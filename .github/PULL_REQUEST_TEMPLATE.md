@@ -15,6 +15,7 @@ What kind of change does this PR introduce?
 
 - [ ] Bugfix
 - [ ] Feature
+- [ ] Enhancement (to existing content)
 - [ ] Code style update (formatting, local variables)
 - [ ] Refactoring (no functional changes, no api changes)
 - [ ] Build related changes
@@ -23,13 +24,15 @@ What kind of change does this PR introduce?
 - [ ] cookbook application / infrastructure changes
 - [ ] Other... Please describe:
 
-## What is the current behavior?
+## Which issue documents the current behaviour?
 
-<!-- Please describe the current behavior that you are modifying, or link to a relevant issue. -->
+<!-- Please link to a relevant issue that documents the current behaviour . -->
 
-Issue Number: N/A
+Issue Number: #[replace with issue number]
 
 ## What is the new behavior?
+
+<!-- Please describe the new behaviour after your pull-request is comitted -->
 
 ## Does this PR introduce a breaking change?
 

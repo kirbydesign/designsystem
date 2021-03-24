@@ -1,14 +1,15 @@
-import { forwardRef, Component, Directive, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Directive, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 
 import {
+  PageActionsComponent,
+  PageActionsDirective,
+  PageComponent,
+  PageContentComponent,
+  PageContentDirective,
+  PageProgressComponent,
+  PageTitleComponent,
   PageTitleDirective,
   PageToolbarTitleDirective,
-  PageActionsDirective,
-  PageContentDirective,
-  PageContentComponent,
-  PageActionsComponent,
-  PageComponent,
-  PageTitleComponent,
 } from '@kirbydesign/designsystem';
 
 type stickyConfig = { sticky: boolean };
@@ -64,6 +65,18 @@ export class MockPageContentDirective {
 }
 
 @Component({
+  selector: 'kirby-page-progress',
+  template: '<ng-content></ng-content>',
+  providers: [
+    {
+      provide: PageProgressComponent,
+      useExisting: forwardRef(() => MockPageProgressComponent),
+    },
+  ],
+})
+export class MockPageProgressComponent {}
+
+@Component({
   selector: 'kirby-page-title',
   template: '<ng-content></ng-content>',
   providers: [
@@ -116,6 +129,7 @@ export class MockPageComponent {
   @Input() defaultBackHref: string;
   @Input() hideBackButton: boolean;
   @Input() titleMaxLines: number;
+  @Input() tabBarBottomHidden: boolean;
   @Output() enter = new EventEmitter<void>();
   @Output() leave = new EventEmitter<void>();
 }

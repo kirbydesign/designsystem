@@ -1,34 +1,35 @@
 import {
+  AfterViewInit,
   Component,
   ContentChild,
+  ContentChildren,
   EventEmitter,
   HostBinding,
   Input,
-  OnInit,
   OnChanges,
+  OnInit,
   Output,
   TemplateRef,
-  ViewChild,
   TrackByFunction,
-  ContentChildren,
-  AfterViewInit,
+  ViewChild,
 } from '@angular/core';
 
+import { PlatformService } from '../../helpers/platform.service';
+import { ThemeColor } from '../../helpers/theme-color.type';
+import { ItemComponent } from '../item/item.component';
+
+import { ListHelper } from './helpers/list-helper';
+import { ListSwipeAction } from './list-swipe-action';
 import {
   ListFlexItemDirective,
   ListFooterDirective,
   ListHeaderDirective,
   ListItemDirective,
-  ListSectionHeaderDirective,
   ListItemTemplateDirective,
+  ListSectionHeaderDirective,
 } from './list.directive';
 import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
-import { ListHelper } from './helpers/list-helper';
 import { GroupByPipe } from './pipes/group-by.pipe';
-import { ListSwipeAction } from './list-swipe-action';
-import { ThemeColor } from '../../helpers/theme-color.type';
-import { ItemComponent } from '../item/item.component';
-import { PlatformService } from '../../helpers/platform.service';
 
 export type ListShape = 'square' | 'rounded' | 'none';
 
@@ -99,6 +100,12 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   hasItemSpacing: boolean;
 
   /**
+   * Determines if the loadOnDemand event should be emitted.
+   * Will default to true if there is at least one subscriber to the loadOnDemand event
+   */
+  @Input() isLoadOnDemandEnabled: boolean;
+
+  /**
    * Determines if list items should have swipe actions or not
    * - the order of swipe actions is used to determine edge actions,
    * as well as their order of appearance on the screen.
@@ -136,7 +143,6 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   isSwipingEnabled: boolean = false;
   isSelectable: boolean;
   isLoading: boolean;
-  isLoadOnDemandEnabled: boolean;
   groupedItems: any[];
   selectedItem: any;
 
@@ -150,7 +156,10 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     this.hasDeprecatedItemTemplate = !!this.legacyItemTemplate || !!this.legacyFlexItemTemplate;
     this.initializeSwipeActions();
     this.isSelectable = this.itemSelect.observers.length > 0;
-    this.isLoadOnDemandEnabled = this.loadOnDemand.observers.length > 0;
+
+    if (this.isLoadOnDemandEnabled === undefined) {
+      this.isLoadOnDemandEnabled = this.loadOnDemand.observers.length > 0;
+    }
   }
 
   ngAfterViewInit(): void {

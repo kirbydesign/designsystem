@@ -16,11 +16,13 @@ export class CalendarCardExampleComponent implements OnChanges {
   @Input() setMaxDate = false;
   @Input() setTodayDate = false;
   @Input() useTimezoneUTC = false;
+  @Input() showYearNavigator = false;
 
   minDate: Date;
   maxDate: Date;
   todayDate: Date;
   disabledDates: Date[];
+  yearNavigatorOptions = { from: -6, to: 3 };
 
   constructor() {
     this.updateInputDates();

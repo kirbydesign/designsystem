@@ -1,36 +1,37 @@
 import {
+  AfterViewInit,
   Component,
+  ComponentFactoryResolver,
+  ElementRef,
+  HostBinding,
   HostListener,
   Injector,
-  HostBinding,
-  ViewChild,
-  AfterViewInit,
-  OnDestroy,
-  ElementRef,
-  Renderer2,
   Input,
-  OnInit,
-  ViewChildren,
-  QueryList,
-  ComponentFactoryResolver,
   NgZone,
+  OnDestroy,
+  OnInit,
+  QueryList,
+  Renderer2,
   RendererStyleFlags2,
+  ViewChild,
+  ViewChildren,
 } from '@angular/core';
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
-import { IonContent, IonHeader, IonTitle } from '@ionic/angular';
+import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular';
 import { Observable, Subject } from 'rxjs';
 import { first, takeUntil } from 'rxjs/operators';
 
 import { KirbyAnimation } from '../../../animation/kirby-animation';
-import { ModalConfig } from './config/modal-config';
-import { COMPONENT_PROPS } from './config/modal-config.helper';
-import { Modal } from '../services/modal.interfaces';
+import { DesignTokenHelper } from '../../../helpers/design-token-helper';
+import { PlatformService } from '../../../helpers/platform.service';
+import { WindowRef } from '../../../types/window-ref';
 import { ButtonComponent } from '../../button/button.component';
 import { ResizeObserverService } from '../../shared/resize-observer/resize-observer.service';
 import { ResizeObserverEntry } from '../../shared/resize-observer/types/resize-observer-entry';
-import { WindowRef } from '../../../types/window-ref';
-import { DesignTokenHelper } from '../../../helpers/design-token-helper';
-import { PlatformService } from '../../../helpers/platform.service';
+import { Modal } from '../services/modal.interfaces';
+
+import { ModalConfig } from './config/modal-config';
+import { COMPONENT_PROPS } from './config/modal-config.helper';
 
 @Component({
   selector: 'kirby-modal-wrapper',
@@ -58,6 +59,9 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   >;
   @ViewChild(IonHeader, { static: true, read: ElementRef }) private ionHeaderElement: ElementRef<
     HTMLIonHeaderElement
+  >;
+  @ViewChild(IonToolbar, { static: true, read: ElementRef }) private ionToolbarElement: ElementRef<
+    HTMLIonToolbarElement
   >;
   @ViewChild(IonTitle, { static: true, read: ElementRef }) private ionTitleElement: ElementRef<
     HTMLIonTitleElement
@@ -405,11 +409,12 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   private readonly elementToParentMap: { [key: string]: () => HTMLElement } = {
     'KIRBY-MODAL-FOOTER': () => this.elementRef.nativeElement,
     'KIRBY-PAGE-TITLE': () => this.ionTitleElement.nativeElement,
+    'KIRBY-PAGE-PROGRESS': () => this.ionToolbarElement.nativeElement,
   };
 
   private clearEmbeddedElements() {
     Object.entries(this.elementToParentMap).forEach(([tagName, getParent]) => {
-      const embeddedElement = getParent().querySelector<HTMLElement>(tagName);
+      const embeddedElement = getParent().querySelector<HTMLElement>(`:scope > ${tagName}`);
       this.removeChild(embeddedElement);
     });
   }

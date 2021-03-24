@@ -1,24 +1,33 @@
-import { NgModule, LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import localeEn from '@angular/common/locales/en-GB';
+import { LOCALE_ID, NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
-import { registerLocaleData } from '@angular/common';
-import localeEn from '@angular/common/locales/en-GB';
+
+import { KirbyModule } from '@kirbydesign/designsystem';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { SideNavComponent } from './page/side-nav/side-nav.component';
-import { HeaderComponent } from './page/header/header.component';
 import { IntroComponent } from './intro/intro.component';
-import { KirbyModule } from '@kirbydesign/designsystem';
+import { FooterComponent } from './page/footer/footer.component';
+import { HeaderComponent } from './page/header/header.component';
+import { SideNavComponent } from './page/side-nav/side-nav.component';
 import { FirebaseModule } from './shared/firebase/firebase.module';
 
 registerLocaleData(localeEn);
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, SideNavComponent, HeaderComponent, IntroComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    SideNavComponent,
+    HeaderComponent,
+    IntroComponent,
+    FooterComponent,
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

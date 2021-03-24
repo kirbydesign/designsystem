@@ -1,7 +1,6 @@
-import { ThemeColor } from './theme-color.type';
 import { ColorHelper } from './color-helper';
-
 import { styles } from './design-token-helper.styles';
+import { ThemeColor } from './theme-color.type';
 
 export class DesignTokenHelper {
   public static readonly breakpoints = styles.breakpoints;
@@ -86,6 +85,10 @@ export class DesignTokenHelper {
 
   public static fatFingerSize(): string {
     return styles.fatFingerSize;
+  }
+
+  public static getElevation(z: 2 | 4 | 8): string {
+    return styles.elevationsRgb[z];
   }
 }
 

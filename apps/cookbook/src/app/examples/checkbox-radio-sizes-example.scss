@@ -1,0 +1,60 @@
+@import './libs/designsystem/src/lib/scss/utils';
+
+$height-measure-width: 80px;
+$default-size: map-get($checkbox-radio-sizes, 'md');
+
+kirby-checkbox,
+kirby-radio {
+  margin-bottom: size('xxs');
+  background-color: get-color('semi-light');
+  position: relative;
+}
+
+/* height measure */
+kirby-checkbox::before,
+kirby-checkbox::after,
+kirby-radio::before,
+kirby-radio::after {
+  height: 100%;
+  border: 1px solid get-color('danger');
+  position: absolute;
+  right: 0;
+}
+
+/* horizontal measure */
+kirby-checkbox::before,
+kirby-radio::before {
+  content: '';
+  border-left: 0;
+  border-right: 0;
+  width: size('xxs') + 1px;
+}
+
+/* vertical measure */
+kirby-checkbox::after,
+kirby-radio::after {
+  content: 'md: #{ $default-size }';
+  border-left: 0;
+  border-top: 0;
+  border-bottom: 0;
+  line-height: $default-size;
+  font-size: font-size('xs');
+  color: get-color('danger');
+  padding-right: size('xxs');
+  margin-right: size('xxs') / 2;
+  vertical-align: center;
+}
+
+@each $size, $height in $checkbox-radio-sizes {
+  kirby-checkbox.#{$size}::after,
+  kirby-radio.#{$size}::after {
+    content: '#{$size}: #{$height}';
+    line-height: $height;
+  }
+}
+
+kirby-checkbox ::ng-deep .wrapper,
+kirby-radio ::ng-deep .wrapper {
+  background-color: #f7e0f0;
+  margin-right: $height-measure-width; // Allow room for height measure info
+}

@@ -82,15 +82,9 @@ function buildPolyfills() {
 }
 
 function buildDesignsystem() {
-  if (isCI) {
-    // We're relying on the fact that CI has performed the build (run the "dist:designsystem"-target)
-    // - hence, we'll immediately resolve this (and skip executing the "dist:designsystem"-target)
-    return Promise.resolve();
-  } else {
-    return npm(['run', 'dist:designsystem'], {
-      onFailMessage: 'Unable to build designsystem package (with ng-packagr)',
-    });
-  }
+  return npm(['run', 'dist:designsystem'], {
+    onFailMessage: 'Unable to build designsystem package (with ng-packagr)',
+  });
 }
 
 function enhancePackageJson() {

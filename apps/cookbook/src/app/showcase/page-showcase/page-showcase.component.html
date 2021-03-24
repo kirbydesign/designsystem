@@ -36,6 +36,9 @@
       Support for <a href="#" (click)="scrollTo(advanced)">fixed page content</a> (e.g. a Floating
       Action Button)
     </li>
+    <li>
+      Support for <a href="#" (click)="scrollTo(fixedFooter)">fixed page footer</a> and hiding tabs.
+    </li>
   </ul>
 
   <h2>Life-cycle hooks</h2>
@@ -190,26 +193,46 @@
   <cookbook-iphone src="/examples/page/fixed" showExternalLink="true"></cookbook-iphone>
 </div>
 
+<div class="page-example">
+  <div>
+    <h2 #fixedFooter>Fixed Footer</h2>
+    <p>
+      If the <code>kirby-page-footer</code> component is present <em>outside</em> of the
+      <code>kirby-page-content</code>, the page will show a <em>fixed</em> footer placed right under
+      the content.
+    </p>
+    <p>
+      Furthermore, you can hide the <code>kirby-tab-bar</code> by specifying the
+      <code>tabBarBottomHidden</code> property.
+    </p>
+    <cookbook-code-viewer [html]="fixedFooterTabsExampleHtml"></cookbook-code-viewer>
+  </div>
+
+  <cookbook-iphone src="/examples/page/fixed-footer" showExternalLink="true"></cookbook-iphone>
+</div>
+
 <h2>Page Properties:</h2>
-<cookbook-showcase-properties [properties]="properties"></cookbook-showcase-properties>
+<cookbook-api-description-properties
+  [properties]="properties"
+></cookbook-api-description-properties>
 
 <h2>Page Events:</h2>
-<cookbook-showcase-properties [properties]="events"></cookbook-showcase-properties>
+<cookbook-api-description-events [events]="events"></cookbook-api-description-events>
 
 <h2>Page Layouts:</h2>
-<cookbook-showcase-properties
+<cookbook-api-description-properties
   [columns]="layoutColumns"
   [properties]="layouts"
-></cookbook-showcase-properties>
+></cookbook-api-description-properties>
 
 <h2>Page Directives:</h2>
-<cookbook-showcase-properties
+<cookbook-api-description-properties
   [columns]="directiveColumns"
   [properties]="directives"
-></cookbook-showcase-properties>
+></cookbook-api-description-properties>
 
 <h2>CSS Custom Properties:</h2>
-<cookbook-showcase-properties
+<cookbook-api-description-properties
   [columns]="cssColumns"
   [properties]="cssProperties"
-></cookbook-showcase-properties>
+></cookbook-api-description-properties>

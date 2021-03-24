@@ -3,9 +3,10 @@ import CustomEqualityTester = jasmine.CustomEqualityTester;
 import CustomMatcherResult = jasmine.CustomMatcherResult;
 import MatchersUtil = jasmine.MatchersUtil;
 
-import { TestHelper } from './test-helper';
 import { ColorHelper } from '../helpers/color-helper';
 import { ThemeColorDefinition } from '../helpers/design-token-helper';
+
+import { TestHelper } from './test-helper';
 
 export const ElementCssCustomMatchers: CustomMatcherFactories = {
   toHaveComputedStyle: (util: MatchersUtil, customEqualityTesters: CustomEqualityTester[]) =>
@@ -92,6 +93,9 @@ function compareCssProperty(
   expectedValueAlias?: string
 ): CustomMatcherResult {
   const actualValue = TestHelper.getCssProperty(element, cssProperty);
+  if (expectedValue.startsWith('<') || expectedValue.startsWith('>')) {
+    customEqualityTesters.push(compareSize);
+  }
   const pass = util.equals(actualValue, expectedValue, customEqualityTesters);
   const message = pass
     ? null
@@ -103,6 +107,27 @@ function compareCssProperty(
   return result;
 }
 
+function compareSize(first: string, second: string): boolean | void {
+  const matches = second.match(/(?<operator>\<\=|\<|\>\=|\>)(?<value>\d*)px/);
+  if (matches && matches.groups) {
+    const actualValueNumber = parseInt(first);
+    const operator = matches.groups['operator'];
+    const expectedValueNumber = parseInt(matches.groups['value']);
+    switch (operator) {
+      case '<':
+        return actualValueNumber < expectedValueNumber;
+      case '<=':
+        return actualValueNumber <= expectedValueNumber;
+      case '>':
+        return actualValueNumber > expectedValueNumber;
+      case '>=':
+        return actualValueNumber >= expectedValueNumber;
+      default:
+        break;
+    }
+  }
+}
+
 function getErrorMessage(
   element: Element,
   cssProperty: string,
@@ -111,5 +136,5 @@ function getErrorMessage(
   expectedValueAlias?: string
 ) {
   const expectedColorNameSuffix = expectedValueAlias ? ` (${expectedValueAlias})` : '';
-  return `Expected [${cssProperty}] of ${element.tagName} '${actualValue}' to equal '${expectedValue}'${expectedColorNameSuffix}`;
+  return `Expected [${cssProperty}] of ${element.tagName} '${actualValue}' to be '${expectedValue}'${expectedColorNameSuffix}`;
 }

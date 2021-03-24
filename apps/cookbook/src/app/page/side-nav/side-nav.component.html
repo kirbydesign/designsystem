@@ -1,122 +1,54 @@
-<ul class="side-nav side-menu" [ngClass]="{ 'is-open': isMenuOpen }" (click)="onToggleMenu()">
-  <button class="side-menu__close-btn">
-    <kirby-icon name="close" size="large"></kirby-icon>
-  </button>
-  <li>
-    <a routerLink="/home/intro" [routerLinkActive]="'is-selected'" class="side-nav__item">Intro</a>
-  </li>
-  <li>
-    <a
-      class="side-nav__item side-nav-header"
-      routerLink="/home/component-status"
-      [routerLinkActive]="'is-selected'"
-      [routerLinkActiveOptions]="{ exact: false }"
+<section [class.is-open]="isMenuOpen">
+  <nav>
+    <ng-container *ngFor="let item of navigationLinks">
+      <a
+        *ngIf="item.routerLink"
+        [routerLink]="item.routerLink"
+        routerLinkActive="is-selected"
+        [routerLinkActiveOptions]="{ exact: false }"
+        (click)="onToggleMenu()"
+        >{{ item.text }}
+      </a>
+      <a *ngIf="item.externalUrl" [href]="item.externalUrl" target="blank">{{ item.text }}</a>
+    </ng-container>
+  </nav>
+  <div class="filter">
+    <kirby-form-field>
+      <input
+        kirby-input
+        size="md"
+        placeholder="Filter components..."
+        (input)="onFilterChange($event.target.value)"
+        (keydown.ArrowDown)="onFilterArrowDown($event)"
+        [ngModel]="filter"
+      />
+    </kirby-form-field>
+    <button
+      *ngIf="filter.length > 0"
+      kirby-button
+      size="sm"
+      attentionLevel="4"
+      class="clear-button"
+      (click)="onFilterChange('')"
     >
-      <svg class="icon">
-        <use xlink:href="../../assets/icons/icon-sprite.svg#icon-make-group"></use>
-      </svg>
-      Component Status
-    </a>
-  </li>
-  <li>
-    <a
-      class="side-nav__item side-nav-header"
-      routerLink="/home/changelog"
-      [routerLinkActive]="'is-selected'"
-      [routerLinkActiveOptions]="{ exact: false }"
-    >
-      <kirby-icon name="pension" size="md"></kirby-icon>
-      Changelog
-    </a>
-  </li>
-  <li routerLinkActive="is-selected" [routerLinkActiveOptions]="{ exact: false }">
-    <a
-      class="side-nav__item side-nav-header"
-      [routerLinkActive]="'is-selected'"
-      [routerLinkActiveOptions]="{ exact: false }"
-    >
-      <svg class="icon">
-        <use xlink:href="../../assets/icons/icon-sprite.svg#icon-point-down"></use>
-      </svg>
-      Actions
-    </a>
-    <!-- prettier-ignore -->
-    <ul class="side-nav side-nav--sub">
-      <li><a routerLink="showcase/action-sheet" [routerLinkActive]="'is-selected'" class="side-nav__item">Action Sheet</a></li>
-      <li><a routerLink="showcase/fab-sheet" [routerLinkActive]="'is-selected'" class="side-nav__item">FAB Sheet</a></li>
-      <li><a routerLink="showcase/alert" [routerLinkActive]="'is-selected'" class="side-nav__item">Alert</a></li>
-      <li><a routerLink="showcase/button" [routerLinkActive]="'is-selected'" class="side-nav__item">Button</a></li>
-      <li><a routerLink="showcase/slide-button" [routerLinkActive]="'is-selected'" class="side-nav__item">Slide Button</a></li>
-      <li><a routerLink="showcase/calendar" [routerLinkActive]="'is-selected'" class="side-nav__item">Calendar</a></li>
-      <li><a routerLink="showcase/checkbox" [routerLinkActive]="'is-selected'" class="side-nav__item">Checkbox</a></li>
-      <li><a routerLink="showcase/chip" [routerLinkActive]="'is-selected'" class="side-nav__item">Chip</a></li>
-      <li><a routerLink="showcase/dropdown" [routerLinkActive]="'is-selected'" class="side-nav__item">Dropdown</a></li>
-      <li><a routerLink="showcase/empty-state" [routerLinkActive]="'is-selected'" class="side-nav__item">Empty State</a></li>
-      <li><a routerLink="showcase/form-field" [routerLinkActive]="'is-selected'" class="side-nav__item">Form Field</a></li>
-      <li><a routerLink="showcase/modal" [routerLinkActive]="'is-selected'" class="side-nav__item">Modal</a></li>
-      <li><a routerLink="showcase/loading-overlay" [routerLinkActive]="'is-selected'" class="side-nav__item">Loading Overlay</a></li>
-      <li><a routerLink="showcase/segmented-control" [routerLinkActive]="'is-selected'" class="side-nav__item">Segmented Control</a></li>
-      <li><a routerLink="showcase/toast" [routerLinkActive]="'is-selected'" class="side-nav__item">Toast</a></li>
-      <li><a routerLink="showcase/toggle" [routerLinkActive]="'is-selected'" class="side-nav__item">Toggle</a></li>
-      <li><a routerLink="showcase/toggle-button" [routerLinkActive]="'is-selected'" class="side-nav__item">Toggle Button</a></li>
-    </ul>
-  </li>
-  <li routerLinkActive="is-selected" [routerLinkActiveOptions]="{ exact: false }">
-    <a class="side-nav__item side-nav-header">
-      <svg class="icon">
-        <use xlink:href="../../assets/icons/icon-sprite.svg#icon-insert-template"></use>
-      </svg>
-      Structure
-    </a>
-    <!-- prettier-ignore -->
-    <ul class="side-nav side-nav--sub">
-      <li><a routerLink="showcase/accordion" [routerLinkActive]="'is-selected'" class="side-nav__item">Accordion</a></li>
-      <li><a routerLink="showcase/card" [routerLinkActive]="'is-selected'" class="side-nav__item">Card</a></li>
-      <li><a routerLink="showcase/divider" [routerLinkActive]="'is-selected'" class="side-nav__item">Divider</a></li>
-      <li><a routerLink="showcase/grid" [routerLinkActive]="'is-selected'" class="side-nav__item">Grid</a></li>
-      <li><a routerLink="showcase/item" [routerLinkActive]="'is-selected'" class="side-nav__item">Item</a></li>
-      <li><a routerLink="showcase/list" [routerLinkActive]="'is-selected'" class="side-nav__item">List</a></li>
-      <li><a routerLink="showcase/list-load-on-demand" [routerLinkActive]="'is-selected'" class="side-nav__item">List - load on demand</a></li>
-      <li><a routerLink="showcase/list-swipe" [routerLinkActive]="'is-selected'" class="side-nav__item">List - swipe</a></li>
-      <li><a routerLink="showcase/list-no-shape" [routerLinkActive]="'is-selected'" class="side-nav__item">List - No styling</a></li>
-      <li><a routerLink="showcase/reorder-list" [routerLinkActive]="'is-selected'" class="side-nav__item">List - reorder</a></li>
-      <li><a routerLink="showcase/page" [routerLinkActive]="'is-selected'" class="side-nav__item">Page</a></li>
-      <li><a routerLink="showcase/slides" [routerLinkActive]="'is-selected'" class="side-nav__item">Slides</a></li>
-      <li><a routerLink="showcase/tabs" [routerLinkActive]="'is-selected'" class="side-nav__item">Tabs</a></li>
-      <li><a routerLink="showcase/toolbar" [routerLinkActive]="'is-selected'" class="side-nav__item">Toolbar</a></li>
-    </ul>
-  </li>
-  <li routerLinkActive="is-selected" [routerLinkActiveOptions]="{ exact: false }">
-    <a class="side-nav__item side-nav-header">
-      <svg class="icon">
-        <use xlink:href="../../assets/icons/icon-sprite.svg#icon-sleepy"></use>
-      </svg>
-      Other
-    </a>
-    <!-- prettier-ignore -->
-    <ul class="side-nav side-nav--sub">
-      <li><a routerLink="showcase/avatar" [routerLinkActive]="'is-selected'" class="side-nav__item">Avatar</a></li>
-      <li><a routerLink="showcase/badge" [routerLinkActive]="'is-selected'" class="side-nav__item">Badge</a></li>
-      <li><a routerLink="showcase/chart" [routerLinkActive]="'is-selected'" class="side-nav__item">Charts</a></li>
-      <li><a routerLink="showcase/stock-chart" [routerLinkActive]="'is-selected'" class="side-nav__item">Stock Chart</a></li>
-      <li><a routerLink="showcase/colors" [routerLinkActive]="'is-selected'" class="side-nav__item">Colors</a></li>
-      <li><a routerLink="showcase/flag" [routerLinkActive]="'is-selected'" class="side-nav__item">Flag</a></li>
-      <li><a routerLink="showcase/icon" [routerLinkActive]="'is-selected'" class="side-nav__item">Icon</a></li>
-      <li><a routerLink="showcase/progress-circle" [routerLinkActive]="'is-selected'" class="side-nav__item">Progress Circle</a></li>
-      <li><a routerLink="showcase/link" [routerLinkActive]="'is-selected'" class="side-nav__item">Link</a></li>
-      <li><a routerLink="showcase/spinner" [routerLinkActive]="'is-selected'" class="side-nav__item">Spinner</a></li>
-    </ul>
-  </li>
-  <li routerLinkActive="is-selected" [routerLinkActiveOptions]="{ exact: false }">
-    <a class="side-nav__item side-nav-header">
-      <svg class="icon">
-        <use xlink:href="../../assets/icons/icon-sprite.svg#icon-font-size"></use>
-      </svg>
-      Typography
-    </a>
-    <!-- prettier-ignore -->
-    <ul class="side-nav side-nav--sub">
-      <li><a routerLink="showcase/fonts" [routerLinkActive]="'is-selected'" class="side-nav__item">Font sizes</a></li>
-    </ul>
-  </li>
-</ul>
+      <kirby-icon name="close"></kirby-icon>
+    </button>
+  </div>
+
+  <kirby-card
+    (keydown.ArrowUp)="onLinksArrowUpDown($event)"
+    (keydown.ArrowDown)="onLinksArrowUpDown($event)"
+  >
+    <ng-container *ngFor="let item of filteredShowcaseRoutes">
+      <a
+        *ngFor="let link of item"
+        [routerLink]="link.path"
+        [class]="{ 'is-selected': link.active }"
+        (click)="onComponentLinkClick(link.path)"
+        #componentLink
+        >{{ link.name }}
+      </a>
+      <hr />
+    </ng-container>
+  </kirby-card>
+</section>

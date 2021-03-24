@@ -51,6 +51,8 @@ $font-weight: (
   light: 300,
   normal: 400,
   bold: 700,
+  // black will be treated as a named css color if not quoted
+    'black': 900,
 ) !default;
 
 /*
@@ -106,6 +108,10 @@ $avatar-sizes: (
 
 $avatar-badge-size: 16px;
 
+/* Page
+****************************************************************************/
+$page-content-max-width: 720px;
+
 /* Modal
 ****************************************************************************/
 $alert-max-width: 359px;
@@ -133,9 +139,22 @@ $item-heights: (
 ****************************************************************************/
 $dropdown-item-height: map-get($item-heights, 's');
 
-/* Button
+/* Button, Checkbox, Page, Radio
 ****************************************************************************/
 $fat-finger-size: 44px;
+
+/* Checkbox, Radio
+****************************************************************************/
+$checkbox-radio-sizes: (
+  'xs': map-get($sizes, 'l'),
+  'sm': $fat-finger-size,
+  'md': map-get($sizes, 'xxxl'),
+);
+
+$checkbox-radio-spacing: (
+  'to-edge': map-get($sizes, 's'),
+  'to-label': map-get($sizes, 'xs'),
+);
 
 /* Transitions
 ****************************************************************************/

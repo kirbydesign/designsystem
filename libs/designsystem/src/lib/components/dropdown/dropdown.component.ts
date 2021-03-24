@@ -1,29 +1,45 @@
 import {
-  Component,
-  HostBinding,
-  Input,
-  TemplateRef,
-  ContentChild,
-  HostListener,
-  ElementRef,
-  ContentChildren,
-  ViewChildren,
-  QueryList,
-  ViewChild,
   AfterContentChecked,
-  Renderer2,
-  Output,
-  EventEmitter,
-  OnDestroy,
-  forwardRef,
   AfterViewInit,
   ChangeDetectorRef,
+  Component,
+  ContentChild,
+  ContentChildren,
+  ElementRef,
+  EventEmitter,
+  forwardRef,
+  HostBinding,
+  HostListener,
+  Input,
+  OnDestroy,
+  Output,
+  QueryList,
+  Renderer2,
+  TemplateRef,
+  ViewChild,
+  ViewChildren,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { ListItemTemplateDirective } from '../list/list.directive';
-import { ItemComponent } from '../item/item.component';
 import { CardComponent } from '../card/card.component';
+import { ItemComponent } from '../item/item.component';
+import { ListItemTemplateDirective } from '../list/list.directive';
+
+export enum OpenState {
+  closed,
+  opening,
+  open,
+}
+
+export enum HorizontalDirection {
+  right = 'right',
+  left = 'left',
+}
+
+enum VerticalDirection {
+  up,
+  down,
+}
 
 @Component({
   selector: 'kirby-dropdown',
@@ -40,8 +56,10 @@ import { CardComponent } from '../card/card.component';
 export class DropdownComponent
   implements AfterContentChecked, AfterViewInit, OnDestroy, ControlValueAccessor {
   static readonly OPEN_DELAY_IN_MS = 100;
-  private state: 'closed' | 'opening' | 'open' = 'closed';
+  private state = OpenState.closed;
   private hasConfiguredSlottedItems = false;
+  private horizontalDirection = HorizontalDirection.right;
+  private verticalDirection = VerticalDirection.down;
 
   private _items: string[] | any[] = [];
   get items(): string[] | any[] {
@@ -70,6 +88,14 @@ export class DropdownComponent
 
   @Input()
   placeholder = 'Please select:';
+
+  @Input() set popout(direction: HorizontalDirection) {
+    this.horizontalDirection = direction || HorizontalDirection.right;
+  }
+
+  get popout() {
+    return this.horizontalDirection;
+  }
 
   @Input()
   attentionLevel: '1' | '2' | '3' | '4' = '3';
@@ -131,25 +157,22 @@ export class DropdownComponent
 
   @HostBinding('class.is-opening')
   get _isOpening(): boolean {
-    return this.state === 'opening';
+    return this.state === OpenState.opening;
   }
 
   @HostBinding('class.is-open')
   get isOpen(): boolean {
-    return this.state === 'open';
+    return this.state === OpenState.open;
   }
 
-  @HostBinding('class.align-end')
-  _alignEnd: boolean;
-
-  @HostBinding('class.align-top')
-  _alignTop: boolean;
-
-  private set _horizontal(value: 'start' | 'end') {
-    this._alignEnd = value === 'end';
+  @HostBinding('class.popout-left')
+  get _popoutLeft() {
+    return this.horizontalDirection === HorizontalDirection.left;
   }
-  private set _vertical(value: 'up' | 'down') {
-    this._alignTop = value === 'up';
+
+  @HostBinding('class.popout-up')
+  get _popoutUp() {
+    return this.verticalDirection === VerticalDirection.up;
   }
 
   @ContentChild(ListItemTemplateDirective, { static: true, read: TemplateRef })
@@ -217,37 +240,17 @@ export class DropdownComponent
       };
       const callback: IntersectionObserverCallback = (entries) => {
         // Only apply alignment when opening:
-        if (this.state !== 'opening') {
+        if (this.state !== OpenState.opening) {
           return;
         }
 
         // Cancel any pending timer to show dropdown:
         clearTimeout(this.showDropdownTimeoutId);
-
         const entry = entries[0];
         const isVisible = entry.boundingClientRect.width > 0;
         if (isVisible && entry.intersectionRatio < 1) {
-          // entry not fully showing:
-          if (entry.boundingClientRect.right > entry.rootBounds.right) {
-            // entry is cut off to the right by ${entry.boundingClientRect.right - entry.intersectionRect.right}px
-            // align to the end:
-            this._horizontal = 'end';
-          }
-          if (entry.boundingClientRect.top < 0) {
-            // entry is cut off at the top by ${entry.boundingClientRect.top}px
-            // open downwards:
-            this._vertical = 'down';
-          }
-          if (entry.boundingClientRect.bottom > entry.rootBounds.bottom) {
-            // entry is cut off at the bottom by ${entry.boundingClientRect.bottom - entry.intersectionRect.bottom}px
-            const containerOffsetTop = this.elementRef.nativeElement.getBoundingClientRect().top;
-            const spacing = 5; //TODO: Get from SCSS
-            // Check if the card can fit on top of button:
-            if (containerOffsetTop > entry.target.clientHeight + spacing) {
-              // open upwards:
-              this._vertical = 'up';
-            }
-          }
+          this.setHorizontalDirection(entry);
+          this.setVerticalDirection(entry);
         }
         this.showDropdown();
         this.changeDetectorRef.detectChanges();
@@ -257,12 +260,44 @@ export class DropdownComponent
     }
   }
 
+  private setHorizontalDirection(entry) {
+    // If popout direction is set to right, and the entry is cut off to the right by ${entry.boundingClientRect.right - entry.intersectionRect.right}px
+    // it is set to popout left instead, and vice versa for popout direction left
+    if (this.horizontalDirection === HorizontalDirection.right) {
+      if (entry.boundingClientRect.right > entry.rootBounds.right) {
+        this.horizontalDirection = HorizontalDirection.left;
+      }
+    } else {
+      if (entry.boundingClientRect.left < entry.rootBounds.left) {
+        this.horizontalDirection = HorizontalDirection.right;
+      }
+    }
+  }
+
+  private setVerticalDirection(entry) {
+    if (entry.boundingClientRect.top < 0) {
+      // entry is cut off at the top by ${entry.boundingClientRect.top}px
+      // open downwards:
+      this.verticalDirection = VerticalDirection.down;
+    }
+    if (entry.boundingClientRect.bottom > entry.rootBounds.bottom) {
+      // entry is cut off at the bottom by ${entry.boundingClientRect.bottom - entry.intersectionRect.bottom}px
+      const containerOffsetTop = this.elementRef.nativeElement.getBoundingClientRect().top;
+      const SPACING = 5; //TODO: Get from SCSS
+      // Check if the card can fit on top of button:
+      if (containerOffsetTop > entry.target.clientHeight + SPACING) {
+        // open upwards:
+        this.verticalDirection = VerticalDirection.up;
+      }
+    }
+  }
+
   open() {
     if (this.disabled) {
       return;
     }
     if (!this.isOpen) {
-      this.state = 'opening';
+      this.state = OpenState.opening;
       // ensures that the dropdown is opened in case the IntersectionObserverCallback isn't invoked
       this.showDropdownTimeoutId = setTimeout(
         () => this.showDropdown(),
@@ -272,8 +307,8 @@ export class DropdownComponent
   }
 
   private showDropdown() {
-    if (this.state === 'opening') {
-      this.state = 'open';
+    if (this.state === OpenState.opening) {
+      this.state = OpenState.open;
       this.scrollItemIntoView(this.selectedIndex);
       this.changeDetectorRef.markForCheck();
     }
@@ -284,7 +319,9 @@ export class DropdownComponent
       return;
     }
     if (this.isOpen) {
-      this.state = 'closed';
+      this.state = OpenState.closed;
+      // Reset vertical direction to default
+      this.verticalDirection = VerticalDirection.down;
     }
   }
 

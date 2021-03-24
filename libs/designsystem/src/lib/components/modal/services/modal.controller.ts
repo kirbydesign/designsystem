@@ -1,16 +1,17 @@
 import { Inject, Injectable, OnDestroy, Optional } from '@angular/core';
-import { ActivatedRoute, Routes, ROUTES } from '@angular/router';
+import { ActivatedRoute, Params, Routes, ROUTES } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { filter, map, takeUntil } from 'rxjs/operators';
 
 import { KirbyAnimation } from '../../../animation/kirby-animation';
 import { ActionSheetConfig } from '../action-sheet/config/action-sheet-config';
-import { ModalConfig } from '../modal-wrapper/config/modal-config';
-import { ActionSheetHelper } from './action-sheet.helper';
 import { AlertConfig } from '../alert/config/alert-config';
+import { ModalConfig } from '../modal-wrapper/config/modal-config';
+
+import { ActionSheetHelper } from './action-sheet.helper';
 import { AlertHelper } from './alert.helper';
-import { ModalHelper } from './modal.helper';
 import { ModalNavigationService } from './modal-navigation.service';
+import { ModalHelper } from './modal.helper';
 import { ModalRouteActivation, Overlay } from './modal.interfaces';
 
 @Injectable()
@@ -27,8 +28,11 @@ export class ModalController implements OnDestroy {
     @Optional() @Inject(ROUTES) private routeConfig: Routes[]
   ) {}
 
-  async initialize() {
-    const modalNavigation = await this.modalNavigationService.getModalNavigation(this.routeConfig);
+  async initialize(moduleRootRoutePath?: string) {
+    const modalNavigation = await this.modalNavigationService.getModalNavigation(
+      this.routeConfig,
+      moduleRootRoutePath
+    );
     this.onModalRouteActivated(modalNavigation.activated$);
     this.onModalRouteDeactivated(modalNavigation.deactivated$); // TODO: Do we want to close modal when routing out of modal route? Or should the code that navigates close the window??
   }
@@ -76,12 +80,12 @@ export class ModalController implements OnDestroy {
     await this.showAndRegisterOverlay(() => this.modalHelper.showModalWindow(config), onClose);
   }
 
-  public async navigateToModal(path: string | string[]): Promise<boolean> {
-    return this.modalNavigationService.navigateToModal(path);
+  public async navigateToModal(path: string | string[], queryParams?: Params): Promise<boolean> {
+    return this.modalNavigationService.navigateToModal(path, queryParams);
   }
 
-  public async navigateWithinModal(relativePath: string): Promise<boolean> {
-    return this.modalNavigationService.navigateWithinModal(relativePath);
+  public async navigateWithinModal(relativePath: string, queryParams?: Params): Promise<boolean> {
+    return this.modalNavigationService.navigateWithinModal(relativePath, queryParams);
   }
 
   private async showModalRoute(

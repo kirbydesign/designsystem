@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
-import { ShowcaseProperty } from '../../shared/showcase-properties/showcase-property';
 declare var require: any;
 
 @Component({
@@ -9,7 +9,7 @@ declare var require: any;
   styleUrls: ['./tabs-showcase.component.scss'],
 })
 export class TabsShowcaseComponent implements OnInit {
-  exampleHtml: string = require('!raw-loader!../../examples/tabs/tabs-example.component.html')
+  exampleHtml: string = require('!raw-loader!../../examples/tabs-example/tabs-example.component.html')
     .default;
 
   exampleRouterHtml = `<kirby-tab-bar>
@@ -58,12 +58,12 @@ const routes: Routes = [
   ...
 `;
 
-  properties: ShowcaseProperty[] = [
+  properties: ApiDescriptionProperty[] = [
     {
       name: 'routerLink',
       description: `Should be a reference to the route path hosting the contents of the tab. Path needs to be a child of your "tabs" path otherwise use manually navigation by handling the \`click\` event.`,
       defaultValue: '',
-      inputValues: ['string'],
+      type: ['string'],
     },
   ];
 

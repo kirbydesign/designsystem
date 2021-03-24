@@ -1,3 +1,8 @@
+@import '~@fontsource/roboto/300.css';
+@import '~@fontsource/roboto/400.css';
+@import '~@fontsource/roboto/700.css';
+@import '~@fontsource/roboto/900.css';
+
 h1,
 .h1,
 h2,
@@ -25,19 +30,19 @@ kirby-app .page-title {
 
 .kirby-text-display-1 {
   font-size: font-size('xxxxl');
-  font-weight: font-weight('light');
+  font-weight: font-weight('black');
   line-height: normal;
 }
 
 .kirby-text-display-2 {
   font-size: font-size('xxxl');
-  font-weight: font-weight('light');
+  font-weight: font-weight('black');
   line-height: normal;
 }
 
 .kirby-text-display-3 {
   font-size: font-size('xxl');
-  font-weight: font-weight('light');
+  font-weight: font-weight('black');
   line-height: normal;
 }
 
@@ -45,7 +50,7 @@ h1,
 .h1,
 .kirby-text-xlarge {
   font-size: font-size('xl');
-  font-weight: font-weight('bold');
+  font-weight: font-weight('black');
   line-height: line-height('xl');
 }
 
