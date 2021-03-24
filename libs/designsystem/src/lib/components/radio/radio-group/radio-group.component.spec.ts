@@ -1206,7 +1206,6 @@ describe('RadioGroupComponent', () => {
 
           describe('and the component has not been touched', () => {
             beforeEach(async () => {
-              favoriteFoodControl.markAsUntouched();
               await TestHelper.waitForTimeout();
               spectator.detectChanges();
             });
