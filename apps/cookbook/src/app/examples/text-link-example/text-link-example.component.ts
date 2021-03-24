@@ -3,6 +3,6 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'cookbook-text-link-example',
   templateUrl: './text-link-example.component.html',
-  styleUrls: ['./text-link-example.component.scss'],
+  styleUrls: ['../_examples.shared.scss'],
 })
 export class TextLinkExampleComponent {}
