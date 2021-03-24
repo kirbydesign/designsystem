@@ -1,12 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  HostBinding,
-  HostListener,
-  Input,
-  NgZone,
-  Output,
-} from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, NgZone, Output } from '@angular/core';
 
 import { WindowRef } from '@kirbydesign/designsystem/types/window-ref';
 
@@ -14,6 +6,8 @@ import { WindowRef } from '@kirbydesign/designsystem/types/window-ref';
   selector: 'cookbook-modal-example-configuration',
   templateUrl: './modal-example-configuration.component.html',
   styleUrls: ['./modal-example-configuration.component.scss'],
+  // tslint:disable-next-line: no-host-metadata-property
+  host: { '[class.checkbox-xs]': 'true' }, // Extra small checkboxes
 })
 export class ModalExampleConfigurationComponent {
   @Input() showDummyKeyboard: boolean;
@@ -39,8 +33,6 @@ export class ModalExampleConfigurationComponent {
 
   @Input() openFullHeight: boolean;
   @Output() openFullHeightChange = new EventEmitter<boolean>();
-
-  @HostBinding('class.checkbox-xs') true; // Extra small checkboxes
 
   constructor(private window: WindowRef, zone: NgZone) {}
 
