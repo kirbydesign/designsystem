@@ -1087,9 +1087,8 @@ describe('RadioGroupComponent', () => {
             // Wait for radio checked attribute to be updated;
             await TestHelper.whenTrue(() => radioChecked(newSelectedIndex));
 
-            expect(radioChecked(0)).toBeFalse();
-            expect(radioChecked(1)).toBeFalse();
-            expect(radioChecked(2)).toBeTrue();
+            expect(radioChecked(defaultSelectedIndex)).toBeFalse();
+            expect(radioChecked(newSelectedIndex)).toBeTrue();
           });
 
           it('should not emit change event when the bound form group control is updated', async () => {
