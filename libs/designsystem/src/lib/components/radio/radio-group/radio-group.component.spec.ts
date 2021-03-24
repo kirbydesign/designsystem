@@ -946,10 +946,6 @@ describe('RadioGroupComponent', () => {
         });
 
         describe('when ngModel is null', () => {
-          beforeEach(async () => {
-            await setSelectedOnHostComponent(null);
-          });
-
           describe('and ngModel is touched', () => {
             beforeEach(async () => {
               spectator.component._onRadioBlur();
