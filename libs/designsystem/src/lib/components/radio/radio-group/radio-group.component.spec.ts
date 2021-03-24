@@ -1091,7 +1091,7 @@ describe('RadioGroupComponent', () => {
             expect(radioChecked(newSelectedIndex)).toBeTrue();
           });
 
-          it('should not emit change event when the bound form group control is updated', async () => {
+          it('should not emit change event when the bound form control is updated', async () => {
             const onChangeSpy = spyOn(spectator.component.valueChange, 'emit');
             await setFormControlValue(items[2]);
             expect(onChangeSpy).not.toHaveBeenCalled();
