@@ -1017,7 +1017,6 @@ describe('RadioGroupComponent', () => {
             const newFavoriteFood = items[0];
             await setFormControlValue(newFavoriteFood);
 
-            expect(spectator.component.value).toEqual(newFavoriteFood);
             expect(ionRadioGroup.value).toEqual(newFavoriteFood);
           });
 
