@@ -1137,7 +1137,7 @@ describe('RadioGroupComponent', () => {
 
       describe('error state when the bound form control is required', () => {
         beforeEach(async () => {
-          favoriteFoodControl = new FormControl(items[defaultSelectedIndex], Validators.required);
+          favoriteFoodControl = new FormControl(null, Validators.required);
 
           spectator = createHost(
             `<form [formGroup]="favoriteFoodForm">
