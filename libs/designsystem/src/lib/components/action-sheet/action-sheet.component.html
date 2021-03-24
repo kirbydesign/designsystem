@@ -1,5 +1,5 @@
 <div class="button-wrapper" (click)="onToggleSheet()">
-  <button *ngIf="!customButton" kirby-button attentionLevel="3">
+  <button *ngIf="!customButton" kirby-button [attentionLevel]="attentionLevel" tabindex="-1">
     <kirby-icon name="more"></kirby-icon>
   </button>
   <ng-content selector="button[kirby-button]"></ng-content>

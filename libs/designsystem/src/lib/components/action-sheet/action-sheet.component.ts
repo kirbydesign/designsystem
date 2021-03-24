@@ -15,6 +15,7 @@ import { ActionSheetItem } from './config/action-sheet-item';
 })
 export class ActionSheetComponent {
   private state: OpenState.closed | OpenState.open = OpenState.closed;
+  attentionLevel: '2' | '3' = '3';
 
   constructor(private platform: PlatformService, private modalController: ModalController) {}
 
@@ -52,6 +53,7 @@ export class ActionSheetComponent {
       return;
     }
     this.state = this.state === OpenState.open ? OpenState.closed : OpenState.open;
+    this.attentionLevel = this.state === OpenState.open ? '2' : '3';
   }
 
   @ContentChild(ButtonComponent) customButton: ButtonComponent;

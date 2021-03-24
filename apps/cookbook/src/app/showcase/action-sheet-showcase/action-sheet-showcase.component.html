@@ -1,5 +1,14 @@
 <div class="example">
+  <p>
+    The <code>action-sheet</code> reveals a sheet with a set of items/options. The sheet behaves
+    differently depending on device. On a touch device the sheet will slide up from the bottom of
+    the screen, whereas on larger screens, the sheet is displayed next to the trigger button.
+  </p>
   <h2>Default</h2>
+  <p>
+    When no custom button is provided between the <code>action-sheet</code> tags, a default
+    icon-button is displayed.
+  </p>
   <cookbook-example-viewer [html]="defaultButtonExample.template">
     <div>
       <cookbook-action-sheet-example-default
@@ -9,6 +18,10 @@
   </cookbook-example-viewer>
 
   <h2>Custom Button</h2>
+  <p>
+    If the default button doesn't fit the context, the <code>action-sheet</code> accepts a custom
+    <code>kirby-button</code> as trigger for revealing the sheet.
+  </p>
   <cookbook-example-viewer [html]="customButtonExample.template">
     <div>
       <cookbook-action-sheet-example-custom-button
@@ -17,8 +30,17 @@
     </div>
   </cookbook-example-viewer>
 
-  <h2>Open Action Sheet Programtically</h2>
-
+  <h2>Open Action Sheet Programatically</h2>
+  <p>
+    To show the action sheet, create an <code>ActionSheetConfig</code> and pass it to
+    <code>modalController.showActionSheet</code>. Each item must to be of type
+    <code>ActionSheetItem</code>.
+  </p>
+  <p>
+    <strong>Caveat:</strong> Showing the <code>action-sheet</code> in this way will not ascociate
+    the sheet with the trigger element. It will always slide up from the bottom of the screen - even
+    on non-touch devices.
+  </p>
   <cookbook-example-viewer [html]="programticalExample.template">
     <div>
       <cookbook-action-sheet-example-programatically
@@ -26,10 +48,8 @@
       ></cookbook-action-sheet-example-programatically>
     </div>
   </cookbook-example-viewer>
+
   <p>
-    To show the action sheet, create an <code>ActionSheetConfig</code> and pass it to
-    <code>modalController.showActionSheet</code>. Each item must to be of type
-    <code>ActionSheetItem</code>.
     <!-- prettier-ignore -->
     <cookbook-code-viewer language="ts">const config: ActionSheetConfig={{ '{' }}
     header: 'Your action sheet header',
