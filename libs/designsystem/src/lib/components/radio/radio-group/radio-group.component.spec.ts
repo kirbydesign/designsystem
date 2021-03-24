@@ -1014,7 +1014,7 @@ describe('RadioGroupComponent', () => {
 
         describe('selection', () => {
           it('should update the value of ion-radio-group when the bound form control is set to a value', async () => {
-            const newFavoriteFood = items[defaultSelectedIndex + 1];
+            const newFavoriteFood = items[0];
             await setFormControlValue(newFavoriteFood);
 
             expect(spectator.component.value).toEqual(newFavoriteFood);
