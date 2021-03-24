@@ -1020,7 +1020,7 @@ describe('RadioGroupComponent', () => {
             expect(ionRadioGroup.value).toEqual(newFavoriteFood);
           });
 
-          it('should update the selected radio when the bound form group control is updated', async () => {
+          it('should update the selected radio when the bound form control is set to a value', async () => {
             await setFormControlValue(items[2]);
             // Wait for radio checked attribute to be updated;
             await TestHelper.whenTrue(() => radioChecked(2));
