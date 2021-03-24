@@ -1160,7 +1160,7 @@ describe('RadioGroupComponent', () => {
             await setFormControlValue(items[defaultSelectedIndex]);
           });
 
-          describe('and the bound form group control is touched', async () => {
+          describe('and the component has been touched', async () => {
             beforeEach(async () => {
               spectator.component._onRadioBlur();
               await TestHelper.waitForTimeout();
