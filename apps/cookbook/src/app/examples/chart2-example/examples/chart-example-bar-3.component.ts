@@ -14,7 +14,7 @@ const config = {
     [backgroundColor]="['#015132', '#B2D1BF', '#AABC08', '#1FA05A']"
 
     [borderWidth]="1"
-    [borderColor]="red"   
+    [borderColor]="'red'"   
     [height]="height"   
     [options]="options"
     

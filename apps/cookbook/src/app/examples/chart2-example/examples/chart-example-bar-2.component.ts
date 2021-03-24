@@ -8,7 +8,7 @@ const config = {
     type="bar"
     label="Bar"
     [height]="height"
-    [backgroundColor]="red"
+    [backgroundColor]="'red'"
     [categories]="categories"   
     [data]="adjustedMonthlyExpenseData"
     >

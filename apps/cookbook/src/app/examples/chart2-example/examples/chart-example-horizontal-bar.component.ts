@@ -14,7 +14,6 @@ const config = {
       [height]="height"
       type="horizontalBar"
       label="Bar"
-      [dataset]="dataset"    
     >
     </kirby-chart-2>
   
