@@ -1135,7 +1135,7 @@ describe('RadioGroupComponent', () => {
         });
       });
 
-      describe('error state when the bound form group control is required', () => {
+      describe('error state when the bound form control is required', () => {
         beforeEach(async () => {
           favoriteFoodControl = new FormControl(items[defaultSelectedIndex], Validators.required);
 
