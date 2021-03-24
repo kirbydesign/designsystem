@@ -828,10 +828,10 @@ describe('RadioGroupComponent', () => {
           });
 
           it('should update the selected radio when the bound ngModel is updated', async () => {
-            const newSelectedIndex = defaultSelectedIndex + 1;
-            await setSelectedOnHostComponent(items[newSelectedIndex]);
+            const selectedIndex = 0;
+            await setSelectedOnHostComponent(items[selectedIndex]);
             // Wait for radio checked attribute to be updated;
-            await TestHelper.whenTrue(() => radioChecked(newSelectedIndex));
+            await TestHelper.whenTrue(() => radioChecked(selectedIndex));
 
             expect(radioChecked(0)).toBeFalse();
             expect(radioChecked(1)).toBeFalse();
