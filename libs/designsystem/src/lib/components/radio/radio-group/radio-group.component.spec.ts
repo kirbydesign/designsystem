@@ -1187,10 +1187,6 @@ describe('RadioGroupComponent', () => {
         });
 
         describe('when the value of the bound form control is null', () => {
-          beforeEach(async () => {
-            await setFormControlValue(null);
-          });
-
           describe('and the component has been touched', () => {
             beforeEach(async () => {
               spectator.component._onRadioBlur();
