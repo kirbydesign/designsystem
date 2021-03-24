@@ -961,7 +961,7 @@ describe('RadioGroupComponent', () => {
             });
           });
 
-          describe('and ngModel is untouched', () => {
+          describe('and component has not been touched', () => {
             it('should not be in error state', async () => {
               expect(spectator.element.classList).not.toContain('ng-touched');
               expect(spectator.element.classList).toContain('ng-invalid');
