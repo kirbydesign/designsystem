@@ -186,7 +186,7 @@ describe('RadioGroupComponent', () => {
                   expect(onChangeSpy).toHaveBeenCalledWith(dataScenario.items[0]);
                 });
 
-                it('should update the value of ion-radio-group when the bound field is updated', async () => {
+                it('should update the value of ion-radio-group when the bound field is updated', () => {
                   spectator.setHostInput('selected', dataScenario.items[2]);
                   expect(ionRadioGroup.value).toEqual(dataScenario.items[2]);
                 });
@@ -201,7 +201,7 @@ describe('RadioGroupComponent', () => {
                   expect(radioChecked(2)).toBeTrue();
                 });
 
-                it('should not emit change event when the bound field is updated', async () => {
+                it('should not emit change event when the bound field is updated', () => {
                   const onChangeSpy = spyOn(spectator.component.valueChange, 'emit');
                   spectator.setHostInput('selected', dataScenario.items[2]);
                   expect(onChangeSpy).not.toHaveBeenCalled();
@@ -321,7 +321,7 @@ describe('RadioGroupComponent', () => {
                   expect(onChangeSpy).toHaveBeenCalledWith(dataScenario.items[0]);
                 });
 
-                it('should update the value of ion-radio-group when the bound field is updated', async () => {
+                it('should update the value of ion-radio-group when the bound field is updated', () => {
                   spectator.setHostInput('selected', dataScenario.items[2]);
                   expect(ionRadioGroup.value).toEqual(dataScenario.items[2]);
                 });
@@ -336,7 +336,7 @@ describe('RadioGroupComponent', () => {
                   expect(radioChecked(2)).toBeTrue();
                 });
 
-                it('should not emit change event when the bound field is updated', async () => {
+                it('should not emit change event when the bound field is updated', () => {
                   const onChangeSpy = spyOn(spectator.component.valueChange, 'emit');
                   spectator.setHostInput('selected', dataScenario.items[2]);
                   expect(onChangeSpy).not.toHaveBeenCalled();
@@ -553,7 +553,7 @@ describe('RadioGroupComponent', () => {
                       },
                     });
 
-                  it('should set the value to the corresponding data item', async () => {
+                  it('should set the value to the corresponding data item', () => {
                     spectator = createHostFromScenario();
 
                     expect(spectator.component.value).toEqual(
@@ -971,7 +971,7 @@ describe('RadioGroupComponent', () => {
             });
           });
 
-          describe('and component has not been touched', async () => {
+          describe('and component has not been touched', () => {
             it('should not be in error state', () => {
               ionRadioElements.forEach((ionRadioElement) => {
                 const radioIcon = ionRadioElement.shadowRoot.querySelector('[part=container]');
@@ -1145,13 +1145,13 @@ describe('RadioGroupComponent', () => {
             radios.forEach((each) => expect(each.disabled).toBeUndefined());
           });
 
-          it('should disable the radio items when the bound form control is disabled', async () => {
+          it('should disable the radio items when the bound form control is disabled', () => {
             favoriteFoodControl.disable();
             spectator.detectChanges();
             radios.forEach((each) => expect(each.disabled).toBeTrue());
           });
 
-          it('should re-enable the radio items when the bound form control is enabled', async () => {
+          it('should re-enable the radio items when the bound form control is enabled', () => {
             favoriteFoodControl.disable();
             spectator.detectChanges();
             radios.forEach((each) => expect(each.disabled).toBeTrue());
