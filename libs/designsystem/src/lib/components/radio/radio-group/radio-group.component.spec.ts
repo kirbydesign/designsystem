@@ -944,7 +944,7 @@ describe('RadioGroupComponent', () => {
           });
         });
 
-        describe('When ngModel is null', () => {
+        describe('when ngModel is null', () => {
           beforeEach(async () => {
             await setSelectedOnHostComponent(null);
           });
