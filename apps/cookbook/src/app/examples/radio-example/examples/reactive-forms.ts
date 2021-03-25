@@ -10,15 +10,6 @@ const config = {
   <kirby-radio-group formControlName="favoriteFood" [items]="items"> </kirby-radio-group>
 </form>
 <cookbook-example-configuration-wrapper>
-  <button
-    kirby-button
-    size="sm"
-    attentionLevel="2"
-    [disabled]="favoriteFoodControl.value === null"
-    (click)="clearForm()"
-  >
-    Clear form
-  </button>
 
   <kirby-checkbox
     [checked]="canSelectFavorite"
@@ -34,29 +25,24 @@ const config = {
   >
   </kirby-checkbox>
 
+  <button
+    kirby-button
+    size="sm"
+    attentionLevel="2"
+    [disabled]="favoriteFoodControl.value === null"
+    (click)="clearForm()"
+  >
+    Clear form
+  </button>
+
   <p class="selection">
-    <b>value:</b>
-    {{ form.value | json }}
-    <br />
-    <span [class.state-true]="favoriteFoodControl.valid">
-      <b>valid:</b>
-      {{ favoriteFoodControl.valid }}
-    </span>
-    <br />
-    <span [class.state-true]="favoriteFoodControl.errors">
-      <b>errors:</b>
-      {{ favoriteFoodControl.errors | json }}
-    </span>
-    <br />
-    <span [class.state-true]="favoriteFoodControl.enabled">
-      <b>enabled:</b>
-      {{ favoriteFoodControl.enabled }}
-    </span>
-    <br />
-    <span [class.state-true]="favoriteFoodControl.touched">
-      <b>touched:</b>
-      {{ favoriteFoodControl.touched }}
-    </span>
+    <strong>form.value:</strong> {{ form.value | json }}<br />
+    <strong>form.favoriteFood: </strong>
+    <span [class.state-true]="favoriteFoodControl.valid">valid: {{ favoriteFoodControl.valid }}</span>
+    <span [class.state-true]="favoriteFoodControl.enabled">enabled: {{ favoriteFoodControl.enabled }}</span>
+    <span [class.state-true]="favoriteFoodControl.touched">touched: {{ favoriteFoodControl.touched }}</span><br />
+    <strong>form.favoriteFood.errors: </strong>
+    <span [class.state-true]="!favoriteFoodControl.errors">{{ favoriteFoodControl.errors | json }}</span>
   </p>
 </cookbook-example-configuration-wrapper>
     `,
@@ -85,23 +71,9 @@ toggleRequired(required: boolean) {
 @Component({
   selector: config.selector,
   template: config.template,
-  styles: [
-    `
-      kirby-checkbox:not(:first-of-type) {
-        margin-top: 4px;
-      }
-
-      kirby-checkbox.indent {
-        margin-left: 32px;
-        margin-top: 4px;
-        font-size: 16px;
-      }
-
-      cookbook-example-configuration-wrapper {
-        margin-top: 40px;
-      }
-    `,
-  ],
+  styleUrls: ['./ng-forms.shared.scss'],
+  // tslint:disable-next-line: no-host-metadata-property
+  host: { '[class.checkbox-xs]': 'true' }, // Extra small checkboxes
 })
 export class RadioReactiveFormsExampleComponent implements OnInit {
   template: string = config.template.split('<cookbook-example-configuration-wrapper>')[0];
