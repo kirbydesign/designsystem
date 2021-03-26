@@ -41,6 +41,5 @@ export class CookbookExampleCardContentComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     let activeSlide = changes.activeSlideIndex.currentValue || 0;
-    activeSlide = activeSlide || 0;
   }
 }
