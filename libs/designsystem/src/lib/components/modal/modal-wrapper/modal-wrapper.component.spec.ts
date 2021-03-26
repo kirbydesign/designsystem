@@ -91,36 +91,6 @@ describe('ModalWrapperComponent', () => {
         });
       });
     });
-
-    // TODO: Better naming
-    describe('title alignement with start and end slot', () => {
-      xit('should have same top + height / 2', async () => {
-        ionToolbarElement = spectator.query('ion-toolbar');
-        const pageProgressElement = ionToolbarElement.querySelector('kirby-progress-circle');
-        const pageTitleElement = ionToolbarElement.querySelector('kirby-page-title');
-        const closeButtonElement = ionToolbarElement.querySelector('[kirby-button]');
-
-        console.log('Page progress:', pageProgressElement.getBoundingClientRect());
-        console.log('Title:', pageTitleElement.getBoundingClientRect());
-        console.log('Close button:', closeButtonElement.getBoundingClientRect());
-
-        const pageProgressYCenter = calculateElementYCenter(pageProgressElement);
-        const pageTitleYCenter = calculateElementYCenter(pageTitleElement);
-        const closeButtonYCenter = calculateElementYCenter(closeButtonElement);
-
-        console.log(pageProgressYCenter);
-        console.log(pageTitleYCenter);
-        console.log(closeButtonYCenter);
-
-        expect(pageProgressYCenter).toEqual(pageTitleYCenter);
-        expect(pageTitleYCenter).toEqual(closeButtonYCenter);
-      });
-    });
-
-    function calculateElementYCenter(element: Element): number {
-      const elementDOMRect = element.getBoundingClientRect();
-      return elementDOMRect.top + elementDOMRect.height / 2;
-    }
   });
 
   describe('sizing', () => {

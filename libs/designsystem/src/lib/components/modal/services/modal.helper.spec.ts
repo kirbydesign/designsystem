@@ -1,13 +1,23 @@
 import { Component, ElementRef, OnInit, Optional, ViewChild } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ModalController as IonicModalController } from '@ionic/angular';
+import {
+  IonButtons,
+  IonHeader,
+  IonTitle,
+  IonToolbar,
+  ModalController as IonicModalController,
+} from '@ionic/angular';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 import { MockComponent } from 'ng-mocks';
 
 import { DesignTokenHelper } from '../../../helpers/design-token-helper';
 import { ScreenSize, TestHelper } from '../../../testing/test-helper';
 import { WindowRef } from '../../../types/window-ref';
+import { ButtonComponent } from '../../button/button.component';
 import { IconComponent } from '../../icon';
+import { PageProgressComponent, PageTitleComponent } from '../../page/page.component';
+import { ProgressCircleRingComponent } from '../../progress-circle/progress-circle-ring.component';
+import { ProgressCircleComponent } from '../../progress-circle/progress-circle.component';
 import { ModalFooterComponent } from '../footer/modal-footer.component';
 import { ModalCompactWrapperComponent } from '../modal-wrapper/compact/modal-compact-wrapper.component';
 import { ModalConfig, ModalFlavor, ModalSize } from '../modal-wrapper/config/modal-config';
@@ -53,6 +63,18 @@ class ContentOverflowsWithFooterEmbeddedComponent {
 })
 class ContentWithNoOverflowEmbeddedComponent {}
 
+@Component({
+  template: `
+    <kirby-page-progress>
+      <kirby-progress-circle>
+        2/4
+      </kirby-progress-circle>
+    </kirby-page-progress>
+    <kirby-page-title>My Title</kirby-page-title>
+  `,
+})
+class StaticPageProgressEmbeddedComponent {}
+
 describe('ModalHelper', () => {
   let spectator: SpectatorService<ModalHelper>;
   let modalHelper: ModalHelper;
@@ -83,10 +105,19 @@ describe('ModalHelper', () => {
       },
     ],
     declarations: [
+      PageProgressComponent,
+      ProgressCircleComponent,
+      ProgressCircleRingComponent,
+      PageTitleComponent,
+      IonButtons,
+      IonTitle,
+      IonToolbar,
+      IonHeader,
       ModalFooterComponent,
       ModalWrapperComponent,
       ModalCompactWrapperComponent,
-      MockComponent(IconComponent),
+      IconComponent,
+      ButtonComponent,
     ],
     entryComponents: [
       InputEmbeddedComponent,
@@ -688,4 +719,42 @@ describe('ModalHelper', () => {
       });
     });
   });
+
+  // TODO: Better naming
+  describe('title alignement with start and end slot', () => {
+    beforeEach(async () => {
+      await openModal(null, StaticPageProgressEmbeddedComponent);
+    });
+
+    afterEach(async () => {
+      // await overlay.dismiss();
+    });
+
+    xit('should have same top + height / 2', async () => {
+      const ionToolbarElement = ionModalWrapper.querySelector('ion-toolbar');
+      const pageProgressElement = ionToolbarElement.querySelector('kirby-progress-circle');
+      const pageTitleElement = ionToolbarElement.querySelector('kirby-page-title');
+      const closeButtonElement = ionToolbarElement.querySelector('[kirby-button]');
+
+      console.log('Page progress:', pageProgressElement.getBoundingClientRect());
+      console.log('Title:', pageTitleElement.getBoundingClientRect());
+      console.log('Close button:', closeButtonElement.getBoundingClientRect());
+
+      const pageProgressYCenter = calculateElementYCenter(pageProgressElement);
+      const pageTitleYCenter = calculateElementYCenter(pageTitleElement);
+      const closeButtonYCenter = calculateElementYCenter(closeButtonElement);
+
+      console.log(pageProgressYCenter);
+      console.log(pageTitleYCenter);
+      console.log(closeButtonYCenter);
+
+      expect(pageProgressYCenter).toEqual(pageTitleYCenter);
+      expect(pageTitleYCenter).toEqual(closeButtonYCenter);
+    });
+  });
+
+  function calculateElementYCenter(element: Element): number {
+    const elementDOMRect = element.getBoundingClientRect();
+    return elementDOMRect.top + elementDOMRect.height / 2;
+  }
 });
