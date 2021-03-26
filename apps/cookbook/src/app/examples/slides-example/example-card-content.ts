@@ -40,6 +40,7 @@ export class CookbookExampleCardContentComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    // not in use in this example - but gives you access to the index of any slide from the component loaded inside the slide
     let activeSlide = changes.activeSlideIndex.currentValue || 0;
   }
 }

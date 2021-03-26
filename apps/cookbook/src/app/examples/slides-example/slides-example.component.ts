@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
+import { Observable, of } from 'rxjs';
 
 import { SlidesComponent } from '@kirbydesign/designsystem';
-import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'cookbook-slides-example',
