@@ -46,7 +46,7 @@ export class SlidesComponent implements AfterViewInit {
     this.ionSlides.getActiveIndex().then((selectedIndex) => {
       this.selectedSlide.emit({
         selectedData: this.slides[selectedIndex],
-        selectedSlideIndex: selectedIndex,
+        index: selectedIndex,
       });
     });
   }
