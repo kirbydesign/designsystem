@@ -7,7 +7,7 @@ const items = ['Bacon', 'Salami', 'Tenderloin', 'Tongue', 'Drumstick'];
 const config = {
   selector: 'cookbook-radio-reactive-forms-example',
   template: `<form [formGroup]="form">
-  <kirby-radio-group formControlName="favoriteFood" [items]="items"> </kirby-radio-group>
+  <kirby-radio-group formControlName="favoriteFood" [items]="items"></kirby-radio-group>
 </form>
 <cookbook-example-configuration-wrapper>
 
@@ -35,15 +35,22 @@ const config = {
     Clear form
   </button>
 
-  <p class="selection">
-    <strong>form.value:</strong> {{ form.value | json }}<br />
-    <strong>form.favoriteFood: </strong>
-    <span [class.state-true]="favoriteFoodControl.valid">valid: {{ favoriteFoodControl.valid }}</span>
-    <span [class.state-true]="favoriteFoodControl.enabled">enabled: {{ favoriteFoodControl.enabled }}</span>
-    <span [class.state-true]="favoriteFoodControl.touched">touched: {{ favoriteFoodControl.touched }}</span><br />
-    <strong>form.favoriteFood.errors: </strong>
-    <span [class.state-true]="!favoriteFoodControl.errors">{{ favoriteFoodControl.errors | json }}</span>
-  </p>
+  <section class="form-state">
+    <h4>Form state:</h4>
+    <p>
+      <strong>form.value:</strong> {{ form.value | json }}
+    </p>
+    <p>
+      <strong>form.favoriteFood: </strong>
+      <span [class.state-true]="favoriteFoodControl.valid">valid: {{ favoriteFoodControl.valid }}</span>
+      <span [class.state-true]="favoriteFoodControl.enabled">enabled: {{ favoriteFoodControl.enabled }}</span>
+      <span [class.state-true]="favoriteFoodControl.touched">touched: {{ favoriteFoodControl.touched }}</span>
+    </p>
+    <p>
+      <strong>form.favoriteFood.errors: </strong>
+      <span [class.state-true]="!favoriteFoodControl.errors">{{ favoriteFoodControl.errors | json }}</span>
+    </p>
+  </section>
 </cookbook-example-configuration-wrapper>
     `,
   codeSnippet: `items = ${stringifyPretty(items)};

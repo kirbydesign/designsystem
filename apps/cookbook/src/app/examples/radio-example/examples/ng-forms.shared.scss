@@ -5,23 +5,39 @@
 }
 
 cookbook-example-configuration-wrapper {
-  margin-left: size('xl');
+  margin-left: size('xxs');
+
+  @include media('>=medium') {
+    margin-left: size('xl');
+  }
 }
 
-.selection {
-  margin: 0;
-  font-size: font-size('xs');
-  line-height: line-height('xs');
-  font-style: italic;
-}
+.form-state {
+  margin-top: size('xs');
+  border-top: 1px solid get-color('medium');
+  padding: size('xxs');
 
-span {
-  background-color: var(--kirby-danger);
-  margin-right: size('xxxs');
-  padding: 0 size('xxxxs');
-  border-radius: size('xxxs');
-}
+  h4 {
+    margin-bottom: size('xxxs');
+    font-weight: font-weight('normal');
+  }
 
-span.state-true {
-  background-color: var(--kirby-success);
+  p {
+    margin: 0;
+    font-size: font-size('xs');
+    line-height: line-height('xs');
+  }
+
+  span {
+    background-color: get-color('danger');
+    color: get-color('white');
+    margin-right: size('xxxs');
+    padding: 0 size('xxxxs');
+    border-radius: size('xxxs');
+  }
+
+  span.state-true {
+    background-color: get-color('success');
+    color: get-color('success-contrast');
+  }
 }
