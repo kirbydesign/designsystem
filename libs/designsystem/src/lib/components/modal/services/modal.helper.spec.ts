@@ -66,7 +66,7 @@ class ContentWithNoOverflowEmbeddedComponent {}
 @Component({
   template: `
     <kirby-page-progress>
-      <kirby-progress-circle>
+      <kirby-progress-circle themeColor="warning" value="50" size="sm" class="kirby-text-xsmall">
         2/4
       </kirby-progress-circle>
     </kirby-page-progress>
@@ -730,23 +730,16 @@ describe('ModalHelper', () => {
       // await overlay.dismiss();
     });
 
-    xit('should have same top + height / 2', async () => {
+    it('should have same top + height / 2', async () => {
       const ionToolbarElement = ionModalWrapper.querySelector('ion-toolbar');
-      const pageProgressElement = ionToolbarElement.querySelector('kirby-progress-circle');
+      const pageProgressElement = ionToolbarElement.querySelector('kirby-page-progress');
       const pageTitleElement = ionToolbarElement.querySelector('kirby-page-title');
       const closeButtonElement = ionToolbarElement.querySelector('[kirby-button]');
-
-      console.log('Page progress:', pageProgressElement.getBoundingClientRect());
-      console.log('Title:', pageTitleElement.getBoundingClientRect());
-      console.log('Close button:', closeButtonElement.getBoundingClientRect());
+      await TestHelper.waitForTimeout(50);
 
       const pageProgressYCenter = calculateElementYCenter(pageProgressElement);
       const pageTitleYCenter = calculateElementYCenter(pageTitleElement);
       const closeButtonYCenter = calculateElementYCenter(closeButtonElement);
-
-      console.log(pageProgressYCenter);
-      console.log(pageTitleYCenter);
-      console.log(closeButtonYCenter);
 
       expect(pageProgressYCenter).toEqual(pageTitleYCenter);
       expect(pageTitleYCenter).toEqual(closeButtonYCenter);
