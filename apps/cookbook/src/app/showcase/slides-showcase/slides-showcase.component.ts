@@ -30,12 +30,6 @@ export class SlidesShowcaseComponent {
       type: ['DataArray'],
     },
     {
-      name: 'slideIndex',
-      description: 'The index of any given slide',
-      defaultValue: '',
-      type: ['number'],
-    },
-    {
       name: 'activeSlideIndex',
       description: 'The index of the active slide',
       defaultValue: '0',
