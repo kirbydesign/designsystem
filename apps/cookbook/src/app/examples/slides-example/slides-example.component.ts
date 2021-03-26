@@ -1,5 +1,4 @@
 import { Component, ViewChild } from '@angular/core';
-import { Observable, of } from 'rxjs';
 
 import { SlidesComponent } from '@kirbydesign/designsystem';
 
@@ -55,11 +54,11 @@ export class SlidesExampleComponent {
     },
   ];
 
-  data$: Observable<any>;
+  data: any;
   selectedSlideIndex: number;
 
   getDataFromActiveSlide(activeSlide: { selectedData: any; selectedSlideIndex: number }) {
-    this.data$ = of(activeSlide.selectedData);
+    this.data = activeSlide.selectedData;
     this.selectedSlideIndex = activeSlide.selectedSlideIndex;
 
     console.log('Output: ', activeSlide);
