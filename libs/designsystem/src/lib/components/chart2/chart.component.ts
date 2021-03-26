@@ -186,7 +186,7 @@ export class Chart2Component implements OnInit, AfterViewInit, OnDestroy, OnChan
   }
 
   /**
-   * Provides data for graph as a ChartDataSets type
+   * Provides data for graph as a ChartDataSets type. This set is added to the array of sets
    */
   @Input()
   public set dataset(value: ChartDataSets) {
@@ -208,6 +208,10 @@ export class Chart2Component implements OnInit, AfterViewInit, OnDestroy, OnChan
     }
   }
 
+  public get datasets(): ChartDataSets[] {
+    return this.chartDatasets;
+  }
+
   /**
    * Provides data for graph as a ChartDataType
    */
@@ -216,12 +220,20 @@ export class Chart2Component implements OnInit, AfterViewInit, OnDestroy, OnChan
     this.chartDataType = value;
   }
 
+  public get data(): ChartDataType {
+    return this.chartDataType;
+  }
+
   /**
    * Provides data for graph as a Dataset type, ie a complex type
    */
   @Input()
   public set chartData(value: ChartData) {
     this.rootChartData = value;
+  }
+
+  public get chartData(): ChartData {
+    return this.rootChartData;
   }
 
   /**
@@ -271,18 +283,12 @@ export class Chart2Component implements OnInit, AfterViewInit, OnDestroy, OnChan
    */
   public renderChart(): void {
     if (this.renderingElement === null) {
-      console.log('this.renderingElement === null');
       return;
     }
-
     let options: ChartConfiguration = this.buildConfiguration();
     options = this.addChartData(options);
     this.mergedOptions = options;
-
     this.setSizes();
-
-    console.log('options', this.mergedOptions);
-
     if (this.chart !== null) {
       this.cleanUp();
     }

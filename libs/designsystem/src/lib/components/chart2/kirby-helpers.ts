@@ -1,4 +1,4 @@
-export enum KirbyColor {
+enum KirbyColor {
   PRIMARY = '--kirby-primary',
   PRIMARY_CONTRAST = '--kirby-primary-contrast',
   PRIMARY_TINT = '--kirby-primary-tint',
@@ -40,7 +40,7 @@ export enum KirbyColor {
   TEXT_DANGER = '--kirby-text-color-danger',
 }
 
-export function readKirbyColor(
+function readKirbyColor(
   document: Document,
   colorName: string | null | undefined
 ): string | null | undefined {
@@ -54,7 +54,7 @@ export function readKirbyColor(
   return color !== '' ? color : null;
 }
 
-export function readKirbyColorFromElement(
+function readKirbyColorFromElement(
   element: HTMLElement,
   colorName: string | null | undefined
 ): string | null | undefined {
