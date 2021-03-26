@@ -104,6 +104,7 @@ describe('ModalHelper', () => {
         useValue: window,
       },
     ],
+    // TODO: Clean up factory declarations
     declarations: [
       PageProgressComponent,
       ProgressCircleComponent,
@@ -720,12 +721,13 @@ describe('ModalHelper', () => {
     });
   });
 
-  // TODO: Better naming
   describe('title alignement with start and end slot', () => {
     beforeEach(async () => {
       await openModal(null, StaticPageProgressEmbeddedComponent);
     });
 
+    // TODO: Render progress circle ring properly
+    // TODO: Set top padding in ion-toolbar properly
     it('should all have the same element y center', async () => {
       const ionToolbarElement = ionModalWrapper.querySelector('ion-toolbar');
       const pageProgressElement = ionToolbarElement.querySelector('kirby-page-progress');
