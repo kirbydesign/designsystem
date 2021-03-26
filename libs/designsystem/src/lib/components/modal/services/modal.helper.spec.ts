@@ -726,11 +726,7 @@ describe('ModalHelper', () => {
       await openModal(null, StaticPageProgressEmbeddedComponent);
     });
 
-    afterEach(async () => {
-      // await overlay.dismiss();
-    });
-
-    it('should have same top + height / 2', async () => {
+    it('should all have the same element y center', async () => {
       const ionToolbarElement = ionModalWrapper.querySelector('ion-toolbar');
       const pageProgressElement = ionToolbarElement.querySelector('kirby-page-progress');
       const pageTitleElement = ionToolbarElement.querySelector('kirby-page-title');
