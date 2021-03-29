@@ -18,13 +18,13 @@ export class TextLinkComponent implements OnChanges {
       if (changes.hasOwnProperty(propName)) {
         switch (propName) {
           case 'link': {
-            this.isExternal();
+            this.isInternal();
           }
         }
       }
     }
   }
-  isExternal() {
+  isInternal() {
     const baseURI = window.document.baseURI;
     return new URL(baseURI).origin === new URL(this.route, baseURI).origin;
   }
