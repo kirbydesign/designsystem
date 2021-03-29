@@ -1,5 +1,5 @@
 <!-- The Routerlink has problems with external links -->
-<ng-container *ngIf="isInternal(); else externalLinkTemplate">
+<ng-container *ngIf="isInternal; else externalLinkTemplate">
   <a [routerLink]="route">{{ text }}</a>
 </ng-container>
 <ng-template #externalLinkTemplate>

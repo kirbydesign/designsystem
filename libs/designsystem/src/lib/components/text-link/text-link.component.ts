@@ -5,25 +5,14 @@ import { Component, HostBinding, Input, OnChanges, SimpleChanges } from '@angula
   templateUrl: './text-link.component.html',
   styleUrls: ['./text-link.component.scss'],
 })
-export class TextLinkComponent implements OnChanges {
+export class TextLinkComponent {
   @Input() route: string;
   @Input() text: string;
   @HostBinding('class')
   @Input()
   size: 'sm' | 'md' | 'lg' = 'md';
 
-  ngOnChanges(changes: SimpleChanges) {
-    for (const propName in changes) {
-      if (changes.hasOwnProperty(propName)) {
-        switch (propName) {
-          case 'link': {
-            this.isInternal();
-          }
-        }
-      }
-    }
-  }
-  isInternal() {
+  get isInternal() {
     const baseURI = window.document.baseURI;
     return new URL(baseURI).origin === new URL(this.route, baseURI).origin;
   }
