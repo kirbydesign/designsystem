@@ -66,9 +66,7 @@ class ContentWithNoOverflowEmbeddedComponent {}
 @Component({
   template: `
     <kirby-page-progress>
-      <kirby-progress-circle themeColor="warning" value="50" size="sm" class="kirby-text-xsmall">
-        2/4
-      </kirby-progress-circle>
+      <div style="height: 40px; width: 40px;"></div>
     </kirby-page-progress>
     <kirby-page-title>My Title</kirby-page-title>
   `,
@@ -104,21 +102,16 @@ describe('ModalHelper', () => {
         useValue: window,
       },
     ],
-    // TODO: Clean up factory declarations
     declarations: [
-      PageProgressComponent,
-      ProgressCircleComponent,
-      ProgressCircleRingComponent,
-      PageTitleComponent,
+      ButtonComponent,
       IonButtons,
-      IonTitle,
       IonToolbar,
-      IonHeader,
       ModalFooterComponent,
       ModalWrapperComponent,
       ModalCompactWrapperComponent,
-      IconComponent,
-      ButtonComponent,
+      PageProgressComponent,
+      PageTitleComponent,
+      MockComponent(IconComponent),
     ],
     entryComponents: [
       InputEmbeddedComponent,
@@ -487,6 +480,29 @@ describe('ModalHelper', () => {
             });
           });
         });
+
+        describe('title alignement with start and end slot', () => {
+          it('should all have the same element y center', async () => {
+            await openModal(null, StaticPageProgressEmbeddedComponent);
+            const ionToolbarElement = ionModalWrapper.querySelector('ion-toolbar');
+            const pageProgressElement = ionToolbarElement.querySelector('kirby-page-progress');
+            const pageTitleElement = ionToolbarElement.querySelector('kirby-page-title');
+            const closeButtonElement = ionToolbarElement.querySelector('[kirby-button]');
+            await TestHelper.waitForTimeout(50);
+
+            const pageProgressYCenter = calculateElementYCenter(pageProgressElement);
+            const pageTitleYCenter = calculateElementYCenter(pageTitleElement);
+            const closeButtonYCenter = calculateElementYCenter(closeButtonElement);
+
+            expect(pageProgressYCenter).toEqual(pageTitleYCenter);
+            expect(pageTitleYCenter).toEqual(closeButtonYCenter);
+          });
+
+          function calculateElementYCenter(element: Element): number {
+            const elementDOMRect = element.getBoundingClientRect();
+            return elementDOMRect.top + elementDOMRect.height / 2;
+          }
+        });
       });
     });
 
@@ -720,32 +736,4 @@ describe('ModalHelper', () => {
       });
     });
   });
-
-  describe('title alignement with start and end slot', () => {
-    beforeEach(async () => {
-      await openModal(null, StaticPageProgressEmbeddedComponent);
-    });
-
-    // TODO: Render progress circle ring properly
-    // TODO: Set top padding in ion-toolbar properly
-    it('should all have the same element y center', async () => {
-      const ionToolbarElement = ionModalWrapper.querySelector('ion-toolbar');
-      const pageProgressElement = ionToolbarElement.querySelector('kirby-page-progress');
-      const pageTitleElement = ionToolbarElement.querySelector('kirby-page-title');
-      const closeButtonElement = ionToolbarElement.querySelector('[kirby-button]');
-      await TestHelper.waitForTimeout(50);
-
-      const pageProgressYCenter = calculateElementYCenter(pageProgressElement);
-      const pageTitleYCenter = calculateElementYCenter(pageTitleElement);
-      const closeButtonYCenter = calculateElementYCenter(closeButtonElement);
-
-      expect(pageProgressYCenter).toEqual(pageTitleYCenter);
-      expect(pageTitleYCenter).toEqual(closeButtonYCenter);
-    });
-  });
-
-  function calculateElementYCenter(element: Element): number {
-    const elementDOMRect = element.getBoundingClientRect();
-    return elementDOMRect.top + elementDOMRect.height / 2;
-  }
 });
