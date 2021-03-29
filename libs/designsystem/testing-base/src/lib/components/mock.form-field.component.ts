@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { forwardRef, Component, Input } from '@angular/core';
 
 import { FormFieldComponent } from '@kirbydesign/designsystem';
 

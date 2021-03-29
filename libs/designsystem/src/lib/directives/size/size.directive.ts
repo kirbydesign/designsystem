@@ -1,4 +1,4 @@
-import { Directive, HostBinding, Input } from '@angular/core';
+import { Directive, Input, HostBinding } from '@angular/core';
 
 @Directive({
   // don't worry. I know what i am doing!

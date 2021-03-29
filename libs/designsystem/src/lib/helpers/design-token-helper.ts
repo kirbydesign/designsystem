@@ -1,6 +1,7 @@
-import { ColorHelper } from './color-helper';
-import { styles } from './design-token-helper.styles';
 import { ThemeColor } from './theme-color.type';
+import { ColorHelper } from './color-helper';
+
+import { styles } from './design-token-helper.styles';
 
 export class DesignTokenHelper {
   public static readonly breakpoints = styles.breakpoints;

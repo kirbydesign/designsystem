@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { stringifyPretty } from '~/app/shared/code-viewer/code-viewer.component';
 
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
+
+import { stringifyPretty } from '~/app/shared/code-viewer/code-viewer.component';
 
 const items = [
   { title: 'Bacon', value: 1 },
