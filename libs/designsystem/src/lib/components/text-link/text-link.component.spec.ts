@@ -145,7 +145,6 @@ describe('TextLinkComponent', () => {
             spectator = createHost(
               `<kirby-text-link size='${scenario.size}' text='External link' route='https://angular.io/api/router/RouterLink'></kirby-text-link>`
             );
-            console.log(spectator);
           });
 
           it('should render icon with correct styling', () => {
