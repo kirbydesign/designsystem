@@ -3,6 +3,7 @@
 
 :host {
   cursor: pointer;
+  display: inline-block;
 
   a {
     font-size: font-size('n');
@@ -11,26 +12,29 @@
   }
 
   kirby-icon {
-    padding-left: size('xxxs');
-    padding-right: size('s');
+    --kirby-icon-margin-left: #{size('xxxs')};
     vertical-align: middle;
-    font-size: #{icon-font-size('sm')};
   }
+
   &.sm {
     a {
       font-size: font-size('s');
       line-height: line-height('s');
     }
+
+    kirby-icon {
+      --kirby-icon-font-size: #{icon-font-size('xs')};
+    }
   }
+
   &.xs {
     a {
       font-size: font-size('xs');
       line-height: line-height('xs');
     }
+
     kirby-icon {
-      padding-left: size('xxxxs');
-      padding-right: size('s');
-      font-size: #{icon-font-size('xs')};
+      --kirby-icon-font-size: #{icon-font-size('xs')};
     }
   }
 }
