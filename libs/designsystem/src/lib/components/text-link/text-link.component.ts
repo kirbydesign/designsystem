@@ -8,11 +8,10 @@ import { Component, HostBinding, Input, OnChanges, SimpleChanges } from '@angula
 export class TextLinkComponent implements OnChanges {
   @Input() route: string;
   @Input() text: string;
-  @Input() size: 'sm' | 'md' | 'lg' = 'md';
   @HostBinding('class')
-  get _cssSize() {
-    return this.size;
-  }
+  @Input()
+  size: 'sm' | 'md' | 'lg' = 'md';
+
   ngOnChanges(changes: SimpleChanges) {
     for (const propName in changes) {
       if (changes.hasOwnProperty(propName)) {
