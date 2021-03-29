@@ -338,7 +338,9 @@ export class ComponentStatusComponent implements OnInit, OnDestroy {
   }
 
   private getGithubIssues(labels: string) {
-    const url = environment.githubApi + `/repos/kirbydesign/designsystem/issues?labels=${labels}`;
+    const url =
+      environment.githubApi +
+      `/repos/kirbydesign/designsystem/issues?labels=${labels}&per_page=100`;
 
     return this.getPageOfIssues(url).pipe(
       expand(({ nextPageUrl }) => (nextPageUrl ? this.getPageOfIssues(nextPageUrl) : EMPTY)),
