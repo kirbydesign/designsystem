@@ -2,7 +2,6 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponent } from 'ng-mocks';
 
-import { SizeDirective } from '../../directives';
 import { DesignTokenHelper } from '../../helpers';
 import { IconComponent } from '../icon';
 
@@ -25,7 +24,7 @@ describe('TextLinkComponent', () => {
 
   describe(`text link should be`, () => {
     beforeEach(() => {
-      spectator = createHost(`<kirby-text-link text='Some Link' link='/'></kirby-text-link>`);
+      spectator = createHost(`<kirby-text-link text='Some Link' route='/'></kirby-text-link>`);
     });
 
     it('created', () => {
@@ -54,7 +53,7 @@ describe('TextLinkComponent', () => {
   describe('with external links', () => {
     beforeEach(() => {
       spectator = createHost(
-        `<kirby-text-link  text='Some Link' link='https://angular.io/api/router/RouterLink'></kirby-text-link>`
+        `<kirby-text-link  text='Some Link' route='https://angular.io/api/router/RouterLink'></kirby-text-link>`
       );
     });
 
@@ -144,7 +143,7 @@ describe('TextLinkComponent', () => {
         describe(`external link`, () => {
           beforeEach(() => {
             spectator = createHost(
-              `<kirby-text-link size='${scenario.size}' text='External link' link='https://angular.io/api/router/RouterLink'></kirby-text-link>`
+              `<kirby-text-link size='${scenario.size}' text='External link' route='https://angular.io/api/router/RouterLink'></kirby-text-link>`
             );
             console.log(spectator);
           });
@@ -171,7 +170,7 @@ describe('TextLinkComponent', () => {
         describe(`internal link`, () => {
           beforeEach(() => {
             spectator = createHost(
-              `<kirby-text-link size='${scenario.size}' text='Internal link' link='/'></kirby-text-link>`
+              `<kirby-text-link size='${scenario.size}' text='Internal link' route='/'></kirby-text-link>`
             );
           });
 

@@ -1,7 +1,7 @@
 <!-- The Routerlink has problems with external links -->
 <ng-container *ngIf="isExternal(); else externalLinkTemplate">
-  <a [routerLink]="link">{{ text }}</a>
+  <a [routerLink]="route">{{ text }}</a>
 </ng-container>
 <ng-template #externalLinkTemplate>
-  <a href="{{ link }}">{{ text }} <kirby-icon name="link"></kirby-icon> </a>
+  <a href="{{ route }}">{{ text }} <kirby-icon name="link"></kirby-icon></a>
 </ng-template>

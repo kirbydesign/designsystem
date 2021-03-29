@@ -1,4 +1,4 @@
-import { Component, Input, HostBinding, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, HostBinding, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'kirby-text-link',
@@ -6,7 +6,7 @@ import { Component, Input, HostBinding, OnChanges, SimpleChanges } from '@angula
   styleUrls: ['./text-link.component.scss'],
 })
 export class TextLinkComponent implements OnChanges {
-  @Input() link: string;
+  @Input() route: string;
   @Input() text: string;
   @Input() size: 'sm' | 'md' | 'lg' = 'md';
   @HostBinding('class')
@@ -26,6 +26,6 @@ export class TextLinkComponent implements OnChanges {
   }
   isExternal() {
     const baseURI = window.document.baseURI;
-    return new URL(baseURI).origin === new URL(this.link, baseURI).origin;
+    return new URL(baseURI).origin === new URL(this.route, baseURI).origin;
   }
 }
