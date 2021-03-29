@@ -26,6 +26,7 @@ export function stringifyPretty(value: any) {
 })
 export class CodeViewerComponent implements AfterViewInit, OnChanges {
   @Input() language: 'html' | 'css' | 'scss' | 'js' | 'ts' | 'typescript';
+  @Input() inlineLabel = false;
   code: string;
   languageTitle: string;
   supportedLanguages = {

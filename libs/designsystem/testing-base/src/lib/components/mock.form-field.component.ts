@@ -1,4 +1,4 @@
-import { forwardRef, Component, Input } from '@angular/core';
+import { Component, forwardRef, Input } from '@angular/core';
 
 import { FormFieldComponent } from '@kirbydesign/designsystem';
 
@@ -16,6 +16,8 @@ import { FormFieldComponent } from '@kirbydesign/designsystem';
 export class MockFormFieldComponent {
   @Input() label: string;
   @Input() message: string;
+
+  focus() {}
 }
 
 // #endregion
