@@ -75,6 +75,12 @@ ion-modal.kirby-overlay {
     --border-radius: 0;
     --height: auto;
 
+    &.invert-colors {
+      --background: #{get-color('background-color-contrast')};
+      --kirby-modal-color: #{get-color('background-color')};
+      --ion-text-color: #{get-color('background-color')};
+    }
+
     &.kirby-modal-compact {
       --border-radius: #{$border-radius};
       --max-width: #{$compact-modal-max-width};

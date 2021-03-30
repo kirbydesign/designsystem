@@ -45,6 +45,7 @@ export class ModalHelper {
         config.flavor === 'compact' ? 'kirby-modal-compact' : null,
         modalSize,
         config.interactWithBackground ? 'interact-with-background' : null,
+        config.invertColors ? 'invert-colors' : null,
       ],
       backdropDismiss: config.flavor === 'compact' || config.interactWithBackground ? false : true,
       showBackdrop: !config.interactWithBackground,
