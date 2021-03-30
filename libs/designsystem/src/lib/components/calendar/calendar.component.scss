@@ -2,11 +2,12 @@
 $month-navigator-width: 80px;
 
 table.calendar-table {
-  width: 100%;
+  width: calc(100% - 2 * #{size('xxxs')});
   border-collapse: collapse;
   user-select: none;
   outline: none !important;
   border-spacing: 0;
+  margin: 0 size('xxxs') size('xxxs') size('xxxs');
 
   thead {
     padding: 0.5em;
@@ -28,6 +29,7 @@ table.calendar-table {
     padding: 0;
     line-height: 2em;
     height: 0;
+    text-align: center;
   }
 }
 
@@ -43,6 +45,7 @@ td {
   align-items: center;
   justify-content: space-between;
   padding: 0.5em;
+  margin: size('xxxs') size('xxxs') 0 size('xxxs');
 }
 
 .month-navigator {
@@ -91,13 +94,14 @@ td {
 }
 
 .day {
+  display: inline-block;
   $dayWidth: 40px;
   border-radius: $dayWidth / 2;
   width: $dayWidth;
   height: $dayWidth;
   line-height: $dayWidth;
   text-align: center;
-  margin: 0 auto;
+  margin: size('xxxs');
 }
 
 .day.selectable,
