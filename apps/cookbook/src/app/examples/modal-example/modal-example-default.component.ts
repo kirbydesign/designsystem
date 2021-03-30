@@ -18,10 +18,19 @@ const config = {
       [(showDummyContent)]="showDummyContent"
       [(delayLoadDummyContent)]="delayLoadDummyContent"
       [(loadAdditionalContent)]="loadAdditionalContent"
-      [(openFullHeight)]="openFullHeight">
+      [(openFullHeight)]="openFullHeight"
+      [(interactWithBackground)]="interactWithBackground"
+      [(invertColors)]="invertColors"
+      >
       </cookbook-modal-example-configuration>
   </cookbook-example-configuration-wrapper>
-    `,
+  
+  <ng-container *ngIf="interactWithBackground">
+    <div *ngFor="let dummyText of dummyBackgroundTexts">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non neque vitae felis ultricies imperdiet in ut orci. Aenean sodales, augue ac consectetur sodales, neque velit condimentum nulla, at ultrices dolor tortor a nunc. Proin tellus nibh, venenatis eget quam ut, blandit cursus ante. Pellentesque convallis pretium orci vitae porta.
+    </div>
+  </ng-container>
+  `,
   titleTemplate: `<kirby-page-title>My Modal Title</kirby-page-title>
  
 <p>Some content of the embedded component</p>
@@ -200,6 +209,9 @@ export class ModalExampleDefaultComponent {
   delayLoadDummyContent = true;
   loadAdditionalContent = false;
   openFullHeight = false;
+  interactWithBackground = false;
+  invertColors = false;
+  dummyBackgroundTexts = new Array(100).map(() => '');
 
   constructor(private modalController: ModalController, private window: WindowRef) {}
 
@@ -208,6 +220,8 @@ export class ModalExampleDefaultComponent {
     const config: ModalConfig = {
       flavor,
       component: FirstEmbeddedModalExampleComponent,
+      interactWithBackground: this.interactWithBackground,
+      invertColors: this.invertColors,
       size: this.openFullHeight ? 'full-height' : null,
       componentProps: {
         title,

@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
+import { KirbyAnimation } from '../../../animation/kirby-animation';
+import { ModalCompactWrapperComponent } from '../modal-wrapper/compact/modal-compact-wrapper.component';
 import { ModalConfig, ModalFlavor, ModalSize } from '../modal-wrapper/config/modal-config';
 import { ModalWrapperComponent } from '../modal-wrapper/modal-wrapper.component';
-import { ModalCompactWrapperComponent } from '../modal-wrapper/compact/modal-compact-wrapper.component';
-import { Overlay } from './modal.interfaces';
-import { KirbyAnimation } from '../../../animation/kirby-animation';
+
 import { ModalAnimationBuilderService } from './modal-animation-builder.service';
+import { Overlay } from './modal.interfaces';
 
 @Injectable()
 export class ModalHelper {
@@ -43,8 +44,10 @@ export class ModalHelper {
         config.flavor === 'drawer' ? 'kirby-drawer' : null,
         config.flavor === 'compact' ? 'kirby-modal-compact' : null,
         modalSize,
+        config.interactWithBackground ? 'interact-with-background' : null,
       ],
-      backdropDismiss: config.flavor === 'compact' ? false : true,
+      backdropDismiss: config.flavor === 'compact' || config.interactWithBackground ? false : true,
+      showBackdrop: !config.interactWithBackground,
       componentProps: { config: config },
       swipeToClose: config.flavor != 'compact',
       presentingElement: modalPresentingElement,

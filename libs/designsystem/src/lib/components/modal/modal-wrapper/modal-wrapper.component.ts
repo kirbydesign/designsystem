@@ -99,6 +99,11 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     return this.config.flavor === 'drawer';
   }
 
+  @HostBinding('class.invert-colors')
+  get _invertColors() {
+    return this.config.invertColors;
+  }
+
   willClose$ = this.ionModalWillDismiss.pipe(first());
 
   constructor(

@@ -40,6 +40,12 @@ export class ModalExampleConfigurationComponent {
   @Input() openFullHeight: boolean;
   @Output() openFullHeightChange = new EventEmitter<boolean>();
 
+  @Input() interactWithBackground: boolean;
+  @Output() interactWithBackgroundChange = new EventEmitter<boolean>();
+
+  @Input() invertColors: boolean;
+  @Output() invertColorsChange = new EventEmitter<boolean>();
+
   @HostBinding('class.checkbox-xs') true; // Extra small checkboxes
 
   constructor(private window: WindowRef, zone: NgZone) {}
@@ -98,5 +104,15 @@ export class ModalExampleConfigurationComponent {
   toggleOpenFullHeight(show: boolean) {
     this.openFullHeight = show;
     this.openFullHeightChange.emit(this.openFullHeight);
+  }
+
+  toggleInteractWithBackground(show: boolean) {
+    this.interactWithBackground = show;
+    this.interactWithBackgroundChange.emit(show);
+  }
+
+  toggleInvertColors(show: boolean) {
+    this.invertColors = show;
+    this.invertColorsChange.emit(show);
   }
 }

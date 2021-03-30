@@ -23,4 +23,7 @@ export interface ModalConfig {
   componentProps?: { [key: string]: any };
   // the supplementary action is only available in the drawer
   drawerSupplementaryAction?: DrawerSupplementaryAction;
+  // drawer properties
+  interactWithBackground?: boolean;
+  invertColors?: boolean;
 }

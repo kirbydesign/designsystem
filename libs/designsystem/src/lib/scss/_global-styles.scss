@@ -46,6 +46,17 @@ ion-modal.kirby-overlay {
     }
   }
 
+  &.interact-with-background {
+    display: table;
+    top: initial;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    padding: 0 !important;
+    ion-backdrop {
+      pointer-events: none;
+    }
+  }
+
   // Ensure consistent backdrop on card style modals, as Ionic 5 only applies --backdrop-opacity to :first-of-type:
   // See https://github.com/ionic-team/ionic/commit/253cd96164914a803f6bb42ff95ca74880c940d0
   // and https://github.com/ionic-team/ionic/issues/20800#issuecomment-606670762

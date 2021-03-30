@@ -57,3 +57,17 @@
   (checkedChange)="toggleOpenFullHeight($event)"
   text="Open in full height"
 ></kirby-checkbox>
+
+<kirby-checkbox
+  *ngIf="interactWithBackground !== undefined"
+  [checked]="interactWithBackground"
+  (checkedChange)="toggleInteractWithBackground($event)"
+  text="Interact with background (drawer only)"
+></kirby-checkbox>
+
+<kirby-checkbox
+  *ngIf="invertColors !== undefined"
+  [checked]="invertColors"
+  (checkedChange)="toggleInvertColors($event)"
+  text="Invert colors (drawer only)"
+></kirby-checkbox>
