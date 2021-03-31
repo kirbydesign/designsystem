@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { timer, of, Subject } from 'rxjs';
-import { map, takeWhile, takeUntil } from 'rxjs/operators';
+import { of, Subject, timer } from 'rxjs';
+import { map, takeUntil, takeWhile } from 'rxjs/operators';
 
 import { ModalController } from '@kirbydesign/designsystem';
 import { AlertConfig } from '@kirbydesign/designsystem';
@@ -8,7 +8,7 @@ import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
 
 const alertConfigWithIcon = {
   title: 'Alert With Icon',
-  message: 'This message is shown under the icon (if specified)',
+  message: 'This message can have more than 1 line.',
   okBtn: 'I agree',
   cancelBtn: 'Take me back',
   icon: { name: 'warning', themeColor: 'warning' },
