@@ -9,7 +9,10 @@ assignees: ''
 
 <!--**Mandatory steps to ensure alignment between stakeholders and the progression of Kirby**-->
 
-<!--In order to ensure steady progress and quality of Kirby, please follow our outlined process. By default three labels are added to new component issues and enhancements. To help Kirby please follow these steps, and remove the labels from the issue when done.-->
+<!--In order to ensure steady progress and quality of Kirby, please follow our outlined process. By default four labels are added to new component issues and enhancements. To help Kirby please follow these steps, and remove the labels from the issue when done.-->
+
+<!--*New*-->
+<!--Indicates that this is a new issue that has not yet been addressed by the Kirby team. The `New` label will be removed by the Kirby team. -->
 
 <!--*NOT Prioritized*-->
 <!--Describe any deadlines for the issue - eg. X needs this done by Y date, to be used in Z sprint. Suggest a milestone for the issue. The `Not Prioritized` label will be removed by the Kirby team. -->
