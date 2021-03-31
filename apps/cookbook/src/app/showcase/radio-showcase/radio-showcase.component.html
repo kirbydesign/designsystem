@@ -13,8 +13,31 @@
   radio is not in a group with another radio, then both radios will have the ability to be checked
   at the same time.
 </p>
-
-<h2>Default</h2>
+<ul>
+  <li>
+    Display a plain list of radios
+    <a href="#" (click)="scrollTo(default)">with just a string array</a>
+  </li>
+  <li>Supported <a href="#" (click)="scrollTo(radioStates)">radio states</a></li>
+  <li>Supported <a href="#" (click)="scrollTo(radioSizes)">radio sizes</a></li>
+  <li>Support for <a href="#" (click)="scrollTo(multilineLabel)">mulitline label</a></li>
+  <li>Support for <a href="#" (click)="scrollTo(simpleDataBinding)">simple data binding</a></li>
+  <li>Support for <a href="#" (click)="scrollTo(twoWayBinding)">two way binding</a></li>
+  <li>
+    Customize radios with
+    <a href="#" (click)="scrollTo(customRadioTemplate)">custom radio templates</a>
+  </li>
+  <li>Use radio group <a href="#" (click)="scrollTo(inFormField)">in a form field</a></li>
+  <li>Use radio group <a href="#" (click)="scrollTo(inItem)">in an item</a></li>
+  <li>
+    Use radio group in a form with <a href="#" (click)="scrollTo(ngforms)">ngForms</a>:
+    <ul>
+      <li><a href="#" (click)="scrollTo(reactiveForms)">Reactive forms</a></li>
+      <li><a href="#" (click)="scrollTo(templateDrivenForms)">Template driven forms</a></li>
+    </ul>
+  </li>
+</ul>
+<h2 #default>Default</h2>
 <p>
   To display a plain list of radio buttons simply provide the options as a plain
   <code>string[]</code> array to the <code>items</code> property of the
@@ -24,12 +47,12 @@
   <cookbook-radio-default-example #defaultExample></cookbook-radio-default-example>
 </cookbook-example-viewer>
 
-<h2>States</h2>
+<h2 #radioStates>States</h2>
 <cookbook-example-viewer [html]="statesExample.template">
   <cookbook-radio-states-example #statesExample></cookbook-radio-states-example>
 </cookbook-example-viewer>
 
-<h2>Sizes</h2>
+<h2 #radioSizes>Sizes</h2>
 <p>
   The size applies to the clickable/tapable area (highlighted in the examples below). The radio icon
   always has the same size.
@@ -38,13 +61,13 @@
   <cookbook-radio-sizes-example #sizesExample></cookbook-radio-sizes-example>
 </cookbook-example-viewer>
 
-<h2>Multiline Label</h2>
+<h2 #multilineLabel>Multiline Label</h2>
 <p>Line breaks can be made by using <code>&#92;n</code> or <code>&amp;&#35;10;</code>.</p>
 <cookbook-example-viewer [html]="radioMultilineExample.template">
   <cookbook-radio-multiline-example #radioMultilineExample></cookbook-radio-multiline-example>
 </cookbook-example-viewer>
 
-<h2>Simple data binding</h2>
+<h2 #simpleDataBinding>Simple data binding</h2>
 <p>
   <code>&lt;kirby-radio-group&gt;</code> supports data binding using simple
   <code>@Input</code> property and <code>@Output</code> event binding.
@@ -72,7 +95,7 @@
 <cookbook-example-viewer [html]="bindingExample.template" [ts]="bindingExample.codeSnippet">
   <cookbook-radio-example-binding #bindingExample></cookbook-radio-example-binding>
 </cookbook-example-viewer>
-<h2>Two-way data binding</h2>
+<h2 #twoWayBinding>Two-way data binding</h2>
 <p>
   To bind the value of the selected radio to a property on your host componenent, you can use
   Angular's two-way data binding syntax <code>[()]</code> (also known as <em>banana in a box</em>)
@@ -81,7 +104,7 @@
   <cookbook-code-viewer [html]="bindingExample.twoWayBindingTemplate"></cookbook-code-viewer>
 </p>
 
-<h2>Custom radio template</h2>
+<h2 #customRadioTemplate>Custom radio template</h2>
 <p>
   If you need to customize the radio buttons you can either:
 </p>
@@ -112,7 +135,7 @@
   ></cookbook-radio-custom-content-example>
 </cookbook-example-viewer>
 
-<h2>In Form Field</h2>
+<h2 #inFormField>In Form Field</h2>
 <p>
   Radios can placed within a <code>&lt;kirby-form-field&gt;</code> and assigned a label and an
   optional message.<br />
@@ -128,7 +151,7 @@
   <cookbook-radio-in-form-field-example #inFormFieldExample></cookbook-radio-in-form-field-example>
 </cookbook-example-viewer>
 
-<h2>In Item</h2>
+<h2 #inItem>In Item</h2>
 <p>
   To render radio buttons as part of an item (e.g. inside a card) you can either supply the item
   template through the <code>*kirbyListItemTemplate</code> directive (see list example below) or you
@@ -150,8 +173,56 @@
   <cookbook-radio-in-item-example #inItemExample></cookbook-radio-in-item-example>
 </cookbook-example-viewer>
 
-<h2>In List</h2>
+<h2 #inList>In List</h2>
 <em>See "In Item" example above.</em>
+
+<h2 #ngforms>ngForms</h2>
+<p>
+  <code>kirby-radio-group</code> implements the
+  <a href="https://angular.io/api/forms/ControlValueAccessor" target="_blank"
+    >control value accessor interface</a
+  >, which means it is ngForms-enabled. This allows you to use it directly in
+  <a href="https://angular.io/guide/forms" target="_blank">template driven</a> and
+  <a href="https://angular.io/guide/reactive-forms" target="_blank">reactive forms</a>.
+</p>
+<h3 #reactiveForms>Reactive Forms</h3>
+<p>
+  To use radios in a reactive form, bind your form control to
+  <code>&lt;kirby-radio-group&gt;</code> with simple data binding:
+</p>
+<!-- prettier-ignore -->
+<cookbook-code-viewer language="html" [inlineLabel]="true">&lt;kirby-radio-group [formControl]="yourFormControl"&gt;
+// or simply:
+&lt;kirby-radio-group formControlName="yourFormControlName"&gt;
+</cookbook-code-viewer>
+
+<cookbook-example-viewer
+  [html]="reactiveFormExample.template"
+  [ts]="reactiveFormExample.codeSnippet"
+>
+  <cookbook-radio-reactive-forms-example
+    #reactiveFormExample
+  ></cookbook-radio-reactive-forms-example>
+</cookbook-example-viewer>
+
+<h3 #templateDrivenForms>Template Driven Forms</h3>
+<p>
+  To use radios in a template driven form, simply two-way bind your selected value to
+  <code>&lt;kirby-radio-group&gt;</code> with <code>ngModel</code>:
+</p>
+
+<!-- prettier-ignore -->
+<cookbook-code-viewer language="html" [inlineLabel]="true">&lt;kirby-radio-group [(ngModel)]="selected"&gt;
+</cookbook-code-viewer>
+
+<cookbook-example-viewer
+  [html]="templateDrivenFormExample.template"
+  [ts]="templateDrivenFormExample.codeSnippet"
+>
+  <cookbook-radio-template-driven-forms-example
+    #templateDrivenFormExample
+  ></cookbook-radio-template-driven-forms-example>
+</cookbook-example-viewer>
 
 <h2>Properties</h2>
 <h3>Radio:</h3>
