@@ -31,6 +31,18 @@ h3.title {
   margin-bottom: size('xxs');
 }
 
+:host-context(kirby-alert) {
+  h3.title {
+    margin-top: size('m');
+    margin-bottom: size('m');
+    font-weight: font-weight('bold');
+  }
+  div.icon-outline + h3.title {
+    margin-top: 0;
+    margin-bottom: size('xs');
+  }
+}
+
 p.subtitle {
   margin-bottom: size('m');
   white-space: pre-wrap;
