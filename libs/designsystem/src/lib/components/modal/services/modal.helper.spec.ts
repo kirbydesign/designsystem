@@ -1,14 +1,8 @@
 import { Component, ElementRef, OnInit, Optional, ViewChild } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
-import {
-  IonButtons,
-  IonHeader,
-  IonTitle,
-  IonToolbar,
-  ModalController as IonicModalController,
-} from '@ionic/angular';
+import { IonButtons, IonToolbar, ModalController as IonicModalController } from '@ionic/angular';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
-import { MockComponent } from 'ng-mocks';
+import { MockComponents } from 'ng-mocks';
 
 import { DesignTokenHelper } from '../../../helpers/design-token-helper';
 import { ScreenSize, TestHelper } from '../../../testing/test-helper';
@@ -16,8 +10,6 @@ import { WindowRef } from '../../../types/window-ref';
 import { ButtonComponent } from '../../button/button.component';
 import { IconComponent } from '../../icon';
 import { PageProgressComponent, PageTitleComponent } from '../../page/page.component';
-import { ProgressCircleRingComponent } from '../../progress-circle/progress-circle-ring.component';
-import { ProgressCircleComponent } from '../../progress-circle/progress-circle.component';
 import { ModalFooterComponent } from '../footer/modal-footer.component';
 import { ModalCompactWrapperComponent } from '../modal-wrapper/compact/modal-compact-wrapper.component';
 import { ModalConfig, ModalFlavor, ModalSize } from '../modal-wrapper/config/modal-config';
@@ -66,12 +58,12 @@ class ContentWithNoOverflowEmbeddedComponent {}
 @Component({
   template: `
     <kirby-page-progress>
-      <div style="height: 40px; width: 40px;"></div>
+      <div style="height: 50px; width: 50px; border: 1px solid red;"></div>
     </kirby-page-progress>
-    <kirby-page-title>My Title</kirby-page-title>
+    <kirby-page-title>Modal With Page Progress</kirby-page-title>
   `,
 })
-class StaticPageProgressEmbeddedComponent {}
+class PageProgressEmbeddedComponent {}
 
 describe('ModalHelper', () => {
   let spectator: SpectatorService<ModalHelper>;
@@ -109,9 +101,8 @@ describe('ModalHelper', () => {
       ModalFooterComponent,
       ModalWrapperComponent,
       ModalCompactWrapperComponent,
-      PageProgressComponent,
       PageTitleComponent,
-      MockComponent(IconComponent),
+      MockComponents(IconComponent, PageProgressComponent),
     ],
     entryComponents: [
       InputEmbeddedComponent,
@@ -481,27 +472,52 @@ describe('ModalHelper', () => {
           });
         });
 
-        describe('title alignement with start and end slot', () => {
-          it('should all have the same element y center', async () => {
-            await openModal(null, StaticPageProgressEmbeddedComponent);
-            const ionToolbarElement = ionModalWrapper.querySelector('ion-toolbar');
-            const pageProgressElement = ionToolbarElement.querySelector('kirby-page-progress');
-            const pageTitleElement = ionToolbarElement.querySelector('kirby-page-title');
-            const closeButtonElement = ionToolbarElement.querySelector('[kirby-button]');
-            await TestHelper.waitForTimeout(50);
+        describe('title', () => {
+          let ionToolbarElement: HTMLIonToolbarElement;
+          let pageTitleElement: HTMLDivElement;
+          let pageTitleVerticalCenter: number;
 
-            const pageProgressYCenter = calculateElementYCenter(pageProgressElement);
-            const pageTitleYCenter = calculateElementYCenter(pageTitleElement);
-            const closeButtonYCenter = calculateElementYCenter(closeButtonElement);
-
-            expect(pageProgressYCenter).toEqual(pageTitleYCenter);
-            expect(pageTitleYCenter).toEqual(closeButtonYCenter);
+          beforeEach(async () => {
+            await openModal(null, PageProgressEmbeddedComponent);
+            ionToolbarElement = ionModalWrapper.querySelector('ion-toolbar');
+            pageTitleElement = ionToolbarElement.querySelector('kirby-page-title');
+            pageTitleVerticalCenter = getElementVerticalCenter(pageTitleElement);
           });
 
-          function calculateElementYCenter(element: Element): number {
-            const elementDOMRect = element.getBoundingClientRect();
-            return elementDOMRect.top + elementDOMRect.height / 2;
-          }
+          afterEach(async () => {
+            await overlay.dismiss();
+          });
+
+          it('should align vertically with close button', () => {
+            const closeButtonElement = ionToolbarElement.querySelector('[kirby-button]');
+            const closeButtonVerticalCenter = getElementVerticalCenter(closeButtonElement);
+
+            expect(closeButtonVerticalCenter).toEqual(pageTitleVerticalCenter);
+          });
+
+          it('should align vertically with page progress', () => {
+            const pageProgressElement = ionToolbarElement.querySelector('kirby-page-progress');
+            const pageProgressVerticalCenter = getElementVerticalCenter(pageProgressElement);
+
+            expect(pageTitleVerticalCenter).toEqual(pageProgressVerticalCenter);
+          });
+
+          it('should have correct padding', () => {
+            const toolbarContainer = ionToolbarElement.shadowRoot.querySelector(
+              '.toolbar-container'
+            );
+            const expectedPadding = size('s');
+            const expectedTopSpacingTotal = size('m');
+            const expectedAdditionalTopPadding =
+              parseInt(expectedTopSpacingTotal) - parseInt(expectedPadding);
+
+            expect(toolbarContainer).toHaveComputedStyle({
+              padding: expectedPadding,
+            });
+            expect(ionToolbarElement).toHaveComputedStyle({
+              'padding-top': `${expectedAdditionalTopPadding}px`,
+            });
+          });
         });
       });
     });
@@ -734,6 +750,50 @@ describe('ModalHelper', () => {
           });
         });
       });
+
+      describe('title', () => {
+        let ionToolbarElement: HTMLIonToolbarElement;
+        let pageTitleElement: HTMLDivElement;
+        let pageTitleVerticalCenter: number;
+
+        beforeEach(async () => {
+          await openModal(null, PageProgressEmbeddedComponent);
+          ionToolbarElement = ionModalWrapper.querySelector('ion-toolbar');
+          pageTitleElement = ionToolbarElement.querySelector('kirby-page-title');
+          pageTitleVerticalCenter = getElementVerticalCenter(pageTitleElement);
+        });
+
+        afterEach(async () => {
+          await overlay.dismiss();
+        });
+
+        it('should align vertically with close button', () => {
+          const closeButtonElement = ionToolbarElement.querySelector('[kirby-button]');
+          const closeButtonVerticalCenter = getElementVerticalCenter(closeButtonElement);
+
+          expect(closeButtonVerticalCenter).toEqual(pageTitleVerticalCenter);
+        });
+
+        it('should align vertically with page progress', () => {
+          const pageProgressElement = ionToolbarElement.querySelector('kirby-page-progress');
+          const pageProgressVerticalCenter = getElementVerticalCenter(pageProgressElement);
+
+          expect(pageTitleVerticalCenter).toEqual(pageProgressVerticalCenter);
+        });
+
+        it('should have correct padding', () => {
+          const toolbarContainer = ionToolbarElement.shadowRoot.querySelector('.toolbar-container');
+
+          expect(toolbarContainer).toHaveComputedStyle({
+            padding: size('s'),
+          });
+        });
+      });
     });
   });
 });
+
+function getElementVerticalCenter(element: Element): number {
+  const elementDOMRect = element.getBoundingClientRect();
+  return elementDOMRect.top + elementDOMRect.height / 2;
+}
