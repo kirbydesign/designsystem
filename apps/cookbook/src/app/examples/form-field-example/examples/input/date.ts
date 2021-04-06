@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
 
 import { InputSize } from '@kirbydesign/designsystem';
 
@@ -8,7 +7,7 @@ const config = {
   template: `
   <form [formGroup]="dateFormGroup">
     <kirby-form-field label="Date input" >
-      <input kirby-input type="date" />
+      <input kirby-input type="date" [size]="size" />
     </kirby-form-field>
   </form>
 `,
@@ -20,11 +19,5 @@ const config = {
 })
 export class FormFieldInputDateExampleComponent {
   template: string = config.template;
-  dateFormGroup: FormGroup;
   @Input() size: InputSize;
-  constructor() {
-    this.dateFormGroup = new FormGroup({
-      dateDemo: new FormControl(),
-    });
-  }
 }
