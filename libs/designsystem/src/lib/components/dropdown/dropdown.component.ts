@@ -26,11 +26,6 @@ import { CardComponent } from '../card/card.component';
 import { ItemComponent } from '../item/item.component';
 import { ListItemTemplateDirective } from '../list/list.directive';
 
-// export enum HorizontalDirection {
-//   right = 'right',
-//   left = 'left',
-// }
-
 @Component({
   selector: 'kirby-dropdown',
   templateUrl: './dropdown.component.html',
