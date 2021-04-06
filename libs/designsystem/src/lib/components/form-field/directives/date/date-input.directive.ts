@@ -1,85 +1,33 @@
-import { DatePipe } from '@angular/common';
-import { Directive, ElementRef, OnDestroy, OnInit, Self } from '@angular/core';
-import { NgControl } from '@angular/forms';
-import { Subject } from 'rxjs';
-import { map, takeUntil } from 'rxjs/operators';
+import { Directive, ElementRef, HostBinding, Renderer2 } from '@angular/core';
+import { IMaskDirective, IMaskFactory } from 'angular-imask';
 
-import { DateInputAnalyzer } from './date-input.analyzer';
-/**
- * Directive for handling input in locale specific date format.
- * Uses LOCALE_ID to read initial separator settings, this can be overriden by the directive user
- * Supports these features:
- * #1: Adds date-month-year separators
- *
- *
- * Example:
- * ```
- * <input kirby-input kirby-date-input formControlName="dateDemo" />
- * ```
- *
- */
+import { DateMaskService } from './date-mask.service';
 
 @Directive({
-  // tslint:disable-next-line:directive-selector
-  selector: '[kirby-date-input]',
-  providers: [DateInputAnalyzer, DatePipe],
+  selector: '[kirby-input][type="date"]',
 })
-export class DateInputDirective implements OnInit, OnDestroy {
+export class DateInputDirective {
+  // Add IMaskDirective
+  @HostBinding('attr.imask') imaskDirective = new IMaskDirective(
+    this.elementRef,
+    this.renderer,
+    this.iMaskFactory,
+    null
+  );
+
+  // Ensure numeric keyboard
+  @HostBinding('attr.inputmode') inputmode = 'numeric';
+
   constructor(
-    @Self() public ngControl: NgControl,
-    private analyzer: DateInputAnalyzer,
-    @Self() public hostElement: ElementRef<HTMLInputElement>
+    private elementRef: ElementRef,
+    private renderer: Renderer2,
+    private iMaskFactory: IMaskFactory,
+    private datemask: DateMaskService
   ) {
-    if (!hostElement.nativeElement.setSelectionRange) {
-      throw new Error("'kirby-date-input' can only be applied to input element");
-    }
-  }
+    // Remove type to avoid user-agent specific behaviour for [type="date"]
+    this.elementRef.nativeElement.removeAttribute('type');
 
-  private destroy$ = new Subject();
-  private lastValue = '';
-  private cursorPosition = -1;
-
-  ngOnInit(): void {
-    if (!this.hostElement.nativeElement.placeholder) {
-      this.hostElement.nativeElement.placeholder = this.analyzer.getPlaceholder();
-    }
-    // @ts-ignore
-    this.ngControl.valueChanges
-      .pipe(
-        takeUntil(this.destroy$),
-        map((value: string) => this.findCursorPosition(value)),
-        map(
-          (value: string) =>
-            (value = this.analyzer.analyse(this.cursorPosition, value, this.lastValue))
-        )
-      )
-      .subscribe((value: string) => {
-        this.cursorPosition = this.analyzer.cursorPosition;
-        this.updateValue(value);
-        this.updateCursorPosition();
-        this.lastValue = value;
-      });
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-  }
-  private findCursorPosition(value: string): string {
-    this.cursorPosition = this.hostElement.nativeElement.selectionStart;
-    return value;
-  }
-  private updateCursorPosition(): void {
-    this.hostElement.nativeElement.selectionStart = this.cursorPosition;
-  }
-
-  private updateValue(value: string): void {
-    this.ngControl.control.setValue(value, {
-      emitEvent: false,
-      onlySelf: true,
-      emitModelToViewChange: true,
-    });
-    if (this.cursorPosition !== undefined) {
-      this.hostElement.nativeElement.setSelectionRange(this.cursorPosition, this.cursorPosition);
-    }
+    this.imaskDirective.imask = this.datemask;
+    this.imaskDirective.ngAfterViewInit();
   }
 }

@@ -1,208 +1,169 @@
-import { DatePipe } from '@angular/common';
-import '@angular/common/locales/global/da';
-import { LOCALE_ID } from '@angular/core';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { createDirectiveFactory, SpectatorDirective } from '@ngneat/spectator';
+import { IMaskModule } from 'angular-imask';
 
 import { DateInputDirective } from './date-input.directive';
-import { DateLocaleAnalyser } from './date-locale-analyser';
+import { DateMaskService } from './date-mask.service';
 
-describe('Directive: DateInputDirective', () => {
-  [
-    { id: 'en', separators: { sep: '/' } },
-    { id: 'da', separators: { sep: '.' } },
-  ].forEach((locale) => {
-    describe(`locale: ${locale.id}`, () => {
-      const createHost = createDirectiveFactory({
-        directive: DateInputDirective,
-        declarations: [DateInputDirective, DatePipe],
-        imports: [FormsModule, ReactiveFormsModule],
-        providers: [
-          DatePipe,
-          {
-            provide: LOCALE_ID,
-            useValue: locale.id,
-          },
-        ],
-      });
-      let testFormControl: FormControl;
-      let spectatorDirective: SpectatorDirective<DateInputDirective>;
-      let inputElement: HTMLInputElement;
-      let sep: string;
-      let month: string;
-      let day: string;
-      let year: string;
+describe('DateInputDirective', () => {
+  let spectator: SpectatorDirective<DateInputDirective>;
+  const createDirective = createDirectiveFactory({
+    directive: DateInputDirective,
+    imports: [IMaskModule],
+    providers: [DateMaskService],
+  });
 
-      beforeEach(() => {
-        testFormControl = new FormControl('');
-        sep = locale.separators.sep;
-        month = '11';
-        day = '22';
-        year = '2020';
-        const template = `<input kirby-date-input [formControl]="testFormControl" />`;
-        spectatorDirective = createHost(template, {
-          hostProps: { testFormControl },
-        });
-        inputElement = spectatorDirective.element as HTMLInputElement;
-      });
-      describe('dates separator', () => {
-        it('should add separator and set changed value in formControl', () => {
-          const localeSettings: DateLocaleAnalyser = new DateLocaleAnalyser(locale.id);
-          let expectedValue = '';
-          if (localeSettings.dayBeforeMonth) {
-            expectedValue = `${day}${sep}${month}${sep}${year}`;
-          } else {
-            expectedValue = `${month}${sep}${day}${sep}${year}`;
-          }
-          const val = DateFormatHelper.getDate(locale.id, day, month, year);
-          testFormControl.setValue(val);
-          spectatorDirective.detectChanges();
-          expect(inputElement.value).toBe(expectedValue);
-        });
+  beforeEach(() => {
+    spectator = createDirective(`<input kirby-input type="date" />`);
+  });
 
-        it('should remove leading "0"s in input', () => {
-          const localeSettings: DateLocaleAnalyser = new DateLocaleAnalyser(locale.id);
-          let val = '';
-          let expectedValue = '';
-          if (localeSettings.dayBeforeMonth) {
-            val = `00${month}${year}`;
-            expectedValue = `01${sep}${month}${sep}${year}`;
-          } else {
-            val = `00${day}${year}`;
-            expectedValue = `01${sep}${day}${sep}${year}`;
-          }
+  it('should get the instance', () => {
+    const instance = spectator.directive;
+    expect(instance).toBeDefined();
+  });
 
-          testFormControl.setValue(val);
-          spectatorDirective.detectChanges();
-          expect(inputElement.value).toBe(expectedValue);
-        });
+  it('should have initial date-mask value', () => {
+    expect(spectator.element).toHaveValue('mm/dd/yyyy');
+  });
 
-        it('should handle out of range day (>31) and month (>12)', () => {
-          const localeSettings: DateLocaleAnalyser = new DateLocaleAnalyser(locale.id);
-          let val = '';
-          let expectedValue = '';
-          if (localeSettings.dayBeforeMonth) {
-            val = '32';
-            expectedValue = `31`;
-          } else {
-            val = '13';
-            expectedValue = `12`;
-          }
+  it('should keep date-mask when typing', () => {
+    spectator.typeInElement('11', spectator.element);
+    expect(spectator.element).toHaveValue('11/dd/yyyy');
+  });
 
-          testFormControl.setValue(val);
-          spectatorDirective.detectChanges();
-          expect(inputElement.value).toBe(expectedValue);
-        });
+  it('should have inputmode="numeric"', () => {
+    expect((spectator.element as HTMLInputElement).inputMode).toBe('numeric');
+  });
 
-        it('should handle lower out of range day (0) and month (0)', () => {
-          const localeSettings: DateLocaleAnalyser = new DateLocaleAnalyser(locale.id);
-          let val = '';
-          let expectedValue = '';
-          val = `0${sep}`;
-          expectedValue = `01${sep}`;
-          testFormControl.setValue(val);
-          spectatorDirective.detectChanges();
-          expect(inputElement.value).toBe(expectedValue);
-        });
+  it('should replace type="date", with type="text"', () => {
+    expect((spectator.element as HTMLInputElement).type).toBe('text');
+  });
 
-        it('should remove dates out of range in input', () => {
-          const val = DateFormatHelper.getDate(locale.id, '32', '13', year);
-          testFormControl.setValue(val);
-          spectatorDirective.detectChanges();
-          const expectedValue = DateFormatHelper.getDate(locale.id, '31', '12', year);
-          expect(inputElement.value.replace(sep, '').replace(sep, '')).toBe(expectedValue);
-        });
+  it('should only allow numbers or valid date formats', () => {
+    spectator.typeInElement('a', spectator.element);
+    expect(spectator.element).toHaveValue('mm/dd/yyyy');
 
-        it('should accept first char as 1', () => {
-          const val = '1';
-          testFormControl.setValue(val);
-          spectatorDirective.detectChanges();
-          expect(inputElement.value).toBe(val);
-        });
+    spectator.typeInElement('01-01-2021', spectator.element);
+    expect(spectator.element).toHaveValue('01/01/2021');
 
-        it('should accept first part (month or day) as 01', () => {
-          const val = '01';
-          testFormControl.setValue(val);
-          spectatorDirective.detectChanges();
-          expect(inputElement.value).toBe(val);
-        });
+    spectator.typeInElement('01/01/2021', spectator.element);
+    expect(spectator.element).toHaveValue('01/01/2021');
+  });
 
-        it('should accept month as x/y', () => {
-          const val = `${month}${sep}${month}`; //use month only to avoid looking a dd/mm and mm/dd scenarios
-          testFormControl.setValue(val);
-          spectatorDirective.detectChanges();
-          expect(inputElement.value).toBe(val);
-        });
-        it('should accept full date as x/y/z', () => {
-          const val = `${month}${sep}${month}${sep}${year}`; //use month only to avoid looking a dd/mm and mm/dd scenarios
-          testFormControl.setValue(val);
-          spectatorDirective.detectChanges();
-          expect(inputElement.value).toBe(val);
-        });
+  describe('month', () => {
+    it('should replace numbers > 1, as first character with "1"', () => {
+      spectator.typeInElement('0', spectator.element);
+      expect(spectator.element).toHaveValue('0m/dd/yyyy');
 
-        it('should convert 1/ to 01/', () => {
-          const localeSettings: DateLocaleAnalyser = new DateLocaleAnalyser(locale.id);
-          let val = '';
-          let expectedValue = '';
-          val = `0${sep}`;
-          expectedValue = `01${sep}`;
+      spectator.typeInElement('2', spectator.element);
+      expect(spectator.element).toHaveValue('1m/dd/yyyy');
 
-          testFormControl.setValue(val);
-          spectatorDirective.detectChanges();
+      spectator.typeInElement('3', spectator.element);
+      expect(spectator.element).toHaveValue('1m/dd/yyyy');
 
-          expect(inputElement.value).toBe(expectedValue);
-        });
+      spectator.typeInElement('4', spectator.element);
+      expect(spectator.element).toHaveValue('1m/dd/yyyy');
 
-        it('should convert 01/1/ to 01/01/', () => {
-          const localeSettings: DateLocaleAnalyser = new DateLocaleAnalyser(locale.id);
-          let val = '';
-          let expectedValue = '';
-          val = `01${sep}1${sep}`;
-          expectedValue = `01${sep}01${sep}`;
+      spectator.typeInElement('5', spectator.element);
+      expect(spectator.element).toHaveValue('1m/dd/yyyy');
 
-          testFormControl.setValue(val);
-          spectatorDirective.detectChanges();
+      spectator.typeInElement('6', spectator.element);
+      expect(spectator.element).toHaveValue('1m/dd/yyyy');
 
-          expect(inputElement.value).toBe(expectedValue);
-        });
-      });
+      spectator.typeInElement('7', spectator.element);
+      expect(spectator.element).toHaveValue('1m/dd/yyyy');
 
-      describe('empty string', () => {
-        it('should not format input, nor set selection range', () => {
-          const input = spectatorDirective.element as HTMLInputElement;
-          spyOn(input, 'setSelectionRange');
-          expect(input.value).toBe('');
-          expect(input.setSelectionRange).not.toHaveBeenCalled();
-        });
-      });
+      spectator.typeInElement('8', spectator.element);
+      expect(spectator.element).toHaveValue('1m/dd/yyyy');
 
-      describe('invalid characters', () => {
-        it('should not allow invalid characters', () => {
-          const val = 'a';
-          const expectedValue = '';
-          testFormControl.setValue(val);
-          spectatorDirective.detectChanges();
-          expect(inputElement.value).toBe(expectedValue);
-        });
-      });
+      spectator.typeInElement('9', spectator.element);
+      expect(spectator.element).toHaveValue('1m/dd/yyyy');
+    });
+
+    it('should replace numbers > 2, as second character with "2", if first character is "1"', () => {
+      spectator.typeInElement('10', spectator.element);
+      expect(spectator.element).toHaveValue('10/dd/yyyy');
+
+      spectator.typeInElement('11', spectator.element);
+      expect(spectator.element).toHaveValue('11/dd/yyyy');
+
+      spectator.typeInElement('12', spectator.element);
+      expect(spectator.element).toHaveValue('12/dd/yyyy');
+
+      spectator.typeInElement('13', spectator.element);
+      expect(spectator.element).toHaveValue('12/dd/yyyy');
+
+      spectator.typeInElement('14', spectator.element);
+      expect(spectator.element).toHaveValue('12/dd/yyyy');
+
+      spectator.typeInElement('15', spectator.element);
+      expect(spectator.element).toHaveValue('12/dd/yyyy');
+
+      spectator.typeInElement('16', spectator.element);
+      expect(spectator.element).toHaveValue('12/dd/yyyy');
+
+      spectator.typeInElement('17', spectator.element);
+      expect(spectator.element).toHaveValue('12/dd/yyyy');
+
+      spectator.typeInElement('18', spectator.element);
+      expect(spectator.element).toHaveValue('12/dd/yyyy');
+
+      spectator.typeInElement('19', spectator.element);
+      expect(spectator.element).toHaveValue('12/dd/yyyy');
+    });
+
+    it('should replace month > 12 with "12"', () => {
+      spectator.typeInElement('99/01/2021', spectator.element);
+      expect(spectator.element).toHaveValue('12/01/2021');
+    });
+  });
+
+  describe('day', () => {
+    it('should replace numbers > 3, as first character with "3"', () => {
+      spectator.typeInElement('01/1', spectator.element);
+      expect(spectator.element).toHaveValue('01/1d/yyyy');
+
+      spectator.typeInElement('01/2', spectator.element);
+      expect(spectator.element).toHaveValue('01/2d/yyyy');
+
+      spectator.typeInElement('01/3', spectator.element);
+      expect(spectator.element).toHaveValue('01/3d/yyyy');
+
+      spectator.typeInElement('01/4', spectator.element);
+      expect(spectator.element).toHaveValue('01/3d/yyyy');
+
+      spectator.typeInElement('01/5', spectator.element);
+      expect(spectator.element).toHaveValue('01/3d/yyyy');
+
+      spectator.typeInElement('01/6', spectator.element);
+      expect(spectator.element).toHaveValue('01/3d/yyyy');
+
+      spectator.typeInElement('01/7', spectator.element);
+      expect(spectator.element).toHaveValue('01/3d/yyyy');
+
+      spectator.typeInElement('01/8', spectator.element);
+      expect(spectator.element).toHaveValue('01/3d/yyyy');
+
+      spectator.typeInElement('01/9', spectator.element);
+      expect(spectator.element).toHaveValue('01/3d/yyyy');
+    });
+
+    it('should replace day > 31 with "31"', () => {
+      spectator.typeInElement('01/99/2021', spectator.element);
+      expect(spectator.element).toHaveValue('01/31/2021');
+    });
+  });
+
+  describe('year', () => {
+    it('should replace < "1900" with "1900', () => {
+      spectator.typeInElement('01-01-1000', spectator.element);
+      expect(spectator.element).toHaveValue('01/01/1900');
+    });
+
+    it('should only allow 4 digits', () => {
+      spectator.typeInElement('01-01-99999', spectator.element);
+      expect(spectator.element).toHaveValue('01/01/9999');
     });
   });
 });
 
-class DateFormatHelper {
-  public static getDate(locale: string, d: string, m: string, y: string): string {
-    const localeSettings: DateLocaleAnalyser = new DateLocaleAnalyser(locale);
-    if (localeSettings.yearFirst) {
-      if (localeSettings.dayBeforeMonth) {
-        return y + d + m;
-      } else {
-        return y + m + d;
-      }
-    }
-    if (localeSettings.dayBeforeMonth) {
-      return d + m + y;
-    } else {
-      return m + d + y;
-    }
-  }
-}
+// TODO: REACTIVE FORM VALIDATION?
