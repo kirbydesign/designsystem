@@ -8,8 +8,9 @@ const config = {
   header="Your action sheet header" 
   subHeader="Your action sheet subheader"
   [items]="items"
-  cancelButtonText="Custom cancel">
-  <button kirby-button>Custom button<kirby-icon name="pension"></kirby-icon></button>
+  cancelButtonText="Custom cancel"
+  triggerIconName="pension"
+  triggerText="Custom button">
   </kirby-action-sheet>`,
 };
 

@@ -19,10 +19,12 @@
 
   <h2>Custom Button</h2>
   <p>
-    If the default button doesn't fit the context, the <code>action-sheet</code> accepts a custom
-    <a href="/home/showcase/button"><code>kirby-button</code></a> as trigger for revealing the
-    sheet.
+    If the default button doesn't fit the context, the <code>action-sheet</code> trigger can display
+    a custom icon by providing a <code>triggerIconName</code>. Allowed icon names can be found here:
+    <a href="/home/showcase/icon"><code>Icons</code></a
+    >.
   </p>
+  <p>To add text to the trigger button, simply add a <code>triggerText</code>.</p>
   <cookbook-example-viewer [html]="customButtonExample.template">
     <div class="action-sheet-trigger">
       <cookbook-action-sheet-example-custom-button

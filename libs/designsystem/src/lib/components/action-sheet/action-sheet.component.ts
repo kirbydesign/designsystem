@@ -25,6 +25,8 @@ export class ActionSheetComponent {
   @Input() header: string;
   @Input() subheader: string;
   @Input() items: Array<ActionSheetItem>;
+  @Input() triggerIconName = 'more';
+  @Input() triggerText?: string;
   @Output() cancel = new EventEmitter();
   @Output() itemSelect: EventEmitter<ActionSheetItem> = new EventEmitter<ActionSheetItem>();
 
@@ -40,6 +42,12 @@ export class ActionSheetComponent {
 
   onCancel() {
     this.cancel.emit();
+  }
+
+  delayedClose() {
+    setTimeout(() => {
+      this.state = OpenState.closed;
+    }, 500);
   }
 
   onToggleSheet() {
