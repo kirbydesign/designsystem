@@ -10,7 +10,7 @@ table.calendar-table {
 
   thead {
     padding: 0.5em;
-    border-bottom: 1px solid get-color('medium');
+    border-bottom: 1px solid get-color('background-color');
 
     th {
       height: 50px;
@@ -97,6 +97,7 @@ td {
   height: $dayWidth;
   line-height: $dayWidth;
   text-align: center;
+  margin: 0 auto;
 }
 
 .day.selectable,
