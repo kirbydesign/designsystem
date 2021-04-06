@@ -1,13 +1,13 @@
 import { AfterViewInit, EventEmitter, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import {
-  ChangeDetectionStrategy,
   Component,
-  ContentChild,
-  Directive,
+  ChangeDetectionStrategy,
   Input,
-  Output,
+  ContentChild,
   TemplateRef,
+  Directive,
   ViewChild,
+  Output,
 } from '@angular/core';
 import { IonSlide, IonSlides } from '@ionic/angular';
 
