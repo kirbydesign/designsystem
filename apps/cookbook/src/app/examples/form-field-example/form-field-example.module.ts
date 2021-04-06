@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
 
 import { KirbyModule } from '@kirbydesign/designsystem';
 
@@ -25,6 +24,7 @@ const COMPONENT_DECLARATIONS = [
   FormFieldInputLabelExampleComponent,
   FormFieldInputLabelMessageExampleComponent,
   FormFieldInputCounterExampleComponent,
+  FormFieldInputNumericExampleComponent,
   FormFieldInputDateExampleComponent,
   FormFieldInputDisabledExampleComponent,
   FormFieldInputErrorExampleComponent,
@@ -33,11 +33,10 @@ const COMPONENT_DECLARATIONS = [
   FormFieldTextareaDefaultExampleComponent,
   FormFieldTextareaLabelExampleComponent,
   FormFieldTextareaCounterExampleComponent,
-  FormFieldInputNumericExampleComponent,
 ];
 
 @NgModule({
-  imports: [CommonModule, KirbyModule, ReactiveFormsModule],
+  imports: [CommonModule, KirbyModule],
   declarations: COMPONENT_DECLARATIONS,
   exports: COMPONENT_DECLARATIONS,
 })

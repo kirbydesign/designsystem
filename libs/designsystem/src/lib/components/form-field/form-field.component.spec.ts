@@ -1,10 +1,8 @@
-import { IonIcon, IonItem, IonRadio, IonRadioGroup } from '@ionic/angular';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { DesignTokenHelper, PlatformService } from '../../helpers';
 import { TestHelper } from '../../testing/test-helper';
 import { WindowRef } from '../../types';
-import { IconComponent } from '../icon';
 import { ItemComponent } from '../item/item.component';
 import { RadioComponent } from '../radio';
 import { RadioGroupComponent } from '../radio/radio-group/radio-group.component';
@@ -30,12 +28,6 @@ describe('FormFieldComponent', () => {
       RadioComponent,
       InputCounterComponent,
       ItemComponent,
-      IconComponent,
-      IonIcon,
-      IonRadio,
-      IonRadioGroup,
-      RadioComponent,
-      IonItem,
     ],
     mocks: [PlatformService],
     providers: [
@@ -188,7 +180,7 @@ describe('FormFieldComponent', () => {
         const availableTextWidth = getAvailableTextWidth();
         const expectedMessageWidth = availableTextWidth * 0.75;
         const messageWidth = messageElement.getBoundingClientRect().width;
-        expect(messageWidth.toFixed()).toEqual(expectedMessageWidth.toFixed());
+        expect(messageWidth).toEqual(expectedMessageWidth);
       });
 
       it('should render the counter with correct width', () => {
@@ -232,7 +224,7 @@ describe('FormFieldComponent', () => {
         expect(inputElement).toBeTruthy();
       });
 
-      it('should render the input as a first level descendant', () => {
+      it('should render the input as a direct descendant', () => {
         const inputElement = spectator.queryHost('input[kirby-input]');
         expect(inputElement).toBeTruthy();
         expect(inputElement.parentElement).toEqual(spectator.element);
@@ -320,7 +312,7 @@ describe('FormFieldComponent', () => {
         expect(textareaElement).toBeTruthy();
       });
 
-      it('should render the textarea as a first level descendant', () => {
+      it('should render the textarea as a direct descendant', () => {
         const textareaElement = spectator.queryHost('textarea[kirby-textarea]');
         expect(textareaElement).toBeTruthy();
         expect(textareaElement.parentElement).toEqual(spectator.element);
@@ -374,7 +366,7 @@ describe('FormFieldComponent', () => {
         label = spectator.queryHost('label');
       });
 
-      it('should render the radio-group as a first level descendant', () => {
+      it('should render the radio-group as a direct descendant', () => {
         expect(radioGroupElement).toBeTruthy();
         expect(radioGroupElement.parentElement).toEqual(spectator.element);
       });
