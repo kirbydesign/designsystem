@@ -785,6 +785,9 @@ describe('ModalHelper', () => {
           expect(toolbarContainer).toHaveComputedStyle({
             padding: size('s'),
           });
+          expect(ionToolbarElement).toHaveComputedStyle({
+            'padding-top': '0px',
+          });
         });
       });
     });
