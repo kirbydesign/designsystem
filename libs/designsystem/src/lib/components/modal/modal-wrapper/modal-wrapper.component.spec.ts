@@ -65,7 +65,7 @@ describe('ModalWrapperComponent', () => {
 
     beforeEach(() => {
       spectator = modalWrapperTestBuilder
-        .withStaticPageProgress()
+        .title('Test title')
         .flavor('modal')
         .build();
     });
