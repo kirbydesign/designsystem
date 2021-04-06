@@ -7,8 +7,7 @@ import { MockComponents } from 'ng-mocks';
 import { WindowRef } from '../../../types';
 import { ButtonComponent } from '../../button/button.component';
 import { IconComponent } from '../../icon';
-import { PageProgressComponent, PageTitleComponent } from '../../page/page.component';
-import { ProgressCircleComponent } from '../../progress-circle/progress-circle.component';
+import { PageProgressComponent } from '../../page/page.component';
 import { ResizeObserverService } from '../../shared';
 import { ModalFooterComponent } from '../footer/modal-footer.component';
 
@@ -42,8 +41,6 @@ export class ModalWrapperTestBuilder {
         IconComponent,
         ButtonComponent,
         PageProgressComponent,
-        ProgressCircleComponent,
-        PageTitleComponent,
         ModalFooterComponent,
         IonHeader,
         IonToolbar,
@@ -158,23 +155,13 @@ export class InputEmbeddedComponent {}
 
 @Component({
   template: `
-    <kirby-page-progress>
-      <kirby-progress-circle themeColor="warning" value="50" size="sm" class="kirby-text-xsmall">
-        2/4
-      </kirby-progress-circle>
-    </kirby-page-progress>
-    <kirby-page-title>My Title</kirby-page-title>
+    <kirby-page-progress> </kirby-page-progress>
   `,
 })
 export class StaticPageProgressEmbeddedComponent {}
 @Component({
   template: `
-    <kirby-page-progress *ngIf="showPageProgress">
-      <kirby-progress-circle themeColor="warning" value="50" size="sm" class="kirby-text-xsmall">
-        2/4
-      </kirby-progress-circle>
-    </kirby-page-progress>
-    <div>My title</div>
+    <kirby-page-progress *ngIf="showPageProgress"> </kirby-page-progress>
   `,
 })
 export class DynamicPageProgressEmbeddedComponent {
