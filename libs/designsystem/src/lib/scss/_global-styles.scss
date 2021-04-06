@@ -215,3 +215,21 @@ ion-modal.kirby-overlay {
     z-index: -1;
   }
 }
+
+/*
+ * Input - Date-mask
+ */
+.date-mask-wrapper {
+  position: relative;
+}
+
+.date-mask {
+  color: var(--kirby-white-contrast);
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 16px;
+  // Todo: get font from input
+  font-family: Arial;
+  line-height: 24px;
+}

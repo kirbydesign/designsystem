@@ -30,7 +30,6 @@ export class DateMaskService {
   autofix: boolean = true;
   lazy: boolean = false;
   overwrite: boolean = true;
-  // Todo: What should we do about these? Config? Kirby locales? Magic function which tries to guess the seperator?
   separator = this.locale === 'da' ? '.' : '/';
   blocks: Blocks = {
     d: {
@@ -51,7 +50,6 @@ export class DateMaskService {
       mask: IMask.MaskedRange,
       from: 1900,
       to: 9999,
-      // Todo: What should we do about these? Config? Kirby locales?
       placeholderChar: this.locale === 'da' ? 'å' : 'y',
     },
   };
@@ -65,6 +63,7 @@ export class DateMaskService {
     this.pattern = this.getPattern(this.dateFormatOrder, this.separator);
   }
 
+  // TODO: ADD TESTS
   formatDate(date: Date): string {
     let day = date.getDate();
     let month = date.getMonth() + 1;
@@ -83,6 +82,7 @@ export class DateMaskService {
       .join(this.separator);
   }
 
+  // TODO: ADD TESTS
   parseDate(str: string): Date {
     const yearMonthDay = str.split(this.separator);
     return new Date(
