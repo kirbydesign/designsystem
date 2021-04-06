@@ -1,4 +1,4 @@
-import { forwardRef, Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 
 import { ActionSheetComponent, ActionSheetItem } from '@kirbydesign/designsystem';
 
@@ -20,6 +20,8 @@ export class MockActionSheetComponent {
   @Input() header: string;
   @Input() subheader: string;
   @Input() items: Array<ActionSheetItem>;
+  @Input() triggerIconName: string;
+  @Input() triggerText: string;
   @Output() cancel = new EventEmitter();
   @Output() itemSelect = new EventEmitter<ActionSheetItem>();
 }
