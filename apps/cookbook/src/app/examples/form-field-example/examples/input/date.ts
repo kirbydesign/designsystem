@@ -4,13 +4,9 @@ import { InputSize } from '@kirbydesign/designsystem';
 
 const config = {
   selector: 'cookbook-form-field-input-date-example',
-  template: `
-  <form [formGroup]="dateFormGroup">
-    <kirby-form-field label="Date input" >
-      <input kirby-input type="date" [size]="size" />
-    </kirby-form-field>
-  </form>
-`,
+  template: `<kirby-form-field label="Date input" >
+  <input kirby-input type="date" [size]="size" />
+</kirby-form-field>`,
 };
 
 @Component({
