@@ -36,6 +36,11 @@ export class ModalHelper {
     const defaultModalSize: ModalSize = config.flavor === 'modal' ? 'medium' : null;
     const modalSize = config.size || defaultModalSize;
 
+    let customCssClasses = [];
+    if (config.cssClass) {
+      customCssClasses = Array.isArray(config.cssClass) ? config.cssClass : [config.cssClass];
+    }
+
     const ionModal = await this.ionicModalController.create({
       component: config.flavor === 'compact' ? ModalCompactWrapperComponent : ModalWrapperComponent,
       cssClass: [
@@ -45,7 +50,7 @@ export class ModalHelper {
         config.flavor === 'compact' ? 'kirby-modal-compact' : null,
         modalSize,
         config.interactWithBackground ? 'interact-with-background' : null,
-        config.invertColors ? 'invert-colors' : null,
+        ...customCssClasses,
       ],
       backdropDismiss: config.flavor === 'compact' || config.interactWithBackground ? false : true,
       showBackdrop: !config.interactWithBackground,

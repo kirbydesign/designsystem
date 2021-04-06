@@ -221,7 +221,7 @@ export class ModalExampleDefaultComponent {
       flavor,
       component: FirstEmbeddedModalExampleComponent,
       interactWithBackground: this.interactWithBackground,
-      invertColors: this.invertColors,
+      cssClass: this.invertColors ? ['my-custom-modal-class'] : [],
       size: this.openFullHeight ? 'full-height' : null,
       componentProps: {
         title,

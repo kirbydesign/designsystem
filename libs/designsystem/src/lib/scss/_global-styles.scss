@@ -47,13 +47,8 @@ ion-modal.kirby-overlay {
   }
 
   &.interact-with-background {
-    display: table;
-    top: initial;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    padding: 0 !important;
-    ion-backdrop {
-      pointer-events: none;
+    &.kirby-modal.kirby-drawer {
+      --kirby-modal-padding-top: 0px;
     }
   }
 
@@ -71,15 +66,9 @@ ion-modal.kirby-overlay {
 
   &.kirby-modal {
     box-sizing: border-box;
-    --background: #{get-color('background-color')};
+    --background: var(--kirby-modal-background, #{get-color('background-color')});
     --border-radius: 0;
     --height: auto;
-
-    &.invert-colors {
-      --background: #{get-color('background-color-contrast')};
-      --kirby-modal-color: #{get-color('background-color')};
-      --ion-text-color: #{get-color('background-color')};
-    }
 
     &.kirby-modal-compact {
       --border-radius: #{$border-radius};

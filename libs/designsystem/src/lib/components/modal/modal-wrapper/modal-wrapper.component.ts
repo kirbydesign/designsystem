@@ -18,8 +18,8 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular';
-import { Observable, Subject } from 'rxjs';
-import { first, takeUntil } from 'rxjs/operators';
+import { combineLatest, merge, Observable, Subject } from 'rxjs';
+import { debounceTime, first, takeUntil } from 'rxjs/operators';
 
 import { KirbyAnimation } from '../../../animation/kirby-animation';
 import { DesignTokenHelper } from '../../../helpers/design-token-helper';
@@ -43,6 +43,8 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   static readonly KEYBOARD_HIDE_DELAY_IN_MS = 100;
 
   scrollY: number = Math.abs(this.windowRef.scrollY);
+  private readonly VIEWPORT_RESIZE_DEBOUNCE_TIME = 100;
+
   set scrollDisabled(disabled: boolean) {
     this.ionContent.scrollY = !disabled;
   }
@@ -79,6 +81,10 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   readonly didPresent = this.ionModalDidPresent.toPromise();
   private readonly ionModalWillDismiss = new Subject<void>();
   readonly willClose = this.ionModalWillDismiss.toPromise();
+  private viewportResize = new Subject<void>();
+  private viewportResize$ = this.viewportResize
+    .asObservable()
+    .pipe(debounceTime(this.VIEWPORT_RESIZE_DEBOUNCE_TIME));
   private _mutationObserver: MutationObserver;
   private get mutationObserver(): MutationObserver {
     if (!this._mutationObserver) {
@@ -93,6 +99,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     }
     return this._intersectionObserver;
   }
+  private destroy = new Subject();
 
   @HostBinding('class.drawer')
   get _isDrawer() {
@@ -125,6 +132,26 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
       providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
       parent: this.injector,
     });
+
+    if (this.config.interactWithBackground) {
+      merge(this.ionModalDidPresent, this.viewportResize$)
+        .pipe(takeUntil(this.destroy))
+        .subscribe(() => {
+          // wait for template to render
+          setTimeout(() => {
+            const topPosition =
+              this.windowRef.document.documentElement.offsetHeight -
+              this.elementRef.nativeElement.offsetHeight;
+            const horizontalPosition =
+              (this.windowRef.document.documentElement.offsetWidth -
+                this.elementRef.nativeElement.offsetWidth) /
+              2;
+            this.ionModalElement.style.top = `${topPosition}px`;
+            this.ionModalElement.style.left = `${horizontalPosition}px`;
+            this.ionModalElement.style.right = `${horizontalPosition}px`;
+          });
+        });
+    }
   }
 
   private initializeSizing() {
@@ -392,6 +419,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
         this.delayedClose();
       }
     }
+    this.viewportResize.next();
   }
 
   blurActiveElement() {
@@ -519,5 +547,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
       this.resizeObserverService.unobserve(this.ionHeaderElement.nativeElement);
       this.resizeObserverService.unobserve(this.getEmbeddedFooterElement());
     }
+    this.destroy.next();
+    this.destroy.complete();
   }
 }

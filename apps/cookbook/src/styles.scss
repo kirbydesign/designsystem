@@ -29,3 +29,8 @@ code:not([class*='language-']) {
   background-color: get-color('semi-light');
   padding: size('xxxxs') size('xxxs');
 }
+
+.my-custom-modal-class {
+  --kirby-modal-background: #{get-color('black')};
+  --kirby-modal-color: #{get-color('black-contrast')};
+}

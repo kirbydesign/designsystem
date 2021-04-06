@@ -73,6 +73,10 @@ ion-header ion-toolbar {
   --border-width: 0;
   --background: transparent;
   --color: var(--kirby-modal-color, #{get-color('black')});
+
+  button {
+    color: var(--color);
+  }
 }
 
 // Ensure iOS safe-area padding-top on default/modal flavor
@@ -97,7 +101,7 @@ ion-title {
 
 ion-content {
   --background: transparent;
-  color: var(--kirby-modal-color);
+  --color: var(--kirby-modal-color, #{get-color('black')});
   display: flex;
   flex-direction: column;
 
@@ -110,10 +114,6 @@ ion-content {
   --padding-bottom: #{size('m')};
   --padding-start: #{size('s')};
   --padding-end: #{size('s')};
-}
-
-button {
-  color: var(--kirby-modal-color);
 }
 
 // Ensure padding-rules are not merged with other media query,

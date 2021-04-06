@@ -25,5 +25,5 @@ export interface ModalConfig {
   drawerSupplementaryAction?: DrawerSupplementaryAction;
   // drawer properties
   interactWithBackground?: boolean;
-  invertColors?: boolean;
+  cssClass?: string | string[];
 }

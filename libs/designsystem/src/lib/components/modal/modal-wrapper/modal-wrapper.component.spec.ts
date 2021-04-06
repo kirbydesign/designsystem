@@ -1,4 +1,4 @@
-import { fakeAsync, tick } from '@angular/core/testing';
+import { async, fakeAsync, tick } from '@angular/core/testing';
 import { IonContent } from '@ionic/angular';
 import { Spectator } from '@ngneat/spectator';
 
@@ -137,6 +137,44 @@ describe('ModalWrapperComponent', () => {
       spectator.component.ngOnDestroy();
 
       expect(disconnectSpy).toHaveBeenCalled();
+    });
+
+    describe('with interact with background', () => {
+      beforeEach(async(async () => {
+        TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
+      }));
+
+      it('should adapt modal size to children after ion-modal has been presented', async(async () => {
+        spectator.element.style.height = '500px';
+        spectator.element.style.width = '400px';
+
+        spectator.component.config.interactWithBackground = true;
+
+        spectator.component['ionModalDidPresent'].complete();
+
+        await TestHelper.waitForTimeout();
+        spectator.detectChanges();
+
+        expect(spectator.element.style.top).toBe('400px');
+        expect(spectator.element.style.left).toBe('400px');
+        expect(spectator.element.style.right).toBe('400px');
+      }));
+
+      it('should adapt modal size to children on resize', async(async () => {
+        spectator.element.style.height = '500px';
+        spectator.element.style.width = '400px';
+
+        spectator.component.config.interactWithBackground = true;
+
+        spectator.component['ionModalDidPresent'].complete();
+
+        spectator.detectChanges();
+        await TestHelper.waitForResizeObserver();
+
+        expect(spectator.element.style.top).toBe('400px');
+        expect(spectator.element.style.left).toBe('400px');
+        expect(spectator.element.style.right).toBe('400px');
+      }));
     });
   });
 
