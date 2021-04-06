@@ -89,6 +89,7 @@ describe('ActionSheetComponent', () => {
   describe('popout', () => {
     beforeEach(() => {
       platformServiceSpy.isTouch = () => false;
+      spectator.detectChanges();
     });
 
     it('should toggle open on click', () => {
@@ -114,7 +115,6 @@ describe('ActionSheetComponent', () => {
 
     it('should not call modalController on desktop', () => {
       spectator.click('button');
-      spectator.detectChanges();
       expect(modalControllerSpy.showActionSheet).toHaveBeenCalledTimes(0);
     });
 
