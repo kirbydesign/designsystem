@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, Optional, ViewChild } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
-import { IonButtons, IonToolbar, ModalController as IonicModalController } from '@ionic/angular';
+import { ModalController as IonicModalController } from '@ionic/angular';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 import { MockComponents } from 'ng-mocks';
 
@@ -96,8 +96,6 @@ describe('ModalHelper', () => {
     ],
     declarations: [
       ButtonComponent,
-      IonButtons,
-      IonToolbar,
       ModalFooterComponent,
       ModalWrapperComponent,
       ModalCompactWrapperComponent,
