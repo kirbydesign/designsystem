@@ -59,40 +59,6 @@ describe('ModalWrapperComponent', () => {
     });
   });
 
-  describe('header', () => {
-    const size = DesignTokenHelper.size;
-    let ionToolbarElement: Element;
-
-    beforeEach(() => {
-      spectator = modalWrapperTestBuilder
-        .title('Test title')
-        .flavor('modal')
-        .build();
-    });
-
-    afterEach(() => {
-      // Ensure any observers are destroyed:
-      spectator.fixture.destroy();
-    });
-
-    describe('padding', () => {
-      beforeEach(() => {
-        TestHelper.resetTestWindow();
-      });
-
-      it('should have correct sizes', async () => {
-        ionToolbarElement = spectator.query('ion-toolbar');
-
-        expect(ionToolbarElement).toHaveComputedStyle({
-          '--padding-start': size('s'),
-          '--padding-end': size('s'),
-          '--padding-top': size('s'),
-          '--padding-bottom': size('s'),
-        });
-      });
-    });
-  });
-
   describe('sizing', () => {
     beforeEach(() => {
       spectator = modalWrapperTestBuilder
