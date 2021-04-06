@@ -11,3 +11,8 @@ h3 {
 cookbook-example-viewer {
   margin-bottom: size('l');
 }
+
+.action-sheet-trigger {
+  display: flex;
+  justify-content: flex-end;
+}

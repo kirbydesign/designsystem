@@ -35,6 +35,7 @@ export class ActionSheetComponent {
 
   onItemSelect(selection: ActionSheetItem) {
     this.itemSelect.emit(selection);
+    this.state = OpenState.closed;
   }
 
   onCancel() {

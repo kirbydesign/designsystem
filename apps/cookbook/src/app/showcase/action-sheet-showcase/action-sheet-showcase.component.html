@@ -10,7 +10,7 @@
     icon-button is displayed.
   </p>
   <cookbook-example-viewer [html]="defaultButtonExample.template">
-    <div>
+    <div class="action-sheet-trigger">
       <cookbook-action-sheet-example-default
         #defaultButtonExample
       ></cookbook-action-sheet-example-default>
@@ -20,10 +20,11 @@
   <h2>Custom Button</h2>
   <p>
     If the default button doesn't fit the context, the <code>action-sheet</code> accepts a custom
-    <code>kirby-button</code> as trigger for revealing the sheet.
+    <a href="/home/showcase/button"><code>kirby-button</code></a> as trigger for revealing the
+    sheet.
   </p>
   <cookbook-example-viewer [html]="customButtonExample.template">
-    <div>
+    <div class="action-sheet-trigger">
       <cookbook-action-sheet-example-custom-button
         #customButtonExample
       ></cookbook-action-sheet-example-custom-button>
