@@ -19,6 +19,24 @@ describe('ButtonComponent', () => {
     declarations: [MockComponent(IconComponent)],
   });
 
+  const canvasColor = 'background-color';
+
+  beforeAll(() => {
+    window.document.documentElement.style.setProperty(
+      'color',
+      getColor(canvasColor, 'contrast').value
+    );
+    window.document.documentElement.style.setProperty(
+      'background-color',
+      getColor(canvasColor).value
+    );
+  });
+
+  afterAll(() => {
+    window.document.documentElement.style.removeProperty('color');
+    window.document.documentElement.style.removeProperty('background-color');
+  });
+
   beforeEach(() => {
     spectator = createHost('<button kirby-button>Test</button>');
     element = spectator.element as HTMLButtonElement;
@@ -205,24 +223,6 @@ describe('ButtonComponent', () => {
   });
 
   describe('when configured with attentionlevel 3', () => {
-    const canvasColor = 'background-color';
-
-    beforeAll(() => {
-      window.document.documentElement.style.setProperty(
-        'color',
-        getColor(canvasColor, 'contrast').value
-      );
-      window.document.documentElement.style.setProperty(
-        'background-color',
-        getColor(canvasColor).value
-      );
-    });
-
-    afterAll(() => {
-      window.document.documentElement.style.removeProperty('color');
-      window.document.documentElement.style.removeProperty('background-color');
-    });
-
     beforeEach(() => {
       spectator.component.attentionLevel = '3';
       spectator.detectChanges();
@@ -285,24 +285,6 @@ describe('ButtonComponent', () => {
   });
 
   describe('when configured with attentionlevel 4', () => {
-    const canvasColor = 'background-color';
-
-    beforeAll(() => {
-      window.document.documentElement.style.setProperty(
-        'color',
-        getColor(canvasColor, 'contrast').value
-      );
-      window.document.documentElement.style.setProperty(
-        'background-color',
-        getColor(canvasColor).value
-      );
-    });
-
-    afterAll(() => {
-      window.document.documentElement.style.removeProperty('color');
-      window.document.documentElement.style.removeProperty('background-color');
-    });
-
     beforeEach(() => {
       spectator.component.attentionLevel = '4';
       spectator.detectChanges();
