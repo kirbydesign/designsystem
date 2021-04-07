@@ -44,9 +44,9 @@ describe('TextLinkComponent', () => {
     });
 
     it('styled with a pointer as the cursor', () => {
-      const textlink = spectator.queryHost<HTMLElement>('kirby-text-link');
+      const anchor = spectator.queryHost<HTMLAnchorElement>('a');
 
-      expect(textlink).toHaveComputedStyle({ cursor: 'pointer' });
+      expect(anchor).toHaveComputedStyle({ cursor: 'pointer' });
     });
   });
 
@@ -82,60 +82,27 @@ describe('TextLinkComponent', () => {
       expect(anchorChildNodes[1].nodeName).toBe('KIRBY-ICON');
     });
 
-    it('should always center icon vertically', () => {
+    // it('should always center icon vertically', () => {
+    //   const icon = spectator.queryHost<HTMLElement>('kirby-icon');
+
+    //   expect(icon).toHaveComputedStyle({ 'vertical-align': 'middle' });
+    // });
+
+    it('should have left and right margin on icon', () => {
       const icon = spectator.queryHost<HTMLElement>('kirby-icon');
-      expect(icon).toHaveComputedStyle({ 'vertical-align': 'middle' });
+
+      expect(icon).toHaveComputedStyle({
+        'margin-left': size('xxxs'),
+        'margin-right': size('xxxs'),
+      });
     });
   });
 
   describe('size and padding', () => {
-    interface TestCase {
-      size?: string;
-      expected: {
-        fontSize: string;
-        lineHeight: string;
-        iconMarginLeft: string;
-        iconFontSize: string;
-      };
-    }
-
-    const testCases: TestCase[] = [
-      {
-        size: 'md',
-        expected: {
-          fontSize: 'n',
-          lineHeight: 'n',
-          iconMarginLeft: 'xxxs',
-          iconFontSize: 'm',
-        },
-      },
-      {
-        size: 'sm',
-        expected: {
-          fontSize: 's',
-          lineHeight: 's',
-          iconMarginLeft: 'xxxs',
-          iconFontSize: 'm',
-        },
-      },
-      {
-        size: 'xs',
-        expected: {
-          fontSize: 'xs',
-          lineHeight: 'xs',
-          iconMarginLeft: 'xxxxs',
-          iconFontSize: 's',
-        },
-      },
-      {
-        size: '',
-        expected: {
-          fontSize: 'n',
-          lineHeight: 'n',
-          iconMarginLeft: 'xxxs',
-          iconFontSize: 'm',
-        },
-      },
+    const testCases: { size: 'xs' | 'sm' | 'md'; expected: any }[] = [
+      { size: 'xs', expected: { iconFontSize: size('s'), fontSize: fontSize('xs') } },
+      { size: 'sm', expected: { iconFontSize: size('s'), fontSize: fontSize('s') } },
+      { size: 'md', expected: { iconFontSize: size('m'), fontSize: fontSize('m') } },
     ];
 
     testCases.forEach((scenario) => {
@@ -147,21 +114,19 @@ describe('TextLinkComponent', () => {
             );
           });
 
-          it('should render icon with correct styling', () => {
+          it('should render icon with correct font size', () => {
             const icon = spectator.queryHost<HTMLElement>('kirby-icon');
 
             expect(icon).toHaveComputedStyle({
-              'font-size': size(scenario.expected.iconFontSize),
-              'margin-left': size(scenario.expected.iconMarginLeft),
+              'font-size': scenario.expected.iconFontSize,
             });
           });
 
-          it('should render anchor link with corrrect styling', () => {
-            const link = spectator.queryHost<HTMLElement>('a');
+          it('should render anchor with correct font size', () => {
+            const anchor = spectator.queryHost<HTMLElement>('a');
 
-            expect(link).toHaveComputedStyle({
-              'font-size': fontSize(scenario.expected.fontSize),
-              'line-height': lineHeight(scenario.expected.lineHeight),
+            expect(anchor).toHaveComputedStyle({
+              'font-size': scenario.expected.fontSize,
             });
           });
         });
@@ -173,12 +138,11 @@ describe('TextLinkComponent', () => {
             );
           });
 
-          it('should render anchor link with corrrect styling', () => {
-            const link = spectator.queryHost<HTMLElement>('a');
+          it('should render anchor with correct font size', () => {
+            const anchor = spectator.queryHost<HTMLElement>('a');
 
-            expect(link).toHaveComputedStyle({
-              'font-size': fontSize(scenario.expected.fontSize),
-              'line-height': lineHeight(scenario.expected.lineHeight),
+            expect(anchor).toHaveComputedStyle({
+              'font-size': scenario.expected.fontSize,
             });
           });
         });
