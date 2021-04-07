@@ -97,6 +97,8 @@ describe('ActionSheetComponent', () => {
       spectator.click('button');
 
       expect(spectator.component['state']).toEqual(OpenState.open);
+      expect(spectator.component.isOpen).toBeTrue();
+      expect(spectator.element.classList).toContain('is-open');
       expect(popout).toHaveComputedStyle({ display: 'block' });
     });
 
@@ -107,6 +109,9 @@ describe('ActionSheetComponent', () => {
 
       spectator.click('button');
 
+      expect(spectator.component['state']).toEqual(OpenState.closed);
+      expect(spectator.component.isOpen).toBeFalse();
+      expect(spectator.element.classList).not.toContain('is-open');
       expect(popout).toHaveComputedStyle({ display: 'none' });
     });
 
