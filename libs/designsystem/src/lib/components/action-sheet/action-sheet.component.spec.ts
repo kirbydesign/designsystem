@@ -64,25 +64,24 @@ describe('ActionSheetComponent', () => {
     });
 
     it('should support custom icon', () => {
-      spectator.component.triggerIconName = 'pension';
-      spectator.detectChanges();
-      const icon = spectator.element.getElementsByTagName('kirby-icon')[0];
-      expect(icon.getAttribute('ng-reflect-name')).toEqual('pension');
+      const iconName = 'pension';
+      spectator.setInput('triggerIconName', iconName);
+      const icon = spectator.query(IconComponent);
+      expect(icon.name).toEqual(iconName);
     });
   });
 
   describe('text', () => {
     it('should have no initial text', () => {
-      const button = spectator.element.getElementsByTagName('button')[0];
-      expect(button.innerText).toEqual('');
+      const button = spectator.query('button');
+      expect(button.textContent).toEqual('');
     });
 
     it('should render custom button text', () => {
       const buttonText = 'Custom text';
-      spectator.component.triggerText = buttonText;
-      spectator.detectChanges();
-      const button = spectator.element.getElementsByTagName('button')[0];
-      expect(button.innerText).toEqual(buttonText);
+      spectator.setInput('triggerText', buttonText);
+      const button = spectator.query('button');
+      expect(button.textContent).toEqual(buttonText);
     });
   });
 
@@ -106,7 +105,7 @@ describe('ActionSheetComponent', () => {
     it('should close (delayed) when trigger blures', fakeAsync(() => {
       spectator.component['state'] = OpenState.open;
       spectator.blur('button');
-      spectator.tick(500);
+      spectator.tick(500); // TODO: Refactor blur event OR get magic number from host component
       expect(popout).toHaveComputedStyle({ display: 'none' });
     }));
 
