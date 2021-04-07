@@ -109,9 +109,8 @@ describe('ButtonComponent', () => {
     });
 
     it('should render with correct color', () => {
-      // TODO: Fix this test - should expect primary-contrast, not white-contrast
       expect(element).toHaveComputedStyle({
-        color: getColor('white', 'contrast'),
+        color: getColor('primary', 'contrast'),
       });
     });
 
