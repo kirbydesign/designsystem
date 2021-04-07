@@ -114,11 +114,6 @@ describe('ActionSheetComponent', () => {
       expect(popout).toHaveComputedStyle({ display: 'none' });
     });
 
-    it('should not call modalController on desktop', () => {
-      spectator.click('button');
-      expect(modalControllerSpy.showActionSheet).toHaveBeenCalledTimes(0);
-    });
-
     it('should call modalController on touch', () => {
       platformServiceSpy.isTouch = () => true;
       spectator.click('button');
