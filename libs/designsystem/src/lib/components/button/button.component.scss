@@ -64,9 +64,6 @@ $button-width: (
 }
 
 @mixin button-attentionlevel3 {
-  // TODO: Remove background and color declarations
-  --kirby-button-background-color: transparent;
-  --kirby-button-color: #{get-color('medium-contrast')};
   --kirby-button-border-color: #{get-color('medium')};
 
   &.destructive {
