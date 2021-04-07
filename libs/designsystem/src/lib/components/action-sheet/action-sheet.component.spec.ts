@@ -12,11 +12,11 @@ import { ModalController } from '../modal';
 import { ActionSheetPopoutComponent } from './action-sheet-popout/action-sheet-popout.component';
 import { ActionSheetComponent } from './action-sheet.component';
 
-describe('ActionSheetComponent', () => {
+fdescribe('ActionSheetComponent', () => {
   let spectator: SpectatorHost<ActionSheetComponent>;
   let popout;
   const modalControllerSpy = jasmine.createSpyObj('ModalController', ['showActionSheet']);
-  const platformServiceSpy = jasmine.createSpyObj('PlatformService', ['isTouch']);
+  const mockPlatformService = { isTouch: () => false };
   const createHost = createHostFactory({
     component: ActionSheetComponent,
     declarations: [
@@ -35,7 +35,7 @@ describe('ActionSheetComponent', () => {
       },
       {
         provide: PlatformService,
-        useValue: platformServiceSpy,
+        useValue: mockPlatformService,
       },
     ],
   });
@@ -88,7 +88,7 @@ describe('ActionSheetComponent', () => {
 
   describe('popout', () => {
     beforeEach(() => {
-      platformServiceSpy.isTouch = () => false;
+      mockPlatformService.isTouch = () => false;
       spectator.detectChanges();
     });
 
@@ -115,7 +115,7 @@ describe('ActionSheetComponent', () => {
     });
 
     it('should call modalController on touch', () => {
-      platformServiceSpy.isTouch = () => true;
+      mockPlatformService.isTouch = () => true;
       spectator.click('button');
       spectator.detectChanges();
       expect(modalControllerSpy.showActionSheet).toHaveBeenCalled();
