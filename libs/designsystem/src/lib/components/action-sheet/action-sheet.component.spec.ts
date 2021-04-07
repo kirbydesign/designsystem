@@ -89,7 +89,6 @@ describe('ActionSheetComponent', () => {
   describe('popout', () => {
     beforeEach(() => {
       mockPlatformService.isTouch = () => false;
-      spectator.detectChanges();
     });
 
     it('should toggle open on click', () => {
