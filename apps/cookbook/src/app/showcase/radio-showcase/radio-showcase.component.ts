@@ -71,4 +71,9 @@ export class RadioShowcaseComponent {
       signature: '(value: any) => void',
     },
   ];
+
+  scrollTo(target: Element) {
+    target.scrollIntoView({ behavior: 'smooth' });
+    return false;
+  }
 }
