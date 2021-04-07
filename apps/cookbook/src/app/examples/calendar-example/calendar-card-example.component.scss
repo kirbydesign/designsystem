@@ -4,6 +4,7 @@ kirby-card {
   z-index: 3; // Ensure dropdown opens over configuration checkboxes
   overflow: visible; // Ensure dropdown isn't cut off
 
+  width: 320px;
   margin-bottom: 20px;
 
   kirby-card-footer {
