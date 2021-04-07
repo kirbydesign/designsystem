@@ -1,9 +1,9 @@
+import { fakeAsync } from '@angular/core/testing';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponent } from 'ng-mocks';
 
 import { PlatformService } from '../..';
 import { OpenState } from '../../models';
-import { TestHelper } from '../../testing/test-helper';
 import { WindowRef } from '../../types';
 import { ButtonComponent } from '../button/button.component';
 import { IconComponent } from '../icon';
@@ -94,29 +94,25 @@ describe('ActionSheetComponent', () => {
     it('should toggle open on click', () => {
       spectator.component['state'] = OpenState.closed;
       spectator.click('button');
-      spectator.detectChanges();
       expect(popout).toHaveComputedStyle({ display: 'block' });
     });
 
     it('should toggle closed when clicked and open', () => {
       spectator.component['state'] = OpenState.open;
       spectator.click('button');
-      spectator.detectChanges();
       expect(popout).toHaveComputedStyle({ display: 'none' });
     });
 
-    it('should close (delayed) when trigger blures', async () => {
+    it('should close (delayed) when trigger blures', fakeAsync(() => {
       spectator.component['state'] = OpenState.open;
       spectator.blur('button');
-      await TestHelper.whenTrue(() => !spectator.component.isOpen, 600);
-      spectator.detectChanges();
+      spectator.tick(500);
       expect(popout).toHaveComputedStyle({ display: 'none' });
-    });
+    }));
 
     it('should call modalController on touch', () => {
       mockPlatformService.isTouch = () => true;
       spectator.click('button');
-      spectator.detectChanges();
       expect(modalControllerSpy.showActionSheet).toHaveBeenCalled();
     });
   });
