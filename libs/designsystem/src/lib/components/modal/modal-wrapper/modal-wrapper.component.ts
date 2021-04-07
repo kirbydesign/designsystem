@@ -18,7 +18,7 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular';
-import { combineLatest, merge, Observable, Subject } from 'rxjs';
+import { merge, Observable, Subject } from 'rxjs';
 import { debounceTime, first, takeUntil } from 'rxjs/operators';
 
 import { KirbyAnimation } from '../../../animation/kirby-animation';
@@ -141,10 +141,10 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
           setTimeout(() => {
             const topPosition =
               this.windowRef.document.documentElement.offsetHeight -
-              this.elementRef.nativeElement.offsetHeight;
+              this.elementRef.nativeElement.scrollHeight;
             const horizontalPosition =
               (this.windowRef.document.documentElement.offsetWidth -
-                this.elementRef.nativeElement.offsetWidth) /
+                this.elementRef.nativeElement.scrollWidth) /
               2;
             this.ionModalElement.style.top = `${topPosition}px`;
             this.ionModalElement.style.left = `${horizontalPosition}px`;

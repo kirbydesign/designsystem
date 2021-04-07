@@ -63,6 +63,11 @@ export class ModalWrapperTestBuilder {
     return this;
   }
 
+  interactWithBackground(interactWithBackground: boolean = true) {
+    this.config.interactWithBackground = interactWithBackground;
+    return this;
+  }
+
   withStaticFooter() {
     this.config.component = StaticFooterEmbeddedComponent;
     return this;
