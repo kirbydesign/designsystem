@@ -20,7 +20,7 @@ const config = {
       [(loadAdditionalContent)]="loadAdditionalContent"
       [(openFullHeight)]="openFullHeight"
       [(interactWithBackground)]="interactWithBackground"
-      [(invertColors)]="invertColors"
+      [(customCssClass)]="customCssClass"
       >
       </cookbook-modal-example-configuration>
   </cookbook-example-configuration-wrapper>
@@ -210,7 +210,7 @@ export class ModalExampleDefaultComponent {
   loadAdditionalContent = false;
   openFullHeight = false;
   interactWithBackground = false;
-  invertColors = false;
+  customCssClass = false;
   dummyBackgroundTexts = new Array(100).map(() => '');
 
   constructor(private modalController: ModalController, private window: WindowRef) {}
@@ -221,7 +221,7 @@ export class ModalExampleDefaultComponent {
       flavor,
       component: FirstEmbeddedModalExampleComponent,
       interactWithBackground: this.interactWithBackground,
-      cssClass: this.invertColors ? ['my-custom-modal-class'] : [],
+      cssClass: this.customCssClass ? ['my-custom-modal-class'] : [],
       size: this.openFullHeight ? 'full-height' : null,
       componentProps: {
         title,

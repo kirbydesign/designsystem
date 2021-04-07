@@ -66,8 +66,8 @@
 ></kirby-checkbox>
 
 <kirby-checkbox
-  *ngIf="invertColors !== undefined"
-  [checked]="invertColors"
-  (checkedChange)="toggleInvertColors($event)"
-  text="Invert colors (drawer only)"
+  *ngIf="customCssClass !== undefined"
+  [checked]="customCssClass"
+  (checkedChange)="toggleCustomCssClass($event)"
+  text="Custom CSS class (drawer only)"
 ></kirby-checkbox>

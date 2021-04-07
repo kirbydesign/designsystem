@@ -46,12 +46,6 @@ ion-modal.kirby-overlay {
     }
   }
 
-  &.interact-with-background {
-    &.kirby-modal.kirby-drawer {
-      --kirby-modal-padding-top: 0px;
-    }
-  }
-
   // Ensure consistent backdrop on card style modals, as Ionic 5 only applies --backdrop-opacity to :first-of-type:
   // See https://github.com/ionic-team/ionic/commit/253cd96164914a803f6bb42ff95ca74880c940d0
   // and https://github.com/ionic-team/ionic/issues/20800#issuecomment-606670762
@@ -81,6 +75,12 @@ ion-modal.kirby-overlay {
       --kirby-modal-padding-top: calc(var(--kirby-safe-area-top, 0px) + #{size('m')});
       padding-top: var(--kirby-modal-padding-top);
       align-items: flex-end;
+
+      &.interact-with-background {
+        &.kirby-modal.kirby-drawer {
+          --kirby-modal-padding-top: 0px;
+        }
+      }
 
       .modal-wrapper {
         border-top-left-radius: #{$border-radius};

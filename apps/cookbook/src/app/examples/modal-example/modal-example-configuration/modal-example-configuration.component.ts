@@ -43,8 +43,8 @@ export class ModalExampleConfigurationComponent {
   @Input() interactWithBackground: boolean;
   @Output() interactWithBackgroundChange = new EventEmitter<boolean>();
 
-  @Input() invertColors: boolean;
-  @Output() invertColorsChange = new EventEmitter<boolean>();
+  @Input() customCssClass: boolean;
+  @Output() customCssClassChange = new EventEmitter<boolean>();
 
   @HostBinding('class.checkbox-xs') true; // Extra small checkboxes
 
@@ -111,8 +111,8 @@ export class ModalExampleConfigurationComponent {
     this.interactWithBackgroundChange.emit(show);
   }
 
-  toggleInvertColors(show: boolean) {
-    this.invertColors = show;
-    this.invertColorsChange.emit(show);
+  toggleCustomCssClass(show: boolean) {
+    this.customCssClass = show;
+    this.customCssClassChange.emit(show);
   }
 }

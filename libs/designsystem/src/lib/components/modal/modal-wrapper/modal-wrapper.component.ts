@@ -99,7 +99,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     }
     return this._intersectionObserver;
   }
-  private destroy = new Subject();
+  private destroy$ = new Subject();
 
   @HostBinding('class.drawer')
   get _isDrawer() {
@@ -134,24 +134,26 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     });
 
     if (this.config.interactWithBackground) {
-      merge(this.ionModalDidPresent, this.viewportResize$)
-        .pipe(takeUntil(this.destroy))
-        .subscribe(() => {
-          // wait for template to render
-          setTimeout(() => {
-            const topPosition =
-              this.windowRef.document.documentElement.offsetHeight -
-              this.elementRef.nativeElement.scrollHeight;
-            const horizontalPosition =
-              (this.windowRef.document.documentElement.offsetWidth -
-                this.elementRef.nativeElement.scrollWidth) /
-              2;
-            this.ionModalElement.style.top = `${topPosition}px`;
-            this.ionModalElement.style.left = `${horizontalPosition}px`;
-            this.ionModalElement.style.right = `${horizontalPosition}px`;
-          });
-        });
+      this.initializeResizeModalToModalWrapper();
     }
+  }
+
+  private initializeResizeModalToModalWrapper() {
+    merge(this.ionModalDidPresent, this.viewportResize$)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        // wait for template to render
+        setTimeout(() => {
+          const docElement = this.windowRef.document.documentElement;
+          const hostElement = this.elementRef.nativeElement;
+          const topPosition = docElement.offsetHeight - hostElement.scrollHeight;
+          const horizontalPosition = (docElement.offsetWidth - hostElement.scrollWidth) / 2;
+
+          this.ionModalElement.style.top = `${topPosition}px`;
+          this.ionModalElement.style.left = `${horizontalPosition}px`;
+          this.ionModalElement.style.right = `${horizontalPosition}px`;
+        });
+      });
   }
 
   private initializeSizing() {
@@ -547,7 +549,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
       this.resizeObserverService.unobserve(this.ionHeaderElement.nativeElement);
       this.resizeObserverService.unobserve(this.getEmbeddedFooterElement());
     }
-    this.destroy.next();
-    this.destroy.complete();
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
