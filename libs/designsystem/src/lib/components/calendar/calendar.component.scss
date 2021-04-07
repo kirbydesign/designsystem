@@ -11,17 +11,12 @@ table.calendar-table {
   margin-top: 0;
 
   thead {
-    padding: 0.5em;
     border-bottom: 1px solid get-color('background-color');
 
     th {
       height: 50px;
       text-align: center;
     }
-  }
-
-  tbody {
-    padding: 0.5em;
   }
 
   tr,
