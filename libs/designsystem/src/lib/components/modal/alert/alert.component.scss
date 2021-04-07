@@ -2,7 +2,8 @@
 
 article {
   overflow: hidden;
-  padding: size('m') size('s') size('s');
+  padding: size('s');
+  padding-top: size('m');
   @include media('<small') {
     padding: size('xxs');
   }
