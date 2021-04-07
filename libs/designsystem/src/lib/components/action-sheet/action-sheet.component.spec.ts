@@ -93,6 +93,7 @@ describe('ActionSheetComponent', () => {
     });
 
     it('should toggle open on click', () => {
+      spectator.component['state'] = OpenState.closed;
       spectator.click('button');
       spectator.detectChanges();
       expect(popout).toHaveComputedStyle({ display: 'block' });
