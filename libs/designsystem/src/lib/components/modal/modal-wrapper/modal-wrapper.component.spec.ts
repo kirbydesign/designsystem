@@ -59,55 +59,6 @@ describe('ModalWrapperComponent', () => {
     });
   });
 
-  describe('header', () => {
-    const size = DesignTokenHelper.size;
-    let ionToolbarElement: Element;
-
-    beforeEach(() => {
-      spectator = modalWrapperTestBuilder
-        .title('Test title')
-        .flavor('modal')
-        .build();
-    });
-
-    afterEach(() => {
-      // Ensure any observers are destroyed:
-      spectator.fixture.destroy();
-    });
-
-    describe('padding', () => {
-      beforeEach(() => {
-        TestHelper.resetTestWindow();
-      });
-
-      it('should have correct sizes', async () => {
-        ionToolbarElement = spectator.query('ion-toolbar');
-
-        expect(ionToolbarElement).toHaveComputedStyle({
-          '--padding-start': size('s'),
-          '--padding-end': size('s'),
-          '--padding-top': size('m'),
-          '--padding-bottom': size('s'),
-        });
-      });
-
-      describe('on small screens', () => {
-        beforeEach(async () => {
-          await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
-          await TestHelper.waitForResizeObserver();
-        });
-
-        it('should have `--padding-top` to be size large', () => {
-          ionToolbarElement = spectator.query('ion-toolbar');
-
-          expect(ionToolbarElement).toHaveComputedStyle({
-            '--padding-top': size('l'),
-          });
-        });
-      });
-    });
-  });
-
   describe('sizing', () => {
     beforeEach(() => {
       spectator = modalWrapperTestBuilder
