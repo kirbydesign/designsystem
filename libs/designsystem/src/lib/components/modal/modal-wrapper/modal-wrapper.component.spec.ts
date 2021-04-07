@@ -138,43 +138,49 @@ describe('ModalWrapperComponent', () => {
 
       expect(disconnectSpy).toHaveBeenCalled();
     });
+  });
 
-    describe('with interact with background', () => {
-      beforeEach(async(async () => {
-        TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
-      }));
+  describe('with interact with background', () => {
+    beforeEach(async(async () => {
+      TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
+      spectator = modalWrapperTestBuilder
+        .flavor('drawer')
+        .interactWithBackground()
+        .build();
+    }));
 
-      it('should adapt modal size to children after ion-modal has been presented', async(async () => {
-        spectator.element.style.height = '500px';
-        spectator.element.style.width = '400px';
+    it('should adapt modal size to children after ion-modal has been presented', async () => {
+      spectator.element.style.height = '500px';
+      spectator.element.style.width = '400px';
 
-        spectator.component.config.interactWithBackground = true;
+      spectator.component.config.interactWithBackground = true;
 
-        spectator.component['ionModalDidPresent'].complete();
+      spectator.component['ionModalDidPresent'].next();
+      spectator.component['ionModalDidPresent'].complete();
 
-        await TestHelper.waitForTimeout();
-        spectator.detectChanges();
+      await TestHelper.waitForTimeout();
+      spectator.detectChanges();
 
-        expect(spectator.element.style.top).toBe('400px');
-        expect(spectator.element.style.left).toBe('400px');
-        expect(spectator.element.style.right).toBe('400px');
-      }));
+      expect(spectator.component['ionModalElement'].style.top).toBe('384px');
+      expect(spectator.component['ionModalElement'].style.left).toBe('400px');
+      expect(spectator.component['ionModalElement'].style.right).toBe('400px');
+    });
 
-      it('should adapt modal size to children on resize', async(async () => {
-        spectator.element.style.height = '500px';
-        spectator.element.style.width = '400px';
+    it('should adapt modal size to children on resize', async () => {
+      spectator.element.style.height = '500px';
+      spectator.element.style.width = '400px';
 
-        spectator.component.config.interactWithBackground = true;
+      spectator.component.config.interactWithBackground = true;
 
-        spectator.component['ionModalDidPresent'].complete();
+      spectator.component['viewportResize'].next();
+      spectator.component['viewportResize'].complete();
 
-        spectator.detectChanges();
-        await TestHelper.waitForResizeObserver();
+      await TestHelper.waitForResizeObserver();
+      spectator.detectChanges();
 
-        expect(spectator.element.style.top).toBe('400px');
-        expect(spectator.element.style.left).toBe('400px');
-        expect(spectator.element.style.right).toBe('400px');
-      }));
+      expect(spectator.component['ionModalElement'].style.top).toBe('384px');
+      expect(spectator.component['ionModalElement'].style.left).toBe('400px');
+      expect(spectator.component['ionModalElement'].style.right).toBe('400px');
     });
   });
 
