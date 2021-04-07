@@ -75,11 +75,6 @@ $button-width: (
 }
 
 @mixin button-attentionlevel4 {
-  // TODO: Remove declarations or set --kirby-button-color to currentColor
-  --kirby-button-background-color: transparent;
-  --kirby-button-color: #{get-color('primary-contrast')};
-  // --kirby-button-color: currentColor;
-
   &.destructive {
     --kirby-button-color: #{get-color('danger')};
   }
@@ -87,12 +82,8 @@ $button-width: (
 
 :host {
   font-family: var(--kirby-font-family);
-  // TODO: Set fallback to "unset"
-  // background-color: var(--kirby-button-background-color, unset);
-  background-color: var(--kirby-button-background-color, get-color('primary'));
-  // TODO: Set fallback to "currentColor"
-  // color: var(--kirby-button-color, currentColor);
-  color: var(--kirby-button-color, get-color('primary-contrast'));
+  background-color: var(--kirby-button-background-color, initial);
+  color: var(--kirby-button-color, inherit);
   border-radius: $border-radius-round;
   box-sizing: border-box; // Ensure border is not added to button height
   cursor: pointer;
