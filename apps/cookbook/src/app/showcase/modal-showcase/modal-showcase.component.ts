@@ -79,7 +79,7 @@ export class ModalShowcaseComponent implements AfterViewInit {
     },
     {
       name: 'cssClass',
-      description: `(Optional) Adds custom css classes to the modal. These needs to be styled with global styling.`,
+      description: `(Optional) Adds custom css classes to the modal. This allows for custom styling of the modal (see 'CSS Custom Properties' section).`,
       defaultValue: '',
       type: ['string | string[]'],
     },
