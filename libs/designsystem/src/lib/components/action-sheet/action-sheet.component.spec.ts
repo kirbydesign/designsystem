@@ -4,6 +4,7 @@ import { MockComponent } from 'ng-mocks';
 
 import { PlatformService } from '../..';
 import { OpenState } from '../../models';
+import { TestHelper } from '../../testing/test-helper';
 import { WindowRef } from '../../types';
 import { ButtonComponent } from '../button/button.component';
 import { IconComponent } from '../icon';
@@ -90,11 +91,13 @@ describe('ActionSheetComponent', () => {
       mockPlatformService.isTouch = () => false;
     });
 
-    it('should toggle open on click', () => {
+    it('should toggle open on click', async () => {
       expect(spectator.component['state']).toEqual(OpenState.closed);
       expect(popout).toHaveComputedStyle({ display: 'none' });
 
       spectator.click('button');
+      await TestHelper.waitForTimeout();
+      popout = spectator.query('kirby-action-sheet-popout');
 
       expect(spectator.component['state']).toBe(+OpenState.open);
       expect(spectator.component.isOpen).toBeTrue();
@@ -108,6 +111,7 @@ describe('ActionSheetComponent', () => {
       expect(popout).toHaveComputedStyle({ display: 'block' });
 
       spectator.click('button');
+      popout = spectator.query('kirby-action-sheet-popout');
 
       expect(spectator.component['state']).toBe(+OpenState.closed);
       expect(spectator.component.isOpen).toBeFalse();
