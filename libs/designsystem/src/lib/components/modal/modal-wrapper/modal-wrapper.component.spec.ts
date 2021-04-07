@@ -112,7 +112,7 @@ describe('ModalWrapperComponent', () => {
       await TestHelper.waitForTimeout();
       spectator.detectChanges();
 
-      expect(spectator.component['ionModalElement'].style.top).toBe('400px');
+      expect(spectator.component['ionModalElement'].style.top).toBe('330px');
       expect(spectator.component['ionModalElement'].style.left).toBe('400px');
       expect(spectator.component['ionModalElement'].style.right).toBe('400px');
     });
@@ -129,7 +129,7 @@ describe('ModalWrapperComponent', () => {
       await TestHelper.waitForResizeObserver();
       spectator.detectChanges();
 
-      expect(spectator.component['ionModalElement'].style.top).toBe('400px');
+      expect(spectator.component['ionModalElement'].style.top).toBe('330px');
       expect(spectator.component['ionModalElement'].style.left).toBe('400px');
       expect(spectator.component['ionModalElement'].style.right).toBe('400px');
     });
