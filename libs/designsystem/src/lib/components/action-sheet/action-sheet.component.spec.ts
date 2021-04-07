@@ -108,6 +108,8 @@ describe('ActionSheetComponent', () => {
     it('should toggle closed when clicked and open', () => {
       spectator.component['state'] = OpenState.open;
       spectator.detectChanges();
+      expect(window.matchMedia('(pointer: fine)').matches).toBe(true, 'pointer: fine');
+      expect(window.matchMedia('(hover: hover)').matches).toBe(true, 'hover: hover');
       expect(popout).toHaveComputedStyle({ display: 'block' });
 
       spectator.click('button');
