@@ -267,6 +267,24 @@ describe('ButtonComponent', () => {
   });
 
   describe('when configured with attentionlevel 4', () => {
+    const canvasColor = 'background-color';
+
+    beforeAll(() => {
+      window.document.documentElement.style.setProperty(
+        'color',
+        getColor(canvasColor, 'contrast').value
+      );
+      window.document.documentElement.style.setProperty(
+        'background-color',
+        getColor(canvasColor).value
+      );
+    });
+
+    afterAll(() => {
+      window.document.documentElement.style.removeProperty('color');
+      window.document.documentElement.style.removeProperty('background-color');
+    });
+
     beforeEach(() => {
       spectator.component.attentionLevel = '4';
       spectator.detectChanges();
@@ -286,7 +304,7 @@ describe('ButtonComponent', () => {
 
     it('should render with correct color', () => {
       expect(element).toHaveComputedStyle({
-        color: getColor('primary', 'contrast'),
+        color: getColor(canvasColor, 'contrast'),
       });
     });
 
