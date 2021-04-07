@@ -92,6 +92,8 @@ describe('ModalWrapperComponent', () => {
   });
 
   describe('with interact with background', () => {
+    const elementHeight = 500;
+    const elementWidth = 400;
     beforeEach(async(async () => {
       TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
       spectator = modalWrapperTestBuilder
@@ -101,8 +103,8 @@ describe('ModalWrapperComponent', () => {
     }));
 
     it('should adapt modal size to children after ion-modal has been presented', async () => {
-      spectator.element.style.height = '500px';
-      spectator.element.style.width = '400px';
+      spectator.element.style.height = `${elementHeight}px`;
+      spectator.element.style.width = `${elementWidth}px`;
 
       spectator.component.config.interactWithBackground = true;
 
@@ -112,14 +114,22 @@ describe('ModalWrapperComponent', () => {
       await TestHelper.waitForTimeout();
       spectator.detectChanges();
 
-      expect(spectator.component['ionModalElement'].style.top).toBe('400px');
-      expect(spectator.component['ionModalElement'].style.left).toBe('400px');
-      expect(spectator.component['ionModalElement'].style.right).toBe('400px');
+      const extectedTopPosition =
+        +TestHelper.screensize.desktop.height.slice(0, -2) - elementHeight;
+      const expectedHorizontalPosition =
+        (+TestHelper.screensize.desktop.width.slice(0, -2) - elementWidth) / 2;
+      expect(spectator.component['ionModalElement'].style.top).toBe(`${extectedTopPosition}px`);
+      expect(spectator.component['ionModalElement'].style.left).toBe(
+        `${expectedHorizontalPosition}px`
+      );
+      expect(spectator.component['ionModalElement'].style.right).toBe(
+        `${expectedHorizontalPosition}px`
+      );
     });
 
     it('should adapt modal size to children on resize', async () => {
-      spectator.element.style.height = '500px';
-      spectator.element.style.width = '400px';
+      spectator.element.style.height = `${elementHeight}px`;
+      spectator.element.style.width = `${elementWidth}px`;
 
       spectator.component.config.interactWithBackground = true;
 
@@ -129,9 +139,17 @@ describe('ModalWrapperComponent', () => {
       await TestHelper.waitForResizeObserver();
       spectator.detectChanges();
 
-      expect(spectator.component['ionModalElement'].style.top).toBe('400px');
-      expect(spectator.component['ionModalElement'].style.left).toBe('400px');
-      expect(spectator.component['ionModalElement'].style.right).toBe('400px');
+      const extectedTopPosition =
+        +TestHelper.screensize.desktop.height.slice(0, -2) - elementHeight;
+      const expectedHorizontalPosition =
+        (+TestHelper.screensize.desktop.width.slice(0, -2) - elementWidth) / 2;
+      expect(spectator.component['ionModalElement'].style.top).toBe(`${extectedTopPosition}px`);
+      expect(spectator.component['ionModalElement'].style.left).toBe(
+        `${expectedHorizontalPosition}px`
+      );
+      expect(spectator.component['ionModalElement'].style.right).toBe(
+        `${expectedHorizontalPosition}px`
+      );
     });
   });
 
