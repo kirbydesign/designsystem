@@ -91,14 +91,22 @@ describe('ActionSheetComponent', () => {
     });
 
     it('should toggle open on click', () => {
-      spectator.component['state'] = OpenState.closed;
+      expect(spectator.component['state']).toEqual(OpenState.closed);
+      expect(popout).toHaveComputedStyle({ display: 'none' });
+
       spectator.click('button');
+
+      expect(spectator.component['state']).toEqual(OpenState.open);
       expect(popout).toHaveComputedStyle({ display: 'block' });
     });
 
     it('should toggle closed when clicked and open', () => {
       spectator.component['state'] = OpenState.open;
+      spectator.detectChanges();
+      expect(popout).toHaveComputedStyle({ display: 'block' });
+
       spectator.click('button');
+
       expect(popout).toHaveComputedStyle({ display: 'none' });
     });
 
