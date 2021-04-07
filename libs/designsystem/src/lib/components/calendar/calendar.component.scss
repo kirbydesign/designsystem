@@ -7,7 +7,8 @@ table.calendar-table {
   user-select: none;
   outline: none !important;
   border-spacing: 0;
-  margin: 0 size('xxxs') size('xxxs');
+  margin: size('xxxs');
+  margin-top: 0;
 
   thead {
     padding: 0.5em;
@@ -44,7 +45,8 @@ td {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin: size('xxs') size('xxs') 0;
+  margin: size('xxs');
+  margin-bottom: 0;
 }
 
 .month-navigator {
