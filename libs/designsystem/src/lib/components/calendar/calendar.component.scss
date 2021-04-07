@@ -23,9 +23,6 @@ table.calendar-table {
   td {
     border-style: none;
     padding: 0;
-    line-height: 2em;
-    height: 0;
-    text-align: center;
   }
 }
 
@@ -37,8 +34,6 @@ td {
 
 .header {
   display: flex;
-  flex-direction: row;
-  align-items: center;
   justify-content: space-between;
   margin: size('xxs');
   margin-bottom: 0;
@@ -46,8 +41,8 @@ td {
 
 .month-navigator {
   display: flex;
-  flex-direction: row;
   flex-grow: 1;
+  align-items: center;
   justify-content: space-between;
 
   button {
@@ -55,6 +50,9 @@ td {
     outline: none;
     border: none;
     cursor: pointer;
+    height: size('xl');
+    width: size('xl');
+    padding: 0;
   }
 
   button:disabled {
@@ -64,7 +62,6 @@ td {
 }
 
 .month-and-year {
-  line-height: line-height('xl');
   user-select: none;
 
   .month {
@@ -90,13 +87,13 @@ td {
 }
 
 .day {
-  display: inline-block;
-  $dayWidth: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  $dayWidth: size('xl');
   border-radius: $dayWidth / 2;
   width: $dayWidth;
   height: $dayWidth;
-  line-height: $dayWidth;
-  text-align: center;
   margin-top: 4px;
   margin-bottom: 4px;
 }
