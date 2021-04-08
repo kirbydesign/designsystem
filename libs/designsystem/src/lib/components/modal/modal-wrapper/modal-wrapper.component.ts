@@ -146,8 +146,8 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
         setTimeout(() => {
           const docElement = this.windowRef.document.documentElement;
           const hostElement = this.elementRef.nativeElement;
-          const topPosition = docElement.offsetHeight - hostElement.scrollHeight;
-          const horizontalPosition = (docElement.offsetWidth - hostElement.scrollWidth) / 2;
+          const topPosition = docElement.offsetHeight - hostElement.offsetHeight;
+          const horizontalPosition = (docElement.offsetWidth - hostElement.offsetWidth) / 2;
 
           this.ionModalElement.style.top = `${topPosition}px`;
           this.ionModalElement.style.left = `${horizontalPosition}px`;
