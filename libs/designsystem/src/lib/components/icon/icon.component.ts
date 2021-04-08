@@ -10,6 +10,7 @@ export enum IconSize {
   MD = 'md',
   LG = 'lg',
 }
+
 @Component({
   selector: 'kirby-icon',
   templateUrl: './icon.component.html',

@@ -195,7 +195,7 @@ describe('IconComponent', () => {
 
   sizes.forEach((size) => {
     it(`should render with correct font-size for size = ${size}`, () => {
-      const fixture = createTestComponent(`<kirby-icon size=${size}></kirby-icon>`);
+      const fixture = createTestComponent(`<kirby-icon size="${size}"></kirby-icon>`);
       fixture.detectChanges();
       const el = fixture.debugElement.query(By.directive(IconComponent));
 
