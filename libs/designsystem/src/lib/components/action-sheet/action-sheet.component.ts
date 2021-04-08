@@ -35,6 +35,8 @@ export class ActionSheetComponent {
     return this.state === OpenState.open;
   }
 
+  isTouch = this.platform.isTouch();
+
   onItemSelect(selection: ActionSheetItem) {
     this.itemSelect.emit(selection);
     this.state = OpenState.closed;
@@ -51,7 +53,7 @@ export class ActionSheetComponent {
   }
 
   onToggleSheet() {
-    if (this.platform.isTouch()) {
+    if (this.isTouch) {
       const config: ActionSheetConfig = {
         header: this.header,
         subheader: this.subheader,

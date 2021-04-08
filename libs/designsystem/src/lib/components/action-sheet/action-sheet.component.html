@@ -4,11 +4,12 @@
   (click)="onToggleSheet()"
   (blur)="delayedClose()"
 >
-  <ng-template [ngIf]="triggerText">{{ triggerText }}</ng-template>
+  <ng-container *ngIf="triggerText">{{ triggerText }}</ng-container>
   <kirby-icon [name]="triggerIconName"></kirby-icon>
 </button>
 
 <kirby-action-sheet-popout
+  *ngIf="!isTouch"
   (cancel)="(onCancel)"
   (itemSelect)="onItemSelect($event)"
   cancelButtonText="cancelButtonText"

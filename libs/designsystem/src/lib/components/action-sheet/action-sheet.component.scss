@@ -6,21 +6,17 @@
 }
 
 :host(.is-open) {
-  @include not-touch() {
-    kirby-action-sheet-popout {
-      display: block;
-    }
-    button {
-      box-shadow: get-elevation(8);
-    }
+  kirby-action-sheet-popout {
+    display: block;
+  }
+  button {
+    box-shadow: get-elevation(8);
   }
 }
 
 kirby-action-sheet-popout {
   display: none;
-  @include not-touch() {
-    position: absolute;
-    right: 0;
-    margin-top: size('xs');
-  }
+  position: absolute;
+  right: 0;
+  margin-top: size('xs');
 }
