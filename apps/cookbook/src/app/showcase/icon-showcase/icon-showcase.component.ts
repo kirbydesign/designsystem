@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
-import { defaultIcons, IconSizes } from '@kirbydesign/designsystem';
+import { defaultIcons, IconSize } from '@kirbydesign/designsystem';
 
 @Component({
   selector: 'cookbook-icon-showcase',
@@ -27,8 +27,8 @@ export class IconShowcaseComponent {
     {
       name: 'size',
       description: 'Determines the size of the icon.',
-      defaultValue: IconSizes.SM,
-      type: Object.values(IconSizes),
+      defaultValue: IconSize.SM,
+      type: Object.values(IconSize),
     },
     {
       name: 'themeColor',

@@ -1,6 +1,6 @@
 import { Component, forwardRef, Input } from '@angular/core';
 
-import { IconComponent, IconSizes } from '@kirbydesign/designsystem';
+import { IconComponent, IconSize } from '@kirbydesign/designsystem';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
@@ -14,7 +14,7 @@ import { IconComponent, IconSizes } from '@kirbydesign/designsystem';
   ],
 })
 export class MockIconComponent {
-  @Input() size: IconSizes;
+  @Input() size: IconSize;
   @Input() name: string;
   @Input() customName: string;
 }

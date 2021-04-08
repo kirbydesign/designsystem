@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { defaultIcons } from '@kirbydesign/designsystem';
 import { Color, ColorHelper } from '@kirbydesign/designsystem';
-import { IconSizes } from '@kirbydesign/designsystem/components/icon/icon.component';
+import { IconSize } from '@kirbydesign/designsystem';
 
 @Component({
   selector: 'cookbook-icon-example',
@@ -11,7 +11,7 @@ import { IconSizes } from '@kirbydesign/designsystem/components/icon/icon.compon
 })
 export class IconExampleComponent {
   icons = defaultIcons;
-  sizes = IconSizes;
+  sizes = IconSize;
   color: Color;
   colors: Color[] = ColorHelper.mainColors;
 

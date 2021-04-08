@@ -9,7 +9,7 @@ import { ThemeColorDirective } from '../../directives/theme-color/theme-color.di
 import { DesignTokenHelper } from '../../helpers/design-token-helper';
 
 import { IconRegistryService } from './icon-registry.service';
-import { IconComponent, IconSizes } from './icon.component';
+import { IconComponent, IconSize } from './icon.component';
 
 const getColor = DesignTokenHelper.getColor;
 const iconFontSize = DesignTokenHelper.iconFontSize;
@@ -191,7 +191,7 @@ describe('IconComponent', () => {
     });
   });
 
-  const sizes = Object.values(IconSizes);
+  const sizes = Object.values(IconSize);
 
   sizes.forEach((size) => {
     it(`should render with correct font-size for size = ${size}`, () => {
