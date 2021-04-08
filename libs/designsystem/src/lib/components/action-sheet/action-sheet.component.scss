@@ -3,6 +3,7 @@
 :host {
   position: relative;
   display: inline-block;
+  outline: none;
 }
 
 :host(.is-open) {

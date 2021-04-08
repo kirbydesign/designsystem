@@ -1,4 +1,13 @@
-import { Component, ContentChild, EventEmitter, HostBinding, Input, Output } from '@angular/core';
+import {
+  Component,
+  ContentChild,
+  ElementRef,
+  EventEmitter,
+  HostBinding,
+  HostListener,
+  Input,
+  Output,
+} from '@angular/core';
 
 import { PlatformService } from '../../helpers';
 import { OpenState } from '../../models';
@@ -17,18 +26,26 @@ export class ActionSheetComponent {
   private state: OpenState.closed | OpenState.open = OpenState.closed;
   attentionLevel: '2' | '3' = '3';
 
-  constructor(private platform: PlatformService, private modalController: ModalController) {}
+  constructor(
+    private platform: PlatformService,
+    private modalController: ModalController,
+    private elementRef: ElementRef<HTMLElement>
+  ) {}
 
   @Input() cancelButtonText = 'Cancel';
-  @Input() hideCancel: boolean = false;
   @Input() disabled: boolean = false;
   @Input() header: string;
   @Input() subheader: string;
   @Input() items: Array<ActionSheetItem>;
   @Input() triggerIconName = 'more';
   @Input() triggerText?: string;
-  @Output() cancel = new EventEmitter();
   @Output() itemSelect: EventEmitter<ActionSheetItem> = new EventEmitter<ActionSheetItem>();
+  @Input() tabindex = 0;
+
+  @HostBinding('attr.tabindex')
+  get _tabindex() {
+    return this.disabled ? -1 : this.tabindex;
+  }
 
   @HostBinding('class.is-open')
   get isOpen(): boolean {
@@ -42,17 +59,25 @@ export class ActionSheetComponent {
     this.state = OpenState.closed;
   }
 
-  onCancel() {
-    this.cancel.emit();
+  @HostListener('blur')
+  _onBlur() {
+    this.toggle();
   }
 
-  delayedClose() {
-    setTimeout(() => {
-      this.state = OpenState.closed;
-    }, 500);
+  onButtonMouseEvent(event: Event) {
+    // avoid button focus
+    event.preventDefault();
   }
 
-  onToggleSheet() {
+  onToggleSheet(event: Event) {
+    event.stopPropagation();
+    if (!this.isOpen) {
+      this.elementRef.nativeElement.focus();
+    }
+    this.toggle();
+  }
+
+  toggle() {
     if (this.isTouch) {
       const config: ActionSheetConfig = {
         header: this.header,

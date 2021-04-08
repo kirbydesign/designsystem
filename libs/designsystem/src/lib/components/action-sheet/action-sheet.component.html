@@ -1,8 +1,9 @@
 <button
   kirby-button
   [attentionLevel]="attentionLevel"
-  (click)="onToggleSheet()"
-  (blur)="delayedClose()"
+  (click)="onToggleSheet($event)"
+  (mousedown)="onButtonMouseEvent($event)"
+  tabindex="-1"
 >
   <ng-container *ngIf="triggerText">{{ triggerText }}</ng-container>
   <kirby-icon [name]="triggerIconName"></kirby-icon>
@@ -10,12 +11,10 @@
 
 <kirby-action-sheet-popout
   *ngIf="!isTouch"
-  (cancel)="(onCancel)"
   (itemSelect)="onItemSelect($event)"
-  cancelButtonText="cancelButtonText"
-  hideCancel="hideCancel"
-  disabled="disabled"
-  header="header"
-  subheader="subheader"
+  [hideCancel]="true"
+  [disabled]="disabled"
+  [header]="header"
+  [subheader]="subheader"
   [items]="items"
 ></kirby-action-sheet-popout>
