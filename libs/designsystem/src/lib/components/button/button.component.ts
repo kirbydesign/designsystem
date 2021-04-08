@@ -50,7 +50,7 @@ export class ButtonComponent implements AfterContentInit {
 
   @HostBinding('class')
   get _cssClass() {
-    return [this.themeColor, this.size];
+    return [this.themeColor, this.size].filter((cssClass) => !!cssClass);
   }
 
   @Input() set attentionLevel(level: '1' | '2' | '3' | '4') {
@@ -67,7 +67,6 @@ export class ButtonComponent implements AfterContentInit {
   @Input() expand: 'full' | 'block';
   @Input() text: string;
   @Input() isFloating: boolean = false;
-  @HostBinding('class')
   @Input()
   size: 'sm' | 'md' | 'lg' = 'md';
 

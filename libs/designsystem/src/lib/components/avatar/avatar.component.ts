@@ -23,17 +23,10 @@ export class AvatarComponent {
   @Input() overlay: boolean;
   @Input() size: AvatarSize = AvatarSize.SM;
   @Input()
-  themeColor:
-    | NotificationColor
-    | BrandColor
-    | 'medium'
-    | 'white'
-    | 'dark'
-    | 'light'
-    | 'semi-light' = 'white';
+  themeColor: NotificationColor | BrandColor | 'medium' | 'white' | 'dark' | 'light' | 'semi-light';
 
   @HostBinding('class')
   get _cssClass() {
-    return [this.themeColor, this.size];
+    return [this.themeColor, this.size].filter((cssClass) => !!cssClass);
   }
 }
