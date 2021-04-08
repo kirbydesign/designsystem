@@ -15,15 +15,14 @@ import { ActionSheetComponent, ActionSheetItem } from '@kirbydesign/designsystem
 })
 export class MockActionSheetComponent {
   @Input() cancelButtonText: string;
-  @Input() hideCancel: boolean;
   @Input() disabled: boolean;
   @Input() header: string;
   @Input() subheader: string;
   @Input() items: Array<ActionSheetItem>;
   @Input() triggerIconName: string;
   @Input() triggerText: string;
-  @Output() cancel = new EventEmitter();
   @Output() itemSelect = new EventEmitter<ActionSheetItem>();
+  @Input() tabindex: number;
 }
 
 // #endregion

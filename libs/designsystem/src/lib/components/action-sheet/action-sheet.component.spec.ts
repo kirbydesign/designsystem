@@ -13,7 +13,7 @@ import { ModalController } from '../modal';
 import { ActionSheetPopoutComponent } from './action-sheet-popout/action-sheet-popout.component';
 import { ActionSheetComponent } from './action-sheet.component';
 
-describe('ActionSheetComponent', () => {
+fdescribe('ActionSheetComponent', () => {
   let spectator: SpectatorHost<ActionSheetComponent>;
   let popout;
   const modalControllerSpy = jasmine.createSpyObj('ModalController', ['showActionSheet']);
@@ -108,8 +108,6 @@ describe('ActionSheetComponent', () => {
     it('should toggle closed when clicked and open', () => {
       spectator.component['state'] = OpenState.open;
       spectator.detectChanges();
-      expect(window.matchMedia('(pointer: fine)').matches).toBe(true, 'pointer: fine');
-      expect(window.matchMedia('(hover: hover)').matches).toBe(true, 'hover: hover');
       expect(popout).toHaveComputedStyle({ display: 'block' });
 
       spectator.click('button');
@@ -121,15 +119,17 @@ describe('ActionSheetComponent', () => {
       expect(popout).toHaveComputedStyle({ display: 'none' });
     });
 
-    it('should close (delayed) when trigger blures', fakeAsync(() => {
+    it('should close when trigger blures', () => {
       spectator.component['state'] = OpenState.open;
-      spectator.blur('button');
-      spectator.tick(500); // TODO: Refactor blur event OR get magic number from host component
+      spectator.detectChanges();
+      expect(popout).toHaveComputedStyle({ display: 'block' });
+
+      spectator.blur();
       expect(popout).toHaveComputedStyle({ display: 'none' });
-    }));
+    });
 
     it('should call modalController on touch', () => {
-      mockPlatformService.isTouch = () => true;
+      spectator.component.isTouch = true;
       spectator.click('button');
       expect(modalControllerSpy.showActionSheet).toHaveBeenCalled();
     });
