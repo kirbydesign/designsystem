@@ -106,6 +106,7 @@ describe('ModalWrapperComponent', () => {
 
     it('should adapt modal size to children after ion-modal has been presented', async(async () => {
       spectator.element.style.height = `${elementHeight}px`;
+      spectator.element.style.overflow = 'none';
       (spectator.query('ion-header') as HTMLElement).style.height = `${headerHeight}px`;
       spectator.element.style.width = `${elementWidth}px`;
 
@@ -132,6 +133,7 @@ describe('ModalWrapperComponent', () => {
 
     it('should adapt modal size to children on resize', async(async () => {
       spectator.element.style.height = `${elementHeight}px`;
+      spectator.element.style.overflow = 'none';
       (spectator.query('ion-header') as HTMLElement).style.height = `${headerHeight}px`;
       spectator.element.style.width = `${elementWidth}px`;
 
