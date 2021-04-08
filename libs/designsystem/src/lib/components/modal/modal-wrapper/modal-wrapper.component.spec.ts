@@ -93,7 +93,7 @@ describe('ModalWrapperComponent', () => {
   describe('with interact with background', () => {
     const elementHeight = 500;
     const elementWidth = 400;
-    const headerHeight = 100;
+    const headerHeight = 0;
 
     beforeEach(async(async () => {
       await TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
@@ -117,7 +117,7 @@ describe('ModalWrapperComponent', () => {
       spectator.detectChanges();
 
       const extectedTopPosition =
-        +TestHelper.screensize.desktop.height.slice(0, -2) - elementHeight - headerHeight;
+        +TestHelper.screensize.desktop.height.slice(0, -2) - elementHeight;
       const expectedHorizontalPosition =
         (+TestHelper.screensize.desktop.width.slice(0, -2) - elementWidth) / 2;
       expect(spectator.component['ionModalElement'].style.top).toBe(`${extectedTopPosition}px`);
@@ -143,7 +143,7 @@ describe('ModalWrapperComponent', () => {
       spectator.detectChanges();
 
       const extectedTopPosition =
-        +TestHelper.screensize.desktop.height.slice(0, -2) - elementHeight - headerHeight;
+        +TestHelper.screensize.desktop.height.slice(0, -2) - elementHeight;
       const expectedHorizontalPosition =
         (+TestHelper.screensize.desktop.width.slice(0, -2) - elementWidth) / 2;
       expect(spectator.component['ionModalElement'].style.top).toBe(`${extectedTopPosition}px`);
