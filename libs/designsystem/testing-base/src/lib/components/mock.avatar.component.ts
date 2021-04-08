@@ -2,7 +2,7 @@ import { Component, forwardRef, Input } from '@angular/core';
 
 import {
   AvatarComponent,
-  AvatarSizes,
+  AvatarSize,
   BrandColor,
   NotificationColor,
 } from '@kirbydesign/designsystem';
@@ -24,7 +24,7 @@ export class MockAvatarComponent {
   @Input() shadow: boolean;
   @Input() text: string;
   @Input() overlay: boolean;
-  @Input() size: AvatarSizes;
+  @Input() size: AvatarSize;
   @Input() themeColor:
     | NotificationColor
     | BrandColor

@@ -1,6 +1,6 @@
 export * from './app';
 
-export { AvatarComponent, AvatarSizes } from './avatar/avatar.component';
+export { AvatarComponent, AvatarSize } from './avatar/avatar.component';
 
 export { BadgeComponent } from './badge/badge.component';
 export { ButtonComponent } from './button/button.component';

@@ -90,7 +90,7 @@ export class DesignTokenHelper {
   }
 
   public static avatarSize(key: 'xs' | 's' | 'm' | 'l'): string {
-    return styles.avatarSizes[key];
+    return styles.avatarSize[key];
   }
 
   public static fatFingerSize(): string {
