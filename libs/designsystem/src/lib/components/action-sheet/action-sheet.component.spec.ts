@@ -13,7 +13,7 @@ import { ModalController } from '../modal';
 import { ActionSheetPopoutComponent } from './action-sheet-popout/action-sheet-popout.component';
 import { ActionSheetComponent } from './action-sheet.component';
 
-fdescribe('ActionSheetComponent', () => {
+describe('ActionSheetComponent', () => {
   let spectator: SpectatorHost<ActionSheetComponent>;
   let popout;
   const modalControllerSpy = jasmine.createSpyObj('ModalController', ['showActionSheet']);
