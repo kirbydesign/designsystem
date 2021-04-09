@@ -1,25 +1,21 @@
 import { RouterTestingModule } from '@angular/router/testing';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { MockComponent } from 'ng-mocks';
 
 import { DesignTokenHelper } from '../../helpers';
+import { TestHelper } from '../../testing/test-helper';
 import { IconComponent } from '../icon';
 
 import { TextLinkComponent } from './text-link.component';
 
-const fontSize = DesignTokenHelper.fontSize;
-const lineHeight = DesignTokenHelper.lineHeight;
-const size = DesignTokenHelper.size;
-
-const getColor = DesignTokenHelper.getColor;
+const { fontSize, size, getColor } = DesignTokenHelper;
 
 describe('TextLinkComponent', () => {
   let spectator: SpectatorHost<TextLinkComponent>;
 
   const createHost = createHostFactory({
     component: TextLinkComponent,
-    declarations: [MockComponent(IconComponent)],
-    imports: [RouterTestingModule],
+    declarations: [IconComponent],
+    imports: [RouterTestingModule, TestHelper.ionicModuleForTest],
   });
 
   describe(`text link should be`, () => {
@@ -82,11 +78,11 @@ describe('TextLinkComponent', () => {
       expect(anchorChildNodes[1].nodeName).toBe('KIRBY-ICON');
     });
 
-    // it('should always center icon vertically', () => {
-    //   const icon = spectator.queryHost<HTMLElement>('kirby-icon');
+    it('should always center icon vertically', () => {
+      const anchor = spectator.queryHost<HTMLAnchorElement>('a');
 
-    //   expect(icon).toHaveComputedStyle({ 'vertical-align': 'middle' });
-    // });
+      expect(anchor).toHaveComputedStyle({ 'align-items': 'center' });
+    });
 
     it('should have left and right margin on icon', () => {
       const icon = spectator.queryHost<HTMLElement>('kirby-icon');
@@ -102,7 +98,7 @@ describe('TextLinkComponent', () => {
     const testCases: { size: 'xs' | 'sm' | 'md'; expected: any }[] = [
       { size: 'xs', expected: { iconFontSize: size('s'), fontSize: fontSize('xs') } },
       { size: 'sm', expected: { iconFontSize: size('s'), fontSize: fontSize('s') } },
-      { size: 'md', expected: { iconFontSize: size('m'), fontSize: fontSize('m') } },
+      { size: 'md', expected: { iconFontSize: size('m'), fontSize: fontSize('n') } },
     ];
 
     testCases.forEach((scenario) => {
