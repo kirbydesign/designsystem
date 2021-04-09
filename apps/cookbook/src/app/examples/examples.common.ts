@@ -57,6 +57,7 @@ import { SpinnerExampleComponent } from './spinner-example/spinner-example.compo
 import { StockChartExampleComponent } from './stock-chart-example/stock-chart-example.component';
 import { TabExampleComponent } from './tabs-example/tab/tab-example.component';
 import { TabsExampleComponent } from './tabs-example/tabs-example.component';
+import { TextLinkExampleComponent } from './text-link-example/text-link-example.component';
 import { ToastExampleComponent } from './toast-example/toast-example.component';
 import { ToggleExampleComponent } from './toggle-example/toggle-example.component';
 import { ToolbarExampleComponent } from './toolbar-example/toolbar-example.component';
@@ -138,6 +139,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   SlidesExampleComponent,
   CookbookExampleCardContentComponent,
   AccordionExampleComponent,
+  TextLinkExampleComponent,
 ];
 
 // Configure custom icons (used by example to show the usage of custom icons)

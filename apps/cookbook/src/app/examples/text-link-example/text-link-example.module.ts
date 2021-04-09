@@ -1,7 +1,8 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
 import { KirbyModule } from '@kirbydesign/designsystem';
+
 import { TextLinkExampleExternalLinkComponent } from './examples/external-link';
 import { TextLinkExampleInternalLinkComponent } from './examples/internal-link';
 
@@ -11,8 +12,8 @@ const COMPONENT_DECLARATIONS = [
 ];
 
 @NgModule({
-  declarations: [COMPONENT_DECLARATIONS],
   imports: [CommonModule, KirbyModule],
-  exports: [COMPONENT_DECLARATIONS],
+  declarations: COMPONENT_DECLARATIONS,
+  exports: COMPONENT_DECLARATIONS,
 })
 export class TextLinkExampleModule {}
