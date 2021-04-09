@@ -29,6 +29,12 @@ export class SlidesShowcaseComponent {
       defaultValue: '',
       type: ['DataArray'],
     },
+    {
+      name: 'activeSlideIndex',
+      description: 'The index of the active slide',
+      defaultValue: '0',
+      type: ['number'],
+    },
   ];
   events: ApiDescriptionEvent[] = [
     {
