@@ -48,13 +48,7 @@ export class DesignTokenHelper {
   }
 
   public static iconFontSize(key: 'xs' | 'sm' | 'md' | 'lg'): string {
-    const iconSizeMapping = {
-      xs: 's',
-      sm: 'm',
-      md: 'l',
-      lg: 'xxxl',
-    };
-    return styles.sizes[iconSizeMapping[key]];
+    return styles.iconFontSizes[key];
   }
 
   public static fontWeight(key: string): string {
@@ -90,7 +84,7 @@ export class DesignTokenHelper {
   }
 
   public static avatarSize(key: 'xs' | 's' | 'm' | 'l'): string {
-    return styles.avatarSize[key];
+    return styles.avatarSizes[key];
   }
 
   public static fatFingerSize(): string {

@@ -1,11 +1,10 @@
 @import '../../scss/utils';
-@import './icon.component.shared';
 
 :host {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: var(--kirby-icon-font-size, icon-font-size('sm'));
+  font-size: var(--kirby-icon-font-size, map-get($icon-font-sizes, 'sm'));
   margin-left: var(--kirby-icon-margin-left, unset);
   margin-right: var(--kirby-icon-margin-right, unset);
 
@@ -16,19 +15,19 @@
 }
 
 :host(.xs) {
-  --kirby-icon-font-size: #{icon-font-size('xs')};
+  --kirby-icon-font-size: #{map-get($icon-font-sizes, 'xs')};
 }
 
 :host(.sm) {
-  --kirby-icon-font-size: #{icon-font-size('sm')};
+  --kirby-icon-font-size: #{map-get($icon-font-sizes, 'sm')};
 }
 
 :host(.md) {
-  --kirby-icon-font-size: #{icon-font-size('md')};
+  --kirby-icon-font-size: #{map-get($icon-font-sizes, 'md')};
 }
 
 :host(.lg) {
-  --kirby-icon-font-size: #{icon-font-size('lg')};
+  --kirby-icon-font-size: #{map-get($icon-font-sizes, 'lg')};
 }
 
 @each $color-name, $color-value in $main-colors {

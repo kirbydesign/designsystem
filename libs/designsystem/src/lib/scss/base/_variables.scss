@@ -156,6 +156,15 @@ $checkbox-radio-spacing: (
   'to-label': map-get($sizes, 'xs'),
 );
 
+/* Icon
+****************************************************************************/
+$icon-font-sizes: (
+  xs: size('s'),
+  sm: size('m'),
+  md: size('l'),
+  lg: size('xxxl'),
+) !default;
+
 /* Transitions
 ****************************************************************************/
 $soft-keyboard-transition-enter: 250ms ease-out 1ms; // Adding a 1ms delay seems to improve the smoothness on iPhone

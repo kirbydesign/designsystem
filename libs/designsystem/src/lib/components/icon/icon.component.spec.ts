@@ -11,8 +11,7 @@ import { DesignTokenHelper } from '../../helpers/design-token-helper';
 import { IconRegistryService } from './icon-registry.service';
 import { IconComponent, IconSize } from './icon.component';
 
-const getColor = DesignTokenHelper.getColor;
-const iconFontSize = DesignTokenHelper.iconFontSize;
+const { getColor, iconFontSize } = DesignTokenHelper;
 
 describe('IconComponent', () => {
   beforeEach(async(() => {
