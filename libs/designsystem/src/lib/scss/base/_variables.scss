@@ -159,10 +159,10 @@ $checkbox-radio-spacing: (
 /* Icon
 ****************************************************************************/
 $icon-font-sizes: (
-  xs: size('s'),
-  sm: size('m'),
-  md: size('l'),
-  lg: size('xxxl'),
+  xs: 16px,
+  sm: 24px,
+  md: 32px,
+  lg: 56px,
 ) !default;
 
 /* Transitions
