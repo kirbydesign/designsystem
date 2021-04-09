@@ -2,13 +2,12 @@
 $month-navigator-width: 80px;
 
 table.calendar-table {
-  width: calc(100% - 2 * #{size('xxxs')});
+  width: 100%;
   border-collapse: collapse;
   user-select: none;
   outline: none !important;
   border-spacing: 0;
-  margin: size('xxxs');
-  margin-top: 0;
+  margin-bottom: size('xxs');
 
   thead {
     border-bottom: 1px solid get-color('background-color');
@@ -16,6 +15,14 @@ table.calendar-table {
     th {
       height: 50px;
       text-align: center;
+
+      &:first-child {
+        padding-left: size('xxs');
+      }
+
+      &:last-child {
+        padding-right: size('xxs');
+      }
     }
   }
 
@@ -23,6 +30,14 @@ table.calendar-table {
   td {
     border-style: none;
     padding: 0;
+    text-align: center;
+
+    td:first-child {
+      padding-left: size('xxs');
+    }
+    td:last-child {
+      padding-right: size('xxs');
+    }
   }
 }
 
@@ -87,15 +102,14 @@ td {
 }
 
 .day {
+  $dayWidth: size('xl');
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  $dayWidth: size('xl');
   border-radius: $dayWidth / 2;
   width: $dayWidth;
   height: $dayWidth;
-  margin-top: 4px;
-  margin-bottom: 4px;
+  margin: size('xxxs') 0;
 }
 
 .day.selectable,
