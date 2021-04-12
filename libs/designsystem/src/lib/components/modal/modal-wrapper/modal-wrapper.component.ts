@@ -128,29 +128,28 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     this.initializeModalRoute();
     this.listenForIonModalDidPresent();
     this.listenForIonModalWillDismiss();
+    this.initializeResizeModalToModalWrapper();
     this.componentPropsInjector = Injector.create({
       providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
       parent: this.injector,
     });
-
-    if (this.config.interactWithBackground) {
-      this.initializeResizeModalToModalWrapper();
-    }
   }
 
   private initializeResizeModalToModalWrapper() {
-    merge(this.ionModalDidPresent, this.viewportResize$)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(() => {
-        // wait for template to render
-        setTimeout(() => {
-          const domRect = this.elementRef.nativeElement.getBoundingClientRect();
-          const right = this.windowRef.innerWidth - domRect.right;
-          this.ionModalElement.style.top = `${domRect.top}px`;
-          this.ionModalElement.style.left = `${domRect.left}px`;
-          this.ionModalElement.style.right = `${right}px`;
+    if (this.config.interactWithBackground) {
+      merge(this.ionModalDidPresent, this.viewportResize$)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(() => {
+          // wait for template to render
+          setTimeout(() => {
+            const domRect = this.elementRef.nativeElement.getBoundingClientRect();
+            const right = this.windowRef.innerWidth - domRect.right;
+            this.ionModalElement.style.top = `${domRect.top}px`;
+            this.ionModalElement.style.left = `${domRect.left}px`;
+            this.ionModalElement.style.right = `${right}px`;
+          });
         });
-      });
+    }
   }
 
   private initializeSizing() {
