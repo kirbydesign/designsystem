@@ -146,25 +146,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
         setTimeout(() => {
           const domRect = this.elementRef.nativeElement.getBoundingClientRect();
           const right = this.windowRef.innerWidth - domRect.right;
-          console.warn('----------------------------------');
-          console.warn('RESIZE MODAL');
-          console.warn('----------------------------------');
-          console.warn('document.scrollTop:', this.windowRef.document.documentElement.scrollTop);
-          console.warn('document.scrollLeft:', this.windowRef.document.documentElement.scrollLeft);
-          console.warn('window.innerHeight:', window.innerHeight);
-          console.warn('this.windowRef.innerHeight:', this.windowRef.innerHeight);
-          console.warn('domRect.height:', domRect.height);
-          console.warn('window.innerWidth:', window.innerWidth);
-          console.warn('this.windowRef.innerWidth:', this.windowRef.innerWidth);
-          console.warn('domRect.width:', domRect.width);
-          console.warn('domRect.bottom:', domRect.bottom);
-          console.warn('domRect.top:', domRect.top);
-          console.warn('domRect.left:', domRect.left);
-          console.warn('domRect.right:', domRect.right);
-          console.warn('Set ionModalElement.top:', domRect.top);
-          console.warn('Set ionModalElement.left:', domRect.left);
-          console.warn('Set ionModalElement.right:', right);
-          console.warn('----------------------------------');
           this.ionModalElement.style.top = `${domRect.top}px`;
           this.ionModalElement.style.left = `${domRect.left}px`;
           this.ionModalElement.style.right = `${right}px`;
