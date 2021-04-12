@@ -6,7 +6,9 @@
     expand="block"
     size="lg"
     attentionLevel="4"
+    tabindex="-1"
     (click)="onItemSelect(item)"
+    (mousedown)="onButtonMouseEvent($event)"
     *ngFor="let item of items"
   >
     {{ item.text }}
@@ -19,6 +21,7 @@
   size="lg"
   attentionLevel="2"
   (click)="onCancel()"
+  (mousedown)="onButtonMouseEvent($event)"
 >
   {{ cancelButtonText }}
 </button>

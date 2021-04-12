@@ -1,6 +1,5 @@
 import {
   Component,
-  ContentChild,
   ElementRef,
   EventEmitter,
   HostBinding,
@@ -11,7 +10,6 @@ import {
 
 import { PlatformService } from '../../helpers';
 import { OpenState } from '../../models';
-import { ButtonComponent } from '../button/button.component';
 import { ModalController } from '../modal';
 
 import { ActionSheetConfig } from './config/action-sheet-config';
@@ -23,8 +21,9 @@ import { ActionSheetItem } from './config/action-sheet-item';
   styleUrls: ['./action-sheet.component.scss'],
 })
 export class ActionSheetComponent {
-  private state: OpenState.closed | OpenState.open = OpenState.closed;
+  private state = OpenState.closed;
   attentionLevel: '2' | '3' = '3';
+  static readonly OPEN_DELAY_IN_MS = 100;
 
   constructor(
     private platform: PlatformService,
@@ -56,12 +55,12 @@ export class ActionSheetComponent {
 
   onItemSelect(selection: ActionSheetItem) {
     this.itemSelect.emit(selection);
-    this.state = OpenState.closed;
+    this.close();
   }
 
   @HostListener('blur')
   _onBlur() {
-    this.toggle();
+    this.close();
   }
 
   onButtonMouseEvent(event: Event) {
@@ -78,6 +77,18 @@ export class ActionSheetComponent {
   }
 
   toggle() {
+    if (this.isOpen) {
+      this.close();
+      return;
+    }
+    this.open();
+  }
+
+  open() {
+    if (this.disabled) {
+      return;
+    }
+
     if (this.isTouch) {
       const config: ActionSheetConfig = {
         header: this.header,
@@ -88,9 +99,21 @@ export class ActionSheetComponent {
       this.modalController.showActionSheet(config);
       return;
     }
-    this.state = this.state === OpenState.open ? OpenState.closed : OpenState.open;
-    this.attentionLevel = this.state === OpenState.open ? '2' : '3';
+
+    this.state = OpenState.opening;
+    setTimeout(() => {
+      this.state = OpenState.open;
+      this.attentionLevel = '2';
+    }, ActionSheetComponent.OPEN_DELAY_IN_MS);
   }
 
-  @ContentChild(ButtonComponent) customButton: ButtonComponent;
+  close() {
+    if (this.disabled) {
+      return;
+    }
+    if (this.isOpen) {
+      this.state = OpenState.closed;
+      this.attentionLevel = '3';
+    }
+  }
 }

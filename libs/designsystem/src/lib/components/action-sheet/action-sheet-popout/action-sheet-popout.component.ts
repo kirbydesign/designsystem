@@ -21,6 +21,11 @@ export class ActionSheetPopoutComponent {
     this.itemSelect.emit(selection);
   }
 
+  onButtonMouseEvent(event: Event) {
+    // avoid button focus
+    event.preventDefault();
+  }
+
   onCancel() {
     this.cancel.emit();
   }
