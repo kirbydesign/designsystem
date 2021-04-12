@@ -139,12 +139,17 @@ describe('ModalWrapperComponent', () => {
       spectator.component['viewportResize'].complete();
       tick();
 
+      const expectedPosition = {
+        top: parseInt(screenSize.height) - elementHeight,
+        left: spectator.element.getBoundingClientRect().left,
+        right: parseInt(screenSize.width) - spectator.element.getBoundingClientRect().right,
+      };
       const expectedTopPosition = parseInt(screenSize.height) - elementHeight;
       const expectedHorizontalPosition = (parseInt(screenSize.width) - elementWidth) / 2;
       const ionModalElement = spectator.component['ionModalElement'];
-      expect(ionModalElement.style.top).toBe(`${expectedTopPosition}px`);
-      expect(ionModalElement.style.left).toBe(`${expectedHorizontalPosition}px`);
-      expect(ionModalElement.style.right).toBe(`${expectedHorizontalPosition}px`);
+      expect(ionModalElement.style.top).toBe(`${expectedPosition.top}px`);
+      expect(ionModalElement.style.left).toBe(`${expectedPosition.left}px`);
+      expect(ionModalElement.style.right).toBe(`${expectedPosition.right}px`);
     }));
   });
 
