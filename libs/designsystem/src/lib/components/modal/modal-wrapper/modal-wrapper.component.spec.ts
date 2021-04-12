@@ -106,8 +106,8 @@ describe('ModalWrapperComponent', () => {
       spectator.element.style.overflow = 'hidden';
       spectator.element.style.position = 'absolute';
       spectator.element.style.bottom = '0';
-      spectator.element.style.left = `calc(50% - ${elementWidth / 2}px)`;
-      spectator.element.style.backgroundColor = 'chartreuse';
+      spectator.element.style.left = `calc(50% - ${elementWidth / 2}px)`; // Simulate horizontally centered modal
+      spectator.element.style.backgroundColor = 'charrtreuse'; // Add some background for easier debugging of test
       await TestHelper.waitForResizeObserver();
     });
 
