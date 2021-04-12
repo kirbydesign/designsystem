@@ -95,8 +95,15 @@ describe('ModalWrapperComponent', () => {
     const elementWidth = 300;
     const screenSize = TestHelper.screensize.desktop;
 
-    beforeEach(async () => {
+    beforeAll(async () => {
       await TestHelper.resizeTestWindow(screenSize);
+    });
+
+    afterAll(() => {
+      TestHelper.resetTestWindow();
+    });
+
+    beforeEach(() => {
       spectator = modalWrapperTestBuilder
         .flavor('drawer')
         .interactWithBackground()
@@ -113,7 +120,6 @@ describe('ModalWrapperComponent', () => {
     afterEach(() => {
       // Ensure any observers are destroyed:
       spectator.fixture.destroy();
-      TestHelper.resetTestWindow();
     });
 
     it('should resize ion-modal to wrapper size after ion-modal has been presented', fakeAsync(() => {
