@@ -121,6 +121,12 @@ describe('ModalWrapperComponent', () => {
         left: spectator.element.getBoundingClientRect().left,
         right: parseInt(screenSize.width) - spectator.element.getBoundingClientRect().right,
       };
+      console.warn('element.top:', spectator.element.getBoundingClientRect().top);
+      console.warn('element.left:', spectator.element.getBoundingClientRect().left);
+      console.warn('element.right:', spectator.element.getBoundingClientRect().right);
+      console.warn('expectedPosition.top:', expectedPosition.top);
+      console.warn('expectedPosition.left:', expectedPosition.left);
+      console.warn('expectedPosition.right:', expectedPosition.right);
       const ionModalElement = spectator.component['ionModalElement'];
       expect(ionModalElement.style.top).toBe(`${expectedPosition.top}px`);
       expect(ionModalElement.style.left).toBe(`${expectedPosition.left}px`);
