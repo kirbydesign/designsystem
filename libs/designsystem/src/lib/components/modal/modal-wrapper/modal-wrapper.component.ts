@@ -147,6 +147,9 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
           const domRect = this.elementRef.nativeElement.getBoundingClientRect();
           const right = this.windowRef.innerWidth - domRect.right;
           console.warn('----------------------------------');
+          console.warn('RESIZE MODAL');
+          console.warn('----------------------------------');
+          console.warn('document.scrollTop:', this.windowRef.document.documentElement.scrollTop);
           console.warn('window.innerHeight:', window.innerHeight);
           console.warn('this.windowRef.innerHeight:', this.windowRef.innerHeight);
           console.warn('domRect.height:', domRect.height);
@@ -423,6 +426,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     if (!this.initialViewportHeight) {
       // Initial observe callback, register initial height:
       this.initialViewportHeight = entry.contentRect.height;
+      console.warn('Initial resize => return...');
       return;
     }
     this.viewportResized = entry.contentRect.height !== this.initialViewportHeight;
@@ -433,6 +437,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
         this.delayedClose();
       }
     }
+    console.warn('Emit viewportResize.next()...');
     this.viewportResize.next();
   }
 
