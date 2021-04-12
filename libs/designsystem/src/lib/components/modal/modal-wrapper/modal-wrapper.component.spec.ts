@@ -108,7 +108,6 @@ describe('ModalWrapperComponent', () => {
       spectator.element.style.bottom = '0';
       spectator.element.style.left = `calc(50% - ${elementWidth / 2}px)`; // Simulate horizontally centered modal
       spectator.element.style.backgroundColor = 'charrtreuse'; // Add some background for easier debugging of test
-      await TestHelper.waitForResizeObserver();
     });
 
     it('should resize ion-modal to wrapper size after ion-modal has been presented', fakeAsync(() => {
