@@ -125,6 +125,18 @@ describe('ModalWrapperComponent', () => {
       console.warn('screen.availHeight', window.screen.availHeight);
       console.warn('screen.availWidth', window.screen.availWidth);
       console.warn('-----------------------------------------');
+      console.warn(
+        'documentElement.margin',
+        window.getComputedStyle(window.document.documentElement).margin
+      );
+      console.warn(
+        'documentElement.padding',
+        window.getComputedStyle(window.document.documentElement).padding
+      );
+      console.warn('body.margin', window.getComputedStyle(window.document.body).margin);
+      console.warn('body.padding', window.getComputedStyle(window.document.body).padding);
+
+      console.warn('-----------------------------------------');
 
       console.warn('Y: offsetTop', spectator.element.offsetTop);
       console.warn('Y: offsetHeight', spectator.element.offsetHeight);
