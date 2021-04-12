@@ -110,6 +110,12 @@ describe('ModalWrapperComponent', () => {
       spectator.element.style.backgroundColor = 'charrtreuse'; // Add some background for easier debugging of test
     });
 
+    afterEach(() => {
+      // Ensure any observers are destroyed:
+      spectator.fixture.destroy();
+      TestHelper.resetTestWindow();
+    });
+
     it('should resize ion-modal to wrapper size after ion-modal has been presented', fakeAsync(() => {
       spectator.component['ionModalDidPresent'].next();
       spectator.component['ionModalDidPresent'].complete();
