@@ -146,6 +146,16 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
         setTimeout(() => {
           const domRect = this.elementRef.nativeElement.getBoundingClientRect();
           const right = this.windowRef.innerWidth - domRect.right;
+          console.warn('----------------------------------');
+          console.warn('window.innerWidth:', window.innerWidth);
+          console.warn('this.windowRef.innerWidth:', this.windowRef.innerWidth);
+          console.warn('domRect.top:', domRect.top);
+          console.warn('domRect.left:', domRect.left);
+          console.warn('domRect.right:', domRect.right);
+          console.warn('Set ionModalElement.top:', domRect.top);
+          console.warn('Set ionModalElement.left:', domRect.left);
+          console.warn('Set ionModalElement.right:', right);
+          console.warn('----------------------------------');
           this.ionModalElement.style.top = `${domRect.top}px`;
           this.ionModalElement.style.left = `${domRect.left}px`;
           this.ionModalElement.style.right = `${right}px`;
