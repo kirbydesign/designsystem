@@ -101,10 +101,12 @@ describe('ModalWrapperComponent', () => {
         .flavor('drawer')
         .interactWithBackground()
         .build();
+      await spectator.fixture.whenStable();
     }));
 
-    it('should adapt modal size to children after ion-modal has been presented', async () => {
+    it('should adapt modal size to children after ion-modal has been presented', async(async () => {
       spectator.element.style.height = `${elementHeight}px`;
+      spectator.element.style.overflow = 'none';
       (spectator.query('ion-header') as HTMLElement).style.height = `${headerHeight}px`;
       spectator.element.style.width = `${elementWidth}px`;
 
@@ -115,22 +117,23 @@ describe('ModalWrapperComponent', () => {
 
       await TestHelper.waitForTimeout();
       spectator.detectChanges();
+      await spectator.fixture.whenStable();
 
-      const extectedTopPosition =
-        +TestHelper.screensize.desktop.height.slice(0, -2) - elementHeight;
+      const expectedTopPosition = parseInt(TestHelper.screensize.desktop.height) - elementHeight;
       const expectedHorizontalPosition =
-        (+TestHelper.screensize.desktop.width.slice(0, -2) - elementWidth) / 2;
-      expect(spectator.component['ionModalElement'].style.top).toBe(`${extectedTopPosition}px`);
+        (parseInt(TestHelper.screensize.desktop.width) - elementWidth) / 2;
+      expect(spectator.component['ionModalElement'].style.top).toBe(`${expectedTopPosition}px`);
       expect(spectator.component['ionModalElement'].style.left).toBe(
         `${expectedHorizontalPosition}px`
       );
       expect(spectator.component['ionModalElement'].style.right).toBe(
         `${expectedHorizontalPosition}px`
       );
-    });
+    }));
 
-    it('should adapt modal size to children on resize', async () => {
+    it('should adapt modal size to children on resize', async(async () => {
       spectator.element.style.height = `${elementHeight}px`;
+      spectator.element.style.overflow = 'none';
       (spectator.query('ion-header') as HTMLElement).style.height = `${headerHeight}px`;
       spectator.element.style.width = `${elementWidth}px`;
 
@@ -141,19 +144,19 @@ describe('ModalWrapperComponent', () => {
 
       await TestHelper.waitForResizeObserver();
       spectator.detectChanges();
+      await spectator.fixture.whenStable();
 
-      const extectedTopPosition =
-        +TestHelper.screensize.desktop.height.slice(0, -2) - elementHeight;
+      const expectedTopPosition = parseInt(TestHelper.screensize.desktop.height) - elementHeight;
       const expectedHorizontalPosition =
-        (+TestHelper.screensize.desktop.width.slice(0, -2) - elementWidth) / 2;
-      expect(spectator.component['ionModalElement'].style.top).toBe(`${extectedTopPosition}px`);
+        (parseInt(TestHelper.screensize.desktop.width) - elementWidth) / 2;
+      expect(spectator.component['ionModalElement'].style.top).toBe(`${expectedTopPosition}px`);
       expect(spectator.component['ionModalElement'].style.left).toBe(
         `${expectedHorizontalPosition}px`
       );
       expect(spectator.component['ionModalElement'].style.right).toBe(
         `${expectedHorizontalPosition}px`
       );
-    });
+    }));
   });
 
   describe('close button', () => {
