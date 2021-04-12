@@ -25,7 +25,9 @@
 
 <table class="calendar-table">
   <thead class="calendar-table-header">
-    <th *ngFor="let weekDay of weekDays">{{ weekDay }}</th>
+    <tr>
+      <th *ngFor="let weekDay of weekDays">{{ weekDay }}</th>
+    </tr>
   </thead>
 
   <tbody>
