@@ -15,6 +15,7 @@ import { ModalConfig } from './config/modal-config';
 import { ModalWrapperComponent } from './modal-wrapper.component';
 
 export class ModalWrapperTestBuilder {
+  private useMockedResizeObserver = true;
   private config: ModalConfig = {
     title: null,
     component: null,
@@ -66,6 +67,11 @@ export class ModalWrapperTestBuilder {
     return this;
   }
 
+  provideRealResizeObserver() {
+    this.useMockedResizeObserver = false;
+    return this;
+  }
+
   withStaticFooter() {
     this.config.component = StaticFooterEmbeddedComponent;
     return this;
@@ -106,9 +112,13 @@ export class ModalWrapperTestBuilder {
     spyOn(spectator.component['ionContent'], 'getScrollElement').and.returnValue(
       Promise.resolve(document.createElement('DIV'))
     );
-    const resizeObserverService = spectator.inject(ResizeObserverService);
-    spyOn(resizeObserverService, 'observe');
-    spyOn(resizeObserverService, 'unobserve');
+    if (this.useMockedResizeObserver) {
+      const resizeObserverService = spectator.inject(ResizeObserverService);
+      resizeObserverService['observer'].disconnect();
+      resizeObserverService['observedElements'] = new WeakMap();
+      spyOn(resizeObserverService, 'observe');
+      spyOn(resizeObserverService, 'unobserve');
+    }
 
     const ionModalWrapper = document.createElement('div');
     const ionModal = document.createElement('div');
