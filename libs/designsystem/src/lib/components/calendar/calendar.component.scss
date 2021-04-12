@@ -1,44 +1,30 @@
 @import '../../scss/utils';
 $month-navigator-width: 80px;
 
-table.calendar-table {
+table {
   width: 100%;
   border-collapse: collapse;
   user-select: none;
-  outline: none !important;
-  border-spacing: 0;
   margin-bottom: size('xxs');
+}
 
-  thead {
-    border-bottom: 1px solid get-color('background-color');
+th,
+td {
+  text-align: center;
+  padding: 0;
 
-    th {
-      height: 50px;
-      text-align: center;
-
-      &:first-child {
-        padding-left: size('xxs');
-      }
-
-      &:last-child {
-        padding-right: size('xxs');
-      }
-    }
+  &:first-child {
+    padding-left: size('xxs');
   }
 
-  tr,
-  td {
-    border-style: none;
-    padding: 0;
-    text-align: center;
-
-    td:first-child {
-      padding-left: size('xxs');
-    }
-    td:last-child {
-      padding-right: size('xxs');
-    }
+  &:last-child {
+    padding-right: size('xxs');
   }
+}
+
+th {
+  height: 50px;
+  border-bottom: 1px solid get-color('background-color');
 }
 
 .header,
