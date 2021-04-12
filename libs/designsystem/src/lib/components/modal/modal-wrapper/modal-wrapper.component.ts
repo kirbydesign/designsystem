@@ -545,7 +545,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     this.intersectionObserver.disconnect();
     delete this._intersectionObserver;
     if (this.resizeObserverService) {
-      this.resizeObserverService.unobserve(window.document.body);
+      this.resizeObserverService.unobserve(this.windowRef.document.body);
       this.resizeObserverService.unobserve(this.ionHeaderElement.nativeElement);
       this.resizeObserverService.unobserve(this.getEmbeddedFooterElement());
     }
