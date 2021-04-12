@@ -117,6 +117,19 @@ describe('ModalWrapperComponent', () => {
       const expectedTopPosition = parseInt(screenSize.height) - elementHeight;
       const expectedHorizontalPosition = (parseInt(screenSize.width) - elementWidth) / 2;
       const ionModalElement = spectator.component['ionModalElement'];
+
+      console.warn('offsetTop', spectator.element.offsetTop);
+      console.warn('offsetHeight', spectator.element.offsetHeight);
+      console.warn('BoundingClientRect.top', spectator.element.getBoundingClientRect().top);
+      console.warn('BoundingClientRect.height', spectator.element.getBoundingClientRect().height);
+      console.warn('screenSize.height', screenSize.height);
+      console.warn(
+        'offsetParent.BoundingClientRect.height',
+        spectator.element.offsetParent.getBoundingClientRect().height
+      );
+      console.warn('documentElement.offsetHeight', window.document.documentElement.offsetHeight);
+      console.warn('body.offsetHeight', window.document.body.offsetHeight);
+
       expect(ionModalElement.style.top).toBe(`${expectedTopPosition}px`);
       expect(ionModalElement.style.left).toBe(`${expectedHorizontalPosition}px`);
       expect(ionModalElement.style.right).toBe(`${expectedHorizontalPosition}px`);
