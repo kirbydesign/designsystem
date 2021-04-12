@@ -118,17 +118,42 @@ describe('ModalWrapperComponent', () => {
       const expectedHorizontalPosition = (parseInt(screenSize.width) - elementWidth) / 2;
       const ionModalElement = spectator.component['ionModalElement'];
 
-      console.warn('offsetTop', spectator.element.offsetTop);
-      console.warn('offsetHeight', spectator.element.offsetHeight);
-      console.warn('BoundingClientRect.top', spectator.element.getBoundingClientRect().top);
-      console.warn('BoundingClientRect.height', spectator.element.getBoundingClientRect().height);
-      console.warn('screenSize.height', screenSize.height);
+      console.warn('window.innerHeight', window.innerHeight);
+      console.warn('window.innerWidth', window.innerWidth);
+      console.warn('window.outerHeight', window.outerHeight);
+      console.warn('window.outerWidth', window.outerWidth);
+      console.warn('screen.availHeight', window.screen.availHeight);
+      console.warn('screen.availWidth', window.screen.availWidth);
+      console.warn('-----------------------------------------');
+
+      console.warn('Y: offsetTop', spectator.element.offsetTop);
+      console.warn('Y: offsetHeight', spectator.element.offsetHeight);
+      console.warn('Y: BoundingClientRect.top', spectator.element.getBoundingClientRect().top);
       console.warn(
-        'offsetParent.BoundingClientRect.height',
+        'Y: BoundingClientRect.height',
+        spectator.element.getBoundingClientRect().height
+      );
+      console.warn('Y: screenSize.height', screenSize.height);
+      console.warn(
+        'Y: offsetParent.BoundingClientRect.height',
         spectator.element.offsetParent.getBoundingClientRect().height
       );
-      console.warn('documentElement.offsetHeight', window.document.documentElement.offsetHeight);
-      console.warn('body.offsetHeight', window.document.body.offsetHeight);
+      console.warn('Y: documentElement.offsetHeight', window.document.documentElement.offsetHeight);
+      console.warn('Y: body.offsetHeight', window.document.body.offsetHeight);
+
+      console.warn('-----------------------------------------');
+
+      console.warn('X: offsetLeft', spectator.element.offsetLeft);
+      console.warn('X: offsetWidth', spectator.element.offsetWidth);
+      console.warn('X: BoundingClientRect.left', spectator.element.getBoundingClientRect().left);
+      console.warn('X: BoundingClientRect.width', spectator.element.getBoundingClientRect().width);
+      console.warn('X: screenSize.width', screenSize.width);
+      console.warn(
+        'X: offsetParent.BoundingClientRect.width',
+        spectator.element.offsetParent.getBoundingClientRect().width
+      );
+      console.warn('X: documentElement.offsetWidth', window.document.documentElement.offsetWidth);
+      console.warn('X: body.offsetWidth', window.document.body.offsetWidth);
 
       expect(ionModalElement.style.top).toBe(`${expectedTopPosition}px`);
       expect(ionModalElement.style.left).toBe(`${expectedHorizontalPosition}px`);
