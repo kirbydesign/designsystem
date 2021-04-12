@@ -92,70 +92,47 @@ describe('ModalWrapperComponent', () => {
 
   describe('with interact with background', () => {
     const elementHeight = 500;
-    const elementWidth = 400;
-    const headerHeight = 0;
+    const elementWidth = 300;
+    const screenSize = TestHelper.screensize.desktop;
 
-    beforeEach(async(async () => {
-      await TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
+    beforeEach(async () => {
+      await TestHelper.resizeTestWindow(screenSize);
       spectator = modalWrapperTestBuilder
         .flavor('drawer')
         .interactWithBackground()
         .build();
-      await spectator.fixture.whenStable();
-    }));
-
-    it('should adapt modal size to children after ion-modal has been presented', async(async () => {
       spectator.element.style.height = `${elementHeight}px`;
-      spectator.element.style.overflow = 'none';
-      (spectator.query('ion-header') as HTMLElement).style.height = `${headerHeight}px`;
       spectator.element.style.width = `${elementWidth}px`;
+      spectator.element.style.overflow = 'hidden';
+      spectator.element.style.position = 'absolute';
+      spectator.element.style.bottom = '0';
+      await TestHelper.waitForResizeObserver();
+    });
 
-      spectator.component.config.interactWithBackground = true;
-
+    it('should resize ion-modal to wrapper size after ion-modal has been presented', fakeAsync(() => {
       spectator.component['ionModalDidPresent'].next();
       spectator.component['ionModalDidPresent'].complete();
+      tick();
 
-      await TestHelper.waitForTimeout();
-      spectator.detectChanges();
-      await spectator.fixture.whenStable();
-
-      const expectedTopPosition = parseInt(TestHelper.screensize.desktop.height) - elementHeight;
-      const expectedHorizontalPosition =
-        (parseInt(TestHelper.screensize.desktop.width) - elementWidth) / 2;
-      expect(spectator.component['ionModalElement'].style.top).toBe(`${expectedTopPosition}px`);
-      expect(spectator.component['ionModalElement'].style.left).toBe(
-        `${expectedHorizontalPosition}px`
-      );
-      expect(spectator.component['ionModalElement'].style.right).toBe(
-        `${expectedHorizontalPosition}px`
-      );
+      const expectedTopPosition = parseInt(screenSize.height) - elementHeight;
+      const expectedHorizontalPosition = (parseInt(screenSize.width) - elementWidth) / 2;
+      const ionModalElement = spectator.component['ionModalElement'];
+      expect(ionModalElement.style.top).toBe(`${expectedTopPosition}px`);
+      expect(ionModalElement.style.left).toBe(`${expectedHorizontalPosition}px`);
+      expect(ionModalElement.style.right).toBe(`${expectedHorizontalPosition}px`);
     }));
 
-    it('should adapt modal size to children on resize', async(async () => {
-      spectator.element.style.height = `${elementHeight}px`;
-      spectator.element.style.overflow = 'none';
-      (spectator.query('ion-header') as HTMLElement).style.height = `${headerHeight}px`;
-      spectator.element.style.width = `${elementWidth}px`;
-
-      spectator.component.config.interactWithBackground = true;
-
+    it('should resize ion-modal to wrapper size on viewport resize', fakeAsync(() => {
       spectator.component['viewportResize'].next();
       spectator.component['viewportResize'].complete();
+      tick();
 
-      await TestHelper.waitForResizeObserver();
-      spectator.detectChanges();
-      await spectator.fixture.whenStable();
-
-      const expectedTopPosition = parseInt(TestHelper.screensize.desktop.height) - elementHeight;
-      const expectedHorizontalPosition =
-        (parseInt(TestHelper.screensize.desktop.width) - elementWidth) / 2;
-      expect(spectator.component['ionModalElement'].style.top).toBe(`${expectedTopPosition}px`);
-      expect(spectator.component['ionModalElement'].style.left).toBe(
-        `${expectedHorizontalPosition}px`
-      );
-      expect(spectator.component['ionModalElement'].style.right).toBe(
-        `${expectedHorizontalPosition}px`
-      );
+      const expectedTopPosition = parseInt(screenSize.height) - elementHeight;
+      const expectedHorizontalPosition = (parseInt(screenSize.width) - elementWidth) / 2;
+      const ionModalElement = spectator.component['ionModalElement'];
+      expect(ionModalElement.style.top).toBe(`${expectedTopPosition}px`);
+      expect(ionModalElement.style.left).toBe(`${expectedHorizontalPosition}px`);
+      expect(ionModalElement.style.right).toBe(`${expectedHorizontalPosition}px`);
     }));
   });
 
