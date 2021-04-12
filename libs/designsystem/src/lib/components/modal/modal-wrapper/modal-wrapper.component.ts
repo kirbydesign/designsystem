@@ -427,7 +427,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     if (!this.initialViewportHeight) {
       // Initial observe callback, register initial height:
       this.initialViewportHeight = entry.contentRect.height;
-      console.warn('Initial resize => return...');
       return;
     }
     this.viewportResized = entry.contentRect.height !== this.initialViewportHeight;
@@ -438,7 +437,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
         this.delayedClose();
       }
     }
-    console.warn('Emit viewportResize.next()...');
     this.viewportResize.next();
   }
 
