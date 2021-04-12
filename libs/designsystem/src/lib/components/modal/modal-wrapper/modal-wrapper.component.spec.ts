@@ -90,6 +90,23 @@ describe('ModalWrapperComponent', () => {
     });
   });
 
+  describe('viewportResize', () => {
+    it('should emit when viewport is resized', async () => {
+      spectator = modalWrapperTestBuilder.provideRealResizeObserver().build();
+      await TestHelper.waitForResizeObserver();
+
+      const viewportResizeSpy = spyOn(spectator.component['viewportResize'], 'next');
+      await TestHelper.resizeTestWindow(TestHelper.screensize.tablet);
+      await TestHelper.waitForResizeObserver();
+
+      expect(viewportResizeSpy).toHaveBeenCalled();
+    });
+
+    afterAll(() => {
+      TestHelper.resetTestWindow();
+    });
+  });
+
   describe('with interact with background', () => {
     const elementHeight = 500;
     const elementWidth = 300;
