@@ -114,6 +114,7 @@ describe('ModalWrapperComponent', () => {
     it('should resize ion-modal to wrapper size after ion-modal has been presented', fakeAsync(() => {
       spectator.component['ionModalDidPresent'].next();
       spectator.component['ionModalDidPresent'].complete();
+      console.warn('tick()...');
       tick();
 
       const expectedPosition = {
