@@ -106,6 +106,8 @@ describe('ModalWrapperComponent', () => {
       spectator.element.style.overflow = 'hidden';
       spectator.element.style.position = 'absolute';
       spectator.element.style.bottom = '0';
+      spectator.element.style.left = `calc(50% - ${elementWidth / 2}px)`;
+      spectator.element.style.backgroundColor = 'chartreuse';
       await TestHelper.waitForResizeObserver();
     });
 
@@ -114,62 +116,15 @@ describe('ModalWrapperComponent', () => {
       spectator.component['ionModalDidPresent'].complete();
       tick();
 
-      const expectedTopPosition = parseInt(screenSize.height) - elementHeight;
-      const expectedHorizontalPosition = (parseInt(screenSize.width) - elementWidth) / 2;
+      const expectedPosition = {
+        top: parseInt(screenSize.height) - elementHeight,
+        left: spectator.element.getBoundingClientRect().left,
+        right: parseInt(screenSize.width) - spectator.element.getBoundingClientRect().right,
+      };
       const ionModalElement = spectator.component['ionModalElement'];
-
-      console.warn('window.innerHeight', window.innerHeight);
-      console.warn('window.innerWidth', window.innerWidth);
-      console.warn('window.outerHeight', window.outerHeight);
-      console.warn('window.outerWidth', window.outerWidth);
-      console.warn('screen.availHeight', window.screen.availHeight);
-      console.warn('screen.availWidth', window.screen.availWidth);
-      console.warn('-----------------------------------------');
-      console.warn(
-        'documentElement.margin',
-        window.getComputedStyle(window.document.documentElement).margin
-      );
-      console.warn(
-        'documentElement.padding',
-        window.getComputedStyle(window.document.documentElement).padding
-      );
-      console.warn('body.margin', window.getComputedStyle(window.document.body).margin);
-      console.warn('body.padding', window.getComputedStyle(window.document.body).padding);
-
-      console.warn('-----------------------------------------');
-
-      console.warn('Y: offsetTop', spectator.element.offsetTop);
-      console.warn('Y: offsetHeight', spectator.element.offsetHeight);
-      console.warn('Y: BoundingClientRect.top', spectator.element.getBoundingClientRect().top);
-      console.warn(
-        'Y: BoundingClientRect.height',
-        spectator.element.getBoundingClientRect().height
-      );
-      console.warn('Y: screenSize.height', screenSize.height);
-      console.warn(
-        'Y: offsetParent.BoundingClientRect.height',
-        spectator.element.offsetParent.getBoundingClientRect().height
-      );
-      console.warn('Y: documentElement.offsetHeight', window.document.documentElement.offsetHeight);
-      console.warn('Y: body.offsetHeight', window.document.body.offsetHeight);
-
-      console.warn('-----------------------------------------');
-
-      console.warn('X: offsetLeft', spectator.element.offsetLeft);
-      console.warn('X: offsetWidth', spectator.element.offsetWidth);
-      console.warn('X: BoundingClientRect.left', spectator.element.getBoundingClientRect().left);
-      console.warn('X: BoundingClientRect.width', spectator.element.getBoundingClientRect().width);
-      console.warn('X: screenSize.width', screenSize.width);
-      console.warn(
-        'X: offsetParent.BoundingClientRect.width',
-        spectator.element.offsetParent.getBoundingClientRect().width
-      );
-      console.warn('X: documentElement.offsetWidth', window.document.documentElement.offsetWidth);
-      console.warn('X: body.offsetWidth', window.document.body.offsetWidth);
-
-      expect(ionModalElement.style.top).toBe(`${expectedTopPosition}px`);
-      expect(ionModalElement.style.left).toBe(`${expectedHorizontalPosition}px`);
-      expect(ionModalElement.style.right).toBe(`${expectedHorizontalPosition}px`);
+      expect(ionModalElement.style.top).toBe(`${expectedPosition.top}px`);
+      expect(ionModalElement.style.left).toBe(`${expectedPosition.left}px`);
+      expect(ionModalElement.style.right).toBe(`${expectedPosition.right}px`);
     }));
 
     it('should resize ion-modal to wrapper size on viewport resize', fakeAsync(() => {
