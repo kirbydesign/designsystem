@@ -150,6 +150,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
           console.warn('RESIZE MODAL');
           console.warn('----------------------------------');
           console.warn('document.scrollTop:', this.windowRef.document.documentElement.scrollTop);
+          console.warn('document.scrollLeft:', this.windowRef.document.documentElement.scrollLeft);
           console.warn('window.innerHeight:', window.innerHeight);
           console.warn('this.windowRef.innerHeight:', this.windowRef.innerHeight);
           console.warn('domRect.height:', domRect.height);
