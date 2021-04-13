@@ -41,6 +41,10 @@
  */
 .date-mask-wrapper {
   position: relative;
+
+  input {
+    color: var(--kirby-text-color-semi-dark);
+  }
 }
 
 .date-mask {
