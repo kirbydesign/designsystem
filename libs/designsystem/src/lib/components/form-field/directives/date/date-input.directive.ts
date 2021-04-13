@@ -3,7 +3,6 @@ import {
   AfterViewInit,
   Directive,
   ElementRef,
-  HostBinding,
   HostListener,
   Inject,
   LOCALE_ID,
@@ -15,9 +14,6 @@ import Inputmask from 'inputmask';
   selector: '[kirby-input][type="date"]',
 })
 export class DateInputDirective implements AfterViewInit {
-  // Ensure numeric keyboard
-  @HostBinding('attr.inputmode') inputmode = 'numeric';
-
   @HostListener('input')
   onInput() {
     this.updateMask(this.elementRef.nativeElement.value);
