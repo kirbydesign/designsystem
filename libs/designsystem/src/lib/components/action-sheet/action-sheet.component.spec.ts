@@ -1,4 +1,4 @@
-import { fakeAsync } from '@angular/core/testing';
+import { fakeAsync, tick } from '@angular/core/testing';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponent } from 'ng-mocks';
 
@@ -16,6 +16,7 @@ import { ActionSheetComponent } from './action-sheet.component';
 describe('ActionSheetComponent', () => {
   let spectator: SpectatorHost<ActionSheetComponent>;
   let popout;
+  const openDelayInMs = ActionSheetComponent.OPEN_DELAY_IN_MS;
   const modalControllerSpy = jasmine.createSpyObj('ModalController', ['showActionSheet']);
   const mockPlatformService = { isTouch: () => false };
   const createHost = createHostFactory({
@@ -91,19 +92,12 @@ describe('ActionSheetComponent', () => {
       mockPlatformService.isTouch = () => false;
     });
 
-    it('should toggle open on click', async () => {
-      expect(spectator.component['state']).toEqual(OpenState.closed);
-      expect(popout).toHaveComputedStyle({ display: 'none' });
-
+    it('should open and focus on click', fakeAsync(() => {
       spectator.click('button');
-      await TestHelper.waitForTimeout();
-      popout = spectator.query('kirby-action-sheet-popout');
-
-      expect(spectator.component['state']).toBe(+OpenState.open);
-      expect(spectator.component.isOpen).toBeTrue();
-      expect(spectator.element.classList).toContain('is-open');
-      expect(popout).toHaveComputedStyle({ display: 'block' });
-    });
+      tick(openDelayInMs);
+      expect(spectator.component.isOpen).toBeTruthy();
+      expect(spectator.element).toBeFocused();
+    }));
 
     it('should toggle closed when clicked and open', () => {
       spectator.component['state'] = OpenState.open;
