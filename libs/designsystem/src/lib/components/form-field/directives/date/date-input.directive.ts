@@ -18,9 +18,8 @@ export class DateInputDirective implements AfterViewInit {
   // Ensure numeric keyboard
   @HostBinding('attr.inputmode') inputmode = 'numeric';
 
-  @HostListener('keyup')
-  @HostListener('keydown')
-  onKeyupAndKeydown() {
+  @HostListener('input')
+  onInput() {
     this.updateMask(this.elementRef.nativeElement.value);
   }
 
