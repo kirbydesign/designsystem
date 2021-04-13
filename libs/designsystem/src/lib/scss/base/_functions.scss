@@ -86,6 +86,17 @@
   @return nth($shadow, $value-index);
 }
 
+/**
+ * Outputs all keys from map as CSS class selector list
+ */
+@function keys-to-classes($map) {
+  $classes: [];
+  @each $key in map-keys($map) {
+    $classes: append($classes, '.#{$key}', $separator: comma);
+  }
+  @return $classes;
+}
+
 @mixin slotted($selectors...) {
   ::ng-deep > {
     #{$selectors} {
