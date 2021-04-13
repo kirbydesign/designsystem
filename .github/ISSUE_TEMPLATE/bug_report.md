@@ -2,7 +2,7 @@
 name: Bug report
 about: Create a report to help us improve
 title: "[BUG]"
-labels: NOT Prioritized, NOT Verified, bug
+labels: New, NOT Prioritized, NOT Verified, bug
 assignees: ''
 
 ---
