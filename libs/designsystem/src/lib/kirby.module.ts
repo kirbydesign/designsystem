@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { Inject, InjectionToken, ModuleWithProviders, NgModule, Optional } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
-import { IMaskModule } from 'angular-imask';
 
 import { AccordionItemComponent } from './components/accordion/accordion-item.component';
 import { AccordionDirective } from './components/accordion/accordion.directive';
@@ -167,7 +166,7 @@ const exportedModules = [
 
 const exports = [...exportedModules, ...exportedDeclarations];
 
-const importedModules = [...exportedModules, OverlayModule, IMaskModule];
+const importedModules = [...exportedModules, OverlayModule];
 
 const providers = [
   ModalController,

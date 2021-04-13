@@ -35,3 +35,22 @@
   }
 }
 /* clean-css ignore:end */
+
+/*
+ * Date-mask
+ */
+.date-mask-wrapper {
+  position: relative;
+}
+
+.date-mask {
+  font-family: $form-field-input-font-family;
+  font-size: $form-field-input-font-size;
+  line-height: $form-field-input-line-height;
+  color: var(--kirby-white-contrast);
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: $form-field-input-padding 0 $form-field-input-padding $form-field-input-padding;
+  background: #fff;
+}

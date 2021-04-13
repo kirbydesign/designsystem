@@ -1,69 +1,98 @@
+import { FormatWidth, getLocaleDateFormat } from '@angular/common';
 import {
   AfterViewInit,
   Directive,
   ElementRef,
   HostBinding,
-  OnDestroy,
+  HostListener,
+  Inject,
+  LOCALE_ID,
   Renderer2,
 } from '@angular/core';
-import { IMaskDirective, IMaskFactory } from 'angular-imask';
-import { Subscription } from 'rxjs';
-
-import { DateMaskService } from './date-mask.service';
+import Inputmask from 'inputmask';
 
 @Directive({
   selector: '[kirby-input][type="date"]',
 })
-export class DateInputDirective implements AfterViewInit, OnDestroy {
-  // Add IMaskDirective
-  @HostBinding('attr.imask') imaskDirective = new IMaskDirective(
-    this.elementRef,
-    this.renderer,
-    this.iMaskFactory,
-    null
-  );
-
+export class DateInputDirective implements AfterViewInit {
   // Ensure numeric keyboard
   @HostBinding('attr.inputmode') inputmode = 'numeric';
-  iMaskAcceptSubscription: Subscription;
+
+  @HostListener('keyup')
+  @HostListener('keydown')
+  onKeyupAndKeydown() {
+    this.updateMask(this.elementRef.nativeElement.value);
+  }
+
+  private maskingElement: HTMLElement;
 
   constructor(
     private elementRef: ElementRef,
     private renderer: Renderer2,
-    private iMaskFactory: IMaskFactory,
-    private datemask: DateMaskService
+    @Inject(LOCALE_ID) private locale: string
   ) {
     // Remove type to avoid user-agent specific behaviour for [type="date"]
     this.elementRef.nativeElement.removeAttribute('type');
-
-    this.imaskDirective.imask = this.datemask;
-    this.imaskDirective.ngAfterViewInit();
   }
 
-  // TODO: ADD TESTS
-  ngAfterViewInit() {
-    const el = this.elementRef.nativeElement;
-    const wrapper = this.renderer.createElement('div');
-    const parent = el.parentElement;
-    const placeholder = this.renderer.createElement('div');
-    this.renderer.insertBefore(parent, wrapper, el);
+  ngAfterViewInit(): void {
+    this.initMask();
+  }
 
-    this.renderer.appendChild(wrapper, el);
-    this.renderer.appendChild(wrapper, placeholder);
+  private initMask(): void {
+    const inputFormat = this.getInputFormat();
+    const placeholder = this.getPlaceholder(inputFormat);
 
+    // Set initial placeholder ex. dd/mm/yyyy
+    this.renderer.setAttribute(this.elementRef.nativeElement, 'placeholder', placeholder);
+
+    // Init InputMask
+    new Inputmask('datetime', {
+      inputFormat,
+      placeholder,
+    }).mask(this.elementRef.nativeElement);
+
+    // Append input overlay, so it's possible to style typed date differntly than the date-mask
+    this.appendMaskingElement();
+  }
+
+  // Keeps order and seperator from speficied locale
+  private getInputFormat(): string {
+    const localeDateFormat = getLocaleDateFormat(this.locale, FormatWidth.Short);
+    return localeDateFormat
+      .toLowerCase()
+      .replace(/d+/, 'dd')
+      .replace(/m+/, 'mm')
+      .replace(/y+/, 'yyyy');
+  }
+
+  private getPlaceholder(inputFormat: string): string {
+    return this.locale === 'da' ? inputFormat.split('y').join('å') : inputFormat;
+  }
+
+  private appendMaskingElement(): void {
+    const wrapper = this.wrapElement(this.elementRef.nativeElement);
     this.renderer.addClass(wrapper, 'date-mask-wrapper');
-    this.renderer.addClass(placeholder, 'date-mask');
 
-    this.iMaskAcceptSubscription = this.imaskDirective.accept.subscribe((maskedValue) => {
-      const unmaskedValue = this.imaskDirective.maskRef.unmaskedValue;
-      const lastNumber = maskedValue.match(/.*?(\d)[^\d]*$/, '$1'); // get last number in string
-      placeholder.innerHTML = unmaskedValue
-        ? maskedValue.slice(0, maskedValue.lastIndexOf(lastNumber[1]) + 1)
-        : '';
-    });
+    this.maskingElement = this.renderer.createElement('div');
+    this.renderer.appendChild(wrapper, this.maskingElement);
+
+    this.renderer.addClass(this.maskingElement, 'date-mask');
   }
 
-  ngOnDestroy() {
-    this.iMaskAcceptSubscription.unsubscribe();
+  private wrapElement(element: HTMLElement): HTMLElement {
+    const wrapper = this.renderer.createElement('div');
+    const parent = element.parentElement;
+    this.renderer.insertBefore(parent, wrapper, element);
+    this.renderer.appendChild(wrapper, element);
+    return wrapper;
+  }
+
+  private updateMask(value: string): void {
+    if (!this.maskingElement) return;
+    const lastNumber = value.match(/.*?(\d)[^\d]*$/); // get last number in string
+    this.maskingElement.innerHTML = value
+      ? value.slice(0, value.lastIndexOf(lastNumber[1]) + 1)
+      : '';
   }
 }
