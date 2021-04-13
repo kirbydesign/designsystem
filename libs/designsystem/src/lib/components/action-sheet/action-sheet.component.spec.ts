@@ -4,7 +4,6 @@ import { MockComponent } from 'ng-mocks';
 
 import { PlatformService } from '../..';
 import { OpenState } from '../../models';
-import { TestHelper } from '../../testing/test-helper';
 import { WindowRef } from '../../types';
 import { ButtonComponent } from '../button/button.component';
 import { IconComponent } from '../icon';

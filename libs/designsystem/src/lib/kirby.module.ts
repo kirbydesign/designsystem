@@ -188,7 +188,6 @@ const providers = [
 const entryComponents = [
   ModalWrapperComponent,
   ModalCompactWrapperComponent,
-  ActionSheetComponent,
   ActionSheetPopoutComponent,
   FullscreenLoadingOverlayComponent,
   AlertComponent,
