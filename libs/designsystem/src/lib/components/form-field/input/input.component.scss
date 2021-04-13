@@ -8,11 +8,6 @@
     -moz-appearance: textfield;
   }
 
-  // TODO: use another selector
-  &[ng-reflect-type='date'] {
-    color: var(--kirby-text-color-semi-dark);
-  }
-
   //Chrome, Safari, Edge, Opera */
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
