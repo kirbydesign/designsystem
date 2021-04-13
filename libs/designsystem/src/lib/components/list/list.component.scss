@@ -116,7 +116,9 @@ ion-item-divider {
 
 .swipe-action {
   display: flex;
-  color: #{get-color('primary-contrast')};
+  color: #{get-color('black')};
+  background-color: transparent;
+
   @each $color-name, $color-value in $main-colors {
     .#{$color-name} {
       background-color: #{get-color($color-name)};
