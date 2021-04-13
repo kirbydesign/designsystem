@@ -8,9 +8,9 @@ import { FirstEmbeddedModalExampleComponent } from './first-embedded-modal-examp
 
 const config = {
   selector: 'cookbook-modal-example-default',
-  template: `<button kirby-button (click)="showModal()">Show modal</button>
+  template: `<button kirby-button (click)="showModal()" [disabled]="interactWithBackground">Show modal</button>
   <button kirby-button (click)="showDrawer()">Show drawer</button>
-  <button kirby-button (click)="showCompact()">Show compact</button>
+  <button kirby-button (click)="showCompact()" [disabled]="interactWithBackground">Show compact</button>
   <cookbook-example-configuration-wrapper>
       <cookbook-modal-example-configuration [(showDummyKeyboard)]="showDummyKeyboard"
       [(showPageProgress)]="showPageProgress"
@@ -26,9 +26,9 @@ const config = {
   </cookbook-example-configuration-wrapper>
   
   <ng-container *ngIf="interactWithBackground">
-    <div *ngFor="let dummyText of dummyBackgroundTexts">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non neque vitae felis ultricies imperdiet in ut orci. Aenean sodales, augue ac consectetur sodales, neque velit condimentum nulla, at ultrices dolor tortor a nunc. Proin tellus nibh, venenatis eget quam ut, blandit cursus ante. Pellentesque convallis pretium orci vitae porta.
-    </div>
+    <p *ngFor="let dummyText of dummyBackgroundTexts">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non neque vitae felis ultricies imperdiet in ut orci. Aenean sodales, augue ac consectetur sodales, neque velit condimentum nulla, at ultrices dolor tortor a nunc. Proin tellus nibh, venenatis eget quam ut, blandit cursus ante. Pellentesque convallis pretium orci vitae porta.
+    </p>
   </ng-container>
   `,
   titleTemplate: `<kirby-page-title>My Modal Title</kirby-page-title>
@@ -216,7 +216,10 @@ export class ModalExampleDefaultComponent {
   constructor(private modalController: ModalController, private window: WindowRef) {}
 
   private async showOverlay(flavor: 'modal' | 'drawer') {
-    const title = flavor === 'modal' ? 'Modal Title' : 'Drawer Title';
+    let title = flavor === 'modal' ? 'Modal Title' : 'Drawer Title';
+    if (this.customCssClass) {
+      title = flavor === 'modal' ? 'Modal with Custom CSS' : 'Drawer with Custom CSS';
+    }
     const config: ModalConfig = {
       flavor,
       component: FirstEmbeddedModalExampleComponent,
@@ -231,11 +234,12 @@ export class ModalExampleDefaultComponent {
           numberProperty: 123,
           booleanProperty: true,
         },
-        showNestedOptions: true,
+        showNestedOptions: !this.interactWithBackground,
         showDummyKeyboard: this.showDummyKeyboard,
         showPageProgress: this.showPageProgress,
         showFooter: this.showFooter,
-        showDummyContent: this.showDummyContent,
+        showDummyContent: this.showDummyContent && !this.interactWithBackground,
+        showStaticDummyContent: this.interactWithBackground,
         delayLoadDummyContent: this.delayLoadDummyContent,
         loadAdditionalContent: this.loadAdditionalContent,
         disableScroll: false,

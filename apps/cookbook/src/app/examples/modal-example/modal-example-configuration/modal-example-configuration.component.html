@@ -1,21 +1,24 @@
 <kirby-checkbox
   *ngIf="showDummyKeyboard !== undefined"
-  [checked]="showDummyKeyboard"
+  [checked]="showDummyKeyboard && !interactWithBackground"
   (checkedChange)="toggleDummyKeyboard($event)"
+  [disabled]="interactWithBackground"
   text="Show dummy keyboard"
 ></kirby-checkbox>
 
 <kirby-checkbox
   *ngIf="showPageProgress !== undefined"
-  [checked]="showPageProgress"
+  [checked]="showPageProgress && !interactWithBackground"
   (checkedChange)="toggleShowPageProgress($event)"
+  [disabled]="interactWithBackground"
   text="Show page progress"
 ></kirby-checkbox>
 
 <kirby-checkbox
   *ngIf="showFooter !== undefined"
-  [checked]="showFooter"
+  [checked]="showFooter && !interactWithBackground"
   (checkedChange)="toggleShowFooter($event)"
+  [disabled]="interactWithBackground"
   text="Show footer"
 ></kirby-checkbox>
 
@@ -30,44 +33,50 @@
   *ngIf="showDummyContent !== undefined"
   [checked]="showDummyContent"
   (checkedChange)="toggleShowDummyContent($event)"
+  [disabled]="interactWithBackground"
   text="Show dummy content"
 ></kirby-checkbox>
 
 <kirby-checkbox
   *ngIf="delayLoadDummyContent !== undefined"
-  [checked]="delayLoadDummyContent"
+  [checked]="delayLoadDummyContent && !interactWithBackground"
   (checkedChange)="toggleDelayLoadDummyContent($event)"
-  [disabled]="!showDummyContent"
+  [disabled]="!showDummyContent || interactWithBackground"
   class="indent"
   text="Delay load modal"
 ></kirby-checkbox>
 
 <kirby-checkbox
   *ngIf="loadAdditionalContent !== undefined"
-  [checked]="loadAdditionalContent"
-  (checkedChange)="showDummyContent && toggleLoadAdditionalContent($event)"
-  [disabled]="!showDummyContent"
+  [checked]="loadAdditionalContent && !interactWithBackground"
+  (checkedChange)="toggleLoadAdditionalContent($event)"
+  [disabled]="!showDummyContent || interactWithBackground"
   class="indent"
   text="Delay load additional"
 ></kirby-checkbox>
 
 <kirby-checkbox
   *ngIf="openFullHeight !== undefined"
-  [checked]="openFullHeight"
+  [checked]="openFullHeight && !interactWithBackground"
   (checkedChange)="toggleOpenFullHeight($event)"
+  [disabled]="interactWithBackground"
   text="Open in full height"
 ></kirby-checkbox>
 
-<kirby-checkbox
-  *ngIf="interactWithBackground !== undefined"
-  [checked]="interactWithBackground"
-  (checkedChange)="toggleInteractWithBackground($event)"
-  text="Interact with background (drawer only)"
-></kirby-checkbox>
+<ng-container *ngIf="interactWithBackground !== undefined || customCssClass !== undefined">
+  <kirby-divider [hasMargin]="true"></kirby-divider>
+  <p>Custom modal/drawer:</p>
+  <kirby-checkbox
+    *ngIf="interactWithBackground !== undefined"
+    [checked]="interactWithBackground"
+    (checkedChange)="toggleInteractWithBackground($event)"
+    text="Interact with background (drawer only)"
+  ></kirby-checkbox>
 
-<kirby-checkbox
-  *ngIf="customCssClass !== undefined"
-  [checked]="customCssClass"
-  (checkedChange)="toggleCustomCssClass($event)"
-  text="Add custom CSS class (drawer only)"
-></kirby-checkbox>
+  <kirby-checkbox
+    *ngIf="customCssClass !== undefined"
+    [checked]="customCssClass"
+    (checkedChange)="toggleCustomCssClass($event)"
+    text="Add custom CSS class"
+  ></kirby-checkbox>
+</ng-container>

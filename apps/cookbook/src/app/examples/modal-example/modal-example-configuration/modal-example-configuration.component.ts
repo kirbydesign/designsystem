@@ -48,6 +48,10 @@ export class ModalExampleConfigurationComponent {
 
   @HostBinding('class.checkbox-xs') true; // Extra small checkboxes
 
+  // Setting ion-checkbox.checked programatically triggers change event
+  // Use this flag in checkbox change event handlers to prevent ExpressionChangedAfterItHasBeenCheckedError
+  private preventChangeEvent = false;
+
   constructor(private window: WindowRef, zone: NgZone) {}
 
   toggleDummyKeyboard(show: boolean) {
@@ -72,11 +76,13 @@ export class ModalExampleConfigurationComponent {
   }
 
   toggleShowPageProgress(show: boolean) {
+    if (this.preventChangeEvent) return;
     this.showPageProgress = show;
     this.showPageProgressChange.emit(this.showPageProgress);
   }
 
   toggleShowFooter(show: boolean) {
+    if (this.preventChangeEvent) return;
     this.showFooter = show;
     this.showFooterChange.emit(this.showFooter);
   }
@@ -87,28 +93,38 @@ export class ModalExampleConfigurationComponent {
   }
 
   toggleDelayLoadDummyContent(show: boolean) {
+    if (this.preventChangeEvent) return;
     this.delayLoadDummyContent = show;
     this.delayLoadDummyContentChange.emit(this.delayLoadDummyContent);
   }
 
   toggleLoadAdditionalContent(show: boolean) {
+    if (this.preventChangeEvent) return;
     this.loadAdditionalContent = show;
     this.loadAdditionalContentChange.emit(this.loadAdditionalContent);
   }
 
   toggleDisableScroll(show: boolean) {
+    if (this.preventChangeEvent) return;
     this.disableScroll = show;
     this.disableScrollChange.emit(this.disableScroll);
   }
 
   toggleOpenFullHeight(show: boolean) {
+    if (this.preventChangeEvent) return;
     this.openFullHeight = show;
     this.openFullHeightChange.emit(this.openFullHeight);
   }
 
   toggleInteractWithBackground(show: boolean) {
+    this.preventChangeEvent = true;
     this.interactWithBackground = show;
+    this.toggleCustomCssClass(show);
+    if (show) {
+      this.toggleShowDummyContent(true);
+    }
     this.interactWithBackgroundChange.emit(show);
+    setTimeout(() => (this.preventChangeEvent = false));
   }
 
   toggleCustomCssClass(show: boolean) {
