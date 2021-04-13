@@ -55,7 +55,7 @@ on how to do their specific task, and explain them what the process is for that 
 If you got an idea for a component that you think should be part of Kirby you should follow these steps: 
 
 1. **Open a [new issue](https://github.com/kirbydesign/designsystem/issues/new/choose) using the "component request"-template** - please follow the guidelines on how to write [the good issue](#issue). 
-2. **Get the issue kicked-off:** <!-- Should we avoid the "kick-off"-terminology and use something as boring as "preparation" instead? It's more direct to me.  -->
+2. **Get the issue kicked-off:**
   - **Request that the issue is [UX refined](#ux-refinement) in [#kirby-guild](#getting-access-to-the-kirby-guild-slack-channel)** - do not proceed until it has been UX refined.
   - **Request that the issue is [tech refined](#tech-refinement) in [#kirby-guild](#getting-access-to-the-kirby-guild-slack-channel)** - do not proceed until it has been tech refined.
   - **Move the issue to the "Ready to do"-column in the "Kirby kan-ban board"-project** 
