@@ -93,11 +93,11 @@ describe('ModalWrapperComponent', () => {
   describe('viewportResize', () => {
     it('should emit when viewport is resized', async () => {
       spectator = modalWrapperTestBuilder.provideRealResizeObserver().build();
-      await TestHelper.waitForResizeObserver();
-
+      await TestHelper.whenTrue(() => !!spectator.component['initialViewportHeight']);
       const viewportResizeSpy = spyOn(spectator.component['viewportResize'], 'next');
+
       await TestHelper.resizeTestWindow(TestHelper.screensize.tablet);
-      await TestHelper.waitForResizeObserver();
+      await TestHelper.whenTrue(() => spectator.component['viewportResized']);
 
       expect(viewportResizeSpy).toHaveBeenCalled();
     });
@@ -776,7 +776,10 @@ describe('ModalWrapperComponent', () => {
 
   describe(`close()`, () => {
     beforeEach(() => {
-      spectator = modalWrapperTestBuilder.withEmbeddedInputComponent().build();
+      spectator = modalWrapperTestBuilder
+        .provideRealResizeObserver()
+        .withEmbeddedInputComponent()
+        .build();
     });
 
     afterEach(() => {
