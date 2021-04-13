@@ -54,27 +54,34 @@ on how to do their specific task, and explain them what the process is for that 
 <!--- Submit issue using the component request template--> 
 If you got an idea for a component that you think should be part of Kirby you should follow these steps: 
 
-1. **Open a [new issue](https://github.com/kirbydesign/designsystem/issues/new/choose) using the "component request"-template** - please follow the guidelines on how to write [the good issue](#issue). 
+1. **Open a [new issue](https://github.com/kirbydesign/designsystem/issues/new/choose) using the "component request"-template** (See guidelines on how to write [the good issue](#issue)).
 2. **Get the issue kicked-off:**
     - Request that the issue is [UX refined](#ux-refinement) in [#kirby-guild](#getting-access-to-the-kirby-guild-slack-channel); do not proceed until this is done.
     - Request that the issue is [tech refined](#tech-refinement) in [#kirby-guild](#getting-access-to-the-kirby-guild-slack-channel); do not proceed until this is done.
-    - Move the issue to the "Ready to do"-column in the "Kirby kan-ban board"-project
+    - Move the issue to the "Ready to do"-column in the "Kirby kan-ban board"-project.
 3. **Get coding:**
     - For a smooth review process read [Before you get coding](#before-you-get-coding).
-    - Assign yourself to the issue such that others may know work is being done on the issue.
-    - Create a feature branch from the [master branch](https://github.com/kirbydesign/designsystem/tree/master) 
-    - Publish a WIP implementation to Github as a draft PR and ask [#kirby-guild](#getting-access-to-the-kirby-guild-slack-channel) for feedback. This will let you know early on if you are going in the right direction.
+    - Signal to others you are working on the issue by assigning yourself to it.
+    - Create a feature branch from the [master branch](https://github.com/kirbydesign/designsystem/tree/master). 
+    - Publish a WIP implementation to Github as a draft PR and ask [#kirby-guild](#getting-access-to-the-kirby-guild-slack-channel) for feedback. <!--This will let you know early on if you are going in the right direction.-->
     - Make sure you have implemented unit tests following the [the good test](#test) guidelines.
-    - Update the [cookbook](https://cookbook.kirby.design) with examples and showcases
+    - Update the [cookbook](https://cookbook.kirby.design) with examples and showcases.
 4. **Get your changes reviewed:**
-    - Create a pull-request (see [creating pull-requests](#creating-pull-requests))
-    - Request that the pull-request is code-reviewed in #kirby-guild. Please stay responsive to comments and suggestions that might be submitted.
-    - Request that the pull-request is [UX reviewed](#ux-review)
+    - Create a pull-request (see [creating pull-requests](#creating-pull-requests)).
+    - Request that the pull-request is code-reviewed in #kirby-guild. <!--Please stay responsive to comments and suggestions that might be submitted.-->
+    - Request that the pull-request is [UX reviewed](#ux-review).
     - When the pull-request has been approved it will be automatically merged to master via [automerge](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/automatically-merging-a-pull-request).
 5. **Celebrate! 🎉**
 
 ### I have an enhancement 
-- Submit [new issue](https://github.com/kirbydesign/designsystem/issues/new/choose) using the enhancement request template
+If you have an idea for Kirby that is not a brand new component or aimed at improving code quality; then you should submit an enhancement request!
+The process is the same as submitting a component request just using another issue-template: 
+
+1. **Open a [new issue](https://github.com/kirbydesign/designsystem/issues/new/choose) using the "enhancement request"-template** (See guidelines on how to write [the good issue](#issue)).
+2. **Follow steps 2 to 5 in [i have a component request](#i-have-a-component-request).**
+
+
+<!--- Submit [new issue](https://github.com/kirbydesign/designsystem/issues/new/choose) using the enhancement request template
   - please read "[the good: issue](#issue)"
 - Contact kirby-guild to get it tech refined 
 - If you would like to implement issue: 
@@ -82,7 +89,7 @@ If you got an idea for a component that you think should be part of Kirby you sh
     - "[Setup environment and tooling for contribution](#setup-environment-and-tooling-for-contribution)" to get properly setup 
     - "[Creating pull-requests](#creating-pull-requests)" to get informed on how to most easily get your changes merged
   - assign yourself to the issue to signal to others you are working on it
-  - if you at any point have questions while solving the issue please see: [I have a question related to Kirby](#i-have-a-question-related-to-kirby)
+  - if you at any point have questions while solving the issue please see: [I have a question related to Kirby](#i-have-a-question-related-to-kirby)-->
 
 ### I would like to report a bug 
 - Submit [new issue](https://github.com/kirbydesign/designsystem/issues/new/choose) using the bug template  
