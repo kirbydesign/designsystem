@@ -120,56 +120,101 @@ describe('ModalWrapperComponent', () => {
       TestHelper.resetTestWindow();
     });
 
-    beforeEach(() => {
-      spectator = modalWrapperTestBuilder
-        .flavor('drawer')
-        .interactWithBackground()
-        .build();
-      spectator.element.style.height = `${elementHeight}px`;
-      spectator.element.style.width = `${elementWidth}px`;
-      spectator.element.style.overflow = 'hidden';
-      spectator.element.style.position = 'fixed'; // Use 'fixed' instead of 'absolute' to prevent test breaking if test window is scrolled
-      spectator.element.style.bottom = '0';
-      spectator.element.style.left = `calc(50% - ${elementWidth / 2}px)`; // Simulate horizontally centered modal
-      spectator.element.style.backgroundColor = 'charrtreuse'; // Add some background for easier debugging of test
+    describe('when flavor is modal', () => {
+      beforeEach(() => {
+        spectator = modalWrapperTestBuilder
+          .flavor('modal')
+          .interactWithBackground()
+          .build();
+        spectator.element.style.height = `${elementHeight}px`;
+        spectator.element.style.width = `${elementWidth}px`;
+        spectator.element.style.overflow = 'hidden';
+        spectator.element.style.position = 'fixed'; // Use 'fixed' instead of 'absolute' to prevent test breaking if test window is scrolled
+        spectator.element.style.bottom = '0';
+        spectator.element.style.left = `calc(50% - ${elementWidth / 2}px)`; // Simulate horizontally centered modal
+        spectator.element.style.backgroundColor = 'charrtreuse'; // Add some background for easier debugging of test
+      });
+
+      afterEach(() => {
+        // Ensure any observers are destroyed:
+        spectator.fixture.destroy();
+      });
+
+      it('should NOT resize ion-modal to wrapper size after ion-modal has been presented', fakeAsync(() => {
+        spectator.component['ionModalDidPresent'].next();
+        spectator.component['ionModalDidPresent'].complete();
+        tick();
+
+        const ionModalElement = spectator.component['ionModalElement'];
+        expect(ionModalElement.style.top).toBe('');
+        expect(ionModalElement.style.left).toBe('');
+        expect(ionModalElement.style.right).toBe('');
+      }));
+
+      it('should NOT resize ion-modal to wrapper size on viewport resize', fakeAsync(() => {
+        spectator.component['viewportResize'].next();
+        spectator.component['viewportResize'].complete();
+        tick();
+
+        const ionModalElement = spectator.component['ionModalElement'];
+        expect(ionModalElement.style.top).toBe('');
+        expect(ionModalElement.style.left).toBe('');
+        expect(ionModalElement.style.right).toBe('');
+      }));
     });
 
-    afterEach(() => {
-      // Ensure any observers are destroyed:
-      spectator.fixture.destroy();
+    describe('when flavor is drawer', () => {
+      beforeEach(() => {
+        spectator = modalWrapperTestBuilder
+          .flavor('drawer')
+          .interactWithBackground()
+          .build();
+        spectator.element.style.height = `${elementHeight}px`;
+        spectator.element.style.width = `${elementWidth}px`;
+        spectator.element.style.overflow = 'hidden';
+        spectator.element.style.position = 'fixed'; // Use 'fixed' instead of 'absolute' to prevent test breaking if test window is scrolled
+        spectator.element.style.bottom = '0';
+        spectator.element.style.left = `calc(50% - ${elementWidth / 2}px)`; // Simulate horizontally centered modal
+        spectator.element.style.backgroundColor = 'charrtreuse'; // Add some background for easier debugging of test
+      });
+
+      afterEach(() => {
+        // Ensure any observers are destroyed:
+        spectator.fixture.destroy();
+      });
+
+      it('should resize ion-modal to wrapper size after ion-modal has been presented', fakeAsync(() => {
+        spectator.component['ionModalDidPresent'].next();
+        spectator.component['ionModalDidPresent'].complete();
+        tick();
+
+        const expectedPosition = {
+          top: parseInt(screenSize.height) - elementHeight,
+          left: spectator.element.getBoundingClientRect().left,
+          right: parseInt(screenSize.width) - spectator.element.getBoundingClientRect().right,
+        };
+        const ionModalElement = spectator.component['ionModalElement'];
+        expect(ionModalElement.style.top).toBe(`${expectedPosition.top}px`);
+        expect(ionModalElement.style.left).toBe(`${expectedPosition.left}px`);
+        expect(ionModalElement.style.right).toBe(`${expectedPosition.right}px`);
+      }));
+
+      it('should resize ion-modal to wrapper size on viewport resize', fakeAsync(() => {
+        spectator.component['viewportResize'].next();
+        spectator.component['viewportResize'].complete();
+        tick();
+
+        const expectedPosition = {
+          top: parseInt(screenSize.height) - elementHeight,
+          left: spectator.element.getBoundingClientRect().left,
+          right: parseInt(screenSize.width) - spectator.element.getBoundingClientRect().right,
+        };
+        const ionModalElement = spectator.component['ionModalElement'];
+        expect(ionModalElement.style.top).toBe(`${expectedPosition.top}px`);
+        expect(ionModalElement.style.left).toBe(`${expectedPosition.left}px`);
+        expect(ionModalElement.style.right).toBe(`${expectedPosition.right}px`);
+      }));
     });
-
-    it('should resize ion-modal to wrapper size after ion-modal has been presented', fakeAsync(() => {
-      spectator.component['ionModalDidPresent'].next();
-      spectator.component['ionModalDidPresent'].complete();
-      tick();
-
-      const expectedPosition = {
-        top: parseInt(screenSize.height) - elementHeight,
-        left: spectator.element.getBoundingClientRect().left,
-        right: parseInt(screenSize.width) - spectator.element.getBoundingClientRect().right,
-      };
-      const ionModalElement = spectator.component['ionModalElement'];
-      expect(ionModalElement.style.top).toBe(`${expectedPosition.top}px`);
-      expect(ionModalElement.style.left).toBe(`${expectedPosition.left}px`);
-      expect(ionModalElement.style.right).toBe(`${expectedPosition.right}px`);
-    }));
-
-    it('should resize ion-modal to wrapper size on viewport resize', fakeAsync(() => {
-      spectator.component['viewportResize'].next();
-      spectator.component['viewportResize'].complete();
-      tick();
-
-      const expectedPosition = {
-        top: parseInt(screenSize.height) - elementHeight,
-        left: spectator.element.getBoundingClientRect().left,
-        right: parseInt(screenSize.width) - spectator.element.getBoundingClientRect().right,
-      };
-      const ionModalElement = spectator.component['ionModalElement'];
-      expect(ionModalElement.style.top).toBe(`${expectedPosition.top}px`);
-      expect(ionModalElement.style.left).toBe(`${expectedPosition.left}px`);
-      expect(ionModalElement.style.right).toBe(`${expectedPosition.right}px`);
-    }));
   });
 
   describe('close button', () => {

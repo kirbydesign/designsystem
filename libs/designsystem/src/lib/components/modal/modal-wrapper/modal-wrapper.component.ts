@@ -136,7 +136,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   private initializeResizeModalToModalWrapper() {
-    if (this.config.interactWithBackground) {
+    if (this.config.flavor === 'drawer' && this.config.interactWithBackground) {
       merge(this.ionModalDidPresent, this.viewportResize$)
         .pipe(takeUntil(this.destroy$))
         .subscribe(() => {
