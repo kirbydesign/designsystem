@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 import { IonFab, IonFabButton, IonIcon } from '@ionic/angular';
 
-import { ActionSheetPopoutComponent } from '../action-sheet/action-sheet-popout/action-sheet-popout.component';
+import { ActionSheetPopoutComponent } from '../action-sheet/';
 import { Icon } from '../icon/icon-settings';
 import { kirbyIconSettings } from '../icon/kirby-icon-settings';
 

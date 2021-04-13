@@ -5,6 +5,7 @@ import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/t
 import * as ionic from '@ionic/angular';
 import { MockComponent } from 'ng-mocks';
 
+import { ActionSheetPopoutComponent } from '../';
 import { ButtonComponent } from '../../button/button.component';
 import { CardHeaderComponent } from '../../card/card-header/card-header.component';
 import { CardComponent } from '../../card/card.component';
@@ -13,8 +14,6 @@ import { ListItemColorDirective } from '../../list/directives/list-item-color.di
 import { ListComponent } from '../../list/list.component';
 import { GroupByPipe } from '../../list/pipes/group-by.pipe';
 import { SpinnerComponent } from '../../spinner/spinner.component';
-
-import { ActionSheetPopoutComponent } from './action-sheet-popout.component';
 
 describe('ActionSheetPopoutComponent', () => {
   let component: ActionSheetPopoutComponent;

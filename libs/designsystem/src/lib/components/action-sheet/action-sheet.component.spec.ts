@@ -9,8 +9,7 @@ import { ButtonComponent } from '../button/button.component';
 import { IconComponent } from '../icon';
 import { ModalController } from '../modal';
 
-import { ActionSheetPopoutComponent } from './action-sheet-popout/action-sheet-popout.component';
-import { ActionSheetComponent } from './action-sheet.component';
+import { ActionSheetComponent, ActionSheetPopoutComponent } from './';
 
 describe('ActionSheetComponent', () => {
   let spectator: SpectatorHost<ActionSheetComponent>;
