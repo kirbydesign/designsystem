@@ -44,9 +44,11 @@ symphatize with the process -->
 - General description of the contribution model
 
 ### Before you get coding
-You should as a minimum skim through the "[the good](#the-good)"-section. This is because we are a lot of people working together on this project, all with varying prefrences both in terms of how we work and code. At the same time we strive for consistency in the Kirby codebase which might lead to some frustrations during code-reviews. In an effort to avoid this; we have attempted to specify our preferences on various subjects in that section. 
+Skim through the "[the good](#the-good)"-section. We are a lot of people working together on this project, all with varying prefrences both in terms of how we work and code. This might lead to frustrations during code-reviews. In an effort to avoid this and be transparent; we have to specified our preferences on various subjects in that section. 
 
-In the end, it might just save you some time. 
+Alternative ways of doing things are not wrong. But we strive for consistency across the Kirby codebase. 
+
+You should also get properly setup before you write any code. To do so have a look at: "[Setup environment and tooling for contribution](#setup-environment-and-tooling-for-contribution)".
 
 <!-- The following "I have/would" sections has the role of easily guiding the reader 
 on how to do their specific task, and explain them what the process is for that task -->
@@ -62,7 +64,7 @@ If you got an idea for a component that you think should be part of Kirby you sh
 3. **Get coding:**
     - For a smooth review process read [before you get coding](#before-you-get-coding).
     - Signal to others you are working on the issue by assigning yourself.
-    - Create a feature branch from the [master branch](https://github.com/kirbydesign/designsystem/tree/master). 
+    - Create a "feature"-branch from the [master branch](https://github.com/kirbydesign/designsystem/tree/master). 
     - Publish a WIP implementation to Github as a draft PR and ask [#kirby-guild](#getting-access-to-the-kirby-guild-slack-channel) for feedback. <!--This will let you know early on if you are going in the right direction.-->
     - Make sure you have implemented unit tests following the [the good test](#test) guidelines.
     - Update the [cookbook](https://cookbook.kirby.design) with examples and showcases.
@@ -78,30 +80,22 @@ If you have an idea for Kirby that is not a brand new component or aimed at impr
 The process is the same as submitting a component request just using another issue-template: 
 
 1. **Open a [new issue](https://github.com/kirbydesign/designsystem/issues/new/choose) using the "enhancement request"-template** (See guidelines on how to write [the good issue](#issue)).
-2. **Follow steps 2 to 5 in "[i have a component request](#i-have-a-component-request)".**
-
-
-<!--- Submit [new issue](https://github.com/kirbydesign/designsystem/issues/new/choose) using the enhancement request template
-  - please read "[the good: issue](#issue)"
-- Contact kirby-guild to get it tech refined 
-- If you would like to implement issue: 
-  -please read: 
-    - "[Setup environment and tooling for contribution](#setup-environment-and-tooling-for-contribution)" to get properly setup 
-    - "[Creating pull-requests](#creating-pull-requests)" to get informed on how to most easily get your changes merged
-  - assign yourself to the issue to signal to others you are working on it
-  - if you at any point have questions while solving the issue please see: [I have a question related to Kirby](#i-have-a-question-related-to-kirby)-->
+2. **Follow steps 2 to 5 in "[I have a component request](#i-have-a-component-request)".**
 
 ### I would like to report a bug 
-- Submit [new issue](https://github.com/kirbydesign/designsystem/issues/new/choose) using the bug template  
-  - please read "[the good: issue](#issue)"
-- Contact kirby-guild to get it verified 
-  - we verify because it might be a feature not a bug 🐛
-- If you would like to implement issue: 
-  -please read: 
-    - "[Setup environment and tooling for contribution](#setup-environment-and-tooling-for-contribution)" to get properly setup 
-    - "[Creating pull-requests](#creating-pull-requests)" to get informed on how to most easily get your changes merged
-  - assign yourself to the issue to signal to others you are working on it
-  - if you at any point have questions while solving the issue please see: [I have a question related to Kirby](#i-have-a-question-related-to-kirby)
+If you have found a bug in Kirby you should follow these steps: 
+1. **Report it by opening a [new issue](https://github.com/kirbydesign/designsystem/issues/new/choose) using the "bug report"-template** (See guidelines on how to write [the good issue](#issue)).
+2. **Get the bug verified** 
+    - To make sure the bug is not intended behaviour contact [#kirby-guild](#getting-access-to-the-kirby-guild-slack-channel) to have it verified; do not proceed until this is done. 
+3. **Reproduce the bug**: 
+    - Signal to others you are working on the issue by assigning yourself.
+    - Create a "fix"-branch from the [master branch](https://github.com/kirbydesign/designsystem/tree/master). 
+    - Create a test that reproduces the bug following "[the good test](#test)"-guidelines. 
+4. **Get coding:** 
+    - For a smooth review process read [before you get coding](#before-you-get-coding).
+    - Write code to fix the bug. 
+    - If relevant to the changes made, you should update the [cookbook](https://cookbook.kirby.design) with examples and showcases.
+5. **Follow steps 4 and 5 in "[I have a component request](#i-have-a-component-request)".**
 
 ## Setup environment and tooling for contribution
 <!-- The following section is responsible for teaching people how to get setup with 
