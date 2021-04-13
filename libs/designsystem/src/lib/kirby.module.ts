@@ -17,6 +17,7 @@ import { CardComponent } from './components/card/card.component';
 import { ChartComponent } from './components/chart/chart.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { ChipComponent } from './components/chip/chip.component';
+import { DateInputDirective } from './components/form-field/directives/date/date-input.directive';
 import { DividerComponent } from './components/divider/divider.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { EmptyStateComponent } from './components/empty-state/empty-state.component';
@@ -116,6 +117,7 @@ const exportedDeclarations = [
   BadgeComponent,
   SizeDirective,
   ThemeColorDirective,
+  DateInputDirective,
   SlideButtonComponent,
   ToggleComponent,
   EmptyStateComponent,
