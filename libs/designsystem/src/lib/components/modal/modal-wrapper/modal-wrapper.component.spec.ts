@@ -1,4 +1,4 @@
-import { async, fakeAsync, tick } from '@angular/core/testing';
+import { fakeAsync, tick } from '@angular/core/testing';
 import { IonContent } from '@ionic/angular';
 import { Spectator } from '@ngneat/spectator';
 
