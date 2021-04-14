@@ -99,6 +99,7 @@ $button-width: (
   user-select: none;
   vertical-align: middle;
   white-space: nowrap;
+  position: relative;
 
   // we default to 'md' size.
   font-size: font-size('s');
@@ -133,6 +134,13 @@ $button-width: (
 
   &.sm {
     @include button-sm;
+    &:after {
+      content: '';
+      position: absolute;
+      height: $fat-finger-size;
+      min-width: $fat-finger-size;
+      width: 100%;
+    }
   }
 
   &.lg {
