@@ -157,3 +157,13 @@
     @content;
   }
 }
+
+@mixin touch-area() {
+  &:after {
+    content: '';
+    position: absolute;
+    height: $fat-finger-size;
+    min-width: $fat-finger-size;
+    width: 100%;
+  }
+}

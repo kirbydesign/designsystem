@@ -134,13 +134,7 @@ $button-width: (
 
   &.sm {
     @include button-sm;
-    &:after {
-      content: '';
-      position: absolute;
-      height: $fat-finger-size;
-      min-width: $fat-finger-size;
-      width: 100%;
-    }
+    @include touch-area();
   }
 
   &.lg {
