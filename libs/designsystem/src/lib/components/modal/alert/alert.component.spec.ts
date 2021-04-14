@@ -140,7 +140,7 @@ describe('AlertComponent with okBtn', () => {
   });
 
   it('should have success colors on button', () => {
-    const okButton = element.getElementsByClassName('ok-btn')[0];
+    const okButton = element.querySelector('[kirby-button]');
 
     expect(okButton).toHaveComputedStyle({
       'background-color': getColor('success'),
