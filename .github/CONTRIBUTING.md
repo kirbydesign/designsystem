@@ -6,9 +6,9 @@ If you at any point have any questions please read: [I have a question related t
 **Beware:** We reserve the right to close issues and pull-requests that does not follow the steps outlined in [the contribution model](#the-contribution-model). This is not because we want to be mean or micro-manage the way things are done - but a project of this size requires some consistency in the way we cooperate in order to be manageable. 
 
 - [The contribution model](#the-contribution-model)
-  - [I have a feature request](#i-have-a-feature-request)
-  - [I have an enhancement](#i-have-an-enhancement)
-  - [I would like to report a bug](#i-would-like-to-report-a-bug)
+  - [Checklist: I have a component request](#checklist:-i-have-a-feature-request)
+  - [Checklist: I have an enhancement](#checklist:-i-have-an-enhancement)
+  - [Checklist I would like to report a bug](#checklist:-i-would-like-to-report-a-bug)
 - [Setup environment and tooling for contribution](#setup-environment-and-tooling-for-contribution)
   - [Clone and install repository](#clone-and-install-repository)
   - [Node](#node)
@@ -34,7 +34,7 @@ If you at any point have any questions please read: [I have a question related t
 ## Introduction to the contribution model
 <!-- Introduction and motivation -->
 Despite Kirby stemming from an internal Bank Data project - it has been decided to open source it, such that others than team Kirby can contribute to it. 
-Allowing for Kirby to be spread to multiple projects without team Kirby being the bottle neck. 
+Allowing for Kirby to be used in multiple projects without team Kirby being the bottleneck. 
 
 If you have a problem, an issue you want resolved, or even got brand new ideas for components. Well. There is no need to sit around and wait for team Kirby to get it implemented. 
 You can contribute yourself! And no matter your role, you can probably contribute with something. May it be a helpful comment or a bug report.
@@ -50,15 +50,15 @@ In broad strokes the process is: submit an issue, get it refined, implement it, 
 Actionable checklists for these steps can be found further down in this section. The following highlight some of these steps to explain what they are and why they exist: 
 
 <!-- Why we do UX refinement?-->
-**UX Refinement**: If an issue involves visual changes then UX refinement must take place. This consists of UXers planning how the issue can be solved in a way that aligns with the design system. The `NOT UX-refined`-label will be removed from the issue by team Kirby, once it has been UX refined. If a pull-request with visual changes is submitted for an issue that has not been UX refined; there is a good chance that the UX review process may result in a bunch of changes. 
+**UX Refinement**: If an issue involves visual changes then UX refinement must take place. This consists of UXers planning how the issue can be solved in a way that aligns with the design system. The `NOT UX refined`-label will be removed from the issue by team Kirby, once it has been done. If a pull-request with visual changes is submitted for an issue that has not been UX refined; there is a good chance that the UX review process may result in a bunch of changes. 
 
 <!--- Why do we do Tech refinement? -->
-**Tech Refinement**: This should happen before any code is written for an issue. Here it is discussed and agreed upon how an issue should be implemented the best. How long it takes depends on the scope of the issue. For small issues it might be nothing more than an agreement via a direct message. Other times it is a full-blown meeting with multiple participants. The `NOT tech-refined` will be removed from the issue by team Kirby once it has been done. If a pull-request is submitted for an issue that has not been tech refined; changes and problems that could have been tackled from the beginning, might arise from the code-review. 
+**Tech Refinement**: This should happen before any code is written for an issue. Here it is discussed and agreed on how an issue should be implemented the best. How long it takes depends on the scope of the issue. For small issues it might be nothing more than an agreement via a direct message. Other times it is a full-blown meeting with multiple participants. The `NOT Tech refined`-label will be removed from the issue by team Kirby once it has been done. If a pull-request is submitted for an issue that has not been tech refined; changes and problems that could have been tackled from the beginning, might arise from the code-review. 
 
-**Publish a WIP draft**: We encourage contributors to publish a draft pull-request with a WIP implementation of their issue to get feedback. This can advantageously be done before tests are written. By doing this misunderstandings and issues can be tackled early on; here they are often easier to correct. If this is not done, they might not be discovered until code-review takes place. Tests might have to be changed. So therefore we encourage you to use the opportunity to get some feedback. 
+**Publish a WIP draft**: We encourage contributors to publish a draft pull-request with a WIP implementation of their issue to get feedback. This can advantageously be done before tests are written. By doing this misunderstandings and issues can be tackled early on; here they are often easier to correct. If this is not done, they might not be discovered until the code-review. Tests might have to be changed. So therefore we encourage contributors to use the opportunity to get some feedback. 
 
 <!-- Why do a self-review? -->
-**Self-review**: This consists of code-reviewing your own pull-request, following guidelines found in: **[LINK HERE]()**. This is your chance to catch any low-hanging fruits and common issues before the reviewer does. If this is not done, an unneccessar amount of minor changes might be required during code review. This wastes both yours and the reviewers time. 
+**Self-review**: This consists of code-reviewing your own pull-request, following guidelines found in: [the good self review](#self-review). This is your chance to catch any low-hanging fruits and common issues before the reviewer does. If this is not done, an unneccessar amount of minor changes might be required during code review. This wastes both yours and the reviewers time. 
 
 <!-- Why we do UX reviews? -->
 **UX review**: If the implementation of the issue resulted in visual changes - then it has to be UX reviewed. This is to make sure that the introduced changes align with the design system. We strive to have every issue that introduces visual changes UX reviewed. If this is not done and the changes are merged to master, we might recieve issues about components not being properly aligned with the design system anymore from the users of Kirby. 
@@ -68,7 +68,7 @@ Our experience is that pull-requests with a troublesome and drawn out review pro
 <!-- - Issues for trackability and history -->
 
 ### Before you get coding
-Skim through the "[the good](#the-good)"-section. We are a lot of people working together on this project, all with varying prefrences both in terms of how we work and code. This might lead to frustrations during code-reviews. In an effort to avoid this and be transparent; we have to specified our preferences on various subjects in that section. 
+Skim through the "[the good](#the-good)"-section. We are a lot of people working together on this project, all with varying prefrences both in terms of how we work and code. This might lead to frustrations during code-reviews. In an effort to avoid this and be transparent; we have specified our preferences on various subjects in that section. 
 
 Alternative ways of doing things are not wrong. But we strive for consistency across the Kirby codebase. 
 
@@ -76,49 +76,47 @@ You should also get properly setup before you write any code. To do so have a lo
 
 <!-- The following "I have/would" sections has the role of easily guiding the reader 
 on how to do their specific task, and explain them what the process is for that task -->
-### I have a component request 
+### Checklist: I have a component request 
 <!--- Submit issue using the component request template--> 
 If you got an idea for a component that you think should be part of Kirby you should follow these steps: 
 
 1. **Open a [new issue](https://github.com/kirbydesign/designsystem/issues/new/choose) using the "component request"-template** (See guidelines on how to write [the good issue](#issue)).
-2. **Get the issue kicked-off:**
+2. **Refinement:**
     - Request that the issue is [UX refined](#ux-refinement) in [#kirby-guild](#getting-access-to-the-kirby-guild-slack-channel); do not proceed until this is done.
     - Request that the issue is [tech refined](#tech-refinement) in [#kirby-guild](#getting-access-to-the-kirby-guild-slack-channel); do not proceed until this is done.
     - Move the issue to the "Ready to do"-column in the "Kirby kan-ban board"-project.
-3. **Get coding:**
+3. **Implementation:**
     - For a smooth review process read [before you get coding](#before-you-get-coding).
     - Signal to others you are working on the issue by assigning yourself.
     - Create a "feature"-branch from the [master branch](https://github.com/kirbydesign/designsystem/tree/master). 
     - Publish a WIP implementation to Github as a draft PR and ask [#kirby-guild](#getting-access-to-the-kirby-guild-slack-channel) for feedback. <!--This will let you know early on if you are going in the right direction.-->
     - Make sure you have implemented unit tests following the [the good test](#test) guidelines.
     - Update the [cookbook](https://cookbook.kirby.design) with examples and showcases.
-4. **Get your changes reviewed:**
+4. **Review:**
+    - Do a [self-review](#self-review). 
     - Create a pull-request (see [creating pull-requests](#creating-pull-requests)).
-    - Request that the pull-request is code-reviewed in #kirby-guild. <!--Please stay responsive to comments and suggestions that might be submitted.-->
+    - Request that the pull-request is code-reviewed in [#kirby-guild](#getting-access-to-the-kirby-guild-slack-channel).
     - Request that the pull-request is [UX reviewed](#ux-review).
     - When the pull-request has been approved it will be automatically merged to master via [automerge](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/automatically-merging-a-pull-request).
 5. **Celebrate! 🎉**
 
-### I have an enhancement 
+### Checklist: I have an enhancement 
 If you have an idea for Kirby that is not a brand new component or aimed at improving code quality; then you should submit an enhancement request!
 The process is the same as submitting a component request just using another issue-template: 
 
 1. **Open a [new issue](https://github.com/kirbydesign/designsystem/issues/new/choose) using the "enhancement request"-template** (See guidelines on how to write [the good issue](#issue)).
 2. **Follow steps 2 to 5 in "[I have a component request](#i-have-a-component-request)".**
 
-### I would like to report a bug 
+### Checklist: I would like to report a bug 
 If you have found a bug in Kirby you should follow these steps: 
 1. **Report it by opening a [new issue](https://github.com/kirbydesign/designsystem/issues/new/choose) using the "bug report"-template** (See guidelines on how to write [the good issue](#issue)).
 2. **Get the bug verified** 
     - To make sure the bug is not intended behaviour contact [#kirby-guild](#getting-access-to-the-kirby-guild-slack-channel) to have it verified; do not proceed until this is done. 
-3. **Reproduce the bug**: 
+3. **Implementation:**: 
     - Signal to others you are working on the issue by assigning yourself.
     - Create a "fix"-branch from the [master branch](https://github.com/kirbydesign/designsystem/tree/master). 
     - Create a test that reproduces the bug following "[the good test](#test)"-guidelines. 
-4. **Get coding:** 
-    - For a smooth review process read [before you get coding](#before-you-get-coding).
-    - Write code to fix the bug. 
-    - If relevant to the changes made, you should update the [cookbook](https://cookbook.kirby.design) with examples and showcases.
+    - Write code to fix the bug
 5. **Follow steps 4 and 5 in "[I have a component request](#i-have-a-component-request)".**
 
 ## Setup environment and tooling for contribution
