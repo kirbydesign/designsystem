@@ -5,10 +5,10 @@ If you at any point have any questions please read: [I have a question related t
 
 **Beware:** We reserve the right to close issues and pull-requests that does not follow the steps outlined in [the contribution model](#the-contribution-model). This is not because we want to be mean or micro-manage the way things are done - but a project of this size requires some consistency in the way we cooperate in order to be manageable. 
 
-- [The contribution model](#the-contribution-model)
-  - [Checklist: I have a component request](#checklist:-i-have-a-feature-request)
-  - [Checklist: I have an enhancement](#checklist:-i-have-an-enhancement)
-  - [Checklist I would like to report a bug](#checklist:-i-would-like-to-report-a-bug)
+- [Introduction to the contribution model](#introduction-to-the-contribution-model)
+  - [Checklist: I have a component request](#checklist-i-have-a-component-request)
+  - [Checklist: I have an enhancement](#checklist-i-have-an-enhancement)
+  - [Checklist I would like to report a bug](#checklist-i-would-like-to-report-a-bug)
 - [Setup environment and tooling for contribution](#setup-environment-and-tooling-for-contribution)
   - [Clone and install repository](#clone-and-install-repository)
   - [Node](#node)
@@ -86,11 +86,11 @@ If you got an idea for a component that you think should be part of Kirby you sh
     - Request that the issue is [tech refined](#tech-refinement) in [#kirby-guild](#getting-access-to-the-kirby-guild-slack-channel); do not proceed until this is done.
     - Move the issue to the "Ready to do"-column in the "Kirby kan-ban board"-project.
 3. **Implementation:**
-    - For a smooth review process read [before you get coding](#before-you-get-coding).
+    - Make sure you have read: [before you get coding](#before-you-get-coding).
     - Signal to others you are working on the issue by assigning yourself.
     - Create a "feature"-branch from the [master branch](https://github.com/kirbydesign/designsystem/tree/master). 
     - Publish a WIP implementation to Github as a draft PR and ask [#kirby-guild](#getting-access-to-the-kirby-guild-slack-channel) for feedback. <!--This will let you know early on if you are going in the right direction.-->
-    - Make sure you have implemented unit tests following the [the good test](#test) guidelines.
+    - Make sure you have implemented tests following the "[the good test](#test)"-guidelines.
     - Update the [cookbook](https://cookbook.kirby.design) with examples and showcases.
 4. **Review:**
     - Do a [self-review](#self-review). 
@@ -104,7 +104,7 @@ If you got an idea for a component that you think should be part of Kirby you sh
 If you have an idea for Kirby that is not a brand new component or aimed at improving code quality; then you should submit an enhancement request!
 The process is the same as submitting a component request just using another issue-template: 
 
-1. **Open a [new issue](https://github.com/kirbydesign/designsystem/issues/new/choose) using the "enhancement request"-template** (See guidelines on how to write [the good issue](#issue)).
+1. **Open a [new issue](https://github.com/kirbydesign/designsystem/issues/new/choose) using the "enhancement request"-template** (See guidelines on how to write: "[the good issue](#issue)").
 2. **Follow steps 2 to 5 in "[I have a component request](#i-have-a-component-request)".**
 
 ### Checklist: I would like to report a bug 
