@@ -20,9 +20,9 @@ export class SlideDirective {}
   selector: 'kirby-slides',
   template: `
     <ion-slides [options]="slidesOptions" #ionslides (ionSlideDidChange)="onSlideChanged($event)">
-      <ion-slide *ngFor="let slide of slides; let i = index">
+      <ion-slide *ngFor="let slide of slides">
         <ng-container
-          *ngTemplateOutlet="slideTemplate; context: { $implicit: slide, index: i }"
+          *ngTemplateOutlet="slideTemplate; context: { $implicit: slide }"
         ></ng-container>
       </ion-slide>
     </ion-slides>
@@ -44,10 +44,7 @@ export class SlidesComponent implements AfterViewInit {
 
   onSlideChanged(e: any) {
     this.ionSlides.getActiveIndex().then((selectedIndex) => {
-      this.selectedSlide.emit({
-        slide: this.slides[selectedIndex],
-        index: selectedIndex,
-      });
+      this.selectedSlide.emit(this.slides[selectedIndex]);
     });
   }
 

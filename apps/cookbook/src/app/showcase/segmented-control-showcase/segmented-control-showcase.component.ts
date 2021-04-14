@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+
+import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
 
 @Component({
   selector: 'cookbook-segmented-control-showcase',
@@ -7,25 +8,25 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   styleUrls: ['./segmented-control-showcase.component.scss'],
 })
 export class SegmentedControlShowcaseComponent {
-  properties: ApiDescriptionProperty[] = [
+  properties: ShowcaseProperty[] = [
     {
       name: 'mode',
       description: 'The mode of the segmented control.',
       defaultValue: 'default',
-      type: ['default', 'chip'],
+      inputValues: ['default', 'chip'],
     },
     {
       name: 'size',
       description: 'Sets the size of the segmented control. Only applies to `default` mode.',
       defaultValue: 'md',
-      type: ['sm', 'md'],
+      inputValues: ['sm', 'md'],
     },
     {
       name: 'items',
       description:
         'An array of `SegmentItem[]` representing the set of segment elements within the control.',
       defaultValue: '',
-      type: [
+      inputValues: [
         `[{
   id: string,
   text: string,
@@ -36,21 +37,21 @@ export class SegmentedControlShowcaseComponent {
   }
 }]`,
       ],
-      preserveTypeWhitespaces: true,
+      preserveInputValuesWhitespaces: true,
     },
     {
       name: 'value',
       description:
         'Gets/sets the selected segment. Returns the selected segment if there is one, otherwise `undefined``.',
       defaultValue: 'undefined',
-      type: ['SegmentItem'],
+      inputValues: ['SegmentItem'],
     },
     {
       name: 'selectedIndex',
       description:
         'Gets/sets the index of the selected segment within the `segmentItems` array. The value -1 indicates no element is selected.',
       defaultValue: 'undefined',
-      type: ['number'],
+      inputValues: ['number'],
     },
   ];
 }

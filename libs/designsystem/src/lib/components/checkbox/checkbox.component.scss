@@ -4,11 +4,6 @@ $border-radius: 6px;
 $checkbox-icon-size: size('m');
 $spacing-to-edge: map-get($checkbox-radio-spacing, 'to-edge');
 $spacing-to-label: map-get($checkbox-radio-spacing, 'to-label');
-$default-checkbox-radio-size: map-get($checkbox-radio-sizes, 'md');
-
-@function getVerticalPadding($target-height) {
-  @return ($target-height - $checkbox-icon-size) / 2;
-}
 
 :host {
   display: inline-block;
@@ -81,25 +76,21 @@ $default-checkbox-radio-size: map-get($checkbox-radio-sizes, 'md');
 
   &.has-label {
     display: block;
-    line-height: line-height('n');
-    white-space: pre-line;
 
     .wrapper {
       position: relative;
       display: inline-flex;
-      align-items: flex-start;
+      align-items: center;
       vertical-align: top;
-      padding: getVerticalPadding($default-checkbox-radio-size) 0;
       padding-right: $spacing-to-label; // Ensure same padding on right side of label
+      min-height: map-get($checkbox-radio-sizes, 'md');
     }
 
     @each $size, $height in $checkbox-radio-sizes {
       :host-context(.checkbox-#{$size}),
       &.#{$size} {
         .wrapper {
-          $verticalPadding: getVerticalPadding($height);
-          padding-top: $verticalPadding;
-          padding-bottom: $verticalPadding;
+          min-height: $height;
         }
       }
     }

@@ -11,7 +11,6 @@ import { ChartExampleModule } from './chart-example/chart-example.module';
 import { CheckboxExampleModule } from './checkbox-example/checkbox-example.module';
 import { DropdownExampleModule } from './dropdown-example/dropdown-example.module';
 import { COMPONENT_DECLARATIONS } from './examples.common';
-import { ExamplesSharedModule } from './examples.shared.module';
 import { FlagExampleModule } from './flag-example/flag-example.module';
 import { FormFieldExamplesModule } from './form-field-example/form-field-example.module';
 import { ItemExampleModule } from './item-example/item-example.module';
@@ -27,7 +26,6 @@ import { SegmentedControlExampleModule } from './segmented-control-example/segme
 import { ToggleButtonExampleModule } from './toggle-button-example/toggle-button-example.module';
 
 const IMPORTS = [
-  ExamplesSharedModule,
   FormFieldExamplesModule,
   ItemExampleModule,
   ListExamplesModule,

@@ -10,32 +10,8 @@ defaults:
     shell: bash
 
 jobs:
-  build_check:
-    name: Check if build is needed
-    runs-on: ubuntu-latest
-    outputs:
-      #Build on PRs, new releases & changes not including 'libs' (which gets build as part of new release)
-      do_build: ${{ github.event_name == 'pull_request' || steps.event_type.outputs.is_new_release == 'true' || steps.filter.outputs.libs == 'false' }}
-    steps:
-      - name: Check for new release
-        id: event_type
-        env:
-          IS_NEW_RELEASE: ${{ github.event_name != 'pull_request' && contains(github.event.head_commit.message, 'Bumping version to') }}
-        run: echo "::set-output name=is_new_release::$IS_NEW_RELEASE"
-      - name: Checkout repo
-        uses: actions/checkout@v2
-      - name: Check modified files
-        id: filter
-        uses: dorny/paths-filter@v2.9.2
-        with:
-          filters: |
-            libs:
-              - 'libs/**'
-
   lint_and_unittest:
     name: Lint & unit test
-    needs: build_check
-    if: ${{ needs.build_check.outputs.do_build == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -55,8 +31,6 @@ jobs:
 
   build_kirby:
     name: Build Kirby lib
-    needs: build_check
-    if: ${{ needs.build_check.outputs.do_build == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -72,6 +46,7 @@ jobs:
 
   deploy_to_cookbook:
     name: Deploy cookbook
+    if: github.event_name == 'pull_request' || contains(github.event.head_commit.message, 'Bumping version to')
     needs: [lint_and_unittest, build_kirby]
     runs-on: ubuntu-latest
     env:

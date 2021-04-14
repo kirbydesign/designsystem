@@ -185,9 +185,7 @@ export class ModalNavigationService {
   ): Observable<boolean> {
     return navigationEnd$.pipe(
       pairwise(),
-      filter(([prevNavigation, _]) =>
-        modalRouteMap.has(prevNavigation.urlAfterRedirects.split('?')[0])
-      ), // Only emit if previous route was modal
+      filter(([prevNavigation, _]) => modalRouteMap.has(prevNavigation.urlAfterRedirects)), // Only emit if previous route was modal
       map(([_, currentNavigation]) => {
         const isNewModalRoute = this.isModalRoute(currentNavigation.urlAfterRedirects);
         // Deactivate modal route if new route is NOT modal OR is outside current parent route:

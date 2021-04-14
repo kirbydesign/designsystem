@@ -1,11 +1,10 @@
 <cookbook-header (menuToggle)="onMenuToggle($event)" [isMenuOpen]="isMenuOpen"></cookbook-header>
-
-<cookbook-side-nav
-  (menuToggle)="onMenuToggle($event)"
-  [isMenuOpen]="isMenuOpen"
-></cookbook-side-nav>
-<section class="main">
-  <router-outlet></router-outlet>
-</section>
-
-<cookbook-footer></cookbook-footer>
+<main>
+  <cookbook-side-nav
+    (menuToggle)="onMenuToggle($event)"
+    [isMenuOpen]="isMenuOpen"
+  ></cookbook-side-nav>
+  <section>
+    <router-outlet></router-outlet>
+  </section>
+</main>

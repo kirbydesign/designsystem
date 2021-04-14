@@ -1,28 +1,18 @@
-import {
-  FormControl,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
 import { IonRadioGroup } from '@ionic/angular';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { Observable, of } from 'rxjs';
 
-import { DesignTokenHelper } from '../../../helpers/design-token-helper';
 import { TestHelper } from '../../../testing/test-helper';
 import { ListItemTemplateDirective } from '../../list/list.directive';
 import { RadioComponent } from '../radio.component';
 
 import { RadioGroupComponent } from './radio-group.component';
 
-const { getColor } = DesignTokenHelper;
-
 describe('RadioGroupComponent', () => {
   const createHost = createHostFactory({
     component: RadioGroupComponent,
     declarations: [RadioComponent, ListItemTemplateDirective],
-    imports: [TestHelper.ionicModuleForTest, FormsModule, ReactiveFormsModule],
+    imports: [TestHelper.ionicModuleForTest],
   });
 
   describe('with plain binding', () => {
@@ -186,7 +176,7 @@ describe('RadioGroupComponent', () => {
                   expect(onChangeSpy).toHaveBeenCalledWith(dataScenario.items[0]);
                 });
 
-                it('should update the value of ion-radio-group when the bound field is updated', () => {
+                it('should update the value of ion-radio-group when the bound field is updated', async () => {
                   spectator.setHostInput('selected', dataScenario.items[2]);
                   expect(ionRadioGroup.value).toEqual(dataScenario.items[2]);
                 });
@@ -201,7 +191,7 @@ describe('RadioGroupComponent', () => {
                   expect(radioChecked(2)).toBeTrue();
                 });
 
-                it('should not emit change event when the bound field is updated', () => {
+                it('should not emit change event when the bound field is updated', async () => {
                   const onChangeSpy = spyOn(spectator.component.valueChange, 'emit');
                   spectator.setHostInput('selected', dataScenario.items[2]);
                   expect(onChangeSpy).not.toHaveBeenCalled();
@@ -321,7 +311,7 @@ describe('RadioGroupComponent', () => {
                   expect(onChangeSpy).toHaveBeenCalledWith(dataScenario.items[0]);
                 });
 
-                it('should update the value of ion-radio-group when the bound field is updated', () => {
+                it('should update the value of ion-radio-group when the bound field is updated', async () => {
                   spectator.setHostInput('selected', dataScenario.items[2]);
                   expect(ionRadioGroup.value).toEqual(dataScenario.items[2]);
                 });
@@ -336,7 +326,7 @@ describe('RadioGroupComponent', () => {
                   expect(radioChecked(2)).toBeTrue();
                 });
 
-                it('should not emit change event when the bound field is updated', () => {
+                it('should not emit change event when the bound field is updated', async () => {
                   const onChangeSpy = spyOn(spectator.component.valueChange, 'emit');
                   spectator.setHostInput('selected', dataScenario.items[2]);
                   expect(onChangeSpy).not.toHaveBeenCalled();
@@ -553,7 +543,7 @@ describe('RadioGroupComponent', () => {
                       },
                     });
 
-                  it('should set the value to the corresponding data item', () => {
+                  it('should set the value to the corresponding data item', async () => {
                     spectator = createHostFromScenario();
 
                     expect(spectator.component.value).toEqual(
@@ -705,573 +695,6 @@ describe('RadioGroupComponent', () => {
         expect(radios[1].disabled).toBeFalse();
         expect(radios[2].disabled).toBeTrue();
       });
-    });
-  });
-
-  describe('implementing ControlValueAccessor interface', () => {
-    const items = ['Bacon', 'Sausage', 'Onion'];
-    const defaultSelectedIndex = 1;
-
-    let ionRadioGroup: IonRadioGroup;
-    let ionRadioElements: HTMLIonRadioElement[];
-    let radios: RadioComponent[];
-
-    let spectator: SpectatorHost<
-      RadioGroupComponent,
-      {
-        items: string[];
-      }
-    >;
-
-    beforeEach(async () => {
-      spectator = createHost(
-        `<kirby-radio-group [items]="items">
-        </kirby-radio-group>`,
-        {
-          hostProps: {
-            items: items,
-          },
-        }
-      );
-
-      ionRadioGroup = spectator.query(IonRadioGroup);
-      const ionRadioGroupElement = spectator.query('ion-radio-group');
-      await TestHelper.whenReady(ionRadioGroupElement);
-
-      radios = spectator.queryAll(RadioComponent);
-      ionRadioElements = spectator.queryAll('ion-radio');
-      await TestHelper.whenReady(ionRadioElements);
-    });
-
-    describe('when writeValue() function is invoked', () => {
-      it('should select the radio', () => {
-        const expectedItem = items[defaultSelectedIndex];
-        spectator.component.writeValue(expectedItem);
-        expect(spectator.component.value).toEqual(expectedItem);
-      });
-
-      it('should not emit change event', () => {
-        const onChangeSpy = spyOn(spectator.component.valueChange, 'emit');
-        spectator.component.writeValue(items[defaultSelectedIndex]);
-        expect(onChangeSpy).not.toHaveBeenCalled();
-      });
-    });
-
-    it('should invoke callback from registerOnChange() function on change', () => {
-      const expectedItem = items[defaultSelectedIndex];
-      const onChangeSpy = jasmine.createSpy('_onChangeCallback');
-      spectator.component.registerOnChange(onChangeSpy);
-      spectator.component._onChange(expectedItem);
-      expect(onChangeSpy).toHaveBeenCalledWith(expectedItem);
-    });
-
-    it('should invoke callback from registerOnTouched() function on blur', () => {
-      const onTouchedSpy = jasmine.createSpy('_onTouched');
-      spectator.component.registerOnTouched(onTouchedSpy);
-      ionRadioElements[0].focus();
-      ionRadioElements[0].blur();
-      expect(onTouchedSpy).toHaveBeenCalled();
-    });
-
-    describe('when setDisabledState() function is invoked', () => {
-      it('should set disabled = false when invoked with false', () => {
-        spectator.component.disabled = true;
-        spectator.component.setDisabledState(false);
-        expect(spectator.component.disabled).toBeFalsy();
-      });
-
-      it('should set disabled = true when invoked with true', () => {
-        spectator.component.disabled = false;
-        spectator.component.setDisabledState(true);
-        expect(spectator.component.disabled).toBeTruthy();
-      });
-    });
-  });
-
-  describe('when used in a form', () => {
-    const radioBorderDefault = {
-      'border-width': '1px',
-      'border-color': getColor('semi-dark'),
-    };
-    const radioBorderErrorState = {
-      'border-width': '1px',
-      'border-color': getColor('danger'),
-    };
-
-    let ionRadioGroup: IonRadioGroup;
-    let ionRadioElements: HTMLIonRadioElement[];
-    let radios: RadioComponent[];
-
-    function radioChecked(index: number): boolean {
-      return ionRadioElements[index].getAttribute('aria-checked') === 'true';
-    }
-
-    const items = ['Bacon', 'Sausage', 'Onion'];
-    const defaultSelectedIndex = 1;
-
-    describe('with a template-driven form', () => {
-      let spectator: SpectatorHost<
-        RadioGroupComponent,
-        {
-          items: string[];
-          selected: string;
-        }
-      >;
-
-      describe('and no pre-selected item', () => {
-        beforeEach(async () => {
-          spectator = createHost(
-            `<kirby-radio-group [items]="items" [(ngModel)]="selected">
-            </kirby-radio-group>`,
-            {
-              hostProps: {
-                items: items,
-                selected: null,
-              },
-            }
-          );
-
-          ionRadioGroup = spectator.query(IonRadioGroup);
-          const ionRadioGroupElement = spectator.query('ion-radio-group');
-          await TestHelper.whenReady(ionRadioGroupElement);
-
-          radios = spectator.queryAll(RadioComponent);
-          ionRadioElements = spectator.queryAll('ion-radio');
-          await TestHelper.whenReady(ionRadioElements);
-        });
-
-        describe('selection', () => {
-          it('should update the bound ngModel when clicking a radio item', () => {
-            spectator.click(ionRadioElements[0]);
-            expect(spectator.hostComponent.selected).toEqual(items[0]);
-          });
-
-          it('should update the value of ion-radio-group when the bound ngModel is updated', async () => {
-            const newSelectedValue = items[0];
-            await setSelectedOnHostComponent(newSelectedValue);
-            expect(ionRadioGroup.value).toEqual(newSelectedValue);
-          });
-
-          it('should update the selected radio when the bound ngModel is updated', async () => {
-            const selectedIndex = 0;
-            await setSelectedOnHostComponent(items[selectedIndex]);
-            // Wait for radio checked attribute to be updated;
-            await TestHelper.whenTrue(() => radioChecked(selectedIndex));
-
-            expect(radioChecked(selectedIndex)).toBeTrue();
-          });
-
-          it('should not emit change event when the bound ngModel is updated', async () => {
-            const onChangeSpy = spyOn(spectator.component.valueChange, 'emit');
-            await setSelectedOnHostComponent(items[0]);
-            expect(onChangeSpy).not.toHaveBeenCalled();
-          });
-        });
-      });
-
-      describe('and pre-selected item', () => {
-        beforeEach(async () => {
-          spectator = createHost(
-            `<kirby-radio-group [items]="items" [(ngModel)]="selected">
-            </kirby-radio-group>`,
-            {
-              hostProps: {
-                items: items,
-                selected: items[defaultSelectedIndex],
-              },
-            }
-          );
-
-          await TestHelper.waitForTimeout();
-          spectator.detectChanges();
-
-          ionRadioGroup = spectator.query(IonRadioGroup);
-          const ionRadioGroupElement = spectator.query('ion-radio-group');
-          await TestHelper.whenReady(ionRadioGroupElement);
-
-          radios = spectator.queryAll(RadioComponent);
-          ionRadioElements = spectator.queryAll('ion-radio');
-          await TestHelper.whenReady(ionRadioElements);
-          await TestHelper.whenTrue(() => radioChecked(defaultSelectedIndex));
-        });
-
-        describe('selection', () => {
-          let newSelectedIndex: number;
-
-          it('should update the bound ngModel when clicking a different radio item', () => {
-            newSelectedIndex = defaultSelectedIndex + 1;
-            spectator.click(ionRadioElements[newSelectedIndex]);
-            expect(spectator.hostComponent.selected).toEqual(items[newSelectedIndex]);
-          });
-
-          it('should update the value of ion-radio-group when the bound ngModel is updated', async () => {
-            const newSelectedValue = items[defaultSelectedIndex + 1];
-            await setSelectedOnHostComponent(items[newSelectedValue]);
-            expect(ionRadioGroup.value).toEqual(items[newSelectedValue]);
-          });
-
-          it('should update the selected radio when the bound ngModel is updated', async () => {
-            newSelectedIndex = defaultSelectedIndex + 1;
-            await setSelectedOnHostComponent(items[newSelectedIndex]);
-            // Wait for radio checked attribute to be updated;
-            await TestHelper.whenTrue(() => radioChecked(newSelectedIndex));
-
-            expect(radioChecked(defaultSelectedIndex)).toBeFalse();
-            expect(radioChecked(newSelectedIndex)).toBeTrue();
-          });
-
-          it('should not emit change event when the bound ngModel is updated', async () => {
-            const onChangeSpy = spyOn(spectator.component.valueChange, 'emit');
-            newSelectedIndex = defaultSelectedIndex + 1;
-            await setSelectedOnHostComponent(items[newSelectedIndex]);
-            expect(onChangeSpy).not.toHaveBeenCalled();
-          });
-        });
-      });
-
-      describe('error state when ngModel is required', () => {
-        beforeEach(async () => {
-          spectator = createHost(
-            `<kirby-radio-group [items]="items" [(ngModel)]="selected" required>
-            </kirby-radio-group>`,
-            {
-              hostProps: {
-                items: items,
-                selected: null,
-              },
-            }
-          );
-
-          ionRadioGroup = spectator.query(IonRadioGroup);
-          const ionRadioGroupElement = spectator.query('ion-radio-group');
-          await TestHelper.whenReady(ionRadioGroupElement);
-
-          radios = spectator.queryAll(RadioComponent);
-          ionRadioElements = spectator.queryAll('ion-radio');
-          await TestHelper.whenReady(ionRadioElements);
-        });
-
-        describe('when ngModel is not null', () => {
-          beforeEach(async () => {
-            await setSelectedOnHostComponent(items[defaultSelectedIndex]);
-          });
-
-          describe('and component has been touched', () => {
-            beforeEach(() => {
-              ionRadioElements[0].focus();
-              ionRadioElements[0].blur();
-              spectator.detectChanges();
-            });
-
-            it('should not be in error state', () => {
-              ionRadioElements.forEach((ionRadioElement) => {
-                const radioIcon = ionRadioElement.shadowRoot.querySelector('[part=container]');
-                expect(radioIcon).toHaveComputedStyle(radioBorderDefault);
-              });
-            });
-          });
-
-          describe('and component has not been touched', () => {
-            it('should not be in error state', () => {
-              ionRadioElements.forEach((ionRadioElement) => {
-                const radioIcon = ionRadioElement.shadowRoot.querySelector('[part=container]');
-                expect(radioIcon).toHaveComputedStyle(radioBorderDefault);
-              });
-            });
-          });
-        });
-
-        describe('when ngModel is null', () => {
-          describe('and component has been touched', () => {
-            beforeEach(() => {
-              ionRadioElements[0].focus();
-              ionRadioElements[0].blur();
-              spectator.detectChanges();
-            });
-
-            it('should be in error state', () => {
-              ionRadioElements.forEach((ionRadioElement) => {
-                const radioIcon = ionRadioElement.shadowRoot.querySelector('[part=container]');
-                expect(radioIcon).toHaveComputedStyle(radioBorderErrorState);
-              });
-            });
-          });
-
-          describe('and component has not been touched', () => {
-            it('should not be in error state', () => {
-              ionRadioElements.forEach((ionRadioElement) => {
-                const radioIcon = ionRadioElement.shadowRoot.querySelector('[part=container]');
-                expect(radioIcon).toHaveComputedStyle(radioBorderDefault);
-              });
-            });
-          });
-        });
-      });
-
-      async function setSelectedOnHostComponent(value: any): Promise<void> {
-        spectator.setHostInput('selected', value);
-        await TestHelper.waitForTimeout();
-        spectator.detectChanges();
-      }
-    });
-
-    describe('with a reactive form', () => {
-      let favoriteFoodControl: FormControl;
-
-      let spectator: SpectatorHost<
-        RadioGroupComponent,
-        {
-          favoriteFoodForm: FormGroup;
-          items: string[];
-        }
-      >;
-
-      describe('and no pre-selected item', () => {
-        beforeEach(async () => {
-          favoriteFoodControl = new FormControl();
-
-          spectator = createHost(
-            `<form [formGroup]="favoriteFoodForm">
-                <kirby-radio-group [items]="items" formControlName="favoriteFood">
-                </kirby-radio-group>
-            </form>`,
-            {
-              hostProps: {
-                favoriteFoodForm: new FormGroup({
-                  favoriteFood: favoriteFoodControl,
-                }),
-                items: items,
-              },
-            }
-          );
-
-          ionRadioGroup = spectator.query(IonRadioGroup);
-          const ionRadioGroupElement = spectator.query('ion-radio-group');
-          await TestHelper.whenReady(ionRadioGroupElement);
-
-          radios = spectator.queryAll(RadioComponent);
-          ionRadioElements = spectator.queryAll('ion-radio');
-          await TestHelper.whenReady(ionRadioElements);
-        });
-
-        describe('selection', () => {
-          it('should update the value of ion-radio-group when the bound form control is set to a value', async () => {
-            const newFavoriteFood = items[0];
-            await setFormControlValue(newFavoriteFood);
-
-            expect(ionRadioGroup.value).toEqual(newFavoriteFood);
-          });
-
-          it('should update the selected radio when the bound form control is set to a value', async () => {
-            const selectedIndex = 0;
-            await setFormControlValue(items[selectedIndex]);
-            // Wait for radio checked attribute to be updated;
-            await TestHelper.whenTrue(() => radioChecked(selectedIndex));
-
-            expect(radioChecked(selectedIndex)).toBeTrue();
-          });
-
-          it('should not emit change event when the bound form control is set to a value', async () => {
-            const onChangeSpy = spyOn(spectator.component.valueChange, 'emit');
-            await setFormControlValue(items[0]);
-            expect(onChangeSpy).not.toHaveBeenCalled();
-          });
-        });
-      });
-
-      describe('and pre-selected item', () => {
-        beforeEach(async () => {
-          favoriteFoodControl = new FormControl(items[defaultSelectedIndex]);
-
-          spectator = createHost(
-            `<form [formGroup]="favoriteFoodForm">
-                <kirby-radio-group [items]="items" formControlName="favoriteFood">
-                </kirby-radio-group>
-            </form>`,
-            {
-              hostProps: {
-                favoriteFoodForm: new FormGroup({
-                  favoriteFood: favoriteFoodControl,
-                }),
-                items: items,
-              },
-            }
-          );
-
-          ionRadioGroup = spectator.query(IonRadioGroup);
-          const ionRadioGroupElement = spectator.query('ion-radio-group');
-          await TestHelper.whenReady(ionRadioGroupElement);
-
-          radios = spectator.queryAll(RadioComponent);
-          ionRadioElements = spectator.queryAll('ion-radio');
-          await TestHelper.whenReady(ionRadioElements);
-        });
-
-        describe('selection', () => {
-          it('should have selected index corresponding to the selected data item', () => {
-            expect(spectator.component.selectedIndex).toBe(defaultSelectedIndex);
-          });
-
-          it('should update the bound form control when clicking a different radio item', () => {
-            spectator.click(ionRadioElements[defaultSelectedIndex]);
-            expect(favoriteFoodControl.value).toEqual(items[defaultSelectedIndex]);
-          });
-
-          it('should update the value of ion-radio-group when the bound form control is updated', async () => {
-            const newControlValue = items[defaultSelectedIndex + 1];
-            await setFormControlValue(newControlValue);
-            expect(ionRadioGroup.value).toEqual(newControlValue);
-          });
-
-          it('should update the selected radio when the bound form control is updated', async () => {
-            const newSelectedIndex = defaultSelectedIndex + 1;
-            await setFormControlValue(items[newSelectedIndex]);
-            // Wait for radio checked attribute to be updated;
-            await TestHelper.whenTrue(() => radioChecked(newSelectedIndex));
-
-            expect(radioChecked(defaultSelectedIndex)).toBeFalse();
-            expect(radioChecked(newSelectedIndex)).toBeTrue();
-          });
-
-          it('should not emit change event when the bound form control is updated', async () => {
-            const onChangeSpy = spyOn(spectator.component.valueChange, 'emit');
-            await setFormControlValue(items[defaultSelectedIndex + 1]);
-            expect(onChangeSpy).not.toHaveBeenCalled();
-          });
-        });
-
-        describe('enablement', () => {
-          it('should not disable the radio items by default', () => {
-            radios.forEach((each) => expect(each.disabled).toBeUndefined());
-          });
-
-          it('should disable the radio items when the bound form control is disabled', () => {
-            favoriteFoodControl.disable();
-            spectator.detectChanges();
-            radios.forEach((each) => expect(each.disabled).toBeTrue());
-          });
-
-          it('should re-enable the radio items when the bound form control is enabled', () => {
-            favoriteFoodControl.disable();
-            spectator.detectChanges();
-            radios.forEach((each) => expect(each.disabled).toBeTrue());
-
-            favoriteFoodControl.enable();
-            spectator.detectChanges();
-            radios.forEach((each) => expect(each.disabled).toBeUndefined());
-          });
-
-          it('should disable the radios if radios are set after the bound form control is disabled', async () => {
-            spectator.setHostInput('items', null);
-            favoriteFoodControl.disable();
-            await TestHelper.waitForTimeout();
-            spectator.detectChanges();
-
-            spectator.setHostInput('items', items);
-            await TestHelper.waitForTimeout();
-            spectator.detectChanges();
-
-            radios = spectator.queryAll(RadioComponent);
-            radios.forEach((each) => expect(each.disabled).toBeTrue());
-          });
-        });
-      });
-
-      describe('error state when the bound form control is required', () => {
-        beforeEach(async () => {
-          favoriteFoodControl = new FormControl(null, Validators.required);
-
-          spectator = createHost(
-            `<form [formGroup]="favoriteFoodForm">
-                <kirby-radio-group [items]="items" formControlName="favoriteFood">
-                </kirby-radio-group>
-            </form>`,
-            {
-              hostProps: {
-                favoriteFoodForm: new FormGroup({
-                  favoriteFood: favoriteFoodControl,
-                }),
-                items: items,
-              },
-            }
-          );
-
-          ionRadioGroup = spectator.query(IonRadioGroup);
-          const ionRadioGroupElement = spectator.query('ion-radio-group');
-          await TestHelper.whenReady(ionRadioGroupElement);
-
-          radios = spectator.queryAll(RadioComponent);
-          ionRadioElements = spectator.queryAll('ion-radio');
-          await TestHelper.whenReady(ionRadioElements);
-        });
-
-        describe('when the value of the bound form control is not null', () => {
-          beforeEach(async () => {
-            await setFormControlValue(items[defaultSelectedIndex]);
-          });
-
-          describe('and the component has been touched', () => {
-            beforeEach(() => {
-              ionRadioElements[0].focus();
-              ionRadioElements[0].blur();
-              spectator.detectChanges();
-            });
-
-            it('should not be in error state', () => {
-              ionRadioElements.forEach((ionRadioElement) => {
-                const radioIcon = ionRadioElement.shadowRoot.querySelector('[part=container]');
-                expect(radioIcon).toHaveComputedStyle(radioBorderDefault);
-              });
-            });
-          });
-
-          describe('and the component has not been touched', () => {
-            it('should not be in error state', () => {
-              ionRadioElements.forEach((ionRadioElement) => {
-                const radioIcon = ionRadioElement.shadowRoot.querySelector('[part=container]');
-                expect(radioIcon).toHaveComputedStyle(radioBorderDefault);
-              });
-            });
-          });
-        });
-
-        describe('when the value of the bound form control is null', () => {
-          describe('and the component has been touched', () => {
-            beforeEach(() => {
-              ionRadioElements[0].focus();
-              ionRadioElements[0].blur();
-              spectator.detectChanges();
-            });
-
-            it('should be in error state', () => {
-              ionRadioElements.forEach((ionRadioElement) => {
-                const radioIcon = ionRadioElement.shadowRoot.querySelector('[part=container]');
-                expect(radioIcon).toHaveComputedStyle(radioBorderErrorState);
-              });
-            });
-          });
-
-          describe('and the component has not been touched', () => {
-            beforeEach(async () => {
-              await TestHelper.waitForTimeout();
-              spectator.detectChanges();
-            });
-
-            it('should not be in error state', () => {
-              ionRadioElements.forEach((ionRadioElement) => {
-                const radioIcon = ionRadioElement.shadowRoot.querySelector('[part=container]');
-                expect(radioIcon).toHaveComputedStyle(radioBorderDefault);
-              });
-            });
-          });
-        });
-      });
-
-      async function setFormControlValue(value: any): Promise<void> {
-        favoriteFoodControl.setValue(value);
-        await TestHelper.waitForTimeout();
-        spectator.detectChanges();
-      }
     });
   });
 });

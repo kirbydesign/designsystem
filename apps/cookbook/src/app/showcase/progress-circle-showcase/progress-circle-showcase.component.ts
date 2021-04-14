@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+
+import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
 
 @Component({
   selector: 'cookbook-progress-circle-showcase',
@@ -7,24 +8,24 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   styleUrls: ['./progress-circle-showcase.component.scss'],
 })
 export class ProgressCircleShowcaseComponent {
-  properties: ApiDescriptionProperty[] = [
+  properties: ShowcaseProperty[] = [
     {
       name: 'value',
       description: 'Sets the progress percentage',
       defaultValue: '0',
-      type: ['[0 - 100]'],
+      inputValues: ['[0 - 100]'],
     },
     {
       name: 'size',
       description: 'Sets the size of the circle',
       defaultValue: 'md',
-      type: ['sm', 'md', 'lg'],
+      inputValues: ['sm', 'md', 'lg'],
     },
     {
       name: 'themeColor',
       description: 'The color of the progress stroke',
       defaultValue: 'success',
-      type: ['success', 'warning', 'danger'],
+      inputValues: ['success', 'warning', 'danger'],
     },
   ];
 }

@@ -6,11 +6,8 @@ import { PageFitHeadingExampleComponent } from '~/app/examples/page-example/fit-
 import { PageFixedFooterTabExampleComponent } from '~/app/examples/page-example/fixed-footer-tabs/tab/fixed-footer-tab-example.component';
 import { PageFixedTitleAndActionsExampleComponent } from '~/app/examples/page-example/fixed-title-and-actions/page-fixed-title-and-actions-example.component';
 import { PageSimpleExampleComponent } from '~/app/examples/page-example/simple/page-simple-example.component';
-import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
-import {
-  ApiDescriptionProperty,
-  ApiDescriptionPropertyColumns,
-} from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+
+import { ShowcaseProperty } from './../../shared/showcase-properties/showcase-property';
 
 @Component({
   selector: 'cookbook-page-showcase',
@@ -29,63 +26,63 @@ export class PageShowcaseComponent {
   fixedActionsExampleHtml: string = PageFixedTitleAndActionsExampleComponent.fixedActionsTemplate;
   customTitleExampleHtml: string = PageCustomTitleExampleComponent.template;
   advancedExampleHtml: string = PageAdvancedExampleComponent.template;
-  properties: ApiDescriptionProperty[] = [
+  properties: ShowcaseProperty[] = [
     {
       name: 'title',
       description:
         'The title of the page. Will stick in the toolbar - including action buttons, if any - when the page is scrolled below the title.',
-      type: ['string'],
+      inputValues: ['string'],
     },
     {
       name: 'toolbarTitle',
       description:
         'An alternative text for the title in the toolbar. If `toolbarTitle` is specified instead of `title`, the page title and actions will only be shown in the toolbar and not on the page itself.',
-      type: ['string'],
+      inputValues: ['string'],
     },
     {
       name: 'titleAlignment',
       description: 'Horizontal alignment of the page title within the content pane.',
       defaultValue: 'left',
-      type: ['left', 'center', 'right'],
+      inputValues: ['left', 'center', 'right'],
     },
     {
       name: 'defaultBackHref',
       description:
         'Back navigation only shows if any navigation has been done. To make it show even after page-reload provide the page with a `defaultBackHref` e.g. "/".',
-      type: ['string'],
+      inputValues: ['string'],
     },
     {
       name: 'hideBackButton',
       description: 'Hides the back button in the toolbar.',
       defaultValue: 'false',
-      type: ['true', 'false'],
+      inputValues: ['true', 'false'],
     },
     {
       name: 'tabBarBottomHidden',
       description: 'Hides the tab bar when placed in the bottom.',
       defaultValue: 'false',
-      type: ['true', 'false'],
+      inputValues: ['true', 'false'],
     },
   ];
-  events: ApiDescriptionEvent[] = [
+  events: ShowcaseProperty[] = [
     {
       name: 'enter',
       description: 'Emitted when the page has animated into view',
-      signature: 'func',
+      inputValues: ['func'],
     },
     {
       name: 'leave',
       description: 'Emitted when leaving the page',
-      signature: 'func',
+      inputValues: ['func'],
     },
   ];
 
-  layoutColumns: ApiDescriptionPropertyColumns = {
-    name: 'Tag',
-    description: 'Description',
+  layoutColumns = {
+    Name: 'Tag',
+    Description: 'Description',
   };
 
-  layouts: ApiDescriptionProperty[] = [
+  layouts: ShowcaseProperty[] = [
     {
       name: '<kirby-page>',
       description:
@@ -103,14 +100,13 @@ export class PageShowcaseComponent {
     },
   ];
 
-  directiveColumns: ApiDescriptionPropertyColumns = {
-    name: 'Name',
-    description: 'Description',
-    type: '(Optional) Configuration',
-    default: 'Default',
+  directiveColumns = {
+    Name: 'Name',
+    Description: 'Description',
+    Type: '(Optional) Configuration',
   };
 
-  directives: ApiDescriptionProperty[] = [
+  directives: ShowcaseProperty[] = [
     {
       name: '*kirbyPageTitle',
       description:
@@ -125,30 +121,30 @@ export class PageShowcaseComponent {
       name: '*kirbyPageActions',
       description:
         'The `*kirbyPageActions` directive can be applied to any host or container element which will then be shown at the top of the page. The default configuration `{sticky: true}` makes the host element stick in the toolbar when the page is scrolled below the title. To avoid this it can be configured with `{sticky: false}` instead. When configured with `{fixed: true}` the element will be fixed and only shown in the toolbar.',
-      type: ['{sticky: boolean}', '{fixed: boolean}'],
+      inputValues: ['{sticky: boolean}', '{fixed: boolean}'],
       defaultValue: '{sticky: true}',
     },
     {
       name: '*kirbyPageContent',
       description:
         'The `kirbyPageContent` directive can be applied to any host or container element which will then be rendered as the content of the page. When configured with `{fixed: true}` the element will be fixed when scrolling the page. An example use case for this could be a Floating Action Button.',
-      type: ['{fixed: boolean}'],
+      inputValues: ['{fixed: boolean}'],
     },
   ];
 
-  cssColumns: ApiDescriptionPropertyColumns = {
-    name: 'Name',
-    description: 'Description',
-    type: 'Type',
-    default: 'Default',
+  cssColumns = {
+    Name: 'Name',
+    Description: 'Description',
+    Type: 'Type',
+    Default: 'Default',
   };
 
-  cssProperties: ApiDescriptionProperty[] = [
+  cssProperties: ShowcaseProperty[] = [
     {
       name: '--kirby-page-title-margin-bottom',
       description: 'Spacing between page title and page content.',
       defaultValue: `size('xl')`,
-      type: ['unit'],
+      inputValues: ['unit'],
     },
   ];
 

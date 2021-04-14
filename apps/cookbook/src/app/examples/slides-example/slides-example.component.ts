@@ -54,14 +54,11 @@ export class SlidesExampleComponent {
     },
   ];
 
-  data: any;
-  selectedSlideIndex: number;
+  activeSlide = this.slides[0];
 
-  getDataFromActiveSlide(activeSlide: { selectedData: any; selectedSlideIndex: number }) {
-    this.data = activeSlide.selectedData;
-    this.selectedSlideIndex = activeSlide.selectedSlideIndex;
-
-    console.log('Output: ', activeSlide);
+  getDataFromActiveSlide(e: any) {
+    // Output onSlideDidChange
+    console.log('Output: ', e);
   }
 
   changeSlide() {

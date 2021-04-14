@@ -3,7 +3,6 @@ import { IonContent } from '@ionic/angular';
 import { Spectator } from '@ngneat/spectator';
 
 import { KirbyAnimation } from '../../../animation/kirby-animation';
-import { DesignTokenHelper } from '../../../helpers';
 import { TestHelper } from '../../../testing/test-helper';
 import { IconComponent } from '../../icon/icon.component';
 

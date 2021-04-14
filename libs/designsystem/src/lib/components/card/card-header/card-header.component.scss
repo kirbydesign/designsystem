@@ -5,17 +5,14 @@
   border-top-left-radius: $border-radius;
   border-top-right-radius: $border-radius;
   text-align: center;
-  padding: var(--kirby_internal_card-header-padding, size('s'));
-  color: var(--kirby-card-header-color);
-  background-color: var(--kirby-card-header-background-color);
+  padding: size('s');
+  background-color: transparent;
 }
 
 h2 {
   font-size: font-size('n');
   font-weight: font-weight('normal');
-  margin: 0 0 var(--kirby_internal_card-header-margin-bottom, size('xxs'));
-  line-height: var(--kirby_internal_card-header-line-height, line-height('l'));
-
+  margin: 0 0 size('xxs');
   &.bold {
     font-weight: font-weight('bold');
   }
@@ -25,38 +22,4 @@ h4 {
   font-size: font-size('s');
   margin: 0;
   font-weight: font-weight('normal');
-}
-
-// Flagged card headers
-
-// key = level, value = color-name
-$notification-levels: (
-  'info': 'semi-light',
-);
-
-@each $color-name, $color-value in $notification-colors {
-  $notification-levels: map-merge(
-    (
-      $color-name: $color-name,
-    ),
-    $notification-levels
-  );
-}
-
-@each $level, $color-name in $notification-levels {
-  :host(.#{$level}) {
-    --kirby-card-header-background-color: #{get-color($color-name)};
-    --kirby-card-header-color: #{get-color($color-name + '-contrast')};
-  }
-}
-
-$notification-levels-class-selectors: keys-to-classes($notification-levels);
-
-:host(#{$notification-levels-class-selectors}) {
-  --kirby_internal_card-header-padding: #{size('xxxxs')} #{size('xxs')};
-
-  h2 {
-    --kirby_internal_card-header-line-height: #{line-height('n')};
-    --kirby_internal_card-header-margin-bottom: 0;
-  }
 }

@@ -1,3 +1,4 @@
+import { highlightElement } from 'prismjs';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -8,7 +9,6 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
-import { highlightElement } from 'prismjs';
 
 export function stringifyPretty(value: any) {
   return JSON.stringify(value, null, 2)
@@ -26,7 +26,6 @@ export function stringifyPretty(value: any) {
 })
 export class CodeViewerComponent implements AfterViewInit, OnChanges {
   @Input() language: 'html' | 'css' | 'scss' | 'js' | 'ts' | 'typescript';
-  @Input() inlineLabel = false;
   code: string;
   languageTitle: string;
   supportedLanguages = {

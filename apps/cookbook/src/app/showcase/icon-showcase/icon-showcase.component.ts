@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 import { defaultIcons, Sizes } from '@kirbydesign/designsystem';
+
+import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
 
 @Component({
   selector: 'cookbook-icon-showcase',
@@ -18,24 +19,24 @@ export class IconShowcaseComponent {
 <kirby-icon size="SIZE"></kirby-icon>`;
   sizes = Sizes;
 
-  properties: ApiDescriptionProperty[] = [
+  properties: ShowcaseProperty[] = [
     {
       name: 'name',
       description: 'Name of the icon that you want to show.',
       defaultValue: 'cog',
-      type: defaultIcons,
+      inputValues: defaultIcons,
     },
     {
       name: 'size',
       description: 'Determines the size of the icon.',
       defaultValue: 'sm',
-      type: Object.values(this.sizes),
+      inputValues: Object.values(this.sizes),
     },
     {
       name: 'themeColor',
       description: 'Sets which color the icon should use from the theme palette.',
       defaultValue: 'null',
-      type: [
+      inputValues: [
         'primary',
         'secondary',
         'tertiary',
@@ -51,7 +52,7 @@ export class IconShowcaseComponent {
       name: 'customName',
       description: 'Used for custom icons.',
       defaultValue: 'null',
-      type: ['string'],
+      inputValues: ['string'],
     },
   ];
 }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
-import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+
+import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
 
 declare var require: any;
 
@@ -15,32 +15,26 @@ export class SlidesShowcaseComponent {
 
   exampleTS: string = require('!raw-loader!../../examples/slides-example/slides-example.component.ts')
     .default;
-  properties: ApiDescriptionProperty[] = [
+  properties: ShowcaseProperty[] = [
     {
       name: 'slidesOptions',
       description:
         'Configuration object for ion-slides. View documentation at: [https://ionicframework.com/docs/v3/api/components/slides/Slides/#input-properties] for available props',
       defaultValue: '',
-      type: ['object'],
+      inputValues: ['object'],
     },
     {
       name: 'slides',
-      description: 'Object array holding the data to be shown',
+      description: 'Objectarray holding the data to be shown',
       defaultValue: '',
-      type: ['DataArray'],
-    },
-    {
-      name: 'activeSlideIndex',
-      description: 'The index of the active slide',
-      defaultValue: '0',
-      type: ['number'],
+      inputValues: ['DataArray'],
     },
   ];
-  events: ApiDescriptionEvent[] = [
+  events: ShowcaseProperty[] = [
     {
       name: 'selectedSlide',
-      description: 'Emits active slide´s data and index',
-      signature: 'func',
+      description: 'Emits active slide',
+      inputValues: ['func'],
     },
   ];
 }

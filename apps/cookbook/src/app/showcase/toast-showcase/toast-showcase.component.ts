@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+
+import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
 
 declare var require: any;
 
@@ -10,25 +11,25 @@ declare var require: any;
 export class ToastShowcaseComponent {
   exampleHtml: string = require('!raw-loader!../../examples/toast-example/toast-example.component.html')
     .default;
-  properties: ApiDescriptionProperty[] = [
+  properties: ShowcaseProperty[] = [
     {
       name: 'message',
       description: 'Sets the message for the toast',
       defaultValue: 'null',
-      type: ['string'],
+      inputValues: ['string'],
     },
     {
       name: 'messageType',
       description:
         'Message type defines which color the toast will have. There are three different toast types: success (green), warning (yellow), danger (red).',
       defaultValue: 'success',
-      type: ['success', 'warning', 'danger'],
+      inputValues: ['success', 'warning', 'danger'],
     },
     {
       name: 'durationInMs',
       description: '(Optional) Duration in milliseconds before the toast dismisses automatically.',
       defaultValue: '4000',
-      type: ['number'],
+      inputValues: ['number'],
     },
   ];
 }

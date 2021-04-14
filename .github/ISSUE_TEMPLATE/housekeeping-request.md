@@ -2,7 +2,7 @@
 name: Housekeeping request
 about: Suggestions for improving code quality
 title: "[Housekeeping]"
-labels: New, NOT Prioritized, NOT Tech refined, housekeeping
+labels: NOT Prioritized, NOT Tech refined, housekeeping
 assignees: ''
 ---
 

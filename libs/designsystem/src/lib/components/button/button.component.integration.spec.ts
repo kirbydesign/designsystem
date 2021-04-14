@@ -102,7 +102,7 @@ describe('ButtonComponent in Kirby Page', () => {
     it('should render with correct color', async () => {
       await TestHelper.whenReady(ionToolbar);
       expect(actionButtonInHeader).toHaveComputedStyle({
-        color: getColor('black'),
+        color: getColor('primary', 'contrast'),
       });
     });
 

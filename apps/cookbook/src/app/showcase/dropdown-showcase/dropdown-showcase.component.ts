@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
-import { ApiDescriptionMethod } from '~/app/shared/api-description/api-description-methods/api-description-methods.component';
-import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+
+import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
 
 @Component({
   selector: 'cookbook-dropdown-showcase',
@@ -10,85 +9,93 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
 })
 export class DropdownShowcaseComponent {
   size: string = 'md';
-  properties: ApiDescriptionProperty[] = [
+  properties: ShowcaseProperty[] = [
     {
       name: 'items',
       description: 'The items rendered within the dropdown.',
       defaultValue: '[ ]',
-      type: ['Array<string> | Array<any>'],
+      inputValues: ['Array<string> | Array<any>'],
     },
     {
       name: 'itemTextProperty',
       description:
         'The property to use for the text representation of items when configured with `Array<any>`.',
       defaultValue: `'text'`,
-      type: ['string'],
+      inputValues: ['string'],
     },
     {
       name: 'value',
       description: 'The currently selected item (readonly).',
       defaultValue: 'undefined',
-      type: ['string | any'],
+      inputValues: ['string | any'],
     },
     {
       name: 'selectedIndex',
       description: 'The index of the selected item within the `items` array.',
       defaultValue: 'undefined',
-      type: ['number'],
+      inputValues: ['number'],
     },
     {
       name: 'disabled',
       description: 'Disables the dropdown so the the user cannot interact with it.',
       defaultValue: 'false',
-      type: ['true', 'false'],
+      inputValues: ['true', 'false'],
     },
     {
       name: 'placeholder',
       defaultValue: `'Please select:'`,
       description: 'Instructional text to show before the dropdown has a selected option.',
-      type: ['string'],
+      inputValues: ['string'],
     },
     {
       name: 'attentionLevel',
       description:
         'Sets the attention level for the button of the dropdown. Button color will be updated automatically depending on host color.',
       defaultValue: '3',
-      type: ['1', '2', '3', '4'],
+      inputValues: ['1', '2', '3', '4'],
     },
     {
       name: 'expand',
       description:
         'If the dropdown needs to expand to full width of its parent container, then use expand.',
       defaultValue: 'undefined',
-      type: ['block'],
+      inputValues: ['block'],
     },
   ];
 
-  methods: ApiDescriptionMethod[] = [
+  methods: ShowcaseProperty[] = [
     {
       name: 'toggle()',
       description: 'Toggles the open/closed state of the dropdown.',
-      signature: '() => void',
     },
     {
       name: 'open()',
       description: 'Opens the dropdown.',
-      signature: '() => void',
     },
     {
       name: 'close()',
       description: 'Closes the dropdown.',
-      signature: '() => void',
     },
   ];
 
-  events: ApiDescriptionEvent[] = [
+  methodColumns = {
+    Name: 'Name',
+    Description: 'Description',
+  };
+
+  events: ShowcaseProperty[] = [
     {
       name: 'change',
       description: 'Emitted when an item is selected (tap on mobile, click/keypress on web)',
-      signature: '(item: string | any) => void',
+      inputValues: ['(item: string | any) => void'],
     },
   ];
+
+  eventColumns = {
+    Name: 'Name',
+    Description: 'Description',
+    Type: 'Signature',
+  };
 
   setSize(size: string) {
     this.size = size;

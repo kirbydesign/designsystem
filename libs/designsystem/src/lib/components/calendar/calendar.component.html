@@ -23,11 +23,9 @@
   </kirby-dropdown>
 </div>
 
-<table>
-  <thead>
-    <tr>
-      <th *ngFor="let weekDay of weekDays">{{ weekDay }}</th>
-    </tr>
+<table class="calendar-table">
+  <thead class="calendar-table-header">
+    <th *ngFor="let weekDay of weekDays">{{ weekDay }}</th>
   </thead>
 
   <tbody>

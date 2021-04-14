@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+
 import {
-  ApiDescriptionProperty,
-  ApiDescriptionPropertyColumns,
-} from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+  ShowcaseProperty,
+  ShowCasePropertyColumns,
+} from '../../shared/showcase-properties/showcase-property';
 
 @Component({
   selector: 'cookbook-item-showcase',
@@ -10,12 +11,12 @@ import {
   styleUrls: ['./item-showcase.component.scss'],
 })
 export class ItemShowcaseComponent {
-  columns: ApiDescriptionPropertyColumns = {
-    name: 'Name',
-    description: 'Description',
+  columns: ShowCasePropertyColumns = {
+    Name: 'Name',
+    Description: 'Description',
   };
 
-  properties: ApiDescriptionProperty[] = [
+  properties: ShowcaseProperty[] = [
     {
       name: '--kirby-item-background',
       description: 'Background of the item',

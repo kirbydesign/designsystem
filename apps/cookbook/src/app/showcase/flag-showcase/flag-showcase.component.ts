@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+
+import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
 
 @Component({
   selector: 'cookbook-flag-showcase',
@@ -7,18 +8,18 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   styleUrls: ['./flag-showcase.component.scss'],
 })
 export class FlagShowcaseComponent {
-  properties: ApiDescriptionProperty[] = [
+  properties: ShowcaseProperty[] = [
     {
       name: 'themeColor',
       description: 'Sets which color the flag should use.',
       defaultValue: 'transparent',
-      type: ['success', 'warning', 'danger', 'semi-light', 'transparent'],
+      inputValues: ['success', 'warning', 'danger', 'semi-light', 'transparent'],
     },
     {
       name: 'size',
       description: 'Sets the size of the flag.',
       defaultValue: 'md',
-      type: ['xs', 'sm', 'md'],
+      inputValues: ['xs', 'sm', 'md'],
     },
   ];
 }

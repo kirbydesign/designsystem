@@ -1,35 +1,35 @@
 import { Component } from '@angular/core';
-import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 import { ColorHelper } from '@kirbydesign/designsystem';
 
+import { ShowcaseProperty } from '../../shared/showcase-properties/showcase-property';
 @Component({
   styleUrls: ['./toggle-button-showcase.component.scss'],
   templateUrl: './toggle-button-showcase.component.html',
 })
 export class ToggleButtonShowcaseComponent {
   notificationColors = ColorHelper.notificationColors.map((color) => color.name);
-  properties: ApiDescriptionProperty[] = [
+  properties: ShowcaseProperty[] = [
     {
       name: 'checked',
       description: 'If true, the toggle button is selected.',
       defaultValue: 'false',
-      type: ['true', 'false'],
+      inputValues: ['true', 'false'],
     },
     {
       name: 'checkedChange',
       description: 'Emits the checked state of the toggle button on change (true | false).',
       defaultValue: '',
-      type: ['event'],
+      inputValues: ['event'],
     },
   ];
-  buttonProperties: ApiDescriptionProperty[] = [
+  buttonProperties: ShowcaseProperty[] = [
     {
       name: 'themeColor',
       description: `Sets the background color to the provided notification color.
         **Please note: Only applies when used inside a Toggle Button`,
       defaultValue: '',
-      type: this.notificationColors,
+      inputValues: this.notificationColors,
     },
   ];
 }

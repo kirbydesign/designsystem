@@ -1,5 +1,5 @@
-import { Component, ElementRef, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
@@ -12,13 +12,12 @@ export class ShowcaseComponent implements OnDestroy {
   exampleComponentName: string;
   exampleComponentPopOutUrl: string[];
   exampleComponentGitUrl: string;
-  propertiesTable: Element;
   private routerEventsSubscription: Subscription;
   private gitUrl =
     'https://github.com/kirbydesign/designsystem/tree/master/apps/cookbook/src/app/examples/';
-  showCallToActionLinks = true;
+  isCTABoxShown = true;
 
-  constructor(private router: Router, private elementRef: ElementRef<HTMLElement>) {
+  constructor(private router: Router) {
     this.onNavigationEnd();
   }
 
@@ -26,17 +25,10 @@ export class ShowcaseComponent implements OnDestroy {
     this.routerEventsSubscription.unsubscribe();
   }
 
-  onPropertiesClick() {
-    this.propertiesTable.scrollIntoView({ behavior: 'smooth' });
-    return false;
-  }
-
   private onNavigationEnd() {
     this.routerEventsSubscription = this.router.events
       .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
-      .subscribe((event) =>
-        setTimeout(() => this.setExampleComponentFromUrl(event.urlAfterRedirects))
-      );
+      .subscribe((event) => this.setExampleComponentFromUrl(event.urlAfterRedirects));
   }
 
   private setExampleComponentFromUrl(url: string) {
@@ -44,10 +36,7 @@ export class ShowcaseComponent implements OnDestroy {
     this.exampleComponentPopOutUrl = ['/', 'examples', exampleComponentUrlSegment];
     this.exampleComponentGitUrl = this.gitUrl + exampleComponentUrlSegment + '-example';
     this.exampleComponentName = this.replaceHyphens(exampleComponentUrlSegment);
-    this.showCallToActionLinks = this.exampleComponentName !== 'colors';
-    this.propertiesTable = this.elementRef.nativeElement.getElementsByClassName(
-      'api-description'
-    )[0];
+    this.isCTABoxShown = this.exampleComponentName !== 'colors';
   }
 
   private getExampleComponentUrlSegment(url: string) {

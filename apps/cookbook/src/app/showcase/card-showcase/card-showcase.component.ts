@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
+import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
 declare var require: any;
 
 @Component({
@@ -11,37 +11,37 @@ declare var require: any;
 export class CardShowcaseComponent {
   exampleHtml: string = require('!raw-loader!../../examples/card-example/card-example.component.html')
     .default;
-  properties: ApiDescriptionProperty[] = [
+  properties: ShowcaseProperty[] = [
     {
       name: 'title',
       description: 'Sets the larger title in kirby-card-header',
       defaultValue: 'null',
-      type: ['string'],
+      inputValues: ['string'],
     },
     {
       name: 'subtitle',
       description: 'Smaller title in kirby-card-header',
       defaultValue: 'null',
-      type: ['string'],
+      inputValues: ['string'],
     },
     {
       name: 'mode',
       description:
         '(Optional) Sets a custom elevation on the card. Default elevation = 2, flat = 0, highlighted = 4.',
       defaultValue: '',
-      type: ['flat', 'highlighted'],
+      inputValues: ['flat', 'highlighted'],
     },
     {
       name: 'hasPadding',
       description: '',
       defaultValue: 'true',
-      type: ['boolean'],
+      inputValues: ['boolean'],
     },
     {
       name: 'themeColor',
       description: 'Sets which color the card should use from the theme palette.',
       defaultValue: 'null',
-      type: [
+      inputValues: [
         'primary',
         'secondary',
         'tertiary',
