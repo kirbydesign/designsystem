@@ -92,7 +92,7 @@ describe('ModalWrapperComponent', () => {
 
   describe('viewportResize', () => {
     it('should emit when viewport is resized', async () => {
-      spectator = modalWrapperTestBuilder.provideRealResizeObserver().build();
+      spectator = modalWrapperTestBuilder.build();
       await TestHelper.whenTrue(() => !!spectator.component['initialViewportHeight']);
       const viewportResizeSpy = spyOn(spectator.component['viewportResize'], 'next');
 
@@ -776,10 +776,7 @@ describe('ModalWrapperComponent', () => {
 
   describe(`close()`, () => {
     beforeEach(() => {
-      spectator = modalWrapperTestBuilder
-        .provideRealResizeObserver()
-        .withEmbeddedInputComponent()
-        .build();
+      spectator = modalWrapperTestBuilder.withEmbeddedInputComponent().build();
     });
 
     afterEach(() => {
@@ -794,7 +791,7 @@ describe('ModalWrapperComponent', () => {
 
     describe(`when keyboard is visible`, () => {
       beforeEach(() => {
-        spectator.component['_onKeyboardShow'](200);
+        spectator.component['keyboardVisible'] = true;
       });
 
       describe(`and viewport is not resized`, () => {
@@ -822,10 +819,8 @@ describe('ModalWrapperComponent', () => {
           // Ensure resizeObserver triggers and onViewportResize fires:
           await TestHelper.waitForResizeObserver();
           await TestHelper.whenTrue(() => spectator.component['viewportResized']);
-          expect(spectator.component['viewportResized']).toBeTrue();
-
-          const dismissSpy = spectator.component['ionModalElement'].dismiss as jasmine.Spy;
-          expect(dismissSpy).not.toHaveBeenCalled();
+          // Ensure keyboardVisible is true, as Ionic dispatches 'ionKeyboardDidShow' event on viewport resize:
+          spectator.component['keyboardVisible'] = true;
         });
 
         afterEach(() => {
@@ -834,11 +829,11 @@ describe('ModalWrapperComponent', () => {
           TestHelper.resetTestWindow();
         });
 
-        it(`should blur document.activeElement before calling wrapping ion-modal's dismiss() method`, fakeAsync(async () => {
+        it(`should blur document.activeElement before calling wrapping ion-modal's dismiss() method`, fakeAsync(() => {
           const ionContent = spectator.query('ion-content');
           // If other test specs have imported IonicModule before this test is run,
           // then Ionic components won't be mocked - so ensure ionContent.componentOnReady is run if exists:
-          await TestHelper.ionComponentOnReady(ionContent);
+          TestHelper.ionComponentOnReady(ionContent);
 
           const input = ionContent.querySelector('input');
           spyOn(input, 'blur');
@@ -849,7 +844,7 @@ describe('ModalWrapperComponent', () => {
           expect(spectator.component['ionModalElement'].dismiss).not.toHaveBeenCalled();
           expect(input.blur).toHaveBeenCalled();
           tick(ModalWrapperComponent.KEYBOARD_HIDE_DELAY_IN_MS);
-          expect(spectator.component['ionModalElement'].dismiss).toHaveBeenCalled();
+          expect(spectator.component['ionModalElement'].dismiss).toHaveBeenCalledWith('test data');
         }));
 
         it(`should delay before calling wrapping ion-modal's dismiss() method`, fakeAsync(() => {
