@@ -31,17 +31,41 @@ If you at any point have any questions please read: [I have a question related t
   - [UX review](#ux-review)
   - [Self review](#self-review)
 
-## The contribution model
-<!-- This section has the purpose of explaining why we do it like we do, in order to have people 
-symphatize with the process -->
-- What are we trying to achieve with this contribution model
-  - Cooperation! - UXers, tech people, and contributors should all be contributing to make the best possible design system
-  - Issues for trackability and history
-  - Why do we do Tech refinement?
-  - Why we do UX refinement?
-  - Why we do UX reviews?
-  - Why do a self-review?
-- General description of the contribution model
+## Introduction to the contribution model
+<!-- Introduction and motivation -->
+Despite Kirby stemming from an internal Bank Data project - it has been decided to open source it, such that others than team Kirby can contribute to it. 
+Allowing for Kirby to be spread to multiple projects without team Kirby being the bottle neck. 
+
+If you have a problem, an issue you want resolved, or even got brand new ideas for components. Well. There is no need to sit around and wait for team Kirby to get it implemented. 
+You can contribute yourself! And no matter your role, you can probably contribute with something. May it be a helpful comment or a bug report.
+
+We think that is neat. 
+
+There is still need for managing Kirby however. We need to make sure that the project is moving in the right direction. That submitted code is: high quality, not duplicating anything and consistent with the rest of the codebase.
+To do so a series of steps has been created that an issue must go through. All of these aim at making sure that the process of cooperating from idea to implementation is smooth for contributors. With as little time wasted as possible.
+
+<!-- General description of the contribution model -->
+In broad strokes the process is: submit an issue, get it refined, implement it, get it reviewed. Once reviewed it will automatically be merged to master. 
+
+Actionable checklists for these steps can be found further down in this section. The following highlight some of these steps to explain what they are and why they exist: 
+
+<!-- Why we do UX refinement?-->
+**UX Refinement**: If an issue involves visual changes then UX refinement must take place. This consists of UXers planning how the issue can be solved in a way that aligns with the design system. The `NOT UX-refined`-label will be removed from the issue by team Kirby, once it has been UX refined. If a pull-request with visual changes is submitted for an issue that has not been UX refined; there is a good chance that the UX review process may result in a bunch of changes. 
+
+<!--- Why do we do Tech refinement? -->
+**Tech Refinement**: This should happen before any code is written for an issue. Here it is discussed and agreed upon how an issue should be implemented the best. How long it takes depends on the scope of the issue. For small issues it might be nothing more than an agreement via a direct message. Other times it is a full-blown meeting with multiple participants. The `NOT tech-refined` will be removed from the issue by team Kirby once it has been done. If a pull-request is submitted for an issue that has not been tech refined; changes and problems that could have been tackled from the beginning, might arise from the code-review. 
+
+**Publish a WIP draft**: We encourage contributors to publish a draft pull-request with a WIP implementation of their issue to get feedback. This can advantageously be done before tests are written. By doing this misunderstandings and issues can be tackled early on; here they are often easier to correct. If this is not done, they might not be discovered until code-review takes place. Tests might have to be changed. So therefore we encourage you to use the opportunity to get some feedback. 
+
+<!-- Why do a self-review? -->
+**Self-review**: This consists of code-reviewing your own pull-request, following guidelines found in: **[LINK HERE]()**. This is your chance to catch any low-hanging fruits and common issues before the reviewer does. If this is not done, an unneccessar amount of minor changes might be required during code review. This wastes both yours and the reviewers time. 
+
+<!-- Why we do UX reviews? -->
+**UX review**: If the implementation of the issue resulted in visual changes - then it has to be UX reviewed. This is to make sure that the introduced changes align with the design system. We strive to have every issue that introduces visual changes UX reviewed. If this is not done and the changes are merged to master, we might recieve issues about components not being properly aligned with the design system anymore from the users of Kirby. 
+
+Our experience is that pull-requests with a troublesome and drawn out review process has not followed one or more of these steps. 
+
+<!-- - Issues for trackability and history -->
 
 ### Before you get coding
 Skim through the "[the good](#the-good)"-section. We are a lot of people working together on this project, all with varying prefrences both in terms of how we work and code. This might lead to frustrations during code-reviews. In an effort to avoid this and be transparent; we have to specified our preferences on various subjects in that section. 
