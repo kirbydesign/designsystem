@@ -2,7 +2,7 @@
   *ngIf="showDummyKeyboard !== undefined"
   [checked]="showDummyKeyboard && !interactWithBackground"
   (checkedChange)="toggleDummyKeyboard($event)"
-  [disabled]="interactWithBackground"
+  [disabled]="interactWithBackground || disabled"
   text="Show dummy keyboard"
 ></kirby-checkbox>
 
@@ -10,7 +10,7 @@
   *ngIf="showPageProgress !== undefined"
   [checked]="showPageProgress && !interactWithBackground"
   (checkedChange)="toggleShowPageProgress($event)"
-  [disabled]="interactWithBackground"
+  [disabled]="interactWithBackground || disabled"
   text="Show page progress"
 ></kirby-checkbox>
 
@@ -18,7 +18,7 @@
   *ngIf="showFooter !== undefined"
   [checked]="showFooter && !interactWithBackground"
   (checkedChange)="toggleShowFooter($event)"
-  [disabled]="interactWithBackground"
+  [disabled]="interactWithBackground || disabled"
   text="Show footer"
 ></kirby-checkbox>
 
@@ -26,6 +26,7 @@
   *ngIf="disableScroll !== undefined"
   [checked]="disableScroll"
   (checkedChange)="toggleDisableScroll($event)"
+  [disabled]="disabled"
   text="Disable scroll"
 ></kirby-checkbox>
 
@@ -33,7 +34,7 @@
   *ngIf="showDummyContent !== undefined"
   [checked]="showDummyContent"
   (checkedChange)="toggleShowDummyContent($event)"
-  [disabled]="interactWithBackground"
+  [disabled]="interactWithBackground || disabled"
   text="Show dummy content"
 ></kirby-checkbox>
 
@@ -41,7 +42,7 @@
   *ngIf="delayLoadDummyContent !== undefined"
   [checked]="delayLoadDummyContent && !interactWithBackground"
   (checkedChange)="toggleDelayLoadDummyContent($event)"
-  [disabled]="!showDummyContent || interactWithBackground"
+  [disabled]="!showDummyContent || interactWithBackground || disabled"
   class="indent"
   text="Delay load modal"
 ></kirby-checkbox>
@@ -50,7 +51,7 @@
   *ngIf="loadAdditionalContent !== undefined"
   [checked]="loadAdditionalContent && !interactWithBackground"
   (checkedChange)="toggleLoadAdditionalContent($event)"
-  [disabled]="!showDummyContent || interactWithBackground"
+  [disabled]="!showDummyContent || interactWithBackground || disabled"
   class="indent"
   text="Delay load additional"
 ></kirby-checkbox>
@@ -59,7 +60,7 @@
   *ngIf="openFullHeight !== undefined"
   [checked]="openFullHeight && !interactWithBackground"
   (checkedChange)="toggleOpenFullHeight($event)"
-  [disabled]="interactWithBackground"
+  [disabled]="interactWithBackground || disabled"
   text="Open in full height"
 ></kirby-checkbox>
 
@@ -70,6 +71,7 @@
     *ngIf="interactWithBackground !== undefined"
     [checked]="interactWithBackground"
     (checkedChange)="toggleInteractWithBackground($event)"
+    [disabled]="disabled"
     text="Interact with background (drawer only)"
   ></kirby-checkbox>
 
@@ -77,6 +79,7 @@
     *ngIf="customCssClass !== undefined"
     [checked]="customCssClass"
     (checkedChange)="toggleCustomCssClass($event)"
+    [disabled]="disabled"
     text="Add custom CSS class"
   ></kirby-checkbox>
 </ng-container>

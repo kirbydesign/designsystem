@@ -16,6 +16,8 @@ import { WindowRef } from '@kirbydesign/designsystem/types/window-ref';
   styleUrls: ['./modal-example-configuration.component.scss'],
 })
 export class ModalExampleConfigurationComponent {
+  @Input() disabled: boolean;
+
   @Input() showDummyKeyboard: boolean;
   @Output() showDummyKeyboardChange = new EventEmitter<boolean>();
 
