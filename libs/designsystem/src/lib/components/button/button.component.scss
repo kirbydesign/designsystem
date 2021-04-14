@@ -214,6 +214,11 @@ $button-width: (
   margin-inline-start: size('s');
 }
 
+:host-context(kirby-alert).ok-btn {
+  --kirby-button-background-color: #{get-color('success')};
+  --kirby-button-color: #{get-color('success-contrast')};
+}
+
 // Temp fix for https://github.com/angular/angular-cli/issues/13854#issuecomment-470831308
 /* clean-css ignore:start */
 :host-context(ion-toolbar kirby-page-actions) {
