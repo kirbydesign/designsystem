@@ -64,8 +64,9 @@ $button-width: (
 }
 
 @mixin button-attentionlevel3 {
+  // Expect canvas underneath to be a light color
   --kirby-button-background-color: transparent;
-  --kirby-button-color: #{get-color('medium-contrast')};
+  --kirby-button-color: #{get-color('black')};
   --kirby-button-border-color: #{get-color('medium')};
 
   &.destructive {
@@ -74,8 +75,9 @@ $button-width: (
 }
 
 @mixin button-attentionlevel4 {
+  // Expect canvas underneath to be a light color
   --kirby-button-background-color: transparent;
-  --kirby-button-color: #{get-color('primary-contrast')};
+  --kirby-button-color: #{get-color('black')};
 
   &.destructive {
     --kirby-button-color: #{get-color('danger')};
@@ -84,8 +86,8 @@ $button-width: (
 
 :host {
   font-family: var(--kirby-font-family);
-  background-color: var(--kirby-button-background-color, get-color('primary'));
-  color: var(--kirby-button-color, get-color('primary-contrast'));
+  background-color: var(--kirby-button-background-color, initial);
+  color: var(--kirby-button-color, inherit);
   border-radius: $border-radius-round;
   box-sizing: border-box; // Ensure border is not added to button height
   cursor: pointer;
