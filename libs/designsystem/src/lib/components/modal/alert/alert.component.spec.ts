@@ -112,7 +112,7 @@ describe('AlertComponent', () => {
   });
 });
 
-describe('AlertComponent', () => {
+describe('AlertComponent with okBtn', () => {
   let spectator: SpectatorHost<AlertComponent>;
   let element: HTMLElement;
 
@@ -139,7 +139,7 @@ describe('AlertComponent', () => {
     expect(spectator.component).toBeTruthy();
   });
 
-  it('should have success colors', () => {
+  it('should have success colors on button', () => {
     const okButton = element.getElementsByClassName('ok-btn')[0];
 
     expect(okButton).toHaveComputedStyle({
