@@ -42,6 +42,20 @@
   ></cookbook-form-field-input-numeric-example>
 </cookbook-example-viewer>
 
+<h3>Date</h3>
+<cookbook-example-viewer [html]="inputDateExample.template">
+  <cookbook-form-field-input-date-example
+    [size]="size"
+    #inputDateExample
+  ></cookbook-form-field-input-date-example>
+</cookbook-example-viewer>
+<p>
+  <em
+    ><strong>*Please note:</strong> Date-mask is based on <code>LOCALE_ID</code>. When
+    <code>DA</code> the date-mask will be <code>dd.mm.åååå</code></em
+  >
+</p>
+
 <h3>Disabled</h3>
 <cookbook-example-viewer [html]="inputDisabledExample.template">
   <cookbook-form-field-input-disabled-example
