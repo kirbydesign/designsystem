@@ -10,7 +10,7 @@ If you at any point have any questions please read: [I have a question related t
   - [I have an enhancement](#i-have-an-enhancement)
   - [I would like to report a bug](#i-would-like-to-report-a-bug)
 - [Setup environment and tooling for contribution](#setup-environment-and-tooling-for-contribution)
-  - [Clone and install repository](#clone-and-install-repository)
+  - [Clone and install the repository](#clone-and-install-the-repository)
   - [Node](#node)
   - [Tslint](#tslint)
   - [Prettier](#prettier)
