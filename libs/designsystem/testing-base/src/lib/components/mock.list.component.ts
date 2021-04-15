@@ -27,7 +27,7 @@ export class MockListComponent {
   @Input() noMoreItemsText: string;
   @Input() showDivider: boolean;
   @Input() markSelectedRow: boolean;
-  @Input() shape: ListShape;
+  @Input() shape;
   @Input() hasItemSpacing: boolean;
   @Input() isLoadOnDemandEnabled: boolean;
   @Input() swipeActions: ListSwipeAction[];

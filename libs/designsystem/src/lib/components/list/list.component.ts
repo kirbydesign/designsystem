@@ -13,6 +13,7 @@ import {
   TrackByFunction,
   ViewChild,
 } from '@angular/core';
+import { Datasource, IDatasource } from 'ngx-ui-scroll';
 
 import { PlatformService } from '../../helpers/platform.service';
 import { ThemeColor } from '../../helpers/theme-color.type';
@@ -50,7 +51,31 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
    * Provide items for the list to render. Items must be provided in the order you expect them to be rendered.
    */
   @Input()
-  items: any[];
+  items: any[] = [];
+
+  datasource: IDatasource = {
+    get(index, count, success) {
+      setTimeout(() => {
+        const data = [];
+        const start = Math.max(0, index);
+        const end = index + count - 1;
+        if (start <= end) {
+          for (let i = start; i <= end; i++) {
+            data.push(this.items[i]);
+          }
+        }
+        console.log('DATA', data);
+
+        success(data);
+      }, 200);
+    },
+  };
+
+  // datasourceCallback2: IDatasource = {
+  //   get: (index, count, success) => setTimeout(
+  //     success(this.getData(index, count)), DELAY
+  //   )
+  // };
 
   @Input()
   getItemColor: (item: any) => ThemeColor;
