@@ -3,3 +3,7 @@
 .toggle-checked {
   --background-checked: #{get-color('success')};
 }
+
+ion-toggle {
+  @include increase-target-size();
+}
