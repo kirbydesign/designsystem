@@ -126,7 +126,7 @@ You should now be able to open `http://localhost:4200` in a browser to access th
 <!-- Which version should people use, and perhaps a recommendation on which tool people can use to manage versions. -->
 [Node](https://nodejs.org/en/) is the runtime used for development. 
 
-It is recommended to use version `12.20.2` for development, as we have experienced problems with **What was the problem exactly again?** for newer versions.  
+It is recommended to use `v12` for development as we currently do not support node LTS (see issue: [#1443](https://github.com/kirbydesign/designsystem/issues/1443)). 
 
 If you need to have multiple versions of node installed then a version manager such as [NVM](https://github.com/nvm-sh/nvm) can be used. 
 
@@ -157,8 +157,9 @@ To solve this:
 This will cause changes to be made in the file `.vscode/settings.json`; do not commit these.
 
 ### Prettier
-Prettier is used for consistent code formatting and avoiding unnecessary discussions about this during reviews. 
-It can be executed `npx prettier [path/to/file]` but as with TSLint, we recommend installing it as a plugin for your editor. You should also enable "format on save".
+Prettier is used for consistent code formatting and avoiding unnecessary discussions about this during reviews.
+
+It can be executed using `npx prettier [path/to/file]` but as with TSLint, we recommend installing it as a plugin for your editor. You should also enable "format on save".
 
 **Useful resources:**
 - [Prettier extension for VSCode](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
