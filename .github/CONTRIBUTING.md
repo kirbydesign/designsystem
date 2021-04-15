@@ -99,58 +99,69 @@ If you got an idea for a component that you think should be part of Kirby you sh
 ## Setup environment and tooling for contribution
 <!-- The following section is responsible for teaching people how to get setup with 
 the repo such that they can get coding -->
-This section will help you get going with Kirby such that you can begin to contribute by writing code! 
+This section will help you get going with Kirby such that you can begin contributing. 
 
-#### Clone and install the repository
+### Clone and install the repository
 <!-- how to clone and get going with the kirby repo-->
 **Note:** make sure you have the right version of Node installed before installing the repository (see: [Node](#node)).
 
 1. Clone the repository: 
-`git clone https://github.com/kirbydesign/designsystem`
+```
+git clone https://github.com/kirbydesign/designsystem
+```
 
 2. Install dependencies: 
-`npm install`
+```
+npm install
+```
 
 3. Start the cookbook server:
-`npm start`
+```
+npm start
+```
 
-You should be able to access the Cookbook by opening `http://localhost:4200` in a browser.
+You should now be able to open `http://localhost:4200` in a browser to access the cookbook.
 
-#### Node 
+### Node 
 <!-- Which version should people use, and perhaps a recommendation on which tool people can use to manage versions. -->
 [Node](https://nodejs.org/en/) is the runtime used for development. 
+
 We recommend using Node version `INSERT HIGHEST VERSION WE HAVE GOTTEN RUNNING WITHOUT ISSUES`. This is because we have experienced errors with other version due to **What was the problem exactly again?**.  
 
 If you have need other versions of Node installed then a version manager such as [NVM](https://github.com/nvm-sh/nvm) can be used. 
 
-#### Tslint 
+### Tslint 
 <!-- People should make sure to have it enabled to avoid unnecessary comments during code review-->
 **Note:** Work is being done to migrate from TSLint to ESLint (see issue: [#1317](https://github.com/kirbydesign/designsystem/issues/1317)). 
 
 TSLint is used for linting which helps keep up the quality of the submitted code for Kirby. 
 Scripts for running TSLint can be found in `package.json`, but we recommend that you install a TSLint plugin for your editor. It can be useful to enable "fix on save"-functionality such that simple errors are fixed automatically. 
 
-VSCode extension: [TSLint on visual studio marketplace](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-tslint-plugin).
-Enabling "fix on save" in VSCode: [auto fix and auto fix on save](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-tslint-plugin#auto-fix-and-auto-fix-on-save).
+**Useful resources:**
+- [TSLint extension for VSCode](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-tslint-plugin).
+- [Enabling "fix on save" in VSCode](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-tslint-plugin#auto-fix-and-auto-fix-on-save).
 
-**VSCode "workspace library execution"-issue:** 
+#### VSCode "workspace library execution"-issue
 An issue might occur where TSLint will randomly disable for the current workspace and has to be enabled again using the command `TSLint: Manage workspace library execution`. 
 
 To solve this: 
 1. open a typescript file in VScode. 
-2. open the command pallette (<kbd>ctrl/cmd</kbd> + <kbd>shift</kbd> + <kbd>p</kbd>) and enter: `typescript: select typescript version`.
-3. select: `use workspace version 3.6.5`.
-4. open the command pallette (<kbd>ctrl/cmd</kbd> + <kbd>shift</kbd> + <kbd>p</kbd>) and enter: `TSLint: Manage workspace library execution`.
-5. select: `always enable workspace library execution`.
+2. open the command pallette (<kbd>ctrl/cmd</kbd> + <kbd>shift</kbd> + <kbd>p</kbd>) and enter: <br />
+`typescript: select typescript version`.
+4. select: `use workspace version 3.6.5`.
+5. open the command pallette and enter: <br />
+`TSLint: Manage workspace library execution`.
+6. select: `always enable workspace library execution`.
 
-This will cause changes to be made in the file `.vscode/settings.json` - make sure to not commit these. This issue should be solved once migration to ESLint is successful. 
+This will cause changes to be made in the file `.vscode/settings.json` - do not commit these.
 
 ### Prettier
 Prettier is used for consistent code formatting and avoiding unnecessary discussions about this during reviews. 
 It can be executed `npx prettier [path/to/file]` but as with TSLint, we recommend installing it as a plugin for your editor. You should also enable "format on save".
 
-VSCode extension: [Prettier on visual studio marketplace](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
-Enabling "format on save" in VSCode: [format on save](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode#format-on-save)
+**Useful resources:**
+- [Prettier extension for VSCode](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+- [Enabling "format on save" in VSCode](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode#format-on-save)
 
 ## Creating pull-requests 
 <!-- This section is responsible for guiding contributors on how they should submit pull-requests in a way that ensures the most swift process and teach them how to catch low-hanging issues there might come up in code-review. -->
