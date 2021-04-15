@@ -1,6 +1,6 @@
 {
   "name": "designsystem",
-  "version": "1.4.38",
+  "version": "1.4.41",
   "description": "Kirby Design Components",
   "repository": {
     "type": "git",
@@ -93,6 +93,7 @@
     "@types/prismjs": "1.9.0",
     "firebase": "6.2.4",
     "highcharts": "8.0.4",
+    "inputmask": "^5.0.5",
     "moment": "2.24.0",
     "prismjs": "1.23.0",
     "reflect-metadata": "0.1.8",
