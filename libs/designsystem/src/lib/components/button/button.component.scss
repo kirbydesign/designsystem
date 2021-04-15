@@ -114,6 +114,9 @@ $button-width: (
   outline: none;
   border: 1px solid var(--kirby-button-border-color, transparent);
 
+  // Apply target size of at least 44px to all sizes
+  @include increase-target-size();
+
   &.icon-left {
     padding-left: size('xs');
     padding-right: size('s');
@@ -134,7 +137,6 @@ $button-width: (
 
   &.sm {
     @include button-sm;
-    @include touch-area();
   }
 
   &.lg {
