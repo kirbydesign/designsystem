@@ -6,7 +6,8 @@ import { IonicModule } from '@ionic/angular';
 
 import { AccordionItemComponent } from './components/accordion/accordion-item.component';
 import { AccordionDirective } from './components/accordion/accordion.directive';
-import { ActionSheetComponent, ActionSheetPopoutComponent } from './components/action-sheet/';
+import { ActionSheetPopoutComponent } from './components/action-sheet/action-sheet-popout/action-sheet-popout.component';
+import { ActionSheetComponent } from './components/action-sheet/action-sheet.component';
 import { AppModule } from './components/app/app.module';
 import { AvatarComponent } from './components/avatar/avatar.component';
 import { BadgeComponent } from './components/badge/badge.component';

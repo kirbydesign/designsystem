@@ -8,9 +8,9 @@ import {
   Output,
 } from '@angular/core';
 
-import { PlatformService } from '../../helpers';
-import { OpenState } from '../../models';
-import { ModalController } from '../modal';
+import { PlatformService } from '../../helpers/platform.service';
+import { OpenState } from '../../models/open-state';
+import { ModalController } from '../modal/services/modal.controller';
 
 import { ActionSheetConfig } from './config/action-sheet-config';
 import { ActionSheetItem } from './config/action-sheet-item';
