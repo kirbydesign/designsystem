@@ -25,7 +25,6 @@ export type RangeValue = number | { lower: number; upper: number };
       useExisting: forwardRef(() => RangeComponent),
     },
   ],
-  encapsulation: ViewEncapsulation.None,
 })
 export class RangeComponent implements ControlValueAccessor {
   @ViewChild('ionRange', { static: false }) ionRange: IonRange;
