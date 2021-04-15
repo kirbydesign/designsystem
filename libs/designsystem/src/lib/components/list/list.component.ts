@@ -31,7 +31,11 @@ import {
 import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
 import { GroupByPipe } from './pipes/group-by.pipe';
 
-export type ListShape = 'square' | 'rounded' | 'none';
+export enum ListShape {
+  'square',
+  'rounded',
+  'none',
+}
 
 @Component({
   selector: 'kirby-list',
@@ -45,7 +49,6 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   /**
    * Provide items for the list to render. Items must be provided in the order you expect them to be rendered.
    */
-
   @Input()
   items: any[];
 
@@ -85,14 +88,14 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
    *
    * `square` means **without** rounded corners, `rounded` means **with** rounded corners.,  `none` means **without** padding, border, box-shadow and background.
    */
-  @Input() shape: ListShape = 'rounded';
+  @Input() shape = ListShape.rounded;
   @HostBinding('class.shape-rounded')
   public get isShapeRounded(): boolean {
-    return this.shape === 'rounded';
+    return this.shape === ListShape.rounded;
   }
   @HostBinding('class.shape-none')
   public get isShapeNone(): boolean {
-    return this.shape === 'none';
+    return this.shape === ListShape.none;
   }
 
   @HostBinding('class.item-spacing')
