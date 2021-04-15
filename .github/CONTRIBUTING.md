@@ -45,9 +45,15 @@ There is still need for managing Kirby however. We need to make sure that the pr
 To do so a series of steps has been created that an issue must go through. All of these aim at making sure that the process of cooperating from idea to implementation is smooth for contributors. With as little time wasted as possible.
 
 <!-- General description of the contribution model -->
-In broad strokes the process is: submit an issue, get it refined, implement it, get it reviewed. Once reviewed it will automatically be merged to master. 
+In broad strokes the process is: 
+1. submit an issue 
+2. get it refined 
+3. implement a solution 
+4. get the solution reviewed and approved
 
-Actionable checklists for these steps can be found further down in this section. The following highlight some of these steps to explain what they are and why they exist: 
+Once a pull-request has been approved it will be automatically merged. 
+
+Actionable checklists for these steps can be found [here](#checklist-i-have-a-component-request). The following highlight some of the steps in the checklists, to explain what they are and why they exist: 
 
 <!-- Why we do UX refinement?-->
 **UX Refinement**: If an issue involves visual changes then UX refinement must take place. This consists of UXers planning how the issue can be solved in a way that aligns with the design system. The `NOT UX refined`-label will be removed from the issue by team Kirby, once it has been done. If a pull-request with visual changes is submitted for an issue that has not been UX refined; there is a good chance that the UX review process may result in a bunch of changes. 
