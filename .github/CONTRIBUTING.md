@@ -126,16 +126,17 @@ You should now be able to open `http://localhost:4200` in a browser to access th
 <!-- Which version should people use, and perhaps a recommendation on which tool people can use to manage versions. -->
 [Node](https://nodejs.org/en/) is the runtime used for development. 
 
-We recommend using Node version `INSERT HIGHEST VERSION WE HAVE GOTTEN RUNNING WITHOUT ISSUES`. This is because we have experienced errors with other version due to **What was the problem exactly again?**.  
+It is recommended to use version `12.20.2` for development, as we have experienced problems with **What was the problem exactly again?** for newer versions.  
 
-If you have need other versions of Node installed then a version manager such as [NVM](https://github.com/nvm-sh/nvm) can be used. 
+If you need to have multiple versions of node installed then a version manager such as [NVM](https://github.com/nvm-sh/nvm) can be used. 
 
 ### Tslint 
 <!-- People should make sure to have it enabled to avoid unnecessary comments during code review-->
 **Note:** Work is being done to migrate from TSLint to ESLint (see issue: [#1317](https://github.com/kirbydesign/designsystem/issues/1317)). 
 
 TSLint is used for linting which helps keep up the quality of the submitted code for Kirby. 
-Scripts for running TSLint can be found in `package.json`, but we recommend that you install a TSLint plugin for your editor. It can be useful to enable "fix on save"-functionality such that simple errors are fixed automatically. 
+
+Scripts for running TSLint can be found in `package.json`. We however recommend that you install a TSLint plugin for your editor. It can be useful to enable "fix on save"-functionality such that simple errors are fixed automatically. 
 
 **Useful resources:**
 - [TSLint extension for VSCode](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-tslint-plugin).
@@ -153,7 +154,7 @@ To solve this:
 `TSLint: Manage workspace library execution`.
 6. select: `always enable workspace library execution`.
 
-This will cause changes to be made in the file `.vscode/settings.json` - do not commit these.
+This will cause changes to be made in the file `.vscode/settings.json`; do not commit these.
 
 ### Prettier
 Prettier is used for consistent code formatting and avoiding unnecessary discussions about this during reviews. 
