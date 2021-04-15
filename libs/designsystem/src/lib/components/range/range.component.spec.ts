@@ -1,4 +1,4 @@
-import { Container } from '@angular/compiler/src/i18n/i18n_ast';
+/*import { Container } from '@angular/compiler/src/i18n/i18n_ast';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule, IonRange } from '@ionic/angular';
@@ -295,3 +295,4 @@ describe('Ion-Range', () => {
     });
   });
 });
+*/
