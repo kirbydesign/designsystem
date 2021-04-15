@@ -18,17 +18,7 @@ const COMPONENT_DECLARATIONS = [
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    KirbyModule,
-    IonicModule.forRoot({
-      mode: 'ios',
-      inputShims: true,
-      scrollAssist: true,
-      scrollPadding: false,
-    }),
-  ],
+  imports: [CommonModule, KirbyModule, ReactiveFormsModule],
   declarations: COMPONENT_DECLARATIONS,
   exports: COMPONENT_DECLARATIONS,
 })
