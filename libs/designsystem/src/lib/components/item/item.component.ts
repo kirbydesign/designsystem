@@ -1,5 +1,11 @@
 import { Component, HostBinding, Input } from '@angular/core';
 
+export enum ItemSize {
+  XS = 'xs',
+  SM = 'sm',
+  MD = 'md',
+}
+
 @Component({
   selector: 'kirby-item',
   templateUrl: './item.component.html',
@@ -16,7 +22,7 @@ export class ItemComponent {
   reorderable: boolean;
   @HostBinding('class')
   @Input()
-  size: 'xs' | 'sm' | 'md' = 'md';
+  size: ItemSize = ItemSize.MD;
 
   // Prevent default when inside kirby-dropdown to avoid blurring dropdown:
   onMouseDown(event: MouseEvent) {

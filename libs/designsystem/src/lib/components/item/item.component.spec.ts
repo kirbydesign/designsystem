@@ -5,7 +5,7 @@ import { MockModule } from 'ng-mocks';
 import { DesignTokenHelper } from '../../helpers/design-token-helper';
 import { IconModule } from '../icon/icon.module';
 
-import { ItemComponent } from './item.component';
+import { ItemComponent, ItemSize } from './item.component';
 
 const { itemHeight, size } = DesignTokenHelper;
 
@@ -34,7 +34,7 @@ describe('ItemComponent', () => {
   describe('when configured with size', () => {
     describe('and size = xs', () => {
       it('should have correct item height and padding', () => {
-        spectator.component.size = 'xs';
+        spectator.component.size = ItemSize.XS;
         spectator.detectChanges();
 
         expect(spectator.query('ion-item')).toHaveComputedStyle({
@@ -47,7 +47,7 @@ describe('ItemComponent', () => {
 
     describe('and size = sm', () => {
       it('should have correct item height', () => {
-        spectator.component.size = 'sm';
+        spectator.component.size = ItemSize.SM;
         spectator.detectChanges();
 
         expect(spectator.query('ion-item')).toHaveComputedStyle({
@@ -58,7 +58,7 @@ describe('ItemComponent', () => {
 
     describe('and size = md', () => {
       it('should have correct item height', () => {
-        spectator.component.size = 'md';
+        spectator.component.size = ItemSize.MD;
         spectator.detectChanges();
 
         expect(spectator.query('ion-item')).toHaveComputedStyle({

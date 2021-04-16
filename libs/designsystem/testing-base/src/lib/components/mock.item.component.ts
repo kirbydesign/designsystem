@@ -18,7 +18,7 @@ export class MockItemComponent {
   @Input() selected: boolean;
   @Input() selectable: boolean;
   @Input() reorderable: boolean;
-  @Input() size: 'xs' | 'sm' | 'md';
+  @Input() size: ItemSize;
 }
 
 // #endregion
