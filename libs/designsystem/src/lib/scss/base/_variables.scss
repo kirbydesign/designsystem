@@ -55,6 +55,15 @@ $font-weight: (
     'black': 900,
 ) !default;
 
+/* Icon
+****************************************************************************/
+$icon-font-sizes: (
+  'xs': map-get($sizes, 's'),
+  'sm': map-get($sizes, 'm'),
+  'md': map-get($sizes, 'l'),
+  'lg': map-get($sizes, 'xxxl'),
+) !default;
+
 /*
   Z - Index overview
 ****************************************************************************/
@@ -155,15 +164,6 @@ $checkbox-radio-spacing: (
   'to-edge': map-get($sizes, 's'),
   'to-label': map-get($sizes, 'xs'),
 );
-
-/* Icon
-****************************************************************************/
-$icon-font-sizes: (
-  xs: 16px,
-  sm: 24px,
-  md: 32px,
-  lg: 56px,
-) !default;
 
 /* Transitions
 ****************************************************************************/

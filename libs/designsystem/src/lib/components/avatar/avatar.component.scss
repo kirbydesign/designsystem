@@ -40,7 +40,7 @@ $badge-diameter: $avatar-badge-size;
   color: get-color('light-contrast');
 
   //default to icon size 'sm'
-  --kirby-icon-font-size: #{map-get($icon-font-sizes, 'sm')};
+  --kirby-icon-font-size: #{icon-font-size('sm')};
 
   &.shadow {
     box-shadow: 0px 2px 4px 2px rgba(113, 113, 113, 0.4);
@@ -98,7 +98,7 @@ $badge-diameter: $avatar-badge-size;
     width: $diameter-medium;
     height: $diameter-medium;
 
-    --kirby-icon-font-size: #{map-get($icon-font-sizes, 'md')};
+    --kirby-icon-font-size: #{icon-font-size('md')};
 
     .avatar-text {
       font-size: font-size('m');
@@ -115,7 +115,7 @@ $badge-diameter: $avatar-badge-size;
     width: $diameter-large;
     height: $diameter-large;
 
-    --kirby-icon-font-size: #{map-get($icon-font-sizes, 'lg')};
+    --kirby-icon-font-size: #{icon-font-size('lg')};
 
     .avatar-text {
       font-size: font-size('xl');
