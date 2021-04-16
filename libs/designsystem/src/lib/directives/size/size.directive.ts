@@ -10,3 +10,10 @@ export class SizeDirective {
     );
   }
 }
+
+export enum Sizes {
+  extraSmall = 'xs',
+  small = 'sm',
+  medium = 'md',
+  large = 'lg',
+}
