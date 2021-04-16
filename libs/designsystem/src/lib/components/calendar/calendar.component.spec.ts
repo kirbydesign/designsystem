@@ -65,7 +65,7 @@ describe('CalendarComponent', () => {
 
     verifyMonthAndYear('August 1997');
 
-    const headerTexts = trimmedTexts('.calendar-table-header th');
+    const headerTexts = trimmedTexts('th');
     expect(headerTexts).toEqual(['M', 'T', 'W', 'T', 'F', 'S', 'S']);
 
     const dayTexts = trimmedTexts('.day.current-month');
@@ -275,7 +275,7 @@ describe('CalendarComponent', () => {
   it('should render days from Monday to Sunday', () => {
     expect(
       spectator
-        .queryAll('.calendar-table-header th')
+        .queryAll('th')
         .map((_) => _.textContent)
         .join(' ')
     ).toEqual('M T W T F S S');

@@ -31,6 +31,7 @@ export class FirstEmbeddedModalExampleComponent implements OnInit {
   showPageProgress: boolean;
   showFooter: boolean;
   showDummyContent: boolean;
+  showStaticDummyContent: boolean;
   showNestedPageProgress: boolean = false;
   showNestedFooter: boolean = false;
   showNestedDummyContent: boolean = true;
