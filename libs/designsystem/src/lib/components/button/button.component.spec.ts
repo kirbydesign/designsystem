@@ -4,7 +4,7 @@ import { MockComponent } from 'ng-mocks';
 import { DesignTokenHelper } from '../../helpers/design-token-helper';
 import { IconComponent } from '../icon/icon.component';
 
-import { ButtonComponent } from './button.component';
+import { ButtonComponent, ButtonSize } from './button.component';
 
 const getColor = DesignTokenHelper.getColor;
 const size = DesignTokenHelper.size;
@@ -316,10 +316,19 @@ describe('ButtonComponent', () => {
     });
   });
 
-  const testScenarios: { size: 'sm' | 'md' | 'lg'; expected: any }[] = [
-    { size: 'sm', expected: { fontSize: fontSize('xs'), height: size('l'), minWidth: '44px' } },
-    { size: 'md', expected: { fontSize: fontSize('s'), height: size('xl'), minWidth: '88px' } },
-    { size: 'lg', expected: { fontSize: fontSize('n'), height: size('xxl'), minWidth: '220px' } },
+  const testScenarios: { size: ButtonSize; expected: any }[] = [
+    {
+      size: ButtonSize.SM,
+      expected: { fontSize: fontSize('xs'), height: size('l'), minWidth: '44px' },
+    },
+    {
+      size: ButtonSize.MD,
+      expected: { fontSize: fontSize('s'), height: size('xl'), minWidth: '88px' },
+    },
+    {
+      size: ButtonSize.LG,
+      expected: { fontSize: fontSize('n'), height: size('xxl'), minWidth: '220px' },
+    },
   ];
   testScenarios.forEach((scenario) => {
     describe(`when configured with size = ${scenario.size}`, () => {

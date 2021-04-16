@@ -10,6 +10,12 @@ import {
 import { NotificationColor } from '../../helpers';
 import { IconComponent } from '../icon/icon.component';
 
+export enum ButtonSize {
+  SM = 'sm',
+  MD = 'md',
+  LG = 'lg',
+}
+
 @Component({
   // tslint:disable-next-line:component-selector
   selector: 'button[kirby-button],Button[kirby-button]',
@@ -68,7 +74,7 @@ export class ButtonComponent implements AfterContentInit {
   @Input() text: string;
   @Input() isFloating: boolean = false;
   @Input()
-  size: 'sm' | 'md' | 'lg' = 'md';
+  size: ButtonSize = ButtonSize.MD;
 
   @ContentChild(IconComponent) icon: IconComponent;
   @ContentChild(IconComponent, { read: ElementRef })
