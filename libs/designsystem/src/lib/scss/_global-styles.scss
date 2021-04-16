@@ -129,13 +129,13 @@ ion-modal.kirby-overlay {
           --min-height: #{$modal-default-height};
           align-items: flex-start;
 
-          &.small {
+          &.kirby-modal--small {
             --min-height: #{map-get($modal-heights, 's')};
           }
-          &.medium {
+          &.kirby-modal--medium {
             --min-height: #{map-get($modal-heights, 'm')};
           }
-          &.large {
+          &.kirby-modal--large {
             --min-height: #{map-get($modal-heights, 'l')};
           }
 
