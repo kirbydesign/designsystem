@@ -4,9 +4,9 @@ import {
   EventEmitter,
   forwardRef,
   Input,
+  OnInit,
   Output,
   ViewChild,
-  ViewEncapsulation,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { IonRange } from '@ionic/angular';
@@ -26,34 +26,43 @@ export type RangeValue = number | { lower: number; upper: number };
     },
   ],
 })
-export class RangeComponent implements ControlValueAccessor {
+export class RangeComponent implements OnInit, ControlValueAccessor {
   @ViewChild('ionRange', { static: false }) ionRange: IonRange;
   @ViewChild(IonRange, { read: ElementRef }) ionRangeElementRef: ElementRef;
 
   @Input() minLabel: string;
   @Input() maxLabel: string;
-  @Input() color: string;
   @Input() debounce: number;
   @Input() max: number;
   @Input() min: number;
-  @Input() mode: 'ios' | 'md';
-  @Input() name: string;
   @Input() pin: boolean;
-  @Input() snaps: boolean;
-  @Input() step: number;
-  @Input() ticks: number;
+  @Input() step: number = 1;
+  @Input() ticks: boolean;
+  @Input() disabled;
+  @Input()
+  get value(): RangeValue {
+    return this.currentValue;
+  }
   @Output() valueChange: EventEmitter<RangeValue> = new EventEmitter<RangeValue>();
 
-  @Output() disabled: boolean;
   private currentValue: RangeValue;
+  initialized: boolean = false;
 
   constructor() {}
 
-  public get value(): RangeValue {
-    return this.currentValue;
+  ngOnInit() {
+    if (!this.ticks) {
+      this.initialized = true;
+      return;
+    }
+    const amountOfTicks = (this.max - this.min) / this.step;
+    if (amountOfTicks > 9) {
+      this.step = (this.max - this.min) / 9;
+    }
+    this.initialized = true;
   }
 
-  public set value(value: RangeValue) {
+  set value(value: RangeValue) {
     if (value !== this.currentValue) {
       this.currentValue = value;
       this.propagateChange(this.currentValue);

@@ -23,6 +23,18 @@ ion-range {
   --bar-border-radius: #{size('xxxs')};
   --bar-height: #{size('xxxxs')};
 
+  &.range-disabled {
+    --knob-background: #{get-color('semi-light')};
+    --knob-box-shadow: none;
+
+    --bar-background: #{get-color('semi-light')};
+    --bar-background-active: #{get-color('semi-light')};
+
+    &::part(tick) {
+      background: get-color('semi-light');
+    }
+  }
+
   flex: 1 1 100%;
   padding: 0;
 

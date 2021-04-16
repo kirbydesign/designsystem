@@ -16,18 +16,14 @@ import { RangeComponent, RangeValue } from '@kirbydesign/designsystem';
 export class MockRangeComponent {
   @Input() minLabel: string;
   @Input() maxLabel: string;
-  @Input() color: string;
   @Input() debounce: number;
   @Input() max: number;
   @Input() min: number;
-  @Input() mode: 'ios' | 'md';
-  @Input() name: string;
   @Input() pin: boolean;
-  @Input() snaps: boolean;
   @Input() step: number;
-  @Input() ticks: number;
+  @Input() ticks: boolean;
+  @Input() disabled;
   @Output() valueChange = new EventEmitter<RangeValue>();
-  @Output() disabled = undefined;
 
   setDisabledState() {}
   rangeValueChange() {}
