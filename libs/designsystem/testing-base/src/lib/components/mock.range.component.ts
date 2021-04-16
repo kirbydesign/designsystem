@@ -23,7 +23,7 @@ export class MockRangeComponent {
   @Input() step: number;
   @Input() ticks: boolean;
   @Input() disabled;
-  @Output() valueChange = new EventEmitter<RangeValue>();
+  @Output() change = new EventEmitter<number>();
 
   setDisabledState() {}
   rangeValueChange() {}
