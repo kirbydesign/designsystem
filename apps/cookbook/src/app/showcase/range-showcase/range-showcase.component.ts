@@ -11,9 +11,9 @@ export class RangeShowcaseComponent {
     {
       name: 'value',
       description:
-        '(Optional) The value represented by the range component. Should only be used if Angular Forms are not used.',
+        '(Optional) The value represented by the range component. Should only be used if Angular Forms (Template-driven or ReactiveForm) are not used.',
       defaultValue: 'undefined',
-      type: ['RangeValue'],
+      type: ['number'],
     },
     {
       name: 'minLabel',
