@@ -69,7 +69,7 @@ Actionable checklists for these steps can be found [here](#checklist-i-have-a-co
 
 <!-- Why do a self-review? -->
 <dt>Self-review</dt> 
-<dd>This consists of code-reviewing your own pull-request, following guidelines found in: [The good self review](#self-review). This is your chance to catch any low-hanging fruits and common issues before the reviewer does. If this is not done, an unneccessar amount of minor changes might be required during code review. This wastes both yours and the reviewers time.</dd>
+<dd>This consists of code-reviewing your own pull-request, following guidelines found in: "[The good: Self-review](#self-review)". This is your chance to catch any low-hanging fruits and common issues before the reviewer does. If this is not done, an unneccessary amount of minor changes might be required during code review. This wastes both yours and the reviewers time.</dd>
 
 <!-- Why we do UX reviews? -->
 <dt>UX review</dt> 
@@ -118,7 +118,7 @@ If you have an idea for Kirby that is not a brand new component or aimed at impr
 The process is the same as submitting a component request just using another issue-template: 
 
 1. **Open a [new issue](https://github.com/kirbydesign/designsystem/issues/new/choose) using the "enhancement request"-template** (See: "[The good: Issue](#issue)").
-2. **Follow steps 2 to 5 in "[I have a component request](#i-have-a-component-request)".**
+2. **Follow steps 2 to 5 in "[Checklist: I have a component request](#checklist-i-have-a-component-request)".**
 
 ### Checklist: I have found a bug 
 If you have found a bug in Kirby you should follow these steps: 
@@ -130,7 +130,7 @@ If you have found a bug in Kirby you should follow these steps:
     - Create a "fix"-branch from the [master branch](https://github.com/kirbydesign/designsystem/tree/master). 
     - Create a test that reproduces the bug following guidelines in: "[The good: Test](#test)". 
     - Write code to fix the bug
-5. **Follow steps 4 and 5 in "[I have a component request](#i-have-a-component-request)".**
+4. **Follow steps 4 and 5 in "[Checklist: I have a component request](#checklist-i-have-a-component-request)".**
 
 ## Setup environment and tooling for contribution
 <!-- The following section is responsible for teaching people how to get setup with 
