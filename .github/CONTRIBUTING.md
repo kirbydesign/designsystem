@@ -69,7 +69,7 @@ Actionable checklists for these steps can be found [here](#checklist-i-have-a-co
 
 <!-- Why do a self-review? -->
 <dt>Self-review</dt> 
-<dd>This consists of code-reviewing your own pull-request, following guidelines found in: [the good self review](#self-review). This is your chance to catch any low-hanging fruits and common issues before the reviewer does. If this is not done, an unneccessar amount of minor changes might be required during code review. This wastes both yours and the reviewers time.</dd>
+<dd>This consists of code-reviewing your own pull-request, following guidelines found in: [The good self review](#self-review). This is your chance to catch any low-hanging fruits and common issues before the reviewer does. If this is not done, an unneccessar amount of minor changes might be required during code review. This wastes both yours and the reviewers time.</dd>
 
 <!-- Why we do UX reviews? -->
 <dt>UX review</dt> 
@@ -81,7 +81,7 @@ Our experience is that pull-requests with a troublesome and drawn out review pro
 <!-- - Issues for trackability and history -->
 
 ### Before you get coding
-Skim through the "[the good](#the-good)"-section. We are a lot of people working together on this project, all with varying prefrences both in terms of how we work and code. This might lead to frustrations during code-reviews. In an effort to avoid this and be transparent; we have specified our preferences on various subjects in that section. 
+Skim through the "[The good](#the-good)"-section. We are a lot of people working together on this project, all with varying prefrences both in terms of how we work and code. This might lead to frustrations during code-reviews. In an effort to avoid this and be transparent; we have specified our preferences on various subjects in that section. 
 
 Alternative ways of doing things are not wrong. But we strive for consistency across the Kirby codebase. 
 
@@ -93,21 +93,21 @@ on how to do their specific task, and explain them what the process is for that 
 <!--- Submit issue using the component request template--> 
 If you got an idea for a component that you think should be part of Kirby you should follow these steps: 
 
-1. **Open a [new issue](https://github.com/kirbydesign/designsystem/issues/new/choose) using the "component request"-template** (See guidelines on how to write [the good issue](#issue)).
+1. **Open a [new issue](https://github.com/kirbydesign/designsystem/issues/new/choose) using the "component request"-template** (See guidelines on how to write "[The good: Issue](#issue)").
 2. **Refinement:**
     - Request that the issue is [UX refined](#ux-refinement) in [#kirby-guild](#getting-access-to-the-kirby-guild-slack-channel); do not proceed until this is done.
     - Request that the issue is [tech refined](#tech-refinement) in [#kirby-guild](#getting-access-to-the-kirby-guild-slack-channel); do not proceed until this is done.
     - Move the issue to the "Ready to do"-column in the "Kirby kan-ban board"-project.
 3. **Implementation:**
-    - Make sure you have read: [before you get coding](#before-you-get-coding).
+    - Make sure you have read: "[Before you get coding](#before-you-get-coding)".
     - Signal to others you are working on the issue by assigning yourself.
     - Create a "feature"-branch from the [master branch](https://github.com/kirbydesign/designsystem/tree/master). 
     - Publish a WIP implementation to Github as a draft PR and ask [#kirby-guild](#getting-access-to-the-kirby-guild-slack-channel) for feedback. <!--This will let you know early on if you are going in the right direction.-->
-    - Make sure you have implemented tests following the "[the good test](#test)"-guidelines.
+    - Make sure you have implemented tests following the guidelines in: "[The good: Test](#test)".
     - Update the [cookbook](https://cookbook.kirby.design) with examples and showcases.
 4. **Review:**
     - Do a [self-review](#self-review). 
-    - Create a pull-request (see [creating pull-requests](#creating-pull-requests)).
+    - Create a pull-request (see: "[Creating pull-requests](#creating-pull-requests)").
     - Request that the pull-request is code-reviewed in [#kirby-guild](#getting-access-to-the-kirby-guild-slack-channel).
     - Request that the pull-request is [UX reviewed](#ux-review).
     - When the pull-request has been approved it will be automatically merged to master via [automerge](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/automatically-merging-a-pull-request).
@@ -117,18 +117,18 @@ If you got an idea for a component that you think should be part of Kirby you sh
 If you have an idea for Kirby that is not a brand new component or aimed at improving code quality; then you should submit an enhancement request!
 The process is the same as submitting a component request just using another issue-template: 
 
-1. **Open a [new issue](https://github.com/kirbydesign/designsystem/issues/new/choose) using the "enhancement request"-template** (See guidelines on how to write: "[the good issue](#issue)").
+1. **Open a [new issue](https://github.com/kirbydesign/designsystem/issues/new/choose) using the "enhancement request"-template** (See: "[The good: Issue](#issue)").
 2. **Follow steps 2 to 5 in "[I have a component request](#i-have-a-component-request)".**
 
 ### Checklist: I would like to report a bug 
 If you have found a bug in Kirby you should follow these steps: 
-1. **Report it by opening a [new issue](https://github.com/kirbydesign/designsystem/issues/new/choose) using the "bug report"-template** (See guidelines on how to write [the good issue](#issue)).
+1. **Report it by opening a [new issue](https://github.com/kirbydesign/designsystem/issues/new/choose) using the "bug report"-template** (See: "[The good: Issue](#issue)").
 2. **Get the bug verified** 
     - To make sure the bug is not intended behaviour contact [#kirby-guild](#getting-access-to-the-kirby-guild-slack-channel) to have it verified; do not proceed until this is done. 
 3. **Implementation:**: 
     - Signal to others you are working on the issue by assigning yourself.
     - Create a "fix"-branch from the [master branch](https://github.com/kirbydesign/designsystem/tree/master). 
-    - Create a test that reproduces the bug following "[the good test](#test)"-guidelines. 
+    - Create a test that reproduces the bug following guidelines in: "[The good: Test](#test)". 
     - Write code to fix the bug
 5. **Follow steps 4 and 5 in "[I have a component request](#i-have-a-component-request)".**
 
