@@ -61,18 +61,18 @@ Actionable checklists for these steps can be found [here](#checklist-i-have-a-co
 <!-- Why we do UX refinement?-->
 <dl>
 <dt>UX Refinement</dt> 
-<dd>Every issue must be UX refined before implementation - unless it does not involve any visual changes. This consists of UXers planning how the issue can be solved in a way that aligns with the design system. The `NOT UX refined`-label will be removed from the issue by team Kirby, once this has been done. If a pull-request with visual changes is submitted for an issue that has not been UX refined; the UX review process may result in a bunch of changes, that can delay the process of getting your PR approved.</dd>
+<dd>Every issue must be UX refined before implementation - unless it does not involve any visual changes. This consists of UXers planning how the issue can be solved in a way that aligns with the design system. The <code>NOT UX refined</code>-label will be removed from the issue by team Kirby, once this has been done. If a pull-request with visual changes is submitted for an issue that has not been UX refined; the UX review process may result in a bunch of changes, that can delay the process of getting your PR approved.</dd>
 
 <!--- Why do we do Tech refinement? -->
 <dt>Tech Refinement</dt> 
-<dd>Every issue must be tech refined. Here it is discussed and agreed on how an issue should be implemented the best; the agreed upon solution should be documented in a comment on the issue. How long it takes depends on the scope of the issue. For small issues it might be nothing more than an agreement via a direct message. Other times it is a full-blown meeting with multiple participants. Once the issue has been properly tech refined Team Kirby will remove the `NOT Tech refined`-label from the issue. <em>No code should be written before this step is complete</em>. If a pull-request is submitted for an issue that has not been tech refined; changes and problems that could have been tackled from the beginning, might arise from the code-review.</dd>
+<dd>Every issue must be tech refined. Here it is discussed and agreed on how an issue should be implemented the best; the agreed upon solution should be documented in a comment on the issue. How long it takes depends on the scope of the issue. For small issues it might be nothing more than an agreement via a direct message. Other times it is a full-blown meeting with multiple participants. Once the issue has been properly tech refined Team Kirby will remove the <code>NOT Tech refined</code>-label from the issue. <em>No code should be written before this step is complete</em>. If a pull-request is submitted for an issue that has not been tech refined; changes and problems that could have been tackled from the beginning, might arise from the code-review.</dd>
 
 <dt>Publish a WIP draft</dt> 
 <dd>We encourage contributors to publish a draft pull-request with a WIP implementation of their issue to get feedback. This can advantageously be done before tests are written. By doing this misunderstandings and issues can be tackled early on; here they are often easier to correct. If this is not done, they might not be discovered until the code-review. Tests might have to be changed. So therefore we encourage contributors to use the opportunity to get some timely feedback.</dd>
 
 <!-- Why do a self-review? -->
 <dt>Self-review</dt> 
-<dd>This consists of code-reviewing your own pull-request, following guidelines found in: "[The good: Self-review](#self-review)". This is your chance to catch any low-hanging fruits and common issues before the reviewer does. If this is not done, an unneccessary amount of minor changes might be required during code review. This wastes both yours and the reviewers time.</dd>
+<dd>This consists of code-reviewing your own pull-request, following guidelines found in: "<a href="#self-review">The good: Self-review</a>". This is your chance to catch any low-hanging fruits and common issues before the reviewer does. If this is not done, an unneccessary amount of minor changes might be required during code review. This wastes both yours and the reviewers time.</dd>
 
 <!-- Why we do UX reviews? -->
 <dt>UX review</dt> 
