@@ -43,6 +43,9 @@ We think that is neat.
 
 There is still need for managing Kirby however. We need to make sure that the project is moving in the right direction. That submitted code is: high quality, not duplicating anything and consistent with the rest of the codebase.
 To do so a series of steps has been created that an issue must go through. All of these aim at making sure that the process of cooperating from idea to implementation is smooth for contributors. With as little time wasted as possible.
+> Simplicity—the art of maximizing the amount of work not done—is essential.
+> 
+> _[Principles behind the Agile Manifesto](https://agilemanifesto.org/principles.html)_
 
 <!-- General description of the contribution model -->
 In broad strokes the process is: 
