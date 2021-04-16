@@ -111,7 +111,7 @@ describe('ButtonComponent', () => {
 
       it('should render with correct color', () => {
         expect(element).toHaveComputedStyle({
-          color: getColor('white', 'contrast'),
+          color: getColor('primary', 'contrast'),
         });
       });
 
@@ -225,7 +225,7 @@ describe('ButtonComponent', () => {
 
       it('should render with correct color', () => {
         expect(element).toHaveComputedStyle({
-          color: getColor('medium', 'contrast'),
+          color: getColor('black'),
         });
       });
 
@@ -287,7 +287,7 @@ describe('ButtonComponent', () => {
 
       it('should render with correct color', () => {
         expect(element).toHaveComputedStyle({
-          color: getColor('primary', 'contrast'),
+          color: getColor('black'),
         });
       });
 

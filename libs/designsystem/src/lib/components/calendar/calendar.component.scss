@@ -1,34 +1,30 @@
 @import '../../scss/utils';
 $month-navigator-width: 80px;
 
-table.calendar-table {
+table {
   width: 100%;
   border-collapse: collapse;
   user-select: none;
-  outline: none !important;
-  border-spacing: 0;
+  margin-bottom: size('xxs');
+}
 
-  thead {
-    padding: 0.5em;
-    border-bottom: 1px solid get-color('background-color');
+th,
+td {
+  text-align: center;
+  padding: 0;
 
-    th {
-      height: 50px;
-      text-align: center;
-    }
+  &:first-child {
+    padding-left: size('xxs');
   }
 
-  tbody {
-    padding: 0.5em;
+  &:last-child {
+    padding-right: size('xxs');
   }
+}
 
-  tr,
-  td {
-    border-style: none;
-    padding: 0;
-    line-height: 2em;
-    height: 0;
-  }
+th {
+  height: 50px;
+  border-bottom: 1px solid get-color('background-color');
 }
 
 .header,
@@ -39,16 +35,15 @@ td {
 
 .header {
   display: flex;
-  flex-direction: row;
-  align-items: center;
   justify-content: space-between;
-  padding: 0.5em;
+  margin: size('xxs');
+  margin-bottom: 0;
 }
 
 .month-navigator {
   display: flex;
-  flex-direction: row;
   flex-grow: 1;
+  align-items: center;
   justify-content: space-between;
 
   button {
@@ -56,6 +51,9 @@ td {
     outline: none;
     border: none;
     cursor: pointer;
+    height: size('xl');
+    width: size('xl');
+    padding: 0;
   }
 
   button:disabled {
@@ -65,7 +63,6 @@ td {
 }
 
 .month-and-year {
-  line-height: line-height('xl');
   user-select: none;
 
   .month {
@@ -91,13 +88,14 @@ td {
 }
 
 .day {
-  $dayWidth: 40px;
+  $dayWidth: size('xl');
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border-radius: $dayWidth / 2;
   width: $dayWidth;
   height: $dayWidth;
-  line-height: $dayWidth;
-  text-align: center;
-  margin: 0 auto;
+  margin: size('xxxs') 0;
 }
 
 .day.selectable,
