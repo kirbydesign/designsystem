@@ -19,8 +19,8 @@ export class MockActionSheetComponent {
   @Input() header: string;
   @Input() subheader: string;
   @Input() items: Array<ActionSheetItem>;
-  @Input() triggerIconName: string;
-  @Input() triggerText: string;
+  @Input() iconName: string;
+  @Input() buttonText: string;
   @Output() itemSelect = new EventEmitter<ActionSheetItem>();
   @Input() tabindex: number;
 }
