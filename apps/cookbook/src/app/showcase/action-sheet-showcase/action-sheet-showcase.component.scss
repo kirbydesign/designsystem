@@ -1,16 +1,4 @@
-@import './libs/designsystem/src/lib/scss/utils';
-
-h2:not(:first-child) {
-  margin-top: size('l');
-}
-
-h3 {
-  border-bottom: 1px dotted get-color('medium');
-}
-
-cookbook-example-viewer {
-  margin-bottom: size('l');
-}
+@import '../showcase.shared';
 
 .action-sheet-trigger {
   display: flex;

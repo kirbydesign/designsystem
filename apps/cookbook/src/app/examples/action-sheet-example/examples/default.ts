@@ -6,7 +6,7 @@ const config = {
   selector: 'cookbook-action-sheet-example-default',
   template: `<kirby-action-sheet 
   header="Your action sheet header" 
-  subHeader="Your action sheet subheader"
+  subheader="Your action sheet subheader"
   [items]="items"
   cancelButtonText="Custom cancel">
   </kirby-action-sheet>`,

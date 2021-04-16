@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ActionSheetItem, ActionSheetConfig } from '@kirbydesign/designsystem';
+import { ActionSheetItem } from '@kirbydesign/designsystem';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
 import { ModalController } from '@kirbydesign/designsystem';
 
@@ -26,9 +26,14 @@ const config = {
   template: `<kirby-page toolbarTitle="A Fixed Title" defaultBackHref="/">
   <!-- Fixed Page Actions -->
   <kirby-page-actions *kirbyPageActions="{fixed: true}">
-    <button kirby-button (click)="onMoreSelect()">
-      <kirby-icon name="more"></kirby-icon>
-    </button>
+  <kirby-action-sheet 
+  header="Your action sheet header" 
+  subHeader="Your action sheet subheader"
+  [items]="items"
+  cancelButtonText="Custom cancel"
+  itemSelect="onItemSelect($event)">
+  </kirby-action-sheet>
+   
   </kirby-page-actions>
   <!-- Page Content -->
   <kirby-page-content>
@@ -75,13 +80,5 @@ export class PageFixedTitleAndActionsExampleComponent extends BasePageExampleCom
       durationInMs: 1500,
     };
     this.toastController.showToast(config);
-  }
-
-  onMoreSelect() {
-    const config: ActionSheetConfig = {
-      header: 'Your action sheet header',
-      items: this.items,
-    };
-    this.modalController.showActionSheet(config, this.onItemSelect.bind(this));
   }
 }

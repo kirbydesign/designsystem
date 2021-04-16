@@ -5,6 +5,7 @@ import {
   HostBinding,
   HostListener,
   Input,
+  OnInit,
   Output,
 } from '@angular/core';
 
@@ -20,9 +21,10 @@ import { ActionSheetItem } from './config/action-sheet-item';
   templateUrl: './action-sheet.component.html',
   styleUrls: ['./action-sheet.component.scss'],
 })
-export class ActionSheetComponent {
+export class ActionSheetComponent implements OnInit {
   private state = OpenState.closed;
-  attentionLevel: '2' | '3' = '3';
+  _attentionLevel: '2' | '3' = '3';
+  _isTouch: boolean;
   static readonly OPEN_DELAY_IN_MS = 100;
 
   constructor(
@@ -31,13 +33,17 @@ export class ActionSheetComponent {
     private elementRef: ElementRef<HTMLElement>
   ) {}
 
+  ngOnInit() {
+    this._isTouch = this.platform.isTouch();
+  }
+
   @Input() cancelButtonText = 'Cancel';
   @Input() disabled: boolean = false;
   @Input() header: string;
   @Input() subheader: string;
   @Input() items: Array<ActionSheetItem>;
-  @Input() triggerIconName = 'more';
-  @Input() triggerText?: string;
+  @Input() iconName = 'more';
+  @Input() buttonText?: string;
   @Output() itemSelect: EventEmitter<ActionSheetItem> = new EventEmitter<ActionSheetItem>();
   @Input() tabindex = 0;
 
@@ -51,9 +57,7 @@ export class ActionSheetComponent {
     return this.state === OpenState.open;
   }
 
-  isTouch = this.platform.isTouch();
-
-  onItemSelect(selection: ActionSheetItem) {
+  _onItemSelect(selection: ActionSheetItem) {
     this.itemSelect.emit(selection);
     this.close();
   }
@@ -63,12 +67,12 @@ export class ActionSheetComponent {
     this.close();
   }
 
-  onButtonMouseEvent(event: Event) {
+  _onButtonMouseEvent(event: Event) {
     // avoid button focus
     event.preventDefault();
   }
 
-  onToggleSheet(event: Event) {
+  _onToggleSheet(event: Event) {
     event.stopPropagation();
     if (!this.isOpen) {
       this.elementRef.nativeElement.focus();
@@ -76,20 +80,14 @@ export class ActionSheetComponent {
     this.toggle();
   }
 
-  toggle() {
-    if (this.isOpen) {
-      this.close();
-      return;
-    }
-    this.open();
+  private toggle() {
+    this.isOpen ? this.close() : this.open();
   }
 
-  open() {
-    if (this.disabled) {
-      return;
-    }
+  private open() {
+    if (this.disabled) return;
 
-    if (this.isTouch) {
+    if (this._isTouch) {
       const config: ActionSheetConfig = {
         header: this.header,
         subheader: this.subheader,
@@ -103,17 +101,16 @@ export class ActionSheetComponent {
     this.state = OpenState.opening;
     setTimeout(() => {
       this.state = OpenState.open;
-      this.attentionLevel = '2';
+      this._attentionLevel = '2';
     }, ActionSheetComponent.OPEN_DELAY_IN_MS);
   }
 
-  close() {
-    if (this.disabled) {
-      return;
-    }
+  private close() {
+    if (this.disabled) return;
+
     if (this.isOpen) {
       this.state = OpenState.closed;
-      this.attentionLevel = '3';
+      this._attentionLevel = '3';
     }
   }
 }

@@ -1,8 +1,8 @@
 import { fakeAsync, tick } from '@angular/core/testing';
-import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
+import { createHostFactory, Spectator } from '@ngneat/spectator';
+import { PlatformService } from 'libs/designsystem/src';
 import { MockComponent } from 'ng-mocks';
 
-import { PlatformService } from '../..';
 import { OpenState } from '../../models';
 import { WindowRef } from '../../types';
 import { ButtonComponent } from '../button/button.component';
@@ -12,8 +12,8 @@ import { ModalController } from '../modal';
 import { ActionSheetComponent, ActionSheetPopoutComponent } from './';
 
 describe('ActionSheetComponent', () => {
-  let spectator: SpectatorHost<ActionSheetComponent>;
-  let popout;
+  let spectator: Spectator<ActionSheetComponent>;
+  let popout: HTMLElement;
   const openDelayInMs = ActionSheetComponent.OPEN_DELAY_IN_MS;
   const modalControllerSpy = jasmine.createSpyObj('ModalController', ['showActionSheet']);
   const mockPlatformService = { isTouch: () => false };
@@ -41,17 +41,20 @@ describe('ActionSheetComponent', () => {
   });
 
   beforeEach(() => {
-    spectator = createHost('<kirby-action-sheet></kirby-action-sheet>');
+    spectator = createHost('<kirby-action-sheet></kirby-action-sheet>', {
+      props: {
+        items: [
+          { id: '1', text: 'Action 1' },
+          { id: '2', text: 'Action 2' },
+          { id: '3', text: 'Action 3' },
+        ],
+        header: 'Test header',
+        subheader: 'Test subheader',
+        cancelButtonText: 'Test cancel button text',
+      },
+    });
 
-    spectator.component.header = 'Test header';
-    spectator.component.subheader = 'Test subheader';
-    spectator.component.items = [
-      { id: '1', text: 'Action 1' },
-      { id: '2', text: 'Action 2' },
-      { id: '3', text: 'Action 3' },
-    ];
-    spectator.component.cancelButtonText = 'Test cancel button text';
-    popout = spectator.element.getElementsByTagName('kirby-action-sheet-popout')[0];
+    popout = spectator.query('kirby-action-sheet-popout');
   });
 
   it('should create', () => {
@@ -60,12 +63,12 @@ describe('ActionSheetComponent', () => {
 
   describe('icon', () => {
     it('should have default icon', () => {
-      expect(spectator.component.triggerIconName).toEqual('more');
+      expect(spectator.component.iconName).toEqual('more');
     });
 
     it('should support custom icon', () => {
       const iconName = 'pension';
-      spectator.setInput('triggerIconName', iconName);
+      spectator.setInput('iconName', iconName);
       const icon = spectator.query(IconComponent);
       expect(icon.name).toEqual(iconName);
     });
@@ -79,17 +82,13 @@ describe('ActionSheetComponent', () => {
 
     it('should render custom button text', () => {
       const buttonText = 'Custom text';
-      spectator.setInput('triggerText', buttonText);
+      spectator.setInput('buttonText', buttonText);
       const button = spectator.query('button');
       expect(button.textContent).toEqual(buttonText);
     });
   });
 
   describe('popout', () => {
-    beforeEach(() => {
-      mockPlatformService.isTouch = () => false;
-    });
-
     it('should open and focus on click', fakeAsync(() => {
       spectator.click('button');
       tick(openDelayInMs);
@@ -121,7 +120,7 @@ describe('ActionSheetComponent', () => {
     });
 
     it('should call modalController on touch', () => {
-      spectator.component.isTouch = true;
+      spectator.component._isTouch = true;
       spectator.click('button');
       expect(modalControllerSpy.showActionSheet).toHaveBeenCalled();
     });

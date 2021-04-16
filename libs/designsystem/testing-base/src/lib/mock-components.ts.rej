@@ -1,3 +1,0 @@
-diff a/libs/designsystem/testing-base/src/lib/mock-components.ts b/libs/designsystem/testing-base/src/lib/mock-components.ts	(rejected hunks)
-@@ -59 +57,0 @@ import { MockTabButtonComponent } from './components/mock.tab-button.component';
--import { MockToggleComponent } from './components/mock.toggle.component';
