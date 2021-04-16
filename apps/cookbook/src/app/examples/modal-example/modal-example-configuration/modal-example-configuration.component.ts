@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, NgZone, Output } from '@angular/core';
 
 import { WindowRef } from '@kirbydesign/designsystem/types/window-ref';
 
