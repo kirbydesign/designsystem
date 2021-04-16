@@ -1,6 +1,6 @@
 import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 
-import { RangeComponent, RangeValue } from '@kirbydesign/designsystem';
+import { RangeComponent } from '@kirbydesign/designsystem';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
