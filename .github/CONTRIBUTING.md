@@ -107,9 +107,9 @@ If you got an idea for a component that you think should be part of Kirby you sh
     - Update the [cookbook](https://cookbook.kirby.design) with examples and showcases.
 4. **Review:**
     - Do a [self-review](#self-review). 
-    - Create a pull-request (see: "[Creating pull-requests](#creating-pull-requests)").
+    - Create a pull-request. If you created a draft PR in step 3 you can just mark that as "ready for review" (see: "[Creating pull-requests](#creating-pull-requests)").
     - Request that the pull-request is code-reviewed in [#kirby-guild](#getting-access-to-the-kirby-guild-slack-channel).
-    - Request that the pull-request is [UX reviewed](#ux-review).
+    - Request that the pull-request is [UX reviewed](#ux-review) in [#kirby-guild](#getting-access-to-the-kirby-guild-slack-channel).
     - When the pull-request has been approved it will be automatically merged to master via [automerge](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/automatically-merging-a-pull-request).
 5. **Celebrate! 🎉**
 
