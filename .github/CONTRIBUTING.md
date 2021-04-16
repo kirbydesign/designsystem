@@ -59,19 +59,25 @@ Once a pull-request has been approved it will be automatically merged.
 Actionable checklists for these steps can be found [here](#checklist-i-have-a-component-request). The following highlight some of the steps in the checklists, to explain what they are and why they exist: 
 
 <!-- Why we do UX refinement?-->
-**UX Refinement:** Every issue must be UX refined before implementation - unless it does not involve any visual changes. This consists of UXers planning how the issue can be solved in a way that aligns with the design system. The `NOT UX refined`-label will be removed from the issue by team Kirby, once this has been done. If a pull-request with visual changes is submitted for an issue that has not been UX refined; the UX review process may result in a bunch of changes, that can delay the process of getting your PR approved.
+<dl>
+<dt>UX Refinement</dt> 
+<dd>Every issue must be UX refined before implementation - unless it does not involve any visual changes. This consists of UXers planning how the issue can be solved in a way that aligns with the design system. The `NOT UX refined`-label will be removed from the issue by team Kirby, once this has been done. If a pull-request with visual changes is submitted for an issue that has not been UX refined; the UX review process may result in a bunch of changes, that can delay the process of getting your PR approved.</dd>
 
 <!--- Why do we do Tech refinement? -->
-**Tech Refinement:**
-Every issue must be tech refined. Here it is discussed and agreed on how an issue should be implemented the best; the agreed upon solution should be documented in a comment on the issue. How long it takes depends on the scope of the issue. For small issues it might be nothing more than an agreement via a direct message. Other times it is a full-blown meeting with multiple participants. Once the issue has been properly tech refined Team Kirby will remove the `NOT Tech refined`-label from the issue. <em>No code should be written before this step is complete</em>. If a pull-request is submitted for an issue that has not been tech refined; changes and problems that could have been tackled from the beginning, might arise from the code-review
+<dt>Tech Refinement</dt> 
+<dd>Every issue must be tech refined. Here it is discussed and agreed on how an issue should be implemented the best; the agreed upon solution should be documented in a comment on the issue. How long it takes depends on the scope of the issue. For small issues it might be nothing more than an agreement via a direct message. Other times it is a full-blown meeting with multiple participants. Once the issue has been properly tech refined Team Kirby will remove the `NOT Tech refined`-label from the issue. <em>No code should be written before this step is complete</em>. If a pull-request is submitted for an issue that has not been tech refined; changes and problems that could have been tackled from the beginning, might arise from the code-review.</dd>
 
-**Publish a WIP draft:** We encourage contributors to publish a draft pull-request with a WIP implementation of their issue to get feedback. This can advantageously be done before tests are written. By doing this misunderstandings and issues can be tackled early on; here they are often easier to correct. If this is not done, they might not be discovered until the code-review. Tests might have to be changed. So therefore we encourage contributors to use the opportunity to get some timely feedback.
+<dt>Publish a WIP draft</dt> 
+<dd>We encourage contributors to publish a draft pull-request with a WIP implementation of their issue to get feedback. This can advantageously be done before tests are written. By doing this misunderstandings and issues can be tackled early on; here they are often easier to correct. If this is not done, they might not be discovered until the code-review. Tests might have to be changed. So therefore we encourage contributors to use the opportunity to get some timely feedback.</dd>
 
 <!-- Why do a self-review? -->
-**Self-review:** This consists of code-reviewing your own pull-request, following guidelines found in: "[The good: Self-review](#self-review)". This is your chance to catch any low-hanging fruits and common issues before the reviewer does. If this is not done, an unneccessary amount of minor changes might be required during code review. This wastes both yours and the reviewers time.
+<dt>Self-review</dt> 
+<dd>This consists of code-reviewing your own pull-request, following guidelines found in: "[The good: Self-review](#self-review)". This is your chance to catch any low-hanging fruits and common issues before the reviewer does. If this is not done, an unneccessary amount of minor changes might be required during code review. This wastes both yours and the reviewers time.</dd>
 
 <!-- Why we do UX reviews? -->
-**UX review:** If the implementation of the issue resulted in visual changes - then it has to be UX reviewed. This is to make sure that the introduced changes align with the design system. We strive to have every issue that introduces visual changes UX reviewed. If this is not done and the changes are merged to master, we might recieve issues about components not being properly aligned with the design system anymore from the users of Kirby.
+<dt>UX review</dt> 
+<dd>If the implementation of the issue resulted in visual changes - then it has to be UX reviewed. This is to make sure that the introduced changes align with the design system. We strive to have every issue that introduces visual changes UX reviewed. If this is not done and the changes are merged to master, we might recieve issues about components not being properly aligned with the design system anymore from the users of Kirby.</dd>
+</dl>
 
 Our experience is that pull-requests with a troublesome and drawn out review process has not followed one or more of these steps. 
 
