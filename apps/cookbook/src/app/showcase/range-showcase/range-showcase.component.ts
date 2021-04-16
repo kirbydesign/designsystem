@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ApiDescriptionMethod } from '~/app/shared/api-description/api-description-methods/api-description-methods.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 @Component({
   selector: 'cookbook-range-showcase',
@@ -53,13 +54,19 @@ export class RangeShowcaseComponent {
       type: ['boolean'],
       defaultValue: 'false',
     },
+    {
+      name: 'debounce',
+      description: '(Optional) How long, in milliseconds, to wait to trigger the change event.',
+      type: ['number'],
+      defaultValue: '0',
+    },
   ];
 
-  rangeEvents: ApiDescriptionProperty[] = [
+  rangeEvents: ApiDescriptionMethod[] = [
     {
-      name: 'valueChange',
+      name: 'change',
       description: 'Emits events when the value changes.',
-      type: ['EventEmitter<RangeValue>'],
+      signature: '() => EventEmitter<number>',
     },
   ];
 }

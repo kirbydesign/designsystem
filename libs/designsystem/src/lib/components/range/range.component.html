@@ -1,19 +1,17 @@
-<ng-container *ngIf="initialized">
-  <ion-range
-    (ionChange)="rangeValueChange($event)"
-    #ionRange
-    [min]="min"
-    [max]="max"
-    [step]="step"
-    [value]="value"
-    [pin]="pin"
-    [snaps]="ticks"
-    [ticks]="ticks"
-    [debounce]="debounce"
-    [disabled]="disabled"
-  >
-  </ion-range>
-</ng-container>
+<ion-range
+  (ionChange)="rangeValueChange($event)"
+  #ionRange
+  [min]="min"
+  [max]="max"
+  [step]="step"
+  [value]="value"
+  [pin]="pin"
+  [snaps]="ticks"
+  [ticks]="ticks"
+  [debounce]="debounce"
+  [disabled]="disabled"
+>
+</ion-range>
 
 <label *ngIf="minLabel" class="min-label">{{ minLabel }}</label>
 <label *ngIf="maxLabel" class="max-label">{{ maxLabel }}</label>
