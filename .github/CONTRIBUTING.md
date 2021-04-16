@@ -19,6 +19,7 @@ If you at any point have any questions please read: [I have a question related t
   - [After you submit](#after-you-submit)
 - [The good:](#the-good:)
   - [Issue](#issue)
+  - [Branch](#branch)
   - [Commit](#commit)
   - [Self-review](#self-review)
   - [Pull-request](#pull-request)
@@ -139,6 +140,15 @@ the repo such that they can get coding -->
     - Screenshots if necessary
     <!-- I think the following point is important if Kirby is to be spread out amongst several teams -->
     - Don't assume people have knowledge outside of Kirby - contributors might come from many different projects 
+
+### Branch 
+<!-- We could also use githooks to enforce branch naming policies: https://itnext.io/using-git-hooks-to-enforce-branch-naming-policy-ffd81fa01e5e - perhaps have the warning throw a link to this section? -->
+- Guidelines for how to name branches 
+- Feature branches
+- Bugfix branches
+- Enhancement branches
+- Housekeeping branches
+- Others i might have forgotten?
 
 ### Commit
 - Focus on one thing per commit 
