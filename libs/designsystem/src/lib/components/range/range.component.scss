@@ -15,8 +15,8 @@ ion-range {
   --knob-box-shadow: #{get-elevation(2)};
   --knob-size: 24px;
 
-  --pin-color: #{get-text-color('semi-dark')};
-  --pin-background: transparent;
+  --pin-color: #{get-text-color('black')};
+  --pin-background: #{get-color('semi-light')};
 
   --bar-background: #{get-color('medium')};
   --bar-background-active: #{get-color('dark')};
@@ -46,6 +46,22 @@ ion-range {
     font-size: font-size('xs');
     color: var(--pin-color);
     background-color: var(--pin-background);
+    padding: 2px 4px;
+    border-radius: 4px;
+    min-width: 40px;
+    position: relative;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      display: block;
+      border-color: var(--pin-background) transparent transparent transparent;
+      border-style: solid;
+      border-width: 6px;
+    }
   }
 
   &::part(tick),
