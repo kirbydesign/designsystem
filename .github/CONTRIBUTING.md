@@ -8,7 +8,7 @@ If you at any point have any questions please read: [I have a question related t
 - [Introduction to the contribution model](#introduction-to-the-contribution-model)
   - [Checklist: I have a component request](#checklist-i-have-a-component-request)
   - [Checklist: I have an enhancement](#checklist-i-have-an-enhancement)
-  - [Checklist I would like to report a bug](#checklist-i-would-like-to-report-a-bug)
+  - [Checklist: I have found a bug](#checklist-i-have-found-a-bug)
 - [Setup environment and tooling for contribution](#setup-environment-and-tooling-for-contribution)
   - [Clone and install repository](#clone-and-install-repository)
   - [Node](#node)
@@ -120,12 +120,12 @@ The process is the same as submitting a component request just using another iss
 1. **Open a [new issue](https://github.com/kirbydesign/designsystem/issues/new/choose) using the "enhancement request"-template** (See: "[The good: Issue](#issue)").
 2. **Follow steps 2 to 5 in "[I have a component request](#i-have-a-component-request)".**
 
-### Checklist: I would like to report a bug 
+### Checklist: I have found a bug 
 If you have found a bug in Kirby you should follow these steps: 
 1. **Report it by opening a [new issue](https://github.com/kirbydesign/designsystem/issues/new/choose) using the "bug report"-template** (See: "[The good: Issue](#issue)").
 2. **Get the bug verified** 
     - To make sure the bug is not intended behaviour contact [#kirby-guild](#getting-access-to-the-kirby-guild-slack-channel) to have it verified; do not proceed until this is done. 
-3. **Implementation:**: 
+3. **Implementation:** 
     - Signal to others you are working on the issue by assigning yourself.
     - Create a "fix"-branch from the [master branch](https://github.com/kirbydesign/designsystem/tree/master). 
     - Create a test that reproduces the bug following guidelines in: "[The good: Test](#test)". 
