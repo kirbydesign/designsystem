@@ -1,8 +1,7 @@
 import { Directive } from '@angular/core';
 
 @Directive({
-  // tslint:disable-next-line:directive-selector
-  selector: ' ',
+  selector: '[kirbyDeprecatedSizeDirectiveDontUse]',
 })
 export class SizeDirective {
   constructor() {
