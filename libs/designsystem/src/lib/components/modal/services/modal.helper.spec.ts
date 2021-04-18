@@ -243,9 +243,9 @@ describe('ModalHelper', () => {
           });
 
           const expectSize = (size: ModalSize | undefined) => {
-            expect(ionModal.classList.contains('small')).toBe(size === 'small');
-            expect(ionModal.classList.contains('medium')).toBe(size === 'medium');
-            expect(ionModal.classList.contains('large')).toBe(size === 'large');
+            expect(ionModal.classList.contains('kirby-modal--small')).toBe(size === 'small');
+            expect(ionModal.classList.contains('kirby-modal--medium')).toBe(size === 'medium');
+            expect(ionModal.classList.contains('kirby-modal--large')).toBe(size === 'large');
           };
 
           it('modal should have min-height', async () => {
@@ -288,11 +288,12 @@ describe('ModalHelper', () => {
             expectSize('large');
           });
 
-          it('modal should be sized `full-height`', async () => {
+          fit('modal should be sized `full-height`', async () => {
             await openModal('Full-height Modal', undefined, 'full-height');
 
             expectSize('full-height');
             const expectedHeight = window.innerHeight - modalPaddingTop;
+            debugger;
             expect(ionModalWrapper).toHaveComputedStyle({ '--height': '100%' });
             expect(ionModalWrapper).toHaveComputedStyle({ height: `${expectedHeight}px` });
           });

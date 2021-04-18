@@ -94,7 +94,7 @@ ion-modal.kirby-overlay {
       }
     }
 
-    &:not(.kirby-modal-compact).full-height {
+    &:not(.kirby-modal-compact).kirby-modal--full-height {
       --height: 100%;
     }
 
@@ -139,7 +139,7 @@ ion-modal.kirby-overlay {
             --min-height: #{map-get($modal-heights, 'l')};
           }
 
-          &.full-height .modal-wrapper,
+          &.kirby-modal--full-height .modal-wrapper,
           .modal-wrapper.full-height {
             border-bottom-left-radius: 0;
             border-bottom-right-radius: 0;
