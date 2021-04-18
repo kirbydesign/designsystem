@@ -288,7 +288,7 @@ describe('ModalHelper', () => {
             expectSize('large');
           });
 
-          fit('modal should be sized `full-height`', async () => {
+          it('modal should be sized `full-height`', async () => {
             await openModal('Full-height Modal', undefined, 'full-height');
 
             expectSize('full-height');
