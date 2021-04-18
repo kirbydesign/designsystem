@@ -12,7 +12,7 @@ $tickWidth: 6px;
 
 ion-range {
   --knob-background: #{get-color('white')};
-  --knob-box-shadow: #{get-elevation(2)};
+  --knob-box-shadow: 0 5px 10px 0px rgba(28, 28, 28, 0.3), 0 0 5px 0 rgba(28, 28, 28, 0.08);
   --knob-size: 24px;
 
   --pin-color: #{get-text-color('black')};
