@@ -293,7 +293,6 @@ describe('ModalHelper', () => {
 
             expectSize('full-height');
             const expectedHeight = window.innerHeight - modalPaddingTop;
-            debugger;
             expect(ionModalWrapper).toHaveComputedStyle({ '--height': '100%' });
             expect(ionModalWrapper).toHaveComputedStyle({ height: `${expectedHeight}px` });
           });
