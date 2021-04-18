@@ -40,7 +40,6 @@ export class RangeComponent implements OnChanges, ControlValueAccessor {
     if (value !== this.currentValue) {
       this.currentValue = value;
       this.propagateChange(this.currentValue);
-      console.log(this.currentValue);
       this.change.emit(this.currentValue);
     }
   }
