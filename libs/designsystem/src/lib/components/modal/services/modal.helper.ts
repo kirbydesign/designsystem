@@ -39,7 +39,6 @@ export class ModalHelper {
     let customCssClasses = [];
     if (config.cssClass) {
       customCssClasses = Array.isArray(config.cssClass) ? config.cssClass : [config.cssClass];
-      console.log(customCssClasses);
     }
 
     const ionModal = await this.ionicModalController.create({
