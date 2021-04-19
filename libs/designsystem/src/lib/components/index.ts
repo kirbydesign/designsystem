@@ -2,10 +2,10 @@ export * from './app';
 
 export * from './accordion';
 export * from './action-sheet';
-export { AvatarComponent } from './avatar/avatar.component';
+export { AvatarComponent, AvatarSize } from './avatar/avatar.component';
 
 export { BadgeComponent } from './badge/badge.component';
-export { ButtonComponent } from './button/button.component';
+export { ButtonComponent, ButtonSize } from './button/button.component';
 
 export * from './card';
 export * from './chart';
