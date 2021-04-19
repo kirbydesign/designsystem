@@ -7,6 +7,7 @@ If you at any point have any questions please read: [I have a question related t
 
 - [Introduction to the contribution model](#introduction-to-the-contribution-model)
   - [The process of contributing](#the-process-of-contributing)
+  - [Before you get coding](#before-you-get-coding)
   - [Checklist: I have a component request](#checklist-i-have-a-component-request)
   - [Checklist: I have an enhancement](#checklist-i-have-an-enhancement)
   - [Checklist: I have found a bug](#checklist-i-have-found-a-bug)
@@ -79,7 +80,9 @@ If a pull-request with visual changes is submitted for an issue that has not bee
 
 Every issue must be tech refined. Here it is discussed and agreed on how an issue should be implemented the best; the agreed upon solution should be documented in a comment on the issue. How long it takes depends on the scope of the issue. For small issues it might be nothing more than an agreement via a direct message. Other times it is a full-blown meeting with multiple participants.
 
-Once the issue has been properly tech refined Team Kirby will remove the `NOT Tech refined` label from the issue. _No code should be written before this step is complete_. If a pull-request is submitted for an issue that has not been tech refined; changes and problems that could have been tackled from the beginning, might arise from the code-review.
+⚠️ _No code should be written before this step is complete_.
+
+Once the issue has been properly tech refined Team Kirby will remove the `NOT Tech refined` label from the issue. If a pull-request is submitted for an issue that has not been tech refined; changes and problems that could have been tackled from the beginning, might arise from the code-review.
 
 #### Publish a WIP draft
 
