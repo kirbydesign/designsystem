@@ -5,5 +5,5 @@
 }
 
 ion-toggle {
-  @include increase-target-size();
+  @include accessible-target-size();
 }

@@ -13,7 +13,7 @@
 :host {
   @include theme-background('white');
   @include selected-and-hover('black');
-  @include increase-target-size();
+  @include accessible-target-size();
 
   white-space: nowrap;
   padding: 0 size('s');

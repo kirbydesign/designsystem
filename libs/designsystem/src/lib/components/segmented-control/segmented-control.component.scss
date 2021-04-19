@@ -37,7 +37,7 @@ ion-segment {
 }
 
 ion-segment-button {
-  @include increase-target-size();
+  @include accessible-target-size();
 
   min-height: size('xl');
   font-weight: font-weight('normal');
