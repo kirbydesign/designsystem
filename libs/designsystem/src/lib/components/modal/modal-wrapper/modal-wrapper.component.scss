@@ -34,7 +34,7 @@
   }
 }
 
-:host-context(ion-modal:not(.kirby-modal--full-height)) {
+:host-context(ion-modal:not(.kirby-modal-full-height)) {
   @include media('>=medium') {
     @include contain-content();
   }
