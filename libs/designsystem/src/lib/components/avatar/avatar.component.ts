@@ -1,6 +1,13 @@
-import { Component, Input, OnInit, ChangeDetectionStrategy, HostBinding } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
 
 import { BrandColor, NotificationColor } from '../../helpers/color-helper';
+
+export enum AvatarSize {
+  XS = 'xs',
+  SM = 'sm',
+  MD = 'md',
+  LG = 'lg',
+}
 
 @Component({
   selector: 'kirby-avatar',
@@ -8,17 +15,18 @@ import { BrandColor, NotificationColor } from '../../helpers/color-helper';
   styleUrls: ['./avatar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AvatarComponent implements OnInit {
+export class AvatarComponent {
   @Input() imageSrc: string;
   @Input() altText: string;
   @Input() shadow: boolean;
   @Input() text: string;
   @Input() overlay: boolean;
-  @HostBinding('class')
+  @Input() size: AvatarSize = AvatarSize.SM;
   @Input()
   themeColor: NotificationColor | BrandColor | 'medium' | 'white' | 'dark' | 'light' | 'semi-light';
 
-  constructor() {}
-
-  ngOnInit() {}
+  @HostBinding('class')
+  get _cssClass() {
+    return [this.themeColor, this.size].filter((cssClass) => !!cssClass);
+  }
 }

@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
-import { Sizes } from '@kirbydesign/designsystem';
-
-declare var require: any;
+import { AvatarSize } from '@kirbydesign/designsystem';
 
 @Component({
   selector: 'cookbook-avatar-showcase',
@@ -21,8 +19,8 @@ export class AvatarShowcaseComponent implements OnInit {
     {
       name: 'size',
       description: 'Sets the size of the avatar.',
-      defaultValue: 'sm',
-      type: Object.values(Sizes),
+      defaultValue: AvatarSize.SM,
+      type: Object.values(AvatarSize),
     },
     {
       name: 'altText',
