@@ -149,4 +149,19 @@ describe('ActionSheetPopoutComponent', () => {
       expect(cancelButton.nativeElement.innerText).toEqual(expected);
     });
   });
+
+  describe('Button focus', () => {
+    it('class is added to focused item', () => {
+      const className = 'is-focused';
+      component.focusedItemIndex = 1;
+      fixture.detectChanges();
+      const rootElement: DebugElement = fixture.debugElement;
+      const actionSheetItems = rootElement
+        .query(By.directive(CardComponent))
+        .queryAll(By.directive(ButtonComponent));
+
+      const focusedItem = actionSheetItems[1].nativeElement;
+      expect(focusedItem).toHaveClass(className);
+    });
+  });
 });

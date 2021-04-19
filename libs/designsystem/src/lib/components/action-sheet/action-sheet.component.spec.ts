@@ -123,4 +123,79 @@ describe('ActionSheetComponent', () => {
       expect(modalControllerSpy.showActionSheet).toHaveBeenCalled();
     });
   });
+
+  fdescribe('keyboard support', () => {
+    it('should toggle open on enter', fakeAsync(() => {
+      spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'Enter');
+      tick(openDelayInMs);
+      expect(spectator.component.isOpen).toBeTrue();
+    }));
+
+    it('should toggle close on enter', fakeAsync(() => {
+      spectator.component['state'] = OpenState.open;
+      spectator.detectChanges();
+      spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'Enter');
+      tick(openDelayInMs);
+      expect(spectator.component.isOpen).toBeFalse();
+    }));
+
+    it('should toggle open on space', fakeAsync(() => {
+      spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'Space');
+      tick(openDelayInMs);
+      expect(spectator.component.isOpen).toBeTrue();
+    }));
+
+    it('should toggle close on escape', fakeAsync(() => {
+      spectator.component['state'] = OpenState.open;
+      spectator.detectChanges();
+      spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'Escape');
+      tick(openDelayInMs);
+      expect(spectator.component.isOpen).toBeFalse();
+    }));
+
+    it('should set and increment focused items on arrow down', () => {
+      expect(spectator.component._focusedIndex).toEqual(-1);
+
+      spectator.component['state'] = OpenState.open;
+      spectator.detectChanges();
+
+      spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowDown');
+      expect(spectator.component._focusedIndex).toEqual(0);
+
+      spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowDown');
+      expect(spectator.component._focusedIndex).toEqual(1);
+
+      spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowDown');
+      expect(spectator.component._focusedIndex).toEqual(2);
+
+      spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowDown');
+      expect(spectator.component._focusedIndex).toEqual(2);
+    });
+
+    it('should decrement focused items on arrow up', () => {
+      spectator.component['state'] = OpenState.open;
+      spectator.component['_focusedIndex'] = 2;
+      spectator.detectChanges();
+
+      spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowUp');
+      expect(spectator.component._focusedIndex).toEqual(1);
+
+      spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowUp');
+      expect(spectator.component._focusedIndex).toEqual(0);
+
+      spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowUp');
+      expect(spectator.component._focusedIndex).toEqual(0);
+    });
+
+    it('should select focused item on enter', () => {
+      const onSelectSpy = spyOn(spectator.component.itemSelect, 'emit');
+      spectator.component['state'] = OpenState.open;
+      spectator.component['_focusedIndex'] = 1;
+      spectator.detectChanges();
+
+      spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'Enter');
+      expect(onSelectSpy).toHaveBeenCalledTimes(1);
+      expect(onSelectSpy).toHaveBeenCalledWith(spectator.component.items[1]);
+    });
+  });
 });

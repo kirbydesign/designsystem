@@ -166,11 +166,11 @@ export class ActionSheetComponent implements OnInit {
     }
     event.preventDefault();
     let newIndex = -1;
-    if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
+    if (event.key === 'ArrowUp') {
       // Select previous item:
       newIndex = this._focusedIndex - 1;
     }
-    if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
+    if (event.key === 'ArrowDown') {
       if (this._focusedIndex === -1) {
         // None selected, select first item:
         newIndex = 0;
