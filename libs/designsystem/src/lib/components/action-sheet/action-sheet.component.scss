@@ -4,6 +4,15 @@
   position: relative;
   display: inline-block;
   outline: none;
+
+  // Only apply focus ring if pointer device can hover
+  // (effectively desktop/mouse devices):
+  @include focus() {
+    > button,
+    > button.attention-level3 {
+      border-color: $focus-ring-color;
+    }
+  }
 }
 
 :host(.is-open) {

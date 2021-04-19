@@ -7,9 +7,10 @@
     size="lg"
     attentionLevel="4"
     tabindex="-1"
+    [ngClass]="{ 'is-focused': focusedItemIndex == i }"
     (click)="onItemSelect(item)"
     (mousedown)="onButtonMouseEvent($event)"
-    *ngFor="let item of items"
+    *ngFor="let item of items; let i = index"
   >
     {{ item.text }}
   </button>

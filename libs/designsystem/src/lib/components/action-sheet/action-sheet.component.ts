@@ -25,6 +25,7 @@ export class ActionSheetComponent implements OnInit {
   private state = OpenState.closed;
   _attentionLevel: '2' | '3' = '3';
   _isTouch: boolean;
+  _focusedIndex = -1;
   static readonly OPEN_DELAY_IN_MS = 100;
 
   constructor(
@@ -118,6 +119,90 @@ export class ActionSheetComponent implements OnInit {
     if (this.isOpen) {
       this.state = OpenState.closed;
       this._attentionLevel = '3';
+      this._focusedIndex = -1;
+    }
+  }
+
+  @HostListener('keydown.space', ['$event'])
+  _onSpace(event: KeyboardEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    if (!this.isOpen) {
+      this.open();
+    }
+  }
+
+  @HostListener('keydown.escape', ['$event'])
+  _onEscape(event: KeyboardEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    if (this.isOpen) {
+      this.close();
+    }
+  }
+
+  @HostListener('keydown.enter', ['$event'])
+  _onEnter(event: KeyboardEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    if (this.isOpen && this._focusedIndex > -1) {
+      this._onItemSelect(this.items[this._focusedIndex]);
+      return;
+    }
+    this.toggle();
+  }
+
+  @HostListener('keydown.arrowup', ['$event'])
+  @HostListener('keydown.arrowdown', ['$event'])
+  @HostListener('keydown.arrowleft', ['$event'])
+  @HostListener('keydown.arrowright', ['$event'])
+  _onArrowKeys(event: KeyboardEvent) {
+    if (this.disabled) {
+      return;
+    }
+    if (this.isOpen && (event.key === 'ArrowLeft' || event.key === 'ArrowRight')) {
+      // Mirror default HTML5 select behaviour - prevent left/right arrows when open:
+      return;
+    }
+    event.preventDefault();
+    let newIndex = -1;
+    if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
+      // Select previous item:
+      newIndex = this._focusedIndex - 1;
+    }
+    if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
+      if (this._focusedIndex === -1) {
+        // None selected, select first item:
+        newIndex = 0;
+      } else if (this._focusedIndex < this.items.length - 1) {
+        // Select next item:
+        newIndex = this._focusedIndex + 1;
+      }
+    }
+
+    if (newIndex > -1) {
+      this._focusedIndex = newIndex;
+    }
+  }
+
+  @HostListener('keydown.home', ['$event'])
+  @HostListener('keydown.end', ['$event'])
+  _onHomeEndKeys(event: KeyboardEvent) {
+    event.preventDefault();
+    if (this.disabled) {
+      return;
+    }
+    let newIndex = -1;
+    if (event.key === 'Home') {
+      // Select first item:
+      newIndex = 0;
+    }
+    if (event.key === 'End') {
+      // Select last item:
+      newIndex = this.items.length - 1;
+    }
+    if (newIndex > -1) {
+      this._focusedIndex = newIndex;
     }
   }
 }

@@ -91,7 +91,7 @@ export class ActionSheetShowcaseComponent {
     {
       name: 'itemSelect',
       description: 'Emitted when an item is selected (tap on mobile, click/keypress on web)',
-      signature: '() => ActionSheetItem',
+      signature: '(ActionSheetItem) => void',
     },
   ];
 }

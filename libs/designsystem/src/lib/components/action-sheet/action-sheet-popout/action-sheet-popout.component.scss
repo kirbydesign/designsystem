@@ -33,8 +33,14 @@ kirby-card {
   button[kirby-button] {
     margin: 0;
     border-radius: 0;
+    transition: background-color get-transition-duration('quick') get-transition-easing('linear'),
+      opacity get-transition-duration('quick') get-transition-easing('linear');
     &:not(:focus) {
       border-top: 1px solid get-color('background-color');
+    }
+    &:hover,
+    &.is-focused {
+      background-color: var(--kirby-item-background-focused, #{get-color('background-color')});
     }
   }
 }
