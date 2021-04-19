@@ -161,6 +161,8 @@
 // Apply click area of at least 44 x 44 px
 // and ignore rounded corners to ensure it is square
 @mixin increase-target-size() {
+  position: relative;
+
   &:after {
     content: '';
     position: absolute;

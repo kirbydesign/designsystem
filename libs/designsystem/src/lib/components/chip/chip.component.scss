@@ -22,7 +22,6 @@
   margin: size('xxxs');
   cursor: pointer;
   user-select: none;
-  position: relative;
   @include theme-background('white');
   @include selected-and-hover('black');
   @include increase-target-size();
