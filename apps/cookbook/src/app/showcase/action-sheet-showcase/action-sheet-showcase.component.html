@@ -24,12 +24,21 @@
     <a href="/home/showcase/icon"><code>Icons</code></a
     >.
   </p>
-  <p>To add text to the trigger button, simply add a <code>triggerText</code>.</p>
+  <p>To add text to the trigger button, simply add a <code>buttonText</code>.</p>
   <cookbook-example-viewer [html]="customButtonExample.template">
     <cookbook-action-sheet-example-custom-button
       class="action-sheet-trigger"
       #customButtonExample
     ></cookbook-action-sheet-example-custom-button>
+  </cookbook-example-viewer>
+
+  <h2>Disabled</h2>
+
+  <cookbook-example-viewer [html]="diabledButtonExample.template">
+    <cookbook-action-sheet-example-disabled
+      class="action-sheet-trigger"
+      #diabledButtonExample
+    ></cookbook-action-sheet-example-disabled>
   </cookbook-example-viewer>
 
   <h2>Open Action Sheet Programatically</h2>

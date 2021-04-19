@@ -102,8 +102,6 @@ describe('ActionSheetComponent', () => {
       expect(popout).toHaveComputedStyle({ display: 'block' });
 
       spectator.click('button');
-      popout = spectator.query('kirby-action-sheet-popout');
-
       expect(spectator.component['state']).toBe(+OpenState.closed);
       expect(spectator.component.isOpen).toBeFalse();
       expect(spectator.element.classList).not.toContain('is-open');

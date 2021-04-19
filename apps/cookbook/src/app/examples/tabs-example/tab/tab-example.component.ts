@@ -56,13 +56,13 @@ import { ActionSheetItem } from '@kirbydesign/designsystem';
 
       <kirby-fab-sheet *kirbyPageContent="{ fixed: true }" horizontalAlignment="right">
         <kirby-icon name="write-message"></kirby-icon>
-        <kirby-action-sheet-popout
+        <kirby-action-sheet
           header="Your action sheet header"
           subheader="Your action sheet subheader"
           [items]="items"
           (itemSelect)="onItemSelect($event)"
         >
-        </kirby-action-sheet-popout>
+        </kirby-action-sheet>
       </kirby-fab-sheet>
     </kirby-page>
   `,

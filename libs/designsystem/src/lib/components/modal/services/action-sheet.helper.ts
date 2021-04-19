@@ -18,7 +18,7 @@ export class ActionSheetHelper {
 
     const ionModal = await this.ionicModalController.create({
       component: ActionSheetPopoutComponent,
-      cssClass: ['kirby-overlay', 'kirby-action-sheet-popout'],
+      cssClass: ['kirby-overlay', 'kirby-action-sheet'],
       componentProps: {
         ...config,
         cancel: cancel,

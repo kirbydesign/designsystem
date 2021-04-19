@@ -38,7 +38,7 @@ export class ActionSheetComponent implements OnInit {
   }
 
   @Input() cancelButtonText = 'Cancel';
-  @Input() disabled: boolean = false;
+  @Input() disabled = false;
   @Input() header: string;
   @Input() subheader: string;
   @Input() items: Array<ActionSheetItem>;
@@ -46,6 +46,8 @@ export class ActionSheetComponent implements OnInit {
   @Input() buttonText?: string;
   @Output() itemSelect: EventEmitter<ActionSheetItem> = new EventEmitter<ActionSheetItem>();
   @Input() tabindex = 0;
+  @Input() hideButton? = false;
+  @Input() hideCancel = !this.hideButton;
 
   @HostBinding('attr.tabindex')
   get _tabindex() {
@@ -55,6 +57,11 @@ export class ActionSheetComponent implements OnInit {
   @HostBinding('class.is-open')
   get isOpen(): boolean {
     return this.state === OpenState.open;
+  }
+
+  @HostBinding('class.has-button')
+  get hasButton(): boolean {
+    return !this.hideButton;
   }
 
   _onItemSelect(selection: ActionSheetItem) {
@@ -84,7 +91,7 @@ export class ActionSheetComponent implements OnInit {
     this.isOpen ? this.close() : this.open();
   }
 
-  private open() {
+  open() {
     if (this.disabled) return;
 
     if (this._isTouch) {
@@ -105,7 +112,7 @@ export class ActionSheetComponent implements OnInit {
     }, ActionSheetComponent.OPEN_DELAY_IN_MS);
   }
 
-  private close() {
+  close() {
     if (this.disabled) return;
 
     if (this.isOpen) {
