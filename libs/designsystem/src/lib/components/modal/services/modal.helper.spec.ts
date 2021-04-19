@@ -243,9 +243,9 @@ describe('ModalHelper', () => {
           });
 
           const expectSize = (size: ModalSize | undefined) => {
-            expect(ionModal.classList.contains('kirby-modal--small')).toBe(size === 'small');
-            expect(ionModal.classList.contains('kirby-modal--medium')).toBe(size === 'medium');
-            expect(ionModal.classList.contains('kirby-modal--large')).toBe(size === 'large');
+            expect(ionModal.classList.contains('kirby-modal-small')).toBe(size === 'small');
+            expect(ionModal.classList.contains('kirby-modal-medium')).toBe(size === 'medium');
+            expect(ionModal.classList.contains('kirby-modal-large')).toBe(size === 'large');
           };
 
           it('modal should have min-height', async () => {
