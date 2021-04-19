@@ -13,6 +13,7 @@ import {
 } from '@angular/core';
 import { Component, HostListener, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { noop } from 'rxjs';
 
 import { ListItemTemplateDirective } from '../../list/list.directive';
 import { RadioComponent } from '../radio.component';
@@ -99,7 +100,7 @@ export class RadioGroupComponent implements AfterContentInit, ControlValueAccess
   private _disabled = false;
   private _items: string[] | any[] = [];
   private _onChangeCallback: (value: any) => void = () => {};
-  private _onTouched: Function;
+  private _onTouched = noop;
   private _selectedIndex: number = -1;
   private _value?: string | any = null;
   @ViewChildren(RadioComponent)
