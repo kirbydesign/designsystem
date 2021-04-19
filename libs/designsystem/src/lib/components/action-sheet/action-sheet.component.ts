@@ -87,7 +87,7 @@ export class ActionSheetComponent implements OnInit {
     this.toggle();
   }
 
-  private toggle() {
+  toggle() {
     this.isOpen ? this.close() : this.open();
   }
 
