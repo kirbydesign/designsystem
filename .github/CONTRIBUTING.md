@@ -215,12 +215,54 @@ __instructions go here__
 ## Glossary 
 Some of the terms used in the context of Kirby might be unfamiliar or have a different meaning in the context of this project. 
 Therefore to avoid misconceptions and misunderstandings this section explains these terms - please let us know, if there are any terms in the context of Kirby you think should be added to this list.
-### UX Refinement
-- Explain what UX refinement is 
+
+<!-- ### UX Refinement
+
+Every issue must be UX refined before implementation - unless it does not involve any visual changes.
+
+This consists of UXers planning how the issue can be solved in a way that aligns with the design system. The `NOT UX refined`-label will be removed from the issue by team Kirby, once this has been done.
+
+If a pull-request with visual changes is submitted for an issue that has not been UX refined; the UX review process may result in a bunch of changes, that can delay the process of getting your PR approved.
+
 ### Tech Refinement
 - Explain what tech refinement is
 ### UX review 
 - Explain what an UX review is
 ### Self review 
-- Explain what a self review is
+- Explain what a self review is -->
 
+<dl>
+  <!-- Why we do UX refinement?-->
+  <dt>UX Refinement</dt>
+  <dd>
+    Planning and deciding how the issue can be solved in a way that aligns with the design
+    system visually and UX-wise.
+  </dd>
+
+  <!--- Why do we do Tech refinement? -->
+  <dt>Tech Refinement</dt>
+  <dd>
+    Discussion and agreement on technical solution(s) for the implementation of
+    the issue.
+  </dd>
+
+  <dt>WIP draft</dt>
+  <dd>
+    Draft pull-request intented for getting timely feedback before too much
+    implementation has been done.
+  </dd>
+
+  <!-- Why do a self-review? -->
+  <dt>Self-review</dt>
+  <dd>
+    Reviewing your own pull-request like you would review someone else's
+    pull-request.
+  </dd>
+
+  <!-- Why we do UX reviews? -->
+  <dt>UX Review</dt>
+  <dd>
+    Confirmation from UXers that the implementation complies with what was
+    decided during UX Refinement.
+  </dd>
+</dl>
