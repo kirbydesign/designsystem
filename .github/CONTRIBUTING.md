@@ -6,6 +6,7 @@ If you at any point have any questions please read: [I have a question related t
 **Beware:** We reserve the right to close issues and pull-requests that does not follow the steps outlined in [the contribution model](#the-contribution-model). This is not because we want to be mean or micro-manage the way things are done - but a project of this size requires some consistency in the way we cooperate in order to be manageable. 
 
 - [Introduction to the contribution model](#introduction-to-the-contribution-model)
+  - [The process of contributing](#the-process-of-contributing)
   - [Checklist: I have a component request](#checklist-i-have-a-component-request)
   - [Checklist: I have an enhancement](#checklist-i-have-an-enhancement)
   - [Checklist: I have found a bug](#checklist-i-have-found-a-bug)
