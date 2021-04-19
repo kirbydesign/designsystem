@@ -11,6 +11,10 @@
 }
 
 :host {
+  @include theme-background('white');
+  @include selected-and-hover('black');
+  @include increase-target-size();
+
   white-space: nowrap;
   padding: 0 size('s');
   height: size('l');
@@ -22,9 +26,6 @@
   margin: size('xxxs');
   cursor: pointer;
   user-select: none;
-  @include theme-background('white');
-  @include selected-and-hover('black');
-  @include increase-target-size();
 
   :host-context(.kirby-color-brightness-dark) {
     @include theme-background(transparent, 'white');

@@ -85,6 +85,8 @@ $button-width: (
 }
 
 :host {
+  @include increase-target-size();
+
   font-family: var(--kirby-font-family);
   background-color: var(--kirby-button-background-color, initial);
   color: var(--kirby-button-color, inherit);
@@ -112,9 +114,6 @@ $button-width: (
   // to keep the rounded shape:
   outline: none;
   border: 1px solid var(--kirby-button-border-color, transparent);
-
-  // Apply target size of at least 44px to all sizes
-  @include increase-target-size();
 
   &.icon-left {
     padding-left: size('xs');
