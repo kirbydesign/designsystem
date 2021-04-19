@@ -124,7 +124,7 @@ describe('ActionSheetComponent', () => {
     });
   });
 
-  fdescribe('keyboard support', () => {
+  describe('keyboard support', () => {
     it('should toggle open on enter', fakeAsync(() => {
       spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'Enter');
       tick(openDelayInMs);
