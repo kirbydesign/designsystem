@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
+import { KirbyAnimation } from '../../../animation/kirby-animation';
+import { ModalCompactWrapperComponent } from '../modal-wrapper/compact/modal-compact-wrapper.component';
 import { ModalConfig, ModalFlavor, ModalSize } from '../modal-wrapper/config/modal-config';
 import { ModalWrapperComponent } from '../modal-wrapper/modal-wrapper.component';
-import { ModalCompactWrapperComponent } from '../modal-wrapper/compact/modal-compact-wrapper.component';
-import { Overlay } from './modal.interfaces';
-import { KirbyAnimation } from '../../../animation/kirby-animation';
+
 import { ModalAnimationBuilderService } from './modal-animation-builder.service';
+import { Overlay } from './modal.interfaces';
 
 @Injectable()
 export class ModalHelper {
@@ -35,6 +36,11 @@ export class ModalHelper {
     const defaultModalSize: ModalSize = config.flavor === 'modal' ? 'medium' : null;
     const modalSize = config.size || defaultModalSize;
 
+    let customCssClasses = [];
+    if (config.cssClass) {
+      customCssClasses = Array.isArray(config.cssClass) ? config.cssClass : [config.cssClass];
+    }
+
     const ionModal = await this.ionicModalController.create({
       component: config.flavor === 'compact' ? ModalCompactWrapperComponent : ModalWrapperComponent,
       cssClass: [
@@ -43,8 +49,11 @@ export class ModalHelper {
         config.flavor === 'drawer' ? 'kirby-drawer' : null,
         config.flavor === 'compact' ? 'kirby-modal-compact' : null,
         modalSize,
+        config.interactWithBackground ? 'interact-with-background' : null,
+        ...customCssClasses,
       ],
-      backdropDismiss: config.flavor === 'compact' ? false : true,
+      backdropDismiss: config.flavor === 'compact' || config.interactWithBackground ? false : true,
+      showBackdrop: !config.interactWithBackground,
       componentProps: { config: config },
       swipeToClose: config.flavor != 'compact',
       presentingElement: modalPresentingElement,
