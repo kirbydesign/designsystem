@@ -14,9 +14,6 @@ If you at any point have any questions please read: [I have a question related t
   - [Node](#node)
   - [Tslint](#tslint)
   - [Prettier](#prettier)
-- [Creating pull-requests](#creating-pull-requests)
-  - [Before you submit](#before-you-submit)
-  - [After you submit](#after-you-submit)
 - [The good:](#the-good:)
   - [Issue](#issue)
   - [Branch](#branch)
@@ -111,7 +108,7 @@ If you got an idea for a component that you think should be part of Kirby you sh
     - Update the [cookbook](https://cookbook.kirby.design) with examples and showcases.
 4. **Review:**
     - Do a [self-review](#self-review). 
-    - Create a pull-request. If you created a draft PR in step 3 you can just mark that as "ready for review" (see: "[Creating pull-requests](#creating-pull-requests)").
+    - Create a pull-request. If you created a draft PR in step 3 you can just mark that as "ready for review".
     - Request that the pull-request is code-reviewed in [#kirby-guild](#getting-access-to-the-kirby-guild-slack-channel).
     - Request that the pull-request is [UX reviewed](#ux-review) in [#kirby-guild](#getting-access-to-the-kirby-guild-slack-channel).
     - When the pull-request has been approved it will be automatically merged to master via [automerge](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/automatically-merging-a-pull-request).
@@ -152,19 +149,6 @@ the repo such that they can get coding -->
 ### Prettier
 - It is a good idea to use format-on-save
 
-## Creating pull-requests 
-<!-- This section is responsible for guiding contributors on how they should submit pull-requests in a way that ensures the most swift process and teach them how to catch low-hanging issues there might come up in code-review. -->
-
-### Before you submit  
-- Make sure you have completed the steps in: [Setup tooling for contribution](#setup-tooling-for-contribution)
-- Make sure you have written tests according to the guidelines described in [The good: test](#test)
-- Do a self-review <!-- We could link to self-review in the templates and have people check it off? -->
-
-### After you submit 
-- Post in Kirby-guild 
-- Code reviews are meant to align your code with existing code 
-  - While your implementation might be perfectly valid, we are aiming for uniformity across the codebase. 
-- Please don't fire & forget, i.e. commit & run - make sure to stay responsive and come back to answer comments on your code review :)
 ## The good:
 <!-- The following sections have the responsibility of explaining contributors our best pratices such that they can more easily have their changes implemented in kirby --> 
 <!-- Ideally we should be able to refer to these sections if people break the guidelines in their issue or pull-requests, to make sure we are all preaching the same guidelines -->
