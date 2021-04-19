@@ -154,15 +154,130 @@ the repo such that they can get coding -->
 <!-- Ideally we should be able to refer to these sections if people break the guidelines in their issue or pull-requests, to make sure we are all preaching the same guidelines -->
 
 ### Issue 
-- General properties we are looking for and how to achieve them 
-  - Readability 
-  - Easily understandable 
-    - No internal lingo 
-  - Proof-read
-  - Self-contained
+>> A good idea is an orhpan without effective communication. 
+>> 
+>> _Topic 7, The pragmatic programmer_
+
+Writing a good issue is all about effective communication. This leads to fewer questions and discussion in the comments, which in turn results in a quicker process from new issue to approved PR. 
+We have in this section outlined what we think a good issue with effective communication is.
+
+<!--- Only one issue per issue-->
+#### The good issue only contain one issue
+While this might seem obvious, it can be easy to fall into the trap of bundling two issues together. 
+
+Consider the following issue: 
+"Hovering a `kirby-button` with attention level 2 in IE11 does not activate the hover-effect. It works when i use attention level 1, but i get warnings in the console". 
+If that issue is closed, how is the reader supposed to know what was actually fixed? Was it the issue of the hover-effect not activating; or was it the issue of warnings being thrown when using attention level 1? Both? 
+
+To solve this, the issue should be split into two seperate issues which then refer to each other: 
+1. "Hovering a `kirby-button` with attention level 2 in IE11 does not activate the hover-effect. This might be related to issue #2"
+2. "I am not able to use a `kirby-button` with attention level 1 without a warning being thrown in the console. This might be related to issue #1"
+
+If you feel like you are "complaining" too much by creating several issues, don't! 
+It is only helpful of you to split up your issues - you are saving time and easing organization. 
+We think that is very nice of you.
+
+#### The good issue is self-contained 
+<!-- - Self-contained
     - Screenshots if necessary
     <!-- I think the following point is important if Kirby is to be spread out amongst several teams -->
     - Don't assume people have knowledge outside of Kirby - contributors might come from many different projects 
+- Explain what you want ad why you want it. -->
+It can not be assumed that the readers of your issue has any knowledge of your work outside of Kirby. 
+The reader might be: a contributor outside of bank data, someone who is not in your team, or potentially a new hire at bank data. 
+This also goes for Kirby maintainers - some of which has been hired to specifically work on Kirby. 
+
+Therefore: 
+- Do not use internal lingo 
+- Do not assume the reader can access the application you are working on - include screenshots instead.
+- Do not assume the reader can access the repository you are working in - include code snippets instead (if possible). 
+
+<!--- Be specific and unambigious -->
+#### The good issue is specific & unambigious
+<!--- Do point to relevant files if you know them, don't just say "there's some css files". 
+- Facts first opinions second. -->
+
+The wording of an issue should be as specific and unambigious as possible. This will help the reader understand exactly what you mean. 
+This can be done in many ways, so we have compiled some examples to show what we mean:
+
+** Example #1: referring to files ** 
+If you are referring to a file in the repository do not refer to it as `_typography.css` use the full path instead: `libs/designsystem/src/lib/scss/base/_typography.scss`.
+While it might be obvious for you and experienced contributors, what and where `_typography.css` is; it is not obvious for newcomers. 
+
+If you have already refered to the full path earlier in the issue, it can be okay to refer to the file as `_typography.css`.
+
+** Example #2: writing reproducible steps for bug reports **
+<!--- When reporting bug, be unambiguosly specific: Don't write "type some text", Do write: "Type: 'test'".
+  - There might be something with the specific text you're typing that triggers the bug. Who knows?  -->
+The steps should be unambigously specific - this can be done for example by changing the step: "Type some text" to: "Type: 'text'". 
+There could be something with the _exact_ way you are doing it, that triggers the behaviour you are experiecing. 
+
+** Example #3: SNAPPY TITLE HERE THX **
+<!---
+- When reporting a bug, be unambigious and exact! 
+  -  I run Rector on [this-code] and I got [this-exception] with [this-exception-message] 
+    - That's pure maintainer poetry-->
+When reporting a bug or similar do not write something along the lines of: 
+"Whenever i use a `kirby-button` with attention level 1 on the frontpage, a warning is thrown."
+Specify exactly where and how the button is inserted is with a code-snippet, along with exact details of the warning and where it can be found:
+"Inserting a `kirby-button` with attention level 1 as shown in the code-snippet, results in the following warning being logged in the browser console: `Warning goes here`".
+
+That's pure maintainer poetry. 
+
+These are but three examples of how issues can be specific and unambigious. 
+But always keep in the back of your mind, how you can be more specific and unambigious when writing. 
+
+#### The good issue follows the template 
+<!-- - Follow the templates! - they are as is to help you remember which information we're looking for -->
+Whenever you create a template you will be prompted to select a list of templates. Whenever you fill out your issue do not delete the template. Use it. 
+They exist to ease the collaboration by reminding you of which information is needed to best understand your issue. 
+
+If you experience that no template lives up to your specific need, well there's a good opportunity to contribute. Create an issue for a new template to be created! 
+
+#### The good issues have a good title
+<!-- - Spend some time on your titles 
+  - Make them alluring. 
+  - Short without too much detail 
+  - The issues are viewed in some sort of list view 80% of the time. -->
+Issues are viewed in some sort of list view 80% of the time (source: author of this document). Therefore you should use some effort, to make sure that the title for your issue is well fought out. 
+A good title is short without too much detail. Details can be explained in the actual issue. You can also try to make it a bit alluring, which might lure contributors to take that issue. 
+
+#### The good issue is easily readable
+<!-- - Readability 
+- Easily understandable 
+  - No internal lingo 
+- Proof-read --> 
+
+You should aim at making your issues as readable as possible. Use punctuation to the best of your abilities and try to simplify the language as most you can. 
+You should also avoid using internal lingo as much as possible. The ideal issue should be able to be read, understood and solved, without the need for any internal bank data knowledge. This aids us in helping out accross different teams and people outside of the organization. Someone reading your issue might not know what that specific shortening means, in the context which you're working.
+
+<!-- - Don't be afraid to use formatting tools such as lists 
+When making issues readable text formatting tools are your friend. Using tools such as lists or bolding text can make it easier to skim and visually parse If you write something along the lines of: "Should i do: a,b,c" turn it into a list: 
+Should i do: 
+- a 
+- b
+- c  -->
+Formatting is also your ally on the path to writing an easily readable issue, as it can help visually parse what is going on. Going through what i have had to eat today i might list it as. 
+Today i ate: greek youghurt for breakfast, minestrone soup for lunch and a bowl of carbonara for dinner. This is much easier parsed if written as: 
+Today i ate: 
+- Greek youghurt for breakfast 
+- Minestrone soup for lunch 
+- A bowl of carbonara for dinner 
+
+Use this to your advantage! 
+
+#### The good issue contains screenshots and gifs if possible 
+<!-- - A picture says more than 1000 words... (Imagine how much a gif is saying) --> 
+Kirby is a design system, hence it is a very visual project! - so don't be shy of using screenshots to explain yourself. 
+If you're requesting a new component, don't be afraid of sketching out how you are imagining it. If you experience a bug, take a screenshot so we know exactly what you are experiencing. 
+
+Gifs can also be a helpful tool to show interactions that might go wrong or problems with animations. Here a tool such as: [ INSERT SUGGESTION FOR GIF TOOL HERE ] can be used for catching these. 
+
+#### The good issue is closed when there i no need for it
+<!-- - Close an issue if you do not need it anymore and work haven't begun on it.  -->
+If an issue that you have submitted is no longer necessary, you should go ahead and close it. 
+This is not because your might not provide value to Kirby, but there is almost certainly someone needing work done, that is more preceeding than an issue for which there really is no need.
+If someone else has a need for your issue again, the needer can open a new issue. No harm done (issues are free to create afterall) :-) 
 
 ### Branch 
 <!-- We could also use githooks to enforce branch naming policies: https://itnext.io/using-git-hooks-to-enforce-branch-naming-policy-ffd81fa01e5e - perhaps have the warning throw a link to this section? -->
