@@ -23,6 +23,8 @@ export class MockActionSheetComponent {
   @Input() buttonText: string;
   @Output() itemSelect = new EventEmitter<ActionSheetItem>();
   @Input() tabindex: number;
+  @Input() hideButton: boolean;
+  @Input() hideCancel;
 }
 
 // #endregion
