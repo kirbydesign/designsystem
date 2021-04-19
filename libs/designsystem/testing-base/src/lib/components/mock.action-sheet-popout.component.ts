@@ -16,10 +16,10 @@ import { ActionSheetItem, ActionSheetPopoutComponent } from '@kirbydesign/design
 export class MockActionSheetPopoutComponent {
   @Input() cancelButtonText: string;
   @Input() hideCancel: boolean;
-  @Input() disabled: boolean;
   @Input() header: string;
   @Input() subheader: string;
   @Input() items: Array<ActionSheetItem>;
+  @Input() focusedItemIndex;
   @Output() cancel = new EventEmitter();
   @Output() itemSelect = new EventEmitter<ActionSheetItem>();
 }
