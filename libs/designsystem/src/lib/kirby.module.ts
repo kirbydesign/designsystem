@@ -83,7 +83,6 @@ import { ToggleComponent } from './components/toggle/toggle.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
 import { ModalRouterLinkDirective } from './directives/modal-router-link/modal-router-link.directive';
-import { SizeDirective } from './directives/size/size.directive';
 import { ThemeColorDirective } from './directives/theme-color/theme-color.directive';
 import { WindowRef } from './types/window-ref';
 
@@ -116,7 +115,6 @@ const exportedDeclarations = [
   SegmentedControlComponent,
   ChipComponent,
   BadgeComponent,
-  SizeDirective,
   ThemeColorDirective,
   DateInputDirective,
   SlideButtonComponent,
