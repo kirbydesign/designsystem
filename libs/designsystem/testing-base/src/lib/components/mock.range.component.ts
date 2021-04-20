@@ -22,11 +22,10 @@ export class MockRangeComponent {
   @Input() pin: boolean;
   @Input() step: number;
   @Input() ticks: boolean;
-  @Input() disabled;
+  @Input() disabled: boolean;
   @Output() change = new EventEmitter<number>();
 
   setDisabledState() {}
-  rangeValueChange() {}
   writeValue() {}
   registerOnTouched() {}
   registerOnChange() {}
