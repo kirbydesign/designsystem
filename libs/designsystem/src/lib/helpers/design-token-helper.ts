@@ -1,7 +1,6 @@
-import { ThemeColor } from './theme-color.type';
 import { ColorHelper } from './color-helper';
-
 import { styles } from './design-token-helper.styles';
+import { ThemeColor } from './theme-color.type';
 
 export class DesignTokenHelper {
   public static readonly breakpoints = styles.breakpoints;
@@ -40,19 +39,23 @@ export class DesignTokenHelper {
     };
   }
 
-  public static size(key: string): string {
+  public static size(key: keyof typeof styles.sizes): string {
     return styles.sizes[key];
   }
 
-  public static fontSize(key: string): string {
+  public static fontSize(key: keyof typeof styles.fontSizes): string {
     return styles.fontSizes[key];
   }
 
-  public static fontWeight(key: string): string {
+  public static iconFontSize(key: keyof typeof styles.iconFontSizes): string {
+    return styles.iconFontSizes[key];
+  }
+
+  public static fontWeight(key: keyof typeof styles.fontWeight): string {
     return styles.fontWeight[key];
   }
 
-  public static lineHeight(key: string): string {
+  public static lineHeight(key: keyof typeof styles.lineHeight): string {
     return styles.lineHeight[key];
   }
 
@@ -80,7 +83,7 @@ export class DesignTokenHelper {
     return styles.dropdownItemHeight;
   }
 
-  public static avatarSize(key: 'xs' | 's' | 'm' | 'l'): string {
+  public static avatarSize(key: keyof typeof styles.avatarSizes): string {
     return styles.avatarSizes[key];
   }
 
@@ -88,8 +91,12 @@ export class DesignTokenHelper {
     return styles.fatFingerSize;
   }
 
-  public static getElevation(z: 2 | 4 | 8): string {
+  public static getElevation(z: keyof typeof styles.elevationsRgb): string {
     return styles.elevationsRgb[z];
+  }
+
+  public static itemHeight(key: keyof typeof styles.itemHeights): string {
+    return styles.itemHeights[key];
   }
 }
 

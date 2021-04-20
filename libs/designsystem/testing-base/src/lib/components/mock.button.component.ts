@@ -1,6 +1,6 @@
-import { forwardRef, Component, Input } from '@angular/core';
+import { Component, forwardRef, Input } from '@angular/core';
 
-import { ButtonComponent, NotificationColor } from '@kirbydesign/designsystem';
+import { ButtonComponent, ButtonSize, NotificationColor } from '@kirbydesign/designsystem';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
@@ -21,6 +21,7 @@ export class MockButtonComponent {
   @Input() expand: 'full' | 'block';
   @Input() text: string;
   @Input() isFloating: boolean;
+  @Input() size: ButtonSize;
 }
 
 // #endregion
