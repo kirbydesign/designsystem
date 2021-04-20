@@ -172,9 +172,13 @@ Consider the following issue:
 If that issue is closed, how is the reader supposed to know what was actually fixed? 
 Was it the issue of the hover-effect not activating? The issue of warnings being thrown when using attention level 1? Both? 
 
-To solve this, the issue should be split into two seperate issues which then refer to each other: 
-1. > Hovering a `kirby-button` with attention level 2 in IE11 does not activate the hover-effect. This might be related to issue #2.
-2. > I am not able to use a `kirby-button` with attention level 1 without a warning being thrown in the console. This might be related to issue #1.
+To solve this, the issue should be split into two seperate issues which refer to each other: 
+
+Issue #1:
+> Hovering a `kirby-button` with attention level 2 in IE11 does not activate the hover-effect. This might be related to issue #2.
+
+Issue #2:
+> I am not able to use a `kirby-button` with attention level 1 without a warning being thrown in the console. This might be related to issue #1.
 
 If you feel like you are "complaining" too much by creating several issues; don't! 
 It is only helpful of you to split up your issues - you are saving time and easing organization. 
