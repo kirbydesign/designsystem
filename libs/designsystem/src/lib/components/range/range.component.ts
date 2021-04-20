@@ -28,7 +28,7 @@ export class RangeComponent implements OnChanges, ControlValueAccessor {
   @Input() max: number;
   @Input() min: number;
   @Input() pin: boolean;
-  @Input() step: number = 1;
+  @Input() step = 1;
   @Input() ticks: boolean;
   @Input() disabled;
   @Input()
