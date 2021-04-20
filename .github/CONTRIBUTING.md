@@ -371,6 +371,12 @@ This does not go for bug reports however, as we want to unearth and solve as man
 
 ### Commit
 
+> Commit early, Commit often
+
+> Commit Often, Perfect Later, Publish Once
+>
+> _[Git Best Practices](https://sethrobertson.github.io/GitBestPractices/)_
+
 - Focus on one thing per commit 
 - Keep changes as small as possible 
 - Only commit related functionality for each commit
