@@ -148,8 +148,13 @@ describe('ModalHelper', () => {
     await openOverlay({ flavor: 'modal', title, component, size });
   };
 
-  const openDrawer = async (title: string = 'Drawer', component?: any, size?: ModalSize) => {
-    await openOverlay({ flavor: 'drawer', title, component, size });
+  const openDrawer = async (
+    title: string = 'Drawer',
+    component?: any,
+    size?: ModalSize,
+    interactWithBackground?: boolean
+  ) => {
+    await openOverlay({ flavor: 'drawer', title, component, size, interactWithBackground });
   };
 
   const expectShadowStyle = () => {
@@ -179,6 +184,15 @@ describe('ModalHelper', () => {
       expect(ionModalWrapper).toHaveComputedStyle({
         'background-color': backgroundColor,
         'border-radius': `${defaultBorderRadius} ${defaultBorderRadius} 0px 0px`,
+      });
+    });
+  };
+
+  const expectBodyToAllowScroll = () => {
+    it(`body should have class 'allow-background-scroll'`, () => {
+      expect(window.document.body.classList).toContain('allow-background-scroll');
+      expect(window.document.body).toHaveComputedStyle({
+        overflow: 'visible',
       });
     });
   };
@@ -220,7 +234,7 @@ describe('ModalHelper', () => {
 
           describe(`drawer`, () => {
             beforeEach(async () => {
-              await openDrawer('Drawer On Presenting Element');
+              await openDrawer('Drawer On Presenting Element', undefined, 'medium', true);
             });
 
             afterEach(async () => {
@@ -230,6 +244,7 @@ describe('ModalHelper', () => {
             expectShadowStyle();
             expectBackdropStyle();
             expectDrawerWrapperStyle();
+            expectBodyToAllowScroll();
           });
         });
 
