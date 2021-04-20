@@ -1,0 +1,8 @@
+@import './libs/designsystem/src/lib/scss/utils';
+@import '../showcase.shared';
+
+cookbook-example-viewer {
+  margin-bottom: size('l');
+  background: #fff;
+  padding: size('s');
+}

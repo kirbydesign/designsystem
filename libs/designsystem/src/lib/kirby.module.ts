@@ -64,6 +64,7 @@ import { ProgressCircleRingComponent } from './components/progress-circle/progre
 import { ProgressCircleComponent } from './components/progress-circle/progress-circle.component';
 import { RadioGroupComponent } from './components/radio/radio-group/radio-group.component';
 import { RadioComponent } from './components/radio/radio.component';
+import { RangeComponent } from './components/range/range.component';
 import { ReorderListComponent } from './components/reorder-list/reorder-list.component';
 import { RouterOutletModule } from './components/router-outlet/router-outlet.module';
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
@@ -138,6 +139,7 @@ const exportedDeclarations = [
   AccordionItemComponent,
   RadioComponent,
   RadioGroupComponent,
+  RangeComponent,
 ];
 
 const declarations = [
