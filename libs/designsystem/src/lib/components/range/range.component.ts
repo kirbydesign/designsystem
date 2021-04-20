@@ -32,10 +32,6 @@ export class RangeComponent implements OnChanges, ControlValueAccessor {
   @Input() ticks: boolean;
   @Input() disabled = false;
   @Input()
-  get value(): number {
-    return this.currentValue;
-  }
-
   set value(value: number) {
     if (value !== this.currentValue) {
       this.currentValue = value;
@@ -43,6 +39,11 @@ export class RangeComponent implements OnChanges, ControlValueAccessor {
       this.change.emit(this.currentValue);
     }
   }
+
+  get value(): number {
+    return this.currentValue;
+  }
+
   @Output() change: EventEmitter<number> = new EventEmitter<number>();
 
   private currentValue: number;
@@ -50,10 +51,28 @@ export class RangeComponent implements OnChanges, ControlValueAccessor {
   ngOnChanges(_: SimpleChanges) {
     if (!this.ticks) return;
 
+    /*
+     * Max 10 ticks are allowed
+     */
     const amountOfTicks = (this.max - this.min) / this.step;
     if (amountOfTicks > 9) {
       this.step = (this.max - this.min) / 9;
     }
+
+    /*
+     * Set value to the nearest tick
+     */
+    this.value = this.getTicks().reduce((a, b) => {
+      return Math.abs(b - this.value) < Math.abs(a - this.value) ? b : a;
+    });
+  }
+
+  private getTicks() {
+    const ticks = [];
+    for (let value = Number(this.min); value <= Number(this.max); value += Number(this.step)) {
+      ticks.push(value);
+    }
+    return ticks;
   }
 
   public setDisabledState?(isDisabled: boolean): void {

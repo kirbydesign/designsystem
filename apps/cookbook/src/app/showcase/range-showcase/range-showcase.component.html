@@ -13,6 +13,10 @@
     Tick marks are displayed based on the step value. If the amount of ticks exceeds
     <code>10</code>, the step property will automatically be adjusted.
   </p>
+  <p>
+    Provided values that doesn't match any tick points, will automatically be changed to the nearest
+    tick point.
+  </p>
   <cookbook-example-viewer [html]="stepExample.template">
     <cookbook-range-step-example #stepExample></cookbook-range-step-example>
   </cookbook-example-viewer>
