@@ -272,7 +272,8 @@ could be improved by writing:
 - Easily understandable 
   - No internal lingo 
 - Proof-read --> 
-An issue can be made easier readable by: 
+
+There are MANY ways to improve the readability of a text. The following is just some ways to do it, that we think can add value when writing an issue:
 - Using proper punctuation (to the best of your abilities at least. We are not experts at ,it either)
 - Spending some time proof-reading the issue before it is submitted. 
 - Using available formatting such as lists and code blocks to aid easy skimming. 
@@ -280,14 +281,14 @@ An issue can be made easier readable by:
 
 <!-- Perhaps come up with a more code related example - i just couldn't at the time of writing -->
 For example the text: 
->> I went to the royal danish library the other day, i think that the RDL is very nice! They have a huge selectin of books such as: the old man and the sea, 1984, Brave new world and the count of monte cristo 
+> I went to the RDL the other day, i think that the RDL is very nice! They have a huge selectin of books such as: the old man and the sea, 1984, Brave new world and the count of monte cristo 
 
 Is much harder to read than: 
->> I went to the royal danish library (RDL) the other day. The RDL is very nice. They have a huge selection of books, such as: 
->> - the old man and the sea 
->> - 1984 
->> - brave new world 
->> - the count of monte cristo
+> I went to the royal danish library (RDL) the other day. The RDL is very nice. They have a huge selection of books, such as: 
+> - the old man and the sea 
+> - 1984 
+> - brave new world 
+> - the count of monte cristo
 
 #### The good issue contains screenshots and gifs if possible 
 <!-- - A picture says more than 1000 words... (Imagine how much a gif is saying) --> 
@@ -298,8 +299,10 @@ Suggesting an enhancement? Add before and after pictures portraying what you wou
 
 #### The good issue is closed when there i no need for it (except bug reports!)
 <!-- - Close an issue if you do not need it anymore and work haven't begun on it.  -->
-If an issue that you have submitted is no longer necessary and no work has been done on it; go ahead and close it. 
-This is not because it might not provide value to Kirby, but there is almost certainly someone needing work done, that is more preceeding than an issue for which there really is no need.
+If an issue that you have submitted is no longer necessary and no work has been done on it, go ahead and close it.
+
+This is not because it might not provide value to Kirby. But there is almost certainly more preceeding issues, than for one which there really is no need.
+
 If someone else has a need for your issue again, they can just go ahead and open a new issue. No harm done (issues cost nothing to create afterall). 
 
 This does not go for bug reports however, as we want to unearth and solve as many bugs as possible.
