@@ -370,14 +370,13 @@ This does not go for bug reports however, as we want to unearth and solve as man
 * Others i might have forgotten?
 
 ### Commit
-
-* Focus on one thing per commit 
-* Keep changes as small as possible 
-* Only commit related functinoality for each commit 
-* Commit often
-* Strive for each commit to compile/build and pass tests 
-* Use [gitmoji](https://gitmoji.dev) when possible - point to VSCode extension and CLI tool
-* sidenote: when merging the CI pipeline combines each commit to a merge commit containing all commit messages
+- Focus on one thing per commit 
+- Keep changes as small as possible 
+- Only commit related functionality for each commit
+- Commit often
+- Strive for each commit to compile/build and pass tests 
+- Use [gitmoji](https://gitmoji.dev) when possible - point to VSCode extension and CLI tool
+- sidenote: when merging the CI pipeline combines each commit to a merge commit containing all commit messages
 
 ### Self-review 
 
