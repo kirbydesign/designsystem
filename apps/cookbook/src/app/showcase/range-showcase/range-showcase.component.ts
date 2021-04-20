@@ -30,7 +30,8 @@ export class RangeShowcaseComponent {
     },
     {
       name: 'step',
-      description: '(Optional) Specifies the value granularity',
+      description:
+        '(Optional) Specifies the size of each movement (an increment or jump between values) of the range',
       type: ['number'],
       defaultValue: '1',
     },
