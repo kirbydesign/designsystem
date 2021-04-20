@@ -182,15 +182,15 @@ It is only helpful of you to split up your issues - you are saving time and easi
 #### The good issue is self-contained 
 <!-- - Self-contained
     - Screenshots if necessary
-    <!-- I think the following point is important if Kirby is to be spread out amongst several teams -->
+     I think the following point is important if Kirby is to be spread out amongst several teams
     - Don't assume people have knowledge outside of Kirby - contributors might come from many different projects 
 - Explain what you want ad why you want it. -->
-It can not be assumed that the readers of your issue has any knowledge of your work outside of Kirby. 
+It can not be assumed that the reader of your issue has any knowledge of your work outside of Kirby. 
 
 The reader might be: 
 - a contributor outside of bank data 
 - someone who is not in your team 
-- potentially a new hire at bank data 
+- potentially a new hire
 
 This also goes for Kirby maintainers - some of which has been hired to specifically work on Kirby. 
 
