@@ -126,6 +126,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     this.ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
     this.initializeSizing();
     this.initializeModalRoute();
+    this.listenForIonModalWillPresent();
     this.listenForIonModalDidPresent();
     this.listenForIonModalWillDismiss();
     this.initializeResizeModalToModalWrapper();
@@ -236,6 +237,15 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     }
   }
 
+  private listenForIonModalWillPresent() {
+    if (this.ionModalElement) {
+      this.ionModalElement.addEventListener('ionModalWillPresent', () => {
+        if (this.config.interactWithBackground)
+          this.renderer.addClass(document.body, 'allow-scroll');
+      });
+    }
+  }
+
   private listenForIonModalDidPresent() {
     if (this.ionModalElement) {
       this.ionModalElement.addEventListener('ionModalDidPresent', () => {
@@ -248,6 +258,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   private listenForIonModalWillDismiss() {
     if (this.ionModalElement) {
       this.ionModalElement.addEventListener('ionModalWillDismiss', () => {
+        this.renderer.removeClass(document.body, 'allow-scroll');
         this.ionModalWillDismiss.next();
         this.ionModalWillDismiss.complete();
       });
