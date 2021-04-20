@@ -30,7 +30,6 @@ import { InputComponent } from './components/form-field/input/input.component';
 import { TextareaComponent } from './components/form-field/textarea/textarea.component';
 import { BreakpointHelperService } from './components/grid/breakpoint-helper.service';
 import { GridComponent } from './components/grid/grid.component';
-import { IconRegistryService } from './components/icon/icon-registry.service';
 import { IconModule } from './components/icon/icon.module';
 import { ItemModule } from './components/item/item.module';
 import { InfiniteScrollDirective } from './components/list/directives/infinite-scroll.directive';
@@ -80,7 +79,6 @@ import { ToastController } from './components/toast/services/toast.controller';
 import { ToastHelper } from './components/toast/services/toast.helper';
 import { ToggleButtonModule } from './components/toggle-button/toggle-button.module';
 import { ToggleComponent } from './components/toggle/toggle.component';
-import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
 import { ModalRouterLinkDirective } from './directives/modal-router-link/modal-router-link.directive';
 import { ThemeColorDirective } from './directives/theme-color/theme-color.directive';
@@ -120,7 +118,6 @@ const exportedDeclarations = [
   SlideButtonComponent,
   ToggleComponent,
   EmptyStateComponent,
-  ToolbarComponent,
   FormFieldComponent,
   InputComponent,
   InputCounterComponent,
