@@ -241,7 +241,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     if (this.ionModalElement) {
       this.ionModalElement.addEventListener('ionModalWillPresent', () => {
         if (this.config.interactWithBackground)
-          this.renderer.addClass(document.body, 'allow-scroll');
+          this.renderer.addClass(document.body, 'allow-modal-scroll');
       });
     }
   }
@@ -258,7 +258,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   private listenForIonModalWillDismiss() {
     if (this.ionModalElement) {
       this.ionModalElement.addEventListener('ionModalWillDismiss', () => {
-        this.renderer.removeClass(document.body, 'allow-scroll');
+        this.renderer.removeClass(document.body, 'allow-modal-scroll');
         this.ionModalWillDismiss.next();
         this.ionModalWillDismiss.complete();
       });

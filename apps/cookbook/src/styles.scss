@@ -14,10 +14,6 @@ html {
   font-size: font-size('n');
   color: get-color('black');
   height: 100vh;
-
-  & .allow-scroll {
-    overflow: initial;
-  }
 }
 
 *,
