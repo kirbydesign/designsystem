@@ -30,7 +30,7 @@ export class RangeComponent implements OnChanges, ControlValueAccessor {
   @Input() pin: boolean;
   @Input() step: number = 1;
   @Input() ticks: boolean;
-  @Input() disabled;
+  @Input() disabled = false;
   @Input()
   get value(): number {
     return this.currentValue;
@@ -60,7 +60,7 @@ export class RangeComponent implements OnChanges, ControlValueAccessor {
     this.disabled = isDisabled;
   }
 
-  public rangeValueChange($event: any): void {
+  public _onRangeValueChange($event: any): void {
     this.writeValue($event.detail.value);
   }
 

@@ -9,35 +9,28 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
 export class RangeShowcaseComponent {
   rangeProperties: ApiDescriptionProperty[] = [
     {
-      name: 'value',
-      description:
-        '(Optional) The value represented by the range component. Should only be used if Angular Forms (Template-driven or ReactiveForm) are not used.',
-      defaultValue: 'undefined',
-      type: ['number'],
-    },
-    {
       name: 'minLabel',
-      description: 'Adds a text to the Minimum labels.',
+      description: 'Adds a text to the Minimum label',
       type: ['string'],
     },
     {
       name: 'maxLabel',
-      description: 'Adds a text to the Maximum labels.',
+      description: 'Adds a text to the Maximum label',
       type: ['string'],
     },
     {
       name: 'min',
-      description: 'Minimum integer value of the range.',
+      description: 'Minimum integer value of the range',
       type: ['number'],
     },
     {
       name: 'max',
-      description: 'Maximum integer value of the range.',
+      description: 'Maximum integer value of the range',
       type: ['number'],
     },
     {
       name: 'step',
-      description: '(Optional) Specifies the value granularity.',
+      description: '(Optional) Specifies the value granularity',
       type: ['number'],
       defaultValue: '1',
     },
@@ -49,16 +42,22 @@ export class RangeShowcaseComponent {
     },
     {
       name: 'pin',
-      description:
-        '(Optional) If true, a pin with integer value is shown when the knob is pressed.',
+      description: '(Optional) If true, a pin with integer value is shown when the knob is pressed',
       type: ['boolean'],
       defaultValue: 'false',
     },
     {
       name: 'debounce',
-      description: '(Optional) How long, in milliseconds, to wait to trigger the change event.',
+      description: '(Optional) How long, in milliseconds, to wait to trigger the change event',
       type: ['number'],
       defaultValue: '0',
+    },
+    {
+      name: 'value',
+      description:
+        '(Optional) The value represented by the range component. Should only be used if Angular Forms (Template-driven or ReactiveForm) are not used',
+      defaultValue: 'undefined',
+      type: ['number'],
     },
   ];
 

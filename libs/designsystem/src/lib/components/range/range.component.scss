@@ -58,9 +58,8 @@ ion-range {
       left: 50%;
       transform: translateX(-50%);
       display: block;
-      border-color: var(--pin-background) transparent transparent transparent;
-      border-style: solid;
-      border-width: 6px;
+      border: solid transparent 6px;
+      border-top-color: var(--pin-background);
     }
   }
 
