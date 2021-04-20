@@ -188,17 +188,10 @@ describe('ModalHelper', () => {
     });
   };
 
-  const expectBodyToAllowScroll = () => {
-    it(`body should have class 'allow-background-scroll'`, () => {
-      expect(window.document.body.classList).toContain('allow-background-scroll');
-      expect(window.document.body).toHaveComputedStyle({
-        overflow: 'visible',
-      });
-    });
-  };
-
   describe('showModalWindow', () => {
     const screenSizes: ScreenSize[] = ['phablet-landscape', 'tablet', 'desktop'];
+    const ALLOW_BACKGROUND_SCROLL_CLASS_NAME = 'allow-background-scroll';
+
     screenSizes.forEach((screenSize) => {
       describe(`on ${screenSize}`, () => {
         beforeAll(async () => {
@@ -234,7 +227,7 @@ describe('ModalHelper', () => {
 
           describe(`drawer`, () => {
             beforeEach(async () => {
-              await openDrawer('Drawer On Presenting Element', undefined, 'medium', true);
+              await openDrawer('Drawer On Presenting Element');
             });
 
             afterEach(async () => {
@@ -244,7 +237,46 @@ describe('ModalHelper', () => {
             expectShadowStyle();
             expectBackdropStyle();
             expectDrawerWrapperStyle();
-            expectBodyToAllowScroll();
+          });
+        });
+
+        describe(`drawer can interact with background`, () => {
+          beforeEach(async () => {
+            await openDrawer('Drawer On Presenting Element', undefined, 'medium', true);
+          });
+
+          afterEach(async () => {
+            await overlay.dismiss();
+          });
+
+          it(`body should have class '${ALLOW_BACKGROUND_SCROLL_CLASS_NAME}' if interactWithBackground is true`, () => {
+            expect(window.document.body.classList).toContain(ALLOW_BACKGROUND_SCROLL_CLASS_NAME);
+            expect(window.document.body).toHaveComputedStyle({
+              overflow: 'visible',
+            });
+          });
+
+          it(`Drawer close should remove '${ALLOW_BACKGROUND_SCROLL_CLASS_NAME}'`, async () => {
+            await overlay.dismiss();
+            expect(window.document.body.classList).not.toContain(
+              ALLOW_BACKGROUND_SCROLL_CLASS_NAME
+            );
+          });
+        });
+
+        describe(`Drawer can not interact with background`, () => {
+          beforeEach(async () => {
+            await openDrawer('Drawer On Presenting Element', undefined, 'medium', false);
+          });
+
+          afterEach(async () => {
+            await overlay.dismiss();
+          });
+
+          it(`body should not have class '${ALLOW_BACKGROUND_SCROLL_CLASS_NAME}' if interactWithBackground is false`, () => {
+            expect(window.document.body.classList).not.toContain(
+              ALLOW_BACKGROUND_SCROLL_CLASS_NAME
+            );
           });
         });
 
