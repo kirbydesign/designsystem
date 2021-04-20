@@ -254,17 +254,18 @@ If you experience that no template lives up to your specific need; well there is
   - Make them alluring. 
   - Short without too much detail 
   - The issues are viewed in some sort of list view 80% of the time. -->
-As issues are viewed in some sort of list view 80% of the time (or so), the title is the oft read part. 
-It can therefore be a good idea to spend some time on formulating a good title. 
+As issues are viewed in some sort of list view 80% of the time (or so) the title is the part being read most often. 
+It can therefore be a good idea to spend some time formulating one. 
 
-A good title is short without too much detail; these should be presented in the actual description. 
+A good title is short without too much detail. Details should be presented in the actual description. 
 
-If possible try to make the title compelling. While an open-source repository is not a newspaper, where readers must be enganged at any cost; you still want to catch the interest of contributors. 
+If possible try to make the title compelling. While an open-source repository is not a newspaper where readers must be enganged at any cost, you still want to catch the interest of contributors. 
 
 The following title: 
->> Input causes error when you type over 50 characters and press enter 
+> Input causes error when you type over 50 characters and press enter 
+
 could be improved by writing: 
->> Input error on 50-character submit
+> Input error on 50-character submit
 
 #### The good issue is easily readable
 <!-- - Readability 
