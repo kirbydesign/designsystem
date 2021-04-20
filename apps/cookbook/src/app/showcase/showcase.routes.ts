@@ -46,7 +46,6 @@ import { TabsShowcaseComponent } from './tabs-showcase/tabs-showcase.component';
 import { ToastShowcaseComponent } from './toast-showcase/toast-showcase.component';
 import { ToggleButtonShowcaseComponent } from './toggle-button-showcase/toggle-button-showcase.component';
 import { ToggleShowcaseComponent } from './toggle-showcase/toggle-showcase.component';
-import { ToolbarShowcaseComponent } from './toolbar-showcase/toolbar-showcase.component';
 
 export const routes: Routes = [
   {
@@ -205,10 +204,6 @@ export const routes: Routes = [
       {
         path: 'empty-state',
         component: EmptyStateShowcaseComponent,
-      },
-      {
-        path: 'toolbar',
-        component: ToolbarShowcaseComponent,
       },
       {
         path: 'form-field',
