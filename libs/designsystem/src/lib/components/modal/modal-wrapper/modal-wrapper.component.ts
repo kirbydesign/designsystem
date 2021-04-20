@@ -44,6 +44,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
 
   scrollY: number = Math.abs(this.windowRef.scrollY);
   private readonly VIEWPORT_RESIZE_DEBOUNCE_TIME = 100;
+  private readonly ALLOW_BACKGROUND_SCROLL_CLASS_NAME = 'allow-background-scroll';
 
   set scrollDisabled(disabled: boolean) {
     this.ionContent.scrollY = !disabled;
@@ -238,9 +239,14 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   private listenForIonModalWillPresent() {
-    if (this.config.interactWithBackground && this.ionModalElement) {
+    if (!this.ionModalElement) return;
+
+    if (this.config.interactWithBackground) {
       this.ionModalElement.addEventListener('ionModalWillPresent', () => {
-        this.renderer.addClass(this.windowRef.document.body, 'allow-background-scroll');
+        this.renderer.addClass(
+          this.windowRef.document.body,
+          this.ALLOW_BACKGROUND_SCROLL_CLASS_NAME
+        );
       });
     }
   }
@@ -257,7 +263,10 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   private listenForIonModalWillDismiss() {
     if (this.ionModalElement) {
       this.ionModalElement.addEventListener('ionModalWillDismiss', () => {
-        this.renderer.removeClass(this.windowRef.document.body, 'allow-background-scroll');
+        this.renderer.removeClass(
+          this.windowRef.document.body,
+          this.ALLOW_BACKGROUND_SCROLL_CLASS_NAME
+        );
         this.ionModalWillDismiss.next();
         this.ionModalWillDismiss.complete();
       });
