@@ -208,35 +208,37 @@ Therefore:
 <!--- Do point to relevant files if you know them, don't just say "there's some css files". 
 - Facts first opinions second. -->
 
-The wording of an issue should be as specific and unambigious as possible. This will help the reader understand exactly what you mean. 
-This can be done in many ways, so we have compiled some examples to show what we mean:
+The wording of an issue should be as specific and unambigious as possible. This will help the reader understand exactly what you mean. This can be done in many ways. Therefore we have compiled some examples to demonstrate:
 
-** Example #1: referring to files ** 
+_Example #1: referring to files_ 
+
 If you are referring to a file in the repository do not refer to it as `_typography.css` use the full path instead: `libs/designsystem/src/lib/scss/base/_typography.scss`.
 While it might be obvious for you and experienced contributors, what and where `_typography.css` is; it is not obvious for newcomers. 
 
 If you already have refered to the full path earlier in the issue, it can be okay to refer to the file as `_typography.css`.
 
-** Example #2: writing reproducible steps for bug reports **
-<!--- When reporting bug, be unambiguosly specific: Don't write "type some text", Do write: "Type: 'test'".
-  - There might be something with the specific text you're typing that triggers the bug. Who knows?  -->
-The steps should be unambigously specific - this can be done for example by changing the step: "Type some text" to: "Type: 'text'". 
+_Example #2: writing reproducible steps for bug reports_
+
+The steps should be unambigously specific. This can be done for example by changing the step: 
+> 2. Type some text 
+
+to: 
+
+> 2. Type: 'text'
+ 
 There could be something with the _exact_ way you are doing it, that triggers the behaviour you are experiecing. 
 
-** Example #3: SNAPPY TITLE HERE THX **
-<!---
-- When reporting a bug, be unambigious and exact! 
-  -  I run Rector on [this-code] and I got [this-exception] with [this-exception-message] 
-    - That's pure maintainer poetry-->
-When reporting a bug or similar do not write something along the lines of: 
->> Whenever i use a `kirby-button` with attention level 1 on the frontpage, a warning is thrown
+_Example #3: using code snippets to explain what and how_
 
-Specify exactly where- and how the button is inserted with a code-snippet, along with exact details of the warning and where it can be found:
->> Inserting a `kirby-button` with attention level 1 as shown in the code-snippet, results in the following warning being logged in the browser console: `Warning goes here`.
+When reporting a bug or similar do not write something along the lines of: 
+> Whenever i use a `kirby-button` with attention level 1 on the frontpage, a warning is thrown
+
+Specify exactly where and how the button is inserted with a code snippet, along with exact details of the warning and where it can be found:
+> Inserting a `kirby-button` with attention level 1 as shown in the code-snippet, results in the following warning being logged in the browser console: `Warning goes here`.
 
 The latter is pure maintainer poetry. 
 
-These are but three examples of how issues can be specific and unambigious. But always keep in the back of your mind, how you can be more specific and unambigious when writing. 
+These are but three examples of how issues can be specific and unambigious. But always keep in the back of your mind how you can be more specific and unambigious when writing issues. 
 
 #### The good issue follows the template 
 <!-- - Follow the templates! - they are as is to help you remember which information we're looking for -->
