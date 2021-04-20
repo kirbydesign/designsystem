@@ -154,29 +154,29 @@ the repo such that they can get coding -->
 <!-- Ideally we should be able to refer to these sections if people break the guidelines in their issue or pull-requests, to make sure we are all preaching the same guidelines -->
 
 ### Issue 
->> A good idea is an orhpan without effective communication. 
->> 
->> _Topic 7, The pragmatic programmer_
+> A good idea is an orhpan without effective communication. 
+> 
+> _Topic 7, The pragmatic programmer_
 
-Writing a good issue is all about effective communication. This leads to fewer questions and discussion in the comments, which in turn results in a quicker process from new issue to approved PR. 
-In this section we have outlined what we think a good issue with effective communication is. 
+Writing a good issue is all about effective communication. This leads to fewer questions and discussions, which in turn results in a quicker process from new issue to approved PR. 
 
-There is quite a lot of text in this section, so feel free to read the headings only as they contain the essence of what we think a good issue is. 
-If you find something you do not understand, disagree with or are curious about how to do better; dive deeper by reading the text for that heading. 
+The following is a series of points that we believe can help to communicate more effectively when writing issues. 
 
 <!--- Only one issue per issue-->
 #### The good issue only contains one issue
-While this might seem obvious, it can be easy to fall into the trap of bundling two issues together. 
+While this might seem obvious it can be easy to fall into the trap of bundling two issues together. 
 
 Consider the following issue: 
-"Hovering a `kirby-button` with attention level 2 in IE11 does not activate the hover-effect. It works when i use attention level 1, but i get warnings in the console". 
-If that issue is closed, how is the reader supposed to know what was actually fixed? Was it the issue of the hover-effect not activating; or was it the issue of warnings being thrown when using attention level 1? Both? 
+> Hovering a `kirby-button` with attention level 2 in IE11 does not activate the hover-effect. It works when i use attention level 1, but i get warnings in the console.
+
+If that issue is closed, how is the reader supposed to know what was actually fixed? 
+Was it the issue of the hover-effect not activating? The issue of warnings being thrown when using attention level 1? Both? 
 
 To solve this, the issue should be split into two seperate issues which then refer to each other: 
-1. "Hovering a `kirby-button` with attention level 2 in IE11 does not activate the hover-effect. This might be related to issue #2"
-2. "I am not able to use a `kirby-button` with attention level 1 without a warning being thrown in the console. This might be related to issue #1"
+1. > Hovering a `kirby-button` with attention level 2 in IE11 does not activate the hover-effect. This might be related to issue #2.
+2. > I am not able to use a `kirby-button` with attention level 1 without a warning being thrown in the console. This might be related to issue #1.
 
-If you feel like you are "complaining" too much by creating several issues, don't! 
+If you feel like you are "complaining" too much by creating several issues; don't! 
 It is only helpful of you to split up your issues - you are saving time and easing organization. 
 
 #### The good issue is self-contained 
