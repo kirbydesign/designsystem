@@ -31,7 +31,7 @@ If you at any point have any questions please read: [I have a question related t
 
 ## Introduction to the contribution model
 <!-- Introduction and motivation -->
-Despite Kirby stemming from an internal Bank Data project - it has been decided to open source it, such that others than team Kirby can contribute to it. 
+Despite Kirby stemming from an internal Bankdata project - it has been decided to open source it, such that others than team Kirby can contribute to it. 
 Allowing for Kirby to be used in multiple projects without team Kirby being the bottleneck. 
 
 If you have a problem, an issue you want resolved, or even got brand new ideas for components. Well. There is no need to sit around and wait for team Kirby to get it implemented. 
@@ -192,7 +192,7 @@ It is only helpful of you to split up your issues - you are saving time and easi
 It can not be assumed that the reader of your issue has any knowledge of your work outside of Kirby. 
 
 The reader might be: 
-- a contributor outside of bank data 
+- a contributor outside of Bankdata 
 - someone who is not in your team 
 - potentially a new hire
 
@@ -210,14 +210,14 @@ Therefore:
 
 The wording of an issue should be as specific and unambigious as possible. This will help the reader understand exactly what you mean. This can be done in many ways. Therefore we have compiled some examples to demonstrate:
 
-_Example #1: referring to files_ 
+##### Example #1: Referring to files 
 
 If you are referring to a file in the repository do not refer to it as `_typography.css` use the full path instead: `libs/designsystem/src/lib/scss/base/_typography.scss`.
 While it might be obvious for you and experienced contributors, what and where `_typography.css` is; it is not obvious for newcomers. 
 
 If you already have refered to the full path earlier in the issue, it can be okay to refer to the file as `_typography.css`.
 
-_Example #2: writing reproducible steps for bug reports_
+##### Example #2: Writing reproducible steps for bug reports
 
 The steps should be unambigously specific. This can be done for example by changing the step: 
 > 2. Type some text 
@@ -228,7 +228,7 @@ to:
  
 There could be something with the _exact_ way you are doing it, that triggers the behaviour you are experiecing. 
 
-_Example #3: using code snippets to explain what and how_
+##### Example #3: Using code snippets to explain what and how
 
 When reporting a bug or similar do not write something along the lines of: 
 > Whenever i use a `kirby-button` with attention level 1 on the frontpage, a warning is thrown
@@ -238,23 +238,23 @@ Specify exactly where and how the button is inserted with a code snippet, along 
 
 The latter is pure maintainer poetry. 
 
-These are but three examples of how issues can be specific and unambigious. But always keep in the back of your mind how you can be more specific and unambigious when writing issues. 
+These are but three examples of how issues can be specific and unambigious. Always keep in the back of your mind, how you can be more specific and unambigious when describing issues. 
 
 #### The good issue follows the template 
 <!-- - Follow the templates! - they are as is to help you remember which information we're looking for -->
-Do not delete the template when creating an issue. Use it. 
+Do not ignore the template text when creating an issue. Use it. 
 
-The issue templates exists to ease collaboration by providing structure and reminding you of which information other contributors are looking for. 
-They also provide helpful checklists that helps you follow [the process (INSERT PROPER LINK HERE)](#the-process) and lets others know how far you are. 
+The issue templates exist to ease collaboration by providing structure and reminding you of which information other contributors are looking for. 
+They also provide helpful checklists that help you follow [the process of contributing](#the-process-of-contributing) and let others know how far you have come. 
 
-If you experience that no template lives up to your specific need; well there is a good opportunity to contribute. Create an issue for a new template to be created! 
+If you experience that no template matches your specifc need; well there is a good opportunity to contribute. Create an issue for a new template to be created! 
 
 #### The good issue has a good title
 <!-- - Spend some time on your titles 
   - Make them alluring. 
   - Short without too much detail 
   - The issues are viewed in some sort of list view 80% of the time. -->
-As issues are viewed in some sort of list view 80% of the time (or so) the title is the part being read most often. 
+The title of an issue is read most often, as issues are viewed in some sort of list most of the time.
 It can therefore be a good idea to spend some time formulating one. 
 
 A good title is short without too much detail. Details should be presented in the actual description. 
@@ -267,28 +267,29 @@ The following title:
 could be improved by writing: 
 > Input error on 50-character submit
 
-#### The good issue is easily readable
+#### The good issue is easy to read
 <!-- - Readability 
 - Easily understandable 
   - No internal lingo 
 - Proof-read --> 
 
 There are MANY ways to improve the readability of a text. The following is just some ways to do it, that we think can add value when writing an issue:
-- Using proper punctuation (to the best of your abilities at least. We are not experts at ,it either)
-- Spending some time proof-reading the issue before it is submitted. 
-- Using available formatting such as lists and code blocks to aid easy skimming. 
-- Explaining the abbrevations being used 
+- Use proper punctuation (to the best of your abilities at least. We are not experts at ,it either)
+- Use proper capitalisation
+- Spend some time proof-reading the issue before it is submitted
+- Use available formatting such as lists and code blocks to aid easy skimming 
+- Explain abbrevations being used 
 
 <!-- Perhaps come up with a more code related example - i just couldn't at the time of writing -->
 For example the text: 
-> I went to the RDL the other day, i think that the RDL is very nice! They have a huge selectin of books such as: the old man and the sea, 1984, Brave new world and the count of monte cristo 
+> I went to the RDL the other day, I think that the RDL is very nice! They have a huge selectin of books such as: the old man and the sea, 1984, Brave new world and the count of monte cristo 
 
 Is much harder to read than: 
 > I went to the royal danish library (RDL) the other day. The RDL is very nice. They have a huge selection of books, such as: 
-> - the old man and the sea 
+> - The Old Man and the Sea 
 > - 1984 
-> - brave new world 
-> - the count of monte cristo
+> - Brave New World 
+> - The Count of Monte Cristo
 
 #### The good issue contains screenshots and gifs if possible 
 <!-- - A picture says more than 1000 words... (Imagine how much a gif is saying) --> 
