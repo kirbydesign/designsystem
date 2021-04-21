@@ -156,13 +156,12 @@ the repo such that they can get coding -->
 ### Issue 
 > A good idea is an orhpan without effective communication. 
 > 
-> _Topic 7, The pragmatic programmer_
+> _Topic 7, The Pragmatic Programmer_
 
 Writing a good issue is all about effective communication. This leads to fewer questions and discussions, which in turn results in a quicker process from new issue to approved PR. 
 
 The following is a series of points that we believe can help to communicate more effectively when writing issues. 
 
-<!--- Only one issue per issue-->
 #### The good issue only contains one issue
 While this might seem obvious it can be easy to fall into the trap of bundling two issues together. 
 
@@ -184,11 +183,6 @@ If you feel like you are "complaining" too much by creating several issues; don'
 It is only helpful of you to split up your issues - you are saving time and easing organization. 
 
 #### The good issue is self-contained 
-<!-- - Self-contained
-    - Screenshots if necessary
-     I think the following point is important if Kirby is to be spread out amongst several teams
-    - Don't assume people have knowledge outside of Kirby - contributors might come from many different projects 
-- Explain what you want ad why you want it. -->
 It can not be assumed that the reader of your issue has any knowledge of your work outside of Kirby. 
 
 The reader might be: 
@@ -203,11 +197,7 @@ Therefore:
 - Do not assume the reader can access the application you are working on - include screenshots instead.
 - Do not assume the reader can access the repository you are working in - include code snippets instead (if possible). 
 
-<!--- Be specific and unambigious -->
 #### The good issue is specific & unambigious
-<!--- Do point to relevant files if you know them, don't just say "there's some css files". 
-- Facts first opinions second. -->
-
 The wording of an issue should be as specific and unambigious as possible. This will help the reader understand exactly what you mean. This can be done in many ways. Therefore we have compiled some examples to demonstrate:
 
 ##### Example #1: Referring to files 
@@ -241,7 +231,6 @@ The latter is pure maintainer poetry.
 These are but three examples of how issues can be specific and unambigious. Always keep in the back of your mind, how you can be more specific and unambigious when describing issues. 
 
 #### The good issue follows the template 
-<!-- - Follow the templates! - they are as is to help you remember which information we're looking for -->
 Do not ignore the template text when creating an issue. Use it. 
 
 The issue templates exist to ease collaboration by providing structure and reminding you of which information other contributors are looking for. 
@@ -250,10 +239,6 @@ They also provide helpful checklists that help you follow [the process of contri
 If you experience that no template matches your specifc need; well there is a good opportunity to contribute. Create an issue for a new template to be created! 
 
 #### The good issue has a good title
-<!-- - Spend some time on your titles 
-  - Make them alluring. 
-  - Short without too much detail 
-  - The issues are viewed in some sort of list view 80% of the time. -->
 The title of an issue is read most often, as issues are viewed in some sort of list most of the time.
 It can therefore be a good idea to spend some time formulating one. 
 
@@ -268,11 +253,6 @@ could be improved by writing:
 > Input error on 50-character submit
 
 #### The good issue is easy to read
-<!-- - Readability 
-- Easily understandable 
-  - No internal lingo 
-- Proof-read --> 
-
 There are MANY ways to improve the readability of a text. The following is just some ways to do it, that we think can add value when writing an issue:
 - Use proper punctuation (to the best of your abilities at least. We are not experts at ,it either)
 - Use proper capitalisation
@@ -280,7 +260,6 @@ There are MANY ways to improve the readability of a text. The following is just 
 - Use available formatting such as lists and code blocks to aid easy skimming 
 - Explain abbrevations being used 
 
-<!-- Perhaps come up with a more code related example - i just couldn't at the time of writing -->
 For example the text: 
 > I went to the RDL the other day, I think that the RDL is very nice! They have a huge selectin of books such as: the old man and the sea, 1984, Brave new world and the count of monte cristo 
 
@@ -292,14 +271,12 @@ Is much harder to read than:
 > - The Count of Monte Cristo
 
 #### The good issue contains screenshots and gifs if possible 
-<!-- - A picture says more than 1000 words... (Imagine how much a gif is saying) --> 
 Kirby is a design system, hence it is a very visual project! So do not be shy of using images and gifs to explain yourself. 
 
 If you are requesting a new component, perhaps add a sketch showing how you are imagining it. When reporting a bug, record a gif to show exactly what you are experiencing. 
 Suggesting an enhancement? Add before and after pictures portraying what you would like. 
 
 #### The good issue is closed when there i no need for it (except bug reports!)
-<!-- - Close an issue if you do not need it anymore and work haven't begun on it.  -->
 If an issue that you have submitted is no longer necessary and no work has been done on it, go ahead and close it.
 
 This is not because it might not provide value to Kirby. But there is almost certainly more preceeding issues, than for one which there really is no need.
