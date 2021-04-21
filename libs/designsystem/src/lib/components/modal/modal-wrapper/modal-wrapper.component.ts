@@ -130,6 +130,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     this.listenForIonModalWillPresent();
     this.listenForIonModalDidPresent();
     this.listenForIonModalWillDismiss();
+    this.listenForIonModalDidDismiss();
     this.initializeResizeModalToModalWrapper();
     this.componentPropsInjector = Injector.create({
       providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
@@ -252,25 +253,32 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   private listenForIonModalDidPresent() {
-    if (this.ionModalElement) {
-      this.ionModalElement.addEventListener('ionModalDidPresent', () => {
-        this.ionModalDidPresent.next();
-        this.ionModalDidPresent.complete();
-      });
-    }
+    if (!this.ionModalElement) return;
+
+    this.ionModalElement.addEventListener('ionModalDidPresent', () => {
+      this.ionModalDidPresent.next();
+      this.ionModalDidPresent.complete();
+    });
   }
 
   private listenForIonModalWillDismiss() {
-    if (this.ionModalElement) {
-      this.ionModalElement.addEventListener('ionModalWillDismiss', () => {
-        this.renderer.removeClass(
-          this.windowRef.document.body,
-          this.ALLOW_BACKGROUND_SCROLL_CLASS_NAME
-        );
-        this.ionModalWillDismiss.next();
-        this.ionModalWillDismiss.complete();
-      });
-    }
+    if (!this.ionModalElement) return;
+
+    this.ionModalElement.addEventListener('ionModalWillDismiss', () => {
+      this.ionModalWillDismiss.next();
+      this.ionModalWillDismiss.complete();
+    });
+  }
+
+  private listenForIonModalDidDismiss() {
+    if (!this.ionModalElement) return;
+
+    this.ionModalElement.addEventListener('ionModalDidDismiss', () =>
+      this.renderer.removeClass(
+        this.windowRef.document.body,
+        this.ALLOW_BACKGROUND_SCROLL_CLASS_NAME
+      )
+    );
   }
 
   scrollToTop(scrollDuration?: KirbyAnimation.Duration) {
