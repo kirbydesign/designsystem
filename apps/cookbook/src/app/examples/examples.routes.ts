@@ -61,6 +61,7 @@ import { TabsExampleComponent } from './tabs-example/tabs-example.component';
 import { ToastExampleComponent } from './toast-example/toast-example.component';
 import { ToggleButtonExampleComponent } from './toggle-button-example/toggle-button-example.component';
 import { ToggleExampleComponent } from './toggle-example/toggle-example.component';
+import { ToolbarExampleComponent } from './toolbar-example/toolbar-example.component';
 
 export const routes: Routes = [
   {
@@ -373,6 +374,10 @@ export const routes: Routes = [
   {
     path: 'empty-state',
     component: EmptyStateExampleComponent,
+  },
+  {
+    path: 'toolbar',
+    component: ToolbarExampleComponent,
   },
   {
     path: 'fab-sheet',
