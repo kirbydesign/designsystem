@@ -245,15 +245,12 @@ describe('ModalHelper', () => {
             await openDrawer('Drawer On Presenting Element', undefined, 'medium', true);
           });
 
-          afterEach(async () => {
-            await overlay.dismiss();
-          });
-
-          it(`body should be scrollable`, () => {
+          it(`body should be scrollable`, async () => {
             expect(window.document.body.classList).toContain(ALLOW_BACKGROUND_SCROLL_CLASS_NAME);
             expect(window.document.body).toHaveComputedStyle({
               overflow: 'visible',
             });
+            await overlay.dismiss();
           });
 
           it(`Drawer close should remove '${ALLOW_BACKGROUND_SCROLL_CLASS_NAME}'`, async () => {
