@@ -8,7 +8,8 @@ ion-footer {
   display: flex;
   justify-content: var(--kirby-modal-footer-justify-content, center);
   align-items: center;
-  background-color: get-color('white');
+  background-color: var(--kirby-modal-footer-background, get-color('white'));
+  color: var(--kirby-modal-footer-color, get-color('white-contrast'));
   padding: $padding-vertical $padding-horizontal;
   padding-bottom: calc(#{$padding-vertical} + var(--kirby-modal-footer-safe-area-bottom, 0px));
 }

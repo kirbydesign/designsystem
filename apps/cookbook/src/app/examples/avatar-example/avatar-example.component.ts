@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
-import { Color, ColorHelper, Sizes } from '@kirbydesign/designsystem';
+import { AvatarSize, Color, ColorHelper } from '@kirbydesign/designsystem';
 
 @Component({
   selector: 'cookbook-avatar-example',
@@ -10,7 +10,7 @@ import { Color, ColorHelper, Sizes } from '@kirbydesign/designsystem';
 export class AvatarExampleComponent {
   imageSrc = '/assets/images/woman.png';
   altText: 'Kirby Avatar Example';
-  sizes = Object.keys(Sizes).map((key) => Sizes[key]);
+  sizes = AvatarSize;
   colors: Color[] = [...ColorHelper.mainColors, { name: 'white', value: '#ffffff' }];
 
   getColorAbbrevation(color: Color) {

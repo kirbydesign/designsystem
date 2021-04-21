@@ -1,6 +1,9 @@
 import { AfterViewInit, Component, ElementRef } from '@angular/core';
 import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
-import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import {
+  ApiDescriptionProperty,
+  ApiDescriptionPropertyColumns,
+} from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 import { ModalController } from '@kirbydesign/designsystem';
 
@@ -67,6 +70,19 @@ export class ModalShowcaseComponent implements AfterViewInit {
       defaultValue: '',
       type: ['{iconName: string, action: Function}'],
     },
+    {
+      name: 'interactWithBackground',
+      description: `(Optional) Removes backdrop and allows interaction with the background.
+      Please note: Only available on modals with a \`drawer\` flavor.`,
+      defaultValue: 'false',
+      type: ['boolean'],
+    },
+    {
+      name: 'cssClass',
+      description: `(Optional) Adds custom css classes to the modal. This allows for custom styling of the modal (see 'CSS Custom Properties' section).`,
+      defaultValue: '',
+      type: ['string | string[]'],
+    },
   ];
 
   properties: ApiDescriptionProperty[] = [
@@ -97,6 +113,21 @@ export class ModalShowcaseComponent implements AfterViewInit {
       name: 'willClose',
       description: 'Emitted when the user closes the modal or modal.close() method is called',
       signature: 'Promise<void>',
+    },
+  ];
+
+  cssCustomPropertiesColumns: ApiDescriptionPropertyColumns = {
+    name: 'Name',
+    description: 'Description',
+  };
+  cssCustomProperties: ApiDescriptionProperty[] = [
+    {
+      name: '--kirby-modal-color',
+      description: 'Color of the modal.',
+    },
+    {
+      name: '--kirby-modal-background',
+      description: 'Background of the modal.',
     },
   ];
 }
