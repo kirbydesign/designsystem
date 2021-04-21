@@ -3,33 +3,39 @@
 
 :host {
   a {
-    display: inline-flex;
-    align-items: center;
     color: get-text-color('black');
-  }
 
-  kirby-icon {
-    --kirby-icon-margin-left: #{size('xxxs')};
-    --kirby-icon-margin-right: #{size('xxxs')};
+    &[href^='http'] {
+      white-space: nowrap;
+      background-image: url('/assets/kirby/icons/svg/link.svg');
+      background-repeat: no-repeat;
+      background-position: right 50%;
+      background-size: size('m');
+      //place icon with icons own width + the spacing defined in UI requirements
+      padding-right: calc(#{size('m')} + #{size('xxxs')});
+    }
   }
 
   &.sm {
     a {
       font-size: font-size('s');
-    }
 
-    kirby-icon {
-      --kirby-icon-font-size: #{icon-font-size('xs')};
+      &[href^='http'] {
+        background-size: size('s');
+        padding-right: calc(#{size('s')} + #{size('xxxs')});
+      }
     }
   }
 
   &.xs {
     a {
       font-size: font-size('xs');
-    }
 
-    kirby-icon {
-      --kirby-icon-font-size: #{icon-font-size('xs')};
+      &[href^='http'] {
+        //same as small icon as per UI requirements
+        background-size: size('s');
+        padding-right: calc(#{size('s')} + #{size('xxxs')});
+      }
     }
   }
 }

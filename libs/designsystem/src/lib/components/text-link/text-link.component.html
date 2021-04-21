@@ -1,7 +1,7 @@
-<!-- The Routerlink has problems with external links -->
+<!-- Use RouterLink for internal links to avoid page refresh -->
 <ng-container *ngIf="isInternal; else externalLinkTemplate">
   <a [routerLink]="route">{{ text }}</a>
 </ng-container>
 <ng-template #externalLinkTemplate>
-  <a href="{{ route }}">{{ text }}<kirby-icon name="link"></kirby-icon></a>
+  <a href="{{ route }}">{{ text }}</a>
 </ng-template>
