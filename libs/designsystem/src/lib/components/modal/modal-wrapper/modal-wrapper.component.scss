@@ -34,7 +34,7 @@
   }
 }
 
-:host-context(ion-modal:not(.full-height)) {
+:host-context(ion-modal:not(.kirby-modal-full-height)) {
   @include media('>=medium') {
     @include contain-content();
   }
@@ -77,7 +77,11 @@ ion-header ion-toolbar {
 
   --border-width: 0;
   --background: transparent;
-  --color: #{get-color('black')};
+  --color: var(--kirby-modal-color, #{get-color('black')});
+
+  button {
+    color: var(--color);
+  }
 
   @include phablet-toolbar-padding();
 }
@@ -106,6 +110,7 @@ ion-title {
 
 ion-content {
   --background: transparent;
+  --color: var(--kirby-modal-color, #{get-color('black')});
   display: flex;
   flex-direction: column;
 

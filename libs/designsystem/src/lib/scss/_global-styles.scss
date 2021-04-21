@@ -60,7 +60,7 @@ ion-modal.kirby-overlay {
 
   &.kirby-modal {
     box-sizing: border-box;
-    --background: #{get-color('background-color')};
+    --background: var(--kirby-modal-background, #{get-color('background-color')});
     --border-radius: 0;
     --height: auto;
 
@@ -76,6 +76,12 @@ ion-modal.kirby-overlay {
       padding-top: var(--kirby-modal-padding-top);
       align-items: flex-end;
 
+      &.interact-with-background {
+        &.kirby-modal.kirby-drawer {
+          --kirby-modal-padding-top: 0px;
+        }
+      }
+
       .modal-wrapper {
         border-top-left-radius: #{$border-radius};
         border-top-right-radius: #{$border-radius};
@@ -88,7 +94,7 @@ ion-modal.kirby-overlay {
       }
     }
 
-    &:not(.kirby-modal-compact).full-height {
+    &:not(.kirby-modal-compact).kirby-modal-full-height {
       --height: 100%;
     }
 
@@ -123,17 +129,17 @@ ion-modal.kirby-overlay {
           --min-height: #{$modal-default-height};
           align-items: flex-start;
 
-          &.small {
+          &.kirby-modal-small {
             --min-height: #{map-get($modal-heights, 's')};
           }
-          &.medium {
+          &.kirby-modal-medium {
             --min-height: #{map-get($modal-heights, 'm')};
           }
-          &.large {
+          &.kirby-modal-large {
             --min-height: #{map-get($modal-heights, 'l')};
           }
 
-          &.full-height .modal-wrapper,
+          &.kirby-modal-full-height .modal-wrapper,
           .modal-wrapper.full-height {
             border-bottom-left-radius: 0;
             border-bottom-right-radius: 0;

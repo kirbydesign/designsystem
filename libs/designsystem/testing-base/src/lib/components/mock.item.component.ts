@@ -1,6 +1,6 @@
-import { forwardRef, Component, Input } from '@angular/core';
+import { Component, forwardRef, Input } from '@angular/core';
 
-import { ItemComponent } from '@kirbydesign/designsystem';
+import { ItemComponent, ItemSize } from '@kirbydesign/designsystem';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
@@ -18,6 +18,7 @@ export class MockItemComponent {
   @Input() selected: boolean;
   @Input() selectable: boolean;
   @Input() reorderable: boolean;
+  @Input() size: ItemSize;
 }
 
 // #endregion
