@@ -252,6 +252,9 @@ The following title:
 could be improved by writing: 
 > Input error on 50-character submit
 
+Having a hard time coming up with a good title? 
+It can sometimes be easier to formulate a brief but comprehensive title _after_ you have written the issue description. 
+
 #### The good issue is easy to read
 There are MANY ways to improve the readability of a text. The following is just some ways to do it, that we think can add value when writing an issue:
 - Use proper punctuation (to the best of your abilities at least. We are not experts at ,it either)
