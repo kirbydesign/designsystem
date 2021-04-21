@@ -1,5 +1,11 @@
 @import './libs/designsystem/src/lib/scss/utils';
 
-kirby-text-link {
-  margin-left: size('s');
+:host {
+  display: block;
+}
+
+:host-context(cookbook-text-link-example-external, cookbook-text-link-example-internal) {
+  kirby-text-link + kirby-text-link {
+    margin-left: size('s');
+  }
 }

@@ -6,6 +6,7 @@ import { Sizes } from '@kirbydesign/designsystem';
 @Component({
   selector: 'cookbook-text-link-showcase',
   templateUrl: './text-link-showcase.component.html',
+  styleUrls: ['../_showcase.shared.scss'],
 })
 export class TextLinkShowcaseComponent {
   properties: ApiDescriptionProperty[] = [
