@@ -22,7 +22,7 @@ export class ModalHelper {
     private ionicModalController: ModalController,
     private modalAnimationBuilder: ModalAnimationBuilderService,
     private rendererFactory: RendererFactory2,
-    @Inject(DOCUMENT) private document: HTMLDocument
+    @Inject(DOCUMENT) private document: any
   ) {
     this.renderer = rendererFactory.createRenderer(null, null);
   }
