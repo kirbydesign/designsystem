@@ -190,7 +190,7 @@ describe('ModalHelper', () => {
 
   describe('showModalWindow', () => {
     const screenSizes: ScreenSize[] = ['phablet-landscape', 'tablet', 'desktop'];
-    const ALLOW_BACKGROUND_SCROLL_CLASS_NAME = 'allow-background-scroll';
+    const allow_scroll_class = 'allow-background-scroll';
 
     screenSizes.forEach((screenSize) => {
       describe(`on ${screenSize}`, () => {
@@ -246,18 +246,16 @@ describe('ModalHelper', () => {
           });
 
           it(`body should be scrollable`, async () => {
-            expect(window.document.body.classList).toContain(ALLOW_BACKGROUND_SCROLL_CLASS_NAME);
+            expect(window.document.body.classList).toContain(allow_scroll_class);
             expect(window.document.body).toHaveComputedStyle({
               overflow: 'visible',
             });
             await overlay.dismiss();
           });
 
-          it(`Drawer close should remove '${ALLOW_BACKGROUND_SCROLL_CLASS_NAME}'`, async () => {
+          it(`Drawer close should remove '${allow_scroll_class}'`, async () => {
             await overlay.dismiss();
-            expect(window.document.body.classList).not.toContain(
-              ALLOW_BACKGROUND_SCROLL_CLASS_NAME
-            );
+            expect(window.document.body.classList).not.toContain(allow_scroll_class);
           });
         });
 
@@ -271,9 +269,7 @@ describe('ModalHelper', () => {
           });
 
           it(`body should not be scrollable`, () => {
-            expect(window.document.body.classList).not.toContain(
-              ALLOW_BACKGROUND_SCROLL_CLASS_NAME
-            );
+            expect(window.document.body.classList).not.toContain(allow_scroll_class);
           });
         });
 

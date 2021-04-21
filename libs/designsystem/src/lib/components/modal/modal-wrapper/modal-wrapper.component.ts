@@ -44,7 +44,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
 
   scrollY: number = Math.abs(this.windowRef.scrollY);
   private readonly VIEWPORT_RESIZE_DEBOUNCE_TIME = 100;
-  private readonly ALLOW_BACKGROUND_SCROLL_CLASS_NAME = 'allow-background-scroll';
 
   set scrollDisabled(disabled: boolean) {
     this.ionContent.scrollY = !disabled;
