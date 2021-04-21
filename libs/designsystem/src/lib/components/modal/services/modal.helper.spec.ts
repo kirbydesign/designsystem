@@ -249,7 +249,7 @@ describe('ModalHelper', () => {
             await overlay.dismiss();
           });
 
-          it(`body should have class '${ALLOW_BACKGROUND_SCROLL_CLASS_NAME}' if interactWithBackground is true`, () => {
+          it(`body should be scrollable`, () => {
             expect(window.document.body.classList).toContain(ALLOW_BACKGROUND_SCROLL_CLASS_NAME);
             expect(window.document.body).toHaveComputedStyle({
               overflow: 'visible',
@@ -273,7 +273,7 @@ describe('ModalHelper', () => {
             await overlay.dismiss();
           });
 
-          it(`body should not have class '${ALLOW_BACKGROUND_SCROLL_CLASS_NAME}' if interactWithBackground is false`, () => {
+          it(`body should not be scrollable`, () => {
             expect(window.document.body.classList).not.toContain(
               ALLOW_BACKGROUND_SCROLL_CLASS_NAME
             );
