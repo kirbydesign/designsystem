@@ -1,7 +1,9 @@
-import { Injectable } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Inject, Injectable, Renderer2, RendererFactory2 } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
 import { KirbyAnimation } from '../../../animation/kirby-animation';
+import { WindowRef } from '../../../types';
 import { ModalCompactWrapperComponent } from '../modal-wrapper/compact/modal-compact-wrapper.component';
 import { ModalConfig, ModalFlavor, ModalSize } from '../modal-wrapper/config/modal-config';
 import { ModalWrapperComponent } from '../modal-wrapper/modal-wrapper.component';
@@ -14,11 +16,16 @@ export class ModalHelper {
   // TODO: Make presentingElement an instance field when
   // forRoot()/singleton services has been solved:
   private static presentingElement: HTMLElement = undefined;
+  private renderer: Renderer2;
 
   constructor(
     private ionicModalController: ModalController,
-    private modalAnimationBuilder: ModalAnimationBuilderService
-  ) {}
+    private modalAnimationBuilder: ModalAnimationBuilderService,
+    private rendererFactory: RendererFactory2,
+    @Inject(DOCUMENT) private document: HTMLDocument
+  ) {
+    this.renderer = rendererFactory.createRenderer(null, null);
+  }
 
   public async showModalWindow(config: ModalConfig): Promise<Overlay> {
     config.flavor = config.flavor || 'modal';
@@ -35,6 +42,7 @@ export class ModalHelper {
 
     const defaultModalSize: ModalSize = config.flavor === 'modal' ? 'medium' : null;
     const modalSize = config.size || defaultModalSize;
+    const allow_scroll_class = 'allow-background-scroll';
 
     let customCssClasses = [];
     if (config.cssClass) {
@@ -61,6 +69,14 @@ export class ModalHelper {
       enterAnimation,
       leaveAnimation,
     });
+
+    if (config.interactWithBackground) {
+      this.renderer.addClass(this.document.body, allow_scroll_class);
+
+      ionModal.onDidDismiss().then(() => {
+        this.renderer.removeClass(this.document.body, allow_scroll_class);
+      });
+    }
 
     await ionModal.present();
 
