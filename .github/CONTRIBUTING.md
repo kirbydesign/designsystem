@@ -203,9 +203,11 @@ The wording of an issue should be as specific and unambigious as possible. This 
 ##### Example #1: Referring to files 
 
 If you are referring to a file in the repository do not refer to it as `_typography.css` use the full path instead: `libs/designsystem/src/lib/scss/base/_typography.scss`.
+It can also be helpful to directly link to the file such that the reader easily can access it: [`libs/designsystem/src/lib/scss/base/_typography`](/kirbydesign/designsystem/blob/master/libs/designsystem/src/lib/scss/base/_typography.scss).
+
 While it might be obvious for you and experienced contributors, what and where `_typography.css` is; it is not obvious for newcomers. 
 
-If you already have refered to the full path earlier in the issue, it can be okay to refer to the file as `_typography.css`.
+If you already have refered to the full path earlier in the issue, it is okay to refer to the file as `_typography.css` without linking to it.
 
 ##### Example #2: Writing reproducible steps for bug reports
 
