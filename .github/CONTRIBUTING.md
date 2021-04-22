@@ -203,6 +203,7 @@ The wording of an issue should be as specific and unambigious as possible. This 
 ##### Example #1: Referring to files 
 
 If you are referring to a file in the repository do not refer to it as `_typography.css` use the full path instead: `libs/designsystem/src/lib/scss/base/_typography.scss`.
+
 It can also be helpful to directly link to the file such that the reader easily can access it: [`libs/designsystem/src/lib/scss/base/_typography`](/kirbydesign/designsystem/blob/master/libs/designsystem/src/lib/scss/base/_typography.scss).
 
 While it might be obvious for you and experienced contributors, what and where `_typography.css` is; it is not obvious for newcomers. 
@@ -241,7 +242,7 @@ They also provide helpful checklists that help you follow [the process of contri
 If you experience that no template matches your specifc need; well there is a good opportunity to contribute. Create an issue for a new template to be created! 
 
 #### The good issue has a good title
-The title of an issue is read most often, as issues are viewed in some sort of list most of the time.
+The title of an issue is the part being read the most, as issues usually are viewed in some sort of list.
 It can therefore be a good idea to spend some time formulating one. 
 
 A good title is short without too much detail. Details should be presented in the actual description. 
