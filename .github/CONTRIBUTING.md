@@ -371,19 +371,40 @@ This does not go for bug reports however, as we want to unearth and solve as man
 
 ### Commit
 
+You may have encountered statements like
+
 > Commit early, Commit often
+
+and
 
 > Commit Often, Perfect Later, Publish Once
 >
 > _[Git Best Practices](https://sethrobertson.github.io/GitBestPractices/)_
 
-- Focus on one thing per commit 
-- Keep changes as small as possible 
-- Only commit related functionality for each commit
-- Commit often
-- Strive for each commit to compile/build and pass tests 
-- Use [gitmoji](https://gitmoji.dev) when possible. There are several [tools](https://gitmoji.dev/related-tools) available (including a [VSCode extension](https://github.com/vtrois/gitmoji-vscode) and a [CLI tool](https://github.com/carloscuesta/gitmoji-cli))
-- All commits are squashed when your branch is merged with the main branch
+You are encouraged to follow commonly adopted Git best practices, see for example [Distributed Git - Contributing to a Project](https://git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project). These include, among others:
+
+* Try to make each commit a logically separate changeset
+  + Keep changes in each commit to a minimum
+  + Focus on _one thing_ per commit
+  + Only commit related functionality for each commit
+* If you have made multiple non-related changes to a file and you want them in separate commits, you can stage your changes using `git add --patch`
+* Commit often
+  + Multiple smaller commits are better than one large commit
+* Strive for each commit to compile/build and pass tests
+* Regularly push your commits to remote
+  + Early peer reviews are easier
+  + In case something happens to your machine it reduces the amount of work lost
+  + Makes it easier to hand over the issue to other developers if needed
+
+#### Commit messages
+
+* Use imperative mood
+* Limit the subject line to 50 characters. If you cannot fit your message into 50 characters:
+  + Consider if you've included too many changes that makes it hard to describe in a brief subject line
+  + Try to rephrase the subject line and use the message body for elaboration. Be aware that if you need to write a lot in the message body it may also be a sign of too many changes in one commit
+* Use [gitmoji](https://gitmoji.dev) when possible. There are several [tools](https://gitmoji.dev/related-tools) available (including a [VSCode extension](https://github.com/vtrois/gitmoji-vscode) and a [CLI tool](https://github.com/carloscuesta/gitmoji-cli))
+
+All commits from your branch are squashed when merged with the main branch. Commit messages from individual commits end up in a list of changes in the message body of the merge commit. Try to keep that in mind when writing your commit messages.
 
 ### Self-review 
 
