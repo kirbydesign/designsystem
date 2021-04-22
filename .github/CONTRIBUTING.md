@@ -223,7 +223,7 @@ While a branch is ephemeral, we believe it is important to have informative and 
 - Determine if it is safe to delete a branch
 - Organize branches 
 
-To achieve this, we have decided that a branch must contain three items:
+To achieve this - it has been decided that a branch must contain the following three items:
 <dl>
 <dt>Issue type</dt>
 <dd>
@@ -240,7 +240,7 @@ The entire name of the issue type  is to be used, such that contributors does no
   
 Should be part of the branch name, such that others know which issue the changes on the branch is related to. 
 
-If this was not included and a branch is created for which a pull-request is never submitted, it can be hard to determine if it is safe to delete it. Is the issue being refered to closed? Is this branch even related to an issue?
+If this was not included and a branch is created for which a pull-request is never submitted - questions can arise, such as: _is it safe to delete the branch? Is the issue for this branch closed? Is this branch even related to an issue?_
 
 It also functions as a reminder for contributors to only work on one issue per branch. 
 
