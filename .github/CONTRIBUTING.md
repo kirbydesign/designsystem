@@ -285,11 +285,12 @@ When reporting a bug, you could record a screen capure to show exactly what you 
 Suggesting an enhancement? Add before and after images portraying what you would like, just make sure to clearly state which is "before" and which is "after". 
 
 #### The good issue is closed when there i no need for it (except bug reports!)
-If an issue that you have submitted is no longer necessary and no work has been done on it, go ahead and close it.
+If an issue you have submitted is no longer necessary and no work has been done on it, go ahead and close it.
 
-This is not because it might not provide value to Kirby. But there is almost certainly more preceeding issues, than for one which there really is no need.
+While suggestions from contributors always are valueable, we want to eliminate as much "noise" as possible, by removing issues that are outdated or redundant. 
+Otherwise they might take away attention from more important issues.  
 
-If someone else has a need for your issue again, they can just go ahead and open a new issue. No harm done (issues cost nothing to create afterall). 
+If someone else has a need for your issue again they can request that it is reopened or go ahead and open a new one. No harm done (issues cost nothing to create afterall). 
 
 This does not go for bug reports however, as we want to unearth and solve as many bugs as possible.
 
