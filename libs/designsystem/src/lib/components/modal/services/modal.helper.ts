@@ -1,8 +1,8 @@
-import { DOCUMENT } from '@angular/common';
-import { Inject, Injectable, Renderer2, RendererFactory2 } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
 import { KirbyAnimation } from '../../../animation/kirby-animation';
+import { WindowRef } from '../../../types/window-ref';
 import { ModalCompactWrapperComponent } from '../modal-wrapper/compact/modal-compact-wrapper.component';
 import { ModalConfig, ModalFlavor, ModalSize } from '../modal-wrapper/config/modal-config';
 import { ModalWrapperComponent } from '../modal-wrapper/modal-wrapper.component';
@@ -15,18 +15,12 @@ export class ModalHelper {
   // TODO: Make presentingElement an instance field when
   // forRoot()/singleton services has been solved:
   private static presentingElement: HTMLElement = undefined;
-  private renderer: Renderer2;
-  private document: Document;
 
   constructor(
     private ionicModalController: ModalController,
     private modalAnimationBuilder: ModalAnimationBuilderService,
-    private rendererFactory: RendererFactory2,
-    @Inject(DOCUMENT) document: any
-  ) {
-    this.renderer = rendererFactory.createRenderer(null, null);
-    this.document = document as Document;
-  }
+    private windowRef: WindowRef
+  ) {}
 
   public async showModalWindow(config: ModalConfig): Promise<Overlay> {
     config.flavor = config.flavor || 'modal';
@@ -72,10 +66,10 @@ export class ModalHelper {
     });
 
     if (config.interactWithBackground) {
-      this.renderer.addClass(this.document.body, allow_scroll_class);
+      this.windowRef.document.body.classList.add(allow_scroll_class);
 
       ionModal.onDidDismiss().then(() => {
-        this.renderer.removeClass(this.document.body, allow_scroll_class);
+        this.windowRef.document.body.classList.remove(allow_scroll_class);
       });
     }
 
