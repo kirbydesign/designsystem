@@ -49,6 +49,7 @@ import { PageFixedTitleAndActionsExampleComponent } from './page-example/fixed-t
 import { PageSimpleExampleComponent } from './page-example/simple/page-simple-example.component';
 import { ProgressCircleExampleComponent } from './progress-circle-example/progress-circle-example.component';
 import { RadioExampleComponent } from './radio-example/radio-example.component';
+import { RangeExampleComponent } from './range-example/range-example.component';
 import { ReorderListExampleComponent } from './reorder-list-example/reorder-list-example.component';
 import { SegmentedControlExampleComponent } from './segmented-control-example/segmented-control-example.component';
 import { SlideButtonExampleComponent } from './slide-button-example/slide-button-example.component';
@@ -410,5 +411,9 @@ export const routes: Routes = [
   {
     path: 'radio',
     component: RadioExampleComponent,
+  },
+  {
+    path: 'range',
+    component: RangeExampleComponent,
   },
 ];

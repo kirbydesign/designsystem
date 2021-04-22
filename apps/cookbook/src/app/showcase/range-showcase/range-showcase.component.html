@@ -1,0 +1,42 @@
+<div class="example">
+  <p>
+    The Range slider lets users select from a range of values by moving the slider knob.
+  </p>
+
+  <h2>Simple</h2>
+  <cookbook-example-viewer [html]="defaultExample.template">
+    <cookbook-range-default-example #defaultExample></cookbook-range-default-example>
+  </cookbook-example-viewer>
+
+  <h2>Step (ticks)</h2>
+  <p>
+    Tick marks are displayed based on the step value. If the amount of ticks exceeds
+    <code>10</code>, the step property will automatically be adjusted.
+  </p>
+  <p>
+    Provided values that doesn't match any tick points, will automatically be changed to the nearest
+    tick point.
+  </p>
+  <cookbook-example-viewer [html]="stepExample.template">
+    <cookbook-range-step-example #stepExample></cookbook-range-step-example>
+  </cookbook-example-viewer>
+
+  <h2>Pin - the slider value is shown when the knob is pressed</h2>
+  <cookbook-example-viewer [html]="pinExample.template">
+    <cookbook-range-pin-example #pinExample></cookbook-range-pin-example>
+  </cookbook-example-viewer>
+
+  <h2>Disabled</h2>
+  <cookbook-example-viewer [html]="disabledFormExample.template">
+    <cookbook-range-disabled-form-example
+      #disabledFormExample
+    ></cookbook-range-disabled-form-example>
+  </cookbook-example-viewer>
+
+  <h2>Properties:</h2>
+  <cookbook-api-description-properties
+    [properties]="rangeProperties"
+  ></cookbook-api-description-properties>
+  <h2>Events:</h2>
+  <cookbook-api-description-events [events]="rangeEvents"></cookbook-api-description-events>
+</div>
