@@ -192,70 +192,13 @@ the repo such that they can get coding -->
     - Don't assume people have knowledge outside of Kirby - contributors might come from many different projects 
 
 ### Branch 
-The good branch only contain changes related to one issue and follows our naming policy:
-- Issue type first followed by a `/`
-- Issue id second followed by a `-`
-- Name last
-- Is kebab cased (`kebab-casing-uses-hyphens-for-space`)
-- Lowercased letters only
-
-Like so:
-```
-documentation/1472-the-good-branch
-```
-``` 
-[issue-type]/[issue-id]-[name] 
-```
-
-`issue-type` and `issue-id` can be found from the "Issues"-page as seen on the following image:
-![](images/how-to-find-issue-type-and-id.png)
-
-
-With this information you should be ready to create a branch, that follows our naming policy. 
-Should you be interested in why we have done like so, read on. 
-
-#### Why this naming branch policy?
-
-While a branch is ephemeral, we believe it is important to have an informative and consistent naming policy in order to: 
-- Be able to easily identify what is contained in a branch
-- Determine if it is safe to delete a branch
-- Organize branches 
-
-To achieve this, we have decided that a branch must contain three items:
-<dl>
-<dt>Issue type</dt>
-<dd>
-Should be part of the branch name to ease organization and grouping. 
-
-When viewing the branch overview on Github, all branches of the same issue type will be grouped together. 
-Likewise when the issue type is followed by a `/`, tools such as an IDE or Git GUI which visualise branches as a tree, will group all branches of the same type together.
-
-The full issue type name is to be used, such that contributors do not have to remember how the different types are abbrivated (is it bug: fix, bug or bugfix? doc, docs, docu or something fourth?) 
-</dd>
-
-<dt>Issue id</dt>
-<dd>
-Should be part of the branch name such that it can be known which issue the branch belongs to.
-
-If a branch is created for which a pull-request is never submitted, it can be known what issue the changes on the branch are related to.
-If the issue that is being refered to in the branch name has been closed, it is probably safe to delete the branch. 
-
-It also functions as a reminder for contributors to only work on one issue per branch. 
-
-If a contributor is working on something for which no issue has been submitted, they will not be able to follow the naming policy. 
-Thus hopefully nudges them to create a [good issue](#issue) and follow [the process for contribution](#the-process-for-contribution).
-</dd>
-
-<dt>Name</dt>
-<dd>Should be part of the branch name such that it (hopefully) is possible to get an idea what the changes on the branch is related to, without looking up issues.</dd>
-</dl>
-
-Lowercasing and the use of kebab case exists to keep the branch names consistent. 
-This makes it easier to change to the branch in for exampe a terminal, as it is necessary to remember whether the specific branch being worked on, was named using camel case, kebab case, or something third; and which words were capitalized and which werent. 
-
-A contributor should simple remember that: 
-- We always use kebab case 
-- We always use lowercase for branch names
+<!-- We could also use githooks to enforce branch naming policies: https://itnext.io/using-git-hooks-to-enforce-branch-naming-policy-ffd81fa01e5e - perhaps have the warning throw a link to this section? -->
+- Guidelines for how to name branches 
+- Feature branches
+- Bugfix branches
+- Enhancement branches
+- Housekeeping branches
+- Others i might have forgotten?
 
 ### Commit
 - Focus on one thing per commit 
