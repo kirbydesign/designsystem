@@ -99,7 +99,7 @@ export class RadioGroupComponent implements AfterContentInit, ControlValueAccess
   private _disabled = false;
   private _items: string[] | any[] = [];
   private _onChangeCallback: (value: any) => void = () => {};
-  private _onTouched: Function;
+  private _onTouched = () => {};
   private _selectedIndex: number = -1;
   private _value?: string | any = null;
   @ViewChildren(RadioComponent)

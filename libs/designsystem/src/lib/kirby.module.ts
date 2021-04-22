@@ -64,6 +64,7 @@ import { ProgressCircleRingComponent } from './components/progress-circle/progre
 import { ProgressCircleComponent } from './components/progress-circle/progress-circle.component';
 import { RadioGroupComponent } from './components/radio/radio-group/radio-group.component';
 import { RadioComponent } from './components/radio/radio.component';
+import { RangeComponent } from './components/range/range.component';
 import { ReorderListComponent } from './components/reorder-list/reorder-list.component';
 import { RouterOutletModule } from './components/router-outlet/router-outlet.module';
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
@@ -82,7 +83,6 @@ import { ToggleComponent } from './components/toggle/toggle.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
 import { ModalRouterLinkDirective } from './directives/modal-router-link/modal-router-link.directive';
-import { SizeDirective } from './directives/size/size.directive';
 import { ThemeColorDirective } from './directives/theme-color/theme-color.directive';
 import { WindowRef } from './types/window-ref';
 
@@ -115,7 +115,6 @@ const exportedDeclarations = [
   SegmentedControlComponent,
   ChipComponent,
   BadgeComponent,
-  SizeDirective,
   ThemeColorDirective,
   DateInputDirective,
   SlideButtonComponent,
@@ -140,6 +139,7 @@ const exportedDeclarations = [
   AccordionItemComponent,
   RadioComponent,
   RadioGroupComponent,
+  RangeComponent,
 ];
 
 const declarations = [
