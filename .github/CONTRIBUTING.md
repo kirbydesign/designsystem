@@ -255,8 +255,7 @@ The following title:
 could be improved by writing: 
 > Input error on 50-character submit
 
-Having a hard time coming up with a good title? 
-It can sometimes be easier to formulate a brief but comprehensive title _after_ you have written the issue description. 
+Having a hard time coming up with a good title? It can sometimes be easier to formulate a brief but comprehensive title _after_ you have written the issue description. 
 
 #### The good issue is easy to read
 There are MANY ways to improve the readability of a text. The following is just some ways to do it, that we think can add value when writing an issue:
@@ -276,11 +275,14 @@ Is much harder to read than:
 > - Brave New World 
 > - The Count of Monte Cristo
 
-#### The good issue contains screenshots and gifs if possible 
-Kirby is a design system, hence it is a very visual project! So do not be shy of using images and gifs to explain yourself. 
+#### The good issue contains screenshots and screen recordings if possible 
+Kirby is a design system, hence it is a very visual project! So do not be shy of using images and screen recordings to explain yourself. 
 
-If you are requesting a new component, perhaps add a sketch showing how you are imagining it. When reporting a bug, record a gif to show exactly what you are experiencing. 
-Suggesting an enhancement? Add before and after pictures portraying what you would like. 
+If you are requesting a new component, perhaps add a sketch showing how you are imagining it. While every component must have a UX refined sketch before it can be implemented; adding one yourself can help others understand what you are thinking. 
+
+When reporting a bug, you could record a screen capure to show exactly what you are experiencing. 
+
+Suggesting an enhancement? Add before and after images portraying what you would like, just make sure to clearly state which is "before" and which is "after". 
 
 #### The good issue is closed when there i no need for it (except bug reports!)
 If an issue that you have submitted is no longer necessary and no work has been done on it, go ahead and close it.
