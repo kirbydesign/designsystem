@@ -204,7 +204,7 @@ The wording of an issue should be as specific and unambigious as possible. This 
 
 If you are referring to a file in the repository do not refer to it as `_typography.css` use the full path instead: `libs/designsystem/src/lib/scss/base/_typography.scss`.
 
-It can also be helpful to directly link to the file such that the reader easily can access it: [`libs/designsystem/src/lib/scss/base/_typography`](/kirbydesign/designsystem/blob/master/libs/designsystem/src/lib/scss/base/_typography.scss).
+It can also be helpful to directly link to the file such that the reader easily can access it: [`libs/designsystem/src/lib/scss/base/_typography.scss`](https://github.com/kirbydesign/designsystem/blob/master/libs/designsystem/src/lib/scss/base/_typography.scss).
 
 While it might be obvious for you and experienced contributors, what and where `_typography.css` is; it is not obvious for newcomers. 
 
@@ -280,7 +280,7 @@ Kirby is a design system, hence it is a very visual project! So do not be shy of
 
 If you are requesting a new component, perhaps add a sketch showing how you are imagining it. While every component must have a UX refined sketch before it can be implemented; adding one yourself can help others understand what you are thinking. 
 
-When reporting a bug, you could record a screen capure to show exactly what you are experiencing. 
+When reporting a bug, you could add a screen recording to show exactly what you are experiencing. 
 
 Suggesting an enhancement? Add before and after images portraying what you would like, just make sure to clearly state which is "before" and which is "after". 
 
