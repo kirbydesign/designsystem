@@ -266,7 +266,7 @@ Do not ignore the template text when creating an issue. Use it.
 The issue templates exist to ease collaboration by providing structure and reminding you of which information other contributors are looking for. 
 They also provide helpful checklists that help you follow [the process of contributing](#the-process-of-contributing) and let others know how far you have come. 
 
-If you experience that no template matches your specifc need; well there is a good opportunity to contribute. Create an issue for a new template to be created! 
+If you experience that no template matches your specific need; well there is a good opportunity to contribute. Create an issue for a new template to be created! 
 
 #### The good issue has a good title
 The title of an issue is the part being read the most, as issues usually are viewed in some sort of list.
