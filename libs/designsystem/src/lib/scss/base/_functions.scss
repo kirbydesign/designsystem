@@ -163,7 +163,7 @@
 @mixin accessible-target-size($width: $fat-finger-size, $height: $width) {
   position: relative;
 
-  &:after {
+  &::after {
     content: '';
     position: absolute;
     min-height: $height;
