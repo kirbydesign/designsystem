@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
-import { Sizes } from '@kirbydesign/designsystem';
+import { TextLinkSize } from '@kirbydesign/designsystem';
 
 @Component({
   selector: 'cookbook-text-link-showcase',
@@ -20,7 +20,7 @@ export class TextLinkShowcaseComponent {
       name: 'size',
       description: 'Sets the size of the link.',
       defaultValue: 'md',
-      type: Object.values(Sizes).slice(0, 3),
+      type: Object.values(TextLinkSize).slice(0, 3),
     },
     {
       name: 'text',

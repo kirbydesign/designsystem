@@ -52,6 +52,7 @@ import { MockSlideButtonComponent } from './components/mock.slide-button.compone
 import { MockSpinnerComponent } from './components/mock.spinner.component';
 import { MockTabButtonComponent } from './components/mock.tab-button.component';
 import { MockTabsComponent } from './components/mock.tabs.component';
+import { MockTextLinkComponent } from './components/mock.text-link.component';
 import { MockTextareaComponent } from './components/mock.textarea.component';
 import { MockToggleButtonComponent } from './components/mock.toggle-button.component';
 import { MockToggleComponent } from './components/mock.toggle.component';
@@ -111,6 +112,7 @@ export const MOCK_COMPONENTS = [
   MockSpinnerComponent,
   MockTabButtonComponent,
   MockTabsComponent,
+  MockTextLinkComponent,
   MockToggleComponent,
   MockToggleButtonComponent,
   MockToolbarComponent,

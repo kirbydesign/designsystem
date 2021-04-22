@@ -1,5 +1,11 @@
 import { Component, HostBinding, Input } from '@angular/core';
 
+export enum TextLinkSize {
+  XS = 'xs',
+  SM = 'sm',
+  MD = 'md',
+}
+
 @Component({
   selector: 'kirby-text-link',
   templateUrl: './text-link.component.html',
@@ -10,7 +16,7 @@ export class TextLinkComponent {
   @Input() text: string;
   @HostBinding('class')
   @Input()
-  size: 'sm' | 'md' | 'lg' = 'md';
+  size: TextLinkSize = TextLinkSize.MD;
 
   get isInternal() {
     const baseURI = window.document.baseURI;

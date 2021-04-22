@@ -46,6 +46,7 @@ export { SpinnerComponent } from './spinner/spinner.component';
 
 export * from './tabs';
 export * from './toast';
+export { TextLinkComponent, TextLinkSize } from './text-link/text-link.component';
 export { ToggleComponent } from './toggle/toggle.component';
 export { ToolbarComponent } from './toolbar/toolbar.component';
 
