@@ -192,7 +192,7 @@ the repo such that they can get coding -->
     - Don't assume people have knowledge outside of Kirby - contributors might come from many different projects 
 
 ### Branch 
-The good branch only contain changes related to one issue and follows our naming policy:
+The good branch only contain changes related to one issue and follows our branch name policy:
 - Issue type first followed by a `/`
 - Issue id second followed by a `-`
 - Name last
@@ -214,9 +214,7 @@ The issue type and id can be found on the [issues page](https://github.com/kirby
 
 ![](images/how-to-find-issue-type-and-id.png)
 
-With this information you should be ready to create a branch that follow our naming policy. 
-
-Should you be interested in why we have decided on this policy then read on. 
+You should now be ready to create a _good_ branch that follows our branch name policy. But if you are interested in why we have decided on this policy - read on. 
 
 #### Why this branch naming policy?
 
@@ -232,8 +230,7 @@ To achieve this, we have decided that a branch must contain three items:
   
 Should be part of the branch name to ease organization and grouping. 
   
-When viewing the branch overview on Github, all branches of the same issue type will be grouped together. 
-Likewise when the issue type is followed by a `/`, tools such as an IDE or Git GUI which visualise branches as a tree, will group all branches of the same type together.
+When viewing the branch overview on Github, which is sorted alphabetically - all branches of the same issue type will be shown next to each other. When the issue type is followed by a `/`, tools that visualise branches as a tree (such as a Git GUI or an IDE), will group all branches belonging to the same type together.
 
 The entire name of the issue type  is to be used, such that contributors does not have to remember a bunch of arbitary abbrivations (is it: doc, docs or docu? Something fourth?) 
 </dd>
@@ -258,9 +255,9 @@ This hopefully nudges them towards creating a [good issue](#issue) and follow [t
 
 Lowercasing and the use of kebab case exists to keep the branch names consistent. 
 
-This makes it easier to change in a terminal, as it is not necessary to remember whether the specific branch being worked on was named using: camel case, kebab case, or something third; and which words were capitalized and which were not. 
+This makes it easier to change branch as it is not necessary to remember whether the branch was named using: camel case, kebab case, or something third. Which words were capitalized and which were not?
 
-Instead a contributor should simply remember to always use kebab case and lowercase for branch names.
+Instead a contributor should simply remember to always use kebab- and lowercase and for branch names.
 
 ### Commit
 - Focus on one thing per commit 
