@@ -242,7 +242,7 @@ describe('ModalHelper', () => {
 
         describe(`When drawer can interact with background`, () => {
           beforeEach(async () => {
-            await openDrawer('Drawer with interactive with background', null, null, true);
+            await openDrawer('Drawer with interact with background', null, null, true);
           });
 
           it(`body should be scrollable`, async () => {
