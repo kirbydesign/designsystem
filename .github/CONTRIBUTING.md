@@ -224,7 +224,7 @@ When reporting a bug or similar do not write something along the lines of:
 > Whenever i use a `kirby-button` with attention level 1 on the frontpage, a warning is thrown
 
 Specify exactly where and how the button is inserted with a code snippet, along with exact details of the warning and where it can be found:
-> Inserting a `kirby-button` with attention level 1 as shown in the code-snippet, results in the following warning being logged in the browser console: `Warning goes here`.
+> Inserting a `kirby-button` with attention level 1 as shown in the code-snippet, results in the following warning being logged in the browser console: `TypeError: undefined is not an object`.
 
 The latter is pure maintainer poetry. 
 
