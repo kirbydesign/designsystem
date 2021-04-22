@@ -401,7 +401,7 @@ export const routes: Routes = [
     component: SlidesExampleComponent,
   },
   {
-    path: 'text-link',
+    path: 'link',
     component: TextLinkExampleComponent,
   },
   {
