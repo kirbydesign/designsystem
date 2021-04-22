@@ -16,14 +16,16 @@ export class ModalHelper {
   // forRoot()/singleton services has been solved:
   private static presentingElement: HTMLElement = undefined;
   private renderer: Renderer2;
+  private document: Document;
 
   constructor(
     private ionicModalController: ModalController,
     private modalAnimationBuilder: ModalAnimationBuilderService,
     private rendererFactory: RendererFactory2,
-    @Inject(DOCUMENT) private document: any
+    @Inject(DOCUMENT) document: any
   ) {
     this.renderer = rendererFactory.createRenderer(null, null);
+    this.document = document as Document;
   }
 
   public async showModalWindow(config: ModalConfig): Promise<Overlay> {

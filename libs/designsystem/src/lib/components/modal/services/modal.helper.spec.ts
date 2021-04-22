@@ -240,9 +240,9 @@ describe('ModalHelper', () => {
           });
         });
 
-        describe(`drawer can interact with background`, () => {
+        describe(`When drawer can interact with background`, () => {
           beforeEach(async () => {
-            await openDrawer('Drawer On Presenting Element', undefined, 'medium', true);
+            await openDrawer('Drawer with interactive with background', null, null, true);
           });
 
           it(`body should be scrollable`, async () => {
@@ -259,9 +259,9 @@ describe('ModalHelper', () => {
           });
         });
 
-        describe(`Drawer can not interact with background`, () => {
+        describe(`When drawer can not interact with background`, () => {
           beforeEach(async () => {
-            await openDrawer('Drawer On Presenting Element', undefined, 'medium', false);
+            await openDrawer('Drawer with no interact with background', null, null, false);
           });
 
           afterEach(async () => {
