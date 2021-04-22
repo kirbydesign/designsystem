@@ -237,21 +237,21 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   private listenForIonModalDidPresent() {
-    if (!this.ionModalElement) return;
-
-    this.ionModalElement.addEventListener('ionModalDidPresent', () => {
-      this.ionModalDidPresent.next();
-      this.ionModalDidPresent.complete();
-    });
+    if (this.ionModalElement) {
+      this.ionModalElement.addEventListener('ionModalDidPresent', () => {
+        this.ionModalDidPresent.next();
+        this.ionModalDidPresent.complete();
+      });
+    }
   }
 
   private listenForIonModalWillDismiss() {
-    if (!this.ionModalElement) return;
-
-    this.ionModalElement.addEventListener('ionModalWillDismiss', () => {
-      this.ionModalWillDismiss.next();
-      this.ionModalWillDismiss.complete();
-    });
+    if (this.ionModalElement) {
+      this.ionModalElement.addEventListener('ionModalWillDismiss', () => {
+        this.ionModalWillDismiss.next();
+        this.ionModalWillDismiss.complete();
+      });
+    }
   }
 
   scrollToTop(scrollDuration?: KirbyAnimation.Duration) {
