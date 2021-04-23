@@ -54,7 +54,7 @@ jobs:
           restore-keys: | 
             npm-
       - name: Install NPM dependencies
-        run: npm ci
+        run: date && npm ci
       - name: Run linting
         run: npm run lint
       - name: Run tests
@@ -84,7 +84,7 @@ jobs:
           restore-keys: | 
             npm-
       - name: Install NPM dependencies
-        run: npm ci
+        run: date && npm ci
       - name: Build Kirby lib
         run: npm run dist:designsystem
 
@@ -170,7 +170,7 @@ jobs:
           restore-keys: | 
             npm-
       - name: Install NPM dependencies
-        run: npm ci
+        run: date && npm ci
       - name: Install Kubernetes CLI
         run: |
           sudo apt-get update
