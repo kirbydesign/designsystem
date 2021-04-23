@@ -71,7 +71,8 @@ describe('IconComponent', () => {
       fixture.detectChanges();
 
       expect(console.warn).toHaveBeenCalledWith(
-        `Built-in icon with name "${noExistingIconName}" was not found. Do you have a typo in 'name' or did you mean to use a custom icon? If so, please use: <kirby-icon customName="${noExistingIconName}"></kirby-icon>`
+        `Built-in icon with name "${noExistingIconName}" was not found. Do you have a typo in 'name' or
+        did you mean to use a custom icon? If so, please use: <kirby-icon customName="${noExistingIconName}"></kirby-icon>`
       );
     });
 
@@ -95,7 +96,8 @@ describe('IconComponent', () => {
       fixture.detectChanges();
 
       expect(console.warn).toHaveBeenCalledWith(
-        `Custom icon with name "${noExistingIconName}" was not found. Do you have a typo in 'customName' or forgot to configure the custom icon through the 'IconRegistryService'?`
+        `Custom icon with name "${noExistingIconName}" was not found. Do you have a typo in 'customName' or
+        forgot to configure the custom icon through the 'IconRegistryService'?`
       );
     });
 
