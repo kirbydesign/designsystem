@@ -12,7 +12,7 @@ export class TextLinkShowcaseComponent {
   properties: ApiDescriptionProperty[] = [
     {
       name: 'route',
-      description: 'The navigation link (internal or external)',
+      description: 'The navigation link (internal or external).',
       defaultValue: 'null',
       type: ['string'],
     },
@@ -24,7 +24,7 @@ export class TextLinkShowcaseComponent {
     },
     {
       name: 'text',
-      description: 'The text shown within the link',
+      description: 'The text shown within the link.',
       defaultValue: 'null',
       type: ['string'],
     },

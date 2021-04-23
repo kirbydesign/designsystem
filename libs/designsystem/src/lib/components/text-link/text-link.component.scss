@@ -4,7 +4,7 @@
   a {
     color: get-text-color('black');
 
-    &[href^='http'] {
+    &.external {
       white-space: nowrap;
       background-image: url('/assets/kirby/icons/svg/link.svg');
       background-repeat: no-repeat;
@@ -19,7 +19,7 @@
     a {
       font-size: font-size('s');
 
-      &[href^='http'] {
+      &.external {
         background-size: size('s');
         padding-right: calc(#{size('s')} + #{size('xxxs')});
       }
@@ -30,7 +30,7 @@
     a {
       font-size: font-size('xs');
 
-      &[href^='http'] {
+      &.external {
         //same as small icon as per UI requirements
         background-size: size('s');
         padding-right: calc(#{size('s')} + #{size('xxxs')});
