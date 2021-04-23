@@ -46,7 +46,22 @@ describe('TextLinkComponent', () => {
     });
   });
 
-  describe('with external links', () => {
+  describe('with internal link', () => {
+    beforeEach(() => {
+      spectator = createHost(
+        `<kirby-text-link text='Internal link' route='/test/route'></kirby-text-link>`
+      );
+    });
+
+    it('should link to relative route', () => {
+      const href = spectator.queryHost<HTMLAnchorElement>('a').getAttribute('href');
+      const startsWithSlash = /^\//;
+
+      expect(href).toMatch(startsWithSlash);
+    });
+  });
+
+  describe('with external link', () => {
     beforeEach(() => {
       spectator = createHost(
         `<kirby-text-link  text='Some Link' route='https://angular.io/api/router/RouterLink'></kirby-text-link>`
@@ -60,6 +75,13 @@ describe('TextLinkComponent', () => {
       expect(anchor).toHaveComputedStyle({
         'background-image': `url("${baseURI}assets/kirby/icons/svg/link.svg")`,
       });
+    });
+
+    it('should link to external resource', () => {
+      const href = spectator.queryHost<HTMLAnchorElement>('a').getAttribute('href');
+      const startsWithHttp = /^https?:\/\//;
+
+      expect(href).toMatch(startsWithHttp);
     });
   });
 
