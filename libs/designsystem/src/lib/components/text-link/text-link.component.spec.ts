@@ -18,28 +18,28 @@ describe('TextLinkComponent', () => {
     imports: [RouterTestingModule, TestHelper.ionicModuleForTest],
   });
 
-  describe(`should be`, () => {
+  describe(`by default`, () => {
     beforeEach(() => {
       spectator = createHost(`<kirby-text-link text='Some Link'></kirby-text-link>`);
     });
 
-    it('created', () => {
+    it('should create', () => {
       expect(spectator.component).toBeTruthy();
     });
 
-    it('styled with correct color', () => {
+    it('should be styled with correct color', () => {
       const anchor = spectator.queryHost<HTMLAnchorElement>('a');
 
       expect(anchor).toHaveComputedStyle({ color: getColor('black') });
     });
 
-    it('styled with an underline', () => {
+    it('should be styled with an underline', () => {
       const anchor = spectator.queryHost<HTMLAnchorElement>('a');
 
       expect(anchor).toHaveComputedStyle({ 'text-decoration-line': 'underline' });
     });
 
-    it('styled with a pointer as the cursor', () => {
+    it('should be styled with a pointer as the cursor', () => {
       const anchor = spectator.queryHost<HTMLAnchorElement>('a');
 
       expect(anchor).toHaveComputedStyle({ cursor: 'pointer' });
