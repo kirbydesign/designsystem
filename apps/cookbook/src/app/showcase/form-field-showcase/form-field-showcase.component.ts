@@ -108,6 +108,41 @@ On native devices this method also ensures the form field is scrolled into the v
     },
   ];
 
+  numericInputProperties: ApiDescriptionProperty[] = [
+    {
+      name: 'precision',
+      defaultValue: '2',
+      description: 'Number of fractional digits',
+      type: ['number'],
+    },
+    {
+      name: 'allowMinus',
+      defaultValue: 'false',
+      description:
+        'Allow negative values, will automatically be true if minimum value is a negative number',
+      type: ['true', 'false'],
+    },
+    {
+      name: 'min',
+      defaultValue: undefined,
+      description: 'Minimum value',
+      type: ['number'],
+    },
+    {
+      name: 'max',
+      defaultValue: undefined,
+      description: 'Maximum value',
+      type: ['number'],
+    },
+    {
+      name: 'setMaxOnOverflow',
+      defaultValue: 'false',
+      description:
+        'Set the maximum value when the user types a number which is greater that the value of max.',
+      type: ['true', 'false'],
+    },
+  ];
+
   sharedEvents: ApiDescriptionEvent[] = [
     {
       name: 'blur',

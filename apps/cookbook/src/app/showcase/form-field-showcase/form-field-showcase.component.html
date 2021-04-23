@@ -35,12 +35,41 @@
 </cookbook-example-viewer>
 
 <h3>Numeric</h3>
-<cookbook-example-viewer [html]="inputNumericExample.template">
+<p>
+  <code>kirby-input</code> of type <code>number</code> will automatically get a numeric mask (unless
+  you disable it, see notes below).
+</p>
+<p>
+  This adds grouping seperators & restrict the value to be numeric only. It also has addional
+  configuration available for allowing negative values, restricting the value to have an maximum
+  value and more (see "Numeric Input: Specific properties" for more details).
+</p>
+
+<cookbook-example-viewer [html]="inputNumericExample.template" [ts]="inputNumericExample.template">
   <cookbook-form-field-input-numeric-example
     [size]="size"
     #inputNumericExample
   ></cookbook-form-field-input-numeric-example>
 </cookbook-example-viewer>
+<p>
+  <em
+    ><strong>*Please note:</strong> Numeric input is based on <code>LOCALE_ID</code>. When
+    <code>DA</code> grouping separator will be <code>.</code> and decimal will be <code>,</code></em
+  >
+</p>
+<p>
+  <em
+    ><strong>*Please note:</strong> mask can be disabled by adding
+    <code>kirby-input-disable-mask</code>
+  </em>
+</p>
+<p>
+  <em
+    ><strong>*Please note:</strong> If you need to apply the mask for non-kirby inputs, it can be
+    done by using
+    <code>kirby-input-numeric</code>
+  </em>
+</p>
 
 <h3>Date</h3>
 <cookbook-example-viewer [html]="inputDateExample.template">
@@ -54,6 +83,19 @@
     ><strong>*Please note:</strong> Date-mask is based on <code>LOCALE_ID</code>. When
     <code>DA</code> the date-mask will be <code>dd.mm.åååå</code></em
   >
+</p>
+<p>
+  <em
+    ><strong>*Please note:</strong> mask can be disabled by adding
+    <code>kirby-input-disable-mask</code>
+  </em>
+</p>
+<p>
+  <em
+    ><strong>*Please note:</strong> If you need to apply the mask for non-kirby inputs, it can be
+    done by using
+    <code>kirby-input-date</code>
+  </em>
 </p>
 
 <h3>Disabled</h3>
@@ -131,6 +173,12 @@
 <h4>Properties:</h4>
 <cookbook-api-description-properties
   [properties]="inputProperties"
+></cookbook-api-description-properties>
+
+<h2>Numeric Input: Specific properties</h2>
+<h4>Properties:</h4>
+<cookbook-api-description-properties
+  [properties]="numericInputProperties"
 ></cookbook-api-description-properties>
 
 <h2>Textarea: Specific properties</h2>
