@@ -54,11 +54,14 @@ export class IconComponent implements OnChanges {
     let warning: string = '';
 
     if (this.customName) {
-      warning = `Custom icon with name "${this.customName}" was not found. Do you have a typo in 'customName' or
+      warning = `Custom icon with name "${this.customName}" was not found. 
+        Do you have a typo in 'customName' or
         forgot to configure the custom icon through the 'IconRegistryService'?`;
     } else {
-      warning = `Built-in icon with name "${this.name}" was not found. Do you have a typo in 'name' or
-        did you mean to use a custom icon? If so, please use: <kirby-icon customName="${this.name}"></kirby-icon>`;
+      warning = `Built-in icon with name "${this.name}" was not found. 
+        Do you have a typo in 'name' or
+        did you mean to use a custom icon? If so, please use: 
+        <kirby-icon customName="${this.name}"></kirby-icon>`;
     }
 
     return warning;
