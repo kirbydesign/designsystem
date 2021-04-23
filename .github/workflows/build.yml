@@ -49,8 +49,7 @@ jobs:
         env:
           cache-name: cache-node-modules
         with:
-          path: | 
-            **/node_modules
+          path: ~/.npm
           key: npm-${{hashFiles('**/package-lock.json')}}
           restore-keys: | 
             npm-
@@ -80,8 +79,7 @@ jobs:
         env:
           cache-name: cache-node-modules
         with:
-          path: | 
-            **/node_modules
+          path: ~/.npm
           key: npm-${{hashFiles('**/package-lock.json')}}
           restore-keys: | 
             npm-
@@ -167,8 +165,7 @@ jobs:
         env:
           cache-name: cache-node-modules
         with:
-          path: |
-            **/node_modules
+          path: ~/.npm
           key: npm-${{hashFiles('**/package-lock.json')}}
           restore-keys: | 
             npm-
