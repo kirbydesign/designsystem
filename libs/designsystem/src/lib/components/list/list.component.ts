@@ -13,14 +13,14 @@ import {
   TrackByFunction,
   ViewChild,
 } from '@angular/core';
-import { Datasource, IDatasource } from 'ngx-ui-scroll';
+import { IDatasource } from 'ngx-ui-scroll';
 
 import { PlatformService } from '../../helpers/platform.service';
 import { ThemeColor } from '../../helpers/theme-color.type';
 import { ItemComponent } from '../item/item.component';
 
 import { ListHelper } from './helpers/list-helper';
-import { ListSwipeAction } from './list-swipe-action';
+import { ListSwipeAction, SwipeDirection, SwipeEnd } from './list-swipe-action';
 import {
   ListFlexItemDirective,
   ListFooterDirective,
@@ -37,7 +37,6 @@ export enum ListShape {
   'rounded',
   'none',
 }
-
 @Component({
   selector: 'kirby-list',
   templateUrl: './list.component.html',
@@ -54,11 +53,14 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   items: any[] = [];
 
   datasource: IDatasource = {
-    get(index, count, success) {
+    get: (index, count, success) => {
+      console.log('index', index);
+      console.log('count', count);
+
       setTimeout(() => {
         const data = [];
         const start = Math.max(0, index);
-        const end = index + count - 1;
+        const end = Math.min(index + count - 1, this.items.length - 1);
         if (start <= end) {
           for (let i = start; i <= end; i++) {
             data.push(this.items[i]);
@@ -67,15 +69,14 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
         console.log('DATA', data);
 
         success(data);
-      }, 200);
+      }, 400);
+    },
+    settings: {
+      minIndex: 0,
+      startIndex: 0,
+      bufferSize: 10,
     },
   };
-
-  // datasourceCallback2: IDatasource = {
-  //   get: (index, count, success) => setTimeout(
-  //     success(this.getData(index, count)), DELAY
-  //   )
-  // };
 
   @Input()
   getItemColor: (item: any) => ThemeColor;
@@ -126,6 +127,10 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   @HostBinding('class.item-spacing')
   @Input()
   hasItemSpacing: boolean;
+
+  @Input() useVirtualScrolling?: boolean = false;
+
+  @Input() virtualScrollViewportHeight?: number = 500;
 
   /**
    * Determines if the loadOnDemand event should be emitted.
@@ -226,7 +231,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     return section.name;
   }
 
-  getSwipeActionsSide(side: 'left' | 'right', item: any): ListSwipeAction[] {
+  getSwipeActions(item: any, side?: SwipeDirection): ListSwipeAction[] {
     if (!Array.isArray(this.swipeActions)) {
       return [];
     }
@@ -237,8 +242,32 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
       if (sa.isDisabled === true) {
         return false;
       }
-      return sa.position === side;
+      return side ? sa.position === side : true;
     });
+  }
+
+  hasSwipeActions(item: any): boolean {
+    if (!Array.isArray(this.swipeActions)) {
+      return false;
+    }
+    return this.swipeActions.some((sa) => {
+      if (sa.isDisabled instanceof Function && sa.isDisabled(item)) {
+        return false;
+      }
+      if (sa.isDisabled === true) {
+        return false;
+      }
+      return sa.position === SwipeDirection.left || sa.position === SwipeDirection.right;
+    });
+  }
+
+  getSwipeActionEnd(item: any): SwipeEnd {
+    if (this.getSwipeActions(item, SwipeDirection.left).length) {
+      return SwipeEnd.start;
+    }
+    if (this.getSwipeActions(item, SwipeDirection.right).length) {
+      return SwipeEnd.end;
+    }
   }
 
   getSwipeActionIcon(swipeAction: ListSwipeAction, item: any): string {
@@ -268,6 +297,11 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     swipeAction.onSelected(item);
     this.list.closeSlidingItems();
     event.stopPropagation();
+  }
+
+  getItemOrderClass(index: number): string {
+    if (index === 0) return this.headerTemplate ? '' : 'first';
+    if (index === this.items.length - 1) return this.footerTemplate ? '' : 'last';
   }
 
   private initializeSwipeActions(): void {

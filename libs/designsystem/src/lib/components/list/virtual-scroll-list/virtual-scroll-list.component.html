@@ -1,0 +1,141 @@
+<ion-list
+  #list
+  #viewport
+  kirbyInfiniteScroll
+  (scrollEnd)="onLoadOnDemand()"
+  [disabled]="!isLoadOnDemandEnabled"
+  [class.has-header]="headerTemplate"
+  [class.has-footer]="footerTemplate"
+  [class.has-divider]="showDivider"
+  [style]="{ height: useVirtualScrolling ? virtualScrollViewportHeight : null }"
+>
+  <ion-list-header *ngIf="headerTemplate">
+    <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
+  </ion-list-header>
+
+  <ng-container
+    *ngTemplateOutlet="
+      isSectionsEnabled ? groupedListTemplate : slidingItemsTemplate;
+      context: { $implicit: datasource }
+    "
+  ></ng-container>
+
+  <div *ngIf="footerTemplate" class="footer">
+    <ng-container *ngTemplateOutlet="footerTemplate"></ng-container>
+  </div>
+</ion-list>
+
+<p *ngIf="!isLoadOnDemandEnabled && noMoreItemsText" class="no-more-items">{{ noMoreItemsText }}</p>
+<div *ngIf="isLoading" class="loading">
+  <kirby-spinner></kirby-spinner>
+</div>
+
+<ng-template #groupedListTemplate>
+  <ion-item-group *ngFor="let section of groupedItems; trackBy: sectionTrackBy">
+    <ion-item-divider>
+      <ng-container
+        *ngTemplateOutlet="sectionHeaderTemplate; context: { $implicit: section.name }"
+      ></ng-container>
+    </ion-item-divider>
+
+    <div class="list-items">
+      <ng-container
+        *ngTemplateOutlet="slidingItemsTemplate; context: { $implicit: section.items }"
+      ></ng-container>
+    </div>
+  </ion-item-group>
+</ng-template>
+
+<!-- Item templates -->
+<ng-template #defaultItemTemplate let-item>
+  <ng-container
+    *ngTemplateOutlet="
+      hasDeprecatedItemTemplate ? deprecatedItemTemplate : itemTemplate;
+      context: { $implicit: item }
+    "
+  ></ng-container>
+</ng-template>
+
+<ng-template #deprecatedItemTemplate let-item>
+  <ion-item
+    [button]="isSelectable ? true : null"
+    [attr.tabindex]="isSelectable ? null : 0"
+    detail="false"
+  >
+    <ng-container
+      *ngTemplateOutlet="legacyItemTemplate; context: { $implicit: item }"
+    ></ng-container>
+    <ng-container
+      *ngTemplateOutlet="legacyFlexItemTemplate; context: { $implicit: item }"
+    ></ng-container>
+  </ion-item>
+</ng-template>
+
+<!-- Swipe Action templates -->
+<ng-template #slidingItemsTemplate let-items>
+  <ng-container *ngIf="useVirtualScrolling">
+    <div *uiScroll="let item of datasource">
+      <div class="item-wrapper">
+        <ion-item-sliding
+          [class.selected]="isSelectable && item === selectedItem"
+          [kirbyListItemColor]="getItemColor"
+          [item]="item"
+          [disabled]="isSwipingEnabled ? null : true"
+          keyHandler
+          (click)="isSelectable ? onItemSelect(item) : null"
+        >
+          <ng-container
+            *ngTemplateOutlet="swipeActionsTemplate; context: { $implicit: item }"
+          ></ng-container>
+          <ng-container
+            *ngTemplateOutlet="defaultItemTemplate; context: { $implicit: item }"
+          ></ng-container>
+        </ion-item-sliding>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="!useVirtualScrolling">
+    <ion-item-sliding
+      *ngFor="let item of items; trackBy: trackBy || defaultTrackBy"
+      [class.selected]="isSelectable && item === selectedItem"
+      [kirbyListItemColor]="getItemColor"
+      [item]="item"
+      [disabled]="isSwipingEnabled ? null : true"
+      keyHandler
+      (click)="isSelectable ? onItemSelect(item) : null"
+    >
+      <ng-container
+        *ngTemplateOutlet="swipeActionsTemplate; context: { $implicit: item }"
+      ></ng-container>
+      <ng-container
+        *ngTemplateOutlet="defaultItemTemplate; context: { $implicit: item }"
+      ></ng-container>
+    </ion-item-sliding>
+  </ng-container>
+</ng-template>
+
+<ng-template #swipeActionsTemplate let-item>
+  <ion-item-options *ngIf="hasSwipeActions(item)" [side]="getSwipeActionEnd(item)">
+    <div class="swipe-action">
+      <ng-container *ngFor="let swipeAction of getSwipeActions(item)">
+        <ion-item-option
+          [ngClass]="getSwipeActionType(swipeAction, item)"
+          (click)="onSwipeActionSelect(swipeAction, item, $event)"
+        >
+          <div class="item-content">
+            <kirby-icon
+              *ngIf="getSwipeActionIcon(swipeAction, item)"
+              size="sm"
+              [name]="getSwipeActionIcon(swipeAction, item)"
+            >
+            </kirby-icon>
+            <ion-label>
+              {{ getSwipeActionTitle(swipeAction, item) }}
+            </ion-label>
+          </div>
+        </ion-item-option>
+      </ng-container>
+    </div>
+  </ion-item-options>
+</ng-template>

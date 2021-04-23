@@ -34,19 +34,7 @@ import { GridComponent } from './components/grid/grid.component';
 import { IconRegistryService } from './components/icon/icon-registry.service';
 import { IconModule } from './components/icon/icon.module';
 import { ItemModule } from './components/item/item.module';
-import { InfiniteScrollDirective } from './components/list/directives/infinite-scroll.directive';
-import { ListItemColorDirective } from './components/list/directives/list-item-color.directive';
-import { ListHeaderComponent } from './components/list/list-header/list-header.component';
-import { ListSectionHeaderComponent } from './components/list/list-section-header/list-section-header.component';
-import { ListComponent } from './components/list/list.component';
-import {
-  ListFlexItemDirective,
-  ListFooterDirective,
-  ListHeaderDirective,
-  ListItemDirective,
-  ListItemTemplateDirective,
-  ListSectionHeaderDirective,
-} from './components/list/list.directive';
+import { ListModule } from './components/list/list.module';
 import { GroupByPipe } from './components/list/pipes/group-by.pipe';
 import { FullscreenLoadingOverlayComponent } from './components/loading-overlay/fullscreen-loading-overlay/fullscreen-loading-overlay.component';
 import { LoadingOverlayService } from './components/loading-overlay/fullscreen-loading-overlay/loading-overlay.service';
@@ -73,7 +61,7 @@ import { ResizeObserverFactory } from './components/shared/resize-observer/resiz
 import { ResizeObserverService } from './components/shared/resize-observer/resize-observer.service';
 import { SlideButtonComponent } from './components/slide-button/slide-button.component';
 import { SlideDirective, SlidesComponent } from './components/slides/slides.component';
-import { SpinnerComponent } from './components/spinner/spinner.component';
+import { SpinnerModule } from './components/spinner/spinner.module';
 import { StockChartComponent } from './components/stock-chart/stock-chart.component';
 import { TabsModule } from './components/tabs/tabs.module';
 import { ToastController } from './components/toast/services/toast.controller';
@@ -92,22 +80,12 @@ const exportedDeclarations = [
   CardHeaderComponent,
   CardFooterComponent,
   ButtonComponent,
-  ListComponent,
-  ListItemDirective,
-  ListFlexItemDirective,
-  ListItemTemplateDirective,
-  ListSectionHeaderComponent,
-  ListSectionHeaderDirective,
-  ListHeaderDirective,
-  ListHeaderComponent,
-  ListFooterDirective,
   ChartComponent,
   StockChartComponent,
   GridComponent,
   ComponentLoaderDirective,
   AvatarComponent,
   GroupByPipe,
-  SpinnerComponent,
   CalendarComponent,
   CheckboxComponent,
   ActionSheetComponent,
@@ -131,7 +109,6 @@ const exportedDeclarations = [
   DividerComponent,
   ReorderListComponent,
   DropdownComponent,
-  InfiniteScrollDirective,
   LoadingOverlayComponent,
   ProgressCircleComponent,
   FlagComponent,
@@ -145,7 +122,6 @@ const exportedDeclarations = [
 
 const declarations = [
   ...exportedDeclarations,
-  ListItemColorDirective,
   FullscreenLoadingOverlayComponent,
   KeyHandlerDirective,
   FormFieldMessageComponent,
@@ -163,6 +139,8 @@ const exportedModules = [
   IconModule,
   ItemModule,
   ToggleButtonModule,
+  ListModule,
+  SpinnerModule,
 ];
 
 const exports = [...exportedModules, ...exportedDeclarations];
