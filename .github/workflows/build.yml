@@ -51,6 +51,8 @@ jobs:
         with:
           path: ~/.npm
           key: npm-${{hashFiles('**/package-lock.json')}}
+          restore-keys: | 
+            npm-
       - name: Install NPM dependencies
         run: npm ci
       - name: Run linting
@@ -79,6 +81,8 @@ jobs:
         with:
           path: ~/.npm
           key: npm-${{hashFiles('**/package-lock.json')}}
+          restore-keys: | 
+            npm-
       - name: Install NPM dependencies
         run: npm ci
       - name: Build Kirby lib
@@ -163,6 +167,8 @@ jobs:
         with:
           path: ~/.npm
           key: npm-${{hashFiles('**/package-lock.json')}}
+          restore-keys: | 
+            npm-
       - name: Install NPM dependencies
         run: npm ci
       - name: Install Kubernetes CLI
