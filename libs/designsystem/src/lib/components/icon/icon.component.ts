@@ -34,7 +34,8 @@ export class IconComponent implements OnChanges {
   set icon(icon: Icon) {
     // If icon are not found, set default icon
     if (!icon && (this.name || this.customName)) {
-      console.warn(this.getMissingIconWarning());
+      this.getMissingIconWarning();
+
       icon = this.defaultIcon;
 
       // If default icon are not found
@@ -50,21 +51,17 @@ export class IconComponent implements OnChanges {
     }
   }
 
-  private getMissingIconWarning(): string {
-    let warning: string = '';
-
+  private getMissingIconWarning(): void {
     if (this.customName) {
-      warning = `Custom icon with name "${this.customName}" was not found. 
+      console.warn(`Custom icon with name "${this.customName}" was not found. 
         Do you have a typo in 'customName' or
-        forgot to configure the custom icon through the 'IconRegistryService'?`;
+        forgot to configure the custom icon through the 'IconRegistryService'?`);
     } else {
-      warning = `Built-in icon with name "${this.name}" was not found. 
+      console.warn(`Built-in icon with name "${this.name}" was not found. 
         Do you have a typo in 'name' or
         did you mean to use a custom icon? If so, please use: 
-        <kirby-icon customName="${this.name}"></kirby-icon>`;
+        <kirby-icon customName="${this.name}"></kirby-icon>`);
     }
-
-    return warning;
   }
 
   constructor(private iconRegistryService: IconRegistryService) {}
