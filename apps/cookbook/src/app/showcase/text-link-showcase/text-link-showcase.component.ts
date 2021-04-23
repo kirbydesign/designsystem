@@ -28,5 +28,11 @@ export class TextLinkShowcaseComponent {
       defaultValue: 'null',
       type: ['string'],
     },
+    {
+      name: 'target',
+      description: 'The browsing context where the link should be displayed.',
+      defaultValue: '_blank',
+      type: ['_self', '_blank', '_parent', '_top'],
+    },
   ];
 }

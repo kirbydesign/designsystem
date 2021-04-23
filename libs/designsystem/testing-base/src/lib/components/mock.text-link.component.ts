@@ -16,6 +16,7 @@ import { TextLinkComponent, TextLinkSize } from '@kirbydesign/designsystem';
 export class MockTextLinkComponent {
   @Input() route: string;
   @Input() text: string;
+  @Input() target: '_self' | '_blank' | '_parent' | '_top';
   @Input() size: TextLinkSize;
 }
 

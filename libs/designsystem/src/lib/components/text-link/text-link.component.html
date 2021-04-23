@@ -3,5 +3,5 @@
   <a [routerLink]="route">{{ text }}</a>
 </ng-container>
 <ng-template #externalLinkTemplate>
-  <a href="{{ route }}">{{ text }}</a>
+  <a href="{{ route }}" target="{{ target }}" rel="noopener noreferrer">{{ text }}</a>
 </ng-template>

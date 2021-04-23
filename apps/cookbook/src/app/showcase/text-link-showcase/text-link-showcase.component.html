@@ -8,6 +8,17 @@
   External links will automatically get an icon to indicate that the user is sent to an external web
   page when clicking the link.
 </p>
+<p>
+  External links will open in a new tab by default, but this behavior can be changed via the
+  <code>target</code> property, similar to the <code>target</code> attribute of a
+  <kirby-text-link
+    route="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#attributes"
+    text="regular anchor tag"
+  >
+  </kirby-text-link
+  >.
+</p>
+
 <h2>Internal links</h2>
 <cookbook-example-viewer [html]="internalExample.template">
   <cookbook-text-link-example-internal #internalExample></cookbook-text-link-example-internal>

@@ -14,6 +14,7 @@ export enum TextLinkSize {
 export class TextLinkComponent {
   @Input() route: string;
   @Input() text: string;
+  @Input() target: '_self' | '_blank' | '_parent' | '_top' = '_blank';
   @HostBinding('class')
   @Input()
   size: TextLinkSize = TextLinkSize.MD;
