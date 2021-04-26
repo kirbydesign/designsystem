@@ -79,7 +79,7 @@ describe('ToastHelper', () => {
           await TestHelper.whenReady(ionToast);
           const toastWrapper = ionToast.shadowRoot.querySelector('.toast-wrapper');
           const expectedColor =
-            messageType === 'danger' ? getColor('danger') : getColor(notificationColor);
+            messageType === 'danger' ? getColor('warning') : getColor(notificationColor);
           expect(toastWrapper).toHaveComputedStyle({
             'background-color': expectedColor,
           });
@@ -95,7 +95,7 @@ describe('ToastHelper', () => {
         });
 
         expect(console.warn).toHaveBeenCalledWith(
-          `[DEPRECATED] 'danger' message type is deprecated. Use Alerts for critial warnings. Message type will be set as 'warning'`
+          `[DEPRECATED] 'danger' message type is deprecated. Use Alerts for critial warnings. Toast will be shown as 'warning'`
         );
       });
     });
