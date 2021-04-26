@@ -6,6 +6,6 @@ export interface ToastConfig {
 }
 
 /**
- * @deprecated 'danger' is deprecated. Use alert for critical events
+ * 'danger' is deprecated. Use alert for critical events
  */
 export type MessageType = 'success' | 'warning' | 'danger';

@@ -37,10 +37,11 @@ export class ToastHelper {
 
       return (cssClass += ' ' + 'warning');
     }
-    return (cssClass += ' ' + messageType);
-  }
 
-  private warnAboutDepricatedMessageType(): MessageType {
-    return 'warning';
+    if (messageType) {
+      cssClass += ' ' + messageType;
+    }
+
+    return cssClass;
   }
 }

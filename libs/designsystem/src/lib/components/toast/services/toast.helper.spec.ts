@@ -78,14 +78,15 @@ describe('ToastHelper', () => {
           const ionToast = window.document.getElementsByTagName('ion-toast')[0];
           await TestHelper.whenReady(ionToast);
           const toastWrapper = ionToast.shadowRoot.querySelector('.toast-wrapper');
+          const expectedColor =
+            messageType !== 'danger' ? getColor(notificationColor) : getColor('warning');
           expect(toastWrapper).toHaveComputedStyle({
-            'background-color':
-              messageType !== 'danger' ? getColor(notificationColor) : getColor('warning'),
+            'background-color': expectedColor,
           });
         });
       });
 
-      it('Danger type should display warning in console', async () => {
+      it(`should display warning in console when using 'danger' MessageType`, async () => {
         spyOn(console, 'warn');
 
         overlay = await spectator.service.showToast({
