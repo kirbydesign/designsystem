@@ -108,7 +108,7 @@ On native devices this method also ensures the form field is scrolled into the v
     },
   ];
 
-  numericInputProperties: ApiDescriptionProperty[] = [
+  decimalMaskProperties: ApiDescriptionProperty[] = [
     {
       name: 'precision',
       defaultValue: '2',

@@ -5,9 +5,8 @@ import { InputSize } from '@kirbydesign/designsystem';
 const config = {
   selector: 'cookbook-form-field-input-numeric-example',
   template: `<kirby-form-field label="Numeric input">
-  <input type="number" kirby-input />
-</kirby-form-field>
-`,
+  <input type="number" kirby-input [size]="size" />
+</kirby-form-field>`,
 };
 
 @Component({
