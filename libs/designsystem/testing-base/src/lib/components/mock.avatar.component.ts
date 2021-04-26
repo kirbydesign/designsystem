@@ -1,6 +1,11 @@
-import { forwardRef, Component, Input } from '@angular/core';
+import { Component, forwardRef, Input } from '@angular/core';
 
-import { AvatarComponent, BrandColor, NotificationColor } from '@kirbydesign/designsystem';
+import {
+  AvatarComponent,
+  AvatarSize,
+  BrandColor,
+  NotificationColor,
+} from '@kirbydesign/designsystem';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
@@ -19,6 +24,7 @@ export class MockAvatarComponent {
   @Input() shadow: boolean;
   @Input() text: string;
   @Input() overlay: boolean;
+  @Input() size: AvatarSize;
   @Input() themeColor:
     | NotificationColor
     | BrandColor

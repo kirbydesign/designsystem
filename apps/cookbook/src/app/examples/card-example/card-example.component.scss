@@ -11,8 +11,8 @@ kirby-card-header {
   }
 
   &.bg-color {
-    color: get-color('dark-contrast');
-    background-color: get-color('dark');
+    --kirby-card-header-color: #{get-color('dark-contrast')};
+    --kirby-card-header-background-color: #{get-color('dark')};
   }
 }
 

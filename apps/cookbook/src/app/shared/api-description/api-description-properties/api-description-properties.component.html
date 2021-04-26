@@ -1,0 +1,29 @@
+<table class="api-description">
+  <thead>
+    <th *ngIf="columns.name">{{ columns.name }}</th>
+    <th *ngIf="columns.description">{{ columns.description }}</th>
+    <th *ngIf="columns.type">{{ columns.type }}</th>
+    <th *ngIf="columns.default">{{ columns.default }}</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let prop of properties">
+      <td *ngIf="columns.name">
+        <code>{{ prop.name }}</code>
+      </td>
+      <td *ngIf="columns.description" class="description">{{ prop.description }}</td>
+      <td *ngIf="columns.type">
+        <ng-container *ngIf="!prop.preserveTypeWhitespaces && prop.type">
+          <code>{{ prop.type.join(' | ') }}</code>
+        </ng-container>
+        <pre
+          *ngIf="prop.preserveTypeWhitespaces && prop.type"
+        ><code>{{  prop.type.join(' | ') }}</code></pre>
+      </td>
+      <td *ngIf="columns.default">
+        <ng-container *ngIf="prop.defaultValue">
+          <code>{{ prop.defaultValue }}</code>
+        </ng-container>
+      </td>
+    </tr>
+  </tbody>
+</table>

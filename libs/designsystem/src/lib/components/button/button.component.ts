@@ -10,6 +10,12 @@ import {
 import { NotificationColor } from '../../helpers';
 import { IconComponent } from '../icon/icon.component';
 
+export enum ButtonSize {
+  SM = 'sm',
+  MD = 'md',
+  LG = 'lg',
+}
+
 @Component({
   // tslint:disable-next-line:component-selector
   selector: 'button[kirby-button],Button[kirby-button]',
@@ -48,6 +54,11 @@ export class ButtonComponent implements AfterContentInit {
     return this._isIconRight;
   }
 
+  @HostBinding('class')
+  get _cssClass() {
+    return [this.themeColor, this.size].filter((cssClass) => !!cssClass);
+  }
+
   @Input() set attentionLevel(level: '1' | '2' | '3' | '4') {
     this.isAttentionLevel1 = level === '1';
     this.isAttentionLevel2 = level === '2';
@@ -57,12 +68,13 @@ export class ButtonComponent implements AfterContentInit {
   @Input() set isDestructive(state: boolean) {
     this.destructive = state;
   }
-  @HostBinding('class')
   @Input()
   themeColor: NotificationColor;
   @Input() expand: 'full' | 'block';
   @Input() text: string;
   @Input() isFloating: boolean = false;
+  @Input()
+  size: ButtonSize = ButtonSize.MD;
 
   @ContentChild(IconComponent) icon: IconComponent;
   @ContentChild(IconComponent, { read: ElementRef })

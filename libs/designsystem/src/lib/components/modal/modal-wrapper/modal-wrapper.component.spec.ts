@@ -90,6 +90,133 @@ describe('ModalWrapperComponent', () => {
     });
   });
 
+  describe('viewportResize', () => {
+    it('should emit when viewport is resized', async () => {
+      spectator = modalWrapperTestBuilder.build();
+      await TestHelper.whenTrue(() => !!spectator.component['initialViewportHeight']);
+      const viewportResizeSpy = spyOn(spectator.component['viewportResize'], 'next');
+
+      await TestHelper.resizeTestWindow(TestHelper.screensize.tablet);
+      await TestHelper.whenTrue(() => spectator.component['viewportResized']);
+
+      expect(viewportResizeSpy).toHaveBeenCalled();
+    });
+
+    afterAll(() => {
+      TestHelper.resetTestWindow();
+    });
+  });
+
+  describe('with interact with background', () => {
+    const elementHeight = 500;
+    const elementWidth = 300;
+    const screenSize = TestHelper.screensize.desktop;
+
+    beforeAll(async () => {
+      await TestHelper.resizeTestWindow(screenSize);
+    });
+
+    afterAll(() => {
+      TestHelper.resetTestWindow();
+    });
+
+    describe('when flavor is modal', () => {
+      beforeEach(() => {
+        spectator = modalWrapperTestBuilder
+          .flavor('modal')
+          .interactWithBackground()
+          .build();
+        spectator.element.style.height = `${elementHeight}px`;
+        spectator.element.style.width = `${elementWidth}px`;
+        spectator.element.style.overflow = 'hidden';
+        spectator.element.style.position = 'fixed'; // Use 'fixed' instead of 'absolute' to prevent test breaking if test window is scrolled
+        spectator.element.style.bottom = '0';
+        spectator.element.style.left = `calc(50% - ${elementWidth / 2}px)`; // Simulate horizontally centered modal
+        spectator.element.style.backgroundColor = 'charrtreuse'; // Add some background for easier debugging of test
+      });
+
+      afterEach(() => {
+        // Ensure any observers are destroyed:
+        spectator.fixture.destroy();
+      });
+
+      it('should NOT resize ion-modal to wrapper size after ion-modal has been presented', fakeAsync(() => {
+        spectator.component['ionModalDidPresent'].next();
+        spectator.component['ionModalDidPresent'].complete();
+        tick();
+
+        const ionModalElement = spectator.component['ionModalElement'];
+        expect(ionModalElement.style.top).toBe('');
+        expect(ionModalElement.style.left).toBe('');
+        expect(ionModalElement.style.right).toBe('');
+      }));
+
+      it('should NOT resize ion-modal to wrapper size on viewport resize', fakeAsync(() => {
+        spectator.component['viewportResize'].next();
+        spectator.component['viewportResize'].complete();
+        tick();
+
+        const ionModalElement = spectator.component['ionModalElement'];
+        expect(ionModalElement.style.top).toBe('');
+        expect(ionModalElement.style.left).toBe('');
+        expect(ionModalElement.style.right).toBe('');
+      }));
+    });
+
+    describe('when flavor is drawer', () => {
+      beforeEach(() => {
+        spectator = modalWrapperTestBuilder
+          .flavor('drawer')
+          .interactWithBackground()
+          .build();
+        spectator.element.style.height = `${elementHeight}px`;
+        spectator.element.style.width = `${elementWidth}px`;
+        spectator.element.style.overflow = 'hidden';
+        spectator.element.style.position = 'fixed'; // Use 'fixed' instead of 'absolute' to prevent test breaking if test window is scrolled
+        spectator.element.style.bottom = '0';
+        spectator.element.style.left = `calc(50% - ${elementWidth / 2}px)`; // Simulate horizontally centered modal
+        spectator.element.style.backgroundColor = 'charrtreuse'; // Add some background for easier debugging of test
+      });
+
+      afterEach(() => {
+        // Ensure any observers are destroyed:
+        spectator.fixture.destroy();
+      });
+
+      it('should resize ion-modal to wrapper size after ion-modal has been presented', fakeAsync(() => {
+        spectator.component['ionModalDidPresent'].next();
+        spectator.component['ionModalDidPresent'].complete();
+        tick();
+
+        const expectedPosition = {
+          top: parseInt(screenSize.height) - elementHeight,
+          left: spectator.element.getBoundingClientRect().left,
+          right: parseInt(screenSize.width) - spectator.element.getBoundingClientRect().right,
+        };
+        const ionModalElement = spectator.component['ionModalElement'];
+        expect(ionModalElement.style.top).toBe(`${expectedPosition.top}px`);
+        expect(ionModalElement.style.left).toBe(`${expectedPosition.left}px`);
+        expect(ionModalElement.style.right).toBe(`${expectedPosition.right}px`);
+      }));
+
+      it('should resize ion-modal to wrapper size on viewport resize', fakeAsync(() => {
+        spectator.component['viewportResize'].next();
+        spectator.component['viewportResize'].complete();
+        tick();
+
+        const expectedPosition = {
+          top: parseInt(screenSize.height) - elementHeight,
+          left: spectator.element.getBoundingClientRect().left,
+          right: parseInt(screenSize.width) - spectator.element.getBoundingClientRect().right,
+        };
+        const ionModalElement = spectator.component['ionModalElement'];
+        expect(ionModalElement.style.top).toBe(`${expectedPosition.top}px`);
+        expect(ionModalElement.style.left).toBe(`${expectedPosition.left}px`);
+        expect(ionModalElement.style.right).toBe(`${expectedPosition.right}px`);
+      }));
+    });
+  });
+
   describe('close button', () => {
     beforeEach(() => {
       spectator = modalWrapperTestBuilder.build();
@@ -664,7 +791,7 @@ describe('ModalWrapperComponent', () => {
 
     describe(`when keyboard is visible`, () => {
       beforeEach(() => {
-        spectator.component['_onKeyboardShow'](200);
+        spectator.component['keyboardVisible'] = true;
       });
 
       describe(`and viewport is not resized`, () => {
@@ -692,10 +819,8 @@ describe('ModalWrapperComponent', () => {
           // Ensure resizeObserver triggers and onViewportResize fires:
           await TestHelper.waitForResizeObserver();
           await TestHelper.whenTrue(() => spectator.component['viewportResized']);
-          expect(spectator.component['viewportResized']).toBeTrue();
-
-          const dismissSpy = spectator.component['ionModalElement'].dismiss as jasmine.Spy;
-          expect(dismissSpy).not.toHaveBeenCalled();
+          // Ensure keyboardVisible is true, as Ionic dispatches 'ionKeyboardDidShow' event on viewport resize:
+          spectator.component['keyboardVisible'] = true;
         });
 
         afterEach(() => {
@@ -704,11 +829,11 @@ describe('ModalWrapperComponent', () => {
           TestHelper.resetTestWindow();
         });
 
-        it(`should blur document.activeElement before calling wrapping ion-modal's dismiss() method`, fakeAsync(async () => {
+        it(`should blur document.activeElement before calling wrapping ion-modal's dismiss() method`, fakeAsync(() => {
           const ionContent = spectator.query('ion-content');
           // If other test specs have imported IonicModule before this test is run,
           // then Ionic components won't be mocked - so ensure ionContent.componentOnReady is run if exists:
-          await TestHelper.ionComponentOnReady(ionContent);
+          TestHelper.ionComponentOnReady(ionContent);
 
           const input = ionContent.querySelector('input');
           spyOn(input, 'blur');
@@ -719,7 +844,7 @@ describe('ModalWrapperComponent', () => {
           expect(spectator.component['ionModalElement'].dismiss).not.toHaveBeenCalled();
           expect(input.blur).toHaveBeenCalled();
           tick(ModalWrapperComponent.KEYBOARD_HIDE_DELAY_IN_MS);
-          expect(spectator.component['ionModalElement'].dismiss).toHaveBeenCalled();
+          expect(spectator.component['ionModalElement'].dismiss).toHaveBeenCalledWith('test data');
         }));
 
         it(`should delay before calling wrapping ion-modal's dismiss() method`, fakeAsync(() => {

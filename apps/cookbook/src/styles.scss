@@ -29,3 +29,25 @@ code:not([class*='language-']) {
   background-color: get-color('semi-light');
   padding: size('xxxxs') size('xxxs');
 }
+
+.my-custom-modal-class {
+  --kirby-modal-background: #{get-color('black')};
+  --kirby-modal-color: #{get-color('black-contrast')};
+  --kirby-modal-footer-background: #{get-color('dark')};
+  --kirby-modal-footer-color: #{get-color('dark-contrast')};
+
+  button[kirby-button] {
+    &.attention-level3 {
+      --kirby-button-border-color: #{get-color('white')};
+      --kirby-button-color: #{get-color('white')};
+    }
+    &.attention-level4 {
+      --kirby-button-color: #{get-color('white')};
+    }
+  }
+
+  code {
+    background-color: get-color('dark');
+    color: get-color('dark-contrast');
+  }
+}

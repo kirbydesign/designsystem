@@ -1,0 +1,20 @@
+<table class="api-description">
+  <thead>
+    <th *ngIf="columns.name">{{ columns.name }}</th>
+    <th *ngIf="columns.description">{{ columns.description }}</th>
+    <th *ngIf="columns.type">{{ columns.type }}</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let event of events">
+      <td *ngIf="columns.name">
+        <code>{{ event.name }}</code>
+      </td>
+      <td *ngIf="columns.description" class="description">{{ event.description }}</td>
+      <td *ngIf="columns.type">
+        <ng-container *ngIf="event.signature">
+          <code>{{ event.signature }}</code>
+        </ng-container>
+      </td>
+    </tr>
+  </tbody>
+</table>

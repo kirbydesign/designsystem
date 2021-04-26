@@ -17,7 +17,6 @@ import { CheckboxExampleComponent } from './checkbox-example/checkbox-example.co
 import { ChipExampleComponent } from './chip-example/chip-example.component';
 import { DividerExampleComponent } from './divider-example/divider-example.component';
 import { EmptyStateExampleComponent } from './empty-state-example/empty-state-example.component';
-import { ExampleConfigurationWrapperComponent } from './example-configuration-wrapper/example-configuration-wrapper.component';
 import { ExamplesComponent } from './examples.component';
 import { FabSheetExampleComponent } from './fab-sheet-example/fab-sheet-example.component';
 import { FlagExampleComponent } from './flag-example/flag-example.component';
@@ -78,7 +77,6 @@ export const iconSettings: IconSettings = {
 
 export const COMPONENT_DECLARATIONS: any[] = [
   ExamplesComponent,
-  ExampleConfigurationWrapperComponent,
   ButtonExampleComponent,
   SlideButtonExampleComponent,
   CardExampleComponent,
