@@ -34,7 +34,7 @@ export class IconComponent implements OnChanges {
   set icon(icon: Icon) {
     // If icon are not found, set default icon
     if (!icon && (this.name || this.customName)) {
-      this.writeConsoleWarningsForMissingIcons();
+      this.warnAboutMissingIcon();
 
       icon = this.defaultIcon;
 
@@ -51,7 +51,7 @@ export class IconComponent implements OnChanges {
     }
   }
 
-  private writeConsoleWarningsForMissingIcons(): void {
+  private warnAboutMissingIcon(): void {
     if (this.customName) {
       console.warn(`Custom icon with name "${this.customName}" was not found. 
         Do you have a typo in 'customName' or
