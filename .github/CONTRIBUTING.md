@@ -535,8 +535,15 @@ For more on good git commits, see (among _many_ other):
 
 * Don't change files that is not related to your pull-request
   + for example don't reorder imports in files that is not directly related to the issue at hand
-* Check for unused imports
 * Other self review points go here
+  + Format files using Prettier
+    - If there is a lot of formatting try to put in a separate commit if possible. It will be easier for the reviewer to see the actual changes.
+  + Use the linting rules
+    - Remove unused imports etc.
+    - Sort imports
+  + Is it obvious what the changes made in the pull request are?
+  + Do the descriptions of the pull request and the issue contain the appropriate information for the reviewer? [refer to The Good Pull Request section]
+  + Read the issue description and the tech refinement comment. Does your changes solve the issue? [refer to The Good Pull Request section]
 
 ### Pull-request
 
