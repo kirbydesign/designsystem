@@ -257,7 +257,7 @@ Lowercasing and the use of kebab case exists to keep the branch names consistent
 
 This makes it easier to change branch as it is not necessary to remember whether the branch was named using: camel case, kebab case, or something third. Which words were capitalized and which were not?
 
-Instead a contributor should simply remember to always use kebab- and lowercase and for branch names.
+Instead a contributor should simply remember to always use kebab- and lowercase for branch names.
 
 ### Commit
 - Focus on one thing per commit 
