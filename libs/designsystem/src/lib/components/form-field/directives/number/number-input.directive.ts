@@ -4,13 +4,13 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import Inputmask from 'inputmask';
 
 interface InputMask {
-  unmaskedvalue: () => number;
-  setValue: (val: number) => void;
+  unmaskedvalue: () => string;
+  setValue: (val: string) => void;
 }
 
 @Directive({
-  selector:
-    '[kirby-input][type="number"]:not([kirby-input-disable-mask]), input[kirby-input-numeric]',
+  // tslint:disable-next-line
+  selector: '[kirby-input-decimal-mask]',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -25,18 +25,29 @@ export class NumberInputDirective implements ControlValueAccessor, OnInit {
   @Input() precision = 2;
   @Input() allowMinus = false;
   @Input() setMaxOnOverflow = false;
-  @Input() set maxlength(val: number) {
-    const maxlengthValue = parseInt('9'.repeat(val));
+
+  @Input() set disableGroupSeperator(disabled: string) {
+    this._groupSeperatorDisabled = String(disabled) === '' || String(disabled) === 'true';
+  }
+
+  @Input() set maxlength(maxlength: number) {
+    this._maxlength = maxlength;
+
+    const maxlengthValue = parseInt('9'.repeat(maxlength));
     this.max = this.getMax(maxlengthValue);
     this.min = this.getMin(maxlengthValue);
   }
 
+  _maxlength: number;
+  _groupSeperatorDisabled: boolean;
+  groupSeparator = getLocaleNumberSymbol(this.locale, NumberSymbol.Group);
+  radixPoint = getLocaleNumberSymbol(this.locale, NumberSymbol.Decimal);
   inputmask: InputMask;
-  onChange = (_: number) => {};
+  onChange = (_: string) => {};
 
   constructor(private elementRef: ElementRef, @Inject(LOCALE_ID) private locale: string) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     // Set type="text", because functionality like 'setSelectionRange' are not supported on type="number"
     this.elementRef.nativeElement.setAttribute('type', 'text');
 
@@ -46,25 +57,26 @@ export class NumberInputDirective implements ControlValueAccessor, OnInit {
     this.initMask();
   }
 
-  writeValue(val: number) {
+  writeValue(val: number): void {
     if (!this.inputmask) return;
-    this.inputmask.setValue(val);
+    const formattedValue = String(val).replace('.', this.radixPoint);
+    this.inputmask.setValue(formattedValue);
   }
 
-  registerOnChange(onChange: any) {
+  registerOnChange(onChange: any): void {
     this.onChange = onChange;
   }
 
-  registerOnTouched(_: any) {}
+  registerOnTouched(_: any): void {}
 
   private initMask(): void {
     new Inputmask('decimal', {
-      groupSeparator: getLocaleNumberSymbol(this.locale, NumberSymbol.Group),
-      radixPoint: getLocaleNumberSymbol(this.locale, NumberSymbol.Decimal),
-      digits: this.precision,
+      groupSeparator: this._groupSeperatorDisabled ? '' : this.groupSeparator,
+      radixPoint: this.radixPoint,
+      digits: this._maxlength ? 0 : this.precision,
       min: this.min,
       max: this.max,
-      allowMinus: this.allowMinus || (this.min || 0) < 0,
+      allowMinus: !!this.allowMinus || (this.min || 0) < 0,
       negationSymbol: {
         front: getLocaleNumberSymbol(this.locale, NumberSymbol.MinusSign),
         back: '',
@@ -73,7 +85,9 @@ export class NumberInputDirective implements ControlValueAccessor, OnInit {
       showMaskOnFocus: false,
       showMaskOnHover: false,
       onBeforeWrite: () => {
-        this.onChange(this.inputmask.unmaskedvalue());
+        if (!this.inputmask) return;
+        const unmaskedValue = this.inputmask.unmaskedvalue();
+        this.onChange(unmaskedValue.replace(this.radixPoint, '.'));
       },
     }).mask(this.elementRef.nativeElement);
     this.inputmask = this.elementRef.nativeElement.inputmask;
@@ -84,7 +98,7 @@ export class NumberInputDirective implements ControlValueAccessor, OnInit {
   }
 
   private getMin(maxlengthValue: number): number {
-    if (!this.allowMinus) return null;
+    if (!this.allowMinus) return;
     maxlengthValue = -Math.abs(maxlengthValue);
     return !this.min ? maxlengthValue : -Math.abs(Math.max(this.min, maxlengthValue));
   }

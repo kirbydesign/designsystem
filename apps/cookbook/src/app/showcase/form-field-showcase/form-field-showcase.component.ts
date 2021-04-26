@@ -135,10 +135,23 @@ On native devices this method also ensures the form field is scrolled into the v
       type: ['number'],
     },
     {
+      name: 'maxlength',
+      defaultValue: undefined,
+      description:
+        'Maximum length of value, please note setting maxlength will disable fractional digits',
+      type: ['number'],
+    },
+    {
       name: 'setMaxOnOverflow',
       defaultValue: 'false',
       description:
         'Set the maximum value when the user types a number which is greater that the value of max.',
+      type: ['true', 'false'],
+    },
+    {
+      name: 'disableGroupSeperator',
+      defaultValue: 'false',
+      description: 'Disable group seperation',
       type: ['true', 'false'],
     },
   ];

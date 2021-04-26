@@ -19,7 +19,7 @@ import { FabSheetExampleComponent } from './fab-sheet-example/fab-sheet-example.
 import { FlagExampleComponent } from './flag-example/flag-example.component';
 import { FontsExampleComponent } from './fonts-example/fonts-example.component';
 import { FormFieldInputDateExampleComponent } from './form-field-example/examples/input/date';
-import { FormFieldInputNumericExampleComponent } from './form-field-example/examples/input/numeric';
+import { FormFieldInputDecimalMaskExampleComponent } from './form-field-example/examples/input/decimal-mask';
 import { FormFieldExampleComponent } from './form-field-example/form-field-example.component';
 import { GridExampleComponent } from './grid-example/grid-example.component';
 import { IconExampleComponent } from './icon-example/icon-example.component';
@@ -223,8 +223,8 @@ export const routes: Routes = [
             component: FormFieldInputDateExampleComponent,
           },
           {
-            path: 'number',
-            component: FormFieldInputNumericExampleComponent,
+            path: 'decimal-mask',
+            component: FormFieldInputDecimalMaskExampleComponent,
           },
         ],
       },
