@@ -84,6 +84,19 @@ describe('ToastHelper', () => {
           });
         });
       });
+
+      it('Danger type should display warning in console', async () => {
+        spyOn(console, 'warn');
+
+        overlay = await spectator.service.showToast({
+          message: 'Test message',
+          messageType: 'danger',
+        });
+
+        expect(console.warn).toHaveBeenCalledWith(
+          `[DEPRECATED] 'danger' message type is deprecated. Use Alerts for critial warnings. Message type will be set as 'warning'`
+        );
+      });
     });
   });
 });
