@@ -299,9 +299,9 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     event.stopPropagation();
   }
 
-  getItemOrderClass(index: number): string {
+  getItemOrderClass(index: number, numberOfItems: number): string {
     if (index === 0) return this.headerTemplate ? '' : 'first';
-    if (index === this.items.length - 1) return this.footerTemplate ? '' : 'last';
+    if (index === numberOfItems - 1) return this.footerTemplate ? '' : 'last';
   }
 
   private initializeSwipeActions(): void {
