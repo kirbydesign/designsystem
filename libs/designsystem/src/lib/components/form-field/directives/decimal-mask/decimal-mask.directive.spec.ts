@@ -6,7 +6,7 @@ import { createDirectiveFactory, SpectatorDirective } from '@ngneat/spectator';
 
 import { InputComponent } from '../../input/input.component';
 
-import { NumberInputDirective } from './number-input.directive';
+import { DecimalMaskDirective } from './decimal-mask.directive';
 
 // tslint:disable-next-line:component-selector
 @Component({ selector: 'numeric-input-host', template: '' })
@@ -16,12 +16,12 @@ class NumericInputHostComponent {
 
 describe('NumberInputDirective', () => {
   let locale: 'da' | 'en-GB' = 'en-GB';
-  let spectator: SpectatorDirective<NumberInputDirective>;
+  let spectator: SpectatorDirective<DecimalMaskDirective>;
 
   registerLocaleData(localeDa);
 
   const createDirective = createDirectiveFactory({
-    directive: NumberInputDirective,
+    directive: DecimalMaskDirective,
     host: NumericInputHostComponent,
     imports: [ReactiveFormsModule],
     declarations: [InputComponent],

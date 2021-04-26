@@ -15,11 +15,11 @@ interface InputMask {
     {
       provide: NG_VALUE_ACCESSOR,
       multi: true,
-      useExisting: NumberInputDirective,
+      useExisting: DecimalMaskDirective,
     },
   ],
 })
-export class NumberInputDirective implements ControlValueAccessor, OnInit {
+export class DecimalMaskDirective implements ControlValueAccessor, OnInit {
   @Input() min: number;
   @Input() max: number;
   @Input() precision = 2;

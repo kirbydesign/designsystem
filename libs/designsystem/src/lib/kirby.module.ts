@@ -23,7 +23,7 @@ import { EmptyStateComponent } from './components/empty-state/empty-state.compon
 import { FabSheetComponent } from './components/fab-sheet/fab-sheet.component';
 import { FlagComponent } from './components/flag/flag.component';
 import { DateInputDirective } from './components/form-field/directives/date/date-input.directive';
-import { NumberInputDirective } from './components/form-field/directives/number/number-input.directive';
+import { DecimalMaskDirective } from './components/form-field/directives/decimal-mask/decimal-mask.directive';
 import { FormFieldMessageComponent } from './components/form-field/form-field-message/form-field-message.component';
 import { FormFieldComponent } from './components/form-field/form-field.component';
 import { InputCounterComponent } from './components/form-field/input-counter/input-counter.component';
@@ -117,7 +117,7 @@ const exportedDeclarations = [
   BadgeComponent,
   ThemeColorDirective,
   DateInputDirective,
-  NumberInputDirective,
+  DecimalMaskDirective,
   SlideButtonComponent,
   ToggleComponent,
   EmptyStateComponent,
