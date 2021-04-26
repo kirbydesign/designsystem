@@ -1,9 +1,10 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { DesignTokenHelper } from '../../helpers/design-token-helper';
+
 import { ChipComponent } from './chip.component';
 
-const getColor = DesignTokenHelper.getColor;
+const { getColor, fatFingerSize } = DesignTokenHelper;
 
 describe('ChipComponent', () => {
   let spectator: SpectatorHost<ChipComponent>;
@@ -37,6 +38,13 @@ describe('ChipComponent', () => {
       'background-color': getColor('white'),
       color: getColor('white', 'contrast'),
     });
+  });
+
+  it('should have touch area with minimum size equal to fat finger size', () => {
+    expect(window.getComputedStyle(spectator.element, '::after').minHeight).toEqual(
+      fatFingerSize()
+    );
+    expect(window.getComputedStyle(spectator.element, '::after').minWidth).toEqual(fatFingerSize());
   });
 
   describe('when selected', () => {
