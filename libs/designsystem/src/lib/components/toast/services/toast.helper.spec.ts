@@ -95,7 +95,7 @@ describe('ToastHelper', () => {
         });
 
         expect(console.warn).toHaveBeenCalledWith(
-          `[DEPRECATED] 'danger' message type is deprecated. Use Alerts for critial warnings. Toast will be shown as 'warning'`
+          `[DEPRECATED] 'danger' message type is deprecated. Use Kirby Alerts for critical warnings. Toast will be shown as 'warning'`
         );
       });
     });
