@@ -29,18 +29,18 @@ export class ToastHelper {
 
   private getCssClass(messageType: MessageType): string {
     let cssClass = ToastHelper.CSS_CLASS;
-    const type: MessageType =
-      messageType !== 'danger' ? messageType : this.warnAboutDepricatedMessageType();
-    if (type) {
-      cssClass += ' ' + type;
+
+    if (messageType === 'danger') {
+      console.warn(
+        `[DEPRECATED] 'danger' message type is deprecated. Use Alerts for critial warnings. Message type will be set as 'warning'`
+      );
+
+      return (cssClass += ' ' + 'warning');
     }
-    return cssClass;
+    return (cssClass += ' ' + messageType);
   }
 
   private warnAboutDepricatedMessageType(): MessageType {
-    console.warn(
-      `[DEPRECATED] 'danger' message type is deprecated. Use Alerts for critial events. Message type will be set as 'warning'`
-    );
     return 'warning';
   }
 }
