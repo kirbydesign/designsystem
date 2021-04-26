@@ -381,13 +381,15 @@ and
 >
 > _[Git Best Practices](https://sethrobertson.github.io/GitBestPractices/)_
 
+#### The good commit follows Git best practices
+
 You are encouraged to follow commonly adopted Git best practices, see for example [Distributed Git - Contributing to a Project](https://git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project). These include, among others:
 
 * Try to make each commit a logically separate changeset
   + Keep changes in each commit to a minimum
   + Focus on _one thing_ per commit
   + Only commit related functionality for each commit
-* If you have made multiple non-related changes to a file and you want them in separate commits, you can stage your changes using `git add --patch`
+  + If you have made multiple non-related changes to a file and you want them in separate commits, you can stage your changes using `git add --patch`
 * Commit often
   + Multiple smaller commits are better than one large commit
 * Strive for each commit to compile/build and pass tests
@@ -396,7 +398,7 @@ You are encouraged to follow commonly adopted Git best practices, see for exampl
   + In case something happens to your machine it reduces the amount of work lost
   + Makes it easier to hand over the issue to other developers if needed
 
-#### Commit messages
+#### The good commit has good commit messages
 
 * Use imperative mood
 * Limit the subject line to 50 characters. If you cannot fit your message into 50 characters:
