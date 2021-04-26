@@ -32,10 +32,10 @@ export class ToastHelper {
 
     if (messageType === 'danger') {
       console.warn(
-        `[DEPRECATED] 'danger' message type is deprecated. Use Alerts for critial warnings. Message type will be set as 'warning'`
+        `[DEPRECATED] 'danger' message type is deprecated. Use Alerts for critial warnings. Toast will be shown as 'warning'`
       );
 
-      return (cssClass += ' ' + 'warning');
+      messageType = 'warning';
     }
 
     if (messageType) {

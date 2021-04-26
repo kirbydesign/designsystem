@@ -79,7 +79,7 @@ describe('ToastHelper', () => {
           await TestHelper.whenReady(ionToast);
           const toastWrapper = ionToast.shadowRoot.querySelector('.toast-wrapper');
           const expectedColor =
-            messageType !== 'danger' ? getColor(notificationColor) : getColor('warning');
+            messageType === 'danger' ? getColor('danger') : getColor(notificationColor);
           expect(toastWrapper).toHaveComputedStyle({
             'background-color': expectedColor,
           });
