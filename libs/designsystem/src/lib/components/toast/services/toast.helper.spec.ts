@@ -79,7 +79,8 @@ describe('ToastHelper', () => {
           await TestHelper.whenReady(ionToast);
           const toastWrapper = ionToast.shadowRoot.querySelector('.toast-wrapper');
           expect(toastWrapper).toHaveComputedStyle({
-            'background-color': getColor(notificationColor),
+            'background-color':
+              messageType !== 'danger' ? getColor(notificationColor) : getColor('warning'),
           });
         });
       });
