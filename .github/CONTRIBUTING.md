@@ -20,7 +20,7 @@ If you at any point have any questions please read: [I have a question related t
   + [Issue](#issue)
   + [Branch](#branch)
   + [Commit](#commit)
-  + [Self-review](#self-review)
+  + [Self-review](#the-good-self-review)
   + [Pull-request](#pull-request)
   + [Test](#test)
 * [I have a question related to Kirby](#i-have-a-question-related-to-kirby)
@@ -98,7 +98,7 @@ We encourage contributors to publish a draft pull-request with a WIP implementat
 
 > Reviewing your own pull-request like you would review someone else's pull-request.
 
-This consists of code-reviewing your own pull-request, following guidelines found in [The good: Self-review](#self-review). This is your chance to catch any low-hanging fruits and common issues before the reviewer does. If this is not done, an unneccessary amount of minor changes might be required during code review. This wastes both yours and the reviewers time.
+This consists of code-reviewing your own pull-request, following guidelines found in [The good: Self-review](#the-good-self-review). This is your chance to catch any low-hanging fruits and common issues before the reviewer does. If this is not done, an unneccessary amount of minor changes might be required during code review. This wastes both yours and the reviewers time.
 
 <!-- Why we do UX reviews? -->
 
@@ -531,7 +531,7 @@ For more on good git commits, see (among _many_ other):
 * [Turbo Git Commit Message Standard](https://gist.github.com/turbo/efb8d57c145e00dc38907f9526b60f17)
 * [Check Out These 5 Git Tips Before Your Next Commit](https://medium.com/walmartglobaltech/check-out-these-5-git-tips-before-your-next-commit-c1c7a5ae34d1)
 
-### Self-review 
+### The good self-review
 
 * Don't change files that is not related to your pull-request
   + for example don't reorder imports in files that is not directly related to the issue at hand
