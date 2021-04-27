@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 
 import { Overlay } from '../../modal/services/modal.interfaces';
-
-import { ToastConfig, MessageType } from '../config/toast-config';
+import { MessageType, ToastConfig } from '../config/toast-config';
 
 @Injectable()
 export class ToastHelper {
@@ -30,9 +29,19 @@ export class ToastHelper {
 
   private getCssClass(messageType: MessageType): string {
     let cssClass = ToastHelper.CSS_CLASS;
+
+    if (messageType === 'danger') {
+      console.warn(
+        `[DEPRECATED] 'danger' message type is deprecated. Use Kirby Alerts for critical warnings. Toast will be shown as 'warning'`
+      );
+
+      messageType = 'warning';
+    }
+
     if (messageType) {
       cssClass += ' ' + messageType;
     }
+
     return cssClass;
   }
 }

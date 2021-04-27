@@ -35,6 +35,10 @@
 
 $backdrop-opacity: 0.4;
 
+body.allow-background-scroll {
+  overflow: initial !important;
+}
+
 ion-modal.kirby-overlay {
   position: fixed;
 
