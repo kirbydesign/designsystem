@@ -413,7 +413,7 @@ The most important part is the subject line. The message body should be used if 
 ##### A good subject line
 
 * will complete the sentence "If applied, this commit will..."
-* is written in imperative mood (_Fix_, not ~~_Fixed_~~, ~~_Fixes_~~ etc.)
+* is written in [imperative mood](https://www.thoughtco.com/imperative-mood-grammar-1691151) (_Fix_, not ~~_Fixed_~~, ~~_Fixes_~~ etc.)
 * is limited to 50 characters
 
 If you cannot fit your message into a 50 character subject line, consider if you've included too many changes that makes it difficult to describe concisely. Try to rephrase the subject line and use the [message body](#a-good-message-body) for elaboration.
