@@ -48,7 +48,7 @@ jobs:
             **/node_modules
           key: npm-${{ runner.os }}-${{hashFiles('**/package-lock.json')}}
       - name: Install Dependencies
-        if: steps.cache.outputs.cache-hit != "true"
+        if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
 
   lint_and_unittest:
