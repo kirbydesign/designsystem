@@ -387,18 +387,18 @@ We agree with both. Apart from acting as checkpoints, it helps other contributor
 
 You are encouraged to follow commonly adopted Git best practices, see for example [Distributed Git - Contributing to a Project](https://git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project). These include, among others:
 
-* Try to make each commit a logically separate changeset
-  + Keep changes in each commit to a minimum
-  + Focus on _one thing_ per commit
-  + Only commit related functionality for each commit
-  + If you have made multiple non-related changes to a file and you want them in separate commits, you can stage your changes using `git add --patch`
-* Commit often
-  + Multiple smaller commits are better than one large commit
-* Strive for each commit to compile/build and pass tests
-* Regularly push your commits to remote
-  + Early peer reviews are easier
-  + In case something happens to your machine it reduces the amount of work lost
-  + Makes it easier to hand over the issue to other developers if needed
+1. **Try to make each commit a logically separate changeset**
+    - Keep changes in each commit to a minimum
+    - Focus on _one thing_ per commit
+    - Only commit related functionality for each commit
+    - If you have made multiple non-related changes to a file and you want them in separate commits, you can stage your changes using `git add --patch`
+2. **Commit often**
+    - Multiple smaller commits are better than one large commit
+3. **Strive for each commit to compile/build and pass tests**
+4. **Regularly push your commits to remote**
+    - Early peer reviews are easier
+    - In case something happens to your machine it reduces the amount of work lost
+    - Makes it easier to hand over the issue to other developers if needed
 
 #### The good commit has good commit messages
 
