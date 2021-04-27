@@ -392,9 +392,9 @@ The issue type and id can be found on the [issues page](https://github.com/kirby
 
 The name part should give an idea of what the changes in the branch is related to, without having to look up the issue. 
 
-You should now be ready to create a _good_ branch that follows our branch name policy. But if you are interested in why we have decided on this policy - read on. 
+You should now be ready to create a _good_ branch that follows our branch naming convention. But if you are interested in why we have decided on this convention - read on. 
 
-#### Why this branch naming policy?
+#### Why this branch naming convention?
 
 While a branch is ephemeral, we believe it is important to have informative and consistent naming in order to: 
 
@@ -423,7 +423,7 @@ If this was not included and a branch is created for which a pull-request is nev
 
 It also functions as a reminder for contributors to only work on one issue per branch. 
 
-If a contributor is working on something for which no issue has been submitted, they will not be able to follow the naming policy. 
+If a contributor is working on something for which no issue has been submitted, they will not be able to follow the naming convention. 
 This hopefully nudges them towards creating a [good issue](#issue) and follow [the process for contribution](#the-process-for-contribution).
 </dd>
 
