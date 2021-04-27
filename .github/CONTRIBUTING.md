@@ -381,6 +381,8 @@ The issue type and id can be found on the [issues page](https://github.com/kirby
 
 The name part should give an idea of what the changes in the branch is related to, without having to look up the issue. 
 
+As of now, Kirby does not utilise any advanced branching strategies. We always branch out from `master` and request that the new branch is merged back into `master` using a PR; no matter the issue type.
+
 You should now be ready to create a _good_ branch that follows our branch naming convention. But if you are interested in why we have decided on this convention - read on. 
 
 #### Why this branch naming convention?
