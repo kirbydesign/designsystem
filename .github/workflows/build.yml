@@ -52,7 +52,7 @@ jobs:
 
   lint_and_unittest:
     name: Lint & unit test
-    needs: [build_check, fetch_or_create_cache]
+    needs: build_check
     if: ${{ needs.build_check.outputs.do_build == 'true' }}
     runs-on: ubuntu-latest
     steps:
@@ -78,7 +78,7 @@ jobs:
 
   build_kirby:
     name: Build Kirby lib
-    needs: [build_check, fetch_or_create_cache]
+    needs: build_check
     if: ${{ needs.build_check.outputs.do_build == 'true' }}
     runs-on: ubuntu-latest
     steps:
@@ -100,7 +100,7 @@ jobs:
 
   deploy_to_cookbook:
     name: Deploy cookbook
-    needs: [lint_and_unittest, build_kirby, fetch_or_create_cache]
+    needs: lint_and_unittest
     runs-on: ubuntu-latest
     env:
       DOMAIN: ${{ github.ref == 'refs/heads/master' && 'kirby.design' || '650b277bd9a54e5cbadc.westeurope.aksapp.io' }}
