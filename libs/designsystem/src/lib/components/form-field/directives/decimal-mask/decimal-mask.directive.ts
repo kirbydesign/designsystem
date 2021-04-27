@@ -57,7 +57,7 @@ export class DecimalMaskDirective implements ControlValueAccessor, OnInit {
     // Set type="text", because functionality like 'setSelectionRange' are not supported on type="number"
     this.elementRef.nativeElement.setAttribute('type', 'text');
 
-    // Remove maxlength as this are handled by the mask
+    // Remove maxlength as this is handled by the mask
     this.elementRef.nativeElement.removeAttribute('maxlength');
 
     this.initMask();
