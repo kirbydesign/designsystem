@@ -48,14 +48,14 @@ jobs:
         with:
           path: |
             **/node_modules
-          key: npm-${{ runner.os }}-${{hashFiles('**/package-lock.json')}}
-      - name: Install Dependencies
+          key: node-modules-${{ runner.os }}-${{hashFiles('**/package-lock.json')}}
+      - name: Clean Install Dependencies
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
 
   lint_and_unittest:
     name: Lint & unit test
-    needs: build_check
+    needs: [build_check, fetch_or_create_cache]
     if: ${{ needs.build_check.outputs.do_build == 'true' }}
     runs-on: ubuntu-latest
     steps:
@@ -70,7 +70,7 @@ jobs:
         with:
           path: | 
             **/node_modules
-          key: npm-${{ runner.os }}-${{hashFiles('**/package-lock.json')}}
+          key: node-modules-${{ runner.os }}-${{hashFiles('**/package-lock.json')}}
       - name: Install NPM dependencies
         run: date && npm install 
       - name: Run linting
@@ -82,7 +82,7 @@ jobs:
 
   build_kirby:
     name: Build Kirby lib
-    needs: build_check
+    needs: [build_check, fetch_or_create_cache]
     if: ${{ needs.build_check.outputs.do_build == 'true' }}
     runs-on: ubuntu-latest
     steps:
@@ -97,7 +97,7 @@ jobs:
         with:
           path: |
             **/node_modules
-          key: npm-${{ runner.os }}-${{hashFiles('**/package-lock.json')}}
+          key: node-modules-${{ runner.os }}-${{hashFiles('**/package-lock.json')}}
       - name: Install NPM dependencies
         run: date && npm install 
       - name: Build Kirby lib
@@ -180,7 +180,7 @@ jobs:
         with:
           path: |
             **/node_modules
-          key: npm-${{ runner.os }}-${{hashFiles('**/package-lock.json')}}
+          key: node-modules-${{ runner.os }}-${{hashFiles('**/package-lock.json')}}
       - name: Install NPM dependencies
         run: date && npm install 
       - name: Install Kubernetes CLI
