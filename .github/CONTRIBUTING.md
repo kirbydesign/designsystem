@@ -379,7 +379,7 @@ and
 
 > Commit Often, Perfect Later, Publish Once
 
-We agree with both. Apart from acting as checkpoints, it helps other contributors to easily get an overview of your changes and navigate them. But only as long the commits are good.
+We agree. Apart from acting as checkpoints, good commits support collaboration by providing an overview of your changes and make navigating them easy. But only as long the commits are good.
 
 #### The good commit follows Git best practices
 
@@ -387,9 +387,9 @@ You are encouraged to follow commonly adopted Git best practices. These include,
 
 1. **Try to make each commit a logically separate changeset**
     - Keep changes in each commit to a minimum
-    - Focus on _one thing_ per commit
+    - Make your commit _atomic_ &ndash; focus on one thing
     - Only commit related functionality for each commit
-    - If you have made multiple non-related changes to a file and you want them in separate commits, you can stage your changes using `git add --patch`
+    - If you have made multiple non-related changes to a file and you need to separate them in several commits, stage your changes using `git add --patch`
 2. **Commit often**
     - Multiple smaller commits are better than one large commit
 3. **Strive for each commit to compile/build and pass tests**
