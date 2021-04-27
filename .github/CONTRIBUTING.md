@@ -378,14 +378,12 @@ You may have encountered statements like
 and
 
 > Commit Often, Perfect Later, Publish Once
->
-> _[Git Best Practices](https://sethrobertson.github.io/GitBestPractices/)_
 
 We agree with both. Apart from acting as checkpoints, it helps other contributors to easily get an overview of your changes and navigate them. But only as long the commits are good.
 
 #### The good commit follows Git best practices
 
-You are encouraged to follow commonly adopted Git best practices, see for example [Distributed Git - Contributing to a Project](https://git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project). These include, among others:
+You are encouraged to follow commonly adopted Git best practices. These include, among others:
 
 1. **Try to make each commit a logically separate changeset**
     - Keep changes in each commit to a minimum
@@ -412,6 +410,14 @@ All commits from your branch are squashed when merged with the main branch. Comm
 * Put a blank line between the subject line and the message body
 * Wrap lines in the message body at 72 characters
 * Use [gitmoji](https://gitmoji.dev) when possible. There are several [tools](https://gitmoji.dev/related-tools) available (including a [VSCode extension](https://github.com/vtrois/gitmoji-vscode) and a [CLI tool](https://github.com/carloscuesta/gitmoji-cli))
+
+For more on good git commits, see (among _many_ other):
+
+* [Stop Writing Bad Commit Messages](https://betterprogramming.pub/stop-writing-bad-commit-messages-8df79517177d)
+* [How to Write a Git Commit Message](https://chris.beams.io/posts/git-commit/)
+* [Turbo Git Commit Message Standard](https://gist.github.com/turbo/efb8d57c145e00dc38907f9526b60f17)
+* [Distributed Git - Contributing to a Project](https://git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project)
+* [Git Best Practices](https://sethrobertson.github.io/GitBestPractices/)
 
 ### Self-review 
 
