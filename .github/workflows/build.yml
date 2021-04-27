@@ -32,24 +32,6 @@ jobs:
             libs:
               - 'libs/**'
 
-  fetch_or_create_cache: 
-    name: Fetch or Create Cache
-    runs-on: ubuntu-latest 
-    steps: 
-      - name: Install Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '10.16'
-      - name: Fetch or Create Cache
-        id: cache
-        uses: actions/cache@v2
-        path: **/node_modules
-        with:
-          key: npm-${{ runner.os }}-${{hashFiles('**/package-lock.json')}}
-      - name: Install Dependencies
-        if: steps.cache.outputs.cache-hit != "true"
-        run: npm ci
-
   lint_and_unittest:
     name: Lint & unit test
     needs: build_check
