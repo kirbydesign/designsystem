@@ -1,7 +1,6 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { ThemeColorDirective } from '../../directives';
-import { SizeDirective } from '../../directives/size/size.directive';
 import { ColorHelper } from '../../helpers';
 import { DesignTokenHelper, ThemeColorExtended } from '../../helpers/design-token-helper';
 import { TestHelper } from '../../testing/test-helper';
@@ -22,7 +21,6 @@ describe('AvatarComponent', () => {
     component: AvatarComponent,
     declarations: [
       IconComponent,
-      SizeDirective,
       ThemeColorDirective,
       ProgressCircleComponent,
       ProgressCircleRingComponent,
@@ -93,7 +91,7 @@ describe('AvatarComponent', () => {
   describe('when rendering Avatar with icon', () => {
     it(`icon should have correct size when Avatar size = 'sm'`, async () => {
       spectator = createHost(`
-      <kirby-avatar [size]="sm" overlay="true">
+      <kirby-avatar size="sm" overlay="true">
         <kirby-icon name="qr"></kirby-icon>
       </kirby-avatar>
       `);
@@ -106,7 +104,7 @@ describe('AvatarComponent', () => {
 
     it(`icon should have correct size when Avatar size = 'md'`, async () => {
       spectator = createHost(`
-      <kirby-avatar [size]="'md'" overlay="true">
+      <kirby-avatar size="md" overlay="true">
         <kirby-icon name="qr"></kirby-icon>
       </kirby-avatar>
       `);

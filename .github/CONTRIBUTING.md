@@ -34,7 +34,7 @@ If you at any point have any questions please read: [I have a question related t
 ## Introduction to the contribution model
 
 <!-- Introduction and motivation -->
-Despite Kirby stemming from an internal Bank Data project - it has been decided to open source it, such that others than team Kirby can contribute to it. 
+Despite Kirby stemming from an internal Bankdata project - it has been decided to open source it, such that others than team Kirby can contribute to it. 
 Allowing for Kirby to be used in multiple projects without team Kirby being the bottleneck. 
 
 If you have a problem, an issue you want resolved, or even got brand new ideas for components. Well. There is no need to sit around and wait for team Kirby to get it implemented. 
@@ -196,17 +196,167 @@ the repo such that they can get coding -->
 
 ### Issue 
 
-* General properties we are looking for and how to achieve them 
-  + Readability 
-  + Easily understandable 
-    - No internal lingo 
-  + Proof-read
-  + Self-contained
-    - Screenshots if necessary
+> A good idea is an orhpan without effective communication. 
+>  
+> _Topic 7, The Pragmatic Programmer_
 
-    <!-- I think the following point is important if Kirby is to be spread out amongst several teams -->
+Writing a good issue is all about effective communication. This leads to fewer questions and discussions, which in turn results in a quicker process from new issue to approved PR. 
 
-    - Don't assume people have knowledge outside of Kirby - contributors might come from many different projects 
+The following is a series of points that we believe can help to communicate more effectively when writing issues. 
+
+#### The good issue only contains one issue
+
+While this might seem obvious it can be easy to fall into the trap of bundling two issues together. 
+
+Consider the following issue: 
+
+> Hovering a `kirby-button` with attention level 2 in IE11 does not activate the hover-effect. It works when i use attention level 1, but i get warnings in the console.
+
+If that issue is closed, how is the reader supposed to know what was actually fixed? 
+Was it the issue of the hover-effect not activating? The issue of warnings being thrown when using attention level 1? Both? 
+
+To solve this, the issue should be split into two seperate issues which refer to each other: 
+
+Issue #1:
+
+> Hovering a `kirby-button` with attention level 2 in IE11 does not activate the hover-effect. This might be related to issue #2.
+
+Issue #2:
+
+> I am not able to use a `kirby-button` with attention level 1 without a warning being thrown in the console. This might be related to issue #1.
+
+If you feel like you are "complaining" too much by creating several issues; don't! 
+It is only helpful of you to split up your issues - you are saving time and easing organization. 
+
+#### The good issue is self-contained 
+
+It can not be assumed that the reader of your issue has any knowledge of your work outside of Kirby. 
+
+The reader might be: 
+
+* a contributor outside of Bankdata 
+* someone who is not in your team 
+* potentially a new hire
+
+This also goes for Kirby maintainers - some of which has been hired to specifically work on Kirby. 
+
+Therefore: 
+
+* Do not use internal lingo 
+* Do not assume the reader can access the application you are working on - include screenshots instead.
+* Do not assume the reader can access the repository you are working in - include code snippets instead (if possible). 
+
+#### The good issue is specific & unambigious
+
+The wording of an issue should be as specific and unambigious as possible. This will help the reader understand exactly what you mean. This can be done in many ways. Therefore we have compiled some examples to demonstrate:
+
+##### Example #1: Referring to files 
+
+If you are referring to a file in the repository do not refer to it as `_typography.css` use the full path instead: `libs/designsystem/src/lib/scss/base/_typography.scss` .
+
+It can also be helpful to directly link to the file such that the reader easily can access it: [ `libs/designsystem/src/lib/scss/base/_typography.scss` ](https://github.com/kirbydesign/designsystem/blob/master/libs/designsystem/src/lib/scss/base/_typography.scss).
+
+While it might be obvious for you and experienced contributors, what and where `_typography.css` is; it is not obvious for newcomers. 
+
+If you already have refered to the full path earlier in the issue, it is okay to refer to the file as `_typography.css` without linking to it.
+
+##### Example #2: Writing reproducible steps for bug reports
+
+The steps should be unambigously specific. This can be done for example by changing the step: 
+
+> 2. Type some text 
+
+to: 
+
+> 2. Type: 'text'
+
+ 
+There could be something with the _exact_ way you are doing it, that triggers the behaviour you are experiecing. 
+
+##### Example #3: Using code snippets to explain what and how
+
+When reporting a bug or similar do not write something along the lines of: 
+
+> Whenever i use a `kirby-button` with attention level 1 on the frontpage, a warning is thrown
+
+Specify exactly where and how the button is inserted with a code snippet, along with exact details of the warning and where it can be found:
+
+> Inserting a `kirby-button` with attention level 1 as shown in the code-snippet, results in the following warning being logged in the browser console: `TypeError: undefined is not an object` .
+
+The latter is pure maintainer poetry. 
+
+These are but three examples of how issues can be specific and unambigious. Always keep in the back of your mind, how you can be more specific and unambigious when describing issues. 
+
+#### The good issue follows the template 
+
+Do not ignore the template text when creating an issue. Use it. 
+
+The issue templates exist to ease collaboration by providing structure and reminding you of which information other contributors are looking for. 
+They also provide helpful checklists that help you follow [the process of contributing](#the-process-of-contributing) and let others know how far you have come. 
+
+If you experience that no template matches your specific need; well there is a good opportunity to contribute. Create an issue for a new template to be created! 
+
+#### The good issue has a good title
+
+The title of an issue is the part being read the most, as issues usually are viewed in some sort of list.
+It can therefore be a good idea to spend some time formulating one. 
+
+A good title is short without too much detail. Details should be presented in the actual description. 
+
+If possible try to make the title compelling. While an open-source repository is not a newspaper where readers must be enganged at any cost, you still want to catch the interest of contributors. 
+
+The following title: 
+
+> Input causes error when you type over 50 characters and press enter 
+
+could be improved by writing: 
+
+> Input error on 50-character submit
+
+Having a hard time coming up with a good title? It can sometimes be easier to formulate a brief but comprehensive title _after_ you have written the issue description. 
+
+#### The good issue is easy to read
+
+There are MANY ways to improve the readability of a text. The following is just some ways to do it, that we think can add value when writing an issue:
+
+* Use proper punctuation (to the best of your abilities at least. We are not experts at , it either)
+* Use proper capitalisation
+* Spend some time proof-reading the issue before it is submitted
+* Use available formatting such as lists and code blocks to aid easy skimming 
+* Explain abbrevations being used 
+
+For example the text: 
+
+> I went to the RDL the other day, I think that the RDL is very nice! They have a huge selectin of books such as: the old man and the sea, 1984, Brave new world and the count of monte cristo 
+
+Is much harder to read than: 
+
+> I went to the royal danish library (RDL) the other day. The RDL is very nice. They have a huge selection of books, such as: 
+> - The Old Man and the Sea 
+> - 1984 
+> - Brave New World 
+> - The Count of Monte Cristo
+
+#### The good issue contains screenshots and screen recordings if possible 
+
+Kirby is a design system, hence it is a very visual project! So do not be shy of using images and screen recordings to explain yourself. 
+
+If you are requesting a new component, perhaps add a sketch showing how you are imagining it. While every component must have a UX refined sketch before it can be implemented; adding one yourself can help others understand what you are thinking. 
+
+When reporting a bug, you could add a screen recording to show exactly what you are experiencing. 
+
+Suggesting an enhancement? Add before and after images portraying what you would like, just make sure to clearly state which is "before" and which is "after". 
+
+#### The good issue is closed when there i no need for it (except bug reports!)
+
+If an issue you have submitted is no longer necessary and no work has been done on it, go ahead and close it.
+
+While suggestions from contributors always are valueable, we want to eliminate as much "noise" as possible, by removing issues that are outdated or redundant. 
+Otherwise they might take away attention from more important issues.  
+
+If someone else has a need for your issue again they can request that it is reopened or go ahead and open a new one. No harm done (issues cost nothing to create afterall). 
+
+This does not go for bug reports however, as we want to unearth and solve as many bugs as possible.
 
 ### Branch 
 

@@ -42,6 +42,20 @@
   ></cookbook-form-field-input-numeric-example>
 </cookbook-example-viewer>
 
+<h3>Date</h3>
+<cookbook-example-viewer [html]="inputDateExample.template">
+  <cookbook-form-field-input-date-example
+    [size]="size"
+    #inputDateExample
+  ></cookbook-form-field-input-date-example>
+</cookbook-example-viewer>
+<p>
+  <em
+    ><strong>*Please note:</strong> Date-mask is based on <code>LOCALE_ID</code>. When
+    <code>DA</code> the date-mask will be <code>dd.mm.åååå</code></em
+  >
+</p>
+
 <h3>Disabled</h3>
 <cookbook-example-viewer [html]="inputDisabledExample.template">
   <cookbook-form-field-input-disabled-example
@@ -99,27 +113,34 @@
 
 <h2>Form Field</h2>
 <h4>Properties:</h4>
-<cookbook-showcase-properties [properties]="formFieldProperties"></cookbook-showcase-properties>
+<cookbook-api-description-properties
+  [properties]="formFieldProperties"
+></cookbook-api-description-properties>
 <h4>Methods:</h4>
-<cookbook-showcase-properties
-  [properties]="formFieldMethods"
-  [columns]="methodColumns"
-></cookbook-showcase-properties>
+<cookbook-api-description-methods [methods]="formFieldMethods"></cookbook-api-description-methods>
 
 <h2>Input & Textarea: Shared Properties & Events</h2>
 <h4>Properties:</h4>
-<cookbook-showcase-properties [properties]="sharedProperties"></cookbook-showcase-properties>
+<cookbook-api-description-properties
+  [properties]="sharedProperties"
+></cookbook-api-description-properties>
 <h4>Events:</h4>
-<cookbook-showcase-properties [properties]="sharedEvents"></cookbook-showcase-properties>
+<cookbook-api-description-events [events]="sharedEvents"></cookbook-api-description-events>
 
 <h2>Input: Specific properties</h2>
 <h4>Properties:</h4>
-<cookbook-showcase-properties [properties]="inputProperties"></cookbook-showcase-properties>
+<cookbook-api-description-properties
+  [properties]="inputProperties"
+></cookbook-api-description-properties>
 
 <h2>Textarea: Specific properties</h2>
 <h4>Properties:</h4>
-<cookbook-showcase-properties [properties]="textareaProperties"></cookbook-showcase-properties>
+<cookbook-api-description-properties
+  [properties]="textareaProperties"
+></cookbook-api-description-properties>
 
 <h2>Input Counter</h2>
 <h4>Properties:</h4>
-<cookbook-showcase-properties [properties]="counterProperties"></cookbook-showcase-properties>
+<cookbook-api-description-properties
+  [properties]="counterProperties"
+></cookbook-api-description-properties>

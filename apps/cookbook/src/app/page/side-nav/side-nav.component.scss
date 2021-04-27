@@ -1,105 +1,99 @@
 @import './libs/designsystem/src/lib/scss/utils';
 
-$page-header-bg: #1c1c1c;
-$page-header-color: #f4f1e8;
-$page-header-height: 7rem;
-$page-gutter: 1rem;
-$page-side-nav-width: 16.625rem;
+$list-margin: size('s');
+$link-padding: 5px size('s');
+$link-border-radius: 3px;
+$menu-padding-mobile: size('m');
+$divider-inset: size('xxxxs');
+$divider-spacing: size('xxs');
 
-.side-menu {
-  display: none;
-  width: $page-side-nav-width;
-  background-color: white;
-  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.2);
-  position: absolute;
-  top: 0;
-  z-index: 900;
+:host {
   @include media('>=large') {
+    grid-area: sidebar;
+  }
+}
+
+nav {
+  @include media('>=large') {
+    display: none;
+  }
+}
+
+section {
+  display: none;
+  position: absolute;
+  min-height: 100vh;
+  top: 0;
+  z-index: z('modal');
+  background-color: get-color('white');
+  padding: 0 $menu-padding-mobile;
+  box-shadow: get-elevation(4);
+
+  @include media('>=large') {
+    box-shadow: none;
     display: block;
     position: static;
     background-color: transparent;
-    box-shadow: none;
+    padding: 0;
+    min-height: unset;
   }
+
   &.is-open {
     display: block;
   }
 
-  &__close-btn {
-    color: black;
+  a {
     text-decoration: none;
-    appearance: none;
-    border: none;
-    background: none;
-    font-size: 0.7rem;
-    margin: -1rem 0 1rem -0.5rem;
-    width: 42px;
-    height: 42px;
-    padding: 0.5rem;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    @include media('>=large') {
-      display: none;
-    }
-  }
-}
-
-.side-nav {
-  list-style: none;
-  padding: 2rem $page-gutter;
-  margin: 0;
-
-  &--sub {
-    overflow: hidden;
-    font-size: 0.85rem;
-    transition: 0.15s transform ease-in-out;
-    transform-origin: 0 0;
-    will-change: height, transform;
-    margin-left: -1rem;
-    padding: 0;
-
-    &.is-selected {
-      height: auto;
-      transform: scaleY(1);
-    }
-  }
-
-  &__item {
-    text-decoration: none;
-    color: get-text-color('black');
-    font-weight: 200;
-    padding: 0.75rem 0 0.75rem 0.75rem;
-    margin-left: -1rem;
+    color: get-text-color('semi-dark');
     display: block;
-    font-size: 1.2em;
-    display: flex;
-    align-items: center;
-    //border-top: 1px solid red;
+    padding: $link-padding;
+    margin: 0 size('xxxxs');
+    border-radius: $link-border-radius;
+
     &:hover,
     &:focus {
-      background-color: get-color('medium');
+      color: get-text-color('black');
+      background-color: get-color('light');
     }
+
     &.is-selected {
-      color: get-color('primary');
+      color: get-text-color('black');
       font-weight: bold;
+      background-color: get-color('semi-light');
     }
-  }
 
-  .is-selected > &-header {
-    font-weight: bold;
-  }
+    &.is-hidden {
+      opacity: 0;
+      max-height: 0;
+      padding: 0 0;
+      pointer-events: none;
+    }
 
-  &--sub &__item {
-    padding-left: 4.25rem; //Magic... :)
+    &:first-child {
+      margin-top: $list-margin;
+    }
   }
 }
 
-.icon,
-kirby-icon {
-  width: 2rem;
-  height: 2rem;
-  margin-right: 0.5rem;
-  color: currentColor;
-  fill: currentColor;
+.filter {
+  position: relative;
+}
+
+.clear-button {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+hr {
+  margin: size('xxxs'), 0;
+  border: solid 1px get-color('light');
+  border-bottom: none;
+  margin-block-start: $divider-spacing;
+  margin-block-end: $divider-spacing;
+  margin-inline-start: $divider-inset;
+  margin-inline-end: $divider-inset;
+  &:last-child {
+    border-color: transparent;
+  }
 }

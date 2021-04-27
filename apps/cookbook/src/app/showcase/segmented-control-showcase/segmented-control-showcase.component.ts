@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-
-import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
+import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
   selector: 'cookbook-segmented-control-showcase',
@@ -8,25 +7,25 @@ import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-prop
   styleUrls: ['./segmented-control-showcase.component.scss'],
 })
 export class SegmentedControlShowcaseComponent {
-  properties: ShowcaseProperty[] = [
+  properties: ApiDescriptionProperty[] = [
     {
       name: 'mode',
       description: 'The mode of the segmented control.',
       defaultValue: 'default',
-      inputValues: ['default', 'chip'],
+      type: ['default', 'chip'],
     },
     {
       name: 'size',
       description: 'Sets the size of the segmented control. Only applies to `default` mode.',
       defaultValue: 'md',
-      inputValues: ['sm', 'md'],
+      type: ['sm', 'md'],
     },
     {
       name: 'items',
       description:
         'An array of `SegmentItem[]` representing the set of segment elements within the control.',
       defaultValue: '',
-      inputValues: [
+      type: [
         `[{
   id: string,
   text: string,
@@ -37,21 +36,21 @@ export class SegmentedControlShowcaseComponent {
   }
 }]`,
       ],
-      preserveInputValuesWhitespaces: true,
+      preserveTypeWhitespaces: true,
     },
     {
       name: 'value',
       description:
         'Gets/sets the selected segment. Returns the selected segment if there is one, otherwise `undefined``.',
       defaultValue: 'undefined',
-      inputValues: ['SegmentItem'],
+      type: ['SegmentItem'],
     },
     {
       name: 'selectedIndex',
       description:
         'Gets/sets the index of the selected segment within the `segmentItems` array. The value -1 indicates no element is selected.',
       defaultValue: 'undefined',
-      inputValues: ['number'],
+      type: ['number'],
     },
   ];
 }

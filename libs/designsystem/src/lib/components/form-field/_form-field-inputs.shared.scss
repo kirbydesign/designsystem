@@ -1,6 +1,10 @@
 @import '../../scss/utils';
 
 $form-field-label-height: 24px;
+$form-field-input-font-family: var(--kirby-font-family);
+$form-field-input-font-size: font-size('n');
+$form-field-input-line-height: line-height('n');
+$form-field-input-padding: size('s');
 
 :host(.error) {
   border: 1px solid get-color('danger');
@@ -27,15 +31,15 @@ $form-field-label-height: 24px;
   border: none;
   box-sizing: border-box;
   display: block;
-  font-size: font-size('n');
-  line-height: line-height('n');
+  font-family: $form-field-input-font-family;
+  font-size: $form-field-input-font-size;
+  line-height: $form-field-input-line-height;
   outline: none;
   margin: 0;
-  padding: 0;
   -webkit-appearance: none;
   border-radius: size('s');
   box-shadow: get-elevation(2);
-  padding: size('s');
+  padding: $form-field-input-padding;
   width: 100%;
 
   &:host-context(kirby-item),

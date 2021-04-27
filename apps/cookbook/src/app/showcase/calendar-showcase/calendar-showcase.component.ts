@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
+import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
+import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 declare var require: any;
 
@@ -38,91 +39,89 @@ export class CalendarShowcaseComponent {
     .default;
   exampleWithCardHtml: string = require('!raw-loader!../../examples/calendar-example/calendar-card-example.component.html')
     .default;
-  properties: ShowcaseProperty[] = [
+  properties: ApiDescriptionProperty[] = [
     {
       name: 'selectedDate',
       description: '(Optional) Returns/sets the selected date.',
       defaultValue: 'null',
-      inputValues: ['Date'],
+      type: ['Date'],
     },
     {
       name: 'disableWeekends',
       description: '(Optional) Disables selection of weekends.',
       defaultValue: 'false',
-      inputValues: ['true | false'],
+      type: ['true | false'],
     },
     {
       name: 'alwaysEnableToday',
       description:
         '(Optional) Allows selection of current date regardless of whether it is disabled (e.g. disableWeekends=true, disabledDates=[...]).',
       defaultValue: 'false',
-      inputValues: ['true | false'],
+      type: ['true | false'],
     },
     {
       name: 'disablePastDates',
       description: '(Optional) Disables selection of dates earlier then the current date.',
       defaultValue: 'false',
-      inputValues: ['true | false'],
+      type: ['true | false'],
     },
     {
       name: 'disableFutureDates',
       description: '(Optional) Disables selection of dates later than the current date.',
       defaultValue: 'false',
-      inputValues: ['true | false'],
+      type: ['true | false'],
     },
     {
       name: 'todayDate',
       description:
         '(Optional) The date to be marked as today. If omitted, will use current date in browser timezone.',
       defaultValue: 'null',
-      inputValues: ['Date'],
+      type: ['Date'],
     },
     {
       name: 'minDate',
       description: '(Optional) The earliest date that should be selectable.',
       defaultValue: 'null',
-      inputValues: ['Date'],
+      type: ['Date'],
     },
     {
       name: 'maxDate',
       description: '(Optional) The latest date that should be selectable.',
       defaultValue: 'null',
-      inputValues: ['Date'],
+      type: ['Date'],
     },
     {
       name: 'disabledDates',
       description: '(Optional) Array of dates that should not be selectable.',
       defaultValue: 'null',
-      inputValues: ['Date[]'],
+      type: ['Date[]'],
     },
     {
       name: 'timezone',
       description:
         '(Optional) Specify timezone for aligning Date objects. Emitted Date objects will be constructed to point to midnight in the given timezone. Input Date objects may be in either of the two timezones but we highly recommend aligning them with midnight.',
       defaultValue: '"local"',
-      inputValues: ['"local" | "UTC"'],
+      type: ['"local" | "UTC"'],
     },
     {
       name: 'yearNavigatorOptions',
       description:
         '(Optional) Displays a dropdown to navigate between years and specifies the navigable year interval with either numbers or dates. Navigable years are set by getting the year difference between `from` and `to`, but prioritize `minDate` and `maxDate`: if `minDate` and `maxDate` are set, they override `from` and `to`.',
       defaultValue: 'null',
-      inputValues: ['{ from: number | Date; to: number | Date }'],
+      type: ['{ from: number | Date; to: number | Date }'],
     },
   ];
 
-  events: ShowcaseProperty[] = [
+  events: ApiDescriptionEvent[] = [
     {
       name: 'dateSelect',
       description: 'Emitted when a date is clicked.',
-      inputValues: ['EventEmitter<Date>'],
+      signature: 'EventEmitter<Date>',
     },
     {
       name: 'dateChange',
       description: 'Emitted when selectedDate changes value.',
-      inputValues: ['EventEmitter<Date>'],
+      signature: 'EventEmitter<Date>',
     },
   ];
-
-  eventColumns = { Name: 'Name', Description: 'Description', Type: 'Type' };
 }

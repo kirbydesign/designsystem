@@ -1,28 +1,39 @@
 @import './libs/designsystem/src/lib/scss/utils';
 
+$icon-size: size('s');
+
 .show-case {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
   margin-bottom: 2rem;
 
   h1 {
     text-transform: uppercase;
-    font-size: 24px;
+    font-size: font-size('xxl');
     color: get-color('dark');
-    font-weight: 400;
+    font-weight: font-weight('light');
     position: relative;
-    flex-grow: 1;
-    align-self: flex-start;
+    padding-bottom: 5 * size('xxxs');
+    border-bottom: solid 1px get-color('medium');
+    margin-bottom: size('xs');
+  }
+}
 
-    &:after {
-      content: '';
-      height: 2px;
-      background-color: currentColor;
-      width: calc(100% - 2rem);
-      position: absolute;
-      bottom: -1rem;
-      left: 0;
+.show-case-actions {
+  display: flex;
+  justify-content: space-between;
+
+  a {
+    color: get-text-color('semi-dark');
+    font-size: font-size('s');
+  }
+}
+
+.cta-links {
+  a {
+    display: block;
+    margin-bottom: size('xxs');
+    @include media('>=large') {
+      display: inline-block;
+      margin-bottom: 0;
     }
   }
 }
@@ -31,61 +42,14 @@ h4 {
   margin-top: size('s');
 }
 
-.cta-box {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  background-color: get-color('white');
-  box-shadow: 0 20px 30px -15px rgba(45, 50, 48, 0.2);
-  padding: 0.5rem 1rem;
-  margin-top: size('s');
-  border-radius: 10px;
-  z-index: 1;
-  position: relative;
-
-  a {
-    display: inline-flex;
-    align-items: center;
-    text-decoration: none;
-    padding: 0.3rem 0;
-    color: gray;
-    width: 100%;
-    transition: 0.15s ease-in-out background-color;
-
-    &:hover {
-      background-color: #e2e2e2;
-    }
-  }
-}
-
 .icon {
-  width: 1rem;
-  height: 1rem;
-  margin-right: 0.5rem;
+  width: $icon-size;
+  height: $icon-size;
+  margin-right: size('xxs');
+  margin-left: size('m');
   color: currentColor;
   fill: currentColor;
-}
-
-::ng-deep .cookbook-properties {
-  border-spacing: 0;
-  border-collapse: collapse;
-  width: 100%;
-  thead {
-    background-color: get-color('light-tint');
-  }
-  th {
-    font-weight: font-weight('normal');
-    border: none;
-    text-align: left;
-    height: size('xl');
-    border-bottom: none;
-  }
-  td,
-  th {
-    border: 1px solid get-color('medium');
-    border-width: 1px 1px 1px 1px;
-    padding: 0.5rem 1rem;
-  }
+  vertical-align: bottom;
 }
 
 ::ng-deep :not(pre) > code[class*='language-'],

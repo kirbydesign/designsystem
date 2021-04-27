@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
   selector: 'cookbook-chip-showcase',
@@ -6,6 +7,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./chip-showcase.component.scss'],
 })
 export class ChipShowcaseComponent {
+  properties: ApiDescriptionProperty[] = [
+    {
+      name: 'text',
+      description: 'The text displayed inside the chip',
+      type: ['string'],
+    },
+    {
+      name: 'isSelected',
+      description: 'Show chip as selected',
+      type: ['boolean'],
+    },
+  ];
+
   themeColors = [
     { text: 'None', value: '' },
     { text: 'Light', value: 'light' },
