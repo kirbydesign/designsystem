@@ -47,7 +47,8 @@ jobs:
       - name: Fetch Node Modules Cache
         uses: actions/cache@v2
         with:
-          path: **/node_modules
+          path: | 
+            **/node_modules
           key: npm-${{ runner.os }}-${{hashFiles('**/package-lock.json')}}
       - name: Install NPM dependencies
         run: date && npm install 
