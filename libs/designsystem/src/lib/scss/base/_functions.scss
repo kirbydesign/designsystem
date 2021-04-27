@@ -90,7 +90,7 @@
  * Outputs all keys from map as CSS class selector list
  */
 @function keys-to-classes($map) {
-  $classes: [];
+  $classes: ();
   @each $key in map-keys($map) {
     $classes: append($classes, '.#{$key}', $separator: comma);
   }

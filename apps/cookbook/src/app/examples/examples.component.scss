@@ -1,7 +1,7 @@
 @import './libs/designsystem/src/lib/scss/utils';
 
 @mixin kirby-keys($start-index, $additional-keys: ()) {
-  $keys: append(('K', 'I', 'R', 'B', 'Y'), $additional-keys);
+  $keys: join(('K', 'I', 'R', 'B', 'Y'), $additional-keys);
   @each $letter in $keys {
     $counter: index($keys, $letter);
     &:nth-child(#{$start-index + $counter})::before {
