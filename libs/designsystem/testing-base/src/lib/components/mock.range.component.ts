@@ -23,7 +23,6 @@ export class MockRangeComponent {
   @Input() step: number;
   @Input() ticks: boolean;
   @Input() disabled: boolean;
-  @Input() value: number;
   @Output() change = new EventEmitter<number>();
 
   setDisabledState() {}
