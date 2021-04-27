@@ -400,16 +400,72 @@ You are encouraged to follow commonly adopted Git best practices. These include,
 
 #### The good commit has good commit messages
 
+> Keep in mind: [This](http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html) [has](https://www.git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project#_commit_guidelines) [all](https://github.com/torvalds/subsurface-for-dirk/blob/master/README.md#contributing) [been](http://who-t.blogspot.co.at/2009/12/on-commit-messages.html) [said](https://github.com/erlang/otp/wiki/writing-good-commit-messages) [before](https://github.com/spring-projects/spring-framework/blob/30bce7/CONTRIBUTING.md#format-commit-messages).
+>
+> &mdash; Chris Beams, [The seven rules of a great Git commit message](https://chris.beams.io/posts/git-commit/#seven-rules)
+
 All commits from your branch are squashed when merged with the main branch. Commit messages from individual commits end up in a list of changes in the message body of the merge commit. Try to keep that in mind when writing your commit messages.
 
-* Use imperative mood
+Ideally, a good commit message will be structured into three parts:
+
+1. Subject
+2. Body
+3. Closing line
+
+The most important part is the subject line. The message body should be used if elaboration is necessary. We rarely use a closing line, but if you want to add useful meta-data related to your commit &ndash; such as GitHub issue number and co-author names &ndash; this is where to put it.
+
+##### A good subject line
+
+* will complete the sentence "If applied, this commit will..."
+* is written in imperative mood (_Fix_, not ~~_Fixed_~~, ~~_Fixes_~~ etc.)
+* is limited to 50 characters
+
+If you cannot fit your message into a 50 character subject line, consider if you've included too many changes that makes it difficult to describe concisely. Try to rephrase the subject line and use the [message body](#a-good-message-body) for elaboration.
+
+In addition we use [gitmoji](https://gitmoji.dev) when possible to prefix the subject line with an illustrative emoji. There are several [tools](https://gitmoji.dev/related-tools) available (including a [VSCode extension](https://github.com/vtrois/gitmoji-vscode) and a [CLI tool](https://github.com/carloscuesta/gitmoji-cli)). It's optional, but very helpful when skimming through the git log.
+
+Good words to use as the first of the subject line:
+
+* Add
+* Create
+* Refactor
+* Fix
+* Release
+* Document
+* Modify
+* Update
+* Remove
+* Delete
+
+🟢 Good subject lines:
+
+> 📝 Update getting started documentation
+
+> 🔥 Remove deprecated methods
+
+> ✅  Add tests for dropdown component
+
+🔴 Bad subject lines:
+
+> ~~fix a bug.~~
+
+> ~~more changes~~
+
+> ~~added file~~
+
+> ~~fix code review comments~~
+
+##### A good message body
+
+* Separate the message body from the subject line with a blank line
+
+TODO:
+
 * Describe what was done and why, but not how
-* Limit the subject line to 50 characters. If you cannot fit your message into 50 characters:
-  + Consider if you've included too many changes that makes it hard to describe in a brief subject line
-  + Try to rephrase the subject line and use the message body for elaboration. Be aware that if you need to write a lot in the message body it may also be a sign of too many changes in one commit
-* Put a blank line between the subject line and the message body
+
+Be aware that if you need to write a lot in the message body it may also be a sign of too many changes in one commit
+
 * Wrap lines in the message body at 72 characters
-* Use [gitmoji](https://gitmoji.dev) when possible. There are several [tools](https://gitmoji.dev/related-tools) available (including a [VSCode extension](https://github.com/vtrois/gitmoji-vscode) and a [CLI tool](https://github.com/carloscuesta/gitmoji-cli))
 
 For more on good git commits, see (among _many_ other):
 
