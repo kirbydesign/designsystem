@@ -18,6 +18,7 @@
     "highcharts",
     "moment",
     "@fontsource/roboto",
-    "inputmask"
+    "inputmask",
+    "chart.js"
   ]
 }
