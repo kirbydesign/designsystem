@@ -1,22 +1,9 @@
 <div class="example">
   <p>
-    The kirby list will emit a <code>loadMore</code> event, when the user has scrolled 80% of the
-    list. It is the responsibility of the consumer to add more items to the bound
-    <code>items</code>.
-  </p>
-  <p>
-    The event emitted is of type <code>KirbyLoadMoreEvent</code> which exposes a
-    <code>complete()</code> callback function.
-  </p>
-  <p>
-    The <code>complete()</code> callback function should be called when the loading of the
-    additional items are done.
-  </p>
-  <p>
-    If <code>complete(disableLoadMore?: boolean)</code> is called with the
-    <code>disableLoadMore</code> argument set to <code>true</code>, no further events will be
-    emitted. If <code>noMoreItemsText</code> is configured it will be shown at the end of the list
-    at this point.
+    The virtual scroll should be mostly invisible to the user, but behind the scenes, only a small
+    subset of the total number of list items are actually rendered on the page. Items will
+    dynamically be added/removed from the top and bottom of the list as the user scrolls up or down.
+    This can have a very positive impact on performance - especially on long lists.
   </p>
 </div>
 <div class="example-wrapper">
