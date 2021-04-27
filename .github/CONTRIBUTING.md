@@ -363,27 +363,31 @@ This does not go for bug reports however, as we want to unearth and solve as man
 The good branch only contain changes related to one issue and follows our branch naming convention:
 
 ``` 
+
 [issue-type]/[issue-id]-[name] 
 ```
 
 Besides the structure, notice that the branch name:
+
 * Is kebab cased (`kebab-casing-uses-hyphens-for-space`)
 * Only uses lowercased letters
 
 Examples:
 
 ``` 
+
 documentation/1472-the-good-branch
 ```
 
-```
+``` 
+
 enhancement/1483-sticky-only-page-header
 ```
 
-```
+``` 
+
 housekeeping/1360-ci-cache-node-modules
 ```
-
 
 The issue type and id can be found on the [issues page](https://github.com/kirbydesign/designsystem/issues).
 
