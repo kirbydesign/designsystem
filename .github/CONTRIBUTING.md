@@ -383,7 +383,7 @@ You are encouraged to follow commonly adopted Git best practices. We would espec
 
 1. **Try to make each commit a logically separate changeset**
     - Keep changes in each commit to a minimum
-    - Make your commit _atomic_ &ndash; focus on one thing
+    - Make changes in each commit _atomic_ &ndash; focus on one thing
     - Only commit related functionality for each commit
     - If you have made multiple non-related changes to a file and you need to separate them in several commits, stage your changes using `git add --patch`
 2. **Commit often**
@@ -433,7 +433,7 @@ Good words to use as the first of the subject line:
 * Remove
 * Delete
 
-🟢 Good subject lines:
+🟢 Good subject line examples:
 
 > 📝 Update getting started documentation
 
@@ -441,7 +441,7 @@ Good words to use as the first of the subject line:
 
 > ✅  Add tests for dropdown component
 
-🔴 Bad subject lines:
+🔴 Bad subject line examples:
 
 > ~~fix a bug.~~
 
@@ -453,23 +453,23 @@ Good words to use as the first of the subject line:
 
 ##### A good message body
 
-* Separate the message body from the subject line with a blank line
+Separate the message body from the subject line with a blank line.
 
-TODO:
+You should use the message body to describe what was done and why, but not how.
 
-* Describe what was done and why, but not how
+Be aware that if you need to write a lot in the message body it may also be a sign of too many changes in one commit.
 
-Be aware that if you need to write a lot in the message body it may also be a sign of too many changes in one commit
+Wrap lines in the message body at 72 characters
 
-* Wrap lines in the message body at 72 characters
+#### Read more about good commits
 
 For more on good git commits, see (among _many_ other):
 
+* [Distributed Git - Contributing to a Project](https://git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project)
+* [Git Best Practices](https://sethrobertson.github.io/GitBestPractices/)
 * [Stop Writing Bad Commit Messages](https://betterprogramming.pub/stop-writing-bad-commit-messages-8df79517177d)
 * [How to Write a Git Commit Message](https://chris.beams.io/posts/git-commit/)
 * [Turbo Git Commit Message Standard](https://gist.github.com/turbo/efb8d57c145e00dc38907f9526b60f17)
-* [Distributed Git - Contributing to a Project](https://git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project)
-* [Git Best Practices](https://sethrobertson.github.io/GitBestPractices/)
 
 ### Self-review 
 
