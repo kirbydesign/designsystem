@@ -10,7 +10,7 @@ interface InputMask {
 
 @Directive({
   // tslint:disable-next-line
-  selector: '[kirby-input-decimal-mask]',
+  selector: '[kirby-decimal-mask]',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -23,8 +23,11 @@ export class DecimalMaskDirective implements ControlValueAccessor, OnInit {
   @Input() min: number;
   @Input() max: number;
   @Input() precision = 2;
-  @Input() allowMinus = false;
   @Input() setMaxOnOverflow = false;
+
+  @Input() set allowMinus(allowMinus: boolean) {
+    this._allowMinus = allowMinus || (this.min || 0) < 0;
+  }
 
   @Input() set disableGroupSeperator(disabled: string) {
     this._groupSeperatorDisabled = String(disabled) === '' || String(disabled) === 'true';
@@ -38,11 +41,14 @@ export class DecimalMaskDirective implements ControlValueAccessor, OnInit {
     this.min = this.getMin(maxlengthValue);
   }
 
-  _maxlength: number;
-  _groupSeperatorDisabled: boolean;
   groupSeparator = getLocaleNumberSymbol(this.locale, NumberSymbol.Group);
   radixPoint = getLocaleNumberSymbol(this.locale, NumberSymbol.Decimal);
   inputmask: InputMask;
+
+  _allowMinus = false;
+  _maxlength: number;
+  _groupSeperatorDisabled: boolean;
+
   onChange = (_: string) => {};
 
   constructor(private elementRef: ElementRef, @Inject(LOCALE_ID) private locale: string) {}
@@ -76,7 +82,7 @@ export class DecimalMaskDirective implements ControlValueAccessor, OnInit {
       digits: this._maxlength ? 0 : this.precision,
       min: this.min,
       max: this.max,
-      allowMinus: !!this.allowMinus || (this.min || 0) < 0,
+      allowMinus: this._allowMinus,
       negationSymbol: {
         front: getLocaleNumberSymbol(this.locale, NumberSymbol.MinusSign),
         back: '',
@@ -94,12 +100,12 @@ export class DecimalMaskDirective implements ControlValueAccessor, OnInit {
   }
 
   private getMax(maxlengthValue: number): number {
-    return !this.max ? maxlengthValue : Math.min(this.max, maxlengthValue);
+    return this.max === undefined ? maxlengthValue : Math.min(this.max, maxlengthValue);
   }
 
   private getMin(maxlengthValue: number): number {
     if (!this.allowMinus) return;
     maxlengthValue = -Math.abs(maxlengthValue);
-    return !this.min ? maxlengthValue : -Math.abs(Math.max(this.min, maxlengthValue));
+    return this.min === undefined ? maxlengthValue : -Math.abs(Math.max(this.min, maxlengthValue));
   }
 }
