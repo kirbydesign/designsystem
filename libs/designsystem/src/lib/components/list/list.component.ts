@@ -63,7 +63,8 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
         const end = Math.min(index + count - 1, this.items.length - 1);
         if (start <= end) {
           for (let i = start; i <= end; i++) {
-            data.push(this.items[i]);
+            const item = { itemIndex: i, totalCount: this.items.length, ...this.items[i] };
+            data.push(item);
           }
         }
         console.log('DATA', data);

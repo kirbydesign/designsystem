@@ -1,0 +1,8 @@
+@import './libs/designsystem/src/lib/scss/utils';
+
+.page-example {
+  display: flex;
+  justify-content: space-between;
+  margin-top: size('xl');
+  margin-bottom: size('xl');
+}
