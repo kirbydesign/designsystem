@@ -32,28 +32,9 @@ jobs:
             libs:
               - 'libs/**'
 
-  fetch_or_create_cache: 
-    name: Fetch or Create Cache
-    runs-on: ubuntu-latest 
-    steps: 
-      - name: Install Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '10.16'
-      - name: Fetch or Create Cache
-        id: cache
-        uses: actions/cache@v2
-        path: **/node_modules
-        with:
-          key: npm-${{ runner.os }}-${{hashFiles('**/package-lock.json')}}
-      - name: Install Dependencies
-        if: steps.cache.outputs.cache-hit != "true"
-        run: npm ci
-
-
   lint_and_unittest:
     name: Lint & unit test
-    needs: [build_check, fetch_or_create_cache]
+    needs: build_check
     if: ${{ needs.build_check.outputs.do_build == 'true' }}
     runs-on: ubuntu-latest
     steps:
@@ -63,15 +44,17 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '10.16'
-
-      - name: Fetch Node Modules Cache
+      - name: Cache node modules
         uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
         with:
-          path: **/node_modules
-          key: npm-${{ runner.os }}-${{hashFiles('**/package-lock.json')}}
+          path: ~/.npm
+          key: npm-${{hashFiles('**/package-lock.json')}}
+          restore-keys: | 
+            npm-
       - name: Install NPM dependencies
-        run: date && npm install 
-
+        run: date && npm ci
       - name: Run linting
         run: npm run lint
       - name: Run tests
@@ -81,7 +64,7 @@ jobs:
 
   build_kirby:
     name: Build Kirby lib
-    needs: [build_check, fetch_or_create_cache]
+    needs: build_check
     if: ${{ needs.build_check.outputs.do_build == 'true' }}
     runs-on: ubuntu-latest
     steps:
@@ -91,21 +74,23 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '10.16'
-
-      - name: Fetch Node Modules Cache
+      - name: Cache node modules
         uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
         with:
-          path: **/node_modules
-          key: npm-${{ runner.os }}-${{hashFiles('**/package-lock.json')}}
+          path: ~/.npm
+          key: npm-${{hashFiles('**/package-lock.json')}}
+          restore-keys: | 
+            npm-
       - name: Install NPM dependencies
-        run: date && npm install 
-
+        run: date && npm ci
       - name: Build Kirby lib
         run: npm run dist:designsystem
 
   deploy_to_cookbook:
     name: Deploy cookbook
-    needs: [lint_and_unittest, build_kirby, fetch_or_create_cache]
+    needs: [lint_and_unittest, build_kirby]
     runs-on: ubuntu-latest
     env:
       DOMAIN: ${{ github.ref == 'refs/heads/master' && 'kirby.design' || '650b277bd9a54e5cbadc.westeurope.aksapp.io' }}
@@ -175,13 +160,17 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '10.16'
-      - name: Fetch Node Modules Cache
+      - name: Cache node modules
         uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
         with:
-          path: **/node_modules
-          key: npm-${{ runner.os }}-${{hashFiles('**/package-lock.json')}}
+          path: ~/.npm
+          key: npm-${{hashFiles('**/package-lock.json')}}
+          restore-keys: | 
+            npm-
       - name: Install NPM dependencies
-        run: date && npm install 
+        run: date && npm ci
       - name: Install Kubernetes CLI
         run: |
           sudo apt-get update
