@@ -375,10 +375,6 @@ You may have encountered statements like
 
 > Commit early, Commit often
 
-and
-
-> Commit Often, Perfect Later, Publish Once
-
 We agree. Apart from acting as checkpoints, good commits support collaboration by providing an overview of your changes and make navigating them easy. But only as long the commits are good.
 
 #### The good commit follows Git best practices
