@@ -383,7 +383,7 @@ We agree. Apart from acting as checkpoints, good commits support collaboration b
 
 #### The good commit follows Git best practices
 
-You are encouraged to follow commonly adopted Git best practices. These include, among others:
+You are encouraged to follow commonly adopted Git best practices. We would especially like to highlight:
 
 1. **Try to make each commit a logically separate changeset**
     - Keep changes in each commit to a minimum
