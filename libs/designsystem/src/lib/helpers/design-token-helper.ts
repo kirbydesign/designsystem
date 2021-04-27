@@ -1,12 +1,11 @@
-import { ThemeColor } from './theme-color.type';
 import { ColorHelper } from './color-helper';
-
 import { styles } from './design-token-helper.styles';
+import { ThemeColor } from './theme-color.type';
 
 export class DesignTokenHelper {
   public static readonly breakpoints = styles.breakpoints;
-  public static readonly softKeyboardTransitionEnter = styles.softKeyboardTransitionEnter.join(' ');
-  public static readonly softKeyboardTransitionLeave = styles.softKeyboardTransitionLeave.join(' ');
+  public static readonly softKeyboardTransitionEnter = styles.softKeyboardTransitionEnter;
+  public static readonly softKeyboardTransitionLeave = styles.softKeyboardTransitionLeave;
   public static readonly modalDefaultHeight = styles.modalDefaultHeight;
   public static readonly drawerDefaultHeight = styles.drawerDefaultHeight;
 
@@ -89,7 +88,7 @@ export class DesignTokenHelper {
   }
 
   public static getElevation(z: 2 | 4 | 8): string {
-    return styles.elevationsRgb[z];
+    return styles.elevations[z];
   }
 }
 
