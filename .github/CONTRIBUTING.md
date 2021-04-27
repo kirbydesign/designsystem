@@ -381,6 +381,8 @@ and
 >
 > _[Git Best Practices](https://sethrobertson.github.io/GitBestPractices/)_
 
+We agree with both. Apart from acting as checkpoints, it helps other contributors to easily get an overview of your changes and navigate them. But only as long the commits are good.
+
 #### The good commit follows Git best practices
 
 You are encouraged to follow commonly adopted Git best practices, see for example [Distributed Git - Contributing to a Project](https://git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project). These include, among others:
