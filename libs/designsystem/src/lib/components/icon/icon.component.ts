@@ -1,8 +1,15 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, HostBinding, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 import { IconRegistryService } from './icon-registry.service';
 import { Icon } from './icon-settings';
 import { kirbyIconSettings } from './kirby-icon-settings';
+
+export enum IconSize {
+  XS = 'xs',
+  SM = 'sm',
+  MD = 'md',
+  LG = 'lg',
+}
 
 @Component({
   selector: 'kirby-icon',
@@ -14,6 +21,9 @@ import { kirbyIconSettings } from './kirby-icon-settings';
 export class IconComponent implements OnChanges {
   defaultIcon: Icon = this.findIcon(kirbyIconSettings.icons, 'cog');
   private _icon = (this.icon = this.defaultIcon);
+  @HostBinding('class')
+  @Input()
+  size: IconSize;
 
   @Input() name: string;
   @Input() customName: string;
@@ -25,7 +35,8 @@ export class IconComponent implements OnChanges {
   set icon(icon: Icon) {
     // If icon are not found, set default icon
     if (!icon && (this.name || this.customName)) {
-      console.warn(`Icon with name "${this.name || this.customName}" was not found.`);
+      this.warnAboutMissingIcon();
+
       icon = this.defaultIcon;
 
       // If default icon are not found
@@ -38,6 +49,19 @@ export class IconComponent implements OnChanges {
     // Set icon if it's found
     if (icon) {
       this._icon = icon;
+    }
+  }
+
+  private warnAboutMissingIcon(): void {
+    if (this.customName) {
+      console.warn(`Custom icon with name "${this.customName}" was not found. 
+        Do you have a typo in 'customName' or
+        forgot to configure the custom icon through the 'IconRegistryService'?`);
+    } else {
+      console.warn(`Built-in icon with name "${this.name}" was not found. 
+        Do you have a typo in 'name' or
+        did you mean to use a custom icon? If so, please use: 
+        <kirby-icon customName="${this.name}"></kirby-icon>`);
     }
   }
 

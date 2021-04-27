@@ -3,7 +3,6 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
-import { SizeDirective } from '../../../directives/size/size.directive';
 import { DesignTokenHelper } from '../../../helpers/design-token-helper';
 import { WindowRef } from '../../../types/window-ref';
 import { ButtonComponent } from '../../button/button.component';
@@ -19,7 +18,7 @@ describe('AlertComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [AlertComponent, ButtonComponent, SizeDirective],
+        declarations: [AlertComponent, ButtonComponent],
         providers: [
           {
             provide: WindowRef,

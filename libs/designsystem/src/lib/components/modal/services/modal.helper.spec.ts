@@ -148,8 +148,13 @@ describe('ModalHelper', () => {
     await openOverlay({ flavor: 'modal', title, component, size });
   };
 
-  const openDrawer = async (title: string = 'Drawer', component?: any, size?: ModalSize) => {
-    await openOverlay({ flavor: 'drawer', title, component, size });
+  const openDrawer = async (
+    title: string = 'Drawer',
+    component?: any,
+    size?: ModalSize,
+    interactWithBackground?: boolean
+  ) => {
+    await openOverlay({ flavor: 'drawer', title, component, size, interactWithBackground });
   };
 
   const expectShadowStyle = () => {
@@ -185,6 +190,8 @@ describe('ModalHelper', () => {
 
   describe('showModalWindow', () => {
     const screenSizes: ScreenSize[] = ['phablet-landscape', 'tablet', 'desktop'];
+    const allow_scroll_class = 'allow-background-scroll';
+
     screenSizes.forEach((screenSize) => {
       describe(`on ${screenSize}`, () => {
         beforeAll(async () => {
@@ -233,6 +240,39 @@ describe('ModalHelper', () => {
           });
         });
 
+        describe(`When drawer can interact with background`, () => {
+          beforeEach(async () => {
+            await openDrawer('Drawer with interact with background', null, null, true);
+          });
+
+          it(`body should be scrollable`, async () => {
+            expect(window.document.body.classList).toContain(allow_scroll_class);
+            expect(window.document.body).toHaveComputedStyle({
+              overflow: 'visible',
+            });
+            await overlay.dismiss();
+          });
+
+          it(`Drawer close should remove '${allow_scroll_class}'`, async () => {
+            await overlay.dismiss();
+            expect(window.document.body.classList).not.toContain(allow_scroll_class);
+          });
+        });
+
+        describe(`When drawer can not interact with background`, () => {
+          beforeEach(async () => {
+            await openDrawer('Drawer with no interact with background', null, null, false);
+          });
+
+          afterEach(async () => {
+            await overlay.dismiss();
+          });
+
+          it(`body should not be scrollable`, () => {
+            expect(window.document.body.classList).not.toContain(allow_scroll_class);
+          });
+        });
+
         describe('sizing', () => {
           beforeEach(() => {
             TestHelper.scrollMainWindowToTop();
@@ -243,9 +283,9 @@ describe('ModalHelper', () => {
           });
 
           const expectSize = (size: ModalSize | undefined) => {
-            expect(ionModal.classList.contains('small')).toBe(size === 'small');
-            expect(ionModal.classList.contains('medium')).toBe(size === 'medium');
-            expect(ionModal.classList.contains('large')).toBe(size === 'large');
+            expect(ionModal.classList.contains('kirby-modal-small')).toBe(size === 'small');
+            expect(ionModal.classList.contains('kirby-modal-medium')).toBe(size === 'medium');
+            expect(ionModal.classList.contains('kirby-modal-large')).toBe(size === 'large');
           };
 
           it('modal should have min-height', async () => {

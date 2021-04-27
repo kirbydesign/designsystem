@@ -9,9 +9,9 @@ import { ThemeColorDirective } from '../../directives/theme-color/theme-color.di
 import { DesignTokenHelper } from '../../helpers/design-token-helper';
 
 import { IconRegistryService } from './icon-registry.service';
-import { IconComponent } from './icon.component';
+import { IconComponent, IconSize } from './icon.component';
 
-const getColor = DesignTokenHelper.getColor;
+const { getColor, iconFontSize } = DesignTokenHelper;
 
 describe('IconComponent', () => {
   beforeEach(
@@ -30,17 +30,20 @@ describe('IconComponent', () => {
 
   it('should compile with custom hardcoded directives', () => {
     const fixture = createTestComponent('<kirby-icon themeColor="primary"></kirby-icon>');
+
     expect(fixture).toBeDefined();
   });
 
   it('should compile with custom dynamic bound directives', () => {
     const fixture = createTestComponent('<kirby-icon [themeColor]="\'primary\'"></kirby-icon>');
+
     expect(fixture).toBeDefined();
   });
 
   it('should create component instance', () => {
     const fixture = createTestComponent('<kirby-icon></kirby-icon>');
     const component = fixture.debugElement.query(By.directive(IconComponent)).componentInstance;
+
     expect(component).toBeTruthy();
   });
 
@@ -48,6 +51,7 @@ describe('IconComponent', () => {
     it('should set default icon by default', () => {
       const fixture = createTestComponent('<kirby-icon></kirby-icon>');
       const component = fixture.debugElement.query(By.directive(IconComponent)).componentInstance;
+
       expect(component.name).toBe(undefined);
       expect(component.icon.name).toBe(component.defaultIcon.name);
     });
@@ -56,6 +60,7 @@ describe('IconComponent', () => {
       const noExistingIconName = 'no-existing-icon-name';
       const fixture = createTestComponent(`<kirby-icon name="${noExistingIconName}"></kirby-icon>`);
       const component = fixture.debugElement.query(By.directive(IconComponent)).componentInstance;
+
       expect(component.name).toBe(noExistingIconName);
       expect(component.icon.name).toBe(component.defaultIcon.name);
     });
@@ -64,9 +69,14 @@ describe('IconComponent', () => {
       spyOn(console, 'warn');
       const noExistingIconName = 'no-existing-icon-name';
       const fixture = createTestComponent(`<kirby-icon name="${noExistingIconName}"></kirby-icon>`);
+
       fixture.detectChanges();
+
       expect(console.warn).toHaveBeenCalledWith(
-        `Icon with name "${noExistingIconName}" was not found.`
+        `Built-in icon with name "${noExistingIconName}" was not found. 
+        Do you have a typo in 'name' or
+        did you mean to use a custom icon? If so, please use: 
+        <kirby-icon customName="${noExistingIconName}"></kirby-icon>`
       );
     });
 
@@ -76,6 +86,7 @@ describe('IconComponent', () => {
         `<kirby-icon customName="${noExistingIconName}"></kirby-icon>`
       );
       const component = fixture.debugElement.query(By.directive(IconComponent)).componentInstance;
+
       expect(component.customName).toBe(noExistingIconName);
       expect(component.icon.name).toBe(component.defaultIcon.name);
     });
@@ -87,8 +98,11 @@ describe('IconComponent', () => {
         `<kirby-icon customName="${noExistingIconName}"></kirby-icon>`
       );
       fixture.detectChanges();
+
       expect(console.warn).toHaveBeenCalledWith(
-        `Icon with name "${noExistingIconName}" was not found.`
+        `Custom icon with name "${noExistingIconName}" was not found. 
+        Do you have a typo in 'customName' or
+        forgot to configure the custom icon through the 'IconRegistryService'?`
       );
     });
 
@@ -96,6 +110,7 @@ describe('IconComponent', () => {
       const fixture = createTestComponent('<kirby-icon name="verify"></kirby-icon>');
       fixture.detectChanges();
       const component = fixture.debugElement.query(By.directive(IconComponent)).componentInstance;
+
       expect(component.icon.name).toBe('verify');
     });
 
@@ -110,6 +125,7 @@ describe('IconComponent', () => {
       });
       fixture.detectChanges();
       const component = fixture.debugElement.query(By.directive(IconComponent)).componentInstance;
+
       expect(component.icon.name).toBe('customIconNameFromIconRegistry');
       expect(component.icon.svg).toBe('customIconSvgFromIconRegistry');
     });
@@ -120,8 +136,11 @@ describe('IconComponent', () => {
       const fixture = createTestComponent('<kirby-icon></kirby-icon>');
       fixture.detectChanges();
       const el = fixture.debugElement.query(By.directive(IconComponent));
+
       expect(el.nativeElement.className).toBe('kirby-icon');
+
       const expectedColor = window.getComputedStyle(window.document.body)['color'];
+
       expect(el.nativeElement).toHaveComputedStyle({
         color: expectedColor,
       });
@@ -131,6 +150,7 @@ describe('IconComponent', () => {
       const fixture = createTestComponent('<kirby-icon [themeColor]="\'primary\'"></kirby-icon>');
       fixture.detectChanges();
       const el = fixture.debugElement.query(By.directive(IconComponent));
+
       expect(el.nativeElement).toHaveComputedStyle({
         color: getColor('primary'),
       });
@@ -140,6 +160,7 @@ describe('IconComponent', () => {
       const fixture = createTestComponent('<kirby-icon themeColor="secondary"></kirby-icon>');
       fixture.detectChanges();
       const el = fixture.debugElement.query(By.directive(IconComponent));
+
       expect(el.nativeElement).toHaveComputedStyle({
         color: getColor('secondary'),
       });
@@ -149,6 +170,7 @@ describe('IconComponent', () => {
       const fixture = createTestComponent('<kirby-icon themeColor="tertiary"></kirby-icon>');
       fixture.detectChanges();
       const el = fixture.debugElement.query(By.directive(IconComponent));
+
       expect(el.nativeElement).toHaveComputedStyle({
         color: getColor('tertiary'),
       });
@@ -158,6 +180,7 @@ describe('IconComponent', () => {
       const fixture = createTestComponent('<kirby-icon themeColor="warning"></kirby-icon>');
       fixture.detectChanges();
       const el = fixture.debugElement.query(By.directive(IconComponent));
+
       expect(el.nativeElement).toHaveComputedStyle({
         color: getColor('warning'),
       });
@@ -167,6 +190,7 @@ describe('IconComponent', () => {
       const fixture = createTestComponent('<kirby-icon themeColor="success"></kirby-icon>');
       fixture.detectChanges();
       const el = fixture.debugElement.query(By.directive(IconComponent));
+
       expect(el.nativeElement).toHaveComputedStyle({
         color: getColor('success'),
       });
@@ -176,8 +200,33 @@ describe('IconComponent', () => {
       const fixture = createTestComponent('<kirby-icon themeColor="danger"></kirby-icon>');
       fixture.detectChanges();
       const el = fixture.debugElement.query(By.directive(IconComponent));
+
       expect(el.nativeElement).toHaveComputedStyle({
         color: getColor('danger'),
+      });
+    });
+  });
+
+  it('should default to size = sm', () => {
+    const fixture = createTestComponent('<kirby-icon></kirby-icon>');
+    fixture.detectChanges();
+    const el = fixture.debugElement.query(By.directive(IconComponent));
+
+    expect(el.nativeElement).toHaveComputedStyle({
+      'font-size': iconFontSize('sm'),
+    });
+  });
+
+  const sizes = Object.values(IconSize);
+
+  sizes.forEach((size) => {
+    it(`should render with correct font-size for size = ${size}`, () => {
+      const fixture = createTestComponent(`<kirby-icon size="${size}"></kirby-icon>`);
+      fixture.detectChanges();
+      const el = fixture.debugElement.query(By.directive(IconComponent));
+
+      expect(el.nativeElement).toHaveComputedStyle({
+        'font-size': iconFontSize(size),
       });
     });
   });
