@@ -360,14 +360,74 @@ This does not go for bug reports however, as we want to unearth and solve as man
 
 ### Branch 
 
-<!-- We could also use githooks to enforce branch naming policies: https://itnext.io/using-git-hooks-to-enforce-branch-naming-policy-ffd81fa01e5e - perhaps have the warning throw a link to this section? -->
+The good branch only contain changes related to one issue and follows our branch naming convention:
 
-* Guidelines for how to name branches 
-* Feature branches
-* Bugfix branches
-* Enhancement branches
-* Housekeeping branches
-* Others i might have forgotten?
+ `[issue-type]/[issue-id]-[name]`
+
+Besides the structure, notice that the branch name:
+
+* Is kebab cased (`kebab-casing-uses-hyphens-for-space`)
+* Only uses lowercased letters
+
+Examples:
+
+* `documentation/1472-the-good-branch`
+* `enhancement/1483-sticky-only-page-header`
+* `housekeeping/1360-ci-cache-node-modules`
+
+The issue type and id can be found on the [issues page](https://github.com/kirbydesign/designsystem/issues).
+
+![](images/how-to-find-issue-type-and-id.png)
+
+The name part should give an idea of what the changes in the branch is related to, without having to look up the issue. 
+
+As of now, Kirby does not utilise any advanced branching strategies. We always branch out from `master` and request that the new branch is merged back into `master` using a PR; no matter the issue type.
+
+You should now be ready to create a _good_ branch that follows our branch naming convention. But if you are interested in why we have decided on this convention - read on. 
+
+#### Why this branch naming convention?
+
+While a branch is ephemeral, we believe it is important to have informative and consistent naming in order to: 
+
+* Be able to easily identify what is contained in a branch
+* Determine if it is safe to delete a branch
+* Organize branches 
+
+To achieve this - it has been decided that a branch must contain the following three items:
+<dl>
+<dt>Issue type</dt>
+<dd>
+  
+Should be part of the branch name to ease organization and grouping. 
+  
+When viewing the branch overview on Github, which is sorted alphabetically - all branches of the same issue type will be shown next to each other. When the issue type is followed by a `/` , tools that visualise branches as a tree (such as a Git GUI or an IDE), will group all branches belonging to the same type together.
+
+The entire name of the issue type  is to be used, such that contributors does not have to remember a bunch of arbitary abbrivations (is it: doc, docs or docu? Something fourth?) 
+</dd>
+
+<dt>Issue id</dt>
+<dd>
+  
+Should be part of the branch name, such that others know which issue the changes on the branch is related to. 
+
+If this was not included and a branch is created for which a pull-request is never submitted - questions can arise, such as: _is it safe to delete the branch? Is the issue for this branch closed? Is this branch even related to an issue?_
+
+It also functions as a reminder for contributors to only work on one issue per branch. 
+
+If a contributor is working on something for which no issue has been submitted, they will not be able to follow the naming convention. 
+This hopefully nudges them towards creating a [good issue](#issue) and follow [the process for contribution](#the-process-for-contribution).
+</dd>
+
+<dt>Name</dt>
+<dd>
+  Should be part of the branch name such that it (hopefully) is possible to get an idea what the changes on the branch is related to, without looking up issues.</dd>
+</dl>
+
+Lowercasing and the use of kebab case exists to keep the branch names consistent. 
+
+This makes it easier to change branch as it is not necessary to remember whether the branch was named using: camel case, kebab case, or something third. Which words were capitalized and which were not?
+
+Instead a contributor should simply remember to always use kebab- and lowercase for branch names.
 
 ### Commit
 
