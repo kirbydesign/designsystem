@@ -50,6 +50,7 @@ jobs:
         if: steps.cache.outputs.cache-hit != "true"
         run: npm ci
 
+
   lint_and_unittest:
     name: Lint & unit test
     needs: [build_check, fetch_or_create_cache]
@@ -62,6 +63,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '10.16'
+
       - name: Fetch Node Modules Cache
         uses: actions/cache@v2
         with:
@@ -69,6 +71,7 @@ jobs:
           key: npm-${{ runner.os }}-${{hashFiles('**/package-lock.json')}}
       - name: Install NPM dependencies
         run: date && npm install 
+
       - name: Run linting
         run: npm run lint
       - name: Run tests
@@ -88,6 +91,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '10.16'
+
       - name: Fetch Node Modules Cache
         uses: actions/cache@v2
         with:
@@ -95,6 +99,7 @@ jobs:
           key: npm-${{ runner.os }}-${{hashFiles('**/package-lock.json')}}
       - name: Install NPM dependencies
         run: date && npm install 
+
       - name: Build Kirby lib
         run: npm run dist:designsystem
 
