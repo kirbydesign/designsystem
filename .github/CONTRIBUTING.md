@@ -402,6 +402,8 @@ You are encouraged to follow commonly adopted Git best practices, see for exampl
 
 #### The good commit has good commit messages
 
+All commits from your branch are squashed when merged with the main branch. Commit messages from individual commits end up in a list of changes in the message body of the merge commit. Try to keep that in mind when writing your commit messages.
+
 * Use imperative mood
 * Describe what was done and why, but not how
 * Limit the subject line to 50 characters. If you cannot fit your message into 50 characters:
@@ -410,8 +412,6 @@ You are encouraged to follow commonly adopted Git best practices, see for exampl
 * Put a blank line between the subject line and the message body
 * Wrap lines in the message body at 72 characters
 * Use [gitmoji](https://gitmoji.dev) when possible. There are several [tools](https://gitmoji.dev/related-tools) available (including a [VSCode extension](https://github.com/vtrois/gitmoji-vscode) and a [CLI tool](https://github.com/carloscuesta/gitmoji-cli))
-
-All commits from your branch are squashed when merged with the main branch. Commit messages from individual commits end up in a list of changes in the message body of the merge commit. Try to keep that in mind when writing your commit messages.
 
 ### Self-review 
 
