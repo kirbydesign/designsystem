@@ -361,8 +361,8 @@ This does not go for bug reports however, as we want to unearth and solve as man
 ### Branch 
 
 The good branch only contain changes related to one issue and follows our branch naming convention:
-``` 
 
+``` 
 [issue-type]/[issue-id]-[name] 
 ```
 
@@ -373,7 +373,6 @@ Besides the structure, notice that the branch name:
 Examples:
 
 ``` 
-
 documentation/1472-the-good-branch
 ```
 
