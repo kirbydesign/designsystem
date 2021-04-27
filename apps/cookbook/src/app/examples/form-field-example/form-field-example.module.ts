@@ -6,6 +6,7 @@ import { KirbyModule } from '@kirbydesign/designsystem';
 import { FormFieldInputBorderlessExampleComponent } from './examples/input/borderless';
 import { FormFieldInputCounterExampleComponent } from './examples/input/counter';
 import { FormFieldInputDateExampleComponent } from './examples/input/date';
+import { FormFieldInputDecimalMaskExampleComponent } from './examples/input/decimal-mask';
 import { FormFieldInputDefaultExampleComponent } from './examples/input/default';
 import { FormFieldInputDisabledExampleComponent } from './examples/input/disabled';
 import { FormFieldInputErrorExampleComponent } from './examples/input/error';
@@ -25,6 +26,7 @@ const COMPONENT_DECLARATIONS = [
   FormFieldInputLabelMessageExampleComponent,
   FormFieldInputCounterExampleComponent,
   FormFieldInputNumericExampleComponent,
+  FormFieldInputDecimalMaskExampleComponent,
   FormFieldInputDateExampleComponent,
   FormFieldInputDisabledExampleComponent,
   FormFieldInputErrorExampleComponent,
