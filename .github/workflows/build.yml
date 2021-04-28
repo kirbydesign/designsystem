@@ -76,7 +76,7 @@ jobs:
             **/node_modules
           key: node-modules-${{ runner.os }}-${{env.NODE_VERSION}}-${{hashFiles('**/package.json')}}-${{hashFiles('**/package-lock.json')}}
       - name: Install NPM dependencies
-        run: date && npm install 
+        run: npm install 
       - name: Run linting
         run: npm run lint
       - name: Run tests
@@ -105,7 +105,7 @@ jobs:
             **/node_modules
           key: node-modules-${{ runner.os }}-${{env.NODE_VERSION}}-${{hashFiles('**/package.json')}}-${{hashFiles('**/package-lock.json')}}
       - name: Install NPM dependencies
-        run: date && npm install 
+        run: npm install 
       - name: Build Kirby lib
         run: npm run dist:designsystem
 
@@ -189,7 +189,7 @@ jobs:
             **/node_modules
           key: node-modules-${{ runner.os }}-${{env.NODE_VERSION}}-${{hashFiles('**/package.json')}}-${{hashFiles('**/package-lock.json')}}
       - name: Install NPM dependencies
-        run: date && npm install 
+        run: npm install 
       - name: Install Kubernetes CLI
         run: |
           sudo apt-get update
