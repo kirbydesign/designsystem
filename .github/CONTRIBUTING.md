@@ -453,13 +453,10 @@ Good words to use as the first of the subject line:
 
 ##### A good message body
 
-Separate the message body from the subject line with a blank line.
-
-You should use the message body to describe what was done and why, but not how.
-
-Be aware that if you need to write a lot in the message body it may also be a sign of too many changes in one commit.
-
-Wrap lines in the message body at 72 characters
+* Separate the message body from the subject line with a blank line.
+* You should use the message body to describe _what_ was done and _why_, but not how.
+* Be aware that if you need to write a lot in the message body it may also be a sign of too many changes in one commit.
+* Wrap lines in the message body at 72 characters
 
 #### Read more about good commits
 
