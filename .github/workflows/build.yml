@@ -97,7 +97,7 @@ jobs:
 
   deploy_to_cookbook:
     name: Deploy cookbook
-    needs: lint_and_unittest
+    needs: [lint_and_unittest, build_kirby]
     runs-on: ubuntu-latest
     env:
       DOMAIN: ${{ github.ref == 'refs/heads/master' && 'kirby.design' || '650b277bd9a54e5cbadc.westeurope.aksapp.io' }}
