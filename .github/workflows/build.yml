@@ -60,7 +60,7 @@ jobs:
         run: npm install 
       - name: Run linting
         run: npm run lint
-       name: Run tests
+      - name: Run tests
         run: npm run test:ci
       - name: Generate coverage report
         run: npm run coverage-report || true
