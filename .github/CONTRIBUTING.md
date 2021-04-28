@@ -387,6 +387,7 @@ You are encouraged to follow commonly adopted Git best practices. We would espec
     - If you have made multiple non-related changes and need to separate them in several commits you can use `git add --patch` to stage them
 2. **Commit often**
     - It is easier to get an overview with multiple small changes than one large commit containing lots of changes
+    - If you need to roll back to a previous commit, you can do it incrementally instead of reverting every change
 3. **Strive for each commit to compile/build and pass tests**
 4. **Regularly push your commits to remote**
     - Early peer reviews are easier
