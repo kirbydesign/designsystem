@@ -1,7 +1,7 @@
 import { getLocaleNumberSymbol, NumberSymbol } from '@angular/common';
 import { Directive, ElementRef, Inject, Input, LOCALE_ID, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import Inputmask from 'inputmask';
+import Inputmask from 'inputmask/lib/inputmask';
 
 interface InputMask {
   unmaskedvalue: () => string;
