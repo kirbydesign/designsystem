@@ -382,12 +382,11 @@ We agree. Apart from acting as checkpoints, good commits support collaboration b
 You are encouraged to follow commonly adopted Git best practices. We would especially like to highlight:
 
 1. **Try to make each commit a logically separate changeset**
-    - Keep changes in each commit to a minimum
     - Make changes in each commit _atomic_ &ndash; focus on one thing
-    - Only commit related changes
-    - If you have made multiple non-related changes and need to separate them in several commits, then use `git add --patch` to stage them
+    - Keep your commits as small as possible, but keep your changes in each commit related
+    - If you have made multiple non-related changes and need to separate them in several commits you can use `git add --patch` to stage them
 2. **Commit often**
-    - Multiple smaller commits are better than one large commit
+    - It is easier to get an overview with multiple small changes than one large commit containing lots of changes
 3. **Strive for each commit to compile/build and pass tests**
 4. **Regularly push your commits to remote**
     - Early peer reviews are easier
