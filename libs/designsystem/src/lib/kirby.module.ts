@@ -23,6 +23,7 @@ import { EmptyStateComponent } from './components/empty-state/empty-state.compon
 import { FabSheetComponent } from './components/fab-sheet/fab-sheet.component';
 import { FlagComponent } from './components/flag/flag.component';
 import { DateInputDirective } from './components/form-field/directives/date/date-input.directive';
+import { DecimalMaskDirective } from './components/form-field/directives/decimal-mask/decimal-mask.directive';
 import { FormFieldMessageComponent } from './components/form-field/form-field-message/form-field-message.component';
 import { FormFieldComponent } from './components/form-field/form-field.component';
 import { InputCounterComponent } from './components/form-field/input-counter/input-counter.component';
@@ -30,7 +31,6 @@ import { InputComponent } from './components/form-field/input/input.component';
 import { TextareaComponent } from './components/form-field/textarea/textarea.component';
 import { BreakpointHelperService } from './components/grid/breakpoint-helper.service';
 import { GridComponent } from './components/grid/grid.component';
-import { IconRegistryService } from './components/icon/icon-registry.service';
 import { IconModule } from './components/icon/icon.module';
 import { ItemModule } from './components/item/item.module';
 import { InfiniteScrollDirective } from './components/list/directives/infinite-scroll.directive';
@@ -117,6 +117,7 @@ const exportedDeclarations = [
   BadgeComponent,
   ThemeColorDirective,
   DateInputDirective,
+  DecimalMaskDirective,
   SlideButtonComponent,
   ToggleComponent,
   EmptyStateComponent,
