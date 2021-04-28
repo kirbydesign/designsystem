@@ -41,10 +41,10 @@ describe('ChipComponent', () => {
   });
 
   it('should have touch area with minimum size equal to fat finger size', () => {
-    expect(window.getComputedStyle(spectator.element, '::after').minHeight).toEqual(
-      fatFingerSize()
-    );
-    expect(window.getComputedStyle(spectator.element, '::after').minWidth).toEqual(fatFingerSize());
+    const touchArea = window.getComputedStyle(spectator.element, '::after');
+
+    expect(parseInt(touchArea.height)).toBeGreaterThanOrEqual(parseInt(fatFingerSize()));
+    expect(parseInt(touchArea.width)).toBeGreaterThanOrEqual(parseInt(fatFingerSize()));
   });
 
   describe('when selected', () => {
