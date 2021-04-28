@@ -10,7 +10,6 @@ import {
 } from '@angular/core';
 import 'inputmask/lib/extensions/inputmask.date.extensions';
 import Inputmask from 'inputmask/lib/inputmask';
-
 @Directive({
   selector: '[kirby-input][type="date"]',
 })
