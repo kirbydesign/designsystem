@@ -31,33 +31,36 @@ jobs:
           filters: |
             libs:
               - 'libs/**'
-
   lint_and_unittest:
     name: Lint & unit test
     needs: build_check
     if: ${{ needs.build_check.outputs.do_build == 'true' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest    
+    env:
+      NODE_VERSION: '10.16'
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
       - name: Install Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '10.16'
-      - name: Cache node modules
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Fetch Node Modules Cache
         uses: actions/cache@v2
-        env:
-          cache-name: cache-node-modules
+        id: cache
         with:
-          path: ~/.npm
-          key: npm-${{hashFiles('**/package-lock.json')}}
-          restore-keys: | 
-            npm-
-      - name: Install NPM dependencies
+          path: | 
+            **/node_modules
+          key: node-modules-${{ runner.os }}-${{env.NODE_VERSION}}-${{hashFiles('**/package.json')}}-${{hashFiles('**/package-lock.json')}}
+      - name: Clean Install Dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
+      - name: Install NPM dependencies
+        if: steps.cache.outputs.cache-hit == 'true'
+        run: npm install 
       - name: Run linting
         run: npm run lint
-      - name: Run tests
+       name: Run tests
         run: npm run test:ci
       - name: Generate coverage report
         run: npm run coverage-report || true
@@ -67,33 +70,38 @@ jobs:
     needs: build_check
     if: ${{ needs.build_check.outputs.do_build == 'true' }}
     runs-on: ubuntu-latest
+    env:
+      NODE_VERSION: '10.16'
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
       - name: Install Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '10.16'
-      - name: Cache node modules
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Fetch Node Modules Cache
         uses: actions/cache@v2
-        env:
-          cache-name: cache-node-modules
+        id: cache
         with:
-          path: ~/.npm
-          key: npm-${{hashFiles('**/package-lock.json')}}
-          restore-keys: | 
-            npm-
-      - name: Install NPM dependencies
+          path: |
+            **/node_modules
+          key: node-modules-${{ runner.os }}-${{env.NODE_VERSION}}-${{hashFiles('**/package.json')}}-${{hashFiles('**/package-lock.json')}}
+      - name: Clean Install Dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
+      - name: Install NPM dependencies
+        if: steps.cache.outputs.cache-hit == 'true'
+        run: npm install 
       - name: Build Kirby lib
         run: npm run dist:designsystem
 
   deploy_to_cookbook:
     name: Deploy cookbook
-    needs: [lint_and_unittest, build_kirby]
+    needs: lint_and_unittest
     runs-on: ubuntu-latest
     env:
       DOMAIN: ${{ github.ref == 'refs/heads/master' && 'kirby.design' || '650b277bd9a54e5cbadc.westeurope.aksapp.io' }}
+      NODE_VERSION: '10.16'
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
@@ -159,18 +167,20 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '10.16'
-      - name: Cache node modules
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Fetch Node Modules Cache
+        id: cache
         uses: actions/cache@v2
-        env:
-          cache-name: cache-node-modules
         with:
-          path: ~/.npm
-          key: npm-${{hashFiles('**/package-lock.json')}}
-          restore-keys: | 
-            npm-
-      - name: Install NPM dependencies
+          path: |
+            **/node_modules
+          key: node-modules-${{ runner.os }}-${{env.NODE_VERSION}}-${{hashFiles('**/package.json')}}-${{hashFiles('**/package-lock.json')}}
+      - name: Clean Install Dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
+      - name: Install NPM dependencies
+        if: steps.cache.outputs.cache-hit == 'true'
+        run: npm install 
       - name: Install Kubernetes CLI
         run: |
           sudo apt-get update
