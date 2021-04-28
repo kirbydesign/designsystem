@@ -50,7 +50,7 @@ jobs:
         with:
           path: |
             **/node_modules
-          key: node-modules-${{ runner.os }}-node-${{env.NODE_VERSION}}-${{hashFiles('**/package-lock.json')}}
+          key: node-modules-${{ runner.os }}-${{env.NODE_VERSION}}-${{hashFiles('**/package.json')}}-${{hashFiles('**/package-lock.json')}}
       - name: Clean Install Dependencies
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
@@ -74,7 +74,7 @@ jobs:
         with:
           path: | 
             **/node_modules
-          key: node-modules-${{ runner.os }}-node-${{env.NODE_VERSION}}-${{hashFiles('**/package-lock.json')}}
+          key: node-modules-${{ runner.os }}-${{env.NODE_VERSION}}-${{hashFiles('**/package.json')}}-${{hashFiles('**/package-lock.json')}}
       - name: Install NPM dependencies
         run: date && npm install 
       - name: Run linting
@@ -103,7 +103,7 @@ jobs:
         with:
           path: |
             **/node_modules
-          key: node-modules-${{ runner.os }}-node-${{env.NODE_VERSION}}-${{hashFiles('**/package-lock.json')}}
+          key: node-modules-${{ runner.os }}-${{env.NODE_VERSION}}-${{hashFiles('**/package.json')}}-${{hashFiles('**/package-lock.json')}}
       - name: Install NPM dependencies
         run: date && npm install 
       - name: Build Kirby lib
@@ -187,7 +187,7 @@ jobs:
         with:
           path: |
             **/node_modules
-          key: node-modules-${{ runner.os }}-node-${{env.NODE_VERSION}}-${{hashFiles('**/package-lock.json')}}
+          key: node-modules-${{ runner.os }}-${{env.NODE_VERSION}}-${{hashFiles('**/package.json')}}-${{hashFiles('**/package-lock.json')}}
       - name: Install NPM dependencies
         run: date && npm install 
       - name: Install Kubernetes CLI
