@@ -384,8 +384,8 @@ You are encouraged to follow commonly adopted Git best practices. We would espec
 1. **Try to make each commit a logically separate changeset**
     - Keep changes in each commit to a minimum
     - Make changes in each commit _atomic_ &ndash; focus on one thing
-    - Only commit related functionality for each commit
-    - If you have made multiple non-related changes to a file and you need to separate them in several commits, stage your changes using `git add --patch`
+    - Only commit related changes
+    - If you have made multiple non-related changes and need to separate them in several commits, then use `git add --patch` to stage them
 2. **Commit often**
     - Multiple smaller commits are better than one large commit
 3. **Strive for each commit to compile/build and pass tests**
