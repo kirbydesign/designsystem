@@ -52,7 +52,7 @@ jobs:
           path: | 
             **/node_modules
           key: node-modules-${{ runner.os }}-${{env.NODE_VERSION}}-${{hashFiles('**/package.json')}}-${{hashFiles('**/package-lock.json')}}
-      - name: Clean Install Dependencies
+      - name: Clean Install NPM Dependencies
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
       - name: Install NPM dependencies
@@ -86,7 +86,7 @@ jobs:
           path: |
             **/node_modules
           key: node-modules-${{ runner.os }}-${{env.NODE_VERSION}}-${{hashFiles('**/package.json')}}-${{hashFiles('**/package-lock.json')}}
-      - name: Clean Install Dependencies
+      - name: Clean Install NPM Dependencies
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
       - name: Install NPM dependencies
@@ -175,7 +175,7 @@ jobs:
           path: |
             **/node_modules
           key: node-modules-${{ runner.os }}-${{env.NODE_VERSION}}-${{hashFiles('**/package.json')}}-${{hashFiles('**/package-lock.json')}}
-      - name: Clean Install Dependencies
+      - name: Clean Install NPM Dependencies
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
       - name: Install NPM dependencies
