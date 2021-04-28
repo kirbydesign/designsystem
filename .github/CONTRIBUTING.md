@@ -384,7 +384,7 @@ You are encouraged to follow commonly adopted Git best practices. We would espec
 1. **Try to make each commit a logically separate changeset**
     - Make changes in each commit _atomic_ &ndash; focus on one thing
     - Keep your commits as small as possible, but keep your changes in each commit related
-    - If you have made multiple non-related changes and need to separate them in several commits you can use `git add --patch` to stage them
+    - If you have made multiple non-related changes and need to split them into separate commits you can use `git add --patch` to stage them
 2. **Commit often**
     - It is easier to get an overview with multiple small changes than one large commit containing lots of changes
     - If you need to roll back to a previous commit, you can do it incrementally instead of reverting every change
