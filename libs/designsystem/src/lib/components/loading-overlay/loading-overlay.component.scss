@@ -16,7 +16,7 @@
     width: 100%;
     position: absolute;
     z-index: z('loading-overlay');
-    opacity: 0.8;
+    opacity: $loading-overlay-backdrop-opacity;
     display: flex;
     background: transparent;
     justify-content: center;

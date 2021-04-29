@@ -1,32 +1,44 @@
-import { Injectable } from '@angular/core';
-import { Overlay, OverlayRef } from '@angular/cdk/overlay';
-import { ComponentPortal } from '@angular/cdk/portal';
+import { ComponentFactoryResolver, Injectable, Injector } from '@angular/core';
+import { LoadingController } from '@ionic/angular';
 
-import { FullscreenLoadingOverlayComponent } from './fullscreen-loading-overlay.component';
+import { SpinnerComponent } from '../spinner/spinner.component';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoadingOverlayService {
-  private overlayRef: OverlayRef = null;
+  private ionLoading: HTMLIonLoadingElement = null;
 
-  constructor(private overlay: Overlay) {}
+  constructor(
+    private loadingController: LoadingController,
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private injector: Injector
+  ) {}
 
-  showLoadingOverlay(showBackdrop: boolean = true): void {
-    if (!this.overlayRef) {
-      this.overlayRef = this.overlay.create();
-    }
+  async showLoadingOverlay(showBackdrop: boolean = true): Promise<void> {
+    if (!this.ionLoading) {
+      this.ionLoading = await this.loadingController.create({
+        cssClass: 'kirby-loading-overlay',
+        duration: 0,
+        message: null,
+        showBackdrop: showBackdrop,
+        spinner: null,
+      });
 
-    const spinnerOverlayPortal = new ComponentPortal(FullscreenLoadingOverlayComponent);
-    if (!this.overlayRef.hasAttached()) {
-      const component = this.overlayRef.attach(spinnerOverlayPortal);
-      component.instance.showBackdrop = showBackdrop;
+      const loadingWrapper = this.ionLoading.querySelector('.loading-wrapper');
+      const kirbySpinner = document.createElement('kirby-spinner');
+      const factory = this.componentFactoryResolver.resolveComponentFactory(SpinnerComponent);
+      factory.create(this.injector, [], kirbySpinner);
+      loadingWrapper.appendChild(kirbySpinner);
+
+      await this.ionLoading.present();
     }
   }
 
-  hideLoadingOverlay(): void {
-    if (!!this.overlayRef) {
-      this.overlayRef.detach();
+  async hideLoadingOverlay(): Promise<void> {
+    if (!!this.ionLoading) {
+      await this.ionLoading.dismiss();
+      this.ionLoading = null;
     }
   }
 }
