@@ -13,7 +13,7 @@
           "options": {
             "tsConfig": "libs/designsystem/tsconfig.lib.json",
             "project": "libs/designsystem/ng-package.json",
-            "buildableProjectDepsInPackageJsonType": "dependencies"
+            "updateBuildableProjectDepsInPackageJson": false
           }
         },
         "lint": {
