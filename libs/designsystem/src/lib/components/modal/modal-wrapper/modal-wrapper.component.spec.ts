@@ -111,11 +111,11 @@ describe('ModalWrapperComponent', () => {
     const elementHeight = 500;
     const elementWidth = 300;
     const screenSize = TestHelper.screensize.desktop;
-    let toolbarWidth = 0;
+    let scrollbarWidth = 0;
 
     beforeAll(async () => {
       await TestHelper.resizeTestWindow(screenSize);
-      toolbarWidth = window.innerWidth - document.documentElement.clientWidth;
+      scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
     });
 
     afterAll(() => {
@@ -194,7 +194,7 @@ describe('ModalWrapperComponent', () => {
         const expectedPosition = {
           top: parseInt(screenSize.height) - elementHeight,
           left: elementRect.left,
-          right: parseInt(screenSize.width) - toolbarWidth - elementRect.right,
+          right: parseInt(screenSize.width) - scrollbarWidth - elementRect.right,
         };
         const ionModalElement = spectator.component['ionModalElement'];
         expect(ionModalElement.style.top).toBe(`${expectedPosition.top}px`);
@@ -211,7 +211,7 @@ describe('ModalWrapperComponent', () => {
         const expectedPosition = {
           top: parseInt(screenSize.height) - elementHeight,
           left: elementRect.left,
-          right: parseInt(screenSize.width) - toolbarWidth - elementRect.right,
+          right: parseInt(screenSize.width) - scrollbarWidth - elementRect.right,
         };
         const ionModalElement = spectator.component['ionModalElement'];
         expect(ionModalElement.style.top).toBe(`${expectedPosition.top}px`);
