@@ -548,6 +548,8 @@ A lot of comments and requests for change during review of a pull request can fe
   + Is it obvious what the changes made in the pull request are?
   + Do the descriptions of the pull request and the issue contain the appropriate information for the reviewer? [refer to The Good Pull Request section]
   + Read the issue description and the tech refinement comment. Does your changes solve the issue? [refer to The Good Pull Request section]
+  + Look for `console.log()` statements and similar temporary things you have used during development that should not end up in the codebase. The linter should catch most of it, though.
+  + Remove code that has been commented out
 
 ### Pull-request
 
