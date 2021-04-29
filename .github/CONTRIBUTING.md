@@ -431,13 +431,105 @@ Instead a contributor should simply remember to always use kebab- and lowercase 
 
 ### Commit
 
-* Focus on one thing per commit 
-* Keep changes as small as possible 
-* Only commit related functinoality for each commit 
-* Commit often
-* Strive for each commit to compile/build and pass tests 
-* Use [gitmoji](https://gitmoji.dev) when possible - point to VSCode extension and CLI tool
-* sidenote: when merging the CI pipeline combines each commit to a merge commit containing all commit messages
+You may have encountered statements like
+
+> Commit early, Commit often
+
+We agree. Apart from acting as checkpoints, good commits support collaboration by providing an overview of your changes and make navigating them easy. But only as long the commits are good.
+
+#### The good commit follows Git best practices
+
+You are encouraged to follow commonly adopted Git best practices. We would especially like to highlight:
+
+1. **Try to make each commit a logically separate changeset**
+    - Make changes in each commit _atomic_ &ndash; focus on one thing
+    - Keep your commits as small as possible and keep your changes in each commit related
+    - Utilize `git add --patch` if you need to split non-related changes into separate commits.
+2. **Commit often**
+    - It is easier to get an overview with multiple small changes than one large commit containing lots of changes
+    - If you need to roll back to a previous commit, you can do it incrementally instead of reverting every change
+3. **Strive for each commit to compile/build and pass tests**
+4. **Regularly push your commits to remote**
+    - Early peer reviews are easier
+    - In case something happens to your machine it reduces the amount of work lost
+    - Makes it easier to hand over the issue to other developers if needed
+
+#### The good commit has good commit messages
+
+> Keep in mind: [This](http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html) &middot; [has](https://www.git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project#_commit_guidelines) &middot; [all](https://github.com/torvalds/subsurface-for-dirk/blob/master/README.md#contributing) &middot; [been](http://who-t.blogspot.co.at/2009/12/on-commit-messages.html) &middot; [said](https://github.com/erlang/otp/wiki/writing-good-commit-messages) &middot; [before](https://github.com/spring-projects/spring-framework/blob/30bce7/CONTRIBUTING.md#format-commit-messages)
+>
+> _&mdash; Chris Beams, [The seven rules of a great Git commit message](https://chris.beams.io/posts/git-commit/#seven-rules)_
+
+All commits from your branch are squashed when merged with the main branch (see [commits](https://github.com/kirbydesign/designsystem/commits/master)). Commit messages from individual commits end up in a list of changes in the message body of the merge commit. Try to keep that in mind when writing your commit messages.
+
+Ideally, a good commit message will be structured into three parts:
+
+1. Subject line
+2. Message body
+3. Closing line
+
+The most important part is the subject line. The message body should be used if elaboration is necessary. We rarely use a closing line, but if you want to add useful meta-data related to your commit &ndash; such as GitHub issue number and co-author names &ndash; this is where to put it.
+
+##### A good subject line
+
+* will complete the sentence "If applied, this commit will..."
+* is written in [imperative mood](https://www.thoughtco.com/imperative-mood-grammar-1691151) (_Fix_, not ~~_Fixed_~~, ~~_Fixes_~~ etc.)
+* is limited to 50 characters
+
+If you cannot fit your message into a 50 character subject line, consider if you've included too many changes that makes it difficult to describe concisely. Try to rephrase the subject line and use the [message body](#a-good-message-body) for elaboration.
+
+In addition we use [gitmoji](https://gitmoji.dev) when possible to prefix the subject line with an illustrative emoji. There are several [tools](https://gitmoji.dev/related-tools) available (including a [VSCode extension](https://github.com/vtrois/gitmoji-vscode) and a [CLI tool](https://github.com/carloscuesta/gitmoji-cli)). It's optional, but very helpful when skimming through the git log.
+
+Good verbs to use as the first word of your subject line:
+
+* Add
+* Create
+* Refactor
+* Fix
+* Release
+* Document
+* Modify
+* Update
+* Remove
+* Delete
+
+🟢 Good subject line examples:
+
+> 📝 Update getting started documentation
+
+> 🔥 Remove deprecated methods
+
+> ✅  Add tests for dropdown component
+
+🔴 Bad subject line examples:
+
+> ~~fixes a bug.~~
+
+> ~~more changes~~
+
+> ~~added file~~
+
+> ~~fix code review comments~~
+
+##### A good message body
+
+We don't often use message bodies, but we encourage you to do so if you need to elaborate on your changes. Here is some pointers on how to write a good one:
+
+* Always separate the message body from the subject line with a blank line.
+* You should use the message body to describe _what_ was done and _why_, but not how (see for example [this commit from Bitcoin Core](https://github.com/bitcoin/bitcoin/commit/eb0b56b19017ab5c16c745e6da39c53126924ed6)).
+* Be aware that if you need to write a lot in the message body it may also be a sign of too many changes in one commit.
+* Wrap lines in the message body at 72 characters
+
+#### Read more about good commits
+
+For more on good git commits, see (among _many_ other):
+
+* [Distributed Git - Contributing to a Project](https://git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project)
+* [Git Best Practices](https://sethrobertson.github.io/GitBestPractices/)
+* [Stop Writing Bad Commit Messages](https://betterprogramming.pub/stop-writing-bad-commit-messages-8df79517177d)
+* [How to Write a Git Commit Message](https://chris.beams.io/posts/git-commit/)
+* [Turbo Git Commit Message Standard](https://gist.github.com/turbo/efb8d57c145e00dc38907f9526b60f17)
+* [Check Out These 5 Git Tips Before Your Next Commit](https://medium.com/walmartglobaltech/check-out-these-5-git-tips-before-your-next-commit-c1c7a5ae34d1)
 
 ### Self-review 
 
