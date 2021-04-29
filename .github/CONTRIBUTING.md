@@ -383,8 +383,8 @@ You are encouraged to follow commonly adopted Git best practices. We would espec
 
 1. **Try to make each commit a logically separate changeset**
     - Make changes in each commit _atomic_ &ndash; focus on one thing
-    - Keep your commits as small as possible, but keep your changes in each commit related
-    - If you have made multiple non-related changes and need to split them into separate commits you can use `git add --patch` to stage them
+    - Keep your commits as small as possible and keep your changes in each commit related
+    - Utilize `git add --patch` if you need to split non-related changes into separate commits.
 2. **Commit often**
     - It is easier to get an overview with multiple small changes than one large commit containing lots of changes
     - If you need to roll back to a previous commit, you can do it incrementally instead of reverting every change
@@ -400,12 +400,12 @@ You are encouraged to follow commonly adopted Git best practices. We would espec
 >
 > _&mdash; Chris Beams, [The seven rules of a great Git commit message](https://chris.beams.io/posts/git-commit/#seven-rules)_
 
-All commits from your branch are squashed when merged with the main branch. Commit messages from individual commits end up in a list of changes in the message body of the merge commit. Try to keep that in mind when writing your commit messages.
+All commits from your branch are squashed when merged with the main branch (see [commits](https://github.com/kirbydesign/designsystem/commits/master)). Commit messages from individual commits end up in a list of changes in the message body of the merge commit. Try to keep that in mind when writing your commit messages.
 
 Ideally, a good commit message will be structured into three parts:
 
-1. Subject
-2. Body
+1. Subject line
+2. Message body
 3. Closing line
 
 The most important part is the subject line. The message body should be used if elaboration is necessary. We rarely use a closing line, but if you want to add useful meta-data related to your commit &ndash; such as GitHub issue number and co-author names &ndash; this is where to put it.
@@ -420,7 +420,7 @@ If you cannot fit your message into a 50 character subject line, consider if you
 
 In addition we use [gitmoji](https://gitmoji.dev) when possible to prefix the subject line with an illustrative emoji. There are several [tools](https://gitmoji.dev/related-tools) available (including a [VSCode extension](https://github.com/vtrois/gitmoji-vscode) and a [CLI tool](https://github.com/carloscuesta/gitmoji-cli)). It's optional, but very helpful when skimming through the git log.
 
-Good words to use as the first of the subject line:
+Good verbs to use as the first word of your subject line:
 
 * Add
 * Create
@@ -443,7 +443,7 @@ Good words to use as the first of the subject line:
 
 🔴 Bad subject line examples:
 
-> ~~fix a bug.~~
+> ~~fixes a bug.~~
 
 > ~~more changes~~
 
@@ -453,8 +453,10 @@ Good words to use as the first of the subject line:
 
 ##### A good message body
 
-* Separate the message body from the subject line with a blank line.
-* You should use the message body to describe _what_ was done and _why_, but not how.
+We don't often use message bodies, but we encourage you to do so if you need to elaborate on your changes. Here is some pointers on how to write a good one:
+
+* Always separate the message body from the subject line with a blank line.
+* You should use the message body to describe _what_ was done and _why_, but not how (see for example [this commit from Bitcoin Core](https://github.com/bitcoin/bitcoin/commit/eb0b56b19017ab5c16c745e6da39c53126924ed6)).
 * Be aware that if you need to write a lot in the message body it may also be a sign of too many changes in one commit.
 * Wrap lines in the message body at 72 characters
 
