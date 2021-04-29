@@ -47,9 +47,8 @@ import {
   ListSectionHeaderDirective,
 } from './components/list/list.directive';
 import { GroupByPipe } from './components/list/pipes/group-by.pipe';
-import { FullscreenLoadingOverlayComponent } from './components/loading-overlay/fullscreen-loading-overlay/fullscreen-loading-overlay.component';
-import { LoadingOverlayService } from './components/loading-overlay/fullscreen-loading-overlay/loading-overlay.service';
 import { LoadingOverlayComponent } from './components/loading-overlay/loading-overlay.component';
+import { LoadingOverlayService } from './components/loading-overlay/loading-overlay.service';
 import { ActionSheetComponent } from './components/modal/action-sheet/action-sheet.component';
 import { AlertComponent } from './components/modal/alert/alert.component';
 import { ModalFooterComponent } from './components/modal/footer/modal-footer.component';
@@ -146,7 +145,6 @@ const exportedDeclarations = [
 const declarations = [
   ...exportedDeclarations,
   ListItemColorDirective,
-  FullscreenLoadingOverlayComponent,
   KeyHandlerDirective,
   FormFieldMessageComponent,
   AlertComponent,
@@ -190,7 +188,6 @@ const entryComponents = [
   ModalWrapperComponent,
   ModalCompactWrapperComponent,
   ActionSheetComponent,
-  FullscreenLoadingOverlayComponent,
   AlertComponent,
 ];
 
