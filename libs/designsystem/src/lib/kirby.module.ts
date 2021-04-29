@@ -1,4 +1,3 @@
-import { OverlayModule } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import { Inject, InjectionToken, ModuleWithProviders, NgModule, Optional } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -165,7 +164,7 @@ const exportedModules = [
 
 const exports = [...exportedModules, ...exportedDeclarations];
 
-const importedModules = [...exportedModules, OverlayModule];
+const importedModules = [...exportedModules];
 
 const providers = [
   ModalController,
