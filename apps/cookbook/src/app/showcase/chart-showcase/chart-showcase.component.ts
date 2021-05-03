@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ChartType } from 'chart.js';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
@@ -7,6 +8,17 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   styleUrls: ['./chart-showcase.component.scss'],
 })
 export class ChartShowcaseComponent {
+  chartType: ChartType = 'bar';
+  data = {
+    labels: ['l1', 'l2', 'l3', 'l4', 'l5', 'l6', 'l7'],
+    datasets: [
+      {
+        label: 'My First Dataset',
+        data: [65, 59, 80, 81, 56, 55, 40],
+      },
+    ],
+  };
+
   properties: ApiDescriptionProperty[] = [
     {
       name: 'height',
