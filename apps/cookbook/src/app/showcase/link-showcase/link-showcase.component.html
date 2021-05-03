@@ -1,2 +1,9 @@
 <h2>External Links</h2>
-<cookbook-link-example-external #external></cookbook-link-example-external>
+<cookbook-example-viewer [html]="external.template">
+  <cookbook-link-example-external #external></cookbook-link-example-external>
+</cookbook-example-viewer>
+
+<h2>Internal Links</h2>
+<cookbook-example-viewer [html]="internal.template">
+  <cookbook-link-example-internal #internal></cookbook-link-example-internal>
+</cookbook-example-viewer>

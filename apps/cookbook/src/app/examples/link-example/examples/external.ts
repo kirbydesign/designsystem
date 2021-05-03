@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 const config = {
   selector: 'cookbook-link-example-external',
-  template: `<a href="https://cookbook.kirby.design/home/changelog">Hello World</a>`,
+  template: `<a target="_blank" href="https://github.com/kirbydesign/designsystem">External</a>`,
 };
 
 @Component({
