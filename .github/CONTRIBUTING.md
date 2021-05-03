@@ -533,25 +533,31 @@ For more on good git commits, see (among _many_ other):
 
 ### The good self-review
 
-A lot of comments and requests for change during review of a pull request can sometimes feel demotivating. The good self-review can help save yourself and the reviewer from frustrations during peer review.
+A lot of comments and requests for change during review of a pull request can sometimes feel demotivating. The good self-review can save yourself and the reviewer from frustrations during peer review.
 
-The review process has a better chance going as smooth as possible if you conduct a self-review before opening the pull request. Removing gravel in the road helps keeping code review focused and unnecessary discussions can be avoided.
+The code review process has a better chance of going smooth if you conduct a self-review before opening the pull request and marking it _Ready for review_. Removing gravel in the road helps keeping code review focused and unnecessary discussions can be avoided.
 
-* Avoid doing unrelated changes in files that are not directly part of your pull-request
-  + For example, don't submit changes like formatting or reordering imports if they're the _only_ changes made in those files.
-* Format files using Prettier
-  + If you come across a file that for some reason has not already been properly formatted, you'll probably get a lot of changes when you do the formatting. Try to put the formatting changes in a separate commit if possible e.g., by creating a _formatting commit_ before your other changes. It will be easier for the reviewer to see your actual changes.
-* Use the linting rules
-  + Remove unused imports etc.
-  + Sort imports
-* Look for `console.log()` statements and similar temporary things you have used during development that should not end up in the codebase. The linter should catch most of it, though.
-* Remove code that has been commented out
+#### Unrelated changes
 
-From the perspective of a reviewer ask yourself:
+Avoid doing unrelated changes in files that are not directly part of your pull-request. For example, don't submit changes like formatting or reordering imports if they're the _only_ changes made in those files.
 
-* Is it obvious what the changes made in the pull request are?
-* Does your changes solve the issue? Read the issue description and the tech refinement comment(s).
-* Do the [pull request](#pull-request) description and the issue description contain the appropriate information for the reviewer?
+#### Formatting and linting
+
+Use Prettier to format the files you're changing. If you are editing a file that for some reason has not already been properly formatted, you'll probably see a lot of changes when you diff the file after you format it. Try to put the formatting changes in a separate commit if possible e.g., by creating a _formatting commit_ before committing your other changes. It will be easier for the reviewer to see your actual changes if they have the option to ignore the formatting changes.
+
+Use the linting rules to sort imports and remove unused variables, imports etc.
+
+#### Temporary changes
+
+Look for temporary changes you have used during development, like `console.log()` statements, TODO comments and code that has been commented out. They do not belong in the codebase and should be removed. TODOs should either be implemented right away or you should create a new issue for solving it later.
+
+#### Conclude by asking yourself
+
+From the perspective of a reviewer, ask yourself:
+
+* Is it obvious what the changes made in the pull request are and what the result of merging the pull request will be?
+* Is the issue solved by the changes? Read the issue description and the tech refinement comment(s) again to confirm you have solved the issue.
+* Does the [pull request](#pull-request) description contain the appropriate information necessary to perform a code review?
 
 ### Pull-request
 
