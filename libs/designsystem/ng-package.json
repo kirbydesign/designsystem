@@ -13,7 +13,6 @@
     }
   },
   "allowedNonPeerDependencies": [
-    "@angular/cdk",
     "@ionic/angular",
     "highcharts",
     "moment",
