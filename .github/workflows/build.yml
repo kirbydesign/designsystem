@@ -57,7 +57,7 @@ jobs:
         run: npm ci
       - name: Install NPM dependencies
         if: steps.cache.outputs.cache-hit == 'true'
-        run: npm install 
+        run: npm run postinstall 
       - name: Run linting
         run: npm run lint
       - name: Run tests
@@ -91,7 +91,7 @@ jobs:
         run: npm ci
       - name: Install NPM dependencies
         if: steps.cache.outputs.cache-hit == 'true'
-        run: npm install 
+        run: npm run postinstall 
       - name: Build Kirby lib
         run: npm run dist:designsystem
 
@@ -180,7 +180,7 @@ jobs:
         run: npm ci
       - name: Install NPM dependencies
         if: steps.cache.outputs.cache-hit == 'true'
-        run: npm install 
+        run: npm run postinstall 
       - name: Install Kubernetes CLI
         run: |
           sudo apt-get update
