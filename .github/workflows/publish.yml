@@ -34,7 +34,7 @@ jobs:
       - name: Clean Install NPM Dependencies
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
-      - name: Install NPM dependencies
+      - name: Run Postinstall Script
         if: steps.cache.outputs.cache-hit == 'true'
         run: npm run postinstall
       - name: Configure git
