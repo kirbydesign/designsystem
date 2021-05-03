@@ -67,10 +67,14 @@ describe('IconComponent', () => {
       spyOn(console, 'warn');
       const noExistingIconName = 'no-existing-icon-name';
       const fixture = createTestComponent(`<kirby-icon name="${noExistingIconName}"></kirby-icon>`);
+
       fixture.detectChanges();
 
       expect(console.warn).toHaveBeenCalledWith(
-        `Icon with name "${noExistingIconName}" was not found.`
+        `Built-in icon with name "${noExistingIconName}" was not found. 
+        Do you have a typo in 'name' or
+        did you mean to use a custom icon? If so, please use: 
+        <kirby-icon customName="${noExistingIconName}"></kirby-icon>`
       );
     });
 
@@ -94,7 +98,9 @@ describe('IconComponent', () => {
       fixture.detectChanges();
 
       expect(console.warn).toHaveBeenCalledWith(
-        `Icon with name "${noExistingIconName}" was not found.`
+        `Custom icon with name "${noExistingIconName}" was not found. 
+        Do you have a typo in 'customName' or
+        forgot to configure the custom icon through the 'IconRegistryService'?`
       );
     });
 
