@@ -1,9 +1,10 @@
-<h2>External Links</h2>
-<cookbook-example-viewer [html]="external.template">
-  <cookbook-link-example-external #external></cookbook-link-example-external>
+<h2>Links</h2>
+<cookbook-example-viewer [html]="internal.template">
+  <cookbook-link-example-default #internal></cookbook-link-example-default>
 </cookbook-example-viewer>
 
-<h2>Internal Links</h2>
-<cookbook-example-viewer [html]="internal.template">
-  <cookbook-link-example-internal #internal></cookbook-link-example-internal>
+<h2>New tab</h2>
+With the <code>target="_blank"</code> ...<br /><br />
+<cookbook-example-viewer [html]="newTab.template">
+  <cookbook-link-example-new-tab #newTab></cookbook-link-example-new-tab>
 </cookbook-example-viewer>

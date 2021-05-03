@@ -4,10 +4,10 @@ import { RouterModule } from '@angular/router';
 
 import { KirbyModule } from '@kirbydesign/designsystem';
 
-import { LinkExampleExternalComponent } from './examples/external';
-import { LinkExampleInternalComponent } from './examples/internal';
+import { LinkExampleDefaultComponent } from './examples/default';
+import { LinkExampleNewTabComponent } from './examples/new-tab';
 
-const COMPONENT_DECLARATIONS = [LinkExampleExternalComponent, LinkExampleInternalComponent];
+const COMPONENT_DECLARATIONS = [LinkExampleNewTabComponent, LinkExampleDefaultComponent];
 
 @NgModule({
   imports: [CommonModule, KirbyModule, RouterModule],

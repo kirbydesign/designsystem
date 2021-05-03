@@ -1,0 +1,6 @@
+@import './libs/designsystem/src/lib/scss/utils';
+
+:host {
+  display: block;
+  margin-bottom: size('s');
+}
