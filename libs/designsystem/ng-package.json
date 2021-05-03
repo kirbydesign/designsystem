@@ -4,7 +4,7 @@
   "lib": {
     "entryFile": "src/index.ts",
     "umdModuleIds": {
-      "moment": "moment",
+      "date-fns": "date-fns",
       "highcharts": "highcharts",
       "highcharts/modules/annotations": "highcharts",
       "highcharts/highstock": "highcharts/highstock",
@@ -16,7 +16,7 @@
     "@angular/cdk",
     "@ionic/angular",
     "highcharts",
-    "moment",
+    "date-fns",
     "@fontsource/roboto",
     "inputmask"
   ]
