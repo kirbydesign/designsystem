@@ -44,6 +44,10 @@ export class ModalHelper {
       customCssClasses = Array.isArray(config.cssClass) ? config.cssClass : [config.cssClass];
     }
 
+    if (config.interactWithBackground) {
+      this.windowRef.document.body.classList.add(allow_scroll_class);
+    }
+
     const ionModal = await this.ionicModalController.create({
       component: config.flavor === 'compact' ? ModalCompactWrapperComponent : ModalWrapperComponent,
       cssClass: [
@@ -66,8 +70,6 @@ export class ModalHelper {
     });
 
     if (config.interactWithBackground) {
-      this.windowRef.document.body.classList.add(allow_scroll_class);
-
       ionModal.onDidDismiss().then(() => {
         this.windowRef.document.body.classList.remove(allow_scroll_class);
       });
