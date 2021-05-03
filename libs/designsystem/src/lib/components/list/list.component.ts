@@ -130,7 +130,6 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   hasItemSpacing: boolean;
 
   @Input() useVirtualScroll?: boolean = false;
-
   @Input() virtualScrollViewportHeight?: number = 500;
 
   /**

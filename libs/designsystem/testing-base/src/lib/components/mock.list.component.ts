@@ -29,7 +29,7 @@ export class MockListComponent {
   @Input() markSelectedRow: boolean;
   @Input() shape;
   @Input() hasItemSpacing: boolean;
-  @Input() useVirtualScrolling: boolean;
+  @Input() useVirtualScroll: boolean;
   @Input() virtualScrollViewportHeight: number;
   @Input() isLoadOnDemandEnabled: boolean;
   @Input() swipeActions: ListSwipeAction[];

@@ -23,7 +23,6 @@ export class ListVirtualScrollExampleComponent extends BaseListComponent {
 
   constructor() {
     super();
-    //this.items.push(...this.generateItems());
   }
 
   // onLoadDemand(loadOnDemandEvent: LoadOnDemandEvent): void {

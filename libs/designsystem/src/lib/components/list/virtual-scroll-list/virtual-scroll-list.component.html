@@ -59,13 +59,13 @@
 
 <!-- Swipe Action templates -->
 <ng-template #slidingItemsTemplate let-datasource>
-  <div *uiScroll="let item of datasource">
+  <div *uiScroll="let entry of datasource">
     <div class="item-wrapper">
       <kirby-list-item
-        [item]="item.item"
+        [item]="entry.item"
         class="list-item"
         [orderClass]="
-          listComponent.getItemOrderClass(item.itemMeta.itemIndex, item.itemMeta.totalCount)
+          listComponent.getItemOrderClass(entry.itemMeta.itemIndex, entry.itemMeta.totalCount)
         "
       >
       </kirby-list-item>
