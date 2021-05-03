@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
+import { UiScrollModule } from 'ngx-ui-scroll';
 
 import { IconModule } from '../icon/icon.module';
 import { SpinnerModule } from '../spinner/spinner.module';
@@ -45,7 +46,7 @@ const declarations = [
 
 @NgModule({
   declarations: declarations,
-  imports: [CommonModule, IconModule, IonicModule, SpinnerModule],
+  imports: [CommonModule, IconModule, IonicModule, SpinnerModule, UiScrollModule],
   exports: exportedDeclarations,
   providers: [],
 })

@@ -6,7 +6,7 @@ import { ListComponent } from '../list.component';
 @Component({
   selector: 'kirby-virtual-scroll-list',
   templateUrl: './virtual-scroll-list.component.html',
-  styleUrls: ['../list.component.scss'],
+  styleUrls: ['../list.component.scss', './virtual-scroll-list.component.scss'],
 })
 export class VirtualScrollListComponent {
   @ViewChild(ListItemComponent) listItem: ListItemComponent;

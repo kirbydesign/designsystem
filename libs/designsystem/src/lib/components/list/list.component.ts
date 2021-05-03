@@ -63,8 +63,8 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
         const end = Math.min(index + count - 1, this.items.length - 1);
         if (start <= end) {
           for (let i = start; i <= end; i++) {
-            const item = { itemIndex: i, totalCount: this.items.length, ...this.items[i] };
-            data.push(item);
+            const itemMeta = { itemIndex: i, totalCount: this.items.length };
+            data.push({ item: this.items[i], itemMeta });
           }
         }
         console.log('DATA', data);
@@ -75,7 +75,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     settings: {
       minIndex: 0,
       startIndex: 0,
-      bufferSize: 10,
+      bufferSize: 20,
     },
   };
 
@@ -129,7 +129,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   @Input()
   hasItemSpacing: boolean;
 
-  @Input() useVirtualScrolling?: boolean = false;
+  @Input() useVirtualScroll?: boolean = false;
 
   @Input() virtualScrollViewportHeight?: number = 500;
 

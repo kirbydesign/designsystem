@@ -4,13 +4,11 @@
   kirbyInfiniteScroll
   (scrollEnd)="listComponent.onLoadOnDemand()"
   [disabled]="!listComponent.isLoadOnDemandEnabled"
-  class="list"
+  class="list viewport"
   [class.has-header]="listComponent.headerTemplate"
   [class.has-footer]="listComponent.footerTemplate"
   [class.has-divider]="listComponent.showDivider"
-  [style]="{
-    height: listComponent.useVirtualScrolling ? listComponent.virtualScrollViewportHeight : null
-  }"
+  [style.height]="listComponent.virtualScrollViewportHeight + 'px'"
 >
   <ion-list-header *ngIf="listComponent.headerTemplate">
     <ng-container *ngTemplateOutlet="listComponent.headerTemplate"></ng-container>
@@ -19,7 +17,7 @@
   <ng-container
     *ngTemplateOutlet="
       listComponent.isSectionsEnabled ? groupedListTemplate : slidingItemsTemplate;
-      context: { $implicit: listComponent.items }
+      context: { $implicit: listComponent.datasource }
     "
   ></ng-container>
 
@@ -60,13 +58,15 @@
 </ng-template>
 
 <!-- Swipe Action templates -->
-<ng-template #slidingItemsTemplate let-items>
+<ng-template #slidingItemsTemplate let-datasource>
   <div *uiScroll="let item of datasource">
     <div class="item-wrapper">
       <kirby-list-item
-        [item]="item"
+        [item]="item.item"
         class="list-item"
-        [orderClass]="listComponent.getItemOrderClass(item.itemIndex, item.totalCount)"
+        [orderClass]="
+          listComponent.getItemOrderClass(item.itemMeta.itemIndex, item.itemMeta.totalCount)
+        "
       >
       </kirby-list-item>
     </div>
