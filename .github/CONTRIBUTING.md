@@ -533,9 +533,9 @@ For more on good git commits, see (among _many_ other):
 
 ### The good self-review
 
-The review process has a better chance going as smooth as possible if you conduct a self-review before opening the pull request. Removing as much gravel in the road as possible helps keeping the peer review of your pull request focused and unnecessary discussions can be avoided.
+A lot of comments and requests for change during review of a pull request can sometimes feel demotivating. The good self-review can help save yourself and the reviewer from frustrations during peer review.
 
-A lot of comments and requests for change during review of a pull request can feel demotivating. The good self-review can help save yourself and the reviewer from frustrations during peer review.
+The review process has a better chance going as smooth as possible if you conduct a self-review before opening the pull request. Removing gravel in the road helps keeping code review focused and unnecessary discussions can be avoided.
 
 * Don't change files that is not related to your pull-request
   + for example don't reorder imports in files that is not directly related to the issue at hand
