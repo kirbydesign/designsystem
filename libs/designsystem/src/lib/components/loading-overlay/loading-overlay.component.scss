@@ -16,7 +16,6 @@
     width: 100%;
     position: absolute;
     z-index: z('loading-overlay');
-    opacity: 0.8;
     display: flex;
     background: transparent;
     justify-content: center;
@@ -24,7 +23,10 @@
     justify-items: center;
 
     &.backdrop {
-      background-color: get-color('background-color');
+      background-color: rgba(
+        get-color('background-color', $getValueOnly: true),
+        $loading-overlay-backdrop-opacity
+      );
     }
 
     .spinner {
