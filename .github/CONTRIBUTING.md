@@ -540,7 +540,64 @@ For more on good git commits, see (among _many_ other):
 
 ### Pull-request
 
+* A good pull-request makes the life easier for the reviewer, causing a quicker review. Noice! 
+* Be responsible for getting your pull-requests reviewed - reach out! 
+  - Where should one reach out?
+* Apply same rules as for issues
 * How is a pull-request that is easily reviewed constructed?
+* Pull requests also works as a sort of documentation
+
+* Throw in before and after images if the changes are visual 
+
+### The good issue solves one issue
+  * Has a related issue - do not submit pull-requests unless it's related to an issue! Please oh god oh please!
+  * Try to keep the scope of a pull-request to one issue - it occassionally happens that a pull-request can solve more than one issue. 
+    - this is often because the issues are somewhat related, and it happens naturally - it should not be a goal to solve several issues with one PR. 
+      - Especially not if the issues are not related at all! 
+
+### The good pull-request uses the tempate
+  * uses our template 
+    - Shortly go through purpose of each section - symphatize
+    - Remember to fill out the closes part without changing wording - causes issue to be closed, once this is merged! No more remembering to close! 
+      - If it closes more than one, also mention these! See: https://github.com/kirbydesign/designsystem/pull/1493
+
+### The good pull-request has a title worthy of the changelog
+* Writes a good title for their pull-request 
+    - Mention that we're unfortunately not able to template it 
+    - Mention the PR title will be part of the changelog, therefore... Smile for the camera :)
+      - Throw in link to changelog, and perhaps a screenshot 
+
+### The good pull-request has a logical commit history
+  * While also being part of writing a good commit - it would be nice if the commit history and each individual commit makes logical sence.
+    - If you have trouble maintaining a clean commit history, try pre-emptive commit comments! https://arialdomartini.wordpress.com/2012/09/03/pre-emptive-commit-comments/
+      - This gives each commit a very specific goal! 
+    <!--* Don't be afraid to mention other optimizations you think might be possible, but outside the scope of your PR in the "Other Information"-part. 
+    - Eventually create a couple of issues, and mention these - make sure to close them again if the changes won't be made... --->
+
+### The good pull-request only alters files related to the changes 
+  * Don't go boyscout in files that are not related to the changes in the PR. 
+    - It will give a weird git history
+
+### The good pull-request knows what it wants
+  * Mention which kind of feedback you want - full on review or just some initial help 
+    - We use pull-requests to signal that we want a full-on review, so abstain from using these, if you only want initia help with like a MVP implementation. 
+  * @mention people you wan't to take into the discussion - also mention why 
+    - "@jesseplusplus for clarificaiton on this logic "
+
+### The good pull-requests only uses review comments for actual review comments
+  * if you feel the need to add review comments to explain your code, consider if it should be inlined in the code instead 
+    - If the reviewer will have a hard time understanding what is going on - future readers of your code will also have a hard time reading it. 
+      - Try to make it so, the code can be understood without having to lookup the pull-request
+
+<!-- ### The good pull-request documents
+  * Remember that anyone in the company could be reading this Pull Request, so the content and tone may inform people other than those taking part, now or later. 
+  * The hard part of programming is learning to play well with others; to write clean, maintainable, efficient code that also solves the problem, and to comment or otherwise document it well enough that if you walked under a bus tomorrow someone else could pick up the project and carry on with it.
+  * Can help clarify a decision process with related issues
+--> 
+
+### The good pull-request is closed when there is no need for it
+  * Is closed when there is no need for it, for example in the case where the changes won't be implemented.
+  
 
 ### Test
 
