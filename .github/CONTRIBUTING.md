@@ -537,21 +537,21 @@ A lot of comments and requests for change during review of a pull request can so
 
 The review process has a better chance going as smooth as possible if you conduct a self-review before opening the pull request. Removing gravel in the road helps keeping code review focused and unnecessary discussions can be avoided.
 
-* Avoid doing changes in files that are not directly related to your pull-request
+* Avoid doing unrelated changes in files that are not directly part of your pull-request
   + For example, don't submit changes like formatting or reordering imports if they're the _only_ changes made in those files.
 * Format files using Prettier
   + If you come across a file that for some reason has not already been properly formatted, you'll probably get a lot of changes when you do the formatting. Try to put the formatting changes in a separate commit if possible e.g., by creating a _formatting commit_ before your other changes. It will be easier for the reviewer to see your actual changes.
 * Use the linting rules
   + Remove unused imports etc.
   + Sort imports
+* Look for `console.log()` statements and similar temporary things you have used during development that should not end up in the codebase. The linter should catch most of it, though.
+* Remove code that has been commented out
 
 From the perspective of a reviewer ask yourself:
 
 * Is it obvious what the changes made in the pull request are?
-* Do the descriptions of the pull request and the issue contain the appropriate information for the reviewer? [refer to The Good Pull Request section]
-* Read the issue description and the tech refinement comment. Does your changes solve the issue? [refer to The Good Pull Request section]
-* Look for `console.log()` statements and similar temporary things you have used during development that should not end up in the codebase. The linter should catch most of it, though.
-* Remove code that has been commented out
+* Does your changes solve the issue? Read the issue description and the tech refinement comment(s).
+* Do the [pull request](#pull-request) description and the issue description contain the appropriate information for the reviewer?
 
 ### Pull-request
 
