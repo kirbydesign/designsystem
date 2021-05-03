@@ -1,3 +1,7 @@
+import { DesignTokenHelper } from '../../helpers/design-token-helper';
+
+const { getColor } = DesignTokenHelper;
+
 describe('Typography', () => {
   let element: HTMLElement;
 
@@ -237,5 +241,44 @@ describe('Typography', () => {
         });
       });
     }
+  });
+
+  describe(`anchor tag`, () => {
+    describe(`by default`, () => {
+      beforeEach(() => {
+        const fixture = `<a id="fixture">Text</a>`;
+        document.body.insertAdjacentHTML('afterbegin', fixture);
+        document.body.style.color = getColor('black').value;
+        element = document.body.querySelector('#fixture');
+      });
+
+      it(`should inherit its color`, () => {
+        expect(element).toHaveComputedStyle({ color: getColor('black') });
+      });
+
+      it(`should be styled with an underline`, () => {
+        expect(element).toHaveComputedStyle({ 'text-decoration-line': 'underline' });
+      });
+
+      it(`should be styled with a pointer as the cursor`, () => {
+        expect(element).toHaveComputedStyle({ cursor: 'pointer' });
+      });
+    });
+
+    describe(`with target-attribute set to '_blank'`, () => {
+      beforeEach(() => {
+        const fixture = `<a target="_blank" id="fixture">Text</a>`;
+        document.body.insertAdjacentHTML('afterbegin', fixture);
+        element = document.body.querySelector('#fixture');
+      });
+
+      it(`should have an "open" icon`, () => {
+        const baseURI = window.document.baseURI;
+
+        expect(element).toHaveComputedStyle({
+          'background-image': `url("${baseURI}assets/kirby/icons/svg/link.svg")`,
+        });
+      });
+    });
   });
 });
