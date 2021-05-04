@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
+import { KirbyAnimation } from '../../../animation/kirby-animation';
+import { WindowRef } from '../../../types/window-ref';
+import { ModalCompactWrapperComponent } from '../modal-wrapper/compact/modal-compact-wrapper.component';
 import { ModalConfig, ModalFlavor, ModalSize } from '../modal-wrapper/config/modal-config';
 import { ModalWrapperComponent } from '../modal-wrapper/modal-wrapper.component';
-import { ModalCompactWrapperComponent } from '../modal-wrapper/compact/modal-compact-wrapper.component';
-import { Overlay } from './modal.interfaces';
-import { KirbyAnimation } from '../../../animation/kirby-animation';
+
 import { ModalAnimationBuilderService } from './modal-animation-builder.service';
+import { Overlay } from './modal.interfaces';
 
 @Injectable()
 export class ModalHelper {
@@ -16,7 +18,8 @@ export class ModalHelper {
 
   constructor(
     private ionicModalController: ModalController,
-    private modalAnimationBuilder: ModalAnimationBuilderService
+    private modalAnimationBuilder: ModalAnimationBuilderService,
+    private windowRef: WindowRef
   ) {}
 
   public async showModalWindow(config: ModalConfig): Promise<Overlay> {
@@ -34,6 +37,12 @@ export class ModalHelper {
 
     const defaultModalSize: ModalSize = config.flavor === 'modal' ? 'medium' : null;
     const modalSize = config.size || defaultModalSize;
+    const allow_scroll_class = 'allow-background-scroll';
+
+    let customCssClasses = [];
+    if (config.cssClass) {
+      customCssClasses = Array.isArray(config.cssClass) ? config.cssClass : [config.cssClass];
+    }
 
     const ionModal = await this.ionicModalController.create({
       component: config.flavor === 'compact' ? ModalCompactWrapperComponent : ModalWrapperComponent,
@@ -42,9 +51,12 @@ export class ModalHelper {
         'kirby-modal',
         config.flavor === 'drawer' ? 'kirby-drawer' : null,
         config.flavor === 'compact' ? 'kirby-modal-compact' : null,
-        modalSize,
+        'kirby-modal-' + modalSize,
+        config.interactWithBackground ? 'interact-with-background' : null,
+        ...customCssClasses,
       ],
-      backdropDismiss: config.flavor === 'compact' ? false : true,
+      backdropDismiss: config.flavor === 'compact' || config.interactWithBackground ? false : true,
+      showBackdrop: !config.interactWithBackground,
       componentProps: { config: config },
       swipeToClose: config.flavor != 'compact',
       presentingElement: modalPresentingElement,
@@ -52,6 +64,14 @@ export class ModalHelper {
       enterAnimation,
       leaveAnimation,
     });
+
+    if (config.interactWithBackground) {
+      this.windowRef.document.body.classList.add(allow_scroll_class);
+
+      ionModal.onDidDismiss().then(() => {
+        this.windowRef.document.body.classList.remove(allow_scroll_class);
+      });
+    }
 
     await ionModal.present();
 

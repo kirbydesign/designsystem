@@ -8,8 +8,6 @@ import { WindowRef } from '../../../types';
 import { ButtonComponent } from '../../button/button.component';
 import { IconComponent } from '../../icon';
 import { PageProgressComponent } from '../../page/page.component';
-import { ProgressCircleComponent } from '../../progress-circle/progress-circle.component';
-import { ResizeObserverService } from '../../shared';
 import { ModalFooterComponent } from '../footer/modal-footer.component';
 
 import { ModalConfig } from './config/modal-config';
@@ -42,7 +40,6 @@ export class ModalWrapperTestBuilder {
         IconComponent,
         ButtonComponent,
         PageProgressComponent,
-        ProgressCircleComponent,
         ModalFooterComponent,
         IonHeader,
         IonToolbar,
@@ -60,6 +57,11 @@ export class ModalWrapperTestBuilder {
 
   flavor(flavor: ModalConfig['flavor']) {
     this.config.flavor = flavor;
+    return this;
+  }
+
+  interactWithBackground(interactWithBackground: boolean = true) {
+    this.config.interactWithBackground = interactWithBackground;
     return this;
   }
 
@@ -103,13 +105,15 @@ export class ModalWrapperTestBuilder {
     spyOn(spectator.component['ionContent'], 'getScrollElement').and.returnValue(
       Promise.resolve(document.createElement('DIV'))
     );
-    const resizeObserverService = spectator.inject(ResizeObserverService);
-    spyOn(resizeObserverService, 'observe');
-    spyOn(resizeObserverService, 'unobserve');
+
+    // TODO: Figure out how to mock ResizeObserverService methods - at this point it's too late as ModalWrapper calls .observe in it's constructor
+    // const resizeObserverService = spectator.inject(ResizeObserverService);
+    // spyOn(resizeObserverService, 'observe');
+    // spyOn(resizeObserverService, 'unobserve');
 
     const ionModalWrapper = document.createElement('div');
     const ionModal = document.createElement('div');
-    ionModal['dismiss'] = jasmine.createSpy('dissmissSpy');
+    ionModal['dismiss'] = jasmine.createSpy('dissmissSpy').and.resolveTo(true);
     spyOn(spectator.element, 'closest')
       .withArgs('.modal-wrapper')
       .and.returnValue(ionModalWrapper)
@@ -157,23 +161,13 @@ export class InputEmbeddedComponent {}
 
 @Component({
   template: `
-    <kirby-page-progress>
-      <kirby-progress-circle themeColor="warning" value="50" size="sm" class="kirby-text-xsmall">
-        2/4
-      </kirby-progress-circle>
-    </kirby-page-progress>
-    <div>My Title</div>
+    <kirby-page-progress> </kirby-page-progress>
   `,
 })
 export class StaticPageProgressEmbeddedComponent {}
 @Component({
   template: `
-    <kirby-page-progress *ngIf="showPageProgress">
-      <kirby-progress-circle themeColor="warning" value="50" size="sm" class="kirby-text-xsmall">
-        2/4
-      </kirby-progress-circle>
-    </kirby-page-progress>
-    <div>My title</div>
+    <kirby-page-progress *ngIf="showPageProgress"> </kirby-page-progress>
   `,
 })
 export class DynamicPageProgressEmbeddedComponent {

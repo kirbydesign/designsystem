@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-
-import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
+import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
   selector: 'cookbook-accordion-showcase',
@@ -8,18 +7,18 @@ import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-prop
   styleUrls: ['./accordion-showcase.component.scss'],
 })
 export class AccordionShowcaseComponent {
-  properties: ShowcaseProperty[] = [
+  properties: ApiDescriptionProperty[] = [
     {
       name: 'title',
       description: 'The title that you can click to show the content',
       defaultValue: 'null',
-      inputValues: ['string'],
+      type: ['string'],
     },
     {
       name: 'isExpanded',
       description: 'Should the content be initially shown',
       defaultValue: 'false',
-      inputValues: ['boolean'],
+      type: ['boolean'],
     },
   ];
 }

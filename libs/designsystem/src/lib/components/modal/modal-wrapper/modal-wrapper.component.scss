@@ -34,7 +34,7 @@
   }
 }
 
-:host-context(ion-modal:not(.full-height)) {
+:host-context(ion-modal:not(.kirby-modal-full-height)) {
   @include media('>=medium') {
     @include contain-content();
   }
@@ -57,13 +57,33 @@
       padding-top: 0;
     }
   }
-  padding-top: size('s');
+}
+
+$toolbar-padding: size('s');
+
+@mixin phablet-toolbar-padding() {
+  $toolbar-top-spacing-total: size('m');
+  $toolbar-padding-top: $toolbar-top-spacing-total - $toolbar-padding;
+  @include media('>=medium') {
+    padding-top: $toolbar-padding-top;
+  }
 }
 
 ion-header ion-toolbar {
+  --padding-start: #{$toolbar-padding};
+  --padding-end: #{$toolbar-padding};
+  --padding-bottom: #{$toolbar-padding};
+  --padding-top: #{$toolbar-padding};
+
   --border-width: 0;
   --background: transparent;
-  --color: #{get-color('black')};
+  --color: var(--kirby-modal-color, #{get-color('black')});
+
+  button {
+    color: var(--color);
+  }
+
+  @include phablet-toolbar-padding();
 }
 
 // Ensure iOS safe-area padding-top on default/modal flavor
@@ -71,6 +91,8 @@ ion-header ion-toolbar {
 :host-context(ion-modal.modal-card:not(.kirby-drawer)) {
   ion-header ion-toolbar:first-of-type {
     padding-top: var(--kirby-safe-area-top, 0px);
+
+    @include phablet-toolbar-padding();
   }
 }
 
@@ -88,6 +110,7 @@ ion-title {
 
 ion-content {
   --background: transparent;
+  --color: var(--kirby-modal-color, #{get-color('black')});
   display: flex;
   flex-direction: column;
 

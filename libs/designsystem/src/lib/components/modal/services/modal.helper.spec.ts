@@ -2,12 +2,14 @@ import { Component, ElementRef, OnInit, Optional, ViewChild } from '@angular/cor
 import { RouterTestingModule } from '@angular/router/testing';
 import { ModalController as IonicModalController } from '@ionic/angular';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
-import { MockComponent } from 'ng-mocks';
+import { MockComponents } from 'ng-mocks';
 
 import { DesignTokenHelper } from '../../../helpers/design-token-helper';
 import { ScreenSize, TestHelper } from '../../../testing/test-helper';
 import { WindowRef } from '../../../types/window-ref';
+import { ButtonComponent } from '../../button/button.component';
 import { IconComponent } from '../../icon';
+import { PageProgressComponent, PageTitleComponent } from '../../page/page.component';
 import { ModalFooterComponent } from '../footer/modal-footer.component';
 import { ModalCompactWrapperComponent } from '../modal-wrapper/compact/modal-compact-wrapper.component';
 import { ModalConfig, ModalFlavor, ModalSize } from '../modal-wrapper/config/modal-config';
@@ -53,6 +55,16 @@ class ContentOverflowsWithFooterEmbeddedComponent {
 })
 class ContentWithNoOverflowEmbeddedComponent {}
 
+@Component({
+  template: `
+    <kirby-page-progress>
+      <div style="height: 50px; width: 50px; border: 1px solid red;"></div>
+    </kirby-page-progress>
+    <kirby-page-title>Modal With Page Progress</kirby-page-title>
+  `,
+})
+class PageProgressEmbeddedComponent {}
+
 describe('ModalHelper', () => {
   let spectator: SpectatorService<ModalHelper>;
   let modalHelper: ModalHelper;
@@ -83,10 +95,12 @@ describe('ModalHelper', () => {
       },
     ],
     declarations: [
+      ButtonComponent,
       ModalFooterComponent,
       ModalWrapperComponent,
       ModalCompactWrapperComponent,
-      MockComponent(IconComponent),
+      PageTitleComponent,
+      MockComponents(IconComponent, PageProgressComponent),
     ],
     entryComponents: [
       InputEmbeddedComponent,
@@ -134,8 +148,13 @@ describe('ModalHelper', () => {
     await openOverlay({ flavor: 'modal', title, component, size });
   };
 
-  const openDrawer = async (title: string = 'Drawer', component?: any, size?: ModalSize) => {
-    await openOverlay({ flavor: 'drawer', title, component, size });
+  const openDrawer = async (
+    title: string = 'Drawer',
+    component?: any,
+    size?: ModalSize,
+    interactWithBackground?: boolean
+  ) => {
+    await openOverlay({ flavor: 'drawer', title, component, size, interactWithBackground });
   };
 
   const expectShadowStyle = () => {
@@ -171,6 +190,8 @@ describe('ModalHelper', () => {
 
   describe('showModalWindow', () => {
     const screenSizes: ScreenSize[] = ['phablet-landscape', 'tablet', 'desktop'];
+    const allow_scroll_class = 'allow-background-scroll';
+
     screenSizes.forEach((screenSize) => {
       describe(`on ${screenSize}`, () => {
         beforeAll(async () => {
@@ -219,6 +240,39 @@ describe('ModalHelper', () => {
           });
         });
 
+        describe(`When drawer can interact with background`, () => {
+          beforeEach(async () => {
+            await openDrawer('Drawer with interact with background', null, null, true);
+          });
+
+          it(`body should be scrollable`, async () => {
+            expect(window.document.body.classList).toContain(allow_scroll_class);
+            expect(window.document.body).toHaveComputedStyle({
+              overflow: 'visible',
+            });
+            await overlay.dismiss();
+          });
+
+          it(`Drawer close should remove '${allow_scroll_class}'`, async () => {
+            await overlay.dismiss();
+            expect(window.document.body.classList).not.toContain(allow_scroll_class);
+          });
+        });
+
+        describe(`When drawer can not interact with background`, () => {
+          beforeEach(async () => {
+            await openDrawer('Drawer with no interact with background', null, null, false);
+          });
+
+          afterEach(async () => {
+            await overlay.dismiss();
+          });
+
+          it(`body should not be scrollable`, () => {
+            expect(window.document.body.classList).not.toContain(allow_scroll_class);
+          });
+        });
+
         describe('sizing', () => {
           beforeEach(() => {
             TestHelper.scrollMainWindowToTop();
@@ -229,9 +283,9 @@ describe('ModalHelper', () => {
           });
 
           const expectSize = (size: ModalSize | undefined) => {
-            expect(ionModal.classList.contains('small')).toBe(size === 'small');
-            expect(ionModal.classList.contains('medium')).toBe(size === 'medium');
-            expect(ionModal.classList.contains('large')).toBe(size === 'large');
+            expect(ionModal.classList.contains('kirby-modal-small')).toBe(size === 'small');
+            expect(ionModal.classList.contains('kirby-modal-medium')).toBe(size === 'medium');
+            expect(ionModal.classList.contains('kirby-modal-large')).toBe(size === 'large');
           };
 
           it('modal should have min-height', async () => {
@@ -452,6 +506,54 @@ describe('ModalHelper', () => {
                   });
                 });
               });
+            });
+          });
+        });
+
+        describe('title', () => {
+          let ionToolbarElement: HTMLIonToolbarElement;
+          let pageTitleElement: HTMLDivElement;
+          let pageTitleVerticalCenter: number;
+
+          beforeEach(async () => {
+            await openModal(null, PageProgressEmbeddedComponent);
+            ionToolbarElement = ionModalWrapper.querySelector('ion-toolbar');
+            pageTitleElement = ionToolbarElement.querySelector('kirby-page-title');
+            pageTitleVerticalCenter = getElementVerticalCenter(pageTitleElement);
+          });
+
+          afterEach(async () => {
+            await overlay.dismiss();
+          });
+
+          it('should align vertically with close button', () => {
+            const closeButtonElement = ionToolbarElement.querySelector('[kirby-button]');
+            const closeButtonVerticalCenter = getElementVerticalCenter(closeButtonElement);
+
+            expect(closeButtonVerticalCenter).toEqual(pageTitleVerticalCenter);
+          });
+
+          it('should align vertically with page progress', () => {
+            const pageProgressElement = ionToolbarElement.querySelector('kirby-page-progress');
+            const pageProgressVerticalCenter = getElementVerticalCenter(pageProgressElement);
+
+            expect(pageTitleVerticalCenter).toEqual(pageProgressVerticalCenter);
+          });
+
+          it('should have correct padding', () => {
+            const toolbarContainer = ionToolbarElement.shadowRoot.querySelector(
+              '.toolbar-container'
+            );
+            const expectedPadding = size('s');
+            const expectedTopSpacingTotal = size('m');
+            const expectedAdditionalTopPadding =
+              parseInt(expectedTopSpacingTotal) - parseInt(expectedPadding);
+
+            expect(toolbarContainer).toHaveComputedStyle({
+              padding: expectedPadding,
+            });
+            expect(ionToolbarElement).toHaveComputedStyle({
+              'padding-top': `${expectedAdditionalTopPadding}px`,
             });
           });
         });
@@ -686,6 +788,53 @@ describe('ModalHelper', () => {
           });
         });
       });
+
+      describe('title', () => {
+        let ionToolbarElement: HTMLIonToolbarElement;
+        let pageTitleElement: HTMLDivElement;
+        let pageTitleVerticalCenter: number;
+
+        beforeEach(async () => {
+          await openModal(null, PageProgressEmbeddedComponent);
+          ionToolbarElement = ionModalWrapper.querySelector('ion-toolbar');
+          pageTitleElement = ionToolbarElement.querySelector('kirby-page-title');
+          pageTitleVerticalCenter = getElementVerticalCenter(pageTitleElement);
+        });
+
+        afterEach(async () => {
+          await overlay.dismiss();
+        });
+
+        it('should align vertically with close button', () => {
+          const closeButtonElement = ionToolbarElement.querySelector('[kirby-button]');
+          const closeButtonVerticalCenter = getElementVerticalCenter(closeButtonElement);
+
+          expect(closeButtonVerticalCenter).toEqual(pageTitleVerticalCenter);
+        });
+
+        it('should align vertically with page progress', () => {
+          const pageProgressElement = ionToolbarElement.querySelector('kirby-page-progress');
+          const pageProgressVerticalCenter = getElementVerticalCenter(pageProgressElement);
+
+          expect(pageTitleVerticalCenter).toEqual(pageProgressVerticalCenter);
+        });
+
+        it('should have correct padding', () => {
+          const toolbarContainer = ionToolbarElement.shadowRoot.querySelector('.toolbar-container');
+
+          expect(toolbarContainer).toHaveComputedStyle({
+            padding: size('s'),
+          });
+          expect(ionToolbarElement).toHaveComputedStyle({
+            'padding-top': '0px',
+          });
+        });
+      });
     });
   });
 });
+
+function getElementVerticalCenter(element: Element): number {
+  const elementDOMRect = element.getBoundingClientRect();
+  return elementDOMRect.top + elementDOMRect.height / 2;
+}
