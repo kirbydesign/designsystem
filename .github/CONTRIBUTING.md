@@ -553,7 +553,13 @@ The linting rules are configured to help you fix things that are easily forgotte
 
 #### Temporary changes
 
-Look for temporary changes you have used during development, like `console.log()` statements, TODO comments and code that has been commented out. They do not belong in the codebase and should be removed. TODOs should either be implemented right away or you should create a new issue for solving it later.
+Look for temporary changes you have used during development, like:
+
+* leftover `console.log()` statements
+* code that has been commented out
+* TODO comments
+
+They do not belong in the codebase and should be removed. TODOs should either be implemented right away or you should create a new issue for solving it later.
 
 #### Conclude by asking yourself
 
