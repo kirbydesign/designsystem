@@ -600,7 +600,7 @@ If the pull-request solves more than one issue also mention these such that they
 > This PR closes [#1427](https://github.com/kirbydesign/designsystem/issues/1427), closes [#1428](https://github.com/kirbydesign/designsystem/issues/1428), closes [#1429](https://github.com/kirbydesign/designsystem/issues/1429)
 
 ### The good pull-request has a logical commit history
-Having a logical commit history constructed using [good commits](#commit), can help the reviewer easily get an overview and understanding of the changes contained in a pull-request.
+Maintaining a logical commit history constructed using [good commits](#commit) helps the reviewer easily get an overview and understanding of the changes contained in a pull-request.
 
 If you are having trouble maintaining a clean commit history, you could eventually try writing [pre-emptive commit comments](https://github.com/kirbydesign/designsystem/issues/1428) i.e. writing down the commit message, before writing your code. This can help you stay focused on a single task at a time. 
 
