@@ -1,4 +1,4 @@
-import { forwardRef, Component } from '@angular/core';
+import { Component, forwardRef } from '@angular/core';
 
 import { TabsComponent } from '@kirbydesign/designsystem';
 
