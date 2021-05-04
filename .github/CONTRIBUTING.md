@@ -549,7 +549,7 @@ Use Prettier to format the files you are changing. If you are editing a file tha
 
 #### Linting
 
-The linting rules are configured to help you fix things that are easily forgotten, like sorting imports and removing unused variables, imports etc. Use the linting tools to avoid having to fix these issues during code review.
+The linting rules are configured to help you fix things that are easily forgotten, like sorting imports and removing unused variables, imports etc. Linting may also help you identify and remove dead code. Use the linting tools to avoid having to fix these issues during code review.
 
 #### Temporary changes
 
