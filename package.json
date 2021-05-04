@@ -1,6 +1,6 @@
 {
   "name": "designsystem",
-  "version": "1.5.12",
+  "version": "1.5.14",
   "description": "Kirby Design Components",
   "repository": {
     "type": "git",
@@ -75,7 +75,6 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^9.1.0",
-    "@angular/cdk": "^8.2.3",
     "@angular/common": "^9.1.0",
     "@angular/compiler": "^9.1.0",
     "@angular/core": "^9.1.0",
