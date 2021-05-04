@@ -14,7 +14,7 @@ If you at any point have any questions please read: [I have a question related t
 * [Setup environment and tooling for contribution](#setup-environment-and-tooling-for-contribution)
   + [Clone and install repository](#clone-and-install-repository)
   + [Node](#node)
-  + [Tslint](#tslint)
+  + [TSlint](#tslint)
   + [Prettier](#prettier)
 * [The good:](#the-good:)
   + [Issue](#issue)
@@ -211,7 +211,7 @@ It is recommended to use `v12` for development as we currently do not support no
 
 If you need to have multiple versions of node installed then a version manager such as [NVM](https://github.com/nvm-sh/nvm) can be used. 
 
-### Tslint 
+### TSlint 
 
 <!-- People should make sure to have it enabled to avoid unnecessary comments during code review-->
 **Note:** Work is being done to migrate from TSLint to ESLint (see issue: [#1317](https://github.com/kirbydesign/designsystem/issues/1317)). 
