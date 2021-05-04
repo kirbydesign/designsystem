@@ -248,7 +248,7 @@ Prettier is used for consistent code formatting and avoiding unnecessary discuss
 As with TSLint, we  strongly recommend installing Prettier as a plugin for your editor. You should also enable "format on save".
 It can however be used without an editor plugin; run `npm run prettier` to check for formatting errors, fix them by running `npm run prettier:fix`. 
 
-If there is changes only concerning formatting, in files you did not create - do not commit these. There is most likely something wrong with your Prettier settings. 
+If there are changes only concerning formatting, in files you did not create - do not commit these. There is most likely something wrong with your Prettier settings. 
 Make sure that Prettier uses the config file that is shipped with the repository ([`.prettierrc.json`](https://github.com/kirbydesign/designsystem/blob/master/.prettierrc.json)) and not a global configuration located on your machine. 
 
 To check if the config file from the repository is used, try to alter the configuration in `.prettierrc.json` and format a file using Prettier - for example by changing `"singleQuote": true,` to `"singleQuote": false,`. 
