@@ -531,7 +531,7 @@ For more on good git commits, see (among _many_ other):
 * [Turbo Git Commit Message Standard](https://gist.github.com/turbo/efb8d57c145e00dc38907f9526b60f17)
 * [Check Out These 5 Git Tips Before Your Next Commit](https://medium.com/walmartglobaltech/check-out-these-5-git-tips-before-your-next-commit-c1c7a5ae34d1)
 
-### The good self-review
+### The Good: Self-Review
 
 A lot of comments and requests for change during review of a pull request can sometimes feel demotivating. Doing a good self-review can save yourself and the reviewer from frustrations during code review.
 
