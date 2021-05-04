@@ -545,7 +545,7 @@ If you have already committed unrelated changes try to revert them before asking
 
 #### Formatting and linting
 
-Use Prettier to format the files you're changing. If you are editing a file that for some reason has not already been properly formatted, you'll probably see a lot of changes when you diff the file after you format it. Try to put the formatting changes in a separate commit if possible e.g., by creating a _formatting commit_ before committing your other changes. It will be easier for the reviewer to see your actual changes if they have the option to ignore the formatting changes.
+Use Prettier to format the files you are changing. If you are editing a file that for some reason has not already been properly formatted, you will probably see a lot of changes when you diff the file after you format it. Try to put the formatting changes in a separate commit if possible e.g., by creating a _formatting commit_ before committing your other changes. It will be easier for the reviewer to see your actual changes if they have the option to ignore the formatting changes.
 
 Use the linting rules to sort imports and remove unused variables, imports etc.
 
