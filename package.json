@@ -109,7 +109,6 @@
     "@nrwl/tao": "11.5.2",
     "@nrwl/workspace": "11.5.2",
     "@types/jasmine": "3.6.7",
-    "@types/jasminewd2": "^2.0.8",
     "@types/jest": "26.0.8",
     "@types/node": "12.12.38",
     "@types/webpack": "^4.41.7",
