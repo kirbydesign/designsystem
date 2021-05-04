@@ -615,10 +615,13 @@ For example, it would not make sense if the imports for the list component locat
 Should you stumble upon possible optimizations or things that could be done better, go ahead and create new issues for these.
 
 ### The good pull-request knows what it wants
-  * Mention which kind of feedback you want - full on review or just some initial help 
-    - We use pull-requests to signal that we want a full-on review, so abstain from using these, if you only want initia help with like a MVP implementation. 
-  * @mention people you wan't to take into the discussion - also mention why 
-    - "@jesseplusplus for clarificaiton on this logic "
+Tell the reviewer what you want to get out of your pull-request. 
+Should the reviewer do a full-on review or give initial guidance on a WIP implementation? Mention it in the pull-request so the reviewer knows what you are looking for and does not waste their time doing a full review on a WIP implementation. 
+
+As a convention in Kirby we signal which kind of feedback we want by creating a draft pull-request if it is a WIP implementation - and a normal one for a full review.
+
+Mention people you want to include in the discussion of your pull-request by using `@`, clarify why: 
+> @MadsBuchmann for details on the fontsource dependency
 
 ### The good pull-requests only uses review comments for actual review comments
   * if you feel the need to add review comments to explain your code, consider if it should be inlined in the code instead 
