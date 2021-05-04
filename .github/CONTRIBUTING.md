@@ -561,7 +561,7 @@ Look for temporary changes you have used during development, like:
 
 They do not belong in the codebase and should be removed. TODOs should either be implemented right away or you should create a new issue for solving it later.
 
-#### Conclude by asking yourself
+#### Concluding
 
 From the perspective of a reviewer, ask yourself:
 
