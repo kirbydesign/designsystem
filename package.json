@@ -1,6 +1,6 @@
 {
   "name": "designsystem",
-  "version": "1.5.12",
+  "version": "1.5.14",
   "description": "Kirby Design Components",
   "repository": {
     "type": "git",
@@ -51,10 +51,7 @@
     "dist:designsystem": "ng build designsystem",
     "postinstall": "npm run ngcc && npm run build-polyfills && npm run transpile:tools && npm run extract-scss-variables",
     "coverage-report": "cat ./coverage/lcov.info | coveralls",
-    "transpile:tools": "npm run transpile:tslint-rules && npm run transpile:sass-to-ts && npm run transpile:generate-mocks",
-    "transpile:tslint-rules": "tsc -p tools/tslint-rules",
-    "transpile:sass-to-ts": "tsc -p tools/sass-to-ts",
-    "transpile:generate-mocks": "tsc -p tools/generate-mocks",
+    "transpile:tools": "tsc -b tools/tslint-rules tools/sass-to-ts tools/generate-mock",
     "extract-scss-variables": "node ./scripts/sass-extract-to-ts.js",
     "generate-mocks": "node ./scripts/generate-mocks.js",
     "affected:apps": "nx affected:apps",
@@ -78,7 +75,6 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^9.1.0",
-    "@angular/cdk": "^8.2.3",
     "@angular/common": "^9.1.0",
     "@angular/compiler": "^9.1.0",
     "@angular/core": "^9.1.0",

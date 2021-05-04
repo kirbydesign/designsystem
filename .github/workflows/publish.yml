@@ -24,8 +24,19 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '10.16'
-      - name: Install NPM dependencies
+      - name: Fetch Node Modules Cache
+        uses: actions/cache@v2
+        id: cache
+        with:
+          path: | 
+            **/node_modules
+          key: node-modules-${{ runner.os }}-${{env.NODE_VERSION}}-${{hashFiles('**/package.json')}}-${{hashFiles('**/package-lock.json')}}
+      - name: Clean Install NPM Dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
+      - name: Run Postinstall Script
+        if: steps.cache.outputs.cache-hit == 'true'
+        run: npm run postinstall
       - name: Configure git
         run: |
           git config user.name "Kirby Bot"
