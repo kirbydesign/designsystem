@@ -607,10 +607,12 @@ If you are having trouble maintaining a clean commit history, you could eventual
 [INSERT IMAGE OF A LOGICAL COMMIT HISTORY HERE!]
 
 ### The good pull-request only alters files related to the changes 
-  * Don't go boyscout in files that are not related to the changes in the PR. 
-    - It will give a weird git history
-    - Eventually create a couple of issues, and mention these - make sure to close them again if the changes won't be made... --->
-    <!--* Don't be afraid to mention other optimizations you think might be possible, but outside the scope of your PR in the "Other Information"-part. 
+While you might get the urge to be a good boy/girl scout and reorder imports or fix formatting in files not related to your issue, don't.
+
+While it is very much appreciated that you want to leave the code better than you found it, doing so in unrelated files will cause the git history of the project to be illogical. 
+It would not make sense if the imports for the list component located in `list.component.ts` is reordered as part of a pull-request concerning the CI/CD pipeline. 
+
+Should you stumble upon possible optimizations or things that might need to be refactored, go ahead and create new issues for these.
 
 ### The good pull-request knows what it wants
   * Mention which kind of feedback you want - full on review or just some initial help 
