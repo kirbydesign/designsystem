@@ -539,7 +539,7 @@ The code review process has a better chance of going smooth if you conduct a sel
 
 #### Unrelated changes
 
-Avoid doing unrelated changes in files that are not directly part of your pull-request. For example, don't submit changes like formatting or reordering imports if they're the _only_ changes made in those files.
+Avoid doing unrelated changes in files that are not directly part of your pull-request. For example, don't commit changes like formatting or reordering imports if they're the _only_ changes made in those files. If you have already committed unrelated changes try to revert them before asking for code review.
 
 #### Formatting and linting
 
