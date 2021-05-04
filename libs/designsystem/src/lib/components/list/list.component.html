@@ -1,2 +1,96 @@
-<kirby-virtual-scroll-list *ngIf="useVirtualScroll"> </kirby-virtual-scroll-list>
-<kirby-normal-list *ngIf="!useVirtualScroll"></kirby-normal-list>
+<ion-list
+  #list
+  kirbyInfiniteScroll
+  (scrollEnd)="onLoadOnDemand()"
+  [disabled]="!isLoadOnDemandEnabled"
+  class="list"
+  [class.has-header]="headerTemplate"
+  [class.has-footer]="footerTemplate"
+  [class.has-divider]="showDivider"
+>
+  <ion-list-header *ngIf="headerTemplate">
+    <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
+  </ion-list-header>
+
+  <div
+    *ngIf="useVirtualScroll"
+    #viewport
+    [style.height]="useVirtualScroll ? virtualScrollViewportHeight + 'px' : null"
+    class="viewport"
+  >
+    <ng-container
+      *ngTemplateOutlet="virtualSlidingItemsTemplate; context: { $implicit: datasource }"
+    ></ng-container>
+  </div>
+
+  <ng-container *ngIf="!useVirtualScroll">
+    <ng-container
+      *ngTemplateOutlet="
+        isSectionsEnabled ? groupedListTemplate : slidingItemsTemplate;
+        context: { $implicit: items }
+      "
+    ></ng-container>
+  </ng-container>
+
+  <div *ngIf="footerTemplate" class="footer">
+    <ng-container *ngTemplateOutlet="footerTemplate"></ng-container>
+  </div>
+</ion-list>
+
+<p *ngIf="!isLoadOnDemandEnabled && noMoreItemsText" class="no-more-items">
+  {{ noMoreItemsText }}
+</p>
+<div *ngIf="isLoading" class="loading">
+  <kirby-spinner></kirby-spinner>
+</div>
+
+<ng-template #groupedListTemplate>
+  <ion-item-group *ngFor="let section of groupedItems; trackBy: sectionTrackBy">
+    <ion-item-divider>
+      <ng-container
+        *ngTemplateOutlet="sectionHeaderTemplate; context: { $implicit: section.name }"
+      ></ng-container>
+    </ion-item-divider>
+
+    <div class="list-items">
+      <ng-container
+        *ngTemplateOutlet="slidingItemsTemplate; context: { $implicit: section.items }"
+      ></ng-container>
+    </div>
+  </ion-item-group>
+</ng-template>
+
+<ng-template #slidingItemsTemplate let-items>
+  <kirby-list-item
+    *ngFor="let item of items; let i = index; trackBy: trackBy || defaultTrackBy"
+    [item]="item"
+    [itemTemplate]="itemTemplate"
+    [swipeActions]="swipeActions"
+    [orderClass]="getItemOrderClass(i, items.length)"
+    [isSelectable]="isSelectable"
+    [getItemColor]="getItemColor"
+    [isSelected]="isSelectable && item === selectedItem"
+    (itemSelect)="onItemSelect($event)"
+    (swipeActionSelect)="onSwipeActionSelect($event)"
+  >
+  </kirby-list-item>
+</ng-template>
+
+<ng-template #virtualSlidingItemsTemplate let-datasource>
+  <div *uiScroll="let entry of datasource">
+    <div class="item-wrapper">
+      <kirby-list-item
+        [item]="entry.item"
+        [itemTemplate]="itemTemplate"
+        [swipeActions]="swipeActions"
+        [orderClass]="getItemOrderClass(entry.itemMeta.itemIndex, entry.itemMeta.totalCount)"
+        [isSelectable]="isSelectable"
+        [getItemColor]="getItemColor"
+        [isSelected]="isSelectable && entry.item === selectedItem"
+        (itemSelect)="onItemSelect($event)"
+        (swipeActionSelect)="onSwipeActionSelect($event)"
+      >
+      </kirby-list-item>
+    </div>
+  </div>
+</ng-template>

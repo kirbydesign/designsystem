@@ -22,10 +22,8 @@ import { ItemComponent } from '../item/item.component';
 import { ListHelper } from './helpers/list-helper';
 import { ListSwipeAction, SwipeDirection, SwipeEnd } from './list-swipe-action';
 import {
-  ListFlexItemDirective,
   ListFooterDirective,
   ListHeaderDirective,
-  ListItemDirective,
   ListItemTemplateDirective,
   ListSectionHeaderDirective,
 } from './list.directive';
@@ -155,24 +153,24 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
    */
   @Output() itemSelect = new EventEmitter<any>();
 
-  // The first element that matches ListItemDirective. As a structural directive it unfolds into a template. This is a reference to that.
-  @ContentChild(ListItemTemplateDirective, { static: true, read: TemplateRef })
-  itemTemplate: TemplateRef<any>;
-  @ContentChild(ListItemDirective, { static: true, read: TemplateRef })
-  legacyItemTemplate: TemplateRef<any>;
   @ContentChildren(ItemComponent)
   kirbyItems: ItemComponent[];
-  @ContentChild(ListFlexItemDirective, { static: true, read: TemplateRef })
-  legacyFlexItemTemplate: TemplateRef<any>;
+
   @ContentChild(ListHeaderDirective, { static: false, read: TemplateRef })
   headerTemplate: TemplateRef<any>;
+
   @ContentChild(ListSectionHeaderDirective, { static: false, read: TemplateRef })
   sectionHeaderTemplate: TemplateRef<any>;
+
   @ContentChild(ListFooterDirective, { static: false, read: TemplateRef })
   footerTemplate: TemplateRef<any>;
 
+  // The first element that matches ListItemDirective. As a structural directive it unfolds into a template. This is a reference to that.
+  @ContentChild(ListItemTemplateDirective, { static: true, read: TemplateRef })
+  itemTemplate: TemplateRef<any>;
+
   @HostBinding('class.has-sections') isSectionsEnabled: boolean;
-  @HostBinding('class.has-deprecated-item-template') hasDeprecatedItemTemplate: boolean;
+
   isSwipingEnabled: boolean = false;
   isSelectable: boolean;
   isLoading: boolean;
@@ -186,8 +184,6 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   ) {}
 
   ngOnInit() {
-    this.hasDeprecatedItemTemplate = !!this.legacyItemTemplate || !!this.legacyFlexItemTemplate;
-    this.initializeSwipeActions();
     this.isSelectable = this.itemSelect.observers.length > 0;
 
     if (this.isLoadOnDemandEnabled === undefined) {
@@ -214,8 +210,8 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     }
   }
 
-  onItemSelect(args: any) {
-    this.selectedItem = this.listHelper.getSelectedItem(this.items, args);
+  onItemSelect(item: any) {
+    this.selectedItem = item;
     this.itemSelect.emit(this.selectedItem);
   }
 
@@ -231,82 +227,14 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     return section.name;
   }
 
-  getSwipeActions(item: any, side?: SwipeDirection): ListSwipeAction[] {
-    if (!Array.isArray(this.swipeActions)) {
-      return [];
-    }
-    return this.swipeActions.filter((sa) => {
-      if (sa.isDisabled instanceof Function && sa.isDisabled(item)) {
-        return false;
-      }
-      if (sa.isDisabled === true) {
-        return false;
-      }
-      return side ? sa.position === side : true;
-    });
-  }
-
-  hasSwipeActions(item: any): boolean {
-    if (!Array.isArray(this.swipeActions)) {
-      return false;
-    }
-    return this.swipeActions.some((sa) => {
-      if (sa.isDisabled instanceof Function && sa.isDisabled(item)) {
-        return false;
-      }
-      if (sa.isDisabled === true) {
-        return false;
-      }
-      return sa.position === SwipeDirection.left || sa.position === SwipeDirection.right;
-    });
-  }
-
-  getSwipeActionEnd(item: any): SwipeEnd {
-    if (this.getSwipeActions(item, SwipeDirection.left).length) {
-      return SwipeEnd.start;
-    }
-    if (this.getSwipeActions(item, SwipeDirection.right).length) {
-      return SwipeEnd.end;
-    }
-  }
-
-  getSwipeActionIcon(swipeAction: ListSwipeAction, item: any): string {
-    if (!swipeAction.icon) return;
-
-    if (swipeAction.icon instanceof Function) {
-      return swipeAction.icon(item);
-    }
-    return swipeAction.icon;
-  }
-
-  getSwipeActionTitle(swipeAction: ListSwipeAction, item: any): string {
-    if (swipeAction.title instanceof Function) {
-      return swipeAction.title(item);
-    }
-    return swipeAction.title;
-  }
-
-  getSwipeActionType(swipeAction: ListSwipeAction, item: any): ThemeColor {
-    if (swipeAction.type instanceof Function) {
-      return swipeAction.type(item);
-    }
-    return swipeAction.type;
-  }
-
-  onSwipeActionSelect(swipeAction: ListSwipeAction, item: any, event: Event): void {
-    swipeAction.onSelected(item);
+  onSwipeActionSelect(value: any): void {
+    value.swipeAction.onSelected(value.item);
     this.list.closeSlidingItems();
-    event.stopPropagation();
+    value.event.stopPropagation();
   }
 
   getItemOrderClass(index: number, numberOfItems: number): string {
     if (index === 0) return this.headerTemplate ? '' : 'first';
     if (index === numberOfItems - 1) return this.footerTemplate ? '' : 'last';
-  }
-
-  private initializeSwipeActions(): void {
-    if (this.swipeActions && this.swipeActions.length) {
-      this.isSwipingEnabled = this.platform.isTouch();
-    }
   }
 }

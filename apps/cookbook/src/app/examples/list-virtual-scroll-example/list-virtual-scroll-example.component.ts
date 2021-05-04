@@ -4,7 +4,10 @@ import { BaseListComponent } from '../list-shared/base-list.component';
 
 export const ListVirtualScrollExampleTemplate = `
 <kirby-list [items]="itemsFullList" [useVirtualScroll]="true" >
-  
+<kirby-item *kirbyListItemTemplate="let item">
+<h3>{{item.title}}</h3>
+<data slot="end" class="kirby-text-bold">{{item.amount}}</data>
+</kirby-item>
 </kirby-list>`;
 
 @Component({

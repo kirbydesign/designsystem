@@ -20,8 +20,6 @@ import {
   ListItemTemplateDirective,
   ListSectionHeaderDirective,
 } from './list.directive';
-import { NormalListComponent } from './normal-list/normal-list.component';
-import { VirtualScrollListComponent } from './virtual-scroll-list/virtual-scroll-list.component';
 
 const exportedDeclarations = [
   ListComponent,
@@ -38,8 +36,6 @@ const exportedDeclarations = [
 const declarations = [
   ...exportedDeclarations,
   ListItemColorDirective,
-  VirtualScrollListComponent,
-  NormalListComponent,
   InfiniteScrollDirective,
   ListItemComponent,
 ];

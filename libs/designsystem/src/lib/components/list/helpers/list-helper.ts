@@ -13,8 +13,4 @@ export class ListHelper {
       });
     }
   }
-
-  getSelectedItem(items: any[], item: any) {
-    return item;
-  }
 }

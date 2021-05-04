@@ -15,6 +15,14 @@ $item-height: size('xxxl');
   padding: 0;
 }
 
+.viewport {
+  overflow-y: auto;
+}
+
+.item-wrapper {
+  min-height: #{map-get($item-heights, 'm')};
+}
+
 ion-list-header {
   background-color: get-color('white');
   border-bottom: 1px solid $divider-color;
