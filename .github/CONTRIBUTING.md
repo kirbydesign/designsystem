@@ -624,15 +624,12 @@ Mention people you want to include in the discussion of your pull-request by usi
 > @MadsBuchmann for details on the fontsource dependency
 
 ### The good pull-requests only uses review comments for actual review comments
-  * if you feel the need to add review comments to explain your code, consider if it should be inlined in the code instead 
-    - If the reviewer will have a hard time understanding what is going on - future readers of your code will also have a hard time reading it. 
-      - Try to make it so, the code can be understood without having to lookup the pull-request
+Review comments are for review comments. Not for explaining your code. 
 
-<!-- ### The good pull-request documents
-  * Remember that anyone in the company could be reading this Pull Request, so the content and tone may inform people other than those taking part, now or later. 
-  * The hard part of programming is learning to play well with others; to write clean, maintainable, efficient code that also solves the problem, and to comment or otherwise document it well enough that if you walked under a bus tomorrow someone else could pick up the project and carry on with it.
-  * Can help clarify a decision process with related issues
---> 
+If you feel the urge to add a review comment to clarify a hard to understand part of your code, it is not only the reviewer that will need that information. 
+Future contributors reading the code will also need it and could have a hard time understanding your code without. 
+
+Either refactor the code to make it more readable or add clarifying comments - it should be possible to understand the code without looking up the pull-request.
 
 ### The good pull-request is closed when there is no need for it
   * Is closed when there is no need for it, for example in the case where the changes won't be implemented.
