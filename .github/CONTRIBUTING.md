@@ -249,7 +249,8 @@ This will cause changes to be made in the file `.vscode/settings.json` ; do not 
 
 Prettier is used for consistent code formatting and avoiding unnecessary discussions about this during reviews.
 
-It can be executed using `npx prettier [path/to/file]` but as with TSLint, we recommend installing it as a plugin for your editor. You should also enable "format on save".
+As with TSLint, we  strongly recommend installing Prettier as a plugin for your editor. You should also enable "format on save".
+It can however be used without an editor plugin; run `npm run prettier` to check for formatting errors, fix them by running `npm run prettier:fix`. 
 
 **Useful resources:**
 
