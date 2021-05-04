@@ -540,32 +540,56 @@ For more on good git commits, see (among _many_ other):
 
 ### Pull-request
 
-* A good pull-request makes the life easier for the reviewer, causing a quicker review. Noice! 
-* Be responsible for getting your pull-requests reviewed - reach out! 
-  - Where should one reach out?
-* Apply same rules as for issues
-* How is a pull-request that is easily reviewed constructed?
-* Pull requests also works as a sort of documentation
-
+<!-- TODO: get this point accross somehow: 
 * Throw in before and after images if the changes are visual 
+--> 
+
+<!--* A good pull-request makes the life easier for the reviewer, causing a quicker review. Noice! -->
+Why should you care about creating good pull-requests - is it not just a tool for code reviews?
+Well first of all, a good pull-request can help reduce how long it takes for your changes to be merged to master by making the life easier for the reviewer, causing a quicker review. 
+Secondly a good pull-request is more than just a tool for code reviews - it documents the process of reaching a satisfactory implementation aswell as toughts and discussion surrounding this. 
+
+The rules that applies for writing a [good issue](#issue) also applies for writing a good description for your pull-request.
+But more importantly a pull-request includes commits containing code changes that you want to get merged to master, which means there is a few more points to keep in mind, when constructing a good pull-request. 
+
+Before going through these however - we want to remind you to take ownership of your pull-requests. 
+It is your responsibility as a contributor to get your pull-requests reviewed, therefore reach out and be communicative! 
 
 ### The good issue solves one issue
-  * Has a related issue - do not submit pull-requests unless it's related to an issue! Please oh god oh please!
-  * Try to keep the scope of a pull-request to one issue - it occassionally happens that a pull-request can solve more than one issue. 
-    - this is often because the issues are somewhat related, and it happens naturally - it should not be a goal to solve several issues with one PR. 
-      - Especially not if the issues are not related at all! 
+  <!--* Has a related issue - do not submit pull-requests unless it's related to an issue! Please oh god oh please!-->
+Every pull-request that is created should solve _one_ existing [Github issue](https://github.com/kirbydesign/designsystem/issues). 
 
-### The good pull-request uses the tempate
+There might be cases where the changes in a pull-request naturally solves multiple issues, often caused by them being related one way or another. This is the exception, not the rule. 
+Striving for the scope of the pull-requests to be one issue, makes the task of reviewing it more manageable.
+
+If you are not able to fill in the `This PR closes # (reference issue number here)` part of the pull-request template and follow the branch naming convention outlined in [The Good: Branch](#branch), because there is no issue to reference; it is unfortunately an indicator that you have not followed [the process for contribution](#the-process-for-contribution). We do not wish for pull-requests that have no related issue to be submitted, as this means no refinement has taken place and there might be no agreement on whether the suggested changes should be part of Kirby. If it is submitted anyways, it will most likely be closed without being merged.  
+
+Should you find yourself in that situation and want to salvage as much of your work as possible: create an issue following [the process for contribution](#the-process-for-contribution) and make changes to your pull-request as necessary.
+
+### The good pull-request has a title worthy of the changelog
+Besides helping to inform what the changes in the pull-request does; the title of your pull-request will be used in the changelog to represent your changes! 
+![](images/issue-title-to-changelog.png)
+
+So make the title descriptive - after writing the title, ask yourself if you would feel informed what the changes in the PR entail if you read it as part of a changelog. 
+
+[keepachangelog.com](https://keepachangelog.com) has a neat list of good verbs to start out with, you can use as inspiration for your title:
+- `Added` for new features
+- `Changed` for changes in existing functionality 
+- `Deprecated` for soon-to-be removed features 
+- `Removed` for now removed features 
+- `Fixed` for any bug fixes 
+
+* Writes a good title for their pull-request 
+    - Mention that we're unfortunately not able to template it 
+    - Mention the PR title will be part of the changelog, therefore... Smile for the camera :)
+      - Throw in link to changelog, and perhaps a screenshot 
+
+### The good pull-request uses the template
   * uses our template 
     - Shortly go through purpose of each section - symphatize
     - Remember to fill out the closes part without changing wording - causes issue to be closed, once this is merged! No more remembering to close! 
       - If it closes more than one, also mention these! See: https://github.com/kirbydesign/designsystem/pull/1493
 
-### The good pull-request has a title worthy of the changelog
-* Writes a good title for their pull-request 
-    - Mention that we're unfortunately not able to template it 
-    - Mention the PR title will be part of the changelog, therefore... Smile for the camera :)
-      - Throw in link to changelog, and perhaps a screenshot 
 
 ### The good pull-request has a logical commit history
   * While also being part of writing a good commit - it would be nice if the commit history and each individual commit makes logical sence.
