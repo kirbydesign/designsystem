@@ -35,6 +35,11 @@ export enum ListShape {
   'rounded',
   'none',
 }
+
+export enum EndClass {
+  'first',
+  'last',
+}
 @Component({
   selector: 'kirby-list',
   templateUrl: './list.component.html',
@@ -127,8 +132,8 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   @Input()
   hasItemSpacing: boolean;
 
-  @Input() useVirtualScroll?: boolean = false;
-  @Input() virtualScrollViewportHeight?: number = 500;
+  @Input() useVirtualScroll: boolean = false;
+  @Input() virtualScrollViewportHeight: number = 500;
 
   /**
    * Determines if the loadOnDemand event should be emitted.
@@ -227,14 +232,14 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     return section.name;
   }
 
-  onSwipeActionSelect(value: any): void {
-    value.swipeAction.onSelected(value.item);
+  onSwipeActionSelect(args: any): void {
+    args.swipeAction.onSelected(args.item);
     this.list.closeSlidingItems();
-    value.event.stopPropagation();
+    args.event.stopPropagation();
   }
 
-  getItemOrderClass(index: number, numberOfItems: number): string {
-    if (index === 0) return this.headerTemplate ? '' : 'first';
-    if (index === numberOfItems - 1) return this.footerTemplate ? '' : 'last';
+  getItemEndClass(index: number, numberOfItems: number): EndClass {
+    if (index === 0) return this.headerTemplate ? null : EndClass.first;
+    if (index === numberOfItems - 1) return this.footerTemplate ? null : EndClass.last;
   }
 }

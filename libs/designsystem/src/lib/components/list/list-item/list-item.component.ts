@@ -13,7 +13,7 @@ import { IonItemSliding } from '@ionic/angular';
 import { ListSwipeAction } from '../';
 import { PlatformService, ThemeColor } from '../../../helpers';
 import { SwipeDirection, SwipeEnd } from '../list-swipe-action';
-import { ListComponent } from '../list.component';
+import { EndClass, ListComponent } from '../list.component';
 
 @Component({
   selector: 'kirby-list-item',
@@ -22,46 +22,30 @@ import { ListComponent } from '../list.component';
 })
 export class ListItemComponent implements OnInit, AfterViewInit {
   isSwipingEnabled: boolean = false;
-  @Input() item: any;
-  @Input() orderClass: string;
-  @ViewChild(IonItemSliding) ionItemSliding: IonItemSliding;
+
   constructor(public listComponent: ListComponent, private platform: PlatformService) {
     this.initializeSwipeActions();
   }
 
-  /**
-   * Determines if list items should have swipe actions or not
-   * - the order of swipe actions is used to determine edge actions,
-   * as well as their order of appearance on the screen.
-   */
+  @ViewChild(IonItemSliding) ionItemSliding: IonItemSliding;
+
+  @Input() item: any;
+
+  @Input() endClass: EndClass;
+
   @Input() swipeActions: ListSwipeAction[] = [];
 
-  @Input()
-  itemTemplate: TemplateRef<any>;
+  @Input() itemTemplate: TemplateRef<any>;
 
   @Input() isSelected: boolean;
 
   @Input() isSelectable: boolean;
 
-  @Input()
-  getItemColor: (item: any) => ThemeColor;
+  @Input() getItemColor: (item: any) => ThemeColor;
 
-  /**
-   * Emitting event when an item is selected (tapped on mobile, clicked on web)
-   */
   @Output() itemSelect = new EventEmitter<any>();
 
   @Output() swipeActionSelect = new EventEmitter<any>();
-
-  ngOnInit() {
-    this.initializeSwipeActions();
-  }
-
-  ngAfterViewInit(): void {
-    if (!this.itemTemplate) {
-      console.warn('No item template was provided.');
-    }
-  }
 
   onSwipeActionSelect(swipeAction, item, event) {
     this.swipeActionSelect.emit({
@@ -74,6 +58,16 @@ export class ListItemComponent implements OnInit, AfterViewInit {
   onItemSelect(item: any) {
     if (!this.isSelectable) return;
     this.itemSelect.emit(item);
+  }
+
+  ngOnInit() {
+    this.initializeSwipeActions();
+  }
+
+  ngAfterViewInit(): void {
+    if (!this.itemTemplate) {
+      console.warn('No item template was provided.');
+    }
   }
 
   hasSwipeActions(item: any): boolean {
