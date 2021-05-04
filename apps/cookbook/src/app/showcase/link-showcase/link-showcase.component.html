@@ -3,8 +3,9 @@
   inline links placed within a sentence.
 </p>
 <p>
-  A link should be used for simple navigation. If a user triggers an action, makes a choice, or in
-  any way manipulate data, use a <a routerLink="/home/showcase/button">button</a> instead.
+  A link should be used for simple navigation. Use
+  <a routerLink="/home/showcase/button">buttons</a> for more complex interactions where a user
+  triggers an action, makes a choice, or in any way manipulate data.
 </p>
 <p>
   Rather than providing a component for links, Kirby simply provides custom styles for the
@@ -15,9 +16,10 @@
 
 <h2>Sizes</h2>
 <p>
-  Any font-class from <a routerLink="/home/showcase/fonts">Kirby Fonts</a> can be used with links.
-  For accessability reasons, it is not recommended to use links when the clickable text is smaller
-  than 12px (extra small).
+  By default, links inherit the font-size of the context they are used in. For standalone links, any
+  font-class from <a routerLink="/home/showcase/fonts">Kirby Fonts</a> can be applied. For
+  accessibility reasons, it is not recommended to use links when the clickable text is smaller than
+  12px (extra small).
 </p>
 
 <cookbook-example-viewer [html]="internal.template">
