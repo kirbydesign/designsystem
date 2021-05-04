@@ -535,7 +535,7 @@ For more on good git commits, see (among _many_ other):
 
 A lot of comments and requests for change during review of a pull request can sometimes feel demotivating. The good self-review can save yourself and the reviewer from frustrations during peer review.
 
-The code review process has a better chance of going smooth if you conduct a self-review before opening the pull request and marking it _Ready for review_. Removing gravel in the road helps keeping code review focused and unnecessary discussions can be avoided.
+A self-review removes gravel in the road, leading to a smooth and focused code review - while avoiding unnecessary discussions. It should be done before the pull request is published and marked as _Ready for review_.
 
 #### Unrelated changes
 
