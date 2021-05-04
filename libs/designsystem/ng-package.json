@@ -10,7 +10,7 @@
       "highcharts/modules/annotations": "highcharts",
       "highcharts/highstock": "highcharts/highstock",
       "@ionic/angular": "ionic",
-      "inputmask": "inputmask"
+      "inputmask/lib/inputmask": "inputmask"
     }
   },
   "allowedNonPeerDependencies": [
