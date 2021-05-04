@@ -10,27 +10,27 @@ module.exports = () => {
     customLaunchers: {
       ChromeCustom: {
         base: 'ChromeHeadless',
-        flags: isDocker ? ['--no-sandbox'] : []
-      }
+        flags: isDocker ? ['--no-sandbox'] : [],
+      },
     },
     basePath: '',
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
     plugins: [
       require('karma-chrome-launcher'),
-      require('karma-coverage-istanbul-reporter'),
+      require('karma-coverage'),
       require('karma-jasmine'),
       require('karma-jasmine-html-reporter'),
       require('karma-junit-reporter'),
       require('karma-spec-reporter'),
-      require('@angular-devkit/build-angular/plugins/karma')
+      require('@angular-devkit/build-angular/plugins/karma'),
     ],
     client: {
-      clearContext: false // leave Jasmine Spec Runner output visible in browser
+      clearContext: false, // leave Jasmine Spec Runner output visible in browser
     },
-    coverageIstanbulReporter: {
+    coverageReporter: {
       dir: join(__dirname, '../../coverage'),
-      reports: ['html', 'lcovonly'],
-      fixWebpackSourcePaths: true
+      subdir: '.',
+      reporters: [{ type: 'html' }, { type: 'text-summary' }],
     },
     reporters: ['progress', 'kjhtml'],
     port: 9876,
@@ -39,6 +39,6 @@ module.exports = () => {
     autoWatch: true,
     browsers: isDocker || process.env.CI === 'true' ? ['ChromeCustom'] : ['Chrome'],
     singleRun: false,
-    failOnEmptyTestSuite: false
+    failOnEmptyTestSuite: false,
   };
 };
