@@ -555,7 +555,7 @@ But more importantly a pull-request includes commits containing code changes tha
 Before going through these however - we want to remind you to take ownership of your pull-requests. 
 It is your responsibility as a contributor to get your pull-requests reviewed, therefore reach out and be communicative! 
 
-### The good issue solves one issue
+### The good pull-request solves one issue
   <!--* Has a related issue - do not submit pull-requests unless it's related to an issue! Please oh god oh please!-->
 Every pull-request that is created should solve _one_ existing [Github issue](https://github.com/kirbydesign/designsystem/issues). 
 
@@ -632,9 +632,10 @@ Future contributors reading the code will also need it and could have a hard tim
 Either refactor the code to make it more readable or add clarifying comments - it should be possible to understand the code without looking up the pull-request.
 
 ### The good pull-request is closed when there is no need for it
+As with the [good issue](#issue), the good pull-request is closed in order to reduce clutter, when there is no need for it. 
 
-  * Is closed when there is no need for it, for example in the case where the changes won't be implemented.
-  
+Therefore if it is clear that the changes will not be merged to `master` - close it. 
+It can always be reopened if it was a mistake.
 
 ### Test
 
