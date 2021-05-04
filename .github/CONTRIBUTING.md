@@ -232,14 +232,10 @@ An issue might occur where TSLint will randomly disable for the current workspac
 To solve this: 
 
 1. Open a typescript file in VScode. 
-2. Open the command pallette (<kbd>ctrl/cmd</kbd> + <kbd>shift</kbd> + <kbd>p</kbd>) and enter: <br />
-
-`typescript: select typescript version` .
+2. Open the command pallette (<kbd>ctrl/cmd</kbd> + <kbd>shift</kbd> + <kbd>p</kbd>) and enter: `typescript: select typescript version`
 
 4. Select: `use workspace version 3.6.5`.
-5. Open the command pallette and enter: <br />
-
-`TSLint: Manage workspace library execution` .
+5. Open the command pallette and enter: `TSLint: Manage workspace library execution` .
 
 6. Select: `always enable workspace library execution`.
 
