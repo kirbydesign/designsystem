@@ -51,7 +51,7 @@
     "dist:designsystem": "ng build designsystem",
     "postinstall": "npm run ngcc && npm run build-polyfills && npm run transpile:tools && npm run extract-scss-variables",
     "coverage-report": "cat ./coverage/lcov.info | coveralls",
-    "transpile:tools": "tsc -b tools/tslint-rules tools/sass-to-ts tools/generate-mock",
+    "transpile:tools": "tsc -b tools/tslint-rules tools/sass-to-ts tools/generate-mocks",
     "extract-scss-variables": "node ./scripts/sass-extract-to-ts.js",
     "generate-mocks": "node ./scripts/generate-mocks.js",
     "affected:apps": "nx affected:apps",
