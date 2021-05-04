@@ -602,7 +602,7 @@ If the pull-request solves more than one issue also mention these such that they
 ### The good pull-request has a logical commit history
 Maintaining a logical commit history constructed using [good commits](#commit) helps the reviewer easily get an overview and understanding of the changes contained in a pull-request.
 
-If you are having trouble maintaining a clean commit history, you could eventually try writing [pre-emptive commit comments](https://github.com/kirbydesign/designsystem/issues/1428) i.e. writing down the commit message, before writing your code. This can help you stay focused on a single task at a time. 
+If you are having trouble maintaining a clean commit history, you could eventually try writing [pre-emptive commit comments](https://arialdomartini.wordpress.com/2012/09/03/pre-emptive-commit-comments/) i.e. writing down the commit comment, before writing your code. This can help you stay focused on a single task at a time. 
 
 [INSERT IMAGE OF A LOGICAL COMMIT HISTORY HERE!]
 
@@ -632,6 +632,7 @@ Future contributors reading the code will also need it and could have a hard tim
 Either refactor the code to make it more readable or add clarifying comments - it should be possible to understand the code without looking up the pull-request.
 
 ### The good pull-request is closed when there is no need for it
+
   * Is closed when there is no need for it, for example in the case where the changes won't be implemented.
   
 
