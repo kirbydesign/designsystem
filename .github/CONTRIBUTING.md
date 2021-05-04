@@ -537,6 +537,8 @@ A lot of comments and requests for change during review of a pull request can so
 
 A self-review removes gravel in the road, leading to a smooth and focused code review - while avoiding unnecessary discussions. It should be done before the pull request is published and marked as _Ready for review_.
 
+We collected a bunch of common issues that often come up during code reviews.
+
 #### Unrelated changes
 
 Avoid doing unrelated changes in files that are not directly part of your pull-request. For example, don't commit changes like formatting or reordering imports if they're the _only_ changes made in those files. It will clutter the git history and make it hard to understand why the latest change made to a particular line of code is in a commit that is not related to the change at all. E.g., when using [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens) or similar tools.
