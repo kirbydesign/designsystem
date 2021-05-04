@@ -90,7 +90,6 @@ export const AreaSplineOptions: Options = {
   series: [
     {
       type: 'areaspline',
-      data: this === undefined ? [] : (this as any).data,
     },
   ],
 };

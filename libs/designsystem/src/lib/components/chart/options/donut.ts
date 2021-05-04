@@ -76,7 +76,6 @@ export const DonutOptions: Options = {
     {
       name: '',
       type: 'pie',
-      data: this === undefined ? [] : (this as any).data,
     },
   ],
   credits: {
