@@ -579,28 +579,38 @@ So make the title descriptive - after writing the title, ask yourself if you wou
 - `Removed` for now removed features 
 - `Fixed` for any bug fixes 
 
-* Writes a good title for their pull-request 
-    - Mention that we're unfortunately not able to template it 
-    - Mention the PR title will be part of the changelog, therefore... Smile for the camera :)
-      - Throw in link to changelog, and perhaps a screenshot 
+Example titles that are worthy of the changelog: 
+- "Added default styling for text links"
+- "Removed kirby-toolbar"
+- "Fixed kirby-radio-group TypeError"
 
 ### The good pull-request uses the template
-  * uses our template 
-    - Shortly go through purpose of each section - symphatize
-    - Remember to fill out the closes part without changing wording - causes issue to be closed, once this is merged! No more remembering to close! 
-      - If it closes more than one, also mention these! See: https://github.com/kirbydesign/designsystem/pull/1493
+As with writing [good issues](#issue), do not ignore the template text when creating a pull-request. 
 
+It provides a checklist to help you follow [the process of contributing](#the-process-of-contributing), ease collaboration by providing structure and reminds you to provide information the reviewer might be looking for. 
+
+Filling out the following part of the template properly, will cause the related issue to be closed automatically, once the pull-request has been merged: 
+
+> This PR closes # (reference issue number here)
+
+For example: 
+> This PR closes [#1427](https://github.com/kirbydesign/designsystem/issues/1427)
+
+If the pull-request solves more than one issue also mention these such that they also are closed automatically: 
+> This PR closes [#1427](https://github.com/kirbydesign/designsystem/issues/1427), closes [#1428](https://github.com/kirbydesign/designsystem/issues/1428), closes [#1429](https://github.com/kirbydesign/designsystem/issues/1429)
 
 ### The good pull-request has a logical commit history
-  * While also being part of writing a good commit - it would be nice if the commit history and each individual commit makes logical sence.
-    - If you have trouble maintaining a clean commit history, try pre-emptive commit comments! https://arialdomartini.wordpress.com/2012/09/03/pre-emptive-commit-comments/
-      - This gives each commit a very specific goal! 
-    <!--* Don't be afraid to mention other optimizations you think might be possible, but outside the scope of your PR in the "Other Information"-part. 
-    - Eventually create a couple of issues, and mention these - make sure to close them again if the changes won't be made... --->
+Having a logical commit history constructed using [good commits](#commit), can help the reviewer easily get an overview and understanding of the changes contained in a pull-request.
+
+If you are having trouble maintaining a clean commit history, you could eventually try writing [pre-emptive commit comments](https://github.com/kirbydesign/designsystem/issues/1428) i.e. writing down the commit message, before writing your code. This can help you stay focused on a single task at a time. 
+
+[INSERT IMAGE OF A LOGICAL COMMIT HISTORY HERE!]
 
 ### The good pull-request only alters files related to the changes 
   * Don't go boyscout in files that are not related to the changes in the PR. 
     - It will give a weird git history
+    - Eventually create a couple of issues, and mention these - make sure to close them again if the changes won't be made... --->
+    <!--* Don't be afraid to mention other optimizations you think might be possible, but outside the scope of your PR in the "Other Information"-part. 
 
 ### The good pull-request knows what it wants
   * Mention which kind of feedback you want - full on review or just some initial help 
