@@ -1,10 +1,43 @@
-<h2>Links</h2>
+<p>
+  Links are used for navigation between pages. They can be standalone links used on their own or
+  inline links placed within a sentence.
+</p>
+<p>
+  A link should be used for simple navigation. If a user triggers an action, makes a choice, or in
+  any way manipulate data, use a <a routerLink="/home/showcase/button">button</a> instead.
+</p>
+<p>
+  Rather than providing a component for links, Kirby simply provides custom styles for the
+  <code>&lt;a&gt;</code> tag, that gives a consistent look and feel of links. Links have an
+  underline, and inherit the text color of the surrounding elements. The color of visited links does
+  not change.
+</p>
+
+<h2>Sizes</h2>
+<p>
+  Any font-class from <a routerLink="/home/showcase/fonts">Kirby Fonts</a> can be used with links.
+  For accessability reasons, it is not recommended to use links when the clickable text is smaller
+  than 12px (extra small).
+</p>
+
 <cookbook-example-viewer [html]="internal.template">
   <cookbook-link-example-default #internal></cookbook-link-example-default>
 </cookbook-example-viewer>
 
 <h2>New tab</h2>
-With the <code>target="_blank"</code> ...<br /><br />
+<p>
+  The default behavior is to open the link in the current tab. If an anchor-tag has
+  <code>target="_blank"</code>, it will get an icon to signal to the user that a new tab will open.
+</p>
+
 <cookbook-example-viewer [html]="newTab.template">
   <cookbook-link-example-new-tab #newTab></cookbook-link-example-new-tab>
 </cookbook-example-viewer>
+
+<p>
+  It is recommended to only use this option for standalone links, that are not used within a
+  paragraph or in any other way embedded in text. For inline links, consider writing out the source,
+  so it is clear that clicking the link will take them to a new context, e.g.
+  <a href="https://github.com/kirbydesign/designsystem">www.github.com/kirbydesign/designsystem</a>.
+  Then the user can choose how to open the link.
+</p>
