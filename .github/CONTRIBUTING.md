@@ -539,7 +539,9 @@ The code review process has a better chance of going smooth if you conduct a sel
 
 #### Unrelated changes
 
-Avoid doing unrelated changes in files that are not directly part of your pull-request. For example, don't commit changes like formatting or reordering imports if they're the _only_ changes made in those files. If you have already committed unrelated changes try to revert them before asking for code review.
+Avoid doing unrelated changes in files that are not directly part of your pull-request. For example, don't commit changes like formatting or reordering imports if they're the _only_ changes made in those files. It will clutter the git history and make it hard to understand why the latest change made to a particular line of code is in a commit that is not related to the change at all. E.g., when using [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens) or similar tools.
+
+If you have already committed unrelated changes try to revert them before asking for code review.
 
 #### Formatting and linting
 
