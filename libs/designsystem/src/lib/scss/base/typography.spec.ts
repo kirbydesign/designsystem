@@ -246,7 +246,7 @@ describe('Typography', () => {
   describe(`anchor tag`, () => {
     describe(`by default`, () => {
       beforeEach(() => {
-        const fixture = `<a id="fixture">Text</a>`;
+        const fixture = `<a href="/test/" id="fixture">Text</a>`;
         document.body.insertAdjacentHTML('afterbegin', fixture);
         document.body.style.color = getColor('black').value;
         element = document.body.querySelector('#fixture');
@@ -267,7 +267,7 @@ describe('Typography', () => {
 
     describe(`with target-attribute set to '_blank'`, () => {
       beforeEach(() => {
-        const fixture = `<a target="_blank" id="fixture">Text</a>`;
+        const fixture = `<a href="/test/" target="_blank" id="fixture">Text</a>`;
         document.body.insertAdjacentHTML('afterbegin', fixture);
         element = document.body.querySelector('#fixture');
       });
