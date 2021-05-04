@@ -12,7 +12,6 @@ import { ListHelper } from './helpers/list-helper';
 import { ListItemComponent } from './list-item/list-item.component';
 import { ListComponent } from './list.component';
 import { LoadOnDemandEvent } from './list.event';
-import { NormalListComponent } from './normal-list/normal-list.component';
 import { GroupByPipe } from './pipes/group-by.pipe';
 
 /**
@@ -45,7 +44,6 @@ describe('ListComponent', () => {
       SpinnerComponent,
       InfiniteScrollDirective,
       ListItemColorDirective,
-      NormalListComponent,
       ListItemComponent,
       MockComponent(ionic.IonList),
       MockComponent(ionic.IonListHeader),

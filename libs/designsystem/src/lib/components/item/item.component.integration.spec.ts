@@ -13,7 +13,6 @@ import { DesignTokenHelper } from '../../helpers';
 import { TestHelper } from '../../testing/test-helper';
 import { WindowRef } from '../../types/window-ref';
 import { ListItemComponent } from '../list/list-item/list-item.component';
-import { NormalListComponent } from '../list/normal-list/normal-list.component';
 
 import { ItemComponent } from './item.component';
 
@@ -41,7 +40,6 @@ describe('ItemComponent in Kirby List', () => {
       InfiniteScrollDirective,
       ListItemColorDirective,
       ListItemTemplateDirective,
-      NormalListComponent,
       ListItemComponent,
     ],
   });
