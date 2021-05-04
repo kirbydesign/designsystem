@@ -543,11 +543,13 @@ Avoid doing unrelated changes in files that are not directly part of your pull-r
 
 If you have already committed unrelated changes try to revert them before asking for code review.
 
-#### Formatting and linting
+#### Formatting
 
 Use Prettier to format the files you are changing. If you are editing a file that for some reason has not already been properly formatted, you will probably see a lot of changes when you diff the file after you format it. Try to put the formatting changes in a separate commit if possible e.g., by creating a _formatting commit_ before committing your other changes. It will be easier for the reviewer to see your actual changes if they have the option to ignore the formatting changes.
 
-Use the linting rules to sort imports and remove unused variables, imports etc.
+#### Linting
+
+The linting rules are configured to help you fix things that are easily forgotten, like sorting imports and removing unused variables, imports etc. Use the linting tools to avoid having to fix these issues during code review.
 
 #### Temporary changes
 
