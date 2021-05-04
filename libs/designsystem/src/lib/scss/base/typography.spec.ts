@@ -272,7 +272,7 @@ describe('Typography', () => {
         element = document.body.querySelector('#fixture');
       });
 
-      it(`should have an "open" icon`, () => {
+      it(`should have a link icon`, () => {
         const baseURI = window.document.baseURI;
 
         expect(element).toHaveComputedStyle({
