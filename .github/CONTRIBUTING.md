@@ -539,21 +539,21 @@ A self-review removes gravel in the road, leading to a smooth and focused code r
 
 We collected a bunch of common issues that often come up during code reviews.
 
-#### Unrelated changes
+#### Do not commit unrelated changes
 
 Avoid unrelated changes in files that are not directly part of your pull-request. For example, don't commit changes like formatting or reordering imports if they're the _only_ changes made in those files. It will clutter the git history and make it hard to understand why the latest change made to a particular line of code is in a commit that is not related to the change at all. E.g., when using [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens) or similar tools.
 
 If you have already committed unrelated changes try to revert them before asking for code review.
 
-#### Formatting
+#### Make sure files are formatted
 
 Use Prettier to format the files you are changing. If you are editing a file that for some reason has not already been properly formatted, you will probably see a lot of changes when you diff the file after you format it. Try to put the formatting changes in a separate commit if possible e.g., by creating a _formatting commit_ before committing your other changes. It will be easier for the reviewer to see your actual changes if they have the option to ignore the formatting changes.
 
-#### Linting
+#### Look out for linting warnings
 
 The linting rules are configured to help you fix things that are easily forgotten, like sorting imports and removing unused variables, imports etc. Linting may also help you identify and remove dead code. Use the linting tools to avoid having to fix these issues during code review.
 
-#### Temporary changes
+#### Delete temporary changes
 
 Look for temporary changes you have used during development, like:
 
@@ -563,7 +563,7 @@ Look for temporary changes you have used during development, like:
 
 They do not belong in the codebase and should be removed. TODOs should either be implemented right away or you should create a new issue for solving it later.
 
-#### Concluding
+#### Concluding questions
 
 From the perspective of a reviewer, ask yourself:
 
