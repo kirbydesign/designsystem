@@ -256,22 +256,6 @@ It can be executed using `npx prettier [path/to/file]` but as with TSLint, we re
 * [Prettier extension for VSCode](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 * [Enabling "format on save" in VSCode](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode#format-on-save)
 
-## Creating pull-requests 
-
-<!-- This section is responsible for guiding contributors on how they should submit pull-requests in a way that ensures the most swift process and teach them how to catch low-hanging issues there might come up in code-review. -->
-
-### Before you submit  
-
-* Make sure you have completed the steps in: [Setup tooling for contribution](#setup-tooling-for-contribution)
-* Make sure you have written tests according to the guidelines described in [The good: test](#test)
-* Do a self-review <!-- We could link to self-review in the templates and have people check it off? -->
-
-### After you submit 
-
-* Post in Kirby-guild 
-* Code reviews are meant to align your code with existing code 
-  + While your implementation might be perfectly valid, we are aiming for uniformity across the codebase. 
-* Please don't fire & forget, i.e. commit & run - make sure to stay responsive and come back to answer comments on your code review :)
 
 ## The good:
 
