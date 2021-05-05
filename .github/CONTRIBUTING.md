@@ -14,7 +14,7 @@ If you at any point have any questions please read: [I have a question related t
 * [Setup environment and tooling for contribution](#setup-environment-and-tooling-for-contribution)
   + [Clone and install repository](#clone-and-install-repository)
   + [Node](#node)
-  + [Tslint](#tslint)
+  + [TSlint](#tslint)
   + [Prettier](#prettier)
 * [The good:](#the-good:)
   + [Issue](#issue)
@@ -172,22 +172,94 @@ If you have found a bug in Kirby you should follow these steps:
 
 <!-- The following section is responsible for teaching people how to get setup with 
 the repo such that they can get coding -->
+This section will help you get going with Kirby such that you can begin contributing. 
 
-### Clone and install repository 
+### Clone and install the repository
 
-* how to clone and get going with the kirby repo
+<!-- how to clone and get going with the kirby repo-->
+**Note:** make sure you have the right version of Node installed before installing the repository (see: [Node](#node)).
+
+1. Clone the repository: 
+
+``` 
+
+git clone https://github.com/kirbydesign/designsystem
+```
+
+2. Install dependencies: 
+
+``` 
+
+npm install
+```
+
+3. Start the cookbook server:
+
+``` 
+
+npm start
+```
+
+You should now be able to open `http://localhost:4200` in a browser to access the cookbook.
 
 ### Node 
 
-* Which version should people use, and perhaps a recommendation on which tool people can use to manage versions. 
+<!-- Which version should people use, and perhaps a recommendation on which tool people can use to manage versions. -->
+[Node](https://nodejs.org/en/) is the runtime used for development. 
 
-### Tslint 
+It is recommended to use `v12` for development as we currently do not support node LTS (see issue: [#1443](https://github.com/kirbydesign/designsystem/issues/1443)). 
 
-* People should make sure to have it enabled to avoid unnecessary comments during code review
+If you need to have multiple versions of node installed then a version manager such as [NVM](https://github.com/nvm-sh/nvm) can be used. 
+
+### TSlint 
+
+<!-- People should make sure to have it enabled to avoid unnecessary comments during code review-->
+**Note:** Work is being done to migrate from TSLint to ESLint (see issue: [#1317](https://github.com/kirbydesign/designsystem/issues/1317)). 
+
+TSLint is used for linting which helps keep up the quality of the submitted code for Kirby. 
+
+Scripts for running TSLint can be found in `package.json` . We however recommend that you install a TSLint plugin for your editor. It can be useful to enable "fix on save"-functionality such that simple errors are fixed automatically. 
+
+**Useful resources:**
+
+* [TSLint extension for VSCode](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-tslint-plugin).
+* [Enabling "fix on save" in VSCode](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-tslint-plugin#auto-fix-and-auto-fix-on-save).
+
+#### VSCode "workspace library execution"-issue
+
+An issue might occur where TSLint will randomly disable for the current workspace and has to be enabled again using the command `TSLint: Manage workspace library execution`. 
+
+To solve this: 
+
+1. Open a typescript file in VScode. 
+2. Open the command pallette (<kbd>ctrl/cmd</kbd> + <kbd>shift</kbd> + <kbd>p</kbd>) and enter: `typescript: select typescript version`
+
+4. Select: `use workspace version 3.6.5`.
+5. Open the command pallette and enter: `TSLint: Manage workspace library execution` .
+
+6. Select: `always enable workspace library execution`.
+
+This will cause changes to be made in the file `.vscode/settings.json` ; do not commit these.
 
 ### Prettier
 
-* It is a good idea to use format-on-save
+Prettier is used for consistent code formatting and avoiding unnecessary discussions about this during reviews.
+
+As with TSLint, we  strongly recommend installing Prettier as a plugin for your editor. You should also enable "format on save".
+
+It can however be used without an editor plugin; run `npm run prettier` to check for formatting errors, fix them by running `npm run prettier:fix`. 
+
+If there are changes only concerning formatting, in files you did not create - do not commit these. There is most likely something wrong with your Prettier settings. 
+Make sure that Prettier uses the config file that is shipped with the repository ([`.prettierrc.json`](https://github.com/kirbydesign/designsystem/blob/master/.prettierrc.json)) and not a global configuration located on your machine. 
+
+To check if the config file from the repository is used, try to alter the configuration in `.prettierrc.json` and format a file using Prettier - for example by changing `"singleQuote": true,` to `"singleQuote": false,`. 
+If all quotation marks are changed to `"` instead of `'` when you format, it means the repository config file is used by Prettier. Remember to revert the changes made to `.prettierrc.json`.
+
+**Useful resources:**
+
+* [Prettier extension for VSCode](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+* [Enabling "format on save" in VSCode](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode#format-on-save)
+
 
 ## The good:
 
