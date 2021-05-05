@@ -191,6 +191,14 @@ ion-modal.kirby-overlay {
   }
 }
 
+ion-loading.kirby-loading-overlay {
+  --backdrop-opacity: #{$loading-overlay-backdrop-opacity};
+  --ion-backdrop-color: #{get-color('background-color')};
+  .loading-wrapper {
+    --background: transparent;
+  }
+}
+
 .kirby-toast {
   position: fixed;
   user-select: none;
