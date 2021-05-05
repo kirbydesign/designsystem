@@ -101,3 +101,21 @@ p,
 .kirby-text-bold {
   font-weight: font-weight('bold');
 }
+
+a:link,
+a:visited {
+  $icon-scaling-factor: 1.5em;
+  color: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+
+  &[target='_blank'] {
+    white-space: nowrap;
+    background-image: url('/assets/kirby/icons/svg/link.svg');
+    background-repeat: no-repeat;
+    background-position: right 50%;
+    background-size: $icon-scaling-factor;
+    //place icon to the right of text, with icons own width + the actual spacing
+    padding-right: calc(#{$icon-scaling-factor} + #{size('xxxs')});
+  }
+}

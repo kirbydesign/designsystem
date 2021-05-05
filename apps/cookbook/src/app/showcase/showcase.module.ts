@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { KirbyModule } from '@kirbydesign/designsystem';
@@ -23,6 +24,7 @@ import { COMPONENT_DECLARATIONS, COMPONENT_EXPORTS, COMPONENT_IMPORTS } from './
     IonicModule,
     KirbyModule.forChild({ moduleRootRoutePath: '/home/showcase' }),
     IphoneModule,
+    RouterModule,
   ],
   declarations: [
     ...COMPONENT_DECLARATIONS,
