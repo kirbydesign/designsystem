@@ -3,9 +3,11 @@
   inline links placed within a sentence.
 </p>
 <p>
-  A link should be used for simple navigation. Use
-  <a routerLink="/home/showcase/button">buttons</a> for more complex interactions where a user
-  triggers an action, makes a choice, or in any way manipulate data.
+  A link should be used for simple navigation. That is, situations where the user will be sent to a
+  new resource or destination in the app, via a <code>href</code>. Use
+  <a routerLink="/home/showcase/button">buttons</a> instead of links if the user is not redirected
+  to a new destination, but instead triggers an action, makes a choice, or in any way manipulate
+  data.
 </p>
 <p>
   Rather than providing a component for links, Kirby simply provides custom styles for the
@@ -30,6 +32,10 @@
 <p>
   The default behavior is to open the link in the current tab. If an anchor-tag has
   <code>target="_blank"</code>, it will get an icon to signal to the user that a new tab will open.
+</p>
+<p>
+  <b>Note:</b> In a non-web context, i.e. an app, any link will most likely launch the device's
+  browser, and effectively open a new tab, outside the app context.
 </p>
 
 <cookbook-example-viewer [html]="newTab.template">
