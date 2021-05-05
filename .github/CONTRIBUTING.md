@@ -20,7 +20,7 @@ If you at any point have any questions please read: [I have a question related t
   + [Issue](#issue)
   + [Branch](#branch)
   + [Commit](#commit)
-  + [Self-review](#self-review)
+  + [Self-review](#the-good-self-review)
   + [Pull-request](#pull-request)
   + [Test](#test)
 * [I have a question related to Kirby](#i-have-a-question-related-to-kirby)
@@ -98,7 +98,7 @@ We encourage contributors to publish a draft pull-request with a WIP implementat
 
 > Reviewing your own pull-request like you would review someone else's pull-request.
 
-This consists of code-reviewing your own pull-request, following guidelines found in [The good: Self-review](#self-review). This is your chance to catch any low-hanging fruits and common issues before the reviewer does. If this is not done, an unneccessary amount of minor changes might be required during code review. This wastes both yours and the reviewers time.
+This consists of code-reviewing your own pull-request, following guidelines found in [The good: Self-review](#the-good-self-review). This is your chance to catch any low-hanging fruits and common issues before the reviewer does. If this is not done, an unneccessary amount of minor changes might be required during code review. This wastes both yours and the reviewers time.
 
 <!-- Why we do UX reviews? -->
 
@@ -603,12 +603,45 @@ For more on good git commits, see (among _many_ other):
 * [Turbo Git Commit Message Standard](https://gist.github.com/turbo/efb8d57c145e00dc38907f9526b60f17)
 * [Check Out These 5 Git Tips Before Your Next Commit](https://medium.com/walmartglobaltech/check-out-these-5-git-tips-before-your-next-commit-c1c7a5ae34d1)
 
-### Self-review 
+### The Good: Self-Review
 
-* Don't change files that is not related to your pull-request
-  + for example don't reorder imports in files that is not directly related to the issue at hand
-* Check for unused imports
-* Other self review points go here
+A lot of comments and requests for change during review of a pull request can sometimes feel demotivating. Doing a good self-review can save yourself and the reviewer from frustrations during code review.
+
+A self-review removes gravel in the road, leading to a smooth and focused code review - while avoiding unnecessary discussions. It should be done before the pull request is published and marked as _Ready for review_.
+
+We collected a bunch of common issues that often come up during code reviews.
+
+#### Do not commit unrelated changes
+
+Avoid unrelated changes in files that are not directly part of your pull-request. For example, don't commit changes like formatting or reordering imports if they're the _only_ changes made in those files. It will clutter the git history and make it hard to understand why the latest change made to a particular line of code is in a commit that is not related to the change at all. E.g., when using [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens) or similar tools.
+
+If you have already committed unrelated changes try to revert them before asking for code review.
+
+#### Make sure files are formatted
+
+Use Prettier to format the files you are changing. If you are editing a file that for some reason has not already been properly formatted, you will probably see a lot of changes when you diff the file after you format it. Try to put the formatting changes in a separate commit if possible e.g., by creating a _formatting commit_ before committing your other changes. It will be easier for the reviewer to see your actual changes if they have the option to ignore the formatting changes.
+
+#### Look out for linting warnings
+
+The linting rules are configured to help you fix things that are easily forgotten, like sorting imports and removing unused variables, imports etc. Linting may also help you identify and remove dead code. Use the linting tools to avoid having to fix these issues during code review.
+
+#### Delete temporary changes
+
+Look for temporary changes you have used during development, like:
+
+* leftover `console.log()` statements
+* code that has been commented out
+* TODO comments
+
+They do not belong in the codebase and should be removed. TODOs should either be implemented right away or you should create a new issue for solving it later.
+
+#### Concluding questions
+
+From the perspective of a reviewer, ask yourself:
+
+* Is it obvious what the changes made in the pull request are and what the result of merging the pull request will be?
+* Is the issue solved by the changes? Read the issue description and the tech refinement comment(s) again to confirm you have solved the issue.
+* Does the [pull request](#pull-request) description contain the appropriate information necessary to perform a code review?
 
 ### Pull-request
 
