@@ -31,7 +31,7 @@ describe('Anchor tag', () => {
 
   describe(`with class for link-icon applied`, () => {
     beforeEach(() => {
-      const fixture = `<a href="/test/" class="external-icon" id="fixture">Text</a>`;
+      const fixture = `<a href="/test/" class="kirby-external-icon" id="fixture">Text</a>`;
       document.body.insertAdjacentHTML('afterbegin', fixture);
       element = document.body.querySelector('#fixture');
     });

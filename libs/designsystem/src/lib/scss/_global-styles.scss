@@ -247,7 +247,7 @@ ion-loading.kirby-loading-overlay {
 /*
  * Class to add link-icon to the right of e.g. anchor tag.
  */
-.external-icon {
+.kirby-external-icon {
   $icon-scaling-factor: 1.5em;
   white-space: nowrap;
   background-image: url('/assets/kirby/icons/svg/link.svg');
