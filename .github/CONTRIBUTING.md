@@ -553,6 +553,7 @@ Before going through these however - we want to remind you to take ownership of 
 It is your responsibility as a contributor to get your pull-requests reviewed, therefore reach out and be communicative! 
 
 ### The good pull-request solves one issue
+
 Every pull-request that is created should solve _one_ existing [Github issue](https://github.com/kirbydesign/designsystem/issues). 
 
 There might be cases where the changes in a pull-request naturally solves multiple issues, often caused by them being related one way or another. This is the exception, not the rule. 
@@ -565,24 +566,28 @@ We do not wish for pull-requests that have no related issue to be submitted, as 
 Should you find yourself in that situation and want to salvage as much of your work as possible: create an issue following [the process for contribution](#the-process-for-contribution) and make changes to your pull-request as necessary.
 
 ### The good pull-request has a title worthy of the changelog
+
 Besides informing what the changes in the pull-request does - the title of your pull-request will be used in [the changelog](https://cookbook.kirby.design/home/changelog) to represent your changes! 
 ![](images/issue-title-to-changelog.png)
 
 So make the title descriptive - after writing the title, ask yourself if you would feel informed what the changes in the PR entail if you read it as part of a changelog. 
 
 [keepachangelog.com](https://keepachangelog.com) has a neat list of good verbs to start out with, you can use as inspiration for your title:
-- `Added` for new features
-- `Changed` for changes in existing functionality 
-- `Deprecated` for soon-to-be removed features 
-- `Removed` for now removed features 
-- `Fixed` for any bug fixes 
+
+* `Added` for new features
+* `Changed` for changes in existing functionality 
+* `Deprecated` for soon-to-be removed features 
+* `Removed` for now removed features 
+* `Fixed` for any bug fixes 
 
 Example titles that are worthy of the changelog: 
-- "Added default styling for text links"
-- "Removed kirby-toolbar"
-- "Fixed kirby-radio-group TypeError"
+
+* "Added default styling for text links"
+* "Removed kirby-toolbar"
+* "Fixed kirby-radio-group TypeError"
 
 ### The good pull-request uses the template
+
 As with writing [good issues](#issue), do not ignore the template text when creating a pull-request. 
 
 It provides a checklist to help you follow [the process of contributing](#the-process-of-contributing), ease collaboration by providing structure and reminds you to provide information the reviewer might be looking for. 
@@ -592,12 +597,15 @@ Filling out the following part of the template properly, will cause the related 
 > This PR closes # (reference issue number here)
 
 For example: 
+
 > This PR closes [#1427](https://github.com/kirbydesign/designsystem/issues/1427)
 
 If the pull-request solves more than one issue also mention these such that they also are closed automatically: 
+
 > This PR closes [#1427](https://github.com/kirbydesign/designsystem/issues/1427), closes [#1428](https://github.com/kirbydesign/designsystem/issues/1428), closes [#1429](https://github.com/kirbydesign/designsystem/issues/1429)
 
 ### The good pull-request has a logical commit history
+
 Maintaining a logical commit history constructed using [good commits](#commit) helps the reviewer easily get an overview and understanding of the changes contained in a pull-request.
 
 If you are having trouble maintaining a clean commit history, you could eventually try writing [pre-emptive commit comments](https://arialdomartini.wordpress.com/2012/09/03/pre-emptive-commit-comments/). This consists of writing down the commit comment, before writing your code. This can help you stay focused on a single task at a time. 
@@ -605,6 +613,7 @@ If you are having trouble maintaining a clean commit history, you could eventual
 ![](images/good-commit-history.png)
 
 ### The good pull-request only alters files related to the issue at hand
+
 While you might get the urge to be a good girl/boy scout and reorder imports or fix formatting in files not related to your issue, don't.
 
 While it is very much appreciated that you want to leave the code better than you found it, doing so in unrelated files will cause the git history of the project to be illogical. 
@@ -613,15 +622,18 @@ For example, it would not make sense if the imports for the list component locat
 Should you stumble upon possible optimizations or things that could be done better, go ahead and create new issues for these.
 
 ### The good pull-request knows what it wants
+
 Tell the reviewer what you want to get out of your pull-request. 
 Should the reviewer do a full-on review or give initial guidance on a WIP implementation? Mention it in the pull-request so the reviewer knows what you are looking for and does not waste their time doing a full review on a WIP implementation. 
 
 As a convention in Kirby we signal which kind of feedback we want by creating a draft pull-request if it is a WIP implementation - and a normal one for a full review.
 
-Mention people you want to include in the discussion of your pull-request by using `@`, clarify why: 
+Mention people you want to include in the discussion of your pull-request by using `@` , clarify why: 
+
 > @MadsBuchmann for details on the fontsource dependency
 
 ### The good pull-requests only uses review comments for actual review comments
+
 Review comments are for review comments. Not for explaining your code. 
 
 If you feel the urge to add a review comment to clarify a hard to understand part of your code, it is not only the reviewer that will need that information. 
@@ -630,6 +642,7 @@ Future contributors reading the code will also need it and could have a hard tim
 Either refactor the code to make it more readable or add clarifying comments - it should be possible to understand the code without looking up the pull-request.
 
 ### The good pull-request is closed when there is no need for it
+
 As with the [good issue](#issue), the good pull-request is closed in order to reduce clutter, when there is no need for it. 
 
 Therefore if it is clear that the changes will not be merged to `master` - close it. 
