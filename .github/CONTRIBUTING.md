@@ -567,7 +567,7 @@ If you are not able to fill in the `This PR closes # (reference issue number her
 Should you find yourself in that situation and want to salvage as much of your work as possible: create an issue following [the process for contribution](#the-process-for-contribution) and make changes to your pull-request as necessary.
 
 ### The good pull-request has a title worthy of the changelog
-Besides helping to inform what the changes in the pull-request does - the title of your pull-request will be used in <a href="https://cookbook.kirby.design/home/changelog" target="_blank">the changelog</a> to represent your changes!
+Besides helping to inform what the changes in the pull-request does - the title of your pull-request will be used in [the changelog](https://cookbook.kirby.design/home/changelog) to represent your changes! 
 ![](images/issue-title-to-changelog.png)
 
 So make the title descriptive - after writing the title, ask yourself if you would feel informed what the changes in the PR entail if you read it as part of a changelog. 
