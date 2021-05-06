@@ -243,7 +243,7 @@ describe('Typography', () => {
     }
   });
 
-  fdescribe(`anchor tag`, () => {
+  describe(`anchor tag`, () => {
     describe(`by default`, () => {
       beforeEach(() => {
         const fixture = `<a href="/test/" id="fixture">Text</a>`;
