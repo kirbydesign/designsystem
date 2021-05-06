@@ -540,11 +540,6 @@ For more on good git commits, see (among _many_ other):
 
 ### Pull-request
 
-<!-- TODO: get this point accross somehow: 
-* Throw in before and after images if the changes are visual 
---> 
-
-<!--* A good pull-request makes the life easier for the reviewer, causing a quicker review. Noice! -->
 Why should you care about creating good pull-requests - is it not just a tool for code reviews?
 
 Well first of all, a good pull-request can help reduce how long it takes for your changes to be merged to master by making the life easier for the reviewer, causing a quicker review. 
@@ -558,7 +553,6 @@ Before going through these however - we want to remind you to take ownership of 
 It is your responsibility as a contributor to get your pull-requests reviewed, therefore reach out and be communicative! 
 
 ### The good pull-request solves one issue
-  <!--* Has a related issue - do not submit pull-requests unless it's related to an issue! Please oh god oh please!-->
 Every pull-request that is created should solve _one_ existing [Github issue](https://github.com/kirbydesign/designsystem/issues). 
 
 There might be cases where the changes in a pull-request naturally solves multiple issues, often caused by them being related one way or another. This is the exception, not the rule. 
