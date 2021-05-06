@@ -102,8 +102,8 @@ p,
   font-weight: font-weight('bold');
 }
 
-a:link,
-a:visited {
+:link,
+:visited {
   $icon-scaling-factor: 1.5em;
   color: inherit;
   cursor: pointer;
