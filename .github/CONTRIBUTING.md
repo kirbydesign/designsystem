@@ -608,7 +608,7 @@ Maintaining a logical commit history constructed using [good commits](#commit) h
 
 If you are having trouble maintaining a clean commit history, you could eventually try writing [pre-emptive commit comments](https://arialdomartini.wordpress.com/2012/09/03/pre-emptive-commit-comments/). This consists of writing down the commit comment, before writing your code. This can help you stay focused on a single task at a time. 
 
-[INSERT IMAGE OF A LOGICAL COMMIT HISTORY HERE!]
+![](images/good-commit-history.png)
 
 ### The good pull-request only alters files related to the issue at hand
 While you might get the urge to be a good girl/boy scout and reorder imports or fix formatting in files not related to your issue, don't.
