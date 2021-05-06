@@ -1,6 +1,10 @@
 <div class="example">
-  <h1>Chart js</h1>
-  <kirby-chartjs [data]="data" [chartType]="chartType"></kirby-chartjs>
+  <cookbook-example-viewer [html]="jsBar.template" [ts]="jsBar.codeSnippet">
+    <cookbook-chartjs-example-bar #jsBar></cookbook-chartjs-example-bar>
+  </cookbook-example-viewer>
+  <cookbook-example-viewer [html]="bar.template" [ts]="bar.codeSnippet">
+    <cookbook-chart-example-bar #bar> </cookbook-chart-example-bar>
+  </cookbook-example-viewer>
   <cookbook-example-viewer [html]="donut.template">
     <cookbook-chart-example-donut #donut> </cookbook-chart-example-donut>
   </cookbook-example-viewer>
@@ -18,9 +22,6 @@
   </cookbook-example-viewer>
   <cookbook-example-viewer [html]="column.template" [ts]="column.codeSnippet">
     <cookbook-chart-example-column #column> </cookbook-chart-example-column>
-  </cookbook-example-viewer>
-  <cookbook-example-viewer [html]="bar.template" [ts]="bar.codeSnippet">
-    <cookbook-chart-example-bar #bar> </cookbook-chart-example-bar>
   </cookbook-example-viewer>
   <h2>Properties:</h2>
   <cookbook-api-description-properties

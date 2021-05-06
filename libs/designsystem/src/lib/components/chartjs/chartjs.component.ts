@@ -31,7 +31,7 @@ import { styles } from '../../helpers/color-helper.styles';
   templateUrl: './chartjs.component.html',
   styleUrls: ['./chartjs.component.scss'],
 })
-export class ChartjsComponent implements OnInit, OnChanges, AfterContentInit {
+export class ChartjsComponent implements OnChanges {
   @ViewChild('chart', { static: true }) chartElement: ElementRef<HTMLCanvasElement>;
 
   @Input() data: ChartData = null;
@@ -44,6 +44,19 @@ export class ChartjsComponent implements OnInit, OnChanges, AfterContentInit {
     data: null,
     options: {
       backgroundColor: styles.mainColors.primary,
+      scales: {
+        x: {
+          grid: {
+            display: false,
+          },
+        },
+        y: {
+          grid: {
+            display: false,
+          },
+        },
+      },
+      indexAxis: 'y',
     },
   };
 
@@ -61,23 +74,25 @@ export class ChartjsComponent implements OnInit, OnChanges, AfterContentInit {
       BarElement
     );
   }
-  ngAfterContentInit(): void {
-    this.chart = new Chart(this.chartElement.nativeElement.getContext('2d'), { ...this.config });
-  }
-
-  ngOnInit(): void {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.chartType) {
+      this.chart = new Chart(this.chartElement.nativeElement.getContext('2d'), { ...this.config });
     }
 
     this.updateProperties();
   }
 
   private updateProperties() {
-    if (this.chart) {
+    if (this.chart || this.chartOptions) {
       this.chart.config.type = this.chartType;
       this.chart.config.data = this.data;
+      console.log(this.chartOptions);
+
+      if (this.chartOptions) {
+        const merged = { ...this.chart.options, ...this.chartOptions };
+        this.chart.config.options = merged;
+      }
       this.chart.update();
     }
   }
