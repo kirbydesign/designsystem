@@ -243,7 +243,7 @@ describe('Typography', () => {
     }
   });
 
-  describe(`anchor tag`, () => {
+  fdescribe(`anchor tag`, () => {
     describe(`by default`, () => {
       beforeEach(() => {
         const fixture = `<a href="/test/" id="fixture">Text</a>`;
@@ -265,9 +265,9 @@ describe('Typography', () => {
       });
     });
 
-    describe(`with target-attribute set to '_blank'`, () => {
+    describe(`with class applied to add icon`, () => {
       beforeEach(() => {
-        const fixture = `<a href="/test/" target="_blank" id="fixture">Text</a>`;
+        const fixture = `<a href="/test/" class="external-icon" id="fixture">Text</a>`;
         document.body.insertAdjacentHTML('afterbegin', fixture);
         element = document.body.querySelector('#fixture');
       });

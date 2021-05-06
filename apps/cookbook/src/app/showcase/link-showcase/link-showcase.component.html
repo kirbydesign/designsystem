@@ -28,10 +28,10 @@
   <cookbook-link-example-default #internal></cookbook-link-example-default>
 </cookbook-example-viewer>
 
-<h2>New tab</h2>
+<h2>External links</h2>
 <p>
-  The default behavior is to open the link in the current tab. If an anchor-tag has
-  <code>target="_blank"</code> it will get an icon to signal to the user that a new tab will open.
+  If the link is standalone, and will open a new tab, use the <code>external-icon</code> css-class
+  to show an icon immediately after the link.
 </p>
 
 <cookbook-example-viewer [html]="newTab.template">
@@ -39,9 +39,9 @@
 </cookbook-example-viewer>
 
 <p>
-  It is recommended to only use this option for standalone links that are not used within a
-  paragraph or in any other way embedded in text. Consider writing out the source for inline links
-  so it is clear that clicking the link will take the user to a new context, e.g.
+  It is not recommended to use this option for inline links. Instead, consider writing out the
+  source for inline links so it is clear that clicking the link will take the user to a new context,
+  e.g.
   <a href="https://github.com/kirbydesign/designsystem">www.github.com/kirbydesign/designsystem</a>.
   Then the user can choose how they want to open the link.
 </p>

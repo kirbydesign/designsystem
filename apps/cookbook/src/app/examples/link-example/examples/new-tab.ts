@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 const config = {
   selector: 'cookbook-link-example-new-tab',
-  template: `<a target="_blank" href="https://github.com/kirbydesign/designsystem">Kirby on Github</a>`,
+  template: `<a class="external-icon" target="_blank" href="https://github.com/kirbydesign/designsystem">Kirby on Github</a>`,
 };
 
 @Component({
