@@ -546,7 +546,9 @@ For more on good git commits, see (among _many_ other):
 
 <!--* A good pull-request makes the life easier for the reviewer, causing a quicker review. Noice! -->
 Why should you care about creating good pull-requests - is it not just a tool for code reviews?
+
 Well first of all, a good pull-request can help reduce how long it takes for your changes to be merged to master by making the life easier for the reviewer, causing a quicker review. 
+
 Secondly a good pull-request is more than just a tool for code reviews - it documents the process of reaching a satisfactory implementation aswell as toughts and discussion surrounding this. 
 
 The rules that applies for writing a [good issue](#issue) also applies for writing a good description for your pull-request.
@@ -560,14 +562,16 @@ It is your responsibility as a contributor to get your pull-requests reviewed, t
 Every pull-request that is created should solve _one_ existing [Github issue](https://github.com/kirbydesign/designsystem/issues). 
 
 There might be cases where the changes in a pull-request naturally solves multiple issues, often caused by them being related one way or another. This is the exception, not the rule. 
-Striving for the scope of the pull-requests to be one issue, makes the task of reviewing it more manageable.
+Striving for the scope of the pull-requests to be one issue makes the task of reviewing it more manageable.
 
-If you are not able to fill in the `This PR closes # (reference issue number here)` part of the pull-request template and follow the branch naming convention outlined in [The Good: Branch](#branch), because there is no issue to reference; it is unfortunately an indicator that you have not followed [the process for contribution](#the-process-for-contribution). We do not wish for pull-requests that have no related issue to be submitted, as this means no refinement has taken place and there might be no agreement on whether the suggested changes should be part of Kirby. If it is submitted anyways, it will most likely be closed without being merged.  
+If you are not able to reference any issue when filling in the `This PR closes # (reference issue number here)` part of the pull-request template or when following the branch name convention outlined in [The Good: Branch](#branch); it is unfortunately an indicator that you are not solving any issue and have not followed [the process for contribution](#the-process-for-contribution). 
+
+We do not wish for pull-requests that have no related issue to be submitted, as this means no refinement has taken place and there might be no agreement on whether the suggested changes should be part of Kirby. If it is submitted anyways, it will most likely be closed without being merged.  
 
 Should you find yourself in that situation and want to salvage as much of your work as possible: create an issue following [the process for contribution](#the-process-for-contribution) and make changes to your pull-request as necessary.
 
 ### The good pull-request has a title worthy of the changelog
-Besides helping to inform what the changes in the pull-request does - the title of your pull-request will be used in [the changelog](https://cookbook.kirby.design/home/changelog) to represent your changes! 
+Besides informing what the changes in the pull-request does - the title of your pull-request will be used in [the changelog](https://cookbook.kirby.design/home/changelog) to represent your changes! 
 ![](images/issue-title-to-changelog.png)
 
 So make the title descriptive - after writing the title, ask yourself if you would feel informed what the changes in the PR entail if you read it as part of a changelog. 
@@ -589,7 +593,7 @@ As with writing [good issues](#issue), do not ignore the template text when crea
 
 It provides a checklist to help you follow [the process of contributing](#the-process-of-contributing), ease collaboration by providing structure and reminds you to provide information the reviewer might be looking for. 
 
-Filling out the following part of the template properly, will cause the related issue to be closed automatically, once the pull-request has been merged: 
+Filling out the following part of the template properly, will cause the related issue to be closed automatically once the pull-request has been merged: 
 
 > This PR closes # (reference issue number here)
 
@@ -602,7 +606,7 @@ If the pull-request solves more than one issue also mention these such that they
 ### The good pull-request has a logical commit history
 Maintaining a logical commit history constructed using [good commits](#commit) helps the reviewer easily get an overview and understanding of the changes contained in a pull-request.
 
-If you are having trouble maintaining a clean commit history, you could eventually try writing [pre-emptive commit comments](https://arialdomartini.wordpress.com/2012/09/03/pre-emptive-commit-comments/) i.e. writing down the commit comment, before writing your code. This can help you stay focused on a single task at a time. 
+If you are having trouble maintaining a clean commit history, you could eventually try writing [pre-emptive commit comments](https://arialdomartini.wordpress.com/2012/09/03/pre-emptive-commit-comments/). This consists of writing down the commit comment, before writing your code. This can help you stay focused on a single task at a time. 
 
 [INSERT IMAGE OF A LOGICAL COMMIT HISTORY HERE!]
 
