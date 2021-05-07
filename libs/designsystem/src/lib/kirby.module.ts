@@ -1,4 +1,3 @@
-import { OverlayModule } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import { Inject, InjectionToken, ModuleWithProviders, NgModule, Optional } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -23,6 +22,7 @@ import { EmptyStateComponent } from './components/empty-state/empty-state.compon
 import { FabSheetComponent } from './components/fab-sheet/fab-sheet.component';
 import { FlagComponent } from './components/flag/flag.component';
 import { DateInputDirective } from './components/form-field/directives/date/date-input.directive';
+import { DecimalMaskDirective } from './components/form-field/directives/decimal-mask/decimal-mask.directive';
 import { FormFieldMessageComponent } from './components/form-field/form-field-message/form-field-message.component';
 import { FormFieldComponent } from './components/form-field/form-field.component';
 import { InputCounterComponent } from './components/form-field/input-counter/input-counter.component';
@@ -46,9 +46,8 @@ import {
   ListSectionHeaderDirective,
 } from './components/list/list.directive';
 import { GroupByPipe } from './components/list/pipes/group-by.pipe';
-import { FullscreenLoadingOverlayComponent } from './components/loading-overlay/fullscreen-loading-overlay/fullscreen-loading-overlay.component';
-import { LoadingOverlayService } from './components/loading-overlay/fullscreen-loading-overlay/loading-overlay.service';
 import { LoadingOverlayComponent } from './components/loading-overlay/loading-overlay.component';
+import { LoadingOverlayService } from './components/loading-overlay/loading-overlay.service';
 import { ActionSheetComponent } from './components/modal/action-sheet/action-sheet.component';
 import { AlertComponent } from './components/modal/alert/alert.component';
 import { ModalFooterComponent } from './components/modal/footer/modal-footer.component';
@@ -115,6 +114,7 @@ const exportedDeclarations = [
   BadgeComponent,
   ThemeColorDirective,
   DateInputDirective,
+  DecimalMaskDirective,
   SlideButtonComponent,
   ToggleComponent,
   EmptyStateComponent,
@@ -142,7 +142,6 @@ const exportedDeclarations = [
 const declarations = [
   ...exportedDeclarations,
   ListItemColorDirective,
-  FullscreenLoadingOverlayComponent,
   KeyHandlerDirective,
   FormFieldMessageComponent,
   AlertComponent,
@@ -163,7 +162,7 @@ const exportedModules = [
 
 const exports = [...exportedModules, ...exportedDeclarations];
 
-const importedModules = [...exportedModules, OverlayModule];
+const importedModules = [...exportedModules];
 
 const providers = [
   ModalController,
@@ -186,7 +185,6 @@ const entryComponents = [
   ModalWrapperComponent,
   ModalCompactWrapperComponent,
   ActionSheetComponent,
-  FullscreenLoadingOverlayComponent,
   AlertComponent,
 ];
 

@@ -17,7 +17,6 @@ import { MockFabSheetComponent } from './components/mock.fab-sheet.component';
 import { MockFlagComponent } from './components/mock.flag.component';
 import { MockFormFieldMessageComponent } from './components/mock.form-field-message.component';
 import { MockFormFieldComponent } from './components/mock.form-field.component';
-import { MockFullscreenLoadingOverlayComponent } from './components/mock.fullscreen-loading-overlay.component';
 import { MockGridComponent } from './components/mock.grid.component';
 import { MockIconComponent } from './components/mock.icon.component';
 import { MockInputCounterComponent } from './components/mock.input-counter.component';
@@ -85,7 +84,6 @@ export const MOCK_COMPONENTS = [
   MockListHeaderComponent,
   MockListSectionHeaderComponent,
   MockListComponent,
-  MockFullscreenLoadingOverlayComponent,
   MockLoadingOverlayComponent,
   MockActionSheetComponent,
   MockModalFooterComponent,

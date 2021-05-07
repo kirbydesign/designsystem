@@ -25,6 +25,7 @@ import { FormFieldExampleComponent } from './form-field-example/form-field-examp
 import { GridExampleComponent } from './grid-example/grid-example.component';
 import { IconExampleComponent } from './icon-example/icon-example.component';
 import { ItemExampleComponent } from './item-example/item-example.component';
+import { LinkExampleComponent } from './link-example/link-example.component';
 import { ListExampleComponent } from './list-example/list-example.component';
 import { ListLoadOnDemandExampleComponent } from './list-load-on-demand-example/list-load-on-demand-example.component';
 import { ListNoShapeExampleComponent } from './list-no-shape-example/list-no-shape-example.component';
@@ -136,6 +137,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   SlidesExampleComponent,
   CookbookExampleCardContentComponent,
   AccordionExampleComponent,
+  LinkExampleComponent,
 ];
 
 // Configure custom icons (used by example to show the usage of custom icons)

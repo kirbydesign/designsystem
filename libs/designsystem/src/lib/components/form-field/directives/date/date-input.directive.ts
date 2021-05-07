@@ -8,7 +8,8 @@ import {
   LOCALE_ID,
   Renderer2,
 } from '@angular/core';
-import Inputmask from 'inputmask';
+import 'inputmask/lib/extensions/inputmask.date.extensions';
+import Inputmask from 'inputmask/lib/inputmask';
 
 @Directive({
   selector: '[kirby-input][type="date"]',

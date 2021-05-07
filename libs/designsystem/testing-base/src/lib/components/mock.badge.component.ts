@@ -1,4 +1,4 @@
-import { forwardRef, Component, Input } from '@angular/core';
+import { Component, forwardRef, Input } from '@angular/core';
 
 import { BadgeComponent } from '@kirbydesign/designsystem';
 

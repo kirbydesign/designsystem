@@ -8,14 +8,15 @@
       "highcharts": "highcharts",
       "highcharts/modules/annotations": "highcharts",
       "highcharts/highstock": "highcharts/highstock",
-      "@ionic/angular": "ionic"
+      "@ionic/angular": "ionic",
+      "inputmask": "inputmask"
     }
   },
   "whitelistedNonPeerDependencies": [
-    "@angular/cdk",
     "@ionic/angular",
     "highcharts",
     "moment",
-    "@fontsource/roboto"
+    "@fontsource/roboto",
+    "inputmask"
   ]
 }
