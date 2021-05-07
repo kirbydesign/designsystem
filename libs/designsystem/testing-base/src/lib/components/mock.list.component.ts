@@ -31,9 +31,10 @@ export class MockListComponent {
   @Input() hasItemSpacing: boolean;
   @Input() useVirtualScroll: boolean;
   @Input() virtualScrollViewportHeight: number;
+  @Input() virtualScrollSettings: any;
   @Input() isLoadOnDemandEnabled: boolean;
-  @Input() swipeActions: ListSwipeAction[];
   @Output() loadOnDemand = new EventEmitter<LoadOnDemandEvent>();
+  @Input() swipeActions: ListSwipeAction[];
   @Output() itemSelect = new EventEmitter<any>();
 }
 
