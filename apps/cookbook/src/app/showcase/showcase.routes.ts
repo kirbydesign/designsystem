@@ -26,6 +26,7 @@ import { FontsShowcaseComponent } from './fonts-showcase/fonts-showcase.componen
 import { FormFieldShowcaseComponent } from './form-field-showcase/form-field-showcase.component';
 import { GridShowcaseComponent } from './grid-showcase/grid-showcase.component';
 import { IconShowcaseComponent } from './icon-showcase/icon-showcase.component';
+import { LinkShowcaseComponent } from './link-showcase/link-showcase.component';
 import { ListLoadOnDemandShowcaseComponent } from './list-load-on-demand-showcase/list-load-on-demand-showcase.component';
 import { ListNoShapeShowcaseComponent } from './list-no-shape-showcase/list-no-shape-showcase.component';
 import { ListShowcaseComponent } from './list-showcase/list-showcase.component';
@@ -246,6 +247,10 @@ export const routes: Routes = [
       {
         path: 'range',
         component: RangeShowcaseComponent,
+      },
+      {
+        path: 'link',
+        component: LinkShowcaseComponent,
       },
     ],
   },
