@@ -663,23 +663,50 @@ For testing we use:
 The following is not a guide on how to use these tools (if you are not familiar with Jasmine & Spectator have a look at the linked documentation above). Rather it is a list of points we believe can help you create tests that are helpful in avoiding regression, making others feel safe changing code and that can assist documenting your code.
 
 #### The good test knows itself (Find a better title for this, sheesh...) / Is appropiately located in file???? 
-<!-- Know which kind of test you're writing: 
-  - Unit Tests - test a single unit, fast to execute, it’s whitebox testing 
-    - We rely exentisvely on these
-    -  We test some SUT (System Under Test)
-  - Integration tests 
-    - How does two components interact, grey box 
-  - Use the appropiate file for this. -->
+In Kirby we seperate integration tests from unit tests - so make sure to know which kind of testing you are doing before writing them. 
+
+Unit tests are located in `*.spec.ts` files such as [`button.component.spec.ts`](https://github.com/kirbydesign/designsystem/blob/master/libs/designsystem/src/lib/components/button/button.component.spec.ts) and integration tests in `*.spec.integration.ts` files such as [`button.component.integration.spec.ts`](https://github.com/kirbydesign/designsystem/blob/master/libs/designsystem/src/lib/components/button/button.component.integration.spec.ts).
+
+Remember that unit tests, test a single unit - so if you find yourself relying on other components or functions without them being mocked or stubbed, then you are most likely writing an integration test. 
 
 #### The good test can be read as a sentence 
-  <!-- A test should be readable as a sentence, try to read it in the test output. 
-    Would you have a clear idea what is going on if this failed?
-    Should with GIVEN WHEN THEN is your best friend
-    Always describe what you test 
-    [ INCLUDE IMAGE EXAMPLE FROM CODE ]
-    Always have expectations  
-     Continue in lowercase, it reads as a sentence 
-   Prefer the use of descriptions such as "should render with #12345" say should render with correct color --> 
+Being able to read a test as a sentence, makes it clear what has gone wrong when the test fails and makes it act as a functional requirement. 
+
+As an example which one of these two tests best communicates intention while being easy to understand and read? 
+
+Example #1: 
+![](images/bad-test-example.png)
+
+Example #2: 
+![](images/good-test-example.png)
+
+Probably #2. The first can make sense when you have seen #2, but without you will have to interpret what is actually meant by "ButtonComponent + Kirby page Page Actions background-color: #fff". What is it exactly that should have the white backgound color here? 
+
+To achieve this, you can follow these pointers:
+
+##### Use the [Given-When-Then](https://www.agilealliance.org/glossary/gwt/#q=~(infinite~false~filters~(postType~(~'page~'post~'aa_book~'aa_event_session~'aa_experience_report~'aa_glossary~'aa_research_paper~'aa_video)~tags~(~'given*20when*20then))~searchTerm~'~sort~false~sortDirection~'asc~page~1)) formula
+For example have a look at example #1: 
+* (Given) ButtonComponent in Kirby Page 
+* (When) inside Page Actions 
+* (Then) [it] should render with correct background-color
+
+The missing _it_ comes from the `it()` blocks used when writing the tests: 
+![](images/it-code-example.png)
+
+##### Start `describe` and `it` blocks with a lowercase letter 
+For example write `describe('inside Page Actions', () => {...})` not `describe('Inside Page Actions', () => {...})`.
+Not following this, causes the capitalisation to be wrong when the test is read as a sentence: "ButtonComponent in Kirby Page Inside Page Actions Should render with correct background color".
+
+##### Read it aloud as an actual sentence 
+Before you delcare that your test is ready try to read it out as an actual sentence, and see if it feels natural. 
+Would others be able to understand your intention?
+
+##### Avoid values in the description 
+Notice how the above test says "should render with correct background-color" instead of "should render with background-color #fff". 
+
+For someone running the tests, it is not relevant what the color should be, they care about if the color is _correct_. If they ever need to see what the correct color is, they can look up the test. 
+
+This also reduces the likeliness of forgetting to correct the test description, if the color ever was to change - resulting in uncertainaity to what the correct color actually is. 
 
 #### The good test follows the Arrange, Act, Assert pattern:
 
