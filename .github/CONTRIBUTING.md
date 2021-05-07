@@ -711,7 +711,23 @@ For someone running the tests, it is not relevant what the color should be, they
 
 This also reduces the likeliness of forgetting to correct the test description, if the color ever was to change - resulting in uncertainaity to what the correct color actually is. 
 
-#### The good test follows the Arrange, Act, Assert pattern:
+#### The good test follows the Arrange, Act, Assert (AAA) pattern
+Following the [AAA pattern](https://medium.com/@pjbgf/title-testing-code-ocd-and-the-aaa-pattern-df453975ab80) makes your test well structured and easy to understand. 
+
+A test will not always have all parts of AAA - sometimes it may only be necessary to assert, as is the case in the following test:
+```
+[...]
+  it('should render with correct background-color', () => {                                                                                                                                                                                             
+       expect(element).toHaveComputedStyle({                                                                                                                                                                                                               
+         'background-color': getColor('primary'),                                                                                                                                                                                                          
+       });                                                                                                                                                                                                                                                 
+  });
+[...]
+```
+
+We do not denote each part of AAA with a comment but use spacing to seperate the different parts of the test.
+
+You might notice tests in Kirby that do not use the AAA pattern - that is a good opportunity to do some girl/boyscouting and fix it if you are making other changes related to your issue in that file anyways.
 
 #### The good test has readable code
   <!-- - It’s more about readabilty than about creating pretty code
