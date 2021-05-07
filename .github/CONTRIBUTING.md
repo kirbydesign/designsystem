@@ -675,9 +675,11 @@ Being able to read a test as a sentence, makes it clear what has gone wrong when
 As an example which one of these two tests best communicates intention while being easy to understand and read? 
 
 Example #1: 
+
 ![](images/bad-test-example.png)
 
 Example #2: 
+
 ![](images/good-test-example.png)
 
 Probably #2. The first can make sense when you have seen #2, but without you will have to interpret what is actually meant by "ButtonComponent + Kirby page Page Actions background-color: #fff". What is it exactly that should have the white backgound color here? 
