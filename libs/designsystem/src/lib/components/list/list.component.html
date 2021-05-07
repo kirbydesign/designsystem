@@ -19,7 +19,7 @@
     class="viewport"
   >
     <ng-container
-      *ngTemplateOutlet="virtualSlidingItemsTemplate; context: { $implicit: datasource }"
+      *ngTemplateOutlet="virtualSlidingItemsTemplate; context: { $implicit: virtualScrollData }"
     ></ng-container>
   </div>
 
@@ -76,8 +76,8 @@
   </kirby-list-item>
 </ng-template>
 
-<ng-template #virtualSlidingItemsTemplate let-datasource>
-  <div *uiScroll="let entry of datasource">
+<ng-template #virtualSlidingItemsTemplate let-virtualScrollData>
+  <div *uiScroll="let entry of virtualScrollData">
     <div class="item-wrapper">
       <kirby-list-item
         [item]="entry.item"

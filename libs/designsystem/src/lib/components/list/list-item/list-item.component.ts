@@ -45,6 +45,11 @@ export class ListItemComponent implements OnInit, AfterViewInit {
 
   @Output() itemSelect = new EventEmitter<any>();
 
+  onItemSelect(item: any) {
+    if (!this.isSelectable) return;
+    this.itemSelect.emit(item);
+  }
+
   @Output() swipeActionSelect = new EventEmitter<any>();
 
   onSwipeActionSelect(swipeAction, item, event) {
@@ -53,11 +58,6 @@ export class ListItemComponent implements OnInit, AfterViewInit {
       item,
       event,
     });
-  }
-
-  onItemSelect(item: any) {
-    if (!this.isSelectable) return;
-    this.itemSelect.emit(item);
   }
 
   ngOnInit() {

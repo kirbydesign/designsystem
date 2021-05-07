@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 
+import { LoadOnDemandEvent } from '@kirbydesign/designsystem';
+
 import { BaseListComponent } from '../list-shared/base-list.component';
 
 export const ListVirtualScrollExampleTemplate = `
-<kirby-list [items]="itemsFullList" [useVirtualScroll]="true" >
+<kirby-list [items]="items" [useVirtualScroll]="true" (loadOnDemand)="onLoadDemand($event)" noMoreItemsText="No more items">
 <kirby-item *kirbyListItemTemplate="let item">
 <h3>{{item.title}}</h3>
 <data slot="end" class="kirby-text-bold">{{item.amount}}</data>
@@ -26,34 +28,35 @@ export class ListVirtualScrollExampleComponent extends BaseListComponent {
 
   constructor() {
     super();
+    this.items.push(...this.generateItems());
   }
 
-  // onLoadDemand(loadOnDemandEvent: LoadOnDemandEvent): void {
-  //   // We end the load more event after 20 items, by sending null to the kirby list.
-  //   if (this.itemCount <= 20) {
-  //     // lets make a delay to simulate a HTTP call.
-  //     setTimeout(() => {
-  //       this.items.push(...this.generateItems());
-  //       loadOnDemandEvent.complete();
-  //     }, 2000);
-  //   } else {
-  //     loadOnDemandEvent.complete(true);
-  //   }
-  // }
+  onLoadDemand(loadOnDemandEvent: LoadOnDemandEvent): void {
+    // We end the load more event after 100 items, by sending null to the kirby list.
+    if (this.itemCount <= 100) {
+      // lets make a delay to simulate a HTTP call.
+      setTimeout(() => {
+        this.items.push(...this.generateItems());
+        loadOnDemandEvent.complete();
+      }, 2000);
+    } else {
+      loadOnDemandEvent.complete(true);
+    }
+  }
 
-  // private generateItems(): any[] {
-  //   const items = [];
-  //   const numberOfItems = 10;
-  //   for (let index = 0; index < numberOfItems; index++) {
-  //     this.itemCount++;
-  //     const transaction = {
-  //       title: `Item ${this.itemCount}`,
-  //       subTitle: `${Math.round(Math.random() * 100)} pcs`,
-  //       amount: `${Math.round(Math.random() * 1000)} DKK`,
-  //       detail: Math.round(Math.random() * 100),
-  //     };
-  //     items.push(transaction);
-  //   }
-  //   return items;
-  // }
+  private generateItems(): any[] {
+    const items = [];
+    const numberOfItems = 20;
+    for (let index = 0; index < numberOfItems; index++) {
+      this.itemCount++;
+      const transaction = {
+        title: `Item ${this.itemCount}`,
+        subTitle: `${Math.round(Math.random() * 100)} pcs`,
+        amount: `${Math.round(Math.random() * 1000)} DKK`,
+        detail: Math.round(Math.random() * 100),
+      };
+      items.push(transaction);
+    }
+    return items;
+  }
 }

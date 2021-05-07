@@ -25,5 +25,12 @@ export class ListVirtualScrollShowcaseComponent {
       type: ['number'],
       defaultValue: '500',
     },
+    {
+      name: 'virtualScrollSettings',
+      description:
+        'Sensible defaults are provided, but the behaviour of the virtual scroll can be fine tuned to specific needs. Available settings can be seen at https://github.com/dhilt/ngx-ui-scroll#settings',
+      type: ['object'],
+      defaultValue: '{ minIndex: 0, startIndex: 0, bufferSize: 20}',
+    },
   ];
 }

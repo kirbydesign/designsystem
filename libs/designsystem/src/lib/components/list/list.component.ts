@@ -15,12 +15,12 @@ import {
 } from '@angular/core';
 import { IDatasource } from 'ngx-ui-scroll';
 
-import { PlatformService } from '../../helpers/platform.service';
 import { ThemeColor } from '../../helpers/theme-color.type';
 import { ItemComponent } from '../item/item.component';
 
+import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 import { ListHelper } from './helpers/list-helper';
-import { ListSwipeAction, SwipeDirection, SwipeEnd } from './list-swipe-action';
+import { ListSwipeAction } from './list-swipe-action';
 import {
   ListFooterDirective,
   ListHeaderDirective,
@@ -37,9 +37,12 @@ export enum ListShape {
 }
 
 export enum EndClass {
-  'first',
-  'last',
+  first = 'first',
+  last = 'last',
 }
+
+const TIMEOUT = 5000;
+const INTERVAL = 400;
 @Component({
   selector: 'kirby-list',
   templateUrl: './list.component.html',
@@ -48,66 +51,21 @@ export enum EndClass {
 })
 export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   @ViewChild('list', { static: true }) list: any;
+  @ViewChild(InfiniteScrollDirective) scrollDirective: InfiniteScrollDirective;
 
-  /**
-   * Provide items for the list to render. Items must be provided in the order you expect them to be rendered.
-   */
   @Input()
   items: any[] = [];
 
-  datasource: IDatasource = {
-    get: (index, count, success) => {
-      console.log('index', index);
-      console.log('count', count);
+  @Input() getItemColor: (item: any) => ThemeColor;
 
-      setTimeout(() => {
-        const data = [];
-        const start = Math.max(0, index);
-        const end = Math.min(index + count - 1, this.items.length - 1);
-        if (start <= end) {
-          for (let i = start; i <= end; i++) {
-            const itemMeta = { itemIndex: i, totalCount: this.items.length };
-            data.push({ item: this.items[i], itemMeta });
-          }
-        }
-        console.log('DATA', data);
-
-        success(data);
-      }, 400);
-    },
-    settings: {
-      minIndex: 0,
-      startIndex: 0,
-      bufferSize: 20,
-    },
-  };
-
-  @Input()
-  getItemColor: (item: any) => ThemeColor;
-
-  /**
-   * Callback to determine name of section. Sections will be ordered alphabetically.
-   */
   @Input() getSectionName: (item: any) => string;
 
-  /**
-   * Callback that defines how to track changes for items in the iterable.
-   */
   @Input() trackBy: TrackByFunction<any>;
 
-  /**
-   * Text to display when no more items can be loaded (used for "on demand"-loading).
-   */
   @Input() noMoreItemsText: string;
 
-  /**
-   * Determines if dividers should be shown or not.
-   */
   @Input() showDivider = false;
 
-  /**
-   * Determines if list row text should turn bold on selection
-   */
   @Input() markSelectedRow = false;
 
   @HostBinding('class.kirby-list') true;
@@ -119,10 +77,12 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
    * `square` means **without** rounded corners, `rounded` means **with** rounded corners.,  `none` means **without** padding, border, box-shadow and background.
    */
   @Input() shape = ListShape.rounded;
+
   @HostBinding('class.shape-rounded')
   public get isShapeRounded(): boolean {
     return this.shape === ListShape.rounded;
   }
+
   @HostBinding('class.shape-none')
   public get isShapeNone(): boolean {
     return this.shape === ListShape.none;
@@ -132,8 +92,74 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   @Input()
   hasItemSpacing: boolean;
 
-  @Input() useVirtualScroll: boolean = false;
+  private _useVirtualScroll: boolean = false;
+  get useVirtualScroll(): boolean {
+    return this._useVirtualScroll && !this.isSectionsEnabled;
+  }
+
+  @Input() set useVirtualScroll(value: boolean) {
+    this._useVirtualScroll = value;
+  }
+
   @Input() virtualScrollViewportHeight: number = 500;
+
+  // Possible settings are listed here: https://github.com/dhilt/ngx-ui-scroll#settings
+  @Input() virtualScrollSettings: any = {};
+
+  virtualScrollData: IDatasource = {
+    get: (index, count) => this.getVirtualDataset(index, count),
+    settings: {
+      minIndex: this.virtualScrollSettings.minIndex || 0,
+      startIndex: this.virtualScrollSettings.startIndex || 0,
+      bufferSize: this.virtualScrollSettings.bufferSize || 10,
+      ...this.virtualScrollSettings,
+    },
+  };
+
+  private async getVirtualDataset(index: number, count: number): Promise<any> {
+    const slicePromise = await new Promise((resolve) => {
+      setTimeout(() => {
+        const sliceWithMeta = this.getItemsSliceWitMeta(index, count);
+
+        // If we return less items than count, virtual scroll will interprete it as EOF and stop asking for more
+        if (sliceWithMeta.length < count && this.isLoadOnDemandEnabled) {
+          let elapsedTime = 0;
+          // Scrollend (that triggers load on demand) is not fired when we scroll as the virtual
+          // scroll component fixes the viewport, so we fire it programmatically
+          this.scrollDirective.scrollEnd.emit();
+
+          const poller = setInterval(() => {
+            elapsedTime += INTERVAL;
+
+            if (this.isLoading) {
+              // Just a failsafe in case this.isLoading for some reason is not reset
+              if (elapsedTime > TIMEOUT) {
+                clearInterval(poller);
+              }
+
+              return;
+            }
+
+            clearInterval(poller);
+            resolve(this.getItemsSliceWitMeta(index, count));
+          }, INTERVAL);
+        } else {
+          resolve(sliceWithMeta);
+        }
+      }, INTERVAL);
+    });
+    return slicePromise;
+  }
+
+  private getItemsSliceWitMeta(index: number, count: number): any[] {
+    const sliceWithMeta = this.items.slice(index, index + count).map((item, sliceIndex) => {
+      return {
+        itemMeta: { itemIndex: index + sliceIndex, totalCount: this.items.length },
+        item,
+      };
+    });
+    return sliceWithMeta;
+  }
 
   /**
    * Determines if the loadOnDemand event should be emitted.
@@ -141,21 +167,10 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
    */
   @Input() isLoadOnDemandEnabled: boolean;
 
-  /**
-   * Determines if list items should have swipe actions or not
-   * - the order of swipe actions is used to determine edge actions,
-   * as well as their order of appearance on the screen.
-   */
-  @Input() swipeActions: ListSwipeAction[] = [];
-
-  /**
-   * Emitting event when more items are to be loaded.
-   */
   @Output() loadOnDemand = new EventEmitter<LoadOnDemandEvent>();
 
-  /**
-   * Emitting event when an item is selected (tapped on mobile, clicked on web)
-   */
+  @Input() swipeActions: ListSwipeAction[] = [];
+
   @Output() itemSelect = new EventEmitter<any>();
 
   @ContentChildren(ItemComponent)
@@ -170,7 +185,6 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   @ContentChild(ListFooterDirective, { static: false, read: TemplateRef })
   footerTemplate: TemplateRef<any>;
 
-  // The first element that matches ListItemDirective. As a structural directive it unfolds into a template. This is a reference to that.
   @ContentChild(ListItemTemplateDirective, { static: true, read: TemplateRef })
   itemTemplate: TemplateRef<any>;
 
@@ -182,11 +196,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   groupedItems: any[];
   selectedItem: any;
 
-  constructor(
-    private listHelper: ListHelper,
-    private groupBy: GroupByPipe,
-    private platform: PlatformService
-  ) {}
+  constructor(private listHelper: ListHelper, private groupBy: GroupByPipe) {}
 
   ngOnInit() {
     this.isSelectable = this.itemSelect.observers.length > 0;
@@ -215,11 +225,6 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     }
   }
 
-  onItemSelect(item: any) {
-    this.selectedItem = item;
-    this.itemSelect.emit(this.selectedItem);
-  }
-
   onLoadOnDemand(event?: LoadOnDemandEventData) {
     this.listHelper.onLoadOnDemand(this, event);
   }
@@ -230,6 +235,11 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
 
   sectionTrackBy(_: number, section: { name: string }): string {
     return section.name;
+  }
+
+  onItemSelect(item: any) {
+    this.selectedItem = item;
+    this.itemSelect.emit(this.selectedItem);
   }
 
   onSwipeActionSelect(args: any): void {
