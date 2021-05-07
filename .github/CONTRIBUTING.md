@@ -716,13 +716,11 @@ Following the [AAA pattern](https://medium.com/@pjbgf/title-testing-code-ocd-and
 
 A test will not always have all parts of AAA - sometimes it may only be necessary to assert, as is the case in the following test:
 ```
-[...]
   it('should render with correct background-color', () => {                                                                                                                                                                                             
        expect(element).toHaveComputedStyle({                                                                                                                                                                                                               
          'background-color': getColor('primary'),                                                                                                                                                                                                          
        });                                                                                                                                                                                                                                                 
   });
-[...]
 ```
 
 We do not denote each part of AAA with a comment but use spacing to seperate the different parts of the test.
