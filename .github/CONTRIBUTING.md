@@ -682,7 +682,9 @@ Example #2:
 
 ![](images/good-test-example.png)
 
-Probably #2. The first can make sense when you have seen #2, but without you will have to interpret what is actually meant by "ButtonComponent + Kirby page Page Actions background-color: #fff". What is it exactly that should have the white backgound color here? 
+Probably #2. 
+
+The first can make sense when you have seen #2, but without you will have to interpret what is actually meant by "ButtonComponent + Kirby page Page Actions background-color: #fff". What is it exactly that should have the white backgound color here? 
 
 To achieve this, you can follow these pointers:
 
