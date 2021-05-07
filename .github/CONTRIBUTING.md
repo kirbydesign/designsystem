@@ -672,7 +672,7 @@ Remember that unit tests, test a single unit - so if you find yourself relying o
 #### The good test can be read as a sentence 
 Being able to read a test as a sentence, makes it clear what has gone wrong when the test fails and makes it act as a functional requirement. 
 
-As an example which one of these two tests best communicates intention while being easy to understand and read? 
+As an example, which one of these two tests best communicates intention while being easy to understand and read? 
 
 Example #1: 
 
@@ -684,7 +684,8 @@ Example #2:
 
 Probably #2. 
 
-The first can make sense when you have seen #2, but without you will have to interpret what is actually meant by "ButtonComponent + Kirby page Page Actions background-color: #fff". What is it exactly that should have the white backgound color here? 
+The first can make sense when you have seen #2, but without you will have to interpret what is actually meant by "ButtonComponent + Kirby page Page Actions background-color: #fff".
+What is it exactly that should have the white backgound color here? 
 
 To achieve this, you can follow these pointers:
 
@@ -702,10 +703,6 @@ For example write `describe('inside Page Actions', () => {...})` not `describe('
 
 Not following this, causes the capitalisation to be wrong when the test is read as a sentence: 
 > "ButtonComponent in Kirby Page Inside Page Actions Should render with correct background color".
-
-##### Read it aloud as an actual sentence 
-Before you delcare that your test is ready try to read it out as an actual sentence, and see if it feels natural. 
-Would others be able to understand your intention?
 
 ##### Avoid values in the description 
 Notice how the above test says "should render with correct background-color" instead of "should render with background-color #fff". 
