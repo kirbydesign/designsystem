@@ -649,19 +649,18 @@ From the perspective of a reviewer, ask yourself:
 
 ### Test
 
-  <!-- Tests gives us quick feedback, making it easy to identify what went wrong, as it was just worked on. 
-  Locks functionality down to avoid regressions. We use husky hooks to do this often. 
-  We might be testing A lot, but it is worth it, as it locks down the functionality avoids regression. Value is extracted from the test each and every time it is ran. -->
+Tests helps us avoid regressions and can provide peace of mind to other contributors when making changes to the code by ensuring that nothing is accidentally broken. Sometimes more time is spent on writing tests than the actual code - but it provides value everytime it is executed and is an important tool in collaboration.
 
-  <!-- We use Jasmine, Spectator, NGMocks, Karma - this is not an introduction on how to use any of these. It is an explanation of how we structure tests to get the most out of them. It can act as documentation if structured correctly, and can help others understand what is going on.
-  If you're not familiar with writing tests using these tools have a look at: ... -->
+A good well written test can also act as a sort of documentation by documenting functional requirements to the code.
 
-  <!-- Karma is the test runner 
-    - Make sure to have the window focused when testing, otherwise there might be errors. 
-      - Can be ran in headless mode instead 
-  Jasmine is the framework for building the test 
-    - Matchers, expectations, beforeEach, describes etc. 
-    - Throw in a link to the matchers documentation -->
+That is three benefits for the price of one - so do not skimp on testing!
+
+For testing we use: 
+* [Karma](https://karma-runner.github.io/latest/index.html) - as our test runner
+* [Jasmine](https://jasmine.github.io) - as the framework for writing tests 
+* [Spectator](https://github.com/ngneat/spectator) - as a tool for reducing boilerplate that gives us mocking capabilities and provide spying functionality 
+
+The following is not a guide on how to use these tools (if you are not familiar with Jasmine & Spectator have a look at the linked documentation above). Rather it is a list of points we believe can help you create tests that are helpful in avoiding regression, making others feel safe changing code and that can assist documenting your code.
 
 #### The good test knows itself (Find a better title for this, sheesh...) / Is appropiately located in file???? 
 <!-- Know which kind of test you're writing: 
