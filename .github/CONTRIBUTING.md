@@ -697,7 +697,9 @@ The missing _it_ comes from the `it()` blocks used when writing the tests:
 
 ##### Start `describe` and `it` blocks with a lowercase letter 
 For example write `describe('inside Page Actions', () => {...})` not `describe('Inside Page Actions', () => {...})`.
-Not following this, causes the capitalisation to be wrong when the test is read as a sentence: "ButtonComponent in Kirby Page Inside Page Actions Should render with correct background color".
+
+Not following this, causes the capitalisation to be wrong when the test is read as a sentence: 
+> "ButtonComponent in Kirby Page Inside Page Actions Should render with correct background color".
 
 ##### Read it aloud as an actual sentence 
 Before you delcare that your test is ready try to read it out as an actual sentence, and see if it feels natural. 
