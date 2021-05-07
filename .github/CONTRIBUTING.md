@@ -649,7 +649,108 @@ From the perspective of a reviewer, ask yourself:
 
 ### Test
 
-* How should testing be done 
+  <!-- Tests gives us quick feedback, making it easy to identify what went wrong, as it was just worked on. 
+  Locks functionality down to avoid regressions. We use husky hooks to do this often. 
+  We might be testing A lot, but it is worth it, as it locks down the functionality avoids regression. Value is extracted from the test each and every time it is ran. -->
+
+  <!-- We use Jasmine, Spectator, NGMocks, Karma - this is not an introduction on how to use any of these. It is an explanation of how we structure tests to get the most out of them. It can act as documentation if structured correctly, and can help others understand what is going on.
+  If you're not familiar with writing tests using these tools have a look at: ... -->
+
+  <!-- Karma is the test runner 
+    - Make sure to have the window focused when testing, otherwise there might be errors. 
+      - Can be ran in headless mode instead 
+  Jasmine is the framework for building the test 
+    - Matchers, expectations, beforeEach, describes etc. 
+    - Throw in a link to the matchers documentation -->
+
+#### The good test knows itself (Find a better title for this, sheesh...) / Is appropiately located in file???? 
+<!-- Know which kind of test you're writing: 
+  - Unit Tests - test a single unit, fast to execute, it’s whitebox testing 
+    - We rely exentisvely on these
+    -  We test some SUT (System Under Test)
+  - Integration tests 
+    - How does two components interact, grey box 
+  - Use the appropiate file for this. -->
+
+#### The good test can be read as a sentence 
+  <!-- A test should be readable as a sentence, try to read it in the test output. 
+    Would you have a clear idea what is going on if this failed?
+    Should with GIVEN WHEN THEN is your best friend
+    Always describe what you test 
+    [ INCLUDE IMAGE EXAMPLE FROM CODE ]
+    Always have expectations  
+     Continue in lowercase, it reads as a sentence 
+   Prefer the use of descriptions such as "should render with #12345" say should render with correct color --> 
+
+#### The good test follows the Arrange, Act, Assert pattern:
+
+#### The good test has readable code
+  <!-- - It’s more about readabilty than about creating pretty code
+  - A well structured readable test 
+  - Makes spacing between it blocks proper to avoid blob of text
+  - Group related tests under common describe blocks 
+    - ex button component, when disabled, it should:  -->
+
+#### The good test is isolated 
+  <!--  - Prefer beforeEach 
+    - It's okay to NOT be DRY, be wet. 
+        - Lowers the chance of something in the testing being the problme versus the actual code 
+        - Use forEach to create a lot of similar tests  (line 334 button-component.spec.ts)
+          - This can read better, when the test is the same, but the scenarios are different 
+          - Can give a better overview of what is going on
+    - Test should be flat and self contained
+    - If you're writing unit tests remember to mock! 
+      We use it whenever we’re not interested in the implementaiton of the thing being mocked. 
+      In a unit test we stub out the surrounding world (GOOD)
+      Ask yourself, what are you testing - can help you decide what to mock (GOOD) -->
+
+#### The good test uses map/test-scenarios when appropiate 
+  <!--   - If you find yourself writing out a lot of 
+    - Unless when it makes sense to use map/test-scenarios (button.component.spec.ts example ~ line 334) 
+    - Sometimes it reads better, when the test is the same, but the scenarios are different 
+    - Can give a better overview of what is going on -->
+
+#### The good test prefers the use of Spectator over Angular testbed 
+  <!--  - Use set input insetad of detectChanges with spectator, less boilreplate (GOOD) 
+    - Less boilerplate -->
+
+
+#### The good test prefers fakeAsync over Async & Done 
+  <!--- Not using done avoids callback hell 
+  - fakeAsync simulates timespan
+    - From notes: 
+      Simulates time span 
+        wrap entire it function in fakeAsync
+        This gives access to stuff like tick() 
+        Only use async or fakeAsync 
+          Don’t mix, it async await does not do anything 
+          We want to “fake” that we’re awaiting, so therefore don’t await 
+        tick can be called with or without a time 
+          actually returns ms, but does not actually take any ms -->
+
+
+#### The good test uses ionicModuleForTest instead of IonicModule.forRoot 
+  <!-- While we said it is okay not to be dry, we have the configuration for the ionicModule being tested, 
+  located in the same spot. There will be places where IonicMoudle.forRoot is being used. If you're writing tests 
+  in these files anyways, go ahead and change it -->
+
+
+
+#### The good test merges tests when appropiate 
+  <!-- It's a bit of an art... 
+  If you're writing individual tests for "font-size", "font-weight", "font-family" consider merging these into a singe "should have correct typography" test. Same with border instead of testing weight, thickness, color for itself, test "should have correct border"
+  It's a bit of an art and no heads will roll if not followed
+  It’s okay to check multiple computed styles when multiple properties results in the expected outcome, “should render without outline” example --> 
+
+#### Other good tips to remember when writing tests in Kirby:
+  <!-- These did not really fit _The Good_ format, but we wouldn't leave you without:
+  - You can use set input instead of detect changes, 
+  - Explain the difference between createHost v. createComponent 
+    - When to use what
+  - The good test includes edge cases 
+  - You can prefix tests with `f` (`fit`, `fdescribe`) to only test that block 
+    - The correct color is stated in the expectation and is easier to change...
+  - Using a TDD approach for writing your tests, can help you create better APIs as you're actually using it as a consumer, to write the test, before implementing it. --> 
 
 ## I have a question related to Kirby
 
