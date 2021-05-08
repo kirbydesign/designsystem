@@ -132,7 +132,7 @@
     "lint-staged": "^9.4.2",
     "multimatch": "^4.0.0",
     "ng-mocks": "^9.0.0",
-    "ng-packagr": "^9.0.3",
+    "ng-packagr": "^10.1.1",
     "node-sass": "^4.13.1",
     "post-npm-install": "^2.0.0",
     "prettier": "^1.19.1",
