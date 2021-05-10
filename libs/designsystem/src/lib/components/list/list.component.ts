@@ -106,7 +106,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   // Possible settings are listed here: https://github.com/dhilt/ngx-ui-scroll#settings
   @Input() virtualScrollSettings: any = {};
 
-  virtualScrollData: IDatasource = {
+  _virtualScrollData: IDatasource = {
     get: (index, count) => this.getVirtualDataset(index, count),
     settings: {
       minIndex: this.virtualScrollSettings.minIndex || 0,
@@ -135,8 +135,8 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
               // Just a failsafe in case this.isLoading for some reason is not reset
               if (elapsedTime > TIMEOUT) {
                 clearInterval(poller);
+                resolve([]);
               }
-
               return;
             }
 
