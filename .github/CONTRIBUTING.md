@@ -552,7 +552,7 @@ But more importantly a pull-request includes commits containing code changes tha
 Before going through these however - we want to remind you to take ownership of your pull-requests. 
 It is your responsibility as a contributor to get your pull-requests reviewed, therefore reach out and be communicative! 
 
-### The good pull-request solves one issue
+### The good pull-request solves only one issue
 
 Every pull-request that is created should solve _one_ existing [Github issue](https://github.com/kirbydesign/designsystem/issues). 
 
