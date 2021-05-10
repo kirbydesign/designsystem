@@ -547,7 +547,7 @@ Well first of all, a good pull-request can help reduce how long it takes for you
 Secondly a good pull-request is more than just a tool for code reviews - it documents the process of reaching a satisfactory implementation as well as toughts and discussion surrounding this. 
 
 The rules that applies for writing a [good issue](#issue) also applies for writing a good description for your pull-request.
-But more importantly a pull-request includes commits containing code changes that you want to merge with the main branch, which means there is a few more points to keep in mind, when constructing a good pull-request. 
+But more importantly a pull-request includes commits containing code changes that you want to merge with the main branch, which means there are a few more points to keep in mind, when constructing a good pull-request. 
 
 Before going through these however - we want to remind you to take ownership of your pull-requests. 
 It is your responsibility as a contributor to get your pull-requests reviewed, therefore reach out and be communicative! 
