@@ -737,7 +737,7 @@ Mention people you want to include in the discussion of your pull request by usi
 
 > @MadsBuchmann for details on the fontsource dependency
 
-### The good pull requests only uses review comments for actual review comments
+### The good pull request only uses review comments for actual review comments
 
 Review comments are for review comments. Not for explaining your code. 
 
