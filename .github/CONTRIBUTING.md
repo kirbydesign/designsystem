@@ -744,31 +744,19 @@ Here is two examples, which one is easiest to read?
 
 ![](images/readable-tests.png)
 
-#### The good test is isolated 
-The good test should be as isolated as possible. It is okay to be wet instead of being dry. This is one of the few cases where that is important actually. 
-A future developer should be able to read your test, understand what is going on, without having to jump around and do too much logic. For example, 
-the conditions of one test should never effect another test. 
+#### The good test is isolated and flat
+Writing tests is one of the few places, where it is okay to be WET instead of DRY - it is rather important actually. 
 
-Therefore do not share variables between tests, each test should be flat. Also avoid putitng repeated code into functions and repeating it accross several tests, as changing this function can cause several tests to fail/change. 
+Future contributors should be able to read the test without having to jump around the code and do too much logic, therefore: 
+* Avoid reusing code by using functions, keep your tests flat instead 
+* Avoid the use of shared variables between tests, all state should be isolated to the test 
+* Use `beforeEach` instead of `beforeAll`; it will cause potential changes made by previous tests to be overwritten, and you start with the same state each time
 
-Therefore be wet. It will loewr the chance of the way testing being done being the problem, as it will be more likely that it is the actual code that is the prolbem. Which is what we want. Not that the code is the problem, but that we can trust that the code is failing when we get a wrogn test, and not the test itself. It will cause mistrust. 
+Not following the above points, makes it more likely that there is something wrong with the actual test and not the code being tested when they fail. Changing a shared function can cause several tests to fail/change unexpectedly. If it happens too often that the test is the problem, not the code; it can cause mistrust in these.
 
-It also allows for a better overview of what is going on, by not having to jup from function to function to understand what is going on
+Therefore be WET - it will lower the chance of the tests being the problem and give a better overview of what is going on when reading the test. 
 
-Also when writing unit tests remember to mock and stub out the "surrounding world", such that it is only the outcome of the test is only dependent on the SUT.
-A way to identifiy what you should mock, is to ask yourself what you're testing. Everything else should be mocked and stubbed whenever you're unit testing.
-
-  <!--  - Prefer beforeEach 
-    - It's okay to NOT be DRY, be wet. Therefore this is also the second time we mention this. :-)  
-        - Lowers the chance of something in the testing being the problme versus the actual code 
-        - Use forEach to create a lot of similar tests  (line 334 button-component.spec.ts)
-          - This can read better, when the test is the same, but the scenarios are different 
-          - Can give a better overview of what is going on
-    - Test should be flat and self contained
-    - If you're writing unit tests remember to mock! 
-      We use it whenever we’re not interested in the implementaiton of the thing being mocked. 
-      In a unit test we stub out the surrounding world (GOOD)
-      Ask yourself, what are you testing - can help you decide what to mock (GOOD) -->
+When doing unit tests, further isolation has to be done by stubbing and mocking everything else than what is being tested. 
 
 #### The good test uses map/test-scenarios when appropiate 
   If you find yourself writing a lot of identical tests, perhaps only changing a few varialbes and the expected outcome. Then it is a point where it is okay to be a little less WET actually. But the method we propose still keep the tests flat and structured, while giving us a nice bit of DRYness. What we usually do is to use "test scenarios" whenever we do this. 
@@ -865,9 +853,8 @@ A good rule of thumb for whenever this is appropiate, is whenever the css proper
   It's a bit of an art and no heads will roll if not followed
   It’s okay to check multiple computed styles when multiple properties results in the expected outcome, “should render without outline” example --> 
 
-#### Other good tips to remember when writing tests in Kirby:
-  <!-- These did not really fit _The Good_ format, but we wouldn't leave you without:
-  - You can use set input instead of detect changes, 
+<!--\#\### Other good tips to remember when writing tests in Kirby:
+  These did not really fit _The Good_ format, but we wouldn't leave you without:
   - The good test includes edge cases 
   - You can prefix tests with `f` (`fit`, `fdescribe`) to only test that block 
     - The correct color is stated in the expectation and is easier to change...
