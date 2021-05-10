@@ -616,7 +616,7 @@ If you are having trouble maintaining a clean commit history, you could consider
 
 While you might get the urge to be a good girl/boy scout and reorder imports or fix formatting in files not related to your issue, don't.
 
-While it is very much appreciated that you want to leave the code better than you found it, doing so in unrelated files will cause the git history of the project to be illogical. 
+It is very much appreciated that you want to leave the code better than you found it, but doing so in unrelated files will cause the git history of the project to be illogical. 
 For example, it would not make sense if the imports for the list component located in `list.component.ts` is reordered as part of a pull-request concerning optimizing a build step in the CI/CD pipeline. 
 
 Should you stumble upon possible optimizations or things that could be done better, go ahead and create new issues for these.
