@@ -61,7 +61,6 @@ import { TabExampleComponent } from './tabs-example/tab/tab-example.component';
 import { TabsExampleComponent } from './tabs-example/tabs-example.component';
 import { ToastExampleComponent } from './toast-example/toast-example.component';
 import { ToggleExampleComponent } from './toggle-example/toggle-example.component';
-import { ToolbarExampleComponent } from './toolbar-example/toolbar-example.component';
 
 // Example of "custom" icons
 export const iconSettings: IconSettings = {
@@ -117,7 +116,6 @@ export const COMPONENT_DECLARATIONS: any[] = [
   ToggleExampleComponent,
   EmptyStateExampleComponent,
   LoadingOverlayExampleComponent,
-  ToolbarExampleComponent,
   FabSheetExampleComponent,
   FormFieldExampleComponent,
   PageSimpleExampleComponent,
