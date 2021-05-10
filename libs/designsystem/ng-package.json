@@ -9,7 +9,8 @@
       "highcharts/modules/annotations": "highcharts",
       "highcharts/highstock": "highcharts/highstock",
       "@ionic/angular": "ionic",
-      "inputmask": "inputmask"
+      "inputmask": "inputmask",
+      "ngx-ui-scroll": "ngx-ui-scroll"
     }
   },
   "whitelistedNonPeerDependencies": [
@@ -17,6 +18,7 @@
     "highcharts",
     "moment",
     "@fontsource/roboto",
-    "inputmask"
+    "inputmask",
+    "ngx-ui-scroll"
   ]
 }
