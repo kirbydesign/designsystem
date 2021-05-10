@@ -820,19 +820,20 @@ You can also usethe setInput function instead of detectChanges with spectator, w
           actually returns ms, but does not actually take any ms -->
 
 
-#### The good test uses ionicModuleForTest instead of IonicModule.forRoot 
-  While we encourage people to be WET when they're writing tests, there's a single place we abstain form this rule. 
-  That is when importing the ionicModule. We have defined a ionicModuleForTest that can be used, to include ionic components for testing. 
+#### The good test uses ionicModuleForTest instead of IonicModule
+When working with ionic you might have to import the `IonicModule` as part of your `createComponent` or `createHost` factory.   
+Here you should use the [`TestHelper`](https://github.com/kirbydesign/designsystem/blob/master/libs/designsystem/src/lib/testing/test-helper.ts) property `ionicModuleForTest` like so: 
 
-In this the configuration for the ionicMoudle during testing is set, and it is set that it should be IOS and test-mode. It is done like this, to ensure that we're using the same settings everywhere, which is the same settings that would be used actually in Kirby. 
+```
+const createComponent = createComponentFactory({
+  component: RadioComponent,
+  imports: [TestHelper.ionicModuleForTest],
+});
+```
 
-You might see files where IonicModule.forRoot is used instead of ionicModuleForTest - this is a good chance to do some girl/boy scouting and change it to ionicModuleForTest instead. 
-But only if you're making changes to that file anyways. 
-  <!-- While we said it is okay not to be dry, we have the configuration for the ionicModule being tested, 
-  located in the same spot. There will be places where IonicMoudle.forRoot is being used. If you're writing tests 
-  in these files anyways, go ahead and change it -->
+This ensures that each test uses the same config for the `IonicModule`. 
 
-
+There might be files where `IonicModule` is used directly instead of `TestHelper.ionicModuleForTest` - this is a good chance to do some girl/boy scouting and fix it, but only if you are making changes to those files anyways.  
 
 #### The good test merges tests when appropiate 
 This last tip is really a bit of an art to get right - and no one will scream you in the face if not done correctly. 
