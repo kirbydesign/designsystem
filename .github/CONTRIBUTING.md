@@ -745,7 +745,7 @@ Here is two examples, which one is easiest to read?
 ![](images/readable-tests.png)
 
 #### The good test is isolated and flat
-Writing tests is one of the few places, where it is okay to be WET instead of DRY - it is rather important actually. 
+The tests should be isolated and flat, therefore writing tests is one of the few places, where it is okay to be WET instead of DRY - it is rather important actually. 
 
 Future contributors should be able to read the test without having to jump around the code and do too much logic, therefore: 
 * Avoid reusing code by using functions, keep your tests flat instead 
