@@ -619,7 +619,7 @@ While you might get the urge to be a good girl/boy scout and reorder imports or 
 It is very much appreciated that you want to leave the code better than you found it, but doing so in unrelated files will cause the git history of the project to be illogical. 
 For example, it would not make sense if the imports for the list component located in `list.component.ts` is reordered as part of a pull-request concerning optimizing a build step in the CI/CD pipeline. 
 
-Should you stumble upon possible optimizations or things that could be done better, go ahead and create new issues for these.
+Should you stumble upon possible optimizations or things that could be improved, go ahead and create new issues for these.
 
 ### The good pull-request knows what it wants
 
