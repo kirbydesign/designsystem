@@ -628,7 +628,7 @@ Should the reviewer do a full-on review or give initial guidance on a WIP implem
 
 As a convention in Kirby we signal which kind of feedback we want by creating a draft pull request if it is a WIP implementation - and a normal one for a full review.
 
-Mention people you want to include in the discussion of your pull request by using `@` , clarify why: 
+Mention people you want to include in the discussion of your pull request by using `@`, clarify why: 
 
 > @MadsBuchmann for details on the fontsource dependency
 
