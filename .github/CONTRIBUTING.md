@@ -600,7 +600,7 @@ For example:
 
 > This PR closes [#1427](https://github.com/kirbydesign/designsystem/issues/1427)
 
-If the pull request solves more than one issue also mention these such that they also are closed automatically: 
+If the pull request solves more than one issue also mention these, such that they also get closed automatically: 
 
 > This PR closes [#1427](https://github.com/kirbydesign/designsystem/issues/1427), closes [#1428](https://github.com/kirbydesign/designsystem/issues/1428), closes [#1429](https://github.com/kirbydesign/designsystem/issues/1429)
 
