@@ -727,12 +727,14 @@ We do not denote each part of AAA with a comment but use spacing to seperate the
 
 You might notice tests in Kirby that do not use the AAA pattern - that is a good opportunity to do some girl/boyscouting and fix it if you are making other changes related to your issue in that file anyways.
 
-#### The good test has readable code
-  <!-- - It’s more about readabilty than about creating pretty code
+#### The good test prioritizes readability above efficient code 
+  <!-- 
+  - It’s more about readabilty than about creating pretty code
   - A well structured readable test 
   - Makes spacing between it blocks proper to avoid blob of text
   - Group related tests under common describe blocks 
-    - ex button component, when disabled, it should:  -->
+    - ex button component, when disabled, it should:  
+  -->
 
 #### The good test is isolated 
   <!--  - Prefer beforeEach 
