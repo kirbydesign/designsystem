@@ -639,7 +639,7 @@ Review comments are for review comments. Not for explaining your code.
 If you feel the urge to add a review comment to clarify a hard to understand part of your code, it is not only the reviewer that will need that information. 
 Future contributors reading the code will also need it and could have a hard time understanding your code without. 
 
-Either refactor the code to make it more readable or add clarifying comments - it should be possible to understand the code without looking up the pull-request.
+Either refactor the code to make it more readable or add clarifying comments in the code itself - it should be possible to understand the code without looking up the pull-request.
 
 ### The good pull-request is closed when there is no need for it
 
