@@ -542,7 +542,7 @@ For more on good git commits, see (among _many_ other):
 
 Why should you care about creating good pull requests - is it not just a tool for code reviews?
 
-Well first of all, a good pull request can help reduce how long it takes for your changes to be merged to master by making the life easier for the reviewer, causing a quicker review. 
+Well first of all, a good pull request can help reduce how long it takes for your changes to be merged with the main branch by making the life easier for the reviewer, causing a quicker review. 
 
 Secondly a good pull request is more than just a tool for code reviews - it documents the process of reaching a satisfactory implementation as well as toughts and discussion surrounding this. 
 
