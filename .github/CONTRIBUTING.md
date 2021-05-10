@@ -14,7 +14,7 @@ If you at any point have any questions please read: [I have a question related t
 * [Setup environment and tooling for contribution](#setup-environment-and-tooling-for-contribution)
   + [Clone and install repository](#clone-and-install-repository)
   + [Node](#node)
-  + [Tslint](#tslint)
+  + [TSlint](#tslint)
   + [Prettier](#prettier)
 * [The good:](#the-good:)
   + [Issue](#issue)
@@ -98,7 +98,7 @@ We encourage contributors to publish a draft pull-request with a WIP implementat
 
 > Reviewing your own pull-request like you would review someone else's pull-request.
 
-This consists of code-reviewing your own pull-request, following guidelines found in [The good: Self-review](#self-review). This is your chance to catch any low-hanging fruits and common issues before the reviewer does. If this is not done, an unneccessary amount of minor changes might be required during code review. This wastes both yours and the reviewers time.
+This consists of code-reviewing your own pull-request, following guidelines found in [The good: Self-review](#the-good-self-review). This is your chance to catch any low-hanging fruits and common issues before the reviewer does. If this is not done, an unneccessary amount of minor changes might be required during code review. This wastes both yours and the reviewers time.
 
 <!-- Why we do UX reviews? -->
 
@@ -172,22 +172,94 @@ If you have found a bug in Kirby you should follow these steps:
 
 <!-- The following section is responsible for teaching people how to get setup with 
 the repo such that they can get coding -->
+This section will help you get going with Kirby such that you can begin contributing. 
 
-### Clone and install repository 
+### Clone and install the repository
 
-* how to clone and get going with the kirby repo
+<!-- how to clone and get going with the kirby repo-->
+**Note:** make sure you have the right version of Node installed before installing the repository (see: [Node](#node)).
+
+1. Clone the repository: 
+
+``` 
+
+git clone https://github.com/kirbydesign/designsystem
+```
+
+2. Install dependencies: 
+
+``` 
+
+npm install
+```
+
+3. Start the cookbook server:
+
+``` 
+
+npm start
+```
+
+You should now be able to open `http://localhost:4200` in a browser to access the cookbook.
 
 ### Node 
 
-* Which version should people use, and perhaps a recommendation on which tool people can use to manage versions. 
+<!-- Which version should people use, and perhaps a recommendation on which tool people can use to manage versions. -->
+[Node](https://nodejs.org/en/) is the runtime used for development. 
 
-### Tslint 
+It is recommended to use `v12` for development as we currently do not support node LTS (see issue: [#1443](https://github.com/kirbydesign/designsystem/issues/1443)). 
 
-* People should make sure to have it enabled to avoid unnecessary comments during code review
+If you need to have multiple versions of node installed then a version manager such as [NVM](https://github.com/nvm-sh/nvm) can be used. 
+
+### TSlint 
+
+<!-- People should make sure to have it enabled to avoid unnecessary comments during code review-->
+**Note:** Work is being done to migrate from TSLint to ESLint (see issue: [#1317](https://github.com/kirbydesign/designsystem/issues/1317)). 
+
+TSLint is used for linting which helps keep up the quality of the submitted code for Kirby. 
+
+Scripts for running TSLint can be found in `package.json` . We however recommend that you install a TSLint plugin for your editor. It can be useful to enable "fix on save"-functionality such that simple errors are fixed automatically. 
+
+**Useful resources:**
+
+* [TSLint extension for VSCode](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-tslint-plugin).
+* [Enabling "fix on save" in VSCode](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-tslint-plugin#auto-fix-and-auto-fix-on-save).
+
+#### VSCode "workspace library execution"-issue
+
+An issue might occur where TSLint will randomly disable for the current workspace and has to be enabled again using the command `TSLint: Manage workspace library execution`. 
+
+To solve this: 
+
+1. Open a typescript file in VScode. 
+2. Open the command pallette (<kbd>ctrl/cmd</kbd> + <kbd>shift</kbd> + <kbd>p</kbd>) and enter: `typescript: select typescript version`
+
+4. Select: `use workspace version 3.6.5`.
+5. Open the command pallette and enter: `TSLint: Manage workspace library execution` .
+
+6. Select: `always enable workspace library execution`.
+
+This will cause changes to be made in the file `.vscode/settings.json` ; do not commit these.
 
 ### Prettier
 
-* It is a good idea to use format-on-save
+Prettier is used for consistent code formatting and avoiding unnecessary discussions about this during reviews.
+
+As with TSLint, we  strongly recommend installing Prettier as a plugin for your editor. You should also enable "format on save".
+
+It can however be used without an editor plugin; run `npm run prettier` to check for formatting errors, fix them by running `npm run prettier:fix`. 
+
+If there are changes only concerning formatting, in files you did not create - do not commit these. There is most likely something wrong with your Prettier settings. 
+Make sure that Prettier uses the config file that is shipped with the repository ([`.prettierrc.json`](https://github.com/kirbydesign/designsystem/blob/master/.prettierrc.json)) and not a global configuration located on your machine. 
+
+To check if the config file from the repository is used, try to alter the configuration in `.prettierrc.json` and format a file using Prettier - for example by changing `"singleQuote": true,` to `"singleQuote": false,`. 
+If all quotation marks are changed to `"` instead of `'` when you format, it means the repository config file is used by Prettier. Remember to revert the changes made to `.prettierrc.json`.
+
+**Useful resources:**
+
+* [Prettier extension for VSCode](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+* [Enabling "format on save" in VSCode](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode#format-on-save)
+
 
 ## The good:
 
@@ -531,12 +603,45 @@ For more on good git commits, see (among _many_ other):
 * [Turbo Git Commit Message Standard](https://gist.github.com/turbo/efb8d57c145e00dc38907f9526b60f17)
 * [Check Out These 5 Git Tips Before Your Next Commit](https://medium.com/walmartglobaltech/check-out-these-5-git-tips-before-your-next-commit-c1c7a5ae34d1)
 
-### Self-review 
+### The Good: Self-Review
 
-* Don't change files that is not related to your pull-request
-  + for example don't reorder imports in files that is not directly related to the issue at hand
-* Check for unused imports
-* Other self review points go here
+A lot of comments and requests for change during review of a pull request can sometimes feel demotivating. Doing a good self-review can save yourself and the reviewer from frustrations during code review.
+
+A self-review removes gravel in the road, leading to a smooth and focused code review - while avoiding unnecessary discussions. It should be done before the pull request is published and marked as _Ready for review_.
+
+We collected a bunch of common issues that often come up during code reviews.
+
+#### Do not commit unrelated changes
+
+Avoid unrelated changes in files that are not directly part of your pull-request. For example, don't commit changes like formatting or reordering imports if they're the _only_ changes made in those files. It will clutter the git history and make it hard to understand why the latest change made to a particular line of code is in a commit that is not related to the change at all. E.g., when using [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens) or similar tools.
+
+If you have already committed unrelated changes try to revert them before asking for code review.
+
+#### Make sure files are formatted
+
+Use Prettier to format the files you are changing. If you are editing a file that for some reason has not already been properly formatted, you will probably see a lot of changes when you diff the file after you format it. Try to put the formatting changes in a separate commit if possible e.g., by creating a _formatting commit_ before committing your other changes. It will be easier for the reviewer to see your actual changes if they have the option to ignore the formatting changes.
+
+#### Look out for linting warnings
+
+The linting rules are configured to help you fix things that are easily forgotten, like sorting imports and removing unused variables, imports etc. Linting may also help you identify and remove dead code. Use the linting tools to avoid having to fix these issues during code review.
+
+#### Delete temporary changes
+
+Look for temporary changes you have used during development, like:
+
+* leftover `console.log()` statements
+* code that has been commented out
+* TODO comments
+
+They do not belong in the codebase and should be removed. TODOs should either be implemented right away or you should create a new issue for solving it later.
+
+#### Concluding questions
+
+From the perspective of a reviewer, ask yourself:
+
+* Is it obvious what the changes made in the pull request are and what the result of merging the pull request will be?
+* Is the issue solved by the changes? Read the issue description and the tech refinement comment(s) again to confirm you have solved the issue.
+* Does the [pull request](#pull-request) description contain the appropriate information necessary to perform a code review?
 
 ### Pull request
 
