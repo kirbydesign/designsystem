@@ -608,7 +608,7 @@ If the pull-request solves more than one issue also mention these such that they
 
 Maintaining a logical commit history constructed using [good commits](#commit) helps the reviewer easily get an overview and understanding of the changes contained in a pull-request.
 
-If you are having trouble maintaining a clean commit history, you could eventually try writing [pre-emptive commit comments](https://arialdomartini.wordpress.com/2012/09/03/pre-emptive-commit-comments/). This consists of writing down the commit comment, before writing your code. This can help you stay focused on a single task at a time. 
+If you are having trouble maintaining a clean commit history, you could consider writing [pre-emptive commit comments](https://arialdomartini.wordpress.com/2012/09/03/pre-emptive-commit-comments/). This consists of writing down the commit comment, before writing your code. This can help you stay focused on a single task at a time. 
 
 ![](images/good-commit-history.png)
 
