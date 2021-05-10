@@ -645,7 +645,7 @@ Either refactor the code to make it more readable or add clarifying comments in 
 
 As with the [good issue](#issue), the good pull-request is closed in order to reduce clutter, when there is no need for it. 
 
-Therefore if it is clear that the changes will not be merged to `master` - close it. 
+Therefore if it is clear that the changes will not be merged with the main branch - close it. 
 It can always be reopened if it was a mistake.
 
 ### Test
