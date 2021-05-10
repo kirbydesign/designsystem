@@ -2,10 +2,9 @@
   [class.selected]="isSelected"
   [kirbyListItemColor]="getItemColor"
   [item]="item"
-  [disabled]="isSwipingEnabled ? null : true"
+  [disabled]="_isSwipingEnabled ? null : true"
   keyHandler
   [ngClass]="endClass"
-  class="ion-item-sliding"
   (click)="onItemSelect(item)"
 >
   <ng-container

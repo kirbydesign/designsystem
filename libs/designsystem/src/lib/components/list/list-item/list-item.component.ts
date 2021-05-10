@@ -10,10 +10,10 @@ import {
 } from '@angular/core';
 import { IonItemSliding } from '@ionic/angular';
 
-import { ListSwipeAction } from '../';
-import { PlatformService, ThemeColor } from '../../../helpers';
-import { SwipeDirection, SwipeEnd } from '../list-swipe-action';
-import { EndClass, ListComponent } from '../list.component';
+import { PlatformService } from '../../../helpers/platform.service';
+import { ThemeColor } from '../../../helpers/theme-color.type';
+import { ListSwipeAction, SwipeDirection, SwipeEnd } from '../list-swipe-action';
+import { EndClass } from '../list.component';
 
 @Component({
   selector: 'kirby-list-item',
@@ -21,9 +21,9 @@ import { EndClass, ListComponent } from '../list.component';
   styleUrls: ['../list.component.scss', './list-item.component.scss'],
 })
 export class ListItemComponent implements OnInit, AfterViewInit {
-  isSwipingEnabled: boolean = false;
+  _isSwipingEnabled = false;
 
-  constructor(public listComponent: ListComponent, private platform: PlatformService) {
+  constructor(private platform: PlatformService) {
     this.initializeSwipeActions();
   }
 
@@ -74,14 +74,17 @@ export class ListItemComponent implements OnInit, AfterViewInit {
     if (!Array.isArray(this.swipeActions)) {
       return false;
     }
-    return this.swipeActions.some((sa) => {
-      if (sa.isDisabled instanceof Function && sa.isDisabled(item)) {
+    return this.swipeActions.some((swipeAction) => {
+      if (swipeAction.isDisabled instanceof Function && swipeAction.isDisabled(item)) {
         return false;
       }
-      if (sa.isDisabled === true) {
+      if (swipeAction.isDisabled === true) {
         return false;
       }
-      return sa.position === SwipeDirection.left || sa.position === SwipeDirection.right;
+      return (
+        swipeAction.position === SwipeDirection.left ||
+        swipeAction.position === SwipeDirection.right
+      );
     });
   }
 
@@ -89,14 +92,14 @@ export class ListItemComponent implements OnInit, AfterViewInit {
     if (!Array.isArray(this.swipeActions)) {
       return [];
     }
-    return this.swipeActions.filter((sa) => {
-      if (sa.isDisabled instanceof Function && sa.isDisabled(item)) {
+    return this.swipeActions.filter((swipeAction) => {
+      if (swipeAction.isDisabled instanceof Function && swipeAction.isDisabled(item)) {
         return false;
       }
-      if (sa.isDisabled === true) {
+      if (swipeAction.isDisabled === true) {
         return false;
       }
-      return side ? sa.position === side : true;
+      return side ? swipeAction.position === side : true;
     });
   }
 
@@ -134,7 +137,7 @@ export class ListItemComponent implements OnInit, AfterViewInit {
 
   private initializeSwipeActions(): void {
     if (this.swipeActions && this.swipeActions.length) {
-      this.isSwipingEnabled = this.platform.isTouch();
+      this._isSwipingEnabled = this.platform.isTouch();
     }
   }
 }

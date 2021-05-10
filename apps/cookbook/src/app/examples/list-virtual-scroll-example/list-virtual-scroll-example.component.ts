@@ -5,7 +5,7 @@ import { LoadOnDemandEvent } from '@kirbydesign/designsystem';
 import { BaseListComponent } from '../list-shared/base-list.component';
 
 export const ListVirtualScrollExampleTemplate = `
-<kirby-list [items]="items" [useVirtualScroll]="true" (loadOnDemand)="onLoadDemand($event)" noMoreItemsText="No more items">
+<kirby-list [items]="items" [useVirtualScroll]="true" [virtualScrollViewportHeight]="400" (loadOnDemand)="onLoadDemand($event)" noMoreItemsText="No more items">
 <kirby-item *kirbyListItemTemplate="let item">
 <h3>{{item.title}}</h3>
 <data slot="end" class="kirby-text-bold">{{item.amount}}</data>

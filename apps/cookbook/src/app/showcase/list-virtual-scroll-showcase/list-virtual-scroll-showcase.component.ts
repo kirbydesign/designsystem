@@ -20,7 +20,7 @@ export class ListVirtualScrollShowcaseComponent {
       defaultValue: 'false',
     },
     {
-      name: 'viewPortHeight',
+      name: 'virtualScrollViewportHeight',
       description: 'A fixed viewport height in pixels.',
       type: ['number'],
       defaultValue: '500',
