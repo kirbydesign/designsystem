@@ -559,7 +559,7 @@ Every pull request that is created should solve _one_ existing [Github issue](ht
 There might be cases where the changes in a pull request naturally solves multiple issues, often caused by them being related one way or another. This is the exception, not the rule. 
 Striving for the scope of the pull requests to be one issue makes the task of reviewing it more manageable.
 
-If you are not able to reference any specific issue; it is unfortunately an indicator that you have not followed [the process for contribution](#the-process-for-contribution). For example when filling in the `This PR closes # (reference issue number here)` part of the pull request or when following the name convention outlined in [The Good: Branch](#branch).
+If you are not able to reference any specific issue; it is unfortunately an indicator that you have not followed [the process for contribution](#the-process-for-contribution). For example when filling in the `This PR closes # (reference issue number here)` part of the pull request or when following the branch naming convention outlined in [The Good: Branch](#branch).
 
 We do not wish for pull requests that have no related issue to be submitted, as this means no refinement has taken place and there might be no agreement on whether the suggested changes should be part of Kirby. If it is submitted anyways, it will most likely be closed without being merged.  
 
