@@ -567,7 +567,7 @@ Should you find yourself in that situation and want to salvage as much of your w
 
 ### The good pull-request has a title worthy of the changelog
 
-Besides informing what the changes in the pull-request does - the title of your pull-request will be used in [the changelog](https://cookbook.kirby.design/home/changelog) to represent your changes! 
+Besides informing what the changes in the pull-request does - the title of your pull-request will be used in [the changelog](https://cookbook.kirby.design/home/changelog) to represent your changes.
 ![](images/issue-title-to-changelog.png)
 
 So make the title descriptive - after writing the title, ask yourself if you would feel informed what the changes in the PR entail if you read it as part of a changelog. 
