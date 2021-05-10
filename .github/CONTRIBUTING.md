@@ -544,7 +544,7 @@ Why should you care about creating good pull-requests - is it not just a tool fo
 
 Well first of all, a good pull-request can help reduce how long it takes for your changes to be merged to master by making the life easier for the reviewer, causing a quicker review. 
 
-Secondly a good pull-request is more than just a tool for code reviews - it documents the process of reaching a satisfactory implementation aswell as toughts and discussion surrounding this. 
+Secondly a good pull-request is more than just a tool for code reviews - it documents the process of reaching a satisfactory implementation as well as toughts and discussion surrounding this. 
 
 The rules that applies for writing a [good issue](#issue) also applies for writing a good description for your pull-request.
 But more importantly a pull-request includes commits containing code changes that you want to get merged to master, which means there is a few more points to keep in mind, when constructing a good pull-request. 
