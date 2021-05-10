@@ -557,7 +557,7 @@ It is your responsibility as a contributor to get your pull requests reviewed, t
 Every pull request that is created should solve _one_ existing [Github issue](https://github.com/kirbydesign/designsystem/issues). 
 
 There might be cases where the changes in a pull request naturally solves multiple issues, often caused by them being related one way or another. This is the exception, not the rule. 
-Striving for the scope of the pull requests to be one issue makes the task of reviewing it more manageable.
+Striving for the scope of a pull request to be one issue, makes the task of reviewing it more manageable.
 
 If you are not able to reference any specific issue; it is unfortunately an indicator that you have not followed [the process for contribution](#the-process-for-contribution). For example when filling in the `This PR closes # (reference issue number here)` part of the pull request or when following the branch naming convention outlined in [The Good: Branch](#branch).
 
