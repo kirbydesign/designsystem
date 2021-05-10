@@ -163,4 +163,5 @@ cleanDistribution()
   .then(copyScssFiles)
   .then(copyIcons)
   .then(copyPolyfills)
-  .then(publish);
+  .then(publish)
+  .catch((err) => console.warn('*** ERROR WHEN PUBLISHING ***', err));

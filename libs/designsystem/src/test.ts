@@ -1,9 +1,8 @@
 // This file is required by karma.conf.js and loads recursively all the .spec and framework files
 
-import 'core-js/es7/reflect';
 import 'zone.js/dist/zone';
-
 import 'zone.js/dist/zone-testing';
+// tslint:disable-next-line: ordered-imports
 import { getTestBed } from '@angular/core/testing';
 import {
   BrowserDynamicTestingModule,
@@ -12,7 +11,16 @@ import {
 
 import { ElementCssCustomMatchers } from './lib/testing/element-css-custom-matchers';
 
-declare const require: any;
+declare const require: {
+  context(
+    path: string,
+    deep?: boolean,
+    filter?: RegExp
+  ): {
+    keys(): string[];
+    <T>(id: string): T;
+  };
+};
 
 // First, initialize the Angular testing environment.
 getTestBed().initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());

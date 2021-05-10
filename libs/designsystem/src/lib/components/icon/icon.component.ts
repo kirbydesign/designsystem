@@ -15,9 +15,10 @@ export enum IconSize {
   selector: 'kirby-icon',
   templateUrl: './icon.component.html',
   styleUrls: ['./icon.component.scss'],
+  // tslint:disable-next-line: no-host-metadata-property
+  host: { '[class.kirby-icon]': 'true' },
 })
 export class IconComponent implements OnChanges {
-  @HostBinding('class.kirby-icon') true;
   defaultIcon: Icon = this.findIcon(kirbyIconSettings.icons, 'cog');
   private _icon = (this.icon = this.defaultIcon);
   @HostBinding('class')

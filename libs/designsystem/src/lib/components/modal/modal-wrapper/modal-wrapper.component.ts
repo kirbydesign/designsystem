@@ -279,7 +279,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     // Blur active element and wait for keyboard to hide,
     // then dismiss modal and return:
     this.blurActiveElement();
-    return new Promise((resolve) => {
+    return new Promise<void>((resolve) => {
       this.delayedClose = async () => {
         await this.ionModalElement.dismiss(data);
         resolve();

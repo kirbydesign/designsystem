@@ -1,6 +1,6 @@
 @import '../form-field-inputs.shared';
 
-:host() {
+:host {
   &[type='number'] {
     //fallback
     appearance: textfield;

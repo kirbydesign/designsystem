@@ -1,5 +1,5 @@
 {
-  "extends": "../../tsconfig.json",
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "types": ["jasmine"],
     "allowSyntheticDefaultImports": true,
@@ -11,5 +11,14 @@
       "@kirbydesign/designsystem/*": ["libs/designsystem/src/lib/*"]
     }
   },
-  "include": ["**/*.ts"]
+  "include": [],
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    }
+  ]
 }

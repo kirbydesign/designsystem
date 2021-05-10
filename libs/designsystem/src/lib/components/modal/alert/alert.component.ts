@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, AfterViewInit, HostBinding, Input } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { WindowRef } from '../../../types/window-ref';
@@ -7,6 +7,8 @@ import { WindowRef } from '../../../types/window-ref';
   selector: 'kirby-alert',
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.scss'],
+  // tslint:disable-next-line: no-host-metadata-property
+  host: { '[class.ion-page]': 'false' }, //Ensure ion-page class doesn't get applied by Ionic Modal Controller
 })
 export class AlertComponent implements AfterViewInit {
   readonly BLUR_WRAPPER_DELAY_IN_MS = 50;
@@ -30,12 +32,6 @@ export class AlertComponent implements AfterViewInit {
   @Input() okBtnText: string;
   @Input() okBtnIsDestructive: boolean;
   @Input() cancelBtnText: string;
-
-  private _ionPageReset = false;
-  @HostBinding('class.ion-page')
-  get ionPageReset() {
-    return this._ionPageReset;
-  }
 
   constructor(private elementRef: ElementRef<HTMLElement>, private window: WindowRef) {}
 
