@@ -88,7 +88,7 @@
     "@nrwl/angular": "11.5.2",
     "@types/prismjs": "1.9.0",
     "firebase": "8.3.1",
-    "highcharts": "8.0.4",
+    "highcharts": "9.0.0",
     "inputmask": "^5.0.5",
     "moment": "2.24.0",
     "prismjs": "1.23.0",
