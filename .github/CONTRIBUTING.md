@@ -649,9 +649,9 @@ From the perspective of a reviewer, ask yourself:
 
 ### Test
 
-Tests helps us avoid regressions and can provide peace of mind to other contributors when making changes to the code by ensuring that nothing is accidentally broken. Sometimes more time is spent on writing tests than the actual code - but it provides value everytime it is executed and is an important tool in collaboration.
+Tests helps us avoid regressions and provides peace of mind to other contributors when making changes to the code by ensuring that nothing is accidentally broken. Sometimes more time is spent on writing tests than the actual code - but it provides value everytime it is executed and is an important tool in collaboration.
 
-A good well written test can also act as a sort of documentation by documenting functional requirements to the code.
+A good well written test also acts as a sort of documentation by documenting functional requirements of the code.
 
 That is three benefits for the price of one - so do not skimp on testing!
 
@@ -667,7 +667,7 @@ In Kirby we seperate integration tests from unit tests - so make sure to know wh
 
 Unit tests are located in `*.spec.ts` files such as [`button.component.spec.ts`](https://github.com/kirbydesign/designsystem/blob/master/libs/designsystem/src/lib/components/button/button.component.spec.ts) and integration tests in `*.spec.integration.ts` files such as [`button.component.integration.spec.ts`](https://github.com/kirbydesign/designsystem/blob/master/libs/designsystem/src/lib/components/button/button.component.integration.spec.ts).
 
-Remember that unit tests, test a single unit - so if you find yourself relying on other components or functions without them being mocked or stubbed, then you are most likely writing an integration test. 
+Remember that unit tests, tests a single unit - so if you find yourself relying on other components or functions without them being mocked or stubbed, then you are most likely writing an integration test. 
 
 #### The good test can be read as a sentence 
 Being able to read a test as a sentence, makes it clear what has gone wrong when the test fails and makes it act as a functional requirement. 
@@ -712,7 +712,7 @@ For someone running the tests, it is not relevant what the color should be, they
 This also reduces the likeliness of forgetting to correct the test description, if the color ever was to change - resulting in uncertainaity to what the correct color actually is. 
 
 #### The good test follows the Arrange, Act, Assert (AAA) pattern
-Following the [AAA pattern](https://medium.com/@pjbgf/title-testing-code-ocd-and-the-aaa-pattern-df453975ab80) makes your test well structured and easy to understand. 
+Following the [AAA pattern](https://medium.com/@pjbgf/title-testing-code-ocd-and-the-aaa-pattern-df453975ab80) makes your tests well structured and easy to understand. 
 
 A test will not always have all parts of AAA - sometimes it may only be necessary to assert, as is the case in the following test:
 ```
@@ -725,20 +725,41 @@ A test will not always have all parts of AAA - sometimes it may only be necessar
 
 We do not denote each part of AAA with a comment but use spacing to seperate the different parts of the test.
 
-You might notice tests in Kirby that do not use the AAA pattern - that is a good opportunity to do some girl/boyscouting and fix it if you are making other changes related to your issue in that file anyways.
+You might notice tests in Kirby that do not use the AAA pattern - that is a good opportunity to do some girl/boy scouting and fix it if you are making other changes related to your issue in that file anyways.
 
 #### The good test prioritizes readability above efficient code 
-  <!-- 
-  - It’s more about readabilty than about creating pretty code
-  - A well structured readable test 
-  - Makes spacing between it blocks proper to avoid blob of text
-  - Group related tests under common describe blocks 
-    - ex button component, when disabled, it should:  
-  -->
+<!-- This section might be a bit redundant IMO -->
+When writing tests prioritise the readability of the test above all. 
+It should be easy for future developers to visually parse and understand what is going on in the test. 
+
+The following points, can help you improve the readability of your tests
+- Making proper spacing between `it` blocks 
+- Group related tests under common `describe` blocks 
+- Keeping your test isolated (more on this here: [The good test is isolated](#the-good-test-is-isolated))
+- Follow the AAA pattern as described above
+
+Here is two examples, which one is easiest to read? 
+
+![](images/unreadable-tests.png)
+
+![](images/readable-tests.png)
 
 #### The good test is isolated 
+The good test should be as isolated as possible. It is okay to be wet instead of being dry. This is one of the few cases where that is important actually. 
+A future developer should be able to read your test, understand what is going on, without having to jump around and do too much logic. For example, 
+the conditions of one test should never effect another test. 
+
+Therefore do not share variables between tests, each test should be flat. Also avoid putitng repeated code into functions and repeating it accross several tests, as changing this function can cause several tests to fail/change. 
+
+Therefore be wet. It will loewr the chance of the way testing being done being the problem, as it will be more likely that it is the actual code that is the prolbem. Which is what we want. Not that the code is the problem, but that we can trust that the code is failing when we get a wrogn test, and not the test itself. It will cause mistrust. 
+
+It also allows for a better overview of what is going on, by not having to jup from function to function to understand what is going on
+
+Also when writing unit tests remember to mock and stub out the "surrounding world", such that it is only the outcome of the test is only dependent on the SUT.
+A way to identifiy what you should mock, is to ask yourself what you're testing. Everything else should be mocked and stubbed whenever you're unit testing.
+
   <!--  - Prefer beforeEach 
-    - It's okay to NOT be DRY, be wet. 
+    - It's okay to NOT be DRY, be wet. Therefore this is also the second time we mention this. :-)  
         - Lowers the chance of something in the testing being the problme versus the actual code 
         - Use forEach to create a lot of similar tests  (line 334 button-component.spec.ts)
           - This can read better, when the test is the same, but the scenarios are different 
@@ -750,17 +771,54 @@ You might notice tests in Kirby that do not use the AAA pattern - that is a good
       Ask yourself, what are you testing - can help you decide what to mock (GOOD) -->
 
 #### The good test uses map/test-scenarios when appropiate 
+  If you find yourself writing a lot of identical tests, perhaps only changing a few varialbes and the expected outcome. Then it is a point where it is okay to be a little less WET actually. But the method we propose still keep the tests flat and structured, while giving us a nice bit of DRYness. What we usually do is to use "test scenarios" whenever we do this. 
+
+  Use a list of scenarios, and create your tests from the variables in these. 
+
+  Have a look at this example, where no scenarios are used: ... (link because it is a huge image)
+
+  Then have a look at this: ... 
+
+  It still works, and individual tests are created that are all flat and self contained. You have just used the map to help you write them out quickly.
+
+  It can sometimes also read better, whenever the test is the same, but the scenarios are different, as it gives a better overview of what is going on.
+
+  Again this is only relevant for identical tests, that have the same Arrange, Act and Assert actions but with different variables. 
   <!--   - If you find yourself writing out a lot of 
     - Unless when it makes sense to use map/test-scenarios (button.component.spec.ts example ~ line 334) 
     - Sometimes it reads better, when the test is the same, but the scenarios are different 
     - Can give a better overview of what is going on -->
 
 #### The good test prefers the use of Spectator over Angular testbed 
+  Spectator is used to give better tests and reducing boilerplate, by using spectator. 
+  One of the way Specatator does this is by wrapping the angular testbed and providing you with two factory functions createHost and createComponent. 
+  these allow you to specify dependencies, imports etc, without having to configure the angular testbed yourself.
+
+  createHost allows you to specify your component using htmlt ags, which can be nice when doing integration tests.
+  The createComponent you simply plug in what you want of properties and it will create it for you. 
+
+  The reduced boilerplate means that we prefer the use of specatators factory functions of angular testbed. So please use these instead. 
+  <!-- Explain the difference between createHost v. createComponent 
+    - When to use what --> 
+
+You can also usethe setInput function instead of detectChanges with spectator, whenever you're setting properties of a component. 
+  This will automatically do change detection, and results in less code :)!!! 
   <!--  - Use set input insetad of detectChanges with spectator, less boilreplate (GOOD) 
     - Less boilerplate -->
 
 
+
 #### The good test prefers fakeAsync over Async & Done 
+  The `it()` function is provided with a `done` argument, that can be used as a callback whenever doing asyncrhonous actions while testing. 
+  This is sometimes necessary, such as when waiting for ionic components to be ready for testing (link example from checkbox and radio buttons). 
+
+  It is also possible to use the async, await syntax. 
+
+  spectator also provides a fakeAsync function that provides a tick function that can be usd to simulate the passing of time. 
+  We prefer the use of this, as it does not result in a callback hell like done would, and it is faster to use than the async await syntax. 
+  Also be sure to not mix await with fakeAsync as it will not do anything. 
+
+  There's more on fakeAsync in th espectator docuemtatnion: 
   <!--- Not using done avoids callback hell 
   - fakeAsync simulates timespan
     - From notes: 
@@ -775,6 +833,13 @@ You might notice tests in Kirby that do not use the AAA pattern - that is a good
 
 
 #### The good test uses ionicModuleForTest instead of IonicModule.forRoot 
+  While we encourage people to be WET when they're writing tests, there's a single place we abstain form this rule. 
+  That is when importing the ionicModule. We have defined a ionicModuleForTest that can be used, to include ionic components for testing. 
+
+In this the configuration for the ionicMoudle during testing is set, and it is set that it should be IOS and test-mode. It is done like this, to ensure that we're using the same settings everywhere, which is the same settings that would be used actually in Kirby. 
+
+You might see files where IonicModule.forRoot is used instead of ionicModuleForTest - this is a good chance to do some girl/boy scouting and change it to ionicModuleForTest instead. 
+But only if you're making changes to that file anyways. 
   <!-- While we said it is okay not to be dry, we have the configuration for the ionicModule being tested, 
   located in the same spot. There will be places where IonicMoudle.forRoot is being used. If you're writing tests 
   in these files anyways, go ahead and change it -->
@@ -782,6 +847,19 @@ You might notice tests in Kirby that do not use the AAA pattern - that is a good
 
 
 #### The good test merges tests when appropiate 
+This last tip is really a bit of an art to get right - and no one will scream you in the face if not done correctly. 
+We have a special matcher called "hasComputedStyle" that checks, if a style is applied correctly. This can for example be used to check the border-color an element is rendered with or the font-family. 
+
+When doing unit tests and testing a single thing at a time, it can seem to be the straightforward thing to do, to create seperate tests for "border-width", "border-color", "border-style". But in this case we would actually prefer if it was created as a single test along the lines of "should render with correct border" where you test all 3 in the assessment part of your test. THis is really what we're interested in the end anyways. Does it have the correct style? 
+
+It is easier to read, and it also saves you some tests. Should the test fail, it will specify which part of the test went wrong. 
+
+But as mentioned, it is a bit of an art, and the things you're testing should be related. For example testing if an element has 'position: relative' and 'background-color: #fff' would not make sense. 
+
+Testing font-family, font-size, font-weight and font-style together would make sense tho, as it can be lopped under "should render with correct typography". 
+
+A good rule of thumb for whenever this is appropiate, is whenever the css property has the same prefix, for example the above typography example, all properties are prefixed with 'font-\*'. This will not always be the case tho, for example if you're testing positioning properties such as 'left', 'right', 'bottom' and 'top'. 
+
   <!-- It's a bit of an art... 
   If you're writing individual tests for "font-size", "font-weight", "font-family" consider merging these into a singe "should have correct typography" test. Same with border instead of testing weight, thickness, color for itself, test "should have correct border"
   It's a bit of an art and no heads will roll if not followed
@@ -790,8 +868,6 @@ You might notice tests in Kirby that do not use the AAA pattern - that is a good
 #### Other good tips to remember when writing tests in Kirby:
   <!-- These did not really fit _The Good_ format, but we wouldn't leave you without:
   - You can use set input instead of detect changes, 
-  - Explain the difference between createHost v. createComponent 
-    - When to use what
   - The good test includes edge cases 
   - You can prefix tests with `f` (`fit`, `fdescribe`) to only test that block 
     - The correct color is stated in the expectation and is easier to change...
