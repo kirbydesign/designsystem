@@ -835,31 +835,37 @@ This ensures that each test uses the same config for the `IonicModule`.
 
 There might be files where `IonicModule` is used directly instead of `TestHelper.ionicModuleForTest` - this is a good chance to do some girl/boy scouting and fix it, but only if you are making changes to those files anyways.  
 
-#### The good test merges tests when appropiate 
-This last tip is really a bit of an art to get right - and no one will scream you in the face if not done correctly. 
-We have a special matcher called "hasComputedStyle" that checks, if a style is applied correctly. This can for example be used to check the border-color an element is rendered with or the font-family. 
+#### The good test merges tests when appropiate (FIND A BETTER TITLE!)
+In Kirby there is defined a [`toHaveComputedStyle`](https://github.com/kirbydesign/designsystem/blob/master/libs/designsystem/src/lib/testing/element-css-custom-matchers.d.ts) custom matcher that checks the value of CSS properties an element is rendered with, like so: 
+```
+it('should render with correct border-width', () => {
+  expect(element).toHaveComputedStyle({
+    'border-width': '1px',
+  });
+});
+```
 
-When doing unit tests and testing a single thing at a time, it can seem to be the straightforward thing to do, to create seperate tests for "border-width", "border-color", "border-style". But in this case we would actually prefer if it was created as a single test along the lines of "should render with correct border" where you test all 3 in the assessment part of your test. THis is really what we're interested in the end anyways. Does it have the correct style? 
+When doing unit tests it can seem to be straightforward to create seperate tests for different CSS properties - we are only testing one thing per test after all. Consider the above example, where the only assessment is if `border-width` is correct. There might then be additional tests assessing if the element also has the correct `border-color` & `border-style`.  
 
-It is easier to read, and it also saves you some tests. Should the test fail, it will specify which part of the test went wrong. 
+In that case, we would actually prefer if the test was created as a single _"should render with correct border"_ test; this is really what the reader of your test needs to know in the end. Here all three properties are assessed together like so:
+```
+it('should render with correct border', () => {
+  expect(element).toHaveComputedStyle({
+    'border-width': '1px',
+    'border-style': 'solid',
+    'border-color': 'transparent'
+  });
+});
+```
 
-But as mentioned, it is a bit of an art, and the things you're testing should be related. For example testing if an element has 'position: relative' and 'background-color: #fff' would not make sense. 
+This makes the intention more clear and also saves some time writing tests. Should the test fail due to one of the properties being rendered with an unexpected value; the error message will display which property is wrong. 
 
-Testing font-family, font-size, font-weight and font-style together would make sense tho, as it can be lopped under "should render with correct typography". 
+We are aware that this requires a bit of gut feel. Testing for example if an element has `position: relative` & `background-color: #ffffff` would most likely not make sense. What would the test say? _Should have correction position and background-color_? There is really no relation between these two properties.
 
-A good rule of thumb for whenever this is appropiate, is whenever the css property has the same prefix, for example the above typography example, all properties are prefixed with 'font-\*'. This will not always be the case tho, for example if you're testing positioning properties such as 'left', 'right', 'bottom' and 'top'. 
+Testing the properties `position`, `left`, `right`, `bottom` and `top` could make better sense as it could be tested as _"should be positioned correctly"_. As an additional example `font-family`, `font-size`, `font-weight` & `font-style` could be tested as _"should have correct typography"_.
 
-  <!-- It's a bit of an art... 
-  If you're writing individual tests for "font-size", "font-weight", "font-family" consider merging these into a singe "should have correct typography" test. Same with border instead of testing weight, thickness, color for itself, test "should have correct border"
-  It's a bit of an art and no heads will roll if not followed
-  It’s okay to check multiple computed styles when multiple properties results in the expected outcome, “should render without outline” example --> 
-
-<!--\#\### Other good tips to remember when writing tests in Kirby:
-  These did not really fit _The Good_ format, but we wouldn't leave you without:
-  - The good test includes edge cases 
-  - You can prefix tests with `f` (`fit`, `fdescribe`) to only test that block 
-    - The correct color is stated in the expectation and is easier to change...
-  - Using a TDD approach for writing your tests, can help you create better APIs as you're actually using it as a consumer, to write the test, before implementing it. --> 
+A rule of thumb is to test properties together whenever they have the same prefix such as `font-`. 
+This will however not always be the case as can be seen in the positioning example.
 
 ## I have a question related to Kirby
 
