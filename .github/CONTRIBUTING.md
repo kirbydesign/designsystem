@@ -785,26 +785,27 @@ const testScenarios: { size: ButtonSize; expected: any }[] = [
 These scenarios can then be used to generate the actual tests when combined with string interpolation: 
 ```
 testScenarios.forEach((scenario) => {
-    describe(`when configured with size = ${scenario.size}`, () => {
-        beforeEach(() => {
-          spectator = createHost(
-            `<button kirby-button size="${scenario.size}"><span>Text</span></button>`
-          );
-          element = spectator.element as HTMLButtonElement;
-        });
-        it('should render with correct font-size', () => {
-          expect(element).toHaveComputedStyle({ 'font-size': scenario.expected.fontSize });
-        });
+  describe(`when configured with size = ${scenario.size}`, () => {
+    beforeEach(() => {
+      spectator = createHost(
+        `<button kirby-button size="${scenario.size}"><span>Text</span></button>`
+      );
+      element = spectator.element as HTMLButtonElement;
+    });
 
-        it('should render with correct height', () => {
-          expect(element).toHaveComputedStyle({ height: scenario.expected.height });
-        });
+    it('should render with correct font-size', () => {
+      expect(element).toHaveComputedStyle({ 'font-size': scenario.expected.fontSize });
+    });
 
-        it('should render with correct min-width', () => {
-          expect(element).toHaveComputedStyle({ 'min-width': scenario.expected.minWidth });
-        });
-      });
+    it('should render with correct height', () => {
+      expect(element).toHaveComputedStyle({ height: scenario.expected.height });
+    });
+
+    it('should render with correct min-width', () => {
+      expect(element).toHaveComputedStyle({ 'min-width': scenario.expected.minWidth });
+    });
   });
+});
 ```
 
 This generates a total of 9 tests for us, but we only had to write 3! This is actually a simplified example taken from [`button.component.spec.ts`](https://github.com/kirbydesign/designsystem/blob/master/libs/designsystem/src/lib/components/button/button.component.spec.ts). In the actual file 9 tests are written; resulting in 27 tests being created programatically.
