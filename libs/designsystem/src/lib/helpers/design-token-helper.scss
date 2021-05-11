@@ -1,9 +1,10 @@
-@import '../scss/base/variables';
+@use 'sass-to-ts';
+@use '../scss/base/variables';
 
-@function generate-rgb-elevations() {
+@function remap-elevation($elevations) {
   $elevation-list: ();
   @each $elevation-key, $shadow-list in $elevations {
-    $shadow-list-reordered: [];
+    $shadow-list-reordered: ();
     @each $shadow in $shadow-list {
       $shadow-color: nth($shadow, -1);
       // window.getComputedStyle() returns box-shadow with color first, so re-order shadow components:
@@ -15,10 +16,22 @@
       }
       $shadow-list-reordered: append($shadow-list-reordered, $shadow-reordered, $separator: comma);
     }
-    $elevation-list: map-merge((#{$elevation-key}: #{$shadow-list-reordered}), $elevation-list);
+    $elevation-list: map-merge(
+      $elevation-list,
+      (
+        $elevation-key: $shadow-list-reordered,
+      )
+    );
   }
   @return $elevation-list;
 }
 
-// shadow-colors are interpolated as hex-colors by default, so re-map to rgb:
-$elevations-rgb: generate-rgb-elevations();
+$styles: map-merge(
+  module-variables('variables'),
+  (
+    // window.getComputedStyle() returns box-shadow in a specific format, so re-map elevations:
+      'elevations': remap-elevation(variables.$elevations)
+  )
+);
+
+@include sass-to-ts.output-styles($styles);
