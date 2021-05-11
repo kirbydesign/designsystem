@@ -846,28 +846,13 @@ Angular Test Bed is a nice tool for configuring and initializing the environment
 For more on `createHostFactory`, `createComponentFactory`, `createHost` and `createComponent` see [the Spectator documentation](https://github.com/ngneat/spectator#testing-components). 
 
 #### The good test prefers fakeAsync over Async & Done 
-  The `it()` function is provided with a `done` argument, that can be used as a callback whenever doing asyncrhonous actions while testing. 
-  This is sometimes necessary, such as when waiting for ionic components to be ready for testing (link example from checkbox and radio buttons). 
+While the `it` function is provided with a `done` callback as an argument and support the `async`/`await` syntax for testing asynchronous behavior; we encourage the use of the [`fakeAsync`](https://angular.io/api/core/testing/fakeAsync) function instead. 
 
-  It is also possible to use the async, await syntax. 
+Using the `done` function might send you straight to [callback hell](https://image.slidesharecdn.com/promisesandchaininginangularjs-141027044455-conversion-gate02/95/promises-and-chaining-in-angularjs-into-callback-hell-and-back-again-17-638.jpg) while the `async`/`await` syntax slows down execution of tests. 
 
-  spectator also provides a fakeAsync function that provides a tick function that can be usd to simulate the passing of time. 
-  We prefer the use of this, as it does not result in a callback hell like done would, and it is faster to use than the async await syntax. 
-  Also be sure to not mix await with fakeAsync as it will not do anything. 
+`fakeAsync` combined with the [`tick`](https://angular.io/api/core/testing/tick) function on the other hand, simulates the asynchronous passage of time without actually taking any additional time and avoiding callback hell.
 
-  There's more on fakeAsync in th espectator docuemtatnion: 
-  <!--- Not using done avoids callback hell 
-  - fakeAsync simulates timespan
-    - From notes: 
-      Simulates time span 
-        wrap entire it function in fakeAsync
-        This gives access to stuff like tick() 
-        Only use async or fakeAsync 
-          Don’t mix, it async await does not do anything 
-          We want to “fake” that we’re awaiting, so therefore don’t await 
-        tick can be called with or without a time 
-          actually returns ms, but does not actually take any ms -->
-
+When using `fakeAsync` remember to not mix it with the `done` function or the `async`/`await` syntax. Using `fakeAsync` we want to simulate that time is passing - not actually wait for the time to pass. 
 
 #### The good test uses ionicModuleForTest instead of IonicModule
 When working with ionic you might have to import the `IonicModule` as part of your `createComponent` or `createHost` factory.   
