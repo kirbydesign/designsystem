@@ -35,7 +35,7 @@ export function modalControllerFactory() {
 }
 
 export function tabsServiceFactory() {
-  return jasmine.createSpyObj('TabsService', []);
+  return jasmine.createSpyObj('TabsService', ['setOutlet']);
 }
 
 export function toastControllerFactory() {

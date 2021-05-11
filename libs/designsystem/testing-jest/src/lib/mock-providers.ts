@@ -38,7 +38,9 @@ export function modalControllerFactory() {
 }
 
 export function tabsServiceFactory() {
-  return {};
+  return {
+    setOutlet: jest.fn(),
+  };
 }
 
 export function toastControllerFactory() {
