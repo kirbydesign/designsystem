@@ -649,7 +649,7 @@ From the perspective of a reviewer, ask yourself:
 
 ### Test
 
-Tests helps us avoid regressions and provides peace of mind to other contributors when making changes to the code by ensuring that nothing is accidentally broken. Sometimes more time is spent on writing tests than the actual code - but it provides value everytime it is executed and is an important tool in collaboration.
+Tests helps us avoid regressions and provides peace of mind to other contributors when making changes to the code by ensuring that nothing is accidentally broken. Sometimes more time is spent on writing tests than the actual code - but it provides value everytime it is executed and is an important tool for collaboration.
 
 A good well written test also acts as a sort of documentation by documenting functional requirements of the code.
 
