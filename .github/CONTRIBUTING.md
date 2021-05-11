@@ -732,7 +732,7 @@ You might notice tests in Kirby that do not use the AAA pattern - that is a good
 When writing tests prioritise the readability of the test above all. 
 It should be easy for future developers to visually parse and understand what is going on in the test. 
 
-The following points, can help you improve the readability of your tests
+The following points can help you improve the readability of your tests:
 - Making proper spacing between `it` blocks 
 - Group related tests under common `describe` blocks 
 - Keeping your test isolated (more on this here: [The good test is isolated](#the-good-test-is-isolated))
