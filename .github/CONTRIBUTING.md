@@ -896,7 +896,7 @@ it('should render with correct border', () => {
 
 This makes the intention more clear and also saves some time writing tests. Should the test fail due to one of the properties being rendered with an unexpected value; the error message will display which property is wrong. 
 
-We are aware that this requires a bit of gut feel. Testing for example if an element has `position: relative` & `background-color: #ffffff` would most likely not make sense. What would the test say? _Should have correction position and background-color_? There is really no relation between these two properties.
+We are aware that this requires a bit of gut feel. Testing for example if an element has `position: relative` & `background-color: #ffffff` would most likely not make sense. What would the test say? _Should have correct position and background-color_? There is really no relation between these two properties.
 
 Testing the properties `position`, `left`, `right`, `bottom` and `top` could make better sense as it could be tested as _"should be positioned correctly"_. As an additional example `font-family`, `font-size`, `font-weight` & `font-style` could be tested as _"should have correct typography"_.
 
