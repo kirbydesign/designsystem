@@ -69,7 +69,7 @@ kirby-card {
   opacity: 0;
   position: absolute;
   width: 100%;
-  max-height: $dropdown-max-height;
+  max-height: var(--dropdown-popout-max-height, $dropdown-max-height);
   margin-top: size('xxxs');
   overflow-y: auto;
   box-shadow: get-elevation(8);

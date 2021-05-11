@@ -1,4 +1,5 @@
 import {
+  AfterViewChecked,
   AfterViewInit,
   Component,
   ElementRef,
@@ -35,7 +36,7 @@ interface CalendarDay {
   styleUrls: ['./calendar.component.scss'],
   providers: [CalendarHelper],
 })
-export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
+export class CalendarComponent implements OnInit, AfterViewInit, OnChanges, AfterViewChecked {
   @ViewChild('calendarContainer', { static: false }) calendarContainer: ElementRef;
   @Output() dateChange = new EventEmitter<Date>();
   @Output() dateSelect = new EventEmitter<Date>();
@@ -64,6 +65,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   private _todayDate: Date;
   private _minDate: Date;
   private _maxDate: Date;
+  private element: HTMLElement;
 
   get selectedDate(): Date {
     return this._selectedDate;
@@ -146,7 +148,12 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
     return !!this.yearNavigatorOptions;
   }
 
-  constructor(private calendarHelper: CalendarHelper, @Inject(LOCALE_ID) private locale: string) {
+  constructor(
+    private calendarHelper: CalendarHelper,
+    @Inject(LOCALE_ID) private locale: string,
+    elementRef: ElementRef<HTMLElement>
+  ) {
+    this.element = elementRef.nativeElement;
     moment.locale(this.locale);
     moment().format('YYYY-MM-DD');
   }
@@ -163,6 +170,25 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
       this.onDateSelected.bind(this),
       this.onChangeMonth.bind(this)
     );
+  }
+
+  ngAfterViewChecked() {
+    if (this._hasYearNavigator) {
+      this.constrainDropdownPopoutHeight();
+    }
+  }
+
+  private constrainDropdownPopoutHeight(): void {
+    const tableHeightUnitless = this.element.querySelector('table').offsetHeight;
+    const itemHeightUnitless = this.element.querySelector('kirby-item').clientHeight;
+
+    if (itemHeightUnitless > 0) {
+      // Set max height based on max number of dropdown items that will fit
+      const maxItems = Math.floor(tableHeightUnitless / itemHeightUnitless);
+      const maxHeightUnitless = maxItems * itemHeightUnitless;
+
+      this.element.style.setProperty('--dropdown-popout-max-height', `${maxHeightUnitless}px`);
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
