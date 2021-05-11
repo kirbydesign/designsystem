@@ -662,7 +662,7 @@ For testing we use:
 
 The following is not a guide on how to use these tools (if you are not familiar with Jasmine & Spectator have a look at the linked documentation above). Rather it is a list of points we believe can help you create tests that are helpful in avoiding regression, making others feel safe changing code and that can assist documenting your code.
 
-#### The good test knows itself (Find a better title for this, sheesh...) / Is appropiately located in file???? 
+#### The good test is located in the right file
 In Kirby we seperate integration tests from unit tests - so make sure to know which kind of testing you are doing before writing them. 
 
 Unit tests are located in `*.spec.ts` files such as [`button.component.spec.ts`](https://github.com/kirbydesign/designsystem/blob/master/libs/designsystem/src/lib/components/button/button.component.spec.ts) and integration tests in `*.spec.integration.ts` files such as [`button.component.integration.spec.ts`](https://github.com/kirbydesign/designsystem/blob/master/libs/designsystem/src/lib/components/button/button.component.integration.spec.ts).
