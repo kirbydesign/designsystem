@@ -672,7 +672,7 @@ Remember that unit tests, tests a single unit - so if you find yourself relying 
 #### The good test can be read as a sentence 
 Being able to read a test as a sentence, makes it clear what has gone wrong when the test fails and makes it act as a functional requirement. 
 
-As an example, which one of these two tests best communicates intention while being easy to understand and read? 
+As an example, which one of these two tests best communicates intention while being easy to read and understand? 
 
 Example #1: 
 
