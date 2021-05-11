@@ -1,3 +1,5 @@
+// AUTO-GENERATED - PLEASE DON'T EDIT THIS FILE MANUALLY
+
 import { MockAccordionItemComponent } from './components/mock.accordion-item.component';
 import { MockActionSheetComponent } from './components/mock.action-sheet.component';
 import { MockAppComponent } from './components/mock.app.component';
