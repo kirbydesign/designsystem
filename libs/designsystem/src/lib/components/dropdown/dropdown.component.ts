@@ -333,7 +333,7 @@ export class DropdownComponent
     if (this.isOpen) {
       this.state = OpenState.closed;
       // Reset vertical direction to default
-      this.verticalDirection = VerticalDirection.down;
+      this.verticalDirection = this._forcePopoutVerticalDirection ?? VerticalDirection.down;
     }
   }
 
