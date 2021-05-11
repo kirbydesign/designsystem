@@ -36,9 +36,9 @@ export enum HorizontalDirection {
   left = 'left',
 }
 
-enum VerticalDirection {
-  up,
-  down,
+export enum VerticalDirection {
+  up = 'up',
+  down = 'down',
 }
 
 @Component({
@@ -60,6 +60,7 @@ export class DropdownComponent
   private hasConfiguredSlottedItems = false;
   private horizontalDirection = HorizontalDirection.right;
   private verticalDirection = VerticalDirection.down;
+  private _forcePopoutVerticalDirection: VerticalDirection = null;
 
   private _items: string[] | any[] = [];
   get items(): string[] | any[] {
@@ -95,6 +96,10 @@ export class DropdownComponent
 
   get popout() {
     return this.horizontalDirection;
+  }
+
+  @Input() set forcePopoutVerticalDirection(direction: VerticalDirection) {
+    this._forcePopoutVerticalDirection = direction;
   }
 
   @Input()
@@ -275,11 +280,18 @@ export class DropdownComponent
   }
 
   private setVerticalDirection(entry) {
+    // Always respect forced popout vertical direction
+    if (this._forcePopoutVerticalDirection) {
+      this.verticalDirection = this._forcePopoutVerticalDirection;
+      return;
+    }
+
     if (entry.boundingClientRect.top < 0) {
       // entry is cut off at the top by ${entry.boundingClientRect.top}px
       // open downwards:
       this.verticalDirection = VerticalDirection.down;
     }
+
     if (entry.boundingClientRect.bottom > entry.rootBounds.bottom) {
       // entry is cut off at the bottom by ${entry.boundingClientRect.bottom - entry.intersectionRect.bottom}px
       const containerOffsetTop = this.elementRef.nativeElement.getBoundingClientRect().top;
