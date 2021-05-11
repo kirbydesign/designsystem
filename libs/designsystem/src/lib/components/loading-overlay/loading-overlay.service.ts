@@ -15,7 +15,7 @@ export class LoadingOverlayService {
     private injector: Injector
   ) {}
 
-  async showLoadingOverlay(showBackdrop: boolean = true): Promise<void> {
+  public async showLoadingOverlay(showBackdrop: boolean = true): Promise<void> {
     if (!this.ionLoading) {
       this.ionLoading = await this.loadingController.create({
         cssClass: 'kirby-loading-overlay',
@@ -35,7 +35,7 @@ export class LoadingOverlayService {
     }
   }
 
-  async hideLoadingOverlay(): Promise<void> {
+  public async hideLoadingOverlay(): Promise<void> {
     if (!!this.ionLoading) {
       await this.ionLoading.dismiss();
       this.ionLoading = null;
