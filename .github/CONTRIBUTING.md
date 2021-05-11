@@ -758,24 +758,58 @@ Therefore be WET - it will lower the chance of the tests being the problem and g
 
 When doing unit tests, further isolation has to be done by stubbing and mocking everything else than what is being tested. 
 
-#### The good test uses map/test-scenarios when appropiate 
-  If you find yourself writing a lot of identical tests, perhaps only changing a few varialbes and the expected outcome. Then it is a point where it is okay to be a little less WET actually. But the method we propose still keep the tests flat and structured, while giving us a nice bit of DRYness. What we usually do is to use "test scenarios" whenever we do this. 
+#### The good test uses test scenarios when appropiate 
+If you find yourself writing several tests that have identical arrange, act and assess sections - just with different variables, then you might benefit from using test scenarios. 
 
-  Use a list of scenarios, and create your tests from the variables in these. 
+An array of scenarios are used to programatically create tests for each using the `forEach` function. Each test scenario contains the variables making up the scenario and then the expected outcome of this. 
 
-  Have a look at this example, where no scenarios are used: ... (link because it is a huge image)
+Take for example the [`kirby-button`](https://cookbook.kirby.design/home/showcase/button) directive which is used to render buttons. Depending on which size is passed as an input property, it is rendered with different values for `font-size`, `height` and `min-width`. When testing this, the tests for each size is identical. They only differ in which value is given for size and the expected outcome. This can be expressed as an array of test scenarios: 
 
-  Then have a look at this: ... 
+```
+const testScenarios: { size: ButtonSize; expected: any }[] = [
+  {
+    size: ButtonSize.SM,
+    expected: { fontSize: fontSize('xs'), height: size('l'), minWidth: '44px' },
+  },
+  {
+    size: ButtonSize.MD,
+    expected: { fontSize: fontSize('s'), height: size('xl'), minWidth: '88px' },
+  },
+  {
+    size: ButtonSize.LG,
+    expected: { fontSize: fontSize('n'), height: size('xxl'), minWidth: '220px' },
+  },
+];
+```
 
-  It still works, and individual tests are created that are all flat and self contained. You have just used the map to help you write them out quickly.
+These scenarios can then be used to generate the actual tests when combined with string interpolation: 
+```
+testScenarios.forEach((scenario) => {
+    describe(`when configured with size = ${scenario.size}`, () => {
+        beforeEach(() => {
+          spectator = createHost(
+            `<button kirby-button size="${scenario.size}"><span>Text</span></button>`
+          );
+          element = spectator.element as HTMLButtonElement;
+        });
+        it('should render with correct font-size', () => {
+          expect(element).toHaveComputedStyle({ 'font-size': scenario.expected.fontSize });
+        });
 
-  It can sometimes also read better, whenever the test is the same, but the scenarios are different, as it gives a better overview of what is going on.
+        it('should render with correct height', () => {
+          expect(element).toHaveComputedStyle({ height: scenario.expected.height });
+        });
 
-  Again this is only relevant for identical tests, that have the same Arrange, Act and Assert actions but with different variables. 
-  <!--   - If you find yourself writing out a lot of 
-    - Unless when it makes sense to use map/test-scenarios (button.component.spec.ts example ~ line 334) 
-    - Sometimes it reads better, when the test is the same, but the scenarios are different 
-    - Can give a better overview of what is going on -->
+        it('should render with correct min-width', () => {
+          expect(element).toHaveComputedStyle({ 'min-width': scenario.expected.minWidth });
+        });
+      });
+  });
+```
+
+This generates a total of 9 tests for us, but we only had to write 3! This is actually a simplified example taken from [`button.component.spec.ts`](https://github.com/kirbydesign/designsystem/blob/master/libs/designsystem/src/lib/components/button/button.component.spec.ts). In the actual file 9 tests are written; resulting in 27 tests being created programatically.
+
+It is less WET than writing them all out by hand but each test is still flat, structured and self-contained. Actually it often reads better as the intention is clearer and gives a better overview of what is going on.
 
 #### The good test prefers the use of Spectator over Angular testbed 
 If you examine the test files, you will notice that almost every file uses the functions `createHostFactory` or `createComponentFactory` as part of their setup. These two functions are given the component being tested along with configuration such as declarations, imports, providers and more.
