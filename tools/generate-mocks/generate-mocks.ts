@@ -35,7 +35,6 @@ export class GenerateMocks {
       exportedTypes,
       exportedProviders
     );
-    // console.log('exportedProviders:', exportedProviders);
     this.renderMockComponentDeclaration(classMap, outputPathNormalized);
     this.renderMockProviders(exportedProviders, path.normalize(outputPaths.jasmine), 'jasmine');
     this.renderMockProviders(exportedProviders, path.normalize(outputPaths.jest), 'jest');
@@ -152,7 +151,6 @@ ${providers},
         await this.traverseFolder(fullPath, outputPath, classMap, exportedTypes, exportedProviders);
       } else {
         if (fileOrFolder.endsWith('.component.ts')) {
-          // console.log('Rendering mock for: ', fullPath);
           const newFilename = path.join(outputPath, 'components', 'mock.' + fileOrFolder);
           const classNames = this.renderMock(fullPath, newFilename, exportedTypes);
           if (classNames) {
@@ -169,7 +167,9 @@ ${providers},
   private getExportedProvidersMetadata(fileName: string, exportedTypes: string[]) {
     return this.generateMetaData(fileName).filter(
       (metaData) =>
-        metaData.decorator === 'Injectable' && exportedTypes.includes(metaData.className)
+        metaData.decorator === 'Injectable' &&
+        exportedTypes.includes(metaData.className) &&
+        metaData.methods.length
     );
   }
 
