@@ -10,6 +10,13 @@ defaults:
     shell: bash
 
 jobs:
+  say-hello-test: 
+    runs-on: ubuntu-lastest
+    steps: 
+    - uses: ../../say-hello
+      with:
+        name: Mads
+    
   build_check:
     name: Check if build is needed
     runs-on: ubuntu-latest
