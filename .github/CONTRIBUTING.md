@@ -227,7 +227,7 @@ Scripts for running TSLint can be found in `package.json` . We however recommend
 
 #### VSCode "workspace library execution"-issue
 
-An issue might occur where TSLint will randomly disable for the current workspace and has to be enabled again using the command `TSLint: Manage workspace library execution`. 
+An issue might occur where TSLint will randomly disable for the current workspace and has to be enabled again using the command `TSLint: Manage workspace library execution` . 
 
 To solve this: 
 
@@ -247,19 +247,18 @@ Prettier is used for consistent code formatting and avoiding unnecessary discuss
 
 As with TSLint, we  strongly recommend installing Prettier as a plugin for your editor. You should also enable "format on save".
 
-It can however be used without an editor plugin; run `npm run prettier` to check for formatting errors, fix them by running `npm run prettier:fix`. 
+It can however be used without an editor plugin; run `npm run prettier` to check for formatting errors, fix them by running `npm run prettier:fix` . 
 
 If there are changes only concerning formatting, in files you did not create - do not commit these. There is most likely something wrong with your Prettier settings. 
-Make sure that Prettier uses the config file that is shipped with the repository ([`.prettierrc.json`](https://github.com/kirbydesign/designsystem/blob/master/.prettierrc.json)) and not a global configuration located on your machine. 
+Make sure that Prettier uses the config file that is shipped with the repository ([ `.prettierrc.json` ](https://github.com/kirbydesign/designsystem/blob/master/.prettierrc.json)) and not a global configuration located on your machine. 
 
-To check if the config file from the repository is used, try to alter the configuration in `.prettierrc.json` and format a file using Prettier - for example by changing `"singleQuote": true,` to `"singleQuote": false,`. 
-If all quotation marks are changed to `"` instead of `'` when you format, it means the repository config file is used by Prettier. Remember to revert the changes made to `.prettierrc.json`.
+To check if the config file from the repository is used, try to alter the configuration in `.prettierrc.json` and format a file using Prettier - for example by changing `"singleQuote": true,` to `"singleQuote": false, ` . 
+If all quotation marks are changed to `"` instead of `'` when you format, it means the repository config file is used by Prettier. Remember to revert the changes made to `.prettierrc.json` .
 
 **Useful resources:**
 
 * [Prettier extension for VSCode](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 * [Enabling "format on save" in VSCode](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode#format-on-save)
-
 
 ## The good:
 
@@ -656,6 +655,7 @@ A good well written test also acts as a sort of documentation by documenting fun
 That is three benefits for the price of one - so do not skimp on testing!
 
 For testing we use: 
+
 * [Karma](https://karma-runner.github.io/latest/index.html) - as our test runner
 * [Jasmine](https://jasmine.github.io) - as the framework for writing tests 
 * [Spectator](https://github.com/ngneat/spectator) - as a tool for reducing boilerplate that gives us mocking capabilities and provide spying functionality 
@@ -663,13 +663,15 @@ For testing we use:
 The following is not a guide on how to use these tools (if you are not familiar with Jasmine & Spectator have a look at the linked documentation above). Rather it is a list of points we believe can help you create tests that are helpful in avoiding regression, making others feel safe changing code and that can assist documenting your code.
 
 #### The good test is located in the right file
+
 In Kirby we seperate integration tests from unit tests - so make sure to know which kind of testing you are doing before writing them. 
 
-Unit tests are located in `*.spec.ts` files such as [`button.component.spec.ts`](https://github.com/kirbydesign/designsystem/blob/master/libs/designsystem/src/lib/components/button/button.component.spec.ts) and integration tests in `*.spec.integration.ts` files such as [`button.component.integration.spec.ts`](https://github.com/kirbydesign/designsystem/blob/master/libs/designsystem/src/lib/components/button/button.component.integration.spec.ts).
+Unit tests are located in `*.spec.ts` files such as [ `button.component.spec.ts` ](https://github.com/kirbydesign/designsystem/blob/master/libs/designsystem/src/lib/components/button/button.component.spec.ts) and integration tests in `*.spec.integration.ts` files such as [ `button.component.integration.spec.ts` ](https://github.com/kirbydesign/designsystem/blob/master/libs/designsystem/src/lib/components/button/button.component.integration.spec.ts).
 
 Remember that unit tests, tests a single unit - so if you find yourself relying on other components or functions without them being mocked or stubbed, then you are most likely writing an integration test. 
 
 #### The good test can be read as a sentence 
+
 Being able to read a test as a sentence, makes it clear what has gone wrong when the test fails and makes it act as a functional requirement. 
 
 As an example, which one of these two tests best communicates intention while being easy to read and understand? 
@@ -690,7 +692,9 @@ What is it exactly that should have the white backgound color here?
 To achieve this, you can follow these pointers:
 
 ##### Use the [Given-When-Then](https://www.agilealliance.org/glossary/gwt/#q=~(infinite~false~filters~(postType~(~'page~'post~'aa_book~'aa_event_session~'aa_experience_report~'aa_glossary~'aa_research_paper~'aa_video)~tags~(~'given*20when*20then))~searchTerm~'~sort~false~sortDirection~'asc~page~1)) formula
+
 For example have a look at example #1: 
+
 * (Given) ButtonComponent in Kirby Page 
 * (When) inside Page Actions 
 * (Then) [it] should render with correct background-color
@@ -699,12 +703,15 @@ The missing _it_ comes from the `it()` blocks used when writing the tests:
 ![](images/it-code-example.png)
 
 ##### Start `describe` and `it` blocks with a lowercase letter 
-For example write `describe('inside Page Actions', () => {...})` not `describe('Inside Page Actions', () => {...})`.
+
+For example write `describe('inside Page Actions', () => {...})` not `describe('Inside Page Actions', () => {...})` .
 
 Not following this, causes the capitalisation to be wrong when the test is read as a sentence: 
+
 > "ButtonComponent in Kirby Page Inside Page Actions Should render with correct background color".
 
 ##### Avoid values in the description 
+
 Notice how the above test says "should render with correct background-color" instead of "should render with background-color #fff". 
 
 For someone running the tests, it is not relevant what the color should be, they care about if the color is _correct_. If they ever need to see what the correct color is, they can look up the test. 
@@ -712,10 +719,13 @@ For someone running the tests, it is not relevant what the color should be, they
 This also reduces the likeliness of forgetting to correct the test description, if the color ever was to change - resulting in uncertainaity to what the correct color actually is. 
 
 #### The good test follows the Arrange, Act, Assert (AAA) pattern
+
 Following the [AAA pattern](https://medium.com/@pjbgf/title-testing-code-ocd-and-the-aaa-pattern-df453975ab80) makes your tests well structured and easy to understand. 
 
 A test will not always have all parts of AAA - sometimes it may only be necessary to assert, as is the case in the following test:
-```
+
+``` 
+
   it('should render with correct background-color', () => {                                                                                                                                                                                             
        expect(element).toHaveComputedStyle({                                                                                                                                                                                                               
          'background-color': getColor('primary'),                                                                                                                                                                                                          
@@ -728,15 +738,17 @@ We do not denote each part of AAA with a comment but use spacing to seperate the
 You might notice tests in Kirby that do not use the AAA pattern - that is a good opportunity to do some girl/boy scouting and fix it if you are making other changes related to your issue in that file anyways.
 
 #### The good test prioritizes readability above efficient code 
+
 <!-- This section might be a bit redundant IMO -->
 When writing tests prioritise the readability of the test above all. 
 It should be easy for future developers to visually parse and understand what is going on in the test. 
 
 The following points can help you improve the readability of your tests:
-- Make proper spacing between `it` blocks 
-- Group related tests under common `describe` blocks 
-- Keep your tests isolated (more on this here: [The good test is isolated](#the-good-test-is-isolated))
-- Follow the AAA pattern as described above
+
+* Make proper spacing between `it` blocks 
+* Group related tests under common `describe` blocks 
+* Keep your tests isolated (more on this here: [The good test is isolated](#the-good-test-is-isolated))
+* Follow the AAA pattern as described above
 
 Below there are two examples. Which one is easiest to read? 
 
@@ -747,9 +759,11 @@ Below there are two examples. Which one is easiest to read?
 (Our guess is the second one)
 
 #### The good test is isolated and flat
+
 The tests should be isolated and flat, therefore writing tests is one of the few places, where it is okay to be WET instead of DRY - it is rather important actually. 
 
 Future contributors should be able to read the test without having to jump around the code and do too much logic, therefore: 
+
 * Avoid reusing code by using functions, keep your tests flat instead 
 * Avoid the use of shared variables between tests, all state should be isolated to the test 
 * Use `beforeEach` instead of `beforeAll`; it will cause potential changes made by previous tests to be overwritten, and you start with the same state each time
@@ -761,13 +775,15 @@ Therefore be WET - it will lower the chance of the tests being the problem and g
 When doing unit tests, further isolation has to be done by stubbing and mocking everything else than what is being tested. 
 
 #### The good test uses test scenarios when appropiate 
+
 If you find yourself writing several tests that have identical arrange, act and assess sections - just with different variables, then you might benefit from using test scenarios. 
 
 An array of scenarios are used to programatically create tests for each using the `forEach` function. Each test scenario contains the variables making up the scenario and then the expected outcome of this. 
 
-Take for example the [`kirby-button`](https://cookbook.kirby.design/home/showcase/button) directive which is used to render buttons. Depending on which size is passed as an input property, it is rendered with different values for `font-size`, `height` and `min-width`. When testing this, the tests for each size is identical. They only differ in which value is given for size and the expected outcome. This can be expressed as an array of test scenarios: 
+Take for example the [ `kirby-button` ](https://cookbook.kirby.design/home/showcase/button) directive which is used to render buttons. Depending on which size is passed as an input property, it is rendered with different values for `font-size` , `height` and `min-width` . When testing this, the tests for each size is identical. They only differ in which value is given for size and the expected outcome. This can be expressed as an array of test scenarios: 
 
-```
+``` 
+
 const testScenarios: { size: ButtonSize; expected: any }[] = [
   {
     size: ButtonSize.SM,
@@ -785,7 +801,9 @@ const testScenarios: { size: ButtonSize; expected: any }[] = [
 ```
 
 These scenarios can then be used to generate the actual tests when combined with string interpolation: 
-```
+
+``` 
+
 testScenarios.forEach((scenario) => {
   describe(`when configured with size = ${scenario.size}`, () => {
     beforeEach(() => {
@@ -810,17 +828,20 @@ testScenarios.forEach((scenario) => {
 });
 ```
 
-This generates a total of 9 tests for us, but we only had to write 3! This is actually a simplified example taken from [`button.component.spec.ts`](https://github.com/kirbydesign/designsystem/blob/master/libs/designsystem/src/lib/components/button/button.component.spec.ts). In the actual file 9 tests are written; resulting in 27 tests being created programatically.
+This generates a total of 9 tests for us, but we only had to write 3! This is actually a simplified example taken from [ `button.component.spec.ts` ](https://github.com/kirbydesign/designsystem/blob/master/libs/designsystem/src/lib/components/button/button.component.spec.ts). In the actual file 9 tests are written; resulting in 27 tests being created programatically.
 
 It is less WET than writing them all out by hand but each test is still flat, structured and self-contained. Actually it often reads better as the intention is clearer and gives a better overview of what is going on.
 
 #### The good test prefers the use of Spectator over Angular testbed 
+
 If you examine the test files, you will notice that almost every file uses the functions `createHostFactory` or `createComponentFactory` as part of their setup. These two functions are given the component being tested along with configuration such as declarations, imports, providers and more.
 
 They then respectively return a `createHost` or `createComponent` function that can be used to create a fresh component in your `beforeEach` blocks. 
 
 For example see: 
-```
+
+``` 
+
 describe('ButtonComponent', () => {    
   let spectator: SpectatorHost<ButtonComponent>;    
   let element: HTMLButtonElement;    
@@ -845,35 +866,41 @@ describe('ButtonComponent', () => {
 
 Angular Test Bed is a nice tool for configuring and initializing the environment for unit tests. It unfortunately involves quite a bit of boilerplate code to use in testing. Therefore the use of Spectator is preferred.
 
-For more on `createHostFactory`, `createComponentFactory`, `createHost` and `createComponent` see [the Spectator documentation](https://github.com/ngneat/spectator#testing-components). 
+For more on `createHostFactory` , `createComponentFactory` , `createHost` and `createComponent` see [the Spectator documentation](https://github.com/ngneat/spectator#testing-components). 
 
 #### The good test prefers fakeAsync over Async & Done 
-While the `it` function is provided with a `done` callback as an argument and support the `async`/`await` syntax for testing asynchronous behavior; we encourage the use of the [`fakeAsync`](https://angular.io/api/core/testing/fakeAsync) function instead. 
 
-Using the `done` function might send you straight to [callback hell](https://image.slidesharecdn.com/promisesandchaininginangularjs-141027044455-conversion-gate02/95/promises-and-chaining-in-angularjs-into-callback-hell-and-back-again-17-638.jpg) while the `async`/`await` syntax slows down execution of tests. 
+While the `it` function is provided with a `done` callback as an argument and support the `async` / `await` syntax for testing asynchronous behavior; we encourage the use of the [ `fakeAsync` ](https://angular.io/api/core/testing/fakeAsync) function instead. 
 
-`fakeAsync` combined with the [`tick`](https://angular.io/api/core/testing/tick) function on the other hand, simulates the asynchronous passage of time without actually taking any additional time and avoiding callback hell.
+Using the `done` function might send you straight to [callback hell](https://image.slidesharecdn.com/promisesandchaininginangularjs-141027044455-conversion-gate02/95/promises-and-chaining-in-angularjs-into-callback-hell-and-back-again-17-638.jpg) while the `async` / `await` syntax slows down execution of tests. 
 
-When using `fakeAsync` remember to not mix it with the `done` function or the `async`/`await` syntax. Using `fakeAsync` we want to simulate that time is passing - not actually wait for the time to pass. 
+`fakeAsync` combined with the [ `tick` ](https://angular.io/api/core/testing/tick) function on the other hand, simulates the asynchronous passage of time without actually taking any additional time and avoiding callback hell.
+
+When using `fakeAsync` remember to not mix it with the `done` function or the `async` / `await` syntax. Using `fakeAsync` we want to simulate that time is passing - not actually wait for the time to pass. 
 
 #### The good test uses ionicModuleForTest instead of IonicModule
-When working with ionic you might have to import the `IonicModule` as part of your `createComponent` or `createHost` factory.   
-Here you should use the [`TestHelper`](https://github.com/kirbydesign/designsystem/blob/master/libs/designsystem/src/lib/testing/test-helper.ts) property `ionicModuleForTest` like so: 
 
-```
+When working with ionic you might have to import the `IonicModule` as part of your `createComponent` or `createHost` factory.   
+Here you should use the [ `TestHelper` ](https://github.com/kirbydesign/designsystem/blob/master/libs/designsystem/src/lib/testing/test-helper.ts) property `ionicModuleForTest` like so: 
+
+``` 
+
 const createComponent = createComponentFactory({
   component: RadioComponent,
   imports: [TestHelper.ionicModuleForTest],
 });
 ```
 
-This ensures that each test uses the same config for the `IonicModule`. 
+This ensures that each test uses the same config for the `IonicModule` . 
 
 There might be files where `IonicModule` is used directly instead of `TestHelper.ionicModuleForTest` - this is a good chance to do some girl/boy scouting and fix it, but only if you are making changes to those files anyways.  
 
 #### The good test combines tests when appropiate
-In Kirby there is defined a [`toHaveComputedStyle`](https://github.com/kirbydesign/designsystem/blob/master/libs/designsystem/src/lib/testing/element-css-custom-matchers.d.ts) custom matcher that checks the value of CSS properties an element is rendered with, like so: 
-```
+
+In Kirby there is defined a [ `toHaveComputedStyle` ](https://github.com/kirbydesign/designsystem/blob/master/libs/designsystem/src/lib/testing/element-css-custom-matchers.d.ts) custom matcher that checks the value of CSS properties an element is rendered with, like so: 
+
+``` 
+
 it('should render with correct border-width', () => {
   expect(element).toHaveComputedStyle({
     'border-width': '1px',
@@ -881,10 +908,12 @@ it('should render with correct border-width', () => {
 });
 ```
 
-When doing unit tests it can seem to be straightforward to create seperate tests for different CSS properties - we are only testing one thing per test after all. Consider the above example, where the only assessment is if `border-width` is correct. There might then be additional tests assessing if the element also has the correct `border-color` & `border-style`.  
+When doing unit tests it can seem to be straightforward to create seperate tests for different CSS properties - we are only testing one thing per test after all. Consider the above example, where the only assessment is if `border-width` is correct. There might then be additional tests assessing if the element also has the correct `border-color` & `border-style` .  
 
 In that case, we would actually prefer if the test was created as a single _"should render with correct border"_ test; this is really what the reader of your test needs to know in the end. Here all three properties are assessed together like so:
-```
+
+``` 
+
 it('should render with correct border', () => {
   expect(element).toHaveComputedStyle({
     'border-width': '1px',
@@ -898,9 +927,9 @@ This makes the intention more clear and also saves some time writing tests. Shou
 
 We are aware that this requires a bit of gut feel. Testing for example if an element has `position: relative` & `background-color: #ffffff` would most likely not make sense. What would the test say? _Should have correct position and background-color_? There is really no relation between these two properties.
 
-Testing the properties `position`, `left`, `right`, `bottom` and `top` could make better sense as it could be tested as _"should be positioned correctly"_. As an additional example `font-family`, `font-size`, `font-weight` & `font-style` could be tested as _"should have correct typography"_.
+Testing the properties `position` , `left` , `right` , `bottom` and `top` could make better sense as it could be tested as _"should be positioned correctly"_. As an additional example `font-family` , `font-size` , `font-weight` & `font-style` could be tested as _"should have correct typography"_.
 
-A rule of thumb is to test properties together whenever they have the same prefix such as `font-`. 
+A rule of thumb is to test properties together whenever they have the same prefix such as `font-` . 
 This will however not always be the case as can be seen in the positioning example.
 
 ## I have a question related to Kirby
