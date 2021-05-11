@@ -8,9 +8,7 @@ import { ReplaySubject } from 'rxjs';
 export class TabsService {
   outlet$: ReplaySubject<IonRouterOutlet> = new ReplaySubject();
 
-  constructor() {}
-
-  setOutlet(outlet: IonRouterOutlet) {
+  public setOutlet(outlet: IonRouterOutlet) {
     this.outlet$.next(outlet);
   }
 }
