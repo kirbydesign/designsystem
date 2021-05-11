@@ -1,4 +1,4 @@
-const { GenerateMocks, OutputPath } = require('../tools/generate-mocks/dist/generate-mocks');
+const { GenerateMocks } = require('../tools/generate-mocks/dist/generate-mocks');
 
 const inputPath = './libs/designsystem/src/lib/';
 const outputPaths = {
