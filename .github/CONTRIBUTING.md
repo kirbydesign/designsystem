@@ -869,7 +869,7 @@ This ensures that each test uses the same config for the `IonicModule`.
 
 There might be files where `IonicModule` is used directly instead of `TestHelper.ionicModuleForTest` - this is a good chance to do some girl/boy scouting and fix it, but only if you are making changes to those files anyways.  
 
-#### The good test merges tests when appropiate (FIND A BETTER TITLE!)
+#### The good test combines tests when appropiate
 In Kirby there is defined a [`toHaveComputedStyle`](https://github.com/kirbydesign/designsystem/blob/master/libs/designsystem/src/lib/testing/element-css-custom-matchers.d.ts) custom matcher that checks the value of CSS properties an element is rendered with, like so: 
 ```
 it('should render with correct border-width', () => {
