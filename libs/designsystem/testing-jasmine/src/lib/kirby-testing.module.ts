@@ -2,52 +2,13 @@
 
 import { NgModule } from '@angular/core';
 
-import { LoadingOverlayService, ModalController, ToastController } from '@kirbydesign/designsystem';
 import { KirbyTestingBaseModule } from '@kirbydesign/designsystem/testing-base';
 
-export function modalControllerFactory() {
-  return jasmine.createSpyObj('ModalController', [
-    'showModal',
-    'navigateToModal',
-    'navigateWithinModal',
-    'showActionSheet',
-    'showAlert',
-    'register',
-    'hideTopmost',
-    'scrollToTop',
-    'scrollToBottom',
-    'hideAll',
-    'registerPresentingElement',
-  ]);
-}
-
-export function toastControllerFactory() {
-  return jasmine.createSpyObj('ToastController', ['showToast']);
-}
-
-export function loadingOverlayServiceFactory() {
-  return jasmine.createSpyObj<LoadingOverlayService>('LoadingOverlayService', [
-    'showLoadingOverlay',
-    'hideLoadingOverlay',
-  ]);
-}
+import { MOCK_PROVIDERS } from './mock-providers';
 
 @NgModule({
   imports: [KirbyTestingBaseModule],
   exports: [KirbyTestingBaseModule],
-  providers: [
-    {
-      provide: ModalController,
-      useFactory: modalControllerFactory,
-    },
-    {
-      provide: ToastController,
-      useFactory: toastControllerFactory,
-    },
-    {
-      provide: LoadingOverlayService,
-      useFactory: loadingOverlayServiceFactory,
-    },
-  ],
+  providers: [...MOCK_PROVIDERS],
 })
 export class KirbyTestingModule {}
