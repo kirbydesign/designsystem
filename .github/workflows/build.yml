@@ -12,9 +12,9 @@ defaults:
 jobs:
   say-hello-test: 
     name: Say hello test
-    runs-on: ubuntu-lastest
+    runs-on: ubuntu-latest
     steps: 
-    - uses: ../../say-hello
+    - uses: ./say-hello
       with:
         name: Mads
     
