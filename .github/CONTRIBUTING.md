@@ -3,7 +3,7 @@ First of all - thank you for your interest in contributing to Kirby! 🥳
 <!-- Early on show that we are here to help if necessary and to educate people in how to get help -->
 If you at any point have any questions please read: [I have a question related to Kirby](#i-have-a-question-related-to-kirby)
 
-**Beware:** We reserve the right to close issues and pull-requests that does not follow the steps outlined in [the contribution model](#the-contribution-model). This is not because we want to be mean or micro-manage the way things are done - but a project of this size requires some consistency in the way we cooperate in order to be manageable. 
+**Beware:** We reserve the right to close issues and pull requests that does not follow the steps outlined in [the contribution model](#the-contribution-model). This is not because we want to be mean or micro-manage the way things are done - but a project of this size requires some consistency in the way we cooperate in order to be manageable. 
 
 * [Introduction to the contribution model](#introduction-to-the-contribution-model)
   + [The process of contributing](#the-process-of-contributing)
@@ -20,8 +20,8 @@ If you at any point have any questions please read: [I have a question related t
   + [Issue](#issue)
   + [Branch](#branch)
   + [Commit](#commit)
-  + [Self-review](#the-good-self-review)
-  + [Pull-request](#pull-request)
+  + [Self-review](#self-review)
+  + [Pull request](#pull-request)
   + [Test](#test)
 * [I have a question related to Kirby](#i-have-a-question-related-to-kirby)
   + [Submit an inquiry request on github](#submit-an-inquiry-request-on-github)
@@ -642,9 +642,115 @@ From the perspective of a reviewer, ask yourself:
 * Is the issue solved by the changes? Read the issue description and the tech refinement comment(s) again to confirm you have solved the issue.
 * Does the [pull request](#pull-request) description contain the appropriate information necessary to perform a code review?
 
-### Pull-request
+### Pull request
 
-* How is a pull-request that is easily reviewed constructed?
+Why should you care about creating good pull requests - is it not just a tool for code reviews?
+
+Well first of all, a good pull request can help reduce how long it takes for your changes to be merged with the main branch by making the life easier for the reviewer, causing a quicker review. 
+
+Secondly a good pull request is more than just a tool for code reviews - it documents the process of reaching a satisfactory implementation as well as toughts and discussion surrounding this. 
+
+The rules that applies for writing a [good issue](#issue) also applies for writing a good description for your pull request.
+But more importantly a pull request includes commits containing code changes that you want to merge with the main branch, which means there are a few more points to keep in mind, when constructing a good pull request. 
+
+Before going through these however - we want to remind you to take ownership of your pull requests. 
+It is your responsibility as a contributor to get your pull requests reviewed, therefore reach out and be communicative! 
+
+### The good pull request solves only one issue
+
+Every pull request that is created should solve _one_ existing [Github issue](https://github.com/kirbydesign/designsystem/issues). 
+
+There might be cases where the changes in a pull request naturally solves multiple issues, often caused by them being related one way or another. This is the exception, not the rule. 
+Striving for the scope of a pull request to be one issue, makes the task of reviewing it more manageable.
+
+If you are not able to reference any specific issue; it is unfortunately an indicator that you have not followed [the process for contribution](#the-process-for-contribution). For example when filling in the `This PR closes # (reference issue number here)` part of the pull request or when following the branch naming convention outlined in [The Good: Branch](#branch).
+
+We do not wish for pull requests that have no related issue to be submitted, as this means no refinement has taken place and there might be no agreement on whether the suggested changes should be part of Kirby. If it is submitted anyways, it will most likely be closed without being merged.  
+
+Should you find yourself in that situation and want to salvage as much of your work as possible: create an issue following [the process for contribution](#the-process-for-contribution) and make changes to your pull request as necessary.
+
+### The good pull request has a title worthy of the changelog
+
+Besides informing what the changes in the pull request does - the title of your pull request will be used in [the changelog](https://cookbook.kirby.design/home/changelog) to represent your changes.
+![](images/issue-title-to-changelog.png)
+
+So make the title descriptive - after writing the title, ask yourself if you would feel informed what the changes in the PR entail if you read it as part of a changelog. 
+
+[keepachangelog.com](https://keepachangelog.com) has a neat list of good verbs to start out with, you can use as inspiration for your title:
+
+* `Added` for new features
+* `Changed` for changes in existing functionality 
+* `Deprecated` for soon-to-be removed features 
+* `Removed` for now removed features 
+* `Fixed` for any bug fixes 
+
+Example titles that are worthy of the changelog: 
+
+* "Added default styling for text links"
+* "Removed kirby-toolbar"
+* "Fixed kirby-radio-group TypeError"
+
+### The good pull request uses the template
+
+As with writing [good issues](#issue), do not ignore the template text when creating a pull request. 
+
+It provides a checklist to help you follow [the process of contributing](#the-process-of-contributing), ease collaboration by providing structure and reminds you to provide information the reviewer might be looking for. 
+
+Filling out the following part of the template properly, will cause the related issue to be closed automatically once the pull request has been merged: 
+
+> This PR closes # (reference issue number here)
+
+For example: 
+
+> This PR closes [#1427](https://github.com/kirbydesign/designsystem/issues/1427)
+
+If the pull request solves more than one issue also mention these, such that they also get closed automatically: 
+
+> This PR closes [#1427](https://github.com/kirbydesign/designsystem/issues/1427), closes [#1428](https://github.com/kirbydesign/designsystem/issues/1428), closes [#1429](https://github.com/kirbydesign/designsystem/issues/1429)
+
+### The good pull request has a logical commit history
+
+Maintaining a logical commit history constructed using [good commits](#commit) helps the reviewer easily get an overview and understanding of the changes contained in a pull request.
+
+If you are having trouble maintaining a clean commit history, you could consider writing [pre-emptive commit comments](https://arialdomartini.wordpress.com/2012/09/03/pre-emptive-commit-comments/). This consists of writing down the commit comment, before writing your code. This can help you stay focused on a single task at a time. 
+
+![](images/good-commit-history.png)
+
+### The good pull request only alters files related to the issue at hand
+
+While you might get the urge to be a good girl/boy scout and reorder imports or fix formatting in files not related to your issue, don't.
+
+It is very much appreciated that you want to leave the code better than you found it, but doing so in unrelated files will cause the git history of the project to be illogical. 
+For example, it would not make sense if the imports for the list component located in `list.component.ts` is reordered as part of a pull request concerning optimizing a build step in the CI/CD pipeline. 
+
+Should you stumble upon possible optimizations or things that could be improved, go ahead and create new issues for these.
+
+### The good pull request knows what it wants
+
+Tell the reviewer what you want to get out of your pull request. 
+Should the reviewer do a full-on review or give initial guidance on a WIP implementation? Mention it in the pull request so the reviewer knows what you are looking for and does not waste their time doing a full review on a WIP implementation. 
+
+As a convention in Kirby we signal which kind of feedback we want by creating a draft pull request if it is a WIP implementation - and a normal one for a full review.
+
+Mention people you want to include in the discussion of your pull request by using `@`, clarify why: 
+
+> @MadsBuchmann for details on the fontsource dependency
+
+### The good pull request only uses review comments for actual review comments
+
+Review comments are for review comments. Not for explaining your code. 
+
+If you feel the urge to add a review comment to clarify a hard to understand part of your code, it is not only the reviewer that will need that information. 
+Future contributors reading the code will also need it and could have a hard time understanding your code without. 
+
+Either refactor the code to make it more readable or add clarifying comments in the code itself - it should be possible to understand the code without looking up the pull request.
+
+### The good pull request is closed when there is no need for it
+
+As with the [good issue](#issue), the good pull request is closed when there is no need for it, in order to reduce clutter. 
+
+Therefore if it is clear that the changes will not be merged with the main branch - close it. 
+It can always be reopened if it was a mistake.
 
 ### Test
 
