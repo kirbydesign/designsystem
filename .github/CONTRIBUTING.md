@@ -733,16 +733,18 @@ When writing tests prioritise the readability of the test above all.
 It should be easy for future developers to visually parse and understand what is going on in the test. 
 
 The following points can help you improve the readability of your tests:
-- Making proper spacing between `it` blocks 
+- Make proper spacing between `it` blocks 
 - Group related tests under common `describe` blocks 
-- Keeping your test isolated (more on this here: [The good test is isolated](#the-good-test-is-isolated))
+- Keep your tests isolated (more on this here: [The good test is isolated](#the-good-test-is-isolated))
 - Follow the AAA pattern as described above
 
-Here is two examples, which one is easiest to read? 
+Below there are two examples. Which one is easiest to read? 
 
 ![](images/unreadable-tests.png)
 
 ![](images/readable-tests.png)
+
+(Our guess is the second one)
 
 #### The good test is isolated and flat
 The tests should be isolated and flat, therefore writing tests is one of the few places, where it is okay to be WET instead of DRY - it is rather important actually. 
