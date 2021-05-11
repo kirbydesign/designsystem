@@ -778,23 +778,37 @@ When doing unit tests, further isolation has to be done by stubbing and mocking 
     - Can give a better overview of what is going on -->
 
 #### The good test prefers the use of Spectator over Angular testbed 
-  Spectator is used to give better tests and reducing boilerplate, by using spectator. 
-  One of the way Specatator does this is by wrapping the angular testbed and providing you with two factory functions createHost and createComponent. 
-  these allow you to specify dependencies, imports etc, without having to configure the angular testbed yourself.
+If you examine the test files, you will notice that almost every file uses the functions `createHostFactory` or `createComponentFactory` as part of their setup. These two functions are given the component being tested along with configuration such as declarations, imports, providers and more.
 
-  createHost allows you to specify your component using htmlt ags, which can be nice when doing integration tests.
-  The createComponent you simply plug in what you want of properties and it will create it for you. 
+They then respectively return a `createHost` or `createComponent` function that can be used to create a fresh component in your `beforeEach` blocks. 
 
-  The reduced boilerplate means that we prefer the use of specatators factory functions of angular testbed. So please use these instead. 
-  <!-- Explain the difference between createHost v. createComponent 
-    - When to use what --> 
+For example see: 
+```
+describe('ButtonComponent', () => {    
+  let spectator: SpectatorHost<ButtonComponent>;    
+  let element: HTMLButtonElement;    
+    
+  const createHost = createHostFactory({    
+    component: ButtonComponent,    
+    declarations: [MockComponent(IconComponent)],    
+  });    
+    
+  describe('by default', () => {    
+    beforeEach(() => {    
+      spectator = createHost('<button kirby-button>Test</button>');    
+      element = spectator.element as HTMLButtonElement;    
+    });    
+    
+    it('should create', () => {    
+      expect(spectator.component).toBeTruthy();    
+    });
+  })
+})
+```
 
-You can also usethe setInput function instead of detectChanges with spectator, whenever you're setting properties of a component. 
-  This will automatically do change detection, and results in less code :)!!! 
-  <!--  - Use set input insetad of detectChanges with spectator, less boilreplate (GOOD) 
-    - Less boilerplate -->
+Angular Test Bed is a nice tool for configuring and initializing the environment for unit tests. It unfortunately involves quite a bit of boilerplate code to use in testing. Therefore the use of Spectator is preferred.
 
-
+For more on `createHostFactory`, `createComponentFactory`, `createHost` and `createComponent` see [the Spectator documentation](https://github.com/ngneat/spectator#testing-components). 
 
 #### The good test prefers fakeAsync over Async & Done 
   The `it()` function is provided with a `done` argument, that can be used as a callback whenever doing asyncrhonous actions while testing. 
