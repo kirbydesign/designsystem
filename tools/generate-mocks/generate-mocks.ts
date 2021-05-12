@@ -182,15 +182,15 @@ ${providers},
 
   private renderJasmineMockProviderFactory(componentMetaData: ComponentMetaData) {
     const methodNames = componentMetaData.methods.map((m) => `'${m.name}'`).join(',' + newLine);
-    const observableProperties = this.getObservableProperties(componentMetaData);
-    const propertyNames = observableProperties.length
-      ? `, { ${observableProperties.join(',' + newLine)} }`
-      : '';
+    const methodNamesArray = `[${methodNames}]`;
+    const observableProperties = this.getObservableProperties(componentMetaData).join(
+      ',' + newLine
+    );
+    const propertyNamesObject = observableProperties.length ? `, { ${observableProperties}` : '';
     const funcName = this.getMockProviderFactoryName(componentMetaData.className);
     return `export function ${funcName}() {
-  return jasmine.createSpyObj('${componentMetaData.className}', [
-    ${methodNames}${propertyNames}
-  ]); 
+  return jasmine.createSpyObj('${componentMetaData.className}', ${methodNamesArray}${propertyNamesObject}
+  ); 
 }`;
   }
 
