@@ -1,6 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy, HostBinding } from '@angular/core';
-
-import { ThemeColor } from '../../helpers/theme-color.type';
+import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
 
 @Component({
   selector: 'kirby-progress-circle-ring',
@@ -9,11 +7,16 @@ import { ThemeColor } from '../../helpers/theme-color.type';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProgressCircleRingComponent {
+  readonly STROKE_MAP = {
+    sm: 3,
+    md: 4,
+    lg: 6,
+  };
+
   @Input() radius: number; // The desired outer radius of the SVG circle
   @Input() value: number = 0;
   @Input() themeColor: 'success' | 'warning' | 'danger' = 'success';
-
-  readonly strokeWidth = 4;
+  @Input() size: 'sm' | 'md' | 'lg' = 'md';
 
   get offset(): number {
     return this.centerCircumference - this.centerCircumference * (this.value / 100);
@@ -31,5 +34,9 @@ export class ProgressCircleRingComponent {
 
   get centerCircumference(): number {
     return this.centerRadius * 2 * Math.PI;
+  }
+
+  get strokeWidth(): number {
+    return this.STROKE_MAP[this.size];
   }
 }
