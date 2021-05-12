@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
-import { ListVirtualScrollExampleTemplate } from './../../examples/list-virtual-scroll-example/list-virtual-scroll-example.component';
+import { ListVirtualScrollItemsExampleTemplate } from './../../examples/list-virtual-scroll-example/examples/items';
+import { ListVirtualScrollLoadExampleTemplate } from './../../examples/list-virtual-scroll-example/examples/load-on-demand';
+import { ListVirtualScrollSectionsExampleTemplate } from './../../examples/list-virtual-scroll-example/examples/sections';
 
 @Component({
   selector: 'cookbook-virtual-scroll-showcase',
@@ -9,7 +11,9 @@ import { ListVirtualScrollExampleTemplate } from './../../examples/list-virtual-
   styleUrls: ['./list-virtual-scroll-showcase.component.scss'],
 })
 export class ListVirtualScrollShowcaseComponent {
-  exampleHtml: string = ListVirtualScrollExampleTemplate;
+  itemsHtml: string = ListVirtualScrollItemsExampleTemplate;
+  loadOnDemandHtml: string = ListVirtualScrollLoadExampleTemplate;
+  sectionsHtml: string = ListVirtualScrollSectionsExampleTemplate;
 
   properties: ApiDescriptionProperty[] = [
     {

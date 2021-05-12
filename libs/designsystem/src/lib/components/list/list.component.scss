@@ -160,6 +160,10 @@ ion-item-options[side='end'] {
     border-radius: $border-radius;
   }
 
+  .virtual-group {
+    margin-top: size('m');
+  }
+
   .footer {
     background-color: transparent;
     border-top: none;

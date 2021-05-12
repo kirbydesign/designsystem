@@ -5,12 +5,39 @@
     dynamically be added/removed from the top and bottom of the list as the user scrolls up or down.
     This can have a very positive impact on performance - especially on long lists.
   </p>
-  <p>Virtual scroll cannot be used in conjunction with <code>isSectionsEnabled</code>.</p>
 </div>
 <div class="example-wrapper">
-  <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
-  <cookbook-iphone src="/examples/list-virtual-scroll" showExternalLink="true"></cookbook-iphone>
+  <h2>With preloaded items</h2>
+  <p>100 items in the list, but approximatly 25 items rendered on the page at a time.</p>
+  <cookbook-code-viewer [html]="itemsHtml"></cookbook-code-viewer>
+  <cookbook-iphone
+    src="/examples/list-virtual-scroll/with-items"
+    showExternalLink="true"
+  ></cookbook-iphone>
 </div>
+
+<div class="example-wrapper">
+  <h2>Load on demand</h2>
+  <p>
+    When ever the list is scrolled to the end, an additional 20 items are requested (with a 2 sec
+    delay to mimic a slow HTTPS request)
+  </p>
+  <cookbook-code-viewer [html]="loadOnDemandHtml"></cookbook-code-viewer>
+  <cookbook-iphone
+    src="/examples/list-virtual-scroll/load-on-demand"
+    showExternalLink="true"
+  ></cookbook-iphone>
+</div>
+
+<div class="example-wrapper">
+  <h2>With sections</h2>
+  <cookbook-code-viewer [html]="sectionsHtml"></cookbook-code-viewer>
+  <cookbook-iphone
+    src="/examples/list-virtual-scroll/with-sections"
+    showExternalLink="true"
+  ></cookbook-iphone>
+</div>
+
 <h2>Properties:</h2>
 <cookbook-api-description-properties
   [properties]="properties"

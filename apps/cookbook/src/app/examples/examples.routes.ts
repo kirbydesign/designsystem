@@ -37,6 +37,9 @@ import { ListExampleComponent } from './list-example/list-example.component';
 import { ListLoadOnDemandExampleComponent } from './list-load-on-demand-example/list-load-on-demand-example.component';
 import { ListNoShapeExampleComponent } from './list-no-shape-example/list-no-shape-example.component';
 import { ListSwipeExampleComponent } from './list-swipe-example/list-swipe-example.component';
+import { ListVirtualScrollItemsExampleComponent } from './list-virtual-scroll-example/examples/items';
+import { ListVirtualScrollLoadExampleComponent } from './list-virtual-scroll-example/examples/load-on-demand';
+import { ListVirtualScrollSectionsExampleComponent } from './list-virtual-scroll-example/examples/sections';
 import { ListVirtualScrollExampleComponent } from './list-virtual-scroll-example/list-virtual-scroll-example.component';
 import { LoadingOverlayExampleComponent } from './loading-overlay-example/loading-overlay-example.component';
 import { ModalExampleComponent } from './modal-example/modal-example.component';
@@ -304,6 +307,20 @@ export const routes: Routes = [
   {
     path: 'list-virtual-scroll',
     component: ListVirtualScrollExampleComponent,
+    children: [
+      {
+        path: 'with-items',
+        component: ListVirtualScrollItemsExampleComponent,
+      },
+      {
+        path: 'load-on-demand',
+        component: ListVirtualScrollLoadExampleComponent,
+      },
+      {
+        path: 'with-sections',
+        component: ListVirtualScrollSectionsExampleComponent,
+      },
+    ],
   },
   {
     path: 'chart',

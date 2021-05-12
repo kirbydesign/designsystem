@@ -91,7 +91,7 @@ describe('ListComponent', () => {
       });
       runNgOnChanges();
 
-      expect(spectator.component.isSectionsEnabled).toBeFalsy();
+      expect(spectator.component._isSectionsEnabled).toBeFalsy();
     });
 
     it('should be enabled if a section callback is defined', () => {
@@ -101,7 +101,7 @@ describe('ListComponent', () => {
       });
       runNgOnChanges();
 
-      expect(spectator.component.isSectionsEnabled).toBeTruthy();
+      expect(spectator.component._isSectionsEnabled).toBeTruthy();
     });
   });
 

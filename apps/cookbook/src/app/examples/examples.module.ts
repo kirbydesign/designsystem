@@ -17,6 +17,7 @@ import { FormFieldExamplesModule } from './form-field-example/form-field-example
 import { ItemExampleModule } from './item-example/item-example.module';
 import { LinkExampleModule } from './link-example/link-example.module';
 import { ListExamplesModule } from './list-example/list-example.module';
+import { ListVirtualScrollExamplesModule } from './list-virtual-scroll-example/list-virtual-scroll-example.module';
 import { ModalCompactExampleComponent } from './modal-example/compact-example/modal-compact-example.component';
 import { FirstEmbeddedModalExampleComponent } from './modal-example/first-embedded-modal-example/first-embedded-modal-example.component';
 import { ModalRoutePage1ExampleComponent } from './modal-example/modal-route-example/modal-route-page1-example.component';
@@ -33,6 +34,7 @@ const IMPORTS = [
   FormFieldExamplesModule,
   ItemExampleModule,
   ListExamplesModule,
+  ListVirtualScrollExamplesModule,
   DropdownExampleModule,
   SegmentedControlExampleModule,
   ChartExampleModule,

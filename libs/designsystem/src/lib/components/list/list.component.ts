@@ -93,7 +93,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
 
   private _useVirtualScroll: boolean = false;
   get useVirtualScroll(): boolean {
-    return this._useVirtualScroll && !this.isSectionsEnabled;
+    return this._useVirtualScroll;
   }
 
   @Input() set useVirtualScroll(value: boolean) {
@@ -116,7 +116,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   };
 
   private async getVirtualDataset(index: number, count: number): Promise<any> {
-    const slicePromise = await new Promise((resolve) => {
+    return await new Promise((resolve) => {
       setTimeout(() => {
         const sliceWithMeta = this.getItemsSliceWitMeta(index, count);
 
@@ -124,13 +124,13 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
         if (sliceWithMeta.length < count && this.isLoadOnDemandEnabled) {
           let elapsedTime = 0;
           // Scrollend (that triggers load on demand) is not fired when we scroll as the virtual
-          // scroll component fixes the viewport, so we fire it programmatically
+          // scroll component fixes the viewport, so we ensure to fire it programmatically
           this.scrollDirective.scrollEnd.emit();
 
           const poller = setInterval(() => {
             elapsedTime += INTERVAL;
 
-            if (this.isLoading) {
+            if (this._isLoading) {
               // Just a failsafe in case this.isLoading for some reason is not reset
               if (elapsedTime > TIMEOUT) {
                 clearInterval(poller);
@@ -147,17 +147,16 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
         }
       }, INTERVAL);
     });
-    return slicePromise;
   }
 
   private getItemsSliceWitMeta(index: number, count: number): any[] {
-    const sliceWithMeta = this.items.slice(index, index + count).map((item, sliceIndex) => {
+    const _items = this._isSectionsEnabled ? this._virtualGroupedItems : this.items;
+    return _items.slice(index, index + count).map((item, sliceIndex) => {
       return {
-        itemMeta: { itemIndex: index + sliceIndex, totalCount: this.items.length },
+        itemMeta: { itemIndex: index + sliceIndex, totalCount: _items.length },
         item,
       };
     });
-    return sliceWithMeta;
   }
 
   /**
@@ -187,18 +186,18 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   @ContentChild(ListItemTemplateDirective, { static: true, read: TemplateRef })
   itemTemplate: TemplateRef<any>;
 
-  @HostBinding('class.has-sections') isSectionsEnabled: boolean;
+  @HostBinding('class.has-sections') _isSectionsEnabled: boolean;
 
-  isSwipingEnabled: boolean = false;
-  isSelectable: boolean;
-  isLoading: boolean;
-  groupedItems: any[];
-  selectedItem: any;
+  _isSelectable: boolean;
+  _isLoading: boolean;
+  _groupedItems: any[];
+  _virtualGroupedItems: any[];
+  _selectedItem: any;
 
   constructor(private listHelper: ListHelper, private groupBy: GroupByPipe) {}
 
   ngOnInit() {
-    this.isSelectable = this.itemSelect.observers.length > 0;
+    this._isSelectable = this.itemSelect.observers.length > 0;
 
     if (this.isLoadOnDemandEnabled === undefined) {
       this.isLoadOnDemandEnabled = this.loadOnDemand.observers.length > 0;
@@ -206,7 +205,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   ngAfterViewInit(): void {
-    if (this.isSelectable) {
+    if (this._isSelectable) {
       setTimeout(() => {
         this.kirbyItems.forEach((item) => {
           item.selectable = true;
@@ -216,11 +215,15 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   ngOnChanges(): void {
-    this.isSectionsEnabled = !!this.getSectionName;
-    if (this.isSectionsEnabled && this.items) {
-      this.groupedItems = this.groupBy.transform(this.items, this.getSectionName);
+    this._isSectionsEnabled = !!this.getSectionName;
+    if (this._isSectionsEnabled && this.items) {
+      this._groupedItems = this.groupBy.transform(this.items, this.getSectionName);
+      this._virtualGroupedItems = this._groupedItems.reduce((accumulator, group) => {
+        accumulator.push({ headingName: group.name });
+        return accumulator.concat(...group.items);
+      }, []);
     } else {
-      this.groupedItems = null;
+      this._groupedItems = null;
     }
   }
 
@@ -237,8 +240,8 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   onItemSelect(item: any) {
-    this.selectedItem = item;
-    this.itemSelect.emit(this.selectedItem);
+    this._selectedItem = item;
+    this.itemSelect.emit(this._selectedItem);
   }
 
   onSwipeActionSelect(args: any): void {
@@ -247,8 +250,17 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     args.event.stopPropagation();
   }
 
-  getItemEndClass(index: number, numberOfItems: number): EndClass {
-    if (index === 0) return this.headerTemplate ? null : EndClass.first;
-    if (index === numberOfItems - 1) return this.footerTemplate ? null : EndClass.last;
+  getItemEndClass(index: number, section?: any[]): EndClass {
+    let _items = section || this.items;
+
+    if (this._isSectionsEnabled && this.useVirtualScroll) {
+      _items = this._virtualGroupedItems;
+    }
+
+    if (index === 0 || _items[index - 1]?.headingName)
+      return this.headerTemplate ? null : EndClass.first;
+
+    if (index === _items.length - 1 || _items[index + 1]?.headingName)
+      return this.footerTemplate ? null : EndClass.last;
   }
 }

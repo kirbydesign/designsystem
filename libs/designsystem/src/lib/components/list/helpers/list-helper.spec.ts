@@ -1,8 +1,9 @@
 import { EventEmitter } from '@angular/core';
 
 import { ListComponent } from '../list.component';
-import { ListHelper } from './list-helper';
 import { LoadOnDemandEvent } from '../list.event';
+
+import { ListHelper } from './list-helper';
 
 describe('list helper', () => {
   let listHelper: ListHelper;
@@ -24,7 +25,7 @@ describe('list helper', () => {
 
     it('should emit load more event, if load on demand is enabled and is not loading', () => {
       component.isLoadOnDemandEnabled = true;
-      component.isLoading = false;
+      component._isLoading = false;
 
       listHelper.onLoadOnDemand(component, null);
 
@@ -40,7 +41,7 @@ describe('list helper', () => {
     });
 
     it('should not emit load more event, if is loading', () => {
-      component.isLoading = true;
+      component._isLoading = true;
 
       listHelper.onLoadOnDemand(component, null);
 
@@ -48,7 +49,7 @@ describe('list helper', () => {
     });
 
     it('should not emit load more event, if tload on demand is disabled and is loading', () => {
-      component.isLoading = true;
+      component._isLoading = true;
       component.isLoadOnDemandEnabled = false;
 
       listHelper.onLoadOnDemand(component, null);
@@ -65,12 +66,12 @@ describe('list helper', () => {
     });
 
     it('should start loading, when before emitting an load more event', () => {
-      component.isLoading = false;
+      component._isLoading = false;
       component.isLoadOnDemandEnabled = true;
 
       listHelper.onLoadOnDemand(component, null);
 
-      expect(component.isLoading).toBeTruthy();
+      expect(component._isLoading).toBeTruthy();
     });
 
     it('should end loading, if the load more events complete callback is called', () => {
@@ -81,7 +82,7 @@ describe('list helper', () => {
 
       listHelper.onLoadOnDemand(component, null);
 
-      expect(component.isLoading).toBeFalsy();
+      expect(component._isLoading).toBeFalsy();
     });
 
     it('should be marked as having load on demand disabled, if the load more events complete callback is called with true', () => {
