@@ -1,5 +1,7 @@
 // AUTO-GENERATED - PLEASE DON'T EDIT THIS FILE MANUALLY
 
+import { EMPTY } from 'rxjs';
+
 import {
   IconRegistryService,
   LoadingOverlayService,
@@ -40,6 +42,7 @@ export function modalControllerFactory() {
 export function tabsServiceFactory() {
   return {
     setOutlet: jest.fn(),
+    outlet$: EMPTY,
   };
 }
 

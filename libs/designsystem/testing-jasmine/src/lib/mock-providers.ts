@@ -1,5 +1,7 @@
 // AUTO-GENERATED - PLEASE DON'T EDIT THIS FILE MANUALLY
 
+import { EMPTY } from 'rxjs';
+
 import {
   IconRegistryService,
   LoadingOverlayService,
@@ -35,7 +37,7 @@ export function modalControllerFactory() {
 }
 
 export function tabsServiceFactory() {
-  return jasmine.createSpyObj('TabsService', ['setOutlet']);
+  return jasmine.createSpyObj('TabsService', ['setOutlet', { outlet$: EMPTY }]);
 }
 
 export function toastControllerFactory() {
