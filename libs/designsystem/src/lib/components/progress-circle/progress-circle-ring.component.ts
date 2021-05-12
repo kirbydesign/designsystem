@@ -7,16 +7,10 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProgressCircleRingComponent {
-  private STROKE_MAP = {
-    sm: 3,
-    md: 4,
-    lg: 6,
-  };
-
   @Input() radius: number; // The desired outer radius of the SVG circle
   @Input() value: number = 0;
   @Input() themeColor: 'success' | 'warning' | 'danger' = 'success';
-  @Input() size: 'sm' | 'md' | 'lg' = 'md';
+  @Input() strokeWidth: number;
 
   get offset(): number {
     return this.centerCircumference - this.centerCircumference * (this.value / 100);
@@ -34,9 +28,5 @@ export class ProgressCircleRingComponent {
 
   get centerCircumference(): number {
     return this.centerRadius * 2 * Math.PI;
-  }
-
-  get strokeWidth(): number {
-    return this.STROKE_MAP[this.size];
   }
 }

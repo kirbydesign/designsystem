@@ -1,11 +1,11 @@
 import {
-  Component,
-  Input,
-  ChangeDetectionStrategy,
-  HostBinding,
-  ElementRef,
   AfterViewInit,
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
+  Component,
+  ElementRef,
+  HostBinding,
+  Input,
   OnDestroy,
 } from '@angular/core';
 
@@ -16,10 +16,10 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProgressCircleComponent implements AfterViewInit, OnDestroy {
-  static readonly DIAMETER_MAP = {
-    sm: 40,
-    md: 56,
-    lg: 96,
+  private SIZE_CONFIG = {
+    sm: { diameter: 40, strokeWidth: 3 },
+    md: { diameter: 56, strokeWidth: 4 },
+    lg: { diameter: 96, strokeWidth: 6 },
   };
 
   @Input() value: number = 0;
@@ -73,7 +73,7 @@ export class ProgressCircleComponent implements AfterViewInit, OnDestroy {
   @HostBinding('style.width.px')
   @HostBinding('style.height.px')
   get diameter(): number {
-    return ProgressCircleComponent.DIAMETER_MAP[this.size];
+    return this.SIZE_CONFIG[this.size].diameter;
   }
 
   get shownValue() {
@@ -83,5 +83,9 @@ export class ProgressCircleComponent implements AfterViewInit, OnDestroy {
 
   get radius() {
     return this.diameter / 2;
+  }
+
+  get strokeWidth() {
+    return this.SIZE_CONFIG[this.size].strokeWidth;
   }
 }
