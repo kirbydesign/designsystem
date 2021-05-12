@@ -14,7 +14,7 @@ describe('ProgressCircleRingComponent', () => {
   });
 
   beforeEach(() => {
-    spectator = createHost({ props: { radius: 50 } });
+    spectator = createHost({ props: { radius: 50, strokeWidth: 4 } });
   });
 
   it('should create', () => {

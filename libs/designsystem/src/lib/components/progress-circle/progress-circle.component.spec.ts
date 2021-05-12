@@ -1,14 +1,15 @@
+import { ChangeDetectorRef } from '@angular/core';
 import {
   createComponentFactory,
   createHostFactory,
   Spectator,
   SpectatorHost,
 } from '@ngneat/spectator';
-import { ChangeDetectorRef } from '@angular/core';
 
 import { TestHelper } from '../../testing/test-helper';
-import { ProgressCircleComponent } from './progress-circle.component';
+
 import { ProgressCircleRingComponent } from './progress-circle-ring.component';
+import { ProgressCircleComponent } from './progress-circle.component';
 
 describe('ProgressCircleComponent', () => {
   describe('with stubbed IntersectionObserver', () => {
@@ -45,22 +46,22 @@ describe('ProgressCircleComponent', () => {
     describe('diameter', () => {
       it('should default to md (56px)', () => {
         spectator.detectChanges();
-        expect(spectator.component.diameter).toBe(ProgressCircleComponent.DIAMETER_MAP.md);
+        expect(spectator.component.diameter).toBe(spectator.component.SIZE_CONFIG['md'].diameter);
       });
       it('should map sm to 40px', () => {
         spectator.setInput({ size: 'sm' });
         spectator.detectChanges();
-        expect(spectator.component.diameter).toBe(ProgressCircleComponent.DIAMETER_MAP.sm);
+        expect(spectator.component.diameter).toBe(spectator.component.SIZE_CONFIG['sm'].diameter);
       });
       it('should map md to 56px', () => {
         spectator.setInput({ size: 'md' });
         spectator.detectChanges();
-        expect(spectator.component.diameter).toBe(ProgressCircleComponent.DIAMETER_MAP.md);
+        expect(spectator.component.diameter).toBe(spectator.component.SIZE_CONFIG['md'].diameter);
       });
       it('should map lg to 96px', () => {
         spectator.setInput({ size: 'lg' });
         spectator.detectChanges();
-        expect(spectator.component.diameter).toBe(ProgressCircleComponent.DIAMETER_MAP.lg);
+        expect(spectator.component.diameter).toBe(spectator.component.SIZE_CONFIG['lg'].diameter);
       });
     });
 
@@ -82,7 +83,7 @@ describe('ProgressCircleComponent', () => {
     describe('radius', () => {
       it('should calculate radius as diameter / 2', () => {
         spectator.setInput({ size: 'sm' });
-        expect(spectator.component.radius).toBe(ProgressCircleComponent.DIAMETER_MAP.sm / 2);
+        expect(spectator.component.radius).toBe(spectator.component.SIZE_CONFIG['sm'].diameter / 2);
       });
     });
 

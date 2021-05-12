@@ -16,7 +16,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProgressCircleComponent implements AfterViewInit, OnDestroy {
-  private SIZE_CONFIG = {
+  readonly SIZE_CONFIG = {
     sm: { diameter: 40, strokeWidth: 3 },
     md: { diameter: 56, strokeWidth: 4 },
     lg: { diameter: 96, strokeWidth: 6 },
