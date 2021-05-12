@@ -186,7 +186,7 @@ ${providers},
     const observableProperties = this.getObservableProperties(componentMetaData).join(
       ',' + newLine
     );
-    const propertyNamesObject = observableProperties.length ? `, { ${observableProperties}` : '';
+    const propertyNamesObject = observableProperties.length ? `, { ${observableProperties} }` : '';
     const funcName = this.getMockProviderFactoryName(componentMetaData.className);
     return `export function ${funcName}() {
   return jasmine.createSpyObj<${componentMetaData.className}>('${componentMetaData.className}', ${methodNamesArray}${propertyNamesObject}
