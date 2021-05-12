@@ -7,7 +7,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProgressCircleRingComponent {
-  readonly STROKE_MAP = {
+  private STROKE_MAP = {
     sm: 3,
     md: 4,
     lg: 6,
