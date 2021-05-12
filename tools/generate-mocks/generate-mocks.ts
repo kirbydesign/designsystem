@@ -69,7 +69,14 @@ export const MOCK_COMPONENTS = [
     outputPath: string,
     testFramework: 'jasmine' | 'jest'
   ) {
-    const importStatements = this.getImports(exportedProviders).join(newLine);
+    const hasObservableProperties = exportedProviders.some((provider) =>
+      provider.properties.some((p) => p.type === 'Observable')
+    );
+    const imports = this.getImports(exportedProviders);
+    if (hasObservableProperties) {
+      imports.push(`import { EMPTY } from 'rxjs';`);
+    }
+    const importStatements = imports.join(newLine);
     const mockProviderFactoryRenderer =
       testFramework === 'jasmine'
         ? this.renderJasmineMockProviderFactory.bind(this)
@@ -175,24 +182,34 @@ ${providers},
 
   private renderJasmineMockProviderFactory(componentMetaData: ComponentMetaData) {
     const methodNames = componentMetaData.methods.map((m) => `'${m.name}'`).join(',' + newLine);
+    const observableProperties = this.getObservableProperties(componentMetaData);
+    const propertyNames = observableProperties.length
+      ? `, { ${observableProperties.join(',' + newLine)} }`
+      : '';
     const funcName = this.getMockProviderFactoryName(componentMetaData.className);
     return `export function ${funcName}() {
   return jasmine.createSpyObj('${componentMetaData.className}', [
-    ${methodNames}
+    ${methodNames}${propertyNames}
   ]); 
 }`;
   }
 
   private renderJestMockProviderFactory(componentMetaData: ComponentMetaData) {
-    const mockMethods = componentMetaData.methods
-      .map((m) => `${m.name}: jest.fn()`)
-      .join(',' + newLine);
+    const mockMethods = componentMetaData.methods.map((m) => `${m.name}: jest.fn()`);
+    const observableProperties = this.getObservableProperties(componentMetaData);
+    const members = mockMethods.concat(observableProperties).join(',' + newLine);
     const funcName = this.getMockProviderFactoryName(componentMetaData.className);
     return `export function ${funcName}() {
   return {
-    ${mockMethods}
+    ${members}
   };
 }`;
+  }
+
+  private getObservableProperties(componentMetaData: ComponentMetaData) {
+    return componentMetaData.properties
+      .filter((p) => p.type === 'Observable')
+      .map((p) => `${p.name}: EMPTY`); // Ensure observable properties can be subscribed, see: https://ng-mocks.sudo.eu/extra/mock-observables
   }
 
   private getMockProviderFactoryName(className: string) {
@@ -417,19 +434,26 @@ export class ${mockClassName} {${propertiesString}${methodsString}}
     componentMetaData: ComponentMetaData
   ) {
     const inputOutputDecorator = this.getInputOutputDecorator(propertyDeclaration);
-    if (!inputOutputDecorator.type) {
-      // Only render Input/Output properties:
+    if (componentMetaData.decorator === 'Injectable') {
+      // Only render provider properties explicitly marked as public :
+      if (
+        !propertyDeclaration.modifiers ||
+        !propertyDeclaration.modifiers.some(
+          (modifier) => modifier.kind === ts.SyntaxKind.PublicKeyword
+        )
+      ) {
+        return;
+      }
+    } else if (!inputOutputDecorator.type) {
+      // Only render Input/Output properties for components and directives:
       return;
     }
+
     const name = propertyDeclaration.name.getText();
     const type = this.getPropertyType(name, propertyDeclaration, componentMetaData);
     let initializer: string;
     if (ts.isPropertyDeclaration(propertyDeclaration)) {
-      if (propertyDeclaration.initializer) {
-        initializer = propertyDeclaration.initializer.getText();
-      } else if (inputOutputDecorator.type === 'Input') {
-        initializer = `new ${type || 'EventEmitter'}()`;
-      }
+      initializer = propertyDeclaration.initializer?.getText();
     }
     const prop = {
       name,
@@ -530,13 +554,24 @@ export class ${mockClassName} {${propertiesString}${methodsString}}
           inferredType = '[]';
           break;
         default:
-          if (!propertyDeclaration.initializer.getText().startsWith('new EventEmitter')) {
-            console.warn(
-              `Can't infer type for property '${componentMetaData.className}.${propertyName}':`,
-              ts.SyntaxKind[propertyDeclaration.initializer.kind],
-              `(${propertyDeclaration.initializer.kind})`
-            );
+          const propInitializer = propertyDeclaration.initializer.getText();
+          if (propInitializer.startsWith('new EventEmitter')) {
+            inferredType = 'EventEmitter';
+            break;
           }
+          if (
+            propInitializer.match(
+              /\.asObservable\(\)|^of\(|new (?:Observable|Subject|ReplaySubject)\(/
+            )
+          ) {
+            inferredType = 'Observable';
+            break;
+          }
+          console.warn(
+            `Can't infer type for property '${componentMetaData.className}.${propertyName}':`,
+            ts.SyntaxKind[propertyDeclaration.initializer.kind],
+            `(${propertyDeclaration.initializer.kind})`
+          );
       }
     }
     return propertyDeclaration.type ? propertyDeclaration.type.getText() : inferredType;
