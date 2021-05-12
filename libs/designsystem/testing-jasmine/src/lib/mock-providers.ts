@@ -11,18 +11,18 @@ import {
 } from '@kirbydesign/designsystem';
 
 export function iconRegistryServiceFactory() {
-  return jasmine.createSpyObj('IconRegistryService', ['addIcon', 'addIcons']);
+  return jasmine.createSpyObj<IconRegistryService>('IconRegistryService', ['addIcon', 'addIcons']);
 }
 
 export function loadingOverlayServiceFactory() {
-  return jasmine.createSpyObj('LoadingOverlayService', [
+  return jasmine.createSpyObj<LoadingOverlayService>('LoadingOverlayService', [
     'showLoadingOverlay',
     'hideLoadingOverlay',
   ]);
 }
 
 export function modalControllerFactory() {
-  return jasmine.createSpyObj('ModalController', [
+  return jasmine.createSpyObj<ModalController>('ModalController', [
     'showModal',
     'navigateToModal',
     'navigateWithinModal',
@@ -37,11 +37,11 @@ export function modalControllerFactory() {
 }
 
 export function tabsServiceFactory() {
-  return jasmine.createSpyObj('TabsService', ['setOutlet', { outlet$: EMPTY }]);
+  return jasmine.createSpyObj<TabsService>('TabsService', ['setOutlet'], { outlet$: EMPTY });
 }
 
 export function toastControllerFactory() {
-  return jasmine.createSpyObj('ToastController', ['showToast']);
+  return jasmine.createSpyObj<ToastController>('ToastController', ['showToast']);
 }
 
 export const MOCK_PROVIDERS = [
