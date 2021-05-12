@@ -37,6 +37,8 @@ jobs:
     if: ${{ needs.build_check.outputs.do_build == 'true' }}
     runs-on: ubuntu-latest    
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
       - name: Setup Kirby Environment
         uses: ./.github/actions/setup-kirby-environment
       - name: Run linting
