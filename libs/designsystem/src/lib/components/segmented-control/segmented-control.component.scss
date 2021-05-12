@@ -17,6 +17,7 @@
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
+    overflow-y: hidden; // chip touch area height is bigger than segmented control height
     // Hide scrollbar on touch device:
     @include touch() {
       scrollbar-width: none; /* Firefox */
