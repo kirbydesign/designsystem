@@ -179,15 +179,15 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges, Afte
   }
 
   private constrainDropdownPopoutHeight(): void {
-    const tableHeightUnitless = this.element.querySelector('table').offsetHeight;
-    const itemHeightUnitless = this.element.querySelector('kirby-item').clientHeight;
+    const tableHeight = this.element.querySelector('table').offsetHeight;
+    const itemHeight = this.element.querySelector('kirby-item').clientHeight;
 
-    if (itemHeightUnitless > 0) {
+    if (itemHeight > 0) {
       // Set max height based on max number of dropdown items that will fit
-      const maxItems = Math.floor(tableHeightUnitless / itemHeightUnitless);
-      const maxHeightUnitless = maxItems * itemHeightUnitless;
+      const maxItems = Math.floor(tableHeight / itemHeight);
+      const maxHeight = maxItems * itemHeight;
 
-      this.element.style.setProperty('--dropdown-popout-max-height', `${maxHeightUnitless}px`);
+      this.element.style.setProperty('--dropdown-popout-max-height', `${maxHeight}px`);
     }
   }
 
