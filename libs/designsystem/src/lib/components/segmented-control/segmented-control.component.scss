@@ -11,6 +11,12 @@
       --padding-start: #{size('s')};
       --padding-end: #{size('s')};
     }
+
+    kirby-chip {
+      min-width: 44px;
+      margin-inline-start: #{size('xxxxs')};
+      margin-inline-end: #{size('xxxxs')};
+    }
   }
 
   &.chip-mode {
