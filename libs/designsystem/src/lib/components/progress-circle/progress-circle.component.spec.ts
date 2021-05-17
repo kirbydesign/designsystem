@@ -44,24 +44,23 @@ describe('ProgressCircleComponent', () => {
     });
 
     describe('diameter', () => {
-      it('should default to md (56px)', () => {
-        spectator.detectChanges();
-        expect(spectator.component.diameter).toBe(spectator.component.SIZE_CONFIG['md'].diameter);
+      it('should default to md', () => {
+        expect(spectator.component.diameter).toBe(56);
       });
-      it('should map sm to 40px', () => {
+
+      it('should map sm to correct value', () => {
         spectator.setInput({ size: 'sm' });
-        spectator.detectChanges();
-        expect(spectator.component.diameter).toBe(spectator.component.SIZE_CONFIG['sm'].diameter);
+        expect(spectator.component.diameter).toBe(40);
       });
-      it('should map md to 56px', () => {
+
+      it('should map md to correct value', () => {
         spectator.setInput({ size: 'md' });
-        spectator.detectChanges();
-        expect(spectator.component.diameter).toBe(spectator.component.SIZE_CONFIG['md'].diameter);
+        expect(spectator.component.diameter).toBe(56);
       });
-      it('should map lg to 96px', () => {
+
+      it('should map lg to correct value', () => {
         spectator.setInput({ size: 'lg' });
-        spectator.detectChanges();
-        expect(spectator.component.diameter).toBe(spectator.component.SIZE_CONFIG['lg'].diameter);
+        expect(spectator.component.diameter).toBe(96);
       });
     });
 
@@ -72,6 +71,7 @@ describe('ProgressCircleComponent', () => {
 
         expect(spectator.component.shownValue).toBe(0);
       });
+
       it('should return value after element has been visible', () => {
         spectator.setInput({ value: 50 });
         spectator.component['hasElementBeenVisible'] = true;
