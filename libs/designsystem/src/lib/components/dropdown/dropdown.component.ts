@@ -36,9 +36,9 @@ export enum HorizontalDirection {
   left = 'left',
 }
 
-export enum VerticalDirection {
-  up = 'up',
-  down = 'down',
+enum VerticalDirection {
+  up,
+  down,
 }
 
 @Component({
