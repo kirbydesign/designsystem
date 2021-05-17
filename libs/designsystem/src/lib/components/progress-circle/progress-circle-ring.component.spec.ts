@@ -44,15 +44,32 @@ describe('ProgressCircleRingComponent', () => {
     });
   });
 
-  describe('offset (progress)', () => {
-    it('should return the non-progress circumference (1-progress) as offset', () => {
+  describe('offset (progress) within upperBound', () => {
+    it('should return the non-progress circumference (1 - progress) as offset', () => {
       const value = 33;
+      const upperBound = 96;
       spectator.setInput({
         value,
+        upperBound,
       });
       expect(spectator.component.offset).toBe(
         spectator.component.centerCircumference -
           spectator.component.centerCircumference * (value / 100)
+      );
+    });
+  });
+
+  describe('offset (progress) larger than upperBound', () => {
+    it('should return the non-progress circumference (1 - upperBound) as offset', () => {
+      const value = 99;
+      const upperBound = 96;
+      spectator.setInput({
+        value,
+        upperBound,
+      });
+      expect(spectator.component.offset).toBe(
+        spectator.component.centerCircumference -
+          spectator.component.centerCircumference * (upperBound / 100)
       );
     });
   });
