@@ -17,9 +17,9 @@ import {
 })
 export class ProgressCircleComponent implements AfterViewInit, OnDestroy {
   readonly SIZE_CONFIG = {
-    sm: { diameter: 40, strokeWidth: 3 },
-    md: { diameter: 56, strokeWidth: 4 },
-    lg: { diameter: 96, strokeWidth: 6 },
+    sm: { diameter: 40, strokeWidth: 3, upperBound: 95 },
+    md: { diameter: 56, strokeWidth: 4, upperBound: 96 },
+    lg: { diameter: 96, strokeWidth: 6, upperBound: 97 },
   };
 
   @Input() value: number = 0;
@@ -87,5 +87,10 @@ export class ProgressCircleComponent implements AfterViewInit, OnDestroy {
 
   get strokeWidth() {
     return this.SIZE_CONFIG[this.size].strokeWidth;
+  }
+
+  get upperBound() {
+    // This is needed to make sure that an input value close to 100 is not shown as 100
+    return this.SIZE_CONFIG[this.size].upperBound;
   }
 }

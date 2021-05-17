@@ -11,9 +11,14 @@ export class ProgressCircleRingComponent {
   @Input() value: number = 0;
   @Input() themeColor: 'success' | 'warning' | 'danger' = 'success';
   @Input() strokeWidth: number;
+  @Input() upperBound: number;
 
   get offset(): number {
-    return this.centerCircumference - this.centerCircumference * (this.value / 100);
+    if (this.value < this.upperBound || this.value > 99) {
+      return this.centerCircumference - this.centerCircumference * (this.value / 100);
+    } else {
+      return this.centerCircumference - this.centerCircumference * (this.upperBound / 100);
+    }
   }
 
   @HostBinding('style.width.px')
