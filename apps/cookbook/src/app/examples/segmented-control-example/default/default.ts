@@ -41,8 +41,7 @@ const config = {
       Chip
     </label>
   </p>
-  <p [class.disabled]="mode === 'chip'">
-    <strong>Size:</strong><em class="kirby-text-small-light"> (only applies in 'default' mode)</em><br/>  
+  <p>
     <label>
       <input
         type="radio"
@@ -50,7 +49,6 @@ const config = {
         value="sm"
         [checked]="size === 'sm'"
         (change)="setSize($event.target.value)"
-        [disabled]="mode === 'chip'"
       />
       Small (<code>sm</code>)
     </label>
@@ -61,7 +59,6 @@ const config = {
         value="md"
         [checked]="size === 'md'"
         (change)="setSize($event.target.value)"
-        [disabled]="mode === 'chip'"
       />
       Medium (<code>md</code>) - default
     </label>
