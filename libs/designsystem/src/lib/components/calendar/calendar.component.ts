@@ -185,7 +185,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges, Afte
     if (itemHeight > 0) {
       // Set max height based on max number of dropdown items that will fit
       const maxItems = Math.floor(tableHeight / itemHeight);
-      const maxHeight = maxItems * itemHeight;
+      const maxHeight: number = maxItems * itemHeight;
 
       this.element.style.setProperty('--dropdown-popout-max-height', `${maxHeight}px`);
     }
