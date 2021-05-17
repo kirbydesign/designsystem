@@ -18,8 +18,8 @@
     [selectedIndex]="navigatedYear"
     [items]="navigableYears"
     popout="left"
-    forcePopoutVerticalDirection="down"
     (change)="changeYear($event)"
+    disableAutoVerticalDirection="true"
   >
   </kirby-dropdown>
 </div>

@@ -60,7 +60,6 @@ export class DropdownComponent
   private hasConfiguredSlottedItems = false;
   private horizontalDirection = HorizontalDirection.right;
   private verticalDirection = VerticalDirection.down;
-  private _forcePopoutVerticalDirection: VerticalDirection = null;
 
   private _items: string[] | any[] = [];
   get items(): string[] | any[] {
@@ -98,9 +97,8 @@ export class DropdownComponent
     return this.horizontalDirection;
   }
 
-  @Input() set forcePopoutVerticalDirection(direction: VerticalDirection) {
-    this._forcePopoutVerticalDirection = direction;
-  }
+  @Input()
+  disableAutoVerticalDirection = false;
 
   @Input()
   attentionLevel: '1' | '2' | '3' | '4' = '3';
@@ -280,9 +278,7 @@ export class DropdownComponent
   }
 
   private setVerticalDirection(entry) {
-    // Always respect forced popout vertical direction
-    if (this._forcePopoutVerticalDirection) {
-      this.verticalDirection = this._forcePopoutVerticalDirection;
+    if (this.disableAutoVerticalDirection) {
       return;
     }
 
@@ -333,7 +329,7 @@ export class DropdownComponent
     if (this.isOpen) {
       this.state = OpenState.closed;
       // Reset vertical direction to default
-      this.verticalDirection = this._forcePopoutVerticalDirection ?? VerticalDirection.down;
+      this.verticalDirection = VerticalDirection.down;
     }
   }
 
