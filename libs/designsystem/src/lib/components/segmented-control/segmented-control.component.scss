@@ -13,9 +13,15 @@
     }
 
     kirby-chip {
+      flex-shrink: 0;
       min-width: 44px;
       margin-inline-start: #{size('xxxxs')};
       margin-inline-end: #{size('xxxxs')};
+
+      @include media('<=small') {
+        margin-inline-start: 0;
+        margin-inline-end: 0;
+      }
     }
   }
 
