@@ -20,9 +20,9 @@ import {
   ],
 })
 export class MockListComponent {
-  @Input() items: any[];
-  @Input() getItemColor: (item: any) => ThemeColor;
-  @Input() getSectionName: (item: any) => string;
+  @Input() items: ListItem[];
+  @Input() getItemColor: (item: ListItem) => ThemeColor;
+  @Input() getSectionName: (item: ListItem) => string;
   @Input() trackBy: TrackByFunction<any>;
   @Input() noMoreItemsText: string;
   @Input() showDivider: boolean;
