@@ -1,8 +1,8 @@
-import { Spectator, createComponentFactory } from '@ngneat/spectator';
+import { createComponentFactory, Spectator } from '@ngneat/spectator';
 
-import { ProgressCircleRingComponent } from './progress-circle-ring.component';
 import { DesignTokenHelper } from './../../helpers/design-token-helper';
 import { ThemeColor } from './../../helpers/theme-color.type';
+import { ProgressCircleRingComponent } from './progress-circle-ring.component';
 
 const getColor = DesignTokenHelper.getColor;
 
@@ -14,7 +14,7 @@ describe('ProgressCircleRingComponent', () => {
   });
 
   beforeEach(() => {
-    spectator = createHost({ props: { radius: 50 } });
+    spectator = createHost({ props: { radius: 50, strokeWidth: 4 } });
   });
 
   it('should create', () => {
@@ -106,7 +106,7 @@ describe('ProgressCircleRingComponent', () => {
 
     it('should render background stroke with the defined stroke width', () => {
       spectator.detectChanges();
-      expect(spectator.query('circle.progress')).toHaveAttribute(
+      expect(spectator.query('circle.circle')).toHaveAttribute(
         'stroke-width',
         '' + spectator.component.strokeWidth
       );
