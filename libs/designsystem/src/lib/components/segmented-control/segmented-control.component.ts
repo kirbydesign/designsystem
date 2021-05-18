@@ -1,3 +1,4 @@
+import { JsonpClientBackend } from '@angular/common/http';
 import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 
 import { SegmentItem } from './segment-item';
@@ -26,9 +27,12 @@ export class SegmentedControlComponent {
     return this.size === 'sm';
   }
 
-  @HostBinding('class')
+  @HostBinding('class.transparent')
+  get isTransparent(): boolean {
+    return this.themeColor === 'transparent';
+  }
   @Input()
-  themeColor: 'white' | 'transparent';
+  themeColor: 'white' | 'transparent' = 'white';
 
   private _items: SegmentItem[] = [];
   get items(): SegmentItem[] {
