@@ -14,6 +14,7 @@ import { SegmentedControlComponent, SegmentItem } from '@kirbydesign/designsyste
   ],
 })
 export class MockSegmentedControlComponent {
+  @Input() themeColor: 'white' | 'transparent';
   @Input() items: SegmentItem[];
   @Input() selectedIndex: number;
   @Input() value: SegmentItem;
