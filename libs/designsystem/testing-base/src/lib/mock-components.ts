@@ -25,6 +25,7 @@ import { MockInputComponent } from './components/mock.input.component';
 import { MockItemComponent } from './components/mock.item.component';
 import { MockLabelComponent } from './components/mock.label.component';
 import { MockListHeaderComponent } from './components/mock.list-header.component';
+import { MockListItemComponent } from './components/mock.list-item.component';
 import { MockListSectionHeaderComponent } from './components/mock.list-section-header.component';
 import { MockListComponent } from './components/mock.list.component';
 import { MockLoadingOverlayComponent } from './components/mock.loading-overlay.component';
@@ -84,6 +85,7 @@ export const MOCK_COMPONENTS = [
   MockItemComponent,
   MockLabelComponent,
   MockListHeaderComponent,
+  MockListItemComponent,
   MockListSectionHeaderComponent,
   MockListComponent,
   MockLoadingOverlayComponent,

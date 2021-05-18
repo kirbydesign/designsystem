@@ -1,0 +1,3 @@
+diff a/libs/designsystem/testing-base/src/lib/components/mock.list.component.ts b/libs/designsystem/testing-base/src/lib/components/mock.list.component.ts	(rejected hunks)
+@@ -8 +8,0 @@ import {
+-  ListItem,
