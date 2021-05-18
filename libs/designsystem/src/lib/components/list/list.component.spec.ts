@@ -233,14 +233,6 @@ describe('ListComponent', () => {
       expect(last).toEqual(EndClass.last);
     });
 
-    it('returns set chunk size', async () => {
-      spectator.setInput('virtualScrollSettings', { bufferSize: 2 });
-
-      const chunk = await component._virtualScrollData.get(0, 2, () => {});
-
-      expect(chunk).toEqual(TEST_ITEMS.splice(0, 2));
-    });
-
     describe('when sections', () => {
       beforeEach(() => {
         const getSectionName = (item: ListItem): string => {
