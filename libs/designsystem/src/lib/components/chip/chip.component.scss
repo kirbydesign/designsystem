@@ -26,11 +26,17 @@
   margin-inline-end: var(--margin-end, size('xxxs'));
   cursor: pointer;
   user-select: none;
+
   @include theme-background('white');
   @include selected-and-hover('black');
 
   :host-context(.kirby-color-brightness-dark) {
     @include theme-background(transparent, 'white');
     @include selected-and-hover('white');
+  }
+
+  :host-context(kirby-segmented-control.transparent) {
+    @include theme-background(transparent);
+    @include selected-and-hover('black');
   }
 }

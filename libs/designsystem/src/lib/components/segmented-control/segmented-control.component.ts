@@ -21,6 +21,15 @@ export class SegmentedControlComponent {
   @HostBinding('class.chip-mode')
   isChipMode: boolean;
 
+  @HostBinding('class.sm')
+  get isSmallSize(): boolean {
+    return this.size === 'sm';
+  }
+
+  @HostBinding('class')
+  @Input()
+  themeColor: 'white' | 'transparent';
+
   private _items: SegmentItem[] = [];
   get items(): SegmentItem[] {
     return this._items;
@@ -64,11 +73,6 @@ export class SegmentedControlComponent {
   }
 
   @Input() size: 'sm' | 'md' = 'md';
-
-  @HostBinding('class.sm')
-  get isSmallSize(): boolean {
-    return this.size === 'sm';
-  }
 
   @Output() segmentSelect: EventEmitter<SegmentItem> = new EventEmitter();
 
