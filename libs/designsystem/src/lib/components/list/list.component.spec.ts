@@ -50,7 +50,7 @@ const TEST_ITEMS: ListItem[] = [
   },
 ];
 
-fdescribe('ListComponent', () => {
+describe('ListComponent', () => {
   let spectator: Spectator<ListComponent>;
   let component: ListComponent;
 
