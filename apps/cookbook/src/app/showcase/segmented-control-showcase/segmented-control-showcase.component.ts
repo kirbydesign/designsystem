@@ -21,6 +21,13 @@ export class SegmentedControlShowcaseComponent {
       type: ['sm', 'md'],
     },
     {
+      name: 'themeColor',
+      description: 'Only applies in "chip" mode: Sets the background color of the chips',
+      defaultValue: 'white',
+      type: ['white', 'transparent'],
+    },
+
+    {
       name: 'items',
       description:
         'An array of `SegmentItem[]` representing the set of segment elements within the control.',
