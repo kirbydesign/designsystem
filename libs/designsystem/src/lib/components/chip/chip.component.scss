@@ -12,7 +12,9 @@
 
 :host {
   white-space: nowrap;
-  padding: 0 size('s');
+  padding: 0;
+  padding-inline-start: var(--padding-start, size('s'));
+  padding-inline-end: var(--padding-end, size('s'));
   height: size('l');
   font-size: font-size('xs');
   line-height: 1;
@@ -20,6 +22,8 @@
   align-items: center;
   border-radius: $border-radius-round;
   margin: size('xxxs');
+  margin-inline-start: var(--margin-start, size('xxxs'));
+  margin-inline-end: var(--margin-end, size('xxxs'));
   cursor: pointer;
   user-select: none;
   @include theme-background('white');
