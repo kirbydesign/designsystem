@@ -15,14 +15,14 @@
     kirby-chip {
       min-width: 44px;
       flex-shrink: 0;
-      --margin-start: size('xxxxs');
-      --margin-end: size('xxxxs');
+      --margin-start: #{size('xxxxs')};
+      --margin-end: #{size('xxxxs')};
       --padding-start: 13px;
       --padding-end: 13px;
 
       @include media('<=small') {
-        --margin-start: 0;
-        --margin-end: 0;
+        --margin-start: 0px;
+        --margin-end: 0px;
       }
     }
   }
