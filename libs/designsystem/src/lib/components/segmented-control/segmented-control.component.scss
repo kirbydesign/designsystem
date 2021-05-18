@@ -13,12 +13,10 @@
     }
 
     kirby-chip {
-      flex-shrink: 0;
       min-width: 44px;
-
+      flex-shrink: 0;
       --margin-start: size('xxxxs');
       --margin-end: size('xxxxs');
-
       --padding-start: 13px;
       --padding-end: 13px;
 
