@@ -16,7 +16,6 @@ import { ChipComponent } from '@kirbydesign/designsystem';
 export class MockChipComponent {
   @Input() text: string;
   @Input() isSelected: boolean;
-  @Input() size: 'sm' | 'md';
 }
 
 // #endregion
