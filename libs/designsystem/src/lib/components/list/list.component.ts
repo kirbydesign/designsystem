@@ -105,9 +105,6 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   };
 
   private async getVirtualDataset(index: number, count: number): Promise<any> {
-    if (!this.useVirtualScroll) {
-      return Promise.resolve();
-    }
     return await new Promise((resolve) => {
       setTimeout(() => {
         const itemSlice = this.getItemsSlice(index, count);

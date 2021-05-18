@@ -50,7 +50,7 @@ const TEST_ITEMS: ListItem[] = [
   },
 ];
 
-describe('ListComponent', () => {
+fdescribe('ListComponent', () => {
   let spectator: Spectator<ListComponent>;
   let component: ListComponent;
 
@@ -210,11 +210,13 @@ describe('ListComponent', () => {
       spectator.setInput('useVirtualScroll', true);
       spectator.setInput('items', TEST_ITEMS);
     });
+
     it('should set default viewport height, when virtual scrolling is active', () => {
       const list = spectator.query('.viewport');
 
       expect(list).toHaveComputedStyle({ height: '500px' });
     });
+
     it('should set viewport height according to input', () => {
       spectator.setInput('virtualScrollViewportHeight', 400);
 
@@ -222,12 +224,21 @@ describe('ListComponent', () => {
 
       expect(list).toHaveComputedStyle({ height: '400px' });
     });
+
     it('returns correct end-class to items', () => {
       const first = component.getItemEndClass(0);
       const last = component.getItemEndClass(TEST_ITEMS.length - 1);
 
       expect(first).toEqual(EndClass.first);
       expect(last).toEqual(EndClass.last);
+    });
+
+    it('returns set chunk size', async () => {
+      spectator.setInput('virtualScrollSettings', { bufferSize: 2 });
+
+      const chunk = await component._virtualScrollData.get(0, 2, () => {});
+
+      expect(chunk).toEqual(TEST_ITEMS.splice(0, 2));
     });
 
     describe('when sections', () => {

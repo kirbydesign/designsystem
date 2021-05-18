@@ -1,6 +1,12 @@
-import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, Output, TemplateRef } from '@angular/core';
 
-import { ListItemComponent } from '@kirbydesign/designsystem';
+import {
+  EndClass,
+  ListItem,
+  ListItemComponent,
+  ListSwipeAction,
+  ThemeColor,
+} from '@kirbydesign/designsystem';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({

@@ -4,6 +4,7 @@ export { ListHeaderComponent } from './list-header/list-header.component';
 export { ListSectionHeaderComponent } from './list-section-header/list-section-header.component';
 export { ListItemComponent } from './list-item/list-item.component';
 export { ListItem } from './list-item/list-item.component';
+export { EndClass } from './list-item/list-item.component';
 
 export { LoadOnDemandEvent } from './list.event';
 export { ListSwipeAction } from './list-swipe-action';
