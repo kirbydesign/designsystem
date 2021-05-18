@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, Input, HostBinding } from '@angular/core';
+import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 
 import { SegmentItem } from './segment-item';
 
@@ -63,11 +63,11 @@ export class SegmentedControlComponent {
     this.isChipMode = mode === 'chip';
   }
 
-  @HostBinding('class.sm')
-  isSmallSize: boolean;
+  @Input() size: 'sm' | 'md' = 'md';
 
-  @Input() set size(size: 'sm' | 'md') {
-    this.isSmallSize = size === 'sm';
+  @HostBinding('class.sm')
+  get isSmallSize(): boolean {
+    return this.size === 'sm';
   }
 
   @Output() segmentSelect: EventEmitter<SegmentItem> = new EventEmitter();
