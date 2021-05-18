@@ -99,7 +99,7 @@ export class SegmentedControlExampleDefaultComponent implements OnInit {
     },
     { text: 'Second item', id: 'second' },
   ];
-  private chipItems = [...'123456'].map((i) => ({ text: `Chip-${i}`, id: i }));
+  private chipItems = [...'1234567'].map((i) => ({ text: `${i}m`, id: i }));
 
   get items(): SegmentItem[] {
     return this.mode === 'default' ? this.defaultItems : this.chipItems;

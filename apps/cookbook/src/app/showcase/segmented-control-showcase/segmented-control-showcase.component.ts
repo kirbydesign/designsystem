@@ -16,7 +16,7 @@ export class SegmentedControlShowcaseComponent {
     },
     {
       name: 'size',
-      description: 'Sets the size of the segmented control. Only applies to `default` mode.',
+      description: 'Sets the size of the segmented control.',
       defaultValue: 'md',
       type: ['sm', 'md'],
     },
