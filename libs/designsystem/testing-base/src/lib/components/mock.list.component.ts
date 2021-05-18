@@ -1,8 +1,8 @@
 import { Component, EventEmitter, forwardRef, Input, Output, TrackByFunction } from '@angular/core';
-import { ListItem } from 'libs/designsystem/src/lib/components/list/list-item/list-item.component';
 
 import {
   ListComponent,
+  ListItem,
   ListSwipeAction,
   LoadOnDemandEvent,
   ThemeColor,

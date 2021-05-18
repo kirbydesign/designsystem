@@ -23,6 +23,7 @@ import {
 
 const exportedDeclarations = [
   ListComponent,
+  ListItemComponent,
   ListItemDirective,
   ListFlexItemDirective,
   ListItemTemplateDirective,

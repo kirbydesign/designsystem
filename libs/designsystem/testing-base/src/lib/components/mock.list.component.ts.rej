@@ -1,4 +1,0 @@
-diff a/libs/designsystem/testing-base/src/lib/components/mock.list.component.ts b/libs/designsystem/testing-base/src/lib/components/mock.list.component.ts	(rejected hunks)
-@@ -3 +3 @@ import { ListItem } from 'libs/designsystem/src/lib/components/list/list-item/li
--
-+
