@@ -64,7 +64,7 @@ describe('SegmentedControlComponent', () => {
     expect(component.value).toBe(items[1]);
   });
 
-  describe('default mode', () => {
+  describe('in default mode', () => {
     it("should have a 'default' mode when created", () => {
       expect(component.isChipMode).toBeFalsy();
     });
@@ -108,7 +108,7 @@ describe('SegmentedControlComponent', () => {
     });
   });
 
-  describe('chip mode', () => {
+  describe('in chip mode', () => {
     beforeEach(() => {
       spectator.setInput('mode', 'chip');
     });
