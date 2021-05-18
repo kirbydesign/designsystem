@@ -64,8 +64,19 @@ describe('SegmentedControlComponent', () => {
     expect(component.size).toBe('md');
   });
 
+  it('should default to themeColor "white"', () => {
+    expect(component.themeColor).toBe('white');
+  });
+
   it('should have checked item as value when created', () => {
     expect(component.value).toBe(items[1]);
+  });
+
+  it("should have class 'transparent' when themeColor is 'transparent'", () => {
+    spectator.setInput('themeColor', 'transparent');
+    spectator.detectChanges();
+
+    expect(spectator.element.classList).toContain('transparent');
   });
 
   describe('in default mode', () => {
