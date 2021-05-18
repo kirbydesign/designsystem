@@ -14,12 +14,12 @@ import { SegmentedControlComponent, SegmentItem } from '@kirbydesign/designsyste
   ],
 })
 export class MockSegmentedControlComponent {
-  @Input() themeColor: 'white' | 'transparent';
   @Input() items: SegmentItem[];
   @Input() selectedIndex: number;
   @Input() value: SegmentItem;
   @Input() mode: 'default' | 'chip';
   @Input() size: 'sm' | 'md';
+  @Input() themeColor: 'white' | 'transparent';
   @Output() segmentSelect = new EventEmitter();
 }
 
