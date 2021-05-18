@@ -29,18 +29,4 @@
     @include theme-background(transparent, 'white');
     @include selected-and-hover('white');
   }
-
-  &.sm {
-    flex-shrink: 0;
-    min-width: 44px;
-
-    margin: size('xxxxs');
-
-    padding: 0 13px;
-
-    @include media('<=small') {
-      margin-inline-start: 0;
-      margin-inline-end: 0;
-    }
-  }
 }

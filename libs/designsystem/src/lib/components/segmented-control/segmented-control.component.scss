@@ -12,16 +12,28 @@
       --padding-end: #{size('s')};
     }
 
-    &.chip-mode {
-      display: flex;
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      // Hide scrollbar on touch device:
-      @include touch() {
-        scrollbar-width: none; /* Firefox */
-        &::-webkit-scrollbar {
-          display: none;
-        }
+    kirby-chip {
+      flex-shrink: 0;
+      min-width: 44px;
+      margin-inline-start: #{size('xxxxs')};
+      margin-inline-end: #{size('xxxxs')};
+
+      @include media('<=small') {
+        margin-inline-start: 0;
+        margin-inline-end: 0;
+      }
+    }
+  }
+
+  &.chip-mode {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    // Hide scrollbar on touch device:
+    @include touch() {
+      scrollbar-width: none; /* Firefox */
+      &::-webkit-scrollbar {
+        display: none;
       }
     }
   }

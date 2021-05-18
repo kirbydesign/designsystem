@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input } from '@angular/core';
+import { Component, Input, HostBinding } from '@angular/core';
 
 @Component({
   selector: 'kirby-chip',
@@ -12,12 +12,4 @@ export class ChipComponent {
   @HostBinding('attr.aria-selected')
   @HostBinding('class.is-selected')
   isSelected: boolean;
-
-  @HostBinding('class.sm')
-  private isSizeSmall: boolean = false;
-
-  @Input() set size(value: 'sm' | 'md') {
-    console.log('setting size', value);
-    this.isSizeSmall = value === 'sm';
-  }
 }
