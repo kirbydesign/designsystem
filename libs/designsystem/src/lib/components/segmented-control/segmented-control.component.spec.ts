@@ -36,7 +36,7 @@ describe('SegmentedControlComponent', () => {
   const createHost = createHostFactory({
     component: SegmentedControlComponent,
     declarations: [
-      MockComponents(ChipComponent, BadgeComponent),
+      MockComponents(BadgeComponent, ChipComponent),
       MockDirective(ThemeColorDirective),
     ],
     imports: [TestHelper.ionicModuleForTest],
@@ -58,6 +58,10 @@ describe('SegmentedControlComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should default to size "md"', () => {
+    expect(component.size).toBe('md');
   });
 
   it('should have checked item as value when created', () => {
@@ -140,6 +144,67 @@ describe('SegmentedControlComponent', () => {
       expect(component.value).toBe(items[1]);
       spectator.dispatchMouseEvent('kirby-chip:last-of-type', 'click');
       expect(component.value).toBe(items[2]);
+    });
+
+    describe('when size is "sm"', () => {
+      let chips: Element[];
+
+      beforeEach(() => {
+        spectator.setInput('size', 'sm');
+        // 'sm' styles are not applied without detecting changes
+        spectator.detectChanges();
+
+        chips = spectator.queryHostAll('kirby-chip');
+      });
+
+      it('should have class "sm"', () => {
+        expect(spectator.element.classList).toContain('sm');
+      });
+
+      it('should set the correct min-width for each chip', () => {
+        chips.forEach((chip) => {
+          expect(chip).toHaveComputedStyle({
+            'min-width': '44px',
+          });
+        });
+      });
+
+      it('should space chips correctly', () => {
+        chips.forEach((chip) => {
+          expect(chip).toHaveComputedStyle({
+            '--margin-start': '2px',
+            '--margin-end': '2px',
+          });
+        });
+      });
+
+      it('should set correct padding for chips', () => {
+        chips.forEach((chip) => {
+          expect(chip).toHaveComputedStyle({
+            '--padding-start': '13px',
+            '--padding-end': '13px',
+          });
+        });
+      });
+
+      describe('on screensize phonesmall', () => {
+        beforeEach(() => {
+          TestHelper.resizeTestWindow(TestHelper.screensize.phonesmall);
+        });
+
+        afterEach(() => {
+          TestHelper.resetTestWindow();
+        });
+
+        it('should space chips correctly', () => {
+          chips.forEach((chip) => {
+            expect(chip).toHaveComputedStyle({
+              '--margin-start': '0px',
+              '--margin-end': '0px',
+            });
+          });
+        });
+      });
     });
   });
 });
