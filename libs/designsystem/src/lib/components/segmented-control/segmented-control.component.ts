@@ -31,8 +31,6 @@ export class SegmentedControlComponent {
   get isTransparent(): boolean {
     return this.themeColor === 'transparent';
   }
-  @Input()
-  themeColor: 'white' | 'transparent' = 'white';
 
   private _items: SegmentItem[] = [];
   get items(): SegmentItem[] {
@@ -77,6 +75,9 @@ export class SegmentedControlComponent {
   }
 
   @Input() size: 'sm' | 'md' = 'md';
+
+  @Input()
+  themeColor: 'white' | 'transparent' = 'white';
 
   @Output() segmentSelect: EventEmitter<SegmentItem> = new EventEmitter();
 
