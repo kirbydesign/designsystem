@@ -1,3 +1,5 @@
+import { ListItem } from '../list-item/list-item.component';
+
 import { GroupByPipe } from './group-by.pipe';
 
 describe('Pipe: GroupBy', () => {
@@ -8,7 +10,7 @@ describe('Pipe: GroupBy', () => {
 
   it('should return collection if no callback is given', () => {
     const pipe = new GroupByPipe();
-    const collection = [1, 2, 3];
+    const collection = [{ id: 1 }, { id: 2 }, { id: 3 }];
 
     const result = pipe.transform(collection);
 
@@ -16,21 +18,21 @@ describe('Pipe: GroupBy', () => {
   });
 
   it('should section list by callback function', () => {
-    const callback = (item: any) => {
-      return item.property;
+    const callback = (item: ListItem) => {
+      return item.title;
     };
     const collection = [
       {
-        property: 'section 1',
-        dummyValue: 1,
+        title: 'section 1',
+        value: 1,
       },
       {
-        property: 'section 2',
-        dummyValue: 2,
+        title: 'section 2',
+        value: 2,
       },
       {
-        property: 'section 3',
-        dummyValue: 3,
+        title: 'section 3',
+        value: 3,
       },
     ];
     const pipe = new GroupByPipe();
@@ -45,21 +47,21 @@ describe('Pipe: GroupBy', () => {
   });
 
   it('should order sections by alphabetical order', () => {
-    const callback = (item: any) => {
-      return item.property;
+    const callback = (item: ListItem) => {
+      return item.title;
     };
     const collection = [
       {
-        property: 'section 202',
-        dummyValue: 1,
+        title: 'section 202',
+        value: 1,
       },
       {
-        property: 'section 1',
-        dummyValue: 2,
+        title: 'section 1',
+        value: 2,
       },
       {
-        property: 'section 44',
-        dummyValue: 3,
+        title: 'section 44',
+        value: 3,
       },
     ];
     const pipe = new GroupByPipe();
