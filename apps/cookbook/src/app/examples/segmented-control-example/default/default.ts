@@ -8,6 +8,7 @@ const config = {
   [value]="selectedSegment"
   [mode]="mode"
   [size]="size"
+  [themeColor]="themeColor"
   (segmentSelect)="onSegmentSelect($event)"
 ></kirby-segmented-control>
 
@@ -63,6 +64,31 @@ const config = {
       Medium (<code>md</code>) - default
     </label>
     </p>
+    <p [class.disabled]='mode === "default"'>
+      <strong>Theme Color:</strong><em class="kirby-text-small-light"> (only applies in 'chip' mode)</em><br/>
+      <label>
+        <input 
+          type="radio"
+          name="themeColor"
+          value="white"
+          [checked]="themeColor === 'white'"
+          (change)="setThemeColor($event.target.value)"
+          [disabled]='mode === "default"'
+        />
+        White - default
+      </label>
+      <label>
+        <input 
+          type="radio"
+          name="themeColor"
+          value="transparent"
+          [checked]="themeColor === 'transparent'"
+          (change)="setThemeColor($event.target.value)"
+          [disabled]='mode === "default"'
+        />
+        Transparent
+      </label>
+    </p>
 </fieldset>
 `,
   codeSnippet: `onSegmentSelect(segment: SegmentItem) {
@@ -85,6 +111,7 @@ export class SegmentedControlExampleDefaultComponent implements OnInit {
 
   mode: 'default' | 'chip' = 'default';
   size: 'sm' | 'md' = 'md';
+  themeColor: 'white' | 'transparent' = 'white';
   selectedSegment: SegmentItem;
 
   private defaultItems = [
@@ -121,5 +148,9 @@ export class SegmentedControlExampleDefaultComponent implements OnInit {
 
   setSize(size: 'sm' | 'md') {
     this.size = size;
+  }
+
+  setThemeColor(color: 'white' | 'transparent') {
+    this.themeColor = color;
   }
 }
