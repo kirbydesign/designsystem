@@ -36,15 +36,11 @@ jobs:
     needs: build_check
     if: ${{ needs.build_check.outputs.do_build == 'true' }}
     runs-on: ubuntu-latest    
-    env:
-      NODE_VERSION: '10.16'
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
-      - name: Install Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ env.NODE_VERSION }}
+      - name: asdf_install
+        uses: asdf-vm/actions/install@v1
       - name: Fetch Node Modules Cache
         uses: actions/cache@v2
         id: cache
