@@ -77,22 +77,22 @@
 </ng-template>
 
 <ng-template #virtualSlidingItemsTemplate let-virtualScrollData>
-  <div *uiScroll="let entry of virtualScrollData; let i = index">
-    <div [class.item-wrapper]="!entry.item.headingName">
-      <ion-item-divider *ngIf="entry.item.headingName" class="virtual-group">
+  <div *uiScroll="let item of virtualScrollData; let i = index">
+    <div [class.item-wrapper]="!item.headingName">
+      <ion-item-divider *ngIf="item.headingName" class="virtual-group">
         <ng-container
-          *ngTemplateOutlet="sectionHeaderTemplate; context: { $implicit: entry.item.headingName }"
+          *ngTemplateOutlet="sectionHeaderTemplate; context: { $implicit: item.headingName }"
         ></ng-container>
       </ion-item-divider>
       <kirby-list-item
-        *ngIf="!entry.item.headingName"
-        [item]="entry.item"
+        *ngIf="!item.headingName"
+        [item]="item"
         [itemTemplate]="itemTemplate"
         [swipeActions]="swipeActions"
         [endClass]="getItemEndClass(i)"
         [isSelectable]="_isSelectable"
         [getItemColor]="getItemColor"
-        [isSelected]="_isSelectable && entry.item === _selectedItem"
+        [isSelected]="_isSelectable && item === _selectedItem"
         (itemSelect)="onItemSelect($event)"
         (swipeActionSelect)="onSwipeActionSelect($event)"
       >

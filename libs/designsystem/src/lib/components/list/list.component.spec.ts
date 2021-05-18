@@ -9,21 +9,12 @@ import { SpinnerComponent } from '../spinner/spinner.component';
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 import { ListItemColorDirective } from './directives/list-item-color.directive';
 import { ListHelper } from './helpers/list-helper';
-import { ListItemComponent } from './list-item/list-item.component';
+import { ListItem, ListItemComponent } from './list-item/list-item.component';
 import { ListComponent } from './list.component';
 import { LoadOnDemandEvent } from './list.event';
 import { GroupByPipe } from './pipes/group-by.pipe';
 
-/**
- * We need an actual model item, since WeakMap can't use primitives for keys.
- */
-class Item {
-  static createItems(...values: number[]) {
-    return values.map((value) => new Item(value));
-  }
-
-  constructor(public value: number) {}
-}
+const TEST_ITEMS: ListItem[] = [{ id: 1 }, { id: 2 }, { id: 3 }];
 
 describe('ListComponent', () => {
   let spectator: Spectator<ListComponent>;
@@ -96,8 +87,8 @@ describe('ListComponent', () => {
 
     it('should be enabled if a section callback is defined', () => {
       spectator.setInput({
-        items: Item.createItems(1, 2, 3),
-        getSectionName: (item: any) => 'this is a test',
+        items: TEST_ITEMS,
+        getSectionName: (item: ListItem) => 'this is a test',
       });
       runNgOnChanges();
 
@@ -108,7 +99,7 @@ describe('ListComponent', () => {
   describe('divider', () => {
     it('should set class "has-divider" on list element when showDivider is true', () => {
       spectator.setInput({
-        items: Item.createItems(1, 2, 3),
+        items: TEST_ITEMS,
         showDivider: true,
       });
       runNgOnChanges();
@@ -119,7 +110,7 @@ describe('ListComponent', () => {
 
     it('should not set class "has-divider" on list element when showDivider is false', () => {
       spectator.setInput({
-        items: Item.createItems(1, 2, 3),
+        items: TEST_ITEMS,
         showDivider: false,
       });
       runNgOnChanges();

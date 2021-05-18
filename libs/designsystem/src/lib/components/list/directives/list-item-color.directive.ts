@@ -1,14 +1,15 @@
 import { Directive, HostBinding, Input, OnChanges } from '@angular/core';
 
 import { ThemeColor } from '../../../helpers/theme-color.type';
+import { ListItem } from '../list-item/list-item.component';
 
 @Directive({
   selector: '[kirbyListItemColor]',
 })
 export class ListItemColorDirective implements OnChanges {
   @Input()
-  kirbyListItemColor: (item: any) => ThemeColor;
-  @Input() item: any;
+  kirbyListItemColor: (item: ListItem) => ThemeColor;
+  @Input() item: ListItem;
   @HostBinding('class')
   color: ThemeColor;
 

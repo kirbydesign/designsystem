@@ -1,3 +1,5 @@
+import { ListItem } from './list-item/list-item.component';
+
 export enum ActionType {
   success = 'success',
   warning = 'warning',
@@ -16,9 +18,9 @@ export enum SwipeEnd {
 
 export interface ListSwipeAction {
   position: SwipeDirection;
-  title: ((item: any) => string) | string;
-  icon?: ((item: any) => string) | string;
-  type?: ((item: any) => ActionType) | ActionType;
-  onSelected: (item: any) => void;
-  isDisabled?: ((item: any) => boolean) | boolean;
+  title: ((item: ListItem) => string) | string;
+  icon?: ((item: ListItem) => string) | string;
+  type?: ((item: ListItem) => ActionType) | ActionType;
+  onSelected: (item: ListItem) => void;
+  isDisabled?: ((item: ListItem) => boolean) | boolean;
 }

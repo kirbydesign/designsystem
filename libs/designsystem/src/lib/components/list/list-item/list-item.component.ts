@@ -13,7 +13,26 @@ import { IonItemSliding } from '@ionic/angular';
 import { PlatformService } from '../../../helpers/platform.service';
 import { ThemeColor } from '../../../helpers/theme-color.type';
 import { ListSwipeAction, SwipeDirection, SwipeEnd } from '../list-swipe-action';
-import { EndClass } from '../list.component';
+
+export enum EndClass {
+  first = 'first',
+  last = 'last',
+}
+
+export type ListItem = {
+  id?: number;
+  title?: string;
+  subTitle?: string;
+  value?: string | number;
+  amount?: string;
+  detail?: string | number;
+  color?: string;
+  flagged?: string;
+  deleted?: boolean;
+  archived?: boolean;
+  isDisabled?: boolean;
+  headingName?: string;
+};
 
 @Component({
   selector: 'kirby-list-item',
@@ -29,7 +48,7 @@ export class ListItemComponent implements OnInit, AfterViewInit {
 
   @ViewChild(IonItemSliding) ionItemSliding: IonItemSliding;
 
-  @Input() item: any;
+  @Input() item: ListItem;
 
   @Input() endClass: EndClass;
 
@@ -41,11 +60,11 @@ export class ListItemComponent implements OnInit, AfterViewInit {
 
   @Input() isSelectable: boolean;
 
-  @Input() getItemColor: (item: any) => ThemeColor;
+  @Input() getItemColor: (item: ListItem) => ThemeColor;
 
   @Output() itemSelect = new EventEmitter<any>();
 
-  onItemSelect(item: any) {
+  onItemSelect(item: ListItem) {
     if (!this.isSelectable) return;
     this.itemSelect.emit(item);
   }
@@ -70,7 +89,7 @@ export class ListItemComponent implements OnInit, AfterViewInit {
     }
   }
 
-  hasSwipeActions(item: any): boolean {
+  hasSwipeActions(item: ListItem): boolean {
     if (!Array.isArray(this.swipeActions)) {
       return false;
     }
@@ -88,7 +107,7 @@ export class ListItemComponent implements OnInit, AfterViewInit {
     });
   }
 
-  getSwipeActions(item: any, side?: SwipeDirection): ListSwipeAction[] {
+  getSwipeActions(item: ListItem, side?: SwipeDirection): ListSwipeAction[] {
     if (!Array.isArray(this.swipeActions)) {
       return [];
     }
@@ -103,7 +122,7 @@ export class ListItemComponent implements OnInit, AfterViewInit {
     });
   }
 
-  getSwipeActionEnd(item: any): SwipeEnd {
+  getSwipeActionEnd(item: ListItem): SwipeEnd {
     if (this.getSwipeActions(item, SwipeDirection.left).length) {
       return SwipeEnd.start;
     }
@@ -112,7 +131,7 @@ export class ListItemComponent implements OnInit, AfterViewInit {
     }
   }
 
-  getSwipeActionIcon(swipeAction: ListSwipeAction, item: any): string {
+  getSwipeActionIcon(swipeAction: ListSwipeAction, item: ListItem): string {
     if (!swipeAction.icon) return;
 
     if (swipeAction.icon instanceof Function) {
@@ -121,14 +140,14 @@ export class ListItemComponent implements OnInit, AfterViewInit {
     return swipeAction.icon;
   }
 
-  getSwipeActionTitle(swipeAction: ListSwipeAction, item: any): string {
+  getSwipeActionTitle(swipeAction: ListSwipeAction, item: ListItem): string {
     if (swipeAction.title instanceof Function) {
       return swipeAction.title(item);
     }
     return swipeAction.title;
   }
 
-  getSwipeActionType(swipeAction: ListSwipeAction, item: any): ThemeColor {
+  getSwipeActionType(swipeAction: ListSwipeAction, item: ListItem): ThemeColor {
     if (swipeAction.type instanceof Function) {
       return swipeAction.type(item);
     }

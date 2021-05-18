@@ -20,6 +20,7 @@ import { ItemComponent } from '../item/item.component';
 
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 import { ListHelper } from './helpers/list-helper';
+import { EndClass, ListItem } from './list-item/list-item.component';
 import { ListSwipeAction } from './list-swipe-action';
 import {
   ListFooterDirective,
@@ -36,11 +37,6 @@ export enum ListShape {
   'none',
 }
 
-export enum EndClass {
-  first = 'first',
-  last = 'last',
-}
-
 const TIMEOUT = 5000;
 const INTERVAL = 400;
 @Component({
@@ -54,11 +50,11 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   @ViewChild(InfiniteScrollDirective) scrollDirective: InfiniteScrollDirective;
 
   @Input()
-  items: any[] = [];
+  items: ListItem[] = [];
 
-  @Input() getItemColor: (item: any) => ThemeColor;
+  @Input() getItemColor: (item: ListItem) => ThemeColor;
 
-  @Input() getSectionName: (item: any) => string;
+  @Input() getSectionName: (item: ListItem) => string;
 
   @Input() trackBy: TrackByFunction<any>;
 
@@ -100,7 +96,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     this._useVirtualScroll = value;
   }
 
-  @Input() virtualScrollViewportHeight: number = 500;
+  @Input() virtualScrollViewportHeight = 500;
 
   // Possible settings are listed here: https://github.com/dhilt/ngx-ui-scroll#settings
   @Input() virtualScrollSettings: any = {};
@@ -118,10 +114,10 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   private async getVirtualDataset(index: number, count: number): Promise<any> {
     return await new Promise((resolve) => {
       setTimeout(() => {
-        const sliceWithMeta = this.getItemsSliceWitMeta(index, count);
+        const itemSlice = this.getItemsSlice(index, count);
 
         // If we return less items than count, virtual scroll will interprete it as EOF and stop asking for more
-        if (sliceWithMeta.length < count && this.isLoadOnDemandEnabled) {
+        if (itemSlice.length < count && this.isLoadOnDemandEnabled) {
           let elapsedTime = 0;
           // Scrollend (that triggers load on demand) is not fired when we scroll as the virtual
           // scroll component fixes the viewport, so we ensure to fire it programmatically
@@ -140,23 +136,18 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
             }
 
             clearInterval(poller);
-            resolve(this.getItemsSliceWitMeta(index, count));
+            resolve(this.getItemsSlice(index, count));
           }, INTERVAL);
         } else {
-          resolve(sliceWithMeta);
+          resolve(itemSlice);
         }
       }, INTERVAL);
     });
   }
 
-  private getItemsSliceWitMeta(index: number, count: number): any[] {
+  private getItemsSlice(index: number, count: number): ListItem[] {
     const _items = this._isSectionsEnabled ? this._virtualGroupedItems : this.items;
-    return _items.slice(index, index + count).map((item, sliceIndex) => {
-      return {
-        itemMeta: { itemIndex: index + sliceIndex, totalCount: _items.length },
-        item,
-      };
-    });
+    return _items.slice(index, index + count);
   }
 
   /**
@@ -239,7 +230,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     return section.name;
   }
 
-  onItemSelect(item: any) {
+  onItemSelect(item: ListItem) {
     this._selectedItem = item;
     this.itemSelect.emit(this._selectedItem);
   }
