@@ -18,7 +18,7 @@ export class SegmentedControlComponent {
     }
   }
 
-  @Input() mode: 'chip' | 'default' = 'default';
+  @Input() mode: 'chip' | 'default' | 'compactChip' = 'default';
 
   public get isChipMode(): boolean {
     return this.mode === 'chip';
@@ -29,6 +29,7 @@ export class SegmentedControlComponent {
     return {
       chip: 'chip-mode',
       default: 'default-mode',
+      compactChip: 'compact chip-mode',
     }[this.mode];
   }
 
