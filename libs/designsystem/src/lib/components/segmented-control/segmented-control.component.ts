@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, Input, HostBinding } from '@angular/core';
+import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 
 import { SegmentItem } from './segment-item';
 
@@ -18,8 +18,19 @@ export class SegmentedControlComponent {
     }
   }
 
-  @HostBinding('class.chip-mode')
-  isChipMode: boolean;
+  @Input() mode: 'chip' | 'default' = 'default';
+
+  public get isChipMode(): boolean {
+    return this.mode === 'chip';
+  }
+
+  @HostBinding('class')
+  get _modeCssClass() {
+    return {
+      chip: 'chip-mode',
+      default: 'default',
+    }[this.mode];
+  }
 
   private _items: SegmentItem[] = [];
   get items(): SegmentItem[] {
@@ -57,10 +68,6 @@ export class SegmentedControlComponent {
 
   @Input() set value(value: SegmentItem) {
     this.selectedIndex = this.items.indexOf(value);
-  }
-
-  @Input() set mode(mode: 'default' | 'chip') {
-    this.isChipMode = mode === 'chip';
   }
 
   @HostBinding('class.sm')
