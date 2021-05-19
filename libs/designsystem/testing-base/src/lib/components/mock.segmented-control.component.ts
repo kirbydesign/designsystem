@@ -14,7 +14,7 @@ import { SegmentedControlComponent, SegmentItem } from '@kirbydesign/designsyste
   ],
 })
 export class MockSegmentedControlComponent {
-  @Input() mode: 'chip' | 'default' | 'compactChip';
+  @Input() mode: Mode;
   @Input() items: SegmentItem[];
   @Input() selectedIndex: number;
   @Input() value: SegmentItem;
