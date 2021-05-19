@@ -40,8 +40,18 @@ const config = {
       />
       Chip
     </label>
+    <label> 
+      <input
+        type="radio"
+        name="mode"
+        value="compactChip"
+        [checked]="mode === 'compactChip'"
+        (change)="setMode($event.target.value)"
+      />
+        Compact Chip
+    </label>
   </p>
-  <p [class.disabled]="mode === 'chip'">
+  <p [class.disabled]="mode !== 'default'">
     <strong>Size:</strong><em class="kirby-text-small-light"> (only applies in 'default' mode)</em><br/>  
     <label>
       <input
@@ -50,7 +60,7 @@ const config = {
         value="sm"
         [checked]="size === 'sm'"
         (change)="setSize($event.target.value)"
-        [disabled]="mode === 'chip'"
+        [disabled]="mode !== 'default'"
       />
       Small (<code>sm</code>)
     </label>
@@ -61,7 +71,7 @@ const config = {
         value="md"
         [checked]="size === 'md'"
         (change)="setSize($event.target.value)"
-        [disabled]="mode === 'chip'"
+        [disabled]="mode !== 'default'"
       />
       Medium (<code>md</code>) - default
     </label>
@@ -86,7 +96,7 @@ export class SegmentedControlExampleDefaultComponent implements OnInit {
   }
   codeSnippet = config.codeSnippet;
 
-  mode: 'default' | 'chip' = 'default';
+  mode: 'default' | 'chip' | 'compactChip' = 'default';
   size: 'sm' | 'md' = 'md';
   selectedSegment: SegmentItem;
 
