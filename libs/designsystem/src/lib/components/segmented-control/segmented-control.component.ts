@@ -2,7 +2,7 @@ import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/co
 
 import { SegmentItem } from './segment-item';
 
-enum Mode {
+export enum Mode {
   chip = 'chip',
   compactChip = 'compactChip',
   default = 'default',

@@ -7,7 +7,7 @@ import { BadgeComponent } from '../badge/badge.component';
 import { ChipComponent } from '../chip/chip.component';
 
 import { SegmentItem } from './segment-item';
-import { SegmentedControlComponent } from './segmented-control.component';
+import { Mode, SegmentedControlComponent } from './segmented-control.component';
 
 describe('SegmentedControlComponent', () => {
   let component: SegmentedControlComponent;
@@ -110,7 +110,7 @@ describe('SegmentedControlComponent', () => {
 
   describe('chip mode', () => {
     beforeEach(() => {
-      spectator.setInput('mode', 'chip');
+      spectator.setInput('mode', Mode.chip);
     });
 
     it("should have a 'chip' mode when created", () => {
