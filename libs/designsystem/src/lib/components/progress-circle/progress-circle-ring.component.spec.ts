@@ -52,6 +52,7 @@ describe('ProgressCircleRingComponent', () => {
         value,
         upperBound,
       });
+
       expect(spectator.component.offset).toBe(
         spectator.component.centerCircumference -
           spectator.component.centerCircumference * (value / 100)
@@ -67,6 +68,7 @@ describe('ProgressCircleRingComponent', () => {
         value,
         upperBound,
       });
+
       expect(spectator.component.offset).toBe(
         spectator.component.centerCircumference -
           spectator.component.centerCircumference * (upperBound / 100)
@@ -85,7 +87,9 @@ describe('ProgressCircleRingComponent', () => {
       const radius = 33;
       const expectedSize = `${2 * radius}px`;
       spectator.setInput({ radius });
+      //width and height are set via hostbinding. Apparently we need to run a change detection cycle.
       spectator.detectChanges();
+
       expect(spectator.element).toHaveComputedStyle({
         width: expectedSize,
         height: expectedSize,
@@ -97,6 +101,7 @@ describe('ProgressCircleRingComponent', () => {
       spectator.element.classList.add(themeColor);
       spectator.element.style.transition = 'none';
       spectator.detectChanges();
+
       expect(spectator.query('circle.progress')).toHaveComputedStyle({
         stroke: getColor(themeColor),
       });
@@ -107,14 +112,12 @@ describe('ProgressCircleRingComponent', () => {
     });
 
     it('should render background stroke in semi-light', () => {
-      spectator.detectChanges();
       expect(spectator.query('circle.circle')).toHaveComputedStyle({
         stroke: getColor('semi-light'),
       });
     });
 
     it('should render progress stroke with the correct width', () => {
-      spectator.detectChanges();
       expect(spectator.query('circle.progress')).toHaveAttribute(
         'stroke-width',
         '' + spectator.component.strokeWidth
