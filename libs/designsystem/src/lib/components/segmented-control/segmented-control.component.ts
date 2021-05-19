@@ -28,7 +28,7 @@ export class SegmentedControlComponent {
   get _modeCssClass() {
     return {
       chip: 'chip-mode',
-      default: 'default',
+      default: 'default-mode',
     }[this.mode];
   }
 
