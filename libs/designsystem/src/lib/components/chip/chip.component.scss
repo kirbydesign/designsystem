@@ -12,14 +12,14 @@
 
 :host {
   white-space: nowrap;
-  padding: 0 size('s');
+  padding: 0 var(--inline-padding, size('s'));
   height: size('l');
   font-size: font-size('xs');
   line-height: 1;
   display: inline-flex;
   align-items: center;
   border-radius: $border-radius-round;
-  margin: size('xxxs');
+  margin: size('xxxs') var(--inline-margin, size('xxxs'));
   cursor: pointer;
   user-select: none;
   @include theme-background('white');
@@ -28,5 +28,19 @@
   :host-context(.kirby-color-brightness-dark) {
     @include theme-background(transparent, 'white');
     @include selected-and-hover('white');
+  }
+
+  :host-context(kirby-segmented-control.compact) {
+    min-width: 44px;
+    flex-shrink: 0;
+    justify-content: center;
+    --inline-margin: #{size('xxxxs')};
+    --inline-padding: #{13px};
+    @include theme-background(transparent);
+    @include selected-and-hover('black');
+
+    @include media('<=small') {
+      --inline-margin: 0;
+    }
   }
 }
