@@ -34,7 +34,7 @@ export const TimeSeriesOptions: Options = {
       return dateFormat('%e. %b', new Date(this.x)) + '.' + '<br/><b>' + this.y + '</b>';
     },
     //xDateFormat: '%d/%m',
-    positioner: function(labelWidth, labelHeight, point) {
+    positioner: function(point: any) {
       return { x: point.x, y: 0 };
     },
     borderWidth: 0,

@@ -362,7 +362,7 @@ export class PageComponent
     };
 
     let initialized = false;
-    const callback = (entries) => {
+    const callback = (entries: any) => {
       if (initialized) {
         this.toolbarTitleVisible = !entries[0].isIntersecting;
         this.toolbarStickyActionsVisible = !entries[0].isIntersecting;

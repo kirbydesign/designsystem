@@ -1,7 +1,7 @@
 import { ResizeObserverCallback } from './resize-observer-callback';
 
 export interface ResizeObserver {
-  new (callback: ResizeObserverCallback);
+  callback: ResizeObserverCallback;
   /**
    * Adds target to the list of observed elements.
    */

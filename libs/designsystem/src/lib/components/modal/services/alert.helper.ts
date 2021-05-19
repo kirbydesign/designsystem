@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
-import { AlertConfig } from '../alert/config/alert-config';
 import { AlertComponent } from '../alert/alert.component';
+import { AlertConfig } from '../alert/config/alert-config';
+
 import { Overlay } from './modal.interfaces';
 
 @Injectable()
@@ -55,7 +56,7 @@ export class AlertHelper {
     return text;
   }
 
-  getOkBtnIsDestructive(config) {
+  getOkBtnIsDestructive(config: any) {
     return typeof config.okBtn === 'object' ? config.okBtn.isDestructive : undefined;
   }
 

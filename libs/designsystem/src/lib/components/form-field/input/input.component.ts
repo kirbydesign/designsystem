@@ -22,7 +22,7 @@ export enum InputSize {
   template: '',
 })
 export class InputComponent implements OnChanges {
-  private static typeToInputmodeMap = {
+  private static typeToInputmodeMap: { [key: string]: string } = {
     number: 'decimal',
     search: 'search',
   };

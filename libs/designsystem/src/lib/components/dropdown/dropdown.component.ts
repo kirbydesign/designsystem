@@ -188,7 +188,7 @@ export class DropdownComponent
 
   private itemClickUnlisten: (() => void)[] = [];
   private intersectionObserverRef: IntersectionObserver;
-  private showDropdownTimeoutId;
+  private showDropdownTimeoutId: number;
 
   constructor(
     private renderer: Renderer2,
@@ -238,7 +238,7 @@ export class DropdownComponent
       const options = {
         rootMargin: '0px',
       };
-      const callback: IntersectionObserverCallback = (entries) => {
+      const callback: IntersectionObserverCallback = (entries: any[]) => {
         // Only apply alignment when opening:
         if (this.state !== OpenState.opening) {
           return;
@@ -260,7 +260,7 @@ export class DropdownComponent
     }
   }
 
-  private setHorizontalDirection(entry) {
+  private setHorizontalDirection(entry: any) {
     // If popout direction is set to right, and the entry is cut off to the right by ${entry.boundingClientRect.right - entry.intersectionRect.right}px
     // it is set to popout left instead, and vice versa for popout direction left
     if (this.horizontalDirection === HorizontalDirection.right) {
@@ -274,7 +274,7 @@ export class DropdownComponent
     }
   }
 
-  private setVerticalDirection(entry) {
+  private setVerticalDirection(entry: any) {
     if (entry.boundingClientRect.top < 0) {
       // entry is cut off at the top by ${entry.boundingClientRect.top}px
       // open downwards:
@@ -435,7 +435,7 @@ export class DropdownComponent
   }
 
   @HostListener('focus', ['$event'])
-  _onFocus(event: Event) {
+  _onFocus() {
     if (this.disabled) {
       this.elementRef.nativeElement.blur();
     }

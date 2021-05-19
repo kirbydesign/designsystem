@@ -17,7 +17,7 @@ export class ListHelper {
     }
   }
 
-  getSelectedItem(items: any[], item: any) {
+  getSelectedItem(item: any) {
     return item;
   }
 }

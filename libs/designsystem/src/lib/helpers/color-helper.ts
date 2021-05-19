@@ -79,7 +79,7 @@ export class ColorHelper {
     return 'rgba(0, 0, 0, 0)';
   }
 
-  public static colorStringToRgbString(color: string) {
+  public static colorStringToRgbString(color: string): string {
     if (color.indexOf('rgb') === 0) {
       return color;
     }

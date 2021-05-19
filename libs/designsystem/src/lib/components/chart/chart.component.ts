@@ -1,12 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  OnChanges,
-  ElementRef,
-  Inject,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, ElementRef, Inject, Input, OnChanges, SimpleChanges } from '@angular/core';
 import {
   Options,
   PlotSeriesDataLabelsOptions,
@@ -15,15 +7,16 @@ import {
   YAxisOptions,
 } from 'highcharts';
 
+import { mergeDeep } from '../../helpers/deep-merge';
+
 import { ChartHelper } from './chart-helper';
 import { ChartType } from './chart-type';
-import { DONUT_OPTIONS, DonutOptions } from './options/donut';
-import { AREASPLINE_OPTIONS, AreaSplineOptions } from './options/areaspline';
-import { TIMESERIES_OPTIONS, TimeSeriesOptions } from './options/timeseries';
-import { ACTIVITYGAUGE_OPTIONS, ActivityGaugeOptions } from './options/activitygauge';
-import { mergeDeep } from '../../helpers/deep-merge';
-import { columnOptions } from './options/column';
+import { ActivityGaugeOptions, ACTIVITYGAUGE_OPTIONS } from './options/activitygauge';
+import { AreaSplineOptions, AREASPLINE_OPTIONS } from './options/areaspline';
 import { barOptions } from './options/bar';
+import { columnOptions } from './options/column';
+import { DonutOptions, DONUT_OPTIONS } from './options/donut';
+import { TimeSeriesOptions, TIMESERIES_OPTIONS } from './options/timeseries';
 
 @Component({
   selector: 'kirby-chart',
@@ -38,7 +31,7 @@ import { barOptions } from './options/bar';
   ],
 })
 export class ChartComponent implements OnChanges {
-  @Input() data = [];
+  @Input() data: any[] = [];
   @Input() categories: string[] = [];
   @Input() breaks: Array<XAxisBreaksOptions> = [];
   @Input() height = 300;
@@ -158,7 +151,7 @@ export class ChartComponent implements OnChanges {
       {
         type: 'bar',
         name: 'InvisibleClickReceiver',
-        data: this.data.map((dataEntry, idx) => dataMaxValue - dataEntry),
+        data: this.data.map((dataEntry) => dataMaxValue - dataEntry),
         edgeColor: 'rgb(255, 255, 255, 0)',
         opacity: 0,
       },
@@ -229,7 +222,7 @@ export class ChartComponent implements OnChanges {
     };
   }
 
-  private setSeries(type) {
+  private setSeries(type: any) {
     this.mergedOptions.series = [
       {
         type,
