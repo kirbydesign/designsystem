@@ -226,8 +226,8 @@ describe('ListComponent', () => {
     });
 
     it('returns correct end-class to items', () => {
-      const first = component.getItemEndClass(0);
-      const last = component.getItemEndClass(TEST_ITEMS.length - 1);
+      const first = component.getFirstOrLastClass(0);
+      const last = component.getFirstOrLastClass(TEST_ITEMS.length - 1);
 
       expect(first).toEqual(EndClass.first);
       expect(last).toEqual(EndClass.last);
@@ -282,10 +282,10 @@ describe('ListComponent', () => {
       });
 
       it('returns correct end-class to items', () => {
-        const section1first = component.getItemEndClass(1);
-        const section1last = component.getItemEndClass(2);
-        const section2first = component.getItemEndClass(4);
-        const section2last = component.getItemEndClass(5);
+        const section1first = component.getFirstOrLastClass(1);
+        const section1last = component.getFirstOrLastClass(2);
+        const section2first = component.getFirstOrLastClass(4);
+        const section2last = component.getFirstOrLastClass(5);
 
         expect(section1first).toEqual(EndClass.first);
         expect(section2first).toEqual(EndClass.first);

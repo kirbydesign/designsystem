@@ -19,14 +19,14 @@
     class="viewport"
   >
     <ng-container
-      *ngTemplateOutlet="virtualSlidingItemsTemplate; context: { $implicit: _virtualScrollData }"
+      *ngTemplateOutlet="virtualItemsTemplate; context: { $implicit: _virtualScrollData }"
     ></ng-container>
   </div>
 
   <ng-container *ngIf="!useVirtualScroll">
     <ng-container
       *ngTemplateOutlet="
-        _isSectionsEnabled ? groupedListTemplate : slidingItemsTemplate;
+        _isSectionsEnabled ? groupedListTemplate : itemsTemplate;
         context: { $implicit: items }
       "
     ></ng-container>
@@ -54,19 +54,19 @@
 
     <div class="list-items">
       <ng-container
-        *ngTemplateOutlet="slidingItemsTemplate; context: { $implicit: section.items }"
+        *ngTemplateOutlet="itemsTemplate; context: { $implicit: section.items }"
       ></ng-container>
     </div>
   </ion-item-group>
 </ng-template>
 
-<ng-template #slidingItemsTemplate let-items>
+<ng-template #itemsTemplate let-items>
   <kirby-list-item
     *ngFor="let item of items; let i = index; trackBy: trackBy || defaultTrackBy"
     [item]="item"
     [itemTemplate]="itemTemplate"
     [swipeActions]="swipeActions"
-    [endClass]="getItemEndClass(i, items)"
+    [endClass]="getFirstOrLastClass(i, items)"
     [isSelectable]="_isSelectable"
     [getItemColor]="getItemColor"
     [isSelected]="_isSelectable && item === _selectedItem"
@@ -76,7 +76,7 @@
   </kirby-list-item>
 </ng-template>
 
-<ng-template #virtualSlidingItemsTemplate let-virtualScrollData>
+<ng-template #virtualItemsTemplate let-virtualScrollData>
   <div *uiScroll="let item of virtualScrollData; let i = index">
     <div [class.item-wrapper]="!item.headingName">
       <ion-item-divider *ngIf="item.headingName" class="virtual-group">
@@ -89,7 +89,7 @@
         [item]="item"
         [itemTemplate]="itemTemplate"
         [swipeActions]="swipeActions"
-        [endClass]="getItemEndClass(i)"
+        [endClass]="getFirstOrLastClass(i)"
         [isSelectable]="_isSelectable"
         [getItemColor]="getItemColor"
         [isSelected]="_isSelectable && item === _selectedItem"

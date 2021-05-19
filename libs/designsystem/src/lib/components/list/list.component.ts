@@ -200,15 +200,19 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
 
   ngOnChanges(): void {
     this._isSectionsEnabled = !!this.getSectionName;
-    if (this._isSectionsEnabled && this.items) {
-      this._groupedItems = this.groupBy.transform(this.items, this.getSectionName);
-      this._virtualGroupedItems = this._groupedItems.reduce((accumulator, group) => {
-        accumulator.push({ headingName: group.name });
-        return accumulator.concat(...group.items);
-      }, []);
-    } else {
-      this._groupedItems = null;
-    }
+    if (this.items.length === 0) return;
+
+    this._groupedItems = this._isSectionsEnabled
+      ? this.groupBy.transform(this.items, this.getSectionName)
+      : null;
+
+    this._virtualGroupedItems =
+      this.useVirtualScroll && this._groupedItems
+        ? this._groupedItems.reduce((accumulator, group) => {
+            accumulator.push({ headingName: group.name });
+            return accumulator.concat(...group.items);
+          }, [])
+        : null;
   }
 
   onLoadOnDemand(event?: LoadOnDemandEventData) {
@@ -234,7 +238,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     args.event.stopPropagation();
   }
 
-  getItemEndClass(index: number, section?: any[]): EndClass {
+  getFirstOrLastClass(index: number, section?: any[]): EndClass {
     let _items = section || this.items;
 
     if (this._isSectionsEnabled && this.useVirtualScroll) {
