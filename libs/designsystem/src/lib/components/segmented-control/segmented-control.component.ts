@@ -2,6 +2,12 @@ import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/co
 
 import { SegmentItem } from './segment-item';
 
+enum Mode {
+  chip = 'chip',
+  compactChip = 'compactChip',
+  default = 'default',
+}
+
 @Component({
   selector: 'kirby-segmented-control',
   templateUrl: './segmented-control.component.html',
@@ -18,18 +24,18 @@ export class SegmentedControlComponent {
     }
   }
 
-  @Input() mode: 'chip' | 'default' | 'compactChip' = 'default';
+  @Input() mode: Mode = Mode.default;
 
   public get isChipMode(): boolean {
-    return this.mode === 'chip';
+    return this.mode === Mode.chip;
   }
 
   @HostBinding('class')
   get _modeCssClass() {
     return {
-      chip: 'chip-mode',
-      default: 'default-mode',
-      compactChip: 'compact chip-mode',
+      [Mode.chip]: 'chip-mode',
+      [Mode.default]: 'default-mode',
+      [Mode.compactChip]: 'compact chip-mode',
     }[this.mode];
   }
 
