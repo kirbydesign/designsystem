@@ -984,7 +984,7 @@ When using `fakeAsync` remember to not mix it with the `done` function or the `a
 
 #### The good test uses ionicModuleForTest instead of IonicModule
 
-When working with ionic you might have to import the `IonicModule` as part of your `createComponent` or `createHost` factory.   
+When working with Ionic you might have to import the `IonicModule` as part of your `createComponent` or `createHost` factory.   
 Here you should use the [ `TestHelper` ](https://github.com/kirbydesign/designsystem/blob/master/libs/designsystem/src/lib/testing/test-helper.ts) property `ionicModuleForTest` like so: 
 
 ``` 
