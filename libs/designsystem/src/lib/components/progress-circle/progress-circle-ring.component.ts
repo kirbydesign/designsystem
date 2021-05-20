@@ -36,7 +36,7 @@ export class ProgressCircleRingComponent {
     return this._centerRadius * 2 * Math.PI;
   }
 
-  private calculateOffset(value: number) {
+  private calculateOffset(value: number): number {
     return this._centerCircumference - this._centerCircumference * (value / 100);
   }
 }
