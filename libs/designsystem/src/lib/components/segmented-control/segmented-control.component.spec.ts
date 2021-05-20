@@ -2,6 +2,7 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponents, MockDirective } from 'ng-mocks';
 
 import { ThemeColorDirective } from '../../directives';
+import { DesignTokenHelper } from '../../helpers';
 import { TestHelper } from '../../testing/test-helper';
 import { BadgeComponent } from '../badge/badge.component';
 import { ChipComponent } from '../chip/chip.component';
@@ -64,7 +65,7 @@ describe('SegmentedControlComponent', () => {
     expect(component.value).toBe(items[1]);
   });
 
-  describe('default mode', () => {
+  describe("in 'default' mode", () => {
     it("should have a 'default' mode when created", () => {
       expect(component.isChipMode).toBeFalsy();
     });
@@ -108,13 +109,49 @@ describe('SegmentedControlComponent', () => {
     });
   });
 
-  describe('chip mode', () => {
+  describe("in 'chip mode'", () => {
     beforeEach(() => {
       spectator.setInput('mode', Mode.chip);
     });
 
     it("should have a 'chip' mode when created", () => {
       expect(component.isChipMode).toBeTruthy();
+    });
+
+    it('should not have an ion-segment control', () => {
+      expect(spectator.queryHost('ion-segment')).toBeNull();
+    });
+
+    it('should not have any segments buttons', () => {
+      expect(spectator.queryHostAll('ion-segment-button').length).toBe(0);
+    });
+
+    it('should have a segment chip per item', () => {
+      expect(spectator.queryHostAll('kirby-chip').length).toBe(items.length);
+    });
+
+    it('should call onSegmentSelect when clicking a different segment chip', () => {
+      expect(component.value).toBe(items[1]);
+      spyOn(component, 'onSegmentSelect');
+      spectator.dispatchMouseEvent('kirby-chip:first-of-type', 'click');
+      expect(component.onSegmentSelect).toHaveBeenCalled();
+    });
+
+    it('should set value when clicking a different segment chip', () => {
+      expect(component.value).toBe(items[1]);
+      spectator.dispatchMouseEvent('kirby-chip:last-of-type', 'click');
+      expect(component.value).toBe(items[2]);
+    });
+  });
+
+  fdescribe("in 'compact chip' mode", () => {
+    beforeEach(() => {
+      spectator.setInput('mode', Mode.compactChip);
+      spectator.detectChanges();
+    });
+
+    it("should have a 'compact chip' mode when created", () => {
+      expect(component.mode).toBe(Mode.compactChip);
     });
 
     it('should not have an ion-segment control', () => {
