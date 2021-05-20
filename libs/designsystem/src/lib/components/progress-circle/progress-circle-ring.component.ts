@@ -13,25 +13,25 @@ export class ProgressCircleRingComponent {
   @Input() strokeWidth: number;
   @Input() upperBound: number;
 
-  get offset(): number {
+  get _offset(): number {
     if (this.value < this.upperBound || this.value > 99) {
-      return this.centerCircumference - this.centerCircumference * (this.value / 100);
+      return this._centerCircumference - this._centerCircumference * (this.value / 100);
     } else {
-      return this.centerCircumference - this.centerCircumference * (this.upperBound / 100);
+      return this._centerCircumference - this._centerCircumference * (this.upperBound / 100);
     }
   }
 
   @HostBinding('style.width.px')
   @HostBinding('style.height.px')
-  get diameter(): number {
+  get _diameter(): number {
     return this.radius * 2;
   }
 
-  get centerRadius(): number {
+  get _centerRadius(): number {
     return this.radius - this.strokeWidth / 2;
   }
 
-  get centerCircumference(): number {
-    return this.centerRadius * 2 * Math.PI;
+  get _centerCircumference(): number {
+    return this._centerRadius * 2 * Math.PI;
   }
 }

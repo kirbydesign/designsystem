@@ -72,24 +72,24 @@ export class ProgressCircleComponent implements AfterViewInit, OnDestroy {
 
   @HostBinding('style.width.px')
   @HostBinding('style.height.px')
-  get diameter(): number {
+  get _diameter(): number {
     return this.SIZE_CONFIG[this.size].diameter;
   }
 
-  get shownValue() {
+  get _shownValue() {
     // This is needed to make an animation [0 -> value] when element is shown to the user
     return this.hasElementBeenVisible ? this.value : 0;
   }
 
-  get radius() {
-    return this.diameter / 2;
+  get _radius() {
+    return this._diameter / 2;
   }
 
-  get strokeWidth() {
+  get _strokeWidth() {
     return this.SIZE_CONFIG[this.size].strokeWidth;
   }
 
-  get upperBound() {
+  get _upperBound() {
     // This is needed to make sure that an input value close to 100 is not shown as 100
     return this.SIZE_CONFIG[this.size].upperBound;
   }
