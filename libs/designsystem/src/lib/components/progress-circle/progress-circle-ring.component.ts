@@ -14,10 +14,11 @@ export class ProgressCircleRingComponent {
   @Input() upperBound: number;
 
   get _offset(): number {
-    if (this.value < this.upperBound || this.value > 99) {
-      return this._centerCircumference - this._centerCircumference * (this.value / 100);
+    const valueWithinBounds = this.value < this.upperBound || this.value > 99;
+    if (valueWithinBounds) {
+      return this.calculateOffset(this.value);
     } else {
-      return this._centerCircumference - this._centerCircumference * (this.upperBound / 100);
+      return this.calculateOffset(this.upperBound);
     }
   }
 
@@ -33,5 +34,9 @@ export class ProgressCircleRingComponent {
 
   get _centerCircumference(): number {
     return this._centerRadius * 2 * Math.PI;
+  }
+
+  private calculateOffset(value: number) {
+    return this._centerCircumference - this._centerCircumference * (value / 100);
   }
 }
