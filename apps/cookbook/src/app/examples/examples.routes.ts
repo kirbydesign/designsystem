@@ -24,6 +24,7 @@ import { FormFieldExampleComponent } from './form-field-example/form-field-examp
 import { GridExampleComponent } from './grid-example/grid-example.component';
 import { IconExampleComponent } from './icon-example/icon-example.component';
 import { ItemExampleComponent } from './item-example/item-example.component';
+import { LinkExampleComponent } from './link-example/link-example.component';
 import { ListBoldTextOnRowSelectionExampleComponent } from './list-example/examples/bold-text-on-row-selection';
 import { ListColoredItemsExampleComponent } from './list-example/examples/colored-items';
 import { ListWithDividersExampleComponent } from './list-example/examples/dividers';
@@ -62,7 +63,6 @@ import { TabsExampleComponent } from './tabs-example/tabs-example.component';
 import { ToastExampleComponent } from './toast-example/toast-example.component';
 import { ToggleButtonExampleComponent } from './toggle-button-example/toggle-button-example.component';
 import { ToggleExampleComponent } from './toggle-example/toggle-example.component';
-import { ToolbarExampleComponent } from './toolbar-example/toolbar-example.component';
 
 export const routes: Routes = [
   {
@@ -381,10 +381,6 @@ export const routes: Routes = [
     component: EmptyStateExampleComponent,
   },
   {
-    path: 'toolbar',
-    component: ToolbarExampleComponent,
-  },
-  {
     path: 'fab-sheet',
     component: FabSheetExampleComponent,
   },
@@ -415,5 +411,9 @@ export const routes: Routes = [
   {
     path: 'range',
     component: RangeExampleComponent,
+  },
+  {
+    path: 'link',
+    component: LinkExampleComponent,
   },
 ];

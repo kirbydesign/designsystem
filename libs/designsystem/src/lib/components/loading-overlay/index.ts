@@ -1,3 +1,2 @@
-export { LoadingOverlayService } from './fullscreen-loading-overlay/loading-overlay.service';
-export { FullscreenLoadingOverlayComponent } from './fullscreen-loading-overlay/fullscreen-loading-overlay.component';
+export { LoadingOverlayService } from './loading-overlay.service';
 export { LoadingOverlayComponent } from './loading-overlay.component';

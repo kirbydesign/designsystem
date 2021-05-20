@@ -97,7 +97,7 @@ export class ComponentStatusComponent implements OnInit, OnDestroy {
   }
 
   private loadGithubComponentRequests() {
-    return new Promise((resolve) => {
+    return new Promise<void>((resolve) => {
       this.getStatusItemsFromGithubIssues()
         .pipe(first())
         .subscribe((githubItems) => {
@@ -108,7 +108,7 @@ export class ComponentStatusComponent implements OnInit, OnDestroy {
   }
 
   private loadGithubComponentEnhancementRequests() {
-    return new Promise((resolve) => {
+    return new Promise<void>((resolve) => {
       this.getEnhancementItemsFromGithubIssues()
         .pipe(first())
         .subscribe((enhancementItems) => {
@@ -350,7 +350,7 @@ export class ComponentStatusComponent implements OnInit, OnDestroy {
   }
 
   private setCurrentGithubStatus() {
-    return new Promise((resolve) => {
+    return new Promise<void>((resolve) => {
       this.getGithubProjectStatus()
         .pipe(first())
         .subscribe((issues) => {

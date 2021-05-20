@@ -8,6 +8,7 @@ import { MockCalendarComponent } from './components/mock.calendar.component';
 import { MockCardFooterComponent } from './components/mock.card-footer.component';
 import { MockCardHeaderComponent } from './components/mock.card-header.component';
 import { MockCardComponent } from './components/mock.card.component';
+import { MockChartComponent } from './components/mock.chart.component';
 import { MockCheckboxComponent } from './components/mock.checkbox.component';
 import { MockChipComponent } from './components/mock.chip.component';
 import { MockDividerComponent } from './components/mock.divider.component';
@@ -17,7 +18,6 @@ import { MockFabSheetComponent } from './components/mock.fab-sheet.component';
 import { MockFlagComponent } from './components/mock.flag.component';
 import { MockFormFieldMessageComponent } from './components/mock.form-field-message.component';
 import { MockFormFieldComponent } from './components/mock.form-field.component';
-import { MockFullscreenLoadingOverlayComponent } from './components/mock.fullscreen-loading-overlay.component';
 import { MockGridComponent } from './components/mock.grid.component';
 import { MockIconComponent } from './components/mock.icon.component';
 import { MockInputCounterComponent } from './components/mock.input-counter.component';
@@ -55,7 +55,6 @@ import { MockTabsComponent } from './components/mock.tabs.component';
 import { MockTextareaComponent } from './components/mock.textarea.component';
 import { MockToggleButtonComponent } from './components/mock.toggle-button.component';
 import { MockToggleComponent } from './components/mock.toggle.component';
-import { MockToolbarComponent } from './components/mock.toolbar.component';
 
 export const MOCK_COMPONENTS = [
   MockAccordionItemComponent,
@@ -67,6 +66,7 @@ export const MOCK_COMPONENTS = [
   MockCardFooterComponent,
   MockCardHeaderComponent,
   MockCardComponent,
+  MockChartComponent,
   MockCheckboxComponent,
   MockChipComponent,
   MockDividerComponent,
@@ -86,7 +86,6 @@ export const MOCK_COMPONENTS = [
   MockListHeaderComponent,
   MockListSectionHeaderComponent,
   MockListComponent,
-  MockFullscreenLoadingOverlayComponent,
   MockLoadingOverlayComponent,
   MockActionSheetComponent,
   MockModalFooterComponent,
@@ -113,5 +112,4 @@ export const MOCK_COMPONENTS = [
   MockTabsComponent,
   MockToggleComponent,
   MockToggleButtonComponent,
-  MockToolbarComponent,
 ];

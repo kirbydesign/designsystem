@@ -1,9 +1,9 @@
-import { Compiler, Plugin } from 'webpack';
-import * as validateOptions from 'schema-utils';
 import * as chokidar from 'chokidar';
+import validate from 'schema-utils';
+import { Compiler, Plugin } from 'webpack';
 
-import { SassToTsWebpackPluginOptions, SCHEMA } from './schema';
 import { SassToTypescriptEngine } from './sass-to-ts.engine';
+import { SassToTsWebpackPluginOptions, SCHEMA } from './schema';
 
 export class SassToTsWebpackPlugin implements Plugin {
   static readonly NAME = 'SassToTsWebpackPlugin';
@@ -11,7 +11,8 @@ export class SassToTsWebpackPlugin implements Plugin {
   shouldLog = false;
 
   constructor(private options: SassToTsWebpackPluginOptions) {
-    validateOptions(SCHEMA, options, 'SASS to TS Plugin');
+    const configuration = { name: 'SASS to TS Plugin' };
+    validate(SCHEMA, options, configuration);
     this.engine = new SassToTypescriptEngine();
   }
 
