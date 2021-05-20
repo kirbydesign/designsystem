@@ -2,7 +2,6 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponents, MockDirective } from 'ng-mocks';
 
 import { ThemeColorDirective } from '../../directives';
-import { DesignTokenHelper } from '../../helpers';
 import { TestHelper } from '../../testing/test-helper';
 import { BadgeComponent } from '../badge/badge.component';
 import { ChipComponent } from '../chip/chip.component';
@@ -144,7 +143,7 @@ describe('SegmentedControlComponent', () => {
     });
   });
 
-  fdescribe("in 'compact chip' mode", () => {
+  describe("in 'compact chip' mode", () => {
     beforeEach(() => {
       spectator.setInput('mode', Mode.compactChip);
       spectator.detectChanges();
