@@ -50,7 +50,8 @@ export * from './tabs';
 export * from './toast';
 export { ToggleButtonComponent } from './toggle-button/toggle-button.component';
 export { ToggleComponent } from './toggle/toggle.component';
-export { ToolbarComponent } from './toolbar/toolbar.component';
 
 export * from './page';
 export { ProgressCircleComponent } from './progress-circle/progress-circle.component';
+
+export { RangeComponent } from './range/range.component';

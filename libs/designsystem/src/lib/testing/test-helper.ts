@@ -58,7 +58,7 @@ export class TestHelper {
     pollIntervalInMs: number = 5
   ): Promise<void> {
     if (pollFunc() === true) return Promise.resolve();
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
       let timeoutId, intervalId;
       const pollState = () => {
         const result = pollFunc();
@@ -95,7 +95,7 @@ export class TestHelper {
   };
 
   public static resizeTestWindow(size: { width?: string; height?: string }): Promise<void> {
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
       if (!window.frameElement) {
         console.warn('window.frameElement is undefined. Cannot resize test window.');
         reject();
@@ -154,7 +154,7 @@ export class TestHelper {
   }
 
   public static waitForTimeout(timeoutInMs?: number): Promise<void> {
-    return new Promise((resolve) => setTimeout(resolve, timeoutInMs));
+    return new Promise<void>((resolve) => setTimeout(resolve, timeoutInMs));
   }
 }
 

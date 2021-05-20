@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, DebugElement } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import * as ionic from '@ionic/angular';
@@ -19,35 +19,37 @@ describe('ActionSheetPopoutComponent', () => {
   let component: ActionSheetPopoutComponent;
   let fixture: ComponentFixture<ActionSheetPopoutComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        ActionSheetPopoutComponent,
-        ListComponent,
-        CardComponent,
-        CardHeaderComponent,
-        GroupByPipe,
-        SpinnerComponent,
-        InfiniteScrollDirective,
-        ButtonComponent,
-        ListItemColorDirective,
-        MockComponent(ionic.IonList),
-        MockComponent(ionic.IonListHeader),
-        MockComponent(ionic.IonLabel),
-        MockComponent(ionic.IonItem),
-        MockComponent(ionic.IonItemDivider),
-        MockComponent(ionic.IonItemGroup),
-        MockComponent(ionic.IonItemOptions),
-        MockComponent(ionic.IonItemSliding),
-      ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    }).compileComponents();
-    TestBed.overrideModule(BrowserDynamicTestingModule, {
-      set: {
-        entryComponents: [ActionSheetPopoutComponent],
-      },
-    });
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [
+          ActionSheetPopoutComponent,
+          ListComponent,
+          CardComponent,
+          CardHeaderComponent,
+          GroupByPipe,
+          SpinnerComponent,
+          InfiniteScrollDirective,
+          ButtonComponent,
+          ListItemColorDirective,
+          MockComponent(ionic.IonList),
+          MockComponent(ionic.IonListHeader),
+          MockComponent(ionic.IonLabel),
+          MockComponent(ionic.IonItem),
+          MockComponent(ionic.IonItemDivider),
+          MockComponent(ionic.IonItemGroup),
+          MockComponent(ionic.IonItemOptions),
+          MockComponent(ionic.IonItemSliding),
+        ],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      }).compileComponents();
+      TestBed.overrideModule(BrowserDynamicTestingModule, {
+        set: {
+          entryComponents: [ActionSheetPopoutComponent],
+        },
+      });
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ActionSheetPopoutComponent);

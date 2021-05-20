@@ -1,17 +1,18 @@
-import { Options, chart } from 'highcharts';
+import { ElementRef, Injectable } from '@angular/core';
+import { chart, Options } from 'highcharts';
 import * as Highcharts from 'highcharts';
-import { ElementRef } from '@angular/core';
+import * as accessibility from 'highcharts/modules/accessibility';
+import * as exportData from 'highcharts/modules/export-data';
+import * as exporting from 'highcharts/modules/exporting';
 
 // Docs on importing accessibility: https://www.highcharts.com/docs/chart-concepts/accessibility
-import * as exporting from 'highcharts/modules/exporting';
-import * as exportData from 'highcharts/modules/export-data';
-import * as accessibility from 'highcharts/modules/accessibility';
 
 declare var require: any;
 require('highcharts/highcharts-more')(Highcharts);
 require('highcharts/modules/solid-gauge')(Highcharts);
 require('highcharts/modules/broken-axis')(Highcharts);
 
+@Injectable()
 export class ChartHelper {
   chartContainer: ElementRef;
 

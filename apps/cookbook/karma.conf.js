@@ -8,9 +8,9 @@ module.exports = function(config) {
   const baseConfig = getBaseKarmaConfig();
   config.set({
     ...baseConfig,
-    coverageIstanbulReporter: {
-      ...baseConfig.coverageIstanbulReporter,
-      dir: join(__dirname, '../../coverage/apps/cookbook')
+    coverageReporter: {
+      ...baseConfig.coverageReporter,
+      dir: join(__dirname, '../../coverage/apps/cookbook'),
     },
     junitReporter: {
       outputDir: require('path').join(__dirname, '../../test-reports/apps/cookbook'),

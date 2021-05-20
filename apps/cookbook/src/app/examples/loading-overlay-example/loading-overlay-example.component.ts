@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 
-import { AlertConfig, ModalController } from '@kirbydesign/designsystem';
 import { LoadingOverlayService } from '@kirbydesign/designsystem';
 
 @Component({

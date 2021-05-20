@@ -143,7 +143,8 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
           // wait for template to render
           setTimeout(() => {
             const domRect = this.elementRef.nativeElement.getBoundingClientRect();
-            const right = this.windowRef.innerWidth - domRect.right;
+            const document = this.windowRef.document.documentElement;
+            const right = document.clientWidth - domRect.right;
             this.renderer.setStyle(this.ionModalElement, 'top', `${domRect.top}px`);
             this.renderer.setStyle(this.ionModalElement, 'left', `${domRect.left}px`);
             this.renderer.setStyle(this.ionModalElement, 'right', `${right}px`);
@@ -278,7 +279,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     // Blur active element and wait for keyboard to hide,
     // then dismiss modal and return:
     this.blurActiveElement();
-    return new Promise((resolve) => {
+    return new Promise<void>((resolve) => {
       this.delayedClose = async () => {
         await this.ionModalElement.dismiss(data);
         resolve();

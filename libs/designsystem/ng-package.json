@@ -1,6 +1,7 @@
 {
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../../dist/libs/designsystem",
+  "assets": ["ngcc.config.js"],
   "lib": {
     "entryFile": "src/index.ts",
     "umdModuleIds": {
@@ -8,14 +9,15 @@
       "highcharts": "highcharts",
       "highcharts/modules/annotations": "highcharts",
       "highcharts/highstock": "highcharts/highstock",
-      "@ionic/angular": "ionic"
+      "@ionic/angular": "ionic",
+      "inputmask/lib/inputmask": "inputmask"
     }
   },
-  "whitelistedNonPeerDependencies": [
-    "@angular/cdk",
+  "allowedNonPeerDependencies": [
     "@ionic/angular",
     "highcharts",
     "moment",
-    "@fontsource/roboto"
+    "@fontsource/roboto",
+    "inputmask"
   ]
 }

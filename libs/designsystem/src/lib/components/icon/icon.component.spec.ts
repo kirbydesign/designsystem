@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { IonIcon } from '@ionic/angular';
 import { mockProvider, SpyObject } from '@ngneat/spectator';
@@ -14,17 +14,19 @@ import { IconComponent, IconSize } from './icon.component';
 const { getColor, iconFontSize } = DesignTokenHelper;
 
 describe('IconComponent', () => {
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        IconComponent,
-        ThemeColorDirective,
-        TestWrapperComponent,
-        MockComponent(IonIcon),
-      ],
-      providers: [mockProvider(IconRegistryService)],
-    });
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [
+          IconComponent,
+          ThemeColorDirective,
+          TestWrapperComponent,
+          MockComponent(IonIcon),
+        ],
+        providers: [mockProvider(IconRegistryService)],
+      });
+    })
+  );
 
   it('should compile with custom hardcoded directives', () => {
     const fixture = createTestComponent('<kirby-icon themeColor="primary"></kirby-icon>');
@@ -67,10 +69,14 @@ describe('IconComponent', () => {
       spyOn(console, 'warn');
       const noExistingIconName = 'no-existing-icon-name';
       const fixture = createTestComponent(`<kirby-icon name="${noExistingIconName}"></kirby-icon>`);
+
       fixture.detectChanges();
 
       expect(console.warn).toHaveBeenCalledWith(
-        `Icon with name "${noExistingIconName}" was not found.`
+        `Built-in icon with name "${noExistingIconName}" was not found. 
+        Do you have a typo in 'name' or
+        did you mean to use a custom icon? If so, please use: 
+        <kirby-icon customName="${noExistingIconName}"></kirby-icon>`
       );
     });
 
@@ -94,7 +100,9 @@ describe('IconComponent', () => {
       fixture.detectChanges();
 
       expect(console.warn).toHaveBeenCalledWith(
-        `Icon with name "${noExistingIconName}" was not found.`
+        `Custom icon with name "${noExistingIconName}" was not found. 
+        Do you have a typo in 'customName' or
+        forgot to configure the custom icon through the 'IconRegistryService'?`
       );
     });
 

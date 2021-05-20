@@ -9,6 +9,7 @@ import { MockCalendarComponent } from './components/mock.calendar.component';
 import { MockCardFooterComponent } from './components/mock.card-footer.component';
 import { MockCardHeaderComponent } from './components/mock.card-header.component';
 import { MockCardComponent } from './components/mock.card.component';
+import { MockChartComponent } from './components/mock.chart.component';
 import { MockCheckboxComponent } from './components/mock.checkbox.component';
 import { MockChipComponent } from './components/mock.chip.component';
 import { MockDividerComponent } from './components/mock.divider.component';
@@ -18,7 +19,6 @@ import { MockFabSheetComponent } from './components/mock.fab-sheet.component';
 import { MockFlagComponent } from './components/mock.flag.component';
 import { MockFormFieldMessageComponent } from './components/mock.form-field-message.component';
 import { MockFormFieldComponent } from './components/mock.form-field.component';
-import { MockFullscreenLoadingOverlayComponent } from './components/mock.fullscreen-loading-overlay.component';
 import { MockGridComponent } from './components/mock.grid.component';
 import { MockIconComponent } from './components/mock.icon.component';
 import { MockInputCounterComponent } from './components/mock.input-counter.component';
@@ -45,6 +45,7 @@ import {
 import { MockProgressCircleComponent } from './components/mock.progress-circle.component';
 import { MockRadioGroupComponent } from './components/mock.radio-group.component';
 import { MockRadioComponent } from './components/mock.radio.component';
+import { MockRangeComponent } from './components/mock.range.component';
 import { MockReorderListComponent } from './components/mock.reorder-list.component';
 import { MockRouterOutletComponent } from './components/mock.router-outlet.component';
 import { MockSegmentedControlComponent } from './components/mock.segmented-control.component';
@@ -55,7 +56,6 @@ import { MockTabsComponent } from './components/mock.tabs.component';
 import { MockTextareaComponent } from './components/mock.textarea.component';
 import { MockToggleButtonComponent } from './components/mock.toggle-button.component';
 import { MockToggleComponent } from './components/mock.toggle.component';
-import { MockToolbarComponent } from './components/mock.toolbar.component';
 
 export const MOCK_COMPONENTS = [
   MockAccordionItemComponent,
@@ -69,6 +69,7 @@ export const MOCK_COMPONENTS = [
   MockCardFooterComponent,
   MockCardHeaderComponent,
   MockCardComponent,
+  MockChartComponent,
   MockCheckboxComponent,
   MockChipComponent,
   MockDividerComponent,
@@ -88,7 +89,6 @@ export const MOCK_COMPONENTS = [
   MockListHeaderComponent,
   MockListSectionHeaderComponent,
   MockListComponent,
-  MockFullscreenLoadingOverlayComponent,
   MockLoadingOverlayComponent,
   MockModalFooterComponent,
   MockPageFooterComponent,
@@ -104,6 +104,7 @@ export const MOCK_COMPONENTS = [
   MockProgressCircleComponent,
   MockRadioGroupComponent,
   MockRadioComponent,
+  MockRangeComponent,
   MockReorderListComponent,
   MockRouterOutletComponent,
   MockSegmentedControlComponent,
@@ -113,5 +114,4 @@ export const MOCK_COMPONENTS = [
   MockTabsComponent,
   MockToggleComponent,
   MockToggleButtonComponent,
-  MockToolbarComponent,
 ];
