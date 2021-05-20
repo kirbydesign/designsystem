@@ -1,4 +1,5 @@
 import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import { Mode } from 'libs/designsystem/src/lib/components/segmented-control/segmented-control.component';
 
 import { SegmentedControlComponent, SegmentItem } from '@kirbydesign/designsystem';
 
