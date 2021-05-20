@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'cookbook-example-card-content',
@@ -19,7 +19,7 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
     </kirby-card>
   `,
 })
-export class CookbookExampleCardContentComponent implements OnInit, OnChanges {
+export class CookbookExampleCardContentComponent implements OnInit {
   @Input() data: any;
   @Input() activeSlideIndex: number;
   @Input() slideIndex: number;
@@ -39,9 +39,9 @@ export class CookbookExampleCardContentComponent implements OnInit, OnChanges {
     this.cardContent = this.data.cardContent;
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    // not in use in this example - but gives you access to the index of any slide from the component loaded inside the slide
-    let activeSlide = changes.activeSlideIndex.currentValue || 0;
-    // doSomethingWithTheActiveSlideIndex(activeSlide);
-  }
+  // ngOnChanges(changes: SimpleChanges) {
+  //   not in use in this example - but gives you access to the index of any slide from the component loaded inside the slide
+  //   let activeSlide = changes.activeSlideIndex.currentValue || 0;
+  //   doSomethingWithTheActiveSlideIndex(activeSlide);
+  // }
 }

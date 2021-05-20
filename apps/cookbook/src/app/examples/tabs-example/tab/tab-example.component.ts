@@ -84,7 +84,7 @@ export class TabExampleComponent implements OnInit {
     }, 300);
   }
 
-  onItemSelect(item: ActionSheetItem) {
+  onItemSelect() {
     alert('item selected');
   }
 

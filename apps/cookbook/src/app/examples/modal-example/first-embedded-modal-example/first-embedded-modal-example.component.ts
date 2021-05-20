@@ -149,7 +149,7 @@ export class FirstEmbeddedModalExampleComponent implements OnInit {
     this.modal.close(someTestData);
   }
 
-  onSupplementaryActionSelect(args: any) {
+  onSupplementaryActionSelect() {
     const config: ToastConfig = {
       message: `Supplementary action selected`,
       messageType: 'success',

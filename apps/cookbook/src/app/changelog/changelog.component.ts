@@ -1,10 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
-
+import { Subscription } from 'rxjs';
+import { ChangelogVersion } from '~/app/changelog/changelog.interfaces';
 import { ChangelogService } from '~/app/changelog/changelog.service';
 import { ColorService } from '~/app/shared/color/color.service';
-import { ChangelogVersion } from '~/app/changelog/changelog.interfaces';
 
 @Component({
   selector: 'cookbook-changelog',
@@ -49,7 +48,7 @@ export class ChangelogComponent implements OnInit, OnDestroy {
     this.changelogService.updateChangelog(version.name, version.name);
   }
 
-  trackByFn(index: number, item: ChangelogVersion) {
+  trackByFn(_index: number, item: ChangelogVersion) {
     return item.name;
   }
 }

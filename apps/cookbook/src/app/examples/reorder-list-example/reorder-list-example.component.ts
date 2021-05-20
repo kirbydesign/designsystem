@@ -72,7 +72,7 @@ export class ReorderListExampleComponent {
     ev.complete(ev.parentItem.shadowAccounts);
   }
 
-  trackByFn(index, item) {
+  trackByFn(_index, item) {
     return item.title;
   }
 }

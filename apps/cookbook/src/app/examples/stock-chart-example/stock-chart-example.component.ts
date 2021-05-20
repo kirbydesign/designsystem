@@ -1,5 +1,4 @@
 import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
-
 import { Options } from 'highcharts';
 
 import { StockChartDataPoint, stockChartOptions } from '@kirbydesign/designsystem';
@@ -20,7 +19,7 @@ const config = {
 })
 export class StockChartExampleComponent implements OnInit {
   template = config.template;
-  constructor(@Inject(LOCALE_ID) private locale: string) {
+  constructor(@Inject(LOCALE_ID) locale: string) {
     this.height = 300;
     this.options = stockChartOptions(locale, this.height);
   }
