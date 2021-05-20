@@ -1,6 +1,6 @@
 @import '../form-field-inputs.shared';
 
-:host() {
+:host {
   &[type='number'] {
     //fallback
     appearance: textfield;
@@ -30,3 +30,25 @@
   }
 }
 /* clean-css ignore:end */
+
+/*
+ * Date-mask
+ */
+.date-mask-wrapper {
+  position: relative;
+}
+
+:host-context(.date-mask-wrapper) {
+  color: var(--kirby-text-color-semi-dark);
+}
+
+.date-mask {
+  font-family: $form-field-input-font-family;
+  font-size: $form-field-input-font-size;
+  line-height: $form-field-input-line-height;
+  color: var(--kirby-white-contrast);
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: $form-field-input-padding;
+}

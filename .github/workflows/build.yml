@@ -10,18 +10,54 @@ defaults:
     shell: bash
 
 jobs:
+  build_check:
+    name: Check if build is needed
+    runs-on: ubuntu-latest
+    outputs:
+      #Build on PRs, new releases & changes not including 'libs' (which gets build as part of new release)
+      do_build: ${{ github.event_name == 'pull_request' || steps.event_type.outputs.is_new_release == 'true' || steps.filter.outputs.libs == 'false' }}
+    steps:
+      - name: Check for new release
+        id: event_type
+        env:
+          IS_NEW_RELEASE: ${{ github.event_name != 'pull_request' && contains(github.event.head_commit.message, 'Bumping version to') }}
+        run: echo "::set-output name=is_new_release::$IS_NEW_RELEASE"
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Check modified files
+        id: filter
+        uses: dorny/paths-filter@v2.9.2
+        with:
+          filters: |
+            libs:
+              - 'libs/**'
   lint_and_unittest:
     name: Lint & unit test
-    runs-on: ubuntu-latest
+    needs: build_check
+    if: ${{ needs.build_check.outputs.do_build == 'true' }}
+    runs-on: ubuntu-latest    
+    env:
+      NODE_VERSION: '10.16'
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
       - name: Install Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '12.20.0'
-      - name: Install NPM dependencies
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Fetch Node Modules Cache
+        uses: actions/cache@v2
+        id: cache
+        with:
+          path: | 
+            **/node_modules
+          key: node-modules-${{ runner.os }}-${{env.NODE_VERSION}}-${{hashFiles('**/package.json')}}-${{hashFiles('**/package-lock.json')}}
+      - name: Clean Install NPM Dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
+      - name: Run Postinstall Script
+        if: steps.cache.outputs.cache-hit == 'true'
+        run: npm run postinstall 
       - name: Run linting
         run: npm run lint
       - name: Run tests
@@ -31,26 +67,41 @@ jobs:
 
   build_kirby:
     name: Build Kirby lib
+    needs: build_check
+    if: ${{ needs.build_check.outputs.do_build == 'true' }}
     runs-on: ubuntu-latest
+    env:
+      NODE_VERSION: '10.16'
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
       - name: Install Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '12.20'
-      - name: Install NPM dependencies
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Fetch Node Modules Cache
+        uses: actions/cache@v2
+        id: cache
+        with:
+          path: |
+            **/node_modules
+          key: node-modules-${{ runner.os }}-${{env.NODE_VERSION}}-${{hashFiles('**/package.json')}}-${{hashFiles('**/package-lock.json')}}
+      - name: Clean Install NPM Dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
+      - name: Run Postinstall Script
+        if: steps.cache.outputs.cache-hit == 'true'
+        run: npm run postinstall 
       - name: Build Kirby lib
         run: npm run dist:designsystem
 
   deploy_to_cookbook:
     name: Deploy cookbook
-    if: github.event_name == 'pull_request' || contains(github.event.head_commit.message, 'Bumping version to')
     needs: [lint_and_unittest, build_kirby]
     runs-on: ubuntu-latest
     env:
       DOMAIN: ${{ github.ref == 'refs/heads/master' && 'kirby.design' || '650b277bd9a54e5cbadc.westeurope.aksapp.io' }}
+      NODE_VERSION: '10.16'
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
@@ -116,9 +167,20 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '10.16'
-      - name: Install NPM dependencies
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Fetch Node Modules Cache
+        id: cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            **/node_modules
+          key: node-modules-${{ runner.os }}-${{env.NODE_VERSION}}-${{hashFiles('**/package.json')}}-${{hashFiles('**/package-lock.json')}}
+      - name: Clean Install NPM Dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
+      - name: Run Postinstall Script
+        if: steps.cache.outputs.cache-hit == 'true'
+        run: npm run postinstall 
       - name: Install Kubernetes CLI
         run: |
           sudo apt-get update

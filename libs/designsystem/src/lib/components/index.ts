@@ -1,9 +1,9 @@
 export * from './app';
 
-export { AvatarComponent } from './avatar/avatar.component';
+export { AvatarComponent, AvatarSize } from './avatar/avatar.component';
 
 export { KirbyBadge as BadgeComponent } from './proxies';
-export { ButtonComponent } from './button/button.component';
+export { ButtonComponent, ButtonSize } from './button/button.component';
 
 export * from './card';
 export * from './chart';
@@ -47,7 +47,6 @@ export { SpinnerComponent } from './spinner/spinner.component';
 export * from './tabs';
 export * from './toast';
 export { ToggleComponent } from './toggle/toggle.component';
-export { ToolbarComponent } from './toolbar/toolbar.component';
 
 export { ProgressCircleComponent } from './progress-circle/progress-circle.component';
 export { FlagComponent } from './flag/flag.component';
@@ -58,3 +57,4 @@ export { ToggleButtonComponent } from './toggle-button/toggle-button.component';
 export * from './accordion';
 
 export * from './radio';
+export { RangeComponent } from './range/range.component';

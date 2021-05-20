@@ -11,7 +11,8 @@ import {
   TemplateRef,
   ViewChildren,
 } from '@angular/core';
-import { Component, Input } from '@angular/core';
+import { Component, HostListener, Input } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { ListItemTemplateDirective } from '../../list/list.directive';
 import { RadioComponent } from '../radio.component';
@@ -20,9 +21,16 @@ import { RadioComponent } from '../radio.component';
   selector: 'kirby-radio-group',
   templateUrl: './radio-group.component.html',
   styles: ['ion-radio-group { display: inherit; flex-wrap: inherit}'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: RadioGroupComponent,
+      multi: true,
+    },
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RadioGroupComponent implements AfterContentInit {
+export class RadioGroupComponent implements AfterContentInit, ControlValueAccessor {
   constructor(private changeDetectionRef: ChangeDetectorRef) {}
 
   // #region public properties
@@ -80,7 +88,6 @@ export class RadioGroupComponent implements AfterContentInit {
    * Emitted when an option is selected
    */
   @Output() valueChange: EventEmitter<string | any> = new EventEmitter<string | any>();
-
   // #endregion public properties
 
   // #region "protected" properties used by template
@@ -91,12 +98,15 @@ export class RadioGroupComponent implements AfterContentInit {
   // #region private fields
   private _disabled = false;
   private _items: string[] | any[] = [];
+  private _onChangeCallback: (value: any) => void = () => {};
+  private _onTouched = () => {};
   private _selectedIndex: number = -1;
   private _value?: string | any = null;
   @ViewChildren(RadioComponent)
   private radioButtons: QueryList<RadioComponent>;
   @ContentChildren(RadioComponent, { descendants: true })
   private projectedRadioButtons: QueryList<RadioComponent>;
+
   private get hasItemsFromContentProjection(): boolean {
     return (
       !this.items.length &&
@@ -121,9 +131,24 @@ export class RadioGroupComponent implements AfterContentInit {
     this.listenForProjectedRadiosChange();
   }
 
+  registerOnChange(fn: any): void {
+    this._onChangeCallback = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+    this._onTouched = fn;
+  }
+
   setDisabledState(isDisabled: boolean) {
     this.disabled = isDisabled;
+    this.changeDetectionRef.markForCheck();
   }
+
+  writeValue(value: any): void {
+    this.value = value;
+    this.changeDetectionRef.markForCheck();
+  }
+
   // #endregion public methods
 
   // #region "protected" methods used by template
@@ -145,7 +170,14 @@ export class RadioGroupComponent implements AfterContentInit {
     if (value === this._value) return;
     this.setSelectedItem(value);
     this.valueChange.emit(value);
+    this._onChangeCallback(value);
   }
+
+  @HostListener('ionBlur')
+  _onRadioBlur() {
+    this._onTouched();
+  }
+
   // #endregion "protected" methods used by template
 
   // #region private methods

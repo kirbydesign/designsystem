@@ -1,12 +1,12 @@
 // schema for options object
 export const SCHEMA = {
-  type: 'object',
+  type: 'object' as const,
   properties: {
     watchGlob: {
-      type: 'array',
+      type: 'array' as const,
     },
     transform: {
-      type: 'array',
+      type: 'array' as const,
     },
   },
 };

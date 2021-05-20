@@ -17,7 +17,6 @@ import { CheckboxExampleComponent } from './checkbox-example/checkbox-example.co
 import { ChipExampleComponent } from './chip-example/chip-example.component';
 import { DividerExampleComponent } from './divider-example/divider-example.component';
 import { EmptyStateExampleComponent } from './empty-state-example/empty-state-example.component';
-import { ExampleConfigurationWrapperComponent } from './example-configuration-wrapper/example-configuration-wrapper.component';
 import { ExamplesComponent } from './examples.component';
 import { FabSheetExampleComponent } from './fab-sheet-example/fab-sheet-example.component';
 import { FlagExampleComponent } from './flag-example/flag-example.component';
@@ -26,6 +25,7 @@ import { FormFieldExampleComponent } from './form-field-example/form-field-examp
 import { GridExampleComponent } from './grid-example/grid-example.component';
 import { IconExampleComponent } from './icon-example/icon-example.component';
 import { ItemExampleComponent } from './item-example/item-example.component';
+import { LinkExampleComponent } from './link-example/link-example.component';
 import { ListExampleComponent } from './list-example/list-example.component';
 import { ListLoadOnDemandExampleComponent } from './list-load-on-demand-example/list-load-on-demand-example.component';
 import { ListNoShapeExampleComponent } from './list-no-shape-example/list-no-shape-example.component';
@@ -60,7 +60,6 @@ import { TabExampleComponent } from './tabs-example/tab/tab-example.component';
 import { TabsExampleComponent } from './tabs-example/tabs-example.component';
 import { ToastExampleComponent } from './toast-example/toast-example.component';
 import { ToggleExampleComponent } from './toggle-example/toggle-example.component';
-import { ToolbarExampleComponent } from './toolbar-example/toolbar-example.component';
 
 // Example of "custom" icons
 export const iconSettings: IconSettings = {
@@ -78,7 +77,6 @@ export const iconSettings: IconSettings = {
 
 export const COMPONENT_DECLARATIONS: any[] = [
   ExamplesComponent,
-  ExampleConfigurationWrapperComponent,
   ButtonExampleComponent,
   SlideButtonExampleComponent,
   CardExampleComponent,
@@ -116,7 +114,6 @@ export const COMPONENT_DECLARATIONS: any[] = [
   ToggleExampleComponent,
   EmptyStateExampleComponent,
   LoadingOverlayExampleComponent,
-  ToolbarExampleComponent,
   FabSheetExampleComponent,
   FormFieldExampleComponent,
   PageSimpleExampleComponent,
@@ -140,6 +137,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   SlidesExampleComponent,
   CookbookExampleCardContentComponent,
   AccordionExampleComponent,
+  LinkExampleComponent,
 ];
 
 // Configure custom icons (used by example to show the usage of custom icons)

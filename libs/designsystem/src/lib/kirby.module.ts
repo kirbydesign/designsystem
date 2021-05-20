@@ -1,4 +1,3 @@
-import { OverlayModule } from '@angular/cdk/overlay';
 import { CommonModule, DOCUMENT } from '@angular/common';
 import {
   APP_INITIALIZER,
@@ -30,6 +29,8 @@ import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { EmptyStateComponent } from './components/empty-state/empty-state.component';
 import { FabSheetComponent } from './components/fab-sheet/fab-sheet.component';
 import { FlagComponent } from './components/flag/flag.component';
+import { DateInputDirective } from './components/form-field/directives/date/date-input.directive';
+import { DecimalMaskDirective } from './components/form-field/directives/decimal-mask/decimal-mask.directive';
 import { FormFieldMessageComponent } from './components/form-field/form-field-message/form-field-message.component';
 import { FormFieldComponent } from './components/form-field/form-field.component';
 import { InputCounterComponent } from './components/form-field/input-counter/input-counter.component';
@@ -37,7 +38,6 @@ import { InputComponent } from './components/form-field/input/input.component';
 import { TextareaComponent } from './components/form-field/textarea/textarea.component';
 import { BreakpointHelperService } from './components/grid/breakpoint-helper.service';
 import { GridComponent } from './components/grid/grid.component';
-import { IconRegistryService } from './components/icon/icon-registry.service';
 import { IconModule } from './components/icon/icon.module';
 import { ItemModule } from './components/item/item.module';
 import { InfiniteScrollDirective } from './components/list/directives/infinite-scroll.directive';
@@ -54,9 +54,8 @@ import {
   ListSectionHeaderDirective,
 } from './components/list/list.directive';
 import { GroupByPipe } from './components/list/pipes/group-by.pipe';
-import { FullscreenLoadingOverlayComponent } from './components/loading-overlay/fullscreen-loading-overlay/fullscreen-loading-overlay.component';
-import { LoadingOverlayService } from './components/loading-overlay/fullscreen-loading-overlay/loading-overlay.service';
 import { LoadingOverlayComponent } from './components/loading-overlay/loading-overlay.component';
+import { LoadingOverlayService } from './components/loading-overlay/loading-overlay.service';
 import { ActionSheetComponent } from './components/modal/action-sheet/action-sheet.component';
 import { AlertComponent } from './components/modal/alert/alert.component';
 import { ModalFooterComponent } from './components/modal/footer/modal-footer.component';
@@ -71,6 +70,7 @@ import { ProgressCircleRingComponent } from './components/progress-circle/progre
 import { ProgressCircleComponent } from './components/progress-circle/progress-circle.component';
 import { RadioGroupComponent } from './components/radio/radio-group/radio-group.component';
 import { RadioComponent } from './components/radio/radio.component';
+import { RangeComponent } from './components/range/range.component';
 import { ReorderListComponent } from './components/reorder-list/reorder-list.component';
 import { RouterOutletModule } from './components/router-outlet/router-outlet.module';
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
@@ -86,10 +86,8 @@ import { ToastController } from './components/toast/services/toast.controller';
 import { ToastHelper } from './components/toast/services/toast.helper';
 import { ToggleButtonModule } from './components/toggle-button/toggle-button.module';
 import { ToggleComponent } from './components/toggle/toggle.component';
-import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
 import { ModalRouterLinkDirective } from './directives/modal-router-link/modal-router-link.directive';
-import { SizeDirective } from './directives/size/size.directive';
 import { ThemeColorDirective } from './directives/theme-color/theme-color.directive';
 import { WindowRef } from './types/window-ref';
 
@@ -122,12 +120,12 @@ const exportedDeclarations = [
   SegmentedControlComponent,
   ChipComponent,
   BadgeComponent,
-  SizeDirective,
   ThemeColorDirective,
+  DateInputDirective,
+  DecimalMaskDirective,
   SlideButtonComponent,
   ToggleComponent,
   EmptyStateComponent,
-  ToolbarComponent,
   FormFieldComponent,
   InputComponent,
   InputCounterComponent,
@@ -146,12 +144,12 @@ const exportedDeclarations = [
   AccordionItemComponent,
   RadioComponent,
   RadioGroupComponent,
+  RangeComponent,
 ];
 
 const declarations = [
   ...exportedDeclarations,
   ListItemColorDirective,
-  FullscreenLoadingOverlayComponent,
   KeyHandlerDirective,
   FormFieldMessageComponent,
   AlertComponent,
@@ -172,7 +170,7 @@ const exportedModules = [
 
 const exports = [...exportedModules, ...exportedDeclarations];
 
-const importedModules = [...exportedModules, OverlayModule];
+const importedModules = [...exportedModules];
 
 const providers = [
   ModalController,
@@ -201,7 +199,6 @@ const entryComponents = [
   ModalWrapperComponent,
   ModalCompactWrapperComponent,
   ActionSheetComponent,
-  FullscreenLoadingOverlayComponent,
   AlertComponent,
 ];
 

@@ -5,4 +5,7 @@ export interface ToastConfig {
   animated?: boolean;
 }
 
+/**
+ * 'danger' is deprecated. Use Kirby Alert for critical events
+ */
 export type MessageType = 'success' | 'warning' | 'danger';

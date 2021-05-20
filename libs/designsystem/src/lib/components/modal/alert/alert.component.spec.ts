@@ -1,28 +1,34 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
+
+import { DesignTokenHelper } from '../../../helpers/design-token-helper';
+import { WindowRef } from '../../../types/window-ref';
+import { ButtonComponent } from '../../button/button.component';
 
 import { AlertComponent } from './alert.component';
-import { ButtonComponent } from '../../button/button.component';
-import { SizeDirective } from '../../../directives/size/size.directive';
-import { WindowRef } from '../../../types/window-ref';
+
+const getColor = DesignTokenHelper.getColor;
 
 describe('AlertComponent', () => {
   let component: AlertComponent;
   let fixture: ComponentFixture<AlertComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [AlertComponent, ButtonComponent, SizeDirective],
-      providers: [
-        {
-          provide: WindowRef,
-          useValue: window,
-        },
-      ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [AlertComponent, ButtonComponent],
+        providers: [
+          {
+            provide: WindowRef,
+            useValue: window,
+          },
+        ],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AlertComponent);
@@ -64,6 +70,7 @@ describe('AlertComponent', () => {
       const okButton = fixture.debugElement.query(By.css('.ok-btn'));
       component.cancelBtnText = 'Test Cancel Button Text';
       fixture.detectChanges();
+
       expect(okButton.attributes['ng-reflect-size']).toBeUndefined();
     });
 
@@ -71,6 +78,7 @@ describe('AlertComponent', () => {
       const okButton = fixture.debugElement.query(By.css('.ok-btn'));
       component.cancelBtnText = null;
       fixture.detectChanges();
+
       expect(okButton.attributes['ng-reflect-size']).toBe('lg');
     });
   });
@@ -81,6 +89,7 @@ describe('AlertComponent', () => {
       component.cancelBtnText = 'Test Cancel Button Text';
       fixture.detectChanges();
       const cancelButton = fixture.debugElement.query(By.css('.cancel-btn'));
+
       expect(cancelButton.nativeElement.innerText).toEqual(expected);
     });
 
@@ -88,6 +97,7 @@ describe('AlertComponent', () => {
       component.cancelBtnText = null;
       fixture.detectChanges();
       const cancelButton = fixture.debugElement.query(By.css('.cancel-btn'));
+
       expect(cancelButton).toBeNull();
     });
   });
@@ -96,9 +106,46 @@ describe('AlertComponent', () => {
     it('should render', () => {
       component.iconName = 'warning';
       fixture.detectChanges();
-
       const icon = fixture.debugElement.query(By.css('.icon-outline'));
+
       expect(icon).toBeDefined();
+    });
+  });
+});
+
+describe('AlertComponent with okBtn', () => {
+  let spectator: SpectatorHost<AlertComponent>;
+  let element: HTMLElement;
+
+  const createHost = createHostFactory({
+    component: AlertComponent,
+    declarations: [ButtonComponent],
+    providers: [
+      {
+        provide: WindowRef,
+        useValue: window,
+      },
+    ],
+  });
+
+  beforeEach(() => {
+    spectator = createHost(`
+    <kirby-alert okBtnText="OK Button Text">
+    </kirby-alert>
+    `);
+    element = spectator.element;
+  });
+
+  it('should create', () => {
+    expect(spectator.component).toBeTruthy();
+  });
+
+  it('should have success colors on button', () => {
+    const okButton = element.querySelector('[kirby-button]');
+
+    expect(okButton).toHaveComputedStyle({
+      'background-color': getColor('success'),
+      color: getColor('success', 'contrast'),
     });
   });
 });

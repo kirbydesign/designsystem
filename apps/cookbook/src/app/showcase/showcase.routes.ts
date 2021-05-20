@@ -26,6 +26,7 @@ import { FontsShowcaseComponent } from './fonts-showcase/fonts-showcase.componen
 import { FormFieldShowcaseComponent } from './form-field-showcase/form-field-showcase.component';
 import { GridShowcaseComponent } from './grid-showcase/grid-showcase.component';
 import { IconShowcaseComponent } from './icon-showcase/icon-showcase.component';
+import { LinkShowcaseComponent } from './link-showcase/link-showcase.component';
 import { ListLoadOnDemandShowcaseComponent } from './list-load-on-demand-showcase/list-load-on-demand-showcase.component';
 import { ListNoShapeShowcaseComponent } from './list-no-shape-showcase/list-no-shape-showcase.component';
 import { ListShowcaseComponent } from './list-showcase/list-showcase.component';
@@ -34,6 +35,7 @@ import { LoadingOverlayShowcaseComponent } from './loading-overlay-showcase/load
 import { ModalShowcaseComponent } from './modal-showcase/modal-showcase.component';
 import { PageShowcaseComponent } from './page-showcase/page-showcase.component';
 import { ProgressCircleShowcaseComponent } from './progress-circle-showcase/progress-circle-showcase.component';
+import { RangeShowcaseComponent } from './range-showcase/range-showcase.component';
 import { ReorderListShowcaseComponent } from './reorder-list-showcase/reorder-list-showcase.component';
 import { SegmentedControlShowcaseComponent } from './segmented-control-showcase/segmented-control-showcase.component';
 import { ShowcaseComponent } from './showcase.component';
@@ -236,6 +238,14 @@ export const routes: Routes = [
       {
         path: 'radio',
         component: RadioShowcaseComponent,
+      },
+      {
+        path: 'range',
+        component: RangeShowcaseComponent,
+      },
+      {
+        path: 'link',
+        component: LinkShowcaseComponent,
       },
     ],
   },

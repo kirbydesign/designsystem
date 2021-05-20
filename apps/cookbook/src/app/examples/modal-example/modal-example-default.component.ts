@@ -8,20 +8,29 @@ import { FirstEmbeddedModalExampleComponent } from './first-embedded-modal-examp
 
 const config = {
   selector: 'cookbook-modal-example-default',
-  template: `<button kirby-button (click)="showModal()">Show modal</button>
-  <button kirby-button (click)="showDrawer()">Show drawer</button>
-  <button kirby-button (click)="showCompact()">Show compact</button>
+  template: `<button kirby-button (click)="showModal()" [disabled]="interactWithBackground || preventInteraction">Show modal</button>
+  <button kirby-button (click)="showDrawer()" [disabled]="preventInteraction">Show drawer</button>
+  <button kirby-button (click)="showCompact()" [disabled]="interactWithBackground || preventInteraction">Show compact</button>
   <cookbook-example-configuration-wrapper>
-      <cookbook-modal-example-configuration [(showDummyKeyboard)]="showDummyKeyboard"
+      <cookbook-modal-example-configuration [disabled]="preventInteraction" [(showDummyKeyboard)]="showDummyKeyboard"
       [(showPageProgress)]="showPageProgress"
       [(showFooter)]="showFooter"
       [(showDummyContent)]="showDummyContent"
       [(delayLoadDummyContent)]="delayLoadDummyContent"
       [(loadAdditionalContent)]="loadAdditionalContent"
-      [(openFullHeight)]="openFullHeight">
+      [(openFullHeight)]="openFullHeight"
+      [(interactWithBackground)]="interactWithBackground"
+      [(customCssClass)]="customCssClass"
+      >
       </cookbook-modal-example-configuration>
   </cookbook-example-configuration-wrapper>
-    `,
+  
+  <ng-container *ngIf="interactWithBackground">
+    <p *ngFor="let dummyText of dummyBackgroundTexts">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non neque vitae felis ultricies imperdiet in ut orci. Aenean sodales, augue ac consectetur sodales, neque velit condimentum nulla, at ultrices dolor tortor a nunc. Proin tellus nibh, venenatis eget quam ut, blandit cursus ante. Pellentesque convallis pretium orci vitae porta.
+    </p>
+  </ng-container>
+  `,
   titleTemplate: `<kirby-page-title>My Modal Title</kirby-page-title>
  
 <p>Some content of the embedded component</p>
@@ -200,14 +209,24 @@ export class ModalExampleDefaultComponent {
   delayLoadDummyContent = true;
   loadAdditionalContent = false;
   openFullHeight = false;
+  interactWithBackground = false;
+  customCssClass = false;
+  dummyBackgroundTexts = new Array(100).map(() => '');
+  preventInteraction = false;
 
   constructor(private modalController: ModalController, private window: WindowRef) {}
 
   private async showOverlay(flavor: 'modal' | 'drawer') {
-    const title = flavor === 'modal' ? 'Modal Title' : 'Drawer Title';
+    let title = flavor === 'modal' ? 'Modal Title' : 'Drawer Title';
+    if (this.customCssClass) {
+      title = flavor === 'modal' ? 'Modal with Custom CSS' : 'Drawer with Custom CSS';
+    }
+    this.preventInteraction = this.interactWithBackground;
     const config: ModalConfig = {
       flavor,
       component: FirstEmbeddedModalExampleComponent,
+      interactWithBackground: this.interactWithBackground,
+      cssClass: this.customCssClass ? ['my-custom-modal-class'] : [],
       size: this.openFullHeight ? 'full-height' : null,
       componentProps: {
         title,
@@ -217,18 +236,19 @@ export class ModalExampleDefaultComponent {
           numberProperty: 123,
           booleanProperty: true,
         },
-        showNestedOptions: true,
+        showNestedOptions: !this.interactWithBackground,
         showDummyKeyboard: this.showDummyKeyboard,
         showPageProgress: this.showPageProgress,
         showFooter: this.showFooter,
-        showDummyContent: this.showDummyContent,
+        showDummyContent: this.showDummyContent && !this.interactWithBackground,
+        showStaticDummyContent: this.interactWithBackground,
         delayLoadDummyContent: this.delayLoadDummyContent,
         loadAdditionalContent: this.loadAdditionalContent,
         disableScroll: false,
         openFullHeight: this.openFullHeight,
       },
     };
-    await this.modalController.showModal(config, this.onOverlayClose);
+    await this.modalController.showModal(config, this.onOverlayClose.bind(this));
   }
 
   async showModal() {
@@ -240,7 +260,7 @@ export class ModalExampleDefaultComponent {
       flavor: 'compact',
       component: ModalCompactExampleComponent,
     };
-    await this.modalController.showModal(config, this.onOverlayClose);
+    await this.modalController.showModal(config, this.onOverlayClose.bind(this));
   }
 
   async showDrawer() {
@@ -248,6 +268,7 @@ export class ModalExampleDefaultComponent {
   }
 
   private onOverlayClose(data: any): void {
+    this.preventInteraction = false;
     console.log('Callback from Embedded Modal:');
     console.log(`Data received: ${JSON.stringify(data)}`);
   }

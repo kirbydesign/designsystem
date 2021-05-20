@@ -35,6 +35,10 @@
   @return _get-map-prop($font-weight, $key);
 }
 
+@function icon-font-size($size) {
+  @return map-get($icon-font-sizes, $size);
+}
+
 @function get-color($variant, $getValueOnly: false, $map: $kirby-colors) {
   $value: _get-map-prop($map, $variant);
   @if $getValueOnly == true {
@@ -90,7 +94,7 @@
  * Outputs all keys from map as CSS class selector list
  */
 @function keys-to-classes($map) {
-  $classes: [];
+  $classes: ();
   @each $key in map-keys($map) {
     $classes: append($classes, '.#{$key}', $separator: comma);
   }

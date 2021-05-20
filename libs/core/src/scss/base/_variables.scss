@@ -55,6 +55,15 @@ $font-weight: (
     'black': 900,
 ) !default;
 
+/* Icon
+****************************************************************************/
+$icon-font-sizes: (
+  'xs': map-get($sizes, 's'),
+  'sm': map-get($sizes, 'm'),
+  'md': map-get($sizes, 'l'),
+  'lg': map-get($sizes, 'xxxl'),
+) !default;
+
 /*
   Z - Index overview
 ****************************************************************************/
@@ -180,3 +189,5 @@ $transition-easings: (
     exit: cubic-bezier(0.32, 0.72, 0, 1),
   ),
 );
+
+$loading-overlay-backdrop-opacity: 0.8;
