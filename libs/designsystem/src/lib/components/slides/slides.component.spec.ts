@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { fakeAsync } from '@angular/core/testing';
 import { IonSlide, IonSlides } from '@ionic/angular';
 import { byTestId, createHostFactory, HostComponent, SpectatorHost } from '@ngneat/spectator';
@@ -13,7 +13,7 @@ class IonSlidesFake extends IonSlides {
         slidesPerView: 1,
       },
     });
-  slideTo = (index: number, speed?: number, runCallbacks?: boolean) => Promise.resolve();
+  slideTo = (_index: number, _speed?: number, _runCallbacks?: boolean) => Promise.resolve();
 }
 
 describe('SlidesComponent', () => {

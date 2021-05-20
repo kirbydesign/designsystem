@@ -95,7 +95,7 @@ describe('ListComponent', () => {
     it('should be enabled if a section callback is defined', () => {
       spectator.setInput({
         items: Item.createItems(1, 2, 3),
-        getSectionName: (item: any) => 'this is a test',
+        getSectionName: (_item: any) => 'this is a test',
       });
       runNgOnChanges();
 

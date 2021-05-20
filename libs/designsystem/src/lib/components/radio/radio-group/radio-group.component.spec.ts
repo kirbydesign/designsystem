@@ -711,11 +711,7 @@ describe('RadioGroupComponent', () => {
   describe('implementing ControlValueAccessor interface', () => {
     const items = ['Bacon', 'Sausage', 'Onion'];
     const defaultSelectedIndex = 1;
-
-    let ionRadioGroup: IonRadioGroup;
     let ionRadioElements: HTMLIonRadioElement[];
-    let radios: RadioComponent[];
-
     let spectator: SpectatorHost<
       RadioGroupComponent,
       {
@@ -734,11 +730,9 @@ describe('RadioGroupComponent', () => {
         }
       );
 
-      ionRadioGroup = spectator.query(IonRadioGroup);
       const ionRadioGroupElement = spectator.query('ion-radio-group');
       await TestHelper.whenReady(ionRadioGroupElement);
 
-      radios = spectator.queryAll(RadioComponent);
       ionRadioElements = spectator.queryAll('ion-radio');
       await TestHelper.whenReady(ionRadioElements);
     });

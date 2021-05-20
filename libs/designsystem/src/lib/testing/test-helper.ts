@@ -2,16 +2,16 @@ import { IonicModule } from '@ionic/angular';
 import { IonicConfig } from '@ionic/core';
 
 export class TestHelper {
-  private static readonly _init = TestHelper.muteIonicReInitializeWarning();
+  // private static readonly _init = TestHelper.muteIonicReInitializeWarning();
 
-  private static muteIonicReInitializeWarning() {
-    const originalWarn = console.warn;
-    const patchedWarn = (warning: any, ...optionalParams: any[]) => {
-      const suppress = `Ionic Angular was already initialized. Make sure IonicModule.forRoot() is just called once.`;
-      if (warning !== suppress) originalWarn(warning, ...optionalParams);
-    };
-    console.warn = patchedWarn;
-  }
+  // private static muteIonicReInitializeWarning() {
+  //   const originalWarn = console.warn;
+  //   const patchedWarn = (warning: any, ...optionalParams: any[]) => {
+  //     const suppress = `Ionic Angular was already initialized. Make sure IonicModule.forRoot() is just called once.`;
+  //     if (warning !== suppress) originalWarn(warning, ...optionalParams);
+  //   };
+  //   console.warn = patchedWarn;
+  // }
 
   public static ionicModuleForTest = IonicModule.forRoot({
     mode: 'ios',
