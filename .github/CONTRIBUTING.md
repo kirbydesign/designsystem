@@ -864,7 +864,7 @@ Below there are two examples. Which one is easiest to read?
 
 #### The good test is isolated and flat
 
-The tests should be isolated and flat, therefore writing tests is one of the few places, where it is okay to be WET instead of DRY - it is rather important actually. 
+The tests should be isolated and flat, therefore writing tests is one of the few places, where it is okay to be [WET](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself#DRY_vs_WET_vs_AHA_solutions) instead of [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) - it is rather important actually. 
 
 Future contributors should be able to read the test without having to jump around the code and do too much logic, therefore: 
 
