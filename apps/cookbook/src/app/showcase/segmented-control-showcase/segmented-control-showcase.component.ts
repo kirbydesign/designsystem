@@ -12,7 +12,7 @@ export class SegmentedControlShowcaseComponent {
       name: 'mode',
       description: 'The mode of the segmented control.',
       defaultValue: 'default',
-      type: ['default', 'chip'],
+      type: ['default', 'chip', 'compactChip'],
     },
     {
       name: 'size',

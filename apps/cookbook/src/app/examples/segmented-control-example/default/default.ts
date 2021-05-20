@@ -100,7 +100,7 @@ export class SegmentedControlExampleDefaultComponent implements OnInit {
   size: 'sm' | 'md' = 'md';
   selectedSegment: SegmentItem;
 
-  private defaultItems = [
+  private defaultItems: SegmentItem[] = [
     {
       text: 'First item',
       id: 'first',
@@ -112,10 +112,21 @@ export class SegmentedControlExampleDefaultComponent implements OnInit {
     },
     { text: 'Second item', id: 'second' },
   ];
+
   private chipItems = [...'123456'].map((i) => ({ text: `Chip-${i}`, id: i }));
 
+  // Showcase compact chips with less chararcters but more chips
+  private compactChipItems = [...'12345678'].map((i) => ({ text: `c${i}`, id: i }));
+
   get items(): SegmentItem[] {
-    return this.mode === 'default' ? this.defaultItems : this.chipItems;
+    switch (this.mode) {
+      case 'default':
+        return this.defaultItems;
+      case 'chip':
+        return this.chipItems;
+      case 'compactChip':
+        return this.compactChipItems;
+    }
   }
 
   ngOnInit() {
