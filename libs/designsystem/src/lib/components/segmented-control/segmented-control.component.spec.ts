@@ -7,7 +7,7 @@ import { BadgeComponent } from '../badge/badge.component';
 import { ChipComponent } from '../chip/chip.component';
 
 import { SegmentItem } from './segment-item';
-import { Mode, SegmentedControlComponent } from './segmented-control.component';
+import { SegmentedControlComponent, SegmentedControlMode } from './segmented-control.component';
 
 describe('SegmentedControlComponent', () => {
   let component: SegmentedControlComponent;
@@ -110,7 +110,7 @@ describe('SegmentedControlComponent', () => {
 
   describe("in 'chip mode'", () => {
     beforeEach(() => {
-      spectator.setInput('mode', Mode.chip);
+      spectator.setInput('mode', SegmentedControlMode.chip);
     });
 
     it("should have a 'chip' mode when created", () => {
@@ -145,12 +145,12 @@ describe('SegmentedControlComponent', () => {
 
   describe("in 'compact chip' mode", () => {
     beforeEach(() => {
-      spectator.setInput('mode', Mode.compactChip);
+      spectator.setInput('mode', SegmentedControlMode.compactChip);
       spectator.detectChanges();
     });
 
     it("should have a 'compact chip' mode when created", () => {
-      expect(component.mode).toBe(Mode.compactChip);
+      expect(component.mode).toBe(SegmentedControlMode.compactChip);
     });
 
     it('should not have an ion-segment control', () => {

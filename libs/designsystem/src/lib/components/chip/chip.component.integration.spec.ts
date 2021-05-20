@@ -5,7 +5,10 @@ import { TestHelper } from '../../testing/test-helper';
 import { BadgeComponent } from '../badge/badge.component';
 import { ChipComponent } from '../chip/chip.component';
 import { SegmentItem } from '../segmented-control/segment-item';
-import { Mode, SegmentedControlComponent } from '../segmented-control/segmented-control.component';
+import {
+  SegmentedControlComponent,
+  SegmentedControlMode,
+} from '../segmented-control/segmented-control.component';
 
 const getColor = DesignTokenHelper.getColor;
 
@@ -34,7 +37,7 @@ describe('ChipComponent in SegmentedControlComponent', () => {
         {
           hostProps: {
             items: items,
-            mode: Mode.compactChip,
+            mode: SegmentedControlMode.compactChip,
           },
         }
       );

@@ -2,7 +2,7 @@ import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/co
 
 import { SegmentItem } from './segment-item';
 
-export enum Mode {
+export enum SegmentedControlMode {
   chip = 'chip',
   compactChip = 'compactChip',
   default = 'default',
@@ -24,18 +24,18 @@ export class SegmentedControlComponent {
     }
   }
 
-  @Input() mode: Mode = Mode.default;
+  @Input() mode: SegmentedControlMode = SegmentedControlMode.default;
 
   public get isChipMode(): boolean {
-    return this.mode === Mode.chip;
+    return this.mode === SegmentedControlMode.chip;
   }
 
   @HostBinding('class')
   get _modeCssClass() {
     return {
-      [Mode.chip]: 'chip-mode',
-      [Mode.default]: 'default-mode',
-      [Mode.compactChip]: 'compact chip-mode',
+      [SegmentedControlMode.chip]: 'chip-mode',
+      [SegmentedControlMode.default]: 'default-mode',
+      [SegmentedControlMode.compactChip]: 'compact chip-mode',
     }[this.mode];
   }
 
