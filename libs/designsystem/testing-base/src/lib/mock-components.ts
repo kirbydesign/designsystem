@@ -47,6 +47,7 @@ import { MockRadioComponent } from './components/mock.radio.component';
 import { MockRangeComponent } from './components/mock.range.component';
 import { MockReorderListComponent } from './components/mock.reorder-list.component';
 import { MockRouterOutletComponent } from './components/mock.router-outlet.component';
+import { MockSegmentedControlComponent } from './components/mock.segmented-control.component';
 import { MockSlideButtonComponent } from './components/mock.slide-button.component';
 import { MockSpinnerComponent } from './components/mock.spinner.component';
 import { MockTabButtonComponent } from './components/mock.tab-button.component';
@@ -104,6 +105,7 @@ export const MOCK_COMPONENTS = [
   MockRangeComponent,
   MockReorderListComponent,
   MockRouterOutletComponent,
+  MockSegmentedControlComponent,
   MockSlideButtonComponent,
   MockSpinnerComponent,
   MockTabButtonComponent,
