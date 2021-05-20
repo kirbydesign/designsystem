@@ -39,7 +39,10 @@ export * from './page';
 export * from './router-outlet';
 
 export * from './shared';
-export { SegmentedControlComponent } from './segmented-control/segmented-control.component';
+export {
+  SegmentedControlComponent,
+  SegmentedControlMode,
+} from './segmented-control/segmented-control.component';
 export { SegmentItem } from './segmented-control/segment-item';
 export { SlideButtonComponent } from './slide-button/slide-button.component';
 export { SpinnerComponent } from './spinner/spinner.component';
