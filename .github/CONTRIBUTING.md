@@ -780,9 +780,9 @@ Remember that unit tests test a single unit - so if you find yourself relying on
 
 Being able to read a test as a sentence, makes it clear what has gone wrong when the test fails and makes it act as a functional requirement. 
 
-As an example, which one of these two tests best communicates intention while being easy to read and understand? 
+In the following two examples, note how example #2 clearly communicates intent while being easy to read and understand.
 
-Example #1: 
+Example #1 
 
 ![](images/bad-test-example.png)
 
@@ -790,16 +790,14 @@ Example #2:
 
 ![](images/good-test-example.png)
 
-Probably #2. 
-
-The first can make sense when you have seen #2, but without you will have to interpret what is actually meant by "ButtonComponent + Kirby page Page Actions background-color: #fff".
+Example #1 can make sense when you have seen #2, but without you will have to interpret what is meant by "ButtonComponent + Kirby page Page Actions background-color: #fff".
 What is it exactly that should have the white backgound color here? 
 
 To achieve this, you can follow these pointers:
 
 ##### Use the [Given-When-Then](https://www.agilealliance.org/glossary/gwt/#q=~(infinite~false~filters~(postType~(~'page~'post~'aa_book~'aa_event_session~'aa_experience_report~'aa_glossary~'aa_research_paper~'aa_video)~tags~(~'given*20when*20then))~searchTerm~'~sort~false~sortDirection~'asc~page~1)) formula
 
-For example have a look at example #1: 
+For example have a look at example #2: 
 
 * (Given) ButtonComponent in Kirby Page 
 * (When) inside Page Actions 
