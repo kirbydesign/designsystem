@@ -774,7 +774,7 @@ In Kirby we seperate integration tests from unit tests - so make sure to know wh
 
 Unit tests are located in `*.spec.ts` files such as [ `button.component.spec.ts` ](https://github.com/kirbydesign/designsystem/blob/master/libs/designsystem/src/lib/components/button/button.component.spec.ts) and integration tests in `*.spec.integration.ts` files such as [ `button.component.integration.spec.ts` ](https://github.com/kirbydesign/designsystem/blob/master/libs/designsystem/src/lib/components/button/button.component.integration.spec.ts).
 
-Remember that unit tests, tests a single unit - so if you find yourself relying on other components or functions without them being mocked or stubbed, then you are most likely writing an integration test. 
+Remember that unit tests test a single unit - so if you find yourself relying on other components or functions without them being mocked or stubbed, then you are most likely writing an integration test. 
 
 #### The good test can be read as a sentence 
 
