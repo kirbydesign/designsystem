@@ -872,7 +872,7 @@ Future contributors should be able to read the test without having to jump aroun
 * Avoid the use of shared variables between tests, all state should be isolated to the test 
 * Use `beforeEach` instead of `beforeAll`; it will cause potential changes made by previous tests to be overwritten, and you start with the same state each time
 
-Not following the above points, makes it more likely that there is something wrong with the actual test and not the code being tested when they fail. Changing a shared function can cause several tests to fail/change unexpectedly. If it happens too often that the test is the problem, not the code; it can cause mistrust in these.
+Following the above points makes it more likely that tests fail due to actual code changes and not how the tests are written. Changing a shared function can cause several tests to fail/change unexpectedly. If it happens too often that the test is the problem, not the code; it can cause mistrust in these.
 
 Therefore be WET - it will lower the chance of the tests being the problem and give a better overview of what is going on when reading the test. 
 
