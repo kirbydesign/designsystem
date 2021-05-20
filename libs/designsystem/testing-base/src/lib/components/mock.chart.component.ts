@@ -15,7 +15,7 @@ import { ChartComponent, ChartType } from '@kirbydesign/designsystem';
   ],
 })
 export class MockChartComponent {
-  @Input() data: any[];
+  @Input() data: [];
   @Input() categories: string[];
   @Input() breaks: Array<XAxisBreaksOptions>;
   @Input() height: number;
