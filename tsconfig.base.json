@@ -12,9 +12,6 @@
     "typeRoots": ["node_modules/@types"],
     "lib": ["es2017", "dom", "es6", "es2015.iterable"],
     "baseUrl": ".",
-    "resolveJsonModule": true,
-    "noImplicitAny": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true
+    "resolveJsonModule": true
   }
 }

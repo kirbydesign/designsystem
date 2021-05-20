@@ -1,6 +1,9 @@
 import { ElementRef, Injectable } from '@angular/core';
 import { chart, Options } from 'highcharts';
 import * as Highcharts from 'highcharts';
+import * as accessibility from 'highcharts/modules/accessibility';
+import * as exportData from 'highcharts/modules/export-data';
+import * as exporting from 'highcharts/modules/exporting';
 
 // Docs on importing accessibility: https://www.highcharts.com/docs/chart-concepts/accessibility
 

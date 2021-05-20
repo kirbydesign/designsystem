@@ -332,7 +332,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   private getCssClasses(day: CalendarDay, isSelectable: boolean, isSelected: boolean) {
-    const cssClasses: { [key: string]: boolean } = {
+    const cssClasses = {
       'current-month': day.isCurrentMonth,
       weekend: day.isWeekend,
       today: day.isToday,

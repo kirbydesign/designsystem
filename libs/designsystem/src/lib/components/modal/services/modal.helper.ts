@@ -39,7 +39,7 @@ export class ModalHelper {
     const modalSize = config.size || defaultModalSize;
     const allow_scroll_class = 'allow-background-scroll';
 
-    let customCssClasses: string[] = [];
+    let customCssClasses = [];
     if (config.cssClass) {
       customCssClasses = Array.isArray(config.cssClass) ? config.cssClass : [config.cssClass];
     }

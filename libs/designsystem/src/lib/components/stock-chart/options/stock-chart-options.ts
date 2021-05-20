@@ -1,4 +1,5 @@
 import { formatNumber } from '@angular/common';
+
 import { Options } from 'highcharts';
 import { dateFormat } from 'highcharts/highstock';
 
@@ -128,7 +129,7 @@ export const annotations = (locale: string): Highcharts.AnnotationsOptions => {
   };
 };
 
-const defaultOptions = (locale: string): any => {
+const defaultOptions = (locale: string) => {
   return {
     chart: {
       zoomType: 'x',

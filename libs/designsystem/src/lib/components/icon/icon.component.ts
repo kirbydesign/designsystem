@@ -75,7 +75,7 @@ export class IconComponent implements OnChanges {
     }
   }
 
-  private findIcon(icons: any, name: string): Icon {
-    return icons.find((icon: any) => icon.name === name);
+  private findIcon(icons, name: string): Icon {
+    return icons.find((icon) => icon.name === name);
   }
 }

@@ -1,4 +1,4 @@
-import { AfterViewInit, EventEmitter } from '@angular/core';
+import { AfterViewInit, EventEmitter, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -9,7 +9,7 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
-import { IonSlides } from '@ionic/angular';
+import { IonSlide, IonSlides } from '@ionic/angular';
 
 @Directive({
   selector: '[kirbySlide]',
@@ -19,7 +19,7 @@ export class SlideDirective {}
 @Component({
   selector: 'kirby-slides',
   template: `
-    <ion-slides [options]="slidesOptions" #ionslides (ionSlideDidChange)="onSlideChanged()">
+    <ion-slides [options]="slidesOptions" #ionslides (ionSlideDidChange)="onSlideChanged($event)">
       <ion-slide *ngFor="let slide of slides; let i = index">
         <ng-container
           *ngTemplateOutlet="slideTemplate; context: { $implicit: slide, index: i }"
@@ -42,7 +42,7 @@ export class SlidesComponent implements AfterViewInit {
     this.slideTo(0);
   }
 
-  onSlideChanged() {
+  onSlideChanged(e: any) {
     this.ionSlides.getActiveIndex().then((selectedIndex) => {
       this.selectedSlide.emit({
         slide: this.slides[selectedIndex],

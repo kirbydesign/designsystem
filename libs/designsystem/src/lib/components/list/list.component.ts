@@ -181,7 +181,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   onItemSelect(args: any) {
-    this.selectedItem = this.listHelper.getSelectedItem(args);
+    this.selectedItem = this.listHelper.getSelectedItem(this.items, args);
     this.itemSelect.emit(this.selectedItem);
   }
 
