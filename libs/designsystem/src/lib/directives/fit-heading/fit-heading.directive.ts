@@ -2,7 +2,6 @@ import { Directive, ElementRef, Input, OnDestroy, OnInit, Renderer2 } from '@ang
 
 import { ResizeObserverService } from '../../components/shared/resize-observer/resize-observer.service';
 import { ResizeObserverEntry } from '../../components/shared/resize-observer/types/resize-observer-entry';
-
 import { DesignTokenHelper } from '../../helpers/design-token-helper';
 import { WindowRef } from '../../types/window-ref';
 
@@ -117,6 +116,7 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
     const fittedSize = this.headingSizes.find(this.canFitHeading.bind(this)) || fallbackSize;
 
     this.setSize(this.elementRef.nativeElement, fittedSize);
+    this.setLineClamp(this.elementRef.nativeElement, this.config.maxLines, fittedSize.lineHeight);
     this.isScalingHeader = false;
   }
 
@@ -136,5 +136,13 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
   private setSize(el: Element, size: HeadingSize): void {
     this.renderer.setStyle(el, 'font-size', size.fontSize);
     this.renderer.setStyle(el, 'line-height', size.lineHeight);
+  }
+
+  private setLineClamp(el: HTMLElement, maxLines: number, lineHeight: string): void {
+    // Does Renderer2 not support custom properties?
+    // this.renderer.setStyle(el, '--line-clamp', maxLines);
+    el.style.setProperty('--line-clamp', `${maxLines}`);
+    el.style.setProperty('--line-height', lineHeight);
+    this.renderer.addClass(el, 'line-clamp');
   }
 }
