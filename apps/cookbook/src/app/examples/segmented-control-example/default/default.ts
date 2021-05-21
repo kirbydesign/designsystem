@@ -48,7 +48,7 @@ const config = {
         [checked]="mode === 'compactChip'"
         (change)="setMode($event.target.value)"
       />
-        Compact Chip
+      Compact Chip
     </label>
   </p>
   <p [class.disabled]="mode !== 'default'">
