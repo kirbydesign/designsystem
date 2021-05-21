@@ -1001,7 +1001,7 @@ There might be files where `IonicModule` is used directly instead of `TestHelper
 
 #### The good test combines tests when appropiate
 
-In Kirby there is defined a [ `toHaveComputedStyle` ](https://github.com/kirbydesign/designsystem/blob/master/libs/designsystem/src/lib/testing/element-css-custom-matchers.d.ts) custom matcher that checks the value of CSS properties an element is rendered with, like so: 
+In Kirby there is a [ `toHaveComputedStyle` ](https://github.com/kirbydesign/designsystem/blob/master/libs/designsystem/src/lib/testing/element-css-custom-matchers.d.ts) custom matcher defined that checks the value of CSS properties an element is rendered with, like so: 
 
 ``` 
 
