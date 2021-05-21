@@ -28,7 +28,7 @@ describe('ChipComponent in SegmentedControlComponent', () => {
   });
 
   describe("when mode is 'compactChip'", () => {
-    let chip: Element;
+    let chip: HTMLElement;
 
     beforeEach(() => {
       spectator = createHost(
@@ -41,7 +41,7 @@ describe('ChipComponent in SegmentedControlComponent', () => {
           },
         }
       );
-      chip = spectator.queryHostAll('kirby-chip')[0];
+      chip = spectator.queryHost('kirby-chip');
     });
 
     it('should render with correct inline margin', () => {
