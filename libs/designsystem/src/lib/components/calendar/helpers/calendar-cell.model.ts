@@ -1,5 +1,5 @@
 export interface CalendarCell {
-  date: number;
+  date: Date;
   isCurrentMonth: boolean;
   isSelectable: boolean;
   isSelected: boolean;
