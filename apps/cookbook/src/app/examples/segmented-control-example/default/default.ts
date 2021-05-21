@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { SegmentItem } from '@kirbydesign/designsystem';
+import { SegmentedControlMode, SegmentItem } from '@kirbydesign/designsystem';
 
 const config = {
   template: `<kirby-segmented-control
@@ -96,7 +96,7 @@ export class SegmentedControlExampleDefaultComponent implements OnInit {
   }
   codeSnippet = config.codeSnippet;
 
-  mode: 'default' | 'chip' | 'compactChip' = 'default';
+  mode: SegmentedControlMode = SegmentedControlMode.default;
   size: 'sm' | 'md' = 'md';
   selectedSegment: SegmentItem;
 
@@ -120,11 +120,11 @@ export class SegmentedControlExampleDefaultComponent implements OnInit {
 
   get items(): SegmentItem[] {
     switch (this.mode) {
-      case 'default':
+      case SegmentedControlMode.default:
         return this.defaultItems;
-      case 'chip':
+      case SegmentedControlMode.chip:
         return this.chipItems;
-      case 'compactChip':
+      case SegmentedControlMode.compactChip:
         return this.compactChipItems;
     }
   }
@@ -138,7 +138,7 @@ export class SegmentedControlExampleDefaultComponent implements OnInit {
     this.selectedSegment = segment;
   }
 
-  setMode(mode: 'default' | 'chip') {
+  setMode(mode: SegmentedControlMode) {
     this.mode = mode;
     this.selectedSegment = this.items[0];
   }
