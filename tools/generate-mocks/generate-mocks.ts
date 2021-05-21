@@ -294,13 +294,17 @@ export class ${mockClassName} {${propertiesString}${methodsString}}
   private getImports(components: ComponentMetaData[]): string[] {
     const importStatements = [];
     const angularCoreImports: string[] = [];
-    if (components.some((metaData) => ['Component', 'Directive'].includes(metaData.decorator))) {
+    const hasDecoratedType = (type: string) =>
+      components.some((metaData) => metaData.decorator === type);
+    const hasComponent = hasDecoratedType('Component');
+    const hasDirective = hasDecoratedType('Directive');
+    if (hasComponent || hasDirective) {
       angularCoreImports.push('forwardRef');
     }
-    if (components.some((metaData) => metaData.decorator === 'Component')) {
+    if (hasComponent) {
       angularCoreImports.push('Component');
     }
-    if (components.some((metaData) => metaData.decorator === 'Directive')) {
+    if (hasDirective) {
       angularCoreImports.push('Directive');
     }
     const hasInputOutput = (metaData: ComponentMetaData, direction: string) =>
