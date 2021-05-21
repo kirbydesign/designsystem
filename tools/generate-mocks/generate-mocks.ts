@@ -309,8 +309,8 @@ export class ${mockClassName} {${propertiesString}${methodsString}}
     }
     const hasInputOutput = (metaData: ComponentMetaData, direction: string) =>
       metaData.properties.some((prop) => prop.direction === direction);
-    const hasInput = (metaData) => hasInputOutput(metaData, 'Input');
-    const hasOutput = (metaData) => hasInputOutput(metaData, 'Output');
+    const hasInput = (metaData: ComponentMetaData) => hasInputOutput(metaData, 'Input');
+    const hasOutput = (metaData: ComponentMetaData) => hasInputOutput(metaData, 'Output');
     if (components.some(hasInput)) {
       angularCoreImports.push('Input');
     }
