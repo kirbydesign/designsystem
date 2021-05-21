@@ -167,14 +167,18 @@ describe('SegmentedControlComponent', () => {
 
     it('should call onSegmentSelect when clicking a different segment chip', () => {
       expect(component.value).toBe(items[1]);
+
       spyOn(component, 'onSegmentSelect');
       spectator.dispatchMouseEvent('kirby-chip:first-of-type', 'click');
+
       expect(component.onSegmentSelect).toHaveBeenCalled();
     });
 
     it('should set value when clicking a different segment chip', () => {
       expect(component.value).toBe(items[1]);
+
       spectator.dispatchMouseEvent('kirby-chip:last-of-type', 'click');
+
       expect(component.value).toBe(items[2]);
     });
   });
