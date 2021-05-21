@@ -108,9 +108,9 @@ describe('SegmentedControlComponent', () => {
     });
   });
 
-  const testMode = [SegmentedControlMode.chip, SegmentedControlMode.compactChip];
+  const testModes = [SegmentedControlMode.chip, SegmentedControlMode.compactChip];
 
-  testMode.forEach((testMode) => {
+  testModes.forEach((testMode) => {
     describe(`in '${testMode}' mode`, () => {
       beforeEach(() => {
         spectator.setInput('mode', testMode);
