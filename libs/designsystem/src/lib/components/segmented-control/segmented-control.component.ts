@@ -26,10 +26,6 @@ export class SegmentedControlComponent {
 
   @Input() mode: SegmentedControlMode = SegmentedControlMode.default;
 
-  public get isChipMode(): boolean {
-    return this.mode === SegmentedControlMode.chip;
-  }
-
   @HostBinding('class')
   get _modeCssClass() {
     return {

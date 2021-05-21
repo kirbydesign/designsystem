@@ -66,7 +66,7 @@ describe('SegmentedControlComponent', () => {
 
   describe("in 'default' mode", () => {
     it("should have a 'default' mode when created", () => {
-      expect(component.isChipMode).toBeFalsy();
+      expect(component.mode).toBe(SegmentedControlMode.default);
     });
 
     it('should have a segment button per item', () => {
