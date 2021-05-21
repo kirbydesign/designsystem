@@ -218,11 +218,10 @@ ${providers},
 
   private renderMock(fileName: string, newFilename: string, exportedTypes: string[]) {
     const components = this.generateMetaData(fileName);
-    if (
-      !components.some(
-        (metaData) => !!metaData.decorator && exportedTypes.includes(metaData.className)
-      )
-    ) {
+    const hasExportedComponents = components.some(
+      (metaData) => !!metaData.decorator && exportedTypes.includes(metaData.className)
+    );
+    if (!hasExportedComponents) {
       // Nothing to generate:
       return;
     }
