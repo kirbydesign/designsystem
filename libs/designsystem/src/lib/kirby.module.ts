@@ -1,4 +1,3 @@
-import { OverlayModule } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import { Inject, InjectionToken, ModuleWithProviders, NgModule, Optional } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -47,9 +46,8 @@ import {
   ListSectionHeaderDirective,
 } from './components/list/list.directive';
 import { GroupByPipe } from './components/list/pipes/group-by.pipe';
-import { FullscreenLoadingOverlayComponent } from './components/loading-overlay/fullscreen-loading-overlay/fullscreen-loading-overlay.component';
-import { LoadingOverlayService } from './components/loading-overlay/fullscreen-loading-overlay/loading-overlay.service';
 import { LoadingOverlayComponent } from './components/loading-overlay/loading-overlay.component';
+import { LoadingOverlayService } from './components/loading-overlay/loading-overlay.service';
 import { ActionSheetComponent } from './components/modal/action-sheet/action-sheet.component';
 import { AlertComponent } from './components/modal/alert/alert.component';
 import { ModalFooterComponent } from './components/modal/footer/modal-footer.component';
@@ -80,7 +78,6 @@ import { ToastController } from './components/toast/services/toast.controller';
 import { ToastHelper } from './components/toast/services/toast.helper';
 import { ToggleButtonModule } from './components/toggle-button/toggle-button.module';
 import { ToggleComponent } from './components/toggle/toggle.component';
-import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
 import { ModalRouterLinkDirective } from './directives/modal-router-link/modal-router-link.directive';
 import { ThemeColorDirective } from './directives/theme-color/theme-color.directive';
@@ -121,7 +118,6 @@ const exportedDeclarations = [
   SlideButtonComponent,
   ToggleComponent,
   EmptyStateComponent,
-  ToolbarComponent,
   FormFieldComponent,
   InputComponent,
   InputCounterComponent,
@@ -146,7 +142,6 @@ const exportedDeclarations = [
 const declarations = [
   ...exportedDeclarations,
   ListItemColorDirective,
-  FullscreenLoadingOverlayComponent,
   KeyHandlerDirective,
   FormFieldMessageComponent,
   AlertComponent,
@@ -167,7 +162,7 @@ const exportedModules = [
 
 const exports = [...exportedModules, ...exportedDeclarations];
 
-const importedModules = [...exportedModules, OverlayModule];
+const importedModules = [...exportedModules];
 
 const providers = [
   ModalController,
@@ -190,7 +185,6 @@ const entryComponents = [
   ModalWrapperComponent,
   ModalCompactWrapperComponent,
   ActionSheetComponent,
-  FullscreenLoadingOverlayComponent,
   AlertComponent,
 ];
 

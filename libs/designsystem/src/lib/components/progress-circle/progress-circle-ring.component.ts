@@ -1,6 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy, HostBinding } from '@angular/core';
-
-import { ThemeColor } from '../../helpers/theme-color.type';
+import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
 
 @Component({
   selector: 'kirby-progress-circle-ring',
@@ -12,24 +10,33 @@ export class ProgressCircleRingComponent {
   @Input() radius: number; // The desired outer radius of the SVG circle
   @Input() value: number = 0;
   @Input() themeColor: 'success' | 'warning' | 'danger' = 'success';
+  @Input() strokeWidth: number;
+  @Input() upperBound: number;
 
-  readonly strokeWidth = 4;
-
-  get offset(): number {
-    return this.centerCircumference - this.centerCircumference * (this.value / 100);
+  get _offset(): number {
+    const valueWithinBounds = this.value < this.upperBound || this.value > 99;
+    if (valueWithinBounds) {
+      return this.calculateOffset(this.value);
+    } else {
+      return this.calculateOffset(this.upperBound);
+    }
   }
 
   @HostBinding('style.width.px')
   @HostBinding('style.height.px')
-  get diameter(): number {
+  get _diameter(): number {
     return this.radius * 2;
   }
 
-  get centerRadius(): number {
+  get _centerRadius(): number {
     return this.radius - this.strokeWidth / 2;
   }
 
-  get centerCircumference(): number {
-    return this.centerRadius * 2 * Math.PI;
+  get _centerCircumference(): number {
+    return this._centerRadius * 2 * Math.PI;
+  }
+
+  private calculateOffset(value: number): number {
+    return this._centerCircumference - this._centerCircumference * (value / 100);
   }
 }

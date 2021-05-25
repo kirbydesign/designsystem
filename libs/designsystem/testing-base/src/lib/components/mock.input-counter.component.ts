@@ -1,8 +1,8 @@
-import { forwardRef, Component, Input } from '@angular/core';
+import { Component, forwardRef, Input } from '@angular/core';
 
 import {
-  InputCounterComponent,
   InputComponent,
+  InputCounterComponent,
   TextareaComponent,
 } from '@kirbydesign/designsystem';
 

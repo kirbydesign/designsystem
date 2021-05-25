@@ -1,12 +1,12 @@
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
-import { Subject, EMPTY } from 'rxjs';
+import { EMPTY, Subject } from 'rxjs';
 
-import { Overlay, OverlayEventDetail } from './modal.interfaces';
-import { ModalController } from './modal.controller';
-import { ModalHelper } from './modal.helper';
 import { ActionSheetHelper } from './action-sheet.helper';
 import { AlertHelper } from './alert.helper';
 import { ModalNavigationService } from './modal-navigation.service';
+import { ModalController } from './modal.controller';
+import { ModalHelper } from './modal.helper';
+import { Overlay, OverlayEventDetail } from './modal.interfaces';
 
 describe('ModalController', () => {
   let spectator: SpectatorService<ModalController>;
@@ -45,7 +45,7 @@ describe('ModalController', () => {
 
   describe('initialize', () => {
     it('should subscribe to modal route navigation', async () => {
-      await new Promise((resolve) => setTimeout(resolve, 1));
+      await new Promise<void>((resolve) => setTimeout(resolve, 1));
       await modalController.initialize();
 
       expect(modalNavigationServiceSpy.getModalNavigation).toHaveBeenCalledTimes(1);

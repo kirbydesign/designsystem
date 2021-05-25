@@ -1,10 +1,11 @@
 import { Component, ElementRef, forwardRef } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { IonApp } from '@ionic/angular';
 
-import { AppComponent } from './app.component';
 import { ModalController } from '../modal';
+
+import { AppComponent } from './app.component';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -27,17 +28,19 @@ describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
 
-  beforeEach(async(() => {
-    const modalControllerSpy = jasmine.createSpyObj('ModalController', [
-      'registerPresentingElement',
-    ]);
+  beforeEach(
+    waitForAsync(() => {
+      const modalControllerSpy = jasmine.createSpyObj('ModalController', [
+        'registerPresentingElement',
+      ]);
 
-    TestBed.configureTestingModule({
-      imports: [NoopAnimationsModule],
-      declarations: [AppComponent, IonAppMockComponent],
-      providers: [{ provide: ModalController, useValue: modalControllerSpy }],
-    }).compileComponents();
-  }));
+      TestBed.configureTestingModule({
+        imports: [NoopAnimationsModule],
+        declarations: [AppComponent, IonAppMockComponent],
+        providers: [{ provide: ModalController, useValue: modalControllerSpy }],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AppComponent);

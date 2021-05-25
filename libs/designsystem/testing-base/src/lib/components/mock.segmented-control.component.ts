@@ -1,4 +1,4 @@
-import { forwardRef, Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 
 import { SegmentedControlComponent, SegmentItem } from '@kirbydesign/designsystem';
 

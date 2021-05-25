@@ -47,7 +47,6 @@ export { SpinnerComponent } from './spinner/spinner.component';
 export * from './tabs';
 export * from './toast';
 export { ToggleComponent } from './toggle/toggle.component';
-export { ToolbarComponent } from './toolbar/toolbar.component';
 
 export { ProgressCircleComponent } from './progress-circle/progress-circle.component';
 export { FlagComponent } from './flag/flag.component';

@@ -1,9 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Options, PlotSeriesDataLabelsOptions, XAxisOptions } from 'highcharts';
 
-import { ChartComponent } from './chart.component';
 import { ChartType } from './chart-type';
+import { ChartComponent } from './chart.component';
 
 describe('ChartComponent', () => {
   let component: ChartComponent;
@@ -11,11 +10,13 @@ describe('ChartComponent', () => {
 
   const expectedDefaultHeight = 300;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ChartComponent],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [ChartComponent],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ChartComponent);
