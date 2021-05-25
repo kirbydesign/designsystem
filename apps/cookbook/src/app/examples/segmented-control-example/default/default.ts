@@ -97,7 +97,12 @@ export class SegmentedControlExampleDefaultComponent implements OnInit {
   codeSnippet = config.codeSnippet;
 
   mode: SegmentedControlMode = SegmentedControlMode.default;
-  size: 'sm' | 'md' = 'md';
+
+  private _size: 'sm' | 'md' = 'md';
+  get size(): 'sm' | 'md' {
+    return this.mode === SegmentedControlMode.default ? this._size : 'sm';
+  }
+
   selectedSegment: SegmentItem;
 
   private defaultItems: SegmentItem[] = [
@@ -144,6 +149,6 @@ export class SegmentedControlExampleDefaultComponent implements OnInit {
   }
 
   setSize(size: 'sm' | 'md') {
-    this.size = size;
+    this._size = size;
   }
 }
