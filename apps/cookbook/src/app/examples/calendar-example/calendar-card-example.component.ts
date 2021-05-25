@@ -1,7 +1,10 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { addDays, startOfDay, subDays } from 'date-fns';
 
-import { getUtcDate } from '@kirbydesign/designsystem/helpers/date-helper';
+import {
+  convertUTCDateToLocalDate,
+  getUtcDate,
+} from '@kirbydesign/designsystem/helpers/date-helper';
 
 @Component({
   selector: 'cookbook-calendar-card-example',
@@ -42,7 +45,7 @@ export class CalendarCardExampleComponent implements OnChanges {
           this.selectedDate = getUtcDate(this.selectedDate);
         } else {
           // realign UTC -> local
-          // this.selectedDate =   moment(moment.utc(this.selectedDate).format('YYYY-MM-DD')).toDate();
+          this.selectedDate = convertUTCDateToLocalDate(this.selectedDate);
         }
       }
     }

@@ -93,7 +93,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   public month: CalendarCell[][];
   public weekDays: string[];
   private selectedDay: CalendarCell;
-  // NOTE: Internally, all objects wrapping timestamps (i.e. Date and moment.Moment)
+  // NOTE: Internally, all Dates
   // are normalized to point to local timezone midnight, regardless of the timezone
   // setting.
   private activeMonth: Date;
@@ -131,8 +131,6 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   @Input() set todayDate(value: Date) {
-    console.log('set today', value);
-
     this._todayDate = this.normalizeDate(value);
   }
 
