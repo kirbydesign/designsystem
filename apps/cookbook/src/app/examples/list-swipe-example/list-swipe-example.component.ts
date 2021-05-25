@@ -2,10 +2,7 @@ import { Component } from '@angular/core';
 
 import { ListSwipeAction } from '@kirbydesign/designsystem';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
-import {
-  ActionType,
-  SwipeDirection,
-} from '@kirbydesign/designsystem/components/list/list-swipe-action';
+import { ActionType } from '@kirbydesign/designsystem/components/list/list-swipe-action';
 
 @Component({
   selector: 'cookbook-list-swipe-example',
@@ -86,14 +83,14 @@ export class ListSwipeExampleComponent {
 
   swipeActions: ListSwipeAction[] = [
     {
-      position: SwipeDirection.left,
+      position: 'left',
       title: 'Archive',
       type: ActionType.warning,
       onSelected: (item) => this.onArchiveItem(item),
       isDisabled: (item) => item.archived || item.id === 3,
     },
     {
-      position: SwipeDirection.left,
+      position: 'left',
       title: (item) => (item.flagged ? 'Remove flag' : 'Flag'),
       icon: (item) => (item.flagged ? null : 'flag'),
       type: ActionType.success,
@@ -101,7 +98,7 @@ export class ListSwipeExampleComponent {
       isDisabled: (item) => item.id === 3,
     },
     {
-      position: SwipeDirection.right,
+      position: 'right',
       title: (item) => (item.deleted ? 'Restore' : 'Delete'),
       icon: (item) => (item.deleted ? 'swap' : 'trash'),
       type: (item) => (item.deleted ? ActionType.warning : ActionType.danger),

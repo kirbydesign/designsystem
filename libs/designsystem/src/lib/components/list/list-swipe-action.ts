@@ -6,10 +6,7 @@ export enum ActionType {
   danger = 'danger',
 }
 
-export enum SwipeDirection {
-  right = 'right',
-  left = 'left',
-}
+export type SwipeDirection = 'right' | 'left';
 
 export enum SwipeEnd {
   start = 'start',

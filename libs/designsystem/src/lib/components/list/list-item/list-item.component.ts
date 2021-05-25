@@ -100,10 +100,7 @@ export class ListItemComponent implements OnInit, AfterViewInit {
       if (swipeAction.isDisabled === true) {
         return false;
       }
-      return (
-        swipeAction.position === SwipeDirection.left ||
-        swipeAction.position === SwipeDirection.right
-      );
+      return swipeAction.position === 'left' || swipeAction.position === 'right';
     });
   }
 
@@ -123,10 +120,10 @@ export class ListItemComponent implements OnInit, AfterViewInit {
   }
 
   getSwipeActionEnd(item: ListItem): SwipeEnd {
-    if (this.getSwipeActions(item, SwipeDirection.left).length) {
+    if (this.getSwipeActions(item, 'left').length) {
       return SwipeEnd.start;
     }
-    if (this.getSwipeActions(item, SwipeDirection.right).length) {
+    if (this.getSwipeActions(item, 'right').length) {
       return SwipeEnd.end;
     }
   }
