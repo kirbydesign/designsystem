@@ -15,7 +15,7 @@ export class IconRegistryService {
     }
   }
 
-  addIcon(iconName: string, svgPath: string): void {
+  public addIcon(iconName: string, svgPath: string): void {
     if (!this.iconRegistry.has(iconName)) {
       this.iconRegistry.set(iconName, svgPath);
     } else {
@@ -23,7 +23,7 @@ export class IconRegistryService {
     }
   }
 
-  addIcons(icons: Icon[]): void {
+  public addIcons(icons: Icon[]): void {
     if (!icons) {
       console.error('Icons not defined');
       return;
@@ -39,7 +39,7 @@ export class IconRegistryService {
     );
   }
 
-  public getIcon(name: string): Icon {
+  getIcon(name: string): Icon {
     const svg = this.iconRegistry.get(name);
     return svg ? { name, svg } : undefined;
   }
