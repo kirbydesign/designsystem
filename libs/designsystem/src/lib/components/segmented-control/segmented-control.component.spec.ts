@@ -7,7 +7,7 @@ import { BadgeComponent } from '../badge/badge.component';
 import { ChipComponent } from '../chip/chip.component';
 
 import { SegmentItem } from './segment-item';
-import { SegmentedControlComponent } from './segmented-control.component';
+import { SegmentedControlComponent, SegmentedControlMode } from './segmented-control.component';
 
 describe('SegmentedControlComponent', () => {
   let component: SegmentedControlComponent;
@@ -64,9 +64,9 @@ describe('SegmentedControlComponent', () => {
     expect(component.value).toBe(items[1]);
   });
 
-  describe('default mode', () => {
+  describe("in 'default' mode", () => {
     it("should have a 'default' mode when created", () => {
-      expect(component.isChipMode).toBeFalsy();
+      expect(component.mode).toBe(SegmentedControlMode.default);
     });
 
     it('should have a segment button per item', () => {
@@ -108,38 +108,46 @@ describe('SegmentedControlComponent', () => {
     });
   });
 
-  describe('chip mode', () => {
-    beforeEach(() => {
-      spectator.setInput('mode', 'chip');
-    });
+  const testModes = [SegmentedControlMode.chip, SegmentedControlMode.compactChip];
 
-    it("should have a 'chip' mode when created", () => {
-      expect(component.isChipMode).toBeTruthy();
-    });
+  testModes.forEach((testMode) => {
+    describe(`in '${testMode}' mode`, () => {
+      beforeEach(() => {
+        spectator.setInput('mode', testMode);
+      });
 
-    it('should not have an ion-segment control', () => {
-      expect(spectator.queryHost('ion-segment')).toBeNull();
-    });
+      it(`should have a '${testMode}' mode when created`, () => {
+        expect(component.mode).toBe(testMode);
+      });
 
-    it('should not have any segments buttons', () => {
-      expect(spectator.queryHostAll('ion-segment-button').length).toBe(0);
-    });
+      it('should not have an ion-segment control', () => {
+        expect(spectator.queryHost('ion-segment')).toBeNull();
+      });
 
-    it('should have a segment chip per item', () => {
-      expect(spectator.queryHostAll('kirby-chip').length).toBe(items.length);
-    });
+      it('should not have any segments buttons', () => {
+        expect(spectator.queryHostAll('ion-segment-button').length).toBe(0);
+      });
 
-    it('should call onSegmentSelect when clicking a different segment chip', () => {
-      expect(component.value).toBe(items[1]);
-      spyOn(component, 'onSegmentSelect');
-      spectator.dispatchMouseEvent('kirby-chip:first-of-type', 'click');
-      expect(component.onSegmentSelect).toHaveBeenCalled();
-    });
+      it('should have a segment chip per item', () => {
+        expect(spectator.queryHostAll('kirby-chip').length).toBe(items.length);
+      });
 
-    it('should set value when clicking a different segment chip', () => {
-      expect(component.value).toBe(items[1]);
-      spectator.dispatchMouseEvent('kirby-chip:last-of-type', 'click');
-      expect(component.value).toBe(items[2]);
+      it('should call onSegmentSelect when clicking a different segment chip', () => {
+        expect(component.value).toBe(items[1]);
+
+        spyOn(component, 'onSegmentSelect');
+        spectator.dispatchMouseEvent('kirby-chip:first-of-type', 'click');
+
+        expect(component.onSegmentSelect).toHaveBeenCalled();
+      });
+
+      it('should set value when clicking a different segment chip', () => {
+        expect(component.value).toBe(items[1]);
+
+        spectator.dispatchMouseEvent('kirby-chip:last-of-type', 'click');
+
+        expect(component.value).toBe(items[2]);
+      });
     });
   });
 });
