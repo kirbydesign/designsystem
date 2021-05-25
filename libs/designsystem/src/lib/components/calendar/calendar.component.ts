@@ -101,17 +101,16 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   private _todayDate: Date;
   private _minDate: Date;
   private _maxDate: Date;
+  private locale: string;
 
   get selectedDate(): Date {
     return this._selectedDate;
   }
 
   @Input() set selectedDate(valueLocalOrUTC: Date) {
-    console.log('selected', valueLocalOrUTC);
-
     const value = this.normalizeDate(valueLocalOrUTC);
-    console.log('value', value);
     this.setActiveMonth(value);
+
     if (this.hasDateChanged(value, this._selectedDate)) {
       this.onSelectedDateChange(value);
       this._selectedDate = value;
@@ -186,18 +185,21 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
     return !!this.yearNavigatorOptions;
   }
 
-  constructor(private calendarHelper: CalendarHelper, @Inject(LOCALE_ID) private locale: string) {}
+  constructor(private calendarHelper: CalendarHelper, @Inject(LOCALE_ID) locale: string) {
+    this.locale = this.mapLocale(locale);
+  }
 
   private formatWithLocale(date: Date, formatStr = 'PP'): string {
     return format(date, formatStr, {
-      // TODO: Make sure locale format fits date-fns keys
       locale: locales[this.locale],
     });
   }
 
-  ngOnInit() {
-    console.log('init', this.selectedDate);
+  private mapLocale(locString: string): string {
+    return locString.replace('-', '');
+  }
 
+  ngOnInit() {
     this.weekDays = this.getWeekDays();
     this.setActiveMonth(this.selectedDate);
   }
@@ -229,8 +231,6 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   private setActiveMonth(date: Date = new Date()) {
-    console.log('setActive', date);
-
     if (!this.activeMonth || !isSameMonth(this.activeMonth, date)) {
       this.activeMonth = startOfMonth(date);
       this.refreshActiveMonth();
@@ -281,7 +281,10 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   private getWeekDays(): string[] {
     const now = new Date();
 
-    const weekInterval = eachDayOfInterval({ start: startOfWeek(now), end: endOfWeek(now) });
+    const weekInterval = eachDayOfInterval({
+      start: startOfWeek(now, { locale: locales[this.locale] }),
+      end: endOfWeek(now, { locale: locales[this.locale] }),
+    });
 
     return weekInterval.reduce((dayArr, date) => {
       dayArr.push(this.formatWithLocale(date, 'EEEEE')); // EEEEE returns first letter of weekday capitalized
@@ -307,18 +310,12 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
 
   refreshActiveMonth() {
     if (!this.activeMonth) return;
-    console.log('activeMonth', this.activeMonth);
 
     const monthStart = startOfMonth(this.activeMonth);
-    console.log('monthStart', monthStart);
     const monthEnd = endOfMonth(this.activeMonth);
-    console.log('monthEnd', monthEnd);
     const startOfFirstWeek = startOfISOWeek(monthStart);
-    console.log('startOfFirstWeek', startOfFirstWeek);
     const endOfLastWeek = endOfISOWeek(monthEnd);
-    console.log('endOfLastWeek', endOfLastWeek);
     const totalDayCount = differenceInDays(endOfLastWeek, startOfFirstWeek) + 1;
-    console.log('totaldays', totalDayCount);
 
     const today = this.todayDate ? startOfDay(this.todayDate) : undefined;
     const daysArray = Array.from(Array(totalDayCount).keys());
@@ -330,7 +327,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
       const isSelectable = this.isSelectable(day, cellDate);
       const isSelected = isSameDay(this.selectedDate, cellDate);
       const cell = {
-        date: cellDate,
+        date: cellDate.getDate(),
         isCurrentMonth: day.isCurrentMonth,
         isSelectable,
         isSelected,
@@ -409,14 +406,14 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   onDateSelected(newDay: CalendarCell) {
-    console.log('onDateSelect', newDay);
-
     if (newDay.isSelectable && newDay.date) {
-      const dateToEmit = this.timezone === 'local' ? newDay.date : this.getUtcDate(newDay.date);
+      const newDate = new Date(this.activeMonth);
+      newDate.setDate(newDay.date);
+      const dateToEmit = this.timezone === 'local' ? newDate : this.getUtcDate(newDate);
 
-      if (this.hasDateChanged(newDay.date, this._selectedDate)) {
-        this.onSelectedDateChange(newDay.date);
-        this._selectedDate = newDay.date;
+      if (this.hasDateChanged(newDate, this._selectedDate)) {
+        this.onSelectedDateChange(newDate);
+        this._selectedDate = newDate;
         this.dateChange.emit(dateToEmit);
       }
       this.dateSelect.emit(dateToEmit);
@@ -488,7 +485,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
     if (date) {
       for (let week of this.month) {
         foundDay = week.find((day) => {
-          return day.isCurrentMonth && day.date === date;
+          return day.isCurrentMonth && day.date === date.getDate();
         });
         if (foundDay) {
           break;

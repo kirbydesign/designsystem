@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import moment from 'moment';
+import { addDays, startOfDay, subDays } from 'date-fns';
 
 @Component({
   selector: 'cookbook-calendar-card-example',
@@ -37,10 +37,10 @@ export class CalendarCardExampleComponent implements OnChanges {
         // be misleading and confusing
         if (this.useTimezoneUTC) {
           // realign local -> UTC
-          this.selectedDate = moment.utc(moment(this.selectedDate).format('YYYY-MM-DD')).toDate();
+          this.selectedDate = this.getUtcDate(this.selectedDate);
         } else {
           // realign UTC -> local
-          this.selectedDate = moment(moment.utc(this.selectedDate).format('YYYY-MM-DD')).toDate();
+          // this.selectedDate =   moment(moment.utc(this.selectedDate).format('YYYY-MM-DD')).toDate();
         }
       }
     }
@@ -61,26 +61,27 @@ export class CalendarCardExampleComponent implements OnChanges {
   }
 
   private updateInputDates() {
-    const todayMoment = (this.useTimezoneUTC ? moment.utc() : moment()).startOf('day');
+    const today = this.useTimezoneUTC
+      ? this.getUtcDate(startOfDay(new Date()))
+      : startOfDay(new Date());
 
-    this.minDate = todayMoment
-      .clone()
-      .subtract(60, 'days')
-      .toDate();
-    this.maxDate = todayMoment
-      .clone()
-      .add(60, 'days')
-      .toDate();
-    this.todayDate = todayMoment
-      .clone()
-      .add(3, 'days')
-      .toDate(); // artificial but works for demo
+    this.minDate = subDays(today, 60);
+    this.maxDate = addDays(today, 60);
+    this.todayDate = addDays(today, 3); // artificial but works for demo
 
     this.disabledDates = [3, 5, 7, 10, 15, 25, 28, 35].map((daysFomToday) =>
-      todayMoment
-        .clone()
-        .add(daysFomToday, 'days')
-        .toDate()
+      addDays(today, daysFomToday)
+    );
+  }
+
+  private getUtcDate(date: Date): Date {
+    return new Date(
+      date.getUTCFullYear(),
+      date.getUTCMonth(),
+      date.getUTCDate(),
+      date.getUTCHours(),
+      date.getUTCMinutes(),
+      date.getUTCSeconds()
     );
   }
 }
