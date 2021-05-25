@@ -5,6 +5,8 @@ import { IonicModule } from '@ionic/angular';
 
 import { AccordionItemComponent } from './components/accordion/accordion-item.component';
 import { AccordionDirective } from './components/accordion/accordion.directive';
+import { ActionSheetPopoutComponent } from './components/action-sheet/action-sheet-popout/action-sheet-popout.component';
+import { ActionSheetComponent } from './components/action-sheet/action-sheet.component';
 import { AppModule } from './components/app/app.module';
 import { AvatarComponent } from './components/avatar/avatar.component';
 import { BadgeComponent } from './components/badge/badge.component';
@@ -48,7 +50,6 @@ import {
 import { GroupByPipe } from './components/list/pipes/group-by.pipe';
 import { LoadingOverlayComponent } from './components/loading-overlay/loading-overlay.component';
 import { LoadingOverlayService } from './components/loading-overlay/loading-overlay.service';
-import { ActionSheetComponent } from './components/modal/action-sheet/action-sheet.component';
 import { AlertComponent } from './components/modal/alert/alert.component';
 import { ModalFooterComponent } from './components/modal/footer/modal-footer.component';
 import { ModalCompactWrapperComponent } from './components/modal/modal-wrapper/compact/modal-compact-wrapper.component';
@@ -107,6 +108,7 @@ const exportedDeclarations = [
   CalendarComponent,
   CheckboxComponent,
   ActionSheetComponent,
+  ActionSheetPopoutComponent,
   ModalFooterComponent,
   ModalRouterLinkDirective,
   SegmentedControlComponent,
@@ -184,7 +186,7 @@ const providers = [
 const entryComponents = [
   ModalWrapperComponent,
   ModalCompactWrapperComponent,
-  ActionSheetComponent,
+  ActionSheetPopoutComponent,
   AlertComponent,
 ];
 

@@ -122,7 +122,7 @@ export class PageContentComponent {}
 @Component({
   selector: 'kirby-page-actions',
   template: `
-    <ng-content select="button[kirby-button]"></ng-content>
+    <ng-content select="button[kirby-button], kirby-action-sheet"></ng-content>
   `,
 })
 export class PageActionsComponent {}

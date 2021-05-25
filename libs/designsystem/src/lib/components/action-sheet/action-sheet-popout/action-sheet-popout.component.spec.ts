@@ -5,6 +5,7 @@ import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/t
 import * as ionic from '@ionic/angular';
 import { MockComponent } from 'ng-mocks';
 
+import { ActionSheetPopoutComponent } from '../';
 import { ButtonComponent } from '../../button/button.component';
 import { CardHeaderComponent } from '../../card/card-header/card-header.component';
 import { CardComponent } from '../../card/card.component';
@@ -14,17 +15,15 @@ import { ListComponent } from '../../list/list.component';
 import { GroupByPipe } from '../../list/pipes/group-by.pipe';
 import { SpinnerComponent } from '../../spinner/spinner.component';
 
-import { ActionSheetComponent } from './action-sheet.component';
-
-describe('ActionSheetComponent', () => {
-  let component: ActionSheetComponent;
-  let fixture: ComponentFixture<ActionSheetComponent>;
+describe('ActionSheetPopoutComponent', () => {
+  let component: ActionSheetPopoutComponent;
+  let fixture: ComponentFixture<ActionSheetPopoutComponent>;
 
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [
-          ActionSheetComponent,
+          ActionSheetPopoutComponent,
           ListComponent,
           CardComponent,
           CardHeaderComponent,
@@ -46,14 +45,14 @@ describe('ActionSheetComponent', () => {
       }).compileComponents();
       TestBed.overrideModule(BrowserDynamicTestingModule, {
         set: {
-          entryComponents: [ActionSheetComponent],
+          entryComponents: [ActionSheetPopoutComponent],
         },
       });
     })
   );
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ActionSheetComponent);
+    fixture = TestBed.createComponent(ActionSheetPopoutComponent);
     component = fixture.componentInstance;
     component.header = 'Test header';
     component.subheader = 'Test subheader';
@@ -150,6 +149,21 @@ describe('ActionSheetComponent', () => {
       const cancelButton = fixture.debugElement.query(By.css('.cancel-btn'));
       expect(component.cancelButtonText).toEqual(expected);
       expect(cancelButton.nativeElement.innerText).toEqual(expected);
+    });
+  });
+
+  describe('Button focus', () => {
+    it('class is added to focused item', () => {
+      const className = 'is-focused';
+      component.focusedItemIndex = 1;
+      fixture.detectChanges();
+      const rootElement: DebugElement = fixture.debugElement;
+      const actionSheetItems = rootElement
+        .query(By.directive(CardComponent))
+        .queryAll(By.directive(ButtonComponent));
+
+      const focusedItem = actionSheetItems[1].nativeElement;
+      expect(focusedItem).toHaveClass(className);
     });
   });
 });

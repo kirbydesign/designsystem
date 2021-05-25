@@ -1,10 +1,64 @@
 <div class="example">
-  <cookbook-action-sheet-example></cookbook-action-sheet-example>
-  <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
+  <p>
+    Action-sheet reveals a sheet with a set of options when tapping the trigger button. The sheet
+    behaves differently depending on device. On a touch device the sheet will slide up from the
+    bottom of the screen, whereas on larger screens, the sheet is displayed next to the trigger
+    button.
+  </p>
+  <h2>Default</h2>
+  <p>
+    When no custom button is provided between the <code>&lt;kirby-action-sheet&gt;</code> tags, a
+    default icon-button is displayed.
+  </p>
+  <cookbook-example-viewer [html]="defaultButtonExample.template">
+    <cookbook-action-sheet-example-default
+      class="action-sheet-trigger"
+      #defaultButtonExample
+    ></cookbook-action-sheet-example-default>
+  </cookbook-example-viewer>
+
+  <h2>Custom Button</h2>
+  <p>
+    If the default button icon doesn't fit the context, you can configure a custom button icon
+    through the <code>iconName</code> property. Allowed icon names can be found here:
+    <a href="/home/showcase/icon"><code>Icons</code></a
+    >.
+  </p>
+  <p>To add text to the trigger button, simply add a <code>buttonText</code>.</p>
+  <cookbook-example-viewer [html]="customButtonExample.template">
+    <cookbook-action-sheet-example-custom-button
+      class="action-sheet-trigger"
+      #customButtonExample
+    ></cookbook-action-sheet-example-custom-button>
+  </cookbook-example-viewer>
+
+  <h2>Disabled</h2>
+
+  <cookbook-example-viewer [html]="diabledButtonExample.template">
+    <cookbook-action-sheet-example-disabled
+      class="action-sheet-trigger"
+      #diabledButtonExample
+    ></cookbook-action-sheet-example-disabled>
+  </cookbook-example-viewer>
+
+  <h2>Open Action Sheet Programatically</h2>
   <p>
     To show the action sheet, create an <code>ActionSheetConfig</code> and pass it to
     <code>modalController.showActionSheet</code>. Each item must to be of type
     <code>ActionSheetItem</code>.
+  </p>
+  <p>
+    <strong>Caveat:</strong> Showing the <code>action-sheet</code> in this way will not ascociate
+    the sheet with the trigger element. It will always slide up from the bottom of the screen - even
+    on non-touch devices.
+  </p>
+  <cookbook-example-viewer [html]="programaticalExample.template">
+    <cookbook-action-sheet-example-programatically
+      style="display: block;"
+      #programaticalExample
+    ></cookbook-action-sheet-example-programatically>
+  </cookbook-example-viewer>
+  <p>
     <!-- prettier-ignore -->
     <cookbook-code-viewer language="ts">const config: ActionSheetConfig={{ '{' }}
     header: 'Your action sheet header',
@@ -28,8 +82,13 @@ this.modalController.showActionSheet(config);</cookbook-code-viewer>
     topmost action sheet. We can pass an optional result parameter to it, which is then going to be
     available inside the callback
   </p>
-  <h4>Action sheet properties:</h4>
+
+  <h2>Action sheet properties</h2>
   <cookbook-api-description-properties
     [properties]="properties"
   ></cookbook-api-description-properties>
+  <h2>Events</h2>
+  <cookbook-api-description-events [events]="events"></cookbook-api-description-events>
+  <h2>Methods</h2>
+  <cookbook-api-description-methods [methods]="methods"></cookbook-api-description-methods>
 </div>

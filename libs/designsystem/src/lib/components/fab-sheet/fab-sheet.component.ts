@@ -1,21 +1,21 @@
+import { DOCUMENT } from '@angular/common';
 import {
-  Component,
-  ContentChild,
-  HostBinding,
-  Input,
   AfterContentInit,
   AfterViewInit,
-  ViewChild,
+  Component,
+  ContentChild,
   ElementRef,
-  Renderer2,
+  HostBinding,
   Inject,
+  Input,
+  Renderer2,
+  ViewChild,
 } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
 import { IonFab, IonFabButton, IonIcon } from '@ionic/angular';
 
-import { ActionSheetComponent } from '../modal/action-sheet/action-sheet.component';
-import { kirbyIconSettings } from '../icon/kirby-icon-settings';
+import { ActionSheetComponent } from '../action-sheet/action-sheet.component';
 import { Icon } from '../icon/icon-settings';
+import { kirbyIconSettings } from '../icon/kirby-icon-settings';
 
 @Component({
   selector: 'kirby-fab-sheet',
@@ -38,7 +38,8 @@ export class FabSheetComponent implements AfterContentInit, AfterViewInit {
     return this._isBackdropVisible;
   }
 
-  @ContentChild(ActionSheetComponent, { static: false }) actionSheet: ActionSheetComponent;
+  @ContentChild(ActionSheetComponent, { static: false })
+  actionSheet: ActionSheetComponent;
 
   @ViewChild(IonFabButton, { static: true, read: ElementRef }) ionFabButton: ElementRef<
     HTMLElement
@@ -76,6 +77,7 @@ export class FabSheetComponent implements AfterContentInit, AfterViewInit {
   ngAfterContentInit(): void {
     if (this.actionSheet) {
       this.actionSheet.hideCancel = true;
+      this.actionSheet.hideButton = true;
     }
   }
 
@@ -89,8 +91,10 @@ export class FabSheetComponent implements AfterContentInit, AfterViewInit {
   onFabClick(fab: IonFab) {
     this._isFabSheetOpen = !fab.activated;
     if (this._isFabSheetOpen) {
+      this.actionSheet.open();
       this.renderer.addClass(this.document.body, 'fab-sheet-active');
     } else {
+      this.actionSheet.close();
       this.renderer.removeClass(this.document.body, 'fab-sheet-active');
     }
     setTimeout(() => (this._isBackdropVisible = this.isFabSheetOpen));

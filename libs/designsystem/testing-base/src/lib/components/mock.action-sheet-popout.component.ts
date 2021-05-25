@@ -1,30 +1,27 @@
 import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 
-import { ActionSheetComponent, ActionSheetItem } from '@kirbydesign/designsystem';
+import { ActionSheetItem, ActionSheetPopoutComponent } from '@kirbydesign/designsystem';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
-  selector: 'kirby-action-sheet',
+  selector: 'kirby-action-sheet-popout',
   template: '<ng-content></ng-content>',
   providers: [
     {
-      provide: ActionSheetComponent,
-      useExisting: forwardRef(() => MockActionSheetComponent),
+      provide: ActionSheetPopoutComponent,
+      useExisting: forwardRef(() => MockActionSheetPopoutComponent),
     },
   ],
 })
-export class MockActionSheetComponent {
+export class MockActionSheetPopoutComponent {
   @Input() cancelButtonText: string;
-  @Input() disabled: boolean;
+  @Input() hideCancel: boolean;
   @Input() header: string;
   @Input() subheader: string;
   @Input() items: Array<ActionSheetItem>;
-  @Input() iconName: string;
-  @Input() buttonText: string;
+  @Input() focusedItemIndex;
+  @Output() cancel = new EventEmitter();
   @Output() itemSelect = new EventEmitter<ActionSheetItem>();
-  @Input() tabindex: number;
-  @Input() hideButton: boolean;
-  @Input() hideCancel;
 }
 
 // #endregion

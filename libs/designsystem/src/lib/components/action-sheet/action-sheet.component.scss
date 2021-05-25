@@ -1,0 +1,38 @@
+@import '../../scss/utils';
+
+:host {
+  position: relative;
+  display: inline-block;
+  outline: none;
+
+  // Only apply focus ring if pointer device can hover
+  // (effectively desktop/mouse devices):
+  @include focus() {
+    > button,
+    > button.attention-level3 {
+      border-color: $focus-ring-color;
+    }
+  }
+}
+
+:host(.is-open) {
+  kirby-action-sheet-popout {
+    display: block;
+  }
+
+  button {
+    box-shadow: get-elevation(8);
+  }
+}
+
+kirby-action-sheet-popout {
+  display: none;
+}
+
+:host(.has-button) {
+  kirby-action-sheet-popout {
+    position: absolute;
+    right: 0;
+    margin-top: size('xs');
+  }
+}
