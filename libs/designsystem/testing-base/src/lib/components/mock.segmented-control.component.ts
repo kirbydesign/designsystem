@@ -1,6 +1,10 @@
 import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 
-import { SegmentedControlComponent, SegmentItem } from '@kirbydesign/designsystem';
+import {
+  SegmentedControlComponent,
+  SegmentedControlMode,
+  SegmentItem,
+} from '@kirbydesign/designsystem';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
@@ -14,10 +18,10 @@ import { SegmentedControlComponent, SegmentItem } from '@kirbydesign/designsyste
   ],
 })
 export class MockSegmentedControlComponent {
+  @Input() mode: SegmentedControlMode;
   @Input() items: SegmentItem[];
   @Input() selectedIndex: number;
   @Input() value: SegmentItem;
-  @Input() mode: 'default' | 'chip';
   @Input() size: 'sm' | 'md';
   @Output() segmentSelect = new EventEmitter();
 }

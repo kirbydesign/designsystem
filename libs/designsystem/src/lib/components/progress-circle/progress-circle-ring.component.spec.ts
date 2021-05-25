@@ -24,7 +24,7 @@ describe('ProgressCircleRingComponent', () => {
 
   describe('centerRadius', () => {
     it('should return distance from center to middle of stroke', () => {
-      expect(spectator.component.centerRadius).toBe(
+      expect(spectator.component._centerRadius).toBe(
         spectator.component.radius - spectator.component.strokeWidth / 2
       );
     });
@@ -32,27 +32,46 @@ describe('ProgressCircleRingComponent', () => {
 
   describe('centerCircumference', () => {
     it('should return circumference in middle of stroke', () => {
-      expect(spectator.component.centerCircumference).toBe(
-        spectator.component.centerRadius * 2 * Math.PI
+      expect(spectator.component._centerCircumference).toBe(
+        spectator.component._centerRadius * 2 * Math.PI
       );
     });
   });
 
   describe('diameter', () => {
     it('should calculate diameter as 2*radius', () => {
-      expect(spectator.component.diameter).toBe(spectator.component.radius * 2);
+      expect(spectator.component._diameter).toBe(spectator.component.radius * 2);
     });
   });
 
-  describe('offset (progress)', () => {
-    it('should return the non-progress circumference (1-progress) as offset', () => {
+  describe('offset (progress) within upperBound', () => {
+    it('should return the non-progress circumference (1 - progress) as offset', () => {
       const value = 33;
+      const upperBound = 96;
       spectator.setInput({
         value,
+        upperBound,
       });
-      expect(spectator.component.offset).toBe(
-        spectator.component.centerCircumference -
-          spectator.component.centerCircumference * (value / 100)
+
+      expect(spectator.component._offset).toBe(
+        spectator.component._centerCircumference -
+          spectator.component._centerCircumference * (value / 100)
+      );
+    });
+  });
+
+  describe('offset (progress) larger than upperBound', () => {
+    it('should return the non-progress circumference (1 - upperBound) as offset', () => {
+      const value = 99;
+      const upperBound = 96;
+      spectator.setInput({
+        value,
+        upperBound,
+      });
+
+      expect(spectator.component._offset).toBe(
+        spectator.component._centerCircumference -
+          spectator.component._centerCircumference * (upperBound / 100)
       );
     });
   });
@@ -68,7 +87,9 @@ describe('ProgressCircleRingComponent', () => {
       const radius = 33;
       const expectedSize = `${2 * radius}px`;
       spectator.setInput({ radius });
+      // As width and height are set via hostbinding, it is necessary to run a change detection cycle.
       spectator.detectChanges();
+
       expect(spectator.element).toHaveComputedStyle({
         width: expectedSize,
         height: expectedSize,
@@ -80,6 +101,7 @@ describe('ProgressCircleRingComponent', () => {
       spectator.element.classList.add(themeColor);
       spectator.element.style.transition = 'none';
       spectator.detectChanges();
+
       expect(spectator.query('circle.progress')).toHaveComputedStyle({
         stroke: getColor(themeColor),
       });
@@ -90,14 +112,12 @@ describe('ProgressCircleRingComponent', () => {
     });
 
     it('should render background stroke in semi-light', () => {
-      spectator.detectChanges();
       expect(spectator.query('circle.circle')).toHaveComputedStyle({
         stroke: getColor('semi-light'),
       });
     });
 
     it('should render progress stroke with the correct width', () => {
-      spectator.detectChanges();
       expect(spectator.query('circle.progress')).toHaveAttribute(
         'stroke-width',
         '' + spectator.component.strokeWidth
@@ -116,7 +136,7 @@ describe('ProgressCircleRingComponent', () => {
       spectator.detectChanges();
       expect(spectator.query('circle.progress')).toHaveAttribute(
         'r',
-        '' + spectator.component.centerRadius
+        '' + spectator.component._centerRadius
       );
     });
   });
