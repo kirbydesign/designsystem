@@ -37,6 +37,7 @@ import {
 } from 'date-fns';
 import { da, de, enGB, enUS, nb, sv } from 'date-fns/locale';
 
+import { convertUTCDateToLocalDate, getUtcDate } from '../../helpers/date-helper';
 import { capitalizeFirstLetter } from '../../helpers/string-helper';
 
 import { CalendarCell } from './helpers/calendar-cell.model';
@@ -130,6 +131,8 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   @Input() set todayDate(value: Date) {
+    console.log('set today', value);
+
     this._todayDate = this.normalizeDate(value);
   }
 
@@ -245,31 +248,8 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   // if it doesn't point to midnight.
   private normalizeDate(dateLocalOrUTC: Date) {
     if (!dateLocalOrUTC) return;
-
-    if (startOfDay(dateLocalOrUTC).getTime() === dateLocalOrUTC.getTime()) {
-      // date is local timezone midnight
-      return dateLocalOrUTC;
-    }
-
-    const utcDate = this.getUtcDate(dateLocalOrUTC);
-
-    if (startOfDay(utcDate).getTime() === utcDate.getTime()) {
-      // the date is a utc midnight; return the equivalent local timezone midnight date
-      return utcDate;
-    }
-    // does not point to midnight so best assumption is to chop off the time part
-    return startOfDay(dateLocalOrUTC);
-  }
-
-  private getUtcDate(date: Date): Date {
-    return new Date(
-      date.getUTCFullYear(),
-      date.getUTCMonth(),
-      date.getUTCDate(),
-      date.getUTCHours(),
-      date.getUTCMinutes(),
-      date.getUTCSeconds()
-    );
+    const localDate = convertUTCDateToLocalDate(dateLocalOrUTC);
+    return startOfDay(localDate);
   }
 
   private normalizeDates(datesLocalOrUTC: Date[]) {
@@ -316,8 +296,8 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
     const startOfFirstWeek = startOfISOWeek(monthStart);
     const endOfLastWeek = endOfISOWeek(monthEnd);
     const totalDayCount = differenceInDays(endOfLastWeek, startOfFirstWeek) + 1;
+    const today = this.todayDate ? startOfDay(this.todayDate) : startOfDay(new Date());
 
-    const today = this.todayDate ? startOfDay(this.todayDate) : undefined;
     const daysArray = Array.from(Array(totalDayCount).keys());
 
     const days: CalendarCell[] = daysArray.map((number) => {
@@ -409,7 +389,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
     if (newDay.isSelectable && newDay.date) {
       const newDate = new Date(this.activeMonth);
       newDate.setDate(newDay.date);
-      const dateToEmit = this.timezone === 'local' ? newDate : this.getUtcDate(newDate);
+      const dateToEmit = this.timezone === 'local' ? newDate : getUtcDate(newDate);
 
       if (this.hasDateChanged(newDate, this._selectedDate)) {
         this.onSelectedDateChange(newDate);

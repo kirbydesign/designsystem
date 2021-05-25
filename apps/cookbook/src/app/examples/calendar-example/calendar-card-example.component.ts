@@ -1,6 +1,8 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { addDays, startOfDay, subDays } from 'date-fns';
 
+import { getUtcDate } from '@kirbydesign/designsystem/helpers/date-helper';
+
 @Component({
   selector: 'cookbook-calendar-card-example',
   templateUrl: './calendar-card-example.component.html',
@@ -37,7 +39,7 @@ export class CalendarCardExampleComponent implements OnChanges {
         // be misleading and confusing
         if (this.useTimezoneUTC) {
           // realign local -> UTC
-          this.selectedDate = this.getUtcDate(this.selectedDate);
+          this.selectedDate = getUtcDate(this.selectedDate);
         } else {
           // realign UTC -> local
           // this.selectedDate =   moment(moment.utc(this.selectedDate).format('YYYY-MM-DD')).toDate();
@@ -61,9 +63,7 @@ export class CalendarCardExampleComponent implements OnChanges {
   }
 
   private updateInputDates() {
-    const today = this.useTimezoneUTC
-      ? this.getUtcDate(startOfDay(new Date()))
-      : startOfDay(new Date());
+    const today = this.useTimezoneUTC ? getUtcDate(startOfDay(new Date())) : startOfDay(new Date());
 
     this.minDate = subDays(today, 60);
     this.maxDate = addDays(today, 60);
@@ -71,17 +71,6 @@ export class CalendarCardExampleComponent implements OnChanges {
 
     this.disabledDates = [3, 5, 7, 10, 15, 25, 28, 35].map((daysFomToday) =>
       addDays(today, daysFomToday)
-    );
-  }
-
-  private getUtcDate(date: Date): Date {
-    return new Date(
-      date.getUTCFullYear(),
-      date.getUTCMonth(),
-      date.getUTCDate(),
-      date.getUTCHours(),
-      date.getUTCMinutes(),
-      date.getUTCSeconds()
     );
   }
 }
