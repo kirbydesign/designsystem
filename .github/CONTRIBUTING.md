@@ -1037,9 +1037,6 @@ We are aware that this requires a bit of gut feel. Testing for example if an ele
 
 Testing the properties `position` , `left` , `right` , `bottom` and `top` would make better sense as it could be tested as _"should be positioned correctly"_. As an additional example `font-family` , `font-size` , `font-weight` & `font-style` could be tested as _"should have correct typography"_.
 
-A rule of thumb is to test properties together whenever they have the same prefix such as `font-` . 
-This will however not always be the case as can be seen in the positioning example.
-
 ## I have a question related to Kirby
 
 <!-- This section is responsible for teaching contributors how to get help with Kirby, we should probably link to this section from the readme.md -->
