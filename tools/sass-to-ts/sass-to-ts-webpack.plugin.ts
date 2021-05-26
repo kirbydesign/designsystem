@@ -33,7 +33,7 @@ export class SassToTsWebpackPlugin implements Plugin {
     );
     // We don't want to bloat the output on initial compilation,
     // so only log changes after first compilation:
-    compiler.hooks.done.tap(SassToTsWebpackPlugin.NAME, (stats) => {
+    compiler.hooks.done.tap(SassToTsWebpackPlugin.NAME, () => {
       this.shouldLog = true;
     });
     const watch = [...this.options.watchGlob, ...this.options.transform];
