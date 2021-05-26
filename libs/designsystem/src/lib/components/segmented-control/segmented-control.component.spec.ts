@@ -2,12 +2,15 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponents, MockDirective } from 'ng-mocks';
 
 import { ThemeColorDirective } from '../../directives';
+import { DesignTokenHelper } from '../../helpers';
 import { TestHelper } from '../../testing/test-helper';
 import { BadgeComponent } from '../badge/badge.component';
 import { ChipComponent } from '../chip/chip.component';
 
 import { SegmentItem } from './segment-item';
 import { SegmentedControlComponent, SegmentedControlMode } from './segmented-control.component';
+
+const fatFingerSize = DesignTokenHelper.fatFingerSize;
 
 describe('SegmentedControlComponent', () => {
   let component: SegmentedControlComponent;
@@ -94,6 +97,16 @@ describe('SegmentedControlComponent', () => {
       const changeEvent = new CustomEvent('ionChange', { detail: { value: items[2].id } });
       ionSegmentElement.dispatchEvent(changeEvent);
       expect(component.value).toBe(items[2]);
+    });
+
+    it('should have touch area with minimum size equal to fat finger size', () => {
+      const touchArea = window.getComputedStyle(
+        spectator.element.querySelector('ion-segment-button'),
+        '::after'
+      );
+
+      expect(parseInt(touchArea.height)).toBeGreaterThanOrEqual(parseInt(fatFingerSize()));
+      expect(parseInt(touchArea.width)).toBeGreaterThanOrEqual(parseInt(fatFingerSize()));
     });
 
     describe('when updating items', () => {
