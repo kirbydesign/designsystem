@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ActionSheetItem, ActionSheetConfig } from '@kirbydesign/designsystem';
+import { ActionSheetConfig, ActionSheetItem } from '@kirbydesign/designsystem';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
 import { ModalController } from '@kirbydesign/designsystem';
 
@@ -21,7 +21,7 @@ const config = {
   <ng-template #customTitle>
     <div style="display: flex;">
       <div style="overflow: hidden; text-overflow: ellipsis;">
-        Custom Title With a very long name
+        Custom Titles with very long names that span multiple lines will be truncated
       </div>
       <kirby-icon name="arrow-down"></kirby-icon>
     </div>
