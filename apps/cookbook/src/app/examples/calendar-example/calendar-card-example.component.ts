@@ -72,8 +72,8 @@ export class CalendarCardExampleComponent implements OnChanges {
     this.maxDate = addDays(today, 60);
     this.todayDate = addDays(today, 3); // artificial but works for demo
 
-    this.disabledDates = [3, 5, 7, 10, 15, 25, 28, 35].map((daysFomToday) =>
-      addDays(today, daysFomToday)
+    this.disabledDates = [3, 5, 7, 10, 15, 25, 28, 35].map((daysFromToday) =>
+      addDays(today, daysFromToday)
     );
   }
 }
