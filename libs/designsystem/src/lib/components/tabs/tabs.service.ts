@@ -6,11 +6,10 @@ import { ReplaySubject } from 'rxjs';
   providedIn: 'root',
 })
 export class TabsService {
-  outlet$: ReplaySubject<IonRouterOutlet> = new ReplaySubject();
+  private outletSubject$: ReplaySubject<IonRouterOutlet> = new ReplaySubject();
+  public outlet$ = this.outletSubject$.asObservable();
 
-  constructor() {}
-
-  setOutlet(outlet: IonRouterOutlet) {
-    this.outlet$.next(outlet);
+  public setOutlet(outlet: IonRouterOutlet) {
+    this.outletSubject$.next(outlet);
   }
 }
