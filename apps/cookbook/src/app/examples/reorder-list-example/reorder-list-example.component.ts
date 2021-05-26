@@ -71,8 +71,4 @@ export class ReorderListExampleComponent {
   doReorderShadowAccount(ev: ReorderEvent) {
     ev.complete(ev.parentItem.shadowAccounts);
   }
-
-  trackByFn(_index, item) {
-    return item.title;
-  }
 }
