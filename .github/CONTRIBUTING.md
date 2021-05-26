@@ -1035,7 +1035,7 @@ This makes the intention more clear and also saves some time writing tests. Shou
 
 We are aware that this requires a bit of gut feel. Testing for example if an element has `position: relative` & `background-color: #ffffff` would most likely not make sense. What would the test say? _Should have correct position and background-color_? There is really no relation between these two properties.
 
-Testing the properties `position` , `left` , `right` , `bottom` and `top` could make better sense as it could be tested as _"should be positioned correctly"_. As an additional example `font-family` , `font-size` , `font-weight` & `font-style` could be tested as _"should have correct typography"_.
+Testing the properties `position` , `left` , `right` , `bottom` and `top` would make better sense as it could be tested as _"should be positioned correctly"_. As an additional example `font-family` , `font-size` , `font-weight` & `font-style` could be tested as _"should have correct typography"_.
 
 A rule of thumb is to test properties together whenever they have the same prefix such as `font-` . 
 This will however not always be the case as can be seen in the positioning example.
