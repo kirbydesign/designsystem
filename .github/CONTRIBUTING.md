@@ -812,7 +812,11 @@ For example write `describe('inside Page Actions', () => {...})` not `describe('
 
 Not following this, causes the capitalisation to be wrong when the test is read as a sentence: 
 
-> "ButtonComponent in Kirby Page Inside Page Actions Should render with correct background color".
+> "ButtonComponent in Kirby Page Inside Page Actions Should render with correct background-color".
+
+When done correctly it should read and be capitalized like a normal sentence:
+
+> "ButtonComponent in Kirby Page inside Page Actions should render with correct background-color"
 
 ##### Avoid values in the description 
 
