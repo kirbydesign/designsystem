@@ -10,17 +10,26 @@ const config = {
   template: `<kirby-page defaultBackHref="/">
 
   <!-- Custom Page Title -->
-  <h1 *kirbyPageTitle [kirbyFitHeading]="{ maxLines: 2 }">
-    <ng-container *ngTemplateOutlet="customTitle"></ng-container>
-  </h1>
+  <div *kirbyPageTitle>
+    <ng-container *ngTemplateOutlet="pageTitle"></ng-container>
+  </div>
 
   <ng-template kirbyPageToolbarTitle>
-    <ng-container *ngTemplateOutlet="customTitle"></ng-container>
+    <ng-container *ngTemplateOutlet="toolbarTitle"></ng-container>
   </ng-template>
 
-  <ng-template #customTitle>
-    <div style="display: flex;">
-      <div style="overflow: hidden; text-overflow: ellipsis;">
+  <ng-template #pageTitle>
+    <div style="display: flex; gap: 0.5rem;">
+      <h1 [kirbyFitHeading]="{ maxLines: 2 }">
+        Custom Titles with very long names that span multiple lines will be truncated
+      </h1>
+      <kirby-icon name="arrow-down"></kirby-icon>
+    </div>
+  </ng-template>
+
+  <ng-template #toolbarTitle>
+    <div style="display: flex; gap: 0.5rem;">
+      <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
         Custom Titles with very long names that span multiple lines will be truncated
       </div>
       <kirby-icon name="arrow-down"></kirby-icon>
