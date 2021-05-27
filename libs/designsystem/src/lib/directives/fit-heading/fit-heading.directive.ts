@@ -138,6 +138,7 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
     this.renderer.setStyle(el, 'line-height', size.lineHeight);
   }
 
+  // TODO: Move line-clamp to separate directive
   private setLineClamp(el: HTMLElement, maxLines: number, lineHeight: string): void {
     // Does Renderer2 not support custom properties?
     // this.renderer.setStyle(el, '--line-clamp', maxLines);
