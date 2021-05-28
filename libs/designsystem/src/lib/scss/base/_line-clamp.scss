@@ -1,4 +1,4 @@
-.line-clamp {
+.kirby-line-clamp {
   line-height: var(--line-height);
   overflow: hidden;
 
@@ -31,7 +31,7 @@
 }
 
 @supports (-webkit-line-clamp: 1) {
-  .line-clamp {
+  .kirby-line-clamp {
     /* reset max-height */
     max-height: initial;
 

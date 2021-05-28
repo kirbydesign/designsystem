@@ -144,6 +144,6 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
     // this.renderer.setStyle(el, '--line-clamp', maxLines);
     el.style.setProperty('--line-clamp', `${maxLines}`);
     el.style.setProperty('--line-height', lineHeight);
-    this.renderer.addClass(el, 'line-clamp');
+    this.renderer.addClass(el, 'kirby-line-clamp');
   }
 }
