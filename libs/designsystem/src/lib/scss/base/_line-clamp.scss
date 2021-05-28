@@ -1,0 +1,53 @@
+.line-clamp {
+  line-height: var(--line-height);
+  overflow: hidden;
+
+  /* Fallback when -webkit-line-clamp is not supported */
+  max-height: calc(var(--line-clamp) * var(--line-height));
+
+  position: relative;
+
+  // Ellipsis
+  &::before {
+    content: '…';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background-color: var(--kirby-background-color);
+    line-height: var(--line-height);
+    height: var(--line-height);
+  }
+
+  // Cover ellipsis when number of lines is less than or equal to line-clamp value
+  &::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    width: 1em;
+    height: var(--line-height);
+    line-height: var(--line-height);
+    background-color: var(--kirby-background-color);
+  }
+}
+
+@supports (-webkit-line-clamp: 1) {
+  .line-clamp {
+    /* reset max-height */
+    max-height: initial;
+
+    // Non-standard line-clamp with wide browser support
+    // See https://caniuse.com/mdn-css_properties_-webkit-line-clamp
+    display: -webkit-box;
+    -webkit-line-clamp: var(
+      --line-clamp,
+      initial
+    ); /* Fallback value could also be a specific number */
+    -webkit-box-orient: vertical;
+
+    // Hide the fallback ellipsis
+    &::before,
+    &::after {
+      display: none;
+    }
+  }
+}
