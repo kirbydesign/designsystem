@@ -2,12 +2,11 @@
   line-height: var(--line-height);
   overflow: hidden;
 
-  /* Fallback when -webkit-line-clamp is not supported */
+  // Fallback when -webkit-line-clamp is not supported
   max-height: calc(var(--line-clamp) * var(--line-height));
-
   position: relative;
 
-  // Ellipsis
+  // Ellipsis as fallback
   &::before {
     content: '…';
     position: absolute;
@@ -32,17 +31,16 @@
 
 @supports (-webkit-line-clamp: 1) {
   .kirby-line-clamp {
-    /* reset max-height */
-    max-height: initial;
-
     // Non-standard line-clamp with wide browser support
     // See https://caniuse.com/mdn-css_properties_-webkit-line-clamp
     display: -webkit-box;
-    -webkit-line-clamp: var(
-      --line-clamp,
-      initial
-    ); /* Fallback value could also be a specific number */
+    /* Fallback value for --line-clamp could also be a specific number */
+    -webkit-line-clamp: var(--line-clamp, initial);
     -webkit-box-orient: vertical;
+
+    // Reset properties needed for fallback only
+    max-height: initial;
+    position: initial;
 
     // Hide the fallback ellipsis
     &::before,
