@@ -102,7 +102,7 @@ jobs:
     env:
       NODE_VERSION: '10.16'
     steps:
-      - name: Test Name:
+      - name: Test Name
         run: echo ${{github.head_ref}}
       - name: Checkout repo
         uses: actions/checkout@v2
