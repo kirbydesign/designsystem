@@ -105,7 +105,7 @@ jobs:
     steps:
       - name: Create artifact name without illegal characters
         run: | 
-          ARTIFACT_NAME=$(echo ${{github.head_ref }} | tr / - |tr -d ":<>|*?\/.\"") 
+          ARTIFACT_NAME=$(echo "${{github.head_ref }}-cookbook-dist" | tr / - |tr -d ":<>|*?\/.\"") 
           echo "##[set-output name=artifact_name;]$(echo $ARTIFACT_NAME)"
           echo $ARTIFACT_NAME
         id: create_artifact_name
@@ -133,7 +133,7 @@ jobs:
       - name: Upload 'dist' folder artifact
         uses: actions/upload-artifact@v2
         with: 
-          name: ${{steps.create_artifact_name.outputs.artifact_name}}-cookbook-dist
+          name: cookbook-dist
           path: dist
           retention-days: 1
 
@@ -238,8 +238,11 @@ jobs:
           tar xzf helm-linux-amd64.tar.gz
           sudo cp linux-amd64/helm /usr/bin/
           rm -rf linux-amd64
-      - name: Build Kirby cookbook
-        run: npm run dist:cookbook
+      - name: Download Kirby Cookbook dist files 
+        uses: actions/download-artifact@v2
+        with:
+          name: cookbook-dist
+          path: dist
       - name: Build Docker image
         run: docker build -t drbstaging.azurecr.io/kirbydesign/designsystem:git${{ github.sha }} .
       - name: Push Docker image
