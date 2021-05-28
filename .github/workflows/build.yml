@@ -101,10 +101,13 @@ jobs:
     runs-on: ubuntu-latest 
     env:
       NODE_VERSION: '10.16'
-      ARTIFACT_NAME: echo "housekeeping/\"test" |tr / - |tr -d ":<>|*?\/.\"" # Removes illegal characters
+      ARTIFACT_NAME: 
     steps:
-      - name: Echo artifact name
-        run: echo ${{env.ARTIFACT_NAME}}
+      - name: Create artifact name without illegal characters
+        run: ARTIFACT_NAME=$(echo ${{github.head_ref }}|tr / - |tr -d ":<>|*?\/.\"")
+        run: echo "##[set-output name=artifact_name;]$(echo $ARTIFACT_NAME)"
+        run: echo $ARTIFACT_NAME
+        id: create_artifact_name
       - name: Checkout repo
         uses: actions/checkout@v2
       - name: Install Node.js
@@ -129,7 +132,7 @@ jobs:
       - name: Upload 'dist' folder artifact
         uses: actions/upload-artifact@v2
         with: 
-          name: ${{env.ARTIFACT_NAME}}-cookbook-dist
+          name: ${{steps.create_artifact_name.outputs.artifact_name}}-cookbook-dist
           path: dist
           retention-days: 1
 
