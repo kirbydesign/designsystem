@@ -102,6 +102,8 @@ jobs:
     env:
       NODE_VERSION: '10.16'
     steps:
+      - name: Test Name:
+        run: echo ${{github.head_ref}}
       - name: Checkout repo
         uses: actions/checkout@v2
       - name: Install Node.js
@@ -126,7 +128,7 @@ jobs:
       - name: Upload 'dist' folder artifact
         uses: actions/upload-artifact@v2
         with: 
-          name: ${{github.ref}}-cookbook-dist
+          name: ${{github.head_ref}}-cookbook-dist
           path: dist
           retention-days: 1
 
