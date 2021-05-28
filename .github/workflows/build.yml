@@ -104,9 +104,10 @@ jobs:
       ARTIFACT_NAME: 
     steps:
       - name: Create artifact name without illegal characters
-        run: ARTIFACT_NAME=$(echo ${{github.head_ref }}|tr / - |tr -d ":<>|*?\/.\"")
-        run: echo "##[set-output name=artifact_name;]$(echo $ARTIFACT_NAME)"
-        run: echo $ARTIFACT_NAME
+        run: | 
+          ARTIFACT_NAME=$(echo ${{github.head_ref }} | tr / - |tr -d ":<>|*?\/.\"") 
+          echo "##[set-output name=artifact_name;]$(echo $ARTIFACT_NAME)"
+          echo $ARTIFACT_NAME
         id: create_artifact_name
       - name: Checkout repo
         uses: actions/checkout@v2
