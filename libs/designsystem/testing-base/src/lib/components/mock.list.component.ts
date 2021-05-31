@@ -2,6 +2,7 @@ import { Component, EventEmitter, forwardRef, Input, Output, TrackByFunction } f
 
 import {
   ListComponent,
+  ListShape,
   ListSwipeAction,
   LoadOnDemandEvent,
   ThemeColor,
