@@ -1,8 +1,7 @@
 import { Component, EventEmitter, forwardRef, Input, Output, TemplateRef } from '@angular/core';
 
 import {
-  EndClass,
-  ListItem,
+  BoundaryClass,
   ListItemComponent,
   ListSwipeAction,
   ThemeColor,
@@ -21,7 +20,7 @@ import {
 })
 export class MockListItemComponent {
   @Input() item: any;
-  @Input() endClass: EndClass;
+  @Input() endClass: BoundaryClass;
   @Input() swipeActions: ListSwipeAction[];
   @Input() itemTemplate: TemplateRef<any>;
   @Input() isSelected: boolean;

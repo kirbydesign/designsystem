@@ -9,7 +9,7 @@ import { SpinnerComponent } from '../spinner/spinner.component';
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 import { ListItemColorDirective } from './directives/list-item-color.directive';
 import { ListHelper } from './helpers/list-helper';
-import { EndClass, ListItemComponent } from './list-item/list-item.component';
+import { BoundaryClass, ListItemComponent } from './list-item/list-item.component';
 import { ListComponent } from './list.component';
 import { LoadOnDemandEvent } from './list.event';
 import { GroupByPipe } from './pipes/group-by.pipe';
@@ -225,11 +225,11 @@ describe('ListComponent', () => {
     });
 
     it('returns correct end-class to items', () => {
-      const first = component.getFirstOrLastClass(0);
-      const last = component.getFirstOrLastClass(TEST_ITEMS.length - 1);
+      const first = component._getBoundaryClass(0);
+      const last = component._getBoundaryClass(TEST_ITEMS.length - 1);
 
-      expect(first).toEqual(EndClass.first);
-      expect(last).toEqual(EndClass.last);
+      expect(first).toEqual(BoundaryClass.first);
+      expect(last).toEqual(BoundaryClass.last);
     });
 
     describe('when sections', () => {
@@ -281,15 +281,15 @@ describe('ListComponent', () => {
       });
 
       it('returns correct end-class to items', () => {
-        const section1first = component.getFirstOrLastClass(1);
-        const section1last = component.getFirstOrLastClass(2);
-        const section2first = component.getFirstOrLastClass(4);
-        const section2last = component.getFirstOrLastClass(5);
+        const section1first = component._getBoundaryClass(1);
+        const section1last = component._getBoundaryClass(2);
+        const section2first = component._getBoundaryClass(4);
+        const section2last = component._getBoundaryClass(5);
 
-        expect(section1first).toEqual(EndClass.first);
-        expect(section2first).toEqual(EndClass.first);
-        expect(section1last).toEqual(EndClass.last);
-        expect(section2last).toEqual(EndClass.last);
+        expect(section1first).toEqual(BoundaryClass.first);
+        expect(section2first).toEqual(BoundaryClass.first);
+        expect(section1last).toEqual(BoundaryClass.last);
+        expect(section2last).toEqual(BoundaryClass.last);
       });
     });
   });

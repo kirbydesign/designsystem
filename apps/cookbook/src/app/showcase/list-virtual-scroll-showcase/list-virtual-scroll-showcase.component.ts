@@ -25,7 +25,8 @@ export class ListVirtualScrollShowcaseComponent {
     },
     {
       name: 'virtualScrollViewportHeight',
-      description: 'A fixed viewport height in pixels.',
+      description:
+        'When using virtual scroll, we need a fixed scroll container. This property makes it possible to set a custom height on this.',
       type: ['number'],
       defaultValue: '500',
     },

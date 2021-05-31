@@ -12,9 +12,9 @@ import { IonItemSliding } from '@ionic/angular';
 
 import { PlatformService } from '../../../helpers/platform.service';
 import { ThemeColor } from '../../../helpers/theme-color.type';
-import { ListSwipeAction, SwipeDirection, SwipeEnd } from '../list-swipe-action';
+import { ListSwipeAction, SwipeDirection, SwipeEnd } from '../list-swipe-action.type';
 
-export enum EndClass {
+export enum BoundaryClass {
   first = 'first',
   last = 'last',
 }
@@ -34,7 +34,7 @@ export class ListItemComponent implements OnInit, AfterViewInit {
 
   @Input() item: any;
 
-  @Input() endClass: EndClass;
+  @Input() boundaryClass: BoundaryClass;
 
   @Input() swipeActions: ListSwipeAction[] = [];
 
@@ -48,14 +48,14 @@ export class ListItemComponent implements OnInit, AfterViewInit {
 
   @Output() itemSelect = new EventEmitter<any>();
 
-  onItemSelect(item: any) {
+  _onItemSelect(item: any) {
     if (!this.isSelectable) return;
     this.itemSelect.emit(item);
   }
 
   @Output() swipeActionSelect = new EventEmitter<any>();
 
-  onSwipeActionSelect(swipeAction, item, event) {
+  _onSwipeActionSelect(swipeAction, item, event) {
     this.swipeActionSelect.emit({
       swipeAction,
       item,
@@ -73,7 +73,7 @@ export class ListItemComponent implements OnInit, AfterViewInit {
     }
   }
 
-  hasSwipeActions(item: any): boolean {
+  _hasSwipeActions(item: any): boolean {
     if (!Array.isArray(this.swipeActions)) {
       return false;
     }
@@ -88,31 +88,33 @@ export class ListItemComponent implements OnInit, AfterViewInit {
     });
   }
 
-  getSwipeActions(item: any, side?: SwipeDirection): ListSwipeAction[] {
+  _getSwipeActions(item: any, direction?: SwipeDirection): ListSwipeAction[] {
     if (!Array.isArray(this.swipeActions)) {
       return [];
     }
     return this.swipeActions.filter((swipeAction) => {
-      if (swipeAction.isDisabled instanceof Function && swipeAction.isDisabled(item)) {
+      if (this.isSwipeactionDisabled(swipeAction, item)) {
         return false;
       }
-      if (swipeAction.isDisabled === true) {
-        return false;
-      }
-      return side ? swipeAction.position === side : true;
+      return direction ? swipeAction.position === direction : true;
     });
   }
 
-  getSwipeActionEnd(item: any): SwipeEnd {
-    if (this.getSwipeActions(item, 'left').length) {
-      return SwipeEnd.start;
+  private isSwipeactionDisabled(swipeAction: ListSwipeAction, item: any): boolean {
+    if (swipeAction.isDisabled instanceof Function && swipeAction.isDisabled(item)) {
+      return true;
     }
-    if (this.getSwipeActions(item, 'right').length) {
-      return SwipeEnd.end;
-    }
+    return swipeAction.isDisabled === true;
   }
 
-  getSwipeActionIcon(swipeAction: ListSwipeAction, item: any): string {
+  _getSwipeActionEnd(item: any): SwipeEnd {
+    if (this._getSwipeActions(item, 'left').length) {
+      return SwipeEnd.start;
+    }
+    return SwipeEnd.end;
+  }
+
+  _getSwipeActionIcon(swipeAction: ListSwipeAction, item: any): string {
     if (!swipeAction.icon) return;
 
     if (swipeAction.icon instanceof Function) {
@@ -121,14 +123,14 @@ export class ListItemComponent implements OnInit, AfterViewInit {
     return swipeAction.icon;
   }
 
-  getSwipeActionTitle(swipeAction: ListSwipeAction, item: any): string {
+  _getSwipeActionTitle(swipeAction: ListSwipeAction, item: any): string {
     if (swipeAction.title instanceof Function) {
       return swipeAction.title(item);
     }
     return swipeAction.title;
   }
 
-  getSwipeActionType(swipeAction: ListSwipeAction, item: any): ThemeColor {
+  _getSwipeActionType(swipeAction: ListSwipeAction, item: any): ThemeColor {
     if (swipeAction.type instanceof Function) {
       return swipeAction.type(item);
     }

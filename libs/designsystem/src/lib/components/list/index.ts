@@ -3,10 +3,10 @@ export { ListShape } from './list.component';
 export { ListHeaderComponent } from './list-header/list-header.component';
 export { ListSectionHeaderComponent } from './list-section-header/list-section-header.component';
 export { ListItemComponent } from './list-item/list-item.component';
-export { EndClass } from './list-item/list-item.component';
+export { BoundaryClass } from './list-item/list-item.component';
 
 export { LoadOnDemandEvent } from './list.event';
-export { ListSwipeAction } from './list-swipe-action';
+export { ListSwipeAction } from './list-swipe-action.type';
 
 export { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 export { ListItemColorDirective } from './directives/list-item-color.directive';

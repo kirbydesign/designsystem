@@ -4,8 +4,8 @@
   [item]="item"
   [disabled]="_isSwipingEnabled ? null : true"
   keyHandler
-  [ngClass]="endClass"
-  (click)="onItemSelect(item)"
+  [ngClass]="boundaryClass"
+  (click)="_onItemSelect(item)"
 >
   <ng-container
     *ngTemplateOutlet="swipeActionsTemplate; context: { $implicit: item }"
@@ -14,22 +14,22 @@
 </ion-item-sliding>
 
 <ng-template #swipeActionsTemplate let-item>
-  <ion-item-options *ngIf="hasSwipeActions(item)" [side]="getSwipeActionEnd(item)">
+  <ion-item-options *ngIf="_hasSwipeActions(item)" [side]="_getSwipeActionEnd(item)">
     <div class="swipe-action">
-      <ng-container *ngFor="let swipeAction of getSwipeActions(item)">
+      <ng-container *ngFor="let swipeAction of _getSwipeActions(item)">
         <ion-item-option
-          [ngClass]="getSwipeActionType(swipeAction, item)"
-          (click)="onSwipeActionSelect(swipeAction, item, $event)"
+          [ngClass]="_getSwipeActionType(swipeAction, item)"
+          (click)="_onSwipeActionSelect(swipeAction, item, $event)"
         >
           <div class="item-content">
             <kirby-icon
-              *ngIf="getSwipeActionIcon(swipeAction, item)"
+              *ngIf="_getSwipeActionIcon(swipeAction, item)"
               size="sm"
-              [name]="getSwipeActionIcon(swipeAction, item)"
+              [name]="_getSwipeActionIcon(swipeAction, item)"
             >
             </kirby-icon>
             <ion-label>
-              {{ getSwipeActionTitle(swipeAction, item) }}
+              {{ _getSwipeActionTitle(swipeAction, item) }}
             </ion-label>
           </div>
         </ion-item-option>

@@ -1,7 +1,7 @@
 <ion-list
   #list
   kirbyInfiniteScroll
-  (scrollEnd)="onLoadOnDemand()"
+  (scrollEnd)="_onLoadOnDemand()"
   [disabled]="!isLoadOnDemandEnabled"
   class="list"
   [class.has-header]="headerTemplate"
@@ -66,7 +66,7 @@
     [item]="item"
     [itemTemplate]="itemTemplate"
     [swipeActions]="swipeActions"
-    [endClass]="getFirstOrLastClass(i, items)"
+    [boundaryClass]="_getBoundaryClass(i, items)"
     [isSelectable]="_isSelectable"
     [getItemColor]="getItemColor"
     [isSelected]="_isSelectable && item === _selectedItem"
@@ -89,7 +89,7 @@
         [item]="item"
         [itemTemplate]="itemTemplate"
         [swipeActions]="swipeActions"
-        [endClass]="getFirstOrLastClass(i)"
+        [boundaryClass]="_getBoundaryClass(i)"
         [isSelectable]="_isSelectable"
         [getItemColor]="getItemColor"
         [isSelected]="_isSelectable && item === _selectedItem"

@@ -20,8 +20,8 @@ import { ItemComponent } from '../item/item.component';
 
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 import { ListHelper } from './helpers/list-helper';
-import { EndClass } from './list-item/list-item.component';
-import { ListSwipeAction } from './list-swipe-action';
+import { BoundaryClass } from './list-item/list-item.component';
+import { ListSwipeAction } from './list-swipe-action.type';
 import {
   ListFooterDirective,
   ListHeaderDirective,
@@ -71,7 +71,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
    *
    * `square` means **without** rounded corners, `rounded` means **with** rounded corners.,  `none` means **without** padding, border, box-shadow and background.
    */
-  @Input() shape = ListShape.rounded;
+  @Input() shape: ListShape = ListShape.rounded;
 
   @HostBinding('class.shape-rounded')
   public get isShapeRounded(): boolean {
@@ -112,8 +112,8 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
         // If we return less items than count, virtual scroll will interprete it as EOF and stop asking for more
         if (itemSlice.length < count && this.isLoadOnDemandEnabled) {
           let elapsedTime = 0;
-          // Scrollend (that triggers load on demand) is not fired when we scroll as the virtual
-          // scroll component fixes the viewport, so we ensure to fire it programmatically
+
+          /* As virtual scroll fixes the viewport causing ScrollEnd to not be emitted; do it manually to trigger load on demand */
           this.scrollDirective.scrollEnd.emit();
 
           const poller = setInterval(() => {
@@ -200,7 +200,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
 
   ngOnChanges(): void {
     this._isSectionsEnabled = !!this.getSectionName;
-    if (!this.items || this.items.length === 0) return;
+    if (this.items?.length === 0) return;
 
     this._groupedItems = this._isSectionsEnabled
       ? this.groupBy.transform(this.items, this.getSectionName)
@@ -215,7 +215,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
         : null;
   }
 
-  onLoadOnDemand(event?: LoadOnDemandEventData) {
+  _onLoadOnDemand(event?: LoadOnDemandEventData) {
     this.listHelper.onLoadOnDemand(this, event);
   }
 
@@ -238,7 +238,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     args.event.stopPropagation();
   }
 
-  getFirstOrLastClass(index: number, section?: any[]): EndClass {
+  _getBoundaryClass(index: number, section?: any[]): BoundaryClass {
     let _items = section || this.items;
 
     if (this._isSectionsEnabled && this.useVirtualScroll) {
@@ -246,9 +246,9 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     }
 
     if (index === 0 || _items[index - 1]?.headingName)
-      return this.headerTemplate ? null : EndClass.first;
+      return this.headerTemplate ? null : BoundaryClass.first;
 
     if (index === _items.length - 1 || _items[index + 1]?.headingName)
-      return this.footerTemplate ? null : EndClass.last;
+      return this.footerTemplate ? null : BoundaryClass.last;
   }
 }

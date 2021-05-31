@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { ListSwipeAction } from '@kirbydesign/designsystem';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
-import { ActionType } from '@kirbydesign/designsystem/components/list/list-swipe-action';
+import { ActionType } from '@kirbydesign/designsystem/components/list/list-swipe-action.type';
 
 @Component({
   selector: 'cookbook-list-swipe-example',
