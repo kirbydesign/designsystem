@@ -20,7 +20,7 @@ import { ItemComponent } from '../item/item.component';
 
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 import { ListHelper } from './helpers/list-helper';
-import { EndClass, ListItem } from './list-item/list-item.component';
+import { EndClass } from './list-item/list-item.component';
 import { ListSwipeAction } from './list-swipe-action';
 import {
   ListFooterDirective,
@@ -32,9 +32,9 @@ import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
 import { GroupByPipe } from './pipes/group-by.pipe';
 
 export enum ListShape {
-  'square',
-  'rounded',
-  'none',
+  square = 'square',
+  rounded = 'rounded',
+  none = 'none',
 }
 
 const TIMEOUT = 5000;
@@ -50,11 +50,11 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   @ViewChild(InfiniteScrollDirective) scrollDirective: InfiniteScrollDirective;
 
   @Input()
-  items: ListItem[] = [];
+  items: any[] = [];
 
-  @Input() getItemColor: (item: ListItem) => ThemeColor;
+  @Input() getItemColor: (item: any) => ThemeColor;
 
-  @Input() getSectionName: (item: ListItem) => string;
+  @Input() getSectionName: (item: any) => string;
 
   @Input() trackBy: TrackByFunction<any>;
 
@@ -138,7 +138,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     });
   }
 
-  private getItemsSlice(index: number, count: number): ListItem[] {
+  private getItemsSlice(index: number, count: number): any[] {
     const _items = this._isSectionsEnabled ? this._virtualGroupedItems : this.items;
     return _items.slice(index, index + count);
   }
@@ -227,7 +227,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     return section.name;
   }
 
-  onItemSelect(item: ListItem) {
+  onItemSelect(item: any) {
     this._selectedItem = item;
     this.itemSelect.emit(this._selectedItem);
   }

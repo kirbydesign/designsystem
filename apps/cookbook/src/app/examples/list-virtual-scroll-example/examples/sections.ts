@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 
-import { ListItem } from '@kirbydesign/designsystem';
-
 import { BaseListComponent } from '../../list-shared/base-list.component';
 
 export const ListVirtualScrollSectionsExampleTemplate = `<kirby-list
@@ -38,7 +36,7 @@ export const ListVirtualScrollSectionsExampleTemplate = `<kirby-list
   `,
 })
 export class ListVirtualScrollSectionsExampleComponent extends BaseListComponent {
-  getSectionName(_item: ListItem): string {
+  getSectionName(_item: any): string {
     return 'Section ' + Math.ceil(Math.random() * 10);
   }
 }
