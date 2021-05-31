@@ -22,8 +22,6 @@ export const ListVirtualScrollItemsExampleTemplate = `
   styleUrls: ['../list-virtual-scroll-example.component.scss'],
 })
 export class ListVirtualScrollItemsExampleComponent extends BaseListComponent {
-  private itemCount: number = 0;
-
   constructor() {
     super();
   }

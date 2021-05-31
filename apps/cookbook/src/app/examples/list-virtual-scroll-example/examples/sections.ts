@@ -38,7 +38,7 @@ export const ListVirtualScrollSectionsExampleTemplate = `<kirby-list
   `,
 })
 export class ListVirtualScrollSectionsExampleComponent extends BaseListComponent {
-  getSectionName(item: ListItem): string {
+  getSectionName(_item: ListItem): string {
     return 'Section ' + Math.ceil(Math.random() * 10);
   }
 }
