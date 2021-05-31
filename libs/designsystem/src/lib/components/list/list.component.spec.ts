@@ -2,7 +2,6 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import * as ionic from '@ionic/angular';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
 import { MockComponent } from 'ng-mocks';
-import { ExpandOperator } from 'rxjs/internal/operators/expand';
 
 import { WindowRef } from '../../types/window-ref';
 import { SpinnerComponent } from '../spinner/spinner.component';
@@ -10,12 +9,12 @@ import { SpinnerComponent } from '../spinner/spinner.component';
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 import { ListItemColorDirective } from './directives/list-item-color.directive';
 import { ListHelper } from './helpers/list-helper';
-import { EndClass, ListItem, ListItemComponent } from './list-item/list-item.component';
+import { EndClass, ListItemComponent } from './list-item/list-item.component';
 import { ListComponent } from './list.component';
 import { LoadOnDemandEvent } from './list.event';
 import { GroupByPipe } from './pipes/group-by.pipe';
 
-const TEST_ITEMS: ListItem[] = [
+const TEST_ITEMS: any[] = [
   {
     id: 0,
     title: 'Vestas Wind Systems has a very long name',
@@ -112,7 +111,7 @@ describe('ListComponent', () => {
 
     it('should be enabled if a section callback is defined', () => {
       spectator.setInput({
-        items: Item.createItems(1, 2, 3),
+        items: TEST_ITEMS,
         getSectionName: (_item: any) => 'this is a test',
       });
 
@@ -235,7 +234,7 @@ describe('ListComponent', () => {
 
     describe('when sections', () => {
       beforeEach(() => {
-        const getSectionName = (item: ListItem): string => {
+        const getSectionName = (item: any): string => {
           return item.detail > 0 ? 'Positive' : 'Negative';
         };
         spectator.setInput('getSectionName', getSectionName);

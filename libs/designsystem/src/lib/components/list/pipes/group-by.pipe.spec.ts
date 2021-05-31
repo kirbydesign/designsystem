@@ -1,5 +1,3 @@
-import { ListItem } from '../list-item/list-item.component';
-
 import { GroupByPipe } from './group-by.pipe';
 
 describe('Pipe: GroupBy', () => {
@@ -18,7 +16,7 @@ describe('Pipe: GroupBy', () => {
   });
 
   it('should section list by callback function', () => {
-    const callback = (item: ListItem) => {
+    const callback = (item: any) => {
       return item.title;
     };
     const collection = [
@@ -47,7 +45,7 @@ describe('Pipe: GroupBy', () => {
   });
 
   it('should order sections by alphabetical order', () => {
-    const callback = (item: ListItem) => {
+    const callback = (item: any) => {
       return item.title;
     };
     const collection = [
