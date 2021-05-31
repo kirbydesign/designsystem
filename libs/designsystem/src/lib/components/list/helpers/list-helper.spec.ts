@@ -20,7 +20,7 @@ describe('list helper', () => {
         loadOnDemand: new EventEmitter<LoadOnDemandEvent>(),
       } as ListComponent;
       loadMoreEmitSpy = spyOn(component.loadOnDemand, 'emit').and.callThrough();
-      component.loadOnDemand.subscribe((loadMoreEvent: LoadOnDemandEvent) => {});
+      component.loadOnDemand.subscribe((_loadMoreEvent: LoadOnDemandEvent) => {});
     });
 
     it('should emit load more event, if load on demand is enabled and is not loading', () => {

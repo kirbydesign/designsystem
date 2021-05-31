@@ -112,8 +112,8 @@ describe('ListComponent', () => {
 
     it('should be enabled if a section callback is defined', () => {
       spectator.setInput({
-        items: TEST_ITEMS,
-        getSectionName: (item: ListItem) => 'this is a test',
+        items: Item.createItems(1, 2, 3),
+        getSectionName: (_item: any) => 'this is a test',
       });
 
       expect(spectator.component._isSectionsEnabled).toBeTruthy();

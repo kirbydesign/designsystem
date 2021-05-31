@@ -67,7 +67,7 @@ describe('ModalController', () => {
       const overlaySpy1: jasmine.SpyObj<Overlay> = jasmine.createSpyObj('overlay', ['dismiss']);
       const onDidDismiss1$ = new Subject<OverlayEventDetail>();
       overlaySpy1.onDidDismiss = onDidDismiss1$.toPromise();
-      overlaySpy1.dismiss.and.callFake((data) => {
+      overlaySpy1.dismiss.and.callFake(() => {
         onDidDismiss1$.next();
         onDidDismiss1$.complete();
         return Promise.resolve(true);
@@ -75,7 +75,7 @@ describe('ModalController', () => {
       const overlaySpy2: jasmine.SpyObj<Overlay> = jasmine.createSpyObj('overlay', ['dismiss']);
       const onDidDismiss2$ = new Subject<OverlayEventDetail>();
       overlaySpy2.onDidDismiss = onDidDismiss2$.toPromise();
-      overlaySpy2.dismiss.and.callFake((data) => {
+      overlaySpy2.dismiss.and.callFake(() => {
         onDidDismiss2$.next();
         onDidDismiss2$.complete();
         return Promise.resolve(true);
@@ -83,7 +83,7 @@ describe('ModalController', () => {
       const overlaySpy3: jasmine.SpyObj<Overlay> = jasmine.createSpyObj('overlay', ['dismiss']);
       const onDidDismiss3$ = new Subject<OverlayEventDetail>();
       overlaySpy3.onDidDismiss = onDidDismiss3$.toPromise();
-      overlaySpy3.dismiss.and.callFake((data) => {
+      overlaySpy3.dismiss.and.callFake(() => {
         onDidDismiss3$.next();
         onDidDismiss3$.complete();
         return Promise.resolve(true);
