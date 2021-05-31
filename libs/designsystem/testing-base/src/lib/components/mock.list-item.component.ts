@@ -20,7 +20,7 @@ import {
 })
 export class MockListItemComponent {
   @Input() item: any;
-  @Input() endClass: BoundaryClass;
+  @Input() boundaryClass: BoundaryClass;
   @Input() swipeActions: ListSwipeAction[];
   @Input() itemTemplate: TemplateRef<any>;
   @Input() isSelected: boolean;

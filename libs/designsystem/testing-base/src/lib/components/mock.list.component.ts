@@ -26,7 +26,7 @@ export class MockListComponent {
   @Input() noMoreItemsText: string;
   @Input() showDivider: boolean;
   @Input() markSelectedRow: boolean;
-  @Input() shape;
+  @Input() shape: ListShape;
   @Input() hasItemSpacing: boolean;
   @Input() useVirtualScroll: boolean;
   @Input() virtualScrollViewportHeight: number;
