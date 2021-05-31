@@ -1,32 +1,6 @@
 .kirby-line-clamp {
   line-height: var(--line-height);
   overflow: hidden;
-
-  // Fallback when -webkit-line-clamp is not supported
-  max-height: calc(var(--line-clamp) * var(--line-height));
-  position: relative;
-
-  // Ellipsis as fallback
-  &::before {
-    content: '…';
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    background-color: var(--kirby-background-color);
-    line-height: var(--line-height);
-    height: var(--line-height);
-  }
-
-  // Cover ellipsis when number of lines is less than or equal to line-clamp value
-  &::after {
-    content: '';
-    position: absolute;
-    right: 0;
-    width: 1em;
-    height: var(--line-height);
-    line-height: var(--line-height);
-    background-color: var(--kirby-background-color);
-  }
 }
 
 @supports (-webkit-line-clamp: 1) {
@@ -34,18 +8,38 @@
     // Non-standard line-clamp with wide browser support
     // See https://caniuse.com/mdn-css_properties_-webkit-line-clamp
     display: -webkit-box;
-    /* Fallback value for --line-clamp could also be a specific number */
-    -webkit-line-clamp: var(--line-clamp, initial);
+    -webkit-line-clamp: var(--line-clamp);
     -webkit-box-orient: vertical;
+  }
+}
 
-    // Reset properties needed for fallback only
-    max-height: initial;
-    position: initial;
+// Fallback solution
+@supports not (-webkit-line-clamp: 1) {
+  .kirby-line-clamp {
+    max-height: calc(var(--line-clamp) * var(--line-height));
+    position: relative;
 
-    // Hide the fallback ellipsis
-    &::before,
+    // Ellipsis
+    &::before {
+      content: '…';
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      background-color: var(--kirby-background-color);
+      line-height: var(--line-height);
+      height: var(--line-height);
+    }
+
+    // Cover ellipsis
+    // when number of lines is less than or equal to line-clamp value
     &::after {
-      display: none;
+      content: '';
+      position: absolute;
+      right: 0;
+      width: 1em;
+      height: var(--line-height);
+      line-height: var(--line-height);
+      background-color: var(--kirby-background-color);
     }
   }
 }
