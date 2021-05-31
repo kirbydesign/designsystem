@@ -20,13 +20,13 @@ import {
   ],
 })
 export class MockListItemComponent {
-  @Input() item: ListItem;
+  @Input() item: any;
   @Input() endClass: EndClass;
   @Input() swipeActions: ListSwipeAction[];
   @Input() itemTemplate: TemplateRef<any>;
   @Input() isSelected: boolean;
   @Input() isSelectable: boolean;
-  @Input() getItemColor: (item: ListItem) => ThemeColor;
+  @Input() getItemColor: (item: any) => ThemeColor;
   @Output() itemSelect = new EventEmitter<any>();
   @Output() swipeActionSelect = new EventEmitter<any>();
 }
