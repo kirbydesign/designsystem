@@ -1,10 +1,8 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { addDays, startOfDay, subDays } from 'date-fns';
+import { utcToZonedTime, zonedTimeToUtc } from 'date-fns-tz';
 
-import {
-  convertUTCDateToLocalDate,
-  getUtcDate,
-} from '@kirbydesign/designsystem/helpers/date-helper';
+import { subtractTimezoneOffset } from '@kirbydesign/designsystem/helpers/date-helper';
 
 @Component({
   selector: 'cookbook-calendar-card-example',
@@ -28,7 +26,7 @@ export class CalendarCardExampleComponent implements OnChanges {
   todayDate: Date;
   disabledDates: Date[];
   yearNavigatorOptions = { from: -6, to: 3 };
-
+  timeZoneName = Intl.DateTimeFormat().resolvedOptions().timeZone;
   constructor() {
     this.updateInputDates();
   }
@@ -41,11 +39,14 @@ export class CalendarCardExampleComponent implements OnChanges {
         // realign selectedDate with the timezone that is now used, or the rendered date will
         // be misleading and confusing
         if (this.useTimezoneUTC) {
-          // realign local -> UTC
-          this.selectedDate = getUtcDate(this.selectedDate);
+          // realign local -> selectedDate
+          this.selectedDate = zonedTimeToUtc(
+            subtractTimezoneOffset(this.selectedDate),
+            this.timeZoneName
+          );
         } else {
           // realign UTC -> local
-          this.selectedDate = convertUTCDateToLocalDate(this.selectedDate);
+          this.selectedDate = utcToZonedTime(this.selectedDate, this.timeZoneName);
         }
       }
     }
@@ -66,7 +67,7 @@ export class CalendarCardExampleComponent implements OnChanges {
   }
 
   private updateInputDates() {
-    const today = this.useTimezoneUTC ? getUtcDate(startOfDay(new Date())) : startOfDay(new Date());
+    const today = startOfDay(new Date());
 
     this.minDate = subDays(today, 60);
     this.maxDate = addDays(today, 60);

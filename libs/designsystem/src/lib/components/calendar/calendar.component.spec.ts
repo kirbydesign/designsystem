@@ -1,10 +1,11 @@
 import { LOCALE_ID } from '@angular/core';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { format, startOfDay, startOfMonth } from 'date-fns';
+import { zonedTimeToUtc } from 'date-fns-tz';
 import { MockComponent } from 'ng-mocks';
 
 import { CalendarComponent, IconComponent } from '..';
-import { getUtcDate } from '../../helpers/date-helper';
+import { subtractTimezoneOffset } from '../../helpers/date-helper';
 import { TestHelper } from '../../testing/test-helper';
 import { WindowRef } from '../../types/window-ref';
 import { CardComponent } from '../card';
@@ -18,7 +19,7 @@ import { CalendarYearNavigatorConfig } from './options/calendar-year-navigator-c
 // as the last one. This makes the component update without the need to
 // explicitly call spectator.component.ngOnChanges()
 
-describe('CalendarComponent', () => {
+fdescribe('CalendarComponent', () => {
   let spectator: SpectatorHost<CalendarComponent>;
 
   const createHost = createHostFactory({
@@ -423,7 +424,9 @@ describe('CalendarComponent', () => {
   }
 
   function utcMidnightDate(yyyyMMdd) {
-    return getUtcDate(startOfDay(new Date(yyyyMMdd)));
+    const timeZone = 'Europe/Copenhagen';
+    const midnight = startOfDay(new Date(yyyyMMdd));
+    return zonedTimeToUtc(subtractTimezoneOffset(midnight), timeZone);
   }
 
   function clickDayOfMonth(dateOneIndexed: number) {

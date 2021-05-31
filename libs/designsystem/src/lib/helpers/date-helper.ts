@@ -9,6 +9,6 @@ export const getUtcDate = (date: Date): Date => {
   );
 };
 
-export const convertUTCDateToLocalDate = (date: Date): Date => {
+export const subtractTimezoneOffset = (date: Date): Date => {
   return new Date(date.getTime() - date.getTimezoneOffset() * 60 * 1000);
 };

@@ -6,6 +6,7 @@
     "entryFile": "src/index.ts",
     "umdModuleIds": {
       "date-fns": "date-fns",
+      "date-fns-tz": "date-fns-tz",
       "highcharts": "highcharts",
       "highcharts/modules/annotations": "highcharts",
       "highcharts/highstock": "highcharts/highstock",
@@ -17,6 +18,7 @@
     "@ionic/angular",
     "highcharts",
     "date-fns",
+    "date-fns-tz",
     "@fontsource/roboto",
     "inputmask"
   ]

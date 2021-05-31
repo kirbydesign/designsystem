@@ -35,9 +35,10 @@ import {
   startOfMonth,
   startOfWeek,
 } from 'date-fns';
+import { utcToZonedTime, zonedTimeToUtc } from 'date-fns-tz';
 import { da, de, enGB, enUS, nb, sv } from 'date-fns/locale';
 
-import { convertUTCDateToLocalDate, getUtcDate } from '../../helpers/date-helper';
+import { subtractTimezoneOffset } from '../../helpers/date-helper';
 import { capitalizeFirstLetter } from '../../helpers/string-helper';
 
 import { CalendarCell } from './helpers/calendar-cell.model';
@@ -103,6 +104,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   private _minDate: Date;
   private _maxDate: Date;
   private locale: string;
+  private timeZoneName: string;
 
   get selectedDate(): Date {
     return this._selectedDate;
@@ -188,6 +190,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
 
   constructor(private calendarHelper: CalendarHelper, @Inject(LOCALE_ID) locale: string) {
     this.locale = this.mapLocale(locale);
+    this.timeZoneName = Intl.DateTimeFormat().resolvedOptions().timeZone;
   }
 
   private formatWithLocale(date: Date, formatStr = 'PP'): string {
@@ -246,13 +249,24 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   // if it doesn't point to midnight.
   private normalizeDate(dateLocalOrUTC: Date) {
     if (!dateLocalOrUTC) return;
-    const localDate = convertUTCDateToLocalDate(dateLocalOrUTC);
-    return startOfDay(localDate);
+
+    if (startOfDay(dateLocalOrUTC) === dateLocalOrUTC) {
+      return dateLocalOrUTC;
+    }
+    if (
+      startOfDay(utcToZonedTime(dateLocalOrUTC, this.timeZoneName)) ===
+      utcToZonedTime(dateLocalOrUTC, this.timeZoneName)
+    ) {
+      const normalizedUTCdate = utcToZonedTime(dateLocalOrUTC, this.timeZoneName);
+      return normalizedUTCdate;
+    }
+
+    return startOfDay(dateLocalOrUTC);
   }
 
   private normalizeDates(datesLocalOrUTC: Date[]) {
     if (datesLocalOrUTC) {
-      return datesLocalOrUTC.map(this.normalizeDate);
+      return datesLocalOrUTC.map((date) => this.normalizeDate(date));
     }
   }
 
@@ -385,9 +399,12 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
 
   onDateSelected(newDay: CalendarCell) {
     if (newDay.isSelectable && newDay.date) {
-      const newDate = new Date(this.activeMonth);
+      const newDate =
+        this.timezone === 'UTC'
+          ? zonedTimeToUtc(subtractTimezoneOffset(this.activeMonth), this.timeZoneName)
+          : new Date(this.activeMonth);
       newDate.setDate(newDay.date);
-      const dateToEmit = this.timezone === 'local' ? newDate : getUtcDate(newDate);
+      const dateToEmit = newDate;
 
       if (this.hasDateChanged(newDate, this._selectedDate)) {
         this.onSelectedDateChange(newDate);
