@@ -19,7 +19,7 @@ import { CalendarYearNavigatorConfig } from './options/calendar-year-navigator-c
 // as the last one. This makes the component update without the need to
 // explicitly call spectator.component.ngOnChanges()
 
-fdescribe('CalendarComponent', () => {
+describe('CalendarComponent', () => {
   let spectator: SpectatorHost<CalendarComponent>;
 
   const createHost = createHostFactory({
