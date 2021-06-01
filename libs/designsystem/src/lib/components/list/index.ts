@@ -6,7 +6,7 @@ export { ListItemComponent } from './list-item/list-item.component';
 export { BoundaryClass } from './list-item/list-item.component';
 
 export { LoadOnDemandEvent } from './list.event';
-export { ListSwipeAction } from './list-swipe-action.type';
+export { ListSwipeAction, ListSwipeActionType, ListSwipeEnd } from './list-swipe-action.type';
 export {
   VirtualScrollerSettings,
   ItemsProcessor,

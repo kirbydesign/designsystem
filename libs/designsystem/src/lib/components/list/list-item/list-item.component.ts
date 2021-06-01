@@ -12,7 +12,7 @@ import { IonItemSliding } from '@ionic/angular';
 
 import { PlatformService } from '../../../helpers/platform.service';
 import { ThemeColor } from '../../../helpers/theme-color.type';
-import { ListSwipeAction, SwipeDirection, SwipeEnd } from '../list-swipe-action.type';
+import { ListSwipeAction, ListSwipeDirection, ListSwipeEnd } from '../list-swipe-action.type';
 
 export enum BoundaryClass {
   first = 'first',
@@ -88,7 +88,7 @@ export class ListItemComponent implements OnInit, AfterViewInit {
     });
   }
 
-  _getSwipeActions(item: any, direction?: SwipeDirection): ListSwipeAction[] {
+  _getSwipeActions(item: any, direction?: ListSwipeDirection): ListSwipeAction[] {
     if (!Array.isArray(this.swipeActions)) {
       return [];
     }
@@ -107,11 +107,11 @@ export class ListItemComponent implements OnInit, AfterViewInit {
     return swipeAction.isDisabled === true;
   }
 
-  _getSwipeActionEnd(item: any): SwipeEnd {
+  _getSwipeActionEnd(item: any): ListSwipeEnd {
     if (this._getSwipeActions(item, 'left').length) {
-      return SwipeEnd.start;
+      return ListSwipeEnd.start;
     }
-    return SwipeEnd.end;
+    return ListSwipeEnd.end;
   }
 
   _getSwipeActionIcon(swipeAction: ListSwipeAction, item: any): string {
