@@ -204,13 +204,13 @@ describe('ListComponent', () => {
     });
   });
 
-  describe('virtual scroll', () => {
+  describe('with virtual scroll', () => {
     beforeEach(() => {
       spectator.setInput('useVirtualScroll', true);
       spectator.setInput('items', TEST_ITEMS);
     });
 
-    it('should set default viewport height, when virtual scrolling is active', () => {
+    it('should set default viewport height', () => {
       const list = spectator.query('.viewport');
 
       expect(list).toHaveComputedStyle({ height: '500px' });
@@ -224,7 +224,7 @@ describe('ListComponent', () => {
       expect(list).toHaveComputedStyle({ height: '400px' });
     });
 
-    it('returns correct end-class to items', () => {
+    it('returns correct boundary-class to items', () => {
       const first = component._getBoundaryClass(0);
       const last = component._getBoundaryClass(TEST_ITEMS.length - 1);
 
@@ -232,7 +232,7 @@ describe('ListComponent', () => {
       expect(last).toEqual(BoundaryClass.last);
     });
 
-    describe('when sections', () => {
+    describe('with sections', () => {
       beforeEach(() => {
         const getSectionName = (item: any): string => {
           return item.detail > 0 ? 'Positive' : 'Negative';
@@ -240,7 +240,7 @@ describe('ListComponent', () => {
         spectator.setInput('getSectionName', getSectionName);
       });
 
-      it('items are grouped correctly', () => {
+      it('should group items correctly', () => {
         expect(component._virtualGroupedItems).toEqual([
           { headingName: 'Negative' },
           {
@@ -280,7 +280,7 @@ describe('ListComponent', () => {
         ]);
       });
 
-      it('returns correct end-class to items', () => {
+      it('returns correct boundary-class to items', () => {
         const section1first = component._getBoundaryClass(1);
         const section1last = component._getBoundaryClass(2);
         const section2first = component._getBoundaryClass(4);
