@@ -233,7 +233,7 @@ describe('ChartComponent', () => {
         {
           type: 'bar',
           name: 'InvisibleClickReceiver',
-          data: component.data.map((dataEntry, idx) => Math.max(...component.data) - dataEntry),
+          data: component.data.map((dataEntry) => Math.max(...component.data) - dataEntry),
           edgeColor: 'rgb(255, 255, 255, 0)',
           opacity: 0,
         },

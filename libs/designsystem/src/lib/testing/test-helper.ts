@@ -2,9 +2,9 @@ import { IonicModule } from '@ionic/angular';
 import { IonicConfig } from '@ionic/core';
 
 export class TestHelper {
-  private static readonly _init = TestHelper.muteIonicReInitializeWarning();
+  public static readonly _init = TestHelper.muteIonicReInitializeWarning();
 
-  private static muteIonicReInitializeWarning() {
+  public static muteIonicReInitializeWarning() {
     const originalWarn = console.warn;
     const patchedWarn = (warning: any, ...optionalParams: any[]) => {
       const suppress = `Ionic Angular was already initialized. Make sure IonicModule.forRoot() is just called once.`;
