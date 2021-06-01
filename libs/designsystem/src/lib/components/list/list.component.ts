@@ -22,6 +22,7 @@ import { InfiniteScrollDirective } from './directives/infinite-scroll.directive'
 import { ListHelper } from './helpers/list-helper';
 import { BoundaryClass } from './list-item/list-item.component';
 import { ListSwipeAction } from './list-swipe-action.type';
+import { VirtualScrollerSettings } from './list-virtual-scroll-settings.type';
 import {
   ListFooterDirective,
   ListHeaderDirective,
@@ -37,7 +38,6 @@ export enum ListShape {
   none = 'none',
 }
 
-const TIMEOUT = 5000;
 const INTERVAL = 400;
 @Component({
   selector: 'kirby-list',
@@ -91,8 +91,9 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
 
   @Input() virtualScrollViewportHeight = 500;
 
-  // Possible settings are listed here: https://github.com/dhilt/ngx-ui-scroll#settings
-  @Input() virtualScrollSettings: any = {};
+  @Input() virtualScrollSettings: VirtualScrollerSettings = {};
+
+  @Input() virtualScrollTimeout = 5000;
 
   _virtualScrollData: IDatasource = {
     get: (index, count) => this.getVirtualDataset(index, count),
@@ -121,7 +122,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
 
             if (this._isLoading) {
               // Just a failsafe in case this.isLoading for some reason is not reset
-              if (elapsedTime > TIMEOUT) {
+              if (elapsedTime > this.virtualScrollTimeout) {
                 clearInterval(poller);
                 resolve([]);
               }

@@ -78,7 +78,7 @@
 
 <ng-template #virtualItemsTemplate let-virtualScrollData>
   <div *uiScroll="let item of virtualScrollData; let i = index">
-    <div [class.item-wrapper]="!item.headingName">
+    <div [class.item-wrapper]="!item.headingName" [class.section-header]="item.headingName">
       <ion-item-divider *ngIf="item.headingName" class="virtual-group">
         <ng-container
           *ngTemplateOutlet="sectionHeaderTemplate; context: { $implicit: item.headingName }"

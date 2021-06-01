@@ -26,15 +26,22 @@ export class ListVirtualScrollShowcaseComponent {
     {
       name: 'virtualScrollViewportHeight',
       description:
-        'When using virtual scroll, we need a fixed scroll container. This property makes it possible to set a custom height on this.',
+        'When using virtual scroll, we need a fixed height scroll container. This property makes it possible to set a custom height on this.',
       type: ['number'],
       defaultValue: '500',
     },
     {
+      name: 'virtualScrollTimeout',
+      description:
+        'When combining virtual scroll with load-on-demand, a timeout is defined as a failsafe for a non-responsive external API. This can be increased if working with slow APIs or large queries.',
+      type: ['number'],
+      defaultValue: '5000',
+    },
+    {
       name: 'virtualScrollSettings',
       description:
-        'Sensible defaults are provided, but the behaviour of the virtual scroll can be fine tuned to specific needs. Available settings can be seen at https://github.com/dhilt/ngx-ui-scroll#settings',
-      type: ['object'],
+        'Sensible defaults are provided, but the behaviour of the virtual scroll can be fine tuned to specific needs. Available settings can also be seen at https://github.com/dhilt/ngx-ui-scroll#settings',
+      type: ['VirtualScrollerSettings'],
       defaultValue: '{ minIndex: 0, startIndex: 0, bufferSize: 10}',
     },
   ];
