@@ -2,13 +2,13 @@ This PR closes # (reference issue number here)
 
 ## Review Checklist
 
-To ease collaboration and make sure you are following the [contribution model](.github/CONTRIBUTING.md/#introduction-to-the-contribution-model) please fill out the below checklist:
+To ease collaboration and make sure you are following the [contribution model](CONTRIBUTING.md/#introduction-to-the-contribution-model) please fill out the below checklist:
 
 - [ ] I have added tests for the changes (for bug fixes / features)
 - [ ] I have added/updated the documentation (for bug fixes / features)
-- [ ] I have done a [self-review](.github/CONTRIBUTING.md/#self-review)
+- [ ] I have done a [self-review](CONTRIBUTING.md/#self-review)
 - [ ] I have requested that the changes are code-reviewed 
-- [ ] I have requested that the changes are [UX reviewed](.github/CONTRIBUTING.md/#ux-review) (only necessary if your PR introduces visual changes)
+- [ ] I have requested that the changes are [UX reviewed](CONTRIBUTING.md/#ux-review) (only necessary if your PR introduces visual changes)
 
 ## Which issue documents the current behaviour?
 
