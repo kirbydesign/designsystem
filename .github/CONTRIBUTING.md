@@ -1,7 +1,7 @@
 <!-- We should probably link to this file in #kirby-guild -->
 First of all - thank you for your interest in contributing to Kirby! 🥳
 <!-- Early on show that we are here to help if necessary and to educate people in how to get help -->
-If you at any point have any questions please read: [I have a question related to Kirby](#i-have-a-question-related-to-kirby)
+If you are looking for help or at any point have questions, check out our [instructions for getting support](.github/SUPPORT.md). 
 
 **Beware:** We reserve the right to close issues and pull requests that does not follow the steps outlined in [the contribution model](#the-contribution-model). This is not because we want to be mean or micro-manage the way things are done - but a project of this size requires some consistency in the way we cooperate in order to be manageable. 
 
@@ -23,9 +23,6 @@ If you at any point have any questions please read: [I have a question related t
   + [Self-review](#self-review)
   + [Pull request](#pull-request)
   + [Test](#test)
-* [I have a question related to Kirby](#i-have-a-question-related-to-kirby)
-  + [Submit an inquiry request on github](#submit-an-inquiry-request-on-github)
-  + [Ask in the kirby-guild slack channel](#ask-in-kirby-guild)
 * [Glossary](#glossary)
   + [Tech Refinement](#tech-refinement)
   + [UX review](#ux-review)
@@ -757,25 +754,3 @@ It can always be reopened if it was a mistake.
 
 * How should testing be done 
 
-## I have a question related to Kirby
-
-<!-- This section is responsible for teaching contributors how to get help with Kirby, we should probably link to this section from the readme.md -->
-We have **Kirby Open Office** every Tuesday and Thursday between 9:15 to 10:15. During these timeslots we will answer questions asked in the @kirby-design/kirby-guild slack channel and inquiry requests submitted on github. You are always welcome to ask questions outside these timeslots and we will answer it when we got time. 
-
-**Do not send direct messages to members of team-kirby:** This is not because we do not want to talk to you - we however prefer questions to be asked in public, such that everyone can benefit from the answers. 
-
-### Submit an inquiry request on github 
-
-You should submit an inquiry request if __If what? What are we trying to achieve with inquiry requests that we do not get from the slack channel?__ 
-
-To do this create a [new issue](https://github.com/kirbydesign/designsystem/issues/new/choose) using the inquiry-template. Make sure to read and fill out the template correctly, as this will ease our work in answering your question.
-
-### Ask in the kirby-guild slack channel
-
-You should ask a question in the @kirby-design/kirby-guild slack channel if: __Same question as above__. 
-
-### Getting access to the #Kirby-guild slack channel
-
-__instructions go here__
-
-<!-- What would be a good way of making this more of an 'aside' thing? -->
