@@ -4,8 +4,10 @@ This PR closes # (reference issue number here)
 
 Please check if your PR fulfills the following requirements:
 
-- [ ] Tests for the changes have been added (for bug fixes / features)
-- [ ] Docs have been added / updated (for bug fixes / features)
+- [ ] I have added tests for the changes (for bug fixes / features)
+- [ ] I have added/updated the documentation (for bug fixes / features)
+- [ ] I have requested that the changes are code-reviewed 
+- [ ] I have requested that the changes are [UX reviewed](.github/CONTRIBUTING.md/#ux-review) (only necessary if your PR introduces visual changes)
 
 ## PR Type
 
