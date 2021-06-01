@@ -1,4 +1,3 @@
-<!-- We should probably link to this file in #kirby-guild -->
 First of all - thank you for your interest in contributing to Kirby! 🥳
 <!-- Early on show that we are here to help if necessary and to educate people in how to get help -->
 If you are looking for help or at any point have questions, check out "[Help!: i have a question related to kirby](.github/SUPPORT.md)". 
@@ -125,21 +124,21 @@ If you got an idea for a component that you think should be part of Kirby you sh
 
 1. **Open a [new issue](https://github.com/kirbydesign/designsystem/issues/new/choose) using the "component request"-template** (See guidelines on how to write "[The good: Issue](#issue)").
 2. **Refinement:**
-    - Request that the issue is [UX refined](#ux-refinement) in [#kirby-guild](#getting-access-to-the-kirby-guild-slack-channel); do not proceed until this is done.
-    - Request that the issue is [tech refined](#tech-refinement) in [#kirby-guild](#getting-access-to-the-kirby-guild-slack-channel); do not proceed until this is done.
+    - Request that the issue is [UX refined](#ux-refinement); do not proceed until this is done.
+    - Request that the issue is [tech refined](#tech-refinement); do not proceed until this is done.
     - Move the issue to the "Ready to do"-column in the "[Kirby kan-ban board](https://github.com/kirbydesign/designsystem/projects/1)"-project.
 3. **Implementation:**
     - Make sure you have read: "[Before you get coding](#before-you-get-coding)".
     - Signal to others you are working on the issue by assigning yourself.
     - Create a "feature"-branch from the [master branch](https://github.com/kirbydesign/designsystem/tree/master). 
-    - Publish a WIP implementation to Github as a draft PR and ask [#kirby-guild](#getting-access-to-the-kirby-guild-slack-channel) for feedback. <!--This will let you know early on if you are going in the right direction.-->
+    - Publish a WIP implementation to Github as a draft PR and ask for feedback. <!--This will let you know early on if you are going in the right direction.-->
     - Make sure you have implemented tests following the guidelines in: "[The good: Test](#test)".
     - Update the [cookbook](https://cookbook.kirby.design) with examples and showcases.
 4. **Review:**
     - Do a [self-review](#self-review). 
     - Create a pull-request. If you created a draft PR in step 3 you can just mark that as "ready for review".
-    - Request that the pull-request is code-reviewed in [#kirby-guild](#getting-access-to-the-kirby-guild-slack-channel).
-    - Request that the pull-request is [UX reviewed](#ux-review) in [#kirby-guild](#getting-access-to-the-kirby-guild-slack-channel).
+    - Request that the pull-request is code-reviewed.
+    - Request that the pull-request is [UX reviewed](#ux-review).
     - When the pull-request has been approved it will be automatically merged to master via [automerge](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/automatically-merging-a-pull-request).
 5. **Celebrate! 🎉**
 
@@ -157,7 +156,7 @@ If you have found a bug in Kirby you should follow these steps:
 
 1. **Report it by opening a [new issue](https://github.com/kirbydesign/designsystem/issues/new/choose) using the "bug report"-template** (See: "[The good: Issue](#issue)").
 2. **Get the bug verified** 
-    - To make sure the bug is not intended behaviour contact [#kirby-guild](#getting-access-to-the-kirby-guild-slack-channel) to have it verified; do not proceed until this is done. 
+    - To make sure the bug is not intended behaviour the bug should be verified by a member of team Kirby; do not proceed until this is done. 
 3. **Implementation:** 
     - Signal to others you are working on the issue by assigning yourself.
     - Create a "fix"-branch from the [master branch](https://github.com/kirbydesign/designsystem/tree/master). 
