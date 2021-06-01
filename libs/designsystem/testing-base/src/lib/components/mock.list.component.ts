@@ -6,6 +6,7 @@ import {
   ListSwipeAction,
   LoadOnDemandEvent,
   ThemeColor,
+  VirtualScrollerSettings,
 } from '@kirbydesign/designsystem';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
