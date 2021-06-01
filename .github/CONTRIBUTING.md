@@ -1,7 +1,7 @@
 <!-- We should probably link to this file in #kirby-guild -->
 First of all - thank you for your interest in contributing to Kirby! 🥳
 <!-- Early on show that we are here to help if necessary and to educate people in how to get help -->
-If you are looking for help or at any point have questions, check out our [instructions for getting support](.github/SUPPORT.md). 
+If you are looking for help or at any point have questions, check out "[Help!: i have a question related to kirby](.github/SUPPORT.md)". 
 
 **Beware:** We reserve the right to close issues and pull requests that does not follow the steps outlined in [the contribution model](#the-contribution-model). This is not because we want to be mean or micro-manage the way things are done - but a project of this size requires some consistency in the way we cooperate in order to be manageable. 
 
