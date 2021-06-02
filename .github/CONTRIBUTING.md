@@ -858,7 +858,7 @@ The following points can help you improve the readability of your tests:
 * Keep your tests isolated (more on this here: [The good test is isolated and flat](#the-good-test-is-isolated-and-flat))
 * Follow the AAA pattern as described above
 
-Below there are two examples. Which one is easiest to read? 
+Below are two examples. Which one is easiest to read? 
 
 ![](images/unreadable-tests.png)
 
