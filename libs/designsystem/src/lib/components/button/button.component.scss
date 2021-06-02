@@ -85,6 +85,8 @@ $button-width: (
 }
 
 :host {
+  @include accessible-target-size();
+
   font-family: var(--kirby-font-family);
   background-color: var(--kirby-button-background-color, initial);
   color: var(--kirby-button-color, inherit);

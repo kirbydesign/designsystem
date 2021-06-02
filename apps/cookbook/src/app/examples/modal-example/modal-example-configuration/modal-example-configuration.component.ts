@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostListener, Input, NgZone, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
 
 import { WindowRef } from '@kirbydesign/designsystem/types/window-ref';
 
@@ -46,7 +46,7 @@ export class ModalExampleConfigurationComponent {
   // Use this flag in checkbox change event handlers to prevent ExpressionChangedAfterItHasBeenCheckedError
   private preventChangeEvent = false;
 
-  constructor(private window: WindowRef, zone: NgZone) {}
+  constructor(private window: WindowRef) {}
 
   toggleDummyKeyboard(show: boolean) {
     const sessionKey = 'kirby-cookbook-show-dummy-keyboard';
