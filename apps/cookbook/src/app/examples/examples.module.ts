@@ -15,6 +15,7 @@ import { ExamplesSharedModule } from './examples.shared.module';
 import { FlagExampleModule } from './flag-example/flag-example.module';
 import { FormFieldExamplesModule } from './form-field-example/form-field-example.module';
 import { ItemExampleModule } from './item-example/item-example.module';
+import { LinkExampleModule } from './link-example/link-example.module';
 import { ListExamplesModule } from './list-example/list-example.module';
 import { ModalCompactExampleComponent } from './modal-example/compact-example/modal-compact-example.component';
 import { FirstEmbeddedModalExampleComponent } from './modal-example/first-embedded-modal-example/first-embedded-modal-example.component';
@@ -43,6 +44,7 @@ const IMPORTS = [
   RadioExampleModule,
   CheckboxExampleModule,
   RangeExampleModule,
+  LinkExampleModule,
 ];
 
 @NgModule({

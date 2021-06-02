@@ -1,14 +1,15 @@
+import { ChangeDetectorRef } from '@angular/core';
 import {
   createComponentFactory,
   createHostFactory,
   Spectator,
   SpectatorHost,
 } from '@ngneat/spectator';
-import { ChangeDetectorRef } from '@angular/core';
 
 import { TestHelper } from '../../testing/test-helper';
-import { ProgressCircleComponent } from './progress-circle.component';
+
 import { ProgressCircleRingComponent } from './progress-circle-ring.component';
+import { ProgressCircleComponent } from './progress-circle.component';
 
 describe('ProgressCircleComponent', () => {
   describe('with stubbed IntersectionObserver', () => {
@@ -43,24 +44,44 @@ describe('ProgressCircleComponent', () => {
     });
 
     describe('diameter', () => {
-      it('should default to md (56px)', () => {
-        spectator.detectChanges();
-        expect(spectator.component.diameter).toBe(ProgressCircleComponent.DIAMETER_MAP.md);
+      it('should default to md', () => {
+        expect(spectator.component._diameter).toBe(56);
       });
-      it('should map sm to 40px', () => {
+
+      it('should map sm to correct value', () => {
         spectator.setInput({ size: 'sm' });
-        spectator.detectChanges();
-        expect(spectator.component.diameter).toBe(ProgressCircleComponent.DIAMETER_MAP.sm);
+        expect(spectator.component._diameter).toBe(40);
       });
-      it('should map md to 56px', () => {
+
+      it('should map md to correct value', () => {
         spectator.setInput({ size: 'md' });
-        spectator.detectChanges();
-        expect(spectator.component.diameter).toBe(ProgressCircleComponent.DIAMETER_MAP.md);
+        expect(spectator.component._diameter).toBe(56);
       });
-      it('should map lg to 96px', () => {
+
+      it('should map lg to correct value', () => {
         spectator.setInput({ size: 'lg' });
-        spectator.detectChanges();
-        expect(spectator.component.diameter).toBe(ProgressCircleComponent.DIAMETER_MAP.lg);
+        expect(spectator.component._diameter).toBe(96);
+      });
+    });
+
+    describe('strokeWidth', () => {
+      it('should default to md', () => {
+        expect(spectator.component._strokeWidth).toBe(4);
+      });
+
+      it('should map sm to correct value', () => {
+        spectator.setInput({ size: 'sm' });
+        expect(spectator.component._strokeWidth).toBe(3);
+      });
+
+      it('should map md to correct value', () => {
+        spectator.setInput({ size: 'md' });
+        expect(spectator.component._strokeWidth).toBe(4);
+      });
+
+      it('should map lg to correct value', () => {
+        spectator.setInput({ size: 'lg' });
+        expect(spectator.component._strokeWidth).toBe(6);
       });
     });
 
@@ -69,20 +90,23 @@ describe('ProgressCircleComponent', () => {
         spectator.setInput({ value: 50 });
         spectator.component['hasElementBeenVisible'] = false;
 
-        expect(spectator.component.shownValue).toBe(0);
+        expect(spectator.component._shownValue).toBe(0);
       });
+
       it('should return value after element has been visible', () => {
         spectator.setInput({ value: 50 });
         spectator.component['hasElementBeenVisible'] = true;
 
-        expect(spectator.component.shownValue).toBe(50);
+        expect(spectator.component._shownValue).toBe(50);
       });
     });
 
     describe('radius', () => {
       it('should calculate radius as diameter / 2', () => {
         spectator.setInput({ size: 'sm' });
-        expect(spectator.component.radius).toBe(ProgressCircleComponent.DIAMETER_MAP.sm / 2);
+        expect(spectator.component._radius).toBe(
+          spectator.component.SIZE_CONFIG['sm'].diameter / 2
+        );
       });
     });
 

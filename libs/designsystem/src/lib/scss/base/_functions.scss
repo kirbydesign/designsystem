@@ -94,7 +94,7 @@
  * Outputs all keys from map as CSS class selector list
  */
 @function keys-to-classes($map) {
-  $classes: [];
+  $classes: ();
   @each $key in map-keys($map) {
     $classes: append($classes, '.#{$key}', $separator: comma);
   }
@@ -159,5 +159,23 @@
 @mixin not-touch() {
   @media (hover: hover) and (pointer: fine) {
     @content;
+  }
+}
+
+// Ensure minimum click area (default 44 x 44 px)
+// Ignore rounded corners to ensure square click area
+@mixin accessible-target-size($width: $fat-finger-size, $height: $width) {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    min-height: $height;
+    min-width: $width;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
   }
 }

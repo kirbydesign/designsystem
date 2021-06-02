@@ -1,11 +1,11 @@
 import {
-  Component,
-  Input,
-  ChangeDetectionStrategy,
-  HostBinding,
-  ElementRef,
   AfterViewInit,
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
+  Component,
+  ElementRef,
+  HostBinding,
+  Input,
   OnDestroy,
 } from '@angular/core';
 
@@ -16,10 +16,10 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProgressCircleComponent implements AfterViewInit, OnDestroy {
-  static readonly DIAMETER_MAP = {
-    sm: 40,
-    md: 56,
-    lg: 96,
+  readonly SIZE_CONFIG = {
+    sm: { diameter: 40, strokeWidth: 3, upperBound: 95 },
+    md: { diameter: 56, strokeWidth: 4, upperBound: 96 },
+    lg: { diameter: 96, strokeWidth: 6, upperBound: 97 },
   };
 
   @Input() value: number = 0;
@@ -72,16 +72,25 @@ export class ProgressCircleComponent implements AfterViewInit, OnDestroy {
 
   @HostBinding('style.width.px')
   @HostBinding('style.height.px')
-  get diameter(): number {
-    return ProgressCircleComponent.DIAMETER_MAP[this.size];
+  get _diameter(): number {
+    return this.SIZE_CONFIG[this.size].diameter;
   }
 
-  get shownValue() {
+  get _shownValue() {
     // This is needed to make an animation [0 -> value] when element is shown to the user
     return this.hasElementBeenVisible ? this.value : 0;
   }
 
-  get radius() {
-    return this.diameter / 2;
+  get _radius() {
+    return this._diameter / 2;
+  }
+
+  get _strokeWidth() {
+    return this.SIZE_CONFIG[this.size].strokeWidth;
+  }
+
+  get _upperBound() {
+    // This is needed to make sure that an input value close to 100 is not shown as 100
+    return this.SIZE_CONFIG[this.size].upperBound;
   }
 }
