@@ -864,7 +864,7 @@ Below are two examples. Which one is easiest to read?
 
 ![](images/readable-tests.png)
 
-(Our guess is the second one)
+(Hint: Our guess is the second one 👌)
 
 #### The good test is isolated and flat
 
