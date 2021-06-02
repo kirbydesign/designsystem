@@ -944,7 +944,7 @@ It is less WET than writing them all out by hand but each test is still flat, st
 
 If you examine the test files, you will notice that almost every file uses the functions `createHostFactory` or `createComponentFactory` as part of their setup. These two functions are given the component being tested along with configuration such as declarations, imports, providers and more.
 
-They then respectively return a `createHost` or `createComponent` function that can be used to create a fresh component in your `beforeEach` blocks. 
+They then respectively return a factory function that can be used to create a fresh component in your `beforeEach` blocks. 
 
 For example see: 
 
@@ -974,7 +974,7 @@ describe('ButtonComponent', () => {
 
 Angular Test Bed is a nice tool for configuring and initializing the environment for unit tests. It unfortunately involves quite a bit of boilerplate code to use in testing. Therefore the use of Spectator is preferred.
 
-For more on `createHostFactory` , `createComponentFactory` , `createHost` and `createComponent` see [the Spectator documentation](https://github.com/ngneat/spectator#testing-components). 
+For more on `createHostFactory` and `createComponentFactory` see [the Spectator documentation](https://github.com/ngneat/spectator#testing-components). 
 
 #### The good test prefers fakeAsync over Async & Done 
 
