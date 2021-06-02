@@ -1,6 +1,6 @@
-@import 'utils';
-@import './base/ionic';
-@import './base/typography';
+@import '../../../../core/src/scss/utils';
+@import '../../../../core/src/scss/base/ionic';
+@import '../../../../core/src/scss/base/typography';
 
 :root {
   --kirby-font-family: 'Roboto';

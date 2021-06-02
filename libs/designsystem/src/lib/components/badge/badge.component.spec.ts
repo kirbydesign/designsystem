@@ -2,8 +2,7 @@ import { IonicModule } from '@ionic/angular';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
 
 import { TestHelper } from '../../testing/test-helper';
-
-import { BadgeComponent } from './badge.component';
+import { BadgeComponent } from '../index';
 
 describe('BadgeComponent', () => {
   let spectator: Spectator<BadgeComponent>;
@@ -27,7 +26,7 @@ describe('BadgeComponent', () => {
   describe('when one character is slotted', () => {
     beforeEach(async () => {
       spectator = createHost({ props: { text: 'x' } });
-      ionBadge = spectator.query('ion-badge');
+      ionBadge = spectator.query('kirby-badge');
       await TestHelper.whenReady(ionBadge);
     });
 
