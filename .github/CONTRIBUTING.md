@@ -808,7 +808,7 @@ The missing _it_ comes from the `it()` blocks used when writing the tests:
 
 ##### Start `describe` and `it` blocks with a lowercase letter 
 
-For example write `describe('inside Page Actions', () => {...})` not `describe('Inside Page Actions', () => {...})` .
+For example write `describe('inside Page Actions', ...)` not `describe('Inside Page Actions', ...)`.
 
 Not following this, causes the capitalisation to be wrong when the test is read as a sentence: 
 
