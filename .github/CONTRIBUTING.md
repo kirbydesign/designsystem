@@ -841,7 +841,7 @@ A test will not always have all parts of AAA - sometimes it may only be necessar
   });
 ```
 
-We do not denote each part of AAA with a comment but use spacing to seperate the different parts of the test.
+We do not necessarily denote each part of AAA with a comment (it is okay if you do) but at least use spacing to seperate the different parts of the test.
 
 You might notice tests in Kirby that do not use the AAA pattern - that is a good opportunity to do some girl/boy scouting and fix it if you are making other changes related to your issue in that file anyways.
 
