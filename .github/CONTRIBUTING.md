@@ -756,7 +756,7 @@ It can always be reopened if it was a mistake.
 
 Tests helps us avoid regressions and provides peace of mind to other contributors when making changes to the code by ensuring that nothing is accidentally broken. Sometimes more time is spent on writing tests than the actual code - but it provides value everytime it is executed and is an important tool for collaboration.
 
-A well written test also acts as a sort of documentation by documenting functional requirements of the code.
+A well written test also acts as documentation of functional requirements for the code.
 
 That is three benefits for the price of one - so do not skimp on testing!
 
