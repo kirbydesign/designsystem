@@ -892,7 +892,7 @@ Take for example the [ `kirby-button` ](https://cookbook.kirby.design/home/showc
 
 ``` 
 
-const testScenarios: { size: ButtonSize; expected: any }[] = [
+const testScenarios = [
   {
     size: ButtonSize.SM,
     expected: { fontSize: fontSize('xs'), height: size('l'), minWidth: '44px' },
