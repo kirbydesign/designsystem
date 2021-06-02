@@ -764,7 +764,7 @@ For testing we use:
 
 * [Karma](https://karma-runner.github.io/latest/index.html) - as our test runner
 * [Jasmine](https://jasmine.github.io) - as the framework for writing tests 
-* [Spectator](https://github.com/ngneat/spectator) - as a tool for reducing boilerplate that gives us mocking capabilities and provide spying functionality 
+* [Spectator](https://github.com/ngneat/spectator) - as a tool for reducing boilerplate code, giving us mocking capabilities and provide spying functionality 
 
 The following is not a guide on how to use these tools (if you are not familiar with Jasmine & Spectator have a look at the linked documentation above). Rather it is a list of points we believe can help you create tests that are helpful in avoiding regression, making others feel safe changing code and that can assist documenting your code.
 
