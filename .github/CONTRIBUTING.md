@@ -780,13 +780,13 @@ Remember that unit tests test a single unit - so if you find yourself relying on
 
 Being able to read a test as a sentence, makes it clear what has gone wrong when the test fails and makes it act as a functional requirement. 
 
-In the following two examples, note how example #2 clearly communicates intent while being easy to read and understand.
+In the following two examples - note how the _good example_ clearly communicates intent while being easy to read and understand.
 
-Example #1 
+Bad example:
 
 ![](images/bad-test-example.png)
 
-Example #2: 
+Good example:
 
 ![](images/good-test-example.png)
 
