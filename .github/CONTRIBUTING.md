@@ -848,7 +848,7 @@ You might notice tests in Kirby that do not use the AAA pattern - that is a good
 #### The good test prioritizes readability above efficient code 
 
 <!-- This section might be a bit redundant IMO -->
-When writing tests prioritise the readability of the test above all. 
+When writing tests prioritize the readability of the test above all. 
 It should be easy for future developers to visually parse and understand what is going on in the test. 
 
 The following points can help you improve the readability of your tests:
