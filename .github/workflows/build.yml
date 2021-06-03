@@ -41,8 +41,8 @@ jobs:
         uses: actions/checkout@v2
       - name: Get Node.JS version from package.json
         id: get_node_version
-        run: echo ::set-output name=NODE_VERSION::$(jq -r .engines.node ./package.json)
-        #run: echo ::set-output name=NODE_VERSION::$(cat .nvmrc)
+        #run: echo ::set-output name=NODE_VERSION::$(jq -r .engines.node ./package.json)
+        run: echo ::set-output name=NODE_VERSION::$(cat .nvmrc)
 #      - name: Set the correct Node version using nvm
 #        shell: bash --login {0} 
 #        run: nvm install --default
