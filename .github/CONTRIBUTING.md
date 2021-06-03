@@ -902,6 +902,8 @@ Following the above points makes it more likely that tests fail due to actual co
 
 Therefore be WET - it will lower the chance of the tests being the problem and give a better overview of what is going on when reading the test. 
 
+However tests written using _[test scenarios](#the-good-test-uses-test-scenarios-when-appropiate)_ are an exception, where it is okay to be less WET and more DRY.
+
 When doing unit tests, further isolation has to be done by stubbing and mocking everything else than what is being tested. 
 
 #### The good test uses test scenarios when appropiate 
