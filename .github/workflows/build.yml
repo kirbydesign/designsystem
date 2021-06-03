@@ -2,7 +2,7 @@ name: Build & Deploy Cookbok
 
 on:
   push: # TODO: Change to `release` event when our release workflow is in place
-    branches: master
+    branches: chore/use-nvmrc
   pull_request:
 
 defaults:
@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       #Build on PRs, new releases & changes not including 'libs' (which gets build as part of new release)
-      do_build: ${{ github.event_name == 'pull_request' || steps.event_type.outputs.is_new_release == 'true' || steps.filter.outputs.libs == 'false' }}
+      do_build: true # ${{ github.event_name == 'pull_request' || steps.event_type.outputs.is_new_release == 'true' || steps.filter.outputs.libs == 'false' }}
     steps:
       - name: Check for new release
         id: event_type
