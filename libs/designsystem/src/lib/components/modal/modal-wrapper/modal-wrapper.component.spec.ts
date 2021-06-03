@@ -111,9 +111,11 @@ describe('ModalWrapperComponent', () => {
     const elementHeight = 500;
     const elementWidth = 300;
     const screenSize = TestHelper.screensize.desktop;
+    let scrollbarWidth = 0;
 
     beforeAll(async () => {
       await TestHelper.resizeTestWindow(screenSize);
+      scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
     });
 
     afterAll(() => {
@@ -188,10 +190,11 @@ describe('ModalWrapperComponent', () => {
         spectator.component['ionModalDidPresent'].complete();
         tick();
 
+        const elementRect = spectator.element.getBoundingClientRect();
         const expectedPosition = {
           top: parseInt(screenSize.height) - elementHeight,
-          left: spectator.element.getBoundingClientRect().left,
-          right: parseInt(screenSize.width) - spectator.element.getBoundingClientRect().right,
+          left: elementRect.left,
+          right: parseInt(screenSize.width) - scrollbarWidth - elementRect.right,
         };
         const ionModalElement = spectator.component['ionModalElement'];
         expect(ionModalElement.style.top).toBe(`${expectedPosition.top}px`);
@@ -204,10 +207,11 @@ describe('ModalWrapperComponent', () => {
         spectator.component['viewportResize'].complete();
         tick();
 
+        const elementRect = spectator.element.getBoundingClientRect();
         const expectedPosition = {
           top: parseInt(screenSize.height) - elementHeight,
-          left: spectator.element.getBoundingClientRect().left,
-          right: parseInt(screenSize.width) - spectator.element.getBoundingClientRect().right,
+          left: elementRect.left,
+          right: parseInt(screenSize.width) - scrollbarWidth - elementRect.right,
         };
         const ionModalElement = spectator.component['ionModalElement'];
         expect(ionModalElement.style.top).toBe(`${expectedPosition.top}px`);

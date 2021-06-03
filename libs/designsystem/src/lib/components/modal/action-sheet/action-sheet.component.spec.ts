@@ -1,53 +1,56 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
-import { By } from '@angular/platform-browser';
-import { MockComponent } from 'ng-mocks';
-import * as ionic from '@ionic/angular';
 import { CUSTOM_ELEMENTS_SCHEMA, DebugElement } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
+import * as ionic from '@ionic/angular';
+import { MockComponent } from 'ng-mocks';
 
-import { ActionSheetComponent } from './action-sheet.component';
-import { ListComponent } from '../../list/list.component';
+import { ButtonComponent } from '../../button/button.component';
+import { CardHeaderComponent } from '../../card/card-header/card-header.component';
 import { CardComponent } from '../../card/card.component';
+import { InfiniteScrollDirective } from '../../list/directives/infinite-scroll.directive';
+import { ListItemColorDirective } from '../../list/directives/list-item-color.directive';
+import { ListComponent } from '../../list/list.component';
 import { GroupByPipe } from '../../list/pipes/group-by.pipe';
 import { SpinnerComponent } from '../../spinner/spinner.component';
-import { InfiniteScrollDirective } from '../../list/directives/infinite-scroll.directive';
-import { CardHeaderComponent } from '../../card/card-header/card-header.component';
-import { ButtonComponent } from '../../button/button.component';
-import { ListItemColorDirective } from '../../list/directives/list-item-color.directive';
+
+import { ActionSheetComponent } from './action-sheet.component';
 
 describe('ActionSheetComponent', () => {
   let component: ActionSheetComponent;
   let fixture: ComponentFixture<ActionSheetComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        ActionSheetComponent,
-        ListComponent,
-        CardComponent,
-        CardHeaderComponent,
-        GroupByPipe,
-        SpinnerComponent,
-        InfiniteScrollDirective,
-        ButtonComponent,
-        ListItemColorDirective,
-        MockComponent(ionic.IonList),
-        MockComponent(ionic.IonListHeader),
-        MockComponent(ionic.IonLabel),
-        MockComponent(ionic.IonItem),
-        MockComponent(ionic.IonItemDivider),
-        MockComponent(ionic.IonItemGroup),
-        MockComponent(ionic.IonItemOptions),
-        MockComponent(ionic.IonItemSliding),
-      ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    }).compileComponents();
-    TestBed.overrideModule(BrowserDynamicTestingModule, {
-      set: {
-        entryComponents: [ActionSheetComponent],
-      },
-    });
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [
+          ActionSheetComponent,
+          ListComponent,
+          CardComponent,
+          CardHeaderComponent,
+          GroupByPipe,
+          SpinnerComponent,
+          InfiniteScrollDirective,
+          ButtonComponent,
+          ListItemColorDirective,
+          MockComponent(ionic.IonList),
+          MockComponent(ionic.IonListHeader),
+          MockComponent(ionic.IonLabel),
+          MockComponent(ionic.IonItem),
+          MockComponent(ionic.IonItemDivider),
+          MockComponent(ionic.IonItemGroup),
+          MockComponent(ionic.IonItemOptions),
+          MockComponent(ionic.IonItemSliding),
+        ],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      }).compileComponents();
+      TestBed.overrideModule(BrowserDynamicTestingModule, {
+        set: {
+          entryComponents: [ActionSheetComponent],
+        },
+      });
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ActionSheetComponent);

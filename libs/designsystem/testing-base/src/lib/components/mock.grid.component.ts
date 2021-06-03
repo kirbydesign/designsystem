@@ -1,6 +1,6 @@
-import { forwardRef, Component, Input } from '@angular/core';
+import { Component, forwardRef, Input } from '@angular/core';
 
-import { GridComponent, GridCardConfiguration } from '@kirbydesign/designsystem';
+import { GridCardConfiguration, GridComponent } from '@kirbydesign/designsystem';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({

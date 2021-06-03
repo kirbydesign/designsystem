@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { IonIcon } from '@ionic/angular';
 import { mockProvider, SpyObject } from '@ngneat/spectator';
@@ -14,17 +14,19 @@ import { IconComponent, IconSize } from './icon.component';
 const { getColor, iconFontSize } = DesignTokenHelper;
 
 describe('IconComponent', () => {
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        IconComponent,
-        ThemeColorDirective,
-        TestWrapperComponent,
-        MockComponent(IonIcon),
-      ],
-      providers: [mockProvider(IconRegistryService)],
-    });
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [
+          IconComponent,
+          ThemeColorDirective,
+          TestWrapperComponent,
+          MockComponent(IonIcon),
+        ],
+        providers: [mockProvider(IconRegistryService)],
+      });
+    })
+  );
 
   it('should compile with custom hardcoded directives', () => {
     const fixture = createTestComponent('<kirby-icon themeColor="primary"></kirby-icon>');

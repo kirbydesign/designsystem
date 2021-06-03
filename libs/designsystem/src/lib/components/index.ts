@@ -39,7 +39,8 @@ export * from './page';
 export * from './router-outlet';
 
 export * from './shared';
-export { SegmentedControlComponent } from './segmented-control/segmented-control.component';
+/* prettier-ignore */
+export { SegmentedControlComponent, SegmentedControlMode} from './segmented-control/segmented-control.component'; // See issue #1555 for prettier-ignore explanation
 export { SegmentItem } from './segmented-control/segment-item';
 export { SlideButtonComponent } from './slide-button/slide-button.component';
 export { SpinnerComponent } from './spinner/spinner.component';
@@ -47,7 +48,6 @@ export { SpinnerComponent } from './spinner/spinner.component';
 export * from './tabs';
 export * from './toast';
 export { ToggleComponent } from './toggle/toggle.component';
-export { ToolbarComponent } from './toolbar/toolbar.component';
 
 export { ProgressCircleComponent } from './progress-circle/progress-circle.component';
 export { FlagComponent } from './flag/flag.component';

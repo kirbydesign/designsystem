@@ -1,5 +1,5 @@
 <ion-segment
-  *ngIf="!isChipMode"
+  *ngIf="mode === 'default'"
   [value]="value?.id"
   (ionChange)="onSegmentSelect($event.detail.value)"
   (click)="preventWrapperClick($event)"
@@ -16,7 +16,7 @@
   </div>
 </ion-segment>
 
-<ng-container *ngIf="isChipMode">
+<ng-container *ngIf="mode === 'chip' || mode === 'compactChip'">
   <kirby-chip
     *ngFor="let item of items; let index = index"
     [text]="item.text"

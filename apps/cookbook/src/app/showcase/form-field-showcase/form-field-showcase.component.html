@@ -42,6 +42,36 @@
   ></cookbook-form-field-input-numeric-example>
 </cookbook-example-viewer>
 
+<h4>Decimal mask</h4>
+<p>
+  Restricts the input to numbers only. It ensures correct keyboard, adds grouping separators based
+  on locale, and will default to allow two fractional digits. These can be configured by setting
+  <code>[precision]="amount of digits"</code>.
+</p>
+<p>
+  Input can be restricted to a specified range with <code>[min]</code> and
+  <code>[max]</code>
+</p>
+<p>
+  As default, negative numbers are disallowed, however, they can be allowed by setting either
+  <code>[allowMinus]="true"</code> or entering a negative number to [min]  <code>[min]="negative number"</code>
+</p>
+<p>
+  Group separators can be disabled with <code>[disableGroupSeperator]</code>.
+</p>
+<cookbook-example-viewer [html]="inputDecimalMaskExample.template">
+  <cookbook-form-field-input-decimal-mask-example
+    [size]="size"
+    #inputDecimalMaskExample
+  ></cookbook-form-field-input-decimal-mask-example>
+</cookbook-example-viewer>
+<p>
+  <em
+    ><strong>*Please note:</strong> using <code>maxlength</code> will disallow fractional
+    digits.</em
+  >
+</p>
+
 <h3>Date</h3>
 <cookbook-example-viewer [html]="inputDateExample.template">
   <cookbook-form-field-input-date-example
@@ -131,6 +161,12 @@
 <h4>Properties:</h4>
 <cookbook-api-description-properties
   [properties]="inputProperties"
+></cookbook-api-description-properties>
+
+<h2>Decimal mask</h2>
+<h4>Properties:</h4>
+<cookbook-api-description-properties
+  [properties]="decimalMaskProperties"
 ></cookbook-api-description-properties>
 
 <h2>Textarea: Specific properties</h2>
