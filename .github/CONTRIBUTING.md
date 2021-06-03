@@ -839,20 +839,33 @@ This also reduces the likeliness of forgetting to correct the test description, 
 
 Following the [AAA pattern](https://medium.com/@pjbgf/title-testing-code-ocd-and-the-aaa-pattern-df453975ab80) makes your tests well structured and easy to understand. 
 
-A test will not always have all parts of AAA - sometimes it may only be necessary to assert, as is the case in the following test:
+An example of this pattern can be found in the file [`list-helper.spec.ts`](https://github.com/kirbydesign/designsystem/blob/master/libs/designsystem/src/lib/components/list/helpers/list-helper.spec.ts): 
 
-``` 
+```javascript
+it('should emit load more event, if load on demand is enabled and is not loading', () => {
+  // Arrange 
+  component.isLoadOnDemandEnabled = true;
+  component.isLoading = false;    
+                                                        
+  // Act 
+  listHelper.onLoadOnDemand(component, null);    
 
-  it('should render with correct background-color', () => {                                                                                                                                                                                             
-       expect(element).toHaveComputedStyle({                                                                                                                                                                                                               
-         'background-color': getColor('primary'),                                                                                                                                                                                                          
-       });                                                                                                                                                                                                                                                 
-  });
+  // Assert
+  expect(component.loadOnDemand.emit).toHaveBeenCalledTimes(1);
+});
 ```
 
-We do not necessarily denote each part of AAA with a comment (it is okay if you do) but at least use spacing to seperate the different parts of the test.
+We do not necessarily denote each part of AAA with a comment as in the above example (it is okay if you do) but at least use spacing to seperate the different parts of the test. 
 
-You might notice tests in Kirby that do not use the AAA pattern - that is a good opportunity to do some girl/boy scouting and fix it if you are making other changes related to your issue in that file anyways.
+A test will not always have all parts of AAA - sometimes it may only be necessary to assert, as is the case in the following test:
+
+```javascript 
+it('should render with correct background-color', () => {
+  expect(element).toHaveComputedStyle({
+   'background-color': getColor('primary'),
+  });
+});
+```
 
 #### The good test prioritizes readability above efficient code 
 
