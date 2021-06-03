@@ -42,6 +42,8 @@ jobs:
       - name: Set the correct Node version using nvm
         shell: bash --login {0} 
         run: nvm install
+      - name: Log node version
+        run: node -v && npm --version
       - name: Fetch Node Modules Cache
         uses: actions/cache@v2
         id: cache
