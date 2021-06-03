@@ -786,15 +786,21 @@ Consider the following _bad_ example:
 
 ![](images/bad-test-example.png)
 
-Here you have to interpret what is meant by "ButtonComponent + Kirby page Page Actions background-color: #fff" and it is also hard to read as a sentence.
-The intent of the test is also unclear; what is it exactly that should have the white backgound color here? 
+Here you have to interpret what is meant by: 
+
+> ButtonComponent + Kirby page Page Actions background-color: #fff 
+
+The intent of the test is unclear; what is it exactly that should have the white background color here? Not only that, but the sentence is also hard to read and understand as a sentence.
 
 Now consider the following _good_ example:
 
 ![](images/good-test-example.png)
 
+When read as a sentence, the intent of the test is clearly communicated while being easy to read and understand:
 
-When read as a sentence: "ButtonComponent in Kirby Page inside Page Actions should render with correct background-color" - the intent of the test is clearly communicated while being easy to read and understand. There is no guessing what should have the white background color applied; the sentence clearly states that it is the ButtonComponent. 
+> ButtonComponent in Kirby Page inside Page Actions should render with correct background-color
+
+There is no guessing what should have the white background color applied; the sentence clearly states that it is the ButtonComponent. 
 
 To achieve this, you can follow these pointers:
 
