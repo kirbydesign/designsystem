@@ -93,14 +93,14 @@ export class ListItemComponent implements OnInit, AfterViewInit {
       return [];
     }
     return this.swipeActions.filter((swipeAction) => {
-      if (this.isSwipeactionDisabled(swipeAction, item)) {
+      if (this.isSwipeActionDisabled(swipeAction, item)) {
         return false;
       }
       return direction ? swipeAction.position === direction : true;
     });
   }
 
-  private isSwipeactionDisabled(swipeAction: ListSwipeAction, item: any): boolean {
+  private isSwipeActionDisabled(swipeAction: ListSwipeAction, item: any): boolean {
     if (swipeAction.isDisabled instanceof Function && swipeAction.isDisabled(item)) {
       return true;
     }
