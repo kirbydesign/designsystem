@@ -904,7 +904,7 @@ describe('ListHelper function: OnLoadOnDemand', () => {
     listHelper.onLoadOnDemand(component, null);
     expect(component.loadOnDemand.emit).not.toHaveBeenCalled();
   });
-  it('should not emit the load more event when load on demand is disabled and is loading', () => {
+  it('should not emit the load more event when load on demand is disabled and isLoading is true', () => {
     component.isLoading = true;
     component.isLoadOnDemandEnabled = false;
     listHelper.onLoadOnDemand(component, null);
@@ -983,8 +983,7 @@ An array of scenarios are used to programatically create tests for each using th
 
 Take for example the [ `kirby-button` ](https://cookbook.kirby.design/home/showcase/button) directive which is used to render buttons. Depending on which size is passed as an input property, it is rendered with different values for `font-size` , `height` and `min-width` . When testing this, the tests for each size is identical. They only differ in which value is given for size and the expected outcome. This can be expressed as an array of test scenarios: 
 
-``` 
-
+```javascript 
 const testScenarios = [
   {
     size: ButtonSize.SM,
@@ -1003,8 +1002,7 @@ const testScenarios = [
 
 These scenarios can then be used to generate the actual tests when combined with string interpolation: 
 
-``` 
-
+```javascript
 testScenarios.forEach((scenario) => {
   describe(`when configured with size = ${scenario.size}`, () => {
     beforeEach(() => {
@@ -1041,8 +1039,7 @@ They then respectively return a factory function that can be used to create a fr
 
 For example see: 
 
-``` 
-
+```javascript 
 describe('ButtonComponent', () => {    
   let spectator: SpectatorHost<ButtonComponent>;    
   let element: HTMLButtonElement;    
@@ -1084,8 +1081,7 @@ When using `fakeAsync` remember to not mix it with the `done` function or the `a
 When working with Ionic you might have to import the `IonicModule` as part of your `createComponent` or `createHost` factory.   
 Here you should use the [ `TestHelper` ](https://github.com/kirbydesign/designsystem/blob/master/libs/designsystem/src/lib/testing/test-helper.ts) property `ionicModuleForTest` like so: 
 
-``` 
-
+```javascript
 const createComponent = createComponentFactory({
   component: RadioComponent,
   imports: [TestHelper.ionicModuleForTest],
@@ -1100,8 +1096,7 @@ There might be files where `IonicModule` is used directly instead of `TestHelper
 
 In Kirby there is a [ `toHaveComputedStyle` ](https://github.com/kirbydesign/designsystem/blob/master/libs/designsystem/src/lib/testing/element-css-custom-matchers.d.ts) custom matcher defined that checks the value of CSS properties an element is rendered with, like so: 
 
-``` 
-
+```javascript
 it('should render with correct border-width', () => {
   expect(element).toHaveComputedStyle({
     'border-width': '1px',
@@ -1113,8 +1108,7 @@ When doing unit tests it can seem to be straightforward to create seperate tests
 
 In that case, we would actually prefer if the test was created as a single _"should render with correct border"_ test; this is really what the reader of your test needs to know in the end. Here all three properties are assessed together like so:
 
-``` 
-
+```javascript
 it('should render with correct border', () => {
   expect(element).toHaveComputedStyle({
     'border-width': '1px',
