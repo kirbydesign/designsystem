@@ -880,11 +880,80 @@ The following points can help you improve the readability of your tests:
 * Keep your tests isolated (more on this here: [The good test is isolated and flat](#the-good-test-is-isolated-and-flat))
 * Follow the AAA pattern as described above
 
-Below are two examples. Which one is easiest to read? 
+Below are two examples. Which one is easiest to read and understand? 
 
-![](images/unreadable-tests.png)
+The following where: 
+- There is no spacing between `it` blocks 
+- Related tests are not grouped under common describes 
+- Tests are not isolated due to the use of `beforeAll`
+- The AAA pattern is not followed 
 
-![](images/readable-tests.png)
+```javascript 
+describe('ListHelper function: OnLoadOnDemand', () => {
+  let listHelper: ListHelper;
+  let component: ListComponent;
+  beforeAll(() => {
+  listHelper = new ListHelper();
+    component = {
+      loadOnDemand: new EventEmitter<LoadOnDemandEvent>(),
+    } as ListComponent;
+    component.loadOnDemand.subscribe((loadMoreEvent: LoadOnDemandEvent) => {});
+  });
+  it('should not emit the load more event when load on demand is disabled', () => {
+    component.isLoadOnDemandEnabled = false;
+    listHelper.onLoadOnDemand(component, null);
+    expect(component.loadOnDemand.emit).not.toHaveBeenCalled();
+  });
+  it('should not emit the load more event when load on demand is disabled and is loading', () => {
+    component.isLoading = true;
+    component.isLoadOnDemandEnabled = false;
+    listHelper.onLoadOnDemand(component, null);
+    expect(component.loadOnDemand.emit).not.toHaveBeenCalled();
+  });
+});
+``` 
+
+Or this one where: 
+- There are spacing between `it` blocks
+- Related tests are grouped under common describes 
+- Tests are isolated due to the use of `beforeEach`
+- The AAA pattern is followed
+
+```javascript 
+describe('ListHelper function: OnLoadOnDemand', () => {
+  let listHelper: ListHelper;
+  let component: ListComponent;
+
+  beforeEach(() => {
+    listHelper = new ListHelper();
+    component = {
+      loadOnDemand: new EventEmitter<LoadOnDemandEvent>(),
+    } as ListComponent;
+    component.loadOnDemand.subscribe((loadMoreEvent: LoadOnDemandEvent) => {});
+  });
+
+  describe('when load on demand is disabled', () => {
+    it('should not emit the load more event', () => {
+      component.isLoadOnDemandEnabled = false;
+
+      listHelper.onLoadOnDemand(component, null);
+
+      expect(component.loadOnDemand.emit).not.toHaveBeenCalled();
+    });
+
+    describe('and isLoading is true', () => {
+      it('should not emit the load more event', () => {
+        component.isLoading = true; 
+        component.isLoadOnDemandEnabled = false;
+
+        listHelper.onLoadOnDemand(component, null);
+
+        expect(component.loadOnDemand.emit).not.toHaveBeenCalled();
+      });
+    });
+  });
+});
+``` 
 
 (Hint: Our guess is the second one 👌)
 
