@@ -1,6 +1,11 @@
 .kirby-line-clamp {
   line-height: var(--line-height);
   overflow: hidden;
+  // TODO: Add explanation
+  // See
+  //  - https://bugs.webkit.org/show_bug.cgi?id=207013
+  //  - https://stackoverflow.com/questions/41995229/webkit-line-clamp-does-not-work-on-chrome-unless-i-make-some-unrelated-css-chan
+  visibility: visible;
 }
 
 @supports (-webkit-line-clamp: 1) {
@@ -8,7 +13,7 @@
     // Non-standard line-clamp with wide browser support
     // See https://caniuse.com/mdn-css_properties_-webkit-line-clamp
     display: -webkit-box;
-    -webkit-line-clamp: var(--line-clamp);
+    -webkit-line-clamp: var(--line-clamp, none);
     -webkit-box-orient: vertical;
   }
 }
