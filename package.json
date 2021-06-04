@@ -157,7 +157,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run sync-node-version",
+      "pre-commit": "npm run sync-node-version && npm run generate-mocks && lint-staged",
       "pre-push": "npm run test:headless-browser:single",
       "post-merge": "post-npm-install"
     }
