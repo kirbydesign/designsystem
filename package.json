@@ -3,7 +3,7 @@
   "version": "2.0.7",
   "description": "Kirby Design Components",
   "engines": {
-    "node": "^14.16"
+    "node": "^14"
   },
   "repository": {
     "type": "git",
