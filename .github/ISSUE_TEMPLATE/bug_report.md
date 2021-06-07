@@ -11,10 +11,10 @@ assignees: ''
 Explanation of applied labels can be found here: https://github.com/kirbydesign/designsystem/labels
 -->
 
-**Describe the bug**
+## Describe the bug
 [ Replace this paragraph with a clear and concise description of what the bug is. ] 
 
-**Describe how to reproduce the bug**
+## Describe how to reproduce the bug
 [ Replace this with steps to reproduce the behavior:
 
 1. Go to '...'
@@ -22,21 +22,21 @@ Explanation of applied labels can be found here: https://github.com/kirbydesign/
 3. Scroll down to '....'
 4. See error ]
 
-**Which Kirby version was used?**
+## Which Kirby version was used?
 - [e.g. 1.1.10]
 
-**What was the expected behavior?**
+## What was the expected behavior?
 [ Replace this paragraph with a clear and concise description of what you expected to happen ]
 
-**Add any screenshots**
+## Add any screenshots
 [ Replace this paragraph with screenshots to help explain your problem (if applicable) ]
 
-**Please complete the following information:**
+## Please complete the following information:
 - OS: [e.g. Windows, MacOS, iOS]
 - Browser [e.g. Chrome, Safari]
 - Browser version [e.g. 22]
 
-**Are there any additional context?**
+## Are there any additional context?
 [ Replace this paragraph with any additional context about the problem here (if any) ]
 
 <hr />

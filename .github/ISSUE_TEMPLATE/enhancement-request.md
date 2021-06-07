@@ -11,13 +11,13 @@ assignees: ''
 Explanation of applied labels can be found here: https://github.com/kirbydesign/designsystem/labels
 -->
 
-**Describe the enhancement**
+## Describe the enhancement
 [ Replace this paragraph with a clear and concise description of what the enhancement is. I.e: I would like Component X to be able to ... ]
 
-**Describe the solution you'd like**
+## Describe the solution you'd like
 [ Replace this paragraph with a clear and concise description of what you want to happen ]
 
-**Have you considered any alternatives?**
+## Have you considered any alternatives?
 [ Replace this paragraph with a clear and concise description of any alternative solutions or enhancement you've considered (if any) ]
 
 **Are there any additional context?**
