@@ -839,7 +839,7 @@ it('should emit load more event, if load on demand is enabled and is not loading
 });
 ```
 
-We do not necessarily denote each part of AAA with a comment as in the above example (it is okay if you do) but at least use spacing to seperate the different parts of the test. 
+We do not necessarily denote each part of AAA with a comment as in the above example (it is okay if you do) but at least use spacing to separate the different parts of the test. 
 
 A test will not always have all parts of AAA - sometimes it may only be necessary to assert, as is the case in the following test:
 
