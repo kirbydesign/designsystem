@@ -9,31 +9,49 @@ import { SpinnerComponent } from '../spinner/spinner.component';
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 import { ListItemColorDirective } from './directives/list-item-color.directive';
 import { ListHelper } from './helpers/list-helper';
+import { BoundaryClass, ListItemComponent } from './list-item/list-item.component';
 import { ListComponent } from './list.component';
 import { LoadOnDemandEvent } from './list.event';
 import { GroupByPipe } from './pipes/group-by.pipe';
 
-/**
- * We need an actual model item, since WeakMap can't use primitives for keys.
- */
-class Item {
-  static createItems(...values: number[]) {
-    return values.map((value) => new Item(value));
-  }
-
-  constructor(public value: number) {}
-}
+const TEST_ITEMS: any[] = [
+  {
+    id: 0,
+    title: 'Vestas Wind Systems has a very long name',
+    subTitle: '2000 pcs',
+    amount: '5.587.218.309 DKK',
+    detail: 225,
+    color: 'default',
+  },
+  {
+    id: 1,
+    title: 'Cypress Semiconductor Corporation',
+    subTitle: '1827 pcs',
+    amount: '76.980 DKK',
+    detail: -3,
+    color: 'light',
+  },
+  {
+    id: 2,
+    title: 'Ultragenyx Pharmaceutical Inc.',
+    subTitle: '787 pcs',
+    amount: '83.004 DKK',
+    detail: -115,
+    color: 'white',
+  },
+  {
+    id: 3,
+    title: 'Trans World Entertainment Corp.',
+    subTitle: '467 pcs',
+    amount: '60.963 DKK',
+    detail: 6,
+    color: 'light',
+  },
+];
 
 describe('ListComponent', () => {
   let spectator: Spectator<ListComponent>;
   let component: ListComponent;
-
-  function runNgOnChanges() {
-    // Forces ngOnChanges to run (since that won't happen, when inputs are changed programmatically)
-    component.ngOnChanges();
-    // Detect changes, since ngOnChanges altered state of component
-    spectator.detectChanges();
-  }
 
   const createHost = createComponentFactory({
     component: ListComponent,
@@ -43,6 +61,7 @@ describe('ListComponent', () => {
       SpinnerComponent,
       InfiniteScrollDirective,
       ListItemColorDirective,
+      ListItemComponent,
       MockComponent(ionic.IonList),
       MockComponent(ionic.IonListHeader),
       MockComponent(ionic.IonLabel),
@@ -76,7 +95,6 @@ describe('ListComponent', () => {
       spectator.setInput({
         items: null,
       });
-      runNgOnChanges();
 
       expect(spectator.component.items).toBe(null);
     });
@@ -87,29 +105,26 @@ describe('ListComponent', () => {
       spectator.setInput({
         getSectionName: undefined,
       });
-      runNgOnChanges();
 
-      expect(spectator.component.isSectionsEnabled).toBeFalsy();
+      expect(spectator.component._isSectionsEnabled).toBeFalsy();
     });
 
     it('should be enabled if a section callback is defined', () => {
       spectator.setInput({
-        items: Item.createItems(1, 2, 3),
+        items: TEST_ITEMS,
         getSectionName: (_item: any) => 'this is a test',
       });
-      runNgOnChanges();
 
-      expect(spectator.component.isSectionsEnabled).toBeTruthy();
+      expect(spectator.component._isSectionsEnabled).toBeTruthy();
     });
   });
 
   describe('divider', () => {
     it('should set class "has-divider" on list element when showDivider is true', () => {
       spectator.setInput({
-        items: Item.createItems(1, 2, 3),
+        items: TEST_ITEMS,
         showDivider: true,
       });
-      runNgOnChanges();
 
       const list = spectator.query('ion-list');
       expect(list.classList).toContain('has-divider');
@@ -117,10 +132,9 @@ describe('ListComponent', () => {
 
     it('should not set class "has-divider" on list element when showDivider is false', () => {
       spectator.setInput({
-        items: Item.createItems(1, 2, 3),
+        items: TEST_ITEMS,
         showDivider: false,
       });
-      runNgOnChanges();
 
       const list = spectator.query('ion-list');
       expect(list.classList).not.toContain('has-divider');
@@ -186,6 +200,96 @@ describe('ListComponent', () => {
         component.ngOnInit();
 
         expect(component.isLoadOnDemandEnabled).toBeFalse();
+      });
+    });
+  });
+
+  describe('with virtual scroll', () => {
+    beforeEach(() => {
+      spectator.setInput('useVirtualScroll', true);
+      spectator.setInput('items', TEST_ITEMS);
+    });
+
+    it('should set default viewport height', () => {
+      const list = spectator.query('.viewport');
+
+      expect(list).toHaveComputedStyle({ height: '500px' });
+    });
+
+    it('should set viewport height according to input', () => {
+      spectator.setInput('virtualScrollViewportHeight', 400);
+
+      const list = spectator.query('.viewport');
+
+      expect(list).toHaveComputedStyle({ height: '400px' });
+    });
+
+    it('returns correct boundary-class to items', () => {
+      const first = component._getBoundaryClass(0);
+      const last = component._getBoundaryClass(TEST_ITEMS.length - 1);
+
+      expect(first).toEqual(BoundaryClass.first);
+      expect(last).toEqual(BoundaryClass.last);
+    });
+
+    describe('with sections', () => {
+      beforeEach(() => {
+        const getSectionName = (item: any): string => {
+          return item.detail > 0 ? 'Positive' : 'Negative';
+        };
+        spectator.setInput('getSectionName', getSectionName);
+      });
+
+      it('should group items correctly', () => {
+        expect(component._virtualGroupedItems).toEqual([
+          { headingName: 'Negative' },
+          {
+            id: 1,
+            title: 'Cypress Semiconductor Corporation',
+            subTitle: '1827 pcs',
+            amount: '76.980 DKK',
+            detail: -3,
+            color: 'light',
+          },
+          {
+            id: 2,
+            title: 'Ultragenyx Pharmaceutical Inc.',
+            subTitle: '787 pcs',
+            amount: '83.004 DKK',
+            detail: -115,
+            color: 'white',
+          },
+
+          { headingName: 'Positive' },
+          {
+            id: 0,
+            title: 'Vestas Wind Systems has a very long name',
+            subTitle: '2000 pcs',
+            amount: '5.587.218.309 DKK',
+            detail: 225,
+            color: 'default',
+          },
+          {
+            id: 3,
+            title: 'Trans World Entertainment Corp.',
+            subTitle: '467 pcs',
+            amount: '60.963 DKK',
+            detail: 6,
+            color: 'light',
+          },
+        ]);
+      });
+
+      it('returns correct boundary-class to items', () => {
+        const section1first = component._getBoundaryClass(1);
+        const section1last = component._getBoundaryClass(2);
+        const section2first = component._getBoundaryClass(4);
+        const section2last = component._getBoundaryClass(5);
+
+        expect(section1first).toEqual(BoundaryClass.first);
+        expect(section2first).toEqual(BoundaryClass.first);
+        expect(section1last).toEqual(BoundaryClass.last);
+        expect(section2last).toEqual(BoundaryClass.last);
       });
     });
   });

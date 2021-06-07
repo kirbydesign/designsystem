@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ListSwipeAction } from '@kirbydesign/designsystem';
+import { ListSwipeAction, ListSwipeActionType } from '@kirbydesign/designsystem';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
 
 @Component({
@@ -84,7 +84,7 @@ export class ListSwipeExampleComponent {
     {
       position: 'left',
       title: 'Archive',
-      type: 'warning',
+      type: ListSwipeActionType.warning,
       onSelected: (item) => this.onArchiveItem(item),
       isDisabled: (item) => item.archived || item.id === 3,
     },
@@ -92,7 +92,7 @@ export class ListSwipeExampleComponent {
       position: 'left',
       title: (item) => (item.flagged ? 'Remove flag' : 'Flag'),
       icon: (item) => (item.flagged ? null : 'flag'),
-      type: 'success',
+      type: ListSwipeActionType.success,
       onSelected: (item) => this.onFlagItem(item),
       isDisabled: (item) => item.id === 3,
     },
@@ -100,7 +100,7 @@ export class ListSwipeExampleComponent {
       position: 'right',
       title: (item) => (item.deleted ? 'Restore' : 'Delete'),
       icon: (item) => (item.deleted ? 'swap' : 'trash'),
-      type: (item) => (item.deleted ? 'warning' : 'danger'),
+      type: (item) => (item.deleted ? ListSwipeActionType.warning : ListSwipeActionType.danger),
       onSelected: (item) => (item.deleted ? this.onRestoreItem(item) : this.onDeleteItem(item)),
       isDisabled: (item) => item.id === 3,
     },
