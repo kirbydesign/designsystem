@@ -27,7 +27,7 @@ If you are looking for help or at any point have questions, check out "[Help!: i
   + [UX review](#ux-review)
   + [Self review](#self-review)
 
-## Introduction to the contribution model
+# Introduction to the contribution model
 
 <!-- Introduction and motivation -->
 Despite Kirby stemming from an internal Bankdata project - it has been decided to open source it, such that others than team Kirby can contribute to it. 
@@ -45,7 +45,7 @@ To do so a series of steps has been created that an issue must go through. All o
 >  
 > _[Principles behind the Agile Manifesto](https://agilemanifesto.org/principles.html)_
 
-### The process of contributing
+## The process of contributing
 
 <!-- General description of the contribution model -->
 
@@ -62,7 +62,7 @@ Actionable checklists for these steps can be found [here](#checklist-i-have-a-co
 
 <!-- Why we do UX refinement?-->
 
-#### UX Refinement
+### UX Refinement
 
 > Planning and deciding how the issue can be solved in a way that aligns with the design system visually and UX-wise.
 
@@ -72,7 +72,7 @@ If a pull-request with visual changes is submitted for an issue that has not bee
 
 <!--- Why do we do Tech refinement? -->
 
-#### Tech Refinement
+### Tech Refinement
 
 > Discussion and agreement on technical solution(s) for the implementation of the issue.
 
@@ -82,7 +82,7 @@ Every issue must be tech refined. Here it is discussed and agreed on how an issu
 
 Once the issue has been properly tech refined Team Kirby will remove the `NOT Tech refined` label from the issue. If a pull-request is submitted for an issue that has not been tech refined; changes and problems that could have been tackled from the beginning, might arise from the code-review.
 
-#### Publish a WIP draft
+### Publish a WIP draft
 
 > Draft pull-request intented for getting timely feedback before too much implementation has been done.
 
@@ -90,7 +90,7 @@ We encourage contributors to publish a draft pull-request with a WIP implementat
 
 <!-- Why do a self-review? -->
 
-#### Self-review
+### Self-review
 
 > Reviewing your own pull-request like you would review someone else's pull-request.
 
@@ -98,7 +98,7 @@ This consists of code-reviewing your own pull-request, following guidelines foun
 
 <!-- Why we do UX reviews? -->
 
-#### UX review
+### UX review
 
 > Confirmation from UXers that the implementation complies with what was decided during UX Refinement.
 
@@ -106,7 +106,7 @@ If the implementation of the issue resulted in visual changes - then it has to b
 
 <!-- - Issues for trackability and history -->
 
-### Before you get coding
+## Before you get coding
 
 Skim through the "[The good](#the-good)"-section. We are a lot of people working together on this project, all with varying prefrences both in terms of how we work and code. This might lead to frustrations during code-reviews. In an effort to avoid this and be transparent; we have specified our preferences on various subjects in that section. 
 
@@ -117,7 +117,7 @@ You should also get properly setup before you write any code. To do so have a lo
 <!-- The following "I have/would" sections has the role of easily guiding the reader 
 on how to do their specific task, and explain them what the process is for that task -->
 
-### Checklist: I have a component request 
+## Checklist: I have a component request 
 
 <!--- Submit issue using the component request template--> 
 If you got an idea for a component that you think should be part of Kirby you should follow these steps: 
@@ -142,7 +142,7 @@ If you got an idea for a component that you think should be part of Kirby you sh
     - When the pull-request has been approved it will be automatically merged to master via [automerge](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/automatically-merging-a-pull-request).
 5. **Celebrate! 🎉**
 
-### Checklist: I have an enhancement 
+## Checklist: I have an enhancement 
 
 If you have an idea for Kirby that is not a brand new component or aimed at improving code quality; then you should submit an enhancement request!
 The process is the same as submitting a component request just using another issue-template: 
@@ -150,7 +150,7 @@ The process is the same as submitting a component request just using another iss
 1. **Open a [new issue](https://github.com/kirbydesign/designsystem/issues/new/choose) using the "enhancement request"-template** (See: "[The good: Issue](#issue)").
 2. **Follow steps 2 to 5 in "[Checklist: I have a component request](#checklist-i-have-a-component-request)".**
 
-### Checklist: I have found a bug 
+## Checklist: I have found a bug 
 
 If you have found a bug in Kirby you should follow these steps: 
 
@@ -165,13 +165,13 @@ If you have found a bug in Kirby you should follow these steps:
     - Write code to fix the bug
 4. **Follow steps 4 and 5 in "[Checklist: I have a component request](#checklist-i-have-a-component-request)".**
 
-## Setup environment and tooling for contribution
+# Setup environment and tooling for contribution
 
 <!-- The following section is responsible for teaching people how to get setup with 
 the repo such that they can get coding -->
 This section will help you get going with Kirby such that you can begin contributing. 
 
-### Clone and install the repository
+## Clone and install the repository
 
 <!-- how to clone and get going with the kirby repo-->
 **Note:** make sure you have the right version of Node installed before installing the repository (see: [Node](#node)).
@@ -199,7 +199,7 @@ npm start
 
 You should now be able to open `http://localhost:4200` in a browser to access the cookbook.
 
-### Node 
+## Node 
 
 <!-- Which version should people use, and perhaps a recommendation on which tool people can use to manage versions. -->
 [Node](https://nodejs.org/en/) is the runtime used for development. 
@@ -208,7 +208,7 @@ It is recommended to use `v12` for development as we currently do not support no
 
 If you need to have multiple versions of node installed then a version manager such as [NVM](https://github.com/nvm-sh/nvm) can be used. 
 
-### TSlint 
+## TSlint 
 
 <!-- People should make sure to have it enabled to avoid unnecessary comments during code review-->
 **Note:** Work is being done to migrate from TSLint to ESLint (see issue: [#1317](https://github.com/kirbydesign/designsystem/issues/1317)). 
@@ -222,7 +222,7 @@ Scripts for running TSLint can be found in `package.json` . We however recommend
 * [TSLint extension for VSCode](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-tslint-plugin).
 * [Enabling "fix on save" in VSCode](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-tslint-plugin#auto-fix-and-auto-fix-on-save).
 
-#### VSCode "workspace library execution"-issue
+### VSCode "workspace library execution"-issue
 
 An issue might occur where TSLint will randomly disable for the current workspace and has to be enabled again using the command `TSLint: Manage workspace library execution`. 
 
@@ -238,7 +238,7 @@ To solve this:
 
 This will cause changes to be made in the file `.vscode/settings.json` ; do not commit these.
 
-### Prettier
+## Prettier
 
 Prettier is used for consistent code formatting and avoiding unnecessary discussions about this during reviews.
 
@@ -258,12 +258,12 @@ If all quotation marks are changed to `"` instead of `'` when you format, it mea
 * [Enabling "format on save" in VSCode](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode#format-on-save)
 
 
-## The good:
+# The good:
 
 <!-- The following sections have the responsibility of explaining contributors our best pratices such that they can more easily have their changes implemented in kirby --> 
 <!-- Ideally we should be able to refer to these sections if people break the guidelines in their issue or pull-requests, to make sure we are all preaching the same guidelines -->
 
-### Issue 
+## Issue 
 
 > A good idea is an orhpan without effective communication. 
 >  
@@ -273,7 +273,7 @@ Writing a good issue is all about effective communication. This leads to fewer q
 
 The following is a series of points that we believe can help to communicate more effectively when writing issues. 
 
-#### The good issue only contains one issue
+### The good issue only contains one issue
 
 While this might seem obvious it can be easy to fall into the trap of bundling two issues together. 
 
@@ -297,7 +297,7 @@ Issue #2:
 If you feel like you are "complaining" too much by creating several issues; don't! 
 It is only helpful of you to split up your issues - you are saving time and easing organization. 
 
-#### The good issue is self-contained 
+### The good issue is self-contained 
 
 It can not be assumed that the reader of your issue has any knowledge of your work outside of Kirby. 
 
@@ -315,11 +315,11 @@ Therefore:
 * Do not assume the reader can access the application you are working on - include screenshots instead.
 * Do not assume the reader can access the repository you are working in - include code snippets instead (if possible). 
 
-#### The good issue is specific & unambigious
+### The good issue is specific & unambigious
 
 The wording of an issue should be as specific and unambigious as possible. This will help the reader understand exactly what you mean. This can be done in many ways. Therefore we have compiled some examples to demonstrate:
 
-##### Example #1: Referring to files 
+#### Example #1: Referring to files 
 
 If you are referring to a file in the repository do not refer to it as `_typography.css` use the full path instead: `libs/designsystem/src/lib/scss/base/_typography.scss` .
 
@@ -329,7 +329,7 @@ While it might be obvious for you and experienced contributors, what and where `
 
 If you already have refered to the full path earlier in the issue, it is okay to refer to the file as `_typography.css` without linking to it.
 
-##### Example #2: Writing reproducible steps for bug reports
+#### Example #2: Writing reproducible steps for bug reports
 
 The steps should be unambigously specific. This can be done for example by changing the step: 
 
@@ -342,7 +342,7 @@ to:
  
 There could be something with the _exact_ way you are doing it, that triggers the behaviour you are experiecing. 
 
-##### Example #3: Using code snippets to explain what and how
+#### Example #3: Using code snippets to explain what and how
 
 When reporting a bug or similar do not write something along the lines of: 
 
@@ -356,7 +356,7 @@ The latter is pure maintainer poetry.
 
 These are but three examples of how issues can be specific and unambigious. Always keep in the back of your mind, how you can be more specific and unambigious when describing issues. 
 
-#### The good issue follows the template 
+### The good issue follows the template 
 
 Do not ignore the template text when creating an issue. Use it. 
 
@@ -365,7 +365,7 @@ They also provide helpful checklists that help you follow [the process of contri
 
 If you experience that no template matches your specific need; well there is a good opportunity to contribute. Create an issue for a new template to be created! 
 
-#### The good issue has a good title
+### The good issue has a good title
 
 The title of an issue is the part being read the most, as issues usually are viewed in some sort of list.
 It can therefore be a good idea to spend some time formulating one. 
@@ -384,7 +384,7 @@ could be improved by writing:
 
 Having a hard time coming up with a good title? It can sometimes be easier to formulate a brief but comprehensive title _after_ you have written the issue description. 
 
-#### The good issue is easy to read
+### The good issue is easy to read
 
 There are MANY ways to improve the readability of a text. The following is just some ways to do it, that we think can add value when writing an issue:
 
@@ -406,7 +406,7 @@ Is much harder to read than:
 > - Brave New World 
 > - The Count of Monte Cristo
 
-#### The good issue contains screenshots and screen recordings if possible 
+### The good issue contains screenshots and screen recordings if possible 
 
 Kirby is a design system, hence it is a very visual project! So do not be shy of using images and screen recordings to explain yourself. 
 
@@ -416,7 +416,7 @@ When reporting a bug, you could add a screen recording to show exactly what you 
 
 Suggesting an enhancement? Add before and after images portraying what you would like, just make sure to clearly state which is "before" and which is "after". 
 
-#### The good issue is closed when there i no need for it (except bug reports!)
+### The good issue is closed when there i no need for it (except bug reports!)
 
 If an issue you have submitted is no longer necessary and no work has been done on it, go ahead and close it.
 
@@ -427,7 +427,7 @@ If someone else has a need for your issue again they can request that it is reop
 
 This does not go for bug reports however, as we want to unearth and solve as many bugs as possible.
 
-### Branch 
+## Branch 
 
 The good branch only contain changes related to one issue and follows our branch naming convention:
 
@@ -454,7 +454,7 @@ As of now, Kirby does not utilise any advanced branching strategies. We always b
 
 You should now be ready to create a _good_ branch that follows our branch naming convention. But if you are interested in why we have decided on this convention - read on. 
 
-#### Why this branch naming convention?
+### Why this branch naming convention?
 
 While a branch is ephemeral, we believe it is important to have informative and consistent naming in order to: 
 
@@ -498,7 +498,7 @@ This makes it easier to change branch as it is not necessary to remember whether
 
 Instead a contributor should simply remember to always use kebab- and lowercase for branch names.
 
-### Commit
+## Commit
 
 You may have encountered statements like
 
@@ -506,7 +506,7 @@ You may have encountered statements like
 
 We agree. Apart from acting as checkpoints, good commits support collaboration by providing an overview of your changes and make navigating them easy. But only as long the commits are good.
 
-#### The good commit follows Git best practices
+### The good commit follows Git best practices
 
 You are encouraged to follow commonly adopted Git best practices. We would especially like to highlight:
 
@@ -523,7 +523,7 @@ You are encouraged to follow commonly adopted Git best practices. We would espec
     - In case something happens to your machine it reduces the amount of work lost
     - Makes it easier to hand over the issue to other developers if needed
 
-#### The good commit has good commit messages
+### The good commit has good commit messages
 
 > Keep in mind: [This](http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html) &middot; [has](https://www.git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project#_commit_guidelines) &middot; [all](https://github.com/torvalds/subsurface-for-dirk/blob/master/README.md#contributing) &middot; [been](http://who-t.blogspot.co.at/2009/12/on-commit-messages.html) &middot; [said](https://github.com/erlang/otp/wiki/writing-good-commit-messages) &middot; [before](https://github.com/spring-projects/spring-framework/blob/30bce7/CONTRIBUTING.md#format-commit-messages)
 >
@@ -539,7 +539,7 @@ Ideally, a good commit message will be structured into three parts:
 
 The most important part is the subject line. The message body should be used if elaboration is necessary. We rarely use a closing line, but if you want to add useful meta-data related to your commit &ndash; such as GitHub issue number and co-author names &ndash; this is where to put it.
 
-##### A good subject line
+#### A good subject line
 
 * will complete the sentence "If applied, this commit will..."
 * is written in [imperative mood](https://www.thoughtco.com/imperative-mood-grammar-1691151) (_Fix_, not ~~_Fixed_~~, ~~_Fixes_~~ etc.)
@@ -580,7 +580,7 @@ Good verbs to use as the first word of your subject line:
 
 > ~~fix code review comments~~
 
-##### A good message body
+#### A good message body
 
 We don't often use message bodies, but we encourage you to do so if you need to elaborate on your changes. Here is some pointers on how to write a good one:
 
@@ -589,7 +589,7 @@ We don't often use message bodies, but we encourage you to do so if you need to 
 * Be aware that if you need to write a lot in the message body it may also be a sign of too many changes in one commit.
 * Wrap lines in the message body at 72 characters
 
-#### Read more about good commits
+### Read more about good commits
 
 For more on good git commits, see (among _many_ other):
 
@@ -600,7 +600,7 @@ For more on good git commits, see (among _many_ other):
 * [Turbo Git Commit Message Standard](https://gist.github.com/turbo/efb8d57c145e00dc38907f9526b60f17)
 * [Check Out These 5 Git Tips Before Your Next Commit](https://medium.com/walmartglobaltech/check-out-these-5-git-tips-before-your-next-commit-c1c7a5ae34d1)
 
-### The Good: Self-Review
+## The Good: Self-Review
 
 A lot of comments and requests for change during review of a pull request can sometimes feel demotivating. Doing a good self-review can save yourself and the reviewer from frustrations during code review.
 
@@ -608,21 +608,21 @@ A self-review removes gravel in the road, leading to a smooth and focused code r
 
 We collected a bunch of common issues that often come up during code reviews.
 
-#### Do not commit unrelated changes
+### Do not commit unrelated changes
 
 Avoid unrelated changes in files that are not directly part of your pull-request. For example, don't commit changes like formatting or reordering imports if they're the _only_ changes made in those files. It will clutter the git history and make it hard to understand why the latest change made to a particular line of code is in a commit that is not related to the change at all. E.g., when using [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens) or similar tools.
 
 If you have already committed unrelated changes try to revert them before asking for code review.
 
-#### Make sure files are formatted
+### Make sure files are formatted
 
 Use Prettier to format the files you are changing. If you are editing a file that for some reason has not already been properly formatted, you will probably see a lot of changes when you diff the file after you format it. Try to put the formatting changes in a separate commit if possible e.g., by creating a _formatting commit_ before committing your other changes. It will be easier for the reviewer to see your actual changes if they have the option to ignore the formatting changes.
 
-#### Look out for linting warnings
+### Look out for linting warnings
 
 The linting rules are configured to help you fix things that are easily forgotten, like sorting imports and removing unused variables, imports etc. Linting may also help you identify and remove dead code. Use the linting tools to avoid having to fix these issues during code review.
 
-#### Delete temporary changes
+### Delete temporary changes
 
 Look for temporary changes you have used during development, like:
 
@@ -632,7 +632,7 @@ Look for temporary changes you have used during development, like:
 
 They do not belong in the codebase and should be removed. TODOs should either be implemented right away or you should create a new issue for solving it later.
 
-#### Concluding questions
+### Concluding questions
 
 From the perspective of a reviewer, ask yourself:
 
@@ -640,7 +640,7 @@ From the perspective of a reviewer, ask yourself:
 * Is the issue solved by the changes? Read the issue description and the tech refinement comment(s) again to confirm you have solved the issue.
 * Does the [pull request](#pull-request) description contain the appropriate information necessary to perform a code review?
 
-### Pull request
+# Pull request
 
 Why should you care about creating good pull requests - is it not just a tool for code reviews?
 
@@ -654,7 +654,7 @@ But more importantly a pull request includes commits containing code changes tha
 Before going through these however - we want to remind you to take ownership of your pull requests. 
 It is your responsibility as a contributor to get your pull requests reviewed, therefore reach out and be communicative! 
 
-### The good pull request solves only one issue
+## The good pull request solves only one issue
 
 Every pull request that is created should solve _one_ existing [Github issue](https://github.com/kirbydesign/designsystem/issues). 
 
@@ -667,7 +667,7 @@ We do not wish for pull requests that have no related issue to be submitted, as 
 
 Should you find yourself in that situation and want to salvage as much of your work as possible: create an issue following [the process for contribution](#the-process-for-contribution) and make changes to your pull request as necessary.
 
-### The good pull request has a title worthy of the changelog
+## The good pull request has a title worthy of the changelog
 
 Besides informing what the changes in the pull request does - the title of your pull request will be used in [the changelog](https://cookbook.kirby.design/home/changelog) to represent your changes.
 ![](images/issue-title-to-changelog.png)
@@ -688,7 +688,7 @@ Example titles that are worthy of the changelog:
 * "Removed kirby-toolbar"
 * "Fixed kirby-radio-group TypeError"
 
-### The good pull request uses the template
+## The good pull request uses the template
 
 As with writing [good issues](#issue), do not ignore the template text when creating a pull request. 
 
@@ -706,7 +706,7 @@ If the pull request solves more than one issue also mention these, such that the
 
 > This PR closes [#1427](https://github.com/kirbydesign/designsystem/issues/1427), closes [#1428](https://github.com/kirbydesign/designsystem/issues/1428), closes [#1429](https://github.com/kirbydesign/designsystem/issues/1429)
 
-### The good pull request has a logical commit history
+## The good pull request has a logical commit history
 
 Maintaining a logical commit history constructed using [good commits](#commit) helps the reviewer easily get an overview and understanding of the changes contained in a pull request.
 
@@ -714,7 +714,7 @@ If you are having trouble maintaining a clean commit history, you could consider
 
 ![](images/good-commit-history.png)
 
-### The good pull request only alters files related to the issue at hand
+## The good pull request only alters files related to the issue at hand
 
 While you might get the urge to be a good girl/boy scout and reorder imports or fix formatting in files not related to your issue, don't.
 
@@ -723,7 +723,7 @@ For example, it would not make sense if the imports for the list component locat
 
 Should you stumble upon possible optimizations or things that could be improved, go ahead and create new issues for these.
 
-### The good pull request knows what it wants
+## The good pull request knows what it wants
 
 Tell the reviewer what you want to get out of your pull request. 
 Should the reviewer do a full-on review or give initial guidance on a WIP implementation? Mention it in the pull request so the reviewer knows what you are looking for and does not waste their time doing a full review on a WIP implementation. 
@@ -734,7 +734,7 @@ Mention people you want to include in the discussion of your pull request by usi
 
 > @MadsBuchmann for details on the fontsource dependency
 
-### The good pull request only uses review comments for actual review comments
+## The good pull request only uses review comments for actual review comments
 
 Review comments are for review comments. Not for explaining your code. 
 
@@ -743,7 +743,7 @@ Future contributors reading the code will also need it and could have a hard tim
 
 Either refactor the code to make it more readable or add clarifying comments in the code itself - it should be possible to understand the code without looking up the pull request.
 
-### The good pull request is closed when there is no need for it
+## The good pull request is closed when there is no need for it
 
 As with the [good issue](#issue), the good pull request is closed when there is no need for it, in order to reduce clutter. 
 
