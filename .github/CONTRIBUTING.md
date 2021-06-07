@@ -776,25 +776,15 @@ Being able to read a test as a sentence, makes it clear what has gone wrong when
 
 In the following two examples - note how the _good example_ clearly communicates intent while being easy to read and understand.
 
-Consider the following _bad_ example: 
+Have a look at the following two examples: 
 
 ![](images/bad-test-example.png)
 
-Here you have to interpret what is meant by: 
-
-> ButtonComponent + Kirby page Page Actions background-color: #fff 
-
-The intent of the test is unclear; what is it exactly that should have the white background color here? Not only that, but the sentence is also hard to read and understand as a sentence.
-
-Now consider the following _good_ example:
-
 ![](images/good-test-example.png)
 
-When read as a sentence, the intent of the test is clearly communicated while being easy to read and understand:
+Start by considering the first example. Notice how hard the test is to understand when read as a sentence and that the intent is unclear; what is it exactly that should have the white background color here? 
 
-> ButtonComponent in Kirby Page inside Page Actions should render with correct background-color
-
-There is no guessing what should have the white background color applied; the sentence clearly states that it is the ButtonComponent. 
+Now consider the second example, it can easily be read as a sentence and the intent of the test is clearly communicated. There is no guessing what should have the white background color applied; the sentence clearly states that it is the ButtonComponent. 
 
 To achieve this, you can follow these pointers:
 
