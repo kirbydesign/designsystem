@@ -12,24 +12,24 @@ Explanation of applied labels can be found here: https://github.com/kirbydesign/
 -->
 
 **Describe the bug**
-Replace this paragraph with a clear and concise description of what the bug is.
+[ Replace this paragraph with a clear and concise description of what the bug is. ] 
 
 **Describe how to reproduce the bug**
-Steps to reproduce the behavior:
+[ Replace this with steps to reproduce the behavior:
 
 1. Go to '...'
 2. Click on '....'
 3. Scroll down to '....'
-4. See error
+4. See error ]
 
 **Which Kirby version was used?**
 - [e.g. 1.1.10]
 
 **What was the expected behavior?**
-Replace this paragraph with a clear and concise description of what you expected to happen.
+[ Replace this paragraph with a clear and concise description of what you expected to happen ]
 
 **Add any screenshots**
-Replace this paragraph with screenshots to help explain your problem (if applicable).
+[ Replace this paragraph with screenshots to help explain your problem (if applicable) ]
 
 **Please complete the following information:**
 - OS: [e.g. Windows, MacOS, iOS]
@@ -37,7 +37,7 @@ Replace this paragraph with screenshots to help explain your problem (if applica
 - Browser version [e.g. 22]
 
 **Are there any additional context?**
-Replace this paragraph with any additional context about the problem here (if any).
+[ Replace this paragraph with any additional context about the problem here (if any) ]
 
 <hr />
 

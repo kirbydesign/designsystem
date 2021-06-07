@@ -12,16 +12,16 @@ Explanation of applied labels can be found here: https://github.com/kirbydesign/
 -->
 
 **Describe the enhancement**
-Replace this paragraph with a clear and concise description of what the enhancement is. I.e: I would like Component X to be able to [...]
+[ Replace this paragraph with a clear and concise description of what the enhancement is. I.e: I would like Component X to be able to ... ]
 
 **Describe the solution you'd like**
-Replace this paragraph with a clear and concise description of what you want to happen.
+[ Replace this paragraph with a clear and concise description of what you want to happen ]
 
 **Have you considered any alternatives?**
-Replace this paragraph with a clear and concise description of any alternative solutions or enhancement you've considered (if any).
+[ Replace this paragraph with a clear and concise description of any alternative solutions or enhancement you've considered (if any) ]
 
 **Are there any additional context?**
-Replace this paragraph with any additional context or screenshots (if any).
+[ Replace this paragraph with any additional context or screenshots (if any) ]
 
 <hr />
 

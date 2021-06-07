@@ -4,14 +4,14 @@ This PR closes # (insert issue number here)
 
 ## What is the new behavior?
 
-Replace this paragraph with a description of the new behaviour after your pull request is merged.
+[ Replace this paragraph with a description of the new behaviour after your pull request is merged ]
 
 ## Does this PR introduce a breaking change?
 
 - [ ] Yes
 - [ ] No
 
-If this PR contains a breaking change, replace this paragraph with a description of the impact and migration path for existing applications. 
+[ If this PR contains a breaking change, replace this paragraph with a description of the impact and migration path for existing applications ] 
 
 ## Are there any additional context?
 
