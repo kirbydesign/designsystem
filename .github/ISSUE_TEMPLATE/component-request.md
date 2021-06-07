@@ -14,10 +14,10 @@ Explanation of applied labels can be found here: https://github.com/kirbydesign/
 **Describe the solution you'd like**
 Replace this paragraph with a clear and concise description of what you want to happen.
 
-**Describe alternatives you've considered**
+**Have you considered any alternatives?**
 Replace this paragraph with a clear and concise description of any alternative solutions or features you've considered (if any).
 
-**Additional context**
+**Are there any additional context?**
 Replace this paragraph with any additional context or screenshots about the component request here, e.g. a link to a corresponding component from [Ionic](https://ionicframework.com/docs/components/) (if any)
 
 <hr />

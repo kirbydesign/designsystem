@@ -10,14 +10,14 @@ assignees: ''
 Explanation of applied labels can be found here: https://github.com/kirbydesign/designsystem/labels
 -->
 
-**Short description of housekeeping request**
+**Describe the housekeeping request**
 
 Replace this paragraph with a clear and concise description of what needs housekeeping along with a reason for doing it.
 
-**Alternatives**
+**Have you considered any alternatives?**
 
 Replace this paragraph with a clear and concise description of any alternative solutions you've considered (if any).
 
-**Additional context**
+**Are there any additional context?**
 
 Replace this paragraph with any additional context about the housekeeping request e.g, links or screenshots (if any).

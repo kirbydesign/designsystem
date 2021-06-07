@@ -14,7 +14,7 @@ Explanation of applied labels can be found here: https://github.com/kirbydesign/
 **Describe the bug**
 Replace this paragraph with a clear and concise description of what the bug is.
 
-**To Reproduce**
+**Describe how to reproduce the bug**
 Steps to reproduce the behavior:
 
 1. Go to '...'
@@ -22,13 +22,13 @@ Steps to reproduce the behavior:
 3. Scroll down to '....'
 4. See error
 
-**Kirby version**
+**Which Kirby version was used?**
 - [e.g. 1.1.10]
 
-**Expected behavior**
+**What was the expected behavior?**
 Replace this paragraph with a clear and concise description of what you expected to happen.
 
-**Screenshots**
+**Add any screenshots**
 Replace this paragraph with screenshots to help explain your problem (if applicable).
 
 **Please complete the following information:**
@@ -36,7 +36,7 @@ Replace this paragraph with screenshots to help explain your problem (if applica
 - Browser [e.g. Chrome, Safari]
 - Browser version [e.g. 22]
 
-**Additional context**
+**Are there any additional context?**
 Replace this paragraph with any additional context about the problem here (if any).
 
 <hr />

@@ -11,16 +11,16 @@ assignees: ''
 Explanation of applied labels can be found here: https://github.com/kirbydesign/designsystem/labels
 -->
 
-**Please add a short description of your enhancement request**
+**Describe the enhancement**
 Replace this paragraph with a clear and concise description of what the enhancement is. I.e: I would like Component X to be able to [...]
 
 **Describe the solution you'd like**
 Replace this paragraph with a clear and concise description of what you want to happen.
 
-**Describe alternatives you've considered**
+**Have you considered any alternatives?**
 Replace this paragraph with a clear and concise description of any alternative solutions or enhancement you've considered (if any).
 
-**Additional context**
+**Are there any additional context?**
 Replace this paragraph with any additional context or screenshots (if any).
 
 <hr />
