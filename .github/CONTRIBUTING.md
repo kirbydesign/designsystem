@@ -635,7 +635,8 @@ From the perspective of a reviewer, ask yourself:
 * Is it obvious what the changes made in the pull request are and what the result of merging the pull request will be?
 * Is the issue solved by the changes? Read the issue description and the tech refinement comment(s) again to confirm you have solved the issue.
 * Does the [pull request](#pull-request) description contain the appropriate information necessary to perform a code review?
-# Pull request
+
+## Pull request
 
 Why should you care about creating good pull requests - is it not just a tool for code reviews?
 
@@ -649,7 +650,7 @@ But more importantly a pull request includes commits containing code changes tha
 Before going through these however - we want to remind you to take ownership of your pull requests. 
 It is your responsibility as a contributor to get your pull requests reviewed, therefore reach out and be communicative! 
 
-## The good pull request solves only one issue
+### The good pull request solves only one issue
 
 Every pull request that is created should solve _one_ existing [Github issue](https://github.com/kirbydesign/designsystem/issues). 
 
@@ -662,7 +663,7 @@ We do not wish for pull requests that have no related issue to be submitted, as 
 
 Should you find yourself in that situation and want to salvage as much of your work as possible: create an issue following [the process for contribution](#the-process-for-contribution) and make changes to your pull request as necessary.
 
-## The good pull request has a title worthy of the changelog
+### The good pull request has a title worthy of the changelog
 
 Besides informing what the changes in the pull request does - the title of your pull request will be used in [the changelog](https://cookbook.kirby.design/home/changelog) to represent your changes.
 ![](images/issue-title-to-changelog.png)
@@ -683,7 +684,7 @@ Example titles that are worthy of the changelog:
 * "Removed kirby-toolbar"
 * "Fixed kirby-radio-group TypeError"
 
-## The good pull request uses the template
+### The good pull request uses the template
 
 As with writing [good issues](#issue), do not ignore the template text when creating a pull request. 
 
@@ -701,7 +702,7 @@ If the pull request solves more than one issue also mention these, such that the
 
 > This PR closes [#1427](https://github.com/kirbydesign/designsystem/issues/1427), closes [#1428](https://github.com/kirbydesign/designsystem/issues/1428), closes [#1429](https://github.com/kirbydesign/designsystem/issues/1429)
 
-## The good pull request has a logical commit history
+### The good pull request has a logical commit history
 
 Maintaining a logical commit history constructed using [good commits](#commit) helps the reviewer easily get an overview and understanding of the changes contained in a pull request.
 
@@ -709,7 +710,7 @@ If you are having trouble maintaining a clean commit history, you could consider
 
 ![](images/good-commit-history.png)
 
-## The good pull request only alters files related to the issue at hand
+### The good pull request only alters files related to the issue at hand
 
 While you might get the urge to be a good girl/boy scout and reorder imports or fix formatting in files not related to your issue, don't.
 
@@ -718,7 +719,7 @@ For example, it would not make sense if the imports for the list component locat
 
 Should you stumble upon possible optimizations or things that could be improved, go ahead and create new issues for these.
 
-## The good pull request knows what it wants
+### The good pull request knows what it wants
 
 Tell the reviewer what you want to get out of your pull request. 
 Should the reviewer do a full-on review or give initial guidance on a WIP implementation? Mention it in the pull request so the reviewer knows what you are looking for and does not waste their time doing a full review on a WIP implementation. 
@@ -729,7 +730,7 @@ Mention people you want to include in the discussion of your pull request by usi
 
 > @MadsBuchmann for details on the fontsource dependency
 
-## The good pull request only uses review comments for actual review comments
+### The good pull request only uses review comments for actual review comments
 
 Review comments are for review comments. Not for explaining your code. 
 
@@ -738,14 +739,14 @@ Future contributors reading the code will also need it and could have a hard tim
 
 Either refactor the code to make it more readable or add clarifying comments in the code itself - it should be possible to understand the code without looking up the pull request.
 
-## The good pull request is closed when there is no need for it
+### The good pull request is closed when there is no need for it
 
 As with the [good issue](#issue), the good pull request is closed when there is no need for it, in order to reduce clutter. 
 
 Therefore if it is clear that the changes will not be merged with the main branch - close it. 
 It can always be reopened if it was a mistake.
 
-### Test
+## Test
 
 Tests helps us avoid regressions and provides peace of mind to other contributors when making changes to the code by ensuring that nothing is accidentally broken. Sometimes more time is spent on writing tests than the actual code - but it provides value everytime it is executed and is an important tool for collaboration.
 
@@ -761,7 +762,7 @@ For testing we use:
 
 The following is not a guide on how to use these tools (if you are not familiar with Jasmine & Spectator have a look at the linked documentation above). Rather it is a list of points we believe can help you create tests that are helpful in avoiding regression, making others feel safe changing code and that can assist documenting your code.
 
-#### The good test is located in the right file
+### The good test is located in the right file
 
 In Kirby we seperate integration tests from unit tests - so make sure to know which kind of testing you are doing before writing them. 
 
@@ -769,7 +770,7 @@ Unit tests are located in `*.spec.ts` files such as [ `button.component.spec.ts`
 
 Remember that unit tests test a single unit - so if you find yourself relying on other components or functions without them being mocked or stubbed, then you are most likely writing an integration test. 
 
-#### The good test can be read as a sentence 
+### The good test can be read as a sentence 
 
 Being able to read a test as a sentence, makes it clear what has gone wrong when the test fails and makes it act as a functional requirement. 
 
@@ -797,7 +798,7 @@ There is no guessing what should have the white background color applied; the se
 
 To achieve this, you can follow these pointers:
 
-##### Use the [Given-When-Then](https://www.agilealliance.org/glossary/gwt/#q=~(infinite~false~filters~(postType~(~'page~'post~'aa_book~'aa_event_session~'aa_experience_report~'aa_glossary~'aa_research_paper~'aa_video)~tags~(~'given*20when*20then))~searchTerm~'~sort~false~sortDirection~'asc~page~1)) formula
+#### Use the [Given-When-Then](https://www.agilealliance.org/glossary/gwt/#q=~(infinite~false~filters~(postType~(~'page~'post~'aa_book~'aa_event_session~'aa_experience_report~'aa_glossary~'aa_research_paper~'aa_video)~tags~(~'given*20when*20then))~searchTerm~'~sort~false~sortDirection~'asc~page~1)) formula
 
 For example have a look at example #2: 
 
@@ -808,7 +809,7 @@ For example have a look at example #2:
 The missing _it_ comes from the `it()` blocks used when writing the tests: 
 ![](images/it-code-example.png)
 
-##### Start `describe` and `it` blocks with a lowercase letter 
+#### Start `describe` and `it` blocks with a lowercase letter 
 
 For example write `describe('inside Page Actions', ...)` not `describe('Inside Page Actions', ...)` .
 
@@ -820,7 +821,7 @@ When done correctly it should read and be capitalized like a normal sentence:
 
 > "ButtonComponent in Kirby Page inside Page Actions should render with correct background-color"
 
-##### Avoid values in the description 
+#### Avoid values in the description 
 
 Notice how the above test says "should render with correct background-color" instead of "should render with background-color #fff". 
 
@@ -828,7 +829,7 @@ For someone running the tests, it is not relevant what the color should be, they
 
 This also reduces the likeliness of forgetting to correct the test description, if the color ever was to change - resulting in uncertainaity to what the correct color actually is. 
 
-#### The good test follows the Arrange, Act, Assert (AAA) pattern
+### The good test follows the Arrange, Act, Assert (AAA) pattern
 
 Following the [AAA pattern](https://medium.com/@pjbgf/title-testing-code-ocd-and-the-aaa-pattern-df453975ab80) makes your tests well structured and easy to understand. 
 
@@ -861,7 +862,7 @@ it('should render with correct background-color', () => {
 
 ```
 
-#### The good test prioritizes readability above efficient code 
+### The good test prioritizes readability above efficient code 
 
 <!-- This section might be a bit redundant IMO -->
 When writing tests prioritize the readability of the test above all. 
@@ -956,7 +957,7 @@ describe('ListHelper function: OnLoadOnDemand', () => {
 
 (Hint: Our guess is the second one 👌)
 
-#### The good test is isolated and flat
+### The good test is isolated and flat
 
 The tests should be isolated and flat, therefore writing tests is one of the few places, where it is okay to be [WET](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself#DRY_vs_WET_vs_AHA_solutions) instead of [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) - it is rather important actually. 
 
@@ -974,7 +975,7 @@ However tests written using _[test scenarios](#the-good-test-uses-test-scenarios
 
 When doing unit tests, further isolation has to be done by stubbing and mocking everything else than what is being tested. 
 
-#### The good test uses test scenarios when appropiate 
+### The good test uses test scenarios when appropiate 
 
 If you find yourself writing several tests that have identical arrange, act and assess sections - just with different variables, then you might benefit from using test scenarios. 
 
@@ -1036,7 +1037,7 @@ This generates a total of 9 tests for us, but we only had to write 3! This is ac
 
 It is less WET than writing them all out by hand but each test is still flat, structured and self-contained. Actually it often reads better as the intention is clearer and gives a better overview of what is going on.
 
-#### The good test prefers the use of Spectator over Angular testbed 
+### The good test prefers the use of Spectator over Angular testbed 
 
 If you examine the test files, you will notice that almost every file uses the functions `createHostFactory` or `createComponentFactory` as part of their setup. These two functions are given the component being tested along with configuration such as declarations, imports, providers and more.
 
@@ -1082,7 +1083,7 @@ Angular Test Bed is a nice tool for configuring and initializing the environment
 
 For more on `createHostFactory` and `createComponentFactory` see [the Spectator documentation](https://github.com/ngneat/spectator#testing-components). 
 
-#### The good test prefers fakeAsync over Async & Done 
+### The good test prefers fakeAsync over Async & Done 
 
 While the `it` function is provided with a `done` callback as an argument and support the `async` / `await` syntax for testing asynchronous behavior; we encourage the use of the [ `fakeAsync` ](https://angular.io/api/core/testing/fakeAsync) function instead. 
 
@@ -1092,7 +1093,7 @@ Using the `done` function might send you straight to [callback hell](https://ima
 
 When using `fakeAsync` remember to not mix it with the `done` function or the `async` / `await` syntax. Using `fakeAsync` we want to simulate that time is passing - not actually wait for the time to pass. 
 
-#### The good test uses ionicModuleForTest instead of IonicModule
+### The good test uses ionicModuleForTest instead of IonicModule
 
 When working with Ionic you might have to import the `IonicModule` as part of your `createComponent` or `createHost` factory.   
 Here you should use the [ `TestHelper` ](https://github.com/kirbydesign/designsystem/blob/master/libs/designsystem/src/lib/testing/test-helper.ts) property `ionicModuleForTest` like so: 
@@ -1108,7 +1109,7 @@ This ensures that each test uses the same config for the `IonicModule` .
 
 There might be files where `IonicModule` is used directly instead of `TestHelper.ionicModuleForTest` - this is a good chance to do some girl/boy scouting and fix it, but only if you are making changes to those files anyways.  
 
-#### The good test combines tests when appropiate
+### The good test combines tests when appropiate
 
 In Kirby there is a [ `toHaveComputedStyle` ](https://github.com/kirbydesign/designsystem/blob/master/libs/designsystem/src/lib/testing/element-css-custom-matchers.d.ts) custom matcher defined that checks the value of CSS properties an element is rendered with, like so: 
 
