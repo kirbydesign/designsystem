@@ -12,7 +12,7 @@ Explanation of applied labels can be found here: https://github.com/kirbydesign/
 -->
 
 **Describe the bug**
-<!--A clear and concise description of what the bug is.-->
+Replace this paragraph with a clear and concise description of what the bug is.
 
 **To Reproduce**
 Steps to reproduce the behavior:
@@ -26,10 +26,10 @@ Steps to reproduce the behavior:
 - [e.g. 1.1.10]
 
 **Expected behavior**
-<!--A clear and concise description of what you expected to happen...-->
+Replace this paragraph with a clear and concise description of what you expected to happen.
 
 **Screenshots**
-<!--If applicable, add screenshots to help explain your problem.-->
+Replace this paragraph with screenshots to help explain your problem (if applicable).
 
 **Please complete the following information:**
 - OS: [e.g. Windows, MacOS, iOS]
@@ -37,7 +37,7 @@ Steps to reproduce the behavior:
 - Browser version [e.g. 22]
 
 **Additional context**
-Add any other context about the problem here.
+Replace this paragraph with any additional context about the problem here (if any).
 
 <!--**Process around fixing and prioritization**-->
 <!--In order to fix bugs in a timely fashion please follow these few steps when relevant-->

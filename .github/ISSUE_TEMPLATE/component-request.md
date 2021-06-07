@@ -12,13 +12,13 @@ Explanation of applied labels can be found here: https://github.com/kirbydesign/
 -->
 
 **Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+Replace this paragraph with a clear and concise description of what you want to happen.
 
 **Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+Replace this paragraph with a clear and concise description of any alternative solutions or features you've considered (if any).
 
 **Additional context**
-Add any other context or screenshots about the feature request here, e.g. a link to the corresponding component from [Ionic](https://ionicframework.com/docs/components/)
+Replace this paragraph with any additional context or screenshots about the component request here, e.g. a link to a corresponding component from [Ionic](https://ionicframework.com/docs/components/) (if any)
 
 <hr />
 

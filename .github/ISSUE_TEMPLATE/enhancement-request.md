@@ -13,16 +13,16 @@ Please see our contribution guidelines for an explanation of the process of cont
 -->
 
 **Please add a short description of your enhancement request**
-A clear and concise description of what the enhancement is. I.e: I would like Component X to be able to [...]
+Replace this paragraph with a clear and concise description of what the enhancement is. I.e: I would like Component X to be able to [...]
 
 **Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+Replace this paragraph with a clear and concise description of what you want to happen.
 
 **Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or enhancement you've considered.
+Replace this paragraph with a clear and concise description of any alternative solutions or enhancement you've considered (if any).
 
 **Additional context**
-Add any other context or screenshots about the feature request here.
+Replace this paragraph with any additional context or screenshots (if any).
 
 <hr />
 
