@@ -1,5 +1,5 @@
 First of all - thank you for your interest in contributing to Kirby! 🥳
-<!-- Early on show that we are here to help if necessary and to educate people in how to get help -->
+
 If you are looking for help or at any point have questions, check out "[Help!: i have a question related to kirby](SUPPORT.md)". 
 
 **Beware:** We reserve the right to close issues and pull requests that does not follow the steps outlined in [the contribution model](#the-contribution-model). This is not because we want to be mean or micro-manage the way things are done - but a project of this size requires some consistency in the way we cooperate in order to be manageable. 
@@ -29,7 +29,6 @@ If you are looking for help or at any point have questions, check out "[Help!: i
 
 # Introduction to the contribution model
 
-<!-- Introduction and motivation -->
 Despite Kirby stemming from an internal Bankdata project - it has been decided to open source it, such that others than team Kirby can contribute to it. 
 Allowing for Kirby to be used in multiple projects without team Kirby being the bottleneck. 
 
@@ -47,7 +46,6 @@ To do so a series of steps has been created that an issue must go through. All o
 
 ## The process of contributing
 
-<!-- General description of the contribution model -->
 
 In broad strokes the process is:
 
@@ -60,7 +58,6 @@ Once a pull request has been approved it will be automatically merged.
 
 Actionable checklists for these steps can be found [here](#checklist-i-have-a-component-request). The following highlight some of the steps in the checklists, to explain what they are and why they exist. Our experience is that pull requests with a troublesome and drawn out review process have not followed one or more of these steps. 
 
-<!-- Why we do UX refinement?-->
 
 ### UX Refinement
 
@@ -70,7 +67,6 @@ Every issue must be UX refined before implementation - unless it does not involv
 
 If a pull request with visual changes is submitted for an issue that has not been UX refined; the UX review process may result in a bunch of changes, that can delay the process of getting your PR approved.
 
-<!--- Why do we do Tech refinement? -->
 
 ### Tech Refinement
 
@@ -88,23 +84,17 @@ Once the issue has been properly tech refined Team Kirby will remove the `NOT Te
 
 We encourage contributors to publish a draft pull request with a WIP implementation of their issue to get feedback. This can advantageously be done before tests are written. By doing this misunderstandings and issues can be tackled early on; here they are often easier to correct. If this is not done, they might not be discovered until the code-review. Tests might have to be changed. So therefore we encourage contributors to use the opportunity to get some timely feedback.
 
-<!-- Why do a self-review? -->
-
 ### Self-review
 
 > Reviewing your own pull request like you would review someone else's pull request.
 
 This consists of code-reviewing your own pull request, following guidelines found in [The good: Self-review](#the-good-self-review). This is your chance to catch any low-hanging fruits and common issues before the reviewer does. If this is not done, an unneccessary amount of minor changes might be required during code review. This wastes both yours and the reviewers time.
 
-<!-- Why we do UX reviews? -->
-
 ### UX review
 
 > Confirmation from UXers that the implementation complies with what was decided during UX Refinement.
 
 If the implementation of the issue resulted in visual changes - then it has to be UX reviewed. This is to make sure that the introduced changes align with the design system. We strive to have every issue that introduces visual changes UX reviewed. If this is not done and the changes are merged to master, we might recieve issues about components not being properly aligned with the design system anymore from the users of Kirby.
-
-<!-- - Issues for trackability and history -->
 
 ## Before you get coding
 
@@ -114,12 +104,9 @@ Alternative ways of doing things are not wrong. But we strive for consistency ac
 
 You should also get properly setup before you write any code. To do so have a look at: "[Setup environment and tooling for contribution](#setup-environment-and-tooling-for-contribution)".
 
-<!-- The following "I have/would" sections has the role of easily guiding the reader 
-on how to do their specific task, and explain them what the process is for that task -->
 
 ## Checklist: I have a component request 
 
-<!--- Submit issue using the component request template--> 
 If you got an idea for a component that you think should be part of Kirby you should follow these steps: 
 
 1. **Open a [new issue](https://github.com/kirbydesign/designsystem/issues/new/choose) using the "component request"-template** (See guidelines on how to write "[The good: Issue](#issue)").
@@ -131,7 +118,7 @@ If you got an idea for a component that you think should be part of Kirby you sh
     - Make sure you have read: "[Before you get coding](#before-you-get-coding)".
     - Signal to others you are working on the issue by assigning yourself.
     - Create a branch from the [master branch](https://github.com/kirbydesign/designsystem/tree/master) following our [branch naming convention](#branch). 
-    - Publish a WIP implementation to Github as a draft PR and ask for feedback. <!--This will let you know early on if you are going in the right direction.-->
+    - Publish a WIP implementation to Github as a draft PR and ask for feedback. 
     - Make sure you have implemented tests following the guidelines in: "[The good: Test](#test)".
     - Update the [cookbook](https://cookbook.kirby.design) with examples and showcases.
 4. **Review:**
@@ -167,13 +154,10 @@ If you have found a bug in Kirby you should follow these steps:
 
 # Setup environment and tooling for contribution
 
-<!-- The following section is responsible for teaching people how to get setup with 
-the repo such that they can get coding -->
 This section will help you get going with Kirby such that you can begin contributing. 
 
 ## Clone and install the repository
 
-<!-- how to clone and get going with the kirby repo-->
 **Note:** make sure you have the right version of Node installed before installing the repository (see: [Node](#node)).
 
 1. Clone the repository: 
@@ -201,7 +185,6 @@ You should now be able to open `http://localhost:4200` in a browser to access th
 
 ## Node 
 
-<!-- Which version should people use, and perhaps a recommendation on which tool people can use to manage versions. -->
 [Node](https://nodejs.org/en/) is the runtime used for development. 
 
 It is recommended to use `v12` for development as we currently do not support node LTS (see issue: [#1443](https://github.com/kirbydesign/designsystem/issues/1443)). 
@@ -210,7 +193,6 @@ If you need to have multiple versions of node installed then a version manager s
 
 ## TSlint 
 
-<!-- People should make sure to have it enabled to avoid unnecessary comments during code review-->
 **Note:** Work is being done to migrate from TSLint to ESLint (see issue: [#1317](https://github.com/kirbydesign/designsystem/issues/1317)). 
 
 TSLint is used for linting which helps keep up the quality of the submitted code for Kirby. 
@@ -259,9 +241,6 @@ If all quotation marks are changed to `"` instead of `'` when you format, it mea
 
 
 # The good:
-
-<!-- The following sections have the responsibility of explaining contributors our best pratices such that they can more easily have their changes implemented in kirby --> 
-<!-- Ideally we should be able to refer to these sections if people break the guidelines in their issue or pull-requests, to make sure we are all preaching the same guidelines -->
 
 ## Issue 
 
