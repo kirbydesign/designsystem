@@ -9,7 +9,6 @@ assignees: ''
 
 <!-- 
 Explanation of applied labels can be found here: https://github.com/kirbydesign/designsystem/labels
-Please see our contribution guidelines for an explanation of the process of contributing to Kirby
 -->
 
 **Please add a short description of your enhancement request**
