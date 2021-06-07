@@ -60,7 +60,7 @@ The contributor who wants to implement this issue should:
 
 - [ ] Make sure you have read: "[Before you get coding](../CONTRIBUTING.md/#before-you-get-coding)".
 - [ ] Signal to others you are working on the issue by assigning yourself.
-- [ ] Create a "fix"-branch from the [master branch](https://github.com/kirbydesign/designsystem/tree/master). 
+- [ ] Create a branch from the [master branch](https://github.com/kirbydesign/designsystem/tree/master) following our [branch naming convention](../CONTRIBUTING.md/#branch). 
 - [ ] Create a test that reproduces the bug following guidelines in: "[The good: Test](../CONTRIBUTING.md/#test)". 
 - [ ] Write code to fix the bug
 
