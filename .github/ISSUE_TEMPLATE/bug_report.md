@@ -44,14 +44,28 @@ Add any other context about the problem here.
 <!--*NOT Verified*-->
 <!--The reported bug might be inteded behaviour - the bug should therefore be verified before it is fixed. Ask a member of @kirbydesign/kirby-guild to verify the bug, before you begin fixing it. When the bug is verified the "NOT Verified" label will be removed.-->
 
+<hr />
 
-## Tasks:
-- [ ] Have the bug report verified by contacting a member of @kirbydesign/kirby-guild
-- [ ] Move issue from "Ready to do" -> "in progress" on our [project board](https://github.com/kirbydesign/designsystem/projects/1)
-- [ ] Create Fix Branch
-- [ ] Create test reproducing the error
-- [ ] Fix
-- [ ] If relevant [Update Examples and Showcase](https://cookbook.kirby.design/home/showcase/button)
-- [ ] Push commits to GitHub
-- [ ] Open a pull request (remember to add `closes #issueno` to the description) and ask @kirbydesign/kirby-guild for review
-- [ ] Merge to master and delete branch
+## Checklist:
+
+The following tasks should be carried out in sequence in order to follow [the process of contributing](../CONTRIBUTING.md/#the-process-of-contributing) correctly.
+
+### Verification
+To make sure the bug is not intended behaviour; it should be verified by a member of team Kirby before moving on to implementation. 
+
+- [ ] Get the `NOT verified` label removed by a member of [team Kirby](../CONTRIBUTING.md/#team-kirby); do not proceed until this is done
+
+### Implementation 
+The contributor who wants to implement this issue should: 
+
+- [ ] Make sure you have read: "[Before you get coding](../CONTRIBUTING.md/#before-you-get-coding)".
+- [ ] Signal to others you are working on the issue by assigning yourself.
+- [ ] Create a "fix"-branch from the [master branch](https://github.com/kirbydesign/designsystem/tree/master). 
+- [ ] Create a test that reproduces the bug following guidelines in: "[The good: Test](../CONTRIBUTING.md/#test)". 
+- [ ] Write code to fix the bug
+
+### Review
+Once the issue has been implemented and is ready for review:
+
+- [ ] Do a [self-review](../CONTRIBUTING.md/#self-review). 
+- [ ] Create a pull-request.
