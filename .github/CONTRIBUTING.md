@@ -158,6 +158,7 @@ If you have found a bug in Kirby you should follow these steps:
 2. **Get the bug verified** 
     - To make sure the bug is not intended behaviour the bug should be verified by a member of team Kirby; do not proceed until this is done. 
 3. **Implementation:** 
+    - Make sure you have read: "[Before you get coding](#before-you-get-coding)".
     - Signal to others you are working on the issue by assigning yourself.
     - Create a "fix"-branch from the [master branch](https://github.com/kirbydesign/designsystem/tree/master). 
     - Create a test that reproduces the bug following guidelines in: "[The good: Test](#test)". 
