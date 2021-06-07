@@ -56,9 +56,9 @@ In broad strokes the process is:
 3. Implement a solution
 4. Get the solution reviewed and approved
 
-Once a pull-request has been approved it will be automatically merged. 
+Once a pull request has been approved it will be automatically merged. 
 
-Actionable checklists for these steps can be found [here](#checklist-i-have-a-component-request). The following highlight some of the steps in the checklists, to explain what they are and why they exist. Our experience is that pull-requests with a troublesome and drawn out review process have not followed one or more of these steps. 
+Actionable checklists for these steps can be found [here](#checklist-i-have-a-component-request). The following highlight some of the steps in the checklists, to explain what they are and why they exist. Our experience is that pull requests with a troublesome and drawn out review process have not followed one or more of these steps. 
 
 <!-- Why we do UX refinement?-->
 
@@ -68,7 +68,7 @@ Actionable checklists for these steps can be found [here](#checklist-i-have-a-co
 
 Every issue must be UX refined before implementation - unless it does not involve any visual changes. This consists of UXers planning how the issue can be solved in a way that aligns with the design system. The `NOT UX refined` label will be removed from the issue by team Kirby, once this has been done.
 
-If a pull-request with visual changes is submitted for an issue that has not been UX refined; the UX review process may result in a bunch of changes, that can delay the process of getting your PR approved.
+If a pull request with visual changes is submitted for an issue that has not been UX refined; the UX review process may result in a bunch of changes, that can delay the process of getting your PR approved.
 
 <!--- Why do we do Tech refinement? -->
 
@@ -80,21 +80,21 @@ Every issue must be tech refined. Here it is discussed and agreed on how an issu
 
 ⚠️ _No code should be written before this step is complete_.
 
-Once the issue has been properly tech refined Team Kirby will remove the `NOT Tech refined` label from the issue. If a pull-request is submitted for an issue that has not been tech refined; changes and problems that could have been tackled from the beginning, might arise from the code-review.
+Once the issue has been properly tech refined Team Kirby will remove the `NOT Tech refined` label from the issue. If a pull request is submitted for an issue that has not been tech refined; changes and problems that could have been tackled from the beginning, might arise from the code-review.
 
 ### Publish a WIP draft
 
-> Draft pull-request intented for getting timely feedback before too much implementation has been done.
+> Draft pull request intented for getting timely feedback before too much implementation has been done.
 
-We encourage contributors to publish a draft pull-request with a WIP implementation of their issue to get feedback. This can advantageously be done before tests are written. By doing this misunderstandings and issues can be tackled early on; here they are often easier to correct. If this is not done, they might not be discovered until the code-review. Tests might have to be changed. So therefore we encourage contributors to use the opportunity to get some timely feedback.
+We encourage contributors to publish a draft pull request with a WIP implementation of their issue to get feedback. This can advantageously be done before tests are written. By doing this misunderstandings and issues can be tackled early on; here they are often easier to correct. If this is not done, they might not be discovered until the code-review. Tests might have to be changed. So therefore we encourage contributors to use the opportunity to get some timely feedback.
 
 <!-- Why do a self-review? -->
 
 ### Self-review
 
-> Reviewing your own pull-request like you would review someone else's pull-request.
+> Reviewing your own pull request like you would review someone else's pull request.
 
-This consists of code-reviewing your own pull-request, following guidelines found in [The good: Self-review](#the-good-self-review). This is your chance to catch any low-hanging fruits and common issues before the reviewer does. If this is not done, an unneccessary amount of minor changes might be required during code review. This wastes both yours and the reviewers time.
+This consists of code-reviewing your own pull request, following guidelines found in [The good: Self-review](#the-good-self-review). This is your chance to catch any low-hanging fruits and common issues before the reviewer does. If this is not done, an unneccessary amount of minor changes might be required during code review. This wastes both yours and the reviewers time.
 
 <!-- Why we do UX reviews? -->
 
@@ -136,10 +136,10 @@ If you got an idea for a component that you think should be part of Kirby you sh
     - Update the [cookbook](https://cookbook.kirby.design) with examples and showcases.
 4. **Review:**
     - Do a [self-review](#self-review). 
-    - Create a pull-request. If you created a draft PR during implementation you can just mark that as "ready for review".
-    - Request that the pull-request is code-reviewed.
-    - Request that the pull-request is [UX reviewed](#ux-review).
-    - When the pull-request has been approved it will be automatically merged to master via [automerge](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/automatically-merging-a-pull-request).
+    - Create a pull request. If you created a draft PR during implementation you can just mark that as "ready for review".
+    - Request that the pull request is code-reviewed.
+    - Request that the pull request is [UX reviewed](#ux-review).
+    - When the pull request has been approved it will be automatically merged to master via [automerge](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/automatically-merging-a-pull-request).
 5. **Celebrate! 🎉**
 
 ## Checklist: I have an enhancement 
@@ -479,7 +479,7 @@ The entire name of the issue type  is to be used, such that contributors does no
   
 Should be part of the branch name, such that others know which issue the changes on the branch is related to. 
 
-If this was not included and a branch is created for which a pull-request is never submitted - questions can arise, such as: _is it safe to delete the branch? Is the issue for this branch closed? Is this branch even related to an issue?_
+If this was not included and a branch is created for which a pull request is never submitted - questions can arise, such as: _is it safe to delete the branch? Is the issue for this branch closed? Is this branch even related to an issue?_
 
 It also functions as a reminder for contributors to only work on one issue per branch. 
 
@@ -610,7 +610,7 @@ We collected a bunch of common issues that often come up during code reviews.
 
 ### Do not commit unrelated changes
 
-Avoid unrelated changes in files that are not directly part of your pull-request. For example, don't commit changes like formatting or reordering imports if they're the _only_ changes made in those files. It will clutter the git history and make it hard to understand why the latest change made to a particular line of code is in a commit that is not related to the change at all. E.g., when using [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens) or similar tools.
+Avoid unrelated changes in files that are not directly part of your pull request. For example, don't commit changes like formatting or reordering imports if they're the _only_ changes made in those files. It will clutter the git history and make it hard to understand why the latest change made to a particular line of code is in a commit that is not related to the change at all. E.g., when using [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens) or similar tools.
 
 If you have already committed unrelated changes try to revert them before asking for code review.
 
