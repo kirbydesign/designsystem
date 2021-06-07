@@ -17,7 +17,7 @@ If this PR contains a breaking change, replace this paragraph with a description
 
 ## Checklist:
 
-To ease collaboration and make sure you are following the [contribution model](./CONTRIBUTING.md/#introduction-to-the-contribution-model) please fill out the below checklist:
+The following tasks should be carried out in sequence in order to follow [the process of contributing](../CONTRIBUTING.md/#the-process-of-contributing) correctly.
 
 - [ ] Make sure you have implemented tests following the guidelines in: "[The good: Test](./CONTRIBUTING.MD/#test)".
 - [ ] Make sure you have updated the cookbook with examples and showcases (for bug fixes, enhancements & new components).
