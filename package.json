@@ -2,6 +2,9 @@
   "name": "designsystem",
   "version": "2.0.8",
   "description": "Kirby Design Components",
+  "engines": {
+    "node": "^14.16"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/kirbydesign/designsystem.git"
@@ -70,7 +73,8 @@
     "help": "nx help",
     "ngcc": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points",
     "publish": "node ./scripts/publish.js",
-    "workspace-generator": "nx workspace-generator"
+    "workspace-generator": "nx workspace-generator",
+    "sync-node-version": "node ./scripts/sync-node-version.js"
   },
   "private": true,
   "dependencies": {
@@ -154,7 +158,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run generate-mocks && lint-staged",
+      "pre-commit": "npm run sync-node-version && npm run generate-mocks && lint-staged",
       "pre-push": "npm run test:headless-browser:single",
       "post-merge": "post-npm-install"
     }
