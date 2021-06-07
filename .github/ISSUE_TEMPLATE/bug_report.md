@@ -39,15 +39,6 @@ Replace this paragraph with screenshots to help explain your problem (if applica
 **Additional context**
 Replace this paragraph with any additional context about the problem here (if any).
 
-<!--**Process around fixing and prioritization**-->
-<!--In order to fix bugs in a timely fashion please follow these few steps when relevant-->
-
-<!--*NOT Prioritized*-->
-<!--Consider urgency of the Bug and be specific if it is blocking for your project. Describe any deadlines for the issue - eg. X needs this done by Y date, to be used in Z sprint. Suggest a milestone for the issue. The Not Prioritized will be removed by the Kirby team. If the bug has "low" priority it will be solved eventually - typically when working with the effected component in a different context.-->
-
-<!--*NOT Verified*-->
-<!--The reported bug might be inteded behaviour - the bug should therefore be verified before it is fixed. Ask a member of @kirbydesign/kirby-guild to verify the bug, before you begin fixing it. When the bug is verified the "NOT Verified" label will be removed.-->
-
 <hr />
 
 ## Checklist:
