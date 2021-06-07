@@ -774,17 +774,27 @@ Remember that unit tests test a single unit - so if you find yourself relying on
 
 Being able to read a test as a sentence, makes it clear what has gone wrong when the test fails and makes it act as a functional requirement. 
 
-In the following two examples - note how the _good example_ clearly communicates intent while being easy to read and understand.
+Have a look at the following two examples:
 
-Have a look at the following two examples: 
+```Javascript
+describe('ButtonComponent + Kirby Page', () => {
+  describe('Page Actions', () => {
+    it('background-color: #fff', ...) 
+  })
+})
+```
 
-![](images/bad-test-example.png)
+```Javascript
+describe('ButtonComponent in Kirby Page', () => {
+  describe('inside page actions', () => {
+    it('should render with correct background-color', ...) 
+  })
+})
+```
 
-![](images/good-test-example.png)
+Start by reading the first example as a sentence: _"ButtonComponent + Kirby Page Page Actions background-color: #fff"_. Notice how hard the test is to read and understand when read like this. The intent of the test is also unclear; what is it exactly that should have the white background color here? Page Actions? ButtonComponent? Kirby Page?
 
-Start by considering the first example. Notice how hard the test is to understand when read as a sentence and that the intent is unclear; what is it exactly that should have the white background color here? 
-
-Now consider the second example, it can easily be read as a sentence and the intent of the test is clearly communicated. There is no guessing what should have the white background color applied; the sentence clearly states that it is the ButtonComponent. 
+Now read the second example as a sentence: _"ButtonComponent in Kirby Page inside page actions should render with correct background-color"_. It can easily be read as a sentence and the intent of the test is clear. There is no guessing what should have the white background color applied; the sentence clearly states that it is the ButtonComponent. 
 
 To achieve this, you can follow these pointers:
 
