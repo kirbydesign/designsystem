@@ -6,6 +6,10 @@ labels: New, NOT Prioritized, NOT Tech refined, housekeeping
 assignees: ''
 ---
 
+<!-- 
+Explanation of applied labels can be found here: https://github.com/kirbydesign/designsystem/labels
+-->
+
 **Short description of housekeeping request**
 
 <!-- Replace the paragraph below with your own description -->

@@ -7,6 +7,10 @@ assignees: ''
 
 ---
 
+<!-- 
+Explanation of applied labels can be found here: https://github.com/kirbydesign/designsystem/labels
+-->
+
 **Describe the bug**
 <!--A clear and concise description of what the bug is.-->
 

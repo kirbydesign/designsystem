@@ -7,22 +7,10 @@ assignees: ''
 
 ---
 
-<!--**Mandatory steps to ensure alignment between stakeholders and the progression of Kirby**-->
-
-<!--In order to ensure steady progress and quality of Kirby, please follow our outlined process. By default four labels are added to new component issues and enhancements. To help Kirby please follow these steps, and remove the labels from the issue when done.-->
-
-<!--*New*-->
-<!--Indicates that this is a new issue that has not yet been addressed by the Kirby team. The `New` label will be removed by the Kirby team. -->
-
-<!--*NOT Prioritized*-->
-<!--Describe any deadlines for the issue - eg. X needs this done by Y date, to be used in Z sprint. Suggest a milestone for the issue. The `Not Prioritized` label will be removed by the Kirby team. -->
-
-<!--*NOT UX Refined*-->
-<!--Make sure the new Component, has a name, can be found in Zeplin, and is used in minimum one reviewed screen. Remove the `NOT UX Refined` label and add links to Zeplin.-->
-
-<!--*NOT Tech Refined*-->
-<!--Sketch a solution in technical terms, that is how will the component be enhanced - eg. build it from scratch or build using X Ionic component. Call for a brief meeting or spend enough time with someone from @kirbydesign/kirby-guild to get a "go ahead". Remove the `NOT Tech Refined` label.-->
-
+<!-- 
+Explanation of applied labels can be found here: https://github.com/kirbydesign/designsystem/labels
+Please see our contribution guidelines for an explanation of the process of contributing to Kirby
+-->
 
 **Please add a short description of your enhancement request**
 A clear and concise description of what the enhancement is. I.e: I would like Component X to be able to [...]
