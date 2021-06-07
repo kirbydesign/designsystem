@@ -1,4 +1,4 @@
-import { Input, Directive, forwardRef } from '@angular/core';
+import { Directive, forwardRef, Input } from '@angular/core';
 
 import { ThemeColor, ThemeColorDirective } from '@kirbydesign/designsystem';
 
@@ -7,7 +7,6 @@ import { ThemeColor, ThemeColorDirective } from '@kirbydesign/designsystem';
   selector: `kirby-card[themeColor],
              kirby-badge[themeColor],
              kirby-icon[themeColor],
-             kirby-toolbar[themeColor]
              kirby-empty-state[themeColor]`,
   providers: [
     {

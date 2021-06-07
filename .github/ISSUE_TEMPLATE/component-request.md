@@ -7,59 +7,47 @@ assignees: ''
 
 ---
 
-<!--**Mandatory steps to ensure alignment between stakeholders and the progression of Kirby**-->
+<!-- 
+Explanation of applied labels can be found here: https://github.com/kirbydesign/designsystem/labels
 
-<!--In order to ensure steady progress and quality of Kirby, please follow our outlined process. By default four labels are added to new component issues and enhancements. To help Kirby please follow these steps, and remove the labels from the issue when done.-->
+The good issue: contains only one issue, is self-contained, is specific & unambigious, follows the template, has a good title, is easy to read and contains screenshots & -recordings
+-->
 
-<!--*New*-->
-<!--Indicates that this is a new issue that has not yet been addressed by the Kirby team. The `New` label will be removed by the Kirby team. -->
+[ ] I have written a [good issue](../CONTRIBUTING.md/#issue) 
 
-<!--*NOT Prioritized*-->
-<!--Describe any deadlines for the issue - eg. X needs this done by Y date, to be used in Z sprint. Suggest a milestone for the issue. The `Not Prioritized` label will be removed by the Kirby team. -->
+## Describe the solution you'd like
+[ Replace this paragraph with a clear and concise description of what you want to happen ]
 
-<!--*NOT UX Refined*-->
-<!--Make sure the new Component, has a name, can be found in Zeplin, and is used in minimum one reviewed screen. Remove the `NOT UX Refined` label and add links to Zeplin.-->
+## Have you considered any alternatives?
+[ Replace this paragraph with a clear and concise description of any alternative solutions or features you've considered (if any) ]
 
-<!--*NOT Tech Refined*
-<!--Sketch a solution in technical terms, that is how will the component be build - eg. build it from scratch or build using X Ionic component. Call for a brief meeting or spend enough time with someone from @kirbydesign/kirby-guild to get a "go ahead". Remove the `NOT Tech Refined` label.-->
+## Are there any additional context?
+\[ Replace this paragraph with any additional context or screenshots about the component request here, e.g. a link to a corresponding component from [Ionic](https://ionicframework.com/docs/components/) (if any) ]
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+<hr />
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+## Checklist:
 
-**Additional context**
-Add any other context or screenshots about the feature request here, e.g. a link to the corresponding component from [Ionic](https://ionicframework.com/docs/components/)
+The following tasks should be carried out in sequence in order to follow [the process of contributing](../CONTRIBUTING.md/#the-process-of-contributing) correctly.
 
-## Tasks
+### Refinement
 
-### Kick Off:
+- [ ] Request that the issue is [UX refined](../CONTRIBUTING.md/#ux-refinement); do not proceed until this is done.
+- [ ] Request that the issue is [tech refined](../CONTRIBUTING.md/#tech-refinement); do not proceed until this is done.
+- [ ] Move the issue to the "Ready to do"-column in the "[Kirby kan-ban board](https://github.com/kirbydesign/designsystem/projects/1)"-project.
 
-- [ ] Ensure Feature is `UX refined` and aligned with UX incl. name of component (our shared Design System Language).  
-_The component should be published and available in the [Kirby Styleguide on Zeplin](https://zpl.io/258pXGj)_
-- [ ] Ensure Feature has been `Tech refined` with @kirbydesign/kirby-guild and this issue is updated with a clear implementation description  
-_This issue should be in the [Ready to do](https://github.com/kirbydesign/designsystem/projects/1#column-4590936) column of the [Kirby kan-ban board](https://github.com/kirbydesign/designsystem/projects/1) before starting implementation)_
-- [ ] Assign yourself to this issue and move it to the [In progress](https://github.com/kirbydesign/designsystem/projects/1#column-4590937) column of the [Kirby kan-ban board](https://github.com/kirbydesign/designsystem/projects/1)
+### Implementation 
+The contributor who wants to implement this issue should: 
 
-### Code:
+- [ ] Make sure you have read: "[Before you get coding](../CONTRIBUTING.md/#before-you-get-coding)".
+- [ ] Signal to others you are working on the issue by assigning yourself.
+- [ ] Create a branch from the [master branch](https://github.com/kirbydesign/designsystem/tree/master) following our [branch naming convention](../CONTRIBUTING.md/#branch). 
+- [ ] Publish a WIP implementation to Github as a draft PR and ask for feedback. 
+- [ ] Make sure you have implemented tests following the guidelines in: "[The good: Test](../CONTRIBUTING.md#test)".
+- [ ] Update the [cookbook](https://cookbook.kirby.design) with examples and showcases.
 
-- [ ] Create Feature Branch from [master branch](https://github.com/kirbydesign/designsystem/tree/master)
-- [ ] Implement Skeleton Component and push to Github
-- [ ] Ask a member of @kirbydesign/kirby-guild for a WIP review by creating a draft Pull Request
-- [ ] Implement unit tests
-- [ ] Implement Cookbook Examples and Showcase, i.e. see [Radio](https://cookbook.kirby.design/home/showcase/radio)  
-_Also remember to add any relevant API documentation_
+### Review
+Once the issue has been implemented and is ready for review:
 
-### Review:
-
-- UX review:
-  - [ ] Ensure implementation is correct in relation to the UX design and the [Kirby Styleguide on Zeplin](https://zpl.io/258pXGj)
-  - [ ] With UX agree on the version of the implementation + any additional steps needed to reach version 1.0 (create [enhancement requests](https://github.com/kirbydesign/designsystem/issues/new/choose))
-- Code review:
-  - [ ] Open a pull request (or mark the existing draft PR as `Ready for review`) and ask @kirbydesign/kirby-guild for a review  
-_Remember to add `closes #issueno` to the description of the PR._
-  - [ ] Once approved, merge feature branch/PR to master
-- [ ] Ask a member of @kirbydesign/kirby-guild to add a link to component showcase from Kirby Component Status
-
-:tada: Celebrate
+- [ ] Do a [self-review](../CONTRIBUTING.md/#self-review). 
+- [ ] Create a pull-request. If you created a draft PR during implementation you can just mark that as "ready for review".

@@ -44,7 +44,7 @@ export class StockChartComponent {
 
   chart: Highcharts.Chart;
 
-  constructor(private hostElement: ElementRef, @Inject(LOCALE_ID) private locale: string) {
+  constructor(hostElement: ElementRef, @Inject(LOCALE_ID) private locale: string) {
     this.chartContainer = hostElement;
   }
 

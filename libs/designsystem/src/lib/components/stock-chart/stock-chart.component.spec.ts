@@ -1,7 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { StockChartComponent } from './stock-chart.component';
 import { stockChartOptions } from './options/stock-chart-options';
+import { StockChartComponent } from './stock-chart.component';
 
 describe('StockChartComponent', () => {
   let component: StockChartComponent;
@@ -9,11 +9,13 @@ describe('StockChartComponent', () => {
 
   const expectedDefaultHeight = 300;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [StockChartComponent],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [StockChartComponent],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(StockChartComponent);

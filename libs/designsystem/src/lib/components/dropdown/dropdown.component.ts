@@ -434,8 +434,8 @@ export class DropdownComponent
     }
   }
 
-  @HostListener('focus', ['$event'])
-  _onFocus(event: Event) {
+  @HostListener('focus')
+  _onFocus() {
     if (this.disabled) {
       this.elementRef.nativeElement.blur();
     }

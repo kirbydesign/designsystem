@@ -1,0 +1,24 @@
+@mixin _output-variable($key, $value) {
+  @if (type_of($value) == map) {
+    @include _output-map($value, $key);
+  } @else {
+    #{$key}: '#{$value}';
+  }
+}
+
+@mixin _output-map($variable-map, $prefix: null) {
+  $separator: '.';
+  @each $key, $value in $variable-map {
+    $sub-key: '#{$key}';
+    @if ($prefix != null) {
+      $sub-key: '#{$prefix}#{$separator}#{$key}';
+    }
+    @include _output-variable($sub-key, $value);
+  }
+}
+
+@mixin output-styles($variable-map, $root-name: 'styles') {
+  #{$root-name} {
+    @include _output-map($variable-map);
+  }
+}

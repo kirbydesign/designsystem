@@ -77,7 +77,6 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
    */
   @Input() markSelectedRow = false;
 
-  @HostBinding('class.kirby-list') true;
   /**
    * Determine outline shape of:
    * - list, if {@link #isSectionsEnabled} is `false`
@@ -182,7 +181,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   onItemSelect(args: any) {
-    this.selectedItem = this.listHelper.getSelectedItem(this.items, args);
+    this.selectedItem = this.listHelper.getSelectedItem(args);
     this.itemSelect.emit(this.selectedItem);
   }
 

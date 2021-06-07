@@ -4,8 +4,8 @@ import { ThemeColor } from './theme-color.type';
 
 export class DesignTokenHelper {
   public static readonly breakpoints = styles.breakpoints;
-  public static readonly softKeyboardTransitionEnter = styles.softKeyboardTransitionEnter.join(' ');
-  public static readonly softKeyboardTransitionLeave = styles.softKeyboardTransitionLeave.join(' ');
+  public static readonly softKeyboardTransitionEnter = styles.softKeyboardTransitionEnter;
+  public static readonly softKeyboardTransitionLeave = styles.softKeyboardTransitionLeave;
   public static readonly modalDefaultHeight = styles.modalDefaultHeight;
   public static readonly drawerDefaultHeight = styles.drawerDefaultHeight;
 
@@ -91,8 +91,8 @@ export class DesignTokenHelper {
     return styles.fatFingerSize;
   }
 
-  public static getElevation(z: keyof typeof styles.elevationsRgb): string {
-    return styles.elevationsRgb[z];
+  public static getElevation(z: keyof typeof styles.elevations): string {
+    return styles.elevations[z];
   }
 
   public static itemHeight(key: keyof typeof styles.itemHeights): string {

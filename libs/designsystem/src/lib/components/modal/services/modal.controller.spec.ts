@@ -1,12 +1,12 @@
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
-import { Subject, EMPTY } from 'rxjs';
+import { EMPTY, Subject } from 'rxjs';
 
-import { Overlay, OverlayEventDetail } from './modal.interfaces';
-import { ModalController } from './modal.controller';
-import { ModalHelper } from './modal.helper';
 import { ActionSheetHelper } from './action-sheet.helper';
 import { AlertHelper } from './alert.helper';
 import { ModalNavigationService } from './modal-navigation.service';
+import { ModalController } from './modal.controller';
+import { ModalHelper } from './modal.helper';
+import { Overlay, OverlayEventDetail } from './modal.interfaces';
 
 describe('ModalController', () => {
   let spectator: SpectatorService<ModalController>;
@@ -45,7 +45,7 @@ describe('ModalController', () => {
 
   describe('initialize', () => {
     it('should subscribe to modal route navigation', async () => {
-      await new Promise((resolve) => setTimeout(resolve, 1));
+      await new Promise<void>((resolve) => setTimeout(resolve, 1));
       await modalController.initialize();
 
       expect(modalNavigationServiceSpy.getModalNavigation).toHaveBeenCalledTimes(1);
@@ -67,7 +67,7 @@ describe('ModalController', () => {
       const overlaySpy1: jasmine.SpyObj<Overlay> = jasmine.createSpyObj('overlay', ['dismiss']);
       const onDidDismiss1$ = new Subject<OverlayEventDetail>();
       overlaySpy1.onDidDismiss = onDidDismiss1$.toPromise();
-      overlaySpy1.dismiss.and.callFake((data) => {
+      overlaySpy1.dismiss.and.callFake(() => {
         onDidDismiss1$.next();
         onDidDismiss1$.complete();
         return Promise.resolve(true);
@@ -75,7 +75,7 @@ describe('ModalController', () => {
       const overlaySpy2: jasmine.SpyObj<Overlay> = jasmine.createSpyObj('overlay', ['dismiss']);
       const onDidDismiss2$ = new Subject<OverlayEventDetail>();
       overlaySpy2.onDidDismiss = onDidDismiss2$.toPromise();
-      overlaySpy2.dismiss.and.callFake((data) => {
+      overlaySpy2.dismiss.and.callFake(() => {
         onDidDismiss2$.next();
         onDidDismiss2$.complete();
         return Promise.resolve(true);
@@ -83,7 +83,7 @@ describe('ModalController', () => {
       const overlaySpy3: jasmine.SpyObj<Overlay> = jasmine.createSpyObj('overlay', ['dismiss']);
       const onDidDismiss3$ = new Subject<OverlayEventDetail>();
       overlaySpy3.onDidDismiss = onDidDismiss3$.toPromise();
-      overlaySpy3.dismiss.and.callFake((data) => {
+      overlaySpy3.dismiss.and.callFake(() => {
         onDidDismiss3$.next();
         onDidDismiss3$.complete();
         return Promise.resolve(true);

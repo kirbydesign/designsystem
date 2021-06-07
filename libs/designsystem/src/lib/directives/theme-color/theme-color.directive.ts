@@ -1,7 +1,7 @@
-import { Input, HostBinding, Directive } from '@angular/core';
+import { Directive, HostBinding, Input } from '@angular/core';
 
-import { ThemeColor } from '../../helpers/theme-color.type';
 import { ColorHelper } from '../../helpers/color-helper';
+import { ThemeColor } from '../../helpers/theme-color.type';
 
 @Directive({
   // tslint:disable-next-line:directive-selector
@@ -10,7 +10,6 @@ import { ColorHelper } from '../../helpers/color-helper';
              kirby-badge[themeColor],
              kirby-icon[themeColor],
              kirby-progress-circle-ring[themeColor],
-             kirby-toolbar[themeColor],
              kirby-modal-footer[themeColor],
              kirby-empty-state[themeColor]`,
 })
