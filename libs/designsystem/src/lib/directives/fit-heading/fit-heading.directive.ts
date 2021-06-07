@@ -62,6 +62,7 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
     if (this.config && this.config.maxLines) {
       this.observeResize();
       this.isObservingHostElement = true;
+      this.lineClampHelper.setLineClamp(this.elementRef.nativeElement, this.config.maxLines);
     }
   }
 
@@ -119,11 +120,9 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
     const fittedSize = this.headingSizes.find(this.canFitHeading.bind(this)) || fallbackSize;
 
     this.setSize(this.elementRef.nativeElement, fittedSize);
-    this.lineClampHelper.setLineClamp(
-      this.elementRef.nativeElement,
-      this.config.maxLines,
-      fittedSize.lineHeight
-    );
+
+    this.lineClampHelper.setLineHeight(this.elementRef.nativeElement, fittedSize.lineHeight);
+
     this.isScalingHeader = false;
   }
 
