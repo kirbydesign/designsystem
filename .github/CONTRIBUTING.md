@@ -777,6 +777,7 @@ Being able to read a test as a sentence, makes it clear what has gone wrong when
 Have a look at the following two examples:
 
 ```Javascript
+// Example #1
 describe('ButtonComponent + Kirby Page', () => {
   describe('Page Actions', () => {
     it('background-color: #fff', ...) 
@@ -785,6 +786,7 @@ describe('ButtonComponent + Kirby Page', () => {
 ```
 
 ```Javascript
+// Example #2
 describe('ButtonComponent in Kirby Page', () => {
   describe('inside page actions', () => {
     it('should render with correct background-color', ...) 
