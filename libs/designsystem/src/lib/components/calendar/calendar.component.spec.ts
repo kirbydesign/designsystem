@@ -5,7 +5,6 @@ import { zonedTimeToUtc } from 'date-fns-tz';
 import { MockComponent } from 'ng-mocks';
 
 import { CalendarComponent, IconComponent } from '..';
-import { subtractTimezoneOffset } from '../../helpers/date-helper';
 import { TestHelper } from '../../testing/test-helper';
 import { WindowRef } from '../../types/window-ref';
 import { CardComponent } from '../card';
@@ -424,9 +423,7 @@ describe('CalendarComponent', () => {
   }
 
   function utcMidnightDate(yyyyMMdd) {
-    const timeZone = 'Europe/Copenhagen';
-    const midnight = startOfDay(new Date(yyyyMMdd));
-    return zonedTimeToUtc(subtractTimezoneOffset(midnight), timeZone);
+    return zonedTimeToUtc(yyyyMMdd, 'UTC');
   }
 
   function clickDayOfMonth(dateOneIndexed: number) {
