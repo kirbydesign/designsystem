@@ -1055,34 +1055,22 @@ For example see:
 describe('ButtonComponent', () => {    
   let spectator: SpectatorHost<ButtonComponent>; 
   let element: HTMLButtonElement; 
-
-    
-
   const createHost = createHostFactory({    
-
     component: ButtonComponent,    
     declarations: [MockComponent(IconComponent)],    
-
   }); 
 
-    
-
   describe('by default', () => {    
-
     beforeEach(() => {    
       spectator = createHost('<button kirby-button>Test</button>'); 
       element = spectator.element as HTMLButtonElement; 
     }); 
 
-    
-
     it('should create', () => {    
       expect(spectator.component).toBeTruthy(); 
     }); 
-
-  })
-})
-
+  });
+});
 ```
 
 Angular Test Bed is a nice tool for configuring and initializing the environment for unit tests. It unfortunately involves quite a bit of boilerplate code to use in testing. Therefore the use of Spectator is preferred.
