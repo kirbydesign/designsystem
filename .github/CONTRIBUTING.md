@@ -182,7 +182,17 @@ You should now be able to open `http://localhost:4200` in a browser to access th
 
 [Node](https://nodejs.org/en/) is the runtime used for development. 
 
-It is recommended to use `v12` for development as we currently do not support node LTS (see issue: [#1443](https://github.com/kirbydesign/designsystem/issues/1443)). 
+The supported version of NodeJS can be found in the file [`package.json`](https://github.com/kirbydesign/designsystem/blob/master/package.json) under `engines`. At the time of writing it for example looks like this: 
+
+```Javascript
+...
+"engines": {
+  "node": "^14.16"
+},
+...
+```
+
+Meaning that as a minimum `v14.16` should be used for development. 
 
 If you need to have multiple versions of node installed then a version manager such as [NVM](https://github.com/nvm-sh/nvm) can be used. 
 
