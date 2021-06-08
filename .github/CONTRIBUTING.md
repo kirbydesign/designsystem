@@ -788,7 +788,7 @@ describe('ButtonComponent + Kirby Page', () => {
 ```Javascript
 // Example #2
 describe('ButtonComponent in Kirby Page', () => {
-  describe('inside page actions', () => {
+  describe('inside Page Actions', () => {
     it('should render with correct background-color', ...) 
   })
 })
@@ -802,7 +802,7 @@ Notice how hard the test is to read and understand when read like this. The inte
 
 Now read the second example as a sentence: 
 
-> "ButtonComponent in Kirby Page inside page actions should render with correct background-color"
+> "ButtonComponent in Kirby Page inside Page Actions should render with correct background-color"
 
 It can easily be read as a sentence and the intent of the test is clear. There is no guessing what should have the white background color applied; the sentence clearly states that it is the ButtonComponent. 
 
