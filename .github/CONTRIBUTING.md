@@ -2,7 +2,7 @@ First of all - thank you for your interest in contributing to Kirby! 🥳
 
 If you are looking for help or at any point have questions, check out "[Help!: i have a question related to kirby](SUPPORT.md)". 
 
-**Beware:** We reserve the right to close issues and pull requests that does not follow the steps outlined in [the contribution model](#the-contribution-model). This is not because we want to be mean or micro-manage the way things are done - but a project of this size requires some consistency in the way we cooperate in order to be manageable. 
+**Beware:** We reserve the right to close issues and pull requests that does not follow the steps outlined in [the contribution model](#introduction-to-the-contribution-model). This is not because we want to be mean or micro-manage the way things are done - but a project of this size requires some consistency in the way we cooperate in order to be manageable. 
 
 * [Introduction to the contribution model](#introduction-to-the-contribution-model)
   + [The process of contributing](#the-process-of-contributing)
@@ -11,7 +11,7 @@ If you are looking for help or at any point have questions, check out "[Help!: i
   + [Checklist: I have an enhancement](#checklist-i-have-an-enhancement)
   + [Checklist: I have found a bug](#checklist-i-have-found-a-bug)
 * [Setup environment and tooling for contribution](#setup-environment-and-tooling-for-contribution)
-  + [Clone and install repository](#clone-and-install-repository)
+  + [Clone and install the repository](#clone-and-install-the-repository)
   + [Node](#node)
   + [TSlint](#tslint)
   + [Prettier](#prettier)
@@ -22,10 +22,7 @@ If you are looking for help or at any point have questions, check out "[Help!: i
   + [Self-review](#self-review)
   + [Pull request](#pull-request)
   + [Test](#test)
-* [Glossary](#glossary)
-  + [Tech Refinement](#tech-refinement)
-  + [UX review](#ux-review)
-  + [Self review](#self-review)
+
 # Introduction to the contribution model
 
 Despite Kirby stemming from an internal Bankdata project - it has been decided to open source it, such that others than team Kirby can contribute to it. 
