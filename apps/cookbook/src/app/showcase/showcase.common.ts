@@ -14,6 +14,7 @@ import { ButtonShowcaseComponent } from './button-showcase/button-showcase.compo
 import { CalendarShowcaseComponent } from './calendar-showcase/calendar-showcase.component';
 import { CardShowcaseComponent } from './card-showcase/card-showcase.component';
 import { ChartShowcaseComponent } from './chart-showcase/chart-showcase.component';
+import { ChartWipShowcaseComponent } from './chart-wip-showcase/chart-wip-showcase.component';
 import { CheckboxShowcaseComponent } from './checkbox-showcase/checkbox-showcase.component';
 import { ChipShowcaseComponent } from './chip-showcase/chip-showcase.component';
 import { ColorsShowcaseComponent } from './colors-showcase/colors-showcase.component';
@@ -64,6 +65,7 @@ export const COMPONENT_EXPORTS: any[] = [
   GridShowcaseComponent,
   AvatarShowcaseComponent,
   ChartShowcaseComponent,
+  ChartWipShowcaseComponent,
   FontsShowcaseComponent,
   SpinnerShowcaseComponent,
   ModalShowcaseComponent,
