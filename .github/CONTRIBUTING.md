@@ -26,7 +26,6 @@ If you are looking for help or at any point have questions, check out "[Help!: i
   + [Tech Refinement](#tech-refinement)
   + [UX review](#ux-review)
   + [Self review](#self-review)
-
 # Introduction to the contribution model
 
 Despite Kirby stemming from an internal Bankdata project - it has been decided to open source it, such that others than team Kirby can contribute to it. 
@@ -151,7 +150,6 @@ If you have found a bug in Kirby you should follow these steps:
     - Create a test that reproduces the bug following guidelines in: "[The good: Test](#test)". 
     - Write code to fix the bug
 4. **Follow steps 4 and 5 in "[Checklist: I have a component request](#checklist-i-have-a-component-request)".**
-
 # Setup environment and tooling for contribution
 
 This section will help you get going with Kirby such that you can begin contributing. 
@@ -162,21 +160,21 @@ This section will help you get going with Kirby such that you can begin contribu
 
 1. Clone the repository: 
 
-``` 
+```
 
 git clone https://github.com/kirbydesign/designsystem
 ```
 
 2. Install dependencies: 
 
-``` 
+```
 
 npm install
 ```
 
 3. Start the cookbook server:
 
-``` 
+```
 
 npm start
 ```
@@ -206,7 +204,7 @@ Scripts for running TSLint can be found in `package.json` . We however recommend
 
 ### VSCode "workspace library execution"-issue
 
-An issue might occur where TSLint will randomly disable for the current workspace and has to be enabled again using the command `TSLint: Manage workspace library execution`. 
+An issue might occur where TSLint will randomly disable for the current workspace and has to be enabled again using the command `TSLint: Manage workspace library execution` . 
 
 To solve this: 
 
@@ -226,21 +224,19 @@ Prettier is used for consistent code formatting and avoiding unnecessary discuss
 
 As with TSLint, we  strongly recommend installing Prettier as a plugin for your editor. You should also enable "format on save".
 
-It can however be used without an editor plugin; run `npm run prettier` to check for formatting errors, fix them by running `npm run prettier:fix`. 
+It can however be used without an editor plugin; run `npm run prettier` to check for formatting errors, fix them by running `npm run prettier:fix` . 
 
 If there are changes only concerning formatting, in files you did not create - do not commit these. There is most likely something wrong with your Prettier settings. 
-Make sure that Prettier uses the config file that is shipped with the repository ([`.prettierrc.json`](https://github.com/kirbydesign/designsystem/blob/master/.prettierrc.json)) and not a global configuration located on your machine. 
+Make sure that Prettier uses the config file that is shipped with the repository ([ `.prettierrc.json` ](https://github.com/kirbydesign/designsystem/blob/master/.prettierrc.json)) and not a global configuration located on your machine. 
 
-To check if the config file from the repository is used, try to alter the configuration in `.prettierrc.json` and format a file using Prettier - for example by changing `"singleQuote": true,` to `"singleQuote": false,`. 
-If all quotation marks are changed to `"` instead of `'` when you format, it means the repository config file is used by Prettier. Remember to revert the changes made to `.prettierrc.json`.
+To check if the config file from the repository is used, try to alter the configuration in `.prettierrc.json` and format a file using Prettier - for example by changing `"singleQuote": true,` to `"singleQuote": false, ` . 
+If all quotation marks are changed to `"` instead of `'` when you format, it means the repository config file is used by Prettier. Remember to revert the changes made to `.prettierrc.json` .
 
 **Useful resources:**
 
 * [Prettier extension for VSCode](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 * [Enabling "format on save" in VSCode](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode#format-on-save)
-
-
-# The good:
+# The Good:
 
 ## Issue 
 
@@ -619,7 +615,7 @@ From the perspective of a reviewer, ask yourself:
 * Is the issue solved by the changes? Read the issue description and the tech refinement comment(s) again to confirm you have solved the issue.
 * Does the [pull request](#pull-request) description contain the appropriate information necessary to perform a code review?
 
-# Pull request
+## Pull request
 
 Why should you care about creating good pull requests - is it not just a tool for code reviews?
 
@@ -633,7 +629,7 @@ But more importantly a pull request includes commits containing code changes tha
 Before going through these however - we want to remind you to take ownership of your pull requests. 
 It is your responsibility as a contributor to get your pull requests reviewed, therefore reach out and be communicative! 
 
-## The good pull request solves only one issue
+### The good pull request solves only one issue
 
 Every pull request that is created should solve _one_ existing [Github issue](https://github.com/kirbydesign/designsystem/issues). 
 
@@ -646,7 +642,7 @@ We do not wish for pull requests that have no related issue to be submitted, as 
 
 Should you find yourself in that situation and want to salvage as much of your work as possible: create an issue following [the process for contribution](#the-process-for-contribution) and make changes to your pull request as necessary.
 
-## The good pull request has a title worthy of the changelog
+### The good pull request has a title worthy of the changelog
 
 Besides informing what the changes in the pull request does - the title of your pull request will be used in [the changelog](https://cookbook.kirby.design/home/changelog) to represent your changes.
 ![](images/issue-title-to-changelog.png)
@@ -667,7 +663,7 @@ Example titles that are worthy of the changelog:
 * "Removed kirby-toolbar"
 * "Fixed kirby-radio-group TypeError"
 
-## The good pull request uses the template
+### The good pull request uses the template
 
 As with writing [good issues](#issue), do not ignore the template text when creating a pull request. 
 
@@ -685,7 +681,7 @@ If the pull request solves more than one issue also mention these, such that the
 
 > This PR closes [#1427](https://github.com/kirbydesign/designsystem/issues/1427), closes [#1428](https://github.com/kirbydesign/designsystem/issues/1428), closes [#1429](https://github.com/kirbydesign/designsystem/issues/1429)
 
-## The good pull request has a logical commit history
+### The good pull request has a logical commit history
 
 Maintaining a logical commit history constructed using [good commits](#commit) helps the reviewer easily get an overview and understanding of the changes contained in a pull request.
 
@@ -693,7 +689,7 @@ If you are having trouble maintaining a clean commit history, you could consider
 
 ![](images/good-commit-history.png)
 
-## The good pull request only alters files related to the issue at hand
+### The good pull request only alters files related to the issue at hand
 
 While you might get the urge to be a good girl/boy scout and reorder imports or fix formatting in files not related to your issue, don't.
 
@@ -702,18 +698,18 @@ For example, it would not make sense if the imports for the list component locat
 
 Should you stumble upon possible optimizations or things that could be improved, go ahead and create new issues for these.
 
-## The good pull request knows what it wants
+### The good pull request knows what it wants
 
 Tell the reviewer what you want to get out of your pull request. 
 Should the reviewer do a full-on review or give initial guidance on a WIP implementation? Mention it in the pull request so the reviewer knows what you are looking for and does not waste their time doing a full review on a WIP implementation. 
 
 As a convention in Kirby we signal which kind of feedback we want by creating a draft pull request if it is a WIP implementation - and a normal one for a full review.
 
-Mention people you want to include in the discussion of your pull request by using `@`, clarify why: 
+Mention people you want to include in the discussion of your pull request by using `@` , clarify why: 
 
 > @MadsBuchmann for details on the fontsource dependency
 
-## The good pull request only uses review comments for actual review comments
+### The good pull request only uses review comments for actual review comments
 
 Review comments are for review comments. Not for explaining your code. 
 
@@ -722,14 +718,388 @@ Future contributors reading the code will also need it and could have a hard tim
 
 Either refactor the code to make it more readable or add clarifying comments in the code itself - it should be possible to understand the code without looking up the pull request.
 
-## The good pull request is closed when there is no need for it
+### The good pull request is closed when there is no need for it
 
 As with the [good issue](#issue), the good pull request is closed when there is no need for it, in order to reduce clutter. 
 
 Therefore if it is clear that the changes will not be merged with the main branch - close it. 
 It can always be reopened if it was a mistake.
 
-### Test
+## Test
 
-* How should testing be done 
+Tests helps us avoid regressions and provides peace of mind to other contributors when making changes to the code by ensuring that nothing is accidentally broken. Sometimes more time is spent on writing tests than the actual code - but it provides value everytime it is executed and is an important tool for collaboration.
 
+A well written test also acts as documentation of functional requirements for the code.
+
+That is three benefits for the price of one - so do not skimp on testing!
+
+For testing we use: 
+
+* [Karma](https://karma-runner.github.io/latest/index.html) - as our test runner
+* [Jasmine](https://jasmine.github.io) - as the framework for writing tests 
+* [Spectator](https://github.com/ngneat/spectator) - as a tool for reducing boilerplate code, giving us mocking capabilities and provide spying functionality 
+
+The following is not a guide on how to use these tools (if you are not familiar with Jasmine & Spectator have a look at the linked documentation above). Rather it is a list of points we believe can help you create tests that are helpful in avoiding regression, making others feel safe changing code and that can assist documenting your code.
+
+### The good test is located in the right file
+
+In Kirby we seperate integration tests from unit tests - so make sure to know which kind of testing you are doing before writing them. 
+
+Unit tests are located in `*.spec.ts` files such as [ `button.component.spec.ts` ](https://github.com/kirbydesign/designsystem/blob/master/libs/designsystem/src/lib/components/button/button.component.spec.ts) and integration tests in `*.spec.integration.ts` files such as [ `button.component.integration.spec.ts` ](https://github.com/kirbydesign/designsystem/blob/master/libs/designsystem/src/lib/components/button/button.component.integration.spec.ts).
+
+Remember that unit tests test a single unit - so if you find yourself relying on other components or functions without them being mocked or stubbed, then you are most likely writing an integration test. 
+
+### The good test can be read as a sentence 
+
+Being able to read a test as a sentence, makes it clear what has gone wrong when the test fails and makes it act as a functional requirement. 
+
+Have a look at the following two examples:
+
+```Javascript
+// Example #1
+describe('ButtonComponent + Kirby Page', () => {
+  describe('Page Actions', () => {
+    it('background-color: #fff', ...) 
+  })
+})
+```
+
+```Javascript
+// Example #2
+describe('ButtonComponent in Kirby Page', () => {
+  describe('inside Page Actions', () => {
+    it('should render with correct background-color', ...) 
+  })
+})
+```
+
+Start by reading the first example as a sentence: 
+
+> "ButtonComponent + Kirby Page Page Actions background-color: #fff" 
+
+Notice how hard the test is to read and understand when read like this. The intent of the test is also unclear; what is it exactly that should have the white background color here? Page Actions? ButtonComponent? Kirby Page?
+
+Now read the second example as a sentence: 
+
+> "ButtonComponent in Kirby Page inside Page Actions should render with correct background-color"
+
+It can easily be read as a sentence and the intent of the test is clear. There is no guessing what should have the white background color applied; the sentence clearly states that it is the ButtonComponent. 
+
+To achieve this, you can follow these pointers:
+
+#### Use the [Given-When-Then](https://www.agilealliance.org/glossary/gwt/#q=~(infinite~false~filters~(postType~(~'page~'post~'aa_book~'aa_event_session~'aa_experience_report~'aa_glossary~'aa_research_paper~'aa_video)~tags~(~'given*20when*20then))~searchTerm~'~sort~false~sortDirection~'asc~page~1)) formula
+
+For example have a look at example #2: 
+
+* (Given) ButtonComponent in Kirby Page 
+* (When) inside Page Actions 
+* (Then) [it] should render with correct background-color
+
+The missing _it_ comes from the `it()` blocks used when writing the tests: 
+![](images/it-code-example.png)
+
+#### Start `describe` and `it` blocks with a lowercase letter 
+
+For example write `describe('inside Page Actions', ...)` not `describe('Inside Page Actions', ...)` .
+
+Not following this, causes the capitalisation to be wrong when the test is read as a sentence: 
+
+> "ButtonComponent in Kirby Page Inside Page Actions Should render with correct background-color".
+
+When done correctly it should read and be capitalized like a normal sentence:
+
+> "ButtonComponent in Kirby Page inside Page Actions should render with correct background-color"
+
+#### Avoid values in the description 
+
+Notice how the above test says "should render with correct background-color" instead of "should render with background-color #fff". 
+
+For someone running the tests, it is not relevant what the color should be, they care about if the color is _correct_. If they ever need to see what the correct color is, they can look up the test. 
+
+This also reduces the likeliness of forgetting to correct the test description, if the color ever was to change - resulting in uncertainaity to what the correct color actually is. 
+
+### The good test follows the Arrange, Act, Assert (AAA) pattern
+
+Following the [AAA pattern](https://medium.com/@pjbgf/title-testing-code-ocd-and-the-aaa-pattern-df453975ab80) makes your tests well structured and easy to understand. 
+
+An example of this pattern can be found in the file [ `list-helper.spec.ts` ](https://github.com/kirbydesign/designsystem/blob/master/libs/designsystem/src/lib/components/list/helpers/list-helper.spec.ts): 
+
+```javascript
+it('should emit load more event, if load on demand is enabled and is not loading', () => {
+    // Arrange 
+    component.isLoadOnDemandEnabled = true;
+    component.isLoading = false;
+
+    // Act 
+    listHelper.onLoadOnDemand(component, null);
+
+    // Assert
+    expect(component.loadOnDemand.emit).toHaveBeenCalledTimes(1);
+});
+```
+
+We do not necessarily denote each part of AAA with a comment as in the above example (it is okay if you do) but at least use spacing to separate the different parts of the test. 
+
+A test will not always have all parts of AAA - sometimes it may only be necessary to assert, as is the case in the following test:
+
+```javascript 
+it('should render with correct background-color', () => {
+  expect(element).toHaveComputedStyle({
+   'background-color': getColor('primary'), 
+  }); 
+}); 
+
+```
+
+### The good test prioritizes readability above efficient code 
+
+<!-- This section might be a bit redundant IMO -->
+When writing tests prioritize the readability of the test above all. 
+It should be easy for future developers to visually parse and understand what is going on in the test. 
+
+The following points can help you improve the readability of your tests:
+
+* Make proper spacing between `it` blocks 
+* Group related tests under common `describe` blocks 
+* Keep your tests isolated (more on this here: [The good test is isolated and flat](#the-good-test-is-isolated-and-flat))
+* Follow the AAA pattern as described above
+
+Have a look at the following two examples and ask yourself which one is easiest to read. 
+Is it the first example which follows none of the above points or the second one that follows all of them?
+
+```javascript 
+// BAD EXAMPLE - DON'T FORMAT TESTS LIKE THIS!
+describe('ListHelper function: OnLoadOnDemand', () => {
+  let listHelper: ListHelper;
+  let component: ListComponent;
+  beforeAll(() => {
+  listHelper = new ListHelper();
+    component = {
+      loadOnDemand: new EventEmitter<LoadOnDemandEvent>(),
+    } as ListComponent;
+    component.loadOnDemand.subscribe((loadMoreEvent: LoadOnDemandEvent) => {});
+  });
+  it('should not emit the load more event when load on demand is disabled', () => {
+    component.isLoadOnDemandEnabled = false;
+    listHelper.onLoadOnDemand(component, null);
+    expect(component.loadOnDemand.emit).not.toHaveBeenCalled();
+  });
+  it('should not emit the load more event when load on demand is disabled and isLoading is true', () => {
+    component.isLoading = true;
+    component.isLoadOnDemandEnabled = false;
+    listHelper.onLoadOnDemand(component, null);
+    expect(component.loadOnDemand.emit).not.toHaveBeenCalled();
+  });
+});
+```
+
+```javascript 
+// GOOD EXAMPLE - DO FORMAT TESTS LIKE THIS!
+describe('ListHelper function: OnLoadOnDemand', () => {
+  let listHelper: ListHelper; 
+  let component: ListComponent; 
+
+  beforeEach(() => {
+    listHelper = new ListHelper(); 
+    component = {
+      loadOnDemand: new EventEmitter<LoadOnDemandEvent>(),
+    } as ListComponent;
+    component.loadOnDemand.subscribe((loadMoreEvent: LoadOnDemandEvent) => {});
+  }); 
+
+  describe('when load on demand is disabled', () => {
+    it('should not emit the load more event', () => {
+      component.isLoadOnDemandEnabled = false;
+
+      listHelper.onLoadOnDemand(component, null);
+
+      expect(component.loadOnDemand.emit).not.toHaveBeenCalled();
+    });
+
+    describe('and isLoading is true', () => {
+      it('should not emit the load more event', () => {
+        component.isLoading = true; 
+        component.isLoadOnDemandEnabled = false;
+
+        listHelper.onLoadOnDemand(component, null);
+
+        expect(component.loadOnDemand.emit).not.toHaveBeenCalled();
+      });
+    });
+  }); 
+}); 
+```
+
+(Hint: Our guess is the second one 👌)
+
+### The good test is isolated and flat
+
+The tests should be isolated and flat, therefore writing tests is one of the few places, where it is okay to be [WET](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself#DRY_vs_WET_vs_AHA_solutions) instead of [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) - it is rather important actually. 
+
+Future contributors should be able to read the test without having to jump around the code and do too much logic, therefore: 
+
+* Avoid reusing code by using functions, keep your tests flat instead 
+* Avoid the use of shared variables between tests, all state should be isolated to the test 
+* Use `beforeEach` instead of `beforeAll`; it will cause potential changes made by previous tests to be overwritten, and you start with the same state each time
+
+Following the above points makes it more likely that tests fail due to actual code changes and not how the tests are written. Changing a shared function can cause several tests to fail/change unexpectedly. If it happens too often that the test is the problem, not the code; it can cause mistrust in these.
+
+Therefore be WET - it will lower the chance of the tests being the problem and give a better overview of what is going on when reading the test. 
+
+However tests written using _[test scenarios](#the-good-test-uses-test-scenarios-when-appropiate)_ are an exception, where it is okay to be less WET and more DRY.
+
+When doing unit tests, further isolation has to be done by stubbing and mocking everything else than what is being tested. 
+
+### The good test uses test scenarios when appropiate 
+
+If you find yourself writing several tests that have identical arrange, act and assess sections - just with different variables, then you might benefit from using test scenarios. 
+
+An array of scenarios are used to programatically create tests for each using the `forEach` function. Each test scenario contains the variables making up the scenario and then the expected outcome of this. 
+
+Take for example the [ `kirby-button` ](https://cookbook.kirby.design/home/showcase/button) directive which is used to render buttons. Depending on which size is passed as an input property, it is rendered with different values for `font-size` , `height` and `min-width` . When testing this, the tests for each size is identical. They only differ in which value is given for size and the expected outcome. This can be expressed as an array of test scenarios: 
+
+```javascript 
+const testScenarios = [
+  {
+    size: ButtonSize.SM,
+    expected: { fontSize: fontSize('xs'), height: size('l'), minWidth: '44px' },
+  },
+  {
+    size: ButtonSize.MD,
+    expected: { fontSize: fontSize('s'), height: size('xl'), minWidth: '88px' },
+  },
+  {
+    size: ButtonSize.LG,
+    expected: { fontSize: fontSize('n'), height: size('xxl'), minWidth: '220px' },
+  },
+];
+```
+
+These scenarios can then be used to generate the actual tests when combined with string interpolation: 
+
+```javascript
+testScenarios.forEach((scenario) => {
+    describe(`when configured with size = ${scenario.size}`, () => {
+        beforeEach(() => {
+            spectator = createHost(
+                `<button kirby-button size="${scenario.size}"><span>Text</span></button>`
+            );
+            element = spectator.element as HTMLButtonElement;
+        });
+
+        it('should render with correct font-size', () => {
+            expect(element).toHaveComputedStyle({
+                'font-size': scenario.expected.fontSize
+            });
+        });
+
+        it('should render with correct height', () => {
+            expect(element).toHaveComputedStyle({
+                height: scenario.expected.height
+            });
+        });
+
+        it('should render with correct min-width', () => {
+            expect(element).toHaveComputedStyle({
+                'min-width': scenario.expected.minWidth
+            });
+        });
+    });
+});
+```
+
+This generates a total of 9 tests for us, but we only had to write 3! This is actually a simplified example taken from [ `button.component.spec.ts` ](https://github.com/kirbydesign/designsystem/blob/master/libs/designsystem/src/lib/components/button/button.component.spec.ts). In the actual file 9 tests are written; resulting in 27 tests being created programatically.
+
+It is less WET than writing them all out by hand but each test is still flat, structured and self-contained. Actually it often reads better as the intention is clearer and gives a better overview of what is going on.
+
+### The good test prefers the use of Spectator over Angular testbed 
+
+If you examine the test files, you will notice that almost every file uses the functions `createHostFactory` or `createComponentFactory` as part of their setup. These two functions are given the component being tested along with configuration such as declarations, imports, providers and more.
+
+They then respectively return a factory function that can be used to create a fresh component in your `beforeEach` blocks. 
+
+For example see: 
+
+```javascript 
+describe('ButtonComponent', () => {    
+  let spectator: SpectatorHost<ButtonComponent>; 
+  let element: HTMLButtonElement; 
+  const createHost = createHostFactory({    
+    component: ButtonComponent,    
+    declarations: [MockComponent(IconComponent)],    
+  }); 
+
+  describe('by default', () => {    
+    beforeEach(() => {    
+      spectator = createHost('<button kirby-button>Test</button>'); 
+      element = spectator.element as HTMLButtonElement; 
+    }); 
+
+    it('should create', () => {    
+      expect(spectator.component).toBeTruthy(); 
+    }); 
+  });
+});
+```
+
+Angular Test Bed is a nice tool for configuring and initializing the environment for unit tests. It unfortunately involves quite a bit of boilerplate code to use in testing. Therefore the use of Spectator is preferred.
+
+For more on `createHostFactory` and `createComponentFactory` see [the Spectator documentation](https://github.com/ngneat/spectator#testing-components). 
+
+### The good test prefers fakeAsync over Async & Done 
+
+While the `it` function is provided with a `done` callback as an argument and support the `async` / `await` syntax for testing asynchronous behavior; we encourage the use of the [ `fakeAsync` ](https://angular.io/api/core/testing/fakeAsync) function instead. 
+
+Using the `done` function might send you straight to [callback hell](https://image.slidesharecdn.com/promisesandchaininginangularjs-141027044455-conversion-gate02/95/promises-and-chaining-in-angularjs-into-callback-hell-and-back-again-17-638.jpg) while the `async` / `await` syntax slows down execution of tests. 
+
+`fakeAsync` combined with the [ `tick` ](https://angular.io/api/core/testing/tick) function on the other hand, simulates the asynchronous passage of time without actually taking any additional time and avoiding callback hell.
+
+When using `fakeAsync` remember to not mix it with the `done` function or the `async` / `await` syntax. Using `fakeAsync` we want to simulate that time is passing - not actually wait for the time to pass. 
+
+### The good test uses ionicModuleForTest instead of IonicModule
+
+When working with Ionic you might have to import the `IonicModule` as part of your `createComponent` or `createHost` factory.   
+Here you should use the [ `TestHelper` ](https://github.com/kirbydesign/designsystem/blob/master/libs/designsystem/src/lib/testing/test-helper.ts) property `ionicModuleForTest` like so: 
+
+```javascript
+const createComponent = createComponentFactory({
+  component: RadioComponent,
+  imports: [TestHelper.ionicModuleForTest],
+});
+```
+
+This ensures that each test uses the same config for the `IonicModule` . 
+
+There might be files where `IonicModule` is used directly instead of `TestHelper.ionicModuleForTest` - this is a good chance to do some girl/boy scouting and fix it, but only if you are making changes to those files anyways.  
+
+### The good test combines tests when appropiate
+
+In Kirby there is a [ `toHaveComputedStyle` ](https://github.com/kirbydesign/designsystem/blob/master/libs/designsystem/src/lib/testing/element-css-custom-matchers.d.ts) custom matcher defined that checks the value of CSS properties an element is rendered with, like so: 
+
+```javascript
+it('should render with correct border-width', () => {
+    expect(element).toHaveComputedStyle({
+        'border-width': '1px',
+    });
+});
+```
+
+When doing unit tests it can seem to be straightforward to create seperate tests for different CSS properties - we are only testing one thing per test after all. Consider the above example, where the only assessment is if `border-width` is correct. There might then be additional tests assessing if the element also has the correct `border-color` & `border-style` .  
+
+In that case, we would actually prefer if the test was created as a single _"should render with correct border"_ test; this is really what the reader of your test needs to know in the end. Here all three properties are assessed together like so:
+
+```javascript
+it('should render with correct border', () => {
+    expect(element).toHaveComputedStyle({
+        'border-width': '1px',
+        'border-style': 'solid',
+        'border-color': 'transparent'
+    });
+});
+```
+
+This makes the intention more clear and also saves some time writing tests. Should the test fail due to one of the properties being rendered with an unexpected value; the error message will display which property is wrong. 
+
+We are aware that this requires a bit of gut feel. Testing for example if an element has `position: relative` & `background-color: #ffffff` would most likely not make sense. What would the test say? _Should have correct position and background-color_? There is really no relation between these two properties.
+
+Testing the properties `position` , `left` , `right` , `bottom` and `top` would make better sense as it could be tested as _"should be positioned correctly"_. As an additional example `font-family` , `font-size` , `font-weight` & `font-style` could be tested as _"should have correct typography"_.
