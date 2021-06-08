@@ -1,12 +1,4 @@
-import {
-  Directive,
-  ElementRef,
-  Input,
-  OnDestroy,
-  OnInit,
-  Renderer2,
-  RendererStyleFlags2,
-} from '@angular/core';
+import { Directive, ElementRef, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 
 import { ResizeObserverService } from '../../components/shared/resize-observer/resize-observer.service';
 import { ResizeObserverEntry } from '../../components/shared/resize-observer/types/resize-observer-entry';
@@ -62,11 +54,13 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
     private elementRef: ElementRef,
     private renderer: Renderer2,
     private resizeObserverService: ResizeObserverService,
-    private window: WindowRef
+    private window: WindowRef,
+    private lineClampHelper: LineClampHelper
   ) {}
 
   ngOnInit(): void {
     if (this.config && this.config.maxLines) {
+      this.lineClampHelper.setLineClamp(this.elementRef.nativeElement, this.config.maxLines);
       this.observeResize();
       this.isObservingHostElement = true;
     }
@@ -116,6 +110,7 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
 
     if (!this.hostElementClone) {
       this.hostElementClone = this.generateHostElementClone();
+      this.lineClampHelper.removeLineClamp(this.hostElementClone);
       this.renderer.appendChild(this.elementRef.nativeElement, this.hostElementClone);
     }
 
@@ -129,7 +124,7 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
     const fittedSize = this.headingSizes.find(this.canFitHeading.bind(this)) || fallbackSize;
 
     this.setSize(this.elementRef.nativeElement, fittedSize);
-    this.setLineClamp(this.elementRef.nativeElement, this.config.maxLines, fittedSize.lineHeight);
+    this.lineClampHelper.setLineHeight(this.elementRef.nativeElement, fittedSize.lineHeight);
     this.isScalingHeader = false;
   }
 
@@ -149,12 +144,5 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
   private setSize(el: Element, size: HeadingSize): void {
     this.renderer.setStyle(el, 'font-size', size.fontSize);
     this.renderer.setStyle(el, 'line-height', size.lineHeight);
-  }
-
-  // TODO: Use line-clamp-helper.ts instead
-  private setLineClamp(el: Element, maxLines: number, lineHeight: string): void {
-    this.renderer.addClass(el, 'kirby-line-clamp');
-    this.renderer.setStyle(el, '--line-clamp', maxLines, RendererStyleFlags2.DashCase);
-    this.renderer.setStyle(el, '--line-height', lineHeight, RendererStyleFlags2.DashCase);
   }
 }
