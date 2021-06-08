@@ -309,6 +309,10 @@ export const routes: Routes = [
     component: ListVirtualScrollExampleComponent,
     children: [
       {
+        path: '',
+        redirectTo: 'with-items',
+      },
+      {
         path: 'with-items',
         component: ListVirtualScrollItemsExampleComponent,
       },
