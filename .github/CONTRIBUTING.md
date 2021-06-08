@@ -930,17 +930,14 @@ describe('ListHelper function: OnLoadOnDemand', () => {
   let component: ListComponent; 
 
   beforeEach(() => {
-
     listHelper = new ListHelper(); 
     component = {
       loadOnDemand: new EventEmitter<LoadOnDemandEvent>(),
     } as ListComponent;
     component.loadOnDemand.subscribe((loadMoreEvent: LoadOnDemandEvent) => {});
-
   }); 
 
   describe('when load on demand is disabled', () => {
-
     it('should not emit the load more event', () => {
       component.isLoadOnDemandEnabled = false;
 
@@ -959,7 +956,6 @@ describe('ListHelper function: OnLoadOnDemand', () => {
         expect(component.loadOnDemand.emit).not.toHaveBeenCalled();
       });
     });
-
   }); 
 }); 
 
