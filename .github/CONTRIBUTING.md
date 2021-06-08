@@ -889,7 +889,7 @@ Have a look at the following two examples and ask yourself which one is easiest 
 Is it the first example which follows none of the above points or the second one that follows all of them?
 
 ```javascript 
-// Example #1
+// BAD EXAMPLE - DON'T FORMAT TESTS LIKE THIS!
 describe('ListHelper function: OnLoadOnDemand', () => {
   let listHelper: ListHelper;
   let component: ListComponent;
@@ -915,7 +915,7 @@ describe('ListHelper function: OnLoadOnDemand', () => {
 ```
 
 ```javascript 
-// Example #2
+// GOOD EXAMPLE - DO FORMAT TESTS LIKE THIS!
 describe('ListHelper function: OnLoadOnDemand', () => {
   let listHelper: ListHelper; 
   let component: ListComponent; 
