@@ -885,15 +885,11 @@ The following points can help you improve the readability of your tests:
 * Keep your tests isolated (more on this here: [The good test is isolated and flat](#the-good-test-is-isolated-and-flat))
 * Follow the AAA pattern as described above
 
-Below are two examples. Which one is easiest to read and understand? 
-
-The following where: 
-- There is no spacing between `it` blocks 
-- Related tests are not grouped under common describes 
-- Tests are not isolated due to the use of `beforeAll`
-- The AAA pattern is not followed 
+Have a look at the following two examples and ask yourself which one is easiest to read. 
+Is it the first example which follows none of the above points or the second one that follows all of them?
 
 ```javascript 
+// Example #1
 describe('ListHelper function: OnLoadOnDemand', () => {
   let listHelper: ListHelper;
   let component: ListComponent;
@@ -918,13 +914,8 @@ describe('ListHelper function: OnLoadOnDemand', () => {
 });
 ```
 
-Or this one where: 
-* There are spacing between `it` blocks
-* Related tests are grouped under common describes 
-* Tests are isolated due to the use of `beforeEach`
-* The AAA pattern is followed
-
 ```javascript 
+// Example #2
 describe('ListHelper function: OnLoadOnDemand', () => {
   let listHelper: ListHelper; 
   let component: ListComponent; 
@@ -958,7 +949,6 @@ describe('ListHelper function: OnLoadOnDemand', () => {
     });
   }); 
 }); 
-
 ```
 
 (Hint: Our guess is the second one 👌)
