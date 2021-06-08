@@ -794,9 +794,17 @@ describe('ButtonComponent in Kirby Page', () => {
 })
 ```
 
-Start by reading the first example as a sentence: _"ButtonComponent + Kirby Page Page Actions background-color: #fff"_. Notice how hard the test is to read and understand when read like this. The intent of the test is also unclear; what is it exactly that should have the white background color here? Page Actions? ButtonComponent? Kirby Page?
+Start by reading the first example as a sentence: 
 
-Now read the second example as a sentence: _"ButtonComponent in Kirby Page inside page actions should render with correct background-color"_. It can easily be read as a sentence and the intent of the test is clear. There is no guessing what should have the white background color applied; the sentence clearly states that it is the ButtonComponent. 
+> "ButtonComponent + Kirby Page Page Actions background-color: #fff" 
+
+Notice how hard the test is to read and understand when read like this. The intent of the test is also unclear; what is it exactly that should have the white background color here? Page Actions? ButtonComponent? Kirby Page?
+
+Now read the second example as a sentence: 
+
+> "ButtonComponent in Kirby Page inside page actions should render with correct background-color"
+
+It can easily be read as a sentence and the intent of the test is clear. There is no guessing what should have the white background color applied; the sentence clearly states that it is the ButtonComponent. 
 
 To achieve this, you can follow these pointers:
 
