@@ -466,7 +466,7 @@ If this was not included and a branch is created for which a pull request is nev
 It also functions as a reminder for contributors to only work on one issue per branch. 
 
 If a contributor is working on something for which no issue has been submitted, they will not be able to follow the naming convention. 
-This hopefully nudges them towards creating a [good issue](#issue) and follow [the process for contribution](#the-process-for-contribution).
+This hopefully nudges them towards creating a [good issue](#issue) and follow [the process of contributing](#the-process-of-contributing).
 </dd>
 
 <dt>Name</dt>
@@ -643,11 +643,11 @@ Every pull request that is created should solve _one_ existing [Github issue](ht
 There might be cases where the changes in a pull request naturally solves multiple issues, often caused by them being related one way or another. This is the exception, not the rule. 
 Striving for the scope of a pull request to be one issue, makes the task of reviewing it more manageable.
 
-If you are not able to reference any specific issue; it is unfortunately an indicator that you have not followed [the process for contribution](#the-process-for-contribution). For example when filling in the `This PR closes # (reference issue number here)` part of the pull request or when following the branch naming convention outlined in [The Good: Branch](#branch).
+If you are not able to reference any specific issue; it is unfortunately an indicator that you have not followed [the process of contributing](#the-process-of-contributing). For example when filling in the `This PR closes # (reference issue number here)` part of the pull request or when following the branch naming convention outlined in [The Good: Branch](#branch).
 
 We do not wish for pull requests that have no related issue to be submitted, as this means no refinement has taken place and there might be no agreement on whether the suggested changes should be part of Kirby. If it is submitted anyways, it will most likely be closed without being merged.  
 
-Should you find yourself in that situation and want to salvage as much of your work as possible: create an issue following [the process for contribution](#the-process-for-contribution) and make changes to your pull request as necessary.
+Should you find yourself in that situation and want to salvage as much of your work as possible: create an issue following [the process of contributing](#the-process-of-contributing) and make changes to your pull request as necessary.
 
 ### The good pull request has a title worthy of the changelog
 
