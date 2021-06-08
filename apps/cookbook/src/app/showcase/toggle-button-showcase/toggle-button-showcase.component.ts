@@ -17,7 +17,7 @@ export class ToggleButtonShowcaseComponent {
       type: ['true', 'false'],
     },
     {
-      name: 'checkedChange',
+      name: 'checkChanged',
       description: 'Emits the checked state of the toggle button on change (true | false).',
       defaultValue: '',
       type: ['event'],
