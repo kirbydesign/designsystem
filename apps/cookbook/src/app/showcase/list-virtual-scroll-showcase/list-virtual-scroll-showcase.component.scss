@@ -1,6 +1,6 @@
 @import './libs/designsystem/src/lib/scss/utils';
 
-.page-example {
+.example-wrapper {
   display: flex;
   justify-content: space-between;
   margin-top: size('xl');
@@ -9,4 +9,8 @@
 
 h2 {
   margin-top: size('l');
+}
+
+.experimental {
+  margin-bottom: size('xl');
 }
