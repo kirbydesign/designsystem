@@ -441,7 +441,6 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   private changeActiveView(index: number, unit: TimeUnit) {
     if (index === 0) return;
     this.activeMonth = add(this.activeMonth, { [unit]: index });
-    console.log('acticeMonth', this.activeMonth);
 
     this.refreshActiveMonth();
   }
