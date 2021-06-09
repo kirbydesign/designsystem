@@ -38,6 +38,7 @@ import { selectedTabClickEvent } from '../tabs/tab-button/tab-button.events';
 import { TabsComponent } from '../tabs/tabs.component';
 
 type stickyConfig = { sticky: boolean };
+type stickyOnlyConfig = { stickyOnly: boolean; stickyTarget?: HTMLElement };
 type fixedConfig = { fixed: boolean };
 
 @Directive({
@@ -50,12 +51,20 @@ export class PageTitleDirective {}
 })
 export class PageToolbarTitleDirective {}
 
+@Component({
+  selector: 'kirby-page-actions',
+  template: `
+    <ng-content select="button[kirby-button]"></ng-content>
+  `,
+})
+export class PageActionsComponent {}
 @Directive({
   selector: '[kirbyPageActions]',
 })
 export class PageActionsDirective {
-  @Input('kirbyPageActions') config: stickyConfig | fixedConfig;
+  @Input('kirbyPageActions') config: stickyConfig | fixedConfig | stickyOnlyConfig;
   private readonly stickyDefault = true;
+  private readonly stickyOnlyDefault = false;
   private readonly fixedDefault = false;
 
   constructor(public template: TemplateRef<any>) {}
@@ -64,8 +73,16 @@ export class PageActionsDirective {
     return this.config ? (this.config as stickyConfig).sticky : this.stickyDefault;
   }
 
+  get isStickyOnly(): boolean {
+    return this.config ? (this.config as stickyOnlyConfig).stickyOnly : this.stickyOnlyDefault;
+  }
+
   get isFixed(): boolean {
     return this.config ? (this.config as fixedConfig).fixed : this.fixedDefault;
+  }
+
+  get stickyTarget(): Element {
+    return this.config ? (this.config as stickyOnlyConfig).stickyTarget : undefined;
   }
 }
 
@@ -112,20 +129,34 @@ export class PageProgressComponent implements OnInit {
 export class PageTitleComponent {}
 
 @Component({
+  selector: 'kirby-page-header',
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+
+      .wrapper {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 16px 32px;
+        padding-top: 0;
+      }
+    `,
+  ],
+  template: `
+    <div class="wrapper"><ng-content></ng-content></div>
+  `,
+})
+export class PageHeaderComponent {}
+
+@Component({
   selector: 'kirby-page-content',
   template: `
     <ng-content></ng-content>
   `,
 })
 export class PageContentComponent {}
-
-@Component({
-  selector: 'kirby-page-actions',
-  template: `
-    <ng-content select="button[kirby-button]"></ng-content>
-  `,
-})
-export class PageActionsComponent {}
 
 @Component({
   selector: 'kirby-page',
@@ -169,6 +200,9 @@ export class PageComponent
   @ViewChild('pageTitle', { static: false, read: ElementRef })
   private pageTitle: ElementRef;
 
+  @ContentChild(PageHeaderComponent, { static: false, read: ElementRef })
+  pageHeader: ElementRef<HTMLElement>;
+
   @ViewChild('simpleTitleTemplate', { static: true, read: TemplateRef })
   private simpleTitleTemplate: TemplateRef<any>;
   @ViewChild('simpleToolbarTitleTemplate', { static: true, read: TemplateRef })
@@ -177,8 +211,12 @@ export class PageComponent
   private customToolbarTitleTemplate: TemplateRef<any>;
   @ContentChild(PageTitleDirective, { static: false, read: TemplateRef })
   customTitleTemplate: TemplateRef<any>;
+  @ContentChild(PageTitleDirective, { static: false, read: ElementRef })
+  customTitleElement: ElementRef<HTMLElement>;
   @ContentChildren(PageActionsDirective)
   customActions: QueryList<PageActionsDirective>;
+  @ViewChild('canvasPageActions', { static: false, read: ElementRef })
+  canvasPageActions: ElementRef<HTMLElement>;
   @ContentChildren(PageContentDirective)
   private customContent: QueryList<PageContentDirective>;
 
@@ -187,6 +225,7 @@ export class PageComponent
   toolbarTitleVisible: boolean;
   toolbarFixedActionsVisible: boolean;
   toolbarStickyActionsVisible: boolean;
+  stickyActionsTarget: Element;
 
   fitHeadingConfig: FitHeadingConfig;
 
@@ -197,6 +236,7 @@ export class PageComponent
   stickyActionsTemplate: TemplateRef<any>;
   fixedActionsTemplate: TemplateRef<any>;
   private pageTitleIntersectionObserverRef: IntersectionObserver = this.pageTitleIntersectionObserver();
+  private stickyActionIntersectionObserverRef: IntersectionObserver = this.stickyActionsIntersectionObserver();
   private urls: string[] = [];
   private hasEntered: boolean;
 
@@ -235,6 +275,8 @@ export class PageComponent
   }
 
   ngAfterViewInit(): void {
+    // console.log('ngAfterViewInit');
+
     this.navigationStart$.subscribe((event: NavigationStart) => {
       if (
         !this.urls.includes(event.url) &&
@@ -273,26 +315,54 @@ export class PageComponent
     this.ngOnDestroy$.complete();
 
     this.pageTitleIntersectionObserverRef.disconnect();
+    this.stickyActionIntersectionObserverRef.disconnect();
     this.window.removeEventListener(selectedTabClickEvent, () => {
       this.content.scrollToTop(KirbyAnimation.Duration.LONG);
     });
   }
 
+  private observePageTitle() {
+    const pageTitleElement = (this.pageTitle || this.customTitleElement)?.nativeElement;
+    // console.log('observePageTitle - pageTitleElement:', pageTitleElement);
+    if (pageTitleElement && pageTitleElement instanceof Element) {
+      this.pageTitleIntersectionObserverRef.observe(pageTitleElement);
+    }
+  }
+
+  private unobservePageTitle() {
+    const pageTitleElement = (this.pageTitle || this.customTitleElement)?.nativeElement;
+    if (pageTitleElement && pageTitleElement instanceof Element) {
+      this.pageTitleIntersectionObserverRef.unobserve(pageTitleElement);
+    }
+  }
+
+  private observeStickyActions() {
+    // console.count('observeStickyActions');
+    if (this.stickyActionsTarget) {
+      this.stickyActionIntersectionObserverRef.observe(this.stickyActionsTarget);
+    }
+  }
+
+  private unobserveStickyActions() {
+    if (this.stickyActionsTarget) {
+      this.stickyActionIntersectionObserverRef.unobserve(this.stickyActionsTarget);
+    }
+  }
+
   private onEnter() {
+    // console.log('onEnter');
     if (this.hasEntered) return;
     this.hasEntered = true;
 
     this.enter.emit();
-    if (this.pageTitle) {
-      this.pageTitleIntersectionObserverRef.observe(this.pageTitle.nativeElement);
-    }
+    this.observePageTitle();
+    this.observeStickyActions();
   }
 
   private onLeave() {
     this.leave.emit();
-    if (this.pageTitle) {
-      this.pageTitleIntersectionObserverRef.unobserve(this.pageTitle.nativeElement);
-    }
+    this.unobservePageTitle();
+    this.unobserveStickyActions();
     this.hasEntered = false;
 
     if (this.tabBarBottomHidden && this.tabsComponent) {
@@ -301,17 +371,17 @@ export class PageComponent
   }
 
   private initializeTitle() {
+    // console.count('initializeTitle');
     // Ensures initializeTitle() won't run, if already initialized
-    if (this.hasPageTitle) return;
+    if (this.hasPageTitle !== undefined) return;
+    if (this.hasPageTitle !== undefined && this.pageHeader) return;
 
     this.hasPageTitle = this.title !== undefined || !!this.customTitleTemplate;
-    this.toolbarTitleVisible = !this.hasPageTitle;
+    this.toolbarTitleVisible = !this.hasPageTitle && !this.pageHeader;
 
-    if (this.hasPageTitle) {
-      setTimeout(() => {
-        this.pageTitleIntersectionObserverRef.observe(this.pageTitle.nativeElement);
-      });
-    }
+    setTimeout(() => {
+      this.observePageTitle();
+    });
 
     const defaultTitleTemplate = this.customTitleTemplate || this.simpleTitleTemplate;
     // tslint:disable:prettier
@@ -323,19 +393,29 @@ export class PageComponent
         : defaultTitleTemplate;
   }
 
+  private hasInitializedActions = false;
   private initializeActions() {
+    if (this.hasInitializedActions) return;
     this.customActions.forEach((pageAction) => {
       if (pageAction.isFixed) {
         this.fixedActionsTemplate = pageAction.template;
         this.toolbarFixedActionsVisible = true;
       } else {
-        this.pageActionsTemplate = pageAction.template;
-        if (pageAction.isSticky) {
+        if (!pageAction.isStickyOnly) {
+          this.pageActionsTemplate = pageAction.template;
+        }
+        if (pageAction.isSticky || pageAction.isStickyOnly) {
           this.stickyActionsTemplate = pageAction.template;
+          this.stickyActionsTarget =
+            pageAction.stickyTarget || this.canvasPageActions?.nativeElement;
+          // console.log('sticky action found - stickyTarget?', this.stickyActionsTarget);
+          this.observeStickyActions();
         }
       }
     });
     this.hasActionsInPage = !!this.pageActionsTemplate;
+    this.hasInitializedActions = this.customActions.length > 0;
+    if (this.stickyActionsTemplate && !this.stickyActionsTarget) this.hasInitializedActions = false;
   }
 
   private initializeContent() {
@@ -365,6 +445,22 @@ export class PageComponent
     const callback = (entries) => {
       if (initialized) {
         this.toolbarTitleVisible = !entries[0].isIntersecting;
+        this.changeDetectorRef.detectChanges();
+      } else {
+        initialized = true;
+      }
+    };
+    return new IntersectionObserver(callback, options);
+  }
+
+  private stickyActionsIntersectionObserver() {
+    const options = {
+      rootMargin: '0px',
+    };
+
+    let initialized = false;
+    const callback = (entries) => {
+      if (initialized) {
         this.toolbarStickyActionsVisible = !entries[0].isIntersecting;
         this.changeDetectorRef.detectChanges();
       } else {

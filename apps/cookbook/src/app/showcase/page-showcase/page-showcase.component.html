@@ -51,6 +51,21 @@
 
   <div class="page-example">
     <div>
+      <h2 #simple>Custom Page Header</h2>
+      <p>
+        <em>Explanation coming...</em>
+      </p>
+      <cookbook-code-viewer [html]="customPageHeaderExampleHtml"></cookbook-code-viewer>
+    </div>
+
+    <cookbook-iphone
+      src="/examples/page/custom-page-header"
+      showExternalLink="true"
+    ></cookbook-iphone>
+  </div>
+
+  <div class="page-example">
+    <div>
       <h2 #simple>Simple Page</h2>
       <p>
         For normal pages it's enough to just wrap the page content in a

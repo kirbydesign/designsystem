@@ -5,17 +5,23 @@
  */
 ion-header,
 ion-toolbar {
-  --background: #{get-color('background-color')};
+  --background: transparent; // #{get-color('background-color')};
   margin: 0 auto;
+}
 
+ion-header {
+  transition: box-shadow 200ms linear; // TODO align animation with UX
+  &.toolbar-active {
+    box-shadow: get-elevation(2); // TODO get correct header shadow from UX
+  }
+}
+
+ion-toolbar {
   @include media('>=large') {
     @include not-touch {
       max-width: 768px;
     }
   }
-}
-
-ion-toolbar {
   --border-width: 0 !important;
   --padding-start: #{size('xxxs')};
   --padding-end: #{size('xxxs')};
@@ -61,7 +67,7 @@ ion-toolbar {
 ion-title {
   box-sizing: border-box;
   font-size: font-size('n');
-  font-weight: font-weight('normal');
+  font-weight: font-weight('bold');
 }
 
 ion-back-button {
@@ -108,14 +114,20 @@ ion-back-button {
  * Page Content
  */
 ion-content {
-  --padding-start: var(--page-content-padding-start, #{size('s')});
-  --padding-end: var(--page-content-padding-end, #{size('s')});
-  --background: #{get-color('background-color')};
+  --padding-start: 0; // var(--page-content-padding-start, #{size('s')});
+  --padding-end: 0; // var(--page-content-padding-end, #{size('s')});
+  --background: transparent; // #{get-color('background-color')};
+
+  .content-outer {
+    background-color: get-color('background-color');
+  }
 
   .content-inner {
     max-width: var(--page-content-max-width, $page-content-max-width);
     margin: 0 auto;
     padding-bottom: size('xl');
+    padding-left: var(--page-content-padding-start, #{size('s')});
+    padding-right: var(--page-content-padding-end, #{size('s')});
   }
 
   /*
