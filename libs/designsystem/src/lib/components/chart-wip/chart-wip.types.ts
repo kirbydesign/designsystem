@@ -5,7 +5,13 @@ export enum ChartType {
 }
 
 export abstract class ChartService {
-  renderChart: (targetElement: ElementRef, type: ChartType) => void;
+  renderChart: (
+    targetElement: ElementRef,
+    type: ChartType,
+    data: number[],
+    dataLabels: string[],
+    label: string
+  ) => void;
   //TODO: implement these?
   updateChart?: void;
   changeChartType?: void;

@@ -16,8 +16,12 @@ import { ChartService, ChartType } from './chart-wip.types';
 })
 export class ChartWipComponent implements AfterViewInit {
   @Input() type: ChartType = ChartType.column;
+  @Input() data: number[];
+  @Input() dataLabels: string[];
+  @Input() label: string;
 
-  @ViewChild('chartCanvas') canvas: ElementRef<HTMLCanvasElement>;
+  @ViewChild('chartCanvas')
+  canvas: ElementRef<HTMLCanvasElement>;
 
   constructor(private chartService: ChartService) {}
 
@@ -26,6 +30,6 @@ export class ChartWipComponent implements AfterViewInit {
   }
 
   private renderChart() {
-    this.chartService.renderChart(this.canvas, this.type);
+    this.chartService.renderChart(this.canvas, this.type, this.data, this.dataLabels, this.label);
   }
 }
