@@ -54,11 +54,11 @@ describe('CalendarComponent', () => {
   });
 
   it('should initially render the current month if selectedDate is not specified', () => {
-    const currentDayMoment = startOfDay(new Date());
-    const currentMonthMoment = startOfMonth(new Date());
+    const currentDay = startOfDay(new Date());
+    const currentMonth = startOfMonth(new Date());
 
-    verifyMonthAndYear(format(currentMonthMoment, 'MMMM yyyy'));
-    expect(spectator.query('.day.today')).toHaveText(format(currentDayMoment, 'd'));
+    verifyMonthAndYear(format(currentMonth, 'MMMM yyyy'));
+    expect(spectator.query('.day.today')).toHaveText(format(currentDay, 'd'));
   });
 
   it('should initially render the month of selectedDate if specified', () => {
@@ -377,7 +377,7 @@ describe('CalendarComponent', () => {
         const firstNavigatedYearIndex = spectator.component.navigatedYear;
         spectator.setInput('selectedDate', new Date(todayDateYear, 11, 31));
 
-        spectator.component.changeMonth(1);
+        spectator.component._changeMonth(1);
 
         expect(spectator.component.activeYear).toEqual('2022');
         expect(spectator.component.navigatedYear).toEqual(firstNavigatedYearIndex + 1);

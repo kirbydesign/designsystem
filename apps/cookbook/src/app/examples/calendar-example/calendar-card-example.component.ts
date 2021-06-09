@@ -2,8 +2,6 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { addDays, startOfDay, subDays } from 'date-fns';
 import { utcToZonedTime, zonedTimeToUtc } from 'date-fns-tz';
 
-import { subtractTimezoneOffset } from '@kirbydesign/designsystem/helpers/date-helper';
-
 @Component({
   selector: 'cookbook-calendar-card-example',
   templateUrl: './calendar-card-example.component.html',
@@ -41,7 +39,7 @@ export class CalendarCardExampleComponent implements OnChanges {
         if (this.useTimezoneUTC) {
           // realign local -> selectedDate
           this.selectedDate = zonedTimeToUtc(
-            subtractTimezoneOffset(this.selectedDate),
+            this.subtractTimezoneOffset(this.selectedDate),
             this.timeZoneName
           );
         } else {
@@ -76,5 +74,9 @@ export class CalendarCardExampleComponent implements OnChanges {
     this.disabledDates = [3, 5, 7, 10, 15, 25, 28, 35].map((daysFromToday) =>
       addDays(today, daysFromToday)
     );
+  }
+
+  private subtractTimezoneOffset(date: Date): Date {
+    return new Date(date.getTime() - date.getTimezoneOffset() * 60 * 1000);
   }
 }

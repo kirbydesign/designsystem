@@ -1,6 +1,6 @@
 <div class="header">
   <div class="month-navigator">
-    <button [disabled]="!canNavigateBack" (click)="changeMonth(-1)">
+    <button [disabled]="!canNavigateBack" (click)="_changeMonth(-1)">
       <kirby-icon name="arrow-back"></kirby-icon>
     </button>
 
@@ -9,7 +9,7 @@
       ><span *ngIf="!_hasYearNavigator" class="year">{{ activeYear }}</span>
     </div>
 
-    <button [disabled]="!canNavigateForward" (click)="changeMonth(1)">
+    <button [disabled]="!canNavigateForward" (click)="_changeMonth(1)">
       <kirby-icon name="arrow-more"></kirby-icon>
     </button>
   </div>
@@ -26,15 +26,15 @@
 <table>
   <thead>
     <tr>
-      <th *ngFor="let weekDay of weekDays">{{ weekDay }}</th>
+      <th *ngFor="let weekDay of _weekDays">{{ weekDay }}</th>
     </tr>
   </thead>
 
   <tbody>
-    <tr *ngFor="let week of month">
+    <tr *ngFor="let week of _month">
       <td *ngFor="let day of week">
         <div
-          (click)="onDateSelected(day)"
+          (click)="_onDateSelected(day)"
           class="{{ day.cssClasses }}"
           [class.selected]="day.isSelected"
         >

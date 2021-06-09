@@ -14,10 +14,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import {
-  addDays,
-  addHours,
-  addMonths,
-  addYears,
+  add,
   differenceInDays,
   eachDayOfInterval,
   endOfISOWeek,
@@ -36,18 +33,14 @@ import {
   startOfWeek,
 } from 'date-fns';
 import { utcToZonedTime, zonedTimeToUtc } from 'date-fns-tz';
-import { da, de, enGB, enUS, nb, sv } from 'date-fns/locale';
+import { da, enGB, enUS } from 'date-fns/locale';
 
-import { subtractTimezoneOffset } from '../../helpers/date-helper';
 import { capitalizeFirstLetter } from '../../helpers/string-helper';
 
 import { CalendarCell } from './helpers/calendar-cell.model';
 import { CalendarOptions } from './helpers/calendar-options.model';
 import { CalendarHelper } from './helpers/calendar.helper';
 import { CalendarYearNavigatorConfig } from './options/calendar-year-navigator-config';
-
-const locales = { da, de, enGB, enUS, sv, nb };
-
 interface CalendarDay {
   isCurrentMonth: boolean;
   isToday: boolean;
@@ -58,14 +51,14 @@ interface CalendarDay {
 }
 
 enum TimeUnit {
-  year,
-  month,
-  week,
-  day,
-  hour,
-  minute,
-  second,
-  millisecond,
+  years = 'years',
+  months = 'months',
+  weeks = 'weeks',
+  days = 'days',
+  hours = 'hours',
+  minutes = 'minutes',
+  seconds = 'seconds',
+  milliseconds = 'milliseconds',
 }
 
 @Component({
@@ -83,6 +76,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() disablePastDates = false;
   @Input() disableFutureDates = false;
   @Input() alwaysEnableToday = false;
+  @Input() customLocales: { [key: string]: Locale } = {};
   /**
    * Configuration for the year navigator.
    *
@@ -91,20 +85,22 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
    * - prioritizes minDate and maxDate over yearNavigatorOptions.from and yearNavigatorOptions.to
    */
   @Input() yearNavigatorOptions: CalendarYearNavigatorConfig;
-  public month: CalendarCell[][];
-  public weekDays: string[];
+
+  _month: CalendarCell[][];
+  _weekDays: string[];
   private selectedDay: CalendarCell;
   // NOTE: Internally, all Dates
   // are normalized to point to local timezone midnight, regardless of the timezone
   // setting.
   private activeMonth: Date;
   private _selectedDate: Date;
-  private _disabledDates: Date[];
+  private _disabledDates: Date[] = [];
   private _todayDate: Date;
   private _minDate: Date;
   private _maxDate: Date;
-  private locale: string;
+  private locale: Locale;
   private timeZoneName: string;
+  private includedLocales = { da, enGB, enUS };
 
   get selectedDate(): Date {
     return this._selectedDate;
@@ -121,7 +117,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   get disabledDates(): Date[] {
-    return this._disabledDates || [];
+    return this._disabledDates;
   }
 
   @Input() set disabledDates(value: Date[]) {
@@ -140,22 +136,22 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
     return this._minDate;
   }
 
-  @Input() set minDate(minDate: Date) {
-    if (minDate && this.activeMonth && isBefore(this.activeMonth, minDate)) {
-      this.setActiveMonth(minDate);
+  @Input() set minDate(value: Date) {
+    if (value && this.activeMonth && isBefore(this.activeMonth, value)) {
+      this.setActiveMonth(value);
     }
-    this._minDate = this.normalizeDate(minDate);
+    this._minDate = this.normalizeDate(value);
   }
 
   get maxDate(): Date {
     return this._maxDate;
   }
 
-  @Input() set maxDate(maxDate: Date) {
-    if (maxDate && this.activeMonth && isAfter(this.activeMonth, maxDate)) {
-      this.setActiveMonth(maxDate);
+  @Input() set maxDate(value: Date) {
+    if (value && this.activeMonth && isAfter(this.activeMonth, value)) {
+      this.setActiveMonth(value);
     }
-    this._maxDate = this.normalizeDate(maxDate);
+    this._maxDate = this.normalizeDate(value);
   }
 
   get activeMonthName(): string {
@@ -193,18 +189,25 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
     this.timeZoneName = Intl.DateTimeFormat().resolvedOptions().timeZone;
   }
 
-  private formatWithLocale(date: Date, formatStr = 'PP'): string {
-    return format(date, formatStr, {
-      locale: locales[this.locale],
+  // 'PP' format is Apr 29, 1453
+  private formatWithLocale(date: Date, formatString = 'PP'): string {
+    return format(date, formatString, {
+      locale: this.locale,
     });
   }
 
-  private mapLocale(locString: string): string {
-    return locString.replace('-', '');
+  private mapLocale(locale: string): Locale {
+    if (locale === 'en') {
+      locale = 'enGB'; // if english locale is provided without region, we default to GB
+    }
+    locale = locale.replace('-', '');
+    const availableLocales = { ...this.includedLocales, ...this.customLocales };
+
+    return availableLocales[locale] || this.includedLocales.enGB; // Default to enGB if injected locale doesnt exist
   }
 
   ngOnInit() {
-    this.weekDays = this.getWeekDays();
+    this._weekDays = this.getWeekDays();
     this.setActiveMonth(this.selectedDate);
   }
 
@@ -212,7 +215,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
     this.calendarHelper.init(
       this.calendarContainer,
       this.getHelperOptions(),
-      this.onDateSelected.bind(this),
+      this._onDateSelected.bind(this),
       this.onChangeMonth.bind(this)
     );
   }
@@ -250,17 +253,19 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   private normalizeDate(dateLocalOrUTC: Date) {
     if (!dateLocalOrUTC) return;
 
-    if (startOfDay(dateLocalOrUTC) === dateLocalOrUTC) {
+    if (startOfDay(dateLocalOrUTC).getTime() === dateLocalOrUTC.getTime()) {
+      // date is local timezone midnight
       return dateLocalOrUTC;
     }
     if (
-      startOfDay(utcToZonedTime(dateLocalOrUTC, this.timeZoneName)) ===
-      utcToZonedTime(dateLocalOrUTC, this.timeZoneName)
+      startOfDay(utcToZonedTime(dateLocalOrUTC, this.timeZoneName)).getTime() ===
+      utcToZonedTime(dateLocalOrUTC, this.timeZoneName).getTime()
     ) {
+      // the date is a UTC midnight; create the equivalent local timezone midnight date
       const normalizedUTCdate = utcToZonedTime(dateLocalOrUTC, this.timeZoneName);
       return normalizedUTCdate;
     }
-
+    // does not point to midnight so we make it
     return startOfDay(dateLocalOrUTC);
   }
 
@@ -268,20 +273,22 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
     if (datesLocalOrUTC) {
       return datesLocalOrUTC.map((date) => this.normalizeDate(date));
     }
+    return [];
   }
 
   private getWeekDays(): string[] {
     const now = new Date();
 
     const weekInterval = eachDayOfInterval({
-      start: startOfWeek(now, { locale: locales[this.locale] }),
-      end: endOfWeek(now, { locale: locales[this.locale] }),
+      start: startOfWeek(now, { locale: this.locale }),
+      end: endOfWeek(now, { locale: this.locale }),
     });
 
-    return weekInterval.reduce((dayArr, date) => {
-      dayArr.push(this.formatWithLocale(date, 'EEEEE')); // EEEEE returns first letter of weekday capitalized
-      return dayArr;
-    }, []);
+    return weekInterval.map((date) => this.getCapitalizedWeekDay(date));
+  }
+
+  private getCapitalizedWeekDay(date: Date) {
+    return this.formatWithLocale(date, 'EEEEE');
   }
 
   private hasDateChanged(newDate: Date, previousDate: Date): boolean {
@@ -313,7 +320,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
     const daysArray = Array.from(Array(totalDayCount).keys());
 
     const days: CalendarCell[] = daysArray.map((number) => {
-      const cellDate = addDays(startOfFirstWeek, number);
+      const cellDate = add(startOfFirstWeek, { [TimeUnit.days]: number });
       const day = this.getCalendarDay(cellDate, today, monthStart);
 
       const isSelectable = this.isSelectable(day, cellDate);
@@ -330,7 +337,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
       }
       return cell;
     });
-    this.month = this.chunk(days, 7);
+    this._month = this.chunk(days, 7);
   }
 
   private getCalendarDay(date: Date, today: Date, monthStart: Date): CalendarDay {
@@ -397,12 +404,14 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
     this.calendarHelper.setSelectedDay(newDate.getDate());
   }
 
-  onDateSelected(newDay: CalendarCell) {
+  _onDateSelected(newDay: CalendarCell) {
     if (newDay.isSelectable && newDay.date) {
-      const newDate =
-        this.timezone === 'UTC'
-          ? zonedTimeToUtc(subtractTimezoneOffset(this.activeMonth), this.timeZoneName)
-          : new Date(this.activeMonth);
+      let newDate = new Date(this.activeMonth);
+
+      if (this.timezone === 'UTC') {
+        newDate = zonedTimeToUtc(this.subtractTimezoneOffset(newDate), this.timeZoneName);
+      }
+
       newDate.setDate(newDay.date);
       const dateToEmit = newDate;
 
@@ -416,69 +425,52 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   private onChangeMonth(direction: number) {
-    this.changeMonth(direction);
+    this._changeMonth(direction);
     this.calendarHelper.update(this.getHelperOptions());
   }
 
-  changeMonth(index: number) {
-    this.changeActiveView(index, TimeUnit.month);
+  _changeMonth(index: number) {
+    this.changeActiveView(index, TimeUnit.months);
   }
 
   public changeYear(year: number) {
-    this.changeActiveView(year - getYear(this.activeMonth), TimeUnit.year);
+    this.changeActiveView(year - getYear(this.activeMonth), TimeUnit.years);
   }
 
   private changeActiveView(index: number, unit: TimeUnit) {
     if (index === 0) return;
-    switch (unit) {
-      case TimeUnit.year:
-        this.activeMonth = addYears(this.activeMonth, index);
-        break;
+    this.activeMonth = add(this.activeMonth, { [unit]: index });
+    console.log('acticeMonth', this.activeMonth);
 
-      case TimeUnit.month:
-        this.activeMonth = addMonths(this.activeMonth, index);
-        break;
-
-      case TimeUnit.day:
-        this.activeMonth = addDays(this.activeMonth, index);
-        break;
-
-      case TimeUnit.hour:
-        this.activeMonth = addHours(this.activeMonth, index);
-        break;
-
-      default:
-        break;
-    }
     this.refreshActiveMonth();
   }
 
   public get canNavigateBack(): boolean {
-    const disabledPastAndActiveCurrent =
+    const reachedPastDatesLimit =
       this.disablePastDates && isSameMonth(this.activeMonth, this.todayDate);
 
-    const reachedOrExceededMinimum =
+    const reachedOrExceededMinDate =
       this.minDate &&
       (isSameMonth(this.activeMonth, this.minDate) || isBefore(this.activeMonth, this.minDate));
 
-    return !disabledPastAndActiveCurrent && !reachedOrExceededMinimum;
+    return !reachedPastDatesLimit && !reachedOrExceededMinDate;
   }
 
   public get canNavigateForward(): boolean {
-    const disabledFutureAndActiveCurrent =
+    const reachedFutureDatesLimit =
       this.disableFutureDates && isSameMonth(this.activeMonth, this.todayDate);
 
-    const reachedOrExceedMax =
+    const reachedOrExceededMaxDate =
       this.maxDate &&
       (isSameMonth(this.activeMonth, this.maxDate) || isAfter(this.activeMonth, this.maxDate));
 
-    return !disabledFutureAndActiveCurrent && !reachedOrExceedMax;
+    return !reachedFutureDatesLimit && !reachedOrExceededMaxDate;
   }
 
   private getCell(date: Date) {
     let foundDay = null;
     if (date) {
-      for (let week of this.month) {
+      for (let week of this._month) {
         foundDay = week.find((day) => {
           return day.isCurrentMonth && day.date === date.getDate();
         });
@@ -496,9 +488,13 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
       canNavigateForward: this.canNavigateForward,
       year: this.activeYear,
       monthName: this.activeMonthName,
-      weekDays: this.weekDays,
-      month: this.month,
+      weekDays: this._weekDays,
+      month: this._month,
     };
+  }
+
+  private subtractTimezoneOffset(date: Date): Date {
+    return new Date(date.getTime() - date.getTimezoneOffset() * 60 * 1000);
   }
 
   private getDateFromNavigableYear(navigableYear: number | Date): Date {
