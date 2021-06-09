@@ -51,13 +51,6 @@ export class PageTitleDirective {}
 })
 export class PageToolbarTitleDirective {}
 
-@Component({
-  selector: 'kirby-page-actions',
-  template: `
-    <ng-content select="button[kirby-button]"></ng-content>
-  `,
-})
-export class PageActionsComponent {}
 @Directive({
   selector: '[kirbyPageActions]',
 })
@@ -157,6 +150,14 @@ export class PageHeaderComponent {}
   `,
 })
 export class PageContentComponent {}
+
+@Component({
+  selector: 'kirby-page-actions',
+  template: `
+    <ng-content select="button[kirby-button]"></ng-content>
+  `,
+})
+export class PageActionsComponent {}
 
 @Component({
   selector: 'kirby-page',
