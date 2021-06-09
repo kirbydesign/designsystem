@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "dependencies": {
     "@ionic/angular": "5.5.2",
-    "date-fns": "^2.21.1",
-    "date-fns-tz": "^1.1.4",
+    "date-fns": "2.21.1",
+    "date-fns-tz": "1.1.4",
     "highcharts": "8.0.4",
     "@fontsource/roboto": "4.2.1",
     "ngx-ui-scroll": "^2.0.1",
