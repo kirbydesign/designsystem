@@ -1,4 +1,5 @@
 import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import { Locale } from 'date-fns';
 
 import { CalendarComponent, CalendarYearNavigatorConfig } from '@kirbydesign/designsystem';
 

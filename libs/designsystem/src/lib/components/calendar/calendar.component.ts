@@ -27,6 +27,7 @@ import {
   isSameDay,
   isSameMonth,
   isWeekend,
+  Locale,
   startOfDay,
   startOfISOWeek,
   startOfMonth,
