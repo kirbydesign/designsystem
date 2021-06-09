@@ -1,5 +1,8 @@
 import { ElementRef, Injectable } from '@angular/core';
+import { ChartConfiguration } from 'chart.js';
 import Chart from 'chart.js/auto';
+
+import { ColorHelper } from '../../helpers';
 
 import { ChartService, ChartType } from './chart-wip.types';
 
@@ -18,13 +21,21 @@ export class ChartJSService implements ChartService {
     }
   }
 
+  constructor() {
+    Chart.defaults.elements.bar = {
+      ...Chart.defaults.elements.bar,
+      backgroundColor: ColorHelper.getThemeColorHexString('secondary'),
+      hoverBackgroundColor: ColorHelper.getThemeColorHexString('primary'),
+    };
+  }
+
   private renderColumnChart(
     targetElement: ElementRef<HTMLCanvasElement>,
     data: number[],
     dataLabels: string[],
     label: string
   ) {
-    const config = {
+    const config: ChartConfiguration = {
       type: 'bar',
       data: {
         labels: dataLabels,
