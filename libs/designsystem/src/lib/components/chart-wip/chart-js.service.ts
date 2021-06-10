@@ -1,6 +1,6 @@
 import { ElementRef, Injectable } from '@angular/core';
+import { BarController, BarElement, CategoryScale, Chart, LinearScale } from 'chart.js';
 import { ChartConfiguration } from 'chart.js';
-import Chart from 'chart.js/auto';
 
 import { ColorHelper } from '../../helpers';
 
@@ -8,6 +8,11 @@ import { ChartService, ChartType } from './chart-wip.types';
 
 @Injectable()
 export class ChartJSService implements ChartService {
+  constructor() {
+    Chart.register(BarController, CategoryScale, LinearScale, BarElement);
+    this.setDefaults();
+  }
+
   public renderChart(
     targetElement: ElementRef<HTMLCanvasElement>,
     type: ChartType,
@@ -21,11 +26,37 @@ export class ChartJSService implements ChartService {
     }
   }
 
-  constructor() {
-    Chart.defaults.elements.bar = {
-      ...Chart.defaults.elements.bar,
-      backgroundColor: ColorHelper.getThemeColorHexString('secondary'),
-      hoverBackgroundColor: ColorHelper.getThemeColorHexString('primary'),
+  /* TODO: Solve undefined issue when setting defaults directly & refactor*/
+  private setDefaults() {
+    // Set bar colors
+    Chart.defaults.elements = {
+      ...Chart.defaults.elements,
+      bar: {
+        ...Chart.defaults.elements.bar,
+        backgroundColor: ColorHelper.getThemeColorHexString('secondary'),
+        hoverBackgroundColor: ColorHelper.getThemeColorHexString('primary'),
+      },
+    };
+
+    // TODO: Figure out why this gives an undefined error when display is set directly
+    Chart.defaults.scales = {
+      ...Chart.defaults.scales,
+      linear: {
+        ...Chart.defaults.scales.linear,
+        display: false,
+        ticks: {
+          ...Chart.defaults.scales.linear.ticks,
+          display: false,
+        },
+      },
+      category: {
+        ...Chart.defaults.scales.category,
+        display: true,
+        grid: {
+          ...Chart.defaults.scales.category.grid,
+          display: false,
+        },
+      },
     };
   }
 
