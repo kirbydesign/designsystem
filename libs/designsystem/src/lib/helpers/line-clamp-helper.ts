@@ -16,6 +16,7 @@ export class LineClampHelper {
   }
 
   setLineHeight(element: Element, lineHeight: string): void {
+    // Only necessary for the fallback solution to work
     this.renderer.setStyle(element, config.lineHeight, lineHeight, RendererStyleFlags2.DashCase);
   }
 
