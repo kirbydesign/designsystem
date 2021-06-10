@@ -43,6 +43,7 @@ const defaultConfig = {
 };
 
 // Chart.defaults is read-only hence set each property seperately
+Chart.defaults.plugins.legend.display = false;
 Chart.defaults.scales = defaultConfig.scales;
 Chart.defaults.elements = defaultConfig.elements;
 Chart.defaults.font = defaultConfig.font;

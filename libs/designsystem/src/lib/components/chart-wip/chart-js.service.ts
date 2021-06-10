@@ -1,42 +1,49 @@
 import { ElementRef, Injectable } from '@angular/core';
-import { ChartConfiguration } from 'chart.js';
+import { ChartConfiguration, ChartDataset } from 'chart.js';
 
-import { ChartService, ChartType } from './chart-wip.types';
+import { ChartType } from './chart-wip.types';
 import { Chart } from './configured-chart-js';
 
+function isNumberArray(value: any): value is number[] {
+  return Array.isArray(value) && value.every((item) => typeof item === 'number');
+}
+
 @Injectable()
-export class ChartJSService implements ChartService {
+export class ChartJSService {
   constructor() {}
 
   public renderChart(
     targetElement: ElementRef<HTMLCanvasElement>,
     type: ChartType,
-    data: number[],
-    dataLabels: string[],
-    label: string
+    data: ChartDataset<'bar'>[] | number[],
+    dataLabels: string[]
   ): void {
+    const datasets = isNumberArray(data) ? this.convertNumberArrayToDataset(data) : data;
+
     switch (type) {
       case ChartType.column:
-        this.renderColumnChart(targetElement, data, dataLabels, label);
+        this.renderColumnChart(targetElement, datasets, dataLabels);
     }
+  }
+
+  private convertNumberArrayToDataset(numberArray: number[]): ChartDataset<'bar'>[] {
+    return [
+      {
+        data: numberArray,
+      },
+    ];
   }
 
   private renderColumnChart(
     targetElement: ElementRef<HTMLCanvasElement>,
-    data: number[],
-    dataLabels: string[],
-    label: string
+    datasets: ChartDataset<'bar'>[],
+    dataLabels: string[]
   ) {
     const config: ChartConfiguration = {
       type: 'bar',
       data: {
         labels: dataLabels,
-        datasets: [
-          {
-            label,
-            data,
-          },
-        ],
+        datasets,
       },
     };
 
