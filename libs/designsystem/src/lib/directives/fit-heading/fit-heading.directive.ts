@@ -110,7 +110,6 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
 
     if (!this.hostElementClone) {
       this.hostElementClone = this.generateHostElementClone();
-      this.lineClampHelper.removeLineClamp(this.hostElementClone);
       this.renderer.appendChild(this.elementRef.nativeElement, this.hostElementClone);
     }
 
@@ -138,6 +137,7 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
     const clone = this.elementRef.nativeElement.cloneNode(true);
     this.renderer.setStyle(clone, 'position', 'absolute');
     this.renderer.setStyle(clone, 'visibility', 'hidden');
+    this.lineClampHelper.removeLineClamp(clone);
     return clone;
   }
 
