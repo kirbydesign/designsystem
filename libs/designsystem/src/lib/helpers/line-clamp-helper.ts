@@ -1,37 +1,27 @@
 import { Injectable, Renderer2, RendererStyleFlags2 } from '@angular/core';
 
-const lineClampConfig = Object.freeze({
+const config = Object.freeze({
   className: 'kirby-line-clamp',
-  cssCustomPropertyLineClamp: '--line-clamp',
-  cssCustomPropertyLineHeight: '--line-height',
+  lineClamp: '--line-clamp',
+  lineHeight: '--line-height',
 });
 
 @Injectable()
 export class LineClampHelper {
   constructor(private renderer: Renderer2) {}
 
-  setLineClamp(element: Element, maxLines: number): void {
-    this.renderer.setStyle(
-      element,
-      lineClampConfig.cssCustomPropertyLineClamp,
-      maxLines,
-      RendererStyleFlags2.DashCase
-    );
-    this.renderer.addClass(element, lineClampConfig.className);
+  setMaxLines(element: Element, maxLines: number): void {
+    this.renderer.setStyle(element, config.lineClamp, maxLines, RendererStyleFlags2.DashCase);
+    this.renderer.addClass(element, config.className);
   }
 
   setLineHeight(element: Element, lineHeight: string): void {
-    this.renderer.setStyle(
-      element,
-      lineClampConfig.cssCustomPropertyLineHeight,
-      lineHeight,
-      RendererStyleFlags2.DashCase
-    );
+    this.renderer.setStyle(element, config.lineHeight, lineHeight, RendererStyleFlags2.DashCase);
   }
 
   removeLineClamp(element: Element) {
-    this.renderer.removeClass(element, lineClampConfig.className);
-    this.renderer.removeStyle(element, lineClampConfig.cssCustomPropertyLineClamp);
-    this.renderer.removeStyle(element, lineClampConfig.cssCustomPropertyLineHeight);
+    this.renderer.removeClass(element, config.className);
+    this.renderer.removeStyle(element, config.lineClamp);
+    this.renderer.removeStyle(element, config.lineHeight);
   }
 }

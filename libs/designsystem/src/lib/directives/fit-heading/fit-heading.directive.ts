@@ -60,7 +60,7 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     if (this.config && this.config.maxLines) {
-      this.lineClampHelper.setLineClamp(this.elementRef.nativeElement, this.config.maxLines);
+      this.lineClampHelper.setMaxLines(this.elementRef.nativeElement, this.config.maxLines);
       this.observeResize();
       this.isObservingHostElement = true;
     }
