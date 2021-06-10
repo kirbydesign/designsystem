@@ -11,7 +11,7 @@ import { ChartType } from './chart-wip.types';
   providers: [ChartJSService],
 })
 export class ChartWipComponent implements AfterViewInit {
-  @Input() type: ChartType = ChartType.column;
+  @Input() type: ChartType = ChartType.bar;
   @Input() data: ChartDataset<'bar'>[] | number[];
   @Input() dataLabels: string[];
   @Input() label: string;

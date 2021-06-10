@@ -12,6 +12,8 @@ function isNumberArray(value: any): value is number[] {
 export class ChartJSService {
   constructor() {}
 
+  // TODO: This funciton can probably be refactored to use
+  // mappings for type & configurations instead
   public renderChart(
     targetElement: ElementRef<HTMLCanvasElement>,
     type: ChartType,
@@ -23,6 +25,9 @@ export class ChartJSService {
     switch (type) {
       case ChartType.column:
         this.renderColumnChart(targetElement, datasets, dataLabels);
+        break;
+      case ChartType.bar:
+        this.renderBarChart(targetElement, datasets, dataLabels);
     }
   }
 
@@ -44,6 +49,25 @@ export class ChartJSService {
       data: {
         labels: dataLabels,
         datasets,
+      },
+    };
+
+    new Chart(targetElement.nativeElement, config);
+  }
+
+  private renderBarChart(
+    targetElement: ElementRef<HTMLCanvasElement>,
+    datasets: ChartDataset<'bar'>[],
+    dataLabels: string[]
+  ) {
+    const config: ChartConfiguration = {
+      type: 'bar',
+      data: {
+        labels: dataLabels,
+        datasets,
+      },
+      options: {
+        indexAxis: 'y',
       },
     };
 
