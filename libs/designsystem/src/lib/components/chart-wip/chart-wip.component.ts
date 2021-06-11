@@ -35,17 +35,25 @@ export class ChartWipComponent implements AfterViewInit, OnChanges {
 
   ngOnChanges(simpleChanges: SimpleChanges) {
     let shouldRedrawChart = false;
-
-    const isNotFirstChangeForKey = (key: string) =>
-      simpleChanges[key] && !simpleChanges[key].firstChange;
-
-    const runUpdateFunction = (updateFn: () => void) => {
-      shouldRedrawChart = true;
-      updateFn();
-    };
-
-    if (isNotFirstChangeForKey('data')) runUpdateFunction(() => this.updateData());
-    if (isNotFirstChangeForKey('dataLabels')) runUpdateFunction(() => this.updateDataLabels());
+    [
+      {
+        key: 'data',
+        updateFn: () => this.updateData(),
+      },
+      {
+        key: 'dataLabels',
+        updateFn: () => this.updateDataLabels(),
+      },
+      {
+        key: 'type',
+        updateFn: () => this.updateType(),
+      },
+    ].forEach(({ key, updateFn }) => {
+      if (simpleChanges[key] && !simpleChanges[key].firstChange) {
+        shouldRedrawChart = true;
+        updateFn();
+      }
+    });
 
     if (shouldRedrawChart) this.redrawChart();
   }
@@ -61,6 +69,10 @@ export class ChartWipComponent implements AfterViewInit, OnChanges {
 
   private updateDataLabels() {
     this.chartService.updateDataLabels(this.dataLabels);
+  }
+
+  private updateType() {
+    console.log('hehehe');
   }
 
   private redrawChart() {
