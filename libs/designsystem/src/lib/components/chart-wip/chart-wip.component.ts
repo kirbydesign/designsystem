@@ -11,8 +11,13 @@ import { ChartType } from './chart-wip.types';
   providers: [ChartJSService],
 })
 export class ChartWipComponent implements AfterViewInit {
-  @Input() type: ChartType = ChartType.column;
-  @Input() data: ChartDataset<'bar'>[] | number[];
+  @Input() type: ChartType = ChartType.bar;
+  private _data: ChartDataset<'bar'>[] | number[];
+
+  @Input() set data(value: ChartDataset<'bar'>[] | number[]) {
+    this._data = value;
+    this.updateData();
+  }
   @Input() dataLabels: string[];
   @Input() label: string;
 
@@ -26,6 +31,10 @@ export class ChartWipComponent implements AfterViewInit {
   }
 
   private renderChart() {
-    this.chartService.renderChart(this.canvasElement, this.type, this.data, this.dataLabels);
+    this.chartService.renderChart(this.canvasElement, this.type, this._data, this.dataLabels);
+  }
+
+  private updateData() {
+    this.chartService.updateData(this._data);
   }
 }

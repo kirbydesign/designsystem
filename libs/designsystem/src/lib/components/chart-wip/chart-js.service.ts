@@ -5,15 +5,18 @@ import { ChartType } from './chart-wip.types';
 import { Chart } from './configured-chart-js';
 
 //---- TODO: move all of this somewhere smart ----//
-const KIRBY_TO_CHARTJS_TYPES_MAP = {
-  [ChartType.bar]: 'bar' as ChartJSType,
-  [ChartType.column]: 'bar' as ChartJSType,
-};
-
 const CHART_TYPE_CONFIGS = {
   [ChartType.bar]: {
+    type: 'bar' as ChartJSType,
     options: {
-      indexAxis: 'y',
+      indexAxis: 'y' as 'y' | 'x',
+      scales: {},
+    },
+  },
+  [ChartType.column]: {
+    type: 'bar' as ChartJSType,
+    options: {
+      indexAxis: 'x' as 'y' | 'x',
     },
   },
 };
@@ -26,7 +29,7 @@ function isNumberArray(value: any): value is number[] {
 
 @Injectable()
 export class ChartJSService {
-  constructor() {}
+  private chart: Chart;
 
   public renderChart(
     targetElement: ElementRef<HTMLCanvasElement>,
@@ -36,7 +39,14 @@ export class ChartJSService {
   ): void {
     const datasets = this.prepareDatasets(data);
     const config = this.prepareConfig(datasets, dataLabels, type);
-    new Chart(targetElement.nativeElement, config as ChartConfiguration);
+    this.chart = new Chart(targetElement.nativeElement, config as ChartConfiguration);
+    console.log(this.chart);
+  }
+
+  public updateData(data: ChartDataset<'bar'>[] | number[]): void {
+    const datasets = this.prepareDatasets(data);
+    this.chart.data.datasets = datasets;
+    this.chart.update();
   }
 
   private prepareConfig(
@@ -45,7 +55,7 @@ export class ChartJSService {
     type: ChartType
   ): ChartConfiguration {
     return {
-      type: KIRBY_TO_CHARTJS_TYPES_MAP[type],
+      type: 'bar',
       data: {
         labels: dataLabels,
         datasets,
