@@ -40,13 +40,19 @@ export class ChartJSService {
     const datasets = this.prepareDatasets(data);
     const config = this.prepareConfig(datasets, dataLabels, type);
     this.chart = new Chart(targetElement.nativeElement, config as ChartConfiguration);
-    console.log(this.chart);
+  }
+
+  public redrawChart() {
+    this.chart.update();
   }
 
   public updateData(data: ChartDataset<'bar'>[] | number[]): void {
     const datasets = this.prepareDatasets(data);
     this.chart.data.datasets = datasets;
-    this.chart.update();
+  }
+
+  public updateDataLabels(dataLabels: string[]) {
+    this.chart.data.labels = dataLabels;
   }
 
   private prepareConfig(

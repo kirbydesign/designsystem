@@ -12,13 +12,17 @@ export class ChartWipShowcaseComponent {
     [10, 43, 49, 558, 1283],
     [1283, 558, 49, 43, 10],
   ];
-  _data = this._dataArray[0];
-  _dataLabels = ['Monday', 'Tuesday', 'Wedensday', 'Thursday', 'Friday'];
+
+  _dataLabelsArray = [
+    ['Monday', 'Tuesday', 'Wedensday', 'Thursday', 'Friday'],
+    ['DAG 1', 'DAG 2', 'DAG 3', 'DAG 4', 'DAG 5'],
+  ];
+
   _label = 'Number of candies from the legohead eaten';
   _type = ChartType.bar;
 
   _onClick() {
-    this._data = ChartType.bar === this._type ? this._dataArray[0] : this._dataArray[1];
     this._dataArray = [this._dataArray[1], this._dataArray[0]];
+    this._dataLabelsArray = [this._dataLabelsArray[1], this._dataLabelsArray[0]];
   }
 }

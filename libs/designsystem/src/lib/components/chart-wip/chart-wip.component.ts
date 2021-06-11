@@ -1,4 +1,12 @@
-import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  OnChanges,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import { ChartDataset } from 'chart.js';
 
 import { ChartJSService } from './chart-js.service';
@@ -10,14 +18,9 @@ import { ChartType } from './chart-wip.types';
   styleUrls: ['./chart-wip.component.scss'],
   providers: [ChartJSService],
 })
-export class ChartWipComponent implements AfterViewInit {
+export class ChartWipComponent implements AfterViewInit, OnChanges {
   @Input() type: ChartType = ChartType.bar;
-  private _data: ChartDataset<'bar'>[] | number[];
-
-  @Input() set data(value: ChartDataset<'bar'>[] | number[]) {
-    this._data = value;
-    this.updateData();
-  }
+  @Input() data: ChartDataset<'bar'>[] | number[];
   @Input() dataLabels: string[];
   @Input() label: string;
 
@@ -30,11 +33,37 @@ export class ChartWipComponent implements AfterViewInit {
     this.renderChart();
   }
 
+  ngOnChanges(simpleChanges: SimpleChanges) {
+    let shouldRedrawChart = false;
+
+    const isNotFirstChangeForKey = (key: string) =>
+      simpleChanges[key] && !simpleChanges[key].firstChange;
+
+    const runUpdateFunction = (updateFn: () => void) => {
+      shouldRedrawChart = true;
+      updateFn();
+    };
+
+    if (isNotFirstChangeForKey('data')) runUpdateFunction(() => this.updateData());
+    if (isNotFirstChangeForKey('dataLabels')) runUpdateFunction(() => this.updateDataLabels());
+
+    if (shouldRedrawChart) this.redrawChart();
+  }
+
   private renderChart() {
-    this.chartService.renderChart(this.canvasElement, this.type, this._data, this.dataLabels);
+    console.log(this.dataLabels);
+    this.chartService.renderChart(this.canvasElement, this.type, this.data, this.dataLabels);
   }
 
   private updateData() {
-    this.chartService.updateData(this._data);
+    this.chartService.updateData(this.data);
+  }
+
+  private updateDataLabels() {
+    this.chartService.updateDataLabels(this.dataLabels);
+  }
+
+  private redrawChart() {
+    this.chartService.redrawChart();
   }
 }
