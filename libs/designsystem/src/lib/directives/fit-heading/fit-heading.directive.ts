@@ -1,10 +1,8 @@
 import { Directive, ElementRef, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 
 import { ResizeObserverService } from '../../components/shared/resize-observer/resize-observer.service';
-import { ResizeObserverEntry } from '../../components/shared/resize-observer/types/resize-observer-entry';
 import { DesignTokenHelper } from '../../helpers/design-token-helper';
 import { LineClampHelper } from '../../helpers/line-clamp-helper';
-import { WindowRef } from '../../types/window-ref';
 
 const fontSize = DesignTokenHelper.fontSize;
 const lineHeight = DesignTokenHelper.lineHeight;
@@ -29,7 +27,6 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
 
   private isObservingHostElement: boolean;
   private hostElementClone: Element;
-  private previousWidth: number;
   private isScalingHeader: boolean; // used to prevent resizeObserver to trigger on font scaling by this.scaleHeader()
 
   private headingSizes: HeadingSize[] = [
@@ -54,7 +51,6 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
     private elementRef: ElementRef,
     private renderer: Renderer2,
     private resizeObserverService: ResizeObserverService,
-    private window: WindowRef,
     private lineClampHelper: LineClampHelper
   ) {}
 
@@ -76,36 +72,14 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
   }
 
   private observeResize(): void {
-    this.resizeObserverService.observe(this.elementRef, (entry: ResizeObserverEntry) => {
-      this.handleResize(entry);
+    this.resizeObserverService.observe(this.elementRef, () => {
+      this.scaleHeader();
     });
   }
 
-  private handleResize(entry: ResizeObserverEntry) {
-    if (!this.shouldScale(entry.target)) return;
-
-    // Set width to determine at next resize if header should be scaled up again
-    this.previousWidth = entry.target.clientWidth;
-    this.scaleHeader();
-  }
-
-  private shouldScale(el: Element): boolean {
-    // TODO: Remove temp. return statement after fixing "should scale-issue"
-    return true;
-
-    const height = el.clientHeight;
-
-    if (height === 0 || this.isScalingHeader) return false;
-
-    const lineHeight = parseInt(
-      this.window.getComputedStyle(this.elementRef.nativeElement).getPropertyValue('line-height')
-    );
-
-    const lines = height / lineHeight;
-    return lines > this.config.maxLines || this.previousWidth < el.clientWidth;
-  }
-
   private scaleHeader(): void {
+    if (this.isScalingHeader) return;
+
     this.isScalingHeader = true;
 
     if (!this.hostElementClone) {
