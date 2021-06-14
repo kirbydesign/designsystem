@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ChartOptions } from 'chart.js';
 
 import { ChartType } from '../../../../../../libs/designsystem/src/lib/components/chart-wip/chart-wip.types';
 
@@ -12,15 +13,20 @@ export class ChartWipShowcaseComponent {
     [10, 43, 49, 558, 1283],
     [1283, 558, 49, 43, 10],
   ];
-
   _dataLabels = [
     ['Monday', 'Tuesday', 'Wedensday', 'Thursday', 'Friday'],
     ['DAG 1', 'DAG 2', 'DAG 3', 'DAG 4', 'DAG 5'],
   ];
-
   _types = [ChartType.bar, ChartType.column];
-
   _label = 'Number of candies from the legohead eaten';
+  _lastClickedElement: string;
+  _options: ChartOptions = {
+    onClick: (_, [activeElement]) => {
+      this._lastClickedElement = activeElement
+        ? this._dataLabels[0][activeElement.index]
+        : 'no element';
+    },
+  };
 
   _onClick() {
     const flip = (arr: any[]) => [arr[1], arr[0]];
@@ -28,5 +34,9 @@ export class ChartWipShowcaseComponent {
     this._datasets = flip(this._datasets);
     this._dataLabels = flip(this._dataLabels);
     this._types = flip(this._types);
+  }
+
+  _onElementClicked() {
+    console.log('An element was clicked');
   }
 }

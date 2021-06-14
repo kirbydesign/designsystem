@@ -7,7 +7,7 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
-import { ChartDataset } from 'chart.js';
+import { ChartConfiguration, ChartDataset } from 'chart.js';
 
 import { ChartJSService } from './chart-js.service';
 import { ChartType } from './chart-wip.types';
@@ -23,6 +23,9 @@ export class ChartWipComponent implements AfterViewInit, OnChanges {
   @Input() data: ChartDataset<'bar'>[] | number[];
   @Input() dataLabels: string[];
   @Input() label: string;
+  // TODO: implement
+  // @Input() overrideConfiguration: ChartConfiguration;
+  @Input() options: ChartConfiguration['options'];
 
   @ViewChild('chartCanvas')
   canvasElement: ElementRef<HTMLCanvasElement>;
@@ -53,7 +56,13 @@ export class ChartWipComponent implements AfterViewInit, OnChanges {
   }
 
   private renderChart() {
-    this.chartService.renderChart(this.canvasElement, this.type, this.data, this.dataLabels);
+    this.chartService.renderChart(
+      this.canvasElement,
+      this.type,
+      this.data,
+      this.dataLabels,
+      this.options
+    );
   }
 
   private updateData() {
