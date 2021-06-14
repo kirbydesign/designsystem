@@ -91,6 +91,7 @@ export class DecimalMaskDirective implements ControlValueAccessor, OnInit {
       SetMaxOnOverflow: this.setMaxOnOverflow,
       showMaskOnFocus: false,
       showMaskOnHover: false,
+      placeholder: '',
       onBeforeWrite: () => {
         if (!this.inputmask) return;
         const unmaskedValue = this.inputmask.unmaskedvalue();
