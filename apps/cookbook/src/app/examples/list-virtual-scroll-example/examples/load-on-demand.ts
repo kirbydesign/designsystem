@@ -14,13 +14,7 @@ export const ListVirtualScrollLoadExampleTemplate = `
 
 @Component({
   selector: 'cookbook-list-virtual-scroll-load-example',
-  template: `
-    <kirby-page title="Virtual Scroll">
-      <kirby-page-content>
-        ${ListVirtualScrollLoadExampleTemplate}
-      </kirby-page-content>
-    </kirby-page>
-  `,
+  template: ListVirtualScrollLoadExampleTemplate,
   styleUrls: ['../list-virtual-scroll-example.component.scss'],
 })
 export class ListVirtualScrollLoadExampleComponent extends BaseListComponent {

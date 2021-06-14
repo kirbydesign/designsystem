@@ -1,16 +1,10 @@
 @import './libs/designsystem/src/lib/scss/utils';
 
 .example-wrapper {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  column-gap: size('xl');
+  display: flex;
+  justify-content: space-between;
   margin-top: size('xl');
   margin-bottom: size('xl');
-}
-
-.example-list-wrapper {
-  width: 320px;
-  margin-top: size('xxl');
 }
 
 h2 {

@@ -41,6 +41,7 @@ import { ListVirtualScrollItemsExampleComponent } from './list-virtual-scroll-ex
 import { ListVirtualScrollLoadExampleComponent } from './list-virtual-scroll-example/examples/load-on-demand';
 import { ListVirtualScrollSectionsExampleComponent } from './list-virtual-scroll-example/examples/sections';
 import { ListVirtualScrollExampleComponent } from './list-virtual-scroll-example/list-virtual-scroll-example.component';
+import { ListVirtualScrollWindowExampleComponent } from './list-virtual-scroll-window-example/list-virtual-scroll-window-example.component';
 import { LoadingOverlayExampleComponent } from './loading-overlay-example/loading-overlay-example.component';
 import { ModalExampleComponent } from './modal-example/modal-example.component';
 import { ModalRoutePage1ExampleComponent } from './modal-example/modal-route-example/modal-route-page1-example.component';
@@ -325,6 +326,10 @@ export const routes: Routes = [
         component: ListVirtualScrollSectionsExampleComponent,
       },
     ],
+  },
+  {
+    path: 'list-virtual-scroll-window',
+    component: ListVirtualScrollWindowExampleComponent,
   },
   {
     path: 'chart',

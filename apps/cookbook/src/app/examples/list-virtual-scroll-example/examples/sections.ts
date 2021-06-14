@@ -27,13 +27,7 @@ export const ListVirtualScrollSectionsExampleTemplate = `<kirby-list
 @Component({
   // tslint:disable-next-line
   selector: 'cookbook-list-virtual-scroll-sections-example',
-  template: `
-    <kirby-page title="List with sections">
-      <kirby-page-content>
-        ${ListVirtualScrollSectionsExampleTemplate}
-      </kirby-page-content>
-    </kirby-page>
-  `,
+  template: ListVirtualScrollSectionsExampleTemplate,
 })
 export class ListVirtualScrollSectionsExampleComponent extends BaseListComponent {
   getSectionName(_item: any): string {
