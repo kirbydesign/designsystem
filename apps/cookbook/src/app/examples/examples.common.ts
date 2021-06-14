@@ -31,7 +31,7 @@ import { ListLoadOnDemandExampleComponent } from './list-load-on-demand-example/
 import { ListNoShapeExampleComponent } from './list-no-shape-example/list-no-shape-example.component';
 import { ListSwipeExampleComponent } from './list-swipe-example/list-swipe-example.component';
 import { ListVirtualScrollExampleComponent } from './list-virtual-scroll-example/list-virtual-scroll-example.component';
-import { ListVirtualScrollWindowExampleComponent } from './list-virtual-scroll-window-example/list-virtual-scroll-window-example.component';
+import { ListVirtualScrollLoadExampleComponent } from './list-virtual-scroll-load-example/list-virtual-scroll-load-example.component';
 import { LoadingOverlayExampleComponent } from './loading-overlay-example/loading-overlay-example.component';
 import { ModalCompactExampleComponent } from './modal-example/compact-example/modal-compact-example.component';
 import { FirstEmbeddedModalExampleComponent } from './modal-example/first-embedded-modal-example/first-embedded-modal-example.component';
@@ -89,7 +89,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   ListSwipeExampleComponent,
   ListNoShapeExampleComponent,
   ListVirtualScrollExampleComponent,
-  ListVirtualScrollWindowExampleComponent,
+  ListVirtualScrollLoadExampleComponent,
   GridExampleComponent,
   AvatarExampleComponent,
   FontsExampleComponent,

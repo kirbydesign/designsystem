@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 import { ListVirtualScrollItemsExampleTemplate } from './../../examples/list-virtual-scroll-example/examples/items';
-import { ListVirtualScrollLoadExampleTemplate } from './../../examples/list-virtual-scroll-example/examples/load-on-demand';
 import { ListVirtualScrollSectionsExampleTemplate } from './../../examples/list-virtual-scroll-example/examples/sections';
 
 @Component({
@@ -12,7 +11,6 @@ import { ListVirtualScrollSectionsExampleTemplate } from './../../examples/list-
 })
 export class ListVirtualScrollShowcaseComponent {
   itemsHtml: string = ListVirtualScrollItemsExampleTemplate;
-  loadOnDemandHtml: string = ListVirtualScrollLoadExampleTemplate;
   sectionsHtml: string = ListVirtualScrollSectionsExampleTemplate;
 
   properties: ApiDescriptionProperty[] = [
@@ -29,13 +27,6 @@ export class ListVirtualScrollShowcaseComponent {
         'When using virtual scroll, we need a fixed height scroll container. This property makes it possible to set a custom height on this.',
       type: ['number'],
       defaultValue: '500',
-    },
-    {
-      name: 'virtualScrollTimeout',
-      description:
-        'When combining virtual scroll with load-on-demand, a timeout is defined as a failsafe for a non-responsive external API. This can be increased if working with slow APIs or large queries.',
-      type: ['number'],
-      defaultValue: '5000',
     },
     {
       name: 'virtualScrollSettings',

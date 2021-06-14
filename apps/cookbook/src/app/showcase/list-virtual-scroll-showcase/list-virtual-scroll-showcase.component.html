@@ -1,10 +1,4 @@
 <div class="example">
-  <kirby-card themeColor="warning" class="experimental">
-    <kirby-card-header
-      title="Experimental"
-      subtitle="This is an experimental feature. It is functional, but we are still working to improve performance."
-    ></kirby-card-header>
-  </kirby-card>
   <p>
     The virtual scroll should be mostly invisible to the user, but behind the scenes, only a small
     subset of the total number of list items are actually rendered on the page. Items will
@@ -24,20 +18,6 @@
   </div>
   <div class="example-list-wrapper">
     <cookbook-list-virtual-scroll-items-example></cookbook-list-virtual-scroll-items-example>
-  </div>
-</div>
-
-<div class="example-wrapper">
-  <div>
-    <h2>Load on demand</h2>
-    <p>
-      When ever the list is scrolled to the end, an additional 20 items are requested (with a 2 sec
-      delay to mimic a slow HTTPS request)
-    </p>
-    <cookbook-code-viewer [html]="loadOnDemandHtml"></cookbook-code-viewer>
-  </div>
-  <div class="example-list-wrapper">
-    <cookbook-list-virtual-scroll-load-example></cookbook-list-virtual-scroll-load-example>
   </div>
 </div>
 

@@ -13,7 +13,7 @@ import {
   TrackByFunction,
   ViewChild,
 } from '@angular/core';
-import { Datasource, IDatasource } from 'ngx-ui-scroll';
+import { IDatasource } from 'ngx-ui-scroll';
 
 import { ThemeColor } from '../../helpers/theme-color.type';
 import { ItemComponent } from '../item/item.component';
@@ -95,44 +95,46 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
 
   @Input() virtualScrollTimeout = 5000;
 
-  _virtualScrollData: IDatasource = new Datasource({
-    get: (index, count, success) => this.getVirtualDataset(index, count, success),
+  _virtualScrollData: IDatasource = {
+    get: (index, count) => this.getVirtualDataset(index, count),
     settings: {
       minIndex: this.virtualScrollSettings.minIndex || 0,
       startIndex: this.virtualScrollSettings.startIndex || 0,
       bufferSize: this.virtualScrollSettings.bufferSize || 10,
       ...this.virtualScrollSettings,
     },
-  });
+  };
 
-  private getVirtualDataset(index: number, count: number, success): void {
-    const itemSlice = this.getItemsSlice(index, count);
+  private getVirtualDataset(index: number, count: number): Promise<any> {
+    return new Promise((resolve) => {
+      const itemSlice = this.getItemsSlice(index, count);
 
-    // If we return less items than count, virtual scroll will interprete it as EOF and stop asking for more
-    if (itemSlice.length < count && this.isLoadOnDemandEnabled) {
-      let elapsedTime = 0;
+      // If we return less items than count, virtual scroll will interprete it as EOF and stop asking for more
+      if (itemSlice.length < count && this.isLoadOnDemandEnabled) {
+        let elapsedTime = 0;
 
-      /* As virtual scroll fixes the viewport causing ScrollEnd to not be emitted; do it manually to trigger load on demand */
-      this.scrollDirective.scrollEnd.emit();
+        /* As virtual scroll fixes the viewport causing ScrollEnd to not be emitted; do it manually to trigger load on demand */
+        this.scrollDirective.scrollEnd.emit();
 
-      const poller = setInterval(() => {
-        elapsedTime += INTERVAL;
+        const poller = setInterval(() => {
+          elapsedTime += INTERVAL;
 
-        if (this._isLoading) {
-          // Just a failsafe in case this.isLoading for some reason is not reset
-          if (elapsedTime > this.virtualScrollTimeout) {
-            clearInterval(poller);
-            success([]);
+          if (this._isLoading) {
+            // Just a failsafe in case this.isLoading for some reason is not reset
+            if (elapsedTime > this.virtualScrollTimeout) {
+              clearInterval(poller);
+              resolve([]);
+            }
+            return;
           }
-          return;
-        }
 
-        clearInterval(poller);
-        return this.getItemsSlice(index, count);
-      }, INTERVAL);
-    } else {
-      success(itemSlice);
-    }
+          clearInterval(poller);
+          resolve(this.getItemsSlice(index, count));
+        }, INTERVAL);
+      } else {
+        resolve(itemSlice);
+      }
+    });
   }
 
   private getItemsSlice(index: number, count: number): any[] {

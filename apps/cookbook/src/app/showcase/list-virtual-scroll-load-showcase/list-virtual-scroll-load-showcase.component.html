@@ -1,0 +1,28 @@
+<h2>Load on demand</h2>
+<p>
+  Virtual scroll is particularly usefull in combination with load-on-demand lists. When new items
+  are continually requested and added to the existing page, it can result in a very large and poor
+  performing document. Virtual scroll fixes this by preserving the loaded items in memory, but only
+  rendering the necessary items on the page.
+</p>
+<p>
+  Whenever the list is scrolled near the end, an additional 40 items are requested (with a 1.5 sec
+  delay to mimic a slow HTTPS request)
+</p>
+
+<div class="example-wrapper">
+  <div>
+    <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
+  </div>
+  <div class="example-list-wrapper">
+    <cookbook-list-virtual-scroll-load-example></cookbook-list-virtual-scroll-load-example>
+  </div>
+</div>
+
+<h2>Properties:</h2>
+<cookbook-api-description-properties
+  [properties]="properties"
+></cookbook-api-description-properties>
+
+<h2>Events:</h2>
+<cookbook-api-description-events [events]="events"></cookbook-api-description-events>
