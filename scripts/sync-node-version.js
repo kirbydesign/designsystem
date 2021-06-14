@@ -26,7 +26,7 @@ hasNodeVersionChanged()
       const {
         engines: { node: nodeVersion },
       } = require('../package.json');
-      fs.writeFile('.nvmrc', nodeVersion + os.EOL);
+      fs.writeFile('.nvmrc', nodeVersion.replace('^', '').replace('~', '') + os.EOL);
       exec('git add .nvmrc');
       console.log(
         '[sync-node-version] ...DONE. Node version synced to .nvmrc file and added to commit.'
