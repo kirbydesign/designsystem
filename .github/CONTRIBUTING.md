@@ -342,7 +342,7 @@ These are but three examples of how issues can be specific and unambigious. Alwa
 
 Do not ignore the template text when creating an issue. Use it. 
 
-The issue templates exist to ease collaboration by providing structure and reminding you of which information other contributors are looking for. 
+The issue templates exist to ease collaboration by providing structure and reminding you of what information other contributors are looking for. 
 They also provide helpful checklists that help you follow [the process of contributing](#the-process-of-contributing) and let others know how far you have come. 
 
 If you experience that no template matches your specific need; well there is a good opportunity to contribute. Create an issue for a new template to be created! 
@@ -390,7 +390,7 @@ Is much harder to read than:
 
 ### The good issue contains screenshots and screen recordings if possible 
 
-Kirby is a design system, hence it is a very visual project! So do not be shy of using images and screen recordings to explain yourself. 
+Kirby is a design system, hence it is a very visual project! So do not shy away from using images and screen recordings to explain yourself. 
 
 If you are requesting a new component, perhaps add a sketch showing how you are imagining it. While every component must have a UX refined sketch before it can be implemented; adding one yourself can help others understand what you are thinking. 
 
@@ -398,14 +398,14 @@ When reporting a bug, you could add a screen recording to show exactly what you 
 
 Suggesting an enhancement? Add before and after images portraying what you would like, just make sure to clearly state which is "before" and which is "after". 
 
-### The good issue is closed when there i no need for it (except bug reports!)
+### The good issue is closed when there is no need for it (except bug reports!)
 
 If an issue you have submitted is no longer necessary and no work has been done on it, go ahead and close it.
 
 While suggestions from contributors always are valueable, we want to eliminate as much "noise" as possible, by removing issues that are outdated or redundant. 
 Otherwise they might take away attention from more important issues.  
 
-If someone else has a need for your issue again they can request that it is reopened or go ahead and open a new one. No harm done (issues cost nothing to create afterall). 
+If someone else has a need for your issue again they can request that it is reopened or go ahead and open a new one. No harm done (issues cost nothing to create after all). 
 
 This does not go for bug reports however, as we want to unearth and solve as many bugs as possible.
 
@@ -453,7 +453,7 @@ Should be part of the branch name to ease organization and grouping.
   
 When viewing the branch overview on Github, which is sorted alphabetically - all branches of the same issue type will be shown next to each other. When the issue type is followed by a `/` , tools that visualise branches as a tree (such as a Git GUI or an IDE), will group all branches belonging to the same type together.
 
-The entire name of the issue type  is to be used, such that contributors does not have to remember a bunch of arbitary abbrivations (is it: doc, docs or docu? Something fourth?) 
+The entire name of the issue type is to be used, such that contributors does not have to remember a bunch of arbitrary abbreviations (is it: doc, docs or docu? Something fourth?) 
 </dd>
 
 <dt>Issue id</dt>
