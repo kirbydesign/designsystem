@@ -11,7 +11,7 @@ defaults:
 
 jobs:
   pre_build:
-    name: Check if build is needed
+    name: Check if build is needed & get node version
     runs-on: ubuntu-latest
     outputs:
       #Build on PRs, new releases & changes not including 'libs' (which gets build as part of new release)
