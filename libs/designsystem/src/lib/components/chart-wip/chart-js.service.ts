@@ -80,20 +80,15 @@ export class ChartJSService {
     dataLabels?: unknown[]
   ): ChartConfiguration {
     const deepCopy = (obj: any) => JSON.parse(JSON.stringify(obj));
-    /* Chart copies by reference; deep copy 
-    to avoid overwriting parts of CHART_TYPE_CONFIGS */
+    /* Deep copy to avoid Chart object modifying parts of CHART_TYPE_CONFIGS 
+    as it copies by reference when initialized */
     const config = deepCopy(CHART_TYPE_CONFIGS[type]);
 
     if (datasets || dataLabels) {
-      config['data'] = {};
-    }
-
-    if (datasets) {
-      config['data']['datasets'] = datasets;
-    }
-
-    if (dataLabels) {
-      config['data']['labels'] = dataLabels;
+      config['data'] = {
+        ...(datasets ? { datasets } : {}),
+        ...(dataLabels ? { labels: dataLabels } : {}),
+      };
     }
 
     return config;
