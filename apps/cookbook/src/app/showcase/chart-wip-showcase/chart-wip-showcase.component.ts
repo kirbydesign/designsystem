@@ -8,21 +8,25 @@ import { ChartType } from '../../../../../../libs/designsystem/src/lib/component
   styleUrls: ['./chart-wip-showcase.component.scss'],
 })
 export class ChartWipShowcaseComponent {
-  _dataArray = [
+  _datasets = [
     [10, 43, 49, 558, 1283],
     [1283, 558, 49, 43, 10],
   ];
 
-  _dataLabelsArray = [
+  _dataLabels = [
     ['Monday', 'Tuesday', 'Wedensday', 'Thursday', 'Friday'],
     ['DAG 1', 'DAG 2', 'DAG 3', 'DAG 4', 'DAG 5'],
   ];
 
+  _types = [ChartType.bar, ChartType.column];
+
   _label = 'Number of candies from the legohead eaten';
-  _type = ChartType.bar;
 
   _onClick() {
-    this._dataArray = [this._dataArray[1], this._dataArray[0]];
-    this._dataLabelsArray = [this._dataLabelsArray[1], this._dataLabelsArray[0]];
+    const flip = (arr: any[]) => [arr[1], arr[0]];
+
+    this._datasets = flip(this._datasets);
+    this._dataLabels = flip(this._dataLabels);
+    this._types = flip(this._types);
   }
 }

@@ -4,19 +4,17 @@ import { ChartConfiguration, ChartDataset, ChartType as ChartJSType } from 'char
 import { ChartType } from './chart-wip.types';
 import { Chart } from './configured-chart-js';
 
-//---- TODO: move all of this somewhere smart ----//
 const CHART_TYPE_CONFIGS = {
   [ChartType.bar]: {
     type: 'bar' as ChartJSType,
     options: {
-      indexAxis: 'y' as 'y' | 'x',
-      scales: {},
+      indexAxis: 'y' as any,
     },
   },
   [ChartType.column]: {
     type: 'bar' as ChartJSType,
     options: {
-      indexAxis: 'x' as 'y' | 'x',
+      indexAxis: 'x' as any,
     },
   },
 };
@@ -37,9 +35,9 @@ export class ChartJSService {
     data: ChartDataset<'bar'>[] | number[],
     dataLabels: string[]
   ): void {
-    const datasets = this.prepareDatasets(data);
-    const config = this.prepareConfig(datasets, dataLabels, type);
-    this.chart = new Chart(targetElement.nativeElement, config as ChartConfiguration);
+    const datasets = this.createDatasets(data);
+    const config = this.createConfig(type, datasets, dataLabels);
+    this.initializeNewChart(targetElement.nativeElement, config);
   }
 
   public redrawChart() {
@@ -47,7 +45,7 @@ export class ChartJSService {
   }
 
   public updateData(data: ChartDataset<'bar'>[] | number[]): void {
-    const datasets = this.prepareDatasets(data);
+    const datasets = this.createDatasets(data);
     this.chart.data.datasets = datasets;
   }
 
@@ -55,22 +53,53 @@ export class ChartJSService {
     this.chart.data.labels = dataLabels;
   }
 
-  private prepareConfig(
-    datasets: ChartDataset<'bar'>[],
-    dataLabels: string[],
-    type: ChartType
-  ): ChartConfiguration {
-    return {
-      type: 'bar',
-      data: {
-        labels: dataLabels,
-        datasets,
-      },
-      ...CHART_TYPE_CONFIGS[type],
-    };
+  public updateType(type: ChartType) {
+    /* indexAxis does not update predictably; 
+    update by replacing the chart entirely instead */
+    this.destructivelyUpdateType(type);
   }
 
-  private prepareDatasets(data: ChartDataset<'bar'>[] | number[]): ChartDataset<'bar'>[] {
+  private destructivelyUpdateType(type: ChartType) {
+    const datasets = this.chart.data.datasets as ChartDataset<'bar'>[];
+    const dataLabels = this.chart.data.labels;
+
+    const config = this.createConfig(type, datasets, dataLabels);
+    const canvasElement = this.chart.canvas;
+
+    this.chart.destroy();
+    this.initializeNewChart(canvasElement, config);
+  }
+
+  private initializeNewChart(canvasElement: HTMLCanvasElement, config: ChartConfiguration) {
+    this.chart = new Chart(canvasElement, config);
+  }
+
+  private createConfig(
+    type: ChartType,
+    datasets?: ChartDataset<'bar'>[],
+    dataLabels?: unknown[]
+  ): ChartConfiguration {
+    const deepCopy = (obj: any) => JSON.parse(JSON.stringify(obj));
+    /* Chart copies by reference; deep copy 
+    to avoid overwriting parts of CHART_TYPE_CONFIGS */
+    const config = deepCopy(CHART_TYPE_CONFIGS[type]);
+
+    if (datasets || dataLabels) {
+      config['data'] = {};
+    }
+
+    if (datasets) {
+      config['data']['datasets'] = datasets;
+    }
+
+    if (dataLabels) {
+      config['data']['labels'] = dataLabels;
+    }
+
+    return config;
+  }
+
+  private createDatasets(data: ChartDataset<'bar'>[] | number[]): ChartDataset<'bar'>[] {
     if (!isNumberArray(data)) return data;
 
     return [

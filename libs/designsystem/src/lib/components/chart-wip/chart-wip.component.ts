@@ -53,7 +53,6 @@ export class ChartWipComponent implements AfterViewInit, OnChanges {
   }
 
   private renderChart() {
-    console.log(this.dataLabels);
     this.chartService.renderChart(this.canvasElement, this.type, this.data, this.dataLabels);
   }
 
@@ -66,7 +65,7 @@ export class ChartWipComponent implements AfterViewInit, OnChanges {
   }
 
   private updateType() {
-    console.log('hehehe');
+    this.chartService.updateType(this.type);
   }
 
   private redrawChart() {
