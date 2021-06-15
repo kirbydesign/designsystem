@@ -16,6 +16,7 @@
   },
   "allowedNonPeerDependencies": [
     "@ionic/angular",
+    "chart.js",
     "highcharts",
     "moment",
     "@fontsource/roboto",
