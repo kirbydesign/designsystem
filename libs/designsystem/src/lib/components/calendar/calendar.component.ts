@@ -27,7 +27,7 @@ import {
   isSameDay,
   isSameMonth,
   isWeekend,
-  Locale,
+  Locale as LocaleDateFns,
   startOfDay,
   startOfISOWeek,
   startOfMonth,
@@ -42,6 +42,8 @@ import { CalendarCell } from './helpers/calendar-cell.model';
 import { CalendarOptions } from './helpers/calendar-options.model';
 import { CalendarHelper } from './helpers/calendar.helper';
 import { CalendarYearNavigatorConfig } from './options/calendar-year-navigator-config';
+
+export type Locale = LocaleDateFns;
 interface CalendarDay {
   isCurrentMonth: boolean;
   isToday: boolean;
@@ -190,8 +192,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
     this.timeZoneName = Intl.DateTimeFormat().resolvedOptions().timeZone;
   }
 
-  // 'PP' format is Apr 29, 1453
-  private formatWithLocale(date: Date, formatString = 'PP'): string {
+  private formatWithLocale(date: Date, formatString: string): string {
     return format(date, formatString, {
       locale: this.locale,
     });
@@ -270,11 +271,8 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
     return startOfDay(dateLocalOrUTC);
   }
 
-  private normalizeDates(datesLocalOrUTC: Date[]) {
-    if (datesLocalOrUTC) {
-      return datesLocalOrUTC.map((date) => this.normalizeDate(date));
-    }
-    return [];
+  private normalizeDates(datesLocalOrUTC?: Date[]) {
+    return (datesLocalOrUTC || []).map((date) => this.normalizeDate(date));
   }
 
   private getWeekDays(): string[] {
@@ -445,7 +443,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
     this.refreshActiveMonth();
   }
 
-  public get canNavigateBack(): boolean {
+  get _canNavigateBack(): boolean {
     const reachedPastDatesLimit =
       this.disablePastDates && isSameMonth(this.activeMonth, this.todayDate);
 
@@ -456,7 +454,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
     return !reachedPastDatesLimit && !reachedOrExceededMinDate;
   }
 
-  public get canNavigateForward(): boolean {
+  get _canNavigateForward(): boolean {
     const reachedFutureDatesLimit =
       this.disableFutureDates && isSameMonth(this.activeMonth, this.todayDate);
 
@@ -484,8 +482,8 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
 
   private getHelperOptions(): CalendarOptions {
     return {
-      canNavigateBack: this.canNavigateBack,
-      canNavigateForward: this.canNavigateForward,
+      canNavigateBack: this._canNavigateBack,
+      canNavigateForward: this._canNavigateForward,
       year: this.activeYear,
       monthName: this.activeMonthName,
       weekDays: this._weekDays,
@@ -494,7 +492,8 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   private subtractTimezoneOffset(date: Date): Date {
-    return new Date(date.getTime() - date.getTimezoneOffset() * 60 * 1000);
+    const timezoneOffsetInMs = date.getTimezoneOffset() * 60 * 1000;
+    return new Date(date.getTime() - timezoneOffsetInMs);
   }
 
   private getDateFromNavigableYear(navigableYear: number | Date): Date {

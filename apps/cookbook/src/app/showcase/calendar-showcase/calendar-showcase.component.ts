@@ -113,7 +113,7 @@ export class CalendarShowcaseComponent {
     {
       name: 'customLocales',
       description:
-        '(Optional) Danish and English locales are built in, but if custom locales are needed, they can be specified here. Input locales should be compatible with the date-fns format (https://date-fns.org/).',
+        '(Optional) Danish and English locales are built in, but if custom locales are needed, they can be specified here.',
       defaultValue: '{}',
       type: ['{ [key: string]: Locale }'],
     },
