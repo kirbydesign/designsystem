@@ -10,7 +10,7 @@ import { ChartType } from '../chart-wip.types';
 import { ChartJSService } from './chart-js.service';
 import { GLOBAL_DEFAULTS } from './configured-chart-js';
 
-describe('ChartJSService', () => {
+fdescribe('ChartJSService', () => {
   let chartJSService: ChartJSService;
   let canvasElement: ElementRef<HTMLCanvasElement>;
 
@@ -134,87 +134,87 @@ describe('ChartJSService', () => {
       it('should have no legend', () => {
         expect(chart.options.plugins.legend.display).toBeFalse();
       });
+    });
 
-      describe('when type is ChartType.bar & no custom options are passed', () => {
-        let chart: Chart;
+    describe('when type is ChartType.bar & no custom options are passed', () => {
+      let chart: Chart;
 
-        beforeEach(() => {
-          chartJSService.renderChart(
-            canvasElement,
-            ChartType.bar,
-            [1, 2, 3],
-            ['one', 'two', 'three']
-          );
-          chart = chartJSService['chart'];
-        });
-
-        it('should have correct background color for elements', () => {
-          expect(chart.options.elements.bar.backgroundColor).toEqual(
-            ColorHelper.getThemeColorHexString('secondary')
-          );
-        });
-
-        it('should have correct hover background color for elements', () => {
-          expect(chart.options.elements.bar.hoverBackgroundColor).toEqual(
-            ColorHelper.getThemeColorHexString('primary')
-          );
-        });
-
-        it('should have no grid', () => {
-          expect(chart.options.scales.linear.display).toBeFalse();
-          expect(chart.options.scales.linear.ticks.display).toBeFalse();
-          expect(chart.options.scales.category.grid.display).toBeFalse();
-        });
-
-        it('should have no legend', () => {
-          expect(chart.options.plugins.legend.display).toBeFalse();
-        });
+      beforeEach(() => {
+        chartJSService.renderChart(
+          canvasElement,
+          ChartType.bar,
+          [1, 2, 3],
+          ['one', 'two', 'three']
+        );
+        chart = chartJSService['chart'];
       });
 
-      describe('when custom options are given', () => {
-        it('should overwrite options set by global config', () => {
-          // Check if a global default is actually being overwritten
-          expect(GLOBAL_DEFAULTS.elements.bar.backgroundColor).not.toBeUndefined();
-          const customElementBackgroundColor = '#ffffff';
+      it('should have correct background color for elements', () => {
+        expect(chart.options.elements.bar.backgroundColor).toEqual(
+          ColorHelper.getThemeColorHexString('secondary')
+        );
+      });
 
-          chartJSService.renderChart(
-            canvasElement,
-            ChartType.bar,
-            [1, 2, 3],
-            ['one', 'two', 'three'],
-            {
-              elements: {
-                bar: {
-                  backgroundColor: customElementBackgroundColor,
-                },
+      it('should have correct hover background color for elements', () => {
+        expect(chart.options.elements.bar.hoverBackgroundColor).toEqual(
+          ColorHelper.getThemeColorHexString('primary')
+        );
+      });
+
+      it('should have no grid', () => {
+        expect(chart.options.scales.linear.display).toBeFalse();
+        expect(chart.options.scales.linear.ticks.display).toBeFalse();
+        expect(chart.options.scales.category.grid.display).toBeFalse();
+      });
+
+      it('should have no legend', () => {
+        expect(chart.options.plugins.legend.display).toBeFalse();
+      });
+    });
+
+    describe('when custom options are given', () => {
+      it('should overwrite options set by global config', () => {
+        // Check if a global default is actually being overwritten
+        expect(GLOBAL_DEFAULTS.elements.bar.backgroundColor).not.toBeUndefined();
+        const customElementBackgroundColor = '#ffffff';
+
+        chartJSService.renderChart(
+          canvasElement,
+          ChartType.bar,
+          [1, 2, 3],
+          ['one', 'two', 'three'],
+          {
+            elements: {
+              bar: {
+                backgroundColor: customElementBackgroundColor,
               },
-            }
-          );
+            },
+          }
+        );
 
-          const chart = chartJSService['chart'];
-          expect(chart.options.elements.bar.backgroundColor).toEqual(customElementBackgroundColor);
-        });
+        const chart = chartJSService['chart'];
+        expect(chart.options.elements.bar.backgroundColor).toEqual(customElementBackgroundColor);
+      });
 
-        it('should overwrite type specific options', () => {
-          // Check if a type config is actually being overwritten
-          const type = ChartType.bar;
-          const customIndexAxis = 'x';
-          expect(CHART_TYPE_CONFIGS[type].options.indexAxis).not.toBeUndefined();
-          expect(CHART_TYPE_CONFIGS[type].options.indexAxis).not.toEqual(customIndexAxis);
+      it('should overwrite type specific options', () => {
+        // Check if a type config is actually being overwritten
+        const type = ChartType.bar;
+        const customIndexAxis = 'x';
+        expect(CHART_TYPE_CONFIGS[type].options.indexAxis).not.toBeUndefined();
+        expect(CHART_TYPE_CONFIGS[type].options.indexAxis).not.toEqual(customIndexAxis);
 
-          chartJSService.renderChart(
-            canvasElement,
-            ChartType.bar,
-            [1, 2, 3],
-            ['one', 'two', 'three'],
-            {
-              indexAxis: customIndexAxis,
-            }
-          );
+        chartJSService.renderChart(
+          canvasElement,
+          ChartType.bar,
+          [1, 2, 3],
+          ['one', 'two', 'three'],
+          {
+            indexAxis: customIndexAxis,
+          }
+        );
 
-          const chart = chartJSService['chart'];
-          expect(chart.options.indexAxis).toEqual(customIndexAxis);
-        });
+        const chart = chartJSService['chart'];
+        expect(chart.options.indexAxis).toEqual(customIndexAxis);
       });
     });
   });
