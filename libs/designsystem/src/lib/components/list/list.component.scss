@@ -49,7 +49,6 @@ ion-item {
   --padding-top: #{size('xxs')};
   display: flex;
   font-size: font-size('s');
-  min-height: $item-height;
   overflow: visible;
   width: 100%;
 }

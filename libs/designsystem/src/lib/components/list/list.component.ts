@@ -100,6 +100,8 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
       minIndex: this.virtualScrollSettings.minIndex || 0,
       startIndex: this.virtualScrollSettings.startIndex || 0,
       bufferSize: this.virtualScrollSettings.bufferSize || 10,
+      itemSize: this.virtualScrollSettings.itemSize || 72,
+      padding: this.virtualScrollSettings.padding || 1,
       ...this.virtualScrollSettings,
     },
   });
@@ -177,6 +179,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   _selectedItem: any;
 
   constructor(private listHelper: ListHelper, private groupBy: GroupByPipe) {
+    // Make sure that virtual items are made selectable when entering the DOM
     this._virtualScrollData.adapter.isLoading$.subscribe((loading) => {
       if (!loading && this._isSelectable) {
         this.kirbyItems.forEach((item) => {
