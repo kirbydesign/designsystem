@@ -28,20 +28,18 @@ function isNumberArray(value: any): value is number[] {
 @Injectable()
 export class ChartJSService {
   private chart: Chart;
-  private options: ChartOptions;
 
   public renderChart(
     targetElement: ElementRef<HTMLCanvasElement>,
     type: ChartType,
     data: ChartDataset<'bar'>[] | number[],
     dataLabels: string[],
-    options?: ChartOptions
+    customOptions?: ChartOptions
   ): void {
     const datasets = this.createDatasets(data);
-    const config = this.createConfig(type, datasets, dataLabels, options);
+    const options = this.getOptions(type, customOptions);
+    const config = this.getConfig(type, datasets, dataLabels, options);
     this.initializeNewChart(targetElement.nativeElement, config);
-
-    this.options = options;
   }
 
   public redrawChart() {
@@ -57,17 +55,24 @@ export class ChartJSService {
     this.chart.data.labels = dataLabels;
   }
 
-  public updateType(type: ChartType) {
-    /* indexAxis does not update predictably; 
-    update by replacing the chart entirely instead */
-    this.destructivelyUpdateType(type);
+  public updateType(type: ChartType, customOptions: ChartOptions) {
+    if (type === ChartType.bar || type === ChartType.column) {
+      /* indexAxis does not update predictably; update by replacing the 
+      chart entirely instead */
+      this.destructivelyUpdateType(type, customOptions);
+    }
   }
 
-  private destructivelyUpdateType(type: ChartType) {
+  public updateOptions(customOptions: ChartOptions, type: ChartType) {
+    this.chart.options = this.getOptions(type, customOptions);
+  }
+
+  private destructivelyUpdateType(type: ChartType, customOptions: ChartOptions) {
     const datasets = this.chart.data.datasets as ChartDataset<'bar'>[];
     const dataLabels = this.chart.data.labels;
 
-    const config = this.createConfig(type, datasets, dataLabels, this.options);
+    const options = this.getOptions(type, customOptions);
+    const config = this.getConfig(type, datasets, dataLabels, options);
     const canvasElement = this.chart.canvas;
 
     this.chart.destroy();
@@ -78,22 +83,33 @@ export class ChartJSService {
     this.chart = new Chart(canvasElement, config);
   }
 
-  private createConfig(
+  private getTypeConfig(type: ChartType) {
+    /* Deep copy to avoid Chart object modifying parts of CHART_TYPE_CONFIGS 
+    as it copies by reference when initialized */
+    const deepCopy = (obj: any) => JSON.parse(JSON.stringify(obj));
+    return deepCopy(CHART_TYPE_CONFIGS[type]);
+  }
+
+  private getOptions(type: ChartType, customOptions?: ChartOptions): ChartOptions | undefined {
+    const typeConfig = this.getTypeConfig(type);
+    const typeConfigOptions = typeConfig['options'];
+    return {
+      ...typeConfigOptions,
+      ...customOptions,
+    };
+  }
+
+  private getConfig(
     type: ChartType,
     datasets?: ChartDataset<'bar'>[],
     dataLabels?: unknown[],
-    options: ChartOptions = {}
+    options?: ChartOptions
   ): ChartConfiguration {
-    const deepCopy = (obj: any) => JSON.parse(JSON.stringify(obj));
+    const config = this.getTypeConfig(type);
 
-    /* Deep copy to avoid Chart object modifying parts of CHART_TYPE_CONFIGS 
-    as it copies by reference when initialized */
-    const config = deepCopy(CHART_TYPE_CONFIGS[type]);
-
-    config['options'] = {
-      ...config.options,
-      ...options,
-    };
+    if (options) {
+      config.options = options;
+    }
 
     if (datasets || dataLabels) {
       config['data'] = {

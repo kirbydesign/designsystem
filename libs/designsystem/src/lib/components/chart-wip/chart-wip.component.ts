@@ -7,7 +7,7 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
-import { ChartConfiguration, ChartDataset } from 'chart.js';
+import { ChartDataset, ChartOptions } from 'chart.js';
 
 import { ChartJSService } from './chart-js.service';
 import { ChartType } from './chart-wip.types';
@@ -23,14 +23,12 @@ export class ChartWipComponent implements AfterViewInit, OnChanges {
   @Input() data: ChartDataset<'bar'>[] | number[];
   @Input() dataLabels: string[];
   @Input() label: string;
-  // TODO: implement
-  // @Input() overrideConfiguration: ChartConfiguration;
-  @Input() options: ChartConfiguration['options'];
+  @Input() options: ChartOptions;
 
   @ViewChild('chartCanvas')
   canvasElement: ElementRef<HTMLCanvasElement>;
 
-  constructor(private chartService: ChartJSService) {}
+  constructor(private chartJSService: ChartJSService) {}
 
   ngAfterViewInit() {
     this.renderChart();
@@ -45,18 +43,17 @@ export class ChartWipComponent implements AfterViewInit, OnChanges {
       type: () => this.updateType(),
     };
 
-    Object.entries(keyUpdateFnPairs).forEach(([key, updateFn]) => {
-      if (simpleChanges[key] && !simpleChanges[key].firstChange) {
-        shouldRedrawChart = true;
-        updateFn();
-      }
+    Object.entries(simpleChanges).forEach(([key]) => {
+      if (simpleChanges[key].firstChange) return;
+      shouldRedrawChart = true;
+      keyUpdateFnPairs[key]();
     });
 
     if (shouldRedrawChart) this.redrawChart();
   }
 
   private renderChart() {
-    this.chartService.renderChart(
+    this.chartJSService.renderChart(
       this.canvasElement,
       this.type,
       this.data,
@@ -66,18 +63,18 @@ export class ChartWipComponent implements AfterViewInit, OnChanges {
   }
 
   private updateData() {
-    this.chartService.updateData(this.data);
+    this.chartJSService.updateData(this.data);
   }
 
   private updateDataLabels() {
-    this.chartService.updateDataLabels(this.dataLabels);
+    this.chartJSService.updateDataLabels(this.dataLabels);
   }
 
   private updateType() {
-    this.chartService.updateType(this.type);
+    this.chartJSService.updateType(this.type, this.options);
   }
 
   private redrawChart() {
-    this.chartService.redrawChart();
+    this.chartJSService.redrawChart();
   }
 }
