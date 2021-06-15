@@ -17,7 +17,6 @@ import {
   add,
   differenceInDays,
   eachDayOfInterval,
-  endOfISOWeek,
   endOfMonth,
   endOfWeek,
   format,
@@ -29,7 +28,6 @@ import {
   isWeekend,
   Locale as LocaleDateFns,
   startOfDay,
-  startOfISOWeek,
   startOfMonth,
   startOfWeek,
 } from 'date-fns';
@@ -124,7 +122,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   @Input() set disabledDates(value: Date[]) {
-    this._disabledDates = this.normalizeDates(value);
+    this._disabledDates = (value || []).map((date) => this.normalizeDate(date));
   }
 
   get todayDate(): Date {
@@ -271,22 +269,18 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
     return startOfDay(dateLocalOrUTC);
   }
 
-  private normalizeDates(datesLocalOrUTC?: Date[]) {
-    return (datesLocalOrUTC || []).map((date) => this.normalizeDate(date));
-  }
-
   private getWeekDays(): string[] {
     const now = new Date();
 
-    const weekInterval = eachDayOfInterval({
+    const week = eachDayOfInterval({
       start: startOfWeek(now, { locale: this.locale }),
       end: endOfWeek(now, { locale: this.locale }),
     });
 
-    return weekInterval.map((date) => this.getCapitalizedWeekDay(date));
+    return week.map((date) => this.getFirstLetterOfWeekDayCapitalized(date));
   }
 
-  private getCapitalizedWeekDay(date: Date) {
+  private getFirstLetterOfWeekDayCapitalized(date: Date) {
     return this.formatWithLocale(date, 'EEEEE');
   }
 
@@ -311,8 +305,8 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
 
     const monthStart = startOfMonth(this.activeMonth);
     const monthEnd = endOfMonth(this.activeMonth);
-    const startOfFirstWeek = startOfISOWeek(monthStart);
-    const endOfLastWeek = endOfISOWeek(monthEnd);
+    const startOfFirstWeek = startOfWeek(monthStart, { locale: this.locale });
+    const endOfLastWeek = endOfWeek(monthEnd, { locale: this.locale });
     const totalDayCount = differenceInDays(endOfLastWeek, startOfFirstWeek) + 1;
     const today = this.todayDate ? startOfDay(this.todayDate) : startOfDay(new Date());
 
