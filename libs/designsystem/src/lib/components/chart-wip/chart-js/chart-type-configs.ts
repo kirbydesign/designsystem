@@ -1,6 +1,6 @@
 import { ChartType as ChartJSType } from 'chart.js';
 
-import { ChartType } from './chart-wip.types';
+import { ChartType } from '../chart-wip.types';
 
 export const CHART_TYPE_CONFIGS = {
   [ChartType.bar]: {

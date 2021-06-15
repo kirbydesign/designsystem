@@ -7,10 +7,10 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
-import { ChartDataset, ChartOptions } from 'chart.js';
+import { ChartOptions } from 'chart.js';
 
-import { ChartJSService } from './chart-js.service';
-import { ChartType } from './chart-wip.types';
+import { ChartJSService } from './chart-js/chart-js.service';
+import { ChartData, ChartType } from './chart-wip.types';
 
 @Component({
   selector: 'kirby-chart-wip',
@@ -20,7 +20,7 @@ import { ChartType } from './chart-wip.types';
 })
 export class ChartWipComponent implements AfterViewInit, OnChanges {
   @Input() type: ChartType = ChartType.bar;
-  @Input() data: ChartDataset<'bar'>[] | number[];
+  @Input() data: ChartData;
   @Input() dataLabels: string[];
   @Input() label: string;
   @Input() options: ChartOptions;

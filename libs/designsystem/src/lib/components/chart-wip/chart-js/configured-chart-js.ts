@@ -1,6 +1,6 @@
 import { BarController, BarElement, CategoryScale, Chart, Legend, LinearScale } from 'chart.js';
 
-import { ColorHelper, DesignTokenHelper } from '../../helpers';
+import { ColorHelper, DesignTokenHelper } from '../../../helpers';
 
 const { fontSize } = DesignTokenHelper;
 const { getThemeColorHexString } = ColorHelper;

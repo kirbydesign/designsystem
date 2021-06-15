@@ -1,8 +1,9 @@
 import { ElementRef, Injectable } from '@angular/core';
-import { ChartConfiguration, ChartDataset, ChartOptions } from 'chart.js';
+import { ChartConfiguration, ChartOptions } from 'chart.js';
+
+import { ChartData, ChartDataset, ChartType, isNumberArray } from '../chart-wip.types';
 
 import { CHART_TYPE_CONFIGS } from './chart-type-configs';
-import { ChartType, isNumberArray } from './chart-wip.types';
 import { Chart } from './configured-chart-js';
 
 @Injectable()
@@ -12,7 +13,7 @@ export class ChartJSService {
   public renderChart(
     targetElement: ElementRef<HTMLCanvasElement>,
     type: ChartType,
-    data: ChartDataset<'bar'>[] | number[],
+    data: ChartData,
     dataLabels: string[],
     customOptions?: ChartOptions
   ): void {
@@ -26,7 +27,7 @@ export class ChartJSService {
     this.chart.update();
   }
 
-  public updateData(data: ChartDataset<'bar'>[] | number[]): void {
+  public updateData(data: ChartData): void {
     const datasets = this.createDatasets(data);
     this.chart.data.datasets = datasets;
   }
@@ -48,7 +49,7 @@ export class ChartJSService {
   }
 
   private destructivelyUpdateType(type: ChartType, customOptions: ChartOptions) {
-    const datasets = this.chart.data.datasets as ChartDataset<'bar'>[];
+    const datasets = this.chart.data.datasets as ChartDataset[];
     const dataLabels = this.chart.data.labels;
 
     const options = this.getOptions(type, customOptions);
@@ -81,7 +82,7 @@ export class ChartJSService {
 
   private getConfig(
     type: ChartType,
-    datasets?: ChartDataset<'bar'>[],
+    datasets?: ChartDataset[],
     dataLabels?: unknown[],
     options?: ChartOptions
   ): ChartConfiguration {
@@ -101,7 +102,7 @@ export class ChartJSService {
     return config;
   }
 
-  private createDatasets(data: ChartDataset<'bar'>[] | number[]): ChartDataset<'bar'>[] {
+  private createDatasets(data: ChartData): ChartDataset[] {
     if (!isNumberArray(data)) return data;
 
     return [
