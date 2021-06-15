@@ -1,4 +1,5 @@
 import { Component, EventEmitter, forwardRef, Input, Output, TrackByFunction } from '@angular/core';
+import { IDatasource } from 'ngx-ui-scroll';
 
 import {
   ListComponent,
@@ -6,7 +7,6 @@ import {
   ListSwipeAction,
   LoadOnDemandEvent,
   ThemeColor,
-  VirtualScrollerSettings,
 } from '@kirbydesign/designsystem';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
