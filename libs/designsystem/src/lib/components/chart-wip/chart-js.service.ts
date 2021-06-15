@@ -1,29 +1,9 @@
 import { ElementRef, Injectable } from '@angular/core';
-import { ChartConfiguration, ChartDataset, ChartOptions, ChartType as ChartJSType } from 'chart.js';
+import { ChartConfiguration, ChartDataset, ChartOptions } from 'chart.js';
 
-import { ChartType } from './chart-wip.types';
+import { CHART_TYPE_CONFIGS } from './chart-type-configs';
+import { ChartType, isNumberArray } from './chart-wip.types';
 import { Chart } from './configured-chart-js';
-
-const CHART_TYPE_CONFIGS = {
-  [ChartType.bar]: {
-    type: 'bar' as ChartJSType,
-    options: {
-      indexAxis: 'y',
-    },
-  },
-  [ChartType.column]: {
-    type: 'bar' as ChartJSType,
-    options: {
-      indexAxis: 'x',
-    },
-  },
-};
-
-function isNumberArray(value: any): value is number[] {
-  return Array.isArray(value) && value.every((item) => typeof item === 'number');
-}
-
-// --------- //
 
 @Injectable()
 export class ChartJSService {
