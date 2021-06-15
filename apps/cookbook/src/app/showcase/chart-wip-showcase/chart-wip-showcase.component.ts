@@ -20,13 +20,22 @@ export class ChartWipShowcaseComponent {
   _types = [ChartType.bar, ChartType.column];
   _label = 'Number of candies from the legohead eaten';
   _lastClickedElement: string;
-  _options: ChartOptions = {
-    onClick: (_, [activeElement]) => {
-      this._lastClickedElement = activeElement
-        ? this._dataLabels[0][activeElement.index]
-        : 'no element';
+  _options: ChartOptions[] = [
+    {
+      onClick: (_, [activeElement]) => {
+        this._lastClickedElement = activeElement
+          ? this._dataLabels[0][activeElement.index]
+          : 'no element';
+      },
     },
-  };
+    {
+      onClick: (_, [activeElement]) => {
+        this._lastClickedElement = activeElement
+          ? `the magnificent ${this._dataLabels[0][activeElement.index]}`
+          : "nuthin'";
+      },
+    },
+  ];
 
   _onClick() {
     const flip = (arr: any[]) => [arr[1], arr[0]];
@@ -34,9 +43,6 @@ export class ChartWipShowcaseComponent {
     this._datasets = flip(this._datasets);
     this._dataLabels = flip(this._dataLabels);
     this._types = flip(this._types);
-  }
-
-  _onElementClicked() {
-    console.log('An element was clicked');
+    this._options = flip(this._options);
   }
 }

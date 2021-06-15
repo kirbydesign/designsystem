@@ -66,15 +66,14 @@ fdescribe('ChartWipComponent', () => {
           spyOn<any>(component, 'updateData'),
           spyOn<any>(component, 'updateDataLabels'),
           spyOn<any>(component, 'updateType'),
-          //spyOn<any>(component, 'updateOptions'),
+          spyOn<any>(component, 'updateOptions'),
         ];
 
         spectator.setInput({
           data: [1, 2, 3],
           dataLabels: ['one', 'two', 'three'],
           type: ChartType.column,
-          // TODO: implement options & test it
-          //options: { onClick: () => console.log('testing') },
+          options: { onClick: () => console.log('testing') },
         });
 
         updateFnSpies.forEach((updateFnSpy) => {
@@ -89,8 +88,7 @@ fdescribe('ChartWipComponent', () => {
           data: [1, 2, 3],
           dataLabels: ['one', 'two', 'three'],
           type: ChartType.column,
-          // TODO: implement options & test it
-          //options: { onClick: () => console.log('testing') },
+          options: { onClick: () => console.log('testing') },
         });
 
         expect(redrawChartSpy).toHaveBeenCalledTimes(1);

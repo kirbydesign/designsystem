@@ -41,6 +41,7 @@ export class ChartWipComponent implements AfterViewInit, OnChanges {
       data: () => this.updateData(),
       dataLabels: () => this.updateDataLabels(),
       type: () => this.updateType(),
+      options: () => this.updateOptions(),
     };
 
     Object.entries(simpleChanges).forEach(([key]) => {
@@ -72,6 +73,10 @@ export class ChartWipComponent implements AfterViewInit, OnChanges {
 
   private updateType() {
     this.chartJSService.updateType(this.type, this.options);
+  }
+
+  private updateOptions() {
+    this.chartJSService.updateOptions(this.options, this.type);
   }
 
   private redrawChart() {
