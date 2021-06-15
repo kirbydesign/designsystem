@@ -4,3 +4,4 @@ export {
   ChartData as ChartWipData,
   ChartDataset as ChartWipDataset,
 } from './chart-wip.types';
+export { ChartOptions as ChartWipOptions } from 'chart.js';
