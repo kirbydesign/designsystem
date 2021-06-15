@@ -1,9 +1,9 @@
 import { ElementRef, Injectable } from '@angular/core';
 import { ChartConfiguration, ChartOptions } from 'chart.js';
 
+import { CHART_TYPE_CONFIGS } from '../chart-wip.configs';
 import { ChartData, ChartDataset, ChartType, isNumberArray } from '../chart-wip.types';
 
-import { CHART_TYPE_CONFIGS } from './chart-type-configs';
 import { Chart } from './configured-chart-js';
 
 @Injectable()

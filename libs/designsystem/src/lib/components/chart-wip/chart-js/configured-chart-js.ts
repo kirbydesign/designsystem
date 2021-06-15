@@ -1,13 +1,13 @@
 import { BarController, BarElement, CategoryScale, Chart, Legend, LinearScale } from 'chart.js';
 
 import { ColorHelper, DesignTokenHelper } from '../../../helpers';
-
 const { fontSize } = DesignTokenHelper;
 const { getThemeColorHexString } = ColorHelper;
 
 Chart.register(BarController, CategoryScale, LinearScale, BarElement, Legend);
 
-const defaultConfig = {
+// Global Defaults must be after register
+const GLOBAL_DEFAULTS = {
   elements: {
     ...Chart.defaults.elements,
     bar: {
@@ -40,12 +40,18 @@ const defaultConfig = {
     family: 'Roboto',
     size: parseInt(fontSize('xs')),
   },
+  plugins: {
+    ...Chart.defaults.plugins,
+    legend: {
+      ...Chart.defaults.plugins.legend,
+      display: false,
+    },
+  },
 };
-
 // Chart.defaults is read-only hence set each property seperately
-Chart.defaults.plugins.legend.display = false;
-Chart.defaults.scales = defaultConfig.scales;
-Chart.defaults.elements = defaultConfig.elements;
-Chart.defaults.font = defaultConfig.font;
+Chart.defaults.plugins = GLOBAL_DEFAULTS.plugins;
+Chart.defaults.scales = GLOBAL_DEFAULTS.scales;
+Chart.defaults.elements = GLOBAL_DEFAULTS.elements;
+Chart.defaults.font = GLOBAL_DEFAULTS.font;
 
 export { Chart };
