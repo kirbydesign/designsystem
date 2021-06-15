@@ -7,7 +7,7 @@ const { getThemeColorHexString } = ColorHelper;
 Chart.register(BarController, CategoryScale, LinearScale, BarElement, Legend);
 
 // Global Defaults must be after register
-const GLOBAL_DEFAULTS = {
+export const GLOBAL_DEFAULTS = {
   elements: {
     ...Chart.defaults.elements,
     bar: {
