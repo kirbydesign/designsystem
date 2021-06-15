@@ -197,7 +197,7 @@ describe('NumberInputDirective', () => {
         `<input kirby-input kirby-decimal-mask type="number" min="-100" [allowMinus]="false" />`
       );
       spectator.typeInElement('-', spectator.element);
-      expect(spectator.element).toHaveValue('-0');
+      expect(spectator.element).toHaveValue('-');
     });
 
     it('should allow negative numbers, if "allowMinus" is set to true', () => {
@@ -205,7 +205,7 @@ describe('NumberInputDirective', () => {
         `<input kirby-input kirby-decimal-mask type="number" [allowMinus]="true" />`
       );
       spectator.typeInElement('-', spectator.element);
-      expect(spectator.element).toHaveValue('-0');
+      expect(spectator.element).toHaveValue('-');
     });
   });
 
