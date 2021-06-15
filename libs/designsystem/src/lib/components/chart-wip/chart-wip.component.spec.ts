@@ -4,7 +4,7 @@ import { ChartJSService } from './chart-js/chart-js.service';
 import { ChartWipComponent } from './chart-wip.component';
 import { ChartType } from './chart-wip.types';
 
-fdescribe('ChartWipComponent', () => {
+describe('ChartWipComponent', () => {
   let spectator: Spectator<ChartWipComponent>;
   let component: ChartWipComponent;
 
