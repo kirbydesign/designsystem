@@ -24,6 +24,44 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+@media print {
+  :root {
+    --kirby-font-family: sans-serif;
+  }
+
+  *,
+  *::before,
+  *::after {
+    color: initial !important;
+    --background: initial !important;
+    background-color: initial !important;
+    font-size: 12pt !important;
+    box-shadow: none !important;
+  }
+
+  cookbook-home {
+    display: block !important;
+  }
+
+  cookbook-header {
+    margin-bottom: 1cm !important;
+  }
+
+  nav,
+  .menu-button,
+  .show-case-actions,
+  cookbook-side-nav,
+  cookbook-iphone,
+  kirby-fab-sheet {
+    display: none !important;
+  }
+
+  .logo {
+    width: 2cm !important;
+    height: 2cm !important;
+  }
+}
+
 @function get-drawer-additional-padding-top() {
   $modal-close-button-inner-height: size('l'); // Todo: Move to / get from shared var
   $modal-close-button-vertical-margin: size('xxxs') * 2; // Todo: Move to / get from shared var
