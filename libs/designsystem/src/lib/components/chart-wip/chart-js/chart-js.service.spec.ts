@@ -240,15 +240,53 @@ describe('ChartJSService', () => {
   });
 
   describe('function: updateData', () => {
+    let chart: Chart;
+
+    beforeEach(() => {
+      chartJSService.renderChart(canvasElement, ChartType.bar, [1, 2, 3], ['one', 'two', 'three']);
+      chart = chartJSService['chart'];
+    });
+
     describe('when data is given as a number[]', () => {
-      it('should update the chart data', () => {});
+      it('should update the chart data', () => {
+        const newData = [4, 5, 6];
+        expect(chart.data.datasets[0].data).not.toEqual(newData);
+
+        chartJSService.updateData(newData);
+
+        expect(chart.data.datasets[0].data).toEqual(newData);
+      });
     });
 
     describe('when data is given as a chartJSDataset[]', () => {
-      it('should update the chart data', () => {});
+      it('should update the chart data', () => {
+        const newDataset = [
+          {
+            data: [7, 8, 9],
+          },
+        ];
+        expect(chart.data.datasets[0].data).not.toEqual(newDataset[0].data);
+
+        chartJSService.updateData(newDataset);
+
+        expect(chart.data.datasets[0].data).toEqual(newDataset[0].data);
+      });
 
       describe('that contains more than one entry', () => {
-        it('should update to have multiple datasets', () => {});
+        it('should update to have multiple datasets', () => {
+          const newDatasets = [
+            {
+              data: [7, 8, 9],
+            },
+            { data: [10, 11, 12] },
+          ];
+          expect(chart.data.datasets.length).toBe(1);
+
+          chartJSService.updateData(newDatasets);
+
+          expect(chart.data.datasets[0].data).toEqual(newDatasets[0].data);
+          expect(chart.data.datasets[1].data).toEqual(newDatasets[1].data);
+        });
       });
     });
   });
