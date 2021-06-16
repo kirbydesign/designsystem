@@ -1,5 +1,3 @@
-/*TODO: where did i leave? 
-  write tests :) Complete writing tests */
 import { ElementRef } from '@angular/core';
 import { Chart } from 'chart.js';
 
@@ -10,7 +8,7 @@ import { ChartType } from '../chart-wip.types';
 import { ChartJSService } from './chart-js.service';
 import { GLOBAL_DEFAULTS } from './configured-chart-js';
 
-fdescribe('ChartJSService', () => {
+describe('ChartJSService', () => {
   let chartJSService: ChartJSService;
   let canvasElement: ElementRef<HTMLCanvasElement>;
 
@@ -220,14 +218,32 @@ fdescribe('ChartJSService', () => {
   });
 
   describe('function: redrawChart', () => {
-    it('should update the existing chart', () => {});
-    it('should keep the same chart', () => {});
+    beforeEach(() => {
+      chartJSService.renderChart(canvasElement, ChartType.bar, [1, 2, 3], ['one', 'two', 'three']);
+    });
+
+    it('should update the chart', () => {
+      const updateSpy = spyOn(chartJSService['chart'], 'update');
+
+      chartJSService.redrawChart();
+
+      expect(updateSpy).toHaveBeenCalledTimes(1);
+    });
+
+    it('should keep the same chart', () => {
+      const initialId = chartJSService['chart'].id;
+
+      chartJSService.redrawChart();
+
+      expect(chartJSService['chart'].id).toEqual(initialId);
+    });
   });
 
   describe('function: updateData', () => {
     describe('when data is given as a number[]', () => {
       it('should update the chart data', () => {});
     });
+
     describe('when data is given as a chartJSDataset[]', () => {
       it('should update the chart data', () => {});
 
