@@ -292,12 +292,80 @@ describe('ChartJSService', () => {
   });
 
   describe('function: updateDataLabels', () => {
-    it('should update the data labels of the chart', () => {});
+    let chart: Chart;
+
+    beforeEach(() => {
+      chartJSService.renderChart(canvasElement, ChartType.bar, [1, 2, 3], ['one', 'two', 'three']);
+      chart = chartJSService['chart'];
+    });
+
+    it('should update the data labels of the chart', () => {
+      const newDatalabels = ['Tre', 'Fire', 'Fem'];
+      expect(chart.data.labels).not.toEqual(newDatalabels);
+
+      chartJSService.updateDataLabels(newDatalabels);
+
+      expect(chart.data.labels).toEqual(newDatalabels);
+    });
   });
 
   describe('function: updateType', () => {
-    it('should create a new chart if the type is ChartType.bar', () => {});
-    it('should create a new chart if the type is ChartType.column', () => {});
+    beforeEach(() => {
+      chartJSService.renderChart(canvasElement, ChartType.bar, [1, 2, 3], ['one', 'two', 'three']);
+    });
+
+    describe('if the new type is ChartType.bar', () => {
+      it('should destructively update the type', () => {
+        const destructivelyUpdateTypeSpy = spyOn<any>(chartJSService, 'destructivelyUpdateType');
+
+        chartJSService.updateType(ChartType.bar, {});
+
+        expect(destructivelyUpdateTypeSpy).toHaveBeenCalledTimes(1);
+      });
+    });
+
+    describe('if the new type is ChartType.column', () => {
+      it('should destructively update the type', () => {
+        const destructivelyUpdateTypeSpy = spyOn<any>(chartJSService, 'destructivelyUpdateType');
+
+        chartJSService.updateType(ChartType.column, {});
+
+        expect(destructivelyUpdateTypeSpy).toHaveBeenCalledTimes(1);
+      });
+    });
+  });
+
+  describe('private function: destructivelyUpdateType', () => {
+    let chart: Chart;
+
+    beforeEach(() => {
+      chartJSService.renderChart(canvasElement, ChartType.bar, [1, 2, 3], ['one', 'two', 'three']);
+      chart = chartJSService['chart'];
+    });
+
+    it('should replace the old chart element', () => {
+      const oldChartId = chart.id;
+
+      chartJSService['destructivelyUpdateType'](ChartType.bar);
+
+      expect(chartJSService['chart'].id).not.toEqual(oldChartId);
+    });
+
+    it('should preserve the original data', () => {
+      const oldDatasets = chart.data.datasets;
+
+      chartJSService['destructivelyUpdateType'](ChartType.bar);
+
+      expect(chartJSService['chart'].data.datasets).toEqual(oldDatasets);
+    });
+
+    it('should preserve the original dataLabels', () => {
+      const oldDatalabels = chart.data.labels;
+
+      chartJSService['destructivelyUpdateType'](ChartType.bar);
+
+      expect(chartJSService['chart'].data.labels).toEqual(oldDatalabels);
+    });
   });
 
   describe('function: updateOptions', () => {

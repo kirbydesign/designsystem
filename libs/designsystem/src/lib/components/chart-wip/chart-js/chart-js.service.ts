@@ -36,7 +36,7 @@ export class ChartJSService {
     this.chart.data.labels = dataLabels;
   }
 
-  public updateType(type: ChartType, customOptions: ChartOptions) {
+  public updateType(type: ChartType, customOptions?: ChartOptions) {
     if (type === ChartType.bar || type === ChartType.column) {
       /* indexAxis does not update predictably; update by replacing the 
       chart entirely instead */
@@ -48,7 +48,7 @@ export class ChartJSService {
     this.chart.options = this.getOptions(type, customOptions);
   }
 
-  private destructivelyUpdateType(type: ChartType, customOptions: ChartOptions) {
+  private destructivelyUpdateType(type: ChartType, customOptions?: ChartOptions) {
     const datasets = this.chart.data.datasets as ChartDataset[];
     const dataLabels = this.chart.data.labels;
 
