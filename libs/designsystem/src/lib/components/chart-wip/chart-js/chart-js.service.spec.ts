@@ -368,11 +368,56 @@ describe('ChartJSService', () => {
     });
   });
 
-  describe('function: updateOptions', () => {
-    it('should update the options of the chart', () => {});
+  fdescribe('function: updateOptions', () => {
+    const chartType = ChartType.bar;
 
-    it('should overwrite options set by global config', () => {});
+    beforeEach(() => {
+      chartJSService.renderChart(canvasElement, chartType, [1, 2, 3], ['one', 'two', 'three']);
+    });
 
-    it('should overwrite type specific options', () => {});
+    it('should update the options of the chart', () => {
+      expect(true).toBeFalse();
+    });
+
+    it('should overwrite options set by global config', () => {
+      // Check if a global default is actually being overwritten
+      expect(GLOBAL_DEFAULTS.elements.bar.backgroundColor).not.toBeUndefined();
+      const customElementBackgroundColor = '#ffffff';
+
+      chartJSService.updateOptions(
+        {
+          elements: {
+            bar: {
+              backgroundColor: customElementBackgroundColor,
+            },
+          },
+        },
+        chartType
+      );
+      // Options are resolved as part of update
+      chartJSService['chart'].update();
+
+      expect(chartJSService['chart'].options.elements.bar.backgroundColor).toEqual(
+        customElementBackgroundColor
+      );
+    });
+
+    it('should overwrite type specific options', () => {
+      // Check if a type config is actually being overwritten
+      const customIndexAxis = 'x';
+      expect(CHART_TYPE_CONFIGS[chartType].options.indexAxis).not.toBeUndefined();
+      expect(CHART_TYPE_CONFIGS[chartType].options.indexAxis).not.toEqual(customIndexAxis);
+
+      chartJSService.updateOptions(
+        {
+          indexAxis: customIndexAxis,
+        },
+        chartType
+      );
+      chartJSService['chart'].update();
+
+      const chart = chartJSService['chart'];
+      expect(chart.options.indexAxis).toEqual(customIndexAxis);
+    });
   });
 });
