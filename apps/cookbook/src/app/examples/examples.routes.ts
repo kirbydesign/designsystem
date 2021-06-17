@@ -301,20 +301,16 @@ export const routes: Routes = [
     component: ListNoShapeExampleComponent,
   },
   {
+    path: 'list-load-on-demand',
+    component: ListLoadOnDemandExampleComponent,
+  },
+  {
     path: 'list-virtual-scroll',
     component: ListVirtualScrollExampleComponent,
     children: [
       {
-        path: '',
-        redirectTo: 'with-items',
-      },
-      {
         path: 'with-items',
         component: ListVirtualScrollItemsExampleComponent,
-      },
-      {
-        path: 'load-on-demand',
-        component: ListVirtualScrollLoadExampleComponent,
       },
       {
         path: 'with-sections',
@@ -323,8 +319,8 @@ export const routes: Routes = [
     ],
   },
   {
-    path: 'list-load-on-demand',
-    component: ListLoadOnDemandExampleComponent,
+    path: 'list-virtual-scroll-load',
+    component: ListVirtualScrollLoadExampleComponent,
   },
   {
     path: 'chart',

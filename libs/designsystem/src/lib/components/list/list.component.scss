@@ -159,6 +159,11 @@ ion-item-options[side='end'] {
     border-radius: $border-radius;
   }
 
+  .virtual-with-sections-wrapper {
+    margin-left: -1 * size('xxxs');
+    margin-right: -1 * size('xxxs');
+  }
+
   .virtual-group {
     margin-top: size('m');
   }
@@ -173,6 +178,7 @@ ion-item-options[side='end'] {
     &.last {
       border-bottom-left-radius: $border-radius;
       border-bottom-right-radius: $border-radius;
+      margin-bottom: size('xxxs');
     }
   }
 

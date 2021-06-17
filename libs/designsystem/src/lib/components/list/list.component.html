@@ -16,6 +16,7 @@
     *ngIf="useVirtualScroll"
     [style.height]="virtualScrollViewportHeight + 'px'"
     class="viewport"
+    [class.virtual-with-sections-wrapper]="_isSectionsEnabled"
   >
     <ng-container
       *ngTemplateOutlet="virtualItemsTemplate; context: { $implicit: _virtualScrollData }"

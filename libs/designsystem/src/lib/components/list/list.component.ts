@@ -31,6 +31,8 @@ import {
 import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
 import { GroupByPipe } from './pipes/group-by.pipe';
 
+export type VirtualScrollSettings = IDatasource['settings'];
+
 export enum ListShape {
   square = 'square',
   rounded = 'rounded',
@@ -90,7 +92,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
 
   @Input() virtualScrollViewportHeight = 500;
 
-  @Input() virtualScrollSettings: IDatasource['settings'] = {};
+  @Input() virtualScrollSettings: VirtualScrollSettings = {};
 
   @Input() virtualScrollTimeout = 5000;
 
@@ -99,7 +101,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     settings: {
       minIndex: this.virtualScrollSettings.minIndex || 0,
       startIndex: this.virtualScrollSettings.startIndex || 0,
-      bufferSize: this.virtualScrollSettings.bufferSize || 10,
+      bufferSize: this.virtualScrollSettings.bufferSize || 4,
       itemSize: this.virtualScrollSettings.itemSize || 72,
       padding: this.virtualScrollSettings.padding || 1,
       ...this.virtualScrollSettings,
