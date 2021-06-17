@@ -15,7 +15,7 @@ This PR closes # (insert issue number here)
 
 ## Are there any additional context?
 
-[ If any - replace this paragraph with additional context otherwise just delete this section]
+[ Replace this paragraph with any additional context e.g, explanations, links or screenshots (if any) ]
 
 ## Checklist:
 

@@ -24,7 +24,7 @@ The good issue: contains only one issue, is self-contained, is specific & unambi
 ## Have you considered any alternatives?
 [ Replace this paragraph with a clear and concise description of any alternative solutions or enhancement you've considered (if any) ]
 
-**Are there any additional context?**
+## Are there any additional context?
 [ Replace this paragraph with any additional context or screenshots (if any) ]
 
 <hr />
