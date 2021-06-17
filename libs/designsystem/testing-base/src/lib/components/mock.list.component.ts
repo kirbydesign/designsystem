@@ -1,5 +1,4 @@
 import { Component, EventEmitter, forwardRef, Input, Output, TrackByFunction } from '@angular/core';
-import { IDatasource } from 'ngx-ui-scroll';
 
 import {
   ListComponent,
@@ -7,6 +6,7 @@ import {
   ListSwipeAction,
   LoadOnDemandEvent,
   ThemeColor,
+  VirtualScrollSettings,
 } from '@kirbydesign/designsystem';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
@@ -32,7 +32,7 @@ export class MockListComponent {
   @Input() hasItemSpacing: boolean;
   @Input() useVirtualScroll: boolean;
   @Input() virtualScrollViewportHeight: number;
-  @Input() virtualScrollSettings: IDatasource['settings'];
+  @Input() virtualScrollSettings: VirtualScrollSettings;
   @Input() virtualScrollTimeout: number;
   @Input() isLoadOnDemandEnabled: boolean;
   @Output() loadOnDemand = new EventEmitter<LoadOnDemandEvent>();
