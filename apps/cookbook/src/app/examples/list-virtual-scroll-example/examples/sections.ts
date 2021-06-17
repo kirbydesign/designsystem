@@ -4,7 +4,7 @@ import { BaseListComponent } from '../../list-shared/base-list.component';
 
 export const ListVirtualScrollSectionsExampleTemplate = `<kirby-list
   [items]="itemsFullList"
-  [useVirtualScroll]="true" [virtualScrollViewportHeight]="400"
+  [useVirtualScroll]="true"
   (itemSelect)="onItemSelect($event)"
   [getSectionName]="getSectionName"
   [showDivider]="true"
