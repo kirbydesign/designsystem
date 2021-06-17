@@ -34,7 +34,6 @@ The following tasks should be carried out in sequence in order to follow [the pr
 
 - [ ] Request that the issue is [UX refined](../CONTRIBUTING.md/#ux-refinement); do not proceed until this is done.
 - [ ] Request that the issue is [tech refined](../CONTRIBUTING.md/#tech-refinement); do not proceed until this is done.
-- [ ] Move the issue to the "Ready to do"-column in the "[Kirby kan-ban board](https://github.com/kirbydesign/designsystem/projects/1)"-project.
 
 ### Implementation 
 The contributor who wants to implement this issue should: 
