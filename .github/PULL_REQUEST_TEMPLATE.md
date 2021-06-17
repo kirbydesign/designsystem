@@ -15,6 +15,8 @@ This PR closes # (insert issue number here)
 
 ## Are there any additional context?
 
+[ If any - replace this paragraph with additional context otherwise just delete this section]
+
 ## Checklist:
 
 The following tasks should be carried out in sequence in order to follow [the process of contributing](../CONTRIBUTING.md/#the-process-of-contributing) correctly.
