@@ -163,6 +163,19 @@ ion-item-options[side='end'] {
     margin-top: size('m');
   }
 
+  .virtual-section-item {
+    box-shadow: $shadow;
+    margin: 0 size('xxxs');
+    &.first {
+      border-top-left-radius: $border-radius;
+      border-top-right-radius: $border-radius;
+    }
+    &.last {
+      border-bottom-left-radius: $border-radius;
+      border-bottom-right-radius: $border-radius;
+    }
+  }
+
   .section-header {
     overflow: hidden;
   }
