@@ -19,9 +19,15 @@ This PR closes # (insert issue number here)
 
 The following tasks should be carried out in sequence in order to follow [the process of contributing](../CONTRIBUTING.md/#the-process-of-contributing) correctly.
 
-- [ ] Make sure you have implemented tests following the guidelines in: "[The good: Test](./CONTRIBUTING.MD/#test)".
+### Reminders
+- [ ] Make sure you have implemented tests following the guidelines in: "[The good: Test](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Test)".
 - [ ] Make sure you have updated the cookbook with examples and showcases (for bug fixes, enhancements & new components).
-- [ ] Do a [self-review](./CONTRIBUTING.md/#self-review).
+
+### Review  
+- [ ] Do a [self-review](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Self-review).
 - [ ] Request that the changes are code-reviewed 
 - [ ] Request that the changes are [UX reviewed](./CONTRIBUTING.md/#ux-review) (only necessary if your PR introduces visual changes)
+
+When the pull request has been approved it will be automatically merged to master via [automerge](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/automatically-merging-a-pull-request).
+
 

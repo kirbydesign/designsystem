@@ -13,7 +13,7 @@ Explanation of applied labels can be found here: https://github.com/kirbydesign/
 The good issue: contains only one issue, is self-contained, is specific & unambigious, follows the template, has a good title, is easy to read and contains screenshots & -recordings
 -->
 
-[ ] I have written a [good issue](../CONTRIBUTING.md/#issue) 
+[ ] I have written a [good issue](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Issue) 
 
 ## Describe the bug
 [ Replace this paragraph with a clear and concise description of what the bug is. ] 
@@ -52,19 +52,19 @@ The following tasks should be carried out in sequence in order to follow [the pr
 ### Verification
 To make sure the bug is not intended behaviour; it should be verified by a member of team Kirby before moving on to implementation. 
 
-- [ ] Make sure the `NOT verified` label has been removed by a member of [team Kirby](../CONTRIBUTING.md/#team-kirby); do not proceed until this is done
+- [ ] Make sure the `NOT verified` label has been removed by a member of [team Kirby](../SUPPORT.md/#team-kirby); do not proceed until this is done
 
 ### Implementation 
 The contributor who wants to implement this issue should: 
 
 - [ ] Make sure you have read: "[Before you get coding](../CONTRIBUTING.md/#before-you-get-coding)".
 - [ ] Signal to others you are working on the issue by assigning yourself.
-- [ ] Create a branch from the [master branch](https://github.com/kirbydesign/designsystem/tree/master) following our [branch naming convention](../CONTRIBUTING.md/#branch). 
-- [ ] Create a test that reproduces the bug following guidelines in: "[The good: Test](../CONTRIBUTING.md/#test)". 
+- [ ] Create a branch from the [master branch](https://github.com/kirbydesign/designsystem/tree/master) following our [branch naming convention](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Branch). 
+- [ ] Create a test that reproduces the bug following guidelines in: "[The good: Test](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Test)". 
 - [ ] Write code to fix the bug
 
 ### Review
 Once the issue has been implemented and is ready for review:
 
-- [ ] Do a [self-review](../CONTRIBUTING.md/#self-review). 
+- [ ] Do a [self-review](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Self-review). 
 - [ ] Create a pull-request.

@@ -12,7 +12,7 @@ Explanation of applied labels can be found here: https://github.com/kirbydesign/
 The good issue: contains only one issue, is self-contained, is specific & unambigious, follows the template, has a good title, is easy to read and contains screenshots & -recordings
 -->
 
-[ ] I have written a [good issue](../CONTRIBUTING.md/#issue) 
+[ ] I have written a [good issue](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Issue) 
 
 ## Describe the housekeeping request
 
