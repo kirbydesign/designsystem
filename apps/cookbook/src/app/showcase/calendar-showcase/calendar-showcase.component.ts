@@ -110,6 +110,13 @@ export class CalendarShowcaseComponent {
       defaultValue: 'null',
       type: ['{ from: number | Date; to: number | Date }'],
     },
+    {
+      name: 'customLocales',
+      description:
+        '(Optional) Danish and English locales are built in, but if custom locales are needed, they can be specified here.',
+      defaultValue: '{}',
+      type: ['{ [key: string]: Locale }'],
+    },
   ];
 
   events: ApiDescriptionEvent[] = [

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import { Locale } from 'date-fns';
 
 import { CalendarComponent, CalendarYearNavigatorConfig } from '@kirbydesign/designsystem';
 
@@ -21,6 +22,7 @@ export class MockCalendarComponent {
   @Input() disablePastDates: boolean;
   @Input() disableFutureDates: boolean;
   @Input() alwaysEnableToday: boolean;
+  @Input() customLocales: { [key: string]: Locale };
   @Input() yearNavigatorOptions: CalendarYearNavigatorConfig;
   @Input() selectedDate: Date;
   @Input() disabledDates: Date[];
