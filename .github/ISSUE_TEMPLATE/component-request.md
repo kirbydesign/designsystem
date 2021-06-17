@@ -7,13 +7,13 @@ assignees: ''
 
 ---
 
+- [ ] I have written a [good issue](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Issue) 
+
 <!-- 
 Explanation of applied labels can be found here: https://github.com/kirbydesign/designsystem/labels
 
 The good issue: contains only one issue, is self-contained, is specific & unambigious, follows the template, has a good title, is easy to read and contains screenshots & -recordings
 -->
-
-[ ] I have written a [good issue](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Issue) 
 
 ## Describe the solution you'd like
 [ Replace this paragraph with a clear and concise description of what you want to happen ]
