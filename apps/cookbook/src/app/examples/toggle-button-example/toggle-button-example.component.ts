@@ -2,17 +2,17 @@ import { Component } from '@angular/core';
 
 const config = {
   selector: 'cookbook-toggle-button-example',
-  template: `<kirby-toggle-button [checked]="true" (checkedChange)="onCheckedChange($event)">
+  template: `<kirby-toggle-button [checked]="true" (checkChanged)="onCheckChanged($event)">
   <button kirby-button unchecked attentionLevel="3">Deactivated</button>
   <button kirby-button checked themeColor="success">Activated</button>
 </kirby-toggle-button>
 
-<kirby-toggle-button [checked]="false" (checkedChange)="onCheckedChange($event)">
+<kirby-toggle-button [checked]="false" (checkChanged)="onCheckChanged($event)">
   <button kirby-button unchecked attentionLevel="3">Deactivated</button>
   <button kirby-button checked themeColor="warning">Activated</button>
 </kirby-toggle-button>
 
-<kirby-toggle-button [checked]="true" (checkedChange)="onCheckedChange($event)">
+<kirby-toggle-button [checked]="true" (checkChanged)="onCheckChanged($event)">
   <button kirby-button unchecked attentionLevel="3">Deactivated</button>
   <button kirby-button checked themeColor="danger">Activated</button>
 </kirby-toggle-button>`,
@@ -26,7 +26,7 @@ const config = {
 export class ToggleButtonExampleComponent {
   template = config.template;
 
-  onCheckedChange(checked: boolean) {
-    console.log(`Toggle onCheckedChange: ${checked}`);
+  onCheckChanged(checked: boolean) {
+    console.log(`Toggle onCheckChanged: ${checked}`);
   }
 }

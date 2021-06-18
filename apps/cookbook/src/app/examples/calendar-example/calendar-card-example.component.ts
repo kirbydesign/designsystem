@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import moment from 'moment';
+import { addDays, startOfDay, subDays } from 'date-fns';
+import { utcToZonedTime, zonedTimeToUtc } from 'date-fns-tz';
 
 @Component({
   selector: 'cookbook-calendar-card-example',
@@ -23,7 +24,7 @@ export class CalendarCardExampleComponent implements OnChanges {
   todayDate: Date;
   disabledDates: Date[];
   yearNavigatorOptions = { from: -6, to: 3 };
-
+  timeZoneName = Intl.DateTimeFormat().resolvedOptions().timeZone;
   constructor() {
     this.updateInputDates();
   }
@@ -36,11 +37,14 @@ export class CalendarCardExampleComponent implements OnChanges {
         // realign selectedDate with the timezone that is now used, or the rendered date will
         // be misleading and confusing
         if (this.useTimezoneUTC) {
-          // realign local -> UTC
-          this.selectedDate = moment.utc(moment(this.selectedDate).format('YYYY-MM-DD')).toDate();
+          // realign local -> selectedDate
+          this.selectedDate = zonedTimeToUtc(
+            this.subtractTimezoneOffset(this.selectedDate),
+            this.timeZoneName
+          );
         } else {
           // realign UTC -> local
-          this.selectedDate = moment(moment.utc(this.selectedDate).format('YYYY-MM-DD')).toDate();
+          this.selectedDate = utcToZonedTime(this.selectedDate, this.timeZoneName);
         }
       }
     }
@@ -61,26 +65,18 @@ export class CalendarCardExampleComponent implements OnChanges {
   }
 
   private updateInputDates() {
-    const todayMoment = (this.useTimezoneUTC ? moment.utc() : moment()).startOf('day');
+    const today = startOfDay(new Date());
 
-    this.minDate = todayMoment
-      .clone()
-      .subtract(60, 'days')
-      .toDate();
-    this.maxDate = todayMoment
-      .clone()
-      .add(60, 'days')
-      .toDate();
-    this.todayDate = todayMoment
-      .clone()
-      .add(3, 'days')
-      .toDate(); // artificial but works for demo
+    this.minDate = subDays(today, 60);
+    this.maxDate = addDays(today, 60);
+    this.todayDate = addDays(today, 3); // artificial but works for demo
 
-    this.disabledDates = [3, 5, 7, 10, 15, 25, 28, 35].map((daysFomToday) =>
-      todayMoment
-        .clone()
-        .add(daysFomToday, 'days')
-        .toDate()
+    this.disabledDates = [3, 5, 7, 10, 15, 25, 28, 35].map((daysFromToday) =>
+      addDays(today, daysFromToday)
     );
+  }
+
+  private subtractTimezoneOffset(date: Date): Date {
+    return new Date(date.getTime() - date.getTimezoneOffset() * 60 * 1000);
   }
 }
