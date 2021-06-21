@@ -19,7 +19,7 @@ export class ChartWipShowcaseComponent {
   ];
   _types = [ChartType.bar, ChartType.column];
   _lastClickedElement: string;
-  _options: ChartOptions[] = [
+  _customOptions: ChartOptions[] = [
     {
       onClick: (_, [activeElement]) => {
         this._lastClickedElement = activeElement
@@ -42,6 +42,6 @@ export class ChartWipShowcaseComponent {
     this._datasets = flip(this._datasets);
     this._dataLabels = flip(this._dataLabels);
     this._types = flip(this._types);
-    this._options = flip(this._options);
+    this._customOptions = flip(this._customOptions);
   }
 }
