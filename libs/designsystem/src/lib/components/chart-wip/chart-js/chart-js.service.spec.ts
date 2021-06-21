@@ -372,11 +372,24 @@ describe('ChartJSService', () => {
     const chartType = ChartType.bar;
 
     beforeEach(() => {
-      chartJSService.renderChart(canvasElement, chartType, [1, 2, 3], ['one', 'two', 'three']);
+      chartJSService.renderChart(canvasElement, chartType, [1, 2, 3], ['one', 'two', 'three'], {
+        borderColor: 'pink',
+      });
     });
 
-    it('should update the options of the chart', () => {
-      expect(true).toBeFalse();
+    it('should overwrite existing custom options', () => {
+      expect(chartJSService['chart'].options.borderColor).toEqual('pink');
+
+      chartJSService.updateOptions(
+        {
+          borderColor: 'red',
+        },
+        chartType
+      );
+      // Options are resolved as part of update
+      chartJSService['chart'].update();
+
+      expect(chartJSService['chart'].options.borderColor).toEqual('red');
     });
 
     it('should overwrite options set by global config', () => {
@@ -414,6 +427,7 @@ describe('ChartJSService', () => {
         },
         chartType
       );
+      // Options are resolved as part of update
       chartJSService['chart'].update();
 
       const chart = chartJSService['chart'];
