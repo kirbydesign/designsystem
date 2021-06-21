@@ -1,6 +1,6 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
-# compiled output
+# compiled angular library output
 /dist
 /tmp
 /out-tsc
@@ -8,6 +8,13 @@
 /test-reports
 *.styles.ts
 /libs/designsystem/src/lib/polyfills/*.min.js
+
+# compiled core library output
+/libs/core/loader
+/libs/core/dist
+/libs/core/component-docs.d.ts
+/libs/core/component-docs.json
+/libs/core/src/components.d.ts
 
 # dependencies
 /node_modules
