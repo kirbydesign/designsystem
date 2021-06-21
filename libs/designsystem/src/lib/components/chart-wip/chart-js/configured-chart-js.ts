@@ -53,5 +53,6 @@ Chart.defaults.plugins = GLOBAL_DEFAULTS.plugins;
 Chart.defaults.scales = GLOBAL_DEFAULTS.scales;
 Chart.defaults.elements = GLOBAL_DEFAULTS.elements;
 Chart.defaults.font = GLOBAL_DEFAULTS.font;
+Chart.defaults.maintainAspectRatio = false;
 
 export { Chart };

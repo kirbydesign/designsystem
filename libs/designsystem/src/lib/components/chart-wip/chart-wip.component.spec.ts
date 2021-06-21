@@ -23,6 +23,22 @@ describe('ChartWipComponent', () => {
     expect(spectator.component).toBeTruthy();
   });
 
+  it('should have correct default height', () => {
+    expect(spectator.query('.chart-container')).toHaveComputedStyle({
+      height: '300px',
+    });
+  });
+
+  it("should be possible to set the height with the '--kirby-chart-height' CSS custom property", () => {
+    const customHeight = '600px';
+    const element = spectator.query('.chart-container') as HTMLElement;
+    expect(element).not.toHaveComputedStyle({ height: customHeight });
+
+    element.style.setProperty('--kirby-chart-height', customHeight);
+
+    expect(element).toHaveComputedStyle({ height: customHeight });
+  });
+
   it('should render chart once after view init', () => {
     const renderChartSpy = spyOn<any>(component, 'renderChart');
 

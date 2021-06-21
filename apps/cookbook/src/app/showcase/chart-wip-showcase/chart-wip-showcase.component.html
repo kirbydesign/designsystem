@@ -1,7 +1,11 @@
 <button (click)="_onClick()">Change Chart Type</button>
 <p>Last clicked element: {{ _lastClickedElement }}</p>
-<kirby-chart-wip
-  [type]="_types[0]"
-  [data]="_datasets[0]"
-  [customOptions]="_customOptions[0]"
-></kirby-chart-wip>
+
+<kirby-card>
+  <kirby-chart-wip
+    [type]="_types[0]"
+    [data]="_datasets[0]"
+    [dataLabels]="_dataLabels[0]"
+    [customOptions]="_customOptions[0]"
+  ></kirby-chart-wip>
+</kirby-card>
