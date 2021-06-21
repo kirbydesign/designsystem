@@ -21,8 +21,8 @@ import { ChartData, ChartType } from './chart-wip.types';
 export class ChartWipComponent implements AfterViewInit, OnChanges {
   @Input() type: ChartType = ChartType.bar;
   @Input() data: ChartData;
-  @Input() dataLabels: string[];
-  @Input() options: ChartOptions;
+  @Input() dataLabels?: string[];
+  @Input() options?: ChartOptions;
 
   @ViewChild('chartCanvas')
   canvasElement: ElementRef<HTMLCanvasElement>;

@@ -14,7 +14,7 @@ export class ChartJSService {
     targetElement: ElementRef<HTMLCanvasElement>,
     type: ChartType,
     data: ChartData,
-    dataLabels: string[],
+    dataLabels?: string[],
     customOptions?: ChartOptions
   ): void {
     const datasets = this.createDatasets(data);
@@ -71,7 +71,7 @@ export class ChartJSService {
     return deepCopy(CHART_TYPE_CONFIGS[type]);
   }
 
-  private getOptions(type: ChartType, customOptions?: ChartOptions): ChartOptions | undefined {
+  private getOptions(type: ChartType, customOptions?: ChartOptions): ChartOptions {
     const typeConfig = this.getTypeConfig(type);
     const typeConfigOptions = typeConfig['options'];
     return {
@@ -80,23 +80,31 @@ export class ChartJSService {
     };
   }
 
+  private createBlankLabels(datasets: ChartDataset[]): string[] {
+    const largestDataset = datasets.reduce((previousDataset, currentDataset) =>
+      previousDataset.data.length > currentDataset.data.length ? previousDataset : currentDataset
+    );
+    return Array(largestDataset.data.length).fill('');
+  }
+
   private getConfig(
     type: ChartType,
-    datasets?: ChartDataset[],
+    datasets: ChartDataset[],
     dataLabels?: unknown[],
     options?: ChartOptions
   ): ChartConfiguration {
-    const config = this.getTypeConfig(type);
+    const config = {
+      ...this.getTypeConfig(type),
+      data: {
+        /* chartJS requires labels; if none is provided create an empty string array
+      to make it optional for consumer */
+        labels: !dataLabels ? this.createBlankLabels(datasets) : dataLabels,
+        datasets,
+      },
+    };
 
     if (options) {
-      config.options = options;
-    }
-
-    if (datasets || dataLabels) {
-      config['data'] = {
-        ...(datasets ? { datasets } : {}),
-        ...(dataLabels ? { labels: dataLabels } : {}),
-      };
+      config['options'] = options;
     }
 
     return config;

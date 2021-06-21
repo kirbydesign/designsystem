@@ -134,6 +134,18 @@ describe('ChartJSService', () => {
       });
     });
 
+    describe('when no data labels are provided', () => {
+      it('should have a blank label for each data point', () => {
+        chartJSService.renderChart(canvasElement, ChartType.column, [1, 2, 3]);
+
+        const chartDataLabels = chartJSService['chart'].data.labels;
+        expect(chartDataLabels.length).toEqual(3);
+        chartDataLabels.forEach((dataLabel) => {
+          expect(dataLabel).toEqual('');
+        });
+      });
+    });
+
     describe('when type is ChartType.bar & no custom options are passed', () => {
       let chart: Chart;
 

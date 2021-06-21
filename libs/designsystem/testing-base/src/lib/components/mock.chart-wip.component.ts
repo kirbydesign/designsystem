@@ -22,7 +22,6 @@ export class MockChartWipComponent {
   @Input() type: ChartType;
   @Input() data: ChartData;
   @Input() dataLabels: string[];
-  @Input() label: string;
   @Input() options: ChartOptions;
 }
 

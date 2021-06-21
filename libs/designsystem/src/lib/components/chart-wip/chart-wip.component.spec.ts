@@ -1,5 +1,5 @@
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
-import { MockService } from 'ng-mocks';
+import { MockProvider } from 'ng-mocks';
 
 import { ChartJSService } from './chart-js/chart-js.service';
 import { ChartWipComponent } from './chart-wip.component';
@@ -11,8 +11,7 @@ describe('ChartWipComponent', () => {
   const createComponent = createComponentFactory({
     component: ChartWipComponent,
     declarations: [ChartWipComponent],
-    // TODO: Mock ChartJSService - this is not a integration test...
-    componentProviders: [{ provide: ChartJSService, use: MockService(ChartJSService) }],
+    componentProviders: [MockProvider(ChartJSService)],
   });
 
   beforeEach(() => {
