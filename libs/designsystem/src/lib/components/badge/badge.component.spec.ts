@@ -1,21 +1,32 @@
+import { DOCUMENT } from '@angular/common';
+import { APP_INITIALIZER } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
-import { createComponentFactory, Spectator } from '@ngneat/spectator';
+import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
+import { appInitialize } from '../../app-initialize';
 import { TestHelper } from '../../testing/test-helper';
 import { BadgeComponent } from '../index';
 
 describe('BadgeComponent', () => {
-  let spectator: Spectator<BadgeComponent>;
+  let spectator: SpectatorHost<BadgeComponent>;
   let ionBadge: HTMLIonBadgeElement;
 
-  let createHost = createComponentFactory({
+  let createHost = createHostFactory({
     component: BadgeComponent,
     imports: [IonicModule.forRoot({ mode: 'ios', _testing: true })],
+    providers: [
+      {
+        provide: APP_INITIALIZER,
+        useFactory: appInitialize,
+        deps: [DOCUMENT],
+        multi: true,
+      },
+    ],
   });
 
   describe('by default', () => {
     beforeEach(() => {
-      spectator = createHost({});
+      spectator = createHost('<kirby-badge></kirby-badge>');
     });
 
     it('should create', () => {
@@ -25,8 +36,10 @@ describe('BadgeComponent', () => {
 
   describe('when one character is slotted', () => {
     beforeEach(async () => {
-      spectator = createHost({ props: { text: 'x' } });
-      ionBadge = spectator.query('kirby-badge');
+      spectator = createHost('<kirby-badge></kirby-badge>', { props: { text: 'x' } });
+      await TestHelper.whenReady(spectator.element);
+
+      ionBadge = spectator.element.shadowRoot.querySelector('ion-badge');
       await TestHelper.whenReady(ionBadge);
     });
 
