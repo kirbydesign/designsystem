@@ -368,7 +368,7 @@ describe('ChartJSService', () => {
     });
   });
 
-  fdescribe('function: updateOptions', () => {
+  describe('function: updateOptions', () => {
     const chartType = ChartType.bar;
 
     beforeEach(() => {
