@@ -22,7 +22,7 @@ export class ChartWipComponent implements AfterViewInit, OnChanges {
   @Input() type: ChartType = ChartType.bar;
   @Input() data: ChartData;
   @Input() dataLabels?: string[];
-  @Input() options?: ChartOptions;
+  @Input() customOptions?: ChartOptions;
 
   @ViewChild('chartCanvas')
   canvasElement: ElementRef<HTMLCanvasElement>;
@@ -40,7 +40,7 @@ export class ChartWipComponent implements AfterViewInit, OnChanges {
       data: () => this.updateData(),
       dataLabels: () => this.updateDataLabels(),
       type: () => this.updateType(),
-      options: () => this.updateOptions(),
+      customOptions: () => this.updateCustomOptions(),
     };
 
     Object.entries(simpleChanges).forEach(([key]) => {
@@ -58,7 +58,7 @@ export class ChartWipComponent implements AfterViewInit, OnChanges {
       this.type,
       this.data,
       this.dataLabels,
-      this.options
+      this.customOptions
     );
   }
 
@@ -71,11 +71,11 @@ export class ChartWipComponent implements AfterViewInit, OnChanges {
   }
 
   private updateType() {
-    this.chartJSService.updateType(this.type, this.options);
+    this.chartJSService.updateType(this.type, this.customOptions);
   }
 
-  private updateOptions() {
-    this.chartJSService.updateOptions(this.options, this.type);
+  private updateCustomOptions() {
+    this.chartJSService.updateOptions(this.customOptions, this.type);
   }
 
   private redrawChart() {

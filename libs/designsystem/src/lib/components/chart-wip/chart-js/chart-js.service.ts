@@ -19,7 +19,7 @@ export class ChartJSService {
   ): void {
     const datasets = this.createDatasets(data);
     const options = this.getOptions(type, customOptions);
-    const config = this.getConfig(type, datasets, dataLabels, options);
+    const config = this.getConfig(type, datasets, options, dataLabels);
     this.initializeNewChart(targetElement.nativeElement, config);
   }
 
@@ -53,7 +53,7 @@ export class ChartJSService {
     const dataLabels = this.chart.data.labels;
 
     const options = this.getOptions(type, customOptions);
-    const config = this.getConfig(type, datasets, dataLabels, options);
+    const config = this.getConfig(type, datasets, options, dataLabels);
     const canvasElement = this.chart.canvas;
 
     this.chart.destroy();
@@ -90,8 +90,8 @@ export class ChartJSService {
   private getConfig(
     type: ChartType,
     datasets: ChartDataset[],
-    dataLabels?: unknown[],
-    options?: ChartOptions
+    options: ChartOptions,
+    dataLabels?: unknown[]
   ): ChartConfiguration {
     const config = {
       ...this.getTypeConfig(type),

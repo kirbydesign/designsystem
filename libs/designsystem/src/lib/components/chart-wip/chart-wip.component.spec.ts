@@ -33,7 +33,10 @@ describe('ChartWipComponent', () => {
 
   describe('when changes occur to', () => {
     const scenarios = {
-      options: { updateFn: 'updateOptions', newValue: { onClick: () => console.log('testing') } },
+      customOptions: {
+        updateFn: 'updateCustomOptions',
+        newValue: { onClick: () => console.log('testing') },
+      },
       data: { updateFn: 'updateData', newValue: [1, 2, 3] },
       dataLabels: { updateFn: 'updateDataLabels', newValue: ['one', 'two', 'three'] },
       type: { updateFn: 'updateType', newValue: ChartType.column },
@@ -65,14 +68,14 @@ describe('ChartWipComponent', () => {
           spyOn<any>(component, 'updateData'),
           spyOn<any>(component, 'updateDataLabels'),
           spyOn<any>(component, 'updateType'),
-          spyOn<any>(component, 'updateOptions'),
+          spyOn<any>(component, 'updateCustomOptions'),
         ];
 
         spectator.setInput({
           data: [1, 2, 3],
           dataLabels: ['one', 'two', 'three'],
           type: ChartType.column,
-          options: { onClick: () => console.log('testing') },
+          customOptions: { onClick: () => console.log('testing') },
         });
 
         updateFnSpies.forEach((updateFnSpy) => {
@@ -87,7 +90,7 @@ describe('ChartWipComponent', () => {
           data: [1, 2, 3],
           dataLabels: ['one', 'two', 'three'],
           type: ChartType.column,
-          options: { onClick: () => console.log('testing') },
+          customOptions: { onClick: () => console.log('testing') },
         });
 
         expect(redrawChartSpy).toHaveBeenCalledTimes(1);
