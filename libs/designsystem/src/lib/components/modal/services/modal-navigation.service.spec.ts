@@ -70,6 +70,48 @@ const lazyLoadedRoutes: Routes = [
       },
     ],
   },
+  {
+    path: 'modal-route-with-additional-level',
+    component: BackdropComponent,
+    children: [
+      {
+        path: 'additional-level',
+        children: [
+          {
+            path: 'page1',
+            outlet: 'modal',
+            component: ModalPageComponent,
+          },
+          {
+            path: 'page2',
+            outlet: 'modal',
+            component: ModalPageComponent,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    path: 'modal-backdrop-with-url-param-and-additional-level/:id',
+    component: BackdropComponent,
+    children: [
+      {
+        path: 'additional-level',
+        children: [
+          {
+            path: 'page1',
+            outlet: 'modal',
+            component: ModalPageComponent,
+          },
+          {
+            path: 'page2',
+            outlet: 'modal',
+            component: ModalPageComponent,
+          },
+        ],
+      },
+    ],
+  },
 ];
 
 const lazyLoadedRouteConfig: Routes[] = [lazyLoadedRoutes];
@@ -391,6 +433,110 @@ describe('ModalNavigationService', () => {
             });
           });
         });
+      });
+    });
+  });
+
+  describe('navigateOutOfModalOutlet', () => {
+    describe('by default', () => {
+      it('should navigate 1 level up to backdrop route', async () => {
+        await zone.run(() =>
+          router.navigate([
+            'home',
+            'modal-lazy',
+            'modal-backdrop',
+            { outlets: { modal: ['page1'] } },
+          ])
+        );
+        let urlAfterRedirects: string;
+        router.events
+          .pipe(
+            filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+            first()
+          )
+          .subscribe((nav) => (urlAfterRedirects = nav.urlAfterRedirects));
+
+        await spectator.service.navigateOutOfModalOutlet();
+
+        expect(urlAfterRedirects).toEqual('/home/modal-lazy/modal-backdrop');
+      });
+    });
+
+    describe('when modal backdrop route has url param', () => {
+      it('should navigate 1 level up to backdrop route', async () => {
+        await zone.run(() =>
+          router.navigate([
+            'home',
+            'modal-lazy',
+            'modal-backdrop-with-url-param',
+            '1978',
+            { outlets: { modal: ['page1'] } },
+          ])
+        );
+        let urlAfterRedirects: string;
+        router.events
+          .pipe(
+            filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+            first()
+          )
+          .subscribe((nav) => (urlAfterRedirects = nav.urlAfterRedirects));
+
+        await spectator.service.navigateOutOfModalOutlet();
+
+        expect(urlAfterRedirects).toEqual('/home/modal-lazy/modal-backdrop-with-url-param/1978');
+      });
+    });
+
+    describe('when modal route has additional level', () => {
+      it('should navigate 2 levels up to backdrop route', async () => {
+        await zone.run(() =>
+          router.navigate([
+            'home',
+            'modal-lazy',
+            'modal-route-with-additional-level',
+            'additional-level',
+            { outlets: { modal: ['page1'] } },
+          ])
+        );
+        let urlAfterRedirects: string;
+        router.events
+          .pipe(
+            filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+            first()
+          )
+          .subscribe((nav) => (urlAfterRedirects = nav.urlAfterRedirects));
+
+        await spectator.service.navigateOutOfModalOutlet();
+
+        expect(urlAfterRedirects).toEqual('/home/modal-lazy/modal-route-with-additional-level');
+      });
+    });
+
+    describe('when modal backdrop route has url param and additional level', () => {
+      it('should navigate 2 level up to backdrop route', async () => {
+        await zone.run(() =>
+          router.navigate([
+            'home',
+            'modal-lazy',
+            'modal-backdrop-with-url-param-and-additional-level',
+            '1978',
+            'additional-level',
+            { outlets: { modal: ['page1'] } },
+          ])
+        );
+        let urlAfterRedirects: string;
+        router.events
+          .pipe(
+            filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+            first()
+          )
+          .subscribe((nav) => (urlAfterRedirects = nav.urlAfterRedirects));
+
+        await spectator.service.navigateOutOfModalOutlet();
+
+        expect(urlAfterRedirects).toEqual(
+          '/home/modal-lazy/modal-backdrop-with-url-param-and-additional-level/1978'
+        );
       });
     });
   });
