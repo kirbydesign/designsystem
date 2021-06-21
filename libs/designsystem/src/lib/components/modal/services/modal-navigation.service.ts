@@ -21,17 +21,17 @@ export class ModalNavigationService {
     return childRoute;
   }
 
-  private async getModalRouteMap(
+  private async getModalRoutes(
     routeConfig: Routes[],
     moduleRootRoutePath?: string
-  ): Promise<Map<string, string>> {
+  ): Promise<string[]> {
     const flattenedRoutes: Routes = [].concat(...routeConfig);
     let modalRoutes: string[] = [];
     const moduleRootPaths = await this.getModuleRootPath(flattenedRoutes, moduleRootRoutePath);
     if (moduleRootPaths) {
       modalRoutes = this.getModalRoutePaths(flattenedRoutes, moduleRootPaths);
     }
-    return new Map(modalRoutes.map((modalRoute) => [modalRoute, modalRoute]));
+    return modalRoutes;
   }
 
   private async getModuleRootPath(routes: Routes, moduleRootRoutePath?: string): Promise<string[]> {
@@ -45,8 +45,8 @@ export class ModalNavigationService {
     }
 
     const currentRoutePaths = await this.getCurrentRoutePaths();
-    this.removeChildSegments(currentRoutePaths, routes);
-    return currentRoutePaths;
+    const moduleRootPaths = this.getRoutePathsWithoutChildSegments(currentRoutePaths, routes);
+    return moduleRootPaths;
   }
 
   private async getCurrentRoutePaths(): Promise<string[]> {
@@ -78,20 +78,61 @@ export class ModalNavigationService {
     );
   }
 
-  private removeChildSegments(currentRoutePaths: string[], routes: Routes): void {
-    if (!currentRoutePaths.length) return;
+  private getRoutePathsWithoutChildSegments(routePaths: string[], routes: Routes): string[] {
+    if (!routePaths.length) return routePaths;
 
-    const moduleRelativePaths = this.getRoutePaths(routes, ['']);
-    moduleRelativePaths.sort().reverse(); // Ensure child paths are evaluated first
-    const currentUrl = currentRoutePaths.join('/');
-    let matchedChildRoute = moduleRelativePaths.find((path) => currentUrl.endsWith(path));
-    if (matchedChildRoute) {
-      const relativeChildRoute = matchedChildRoute.startsWith('/')
-        ? matchedChildRoute.substring(1)
-        : matchedChildRoute;
-      const childSegmentCount = relativeChildRoute.split('/').length;
-      currentRoutePaths.splice(-childSegmentCount); // Pop child segments from end of current route path
+    const matchedChildRoute = this.findChildRouteForUrl(routePaths.join('/'), routes);
+
+    if (!matchedChildRoute) return routePaths;
+
+    const startSlashRegex = /^\//;
+    const relativeChildRoute = matchedChildRoute.replace(startSlashRegex, '');
+    const childSegmentCount = relativeChildRoute.split('/').length;
+    const routePathsWithoutChildSegments = routePaths.slice(0, -childSegmentCount); // Remove child segments from end of route path array
+    return routePathsWithoutChildSegments;
+  }
+
+  private findChildRouteForUrl(url: string, routes: Routes) {
+    const moduleRelativePaths = this.getRoutePaths(routes, [''])
+      .sort()
+      .reverse(); // Ensure child paths are evaluated first
+    let matchedChildRoute = moduleRelativePaths.find((path) => url.endsWith(path));
+    if (!matchedChildRoute) {
+      // No static child route found matching current route - look for child route with url params:
+      const exactMatch = false;
+      matchedChildRoute = moduleRelativePaths.find(
+        (path) =>
+          path.includes('/:') && this.pathContainsChildRouteWithUrlParams(url, path, exactMatch)
+      );
     }
+    return matchedChildRoute;
+  }
+
+  private pathContainsChildRouteWithUrlParams(
+    path: string,
+    childRouteWithUrlParams: string,
+    exactMatch: boolean
+  ) {
+    const pathSegments = path.split('/');
+    const startSlashRegex = /^\//;
+    let childRouteToMatch = childRouteWithUrlParams;
+    if (!exactMatch) {
+      const relativeChildRoute = childRouteWithUrlParams.replace(startSlashRegex, '');
+      childRouteToMatch = relativeChildRoute;
+    }
+    const childRouteSegments = childRouteToMatch.split('/');
+    // Match each child route segment against url
+    // Match backwards from end to start of child route, i.e. "url ends with child route":
+    const pathContainsChildRoute = childRouteSegments.reverse().every((childRouteSegment) => {
+      const pathSegment = pathSegments.pop();
+      // url params (e.g. `/:id/`) are treated as a match:
+      return childRouteSegment.startsWith(':') || childRouteSegment === pathSegment;
+    });
+    if (exactMatch) {
+      // Only match if we've reached the start of the url to match against:
+      return pathSegments.length === 0 && pathContainsChildRoute;
+    }
+    return pathContainsChildRoute;
   }
 
   private getRoutePaths(routes: Routes, parentPath: string[]): string[] {
@@ -168,10 +209,13 @@ export class ModalNavigationService {
 
   private modalRouteActivatedFor(
     navigationEnd$: Observable<NavigationEnd>,
-    modalRouteMap: Map<string, string>
+    modalRouteSet: Set<string>,
+    modalRoutesContainsUrlParams: boolean
   ): Observable<ModalRouteActivation> {
     return navigationEnd$.pipe(
-      filter((navigationEnd) => modalRouteMap.has(navigationEnd.urlAfterRedirects.split('?')[0])),
+      filter((navigationEnd) =>
+        this.modalRouteSetContainsPath(modalRouteSet, navigationEnd, modalRoutesContainsUrlParams)
+      ),
       map((navigationEnd) => ({
         route: this.getCurrentActivatedRoute(),
         isNewModal: this.isNewModalWindow(navigationEnd),
@@ -181,12 +225,13 @@ export class ModalNavigationService {
 
   private modalRouteDeactivatedFor(
     navigationEnd$: Observable<NavigationEnd>,
-    modalRouteMap: Map<string, string>
+    modalRouteSet: Set<string>,
+    modalRoutesContainsUrlParams: boolean
   ): Observable<boolean> {
     return navigationEnd$.pipe(
       pairwise(),
       filter(([prevNavigation, _]) =>
-        modalRouteMap.has(prevNavigation.urlAfterRedirects.split('?')[0])
+        this.modalRouteSetContainsPath(modalRouteSet, prevNavigation, modalRoutesContainsUrlParams)
       ), // Only emit if previous route was modal
       map(([_, currentNavigation]) => {
         const isNewModalRoute = this.isModalRoute(currentNavigation.urlAfterRedirects);
@@ -197,17 +242,52 @@ export class ModalNavigationService {
     );
   }
 
+  private modalRouteSetContainsPath(
+    modalRouteSet: Set<string>,
+    navigationEnd: NavigationEnd,
+    modalRoutesContainsUrlParams: boolean
+  ) {
+    const pathname = navigationEnd.urlAfterRedirects.split('?')[0];
+    let hasRoute = modalRouteSet.has(pathname);
+    if (!hasRoute && modalRoutesContainsUrlParams) {
+      // Use `for ... of` instead of `forEach` so we can break out of the loop if route is found:
+      for (let route of modalRouteSet) {
+        const exactMatch = true;
+        const routeMatchesPath = this.pathContainsChildRouteWithUrlParams(
+          pathname,
+          route,
+          exactMatch
+        );
+        if (routeMatchesPath) {
+          hasRoute = true;
+          break;
+        }
+      }
+    }
+    return hasRoute;
+  }
+
   async getModalNavigation(
     routeConfig: Routes[],
     moduleRootRoutePath?: string
   ): Promise<{ activated$: Observable<ModalRouteActivation>; deactivated$: Observable<boolean> }> {
     if (Array.isArray(routeConfig)) {
       const navigationEnd$ = await this.waitForCurrentThenGetNavigationEndStream();
-      const modalRouteMap = await this.getModalRouteMap(routeConfig, moduleRootRoutePath);
-      const hasModalRoutes = modalRouteMap.size > 0;
+      const modalRoutes = await this.getModalRoutes(routeConfig, moduleRootRoutePath);
+      const hasModalRoutes = modalRoutes.length > 0;
       if (hasModalRoutes) {
-        const activated$ = this.modalRouteActivatedFor(navigationEnd$, modalRouteMap);
-        const deactivated$ = this.modalRouteDeactivatedFor(navigationEnd$, modalRouteMap);
+        const modalRoutesContainsUrlParams = modalRoutes.some((route) => route.includes('/:'));
+        const modalRouteSet = new Set(modalRoutes);
+        const activated$ = this.modalRouteActivatedFor(
+          navigationEnd$,
+          modalRouteSet,
+          modalRoutesContainsUrlParams
+        );
+        const deactivated$ = this.modalRouteDeactivatedFor(
+          navigationEnd$,
+          modalRouteSet,
+          modalRoutesContainsUrlParams
+        );
         return { activated$, deactivated$ };
       }
     }
