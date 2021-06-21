@@ -22,7 +22,6 @@ export class ChartWipComponent implements AfterViewInit, OnChanges {
   @Input() type: ChartType = ChartType.bar;
   @Input() data: ChartData;
   @Input() dataLabels: string[];
-  @Input() label: string;
   @Input() options: ChartOptions;
 
   @ViewChild('chartCanvas')

@@ -18,7 +18,6 @@ export class ChartWipShowcaseComponent {
     ['DAG 1', 'DAG 2', 'DAG 3', 'DAG 4', 'DAG 5'],
   ];
   _types = [ChartType.bar, ChartType.column];
-  _label = 'Number of candies from the legohead eaten';
   _lastClickedElement: string;
   _options: ChartOptions[] = [
     {
