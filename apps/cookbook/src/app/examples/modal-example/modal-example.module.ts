@@ -14,7 +14,6 @@ import { ModalExampleOutletComponent } from './modal-example-outlet.component';
 import { ModalExampleComponent } from './modal-example.component';
 import { ModalRoutePage1ExampleComponent } from './modal-route-example/modal-route-page1-example.component';
 import { ModalRoutePage2ExampleComponent } from './modal-route-example/modal-route-page2-example.component';
-import { SecondEmbeddedModalExampleComponent } from './second-embedded-modal-example/second-embedded-modal-example.component';
 
 const COMPONENT_DECLARATIONS = [
   ModalExampleComponent,
@@ -22,7 +21,6 @@ const COMPONENT_DECLARATIONS = [
   ModalExampleConfigurationComponent,
   ModalExampleOutletComponent,
   FirstEmbeddedModalExampleComponent,
-  SecondEmbeddedModalExampleComponent,
   ModalCompactExampleComponent,
   ModalRoutePage1ExampleComponent,
   ModalRoutePage2ExampleComponent,
@@ -34,7 +32,6 @@ const COMPONENT_DECLARATIONS = [
   exports: COMPONENT_DECLARATIONS,
   entryComponents: [
     FirstEmbeddedModalExampleComponent,
-    SecondEmbeddedModalExampleComponent,
     ModalCompactExampleComponent,
     ModalRoutePage1ExampleComponent,
     ModalRoutePage2ExampleComponent,
