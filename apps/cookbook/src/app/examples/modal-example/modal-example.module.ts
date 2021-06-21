@@ -7,7 +7,7 @@ import { KirbyModule } from '@kirbydesign/designsystem';
 import { ExamplesSharedModule } from '../examples.shared.module';
 
 import { ModalCompactExampleComponent } from './compact-example/modal-compact-example.component';
-import { FirstEmbeddedModalExampleComponent } from './first-embedded-modal-example/first-embedded-modal-example.component';
+import { EmbeddedModalExampleComponent } from './embedded-modal-example/embedded-modal-example.component';
 import { ModalExampleConfigurationComponent } from './modal-example-configuration/modal-example-configuration.component';
 import { ModalExampleDefaultComponent } from './modal-example-default.component';
 import { ModalExampleOutletComponent } from './modal-example-outlet.component';
@@ -20,7 +20,7 @@ const COMPONENT_DECLARATIONS = [
   ModalExampleDefaultComponent,
   ModalExampleConfigurationComponent,
   ModalExampleOutletComponent,
-  FirstEmbeddedModalExampleComponent,
+  EmbeddedModalExampleComponent,
   ModalCompactExampleComponent,
   ModalRoutePage1ExampleComponent,
   ModalRoutePage2ExampleComponent,
@@ -31,7 +31,7 @@ const COMPONENT_DECLARATIONS = [
   declarations: COMPONENT_DECLARATIONS,
   exports: COMPONENT_DECLARATIONS,
   entryComponents: [
-    FirstEmbeddedModalExampleComponent,
+    EmbeddedModalExampleComponent,
     ModalCompactExampleComponent,
     ModalRoutePage1ExampleComponent,
     ModalRoutePage2ExampleComponent,
