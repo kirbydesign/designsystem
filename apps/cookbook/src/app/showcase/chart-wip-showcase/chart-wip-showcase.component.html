@@ -1,11 +1,173 @@
-<button (click)="_onClick()">Change Chart Type</button>
-<p>Last clicked element: {{ _lastClickedElement }}</p>
+<p>
+  The <code>kirby-chart</code> component is used to show data in various chart types. To show the
+  default column chart all that is needed is a <code>number[]</code> which will produce a simple
+  chart using colors from the <a href="/home/showcase/colors">Kirby color palette</a> as can be seen
+  below.
+</p>
 
-<kirby-card>
-  <kirby-chart-wip
-    [type]="_types[0]"
-    [data]="_datasets[0]"
-    [dataLabels]="_dataLabels[0]"
-    [customOptions]="_customOptions[0]"
-  ></kirby-chart-wip>
-</kirby-card>
+<p>
+  It is possible to customize the <code>kirby-chart</code> component with different chart types,
+  data labels, interactions, more complex datasets & custom options.
+</p>
+<p>
+  <kirby-card [mode]="_cardMode" [hasPadding]="_cardHasPadding">
+    <cookbook-example-viewer [html]="simpleColumnExample.template">
+      <cookbook-chart-wip-example-simple-column
+        #simpleColumnExample
+      ></cookbook-chart-wip-example-simple-column>
+    </cookbook-example-viewer>
+  </kirby-card>
+</p>
+
+<kirby-divider [hasMargin]="true"></kirby-divider>
+
+<h2>Types of Charts</h2>
+<p>
+  The type of a <code>kirby-chart</code> is set through the <code>type</code> input property. This
+  can be done either by supplying the type using the <code>ChartType</code> enumerator or as a
+  string value.
+</p>
+
+<h3>Column Chart</h3>
+<p>
+  The column chart visualizes data from different categories as rectangles.
+</p>
+<p>
+  To render a column chart set <code>type</code> to either: <code>ChartType.column</code> or
+  <code>'column'</code>.
+</p>
+<p>
+  <kirby-card [mode]="_cardMode" [hasPadding]="_cardHasPadding">
+    <cookbook-example-viewer [html]="columnExample.template">
+      <cookbook-chart-wip-example-column #columnExample></cookbook-chart-wip-example-column>
+    </cookbook-example-viewer>
+  </kirby-card>
+</p>
+
+<h3>Bar Chart</h3>
+<p>
+  The bar chart visualizes data from different categories as rectangles along the x-axis.
+</p>
+<p>
+  To render a bar chart set <code>type</code> to either: <code>ChartType.bar</code> or
+  <code>'bar'</code>.
+</p>
+<p>
+  <kirby-card [mode]="_cardMode" [hasPadding]="_cardHasPadding">
+    <cookbook-example-viewer [html]="barExample.template">
+      <cookbook-chart-wip-example-bar #barExample></cookbook-chart-wip-example-bar>
+    </cookbook-example-viewer>
+  </kirby-card>
+</p>
+
+<kirby-divider [hasMargin]="true"></kirby-divider>
+
+<h2>Custom Options</h2>
+<p>
+  The <code>kirby-chart</code> component is based on
+  <a href="https://www.chartjs.org/docs/latest/">chart.js</a>. Under the hood all Kirby chart types
+  are a set of pre-configured options for chart.js that has been Kirbyfied.
+</p>
+<p>
+  These options can be overwritten via the <code>customOptions</code> input property. Among other
+  things, this can be useful for implementing interactions with your charts and creating stacked bar
+  charts.
+</p>
+<p>
+  While customization can be nice and opens for the possibility of more varied charts; it also allow
+  you to create charts that are not very kirby-esque, for example by changing the colors to
+  something outside of the
+  <a href="/home/showcase/colors">Kirby color palette</a>.
+</p>
+<p>
+  Therefore if there is a customization you seem to be making again and again do not hesitate to
+  create an issue in our Github repo to get a standard implementation of your chart.
+</p>
+<p>
+  For documentation on the options object see the
+  <a href="https://www.chartjs.org/docs/latest/general/options.html"
+    >chart.js options documentation</a
+  >.
+</p>
+
+<h3>Interacting with charts</h3>
+<p>
+  It is possible to implement various interactions using custom options. The following example
+  implements a simple click event listener; for a more detailed explanation of possible interactions
+  see
+  <a href="https://www.chartjs.org/docs/latest/configuration/interactions.html"
+    >the chart.js interactions documentation</a
+  >.
+</p>
+<p>
+  <kirby-card [mode]="_cardMode" [hasPadding]="_cardHasPadding">
+    <cookbook-example-viewer
+      [html]="interactionExample.template"
+      [ts]="interactionExample.codeSnippet"
+    >
+      <cookbook-chart-wip-example-interaction
+        #interactionExample
+      ></cookbook-chart-wip-example-interaction>
+    </cookbook-example-viewer>
+  </kirby-card>
+</p>
+
+<h3 id="stackedBarAndColumnCharts">Stacked Bar & column charts</h3>
+<p>
+  Stacked charts can be created using a combination of custom options and
+  <a href="#datasets">datasets</a>.
+</p>
+<p>
+  <kirby-card [mode]="_cardMode" [hasPadding]="_cardHasPadding">
+    <cookbook-example-viewer [html]="stackedExample.template" [ts]="stackedExample.codeSnippet">
+      <cookbook-chart-wip-example-column-stacked #stackedExample>
+      </cookbook-chart-wip-example-column-stacked>
+    </cookbook-example-viewer>
+  </kirby-card>
+</p>
+
+<h3>Option resolving</h3>
+<p>
+  Besides custom options it is also possible to provide options for each
+  <a href="#datasetes">dataset</a> as can be seen in the above
+  <a href="stackedBarAndColumnCharts">stacked bar & column charts</a> example where it is used to
+  change the background- & hover background color for one of the datsets.
+</p>
+
+<p>
+  Options are resolved such that:
+</p>
+<ul>
+  <li>Defaults are overwritten by <a href="#customOptions">custom options</a>.</li>
+  <li>
+    Custom options are overwritten by per dataset options.
+  </li>
+</ul>
+
+<h2 id="datasets">Datasets</h2>
+<p>
+  It is possible to provide data as an array of
+  <a href="https://www.chartjs.org/docs/next/general/data-structures.html">chart.js datasets</a>.
+  This allows for example to have several bars for each category in a bar chart. Also each dataset
+  can be customized with <a href="#customOptions">custom options</a>.
+</p>
+<p>
+  The following is an example of using 3 seperate datasets in a single chart:
+</p>
+<p>
+  <kirby-card [mode]="_cardMode" [hasPadding]="_cardHasPadding">
+    <cookbook-example-viewer
+      [html]="multipleDatasetsExample.template"
+      [ts]="multipleDatasetsExample.codeSnippet"
+    >
+      <cookbook-chart-wip-example-multiple-datasets #multipleDatasetsExample>
+      </cookbook-chart-wip-example-multiple-datasets>
+    </cookbook-example-viewer>
+  </kirby-card>
+</p>
+<kirby-divider [hasMargin]="true"></kirby-divider>
+
+<h2>API Description</h2>
+<cookbook-api-description-properties
+  [properties]="_apiDescriptionProperties"
+></cookbook-api-description-properties>

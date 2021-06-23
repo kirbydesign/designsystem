@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { ChartOptions } from 'chart.js';
-
-import { ChartType } from '../../../../../../libs/designsystem/src/lib/components/chart-wip/chart-wip.types';
+import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
   selector: 'cookbook-chart-wip-showcase',
@@ -9,39 +7,30 @@ import { ChartType } from '../../../../../../libs/designsystem/src/lib/component
   styleUrls: ['./chart-wip-showcase.component.scss'],
 })
 export class ChartWipShowcaseComponent {
-  _datasets = [
-    [10, 43, 49, 558, 1283],
-    [1283, 558, 49, 43, 10],
-  ];
-  _dataLabels = [
-    ['Monday', 'Tuesday', 'Wedensday', 'Thursday', 'Friday'],
-    ['DAG 1', 'DAG 2', 'DAG 3', 'DAG 4', 'DAG 5'],
-  ];
-  _types = [ChartType.bar, ChartType.column];
-  _lastClickedElement: string;
-  _customOptions: ChartOptions[] = [
+  _cardMode = 'flat';
+  _cardHasPadding = true;
+  _apiDescriptionProperties: ApiDescriptionProperty[] = [
     {
-      onClick: (_, [activeElement]) => {
-        this._lastClickedElement = activeElement
-          ? this._dataLabels[0][activeElement.index]
-          : 'no element';
-      },
+      name: 'type',
+      description: 'Controls the type which the chart should be displayed as.',
+      type: ['ChartType', '"column"', '"bar"'],
+      defaultValue: 'ChartType.column',
     },
     {
-      onClick: (_, [activeElement]) => {
-        this._lastClickedElement = activeElement
-          ? `the magnificent ${this._dataLabels[0][activeElement.index]}`
-          : "nuthin'";
-      },
+      name: 'data',
+      description:
+        'The data which the chart should display. Can be supplied as a simple array of numbers or as a chart.js dataset. See: https://www.chartjs.org/docs/latest/general/data-structures.html ',
+      type: ['number[]', 'ChartDataset[]'],
+    },
+    {
+      name: 'dataLabels',
+      description: `(Optional) Labels that should be displayed along the main axis for each category.`,
+      type: ['string[]'],
+    },
+    {
+      name: 'customOptions',
+      description: `(Optional) Chart.js options that can be used to customize the charts, see: https://www.chartjs.org/docs/latest/general/options.html`,
+      type: ['ChartOptions'],
     },
   ];
-
-  _onClick() {
-    const flip = (arr: any[]) => [arr[1], arr[0]];
-
-    this._datasets = flip(this._datasets);
-    this._dataLabels = flip(this._dataLabels);
-    this._types = flip(this._types);
-    this._customOptions = flip(this._customOptions);
-  }
 }
