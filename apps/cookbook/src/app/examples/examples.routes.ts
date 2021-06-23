@@ -11,6 +11,7 @@ import { CalendarCardExampleComponent } from './calendar-example/calendar-card-e
 import { CalendarExampleComponent } from './calendar-example/calendar-example.component';
 import { CardExampleComponent } from './card-example/card-example.component';
 import { ChartExampleComponent } from './chart-example/chart-example.component';
+import { ChartWipExampleComponent } from './chart-wip-example/chart-wip-example.component';
 import { CheckboxExampleComponent } from './checkbox-example/checkbox-example.component';
 import { ChipExampleComponent } from './chip-example/chip-example.component';
 import { EmptyStateExampleComponent } from './empty-state-example/empty-state-example.component';
@@ -329,6 +330,10 @@ export const routes: Routes = [
   {
     path: 'chart',
     component: ChartExampleComponent,
+  },
+  {
+    path: 'chart-wip',
+    component: ChartWipExampleComponent,
   },
   {
     path: 'stock-chart',
