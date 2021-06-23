@@ -3,8 +3,9 @@ import { Component } from '@angular/core';
 const config = {
   selector: 'cookbook-chart-example-donut',
   template: `<kirby-card>
+  <kirby-card-header title="Donut"></kirby-card-header>
     <kirby-chart
-      [height]="5520"
+      [height]="320"
       type="donut"
       [showDataLabels]="true"
       description="Accessibility description goes here"
