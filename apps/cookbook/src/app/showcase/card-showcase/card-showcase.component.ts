@@ -34,7 +34,7 @@ export class CardShowcaseComponent {
     {
       name: 'hasPadding',
       description: '',
-      defaultValue: 'true',
+      defaultValue: 'false',
       type: ['boolean'],
     },
     {
