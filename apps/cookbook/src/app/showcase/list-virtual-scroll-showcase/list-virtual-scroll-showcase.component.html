@@ -1,0 +1,61 @@
+<div class="example">
+  <kirby-card themeColor="warning" class="experimental">
+    <kirby-card-header
+      title="Experimental"
+      subtitle="This is an experimental feature. It is functional, but we are still working to improve performance."
+    ></kirby-card-header>
+  </kirby-card>
+  <p>
+    The virtual scroll should be mostly invisible to the user, but behind the scenes, only a small
+    subset of the total number of list items are actually rendered on the page. Items will
+    dynamically be added/removed from the top and bottom of the list as the user scrolls up or down.
+    This can have a very positive impact on performance - especially on long lists.
+  </p>
+  <p>
+    The virtual scroll implementation is based on the
+    <a href="https://github.com/dhilt/ngx-ui-scroll" target="_blank">ngx-ui-scroll library</a>.
+  </p>
+</div>
+<div class="example-wrapper">
+  <div>
+    <h2>With preloaded items</h2>
+    <p>100 items in the list, but approximatly 25 items rendered on the page at a time.</p>
+    <cookbook-code-viewer [html]="itemsHtml"></cookbook-code-viewer>
+  </div>
+  <cookbook-iphone
+    src="/examples/list-virtual-scroll/with-items"
+    showExternalLink="true"
+  ></cookbook-iphone>
+</div>
+
+<div class="example-wrapper">
+  <div>
+    <h2>Load on demand</h2>
+    <p>
+      When ever the list is scrolled to the end, an additional 20 items are requested (with a 2 sec
+      delay to mimic a slow HTTPS request)
+    </p>
+    <cookbook-code-viewer [html]="loadOnDemandHtml"></cookbook-code-viewer>
+  </div>
+  <cookbook-iphone
+    src="/examples/list-virtual-scroll/load-on-demand"
+    showExternalLink="true"
+  ></cookbook-iphone>
+</div>
+
+<div class="example-wrapper">
+  <div>
+    <h2>With sections</h2>
+    <cookbook-code-viewer [html]="sectionsHtml"></cookbook-code-viewer>
+  </div>
+  <cookbook-iphone
+    src="/examples/list-virtual-scroll/with-sections"
+    showExternalLink="true"
+  ></cookbook-iphone>
+</div>
+
+<h2>Properties:</h2>
+
+<cookbook-api-description-properties
+  [properties]="properties"
+></cookbook-api-description-properties>
