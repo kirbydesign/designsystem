@@ -12,7 +12,6 @@ import { IonicModule } from '@ionic/angular';
 import { UiScrollModule } from 'ngx-ui-scroll';
 
 import { appInitialize } from './app-initialize';
-import { BadgeComponent } from './components/';
 import { AccordionItemComponent } from './components/accordion/accordion-item.component';
 import { AccordionDirective } from './components/accordion/accordion.directive';
 import { AppModule } from './components/app/app.module';
@@ -57,6 +56,7 @@ import { ModalHelper } from './components/modal/services/modal.helper';
 import { PageModule } from './components/page/page.module';
 import { ProgressCircleRingComponent } from './components/progress-circle/progress-circle-ring.component';
 import { ProgressCircleComponent } from './components/progress-circle/progress-circle.component';
+import { KirbyBadge as BadgeComponent } from './components/proxies';
 import { RadioGroupComponent } from './components/radio/radio-group/radio-group.component';
 import { RadioComponent } from './components/radio/radio.component';
 import { RangeComponent } from './components/range/range.component';
