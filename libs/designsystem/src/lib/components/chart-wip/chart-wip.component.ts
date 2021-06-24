@@ -29,7 +29,6 @@ export class ChartWipComponent implements AfterViewInit, OnChanges {
   _height: string;
   @Input() set height(value: string | number) {
     this._height = typeof value === 'number' ? `${value}px` : value;
-    console.log(this._height);
   }
 
   @ViewChild('chartCanvas')
