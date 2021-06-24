@@ -27,8 +27,8 @@ export class ChartWipShowcaseComponent {
     },
     {
       name: 'dataLabels',
-      description: `(Optional) Labels that should be displayed along the main axis for each category.`,
-      type: ['string[]'],
+      description: `(Optional) Labels that should be displayed along the main axis for each category. Multi-line labels can be created by supplying a string[][] as such: ['one line', ['multi', 'line']].`,
+      type: ['string[]', 'string[][]'],
     },
     {
       name: 'height',

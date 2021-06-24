@@ -14,7 +14,7 @@ export class ChartJSService {
     targetElement: ElementRef<HTMLCanvasElement>,
     type: ChartType,
     data: ChartData,
-    dataLabels?: string[],
+    dataLabels?: string[] | string[][],
     customOptions?: ChartOptions
   ): void {
     const datasets = this.createDatasets(data);
@@ -32,7 +32,7 @@ export class ChartJSService {
     this.chart.data.datasets = datasets;
   }
 
-  public updateDataLabels(dataLabels: string[]) {
+  public updateDataLabels(dataLabels: string[] | string[][]) {
     this.chart.data.labels = dataLabels;
   }
 

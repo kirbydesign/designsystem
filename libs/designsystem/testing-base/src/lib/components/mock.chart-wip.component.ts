@@ -21,7 +21,7 @@ import {
 export class MockChartWipComponent {
   @Input() type: ChartType;
   @Input() data: ChartData;
-  @Input() dataLabels: string[];
+  @Input() dataLabels: string[] | string[][];
   @Input() customOptions: ChartOptions;
   @Input() height: string | number;
 }

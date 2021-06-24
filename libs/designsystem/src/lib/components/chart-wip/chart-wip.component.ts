@@ -22,7 +22,7 @@ import { ChartData, ChartType } from './chart-wip.types';
 export class ChartWipComponent implements AfterViewInit, OnChanges {
   @Input() type: ChartType = ChartType.column;
   @Input() data: ChartData;
-  @Input() dataLabels?: string[];
+  @Input() dataLabels?: string[] | string[][];
   @Input() customOptions?: ChartOptions;
 
   @HostBinding('style.--kirby-chart-height')
