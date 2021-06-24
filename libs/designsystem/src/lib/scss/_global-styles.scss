@@ -27,6 +27,7 @@
 @media print {
   :root {
     --kirby-font-family: sans-serif;
+    --kirby-page-max-width: 100%;
   }
 
   *,
@@ -35,8 +36,12 @@
     color: initial !important;
     --background: initial !important;
     background-color: initial !important;
-    font-size: 12pt !important;
+    font-size: inherit !important;
     box-shadow: none !important;
+  }
+
+  body {
+    font-size: 11pt !important;
   }
 
   cookbook-home {
@@ -59,6 +64,53 @@
   .logo {
     width: 2cm !important;
     height: 2cm !important;
+  }
+
+  table {
+    --table-border-width: 2pt;
+    --table-border-color: #000;
+    max-width: 100%;
+    border-right: var(--table-border-width) solid var(--table-border-color) !important;
+    border-bottom: var(--table-border-width) solid var(--table-border-color) !important;
+    border-left: var(--table-border-width) solid var(--table-border-color) !important;
+    font-size: 10pt !important;
+  }
+
+  tr {
+    border: none !important;
+    border-top: var(--table-border-width) solid var(--table-border-color) !important;
+  }
+
+  thead {
+    border-top: var(--table-border-width) solid var(--table-border-color) !important;
+  }
+
+  th {
+    font-weight: 700 !important;
+  }
+
+  th,
+  td {
+    // border: var(--table-border-width) solid #000 !important;
+    border: none !important;
+  }
+
+  th + th,
+  td + td {
+    border-left: var(--table-border-width) solid var(--table-border-color) !important;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    page-break-after: avoid !important;
+  }
+
+  code {
+    font-size: 10pt !important;
   }
 }
 
