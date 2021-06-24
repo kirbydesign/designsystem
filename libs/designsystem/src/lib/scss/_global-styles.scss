@@ -25,11 +25,13 @@
 }
 
 @media print {
+  // Generic
   :root {
     --kirby-font-family: sans-serif;
     --kirby-page-max-width: 100%;
   }
 
+  // Generic reset
   *,
   *::before,
   *::after {
@@ -40,18 +42,22 @@
     box-shadow: none !important;
   }
 
+  // Generic
   body {
     font-size: 11pt !important;
   }
 
+  // Not needed
   cookbook-home {
     display: block !important;
   }
 
+  // Not needed
   cookbook-header {
     margin-bottom: 1cm !important;
   }
 
+  // Specific to host project
   nav,
   .menu-button,
   .show-case-actions,
@@ -61,11 +67,13 @@
     display: none !important;
   }
 
+  // Specific to host project
   .logo {
     width: 2cm !important;
     height: 2cm !important;
   }
 
+  // Optional (all table styles)
   table {
     --table-border-width: 2pt;
     --table-border-color: #000;
@@ -100,6 +108,7 @@
     border-left: var(--table-border-width) solid var(--table-border-color) !important;
   }
 
+  // Generic
   h1,
   h2,
   h3,
@@ -107,11 +116,24 @@
   h5,
   h6 {
     page-break-after: avoid !important;
+    line-height: initial !important;
   }
 
+  // Optional
   code {
     font-size: 10pt !important;
   }
+
+  // Generic
+  p {
+    line-height: initial !important;
+    margin: revert !important;
+  }
+
+  // TODO:
+  // - Links
+  // - Lists
+  // - Margins
 }
 
 @function get-drawer-additional-padding-top() {
