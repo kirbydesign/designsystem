@@ -2,6 +2,7 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
+  HostBinding,
   Input,
   OnChanges,
   SimpleChanges,
@@ -24,6 +25,13 @@ export class ChartWipComponent implements AfterViewInit, OnChanges {
   @Input() dataLabels?: string[];
   @Input() customOptions?: ChartOptions;
 
+  @HostBinding('style.--kirby-chart-height')
+  _height: string;
+  @Input() set height(value: string | number) {
+    this._height = typeof value === 'number' ? `${value}px` : value;
+    console.log(this._height);
+  }
+
   @ViewChild('chartCanvas')
   canvasElement: ElementRef<HTMLCanvasElement>;
 
@@ -44,7 +52,7 @@ export class ChartWipComponent implements AfterViewInit, OnChanges {
     };
 
     Object.entries(simpleChanges).forEach(([key]) => {
-      if (simpleChanges[key].firstChange) return;
+      if (simpleChanges[key].firstChange || !keyUpdateFnPairs[key]) return;
       shouldRedrawChart = true;
       keyUpdateFnPairs[key]();
     });

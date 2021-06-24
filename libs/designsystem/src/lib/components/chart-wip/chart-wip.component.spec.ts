@@ -29,6 +29,14 @@ describe('ChartWipComponent', () => {
     });
   });
 
+  it('should render chart once after view init', () => {
+    const renderChartSpy = spyOn<any>(component, 'renderChart');
+
+    component.ngAfterViewInit();
+
+    expect(renderChartSpy).toHaveBeenCalledTimes(1);
+  });
+
   it("should be possible to set the height with the '--kirby-chart-height' CSS custom property", () => {
     const customHeight = '600px';
     const element = spectator.query('.chart-container') as HTMLElement;
@@ -39,12 +47,28 @@ describe('ChartWipComponent', () => {
     expect(element).toHaveComputedStyle({ height: customHeight });
   });
 
-  it('should render chart once after view init', () => {
-    const renderChartSpy = spyOn<any>(component, 'renderChart');
+  describe("when setting height through the 'height' input property", () => {
+    it('should be possible to use a number', () => {
+      const customHeight = 600;
+      const element = spectator.query('.chart-container') as HTMLElement;
+      expect(element).not.toHaveComputedStyle({ height: `${customHeight}px` });
 
-    component.ngAfterViewInit();
+      spectator.setInput('height', customHeight);
+      spectator.detectChanges();
 
-    expect(renderChartSpy).toHaveBeenCalledTimes(1);
+      expect(element).toHaveComputedStyle({ height: `${customHeight}px` });
+    });
+
+    it('should be possible to use a string', () => {
+      const customHeight = '600px';
+      const element = spectator.query('.chart-container') as HTMLElement;
+      expect(element).not.toHaveComputedStyle({ height: customHeight });
+
+      spectator.setInput('height', customHeight);
+      spectator.detectChanges();
+
+      expect(element).toHaveComputedStyle({ height: customHeight });
+    });
   });
 
   describe('when changes occur to', () => {
