@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import {
+  ApiDescriptionProperty,
+  ApiDescriptionPropertyColumns,
+} from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
   selector: 'cookbook-chart-wip-showcase',
@@ -28,9 +31,27 @@ export class ChartWipShowcaseComponent {
       type: ['string[]'],
     },
     {
+      name: 'height',
+      description: `(Optional) can be used to set the height of the chart. Will overwrite the value of setting the height using --kirby-chart-height.`,
+      type: ['string', 'number'],
+      defaultValue: '300px',
+    },
+    {
       name: 'customOptions',
       description: `(Optional) Chart.js options that can be used to customize the charts, see: https://www.chartjs.org/docs/latest/general/options.html`,
       type: ['ChartOptions'],
+    },
+  ];
+
+  _cssCustomPropertiesColumns: ApiDescriptionPropertyColumns = {
+    name: 'Name',
+    description: 'Description',
+  };
+
+  _cssCustomProperties: ApiDescriptionProperty[] = [
+    {
+      name: '--kirby-chart-height',
+      description: 'Height of the chart.',
     },
   ];
 }
