@@ -40,6 +40,8 @@
     background-color: initial !important;
     font-size: revert !important;
     box-shadow: none !important;
+    width: auto !important;
+    max-width: none !important;
   }
 
   // Generic
@@ -130,11 +132,63 @@
     margin: revert !important;
   }
 
+  // App containers ------------------------------------------------------------
+  .ion-page,
+  ion-app,
+  kirby-app,
+  ion-router-outlet,
+  kirby-router-outlet {
+    display: contents !important;
+    // display: block !important;
+    // position: static !important;
+    // overflow: visible !important;
+  }
+
+  .inner-scroll,
+  ion-content::part(scroll) {
+    position: static !important;
+  }
+
+  ion-content::part(background) {
+    display: none !important;
+  }
+
+  body {
+    height: auto !important;
+  }
+
+  .page-title {
+    margin: initial !important;
+  }
+
+  ion-header {
+    display: none !important;
+  }
+
+  ion-content {
+    padding: initial !important;
+  }
+
+  .ion-page-hidden {
+    display: none !important;
+  }
+
+  ion-tab-bar {
+    display: none !important;
+  }
+
+  // ---------------------------------------------------------------------------
+
+  // Virtual scroll ------------------------------------------------------------
+  [ng-reflect-use-virtual-scroll='true'] .viewport {
+    height: auto !important;
+  }
+
   // TODO:
-  // App containers (inside-out)
   // Links
   // Lists
   // Margins
+  // No-print utility class
 }
 
 @function get-drawer-additional-padding-top() {
