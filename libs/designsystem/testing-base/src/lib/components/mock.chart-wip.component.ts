@@ -23,6 +23,7 @@ export class MockChartWipComponent {
   @Input() data: ChartData;
   @Input() dataLabels: string[];
   @Input() customOptions: ChartOptions;
+  @Input() height: string | number;
 }
 
 // #endregion
