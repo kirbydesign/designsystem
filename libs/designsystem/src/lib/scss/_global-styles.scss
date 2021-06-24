@@ -27,7 +27,7 @@
 @media print {
   // Generic
   :root {
-    --kirby-font-family: sans-serif;
+    --kirby-font-family: 'Roboto', sans-serif;
     --kirby-page-max-width: 100%;
   }
 
@@ -38,14 +38,14 @@
     color: initial !important;
     --background: initial !important;
     background-color: initial !important;
-    font-size: inherit !important;
+    font-size: revert !important;
     box-shadow: none !important;
   }
 
   // Generic
-  body {
-    font-size: 11pt !important;
-  }
+  // body {
+  //   font-size: 12pt !important;
+  // }
 
   // Not needed
   cookbook-home {
@@ -116,7 +116,7 @@
   h5,
   h6 {
     page-break-after: avoid !important;
-    line-height: initial !important;
+    line-height: revert !important;
   }
 
   // Optional
@@ -126,14 +126,15 @@
 
   // Generic
   p {
-    line-height: initial !important;
+    line-height: 1.4 !important;
     margin: revert !important;
   }
 
   // TODO:
-  // - Links
-  // - Lists
-  // - Margins
+  // App containers (inside-out)
+  // Links
+  // Lists
+  // Margins
 }
 
 @function get-drawer-additional-padding-top() {
