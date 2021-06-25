@@ -14,9 +14,9 @@
 
   <div
     *ngIf="useVirtualScroll"
-    #viewport
     [style.height]="virtualScrollViewportHeight + 'px'"
     class="viewport"
+    [class.virtual-with-sections-wrapper]="_isSectionsEnabled"
   >
     <ng-container
       *ngTemplateOutlet="virtualItemsTemplate; context: { $implicit: _virtualScrollData }"
@@ -78,7 +78,12 @@
 
 <ng-template #virtualItemsTemplate let-virtualScrollData>
   <div *uiScroll="let item of virtualScrollData; let i = index">
-    <div [class.item-wrapper]="!item.headingName" [class.section-header]="item.headingName">
+    <div
+      [class.item-wrapper]="!item.headingName"
+      [class.section-header]="!!item.headingName"
+      [class.virtual-section-item]="_isSectionsEnabled && !item.headingName"
+      [ngClass]="_getBoundaryClass(i)"
+    >
       <ion-item-divider *ngIf="item.headingName" class="virtual-group">
         <ng-container
           *ngTemplateOutlet="sectionHeaderTemplate; context: { $implicit: item.headingName }"

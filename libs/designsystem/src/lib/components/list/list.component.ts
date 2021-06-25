@@ -13,7 +13,7 @@ import {
   TrackByFunction,
   ViewChild,
 } from '@angular/core';
-import { IDatasource } from 'ngx-ui-scroll';
+import { Datasource, IDatasource } from 'ngx-ui-scroll';
 
 import { ThemeColor } from '../../helpers/theme-color.type';
 import { ItemComponent } from '../item/item.component';
@@ -22,7 +22,6 @@ import { InfiniteScrollDirective } from './directives/infinite-scroll.directive'
 import { ListHelper } from './helpers/list-helper';
 import { BoundaryClass } from './list-item/list-item.component';
 import { ListSwipeAction } from './list-swipe-action.type';
-import { VirtualScrollerSettings } from './list-virtual-scroll-settings.type';
 import {
   ListFooterDirective,
   ListHeaderDirective,
@@ -31,6 +30,8 @@ import {
 } from './list.directive';
 import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
 import { GroupByPipe } from './pipes/group-by.pipe';
+
+export type VirtualScrollSettings = IDatasource['settings'];
 
 export enum ListShape {
   square = 'square',
@@ -91,51 +92,51 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
 
   @Input() virtualScrollViewportHeight = 500;
 
-  @Input() virtualScrollSettings: VirtualScrollerSettings = {};
+  @Input() virtualScrollSettings: VirtualScrollSettings = {};
 
   @Input() virtualScrollTimeout = 5000;
 
-  _virtualScrollData: IDatasource = {
+  _virtualScrollData: IDatasource = new Datasource({
     get: (index, count) => this.getVirtualDataset(index, count),
     settings: {
       minIndex: this.virtualScrollSettings.minIndex || 0,
       startIndex: this.virtualScrollSettings.startIndex || 0,
-      bufferSize: this.virtualScrollSettings.bufferSize || 10,
+      bufferSize: this.virtualScrollSettings.bufferSize || 4,
+      itemSize: this.virtualScrollSettings.itemSize || 72,
+      padding: this.virtualScrollSettings.padding || 1,
       ...this.virtualScrollSettings,
     },
-  };
+  });
 
-  private async getVirtualDataset(index: number, count: number): Promise<any> {
-    return await new Promise((resolve) => {
-      setTimeout(() => {
-        const itemSlice = this.getItemsSlice(index, count);
+  private getVirtualDataset(index: number, count: number): Promise<any> {
+    return new Promise((resolve) => {
+      const itemSlice = this.getItemsSlice(index, count);
 
-        // If we return less items than count, virtual scroll will interprete it as EOF and stop asking for more
-        if (itemSlice.length < count && this.isLoadOnDemandEnabled) {
-          let elapsedTime = 0;
+      // If we return less items than count, virtual scroll will interprete it as EOF and stop asking for more
+      if (itemSlice.length < count && this.isLoadOnDemandEnabled) {
+        let elapsedTime = 0;
 
-          /* As virtual scroll fixes the viewport causing ScrollEnd to not be emitted; do it manually to trigger load on demand */
-          this.scrollDirective.scrollEnd.emit();
+        /* As virtual scroll fixes the viewport causing ScrollEnd to not be emitted; do it manually to trigger load on demand */
+        this.scrollDirective.scrollEnd.emit();
 
-          const poller = setInterval(() => {
-            elapsedTime += INTERVAL;
+        const poller = setInterval(() => {
+          elapsedTime += INTERVAL;
 
-            if (this._isLoading) {
-              // Just a failsafe in case this.isLoading for some reason is not reset
-              if (elapsedTime > this.virtualScrollTimeout) {
-                clearInterval(poller);
-                resolve([]);
-              }
-              return;
+          if (this._isLoading) {
+            // Just a failsafe in case this.isLoading for some reason is not reset
+            if (elapsedTime > this.virtualScrollTimeout) {
+              clearInterval(poller);
+              resolve([]);
             }
+            return;
+          }
 
-            clearInterval(poller);
-            resolve(this.getItemsSlice(index, count));
-          }, INTERVAL);
-        } else {
-          resolve(itemSlice);
-        }
-      }, INTERVAL);
+          clearInterval(poller);
+          resolve(this.getItemsSlice(index, count));
+        }, INTERVAL);
+      } else {
+        resolve(itemSlice);
+      }
     });
   }
 
@@ -179,7 +180,16 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   _virtualGroupedItems: any[];
   _selectedItem: any;
 
-  constructor(private listHelper: ListHelper, private groupBy: GroupByPipe) {}
+  constructor(private listHelper: ListHelper, private groupBy: GroupByPipe) {
+    // Make sure that virtual items are made selectable when entering the DOM
+    this._virtualScrollData.adapter.isLoading$.subscribe((loading) => {
+      if (!loading && this._isSelectable) {
+        this.kirbyItems.forEach((item) => {
+          item.selectable = true;
+        });
+      }
+    });
+  }
 
   ngOnInit() {
     this._isSelectable = this.itemSelect.observers.length > 0;

@@ -49,7 +49,6 @@ ion-item {
   --padding-top: #{size('xxs')};
   display: flex;
   font-size: font-size('s');
-  min-height: $item-height;
   overflow: visible;
   width: 100%;
 }
@@ -160,8 +159,27 @@ ion-item-options[side='end'] {
     border-radius: $border-radius;
   }
 
+  .virtual-with-sections-wrapper {
+    margin-left: -1 * size('xxxs');
+    margin-right: -1 * size('xxxs');
+  }
+
   .virtual-group {
     margin-top: size('m');
+  }
+
+  .virtual-section-item {
+    box-shadow: $shadow;
+    margin: 0 size('xxxs');
+    &.first {
+      border-top-left-radius: $border-radius;
+      border-top-right-radius: $border-radius;
+    }
+    &.last {
+      border-bottom-left-radius: $border-radius;
+      border-bottom-right-radius: $border-radius;
+      margin-bottom: size('xxxs');
+    }
   }
 
   .section-header {
