@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { KirbyModule } from '@kirbydesign/designsystem';
 
 import { ChartWipExampleComponent } from './chart-wip-example.component';
+import { ChartWipExampleAccessibilityComponent } from './examples/chart-wip-example-accessibility.component';
 import { ChartWipExampleBarComponent } from './examples/chart-wip-example-bar.component';
 import { ChartWipExampleColumnComponent } from './examples/chart-wip-example-column-chart.component';
 import { ChartWipExampleColumnStackedComponent } from './examples/chart-wip-example-column-stacked.component';
@@ -19,6 +20,7 @@ const COMPONENT_DECLARATIONS = [
   ChartWipExampleInteractionComponent,
   ChartWipExampleColumnStackedComponent,
   ChartWipExampleMultipleDatasetsComponent,
+  ChartWipExampleAccessibilityComponent,
 ];
 
 @NgModule({

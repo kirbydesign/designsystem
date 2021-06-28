@@ -133,6 +133,7 @@
     Custom options are overwritten by per dataset options.
   </li>
 </ul>
+<kirby-divider [hasMargin]="true"></kirby-divider>
 
 <h2 id="datasets">Datasets</h2>
 <p>
@@ -152,6 +153,40 @@
     >
       <cookbook-chart-wip-example-multiple-datasets #multipleDatasetsExample>
       </cookbook-chart-wip-example-multiple-datasets>
+    </cookbook-example-viewer>
+  </kirby-card>
+</p>
+
+<kirby-divider [hasMargin]="true"></kirby-divider>
+
+<h2>Accessibility</h2>
+<p>
+  The charts are unfortunately not accessible out-of-the-box. This is because the charts are drawn
+  using a canvas element which renders it as a rasterized image; meaning there is no structured
+  content that can be read aloud by a screen reader. This makes it act much like an
+  <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img"
+    >image element</a
+  >.
+</p>
+<p>
+  As a fallback for screen readers structured content can be slotted that a screen reader will read
+  aloud; see the below example.
+</p>
+<p>
+  For more on accessibility when working with the canvas element have a look at
+  <a target="_blank" href="https://pauljadam.com/demos/canvas.html"
+    >this great article from Paul J. Adam</a
+  >.
+</p>
+
+<p>
+  <kirby-card [mode]="_cardMode" [hasPadding]="_cardHasPadding">
+    <cookbook-example-viewer
+      [html]="accessibilityExample.template"
+      [ts]="accessibilityExample.codeSnippet"
+    >
+      <cookbook-chart-wip-example-accessibility #accessibilityExample>
+      </cookbook-chart-wip-example-accessibility>
     </cookbook-example-viewer>
   </kirby-card>
 </p>
