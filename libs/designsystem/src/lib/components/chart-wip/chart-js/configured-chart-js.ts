@@ -1,10 +1,29 @@
-import { BarController, BarElement, CategoryScale, Chart, Legend, LinearScale } from 'chart.js';
+import {
+  BarController,
+  BarElement,
+  CategoryScale,
+  Chart,
+  Legend,
+  LinearScale,
+  LineController,
+  LineElement,
+  PointElement,
+} from 'chart.js';
 
 import { ColorHelper, DesignTokenHelper } from '../../../helpers';
 const { fontSize } = DesignTokenHelper;
 const { getThemeColorHexString } = ColorHelper;
 
-Chart.register(BarController, CategoryScale, LinearScale, BarElement, Legend);
+Chart.register(
+  BarController,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Legend,
+  LineElement,
+  LineController,
+  PointElement
+);
 
 // Global Defaults must be after register
 export const GLOBAL_DEFAULTS = {

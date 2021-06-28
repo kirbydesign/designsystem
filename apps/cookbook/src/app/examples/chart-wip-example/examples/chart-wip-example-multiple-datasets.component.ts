@@ -7,7 +7,7 @@ const { getThemeColorHexString } = ColorHelper;
 const config = {
   selector: 'cookbook-chart-wip-example-multiple-datasets',
   template: `<kirby-chart-wip 
-  type="bar" 
+  type="column" 
   [data]="_datasets" 
   [dataLabels]="['Monday', 'Tuesday', ['Wedens-','day'], 'Thursday', 'Friday']">
 </kirby-chart-wip>`,
@@ -17,15 +17,15 @@ const { getThemeColorHexString } = ColorHelper;
 
 _datasets = [
   {
+    type: 'line',
+    data: [45, 65, 105, 37, 70],
+  },
+  {
     data: [30, 50, 89.5, 22, 48],
   },
   {
-    data: [68, 62, 101, 2.1, 38],
+    data: [60, 32, 38, 44, 12],
     backgroundColor: getThemeColorHexString('secondary-tint'),
-  },
-  {
-    data: [125, 28, 32, 20, 69],
-    backgroundColor: getThemeColorHexString('secondary-shade'),
   },
 ];
 `,
@@ -45,12 +45,12 @@ export class ChartWipExampleMultipleDatasetsComponent {
       data: [30, 50, 89.5, 22, 48],
     },
     {
-      data: [68, 62, 101, 2.1, 38],
+      data: [60, 32, 38, 44, 12],
       backgroundColor: getThemeColorHexString('secondary-tint'),
     },
     {
-      data: [125, 28, 32, 20, 69],
-      backgroundColor: getThemeColorHexString('secondary-shade'),
+      type: 'line',
+      data: [45, 65, 105, 37, 70],
     },
   ];
 }
