@@ -22,20 +22,13 @@
 <kirby-divider [hasMargin]="true"></kirby-divider>
 
 <h2>Types of Charts</h2>
-<p>
-  The type of a <code>kirby-chart</code> is set through the <code>type</code> input property. This
-  can be done either by supplying the type using the <code>ChartType</code> enumerator or as a
-  string value.
-</p>
+<p>The type of a <code>kirby-chart</code> is set through the <code>type</code> input property.</p>
 
 <h3>Column Chart</h3>
 <p>
   The column chart visualizes data from different categories as rectangles.
 </p>
-<p>
-  To render a column chart set <code>type</code> to either: <code>ChartType.column</code> or
-  <code>'column'</code>.
-</p>
+<p>To render a column chart set <code>type</code> to <code>"column"</code>.</p>
 <p>
   <kirby-card [mode]="_cardMode" [hasPadding]="_cardHasPadding">
     <cookbook-example-viewer [html]="columnExample.template">
@@ -48,10 +41,7 @@
 <p>
   The bar chart visualizes data from different categories as rectangles along the x-axis.
 </p>
-<p>
-  To render a bar chart set <code>type</code> to either: <code>ChartType.bar</code> or
-  <code>'bar'</code>.
-</p>
+<p>To render a bar chart set <code>type</code> to <code>'bar'</code>.</p>
 <p>
   <kirby-card [mode]="_cardMode" [hasPadding]="_cardHasPadding">
     <cookbook-example-viewer [html]="barExample.template">

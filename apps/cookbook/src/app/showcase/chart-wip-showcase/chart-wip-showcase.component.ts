@@ -16,8 +16,8 @@ export class ChartWipShowcaseComponent {
     {
       name: 'type',
       description: 'Controls the type which the chart should be displayed as.',
-      type: ['ChartType', '"column"', '"bar"'],
-      defaultValue: 'ChartType.column',
+      type: ['"column"', '"bar"'],
+      defaultValue: 'column',
     },
     {
       name: 'data',
