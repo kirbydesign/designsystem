@@ -31,7 +31,7 @@
     --kirby-page-max-width: 100%;
   }
 
-  // Generic reset
+  // Generic reset (Be careful)
   *,
   *::before,
   *::after {
@@ -60,6 +60,7 @@
   }
 
   // Specific to host project
+  // Alternative: Expose a .kirby-no-print utility
   nav,
   .menu-button,
   .show-case-actions,
@@ -75,7 +76,7 @@
     height: 2cm !important;
   }
 
-  // Optional (all table styles)
+  // Table styles (optional)
   table {
     --table-border-width: 2pt;
     --table-border-color: #000;
@@ -101,7 +102,6 @@
 
   th,
   td {
-    // border: var(--table-border-width) solid #000 !important;
     border: none !important;
   }
 
@@ -176,7 +176,6 @@
   ion-tab-bar {
     display: none !important;
   }
-
   // ---------------------------------------------------------------------------
 
   // Virtual scroll ------------------------------------------------------------
@@ -189,6 +188,7 @@
   // Lists
   // Margins
   // No-print utility class
+  // Typography (Display, headings, paragraphs etc.)
 }
 
 @function get-drawer-additional-padding-top() {
