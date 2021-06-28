@@ -3,7 +3,6 @@ import { Chart } from 'chart.js';
 
 import { ColorHelper } from '../../../helpers';
 import { CHART_TYPE_CONFIGS } from '../chart-wip.configs';
-import { ChartType } from '../chart-wip.types';
 
 import { ChartJSService } from './chart-js.service';
 import { GLOBAL_DEFAULTS } from './configured-chart-js';
@@ -23,12 +22,7 @@ describe('ChartJSService', () => {
       it('should render a new chart', () => {
         expect(chartJSService['chart']).toBeUndefined();
 
-        chartJSService.renderChart(
-          canvasElement,
-          ChartType.bar,
-          [1, 2, 3],
-          ['one', 'two', 'three']
-        );
+        chartJSService.renderChart(canvasElement, 'bar', [1, 2, 3], ['one', 'two', 'three']);
 
         expect(chartJSService['chart']).toBeInstanceOf(Chart);
       });
@@ -36,7 +30,7 @@ describe('ChartJSService', () => {
       it('should use the supplied data in the chart', () => {
         const data = [1, 2, 3];
 
-        chartJSService.renderChart(canvasElement, ChartType.bar, data, ['one', 'two', 'three']);
+        chartJSService.renderChart(canvasElement, 'bar', data, ['one', 'two', 'three']);
 
         const chart = chartJSService['chart'];
         expect(chart.data.datasets[0].data).toEqual(data);
@@ -49,7 +43,7 @@ describe('ChartJSService', () => {
 
         chartJSService.renderChart(
           canvasElement,
-          ChartType.bar,
+          'bar',
           [{ data: [1, 2, 3] }],
           ['one', 'two', 'three']
         );
@@ -63,12 +57,7 @@ describe('ChartJSService', () => {
           data: data,
         };
 
-        chartJSService.renderChart(
-          canvasElement,
-          ChartType.bar,
-          [dataset],
-          ['one', 'two', 'three']
-        );
+        chartJSService.renderChart(canvasElement, 'bar', [dataset], ['one', 'two', 'three']);
 
         const chart = chartJSService['chart'];
         expect(chart.data.datasets[0].data).toEqual(data);
@@ -85,11 +74,7 @@ describe('ChartJSService', () => {
             { data: data2 },
           ];
 
-          chartJSService.renderChart(canvasElement, ChartType.bar, datasets, [
-            'one',
-            'two',
-            'three',
-          ]);
+          chartJSService.renderChart(canvasElement, 'bar', datasets, ['one', 'two', 'three']);
 
           const chart = chartJSService['chart'];
           expect(chart.data.datasets[0].data).toEqual(data1);
@@ -102,12 +87,7 @@ describe('ChartJSService', () => {
       let chart: Chart;
 
       beforeEach(() => {
-        chartJSService.renderChart(
-          canvasElement,
-          ChartType.column,
-          [1, 2, 3],
-          ['one', 'two', 'three']
-        );
+        chartJSService.renderChart(canvasElement, 'column', [1, 2, 3], ['one', 'two', 'three']);
         chart = chartJSService['chart'];
       });
 
@@ -136,7 +116,7 @@ describe('ChartJSService', () => {
 
     describe('when no data labels are provided', () => {
       it('should have a blank label for each data point', () => {
-        chartJSService.renderChart(canvasElement, ChartType.column, [1, 2, 3]);
+        chartJSService.renderChart(canvasElement, 'column', [1, 2, 3]);
 
         const chartDataLabels = chartJSService['chart'].data.labels;
         expect(chartDataLabels.length).toEqual(3);
@@ -150,12 +130,7 @@ describe('ChartJSService', () => {
       let chart: Chart;
 
       beforeEach(() => {
-        chartJSService.renderChart(
-          canvasElement,
-          ChartType.bar,
-          [1, 2, 3],
-          ['one', 'two', 'three']
-        );
+        chartJSService.renderChart(canvasElement, 'bar', [1, 2, 3], ['one', 'two', 'three']);
         chart = chartJSService['chart'];
       });
 
@@ -188,19 +163,13 @@ describe('ChartJSService', () => {
         expect(GLOBAL_DEFAULTS.elements.bar.backgroundColor).not.toBeUndefined();
         const customElementBackgroundColor = '#ffffff';
 
-        chartJSService.renderChart(
-          canvasElement,
-          ChartType.bar,
-          [1, 2, 3],
-          ['one', 'two', 'three'],
-          {
-            elements: {
-              bar: {
-                backgroundColor: customElementBackgroundColor,
-              },
+        chartJSService.renderChart(canvasElement, 'bar', [1, 2, 3], ['one', 'two', 'three'], {
+          elements: {
+            bar: {
+              backgroundColor: customElementBackgroundColor,
             },
-          }
-        );
+          },
+        });
 
         const chart = chartJSService['chart'];
         expect(chart.options.elements.bar.backgroundColor).toEqual(customElementBackgroundColor);
@@ -208,20 +177,14 @@ describe('ChartJSService', () => {
 
       it('should overwrite type specific options', () => {
         // Check if a type config is actually being overwritten
-        const type = ChartType.bar;
+        const type = 'bar';
         const customIndexAxis = 'x';
         expect(CHART_TYPE_CONFIGS[type].options.indexAxis).not.toBeUndefined();
         expect(CHART_TYPE_CONFIGS[type].options.indexAxis).not.toEqual(customIndexAxis);
 
-        chartJSService.renderChart(
-          canvasElement,
-          ChartType.bar,
-          [1, 2, 3],
-          ['one', 'two', 'three'],
-          {
-            indexAxis: customIndexAxis,
-          }
-        );
+        chartJSService.renderChart(canvasElement, 'bar', [1, 2, 3], ['one', 'two', 'three'], {
+          indexAxis: customIndexAxis,
+        });
 
         const chart = chartJSService['chart'];
         expect(chart.options.indexAxis).toEqual(customIndexAxis);
@@ -231,7 +194,7 @@ describe('ChartJSService', () => {
 
   describe('function: redrawChart', () => {
     beforeEach(() => {
-      chartJSService.renderChart(canvasElement, ChartType.bar, [1, 2, 3], ['one', 'two', 'three']);
+      chartJSService.renderChart(canvasElement, 'bar', [1, 2, 3], ['one', 'two', 'three']);
     });
 
     it('should update the chart', () => {
@@ -255,7 +218,7 @@ describe('ChartJSService', () => {
     let chart: Chart;
 
     beforeEach(() => {
-      chartJSService.renderChart(canvasElement, ChartType.bar, [1, 2, 3], ['one', 'two', 'three']);
+      chartJSService.renderChart(canvasElement, 'bar', [1, 2, 3], ['one', 'two', 'three']);
       chart = chartJSService['chart'];
     });
 
@@ -307,7 +270,7 @@ describe('ChartJSService', () => {
     let chart: Chart;
 
     beforeEach(() => {
-      chartJSService.renderChart(canvasElement, ChartType.bar, [1, 2, 3], ['one', 'two', 'three']);
+      chartJSService.renderChart(canvasElement, 'bar', [1, 2, 3], ['one', 'two', 'three']);
       chart = chartJSService['chart'];
     });
 
@@ -323,14 +286,14 @@ describe('ChartJSService', () => {
 
   describe('function: updateType', () => {
     beforeEach(() => {
-      chartJSService.renderChart(canvasElement, ChartType.bar, [1, 2, 3], ['one', 'two', 'three']);
+      chartJSService.renderChart(canvasElement, 'bar', [1, 2, 3], ['one', 'two', 'three']);
     });
 
     describe('if the new type is ChartType.bar', () => {
       it('should destructively update the type', () => {
         const destructivelyUpdateTypeSpy = spyOn<any>(chartJSService, 'destructivelyUpdateType');
 
-        chartJSService.updateType(ChartType.bar, {});
+        chartJSService.updateType('bar', {});
 
         expect(destructivelyUpdateTypeSpy).toHaveBeenCalledTimes(1);
       });
@@ -340,7 +303,7 @@ describe('ChartJSService', () => {
       it('should destructively update the type', () => {
         const destructivelyUpdateTypeSpy = spyOn<any>(chartJSService, 'destructivelyUpdateType');
 
-        chartJSService.updateType(ChartType.column, {});
+        chartJSService.updateType('column', {});
 
         expect(destructivelyUpdateTypeSpy).toHaveBeenCalledTimes(1);
       });
@@ -351,14 +314,14 @@ describe('ChartJSService', () => {
     let chart: Chart;
 
     beforeEach(() => {
-      chartJSService.renderChart(canvasElement, ChartType.bar, [1, 2, 3], ['one', 'two', 'three']);
+      chartJSService.renderChart(canvasElement, 'bar', [1, 2, 3], ['one', 'two', 'three']);
       chart = chartJSService['chart'];
     });
 
     it('should replace the old chart element', () => {
       const oldChartId = chart.id;
 
-      chartJSService['destructivelyUpdateType'](ChartType.bar);
+      chartJSService['destructivelyUpdateType']('bar');
 
       expect(chartJSService['chart'].id).not.toEqual(oldChartId);
     });
@@ -366,7 +329,7 @@ describe('ChartJSService', () => {
     it('should preserve the original data', () => {
       const oldDatasets = chart.data.datasets;
 
-      chartJSService['destructivelyUpdateType'](ChartType.bar);
+      chartJSService['destructivelyUpdateType']('bar');
 
       expect(chartJSService['chart'].data.datasets).toEqual(oldDatasets);
     });
@@ -374,14 +337,14 @@ describe('ChartJSService', () => {
     it('should preserve the original dataLabels', () => {
       const oldDatalabels = chart.data.labels;
 
-      chartJSService['destructivelyUpdateType'](ChartType.bar);
+      chartJSService['destructivelyUpdateType']('bar');
 
       expect(chartJSService['chart'].data.labels).toEqual(oldDatalabels);
     });
   });
 
   describe('function: updateOptions', () => {
-    const chartType = ChartType.bar;
+    const chartType = 'bar';
 
     beforeEach(() => {
       chartJSService.renderChart(canvasElement, chartType, [1, 2, 3], ['one', 'two', 'three'], {

@@ -1,10 +1,6 @@
 import { ChartDataset as ChartJSDataset } from 'chart.js';
 
-export enum ChartType {
-  column = 'column',
-  bar = 'bar',
-}
-
+export type ChartType = 'column' | 'bar';
 export type ChartDataset = ChartJSDataset<'bar'>;
 export type ChartData = ChartDataset[] | number[];
 

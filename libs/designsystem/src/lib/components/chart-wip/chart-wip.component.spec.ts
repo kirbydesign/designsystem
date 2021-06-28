@@ -3,7 +3,6 @@ import { MockProvider } from 'ng-mocks';
 
 import { ChartJSService } from './chart-js/chart-js.service';
 import { ChartWipComponent } from './chart-wip.component';
-import { ChartType } from './chart-wip.types';
 
 describe('ChartWipComponent', () => {
   let spectator: Spectator<ChartWipComponent>;
@@ -79,7 +78,7 @@ describe('ChartWipComponent', () => {
       },
       data: { updateFn: 'updateData', newValue: [1, 2, 3] },
       dataLabels: { updateFn: 'updateDataLabels', newValue: ['one', 'two', 'three'] },
-      type: { updateFn: 'updateType', newValue: ChartType.bar },
+      type: { updateFn: 'updateType', newValue: 'bar' },
     };
 
     Object.entries(scenarios).forEach(([property, { updateFn, newValue }]) => {
@@ -114,7 +113,7 @@ describe('ChartWipComponent', () => {
         spectator.setInput({
           data: [1, 2, 3],
           dataLabels: ['one', 'two', 'three'],
-          type: ChartType.bar,
+          type: 'bar',
           customOptions: { onClick: () => console.log('testing') },
         });
 
@@ -129,7 +128,7 @@ describe('ChartWipComponent', () => {
         spectator.setInput({
           data: [1, 2, 3],
           dataLabels: ['one', 'two', 'three'],
-          type: ChartType.bar,
+          type: 'bar',
           customOptions: { onClick: () => console.log('testing') },
         });
 
@@ -140,7 +139,7 @@ describe('ChartWipComponent', () => {
 
   describe('when "type" is not provided', () => {
     it('should default to correct type', () => {
-      expect(component.type).toBe(ChartType.column);
+      expect(component.type).toBe('column');
     });
   });
 });

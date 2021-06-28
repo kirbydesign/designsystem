@@ -20,7 +20,7 @@ import { ChartData, ChartType } from './chart-wip.types';
   providers: [ChartJSService],
 })
 export class ChartWipComponent implements AfterViewInit, OnChanges {
-  @Input() type: ChartType = ChartType.column;
+  @Input() type: ChartType = 'column';
   @Input() data: ChartData;
   @Input() dataLabels?: string[] | string[][];
   @Input() customOptions?: ChartOptions;

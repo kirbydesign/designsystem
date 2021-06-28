@@ -37,7 +37,7 @@ export class ChartJSService {
   }
 
   public updateType(type: ChartType, customOptions?: ChartOptions) {
-    if (type === ChartType.bar || type === ChartType.column) {
+    if (type === 'bar' || type === 'column') {
       /* indexAxis does not update predictably; update by replacing the 
       chart entirely instead */
       this.destructivelyUpdateType(type, customOptions);
