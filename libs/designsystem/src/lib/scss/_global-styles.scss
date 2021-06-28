@@ -24,6 +24,54 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+// Generic base print styles
+// (copied from Watchmedier's sites)
+// TODO: Walk through them - clean up - add !important
+@media print {
+  @page {
+    margin: 2.54cm;
+    orphans: 4;
+    widows: 3;
+  }
+
+  *,
+  :after,
+  :before {
+    color: #000;
+    background-color: transparent;
+  }
+
+  html {
+    font-size: 11pt !important;
+    line-height: 1.4 !important;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    page-break-after: avoid;
+  }
+
+  blockquote,
+  figure,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  img,
+  ol,
+  p,
+  table,
+  ul {
+    page-break-inside: avoid;
+  }
+}
+
 @media print {
   // Generic
   :root {
