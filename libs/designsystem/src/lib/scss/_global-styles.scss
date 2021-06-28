@@ -86,7 +86,7 @@
     color: initial !important;
     --background: initial !important;
     background-color: initial !important;
-    font-size: revert !important;
+    font-size: inherit !important; // TODO: Maybe not use this reset
     box-shadow: none !important;
     width: auto !important;
     max-width: none !important;
