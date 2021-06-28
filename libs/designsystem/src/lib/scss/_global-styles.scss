@@ -238,6 +238,14 @@
   // Margins
   // No-print utility class
   // Typography (Display, headings, paragraphs etc.)
+
+  // Typography ----------------------------------------------------------------
+  pre {
+    font-size: 9pt !important;
+    width: max-content !important;
+    margin: auto !important;
+  }
+  // ---------------------------------------------------------------------------
 }
 
 @function get-drawer-additional-padding-top() {
