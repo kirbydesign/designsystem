@@ -32,11 +32,7 @@ import {
 import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
 import { GroupByPipe } from './pipes/group-by.pipe';
 
-export enum ListShape {
-  square = 'square',
-  rounded = 'rounded',
-  none = 'none',
-}
+export type ListShape = 'square' | 'rounded' | 'none';
 
 const INTERVAL = 400;
 @Component({
@@ -71,16 +67,16 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
    *
    * `square` means **without** rounded corners, `rounded` means **with** rounded corners.,  `none` means **without** padding, border, box-shadow and background.
    */
-  @Input() shape: ListShape = ListShape.rounded;
+  @Input() shape: ListShape = 'rounded';
 
   @HostBinding('class.shape-rounded')
   public get isShapeRounded(): boolean {
-    return this.shape === ListShape.rounded;
+    return this.shape === 'rounded';
   }
 
   @HostBinding('class.shape-none')
   public get isShapeNone(): boolean {
-    return this.shape === ListShape.none;
+    return this.shape === 'none';
   }
 
   @HostBinding('class.item-spacing')
