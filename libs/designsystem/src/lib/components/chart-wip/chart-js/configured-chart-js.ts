@@ -12,6 +12,7 @@ import {
 import annotationPlugin from 'chartjs-plugin-annotation';
 
 import { ColorHelper, DesignTokenHelper } from '../../../helpers';
+
 const { fontSize } = DesignTokenHelper;
 const { getThemeColorHexString } = ColorHelper;
 

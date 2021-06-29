@@ -4,7 +4,7 @@ import { MockProvider } from 'ng-mocks';
 import { ChartJSService } from './chart-js/chart-js.service';
 import { ChartWipComponent } from './chart-wip.component';
 
-fdescribe('ChartWipComponent', () => {
+describe('ChartWipComponent', () => {
   let spectator: Spectator<ChartWipComponent>;
   let component: ChartWipComponent;
   const createComponent = createComponentFactory({

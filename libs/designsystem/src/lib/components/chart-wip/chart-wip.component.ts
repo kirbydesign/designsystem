@@ -25,7 +25,7 @@ export class ChartWipComponent implements AfterViewInit, OnChanges {
   @Input() data: ChartData;
   @Input() dataLabels?: string[] | string[][];
   @Input() customOptions?: ChartOptions;
-  @Input() customAnnotations?: AnnotationOptions;
+  @Input() customAnnotations: AnnotationOptions[];
 
   @HostBinding('style.--kirby-chart-height')
   _height: string;
@@ -54,6 +54,7 @@ export class ChartWipComponent implements AfterViewInit, OnChanges {
     };
 
     Object.entries(simpleChanges).forEach(([key]) => {
+      console.log(key);
       if (simpleChanges[key].firstChange || !keyUpdateFnPairs[key]) return;
       shouldRedrawChart = true;
       keyUpdateFnPairs[key]();
@@ -68,7 +69,8 @@ export class ChartWipComponent implements AfterViewInit, OnChanges {
       this.type,
       this.data,
       this.dataLabels,
-      this.customOptions
+      this.customOptions,
+      this.customAnnotations
     );
   }
 
@@ -81,11 +83,11 @@ export class ChartWipComponent implements AfterViewInit, OnChanges {
   }
 
   private updateType() {
-    this.chartJSService.updateType(this.type, this.customOptions);
+    this.chartJSService.updateType(this.type, this.customOptions, this.customAnnotations);
   }
 
   private updateCustomOptions() {
-    this.chartJSService.updateOptions(this.customOptions, this.type);
+    this.chartJSService.updateOptions(this.customOptions, this.type, this.customAnnotations);
   }
 
   private updateCustomAnnotations() {

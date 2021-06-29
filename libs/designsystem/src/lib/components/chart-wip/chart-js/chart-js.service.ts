@@ -16,10 +16,11 @@ export class ChartJSService {
     type: ChartType,
     data: ChartData,
     dataLabels?: string[] | string[][],
-    customOptions?: ChartOptions
+    customOptions?: ChartOptions,
+    customAnnotations?: AnnotationOptions[]
   ): void {
     const datasets = this.createDatasets(data);
-    const options = this.getOptions(type, customOptions);
+    const options = this.getOptions(type, customOptions, customAnnotations);
     const config = this.getConfig(type, datasets, options, dataLabels);
     this.initializeNewChart(targetElement.nativeElement, config);
   }
@@ -37,27 +38,39 @@ export class ChartJSService {
     this.chart.data.labels = dataLabels;
   }
 
-  public updateType(type: ChartType, customOptions?: ChartOptions) {
+  public updateType(
+    type: ChartType,
+    customOptions?: ChartOptions,
+    customAnnotations?: AnnotationOptions[]
+  ) {
     if (type === 'bar' || type === 'column') {
       /* indexAxis does not update predictably; update by replacing the 
       chart entirely instead */
-      this.destructivelyUpdateType(type, customOptions);
+      this.destructivelyUpdateType(type, customOptions, customAnnotations);
     }
   }
 
-  public updateOptions(customOptions: ChartOptions, type: ChartType) {
-    this.chart.options = this.getOptions(type, customOptions);
+  public updateOptions(
+    customOptions: ChartOptions,
+    type: ChartType,
+    customAnnotations?: AnnotationOptions[]
+  ) {
+    this.chart.options = this.getOptions(type, customOptions, customAnnotations);
   }
 
-  public updateAnnotations(annotationOptions: AnnotationOptions) {
-    this.chart.options.plugins.annotation = annotationOptions;
+  public updateAnnotations(annotationOptions: AnnotationOptions[]) {
+    this.chart.options.plugins.annotation.annotations = annotationOptions;
   }
 
-  private destructivelyUpdateType(type: ChartType, customOptions?: ChartOptions) {
+  private destructivelyUpdateType(
+    type: ChartType,
+    customOptions?: ChartOptions,
+    customAnnotations?: AnnotationOptions[]
+  ) {
     const datasets = this.chart.data.datasets as ChartDataset[];
     const dataLabels = this.chart.data.labels;
 
-    const options = this.getOptions(type, customOptions);
+    const options = this.getOptions(type, customOptions, customAnnotations);
     const config = this.getConfig(type, datasets, options, dataLabels);
     const canvasElement = this.chart.canvas;
 
@@ -76,13 +89,25 @@ export class ChartJSService {
     return deepCopy(CHART_TYPE_CONFIGS[type]);
   }
 
-  private getOptions(type: ChartType, customOptions?: ChartOptions): ChartOptions {
+  private getOptions(
+    type: ChartType,
+    customOptions?: ChartOptions,
+    customAnnotations?: AnnotationOptions[]
+  ): ChartOptions {
     const typeConfig = this.getTypeConfig(type);
     const typeConfigOptions = typeConfig['options'];
-    return {
+
+    const options = {
       ...typeConfigOptions,
       ...customOptions,
     };
+
+    if (customAnnotations) {
+      const pluginOptions = { plugins: { annotation: { annotations: customAnnotations } } };
+      Object.assign(options, pluginOptions);
+    }
+
+    return options;
   }
 
   private createBlankLabels(datasets: ChartDataset[]): string[] {
