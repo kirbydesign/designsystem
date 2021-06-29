@@ -1,5 +1,6 @@
 import { ElementRef, Injectable } from '@angular/core';
 import { ChartConfiguration, ChartOptions } from 'chart.js';
+import { AnnotationOptions } from 'chartjs-plugin-annotation';
 
 import { CHART_TYPE_CONFIGS } from '../chart-wip.configs';
 import { ChartData, ChartDataset, ChartType, isNumberArray } from '../chart-wip.types';
@@ -46,6 +47,10 @@ export class ChartJSService {
 
   public updateOptions(customOptions: ChartOptions, type: ChartType) {
     this.chart.options = this.getOptions(type, customOptions);
+  }
+
+  public updateAnnotations(annotationOptions: AnnotationOptions) {
+    this.chart.options.plugins.annotation = annotationOptions;
   }
 
   private destructivelyUpdateType(type: ChartType, customOptions?: ChartOptions) {

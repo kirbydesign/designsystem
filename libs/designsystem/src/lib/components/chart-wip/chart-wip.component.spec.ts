@@ -4,7 +4,7 @@ import { MockProvider } from 'ng-mocks';
 import { ChartJSService } from './chart-js/chart-js.service';
 import { ChartWipComponent } from './chart-wip.component';
 
-describe('ChartWipComponent', () => {
+fdescribe('ChartWipComponent', () => {
   let spectator: Spectator<ChartWipComponent>;
   let component: ChartWipComponent;
   const createComponent = createComponentFactory({
@@ -79,6 +79,7 @@ describe('ChartWipComponent', () => {
       data: { updateFn: 'updateData', newValue: [1, 2, 3] },
       dataLabels: { updateFn: 'updateDataLabels', newValue: ['one', 'two', 'three'] },
       type: { updateFn: 'updateType', newValue: 'bar' },
+      customAnnotations: { updateFn: 'updateCustomAnnotations', newValue: {} },
     };
 
     Object.entries(scenarios).forEach(([property, { updateFn, newValue }]) => {

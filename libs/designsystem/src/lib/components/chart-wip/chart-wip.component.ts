@@ -9,6 +9,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { ChartOptions } from 'chart.js';
+import { AnnotationOptions } from 'chartjs-plugin-annotation';
 
 import { ChartJSService } from './chart-js/chart-js.service';
 import { ChartData, ChartType } from './chart-wip.types';
@@ -24,6 +25,7 @@ export class ChartWipComponent implements AfterViewInit, OnChanges {
   @Input() data: ChartData;
   @Input() dataLabels?: string[] | string[][];
   @Input() customOptions?: ChartOptions;
+  @Input() customAnnotations?: AnnotationOptions;
 
   @HostBinding('style.--kirby-chart-height')
   _height: string;
@@ -48,6 +50,7 @@ export class ChartWipComponent implements AfterViewInit, OnChanges {
       dataLabels: () => this.updateDataLabels(),
       type: () => this.updateType(),
       customOptions: () => this.updateCustomOptions(),
+      customAnnotations: () => this.updateCustomAnnotations(),
     };
 
     Object.entries(simpleChanges).forEach(([key]) => {
@@ -83,6 +86,10 @@ export class ChartWipComponent implements AfterViewInit, OnChanges {
 
   private updateCustomOptions() {
     this.chartJSService.updateOptions(this.customOptions, this.type);
+  }
+
+  private updateCustomAnnotations() {
+    this.chartJSService.updateAnnotations(this.customAnnotations);
   }
 
   private redrawChart() {
