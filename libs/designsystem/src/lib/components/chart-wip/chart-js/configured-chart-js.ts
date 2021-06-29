@@ -9,21 +9,18 @@ import {
   LineElement,
   PointElement,
 } from 'chart.js';
+import annotationPlugin from 'chartjs-plugin-annotation';
 
 import { ColorHelper, DesignTokenHelper } from '../../../helpers';
 const { fontSize } = DesignTokenHelper;
 const { getThemeColorHexString } = ColorHelper;
 
-Chart.register(
-  BarController,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Legend,
-  LineElement,
-  LineController,
-  PointElement
-);
+const CHART_SCALES = [CategoryScale, LinearScale];
+const CHART_ELEMENTS = [BarElement, LineElement, PointElement];
+const CHART_CONTROLLERS = [BarController, LineController];
+const CHART_PLUGINS = [annotationPlugin];
+
+Chart.register(Legend, ...CHART_SCALES, ...CHART_ELEMENTS, ...CHART_CONTROLLERS, ...CHART_PLUGINS);
 
 // Global Defaults must be after register
 export const GLOBAL_DEFAULTS = {
@@ -67,6 +64,7 @@ export const GLOBAL_DEFAULTS = {
     },
   },
 };
+
 // Chart.defaults is read-only hence set each property seperately
 Chart.defaults.plugins = GLOBAL_DEFAULTS.plugins;
 Chart.defaults.scales = GLOBAL_DEFAULTS.scales;
