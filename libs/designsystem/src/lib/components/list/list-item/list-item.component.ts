@@ -109,9 +109,9 @@ export class ListItemComponent implements OnInit, AfterViewInit {
 
   _getSwipeActionEnd(item: any): ListSwipeEnd {
     if (this._getSwipeActions(item, 'left').length) {
-      return ListSwipeEnd.start;
+      return 'start';
     }
-    return ListSwipeEnd.end;
+    return 'end';
   }
 
   _getSwipeActionIcon(swipeAction: ListSwipeAction, item: any): string {
