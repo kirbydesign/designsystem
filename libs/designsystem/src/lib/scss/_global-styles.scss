@@ -52,6 +52,7 @@
   h4,
   h5,
   h6 {
+    // TODO: Update to break-after
     page-break-after: avoid;
   }
 
@@ -67,7 +68,10 @@
   ol,
   p,
   table,
-  ul {
+  ul,
+  // TODO: Generic base "page" print styles for ion- and kirby- components
+  ion-item-group {
+    // TODO: Update to break-inside
     page-break-inside: avoid;
   }
 }
