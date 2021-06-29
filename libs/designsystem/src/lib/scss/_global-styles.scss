@@ -129,6 +129,14 @@
     height: 2cm !important;
   }
 
+  // Generic or local?
+  // Remove inline padding
+  ion-item::part(native),
+  ion-item-divider {
+    padding-inline-start: initial !important;
+    padding-inline-end: initial !important;
+  }
+
   // Table styles (optional)
   table {
     --table-border-width: 2pt;
