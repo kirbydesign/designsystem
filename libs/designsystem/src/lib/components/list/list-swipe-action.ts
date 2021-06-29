@@ -1,2 +1,2 @@
-/* Re-export for backwards compatability */
+/* Re-export for backwards compatibility */
 export { ListSwipeAction } from './list-swipe-action.type';
