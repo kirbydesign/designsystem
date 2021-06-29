@@ -1,8 +1,4 @@
-export enum ListSwipeActionType {
-  success = 'success',
-  warning = 'warning',
-  danger = 'danger',
-}
+export type ListSwipeActionType = 'success' | 'warning' | 'danger';
 
 export type ListSwipeDirection = 'right' | 'left';
 
