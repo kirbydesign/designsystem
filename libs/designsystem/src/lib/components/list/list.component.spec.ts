@@ -9,7 +9,7 @@ import { SpinnerComponent } from '../spinner/spinner.component';
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 import { ListItemColorDirective } from './directives/list-item-color.directive';
 import { ListHelper } from './helpers/list-helper';
-import { BoundaryClass, ListItemComponent } from './list-item/list-item.component';
+import { ListItemComponent } from './list-item/list-item.component';
 import { ListComponent } from './list.component';
 import { LoadOnDemandEvent } from './list.event';
 import { GroupByPipe } from './pipes/group-by.pipe';
@@ -228,8 +228,8 @@ describe('ListComponent', () => {
       const first = component._getBoundaryClass(0);
       const last = component._getBoundaryClass(TEST_ITEMS.length - 1);
 
-      expect(first).toEqual(BoundaryClass.first);
-      expect(last).toEqual(BoundaryClass.last);
+      expect(first).toEqual('first');
+      expect(last).toEqual('last');
     });
 
     describe('with sections', () => {
@@ -286,10 +286,10 @@ describe('ListComponent', () => {
         const section2first = component._getBoundaryClass(4);
         const section2last = component._getBoundaryClass(5);
 
-        expect(section1first).toEqual(BoundaryClass.first);
-        expect(section2first).toEqual(BoundaryClass.first);
-        expect(section1last).toEqual(BoundaryClass.last);
-        expect(section2last).toEqual(BoundaryClass.last);
+        expect(section1first).toEqual('first');
+        expect(section2first).toEqual('first');
+        expect(section1last).toEqual('last');
+        expect(section2last).toEqual('last');
       });
     });
   });

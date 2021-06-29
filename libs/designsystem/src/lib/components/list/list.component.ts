@@ -242,10 +242,9 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
       _items = this._virtualGroupedItems;
     }
 
-    if (index === 0 || _items[index - 1]?.headingName)
-      return this.headerTemplate ? null : BoundaryClass.first;
+    if (index === 0 || _items[index - 1]?.headingName) return this.headerTemplate ? null : 'first';
 
     if (index === _items.length - 1 || _items[index + 1]?.headingName)
-      return this.footerTemplate ? null : BoundaryClass.last;
+      return this.footerTemplate ? null : 'last';
   }
 }
