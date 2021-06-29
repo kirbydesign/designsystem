@@ -216,6 +216,22 @@ export const routes: Routes = [
         ],
       },
       {
+        path: 'modal-route-with-url-param/:id',
+        component: ModalExampleComponent,
+        children: [
+          {
+            path: 'page1',
+            outlet: 'modal',
+            component: ModalRoutePage1ExampleComponent,
+          },
+          {
+            path: 'page2',
+            outlet: 'modal',
+            component: ModalRoutePage2ExampleComponent,
+          },
+        ],
+      },
+      {
         path: 'form-field',
         children: [
           {
