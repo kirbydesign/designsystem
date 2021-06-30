@@ -21,12 +21,15 @@ export class KeyboardHandlerService {
           // Select next item:
           newIndex = selectedIndex + 1;
         }
+        break;
       case 'Home':
         // Select first item:
         newIndex = 0;
+        break;
       case 'End':
         // Select last item:
         newIndex = items.length - 1;
+        break;
       default:
         break;
     }
