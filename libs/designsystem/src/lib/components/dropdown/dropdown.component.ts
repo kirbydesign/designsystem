@@ -21,6 +21,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+import { KeyboardHandlerService } from '../../helpers';
 import { CardComponent } from '../card/card.component';
 import { ItemComponent } from '../item/item.component';
 import { ListItemTemplateDirective } from '../list/list.directive';
@@ -193,7 +194,8 @@ export class DropdownComponent
   constructor(
     private renderer: Renderer2,
     private elementRef: ElementRef<HTMLElement>,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    private keyboardHandlerService: KeyboardHandlerService
   ) {}
 
   onToggle(event: Event) {
@@ -475,52 +477,27 @@ export class DropdownComponent
   @HostListener('keydown.arrowleft', ['$event'])
   @HostListener('keydown.arrowright', ['$event'])
   _onArrowKeys(event: KeyboardEvent) {
-    if (this.disabled) {
-      return;
-    }
+    if (this.disabled) return;
     if (this.isOpen && (event.key === 'ArrowLeft' || event.key === 'ArrowRight')) {
       // Mirror default HTML5 select behaviour - prevent left/right arrows when open:
       return;
     }
-    event.preventDefault();
-    let newIndex = -1;
-    if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
-      // Select previous item:
-      newIndex = this.selectedIndex - 1;
-    }
-    if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
-      if (this.selectedIndex === undefined) {
-        // None selected, select first item:
-        newIndex = 0;
-      } else if (this.selectedIndex < this.items.length - 1) {
-        // Select next item:
-        newIndex = this.selectedIndex + 1;
-      }
-    }
+    const newIndex = this.keyboardHandlerService.handle(event, this.items, this.selectedIndex);
     if (newIndex > -1) {
       this.selectItem(newIndex);
     }
+    return false;
   }
 
   @HostListener('keydown.home', ['$event'])
   @HostListener('keydown.end', ['$event'])
   _onHomeEndKeys(event: KeyboardEvent) {
-    event.preventDefault();
-    if (this.disabled) {
-      return;
-    }
-    let newIndex = -1;
-    if (event.key === 'Home') {
-      // Select first item:
-      newIndex = 0;
-    }
-    if (event.key === 'End') {
-      // Select last item:
-      newIndex = this.items.length - 1;
-    }
+    if (this.disabled) return;
+    const newIndex = this.keyboardHandlerService.handle(event, this.items, this.selectedIndex);
     if (newIndex > -1) {
       this.selectItem(newIndex);
     }
+    return false;
   }
 
   ngOnDestroy(): void {
