@@ -15,6 +15,7 @@ import {
   Output,
   QueryList,
   Renderer2,
+  RendererStyleFlags2,
   TemplateRef,
   ViewChild,
   ViewChildren,
@@ -22,19 +23,16 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { KeyboardHandlerService } from '../../helpers';
+import { ButtonComponent } from '../button/button.component';
 import { CardComponent } from '../card/card.component';
 import { ItemComponent } from '../item/item.component';
 import { ListItemTemplateDirective } from '../list/list.directive';
+import { HorizontalDirection, PopoverComponent } from '../popover/popover.component';
 
 export enum OpenState {
   closed,
   opening,
   open,
-}
-
-export enum HorizontalDirection {
-  right = 'right',
-  left = 'left',
 }
 
 enum VerticalDirection {
@@ -123,6 +121,10 @@ export class DropdownComponent
   @Input()
   tabindex = 0;
 
+  @HostBinding('class.with-popover')
+  @Input()
+  usePopover = false;
+
   @HostBinding('attr.tabindex')
   get _tabindex() {
     return this.disabled ? -1 : this.tabindex;
@@ -180,8 +182,12 @@ export class DropdownComponent
   itemTemplate: TemplateRef<any>;
   @ContentChildren(ListItemTemplateDirective, { read: ElementRef })
   slottedItems: QueryList<ElementRef<HTMLElement>>;
-  @ViewChild(CardComponent, { static: true, read: ElementRef })
+  @ViewChild(CardComponent, { static: false, read: ElementRef })
   cardElement: ElementRef<HTMLElement>;
+  @ViewChild(PopoverComponent, { static: false })
+  popover?: PopoverComponent;
+  @ViewChild(ButtonComponent, { static: true, read: ElementRef })
+  buttonElement: ElementRef<HTMLElement>;
   @ViewChildren(ItemComponent, { read: ElementRef })
   kirbyItemsDefault: QueryList<ElementRef<HTMLElement>>;
   @ContentChildren(ItemComponent, { read: ElementRef })
@@ -198,7 +204,7 @@ export class DropdownComponent
     private keyboardHandlerService: KeyboardHandlerService
   ) {}
 
-  onToggle(event: Event) {
+  onToggle(event: MouseEvent) {
     event.stopPropagation();
     if (!this.isOpen) {
       this.elementRef.nativeElement.focus();
@@ -232,10 +238,21 @@ export class DropdownComponent
   }
 
   ngAfterViewInit() {
+    if (this.usePopover && this.expand === 'block') {
+      // TODO: Update width on dropdown resize (e.g. on window resize / orientation change)
+      const width = this.elementRef.nativeElement.getBoundingClientRect().width;
+      this.renderer.setStyle(
+        this.cardElement.nativeElement,
+        '--width',
+        `${width}px`,
+        RendererStyleFlags2.DashCase
+      );
+    }
     this.initializeAlignment();
   }
 
   private initializeAlignment() {
+    if (this.usePopover) return;
     if (!this.intersectionObserverRef) {
       const options = {
         rootMargin: '0px',
@@ -311,6 +328,7 @@ export class DropdownComponent
   private showDropdown() {
     if (this.state === OpenState.opening) {
       this.state = OpenState.open;
+      this.popover?.show();
       this.scrollItemIntoView(this.selectedIndex);
       this.changeDetectorRef.markForCheck();
     }
@@ -324,6 +342,7 @@ export class DropdownComponent
       this.state = OpenState.closed;
       // Reset vertical direction to default
       this.verticalDirection = VerticalDirection.down;
+      this.popover?.hide();
     }
   }
 
@@ -443,15 +462,20 @@ export class DropdownComponent
     }
   }
 
+  _onPopoverWillHide() {
+    this.state = OpenState.closed;
+    this.elementRef.nativeElement.focus();
+  }
+
   @HostListener('keydown.enter')
   @HostListener('keydown.escape')
-  @HostListener('blur')
-  _onBlur() {
-    if (this.disabled) {
-      return;
-    }
+  @HostListener('blur', ['$event'])
+  _onBlur(event?: FocusEvent) {
+    if (this.disabled) return;
     if (this.isOpen) {
-      this.close();
+      if (!this.cardElement.nativeElement.contains(event?.relatedTarget as HTMLElement)) {
+        this.close();
+      }
     }
     this._onTouched();
   }
