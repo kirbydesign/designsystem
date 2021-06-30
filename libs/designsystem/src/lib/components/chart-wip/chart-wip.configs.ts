@@ -38,3 +38,15 @@ export const CHART_TYPE_CONFIGS = {
     },
   },
 };
+
+/* The chart.js annotation does not allow for changing the 
+defaults it comes with. In order to have sensible defaults 
+this object is used instead and manually merged with the 
+rest of the annotations object */
+export const CHART_ANNOTATION_CONFIGS = {
+  line: {
+    borderDash: [5, 5],
+    drawTime: 'beforeDatasetsDraw',
+    borderColor: 'pink',
+  },
+};

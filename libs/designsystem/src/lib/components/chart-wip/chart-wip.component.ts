@@ -54,7 +54,6 @@ export class ChartWipComponent implements AfterViewInit, OnChanges {
     };
 
     Object.entries(simpleChanges).forEach(([key]) => {
-      console.log(key);
       if (simpleChanges[key].firstChange || !keyUpdateFnPairs[key]) return;
       shouldRedrawChart = true;
       keyUpdateFnPairs[key]();

@@ -2,7 +2,7 @@ import { ElementRef, Injectable } from '@angular/core';
 import { ChartConfiguration, ChartOptions } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
 
-import { CHART_TYPE_CONFIGS } from '../chart-wip.configs';
+import { CHART_ANNOTATION_CONFIGS, CHART_TYPE_CONFIGS } from '../chart-wip.configs';
 import { ChartData, ChartDataset, ChartType, isNumberArray } from '../chart-wip.types';
 
 import { Chart } from './configured-chart-js';
@@ -20,8 +20,8 @@ export class ChartJSService {
     customAnnotations?: AnnotationOptions[]
   ): void {
     const datasets = this.createDatasets(data);
-    const options = this.getOptions(type, customOptions, customAnnotations);
-    const config = this.getConfig(type, datasets, options, dataLabels);
+    const options = this.createOptionsObject(type, customOptions, customAnnotations);
+    const config = this.createConfigurationObject(type, datasets, options, dataLabels);
     this.initializeNewChart(targetElement.nativeElement, config);
   }
 
@@ -55,7 +55,7 @@ export class ChartJSService {
     type: ChartType,
     customAnnotations?: AnnotationOptions[]
   ) {
-    this.chart.options = this.getOptions(type, customOptions, customAnnotations);
+    this.chart.options = this.createOptionsObject(type, customOptions, customAnnotations);
   }
 
   public updateAnnotations(annotationOptions: AnnotationOptions[]) {
@@ -70,8 +70,8 @@ export class ChartJSService {
     const datasets = this.chart.data.datasets as ChartDataset[];
     const dataLabels = this.chart.data.labels;
 
-    const options = this.getOptions(type, customOptions, customAnnotations);
-    const config = this.getConfig(type, datasets, options, dataLabels);
+    const options = this.createOptionsObject(type, customOptions, customAnnotations);
+    const config = this.createConfigurationObject(type, datasets, options, dataLabels);
     const canvasElement = this.chart.canvas;
 
     this.chart.destroy();
@@ -89,7 +89,18 @@ export class ChartJSService {
     return deepCopy(CHART_TYPE_CONFIGS[type]);
   }
 
-  private getOptions(
+  private createBlankLabels(datasets: ChartDataset[]): string[] {
+    const largestDataset = datasets.reduce((previousDataset, currentDataset) =>
+      previousDataset.data.length > currentDataset.data.length ? previousDataset : currentDataset
+    );
+    return Array(largestDataset.data.length).fill('');
+  }
+
+  private getAnnotationDefaults(type: string) {
+    return CHART_ANNOTATION_CONFIGS[type];
+  }
+
+  private createOptionsObject(
     type: ChartType,
     customOptions?: ChartOptions,
     customAnnotations?: AnnotationOptions[]
@@ -103,21 +114,26 @@ export class ChartJSService {
     };
 
     if (customAnnotations) {
-      const pluginOptions = { plugins: { annotation: { annotations: customAnnotations } } };
-      Object.assign(options, pluginOptions);
+      const customAnnotationsWithDefaults = customAnnotations.map((customAnnotation) => ({
+        ...this.getAnnotationDefaults(customAnnotation.type),
+        ...customAnnotation,
+      }));
+
+      const pluginOptions = {
+        ...typeConfigOptions?.plugins,
+        ...customOptions?.plugins,
+        annotation: {
+          ...typeConfigOptions?.plugins?.annotation,
+          ...customOptions?.plugins?.annotation,
+          annotations: customAnnotationsWithDefaults,
+        },
+      };
+      options['plugins'] = pluginOptions;
     }
 
     return options;
   }
-
-  private createBlankLabels(datasets: ChartDataset[]): string[] {
-    const largestDataset = datasets.reduce((previousDataset, currentDataset) =>
-      previousDataset.data.length > currentDataset.data.length ? previousDataset : currentDataset
-    );
-    return Array(largestDataset.data.length).fill('');
-  }
-
-  private getConfig(
+  private createConfigurationObject(
     type: ChartType,
     datasets: ChartDataset[],
     options: ChartOptions,
