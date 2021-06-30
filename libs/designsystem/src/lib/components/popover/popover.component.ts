@@ -43,7 +43,7 @@ export class PopoverComponent implements AfterViewInit, OnChanges, OnDestroy {
   private isShowing = false;
 
   @Input()
-  direction: HorizontalDirection = HorizontalDirection.right;
+  popout: HorizontalDirection = HorizontalDirection.right;
 
   @HostListener('click')
   _backdropClick() {
@@ -166,7 +166,7 @@ export class PopoverComponent implements AfterViewInit, OnChanges, OnDestroy {
     const availableSpaceLeft = targetDimensions.right;
     const contentCanRightOfTarget = availableSpaceRight >= contentWidth + this.POPOVER_BODY_PADDING;
     const openRight = contentCanRightOfTarget || availableSpaceRight >= availableSpaceLeft;
-    if (this.direction === HorizontalDirection.left || !openRight) {
+    if (this.popout === HorizontalDirection.left || !openRight) {
       // Open left:
       const rightPxValue = `${viewPortWidth - targetDimensions.right}px`;
       this.renderer.removeStyle(popoverElement, 'left');
