@@ -45,8 +45,9 @@ this object is used instead and manually merged with the
 rest of the annotations object */
 export const CHART_ANNOTATION_CONFIGS = {
   line: {
-    borderDash: [5, 5],
+    borderDash: [6, 3],
+    borderWidth: 1,
     drawTime: 'beforeDatasetsDraw',
-    borderColor: 'pink',
+    borderColor: getThemeColorHexString('semi-dark'),
   },
 };
