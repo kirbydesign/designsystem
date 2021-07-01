@@ -100,38 +100,50 @@ export class ChartJSService {
     return CHART_ANNOTATION_CONFIGS[type];
   }
 
+  private applyDefaultsToAnnotations(annotations: AnnotationOptions[]) {
+    return annotations.map((annotation) => ({
+      ...this.getAnnotationDefaults(annotation.type),
+      ...annotation,
+    }));
+  }
+
+  private createPluginOptionsObject(
+    annotations: AnnotationOptions[],
+    typeConfigPluginOptions: any,
+    customPluginOptions: any
+  ) {
+    if (!annotations) return;
+
+    const annotationsWithDefaults = this.applyDefaultsToAnnotations(annotations);
+    return {
+      ...typeConfigPluginOptions,
+      ...customPluginOptions,
+      annotation: {
+        ...typeConfigPluginOptions?.annotation,
+        ...customPluginOptions?.annotation,
+        annotations: annotationsWithDefaults,
+      },
+    };
+  }
+
   private createOptionsObject(
     type: ChartType,
     customOptions?: ChartOptions,
-    customAnnotations?: AnnotationOptions[]
+    annotations?: AnnotationOptions[]
   ): ChartOptions {
     const typeConfig = this.getTypeConfig(type);
-    const typeConfigOptions = typeConfig['options'];
+    const typeConfigOptions = typeConfig?.options;
+    const pluginOptions = this.createPluginOptionsObject(
+      annotations,
+      typeConfigOptions?.plugins,
+      customOptions?.plugins
+    );
 
-    const options = {
+    return {
       ...typeConfigOptions,
       ...customOptions,
+      plugins: pluginOptions,
     };
-
-    if (customAnnotations) {
-      const customAnnotationsWithDefaults = customAnnotations.map((customAnnotation) => ({
-        ...this.getAnnotationDefaults(customAnnotation.type),
-        ...customAnnotation,
-      }));
-
-      const pluginOptions = {
-        ...typeConfigOptions?.plugins,
-        ...customOptions?.plugins,
-        annotation: {
-          ...typeConfigOptions?.plugins?.annotation,
-          ...customOptions?.plugins?.annotation,
-          annotations: customAnnotationsWithDefaults,
-        },
-      };
-      options['plugins'] = pluginOptions;
-    }
-
-    return options;
   }
   private createConfigurationObject(
     type: ChartType,
@@ -139,30 +151,21 @@ export class ChartJSService {
     options: ChartOptions,
     dataLabels?: unknown[]
   ): ChartConfiguration {
-    const config = {
-      ...this.getTypeConfig(type),
+    /* chartJS requires labels; if none is provided create an empty string array
+    to make it optional for consumer */
+    const labels = !dataLabels ? this.createBlankLabels(datasets) : dataLabels;
+    const typeConfig = this.getTypeConfig(type);
+    return {
+      ...typeConfig,
       data: {
-        /* chartJS requires labels; if none is provided create an empty string array
-      to make it optional for consumer */
-        labels: !dataLabels ? this.createBlankLabels(datasets) : dataLabels,
+        labels,
         datasets,
       },
+      options,
     };
-
-    if (options) {
-      config['options'] = options;
-    }
-
-    return config;
   }
 
   private createDatasets(data: ChartData): ChartDataset[] {
-    if (!isNumberArray(data)) return data;
-
-    return [
-      {
-        data: data,
-      },
-    ];
+    return isNumberArray(data) ? [{ data }] : data;
   }
 }

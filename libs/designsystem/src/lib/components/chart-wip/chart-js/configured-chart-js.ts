@@ -23,6 +23,16 @@ const CHART_PLUGINS = [annotationPlugin];
 
 Chart.register(Legend, ...CHART_SCALES, ...CHART_ELEMENTS, ...CHART_CONTROLLERS, ...CHART_PLUGINS);
 
+//TODO: you were here
+const merge = (target: any, source: any) => {
+  for (const key of Object.keys(source)) {
+    if (source[key] instanceof Object) Object.assign(source[key], merge(target[key], source[key]));
+  }
+
+  Object.assign(target || {}, source);
+  return target;
+};
+
 // Global Defaults must be after register
 export const GLOBAL_DEFAULTS = {
   elements: {
