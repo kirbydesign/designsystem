@@ -1,10 +1,10 @@
 import { ElementRef, Injectable } from '@angular/core';
 import { ChartConfiguration, ChartOptions } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
-import { all as deepMergeAll } from 'deepmerge';
 
 import { CHART_ANNOTATION_CONFIGS, CHART_TYPE_CONFIGS } from '../chart-wip.configs';
 import { ChartData, ChartDataset, ChartType, isNumberArray } from '../chart-wip.types';
+import { deepCopy, deepMergeObjects } from '../utils';
 
 import { Chart } from './configured-chart-js';
 
@@ -86,7 +86,7 @@ export class ChartJSService {
   private getTypeConfig(type: ChartType) {
     /* Deep copy to avoid Chart object modifying parts of CHART_TYPE_CONFIGS 
     as it copies by reference when initialized */
-    const deepCopy = (obj: any) => JSON.parse(JSON.stringify(obj));
+
     return deepCopy(CHART_TYPE_CONFIGS[type]);
   }
 
@@ -104,13 +104,8 @@ export class ChartJSService {
   private applyDefaultsToAnnotations(annotations: AnnotationOptions[]) {
     return annotations.map((annotation) => {
       const annotationTypeDefaults = this.getAnnotationDefaults(annotation.type);
-      return this.deepMergeObjects(annotationTypeDefaults, annotation);
+      return deepMergeObjects(annotationTypeDefaults, annotation);
     });
-  }
-
-  private deepMergeObjects(...objects: any[]) {
-    // Deepmerge will mutate objects; add all updates to blank object
-    return deepMergeAll([{}, ...objects.map((object) => ({ ...object }))]);
   }
 
   private createAnnotationPluginOptionsObject(annotations: AnnotationOptions[]) {
@@ -135,7 +130,7 @@ export class ChartJSService {
       ? this.createAnnotationPluginOptionsObject(annotations)
       : {};
 
-    return this.deepMergeObjects(typeConfigOptions, customOptions, annotationPluginOptions);
+    return deepMergeObjects(typeConfigOptions, customOptions, annotationPluginOptions);
   }
 
   private createConfigurationObject(
