@@ -3,9 +3,9 @@ import { Chart } from 'chart.js';
 
 import { ColorHelper } from '../../../helpers';
 import { CHART_TYPE_CONFIGS } from '../chart-wip.configs';
+import { CHART_GLOBAL_DEFAULTS } from '../chart-wip.configs';
 
 import { ChartJSService } from './chart-js.service';
-import { GLOBAL_DEFAULTS } from './configured-chart-js';
 
 describe('ChartJSService', () => {
   let chartJSService: ChartJSService;
@@ -158,9 +158,9 @@ describe('ChartJSService', () => {
     });
 
     describe('when custom options are given', () => {
-      it('should overwrite options set by global config', () => {
+      it('should overwrite options set by global defaults', () => {
         // Check if a global default is actually being overwritten
-        expect(GLOBAL_DEFAULTS.elements.bar.backgroundColor).not.toBeUndefined();
+        expect(CHART_GLOBAL_DEFAULTS.elements.bar.backgroundColor).not.toBeUndefined();
         const customElementBackgroundColor = '#ffffff';
 
         chartJSService.renderChart(canvasElement, 'bar', [1, 2, 3], ['one', 'two', 'three'], {
@@ -367,9 +367,9 @@ describe('ChartJSService', () => {
       expect(chartJSService['chart'].options.borderColor).toEqual('red');
     });
 
-    it('should overwrite options set by global config', () => {
+    it('should overwrite options set by global defaults', () => {
       // Check if a global default is actually being overwritten
-      expect(GLOBAL_DEFAULTS.elements.bar.backgroundColor).not.toBeUndefined();
+      expect(CHART_GLOBAL_DEFAULTS.elements.bar.backgroundColor).not.toBeUndefined();
       const customElementBackgroundColor = '#ffffff';
 
       chartJSService.updateOptions(

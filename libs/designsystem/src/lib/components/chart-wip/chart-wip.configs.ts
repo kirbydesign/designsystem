@@ -1,8 +1,42 @@
 import { ChartType as ChartJSType } from 'chart.js';
 
-import { ColorHelper } from '../../helpers';
+import { ColorHelper, DesignTokenHelper } from '../../helpers';
 
+const { fontSize } = DesignTokenHelper;
 const { getThemeColorHexString } = ColorHelper;
+
+export const CHART_GLOBAL_DEFAULTS = {
+  maintainAspectRatio: false,
+  elements: {
+    bar: {
+      backgroundColor: getThemeColorHexString('secondary'),
+      hoverBackgroundColor: getThemeColorHexString('primary'),
+    },
+  },
+  scales: {
+    linear: {
+      display: false,
+      ticks: {
+        display: false,
+      },
+    },
+    category: {
+      display: true,
+      grid: {
+        display: false,
+      },
+    },
+  },
+  font: {
+    family: 'Roboto',
+    size: parseInt(fontSize('xs')),
+  },
+  plugins: {
+    legend: {
+      display: false,
+    },
+  },
+};
 
 export const CHART_TYPE_CONFIGS = {
   bar: {
