@@ -1,6 +1,7 @@
 import { ElementRef, Injectable } from '@angular/core';
 import { ChartConfiguration, ChartOptions } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
+import { all as deepMergeAll } from 'deepmerge';
 
 import { CHART_ANNOTATION_CONFIGS, CHART_TYPE_CONFIGS } from '../chart-wip.configs';
 import { ChartData, ChartDataset, ChartType, isNumberArray } from '../chart-wip.types';
@@ -101,27 +102,24 @@ export class ChartJSService {
   }
 
   private applyDefaultsToAnnotations(annotations: AnnotationOptions[]) {
-    return annotations.map((annotation) => ({
-      ...this.getAnnotationDefaults(annotation.type),
-      ...annotation,
-    }));
+    return annotations.map((annotation) => {
+      const annotationTypeDefaults = this.getAnnotationDefaults(annotation.type);
+      return this.deepMergeObjects(annotationTypeDefaults, annotation);
+    });
   }
 
-  private createPluginOptionsObject(
-    annotations: AnnotationOptions[],
-    typeConfigPluginOptions: any,
-    customPluginOptions: any
-  ) {
-    if (!annotations) return;
+  private deepMergeObjects(...objects: any[]) {
+    // Deepmerge will mutate objects; add all updates to blank object
+    return deepMergeAll([{}, ...objects.map((object) => ({ ...object }))]);
+  }
 
+  private createAnnotationPluginOptionsObject(annotations: AnnotationOptions[]) {
     const annotationsWithDefaults = this.applyDefaultsToAnnotations(annotations);
     return {
-      ...typeConfigPluginOptions,
-      ...customPluginOptions,
-      annotation: {
-        ...typeConfigPluginOptions?.annotation,
-        ...customPluginOptions?.annotation,
-        annotations: annotationsWithDefaults,
+      plugins: {
+        annotation: {
+          annotations: annotationsWithDefaults,
+        },
       },
     };
   }
@@ -133,18 +131,13 @@ export class ChartJSService {
   ): ChartOptions {
     const typeConfig = this.getTypeConfig(type);
     const typeConfigOptions = typeConfig?.options;
-    const pluginOptions = this.createPluginOptionsObject(
-      annotations,
-      typeConfigOptions?.plugins,
-      customOptions?.plugins
-    );
+    const annotationPluginOptions = annotations
+      ? this.createAnnotationPluginOptionsObject(annotations)
+      : {};
 
-    return {
-      ...typeConfigOptions,
-      ...customOptions,
-      plugins: pluginOptions,
-    };
+    return this.deepMergeObjects(typeConfigOptions, customOptions, annotationPluginOptions);
   }
+
   private createConfigurationObject(
     type: ChartType,
     datasets: ChartDataset[],
