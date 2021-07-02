@@ -4,6 +4,7 @@
     "outDir": "../../dist/out-tsc",
     "target": "es2015",
     "declaration": true,
+    "inlineSourceMap": true,
     "inlineSources": true,
     "types": [],
     "lib": ["dom", "es2018"]

@@ -2,8 +2,8 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { DesignTokenHelper } from '../../helpers';
 import { TestHelper } from '../../testing/test-helper';
-import { BadgeComponent } from '../badge/badge.component';
 import { ChipComponent } from '../chip/chip.component';
+import { BadgeComponent } from '../index';
 import { SegmentItem } from '../segmented-control/segment-item';
 import {
   SegmentedControlComponent,

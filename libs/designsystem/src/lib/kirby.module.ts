@@ -1,14 +1,21 @@
-import { CommonModule } from '@angular/common';
-import { Inject, InjectionToken, ModuleWithProviders, NgModule, Optional } from '@angular/core';
+import { CommonModule, DOCUMENT } from '@angular/common';
+import {
+  APP_INITIALIZER,
+  Inject,
+  InjectionToken,
+  ModuleWithProviders,
+  NgModule,
+  Optional,
+} from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { UiScrollModule } from 'ngx-ui-scroll';
 
+import { appInitialize } from './app-initialize';
 import { AccordionItemComponent } from './components/accordion/accordion-item.component';
 import { AccordionDirective } from './components/accordion/accordion.directive';
 import { AppModule } from './components/app/app.module';
 import { AvatarComponent } from './components/avatar/avatar.component';
-import { BadgeComponent } from './components/badge/badge.component';
 import { ButtonComponent } from './components/button/button.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { CardFooterComponent } from './components/card/card-footer/card-footer.component';
@@ -49,6 +56,7 @@ import { ModalHelper } from './components/modal/services/modal.helper';
 import { PageModule } from './components/page/page.module';
 import { ProgressCircleRingComponent } from './components/progress-circle/progress-circle-ring.component';
 import { ProgressCircleComponent } from './components/progress-circle/progress-circle.component';
+import { KirbyBadge as BadgeComponent } from './components/proxies';
 import { RadioGroupComponent } from './components/radio/radio-group/radio-group.component';
 import { RadioComponent } from './components/radio/radio.component';
 import { RangeComponent } from './components/range/range.component';
@@ -157,6 +165,12 @@ const providers = [
   {
     provide: WindowRef,
     useValue: window,
+  },
+  {
+    provide: APP_INITIALIZER,
+    useFactory: appInitialize,
+    deps: [DOCUMENT],
+    multi: true,
   },
 ];
 

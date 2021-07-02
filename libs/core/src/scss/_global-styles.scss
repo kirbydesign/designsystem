@@ -1,7 +1,6 @@
-@import '../../../../core/src/scss/utils';
-@import '../../../../core/src/scss/base/ionic';
-@import '../../../../core/src/scss/base/typography';
-@import '../../../../core/src/scss/base/line-clamp';
+@import 'utils';
+@import './base/ionic';
+@import './base/typography';
 
 :root {
   --kirby-font-family: 'Roboto';
@@ -36,10 +35,6 @@
 
 $backdrop-opacity: 0.4;
 
-body.allow-background-scroll {
-  overflow: initial !important;
-}
-
 ion-modal.kirby-overlay {
   position: fixed;
 
@@ -65,7 +60,7 @@ ion-modal.kirby-overlay {
 
   &.kirby-modal {
     box-sizing: border-box;
-    --background: var(--kirby-modal-background, #{get-color('background-color')});
+    --background: #{get-color('background-color')};
     --border-radius: 0;
     --height: auto;
 
@@ -81,12 +76,6 @@ ion-modal.kirby-overlay {
       padding-top: var(--kirby-modal-padding-top);
       align-items: flex-end;
 
-      &.interact-with-background {
-        &.kirby-modal.kirby-drawer {
-          --kirby-modal-padding-top: 0px;
-        }
-      }
-
       .modal-wrapper {
         border-top-left-radius: #{$border-radius};
         border-top-right-radius: #{$border-radius};
@@ -99,7 +88,7 @@ ion-modal.kirby-overlay {
       }
     }
 
-    &:not(.kirby-modal-compact).kirby-modal-full-height {
+    &:not(.kirby-modal-compact).full-height {
       --height: 100%;
     }
 
@@ -134,17 +123,17 @@ ion-modal.kirby-overlay {
           --min-height: #{$modal-default-height};
           align-items: flex-start;
 
-          &.kirby-modal-small {
+          &.small {
             --min-height: #{map-get($modal-heights, 's')};
           }
-          &.kirby-modal-medium {
+          &.medium {
             --min-height: #{map-get($modal-heights, 'm')};
           }
-          &.kirby-modal-large {
+          &.large {
             --min-height: #{map-get($modal-heights, 'l')};
           }
 
-          &.kirby-modal-full-height .modal-wrapper,
+          &.full-height .modal-wrapper,
           .modal-wrapper.full-height {
             border-bottom-left-radius: 0;
             border-bottom-right-radius: 0;
@@ -192,14 +181,6 @@ ion-modal.kirby-overlay {
   }
 }
 
-ion-loading.kirby-loading-overlay {
-  --backdrop-opacity: #{$loading-overlay-backdrop-opacity};
-  --ion-backdrop-color: #{get-color('background-color')};
-  .loading-wrapper {
-    --background: transparent;
-  }
-}
-
 .kirby-toast {
   position: fixed;
   user-select: none;
@@ -233,28 +214,4 @@ ion-loading.kirby-loading-overlay {
   ion-tab-bar {
     z-index: -1;
   }
-}
-
-/*
- * Link-styles (anchor tag with href)
- */
-:link,
-:visited {
-  color: inherit;
-  cursor: pointer;
-  text-decoration: underline;
-}
-
-/*
- * Class to add link-icon to the right of e.g. anchor tag.
- */
-.kirby-external-icon {
-  $icon-scaling-factor: 1.5em;
-  white-space: nowrap;
-  background-image: url('/assets/kirby/icons/svg/link.svg');
-  background-repeat: no-repeat;
-  background-position: right 50%;
-  background-size: $icon-scaling-factor;
-  //place icon to the right of text, with icons own width + the actual spacing
-  padding-right: calc(#{$icon-scaling-factor} + #{size('xxxs')});
 }

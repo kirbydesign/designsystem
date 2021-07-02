@@ -3,5 +3,8 @@
   "rules": {
     "directive-selector": [true, "attribute", "kirby", "camelCase"],
     "component-selector": [true, "element", "kirby", "kebab-case"]
+  },
+  "linterOptions": {
+    "exclude": ["src/lib/components/angular-component-lib/**.*"]
   }
 }

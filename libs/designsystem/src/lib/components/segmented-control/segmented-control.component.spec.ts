@@ -1,10 +1,10 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponents, MockDirective } from 'ng-mocks';
 
+import { BadgeComponent } from '../';
 import { ThemeColorDirective } from '../../directives';
 import { DesignTokenHelper } from '../../helpers';
 import { TestHelper } from '../../testing/test-helper';
-import { BadgeComponent } from '../badge/badge.component';
 import { ChipComponent } from '../chip/chip.component';
 
 import { SegmentItem } from './segment-item';

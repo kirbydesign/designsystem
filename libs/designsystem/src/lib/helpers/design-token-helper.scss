@@ -1,5 +1,5 @@
 @use 'sass-to-ts';
-@use '../scss/base/variables';
+@use '../../../../core/src/scss/base/variables';
 
 @function remap-elevation($elevations) {
   $elevation-list: ();

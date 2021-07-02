@@ -11,12 +11,14 @@
       "highcharts/modules/annotations": "highcharts",
       "highcharts/highstock": "highcharts/highstock",
       "@ionic/angular": "ionic",
+      "@kirbydesign/core/loader": "loader",
       "ngx-ui-scroll": "ngx-ui-scroll",
       "inputmask/lib/inputmask": "inputmask"
     }
   },
   "allowedNonPeerDependencies": [
     "@ionic/angular",
+    "@kirbydesign/core",
     "highcharts",
     "date-fns",
     "date-fns-tz",

@@ -2,7 +2,7 @@ export * from './app';
 
 export { AvatarComponent, AvatarSize } from './avatar/avatar.component';
 
-export { BadgeComponent } from './badge/badge.component';
+export { KirbyBadge as BadgeComponent } from './proxies';
 export { ButtonComponent, ButtonSize } from './button/button.component';
 
 export * from './card';
