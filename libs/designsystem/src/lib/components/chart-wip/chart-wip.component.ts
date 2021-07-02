@@ -25,7 +25,7 @@ export class ChartWipComponent implements AfterViewInit, OnChanges {
   @Input() data: ChartData;
   @Input() dataLabels?: string[] | string[][];
   @Input() customOptions?: ChartOptions;
-  @Input() customAnnotations: AnnotationOptions[];
+  @Input() annotations: AnnotationOptions[];
 
   @HostBinding('style.--kirby-chart-height')
   _height: string;
@@ -50,7 +50,7 @@ export class ChartWipComponent implements AfterViewInit, OnChanges {
       dataLabels: () => this.updateDataLabels(),
       type: () => this.updateType(),
       customOptions: () => this.updateCustomOptions(),
-      customAnnotations: () => this.updateCustomAnnotations(),
+      annotations: () => this.updateAnnotations(),
     };
 
     Object.entries(simpleChanges).forEach(([key]) => {
@@ -69,7 +69,7 @@ export class ChartWipComponent implements AfterViewInit, OnChanges {
       this.data,
       this.dataLabels,
       this.customOptions,
-      this.customAnnotations
+      this.annotations
     );
   }
 
@@ -82,15 +82,15 @@ export class ChartWipComponent implements AfterViewInit, OnChanges {
   }
 
   private updateType() {
-    this.chartJSService.updateType(this.type, this.customOptions, this.customAnnotations);
+    this.chartJSService.updateType(this.type, this.customOptions, this.annotations);
   }
 
   private updateCustomOptions() {
-    this.chartJSService.updateOptions(this.customOptions, this.type, this.customAnnotations);
+    this.chartJSService.updateOptions(this.customOptions, this.type, this.annotations);
   }
 
-  private updateCustomAnnotations() {
-    this.chartJSService.updateAnnotations(this.customAnnotations);
+  private updateAnnotations() {
+    this.chartJSService.updateAnnotations(this.annotations);
   }
 
   private redrawChart() {

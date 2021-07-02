@@ -18,10 +18,10 @@ export class ChartJSService {
     data: ChartData,
     dataLabels?: string[] | string[][],
     customOptions?: ChartOptions,
-    customAnnotations?: AnnotationOptions[]
+    annotations?: AnnotationOptions[]
   ): void {
     const datasets = this.createDatasets(data);
-    const options = this.createOptionsObject(type, customOptions, customAnnotations);
+    const options = this.createOptionsObject(type, customOptions, annotations);
     const config = this.createConfigurationObject(type, datasets, options, dataLabels);
     this.initializeNewChart(targetElement.nativeElement, config);
   }
@@ -42,21 +42,21 @@ export class ChartJSService {
   public updateType(
     type: ChartType,
     customOptions?: ChartOptions,
-    customAnnotations?: AnnotationOptions[]
+    annotations?: AnnotationOptions[]
   ) {
     if (type === 'bar' || type === 'column') {
       /* indexAxis does not update predictably; update by replacing the 
       chart entirely instead */
-      this.destructivelyUpdateType(type, customOptions, customAnnotations);
+      this.destructivelyUpdateType(type, customOptions, annotations);
     }
   }
 
   public updateOptions(
     customOptions: ChartOptions,
     type: ChartType,
-    customAnnotations?: AnnotationOptions[]
+    annotations?: AnnotationOptions[]
   ) {
-    this.chart.options = this.createOptionsObject(type, customOptions, customAnnotations);
+    this.chart.options = this.createOptionsObject(type, customOptions, annotations);
   }
 
   public updateAnnotations(annotationOptions: AnnotationOptions[]) {
@@ -66,12 +66,12 @@ export class ChartJSService {
   private destructivelyUpdateType(
     type: ChartType,
     customOptions?: ChartOptions,
-    customAnnotations?: AnnotationOptions[]
+    annotations?: AnnotationOptions[]
   ) {
     const datasets = this.chart.data.datasets as ChartDataset[];
     const dataLabels = this.chart.data.labels;
 
-    const options = this.createOptionsObject(type, customOptions, customAnnotations);
+    const options = this.createOptionsObject(type, customOptions, annotations);
     const config = this.createConfigurationObject(type, datasets, options, dataLabels);
     const canvasElement = this.chart.canvas;
 

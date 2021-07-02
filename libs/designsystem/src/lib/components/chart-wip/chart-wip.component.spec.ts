@@ -79,7 +79,7 @@ describe('ChartWipComponent', () => {
       data: { updateFn: 'updateData', newValue: [1, 2, 3] },
       dataLabels: { updateFn: 'updateDataLabels', newValue: ['one', 'two', 'three'] },
       type: { updateFn: 'updateType', newValue: 'bar' },
-      customAnnotations: { updateFn: 'updateCustomAnnotations', newValue: {} },
+      annotations: { updateFn: 'updateAnnotations', newValue: [{ type: 'line' }] },
     };
 
     Object.entries(scenarios).forEach(([property, { updateFn, newValue }]) => {
