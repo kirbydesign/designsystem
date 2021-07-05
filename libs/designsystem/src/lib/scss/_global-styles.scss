@@ -24,42 +24,6 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-@media print {
-  // Not needed
-  cookbook-home {
-    display: block !important;
-  }
-
-  // Not needed
-  cookbook-header {
-    margin-bottom: 1cm !important;
-  }
-
-  // Specific to host project
-  // Alternative: Expose a .kirby-no-print utility
-  nav,
-  .menu-button,
-  .show-case-actions,
-  cookbook-side-nav,
-  cookbook-iphone,
-  kirby-fab-sheet {
-    display: none !important;
-  }
-
-  // Specific to host project
-  .logo {
-    width: 2cm !important;
-    height: 2cm !important;
-  }
-
-  // TODO:
-  // Links
-  // Lists
-  // Margins
-  // No-print utility class
-  // Typography (Display, headings, paragraphs etc.)
-}
-
 @function get-drawer-additional-padding-top() {
   $modal-close-button-inner-height: size('l'); // Todo: Move to / get from shared var
   $modal-close-button-vertical-margin: size('xxxs') * 2; // Todo: Move to / get from shared var
