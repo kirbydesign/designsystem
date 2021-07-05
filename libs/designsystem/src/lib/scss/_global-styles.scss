@@ -52,40 +52,6 @@
     height: 2cm !important;
   }
 
-  // Table styles (optional)
-  table {
-    --table-border-width: 2pt;
-    --table-border-color: #000;
-    max-width: 100%;
-    border-right: var(--table-border-width) solid var(--table-border-color) !important;
-    border-bottom: var(--table-border-width) solid var(--table-border-color) !important;
-    border-left: var(--table-border-width) solid var(--table-border-color) !important;
-    font-size: 10pt !important;
-  }
-
-  tr {
-    border: none !important;
-    border-top: var(--table-border-width) solid var(--table-border-color) !important;
-  }
-
-  thead {
-    border-top: var(--table-border-width) solid var(--table-border-color) !important;
-  }
-
-  th {
-    font-weight: 700 !important;
-  }
-
-  th,
-  td {
-    border: none !important;
-  }
-
-  th + th,
-  td + td {
-    border-left: var(--table-border-width) solid var(--table-border-color) !important;
-  }
-
   // TODO:
   // Links
   // Lists
