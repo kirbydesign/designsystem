@@ -60,6 +60,7 @@ export class ChartJSService {
   }
 
   public updateAnnotations(annotationOptions: AnnotationOptions[]) {
+    // TODO: I suppose this is overwriting the defaults...? Fix it.
     this.chart.options.plugins.annotation.annotations = annotationOptions;
   }
 
@@ -86,7 +87,6 @@ export class ChartJSService {
   private getTypeConfig(type: ChartType) {
     /* Deep copy to avoid Chart object modifying parts of CHART_TYPE_CONFIGS 
     as it copies by reference when initialized */
-
     return deepCopy(CHART_TYPE_CONFIGS[type]);
   }
 
@@ -143,6 +143,7 @@ export class ChartJSService {
     to make it optional for consumer */
     const labels = !dataLabels ? this.createBlankLabels(datasets) : dataLabels;
     const typeConfig = this.getTypeConfig(type);
+    //TODO: do we need deep merge?
     return {
       ...typeConfig,
       data: {

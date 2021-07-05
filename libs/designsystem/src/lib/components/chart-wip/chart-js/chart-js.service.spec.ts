@@ -18,6 +18,10 @@ describe('ChartJSService', () => {
   });
 
   describe('function: renderChart', () => {
+    describe('when annotations are given', () => {
+      it('should render the chart with annotations applied', () => {});
+    });
+
     describe('when data is given as a number[]', () => {
       it('should render a new chart', () => {
         expect(chartJSService['chart']).toBeUndefined();
@@ -341,6 +345,10 @@ describe('ChartJSService', () => {
 
       expect(chartJSService['chart'].data.labels).toEqual(oldDatalabels);
     });
+
+    it('should preserve the original annotations', () => {
+      expect(true).toBeFalse();
+    });
   });
 
   describe('function: updateOptions', () => {
@@ -408,5 +416,26 @@ describe('ChartJSService', () => {
       const chart = chartJSService['chart'];
       expect(chart.options.indexAxis).toEqual(customIndexAxis);
     });
+
+    it('should preserve annotations', () => {
+      expect(true).toBeFalse();
+    });
+  });
+
+  describe('function: updateAnnotations', () => {
+    describe('if the chart already has annotations applied', () => {
+      it('should update existing annotations', () => {});
+      it('should be possible to remove the annotations by passing an empty array', () => {});
+    });
+
+    describe('if the chart has no annotations applied', () => {
+      it('should add annotations to the chart', () => {});
+    });
+
+    it('should preserve global defaults if they are not overwritten', () => {});
+    it('should preserve type specific defualts if they are not overwritten', () => {});
+
+    it('should be possible to overwrite global annotation defaults', () => {});
+    it('should be possible to overwrite type annotation specific options', () => {});
   });
 });
