@@ -1,0 +1,67 @@
+@media print {
+  :root {
+    --kirby-font-family: 'Roboto', sans-serif;
+  }
+
+  html {
+    font-size: 11pt !important;
+    line-height: 1.4 !important;
+  }
+
+  // Generic reset (Be careful)
+  *,
+  *::before,
+  *::after {
+    font-size: inherit !important;
+  }
+
+  // Optional
+  code {
+    font-size: 10pt !important;
+  }
+
+  pre {
+    font-size: 9pt !important;
+  }
+
+  p {
+    line-height: 1.4 !important;
+    margin-block: 1em !important;
+  }
+
+  h1,
+  .h1,
+  .kirby-text-xlarge {
+    font-size: 22pt !important;
+    line-height: initial !important;
+    margin-block: 1em !important;
+  }
+
+  h2,
+  .h2,
+  .kirby-text-large {
+    font-size: 15pt !important;
+    line-height: initial !important;
+    margin-block: 1em !important;
+  }
+
+  h3,
+  .h3,
+  .kirby-text-medium {
+    font-size: 12pt !important;
+    line-height: initial !important;
+    margin-block: 1em !important;
+  }
+
+  .kirby-text-display-3 {
+    font-size: 27pt !important;
+    line-height: initial !important;
+    margin-block: 1em !important;
+  }
+
+  h4,
+  h5,
+  h6 {
+    line-height: initial !important;
+  }
+}

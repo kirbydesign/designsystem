@@ -1,0 +1,38 @@
+@media print {
+  .ion-page,
+  ion-app,
+  kirby-app,
+  ion-router-outlet,
+  kirby-router-outlet {
+    display: contents !important;
+  }
+
+  .inner-scroll,
+  ion-content::part(scroll) {
+    position: static !important;
+  }
+
+  ion-content::part(background) {
+    display: none !important;
+  }
+
+  ion-header {
+    display: none !important;
+  }
+
+  ion-content {
+    padding: initial !important;
+  }
+
+  ion-tab-bar {
+    display: none !important;
+  }
+
+  .ion-page-hidden {
+    display: none !important;
+  }
+
+  .page-title {
+    margin: initial !important;
+  }
+}

@@ -1,0 +1,5 @@
+@media print {
+  [ng-reflect-use-virtual-scroll='true'] .viewport {
+    height: auto !important;
+  }
+}

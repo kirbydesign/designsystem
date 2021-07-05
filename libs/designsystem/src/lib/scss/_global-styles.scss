@@ -24,84 +24,7 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-// Generic base print styles
-// (copied from Watchmedier's sites)
-// TODO: Walk through them - clean up - add !important
 @media print {
-  @page {
-    margin: 2.54cm;
-    orphans: 4;
-    widows: 3;
-  }
-
-  *,
-  :after,
-  :before {
-    color: #000;
-    background-color: transparent;
-  }
-
-  html {
-    font-size: 11pt !important;
-    line-height: 1.4 !important;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    // TODO: Update to break-after
-    page-break-after: avoid;
-  }
-
-  blockquote,
-  figure,
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  img,
-  ol,
-  p,
-  table,
-  ul,
-  // TODO: Generic base "page" print styles for ion- and kirby- components
-  ion-item-group {
-    // TODO: Update to break-inside
-    page-break-inside: avoid;
-  }
-}
-
-@media print {
-  // Generic
-  :root {
-    --kirby-font-family: 'Roboto', sans-serif;
-    --kirby-page-max-width: 100%;
-  }
-
-  // Generic reset (Be careful)
-  *,
-  *::before,
-  *::after {
-    color: initial !important;
-    --background: initial !important;
-    background-color: initial !important;
-    font-size: inherit !important; // TODO: Maybe not use this reset
-    box-shadow: none !important;
-    // width: auto !important; // TODO: Maybe not use this reset
-    max-width: none !important;
-    contain: initial !important;
-  }
-
-  // Generic
-  // body {
-  //   font-size: 12pt !important;
-  // }
-
   // Not needed
   cookbook-home {
     display: block !important;
@@ -127,14 +50,6 @@
   .logo {
     width: 2cm !important;
     height: 2cm !important;
-  }
-
-  // Generic or local?
-  // Remove inline padding
-  ion-item::part(native),
-  ion-item-divider {
-    padding-inline-start: initial !important;
-    padding-inline-end: initial !important;
   }
 
   // Table styles (optional)
@@ -171,125 +86,12 @@
     border-left: var(--table-border-width) solid var(--table-border-color) !important;
   }
 
-  // Generic
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    page-break-after: avoid !important;
-    line-height: revert !important;
-  }
-
-  // Optional
-  code {
-    font-size: 10pt !important;
-  }
-
-  // Generic
-  p {
-    line-height: 1.4 !important;
-    margin: revert !important;
-  }
-
-  // App containers ------------------------------------------------------------
-  .ion-page,
-  ion-app,
-  kirby-app,
-  ion-router-outlet,
-  kirby-router-outlet {
-    display: contents !important;
-    // display: block !important;
-    // position: static !important;
-    // overflow: visible !important;
-  }
-
-  .inner-scroll,
-  ion-content::part(scroll) {
-    position: static !important;
-  }
-
-  ion-content::part(background) {
-    display: none !important;
-  }
-
-  body {
-    height: auto !important;
-  }
-
-  .page-title {
-    margin: initial !important;
-  }
-
-  ion-header {
-    display: none !important;
-  }
-
-  ion-content {
-    padding: initial !important;
-  }
-
-  .ion-page-hidden {
-    display: none !important;
-  }
-
-  ion-tab-bar {
-    display: none !important;
-  }
-  // ---------------------------------------------------------------------------
-
-  // Virtual scroll ------------------------------------------------------------
-  [ng-reflect-use-virtual-scroll='true'] .viewport {
-    height: auto !important;
-  }
-
   // TODO:
   // Links
   // Lists
   // Margins
   // No-print utility class
   // Typography (Display, headings, paragraphs etc.)
-
-  // Typography ----------------------------------------------------------------
-  pre {
-    font-size: 9pt !important;
-    width: max-content !important;
-    margin: auto !important;
-  }
-
-  h1,
-  .h1,
-  .kirby-text-xlarge {
-    font-size: 22pt !important;
-    margin-block: 1em !important;
-  }
-
-  h2,
-  .h2,
-  .kirby-text-large {
-    font-size: 15pt !important;
-    margin-block: 1em !important;
-  }
-
-  h3,
-  .h3,
-  .kirby-text-medium {
-    font-size: 12pt !important;
-    margin-block: 1em !important;
-  }
-
-  .kirby-text-display-3 {
-    font-size: 27pt !important;
-  }
-
-  // ---------------------------------------------------------------------------
-
-  // Generic
-  // Buttons do not make much sense on print, but this may be too far reaching
-  button {
-    display: none !important;
-  }
 }
 
 @function get-drawer-additional-padding-top() {
