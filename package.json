@@ -77,8 +77,7 @@
     "build:core:watch": "npm run build:core -- --watch",
     "dist:core": "npm run build:core -- --docs",
     "start:core": "npm run build:core -- --dev --watch --serve",
-    "test:core": "stencil test --config=./libs/core/stencil.config.ts --spec",
-    "test:core:watch": "stencil test --config=./libs/core/stencil.config.ts --spec --watchAll",
+    "test:core": "stencil test --config=./libs/core/stencil.config.ts --spec --watchAll",
     "workspace-generator": "nx workspace-generator",
     "sync-node-version": "node ./scripts/sync-node-version.js"
   },
