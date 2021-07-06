@@ -1,13 +1,14 @@
 import { ElementRef } from '@angular/core';
 import { Chart } from 'chart.js';
+import { AnnotationOptions } from 'chartjs-plugin-annotation';
 
 import { ColorHelper } from '../../../helpers';
-import { CHART_TYPE_CONFIGS } from '../chart-wip.configs';
+import { CHART_ANNOTATION_CONFIGS, CHART_TYPE_CONFIGS } from '../chart-wip.configs';
 import { CHART_GLOBAL_DEFAULTS } from '../chart-wip.configs';
 
 import { ChartJSService } from './chart-js.service';
 
-describe('ChartJSService', () => {
+fdescribe('ChartJSService', () => {
   let chartJSService: ChartJSService;
   let canvasElement: ElementRef<HTMLCanvasElement>;
 
@@ -423,19 +424,97 @@ describe('ChartJSService', () => {
   });
 
   describe('function: updateAnnotations', () => {
+    const chartType = 'bar';
+    let chart: Chart;
+
+    beforeEach(() => {
+      chartJSService.renderChart(canvasElement, chartType, [1, 2, 3], ['one', 'two', 'three']);
+      chart = chartJSService['chart'];
+    });
+
     describe('if the chart already has annotations applied', () => {
-      it('should update existing annotations', () => {});
-      it('should be possible to remove the annotations by passing an empty array', () => {});
+      beforeEach(() => {
+        chart.options.plugins.annotation.annotations = [
+          { type: 'line', yMin: -10, yMax: -10 },
+          { type: 'line', yMin: 0, yMax: 0 },
+        ];
+        chartJSService.redrawChart();
+        expect(chart.options.plugins.annotation.annotations.length).toEqual(2);
+      });
+
+      it('should replace the annotations with new ones', () => {
+        const annotations: AnnotationOptions[] = [
+          { type: 'line', yMin: 10, yMax: 10 },
+          { type: 'line', yMin: 20, yMax: 20 },
+        ];
+
+        chartJSService.updateAnnotations(annotations);
+        chartJSService.redrawChart();
+
+        expect(chart.options.plugins.annotation.annotations).toEqual(annotations);
+      });
+
+      it('should be possible to remove the annotations by passing an empty array', () => {
+        chartJSService.updateAnnotations([]);
+        chartJSService.redrawChart();
+        expect(chart.options.plugins.annotation.annotations.length).toEqual(0);
+      });
     });
 
     describe('if the chart has no annotations applied', () => {
-      it('should add annotations to the chart', () => {});
+      beforeEach(() => {
+        expect(chart.options.plugins.annotation.annotations).toEqual({});
+      });
+
+      it('should add annotations to the chart', () => {
+        const annotations: AnnotationOptions[] = [
+          { type: 'line', yMin: 10, yMax: 10 },
+          { type: 'line', yMin: 20, yMax: 20 },
+        ];
+
+        chartJSService.updateAnnotations(annotations);
+        chartJSService.redrawChart();
+
+        expect(chart.options.plugins.annotation.annotations).toEqual(annotations);
+      });
     });
 
-    it('should preserve global defaults if they are not overwritten', () => {});
-    it('should preserve type specific defualts if they are not overwritten', () => {});
+    it('should preserve annotation defaults if they are not overwritten', () => {
+      // Arrange
+      const annotations: AnnotationOptions[] = [
+        { type: 'line', yMin: 10, yMax: 10 },
+        { type: 'line', yMin: 20, yMax: 20 },
+      ];
 
-    it('should be possible to overwrite global annotation defaults', () => {});
-    it('should be possible to overwrite type annotation specific options', () => {});
+      // Act
+      chartJSService.updateAnnotations(annotations);
+      chartJSService.redrawChart();
+
+      // Assess
+      const chartAnnotations = chart.options.plugins.annotation.annotations as AnnotationOptions[];
+
+      chartAnnotations.forEach((chartAnnotation) => {
+        const annotationDefaults = CHART_ANNOTATION_CONFIGS[chartAnnotation.type];
+        Object.entries(annotationDefaults).forEach(([key, _]) => {
+          expect(chartAnnotation[key]).toEqual(annotationDefaults[key]);
+        });
+      });
+    });
+
+    it('should be possible to overwrite annotation defaults', () => {
+      expect(CHART_ANNOTATION_CONFIGS['line']['drawTime']).toBe('beforeDatasetsDraw');
+      const annotations: AnnotationOptions[] = [
+        { type: 'line', yMin: 10, yMax: 10, drawTime: 'afterDatasetsDraw' },
+        { type: 'line', yMin: 20, yMax: 20, drawTime: 'afterDatasetsDraw' },
+      ];
+
+      chartJSService.updateAnnotations(annotations);
+      chartJSService.redrawChart();
+
+      const chartAnnotations = chart.options.plugins.annotation.annotations as AnnotationOptions[];
+      chartAnnotations.forEach((chartAnnotation) => {
+        expect(chartAnnotation.drawTime).toBe('afterDatasetsDraw');
+      });
+    });
   });
 });

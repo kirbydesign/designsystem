@@ -59,9 +59,9 @@ export class ChartJSService {
     this.chart.options = this.createOptionsObject(type, customOptions, annotations);
   }
 
-  public updateAnnotations(annotationOptions: AnnotationOptions[]) {
-    // TODO: I suppose this is overwriting the defaults...? Fix it.
-    this.chart.options.plugins.annotation.annotations = annotationOptions;
+  public updateAnnotations(annotations: AnnotationOptions[]) {
+    const annotationsWithDefaults = this.applyDefaultsToAnnotations(annotations);
+    this.chart.options.plugins.annotation.annotations = annotationsWithDefaults;
   }
 
   private destructivelyUpdateType(
@@ -143,7 +143,7 @@ export class ChartJSService {
     to make it optional for consumer */
     const labels = !dataLabels ? this.createBlankLabels(datasets) : dataLabels;
     const typeConfig = this.getTypeConfig(type);
-    //TODO: do we need deep merge?
+    //TODO: do we need deep merge here?
     return {
       ...typeConfig,
       data: {
