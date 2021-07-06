@@ -8,7 +8,7 @@ import { CHART_GLOBAL_DEFAULTS } from '../chart-wip.configs';
 
 import { ChartJSService } from './chart-js.service';
 
-fdescribe('ChartJSService', () => {
+describe('ChartJSService', () => {
   let chartJSService: ChartJSService;
   let canvasElement: ElementRef<HTMLCanvasElement>;
 
@@ -319,7 +319,9 @@ fdescribe('ChartJSService', () => {
     let chart: Chart;
 
     beforeEach(() => {
-      chartJSService.renderChart(canvasElement, 'bar', [1, 2, 3], ['one', 'two', 'three']);
+      chartJSService.renderChart(canvasElement, 'bar', [1, 2, 3], ['one', 'two', 'three'], {}, [
+        { type: 'line', yMin: 10, yMax: 10 },
+      ]);
       chart = chartJSService['chart'];
     });
 
@@ -348,17 +350,32 @@ fdescribe('ChartJSService', () => {
     });
 
     it('should preserve the original annotations', () => {
-      expect(true).toBeFalse();
+      const oldAnnotations = chart.options.plugins.annotation.annotations;
+
+      chartJSService['destructivelyUpdateType']('bar');
+
+      expect(chartJSService['chart'].options.plugins.annotation.annotations).toEqual(
+        oldAnnotations
+      );
     });
   });
 
   describe('function: updateOptions', () => {
     const chartType = 'bar';
+    let annotations: AnnotationOptions[];
 
     beforeEach(() => {
-      chartJSService.renderChart(canvasElement, chartType, [1, 2, 3], ['one', 'two', 'three'], {
-        borderColor: 'pink',
-      });
+      annotations = [{ type: 'line', yMin: 20, yMax: 20 }];
+      chartJSService.renderChart(
+        canvasElement,
+        chartType,
+        [1, 2, 3],
+        ['one', 'two', 'three'],
+        {
+          borderColor: 'pink',
+        },
+        annotations
+      );
     });
 
     it('should overwrite existing custom options', () => {
@@ -418,8 +435,20 @@ fdescribe('ChartJSService', () => {
       expect(chart.options.indexAxis).toEqual(customIndexAxis);
     });
 
-    it('should preserve annotations', () => {
-      expect(true).toBeFalse();
+    it('should preserve the original annotations', () => {
+      const oldAnnotations = chartJSService['chart'].options.plugins.annotation.annotations;
+
+      chartJSService.updateOptions(
+        {
+          indexAxis: 'x',
+        },
+        chartType
+      );
+      chartJSService['chart'].update();
+
+      const newAnnotations = chartJSService['chart'].options.plugins.annotation.annotations;
+      expect(newAnnotations.length).not.toBe(0);
+      expect(newAnnotations).toEqual(oldAnnotations);
     });
   });
 
@@ -443,15 +472,21 @@ fdescribe('ChartJSService', () => {
       });
 
       it('should replace the annotations with new ones', () => {
-        const annotations: AnnotationOptions[] = [
+        const newAnnotations: AnnotationOptions[] = [
           { type: 'line', yMin: 10, yMax: 10 },
           { type: 'line', yMin: 20, yMax: 20 },
         ];
 
-        chartJSService.updateAnnotations(annotations);
+        chartJSService.updateAnnotations(newAnnotations);
         chartJSService.redrawChart();
 
-        expect(chart.options.plugins.annotation.annotations).toEqual(annotations);
+        const chartAnnotations = chartJSService['chart'].options.plugins.annotation.annotations;
+        newAnnotations.forEach((newAnnotation, index) => {
+          const chartAnnotation = chartAnnotations[index];
+          expect(newAnnotation['yMin']).toEqual(chartAnnotation['yMin']);
+          expect(newAnnotation['yMax']).toEqual(chartAnnotation['yMax']);
+        });
+        expect(chartAnnotations.length).toBe(2);
       });
 
       it('should be possible to remove the annotations by passing an empty array', () => {
@@ -471,11 +506,12 @@ fdescribe('ChartJSService', () => {
           { type: 'line', yMin: 10, yMax: 10 },
           { type: 'line', yMin: 20, yMax: 20 },
         ];
+        expect(chart.options.plugins.annotation.annotations).toEqual(Object.create(null));
 
         chartJSService.updateAnnotations(annotations);
         chartJSService.redrawChart();
 
-        expect(chart.options.plugins.annotation.annotations).toEqual(annotations);
+        expect(chart.options.plugins.annotation.annotations.length).toEqual(2);
       });
     });
 
