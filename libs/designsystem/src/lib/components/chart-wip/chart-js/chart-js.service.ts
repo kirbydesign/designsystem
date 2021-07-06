@@ -39,23 +39,17 @@ export class ChartJSService {
     this.chart.data.labels = dataLabels;
   }
 
-  public updateType(
-    type: ChartType,
-    customOptions?: ChartOptions,
-    annotations?: AnnotationOptions[]
-  ) {
+  public updateType(type: ChartType, customOptions?: ChartOptions) {
     if (type === 'bar' || type === 'column') {
-      /* indexAxis does not update predictably; update by replacing the 
-      chart entirely instead */
-      this.destructivelyUpdateType(type, customOptions, annotations);
+      /* indexAxis does not update predictably; update by replacing 
+         the chart entirely instead */
+      this.destructivelyUpdateType(type, customOptions);
     }
   }
 
-  public updateOptions(
-    customOptions: ChartOptions,
-    type: ChartType,
-    annotations?: AnnotationOptions[]
-  ) {
+  public updateOptions(customOptions: ChartOptions, type: ChartType) {
+    // TODO: Fix the types...
+    const annotations = this.chart.options.plugins?.annotation?.annotations as AnnotationOptions[];
     this.chart.options = this.createOptionsObject(type, customOptions, annotations);
   }
 
@@ -64,13 +58,12 @@ export class ChartJSService {
     this.chart.options.plugins.annotation.annotations = annotationsWithDefaults;
   }
 
-  private destructivelyUpdateType(
-    type: ChartType,
-    customOptions?: ChartOptions,
-    annotations?: AnnotationOptions[]
-  ) {
+  private destructivelyUpdateType(type: ChartType, customOptions?: ChartOptions) {
+    //TODO: Fix dataset type, why is this necessary?
     const datasets = this.chart.data.datasets as ChartDataset[];
     const dataLabels = this.chart.data.labels;
+    //TODO: fix annotation type - should probably re-expose it directly
+    const annotations = this.chart.options.plugins.annotation.annotations as AnnotationOptions[];
 
     const options = this.createOptionsObject(type, customOptions, annotations);
     const config = this.createConfigurationObject(type, datasets, options, dataLabels);

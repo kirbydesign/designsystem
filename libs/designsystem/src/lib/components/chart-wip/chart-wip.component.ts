@@ -82,11 +82,11 @@ export class ChartWipComponent implements AfterViewInit, OnChanges {
   }
 
   private updateType() {
-    this.chartJSService.updateType(this.type, this.customOptions, this.annotations);
+    this.chartJSService.updateType(this.type, this.customOptions);
   }
 
   private updateCustomOptions() {
-    this.chartJSService.updateOptions(this.customOptions, this.type, this.annotations);
+    this.chartJSService.updateOptions(this.customOptions, this.type);
   }
 
   private updateAnnotations() {
