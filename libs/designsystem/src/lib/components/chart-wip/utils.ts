@@ -1,8 +1,14 @@
-import { all as deepMergeAll } from 'deepmerge';
+import { all as deepMergeAll, Options as deepMergeOptions } from 'deepmerge';
 
 export function deepMergeObjects(...objects: any[]) {
-  // Deepmerge will mutate objects; add all updates to blank object
-  return deepMergeAll([{}, ...objects.map((object) => ({ ...object }))]);
+  const overwriteMerge = (_target: any[], source: any[], _options: deepMergeOptions) => source;
+  const deepMergeOptions: deepMergeOptions = {
+    arrayMerge: overwriteMerge,
+  };
+
+  const objectsWithoutUndefined = objects.filter((object) => object !== undefined);
+
+  return deepMergeAll([{}, ...objectsWithoutUndefined], deepMergeOptions);
 }
 
 export function deepCopy(obj: any) {
