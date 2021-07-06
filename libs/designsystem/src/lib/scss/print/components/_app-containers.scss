@@ -3,13 +3,18 @@
   ion-app,
   kirby-app,
   ion-router-outlet,
-  kirby-router-outlet {
+  kirby-router-outlet,
+  kirby-tab-bar,
+  ion-tabs {
     display: contents !important;
   }
 
   .inner-scroll,
   ion-content::part(scroll) {
+    display: block !important;
     position: static !important;
+    overflow: visible !important;
+    padding: initial !important;
   }
 
   ion-content::part(background) {
