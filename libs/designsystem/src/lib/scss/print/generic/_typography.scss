@@ -1,11 +1,18 @@
 @media print {
   :root {
     --kirby-font-family: 'Roboto', sans-serif;
+    --font-size-xxlarge: 27pt;
+    --font-size-xlarge: 22pt;
+    --font-size-large: 15pt;
+    --font-size-medium: 12pt;
+    --font-size-normal: 11pt;
+    --font-size-small: 9pt;
+    --line-height-base: 1.4;
   }
 
   html {
-    font-size: 11pt !important;
-    line-height: 1.4 !important;
+    font-size: var(--font-size-normal) !important;
+    line-height: var(--line-height-base) !important;
   }
 
   // Generic reset (Be careful)
@@ -21,18 +28,18 @@
   }
 
   pre {
-    font-size: 9pt !important;
+    font-size: var(--font-size-small) !important;
   }
 
   p {
-    line-height: 1.4 !important;
+    line-height: var(--line-height-base) !important;
     margin-block: 1em !important;
   }
 
   h1,
   .h1,
   .kirby-text-xlarge {
-    font-size: 22pt !important;
+    font-size: var(--font-size-xlarge) !important;
     line-height: initial !important;
     margin-block: 1em !important;
   }
@@ -40,7 +47,7 @@
   h2,
   .h2,
   .kirby-text-large {
-    font-size: 15pt !important;
+    font-size: var(--font-size-large) !important;
     line-height: initial !important;
     margin-block: 1em !important;
   }
@@ -48,13 +55,13 @@
   h3,
   .h3,
   .kirby-text-medium {
-    font-size: 12pt !important;
+    font-size: var(--font-size-medium) !important;
     line-height: initial !important;
     margin-block: 1em !important;
   }
 
   .kirby-text-display-3 {
-    font-size: 27pt !important;
+    font-size: var(--font-size-xxlarge) !important;
     line-height: initial !important;
     margin-block: 1em !important;
   }
