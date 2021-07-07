@@ -161,6 +161,58 @@
 
 <kirby-divider [hasMargin]="true"></kirby-divider>
 
+<h2>Annotations</h2>
+<p>
+  Lines, boxes, points and ellipses can be drawn to annotate the charts using the
+  <code>annotations</code> input property. Annotations are drawn using the
+  <a href="https://www.chartjs.org/chartjs-plugin-annotation/">chartjs-plugin-annotation</a> plugin
+  for Chart.js
+</p>
+
+<p>
+  The Chart component has some defaults for the different chart types - these can however be
+  overwritten on a per annotation basis.
+</p>
+
+<p>More documentation of the individual annotation types can be found here:</p>
+<ul>
+  <li>
+    <a href="https://www.chartjs.org/chartjs-plugin-annotation/guide/types/box.html"
+      >Box annotation documentation</a
+    >
+  </li>
+  <li>
+    <a href="https://www.chartjs.org/chartjs-plugin-annotation/guide/types/ellipse.html"
+      >Ellipse annotation documentation</a
+    >
+  </li>
+  <li>
+    <a href="https://www.chartjs.org/chartjs-plugin-annotation/guide/types/line.html"
+      >Line annotation documentation</a
+    >
+  </li>
+  <li>
+    <a href="https://www.chartjs.org/chartjs-plugin-annotation/guide/types/point.html"
+      >Point annotation documentation</a
+    >
+  </li>
+</ul>
+
+<p>The following example shows a chart annotated with a line, box, ellipse and point.</p>
+
+<p>
+  <kirby-card [mode]="_cardMode" [hasPadding]="_cardHasPadding">
+    <cookbook-example-viewer
+      [html]="annotationsExample.template"
+      [ts]="annotationsExample.codeSnippet"
+    >
+      <cookbook-chart-wip-example-annotations #annotationsExample>
+      </cookbook-chart-wip-example-annotations>
+    </cookbook-example-viewer>
+  </kirby-card>
+</p>
+
+<kirby-divider [hasMargin]="true"></kirby-divider>
 <h2>Accessibility</h2>
 <p>
   The charts are unfortunately not accessible out-of-the-box. This is because the charts are drawn
