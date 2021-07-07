@@ -1,0 +1,9 @@
+@media print {
+  kirby-page-actions {
+    display: none !important;
+  }
+
+  .page-title {
+    margin: initial !important;
+  }
+}

@@ -1,3 +1,4 @@
+// These rulesets make sure you can print more than a single page
 @media print {
   .ion-page,
   ion-app,
@@ -15,29 +16,5 @@
     position: static !important;
     overflow: visible !important;
     padding: initial !important;
-  }
-
-  ion-content::part(background) {
-    display: none !important;
-  }
-
-  ion-header {
-    display: none !important;
-  }
-
-  ion-content {
-    padding: initial !important;
-  }
-
-  ion-tab-bar {
-    display: none !important;
-  }
-
-  .ion-page-hidden {
-    display: none !important;
-  }
-
-  .page-title {
-    margin: initial !important;
   }
 }

@@ -1,0 +1,9 @@
+@media print {
+  ion-content {
+    padding: initial !important;
+  }
+
+  ion-content::part(background) {
+    display: none !important;
+  }
+}
