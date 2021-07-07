@@ -2,7 +2,7 @@ import { newSpecPage } from '@stencil/core/testing';
 
 import { Badge } from './badge';
 
-describe('some-component', () => {
+describe('Badge', () => {
   it('renders', async () => {
     const page = await newSpecPage({
       components: [Badge],
