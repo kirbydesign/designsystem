@@ -1,4 +1,5 @@
-// Generic resets (Be careful)
+// Generic reset
+// This targets *all* elements so be careful which declarations are made
 @media print {
   *,
   *::before,

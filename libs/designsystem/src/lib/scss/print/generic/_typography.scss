@@ -15,16 +15,12 @@
     line-height: var(--line-height-base) !important;
   }
 
-  // Generic reset (Be careful)
+  // Generic reset
+  // This targets *all* elements so be careful which declarations are made
   *,
   *::before,
   *::after {
     font-size: inherit !important;
-  }
-
-  // Optional
-  code {
-    font-size: 10pt !important;
   }
 
   pre {
