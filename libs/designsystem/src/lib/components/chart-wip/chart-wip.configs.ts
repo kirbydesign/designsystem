@@ -42,6 +42,7 @@ export const CHART_TYPE_CONFIGS = {
   bar: {
     type: 'bar' as ChartJSType,
     options: {
+      barPercentage: 0.6,
       indexAxis: 'y',
       elements: {
         point: {
@@ -58,6 +59,7 @@ export const CHART_TYPE_CONFIGS = {
   column: {
     type: 'bar' as ChartJSType,
     options: {
+      barPercentage: 0.6,
       indexAxis: 'x',
       elements: {
         line: {
