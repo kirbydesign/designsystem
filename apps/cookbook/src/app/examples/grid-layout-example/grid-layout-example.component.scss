@@ -72,38 +72,45 @@ body {
 }
 
 // Example details
-.kirby-card {
+
+// kirby-card {
+//   //   min-height: 200px;
+//   background-color: hotpink;
+// }
+
+.box {
+  margin-block: $gap;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   min-height: 200px;
-  background-color: hotpink;
 }
 
-#example-no-gutter,
-#example-full-width-gutter,
-#example-full-width {
-  margin-block: $gutter;
-  min-height: 200px;
-}
-
-#example-no-gutter {
+#example-1 {
   background-color: crimson;
   color: #fff;
 }
 
-#example-full-width-gutter {
+#example-2 {
   background-color: rebeccapurple;
   color: #fff;
 }
 
-#example-full-width {
+#example-3 {
   background-color: deepskyblue;
   color: #000;
 }
 
 .example-text {
   font-size: 1.62rem;
-  text-align: center;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  //   display: flex;
+  //   align-items: center;
+  //   justify-content: center;
+  //   min-height: 200px;
+}
+
+.align-center {
+  text-align: center;
 }
