@@ -48,8 +48,7 @@ export class ChartJSService {
   }
 
   public updateOptions(customOptions: ChartOptions, type: ChartType) {
-    // TODO: Fix the types...
-    const annotations = this.chart.options.plugins?.annotation?.annotations as AnnotationOptions[];
+    const annotations = this.getExistingChartAnnotations();
     this.chart.options = this.createOptionsObject(type, customOptions, annotations);
   }
 
@@ -58,12 +57,17 @@ export class ChartJSService {
     this.chart.options.plugins.annotation.annotations = annotationsWithDefaults;
   }
 
+  private getExistingChartAnnotations(): AnnotationOptions[] | undefined {
+    /* Plugin options type uses a utility type to mark all members as optional. 
+       To not have to import this from the utility-types npm package, return as 
+       AnnotationOptions[]; that is what we get in the end anyways */
+    return this.chart.options.plugins?.annotation?.annotations as AnnotationOptions[];
+  }
+
   private destructivelyUpdateType(type: ChartType, customOptions?: ChartOptions) {
-    //TODO: Fix dataset type, why is this necessary?
     const datasets = this.chart.data.datasets as ChartDataset[];
     const dataLabels = this.chart.data.labels;
-    //TODO: fix annotation type - should probably re-expose it directly
-    const annotations = this.chart.options.plugins.annotation.annotations as AnnotationOptions[];
+    const annotations = this.getExistingChartAnnotations();
 
     const options = this.createOptionsObject(type, customOptions, annotations);
     const config = this.createConfigurationObject(type, datasets, options, dataLabels);
