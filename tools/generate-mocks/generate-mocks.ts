@@ -122,10 +122,30 @@ ${providers},
             typesInFile.push(...exported.split(',').map((entry) => entry.trim()));
           });
         });
-        return typesInFile;
+        const filteredTypes = this.mapAndRemoveTypeAssertions(typesInFile);
+        return filteredTypes;
       })
     );
     return Array.prototype.concat(...exportedTypes);
+  }
+
+  mapAndRemoveTypeAssertions(exportedTypes: string[]) {
+    let compNameToExportedNameMap: Map<string, string> = new Map();
+
+    // capture group 1 is internal component name, group 2 is exported name
+    const assertedTypeRegex = /(\w+) as (\w+)/;
+
+    const exports = exportedTypes.map((type) => {
+      const match = type.match(assertedTypeRegex);
+      if (match) {
+        // add both matches to the map, but only return the exported type
+        compNameToExportedNameMap.set(match[1], match[2]);
+        return match[2];
+      }
+      return type;
+    });
+
+    return exports;
   }
 
   private async getBarrelFiles(folderpath: string) {
@@ -157,7 +177,7 @@ ${providers},
       if (ent.isDirectory()) {
         await this.traverseFolder(fullPath, outputPath, classMap, exportedTypes, exportedProviders);
       } else {
-        if (fileOrFolder.endsWith('.component.ts')) {
+        if (fileOrFolder.endsWith('.component.ts') || fileOrFolder.endsWith('proxies.ts')) {
           const newFilename = path.join(outputPath, 'components', 'mock.' + fileOrFolder);
           const classNames = this.renderMock(fullPath, newFilename, exportedTypes);
           if (classNames) {
