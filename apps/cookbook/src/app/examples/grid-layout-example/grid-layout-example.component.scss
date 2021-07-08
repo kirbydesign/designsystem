@@ -1,0 +1,108 @@
+// Core example
+$columns: 12;
+$desktop-min-width: 1025px;
+$gap: 24px;
+$tablet-min-width: 721px;
+
+// Context
+$gutter: 16px;
+$max-width: 1196px;
+
+// Core example
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+  gap: $gap;
+}
+
+// Core example
+.grid-item {
+  grid-column: span $columns;
+}
+
+// Core example
+@media screen and (min-width: $tablet-min-width) {
+  .half\@tablet-up {
+    grid-column: span ($columns / 2);
+  }
+}
+
+// Core example
+@media screen and (min-width: $desktop-min-width) {
+  .half\@desktop-up {
+    grid-column: span ($columns / 2);
+  }
+
+  .third\@desktop-up {
+    grid-column: span ($columns / 3);
+  }
+}
+
+// Context
+html {
+  box-sizing: border-box;
+}
+
+// Context
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+// Context
+body {
+  margin: 0;
+}
+
+// Context
+.kirby-max-width-container {
+  max-width: ($max-width + 2 * $gutter);
+  margin-inline: auto;
+}
+
+// Context
+.kirby-gutter {
+  padding-inline: $gutter;
+}
+
+// Example details
+.grid-item h2 {
+  margin-block: 0;
+}
+
+.kirby-card {
+  min-height: 200px;
+  background-color: hotpink;
+}
+
+#example-no-gutter,
+#example-full-width-gutter,
+#example-full-width {
+  margin-block: $gutter;
+  min-height: 200px;
+}
+
+#example-no-gutter {
+  background-color: crimson;
+  color: #fff;
+}
+
+#example-full-width-gutter {
+  background-color: rebeccapurple;
+  color: #fff;
+}
+
+#example-full-width {
+  background-color: deepskyblue;
+  color: #000;
+}
+
+.example-text {
+  font-size: 1.62rem;
+  text-align: center;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
