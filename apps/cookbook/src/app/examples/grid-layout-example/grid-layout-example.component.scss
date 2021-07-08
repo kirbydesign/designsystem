@@ -56,13 +56,13 @@ body {
 }
 
 // Context
-.kirby-max-width-container {
+.max-width-container {
   max-width: ($max-width + 2 * $gutter);
   margin-inline: auto;
 }
 
 // Context
-.kirby-gutter {
+.gutter {
   padding-inline: $gutter;
 }
 
