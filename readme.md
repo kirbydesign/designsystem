@@ -70,7 +70,7 @@ export class AppModule {}
 
 ### Sass
 
-Include the Kirby global styles in your app, e.g., in `src/styles.scss` :
+Include the Kirby global styles in your app, e.g., in `src/styles.scss`:
 
 ```css
 @import '~@kirbydesign/designsystem/scss/global-styles';
