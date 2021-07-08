@@ -1,0 +1,17 @@
+@media print {
+  kirby-page-actions {
+    display: none !important;
+  }
+
+  ion-header {
+    display: none !important;
+  }
+
+  ion-content {
+    padding: initial !important;
+  }
+
+  .page-title {
+    margin: initial !important;
+  }
+}

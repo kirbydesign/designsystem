@@ -1,0 +1,70 @@
+@media print {
+  :root {
+    --kirby-font-family: 'Roboto', sans-serif;
+    --kirby-font-size-xxlarge: 27pt;
+    --kirby-font-size-xlarge: 22pt;
+    --kirby-font-size-large: 15pt;
+    --kirby-font-size-medium: 12pt;
+    --kirby-font-size-normal: 11pt;
+    --kirby-font-size-small: 9pt;
+    --kirby-line-height-base: 1.4;
+  }
+
+  html {
+    font-size: var(--kirby-font-size-normal) !important;
+    line-height: var(--kirby-line-height-base) !important;
+  }
+
+  // Generic reset
+  // This targets *all* elements so be careful which declarations are made
+  *,
+  *::before,
+  *::after {
+    font-size: inherit !important;
+  }
+
+  pre {
+    font-size: var(--kirby-font-size-small) !important;
+  }
+
+  p {
+    line-height: var(--kirby-line-height-base) !important;
+    margin-block: 1em !important;
+  }
+
+  h1,
+  .h1,
+  .kirby-text-xlarge {
+    font-size: var(--kirby-font-size-xlarge) !important;
+    line-height: initial !important;
+    margin-block: 1em !important;
+  }
+
+  h2,
+  .h2,
+  .kirby-text-large {
+    font-size: var(--kirby-font-size-large) !important;
+    line-height: initial !important;
+    margin-block: 1em !important;
+  }
+
+  h3,
+  .h3,
+  .kirby-text-medium {
+    font-size: var(--kirby-font-size-medium) !important;
+    line-height: initial !important;
+    margin-block: 1em !important;
+  }
+
+  .kirby-text-display-3 {
+    font-size: var(--kirby-font-size-xxlarge) !important;
+    line-height: initial !important;
+    margin-block: 1em !important;
+  }
+
+  h4,
+  h5,
+  h6 {
+    line-height: initial !important;
+  }
+}

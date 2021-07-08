@@ -1,0 +1,24 @@
+@media print {
+  ion-item-group {
+    margin-block: 17pt !important;
+  }
+
+  ion-item {
+    --min-height: none !important;
+    --padding-top: 0 !important;
+    --padding-bottom: 0 !important;
+    --inner-padding-top: 0 !important;
+    --inner-padding-bottom: 0 !important;
+    --inner-padding-end: 0 !important;
+  }
+
+  ion-item::part(native),
+  ion-item-divider {
+    padding-inline-start: initial !important;
+    padding-inline-end: initial !important;
+  }
+
+  [ng-reflect-use-virtual-scroll='true'] .viewport {
+    height: auto !important;
+  }
+}

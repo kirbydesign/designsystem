@@ -1,0 +1,16 @@
+@media print {
+  kirby-modal-wrapper {
+    // Part of making sure you can print more than a single page
+    display: contents !important;
+
+    ion-content::part(background) {
+      display: none !important;
+    }
+
+    // Part of making sure you can print more than a single page
+    .inner-scroll,
+    ion-content::part(scroll) {
+      display: contents !important;
+    }
+  }
+}
