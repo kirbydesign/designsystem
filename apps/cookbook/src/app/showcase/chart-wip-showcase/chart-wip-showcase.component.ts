@@ -41,6 +41,11 @@ export class ChartWipShowcaseComponent {
       description: `(Optional) Chart.js options that can be used to customize the charts, see: https://www.chartjs.org/docs/latest/general/options.html`,
       type: ['ChartOptions'],
     },
+    {
+      name: 'annotations',
+      description: `(Optional) Chart.js annotations that can be used to add annotations to the chart, see: https://www.chartjs.org/chartjs-plugin-annotation/`,
+      type: ['AnnotationOptions[]'],
+    },
   ];
 
   _cssCustomPropertiesColumns: ApiDescriptionPropertyColumns = {
