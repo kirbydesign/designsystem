@@ -15,7 +15,7 @@ export { ChipComponent } from './chip/chip.component';
 
 export { DividerComponent } from './divider/divider.component';
 
-export { DropdownComponent, HorizontalDirection } from './dropdown/dropdown.component';
+export { DropdownComponent } from './dropdown/dropdown.component';
 
 export { EmptyStateComponent } from './empty-state/empty-state.component';
 
@@ -35,6 +35,8 @@ export * from './reorder-list';
 export * from './modal';
 
 export * from './page';
+
+export { HorizontalDirection, PopoverComponent } from './popover/popover.component';
 
 export * from './router-outlet';
 

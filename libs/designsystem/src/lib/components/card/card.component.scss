@@ -16,6 +16,7 @@
   overflow: hidden;
   position: relative;
   z-index: z('default');
+  width: var(--width, auto);
 
   .content-wrapper {
     &.padding {

@@ -98,6 +98,10 @@ export class DesignTokenHelper {
   public static itemHeight(key: keyof typeof styles.itemHeights): string {
     return styles.itemHeights[key];
   }
+
+  public static zLayer(key: keyof typeof styles.zLayers): string {
+    return styles.zLayers[key];
+  }
 }
 
 export type ThemeColorExtended =

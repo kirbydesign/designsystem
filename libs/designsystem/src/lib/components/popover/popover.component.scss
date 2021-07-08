@@ -1,0 +1,26 @@
+@import '../../scss/utils';
+
+:host {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: z('popover');
+}
+
+:host(.is-opening) {
+  display: block;
+  visibility: hidden;
+}
+
+:host(.is-open) {
+  display: block;
+}
+
+.wrapper {
+  position: fixed;
+  margin-top: size('xxxs');
+  margin-bottom: size('xxxs');
+}
