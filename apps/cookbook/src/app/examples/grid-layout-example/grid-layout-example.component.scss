@@ -6,6 +6,7 @@ $tablet-min-width: 721px;
 
 // Context
 $gutter: 16px;
+$safe-area: 16px;
 $max-width: 1196px;
 
 // Core example
@@ -63,6 +64,10 @@ body {
 
 // Context
 .gutter {
+  padding-inline: $gutter;
+}
+
+.safe-area-inline {
   padding-inline: $gutter;
 }
 
