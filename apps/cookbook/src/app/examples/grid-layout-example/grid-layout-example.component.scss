@@ -56,6 +56,11 @@ body {
   margin: 0;
 }
 
+main {
+  background-color: var(--kirby-background-color);
+  min-height: 100%;
+}
+
 // Context
 .max-width-container {
   max-width: ($max-width + 2 * $gutter);
@@ -73,13 +78,7 @@ body {
 
 // Example details
 
-// kirby-card {
-//   //   min-height: 200px;
-//   background-color: hotpink;
-// }
-
 .box {
-  margin-block: $gap;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -103,14 +102,47 @@ body {
 }
 
 .example-text {
-  font-size: 1.62rem;
-
-  //   display: flex;
-  //   align-items: center;
-  //   justify-content: center;
-  //   min-height: 200px;
+  &,
+  & > p {
+    font-size: clamp(1rem, 5vw, 2rem);
+  }
 }
 
 .align-center {
   text-align: center;
+}
+
+.not-grid {
+  display: none;
+}
+
+.debug {
+  kirby-card {
+    --kirby-card-main-background-color: var(--kirby-white-contrast);
+    --kirby-card-main-color: var(--kirby-white);
+  }
+
+  h1,
+  h2 {
+    color: #000;
+    background-color: #fff;
+  }
+
+  .not-grid {
+    display: block;
+  }
+
+  .gutter {
+    color: #fff;
+    background-color: blue;
+  }
+
+  .safe-area-inline {
+    background-color: darkcyan;
+  }
+
+  .box {
+    color: #000;
+    background-color: hotpink;
+  }
 }

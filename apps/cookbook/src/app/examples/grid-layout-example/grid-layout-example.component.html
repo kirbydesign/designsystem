@@ -1,4 +1,4 @@
-<main>
+<main class="debug">
   <section>
     <div class="safe-area-inline">
       <div class="max-width-container gutter">
@@ -58,10 +58,13 @@
       </div>
     </div>
   </section>
-  <div class="max-width-container gutter">
-    <div class="box">
-      <button kirby-button size="lg">Tilføj</button>
-      <p class="align-center">Tilføj gæld og formue fra andre banker m.m.</p>
+
+  <div class="safe-area-inline">
+    <div class="max-width-container gutter">
+      <div class="box">
+        <button kirby-button size="lg">Tilføj</button>
+        <p class="align-center">Tilføj gæld og formue fra andre banker m.m.</p>
+      </div>
     </div>
   </div>
 
@@ -117,19 +120,25 @@
     </div>
   </section>
 
-  <div class="safe-area-inline">
-    <div class="max-width-container gutter">
-      <div id="example-1" class="box example-text align-center">
-        max-width + gutter + safe area
+  <div class="not-grid">
+    <div class="safe-area-inline">
+      <div class="max-width-container gutter">
+        <div id="example-1" class="box example-text align-center">
+          <div class="h1">
+            max-width + gutter + safe area
+          </div>
+          .safe-area-inline > .max-width-container.gutter
+        </div>
       </div>
     </div>
-  </div>
-  <div class="safe-area-inline">
-    <div id="example-2" class="box example-text align-center">
-      Full width + safe area
+    <div class="safe-area-inline">
+      <div id="example-2" class="box example-text align-center">
+        <div class="h1">Full width + safe area</div>
+        .safe-area-inline
+      </div>
     </div>
-  </div>
-  <div id="example-3" class="box example-text align-center">
-    Full width
+    <div id="example-3" class="box example-text align-center">
+      <div class="h1">Full width</div>
+    </div>
   </div>
 </main>
