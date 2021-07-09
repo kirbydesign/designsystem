@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header [class.toolbar-active]="toolbarTitleVisible">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button
@@ -31,28 +31,34 @@
 </ion-header>
 
 <ion-content scrollEvents="true" forceOverscroll="false">
-  <div class="content-inner">
-    <div
-      class="page-title"
-      #pageTitle
-      *ngIf="hasPageTitle"
-      [class.has-actions]="hasActionsInPage"
-      [ngClass]="{
-        'text-center': titleAlignment === 'center',
-        'text-right': titleAlignment === 'right'
-      }"
-    >
+  <!-- Header -->
+  <ng-content select="kirby-page-header"> </ng-content>
+  <div class="content-outer">
+    <div class="content-inner">
+      <div
+        class="page-title"
+        #pageTitle
+        *ngIf="hasPageTitle"
+        [class.has-actions]="hasActionsInPage"
+        [ngClass]="{
+          'text-center': titleAlignment === 'center',
+          'text-right': titleAlignment === 'right'
+        }"
+      >
+        <ng-container
+          *ngTemplateOutlet="customTitleTemplate || defaultPageTitleTemplate"
+        ></ng-container>
+        <div #canvasPageActions *ngIf="pageActionsTemplate || defaultPageActionsTemplate">
+          <ng-container
+            *ngTemplateOutlet="pageActionsTemplate || defaultPageActionsTemplate"
+          ></ng-container>
+        </div>
+      </div>
+      <!-- Content -->
       <ng-container
-        *ngTemplateOutlet="customTitleTemplate || defaultPageTitleTemplate"
-      ></ng-container>
-      <ng-container
-        *ngTemplateOutlet="pageActionsTemplate || defaultPageActionsTemplate"
+        *ngTemplateOutlet="customContentTemplate || defaultContentTemplate"
       ></ng-container>
     </div>
-    <!-- Content -->
-    <ng-container
-      *ngTemplateOutlet="customContentTemplate || defaultContentTemplate"
-    ></ng-container>
   </div>
 
   <div slot="fixed" class="fixed-content" *ngIf="fixedContentTemplate">

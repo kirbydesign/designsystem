@@ -7,5 +7,6 @@ export { PageActionsDirective } from './page.component';
 export { PageContentDirective } from './page.component';
 export { PageContentComponent } from './page.component';
 export { PageActionsComponent } from './page.component';
+export { PageHeaderComponent } from './page.component';
 export { PageFooterComponent } from './page-footer/page-footer.component';
 export { PageModule } from './page.module';

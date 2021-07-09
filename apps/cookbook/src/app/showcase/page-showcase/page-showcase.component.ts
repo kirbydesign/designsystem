@@ -5,6 +5,7 @@ import { PageAlignmentAndToolbarTitleExampleComponent } from '~/app/examples/pag
 import { PageFitHeadingExampleComponent } from '~/app/examples/page-example/fit-heading/fit-heading-example.component';
 import { PageFixedFooterTabExampleComponent } from '~/app/examples/page-example/fixed-footer-tabs/tab/fixed-footer-tab-example.component';
 import { PageFixedTitleAndActionsExampleComponent } from '~/app/examples/page-example/fixed-title-and-actions/page-fixed-title-and-actions-example.component';
+import { PageCustomPageHeaderExampleComponent } from '~/app/examples/page-example/page-custom-page-header-example.component';
 import { PageSimpleExampleComponent } from '~/app/examples/page-example/simple/page-simple-example.component';
 import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
 import {
@@ -29,6 +30,7 @@ export class PageShowcaseComponent {
   fixedActionsExampleHtml: string = PageFixedTitleAndActionsExampleComponent.fixedActionsTemplate;
   customTitleExampleHtml: string = PageCustomTitleExampleComponent.template;
   advancedExampleHtml: string = PageAdvancedExampleComponent.template;
+  customPageHeaderExampleHtml: string = PageCustomPageHeaderExampleComponent.template;
   properties: ApiDescriptionProperty[] = [
     {
       name: 'title',

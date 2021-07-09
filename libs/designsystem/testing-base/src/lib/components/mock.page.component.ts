@@ -6,6 +6,7 @@ import {
   PageComponent,
   PageContentComponent,
   PageContentDirective,
+  PageHeaderComponent,
   PageProgressComponent,
   PageTitleComponent,
   PageTitleDirective,
@@ -13,6 +14,7 @@ import {
 } from '@kirbydesign/designsystem';
 
 type stickyConfig = { sticky: boolean };
+type stickyOnlyConfig = { stickyOnly: boolean; stickyTarget?: HTMLElement };
 type fixedConfig = { fixed: boolean };
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
@@ -48,7 +50,7 @@ export class MockPageToolbarTitleDirective {}
   ],
 })
 export class MockPageActionsDirective {
-  @Input('kirbyPageActions') config: stickyConfig | fixedConfig;
+  @Input('kirbyPageActions') config: stickyConfig | fixedConfig | stickyOnlyConfig;
 }
 
 @Directive({
@@ -87,6 +89,18 @@ export class MockPageProgressComponent {}
   ],
 })
 export class MockPageTitleComponent {}
+
+@Component({
+  selector: 'kirby-page-header',
+  template: '<ng-content></ng-content>',
+  providers: [
+    {
+      provide: PageHeaderComponent,
+      useExisting: forwardRef(() => MockPageHeaderComponent),
+    },
+  ],
+})
+export class MockPageHeaderComponent {}
 
 @Component({
   selector: 'kirby-page-content',
