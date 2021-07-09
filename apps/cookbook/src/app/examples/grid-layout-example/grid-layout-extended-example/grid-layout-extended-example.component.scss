@@ -49,7 +49,7 @@ main {
 }
 
 .max-width-container {
-  max-width: ($max-width + 2 * $gutter);
+  max-width: $max-width;
   margin-inline: auto;
 }
 
