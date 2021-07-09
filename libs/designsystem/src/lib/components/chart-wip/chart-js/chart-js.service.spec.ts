@@ -538,7 +538,7 @@ describe('ChartJSService', () => {
     });
 
     it('should be possible to overwrite annotation defaults', () => {
-      expect(CHART_ANNOTATION_CONFIGS['line']['borderDash']).toBe([6, 3]);
+      expect(CHART_ANNOTATION_CONFIGS['line']['borderDash']).toEqual([6, 3]);
       const annotations: AnnotationOptions[] = [
         { type: 'line', yMin: 10, yMax: 10, borderDash: [10, 10] },
         { type: 'line', yMin: 20, yMax: 20, borderDash: [10, 10] },
@@ -549,7 +549,7 @@ describe('ChartJSService', () => {
 
       const chartAnnotations = chart.options.plugins.annotation.annotations as AnnotationOptions[];
       chartAnnotations.forEach((chartAnnotation) => {
-        expect(chartAnnotation.drawTime).toBe([10, 10]);
+        expect(chartAnnotation.borderDash).toEqual([10, 10]);
       });
     });
   });
