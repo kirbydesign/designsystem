@@ -1,29 +1,29 @@
-// Core example
+// Grid
 $columns: 12;
-$desktop-min-width: 1025px;
 $gap: 24px;
+
+// Breakpoints
+$desktop-min-width: 1025px;
 $tablet-min-width: 721px;
 
-// Core example
 .grid-container {
   display: grid;
   grid-template-columns: repeat($columns, 1fr);
   gap: $gap;
 }
 
-// Core example
 .grid-item {
   grid-column: span $columns;
 }
 
-// Core example
+// Tablet size and above
 @media screen and (min-width: $tablet-min-width) {
   .half\@tablet-up {
     grid-column: span ($columns / 2);
   }
 }
 
-// Core example
+// Desktop size and above
 @media screen and (min-width: $desktop-min-width) {
   .half\@desktop-up {
     grid-column: span ($columns / 2);
@@ -34,8 +34,22 @@ $tablet-min-width: 721px;
   }
 }
 
-// Context
+// For the sake of example -----------------------------------------------------
 main {
   background-color: var(--kirby-background-color);
   min-height: 100%;
+  padding-block: 2rem 5rem;
 }
+
+.example-title {
+  display: block;
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.4;
+  text-align: center;
+  border-block: 0.5rem solid #000;
+  color: #000;
+  background-color: deepskyblue;
+  margin-block: 5rem;
+}
+// -----------------------------------------------------------------------------
