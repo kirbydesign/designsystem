@@ -163,7 +163,7 @@
 
 <h2>Annotations</h2>
 <p>
-  Lines, boxes, points and ellipses can be drawn to annotate the charts using the
+  Lines, boxes, ellipses can be drawn to annotate the charts using the
   <code>annotations</code> input property. Annotations are drawn using the
   <a href="https://www.chartjs.org/chartjs-plugin-annotation/">chartjs-plugin-annotation</a> plugin
   for Chart.js
@@ -191,14 +191,12 @@
       >Line annotation documentation</a
     >
   </li>
-  <li>
-    <a href="https://www.chartjs.org/chartjs-plugin-annotation/guide/types/point.html"
-      >Point annotation documentation</a
-    >
-  </li>
 </ul>
 
-<p>The following example shows a chart annotated with a line, box, ellipse and point.</p>
+<p>
+  The following example shows a chart annotated with a line, box, ellipse and a line that has been
+  customized to not be dashed and have a different draw time.
+</p>
 
 <p>
   <kirby-card [mode]="_cardMode" [hasPadding]="_cardHasPadding">
