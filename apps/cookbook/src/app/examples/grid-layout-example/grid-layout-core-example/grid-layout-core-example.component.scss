@@ -4,11 +4,6 @@ $desktop-min-width: 1025px;
 $gap: 24px;
 $tablet-min-width: 721px;
 
-// Context
-$gutter: 16px;
-$safe-area: 16px;
-$max-width: 1196px;
-
 // Core example
 .grid-container {
   display: grid;
@@ -40,109 +35,7 @@ $max-width: 1196px;
 }
 
 // Context
-html {
-  box-sizing: border-box;
-}
-
-// Context
-*,
-*::before,
-*::after {
-  box-sizing: inherit;
-}
-
-// Context
-body {
-  margin: 0;
-}
-
 main {
   background-color: var(--kirby-background-color);
   min-height: 100%;
-}
-
-// Context
-.max-width-container {
-  max-width: ($max-width + 2 * $gutter);
-  margin-inline: auto;
-}
-
-// Context
-.gutter {
-  padding-inline: $gutter;
-}
-
-.safe-area-inline {
-  padding-inline: $gutter;
-}
-
-// Example details
-
-.box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 200px;
-}
-
-#example-1 {
-  background-color: crimson;
-  color: #fff;
-}
-
-#example-2 {
-  background-color: rebeccapurple;
-  color: #fff;
-}
-
-#example-3 {
-  background-color: deepskyblue;
-  color: #000;
-}
-
-.example-text {
-  &,
-  & > p {
-    font-size: clamp(1rem, 5vw, 2rem);
-  }
-}
-
-.align-center {
-  text-align: center;
-}
-
-.not-grid {
-  display: none;
-}
-
-.debug {
-  kirby-card {
-    --kirby-card-main-background-color: var(--kirby-white-contrast);
-    --kirby-card-main-color: var(--kirby-white);
-  }
-
-  h1,
-  h2 {
-    color: #000;
-    background-color: #fff;
-  }
-
-  .not-grid {
-    display: block;
-  }
-
-  .gutter {
-    color: #fff;
-    background-color: blue;
-  }
-
-  .safe-area-inline {
-    background-color: darkcyan;
-  }
-
-  .box {
-    color: #000;
-    background-color: hotpink;
-  }
 }
