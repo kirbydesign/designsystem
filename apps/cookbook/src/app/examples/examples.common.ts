@@ -23,7 +23,8 @@ import { FlagExampleComponent } from './flag-example/flag-example.component';
 import { FontsExampleComponent } from './fonts-example/fonts-example.component';
 import { FormFieldExampleComponent } from './form-field-example/form-field-example.component';
 import { GridExampleComponent } from './grid-example/grid-example.component';
-import { GridLayoutExtendedExampleComponent } from './grid-layout-extended-example/grid-layout-extended-example.component';
+import { GridLayoutCoreExampleComponent } from './grid-layout-example/grid-layout-core-example/grid-layout-core-example.component';
+import { GridLayoutExtendedExampleComponent } from './grid-layout-example/grid-layout-extended-example/grid-layout-extended-example.component';
 import { IconExampleComponent } from './icon-example/icon-example.component';
 import { ItemExampleComponent } from './item-example/item-example.component';
 import { LinkExampleComponent } from './link-example/link-example.component';
@@ -81,6 +82,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   ListNoShapeExampleComponent,
   ListVirtualScrollExampleComponent,
   GridExampleComponent,
+  GridLayoutCoreExampleComponent,
   GridLayoutExtendedExampleComponent,
   AvatarExampleComponent,
   FontsExampleComponent,
