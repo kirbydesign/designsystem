@@ -1,13 +1,10 @@
-// Core example
+// Grid
 $columns: 12;
-$desktop-min-width: 1025px;
 $gap: 24px;
-$tablet-min-width: 721px;
 
-// Context
-$gutter: 16px;
-$safe-area: 16px;
-$max-width: 1196px;
+// Breakpoints
+$desktop-min-width: 1025px;
+$tablet-min-width: 721px;
 
 // Core example
 .grid-container {
@@ -39,35 +36,23 @@ $max-width: 1196px;
   }
 }
 
-// Context
-html {
-  box-sizing: border-box;
-}
+// For the sake of example -----------------------------------------------------
 
 // Context
-*,
-*::before,
-*::after {
-  box-sizing: inherit;
-}
-
-// Context
-body {
-  margin: 0;
-}
+$gutter: 16px;
+$safe-area: 16px;
+$max-width: 1196px;
 
 main {
   background-color: var(--kirby-background-color);
   min-height: 100%;
 }
 
-// Context
 .max-width-container {
   max-width: ($max-width + 2 * $gutter);
   margin-inline: auto;
 }
 
-// Context
 .gutter {
   padding-inline: $gutter;
 }
@@ -76,29 +61,12 @@ main {
   padding-inline: $gutter;
 }
 
-// Example details
-
 .box {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 200px;
-}
-
-#example-1 {
-  background-color: crimson;
-  color: #fff;
-}
-
-#example-2 {
-  background-color: rebeccapurple;
-  color: #fff;
-}
-
-#example-3 {
-  background-color: deepskyblue;
-  color: #000;
 }
 
 .example-text {
@@ -115,7 +83,9 @@ main {
 .not-grid {
   display: none;
 }
+// -----------------------------------------------------------------------------
 
+// Color bonanza for debugging -------------------------------------------------
 .debug {
   kirby-card {
     --kirby-card-main-background-color: var(--kirby-white-contrast);
@@ -145,4 +115,20 @@ main {
     color: #000;
     background-color: hotpink;
   }
+
+  #example-1 {
+    background-color: crimson;
+    color: #fff;
+  }
+
+  #example-2 {
+    background-color: rebeccapurple;
+    color: #fff;
+  }
+
+  #example-3 {
+    background-color: deepskyblue;
+    color: #000;
+  }
 }
+// -----------------------------------------------------------------------------
