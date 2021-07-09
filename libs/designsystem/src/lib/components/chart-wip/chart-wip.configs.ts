@@ -79,11 +79,26 @@ export const CHART_TYPE_CONFIGS = {
 defaults it comes with. In order to have sensible defaults 
 this object is used instead and manually merged with the 
 rest of the annotations object */
+const borderColor = getThemeColorHexString('semi-dark');
+const borderDash = [6, 3];
+const borderWidth = 1;
+
 export const CHART_ANNOTATION_CONFIGS = {
   line: {
-    borderDash: [6, 3],
-    borderWidth: 1,
-    drawTime: 'beforeDatasetsDraw',
-    borderColor: getThemeColorHexString('semi-dark'),
+    borderDash,
+    borderWidth,
+    borderColor,
+  },
+  ellipse: {
+    borderDash,
+    borderWidth,
+    borderColor,
+    backgroundColor: 'transparent',
+  },
+  box: {
+    borderDash,
+    borderWidth,
+    borderColor,
+    backgroundColor: 'transparent',
   },
 };
