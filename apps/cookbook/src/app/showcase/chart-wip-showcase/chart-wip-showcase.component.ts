@@ -46,6 +46,11 @@ export class ChartWipShowcaseComponent {
       description: `(Optional) Chart.js annotations that can be used to add annotations to the chart, see: https://www.chartjs.org/chartjs-plugin-annotation/`,
       type: ['AnnotationOptions[]'],
     },
+    {
+      name: 'highlightedElements',
+      description: `(Optional) can be used to highlight specific data elements in the chart. Provided as an array of [number, number] tuples where the first value is the datasetIndex and the second is the dataIndex.`,
+      type: ['[number, number][]'],
+    },
   ];
 
   _cssCustomPropertiesColumns: ApiDescriptionPropertyColumns = {
