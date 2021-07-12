@@ -44,6 +44,7 @@ import {
   MockPageToolbarTitleDirective,
 } from './components/mock.page.component';
 import { MockProgressCircleComponent } from './components/mock.progress-circle.component';
+import { MockBadgeComponent } from './components/mock.proxies';
 import { MockRadioGroupComponent } from './components/mock.radio-group.component';
 import { MockRadioComponent } from './components/mock.radio.component';
 import { MockRangeComponent } from './components/mock.range.component';
@@ -102,6 +103,7 @@ export const MOCK_COMPONENTS = [
   MockPageActionsComponent,
   MockPageComponent,
   MockProgressCircleComponent,
+  MockBadgeComponent,
   MockRadioGroupComponent,
   MockRadioComponent,
   MockRangeComponent,

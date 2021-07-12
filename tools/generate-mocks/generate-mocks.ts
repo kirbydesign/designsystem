@@ -27,13 +27,15 @@ export class GenerateMocks {
     const outputPathNormalized = path.normalize(outputPaths.base);
     const classMap = new Map<string, string[]>();
     const exportedProviders: ComponentMetaData[] = [];
-    const exportedTypes = await this.getExportedTypes(inputPath);
+    const assertedTypesMap = new Map<string, string>();
+    const exportedTypes = await this.getExportedTypes(inputPath, assertedTypesMap);
     await this.traverseFolder(
       inputPath,
       outputPathNormalized,
       classMap,
       exportedTypes,
-      exportedProviders
+      exportedProviders,
+      assertedTypesMap
     );
     this.renderMockComponentDeclaration(classMap, outputPathNormalized);
     this.renderMockProviders(exportedProviders, path.normalize(outputPaths.jasmine), 'jasmine');
@@ -106,7 +108,10 @@ ${providers},
     this.saveFileLinted(filename, content);
   }
 
-  private async getExportedTypes(folderpath: string): Promise<string[]> {
+  private async getExportedTypes(
+    folderpath: string,
+    assertedTypesMap: Map<string, string>
+  ): Promise<string[]> {
     const files = await this.getBarrelFiles(folderpath);
     const exportedTypes = await Promise.all(
       files.map(async (file) => {
@@ -122,16 +127,17 @@ ${providers},
             typesInFile.push(...exported.split(',').map((entry) => entry.trim()));
           });
         });
-        const filteredTypes = this.mapAndRemoveTypeAssertions(typesInFile);
+        const filteredTypes = this.mapAndRemoveTypeAssertions(typesInFile, assertedTypesMap);
         return filteredTypes;
       })
     );
     return Array.prototype.concat(...exportedTypes);
   }
 
-  mapAndRemoveTypeAssertions(exportedTypes: string[]) {
-    let compNameToExportedNameMap: Map<string, string> = new Map();
-
+  mapAndRemoveTypeAssertions(
+    exportedTypes: string[],
+    assertedTypesMap: Map<string, string>
+  ): string[] {
     // capture group 1 is internal component name, group 2 is exported name
     const assertedTypeRegex = /(\w+) as (\w+)/;
 
@@ -139,7 +145,7 @@ ${providers},
       const match = type.match(assertedTypeRegex);
       if (match) {
         // add both matches to the map, but only return the exported type
-        compNameToExportedNameMap.set(match[1], match[2]);
+        assertedTypesMap.set(match[1], match[2]);
         return match[2];
       }
       return type;
@@ -168,18 +174,31 @@ ${providers},
     outputPath: string,
     classMap: Map<string, string[]>,
     exportedTypes: string[],
-    exportedProviders: ComponentMetaData[]
+    exportedProviders: ComponentMetaData[],
+    assertedTypesMap: Map<string, string>
   ) {
     const folderContent = readdirSync(folderpath);
     for (const fileOrFolder of folderContent) {
       const fullPath = path.join(folderpath, fileOrFolder);
       const ent = statSync(fullPath);
       if (ent.isDirectory()) {
-        await this.traverseFolder(fullPath, outputPath, classMap, exportedTypes, exportedProviders);
+        await this.traverseFolder(
+          fullPath,
+          outputPath,
+          classMap,
+          exportedTypes,
+          exportedProviders,
+          assertedTypesMap
+        );
       } else {
         if (fileOrFolder.endsWith('.component.ts') || fileOrFolder.endsWith('proxies.ts')) {
           const newFilename = path.join(outputPath, 'components', 'mock.' + fileOrFolder);
-          const classNames = this.renderMock(fullPath, newFilename, exportedTypes);
+          const classNames = this.renderMock(
+            fullPath,
+            newFilename,
+            exportedTypes,
+            assertedTypesMap
+          );
           if (classNames) {
             classMap.set(newFilename, classNames);
           }
@@ -236,8 +255,14 @@ ${providers},
     return className[0].toLowerCase() + className.slice(1) + 'Factory';
   }
 
-  private renderMock(fileName: string, newFilename: string, exportedTypes: string[]) {
-    const components = this.generateMetaData(fileName);
+  private renderMock(
+    fileName: string,
+    newFilename: string,
+    exportedTypes: string[],
+    assertedTypesMap: Map<string, string>
+  ) {
+    const components = this.generateMetaData(fileName, assertedTypesMap);
+
     const hasExportedComponents = components.some(
       (metaData) => !!metaData.decorator && exportedTypes.includes(metaData.className)
     );
@@ -379,7 +404,7 @@ export class ${mockClassName} {${propertiesString}${methodsString}}
     return renderedMethods.length ? separator + renderedMethods.join(separator) + newLine : '';
   }
 
-  private generateMetaData(fileName: string) {
+  private generateMetaData(fileName: string, assertedTypesMap?: Map<string, string>) {
     const sourceFile = ts.createSourceFile(
       fileName,
       readFileSync(fileName).toString(),
@@ -396,7 +421,7 @@ export class ${mockClassName} {${propertiesString}${methodsString}}
           properties: [],
           methods: [],
         };
-        this.visitTree(node, componentMetaData);
+        this.visitTree(node, componentMetaData, assertedTypesMap);
         if (componentMetaData.decorator) {
           components.push(componentMetaData);
         }
@@ -405,9 +430,13 @@ export class ${mockClassName} {${propertiesString}${methodsString}}
     return components;
   }
 
-  private visitTree(node: ts.Node, componentMetaData?: ComponentMetaData) {
+  private visitTree(
+    node: ts.Node,
+    componentMetaData?: ComponentMetaData,
+    assertedTypesMap?: Map<string, string>
+  ) {
     if (ts.isClassDeclaration(node)) {
-      this.visitClassDeclaration(node, componentMetaData);
+      this.visitClassDeclaration(node, componentMetaData, assertedTypesMap);
     }
     if (ts.isPropertyDeclaration(node) || ts.isSetAccessorDeclaration(node)) {
       this.visitPropertyDeclaration(node, componentMetaData);
@@ -420,10 +449,17 @@ export class ${mockClassName} {${propertiesString}${methodsString}}
 
   private visitClassDeclaration(
     classDeclaration: ts.ClassDeclaration,
-    componentMetaData: ComponentMetaData
+    componentMetaData: ComponentMetaData,
+    assertedTypesMap: Map<string, string>
   ) {
     const className = classDeclaration.name.getText();
-    componentMetaData.className = className;
+
+    if (assertedTypesMap?.get(className)) {
+      componentMetaData.className = assertedTypesMap.get(className);
+    } else {
+      componentMetaData.className = className;
+    }
+
     if (classDeclaration && classDeclaration.decorators) {
       classDeclaration.decorators.forEach((decorator) => {
         if (ts.isCallExpression(decorator.expression)) {
