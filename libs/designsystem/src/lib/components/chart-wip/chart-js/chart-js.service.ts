@@ -2,6 +2,7 @@ import { ElementRef, Injectable } from '@angular/core';
 import { ChartConfiguration, ChartOptions } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
 
+import { ChartWipDataset } from '..';
 import { CHART_ANNOTATION_CONFIGS, CHART_TYPE_CONFIGS } from '../chart-wip.configs';
 import {
   ChartData,
@@ -64,7 +65,7 @@ export class ChartJSService {
     this.chart.options.plugins.annotation.annotations = annotationsWithDefaults;
   }
 
-  public updateHighlightedElements(highlightedElements: ChartHighlightedElements) {
+  public updateHighlightedElements(highlightedElements?: ChartHighlightedElements) {
     const oldDatasets = this.chart.data.datasets as ChartDataset[];
 
     // Clear old datasets of highlighted elements
@@ -171,29 +172,31 @@ export class ChartJSService {
     };
   }
 
+  private addHighlightedElementsToDatasets(
+    highlightedElements: ChartHighlightedElements,
+    datasets: ChartWipDataset[]
+  ) {
+    highlightedElements.forEach(([datasetIndex, dataIndex]) => {
+      const dataset = datasets[datasetIndex];
+      if (!dataset) return;
+
+      if (dataset?.kirbyOptions?.highlightedElements) {
+        dataset.kirbyOptions.highlightedElements.push(dataIndex);
+      } else {
+        dataset.kirbyOptions = {
+          ...dataset.kirbyOptions,
+          highlightedElements: [dataIndex],
+        };
+      }
+    });
+  }
   private createDatasets(
     data: ChartData,
     highlightedElements?: ChartHighlightedElements
   ): ChartDataset[] {
-    const datasets = isNumberArray(data) ? [{ data }] : data;
+    let datasets = isNumberArray(data) ? [{ data }] : data;
 
-    if (highlightedElements) {
-      console.log(highlightedElements);
-      highlightedElements.forEach(([datasetIndex, dataIndex]) => {
-        if (datasetIndex >= datasets.length) return;
-
-        const dataset = datasets[datasetIndex];
-        const currentHighlightedElements = dataset?.kirbyOptions?.highlightedElements;
-        if (currentHighlightedElements) {
-          currentHighlightedElements.push(dataIndex);
-        } else {
-          dataset.kirbyOptions = {
-            ...dataset.kirbyOptions,
-            highlightedElements: [dataIndex],
-          };
-        }
-      });
-    }
+    if (highlightedElements) this.addHighlightedElementsToDatasets(highlightedElements, datasets);
 
     return datasets;
   }
