@@ -21,12 +21,18 @@ function scriptedBackgroundColor(context: ScriptableContext<'bar'>) {
   }
 }
 
+function scriptedHoverBackgroundColor(context: ScriptableContext<'bar'>) {
+  if (context.chart.options.onClick) {
+    return hoverBackgroundColor;
+  }
+}
+
 export const CHART_GLOBAL_DEFAULTS = {
   maintainAspectRatio: false,
   elements: {
     bar: {
       backgroundColor: scriptedBackgroundColor,
-      hoverBackgroundColor: hoverBackgroundColor,
+      hoverBackgroundColor: scriptedHoverBackgroundColor,
     },
   },
   scales: {
