@@ -24,6 +24,7 @@ export class MockChartWipComponent {
   @Input() dataLabels: string[] | string[][];
   @Input() customOptions: ChartOptions;
   @Input() annotations: AnnotationOptions[];
+  @Input() highlightedElements: ChartHighlightedElements;
   @Input() height: string | number;
 }
 
