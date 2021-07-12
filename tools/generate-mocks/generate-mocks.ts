@@ -454,11 +454,9 @@ export class ${mockClassName} {${propertiesString}${methodsString}}
   ) {
     const className = classDeclaration.name.getText();
 
-    if (assertedTypesMap?.get(className)) {
-      componentMetaData.className = assertedTypesMap.get(className);
-    } else {
-      componentMetaData.className = className;
-    }
+    componentMetaData.className = assertedTypesMap?.get(className)
+      ? assertedTypesMap.get(className)
+      : className;
 
     if (classDeclaration && classDeclaration.decorators) {
       classDeclaration.decorators.forEach((decorator) => {
