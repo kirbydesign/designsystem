@@ -88,34 +88,47 @@ describe('ChartJSService', () => {
       });
     });
 
-    describe('when type is ChartType.column & no custom options are passed', () => {
+    describe('when type is ChartType.column', () => {
       let chart: Chart;
 
-      beforeEach(() => {
-        chartJSService.renderChart(canvasElement, 'column', [1, 2, 3], ['one', 'two', 'three']);
-        chart = chartJSService['chart'];
+      describe('and no custom options are passed', () => {
+        beforeEach(() => {
+          chartJSService.renderChart(canvasElement, 'column', [1, 2, 3], ['one', 'two', 'three']);
+          chart = chartJSService['chart'];
+        });
+
+        it('should have correct background color for elements', () => {
+          expect(chart.options.elements.bar.backgroundColor).toEqual(
+            ColorHelper.getThemeColorHexString('secondary')
+          );
+        });
+
+        it('should have no hover background color for elements', () => {
+          expect(chart.options.elements.bar.hoverBackgroundColor).toBeUndefined();
+        });
+
+        it('should have no grid', () => {
+          expect(chart.options.scales.linear.display).toBeFalse();
+          expect(chart.options.scales.linear.ticks.display).toBeFalse();
+          expect(chart.options.scales.category.grid.display).toBeFalse();
+        });
+
+        it('should have no legend', () => {
+          expect(chart.options.plugins.legend.display).toBeFalse();
+        });
       });
 
-      it('should have correct background color for elements', () => {
-        expect(chart.options.elements.bar.backgroundColor).toEqual(
-          ColorHelper.getThemeColorHexString('secondary')
-        );
-      });
+      describe('and onClick is set via custom options', () => {
+        beforeEach(() => {
+          chartJSService.renderChart(canvasElement, 'column', [1, 2, 3], ['one', 'two', 'three'], {
+            onClick: () => console.log('testing'),
+          });
+          chart = chartJSService['chart'];
+        });
 
-      it('should have correct hover background color for elements', () => {
-        expect(chart.options.elements.bar.hoverBackgroundColor).toEqual(
-          ColorHelper.getThemeColorHexString('primary')
-        );
-      });
-
-      it('should have no grid', () => {
-        expect(chart.options.scales.linear.display).toBeFalse();
-        expect(chart.options.scales.linear.ticks.display).toBeFalse();
-        expect(chart.options.scales.category.grid.display).toBeFalse();
-      });
-
-      it('should have no legend', () => {
-        expect(chart.options.plugins.legend.display).toBeFalse();
+        it('should have correct hover background color', () => {
+          expect(chart.options.elements.bar.hoverBackgroundColor).toBe('#00e89a');
+        });
       });
     });
 
@@ -131,34 +144,47 @@ describe('ChartJSService', () => {
       });
     });
 
-    describe('when type is ChartType.bar & no custom options are passed', () => {
+    describe('when type is ChartType.bar', () => {
       let chart: Chart;
 
-      beforeEach(() => {
-        chartJSService.renderChart(canvasElement, 'bar', [1, 2, 3], ['one', 'two', 'three']);
-        chart = chartJSService['chart'];
+      describe('and no custom options are passed', () => {
+        beforeEach(() => {
+          chartJSService.renderChart(canvasElement, 'bar', [1, 2, 3], ['one', 'two', 'three']);
+          chart = chartJSService['chart'];
+        });
+
+        it('should have correct background color for elements', () => {
+          expect(chart.options.elements.bar.backgroundColor).toEqual(
+            ColorHelper.getThemeColorHexString('secondary')
+          );
+        });
+
+        it('should have no hover background color for elements', () => {
+          expect(chart.options.elements.bar.hoverBackgroundColor).toBeUndefined();
+        });
+
+        it('should have no grid', () => {
+          expect(chart.options.scales.linear.display).toBeFalse();
+          expect(chart.options.scales.linear.ticks.display).toBeFalse();
+          expect(chart.options.scales.category.grid.display).toBeFalse();
+        });
+
+        it('should have no legend', () => {
+          expect(chart.options.plugins.legend.display).toBeFalse();
+        });
       });
 
-      it('should have correct background color for elements', () => {
-        expect(chart.options.elements.bar.backgroundColor).toEqual(
-          ColorHelper.getThemeColorHexString('secondary')
-        );
-      });
+      describe('and onClick is set via custom options', () => {
+        beforeEach(() => {
+          chartJSService.renderChart(canvasElement, 'bar', [1, 2, 3], ['one', 'two', 'three'], {
+            onClick: () => console.log('testing'),
+          });
+          chart = chartJSService['chart'];
+        });
 
-      it('should have correct hover background color for elements', () => {
-        expect(chart.options.elements.bar.hoverBackgroundColor).toEqual(
-          ColorHelper.getThemeColorHexString('primary')
-        );
-      });
-
-      it('should have no grid', () => {
-        expect(chart.options.scales.linear.display).toBeFalse();
-        expect(chart.options.scales.linear.ticks.display).toBeFalse();
-        expect(chart.options.scales.category.grid.display).toBeFalse();
-      });
-
-      it('should have no legend', () => {
-        expect(chart.options.plugins.legend.display).toBeFalse();
+        it('should have correct hover background color', () => {
+          expect(chart.options.elements.bar.hoverBackgroundColor).toBe('#00e89a');
+        });
       });
     });
 
