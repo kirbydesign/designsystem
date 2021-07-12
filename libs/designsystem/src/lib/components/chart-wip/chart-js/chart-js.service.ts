@@ -64,6 +64,19 @@ export class ChartJSService {
     this.chart.options.plugins.annotation.annotations = annotationsWithDefaults;
   }
 
+  public updateHighlightedElements(highlightedElements: ChartHighlightedElements) {
+    const oldDatasets = this.chart.data.datasets as ChartDataset[];
+
+    // Clear old datasets of highlighted elements
+    oldDatasets.map((dataset) => {
+      if (dataset?.kirbyOptions?.highlightedElements) {
+        delete dataset.kirbyOptions.highlightedElements;
+      }
+    });
+
+    this.chart.data.datasets = this.createDatasets(oldDatasets, highlightedElements);
+  }
+
   private getExistingChartAnnotations(): AnnotationOptions[] | undefined {
     /* Plugin options type uses a utility type to mark all members as optional. 
        To not have to import this from the utility-types npm package, return as 

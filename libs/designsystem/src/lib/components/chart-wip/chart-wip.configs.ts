@@ -7,14 +7,17 @@ import { ChartWipDataset } from '.';
 const { fontSize } = DesignTokenHelper;
 const { getThemeColorHexString } = ColorHelper;
 
+const hoverBackgroundColor = getThemeColorHexString('primary');
+const backgroundColor = getThemeColorHexString('secondary');
+
 function scriptedBackgroundColor(context: ScriptableContext<'bar'>) {
   const dataset = context.dataset as ChartWipDataset;
   const highlightedElements = dataset?.kirbyOptions?.highlightedElements;
 
   if (highlightedElements && highlightedElements.includes(context.dataIndex)) {
-    return 'red';
+    return hoverBackgroundColor;
   } else {
-    return getThemeColorHexString('secondary');
+    return backgroundColor;
   }
 }
 
@@ -23,7 +26,7 @@ export const CHART_GLOBAL_DEFAULTS = {
   elements: {
     bar: {
       backgroundColor: scriptedBackgroundColor,
-      hoverBackgroundColor: getThemeColorHexString('primary'),
+      hoverBackgroundColor: hoverBackgroundColor,
     },
   },
   scales: {

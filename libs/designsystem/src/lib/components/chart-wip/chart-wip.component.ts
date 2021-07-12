@@ -97,7 +97,7 @@ export class ChartWipComponent implements AfterViewInit, OnChanges {
   }
 
   private updateHighlightedElements() {
-    console.log('Moy calente update amigo! 🤠');
+    this.chartJSService.updateHighlightedElements(this.highlightedElements);
   }
 
   private redrawChart() {
