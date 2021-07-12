@@ -1,6 +1,6 @@
 import { ChartDataset as ChartJSDataset } from 'chart.js';
 
-export type ChartHighlightedElements = [number, number][];
+export type ChartHighlightedElements = number[][];
 
 export type ChartType = 'column' | 'bar';
 

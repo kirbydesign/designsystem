@@ -23,7 +23,21 @@ describe('ChartJSService', () => {
   describe('function: renderChart', () => {
     describe('when annotations are given', () => {
       it('should render the chart with annotations applied', () => {
-        expect(false).toBeTrue();
+        const annotations: AnnotationOptions[] = [
+          { type: 'line', yMin: 10, yMax: 10 },
+          { type: 'line', yMin: 20, yMax: 20 },
+        ];
+
+        chartJSService.renderChart(
+          canvasElement,
+          'bar',
+          [1, 2, 3],
+          ['one', 'two', 'three'],
+          {},
+          annotations
+        );
+
+        expect(chartJSService['chart'].options.plugins.annotation.annotations.length).toEqual(2);
       });
     });
 
@@ -44,15 +58,29 @@ describe('ChartJSService', () => {
         const chart = chartJSService['chart'];
         expect(chart.data.datasets[0].data).toEqual(data);
       });
-    });
 
-    describe('when highlightedElements are given', () => {
-      it('should highlight given elements with correct color', () => {
-        expect(false).toBeTrue();
-      });
+      describe('when highlightedElements are given', () => {
+        it('should mark given elements as highlighted', () => {
+          const highlightedElements = [
+            [0, 0],
+            [0, 2],
+          ];
 
-      it('should keep the color of elements that are not highlighted', () => {
-        expect(false).toBeTrue();
+          chartJSService.renderChart(
+            canvasElement,
+            'bar',
+            [1, 2, 3],
+            ['one', 'two', 'three'],
+            {},
+            [],
+            highlightedElements
+          );
+
+          const datasets = chartJSService['chart'].data.datasets as ChartWipDataset[];
+
+          expect(datasets.length).toEqual(1);
+          expect(datasets[0].kirbyOptions.highlightedElements).toEqual([0, 2]);
+        });
       });
     });
 
@@ -98,6 +126,30 @@ describe('ChartJSService', () => {
           const chart = chartJSService['chart'];
           expect(chart.data.datasets[0].data).toEqual(data1);
           expect(chart.data.datasets[1].data).toEqual(data2);
+        });
+      });
+
+      describe('when highlightedElements are given', () => {
+        it('should mark given elements as highlighted', () => {
+          const highlightedElements = [
+            [0, 0],
+            [0, 2],
+          ];
+
+          chartJSService.renderChart(
+            canvasElement,
+            'bar',
+            [{ data: [1, 2, 3] }],
+            ['one', 'two', 'three'],
+            {},
+            [],
+            highlightedElements
+          );
+
+          const datasets = chartJSService['chart'].data.datasets as ChartWipDataset[];
+
+          expect(datasets.length).toEqual(1);
+          expect(datasets[0].kirbyOptions.highlightedElements).toEqual([0, 2]);
         });
       });
     });
