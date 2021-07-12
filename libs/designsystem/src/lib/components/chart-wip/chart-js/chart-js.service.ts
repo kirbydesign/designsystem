@@ -3,7 +3,13 @@ import { ChartConfiguration, ChartOptions } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
 
 import { CHART_ANNOTATION_CONFIGS, CHART_TYPE_CONFIGS } from '../chart-wip.configs';
-import { ChartData, ChartDataset, ChartType, isNumberArray } from '../chart-wip.types';
+import {
+  ChartData,
+  ChartDataset,
+  ChartHighlightedElements,
+  ChartType,
+  isNumberArray,
+} from '../chart-wip.types';
 import { deepCopy, deepMergeObjects } from '../utils';
 
 import { Chart } from './configured-chart-js';
@@ -18,9 +24,10 @@ export class ChartJSService {
     data: ChartData,
     dataLabels?: string[] | string[][],
     customOptions?: ChartOptions,
-    annotations?: AnnotationOptions[]
+    annotations?: AnnotationOptions[],
+    highlightedElements?: ChartHighlightedElements
   ): void {
-    const datasets = this.createDatasets(data);
+    const datasets = this.createDatasets(data, highlightedElements);
     const options = this.createOptionsObject(type, customOptions, annotations);
     const config = this.createConfigurationObject(type, datasets, options, dataLabels);
     this.initializeNewChart(targetElement.nativeElement, config);
@@ -151,7 +158,30 @@ export class ChartJSService {
     };
   }
 
-  private createDatasets(data: ChartData): ChartDataset[] {
-    return isNumberArray(data) ? [{ data }] : data;
+  private createDatasets(
+    data: ChartData,
+    highlightedElements?: ChartHighlightedElements
+  ): ChartDataset[] {
+    const datasets = isNumberArray(data) ? [{ data }] : data;
+
+    if (highlightedElements) {
+      console.log(highlightedElements);
+      highlightedElements.forEach(([datasetIndex, dataIndex]) => {
+        if (datasetIndex >= datasets.length) return;
+
+        const dataset = datasets[datasetIndex];
+        const currentHighlightedElements = dataset?.kirbyOptions?.highlightedElements;
+        if (currentHighlightedElements) {
+          currentHighlightedElements.push(dataIndex);
+        } else {
+          dataset.kirbyOptions = {
+            ...dataset.kirbyOptions,
+            highlightedElements: [dataIndex],
+          };
+        }
+      });
+    }
+
+    return datasets;
   }
 }

@@ -1,15 +1,28 @@
-import { ChartType as ChartJSType } from 'chart.js';
+import { ChartType as ChartJSType, ScriptableContext } from 'chart.js';
 
 import { ColorHelper, DesignTokenHelper } from '../../helpers';
 
+import { ChartWipDataset } from '.';
+
 const { fontSize } = DesignTokenHelper;
 const { getThemeColorHexString } = ColorHelper;
+
+function scriptedBackgroundColor(context: ScriptableContext<'bar'>) {
+  const dataset = context.dataset as ChartWipDataset;
+  const highlightedElements = dataset?.kirbyOptions?.highlightedElements;
+
+  if (highlightedElements && highlightedElements.includes(context.dataIndex)) {
+    return 'red';
+  } else {
+    return getThemeColorHexString('secondary');
+  }
+}
 
 export const CHART_GLOBAL_DEFAULTS = {
   maintainAspectRatio: false,
   elements: {
     bar: {
-      backgroundColor: getThemeColorHexString('secondary'),
+      backgroundColor: scriptedBackgroundColor,
       hoverBackgroundColor: getThemeColorHexString('primary'),
     },
   },

@@ -12,7 +12,7 @@ import { ChartOptions } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
 
 import { ChartJSService } from './chart-js/chart-js.service';
-import { ChartData, ChartType } from './chart-wip.types';
+import { ChartData, ChartHighlightedElements, ChartType } from './chart-wip.types';
 
 @Component({
   selector: 'kirby-chart-wip',
@@ -25,7 +25,8 @@ export class ChartWipComponent implements AfterViewInit, OnChanges {
   @Input() data: ChartData;
   @Input() dataLabels?: string[] | string[][];
   @Input() customOptions?: ChartOptions;
-  @Input() annotations: AnnotationOptions[];
+  @Input() annotations?: AnnotationOptions[];
+  @Input() highlightedElements?: ChartHighlightedElements;
 
   @HostBinding('style.--kirby-chart-height')
   _height: string;
@@ -51,6 +52,7 @@ export class ChartWipComponent implements AfterViewInit, OnChanges {
       type: () => this.updateType(),
       customOptions: () => this.updateCustomOptions(),
       annotations: () => this.updateAnnotations(),
+      highlightedElements: () => this.updateHighlightedElements(),
     };
 
     Object.entries(simpleChanges).forEach(([key]) => {
@@ -69,7 +71,8 @@ export class ChartWipComponent implements AfterViewInit, OnChanges {
       this.data,
       this.dataLabels,
       this.customOptions,
-      this.annotations
+      this.annotations,
+      this.highlightedElements
     );
   }
 
@@ -91,6 +94,10 @@ export class ChartWipComponent implements AfterViewInit, OnChanges {
 
   private updateAnnotations() {
     this.chartJSService.updateAnnotations(this.annotations);
+  }
+
+  private updateHighlightedElements() {
+    console.log('Moy calente update amigo! 🤠');
   }
 
   private redrawChart() {

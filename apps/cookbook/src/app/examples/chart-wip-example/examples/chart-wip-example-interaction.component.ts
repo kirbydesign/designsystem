@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { ActiveElement } from 'chart.js';
+import { ActiveElement, Chart, ChartEvent } from 'chart.js';
 
 import { ChartWipOptions } from '@kirbydesign/designsystem';
+import { ChartHighlightedElements } from '@kirbydesign/designsystem/components/chart-wip/chart-wip.types';
 
 const config = {
   selector: 'cookbook-chart-wip-example-interaction',
@@ -11,6 +12,7 @@ const config = {
     [data]="[7, 12, 5, 9, 3]" 
     [dataLabels]="_dataLabels" 
     [customOptions]="_customOptions"
+    [highlightedElements]="_highlighted"
   ></kirby-chart-wip>`,
   codeSnippet: `
   _text = 'Nothing has been clicked';
@@ -42,15 +44,18 @@ export class ChartWipExampleInteractionComponent {
 
   _text: string = 'Nothing has been clicked';
   _dataLabels = ['Monday', 'Tuesday', 'Wedensday', 'Thursday', 'Friday'];
+  _highlighted: ChartHighlightedElements = [[0, 1]];
 
   _customOptions: ChartWipOptions = {
-    onClick: (_, [activeElement]) => this.onClickHandler(activeElement),
+    onClick: (event, [activeElement], chart) => this.onClickHandler(event, activeElement, chart),
   };
 
-  onClickHandler(activeElement: ActiveElement) {
+  onClickHandler(_event: ChartEvent, activeElement: ActiveElement, _chart: Chart) {
     if (!activeElement) {
       this._text = 'The background was clicked';
     } else {
+      this._highlighted = [[activeElement.datasetIndex, activeElement.index]];
+      // this._highlighted = [activeElement.datasetIndex, activeElement.index];
       const activeElementLabel = this._dataLabels[activeElement.index];
       this._text = `${activeElementLabel} was clicked`;
     }
