@@ -10,7 +10,7 @@ import { ChartHighlightedElements } from '../chart-wip.types';
 
 import { ChartJSService } from './chart-js.service';
 
-fdescribe('ChartJSService', () => {
+describe('ChartJSService', () => {
   let chartJSService: ChartJSService;
   let canvasElement: ElementRef<HTMLCanvasElement>;
 
