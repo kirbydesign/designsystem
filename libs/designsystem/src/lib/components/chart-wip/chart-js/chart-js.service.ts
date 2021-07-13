@@ -1,9 +1,13 @@
 import { ElementRef, Injectable } from '@angular/core';
-import { ChartConfiguration, ChartOptions } from 'chart.js';
+import { ActiveElement, ChartConfiguration, ChartOptions } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
 
 import { ChartWipDataset } from '..';
-import { CHART_ANNOTATION_CONFIGS, CHART_TYPE_CONFIGS } from '../chart-wip.configs';
+import {
+  CHART_ANNOTATION_CONFIGS,
+  CHART_TYPE_CONFIGS,
+  INTERACTION_FUNCTIONS_EXTENSIONS,
+} from '../chart-wip.configs';
 import {
   ChartData,
   ChartDataset,
@@ -137,6 +141,17 @@ export class ChartJSService {
     };
   }
 
+  private applyInteractionFunctionsExtensions(options: ChartOptions): ChartOptions {
+    const interactionFunctionsExtensions = INTERACTION_FUNCTIONS_EXTENSIONS;
+    Object.entries(interactionFunctionsExtensions).forEach(([key, _]) => {
+      const callback = options[key];
+      options[key] = (e: Event, a: ActiveElement[], c: Chart) => {
+        interactionFunctionsExtensions[key](e, a, c, callback);
+      };
+    });
+    return options;
+  }
+
   private createOptionsObject(
     type: ChartType,
     customOptions?: ChartOptions,
@@ -147,8 +162,8 @@ export class ChartJSService {
     const annotationPluginOptions = annotations
       ? this.createAnnotationPluginOptionsObject(annotations)
       : {};
-
-    return deepMergeObjects(typeConfigOptions, customOptions, annotationPluginOptions);
+    const options = deepMergeObjects(typeConfigOptions, customOptions, annotationPluginOptions);
+    return this.applyInteractionFunctionsExtensions(options);
   }
 
   private createConfigurationObject(

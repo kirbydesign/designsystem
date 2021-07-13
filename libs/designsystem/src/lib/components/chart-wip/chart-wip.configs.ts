@@ -1,4 +1,11 @@
-import { ChartType as ChartJSType, ScriptableContext } from 'chart.js';
+import {
+  ActiveElement,
+  Chart,
+  ChartEvent,
+  ChartOptions,
+  ChartType as ChartJSType,
+  ScriptableContext,
+} from 'chart.js';
 
 import { ColorHelper, DesignTokenHelper } from '../../helpers';
 
@@ -122,5 +129,22 @@ export const CHART_ANNOTATION_CONFIGS = {
     borderWidth,
     borderColor,
     backgroundColor: 'transparent',
+  },
+};
+
+/* Allows for adding functionality to interactions chart.js while 
+preserving the interaction functionality the consumer of the component has 
+passed by being provided as a callback. */
+export const INTERACTION_FUNCTIONS_EXTENSIONS = {
+  onHover: (
+    _event: ChartEvent,
+    activeElements: ActiveElement[],
+    _chart: Chart,
+    callback: ChartOptions['onHover']
+  ) => {
+    if (_chart.options.onClick) {
+      _chart.canvas.style.cursor = activeElements[0] ? 'pointer' : 'default';
+      callback(_event, activeElements, _chart);
+    }
   },
 };
