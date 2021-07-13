@@ -1,4 +1,4 @@
-import { Component, forwardRef } from '@angular/core';
+import { Component, forwardRef, Input } from '@angular/core';
 
 import { BadgeComponent } from '@kirbydesign/designsystem';
 
@@ -13,6 +13,8 @@ import { BadgeComponent } from '@kirbydesign/designsystem';
     },
   ],
 })
-export class MockBadgeComponent {}
+export class MockBadgeComponent {
+  @Input() text: string;
+}
 
 // #endregion
