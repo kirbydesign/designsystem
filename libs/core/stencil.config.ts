@@ -16,6 +16,6 @@ export const config: Config = {
       // copy: [{ src: './scss', dest: '../scss' }],
     },
     { type: 'docs-readme' },
-    { type: 'docs-json', file: './component-docs.json' },
+    { type: 'docs-json', file: './custom-elements.json' },
   ],
 };
