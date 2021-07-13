@@ -144,7 +144,8 @@ export const INTERACTION_FUNCTIONS_EXTENSIONS = {
   ) => {
     if (_chart.options.onClick) {
       _chart.canvas.style.cursor = activeElements[0] ? 'pointer' : 'default';
-      callback(_event, activeElements, _chart);
     }
+
+    if (callback) callback(_event, activeElements, _chart);
   },
 };
