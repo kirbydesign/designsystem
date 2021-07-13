@@ -10,7 +10,7 @@ import { ChartHighlightedElements } from '../chart-wip.types';
 
 import { ChartJSService } from './chart-js.service';
 
-describe('ChartJSService', () => {
+fdescribe('ChartJSService', () => {
   let chartJSService: ChartJSService;
   let canvasElement: ElementRef<HTMLCanvasElement>;
 
@@ -403,6 +403,19 @@ describe('ChartJSService', () => {
 
           expect(destructivelyUpdateTypeSpy).toHaveBeenCalledTimes(1);
         });
+      });
+    });
+
+    describe('private function: createOptionsObject', () => {
+      it('should apply interaction functions extensions', () => {
+        const applyInteractionFunctionsExtensionsSpy = spyOn<any>(
+          chartJSService,
+          'applyInteractionFunctionsExtensions'
+        );
+
+        chartJSService['createOptionsObject']('bar');
+
+        expect(applyInteractionFunctionsExtensionsSpy).toHaveBeenCalledTimes(1);
       });
     });
 
