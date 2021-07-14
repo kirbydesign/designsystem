@@ -6,33 +6,34 @@ import { ChartHighlightedElements } from '@kirbydesign/designsystem/components/c
 
 const config = {
   selector: 'cookbook-chart-wip-example-interaction',
-  template: `  <p>{{_text}}</p>
-  <kirby-chart-wip 
-    type="column" 
-    [data]="[7, 12, 5, 9, 3]" 
-    [dataLabels]="_dataLabels" 
-    [customOptions]="_customOptions"
-    [highlightedElements]="_highlighted"
-  ></kirby-chart-wip>`,
-  codeSnippet: `
-  _text = 'Nothing has been clicked';
-  _dataLabels = ['Monday', 'Tuesday', 'Wedensday', 'Thursday', 'Friday'];
-  _highlighted: ChartHighlightedElements;
+  template: `<p>{{_text}}</p>
+<kirby-chart-wip 
+  type="column" 
+  [data]="[7, 12, 5, 9, 3]" 
+  [dataLabels]="_dataLabels" 
+  [customOptions]="_customOptions"
+  [highlightedElements]="_highlighted"
+></kirby-chart-wip>`,
+  codeSnippet: `_text = 'Nothing has been clicked';
+_dataLabels = ['Monday', 'Tuesday', 'Wedensday', 'Thursday', 'Friday'];
+_highlighted: ChartHighlightedElements;
 
-  _customOptions = {
-    onClick: (_, [activeElement]) => this.onClickHandler(activeElement),
-  };
+_customOptions: ChartOptions = {
+  onClick: (_event: ChartEvent, activeElements: ActiveElement[], _chart: Chart) => {
+    const activeElement = activeElements[0];
+    if (activeElement) {
+      // Highlight clicked element
+      this._highlighted = [[activeElement.datasetIndex, activeElement.index]];
 
-  onClickHandler(activeElement) {
-    if (!activeElement) {
+      // Change text
+      const activeElementLabel = this._dataLabels[activeElement.index];
+      this._text = \`\${activeElementLabel} was clicked\`;
+    } else {
       this._text = 'The background was clicked';
       this._highlighted = [];
-    } else {
-      this._highlighted = [[activeElement.datasetIndex, activeElement.index]];
-      const activeElementLabel = this._dataLabels[activeElement.index];
-      this._text = \`\${activeElementLabel\} was clicked\`;
     }
-  }
+  },
+};
   `,
 };
 
@@ -49,17 +50,19 @@ export class ChartWipExampleInteractionComponent {
   _highlighted: ChartHighlightedElements;
 
   _customOptions: ChartOptions = {
-    onClick: (event, [activeElement], chart) => this.onClickHandler(event, activeElement, chart),
-  };
+    onClick: (_event: ChartEvent, activeElements: ActiveElement[], _chart: Chart) => {
+      const activeElement = activeElements[0];
+      if (activeElement) {
+        // Highlight clicked element
+        this._highlighted = [[activeElement.datasetIndex, activeElement.index]];
 
-  onClickHandler(_event: ChartEvent, activeElement: ActiveElement, _chart: Chart) {
-    if (!activeElement) {
-      this._text = 'The background was clicked';
-      this._highlighted = [];
-    } else {
-      this._highlighted = [[activeElement.datasetIndex, activeElement.index]];
-      const activeElementLabel = this._dataLabels[activeElement.index];
-      this._text = `${activeElementLabel} was clicked`;
-    }
-  }
+        // Change text
+        const activeElementLabel = this._dataLabels[activeElement.index];
+        this._text = `${activeElementLabel} was clicked`;
+      } else {
+        this._text = 'The background was clicked';
+        this._highlighted = [];
+      }
+    },
+  };
 }
