@@ -17,7 +17,7 @@ const config = {
     },
     {
       data: [0.6, 2, 1, 2.1, 0.2],
-      backgroundColor: getThemeColorHexString('secondary-shade'),
+      backgroundColor: getThemeColorHexString('primary'),
     },
   ];
 
@@ -48,7 +48,7 @@ export class ChartWipExampleColumnStackedComponent {
     },
     {
       data: [0.6, 2, 1, 2.1, 0.2],
-      backgroundColor: ColorHelper.getThemeColorHexString('secondary-shade'),
+      backgroundColor: ColorHelper.getThemeColorHexString('primary'),
     },
   ];
 

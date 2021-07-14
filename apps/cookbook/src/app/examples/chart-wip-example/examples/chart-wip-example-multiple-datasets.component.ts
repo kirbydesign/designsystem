@@ -25,7 +25,7 @@ _datasets = [
   },
   {
     data: [60, 32, 38, 44, 12],
-    backgroundColor: getThemeColorHexString('secondary-tint'),
+    backgroundColor: getThemeColorHexString('primary'),
   },
 ];
 `,
@@ -46,7 +46,7 @@ export class ChartWipExampleMultipleDatasetsComponent {
     },
     {
       data: [60, 32, 38, 44, 12],
-      backgroundColor: getThemeColorHexString('secondary-tint'),
+      backgroundColor: getThemeColorHexString('primary'),
     },
     {
       type: 'line',
