@@ -37,6 +37,7 @@ function scriptedHoverBackgroundColor(context: ScriptableContext<'bar'>) {
 export const CHART_GLOBAL_DEFAULTS = {
   maintainAspectRatio: false,
   color: getThemeColorHexString('black'),
+  resizeDelay: 10,
   elements: {
     bar: {
       backgroundColor: scriptedBackgroundColor,
