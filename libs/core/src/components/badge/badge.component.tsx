@@ -1,7 +1,7 @@
 import { Component, ComponentInterface, h, Host, Prop } from '@stencil/core';
 @Component({
   tag: 'kirby-badge',
-  styleUrl: 'badge.scss',
+  styleUrl: 'badge.component.scss',
   shadow: true,
 })
 // tslint:disable-next-line: component-class-suffix

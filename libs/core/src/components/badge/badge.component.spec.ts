@@ -1,6 +1,6 @@
 import { newSpecPage } from '@stencil/core/testing';
 
-import { Badge } from './badge';
+import { Badge } from './badge.component';
 
 describe('Badge', () => {
   it('renders', async () => {
