@@ -25,9 +25,7 @@
 <p>The type of a <code>kirby-chart</code> is set through the <code>type</code> input property.</p>
 
 <h3>Column Chart</h3>
-<p>
-  The column chart visualizes data from different categories as rectangles.
-</p>
+<p>The column chart visualizes data from different categories as rectangles.</p>
 <p>To render a column chart set <code>type</code> to <code>"column"</code>.</p>
 <p>
   <kirby-card [mode]="_cardMode" [hasPadding]="_cardHasPadding">
@@ -38,9 +36,7 @@
 </p>
 
 <h3>Bar Chart</h3>
-<p>
-  The bar chart visualizes data from different categories as rectangles along the x-axis.
-</p>
+<p>The bar chart visualizes data from different categories as rectangles along the x-axis.</p>
 <p>To render a bar chart set <code>type</code> to <code>'bar'</code>.</p>
 <p>
   <kirby-card [mode]="_cardMode" [hasPadding]="_cardHasPadding">
@@ -103,9 +99,7 @@
 </p>
 
 <h3 id="stacked-bar-and-column-charts">Stacked Bar & column charts</h3>
-<p>
-  Stacked charts can be created using a combination of custom options and datasets.
-</p>
+<p>Stacked charts can be created using a combination of custom options and datasets.</p>
 <p>
   <kirby-card [mode]="_cardMode" [hasPadding]="_cardHasPadding">
     <cookbook-example-viewer [html]="stackedExample.template" [ts]="stackedExample.codeSnippet">
@@ -122,14 +116,10 @@
   hover background color for one of the datsets.
 </p>
 
-<p>
-  Options are resolved such that:
-</p>
+<p>Options are resolved such that:</p>
 <ul>
   <li>Defaults are overwritten by custom options.</li>
-  <li>
-    Custom options are overwritten by dataset options.
-  </li>
+  <li>Custom options are overwritten by dataset options.</li>
 </ul>
 
 <kirby-divider [hasMargin]="true"></kirby-divider>
@@ -207,8 +197,8 @@
 </ul>
 
 <p>
-  The following example shows a chart annotated with a line, box, ellipse and a line that has been
-  customized to not be dashed and have a different draw time.
+  The following example shows a chart annotated with a line that has a different draw time than the
+  default, box, ellipse and a line that has been customized to not be dashed.
 </p>
 
 <p>
