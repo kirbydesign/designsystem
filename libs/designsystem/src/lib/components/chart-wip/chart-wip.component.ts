@@ -12,7 +12,7 @@ import { ChartOptions } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
 
 import { ChartJSService } from './chart-js/chart-js.service';
-import { ChartData, ChartHighlightedElements, ChartType } from './chart-wip.types';
+import { ChartDataset, ChartHighlightedElements, ChartType } from './chart-wip.types';
 
 @Component({
   selector: 'kirby-chart-wip',
@@ -22,7 +22,7 @@ import { ChartData, ChartHighlightedElements, ChartType } from './chart-wip.type
 })
 export class ChartWipComponent implements AfterViewInit, OnChanges {
   @Input() type: ChartType = 'column';
-  @Input() data: ChartData;
+  @Input() data: ChartDataset[] | number[];
   @Input() dataLabels?: string[] | string[][];
   @Input() customOptions?: ChartOptions;
   @Input() annotations?: AnnotationOptions[];

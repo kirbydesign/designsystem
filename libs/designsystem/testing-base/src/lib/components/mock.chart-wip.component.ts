@@ -2,7 +2,7 @@ import { Component, forwardRef, Input } from '@angular/core';
 
 import {
   AnnotationOptions,
-  ChartData,
+  ChartDataset,
   ChartHighlightedElements,
   ChartOptions,
   ChartType,
@@ -22,7 +22,7 @@ import {
 })
 export class MockChartWipComponent {
   @Input() type: ChartType;
-  @Input() data: ChartData;
+  @Input() data: ChartDataset[] | number[];
   @Input() dataLabels: string[] | string[][];
   @Input() customOptions: ChartOptions;
   @Input() annotations: AnnotationOptions[];

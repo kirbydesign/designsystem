@@ -8,7 +8,6 @@ import {
   INTERACTION_FUNCTIONS_EXTENSIONS,
 } from '../chart-wip.configs';
 import {
-  ChartData,
   ChartDataset,
   ChartHighlightedElements,
   ChartType,
@@ -25,7 +24,7 @@ export class ChartJSService {
   public renderChart(
     targetElement: ElementRef<HTMLCanvasElement>,
     type: ChartType,
-    data: ChartData,
+    data: ChartDataset[] | number[],
     dataLabels?: string[] | string[][],
     customOptions?: ChartOptions,
     annotations?: AnnotationOptions[],
@@ -41,7 +40,7 @@ export class ChartJSService {
     this.chart.update();
   }
 
-  public updateData(data: ChartData): void {
+  public updateData(data: ChartDataset[] | number[]): void {
     const datasets = this.createDatasets(data);
     this.chart.data.datasets = datasets;
   }
@@ -209,7 +208,7 @@ export class ChartJSService {
     });
   }
   private createDatasets(
-    data: ChartData,
+    data: ChartDataset[] | number[],
     highlightedElements?: ChartHighlightedElements
   ): ChartDataset[] {
     let datasets = isNumberArray(data) ? [{ data }] : data;
