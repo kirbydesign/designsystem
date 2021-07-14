@@ -1,15 +1,8 @@
-export enum ListSwipeActionType {
-  success = 'success',
-  warning = 'warning',
-  danger = 'danger',
-}
+export type ListSwipeActionType = 'success' | 'warning' | 'danger';
 
 export type ListSwipeDirection = 'right' | 'left';
 
-export enum ListSwipeEnd {
-  start = 'start',
-  end = 'end',
-}
+export type ListSwipeEnd = 'start' | 'end';
 
 export interface ListSwipeAction {
   position: ListSwipeDirection;

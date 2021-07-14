@@ -5,7 +5,8 @@
   "lib": {
     "entryFile": "src/index.ts",
     "umdModuleIds": {
-      "moment": "moment",
+      "date-fns": "date-fns",
+      "date-fns-tz": "date-fns-tz",
       "highcharts": "highcharts",
       "highcharts/modules/annotations": "highcharts",
       "highcharts/highstock": "highcharts/highstock",
@@ -18,7 +19,8 @@
     "@ionic/angular",
     "chart.js",
     "highcharts",
-    "moment",
+    "date-fns",
+    "date-fns-tz",
     "@fontsource/roboto",
     "inputmask",
     "ngx-ui-scroll"

@@ -12,11 +12,11 @@ import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
 import { KirbyAnimation } from '@kirbydesign/designsystem';
 
 @Component({
-  selector: 'cookbook-first-embedded-modal-example',
-  templateUrl: './first-embedded-modal-example.component.html',
-  styleUrls: ['./first-embedded-modal-example.component.scss'],
+  selector: 'cookbook-embedded-modal-example',
+  templateUrl: './embedded-modal-example.component.html',
+  styleUrls: ['./embedded-modal-example.component.scss'],
 })
-export class FirstEmbeddedModalExampleComponent implements OnInit {
+export class EmbeddedModalExampleComponent implements OnInit {
   title: string;
   subtitle: string;
 
@@ -74,7 +74,7 @@ export class FirstEmbeddedModalExampleComponent implements OnInit {
         iconName: 'edit',
         action: this.onSupplementaryActionSelect.bind(this),
       },
-      component: FirstEmbeddedModalExampleComponent,
+      component: EmbeddedModalExampleComponent,
       size: this.openFullHeight ? 'full-height' : null,
       componentProps: {
         title,

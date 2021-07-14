@@ -19,11 +19,7 @@ import { ItemExampleModule } from './item-example/item-example.module';
 import { LinkExampleModule } from './link-example/link-example.module';
 import { ListExamplesModule } from './list-example/list-example.module';
 import { ListVirtualScrollExamplesModule } from './list-virtual-scroll-example/list-virtual-scroll-example.module';
-import { ModalCompactExampleComponent } from './modal-example/compact-example/modal-compact-example.component';
-import { FirstEmbeddedModalExampleComponent } from './modal-example/first-embedded-modal-example/first-embedded-modal-example.component';
-import { ModalRoutePage1ExampleComponent } from './modal-example/modal-route-example/modal-route-page1-example.component';
-import { ModalRoutePage2ExampleComponent } from './modal-example/modal-route-example/modal-route-page2-example.component';
-import { SecondEmbeddedModalExampleComponent } from './modal-example/second-embedded-modal-example/second-embedded-modal-example.component';
+import { ModalExampleModule } from './modal-example/modal-example.module';
 import { ProgressCircleExampleModule } from './progress-circle-example/progress-circle-example.module';
 import { RadioExampleModule } from './radio-example/radio-example.module';
 import { RangeExampleModule } from './range-example/range-example.module';
@@ -49,20 +45,14 @@ const IMPORTS = [
   CheckboxExampleModule,
   RangeExampleModule,
   LinkExampleModule,
+  ModalExampleModule,
 ];
 
 @NgModule({
   imports: [CommonModule, RouterModule, KirbyModule, ...IMPORTS],
   declarations: COMPONENT_DECLARATIONS,
   exports: [...COMPONENT_DECLARATIONS, ...IMPORTS],
-  entryComponents: [
-    CardExampleComponent,
-    FirstEmbeddedModalExampleComponent,
-    SecondEmbeddedModalExampleComponent,
-    ModalCompactExampleComponent,
-    ModalRoutePage1ExampleComponent,
-    ModalRoutePage2ExampleComponent,
-  ],
+  entryComponents: [CardExampleComponent],
 })
 export class ExamplesModule {
   constructor(iconRegistryService: IconRegistryService) {

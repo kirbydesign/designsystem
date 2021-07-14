@@ -14,10 +14,8 @@ import { PlatformService } from '../../../helpers/platform.service';
 import { ThemeColor } from '../../../helpers/theme-color.type';
 import { ListSwipeAction, ListSwipeDirection, ListSwipeEnd } from '../list-swipe-action.type';
 
-export enum BoundaryClass {
-  first = 'first',
-  last = 'last',
-}
+export type BoundaryClass = 'first' | 'last';
+
 @Component({
   selector: 'kirby-list-item',
   templateUrl: './list-item.component.html',
@@ -109,9 +107,9 @@ export class ListItemComponent implements OnInit, AfterViewInit {
 
   _getSwipeActionEnd(item: any): ListSwipeEnd {
     if (this._getSwipeActions(item, 'left').length) {
-      return ListSwipeEnd.start;
+      return 'start';
     }
-    return ListSwipeEnd.end;
+    return 'end';
   }
 
   _getSwipeActionIcon(swipeAction: ListSwipeAction, item: any): string {
