@@ -2,10 +2,10 @@ import { ElementRef } from '@angular/core';
 import { Chart, FontSpec } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
 
-import { ChartWipData, ChartWipDataset } from '..';
 import { ColorHelper } from '../../../helpers';
 import { CHART_ANNOTATION_CONFIGS, CHART_TYPE_CONFIGS } from '../chart-wip.configs';
 import { CHART_GLOBAL_DEFAULTS } from '../chart-wip.configs';
+import { ChartDataset } from '../chart-wip.types';
 import { ChartHighlightedElements } from '../chart-wip.types';
 
 import { ChartJSService } from './chart-js.service';
@@ -76,7 +76,7 @@ describe('ChartJSService', () => {
             highlightedElements
           );
 
-          const datasets = chartJSService['chart'].data.datasets as ChartWipDataset[];
+          const datasets = chartJSService['chart'].data.datasets as ChartDataset[];
 
           expect(datasets.length).toEqual(1);
           expect(datasets[0].kirbyOptions.highlightedElements).toEqual([0, 2]);
@@ -146,7 +146,7 @@ describe('ChartJSService', () => {
             highlightedElements
           );
 
-          const datasets = chartJSService['chart'].data.datasets as ChartWipDataset[];
+          const datasets = chartJSService['chart'].data.datasets as ChartDataset[];
 
           expect(datasets.length).toEqual(1);
           expect(datasets[0].kirbyOptions.highlightedElements).toEqual([0, 2]);
@@ -579,7 +579,7 @@ describe('ChartJSService', () => {
     });
 
     describe('function: updateHighlightedElements', () => {
-      let data: ChartWipData;
+      let data: ChartDataset[] | number[];
       let chart: Chart;
 
       beforeEach(() => {
@@ -604,7 +604,7 @@ describe('ChartJSService', () => {
         chart.update();
 
         highlightedElements.forEach(([datasetIndex, dataIndex]) => {
-          const dataset = chart.data.datasets[datasetIndex] as ChartWipDataset;
+          const dataset = chart.data.datasets[datasetIndex] as ChartDataset;
           expect(dataset.kirbyOptions.highlightedElements.includes(dataIndex)).toBeTrue();
         });
       });
@@ -644,7 +644,7 @@ describe('ChartJSService', () => {
           chart.update();
 
           highlightedElements.forEach(([datasetIndex, dataIndex]) => {
-            const dataset = chart.data.datasets[datasetIndex] as ChartWipDataset;
+            const dataset = chart.data.datasets[datasetIndex] as ChartDataset;
             expect(dataset?.kirbyOptions?.highlightedElements?.includes(dataIndex)).toBeFalsy();
           });
         });
@@ -653,7 +653,7 @@ describe('ChartJSService', () => {
           chartJSService.updateHighlightedElements([]);
           chart.update();
 
-          const datasets = chart.data.datasets as ChartWipDataset[];
+          const datasets = chart.data.datasets as ChartDataset[];
           datasets.forEach((dataset) => {
             expect(dataset?.kirbyOptions?.highlightedElements).toBeFalsy();
           });
@@ -663,7 +663,7 @@ describe('ChartJSService', () => {
           chartJSService.updateHighlightedElements();
           chart.update();
 
-          const datasets = chart.data.datasets as ChartWipDataset[];
+          const datasets = chart.data.datasets as ChartDataset[];
           datasets.forEach((dataset) => {
             expect(dataset?.kirbyOptions?.highlightedElements).toBeFalsy();
           });
