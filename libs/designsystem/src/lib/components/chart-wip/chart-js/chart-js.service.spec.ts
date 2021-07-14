@@ -1,5 +1,5 @@
 import { ElementRef } from '@angular/core';
-import { Chart } from 'chart.js';
+import { Chart, FontSpec } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
 
 import { ChartWipData, ChartWipDataset } from '..';
@@ -169,6 +169,13 @@ describe('ChartJSService', () => {
           );
         });
 
+        it('should be rendered with correct typography for data labels', () => {
+          const { size } = chart.options.scales['x'].ticks.font as FontSpec;
+          const { color } = chart.options;
+          expect(size).toBe(12);
+          expect(color).toBe(ColorHelper.getThemeColorHexString('black'));
+        });
+
         it('should have no hover background color for elements', () => {
           expect(chart.options.elements.bar.hoverBackgroundColor).toBeUndefined();
         });
@@ -223,6 +230,13 @@ describe('ChartJSService', () => {
           expect(chart.options.elements.bar.backgroundColor).toEqual(
             ColorHelper.getThemeColorHexString('secondary')
           );
+        });
+
+        it('should be rendered with correct typography for data labels', () => {
+          const { size } = chart.options.scales['y'].ticks.font as FontSpec;
+          const { color } = chart.options;
+          expect(size).toBe(14);
+          expect(color).toBe(ColorHelper.getThemeColorHexString('black'));
         });
 
         it('should have no hover background color for elements', () => {

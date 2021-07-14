@@ -36,6 +36,7 @@ function scriptedHoverBackgroundColor(context: ScriptableContext<'bar'>) {
 
 export const CHART_GLOBAL_DEFAULTS = {
   maintainAspectRatio: false,
+  color: getThemeColorHexString('black'),
   elements: {
     bar: {
       backgroundColor: scriptedBackgroundColor,
@@ -58,7 +59,6 @@ export const CHART_GLOBAL_DEFAULTS = {
   },
   font: {
     family: 'Roboto',
-    size: parseInt(fontSize('xs')),
   },
   plugins: {
     legend: {
@@ -73,6 +73,15 @@ export const CHART_TYPE_CONFIGS = {
     options: {
       barPercentage: 0.6,
       indexAxis: 'y',
+      scales: {
+        y: {
+          ticks: {
+            font: {
+              size: parseInt(fontSize('s')),
+            },
+          },
+        },
+      },
       elements: {
         point: {
           pointRadius: 0,
@@ -90,6 +99,15 @@ export const CHART_TYPE_CONFIGS = {
     options: {
       barPercentage: 0.6,
       indexAxis: 'x',
+      scales: {
+        x: {
+          ticks: {
+            font: {
+              size: parseInt(fontSize('xs')),
+            },
+          },
+        },
+      },
       elements: {
         line: {
           spanGaps: true,

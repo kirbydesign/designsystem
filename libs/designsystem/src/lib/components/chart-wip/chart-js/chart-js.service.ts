@@ -162,7 +162,11 @@ export class ChartJSService {
     const annotationPluginOptions = annotations
       ? this.createAnnotationPluginOptionsObject(annotations)
       : {};
-    const options = deepMergeObjects(typeConfigOptions, customOptions, annotationPluginOptions);
+    let options: ChartOptions = deepMergeObjects(
+      typeConfigOptions,
+      customOptions,
+      annotationPluginOptions
+    );
     return this.applyInteractionFunctionsExtensions(options);
   }
 
