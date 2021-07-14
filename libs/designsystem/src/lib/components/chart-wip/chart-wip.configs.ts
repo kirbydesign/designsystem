@@ -75,6 +75,9 @@ export const CHART_TYPE_CONFIGS = {
       indexAxis: 'y',
       scales: {
         y: {
+          grid: {
+            drawBorder: false,
+          },
           ticks: {
             font: {
               size: parseInt(fontSize('s')),
@@ -101,6 +104,9 @@ export const CHART_TYPE_CONFIGS = {
       indexAxis: 'x',
       scales: {
         x: {
+          grid: {
+            drawBorder: false,
+          },
           ticks: {
             font: {
               size: parseInt(fontSize('xs')),

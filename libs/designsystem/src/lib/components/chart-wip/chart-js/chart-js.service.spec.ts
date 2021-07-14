@@ -163,6 +163,10 @@ describe('ChartJSService', () => {
           chart = chartJSService['chart'];
         });
 
+        it('should draw without an axis line', () => {
+          expect(chart.options.scales['x'].grid.drawBorder).toBeFalse();
+        });
+
         it('should have correct background color for elements', () => {
           expect(chart.options.elements.bar.backgroundColor).toEqual(
             ColorHelper.getThemeColorHexString('secondary')
@@ -224,6 +228,10 @@ describe('ChartJSService', () => {
         beforeEach(() => {
           chartJSService.renderChart(canvasElement, 'bar', [1, 2, 3], ['one', 'two', 'three']);
           chart = chartJSService['chart'];
+        });
+
+        it('should draw without an axis line', () => {
+          expect(chart.options.scales['y'].grid.drawBorder).toBeFalse();
         });
 
         it('should have correct background color for elements', () => {
