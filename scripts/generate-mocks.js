@@ -3,9 +3,9 @@
 const { exec } = require('child_process');
 const { GenerateMocks } = require('../tools/generate-mocks/dist/generate-mocks');
 
-function hasChanges(inputPath) {
+function hasChanges(inputPaths) {
   return new Promise((resolve, reject) => {
-    exec(`git diff --name-only '${inputPath}'`, (e, stdout, stderr) => {
+    exec(`git diff --name-only '${inputPaths[0]}' '${inputPaths[1]}'`, (e, stdout, stderr) => {
       if (e) return reject(e);
       if (stderr) return reject(stderr);
       return resolve(stdout.length > 0);
@@ -13,8 +13,8 @@ function hasChanges(inputPath) {
   });
 }
 
-const inputPath = './libs/designsystem/src/lib/';
-hasChanges(inputPath).then((hasChanged) => {
+const inputPaths = ['./libs/designsystem/src/lib/', './libs/core/src'];
+hasChanges(inputPaths).then((hasChanged) => {
   if (!hasChanged) return;
   const outputPaths = {
     base: './libs/designsystem/testing-base/src/lib/',
@@ -22,5 +22,5 @@ hasChanges(inputPath).then((hasChanged) => {
     jest: './libs/designsystem/testing-jest/src/lib/',
   };
   const subFolder = '/components/';
-  new GenerateMocks().renderMocks(inputPath, outputPaths, subFolder);
+  new GenerateMocks().renderMocks(inputPaths[0], outputPaths, subFolder);
 });
