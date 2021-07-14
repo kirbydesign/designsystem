@@ -21,17 +21,27 @@ import { Chart } from './configured-chart-js';
 export class ChartJSService {
   private chart: Chart;
 
-  public renderChart(
-    targetElement: ElementRef<HTMLCanvasElement>,
-    type: ChartType,
-    data: ChartDataset[] | number[],
-    dataLabels?: string[] | string[][],
-    customOptions?: ChartOptions,
-    annotations?: AnnotationOptions[],
-    highlightedElements?: ChartHighlightedElements
-  ): void {
+  public renderChart(args: {
+    targetElement: ElementRef<HTMLCanvasElement>;
+    type: ChartType;
+    data: ChartDataset[] | number[];
+    dataLabels?: string[] | string[][];
+    customOptions?: ChartOptions;
+    annotations?: AnnotationOptions[];
+    highlightedElements?: ChartHighlightedElements;
+  }): void {
+    const {
+      targetElement,
+      type,
+      data,
+      dataLabels,
+      customOptions,
+      annotations,
+      highlightedElements,
+    } = args;
+
     const datasets = this.createDatasets(data, highlightedElements);
-    const options = this.createOptionsObject(type, customOptions, annotations);
+    const options = this.createOptionsObject({ type, customOptions, annotations });
     const config = this.createConfigurationObject(type, datasets, options, dataLabels);
     this.initializeNewChart(targetElement.nativeElement, config);
   }
@@ -59,7 +69,7 @@ export class ChartJSService {
 
   public updateOptions(customOptions: ChartOptions, type: ChartType) {
     const annotations = this.getExistingChartAnnotations();
-    this.chart.options = this.createOptionsObject(type, customOptions, annotations);
+    this.chart.options = this.createOptionsObject({ type, customOptions, annotations });
   }
 
   public updateAnnotations(annotations: AnnotationOptions[]) {
@@ -92,7 +102,7 @@ export class ChartJSService {
     const dataLabels = this.chart.data.labels;
     const annotations = this.getExistingChartAnnotations();
 
-    const options = this.createOptionsObject(type, customOptions, annotations);
+    const options = this.createOptionsObject({ type, customOptions, annotations });
     const config = this.createConfigurationObject(type, datasets, options, dataLabels);
     const canvasElement = this.chart.canvas;
 
@@ -150,11 +160,13 @@ export class ChartJSService {
     return options;
   }
 
-  private createOptionsObject(
-    type: ChartType,
-    customOptions?: ChartOptions,
-    annotations?: AnnotationOptions[]
-  ): ChartOptions {
+  private createOptionsObject(args: {
+    type: ChartType;
+    customOptions?: ChartOptions;
+    annotations?: AnnotationOptions[];
+  }): ChartOptions {
+    const { type, customOptions, annotations } = args;
+
     const typeConfig = this.getTypeConfig(type);
     const typeConfigOptions = typeConfig?.options;
     const annotationPluginOptions = annotations

@@ -65,15 +65,15 @@ export class ChartWipComponent implements AfterViewInit, OnChanges {
   }
 
   private renderChart() {
-    this.chartJSService.renderChart(
-      this.canvasElement,
-      this.type,
-      this.data,
-      this.dataLabels,
-      this.customOptions,
-      this.annotations,
-      this.highlightedElements
-    );
+    this.chartJSService.renderChart({
+      targetElement: this.canvasElement,
+      type: this.type,
+      data: this.data,
+      dataLabels: this.dataLabels,
+      customOptions: this.customOptions,
+      annotations: this.annotations,
+      highlightedElements: this.highlightedElements,
+    });
   }
 
   private updateData() {
