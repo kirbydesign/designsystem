@@ -1,17 +1,29 @@
+@import '../../scss/utils';
+
+:root {
+  --kirby-badge-elevation: none;
+  --kirby-badge-position: relative;
+  --kirby-badge-left: 0;
+  --kirby-badge-right: 0;
+  --kirby-badge-top: 0;
+  --kirby-badge-zindex: none;
+}
+
 :host {
-  position: var(--kirby-badge-position, relative);
-  left: var(--kirby-badge-left, auto);
-  right: var(--kirby-badge-right, auto);
-  top: var(--kirby-badge-top, auto);
-  z-index: var(--kirby-badge-zindex, none);
+  --kirby-badge-background-color: #{get-color('white')};
+  --kirby-badge-color: #{get-color('white-contrast')};
+  --ion-color-base: var(--kirby-badge-background-color);
+  --ion-color-contrast: var(--kirby-badge-color);
+
+  position: var(--kirby-badge-position);
+  left: var(--kirby-badge-left);
+  right: var(--kirby-badge-right);
+  top: var(--kirby-badge-top);
+  z-index: var(--kirby-badge-zindex);
   font-size: font-size('xxs');
   line-height: 1;
 
   ion-badge {
-    --background: #{get-color('white')};
-    --color: #{get-color('white-contrast')};
-    --ion-color-base: var(--kirby-badge-background-color);
-    --ion-color-contrast: var(--kirby-badge-color);
     --padding-top: 3px;
     --padding-end: 5px;
     --padding-bottom: 3px;
@@ -22,10 +34,10 @@
     min-height: 16px;
     font-size: inherit;
     position: relative;
-    box-shadow: var(--kirby-badge-elevation, none);
+    box-shadow: var(--kirby-badge-elevation);
   }
 
-  ::slotted(kirby-icon) {
+  ::ng-deep kirby-icon {
     --kirby-icon-font-size: #{font-size('n')};
     position: absolute;
     top: 0;
@@ -34,14 +46,17 @@
 }
 
 @each $color-name, $color-value in $notification-colors {
-  $text-color: get-color($color-name + '-contrast');
-  @if ($color-name == 'danger') {
-    $text-color: get-text-color('white');
-  }
   :host(.#{$color-name}) {
-    ion-badge {
-      --background: #{get-color($color-name)};
-      --color: #{var(--kirby-badge-color, #{$text-color})};
-    }
+    --kirby-badge-background-color: #{get-color($color-name)};
+    --kirby-badge-color: #{get-color($color-name + '-contrast')};
   }
+}
+
+:host(.danger) {
+  --kirby-badge-color: #{get-color('white')};
+}
+
+:host(.white) {
+  --kirby-badge-background-color: #{get-color('white')};
+  --kirby-badge-color: #{get-color('white-contrast')};
 }
