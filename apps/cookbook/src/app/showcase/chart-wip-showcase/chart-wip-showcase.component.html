@@ -214,6 +214,38 @@
 </p>
 
 <kirby-divider [hasMargin]="true"></kirby-divider>
+<h2>Responsiveness</h2>
+<p>
+  The chart component takes 100% width of whatever container it is placed in. The height has to be
+  set manually either via the <code>height</code> input property or the
+  <code>--kirby-chart-height</code> custom css property.
+</p>
+<h3>Resize delay</h3>
+<p>
+  The chart will be redrawn whenever the size of its container changes. This will happen with a
+  delay of 10 milliseconds to debounce the drawing and make resizing smoother.
+</p>
+<p>
+  It is possible to change this delay through the <code>customOptions</code> input property by
+  setting
+  <a
+    target="_blank"
+    href="https://www.chartjs.org/docs/master/configuration/responsive.html#configuration-options"
+    ><code>resizeDelay</code></a
+  >
+  to a delay in milliseconds.
+</p>
+<h3>Aspect Ratio</h3>
+The aspect ratio of the chart is not preserved whenever it is resized. This can be changed using
+<code>customOptions</code> by setting
+<a
+  target="_blank"
+  href="https://www.chartjs.org/docs/master/configuration/responsive.html#configuration-options"
+  ><code>maintainAspectRatio</code></a
+>
+to <code>false</code>.
+
+<kirby-divider [hasMargin]="true"></kirby-divider>
 <h2>Accessibility</h2>
 <p>
   The charts are unfortunately not accessible out-of-the-box. This is because the charts are drawn
