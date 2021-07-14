@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActiveElement, Chart, ChartEvent } from 'chart.js';
 
-import { ChartWipOptions } from '@kirbydesign/designsystem';
+import { ChartOptions } from '@kirbydesign/designsystem';
 import { ChartHighlightedElements } from '@kirbydesign/designsystem/components/chart-wip/chart-wip.types';
 
 const config = {
@@ -48,7 +48,7 @@ export class ChartWipExampleInteractionComponent {
   _dataLabels = ['Monday', 'Tuesday', 'Wedensday', 'Thursday', 'Friday'];
   _highlighted: ChartHighlightedElements;
 
-  _customOptions: ChartWipOptions = {
+  _customOptions: ChartOptions = {
     onClick: (event, [activeElement], chart) => this.onClickHandler(event, activeElement, chart),
   };
 

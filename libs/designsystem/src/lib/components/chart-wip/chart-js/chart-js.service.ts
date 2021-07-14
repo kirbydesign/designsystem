@@ -2,7 +2,6 @@ import { ElementRef, Injectable } from '@angular/core';
 import { ActiveElement, ChartConfiguration, ChartOptions } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
 
-import { ChartWipDataset } from '..';
 import {
   CHART_ANNOTATION_CONFIGS,
   CHART_TYPE_CONFIGS,
@@ -193,7 +192,7 @@ export class ChartJSService {
 
   private addHighlightedElementsToDatasets(
     highlightedElements: ChartHighlightedElements,
-    datasets: ChartWipDataset[]
+    datasets: ChartDataset[]
   ) {
     highlightedElements.forEach(([datasetIndex, dataIndex]) => {
       const dataset = datasets[datasetIndex];

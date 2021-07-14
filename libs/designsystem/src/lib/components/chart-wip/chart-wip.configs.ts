@@ -9,7 +9,7 @@ import {
 
 import { ColorHelper, DesignTokenHelper } from '../../helpers';
 
-import { ChartWipDataset } from '.';
+import { ChartDataset } from './chart-wip.types';
 
 const { fontSize } = DesignTokenHelper;
 const { getThemeColorHexString } = ColorHelper;
@@ -18,7 +18,7 @@ const hoverBackgroundColor = getThemeColorHexString('primary');
 const backgroundColor = getThemeColorHexString('secondary');
 
 function scriptedBackgroundColor(context: ScriptableContext<'bar'>) {
-  const dataset = context.dataset as ChartWipDataset;
+  const dataset = context.dataset as ChartDataset;
   const highlightedElements = dataset?.kirbyOptions?.highlightedElements;
 
   if (highlightedElements && highlightedElements.includes(context.dataIndex)) {

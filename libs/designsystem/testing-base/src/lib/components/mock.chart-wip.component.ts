@@ -1,12 +1,12 @@
 import { Component, forwardRef, Input } from '@angular/core';
 
 import {
-  ChartWipAnnotationOptions as AnnotationOptions,
+  AnnotationOptions,
+  ChartData,
+  ChartHighlightedElements,
+  ChartOptions,
+  ChartType,
   ChartWipComponent,
-  ChartWipData as ChartData,
-  ChartWipHighlightedElements as ChartHighlightedElements,
-  ChartWipOptions as ChartOptions,
-  ChartWipType as ChartType,
 } from '@kirbydesign/designsystem';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
