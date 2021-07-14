@@ -28,14 +28,13 @@ describe('ChartJSService', () => {
           { type: 'line', yMin: 20, yMax: 20 },
         ];
 
-        chartJSService.renderChart(
-          canvasElement,
-          'bar',
-          [1, 2, 3],
-          ['one', 'two', 'three'],
-          {},
-          annotations
-        );
+        chartJSService.renderChart({
+          targetElement: canvasElement,
+          type: 'bar',
+          data: [1, 2, 3],
+          dataLabels: ['one', 'two', 'three'],
+          annotations,
+        });
 
         expect(chartJSService['chart'].options.plugins.annotation.annotations.length).toEqual(2);
       });
@@ -45,7 +44,12 @@ describe('ChartJSService', () => {
       it('should render a new chart', () => {
         expect(chartJSService['chart']).toBeUndefined();
 
-        chartJSService.renderChart(canvasElement, 'bar', [1, 2, 3], ['one', 'two', 'three']);
+        chartJSService.renderChart({
+          targetElement: canvasElement,
+          type: 'bar',
+          data: [1, 2, 3],
+          dataLabels: ['one', 'two', 'three'],
+        });
 
         expect(chartJSService['chart']).toBeInstanceOf(Chart);
       });
@@ -53,7 +57,12 @@ describe('ChartJSService', () => {
       it('should use the supplied data in the chart', () => {
         const data = [1, 2, 3];
 
-        chartJSService.renderChart(canvasElement, 'bar', data, ['one', 'two', 'three']);
+        chartJSService.renderChart({
+          targetElement: canvasElement,
+          type: 'bar',
+          data,
+          dataLabels: ['one', 'two', 'three'],
+        });
 
         const chart = chartJSService['chart'];
         expect(chart.data.datasets[0].data).toEqual(data);
@@ -66,15 +75,13 @@ describe('ChartJSService', () => {
             [0, 2],
           ];
 
-          chartJSService.renderChart(
-            canvasElement,
-            'bar',
-            [1, 2, 3],
-            ['one', 'two', 'three'],
-            {},
-            [],
-            highlightedElements
-          );
+          chartJSService.renderChart({
+            targetElement: canvasElement,
+            type: 'bar',
+            data: [1, 2, 3],
+            dataLabels: ['one', 'two', 'three'],
+            highlightedElements,
+          });
 
           const datasets = chartJSService['chart'].data.datasets as ChartDataset[];
 
@@ -88,12 +95,12 @@ describe('ChartJSService', () => {
       it('should render a new chart', () => {
         expect(chartJSService['chart']).toBeUndefined();
 
-        chartJSService.renderChart(
-          canvasElement,
-          'bar',
-          [{ data: [1, 2, 3] }],
-          ['one', 'two', 'three']
-        );
+        chartJSService.renderChart({
+          targetElement: canvasElement,
+          type: 'bar',
+          data: [{ data: [1, 2, 3] }],
+          dataLabels: ['one', 'two', 'three'],
+        });
 
         expect(chartJSService['chart']).toBeInstanceOf(Chart);
       });
@@ -104,7 +111,12 @@ describe('ChartJSService', () => {
           data: data,
         };
 
-        chartJSService.renderChart(canvasElement, 'bar', [dataset], ['one', 'two', 'three']);
+        chartJSService.renderChart({
+          targetElement: canvasElement,
+          type: 'bar',
+          data: [dataset],
+          dataLabels: ['one', 'two', 'three'],
+        });
 
         const chart = chartJSService['chart'];
         expect(chart.data.datasets[0].data).toEqual(data);
@@ -121,7 +133,12 @@ describe('ChartJSService', () => {
             { data: data2 },
           ];
 
-          chartJSService.renderChart(canvasElement, 'bar', datasets, ['one', 'two', 'three']);
+          chartJSService.renderChart({
+            targetElement: canvasElement,
+            type: 'bar',
+            data: datasets,
+            dataLabels: ['one', 'two', 'three'],
+          });
 
           const chart = chartJSService['chart'];
           expect(chart.data.datasets[0].data).toEqual(data1);
@@ -136,15 +153,13 @@ describe('ChartJSService', () => {
             [0, 2],
           ];
 
-          chartJSService.renderChart(
-            canvasElement,
-            'bar',
-            [{ data: [1, 2, 3] }],
-            ['one', 'two', 'three'],
-            {},
-            [],
-            highlightedElements
-          );
+          chartJSService.renderChart({
+            targetElement: canvasElement,
+            type: 'bar',
+            data: [{ data: [1, 2, 3] }],
+            dataLabels: ['one', 'two', 'three'],
+            highlightedElements,
+          });
 
           const datasets = chartJSService['chart'].data.datasets as ChartDataset[];
 
@@ -159,7 +174,12 @@ describe('ChartJSService', () => {
 
       describe('and no custom options are passed', () => {
         beforeEach(() => {
-          chartJSService.renderChart(canvasElement, 'column', [1, 2, 3], ['one', 'two', 'three']);
+          chartJSService.renderChart({
+            targetElement: canvasElement,
+            type: 'column',
+            data: [1, 2, 3],
+            dataLabels: ['one', 'two', 'three'],
+          });
           chart = chartJSService['chart'];
         });
 
@@ -197,8 +217,14 @@ describe('ChartJSService', () => {
 
       describe('and onClick is set via custom options', () => {
         beforeEach(() => {
-          chartJSService.renderChart(canvasElement, 'column', [1, 2, 3], ['one', 'two', 'three'], {
-            onClick: () => console.log('testing'),
+          chartJSService.renderChart({
+            targetElement: canvasElement,
+            type: 'column',
+            data: [1, 2, 3],
+            dataLabels: ['one', 'two', 'three'],
+            customOptions: {
+              onClick: () => console.log('testing'),
+            },
           });
           chart = chartJSService['chart'];
         });
@@ -211,7 +237,11 @@ describe('ChartJSService', () => {
 
     describe('when no data labels are provided', () => {
       it('should have a blank label for each data point', () => {
-        chartJSService.renderChart(canvasElement, 'column', [1, 2, 3]);
+        chartJSService.renderChart({
+          targetElement: canvasElement,
+          type: 'column',
+          data: [1, 2, 3],
+        });
 
         const chartDataLabels = chartJSService['chart'].data.labels;
         expect(chartDataLabels.length).toEqual(3);
@@ -226,7 +256,12 @@ describe('ChartJSService', () => {
 
       describe('and no custom options are passed', () => {
         beforeEach(() => {
-          chartJSService.renderChart(canvasElement, 'bar', [1, 2, 3], ['one', 'two', 'three']);
+          chartJSService.renderChart({
+            targetElement: canvasElement,
+            type: 'bar',
+            data: [1, 2, 3],
+            dataLabels: ['one', 'two', 'three'],
+          });
           chart = chartJSService['chart'];
         });
 
@@ -264,8 +299,14 @@ describe('ChartJSService', () => {
 
       describe('and onClick is set via custom options', () => {
         beforeEach(() => {
-          chartJSService.renderChart(canvasElement, 'bar', [1, 2, 3], ['one', 'two', 'three'], {
-            onClick: () => console.log('testing'),
+          chartJSService.renderChart({
+            targetElement: canvasElement,
+            type: 'bar',
+            data: [1, 2, 3],
+            dataLabels: ['one', 'two', 'three'],
+            customOptions: {
+              onClick: () => console.log('testing'),
+            },
           });
           chart = chartJSService['chart'];
         });
@@ -282,10 +323,16 @@ describe('ChartJSService', () => {
         expect(CHART_GLOBAL_DEFAULTS.elements.bar.backgroundColor).not.toBeUndefined();
         const customElementBackgroundColor = '#ffffff';
 
-        chartJSService.renderChart(canvasElement, 'bar', [1, 2, 3], ['one', 'two', 'three'], {
-          elements: {
-            bar: {
-              backgroundColor: customElementBackgroundColor,
+        chartJSService.renderChart({
+          targetElement: canvasElement,
+          type: 'bar',
+          data: [1, 2, 3],
+          dataLabels: ['one', 'two', 'three'],
+          customOptions: {
+            elements: {
+              bar: {
+                backgroundColor: customElementBackgroundColor,
+              },
             },
           },
         });
@@ -301,8 +348,14 @@ describe('ChartJSService', () => {
         expect(CHART_TYPE_CONFIGS[type].options.indexAxis).not.toBeUndefined();
         expect(CHART_TYPE_CONFIGS[type].options.indexAxis).not.toEqual(customIndexAxis);
 
-        chartJSService.renderChart(canvasElement, 'bar', [1, 2, 3], ['one', 'two', 'three'], {
-          indexAxis: customIndexAxis,
+        chartJSService.renderChart({
+          targetElement: canvasElement,
+          type: 'bar',
+          data: [1, 2, 3],
+          dataLabels: ['one', 'two', 'three'],
+          customOptions: {
+            indexAxis: customIndexAxis,
+          },
         });
 
         const chart = chartJSService['chart'];
@@ -312,7 +365,12 @@ describe('ChartJSService', () => {
 
     describe('function: redrawChart', () => {
       beforeEach(() => {
-        chartJSService.renderChart(canvasElement, 'bar', [1, 2, 3], ['one', 'two', 'three']);
+        chartJSService.renderChart({
+          targetElement: canvasElement,
+          type: 'bar',
+          data: [1, 2, 3],
+          dataLabels: ['one', 'two', 'three'],
+        });
       });
 
       it('should update the chart', () => {
@@ -336,7 +394,12 @@ describe('ChartJSService', () => {
       let chart: Chart;
 
       beforeEach(() => {
-        chartJSService.renderChart(canvasElement, 'bar', [1, 2, 3], ['one', 'two', 'three']);
+        chartJSService.renderChart({
+          targetElement: canvasElement,
+          type: 'bar',
+          data: [1, 2, 3],
+          dataLabels: ['one', 'two', 'three'],
+        });
         chart = chartJSService['chart'];
       });
 
@@ -388,7 +451,12 @@ describe('ChartJSService', () => {
       let chart: Chart;
 
       beforeEach(() => {
-        chartJSService.renderChart(canvasElement, 'bar', [1, 2, 3], ['one', 'two', 'three']);
+        chartJSService.renderChart({
+          targetElement: canvasElement,
+          type: 'bar',
+          data: [1, 2, 3],
+          dataLabels: ['one', 'two', 'three'],
+        });
         chart = chartJSService['chart'];
       });
 
@@ -404,7 +472,12 @@ describe('ChartJSService', () => {
 
     describe('function: updateType', () => {
       beforeEach(() => {
-        chartJSService.renderChart(canvasElement, 'bar', [1, 2, 3], ['one', 'two', 'three']);
+        chartJSService.renderChart({
+          targetElement: canvasElement,
+          type: 'bar',
+          data: [1, 2, 3],
+          dataLabels: ['one', 'two', 'three'],
+        });
       });
 
       describe('if the new type is ChartType.bar', () => {
@@ -435,7 +508,7 @@ describe('ChartJSService', () => {
           'applyInteractionFunctionsExtensions'
         );
 
-        chartJSService['createOptionsObject']('bar');
+        chartJSService['createOptionsObject']({ type: 'bar' });
 
         expect(applyInteractionFunctionsExtensionsSpy).toHaveBeenCalledTimes(1);
       });
@@ -445,9 +518,13 @@ describe('ChartJSService', () => {
       let chart: Chart;
 
       beforeEach(() => {
-        chartJSService.renderChart(canvasElement, 'bar', [1, 2, 3], ['one', 'two', 'three'], {}, [
-          { type: 'line', yMin: 10, yMax: 10 },
-        ]);
+        chartJSService.renderChart({
+          targetElement: canvasElement,
+          type: 'bar',
+          data: [1, 2, 3],
+          dataLabels: ['one', 'two', 'three'],
+          annotations: [{ type: 'line', yMin: 10, yMax: 10 }],
+        });
         chart = chartJSService['chart'];
       });
 
@@ -492,16 +569,16 @@ describe('ChartJSService', () => {
 
       beforeEach(() => {
         annotations = [{ type: 'line', yMin: 20, yMax: 20 }];
-        chartJSService.renderChart(
-          canvasElement,
-          chartType,
-          [1, 2, 3],
-          ['one', 'two', 'three'],
-          {
+        chartJSService.renderChart({
+          targetElement: canvasElement,
+          type: chartType,
+          data: [1, 2, 3],
+          dataLabels: ['one', 'two', 'three'],
+          customOptions: {
             borderColor: 'pink',
           },
-          annotations
-        );
+          annotations,
+        });
       });
 
       it('should overwrite existing custom options', () => {
@@ -584,7 +661,12 @@ describe('ChartJSService', () => {
 
       beforeEach(() => {
         data = [{ data: [1, 2, 3] }, { data: [4, 5, 6] }, { data: [7, 8, 9] }];
-        chartJSService.renderChart(canvasElement, 'bar', data, ['one', 'two', 'three']);
+        chartJSService.renderChart({
+          targetElement: canvasElement,
+          type: 'bar',
+          data,
+          dataLabels: ['one', 'two', 'three'],
+        });
         chart = chartJSService['chart'];
       });
 
@@ -676,7 +758,12 @@ describe('ChartJSService', () => {
       let chart: Chart;
 
       beforeEach(() => {
-        chartJSService.renderChart(canvasElement, chartType, [1, 2, 3], ['one', 'two', 'three']);
+        chartJSService.renderChart({
+          targetElement: canvasElement,
+          type: chartType,
+          data: [1, 2, 3],
+          dataLabels: ['one', 'two', 'three'],
+        });
         chart = chartJSService['chart'];
       });
 
