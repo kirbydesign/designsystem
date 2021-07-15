@@ -556,9 +556,10 @@ export class ${mockClassName} {${propertiesString}${methodsString}}
   }
 
   private visitCustomElementsJSON(componentMetaData: ComponentMetaData) {
-    const components = customElements.components;
-    const selector = componentMetaData.selector.replace(/["']/g, '');
-    const component = components.find((comp) => comp.tag === selector);
+    const currentComponentSelector = componentMetaData.selector.replace(/["']/g, '');
+    const component = customElements.components.find(
+      (comp) => comp.tag === currentComponentSelector
+    );
 
     if (component) {
       component.props.forEach((prop) => {
