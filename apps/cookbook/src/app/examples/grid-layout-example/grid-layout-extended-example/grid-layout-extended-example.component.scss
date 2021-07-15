@@ -1,10 +1,8 @@
+@import './libs/designsystem/src/lib/scss/utils';
+
 // Grid
 $columns: 12;
-$gap: 24px;
-
-// Breakpoints
-$desktop-min-width: 1025px;
-$tablet-min-width: 721px;
+$gap: size('m');
 
 // Core example
 .grid-container {
@@ -19,14 +17,14 @@ $tablet-min-width: 721px;
 }
 
 // Core example
-@media screen and (min-width: $tablet-min-width) {
+@include media('>=medium') {
   .half\@tablet-up {
     grid-column: span ($columns / 2);
   }
 }
 
 // Core example
-@media screen and (min-width: $desktop-min-width) {
+@include media('>=large') {
   .half\@desktop-up {
     grid-column: span ($columns / 2);
   }
