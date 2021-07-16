@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 const config = {
-  selector: 'cookbook-chart-example-areaspline',
+  selector: 'cookbook-chart-deprecated-example-areaspline',
   template: `<kirby-card>
   <kirby-card-header title="Areaspline"></kirby-card-header>
     <kirby-chart-deprecated
@@ -26,7 +26,7 @@ const config = {
   selector: config.selector,
   template: config.template,
 })
-export class ChartExampleAreasplineComponent {
+export class ChartDeprecatedExampleAreasplineComponent {
   template = config.template;
 
   data = [

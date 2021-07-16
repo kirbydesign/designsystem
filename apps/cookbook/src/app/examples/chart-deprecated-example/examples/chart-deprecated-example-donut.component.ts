@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 const config = {
-  selector: 'cookbook-chart-example-donut',
+  selector: 'cookbook-chart-deprecated-example-donut',
   template: `<kirby-card>
   <kirby-card-header title="Donut"></kirby-card-header>
     <kirby-chart-deprecated
@@ -39,6 +39,6 @@ const config = {
   selector: config.selector,
   template: config.template,
 })
-export class ChartExampleDonutComponent {
+export class ChartDeprecatedExampleDonutComponent {
   template = config.template;
 }

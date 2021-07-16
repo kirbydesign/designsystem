@@ -130,7 +130,7 @@ export const routes: Routes = [
         component: ChartDeprecatedShowcaseComponent,
       },
       {
-        path: 'chart-wip',
+        path: 'chart',
         component: ChartShowcaseComponent,
       },
       {

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 const config = {
-  selector: 'cookbook-chart-example-timeseries',
+  selector: 'cookbook-chart-deprecated-example-timeseries',
   template: `<kirby-card>
   <kirby-card-header title="Timeseries"></kirby-card-header>
   <kirby-chart-deprecated
@@ -18,7 +18,7 @@ const config = {
   selector: config.selector,
   template: config.template,
 })
-export class ChartExampleTimeseriesComponent {
+export class ChartDeprecatedExampleTimeseriesComponent {
   template = config.template;
   breaks = [
     {

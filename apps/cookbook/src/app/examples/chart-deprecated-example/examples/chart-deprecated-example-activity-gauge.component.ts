@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 const config = {
-  selector: 'cookbook-chart-example-activity-gauge',
+  selector: 'cookbook-chart-deprecated-example-activity-gauge',
   template: `<kirby-card>
   <kirby-card-header title="Activity-Gauge"> </kirby-card-header>
   <div
@@ -40,6 +40,6 @@ const config = {
   selector: config.selector,
   template: config.template,
 })
-export class ChartExampleActivityGaugeComponent {
+export class ChartDeprecatedExampleActivityGaugeComponent {
   template = config.template;
 }

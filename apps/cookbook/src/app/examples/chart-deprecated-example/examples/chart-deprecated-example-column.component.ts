@@ -75,7 +75,7 @@ monthlyOverviewOptions: Options = {
   selector: config.selector,
   template: config.template,
 })
-export class ChartExampleColumnComponent {
+export class ChartDeprecatedExampleColumnComponent {
   template: string = config.template;
   codeSnippet: string = config.codeSnippet;
   height = 150;

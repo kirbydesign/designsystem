@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 const config = {
-  selector: 'cookbook-chart-example-pie',
+  selector: 'cookbook-chart-deprecated-example-pie',
   template: `<kirby-card>
   <kirby-card-header title="Pie"></kirby-card-header>
   <kirby-chart-deprecated
@@ -38,6 +38,6 @@ const config = {
   selector: config.selector,
   template: config.template,
 })
-export class ChartExamplePieComponent {
+export class ChartDeprecatedExamplePieComponent {
   template = config.template;
 }

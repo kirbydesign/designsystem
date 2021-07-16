@@ -4,23 +4,23 @@ import { NgModule } from '@angular/core';
 import { KirbyModule } from '@kirbydesign/designsystem';
 
 import { ChartDeprecatedExampleComponent } from './chart-deprecated-example.component';
-import { ChartExampleActivityGaugeComponent } from './examples/chart-example-activity-gauge.component';
-import { ChartExampleAreasplineComponent } from './examples/chart-example-areaspline.component';
-import { ChartExampleBarComponent } from './examples/chart-example-bar.component';
-import { ChartExampleColumnComponent } from './examples/chart-example-column.component';
-import { ChartExampleDonutComponent } from './examples/chart-example-donut.component';
-import { ChartExamplePieComponent } from './examples/chart-example-pie.component';
-import { ChartExampleTimeseriesComponent } from './examples/chart-example-timeseries.component';
+import { ChartDeprecatedExampleActivityGaugeComponent } from './examples/chart-deprecated-example-activity-gauge.component';
+import { ChartDeprecatedExampleAreasplineComponent } from './examples/chart-deprecated-example-areaspline.component';
+import { ChartDeprecatedExampleBarComponent } from './examples/chart-deprecated-example-bar.component';
+import { ChartDeprecatedExampleColumnComponent } from './examples/chart-deprecated-example-column.component';
+import { ChartDeprecatedExampleDonutComponent } from './examples/chart-deprecated-example-donut.component';
+import { ChartDeprecatedExamplePieComponent } from './examples/chart-deprecated-example-pie.component';
+import { ChartDeprecatedExampleTimeseriesComponent } from './examples/chart-deprecated-example-timeseries.component';
 
 const COMPONENT_DECLARATIONS = [
   ChartDeprecatedExampleComponent,
-  ChartExampleActivityGaugeComponent,
-  ChartExampleAreasplineComponent,
-  ChartExampleDonutComponent,
-  ChartExampleColumnComponent,
-  ChartExamplePieComponent,
-  ChartExampleTimeseriesComponent,
-  ChartExampleBarComponent,
+  ChartDeprecatedExampleActivityGaugeComponent,
+  ChartDeprecatedExampleAreasplineComponent,
+  ChartDeprecatedExampleDonutComponent,
+  ChartDeprecatedExampleColumnComponent,
+  ChartDeprecatedExamplePieComponent,
+  ChartDeprecatedExampleTimeseriesComponent,
+  ChartDeprecatedExampleBarComponent,
 ];
 
 @NgModule({
