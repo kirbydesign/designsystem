@@ -6,13 +6,8 @@ import {
   CHART_ANNOTATION_CONFIGS,
   CHART_TYPE_CONFIGS,
   INTERACTION_FUNCTIONS_EXTENSIONS,
-} from '../chart-wip.configs';
-import {
-  ChartDataset,
-  ChartHighlightedElements,
-  ChartType,
-  isNumberArray,
-} from '../chart-wip.types';
+} from '../chart.configs';
+import { ChartDataset, ChartHighlightedElements, ChartType, isNumberArray } from '../chart.types';
 import { deepCopy, deepMergeObjects } from '../utils';
 
 import { Chart } from './configured-chart-js';

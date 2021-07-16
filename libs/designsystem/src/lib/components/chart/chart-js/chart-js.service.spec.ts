@@ -3,10 +3,10 @@ import { Chart, FontSpec } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
 
 import { ColorHelper } from '../../../helpers';
-import { CHART_ANNOTATION_CONFIGS, CHART_TYPE_CONFIGS } from '../chart-wip.configs';
-import { CHART_GLOBAL_DEFAULTS } from '../chart-wip.configs';
-import { ChartDataset } from '../chart-wip.types';
-import { ChartHighlightedElements } from '../chart-wip.types';
+import { CHART_ANNOTATION_CONFIGS, CHART_TYPE_CONFIGS } from '../chart.configs';
+import { CHART_GLOBAL_DEFAULTS } from '../chart.configs';
+import { ChartDataset } from '../chart.types';
+import { ChartHighlightedElements } from '../chart.types';
 
 import { ChartJSService } from './chart-js.service';
 

@@ -11,7 +11,7 @@ import {
 } from 'chart.js';
 import annotationPlugin from 'chartjs-plugin-annotation';
 
-import { CHART_GLOBAL_DEFAULTS } from '../chart-wip.configs';
+import { CHART_GLOBAL_DEFAULTS } from '../chart.configs';
 import { deepMergeObjects } from '../utils';
 
 const CHART_SCALES = [CategoryScale, LinearScale];

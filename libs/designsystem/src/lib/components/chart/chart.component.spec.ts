@@ -2,7 +2,7 @@ import { createComponentFactory, Spectator } from '@ngneat/spectator';
 import { MockProvider } from 'ng-mocks';
 
 import { ChartJSService } from './chart-js/chart-js.service';
-import { ChartComponent } from './chart-wip.component';
+import { ChartComponent } from './chart.component';
 
 describe('ChartComponent', () => {
   let spectator: Spectator<ChartComponent>;

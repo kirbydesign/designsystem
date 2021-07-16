@@ -1,4 +1,4 @@
-export { ChartComponent } from './chart-wip.component';
-export * from './chart-wip.types';
+export { ChartComponent } from './chart.component';
+export * from './chart.types';
 export { ChartOptions, ChartEvent, ActiveElement, Chart } from 'chart.js';
 export { AnnotationOptions } from 'chartjs-plugin-annotation';

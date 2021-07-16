@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { ActiveElement, Chart, ChartEvent } from 'chart.js';
 
-import { ChartOptions } from '@kirbydesign/designsystem';
-import { ChartHighlightedElements } from '@kirbydesign/designsystem/components/chart-wip/chart-wip.types';
+import { ChartHighlightedElements, ChartOptions } from '@kirbydesign/designsystem';
 
 const config = {
   selector: 'cookbook-chart-wip-example-interaction',

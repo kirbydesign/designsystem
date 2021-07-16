@@ -9,7 +9,7 @@ import {
 
 import { ColorHelper, DesignTokenHelper } from '../../helpers';
 
-import { ChartDataset } from './chart-wip.types';
+import { ChartDataset } from './chart.types';
 
 const { fontSize } = DesignTokenHelper;
 const { getThemeColorHexString } = ColorHelper;

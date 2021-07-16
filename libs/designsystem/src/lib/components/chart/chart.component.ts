@@ -12,12 +12,12 @@ import { ChartOptions } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
 
 import { ChartJSService } from './chart-js/chart-js.service';
-import { ChartDataset, ChartHighlightedElements, ChartType } from './chart-wip.types';
+import { ChartDataset, ChartHighlightedElements, ChartType } from './chart.types';
 
 @Component({
   selector: 'kirby-chart',
-  templateUrl: './chart-wip.component.html',
-  styleUrls: ['./chart-wip.component.scss'],
+  templateUrl: './chart.component.html',
+  styleUrls: ['./chart.component.scss'],
   providers: [ChartJSService],
 })
 export class ChartComponent implements AfterViewInit, OnChanges {
