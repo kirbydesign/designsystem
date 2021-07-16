@@ -15,7 +15,7 @@ import { ChartJSService } from './chart-js/chart-js.service';
 import { ChartDataset, ChartHighlightedElements, ChartType } from './chart-wip.types';
 
 @Component({
-  selector: 'kirby-chart-wip',
+  selector: 'kirby-chart',
   templateUrl: './chart-wip.component.html',
   styleUrls: ['./chart-wip.component.scss'],
   providers: [ChartJSService],

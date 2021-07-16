@@ -7,13 +7,13 @@ import { ChartHighlightedElements } from '@kirbydesign/designsystem/components/c
 const config = {
   selector: 'cookbook-chart-wip-example-interaction',
   template: `<p>{{_text}}</p>
-<kirby-chart-wip 
+<kirby-chart 
   type="column" 
   [data]="[7, 12, 5, 9, 3]" 
   [dataLabels]="_dataLabels" 
   [customOptions]="_customOptions"
   [highlightedElements]="_highlighted"
-></kirby-chart-wip>`,
+></kirby-chart>`,
   codeSnippet: `_text = 'Nothing has been clicked';
 _dataLabels = ['Monday', 'Tuesday', 'Wedensday', 'Thursday', 'Friday'];
 _highlighted: ChartHighlightedElements;

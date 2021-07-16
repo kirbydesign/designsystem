@@ -6,11 +6,11 @@ const { getThemeColorHexString } = ColorHelper;
 
 const config = {
   selector: 'cookbook-chart-wip-example-multiple-datasets',
-  template: `<kirby-chart-wip 
+  template: `<kirby-chart 
   type="column" 
   [data]="_datasets" 
   [dataLabels]="['Monday', 'Tuesday', ['Wedens-','day'], 'Thursday', 'Friday']">
-</kirby-chart-wip>`,
+</kirby-chart>`,
   codeSnippet: `import { ColorHelper } from '@kirbydesign/designsystem';
 
 const { getThemeColorHexString } = ColorHelper;

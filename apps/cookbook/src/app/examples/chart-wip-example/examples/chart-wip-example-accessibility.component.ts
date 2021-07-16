@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 const config = {
   selector: 'cookbook-chart-wip-example-accessibility',
-  template: `<kirby-chart-wip 
+  template: `<kirby-chart 
   type="column" 
   [data]="[739, 1200, 584, 902, 30]" 
   [dataLabels]="['Monday', 'Tuesday', 'Wedensday', 'Thursday', 'Friday']"
@@ -33,7 +33,7 @@ const config = {
       <td>30</td>
     </tr>
   </table>
-</kirby-chart-wip>`,
+</kirby-chart>`,
 };
 
 @Component({

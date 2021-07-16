@@ -3,10 +3,10 @@ import { AnnotationOptions } from 'chartjs-plugin-annotation';
 
 const config = {
   selector: 'cookbook-chart-wip-example-annotations',
-  template: `<kirby-chart-wip 
+  template: `<kirby-chart 
     [data]="[7, 12, 5, 9, 3]" 
     [annotations]="annotations"
-  ></kirby-chart-wip>`,
+  ></kirby-chart>`,
   codeSnippet: `annotations: AnnotationOptions[] = [
   {
     type: 'line',

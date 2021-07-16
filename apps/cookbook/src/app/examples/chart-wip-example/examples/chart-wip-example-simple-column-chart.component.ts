@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 const config = {
   selector: 'cookbook-chart-wip-example-simple-column',
-  template: `<kirby-chart-wip [data]="[50, 200, 83, 102]"></kirby-chart-wip>`,
+  template: `<kirby-chart [data]="[50, 200, 83, 102]"></kirby-chart>`,
 };
 
 @Component({
