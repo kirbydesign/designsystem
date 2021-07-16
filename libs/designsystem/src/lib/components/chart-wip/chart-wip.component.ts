@@ -20,7 +20,7 @@ import { ChartDataset, ChartHighlightedElements, ChartType } from './chart-wip.t
   styleUrls: ['./chart-wip.component.scss'],
   providers: [ChartJSService],
 })
-export class ChartWipComponent implements AfterViewInit, OnChanges {
+export class ChartComponent implements AfterViewInit, OnChanges {
   @Input() type: ChartType = 'column';
   @Input() data: ChartDataset[] | number[];
   @Input() dataLabels?: string[] | string[][];

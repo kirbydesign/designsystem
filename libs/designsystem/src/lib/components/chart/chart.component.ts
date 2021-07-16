@@ -30,7 +30,7 @@ import { TimeSeriesOptions, TIMESERIES_OPTIONS } from './options/timeseries';
     { provide: ACTIVITYGAUGE_OPTIONS, useValue: ActivityGaugeOptions },
   ],
 })
-export class ChartComponent implements OnChanges {
+export class ChartDeprecatedComponent implements OnChanges {
   @Input() data = [];
   @Input() categories: string[] = [];
   @Input() breaks: Array<XAxisBreaksOptions> = [];
