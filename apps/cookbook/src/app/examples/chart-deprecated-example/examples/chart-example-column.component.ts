@@ -24,7 +24,7 @@ function colorPoints(selectedIdx) {
 }
 
 const config = {
-  selector: 'cookbook-chart-example-column',
+  selector: 'cookbook-chart-deprecated-example-column',
   template: `<kirby-card>
   <kirby-card-header title="Column"></kirby-card-header>
   <kirby-chart-deprecated

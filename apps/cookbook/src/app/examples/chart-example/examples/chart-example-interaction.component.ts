@@ -4,7 +4,7 @@ import { ActiveElement, Chart, ChartEvent } from 'chart.js';
 import { ChartHighlightedElements, ChartOptions } from '@kirbydesign/designsystem';
 
 const config = {
-  selector: 'cookbook-chart-wip-example-interaction',
+  selector: 'cookbook-chart-example-interaction',
   template: `<p>{{_text}}</p>
 <kirby-chart 
   type="column" 
@@ -40,7 +40,7 @@ _customOptions: ChartOptions = {
   selector: config.selector,
   template: config.template,
 })
-export class ChartWipExampleInteractionComponent {
+export class ChartExampleInteractionComponent {
   template: string = config.template;
   codeSnippet: string = config.codeSnippet;
 

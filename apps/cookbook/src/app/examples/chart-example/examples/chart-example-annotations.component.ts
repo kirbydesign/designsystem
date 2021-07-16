@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
 
 const config = {
-  selector: 'cookbook-chart-wip-example-annotations',
+  selector: 'cookbook-chart-example-annotations',
   template: `<kirby-chart 
     [data]="[7, 12, 5, 9, 3]" 
     [annotations]="annotations"
@@ -42,7 +42,7 @@ const config = {
   selector: config.selector,
   template: config.template,
 })
-export class ChartWipExampleAnnotationsComponent {
+export class ChartExampleAnnotationsComponent {
   template: string = config.template;
   codeSnippet: string = config.codeSnippet;
 

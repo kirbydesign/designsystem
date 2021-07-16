@@ -4,7 +4,7 @@ import { ChartOptions } from 'chart.js';
 import { ColorHelper } from '@kirbydesign/designsystem';
 
 const config = {
-  selector: 'cookbook-chart-wip-example-column-stacked',
+  selector: 'cookbook-chart-example-column-stacked',
   template: `<kirby-chart type="column" [data]="_datasets" [dataLabels]="['Monday', 'Tuesday', 'Wedensday', 'Thursday', 'Friday']" [customOptions]="_customOptions"></kirby-chart>`,
   codeSnippet: `
   import { ColorHelper } from '@kirbydesign/designsystem';
@@ -37,7 +37,7 @@ const config = {
   selector: config.selector,
   template: config.template,
 })
-export class ChartWipExampleColumnStackedComponent {
+export class ChartExampleColumnStackedComponent {
   template: string = config.template;
 
   codeSnippet = config.codeSnippet;

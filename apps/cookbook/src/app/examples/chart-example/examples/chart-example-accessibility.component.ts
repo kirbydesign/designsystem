@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 const config = {
-  selector: 'cookbook-chart-wip-example-accessibility',
+  selector: 'cookbook-chart-example-accessibility',
   template: `<kirby-chart 
   type="column" 
   [data]="[739, 1200, 584, 902, 30]" 
@@ -40,6 +40,6 @@ const config = {
   selector: config.selector,
   template: config.template,
 })
-export class ChartWipExampleAccessibilityComponent {
+export class ChartExampleAccessibilityComponent {
   template: string = config.template;
 }

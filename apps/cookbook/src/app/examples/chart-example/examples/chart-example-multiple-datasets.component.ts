@@ -5,7 +5,7 @@ import { ColorHelper } from '@kirbydesign/designsystem';
 const { getThemeColorHexString } = ColorHelper;
 
 const config = {
-  selector: 'cookbook-chart-wip-example-multiple-datasets',
+  selector: 'cookbook-chart-example-multiple-datasets',
   template: `<kirby-chart 
   type="column" 
   [data]="_datasets" 
@@ -35,7 +35,7 @@ _datasets = [
   selector: config.selector,
   template: config.template,
 })
-export class ChartWipExampleMultipleDatasetsComponent {
+export class ChartExampleMultipleDatasetsComponent {
   template: string = config.template;
 
   codeSnippet = config.codeSnippet;

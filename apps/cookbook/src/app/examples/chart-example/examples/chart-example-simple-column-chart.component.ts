@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 const config = {
-  selector: 'cookbook-chart-wip-example-simple-column',
+  selector: 'cookbook-chart-example-simple-column',
   template: `<kirby-chart [data]="[50, 200, 83, 102]"></kirby-chart>`,
 };
 
@@ -9,6 +9,6 @@ const config = {
   selector: config.selector,
   template: config.template,
 })
-export class ChartWipExampleSimpleColumnComponent {
+export class ChartExampleSimpleColumnComponent {
   template: string = config.template;
 }
