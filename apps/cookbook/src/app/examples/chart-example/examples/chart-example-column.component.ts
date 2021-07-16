@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Options, SeriesClickCallbackFunction, SeriesClickEventObject } from 'highcharts';
 
-import { ModalController, DesignTokenHelper } from '@kirbydesign/designsystem';
+import { DesignTokenHelper, ModalController } from '@kirbydesign/designsystem';
 
 const getColor = DesignTokenHelper.getColor;
 function colorPoints(selectedIdx) {
@@ -27,13 +27,13 @@ const config = {
   selector: 'cookbook-chart-example-column',
   template: `<kirby-card>
   <kirby-card-header title="Column"></kirby-card-header>
-  <kirby-chart
+  <kirby-chart-deprecated
     [height]="height"
     [categories]="categories"
     type="column"
     [data]="adjustedMonthlyExpenseData"
     [options]="monthlyOverviewOptions">
-  </kirby-chart>
+  </kirby-chart-deprecated>
 </kirby-card>`,
   codeSnippet: `private monthlyOverviewClick: SeriesClickCallbackFunction = (ev: SeriesClickEventObject) => {
       this.modalController.showAlert({

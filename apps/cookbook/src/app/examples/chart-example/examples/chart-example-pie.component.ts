@@ -4,7 +4,7 @@ const config = {
   selector: 'cookbook-chart-example-pie',
   template: `<kirby-card>
   <kirby-card-header title="Pie"></kirby-card-header>
-  <kirby-chart
+  <kirby-chart-deprecated
     [height]="320"
     type="pie"
     [showDataLabels]="false"
@@ -31,7 +31,7 @@ const config = {
       label: '< 1%'
     }
     ]"
-  ></kirby-chart>
+  ></kirby-chart-deprecated>
 </kirby-card>`,
 };
 @Component({

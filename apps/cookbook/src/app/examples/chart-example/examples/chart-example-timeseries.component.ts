@@ -4,14 +4,14 @@ const config = {
   selector: 'cookbook-chart-example-timeseries',
   template: `<kirby-card>
   <kirby-card-header title="Timeseries"></kirby-card-header>
-  <kirby-chart
+  <kirby-chart-deprecated
     [height]="240"
     type="timeseries"
     description="Accessibility description goes here"
     [data]="rates"
     [breaks]="breaks"
   >
-  </kirby-chart>
+  </kirby-chart-deprecated>
 </kirby-card>`,
 };
 @Component({

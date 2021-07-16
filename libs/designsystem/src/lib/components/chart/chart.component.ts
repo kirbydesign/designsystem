@@ -19,7 +19,7 @@ import { DonutOptions, DONUT_OPTIONS } from './options/donut';
 import { TimeSeriesOptions, TIMESERIES_OPTIONS } from './options/timeseries';
 
 @Component({
-  selector: 'kirby-chart',
+  selector: 'kirby-chart-deprecated',
   template: '',
   styleUrls: ['./chart.component.scss'],
   providers: [

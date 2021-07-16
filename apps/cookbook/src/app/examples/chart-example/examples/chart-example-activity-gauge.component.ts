@@ -7,7 +7,7 @@ const config = {
   <div
     style="background: url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80') no-repeat fixed center;"
   >
-  <kirby-chart
+  <kirby-chart-deprecated
     [height]="258"
     type="activitygauge"
     [showDataLabels]="false"
@@ -32,7 +32,7 @@ const config = {
       ]
     }
     ]"
-  ></kirby-chart>
+  ></kirby-chart-deprecated>
   </div>
 </kirby-card>`,
 };

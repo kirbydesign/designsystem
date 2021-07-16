@@ -4,7 +4,7 @@ const config = {
   selector: 'cookbook-chart-example-donut',
   template: `<kirby-card>
   <kirby-card-header title="Donut"></kirby-card-header>
-    <kirby-chart
+    <kirby-chart-deprecated
       [height]="320"
       type="donut"
       [showDataLabels]="true"
@@ -32,7 +32,7 @@ const config = {
       }
       ]"
     >
-    </kirby-chart>
+    </kirby-chart-deprecated>
 </kirby-card>`,
 };
 @Component({
