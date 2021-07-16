@@ -2,24 +2,24 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Options, PlotSeriesDataLabelsOptions, XAxisOptions } from 'highcharts';
 
 import { ChartType } from './chart-type';
-import { ChartComponent } from './chart.component';
+import { ChartDeprecatedComponent } from './chart.component';
 
-describe('ChartComponent', () => {
-  let component: ChartComponent;
-  let fixture: ComponentFixture<ChartComponent>;
+describe('ChartDeprecatedComponent', () => {
+  let component: ChartDeprecatedComponent;
+  let fixture: ComponentFixture<ChartDeprecatedComponent>;
 
   const expectedDefaultHeight = 300;
 
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [ChartComponent],
+        declarations: [ChartDeprecatedComponent],
       }).compileComponents();
     })
   );
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ChartComponent);
+    fixture = TestBed.createComponent(ChartDeprecatedComponent);
     component = fixture.componentInstance;
     component.data = [];
     component.ngOnChanges({ type: {} as any });

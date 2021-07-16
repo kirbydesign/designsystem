@@ -2,14 +2,14 @@ import { createComponentFactory, Spectator } from '@ngneat/spectator';
 import { MockProvider } from 'ng-mocks';
 
 import { ChartJSService } from './chart-js/chart-js.service';
-import { ChartWipComponent } from './chart-wip.component';
+import { ChartComponent } from './chart-wip.component';
 
-describe('ChartWipComponent', () => {
-  let spectator: Spectator<ChartWipComponent>;
-  let component: ChartWipComponent;
+describe('ChartComponent', () => {
+  let spectator: Spectator<ChartComponent>;
+  let component: ChartComponent;
   const createComponent = createComponentFactory({
-    component: ChartWipComponent,
-    declarations: [ChartWipComponent],
+    component: ChartComponent,
+    declarations: [ChartComponent],
     componentProviders: [MockProvider(ChartJSService)],
   });
 
