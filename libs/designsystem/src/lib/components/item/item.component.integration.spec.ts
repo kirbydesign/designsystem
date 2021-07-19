@@ -18,7 +18,7 @@ import { ItemComponent } from './item.component';
 
 const size = DesignTokenHelper.size;
 
-describe('ItemComponent in Kirby List', () => {
+describe('ItemComponent', () => {
   let ionList: HTMLElement;
   let itemsInList: HTMLElement[];
 
@@ -44,7 +44,7 @@ describe('ItemComponent in Kirby List', () => {
     ],
   });
 
-  describe('inside list', () => {
+  describe('inside Kirby List', () => {
     beforeEach(async () => {
       spectator = createHost<ListComponent>(
         `
@@ -74,6 +74,39 @@ describe('ItemComponent in Kirby List', () => {
       const lastItem = itemsInList[itemsInList.length - 1].shadowRoot.querySelector('.item-native');
       expect(firstItem).toHaveComputedStyle({ 'padding-top': size('xxs') });
       expect(lastItem).toHaveComputedStyle({ 'padding-bottom': size('xxs') });
+    });
+
+    describe('with hasItemSpacing set to true', () => {
+      it('should apply spacing to all but the last item', () => {
+        spectator.setInput('hasItemSpacing', true);
+        spectator.detectChanges();
+        const kirbyItemsInList = spectator.queryAll('kirby-list-item:not(:last-child)');
+
+        kirbyItemsInList.forEach((item) => {
+          expect(item).toHaveComputedStyle({ 'margin-bottom': size('s') });
+        });
+      });
+
+      it('should not apply spacing to the last item', () => {
+        spectator.setInput('hasItemSpacing', true);
+        spectator.detectChanges();
+        const kirbyItemsInList = spectator.queryAll('kirby-list-item:last-child');
+
+        kirbyItemsInList.forEach((item) => {
+          expect(item).toHaveComputedStyle({ 'margin-bottom': '0px' });
+        });
+      });
+    });
+    describe('with hasItemSpacing set to false', () => {
+      it('should not apply spacing to items', () => {
+        spectator.setInput('hasItemSpacing', false);
+        spectator.detectChanges();
+        const kirbyItemsInList = spectator.queryAll('kirby-list-item');
+
+        kirbyItemsInList.forEach((item) => {
+          expect(item).toHaveComputedStyle({ 'margin-bottom': '0px' });
+        });
+      });
     });
   });
 
