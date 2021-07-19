@@ -14,7 +14,7 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { CardFooterComponent } from './components/card/card-footer/card-footer.component';
 import { CardHeaderComponent } from './components/card/card-header/card-header.component';
 import { CardComponent } from './components/card/card.component';
-import { ChartWipComponent } from './components/chart-wip/chart-wip.component';
+import { ChartDeprecatedComponent } from './components/chart-deprecated/chart.component';
 import { ChartComponent } from './components/chart/chart.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { ChipComponent } from './components/chip/chip.component';
@@ -79,7 +79,7 @@ const exportedDeclarations = [
   CardFooterComponent,
   ButtonComponent,
   ChartComponent,
-  ChartWipComponent,
+  ChartDeprecatedComponent,
   StockChartComponent,
   GridComponent,
   ComponentLoaderDirective,

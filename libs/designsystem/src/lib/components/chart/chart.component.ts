@@ -1,233 +1,106 @@
-import { Component, ElementRef, Inject, Input, OnChanges, SimpleChanges } from '@angular/core';
 import {
-  Options,
-  PlotSeriesDataLabelsOptions,
-  XAxisBreaksOptions,
-  XAxisOptions,
-  YAxisOptions,
-} from 'highcharts';
+  AfterViewInit,
+  Component,
+  ElementRef,
+  HostBinding,
+  Input,
+  OnChanges,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
+import { ChartOptions } from 'chart.js';
+import { AnnotationOptions } from 'chartjs-plugin-annotation';
 
-import { mergeDeep } from '../../helpers/deep-merge';
-
-import { ChartHelper } from './chart-helper';
-import { ChartType } from './chart-type';
-import { ActivityGaugeOptions, ACTIVITYGAUGE_OPTIONS } from './options/activitygauge';
-import { AreaSplineOptions, AREASPLINE_OPTIONS } from './options/areaspline';
-import { barOptions } from './options/bar';
-import { columnOptions } from './options/column';
-import { DonutOptions, DONUT_OPTIONS } from './options/donut';
-import { TimeSeriesOptions, TIMESERIES_OPTIONS } from './options/timeseries';
+import { ChartJSService } from './chart-js/chart-js.service';
+import { ChartDataset, ChartHighlightedElements, ChartType } from './chart.types';
 
 @Component({
   selector: 'kirby-chart',
-  template: '',
+  templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.scss'],
-  providers: [
-    ChartHelper,
-    { provide: DONUT_OPTIONS, useValue: DonutOptions },
-    { provide: AREASPLINE_OPTIONS, useValue: AreaSplineOptions },
-    { provide: TIMESERIES_OPTIONS, useValue: TimeSeriesOptions },
-    { provide: ACTIVITYGAUGE_OPTIONS, useValue: ActivityGaugeOptions },
-  ],
+  providers: [ChartJSService],
 })
-export class ChartComponent implements OnChanges {
-  @Input() data = [];
-  @Input() categories: string[] = [];
-  @Input() breaks: Array<XAxisBreaksOptions> = [];
-  @Input() height = 300;
-  @Input() type: ChartType = ChartType.PIE;
-  @Input() description = '';
-  @Input() showDataLabels = true;
-  @Input() options: Options;
-  mergedOptions: Options = {
-    accessibility: {},
-  };
+export class ChartComponent implements AfterViewInit, OnChanges {
+  @Input() type: ChartType = 'column';
+  @Input() data: ChartDataset[] | number[];
+  @Input() dataLabels?: string[] | string[][];
+  @Input() customOptions?: ChartOptions;
+  @Input() annotations?: AnnotationOptions[];
+  @Input() highlightedElements?: ChartHighlightedElements;
 
-  constructor(
-    private chartHelper: ChartHelper,
-    private hostElement: ElementRef,
-    @Inject(DONUT_OPTIONS) public donutOptions: Options,
-    @Inject(AREASPLINE_OPTIONS) public areasplineOptions: Options,
-    @Inject(TIMESERIES_OPTIONS) public timeSeriesOptions: Options,
-    @Inject(ACTIVITYGAUGE_OPTIONS) public activitygaugeOptions: Options
-  ) {
-    this.chartHelper.init(this.hostElement);
+  @HostBinding('style.--kirby-chart-height')
+  _height: string;
+  @Input() set height(value: string | number) {
+    this._height = typeof value === 'number' ? `${value}px` : value;
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes.type) {
-      this.setupChartType();
-    }
-    this.updateProperties();
-    this.chartHelper.renderChart(this.mergedOptions);
+  @ViewChild('chartCanvas')
+  canvasElement: ElementRef<HTMLCanvasElement>;
+
+  constructor(private chartJSService: ChartJSService) {}
+
+  ngAfterViewInit() {
+    this.renderChart();
   }
 
-  setupChartType() {
-    switch (this.type) {
-      case ChartType.DONUT: {
-        this.mergedOptions = this.donutOptions;
-        this.mergedOptions.chart.type = ChartType.PIE;
-        this.mergedOptions.plotOptions.pie.innerSize = '50%';
-        break;
-      }
-      case ChartType.PIE: {
-        this.mergedOptions = this.donutOptions;
-        this.mergedOptions.chart.type = this.type;
-        this.mergedOptions.plotOptions.pie.innerSize = '0%';
-        break;
-      }
-      case ChartType.AREASPLINE: {
-        this.mergedOptions = this.areasplineOptions;
-        this.mergedOptions.chart.type = this.type;
-        break;
-      }
-      case ChartType.TIMESERIES: {
-        this.mergedOptions = this.timeSeriesOptions;
-        this.mergedOptions.chart.type = this.type;
-        break;
-      }
-      case ChartType.ACTIVITYGAUGE: {
-        this.mergedOptions = this.activitygaugeOptions;
-        this.mergedOptions.chart.type = this.type;
-        break;
-      }
-      case ChartType.COLUMN: {
-        this.mergedOptions = columnOptions;
-        this.mergedOptions.chart.type = this.type;
-        break;
-      }
-      case ChartType.BAR: {
-        this.mergedOptions = barOptions;
-        this.mergedOptions.chart.type = this.type;
-        break;
-      }
-    }
-  }
+  ngOnChanges(simpleChanges: SimpleChanges) {
+    let shouldRedrawChart = false;
 
-  updateProperties() {
-    this.mergedOptions.chart.height = this.height;
-    this.mergedOptions.accessibility.description = this.description;
-    switch (this.mergedOptions.chart.type) {
-      case ChartType.PIE:
-      case ChartType.DONUT: {
-        this.setPieInput();
-        break;
-      }
-      case ChartType.AREASPLINE: {
-        this.setSeries('areaspline');
-        break;
-      }
-      case ChartType.TIMESERIES: {
-        this.setTimeseriesInput();
-        break;
-      }
-      case ChartType.ACTIVITYGAUGE: {
-        this.setActivitygaugeInput();
-        break;
-      }
-      case ChartType.COLUMN: {
-        this.setColumnInput();
-        break;
-      }
-      case ChartType.BAR: {
-        this.setBarInput();
-        break;
-      }
-    }
-    if (!!this.options) {
-      this.mergedOptions = mergeDeep(this.mergedOptions, this.options);
-    }
-  }
-
-  private setPieInput() {
-    (this.mergedOptions.plotOptions.pie
-      .dataLabels as PlotSeriesDataLabelsOptions).enabled = this.showDataLabels;
-    this.setSeries('pie');
-  }
-
-  private setBarInput() {
-    const dataMaxValue = Math.max(...this.data);
-    this.mergedOptions.series = [
-      {
-        type: 'bar',
-        name: 'InvisibleClickReceiver',
-        data: this.data.map((dataEntry) => dataMaxValue - dataEntry),
-        edgeColor: 'rgb(255, 255, 255, 0)',
-        opacity: 0,
-      },
-      {
-        type: 'bar',
-        data: this.data,
-      },
-    ];
-    (this.mergedOptions.xAxis as XAxisOptions).categories = this.categories;
-  }
-
-  private setColumnInput() {
-    this.mergedOptions.series = [
-      {
-        type: 'column',
-        data: this.data,
-      },
-    ];
-    const dataMaxValue = Math.max(...this.data);
-    ((this.mergedOptions.yAxis as YAxisOptions).tickPositioner = () => {
-      var positions = [0, dataMaxValue];
-      return positions;
-    }),
-      (this.mergedOptions.series = [
-        {
-          type: 'column',
-          name: 'InvisibleClickReceiver',
-          data: this.data.map((_, idx) => dataMaxValue - this.data[idx]),
-          opacity: 0,
-        },
-        {
-          type: 'column',
-          data: this.data,
-        },
-      ]);
-    (this.mergedOptions.xAxis as XAxisOptions).categories = this.categories;
-  }
-
-  private setActivitygaugeInput() {
-    const data = this.data[0];
-    this.mergedOptions.title.text = data.title;
-    this.mergedOptions.subtitle.text = data.subtitle;
-    if (data.paneBackgroundColor) {
-      this.mergedOptions.pane.background = [
-        {
-          ...this.mergedOptions.pane.background[0],
-          backgroundColor: data.paneBackgroundColor,
-        },
-      ];
-    }
-    if (data.color) {
-      this.mergedOptions.title.style.color = data.color;
-      this.mergedOptions.subtitle.style.color = data.color;
-    }
-    this.mergedOptions.series = [
-      {
-        type: 'solidgauge',
-        data: data.series,
-      },
-    ];
-  }
-
-  private setTimeseriesInput() {
-    this.setSeries('area');
-    this.mergedOptions.xAxis = {
-      ...this.mergedOptions.xAxis,
-      breaks: this.breaks,
+    const keyUpdateFnPairs = {
+      data: () => this.updateData(),
+      dataLabels: () => this.updateDataLabels(),
+      type: () => this.updateType(),
+      customOptions: () => this.updateCustomOptions(),
+      annotations: () => this.updateAnnotations(),
+      highlightedElements: () => this.updateHighlightedElements(),
     };
+
+    Object.entries(simpleChanges).forEach(([key]) => {
+      if (simpleChanges[key].firstChange || !keyUpdateFnPairs[key]) return;
+      shouldRedrawChart = true;
+      keyUpdateFnPairs[key]();
+    });
+
+    if (shouldRedrawChart) this.redrawChart();
   }
 
-  private setSeries(type) {
-    this.mergedOptions.series = [
-      {
-        type,
-        data: this.data,
-      },
-    ];
+  private renderChart() {
+    this.chartJSService.renderChart({
+      targetElement: this.canvasElement,
+      type: this.type,
+      data: this.data,
+      dataLabels: this.dataLabels,
+      customOptions: this.customOptions,
+      annotations: this.annotations,
+      highlightedElements: this.highlightedElements,
+    });
+  }
+
+  private updateData() {
+    this.chartJSService.updateData(this.data);
+  }
+
+  private updateDataLabels() {
+    this.chartJSService.updateDataLabels(this.dataLabels);
+  }
+
+  private updateType() {
+    this.chartJSService.updateType(this.type, this.customOptions);
+  }
+
+  private updateCustomOptions() {
+    this.chartJSService.updateOptions(this.customOptions, this.type);
+  }
+
+  private updateAnnotations() {
+    this.chartJSService.updateAnnotations(this.annotations);
+  }
+
+  private updateHighlightedElements() {
+    this.chartJSService.updateHighlightedElements(this.highlightedElements);
+  }
+
+  private redrawChart() {
+    this.chartJSService.redrawChart();
   }
 }

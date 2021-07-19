@@ -6,8 +6,8 @@ export { BadgeComponent } from './badge/badge.component';
 export { ButtonComponent, ButtonSize } from './button/button.component';
 
 export * from './card';
+export * from './chart-deprecated';
 export * from './chart';
-export * from './chart-wip';
 export * from './stock-chart';
 export * from './calendar';
 
