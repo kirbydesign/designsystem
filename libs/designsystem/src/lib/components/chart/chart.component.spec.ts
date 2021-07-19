@@ -28,6 +28,12 @@ describe('ChartComponent', () => {
     });
   });
 
+  describe('when "type" is not provided', () => {
+    it('should default to correct type', () => {
+      expect(component.type).toBe('column');
+    });
+  });
+
   it('should render chart once after view init', () => {
     const renderChartSpy = spyOn<any>(component, 'renderChart');
 
@@ -135,12 +141,6 @@ describe('ChartComponent', () => {
 
         expect(redrawChartSpy).toHaveBeenCalledTimes(1);
       });
-    });
-  });
-
-  describe('when "type" is not provided', () => {
-    it('should default to correct type', () => {
-      expect(component.type).toBe('column');
     });
   });
 });
