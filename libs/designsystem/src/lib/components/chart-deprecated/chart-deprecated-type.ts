@@ -1,4 +1,4 @@
-export enum ChartType {
+export enum ChartDeprecatedType {
   PIE = 'pie',
   DONUT = 'donut',
   AREASPLINE = 'areaspline',

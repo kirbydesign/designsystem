@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Options, PlotSeriesDataLabelsOptions, XAxisOptions } from 'highcharts';
 
-import { ChartType } from './chart-type';
-import { ChartDeprecatedComponent } from './chart.component';
+import { ChartDeprecatedType } from './chart-deprecated-type';
+import { ChartDeprecatedComponent } from './chart-deprecated.component';
 
 describe('ChartDeprecatedComponent', () => {
   let component: ChartDeprecatedComponent;
@@ -43,28 +43,28 @@ describe('ChartDeprecatedComponent', () => {
   });
 
   it('should have correct default chart type', () => {
-    expect((component.type = ChartType.PIE));
+    expect((component.type = ChartDeprecatedType.PIE));
     component.ngOnChanges({ type: {} as any });
 
-    expect(component.mergedOptions.chart.type).toBe(ChartType.PIE);
+    expect(component.mergedOptions.chart.type).toBe(ChartDeprecatedType.PIE);
     expect(component.mergedOptions.plotOptions.pie.innerSize).toBe('0%');
   });
 
   it('should convert donut chart type to highcharts pie with 50% innerSize', () => {
-    component.type = ChartType.DONUT;
+    component.type = ChartDeprecatedType.DONUT;
     component.ngOnChanges({ type: {} as any });
 
-    expect((component.type = ChartType.DONUT));
-    expect(component.mergedOptions.chart.type).toBe(ChartType.PIE);
+    expect((component.type = ChartDeprecatedType.DONUT));
+    expect(component.mergedOptions.chart.type).toBe(ChartDeprecatedType.PIE);
     expect(component.mergedOptions.plotOptions.pie.innerSize).toBe('50%');
   });
 
   it('should set areaspline chart type', () => {
-    component.type = ChartType.AREASPLINE;
+    component.type = ChartDeprecatedType.AREASPLINE;
     component.ngOnChanges({ type: {} as any });
 
-    expect((component.type = ChartType.AREASPLINE));
-    expect(component.mergedOptions.chart.type).toBe(ChartType.AREASPLINE);
+    expect((component.type = ChartDeprecatedType.AREASPLINE));
+    expect(component.mergedOptions.chart.type).toBe(ChartDeprecatedType.AREASPLINE);
   });
 
   it('should have dataLabels enabled as default', () => {
@@ -104,7 +104,7 @@ describe('ChartDeprecatedComponent', () => {
 
   describe('ActivityGauge', () => {
     it('should set correct title and subtitle', () => {
-      component.type = ChartType.ACTIVITYGAUGE;
+      component.type = ChartDeprecatedType.ACTIVITYGAUGE;
 
       component.data = [
         {
@@ -119,7 +119,7 @@ describe('ChartDeprecatedComponent', () => {
     });
 
     it('should add backgroundColor to optionsarray', () => {
-      component.type = ChartType.ACTIVITYGAUGE;
+      component.type = ChartDeprecatedType.ACTIVITYGAUGE;
       const ActivityGaugeOptions: Options = {
         pane: {
           background: [
@@ -154,7 +154,7 @@ describe('ChartDeprecatedComponent', () => {
     });
 
     it('should change title and subtitle color when color-attribute is set', () => {
-      component.type = ChartType.ACTIVITYGAUGE;
+      component.type = ChartDeprecatedType.ACTIVITYGAUGE;
       component.data = [
         {
           color: 'red',
@@ -169,7 +169,7 @@ describe('ChartDeprecatedComponent', () => {
     });
 
     it('should set type to solidgauge when ACTIVITYGAUGE is chosen', () => {
-      component.type = ChartType.ACTIVITYGAUGE;
+      component.type = ChartDeprecatedType.ACTIVITYGAUGE;
       component.data = [
         {
           title: '',
@@ -182,7 +182,7 @@ describe('ChartDeprecatedComponent', () => {
     });
 
     it('should set activitygauge chart type', () => {
-      component.type = ChartType.ACTIVITYGAUGE;
+      component.type = ChartDeprecatedType.ACTIVITYGAUGE;
       component.data = [
         {
           title: 'test',
@@ -191,13 +191,13 @@ describe('ChartDeprecatedComponent', () => {
       ];
       component.ngOnChanges({ type: {} as any });
 
-      expect(component.mergedOptions.chart.type).toBe(ChartType.ACTIVITYGAUGE);
+      expect(component.mergedOptions.chart.type).toBe(ChartDeprecatedType.ACTIVITYGAUGE);
     });
   });
 
   describe('column', () => {
     it('should set inputs correct', () => {
-      component.type = ChartType.COLUMN;
+      component.type = ChartDeprecatedType.COLUMN;
       component.data = [1, 2, 3];
       component.categories = ['jan', 'feb', 'mar'];
       component.ngOnChanges({ type: {} as any });
@@ -224,7 +224,7 @@ describe('ChartDeprecatedComponent', () => {
 
   describe('bar', () => {
     it('should set inputs correct', () => {
-      component.type = ChartType.BAR;
+      component.type = ChartDeprecatedType.BAR;
       component.data = [1, 2, 3];
       component.categories = ['jan', 'feb', 'mar'];
       component.ngOnChanges({ type: {} as any });
@@ -251,7 +251,7 @@ describe('ChartDeprecatedComponent', () => {
 
   describe('override options', () => {
     it('should override options', () => {
-      component.type = ChartType.PIE;
+      component.type = ChartDeprecatedType.PIE;
       component.data = [
         {
           data: [1, 1],

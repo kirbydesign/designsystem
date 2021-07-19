@@ -10,7 +10,7 @@ require('highcharts/modules/solid-gauge')(Highcharts);
 require('highcharts/modules/broken-axis')(Highcharts);
 
 @Injectable()
-export class ChartHelper {
+export class ChartDeprecatedHelper {
   chartContainer: ElementRef;
 
   public init(chartContainer: ElementRef) {

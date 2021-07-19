@@ -9,8 +9,8 @@ import {
 
 import { mergeDeep } from '../../helpers/deep-merge';
 
-import { ChartHelper } from './chart-helper';
-import { ChartType } from './chart-type';
+import { ChartDeprecatedHelper } from './chart-deprecated-helper';
+import { ChartDeprecatedType } from './chart-deprecated-type';
 import { ActivityGaugeOptions, ACTIVITYGAUGE_OPTIONS } from './options/activitygauge';
 import { AreaSplineOptions, AREASPLINE_OPTIONS } from './options/areaspline';
 import { barOptions } from './options/bar';
@@ -21,9 +21,9 @@ import { TimeSeriesOptions, TIMESERIES_OPTIONS } from './options/timeseries';
 @Component({
   selector: 'kirby-chart-deprecated',
   template: '',
-  styleUrls: ['./chart.component.scss'],
+  styleUrls: ['./chart-deprecated.component.scss'],
   providers: [
-    ChartHelper,
+    ChartDeprecatedHelper,
     { provide: DONUT_OPTIONS, useValue: DonutOptions },
     { provide: AREASPLINE_OPTIONS, useValue: AreaSplineOptions },
     { provide: TIMESERIES_OPTIONS, useValue: TimeSeriesOptions },
@@ -35,7 +35,7 @@ export class ChartDeprecatedComponent implements OnChanges {
   @Input() categories: string[] = [];
   @Input() breaks: Array<XAxisBreaksOptions> = [];
   @Input() height = 300;
-  @Input() type: ChartType = ChartType.PIE;
+  @Input() type: ChartDeprecatedType = ChartDeprecatedType.PIE;
   @Input() description = '';
   @Input() showDataLabels = true;
   @Input() options: Options;
@@ -44,7 +44,7 @@ export class ChartDeprecatedComponent implements OnChanges {
   };
 
   constructor(
-    private chartHelper: ChartHelper,
+    private chartHelper: ChartDeprecatedHelper,
     private hostElement: ElementRef,
     @Inject(DONUT_OPTIONS) public donutOptions: Options,
     @Inject(AREASPLINE_OPTIONS) public areasplineOptions: Options,
@@ -64,39 +64,39 @@ export class ChartDeprecatedComponent implements OnChanges {
 
   setupChartType() {
     switch (this.type) {
-      case ChartType.DONUT: {
+      case ChartDeprecatedType.DONUT: {
         this.mergedOptions = this.donutOptions;
-        this.mergedOptions.chart.type = ChartType.PIE;
+        this.mergedOptions.chart.type = ChartDeprecatedType.PIE;
         this.mergedOptions.plotOptions.pie.innerSize = '50%';
         break;
       }
-      case ChartType.PIE: {
+      case ChartDeprecatedType.PIE: {
         this.mergedOptions = this.donutOptions;
         this.mergedOptions.chart.type = this.type;
         this.mergedOptions.plotOptions.pie.innerSize = '0%';
         break;
       }
-      case ChartType.AREASPLINE: {
+      case ChartDeprecatedType.AREASPLINE: {
         this.mergedOptions = this.areasplineOptions;
         this.mergedOptions.chart.type = this.type;
         break;
       }
-      case ChartType.TIMESERIES: {
+      case ChartDeprecatedType.TIMESERIES: {
         this.mergedOptions = this.timeSeriesOptions;
         this.mergedOptions.chart.type = this.type;
         break;
       }
-      case ChartType.ACTIVITYGAUGE: {
+      case ChartDeprecatedType.ACTIVITYGAUGE: {
         this.mergedOptions = this.activitygaugeOptions;
         this.mergedOptions.chart.type = this.type;
         break;
       }
-      case ChartType.COLUMN: {
+      case ChartDeprecatedType.COLUMN: {
         this.mergedOptions = columnOptions;
         this.mergedOptions.chart.type = this.type;
         break;
       }
-      case ChartType.BAR: {
+      case ChartDeprecatedType.BAR: {
         this.mergedOptions = barOptions;
         this.mergedOptions.chart.type = this.type;
         break;
@@ -108,28 +108,28 @@ export class ChartDeprecatedComponent implements OnChanges {
     this.mergedOptions.chart.height = this.height;
     this.mergedOptions.accessibility.description = this.description;
     switch (this.mergedOptions.chart.type) {
-      case ChartType.PIE:
-      case ChartType.DONUT: {
+      case ChartDeprecatedType.PIE:
+      case ChartDeprecatedType.DONUT: {
         this.setPieInput();
         break;
       }
-      case ChartType.AREASPLINE: {
+      case ChartDeprecatedType.AREASPLINE: {
         this.setSeries('areaspline');
         break;
       }
-      case ChartType.TIMESERIES: {
+      case ChartDeprecatedType.TIMESERIES: {
         this.setTimeseriesInput();
         break;
       }
-      case ChartType.ACTIVITYGAUGE: {
+      case ChartDeprecatedType.ACTIVITYGAUGE: {
         this.setActivitygaugeInput();
         break;
       }
-      case ChartType.COLUMN: {
+      case ChartDeprecatedType.COLUMN: {
         this.setColumnInput();
         break;
       }
-      case ChartType.BAR: {
+      case ChartDeprecatedType.BAR: {
         this.setBarInput();
         break;
       }
