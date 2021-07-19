@@ -1,7 +1,12 @@
 import { Component } from '@angular/core';
-import { ActiveElement, Chart, ChartEvent } from 'chart.js';
 
-import { ChartHighlightedElements, ChartOptions } from '@kirbydesign/designsystem';
+import {
+  ActiveElement,
+  Chart,
+  ChartEvent,
+  ChartHighlightedElements,
+  ChartOptions,
+} from '@kirbydesign/designsystem';
 
 const config = {
   selector: 'cookbook-chart-example-interaction',
