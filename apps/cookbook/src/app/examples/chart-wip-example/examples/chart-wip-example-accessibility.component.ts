@@ -5,7 +5,7 @@ const config = {
   template: `<kirby-chart-wip 
   type="column" 
   [data]="[739, 1200, 584, 902, 30]" 
-  [dataLabels]="['Monday', 'Tuesday', 'Wedensday', 'Thursday', 'Friday']"
+  [dataLabels]="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']"
 >
   <table>
     <tr>
@@ -21,7 +21,7 @@ const config = {
       <td>1200</td>
     </tr>
     <tr>
-      <td>Wedensday</td>
+      <td>Wednesday</td>
       <td>584</td>
     </tr>
     <tr>

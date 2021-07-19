@@ -15,7 +15,7 @@ const config = {
   [highlightedElements]="_highlighted"
 ></kirby-chart-wip>`,
   codeSnippet: `_text = 'Nothing has been clicked';
-_dataLabels = ['Monday', 'Tuesday', 'Wedensday', 'Thursday', 'Friday'];
+_dataLabels = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 _highlighted: ChartHighlightedElements;
 
 _customOptions: ChartOptions = {
@@ -46,7 +46,7 @@ export class ChartWipExampleInteractionComponent {
   codeSnippet: string = config.codeSnippet;
 
   _text: string = 'Nothing has been clicked';
-  _dataLabels = ['Monday', 'Tuesday', 'Wedensday', 'Thursday', 'Friday'];
+  _dataLabels = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
   _highlighted: ChartHighlightedElements;
 
   _customOptions: ChartOptions = {
