@@ -9,7 +9,7 @@ const config = {
   template: `<kirby-chart 
   type="column" 
   [data]="_datasets" 
-  [dataLabels]="['Monday', 'Tuesday', ['Wedens-','day'], 'Thursday', 'Friday']">
+  [dataLabels]="['Monday', 'Tuesday', ['Wednes-','day'], 'Thursday', 'Friday']">
 </kirby-chart>`,
   codeSnippet: `import { ColorHelper } from '@kirbydesign/designsystem';
 
