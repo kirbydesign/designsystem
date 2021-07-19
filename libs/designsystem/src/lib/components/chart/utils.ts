@@ -1,6 +1,6 @@
 import { all as deepMergeAll, Options as deepMergeOptions } from 'deepmerge';
 
-export function deepMergeObjects(...objects: any[]) {
+export function deepMergeObjects(...objects: Object[]): Object {
   const overwriteMerge = (_target: any[], source: any[], _options: deepMergeOptions) => source;
   const deepMergeOptions: deepMergeOptions = {
     arrayMerge: overwriteMerge,
