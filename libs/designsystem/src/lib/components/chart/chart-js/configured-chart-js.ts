@@ -25,7 +25,7 @@ Chart.register(Legend, ...CHART_SCALES, ...CHART_ELEMENTS, ...CHART_CONTROLLERS,
 
 /* Chart.defaults is read only; set each key modified in 
    CHART_GLOBAL_DEFAULTS manually */
-const mergedDefaults = deepMergeObjects(Chart.defaults, CHART_GLOBAL_DEFAULTS) as any;
+const mergedDefaults = deepMergeObjects(Chart.defaults, CHART_GLOBAL_DEFAULTS);
 Object.entries(CHART_GLOBAL_DEFAULTS).forEach(([key]) => {
   Chart.defaults[key] = mergedDefaults[key];
 });
