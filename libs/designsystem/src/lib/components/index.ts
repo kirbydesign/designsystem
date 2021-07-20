@@ -8,7 +8,7 @@ export { ButtonComponent, ButtonSize } from './button/button.component';
 export * from './card';
 export * from './chart-deprecated';
 export * from './chart';
-export * from './stock-chart';
+export * from './stock-chart-deprecated';
 export * from './calendar';
 
 export { CheckboxComponent } from './checkbox/checkbox.component';

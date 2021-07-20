@@ -1,17 +1,16 @@
 import { formatNumber } from '@angular/common';
-
 import { Options } from 'highcharts';
 import { dateFormat } from 'highcharts/highstock';
 
 import { ColorHelper } from '../../../helpers/color-helper';
 
-export interface StockChartDataPoint {
+export interface StockChartDeprecatedDataPoint {
   x: number;
   y: number;
   id: 'min' | 'max' | '';
 }
 
-export const stockChartOptions = (locale: string, height: number) => {
+export const stockChartDeprecatedOptions = (locale: string, height: number) => {
   const options: Options = defaultOptions(locale) as Options;
   const transparentColor = 'rgba(255,255,255,0)';
   options.chart.backgroundColor = transparentColor;

@@ -62,7 +62,7 @@ import { ResizeObserverService } from './components/shared/resize-observer/resiz
 import { SlideButtonComponent } from './components/slide-button/slide-button.component';
 import { SlideDirective, SlidesComponent } from './components/slides/slides.component';
 import { SpinnerModule } from './components/spinner/spinner.module';
-import { StockChartComponent } from './components/stock-chart/stock-chart.component';
+import { StockChartDeprecatedComponent } from './components/stock-chart-deprecated/stock-chart-deprecated.component';
 import { TabsModule } from './components/tabs/tabs.module';
 import { ToastController } from './components/toast/services/toast.controller';
 import { ToastHelper } from './components/toast/services/toast.helper';
@@ -80,7 +80,7 @@ const exportedDeclarations = [
   ButtonComponent,
   ChartComponent,
   ChartDeprecatedComponent,
-  StockChartComponent,
+  StockChartDeprecatedComponent,
   GridComponent,
   ComponentLoaderDirective,
   AvatarComponent,

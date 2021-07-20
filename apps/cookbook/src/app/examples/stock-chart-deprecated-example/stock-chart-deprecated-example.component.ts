@@ -1,33 +1,36 @@
 import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
 import { Options } from 'highcharts';
 
-import { StockChartDataPoint, stockChartOptions } from '@kirbydesign/designsystem';
+import {
+  StockChartDeprecatedDataPoint,
+  stockChartDeprecatedOptions,
+} from '@kirbydesign/designsystem';
 
 const config = {
-  selector: 'cookbook-stock-chart-example',
-  template: `<kirby-stock-chart
+  selector: 'cookbook-stock-chart-deprecated-example',
+  template: `<kirby-stock-chart-deprecated
   description="Accessibility description goes here"
   [options]="options"
   [data]="data"
   [height]="height">
-</kirby-stock-chart>`,
+</kirby-stock-chart-deprecated>`,
 };
 
 @Component({
   selector: config.selector,
   template: config.template,
 })
-export class StockChartExampleComponent implements OnInit {
+export class StockChartDeprecatedExampleComponent implements OnInit {
   template = config.template;
   constructor(@Inject(LOCALE_ID) locale: string) {
     this.height = 300;
-    this.options = stockChartOptions(locale, this.height);
+    this.options = stockChartDeprecatedOptions(locale, this.height);
   }
 
   options: Options;
   height: number;
 
-  data: StockChartDataPoint[] = [
+  data: StockChartDeprecatedDataPoint[] = [
     { x: 1198914890000, y: 0.6809, id: '' },
     { x: 1199232000000, y: 0.6809, id: '' },
     { x: 1199318400000, y: 0.6779, id: '' },

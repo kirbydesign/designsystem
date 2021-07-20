@@ -3,20 +3,23 @@ import { Options } from 'highcharts';
 import * as Highcharts from 'highcharts/highstock';
 import AnnotationsModule from 'highcharts/modules/annotations';
 
-import { annotations, StockChartDataPoint } from './options/stock-chart-options';
+import {
+  annotations,
+  StockChartDeprecatedDataPoint,
+} from './options/stock-chart-deprecated-options';
 
 // @ts-ignore
 AnnotationsModule(Highcharts);
 
 @Component({
-  selector: 'kirby-stock-chart',
+  selector: 'kirby-stock-chart-deprecated',
   template: '',
-  styleUrls: ['./stock-chart.component.scss'],
+  styleUrls: ['./stock-chart-deprecated.component.scss'],
 })
-export class StockChartComponent {
+export class StockChartDeprecatedComponent {
   chartContainer: ElementRef;
-  private _data: StockChartDataPoint[];
-  @Input() set data(val: StockChartDataPoint[]) {
+  private _data: StockChartDeprecatedDataPoint[];
+  @Input() set data(val: StockChartDeprecatedDataPoint[]) {
     this.onDataChanges(val);
   }
   get data() {
@@ -53,7 +56,7 @@ export class StockChartComponent {
     this.chart = Highcharts.stockChart(this.chartContainer.nativeElement, this._options);
   }
 
-  onDataChanges(data: StockChartDataPoint[]) {
+  onDataChanges(data: StockChartDeprecatedDataPoint[]) {
     this._data = data;
 
     if (this.chart != null) {

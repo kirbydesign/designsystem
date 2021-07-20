@@ -43,7 +43,7 @@ import { ShowcaseComponent } from './showcase.component';
 import { SlideButtonShowcaseComponent } from './slide-button-showcase/slide-button-showcase.component';
 import { SlidesShowcaseComponent } from './slides-showcase/slides-showcase.component';
 import { SpinnerShowcaseComponent } from './spinner-showcase/spinner-showcase.component';
-import { StockChartShowcaseComponent } from './stock-chart-showcase/stock-chart-showcase.component';
+import { StockChartDeprecatedShowcaseComponent } from './stock-chart-deprecated-showcase/stock-chart-deprecated-showcase.component';
 import { TabsShowcaseComponent } from './tabs-showcase/tabs-showcase.component';
 import { ToastShowcaseComponent } from './toast-showcase/toast-showcase.component';
 import { ToggleButtonShowcaseComponent } from './toggle-button-showcase/toggle-button-showcase.component';
@@ -91,7 +91,7 @@ export const COMPONENT_EXPORTS: any[] = [
   DividerShowcaseComponent,
   ReorderListShowcaseComponent,
   DropdownShowcaseComponent,
-  StockChartShowcaseComponent,
+  StockChartDeprecatedShowcaseComponent,
   ProgressCircleShowcaseComponent,
   FlagShowcaseComponent,
   SlidesShowcaseComponent,

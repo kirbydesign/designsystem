@@ -1,26 +1,26 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { stockChartOptions } from './options/stock-chart-options';
-import { StockChartComponent } from './stock-chart.component';
+import { stockChartDeprecatedOptions } from './options/stock-chart-deprecated-options';
+import { StockChartDeprecatedComponent } from './stock-chart-deprecated.component';
 
-describe('StockChartComponent', () => {
-  let component: StockChartComponent;
-  let fixture: ComponentFixture<StockChartComponent>;
+describe('StockChartDeprecatedComponent', () => {
+  let component: StockChartDeprecatedComponent;
+  let fixture: ComponentFixture<StockChartDeprecatedComponent>;
 
   const expectedDefaultHeight = 300;
 
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [StockChartComponent],
+        declarations: [StockChartDeprecatedComponent],
       }).compileComponents();
     })
   );
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(StockChartComponent);
+    fixture = TestBed.createComponent(StockChartDeprecatedComponent);
     component = fixture.componentInstance;
-    component.options = stockChartOptions('da', expectedDefaultHeight);
+    component.options = stockChartDeprecatedOptions('da', expectedDefaultHeight);
     fixture.detectChanges();
   });
 

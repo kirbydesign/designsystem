@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
-  selector: 'cookbook-highstock-chart-showcase',
-  templateUrl: './stock-chart-showcase.component.html',
-  styleUrls: ['./stock-chart-showcase.component.scss'],
+  selector: 'cookbook-highstock-chart-deprecated-showcase',
+  templateUrl: './stock-chart-deprecated-showcase.component.html',
+  styleUrls: ['./stock-chart-deprecated-showcase.component.scss'],
 })
-export class StockChartShowcaseComponent {
+export class StockChartDeprecatedShowcaseComponent {
   properties: ApiDescriptionProperty[] = [
     {
       name: 'description',
