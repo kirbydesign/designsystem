@@ -32,17 +32,16 @@ export class GenerateMocks {
     const outputPathNormalized = path.normalize(outputPaths.base);
     const classMap = new Map<string, string[]>();
     const exportedProviders: ComponentMetaData[] = [];
-    const assertedTypesMap = new Map<string, string>();
-    const exportedTypes = await this.getExportedTypes(inputPath);
-    const filteredTypes = this.mapAndRemoveTypeAssertions(exportedTypes, assertedTypesMap);
-
+    const aliasesMap = new Map<string, string>();
+    const exportedTypesAndAliases = await this.getExportedTypesAndAliases(inputPath);
+    const exportedTypes = this.mapAndRemoveAliases(exportedTypesAndAliases, aliasesMap);
     await this.traverseFolder(
       inputPath,
       outputPathNormalized,
       classMap,
-      filteredTypes,
+      exportedTypes,
       exportedProviders,
-      assertedTypesMap
+      aliasesMap
     );
     this.renderMockComponentDeclaration(classMap, outputPathNormalized);
     this.renderMockProviders(exportedProviders, path.normalize(outputPaths.jasmine), 'jasmine');
@@ -115,15 +114,15 @@ ${providers},
     this.saveFileLinted(filename, content);
   }
 
-  private async getExportedTypes(folderpath: string): Promise<string[]> {
+  private async getExportedTypesAndAliases(folderpath: string): Promise<string[]> {
     const files = await this.getBarrelFiles(folderpath);
-    const exportedTypes = await Promise.all(
+    const exportedTypesAndAliases = await Promise.all(
       files.map(async (file) => {
         const fileContent = await readFile(file, 'utf8');
         return this.getTypesInFile(fileContent);
       })
     );
-    return Array.prototype.concat(...exportedTypes);
+    return Array.prototype.concat(...exportedTypesAndAliases);
   }
 
   private getTypesInFile(fileContent: any): any[] {
@@ -141,18 +140,18 @@ ${providers},
     return typesInFile;
   }
 
-  mapAndRemoveTypeAssertions(
-    exportedTypes: string[],
-    assertedTypesMap: Map<string, string>
+  mapAndRemoveAliases(
+    exportedTypesAndAliases: string[],
+    aliasesMap: Map<string, string>
   ): string[] {
     // capture group 1 is internal component name, group 2 is exported name
-    const assertedTypeRegex = /(\w+) as (\w+)/;
+    const aliasRegex = /(\w+) as (\w+)/;
 
-    const exports = exportedTypes.map((type) => {
-      const match = type.match(assertedTypeRegex);
+    const exports = exportedTypesAndAliases.map((type) => {
+      const match = type.match(aliasRegex);
       if (match) {
         // add both matches to the map, but only return the exported type
-        assertedTypesMap.set(match[1], match[2]);
+        aliasesMap.set(match[1], match[2]);
         return match[2];
       }
       return type;
@@ -182,7 +181,7 @@ ${providers},
     classMap: Map<string, string[]>,
     exportedTypes: string[],
     exportedProviders: ComponentMetaData[],
-    assertedTypesMap: Map<string, string>
+    aliasesMap: Map<string, string>
   ) {
     const folderContent = readdirSync(folderpath);
     for (const fileOrFolder of folderContent) {
@@ -195,17 +194,12 @@ ${providers},
           classMap,
           exportedTypes,
           exportedProviders,
-          assertedTypesMap
+          aliasesMap
         );
       } else {
         if (fileOrFolder.endsWith('.component.ts')) {
           const newFilename = path.join(outputPath, 'components', 'mock.' + fileOrFolder);
-          const classNames = this.renderMock(
-            fullPath,
-            newFilename,
-            exportedTypes,
-            assertedTypesMap
-          );
+          const classNames = this.renderMock(fullPath, newFilename, exportedTypes, aliasesMap);
           if (classNames) {
             classMap.set(newFilename, classNames);
           }
@@ -266,9 +260,9 @@ ${providers},
     fileName: string,
     newFilename: string,
     exportedTypes: string[],
-    assertedTypesMap: Map<string, string>
+    aliasesMap: Map<string, string>
   ) {
-    const components = this.generateMetaData(fileName, assertedTypesMap);
+    const components = this.generateMetaData(fileName, aliasesMap);
 
     const hasExportedComponents = components.some(
       (metaData) => !!metaData.decorator && exportedTypes.includes(metaData.className)
@@ -411,7 +405,7 @@ export class ${mockClassName} {${propertiesString}${methodsString}}
     return renderedMethods.length ? separator + renderedMethods.join(separator) + newLine : '';
   }
 
-  private generateMetaData(fileName: string, assertedTypesMap?: Map<string, string>) {
+  private generateMetaData(fileName: string, aliasesMap?: Map<string, string>) {
     const sourceFile = ts.createSourceFile(
       fileName,
       readFileSync(fileName).toString(),
@@ -428,7 +422,7 @@ export class ${mockClassName} {${propertiesString}${methodsString}}
           properties: [],
           methods: [],
         };
-        this.visitTree(node, componentMetaData, assertedTypesMap);
+        this.visitTree(node, componentMetaData, aliasesMap);
         if (componentMetaData.decorator) {
           components.push(componentMetaData);
         }
@@ -440,10 +434,10 @@ export class ${mockClassName} {${propertiesString}${methodsString}}
   private visitTree(
     node: ts.Node,
     componentMetaData?: ComponentMetaData,
-    assertedTypesMap?: Map<string, string>
+    aliasesMap?: Map<string, string>
   ) {
     if (ts.isClassDeclaration(node)) {
-      this.visitClassDeclaration(node, componentMetaData, assertedTypesMap);
+      this.visitClassDeclaration(node, componentMetaData, aliasesMap);
     }
     if (ts.isPropertyDeclaration(node) || ts.isSetAccessorDeclaration(node)) {
       this.visitPropertyDeclaration(node, componentMetaData);
@@ -451,7 +445,7 @@ export class ${mockClassName} {${propertiesString}${methodsString}}
     if (ts.isMethodDeclaration(node)) {
       this.visitMethodDeclaration(node, componentMetaData);
     }
-    assertedTypesMap?.forEach((value) => {
+    aliasesMap?.forEach((value) => {
       if (componentMetaData.className === value) {
         this.visitCustomElementsJSON(componentMetaData);
       }
@@ -462,12 +456,12 @@ export class ${mockClassName} {${propertiesString}${methodsString}}
   private visitClassDeclaration(
     classDeclaration: ts.ClassDeclaration,
     componentMetaData: ComponentMetaData,
-    assertedTypesMap: Map<string, string>
+    aliasesMap: Map<string, string>
   ) {
     const className = classDeclaration.name.getText();
 
-    componentMetaData.className = assertedTypesMap?.get(className)
-      ? assertedTypesMap.get(className)
+    componentMetaData.className = aliasesMap?.get(className)
+      ? aliasesMap.get(className)
       : className;
 
     if (classDeclaration && classDeclaration.decorators) {
