@@ -1,20 +1,20 @@
-import { createComponentFactory, Spectator } from '@ngneat/spectator';
+import { createComponentFactory, createHostFactory, Spectator } from '@ngneat/spectator';
 import { MockProvider } from 'ng-mocks';
 
 import { ChartJSService } from './chart-js/chart-js.service';
 import { ChartComponent } from './chart.component';
 
-describe('ChartComponent', () => {
+fdescribe('ChartComponent', () => {
   let spectator: Spectator<ChartComponent>;
   let component: ChartComponent;
-  const createComponent = createComponentFactory({
+  const createHost = createHostFactory({
     component: ChartComponent,
     declarations: [ChartComponent],
     componentProviders: [MockProvider(ChartJSService)],
   });
 
   beforeEach(() => {
-    spectator = createComponent({});
+    spectator = createHost('<kirby-chart></kirby-chart>');
     component = spectator.component;
   });
 
@@ -44,12 +44,12 @@ describe('ChartComponent', () => {
 
   it("should be possible to set the height with the '--kirby-chart-height' CSS custom property", () => {
     const customHeight = '600px';
-    const element = spectator.query('.chart-container') as HTMLElement;
-    expect(element).not.toHaveComputedStyle({ height: customHeight });
+    const chartContainerElement = spectator.query('.chart-container') as HTMLElement;
+    expect(chartContainerElement).not.toHaveComputedStyle({ height: customHeight });
 
-    element.style.setProperty('--kirby-chart-height', customHeight);
+    spectator.element.style.setProperty('--kirby-chart-height', customHeight);
 
-    expect(element).toHaveComputedStyle({ height: customHeight });
+    expect(chartContainerElement).toHaveComputedStyle({ height: customHeight });
   });
 
   describe("when setting height through the 'height' input property", () => {
