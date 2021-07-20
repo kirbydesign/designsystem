@@ -185,15 +185,13 @@ export class ChartJSService {
     to make it optional for consumer */
     const labels = !dataLabels ? this.createBlankLabels(datasets) : dataLabels;
     const typeConfig = this.getTypeConfig(type);
-    //TODO: do we need deep merge here?
-    return {
-      ...typeConfig,
+    return deepMergeObjects(typeConfig, {
       data: {
         labels,
         datasets,
       },
       options,
-    };
+    }) as ChartConfiguration;
   }
 
   private addHighlightedElementsToDatasets(
