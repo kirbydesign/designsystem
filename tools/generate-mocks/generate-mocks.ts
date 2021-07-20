@@ -196,7 +196,7 @@ ${providers},
           assertedTypesMap
         );
       } else {
-        if (fileOrFolder.endsWith('.component.ts') || fileOrFolder.endsWith('proxies.ts')) {
+        if (fileOrFolder.endsWith('.component.ts')) {
           const newFilename = path.join(outputPath, 'components', 'mock.' + fileOrFolder);
           const classNames = this.renderMock(
             fullPath,
