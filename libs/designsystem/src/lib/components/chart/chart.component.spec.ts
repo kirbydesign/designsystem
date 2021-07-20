@@ -86,16 +86,28 @@ describe('ChartComponent', () => {
       dataLabels: { updateFn: 'updateDataLabels', newValue: ['one', 'two', 'three'] },
       type: { updateFn: 'updateType', newValue: 'bar' },
       annotations: { updateFn: 'updateAnnotations', newValue: [{ type: 'line' }] },
+      highlightedElements: { updateFn: 'updateHighlightedElements', newValue: [[0, 1]] },
     };
 
     Object.entries(scenarios).forEach(([property, { updateFn, newValue }]) => {
       describe(`${property}`, () => {
-        it(`should only update ${property}`, () => {
+        it(`should update ${property}`, () => {
           const updateFnSpy = spyOn<any>(component, updateFn);
 
           spectator.setInput(property as any, newValue);
 
           expect(updateFnSpy).toHaveBeenCalledTimes(1);
+        });
+
+        it(`should not update properties that are not ${property}`, () => {
+          const updateFnSpies = Object.entries(scenarios)
+            .filter(([key]) => key !== property)
+            .map(([_, { updateFn }]) => spyOn<any>(component, updateFn));
+          expect(updateFnSpies.length).not.toBe(0);
+
+          spectator.setInput(property as any, newValue);
+
+          updateFnSpies.forEach((updateFnSpy) => expect(updateFnSpy).toHaveBeenCalledTimes(0));
         });
 
         it('should redraw once', () => {
@@ -115,6 +127,8 @@ describe('ChartComponent', () => {
           spyOn<any>(component, 'updateDataLabels'),
           spyOn<any>(component, 'updateType'),
           spyOn<any>(component, 'updateCustomOptions'),
+          spyOn<any>(component, 'updateAnnotations'),
+          spyOn<any>(component, 'updateHighlightedElements'),
         ];
 
         spectator.setInput({
@@ -122,6 +136,8 @@ describe('ChartComponent', () => {
           dataLabels: ['one', 'two', 'three'],
           type: 'bar',
           customOptions: { onClick: () => console.log('testing') },
+          annotations: [{ type: 'line' }],
+          highlightedElements: [[0, 1]],
         });
 
         updateFnSpies.forEach((updateFnSpy) => {
