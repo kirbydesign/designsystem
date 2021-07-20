@@ -121,22 +121,27 @@ ${providers},
     const exportedTypes = await Promise.all(
       files.map(async (file) => {
         const fileContent = await readFile(file, 'utf8');
-        const typesInFile = [];
-        const exportRegEx = /^export \{ *(.*) *\} from '\.\//;
-        const exportRegExGlobal = new RegExp(exportRegEx, 'gm');
-        // "|| []" prevents having to check for undefined:
-        (fileContent.match(exportRegExGlobal) || []).forEach((matchedLine) => {
-          // "slice(1)" skips the full match:
-          (matchedLine.match(exportRegEx) || []).slice(1).forEach((exported) => {
-            // Split multiple entries, trim away whitespace and add:
-            typesInFile.push(...exported.split(',').map((entry) => entry.trim()));
-          });
-        });
+        const typesInFile = this.getTypesInFile(fileContent);
         const filteredTypes = this.mapAndRemoveTypeAssertions(typesInFile, assertedTypesMap);
         return filteredTypes;
       })
     );
     return Array.prototype.concat(...exportedTypes);
+  }
+
+  private getTypesInFile(fileContent: any): any[] {
+    const typesInFile = [];
+    const exportRegEx = /^export \{ *(.*) *\} from '\.\//;
+    const exportRegExGlobal = new RegExp(exportRegEx, 'gm');
+    // "|| []" prevents having to check for undefined:
+    (fileContent.match(exportRegExGlobal) || []).forEach((matchedLine) => {
+      // "slice(1)" skips the full match:
+      (matchedLine.match(exportRegEx) || []).slice(1).forEach((exported) => {
+        // Split multiple entries, trim away whitespace and add:
+        typesInFile.push(...exported.split(',').map((entry) => entry.trim()));
+      });
+    });
+    return typesInFile;
   }
 
   mapAndRemoveTypeAssertions(
