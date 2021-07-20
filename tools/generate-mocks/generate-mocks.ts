@@ -433,11 +433,11 @@ export class ${mockClassName} {${propertiesString}${methodsString}}
 
   private visitTree(
     node: ts.Node,
-    componentMetaData?: ComponentMetaData,
-    aliasesMap?: Map<string, string>
+    componentMetaData: ComponentMetaData,
+    aliasesMap: Map<string, string>
   ) {
     if (ts.isClassDeclaration(node)) {
-      this.visitClassDeclaration(node, componentMetaData, aliasesMap);
+      this.visitClassDeclaration(node, componentMetaData);
     }
     if (ts.isPropertyDeclaration(node) || ts.isSetAccessorDeclaration(node)) {
       this.visitPropertyDeclaration(node, componentMetaData);
@@ -445,24 +445,20 @@ export class ${mockClassName} {${propertiesString}${methodsString}}
     if (ts.isMethodDeclaration(node)) {
       this.visitMethodDeclaration(node, componentMetaData);
     }
-    aliasesMap?.forEach((value) => {
-      if (componentMetaData.className === value) {
-        this.visitCustomElementsJSON(componentMetaData);
-      }
-    });
-    ts.forEachChild(node, (node) => this.visitTree(node, componentMetaData));
+    if (aliasesMap.get(componentMetaData.className)) {
+      // overwrite classname with alias if the classname set by visitClassDecoration is in the map
+      componentMetaData.className = aliasesMap.get(componentMetaData.className);
+      this.visitCustomElementsJSON(componentMetaData);
+    }
+    ts.forEachChild(node, (node) => this.visitTree(node, componentMetaData, aliasesMap));
   }
 
   private visitClassDeclaration(
     classDeclaration: ts.ClassDeclaration,
-    componentMetaData: ComponentMetaData,
-    aliasesMap: Map<string, string>
+    componentMetaData: ComponentMetaData
   ) {
     const className = classDeclaration.name.getText();
-
-    componentMetaData.className = aliasesMap?.get(className)
-      ? aliasesMap.get(className)
-      : className;
+    componentMetaData.className = className;
 
     if (classDeclaration && classDeclaration.decorators) {
       classDeclaration.decorators.forEach((decorator) => {
