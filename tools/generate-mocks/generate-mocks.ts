@@ -33,12 +33,14 @@ export class GenerateMocks {
     const classMap = new Map<string, string[]>();
     const exportedProviders: ComponentMetaData[] = [];
     const assertedTypesMap = new Map<string, string>();
-    const exportedTypes = await this.getExportedTypes(inputPath, assertedTypesMap);
+    const exportedTypes = await this.getExportedTypes(inputPath);
+    const filteredTypes = this.mapAndRemoveTypeAssertions(exportedTypes, assertedTypesMap);
+
     await this.traverseFolder(
       inputPath,
       outputPathNormalized,
       classMap,
-      exportedTypes,
+      filteredTypes,
       exportedProviders,
       assertedTypesMap
     );
@@ -113,17 +115,12 @@ ${providers},
     this.saveFileLinted(filename, content);
   }
 
-  private async getExportedTypes(
-    folderpath: string,
-    assertedTypesMap: Map<string, string>
-  ): Promise<string[]> {
+  private async getExportedTypes(folderpath: string): Promise<string[]> {
     const files = await this.getBarrelFiles(folderpath);
     const exportedTypes = await Promise.all(
       files.map(async (file) => {
         const fileContent = await readFile(file, 'utf8');
-        const typesInFile = this.getTypesInFile(fileContent);
-        const filteredTypes = this.mapAndRemoveTypeAssertions(typesInFile, assertedTypesMap);
-        return filteredTypes;
+        return this.getTypesInFile(fileContent);
       })
     );
     return Array.prototype.concat(...exportedTypes);
