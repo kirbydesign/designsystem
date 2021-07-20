@@ -44,7 +44,7 @@ describe('ItemComponent', () => {
     ],
   });
 
-  describe('inside Kirby List', () => {
+  describe('inside kirby-list', () => {
     beforeEach(async () => {
       spectator = createHost<ListComponent>(
         `
@@ -97,6 +97,7 @@ describe('ItemComponent', () => {
         });
       });
     });
+
     describe('with hasItemSpacing set to false', () => {
       it('should not apply spacing to items', () => {
         spectator.setInput('hasItemSpacing', false);
@@ -110,7 +111,7 @@ describe('ItemComponent', () => {
     });
   });
 
-  describe('inside list with cards', () => {
+  describe('inside kirby-list with cards', () => {
     beforeEach(async () => {
       spectator = createHost<ListComponent>(
         `
