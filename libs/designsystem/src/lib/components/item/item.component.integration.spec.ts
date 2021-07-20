@@ -82,6 +82,7 @@ describe('ItemComponent', () => {
         spectator.detectChanges();
         const kirbyItemsInList = spectator.queryAll('kirby-list-item:not(:last-child)');
 
+        expect(kirbyItemsInList).not.toBeEmpty();
         kirbyItemsInList.forEach((item) => {
           expect(item).toHaveComputedStyle({ 'margin-bottom': size('s') });
         });
@@ -92,6 +93,7 @@ describe('ItemComponent', () => {
         spectator.detectChanges();
         const kirbyItemsInList = spectator.queryAll('kirby-list-item:last-child');
 
+        expect(kirbyItemsInList).not.toBeEmpty();
         kirbyItemsInList.forEach((item) => {
           expect(item).toHaveComputedStyle({ 'margin-bottom': '0px' });
         });
@@ -104,6 +106,7 @@ describe('ItemComponent', () => {
         spectator.detectChanges();
         const kirbyItemsInList = spectator.queryAll('kirby-list-item');
 
+        expect(kirbyItemsInList).not.toBeEmpty();
         kirbyItemsInList.forEach((item) => {
           expect(item).toHaveComputedStyle({ 'margin-bottom': '0px' });
         });
