@@ -385,7 +385,7 @@ describe('CalendarComponent', () => {
 
       it('should emit selected year on navigation', () => {
         const captured = captureYearSelectEvents();
-        spectator.component._changeYear(2040);
+        spectator.triggerEventHandler(DropdownComponent, 'change', '2040');
 
         expect(captured.event).toEqual(2040);
       });
@@ -464,7 +464,7 @@ describe('CalendarComponent', () => {
 
   function captureYearSelectEvents() {
     const captured: { event?: number } = {};
-    spectator.output<number>('yearChange').subscribe((result) => (captured.event = result));
+    spectator.output<number>('yearSelect').subscribe((result) => (captured.event = result));
     return captured;
   }
 });
