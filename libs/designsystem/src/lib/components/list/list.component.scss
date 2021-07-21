@@ -251,8 +251,7 @@ ion-item-options[side='end'] {
 
 :host-context(.item-spacing) {
   .list {
-    ion-item,
-    ion-item-sliding {
+    kirby-list-item {
       margin-bottom: size('s');
 
       & > ion-item,

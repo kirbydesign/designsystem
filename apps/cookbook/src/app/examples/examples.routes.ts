@@ -23,6 +23,8 @@ import { FormFieldInputDateExampleComponent } from './form-field-example/example
 import { FormFieldInputDecimalMaskExampleComponent } from './form-field-example/examples/input/decimal-mask';
 import { FormFieldExampleComponent } from './form-field-example/form-field-example.component';
 import { GridExampleComponent } from './grid-example/grid-example.component';
+import { GridLayoutCoreExampleComponent } from './grid-layout-example/grid-layout-core-example/grid-layout-core-example.component';
+import { GridLayoutExtendedExampleComponent } from './grid-layout-example/grid-layout-extended-example/grid-layout-extended-example.component';
 import { IconExampleComponent } from './icon-example/icon-example.component';
 import { ItemExampleComponent } from './item-example/item-example.component';
 import { LinkExampleComponent } from './link-example/link-example.component';
@@ -358,6 +360,14 @@ export const routes: Routes = [
   {
     path: 'grid',
     component: GridExampleComponent,
+  },
+  {
+    path: 'grid-layout-core',
+    component: GridLayoutCoreExampleComponent,
+  },
+  {
+    path: 'grid-layout-extended',
+    component: GridLayoutExtendedExampleComponent,
   },
   {
     path: 'chip',
