@@ -1,6 +1,5 @@
 import { DOCUMENT } from '@angular/common';
 import { APP_INITIALIZER } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { appInitialize } from '../../app-initialize';
@@ -13,7 +12,7 @@ describe('BadgeComponent', () => {
 
   let createHost = createHostFactory({
     component: BadgeComponent,
-    imports: [IonicModule.forRoot({ mode: 'ios', _testing: true })],
+    imports: [TestHelper.ionicModuleForTest],
     providers: [
       {
         provide: APP_INITIALIZER,
