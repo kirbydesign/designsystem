@@ -130,5 +130,10 @@ export class CalendarShowcaseComponent {
       description: 'Emitted when selectedDate changes value.',
       signature: 'EventEmitter<Date>',
     },
+    {
+      name: 'yearChange',
+      description: 'Emitted when yearNavigator changes value.',
+      signature: 'EventEmitter<number>',
+    },
   ];
 }

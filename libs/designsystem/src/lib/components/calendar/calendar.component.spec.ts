@@ -383,6 +383,13 @@ describe('CalendarComponent', () => {
         expect(spectator.component.navigatedYear).toEqual(firstNavigatedYearIndex + 1);
       });
 
+      it('should emit selected year on navigation', () => {
+        const captured = captureYearSelectEvents();
+        spectator.component._changeYear(2040);
+
+        expect(captured.event).toEqual(2040);
+      });
+
       it('should get navigable years based on `from` and `to` when `minDate` and `maxDate` are omitted', () => {
         spectator.setInput('minDate', undefined);
         spectator.setInput('maxDate', undefined);
@@ -452,6 +459,12 @@ describe('CalendarComponent', () => {
   function captureDateSelectEvents() {
     const captured: { event?: Date } = {};
     spectator.output<Date>('dateSelect').subscribe((result) => (captured.event = result));
+    return captured;
+  }
+
+  function captureYearSelectEvents() {
+    const captured: { event?: number } = {};
+    spectator.output<number>('yearChange').subscribe((result) => (captured.event = result));
     return captured;
   }
 });
