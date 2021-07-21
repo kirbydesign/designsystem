@@ -32,8 +32,8 @@ export class GenerateMocks {
     const outputPathNormalized = path.normalize(outputPaths.base);
     const classMap = new Map<string, string[]>();
     const exportedProviders: ComponentMetaData[] = [];
-    const exportedTypesAndAliases = await this.getExportedTypesAndAliases(inputPath);
-    const [exportedTypes, aliasesMap] = this.separateTypesFromAliases(exportedTypesAndAliases);
+    const exportedTypesWithAliases = await this.getExportedTypesWithAliases(inputPath);
+    const [exportedTypes, aliasesMap] = this.separateTypesFromAliases(exportedTypesWithAliases);
     await this.traverseFolder(
       inputPath,
       outputPathNormalized,
@@ -113,7 +113,7 @@ ${providers},
     this.saveFileLinted(filename, content);
   }
 
-  private async getExportedTypesAndAliases(folderpath: string): Promise<string[]> {
+  private async getExportedTypesWithAliases(folderpath: string): Promise<string[]> {
     const files = await this.getBarrelFiles(folderpath);
     const exportedTypesAndAliases = await Promise.all(
       files.map(async (file) => {
@@ -140,13 +140,13 @@ ${providers},
   }
 
   private separateTypesFromAliases(
-    exportedTypesAndAliases: string[]
+    exportedTypesWithAliases: string[]
   ): [string[], Map<string, string>] {
     // capture group 1 is internal component name, group 2 is exported name
     const aliasRegex = /(\w+) as (\w+)/;
 
     const aliasesMap = new Map<string, string>();
-    const exports = exportedTypesAndAliases.map((type) => {
+    const exportedTypes = exportedTypesWithAliases.map((type) => {
       const match = type.match(aliasRegex);
       if (match) {
         // add both matches to the map, but only return the exported type
@@ -156,7 +156,7 @@ ${providers},
       return type;
     });
 
-    return [exports, aliasesMap];
+    return [exportedTypes, aliasesMap];
   }
 
   private async getBarrelFiles(folderpath: string) {
