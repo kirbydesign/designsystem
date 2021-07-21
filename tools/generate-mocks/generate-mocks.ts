@@ -32,9 +32,8 @@ export class GenerateMocks {
     const outputPathNormalized = path.normalize(outputPaths.base);
     const classMap = new Map<string, string[]>();
     const exportedProviders: ComponentMetaData[] = [];
-    const aliasesMap = new Map<string, string>();
     const exportedTypesAndAliases = await this.getExportedTypesAndAliases(inputPath);
-    const exportedTypes = this.mapAndRemoveAliases(exportedTypesAndAliases, aliasesMap);
+    const [exportedTypes, aliasesMap] = this.mapAndRemoveAliases(exportedTypesAndAliases);
     await this.traverseFolder(
       inputPath,
       outputPathNormalized,
@@ -140,13 +139,11 @@ ${providers},
     return typesInFile;
   }
 
-  mapAndRemoveAliases(
-    exportedTypesAndAliases: string[],
-    aliasesMap: Map<string, string>
-  ): string[] {
+  mapAndRemoveAliases(exportedTypesAndAliases: string[]): [string[], Map<string, string>] {
     // capture group 1 is internal component name, group 2 is exported name
     const aliasRegex = /(\w+) as (\w+)/;
 
+    const aliasesMap = new Map<string, string>();
     const exports = exportedTypesAndAliases.map((type) => {
       const match = type.match(aliasRegex);
       if (match) {
@@ -157,7 +154,7 @@ ${providers},
       return type;
     });
 
-    return exports;
+    return [exports, aliasesMap];
   }
 
   private async getBarrelFiles(folderpath: string) {
