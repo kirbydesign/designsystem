@@ -204,14 +204,20 @@ ${providers},
           }
         }
         if (fileOrFolder.endsWith('.controller.ts') || fileOrFolder.endsWith('.service.ts')) {
-          exportedProviders.push(...this.getExportedProvidersMetadata(fullPath, exportedTypes));
+          exportedProviders.push(
+            ...this.getExportedProvidersMetadata(fullPath, exportedTypes, aliasesMap)
+          );
         }
       }
     }
   }
 
-  private getExportedProvidersMetadata(fileName: string, exportedTypes: string[]) {
-    return this.generateMetaData(fileName).filter(
+  private getExportedProvidersMetadata(
+    fileName: string,
+    exportedTypes: string[],
+    aliasesMap: Map<string, string>
+  ) {
+    return this.generateMetaData(fileName, aliasesMap).filter(
       (metaData) =>
         metaData.decorator === 'Injectable' &&
         exportedTypes.includes(metaData.className) &&
@@ -404,7 +410,7 @@ export class ${mockClassName} {${propertiesString}${methodsString}}
     return renderedMethods.length ? separator + renderedMethods.join(separator) + newLine : '';
   }
 
-  private generateMetaData(fileName: string, aliasesMap?: Map<string, string>) {
+  private generateMetaData(fileName: string, aliasesMap: Map<string, string>) {
     const sourceFile = ts.createSourceFile(
       fileName,
       readFileSync(fileName).toString(),
