@@ -2,7 +2,7 @@ import { ElementRef, Injectable } from '@angular/core';
 import { ActiveElement, ChartConfiguration, ChartOptions } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
 
-import { mergeDeepAll } from '../../../helpers/deep-merge';
+import { mergeDeepAll } from '../../../helpers/merge-deep';
 import {
   CHART_ANNOTATION_CONFIGS,
   CHART_TYPE_CONFIGS,

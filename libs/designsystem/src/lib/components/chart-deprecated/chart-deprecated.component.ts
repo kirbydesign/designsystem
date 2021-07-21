@@ -7,7 +7,7 @@ import {
   YAxisOptions,
 } from 'highcharts';
 
-import { mergeDeep } from '../../helpers/deep-merge';
+import { mergeDeep } from '../../helpers/merge-deep';
 
 import { ChartDeprecatedHelper } from './chart-deprecated-helper';
 import { ChartDeprecatedType } from './chart-deprecated-type';

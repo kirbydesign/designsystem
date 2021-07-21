@@ -11,7 +11,7 @@ import {
 } from 'chart.js';
 import annotationPlugin from 'chartjs-plugin-annotation';
 
-import { mergeDeepAll } from '../../../helpers/deep-merge';
+import { mergeDeepAll } from '../../../helpers/merge-deep';
 import { CHART_GLOBAL_DEFAULTS } from '../chart.configs';
 
 const CHART_SCALES = [CategoryScale, LinearScale];

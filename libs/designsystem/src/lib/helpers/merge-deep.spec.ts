@@ -1,4 +1,4 @@
-import { mergeDeep } from './deep-merge';
+import { mergeDeep } from './merge-deep';
 
 describe('mergeDeep', () => {
   it('should deep merge provided objects, right into left', () => {
