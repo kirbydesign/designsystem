@@ -1,4 +1,4 @@
-import { createComponentFactory, createHostFactory, Spectator } from '@ngneat/spectator';
+import { createHostFactory, Spectator } from '@ngneat/spectator';
 import { MockProvider } from 'ng-mocks';
 
 import { ChartJSService } from './chart-js/chart-js.service';
