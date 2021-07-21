@@ -1,4 +1,4 @@
 @use 'sass-to-ts';
-@use '../../../../core/src/scss/themes/colors';
+@use '~@kirbydesign/core/src/scss/themes/colors';
 
 @include sass-to-ts.output-styles(module-variables('colors'));

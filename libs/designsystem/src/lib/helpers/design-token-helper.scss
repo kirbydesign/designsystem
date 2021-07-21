@@ -1,5 +1,5 @@
 @use 'sass-to-ts';
-@use '../../../../core/src/scss/base/variables';
+@use '~@kirbydesign/core/src/scss/base/variables';
 
 @function remap-elevation($elevations) {
   $elevation-list: ();
