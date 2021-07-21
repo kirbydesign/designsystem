@@ -10,6 +10,7 @@ import { ButtonExampleComponent } from './button-example/button-example.componen
 import { CalendarCardExampleComponent } from './calendar-example/calendar-card-example.component';
 import { CalendarExampleComponent } from './calendar-example/calendar-example.component';
 import { CardExampleComponent } from './card-example/card-example.component';
+import { ChartDeprecatedExampleComponent } from './chart-deprecated-example/chart-deprecated-example.component';
 import { ChartExampleComponent } from './chart-example/chart-example.component';
 import { CheckboxExampleComponent } from './checkbox-example/checkbox-example.component';
 import { ChipExampleComponent } from './chip-example/chip-example.component';
@@ -63,7 +64,7 @@ import { SegmentedControlExampleComponent } from './segmented-control-example/se
 import { SlideButtonExampleComponent } from './slide-button-example/slide-button-example.component';
 import { SlidesExampleComponent } from './slides-example/slides-example.component';
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
-import { StockChartExampleComponent } from './stock-chart-example/stock-chart-example.component';
+import { StockChartDeprecatedExampleComponent } from './stock-chart-deprecated-example/stock-chart-deprecated-example.component';
 import { TabExampleComponent } from './tabs-example/tab/tab-example.component';
 import { TabsExampleComponent } from './tabs-example/tabs-example.component';
 import { ToastExampleComponent } from './toast-example/toast-example.component';
@@ -345,12 +346,16 @@ export const routes: Routes = [
     ],
   },
   {
+    path: 'chart-deprecated',
+    component: ChartDeprecatedExampleComponent,
+  },
+  {
     path: 'chart',
     component: ChartExampleComponent,
   },
   {
-    path: 'stock-chart',
-    component: StockChartExampleComponent,
+    path: 'stock-chart-deprecated',
+    component: StockChartDeprecatedExampleComponent,
   },
   {
     path: 'grid',

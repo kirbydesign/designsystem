@@ -1,7 +1,13 @@
 import { Component, forwardRef, Input } from '@angular/core';
-import { Options, XAxisBreaksOptions } from 'highcharts';
 
-import { ChartComponent, ChartType } from '@kirbydesign/designsystem';
+import {
+  AnnotationOptions,
+  ChartComponent,
+  ChartDataset,
+  ChartHighlightedElements,
+  ChartOptions,
+  ChartType,
+} from '@kirbydesign/designsystem';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
@@ -15,14 +21,13 @@ import { ChartComponent, ChartType } from '@kirbydesign/designsystem';
   ],
 })
 export class MockChartComponent {
-  @Input() data: [];
-  @Input() categories: string[];
-  @Input() breaks: Array<XAxisBreaksOptions>;
-  @Input() height: number;
   @Input() type: ChartType;
-  @Input() description: string;
-  @Input() showDataLabels: boolean;
-  @Input() options: Options;
+  @Input() data: ChartDataset[] | number[];
+  @Input() dataLabels: string[] | string[][];
+  @Input() customOptions: ChartOptions;
+  @Input() annotations: AnnotationOptions[];
+  @Input() highlightedElements: ChartHighlightedElements;
+  @Input() height: string | number;
 }
 
 // #endregion

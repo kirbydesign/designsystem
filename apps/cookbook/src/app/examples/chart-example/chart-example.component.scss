@@ -1,8 +1,9 @@
 @import './libs/designsystem/src/lib/scss/utils';
 
 :host {
-  display: block;
-  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   overflow-x: hidden;
   background: get-color('background-color');
   padding: size('s');
@@ -14,5 +15,9 @@
   > * {
     display: block;
     margin: size('s') 0;
+  }
+
+  kirby-card {
+    width: 100%;
   }
 }

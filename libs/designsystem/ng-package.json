@@ -17,6 +17,7 @@
   },
   "allowedNonPeerDependencies": [
     "@ionic/angular",
+    "chart.js",
     "highcharts",
     "date-fns",
     "date-fns-tz",
