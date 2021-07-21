@@ -2,6 +2,7 @@ import { ElementRef, Injectable } from '@angular/core';
 import { ActiveElement, ChartConfiguration, ChartOptions } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
 
+import { deepCopy } from '../../../helpers/deep-copy';
 import { mergeDeepAll } from '../../../helpers/merge-deep';
 import {
   CHART_ANNOTATION_CONFIGS,
@@ -9,7 +10,6 @@ import {
   INTERACTION_FUNCTIONS_EXTENSIONS,
 } from '../chart.configs';
 import { ChartDataset, ChartHighlightedElements, ChartType, isNumberArray } from '../chart.types';
-import { deepCopy } from '../utils';
 
 import { Chart } from './configured-chart-js';
 
