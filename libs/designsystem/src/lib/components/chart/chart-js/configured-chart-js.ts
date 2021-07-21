@@ -11,8 +11,8 @@ import {
 } from 'chart.js';
 import annotationPlugin from 'chartjs-plugin-annotation';
 
+import { mergeDeepAll } from '../../../helpers/deep-merge';
 import { CHART_GLOBAL_DEFAULTS } from '../chart.configs';
-import { deepMergeObjects } from '../utils';
 
 const CHART_SCALES = [CategoryScale, LinearScale];
 const CHART_ELEMENTS = [BarElement, LineElement, PointElement];
@@ -25,7 +25,7 @@ Chart.register(Legend, ...CHART_SCALES, ...CHART_ELEMENTS, ...CHART_CONTROLLERS,
 
 /* Chart.defaults is read only; set each key modified in 
    CHART_GLOBAL_DEFAULTS manually */
-const mergedDefaults = deepMergeObjects(Chart.defaults, CHART_GLOBAL_DEFAULTS);
+const mergedDefaults = mergeDeepAll(Chart.defaults, CHART_GLOBAL_DEFAULTS);
 Object.entries(CHART_GLOBAL_DEFAULTS).forEach(([key]) => {
   Chart.defaults[key] = mergedDefaults[key];
 });

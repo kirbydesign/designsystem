@@ -2,13 +2,14 @@ import { ElementRef, Injectable } from '@angular/core';
 import { ActiveElement, ChartConfiguration, ChartOptions } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
 
+import { mergeDeepAll } from '../../../helpers/deep-merge';
 import {
   CHART_ANNOTATION_CONFIGS,
   CHART_TYPE_CONFIGS,
   INTERACTION_FUNCTIONS_EXTENSIONS,
 } from '../chart.configs';
 import { ChartDataset, ChartHighlightedElements, ChartType, isNumberArray } from '../chart.types';
-import { deepCopy, deepMergeObjects } from '../utils';
+import { deepCopy } from '../utils';
 
 import { Chart } from './configured-chart-js';
 
@@ -129,7 +130,7 @@ export class ChartJSService {
   private applyDefaultsToAnnotations(annotations: AnnotationOptions[]) {
     return annotations.map((annotation) => {
       const annotationTypeDefaults = this.getAnnotationDefaults(annotation.type);
-      return deepMergeObjects(annotationTypeDefaults, annotation);
+      return mergeDeepAll(annotationTypeDefaults, annotation);
     });
   }
 
@@ -167,7 +168,7 @@ export class ChartJSService {
     const annotationPluginOptions = annotations
       ? this.createAnnotationPluginOptionsObject(annotations)
       : {};
-    let options: ChartOptions = deepMergeObjects(
+    let options: ChartOptions = mergeDeepAll(
       typeConfigOptions,
       customOptions,
       annotationPluginOptions
@@ -185,7 +186,7 @@ export class ChartJSService {
     to make it optional for consumer */
     const labels = !dataLabels ? this.createBlankLabels(datasets) : dataLabels;
     const typeConfig = this.getTypeConfig(type);
-    return deepMergeObjects(typeConfig, {
+    return mergeDeepAll(typeConfig, {
       data: {
         labels,
         datasets,
