@@ -427,9 +427,10 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
     this.changeActiveView(index, TimeUnit.months);
   }
 
-  _changeYear(year: number) {
-    this.changeActiveView(year - getYear(this.activeMonth), TimeUnit.years);
-    this.yearSelect.emit(+year);
+  _changeYear(year: string) {
+    const yearNumeric = Number(year);
+    this.changeActiveView(yearNumeric - getYear(this.activeMonth), TimeUnit.years);
+    this.yearSelect.emit(yearNumeric);
   }
 
   private changeActiveView(index: number, unit: TimeUnit) {
