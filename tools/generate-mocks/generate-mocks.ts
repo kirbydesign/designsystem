@@ -33,7 +33,7 @@ export class GenerateMocks {
     const classMap = new Map<string, string[]>();
     const exportedProviders: ComponentMetaData[] = [];
     const exportedTypesAndAliases = await this.getExportedTypesAndAliases(inputPath);
-    const [exportedTypes, aliasesMap] = this.mapAndRemoveAliases(exportedTypesAndAliases);
+    const [exportedTypes, aliasesMap] = this.separateTypesFromAliases(exportedTypesAndAliases);
     await this.traverseFolder(
       inputPath,
       outputPathNormalized,
@@ -139,7 +139,9 @@ ${providers},
     return typesInFile;
   }
 
-  mapAndRemoveAliases(exportedTypesAndAliases: string[]): [string[], Map<string, string>] {
+  private separateTypesFromAliases(
+    exportedTypesAndAliases: string[]
+  ): [string[], Map<string, string>] {
     // capture group 1 is internal component name, group 2 is exported name
     const aliasRegex = /(\w+) as (\w+)/;
 
