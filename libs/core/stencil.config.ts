@@ -8,13 +8,13 @@ export const config: Config = {
   outputTargets: [
     angularOutputTarget({
       componentCorePackage: '@kirbydesign/core',
-      directivesProxyFile: '../designsystem/src/lib/components/proxies.ts',
+      directivesProxyFile: '../designsystem/src/lib/components/web-component-proxies.component.ts',
     }),
     {
       type: 'dist',
       esmLoaderPath: '../loader',
-      // copy: [{ src: './scss', dest: '../scss' }],
     },
     { type: 'docs-readme' },
+    { type: 'docs-json', file: './custom-elements.json' },
   ],
 };

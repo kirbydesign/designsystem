@@ -1,6 +1,6 @@
 /src/kirby/scss/base/_include-media.scss
 /.github/
-/libs/designsystem/src/lib/components/proxies.ts
+/libs/designsystem/src/lib/components/web-component-proxies.component.ts
 /libs/designsystem/src/lib/components/angular-component-lib/**.*
 /libs/designsystem/src/lib/components/angular-component-lib/utils.ts
 /libs/core/dist/**

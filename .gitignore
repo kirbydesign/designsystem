@@ -12,8 +12,8 @@
 # compiled core library output
 /libs/core/loader
 /libs/core/dist
-/libs/core/component-docs.d.ts
-/libs/core/component-docs.json
+/libs/core/custom-elements.d.ts
+/libs/core/custom-elements.json
 /libs/core/src/components.d.ts
 
 # dependencies
