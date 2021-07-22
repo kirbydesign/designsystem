@@ -1,11 +1,9 @@
-import { DOCUMENT } from '@angular/common';
 import {
   AfterViewInit,
   Component,
   ElementRef,
   EventEmitter,
   HostListener,
-  Inject,
   Input,
   OnChanges,
   OnDestroy,
@@ -21,6 +19,7 @@ export enum HorizontalDirection {
   right = 'right',
   left = 'left',
 }
+
 @Component({
   selector: 'kirby-popover',
   template: `
