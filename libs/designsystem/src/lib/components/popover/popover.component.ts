@@ -21,6 +21,7 @@ export enum HorizontalDirection {
   right = 'right',
   left = 'left',
 }
+/* @dynamic */
 @Component({
   selector: 'kirby-popover',
   template: `
