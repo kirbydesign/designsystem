@@ -8,8 +8,9 @@ import { ButtonComponent, CardComponent, IconComponent, ItemComponent } from '..
 import { DesignTokenHelper } from '../../helpers';
 import { TestHelper } from '../../testing/test-helper';
 import { ListItemTemplateDirective } from '../list';
+import { HorizontalDirection } from '../popover/popover.component';
 
-import { DropdownComponent, HorizontalDirection, OpenState } from './dropdown.component';
+import { DropdownComponent, OpenState } from './dropdown.component';
 
 @Component({
   template: '<ng-content></ng-content>',
