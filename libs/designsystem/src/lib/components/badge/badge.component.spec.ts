@@ -1,8 +1,6 @@
-import { DOCUMENT } from '@angular/common';
-import { APP_INITIALIZER } from '@angular/core';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
-import { appInitialize } from '../../app-initialize';
+import { customElementsInitializer } from '../../app-initialize';
 import { TestHelper } from '../../testing/test-helper';
 import { BadgeComponent } from '../index';
 
@@ -13,14 +11,7 @@ describe('BadgeComponent', () => {
   let createHost = createHostFactory({
     component: BadgeComponent,
     imports: [TestHelper.ionicModuleForTest],
-    providers: [
-      {
-        provide: APP_INITIALIZER,
-        useFactory: appInitialize,
-        deps: [DOCUMENT],
-        multi: true,
-      },
-    ],
+    providers: [customElementsInitializer()],
   });
 
   describe('by default', () => {

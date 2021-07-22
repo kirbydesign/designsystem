@@ -11,7 +11,7 @@ import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { UiScrollModule } from 'ngx-ui-scroll';
 
-import { appInitialize } from './app-initialize';
+import { customElementsInitializer } from './app-initialize';
 import { AccordionItemComponent } from './components/accordion/accordion-item.component';
 import { AccordionDirective } from './components/accordion/accordion.directive';
 import { AppModule } from './components/app/app.module';
@@ -166,12 +166,7 @@ const providers = [
     provide: WindowRef,
     useValue: window,
   },
-  {
-    provide: APP_INITIALIZER,
-    useFactory: appInitialize,
-    deps: [DOCUMENT],
-    multi: true,
-  },
+  customElementsInitializer(),
 ];
 
 const entryComponents = [
