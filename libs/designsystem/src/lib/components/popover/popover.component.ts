@@ -21,7 +21,6 @@ export enum HorizontalDirection {
   right = 'right',
   left = 'left',
 }
-/* @dynamic */
 @Component({
   selector: 'kirby-popover',
   template: `
@@ -60,11 +59,11 @@ export class PopoverComponent implements AfterViewInit, OnChanges, OnDestroy {
     }
   }
 
-  constructor(
-    private elementRef: ElementRef<HTMLElement>,
-    @Inject(DOCUMENT) private document: Document,
-    private renderer: Renderer2
-  ) {}
+  private document: Document;
+
+  constructor(private elementRef: ElementRef<HTMLElement>, private renderer: Renderer2) {
+    this.document = elementRef.nativeElement.ownerDocument;
+  }
 
   private zIndex = parseInt(DesignTokenHelper.zLayer('popover'));
 
