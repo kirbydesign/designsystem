@@ -22,12 +22,13 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { KeyboardHandlerService } from '../../helpers';
 import { ButtonComponent } from '../button/button.component';
 import { CardComponent } from '../card/card.component';
 import { ItemComponent } from '../item/item.component';
 import { ListItemTemplateDirective } from '../list/list.directive';
 import { HorizontalDirection, PopoverComponent } from '../popover/popover.component';
+
+import { KeyboardHandlerService } from './keyboard-handler.service';
 
 export enum OpenState {
   closed,
