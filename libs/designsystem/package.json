@@ -2,6 +2,7 @@
   "name": "@kirbydesign/designsystem",
   "version": "0.0.0",
   "dependencies": {
+    "chart.js": "3.3.2",
     "@ionic/angular": "5.5.2",
     "date-fns": "2.21.1",
     "date-fns-tz": "1.1.4",

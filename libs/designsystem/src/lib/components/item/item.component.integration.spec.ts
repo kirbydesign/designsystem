@@ -18,7 +18,7 @@ import { ItemComponent } from './item.component';
 
 const size = DesignTokenHelper.size;
 
-describe('ItemComponent in Kirby List', () => {
+describe('ItemComponent', () => {
   let ionList: HTMLElement;
   let itemsInList: HTMLElement[];
 
@@ -44,7 +44,7 @@ describe('ItemComponent in Kirby List', () => {
     ],
   });
 
-  describe('inside list', () => {
+  describe('inside kirby-list', () => {
     beforeEach(async () => {
       spectator = createHost<ListComponent>(
         `
@@ -75,9 +75,46 @@ describe('ItemComponent in Kirby List', () => {
       expect(firstItem).toHaveComputedStyle({ 'padding-top': size('xxs') });
       expect(lastItem).toHaveComputedStyle({ 'padding-bottom': size('xxs') });
     });
+
+    describe('with hasItemSpacing set to true', () => {
+      it('should apply spacing to all but the last item', () => {
+        spectator.setInput('hasItemSpacing', true);
+        spectator.detectChanges();
+        const kirbyItemsInList = spectator.queryAll('kirby-list-item:not(:last-child)');
+
+        expect(kirbyItemsInList).not.toBeEmpty();
+        kirbyItemsInList.forEach((item) => {
+          expect(item).toHaveComputedStyle({ 'margin-bottom': size('s') });
+        });
+      });
+
+      it('should not apply spacing to the last item', () => {
+        spectator.setInput('hasItemSpacing', true);
+        spectator.detectChanges();
+        const kirbyItemsInList = spectator.queryAll('kirby-list-item:last-child');
+
+        expect(kirbyItemsInList).not.toBeEmpty();
+        kirbyItemsInList.forEach((item) => {
+          expect(item).toHaveComputedStyle({ 'margin-bottom': '0px' });
+        });
+      });
+    });
+
+    describe('with hasItemSpacing set to false', () => {
+      it('should not apply spacing to items', () => {
+        spectator.setInput('hasItemSpacing', false);
+        spectator.detectChanges();
+        const kirbyItemsInList = spectator.queryAll('kirby-list-item');
+
+        expect(kirbyItemsInList).not.toBeEmpty();
+        kirbyItemsInList.forEach((item) => {
+          expect(item).toHaveComputedStyle({ 'margin-bottom': '0px' });
+        });
+      });
+    });
   });
 
-  describe('inside list with cards', () => {
+  describe('inside kirby-list with cards', () => {
     beforeEach(async () => {
       spectator = createHost<ListComponent>(
         `
