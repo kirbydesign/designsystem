@@ -1,4 +1,4 @@
-import { ThemeColor } from '../../helpers/theme-color.type';
+import { ThemeColor } from '@kirbydesign/core/src/helpers/theme-color.type';
 
 export interface SegmentItem {
   id: string;

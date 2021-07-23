@@ -1,7 +1,7 @@
 import { Directive, HostBinding, Input } from '@angular/core';
 
-import { ColorHelper } from '../../helpers/color-helper';
-import { ThemeColor } from '../../helpers/theme-color.type';
+import { ColorHelper } from '@kirbydesign/core/src/helpers/color-helper';
+import { ThemeColor } from '@kirbydesign/core/src/helpers/theme-color.type';
 
 @Directive({
   // tslint:disable-next-line:directive-selector

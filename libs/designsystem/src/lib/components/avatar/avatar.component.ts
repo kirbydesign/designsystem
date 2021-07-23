@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
 
-import { BrandColor, NotificationColor } from '../../helpers/color-helper';
+import { BrandColor, NotificationColor } from '@kirbydesign/core/src/helpers/color-helper';
 
 export enum AvatarSize {
   XS = 'xs',

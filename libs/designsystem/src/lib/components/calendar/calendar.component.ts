@@ -34,7 +34,7 @@ import {
 import { utcToZonedTime, zonedTimeToUtc } from 'date-fns-tz';
 import { da, enGB, enUS } from 'date-fns/locale';
 
-import { capitalizeFirstLetter } from '../../helpers/string-helper';
+import { capitalizeFirstLetter } from '@kirbydesign/core/src/helpers/string-helper';
 
 import { CalendarCell } from './helpers/calendar-cell.model';
 import { CalendarOptions } from './helpers/calendar-options.model';

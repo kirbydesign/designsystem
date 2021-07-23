@@ -1,4 +1,4 @@
-import { styles } from '../helpers/design-token-helper.styles';
+import { styles } from '@kirbydesign/core/src/helpers/design-token-helper.styles';
 
 export namespace KirbyAnimation {
   export enum Duration {
