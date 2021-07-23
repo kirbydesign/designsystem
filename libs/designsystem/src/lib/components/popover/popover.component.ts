@@ -101,6 +101,7 @@ export class PopoverComponent implements AfterViewInit, OnChanges, OnDestroy {
 
   private preventScroll() {
     this.renderer.addClass(this.document.body, 'backdrop-no-scroll'); // TODO use our own class instead of relying on Ionic?
+    // preventDefault does not work with Renderer2.listen method; add event listener directly to document instead
     this.document.addEventListener(
       'touchmove',
       this.preventEvent,
