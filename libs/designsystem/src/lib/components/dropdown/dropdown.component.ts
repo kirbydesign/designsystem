@@ -28,18 +28,8 @@ import { ItemComponent } from '../item/item.component';
 import { ListItemTemplateDirective } from '../list/list.directive';
 import { HorizontalDirection, PopoverComponent } from '../popover/popover.component';
 
+import { OpenState, VerticalDirection } from './dropdown.types';
 import { KeyboardHandlerService } from './keyboard-handler.service';
-
-export enum OpenState {
-  closed,
-  opening,
-  open,
-}
-
-enum VerticalDirection {
-  up,
-  down,
-}
 
 @Component({
   selector: 'kirby-dropdown',

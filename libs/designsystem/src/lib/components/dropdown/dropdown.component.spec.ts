@@ -10,7 +10,8 @@ import { TestHelper } from '../../testing/test-helper';
 import { ListItemTemplateDirective } from '../list';
 import { HorizontalDirection } from '../popover/popover.component';
 
-import { DropdownComponent, OpenState } from './dropdown.component';
+import { DropdownComponent } from './dropdown.component';
+import { OpenState } from './dropdown.types';
 
 @Component({
   template: '<ng-content></ng-content>',
