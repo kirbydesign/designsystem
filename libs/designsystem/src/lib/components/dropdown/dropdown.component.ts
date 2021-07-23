@@ -173,9 +173,9 @@ export class DropdownComponent
   itemTemplate: TemplateRef<any>;
   @ContentChildren(ListItemTemplateDirective, { read: ElementRef })
   slottedItems: QueryList<ElementRef<HTMLElement>>;
-  @ViewChild(CardComponent, { static: false, read: ElementRef })
+  @ViewChild(CardComponent, { read: ElementRef })
   cardElement: ElementRef<HTMLElement>;
-  @ViewChild(PopoverComponent, { static: false })
+  @ViewChild(PopoverComponent)
   popover?: PopoverComponent;
   @ViewChild(ButtonComponent, { static: true, read: ElementRef })
   buttonElement: ElementRef<HTMLElement>;
