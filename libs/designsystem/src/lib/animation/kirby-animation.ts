@@ -1,4 +1,5 @@
-import { styles } from '@kirbydesign/core/src/helpers/design-token-helper.styles';
+// reference styles with relative path as we do not publicly export it from core package
+import { styles } from '../../../../core/src/helpers/design-token-helper.styles';
 
 export namespace KirbyAnimation {
   export enum Duration {

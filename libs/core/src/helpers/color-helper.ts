@@ -1,6 +1,5 @@
-import { camelToKebabCase, kebabToCamelCase } from '@kirbydesign/core/src/helpers/string-helper';
-
 import { styles } from './color-helper.styles';
+import { camelToKebabCase, kebabToCamelCase } from './string-helper';
 
 type KirbyColorGroup = { [key: string]: string };
 

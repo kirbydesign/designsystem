@@ -6,7 +6,7 @@
   "main": "dist/index.cjs.js",
   "unpkg": "dist/kirby.js",
   "private": true,
-  "types": "dist/types/components.d.ts",
+  "types": "dist/types/index.d.ts",
   "collection": "dist/collection/collection-manifest.json",
   "files": [
     "dist/",
