@@ -1,5 +1,7 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
+import { DesignTokenHelper } from '@kirbydesign/core';
+
 import {
   CardComponent,
   IconComponent,
@@ -9,7 +11,6 @@ import {
   ListItemTemplateDirective,
   SpinnerComponent,
 } from '..';
-import { DesignTokenHelper } from '../../helpers';
 import { TestHelper } from '../../testing/test-helper';
 import { WindowRef } from '../../types/window-ref';
 import { ListItemComponent } from '../list/list-item/list-item.component';

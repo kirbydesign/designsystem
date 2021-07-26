@@ -1,8 +1,9 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
+import { DesignTokenHelper, ThemeColorExtended } from '@kirbydesign/core';
+import { ColorHelper } from '@kirbydesign/core';
+
 import { ThemeColorDirective } from '../../directives';
-import { ColorHelper } from '../../helpers';
-import { DesignTokenHelper, ThemeColorExtended } from '../../helpers/design-token-helper';
 import { TestHelper } from '../../testing/test-helper';
 import { IconComponent } from '../icon/icon.component';
 import { ProgressCircleRingComponent } from '../progress-circle/progress-circle-ring.component';

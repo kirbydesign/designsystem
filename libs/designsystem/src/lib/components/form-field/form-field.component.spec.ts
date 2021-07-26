@@ -1,6 +1,8 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
-import { DesignTokenHelper, PlatformService } from '../../helpers';
+import { DesignTokenHelper } from '@kirbydesign/core';
+
+import { PlatformService } from '../../helpers';
 import { TestHelper } from '../../testing/test-helper';
 import { WindowRef } from '../../types';
 import { ItemComponent } from '../item/item.component';

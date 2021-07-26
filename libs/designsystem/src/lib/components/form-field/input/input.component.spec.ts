@@ -1,7 +1,7 @@
 import { fakeAsync, tick } from '@angular/core/testing';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
-import { DesignTokenHelper } from '../../../helpers/design-token-helper';
+import { DesignTokenHelper } from '@kirbydesign/core';
 
 import { InputComponent } from './input.component';
 

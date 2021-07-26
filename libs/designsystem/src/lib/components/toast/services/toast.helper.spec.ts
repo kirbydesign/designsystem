@@ -1,7 +1,8 @@
 import { ToastController } from '@ionic/angular';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 
-import { DesignTokenHelper } from '../../../helpers/design-token-helper';
+import { DesignTokenHelper } from '@kirbydesign/core';
+
 import { TestHelper } from '../../../testing/test-helper';
 import { Overlay } from '../../modal/services/modal.interfaces';
 
