@@ -1,6 +1,6 @@
 import { Options } from 'highcharts';
 
-import { DesignTokenHelper } from '@kirbydesign/core/src/helpers/design-token-helper';
+import { DesignTokenHelper } from '@kirbydesign/core';
 
 const getColor = DesignTokenHelper.getColor;
 const fontSize = DesignTokenHelper.fontSize;

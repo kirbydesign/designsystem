@@ -1,6 +1,6 @@
 import { Directive, HostBinding, Input, OnChanges } from '@angular/core';
 
-import { ThemeColor } from '@kirbydesign/core/src/helpers/theme-color.type';
+import { ThemeColor } from '@kirbydesign/core';
 
 @Directive({
   selector: '[kirbyListItemColor]',

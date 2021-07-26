@@ -15,7 +15,7 @@ import {
 } from '@angular/core';
 import { IDatasource } from 'ngx-ui-scroll';
 
-import { ThemeColor } from '@kirbydesign/core/src/helpers/theme-color.type';
+import { ThemeColor } from '@kirbydesign/core';
 
 import { ItemComponent } from '../item/item.component';
 

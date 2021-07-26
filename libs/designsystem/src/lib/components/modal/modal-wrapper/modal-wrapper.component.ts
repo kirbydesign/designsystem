@@ -21,7 +21,7 @@ import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular';
 import { merge, Observable, Subject } from 'rxjs';
 import { debounceTime, first, takeUntil } from 'rxjs/operators';
 
-import { DesignTokenHelper } from '@kirbydesign/core/src/helpers/design-token-helper';
+import { DesignTokenHelper } from '@kirbydesign/core';
 
 import { KirbyAnimation } from '../../../animation/kirby-animation';
 import { PlatformService } from '../../../helpers/platform.service';

@@ -2,7 +2,7 @@ import { formatNumber } from '@angular/common';
 import { Options } from 'highcharts';
 import { dateFormat } from 'highcharts/highstock';
 
-import { ColorHelper } from '@kirbydesign/core/src/helpers/color-helper';
+import { ColorHelper } from '@kirbydesign/core';
 
 export interface StockChartDataPoint {
   x: number;
