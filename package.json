@@ -52,7 +52,7 @@
     "dist:cookbook": "ng build cookbook --prod --aot --progress false",
     "predist:designsystem": "npm run extract-scss-variables",
     "dist:designsystem": "ng build designsystem",
-    "postinstall": "npm run ngcc && npm run build:core && npm run build-polyfills && npm run transpile:tools && npm run extract-scss-variables && node ./decorate-angular-cli.js",
+    "postinstall": "npm run ngcc && npm run build-polyfills && npm run transpile:tools && npm run extract-scss-variables && npm run build:core && node ./decorate-angular-cli.js",
     "coverage-report": "cat ./coverage/lcov.info | coveralls",
     "transpile:tools": "tsc -b tools/tslint-rules tools/sass-to-ts tools/generate-mocks",
     "extract-scss-variables": "node ./scripts/sass-extract-to-ts.js",
