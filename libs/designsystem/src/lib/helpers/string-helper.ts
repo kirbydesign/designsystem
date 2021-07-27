@@ -1,1 +1,6 @@
-export * from '../../../../core/src/helpers/string-helper';
+export {
+  kebabToCamelCase,
+  kebabToTitleCase,
+  camelToKebabCase,
+  capitalizeFirstLetter,
+} from '@kirbydesign/core';

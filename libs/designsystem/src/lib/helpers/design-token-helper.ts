@@ -1,1 +1,6 @@
-export * from '../../../../core/src/helpers/design-token-helper';
+export {
+  DesignTokenHelper,
+  ThemeColorDefinition,
+  ThemeColorExtended,
+  ThemeColorVariant,
+} from '@kirbydesign/core';

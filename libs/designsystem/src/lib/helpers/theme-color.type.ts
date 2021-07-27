@@ -1,1 +1,1 @@
-export * from '../../../../core/src/helpers/theme-color.type';
+export { ThemeColor } from '@kirbydesign/core';

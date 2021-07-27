@@ -1,1 +1,1 @@
-export * from '../../../../core/src/helpers/color-helper';
+export { ColorHelper, Color, BrandColor, KirbyColor, NotificationColor } from '@kirbydesign/core';
