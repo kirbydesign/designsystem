@@ -7,7 +7,7 @@ import {
   ScriptableContext,
 } from 'chart.js';
 
-import { ColorHelper, DesignTokenHelper } from '../../helpers';
+import { ColorHelper, DesignTokenHelper } from '@kirbydesign/core';
 
 import { ChartDataset } from './chart.types';
 
