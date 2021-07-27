@@ -1,0 +1,53 @@
+@import './libs/designsystem/src/lib/scss/utils';
+
+// Grid
+$columns: 12;
+$gap: size('m');
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+  gap: $gap;
+}
+
+.grid-item {
+  grid-column: span $columns;
+}
+
+// Tablet size and above
+@include media('>=medium') {
+  .half\@tablet-up {
+    grid-column: span ($columns / 2);
+  }
+}
+
+// Desktop size and above
+@include media('>=large') {
+  .half\@desktop-up {
+    grid-column: span ($columns / 2);
+  }
+
+  .third\@desktop-up {
+    grid-column: span ($columns / 3);
+  }
+}
+
+// For the sake of example -----------------------------------------------------
+main {
+  background-color: var(--kirby-background-color);
+  min-height: 100%;
+  padding-block: 2rem 5rem;
+}
+
+.example-title {
+  display: block;
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.4;
+  text-align: center;
+  border-block: 0.5rem solid #000;
+  color: #000;
+  background-color: deepskyblue;
+  margin-block: 5rem;
+}
+// -----------------------------------------------------------------------------

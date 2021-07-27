@@ -1,0 +1,21 @@
+@media print {
+  kirby-app {
+    // Part of making sure you can print more than a single page
+    display: contents !important;
+
+    // Part of making sure you can print more than a single page
+    ion-app {
+      display: contents !important;
+    }
+
+    // Part of making sure you can print more than a single page
+    .ion-page {
+      display: contents !important;
+    }
+
+    // Only print the currently displayed ion-page
+    .ion-page-hidden {
+      display: none !important;
+    }
+  }
+}

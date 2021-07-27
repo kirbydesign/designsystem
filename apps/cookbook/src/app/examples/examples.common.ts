@@ -23,6 +23,8 @@ import { FlagExampleComponent } from './flag-example/flag-example.component';
 import { FontsExampleComponent } from './fonts-example/fonts-example.component';
 import { FormFieldExampleComponent } from './form-field-example/form-field-example.component';
 import { GridExampleComponent } from './grid-example/grid-example.component';
+import { GridLayoutCoreExampleComponent } from './grid-layout-example/grid-layout-core-example/grid-layout-core-example.component';
+import { GridLayoutExtendedExampleComponent } from './grid-layout-example/grid-layout-extended-example/grid-layout-extended-example.component';
 import { IconExampleComponent } from './icon-example/icon-example.component';
 import { ItemExampleComponent } from './item-example/item-example.component';
 import { LinkExampleComponent } from './link-example/link-example.component';
@@ -32,15 +34,6 @@ import { ListNoShapeExampleComponent } from './list-no-shape-example/list-no-sha
 import { ListSwipeExampleComponent } from './list-swipe-example/list-swipe-example.component';
 import { ListVirtualScrollExampleComponent } from './list-virtual-scroll-example/list-virtual-scroll-example.component';
 import { LoadingOverlayExampleComponent } from './loading-overlay-example/loading-overlay-example.component';
-import { ModalCompactExampleComponent } from './modal-example/compact-example/modal-compact-example.component';
-import { FirstEmbeddedModalExampleComponent } from './modal-example/first-embedded-modal-example/first-embedded-modal-example.component';
-import { ModalExampleConfigurationComponent } from './modal-example/modal-example-configuration/modal-example-configuration.component';
-import { ModalExampleDefaultComponent } from './modal-example/modal-example-default.component';
-import { ModalExampleOutletComponent } from './modal-example/modal-example-outlet.component';
-import { ModalExampleComponent } from './modal-example/modal-example.component';
-import { ModalRoutePage1ExampleComponent } from './modal-example/modal-route-example/modal-route-page1-example.component';
-import { ModalRoutePage2ExampleComponent } from './modal-example/modal-route-example/modal-route-page2-example.component';
-import { SecondEmbeddedModalExampleComponent } from './modal-example/second-embedded-modal-example/second-embedded-modal-example.component';
 import { PageAdvancedExampleComponent } from './page-example/advanced/page-advanced-example.component';
 import { PageCustomTitleExampleComponent } from './page-example/advanced/page-custom-title-example.component';
 import { PageAlignmentAndToolbarTitleExampleComponent } from './page-example/alignment-and-toolbar-title/page-alignment-and-toolbar-title-example.component';
@@ -56,7 +49,7 @@ import { SlideButtonExampleComponent } from './slide-button-example/slide-button
 import { CookbookExampleCardContentComponent } from './slides-example/example-card-content';
 import { SlidesExampleComponent } from './slides-example/slides-example.component';
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
-import { StockChartExampleComponent } from './stock-chart-example/stock-chart-example.component';
+import { StockChartDeprecatedExampleComponent } from './stock-chart-deprecated-example/stock-chart-deprecated-example.component';
 import { TabExampleComponent } from './tabs-example/tab/tab-example.component';
 import { TabsExampleComponent } from './tabs-example/tabs-example.component';
 import { ToastExampleComponent } from './toast-example/toast-example.component';
@@ -89,20 +82,11 @@ export const COMPONENT_DECLARATIONS: any[] = [
   ListNoShapeExampleComponent,
   ListVirtualScrollExampleComponent,
   GridExampleComponent,
+  GridLayoutCoreExampleComponent,
+  GridLayoutExtendedExampleComponent,
   AvatarExampleComponent,
   FontsExampleComponent,
   SpinnerExampleComponent,
-  // TODO: Move Modal examples to ModalExample.module
-  ModalExampleComponent,
-  ModalExampleDefaultComponent,
-  ModalExampleConfigurationComponent,
-  ModalExampleOutletComponent,
-  FirstEmbeddedModalExampleComponent,
-  SecondEmbeddedModalExampleComponent,
-  ModalCompactExampleComponent,
-  ModalRoutePage1ExampleComponent,
-  ModalRoutePage2ExampleComponent,
-  // END TODO: Move Modal examples to ModalExample.module
   SegmentedControlExampleComponent,
   ChipExampleComponent,
   BadgeExampleComponent,
@@ -133,7 +117,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   DividerExampleComponent,
   ReorderListExampleComponent,
   DropdownExampleComponent,
-  StockChartExampleComponent,
+  StockChartDeprecatedExampleComponent,
   ProgressCircleExampleComponent,
   FlagExampleComponent,
   SlidesExampleComponent,

@@ -19,6 +19,7 @@
   "allowedNonPeerDependencies": [
     "@ionic/angular",
     "@kirbydesign/core",
+    "chart.js",
     "highcharts",
     "date-fns",
     "date-fns-tz",
