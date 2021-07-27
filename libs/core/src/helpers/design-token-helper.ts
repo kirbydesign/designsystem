@@ -98,6 +98,14 @@ export class DesignTokenHelper {
   public static itemHeight(key: keyof typeof styles.itemHeights): string {
     return styles.itemHeights[key];
   }
+
+  public static transitionDuration(key: keyof typeof styles.transitionDurations): string {
+    return styles.transitionDurations[key];
+  }
+
+  public static transitionEasings() {
+    return styles.transitionEasings;
+  }
 }
 
 export type ThemeColorExtended =

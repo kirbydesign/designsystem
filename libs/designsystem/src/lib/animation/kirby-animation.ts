@@ -1,13 +1,12 @@
-// reference styles with relative path as we do not publicly export it from core package
-import { styles } from '../../../../core/src/helpers/design-token-helper.styles';
+import { DesignTokenHelper } from '@kirbydesign/core';
 
 export namespace KirbyAnimation {
   export enum Duration {
     // Duration in milliseconds
-    QUICK = parseInt(styles.transitionDurations.quick),
-    SHORT = parseInt(styles.transitionDurations.short),
-    LONG = parseInt(styles.transitionDurations.long),
-    EXTRA_LONG = parseInt(styles.transitionDurations.extraLong),
+    QUICK = parseInt(DesignTokenHelper.transitionDuration('quick')),
+    SHORT = parseInt(DesignTokenHelper.transitionDuration('short')),
+    LONG = parseInt(DesignTokenHelper.transitionDuration('long')),
+    EXTRA_LONG = parseInt(DesignTokenHelper.transitionDuration('extraLong')),
   }
-  export const Easing = styles.transitionEasings;
+  export const Easing = DesignTokenHelper.transitionEasings();
 }
