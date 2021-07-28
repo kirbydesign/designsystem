@@ -32,8 +32,7 @@
     "test:designsystem": "ng test designsystem",
     "test:headless-browser": "npm run test -- --browsers=ChromeCustom",
     "test:headless-browser:single": "npm run test:headless-browser -- --watch=false",
-    "test:libs": "test:core:single && npm run test:headless-browser:single",
-    "ci-test": "test:core:single && npm run test:ci",
+    "ci-test": "npm run test:ci",
     "test:ci": "ng test designsystem --progress false --watch false --code-coverage",
     "lint": "npm run lint:cookbook && npm run lint:designsystem",
     "lint:cookbook": "npm run lint:cookbook:ts && npm run lint:cookbook:css",
@@ -179,7 +178,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "npm run sync-node-version && npm run generate-mocks && lint-staged",
-      "pre-push": "npm run test:libs",
+      "pre-push": "npm run test:core:single && npm run test:headless-browser:single",
       "post-merge": "post-npm-install"
     }
   }
