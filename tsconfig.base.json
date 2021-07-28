@@ -8,7 +8,6 @@
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "allowUnreachableCode": false,
     "target": "es2017",
     "typeRoots": ["node_modules/@types"],
     "lib": ["es2017", "dom"],
