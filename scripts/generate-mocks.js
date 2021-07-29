@@ -20,7 +20,7 @@ function hasChanges(inputPaths) {
 
 const inputPaths = {
   angular: './libs/designsystem/src/lib/', 
-  core: './libs/core/src'
+  core: './libs/core/src/'
 };
 
 hasChanges(inputPaths).then((hasChanged) => {
