@@ -7,7 +7,6 @@ import { ThemeColor } from '@kirbydesign/core';
   // tslint:disable-next-line:directive-selector
   selector: `kirby-avatar[themeColor],
              kirby-card[themeColor],
-             kirby-badge[themeColor],
              kirby-icon[themeColor],
              kirby-progress-circle-ring[themeColor],
              kirby-modal-footer[themeColor],

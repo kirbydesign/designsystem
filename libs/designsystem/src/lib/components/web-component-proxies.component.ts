@@ -8,13 +8,13 @@ import { Components } from '@kirbydesign/core';
 
 export declare interface KirbyBadge extends Components.KirbyBadge {}
 @ProxyCmp({
-  inputs: ['text']
+  inputs: ['text', 'themeColor']
 })
 @Component({
   selector: 'kirby-badge',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['text']
+  inputs: ['text', 'themeColor']
 })
 export class KirbyBadge {
   protected el: HTMLElement;

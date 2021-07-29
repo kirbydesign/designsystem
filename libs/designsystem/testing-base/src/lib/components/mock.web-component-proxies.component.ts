@@ -15,6 +15,17 @@ import { BadgeComponent } from '@kirbydesign/designsystem';
 })
 export class MockBadgeComponent {
   @Input() text: string;
+  @Input() themeColor:
+    | 'danger'
+    | 'dark'
+    | 'light'
+    | 'medium'
+    | 'primary'
+    | 'secondary'
+    | 'success'
+    | 'tertiary'
+    | 'warning'
+    | 'white';
 }
 
 // #endregion
