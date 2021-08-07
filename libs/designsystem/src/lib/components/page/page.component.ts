@@ -216,7 +216,7 @@ export class PageComponent
     private renderer: Renderer2,
     private router: Router,
     private changeDetectorRef: ChangeDetectorRef,
-    private window: WindowRef,
+    private windowRef: WindowRef,
     private modalNavigationService: ModalNavigationService,
     @Optional() @SkipSelf() private tabsComponent: TabsComponent
   ) {}
@@ -251,7 +251,7 @@ export class PageComponent
       }
     });
 
-    this.window.addEventListener(selectedTabClickEvent, () => {
+    this.windowRef.nativeWindow.addEventListener(selectedTabClickEvent, () => {
       this.content.scrollToTop(KirbyAnimation.Duration.LONG);
     });
   }
@@ -273,7 +273,7 @@ export class PageComponent
     this.ngOnDestroy$.complete();
 
     this.pageTitleIntersectionObserverRef.disconnect();
-    this.window.removeEventListener(selectedTabClickEvent, () => {
+    this.windowRef.nativeWindow.removeEventListener(selectedTabClickEvent, () => {
       this.content.scrollToTop(KirbyAnimation.Duration.LONG);
     });
   }
