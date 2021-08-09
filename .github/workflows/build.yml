@@ -212,9 +212,9 @@ jobs:
           echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
           sudo apt-get update
           sudo apt-get install -y kubectl
-      - name: Setup Helm to use version 2.12.3
+      - name: Setup Helm to use version 3.6.3
         run: |
-          curl https://storage.googleapis.com/kubernetes-helm/helm-v2.12.3-linux-amd64.tar.gz -o helm-linux-amd64.tar.gz
+          curl https://get.helm.sh/helm-v3.6.3-linux-amd64.tar.gz -o helm-linux-amd64.tar.gz
           tar xzf helm-linux-amd64.tar.gz
           sudo cp linux-amd64/helm /usr/bin/
           rm -rf linux-amd64
