@@ -13,7 +13,7 @@ import { WindowRef } from '../../../types/window-ref';
 export class AlertComponent implements AfterViewInit {
   readonly BLUR_WRAPPER_DELAY_IN_MS = 50;
   @ViewChild('alertWrapper', { static: true }) private alertWrapper: ElementRef;
-  private scrollY: number = Math.abs(this.window.scrollY);
+  private scrollY: number = Math.abs(this.windowRef.nativeWindow.scrollY);
 
   title$: Observable<string>;
   @Input()
@@ -33,7 +33,7 @@ export class AlertComponent implements AfterViewInit {
   @Input() okBtnIsDestructive: boolean;
   @Input() cancelBtnText: string;
 
-  constructor(private elementRef: ElementRef<HTMLElement>, private window: WindowRef) {}
+  constructor(private elementRef: ElementRef<HTMLElement>, private windowRef: WindowRef) {}
 
   ngAfterViewInit(): void {
     setTimeout(() => {
@@ -44,7 +44,7 @@ export class AlertComponent implements AfterViewInit {
 
   onFocusChange() {
     // This fixes an undesired scroll behaviour occurring on keyboard-tabbing
-    this.window.scrollTo({ top: this.scrollY });
+    this.windowRef.nativeWindow.scrollTo({ top: this.scrollY });
   }
 
   onCancel() {

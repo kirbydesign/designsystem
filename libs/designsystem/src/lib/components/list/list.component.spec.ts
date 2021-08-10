@@ -75,7 +75,7 @@ describe('ListComponent', () => {
       GroupByPipe,
       {
         provide: WindowRef,
-        useValue: window,
+        useValue: <WindowRef>{ nativeWindow: window },
       },
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
