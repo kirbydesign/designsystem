@@ -214,7 +214,7 @@ jobs:
           sudo apt-get install -y kubectl
       - name: Setup Helm to use version 2.12.3
         run: |
-          curl https://storage.googleapis.com/kubernetes-helm/helm-v2.12.3-linux-amd64.tar.gz -o helm-linux-amd64.tar.gz
+          curl https://get.helm.sh/helm-v2.12.3-linux-amd64.tar.gz -o helm-linux-amd64.tar.gz
           tar xzf helm-linux-amd64.tar.gz
           sudo cp linux-amd64/helm /usr/bin/
           rm -rf linux-amd64
