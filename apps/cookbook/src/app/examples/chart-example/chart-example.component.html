@@ -1,19 +1,15 @@
 <kirby-card [hasPadding]="true">
-  <cookbook-chart-example-simple-column></cookbook-chart-example-simple-column>
-</kirby-card>
-
-<kirby-card [hasPadding]="true">
-  <cookbook-chart-example-bar></cookbook-chart-example-bar>
-</kirby-card>
-
-<kirby-card [hasPadding]="true">
-  <cookbook-chart-example-column></cookbook-chart-example-column>
-</kirby-card>
-
-<kirby-card [hasPadding]="true">
-  <cookbook-chart-example-column-stacked> </cookbook-chart-example-column-stacked>
-</kirby-card>
-
-<kirby-card [hasPadding]="true">
-  <cookbook-chart-example-multiple-datasets> </cookbook-chart-example-multiple-datasets>
+  <p>Pension</p>
+  <div class="outer">
+    <kirby-chart
+      [data]="[1, 2]"
+      height="100"
+      type="bar"
+      [customOptions]="_customOptions"
+    ></kirby-chart>
+    <div class="inner">
+      <p>label 1</p>
+      <p>label 2</p>
+    </div>
+  </div>
 </kirby-card>

@@ -19,5 +19,32 @@
 
   kirby-card {
     width: 100%;
+    max-width: 624px;
+  }
+
+  .outer {
+    display: flex;
+    background-color: red;
+  }
+
+  .inner {
+    background-color: green;
+
+    padding-left: 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    p {
+      background-color: yellow;
+      white-space: nowrap;
+      margin-bottom: 0;
+    }
+  }
+
+  kirby-chart {
+    background-color: blue;
+    flex-basis: 100%;
   }
 }
