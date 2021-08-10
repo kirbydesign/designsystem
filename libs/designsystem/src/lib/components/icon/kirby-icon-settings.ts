@@ -6,6 +6,7 @@ export const kirbyIconSettings: IconSettings = {
     { name: 'accounts-outline', svg: 'assets/kirby/icons/svg/accounts-outline.svg' },
     { name: 'accounts', svg: 'assets/kirby/icons/svg/accounts.svg' },
     { name: 'add', svg: 'assets/kirby/icons/svg/add.svg' },
+    { name: 'remove', svg: 'assets/kirby/icons/svg/remove.svg' },
     { name: 'unsubscribe', svg: 'assets/kirby/icons/svg/unsubscribe.svg' },
     { name: 'arrow-back', svg: 'assets/kirby/icons/svg/arrow-back.svg' },
     { name: 'arrow-down', svg: 'assets/kirby/icons/svg/arrow-down.svg' },
