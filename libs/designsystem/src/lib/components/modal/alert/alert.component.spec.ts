@@ -22,7 +22,7 @@ describe('AlertComponent', () => {
         providers: [
           {
             provide: WindowRef,
-            useValue: window,
+            useValue: <WindowRef>{ nativeWindow: window },
           },
         ],
         schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -123,7 +123,7 @@ describe('AlertComponent with okBtn', () => {
     providers: [
       {
         provide: WindowRef,
-        useValue: window,
+        useValue: <WindowRef>{ nativeWindow: window },
       },
     ],
   });

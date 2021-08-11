@@ -45,7 +45,7 @@ describe('ButtonComponent in Kirby Page', () => {
     providers: [
       {
         provide: WindowRef,
-        useValue: window,
+        useValue: <WindowRef>{ nativeWindow: window },
       },
     ],
   });

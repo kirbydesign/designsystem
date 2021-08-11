@@ -59,7 +59,7 @@ describe('PageComponent', () => {
     providers: [
       {
         provide: WindowRef,
-        useValue: window,
+        useValue: <WindowRef>{ nativeWindow: window },
       },
       mockProvider(TabsComponent, { tabBarBottomHidden: false }),
       mockProvider(ModalNavigationService),

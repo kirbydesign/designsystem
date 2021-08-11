@@ -1,7 +1,6 @@
 import { Component, HostListener } from '@angular/core';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem';
-
 import { WindowRef } from '@kirbydesign/designsystem/types/window-ref';
 
 @Component({
@@ -10,12 +9,14 @@ import { WindowRef } from '@kirbydesign/designsystem/types/window-ref';
   styleUrls: ['./examples.component.scss'],
 })
 export class ExamplesComponent {
-  showDummyKeyboard = !!this.window.sessionStorage.getItem('kirby-cookbook-show-dummy-keyboard');
+  showDummyKeyboard = !!this.windowRef.nativeWindow.sessionStorage.getItem(
+    'kirby-cookbook-show-dummy-keyboard'
+  );
   keyboardIsShowing = false;
   keyboardHeight: number;
   keyCount = 40;
 
-  constructor(private window: WindowRef) {
+  constructor(private windowRef: WindowRef) {
     this.setKeyboardSize();
   }
 
@@ -35,8 +36,8 @@ export class ExamplesComponent {
       },
     };
     const query = `(min-width: ${DesignTokenHelper.breakpoints.medium})`;
-    const device = this.window.matchMedia(query).matches ? 'tablet' : 'phone';
-    const orientation = this.window.matchMedia('(orientation: landscape)').matches
+    const device = this.windowRef.nativeWindow.matchMedia(query).matches ? 'tablet' : 'phone';
+    const orientation = this.windowRef.nativeWindow.matchMedia('(orientation: landscape)').matches
       ? 'landscape'
       : 'portrait';
     this.keyboardHeight = keyboardHeights[device][orientation];
@@ -70,7 +71,7 @@ export class ExamplesComponent {
       });
       const keyboardDidShowDelayInMs = 100;
       setTimeout(
-        () => this.window.dispatchEvent(ionKeyboardDidShowEvent),
+        () => this.windowRef.nativeWindow.dispatchEvent(ionKeyboardDidShowEvent),
         keyboardDidShowDelayInMs
       );
     }
@@ -81,7 +82,7 @@ export class ExamplesComponent {
     if (!this.showDummyKeyboard) return;
     if (input.tagName === 'INPUT' || input.tagName === 'TEXTAREA') {
       const ionKeyboardDidHideEvent = new CustomEvent('ionKeyboardDidHide');
-      this.window.dispatchEvent(ionKeyboardDidHideEvent);
+      this.windowRef.nativeWindow.dispatchEvent(ionKeyboardDidHideEvent);
     }
   }
 

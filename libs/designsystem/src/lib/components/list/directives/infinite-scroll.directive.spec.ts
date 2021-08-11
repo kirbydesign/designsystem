@@ -32,7 +32,7 @@ describe('InfiniteScrollDirective', () => {
 
     const directive = new InfiniteScrollDirective(
       { nativeElement } as ElementRef,
-      { innerHeight: viewHeight, document: document as Document } as WindowRef,
+      { nativeWindow: { innerHeight: viewHeight, document: document as Document } } as WindowRef,
       mockNgZone
     );
     spyOn(directive.scrollEnd, 'emit');

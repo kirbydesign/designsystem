@@ -39,7 +39,7 @@ describe('CalendarComponent', () => {
       },
       {
         provide: WindowRef,
-        useValue: window,
+        useValue: <WindowRef>{ nativeWindow: window },
       },
     ],
     imports: [TestHelper.ionicModuleForTest],
