@@ -46,17 +46,17 @@ export class ModalExampleConfigurationComponent {
   // Use this flag in checkbox change event handlers to prevent ExpressionChangedAfterItHasBeenCheckedError
   private preventChangeEvent = false;
 
-  constructor(private window: WindowRef) {}
+  constructor(private windowRef: WindowRef) {}
 
   toggleDummyKeyboard(show: boolean) {
     const sessionKey = 'kirby-cookbook-show-dummy-keyboard';
     this.showDummyKeyboard = show;
     this.showDummyKeyboard
-      ? this.window.sessionStorage.setItem(sessionKey, 'true')
-      : this.window.sessionStorage.removeItem(sessionKey);
+      ? this.windowRef.nativeWindow.sessionStorage.setItem(sessionKey, 'true')
+      : this.windowRef.nativeWindow.sessionStorage.removeItem(sessionKey);
     // Timeout prevents ExpressionChangedAfterItHasBeenCheckedError:
     setTimeout(() =>
-      this.window.dispatchEvent(
+      this.windowRef.nativeWindow.dispatchEvent(
         new CustomEvent('kirbyToggleDummyKeyboard', { detail: this.showDummyKeyboard })
       )
     );
