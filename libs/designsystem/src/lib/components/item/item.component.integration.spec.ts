@@ -29,7 +29,7 @@ describe('ItemComponent', () => {
     providers: [
       {
         provide: WindowRef,
-        useValue: window,
+        useValue: <WindowRef>{ nativeWindow: window },
       },
     ],
     declarations: [

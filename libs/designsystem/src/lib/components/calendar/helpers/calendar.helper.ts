@@ -9,7 +9,7 @@ export class CalendarHelper {
   private embeddedView: Window;
   private embeddedViewReady = false;
 
-  constructor(private window: WindowRef) {}
+  constructor(private windowRef: WindowRef) {}
 
   public init(
     calendarContainer: ElementRef,
@@ -25,7 +25,7 @@ export class CalendarHelper {
       };
       this.embeddedView = iframe.contentWindow;
 
-      this.window.addEventListener('message', (event: MessageEvent) =>
+      this.windowRef.nativeWindow.addEventListener('message', (event: MessageEvent) =>
         this.handleMessageEvent(event, onDaySelected, onChangeMonth)
       );
     }
