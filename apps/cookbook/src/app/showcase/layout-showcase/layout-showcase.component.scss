@@ -1,0 +1,33 @@
+@import './libs/designsystem/src/lib/scss/utils';
+
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+  width: 100%;
+
+  thead {
+    background-color: get-color('light-tint');
+  }
+
+  th {
+    font-weight: font-weight('normal');
+    border: none;
+    text-align: left;
+    height: size('xl');
+    border-bottom: none;
+
+    &:first-child {
+      width: (100% / 3);
+    }
+  }
+
+  tbody {
+    vertical-align: text-top;
+  }
+
+  td,
+  th {
+    border: 1px solid get-color('medium');
+    padding: 0.5rem 1rem;
+  }
+}
