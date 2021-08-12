@@ -149,17 +149,17 @@ export class PopoverComponent implements AfterViewInit, OnChanges, OnDestroy {
     const popoverElement = this.wrapperElement.nativeElement;
     const popoverDimensions = popoverElement.getBoundingClientRect();
     const viewport = popoverElement.ownerDocument.defaultView;
-    this.positionHorizontally(viewport, targetDimensions, popoverDimensions);
-    this.positionVertically(viewport, targetDimensions, popoverDimensions);
+    this.positionHorizontally(viewport, popoverElement, targetDimensions, popoverDimensions);
+    this.positionVertically(viewport, popoverElement, targetDimensions, popoverDimensions);
   }
 
   private positionHorizontally(
     viewPort: Window,
+    popoverElement: HTMLDivElement,
     targetDimensions: DOMRect,
     popoverDimensions: DOMRect
   ) {
     const viewPortWidth = viewPort.innerWidth;
-    const popoverElement = this.wrapperElement.nativeElement;
     const contentWidth = popoverDimensions.width;
     const availableSpaceRight = viewPortWidth - targetDimensions.left;
     const availableSpaceLeft = targetDimensions.right;
@@ -181,11 +181,11 @@ export class PopoverComponent implements AfterViewInit, OnChanges, OnDestroy {
 
   private positionVertically(
     viewPort: Window,
+    popoverElement: HTMLDivElement,
     targetDimensions: DOMRect,
     popoverDimensions: DOMRect
   ) {
     const viewPortHeight = viewPort.innerHeight;
-    const popoverElement = this.wrapperElement.nativeElement;
     const contentHeight = popoverDimensions.height;
     const availableSpaceDown = viewPortHeight - targetDimensions.bottom;
     const availableSpaceUp = targetDimensions.top;
