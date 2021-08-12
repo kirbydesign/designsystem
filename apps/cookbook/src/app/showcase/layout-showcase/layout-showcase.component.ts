@@ -7,6 +7,6 @@ declare var require: any;
   styleUrls: ['./layout-showcase.component.scss'],
 })
 export class LayoutShowcaseComponent {
-  gridLayoutCoreExampleHtml: string = require('!raw-loader!../../examples/grid-layout-example/grid-layout-core-example/grid-layout-core-example.component.html')
+  exampleHtml: string = require('!raw-loader!../../examples/grid-layout-example/grid-layout-core-example/grid-layout-core-example.component.html')
     .default;
 }

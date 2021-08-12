@@ -28,6 +28,8 @@ import { FormFieldShowcaseComponent } from './form-field-showcase/form-field-sho
 import { GridShowcaseComponent } from './grid-showcase/grid-showcase.component';
 import { IconShowcaseComponent } from './icon-showcase/icon-showcase.component';
 import { LayoutShowcaseComponent } from './layout-showcase/layout-showcase.component';
+import { GridLayoutCoreShowcaseComponent } from './layout-showcase/recipes/grid-layout-core-showcase/grid-layout-core-showcase.component';
+import { GridLayoutExtendedShowcaseComponent } from './layout-showcase/recipes/grid-layout-extended-showcase/grid-layout-extended-showcase.component';
 import { LinkShowcaseComponent } from './link-showcase/link-showcase.component';
 import { ListLoadOnDemandShowcaseComponent } from './list-load-on-demand-showcase/list-load-on-demand-showcase.component';
 import { ListNoShapeShowcaseComponent } from './list-no-shape-showcase/list-no-shape-showcase.component';
@@ -259,8 +261,18 @@ export const routes: Routes = [
         component: LinkShowcaseComponent,
       },
       {
-        path: 'layout',
+        path: 'layout-recipes',
         component: LayoutShowcaseComponent,
+        children: [
+          {
+            path: 'grid-core',
+            component: GridLayoutCoreShowcaseComponent,
+          },
+          {
+            path: 'grid-extended',
+            component: GridLayoutExtendedShowcaseComponent,
+          },
+        ],
       },
     ],
   },
