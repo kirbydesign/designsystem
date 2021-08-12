@@ -144,7 +144,6 @@ export class PopoverComponent implements AfterViewInit, OnChanges, OnDestroy {
   private positionWrapper() {
     const targetDimensions = this.targetElement.getBoundingClientRect();
 
-    this.renderer.addClass(this.elementRef.nativeElement, 'is-opening');
     this.renderer.appendChild(this.document.body, this.elementRef.nativeElement);
 
     const popoverElement = this.wrapperElement.nativeElement;
