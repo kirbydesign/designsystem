@@ -163,8 +163,9 @@ export class PopoverComponent implements AfterViewInit, OnChanges, OnDestroy {
     const contentWidth = popoverDimensions.width;
     const availableSpaceRight = viewPortWidth - targetDimensions.left;
     const availableSpaceLeft = targetDimensions.right;
-    const contentCanRightOfTarget = availableSpaceRight >= contentWidth + this.POPOVER_BODY_PADDING;
-    const openRight = contentCanRightOfTarget || availableSpaceRight >= availableSpaceLeft;
+    const contentCanFitRightOfTarget =
+      availableSpaceRight >= contentWidth + this.POPOVER_BODY_PADDING;
+    const openRight = contentCanFitRightOfTarget || availableSpaceRight >= availableSpaceLeft;
     if (this.popout === HorizontalDirection.left || !openRight) {
       // Open left:
       const rightPxValue = `${viewPortWidth - targetDimensions.right}px`;
