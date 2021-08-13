@@ -60,6 +60,13 @@ export class PopoverComponent implements AfterViewInit, OnChanges, OnDestroy {
 
   private document: Document;
 
+  /* 
+     Removing the 'backdrop-no-scroll' class when used in a modal makes the entire 
+     page scrollable. This is not desired. Therefore track if scroll is already locked when 
+     the popover attempts to lock it. 
+  */
+  private isFirstToLockScroll: boolean;
+
   constructor(private elementRef: ElementRef<HTMLElement>, private renderer: Renderer2) {
     this.document = elementRef.nativeElement.ownerDocument;
   }
@@ -100,7 +107,11 @@ export class PopoverComponent implements AfterViewInit, OnChanges, OnDestroy {
   }
 
   private preventScroll() {
-    this.renderer.addClass(this.document.body, 'backdrop-no-scroll'); // TODO use our own class instead of relying on Ionic?
+    this.isFirstToLockScroll = !this.document.body.classList.contains('backdrop-no-scroll');
+    if (this.isFirstToLockScroll) {
+      this.renderer.addClass(this.document.body, 'backdrop-no-scroll');
+    }
+
     // preventDefault does not work with Renderer2.listen method; add event listener directly to document instead
     this.document.addEventListener(
       'touchmove',
@@ -110,7 +121,10 @@ export class PopoverComponent implements AfterViewInit, OnChanges, OnDestroy {
   }
 
   private releaseScroll() {
-    this.renderer.removeClass(this.document.body, 'backdrop-no-scroll'); // TODO use our own class instead of relying on Ionic?
+    if (this.isFirstToLockScroll) {
+      this.renderer.removeClass(this.document.body, 'backdrop-no-scroll');
+    }
+
     this.document.removeEventListener(
       'touchmove',
       this.preventEvent,
