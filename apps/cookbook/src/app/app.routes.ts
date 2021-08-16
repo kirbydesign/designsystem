@@ -1,7 +1,8 @@
 import { Routes } from '@angular/router';
 
-import { IntroComponent } from './intro/intro.component';
 import { HomeComponent } from './home/home.component';
+import { IntroComponent } from './intro/intro.component';
+import { LayoutRecipesComponent } from './layout-recipes/layout-recipes.component';
 
 export const routes: Routes = [
   {
@@ -34,6 +35,10 @@ export const routes: Routes = [
       {
         path: 'changelog',
         loadChildren: () => import('./changelog/changelog.module').then((m) => m.ChangelogModule),
+      },
+      {
+        path: 'layout-recipes',
+        component: LayoutRecipesComponent,
       },
     ],
   },
