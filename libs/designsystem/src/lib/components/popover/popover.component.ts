@@ -90,7 +90,7 @@ export class PopoverComponent implements AfterViewInit, OnChanges, OnDestroy {
     this.hide();
   }
 
-  placePopoverAboveClosestModal() {
+  private placePopoverAboveClosestModal() {
     const closestIonModal = this.elementRef.nativeElement.closest('ion-modal');
     if (closestIonModal) {
       this.zIndex = parseInt(closestIonModal.style.zIndex) + 1;
@@ -178,17 +178,17 @@ export class PopoverComponent implements AfterViewInit, OnChanges, OnDestroy {
     const contentCanFitRightOfTarget =
       availableSpaceRight >= contentWidth + this.POPOVER_BODY_PADDING;
     const openRight = contentCanFitRightOfTarget || availableSpaceRight >= availableSpaceLeft;
-    if (this.popout === HorizontalDirection.left || !openRight) {
-      // Open left:
-      const rightPxValue = `${viewPortWidth - targetDimensions.right}px`;
-      this.renderer.removeStyle(popoverElement, 'left');
-      this.renderer.setStyle(popoverElement, 'right', rightPxValue);
-    } else {
-      // Open right:
-      const leftPxValue = `${targetDimensions.left}px`;
-      this.renderer.removeStyle(popoverElement, 'right');
-      this.renderer.setStyle(popoverElement, 'left', leftPxValue);
-    }
+
+    const [direction, oppositeDirection] =
+      this.popout === HorizontalDirection.left || !openRight
+        ? ['left', 'right']
+        : ['right', 'left'];
+
+    const pxValue =
+      direction === 'left' ? viewPortWidth - targetDimensions.right : targetDimensions.left;
+
+    this.renderer.removeStyle(popoverElement, direction);
+    this.renderer.setStyle(popoverElement, oppositeDirection, `${pxValue}px`);
   }
 
   private positionVertically(
