@@ -72,14 +72,7 @@ export class PopoverComponent implements AfterViewInit, OnChanges, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    const ionModal = this.elementRef.nativeElement.closest('ion-modal');
-    if (ionModal) {
-      this.zIndex = parseInt(ionModal.style.zIndex) + 1;
-      this.elementRef.nativeElement.style.zIndex = `${this.zIndex}`;
-    } else {
-      this.zIndex = parseInt(DesignTokenHelper.zLayer('popover'));
-    }
-
+    this.placePopoverAboveClosestModal();
     this.renderer.removeChild(
       this.elementRef.nativeElement.parentElement,
       this.elementRef.nativeElement
@@ -95,6 +88,16 @@ export class PopoverComponent implements AfterViewInit, OnChanges, OnDestroy {
 
   ngOnDestroy(): void {
     this.hide();
+  }
+
+  placePopoverAboveClosestModal() {
+    const closestIonModal = this.elementRef.nativeElement.closest('ion-modal');
+    if (closestIonModal) {
+      this.zIndex = parseInt(closestIonModal.style.zIndex) + 1;
+      this.elementRef.nativeElement.style.zIndex = `${this.zIndex}`;
+    } else {
+      this.zIndex = parseInt(DesignTokenHelper.zLayer('popover'));
+    }
   }
 
   // document.removeEventListener needs the exact same event handler & options reference:
