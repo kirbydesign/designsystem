@@ -203,18 +203,21 @@ export class PopoverComponent implements AfterViewInit, OnChanges, OnDestroy {
     const availableSpaceUp = targetDimensions.top;
     const contentCanFitBelowTarget =
       availableSpaceDown >= contentHeight + this.POPOVER_BODY_PADDING;
-    const openDown = contentCanFitBelowTarget || availableSpaceDown >= availableSpaceUp;
-    if (openDown) {
-      // Open down:
-      const topPxValue = `${targetDimensions.bottom}px`;
-      this.renderer.removeStyle(popoverElement, 'bottom');
-      this.renderer.setStyle(popoverElement, 'top', topPxValue);
-    } else {
-      // Open up:
-      const bottomPxValue = `${viewPortHeight - targetDimensions.top}px`;
-      this.renderer.removeStyle(popoverElement, 'top');
-      this.renderer.setStyle(popoverElement, 'bottom', bottomPxValue);
-      // Ensure target element is elevated above any shadow inside popover, i.e. content wrapped in Card:
+
+    const isAvailableSpaceBelow =
+      contentCanFitBelowTarget || availableSpaceDown >= availableSpaceUp;
+    const [direction, oppositeDirection] = isAvailableSpaceBelow
+      ? ['bottom', 'top']
+      : ['top', 'bottom'];
+
+    const pxValue =
+      direction === 'bottom' ? targetDimensions.bottom : viewPortHeight - targetDimensions.top;
+
+    this.renderer.removeStyle(popoverElement, direction);
+    this.renderer.setStyle(popoverElement, oppositeDirection, `${pxValue}px`);
+
+    if (direction === 'top') {
+      // Ensure target is elevated above shadows in popover, i.e. content wrapped in Card:
       this.renderer.setStyle(this.targetElement, 'z-index', `${this.zIndex + 1}`);
       this.renderer.setStyle(this.targetElement, 'pointer-events', 'none');
     }
