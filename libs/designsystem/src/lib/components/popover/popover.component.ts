@@ -28,21 +28,30 @@ export enum HorizontalDirection {
   styleUrls: ['./popover.component.scss'],
 })
 export class PopoverComponent implements AfterViewInit, OnChanges, OnDestroy {
+  // removeEventListener same instance of event handler & options
+  private readonly preventScrollEventListenerOptions = {
+    passive: false,
+  } as EventListenerOptions;
+
+  private readonly POPOVER_BODY_PADDING = 12;
+
+  private isShowing: boolean = false;
+  private isFirstToLockScroll: boolean;
+  private zIndex: number;
+  private targetElement: HTMLElement;
+  private document: Document;
+
   @ViewChild('wrapper', { static: true, read: ElementRef })
   wrapperElement: ElementRef<HTMLDivElement>;
+
+  @Input()
+  popout: HorizontalDirection = HorizontalDirection.right;
 
   @Input()
   target: HTMLElement | ElementRef<HTMLElement>;
 
   @Output()
   willHide = new EventEmitter<void>();
-
-  private targetElement: HTMLElement;
-
-  private isShowing = false;
-
-  @Input()
-  popout: HorizontalDirection = HorizontalDirection.right;
 
   @HostListener('click')
   _backdropClick() {
@@ -58,27 +67,19 @@ export class PopoverComponent implements AfterViewInit, OnChanges, OnDestroy {
     }
   }
 
-  private document: Document;
-
-  /* 
-     Removing the 'backdrop-no-scroll' class when used in a modal makes the entire 
-     page scrollable. This is not desired. Therefore track if scroll is already locked when 
-     the popover attempts to lock it. 
-  */
-  private isFirstToLockScroll: boolean;
-
   constructor(private elementRef: ElementRef<HTMLElement>, private renderer: Renderer2) {
     this.document = elementRef.nativeElement.ownerDocument;
   }
-
-  private zIndex = parseInt(DesignTokenHelper.zLayer('popover'));
 
   ngAfterViewInit(): void {
     const ionModal = this.elementRef.nativeElement.closest('ion-modal');
     if (ionModal) {
       this.zIndex = parseInt(ionModal.style.zIndex) + 1;
       this.elementRef.nativeElement.style.zIndex = `${this.zIndex}`;
+    } else {
+      this.zIndex = parseInt(DesignTokenHelper.zLayer('popover'));
     }
+
     this.renderer.removeChild(
       this.elementRef.nativeElement.parentElement,
       this.elementRef.nativeElement
@@ -95,11 +96,6 @@ export class PopoverComponent implements AfterViewInit, OnChanges, OnDestroy {
   ngOnDestroy(): void {
     this.hide();
   }
-
-  // document.removeEventListener needs the exact same event handler & options reference:
-  private readonly preventScrollEventListenerOptions = {
-    passive: false,
-  } as EventListenerOptions;
 
   // document.removeEventListener needs the exact same event handler & options reference:
   private preventEvent(event: TouchEvent) {
@@ -154,7 +150,6 @@ export class PopoverComponent implements AfterViewInit, OnChanges, OnDestroy {
     this.isShowing = false;
   }
 
-  private readonly POPOVER_BODY_PADDING = 12;
   private positionWrapper() {
     const targetDimensions = this.targetElement.getBoundingClientRect();
 
