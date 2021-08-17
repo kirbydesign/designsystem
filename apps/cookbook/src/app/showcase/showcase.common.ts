@@ -1,6 +1,7 @@
 import { DropdownShowcaseComponent } from '~/app/showcase/dropdown-showcase/dropdown-showcase.component';
 
 import { ExamplesModule } from '../examples/examples.module';
+import { LayoutRecipesComponent } from '../layout-recipes/layout-recipes.component';
 import { DividerShowcaseComponent } from '../showcase/divider-showcase/divider-showcase.component';
 import { ItemShowcaseComponent } from '../showcase/item-showcase/item-showcase.component';
 import { ReorderListShowcaseComponent } from '../showcase/reorder-list-showcase/reorder-list-showcase.component';
@@ -99,6 +100,7 @@ export const COMPONENT_EXPORTS: any[] = [
   RadioShowcaseComponent,
   RangeShowcaseComponent,
   LinkShowcaseComponent,
+  LayoutRecipesComponent,
 ];
 
 export const COMPONENT_DECLARATIONS: any[] = [...COMPONENT_EXPORTS, ShowcaseComponent];
