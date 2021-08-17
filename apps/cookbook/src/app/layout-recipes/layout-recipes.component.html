@@ -16,7 +16,7 @@
     <tbody>
       <tr>
         <td>
-          <a href="/examples/grid-layout-core">Core - single grid container</a>
+          <a [routerLink]="['/showcase/grid-layout-core']">Core - single grid container</a>
         </td>
         <td>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur neque eaque
@@ -42,4 +42,9 @@
       </tr>
     </tbody>
   </table>
+  <cookbook-iphone src="/examples/grid-layout-core" showExternalLink="true"></cookbook-iphone>
+  <div class="example">
+    <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
+    <cookbook-grid-layout-core-example></cookbook-grid-layout-core-example>
+  </div>
 </article>

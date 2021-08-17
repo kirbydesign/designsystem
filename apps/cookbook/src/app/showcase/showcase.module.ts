@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { KirbyModule } from '@kirbydesign/designsystem';
 
 import { IphoneModule } from '../iphone/iphone.module';
+import { LayoutRecipesComponent } from '../layout-recipes/layout-recipes.component';
 import { ApiDescriptionEventsComponent } from '../shared/api-description/api-description-events/api-description-events.component';
 import { ApiDescriptionMethodsComponent } from '../shared/api-description/api-description-methods/api-description-methods.component';
 import { ApiDescriptionPropertiesComponent } from '../shared/api-description/api-description-properties/api-description-properties.component';
@@ -34,6 +35,7 @@ import { COMPONENT_DECLARATIONS, COMPONENT_EXPORTS, COMPONENT_IMPORTS } from './
     ApiDescriptionMethodsComponent,
     ApiDescriptionPropertiesComponent,
     DividerShowcaseComponent,
+    LayoutRecipesComponent,
   ],
   exports: COMPONENT_EXPORTS,
 })
