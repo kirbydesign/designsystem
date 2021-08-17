@@ -15,6 +15,7 @@ import { COMPONENT_DECLARATIONS } from './examples.common';
 import { ExamplesSharedModule } from './examples.shared.module';
 import { FlagExampleModule } from './flag-example/flag-example.module';
 import { FormFieldExamplesModule } from './form-field-example/form-field-example.module';
+import { GridLayoutExamplesModule } from './grid-layout-example/grid-layout-example.module';
 import { ItemExampleModule } from './item-example/item-example.module';
 import { LinkExampleModule } from './link-example/link-example.module';
 import { ListExamplesModule } from './list-example/list-example.module';
@@ -46,6 +47,7 @@ const IMPORTS = [
   RangeExampleModule,
   LinkExampleModule,
   ModalExampleModule,
+  GridLayoutExamplesModule,
 ];
 
 @NgModule({
