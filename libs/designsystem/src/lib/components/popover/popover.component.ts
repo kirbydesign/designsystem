@@ -156,21 +156,21 @@ export class PopoverComponent implements AfterViewInit, OnDestroy {
 
     this.renderer.appendChild(this.document.body, this.elementRef.nativeElement);
 
-    const popoverElement = this.wrapperElement.nativeElement;
-    const popoverDimensions = popoverElement.getBoundingClientRect();
-    const viewport = popoverElement.ownerDocument.defaultView;
-    this.positionHorizontally(viewport, popoverElement, targetDimensions, popoverDimensions);
-    this.positionVertically(viewport, popoverElement, targetDimensions, popoverDimensions);
+    const wrapperElement = this.wrapperElement.nativeElement;
+    const wrapperDimensions = wrapperElement.getBoundingClientRect();
+    const viewport = wrapperElement.ownerDocument.defaultView;
+    this.positionHorizontally(viewport, wrapperElement, targetDimensions, wrapperDimensions);
+    this.positionVertically(viewport, wrapperElement, targetDimensions, wrapperDimensions);
   }
 
   private positionHorizontally(
     viewPort: Window,
-    popoverElement: HTMLDivElement,
+    wrapperElement: HTMLDivElement,
     targetDimensions: DOMRect,
-    popoverDimensions: DOMRect
+    wrapperDimensions: DOMRect
   ) {
     const viewPortWidth = viewPort.innerWidth;
-    const contentWidth = popoverDimensions.width;
+    const contentWidth = wrapperDimensions.width;
     const availableSpaceRight = viewPortWidth - targetDimensions.left;
     const availableSpaceLeft = targetDimensions.right;
     const contentCanFitRightOfTarget =
@@ -185,18 +185,18 @@ export class PopoverComponent implements AfterViewInit, OnDestroy {
     const pxValue =
       direction === 'left' ? viewPortWidth - targetDimensions.right : targetDimensions.left;
 
-    this.renderer.removeStyle(popoverElement, direction);
-    this.renderer.setStyle(popoverElement, oppositeDirection, `${pxValue}px`);
+    this.renderer.removeStyle(wrapperElement, direction);
+    this.renderer.setStyle(wrapperElement, oppositeDirection, `${pxValue}px`);
   }
 
   private positionVertically(
     viewPort: Window,
-    popoverElement: HTMLDivElement,
+    wrapperElement: HTMLDivElement,
     targetDimensions: DOMRect,
-    popoverDimensions: DOMRect
+    wrapperDimensions: DOMRect
   ) {
     const viewPortHeight = viewPort.innerHeight;
-    const contentHeight = popoverDimensions.height;
+    const contentHeight = wrapperDimensions.height;
     const availableSpaceDown = viewPortHeight - targetDimensions.bottom;
     const availableSpaceUp = targetDimensions.top;
     const contentCanFitBelowTarget =
@@ -211,8 +211,8 @@ export class PopoverComponent implements AfterViewInit, OnDestroy {
     const pxValue =
       direction === 'bottom' ? targetDimensions.bottom : viewPortHeight - targetDimensions.top;
 
-    this.renderer.removeStyle(popoverElement, direction);
-    this.renderer.setStyle(popoverElement, oppositeDirection, `${pxValue}px`);
+    this.renderer.removeStyle(wrapperElement, direction);
+    this.renderer.setStyle(wrapperElement, oppositeDirection, `${pxValue}px`);
 
     if (direction === 'top') {
       // Ensure target is elevated above shadows in popover, i.e. content wrapped in Card:
