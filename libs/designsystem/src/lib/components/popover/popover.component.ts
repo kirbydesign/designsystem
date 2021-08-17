@@ -5,11 +5,9 @@ import {
   EventEmitter,
   HostListener,
   Input,
-  OnChanges,
   OnDestroy,
   Output,
   Renderer2,
-  SimpleChanges,
   ViewChild,
 } from '@angular/core';
 
@@ -27,7 +25,7 @@ export enum HorizontalDirection {
   `,
   styleUrls: ['./popover.component.scss'],
 })
-export class PopoverComponent implements AfterViewInit, OnChanges, OnDestroy {
+export class PopoverComponent implements AfterViewInit, OnDestroy {
   // removeEventListener same instance of event handler & options
   private readonly preventScrollEventListenerOptions = {
     passive: false,
@@ -38,7 +36,6 @@ export class PopoverComponent implements AfterViewInit, OnChanges, OnDestroy {
   private isShowing: boolean = false;
   private isFirstToLockScroll: boolean;
   private zIndex: number;
-  private targetElement: HTMLElement;
   private document: Document;
 
   @ViewChild('wrapper', { static: true, read: ElementRef })
@@ -52,6 +49,14 @@ export class PopoverComponent implements AfterViewInit, OnChanges, OnDestroy {
 
   @Output()
   willHide = new EventEmitter<void>();
+
+  private get targetElement(): HTMLElement {
+    if (this.target instanceof ElementRef) {
+      return this.target.nativeElement;
+    } else {
+      return this.target;
+    }
+  }
 
   @HostListener('click')
   _backdropClick() {
@@ -77,13 +82,6 @@ export class PopoverComponent implements AfterViewInit, OnChanges, OnDestroy {
       this.elementRef.nativeElement.parentElement,
       this.elementRef.nativeElement
     );
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.target.currentValue) {
-      this.targetElement =
-        this.target instanceof ElementRef ? this.target.nativeElement : this.target;
-    }
   }
 
   ngOnDestroy(): void {
