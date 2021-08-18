@@ -86,11 +86,12 @@ export class ChartJSService {
     this.chart.data.datasets = this.createDatasets(oldDatasets, highlightedElements);
   }
 
-  private getExistingChartAnnotations(): AnnotationOptions[] | undefined {
-    /* Plugin options type uses a utility type to mark all members as optional. 
-       To not have to import this from the utility-types npm package, return as 
-       AnnotationOptions[]; that is what we get in the end anyways */
-    return this.chart.options.plugins?.annotation?.annotations as AnnotationOptions[];
+  private getExistingChartAnnotations(): AnnotationOptions[] {
+    const annotations = this.chart.options.plugins?.annotation?.annotations;
+    /* In browser chart.js might return annotations as a Proxy object; force it to be an array.
+       Each annotationOption in the resulting array  will also be a Proxy object. 
+       But internally chart.js will just work with them as normal values */
+    return Object.keys(annotations).map((key) => annotations[key]);
   }
 
   private destructivelyUpdateType(type: ChartType, customOptions?: ChartOptions) {
