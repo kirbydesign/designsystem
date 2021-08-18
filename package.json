@@ -1,6 +1,6 @@
 {
   "name": "designsystem",
-  "version": "2.0.13",
+  "version": "3.0.7",
   "description": "Kirby Design Components",
   "engines": {
     "node": "^14.16"
@@ -91,13 +91,15 @@
     "@ionic/angular": "^5.5.2",
     "@nrwl/angular": "11.5.2",
     "@types/prismjs": "1.9.0",
+    "chart.js": "3.3.2",
+    "chartjs-plugin-annotation": "^1.0.2",
     "date-fns": "2.21.1",
     "date-fns-tz": "1.1.4",
     "firebase": "8.3.1",
     "highcharts": "8.0.4",
     "inputmask": "^5.0.5",
     "ngx-ui-scroll": "^2.0.1",
-    "prismjs": "1.23.0",
+    "prismjs": "1.24.0",
     "reflect-metadata": "0.1.8",
     "rxjs": "6.5.5",
     "tslib": "^2.0.3",

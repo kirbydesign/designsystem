@@ -202,7 +202,9 @@ export class ModalExampleDefaultComponent {
   embeddedCodeSnippet = config.embeddedCodeSnippet;
   closeModalCodeSnippet = config.closeModalCodeSnippet;
 
-  showDummyKeyboard = !!this.window.sessionStorage.getItem('kirby-cookbook-show-dummy-keyboard');
+  showDummyKeyboard = !!this.windowRef.nativeWindow.sessionStorage.getItem(
+    'kirby-cookbook-show-dummy-keyboard'
+  );
   showPageProgress = false;
   showFooter = false;
   showDummyContent = true;
@@ -214,7 +216,7 @@ export class ModalExampleDefaultComponent {
   dummyBackgroundTexts = new Array(100).map(() => '');
   preventInteraction = false;
 
-  constructor(private modalController: ModalController, private window: WindowRef) {}
+  constructor(private modalController: ModalController, private windowRef: WindowRef) {}
 
   private async showOverlay(flavor: 'modal' | 'drawer') {
     let title = flavor === 'modal' ? 'Modal Title' : 'Drawer Title';

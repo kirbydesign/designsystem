@@ -10,6 +10,7 @@ import { MockCalendarComponent } from './components/mock.calendar.component';
 import { MockCardFooterComponent } from './components/mock.card-footer.component';
 import { MockCardHeaderComponent } from './components/mock.card-header.component';
 import { MockCardComponent } from './components/mock.card.component';
+import { MockChartDeprecatedComponent } from './components/mock.chart-deprecated.component';
 import { MockChartComponent } from './components/mock.chart.component';
 import { MockCheckboxComponent } from './components/mock.checkbox.component';
 import { MockChipComponent } from './components/mock.chip.component';
@@ -71,6 +72,7 @@ export const MOCK_COMPONENTS = [
   MockCardHeaderComponent,
   MockCardComponent,
   MockChartComponent,
+  MockChartDeprecatedComponent,
   MockCheckboxComponent,
   MockChipComponent,
   MockDividerComponent,

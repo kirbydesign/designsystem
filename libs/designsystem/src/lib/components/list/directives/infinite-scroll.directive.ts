@@ -52,7 +52,7 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
    */
   private offset = 0.8;
 
-  constructor(private elementRef: ElementRef, private window: WindowRef, private zone: NgZone) {}
+  constructor(private elementRef: ElementRef, private windowRef: WindowRef, private zone: NgZone) {}
 
   ngAfterViewInit(): void {
     /**
@@ -130,7 +130,7 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
 
     const distanceToViewBottom = boundindClientRect.bottom;
     const elementHeight = boundindClientRect.height;
-    const viewHeight = this.window.innerHeight;
+    const viewHeight = this.windowRef.nativeWindow.innerHeight;
 
     return { distanceToViewBottom, elementHeight, viewHeight };
   }

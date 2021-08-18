@@ -32,7 +32,7 @@ export class ModalWrapperTestBuilder {
     providers: [
       {
         provide: WindowRef,
-        useValue: window,
+        useValue: <WindowRef>{ nativeWindow: window },
       },
     ],
     declarations: [

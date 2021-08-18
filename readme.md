@@ -51,7 +51,7 @@ npm i @kirbydesign/designsystem
 
 ### Include KirbyModule
 
-Import the `KirbyModule` in your `AppModule`:
+Import the `KirbyModule` in your `AppModule` :
 
 ```ts
 import { KirbyModule } from '@kirbydesign/designsystem';
@@ -70,19 +70,26 @@ export class AppModule {}
 
 ### Sass
 
-Include the Kirby global styles in your app:
+Include the Kirby global styles in your app, e.g., in `src/styles.scss`:
 
-- Eg. in `src/styles.scss`:
+```css
+@import '~@kirbydesign/designsystem/scss/global-styles';
+```
 
-  ```css
-  @import '~@kirbydesign/designsystem/scss/global-styles';
-  ```
+In each `.scss` file where you need to access the Sass utility functions from Kirby (e.g. [colors][kirby.cookbook.colors] or [fonts][kirby.cookbook.fonts]) you must import the scss utilities:
 
-  In each `.scss` file where you need to access the Sass utility functions from Kirby (e.g. [colors][kirby.cookbook.colors] or [fonts][kirby.cookbook.fonts]) you must import the scss utilities:
+```css
+@import '~@kirbydesign/designsystem/scss/utils';
+```
 
-  ```css
-  @import '~@kirbydesign/designsystem/scss/utils';
-  ```
+#### Generic Print Styles (Optional)
+Kirby also provides a generic print stylesheet. It includes the basics. You most likely have to add local print styles specific to your app as well.
+
+Import it into your app, e.g., in `src/styles.scss` or in your local print stylesheet if you have one:
+
+```css
+@import '~@kirbydesign/designsystem/scss/print';
+```
 
 ### Testing
 
@@ -109,7 +116,7 @@ describe('AppComponent', () => {
 });
 ```
 
-For unit test performance reasons it's highly recommended to utilize these modules, since they provide a template-less implementation of the Kirby Components, but still translude content through `<ng-content></ng-content>` and provide `@Input`-decorated properties and `@Output`-decorated `EventEmitter`s, without
+For unit test performance reasons it's highly recommended to utilize these modules, since they provide a template-less implementation of the Kirby Components, but still translude content through `<ng-content></ng-content>` and provide `@Input` -decorated properties and `@Output` -decorated `EventEmitter` s, without
 having to reflow the DOM, execute component logic etc.
 
 ### Migration Guide
@@ -120,21 +127,21 @@ To upgrade, please perform the following tasks:
 
   #### Simplified namespaces
 
-  Import `@kirbydesign/designsystem` instead of `@kirbydesign/designsystem/list` or `@kirbydesign/designsystem/modal`. This can be done by executing the following commands (Mac/Linux and Windows respectively):
+  Import `@kirbydesign/designsystem` instead of `@kirbydesign/designsystem/list` or `@kirbydesign/designsystem/modal` . This can be done by executing the following commands (Mac/Linux and Windows respectively):
 
   ##### Mac / Linux
 
-  ```sh
+```sh
   cd <root folder of your application>
   find . -name "*.ts" ! -name "*.spec.ts" -type f -exec sed -i '' -e "s|from '@kirbydesign/designsystem/.*';$|from '@kirbydesign/designsystem';|g" {} \;
   find . -name "*.spec.ts" -type f -exec sed -i '' -e "s|from '@kirbydesign/designsystem/testing';$|from '@kirbydesign/designsystem/testing-jasmine';|g" {} \;
-  ```
+```
 
-  _Note: If you're using `jest` you should replace with `@kirbydesign/designsystem/testing-jest` instead._
+_Note: If you're using `jest` you should replace with `@kirbydesign/designsystem/testing-jest` instead._
 
-  ##### Windows
+##### Windows
 
-  ```sh
+```sh
   cd <root folder of your application>
   Get-ChildItem "*.ts" -Recurse | ForEach {
   (Get-Content $_ | ForEach  { $_ `
@@ -142,53 +149,53 @@ To upgrade, please perform the following tasks:
     -replace "from '@kirbydesign/designsystem/testing';$", "from '@kirbydesign/designsystem/testing-jasmine';" `
   }) | Set-Content $_
   }
-  ```
+```
 
-  _Note: If you're using `jest` you should replace with `@kirbydesign/designsystem/testing-jest` instead._
+_Note: If you're using `jest` you should replace with `@kirbydesign/designsystem/testing-jest` instead._
 
-  #### Change TypeScript configuration
+#### Change TypeScript configuration
 
-  Due to Kirby not being distributed as a source-distribution package any more, changes to `tsconfig.json`, `tsconfig.app.json` as well as `tsconfig.spec.json` should be reverted:
+Due to Kirby not being distributed as a source-distribution package any more, changes to `tsconfig.json` , `tsconfig.app.json` as well as `tsconfig.spec.json` should be reverted:
 
-  In `tsconfig.json`:
+In `tsconfig.json` :
 
-  - Remove the line `"./node_modules/@kirbydesign/designsystem/**/*.ts"` from the `includes`-array
+- Remove the line `"./node_modules/@kirbydesign/designsystem/**/*.ts"` from the `includes`-array
 
-  In `tsconfig.app.json`:
+In `tsconfig.app.json` :
 
-  - Remove the line `"./node_modules/@kirbydesign/designsystem/**/*.ts"` from the `includes`-array
-  - Remove the line `"../node_modules/@kirbydesign/designsystem/testing/**/*.*"` from the `excludes`-array
+- Remove the line `"./node_modules/@kirbydesign/designsystem/**/*.ts"` from the `includes`-array
+- Remove the line `"../node_modules/@kirbydesign/designsystem/testing/**/*.*"` from the `excludes` -array
 
-  In `tsconfig.spec.json`:
+In `tsconfig.spec.json` :
 
-  - Remove the line `"../node_modules/@kirbydesign/designsystem/**/*.ts",` from the `includes`-array
+- Remove the line `"../node_modules/@kirbydesign/designsystem/**/*.ts",` from the `includes`-array
 
-  #### Changed dependencies
+#### Changed dependencies
 
-  Remove any previously installed dev-dependencies for `sass-extract`, `sass-extract-loader` and `ng-mocks` _(unless otherwise used in your application)_.
-  This can be done by the following command:
+Remove any previously installed dev-dependencies for `sass-extract` , `sass-extract-loader` and `ng-mocks` _(unless otherwise used in your application)_.
+This can be done by the following command:
 
-  `npm uninstall --save-dev sass-extract sass-extract-loader ng-mocks`
+`npm uninstall --save-dev sass-extract sass-extract-loader ng-mocks`
 
-  #### Deprecation
+#### Deprecation
 
-  The following legacy components have been removed:
+The following legacy components have been removed:
 
-  - `ListItemComponent` (`<kirby-list-item>`)
-  - `ListFlexItemComponent` (`<kirby-list-flex-item>`)
-  - `ListCellComponent` (`<kirby-list-cell>`)
-  - `ListCellLineComponent` (`<kirby-list-cell-line>`)
+- `ListItemComponent` (`<kirby-list-item>`)
+- `ListFlexItemComponent` (`<kirby-list-flex-item>`)
+- `ListCellComponent` (`<kirby-list-cell>`)
+- `ListCellLineComponent` (`<kirby-list-cell-line>`)
 
-  The following directives have been deprecated and will be removed in future versions:
+The following directives have been deprecated and will be removed in future versions:
 
-  - `ListItemDirective` (`[kirbyListItem]`)
-  - `ListFlexItemDirective` (`[kirbyListFlexItem]`)
+- `ListItemDirective` (`[kirbyListItem]`)
+- `ListFlexItemDirective` (`[kirbyListFlexItem]`)
 
-  _Please see the [list documentation][kirby.cookbook.list] on how to use the list component(s) and directives._
+_Please see the [list documentation][kirby.cookbook.list] on how to use the list component(s) and directives._
 
 ### Icons
 
-Kirby comes bundled with a default set of icons. Make sure the `.svg` files used by Kirby are copied to your output folder by adding the following to `build > options > assets` in `angular.json`:
+Kirby comes bundled with a default set of icons. Make sure the `.svg` files used by Kirby are copied to your output folder by adding the following to `build > options > assets` in `angular.json` :
 
 ```json
 {
@@ -244,7 +251,7 @@ A basic walkthrough is outlined in the structure below:
 ## Scripts
 
 Below is an overview of most widely used scripts, available for this project.  
-Use them in your terminal like: `npm run <script>`:
+Use them in your terminal like: `npm run <script>` :
 
 | Command           | Description                                                                                                                                            |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -277,7 +284,7 @@ Developing new features should also include that they should be tested.
 
    The easiest way to do this is to build a distribution package, and install it in your own project.
 
-   ```
+```
    # 1. From the root of this repository, run (this may take a minute or two):
    npm run publish
 
@@ -288,7 +295,7 @@ Developing new features should also include that they should be tested.
    #     and <version> is the version of designsystem that was build (in the previous step)
 
    # You do NOT want to commit the changes made to package.json and package-lock.json to your code base!
-   ```
+```
 
 ## Polyfills
 
@@ -296,7 +303,7 @@ Some features of Kirby requires polyfills to ensure compability across all major
 
 To enable the polyfill, you register a _polyfill loader_ that checks whether the polyfill is needed or the feature is already supported by the browser (and can skip requesting the polyfill).  
 To use the sizing feature of Kirby Card across all major browsers, you must copy additional files from the Kirby package to your output folder.  
-Add the following to `build > options > assets` in `angular.json`:
+Add the following to `build > options > assets` in `angular.json` :
 
 ```json
 {
@@ -317,7 +324,7 @@ Add the following to `build > options > assets` in `angular.json`:
 }
 ```
 
-Finally, add the following to `index.html`:
+Finally, add the following to `index.html` :
 
 ```html
 <head>

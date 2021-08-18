@@ -23,6 +23,8 @@ import { FlagExampleComponent } from './flag-example/flag-example.component';
 import { FontsExampleComponent } from './fonts-example/fonts-example.component';
 import { FormFieldExampleComponent } from './form-field-example/form-field-example.component';
 import { GridExampleComponent } from './grid-example/grid-example.component';
+import { GridLayoutCoreExampleComponent } from './grid-layout-example/grid-layout-core-example/grid-layout-core-example.component';
+import { GridLayoutExtendedExampleComponent } from './grid-layout-example/grid-layout-extended-example/grid-layout-extended-example.component';
 import { IconExampleComponent } from './icon-example/icon-example.component';
 import { ItemExampleComponent } from './item-example/item-example.component';
 import { LinkExampleComponent } from './link-example/link-example.component';
@@ -47,7 +49,7 @@ import { SlideButtonExampleComponent } from './slide-button-example/slide-button
 import { CookbookExampleCardContentComponent } from './slides-example/example-card-content';
 import { SlidesExampleComponent } from './slides-example/slides-example.component';
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
-import { StockChartExampleComponent } from './stock-chart-example/stock-chart-example.component';
+import { StockChartDeprecatedExampleComponent } from './stock-chart-deprecated-example/stock-chart-deprecated-example.component';
 import { TabExampleComponent } from './tabs-example/tab/tab-example.component';
 import { TabsExampleComponent } from './tabs-example/tabs-example.component';
 import { ToastExampleComponent } from './toast-example/toast-example.component';
@@ -80,6 +82,8 @@ export const COMPONENT_DECLARATIONS: any[] = [
   ListNoShapeExampleComponent,
   ListVirtualScrollExampleComponent,
   GridExampleComponent,
+  GridLayoutCoreExampleComponent,
+  GridLayoutExtendedExampleComponent,
   AvatarExampleComponent,
   FontsExampleComponent,
   SpinnerExampleComponent,
@@ -113,7 +117,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   DividerExampleComponent,
   ReorderListExampleComponent,
   DropdownExampleComponent,
-  StockChartExampleComponent,
+  StockChartDeprecatedExampleComponent,
   ProgressCircleExampleComponent,
   FlagExampleComponent,
   SlidesExampleComponent,

@@ -1,0 +1,12 @@
+// Generic reset
+// This targets *all* elements so be careful which declarations are made
+@media print {
+  *,
+  *::before,
+  *::after {
+    box-shadow: none !important;
+    max-width: none !important;
+    border-radius: 0 !important;
+    contain: initial !important;
+  }
+}

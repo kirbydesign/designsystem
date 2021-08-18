@@ -1,0 +1,11 @@
+@media print {
+  kirby-router-outlet {
+    // Part of making sure you can print more than a single page
+    display: contents !important;
+
+    // Part of making sure you can print more than a single page
+    ion-router-outlet {
+      display: contents !important;
+    }
+  }
+}

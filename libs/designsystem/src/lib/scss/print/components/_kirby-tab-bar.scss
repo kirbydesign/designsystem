@@ -1,0 +1,25 @@
+@media print {
+  kirby-tab-bar {
+    // Part of making sure you can print more than a single page
+    display: contents !important;
+
+    // Part of making sure you can print more than a single page
+    ion-tabs {
+      display: contents !important;
+    }
+
+    ion-tab-bar {
+      display: none !important;
+    }
+
+    ion-content::part(background) {
+      display: none !important;
+    }
+
+    // Part of making sure you can print more than a single page
+    .inner-scroll,
+    ion-content::part(scroll) {
+      display: contents !important;
+    }
+  }
+}

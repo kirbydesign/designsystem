@@ -7,6 +7,7 @@ import { IconRegistryService, KirbyModule } from '@kirbydesign/designsystem';
 import { AccordionExampleModule } from './accordion-example/accordion-example.module';
 import { AvatarExampleModule } from './avatar-example/avatar-example.module';
 import { CardExampleComponent } from './card-example/card-example.component';
+import { ChartDeprecatedExampleModule } from './chart-deprecated-example/chart-deprecated-example.module';
 import { ChartExampleModule } from './chart-example/chart-example.module';
 import { CheckboxExampleModule } from './checkbox-example/checkbox-example.module';
 import { DropdownExampleModule } from './dropdown-example/dropdown-example.module';
@@ -33,6 +34,7 @@ const IMPORTS = [
   ListVirtualScrollExamplesModule,
   DropdownExampleModule,
   SegmentedControlExampleModule,
+  ChartDeprecatedExampleModule,
   ChartExampleModule,
   ProgressCircleExampleModule,
   AvatarExampleModule,

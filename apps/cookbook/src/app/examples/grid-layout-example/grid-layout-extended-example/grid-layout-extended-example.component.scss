@@ -1,0 +1,132 @@
+@import './libs/designsystem/src/lib/scss/utils';
+
+// Grid
+$columns: 12;
+$gap: size('m');
+
+// Core example
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+  gap: $gap;
+}
+
+// Core example
+.grid-item {
+  grid-column: span $columns;
+}
+
+// Core example
+@include media('>=medium') {
+  .half\@tablet-up {
+    grid-column: span ($columns / 2);
+  }
+}
+
+// Core example
+@include media('>=large') {
+  .half\@desktop-up {
+    grid-column: span ($columns / 2);
+  }
+
+  .third\@desktop-up {
+    grid-column: span ($columns / 3);
+  }
+}
+
+// For the sake of example -----------------------------------------------------
+
+// Context
+$gutter: 16px;
+$safe-area: 16px;
+$max-width: 1196px;
+
+main {
+  background-color: var(--kirby-background-color);
+  min-height: 100%;
+}
+
+.max-width-container {
+  max-width: $max-width;
+  margin-inline: auto;
+}
+
+.gutter {
+  padding-inline: $gutter;
+}
+
+.safe-area-inline {
+  padding-inline: $gutter;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+
+.example-text {
+  &,
+  & > p {
+    font-size: clamp(1rem, 5vw, 2rem);
+  }
+}
+
+.align-center {
+  text-align: center;
+}
+
+.not-grid {
+  display: none;
+}
+// -----------------------------------------------------------------------------
+
+// Color bonanza for debugging -------------------------------------------------
+.debug {
+  kirby-card {
+    --kirby-card-main-background-color: var(--kirby-white-contrast);
+    --kirby-card-main-color: var(--kirby-white);
+  }
+
+  h1,
+  h2 {
+    color: #000;
+    background-color: #fff;
+  }
+
+  .not-grid {
+    display: block;
+  }
+
+  .gutter {
+    color: #fff;
+    background-color: blue;
+  }
+
+  .safe-area-inline {
+    background-color: darkcyan;
+  }
+
+  .box {
+    color: #000;
+    background-color: hotpink;
+  }
+
+  #example-1 {
+    background-color: crimson;
+    color: #fff;
+  }
+
+  #example-2 {
+    background-color: rebeccapurple;
+    color: #fff;
+  }
+
+  #example-3 {
+    background-color: deepskyblue;
+    color: #000;
+  }
+}
+// -----------------------------------------------------------------------------
