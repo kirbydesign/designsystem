@@ -7,10 +7,6 @@ import { KirbyModule } from '@kirbydesign/designsystem';
 import { IphoneModule } from '../iphone/iphone.module';
 
 import { LayoutRecipesComponent } from './layout-recipes.component';
-import { GridLayoutCoreExampleComponent } from './recipes/grid-layout-example/grid-layout-core-example/grid-layout-core-example.component';
-import { GridLayoutExtendedExampleComponent } from './recipes/grid-layout-example/grid-layout-extended-example/grid-layout-extended-example.component';
-
-const RECIPES = [GridLayoutCoreExampleComponent, GridLayoutExtendedExampleComponent];
 
 @NgModule({
   imports: [
@@ -24,7 +20,7 @@ const RECIPES = [GridLayoutCoreExampleComponent, GridLayoutExtendedExampleCompon
     KirbyModule,
     IphoneModule,
   ],
-  declarations: [LayoutRecipesComponent, ...RECIPES],
-  exports: [LayoutRecipesComponent, ...RECIPES],
+  declarations: [LayoutRecipesComponent],
+  exports: [LayoutRecipesComponent],
 })
 export class LayoutRecipesModule {}
