@@ -4,7 +4,9 @@ import { RouterModule } from '@angular/router';
 
 import { KirbyModule } from '@kirbydesign/designsystem';
 
+import { ExamplesModule } from '../examples/examples.module';
 import { IphoneModule } from '../iphone/iphone.module';
+import { CodeViewerModule } from '../shared/code-viewer/code-viewer.module';
 
 import { LayoutRecipesComponent } from './layout-recipes.component';
 
@@ -19,6 +21,8 @@ import { LayoutRecipesComponent } from './layout-recipes.component';
     ]),
     KirbyModule,
     IphoneModule,
+    CodeViewerModule,
+    ExamplesModule,
   ],
   declarations: [LayoutRecipesComponent],
   exports: [LayoutRecipesComponent],
