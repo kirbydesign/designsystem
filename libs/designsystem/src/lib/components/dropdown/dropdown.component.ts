@@ -493,8 +493,8 @@ export class DropdownComponent
   @HostListener('keydown.arrowright', ['$event'])
   _onArrowKeys(event: KeyboardEvent) {
     if (this.disabled) return;
+    // Mirror default HTML5 select behaviour - prevent left/right arrows when open:
     if (this.isOpen && (event.key === 'ArrowLeft' || event.key === 'ArrowRight')) {
-      // Mirror default HTML5 select behaviour - prevent left/right arrows when open:
       return;
     }
     const newIndex = this.keyboardHandlerService.handle(event, this.items, this.selectedIndex);
