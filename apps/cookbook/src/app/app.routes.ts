@@ -38,7 +38,8 @@ export const routes: Routes = [
       },
       {
         path: 'layout-recipes',
-        component: LayoutRecipesComponent,
+        loadChildren: () =>
+          import('./layout-recipes/layout-recipes.module').then((m) => m.LayoutRecipesModule),
       },
     ],
   },
