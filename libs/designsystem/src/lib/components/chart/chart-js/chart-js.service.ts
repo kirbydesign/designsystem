@@ -91,7 +91,11 @@ export class ChartJSService {
     /* In browser chart.js might return annotations as a Proxy object; force it to be an array.
        Each annotationOption in the resulting array  will also be a Proxy object. 
        But internally chart.js will just work with them as normal values */
-    return Object.keys(annotations).map((key) => annotations[key]);
+    if (annotations !== undefined) {
+      return Object.keys(annotations).map((key) => annotations[key]);
+    } else {
+      return [];
+    }
   }
 
   private destructivelyUpdateType(type: ChartType, customOptions?: ChartOptions) {
