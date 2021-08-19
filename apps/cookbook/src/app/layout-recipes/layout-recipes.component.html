@@ -9,11 +9,19 @@
   <table>
     <thead>
       <tr>
-        <th>Recipe</th>
-        <th>Description</th>
+        <th scope="col">Recipe</th>
+        <th scope="col">Description</th>
       </tr>
     </thead>
     <tbody>
+      <tr>
+        <td><a [routerLink]="'grid-layout'">Grid Layout</a></td>
+        <td>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed modi porro cum nihil, nam
+          deleniti accusantium delectus vero vitae veritatis esse similique et non necessitatibus
+          sint optio nulla! Repellendus, eligendi.
+        </td>
+      </tr>
       <tr>
         <td>
           <a [routerLink]="'/examples/grid-layout-core'">Core - single grid container</a>
@@ -42,9 +50,4 @@
       </tr>
     </tbody>
   </table>
-  <cookbook-iphone src="/examples/grid-layout-core" showExternalLink="true"></cookbook-iphone>
-  <div class="example">
-    <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
-    <cookbook-grid-layout-core-example></cookbook-grid-layout-core-example>
-  </div>
 </article>

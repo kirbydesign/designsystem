@@ -6,7 +6,4 @@ declare var require: any;
   templateUrl: './layout-recipes.component.html',
   styleUrls: ['./layout-recipes.component.scss'],
 })
-export class LayoutRecipesComponent {
-  exampleHtml: string = require('!raw-loader!../examples/grid-layout-example/grid-layout-core-example/grid-layout-core-example.component.html')
-    .default;
-}
+export class LayoutRecipesComponent {}
