@@ -13,7 +13,7 @@ table {
     text-align: left;
 
     &:first-child {
-      width: (100% / 3);
+      min-width: 14rem;
     }
   }
 
@@ -21,5 +21,9 @@ table {
   th {
     border: 1px solid get-color('medium');
     padding: 0.5rem 1rem;
+  }
+
+  tbody td {
+    height: 3.5rem; // This effectively means "minimum height"
   }
 }
