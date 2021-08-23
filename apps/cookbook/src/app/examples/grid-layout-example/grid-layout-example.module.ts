@@ -3,13 +3,11 @@ import { NgModule } from '@angular/core';
 
 import { KirbyModule } from '@kirbydesign/designsystem';
 
-import { GridLayoutCoreExampleComponent } from './grid-layout-core-example/grid-layout-core-example.component';
 import { GridLayoutExtendedExampleComponent } from './grid-layout-extended-example/grid-layout-extended-example.component';
 import { GridLayoutMultipleContainersExampleComponent } from './grid-layout-multiple-containers-example/grid-layout-multiple-containers-example.component';
 import { GridLayoutSingleContainerExampleComponent } from './grid-layout-single-container-example/grid-layout-single-container-example.component';
 
 const gridLayoutExamples = [
-  GridLayoutCoreExampleComponent,
   GridLayoutMultipleContainersExampleComponent,
   GridLayoutSingleContainerExampleComponent,
   GridLayoutExtendedExampleComponent,
