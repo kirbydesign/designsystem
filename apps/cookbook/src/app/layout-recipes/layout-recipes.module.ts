@@ -8,7 +8,8 @@ import { ExamplesModule } from '../examples/examples.module';
 import { IphoneModule } from '../iphone/iphone.module';
 import { CodeViewerModule } from '../shared/code-viewer/code-viewer.module';
 
-import { GridLayoutComponent } from './grid-layout/grid-layout.component';
+import { GridLayoutMultipleContainersComponent } from './grid-layout/grid-layout-multiple-containers/grid-layout-multiple-containers.component';
+import { GridLayoutSingleContainerComponent } from './grid-layout/grid-layout-single-container/grid-layout-single-container.component';
 import { LayoutRecipesComponent } from './layout-recipes.component';
 
 @NgModule({
@@ -20,8 +21,12 @@ import { LayoutRecipesComponent } from './layout-recipes.component';
         component: LayoutRecipesComponent,
       },
       {
-        path: 'grid-layout',
-        component: GridLayoutComponent,
+        path: 'grid-layout-single-container',
+        component: GridLayoutSingleContainerComponent,
+      },
+      {
+        path: 'grid-layout-multiple-containers',
+        component: GridLayoutMultipleContainersComponent,
       },
     ]),
     KirbyModule,
@@ -29,7 +34,15 @@ import { LayoutRecipesComponent } from './layout-recipes.component';
     CodeViewerModule,
     ExamplesModule,
   ],
-  declarations: [LayoutRecipesComponent, GridLayoutComponent],
-  exports: [LayoutRecipesComponent, GridLayoutComponent],
+  declarations: [
+    LayoutRecipesComponent,
+    GridLayoutSingleContainerComponent,
+    GridLayoutMultipleContainersComponent,
+  ],
+  exports: [
+    LayoutRecipesComponent,
+    GridLayoutSingleContainerComponent,
+    GridLayoutMultipleContainersComponent,
+  ],
 })
 export class LayoutRecipesModule {}
