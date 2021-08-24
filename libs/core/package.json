@@ -10,7 +10,8 @@
   "collection": "dist/collection/collection-manifest.json",
   "files": [
     "dist/",
-    "loader/"
+    "loader/",
+    "scss/"
   ],
   "license": "MIT"
 }
