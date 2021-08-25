@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-declare var require: any;
 
 @Component({
   selector: 'cookbook-grid-layout-multiple-containers',

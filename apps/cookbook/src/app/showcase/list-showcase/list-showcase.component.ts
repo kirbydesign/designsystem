@@ -9,8 +9,6 @@ import { ListSelectableItemsExampleTemplate } from '~/app/examples/list-example/
 import { ListBoldTextOnRowSelectionExampleTemplate } from '../../examples/list-example/examples/bold-text-on-row-selection';
 import { ListItemsExampleTemplate } from '../../examples/list-example/examples/items';
 
-declare var require: any;
-
 @Component({
   selector: 'cookbook-list-showcase',
   templateUrl: './list-showcase.component.html',
