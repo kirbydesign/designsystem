@@ -18,18 +18,18 @@ $gap: size('m');
 
 /* Tablet size and above */
 @include media('>=medium') {
-  .half\@tablet-up {
+  .half-at-tablet-up {
     grid-column: span ($columns / 2);
   }
 }
 
 /* Desktop size and above */
 @include media('>=large') {
-  .half\@desktop-up {
+  .half-at-desktop-up {
     grid-column: span ($columns / 2);
   }
 
-  .third\@desktop-up {
+  .third-at-desktop-up {
     grid-column: span ($columns / 3);
   }
 }
