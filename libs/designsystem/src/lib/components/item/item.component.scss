@@ -23,6 +23,14 @@
     --background-hover: var(--kirby-item-background-hover, #{get-color('background-color')});
     --background-hover-opacity: 1;
 
+    // Prevent additional padding in iOS Safari on devices with "screen notch"
+    // by removing horizontal safe area when rotated to landscape orientation.
+    // See https://github.com/kirbydesign/designsystem/issues/1689
+    @media screen and (orientation: landscape) {
+      --ion-safe-area-left: 0px;
+      --ion-safe-area-right: 0px;
+    }
+
     @include slotted('[slot="end"]') {
       margin-inline-start: 0;
       margin-inline-end: 0;

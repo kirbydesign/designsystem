@@ -9,19 +9,21 @@ import { WindowRef } from '@kirbydesign/designsystem/types';
   styleUrls: ['./form-field-example.component.scss'],
 })
 export class FormFieldExampleComponent {
-  constructor(private window: WindowRef) {}
+  constructor(private windowRef: WindowRef) {}
   size: InputSize;
-  showDummyKeyboard = !!this.window.sessionStorage.getItem('kirby-cookbook-show-dummy-keyboard');
+  showDummyKeyboard = !!this.windowRef.nativeWindow.sessionStorage.getItem(
+    'kirby-cookbook-show-dummy-keyboard'
+  );
 
   toggleDummyKeyboard(show: boolean) {
     const sessionKey = 'kirby-cookbook-show-dummy-keyboard';
     this.showDummyKeyboard = show;
     this.showDummyKeyboard
-      ? this.window.sessionStorage.setItem(sessionKey, 'true')
-      : this.window.sessionStorage.removeItem(sessionKey);
+      ? this.windowRef.nativeWindow.sessionStorage.setItem(sessionKey, 'true')
+      : this.windowRef.nativeWindow.sessionStorage.removeItem(sessionKey);
     // Timeout prevents ExpressionChangedAfterItHasBeenCheckedError:
     setTimeout(() =>
-      this.window.dispatchEvent(
+      this.windowRef.nativeWindow.dispatchEvent(
         new CustomEvent('kirbyToggleDummyKeyboard', { detail: this.showDummyKeyboard })
       )
     );

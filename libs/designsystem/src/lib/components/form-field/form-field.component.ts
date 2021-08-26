@@ -51,7 +51,7 @@ export class FormFieldComponent
     elementRef: ElementRef<HTMLElement>,
     private platform: PlatformService,
     private renderer: Renderer2,
-    private window: WindowRef
+    private windowRef: WindowRef
   ) {
     this.element = elementRef.nativeElement;
   }
@@ -64,7 +64,7 @@ export class FormFieldComponent
     // Dispatch an `ionInputDidLoad` event to register
     // form field + input/textarea with Ionic input shims
     // See: https://github.com/ionic-team/ionic-framework/blob/master/core/src/utils/input-shims/input-shims.ts
-    this.window.document.dispatchEvent(
+    this.windowRef.nativeWindow.document.dispatchEvent(
       new CustomEvent('ionInputDidLoad', {
         detail: this.element,
       })
@@ -132,7 +132,7 @@ export class FormFieldComponent
     // Dispatch an `ionInputDidUnload` event to unregister
     // form field + input/textarea from Ionic input shims
     // See: https://github.com/ionic-team/ionic-framework/blob/master/core/src/utils/input-shims/input-shims.ts
-    this.window.document.dispatchEvent(
+    this.windowRef.nativeWindow.document.dispatchEvent(
       new CustomEvent('ionInputDidUnload', {
         detail: this.element,
       })

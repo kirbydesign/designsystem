@@ -72,7 +72,6 @@ export class ButtonComponent implements AfterContentInit {
   @Input()
   themeColor: NotificationColor;
   @Input() expand: 'full' | 'block';
-  @Input() text: string;
   @Input() isFloating: boolean = false;
   @Input()
   size: ButtonSize = ButtonSize.MD;

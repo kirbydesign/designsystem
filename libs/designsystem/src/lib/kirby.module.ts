@@ -79,7 +79,6 @@ import { KirbyBadge as BadgeComponent } from './components/web-component-proxies
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
 import { ModalRouterLinkDirective } from './directives/modal-router-link/modal-router-link.directive';
 import { ThemeColorDirective } from './directives/theme-color/theme-color.directive';
-import { WindowRef } from './types/window-ref';
 
 const exportedDeclarations = [
   CardComponent,
@@ -164,10 +163,6 @@ const providers = [
   LoadingOverlayService,
   ResizeObserverFactory,
   ResizeObserverService,
-  {
-    provide: WindowRef,
-    useValue: window,
-  },
   customElementsInitializer(),
 ];
 

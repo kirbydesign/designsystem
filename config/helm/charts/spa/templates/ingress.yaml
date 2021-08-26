@@ -1,0 +1,31 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: {{ template "spa.fullname" . }}
+  labels:
+    heritage: {{ .Release.Service }}
+    release: {{ .Release.Name }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    app: {{ template "spa.name" . }}
+{{- if .Values.ingress.annotations }}
+  annotations:
+{{ toYaml .Values.ingress.annotations | indent 4 }}
+{{- end }}
+spec:
+  rules:
+  - host: {{ .Values.ingress.host | quote }}
+    http:
+      paths:
+      - backend:
+          serviceName: {{ template "spa.fullname" . }}
+          servicePort: web
+{{- if .Values.ingress.tls.enable }}
+  tls:
+  - hosts:
+    - {{ .Values.ingress.host | quote }}
+{{- if .Values.ingress.tls.secret }}
+    secretName: {{ .Values.ingress.tls.secret }}
+{{ else }}
+    secretName: {{ template "spa.fullname" . }}
+{{- end }}
+{{- end }}

@@ -43,7 +43,7 @@ import { COMPONENT_PROPS } from './config/modal-config.helper';
 export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDestroy {
   static readonly KEYBOARD_HIDE_DELAY_IN_MS = 100;
 
-  scrollY: number = Math.abs(this.windowRef.scrollY);
+  scrollY: number = Math.abs(this.windowRef.nativeWindow.scrollY);
   private readonly VIEWPORT_RESIZE_DEBOUNCE_TIME = 100;
 
   set scrollDisabled(disabled: boolean) {
@@ -144,7 +144,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
           // wait for template to render
           setTimeout(() => {
             const domRect = this.elementRef.nativeElement.getBoundingClientRect();
-            const document = this.windowRef.document.documentElement;
+            const document = this.windowRef.nativeWindow.document.documentElement;
             const right = document.clientWidth - domRect.right;
             this.renderer.setStyle(this.ionModalElement, 'top', `${domRect.top}px`);
             this.renderer.setStyle(this.ionModalElement, 'left', `${domRect.left}px`);
@@ -296,7 +296,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   @HostListener('window:focusout')
   onFocusChange() {
     // This fixes an undesired scroll behaviour occurring on keyboard-tabbing backwards (with shift+tab):
-    this.windowRef.scrollTo({ top: this.scrollY });
+    this.windowRef.nativeWindow.scrollTo({ top: this.scrollY });
   }
 
   @HostListener('window:ionKeyboardDidShow', ['$event.detail.keyboardHeight'])
@@ -339,7 +339,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   private getKeyboardOverlap(keyboardHeight: number, element: Element) {
     if (keyboardHeight <= 0 || !element) return 0;
     const distanceFromViewportBottomToElement = Math.floor(
-      this.windowRef.innerHeight - element.getBoundingClientRect().bottom
+      this.windowRef.nativeWindow.innerHeight - element.getBoundingClientRect().bottom
     );
     return Math.max(keyboardHeight - distanceFromViewportBottomToElement, 0);
   }
@@ -395,12 +395,12 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   private setViewportHeight() {
-    const vh = (this.windowRef.innerHeight * 0.01).toFixed(2);
+    const vh = (this.windowRef.nativeWindow.innerHeight * 0.01).toFixed(2);
     this.setCssVar(this.elementRef.nativeElement, '--vh', `${vh}px`);
   }
 
   private observeViewportResize() {
-    this.resizeObserverService.observe(this.windowRef.document.body, (entry) =>
+    this.resizeObserverService.observe(this.windowRef.nativeWindow.document.body, (entry) =>
       this.onViewportResize(entry)
     );
   }
@@ -521,8 +521,8 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     };
 
     // Set explicit viewport root if within iframe:
-    const root = this.windowRef.frameElement
-      ? (this.windowRef.document as any) // Cast to `any` as Typescript lib.d.ts doesnt support Document type yet
+    const root = this.windowRef.nativeWindow.frameElement
+      ? (this.windowRef.nativeWindow.document as any) // Cast to `any` as Typescript lib.d.ts doesnt support Document type yet
       : undefined;
     const options: IntersectionObserverInit = {
       rootMargin: '0px 0px -1px 0px', // `bottom: -1px` allows checking when the modal bottom is touching the viewport
@@ -543,7 +543,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     this.intersectionObserver.disconnect();
     delete this._intersectionObserver;
     if (this.resizeObserverService) {
-      this.resizeObserverService.unobserve(this.windowRef.document.body);
+      this.resizeObserverService.unobserve(this.windowRef.nativeWindow.document.body);
       this.resizeObserverService.unobserve(this.ionHeaderElement.nativeElement);
       this.resizeObserverService.unobserve(this.getEmbeddedFooterElement());
     }
