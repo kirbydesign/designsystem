@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
-declare var require: any;
-
 @Component({
   selector: 'cookbook-action-sheet-showcase',
   templateUrl: './action-sheet-showcase.component.html',
