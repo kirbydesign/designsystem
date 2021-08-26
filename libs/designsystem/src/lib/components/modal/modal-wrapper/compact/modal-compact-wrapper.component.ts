@@ -15,7 +15,7 @@ import { COMPONENT_PROPS } from '../config/modal-config.helper';
   host: { '[class.ion-page]': 'false' }, //Ensure ion-page class doesn't get applied by Ionic Modal Controller
 })
 export class ModalCompactWrapperComponent implements Modal, OnInit {
-  scrollY: number = Math.abs(this.window.scrollY);
+  scrollY: number = Math.abs(this.windowRef.nativeWindow.scrollY);
   scrollDisabled = false;
   @Input() config: ModalConfig;
   componentPropsInjector: Injector;
@@ -29,7 +29,7 @@ export class ModalCompactWrapperComponent implements Modal, OnInit {
   constructor(
     private injector: Injector,
     private elementRef: ElementRef<HTMLElement>,
-    private window: WindowRef
+    private windowRef: WindowRef
   ) {}
 
   ngOnInit(): void {
@@ -74,6 +74,6 @@ export class ModalCompactWrapperComponent implements Modal, OnInit {
   @HostListener('window:focusout')
   onFocusChange() {
     // This fixes an undesired scroll behaviour occurring on keyboard-tabbing backwards (with shift+tab):
-    this.window.scrollTo({ top: this.scrollY });
+    this.windowRef.nativeWindow.scrollTo({ top: this.scrollY });
   }
 }

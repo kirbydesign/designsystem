@@ -15,7 +15,6 @@ We have **Kirby Open Office** every Tuesday and Thursday between 9:15 to 10:15. 
 The following are working full time on Kirby:
 * [alxzak](https://github.com/alxzak)
 * [henrikvoetmand](https://github.com/henrikvoetmand)
-* [Jakobe](https://github.com/jakobe) 
-* [Jkaltoft](https://github.com/jkaltoft)
+* [jkaltoft](https://github.com/jkaltoft)
 * [MadsBuchmann](https://github.com/MadsBuchmann)
 * [RasmusKjeldgaard](https://github.com/RasmusKjeldgaard)

@@ -2,8 +2,8 @@
   <nav>
     <ng-container *ngFor="let item of navigationLinks">
       <a
-        *ngIf="item.routerLink"
-        [routerLink]="item.routerLink"
+        *ngIf="item.route"
+        [routerLink]="item.route"
         routerLinkActive="is-selected"
         [routerLinkActiveOptions]="{ exact: false }"
         (click)="onToggleMenu()"
