@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
-declare var require: any;
-
 @Component({
   selector: 'cookbook-slide-showcase',
   templateUrl: './slides-showcase.component.html',
