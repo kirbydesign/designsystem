@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
-declare var require: any;
-
 @Component({
   selector: 'cookbook-loading-overlay-showcase',
   templateUrl: './loading-overlay-showcase.component.html',
