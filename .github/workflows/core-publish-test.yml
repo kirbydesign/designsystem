@@ -31,8 +31,8 @@ jobs:
   bump_version_and_publish:
     name: Bump and publish new package version to npm
     needs: determine_changed_library
+    if: needs.determine_changed_library.outputs.build_core == 'true'
     runs-on: ubuntu-latest
-    if: {{ needs.determine_changed_library.outputs.build_core == 'true' }}
     steps:
       - name: Echo
         run: echo "publishing core"
