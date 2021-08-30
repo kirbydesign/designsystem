@@ -34,7 +34,8 @@
 
 <ng-template #defaultItemTemplate let-item let-selected="selected" let-index="index">
   <kirby-item [selectable]="true" [selected]="selected" (click)="onItemSelect(index)" role="option">
-    <h3>{{ getTextFromItem(item) }}</h3>
+    <!-- Tabindex fixes issue with popover dropdown not working in safari -->
+    <h3 tabindex="0">{{ getTextFromItem(item) }}</h3>
     <kirby-icon *ngIf="selected" name="checkmark-selected" slot="end"></kirby-icon>
   </kirby-item>
 </ng-template>
