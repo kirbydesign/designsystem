@@ -1,0 +1,33 @@
+# Configuration for probot-stale - https://github.com/probot/stale
+daysUntilStale: 70
+daysUntilClose: 70
+
+pulls:
+  markComment: >
+    This pull request has been automatically marked as stale because of no recent activity. 
+    It will be closed in 10 weeks if no further activity occurs. Thank you
+    for your contributions.
+  closeComment: >
+    This pull request has been closed due to inactivity. 
+    Please create a new PR if it becomes relevant again.
+
+issues:
+  markComment: >
+    This issue has been automatically marked as stale because of no recent activity. 
+    It will be closed in 10 weeks if no further activity occurs. Thank you
+    for your contributions.
+  closeComment: >
+    This issue has been closed due to inactivity. 
+    Please open a new issue if it becomes relevant again.
+
+# Label to use when marking as stale
+staleLabel: stale
+
+# Set to true to ignore issues in a project (defaults to false)
+exemptProjects: true
+
+# Set to true to ignore issues in a milestone (defaults to false)
+exemptMilestones: true
+
+exemptLabels:
+  - bug

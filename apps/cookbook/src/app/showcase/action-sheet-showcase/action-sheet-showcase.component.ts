@@ -3,8 +3,6 @@ import { ApiDescriptionEvent } from '~/app/shared/api-description/api-descriptio
 import { ApiDescriptionMethod } from '~/app/shared/api-description/api-description-methods/api-description-methods.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
-declare var require: any;
-
 @Component({
   selector: 'cookbook-action-sheet-showcase',
   templateUrl: './action-sheet-showcase.component.html',

@@ -5,19 +5,25 @@
   "lib": {
     "entryFile": "src/index.ts",
     "umdModuleIds": {
-      "moment": "moment",
+      "date-fns": "date-fns",
+      "date-fns-tz": "date-fns-tz",
       "highcharts": "highcharts",
       "highcharts/modules/annotations": "highcharts",
       "highcharts/highstock": "highcharts/highstock",
       "@ionic/angular": "ionic",
+      "ngx-ui-scroll": "ngx-ui-scroll",
       "inputmask/lib/inputmask": "inputmask"
     }
   },
   "allowedNonPeerDependencies": [
     "@ionic/angular",
+    "chart.js",
+    "chartjs-plugin-annotation",
     "highcharts",
-    "moment",
+    "date-fns",
+    "date-fns-tz",
     "@fontsource/roboto",
-    "inputmask"
+    "inputmask",
+    "ngx-ui-scroll"
   ]
 }

@@ -1,44 +1,35 @@
-This PR closes # (reference issue number here)
+## Which issue does this PR close?
 
-## PR Checklist
-
-Please check if your PR fulfills the following requirements:
-
-- [ ] Tests for the changes have been added (for bug fixes / features)
-- [ ] Docs have been added / updated (for bug fixes / features)
-
-## PR Type
-
-What kind of change does this PR introduce?
-
-<!-- Please check the one that applies to this PR using "x". -->
-
-- [ ] Bugfix
-- [ ] Feature
-- [ ] Enhancement (to existing content)
-- [ ] Code style update (formatting, local variables)
-- [ ] Refactoring (no functional changes, no api changes)
-- [ ] Build related changes
-- [ ] CI related changes
-- [ ] Documentation content changes
-- [ ] cookbook application / infrastructure changes
-- [ ] Other... Please describe:
-
-## Which issue documents the current behaviour?
-
-<!-- Please link to a relevant issue that documents the current behaviour . -->
-
-Issue Number: #[replace with issue number]
+This PR closes # (insert issue number here)
 
 ## What is the new behavior?
 
-<!-- Please describe the new behaviour after your pull-request is comitted -->
+<!-- Replace this paragraph with a description of the new behaviour after your pull request is merged -->
 
 ## Does this PR introduce a breaking change?
 
 - [ ] Yes
 - [ ] No
 
-<!-- If this PR contains a breaking change, please describe the impact and migration path for existing applications below. -->
+<!-- If this PR contains a breaking change, replace this paragraph with a description of the impact and migration path for existing applications  -->
 
-## Other information
+## Are there any additional context?
+
+<!-- Replace this paragraph with any additional context e.g, explanations, links or screenshots (if any) -->
+
+## Checklist:
+
+The following tasks should be carried out in sequence in order to follow [the process of contributing](../CONTRIBUTING.md/#the-process-of-contributing) correctly.
+
+### Reminders
+- [ ] Make sure you have implemented tests following the guidelines in: "[The good: Test](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Test)".
+- [ ] Make sure you have updated the cookbook with examples and showcases (for bug fixes, enhancements & new components).
+
+### Review  
+- [ ] Do a [self-review](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Self-review).
+- [ ] Request that the changes are code-reviewed 
+- [ ] Request that the changes are [UX reviewed](./CONTRIBUTING.md/#ux-review) (only necessary if your PR introduces visual changes)
+
+When the pull request has been approved it will be automatically merged to master via [automerge](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/automatically-merging-a-pull-request).
+
+

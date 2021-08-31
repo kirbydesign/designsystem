@@ -13,6 +13,7 @@ import { BadgeShowcaseComponent } from './badge-showcase/badge-showcase.componen
 import { ButtonShowcaseComponent } from './button-showcase/button-showcase.component';
 import { CalendarShowcaseComponent } from './calendar-showcase/calendar-showcase.component';
 import { CardShowcaseComponent } from './card-showcase/card-showcase.component';
+import { ChartDeprecatedShowcaseComponent } from './chart-deprecated-showcase/chart-deprecated-showcase.component';
 import { ChartShowcaseComponent } from './chart-showcase/chart-showcase.component';
 import { CheckboxShowcaseComponent } from './checkbox-showcase/checkbox-showcase.component';
 import { ChipShowcaseComponent } from './chip-showcase/chip-showcase.component';
@@ -31,6 +32,7 @@ import { ListLoadOnDemandShowcaseComponent } from './list-load-on-demand-showcas
 import { ListNoShapeShowcaseComponent } from './list-no-shape-showcase/list-no-shape-showcase.component';
 import { ListShowcaseComponent } from './list-showcase/list-showcase.component';
 import { ListSwipeShowcaseComponent } from './list-swipe-showcase/list-swipe-showcase.component';
+import { ListVirtualScrollShowcaseComponent } from './list-virtual-scroll-showcase/list-virtual-scroll-showcase.component';
 import { LoadingOverlayShowcaseComponent } from './loading-overlay-showcase/loading-overlay-showcase.component';
 import { ModalShowcaseComponent } from './modal-showcase/modal-showcase.component';
 import { PageShowcaseComponent } from './page-showcase/page-showcase.component';
@@ -42,7 +44,7 @@ import { ShowcaseComponent } from './showcase.component';
 import { SlideButtonShowcaseComponent } from './slide-button-showcase/slide-button-showcase.component';
 import { SlidesShowcaseComponent } from './slides-showcase/slides-showcase.component';
 import { SpinnerShowcaseComponent } from './spinner-showcase/spinner-showcase.component';
-import { StockChartShowcaseComponent } from './stock-chart-showcase/stock-chart-showcase.component';
+import { StockChartDeprecatedShowcaseComponent } from './stock-chart-deprecated-showcase/stock-chart-deprecated-showcase.component';
 import { TabsShowcaseComponent } from './tabs-showcase/tabs-showcase.component';
 import { ToastShowcaseComponent } from './toast-showcase/toast-showcase.component';
 import { ToggleButtonShowcaseComponent } from './toggle-button-showcase/toggle-button-showcase.component';
@@ -108,6 +110,10 @@ export const routes: Routes = [
         component: ListNoShapeShowcaseComponent,
       },
       {
+        path: 'list-virtual-scroll',
+        component: ListVirtualScrollShowcaseComponent,
+      },
+      {
         path: 'page',
         component: PageShowcaseComponent,
       },
@@ -120,12 +126,16 @@ export const routes: Routes = [
         component: GridShowcaseComponent,
       },
       {
+        path: 'chart-deprecated',
+        component: ChartDeprecatedShowcaseComponent,
+      },
+      {
         path: 'chart',
         component: ChartShowcaseComponent,
       },
       {
-        path: 'stock-chart',
-        component: StockChartShowcaseComponent,
+        path: 'stock-chart-deprecated',
+        component: StockChartDeprecatedShowcaseComponent,
       },
       {
         path: 'fonts',

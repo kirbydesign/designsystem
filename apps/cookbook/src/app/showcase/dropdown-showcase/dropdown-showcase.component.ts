@@ -18,6 +18,13 @@ export class DropdownShowcaseComponent {
       type: ['Array<string> | Array<any>'],
     },
     {
+      name: 'size',
+      description:
+        'The size of the dropdown. The touch area will always be a minimum of 44px by 44px. If the dropdown is smaller than this, the surrounding area will still be clickable, to preserve accessibility.',
+      defaultValue: 'md',
+      type: ['sm | md'],
+    },
+    {
       name: 'itemTextProperty',
       description:
         'The property to use for the text representation of items when configured with `Array<any>`.',

@@ -10,6 +10,7 @@ import { ButtonExampleComponent } from './button-example/button-example.componen
 import { CalendarCardExampleComponent } from './calendar-example/calendar-card-example.component';
 import { CalendarExampleComponent } from './calendar-example/calendar-example.component';
 import { CardExampleComponent } from './card-example/card-example.component';
+import { ChartDeprecatedExampleComponent } from './chart-deprecated-example/chart-deprecated-example.component';
 import { ChartExampleComponent } from './chart-example/chart-example.component';
 import { CheckboxExampleComponent } from './checkbox-example/checkbox-example.component';
 import { ChipExampleComponent } from './chip-example/chip-example.component';
@@ -22,6 +23,9 @@ import { FormFieldInputDateExampleComponent } from './form-field-example/example
 import { FormFieldInputDecimalMaskExampleComponent } from './form-field-example/examples/input/decimal-mask';
 import { FormFieldExampleComponent } from './form-field-example/form-field-example.component';
 import { GridExampleComponent } from './grid-example/grid-example.component';
+import { GridLayoutExtendedExampleComponent } from './grid-layout-example/grid-layout-extended-example/grid-layout-extended-example.component';
+import { GridLayoutMultipleContainersExampleComponent } from './grid-layout-example/grid-layout-multiple-containers-example/grid-layout-multiple-containers-example.component';
+import { GridLayoutSingleContainerExampleComponent } from './grid-layout-example/grid-layout-single-container-example/grid-layout-single-container-example.component';
 import { IconExampleComponent } from './icon-example/icon-example.component';
 import { ItemExampleComponent } from './item-example/item-example.component';
 import { LinkExampleComponent } from './link-example/link-example.component';
@@ -37,6 +41,10 @@ import { ListExampleComponent } from './list-example/list-example.component';
 import { ListLoadOnDemandExampleComponent } from './list-load-on-demand-example/list-load-on-demand-example.component';
 import { ListNoShapeExampleComponent } from './list-no-shape-example/list-no-shape-example.component';
 import { ListSwipeExampleComponent } from './list-swipe-example/list-swipe-example.component';
+import { ListVirtualScrollItemsExampleComponent } from './list-virtual-scroll-example/examples/items';
+import { ListVirtualScrollLoadExampleComponent } from './list-virtual-scroll-example/examples/load-on-demand';
+import { ListVirtualScrollSectionsExampleComponent } from './list-virtual-scroll-example/examples/sections';
+import { ListVirtualScrollExampleComponent } from './list-virtual-scroll-example/list-virtual-scroll-example.component';
 import { LoadingOverlayExampleComponent } from './loading-overlay-example/loading-overlay-example.component';
 import { ModalExampleComponent } from './modal-example/modal-example.component';
 import { ModalRoutePage1ExampleComponent } from './modal-example/modal-route-example/modal-route-page1-example.component';
@@ -57,7 +65,7 @@ import { SegmentedControlExampleComponent } from './segmented-control-example/se
 import { SlideButtonExampleComponent } from './slide-button-example/slide-button-example.component';
 import { SlidesExampleComponent } from './slides-example/slides-example.component';
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
-import { StockChartExampleComponent } from './stock-chart-example/stock-chart-example.component';
+import { StockChartDeprecatedExampleComponent } from './stock-chart-deprecated-example/stock-chart-deprecated-example.component';
 import { TabExampleComponent } from './tabs-example/tab/tab-example.component';
 import { TabsExampleComponent } from './tabs-example/tabs-example.component';
 import { ToastExampleComponent } from './toast-example/toast-example.component';
@@ -212,6 +220,22 @@ export const routes: Routes = [
         ],
       },
       {
+        path: 'modal-route-with-url-param/:id',
+        component: ModalExampleComponent,
+        children: [
+          {
+            path: 'page1',
+            outlet: 'modal',
+            component: ModalRoutePage1ExampleComponent,
+          },
+          {
+            path: 'page2',
+            outlet: 'modal',
+            component: ModalRoutePage2ExampleComponent,
+          },
+        ],
+      },
+      {
         path: 'form-field',
         children: [
           {
@@ -301,16 +325,54 @@ export const routes: Routes = [
     component: ListLoadOnDemandExampleComponent,
   },
   {
+    path: 'list-virtual-scroll',
+    component: ListVirtualScrollExampleComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'with-items',
+      },
+      {
+        path: 'with-items',
+        component: ListVirtualScrollItemsExampleComponent,
+      },
+      {
+        path: 'load-on-demand',
+        component: ListVirtualScrollLoadExampleComponent,
+      },
+      {
+        path: 'with-sections',
+        component: ListVirtualScrollSectionsExampleComponent,
+      },
+    ],
+  },
+  {
+    path: 'chart-deprecated',
+    component: ChartDeprecatedExampleComponent,
+  },
+  {
     path: 'chart',
     component: ChartExampleComponent,
   },
   {
-    path: 'stock-chart',
-    component: StockChartExampleComponent,
+    path: 'stock-chart-deprecated',
+    component: StockChartDeprecatedExampleComponent,
   },
   {
     path: 'grid',
     component: GridExampleComponent,
+  },
+  {
+    path: 'grid-layout-single-container',
+    component: GridLayoutSingleContainerExampleComponent,
+  },
+  {
+    path: 'grid-layout-multiple-containers',
+    component: GridLayoutMultipleContainersExampleComponent,
+  },
+  {
+    path: 'grid-layout-extended',
+    component: GridLayoutExtendedExampleComponent,
   },
   {
     path: 'chip',

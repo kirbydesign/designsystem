@@ -8,17 +8,19 @@ $item-height: size('xxxl');
   display: block;
 }
 
-ion-list {
-  &.has-divider {
-    ion-item-sliding:not(:last-of-type) {
-      border-bottom: 1px solid $divider-color;
-    }
-  }
-
+.list {
   box-shadow: $shadow;
   background: transparent;
   contain: inherit;
   padding: 0;
+}
+
+.viewport {
+  overflow-y: auto;
+}
+
+.item-wrapper {
+  min-height: #{map-get($item-heights, 'm')};
 }
 
 ion-list-header {
@@ -110,7 +112,7 @@ ion-item-divider {
 .no-more-items,
 .loading {
   width: 100%;
-  padding: size('m');
+  padding: size('m') 0;
   text-align: center;
 }
 
@@ -148,14 +150,22 @@ ion-item-options[side='end'] {
   border-bottom-width: 0;
 }
 
-:host(.has-sections) {
-  ion-list {
+:host-context(.has-sections) {
+  .list {
     box-shadow: none;
   }
 
   .list-items {
     box-shadow: $shadow;
     border-radius: $border-radius;
+  }
+
+  .virtual-group {
+    margin-top: size('m');
+  }
+
+  .section-header {
+    overflow: hidden;
   }
 
   .footer {
@@ -169,14 +179,14 @@ ion-item-options[side='end'] {
   }
 }
 
-:host(.shape-rounded) {
-  ion-list,
+:host-context(.shape-rounded) {
+  .list,
   .list-items {
     border-radius: $border-radius;
   }
 
-  ion-list ion-item:first-of-type,
-  ion-list ion-item-sliding:first-of-type,
+  ion-item.first,
+  ion-item-sliding.first,
   ion-list-header {
     border-top-left-radius: $border-radius;
     border-top-right-radius: $border-radius;
@@ -186,15 +196,15 @@ ion-item-options[side='end'] {
     ); // Solves issues with round borders at iOS in certain scenarios
   }
 
-  ion-list ion-item-sliding > ion-item,
-  &:not(.has-sections) ion-list.has-header ion-item,
-  &:not(.has-sections) ion-list.has-header ion-item-sliding {
+  ion-item-sliding > ion-item,
+  &:not(.has-sections) .has-header ion-item,
+  &:not(.has-sections) .has-header ion-item-sliding {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
   }
 
-  ion-list ion-item:last-of-type,
-  ion-list ion-item-sliding:last-of-type,
+  ion-item.last,
+  ion-item-sliding.last,
   .footer {
     border-bottom-left-radius: $border-radius;
     border-bottom-right-radius: $border-radius;
@@ -204,22 +214,22 @@ ion-item-options[side='end'] {
     ); // Solves issues with round borders at iOS in certain scenarios
   }
 
-  ion-list ion-item-sliding > ion-item,
-  &:not(.has-sections) ion-list.has-footer ion-item,
-  &:not(.has-sections) ion-list.has-footer ion-item-sliding {
+  ion-item-sliding > ion-item,
+  &:not(.has-sections) .has-footer ion-item,
+  &:not(.has-sections) .has-footer ion-item-sliding {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
   }
 }
 
-:host(.shape-none) {
-  ion-list,
+:host-context(.shape-none) {
+  .list,
   .list-items {
     box-shadow: none;
     border-radius: unset;
   }
 
-  ion-list {
+  .list {
     ion-item,
     ion-item-sliding {
       --padding-start: 0;
@@ -239,10 +249,9 @@ ion-item-options[side='end'] {
   }
 }
 
-:host(.item-spacing) {
-  ion-list {
-    ion-item,
-    ion-item-sliding {
+:host-context(.item-spacing) {
+  .list {
+    kirby-list-item {
       margin-bottom: size('s');
 
       & > ion-item,

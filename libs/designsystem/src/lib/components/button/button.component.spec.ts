@@ -6,9 +6,7 @@ import { IconComponent } from '../icon/icon.component';
 
 import { ButtonComponent, ButtonSize } from './button.component';
 
-const getColor = DesignTokenHelper.getColor;
-const size = DesignTokenHelper.size;
-const fontSize = DesignTokenHelper.fontSize;
+const { getColor, size, fontSize, fatFingerSize } = DesignTokenHelper;
 
 describe('ButtonComponent', () => {
   let spectator: SpectatorHost<ButtonComponent>;
@@ -56,6 +54,7 @@ describe('ButtonComponent', () => {
 
     it('should render with correct border-radius', () => {
       const expected = DesignTokenHelper.borderRadiusRound();
+
       expect(element).toHaveComputedStyle({ 'border-radius': expected });
     });
 
@@ -69,6 +68,13 @@ describe('ButtonComponent', () => {
 
     it('should render with correct margin', () => {
       expect(element).toHaveComputedStyle({ margin: size('xxxs') });
+    });
+
+    it('should have touch area with minimum size equal to fat finger size', () => {
+      const touchArea = window.getComputedStyle(element, '::after');
+
+      expect(parseInt(touchArea.height)).toBeGreaterThanOrEqual(parseInt(fatFingerSize()));
+      expect(parseInt(touchArea.width)).toBeGreaterThanOrEqual(parseInt(fatFingerSize()));
     });
 
     describe('when disabled', () => {

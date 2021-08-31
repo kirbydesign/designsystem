@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 interface HeaderLink {
   text: string;
@@ -12,6 +12,7 @@ export const navigationItems: HeaderLink[] = [
   { text: 'Ressources', route: '' },
   { text: 'Changelog', route: '/home/changelog' },
   { text: 'Component Status', route: '/home/component-status' },
+  { text: 'Layout Recipes', route: '/home/layout-recipes' },
   { text: 'Design', externalUrl: 'https://kirby.design/' },
   { text: 'GitHub', externalUrl: 'https://github.com/kirbydesign/designsystem' },
 ];

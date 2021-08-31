@@ -1,0 +1,42 @@
+@import './libs/designsystem/src/lib/scss/utils';
+
+/* Configure grid properties */
+$columns: 12;
+$gap: size('m');
+
+/* Declare the grid container */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+  gap: $gap;
+}
+
+/* Let grid items span all columns by default */
+.grid-item {
+  grid-column: span $columns;
+}
+
+/* Tablet size and above */
+@include media('>=medium') {
+  .half-at-tablet-up {
+    grid-column: span ($columns / 2);
+  }
+}
+
+/* Desktop size and above */
+@include media('>=large') {
+  .half-at-desktop-up {
+    grid-column: span ($columns / 2);
+  }
+
+  .third-at-desktop-up {
+    grid-column: span ($columns / 3);
+  }
+}
+
+/* Additional styles that are not essential to the example */
+main {
+  background-color: var(--kirby-background-color);
+  min-height: 100%;
+  padding-block: 2rem 5rem;
+}

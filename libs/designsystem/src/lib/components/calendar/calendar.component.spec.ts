@@ -1,6 +1,7 @@
 import { LOCALE_ID } from '@angular/core';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import moment from 'moment';
+import { format, startOfDay, startOfMonth } from 'date-fns';
+import { zonedTimeToUtc } from 'date-fns-tz';
 import { MockComponent } from 'ng-mocks';
 
 import { CalendarComponent, IconComponent } from '..';
@@ -34,11 +35,11 @@ describe('CalendarComponent', () => {
       {
         provide: LOCALE_ID,
         // i.e. en-US. The week should start on Monday regardlessly
-        useValue: 'en',
+        useValue: 'en-GB',
       },
       {
         provide: WindowRef,
-        useValue: window,
+        useValue: <WindowRef>{ nativeWindow: window },
       },
     ],
     imports: [TestHelper.ionicModuleForTest],
@@ -53,11 +54,11 @@ describe('CalendarComponent', () => {
   });
 
   it('should initially render the current month if selectedDate is not specified', () => {
-    const currentDayMoment = moment().startOf('day');
-    const currentMonthMoment = moment().startOf('month');
+    const currentDay = startOfDay(new Date());
+    const currentMonth = startOfMonth(new Date());
 
-    verifyMonthAndYear(currentMonthMoment.format('MMMM YYYY'));
-    expect(spectator.query('.day.today')).toHaveText(currentDayMoment.format('D'));
+    verifyMonthAndYear(format(currentMonth, 'MMMM yyyy'));
+    expect(spectator.query('.day.today')).toHaveText(format(currentDay, 'd'));
   });
 
   it('should initially render the month of selectedDate if specified', () => {
@@ -313,7 +314,7 @@ describe('CalendarComponent', () => {
         });
 
         it('should set active month based on changed `minDate`', () => {
-          expect(spectator.component.activeMonthName).toEqual(moment(newMinDate).format('MMMM'));
+          expect(spectator.component.activeMonthName).toEqual(format(newMinDate, 'MMMM'));
         });
       });
     });
@@ -340,7 +341,7 @@ describe('CalendarComponent', () => {
         });
 
         it('should set active month based on changed `maxDate`', () => {
-          expect(spectator.component.activeMonthName).toEqual(moment(newMaxDate).format('MMMM'));
+          expect(spectator.component.activeMonthName).toEqual(format(newMaxDate, 'MMMM'));
         });
       });
     });
@@ -376,10 +377,17 @@ describe('CalendarComponent', () => {
         const firstNavigatedYearIndex = spectator.component.navigatedYear;
         spectator.setInput('selectedDate', new Date(todayDateYear, 11, 31));
 
-        spectator.component.changeMonth(1);
+        spectator.component._changeMonth(1);
 
         expect(spectator.component.activeYear).toEqual('2022');
         expect(spectator.component.navigatedYear).toEqual(firstNavigatedYearIndex + 1);
+      });
+
+      it('should emit selected year on navigation', () => {
+        const captured = captureYearSelectEvents();
+        spectator.triggerEventHandler(DropdownComponent, 'change', '2040');
+
+        expect(captured.event).toEqual(2040);
       });
 
       it('should get navigable years based on `from` and `to` when `minDate` and `maxDate` are omitted', () => {
@@ -418,11 +426,11 @@ describe('CalendarComponent', () => {
   const SEL_NAV_FORWARD = '.header button:last-of-type';
 
   function localMidnightDate(yyyyMMdd) {
-    return moment(yyyyMMdd).toDate();
+    return startOfDay(new Date(yyyyMMdd));
   }
 
   function utcMidnightDate(yyyyMMdd) {
-    return moment.utc(yyyyMMdd).toDate();
+    return zonedTimeToUtc(yyyyMMdd, 'UTC');
   }
 
   function clickDayOfMonth(dateOneIndexed: number) {
@@ -451,6 +459,12 @@ describe('CalendarComponent', () => {
   function captureDateSelectEvents() {
     const captured: { event?: Date } = {};
     spectator.output<Date>('dateSelect').subscribe((result) => (captured.event = result));
+    return captured;
+  }
+
+  function captureYearSelectEvents() {
+    const captured: { event?: number } = {};
+    spectator.output<number>('yearSelect').subscribe((result) => (captured.event = result));
     return captured;
   }
 });

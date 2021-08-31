@@ -1,7 +1,10 @@
 {
   "name": "designsystem",
-  "version": "2.0.2",
+  "version": "3.0.8",
   "description": "Kirby Design Components",
+  "engines": {
+    "node": "^14.16"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/kirbydesign/designsystem.git"
@@ -70,7 +73,8 @@
     "help": "nx help",
     "ngcc": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points",
     "publish": "node ./scripts/publish.js",
-    "workspace-generator": "nx workspace-generator"
+    "workspace-generator": "nx workspace-generator",
+    "sync-node-version": "node ./scripts/sync-node-version.js"
   },
   "private": true,
   "dependencies": {
@@ -87,11 +91,15 @@
     "@ionic/angular": "^5.5.2",
     "@nrwl/angular": "11.5.2",
     "@types/prismjs": "1.9.0",
+    "chart.js": "3.3.2",
+    "chartjs-plugin-annotation": "^1.0.2",
+    "date-fns": "2.21.1",
+    "date-fns-tz": "1.1.4",
     "firebase": "8.3.1",
     "highcharts": "8.0.4",
     "inputmask": "^5.0.5",
-    "moment": "2.24.0",
-    "prismjs": "1.23.0",
+    "ngx-ui-scroll": "^2.0.1",
+    "prismjs": "1.24.0",
     "reflect-metadata": "0.1.8",
     "rxjs": "6.5.5",
     "tslib": "^2.0.3",
@@ -153,7 +161,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run generate-mocks && lint-staged",
+      "pre-commit": "npm run sync-node-version && npm run generate-mocks && lint-staged",
       "pre-push": "npm run test:headless-browser:single",
       "post-merge": "post-npm-install"
     }

@@ -8,8 +8,9 @@ export { BadgeComponent } from './badge/badge.component';
 export { ButtonComponent, ButtonSize } from './button/button.component';
 
 export * from './card';
+export * from './chart-deprecated';
 export * from './chart';
-export * from './stock-chart';
+export * from './stock-chart-deprecated';
 export * from './calendar';
 
 export { CheckboxComponent } from './checkbox/checkbox.component';
@@ -40,7 +41,8 @@ export * from './radio';
 export * from './router-outlet';
 
 export * from './shared';
-export { SegmentedControlComponent } from './segmented-control/segmented-control.component';
+/* prettier-ignore */
+export { SegmentedControlComponent, SegmentedControlMode} from './segmented-control/segmented-control.component'; // See issue #1555 for prettier-ignore explanation
 export { SegmentItem } from './segmented-control/segment-item';
 export { SlideButtonComponent } from './slide-button/slide-button.component';
 export * from './slides/slides.component';

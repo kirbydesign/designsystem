@@ -13,13 +13,35 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
-import moment from 'moment';
+import {
+  add,
+  differenceInDays,
+  eachDayOfInterval,
+  endOfMonth,
+  endOfWeek,
+  format,
+  getYear,
+  isAfter,
+  isBefore,
+  isSameDay,
+  isSameMonth,
+  isWeekend,
+  Locale as LocaleDateFns,
+  startOfDay,
+  startOfMonth,
+  startOfWeek,
+} from 'date-fns';
+import { utcToZonedTime, zonedTimeToUtc } from 'date-fns-tz';
+import { da, enGB, enUS } from 'date-fns/locale';
+
+import { capitalizeFirstLetter } from '../../helpers/string-helper';
 
 import { CalendarCell } from './helpers/calendar-cell.model';
 import { CalendarOptions } from './helpers/calendar-options.model';
 import { CalendarHelper } from './helpers/calendar.helper';
 import { CalendarYearNavigatorConfig } from './options/calendar-year-navigator-config';
 
+export type Locale = LocaleDateFns;
 interface CalendarDay {
   isCurrentMonth: boolean;
   isToday: boolean;
@@ -27,6 +49,17 @@ interface CalendarDay {
   isPast: boolean;
   isFuture: boolean;
   isDisabled: boolean;
+}
+
+enum TimeUnit {
+  years = 'years',
+  months = 'months',
+  weeks = 'weeks',
+  days = 'days',
+  hours = 'hours',
+  minutes = 'minutes',
+  seconds = 'seconds',
+  milliseconds = 'milliseconds',
 }
 
 @Component({
@@ -39,11 +72,13 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   @ViewChild('calendarContainer', { static: false }) calendarContainer: ElementRef;
   @Output() dateChange = new EventEmitter<Date>();
   @Output() dateSelect = new EventEmitter<Date>();
+  @Output() yearSelect = new EventEmitter<number>();
   @Input() timezone: 'local' | 'UTC' = 'local';
   @Input() disableWeekends = false;
   @Input() disablePastDates = false;
   @Input() disableFutureDates = false;
   @Input() alwaysEnableToday = false;
+  @Input() customLocales: { [key: string]: Locale } = {};
   /**
    * Configuration for the year navigator.
    *
@@ -52,18 +87,22 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
    * - prioritizes minDate and maxDate over yearNavigatorOptions.from and yearNavigatorOptions.to
    */
   @Input() yearNavigatorOptions: CalendarYearNavigatorConfig;
-  public month: CalendarCell[][];
-  public weekDays: string[];
+
+  _month: CalendarCell[][];
+  _weekDays: string[];
   private selectedDay: CalendarCell;
-  // NOTE: Internally, all objects wrapping timestamps (i.e. Date and moment.Moment)
+  // NOTE: Internally, all Dates
   // are normalized to point to local timezone midnight, regardless of the timezone
   // setting.
-  private activeMonth: moment.Moment;
+  private activeMonth: Date;
   private _selectedDate: Date;
-  private _disabledDates: Date[];
+  private _disabledDates: Date[] = [];
   private _todayDate: Date;
   private _minDate: Date;
   private _maxDate: Date;
+  private locale: Locale;
+  private timeZoneName: string;
+  private includedLocales = { da, enGB, enUS };
 
   get selectedDate(): Date {
     return this._selectedDate;
@@ -72,6 +111,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() set selectedDate(valueLocalOrUTC: Date) {
     const value = this.normalizeDate(valueLocalOrUTC);
     this.setActiveMonth(value);
+
     if (this.hasDateChanged(value, this._selectedDate)) {
       this.onSelectedDateChange(value);
       this._selectedDate = value;
@@ -83,7 +123,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   @Input() set disabledDates(value: Date[]) {
-    this._disabledDates = this.normalizeDates(value);
+    this._disabledDates = (value || []).map((date) => this.normalizeDate(date));
   }
 
   get todayDate(): Date {
@@ -99,7 +139,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   @Input() set minDate(value: Date) {
-    if (value && this.activeMonth && this.activeMonth.isBefore(value)) {
+    if (value && this.activeMonth && isBefore(this.activeMonth, value)) {
       this.setActiveMonth(value);
     }
     this._minDate = this.normalizeDate(value);
@@ -110,18 +150,18 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   @Input() set maxDate(value: Date) {
-    if (value && this.activeMonth && this.activeMonth.isAfter(value)) {
+    if (value && this.activeMonth && isAfter(this.activeMonth, value)) {
       this.setActiveMonth(value);
     }
     this._maxDate = this.normalizeDate(value);
   }
 
   get activeMonthName(): string {
-    return this.capitalizeFirstLetter(this.activeMonth.format('MMMM'));
+    return capitalizeFirstLetter(this.formatWithLocale(this.activeMonth, 'MMMM'));
   }
 
   get activeYear(): string {
-    return this.activeMonth.format('YYYY');
+    return this.formatWithLocale(this.activeMonth, 'yyyy');
   }
 
   /**
@@ -146,13 +186,29 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
     return !!this.yearNavigatorOptions;
   }
 
-  constructor(private calendarHelper: CalendarHelper, @Inject(LOCALE_ID) private locale: string) {
-    moment.locale(this.locale);
-    moment().format('YYYY-MM-DD');
+  constructor(private calendarHelper: CalendarHelper, @Inject(LOCALE_ID) locale: string) {
+    this.locale = this.mapLocale(locale);
+    this.timeZoneName = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  }
+
+  private formatWithLocale(date: Date, formatString: string): string {
+    return format(date, formatString, {
+      locale: this.locale,
+    });
+  }
+
+  private mapLocale(locale: string): Locale {
+    if (locale === 'en') {
+      locale = 'enGB'; // if english locale is provided without region, we default to GB
+    }
+    locale = locale.replace('-', '');
+    const availableLocales = { ...this.includedLocales, ...this.customLocales };
+
+    return availableLocales[locale] || this.includedLocales.enGB; // Default to enGB if injected locale doesnt exist
   }
 
   ngOnInit() {
-    this.weekDays = this.getWeekDays();
+    this._weekDays = this.getWeekDays();
     this.setActiveMonth(this.selectedDate);
   }
 
@@ -160,7 +216,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
     this.calendarHelper.init(
       this.calendarContainer,
       this.getHelperOptions(),
-      this.onDateSelected.bind(this),
+      this._onDateSelected.bind(this),
       this.onChangeMonth.bind(this)
     );
   }
@@ -182,9 +238,9 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
     }
   }
 
-  private setActiveMonth(date?: Date) {
-    if (!this.activeMonth || !this.activeMonth.isSame(date, 'month')) {
-      this.activeMonth = moment(date).startOf('month');
+  private setActiveMonth(date: Date = new Date()) {
+    if (!this.activeMonth || !isSameMonth(this.activeMonth, date)) {
+      this.activeMonth = startOfMonth(date);
       this.refreshActiveMonth();
       this.calendarHelper.update(this.getHelperOptions());
     }
@@ -196,46 +252,37 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   // We currently log no warnings if the date doesn't match the timezone setting or
   // if it doesn't point to midnight.
   private normalizeDate(dateLocalOrUTC: Date) {
-    if (dateLocalOrUTC) {
-      // prettier-ignore
-      if (moment(dateLocalOrUTC).startOf('day').isSame(moment(dateLocalOrUTC))) {
-        // date is local timezone midnight
-        return dateLocalOrUTC;
-      
-      // prettier-ignore
-      } else if (moment.utc(dateLocalOrUTC).startOf('day').isSame(moment.utc(dateLocalOrUTC))) {
-        // the date is a utc midnight; create the equivalent local timezone midnight date
-        const utcMidnightMoment = moment.utc(dateLocalOrUTC);
-        return moment(utcMidnightMoment.format('YYYY-MM-DD')).toDate();
-      
-      } else {
-        // does not point to midnight so best assumption is to chop off the time part
-        return moment(dateLocalOrUTC).startOf('day').toDate();
-      }
-    }
-  }
+    if (!dateLocalOrUTC) return;
 
-  private normalizeDates(datesLocalOrUTC: Date[]) {
-    if (datesLocalOrUTC) {
-      return datesLocalOrUTC.map(this.normalizeDate);
+    if (startOfDay(dateLocalOrUTC).getTime() === dateLocalOrUTC.getTime()) {
+      // date is local timezone midnight
+      return dateLocalOrUTC;
     }
-  }
-
-  private capitalizeFirstLetter(string: string) {
-    if (typeof string !== 'string') {
-      return '';
+    if (
+      startOfDay(utcToZonedTime(dateLocalOrUTC, this.timeZoneName)).getTime() ===
+      utcToZonedTime(dateLocalOrUTC, this.timeZoneName).getTime()
+    ) {
+      // the date is a UTC midnight; create the equivalent local timezone midnight date
+      const normalizedUTCdate = utcToZonedTime(dateLocalOrUTC, this.timeZoneName);
+      return normalizedUTCdate;
     }
-    return string.charAt(0).toUpperCase() + string.slice(1);
+    // does not point to midnight so we make it
+    return startOfDay(dateLocalOrUTC);
   }
 
   private getWeekDays(): string[] {
-    return [1, 2, 3, 4, 5, 6, 7].map((index) =>
-      moment()
-        .isoWeekday(index)
-        .format('dd')
-        .substr(0, 1)
-        .toUpperCase()
-    );
+    const now = new Date();
+
+    const week = eachDayOfInterval({
+      start: startOfWeek(now, { locale: this.locale }),
+      end: endOfWeek(now, { locale: this.locale }),
+    });
+
+    return week.map((date) => this.getFirstLetterOfWeekDayCapitalized(date));
+  }
+
+  private getFirstLetterOfWeekDayCapitalized(date: Date) {
+    return this.formatWithLocale(date, 'EEEEE');
   }
 
   private hasDateChanged(newDate: Date, previousDate: Date): boolean {
@@ -245,51 +292,35 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
     if (newDate instanceof Date && !previousDate) {
       return true;
     }
-    return !this.isSameDay(newDate, previousDate);
+    return !isSameDay(newDate, previousDate);
   }
 
-  private isSameDay(date1: Date | moment.Moment, date2: Date | moment.Moment): boolean {
-    // Moment will return a new moment with the current time from `undefined`,
-    // so `moment(date1).isSame(undefined, 'day')` will return `true` if date1 equals current time:
-    if (!date1 || !date2) {
-      return false;
-    }
-    return moment(date1).isSame(date2, 'day');
-  }
-
-  private isDisabledDate(date: Date | moment.Moment) {
-    let isDisabled = false;
-
-    if (this.disabledDates && this.disabledDates.length > 0) {
-      this.disabledDates.forEach((disabledDate) => {
-        if (moment(disabledDate).isSame(date, 'day')) {
-          isDisabled = true;
-        }
-      });
-    }
-    return isDisabled;
+  private isDisabledDate(date: Date): boolean {
+    return this.disabledDates.some((disabledDate) => {
+      return isSameDay(disabledDate, date);
+    });
   }
 
   refreshActiveMonth() {
     if (!this.activeMonth) return;
-    // IMPORTANT: Moment startOf|endOf functions mutates the date!
-    // Clone the date before mutating:
-    const monthStart = this.activeMonth.clone().startOf('month');
-    const monthEnd = this.activeMonth.clone().endOf('month');
-    const startOfFirstWeek = monthStart.clone().startOf('isoWeek');
-    const endOfLastWeek = monthEnd.clone().endOf('isoWeek');
-    const totalDayCount = endOfLastWeek.diff(startOfFirstWeek, 'days') + 1;
-    const today = moment(this.todayDate ? this.todayDate : undefined).startOf('day');
+
+    const monthStart = startOfMonth(this.activeMonth);
+    const monthEnd = endOfMonth(this.activeMonth);
+    const startOfFirstWeek = startOfWeek(monthStart, { locale: this.locale });
+    const endOfLastWeek = endOfWeek(monthEnd, { locale: this.locale });
+    const totalDayCount = differenceInDays(endOfLastWeek, startOfFirstWeek) + 1;
+    const today = this.todayDate ? startOfDay(this.todayDate) : startOfDay(new Date());
+
     const daysArray = Array.from(Array(totalDayCount).keys());
 
     const days: CalendarCell[] = daysArray.map((number) => {
-      const momentDate = startOfFirstWeek.clone().add(number, 'days');
-      const day = this.getCalendarDay(momentDate, today, monthStart);
+      const cellDate = add(startOfFirstWeek, { [TimeUnit.days]: number });
+      const day = this.getCalendarDay(cellDate, today, monthStart);
 
-      const isSelectable = this.isSelectable(day, momentDate);
-      const isSelected = this.isSameDay(this.selectedDate, momentDate);
+      const isSelectable = this.isSelectable(day, cellDate);
+      const isSelected = isSameDay(this.selectedDate, cellDate);
       const cell = {
-        date: momentDate.date(),
+        date: cellDate.getDate(),
         isCurrentMonth: day.isCurrentMonth,
         isSelectable,
         isSelected,
@@ -300,25 +331,21 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
       }
       return cell;
     });
-    this.month = this.chunk(days, 7);
+    this._month = this.chunk(days, 7);
   }
 
-  private getCalendarDay(
-    date: moment.Moment,
-    today: moment.Moment,
-    monthStart: moment.Moment
-  ): CalendarDay {
+  private getCalendarDay(date: Date, today: Date, monthStart: Date): CalendarDay {
     return {
-      isToday: date.isSame(today, 'day'),
-      isPast: date.isBefore(today),
-      isFuture: date.isAfter(today),
-      isWeekend: date.isoWeekday() === 6 || date.isoWeekday() === 7,
-      isCurrentMonth: date.isSame(monthStart, 'month'),
+      isToday: isSameDay(today, date),
+      isPast: isBefore(date, today),
+      isFuture: isAfter(date, today),
+      isWeekend: isWeekend(date),
+      isCurrentMonth: isSameMonth(date, monthStart),
       isDisabled: this.isDisabledDate(date),
     };
   }
 
-  private isSelectable(day: CalendarDay, date: moment.Moment) {
+  private isSelectable(day: CalendarDay, date: Date) {
     return (
       (this.alwaysEnableToday && day.isToday) ||
       (!day.isDisabled &&
@@ -326,8 +353,8 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
         !(this.disableWeekends && day.isWeekend) &&
         !(this.disablePastDates && day.isPast) &&
         !(this.disableFutureDates && day.isFuture) &&
-        !(this.minDate && date.isBefore(this.minDate, 'day')) &&
-        !(this.maxDate && date.isAfter(this.maxDate, 'day')))
+        !(this.minDate && isBefore(date, this.minDate)) &&
+        !(this.maxDate && isAfter(date, this.maxDate)))
     );
   }
 
@@ -371,18 +398,16 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
     this.calendarHelper.setSelectedDay(newDate.getDate());
   }
 
-  onDateSelected(newDay: CalendarCell) {
+  _onDateSelected(newDay: CalendarCell) {
     if (newDay.isSelectable && newDay.date) {
-      const newDate = this.activeMonth
-        .clone()
-        .date(newDay.date)
-        .toDate();
+      let newDate = new Date(this.activeMonth);
 
-      // emit equivalent date in utc midnight if timezone is not local
-      const dateToEmit =
-        this.timezone === 'local'
-          ? newDate
-          : moment.utc(moment(newDate).format('YYYY-MM-DD')).toDate();
+      if (this.timezone === 'UTC') {
+        newDate = zonedTimeToUtc(this.subtractTimezoneOffset(newDate), this.timeZoneName);
+      }
+
+      newDate.setDate(newDay.date);
+      const dateToEmit = newDate;
 
       if (this.hasDateChanged(newDate, this._selectedDate)) {
         this.onSelectedDateChange(newDate);
@@ -394,43 +419,53 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   private onChangeMonth(direction: number) {
-    this.changeMonth(direction);
+    this._changeMonth(direction);
     this.calendarHelper.update(this.getHelperOptions());
   }
 
-  changeMonth(index: number) {
-    this.changeActiveView(index, 'months');
+  _changeMonth(index: number) {
+    this.changeActiveView(index, TimeUnit.months);
   }
 
-  public changeYear(year: number) {
-    this.changeActiveView(year - this.activeMonth.year(), 'years');
+  _changeYear(year: string) {
+    const yearNumeric = Number(year);
+    this.changeActiveView(yearNumeric - getYear(this.activeMonth), TimeUnit.years);
+    this.yearSelect.emit(yearNumeric);
   }
 
-  private changeActiveView(index: number, unit: moment.unitOfTime.Base) {
-    if (index != 0) {
-      this.activeMonth.add(index, unit);
-      this.refreshActiveMonth();
-    }
+  private changeActiveView(index: number, unit: TimeUnit) {
+    if (index === 0) return;
+    this.activeMonth = add(this.activeMonth, { [unit]: index });
+
+    this.refreshActiveMonth();
   }
 
-  public get canNavigateBack(): boolean {
-    return (
-      !(this.disablePastDates && moment().isSame(this.activeMonth, 'month')) &&
-      !(this.minDate && this.activeMonth.isSameOrBefore(this.minDate, 'month'))
-    );
+  get _canNavigateBack(): boolean {
+    const reachedPastDatesLimit =
+      this.disablePastDates && isSameMonth(this.activeMonth, this.todayDate);
+
+    const reachedOrExceededMinDate =
+      this.minDate &&
+      (isSameMonth(this.activeMonth, this.minDate) || isBefore(this.activeMonth, this.minDate));
+
+    return !reachedPastDatesLimit && !reachedOrExceededMinDate;
   }
 
-  public get canNavigateForward(): boolean {
-    return (
-      !(this.disableFutureDates && moment().isSame(this.activeMonth, 'month')) &&
-      !(this.maxDate && this.activeMonth.isSameOrAfter(this.maxDate, 'month'))
-    );
+  get _canNavigateForward(): boolean {
+    const reachedFutureDatesLimit =
+      this.disableFutureDates && isSameMonth(this.activeMonth, this.todayDate);
+
+    const reachedOrExceededMaxDate =
+      this.maxDate &&
+      (isSameMonth(this.activeMonth, this.maxDate) || isAfter(this.activeMonth, this.maxDate));
+
+    return !reachedFutureDatesLimit && !reachedOrExceededMaxDate;
   }
 
   private getCell(date: Date) {
     let foundDay = null;
     if (date) {
-      for (let week of this.month) {
+      for (let week of this._month) {
         foundDay = week.find((day) => {
           return day.isCurrentMonth && day.date === date.getDate();
         });
@@ -444,13 +479,18 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
 
   private getHelperOptions(): CalendarOptions {
     return {
-      canNavigateBack: this.canNavigateBack,
-      canNavigateForward: this.canNavigateForward,
+      canNavigateBack: this._canNavigateBack,
+      canNavigateForward: this._canNavigateForward,
       year: this.activeYear,
       monthName: this.activeMonthName,
-      weekDays: this.weekDays,
-      month: this.month,
+      weekDays: this._weekDays,
+      month: this._month,
     };
+  }
+
+  private subtractTimezoneOffset(date: Date): Date {
+    const timezoneOffsetInMs = date.getTimezoneOffset() * 60 * 1000;
+    return new Date(date.getTime() - timezoneOffsetInMs);
   }
 
   private getDateFromNavigableYear(navigableYear: number | Date): Date {

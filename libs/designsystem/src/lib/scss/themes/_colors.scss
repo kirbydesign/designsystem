@@ -2,7 +2,7 @@ $brand-colors: (
   'primary': #00e89a,
   'secondary': #005c3c,
   'tertiary': #01352c,
-);
+) !default;
 
 $notification-colors: (
   'success': #2cf287,

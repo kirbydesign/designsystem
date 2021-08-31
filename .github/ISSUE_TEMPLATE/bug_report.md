@@ -7,51 +7,64 @@ assignees: ''
 
 ---
 
-**Describe the bug**
-<!--A clear and concise description of what the bug is.-->
+- [ ] I have written a [good issue](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Issue) 
 
-**To Reproduce**
-Steps to reproduce the behavior:
+<!-- 
+Explanation of applied labels can be found here: https://github.com/kirbydesign/designsystem/labels
+
+The good issue: contains only one issue, is self-contained, is specific & unambigious, follows the template, has a good title, is easy to read and contains screenshots & -recordings
+-->
+
+## Describe the bug
+<!-- Replace this paragraph with a clear and concise description of what the bug is. --> 
+
+## Describe how to reproduce the bug
+<!-- Replace this with steps to reproduce the behavior: 
 
 1. Go to '...'
 2. Click on '....'
 3. Scroll down to '....'
-4. See error
+4. See error -->
 
-**Kirby version**
-- [e.g. 1.1.10]
+## Which Kirby version was used?
+<!-- e.g. 1.1.10 --> 
 
-**Expected behavior**
-<!--A clear and concise description of what you expected to happen...-->
+## What was the expected behavior?
+<!-- Replace this paragraph with a clear and concise description of what you expected to happen -->
 
-**Screenshots**
-<!--If applicable, add screenshots to help explain your problem.-->
+## Add any screenshots
+<!-- Replace this paragraph with screenshots to help explain your problem (if applicable) -->
 
-**Please complete the following information:**
+## Please complete the following information:
 - OS: [e.g. Windows, MacOS, iOS]
 - Browser [e.g. Chrome, Safari]
 - Browser version [e.g. 22]
 
-**Additional context**
-Add any other context about the problem here.
+## Are there any additional context?
+<!-- Replace this paragraph with any additional context about the problem here (if any) -->
 
-<!--**Process around fixing and prioritization**-->
-<!--In order to fix bugs in a timely fashion please follow these few steps when relevant-->
+<hr />
 
-<!--*NOT Prioritized*-->
-<!--Consider urgency of the Bug and be specific if it is blocking for your project. Describe any deadlines for the issue - eg. X needs this done by Y date, to be used in Z sprint. Suggest a milestone for the issue. The Not Prioritized will be removed by the Kirby team. If the bug has "low" priority it will be solved eventually - typically when working with the effected component in a different context.-->
+## Checklist:
 
-<!--*NOT Verified*-->
-<!--The reported bug might be inteded behaviour - the bug should therefore be verified before it is fixed. Ask a member of @kirbydesign/kirby-guild to verify the bug, before you begin fixing it. When the bug is verified the "NOT Verified" label will be removed.-->
+The following tasks should be carried out in sequence in order to follow [the process of contributing](../CONTRIBUTING.md/#the-process-of-contributing) correctly.
 
+### Verification
+To make sure the bug is not intended behaviour; it should be verified by a member of team Kirby before moving on to implementation. 
 
-## Tasks:
-- [ ] Have the bug report verified by contacting a member of @kirbydesign/kirby-guild
-- [ ] Move issue from "Ready to do" -> "in progress" on our [project board](https://github.com/kirbydesign/designsystem/projects/1)
-- [ ] Create Fix Branch
-- [ ] Create test reproducing the error
-- [ ] Fix
-- [ ] If relevant [Update Examples and Showcase](https://cookbook.kirby.design/home/showcase/button)
-- [ ] Push commits to GitHub
-- [ ] Open a pull request (remember to add `closes #issueno` to the description) and ask @kirbydesign/kirby-guild for review
-- [ ] Merge to master and delete branch
+- [ ] Make sure the `NOT verified` label has been removed by a member of [team Kirby](../SUPPORT.md/#team-kirby); do not proceed until this is done
+
+### Implementation 
+The contributor who wants to implement this issue should: 
+
+- [ ] Make sure you have read: "[Before you get coding](../CONTRIBUTING.md/#before-you-get-coding)".
+- [ ] Signal to others you are working on the issue by assigning yourself.
+- [ ] Create a branch from the [master branch](https://github.com/kirbydesign/designsystem/tree/master) following our [branch naming convention](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Branch). 
+- [ ] Create a test that reproduces the bug following guidelines in: "[The good: Test](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Test)". 
+- [ ] Write code to fix the bug
+
+### Review
+Once the issue has been implemented and is ready for review:
+
+- [ ] Do a [self-review](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Self-review). 
+- [ ] Create a pull-request.
