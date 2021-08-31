@@ -122,7 +122,10 @@ export const CHART_TYPE_CONFIGS = {
   },
   line: {
     type: 'line',
-    options: {},
+    options: {
+      pointRadius: 0,
+      tension: 0.3,
+    },
   },
 };
 
