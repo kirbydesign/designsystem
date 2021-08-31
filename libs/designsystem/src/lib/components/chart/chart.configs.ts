@@ -1,11 +1,4 @@
-import {
-  ActiveElement,
-  Chart,
-  ChartEvent,
-  ChartOptions,
-  ChartType as ChartJSType,
-  ScriptableContext,
-} from 'chart.js';
+import { ActiveElement, Chart, ChartEvent, ChartOptions, ScriptableContext } from 'chart.js';
 
 import { ColorHelper, DesignTokenHelper } from '../../helpers';
 
@@ -70,7 +63,7 @@ export const CHART_GLOBAL_DEFAULTS = {
 
 export const CHART_TYPE_CONFIGS = {
   bar: {
-    type: 'bar' as ChartJSType,
+    type: 'bar',
     options: {
       barPercentage: 0.6,
       indexAxis: 'y',
@@ -99,7 +92,7 @@ export const CHART_TYPE_CONFIGS = {
     },
   },
   column: {
-    type: 'bar' as ChartJSType,
+    type: 'bar',
     options: {
       barPercentage: 0.6,
       indexAxis: 'x',
@@ -126,6 +119,10 @@ export const CHART_TYPE_CONFIGS = {
         },
       },
     },
+  },
+  line: {
+    type: 'line',
+    options: {},
   },
 };
 
