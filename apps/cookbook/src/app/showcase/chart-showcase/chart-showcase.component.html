@@ -46,6 +46,15 @@
   </kirby-card>
 </p>
 
+<h3>Line Chart</h3>
+<p>
+  <kirby-card [mode]="_cardMode" [hasPadding]="_cardHasPadding">
+    <cookbook-example-viewer [html]="lineExample.template">
+      <cookbook-chart-example-line #lineExample></cookbook-chart-example-line>
+    </cookbook-example-viewer>
+  </kirby-card>
+</p>
+
 <kirby-divider [hasMargin]="true"></kirby-divider>
 
 <h2 id="custom-options">Custom Options</h2>
