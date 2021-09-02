@@ -10,6 +10,7 @@ const { getThemeColorHexString } = ColorHelper;
 const hoverBackgroundColor = getThemeColorHexString('primary');
 const backgroundColor = getThemeColorHexString('secondary');
 
+// Highlight elements that are added to the highlightedElements array
 function scriptedBackgroundColor(context: ScriptableContext<'bar'>) {
   const dataset = context.dataset as ChartDataset;
   const highlightedElements = dataset?.kirbyOptions?.highlightedElements;
@@ -21,6 +22,7 @@ function scriptedBackgroundColor(context: ScriptableContext<'bar'>) {
   }
 }
 
+// Only adds a hovercolor if an onClick handler is provided
 function scriptedHoverBackgroundColor(context: ScriptableContext<'bar'>) {
   if (context.chart.options.onClick) {
     return hoverBackgroundColor;
@@ -35,6 +37,10 @@ export const CHART_GLOBAL_DEFAULTS = {
     bar: {
       backgroundColor: scriptedBackgroundColor,
       hoverBackgroundColor: scriptedHoverBackgroundColor,
+    },
+    line: {
+      borderColor: scriptedBackgroundColor,
+      tension: 0.3,
     },
   },
   scales: {
@@ -122,10 +128,6 @@ export const CHART_TYPE_CONFIGS = {
   },
   line: {
     type: 'line',
-    options: {
-      pointRadius: 0,
-      tension: 0.3,
-    },
   },
 };
 
