@@ -128,6 +128,13 @@ export const CHART_TYPE_CONFIGS = {
   },
   line: {
     type: 'line',
+    options: {
+      elements: {
+        point: {
+          pointRadius: 0,
+        },
+      },
+    },
   },
 };
 
