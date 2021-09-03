@@ -5,49 +5,59 @@ on:
     types: closed
     branches: master
     paths: 'libs/**'
-
+    
 defaults:
   run:
     shell: bash
 
 jobs:
-  bump_version_and_publish:
-    name: Bump and publish new package version to npm
+  bump_package_versions:
+    name: Bump packages on changes in the their respective libs
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged
     steps:
-      - name: Checkout master branch
+      - name: Checkout repo
         uses: actions/checkout@v2
         with:
           token: ${{secrets.VERSION_BUMP_GITHUB_TOKEN}}
-      - name: Get Node.JS version from package.json
-        run: echo "NODE_VERSION=$(jq -r .engines.node ./package.json)" >> $GITHUB_ENV
-      - name: Install Node.js
-        uses: actions/setup-node@v2
+      - name: Check modified files
+        id: modified-files
+        uses: dorny/paths-filter@v2.9.2
         with:
-          node-version: ${{env.NODE_VERSION}}
-      - name: Fetch Node Modules Cache
-        uses: actions/cache@v2
-        id: cache
-        with:
-          path: | 
-            **/node_modules
-          key: node-modules-${{runner.os}}-${{env.NODE_VERSION}}-${{hashFiles('**/package.json', '**/package-lock.json')}}
-      - name: Clean Install NPM Dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: npm ci
-      - name: Run Postinstall Script
-        if: steps.cache.outputs.cache-hit == 'true'
-        run: npm run postinstall
+          filters: |
+            core:
+              - 'libs/core/**'
       - name: Configure git
         run: |
-          git config user.name "Kirby Bot"
+          git config user.name "Kirby Bot" 
           git config user.email "<>"
       - name: Create npm config
+        if: steps.modified-files.outputs.core == 'true'
+        run:  |
+          cd libs/core 
+          echo '//registry.npmjs.org/:_authToken=${{secrets.NPM_PUBLISH_TOKEN}}' > ~/.npmrc
+      - name: Bump core package and update version in designsystem
+        id: bump-core
+        if: steps.modified-files.outputs.core == 'true'
+        run: | # patch version -> write without 'v' to variable -> update core package dependency in designsystem -> commit patch manually due to https://github.com/npm/cli/issues/2010#issuecomment-863288622 
+          cd libs/core
+          NEW_VERSION=$(npm version patch | cut -d v -f2) 
+          cd ../../ 
+          echo $(jq --arg version "$NEW_VERSION" '.dependencies["@kirbydesign/core"]=$version' libs/designsystem/package.json) > libs/designsystem/package.json
+          npx prettier --write libs/designsystem/package.json
+          git add libs/core/package.json libs/designsystem/package.json 
+          GIT_MESSAGE=":bookmark:Bumping version to $NEW_VERSION (core)"
+          git commit -m "$GIT_MESSAGE" 
+      - name: Publish core package to npm
+        if: steps.modified-files.outputs.core == 'true'
+        run: |
+          npm run build:core
+          cd libs/core
+          npm publish --access public
+      - name: Create npm config
         run: echo '//registry.npmjs.org/:_authToken=${{secrets.NPM_PUBLISH_TOKEN}}' > ~/.npmrc
-      - name: Bump version
-        run: npm version patch -m ":bookmark:Bumping version to %s"
-      - name: Build package and publish to npm
+      - name: Bump designsystem package
+        run: npm version patch -m ":bookmark:Bumping version to %s (designsystem)"
+      - name: Publish designsystem package to npm
         run: npm run publish
-      - name: Push version bump and tag to Github
+      - name: Push version bump(s) and tag to Github
         run: git push --follow-tags
