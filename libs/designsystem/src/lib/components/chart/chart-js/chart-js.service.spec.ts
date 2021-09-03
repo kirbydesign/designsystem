@@ -10,7 +10,7 @@ import { ChartHighlightedElements } from '../chart.types';
 
 import { ChartJSService } from './chart-js.service';
 
-describe('ChartJSService', () => {
+fdescribe('ChartJSService', () => {
   let chartJSService: ChartJSService;
   let canvasElement: ElementRef<HTMLCanvasElement>;
 
@@ -232,6 +232,16 @@ describe('ChartJSService', () => {
 
       describe('when type is ChartType.column', () => {
         let chart: Chart;
+        it('should use correct ChartJS type', () => {
+          chartJSService.renderChart({
+            targetElement: canvasElement,
+            type: 'column',
+            data: [1, 2, 3],
+          });
+          const chart = chartJSService['chart'];
+
+          expect(chart.config.type).toBe('bar');
+        });
 
         describe('and no custom options are passed', () => {
           beforeEach(() => {
@@ -298,9 +308,20 @@ describe('ChartJSService', () => {
     });
 
     describe('when type is ChartType.line', () => {
-      let chart: Chart;
+      it('should use correct ChartJS type', () => {
+        chartJSService.renderChart({
+          targetElement: canvasElement,
+          type: 'line',
+          data: [1, 2, 3],
+        });
+        const chart = chartJSService['chart'];
+
+        expect(chart.config.type).toBe('line');
+      });
 
       describe('and no custom options are passed', () => {
+        let chart: Chart;
+
         beforeEach(() => {
           chartJSService.renderChart({
             targetElement: canvasElement,
@@ -355,6 +376,17 @@ describe('ChartJSService', () => {
 
     describe('when type is ChartType.bar', () => {
       let chart: Chart;
+
+      it('should use correct ChartJS type', () => {
+        chartJSService.renderChart({
+          targetElement: canvasElement,
+          type: 'bar',
+          data: [1, 2, 3],
+        });
+        const chart = chartJSService['chart'];
+
+        expect(chart.config.type).toBe('bar');
+      });
 
       describe('and no custom options are passed', () => {
         beforeEach(() => {
