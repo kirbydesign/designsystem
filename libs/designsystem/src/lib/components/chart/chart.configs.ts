@@ -131,7 +131,7 @@ export const CHART_TYPE_CONFIGS = {
     options: {
       elements: {
         point: {
-          pointRadius: 0,
+          radius: 0,
         },
       },
     },
