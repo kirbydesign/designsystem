@@ -91,147 +91,49 @@ describe('ChartJSService', () => {
       });
     });
 
-    describe('when data is given as a chartJSDataset[]', () => {
-      it('should render a new chart', () => {
-        expect(chartJSService['chart']).toBeUndefined();
+    describe('when custom options are given', () => {
+      it('should overwrite options set by global defaults', () => {
+        // Check if a global default is actually being overwritten
+        expect(CHART_GLOBAL_DEFAULTS.elements.bar.backgroundColor).not.toBeUndefined();
+        const customElementBackgroundColor = '#ffffff';
 
         chartJSService.renderChart({
           targetElement: canvasElement,
           type: 'bar',
-          data: [{ data: [1, 2, 3] }],
+          data: [1, 2, 3],
           dataLabels: ['one', 'two', 'three'],
-        });
-
-        expect(chartJSService['chart']).toBeInstanceOf(Chart);
-      });
-
-      it('should use the supplied data in the chart', () => {
-        const data = [1, 2, 3];
-        const dataset = {
-          data: data,
-        };
-
-        chartJSService.renderChart({
-          targetElement: canvasElement,
-          type: 'bar',
-          data: [dataset],
-          dataLabels: ['one', 'two', 'three'],
+          customOptions: {
+            elements: {
+              bar: {
+                backgroundColor: customElementBackgroundColor,
+              },
+            },
+          },
         });
 
         const chart = chartJSService['chart'];
-        expect(chart.data.datasets[0].data).toEqual(data);
+        expect(chart.options.elements.bar.backgroundColor).toEqual(customElementBackgroundColor);
       });
 
-      describe('that contains more than one entry', () => {
-        it('should use every supplied dataset in the chart', () => {
-          const data1 = [1, 2, 3];
-          const data2 = [4, 5, 6];
-          const datasets = [
-            {
-              data: data1,
-            },
-            { data: data2 },
-          ];
+      it('should overwrite type specific options', () => {
+        // Check if a type config is actually being overwritten
+        const type = 'bar';
+        const customIndexAxis = 'x';
+        expect(CHART_TYPE_CONFIGS[type].options.indexAxis).not.toBeUndefined();
+        expect(CHART_TYPE_CONFIGS[type].options.indexAxis).not.toEqual(customIndexAxis);
 
-          chartJSService.renderChart({
-            targetElement: canvasElement,
-            type: 'bar',
-            data: datasets,
-            dataLabels: ['one', 'two', 'three'],
-          });
-
-          const chart = chartJSService['chart'];
-          expect(chart.data.datasets[0].data).toEqual(data1);
-          expect(chart.data.datasets[1].data).toEqual(data2);
-        });
-      });
-
-      describe('when highlightedElements are given', () => {
-        it('should mark given elements as highlighted', () => {
-          const highlightedElements = [
-            [0, 0],
-            [0, 2],
-          ];
-
-          chartJSService.renderChart({
-            targetElement: canvasElement,
-            type: 'bar',
-            data: [{ data: [1, 2, 3] }],
-            dataLabels: ['one', 'two', 'three'],
-            highlightedElements,
-          });
-
-          const datasets = chartJSService['chart'].data.datasets as ChartDataset[];
-
-          expect(datasets.length).toEqual(1);
-          expect(datasets[0].kirbyOptions.highlightedElements).toEqual([0, 2]);
-        });
-      });
-    });
-
-    describe('when type is ChartType.column', () => {
-      let chart: Chart;
-
-      describe('and no custom options are passed', () => {
-        beforeEach(() => {
-          chartJSService.renderChart({
-            targetElement: canvasElement,
-            type: 'column',
-            data: [1, 2, 3],
-            dataLabels: ['one', 'two', 'three'],
-          });
-          chart = chartJSService['chart'];
+        chartJSService.renderChart({
+          targetElement: canvasElement,
+          type: 'bar',
+          data: [1, 2, 3],
+          dataLabels: ['one', 'two', 'three'],
+          customOptions: {
+            indexAxis: customIndexAxis,
+          },
         });
 
-        it('should draw without an axis line', () => {
-          expect(chart.options.scales['x'].grid.drawBorder).toBeFalse();
-        });
-
-        it('should have correct background color for elements', () => {
-          expect(chart.options.elements.bar.backgroundColor).toEqual(
-            ColorHelper.getThemeColorHexString('secondary')
-          );
-        });
-
-        it('should be rendered with correct typography for data labels', () => {
-          const { size } = chart.options.scales['x'].ticks.font as FontSpec;
-          const { color } = chart.options;
-          expect(size).toBe(12);
-          expect(color).toBe(ColorHelper.getThemeColorHexString('black'));
-        });
-
-        it('should have no hover background color for elements', () => {
-          expect(chart.options.elements.bar.hoverBackgroundColor).toBeUndefined();
-        });
-
-        it('should have no grid', () => {
-          expect(chart.options.scales.linear.display).toBeFalse();
-          expect(chart.options.scales.linear.ticks.display).toBeFalse();
-          expect(chart.options.scales.category.grid.display).toBeFalse();
-        });
-
-        it('should have no legend', () => {
-          expect(chart.options.plugins.legend.display).toBeFalse();
-        });
-      });
-
-      describe('and onClick is set via custom options', () => {
-        beforeEach(() => {
-          chartJSService.renderChart({
-            targetElement: canvasElement,
-            type: 'column',
-            data: [1, 2, 3],
-            dataLabels: ['one', 'two', 'three'],
-            customOptions: {
-              onClick: () => console.log('testing'),
-            },
-          });
-          chart = chartJSService['chart'];
-        });
-
-        it('should have correct hover background color', () => {
-          expect(chart.options.elements.bar.hoverBackgroundColor).toBe('#00e89a');
-        });
+        const chart = chartJSService['chart'];
+        expect(chart.options.indexAxis).toEqual(customIndexAxis);
       });
     });
 
@@ -248,6 +150,206 @@ describe('ChartJSService', () => {
         chartDataLabels.forEach((dataLabel) => {
           expect(dataLabel).toEqual('');
         });
+      });
+
+      describe('when data is given as a chartJSDataset[]', () => {
+        it('should render a new chart', () => {
+          expect(chartJSService['chart']).toBeUndefined();
+
+          chartJSService.renderChart({
+            targetElement: canvasElement,
+            type: 'bar',
+            data: [{ data: [1, 2, 3] }],
+            dataLabels: ['one', 'two', 'three'],
+          });
+
+          expect(chartJSService['chart']).toBeInstanceOf(Chart);
+        });
+
+        it('should use the supplied data in the chart', () => {
+          const data = [1, 2, 3];
+          const dataset = {
+            data: data,
+          };
+
+          chartJSService.renderChart({
+            targetElement: canvasElement,
+            type: 'bar',
+            data: [dataset],
+            dataLabels: ['one', 'two', 'three'],
+          });
+
+          const chart = chartJSService['chart'];
+          expect(chart.data.datasets[0].data).toEqual(data);
+        });
+
+        describe('that contains more than one entry', () => {
+          it('should use every supplied dataset in the chart', () => {
+            const data1 = [1, 2, 3];
+            const data2 = [4, 5, 6];
+            const datasets = [
+              {
+                data: data1,
+              },
+              { data: data2 },
+            ];
+
+            chartJSService.renderChart({
+              targetElement: canvasElement,
+              type: 'bar',
+              data: datasets,
+              dataLabels: ['one', 'two', 'three'],
+            });
+
+            const chart = chartJSService['chart'];
+            expect(chart.data.datasets[0].data).toEqual(data1);
+            expect(chart.data.datasets[1].data).toEqual(data2);
+          });
+        });
+
+        describe('when highlightedElements are given', () => {
+          it('should mark given elements as highlighted', () => {
+            const highlightedElements = [
+              [0, 0],
+              [0, 2],
+            ];
+
+            chartJSService.renderChart({
+              targetElement: canvasElement,
+              type: 'bar',
+              data: [{ data: [1, 2, 3] }],
+              dataLabels: ['one', 'two', 'three'],
+              highlightedElements,
+            });
+
+            const datasets = chartJSService['chart'].data.datasets as ChartDataset[];
+
+            expect(datasets.length).toEqual(1);
+            expect(datasets[0].kirbyOptions.highlightedElements).toEqual([0, 2]);
+          });
+        });
+      });
+
+      describe('when type is ChartType.column', () => {
+        let chart: Chart;
+
+        describe('and no custom options are passed', () => {
+          beforeEach(() => {
+            chartJSService.renderChart({
+              targetElement: canvasElement,
+              type: 'column',
+              data: [1, 2, 3],
+              dataLabels: ['one', 'two', 'three'],
+            });
+            chart = chartJSService['chart'];
+          });
+
+          it('should draw without an axis line', () => {
+            expect(chart.options.scales['x'].grid.drawBorder).toBeFalse();
+          });
+
+          it('should have correct background color for elements', () => {
+            expect(chart.options.elements.bar.backgroundColor).toEqual(
+              ColorHelper.getThemeColorHexString('secondary')
+            );
+          });
+
+          it('should be rendered with correct typography for data labels', () => {
+            const { size } = chart.options.scales['x'].ticks.font as FontSpec;
+            const { color } = chart.options;
+            expect(size).toBe(12);
+            expect(color).toBe(ColorHelper.getThemeColorHexString('black'));
+          });
+
+          it('should have no hover background color for elements', () => {
+            expect(chart.options.elements.bar.hoverBackgroundColor).toBeUndefined();
+          });
+
+          it('should have no grid', () => {
+            expect(chart.options.scales.linear.display).toBeFalse();
+            expect(chart.options.scales.linear.ticks.display).toBeFalse();
+            expect(chart.options.scales.category.grid.display).toBeFalse();
+          });
+
+          it('should have no legend', () => {
+            expect(chart.options.plugins.legend.display).toBeFalse();
+          });
+        });
+
+        describe('and onClick is set via custom options', () => {
+          beforeEach(() => {
+            chartJSService.renderChart({
+              targetElement: canvasElement,
+              type: 'column',
+              data: [1, 2, 3],
+              dataLabels: ['one', 'two', 'three'],
+              customOptions: {
+                onClick: () => console.log('testing'),
+              },
+            });
+            chart = chartJSService['chart'];
+          });
+
+          it('should have correct hover background color', () => {
+            expect(chart.options.elements.bar.hoverBackgroundColor).toBe('#00e89a');
+          });
+        });
+      });
+    });
+
+    describe('when type is ChartType.line', () => {
+      let chart: Chart;
+
+      describe('and no custom options are passed', () => {
+        beforeEach(() => {
+          chartJSService.renderChart({
+            targetElement: canvasElement,
+            type: 'line',
+            data: [1, 2, 3],
+            dataLabels: ['one', 'two', 'three'],
+          });
+          chart = chartJSService['chart'];
+        });
+
+        it('should hide point elements', () => {
+          expect(chart.options.elements.point.radius).toBe(0);
+        });
+
+        it('should have correct tension', () => {
+          expect(chart.options.elements.line.tension).toBe(0.3);
+        });
+
+        it('should draw the line with correct color', () => {
+          expect(chart.options.elements.line.borderColor).toBe(
+            ColorHelper.getThemeColorHexString('secondary')
+          );
+        });
+
+        it('should not display the y-axis', () => {
+          expect(chart.options.scales['y'].display).toBeFalse();
+        });
+
+        it('should have no grid', () => {
+          expect(chart.options.scales.linear.display).toBeFalse();
+          expect(chart.options.scales.linear.ticks.display).toBeFalse();
+          expect(chart.options.scales.category.grid.display).toBeFalse();
+        });
+
+        it('should have no legend', () => {
+          expect(chart.options.plugins.legend.display).toBeFalse();
+        });
+
+        it('should have no hover color for line', () => {
+          expect(chart.options.elements.line.hoverBackgroundColor).toBeUndefined();
+        });
+
+        // TODO: Figure out typography for chart
+        /*it('should be rendered with correct typography for data labels', () => {
+          const { size } = chart.options.scales['y'].ticks.font as FontSpec;
+          const { color } = chart.options;
+          expect(size).toBe(14);
+          expect(color).toBe(ColorHelper.getThemeColorHexString('black'));
+        });*/
       });
     });
 
@@ -314,52 +416,6 @@ describe('ChartJSService', () => {
         it('should have correct hover background color', () => {
           expect(chart.options.elements.bar.hoverBackgroundColor).toBe('#00e89a');
         });
-      });
-    });
-
-    describe('when custom options are given', () => {
-      it('should overwrite options set by global defaults', () => {
-        // Check if a global default is actually being overwritten
-        expect(CHART_GLOBAL_DEFAULTS.elements.bar.backgroundColor).not.toBeUndefined();
-        const customElementBackgroundColor = '#ffffff';
-
-        chartJSService.renderChart({
-          targetElement: canvasElement,
-          type: 'bar',
-          data: [1, 2, 3],
-          dataLabels: ['one', 'two', 'three'],
-          customOptions: {
-            elements: {
-              bar: {
-                backgroundColor: customElementBackgroundColor,
-              },
-            },
-          },
-        });
-
-        const chart = chartJSService['chart'];
-        expect(chart.options.elements.bar.backgroundColor).toEqual(customElementBackgroundColor);
-      });
-
-      it('should overwrite type specific options', () => {
-        // Check if a type config is actually being overwritten
-        const type = 'bar';
-        const customIndexAxis = 'x';
-        expect(CHART_TYPE_CONFIGS[type].options.indexAxis).not.toBeUndefined();
-        expect(CHART_TYPE_CONFIGS[type].options.indexAxis).not.toEqual(customIndexAxis);
-
-        chartJSService.renderChart({
-          targetElement: canvasElement,
-          type: 'bar',
-          data: [1, 2, 3],
-          dataLabels: ['one', 'two', 'three'],
-          customOptions: {
-            indexAxis: customIndexAxis,
-          },
-        });
-
-        const chart = chartJSService['chart'];
-        expect(chart.options.indexAxis).toEqual(customIndexAxis);
       });
     });
 
