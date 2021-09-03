@@ -76,7 +76,7 @@ jobs:
         run: echo '//registry.npmjs.org/:_authToken=${{secrets.NPM_PUBLISH_TOKEN}}' > ~/.npmrc
       - name: Bump designsystem package
         run: npm version patch -m ":bookmark:Bumping version to %s (designsystem)"
-      - name: Publish designsystem package to npm
+      - name: Build designsystem package and publish to npm
         run: npm run publish
       - name: Push version bump(s) and tag to Github
         run: git push --follow-tags
