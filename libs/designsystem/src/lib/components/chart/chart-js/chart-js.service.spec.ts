@@ -5,12 +5,12 @@ import { AnnotationOptions } from 'chartjs-plugin-annotation';
 import { ColorHelper } from '../../../helpers';
 import { CHART_ANNOTATION_CONFIGS, CHART_TYPE_CONFIGS } from '../chart.configs';
 import { CHART_GLOBAL_DEFAULTS } from '../chart.configs';
-import { ChartDataset } from '../chart.types';
+import { ChartDataset, ChartType } from '../chart.types';
 import { ChartHighlightedElements } from '../chart.types';
 
 import { ChartJSService } from './chart-js.service';
 
-describe('ChartJSService', () => {
+fdescribe('ChartJSService', () => {
   let chartJSService: ChartJSService;
   let canvasElement: ElementRef<HTMLCanvasElement>;
 
@@ -558,7 +558,7 @@ describe('ChartJSService', () => {
       });
     });
 
-    describe('function: updateType', () => {
+    fdescribe('function: updateType', () => {
       beforeEach(() => {
         chartJSService.renderChart({
           targetElement: canvasElement,
@@ -568,23 +568,36 @@ describe('ChartJSService', () => {
         });
       });
 
-      describe('if the new type is ChartType.bar', () => {
-        it('should destructively update the type', () => {
-          const destructivelyUpdateTypeSpy = spyOn<any>(chartJSService, 'destructivelyUpdateType');
+      let chartTypesThatDestructivelyUpdate: ChartType[] = ['bar', 'column'];
+      let chartTypesThatUpdateNormally: ChartType[] = ['line'];
 
-          chartJSService.updateType('bar', {});
+      chartTypesThatDestructivelyUpdate.forEach((chartType) => {
+        describe(`if the new type is ChartType.${chartType}`, () => {
+          it('should destructively update type', () => {
+            const destructivelyUpdateTypeSpy = spyOn<any>(
+              chartJSService,
+              'destructivelyUpdateType'
+            );
 
-          expect(destructivelyUpdateTypeSpy).toHaveBeenCalledTimes(1);
+            chartJSService.updateType(chartType, {});
+
+            expect(destructivelyUpdateTypeSpy).toHaveBeenCalledTimes(1);
+          });
         });
       });
 
-      describe('if the new type is ChartType.column', () => {
-        it('should destructively update the type', () => {
-          const destructivelyUpdateTypeSpy = spyOn<any>(chartJSService, 'destructivelyUpdateType');
+      chartTypesThatUpdateNormally.forEach((chartType) => {
+        describe(`if the new type is ChartType.${chartType}`, () => {
+          it('should update type non-destructively', () => {
+            const destructivelyUpdateTypeSpy = spyOn<any>(
+              chartJSService,
+              'destructivelyUpdateType'
+            );
 
-          chartJSService.updateType('column', {});
+            chartJSService.updateType(chartType, {});
 
-          expect(destructivelyUpdateTypeSpy).toHaveBeenCalledTimes(1);
+            expect(destructivelyUpdateTypeSpy).toHaveBeenCalledTimes(0);
+          });
         });
       });
     });
