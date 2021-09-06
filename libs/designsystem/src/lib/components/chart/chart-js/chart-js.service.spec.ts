@@ -19,6 +19,11 @@ const TEST_CHART_TYPE_CONFIGS = {
     options: {
       indexAxis: 'y',
     },
+    elements: {
+      line: {
+        borderColor: 'blue',
+      },
+    },
   },
   column: {
     type: 'bar',
@@ -30,6 +35,11 @@ const TEST_CHART_TYPE_CONFIGS = {
     type: 'line',
     options: {
       backgroundColor: 'blue',
+      elements: {
+        line: {
+          borderColor: 'red',
+        },
+      },
     },
   },
 };
@@ -43,7 +53,7 @@ const TEST_CHART_ANNOTATION_CONFIGS = {
   },
 };
 
-fdescribe('ChartJSService', () => {
+describe('ChartJSService', () => {
   let spectator: SpectatorService<ChartJSService>;
   let chartJSService: ChartJSService;
   let canvasElement: ElementRef<HTMLCanvasElement>;
@@ -465,7 +475,14 @@ fdescribe('ChartJSService', () => {
     });
 
     it('should apply config from new type', () => {
-      /*TODO: Make this test */
+      const newType = 'line';
+      const newBorderColor = TEST_CHART_TYPE_CONFIGS[newType].options.elements.line.borderColor;
+      expect(chart.options.elements.line.borderColor).not.toEqual(newBorderColor);
+
+      chartJSService['nonDestructivelyUpdateType'](newType);
+      chart.update(); // An update is needed for changes to be reflected
+
+      expect(chart.options.elements.line.borderColor).toEqual(newBorderColor);
     });
 
     it('should apply custom options', () => {
