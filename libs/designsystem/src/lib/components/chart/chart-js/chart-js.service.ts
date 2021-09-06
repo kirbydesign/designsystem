@@ -2,20 +2,17 @@ import { ElementRef, Injectable } from '@angular/core';
 import { ActiveElement, ChartConfiguration, ChartOptions } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
 
-import { deepCopy } from '../../../helpers/deep-copy';
 import { mergeDeepAll } from '../../../helpers/merge-deep';
 import { ChartDataset, ChartHighlightedElements, ChartType, isNumberArray } from '../chart.types';
-import {
-  CHART_ANNOTATION_CONFIGS,
-  CHART_TYPE_CONFIGS,
-  INTERACTION_FUNCTIONS_EXTENSIONS,
-} from '../configs/type.config';
+import { ChartConfigService } from '../configs/chart-config.service';
 
 import { Chart } from './configured-chart-js';
 
 @Injectable()
 export class ChartJSService {
   private chart: Chart;
+
+  constructor(private chartConfigService: ChartConfigService) {}
 
   public renderChart(args: {
     targetElement: ElementRef<HTMLCanvasElement>;
@@ -113,8 +110,9 @@ export class ChartJSService {
     this.initializeNewChart(canvasElement, config);
   }
 
-  private nonDestructivelyUpdateType(type: ChartType, customOptions?: ChartOptions) {
-    const chartJSType = this.getTypeConfig(type)['type'];
+  private nonDestructivelyUpdateType(chartType: ChartType, customOptions?: ChartOptions) {
+    //TODO: What?
+    const chartJSType = this.chartConfigService.getTypeConfig(chartType)['type'];
     const annotations = this.getExistingChartAnnotations();
 
     this.chart.options = this.createOptionsObject({
@@ -129,12 +127,6 @@ export class ChartJSService {
     this.chart = new Chart(canvasElement, config);
   }
 
-  private getTypeConfig(type: ChartType) {
-    /* Deep copy to avoid Chart object modifying parts of CHART_TYPE_CONFIGS 
-    as it copies by reference when initialized */
-    return deepCopy(CHART_TYPE_CONFIGS[type]);
-  }
-
   private createBlankLabels(datasets: ChartDataset[]): string[] {
     const largestDataset = datasets.reduce((previousDataset, currentDataset) =>
       previousDataset.data.length > currentDataset.data.length ? previousDataset : currentDataset
@@ -142,13 +134,9 @@ export class ChartJSService {
     return Array(largestDataset.data.length).fill('');
   }
 
-  private getAnnotationDefaults(type: string) {
-    return CHART_ANNOTATION_CONFIGS[type];
-  }
-
   private applyDefaultsToAnnotations(annotations: AnnotationOptions[]) {
     return annotations.map((annotation) => {
-      const annotationTypeDefaults = this.getAnnotationDefaults(annotation.type);
+      const annotationTypeDefaults = this.chartConfigService.getAnnotationDefaults(annotation.type);
       return mergeDeepAll(annotationTypeDefaults, annotation);
     });
   }
@@ -165,7 +153,7 @@ export class ChartJSService {
   }
 
   private applyInteractionFunctionsExtensions(options: ChartOptions): ChartOptions {
-    const interactionFunctionsExtensions = INTERACTION_FUNCTIONS_EXTENSIONS;
+    const interactionFunctionsExtensions = this.chartConfigService.getInteractionFunctionsExtensions();
     Object.entries(interactionFunctionsExtensions).forEach(([key, _]) => {
       const callback = options[key];
       options[key] = (e: Event, a: ActiveElement[], c: Chart) => {
@@ -182,7 +170,7 @@ export class ChartJSService {
   }): ChartOptions {
     const { type, customOptions, annotations } = args;
 
-    const typeConfig = this.getTypeConfig(type);
+    const typeConfig = this.chartConfigService.getTypeConfig(type);
     const typeConfigOptions = typeConfig?.options;
     const annotationPluginOptions = annotations
       ? this.createAnnotationPluginOptionsObject(annotations)
@@ -205,7 +193,7 @@ export class ChartJSService {
     to make it optional for consumer */
     const labels = !dataLabels ? this.createBlankLabels(datasets) : dataLabels;
     //TODO: I think this might be redundant? It should come in through options
-    const typeConfig = this.getTypeConfig(type);
+    const typeConfig = this.chartConfigService.getTypeConfig(type);
     return mergeDeepAll(typeConfig, {
       data: {
         labels,
