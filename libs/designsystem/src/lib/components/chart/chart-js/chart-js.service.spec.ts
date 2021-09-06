@@ -9,7 +9,6 @@ import { ChartDataset, ChartType } from '../chart.types';
 import { ChartHighlightedElements } from '../chart.types';
 import { ChartConfigService } from '../configs/chart-config.service';
 import { CHART_GLOBAL_DEFAULTS } from '../configs/global-defaults.config';
-import { CHART_ANNOTATION_CONFIGS, CHART_TYPE_CONFIGS } from '../configs/type.config';
 
 import { ChartJSService } from './chart-js.service';
 
@@ -17,15 +16,21 @@ import { ChartJSService } from './chart-js.service';
 const TEST_CHART_TYPE_CONFIGS = {
   bar: {
     type: 'bar',
-    options: {},
+    options: {
+      indexAxis: 'y',
+    },
   },
   column: {
     type: 'bar',
-    options: {},
+    options: {
+      backgroundColor: 'red',
+    },
   },
   line: {
     type: 'line',
-    options: {},
+    options: {
+      backgroundColor: 'blue',
+    },
   },
 };
 
@@ -38,7 +43,7 @@ const TEST_CHART_ANNOTATION_CONFIGS = {
   },
 };
 
-describe('ChartJSService', () => {
+fdescribe('ChartJSService', () => {
   let spectator: SpectatorService<ChartJSService>;
   let chartJSService: ChartJSService;
   let canvasElement: ElementRef<HTMLCanvasElement>;
@@ -161,8 +166,7 @@ describe('ChartJSService', () => {
         // Check if a type config is actually being overwritten
         const type = 'bar';
         const customIndexAxis = 'x';
-        expect(CHART_TYPE_CONFIGS[type].options.indexAxis).not.toBeUndefined();
-        expect(CHART_TYPE_CONFIGS[type].options.indexAxis).not.toEqual(customIndexAxis);
+        expect(TEST_CHART_TYPE_CONFIGS[type].options.indexAxis).toBe('y');
 
         chartJSService.renderChart({
           targetElement: canvasElement,
@@ -612,8 +616,8 @@ describe('ChartJSService', () => {
     it('should overwrite type specific options', () => {
       // Check if a type config is actually being overwritten
       const customIndexAxis = 'x';
-      expect(CHART_TYPE_CONFIGS[chartType].options.indexAxis).not.toBeUndefined();
-      expect(CHART_TYPE_CONFIGS[chartType].options.indexAxis).not.toEqual(customIndexAxis);
+      expect(TEST_CHART_TYPE_CONFIGS[chartType].options.indexAxis).not.toBeUndefined();
+      expect(TEST_CHART_TYPE_CONFIGS[chartType].options.indexAxis).not.toEqual(customIndexAxis);
 
       chartJSService.updateOptions(
         {
@@ -812,17 +816,14 @@ describe('ChartJSService', () => {
     });
 
     it('should preserve annotation defaults if they are not overwritten', () => {
-      // Arrange
       const annotations: AnnotationOptions[] = [
         { type: 'line', yMin: 10, yMax: 10 },
         { type: 'line', yMin: 20, yMax: 20 },
       ];
 
-      // Act
       chartJSService.updateAnnotations(annotations);
       chartJSService.redrawChart();
 
-      // Assess
       const chartAnnotations = chart.options.plugins.annotation.annotations as AnnotationOptions[];
 
       chartAnnotations.forEach((chartAnnotation) => {
@@ -834,7 +835,7 @@ describe('ChartJSService', () => {
     });
 
     it('should be possible to overwrite annotation defaults', () => {
-      expect(CHART_ANNOTATION_CONFIGS['line']['borderDash']).toEqual([6, 3]);
+      expect(TEST_CHART_ANNOTATION_CONFIGS['line']['borderDash']).toEqual([6, 3]);
       const annotations: AnnotationOptions[] = [
         { type: 'line', yMin: 10, yMax: 10, borderDash: [10, 10] },
         { type: 'line', yMin: 20, yMax: 20, borderDash: [10, 10] },
