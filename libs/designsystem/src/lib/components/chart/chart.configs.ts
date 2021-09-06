@@ -91,7 +91,6 @@ export const CHART_TYPE_CONFIGS = {
         },
         line: {
           spanGaps: true,
-          tension: 0.2,
           borderColor: getThemeColorHexString('medium'),
         },
       },

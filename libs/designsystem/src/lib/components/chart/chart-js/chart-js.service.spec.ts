@@ -10,7 +10,7 @@ import { ChartHighlightedElements } from '../chart.types';
 
 import { ChartJSService } from './chart-js.service';
 
-fdescribe('ChartJSService', () => {
+describe('ChartJSService', () => {
   let chartJSService: ChartJSService;
   let canvasElement: ElementRef<HTMLCanvasElement>;
 
@@ -558,7 +558,7 @@ fdescribe('ChartJSService', () => {
       });
     });
 
-    fdescribe('function: updateType', () => {
+    describe('function: updateType', () => {
       beforeEach(() => {
         chartJSService.renderChart({
           targetElement: canvasElement,
@@ -588,15 +588,15 @@ fdescribe('ChartJSService', () => {
 
       chartTypesThatUpdateNormally.forEach((chartType) => {
         describe(`if the new type is ChartType.${chartType}`, () => {
-          it('should update type non-destructively', () => {
-            const destructivelyUpdateTypeSpy = spyOn<any>(
+          it('should non-destructively update type', () => {
+            const nonDestructivelyUpdateTypeSpy = spyOn<any>(
               chartJSService,
-              'destructivelyUpdateType'
+              'nonDestructivelyUpdateType'
             );
 
             chartJSService.updateType(chartType, {});
 
-            expect(destructivelyUpdateTypeSpy).toHaveBeenCalledTimes(0);
+            expect(nonDestructivelyUpdateTypeSpy).toHaveBeenCalledTimes(1);
           });
         });
       });
@@ -612,6 +612,75 @@ fdescribe('ChartJSService', () => {
         chartJSService['createOptionsObject']({ type: 'bar' });
 
         expect(applyInteractionFunctionsExtensionsSpy).toHaveBeenCalledTimes(1);
+      });
+    });
+
+    fdescribe('private function: nonDestructivelyUpdateType', () => {
+      let chart: Chart;
+
+      beforeEach(() => {
+        chartJSService.renderChart({
+          targetElement: canvasElement,
+          type: 'bar',
+          data: [1, 2, 3],
+          dataLabels: ['one', 'two', 'three'],
+          annotations: [{ type: 'line', yMin: 10, yMax: 10 }],
+        });
+        chart = chartJSService['chart'];
+      });
+
+      it('should set a new type', () => {
+        const oldType = chart.config.type;
+        const newType = 'line';
+        expect(oldType).not.toBe(newType);
+
+        chartJSService['nonDestructivelyUpdateType']('line');
+
+        expect(chart.config.type).not.toBe(oldType);
+        expect(newType).toBe('line');
+      });
+
+      it('should apply config from new type', () => {
+        /*TODO: Make this test */
+      });
+
+      it('should apply custom options', () => {
+        const oldBackgroundColor = chart.options.bar?.datasets?.backgroundColor;
+        const newBackgroundColor = 'rgba(125,124,123,1)';
+
+        chartJSService['nonDestructivelyUpdateType']('line', {
+          elements: { bar: { backgroundColor: newBackgroundColor } },
+        });
+
+        expect(oldBackgroundColor).toBeUndefined();
+        expect(chart.config.options.elements.bar.backgroundColor).toBe(newBackgroundColor);
+      });
+
+      it('should preserve the chart', () => {
+        const oldChartId = chart.id;
+
+        chartJSService['nonDestructivelyUpdateType']('bar');
+
+        expect(chartJSService['chart'].id).toEqual(oldChartId);
+      });
+
+      it('should preserve the original dataLabels', () => {
+        const oldDatalabels = chart.data.labels;
+
+        chartJSService['nonDestructivelyUpdateType']('line');
+
+        expect(chartJSService['chart'].data.labels).toEqual(oldDatalabels);
+      });
+
+      it('should preserve the original annotations', () => {
+        const oldAnnotations = chart.options.plugins.annotation.annotations;
+
+        chartJSService['nonDestructivelyUpdateType']('line');
+        chart.update(); // Annotation changes are not visible before update
+
+        const newAnnotations = chartJSService['chart'].options.plugins.annotation.annotations;
+
+        expect(newAnnotations).toEqual(oldAnnotations);
       });
     });
 

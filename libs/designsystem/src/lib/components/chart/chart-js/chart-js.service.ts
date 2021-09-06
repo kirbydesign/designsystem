@@ -60,6 +60,8 @@ export class ChartJSService {
       /* indexAxis does not update predictably; update by replacing 
          the chart entirely instead */
       this.destructivelyUpdateType(type, customOptions);
+    } else {
+      this.nonDestructivelyUpdateType(type, customOptions);
     }
   }
 
@@ -109,6 +111,18 @@ export class ChartJSService {
 
     this.chart.destroy();
     this.initializeNewChart(canvasElement, config);
+  }
+
+  private nonDestructivelyUpdateType(type: ChartType, customOptions?: ChartOptions) {
+    const chartJSType = this.getTypeConfig(type)['type'];
+    const annotations = this.getExistingChartAnnotations();
+
+    this.chart.options = this.createOptionsObject({
+      type: chartJSType,
+      customOptions,
+      annotations,
+    });
+    this.chart.config.type = chartJSType;
   }
 
   private initializeNewChart(canvasElement: HTMLCanvasElement, config: ChartConfiguration) {
@@ -190,6 +204,7 @@ export class ChartJSService {
     /* chartJS requires labels; if none is provided create an empty string array
     to make it optional for consumer */
     const labels = !dataLabels ? this.createBlankLabels(datasets) : dataLabels;
+    //TODO: I think this might be redundant? It should come in through options
     const typeConfig = this.getTypeConfig(type);
     return mergeDeepAll(typeConfig, {
       data: {
