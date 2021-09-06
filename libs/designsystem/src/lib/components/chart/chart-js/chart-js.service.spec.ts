@@ -1,22 +1,32 @@
 import { ElementRef } from '@angular/core';
+import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 import { Chart, FontSpec } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
 
 import { ColorHelper } from '../../../helpers';
 import { ChartDataset, ChartType } from '../chart.types';
 import { ChartHighlightedElements } from '../chart.types';
+import { ChartConfigService } from '../configs/chart-config.service';
 import { CHART_GLOBAL_DEFAULTS } from '../configs/global-defaults.config';
 import { CHART_ANNOTATION_CONFIGS, CHART_TYPE_CONFIGS } from '../configs/type.config';
 
 import { ChartJSService } from './chart-js.service';
 
-fdescribe('ChartJSService', () => {
+describe('ChartJSService', () => {
+  let spectator: SpectatorService<ChartJSService>;
   let chartJSService: ChartJSService;
   let canvasElement: ElementRef<HTMLCanvasElement>;
 
+  const createService = createServiceFactory({
+    service: ChartJSService,
+    providers: [ChartConfigService],
+  });
+
   beforeEach(() => {
-    chartJSService = new ChartJSService();
+    spectator = createService();
     const nativeElement = document.createElement('canvas');
+
+    chartJSService = spectator.service;
     canvasElement = new ElementRef<HTMLCanvasElement>(nativeElement);
   });
 
