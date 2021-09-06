@@ -3,14 +3,14 @@ import { Chart, FontSpec } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
 
 import { ColorHelper } from '../../../helpers';
-import { CHART_ANNOTATION_CONFIGS, CHART_TYPE_CONFIGS } from '../chart.configs';
-import { CHART_GLOBAL_DEFAULTS } from '../chart.configs';
 import { ChartDataset, ChartType } from '../chart.types';
 import { ChartHighlightedElements } from '../chart.types';
+import { CHART_GLOBAL_DEFAULTS } from '../configs/global-defaults.config';
+import { CHART_ANNOTATION_CONFIGS, CHART_TYPE_CONFIGS } from '../configs/type.config';
 
 import { ChartJSService } from './chart-js.service';
 
-describe('ChartJSService', () => {
+fdescribe('ChartJSService', () => {
   let chartJSService: ChartJSService;
   let canvasElement: ElementRef<HTMLCanvasElement>;
 
@@ -615,7 +615,7 @@ describe('ChartJSService', () => {
       });
     });
 
-    fdescribe('private function: nonDestructivelyUpdateType', () => {
+    describe('private function: nonDestructivelyUpdateType', () => {
       let chart: Chart;
 
       beforeEach(() => {

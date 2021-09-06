@@ -1,71 +1,9 @@
-import { ActiveElement, Chart, ChartEvent, ChartOptions, ScriptableContext } from 'chart.js';
+import { ActiveElement, Chart, ChartEvent, ChartOptions } from 'chart.js';
 
-import { ColorHelper, DesignTokenHelper } from '../../helpers';
-
-import { ChartDataset } from './chart.types';
+import { ColorHelper, DesignTokenHelper } from '../../../helpers';
 
 const { fontSize } = DesignTokenHelper;
 const { getThemeColorHexString } = ColorHelper;
-
-const hoverBackgroundColor = getThemeColorHexString('primary');
-const backgroundColor = getThemeColorHexString('secondary');
-
-// Highlight elements that are added to the highlightedElements array
-function scriptedBackgroundColor(context: ScriptableContext<'bar'>) {
-  const dataset = context.dataset as ChartDataset;
-  const highlightedElements = dataset?.kirbyOptions?.highlightedElements;
-
-  if (highlightedElements && highlightedElements.includes(context.dataIndex)) {
-    return hoverBackgroundColor;
-  } else {
-    return backgroundColor;
-  }
-}
-
-// Only adds a hovercolor if an onClick handler is provided
-function scriptedHoverBackgroundColor(context: ScriptableContext<'bar'>) {
-  if (context.chart.options.onClick) {
-    return hoverBackgroundColor;
-  }
-}
-
-export const CHART_GLOBAL_DEFAULTS = {
-  maintainAspectRatio: false,
-  color: getThemeColorHexString('black'),
-  resizeDelay: 10,
-  elements: {
-    bar: {
-      backgroundColor: scriptedBackgroundColor,
-      hoverBackgroundColor: scriptedHoverBackgroundColor,
-    },
-    line: {
-      borderColor: scriptedBackgroundColor,
-      tension: 0.3,
-    },
-  },
-  scales: {
-    linear: {
-      display: false,
-      ticks: {
-        display: false,
-      },
-    },
-    category: {
-      display: true,
-      grid: {
-        display: false,
-      },
-    },
-  },
-  font: {
-    family: 'Roboto',
-  },
-  plugins: {
-    legend: {
-      display: false,
-    },
-  },
-};
 
 export const CHART_TYPE_CONFIGS = {
   bar: {
@@ -137,6 +75,7 @@ export const CHART_TYPE_CONFIGS = {
   },
 };
 
+/* TODO: Find a proper place to store these two */
 /* The chart.js annotation does not allow for changing the 
 defaults it comes with. In order to have sensible defaults 
 this object is used instead and manually merged with the 

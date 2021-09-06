@@ -4,12 +4,12 @@ import { AnnotationOptions } from 'chartjs-plugin-annotation';
 
 import { deepCopy } from '../../../helpers/deep-copy';
 import { mergeDeepAll } from '../../../helpers/merge-deep';
+import { ChartDataset, ChartHighlightedElements, ChartType, isNumberArray } from '../chart.types';
 import {
   CHART_ANNOTATION_CONFIGS,
   CHART_TYPE_CONFIGS,
   INTERACTION_FUNCTIONS_EXTENSIONS,
-} from '../chart.configs';
-import { ChartDataset, ChartHighlightedElements, ChartType, isNumberArray } from '../chart.types';
+} from '../configs/type.config';
 
 import { Chart } from './configured-chart-js';
 
