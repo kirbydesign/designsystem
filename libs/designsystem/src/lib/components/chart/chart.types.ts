@@ -10,12 +10,7 @@ export type ChartTypesConfig = {
   [key in ChartType]: ChartTypeConfig;
 };
 
-//TODO: update this type to include 'line'
-export interface ChartDataset extends ChartJSDataset<'bar'> {
-  kirbyOptions?: {
-    highlightedElements?: number[];
-  };
-}
+export type ChartDataset = { kirbyOptions?: { highlightedElements?: number[] } } & ChartJSDataset;
 
 export function isNumberArray(value: any): value is number[] {
   return Array.isArray(value) && value.every((item) => typeof item === 'number');
