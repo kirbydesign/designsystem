@@ -54,6 +54,10 @@ describe('ChartJSService with ChartConfigService', () => {
           expect(chart.options.scales['x'].grid.drawBorder).toBeFalse();
         });
 
+        it('should have correct barPercentage', () => {
+          expect(chart.options.datasets.bar.barPercentage).toBe(0.6);
+        });
+
         it('should have correct background color for elements', () => {
           expect(chart.options.elements.bar.backgroundColor).toEqual(
             ColorHelper.getThemeColorHexString('secondary')
@@ -209,6 +213,10 @@ describe('ChartJSService with ChartConfigService', () => {
           const { color } = chart.options;
           expect(size).toBe(14);
           expect(color).toBe(ColorHelper.getThemeColorHexString('black'));
+        });
+
+        it('should have correct barPercentage', () => {
+          expect(chart.options.datasets.bar.barPercentage).toBe(0.6);
         });
 
         it('should have no hover background color for elements', () => {

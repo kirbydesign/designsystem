@@ -53,7 +53,7 @@ const TEST_CHART_ANNOTATION_CONFIGS = {
   },
 };
 
-fdescribe('ChartJSService', () => {
+describe('ChartJSService', () => {
   let spectator: SpectatorService<ChartJSService>;
   let chartJSService: ChartJSService;
   let canvasElement: ElementRef<HTMLCanvasElement>;

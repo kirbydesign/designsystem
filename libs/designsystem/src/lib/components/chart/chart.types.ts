@@ -1,8 +1,18 @@
-import { ChartDataset as ChartJSDataset } from 'chart.js';
+import { ChartDataset as ChartJSDataset, ChartOptions, ChartType as ChartJSType } from 'chart.js';
 
 export type ChartHighlightedElements = number[][];
 
-export type ChartType = 'column' | 'bar' | 'line';
+interface ChartTypeRegistry {
+  column: any;
+  bar: any;
+  line: any;
+}
+
+export type ChartType = keyof ChartTypeRegistry;
+
+export type ChartTypeConfigs = {
+  [key in ChartType]: { type: ChartJSType; options?: ChartOptions };
+};
 
 //TODO: update this type to include 'line'
 export interface ChartDataset extends ChartJSDataset<'bar'> {

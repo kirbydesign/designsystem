@@ -1,15 +1,23 @@
 import { ActiveElement, Chart, ChartEvent, ChartOptions } from 'chart.js';
 
 import { ColorHelper, DesignTokenHelper } from '../../../helpers';
+import { ChartTypeConfigs } from '../chart.types';
 
 const { fontSize } = DesignTokenHelper;
 const { getThemeColorHexString } = ColorHelper;
 
-export const CHART_TYPE_CONFIGS = {
+export const CHART_TYPE_CONFIGS: ChartTypeConfigs = {
   bar: {
     type: 'bar',
     options: {
-      barPercentage: 0.6,
+      datasets: {
+        bar: {
+          barPercentage: 0.6,
+        },
+        line: {
+          spanGaps: true,
+        },
+      },
       indexAxis: 'y',
       scales: {
         y: {
@@ -25,10 +33,9 @@ export const CHART_TYPE_CONFIGS = {
       },
       elements: {
         point: {
-          pointRadius: 0,
+          radius: 0,
         },
         line: {
-          spanGaps: true,
           borderColor: getThemeColorHexString('medium'),
         },
       },
@@ -37,7 +44,14 @@ export const CHART_TYPE_CONFIGS = {
   column: {
     type: 'bar',
     options: {
-      barPercentage: 0.6,
+      datasets: {
+        bar: {
+          barPercentage: 0.6,
+        },
+        line: {
+          spanGaps: true,
+        },
+      },
       indexAxis: 'x',
       scales: {
         x: {
@@ -53,12 +67,11 @@ export const CHART_TYPE_CONFIGS = {
       },
       elements: {
         line: {
-          spanGaps: true,
           tension: 0.2,
           borderColor: getThemeColorHexString('medium'),
         },
         point: {
-          pointRadius: 0,
+          radius: 0,
         },
       },
     },

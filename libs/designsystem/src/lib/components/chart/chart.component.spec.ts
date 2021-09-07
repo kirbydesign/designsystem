@@ -4,7 +4,7 @@ import { MockProvider } from 'ng-mocks';
 import { ChartJSService } from './chart-js/chart-js.service';
 import { ChartComponent } from './chart.component';
 
-fdescribe('ChartComponent', () => {
+describe('ChartComponent', () => {
   let spectator: Spectator<ChartComponent>;
   let component: ChartComponent;
   const createHost = createHostFactory({
