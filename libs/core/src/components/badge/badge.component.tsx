@@ -1,6 +1,6 @@
 import { Component, ComponentInterface, h, Host, Prop } from '@stencil/core';
 
-import { ColorHelper, ThemeColor } from '../../helpers';
+import { ThemeColor } from '../../helpers';
 @Component({
   tag: 'kirby-badge',
   styleUrl: 'badge.component.scss',
