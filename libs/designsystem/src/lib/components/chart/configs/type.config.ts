@@ -1,4 +1,5 @@
 import { ActiveElement, Chart, ChartEvent, ChartOptions } from 'chart.js';
+import { AnnotationTypeRegistry } from 'chartjs-plugin-annotation';
 
 import { ColorHelper, DesignTokenHelper } from '../../../helpers';
 import { ChartTypesConfig } from '../chart.types';
@@ -94,10 +95,10 @@ defaults it comes with. In order to have sensible defaults
 this object is used instead and manually merged with the 
 rest of the annotations object */
 const borderColor = getThemeColorHexString('semi-dark');
-const borderDash = [6, 3];
+const borderDash: [number, number] = [6, 3];
 const borderWidth = 1;
 
-export const CHART_ANNOTATION_CONFIGS = {
+export const CHART_ANNOTATION_CONFIGS: AnnotationTypeRegistry = {
   line: {
     borderDash,
     borderWidth,
@@ -114,6 +115,9 @@ export const CHART_ANNOTATION_CONFIGS = {
     borderWidth,
     borderColor,
     backgroundColor: 'transparent',
+  },
+  point: {
+    backgroundColor: 'initial',
   },
 };
 

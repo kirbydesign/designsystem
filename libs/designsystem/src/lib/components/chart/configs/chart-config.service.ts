@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ChartType as ChartJSType } from 'chart.js';
+import { AnnotationType, AnnotationTypeRegistry } from 'chartjs-plugin-annotation';
 
 import { deepCopy } from '../../../helpers/deep-copy';
 import { ChartType, ChartTypeConfig } from '../chart.types';
@@ -18,7 +19,7 @@ export class ChartConfigService {
     return deepCopy(CHART_TYPES_CONFIG[chartType]);
   }
 
-  public getAnnotationDefaults(type: string) {
+  public getAnnotationDefaults(type: AnnotationType): AnnotationTypeRegistry[AnnotationType] {
     return CHART_ANNOTATION_CONFIGS[type];
   }
 
