@@ -197,8 +197,6 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
 
   ngOnChanges(): void {
     this._isSectionsEnabled = !!this.getSectionName;
-    if (this.items?.length === 0) return;
-
     this._groupedItems = this._isSectionsEnabled
       ? this.groupBy.transform(this.items, this.getSectionName)
       : null;
