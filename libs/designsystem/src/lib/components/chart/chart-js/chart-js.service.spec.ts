@@ -1,7 +1,7 @@
 import { ElementRef } from '@angular/core';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 import { Chart, ChartType as ChartJSType } from 'chart.js';
-import { AnnotationOptions } from 'chartjs-plugin-annotation';
+import { AnnotationOptions, AnnotationTypeRegistry } from 'chartjs-plugin-annotation';
 import { MockProvider } from 'ng-mocks';
 
 import { deepCopy } from '../../../helpers/deep-copy';
@@ -43,12 +43,16 @@ const TEST_CHART_TYPES_CONFIG: ChartTypesConfig = {
   },
 };
 
-const TEST_CHART_ANNOTATION_CONFIGS = {
+const TEST_CHART_ANNOTATION_CONFIGS: AnnotationTypeRegistry = {
   line: {
     borderDash: [6, 3],
   },
   ellipse: {
     borderDash: [3, 6],
+  },
+  box: {},
+  point: {
+    backgroundColor: 'initial',
   },
 };
 
