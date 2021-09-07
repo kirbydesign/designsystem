@@ -98,7 +98,7 @@ const borderColor = getThemeColorHexString('semi-dark');
 const borderDash: [number, number] = [6, 3];
 const borderWidth = 1;
 
-export const CHART_ANNOTATION_CONFIGS: AnnotationTypeRegistry = {
+export const CHART_ANNOTATIONS_CONFIG: AnnotationTypeRegistry = {
   line: {
     borderDash,
     borderWidth,

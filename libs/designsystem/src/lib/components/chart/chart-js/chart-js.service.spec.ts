@@ -43,7 +43,7 @@ const TEST_CHART_TYPES_CONFIG: ChartTypesConfig = {
   },
 };
 
-const TEST_CHART_ANNOTATION_CONFIGS: AnnotationTypeRegistry = {
+const TEST_CHART_ANNOTATIONS_CONFIG: AnnotationTypeRegistry = {
   line: {
     borderDash: [6, 3],
   },
@@ -64,7 +64,7 @@ describe('ChartJSService', () => {
   const mockChartConfigService = MockProvider(ChartConfigService, {
     getTypeConfig: (chartType: ChartType) => deepCopy(TEST_CHART_TYPES_CONFIG[chartType]),
     getInteractionFunctionsExtensions: () => ({ onHover: () => console.log('testing') }),
-    getAnnotationDefaults: (type: string) => TEST_CHART_ANNOTATION_CONFIGS[type],
+    getAnnotationDefaults: (type: string) => TEST_CHART_ANNOTATIONS_CONFIG[type],
     chartTypeToChartJSType: (type: ChartType) => TEST_CHART_TYPES_CONFIG[type].type as ChartJSType,
   });
 
@@ -848,7 +848,7 @@ describe('ChartJSService', () => {
       const chartAnnotations = chart.options.plugins.annotation.annotations as AnnotationOptions[];
 
       chartAnnotations.forEach((chartAnnotation) => {
-        const annotationDefaults = TEST_CHART_ANNOTATION_CONFIGS[chartAnnotation.type];
+        const annotationDefaults = TEST_CHART_ANNOTATIONS_CONFIG[chartAnnotation.type];
         Object.entries(annotationDefaults).forEach(([key, _]) => {
           expect(chartAnnotation[key]).toEqual(annotationDefaults[key]);
         });
@@ -856,7 +856,7 @@ describe('ChartJSService', () => {
     });
 
     it('should be possible to overwrite annotation defaults', () => {
-      expect(TEST_CHART_ANNOTATION_CONFIGS['line']['borderDash']).toEqual([6, 3]);
+      expect(TEST_CHART_ANNOTATIONS_CONFIG['line']['borderDash']).toEqual([6, 3]);
       const annotations: AnnotationOptions[] = [
         { type: 'line', yMin: 10, yMax: 10, borderDash: [10, 10] },
         { type: 'line', yMin: 20, yMax: 20, borderDash: [10, 10] },

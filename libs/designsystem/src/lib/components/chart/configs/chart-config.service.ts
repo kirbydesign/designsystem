@@ -6,7 +6,7 @@ import { deepCopy } from '../../../helpers/deep-copy';
 import { ChartType, ChartTypeConfig } from '../chart.types';
 
 import {
-  CHART_ANNOTATION_CONFIGS,
+  CHART_ANNOTATIONS_CONFIG,
   CHART_TYPES_CONFIG,
   INTERACTION_FUNCTIONS_EXTENSIONS,
 } from './type.config';
@@ -20,7 +20,7 @@ export class ChartConfigService {
   }
 
   public getAnnotationDefaults(type: AnnotationType): AnnotationTypeRegistry[AnnotationType] {
-    return CHART_ANNOTATION_CONFIGS[type];
+    return CHART_ANNOTATIONS_CONFIG[type];
   }
 
   public getInteractionFunctionsExtensions() {
