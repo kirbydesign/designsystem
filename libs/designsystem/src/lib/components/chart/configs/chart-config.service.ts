@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ChartType as ChartJSType } from 'chart.js';
 
 import { deepCopy } from '../../../helpers/deep-copy';
 import { ChartType } from '../chart.types';
@@ -23,5 +24,12 @@ export class ChartConfigService {
 
   public getInteractionFunctionsExtensions() {
     return INTERACTION_FUNCTIONS_EXTENSIONS;
+  }
+
+  /* Our types does not always map 1 to 1 to the same type 
+  that the chart.js chart is actually oconfigured with. Therefore this function 
+  for looking up the ChartJSType of a type.  */
+  public chartTypeToChartJSType(chartType: ChartType): ChartJSType {
+    return CHART_TYPE_CONFIGS[chartType]['type'] as ChartJSType;
   }
 }

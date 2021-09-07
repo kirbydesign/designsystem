@@ -1,6 +1,6 @@
 import { ElementRef } from '@angular/core';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
-import { Chart } from 'chart.js';
+import { Chart, ChartType as ChartJSType } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
 import { MockProvider } from 'ng-mocks';
 
@@ -53,7 +53,7 @@ const TEST_CHART_ANNOTATION_CONFIGS = {
   },
 };
 
-describe('ChartJSService', () => {
+fdescribe('ChartJSService', () => {
   let spectator: SpectatorService<ChartJSService>;
   let chartJSService: ChartJSService;
   let canvasElement: ElementRef<HTMLCanvasElement>;
@@ -62,6 +62,7 @@ describe('ChartJSService', () => {
     getTypeConfig: (chartType: ChartType) => deepCopy(TEST_CHART_TYPE_CONFIGS[chartType]),
     getInteractionFunctionsExtensions: () => ({ onHover: () => console.log('testing') }),
     getAnnotationDefaults: (type: string) => TEST_CHART_ANNOTATION_CONFIGS[type],
+    chartTypeToChartJSType: (type: ChartType) => TEST_CHART_TYPE_CONFIGS[type].type as ChartJSType,
   });
 
   const createService = createServiceFactory({

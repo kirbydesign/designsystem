@@ -111,16 +111,15 @@ export class ChartJSService {
   }
 
   private nonDestructivelyUpdateType(chartType: ChartType, customOptions?: ChartOptions) {
-    //TODO: What?
-    const chartJSType = this.chartConfigService.getTypeConfig(chartType)['type'];
     const annotations = this.getExistingChartAnnotations();
-
-    this.chart.options = this.createOptionsObject({
-      type: chartJSType,
+    const options = this.createOptionsObject({
+      type: chartType,
       customOptions,
       annotations,
     });
-    this.chart.config.type = chartJSType;
+
+    this.chart.options = options;
+    this.chart.config.type = this.chartConfigService.chartTypeToChartJSType(chartType);
   }
 
   private initializeNewChart(canvasElement: HTMLCanvasElement, config: ChartConfiguration) {
@@ -192,8 +191,8 @@ export class ChartJSService {
     /* chartJS requires labels; if none is provided create an empty string array
     to make it optional for consumer */
     const labels = !dataLabels ? this.createBlankLabels(datasets) : dataLabels;
-    //TODO: I think this might be redundant? It should come in through options
     const typeConfig = this.chartConfigService.getTypeConfig(type);
+
     return mergeDeepAll(typeConfig, {
       data: {
         labels,
