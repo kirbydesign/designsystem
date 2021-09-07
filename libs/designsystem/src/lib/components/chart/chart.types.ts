@@ -2,16 +2,12 @@ import { ChartDataset as ChartJSDataset, ChartOptions, ChartType as ChartJSType 
 
 export type ChartHighlightedElements = number[][];
 
-interface ChartTypeRegistry {
-  column: any;
-  bar: any;
-  line: any;
-}
+export type ChartType = 'column' | 'bar' | 'line';
 
-export type ChartType = keyof ChartTypeRegistry;
+export type ChartTypeConfig = { type: ChartJSType; options?: ChartOptions };
 
-export type ChartTypeConfigs = {
-  [key in ChartType]: { type: ChartJSType; options?: ChartOptions };
+export type ChartTypesConfig = {
+  [key in ChartType]: ChartTypeConfig;
 };
 
 //TODO: update this type to include 'line'

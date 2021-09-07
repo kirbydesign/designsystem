@@ -5,23 +5,22 @@ import { AnnotationOptions } from 'chartjs-plugin-annotation';
 import { MockProvider } from 'ng-mocks';
 
 import { deepCopy } from '../../../helpers/deep-copy';
-import { ChartDataset, ChartType } from '../chart.types';
+import { ChartDataset, ChartType, ChartTypesConfig } from '../chart.types';
 import { ChartHighlightedElements } from '../chart.types';
 import { ChartConfigService } from '../configs/chart-config.service';
 import { CHART_GLOBAL_DEFAULTS } from '../configs/global-defaults.config';
 
 import { ChartJSService } from './chart-js.service';
 
-// TODO: Find a better place to store this?
-const TEST_CHART_TYPE_CONFIGS = {
+const TEST_CHART_TYPES_CONFIG: ChartTypesConfig = {
   bar: {
     type: 'bar',
     options: {
       indexAxis: 'y',
-    },
-    elements: {
-      line: {
-        borderColor: 'blue',
+      elements: {
+        line: {
+          borderColor: 'blue',
+        },
       },
     },
   },
@@ -59,10 +58,10 @@ describe('ChartJSService', () => {
   let canvasElement: ElementRef<HTMLCanvasElement>;
 
   const mockChartConfigService = MockProvider(ChartConfigService, {
-    getTypeConfig: (chartType: ChartType) => deepCopy(TEST_CHART_TYPE_CONFIGS[chartType]),
+    getTypeConfig: (chartType: ChartType) => deepCopy(TEST_CHART_TYPES_CONFIG[chartType]),
     getInteractionFunctionsExtensions: () => ({ onHover: () => console.log('testing') }),
     getAnnotationDefaults: (type: string) => TEST_CHART_ANNOTATION_CONFIGS[type],
-    chartTypeToChartJSType: (type: ChartType) => TEST_CHART_TYPE_CONFIGS[type].type as ChartJSType,
+    chartTypeToChartJSType: (type: ChartType) => TEST_CHART_TYPES_CONFIG[type].type as ChartJSType,
   });
 
   const createService = createServiceFactory({
@@ -177,7 +176,7 @@ describe('ChartJSService', () => {
         // Check if a type config is actually being overwritten
         const type = 'bar';
         const customIndexAxis = 'x';
-        expect(TEST_CHART_TYPE_CONFIGS[type].options.indexAxis).toBe('y');
+        expect(TEST_CHART_TYPES_CONFIG[type].options.indexAxis).toBe('y');
 
         chartJSService.renderChart({
           targetElement: canvasElement,
@@ -477,7 +476,7 @@ describe('ChartJSService', () => {
 
     it('should apply config from new type', () => {
       const newType = 'line';
-      const newBorderColor = TEST_CHART_TYPE_CONFIGS[newType].options.elements.line.borderColor;
+      const newBorderColor = TEST_CHART_TYPES_CONFIG[newType].options.elements.line.borderColor;
       expect(chart.options.elements.line.borderColor).not.toEqual(newBorderColor);
 
       chartJSService['nonDestructivelyUpdateType'](newType);
@@ -634,8 +633,8 @@ describe('ChartJSService', () => {
     it('should overwrite type specific options', () => {
       // Check if a type config is actually being overwritten
       const customIndexAxis = 'x';
-      expect(TEST_CHART_TYPE_CONFIGS[chartType].options.indexAxis).not.toBeUndefined();
-      expect(TEST_CHART_TYPE_CONFIGS[chartType].options.indexAxis).not.toEqual(customIndexAxis);
+      expect(TEST_CHART_TYPES_CONFIG[chartType].options.indexAxis).not.toBeUndefined();
+      expect(TEST_CHART_TYPES_CONFIG[chartType].options.indexAxis).not.toEqual(customIndexAxis);
 
       chartJSService.updateOptions(
         {

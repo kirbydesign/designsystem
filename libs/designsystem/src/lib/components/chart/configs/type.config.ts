@@ -1,12 +1,12 @@
 import { ActiveElement, Chart, ChartEvent, ChartOptions } from 'chart.js';
 
 import { ColorHelper, DesignTokenHelper } from '../../../helpers';
-import { ChartTypeConfigs } from '../chart.types';
+import { ChartTypesConfig } from '../chart.types';
 
 const { fontSize } = DesignTokenHelper;
 const { getThemeColorHexString } = ColorHelper;
 
-export const CHART_TYPE_CONFIGS: ChartTypeConfigs = {
+export const CHART_TYPES_CONFIG: ChartTypesConfig = {
   bar: {
     type: 'bar',
     options: {
