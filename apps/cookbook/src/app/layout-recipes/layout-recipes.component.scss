@@ -1,0 +1,29 @@
+@import './libs/designsystem/src/lib/scss/utils';
+
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+  width: 100%;
+
+  thead {
+    background-color: get-color('light-tint');
+  }
+
+  th {
+    text-align: left;
+
+    &:first-child {
+      min-width: 14rem;
+    }
+  }
+
+  td,
+  th {
+    border: 1px solid get-color('medium');
+    padding: 1rem;
+  }
+
+  tbody td {
+    height: 3.5rem; // This effectively means "minimum height"
+  }
+}

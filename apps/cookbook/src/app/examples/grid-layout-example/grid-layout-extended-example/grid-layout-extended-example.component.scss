@@ -1,42 +1,43 @@
 @import '~@kirbydesign/core/src/scss/utils';
 
-// Grid
+/* Configure grid properties */
 $columns: 12;
 $gap: size('m');
 
-// Core example
+/* Declare the grid container */
 .grid-container {
   display: grid;
   grid-template-columns: repeat($columns, 1fr);
   gap: $gap;
 }
 
-// Core example
+/* Let grid items span all columns by default */
 .grid-item {
   grid-column: span $columns;
 }
 
-// Core example
+/* Tablet size and above */
 @include media('>=medium') {
-  .half\@tablet-up {
+  .half-at-tablet-up {
     grid-column: span ($columns / 2);
   }
 }
 
-// Core example
+/* Desktop size and above */
 @include media('>=large') {
-  .half\@desktop-up {
+  .half-at-desktop-up {
     grid-column: span ($columns / 2);
   }
 
-  .third\@desktop-up {
+  .third-at-desktop-up {
     grid-column: span ($columns / 3);
   }
 }
 
-// For the sake of example -----------------------------------------------------
+/*********************************************************
+  Additional styles that are not essential to the example
+ *********************************************************/
 
-// Context
 $gutter: 16px;
 $safe-area: 16px;
 $max-width: 1196px;
@@ -67,6 +68,18 @@ main {
   min-height: 200px;
 }
 
+.align-center {
+  text-align: center;
+}
+
+/*
+  Hidden area for demonstrating the non- parts of the layout.
+  Only visible when containing <main> element has class="debug".
+*/
+.not-grid {
+  display: none;
+}
+
 .example-text {
   &,
   & > p {
@@ -74,16 +87,7 @@ main {
   }
 }
 
-.align-center {
-  text-align: center;
-}
-
-.not-grid {
-  display: none;
-}
-// -----------------------------------------------------------------------------
-
-// Color bonanza for debugging -------------------------------------------------
+/* Extra Color Bonanza */
 .debug {
   kirby-card {
     --kirby-card-main-background-color: var(--kirby-white-contrast);
@@ -92,8 +96,8 @@ main {
 
   h1,
   h2 {
-    color: #000;
     background-color: #fff;
+    color: #000;
   }
 
   .not-grid {
@@ -101,17 +105,18 @@ main {
   }
 
   .gutter {
-    color: #fff;
-    background-color: blue;
+    background-color: chartreuse;
+    color: #000;
   }
 
   .safe-area-inline {
     background-color: darkcyan;
+    color: #000;
   }
 
   .box {
-    color: #000;
     background-color: hotpink;
+    color: #000;
   }
 
   #example-1 {
@@ -129,4 +134,3 @@ main {
     color: #000;
   }
 }
-// -----------------------------------------------------------------------------
