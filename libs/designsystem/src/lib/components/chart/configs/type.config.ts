@@ -83,6 +83,10 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
       color: getThemeColorHexString('semi-dark'),
       scales: {
         x: {
+          grid: {
+            borderColor: getThemeColorHexString('medium'),
+            borderWidth: 1,
+          },
           ticks: {
             font: {
               size: parseInt(fontSize('xs')),

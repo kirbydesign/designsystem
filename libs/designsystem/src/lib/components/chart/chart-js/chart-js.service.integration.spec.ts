@@ -169,6 +169,13 @@ describe('ChartJSService with ChartConfigService', () => {
           expect(size).toBe(12);
           expect(color).toBe(ColorHelper.getThemeColorHexString('semi-dark'));
         });
+
+        it('should be rendered with correctly styled x-axis line', () => {
+          expect(chart.options.scales.x.grid.borderColor).toBe(
+            ColorHelper.getThemeColorHexString('medium')
+          );
+          expect(chart.options.scales.x.grid.borderWidth).toBe(1);
+        });
       });
     });
 
