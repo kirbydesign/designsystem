@@ -6,7 +6,8 @@ import { deepCopy } from '../../../helpers/deep-copy';
 import { ChartType, ChartTypeConfig } from '../chart.types';
 
 import { CHART_ANNOTATIONS_CONFIG } from './annotations.config';
-import { CHART_TYPES_CONFIG, INTERACTION_FUNCTIONS_EXTENSIONS } from './type.config';
+import { CHART_INTERACTION_FUNCTIONS_EXTENSIONS } from './interaction-functions-extensions.config';
+import { CHART_TYPES_CONFIG } from './type.config';
 
 @Injectable()
 export class ChartConfigService {
@@ -21,7 +22,7 @@ export class ChartConfigService {
   }
 
   public getInteractionFunctionsExtensions() {
-    return INTERACTION_FUNCTIONS_EXTENSIONS;
+    return CHART_INTERACTION_FUNCTIONS_EXTENSIONS;
   }
 
   /* Our types does not always map 1 to 1 to the same type 
