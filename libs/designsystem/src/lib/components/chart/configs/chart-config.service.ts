@@ -5,11 +5,8 @@ import { AnnotationType, AnnotationTypeRegistry } from 'chartjs-plugin-annotatio
 import { deepCopy } from '../../../helpers/deep-copy';
 import { ChartType, ChartTypeConfig } from '../chart.types';
 
-import {
-  CHART_ANNOTATIONS_CONFIG,
-  CHART_TYPES_CONFIG,
-  INTERACTION_FUNCTIONS_EXTENSIONS,
-} from './type.config';
+import { CHART_ANNOTATIONS_CONFIG } from './annotations.config';
+import { CHART_TYPES_CONFIG, INTERACTION_FUNCTIONS_EXTENSIONS } from './type.config';
 
 @Injectable()
 export class ChartConfigService {
