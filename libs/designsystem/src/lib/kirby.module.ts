@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { UiScrollModule } from 'ngx-ui-scroll';
 
+import { ActionSheetController } from './components';
 import { AccordionItemComponent } from './components/accordion/accordion-item.component';
 import { AccordionDirective } from './components/accordion/accordion.directive';
 import { ActionSheetPopoutComponent } from './components/action-sheet/action-sheet-popout/action-sheet-popout.component';
@@ -148,6 +149,7 @@ const importedModules = [...exportedModules];
 
 const providers = [
   ModalController,
+  ActionSheetController,
   ActionSheetHelper,
   ModalHelper,
   AlertHelper,

@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 
-import { ActionSheetConfig, ActionSheetItem } from '@kirbydesign/designsystem';
+import {
+  ActionSheetConfig,
+  ActionSheetController,
+  ActionSheetItem,
+} from '@kirbydesign/designsystem';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
-import { ModalController } from '@kirbydesign/designsystem';
 
 import { BasePageExampleComponent } from '../base-page-example.component';
 
@@ -70,7 +73,10 @@ export class PageCustomTitleExampleComponent extends BasePageExampleComponent {
     { id: '3', text: 'Option 3' },
   ];
 
-  constructor(private toastController: ToastController, private modalController: ModalController) {
+  constructor(
+    private toastController: ToastController,
+    private actionSheetController: ActionSheetController
+  ) {
     super();
   }
 
@@ -100,6 +106,6 @@ export class PageCustomTitleExampleComponent extends BasePageExampleComponent {
       header: 'Your action sheet header',
       items: this.items,
     };
-    this.modalController.showActionSheet(config, this.onItemSelect.bind(this));
+    this.actionSheetController.showActionSheet(config, this.onItemSelect.bind(this));
   }
 }
