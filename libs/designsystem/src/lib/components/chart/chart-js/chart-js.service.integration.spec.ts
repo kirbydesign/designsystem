@@ -36,6 +36,9 @@ describe('ChartJSService with ChartConfigService', () => {
         });
         const chart = chartJSService['chart'];
 
+        /* Our 'column' chart is a chart.js 'bar' type chart 
+        with it's indexAxis set to y; therefore testing if 
+        bar is being used. */
         expect(chart.config.type).toBe('bar');
       });
 
