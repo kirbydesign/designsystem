@@ -15,6 +15,7 @@ export const CHART_GLOBAL_DEFAULTS = {
     },
     line: {
       borderColor: scriptedBackgroundColor,
+      borderWidth: 2,
       tension: 0.3,
     },
   },

@@ -176,6 +176,10 @@ describe('ChartJSService with ChartConfigService', () => {
           );
           expect(chart.options.scales.x.grid.borderWidth).toBe(1);
         });
+
+        it('should render line elements with correct width', () => {
+          expect(chart.options.elements.line.borderWidth).toBe(2);
+        });
       });
     });
 
