@@ -170,7 +170,7 @@ describe('ChartJSService with ChartConfigService', () => {
           const { size } = chart.options.scales['x'].ticks.font as FontSpec;
           const { color } = chart.options;
           expect(size).toBe(12);
-          expect(color).toBe(ColorHelper.getThemeColorHexString('semi-dark'));
+          expect(color).toBe(ColorHelper.getThemeColorHexString('black'));
         });
 
         it('should be rendered with correctly styled x-axis line', () => {
