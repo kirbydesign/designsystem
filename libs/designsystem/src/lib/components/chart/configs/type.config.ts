@@ -80,6 +80,16 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
   line: {
     type: 'line',
     options: {
+      color: getThemeColorHexString('semi-dark'),
+      scales: {
+        x: {
+          ticks: {
+            font: {
+              size: parseInt(fontSize('xs')),
+            },
+          },
+        },
+      },
       elements: {
         point: {
           radius: 0,

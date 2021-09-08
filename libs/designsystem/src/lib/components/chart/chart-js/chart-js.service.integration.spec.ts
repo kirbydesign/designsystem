@@ -163,13 +163,12 @@ describe('ChartJSService with ChartConfigService', () => {
           expect(chart.options.elements.line.hoverBackgroundColor).toBeUndefined();
         });
 
-        // TODO: Figure out typography for chart
-        /*it('should be rendered with correct typography for data labels', () => {
-          const { size } = chart.options.scales['y'].ticks.font as FontSpec;
+        it('should be rendered with correct typography for data labels', () => {
+          const { size } = chart.options.scales['x'].ticks.font as FontSpec;
           const { color } = chart.options;
-          expect(size).toBe(14);
-          expect(color).toBe(ColorHelper.getThemeColorHexString('black'));
-        });*/
+          expect(size).toBe(12);
+          expect(color).toBe(ColorHelper.getThemeColorHexString('semi-dark'));
+        });
       });
     });
 
