@@ -117,6 +117,19 @@ describe('ListComponent', () => {
 
       expect(spectator.component._isSectionsEnabled).toBeTruthy();
     });
+
+    it('should have no groupedItems when last item in items input is removed', () => {
+      spectator.setInput({
+        items: [TEST_ITEMS[0]],
+        getSectionName: (_item: any) => 'this is a test',
+      });
+
+      expect(spectator.component._groupedItems).toHaveLength(1);
+
+      spectator.setInput({ items: [] });
+
+      expect(spectator.component._groupedItems).toHaveLength(0);
+    });
   });
 
   describe('divider', () => {
