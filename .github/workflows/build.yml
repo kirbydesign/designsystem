@@ -1,4 +1,4 @@
-name: Build & Deploy Cookbok
+name: Build & Deploy Cookbook
 
 on:
   push: # TODO: Change to `release` event when our release workflow is in place
@@ -276,5 +276,40 @@ jobs:
           log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
           state: failure
           mediaType: '{"previews": ["ant-man"]}'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Deploy cookbook to GitHub pages
+        run: |
+          echo "Hostname: ${HOSTNAME}"
+          
+          git clone https://github.com/kirbydesign/designsystem.git -b gh-pages designsystemWeb
+          
+          if [ $HOSTNAME == "cookbook" ]; then 
+            cp dist/apps/cookbook/* designsysteWeb/
+          else
+            mkdir -p designsystemWeb/$HOSTNAME
+            cp dist/apps/cookbook/* designsystemWeb/$HOSTNAME
+          fi
+          
+          cd designsystemWeb
+          
+          git add .
+          git commit -m "Release: $RELEASENAME"
+          git push
+
+          branches=$(git branch -r)
+          folders=$(ls -d */)
+
+          for item in $folders
+          do
+            count=$(echo $branches | grep ${item::-1} | wc -l)
+            if [ $count == "0" ]; then
+              echo "DELETE: ${item::-1} (branch closed)"
+            fi
+          done
+
+          #git config --global user.name 'DRB-bot'
+          #git config --global user.email 'dbrr00@bankdata.dk'
+        shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
