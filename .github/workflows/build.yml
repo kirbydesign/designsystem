@@ -286,8 +286,6 @@ jobs:
 
           git config --global user.name 'DRB-bot'
           git config --global user.email 'dbrr00@bankdata.dk'          
-
-          
           
           if [ $HOSTNAME == "cookbook" ]; then 
             sed -i -E 's,<base href="[^"]*".*>,<base href="designsystem/">,g' dist/apps/cookbook/index.html
@@ -307,16 +305,20 @@ jobs:
 
           for item in $folders
           do
+            echo "processing item: $item"
             if grep -q "${item::-1}" <<< "$branches"; then
               echo "DELETE: ${item::-1} (branch closed)"
             fi
+            echo "after if"
           done
+          echo "after loop"
 
           git add .
+          echo "after add"
           git commit -m "Release: $RELEASENAME"
+          echo "after commit"
           git push
-
-          #count=$(echo $branches | grep ${item::-1} | wc -l)
+          echo "after push"
         shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
