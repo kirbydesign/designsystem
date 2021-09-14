@@ -285,10 +285,10 @@ jobs:
           git clone https://github.com/kirbydesign/designsystem.git -b gh-pages designsystemWeb
           
           if [ $HOSTNAME == "cookbook" ]; then 
-            cp dist/apps/cookbook/* designsysteWeb/
+            cp -R dist/apps/cookbook/* designsysteWeb/
           else
             mkdir -p designsystemWeb/$HOSTNAME
-            cp dist/apps/cookbook/* designsystemWeb/$HOSTNAME
+            cp -R dist/apps/cookbook/* designsystemWeb/$HOSTNAME
           fi
           
           cd designsystemWeb
