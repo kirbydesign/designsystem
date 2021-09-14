@@ -282,6 +282,9 @@ jobs:
         run: |
           echo "Hostname: ${HOSTNAME}"
           
+          git config --global user.name 'DRB-bot'
+          git config --global user.email 'dbrr00@bankdata.dk'          
+          
           git clone https://github.com/kirbydesign/designsystem.git -b gh-pages designsystemWeb
           
           if [ $HOSTNAME == "cookbook" ]; then 
@@ -308,8 +311,7 @@ jobs:
             fi
           done
 
-          #git config --global user.name 'DRB-bot'
-          #git config --global user.email 'dbrr00@bankdata.dk'
+
         shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
