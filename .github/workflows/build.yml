@@ -282,11 +282,13 @@ jobs:
         run: |
           echo "Hostname: ${HOSTNAME}"
           
-          git config --global user.name 'DRB-bot'
-          git config --global user.email 'dbrr00@bankdata.dk'          
           
           git clone https://github.com/kirbydesign/designsystem.git -b gh-pages designsystemWeb
-          
+
+          git config --global user.name 'DRB-bot'
+          git config --global user.email 'dbrr00@bankdata.dk'          
+
+
           if [ $HOSTNAME == "cookbook" ]; then 
             cp -R dist/apps/cookbook/* designsysteWeb/
           else
