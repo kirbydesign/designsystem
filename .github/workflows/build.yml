@@ -299,12 +299,6 @@ jobs:
             cp -R dist/apps/cookbook/* designsystemWeb/branch/$HOSTNAME
           fi
 
-          #create test data
-          mkdir -p designsystemWeb/branch/deleteBranch1
-          mkdir -p designsystemWeb/branch/deleteBranch2
-          mkdir -p designsystemWeb/branch/deleteBranch3
-          mkdir -p designsystemWeb/branch/kby-inline-footer
-
           cd designsystemWeb/branch/
           folders=$(ls -d */)
 
@@ -327,9 +321,9 @@ jobs:
           #delete deployments related to closed branches
           for item in $folders
           do
-            echo "Verify brnach ${item::-1} exist"
+            echo "Verify branch ${item::-1} exist"
             if ! grep -q "${item::-1}" <<< "$branchList"; then
-              echo "DELETE branch folder ${item::-1} (branch closed)"
+              echo "Deleting branch folder ${item::-1} (branch closed)"
               rm -Rf branch/${item::-1}
             fi
           done
