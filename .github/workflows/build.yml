@@ -288,11 +288,11 @@ jobs:
           git config --global user.name 'DRB-bot'
           git config --global user.email 'dbrr00@bankdata.dk'          
           
-          
+          HOSTNAME="cookbook"
           mkdir -p designsystemWeb/branch
           if [ $HOSTNAME == "cookbook" ]; then 
             sed -i -E "s,<base href=\"[^\"]*\".*>,<base href=\"/designsystem/\">,g" dist/apps/cookbook/index.html
-            cp -R dist/apps/cookbook/* designsysteWeb/
+            cp -R dist/apps/cookbook/* designsystemWeb/
             cp designsystemWeb/index.html designsystemWeb/404.html
           else
             mkdir -p designsystemWeb/branch/$HOSTNAME
