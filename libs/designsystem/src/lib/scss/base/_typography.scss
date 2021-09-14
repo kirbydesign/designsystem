@@ -28,6 +28,38 @@ kirby-app .page-title {
   }
 }
 
+ul,
+.ul,
+ol,
+.ol {
+  list-style: none; /* Remove default bullets/numbers */
+  padding-left: 8px;
+  counter-reset: item;
+}
+
+ul,
+ol {
+  li {
+    display: flex;
+    line-height: 1.2em;
+  }
+}
+
+ul li::before {
+  content: '\2022'; /* Add content: \2022 is the CSS Code/unicode for a bullet */
+  display: inline-block;
+  font-weight: bold;
+  font-size: 1.4em;
+  padding-right: 8px;
+}
+ol li::before {
+  content: counters(item, '.') '. ';
+  counter-increment: item;
+  display: inline-block;
+  font-weight: bold;
+  padding-right: 8px;
+}
+
 .kirby-text-display-1 {
   font-size: font-size('xxxxl');
   font-weight: font-weight('black');
