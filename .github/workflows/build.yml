@@ -310,14 +310,14 @@ jobs:
           echo "Branches:"
           echo $branches
 
-          for item in $folders
-          do
-            echo "Verify brnach ${item::-1} exist"
-            if ! grep -q "${item::-1}" <<< "$branches"; then
-              echo "DELETE branch folder ${item::-1} (branch closed)"
-              rm -Rf branch/${item::-1}
-            fi
-          done
+          #for item in $folders
+          #do
+          #  echo "Verify brnach ${item::-1} exist"
+          #  if ! grep -q "${item::-1}" <<< "$branches"; then
+          #    echo "DELETE branch folder ${item::-1} (branch closed)"
+          #    rm -Rf branch/${item::-1}
+          #  fi
+          #done
 
           git add .
           
