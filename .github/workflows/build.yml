@@ -293,10 +293,12 @@ jobs:
           if [ $HOSTNAME == "cookbook" ]; then 
             sed -i -E "s,<base href=\"[^\"]*\".*>,<base href=\"/designsystem/\">,g" dist/apps/cookbook/index.html
             cp -R dist/apps/cookbook/* designsysteWeb/
+            cp designsystemWeb/index.html designsystemWeb/404.html
           else
             mkdir -p designsystemWeb/branch/$HOSTNAME
             sed -i -E "s,<base href=\"[^\"]*\".*>,<base href=\"/designsystem/branch/$HOSTNAME/\">,g" dist/apps/cookbook/index.html
             cp -R dist/apps/cookbook/* designsystemWeb/branch/$HOSTNAME
+            cp designsystemWeb/branch/$HOSTNAME/index.html designsystemWeb/branch/$HOSTNAME/404.html
           fi
           
           cd designsystemWeb/branch/
