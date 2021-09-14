@@ -298,29 +298,21 @@ jobs:
           cd designsystemWeb
           
           branches=$(git branch -r)
-          echo "Branches:"
-          echo $branches
 
           folders=$(ls -d */)
-          echo "Folders:"
-          echo $folders
 
           for item in $folders
           do
-            echo "processing $item"
-            tmp=$(echo $branches | grep ${item::-1})
-            count=$(echo $tmp | wc -l)
-            echo "was found: $count"
-            if [ $count == "0" ]; then
+            if grep -q "${item::-1}" <<< "$branches"; then
               echo "DELETE: ${item::-1} (branch closed)"
             fi
-            echo "after if"
           done
-          echo "after clean-up loop"
 
           git add .
           git commit -m "Release: $RELEASENAME"
           git push
+
+          #count=$(echo $branches | grep ${item::-1} | wc -l)
         shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
