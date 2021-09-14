@@ -251,7 +251,7 @@ jobs:
       - name: Deploy the pull request
         run: |
           # deployment logic goes here
-          sleep 30
+          sleep 3
       - name: Set deployment status to success
         id: successful_deployment
         uses: octokit/request-action@v2.x
@@ -297,27 +297,42 @@ jobs:
             mkdir -p designsystemWeb/branch/$HOSTNAME
             sed -i -E "s,<base href=\"[^\"]*\".*>,<base href=\"/designsystem/branch/$HOSTNAME/\">,g" dist/apps/cookbook/index.html
             cp -R dist/apps/cookbook/* designsystemWeb/branch/$HOSTNAME
-            cp designsystemWeb/branch/$HOSTNAME/index.html designsystemWeb/branch/$HOSTNAME/404.html
           fi
-          
+
+          #create test data
+          mkdir -p designsystemWeb/branch/deleteBranch1
+          mkdir -p designsystemWeb/branch/deleteBranch2
+          mkdir -p designsystemWeb/branch/deleteBranch3
+          mkdir -p designsystemWeb/branch/kby-inline-footer
+
           cd designsystemWeb/branch/
           folders=$(ls -d */)
-          echo "Folders:"
-          echo $folders
 
           cd ../
           branches=$(git branch -r)
-          echo "Branches:"
-          echo $branches
 
-          #for item in $folders
-          #do
-          #  echo "Verify brnach ${item::-1} exist"
-          #  if ! grep -q "${item::-1}" <<< "$branches"; then
-          #    echo "DELETE branch folder ${item::-1} (branch closed)"
-          #    rm -Rf branch/${item::-1}
-          #  fi
-          #done
+          #find deployment names for all branches
+          branchList=""
+          for branch in $branches; do
+            name="${branch##*/}"
+            name=$(tr [:upper:] [:lower:] <<< "$name")
+            name="${name//[^a-zA-Z0-9]/-}"
+            name=$(tr -s '-' '-' <<< "$name")
+            name="${name%%-}"
+            name="kby-${name}"
+            name=$(cut -c 1-53 <<< "$name")
+            branchList="$branchList $name"
+          done
+
+          #delete deployments related to closed branches
+          for item in $folders
+          do
+            echo "Verify brnach ${item::-1} exist"
+            if ! grep -q "${item::-1}" <<< "$branchList"; then
+              echo "DELETE branch folder ${item::-1} (branch closed)"
+              rm -Rf branch/${item::-1}
+            fi
+          done
 
           git add .
           
