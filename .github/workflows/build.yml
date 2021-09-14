@@ -287,38 +287,34 @@ jobs:
           git config --global user.name 'DRB-bot'
           git config --global user.email 'dbrr00@bankdata.dk'          
           
+          mkdir -p designsystemWeb/branch
           if [ $HOSTNAME == "cookbook" ]; then 
             sed -i -E "s,<base href=\"[^\"]*\".*>,<base href=\"designsystem/\">,g" dist/apps/cookbook/index.html
             cp -R dist/apps/cookbook/* designsysteWeb/
           else
-            mkdir -p designsystemWeb/$HOSTNAME
-            sed -i -E "s,<base href=\"[^\"]*\".*>,<base href=\"designsystem/$HOSTNAME/\">,g" dist/apps/cookbook/index.html
-            cp -R dist/apps/cookbook/* designsystemWeb/$HOSTNAME
+            mkdir -p designsystemWeb/branch/$HOSTNAME
+            sed -i -E "s,<base href=\"[^\"]*\".*>,<base href=\"designsystem/branch/$HOSTNAME/\">,g" dist/apps/cookbook/index.html
+            cp -R dist/apps/cookbook/* designsystemWeb/branch/$HOSTNAME
           fi
-          echo "Content copied form dist/apps/cookbook/* to designsystemWeb/$HOSTNAME"
           
-          cd designsystemWeb
-          
-          branches=$(git branch -r)
-
+          cd designsystemWeb/branch/
           folders=$(ls -d */)
+          cd ../
+          branches=$(git branch -r)
 
           for item in $folders
           do
-            echo "processing item: $item"
             if grep -q "${item::-1}" <<< "$branches"; then
-              echo "DELETE: ${item::-1} (branch closed)"
+              echo "DELETE branch folder: ${item::-1} (branch closed)"
             fi
-            echo "after if"
           done
-          echo "after loop"
 
           git add .
-          echo "after add"
-          git commit -m "Release: $RELEASENAME"
-          echo "after commit"
-          git push
-          echo "after push"
+          
+          if ! git diff-index --quiet HEAD; then          
+            git commit -m "Release: $RELEASENAME"
+            git push
+          fi
         shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
