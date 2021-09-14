@@ -18,6 +18,7 @@ import { ChartShowcaseComponent } from './chart-showcase/chart-showcase.componen
 import { CheckboxShowcaseComponent } from './checkbox-showcase/checkbox-showcase.component';
 import { ChipShowcaseComponent } from './chip-showcase/chip-showcase.component';
 import { ColorsShowcaseComponent } from './colors-showcase/colors-showcase.component';
+import { DefaultListShowcaseComponent } from './default-list-showcase/default-list-showcase';
 import { EmptyStateShowcaseComponent } from './empty-state-showcase/empty-state-showcase.component';
 import { FabSheetShowcaseComponent } from './fab-sheet-showcase/fab-sheet-showcase.component';
 import { FlagShowcaseComponent } from './flag-showcase/flag-showcase.component';
@@ -99,6 +100,7 @@ export const COMPONENT_EXPORTS: any[] = [
   RadioShowcaseComponent,
   RangeShowcaseComponent,
   LinkShowcaseComponent,
+  DefaultListShowcaseComponent,
 ];
 
 export const COMPONENT_DECLARATIONS: any[] = [...COMPONENT_EXPORTS, ShowcaseComponent];

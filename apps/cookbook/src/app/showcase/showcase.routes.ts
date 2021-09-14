@@ -18,6 +18,7 @@ import { ChartShowcaseComponent } from './chart-showcase/chart-showcase.componen
 import { CheckboxShowcaseComponent } from './checkbox-showcase/checkbox-showcase.component';
 import { ChipShowcaseComponent } from './chip-showcase/chip-showcase.component';
 import { ColorsShowcaseComponent } from './colors-showcase/colors-showcase.component';
+import { DefaultListShowcaseComponent } from './default-list-showcase/default-list-showcase';
 import { DividerShowcaseComponent } from './divider-showcase/divider-showcase.component';
 import { DropdownShowcaseComponent } from './dropdown-showcase/dropdown-showcase.component';
 import { EmptyStateShowcaseComponent } from './empty-state-showcase/empty-state-showcase.component';
@@ -256,6 +257,10 @@ export const routes: Routes = [
       {
         path: 'link',
         component: LinkShowcaseComponent,
+      },
+      {
+        path: 'default-list',
+        component: DefaultListShowcaseComponent,
       },
     ],
   },
