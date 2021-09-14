@@ -280,6 +280,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Deploy cookbook to GitHub pages
         run: |
+          set -e
           echo "Hostname: ${HOSTNAME}"
 
           git clone https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/kirbydesign/designsystem.git -b gh-pages designsystemWeb
@@ -306,6 +307,7 @@ jobs:
           do
             if grep -q "${item::-1}" <<< "$branches"; then
               echo "DELETE branch folder: ${item::-1} (branch closed)"
+              rm -Rf branch/$item
             fi
           done
 
