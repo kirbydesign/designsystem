@@ -287,10 +287,14 @@ jobs:
           git config --global user.name 'DRB-bot'
           git config --global user.email 'dbrr00@bankdata.dk'          
 
+          
+          
           if [ $HOSTNAME == "cookbook" ]; then 
+            sed -i -E 's,<base href="[^"]*".*>,<base href="designsystem/">,g' dist/apps/cookbook/index.html
             cp -R dist/apps/cookbook/* designsysteWeb/
           else
             mkdir -p designsystemWeb/$HOSTNAME
+            sed -i -E 's,<base href="[^"]*".*>,<base href="designsystem/$HOSTNAME/">,g' dist/apps/cookbook/index.html
             cp -R dist/apps/cookbook/* designsystemWeb/$HOSTNAME
           fi
           echo "Content copied form dist/apps/cookbook/* to designsystemWeb/$HOSTNAME"
