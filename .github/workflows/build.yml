@@ -18,18 +18,6 @@ jobs:
       do_build: ${{ github.event_name == 'pull_request' || steps.event_type.outputs.is_new_release == 'true' || steps.filter.outputs.libs == 'false' }}
       node_version: ${{ steps.get_node_version.outputs.node_version }}
     steps:
-      - name: Deploy cookbook to GitHub pages
-        run: |
-          echo "Hostname: ${HOSTNAME}"
-          
-          git clone https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/kirbydesign/designsystem.git -b gh-pages designsystemWeb
-
-          git config --global user.name 'DRB-bot'
-          git config --global user.email 'dbrr00@bankdata.dk'          
-
-        shell: bash
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Check for new release
         id: event_type
         env:
@@ -305,23 +293,33 @@ jobs:
             mkdir -p designsystemWeb/$HOSTNAME
             cp -R dist/apps/cookbook/* designsystemWeb/$HOSTNAME
           fi
+          echo "Content copied form dist/apps/cookbook/* to designsystemWeb/$HOSTNAME"
           
           cd designsystemWeb
           
-          git add .
-          git commit -m "Release: $RELEASENAME"
-          git push
-
           branches=$(git branch -r)
+          echo "Branches:"
+          echo $branches
+
           folders=$(ls -d */)
+          echo "Folders:"
+          echo $folders
 
           for item in $folders
           do
+            echo "processing $item"
             count=$(echo $branches | grep ${item::-1} | wc -l)
+            echo "was found: $count"
             if [ $count == "0" ]; then
               echo "DELETE: ${item::-1} (branch closed)"
             fi
+            echo "after if"
           done
+          echo "after clean-up loop"
+
+          git add .
+          git commit -m "Release: $RELEASENAME"
+          git push
         shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
