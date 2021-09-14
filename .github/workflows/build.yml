@@ -18,6 +18,18 @@ jobs:
       do_build: ${{ github.event_name == 'pull_request' || steps.event_type.outputs.is_new_release == 'true' || steps.filter.outputs.libs == 'false' }}
       node_version: ${{ steps.get_node_version.outputs.node_version }}
     steps:
+      - name: Deploy cookbook to GitHub pages
+        run: |
+          echo "Hostname: ${HOSTNAME}"
+          
+          git clone https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/kirbydesign/designsystem.git -b gh-pages designsystemWeb
+
+          git config --global user.name 'DRB-bot'
+          git config --global user.email 'dbrr00@bankdata.dk'          
+
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Check for new release
         id: event_type
         env:
@@ -281,18 +293,11 @@ jobs:
       - name: Deploy cookbook to GitHub pages
         run: |
           echo "Hostname: ${HOSTNAME}"
-          
-          origin=${GITHUB_SERVER_URL:-${GITHUB_URL:-https://github.com}}
-          token64=$(printf "%s""x-access-token:$GITHUB_TOKEN" | base64)
-          git config --local http.${origin}/.extraheader "AUTHORIZATION: basic $token64"
-          
-          echo $token64
 
-          git clone https://github.com/kirbydesign/designsystem.git -b gh-pages designsystemWeb
+          git clone https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/kirbydesign/designsystem.git -b gh-pages designsystemWeb
 
           git config --global user.name 'DRB-bot'
           git config --global user.email 'dbrr00@bankdata.dk'          
-
 
           if [ $HOSTNAME == "cookbook" ]; then 
             cp -R dist/apps/cookbook/* designsysteWeb/
@@ -317,8 +322,6 @@ jobs:
               echo "DELETE: ${item::-1} (branch closed)"
             fi
           done
-
-
         shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
