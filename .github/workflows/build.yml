@@ -283,7 +283,7 @@ jobs:
           echo "Hostname: ${HOSTNAME}"
           
           
-          git clone https://github.com/kirbydesign/designsystem.git -b gh-pages designsystemWeb
+          git clone https://$GITHUB_TOKEN@github.com/kirbydesign/designsystem.git -b gh-pages designsystemWeb
 
           git config --global user.name 'DRB-bot'
           git config --global user.email 'dbrr00@bankdata.dk'          
