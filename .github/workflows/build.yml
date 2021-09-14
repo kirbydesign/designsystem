@@ -308,7 +308,8 @@ jobs:
           for item in $folders
           do
             echo "processing $item"
-            count=$(echo $branches | grep ${item::-1} | wc -l)
+            tmp=$(echo $branches | grep ${item::-1})
+            count=$(echo $tmp | wc -l)
             echo "was found: $count"
             if [ $count == "0" ]; then
               echo "DELETE: ${item::-1} (branch closed)"
