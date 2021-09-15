@@ -251,7 +251,7 @@ jobs:
       - name: Deploy the pull request
         run: |
           # deployment logic goes here
-          sleep 3
+          sleep 30
       - name: Set deployment status to success
         id: successful_deployment
         uses: octokit/request-action@v2.x
@@ -283,23 +283,23 @@ jobs:
           set -e
           echo "Hostname: ${HOSTNAME}"
 
-          git clone https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/kirbydesign/designsystem.git -b gh-pages designsystemWeb
+          git clone https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/kirbydesign/designsystem.git -b gh-pages designsystem_web
 
           git config --global user.name 'DRB-bot'
           git config --global user.email 'dbrr00@bankdata.dk'          
           
-          mkdir -p designsystemWeb/branch
+          mkdir -p designsystem_web/branch
           if [ $HOSTNAME == "cookbook" ]; then 
             sed -i -E "s,<base href=\"[^\"]*\".*>,<base href=\"/\">,g" dist/apps/cookbook/index.html
-            cp -R dist/apps/cookbook/* designsystemWeb/
-            cp designsystemWeb/index.html designsystemWeb/404.html
+            cp -R dist/apps/cookbook/* designsystem_web/
+            cp designsystem_web/index.html designsystem_web/404.html
           else
-            mkdir -p designsystemWeb/branch/$HOSTNAME
+            mkdir -p designsystem_web/branch/$HOSTNAME
             sed -i -E "s,<base href=\"[^\"]*\".*>,<base href=\"/branch/$HOSTNAME/\">,g" dist/apps/cookbook/index.html
-            cp -R dist/apps/cookbook/* designsystemWeb/branch/$HOSTNAME
+            cp -R dist/apps/cookbook/* designsystem_web/branch/$HOSTNAME
           fi
 
-          cd designsystemWeb/branch/
+          cd designsystem_web/branch/
           folders=$(ls -d */)
 
           cd ../
