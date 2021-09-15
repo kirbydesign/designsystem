@@ -288,7 +288,6 @@ jobs:
           git config --global user.name 'DRB-bot'
           git config --global user.email 'dbrr00@bankdata.dk'          
           
-          HOSTNAME="cookbook"
           mkdir -p designsystemWeb/branch
           if [ $HOSTNAME == "cookbook" ]; then 
             sed -i -E "s,<base href=\"[^\"]*\".*>,<base href=\"/\">,g" dist/apps/cookbook/index.html
