@@ -1,4 +1,4 @@
-name: Build & Deploy Cookbok
+name: Build & Deploy Cookbook
 
 on:
   push: # TODO: Change to `release` event when our release workflow is in place
@@ -276,5 +276,64 @@ jobs:
           log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
           state: failure
           mediaType: '{"previews": ["ant-man"]}'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Deploy cookbook to GitHub pages
+        run: |
+          set -e
+          echo "Hostname: ${HOSTNAME}"
+
+          git clone https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/kirbydesign/designsystem.git -b gh-pages designsystem_web
+
+          git config --global user.name 'DRB-bot'
+          git config --global user.email 'dbrr00@bankdata.dk'          
+          
+          mkdir -p designsystem_web/branch
+          if [ $HOSTNAME == "cookbook" ]; then 
+            sed -i -E "s,<base href=\"[^\"]*\".*>,<base href=\"/\">,g" dist/apps/cookbook/index.html
+            cp -R dist/apps/cookbook/* designsystem_web/
+            cp designsystem_web/index.html designsystem_web/404.html
+          else
+            mkdir -p designsystem_web/branch/$HOSTNAME
+            sed -i -E "s,<base href=\"[^\"]*\".*>,<base href=\"/branch/$HOSTNAME/\">,g" dist/apps/cookbook/index.html
+            cp -R dist/apps/cookbook/* designsystem_web/branch/$HOSTNAME
+          fi
+
+          cd designsystem_web/branch/
+          folders=$(ls -d */)
+
+          cd ../
+          branches=$(git branch -r)
+
+          #find deployment names for all branches
+          branchList=""
+          for branch in $branches; do
+            name="${branch##*/}"
+            name=$(tr [:upper:] [:lower:] <<< "$name")
+            name="${name//[^a-zA-Z0-9]/-}"
+            name=$(tr -s '-' '-' <<< "$name")
+            name="${name%%-}"
+            name="kby-${name}"
+            name=$(cut -c 1-53 <<< "$name")
+            branchList="$branchList $name"
+          done
+
+          #delete deployments related to closed branches
+          for item in $folders
+          do
+            echo "Verify branch ${item::-1} exist"
+            if ! grep -q "${item::-1}" <<< "$branchList"; then
+              echo "Deleting branch folder ${item::-1} (branch closed)"
+              rm -Rf branch/${item::-1}
+            fi
+          done
+
+          git add .
+          
+          if ! git diff-index --quiet HEAD; then          
+            git commit -m "Release: $RELEASENAME"
+            git push
+          fi
+        shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
