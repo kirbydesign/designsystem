@@ -88,6 +88,12 @@ ion-item {
     --padding-top: #{size('xxs')};
   }
 
+  :host-context(kirby-list-item:first-of-type.virtual) &,
+  :host-context(kirby-list-item:last-of-type.virtual) & {
+    --padding-top: 0;
+    --padding-bottom: 0;
+  }
+
   :host-context(kirby-list-item:first-of-type kirby-card) & {
     --padding-top: 0;
   }
