@@ -115,3 +115,26 @@
     }
   }
 }
+
+// Fixes https://github.com/kirbydesign/designsystem/issues/1711
+:host-context(.shape-rounded .is-single) {
+  ion-item {
+    --border-radius: #{$border-radius};
+  }
+}
+
+// Fixes https://github.com/kirbydesign/designsystem/issues/1711
+:host-context(.has-header .is-single) {
+  ion-item::part(native) {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+}
+
+// Fixes https://github.com/kirbydesign/designsystem/issues/1711
+:host-context(.has-footer .is-single) {
+  ion-item::part(native) {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
