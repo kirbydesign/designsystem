@@ -82,26 +82,21 @@
 }
 
 /* clean-css ignore:start */
-:host-context(kirby-list ion-item-sliding:first-of-type) {
-  ion-item {
+// Fixes https://github.com/kirbydesign/designsystem/issues/1745
+ion-item {
+  :host-context(kirby-list-item:first-of-type) & {
     --padding-top: #{size('xxs')};
   }
-}
 
-:host-context(kirby-list ion-item-sliding:first-of-type kirby-card) {
-  ion-item {
+  :host-context(kirby-list-item:first-of-type kirby-card) & {
     --padding-top: 0;
   }
-}
 
-:host-context(kirby-list ion-item-sliding:last-of-type) {
-  ion-item {
+  :host-context(kirby-list-item:last-of-type) & {
     --padding-bottom: #{size('xxs')};
   }
-}
 
-:host-context(kirby-list ion-item-sliding:last-of-type kirby-card) {
-  ion-item {
+  :host-context(kirby-list-item:last-of-type kirby-card) & {
     --padding-bottom: 0;
   }
 }
