@@ -1,6 +1,6 @@
 import { Component, forwardRef, Input } from '@angular/core';
 
-import { BadgeComponent } from '@kirbydesign/designsystem';
+import { KirbyBadge } from '@kirbydesign/designsystem';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
@@ -8,7 +8,7 @@ import { BadgeComponent } from '@kirbydesign/designsystem';
   template: '<ng-content></ng-content>',
   providers: [
     {
-      provide: BadgeComponent,
+      provide: KirbyBadge,
       useExisting: forwardRef(() => MockBadgeComponent),
     },
   ],

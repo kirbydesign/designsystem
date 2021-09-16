@@ -2,7 +2,7 @@ export * from './app';
 
 export { AvatarComponent, AvatarSize } from './avatar/avatar.component';
 
-export { KirbyBadge as BadgeComponent } from './web-component-proxies.component';
+export { KirbyBadge } from './web-component-proxies.component';
 export { ButtonComponent, ButtonSize } from './button/button.component';
 
 export * from './card';
