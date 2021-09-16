@@ -3,8 +3,8 @@ export const environment = {
   githubBaseUrl: 'https://github.com/kirbydesign/designsystem',
   githubApi: 'https://api.github.com',
   oauth: {
-    githubToken1: 'd84e5664fdc88216170',
-    githubToken2: '38b876845f9e791425f45',
+    githubToken1: 'ghp_jd0nvTUS5YSDCRCbL',
+    githubToken2: '8sHauSnf3pUZS2g0iXV',
   },
   firebase: {
     apiKey: 'AIzaSyAywQylHrFlUNN2v6PD96Gc_82Erwbw7E4',

@@ -1,25 +1,30 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
 import { KirbyModule } from '@kirbydesign/designsystem';
-import { ChartExampleAreasplineComponent } from './examples/chart-example-areaspline.component';
-import { ChartExampleActivityGaugeComponent } from './examples/chart-example-activity-gauge.component';
-import { ChartExampleDonutComponent } from './examples/chart-example-donut.component';
-import { ChartExampleColumnComponent } from './examples/chart-example-column.component';
-import { ChartExamplePieComponent } from './examples/chart-example-pie.component';
-import { ChartExampleTimeseriesComponent } from './examples/chart-example-timeseries.component';
-import { ChartExampleBarComponent } from './examples/chart-example-bar.component';
+
 import { ChartExampleComponent } from './chart-example.component';
+import { ChartExampleAccessibilityComponent } from './examples/chart-example-accessibility.component';
+import { ChartExampleAnnotationsComponent } from './examples/chart-example-annotations.component';
+import { ChartExampleBarComponent } from './examples/chart-example-bar.component';
+import { ChartExampleColumnComponent } from './examples/chart-example-column-chart.component';
+import { ChartExampleColumnStackedComponent } from './examples/chart-example-column-stacked.component';
+import { ChartExampleInteractionComponent } from './examples/chart-example-interaction.component';
+import { ChartExampleLineComponent } from './examples/chart-example-line.component';
+import { ChartExampleMultipleDatasetsComponent } from './examples/chart-example-multiple-datasets.component';
+import { ChartExampleSimpleColumnComponent } from './examples/chart-example-simple-column-chart.component';
 
 const COMPONENT_DECLARATIONS = [
   ChartExampleComponent,
-  ChartExampleActivityGaugeComponent,
-  ChartExampleAreasplineComponent,
-  ChartExampleDonutComponent,
+  ChartExampleSimpleColumnComponent,
   ChartExampleColumnComponent,
-  ChartExamplePieComponent,
-  ChartExampleTimeseriesComponent,
   ChartExampleBarComponent,
+  ChartExampleInteractionComponent,
+  ChartExampleColumnStackedComponent,
+  ChartExampleMultipleDatasetsComponent,
+  ChartExampleAccessibilityComponent,
+  ChartExampleAnnotationsComponent,
+  ChartExampleLineComponent,
 ];
 
 @NgModule({

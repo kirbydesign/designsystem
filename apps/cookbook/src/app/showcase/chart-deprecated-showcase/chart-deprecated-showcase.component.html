@@ -1,0 +1,30 @@
+<div class="example">
+  <cookbook-example-viewer [html]="donut.template">
+    <cookbook-chart-deprecated-example-donut #donut> </cookbook-chart-deprecated-example-donut>
+  </cookbook-example-viewer>
+  <cookbook-example-viewer [html]="pie.template">
+    <cookbook-chart-deprecated-example-pie #pie> </cookbook-chart-deprecated-example-pie>
+  </cookbook-example-viewer>
+  <cookbook-example-viewer [html]="timeseries.template">
+    <cookbook-chart-deprecated-example-timeseries #timeseries>
+    </cookbook-chart-deprecated-example-timeseries>
+  </cookbook-example-viewer>
+  <cookbook-example-viewer [html]="areaspline.template">
+    <cookbook-chart-deprecated-example-areaspline #areaspline>
+    </cookbook-chart-deprecated-example-areaspline>
+  </cookbook-example-viewer>
+  <cookbook-example-viewer [html]="activityGauge.template">
+    <cookbook-chart-deprecated-example-activity-gauge #activityGauge>
+    </cookbook-chart-deprecated-example-activity-gauge>
+  </cookbook-example-viewer>
+  <cookbook-example-viewer [html]="column.template" [ts]="column.codeSnippet">
+    <cookbook-chart-deprecated-example-column #column> </cookbook-chart-deprecated-example-column>
+  </cookbook-example-viewer>
+  <cookbook-example-viewer [html]="bar.template" [ts]="bar.codeSnippet">
+    <cookbook-chart-deprecated-example-bar #bar> </cookbook-chart-deprecated-example-bar>
+  </cookbook-example-viewer>
+  <h2>Properties:</h2>
+  <cookbook-api-description-properties
+    [properties]="properties"
+  ></cookbook-api-description-properties>
+</div>

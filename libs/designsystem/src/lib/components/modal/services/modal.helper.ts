@@ -45,7 +45,7 @@ export class ModalHelper {
     }
 
     if (config.interactWithBackground) {
-      this.windowRef.document.body.classList.add(allow_scroll_class);
+      this.windowRef.nativeWindow.document.body.classList.add(allow_scroll_class);
     }
 
     const ionModal = await this.ionicModalController.create({
@@ -71,7 +71,7 @@ export class ModalHelper {
 
     if (config.interactWithBackground) {
       ionModal.onDidDismiss().then(() => {
-        this.windowRef.document.body.classList.remove(allow_scroll_class);
+        this.windowRef.nativeWindow.document.body.classList.remove(allow_scroll_class);
       });
     }
 

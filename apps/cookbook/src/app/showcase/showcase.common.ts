@@ -13,6 +13,7 @@ import { BadgeShowcaseComponent } from './badge-showcase/badge-showcase.componen
 import { ButtonShowcaseComponent } from './button-showcase/button-showcase.component';
 import { CalendarShowcaseComponent } from './calendar-showcase/calendar-showcase.component';
 import { CardShowcaseComponent } from './card-showcase/card-showcase.component';
+import { ChartDeprecatedShowcaseComponent } from './chart-deprecated-showcase/chart-deprecated-showcase.component';
 import { ChartShowcaseComponent } from './chart-showcase/chart-showcase.component';
 import { CheckboxShowcaseComponent } from './checkbox-showcase/checkbox-showcase.component';
 import { ChipShowcaseComponent } from './chip-showcase/chip-showcase.component';
@@ -43,7 +44,7 @@ import { ShowcaseComponent } from './showcase.component';
 import { SlideButtonShowcaseComponent } from './slide-button-showcase/slide-button-showcase.component';
 import { SlidesShowcaseComponent } from './slides-showcase/slides-showcase.component';
 import { SpinnerShowcaseComponent } from './spinner-showcase/spinner-showcase.component';
-import { StockChartShowcaseComponent } from './stock-chart-showcase/stock-chart-showcase.component';
+import { StockChartDeprecatedShowcaseComponent } from './stock-chart-deprecated-showcase/stock-chart-deprecated-showcase.component';
 import { TabsShowcaseComponent } from './tabs-showcase/tabs-showcase.component';
 import { ToastShowcaseComponent } from './toast-showcase/toast-showcase.component';
 import { ToggleButtonShowcaseComponent } from './toggle-button-showcase/toggle-button-showcase.component';
@@ -65,6 +66,7 @@ export const COMPONENT_EXPORTS: any[] = [
   ListVirtualScrollLoadShowcaseComponent,
   GridShowcaseComponent,
   AvatarShowcaseComponent,
+  ChartDeprecatedShowcaseComponent,
   ChartShowcaseComponent,
   FontsShowcaseComponent,
   SpinnerShowcaseComponent,
@@ -91,7 +93,7 @@ export const COMPONENT_EXPORTS: any[] = [
   DividerShowcaseComponent,
   ReorderListShowcaseComponent,
   DropdownShowcaseComponent,
-  StockChartShowcaseComponent,
+  StockChartDeprecatedShowcaseComponent,
   ProgressCircleShowcaseComponent,
   FlagShowcaseComponent,
   SlidesShowcaseComponent,

@@ -1,8 +1,9 @@
 import { Component, NgModule, NgZone } from '@angular/core';
-import { Router, RouterModule, Routes } from '@angular/router';
+import { NavigationEnd, Router, RouterModule, Routes } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 import { EMPTY } from 'rxjs';
+import { filter, first } from 'rxjs/operators';
 
 import { ModalNavigationService } from './modal-navigation.service';
 
@@ -50,6 +51,64 @@ const lazyLoadedRoutes: Routes = [
         path: 'page2',
         outlet: 'modal',
         component: ModalPageComponent,
+      },
+    ],
+  },
+  {
+    path: 'modal-backdrop-with-url-param/:id',
+    component: BackdropComponent,
+    children: [
+      {
+        path: 'page1',
+        outlet: 'modal',
+        component: ModalPageComponent,
+      },
+      {
+        path: 'page2',
+        outlet: 'modal',
+        component: ModalPageComponent,
+      },
+    ],
+  },
+  {
+    path: 'modal-route-with-additional-level',
+    component: BackdropComponent,
+    children: [
+      {
+        path: 'additional-level',
+        children: [
+          {
+            path: 'page1',
+            outlet: 'modal',
+            component: ModalPageComponent,
+          },
+          {
+            path: 'page2',
+            outlet: 'modal',
+            component: ModalPageComponent,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    path: 'modal-backdrop-with-url-param-and-additional-level/:id',
+    component: BackdropComponent,
+    children: [
+      {
+        path: 'additional-level',
+        children: [
+          {
+            path: 'page1',
+            outlet: 'modal',
+            component: ModalPageComponent,
+          },
+          {
+            path: 'page2',
+            outlet: 'modal',
+            component: ModalPageComponent,
+          },
+        ],
       },
     ],
   },
@@ -152,206 +211,332 @@ describe('ModalNavigationService', () => {
           }
         });
 
-        describe('modalNavigation.activated$', () => {
-          it('should emit when navigating within routeConfig', async () => {
-            let modalRouteActivated = false;
-            const subscription = (
-              await spectator.service.getModalNavigation(lazyLoadedRouteConfig)
-            ).activated$.subscribe((_) => (modalRouteActivated = true));
+        [false, true].forEach((routeHasUrlParams) => {
+          const urlMsg = routeHasUrlParams
+            ? 'when route has url params'
+            : 'when route DOES NOT have url params';
+          const backdropSegments = routeHasUrlParams
+            ? ['modal-backdrop-with-url-param', '123']
+            : ['modal-backdrop'];
+          describe(urlMsg, () => {
+            describe('modalNavigation.activated$', () => {
+              it('should emit when navigating within routeConfig', async () => {
+                let modalRouteActivated = false;
+                const subscription = (
+                  await spectator.service.getModalNavigation(lazyLoadedRouteConfig)
+                ).activated$.subscribe((_) => (modalRouteActivated = true));
 
-            await zone.run(() =>
-              router.navigate([
-                'home',
-                'modal-lazy',
-                'modal-backdrop',
-                { outlets: { modal: ['page1'] } },
-              ])
-            );
+                await zone.run(() =>
+                  router.navigate([
+                    'home',
+                    'modal-lazy',
+                    ...backdropSegments,
+                    { outlets: { modal: ['page1'] } },
+                  ])
+                );
 
-            expect(modalRouteActivated).toBeTrue();
-            subscription.unsubscribe();
-          });
+                expect(modalRouteActivated).toBeTrue();
+                subscription.unsubscribe();
+              });
 
-          it('should emit when navigating from backdrop route to child modal route within routeConfig', async () => {
-            let modalRouteActivated = false;
-            await zone.run(() => router.navigate(['home', 'modal-lazy', 'modal-backdrop']));
-            const subscription = (
-              await spectator.service.getModalNavigation(lazyLoadedRouteConfig)
-            ).activated$.subscribe((_) => (modalRouteActivated = true));
+              it('should emit when navigating from backdrop route to child modal route within routeConfig', async () => {
+                let modalRouteActivated = false;
+                await zone.run(() => router.navigate(['home', 'modal-lazy', ...backdropSegments]));
+                const subscription = (
+                  await spectator.service.getModalNavigation(lazyLoadedRouteConfig)
+                ).activated$.subscribe((_) => (modalRouteActivated = true));
 
-            await zone.run(() =>
-              router.navigate([
-                'home',
-                'modal-lazy',
-                'modal-backdrop',
-                { outlets: { modal: ['page1'] } },
-              ])
-            );
+                await zone.run(() =>
+                  router.navigate([
+                    'home',
+                    'modal-lazy',
+                    ...backdropSegments,
+                    { outlets: { modal: ['page1'] } },
+                  ])
+                );
 
-            expect(modalRouteActivated).toBeTrue();
-            subscription.unsubscribe();
-          });
+                expect(modalRouteActivated).toBeTrue();
+                subscription.unsubscribe();
+              });
 
-          it('should emit when navigating from modal route to another modal route within routeConfig', async () => {
-            let modalRouteActivated = false;
-            await zone.run(() =>
-              router.navigate([
-                'home',
-                'modal-lazy',
-                'modal-backdrop',
-                { outlets: { modal: ['page1'] } },
-              ])
-            );
-            const subscription = (
-              await spectator.service.getModalNavigation(lazyLoadedRouteConfig)
-            ).activated$.subscribe((_) => (modalRouteActivated = true));
+              it('should emit when navigating from modal route to another modal route within routeConfig', async () => {
+                let modalRouteActivated = false;
+                await zone.run(() =>
+                  router.navigate([
+                    'home',
+                    'modal-lazy',
+                    ...backdropSegments,
+                    { outlets: { modal: ['page1'] } },
+                  ])
+                );
+                const subscription = (
+                  await spectator.service.getModalNavigation(lazyLoadedRouteConfig)
+                ).activated$.subscribe((_) => (modalRouteActivated = true));
 
-            await zone.run(() =>
-              router.navigate([
-                'home',
-                'modal-lazy',
-                'other-modal-path',
-                { outlets: { modal: ['page1'] } },
-              ])
-            );
+                await zone.run(() =>
+                  router.navigate([
+                    'home',
+                    'modal-lazy',
+                    'other-modal-path',
+                    { outlets: { modal: ['page1'] } },
+                  ])
+                );
 
-            expect(modalRouteActivated).toBeTrue();
-            subscription.unsubscribe();
-          });
+                expect(modalRouteActivated).toBeTrue();
+                subscription.unsubscribe();
+              });
 
-          it(`should emit with 'isNewModal=false' when navigating from modal route to sibling modal route within routeConfig`, async () => {
-            let isNewModal: boolean;
-            await zone.run(() =>
-              router.navigate([
-                'home',
-                'modal-lazy',
-                'modal-backdrop',
-                { outlets: { modal: ['page1'] } },
-              ])
-            );
-            const subscription = (
-              await spectator.service.getModalNavigation(lazyLoadedRouteConfig)
-            ).activated$.subscribe(
-              (modalRouteActivation) => (isNewModal = modalRouteActivation.isNewModal)
-            );
+              it(`should emit with 'isNewModal=false' when navigating from modal route to sibling modal route within routeConfig`, async () => {
+                let isNewModal: boolean;
+                await zone.run(() =>
+                  router.navigate([
+                    'home',
+                    'modal-lazy',
+                    ...backdropSegments,
+                    { outlets: { modal: ['page1'] } },
+                  ])
+                );
+                const subscription = (
+                  await spectator.service.getModalNavigation(lazyLoadedRouteConfig)
+                ).activated$.subscribe(
+                  (modalRouteActivation) => (isNewModal = modalRouteActivation.isNewModal)
+                );
 
-            await zone.run(() =>
-              router.navigate([
-                'home',
-                'modal-lazy',
-                'modal-backdrop',
-                { outlets: { modal: ['page2'] } },
-              ])
-            );
+                await zone.run(() =>
+                  router.navigate([
+                    'home',
+                    'modal-lazy',
+                    ...backdropSegments,
+                    { outlets: { modal: ['page2'] } },
+                  ])
+                );
 
-            expect(isNewModal).toBeDefined();
-            expect(isNewModal).toBeFalse();
-            subscription.unsubscribe();
-          });
+                expect(isNewModal).toBeDefined();
+                expect(isNewModal).toBeFalse();
+                subscription.unsubscribe();
+              });
 
-          it('should NOT emit when navigating outside routeConfig', async () => {
-            let modalRouteActivated = false;
-            const subscription = (
-              await spectator.service.getModalNavigation(lazyLoadedRouteConfig)
-            ).activated$.subscribe((_) => (modalRouteActivated = true));
+              it('should NOT emit when navigating outside routeConfig', async () => {
+                let modalRouteActivated = false;
+                const subscription = (
+                  await spectator.service.getModalNavigation(lazyLoadedRouteConfig)
+                ).activated$.subscribe((_) => (modalRouteActivated = true));
 
-            await zone.run(() =>
-              router.navigate(['home', 'other-root-modal-path', { outlets: { modal: ['page1'] } }])
-            );
+                await zone.run(() =>
+                  router.navigate([
+                    'home',
+                    'other-root-modal-path',
+                    { outlets: { modal: ['page1'] } },
+                  ])
+                );
 
-            expect(modalRouteActivated).toBeFalse();
-            subscription.unsubscribe();
-          });
+                expect(modalRouteActivated).toBeFalse();
+                subscription.unsubscribe();
+              });
 
-          it('should NOT emit when navigating from modal route to another modal route outside routeConfig', async () => {
-            let modalRouteActivated = false;
-            await zone.run(() =>
-              router.navigate(['home', 'other-root-modal-path', { outlets: { modal: ['page1'] } }])
-            );
-            const subscription = (
-              await spectator.service.getModalNavigation(lazyLoadedRouteConfig)
-            ).activated$.subscribe((_) => (modalRouteActivated = true));
+              it('should NOT emit when navigating from modal route to another modal route outside routeConfig', async () => {
+                let modalRouteActivated = false;
+                await zone.run(() =>
+                  router.navigate([
+                    'home',
+                    'other-root-modal-path',
+                    { outlets: { modal: ['page1'] } },
+                  ])
+                );
+                const subscription = (
+                  await spectator.service.getModalNavigation(lazyLoadedRouteConfig)
+                ).activated$.subscribe((_) => (modalRouteActivated = true));
 
-            await zone.run(() =>
-              router.navigate(['home', 'other-root-modal-path', { outlets: { modal: ['page1'] } }])
-            );
+                await zone.run(() =>
+                  router.navigate([
+                    'home',
+                    'other-root-modal-path',
+                    { outlets: { modal: ['page1'] } },
+                  ])
+                );
 
-            expect(modalRouteActivated).toBeFalse();
-            subscription.unsubscribe();
-          });
+                expect(modalRouteActivated).toBeFalse();
+                subscription.unsubscribe();
+              });
 
-          it('should NEVER emit when routeConfig is null', async () => {
-            const actual = await spectator.service.getModalNavigation(null);
-            expect(actual.activated$).toEqual(EMPTY);
+              it('should NEVER emit when routeConfig is null', async () => {
+                const actual = await spectator.service.getModalNavigation(null);
+                expect(actual.activated$).toEqual(EMPTY);
+              });
+            });
+
+            describe('ModalNavigation.deactivated$', () => {
+              it('should emit when navigating away from modal route', async () => {
+                let modalRouteDeactivated = false;
+                const subscription = (
+                  await spectator.service.getModalNavigation(lazyLoadedRouteConfig)
+                ).deactivated$.subscribe((_) => (modalRouteDeactivated = true));
+                await zone.run(() =>
+                  router.navigate([
+                    'home',
+                    'modal-lazy',
+                    ...backdropSegments,
+                    { outlets: { modal: ['page1'] } },
+                  ])
+                );
+
+                await zone.run(() => router.navigate(['home', 'modal-lazy', ...backdropSegments]));
+
+                expect(modalRouteDeactivated).toBeTrue();
+                subscription.unsubscribe();
+              });
+
+              it('should NOT emit on non-modal routes', async () => {
+                let modalRouteDeactivated = false;
+                const subscription = (
+                  await spectator.service.getModalNavigation(lazyLoadedRouteConfig)
+                ).deactivated$.subscribe((_) => (modalRouteDeactivated = true));
+
+                await zone.run(() => router.navigate(['home', 'modal-lazy', ...backdropSegments]));
+                await zone.run(() => router.navigate(['']));
+
+                expect(modalRouteDeactivated).toBeFalse();
+                subscription.unsubscribe();
+              });
+
+              it('should NOT emit when navigating from modal route to another modal route', async () => {
+                let modalRouteDeactivated = false;
+                const subscription = (
+                  await spectator.service.getModalNavigation(lazyLoadedRouteConfig)
+                ).deactivated$.subscribe((_) => (modalRouteDeactivated = true));
+
+                await zone.run(() =>
+                  router.navigate([
+                    'home',
+                    'modal-lazy',
+                    ...backdropSegments,
+                    { outlets: { modal: ['page1'] } },
+                  ])
+                );
+                await zone.run(() =>
+                  router.navigate([
+                    'home',
+                    'modal-lazy',
+                    ...backdropSegments,
+                    { outlets: { modal: ['page2'] } },
+                  ])
+                );
+
+                expect(modalRouteDeactivated).toBeFalse();
+                subscription.unsubscribe();
+              });
+
+              it('should NEVER emit when routeConfig is null', async () => {
+                const actual = await spectator.service.getModalNavigation(null);
+                expect(actual.deactivated$).toEqual(EMPTY);
+              });
+            });
           });
         });
+      });
+    });
+  });
 
-        describe('ModalNavigation.deactivated$', () => {
-          it('should emit when navigating away from modal route', async () => {
-            let modalRouteDeactivated = false;
-            const subscription = (
-              await spectator.service.getModalNavigation(lazyLoadedRouteConfig)
-            ).deactivated$.subscribe((_) => (modalRouteDeactivated = true));
-            await zone.run(() =>
-              router.navigate([
-                'home',
-                'modal-lazy',
-                'modal-backdrop',
-                { outlets: { modal: ['page1'] } },
-              ])
-            );
+  describe('navigateOutOfModalOutlet', () => {
+    describe('by default', () => {
+      it('should navigate 1 level up to backdrop route', async () => {
+        await zone.run(() =>
+          router.navigate([
+            'home',
+            'modal-lazy',
+            'modal-backdrop',
+            { outlets: { modal: ['page1'] } },
+          ])
+        );
+        let urlAfterRedirects: string;
+        router.events
+          .pipe(
+            filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+            first()
+          )
+          .subscribe((nav) => (urlAfterRedirects = nav.urlAfterRedirects));
 
-            await zone.run(() => router.navigate(['home', 'modal-lazy', 'modal-backdrop']));
+        await spectator.service.navigateOutOfModalOutlet();
 
-            expect(modalRouteDeactivated).toBeTrue();
-            subscription.unsubscribe();
-          });
+        expect(urlAfterRedirects).toEqual('/home/modal-lazy/modal-backdrop');
+      });
+    });
 
-          it('should NOT emit on non-modal routes', async () => {
-            let modalRouteDeactivated = false;
-            const subscription = (
-              await spectator.service.getModalNavigation(lazyLoadedRouteConfig)
-            ).deactivated$.subscribe((_) => (modalRouteDeactivated = true));
+    describe('when modal backdrop route has url param', () => {
+      it('should navigate 1 level up to backdrop route', async () => {
+        await zone.run(() =>
+          router.navigate([
+            'home',
+            'modal-lazy',
+            'modal-backdrop-with-url-param',
+            '1978',
+            { outlets: { modal: ['page1'] } },
+          ])
+        );
+        let urlAfterRedirects: string;
+        router.events
+          .pipe(
+            filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+            first()
+          )
+          .subscribe((nav) => (urlAfterRedirects = nav.urlAfterRedirects));
 
-            await zone.run(() => router.navigate(['home', 'modal-lazy', 'modal-backdrop']));
-            await zone.run(() => router.navigate(['']));
+        await spectator.service.navigateOutOfModalOutlet();
 
-            expect(modalRouteDeactivated).toBeFalse();
-            subscription.unsubscribe();
-          });
+        expect(urlAfterRedirects).toEqual('/home/modal-lazy/modal-backdrop-with-url-param/1978');
+      });
+    });
 
-          it('should NOT emit when navigating from modal route to another modal route', async () => {
-            let modalRouteDeactivated = false;
-            const subscription = (
-              await spectator.service.getModalNavigation(lazyLoadedRouteConfig)
-            ).deactivated$.subscribe((_) => (modalRouteDeactivated = true));
+    describe('when modal route has additional level', () => {
+      it('should navigate 2 levels up to backdrop route', async () => {
+        await zone.run(() =>
+          router.navigate([
+            'home',
+            'modal-lazy',
+            'modal-route-with-additional-level',
+            'additional-level',
+            { outlets: { modal: ['page1'] } },
+          ])
+        );
+        let urlAfterRedirects: string;
+        router.events
+          .pipe(
+            filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+            first()
+          )
+          .subscribe((nav) => (urlAfterRedirects = nav.urlAfterRedirects));
 
-            await zone.run(() =>
-              router.navigate([
-                'home',
-                'modal-lazy',
-                'modal-backdrop',
-                { outlets: { modal: ['page1'] } },
-              ])
-            );
-            await zone.run(() =>
-              router.navigate([
-                'home',
-                'modal-lazy',
-                'modal-backdrop',
-                { outlets: { modal: ['page2'] } },
-              ])
-            );
+        await spectator.service.navigateOutOfModalOutlet();
 
-            expect(modalRouteDeactivated).toBeFalse();
-            subscription.unsubscribe();
-          });
+        expect(urlAfterRedirects).toEqual('/home/modal-lazy/modal-route-with-additional-level');
+      });
+    });
 
-          it('should NEVER emit when routeConfig is null', async () => {
-            const actual = await spectator.service.getModalNavigation(null);
-            expect(actual.deactivated$).toEqual(EMPTY);
-          });
-        });
+    describe('when modal backdrop route has url param and additional level', () => {
+      it('should navigate 2 level up to backdrop route', async () => {
+        await zone.run(() =>
+          router.navigate([
+            'home',
+            'modal-lazy',
+            'modal-backdrop-with-url-param-and-additional-level',
+            '1978',
+            'additional-level',
+            { outlets: { modal: ['page1'] } },
+          ])
+        );
+        let urlAfterRedirects: string;
+        router.events
+          .pipe(
+            filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+            first()
+          )
+          .subscribe((nav) => (urlAfterRedirects = nav.urlAfterRedirects));
+
+        await spectator.service.navigateOutOfModalOutlet();
+
+        expect(urlAfterRedirects).toEqual(
+          '/home/modal-lazy/modal-backdrop-with-url-param-and-additional-level/1978'
+        );
       });
     });
   });

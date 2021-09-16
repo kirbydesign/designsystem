@@ -1,0 +1,40 @@
+// Generic base print styles
+@media print {
+  @page {
+    margin: 2.54cm;
+    orphans: 4;
+    widows: 3;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    break-after: avoid;
+  }
+
+  blockquote,
+  figure,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  img,
+  ol,
+  p,
+  table,
+  ul,
+  ion-item-group {
+    break-inside: avoid;
+  }
+}
+
+@media print {
+  :root {
+    --kirby-page-max-width: 100%;
+  }
+}

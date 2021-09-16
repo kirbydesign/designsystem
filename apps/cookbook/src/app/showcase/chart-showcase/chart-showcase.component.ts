@@ -1,44 +1,66 @@
 import { Component } from '@angular/core';
-import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import {
+  ApiDescriptionProperty,
+  ApiDescriptionPropertyColumns,
+} from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
   selector: 'cookbook-chart-showcase',
   templateUrl: './chart-showcase.component.html',
-  styleUrls: ['./chart-showcase.component.scss'],
 })
 export class ChartShowcaseComponent {
-  properties: ApiDescriptionProperty[] = [
-    {
-      name: 'height',
-      description: 'The height of the chart in px for web and dp for native',
-      type: ['number'],
-    },
+  _cardMode = 'flat';
+  _cardHasPadding = true;
+  _apiDescriptionProperties: ApiDescriptionProperty[] = [
     {
       name: 'type',
-      description: 'The type of chart',
-      type: ['donut', 'pie', 'areaspline'],
-    },
-    {
-      name: 'showDataLabels',
-      description: 'Enable or disable labels around pie/donut charts',
-      type: ['true', 'false'],
-      defaultValue: 'true',
-    },
-    {
-      name: 'description',
-      description: 'Description of chart for accessibility',
-      type: ['string - e.g. "Distribution of assets in custody account"'],
+      description: 'Controls the type which the chart should be displayed as.',
+      type: ['"column"', '"bar"', '"line"'],
+      defaultValue: 'column',
     },
     {
       name: 'data',
-      description: 'Data input for chart',
-      type: ['See examples above for exact format'],
+      description:
+        'The data which the chart should display. Can be supplied as a simple array of numbers or as a chart.js dataset. See: https://www.chartjs.org/docs/latest/general/data-structures.html ',
+      type: ['number[]', 'ChartDataset[]'],
     },
     {
-      name: 'options',
-      description:
-        'The Highcharts options to configure the chart with (will override existing options using a deep merge)',
-      type: ['See [Highcharts options docs](https://api.highcharts.com/highcharts/)'],
+      name: 'dataLabels',
+      description: `(Optional) Labels that should be displayed along the main axis for each category. Multi-line labels can be created by supplying a string[][] as such: ['one line', ['multi', 'line']].`,
+      type: ['string[]', 'string[][]'],
+    },
+    {
+      name: 'height',
+      description: `(Optional) can be used to set the height of the chart. Will overwrite the value of setting the height using --kirby-chart-height.`,
+      type: ['string', 'number'],
+      defaultValue: '300px',
+    },
+    {
+      name: 'customOptions',
+      description: `(Optional) Chart.js options that can be used to customize the charts, see: https://www.chartjs.org/docs/latest/general/options.html`,
+      type: ['ChartOptions'],
+    },
+    {
+      name: 'annotations',
+      description: `(Optional) Chart.js annotations that can be used to add annotations to the chart, see: https://www.chartjs.org/chartjs-plugin-annotation/`,
+      type: ['AnnotationOptions[]'],
+    },
+    {
+      name: 'highlightedElements',
+      description: `(Optional) can be used to highlight specific data elements in the chart. Provided as an array of [number, number] tuples where the first value is the datasetIndex and the second is the dataIndex.`,
+      type: ['[number, number][]'],
+    },
+  ];
+
+  _cssCustomPropertiesColumns: ApiDescriptionPropertyColumns = {
+    name: 'Name',
+    description: 'Description',
+  };
+
+  _cssCustomProperties: ApiDescriptionProperty[] = [
+    {
+      name: '--kirby-chart-height',
+      description: 'Height of the chart.',
     },
   ];
 }

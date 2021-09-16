@@ -4,7 +4,7 @@ import { ModalConfig, ModalController } from '@kirbydesign/designsystem';
 import { WindowRef } from '@kirbydesign/designsystem/types/window-ref';
 
 import { ModalCompactExampleComponent } from './compact-example/modal-compact-example.component';
-import { FirstEmbeddedModalExampleComponent } from './first-embedded-modal-example/first-embedded-modal-example.component';
+import { EmbeddedModalExampleComponent } from './embedded-modal-example/embedded-modal-example.component';
 
 const config = {
   selector: 'cookbook-modal-example-default',
@@ -202,7 +202,9 @@ export class ModalExampleDefaultComponent {
   embeddedCodeSnippet = config.embeddedCodeSnippet;
   closeModalCodeSnippet = config.closeModalCodeSnippet;
 
-  showDummyKeyboard = !!this.window.sessionStorage.getItem('kirby-cookbook-show-dummy-keyboard');
+  showDummyKeyboard = !!this.windowRef.nativeWindow.sessionStorage.getItem(
+    'kirby-cookbook-show-dummy-keyboard'
+  );
   showPageProgress = false;
   showFooter = false;
   showDummyContent = true;
@@ -214,7 +216,7 @@ export class ModalExampleDefaultComponent {
   dummyBackgroundTexts = new Array(100).map(() => '');
   preventInteraction = false;
 
-  constructor(private modalController: ModalController, private window: WindowRef) {}
+  constructor(private modalController: ModalController, private windowRef: WindowRef) {}
 
   private async showOverlay(flavor: 'modal' | 'drawer') {
     let title = flavor === 'modal' ? 'Modal Title' : 'Drawer Title';
@@ -224,7 +226,7 @@ export class ModalExampleDefaultComponent {
     this.preventInteraction = this.interactWithBackground;
     const config: ModalConfig = {
       flavor,
-      component: FirstEmbeddedModalExampleComponent,
+      component: EmbeddedModalExampleComponent,
       interactWithBackground: this.interactWithBackground,
       cssClass: this.customCssClass ? ['my-custom-modal-class'] : [],
       size: this.openFullHeight ? 'full-height' : null,

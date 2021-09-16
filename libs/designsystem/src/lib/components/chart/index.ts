@@ -1,2 +1,4 @@
+export * from './chart.types';
 export { ChartComponent } from './chart.component';
-export { ChartType } from './chart-type';
+export { ChartOptions, ChartEvent, ActiveElement, Chart } from 'chart.js';
+export { AnnotationOptions } from 'chartjs-plugin-annotation';

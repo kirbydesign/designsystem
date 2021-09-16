@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
-declare var require: any;
-
 @Component({
   selector: 'cookbook-calendar-showcase',
   templateUrl: './calendar-showcase.component.html',
@@ -129,6 +127,11 @@ export class CalendarShowcaseComponent {
       name: 'dateChange',
       description: 'Emitted when selectedDate changes value.',
       signature: 'EventEmitter<Date>',
+    },
+    {
+      name: 'yearSelect',
+      description: 'Emitted when yearNavigator changes value.',
+      signature: 'EventEmitter<number>',
     },
   ];
 }

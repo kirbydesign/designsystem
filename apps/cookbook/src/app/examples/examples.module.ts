@@ -7,6 +7,7 @@ import { IconRegistryService, KirbyModule } from '@kirbydesign/designsystem';
 import { AccordionExampleModule } from './accordion-example/accordion-example.module';
 import { AvatarExampleModule } from './avatar-example/avatar-example.module';
 import { CardExampleComponent } from './card-example/card-example.component';
+import { ChartDeprecatedExampleModule } from './chart-deprecated-example/chart-deprecated-example.module';
 import { ChartExampleModule } from './chart-example/chart-example.module';
 import { CheckboxExampleModule } from './checkbox-example/checkbox-example.module';
 import { DropdownExampleModule } from './dropdown-example/dropdown-example.module';
@@ -14,15 +15,12 @@ import { COMPONENT_DECLARATIONS } from './examples.common';
 import { ExamplesSharedModule } from './examples.shared.module';
 import { FlagExampleModule } from './flag-example/flag-example.module';
 import { FormFieldExamplesModule } from './form-field-example/form-field-example.module';
+import { GridLayoutExamplesModule } from './grid-layout-example/grid-layout-example.module';
 import { ItemExampleModule } from './item-example/item-example.module';
 import { LinkExampleModule } from './link-example/link-example.module';
 import { ListExamplesModule } from './list-example/list-example.module';
 import { ListVirtualScrollExamplesModule } from './list-virtual-scroll-example/list-virtual-scroll-example.module';
-import { ModalCompactExampleComponent } from './modal-example/compact-example/modal-compact-example.component';
-import { FirstEmbeddedModalExampleComponent } from './modal-example/first-embedded-modal-example/first-embedded-modal-example.component';
-import { ModalRoutePage1ExampleComponent } from './modal-example/modal-route-example/modal-route-page1-example.component';
-import { ModalRoutePage2ExampleComponent } from './modal-example/modal-route-example/modal-route-page2-example.component';
-import { SecondEmbeddedModalExampleComponent } from './modal-example/second-embedded-modal-example/second-embedded-modal-example.component';
+import { ModalExampleModule } from './modal-example/modal-example.module';
 import { ProgressCircleExampleModule } from './progress-circle-example/progress-circle-example.module';
 import { RadioExampleModule } from './radio-example/radio-example.module';
 import { RangeExampleModule } from './range-example/range-example.module';
@@ -37,6 +35,7 @@ const IMPORTS = [
   ListVirtualScrollExamplesModule,
   DropdownExampleModule,
   SegmentedControlExampleModule,
+  ChartDeprecatedExampleModule,
   ChartExampleModule,
   ProgressCircleExampleModule,
   AvatarExampleModule,
@@ -47,20 +46,15 @@ const IMPORTS = [
   CheckboxExampleModule,
   RangeExampleModule,
   LinkExampleModule,
+  ModalExampleModule,
+  GridLayoutExamplesModule,
 ];
 
 @NgModule({
   imports: [CommonModule, RouterModule, KirbyModule, ...IMPORTS],
   declarations: COMPONENT_DECLARATIONS,
   exports: [...COMPONENT_DECLARATIONS, ...IMPORTS],
-  entryComponents: [
-    CardExampleComponent,
-    FirstEmbeddedModalExampleComponent,
-    SecondEmbeddedModalExampleComponent,
-    ModalCompactExampleComponent,
-    ModalRoutePage1ExampleComponent,
-    ModalRoutePage2ExampleComponent,
-  ],
+  entryComponents: [CardExampleComponent],
 })
 export class ExamplesModule {
   constructor(iconRegistryService: IconRegistryService) {

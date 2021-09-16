@@ -33,11 +33,7 @@ import { GroupByPipe } from './pipes/group-by.pipe';
 
 export type VirtualScrollSettings = IDatasource['settings'];
 
-export enum ListShape {
-  square = 'square',
-  rounded = 'rounded',
-  none = 'none',
-}
+export type ListShape = 'square' | 'rounded' | 'none';
 
 const INTERVAL = 400;
 @Component({
@@ -72,16 +68,16 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
    *
    * `square` means **without** rounded corners, `rounded` means **with** rounded corners.,  `none` means **without** padding, border, box-shadow and background.
    */
-  @Input() shape: ListShape = ListShape.rounded;
+  @Input() shape: ListShape = 'rounded';
 
   @HostBinding('class.shape-rounded')
   public get isShapeRounded(): boolean {
-    return this.shape === ListShape.rounded;
+    return this.shape === 'rounded';
   }
 
   @HostBinding('class.shape-none')
   public get isShapeNone(): boolean {
-    return this.shape === ListShape.none;
+    return this.shape === 'none';
   }
 
   @HostBinding('class.item-spacing')
@@ -211,8 +207,6 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
 
   ngOnChanges(): void {
     this._isSectionsEnabled = !!this.getSectionName;
-    if (this.items?.length === 0) return;
-
     this._groupedItems = this._isSectionsEnabled
       ? this.groupBy.transform(this.items, this.getSectionName)
       : null;
@@ -256,10 +250,9 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
       _items = this._virtualGroupedItems;
     }
 
-    if (index === 0 || _items[index - 1]?.headingName)
-      return this.headerTemplate ? null : BoundaryClass.first;
+    if (index === 0 || _items[index - 1]?.headingName) return this.headerTemplate ? null : 'first';
 
     if (index === _items.length - 1 || _items[index + 1]?.headingName)
-      return this.footerTemplate ? null : BoundaryClass.last;
+      return this.footerTemplate ? null : 'last';
   }
 }
