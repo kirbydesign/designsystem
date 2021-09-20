@@ -277,7 +277,7 @@ jobs:
           route: POST /repos/:repository/deployments/:deployment/statuses
           repository: ${{ github.repository }}
           deployment: ${{ fromJson(steps.create_deployment.outputs.data).id }}
-          environment_url: ${{ env.HOSTNAME == 'cookbook' && format('https://cookbook.{0}', env.DOMAIN) || format('https://cookbook.{0}/branch/{1}/', env.DOMAIN, env.HOSTNAME) }}
+          environment_url: ${{ env.HOSTNAME == 'cookbook' && format('https://cookbook.{0}', env.DOMAIN) || format('https://cookbook.{0}/branch/{1}/index.html', env.DOMAIN, env.HOSTNAME) }}
           log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
           state: success
           mediaType: '{"previews": ["ant-man"]}'
