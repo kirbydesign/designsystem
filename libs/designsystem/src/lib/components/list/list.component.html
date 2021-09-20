@@ -72,6 +72,7 @@
     [isSelected]="_isSelectable && item === _selectedItem"
     (itemSelect)="onItemSelect($event)"
     (swipeActionSelect)="onSwipeActionSelect($event)"
+    [class.is-single]="items.length === 1"
   >
   </kirby-list-item>
 </ng-template>
