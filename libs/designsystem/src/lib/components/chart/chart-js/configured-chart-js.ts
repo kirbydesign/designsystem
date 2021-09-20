@@ -12,7 +12,7 @@ import {
 import annotationPlugin from 'chartjs-plugin-annotation';
 
 import { mergeDeepAll } from '../../../helpers/merge-deep';
-import { CHART_GLOBAL_DEFAULTS } from '../chart.configs';
+import { CHART_GLOBAL_DEFAULTS } from '../configs/global-defaults.config';
 
 const CHART_SCALES = [CategoryScale, LinearScale];
 const CHART_ELEMENTS = [BarElement, LineElement, PointElement];
