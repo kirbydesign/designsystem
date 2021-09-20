@@ -10,6 +10,7 @@ import { ChartExampleBarComponent } from './examples/chart-example-bar.component
 import { ChartExampleColumnComponent } from './examples/chart-example-column-chart.component';
 import { ChartExampleColumnStackedComponent } from './examples/chart-example-column-stacked.component';
 import { ChartExampleInteractionComponent } from './examples/chart-example-interaction.component';
+import { ChartExampleLineComponent } from './examples/chart-example-line.component';
 import { ChartExampleMultipleDatasetsComponent } from './examples/chart-example-multiple-datasets.component';
 import { ChartExampleSimpleColumnComponent } from './examples/chart-example-simple-column-chart.component';
 
@@ -23,6 +24,7 @@ const COMPONENT_DECLARATIONS = [
   ChartExampleMultipleDatasetsComponent,
   ChartExampleAccessibilityComponent,
   ChartExampleAnnotationsComponent,
+  ChartExampleLineComponent,
 ];
 
 @NgModule({

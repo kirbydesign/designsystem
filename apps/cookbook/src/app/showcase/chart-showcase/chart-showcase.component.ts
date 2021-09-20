@@ -15,7 +15,7 @@ export class ChartShowcaseComponent {
     {
       name: 'type',
       description: 'Controls the type which the chart should be displayed as.',
-      type: ['"column"', '"bar"'],
+      type: ['"column"', '"bar"', '"line"'],
       defaultValue: 'column',
     },
     {

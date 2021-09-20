@@ -2,20 +2,17 @@ import { ElementRef, Injectable } from '@angular/core';
 import { ActiveElement, ChartConfiguration, ChartOptions } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
 
-import { deepCopy } from '../../../helpers/deep-copy';
 import { mergeDeepAll } from '../../../helpers/merge-deep';
-import {
-  CHART_ANNOTATION_CONFIGS,
-  CHART_TYPE_CONFIGS,
-  INTERACTION_FUNCTIONS_EXTENSIONS,
-} from '../chart.configs';
 import { ChartDataset, ChartHighlightedElements, ChartType, isNumberArray } from '../chart.types';
+import { ChartConfigService } from '../configs/chart-config.service';
 
 import { Chart } from './configured-chart-js';
 
 @Injectable()
 export class ChartJSService {
   private chart: Chart;
+
+  constructor(private chartConfigService: ChartConfigService) {}
 
   public renderChart(args: {
     targetElement: ElementRef<HTMLCanvasElement>;
@@ -60,6 +57,8 @@ export class ChartJSService {
       /* indexAxis does not update predictably; update by replacing 
          the chart entirely instead */
       this.destructivelyUpdateType(type, customOptions);
+    } else {
+      this.nonDestructivelyUpdateType(type, customOptions);
     }
   }
 
@@ -111,14 +110,20 @@ export class ChartJSService {
     this.initializeNewChart(canvasElement, config);
   }
 
-  private initializeNewChart(canvasElement: HTMLCanvasElement, config: ChartConfiguration) {
-    this.chart = new Chart(canvasElement, config);
+  private nonDestructivelyUpdateType(chartType: ChartType, customOptions?: ChartOptions) {
+    const annotations = this.getExistingChartAnnotations();
+    const options = this.createOptionsObject({
+      type: chartType,
+      customOptions,
+      annotations,
+    });
+
+    this.chart.options = options;
+    this.chart.config.type = this.chartConfigService.chartTypeToChartJSType(chartType);
   }
 
-  private getTypeConfig(type: ChartType) {
-    /* Deep copy to avoid Chart object modifying parts of CHART_TYPE_CONFIGS 
-    as it copies by reference when initialized */
-    return deepCopy(CHART_TYPE_CONFIGS[type]);
+  private initializeNewChart(canvasElement: HTMLCanvasElement, config: ChartConfiguration) {
+    this.chart = new Chart(canvasElement, config);
   }
 
   private createBlankLabels(datasets: ChartDataset[]): string[] {
@@ -128,13 +133,9 @@ export class ChartJSService {
     return Array(largestDataset.data.length).fill('');
   }
 
-  private getAnnotationDefaults(type: string) {
-    return CHART_ANNOTATION_CONFIGS[type];
-  }
-
   private applyDefaultsToAnnotations(annotations: AnnotationOptions[]) {
     return annotations.map((annotation) => {
-      const annotationTypeDefaults = this.getAnnotationDefaults(annotation.type);
+      const annotationTypeDefaults = this.chartConfigService.getAnnotationDefaults(annotation.type);
       return mergeDeepAll(annotationTypeDefaults, annotation);
     });
   }
@@ -151,7 +152,7 @@ export class ChartJSService {
   }
 
   private applyInteractionFunctionsExtensions(options: ChartOptions): ChartOptions {
-    const interactionFunctionsExtensions = INTERACTION_FUNCTIONS_EXTENSIONS;
+    const interactionFunctionsExtensions = this.chartConfigService.getInteractionFunctionsExtensions();
     Object.entries(interactionFunctionsExtensions).forEach(([key, _]) => {
       const callback = options[key];
       options[key] = (e: Event, a: ActiveElement[], c: Chart) => {
@@ -168,7 +169,7 @@ export class ChartJSService {
   }): ChartOptions {
     const { type, customOptions, annotations } = args;
 
-    const typeConfig = this.getTypeConfig(type);
+    const typeConfig = this.chartConfigService.getTypeConfig(type);
     const typeConfigOptions = typeConfig?.options;
     const annotationPluginOptions = annotations
       ? this.createAnnotationPluginOptionsObject(annotations)
@@ -190,7 +191,8 @@ export class ChartJSService {
     /* chartJS requires labels; if none is provided create an empty string array
     to make it optional for consumer */
     const labels = !dataLabels ? this.createBlankLabels(datasets) : dataLabels;
-    const typeConfig = this.getTypeConfig(type);
+    const typeConfig = this.chartConfigService.getTypeConfig(type);
+
     return mergeDeepAll(typeConfig, {
       data: {
         labels,

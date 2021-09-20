@@ -22,7 +22,7 @@ import { CardFooterComponent } from './components/card/card-footer/card-footer.c
 import { CardHeaderComponent } from './components/card/card-header/card-header.component';
 import { CardComponent } from './components/card/card.component';
 import { ChartDeprecatedComponent } from './components/chart-deprecated/chart-deprecated.component';
-import { ChartComponent } from './components/chart/chart.component';
+import { ChartModule } from './components/chart/chart.module';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { ChipComponent } from './components/chip/chip.component';
 import { DividerComponent } from './components/divider/divider.component';
@@ -85,7 +85,6 @@ const exportedDeclarations = [
   CardHeaderComponent,
   CardFooterComponent,
   ButtonComponent,
-  ChartComponent,
   ChartDeprecatedComponent,
   StockChartDeprecatedComponent,
   GridComponent,
@@ -145,6 +144,7 @@ const exportedModules = [
   ItemModule,
   ToggleButtonModule,
   ListModule,
+  ChartModule,
   SpinnerModule,
 ];
 
