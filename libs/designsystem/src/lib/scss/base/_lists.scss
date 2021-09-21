@@ -1,3 +1,11 @@
+$bullet-font-size: 1.4em;
+$list-item-line-height: 1.2em;
+
+// TODO: Move to utilities/functions
+@function unitless($number) {
+  @return $number / ($number * 0 + 1);
+}
+
 // -----------------------------------------------------------------------------
 // Grid layout
 // -----------------------------------------------------------------------------
@@ -45,7 +53,8 @@ ul {
 // First level marker
 ul > li::before {
   content: '\2022'; // Unicode disc ("bullet")
-  font-size: 1.4em;
+  font-size: $bullet-font-size;
+  line-height: (unitless($list-item-line-height) / unitless($bullet-font-size));
 }
 
 // Second level marker
@@ -69,7 +78,7 @@ ol > li::before {
 // -----------------------------------------------------------------------------
 
 li {
-  line-height: 1.2em;
+  line-height: unitless($list-item-line-height);
 
   &::before {
     font-weight: bold;
