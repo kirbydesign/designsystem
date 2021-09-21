@@ -37,27 +37,35 @@ ol {
   counter-reset: item;
 }
 
-ul,
-ol {
-  li {
-    display: flex;
-    line-height: 1.2em;
-    &:not(:last-child) {
-      margin-bottom: 8px;
+li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  line-height: 1.2em;
+  &:not(:last-child) {
+    margin-bottom: 8px;
+  }
+  ul,
+  ol {
+    margin-top: 8px;
+    grid-column-start: 2;
+    grid-column-end: -1;
+    ul > li::before {
+      content: '\25E6';
+      font-size: 1em;
     }
   }
 }
 
-ul li::before {
+ul > li::before {
   content: '\2022'; /* Add content: \2022 is the CSS Code/unicode for a bullet */
   font-weight: bold;
   font-size: 1.4em;
   padding-right: 12px;
 }
 
-ol li::before {
-  content: counters(item, '.') '. ';
+ol > li::before {
   counter-increment: item;
+  content: counter(item) '. ';
   font-weight: bold;
   padding-right: 12px;
 }
