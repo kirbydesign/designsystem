@@ -1,4 +1,5 @@
 $bullet-font-size: 1.4em;
+$hollow-bullet-font-size: 0.8em;
 $list-item-line-height: 1.2em;
 
 // TODO: Move to utilities/functions
@@ -26,6 +27,7 @@ li {
 ol,
 ul {
   padding-inline-start: size('xxxs'); // left
+  margin-top: 0;
 }
 
 li {
@@ -60,6 +62,8 @@ ul > li::before {
 // Second level marker
 ul ul > li::before {
   content: '\25E6'; // Unicode circle
+  font-size: $hollow-bullet-font-size;
+  line-height: (unitless($list-item-line-height) / unitless($hollow-bullet-font-size));
 }
 
 // Third level (and beyond) marker
