@@ -14,6 +14,7 @@ import { ChartDeprecatedExampleComponent } from './chart-deprecated-example/char
 import { ChartExampleComponent } from './chart-example/chart-example.component';
 import { CheckboxExampleComponent } from './checkbox-example/checkbox-example.component';
 import { ChipExampleComponent } from './chip-example/chip-example.component';
+import { DefaultListExampleComponent } from './default-list-example/default-list-example.component';
 import { EmptyStateExampleComponent } from './empty-state-example/empty-state-example.component';
 import { ExamplesComponent } from './examples.component';
 import { FabSheetExampleComponent } from './fab-sheet-example/fab-sheet-example.component';
@@ -477,5 +478,9 @@ export const routes: Routes = [
   {
     path: 'link',
     component: LinkExampleComponent,
+  },
+  {
+    path: 'default-list',
+    component: DefaultListExampleComponent,
   },
 ];
