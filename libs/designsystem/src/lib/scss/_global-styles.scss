@@ -3,7 +3,8 @@
 @import './base/typography';
 @import './base/line-clamp';
 
-:root {
+:root,
+:host {
   --kirby-font-family: 'Roboto';
   font-family: var(--kirby-font-family);
   @each $color, $color-name in $kirby-colors {
