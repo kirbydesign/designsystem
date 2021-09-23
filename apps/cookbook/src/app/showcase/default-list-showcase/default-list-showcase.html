@@ -1,10 +1,64 @@
 <p>
   Default List adds styling to every <code>&lt;ul&gt;</code> and <code>&lt;ol&gt;</code> in Kirby.
-  It adds a margin of 8px to the left of the entire <code>&lt;ul&gt;</code> or
-  <code>&lt;ol&gt;</code>, and a margin of 8px to the right of every individual bullet or number in
-  the <code>&lt;li&gt;</code> element(s).
+  It adds a padding of 4px to the left and a margin of 16px to the bottom of the entire
+  <code>&lt;ul&gt;</code> or <code>&lt;ol&gt;</code>, and a padding of 12px to the right of every
+  individual bullet or number in the <code>&lt;li&gt;</code> element(s). Lastly it adds a margin of
+  8px to the top of every <code>&lt;li&gt;</code>, except for the first
+  <code>&lt;li&gt;</code> element within the <code>&lt;ul&gt;</code> or <code>&lt;ol&gt;</code>.
 </p>
 <h2>Unordered List Example</h2>
+<ul>
+  <li>One</li>
+  <li>Two</li>
+  <li>Three</li>
+</ul>
+<h2>Unordered List /w Nested Lists Example</h2>
+<ul>
+  <li>One</li>
+  <li>Two</li>
+  <li>
+    Three
+    <ul>
+      <li>3.1</li>
+      <li>3.2</li>
+      <li>
+        3.3
+        <ul>
+          <li>3.3.1</li>
+          <li>3.3.2</li>
+          <li>3.3.3</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+<h2>Ordered List Example</h2>
+<ul>
+  <li>One</li>
+  <li>Two</li>
+  <li>Three</li>
+</ul>
+<h2>Ordered List /w Nested Lists Example</h2>
+<ol>
+  <li>One</li>
+  <li>Two</li>
+  <li>
+    Three
+    <ol>
+      <li>3.1</li>
+      <li>3.2</li>
+      <li>
+        3.3
+        <ol>
+          <li>3.3.1</li>
+          <li>3.3.2</li>
+          <li>3.3.3</li>
+        </ol>
+      </li>
+    </ol>
+  </li>
+</ol>
+<h2>Mixed List</h2>
 <ul>
   <li>One</li>
   <li>Two</li>
@@ -13,28 +67,17 @@
     <ol>
       <li>3.1</li>
       <li>3.2</li>
-      <li>3.3</li>
+      <li>
+        3.3
+        <ul>
+          <li>3.3.1</li>
+          <li>3.3.2</li>
+          <li>3.3.3</li>
+        </ul>
+      </li>
     </ol>
   </li>
 </ul>
-<h2>Ordered List Example</h2>
-<ol>
-  <li>
-    One
-    <ol>
-      <li>1.1</li>
-      <li>1.2</li>
-    </ol>
-  </li>
-  <li>Two</li>
-  <li>
-    Three
-    <ol>
-      <li>3.1</li>
-      <li>3.2</li>
-    </ol>
-  </li>
-</ol>
 <h2>Nested lists</h2>
 <ul>
   <li>
