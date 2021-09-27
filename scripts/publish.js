@@ -133,6 +133,12 @@ function copyPolyfills() {
   });
 }
 
+function createTarballPackage() {
+  return npm(['pack', distTarget], {
+    onFailMessage: 'Unable to create gzipped tar-ball package',
+  })
+}
+
 function publish() {
   const findTarball = (files) =>
     files.find(
@@ -151,20 +157,16 @@ function publish() {
     // For CI, we build and publish this package separately.
     npm(['run', 'build:core'], {
       onFailMessage: 'Unable to build core package (stencil compiler)',
-    });
-
-    return npm(['pack', distTarget], {
-      onFailMessage: 'Unable to create gzipped tar-ball package',
-    })
+    }).then(createTarballPackage)
       .then(() => fs.promises.readdir('.'))
       .then(findTarball)
       .then((filename) => fs.move(filename, `${dist}/${filename}`, { overwrite: true }));
   }
+  
 }
 
 // Actual execution of script!
 cleanDistribution()
-  .then(buildCoreLib)
   .then(buildPolyfills)
   .then(buildDesignsystem)
   .then(enhancePackageJson)
