@@ -101,6 +101,10 @@
   @return $classes;
 }
 
+@function unitless($number) {
+  @return $number / ($number * 0 + 1);
+}
+
 @mixin slotted($selectors...) {
   ::ng-deep > {
     #{$selectors} {

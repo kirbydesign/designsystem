@@ -1,11 +1,8 @@
+@import '../utils';
+
 $bullet-font-size: 1.3em;
 $hollow-bullet-font-size: 0.8em;
 $list-item-line-height: 1.2em;
-
-// TODO: Move to utilities/functions
-@function unitless($number) {
-  @return $number / ($number * 0 + 1);
-}
 
 // -----------------------------------------------------------------------------
 // Grid layout
