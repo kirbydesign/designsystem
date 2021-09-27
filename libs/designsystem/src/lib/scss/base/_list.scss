@@ -67,6 +67,10 @@ ul ul ul > li::before {
   content: '\25AA'; // Unicode square
 }
 
+ul ol ul > li::before {
+  content: '\25AA'; // Unicode square
+}
+
 // Ordered list marker (decimal)
 ol > li::before {
   content: counter(item) '. ';
