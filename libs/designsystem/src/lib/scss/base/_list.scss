@@ -1,7 +1,7 @@
 @import '../utils';
 
-$bullet-font-size: 1.3em;
-$hollow-bullet-font-size: 0.8em;
+$marker-disc-font-size: 1.3em;
+$marker-cirle-font-size: 0.8em;
 $list-item-line-height: 1.2em;
 
 // -----------------------------------------------------------------------------
@@ -51,15 +51,15 @@ ul {
 // First level marker
 ul > li::before {
   content: '\2022'; // Unicode disc ("bullet")
-  font-size: $bullet-font-size;
-  line-height: (unitless($list-item-line-height) / unitless($bullet-font-size));
+  font-size: $marker-disc-font-size;
+  line-height: (unitless($list-item-line-height) / unitless($marker-disc-font-size));
 }
 
 // Second level marker
 ul ul > li::before {
   content: '\25E6'; // Unicode circle
-  font-size: $hollow-bullet-font-size;
-  line-height: (unitless($list-item-line-height) / unitless($hollow-bullet-font-size));
+  font-size: $marker-cirle-font-size;
+  line-height: (unitless($list-item-line-height) / unitless($marker-cirle-font-size));
 }
 
 // Third level (and beyond) marker
