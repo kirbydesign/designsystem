@@ -56,18 +56,14 @@ ul > li::before {
 }
 
 // Second level marker
-ul ul > li::before {
+:where(ol, ul) ul > li::before {
   content: '\25E6'; // Unicode circle
   font-size: $marker-cirle-font-size;
   line-height: ($list-item-line-height / unitless($marker-cirle-font-size));
 }
 
 // Third level (and beyond) marker
-ul ul ul > li::before {
-  content: '\25AA'; // Unicode square
-}
-
-ul ol ul > li::before {
+:where(ol, ul) :where(ol, ul) ul > li::before {
   content: '\25AA'; // Unicode square
 }
 
