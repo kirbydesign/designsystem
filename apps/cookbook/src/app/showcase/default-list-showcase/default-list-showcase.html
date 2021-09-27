@@ -78,11 +78,23 @@
     </ol>
   </li>
 </ul>
+<h2>Text Overflow in a List</h2>
+<ul>
+  <li>
+    Proin at pharetra ligula, donec ullamcorper, risus id venenatis. Integer id diam eleifend ac,
+    consectetur adipiscing elit. Fusce iaculis ante ac diam ac elementum nisi eleifend in pulvinar
+    massa ac porttitor.
+  </li>
+</ul>
 <h2>Opt-Out Default Style</h2>
 <p>
   If you have a menu, built with a <code>&lt;ul&gt;</code>, you might want to opt-out the default
   styling to avoid getting bullets in your menu. This can be done as followed:
 </p>
+
+<cookbook-code-viewer [html]="defaultListExample.template">
+  <cookbook-default-list-example #defaultListExample></cookbook-default-list-example>
+</cookbook-code-viewer>
 <cookbook-code-viewer [css]="defaultListExample.styles">
   <cookbook-default-list-example #defaultListExample></cookbook-default-list-example>
 </cookbook-code-viewer>

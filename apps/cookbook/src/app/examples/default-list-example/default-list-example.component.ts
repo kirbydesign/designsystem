@@ -1,8 +1,13 @@
 import { Component } from '@angular/core';
 
 const config = {
-  template: `<kirby-page
-></kirby-page>`,
+  template: `<div class="menu-items-container">
+  <ul class="menu-items">
+    <li>
+      <a
+        class="menu-item">"Menu Item 1"</a
+      >
+    </li>`,
   styles: [
     `li::before {
       display: none;
