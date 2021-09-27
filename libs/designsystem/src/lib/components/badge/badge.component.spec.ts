@@ -1,8 +1,8 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { customElementsInitializer } from '../../app-initialize';
+import { BadgeComponent } from '../../index';
 import { TestHelper } from '../../testing/test-helper';
-import { BadgeComponent } from '../index';
 
 describe('BadgeComponent', () => {
   let spectator: SpectatorHost<BadgeComponent>;

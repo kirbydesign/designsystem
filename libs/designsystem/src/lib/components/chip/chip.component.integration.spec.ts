@@ -2,9 +2,9 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { DesignTokenHelper } from '@kirbydesign/core';
 
+import { BadgeComponent } from '../../index';
 import { TestHelper } from '../../testing/test-helper';
 import { ChipComponent } from '../chip/chip.component';
-import { BadgeComponent } from '../index';
 import { SegmentItem } from '../segmented-control/segment-item';
 import {
   SegmentedControlComponent,

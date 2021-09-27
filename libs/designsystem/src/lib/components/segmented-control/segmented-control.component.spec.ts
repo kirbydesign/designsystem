@@ -3,8 +3,8 @@ import { MockComponents, MockDirective } from 'ng-mocks';
 
 import { DesignTokenHelper } from '@kirbydesign/core';
 
-import { BadgeComponent } from '../';
 import { ThemeColorDirective } from '../../directives';
+import { BadgeComponent } from '../../index';
 import { TestHelper } from '../../testing/test-helper';
 import { ChipComponent } from '../chip/chip.component';
 
