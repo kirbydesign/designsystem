@@ -89,7 +89,9 @@
 <h2>Opt-Out Default Style</h2>
 <p>
   If you have a menu, built with a <code>&lt;ul&gt;</code>, you might want to opt-out the default
-  styling to avoid getting bullets in your menu. This can be done as followed:
+  styling to avoid getting bullets in your menu with <code>display: none</code>. You can also
+  opt-out of the 8px margin that's added to the top of every <code>&lt;li&gt;</code> element, except
+  the first, with <code>margin-block-start: revert;</code>.
 </p>
 
 <cookbook-code-viewer [html]="defaultListExample.template">
