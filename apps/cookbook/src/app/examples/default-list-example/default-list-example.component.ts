@@ -9,9 +9,9 @@ const config = {
       >
     </li>`,
   styles: [
-    `li::before {
-      display: none;
-    }`,
+    `li::before { 
+  display: none; 
+}`,
   ],
 };
 
