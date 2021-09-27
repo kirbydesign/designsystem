@@ -32,8 +32,8 @@ The following tasks should be carried out in sequence in order to follow [the pr
 
 ### Refinement
 
-- [ ] Request that the issue is [UX refined](../CONTRIBUTING.md/#ux-refinement); do not proceed until this is done.
-- [ ] Request that the issue is [tech refined](../CONTRIBUTING.md/#tech-refinement); do not proceed until this is done.
+- [ ] Request that the issue is [UX refined](https://github.com/kirbydesign/designsystem/blob/master/.github/CONTRIBUTING.md/#ux-refinement); do not proceed until this is done.
+- [ ] Request that the issue is [tech refined](https://github.com/kirbydesign/designsystem/blob/master/.github/CONTRIBUTING.md/#tech-refinement); do not proceed until this is done.
 
 ### Implementation 
 The contributor who wants to implement this issue should: 
