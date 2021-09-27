@@ -11,8 +11,10 @@ defaults:
     shell: bash
 
 jobs:
-  bump_package_versions:
-    name: Bump packages on changes in the their respective libs
+  # If core has changes, we want to bump both core and designsystem
+  # If only designsystem has changes, we want to just bump designsystem
+  bump_package_versions: 
+    name: Bump version and publish changed packages
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -38,26 +40,26 @@ jobs:
       - name: Run Postinstall Script
         if: steps.cache.outputs.cache-hit == 'true'
         run: npm run postinstall
-      - name: Check modified files
+      - name: Configure git
+        run: |
+          git config user.name "Kirby Bot"
+          git config user.email "<>"
+      - name: Check if core has been modified
         id: modified-files
         uses: dorny/paths-filter@v2.9.2
         with:
           filters: |
             core:
               - 'libs/core/**'
-      - name: Configure git
-        run: |
-          git config user.name "Kirby Bot"
-          git config user.email "<>"
       - name: Create npm config
         if: steps.modified-files.outputs.core == 'true'
         run:  |
           cd libs/core 
           echo '//registry.npmjs.org/:_authToken=${{secrets.NPM_PUBLISH_TOKEN}}' > ~/.npmrc
-      - name: Bump core package and update version in designsystem
+      - name: Version bump core and update core dependency version in designsystem
         id: bump-core
         if: steps.modified-files.outputs.core == 'true'
-        run: | # patch version -> write without 'v' to variable -> update core package dependency in designsystem -> commit patch manually due to https://github.com/npm/cli/issues/2010#issuecomment-863288622 
+        run: | # For explanation: https://github.com/kirbydesign/designsystem/pull/1722#issuecomment-928181479
           cd libs/core
           NEW_VERSION=$(npm version patch | cut -d v -f2) 
           cd ../../ 
