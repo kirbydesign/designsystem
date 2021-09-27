@@ -47,7 +47,7 @@ The good issue: contains only one issue, is self-contained, is specific & unambi
 
 ## Checklist:
 
-The following tasks should be carried out in sequence in order to follow [the process of contributing](../CONTRIBUTING.md/#the-process-of-contributing) correctly.
+The following tasks should be carried out in sequence in order to follow [the process of contributing](https://github.com/kirbydesign/designsystem/blob/master/.github/CONTRIBUTING.md/#the-process-of-contributing) correctly.
 
 ### Verification
 To make sure the bug is not intended behaviour; it should be verified by a member of team Kirby before moving on to implementation. 
