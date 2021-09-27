@@ -146,6 +146,13 @@ function publish() {
   } else {
     // Create a GZipped Tarball
     console.log('Running on non-CI, hence creating a gzipped tar-ball');
+    
+    // Make sure any local core changes (proxies etc.) are included in the local .tgz package
+    // For CI, we build and publish this package separately.
+    npm(['run', 'build:core'], {
+      onFailMessage: 'Unable to build core package (stencil compiler)',
+    });
+
     return npm(['pack', distTarget], {
       onFailMessage: 'Unable to create gzipped tar-ball package',
     })
@@ -157,6 +164,7 @@ function publish() {
 
 // Actual execution of script!
 cleanDistribution()
+  .then(buildCoreLib)
   .then(buildPolyfills)
   .then(buildDesignsystem)
   .then(enhancePackageJson)
