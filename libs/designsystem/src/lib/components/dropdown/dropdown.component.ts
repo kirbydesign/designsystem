@@ -186,7 +186,7 @@ export class DropdownComponent
 
   private itemClickUnlisten: (() => void)[] = [];
   private intersectionObserverRef: IntersectionObserver;
-  private showDropdownTimeoutId;
+  private showDropdownTimeoutId: ReturnType<typeof setTimeout>;
 
   constructor(
     private renderer: Renderer2,
@@ -270,7 +270,7 @@ export class DropdownComponent
     }
   }
 
-  private setHorizontalDirection(entry) {
+  private setHorizontalDirection(entry: IntersectionObserverEntry) {
     // If popout direction is set to right, and the entry is cut off to the right by ${entry.boundingClientRect.right - entry.intersectionRect.right}px
     // it is set to popout left instead, and vice versa for popout direction left
     if (this.horizontalDirection === HorizontalDirection.right) {
@@ -284,7 +284,7 @@ export class DropdownComponent
     }
   }
 
-  private setVerticalDirection(entry) {
+  private setVerticalDirection(entry: IntersectionObserverEntry) {
     if (entry.boundingClientRect.top < 0) {
       // entry is cut off at the top by ${entry.boundingClientRect.top}px
       // open downwards:
