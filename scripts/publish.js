@@ -27,6 +27,7 @@ const path = require('path');
 const isCI = require('is-ci');
 
 const libDir = 'libs/designsystem/src/lib';
+const coreLibDir = 'libs/core/src';
 const dist = `dist`;
 const distTarget = `${dist}/libs/designsystem`;
 const distPackageJsonPath = `${distTarget}/package.json`;
@@ -114,7 +115,7 @@ function copyReadme() {
 function copyScssFiles() {
   console.log('Copying SCSS files...');
   const onlyScssFiles = (input) => ['', '.scss'].includes(path.extname(input));
-  return fs.copy(`${libDir}/scss`, `${distTarget}/scss`, { filter: onlyScssFiles });
+  return fs.copy(`${coreLibDir}/scss`, `${distTarget}/scss`, { filter: onlyScssFiles });
 }
 
 function copyIcons() {
@@ -132,6 +133,12 @@ function copyPolyfills() {
   });
 }
 
+function createTarballPackage() {
+  return npm(['pack', distTarget], {
+    onFailMessage: 'Unable to create gzipped tar-ball package',
+  })
+}
+
 function publish() {
   const findTarball = (files) =>
     files.find(
@@ -145,13 +152,17 @@ function publish() {
   } else {
     // Create a GZipped Tarball
     console.log('Running on non-CI, hence creating a gzipped tar-ball');
-    return npm(['pack', distTarget], {
-      onFailMessage: 'Unable to create gzipped tar-ball package',
-    })
+    
+    // Make sure any local core changes (proxies etc.) are included in the local .tgz package
+    // For CI, we build and publish this package separately.
+    npm(['run', 'build:core'], {
+      onFailMessage: 'Unable to build core package (stencil compiler)',
+    }).then(createTarballPackage)
       .then(() => fs.promises.readdir('.'))
       .then(findTarball)
       .then((filename) => fs.move(filename, `${dist}/${filename}`, { overwrite: true }));
   }
+  
 }
 
 // Actual execution of script!

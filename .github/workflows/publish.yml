@@ -5,18 +5,19 @@ on:
     types: closed
     branches: master
     paths: 'libs/**'
-
+    
 defaults:
   run:
     shell: bash
 
 jobs:
-  bump_version_and_publish:
-    name: Bump and publish new package version to npm
+  # If core has changes, we want to bump both core and designsystem
+  # If only designsystem has changes, we want to just bump designsystem
+  bump_package_versions: 
+    name: Bump version and publish changed packages
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged
     steps:
-      - name: Checkout master branch
+      - name: Checkout repo
         uses: actions/checkout@v2
         with:
           token: ${{secrets.VERSION_BUMP_GITHUB_TOKEN}}
@@ -43,11 +44,41 @@ jobs:
         run: |
           git config user.name "Kirby Bot"
           git config user.email "<>"
+      - name: Check if core has been modified
+        id: modified-files
+        uses: dorny/paths-filter@v2.9.2
+        with:
+          filters: |
+            core:
+              - 'libs/core/**'
+      - name: Create npm config
+        if: steps.modified-files.outputs.core == 'true'
+        run:  |
+          cd libs/core 
+          echo '//registry.npmjs.org/:_authToken=${{secrets.NPM_PUBLISH_TOKEN}}' > ~/.npmrc
+      - name: Version bump core and update core dependency version in designsystem
+        id: bump-core
+        if: steps.modified-files.outputs.core == 'true'
+        run: | # For explanation: https://github.com/kirbydesign/designsystem/pull/1722#issuecomment-928181479
+          cd libs/core
+          NEW_VERSION=$(npm version patch | cut -d v -f2) 
+          cd ../../ 
+          echo $(jq --arg version "$NEW_VERSION" '.dependencies["@kirbydesign/core"]=$version' libs/designsystem/package.json) > libs/designsystem/package.json
+          npx prettier --write libs/designsystem/package.json
+          git add libs/core/package.json libs/designsystem/package.json 
+          GIT_MESSAGE=":bookmark:Bumping version to $NEW_VERSION (core)"
+          git commit -m "$GIT_MESSAGE" 
+      - name: Publish core package to npm
+        if: steps.modified-files.outputs.core == 'true'
+        run: |
+          npm run build:core
+          cd libs/core
+          npm publish --access public
       - name: Create npm config
         run: echo '//registry.npmjs.org/:_authToken=${{secrets.NPM_PUBLISH_TOKEN}}' > ~/.npmrc
-      - name: Bump version
-        run: npm version patch -m ":bookmark:Bumping version to %s"
-      - name: Build package and publish to npm
+      - name: Bump designsystem package
+        run: npm version patch -m ":bookmark:Bumping version to %s (designsystem)"
+      - name: Build designsystem package and publish to npm
         run: npm run publish
-      - name: Push version bump and tag to Github
+      - name: Push version bump(s) and tag to Github
         run: git push --follow-tags

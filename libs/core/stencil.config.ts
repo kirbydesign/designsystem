@@ -4,7 +4,9 @@ import { sass } from '@stencil/sass';
 
 export const config: Config = {
   namespace: 'kirby',
-  plugins: [sass({ injectGlobalPaths: ['./src/scss/utils'] })],
+  srcDir: './src/',
+  plugins: [sass({ injectGlobalPaths: ['./src/scss/_utils.scss'] })],
+  globalStyle: './src/scss/_global-styles.scss',
   outputTargets: [
     angularOutputTarget({
       componentCorePackage: '@kirbydesign/core',
@@ -13,6 +15,7 @@ export const config: Config = {
     {
       type: 'dist',
       esmLoaderPath: '../loader',
+      copy: [{ src: 'scss', dest: '../../scss', warn: true }],
     },
     { type: 'docs-readme' },
     { type: 'docs-json', file: './custom-elements.json' },

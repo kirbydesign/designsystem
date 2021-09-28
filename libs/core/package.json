@@ -1,16 +1,15 @@
 {
   "name": "@kirbydesign/core",
   "version": "0.0.1",
-  "description": "Base components for Kirby Design System",
+  "description": "Core web-components for the Kirby Design System.",
   "module": "dist/index.js",
   "main": "dist/index.cjs.js",
-  "unpkg": "dist/kirby.js",
-  "private": true,
   "types": "dist/types/index.d.ts",
   "collection": "dist/collection/collection-manifest.json",
   "files": [
     "dist/",
-    "loader/"
+    "loader/",
+    "scss/"
   ],
   "license": "MIT"
 }
