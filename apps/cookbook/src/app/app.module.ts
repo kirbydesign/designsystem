@@ -1,4 +1,4 @@
-import { HashLocationStrategy, LocationStrategy, registerLocaleData } from '@angular/common';
+import { registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import localeEn from '@angular/common/locales/en-GB';
 import { LOCALE_ID, NgModule } from '@angular/core';
@@ -38,10 +38,7 @@ registerLocaleData(localeEn);
     FirebaseModule,
   ],
 
-  providers: [
-    { provide: LOCALE_ID, useValue: 'en-GB' },
-    { provide: LocationStrategy, useClass: HashLocationStrategy },
-  ],
+  providers: [{ provide: LOCALE_ID, useValue: 'en-GB' }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
