@@ -97,6 +97,26 @@
 <cookbook-code-viewer [html]="defaultListExample.template">
   <cookbook-styling-list-example #defaultListExample></cookbook-styling-list-example>
 </cookbook-code-viewer>
+<br />
+<p>To remove the custom markers (bullets):</p>
 <cookbook-code-viewer [css]="defaultListExample.styles">
   <cookbook-styling-list-example #defaultListExample></cookbook-styling-list-example>
 </cookbook-code-viewer>
+<br />
+<p>
+  To remove or control the space between list items you’ll want to target list items with
+  sufficiently high specificity, e.g.:
+</p>
+<cookbook-code-viewer language="css">
+  ol li, ul li
+  <pre>
+{{ '{' }}
+   margin-block-start: revert;
+{{ '}' }} </pre
+  >
+</cookbook-code-viewer>
+<br />
+<p>
+  You may also want to change the display and line-height properties on list items li. Which values
+  to use will depend on the specific case.
+</p>

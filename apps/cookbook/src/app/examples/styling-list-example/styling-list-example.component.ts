@@ -11,10 +11,6 @@ const config = {
   styles: [
     `li::before { 
   display: none; 
-}
-
-li { 
-  margin-block-start: revert; 
 }`,
   ],
 };
