@@ -15,7 +15,6 @@ import { CardElevationsExampleComponent } from './card/card-elevations-example/c
 import { CardThemecolorExampleComponent } from './card/card-themecolor-example/card-themecolor-example.component';
 import { CheckboxExampleComponent } from './checkbox-example/checkbox-example.component';
 import { ChipExampleComponent } from './chip-example/chip-example.component';
-import { DefaultListExampleComponent } from './default-list-example/default-list-example.component';
 import { DividerExampleComponent } from './divider-example/divider-example.component';
 import { EmptyStateExampleComponent } from './empty-state-example/empty-state-example.component';
 import { ExamplesComponent } from './examples.component';
@@ -49,6 +48,7 @@ import { CookbookExampleCardContentComponent } from './slides-example/example-ca
 import { SlidesExampleComponent } from './slides-example/slides-example.component';
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
 import { StockChartDeprecatedExampleComponent } from './stock-chart-deprecated-example/stock-chart-deprecated-example.component';
+import { StylingListExampleComponent } from './styling-list-example/styling-list-example.component';
 import { TabExampleComponent } from './tabs-example/tab/tab-example.component';
 import { TabsExampleComponent } from './tabs-example/tabs-example.component';
 import { ToastExampleComponent } from './toast-example/toast-example.component';
@@ -121,7 +121,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   CookbookExampleCardContentComponent,
   AccordionExampleComponent,
   LinkExampleComponent,
-  DefaultListExampleComponent,
+  StylingListExampleComponent,
 ];
 
 // Configure custom icons (used by example to show the usage of custom icons)

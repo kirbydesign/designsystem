@@ -14,7 +14,6 @@ import { ChartDeprecatedExampleComponent } from './chart-deprecated-example/char
 import { ChartExampleComponent } from './chart-example/chart-example.component';
 import { CheckboxExampleComponent } from './checkbox-example/checkbox-example.component';
 import { ChipExampleComponent } from './chip-example/chip-example.component';
-import { DefaultListExampleComponent } from './default-list-example/default-list-example.component';
 import { EmptyStateExampleComponent } from './empty-state-example/empty-state-example.component';
 import { ExamplesComponent } from './examples.component';
 import { FabSheetExampleComponent } from './fab-sheet-example/fab-sheet-example.component';
@@ -67,6 +66,7 @@ import { SlideButtonExampleComponent } from './slide-button-example/slide-button
 import { SlidesExampleComponent } from './slides-example/slides-example.component';
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
 import { StockChartDeprecatedExampleComponent } from './stock-chart-deprecated-example/stock-chart-deprecated-example.component';
+import { StylingListExampleComponent } from './styling-list-example/styling-list-example.component';
 import { TabExampleComponent } from './tabs-example/tab/tab-example.component';
 import { TabsExampleComponent } from './tabs-example/tabs-example.component';
 import { ToastExampleComponent } from './toast-example/toast-example.component';
@@ -480,7 +480,7 @@ export const routes: Routes = [
     component: LinkExampleComponent,
   },
   {
-    path: 'default-list',
-    component: DefaultListExampleComponent,
+    path: 'styling-list',
+    component: StylingListExampleComponent,
   },
 ];

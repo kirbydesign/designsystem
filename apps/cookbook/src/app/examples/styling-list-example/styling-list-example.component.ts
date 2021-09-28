@@ -20,11 +20,11 @@ li {
 };
 
 @Component({
-  selector: 'cookbook-default-list-example',
+  selector: 'cookbook-styling-list-example',
   template: config.template,
   styles: config.styles,
 })
-export class DefaultListExampleComponent {
+export class StylingListExampleComponent {
   template: string = config.template;
   styles: string = config.styles.join(`
 `);

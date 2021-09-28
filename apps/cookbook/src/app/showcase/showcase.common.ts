@@ -18,7 +18,6 @@ import { ChartShowcaseComponent } from './chart-showcase/chart-showcase.componen
 import { CheckboxShowcaseComponent } from './checkbox-showcase/checkbox-showcase.component';
 import { ChipShowcaseComponent } from './chip-showcase/chip-showcase.component';
 import { ColorsShowcaseComponent } from './colors-showcase/colors-showcase.component';
-import { DefaultListShowcaseComponent } from './default-list-showcase/default-list-showcase';
 import { EmptyStateShowcaseComponent } from './empty-state-showcase/empty-state-showcase.component';
 import { FabSheetShowcaseComponent } from './fab-sheet-showcase/fab-sheet-showcase.component';
 import { FlagShowcaseComponent } from './flag-showcase/flag-showcase.component';
@@ -45,6 +44,7 @@ import { SlideButtonShowcaseComponent } from './slide-button-showcase/slide-butt
 import { SlidesShowcaseComponent } from './slides-showcase/slides-showcase.component';
 import { SpinnerShowcaseComponent } from './spinner-showcase/spinner-showcase.component';
 import { StockChartDeprecatedShowcaseComponent } from './stock-chart-deprecated-showcase/stock-chart-deprecated-showcase.component';
+import { StylingListShowcaseComponent } from './styling-list/styling-list-showcase';
 import { TabsShowcaseComponent } from './tabs-showcase/tabs-showcase.component';
 import { ToastShowcaseComponent } from './toast-showcase/toast-showcase.component';
 import { ToggleButtonShowcaseComponent } from './toggle-button-showcase/toggle-button-showcase.component';
@@ -100,7 +100,7 @@ export const COMPONENT_EXPORTS: any[] = [
   RadioShowcaseComponent,
   RangeShowcaseComponent,
   LinkShowcaseComponent,
-  DefaultListShowcaseComponent,
+  StylingListShowcaseComponent,
 ];
 
 export const COMPONENT_DECLARATIONS: any[] = [...COMPONENT_EXPORTS, ShowcaseComponent];
