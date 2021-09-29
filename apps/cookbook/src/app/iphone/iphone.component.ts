@@ -27,8 +27,6 @@ export class IphoneComponent implements OnChanges, AfterViewInit {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.src) {
       this.trustedSrc = this.createTrustedSrc(changes.src.currentValue);
-      console.log(changes.src.currentValue);
-      console.log(this.trustedSrc);
     }
   }
 
