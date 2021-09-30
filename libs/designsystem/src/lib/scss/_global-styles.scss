@@ -4,7 +4,8 @@
 @import './base/line-clamp';
 @import './base/list';
 
-:root {
+:root,
+:host {
   --kirby-font-family: 'Roboto';
   font-family: var(--kirby-font-family);
   @each $color, $color-name in $kirby-colors {
