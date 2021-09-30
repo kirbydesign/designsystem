@@ -101,6 +101,7 @@
   @return $classes;
 }
 
+// Strips the unit by dividing it with exactly one of that unit, eg. 42px / 1px = 42
 @function unitless($number) {
   @return $number / ($number * 0 + 1);
 }
