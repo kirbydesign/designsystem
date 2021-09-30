@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 const config = {
   template: `<div class="menu-items-container">
@@ -17,11 +17,13 @@ const config = {
 
 @Component({
   selector: 'cookbook-styling-list-example',
-  template: config.template,
-  styles: config.styles,
+  templateUrl: './styling-list-example.component.html',
+  styleUrls: ['./styling-list-example.component.scss'],
 })
-export class StylingListExampleComponent {
-  template: string = config.template;
-  styles: string = config.styles.join(`
-`);
+export class StylingListExampleComponent implements OnInit {
+  constructor() {}
+  ngOnInit() {}
+  //   template: string = config.template;
+  //   styles: string = config.styles.join(`
+  // `);
 }
