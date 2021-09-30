@@ -8,7 +8,7 @@ import { ButtonComponent, CardComponent, IconComponent, ItemComponent } from '..
 import { DesignTokenHelper } from '../../helpers';
 import { TestHelper } from '../../testing/test-helper';
 import { ListItemTemplateDirective } from '../list';
-import { HorizontalDirection } from '../popover/popover.component';
+import { HorizontalDirection, PopoverComponent } from '../popover/popover.component';
 
 import { DropdownComponent } from './dropdown.component';
 import { OpenState } from './dropdown.types';
@@ -30,16 +30,16 @@ describe('DropdownComponent', () => {
   const openDelayInMs = DropdownComponent.OPEN_DELAY_IN_MS;
 
   describe('by default', () => {
-    let spectator: Spectator<DropdownComponent>;
-    let buttonElement: HTMLButtonElement;
-
     const createHost = createHostFactory({
       component: DropdownComponent,
       declarations: [
         ItemComponent,
-        MockComponents(ButtonComponent, CardComponent, IconComponent, IonItem),
+        MockComponents(ButtonComponent, CardComponent, IconComponent, IonItem, PopoverComponent),
       ],
     });
+
+    let spectator: Spectator<DropdownComponent>;
+    let buttonElement: HTMLButtonElement;
 
     beforeEach(() => {
       spectator = createHost(`<kirby-dropdown></kirby-dropdown>`, {
@@ -52,6 +52,10 @@ describe('DropdownComponent', () => {
 
     it('should create', () => {
       expect(spectator.component).toBeTruthy();
+    });
+
+    it('should have popover disabled', () => {
+      expect(spectator.component.usePopover).toBeFalse();
     });
 
     it('should be closed', () => {
@@ -877,7 +881,15 @@ describe('DropdownComponent', () => {
 
     const createHost = createHostFactory({
       component: DropdownComponent,
-      declarations: [MockComponents(ButtonComponent, CardComponent, ItemComponent, IconComponent)],
+      declarations: [
+        MockComponents(
+          ButtonComponent,
+          CardComponent,
+          ItemComponent,
+          IconComponent,
+          PopoverComponent
+        ),
+      ],
     });
 
     describe('through template one-time string initialization', () => {
@@ -970,7 +982,15 @@ describe('DropdownComponent', () => {
 
     const createHost = createHostFactory({
       component: DropdownComponent,
-      declarations: [MockComponents(ButtonComponent, CardComponent, ItemComponent, IconComponent)],
+      declarations: [
+        MockComponents(
+          ButtonComponent,
+          CardComponent,
+          ItemComponent,
+          IconComponent,
+          PopoverComponent
+        ),
+      ],
     });
 
     const defaultSelectedIndex = 2;
@@ -1078,7 +1098,15 @@ describe('DropdownComponent', () => {
 
     const createHost = createHostFactory({
       component: DropdownComponent,
-      declarations: [MockComponents(ButtonComponent, CardComponent, ItemComponent, IconComponent)],
+      declarations: [
+        MockComponents(
+          ButtonComponent,
+          CardComponent,
+          ItemComponent,
+          IconComponent,
+          PopoverComponent
+        ),
+      ],
       host: OnPushHostComponent,
     });
 
@@ -1123,7 +1151,7 @@ describe('DropdownComponent', () => {
       declarations: [
         ItemComponent,
         ListItemTemplateDirective,
-        MockComponents(ButtonComponent, CardComponent, IconComponent, IonItem),
+        MockComponents(ButtonComponent, CardComponent, IconComponent, IonItem, PopoverComponent),
       ],
     });
 
