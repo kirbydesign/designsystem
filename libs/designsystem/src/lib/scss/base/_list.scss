@@ -1,6 +1,6 @@
 @import '../utils';
 
-$marker-disc-font-size: 1.3em;
+$marker-disc-font-size: 1.4em;
 $marker-cirle-font-size: 0.8em;
 $list-item-line-height: 1.2;
 
@@ -79,8 +79,4 @@ ol > li::before {
 
 li {
   line-height: $list-item-line-height;
-
-  &::before {
-    font-weight: bold;
-  }
 }
