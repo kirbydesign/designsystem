@@ -92,8 +92,13 @@
 </p>
 
 <p>To remove the custom markers (bullets):</p>
-<cookbook-code-viewer [css]="defaultListExample.styles">
-  <cookbook-styling-list-example #defaultListExample></cookbook-styling-list-example>
+<cookbook-code-viewer language="css">
+  li::before
+  <pre>
+{{ '{' }}
+   display: none;
+{{ '}' }} </pre
+  >
 </cookbook-code-viewer>
 <br />
 <p>
