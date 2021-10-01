@@ -1108,13 +1108,8 @@ describe('DropdownComponent (popover version)', () => {
     const createHost = createHostFactory({
       component: DropdownComponent,
       declarations: [
-        MockComponents(
-          ButtonComponent,
-          CardComponent,
-          ItemComponent,
-          IconComponent,
-          PopoverComponent
-        ),
+        MockComponents(ButtonComponent, CardComponent, ItemComponent, IconComponent),
+        PopoverComponent,
       ],
       host: OnPushHostComponent,
     });
@@ -1131,7 +1126,6 @@ describe('DropdownComponent (popover version)', () => {
       cardElement = spectator.query('kirby-card');
       // Assert that card is initially hidden:
       expect(cardElement).toBeHidden();
-      expect(cardElement).toHaveComputedStyle({ opacity: '0' });
       // Act:
       spectator.click('button');
       tick(openDelayInMs);
@@ -1147,8 +1141,9 @@ describe('DropdownComponent (popover version)', () => {
     });
 
     it('options should be visible', () => {
+      // TODO: This requires PopoverComponent to not be mocked
+      // Move it to an integration test
       expect(cardElement).toBeVisible();
-      expect(cardElement).toHaveComputedStyle({ opacity: '1' });
     });
   });
 
