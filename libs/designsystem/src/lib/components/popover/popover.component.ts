@@ -133,8 +133,8 @@ export class PopoverComponent implements AfterViewInit, OnDestroy {
     this.renderer.addClass(this.elementRef.nativeElement, 'is-opening');
     this.renderer.appendChild(this.document.body, this.elementRef.nativeElement);
 
-    this.positionWrapper();
     this.preventScroll();
+    this.positionWrapper();
 
     this.renderer.addClass(this.elementRef.nativeElement, 'is-open');
     this.renderer.removeClass(this.elementRef.nativeElement, 'is-opening');
