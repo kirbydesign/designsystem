@@ -79,15 +79,13 @@
 
 <ng-template #virtualItemsTemplate let-virtualScrollData>
   <div *uiScroll="let item of virtualScrollData; let i = index">
-    <ion-item-divider
-      *ngIf="item.headingName"
-      class="virtual-group"
-      [class.section-header]="!!item.headingName"
-    >
-      <ng-container
-        *ngTemplateOutlet="sectionHeaderTemplate; context: { $implicit: item.headingName }"
-      ></ng-container>
-    </ion-item-divider>
+    <div *ngIf="item.headingName" class="virtual-section">
+      <ion-item-divider>
+        <ng-container
+          *ngTemplateOutlet="sectionHeaderTemplate; context: { $implicit: item.headingName }"
+        ></ng-container>
+      </ion-item-divider>
+    </div>
     <kirby-list-item
       *ngIf="!item.headingName"
       [item]="item"
@@ -99,10 +97,8 @@
       [isSelected]="_isSelectable && item === _selectedItem"
       (itemSelect)="onItemSelect($event)"
       (swipeActionSelect)="onSwipeActionSelect($event)"
-      [class.item-wrapper]="!item.headingName"
       [class.virtual-section-item]="_isSectionsEnabled && !item.headingName"
       [ngClass]="_getBoundaryClass(i)"
-      class="virtual"
     >
     </kirby-list-item>
   </div>

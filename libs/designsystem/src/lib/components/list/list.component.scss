@@ -19,10 +19,6 @@ $item-height: size('xxxl');
   overflow-y: auto;
 }
 
-.item-wrapper {
-  min-height: #{map-get($item-heights, 'm')};
-}
-
 ion-list-header {
   background-color: get-color('white');
   border-bottom: 1px solid $divider-color;
@@ -96,7 +92,7 @@ ion-item-divider {
   background-color: transparent;
   border-color: transparent;
   min-height: 0;
-  padding: 0 size('s') size('xxs') size('s');
+  padding: size('m') size('s') size('xxs') size('s');
 }
 
 .footer {
@@ -149,6 +145,18 @@ ion-item-options[side='end'] {
   border-bottom-width: 0;
 }
 
+// We need to be specific about the heights of the items, otherwise the virtual scroll
+// list will not know what to expect, and we get jumpy behavior when scrolling.
+kirby-list-item,
+.virtual-section {
+  min-height: #{map-get($item-heights, 'm')};
+  &.first,
+  &.last {
+    // Add padding of first and last item in section to usual item height
+    min-height: #{map-get($item-heights, 'm') + map-get($sizes, 'xxs')};
+  }
+}
+
 :host-context(.has-sections) {
   .list {
     box-shadow: none;
@@ -162,10 +170,6 @@ ion-item-options[side='end'] {
   .virtual-with-sections-wrapper {
     margin-left: -1 * size('xxxs');
     margin-right: -1 * size('xxxs');
-  }
-
-  .virtual-group {
-    margin-top: size('m');
   }
 
   .virtual-section-item {

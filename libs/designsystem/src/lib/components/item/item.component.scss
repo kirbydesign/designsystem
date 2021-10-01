@@ -88,12 +88,6 @@ ion-item {
     --padding-top: #{size('xxs')};
   }
 
-  :host-context(kirby-list-item:first-of-type.virtual) &,
-  :host-context(kirby-list-item:last-of-type.virtual) & {
-    --padding-top: 0;
-    --padding-bottom: 0;
-  }
-
   :host-context(kirby-list-item:first-of-type kirby-card) & {
     --padding-top: 0;
   }
@@ -104,6 +98,20 @@ ion-item {
 
   :host-context(kirby-list-item:last-of-type kirby-card) & {
     --padding-bottom: 0;
+  }
+
+  :host-context(div[ui-scroll] kirby-list-item) &,
+  :host-context(div[ui-scroll] kirby-list-item) {
+    --padding-top: 0;
+    --padding-bottom: 0;
+  }
+
+  :host-context(div[ui-scroll] kirby-list-item.first) & {
+    --padding-top: #{size('xxs')};
+  }
+
+  :host-context(div[ui-scroll] kirby-list-item.last) & {
+    --padding-bottom: #{size('xxs')};
   }
 }
 /* clean-css ignore:end */

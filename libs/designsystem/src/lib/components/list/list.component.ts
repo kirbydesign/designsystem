@@ -97,9 +97,6 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     settings: {
       minIndex: this.virtualScrollSettings.minIndex || 0,
       startIndex: this.virtualScrollSettings.startIndex || 0,
-      bufferSize: this.virtualScrollSettings.bufferSize || 4,
-      itemSize: this.virtualScrollSettings.itemSize || 72,
-      padding: this.virtualScrollSettings.padding || 1,
       ...this.virtualScrollSettings,
     },
   });
