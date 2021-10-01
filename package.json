@@ -98,7 +98,7 @@
     "firebase": "8.3.1",
     "highcharts": "8.0.4",
     "inputmask": "^5.0.5",
-    "ngx-ui-scroll": "^2.0.1",
+    "ngx-ui-scroll": "^2.2.3",
     "prismjs": "1.24.0",
     "reflect-metadata": "0.1.8",
     "rxjs": "6.5.5",

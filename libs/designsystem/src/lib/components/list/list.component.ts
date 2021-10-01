@@ -13,7 +13,7 @@ import {
   TrackByFunction,
   ViewChild,
 } from '@angular/core';
-import { Datasource, IDatasource } from 'ngx-ui-scroll';
+import { Datasource, IDatasource, SizeStrategy } from 'ngx-ui-scroll';
 
 import { ThemeColor } from '../../helpers/theme-color.type';
 import { ItemComponent } from '../item/item.component';
@@ -97,6 +97,8 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     settings: {
       minIndex: this.virtualScrollSettings.minIndex || 0,
       startIndex: this.virtualScrollSettings.startIndex || 0,
+      // Default to frequent size strategy as it works well with differing item heights in sections (first/last item)
+      sizeStrategy: this.virtualScrollSettings.sizeStrategy || SizeStrategy.Frequent,
       ...this.virtualScrollSettings,
     },
   });
