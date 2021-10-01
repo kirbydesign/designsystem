@@ -40,7 +40,9 @@ describe('DropdownComponent (popover version)', () => {
       component: DropdownComponent,
       declarations: [
         ItemComponent,
-        MockComponents(ButtonComponent, CardComponent, IconComponent, IonItem, PopoverComponent),
+        MockComponents(ButtonComponent, IconComponent, IonItem),
+        PopoverComponent,
+        CardComponent,
       ],
     });
 
@@ -745,13 +747,18 @@ describe('DropdownComponent (popover version)', () => {
 
     describe('when aligned to right side of viewport', () => {
       it('should align the dropdown to the right side of button and component container ', (done) => {
+        //TODO: Move this to integration test. It requires popover to check wrapper.
         spectator.element.style.cssFloat = 'right';
         spectator.component.open();
         spectator.detectChanges();
         setTimeout(() => {
           spectator.detectChanges();
+
           const card = spectator.query('kirby-card');
-          expect(card).toHaveComputedStyle({ right: '0px' });
+          const cardClientRect = card.getClientRects()[0];
+          const buttonClientRect = buttonElement.getClientRects()[0];
+
+          expect(cardClientRect.right).toEqual(buttonClientRect.right);
           done();
         }, openDelayInMs);
       });
@@ -1235,12 +1242,6 @@ describe('DropdownComponent (popover version)', () => {
 
     it("should render 'kirby-popover' with correct max-height", () => {
       expect(popoverElement).toHaveComputedStyle({ '--max-height': '352px' });
-    });
-
-    describe('when the state is open', () => {
-      it('should focus the button element when the popover backdrop is clicked', () => {
-        expect(true).toBeFalse();
-      });
     });
   });
 });
