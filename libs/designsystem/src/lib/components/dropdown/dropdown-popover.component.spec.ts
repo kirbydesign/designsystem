@@ -60,10 +60,6 @@ describe('DropdownComponent (popover version)', () => {
       expect(spectator.component).toBeTruthy();
     });
 
-    it('should have popover disabled', () => {
-      expect(spectator.component.usePopover).toBeFalse();
-    });
-
     it('should be closed', () => {
       expect(spectator.component.isOpen).toBeFalsy();
     });
