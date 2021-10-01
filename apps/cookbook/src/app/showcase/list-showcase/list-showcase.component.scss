@@ -5,4 +5,11 @@
   justify-content: space-between;
   margin-top: size('xl');
   margin-bottom: size('xl');
+  &.virtual-scroll {
+    gap: size('m');
+  }
+}
+
+.virtual-list {
+  width: map-get($breakpoints, small);
 }

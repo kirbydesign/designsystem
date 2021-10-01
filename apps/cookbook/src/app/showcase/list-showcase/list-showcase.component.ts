@@ -5,6 +5,9 @@ import { ListWithHeaderAndFooterExampleTemplate } from '~/app/examples/list-exam
 import { ListWithSectionsExampleTemplate } from '~/app/examples/list-example/examples/sections';
 import { ListWithSectionsAndColoredItemsExampleTemplate } from '~/app/examples/list-example/examples/sections-and-colored-items';
 import { ListSelectableItemsExampleTemplate } from '~/app/examples/list-example/examples/selectable-items';
+import { ListVirtualScrollItemsExampleTemplate } from '~/app/examples/list-example/examples/virtual-scroll';
+import { ListVirtualScrollSectionsExampleTemplate } from '~/app/examples/list-example/examples/virtual-scroll-sections';
+import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 import { ListBoldTextOnRowSelectionExampleTemplate } from '../../examples/list-example/examples/bold-text-on-row-selection';
 import { ListItemsExampleTemplate } from '../../examples/list-example/examples/items';
@@ -23,6 +26,8 @@ export class ListShowcaseComponent implements OnInit {
   headerAndFooterExampleTemplate: string = ListWithHeaderAndFooterExampleTemplate;
   sectionsExampleTemplate: string = ListWithSectionsExampleTemplate;
   items: string = ListItemsExampleTemplate;
+  virtualScroll: string = ListVirtualScrollItemsExampleTemplate;
+  virtualScrollSections: string = ListVirtualScrollSectionsExampleTemplate;
 
   exampleHtml: string = require('!raw-loader!../../examples/list-example/list-example.component.html')
     .default;
@@ -30,6 +35,30 @@ export class ListShowcaseComponent implements OnInit {
   sectionHeaderExampleHtml: string =
     '<GridLayout *kirbyListSectionHeader="let section" ios:height="50">...</GridLayout>';
   constructor() {}
+
+  virtualScrollProperties: ApiDescriptionProperty[] = [
+    {
+      name: 'useVirtualScroll',
+      description:
+        'Determines if virtual scroll is used to improve rendering performance of many list items.',
+      type: ['boolean'],
+      defaultValue: 'false',
+    },
+    {
+      name: 'virtualScrollViewportHeight',
+      description:
+        'When using virtual scroll, we need a fixed height scroll container. This property makes it possible to set a custom height on this.',
+      type: ['number'],
+      defaultValue: '500',
+    },
+    {
+      name: 'virtualScrollSettings',
+      description:
+        'Sensible defaults are provided, but the behaviour of the virtual scroll can be fine tuned to specific needs. Available settings can also be seen at https://github.com/dhilt/ngx-ui-scroll#settings',
+      type: ['VirtualScrollSettings'],
+      defaultValue: '{ minIndex: 0, startIndex: 0, sizeStrategy: SizeStrategy.Frequent}',
+    },
+  ];
 
   ngOnInit() {}
 }

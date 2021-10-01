@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { IonicModule, IonRouterOutlet } from '@ionic/angular';
 
 import { KirbyModule } from '@kirbydesign/designsystem';
 
@@ -11,6 +12,8 @@ import { ListItemsExampleComponent } from './examples/items';
 import { ListWithSectionsExampleComponent } from './examples/sections';
 import { ListWithSectionsAndColoredItemsExampleComponent } from './examples/sections-and-colored-items';
 import { ListSelectableItemsExampleComponent } from './examples/selectable-items';
+import { ListVirtualScrollItemsExampleComponent } from './examples/virtual-scroll';
+import { ListVirtualScrollSectionsExampleComponent } from './examples/virtual-scroll-sections';
 
 const listExamples = [
   ListBoldTextOnRowSelectionExampleComponent,
@@ -21,10 +24,12 @@ const listExamples = [
   ListWithHeaderAndFooterExampleComponent,
   ListWithSectionsExampleComponent,
   ListItemsExampleComponent,
+  ListVirtualScrollItemsExampleComponent,
+  ListVirtualScrollSectionsExampleComponent,
 ];
 
 @NgModule({
-  imports: [CommonModule, KirbyModule],
+  imports: [CommonModule, KirbyModule, IonicModule],
   declarations: [...listExamples],
   exports: [...listExamples],
 })
