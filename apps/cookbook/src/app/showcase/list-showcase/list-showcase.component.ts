@@ -57,7 +57,8 @@ export class ListShowcaseComponent implements OnInit {
       description:
         'Sensible defaults are provided, but the behaviour of the virtual scroll can be fine tuned to specific needs. Available settings can also be seen at https://github.com/dhilt/ngx-ui-scroll#settings',
       type: ['VirtualScrollSettings'],
-      defaultValue: '{ minIndex: 0, startIndex: 0, sizeStrategy: SizeStrategy.Frequent}',
+      defaultValue:
+        '{ minIndex: 0, startIndex: 0, sizeStrategy: VirtualScrollSizeStrategy.Frequent}',
     },
   ];
 

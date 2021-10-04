@@ -35,6 +35,8 @@ export type VirtualScrollSettings = IDatasource['settings'];
 
 export type ListShape = 'square' | 'rounded' | 'none';
 
+export { SizeStrategy as VirtualScrollSizeStrategy } from 'ngx-ui-scroll';
+
 const INTERVAL = 400;
 @Component({
   selector: 'kirby-list',
