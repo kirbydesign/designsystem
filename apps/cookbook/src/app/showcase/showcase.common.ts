@@ -26,11 +26,9 @@ import { FormFieldShowcaseComponent } from './form-field-showcase/form-field-sho
 import { GridShowcaseComponent } from './grid-showcase/grid-showcase.component';
 import { IconShowcaseComponent } from './icon-showcase/icon-showcase.component';
 import { LinkShowcaseComponent } from './link-showcase/link-showcase.component';
-import { ListLoadOnDemandShowcaseComponent } from './list-load-on-demand-showcase/list-load-on-demand-showcase.component';
 import { ListNoShapeShowcaseComponent } from './list-no-shape-showcase/list-no-shape-showcase.component';
 import { ListShowcaseComponent } from './list-showcase/list-showcase.component';
 import { ListSwipeShowcaseComponent } from './list-swipe-showcase/list-swipe-showcase.component';
-import { ListVirtualScrollLoadShowcaseComponent } from './list-virtual-scroll-load-showcase/list-virtual-scroll-load-showcase.component';
 import { LoadingOverlayShowcaseComponent } from './loading-overlay-showcase/loading-overlay-showcase.component';
 import { ModalShowcaseComponent } from './modal-showcase/modal-showcase.component';
 import { PageShowcaseComponent } from './page-showcase/page-showcase.component';
@@ -58,10 +56,8 @@ export const COMPONENT_EXPORTS: any[] = [
   ButtonShowcaseComponent,
   SlideButtonShowcaseComponent,
   ListShowcaseComponent,
-  ListLoadOnDemandShowcaseComponent,
   ListSwipeShowcaseComponent,
   ListNoShapeShowcaseComponent,
-  ListVirtualScrollLoadShowcaseComponent,
   GridShowcaseComponent,
   AvatarShowcaseComponent,
   ChartDeprecatedShowcaseComponent,

@@ -110,7 +110,7 @@
     <cookbook-iphone src="/examples/list/with-sections" showExternalLink="true"></cookbook-iphone>
   </div>
 </div>
-
+<h1>Virtual Scroll</h1>
 <div class="example">
   <p>
     The virtual scroll should be mostly invisible to the user, but behind the scenes, only a small
@@ -145,7 +145,25 @@
   </div>
 </div>
 
-<h2>Virtual Scroll Properties:</h2>
+<h2>Virtual Scroll Properties</h2>
 <cookbook-api-description-properties
   [properties]="virtualScrollProperties"
 ></cookbook-api-description-properties>
+
+<h2>Load on demand with Virtual Scroll</h2>
+<p>
+  Virtual scroll is particularly useful in combination with load-on-demand lists. When new items are
+  continually requested and added to the existing page, it can result in a very large and poor
+  performing document. Virtual scroll fixes this by preserving the loaded items in memory, but only
+  rendering the necessary items on the page.
+</p>
+
+<h2>Load on Demand Virtual Scroll Properties</h2>
+<cookbook-api-description-properties
+  [properties]="virtualScrollLoadOnDemandProperties"
+></cookbook-api-description-properties>
+
+<h2>Load on Demand Virtual Scroll Events</h2>
+<cookbook-api-description-events
+  [events]="virtualScrollLoadOnDemandEvents"
+></cookbook-api-description-events>
