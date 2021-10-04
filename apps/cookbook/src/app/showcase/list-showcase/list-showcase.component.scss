@@ -13,3 +13,7 @@
 .virtual-list {
   width: map-get($breakpoints, small);
 }
+
+.experimental {
+  margin-bottom: size('m');
+}
