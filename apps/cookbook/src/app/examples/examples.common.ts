@@ -27,6 +27,7 @@ import { IconExampleComponent } from './icon-example/icon-example.component';
 import { ItemExampleComponent } from './item-example/item-example.component';
 import { LinkExampleComponent } from './link-example/link-example.component';
 import { ListExampleComponent } from './list-example/list-example.component';
+import { ListLoadOnDemandExampleComponent } from './list-load-on-demand-example/list-load-on-demand-example.component';
 import { ListNoShapeExampleComponent } from './list-no-shape-example/list-no-shape-example.component';
 import { ListSwipeExampleComponent } from './list-swipe-example/list-swipe-example.component';
 import { LoadingOverlayExampleComponent } from './loading-overlay-example/loading-overlay-example.component';
@@ -73,6 +74,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   CardThemecolorExampleComponent,
   CardElevationsExampleComponent,
   ListExampleComponent,
+  ListLoadOnDemandExampleComponent,
   ListSwipeExampleComponent,
   ListNoShapeExampleComponent,
   GridExampleComponent,

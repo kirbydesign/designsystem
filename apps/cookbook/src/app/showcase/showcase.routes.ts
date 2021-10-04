@@ -28,6 +28,7 @@ import { FormFieldShowcaseComponent } from './form-field-showcase/form-field-sho
 import { GridShowcaseComponent } from './grid-showcase/grid-showcase.component';
 import { IconShowcaseComponent } from './icon-showcase/icon-showcase.component';
 import { LinkShowcaseComponent } from './link-showcase/link-showcase.component';
+import { ListLoadOnDemandShowcaseComponent } from './list-load-on-demand-showcase/list-load-on-demand-showcase.component';
 import { ListNoShapeShowcaseComponent } from './list-no-shape-showcase/list-no-shape-showcase.component';
 import { ListShowcaseComponent } from './list-showcase/list-showcase.component';
 import { ListSwipeShowcaseComponent } from './list-swipe-showcase/list-swipe-showcase.component';
@@ -94,6 +95,10 @@ export const routes: Routes = [
       {
         path: 'list',
         component: ListShowcaseComponent,
+      },
+      {
+        path: 'list-load-on-demand',
+        component: ListLoadOnDemandShowcaseComponent,
       },
       {
         path: 'list-swipe',
