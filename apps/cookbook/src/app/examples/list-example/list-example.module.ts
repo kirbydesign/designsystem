@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { IonicModule, IonRouterOutlet } from '@ionic/angular';
 
 import { KirbyModule } from '@kirbydesign/designsystem';
 
@@ -29,7 +28,7 @@ const listExamples = [
 ];
 
 @NgModule({
-  imports: [CommonModule, KirbyModule, IonicModule],
+  imports: [CommonModule, KirbyModule],
   declarations: [...listExamples],
   exports: [...listExamples],
 })
