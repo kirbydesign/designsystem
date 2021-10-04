@@ -111,7 +111,10 @@ describe('DropdownComponent (popover version)', () => {
       expect(buttonElement.attributes['disabled']).toBeUndefined();
     });
 
-    it('should have correct item size', () => {
+    it('should have correct item size', fakeAsync(() => {
+      spectator.component.open();
+      tick(openDelayInMs);
+
       const itemElements = spectator.queryAll<HTMLElement>('kirby-item');
       expect(itemElements).toHaveLength(items.length);
       itemElements.forEach((item) => {
@@ -119,7 +122,7 @@ describe('DropdownComponent (popover version)', () => {
           '--min-height': DesignTokenHelper.dropdownItemHeight(),
         });
       });
-    });
+    }));
 
     it('should receive focus', () => {
       spectator.element.focus();
