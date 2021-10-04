@@ -197,7 +197,7 @@ export class DropdownComponent
 
   onToggle(event: MouseEvent) {
     event.stopPropagation();
-    if (!this.isOpen && !this.usePopover) {
+    if (!this.isOpen) {
       this.elementRef.nativeElement.focus();
     }
     this.toggle();
@@ -473,7 +473,7 @@ export class DropdownComponent
   @HostListener('blur', ['$event'])
   _onBlur(event?: FocusEvent) {
     if (this.disabled) return;
-    if (this.isOpen && !this.usePopover) {
+    if (this.isOpen) {
       if (!this.cardElement.nativeElement.contains(event?.relatedTarget as HTMLElement)) {
         this.close();
       }
