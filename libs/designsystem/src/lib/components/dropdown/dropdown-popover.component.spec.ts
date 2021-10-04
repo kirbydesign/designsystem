@@ -280,18 +280,19 @@ describe('DropdownComponent (popover version)', () => {
         expect(cardRect.left).toEqual(buttonRect.left);
       }));
 
-      it('open card to the left when popout=left', () => {
+      it('open card to the left when popout=left', fakeAsync(() => {
         spectator.component.popout = HorizontalDirection.left;
         spectator.element.style.cssFloat = 'right';
-        spectator.component['state'] = OpenState.open;
-        spectator.detectChanges();
+
+        spectator.component.open();
+        tick(openDelayInMs);
 
         const card = spectator.query('kirby-card');
         const buttonRect = buttonElement.getBoundingClientRect();
         const cardRect = card.getBoundingClientRect();
 
         expect(cardRect.right).toEqual(buttonRect.right);
-      });
+      }));
     });
 
     describe('when configured with expand=block', () => {
