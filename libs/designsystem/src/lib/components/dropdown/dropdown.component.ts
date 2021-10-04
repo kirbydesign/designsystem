@@ -228,16 +228,26 @@ export class DropdownComponent
     }
   }
 
+  /* Utility that makes it easier to set styles on card element 
+  when using popover*/
+  private setPopoverCardStyle(style: string, value: string) {
+    if (!this.usePopover) return;
+
+    this.renderer.setStyle(
+      this.cardElement.nativeElement,
+      style,
+      value,
+      RendererStyleFlags2.DashCase
+    );
+  }
+
   ngAfterViewInit() {
     if (this.usePopover && this.expand === 'block') {
       // TODO: Update width on dropdown resize (e.g. on window resize / orientation change)
-      const width = this.elementRef.nativeElement.getBoundingClientRect().width;
-      this.renderer.setStyle(
-        this.cardElement.nativeElement,
-        '--width',
-        `${width}px`,
-        RendererStyleFlags2.DashCase
-      );
+      const { width } = this.elementRef.nativeElement.getBoundingClientRect();
+      this.setPopoverCardStyle('--width', `${width}px`);
+      this.setPopoverCardStyle('max-width', 'unset');
+      this.setPopoverCardStyle('min-width', 'unset');
     }
     this.initializeAlignment();
   }

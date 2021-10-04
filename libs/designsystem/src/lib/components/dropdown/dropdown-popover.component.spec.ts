@@ -314,15 +314,22 @@ describe('DropdownComponent (popover version)', () => {
         expect(buttonWidth).toEqual(componentWidth);
       });
 
-      it('should render dropdown with full width', () => {
-        spectator.component['state'] = OpenState.open;
-        spectator.detectChanges();
+      it('should render dropdown with full width', fakeAsync(() => {
+        // TODO: Move to integration tests
+        spectator.component.ngAfterViewInit();
+
+        spectator.component.open();
+        tick(openDelayInMs);
+
         const card = spectator.query('kirby-card');
         const componentWidth = spectator.element.clientWidth;
         const cardWidth = card.getBoundingClientRect().width;
         expect(cardWidth).toEqual(componentWidth);
-        expect(card).toHaveComputedStyle({ 'min-width': '0px', 'max-width': 'none' });
-      });
+        expect(card).toHaveComputedStyle({
+          'min-width': '0px',
+          'max-width': 'none',
+        });
+      }));
     });
 
     describe('when closed', () => {
