@@ -4,7 +4,6 @@
   almost identic tests should make it easier to remove the ones for the old version when we have 
   to deprecate it. 
 */
-import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { fakeAsync, tick } from '@angular/core/testing';
 import { IonItem } from '@ionic/angular';
 import { createHostFactory, Spectator, SpectatorHost } from '@ngneat/spectator';
@@ -18,12 +17,6 @@ import { HorizontalDirection, PopoverComponent } from '../popover/popover.compon
 
 import { DropdownComponent } from './dropdown.component';
 import { OpenState } from './dropdown.types';
-
-@Component({
-  template: '<ng-content></ng-content>',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-})
-class OnPushHostComponent {}
 
 describe('DropdownComponent (popover version)', () => {
   const items = [
@@ -40,9 +33,7 @@ describe('DropdownComponent (popover version)', () => {
       component: DropdownComponent,
       declarations: [
         ItemComponent,
-        MockComponents(ButtonComponent, IconComponent, IonItem),
-        PopoverComponent,
-        CardComponent,
+        MockComponents(ButtonComponent, IconComponent, IonItem, PopoverComponent, CardComponent),
       ],
     });
 
@@ -270,19 +261,6 @@ describe('DropdownComponent (popover version)', () => {
     });
 
     describe('when configured with popout direction', () => {
-      it('open card to the right when popout=right', fakeAsync(() => {
-        spectator.component.popout = HorizontalDirection.right;
-
-        spectator.component.open();
-        tick(openDelayInMs);
-
-        const buttonRect = buttonElement.getBoundingClientRect();
-        const card = spectator.query('kirby-card');
-        const cardRect = card.getBoundingClientRect();
-
-        expect(cardRect.left).toEqual(buttonRect.left);
-      }));
-
       it('open card to the left when popout=left', fakeAsync(() => {
         spectator.component.popout = HorizontalDirection.left;
         spectator.element.style.cssFloat = 'right';
@@ -307,29 +285,6 @@ describe('DropdownComponent (popover version)', () => {
       it('should render as block level', () => {
         expect(spectator.element).toHaveComputedStyle({ display: 'block' });
       });
-
-      it('should render button with full width', () => {
-        const componentWidth = spectator.element.clientWidth;
-        const buttonWidth = buttonElement.getBoundingClientRect().width;
-        expect(buttonWidth).toEqual(componentWidth);
-      });
-
-      it('should render dropdown with full width', fakeAsync(() => {
-        // TODO: Move to integration tests
-        spectator.component.ngAfterViewInit();
-
-        spectator.component.open();
-        tick(openDelayInMs);
-
-        const card = spectator.query('kirby-card');
-        const componentWidth = spectator.element.clientWidth;
-        const cardWidth = card.getBoundingClientRect().width;
-        expect(cardWidth).toEqual(componentWidth);
-        expect(card).toHaveComputedStyle({
-          'min-width': '0px',
-          'max-width': 'none',
-        });
-      }));
     });
 
     describe('when closed', () => {
@@ -757,25 +712,6 @@ describe('DropdownComponent (popover version)', () => {
       });
     });
 
-    describe('when aligned to right side of viewport', () => {
-      it('should align the dropdown to the right side of button and component container ', (done) => {
-        //TODO: Move this to integration test. It requires popover to check wrapper.
-        spectator.element.style.cssFloat = 'right';
-        spectator.component.open();
-        spectator.detectChanges();
-        setTimeout(() => {
-          spectator.detectChanges();
-
-          const card = spectator.query('kirby-card');
-          const cardClientRect = card.getClientRects()[0];
-          const buttonClientRect = buttonElement.getClientRects()[0];
-
-          expect(cardClientRect.right).toEqual(buttonClientRect.right);
-          done();
-        }, openDelayInMs);
-      });
-    });
-
     describe('when disabled', () => {
       beforeEach(() => {
         spectator.component.disabled = true;
@@ -1113,52 +1049,6 @@ describe('DropdownComponent (popover version)', () => {
           expect(onChangeSpy).not.toHaveBeenCalled();
         });
       });
-    });
-  });
-
-  describe('when inside host component with ChangeDetectionStrategy.OnPush', () => {
-    let spectator: SpectatorHost<DropdownComponent>;
-    let cardElement: HTMLElement;
-
-    const createHost = createHostFactory({
-      component: DropdownComponent,
-      declarations: [
-        MockComponents(ButtonComponent, CardComponent, ItemComponent, IconComponent),
-        PopoverComponent,
-      ],
-      host: OnPushHostComponent,
-    });
-
-    beforeEach(() => {
-      spectator = createHost(`<kirby-dropdown [usePopover]="true"></kirby-dropdown>`, {
-        props: {
-          items: items,
-        },
-      });
-    });
-
-    beforeEach(fakeAsync(() => {
-      cardElement = spectator.query('kirby-card');
-      // Assert that card is initially hidden:
-      expect(cardElement).toBeHidden();
-      // Act:
-      spectator.click('button');
-      tick(openDelayInMs);
-      spectator.detectChanges();
-    }));
-
-    it('should open dropdown', () => {
-      expect(spectator.component.isOpen).toBeTruthy();
-    });
-
-    it(`should have '.is-open' css class`, () => {
-      expect(spectator.element).toHaveClass('is-open');
-    });
-
-    it('options should be visible', () => {
-      // TODO: This requires PopoverComponent to not be mocked
-      // Move it to an integration test
-      expect(cardElement).toBeVisible();
     });
   });
 
