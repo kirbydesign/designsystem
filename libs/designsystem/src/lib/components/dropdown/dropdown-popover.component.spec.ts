@@ -353,7 +353,7 @@ describe('DropdownComponent (popover version)', () => {
 
         it('should open dropdown within actual delay', async () => {
           spectator.click('button');
-          await TestHelper.whenTrue(() => spectator.component.isOpen, openDelayInMs);
+          await TestHelper.whenTrue(() => spectator.component.isOpen, openDelayInMs + 1);
           expect(spectator.component.isOpen).toBeTruthy();
         });
       });
