@@ -101,9 +101,19 @@
   @return $classes;
 }
 
-// Strips the unit by dividing it with exactly one of that unit, eg. 42px / 1px = 42
-@function unitless($number) {
-  @return $number / ($number * 0 + 1);
+/**
+ * Remove the unit of a length
+ * @param {Number} $number - Number to remove unit from
+ * @return {Number} - Unitless number
+ * 
+ * Source: https://css-tricks.com/snippets/sass/strip-unit-function/
+ */
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+
+  @return $number;
 }
 
 @mixin slotted($selectors...) {
