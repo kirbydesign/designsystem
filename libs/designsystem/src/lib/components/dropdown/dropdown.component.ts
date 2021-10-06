@@ -243,7 +243,6 @@ export class DropdownComponent
 
   ngAfterViewInit() {
     if (this.usePopover && this.expand === 'block') {
-      // TODO: Update width on dropdown resize (e.g. on window resize / orientation change)
       const { width } = this.elementRef.nativeElement.getBoundingClientRect();
       this.setPopoverCardStyle('--width', `${width}px`);
       this.setPopoverCardStyle('max-width', 'unset');
