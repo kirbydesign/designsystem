@@ -245,8 +245,8 @@ export class DropdownComponent
     if (this.usePopover && this.expand === 'block') {
       const { width } = this.elementRef.nativeElement.getBoundingClientRect();
       this.setPopoverCardStyle('--width', `${width}px`);
-      this.setPopoverCardStyle('max-width', 'unset');
-      this.setPopoverCardStyle('min-width', 'unset');
+      this.setPopoverCardStyle('max-width', 'initial');
+      this.setPopoverCardStyle('min-width', 'initial');
     }
     this.initializeAlignment();
   }
