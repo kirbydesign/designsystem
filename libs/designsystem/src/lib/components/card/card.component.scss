@@ -16,7 +16,7 @@
   overflow: hidden;
   position: relative;
   z-index: z('default');
-  width: var(--width, auto);
+  width: var(--kirby-card-width, auto);
 
   .content-wrapper {
     &.padding {

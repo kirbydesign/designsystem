@@ -244,7 +244,7 @@ export class DropdownComponent
   ngAfterViewInit() {
     if (this.usePopover && this.expand === 'block') {
       const { width } = this.elementRef.nativeElement.getBoundingClientRect();
-      this.setPopoverCardStyle('--width', `${width}px`);
+      this.setPopoverCardStyle('--kirby-card-width', `${width}px`);
       this.setPopoverCardStyle('max-width', 'initial');
       this.setPopoverCardStyle('min-width', 'initial');
     }
