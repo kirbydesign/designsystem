@@ -18,8 +18,8 @@ $margin-horizontal-total: 2 * size('s');
 
     kirby-card {
       width: 100%;
-      min-width: unset;
-      max-width: unset;
+      min-width: initial;
+      max-width: initial;
     }
   }
 
