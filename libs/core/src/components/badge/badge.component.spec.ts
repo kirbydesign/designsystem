@@ -9,7 +9,7 @@ describe('Badge', () => {
       html: `<kirby-badge></kirby-badge>`,
     });
     expect(page.root).toEqualHtml(`
-      <kirby-badge>
+      <kirby-badge class="md">
         <mock:shadow-root>
           <ion-badge>
             <slot></slot>
