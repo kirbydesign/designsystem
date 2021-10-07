@@ -5,6 +5,7 @@ import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
 const config = {
   selector: 'cookbook-dropdown-example-item-select',
   template: `<kirby-dropdown
+  usePopover="true"
   [size]="size"
   placeholder="Dropdown with event handler"
   [items]="items"

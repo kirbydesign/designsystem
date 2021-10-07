@@ -3,6 +3,7 @@ import { Component, Input } from '@angular/core';
 const config = {
   selector: 'cookbook-dropdown-example-right-aligned',
   template: `<kirby-dropdown
+  usePopover="true"
   [size]="size"
   placeholder="Right aligned (opens left)"
   [items]="['Item 1','Item 2','Item 3','Item 4','Item 5']"

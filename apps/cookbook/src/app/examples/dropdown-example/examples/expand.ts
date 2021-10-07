@@ -3,6 +3,7 @@ import { Component, Input } from '@angular/core';
 const config = {
   selector: 'cookbook-dropdown-example-expand',
   template: `<kirby-dropdown
+  usePopover="true"
   [size]="size"
   placeholder="Block level Dropdown"
   expand="block"

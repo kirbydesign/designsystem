@@ -3,6 +3,7 @@ import { Component, Input } from '@angular/core';
 const config = {
   selector: 'cookbook-dropdown-example-attention-level',
   template: `<kirby-dropdown
+  usePopover="true"
   [size]="size"
   placeholder="Dropdown with attention level"
   attentionLevel="2"
