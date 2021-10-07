@@ -1,5 +1,5 @@
 @use '../form-field-inputs.shared' as shared;
-@use '/libs/designsystem/src/lib/scss/utils';
+@use '../../../scss/utils';
 
 :host {
   &[type='number'] {

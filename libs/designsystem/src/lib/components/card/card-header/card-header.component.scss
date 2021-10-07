@@ -1,3 +1,4 @@
+@use "sass:map";
 @use '../../../scss/utils';
 
 :host {
@@ -35,7 +36,7 @@ $notification-levels: (
 );
 
 @each $color-name, $color-value in utils.$notification-colors {
-  $notification-levels: map-merge(
+  $notification-levels: map.merge(
     (
       $color-name: $color-name,
     ),

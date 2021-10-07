@@ -1,4 +1,4 @@
-@use './libs/designsystem/src/lib/scss/utils';
+@use '../../../../../../libs/designsystem/src/lib/scss/utils';
 
 $logo-size-mobile: utils.size('xl');
 $logo-size-desktop: 2 * utils.size('l');

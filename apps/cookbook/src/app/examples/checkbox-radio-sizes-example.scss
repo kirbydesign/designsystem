@@ -1,7 +1,8 @@
-@use './libs/designsystem/src/lib/scss/utils';
+@use "sass:map";
+@use '../../../../../libs/designsystem/src/lib/scss/utils';
 
 $height-measure-width: 80px;
-$default-size: map-get(utils.$checkbox-radio-sizes, 'md');
+$default-size: map.get(utils.$checkbox-radio-sizes, 'md');
 
 kirby-checkbox,
 kirby-radio {

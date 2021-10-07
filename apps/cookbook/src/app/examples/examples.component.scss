@@ -1,9 +1,10 @@
-@use './libs/designsystem/src/lib/scss/utils';
+@use "sass:list";
+@use '../../../../../libs/designsystem/src/lib/scss/utils';
 
 @mixin kirby-keys($start-index, $additional-keys: ()) {
-  $keys: join(('K', 'I', 'R', 'B', 'Y'), $additional-keys);
+  $keys: list.join(('K', 'I', 'R', 'B', 'Y'), $additional-keys);
   @each $letter in $keys {
-    $counter: index($keys, $letter);
+    $counter: list.index($keys, $letter);
     &:nth-child(#{$start-index + $counter})::before {
       content: $letter;
     }
