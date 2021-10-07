@@ -1,10 +1,10 @@
-@import '../../scss/utils';
+@use '../../scss/utils';
 
 :host {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: var(--kirby-icon-font-size, icon-font-size('sm'));
+  font-size: var(--kirby-icon-font-size, utils.icon-font-size('sm'));
   margin-left: var(--kirby-icon-margin-left, unset);
   margin-right: var(--kirby-icon-margin-right, unset);
 
@@ -15,32 +15,32 @@
 }
 
 :host(.xs) {
-  --kirby-icon-font-size: #{icon-font-size('xs')};
+  --kirby-icon-font-size: #{utils.icon-font-size('xs')};
 }
 
 :host(.sm) {
-  --kirby-icon-font-size: #{icon-font-size('sm')};
+  --kirby-icon-font-size: #{utils.icon-font-size('sm')};
 }
 
 :host(.md) {
-  --kirby-icon-font-size: #{icon-font-size('md')};
+  --kirby-icon-font-size: #{utils.icon-font-size('md')};
 }
 
 :host(.lg) {
-  --kirby-icon-font-size: #{icon-font-size('lg')};
+  --kirby-icon-font-size: #{utils.icon-font-size('lg')};
 }
 
-@each $color-name, $color-value in $main-colors {
+@each $color-name, $color-value in utils.$main-colors {
   :host(.#{$color-name}) {
-    color: get-color($color-name);
+    color: utils.get-color($color-name);
   }
 }
 
 :host-context(kirby-item) {
   &[slot='start'] {
-    margin-inline-end: size('xxs');
+    margin-inline-end: utils.size('xxs');
   }
   &[slot='end'] {
-    margin-inline-start: size('xxs');
+    margin-inline-start: utils.size('xxs');
   }
 }

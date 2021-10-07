@@ -1,19 +1,19 @@
-@import './libs/designsystem/src/lib/scss/utils';
+@use './libs/designsystem/src/lib/scss/utils';
 
 :host {
   display: flex;
   align-items: flex-end;
-  margin-bottom: size('s');
+  margin-bottom: utils.size('s');
 
   > * {
-    margin-right: size('s');
+    margin-right: utils.size('s');
   }
 
   &.wrap {
     flex-wrap: wrap;
 
     > * {
-      margin-bottom: size('s');
+      margin-bottom: utils.size('s');
     }
   }
 
@@ -27,7 +27,7 @@ kirby-avatar {
 }
 
 kirby-avatar[title] {
-  margin-bottom: size('s');
+  margin-bottom: utils.size('s');
 
   &::before {
     content: '';
@@ -35,7 +35,7 @@ kirby-avatar[title] {
     position: absolute;
     bottom: 0;
     transform: translateY(100%);
-    font-size: font-size('xs');
+    font-size: utils.font-size('xs');
     text-align: center;
   }
 

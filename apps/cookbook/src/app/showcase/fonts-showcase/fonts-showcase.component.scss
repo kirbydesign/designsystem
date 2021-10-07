@@ -1,8 +1,8 @@
-@import './libs/designsystem/src/lib/scss/utils';
+@use './libs/designsystem/src/lib/scss/utils';
 
 code {
-  background-color: get-color('medium');
-  color: get-color('medium-contrast');
+  background-color: utils.get-color('medium');
+  color: utils.get-color('medium-contrast');
   padding: 0.2rem 0.5rem;
   border-radius: 2px;
   white-space: nowrap;
@@ -20,12 +20,12 @@ code {
   code {
     padding: 0.25rem 0 0 0;
     display: block;
-    color: get-color('dark');
+    color: utils.get-color('dark');
     background-color: transparent;
   }
 
   code.highlight {
-    font-weight: font-weight('bold');
+    font-weight: utils.font-weight('bold');
   }
 }
 
@@ -45,56 +45,56 @@ code {
 
   &-header-1 {
     &::after {
-      content: '(#{font-size('xl')})';
+      content: '(#{utils.font-size('xl')})';
     }
   }
 
   &-header-2 {
     &::after {
-      content: '(#{font-size('l')})';
+      content: '(#{utils.font-size('l')})';
     }
   }
 
   &-header-3 {
     &::after {
-      content: '(#{font-size('m')})';
+      content: '(#{utils.font-size('m')})';
     }
   }
 
   &-body {
     &::after {
-      content: '(#{font-size('n')})';
+      content: '(#{utils.font-size('n')})';
     }    
   }
 
   &-body-small {
     &::after {
-      content: '(#{font-size('s')})';
+      content: '(#{utils.font-size('s')})';
     }    
   }
 
   &-body-xsmall {
     &::after {
-      content: '(#{font-size('xs')})';
+      content: '(#{utils.font-size('xs')})';
     }    
   }
 
   &-body-xxsmall {
     &::after {
-      content: '(#{font-size('xxs')})';
+      content: '(#{utils.font-size('xxs')})';
     }    
   }
 }
 
 [class^='sample-']::after {
-  color: get-text-color('danger');
-  font-size: font-size('xs');
-  margin-left: size('m');
+  color: utils.get-text-color('danger');
+  font-size: utils.font-size('xs');
+  margin-left: utils.size('m');
 }
 
 .info-box {
-  background-color: get-color('white');
+  background-color: utils.get-color('white');
   padding: 0.5rem 1rem;
   margin-right: 1rem;
-  border: 1px solid get-color('medium');
+  border: 1px solid utils.get-color('medium');
 }

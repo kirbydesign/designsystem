@@ -1,9 +1,9 @@
-@import './libs/designsystem/src/lib/scss/utils';
+@use './libs/designsystem/src/lib/scss/utils';
 
 :host {
   padding: 2px;
   width: 100%;
-  background: get-color('background-color');
+  background: utils.get-color('background-color');
   height: 100%;
   display: block;
 }
@@ -13,7 +13,7 @@ hr {
 }
 
 h2 {
-  margin-top: size('xl');
+  margin-top: utils.size('xl');
 }
 
 .footer {
@@ -21,7 +21,7 @@ h2 {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: size('s');
+  padding: utils.size('s');
 
   h2 {
     margin: 0;

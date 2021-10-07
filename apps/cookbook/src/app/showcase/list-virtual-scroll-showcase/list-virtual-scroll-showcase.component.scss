@@ -1,16 +1,16 @@
-@import './libs/designsystem/src/lib/scss/utils';
+@use './libs/designsystem/src/lib/scss/utils';
 
 .example-wrapper {
   display: flex;
   justify-content: space-between;
-  margin-top: size('xl');
-  margin-bottom: size('xl');
+  margin-top: utils.size('xl');
+  margin-bottom: utils.size('xl');
 }
 
 h2 {
-  margin-top: size('l');
+  margin-top: utils.size('l');
 }
 
 .experimental {
-  margin-bottom: size('xl');
+  margin-bottom: utils.size('xl');
 }

@@ -1,4 +1,4 @@
-@import '../../scss/utils';
+@use '../../scss/utils';
 
 ion-backdrop {
   opacity: 0.3;
@@ -19,10 +19,10 @@ ion-backdrop {
     }
   }
 
-  @include slotted('kirby-item') {
+  @include utils.slotted('kirby-item') {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
     transform: scale(1.05, 1.05);
-    border-radius: $border-radius;
+    border-radius: utils.$border-radius;
     overflow: hidden;
   }
 }
@@ -39,17 +39,17 @@ ion-backdrop {
     border-top: none;
   }
 
-  @include slotted('div:last-child kirby-item') {
-    border-bottom-left-radius: $border-radius;
-    border-bottom-right-radius: $border-radius;
+  @include utils.slotted('div:last-child kirby-item') {
+    border-bottom-left-radius: utils.$border-radius;
+    border-bottom-right-radius: utils.$border-radius;
     overflow: hidden;
   }
 
   .reorder-selected {
-    @include slotted('kirby-item') {
+    @include utils.slotted('kirby-item') {
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
       transform: scale(1.05, 1.05);
-      border-radius: $border-radius;
+      border-radius: utils.$border-radius;
       overflow: hidden;
     }
   }
@@ -63,22 +63,22 @@ kirby-card {
   overflow: inherit;
   z-index: auto;
 
-  @include slotted('div:last-child ion-reorder-group div:last-child>kirby-item') {
-    border-bottom-left-radius: $border-radius;
-    border-bottom-right-radius: $border-radius;
+  @include utils.slotted('div:last-child ion-reorder-group div:last-child>kirby-item') {
+    border-bottom-left-radius: utils.$border-radius;
+    border-bottom-right-radius: utils.$border-radius;
     overflow: hidden;
   }
 
-  @include slotted('div kirby-item') {
+  @include utils.slotted('div kirby-item') {
     z-index: 1; // for showing rounded corners on ios devices
   }
 
-  @include slotted('div:first-child>kirby-item') {
-    border-radius: $border-radius;
+  @include utils.slotted('div:first-child>kirby-item') {
+    border-radius: utils.$border-radius;
     overflow: hidden;
   }
 
-  @include slotted('div .reorder-list-active kirby-item') {
+  @include utils.slotted('div .reorder-list-active kirby-item') {
     z-index: 103;
   }
 

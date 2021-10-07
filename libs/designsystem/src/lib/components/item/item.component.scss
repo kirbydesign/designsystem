@@ -1,26 +1,33 @@
-@import '../../scss/utils';
-@import 'item.utils';
+@use '../../scss/utils';
+@use "sass:map";
+@use 'item.utils';
 
 :host {
   display: block;
   position: relative;
 
   ion-item {
-    font-size: font-size('s');
-    --min-height: #{map-get($item-heights, 'm')};
-    --padding-start: #{size('s')};
-    --inner-padding-top: #{size('xxs')};
-    --inner-padding-bottom: #{size('xxs')};
-    --inner-padding-end: #{size('s')};
+    font-size: utils.font-size('s');
+    --min-height: #{map.get(utils.$item-heights, 'm')};
+    --padding-start: #{utils.size('s')};
+    --inner-padding-top: #{utils.size('xxs')};
+    --inner-padding-bottom: #{utils.size('xxs')};
+    --inner-padding-end: #{utils.size('s')};
 
-    --background: var(--kirby-item-background, #{get-color('white')});
-    --background-activated: var(--kirby-item-background-activated, #{get-color('white-shade')});
+    --background: var(--kirby-item-background, #{utils.get-color('white')});
+    --background-activated: var(
+      --kirby-item-background-activated,
+      #{utils.get-color('white-shade')}
+    );
     // WORKAROUND: Needed to fix ignored click on scrollend
     // https://github.com/ionic-team/ionic-framework/issues/21871
     --background-activated-opacity: 0.99;
-    --background-focused: var(--kirby-item-background-focused, #{get-color('background-color')});
+    --background-focused: var(
+      --kirby-item-background-focused,
+      #{utils.get-color('background-color')}
+    );
     --background-focused-opacity: 1;
-    --background-hover: var(--kirby-item-background-hover, #{get-color('background-color')});
+    --background-hover: var(--kirby-item-background-hover, #{utils.get-color('background-color')});
     --background-hover-opacity: 1;
 
     // Prevent additional padding in iOS Safari on devices with "screen notch"
@@ -31,61 +38,61 @@
       --ion-safe-area-right: 0px;
     }
 
-    @include slotted('[slot="end"]') {
+    @include utils.slotted('[slot="end"]') {
       margin-inline-start: 0;
       margin-inline-end: 0;
       text-align: right;
     }
 
-    @include slotted('time[slot="end"]') {
-      margin-inline-start: size('xs');
+    @include utils.slotted('time[slot="end"]') {
+      margin-inline-start: utils.size('xs');
     }
 
-    @include slotted('data[slot="end"]', '[detail][slot="end"], ion-reorder[slot="end"]') {
-      margin-inline-start: size('s');
+    @include utils.slotted('data[slot="end"]', '[detail][slot="end"], ion-reorder[slot="end"]') {
+      margin-inline-start: utils.size('s');
     }
 
-    @include item-typography();
+    @include item.item-typography();
 
-    @include slotted(':not([slot])') {
+    @include utils.slotted(':not([slot])') {
       width: 100%;
     }
 
-    @include slotted('input[slot="end"], kirby-form-field[slot="end"] input') {
-      margin-inline-start: size('s');
+    @include utils.slotted('input[slot="end"], kirby-form-field[slot="end"] input') {
+      margin-inline-start: utils.size('s');
       width: auto;
       text-align: right;
     }
   }
 
   &.sm ion-item {
-    --min-height: #{map-get($item-heights, 's')};
+    --min-height: #{map.get(utils.$item-heights, 's')};
   }
 
   &.xs ion-item {
-    --min-height: #{map-get($item-heights, 'xs')};
-    --inner-padding-top: #{size('xxxs')};
-    --inner-padding-bottom: #{size('xxxs')};
+    --min-height: #{map.get(utils.$item-heights, 'xs')};
+    --inner-padding-top: #{utils.size('xxxs')};
+    --inner-padding-bottom: #{utils.size('xxxs')};
   }
 
   .outside {
-    left: size('xxxs');
+    left: utils.size('xxxs');
     margin: 0;
     position: absolute;
-    width: size('s');
+    width: utils.size('s');
     z-index: 1;
   }
 }
 
 :host-context(kirby-dropdown) ion-item {
-  --min-height: #{$dropdown-item-height};
+  --min-height: #{utils.$dropdown-item-height};
 }
 
 /* clean-css ignore:start */
 // Fixes https://github.com/kirbydesign/designsystem/issues/1745
 ion-item {
   :host-context(kirby-list-item:first-of-type) & {
-    --padding-top: #{size('xxs')};
+    --padding-top: #{utils.size('xxs')};
   }
 
   :host-context(kirby-list-item:first-of-type kirby-card) & {
@@ -93,7 +100,7 @@ ion-item {
   }
 
   :host-context(kirby-list-item:last-of-type) & {
-    --padding-bottom: #{size('xxs')};
+    --padding-bottom: #{utils.size('xxs')};
   }
 
   :host-context(kirby-list-item:last-of-type kirby-card) & {
@@ -105,8 +112,8 @@ ion-item {
 :host(.selected),
 :host-context(kirby-list .selected) {
   ion-item {
-    @include slotted(h1, h2, h3, h4, h5, h6, p, data) {
-      font-weight: font-weight('bold');
+    @include utils.slotted(h1, h2, h3, h4, h5, h6, p, data) {
+      font-weight: utils.font-weight('bold');
     }
   }
 }
@@ -114,7 +121,7 @@ ion-item {
 // Fixes https://github.com/kirbydesign/designsystem/issues/1711
 :host-context(.shape-rounded .is-single) {
   ion-item {
-    --border-radius: #{$border-radius};
+    --border-radius: #{utils.$border-radius};
   }
 }
 
@@ -137,7 +144,7 @@ ion-item {
 // Fixes https://github.com/kirbydesign/designsystem/issues/1711
 :host-context(.shape-rounded.has-sections .list-items kirby-list-item:first-of-type) {
   ion-item::part(native) {
-    border-top-left-radius: $border-radius;
-    border-top-right-radius: $border-radius;
+    border-top-left-radius: utils.$border-radius;
+    border-top-right-radius: utils.$border-radius;
   }
 }

@@ -1,12 +1,12 @@
-@import './libs/designsystem/src/lib/scss/utils';
+@use './libs/designsystem/src/lib/scss/utils';
 
 .badge-examples {
   display: inline-flex;
   kirby-badge + kirby-badge {
-    margin-left: size('s');
+    margin-left: utils.size('s');
   }
 }
 
 h2 {
-  margin-top: size('l');
+  margin-top: utils.size('l');
 }

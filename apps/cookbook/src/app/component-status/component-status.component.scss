@@ -1,4 +1,4 @@
-@import './libs/designsystem/src/lib/scss/utils';
+@use './libs/designsystem/src/lib/scss/utils';
 
 :host {
   a {
@@ -67,15 +67,15 @@
     }
 
     &.component {
-      border-top: 0.1rem solid get-color('medium');
+      border-top: 0.1rem solid utils.get-color('medium');
     }
 
     &.subcomponent,
     &.enhancement {
       vertical-align: middle;
-      border-top: 0.1rem dashed get-color('medium');
-      color: get-color('dark-tint');
-      font-size: font-size('s');
+      border-top: 0.1rem dashed utils.get-color('medium');
+      color: utils.get-color('dark-tint');
+      font-size: utils.font-size('s');
 
       td {
         &:first-child {
@@ -84,7 +84,7 @@
       }
 
       a {
-        color: get-color('dark-tint');
+        color: utils.get-color('dark-tint');
       }
 
       .vnext {
@@ -109,7 +109,7 @@
 
     &.someday-maybe,
     &.someday-maybe td a {
-      color: get-color('dark-tint');
+      color: utils.get-color('dark-tint');
       font-style: italic;
     }
   }
@@ -122,7 +122,7 @@
     }
 
     &.component {
-      font-weight: font-weight('bold');
+      font-weight: utils.font-weight('bold');
     }
   }
 
@@ -131,7 +131,7 @@
     font-size: 18px;
 
     &[name='open'] {
-      color: get-color('dark-tint');
+      color: utils.get-color('dark-tint');
     }
   }
 
@@ -140,8 +140,8 @@
 
     &.version {
       margin-left: 0.5rem;
-      --ion-color-base: #{get-color('semi-dark')};
-      --ion-color-contrast: #{get-color('white')};
+      --ion-color-base: #{utils.get-color('semi-dark')};
+      --ion-color-contrast: #{utils.get-color('white')};
     }
   }
 }

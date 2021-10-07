@@ -1,8 +1,8 @@
-@import './libs/designsystem/src/lib/scss/utils';
+@use './libs/designsystem/src/lib/scss/utils';
 
 kirby-card {
   position: relative;
-  margin-bottom: size('s');
+  margin-bottom: utils.size('s');
 }
 
 kirby-card-header {
@@ -11,21 +11,21 @@ kirby-card-header {
   }
 
   &.bg-color {
-    --kirby-card-header-color: #{get-color('dark-contrast')};
-    --kirby-card-header-background-color: #{get-color('dark')};
+    --kirby-card-header-color: #{utils.get-color('dark-contrast')};
+    --kirby-card-header-background-color: #{utils.get-color('dark')};
   }
 }
 
 kirby-card-footer {
   &.bg-color {
-    color: get-color('dark-contrast');
-    background-color: get-color('dark');
+    color: utils.get-color('dark-contrast');
+    background-color: utils.get-color('dark');
   }
 }
 
 .card-content {
-  padding: size('s');
-  background-color: get-color('light');
+  padding: utils.size('s');
+  background-color: utils.get-color('light');
 }
 
 kirby-card.show-size {

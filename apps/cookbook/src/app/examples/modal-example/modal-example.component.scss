@@ -1,10 +1,11 @@
-@import '../examples.shared';
+@use '../examples.shared';
+@use './libs/designsystem/src/lib/scss/utils';
 
 h1 {
   text-align: center;
 }
 
-@include media('>medium') {
+@include utils.im-media('>medium') {
   .mobile {
     display: none;
   }

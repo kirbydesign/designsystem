@@ -1,3 +1,5 @@
+@use "sass:map";
+@use "sass:math";
 /*
   SPACINGS
 ****************************************************************************/
@@ -58,10 +60,10 @@ $font-weight: (
 /* Icon
 ****************************************************************************/
 $icon-font-sizes: (
-  'xs': map-get($sizes, 's'),
-  'sm': map-get($sizes, 'm'),
-  'md': map-get($sizes, 'l'),
-  'lg': map-get($sizes, 'xxxl'),
+  'xs': map.get($sizes, 's'),
+  'sm': map.get($sizes, 'm'),
+  'md': map.get($sizes, 'l'),
+  'lg': map.get($sizes, 'xxxl'),
 ) !default;
 
 /*
@@ -128,13 +130,13 @@ $compact-modal-max-width: 359px;
 $modal-max-width: 720px;
 
 $modal-heights: (
-  s: floor($modal-max-width * 0.4),
-  m: floor($modal-max-width * 0.64),
-  l: floor($modal-max-width * 0.8),
+  s: math.floor($modal-max-width * 0.4),
+  m: math.floor($modal-max-width * 0.64),
+  l: math.floor($modal-max-width * 0.8),
 ) !default;
 
-$modal-default-height: map-get($modal-heights, 'm');
-$drawer-default-height: map-get($modal-heights, 's');
+$modal-default-height: map.get($modal-heights, 'm');
+$drawer-default-height: map.get($modal-heights, 's');
 
 /* Item
 ****************************************************************************/
@@ -146,7 +148,7 @@ $item-heights: (
 
 /* Dropdown
 ****************************************************************************/
-$dropdown-item-height: map-get($item-heights, 's');
+$dropdown-item-height: map.get($item-heights, 's');
 
 /* Button, Checkbox, Page, Radio
 ****************************************************************************/
@@ -155,14 +157,14 @@ $fat-finger-size: 44px;
 /* Checkbox, Radio
 ****************************************************************************/
 $checkbox-radio-sizes: (
-  'xs': map-get($sizes, 'l'),
+  'xs': map.get($sizes, 'l'),
   'sm': $fat-finger-size,
-  'md': map-get($sizes, 'xxxl'),
+  'md': map.get($sizes, 'xxxl'),
 );
 
 $checkbox-radio-spacing: (
-  'to-edge': map-get($sizes, 's'),
-  'to-label': map-get($sizes, 'xs'),
+  'to-edge': map.get($sizes, 's'),
+  'to-label': map.get($sizes, 'xs'),
 );
 
 /* Transitions

@@ -1,4 +1,4 @@
-@import '../../scss/utils';
+@use '../../scss/utils';
 
 article {
   max-width: 330px;
@@ -10,39 +10,39 @@ article {
 }
 
 .icon-outline {
-  $icon-size: size('xxl') * 2;
+  $icon-size: utils.size('xxl') * 2;
   width: $icon-size;
   height: $icon-size;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: size('m');
+  margin-bottom: utils.size('m');
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border: size('xxxs') solid get-color('medium');
+  border: utils.size('xxxs') solid utils.get-color('medium');
   border-radius: 50%;
 }
 
 kirby-icon {
-  color: get-color('medium');
+  color: utils.get-color('medium');
 }
 
 h3.title {
-  margin-bottom: size('xxs');
+  margin-bottom: utils.size('xxs');
 }
 
 p.subtitle {
-  margin-bottom: size('m');
+  margin-bottom: utils.size('m');
   white-space: pre-wrap;
 }
 
-@each $color-name, $color-value in $main-colors {
+@each $color-name, $color-value in utils.$main-colors {
   :host(.#{$color-name}) {
     .icon-outline {
-      border-color: #{get-color($color-name)};
+      border-color: #{utils.get-color($color-name)};
     }
     kirby-icon {
-      color: #{get-color($color-name)};
+      color: #{utils.get-color($color-name)};
     }
   }
 }

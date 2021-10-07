@@ -1,11 +1,11 @@
-@import './libs/designsystem/src/lib/scss/utils';
+@use './libs/designsystem/src/lib/scss/utils';
 
 h2:not(:first-child) {
-  margin-top: size('l');
+  margin-top: utils.size('l');
 }
 
 cookbook-example-viewer > *:first-child {
   display: block;
-  margin-bottom: size('s');
+  margin-bottom: utils.size('s');
   max-width: 550px;
 }

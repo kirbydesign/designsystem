@@ -1,4 +1,4 @@
-@import './libs/designsystem/src/lib/scss/utils';
+@use './libs/designsystem/src/lib/scss/utils';
 
 kirby-card {
   z-index: 3; // Ensure dropdown opens over configuration checkboxes
@@ -8,12 +8,12 @@ kirby-card {
   margin-bottom: 20px;
 
   kirby-card-footer {
-    height: size('xxl');
+    height: utils.size('xxl');
     display: flex;
     flex-grow: 1;
     align-items: stretch;
     padding: 0;
-    border-top: 1px solid get-color('medium');
+    border-top: 1px solid utils.get-color('medium');
 
     button {
       flex: 1;

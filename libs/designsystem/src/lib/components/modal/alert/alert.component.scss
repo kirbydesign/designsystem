@@ -1,11 +1,11 @@
-@import '../../../scss/utils';
+@use '../../../scss/utils';
 
 article {
   overflow: hidden;
-  padding: size('s');
-  padding-top: size('m');
-  @include media('<small') {
-    padding: size('xxs');
+  padding: utils.size('s');
+  padding-top: utils.size('m');
+  @include utils.im-media('<small') {
+    padding: utils.size('xxs');
   }
 }
 

@@ -1,4 +1,4 @@
-@import '../showcase.shared';
+@use '../showcase.shared' as utils;
 
 cookbook-iphone {
   float: right;
@@ -8,7 +8,7 @@ cookbook-iphone {
   display: none;
 }
 
-@include media('>medium') {
+@include utils.im-media('>medium') {
   .mobile {
     display: none;
   }

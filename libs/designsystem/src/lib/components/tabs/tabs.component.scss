@@ -1,4 +1,4 @@
-@import '../../scss/utils';
+@use '../../scss/utils';
 
 :host(:not(.tab-bar-bottom-hidden)) {
   --kirby-page-footer-safe-area-bottom: 0px;
@@ -6,9 +6,9 @@
 
 ion-tabs {
   ion-tab-bar {
-    --background: rgba(#{get-color('white-rgb')}, 0.94);
-    --border: 1px solid #{get-color('light')};
-    --color: #{get-color('black')};
+    --background: rgba(#{utils.get-color('white-rgb')}, 0.94);
+    --border: 1px solid #{utils.get-color('light')};
+    --color: #{utils.get-color('black')};
     display: flex;
     max-width: var(--kirby-tab-bar-max-width, none);
     justify-content: center;
@@ -24,13 +24,13 @@ ion-tabs {
     }
   }
 
-  @include media('>=medium') {
+  @include utils.im-media('>=medium') {
     --kirby-tab-bar-height: 70px;
   }
 
   // move tabs to top of screen if not touch and large device
-  @include media('>=large') {
-    @include not-touch {
+  @include utils.im-media('>=large') {
+    @include utils.not-touch {
       flex-direction: column-reverse;
       // Ensure page-footer falls back to safe-area default
       --kirby-page-footer-safe-area-bottom: initial;

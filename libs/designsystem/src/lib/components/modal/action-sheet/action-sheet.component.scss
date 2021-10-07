@@ -1,12 +1,12 @@
-@import '../../../scss/utils';
+@use '../../../scss/utils';
 
-$margin-horizontal: size('l');
-$margin-horizontal-narrow: size('s');
+$margin-horizontal: utils.size('l');
+$margin-horizontal-narrow: utils.size('s');
 $max-width: 375px;
 
 :host {
   --kirby_internal_margin_horizontal_default: #{$margin-horizontal};
-  @include media('<small') {
+  @include utils.im-media('<small') {
     --kirby_internal_margin_horizontal_default: #{$margin-horizontal-narrow};
   }
 
@@ -28,21 +28,21 @@ $max-width: 375px;
 kirby-card {
   align-self: stretch;
   pointer-events: auto;
-  box-shadow: get-elevation(8);
+  box-shadow: utils.get-elevation(8);
 
   button[kirby-button] {
     margin: 0;
     border-radius: 0;
     &:not(:focus) {
-      border-top: 1px solid get-color('background-color');
+      border-top: 1px solid utils.get-color('background-color');
     }
   }
 }
 
 .cancel-btn {
-  font-weight: font-weight('bold');
-  margin-top: size('s');
-  margin-bottom: size('m');
+  font-weight: utils.font-weight('bold');
+  margin-top: utils.size('s');
+  margin-bottom: utils.size('m');
   pointer-events: auto;
-  box-shadow: get-elevation(8);
+  box-shadow: utils.get-elevation(8);
 }

@@ -1,29 +1,29 @@
-@import './libs/designsystem/src/lib/scss/utils';
+@use './libs/designsystem/src/lib/scss/utils';
 
 :host {
   display: flex;
   flex-direction: column;
   align-items: center;
   min-height: 100%;
-  background: get-color('background-color');
-  padding: size('s');
+  background: utils.get-color('background-color');
+  padding: utils.size('s');
 
-  @include media('>=medium') {
-    padding: size('l');
+  @include utils.im-media('>=medium') {
+    padding: utils.size('l');
   }
 
   h2 {
-    margin-bottom: size('xxxs');
+    margin-bottom: utils.size('xxxs');
     &:not(first-of-type) {
-      margin-top: size('l');
+      margin-top: utils.size('l');
     }
   }
 
   h3 {
-    font-size: font-size('xs');
-    color: get-color('semi-dark');
+    font-size: utils.font-size('xs');
+    color: utils.get-color('semi-dark');
     text-transform: uppercase;
-    margin-top: size('xs');
-    margin-bottom: size('xxxs');
+    margin-top: utils.size('xs');
+    margin-bottom: utils.size('xxxs');
   }
 }

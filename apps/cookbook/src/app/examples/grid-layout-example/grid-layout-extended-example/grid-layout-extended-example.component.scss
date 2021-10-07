@@ -1,8 +1,8 @@
-@import './libs/designsystem/src/lib/scss/utils';
+@use './libs/designsystem/src/lib/scss/utils';
 
 /* Configure grid properties */
 $columns: 12;
-$gap: size('m');
+$gap: utils.size('m');
 
 /* Declare the grid container */
 .grid-container {
@@ -17,14 +17,14 @@ $gap: size('m');
 }
 
 /* Tablet size and above */
-@include media('>=medium') {
+@include utils.im-media('>=medium') {
   .half-at-tablet-up {
     grid-column: span ($columns / 2);
   }
 }
 
 /* Desktop size and above */
-@include media('>=large') {
+@include utils.im-media('>=large') {
   .half-at-desktop-up {
     grid-column: span ($columns / 2);
   }

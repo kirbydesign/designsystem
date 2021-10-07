@@ -1,6 +1,6 @@
-@import './libs/designsystem/src/lib/scss/utils';
+@use './libs/designsystem/src/lib/scss/utils';
 h4 {
-  margin: size('s') 0;
+  margin: utils.size('s') 0;
 }
 
 pre {
@@ -11,11 +11,11 @@ pre {
     right: 0;
     top: 0;
     line-height: 1;
-    color: get-text-color('semi-dark');
-    border: 1px solid get-color('medium');
+    color: utils.get-text-color('semi-dark');
+    border: 1px solid utils.get-color('medium');
     border-top: none;
     border-right: none;
-    padding: size('xxxxs');
+    padding: utils.size('xxxxs');
     font-size: 0.75em;
   }
 }

@@ -1,11 +1,11 @@
-@import '../../scss/utils';
+@use '../../scss/utils';
 
-$dropdown-max-height: 8 * $dropdown-item-height;
-$margin-horizontal-total: 2 * size('s');
+$dropdown-max-height: 8 * utils.$dropdown-item-height;
+$margin-horizontal-total: 2 * utils.size('s');
 
 :host {
   --kirby_internal_min-screen-width: 320px;
-  @include media('>=small') {
+  @include utils.im-media('>=small') {
     --kirby_internal_min-screen-width: 375px;
   }
 
@@ -30,17 +30,17 @@ $margin-horizontal-total: 2 * size('s');
 
   // Only apply focus ring if pointer device can hover
   // (effectively desktop/mouse devices):
-  @include focus() {
+  @include utils.focus() {
     > button,
     > button.attention-level3 {
-      border-color: $focus-ring-color;
+      border-color: utils.$focus-ring-color;
     }
   }
 
   &.error,
   &.ng-touched.ng-invalid {
     > button {
-      border-color: get-color('danger');
+      border-color: utils.get-color('danger');
     }
   }
 }
@@ -70,10 +70,10 @@ kirby-card {
   position: absolute;
   width: 100%;
   max-height: $dropdown-max-height;
-  margin-top: size('xxxs');
+  margin-top: utils.size('xxxs');
   overflow-y: auto;
-  box-shadow: get-elevation(8);
-  z-index: z('dropdown');
+  box-shadow: utils.get-elevation(8);
+  z-index: utils.z('dropdown');
 }
 
 :host(.is-opening) {
@@ -84,7 +84,7 @@ kirby-card {
 
 :host(.is-open) {
   & > button {
-    box-shadow: get-elevation(8);
+    box-shadow: utils.get-elevation(8);
   }
 
   kirby-card {
@@ -103,14 +103,14 @@ kirby-card {
 :host(.popout-up) {
   kirby-card {
     top: 0;
-    margin-top: -#{size('xxxs')};
+    margin-top: -#{utils.size('xxxs')};
     transform: translateY(-100%);
   }
 
   &.is-open {
     > button {
       //Move button on top of card's shadow:
-      z-index: z('dropdown') + 1;
+      z-index: utils.z('dropdown') + 1;
     }
   }
 }
@@ -118,7 +118,7 @@ kirby-card {
 :host-context(kirby-calendar) {
   > button {
     border-color: transparent;
-    font-weight: font-weight('bold');
+    font-weight: utils.font-weight('bold');
     font-size: initial;
   }
 

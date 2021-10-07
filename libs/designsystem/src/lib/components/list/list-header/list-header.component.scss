@@ -1,9 +1,9 @@
-@import '../../../scss/utils';
+@use '../../../scss/utils';
 :host {
   background-color: transparent;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-  padding: size('m');
+  padding: utils.size('m');
 }

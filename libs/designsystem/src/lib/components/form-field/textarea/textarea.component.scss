@@ -1,11 +1,12 @@
-@import '../form-field-inputs.shared';
+@use '../form-field-inputs.shared';
+@use '../../../scss/utils';
 
 :host {
   font-family: var(--kirby-font-family);
 
   resize: none;
 
-  @include media('>=medium') {
+  @include utils.im-media('>=medium') {
     resize: vertical;
   }
 }

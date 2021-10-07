@@ -1,4 +1,4 @@
-@import '../../scss/utils';
+@use '../../scss/utils';
 
 :host {
   left: 0px;
@@ -9,5 +9,5 @@
   contain: size layout style;
   z-index: 0;
   overflow: hidden;
-  background-color: get-color('background-color');
+  background-color: utils.get-color('background-color');
 }

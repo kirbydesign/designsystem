@@ -1,20 +1,20 @@
-@import './libs/designsystem/src/lib/scss/utils';
+@use './libs/designsystem/src/lib/scss/utils';
 
-$list-margin: size('s');
-$link-padding: 5px size('s');
+$list-margin: utils.size('s');
+$link-padding: 5px utils.size('s');
 $link-border-radius: 3px;
-$menu-padding-mobile: size('m');
-$divider-inset: size('xxxxs');
-$divider-spacing: size('xxs');
+$menu-padding-mobile: utils.size('m');
+$divider-inset: utils.size('xxxxs');
+$divider-spacing: utils.size('xxs');
 
 :host {
-  @include media('>=large') {
+  @include utils.im-media('>=large') {
     grid-area: sidebar;
   }
 }
 
 nav {
-  @include media('>=large') {
+  @include utils.im-media('>=large') {
     display: none;
   }
 }
@@ -24,12 +24,12 @@ section {
   position: absolute;
   min-height: 100vh;
   top: 0;
-  z-index: z('modal');
-  background-color: get-color('white');
+  z-index: utils.z('modal');
+  background-color: utils.get-color('white');
   padding: 0 $menu-padding-mobile;
-  box-shadow: get-elevation(4);
+  box-shadow: utils.get-elevation(4);
 
-  @include media('>=large') {
+  @include utils.im-media('>=large') {
     box-shadow: none;
     display: block;
     position: static;
@@ -44,22 +44,22 @@ section {
 
   a {
     text-decoration: none;
-    color: get-text-color('semi-dark');
+    color: utils.get-text-color('semi-dark');
     display: block;
     padding: $link-padding;
-    margin: 0 size('xxxxs');
+    margin: 0 utils.size('xxxxs');
     border-radius: $link-border-radius;
 
     &:hover,
     &:focus {
-      color: get-text-color('black');
-      background-color: get-color('light');
+      color: utils.get-text-color('black');
+      background-color: utils.get-color('light');
     }
 
     &.is-selected {
-      color: get-text-color('black');
+      color: utils.get-text-color('black');
       font-weight: bold;
-      background-color: get-color('semi-light');
+      background-color: utils.get-color('semi-light');
     }
 
     &.is-hidden {
@@ -86,8 +86,8 @@ section {
 }
 
 hr {
-  margin: size('xxxs'), 0;
-  border: solid 1px get-color('light');
+  margin: utils.size('xxxs'), 0;
+  border: solid 1px utils.get-color('light');
   border-bottom: none;
   margin-block-start: $divider-spacing;
   margin-block-end: $divider-spacing;

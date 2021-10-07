@@ -1,5 +1,5 @@
-@import '../../scss/utils';
+@use '../../scss/utils';
 
 .toggle-checked {
-  --background-checked: #{get-color('success')};
+  --background-checked: #{utils.get-color('success')};
 }

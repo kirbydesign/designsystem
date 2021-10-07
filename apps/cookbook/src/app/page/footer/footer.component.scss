@@ -1,10 +1,10 @@
-@import './libs/designsystem/src/lib/scss/utils';
+@use './libs/designsystem/src/lib/scss/utils';
 
 :host {
   grid-area: footer;
-  background-color: get-color('white');
+  background-color: utils.get-color('white');
   text-align: center;
-  padding: size('xl') 0;
+  padding: utils.size('xl') 0;
   p {
     margin: 0;
   }

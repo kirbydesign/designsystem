@@ -1,9 +1,9 @@
-@import '../../scss/utils';
+@use '../../scss/utils';
 
 .spinner {
   overflow: hidden;
-  width: size('l');
-  height: size('l');
+  width: utils.size('l');
+  height: utils.size('l');
   position: relative;
   margin: 0 auto;
 }
@@ -13,7 +13,7 @@
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background-color: get-color('primary');
+  background-color: utils.get-color('primary');
   opacity: 0.6;
   position: absolute;
   top: 0;

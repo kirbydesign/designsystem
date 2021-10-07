@@ -1,10 +1,10 @@
-@import './libs/designsystem/src/lib/scss/utils';
+@use './libs/designsystem/src/lib/scss/utils';
 
 :host {
   display: block;
-  margin-bottom: size('s');
+  margin-bottom: utils.size('s');
 
   a {
-    margin-right: size('s');
+    margin-right: utils.size('s');
   }
 }

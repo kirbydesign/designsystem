@@ -1,5 +1,6 @@
-@import './avatar-examples.shared.scss';
+@use './avatar-examples.shared.scss';
+@use '/libs/designsystem/src/lib/scss/utils';
 
 :host {
-  padding: size('l');
+  padding: utils.size('l');
 }

@@ -1,16 +1,19 @@
-@import 'utils';
-@import './base/ionic';
-@import './base/typography';
-@import './base/line-clamp';
+@use "sass:map";
+@use "sass:math";
+@use 'utils';
+@use 'base/ionic';
+@use 'base/typography';
+@use 'base/line-clamp';
+@use "base/functions";
 
 :root,
 :host {
   --kirby-font-family: 'Roboto';
   font-family: var(--kirby-font-family);
-  @each $color, $color-name in $kirby-colors {
+  @each $color, $color-name in utils.$kirby-colors {
     --kirby-#{$color}: #{$color-name};
   }
-  @each $color, $color-name in $text-colors {
+  @each $color, $color-name in utils.$text-colors {
     --kirby-text-color-#{$color}: #{$color-name};
   }
   --kirby-page-max-width: 1366px;
@@ -26,12 +29,12 @@
 }
 
 @function get-drawer-additional-padding-top() {
-  $modal-close-button-inner-height: size('l'); // Todo: Move to / get from shared var
-  $modal-close-button-vertical-margin: size('xxxs') * 2; // Todo: Move to / get from shared var
+  $modal-close-button-inner-height: functions.size('l'); // Todo: Move to / get from shared var
+  $modal-close-button-vertical-margin: functions.size('xxxs') * 2; // Todo: Move to / get from shared var
   $modal-header-vertical-padding: 3px * 2; // 3px defined by Ionic
   $modal-header-total-height: $modal-close-button-inner-height + $modal-close-button-vertical-margin +
     $modal-header-vertical-padding;
-  $modal-header-vertical-center: round($modal-header-total-height / 2);
+  $modal-header-vertical-center: math.round($modal-header-total-height / 2);
   @return $modal-header-vertical-center;
 }
 
@@ -66,19 +69,19 @@ ion-modal.kirby-overlay {
 
   &.kirby-modal {
     box-sizing: border-box;
-    --background: var(--kirby-modal-background, #{get-color('background-color')});
+    --background: var(--kirby-modal-background, #{functions.get-color('background-color')});
     --border-radius: 0;
     --height: auto;
 
     &.kirby-modal-compact {
-      --border-radius: #{$border-radius};
-      --max-width: #{$compact-modal-max-width};
+      --border-radius: #{utils.$border-radius};
+      --max-width: #{utils.$compact-modal-max-width};
       text-align: center;
     }
 
     &.kirby-drawer {
-      --min-height: #{$drawer-default-height};
-      --kirby-modal-padding-top: calc(var(--kirby-safe-area-top, 0px) + #{size('m')});
+      --min-height: #{utils.$drawer-default-height};
+      --kirby-modal-padding-top: calc(var(--kirby-safe-area-top, 0px) + #{functions.size('m')});
       padding-top: var(--kirby-modal-padding-top);
       align-items: flex-end;
 
@@ -89,12 +92,12 @@ ion-modal.kirby-overlay {
       }
 
       .modal-wrapper {
-        border-top-left-radius: #{$border-radius};
-        border-top-right-radius: #{$border-radius};
+        border-top-left-radius: #{utils.$border-radius};
+        border-top-right-radius: #{utils.$border-radius};
       }
     }
 
-    @include media('<medium') {
+    @include utils.im-media('<medium') {
       &:not(.kirby-drawer):not(.kirby-modal-compact) {
         --height: 100%;
       }
@@ -106,43 +109,43 @@ ion-modal.kirby-overlay {
 
     &.modal-card:not(.kirby-drawer) {
       .modal-wrapper {
-        @include media('<medium') {
+        @include utils.im-media('<medium') {
           // Reset Ionic Card style height + top border radius:
           --height: 100%;
           border-top-left-radius: 0;
           border-top-right-radius: 0;
         }
 
-        @include media('>=medium') {
+        @include utils.im-media('>=medium') {
           // Reset Ionic Card style border radius:
-          border-radius: $border-radius;
+          border-radius: utils.$border-radius;
         }
       }
     }
 
-    @include media('>=medium') {
-      --width: #{$modal-max-width};
-      --border-radius: #{$border-radius};
-      --box-shadow: #{get-elevation(8)};
+    @include utils.im-media('>=medium') {
+      --width: #{utils.$modal-max-width};
+      --border-radius: #{utils.$border-radius};
+      --box-shadow: #{functions.get-elevation(8)};
 
       &:not(.kirby-modal-compact) {
         --max-height: 100%;
-        --kirby-modal-padding-top-base: #{size('xl')};
+        --kirby-modal-padding-top-base: #{functions.size('xl')};
         --kirby-modal-padding-top: var(--kirby-modal-padding-top-base);
         padding-top: var(--kirby-modal-padding-top);
 
         &:not(.kirby-drawer) {
-          --min-height: #{$modal-default-height};
+          --min-height: #{utils.$modal-default-height};
           align-items: flex-start;
 
           &.kirby-modal-small {
-            --min-height: #{map-get($modal-heights, 's')};
+            --min-height: #{map.get(utils.$modal-heights, 's')};
           }
           &.kirby-modal-medium {
-            --min-height: #{map-get($modal-heights, 'm')};
+            --min-height: #{map.get(utils.$modal-heights, 'm')};
           }
           &.kirby-modal-large {
-            --min-height: #{map-get($modal-heights, 'l')};
+            --min-height: #{map.get(utils.$modal-heights, 'l')};
           }
 
           &.kirby-modal-full-height .modal-wrapper,
@@ -181,12 +184,12 @@ ion-modal.kirby-overlay {
   }
 
   &.kirby-alert {
-    --background: #{get-color('background-color')};
-    --border-radius: #{$border-radius};
-    --box-shadow: #{get-elevation(8)};
+    --background: #{functions.get-color('background-color')};
+    --border-radius: #{utils.$border-radius};
+    --box-shadow: #{functions.get-elevation(8)};
 
     .modal-wrapper {
-      max-width: $alert-max-width;
+      max-width: utils.$alert-max-width;
       height: auto;
       text-align: center;
     }
@@ -194,8 +197,8 @@ ion-modal.kirby-overlay {
 }
 
 ion-loading.kirby-loading-overlay {
-  --backdrop-opacity: #{$loading-overlay-backdrop-opacity};
-  --ion-backdrop-color: #{get-color('background-color')};
+  --backdrop-opacity: #{utils.$loading-overlay-backdrop-opacity};
+  --ion-backdrop-color: #{functions.get-color('background-color')};
   .loading-wrapper {
     --background: transparent;
   }
@@ -207,15 +210,15 @@ ion-loading.kirby-loading-overlay {
   text-align: center;
 
   // Set default colors
-  --background: #{get-color('success')};
-  --color: #{get-color('success-contrast')};
-  --button-color: #{get-color('success-contrast')};
+  --background: #{functions.get-color('success')};
+  --color: #{functions.get-color('success-contrast')};
+  --button-color: #{functions.get-color('success-contrast')};
 
-  @each $color-name, $color-value in $notification-colors {
+  @each $color-name, $color-value in utils.$notification-colors {
     &.#{$color-name} {
-      --background: #{get-color($color-name)};
-      --color: #{get-color($color-name + '-contrast')};
-      --button-color: #{get-color($color-name + '-contrast')};
+      --background: #{functions.get-color($color-name)};
+      --color: #{functions.get-color($color-name + '-contrast')};
+      --button-color: #{functions.get-color($color-name + '-contrast')};
     }
   }
 }
@@ -257,5 +260,5 @@ ion-loading.kirby-loading-overlay {
   background-position: right 50%;
   background-size: $icon-scaling-factor;
   //place icon to the right of text, with icons own width + the actual spacing
-  padding-right: calc(#{$icon-scaling-factor} + #{size('xxxs')});
+  padding-right: calc(#{$icon-scaling-factor} + #{functions.size('xxxs')});
 }

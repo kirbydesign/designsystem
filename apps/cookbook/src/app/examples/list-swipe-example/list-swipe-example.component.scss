@@ -1,14 +1,14 @@
-@import './libs/designsystem/src/lib/scss/utils';
+@use './libs/designsystem/src/lib/scss/utils';
 
-$item-height: size('xxxl');
-$dot-size: size('xxs');
-$dot-margin: size('xxxs');
+$item-height: utils.size('xxxl');
+$dot-size: utils.size('xxs');
+$dot-margin: utils.size('xxxs');
 
 :host {
   display: block;
   height: 100%;
-  padding: size('s');
-  background-color: get-color('background-color');
+  padding: utils.size('s');
+  background-color: utils.get-color('background-color');
 }
 
 .flag {

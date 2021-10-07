@@ -1,19 +1,19 @@
-@import '../../scss/utils';
+@use '../../scss/utils';
 
 :host-context(kirby-card),
 :host-context(.kirby-color-brightness-white) {
-  --kirby-divider-color: #{get-color('background-color')};
+  --kirby-divider-color: #{utils.get-color('background-color')};
 }
 
 :host-context(.kirby-color-brightness-light) {
-  --kirby-divider-color: #{get-color('medium')};
+  --kirby-divider-color: #{utils.get-color('medium')};
 }
 
 hr {
-  margin-top: size('xxs');
-  margin-bottom: size('xxs');
+  margin-top: utils.size('xxs');
+  margin-bottom: utils.size('xxs');
   border: 0;
-  border-top: 1px solid var(--kirby-divider-color, get-color('medium'));
+  border-top: 1px solid var(--kirby-divider-color, utils.get-color('medium'));
 
   &.no-margin {
     margin-top: 0;

@@ -1,4 +1,4 @@
-@import '../../scss/utils';
+@use '../../scss/utils';
 
 :root {
   --kirby-badge-elevation: none;
@@ -10,8 +10,8 @@
 }
 
 :host {
-  --kirby-badge-background-color: #{get-color('white')};
-  --kirby-badge-color: #{get-color('white-contrast')};
+  --kirby-badge-background-color: #{utils.get-color('white')};
+  --kirby-badge-color: #{utils.get-color('white-contrast')};
   --ion-color-base: var(--kirby-badge-background-color);
   --ion-color-contrast: var(--kirby-badge-color);
 
@@ -20,7 +20,7 @@
   right: var(--kirby-badge-right);
   top: var(--kirby-badge-top);
   z-index: var(--kirby-badge-zindex);
-  font-size: font-size('xxs');
+  font-size: utils.font-size('xxs');
   line-height: 1;
 
   ion-badge {
@@ -38,25 +38,25 @@
   }
 
   ::ng-deep kirby-icon {
-    --kirby-icon-font-size: #{font-size('n')};
+    --kirby-icon-font-size: #{utils.font-size('n')};
     position: absolute;
     top: 0;
     left: 0;
   }
 }
 
-@each $color-name, $color-value in $notification-colors {
+@each $color-name, $color-value in utils.$notification-colors {
   :host(.#{$color-name}) {
-    --kirby-badge-background-color: #{get-color($color-name)};
-    --kirby-badge-color: #{get-color($color-name + '-contrast')};
+    --kirby-badge-background-color: #{utils.get-color($color-name)};
+    --kirby-badge-color: #{utils.get-color($color-name + '-contrast')};
   }
 }
 
 :host(.danger) {
-  --kirby-badge-color: #{get-color('white')};
+  --kirby-badge-color: #{utils.get-color('white')};
 }
 
 :host(.white) {
-  --kirby-badge-background-color: #{get-color('white')};
-  --kirby-badge-color: #{get-color('white-contrast')};
+  --kirby-badge-background-color: #{utils.get-color('white')};
+  --kirby-badge-color: #{utils.get-color('white-contrast')};
 }

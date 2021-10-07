@@ -1,20 +1,20 @@
-@import '../../../scss/utils';
+@use '../../../scss/utils';
 
-$padding-horizontal: size('s');
-$padding-vertical: size('xxs');
+$padding-horizontal: utils.size('s');
+$padding-vertical: utils.size('xxs');
 
 ion-footer {
-  box-shadow: get-elevation(8);
+  box-shadow: utils.get-elevation(8);
   display: flex;
   justify-content: var(--kirby-modal-footer-justify-content, center);
   align-items: center;
-  background-color: var(--kirby-modal-footer-background, get-color('white'));
-  color: var(--kirby-modal-footer-color, get-color('white-contrast'));
+  background-color: var(--kirby-modal-footer-background, utils.get-color('white'));
+  color: var(--kirby-modal-footer-color, utils.get-color('white-contrast'));
   padding: $padding-vertical $padding-horizontal;
   padding-bottom: calc(#{$padding-vertical} + var(--kirby-modal-footer-safe-area-bottom, 0px));
 }
 
-@include media('<medium') {
+@include utils.im-media('<medium') {
   :host {
     --kirby-modal-footer-safe-area-bottom: var(--kirby-safe-area-bottom);
   }
@@ -26,14 +26,14 @@ ion-footer {
 
 :host(.snap-to-keyboard) {
   ion-footer {
-    transition: transform $soft-keyboard-transition-leave;
+    transition: transform utils.$soft-keyboard-transition-leave;
   }
 }
 
 :host-context(.keyboard-visible) {
   &.snap-to-keyboard {
     ion-footer {
-      transition: transform $soft-keyboard-transition-enter;
+      transition: transform utils.$soft-keyboard-transition-enter;
       // Prevent clean-css from replacing `0px` with `0` or `calc()` won't work:
       /* clean-css ignore:start */
       transform: translateY(
@@ -45,5 +45,5 @@ ion-footer {
 }
 
 :host(.light) ion-footer {
-  background-color: get-color('background-color');
+  background-color: utils.get-color('background-color');
 }

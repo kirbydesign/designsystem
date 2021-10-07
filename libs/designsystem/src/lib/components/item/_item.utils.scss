@@ -1,10 +1,10 @@
-@import '../../scss/utils';
+@use '../../scss/utils';
 
 @mixin item-typography() {
-  @include slotted(h1, h2, h3, h4, h5, h6, p, data) {
-    font-size: font-size('n');
-    line-height: line-height('n');
-    color: get-text-color('black');
+  @include utils.slotted(h1, h2, h3, h4, h5, h6, p, data) {
+    font-size: utils.font-size('n');
+    line-height: utils.line-height('n');
+    color: utils.get-text-color('black');
     display: block;
     margin: 0;
     white-space: nowrap;
@@ -13,24 +13,24 @@
     font-weight: normal;
 
     &.kirby-text-bold {
-      font-weight: font-weight('bold');
+      font-weight: utils.font-weight('bold');
     }
   }
 
-  @include slotted(p) {
-    font-size: font-size('s');
+  @include utils.slotted(p) {
+    font-size: utils.font-size('s');
   }
 
-  @include slotted('[subtitle]', '[detail]') {
-    font-size: font-size('xs');
-    line-height: line-height('xs');
+  @include utils.slotted('[subtitle]', '[detail]') {
+    font-size: utils.font-size('xs');
+    line-height: utils.line-height('xs');
   }
 
-  @include slotted('[subtitle]:not(:last-child)') {
-    margin-bottom: size('xxxs');
+  @include utils.slotted('[subtitle]:not(:last-child)') {
+    margin-bottom: utils.size('xxxs');
   }
 
-  @include slotted('[detail]') {
-    color: get-text-color('semi-dark');
+  @include utils.slotted('[detail]') {
+    color: utils.get-text-color('semi-dark');
   }
 }

@@ -1,16 +1,16 @@
-@import '../../scss/utils';
-@import 'slide-button.component.shared';
+@use '../../scss/utils';
+@use 'slide-button.component.shared' as shared;
 
 @mixin _slider-thumb() {
   -webkit-appearance: none;
   border-radius: 50%;
-  background-color: $slider-thumb-bg-color;
+  background-color: shared.$slider-thumb-bg-color;
   background-image: url('/assets/kirby/icons/svg/arrow-more.svg');
   background-repeat: no-repeat;
   background-position: center;
-  background-size: size('m');
-  width: $slide-button-width;
-  height: $slide-button-width;
+  background-size: utils.size('m');
+  width: shared.$slide-button-width;
+  height: shared.$slide-button-width;
   border: none;
   cursor: pointer;
 }
@@ -18,7 +18,7 @@
 :host {
   position: relative;
   display: inline-block;
-  width: $slide-button-container-width;
+  width: shared.$slide-button-container-width;
   user-select: none;
 
   &[expand='block'] {
@@ -31,10 +31,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: $slide-button-text-color;
-    background-color: $slide-button-container-bg-color;
-    height: $slide-button-container-height;
-    border-radius: $slide-button-container-radius;
+    color: shared.$slide-button-text-color;
+    background-color: shared.$slide-button-container-bg-color;
+    height: shared.$slide-button-container-height;
+    border-radius: shared.$slide-button-container-radius;
   }
 
   @for $i from 1 through 10 {
@@ -46,13 +46,13 @@
 
   .slide-button-text {
     position: absolute;
-    font-size: font-size('n');
+    font-size: utils.font-size('n');
     margin: 0;
     line-height: 1;
     z-index: 1;
     width: 100%;
     text-align: center;
-    padding: $slide-button-text-padding;
+    padding: shared.$slide-button-text-padding;
   }
 
   .slide-button {

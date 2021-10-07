@@ -1,4 +1,4 @@
-@import './libs/designsystem/src/lib/scss/utils';
+@use './libs/designsystem/src/lib/scss/utils';
 
 :host {
   display: inline-block;
@@ -17,35 +17,35 @@
 }
 
 fieldset {
-  border: 1px solid var(--kirby-border-color, get-color('medium'));
+  border: 1px solid var(--kirby-border-color, utils.get-color('medium'));
 
   legend {
-    color: get-text-color('semi-dark');
+    color: utils.get-text-color('semi-dark');
     text-align: var(--text-align, initial);
   }
 }
 
 kirby-card {
   position: fixed;
-  z-index: z('default') + 1;
+  z-index: utils.z('default') + 1;
   top: 0;
   right: 0;
-  margin-top: $border-radius;
-  font-size: font-size('xs');
+  margin-top: utils.$border-radius;
+  font-size: utils.font-size('xs');
   opacity: 0.5;
   transition-property: transform, border-radius;
-  transition-duration: get-transition-duration('short');
-  transition-timing-function: get-transition-easing('enter-exit');
-  transform: rotate(-90deg) translateY(-#{$border-radius + size('xs')});
+  transition-duration: utils.get-transition-duration('short');
+  transition-timing-function: utils.get-transition-easing('enter-exit');
+  transform: rotate(-90deg) translateY(-#{utils.$border-radius + utils.size('xs')});
   transform-origin: top right;
-  padding: size('xxs');
+  padding: utils.size('xxs');
   --kirby-border-color: transparent;
   --text-align: center;
 
-  @include media('>=medium') {
+  @include utils.im-media('>=medium') {
     top: 0;
     transform: translateX(40%);
-    padding: size('s');
+    padding: utils.size('s');
     --text-align: initial;
     --kirby-border-color: initial;
   }

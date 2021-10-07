@@ -1,9 +1,9 @@
-@import './libs/designsystem/src/lib/scss/utils';
+@use './libs/designsystem/src/lib/scss/utils';
 
 .example-properties {
   display: none;
 
-  @include media('>=medium') {
+  @include utils.im-media('>=medium') {
     display: unset;
   }
 
@@ -12,7 +12,7 @@
     grid-template: auto / auto 1fr;
 
     dt {
-      padding-right: size('xxxs');
+      padding-right: utils.size('xxxs');
     }
 
     dd {
@@ -23,11 +23,11 @@
 }
 
 kirby-card.nested-modal-configuration {
-  margin-top: size('l');
-  margin-bottom: size('l');
+  margin-top: utils.size('l');
+  margin-bottom: utils.size('l');
 
   cookbook-example-configuration-wrapper {
-    margin-top: size('m');
+    margin-top: utils.size('m');
   }
 }
 
@@ -37,7 +37,7 @@ kirby-modal-footer {
   }
 
   kirby-checkbox {
-    font-size: font-size('xs');
+    font-size: utils.font-size('xs');
     text-align: center;
   }
 }

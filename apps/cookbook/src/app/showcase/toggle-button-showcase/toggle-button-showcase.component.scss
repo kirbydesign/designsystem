@@ -1,6 +1,7 @@
-@import '../showcase.shared';
+@use '../showcase.shared';
+@use '/libs/designsystem/src/lib/scss/utils';
 
 cookbook-toggle-button-example {
   padding: 0;
-  margin-bottom: size('s');
+  margin-bottom: utils.size('s');
 }

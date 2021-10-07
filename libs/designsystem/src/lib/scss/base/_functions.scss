@@ -1,6 +1,13 @@
+@use "sass:list";
+@use "sass:map";
+@use "sass:math";
+@use "sass:string";
+@use "../themes/colors";
+@use "variables";
+
 @function _get-map-prop($map, $key) {
-  @if map-has-key($map, $key) {
-    @return map-get($map, $key);
+  @if map.has-key($map, $key) {
+    @return map.get($map, $key);
   }
 
   @error 'Unknown key `#{$key}`.';
@@ -8,73 +15,73 @@
 }
 
 @function size($key: 'm') {
-  $negative: str-index($key, '-') == 1;
+  $negative: string.index($key, '-') == 1;
   @if ($negative) {
-    $key: str-slice($key, 2, -1);
+    $key: string.slice($key, 2, -1);
   }
-  $value: _get-map-prop($sizes, $key);
-  @return if($negative, unquote('-' + $value), $value);
+  $value: _get-map-prop(variables.$sizes, $key);
+  @return if($negative, string.unquote('-' + $value), $value);
 }
 
 @function z($key) {
-  @return _get-map-prop($z-layers, $key);
+  @return _get-map-prop(variables.$z-layers, $key);
 }
 
 @function font-size($key: 'n') {
   @if ($key == 'display') {
     @warn 'Display key is deprecated';
   }
-  @return _get-map-prop($font-sizes, $key);
+  @return _get-map-prop(variables.$font-sizes, $key);
 }
 
 @function line-height($key: 'm') {
-  @return _get-map-prop($line-height, $key);
+  @return _get-map-prop(variables.$line-height, $key);
 }
 
 @function font-weight($key: 'normal') {
-  @return _get-map-prop($font-weight, $key);
+  @return _get-map-prop(variables.$font-weight, $key);
 }
 
 @function icon-font-size($size) {
-  @return map-get($icon-font-sizes, $size);
+  @return map.get(variables.$icon-font-sizes, $size);
 }
 
-@function get-color($variant, $getValueOnly: false, $map: $kirby-colors) {
+@function get-color($variant, $getValueOnly: false, $map: colors.$kirby-colors) {
   $value: _get-map-prop($map, $variant);
   @if $getValueOnly == true {
     @return $value;
   } @else {
-    @return unquote('var(--kirby-' + $variant + ')');
+    @return string.unquote('var(--kirby-' + $variant + ')');
   }
 }
 
 @function get-text-color($variant) {
-  $value: _get-map-prop($text-colors, $variant);
-  @return unquote('var(--kirby-text-color-' + $variant + ')');
+  $value: _get-map-prop(colors.$text-colors, $variant);
+  @return string.unquote('var(--kirby-text-color-' + $variant + ')');
 }
 
 @function get-elevation($value) {
-  @return map-get($elevations, $value);
+  @return map.get(variables.$elevations, $value);
 }
 
 @function get-transition-duration($value) {
-  @return map-get($transition-durations, $value);
+  @return map.get(variables.$transition-durations, $value);
 }
 
 @function get-transition-easing($value) {
-  @return map-get($transition-easings, $value);
+  @return map.get(variables.$transition-easings, $value);
 }
 
 @function get-shadow-size($elevation) {
   $shadow-size: 0;
-  $shadow-list: map-get($elevations, $elevation);
+  $shadow-list: map.get(variables.$elevations, $elevation);
   @each $shadow in $shadow-list {
-    $offset-x: abs(_get-shadow-value($shadow, 'offset-x'));
-    $offset-y: abs(_get-shadow-value($shadow, 'offset-y'));
+    $offset-x: math.abs(_get-shadow-value($shadow, 'offset-x'));
+    $offset-y: math.abs(_get-shadow-value($shadow, 'offset-y'));
     $blur-radius: _get-shadow-value($shadow, 'blur-radius');
     $spread-radius: _get-shadow-value($shadow, 'spread-radius');
-    $current-shadow-size: max($offset-x, $offset-y) + $blur-radius + $spread-radius;
-    $shadow-size: max($shadow-size, $current-shadow-size);
+    $current-shadow-size: math.max($offset-x, $offset-y) + $blur-radius + $spread-radius;
+    $shadow-size: math.max($shadow-size, $current-shadow-size);
   }
   @return $shadow-size;
 }
@@ -86,8 +93,8 @@
     'blur-radius': 3,
     'spread-radius': 4,
   );
-  $value-index: map-get($shadow-value-map, $valuekey);
-  @return nth($shadow, $value-index);
+  $value-index: map.get($shadow-value-map, $valuekey);
+  @return list.nth($shadow, $value-index);
 }
 
 /**
@@ -95,8 +102,8 @@
  */
 @function keys-to-classes($map) {
   $classes: ();
-  @each $key in map-keys($map) {
-    $classes: append($classes, '.#{$key}', $separator: comma);
+  @each $key in map.keys($map) {
+    $classes: list.append($classes, '.#{$key}', $separator: comma);
   }
   @return $classes;
 }
@@ -164,7 +171,7 @@
 
 // Ensure minimum click area (default 44 x 44 px)
 // Ignore rounded corners to ensure square click area
-@mixin accessible-target-size($width: $fat-finger-size, $height: $width) {
+@mixin accessible-target-size($width: variables.$fat-finger-size, $height: $width) {
   position: relative;
 
   &::after {
