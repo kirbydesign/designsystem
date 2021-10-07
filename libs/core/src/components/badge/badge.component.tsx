@@ -1,4 +1,4 @@
-import { Component, ComponentInterface, h, Host, Prop, Watch, State } from '@stencil/core';
+import { Component, ComponentInterface, h, Host, Prop } from '@stencil/core';
 
 import { ThemeColor } from '../../helpers';
 
@@ -34,12 +34,16 @@ export class Badge implements ComponentInterface {
   @Prop() size: 'sm' | 'md' = 'md';
 
   private get cssClass(): CssClassMap {
-    return getClassMap([this.themeColor, this.size]);
+    return getClassMap([this.size, this.themeColor]);
   }
 
   private get badgeContent() {
-    if (this.size !== 'sm') {
-      return this.text ? <span>{this.text}</span> : <slot />;
+    if (this.size === 'sm') {
+      return <span></span>;
+    } else if (this.text) {
+      return <span>{this.text}</span>;
+    } else {
+      return <slot />;
     }
   }
 
