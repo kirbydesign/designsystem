@@ -3,7 +3,7 @@
 kirby-card {
   width: map-get(utils.$breakpoints, small);
 
-  @include utils.im-media('>=large') {
+  @include utils.media('>=large') {
     width: map-get(utils.$breakpoints, medium);
   }
 

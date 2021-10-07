@@ -10,7 +10,7 @@ $app-header-max-width: 1024px;
 
 .logo {
   display: none;
-  @include utils.im-media('>=large') {
+  @include utils.media('>=large') {
     display: block;
   }
 }

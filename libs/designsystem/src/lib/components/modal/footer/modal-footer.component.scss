@@ -14,7 +14,7 @@ ion-footer {
   padding-bottom: calc(#{$padding-vertical} + var(--kirby-modal-footer-safe-area-bottom, 0px));
 }
 
-@include utils.im-media('<medium') {
+@include utils.media('<medium') {
   :host {
     --kirby-modal-footer-safe-area-bottom: var(--kirby-safe-area-bottom);
   }

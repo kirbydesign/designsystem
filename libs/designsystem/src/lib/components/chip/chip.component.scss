@@ -41,7 +41,7 @@
     @include utils.theme-background(transparent);
     @include selected-and-hover('black');
 
-    @include utils.im-media('<=small') {
+    @include utils.media('<=small') {
       --inline-margin: 0;
     }
   }

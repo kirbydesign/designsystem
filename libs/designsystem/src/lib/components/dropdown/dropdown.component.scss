@@ -5,7 +5,7 @@ $margin-horizontal-total: 2 * utils.size('s');
 
 :host {
   --kirby_internal_min-screen-width: 320px;
-  @include utils.im-media('>=small') {
+  @include utils.media('>=small') {
     --kirby_internal_min-screen-width: 375px;
   }
 

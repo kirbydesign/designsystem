@@ -6,7 +6,7 @@ $max-width: 375px;
 
 :host {
   --kirby_internal_margin_horizontal_default: #{$margin-horizontal};
-  @include utils.im-media('<small') {
+  @include utils.media('<small') {
     --kirby_internal_margin_horizontal_default: #{$margin-horizontal-narrow};
   }
 

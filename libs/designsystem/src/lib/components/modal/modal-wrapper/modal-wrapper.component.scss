@@ -35,7 +35,7 @@
 }
 
 :host-context(ion-modal:not(.kirby-modal-full-height)) {
-  @include utils.im-media('>=medium') {
+  @include utils.media('>=medium') {
     @include contain-content();
   }
 
@@ -64,7 +64,7 @@ $toolbar-padding: utils.size('s');
 @mixin phablet-toolbar-padding() {
   $toolbar-top-spacing-total: utils.size('m');
   $toolbar-padding-top: $toolbar-top-spacing-total - $toolbar-padding;
-  @include utils.im-media('>=medium') {
+  @include utils.media('>=medium') {
     padding-top: $toolbar-padding-top;
   }
 }
@@ -128,7 +128,7 @@ ion-content {
 // Ensure padding-rules are not merged with other media query,
 // as this rule has to come AFTER the default mobile-first rule in order to override:
 /* clean-css ignore:start */
-@include utils.im-media('>=medium') {
+@include utils.media('>=medium') {
   ion-content {
     --padding-start: #{utils.size('xxxl')};
     --padding-end: #{utils.size('xxxl')};

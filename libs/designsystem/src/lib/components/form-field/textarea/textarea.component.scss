@@ -6,7 +6,7 @@
 
   resize: none;
 
-  @include utils.im-media('>=medium') {
+  @include utils.media('>=medium') {
     resize: vertical;
   }
 }

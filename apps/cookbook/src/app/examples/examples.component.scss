@@ -43,7 +43,7 @@
     padding: utils.size('s');
     transform: translateY(100%);
 
-    @include utils.im-media('>=medium') {
+    @include utils.media('>=medium') {
       grid-template-columns: repeat(10, 1fr);
     }
 
@@ -56,11 +56,11 @@
       justify-content: center;
       font-size: utils.font-size('m');
 
-      @include utils.im-media('<medium') {
+      @include utils.media('<medium') {
         @include kirby-keys(15);
       }
 
-      @include utils.im-media('>=medium') {
+      @include utils.media('>=medium') {
         @include kirby-keys(22, $additional-keys: ('©'));
       }
     }

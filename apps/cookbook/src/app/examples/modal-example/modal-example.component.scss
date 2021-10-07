@@ -5,7 +5,7 @@ h1 {
   text-align: center;
 }
 
-@include utils.im-media('>medium') {
+@include utils.media('>medium') {
   .mobile {
     display: none;
   }

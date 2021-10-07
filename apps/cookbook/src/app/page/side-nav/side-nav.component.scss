@@ -8,13 +8,13 @@ $divider-inset: utils.size('xxxxs');
 $divider-spacing: utils.size('xxs');
 
 :host {
-  @include utils.im-media('>=large') {
+  @include utils.media('>=large') {
     grid-area: sidebar;
   }
 }
 
 nav {
-  @include utils.im-media('>=large') {
+  @include utils.media('>=large') {
     display: none;
   }
 }
@@ -29,7 +29,7 @@ section {
   padding: 0 $menu-padding-mobile;
   box-shadow: utils.get-elevation(4);
 
-  @include utils.im-media('>=large') {
+  @include utils.media('>=large') {
     box-shadow: none;
     display: block;
     position: static;

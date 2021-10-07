@@ -3,7 +3,7 @@
     NOTICE: Must not contain anything that generates classes or else it will be generated for every component that imports this file.
 */
 @forward 'base/functions';
-@forward 'base/variables';
+@forward 'base/variables' hide $breakpoints;
 @forward 'themes/colors';
 @use '../../../../../node_modules/include-media/dist/include-media' with (
   $breakpoints: (
@@ -14,4 +14,4 @@
     xxlarge: 80em,
   ),
 );
-@forward '../../../../../node_modules/include-media/dist/include-media' as im-*;
+@forward '../../../../../node_modules/include-media/dist/include-media';

@@ -6,7 +6,7 @@
   background: utils.get-color('background-color');
   padding: utils.size('s');
 
-  @include utils.im-media('>=medium') {
+  @include utils.media('>=medium') {
     padding: utils.size('l');
   }
 

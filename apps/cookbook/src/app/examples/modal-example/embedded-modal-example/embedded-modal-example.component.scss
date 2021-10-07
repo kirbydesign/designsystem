@@ -3,7 +3,7 @@
 .example-properties {
   display: none;
 
-  @include utils.im-media('>=medium') {
+  @include utils.media('>=medium') {
     display: unset;
   }
 

@@ -24,12 +24,12 @@ ion-tabs {
     }
   }
 
-  @include utils.im-media('>=medium') {
+  @include utils.media('>=medium') {
     --kirby-tab-bar-height: 70px;
   }
 
   // move tabs to top of screen if not touch and large device
-  @include utils.im-media('>=large') {
+  @include utils.media('>=large') {
     @include utils.not-touch {
       flex-direction: column-reverse;
       // Ensure page-footer falls back to safe-area default

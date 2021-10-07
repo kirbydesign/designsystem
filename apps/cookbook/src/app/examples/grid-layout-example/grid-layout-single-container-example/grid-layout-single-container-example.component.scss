@@ -17,14 +17,14 @@ $gap: utils.size('m');
 }
 
 /* Tablet size and above */
-@include utils.im-media('>=medium') {
+@include utils.media('>=medium') {
   .half-at-tablet-up {
     grid-column: span ($columns / 2);
   }
 }
 
 /* Desktop size and above */
-@include utils.im-media('>=large') {
+@include utils.media('>=large') {
   .half-at-desktop-up {
     grid-column: span ($columns / 2);
   }

@@ -21,7 +21,7 @@ header {
 }
 
 .menu-button {
-  @include utils.im-media('>=large') {
+  @include utils.media('>=large') {
     display: none;
   }
 }
@@ -29,7 +29,7 @@ header {
 nav {
   display: none;
 
-  @include utils.im-media('>=large') {
+  @include utils.media('>=large') {
     display: block;
   }
 
@@ -49,7 +49,7 @@ nav {
   width: $logo-size-mobile;
   height: $logo-size-mobile;
 
-  @include utils.im-media('>=large') {
+  @include utils.media('>=large') {
     width: $logo-size-desktop;
     height: $logo-size-desktop;
   }

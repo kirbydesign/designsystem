@@ -31,7 +31,7 @@ $icon-size: utils.size('s');
   a {
     display: block;
     margin-bottom: utils.size('xxs');
-    @include utils.im-media('>=large') {
+    @include utils.media('>=large') {
       display: inline-block;
       margin-bottom: 0;
     }

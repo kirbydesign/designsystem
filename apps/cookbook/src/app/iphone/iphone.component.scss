@@ -89,7 +89,7 @@
   margin-right: 5px;
 }
 
-@include utils.im-media('<medium') {
+@include utils.media('<medium') {
   .docs-demo-device,
   .pop-out {
     display: none;

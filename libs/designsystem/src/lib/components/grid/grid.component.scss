@@ -8,7 +8,7 @@
   max-width: var(--kirby-page-max-width);
   margin: 0 auto;
 
-  @include utils.im-media('>=medium') {
+  @include utils.media('>=medium') {
     @for $i from 1 through 10 {
       &[max-columns='#{$i}'] {
         grid-template-columns: repeat($i, 1fr);
@@ -19,7 +19,7 @@
 
 @for $i from 1 through 10 {
   ::ng-deep .grid-item--col-#{$i} {
-    @include utils.im-media('>=medium') {
+    @include utils.media('>=medium') {
       grid-column: span $i;
     }
   }

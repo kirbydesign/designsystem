@@ -97,7 +97,7 @@ ion-modal.kirby-overlay {
       }
     }
 
-    @include utils.im-media('<medium') {
+    @include utils.media('<medium') {
       &:not(.kirby-drawer):not(.kirby-modal-compact) {
         --height: 100%;
       }
@@ -109,21 +109,21 @@ ion-modal.kirby-overlay {
 
     &.modal-card:not(.kirby-drawer) {
       .modal-wrapper {
-        @include utils.im-media('<medium') {
+        @include utils.media('<medium') {
           // Reset Ionic Card style height + top border radius:
           --height: 100%;
           border-top-left-radius: 0;
           border-top-right-radius: 0;
         }
 
-        @include utils.im-media('>=medium') {
+        @include utils.media('>=medium') {
           // Reset Ionic Card style border radius:
           border-radius: utils.$border-radius;
         }
       }
     }
 
-    @include utils.im-media('>=medium') {
+    @include utils.media('>=medium') {
       --width: #{utils.$modal-max-width};
       --border-radius: #{utils.$border-radius};
       --box-shadow: #{functions.get-elevation(8)};

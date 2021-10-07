@@ -4,7 +4,7 @@ kirby-card {
   margin-bottom: utils.size('m');
 
   &.attention-levels {
-    max-width: map-get(utils.$breakpoints, 'small');
+    max-width: map-get(utils.$breakpoints, small);
   }
 }
 

@@ -42,7 +42,7 @@ kirby-card {
   --kirby-border-color: transparent;
   --text-align: center;
 
-  @include utils.im-media('>=medium') {
+  @include utils.media('>=medium') {
     top: 0;
     transform: translateX(40%);
     padding: utils.size('s');

@@ -53,7 +53,7 @@ ion-backdrop {
 :host(.backdrop-visible) ion-backdrop {
   opacity: 0.4;
 
-  @include utils.im-media('>=medium') {
+  @include utils.media('>=medium') {
     opacity: 0;
   }
 }
