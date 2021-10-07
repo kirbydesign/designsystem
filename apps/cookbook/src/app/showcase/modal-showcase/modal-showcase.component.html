@@ -116,9 +116,16 @@
 </p>
 <p>
   If you need to navigate from code <strong>within the child component</strong> you can either
-  inject and navigate through the regular Angular <code>Router</code> or you can inject
-  <code>ModalController</code> and call it's <code>navigateWithinModal</code> method for
-  convenience, which also support passing query params:
+  inject <code>ModalController</code> and call it's <code>navigateWithinModal</code> method for
+  convenience, which also support passing query params, or you can inject and navigate through the
+  regular Angular <code>Router</code>. The latter is useful if you need to pass
+  <code>NavigationExtras</code>
+  other then query params. Notice that when using the Angular Router you need to provide the current
+  <code>ActivatedRoute</code> as the root URI using the
+  <a href="https://angular.io/api/router/UrlCreationOptions#relativeTo" target="_blank"
+    >relativeTo</a
+  >
+  param:
   <cookbook-code-viewer
     [ts]="outletExample.modalControllerWithinModalOutletCodeSnippet"
   ></cookbook-code-viewer>
