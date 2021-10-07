@@ -1,25 +1,7 @@
 import { Component, ComponentInterface, h, Host, Prop } from '@stencil/core';
 
 import { ThemeColor } from '../../helpers';
-
-export type CssClassMap = { [className: string]: boolean };
-
-const getClassList = (classes: string | (string | null | undefined)[] | undefined): string[] => {
-  if (classes !== undefined) {
-    const array = Array.isArray(classes) ? classes : classes.split(' ');
-    return array
-      .filter((c) => c != null)
-      .map((c) => (c as string).trim())
-      .filter((c) => c !== '');
-  }
-  return [];
-};
-
-const getClassMap = (classes: string | string[] | undefined): CssClassMap => {
-  const map: CssClassMap = {};
-  getClassList(classes).forEach((c) => (map[c] = true));
-  return map;
-};
+import { createClassMap, CssClassMap } from '../../helpers/css-classes-helper';
 
 @Component({
   tag: 'kirby-badge',
@@ -34,7 +16,7 @@ export class Badge implements ComponentInterface {
   @Prop() size: 'sm' | 'md' = 'md';
 
   private get cssClass(): CssClassMap {
-    return getClassMap([this.size, this.themeColor]);
+    return createClassMap([this.size, this.themeColor]);
   }
 
   private get badgeContent() {
