@@ -1,4 +1,4 @@
-@use '../../../../../../libs/designsystem/src/lib/scss/utils';
+@use '/libs/designsystem/src/lib/scss/utils';
 
 @each $color-name, $color-value in utils.getAllColors() {
   .#{$color-name} {

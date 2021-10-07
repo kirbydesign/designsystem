@@ -1,5 +1,5 @@
 @use "sass:list";
-@use '../../../../../libs/designsystem/src/lib/scss/utils';
+@use '/libs/designsystem/src/lib/scss/utils';
 
 @mixin kirby-keys($start-index, $additional-keys: ()) {
   $keys: list.join(('K', 'I', 'R', 'B', 'Y'), $additional-keys);

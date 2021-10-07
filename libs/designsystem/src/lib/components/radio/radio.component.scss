@@ -1,5 +1,5 @@
 @use "sass:map";
-@use '../../scss/utils';
+@use '/libs/designsystem/src/lib/scss/utils';
 
 $radio-icon-padding: utils.size('xxxxs');
 $radio-icon-size: utils.size('m');

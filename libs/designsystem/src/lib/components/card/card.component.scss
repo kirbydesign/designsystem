@@ -1,4 +1,4 @@
-@use '../../scss/utils';
+@use '/libs/designsystem/src/lib/scss/utils';
 
 :host {
   --kirby-card-main-background-color: #{utils.get-color('white')};

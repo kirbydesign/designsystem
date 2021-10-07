@@ -1,5 +1,5 @@
 @use "sass:map";
-@use '../../../../../libs/designsystem/src/lib/scss/utils';
+@use '/libs/designsystem/src/lib/scss/utils';
 
 $height-measure-width: 80px;
 $default-size: map.get(utils.$checkbox-radio-sizes, 'md');

@@ -1,5 +1,5 @@
 @use "sass:map";
-@use '../../scss/utils';
+@use '/libs/designsystem/src/lib/scss/utils';
 
 :host {
   display: inline-block;

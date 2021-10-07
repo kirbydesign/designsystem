@@ -1,4 +1,4 @@
-@use '../../scss/utils';
+@use '/libs/designsystem/src/lib/scss/utils';
 
 .toggle-checked {
   --background-checked: #{utils.get-color('success')};

@@ -1,4 +1,4 @@
-@use '../../scss/utils';
+@use '/libs/designsystem/src/lib/scss/utils';
 
 :host(:not(.tab-bar-bottom-hidden)) {
   --kirby-page-footer-safe-area-bottom: 0px;

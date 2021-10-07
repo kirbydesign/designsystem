@@ -1,5 +1,5 @@
 @use "sass:map";
-@use '../../scss/utils';
+@use '/libs/designsystem/src/lib/scss/utils';
 
 $button-width: (
   sm: 44px,

@@ -1,5 +1,5 @@
 @use '../form-field-inputs.shared';
-@use '../../../scss/utils';
+@use '/libs/designsystem/src/lib/scss/utils';
 
 :host {
   font-family: var(--kirby-font-family);

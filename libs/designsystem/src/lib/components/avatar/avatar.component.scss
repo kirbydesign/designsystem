@@ -1,6 +1,6 @@
 @use "sass:map";
 @use "sass:math";
-@use '../../scss/utils';
+@use '/libs/designsystem/src/lib/scss/utils';
 
 $diameter-xsmall: map.get(utils.$avatar-sizes, 'xs');
 $diameter-small: map.get(utils.$avatar-sizes, 's');

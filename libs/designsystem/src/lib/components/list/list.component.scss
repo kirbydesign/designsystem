@@ -1,5 +1,5 @@
 @use "sass:map";
-@use '../../scss/utils';
+@use '/libs/designsystem/src/lib/scss/utils';
 
 $divider-color: utils.get-color('background-color');
 $shadow: utils.get-elevation(2);

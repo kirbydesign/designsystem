@@ -1,4 +1,4 @@
-@use '../../scss/utils';
+@use '/libs/designsystem/src/lib/scss/utils';
 @use 'slide-button.component.shared' as shared;
 
 @mixin _slider-thumb() {
