@@ -4,11 +4,6 @@ $dropdown-max-height: 8 * $dropdown-item-height;
 $margin-horizontal-total: 2 * size('s');
 
 :host {
-  --kirby_internal_min-screen-width: 320px;
-  @include media('>=small') {
-    --kirby_internal_min-screen-width: 375px;
-  }
-
   display: inline-block;
   position: relative;
   max-width: calc(100vw - #{$margin-horizontal-total});
