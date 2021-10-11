@@ -3,6 +3,8 @@ import { Component, ComponentInterface, h, Host, Prop } from '@stencil/core';
 import { ThemeColor } from '../../helpers';
 import { createClassMap, CssClassMap } from '../../helpers/css-classes-helper';
 
+export type BadgeSize = 'sm' | 'md';
+
 @Component({
   tag: 'kirby-badge',
   styleUrl: 'badge.component.scss',
@@ -13,7 +15,7 @@ export class Badge implements ComponentInterface {
   @Prop() text: string;
 
   @Prop() themeColor: ThemeColor;
-  @Prop() size: 'sm' | 'md' = 'md';
+  @Prop() size: BadgeSize = 'md';
 
   private get cssClass(): CssClassMap {
     return createClassMap([this.size, this.themeColor]);
