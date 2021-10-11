@@ -7,11 +7,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { fakeAsync, tick } from '@angular/core/testing';
 import { IonItem } from '@ionic/angular';
-import { createHostFactory, Spectator, SpectatorHost } from '@ngneat/spectator';
+import { createHostFactory, Spectator } from '@ngneat/spectator';
 import { MockComponents } from 'ng-mocks';
 
 import { ButtonComponent, CardComponent, IconComponent, ItemComponent } from '..';
-import { HorizontalDirection, PopoverComponent } from '../popover/popover.component';
+import { PopoverComponent } from '../popover/popover.component';
 
 import { DropdownComponent } from './dropdown.component';
 
@@ -21,7 +21,7 @@ import { DropdownComponent } from './dropdown.component';
 })
 class OnPushHostComponent {}
 
-fdescribe('DropdownComponent + PopoverComponent', () => {
+describe('DropdownComponent + PopoverComponent', () => {
   const items = [
     { text: 'Item 1', value: 1 },
     { text: 'Item 2', value: 2 },
@@ -31,16 +31,6 @@ fdescribe('DropdownComponent + PopoverComponent', () => {
   ];
   const openDelayInMs = DropdownComponent.OPEN_DELAY_IN_MS;
 
-  const createHost = createHostFactory({
-    component: DropdownComponent,
-    declarations: [
-      ItemComponent,
-      MockComponents(ButtonComponent, IconComponent, IonItem),
-      PopoverComponent,
-      CardComponent,
-    ],
-  });
-
   let spectator: Spectator<DropdownComponent>;
   let buttonElement: HTMLButtonElement;
   let cardElement: HTMLElement;
@@ -49,92 +39,104 @@ fdescribe('DropdownComponent + PopoverComponent', () => {
     spectator.query('kirby-popover').remove();
   });
 
-  describe('when configured with popout direction', () => {
-    beforeEach(() => {
-      spectator = createHost(
-        `<kirby-dropdown [usePopover]="true" popout="right"></kirby-dropdown>`,
-        {
+  describe('with default change detection strategy', () => {
+    const createHost = createHostFactory({
+      component: DropdownComponent,
+      declarations: [
+        ItemComponent,
+        MockComponents(ButtonComponent, IconComponent, IonItem),
+        PopoverComponent,
+        CardComponent,
+      ],
+    });
+
+    describe('when configured with popout direction', () => {
+      beforeEach(() => {
+        spectator = createHost(
+          `<kirby-dropdown [usePopover]="true" popout="right"></kirby-dropdown>`,
+          {
+            props: {
+              items: items,
+            },
+          }
+        );
+        buttonElement = spectator.query('button[kirby-button]');
+      });
+
+      it('should open card to the right when popout=right', fakeAsync(() => {
+        spectator.component.open();
+        tick(openDelayInMs);
+
+        const buttonRect = buttonElement.getBoundingClientRect();
+        const card = spectator.query('kirby-card');
+        const cardRect = card.getBoundingClientRect();
+
+        expect(cardRect.left).toEqual(buttonRect.left);
+      }));
+    });
+
+    describe('when configured with expand=block', () => {
+      beforeEach(() => {
+        spectator = createHost(
+          `<kirby-dropdown [usePopover]="true" expand="block"></kirby-dropdown>`,
+          {
+            props: {
+              items: items,
+            },
+          }
+        );
+        buttonElement = spectator.query('button[kirby-button]');
+      });
+
+      it('should render button with full width', () => {
+        const componentWidth = spectator.element.clientWidth;
+        const buttonWidth = buttonElement.getBoundingClientRect().width;
+        expect(buttonWidth).toEqual(componentWidth);
+      });
+
+      it('should render dropdown with full width', fakeAsync(() => {
+        spectator.component.ngAfterViewInit();
+
+        spectator.component.open();
+        tick(openDelayInMs);
+
+        const card = spectator.query('kirby-card');
+        const componentWidth = spectator.element.clientWidth;
+        const cardWidth = card.getBoundingClientRect().width;
+        expect(cardWidth).toEqual(componentWidth);
+        expect(card).toHaveComputedStyle({
+          'min-width': '0px',
+          'max-width': 'none',
+        });
+      }));
+    });
+
+    describe('when aligned to right side of viewport', () => {
+      beforeEach(() => {
+        spectator = createHost(`<kirby-dropdown [usePopover]="true"></kirby-dropdown>`, {
           props: {
             items: items,
           },
-        }
-      );
-      buttonElement = spectator.query('button[kirby-button]');
-    });
-
-    it('should open card to the right when popout=right', fakeAsync(() => {
-      spectator.component.open();
-      tick(openDelayInMs);
-
-      const buttonRect = buttonElement.getBoundingClientRect();
-      const card = spectator.query('kirby-card');
-      const cardRect = card.getBoundingClientRect();
-
-      expect(cardRect.left).toEqual(buttonRect.left);
-    }));
-  });
-
-  describe('when configured with expand=block', () => {
-    beforeEach(() => {
-      spectator = createHost(
-        `<kirby-dropdown [usePopover]="true" expand="block"></kirby-dropdown>`,
-        {
-          props: {
-            items: items,
-          },
-        }
-      );
-      buttonElement = spectator.query('button[kirby-button]');
-    });
-
-    it('should render button with full width', () => {
-      const componentWidth = spectator.element.clientWidth;
-      const buttonWidth = buttonElement.getBoundingClientRect().width;
-      expect(buttonWidth).toEqual(componentWidth);
-    });
-
-    it('should render dropdown with full width', fakeAsync(() => {
-      spectator.component.ngAfterViewInit();
-
-      spectator.component.open();
-      tick(openDelayInMs);
-
-      const card = spectator.query('kirby-card');
-      const componentWidth = spectator.element.clientWidth;
-      const cardWidth = card.getBoundingClientRect().width;
-      expect(cardWidth).toEqual(componentWidth);
-      expect(card).toHaveComputedStyle({
-        'min-width': '0px',
-        'max-width': 'none',
+        });
+        spectator.element.style.cssFloat = 'right';
+        buttonElement = spectator.query('button[kirby-button]');
       });
-    }));
-  });
 
-  describe('when aligned to right side of viewport', () => {
-    beforeEach(() => {
-      spectator = createHost(`<kirby-dropdown [usePopover]="true"></kirby-dropdown>`, {
-        props: {
-          items: items,
-        },
-      });
-      spectator.element.style.cssFloat = 'right';
-      buttonElement = spectator.query('button[kirby-button]');
+      it('should align the dropdown to the right side of button and component container ', fakeAsync(() => {
+        spectator.component.open();
+        spectator.detectChanges();
+        tick(openDelayInMs);
+        spectator.detectChanges();
+
+        const card = spectator.query('kirby-card');
+        const cardClientRect = card.getClientRects()[0];
+        const buttonClientRect = buttonElement.getClientRects()[0];
+        expect(cardClientRect.right).toEqual(buttonClientRect.right);
+      }));
     });
-
-    it('should align the dropdown to the right side of button and component container ', fakeAsync(() => {
-      spectator.component.open();
-      spectator.detectChanges();
-      tick(openDelayInMs);
-      spectator.detectChanges();
-
-      const card = spectator.query('kirby-card');
-      const cardClientRect = card.getClientRects()[0];
-      const buttonClientRect = buttonElement.getClientRects()[0];
-      expect(cardClientRect.right).toEqual(buttonClientRect.right);
-    }));
   });
 
-  fdescribe('when inside host component with ChangeDetectionStrategy.OnPush', () => {
+  describe("with 'OnPush' change detection strategy", () => {
     const createOnPushHost = createHostFactory({
       component: DropdownComponent,
       declarations: [
@@ -150,8 +152,6 @@ fdescribe('DropdownComponent + PopoverComponent', () => {
           items: items,
         },
       });
-      console.log('flag daddy');
-      console.log(spectator.queryAll('kirby-card'));
       cardElement = spectator.query('kirby-card');
 
       // Assert that card is initially hidden:
