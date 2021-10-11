@@ -48,6 +48,7 @@ import { AlertHelper } from './components/modal/services/alert.helper';
 import { ModalController } from './components/modal/services/modal.controller';
 import { ModalHelper } from './components/modal/services/modal.helper';
 import { PageModule } from './components/page/page.module';
+import { PopoverComponent } from './components/popover/popover.component';
 import { ProgressCircleRingComponent } from './components/progress-circle/progress-circle-ring.component';
 import { ProgressCircleComponent } from './components/progress-circle/progress-circle.component';
 import { RadioGroupComponent } from './components/radio/radio-group/radio-group.component';
@@ -125,6 +126,7 @@ const declarations = [
   ModalWrapperComponent,
   ModalCompactWrapperComponent,
   ProgressCircleRingComponent,
+  PopoverComponent,
 ];
 
 const exportedModules = [

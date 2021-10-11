@@ -45,6 +45,7 @@ import {
   MockPageTitleDirective,
   MockPageToolbarTitleDirective,
 } from './components/mock.page.component';
+import { MockPopoverComponent } from './components/mock.popover.component';
 import { MockProgressCircleComponent } from './components/mock.progress-circle.component';
 import { MockRadioGroupComponent } from './components/mock.radio-group.component';
 import { MockRadioComponent } from './components/mock.radio.component';
@@ -105,6 +106,7 @@ export const MOCK_COMPONENTS = [
   MockPageContentComponent,
   MockPageActionsComponent,
   MockPageComponent,
+  MockPopoverComponent,
   MockProgressCircleComponent,
   MockRadioGroupComponent,
   MockRadioComponent,
