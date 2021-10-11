@@ -54,7 +54,7 @@ describe('DropdownComponent + PopoverComponent', () => {
       buttonElement = spectator.query('button[kirby-button]');
     });
     describe('when configured with popout direction', () => {
-      it('open card to the right when popout=right', fakeAsync(() => {
+      it('should open card to the right when popout=right', fakeAsync(() => {
         spectator.component.popout = HorizontalDirection.right;
 
         spectator.component.open();
@@ -156,7 +156,7 @@ describe('DropdownComponent + PopoverComponent', () => {
       expect(spectator.element).toHaveClass('is-open');
     });
 
-    it('options should be visible', () => {
+    it('should have options be visible', () => {
       expect(cardElement).toBeVisible();
     });
   });
