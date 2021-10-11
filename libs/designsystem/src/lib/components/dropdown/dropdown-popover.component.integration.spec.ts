@@ -21,7 +21,7 @@ import { DropdownComponent } from './dropdown.component';
 })
 class OnPushHostComponent {}
 
-describe('DropdownComponent + PopoverComponent', () => {
+fdescribe('DropdownComponent + PopoverComponent', () => {
   const items = [
     { text: 'Item 1', value: 1 },
     { text: 'Item 2', value: 2 },
@@ -97,22 +97,20 @@ describe('DropdownComponent + PopoverComponent', () => {
       }));
     });
 
-    describe('when aligned to right side of viewport', () => {
-      it('should align the dropdown to the right side of button and component container ', (done) => {
+    fdescribe('when aligned to right side of viewport', () => {
+      it('should align the dropdown to the right side of button and component container ', fakeAsync(() => {
         spectator.element.style.cssFloat = 'right';
+
         spectator.component.open();
         spectator.detectChanges();
-        setTimeout(() => {
-          spectator.detectChanges();
+        tick(openDelayInMs);
+        spectator.detectChanges();
 
-          const card = spectator.query('kirby-card');
-          const cardClientRect = card.getClientRects()[0];
-          const buttonClientRect = buttonElement.getClientRects()[0];
-
-          expect(cardClientRect.right).toEqual(buttonClientRect.right);
-          done();
-        }, openDelayInMs);
-      });
+        const card = spectator.query('kirby-card');
+        const cardClientRect = card.getClientRects()[0];
+        const buttonClientRect = buttonElement.getClientRects()[0];
+        expect(cardClientRect.right).toEqual(buttonClientRect.right);
+      }));
     });
   });
 
