@@ -19,7 +19,6 @@ export class MockButtonComponent {
   @Input() isDestructive: boolean;
   @Input() themeColor: NotificationColor;
   @Input() expand: 'full' | 'block';
-  @Input() text: string;
   @Input() isFloating: boolean;
   @Input() size: ButtonSize;
 }

@@ -17,6 +17,7 @@ import { CalendarComponent, CalendarYearNavigatorConfig } from '@kirbydesign/des
 export class MockCalendarComponent {
   @Output() dateChange = new EventEmitter<Date>();
   @Output() dateSelect = new EventEmitter<Date>();
+  @Output() yearSelect = new EventEmitter<number>();
   @Input() timezone: 'local' | 'UTC';
   @Input() disableWeekends: boolean;
   @Input() disablePastDates: boolean;
@@ -29,8 +30,6 @@ export class MockCalendarComponent {
   @Input() todayDate: Date;
   @Input() minDate: Date;
   @Input() maxDate: Date;
-
-  changeYear() {}
 }
 
 // #endregion
