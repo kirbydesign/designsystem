@@ -21,7 +21,7 @@ import { DropdownComponent } from './dropdown.component';
 })
 class OnPushHostComponent {}
 
-fdescribe('DropdownComponent + PopoverComponent', () => {
+describe('DropdownComponent + PopoverComponent', () => {
   const items = [
     { text: 'Item 1', value: 1 },
     { text: 'Item 2', value: 2 },
@@ -97,7 +97,7 @@ fdescribe('DropdownComponent + PopoverComponent', () => {
       }));
     });
 
-    fdescribe('when aligned to right side of viewport', () => {
+    describe('when aligned to right side of viewport', () => {
       it('should align the dropdown to the right side of button and component container ', fakeAsync(() => {
         spectator.element.style.cssFloat = 'right';
 
