@@ -81,7 +81,6 @@ describe('DropdownComponent + PopoverComponent', () => {
       });
 
       it('should render dropdown with full width', fakeAsync(() => {
-        // TODO: Move to integration tests
         spectator.component.ngAfterViewInit();
 
         spectator.component.open();
