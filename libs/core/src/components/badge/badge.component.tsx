@@ -2,8 +2,7 @@ import { Component, ComponentInterface, h, Host, Prop } from '@stencil/core';
 
 import { ThemeColor } from '../../helpers';
 import { createClassMap, CssClassMap } from '../../helpers/css-classes-helper';
-
-export type BadgeSize = 'sm' | 'md';
+import { BadgeSize } from './badge.types';
 
 @Component({
   tag: 'kirby-badge',
