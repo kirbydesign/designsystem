@@ -39,6 +39,14 @@ nav {
     padding: 0;
     margin: 0;
 
+    li::before {
+      display: none;
+    }
+
+    li + li {
+      margin-block-start: revert;
+    }
+
     a {
       text-decoration: none;
     }

@@ -1,0 +1,82 @@
+@import '../utils';
+
+$marker-disc-font-size: 1.8em;
+$marker-cirle-font-size: 0.9em;
+$list-item-line-height: 1.5;
+
+// -----------------------------------------------------------------------------
+// Grid layout
+// -----------------------------------------------------------------------------
+li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+
+  // Nested lists
+  ol,
+  ul {
+    grid-column: 2 / -1;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Spacing
+// -----------------------------------------------------------------------------
+ol,
+ul {
+  padding-inline-start: size('xxxs'); // left
+}
+
+li {
+  &::before {
+    padding-inline-end: size('xs'); // right
+  }
+
+  // Vertical space between list items (excluding the first outermost item)
+  li,
+  & + li {
+    margin-block-start: size('xxs'); // top
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Markers (bullets and numbers)
+// -----------------------------------------------------------------------------
+
+ol,
+ul {
+  list-style: none;
+  counter-reset: item;
+}
+
+// First level marker
+ul > li::before {
+  content: '\2022'; // Unicode disc ("bullet")
+  font-size: $marker-disc-font-size;
+  line-height: ($list-item-line-height / strip-unit($marker-disc-font-size));
+}
+
+// Second level marker
+:where(ol, ul) ul > li::before {
+  content: '\25E6'; // Unicode circle
+  font-size: $marker-cirle-font-size;
+  line-height: ($list-item-line-height / strip-unit($marker-cirle-font-size));
+}
+
+// Third level (and beyond) marker
+:where(ol, ul) :where(ol, ul) ul > li::before {
+  content: '\25AA'; // Unicode square
+}
+
+// Ordered list marker (decimal)
+ol > li::before {
+  content: counter(item) '. ';
+  counter-increment: item;
+}
+
+// -----------------------------------------------------------------------------
+// Typography
+// -----------------------------------------------------------------------------
+
+li {
+  line-height: $list-item-line-height;
+}
