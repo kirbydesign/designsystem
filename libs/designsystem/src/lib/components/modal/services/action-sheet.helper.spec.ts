@@ -59,12 +59,12 @@ describe('ActionSheetHelper', () => {
       expect(modalWrapper).toHaveComputedStyle({ 'max-width': 'none', 'max-height': 'none' });
     });
 
-    it('backdrop click should not dismiss action-sheet', async () => {
+    it('backdrop click should dismiss action-sheet', async () => {
       let modalDidDismiss = false;
       ionModal.onDidDismiss().then((_) => (modalDidDismiss = true));
       backdrop.dispatchEvent(new MouseEvent('click'));
       await new Promise<void>((resolve) => setTimeout(resolve, 15));
-      expect(modalDidDismiss).toBeTruthy();
+      expect(modalDidDismiss).toBeTrue();
     });
 
     it('action-sheet should have correct backdrop style when opened on top of a modal', async () => {
