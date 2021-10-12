@@ -1,0 +1,7 @@
+@import '~@kirbydesign/core/src/scss/utils';
+
+:host {
+  kirby-badge + kirby-badge {
+    margin-left: size('s');
+  }
+}

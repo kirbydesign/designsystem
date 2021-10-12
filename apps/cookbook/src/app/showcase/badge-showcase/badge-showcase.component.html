@@ -1,6 +1,30 @@
 <div class="example">
-  <cookbook-badge-example></cookbook-badge-example>
-  <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
+  <h2>Number</h2>
+  <p>
+    <cookbook-badge-example-number #badgeExampleNumber></cookbook-badge-example-number>
+    <cookbook-example-viewer [html]="badgeExampleNumber.template"> </cookbook-example-viewer>
+  </p>
+
+  <h2>Text</h2>
+  <p>
+    <cookbook-badge-example-text #badgeExampleText></cookbook-badge-example-text>
+    <cookbook-example-viewer [html]="badgeExampleText.template"> </cookbook-example-viewer>
+  </p>
+
+  <h2>Icon</h2>
+  <p>
+    <cookbook-badge-example-icon #badgeExampleIcon></cookbook-badge-example-icon><br />
+    <cookbook-example-viewer [html]="badgeExampleIcon.template"> </cookbook-example-viewer>
+  </p>
+
+  <h2>Small Badge</h2>
+  <p>
+    <cookbook-badge-example-small #badgeExampleSmall></cookbook-badge-example-small>
+    <cookbook-example-viewer [html]="badgeExampleSmall.template"> </cookbook-example-viewer>
+  </p>
+</div>
+
+<div class="example">
   <h4>Properties:</h4>
   <cookbook-api-description-properties
     [properties]="properties"
