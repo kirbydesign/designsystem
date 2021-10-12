@@ -19,5 +19,11 @@ export class BadgeShowcaseComponent {
       defaultValue: 'white',
       type: ['white', 'success', 'warning', 'danger'],
     },
+    {
+      name: 'size',
+      description: 'Sets the size of the badge',
+      defaultValue: 'md',
+      type: ['sm', 'md'],
+    },
   ];
 }
