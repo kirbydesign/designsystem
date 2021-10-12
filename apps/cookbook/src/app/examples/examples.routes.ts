@@ -66,7 +66,6 @@ import { SlideButtonExampleComponent } from './slide-button-example/slide-button
 import { SlidesExampleComponent } from './slides-example/slides-example.component';
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
 import { StockChartDeprecatedExampleComponent } from './stock-chart-deprecated-example/stock-chart-deprecated-example.component';
-import { StylingListExampleComponent } from './styling-list-example/styling-list-example.component';
 import { TabExampleComponent } from './tabs-example/tab/tab-example.component';
 import { TabsExampleComponent } from './tabs-example/tabs-example.component';
 import { ToastExampleComponent } from './toast-example/toast-example.component';
@@ -478,9 +477,5 @@ export const routes: Routes = [
   {
     path: 'link',
     component: LinkExampleComponent,
-  },
-  {
-    path: 'styling-list',
-    component: StylingListExampleComponent,
   },
 ];
