@@ -1,6 +1,6 @@
 {
   "name": "designsystem",
-  "version": "4.0.3",
+  "version": "4.0.4",
   "description": "Kirby Design Components",
   "engines": {
     "node": "^14.16"
