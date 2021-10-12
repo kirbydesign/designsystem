@@ -1,32 +1,52 @@
-<div class="example">
-  <h2>Number</h2>
-  <p>
-    <cookbook-badge-example-number #badgeExampleNumber></cookbook-badge-example-number>
-    <cookbook-example-viewer [html]="badgeExampleNumber.template"> </cookbook-example-viewer>
-  </p>
+<p>
+  Badges are inlines block elements that often are used on top of or close to another component.
+  They can be used with numbers, text and icons. A small badge version also exists which does not
+  support slotted content but can be used to indicate status.
+</p>
 
-  <h2>Text</h2>
-  <p>
-    <cookbook-badge-example-text #badgeExampleText></cookbook-badge-example-text>
-    <cookbook-example-viewer [html]="badgeExampleText.template"> </cookbook-example-viewer>
-  </p>
+<kirby-divider [hasMargin]="true"></kirby-divider>
+<h2>Number</h2>
+<p>
+  Using a badge with an number can be a good way to indicate status on an element.
+</p>
+<p>
+  <cookbook-badge-example-number #badgeExampleNumber></cookbook-badge-example-number>
+  <cookbook-example-viewer [html]="badgeExampleNumber.template"> </cookbook-example-viewer>
+</p>
 
-  <h2>Icon</h2>
-  <p>
-    <cookbook-badge-example-icon #badgeExampleIcon></cookbook-badge-example-icon><br />
-    <cookbook-example-viewer [html]="badgeExampleIcon.template"> </cookbook-example-viewer>
-  </p>
+<kirby-divider [hasMargin]="true"></kirby-divider>
+<h2>Text</h2>
+<p>
+  Badges can also be used together with a text. Flags might in some cases be a better alternative.
+</p>
+<p>
+  <cookbook-badge-example-text #badgeExampleText></cookbook-badge-example-text>
+  <cookbook-example-viewer [html]="badgeExampleText.template"> </cookbook-example-viewer>
+</p>
 
-  <h2>Small Badge</h2>
-  <p>
-    <cookbook-badge-example-small #badgeExampleSmall></cookbook-badge-example-small>
-    <cookbook-example-viewer [html]="badgeExampleSmall.template"> </cookbook-example-viewer>
-  </p>
-</div>
+<kirby-divider [hasMargin]="true"></kirby-divider>
+<h2>Icon</h2>
+<p>
+  It is possible to slot an icon to display it in a badge. This might be used to indicate the
+  existence of an associated element.
+</p>
+<p>
+  <cookbook-badge-example-icon #badgeExampleIcon></cookbook-badge-example-icon><br />
+  <cookbook-example-viewer [html]="badgeExampleIcon.template"> </cookbook-example-viewer>
+</p>
+<kirby-divider [hasMargin]="true"></kirby-divider>
 
-<div class="example">
-  <h4>Properties:</h4>
-  <cookbook-api-description-properties
-    [properties]="properties"
-  ></cookbook-api-description-properties>
-</div>
+<h2>Small Badge</h2>
+<p>
+  Setting the input property <code>size</code> to <code>'sm'</code> will display a small badge
+  without any content. This can be useful to indicate status on an element.
+</p>
+<p>
+  <cookbook-badge-example-small #badgeExampleSmall></cookbook-badge-example-small>
+  <cookbook-example-viewer [html]="badgeExampleSmall.template"> </cookbook-example-viewer>
+</p>
+<kirby-divider [hasMargin]="true"></kirby-divider>
+<h2>Properties:</h2>
+<cookbook-api-description-properties
+  [properties]="properties"
+></cookbook-api-description-properties>
