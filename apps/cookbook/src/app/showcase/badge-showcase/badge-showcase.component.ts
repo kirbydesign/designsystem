@@ -9,6 +9,8 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
 export class BadgeShowcaseComponent {
   exampleHtml: string = require('!raw-loader!../../examples/badge-example/badge-example.component.html')
     .default;
+  _cardMode = 'flat';
+  _cardHasPadding = true;
 
   properties: ApiDescriptionProperty[] = [
     {
