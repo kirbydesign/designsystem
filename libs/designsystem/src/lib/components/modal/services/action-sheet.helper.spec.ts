@@ -64,7 +64,7 @@ describe('ActionSheetHelper', () => {
       ionModal.onDidDismiss().then((_) => (modalDidDismiss = true));
       backdrop.dispatchEvent(new MouseEvent('click'));
       await new Promise<void>((resolve) => setTimeout(resolve, 15));
-      expect(modalDidDismiss).toBeFalse();
+      expect(modalDidDismiss).toBeTruthy();
     });
 
     it('action-sheet should have correct backdrop style when opened on top of a modal', async () => {
