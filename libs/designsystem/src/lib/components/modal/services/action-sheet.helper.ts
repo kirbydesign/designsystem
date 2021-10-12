@@ -1,10 +1,11 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 
-import { ActionSheetConfig } from '../action-sheet/config/action-sheet-config';
 import { ActionSheetComponent } from '../action-sheet/action-sheet.component';
+import { ActionSheetConfig } from '../action-sheet/config/action-sheet-config';
 import { ActionSheetItem } from '../action-sheet/config/action-sheet-item';
+
 import { Overlay } from './modal.interfaces';
 
 @Injectable()
@@ -23,7 +24,7 @@ export class ActionSheetHelper {
         cancel: cancel,
         itemSelect: itemSelect,
       },
-      backdropDismiss: false,
+      backdropDismiss: true,
     });
 
     const cancelSubscription: Subscription = cancel.subscribe(() => ionModal.dismiss());
