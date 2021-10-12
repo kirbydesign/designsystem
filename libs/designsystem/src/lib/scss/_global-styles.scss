@@ -177,6 +177,7 @@ ion-modal.kirby-overlay {
       align-items: flex-end;
       --max-width: auto;
       --max-height: auto;
+      pointer-events: none;
     }
   }
 
