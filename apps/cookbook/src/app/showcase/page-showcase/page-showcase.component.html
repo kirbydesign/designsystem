@@ -41,12 +41,42 @@
     </li>
   </ul>
 
-  <h2>Life-cycle hooks</h2>
+  <h2>Page with Kirby Router Outlet</h2>
   <p>
-    Be aware that using page with <code>kirby-router-outlet</code>, causes the views to be stacked
-    instead of replaced. This means that you can't trust <code>onInit</code> and
-    <code>onDestroy</code>. Instead you can trust the <code>kirby-page</code> events
-    <code>(enter)</code> and <code>(leave)</code> instead.
+    Using page with the <code>kirby-router-outlet</code> will cause the views to be stacked instead
+    of replaced.
+  </p>
+
+  <h3>Life-cycle hooks</h3>
+  <p>
+    As the views are stacked and not replaced when using <code>kirby-router-outlet</code> the
+    life-cycle hooks <code>onInit</code> and <code>onDestroy</code> can't be relied on. Instead the
+    <code>kirby-page</code> events <code>(enter)</code> and <code>(leave)</code> should be used.
+  </p>
+
+  <h3>Navigation</h3>
+  <p>
+    When using a page with <code>kirby-router-outlet</code> it is possible to navigate to a new page
+    using the Angular router. But in order to navigate the history of the stack; the
+    <code>NavController</code> class is necessary for the animations to work properly.
+  </p>
+
+  <p>
+    For example it is possible to navigate one step back when using stacked pages using the
+    <code>back</code> method of the <code>NavController</code> class.
+  </p>
+
+  <p>
+    The <code>NavController</code> is provided by the
+    <a target="_blank" href="https://www.npmjs.com/package/@ionic/angular" target="_blank"
+      ><code>@ionic/angular</code></a
+    >
+    package and is being re-exported by Kirby.
+  </p>
+
+  <p>
+    <code>NavController</code> documentation and usage details can be found
+    <a href="https://ionicframework.com/docs/v3/api/navigation/NavController/">here</a>.
   </p>
 
   <div class="page-example">

@@ -15,31 +15,21 @@ import {
   Output,
   QueryList,
   Renderer2,
+  RendererStyleFlags2,
   TemplateRef,
   ViewChild,
   ViewChildren,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+import { ButtonComponent } from '../button/button.component';
 import { CardComponent } from '../card/card.component';
 import { ItemComponent } from '../item/item.component';
 import { ListItemTemplateDirective } from '../list/list.directive';
+import { HorizontalDirection, PopoverComponent } from '../popover/popover.component';
 
-export enum OpenState {
-  closed,
-  opening,
-  open,
-}
-
-export enum HorizontalDirection {
-  right = 'right',
-  left = 'left',
-}
-
-enum VerticalDirection {
-  up,
-  down,
-}
+import { OpenState, VerticalDirection } from './dropdown.types';
+import { KeyboardHandlerService } from './keyboard-handler.service';
 
 @Component({
   selector: 'kirby-dropdown',
@@ -122,6 +112,10 @@ export class DropdownComponent
   @Input()
   tabindex = 0;
 
+  @HostBinding('class.with-popover')
+  @Input()
+  usePopover = false;
+
   @HostBinding('attr.tabindex')
   get _tabindex() {
     return this.disabled ? -1 : this.tabindex;
@@ -179,8 +173,12 @@ export class DropdownComponent
   itemTemplate: TemplateRef<any>;
   @ContentChildren(ListItemTemplateDirective, { read: ElementRef })
   slottedItems: QueryList<ElementRef<HTMLElement>>;
-  @ViewChild(CardComponent, { static: true, read: ElementRef })
+  @ViewChild(CardComponent, { read: ElementRef })
   cardElement: ElementRef<HTMLElement>;
+  @ViewChild(PopoverComponent)
+  popover?: PopoverComponent;
+  @ViewChild(ButtonComponent, { static: true, read: ElementRef })
+  buttonElement: ElementRef<HTMLElement>;
   @ViewChildren(ItemComponent, { read: ElementRef })
   kirbyItemsDefault: QueryList<ElementRef<HTMLElement>>;
   @ContentChildren(ItemComponent, { read: ElementRef })
@@ -188,15 +186,16 @@ export class DropdownComponent
 
   private itemClickUnlisten: (() => void)[] = [];
   private intersectionObserverRef: IntersectionObserver;
-  private showDropdownTimeoutId;
+  private showDropdownTimeoutId: ReturnType<typeof setTimeout>;
 
   constructor(
     private renderer: Renderer2,
     private elementRef: ElementRef<HTMLElement>,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    private keyboardHandlerService: KeyboardHandlerService
   ) {}
 
-  onToggle(event: Event) {
+  onToggle(event: MouseEvent) {
     event.stopPropagation();
     if (!this.isOpen) {
       this.elementRef.nativeElement.focus();
@@ -229,11 +228,31 @@ export class DropdownComponent
     }
   }
 
+  /* Utility that makes it easier to set styles on card element 
+  when using popover*/
+  private setPopoverCardStyle(style: string, value: string) {
+    if (!this.usePopover) return;
+
+    this.renderer.setStyle(
+      this.cardElement.nativeElement,
+      style,
+      value,
+      RendererStyleFlags2.DashCase
+    );
+  }
+
   ngAfterViewInit() {
+    if (this.usePopover && this.expand === 'block') {
+      const { width } = this.elementRef.nativeElement.getBoundingClientRect();
+      this.setPopoverCardStyle('--kirby-card-width', `${width}px`);
+      this.setPopoverCardStyle('max-width', 'initial');
+      this.setPopoverCardStyle('min-width', 'initial');
+    }
     this.initializeAlignment();
   }
 
   private initializeAlignment() {
+    if (this.usePopover) return;
     if (!this.intersectionObserverRef) {
       const options = {
         rootMargin: '0px',
@@ -260,7 +279,7 @@ export class DropdownComponent
     }
   }
 
-  private setHorizontalDirection(entry) {
+  private setHorizontalDirection(entry: IntersectionObserverEntry) {
     // If popout direction is set to right, and the entry is cut off to the right by ${entry.boundingClientRect.right - entry.intersectionRect.right}px
     // it is set to popout left instead, and vice versa for popout direction left
     if (this.horizontalDirection === HorizontalDirection.right) {
@@ -274,7 +293,7 @@ export class DropdownComponent
     }
   }
 
-  private setVerticalDirection(entry) {
+  private setVerticalDirection(entry: IntersectionObserverEntry) {
     if (entry.boundingClientRect.top < 0) {
       // entry is cut off at the top by ${entry.boundingClientRect.top}px
       // open downwards:
@@ -309,6 +328,7 @@ export class DropdownComponent
   private showDropdown() {
     if (this.state === OpenState.opening) {
       this.state = OpenState.open;
+      this.popover?.show();
       this.scrollItemIntoView(this.selectedIndex);
       this.changeDetectorRef.markForCheck();
     }
@@ -322,6 +342,7 @@ export class DropdownComponent
       this.state = OpenState.closed;
       // Reset vertical direction to default
       this.verticalDirection = VerticalDirection.down;
+      this.popover?.hide();
     }
   }
 
@@ -441,15 +462,20 @@ export class DropdownComponent
     }
   }
 
+  _onPopoverWillHide() {
+    this.state = OpenState.closed;
+    this.elementRef.nativeElement.focus();
+  }
+
   @HostListener('keydown.enter')
   @HostListener('keydown.escape')
-  @HostListener('blur')
-  _onBlur() {
-    if (this.disabled) {
-      return;
-    }
+  @HostListener('blur', ['$event'])
+  _onBlur(event?: FocusEvent) {
+    if (this.disabled) return;
     if (this.isOpen) {
-      this.close();
+      if (!this.cardElement.nativeElement.contains(event?.relatedTarget as HTMLElement)) {
+        this.close();
+      }
     }
     this._onTouched();
   }
@@ -475,52 +501,27 @@ export class DropdownComponent
   @HostListener('keydown.arrowleft', ['$event'])
   @HostListener('keydown.arrowright', ['$event'])
   _onArrowKeys(event: KeyboardEvent) {
-    if (this.disabled) {
-      return;
-    }
+    if (this.disabled) return;
+    // Mirror default HTML5 select behaviour - prevent left/right arrows when open:
     if (this.isOpen && (event.key === 'ArrowLeft' || event.key === 'ArrowRight')) {
-      // Mirror default HTML5 select behaviour - prevent left/right arrows when open:
       return;
     }
-    event.preventDefault();
-    let newIndex = -1;
-    if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
-      // Select previous item:
-      newIndex = this.selectedIndex - 1;
-    }
-    if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
-      if (this.selectedIndex === undefined) {
-        // None selected, select first item:
-        newIndex = 0;
-      } else if (this.selectedIndex < this.items.length - 1) {
-        // Select next item:
-        newIndex = this.selectedIndex + 1;
-      }
-    }
+    const newIndex = this.keyboardHandlerService.handle(event, this.items, this.selectedIndex);
     if (newIndex > -1) {
       this.selectItem(newIndex);
     }
+    return false;
   }
 
   @HostListener('keydown.home', ['$event'])
   @HostListener('keydown.end', ['$event'])
   _onHomeEndKeys(event: KeyboardEvent) {
-    event.preventDefault();
-    if (this.disabled) {
-      return;
-    }
-    let newIndex = -1;
-    if (event.key === 'Home') {
-      // Select first item:
-      newIndex = 0;
-    }
-    if (event.key === 'End') {
-      // Select last item:
-      newIndex = this.items.length - 1;
-    }
+    if (this.disabled) return;
+    const newIndex = this.keyboardHandlerService.handle(event, this.items, this.selectedIndex);
     if (newIndex > -1) {
       this.selectItem(newIndex);
     }
+    return false;
   }
 
   ngOnDestroy(): void {
