@@ -47,17 +47,17 @@ The good issue: contains only one issue, is self-contained, is specific & unambi
 
 ## Checklist:
 
-The following tasks should be carried out in sequence in order to follow [the process of contributing](../CONTRIBUTING.md/#the-process-of-contributing) correctly.
+The following tasks should be carried out in sequence in order to follow [the process of contributing](https://github.com/kirbydesign/designsystem/blob/master/.github/CONTRIBUTING.md/#the-process-of-contributing) correctly.
 
 ### Verification
 To make sure the bug is not intended behaviour; it should be verified by a member of team Kirby before moving on to implementation. 
 
-- [ ] Make sure the `NOT verified` label has been removed by a member of [team Kirby](../SUPPORT.md/#team-kirby); do not proceed until this is done
+- [ ] Make sure the `NOT verified` label has been removed by a member of [team Kirby](https://github.com/kirbydesign/designsystem/blob/master/.github/SUPPORT.md#team-kirby); do not proceed until this is done
 
 ### Implementation 
 The contributor who wants to implement this issue should: 
 
-- [ ] Make sure you have read: "[Before you get coding](../CONTRIBUTING.md/#before-you-get-coding)".
+- [ ] Make sure you have read: "[Before you get coding](https://github.com/kirbydesign/designsystem/blob/master/.github/CONTRIBUTING.md/#before-you-get-coding)".
 - [ ] Signal to others you are working on the issue by assigning yourself.
 - [ ] Create a branch from the [master branch](https://github.com/kirbydesign/designsystem/tree/master) following our [branch naming convention](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Branch). 
 - [ ] Create a test that reproduces the bug following guidelines in: "[The good: Test](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Test)". 

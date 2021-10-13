@@ -134,3 +134,11 @@ ion-item {
     border-bottom-right-radius: 0;
   }
 }
+
+// Fixes https://github.com/kirbydesign/designsystem/issues/1711
+:host-context(.shape-rounded.has-sections .list-items kirby-list-item:first-of-type) {
+  ion-item::part(native) {
+    border-top-left-radius: $border-radius;
+    border-top-right-radius: $border-radius;
+  }
+}
