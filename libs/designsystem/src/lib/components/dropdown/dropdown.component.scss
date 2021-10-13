@@ -2,25 +2,21 @@
 
 $dropdown-max-height: 8 * $dropdown-item-height;
 $margin-horizontal-total: 2 * size('s');
+$min-screen-width-small: 320px;
+$min-screen-width: 375px;
 
 :host {
-  --kirby_internal_min-screen-width: 320px;
-  @include media('>=small') {
-    --kirby_internal_min-screen-width: 375px;
-  }
-
   display: inline-block;
   position: relative;
   max-width: calc(100vw - #{$margin-horizontal-total});
 
   &.expand {
     display: block;
-  }
 
-  &:not(.expand) {
     kirby-card {
-      min-width: calc(var(--kirby_internal_min-screen-width) - #{$margin-horizontal-total});
-      max-width: calc(100vw - #{$margin-horizontal-total});
+      width: 100%;
+      min-width: initial;
+      max-width: initial;
     }
   }
 
@@ -64,54 +60,69 @@ $margin-horizontal-total: 2 * size('s');
   }
 }
 
-kirby-card {
-  display: none;
-  opacity: 0;
-  position: absolute;
-  width: 100%;
-  max-height: $dropdown-max-height;
-  margin-top: size('xxxs');
-  overflow-y: auto;
-  box-shadow: get-elevation(8);
-  z-index: z('dropdown');
+kirby-popover {
+  --max-height: #{$dropdown-max-height};
 }
 
-:host(.is-opening) {
+kirby-card {
+  max-height: $dropdown-max-height;
+  margin-top: size('xxxs');
+  margin-bottom: size('xxxs');
+  overflow-y: auto;
+  box-shadow: get-elevation(8);
+  min-width: $min-screen-width-small - $margin-horizontal-total;
+  @include media('>=small') {
+    min-width: $min-screen-width - $margin-horizontal-total;
+  }
+  max-width: calc(100vw - #{$margin-horizontal-total});
+}
+
+:host(:not(.with-popover)) {
   kirby-card {
-    display: block;
+    display: none;
+    opacity: 0;
+    position: absolute;
+    z-index: z('dropdown');
+  }
+
+  &.is-opening {
+    kirby-card {
+      display: block;
+    }
+  }
+
+  &.is-open {
+    kirby-card {
+      display: block;
+      opacity: 1;
+    }
+  }
+
+  &.popout-left {
+    kirby-card {
+      right: 0;
+    }
+  }
+
+  &.popout-up {
+    kirby-card {
+      top: 0;
+      margin-top: -#{size('xxxs')};
+      transform: translateY(-100%);
+    }
+
+    &.is-open {
+      > button {
+        //Move button on top of card's shadow:
+        z-index: z('dropdown') + 1;
+      }
+    }
   }
 }
 
 :host(.is-open) {
   & > button {
     box-shadow: get-elevation(8);
-  }
-
-  kirby-card {
-    display: block;
-    opacity: 1;
-  }
-}
-
-:host(.popout-left) {
-  kirby-card {
-    right: 0;
-  }
-}
-
-// TODO: UI refine style and behaviour when open upwards...
-:host(.popout-up) {
-  kirby-card {
-    top: 0;
-    margin-top: -#{size('xxxs')};
-    transform: translateY(-100%);
-  }
-
-  &.is-open {
-    > button {
-      //Move button on top of card's shadow:
-      z-index: z('dropdown') + 1;
-    }
   }
 }
 

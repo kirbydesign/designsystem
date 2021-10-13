@@ -106,6 +106,9 @@ export class DesignTokenHelper {
   public static transitionEasings() {
     return styles.transitionEasings;
   }
+  public static zLayer(key: keyof typeof styles.zLayers): string {
+    return styles.zLayers[key];
+  }
 }
 
 export type ThemeColorExtended =

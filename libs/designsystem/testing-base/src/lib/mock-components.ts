@@ -44,6 +44,7 @@ import {
   MockPageTitleDirective,
   MockPageToolbarTitleDirective,
 } from './components/mock.page.component';
+import { MockPopoverComponent } from './components/mock.popover.component';
 import { MockProgressCircleComponent } from './components/mock.progress-circle.component';
 import { MockRadioGroupComponent } from './components/mock.radio-group.component';
 import { MockRadioComponent } from './components/mock.radio.component';
@@ -58,7 +59,6 @@ import { MockTabsComponent } from './components/mock.tabs.component';
 import { MockTextareaComponent } from './components/mock.textarea.component';
 import { MockToggleButtonComponent } from './components/mock.toggle-button.component';
 import { MockToggleComponent } from './components/mock.toggle.component';
-import { MockBadgeComponent } from './components/mock.web-component-proxies.component';
 
 export const MOCK_COMPONENTS = [
   MockAccordionItemComponent,
@@ -104,6 +104,7 @@ export const MOCK_COMPONENTS = [
   MockPageContentComponent,
   MockPageActionsComponent,
   MockPageComponent,
+  MockPopoverComponent,
   MockProgressCircleComponent,
   MockRadioGroupComponent,
   MockRadioComponent,
@@ -117,5 +118,4 @@ export const MOCK_COMPONENTS = [
   MockTabsComponent,
   MockToggleComponent,
   MockToggleButtonComponent,
-  MockBadgeComponent,
 ];
