@@ -15,8 +15,9 @@ describe('BadgeComponent', () => {
   });
 
   describe('by default', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
       spectator = createHost('<kirby-badge></kirby-badge>');
+      await TestHelper.whenReady(spectator.element);
     });
 
     it('should create', () => {
@@ -27,7 +28,9 @@ describe('BadgeComponent', () => {
       expect(spectator.component.size).toBe('md');
     });
 
-    it("should have 'md' class ", () => {});
+    it("should have 'md' class ", () => {
+      expect(spectator.element).toHaveClass('md');
+    });
   });
 
   describe('when one character is slotted', () => {
