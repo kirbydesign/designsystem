@@ -1,4 +1,3 @@
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import {
   AfterViewInit,
   Component,
@@ -22,11 +21,11 @@ export class IphoneComponent implements OnChanges, AfterViewInit {
 
   @ViewChild('iframe', { read: ElementRef, static: true }) iframe: ElementRef<HTMLIFrameElement>;
 
-  constructor(private sanitizer: DomSanitizer, private locationStrategy: LocationStrategy) {}
+  constructor(private sanitizer: DomSanitizer) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.src) {
-      this.trustedSrc = this.createTrustedSrc(changes.src.currentValue);
+      this.trustedSrc = this.sanitizer.bypassSecurityTrustResourceUrl(changes.src.currentValue);
     }
   }
 
@@ -38,11 +37,5 @@ export class IphoneComponent implements OnChanges, AfterViewInit {
     const document = this.iframe.nativeElement.contentWindow.document.documentElement;
     document.style.setProperty('--ion-safe-area-top', '20px');
     document.style.setProperty('--ion-safe-area-bottom', '22px');
-  }
-
-  createTrustedSrc(unstrustedSrc: string) {
-    const src =
-      this.locationStrategy instanceof HashLocationStrategy ? `#${unstrustedSrc}` : unstrustedSrc;
-    return this.sanitizer.bypassSecurityTrustResourceUrl(src);
   }
 }

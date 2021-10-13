@@ -13,5 +13,3 @@ export class TabsService {
     this.outletSubject$.next(outlet);
   }
 }
-
-export { IonRouterOutlet };
