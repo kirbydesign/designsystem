@@ -54,7 +54,14 @@
 </p>
 
 <kirby-divider [hasMargin]="true"></kirby-divider>
-<h2>Properties:</h2>
+<h2>API</h2>
+<h3>Properties</h3>
 <cookbook-api-description-properties
-  [properties]="properties"
+  [properties]="_properties"
+></cookbook-api-description-properties>
+
+<h3>CSS Custom Properties</h3>
+<cookbook-api-description-properties
+  [properties]="_cssCustomProperties"
+  [columns]="_cssCustomPropertiesColumns"
 ></cookbook-api-description-properties>
