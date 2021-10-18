@@ -35,14 +35,6 @@
   }
 }
 
-:host-context(.segment-btn-wrapper) {
-  --kirby-badge-elevation: #{get-elevation(2)};
-  position: absolute;
-  top: -#{size('xxs')};
-  right: #{size('xxs')};
-  z-index: z('segmentBadge');
-}
-
 @each $color-name, $color-value in $notification-colors {
   $text-color: get-color($color-name + '-contrast');
   @if ($color-name == 'danger') {

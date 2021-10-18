@@ -9,12 +9,7 @@ const config = {
   [mode]="mode"
   [size]="size"
   (segmentSelect)="onSegmentSelect($event)"
->
-<kirby-badge themeColor="warning">
-  <kirby-icon name="attach"></kirby-icon>
-</kirby-badge>
-
-</kirby-segmented-control>
+></kirby-segmented-control>
 
 <kirby-card hasPadding="true">
   <h2>Content for {{ selectedSegment.text }} segment</h2>
