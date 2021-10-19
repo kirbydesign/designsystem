@@ -4,7 +4,7 @@
   display: block;
   user-select: none;
 
-  --kirby-badge-elevation: #{get-elevation(99)};
+  --kirby-badge-elevation: #{get-elevation(2)};
   --kirby-badge-position: absolute;
   --kirby-badge-top: -#{size('xxs')};
   --kirby-badge-right: #{size('xxs')};
