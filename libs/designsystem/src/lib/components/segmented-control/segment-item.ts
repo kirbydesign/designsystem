@@ -8,7 +8,8 @@ export interface SegmentItem {
    */
   checked?: boolean;
   badge?: {
-    content: string;
+    content?: string;
+    icon?: string;
     description?: string;
     themeColor: ThemeColor;
   };

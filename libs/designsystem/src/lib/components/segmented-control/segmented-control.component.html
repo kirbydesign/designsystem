@@ -11,8 +11,14 @@
       role="text"
       [attr.aria-label]="item.badge.description"
       [themeColor]="item.badge.themeColor"
-      >{{ item.badge.content }}</kirby-badge
     >
+      <kirby-icon
+        *ngIf="item.badge.icon"
+        [customName]="item.badge.icon"
+        [name]="item.badge.icon"
+      ></kirby-icon>
+      {{ item.badge.content }}
+    </kirby-badge>
   </div>
 </ion-segment>
 
