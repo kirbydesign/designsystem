@@ -13,11 +13,13 @@
       [themeColor]="item.badge.themeColor"
     >
       <kirby-icon
-        *ngIf="item.badge.icon"
+        *ngIf="item.badge.icon; else badgeContent"
         [customName]="item.badge.icon"
         [name]="item.badge.icon"
       ></kirby-icon>
-      {{ item.badge.content }}
+      <ng-template #badgeContent>
+        {{ item.badge.content }}
+      </ng-template>
     </kirby-badge>
   </div>
 </ion-segment>
