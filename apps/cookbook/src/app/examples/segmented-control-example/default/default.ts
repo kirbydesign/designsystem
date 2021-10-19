@@ -115,7 +115,15 @@ export class SegmentedControlExampleDefaultComponent implements OnInit {
         themeColor: 'warning',
       },
     },
-    { text: 'Second item', id: 'second' },
+    {
+      text: 'Second item',
+      id: 'second',
+      badge: {
+        icon: 'attach',
+        description: '4 unread messages',
+        themeColor: 'success',
+      },
+    },
   ];
 
   private chipItems = [...'123456'].map((i) => ({ text: `Chip-${i}`, id: i }));

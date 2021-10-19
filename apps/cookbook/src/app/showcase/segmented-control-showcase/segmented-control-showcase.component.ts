@@ -22,15 +22,17 @@ export class SegmentedControlShowcaseComponent {
     },
     {
       name: 'items',
-      description:
-        'An array of `SegmentItem[]` representing the set of segment elements within the control.',
+      description: `An array of SegmentItem[] representing the set of segment elements within the control. If you want a badge on the SegmentItem it can be added via the SegmentItem array. *
+        
+        The badge can contain either plain text via 'content', or an icon provided as either the name of any default icon, or customName of any registered icon, to the 'icon' field.`,
       defaultValue: '',
       type: [
         `[{
   id: string,
   text: string,
   badge?: {
-    content: string,
+    content?: string,
+    icon?: string,
     description?: string,
     themeColor: ThemeColor
   }
