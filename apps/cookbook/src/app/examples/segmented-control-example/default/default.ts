@@ -120,7 +120,7 @@ export class SegmentedControlExampleDefaultComponent implements OnInit {
       id: 'second',
       badge: {
         icon: 'attach',
-        description: '4 unread messages',
+        description: 'Item with attachment',
         themeColor: 'success',
       },
     },
