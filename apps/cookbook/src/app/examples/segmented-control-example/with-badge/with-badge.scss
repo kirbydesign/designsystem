@@ -1,0 +1,13 @@
+@import '~@kirbydesign/core/src/scss/utils';
+
+:host {
+  display: block;
+}
+
+kirby-segmented-control {
+  margin-bottom: size('l');
+}
+
+fieldset {
+  display: inline-block;
+}

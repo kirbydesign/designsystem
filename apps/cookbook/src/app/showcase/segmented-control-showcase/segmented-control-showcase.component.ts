@@ -22,15 +22,15 @@ export class SegmentedControlShowcaseComponent {
     },
     {
       name: 'items',
-      description:
-        'An array of `SegmentItem[]` representing the set of segment elements within the control.',
+      description: `An array of SegmentItem[] representing the set of segment elements within the control.`,
       defaultValue: '',
       type: [
         `[{
   id: string,
   text: string,
   badge?: {
-    content: string,
+    content?: string,
+    icon?: string,
     description?: string,
     themeColor: ThemeColor
   }
