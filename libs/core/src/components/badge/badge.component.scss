@@ -19,6 +19,7 @@
     font-size: inherit;
     position: relative;
     box-shadow: var(--kirby-badge-elevation, none);
+    //box-shadow: get-elevation(4);
   }
 
   ::slotted(kirby-icon) {

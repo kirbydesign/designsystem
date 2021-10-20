@@ -1,12 +1,25 @@
 @import '~@kirbydesign/core/src/scss/utils';
+@import '~@kirbydesign/core/src/scss/utils';
 
-.badge-examples {
-  display: inline-flex;
-  kirby-badge + kirby-badge {
-    margin-left: size('s');
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+  background: get-color('background-color');
+  padding: size('s');
+
+  @include media('>=medium') {
+    padding: size('l');
   }
-}
 
-h2 {
-  margin-top: size('l');
+  > * {
+    display: block;
+    margin: size('s') 0;
+  }
+
+  kirby-card {
+    width: 100%;
+    max-width: map-get($breakpoints, 'small');
+  }
 }
