@@ -19,18 +19,21 @@
 
   <h3>Default - with Badge</h3>
   <p>
-    If you want a badge on an item, it can be added via
+    Badges can be applied to a Segmented Control when the mode is 'default'. A badge can be added to
+    any SegmentItem, using the badge property.
+  </p>
+  <p>
     <a
       href="https://github.com/kirbydesign/designsystem/blob/master/libs/designsystem/src/lib/components/segmented-control/segment-item.ts"
       class="kirby-external-icon"
       target="_blank"
-      >the interface for SegmentItem</a
-    >. Badges are only applied when the mode is 'default'.
+      >See SegmentItem on Github</a
+    >
   </p>
   <p>
     The badge can contain either a plain text string through 'content', or an icon provided as
-    either the name of any default icon, or customName of any registered icon, in its 'icon' field.
-    The description of the badge is used as aria-label.
+    either the name of any default icon, or customName of any registered icon, in its 'icon'
+    property. The description of the badge is used as aria-label.
   </p>
 
   <cookbook-example-viewer [html]="badgeExample.template" [ts]="badgeExample.codeSnippet">
