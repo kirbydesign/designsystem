@@ -212,7 +212,7 @@ describe('SegmentedControl with Badge', () => {
     );
   });
 
-  it('should render a badge per item that has it defined', () => {
+  it('should render a badge per item with badge property defined', () => {
     spectator.setInput({ items: itemsWithBadge });
 
     expect(spectator.queryHostAll('kirby-badge').length).toBe(itemsWithBadge.length);
