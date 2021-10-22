@@ -19,6 +19,6 @@
     "inlineSourceMap": true,
     "enableIvy": false
   },
-  "exclude": ["src/test.ts", "**/*.spec.ts"],
+  "exclude": ["src/test.ts", "**/*.spec.ts", "**/*.stories.*"],
   "include": ["**/*.ts"]
 }
