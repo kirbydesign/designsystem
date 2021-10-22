@@ -23,7 +23,6 @@ import { InfiniteScrollDirective } from './directives/infinite-scroll.directive'
 import { ListHelper } from './helpers/list-helper';
 import { BoundaryClass } from './list-item/list-item.component';
 import { ListSwipeAction } from './list-swipe-action.type';
-import { VirtualScrollerSettings } from './list-virtual-scroll-settings.type';
 import {
   ListFooterDirective,
   ListHeaderDirective,
@@ -33,6 +32,7 @@ import {
 import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
 import { GroupByPipe } from './pipes/group-by.pipe';
 
+export type VirtualScrollSettings = IDatasource['settings'];
 export type ListShape = 'square' | 'rounded' | 'none';
 
 const INTERVAL = 400;
@@ -88,7 +88,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
 
   @Input() virtualScrollViewportHeight = 500;
 
-  @Input() virtualScrollSettings: VirtualScrollerSettings = {};
+  @Input() virtualScrollSettings: VirtualScrollSettings = {};
 
   @Input() virtualScrollTimeout = 5000;
 
