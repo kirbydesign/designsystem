@@ -31,6 +31,14 @@
 </ion-header>
 
 <ion-content scrollEvents="true" forceOverscroll="false">
+  <ion-refresher
+    *ngIf="refresh.observers.length > 0"
+    (ionRefresh)="refresh.emit($event)"
+    slot="fixed"
+  >
+    <kirby-spinner></kirby-spinner>
+  </ion-refresher>
+
   <div class="content-inner">
     <div
       class="page-title"

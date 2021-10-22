@@ -157,6 +157,7 @@ export class PageComponent
 
   @Output() enter = new EventEmitter<void>();
   @Output() leave = new EventEmitter<void>();
+  @Output() refresh = new EventEmitter<any>();
 
   @ViewChild(IonContent, { static: true }) private content: IonContent;
   @ViewChild(IonContent, { static: true, read: ElementRef })
