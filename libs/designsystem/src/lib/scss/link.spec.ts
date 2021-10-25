@@ -28,20 +28,4 @@ describe('Anchor tag', () => {
       expect(element).toHaveComputedStyle({ cursor: 'pointer' });
     });
   });
-
-  describe(`with class for link-icon applied`, () => {
-    beforeEach(() => {
-      const fixture = `<a href="/test/" class="kirby-external-icon" id="fixture">Text</a>`;
-      document.body.insertAdjacentHTML('afterbegin', fixture);
-      element = document.body.querySelector('#fixture');
-    });
-
-    it(`should have a link icon`, () => {
-      const baseURI = window.document.baseURI;
-
-      expect(element).toHaveComputedStyle({
-        'background-image': `url("${baseURI}assets/kirby/icons/svg/link.svg")`,
-      });
-    });
-  });
 });
