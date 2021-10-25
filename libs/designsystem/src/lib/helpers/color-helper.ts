@@ -57,9 +57,10 @@ export class ColorHelper {
     return ColorHelper.getColor(name + '-color-brightness');
   }
 
-  public static getThemeColorRgbString(name: string) {
+  public static getThemeColorRgbString(name: string, opacity?: number) {
+    const opacityValue: number = opacity ? ColorHelper.opacityThreshold(opacity) : 1;
     const rgbValue = ColorHelper.getColor(name + '-rgb');
-    return `rgb(${rgbValue})`;
+    return `rgb(${rgbValue}, ${opacityValue})`;
   }
 
   public static getThemeTextColorRgbString(name: string) {
@@ -129,6 +130,15 @@ export class ColorHelper {
     const camelCaseKey = kebabToCamelCase(name);
     const found = styles.kirbyTextColors[camelCaseKey];
     return found || null;
+  }
+
+  private static opacityThreshold(opacity: number): number {
+    if (0 <= opacity && opacity <= 1) {
+      return opacity;
+    }
+
+    console.error(`Opacity value must be between 0 and 1. Current value is: ${opacity}.`);
+    return 1;
   }
 }
 

@@ -6,6 +6,7 @@ import { KirbyModule } from '@kirbydesign/designsystem';
 import { ChartExampleComponent } from './chart-example.component';
 import { ChartExampleAccessibilityComponent } from './examples/chart-example-accessibility.component';
 import { ChartExampleAnnotationsComponent } from './examples/chart-example-annotations.component';
+import { ChartExampleAreaLineComponent } from './examples/chart-example-area-line.component';
 import { ChartExampleBarComponent } from './examples/chart-example-bar.component';
 import { ChartExampleColumnComponent } from './examples/chart-example-column-chart.component';
 import { ChartExampleColumnStackedComponent } from './examples/chart-example-column-stacked.component';
@@ -25,6 +26,7 @@ const COMPONENT_DECLARATIONS = [
   ChartExampleAccessibilityComponent,
   ChartExampleAnnotationsComponent,
   ChartExampleLineComponent,
+  ChartExampleAreaLineComponent,
 ];
 
 @NgModule({
