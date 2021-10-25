@@ -52,7 +52,7 @@ export class ChartShowcaseComponent {
     },
     {
       name: 'fill',
-      description: `(Optional) Chart.js fill that can be used to add background color between lines to the chart, see: https://www.chartjs.org/docs/latest/samples/area/line-datasets.html`,
+      description: `(Optional) Chart.js fill can be used to add background color between lines in the chart, see: https://www.chartjs.org/docs/latest/samples/area/line-datasets.html`,
       type: ['number', 'string', 'object'],
     },
   ];
