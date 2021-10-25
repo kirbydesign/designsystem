@@ -2,6 +2,7 @@ import { Component, ComponentInterface, h, Host, Prop } from '@stencil/core';
 
 import { ThemeColor } from '../../helpers';
 import { createClassMap, CssClassMap } from '../../helpers/css-classes-helper';
+
 import { BadgeSize } from './badge.types';
 
 @Component({

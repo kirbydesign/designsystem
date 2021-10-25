@@ -33745,7 +33745,7 @@
         "ctype": "miscellaneous",
         "subtype": "typealias",
         "rawtype": "literal type",
-        "file": "libs/designsystem/testing-base/src/lib/components/mock.page.component.ts",
+        "file": "libs/designsystem/src/lib/components/page/page.component.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "description": "",
@@ -33756,7 +33756,7 @@
         "ctype": "miscellaneous",
         "subtype": "typealias",
         "rawtype": "literal type",
-        "file": "libs/designsystem/src/lib/components/page/page.component.ts",
+        "file": "libs/designsystem/testing-base/src/lib/components/mock.page.component.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "description": "",
@@ -33877,7 +33877,7 @@
         "ctype": "miscellaneous",
         "subtype": "typealias",
         "rawtype": "literal type",
-        "file": "libs/designsystem/testing-base/src/lib/components/mock.page.component.ts",
+        "file": "libs/designsystem/src/lib/components/page/page.component.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "description": "",
@@ -33888,7 +33888,7 @@
         "ctype": "miscellaneous",
         "subtype": "typealias",
         "rawtype": "literal type",
-        "file": "libs/designsystem/src/lib/components/page/page.component.ts",
+        "file": "libs/designsystem/testing-base/src/lib/components/mock.page.component.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "description": "",
@@ -36377,30 +36377,6 @@
           "kind": 193
         }
       ],
-      "libs/designsystem/testing-base/src/lib/components/mock.page.component.ts": [
-        {
-          "name": "fixedConfig",
-          "ctype": "miscellaneous",
-          "subtype": "typealias",
-          "rawtype": "literal type",
-          "file": "libs/designsystem/testing-base/src/lib/components/mock.page.component.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "description": "",
-          "kind": 180
-        },
-        {
-          "name": "stickyConfig",
-          "ctype": "miscellaneous",
-          "subtype": "typealias",
-          "rawtype": "literal type",
-          "file": "libs/designsystem/testing-base/src/lib/components/mock.page.component.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "description": "",
-          "kind": 180
-        }
-      ],
       "libs/designsystem/src/lib/components/page/page.component.ts": [
         {
           "name": "fixedConfig",
@@ -36419,6 +36395,30 @@
           "subtype": "typealias",
           "rawtype": "literal type",
           "file": "libs/designsystem/src/lib/components/page/page.component.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "description": "",
+          "kind": 180
+        }
+      ],
+      "libs/designsystem/testing-base/src/lib/components/mock.page.component.ts": [
+        {
+          "name": "fixedConfig",
+          "ctype": "miscellaneous",
+          "subtype": "typealias",
+          "rawtype": "literal type",
+          "file": "libs/designsystem/testing-base/src/lib/components/mock.page.component.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "description": "",
+          "kind": 180
+        },
+        {
+          "name": "stickyConfig",
+          "ctype": "miscellaneous",
+          "subtype": "typealias",
+          "rawtype": "literal type",
+          "file": "libs/designsystem/testing-base/src/lib/components/mock.page.component.ts",
           "deprecated": false,
           "deprecationMessage": "",
           "description": "",
