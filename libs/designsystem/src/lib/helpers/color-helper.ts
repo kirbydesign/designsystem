@@ -58,9 +58,10 @@ export class ColorHelper {
   }
 
   public static getThemeColorRgbString(name: string, opacity?: number) {
-    const opacityValue: number = opacity ? ColorHelper.opacityThreshold(opacity) : 1;
     const rgbValue = ColorHelper.getColor(name + '-rgb');
-    return `rgb(${rgbValue}, ${opacityValue})`;
+    return opacity
+      ? `rgba(${rgbValue}, ${ColorHelper.opacityThreshold(opacity)})`
+      : `rgb(${rgbValue})`;
   }
 
   public static getThemeTextColorRgbString(name: string) {
@@ -137,7 +138,7 @@ export class ColorHelper {
       return opacity;
     }
 
-    console.error(`Opacity value must be between 0 and 1. Current value is: ${opacity}.`);
+    console.warn(`Opacity value must be between 0 and 1. Current value is: ${opacity}.`);
     return 1;
   }
 }
