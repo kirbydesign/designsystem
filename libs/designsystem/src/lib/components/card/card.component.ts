@@ -1,11 +1,11 @@
 import {
   Component,
-  OnInit,
-  Input,
   ElementRef,
-  Renderer2,
-  OnDestroy,
   HostBinding,
+  Input,
+  OnDestroy,
+  OnInit,
+  Renderer2,
 } from '@angular/core';
 
 import { ResizeObserverService } from '../shared/resize-observer/resize-observer.service';
@@ -22,6 +22,8 @@ export class CardComponent implements OnInit, OnDestroy {
 
   @Input()
   hasPadding: boolean;
+
+  hasButton: boolean;
 
   private sizesSortedByBreakpoint = this.sortSizesByBreakpoint({
     small: 360,
