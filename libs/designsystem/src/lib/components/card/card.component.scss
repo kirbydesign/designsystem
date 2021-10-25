@@ -45,3 +45,10 @@
     --kirby-card-main-color: #{get-color($color-name + '-contrast')};
   }
 }
+
+.hasButton {
+  cursor: pointer;
+  @include hover() {
+    opacity: 0.8;
+  }
+}
