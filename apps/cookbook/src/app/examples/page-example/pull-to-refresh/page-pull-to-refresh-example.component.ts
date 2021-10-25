@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { PullToRefreshEvent } from '@kirbydesign/designsystem';
+
 import { BasePageExampleComponent } from '../base-page-example.component';
 
 const config = {
@@ -16,21 +18,21 @@ export class PagePullToRefreshExampleComponent extends BasePageExampleComponent 
   static readonly template = config.template
     .replace(' defaultBackHref="/"', '')
     .replace('<div [innerHTML]="content"></div>', '...');
-  static readonly handler = `loadData(event) {
+  static readonly handler = `loadData(event: PullToRefreshEvent) {
   console.log('Begin async operation');
 
   setTimeout(() => {
     console.log('Async operation has ended');
-    event.target.complete();
+    event.complete();
   }, 3000);
 }`;
 
-  loadData(event) {
+  loadData(event: PullToRefreshEvent) {
     console.log('Begin async operation');
 
     setTimeout(() => {
       console.log('Async operation has ended');
-      event.target.complete();
+      event.complete();
     }, 3000);
   }
 }
