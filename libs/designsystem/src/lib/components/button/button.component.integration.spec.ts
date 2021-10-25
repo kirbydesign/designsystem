@@ -1,6 +1,7 @@
 import { RouterTestingModule } from '@angular/router/testing';
 import { IonIcon } from '@ionic/angular';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
+import { HasButtonDirective } from 'libs/designsystem/src';
 import { MockComponent, MockComponents } from 'ng-mocks';
 
 import { FitHeadingDirective } from '../../directives/fit-heading/fit-heading.directive';
@@ -41,6 +42,7 @@ describe('ButtonComponent in Kirby Page', () => {
       PageTitleDirective,
       PageToolbarTitleDirective,
       FitHeadingDirective,
+      HasButtonDirective,
     ],
     providers: [
       {

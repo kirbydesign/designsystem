@@ -1,4 +1,5 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
+import { HasButtonDirective } from 'libs/designsystem/src';
 
 import { ThemeColorDirective } from '../../directives';
 import { ColorHelper } from '../../helpers';
@@ -24,6 +25,7 @@ describe('AvatarComponent', () => {
       ThemeColorDirective,
       ProgressCircleComponent,
       ProgressCircleRingComponent,
+      HasButtonDirective,
     ],
     imports: [TestHelper.ionicModuleForTest],
   });
