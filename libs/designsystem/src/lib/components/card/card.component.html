@@ -1,5 +1,7 @@
-<ng-content select="kirby-card-header"></ng-content>
-<div class="content-wrapper" [class.padding]="hasPadding">
-  <ng-content></ng-content>
+<div [ngClass]="{ hasButton: hasButton }">
+  <ng-content select="kirby-card-header"></ng-content>
+  <div class="content-wrapper" [class.padding]="hasPadding">
+    <ng-content></ng-content>
+  </div>
+  <ng-content select="kirby-card-footer"></ng-content>
 </div>
-<ng-content select="kirby-card-footer"></ng-content>
