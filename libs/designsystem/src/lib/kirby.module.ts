@@ -14,6 +14,7 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { CardFooterComponent } from './components/card/card-footer/card-footer.component';
 import { CardHeaderComponent } from './components/card/card-header/card-header.component';
 import { CardComponent } from './components/card/card.component';
+import { HasButtonDirective } from './components/card/directives/has-button.directive';
 import { ChartDeprecatedComponent } from './components/chart-deprecated/chart-deprecated.component';
 import { ChartModule } from './components/chart/chart.module';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
@@ -116,6 +117,7 @@ const exportedDeclarations = [
   RadioComponent,
   RadioGroupComponent,
   RangeComponent,
+  HasButtonDirective,
 ];
 
 const declarations = [
