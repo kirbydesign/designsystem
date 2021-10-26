@@ -23,8 +23,6 @@ export class CardComponent implements OnInit, OnDestroy {
   @Input()
   hasPadding: boolean;
 
-  hasButton: boolean;
-
   private sizesSortedByBreakpoint = this.sortSizesByBreakpoint({
     small: 360,
     medium: 720,
@@ -41,6 +39,7 @@ export class CardComponent implements OnInit, OnDestroy {
     this.sizesSortedByBreakpoint = this.sortSizesByBreakpoint(value);
   }
 
+  @HostBinding('class.card-is-clickable') cardIsClickable: boolean;
   @HostBinding('class.flat')
   flat: boolean = false;
   @HostBinding('class.highlighted')

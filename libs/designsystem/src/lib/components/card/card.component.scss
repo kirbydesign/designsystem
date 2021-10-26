@@ -31,6 +31,13 @@
   &.flat {
     box-shadow: none;
   }
+
+  &.card-is-clickable {
+    @include hover() {
+      opacity: 0.8;
+    }
+    cursor: pointer;
+  }
 }
 
 :host-context(.swiper-slide-active) {
@@ -43,12 +50,5 @@
   :host(.#{$color-name}) {
     --kirby-card-main-background-color: #{get-color($color-name)};
     --kirby-card-main-color: #{get-color($color-name + '-contrast')};
-  }
-}
-
-.hasButton {
-  cursor: pointer;
-  @include hover() {
-    opacity: 0.8;
   }
 }
