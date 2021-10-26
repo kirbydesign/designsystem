@@ -31629,9 +31629,9 @@
       "description": "",
       "deprecationMessage": "",
       "deprecated": false,
-      "file": "libs/designsystem/testing-jasmine/src/lib/kirby-testing.module.ts",
+      "file": "libs/designsystem/testing-jest/src/lib/kirby-testing.module.ts",
       "methods": [],
-      "sourceCode": "/// <reference path='../../../../../node_modules/@types/jasmine/index.d.ts' />\n\nimport { NgModule } from '@angular/core';\n\nimport { KirbyTestingBaseModule } from '@kirbydesign/designsystem/testing-base';\n\nimport { MOCK_PROVIDERS } from './mock-providers';\n\n@NgModule({\n  imports: [KirbyTestingBaseModule],\n  exports: [KirbyTestingBaseModule],\n  providers: [...MOCK_PROVIDERS],\n})\nexport class KirbyTestingModule {}\n",
+      "sourceCode": "/// <reference path='../../../../../node_modules/@types/jest/index.d.ts' />\n\nimport { NgModule } from '@angular/core';\n\nimport { KirbyTestingBaseModule } from '@kirbydesign/designsystem/testing-base';\n\nimport { MOCK_PROVIDERS } from './mock-providers';\n\n@NgModule({\n  imports: [KirbyTestingBaseModule],\n  exports: [KirbyTestingBaseModule],\n  providers: [...MOCK_PROVIDERS],\n})\nexport class KirbyTestingModule {}\n",
       "children": [
         {
           "type": "providers",
@@ -31673,9 +31673,9 @@
       "description": "",
       "deprecationMessage": "",
       "deprecated": false,
-      "file": "libs/designsystem/testing-jest/src/lib/kirby-testing.module.ts",
+      "file": "libs/designsystem/testing-jasmine/src/lib/kirby-testing.module.ts",
       "methods": [],
-      "sourceCode": "/// <reference path='../../../../../node_modules/@types/jest/index.d.ts' />\n\nimport { NgModule } from '@angular/core';\n\nimport { KirbyTestingBaseModule } from '@kirbydesign/designsystem/testing-base';\n\nimport { MOCK_PROVIDERS } from './mock-providers';\n\n@NgModule({\n  imports: [KirbyTestingBaseModule],\n  exports: [KirbyTestingBaseModule],\n  providers: [...MOCK_PROVIDERS],\n})\nexport class KirbyTestingModule {}\n",
+      "sourceCode": "/// <reference path='../../../../../node_modules/@types/jasmine/index.d.ts' />\n\nimport { NgModule } from '@angular/core';\n\nimport { KirbyTestingBaseModule } from '@kirbydesign/designsystem/testing-base';\n\nimport { MOCK_PROVIDERS } from './mock-providers';\n\n@NgModule({\n  imports: [KirbyTestingBaseModule],\n  exports: [KirbyTestingBaseModule],\n  providers: [...MOCK_PROVIDERS],\n})\nexport class KirbyTestingModule {}\n",
       "children": [
         {
           "type": "providers",
@@ -32724,7 +32724,7 @@
         "name": "MOCK_PROVIDERS",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "libs/designsystem/testing-jasmine/src/lib/mock-providers.ts",
+        "file": "libs/designsystem/testing-jest/src/lib/mock-providers.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "[]",
@@ -32734,7 +32734,7 @@
         "name": "MOCK_PROVIDERS",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "libs/designsystem/testing-jest/src/lib/mock-providers.ts",
+        "file": "libs/designsystem/testing-jasmine/src/lib/mock-providers.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "[]",
@@ -33295,7 +33295,7 @@
       },
       {
         "name": "iconRegistryServiceFactory",
-        "file": "libs/designsystem/testing-jasmine/src/lib/mock-providers.ts",
+        "file": "libs/designsystem/testing-jest/src/lib/mock-providers.ts",
         "ctype": "miscellaneous",
         "subtype": "function",
         "deprecated": false,
@@ -33305,7 +33305,7 @@
       },
       {
         "name": "iconRegistryServiceFactory",
-        "file": "libs/designsystem/testing-jest/src/lib/mock-providers.ts",
+        "file": "libs/designsystem/testing-jasmine/src/lib/mock-providers.ts",
         "ctype": "miscellaneous",
         "subtype": "function",
         "deprecated": false,
@@ -33344,7 +33344,7 @@
       },
       {
         "name": "loadingOverlayServiceFactory",
-        "file": "libs/designsystem/testing-jasmine/src/lib/mock-providers.ts",
+        "file": "libs/designsystem/testing-jest/src/lib/mock-providers.ts",
         "ctype": "miscellaneous",
         "subtype": "function",
         "deprecated": false,
@@ -33354,7 +33354,7 @@
       },
       {
         "name": "loadingOverlayServiceFactory",
-        "file": "libs/designsystem/testing-jest/src/lib/mock-providers.ts",
+        "file": "libs/designsystem/testing-jasmine/src/lib/mock-providers.ts",
         "ctype": "miscellaneous",
         "subtype": "function",
         "deprecated": false,
@@ -33510,7 +33510,7 @@
       },
       {
         "name": "modalControllerFactory",
-        "file": "libs/designsystem/testing-jasmine/src/lib/mock-providers.ts",
+        "file": "libs/designsystem/testing-jest/src/lib/mock-providers.ts",
         "ctype": "miscellaneous",
         "subtype": "function",
         "deprecated": false,
@@ -33520,7 +33520,7 @@
       },
       {
         "name": "modalControllerFactory",
-        "file": "libs/designsystem/testing-jest/src/lib/mock-providers.ts",
+        "file": "libs/designsystem/testing-jasmine/src/lib/mock-providers.ts",
         "ctype": "miscellaneous",
         "subtype": "function",
         "deprecated": false,
@@ -33612,7 +33612,7 @@
       },
       {
         "name": "tabsServiceFactory",
-        "file": "libs/designsystem/testing-jasmine/src/lib/mock-providers.ts",
+        "file": "libs/designsystem/testing-jest/src/lib/mock-providers.ts",
         "ctype": "miscellaneous",
         "subtype": "function",
         "deprecated": false,
@@ -33622,16 +33622,6 @@
       },
       {
         "name": "tabsServiceFactory",
-        "file": "libs/designsystem/testing-jest/src/lib/mock-providers.ts",
-        "ctype": "miscellaneous",
-        "subtype": "function",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "description": "",
-        "args": []
-      },
-      {
-        "name": "toastControllerFactory",
         "file": "libs/designsystem/testing-jasmine/src/lib/mock-providers.ts",
         "ctype": "miscellaneous",
         "subtype": "function",
@@ -33643,6 +33633,16 @@
       {
         "name": "toastControllerFactory",
         "file": "libs/designsystem/testing-jest/src/lib/mock-providers.ts",
+        "ctype": "miscellaneous",
+        "subtype": "function",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "description": "",
+        "args": []
+      },
+      {
+        "name": "toastControllerFactory",
+        "file": "libs/designsystem/testing-jasmine/src/lib/mock-providers.ts",
         "ctype": "miscellaneous",
         "subtype": "function",
         "deprecated": false,
@@ -33745,7 +33745,7 @@
         "ctype": "miscellaneous",
         "subtype": "typealias",
         "rawtype": "literal type",
-        "file": "libs/designsystem/src/lib/components/page/page.component.ts",
+        "file": "libs/designsystem/testing-base/src/lib/components/mock.page.component.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "description": "",
@@ -33756,7 +33756,7 @@
         "ctype": "miscellaneous",
         "subtype": "typealias",
         "rawtype": "literal type",
-        "file": "libs/designsystem/testing-base/src/lib/components/mock.page.component.ts",
+        "file": "libs/designsystem/src/lib/components/page/page.component.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "description": "",
@@ -33877,7 +33877,7 @@
         "ctype": "miscellaneous",
         "subtype": "typealias",
         "rawtype": "literal type",
-        "file": "libs/designsystem/src/lib/components/page/page.component.ts",
+        "file": "libs/designsystem/testing-base/src/lib/components/mock.page.component.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "description": "",
@@ -33888,7 +33888,7 @@
         "ctype": "miscellaneous",
         "subtype": "typealias",
         "rawtype": "literal type",
-        "file": "libs/designsystem/testing-base/src/lib/components/mock.page.component.ts",
+        "file": "libs/designsystem/src/lib/components/page/page.component.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "description": "",
@@ -34949,24 +34949,24 @@
           "defaultValue": "[MockThemeColorDirective, MockFitHeadingDirective]"
         }
       ],
-      "libs/designsystem/testing-jasmine/src/lib/mock-providers.ts": [
-        {
-          "name": "MOCK_PROVIDERS",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "libs/designsystem/testing-jasmine/src/lib/mock-providers.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "[]",
-          "defaultValue": "[\r\n  {\r\n    provide: IconRegistryService,\r\n    useFactory: iconRegistryServiceFactory,\r\n  },\r\n  {\r\n    provide: LoadingOverlayService,\r\n    useFactory: loadingOverlayServiceFactory,\r\n  },\r\n  {\r\n    provide: ModalController,\r\n    useFactory: modalControllerFactory,\r\n  },\r\n  {\r\n    provide: TabsService,\r\n    useFactory: tabsServiceFactory,\r\n  },\r\n  {\r\n    provide: ToastController,\r\n    useFactory: toastControllerFactory,\r\n  },\r\n]"
-        }
-      ],
       "libs/designsystem/testing-jest/src/lib/mock-providers.ts": [
         {
           "name": "MOCK_PROVIDERS",
           "ctype": "miscellaneous",
           "subtype": "variable",
           "file": "libs/designsystem/testing-jest/src/lib/mock-providers.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "[]",
+          "defaultValue": "[\r\n  {\r\n    provide: IconRegistryService,\r\n    useFactory: iconRegistryServiceFactory,\r\n  },\r\n  {\r\n    provide: LoadingOverlayService,\r\n    useFactory: loadingOverlayServiceFactory,\r\n  },\r\n  {\r\n    provide: ModalController,\r\n    useFactory: modalControllerFactory,\r\n  },\r\n  {\r\n    provide: TabsService,\r\n    useFactory: tabsServiceFactory,\r\n  },\r\n  {\r\n    provide: ToastController,\r\n    useFactory: toastControllerFactory,\r\n  },\r\n]"
+        }
+      ],
+      "libs/designsystem/testing-jasmine/src/lib/mock-providers.ts": [
+        {
+          "name": "MOCK_PROVIDERS",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "libs/designsystem/testing-jasmine/src/lib/mock-providers.ts",
           "deprecated": false,
           "deprecationMessage": "",
           "type": "[]",
@@ -35487,58 +35487,6 @@
           ]
         }
       ],
-      "libs/designsystem/testing-jasmine/src/lib/mock-providers.ts": [
-        {
-          "name": "iconRegistryServiceFactory",
-          "file": "libs/designsystem/testing-jasmine/src/lib/mock-providers.ts",
-          "ctype": "miscellaneous",
-          "subtype": "function",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "description": "",
-          "args": []
-        },
-        {
-          "name": "loadingOverlayServiceFactory",
-          "file": "libs/designsystem/testing-jasmine/src/lib/mock-providers.ts",
-          "ctype": "miscellaneous",
-          "subtype": "function",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "description": "",
-          "args": []
-        },
-        {
-          "name": "modalControllerFactory",
-          "file": "libs/designsystem/testing-jasmine/src/lib/mock-providers.ts",
-          "ctype": "miscellaneous",
-          "subtype": "function",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "description": "",
-          "args": []
-        },
-        {
-          "name": "tabsServiceFactory",
-          "file": "libs/designsystem/testing-jasmine/src/lib/mock-providers.ts",
-          "ctype": "miscellaneous",
-          "subtype": "function",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "description": "",
-          "args": []
-        },
-        {
-          "name": "toastControllerFactory",
-          "file": "libs/designsystem/testing-jasmine/src/lib/mock-providers.ts",
-          "ctype": "miscellaneous",
-          "subtype": "function",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "description": "",
-          "args": []
-        }
-      ],
       "libs/designsystem/testing-jest/src/lib/mock-providers.ts": [
         {
           "name": "iconRegistryServiceFactory",
@@ -35583,6 +35531,58 @@
         {
           "name": "toastControllerFactory",
           "file": "libs/designsystem/testing-jest/src/lib/mock-providers.ts",
+          "ctype": "miscellaneous",
+          "subtype": "function",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "description": "",
+          "args": []
+        }
+      ],
+      "libs/designsystem/testing-jasmine/src/lib/mock-providers.ts": [
+        {
+          "name": "iconRegistryServiceFactory",
+          "file": "libs/designsystem/testing-jasmine/src/lib/mock-providers.ts",
+          "ctype": "miscellaneous",
+          "subtype": "function",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "description": "",
+          "args": []
+        },
+        {
+          "name": "loadingOverlayServiceFactory",
+          "file": "libs/designsystem/testing-jasmine/src/lib/mock-providers.ts",
+          "ctype": "miscellaneous",
+          "subtype": "function",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "description": "",
+          "args": []
+        },
+        {
+          "name": "modalControllerFactory",
+          "file": "libs/designsystem/testing-jasmine/src/lib/mock-providers.ts",
+          "ctype": "miscellaneous",
+          "subtype": "function",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "description": "",
+          "args": []
+        },
+        {
+          "name": "tabsServiceFactory",
+          "file": "libs/designsystem/testing-jasmine/src/lib/mock-providers.ts",
+          "ctype": "miscellaneous",
+          "subtype": "function",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "description": "",
+          "args": []
+        },
+        {
+          "name": "toastControllerFactory",
+          "file": "libs/designsystem/testing-jasmine/src/lib/mock-providers.ts",
           "ctype": "miscellaneous",
           "subtype": "function",
           "deprecated": false,
@@ -36377,30 +36377,6 @@
           "kind": 193
         }
       ],
-      "libs/designsystem/src/lib/components/page/page.component.ts": [
-        {
-          "name": "fixedConfig",
-          "ctype": "miscellaneous",
-          "subtype": "typealias",
-          "rawtype": "literal type",
-          "file": "libs/designsystem/src/lib/components/page/page.component.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "description": "",
-          "kind": 180
-        },
-        {
-          "name": "stickyConfig",
-          "ctype": "miscellaneous",
-          "subtype": "typealias",
-          "rawtype": "literal type",
-          "file": "libs/designsystem/src/lib/components/page/page.component.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "description": "",
-          "kind": 180
-        }
-      ],
       "libs/designsystem/testing-base/src/lib/components/mock.page.component.ts": [
         {
           "name": "fixedConfig",
@@ -36419,6 +36395,30 @@
           "subtype": "typealias",
           "rawtype": "literal type",
           "file": "libs/designsystem/testing-base/src/lib/components/mock.page.component.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "description": "",
+          "kind": 180
+        }
+      ],
+      "libs/designsystem/src/lib/components/page/page.component.ts": [
+        {
+          "name": "fixedConfig",
+          "ctype": "miscellaneous",
+          "subtype": "typealias",
+          "rawtype": "literal type",
+          "file": "libs/designsystem/src/lib/components/page/page.component.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "description": "",
+          "kind": 180
+        },
+        {
+          "name": "stickyConfig",
+          "ctype": "miscellaneous",
+          "subtype": "typealias",
+          "rawtype": "literal type",
+          "file": "libs/designsystem/src/lib/components/page/page.component.ts",
           "deprecated": false,
           "deprecationMessage": "",
           "description": "",
