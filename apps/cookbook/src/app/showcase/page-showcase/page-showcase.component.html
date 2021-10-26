@@ -251,8 +251,7 @@
     </p>
     <cookbook-code-viewer [html]="pullToRefreshExampleHtml"></cookbook-code-viewer>
     <p>
-      To indicate that completion of <code>refresh</code>-event is done by invoking
-      <code>complete()</code>-method on the event's <code>target</code>-object, eg.:
+     The <code>PullToRefreshEvent</code> <code>complete()</code>-method can be invoked to indicate that the <code>refresh</code>-event has finished, e.g. when the required data has been loaded:
     </p>
     <cookbook-code-viewer [ts]="pullToRefreshExampleTs"></cookbook-code-viewer>
   </div>
