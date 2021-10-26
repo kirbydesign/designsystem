@@ -41,7 +41,7 @@ type stickyConfig = { sticky: boolean };
 type fixedConfig = { fixed: boolean };
 
 /**
- * Event emitted when "pull-to-refresh" begins!
+ * Event emitted when "pull-to-refresh" begins.
  */
 export interface PullToRefreshEvent {
   /**
