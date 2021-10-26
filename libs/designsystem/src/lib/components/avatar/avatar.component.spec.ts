@@ -4,7 +4,7 @@ import { ThemeColorDirective } from '../../directives';
 import { ColorHelper } from '../../helpers';
 import { DesignTokenHelper, ThemeColorExtended } from '../../helpers/design-token-helper';
 import { TestHelper } from '../../testing/test-helper';
-import { HasButtonDirective } from '../card/directives/has-button.directive';
+import { CardIsClickableDirective } from '../card/directives/card-is-clickable.directive';
 import { IconComponent } from '../icon/icon.component';
 import { ProgressCircleRingComponent } from '../progress-circle/progress-circle-ring.component';
 import { ProgressCircleComponent } from '../progress-circle/progress-circle.component';
@@ -25,7 +25,7 @@ describe('AvatarComponent', () => {
       ThemeColorDirective,
       ProgressCircleComponent,
       ProgressCircleRingComponent,
-      HasButtonDirective,
+      CardIsClickableDirective,
     ],
     imports: [TestHelper.ionicModuleForTest],
   });

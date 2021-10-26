@@ -8,7 +8,7 @@ import { DesignTokenHelper } from '../../helpers/design-token-helper';
 import { TestHelper } from '../../testing/test-helper';
 import { WindowRef } from '../../types/window-ref';
 import { CardComponent } from '../card/card.component';
-import { HasButtonDirective } from '../card/directives/has-button.directive';
+import { CardIsClickableDirective } from '../card/directives/card-is-clickable.directive';
 import { DropdownComponent } from '../dropdown/dropdown.component';
 import { EmptyStateComponent } from '../empty-state/empty-state.component';
 import { IconComponent } from '../icon/icon.component';
@@ -42,7 +42,7 @@ describe('ButtonComponent in Kirby Page', () => {
       PageTitleDirective,
       PageToolbarTitleDirective,
       FitHeadingDirective,
-      HasButtonDirective,
+      CardIsClickableDirective,
     ],
     providers: [
       {

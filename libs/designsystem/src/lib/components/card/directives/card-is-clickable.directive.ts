@@ -6,7 +6,7 @@ import { CardComponent } from '../card.component';
   // tslint:disable-next-line
   selector: 'kirby-card[click]',
 })
-export class HasButtonDirective implements OnInit {
+export class CardIsClickableDirective implements OnInit {
   constructor(private card: CardComponent) {}
 
   ngOnInit(): void {
