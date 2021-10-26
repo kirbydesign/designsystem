@@ -1,7 +1,7 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { HasButtonDirective } from 'libs/designsystem/src';
 
 import { TestHelper } from '../../testing/test-helper';
+import { HasButtonDirective } from '../card/directives/has-button.directive';
 import { IconComponent } from '../icon/icon.component';
 
 import { AccordionItemComponent } from './accordion-item.component';

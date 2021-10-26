@@ -1,10 +1,10 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { HasButtonDirective } from 'libs/designsystem/src';
 
 import { ThemeColorDirective } from '../../directives';
 import { ColorHelper } from '../../helpers';
 import { DesignTokenHelper, ThemeColorExtended } from '../../helpers/design-token-helper';
 import { TestHelper } from '../../testing/test-helper';
+import { HasButtonDirective } from '../card/directives/has-button.directive';
 import { IconComponent } from '../icon/icon.component';
 import { ProgressCircleRingComponent } from '../progress-circle/progress-circle-ring.component';
 import { ProgressCircleComponent } from '../progress-circle/progress-circle.component';

@@ -1,5 +1,6 @@
 import { Directive, OnInit } from '@angular/core';
-import { CardComponent } from 'libs/designsystem/src';
+
+import { CardComponent } from '../card.component';
 
 @Directive({
   // tslint:disable-next-line

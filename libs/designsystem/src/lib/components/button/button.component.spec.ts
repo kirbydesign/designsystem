@@ -1,8 +1,8 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { HasButtonDirective } from 'libs/designsystem/src';
 import { MockComponent } from 'ng-mocks';
 
 import { DesignTokenHelper } from '../../helpers/design-token-helper';
+import { HasButtonDirective } from '../card/directives/has-button.directive';
 import { IconComponent } from '../icon/icon.component';
 
 import { ButtonComponent, ButtonSize } from './button.component';
