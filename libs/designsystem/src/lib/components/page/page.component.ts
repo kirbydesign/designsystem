@@ -45,7 +45,7 @@ type fixedConfig = { fixed: boolean };
  */
 export interface PullToRefreshEvent {
   /**
-   * Invoke this callback-method when action to perform upon "pull-to-refresh" completes!
+   * Invoke this callback-method when action to perform upon "pull-to-refresh" completes.
    */
   complete();
 }
