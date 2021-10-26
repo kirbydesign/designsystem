@@ -101,6 +101,32 @@ describe('ChartJSService', () => {
       });
     });
 
+    describe('when filler is applied', () => {
+      it('should render background color', () => {
+        const data = [
+          {
+            data: [7, 7.37, 7.46],
+          },
+          {
+            data: [6, 6.37, 6.46],
+            fill: '-1',
+          },
+        ];
+
+        chartJSService.renderChart({
+          targetElement: canvasElement,
+          type: 'bar',
+          data: data,
+          dataLabels: ['one', 'two', 'three'],
+        });
+
+        const fillerOptions = chartJSService['chart'].options.plugins.filler;
+
+        expect(fillerOptions.propagate).toBeTrue();
+        expect(fillerOptions.drawTime).toBe('beforeDatasetDraw');
+      });
+    });
+
     describe('when data is given as a number[]', () => {
       it('should render a new chart', () => {
         expect(chartJSService['chart']).toBeUndefined();
