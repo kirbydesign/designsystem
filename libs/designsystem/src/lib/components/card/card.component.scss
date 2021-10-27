@@ -33,9 +33,6 @@
   }
 
   &.card-is-clickable {
-    @include hover() {
-      opacity: 0.8;
-    }
     cursor: pointer;
   }
 }
