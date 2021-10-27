@@ -47,6 +47,7 @@ testem.log
 /typings
 *.bak
 .stencil/
+documentation.json
 
 # System Files
 .DS_Store
