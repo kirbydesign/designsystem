@@ -41,11 +41,11 @@ type stickyConfig = { sticky: boolean };
 type fixedConfig = { fixed: boolean };
 
 /**
- * Event emitted when "pull-to-refresh" begins!
+ * Event emitted when "pull-to-refresh" begins.
  */
 export interface PullToRefreshEvent {
   /**
-   * Invoke this callback-method when action to perform upon "pull-to-refresh" completes!
+   * Invoke this callback-method when action to perform upon "pull-to-refresh" completes.
    */
   complete();
 }

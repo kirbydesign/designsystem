@@ -247,12 +247,11 @@
     <p>
       If the <code>kirby-page</code> component has been provided with an event-listener of type
       <code>refresh</code> a <code>kirby-spinner</code> will be displayed when
-      <em>dragging down</em> from the top of the screen.
+      <em>dragging down</em> from the top of the screen. This can be useful for <em>updating</em> the data in the current view, if new data has arrived or something changed in the meantime. This could for instance be new messages added to the top of a list view. It should not be used as a load-more type of event for simply adding more data to the view. 
     </p>
     <cookbook-code-viewer [html]="pullToRefreshExampleHtml"></cookbook-code-viewer>
     <p>
-      To indicate that completion of <code>refresh</code>-event is done by invoking
-      <code>complete()</code>-method on the event's <code>target</code>-object, eg.:
+     The <code>PullToRefreshEvent</code> <code>complete()</code>-method can be invoked to indicate that the <code>refresh</code>-event has finished, e.g. when the required data has been loaded:
     </p>
     <cookbook-code-viewer [ts]="pullToRefreshExampleTs"></cookbook-code-viewer>
   </div>
