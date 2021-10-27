@@ -87,7 +87,7 @@ describe('ChartJSService', () => {
 
       chartJSService.renderChart({
         targetElement: canvasElement,
-        type: 'bar',
+        type: 'line',
         data: data,
         dataLabels: ['one', 'two', 'three'],
       });
