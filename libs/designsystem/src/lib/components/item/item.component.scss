@@ -77,7 +77,8 @@
   }
 }
 
-:host-context(kirby-dropdown) ion-item {
+:host-context(kirby-dropdown) ion-item,
+:host-context(kirby-popover) ion-item {
   --min-height: #{$dropdown-item-height};
 }
 
@@ -131,5 +132,13 @@ ion-item {
   ion-item::part(native) {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
+  }
+}
+
+// Fixes https://github.com/kirbydesign/designsystem/issues/1711
+:host-context(.shape-rounded.has-sections .list-items kirby-list-item:first-of-type) {
+  ion-item::part(native) {
+    border-top-left-radius: $border-radius;
+    border-top-right-radius: $border-radius;
   }
 }

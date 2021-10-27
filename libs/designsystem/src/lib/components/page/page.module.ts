@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 
 import { FitHeadingModule } from '../../directives/fit-heading/fit-heading.module';
+import { SpinnerModule } from '../spinner/spinner.module';
 
 import { PageFooterComponent } from './page-footer/page-footer.component';
 import {
@@ -30,7 +31,7 @@ import {
     PageTitleDirective,
     PageToolbarTitleDirective,
   ],
-  imports: [CommonModule, IonicModule, FitHeadingModule],
+  imports: [CommonModule, IonicModule, FitHeadingModule, SpinnerModule],
   exports: [
     PageComponent,
     PageActionsComponent,
