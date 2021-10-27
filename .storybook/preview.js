@@ -6,7 +6,6 @@ setCompodocJson(docJson);
 defineCustomElements();
 
 import '!style-loader!css-loader!sass-loader!../libs/core/src/scss/_global-styles.scss';
-import '!style-loader!css-loader!sass-loader!../libs/core/src/scss/_utils.scss';
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -17,5 +16,7 @@ export const parameters = {
       date: /Date$/,
     },
   },
-  docs: { inlineStories: true },
+  docs: { 
+    inlineStories: true
+  },
 }
