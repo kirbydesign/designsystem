@@ -50,11 +50,6 @@ export class ChartShowcaseComponent {
       description: `(Optional) can be used to highlight specific data elements in the chart. Provided as an array of [number, number] tuples where the first value is the datasetIndex and the second is the dataIndex.`,
       type: ['[number, number][]'],
     },
-    {
-      name: 'fill',
-      description: `(Optional) Chart.js fill can be used to add background color between lines in the chart, see: https://www.chartjs.org/docs/latest/samples/area/line-datasets.html`,
-      type: ['number', 'string', 'object'],
-    },
   ];
 
   _cssCustomPropertiesColumns: ApiDescriptionPropertyColumns = {

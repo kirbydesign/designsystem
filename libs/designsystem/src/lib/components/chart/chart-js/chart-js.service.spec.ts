@@ -82,6 +82,22 @@ describe('ChartJSService', () => {
   });
 
   describe('function: renderChart', () => {
+    it('should render chart with correct defaults for filler plugin', () => {
+      const data = [7, 7.37, 7.46];
+
+      chartJSService.renderChart({
+        targetElement: canvasElement,
+        type: 'line',
+        data: data,
+        dataLabels: ['one', 'two', 'three'],
+      });
+
+      const fillerOptions = chartJSService['chart'].options.plugins.filler;
+
+      expect(fillerOptions.propagate).toBeTrue();
+      expect(fillerOptions.drawTime).toBe('beforeDatasetDraw');
+    });
+
     describe('when annotations are given', () => {
       it('should render the chart with annotations applied', () => {
         const annotations: AnnotationOptions[] = [
@@ -98,32 +114,6 @@ describe('ChartJSService', () => {
         });
 
         expect(chartJSService['chart'].options.plugins.annotation.annotations.length).toEqual(2);
-      });
-    });
-
-    describe('when filler is applied', () => {
-      it('should render background color', () => {
-        const data = [
-          {
-            data: [7, 7.37, 7.46],
-          },
-          {
-            data: [6, 6.37, 6.46],
-            fill: '-1',
-          },
-        ];
-
-        chartJSService.renderChart({
-          targetElement: canvasElement,
-          type: 'bar',
-          data: data,
-          dataLabels: ['one', 'two', 'three'],
-        });
-
-        const fillerOptions = chartJSService['chart'].options.plugins.filler;
-
-        expect(fillerOptions.propagate).toBeTrue();
-        expect(fillerOptions.drawTime).toBe('beforeDatasetDraw');
       });
     });
 
