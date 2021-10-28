@@ -7,8 +7,7 @@ import { CardComponent } from '../card.component';
 
 import { CardIsClickableDirective } from './card-is-clickable.directive';
 
-describe('CardIsClickableDirective', () => {
-  let locale: 'da' | 'en-GB' = 'en-GB';
+fdescribe('CardIsClickableDirective', () => {
   let spectator: SpectatorDirective<CardIsClickableDirective>;
 
   registerLocaleData(localeDa);
@@ -17,12 +16,6 @@ describe('CardIsClickableDirective', () => {
     directive: CardIsClickableDirective,
     imports: [],
     declarations: [CardComponent],
-    providers: [
-      {
-        provide: LOCALE_ID,
-        useFactory: () => locale,
-      },
-    ],
   });
   beforeEach(() => {
     spectator = createDirective(`<kirby-card (click)="someMethod()"> </kirby-card>`);
