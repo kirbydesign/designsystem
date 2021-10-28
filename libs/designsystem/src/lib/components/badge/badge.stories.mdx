@@ -5,27 +5,7 @@ import { BadgeComponent } from '../../index.ts';
 <Meta 
   title='Components/Badge' 
   component={BadgeComponent}
-  argTypes={{
-    themeColor: {
-      options: ['success', 'warning', 'danger', 'white'],
-      description: 'Sets which color the badge should use from the theme palette.',
-      table: {
-        defaultValue: {
-          summary: 'white'
-        },
-        type: {
-          summary: 'Subset of ThemeColor',
-          detail: 'success | warning | danger | white'
-        },
-      },
-      control: 'select',
-    },
-    el: {
-      table:{
-        disable: true
-      }
-    },
-  }}
+  argTypes={ argTypeConfig }
   />
 
 # Badge
@@ -142,3 +122,34 @@ REMEMBER TO ADD ALL PROPERTIES TO BELOW ON THE PROPTABLE STORY, FOR THEM TO SHOW
 </Story>
 
 <ArgsTable story='PropTable' />
+
+export const argTypeConfig = {
+  themeColor: {
+    options: ['success', 'warning', 'danger', 'white'],
+    description: 'Sets which color the badge should use from the theme palette.',
+    table: {
+      defaultValue: {
+        summary: 'white'
+      },
+      type: {
+        summary: 'Subset of ThemeColor',
+        detail: 'success | warning | danger | white'
+      },
+    },
+    control: 'select',
+  },
+  "--kirby-badge-position": {
+    description: "Sets the position property of the badge.",
+    table: {
+        defaultValue: {
+        summary: 'relative'
+      },
+      category: "CSS Custom Properties",
+    }
+  },
+  el: {
+    table:{
+      disable: true
+    }
+  },
+}
