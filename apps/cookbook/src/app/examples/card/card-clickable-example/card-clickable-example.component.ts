@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./card-clickable-example.component.scss'],
 })
 export class CardClickableExampleComponent {
-  genericMethod() {}
+  function() {}
 }

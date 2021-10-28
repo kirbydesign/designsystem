@@ -1,9 +1,13 @@
-<kirby-card (click)="genericMethod()">
+<kirby-card (click)="function()">
   <kirby-card-header title="Clickable"></kirby-card-header>
   <div class="card-content">
     <p>
-      Giving a card a click event <code>(click)="method()"</code> will activate cursor: pointer for
-      the card
+      Giving a card any click event <code>(click)="function()"</code> will change your cursor to a
+      pointer when hovering the card.
+    </p>
+    <p>
+      If <code>mode="flat"</code> has been given to the card, it will automatically be reverted to
+      default elevation.
     </p>
   </div>
 </kirby-card>
