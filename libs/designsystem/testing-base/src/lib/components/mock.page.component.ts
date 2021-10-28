@@ -10,6 +10,7 @@ import {
   PageTitleComponent,
   PageTitleDirective,
   PageToolbarTitleDirective,
+  PullToRefreshEvent,
 } from '@kirbydesign/designsystem';
 
 type stickyConfig = { sticky: boolean };
@@ -132,6 +133,7 @@ export class MockPageComponent {
   @Input() tabBarBottomHidden: boolean;
   @Output() enter = new EventEmitter<void>();
   @Output() leave = new EventEmitter<void>();
+  @Output() refresh = new EventEmitter<PullToRefreshEvent>();
 }
 
 // #endregion
