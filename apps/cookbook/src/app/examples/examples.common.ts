@@ -1,4 +1,5 @@
 import { DropdownExampleComponent } from '~/app/examples/dropdown-example/dropdown-example.component';
+import { PagePullToRefreshExampleComponent } from '~/app/examples/page-example/pull-to-refresh/page-pull-to-refresh-example.component';
 
 import { IconSettings, ICON_SETTINGS } from '@kirbydesign/designsystem';
 
@@ -120,6 +121,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   CookbookExampleCardContentComponent,
   AccordionExampleComponent,
   LinkExampleComponent,
+  PagePullToRefreshExampleComponent,
 ];
 
 // Configure custom icons (used by example to show the usage of custom icons)
