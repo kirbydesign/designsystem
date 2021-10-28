@@ -7,7 +7,7 @@ import { CardComponent } from '../card.component';
 
 import { CardIsClickableDirective } from './card-is-clickable.directive';
 
-fdescribe('CardIsClickableDirective', () => {
+describe('CardIsClickableDirective', () => {
   let spectator: SpectatorDirective<CardIsClickableDirective>;
 
   registerLocaleData(localeDa);
