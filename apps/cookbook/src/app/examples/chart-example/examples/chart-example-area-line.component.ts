@@ -19,6 +19,7 @@ const config = {
         '1959',
         '1960'
       ]"
+      [customOptions]="_customOptions"
     ></kirby-chart>
   `,
   codeSnippet: `
@@ -31,6 +32,16 @@ const config = {
       fill: '-1',
     },
   ];
+
+  _customOptions = {
+    scales: {
+      x: {
+        grid: {
+          display: true,
+        },
+      },
+    },
+  };
   `,
 };
 
@@ -41,6 +52,15 @@ const config = {
 export class ChartExampleAreaLineComponent {
   template: string = config.template;
   codeSnippet: string = config.codeSnippet;
+  _customOptions = {
+    scales: {
+      x: {
+        grid: {
+          display: true,
+        },
+      },
+    },
+  };
 
   data = [
     {
