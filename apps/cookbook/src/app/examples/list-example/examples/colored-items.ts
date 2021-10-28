@@ -6,7 +6,7 @@ export const ListColoredItemsExampleTemplate = `<kirby-list
   [items]="items"
   [getItemColor]="getItemColor"
   (itemSelect)="onItemSelect($event)"
-  showDivider="true"
+  [showDivider]="true"
 >
   <kirby-item *kirbyListItemTemplate="let item">
     <kirby-label>

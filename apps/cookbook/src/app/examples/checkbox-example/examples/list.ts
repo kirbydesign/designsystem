@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 const config = {
   selector: 'cookbook-checkbox-list-example',
-  template: `<kirby-list [items]="checkboxItems" showDivider="true">
+  template: `<kirby-list [items]="checkboxItems" [showDivider]="true">
   <kirby-item *kirbyListItemTemplate="let item">
     <kirby-checkbox
       slot="start"
