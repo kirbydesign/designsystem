@@ -11,6 +11,6 @@ export class CardIsClickableDirective implements OnInit {
 
   ngOnInit(): void {
     this.card.cardIsClickable = true;
-    this.card.flat = this.card.flat === true && false;
+    this.card.flat = false;
   }
 }
