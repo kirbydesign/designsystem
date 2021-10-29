@@ -230,6 +230,7 @@ jobs:
             cp designsystem_web/index.html designsystem_web/404.html
           else
             mkdir -p designsystem_web/branch/$HOSTNAME
+            mkdir -p designsystem_web/branch/storybook/$HOSTNAME
             sed -i -E "s,<base href=\"[^\"]*\".*>,<base href=\"/branch/$HOSTNAME/\">,g" dist/apps/cookbook/index.html
             cp -R dist/apps/cookbook/* designsystem_web/branch/$HOSTNAME
             cp -R dist/storybook/* designsystem_web/branch/storybook/$HOSTNAME
