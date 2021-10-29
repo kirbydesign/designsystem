@@ -3,7 +3,7 @@ import { APP_INITIALIZER } from '@angular/core';
 
 import { defineCustomElements } from '@kirbydesign/core/loader';
 
-export const appInitialize = (doc: Document) => {
+const appInitialize = (doc: Document) => {
   return () => {
     defineCustomElements(doc.defaultView);
   };
