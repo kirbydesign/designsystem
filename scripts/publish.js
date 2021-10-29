@@ -26,7 +26,7 @@ const fs = require('fs-extra');
 const path = require('path');
 const isCI = require('is-ci');
 
-const libDir = 'libs/designsystem/src/lib';
+const angularLibDir = 'libs/designsystem/src/lib';
 const coreLibDir = 'libs/core/src';
 const dist = `dist`;
 const distTarget = `${dist}/libs/designsystem`;
@@ -121,14 +121,14 @@ function copyScssFiles() {
 function copyIcons() {
   console.log('Copying Icons...');
   const onlySvgFiles = (input) => ['', '.svg'].includes(path.extname(input));
-  return fs.copy(`${libDir}/icons/svg`, `${distTarget}/icons/svg`, { filter: onlySvgFiles });
+  return fs.copy(`${angularLibDir}/icons/svg`, `${distTarget}/icons/svg`, { filter: onlySvgFiles });
 }
 
 function copyPolyfills() {
   console.log('Copying Polyfills...');
   const onlyLoadersAndMinified = (input) =>
     path.extname(input) === '' || input.endsWith('-loader.js') || input.endsWith('.min.js');
-  return fs.copy(`${libDir}/polyfills`, `${distTarget}/polyfills`, {
+  return fs.copy(`${angularLibDir}/polyfills`, `${distTarget}/polyfills`, {
     filter: onlyLoadersAndMinified,
   });
 }
