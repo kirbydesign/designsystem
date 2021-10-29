@@ -15,7 +15,7 @@
     --ion-color-base: var(--kirby-badge-background-color);
     --ion-color-contrast: var(--kirby-badge-color);
     box-sizing: border-box; //Fixes https://github.com/kirbydesign/designsystem/issues/537
-    border-radius: 8px;
+    border-radius: size('xxs');
     font-size: inherit;
     position: relative;
     box-shadow: var(--kirby-badge-elevation, none);
@@ -34,8 +34,8 @@
     padding: initial;
     min-height: initial;
     min-width: initial;
-    height: 8px;
-    width: 8px;
+    height: size('xxs');
+    width: size('xxs');
   }
 }
 
@@ -45,8 +45,8 @@
     --padding-end: 5px;
     --padding-bottom: 3px;
     --padding-start: 5px;
-    min-width: 16px;
-    min-height: 16px;
+    min-width: size('s');
+    min-height: size('s');
   }
 }
 
