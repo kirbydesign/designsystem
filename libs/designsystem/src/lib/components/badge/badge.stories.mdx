@@ -1,10 +1,17 @@
 import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs';
-
-import { BadgeComponent } from '../../index.ts';
+import { moduleMetadata } from '@storybook/angular';
+import { IconModule, BadgeComponent} from '../../index.ts';
+import { IonicModule } from '@ionic/angular'
 
 <Meta 
   title='Components/Badge' 
   component={BadgeComponent}
+  decorators={[
+    moduleMetadata({
+      declarations: [],
+      imports: [IonicModule.forRoot(), IconModule]
+    })
+  ]}
   argTypes={ argTypeConfig }
   />
 
@@ -19,7 +26,15 @@ Here it can be necesssary to apply some elevation to the badge; this is also don
 The `--kirby-badge-elevation` property can be useful for this. You can see how it is applied to the examples below by inspecting the shared styling for the badge examples:
 [badge-example-shared.scss on Github](https://github.com/kirbydesign/designsystem/blob/master/apps/cookbook/src/app/examples/badge-example/examples/badge-example-shared.scss)
 
-export const Template = (args) => ({ props: args });
+export const Badge = (args) => ({ props: args });
+export const BadgeWithIcon = (args) => ({ 
+  props: args,
+  template: `
+  <kirby-badge>
+    <kirby-icon>
+    </kirby-icon>
+  </kirby-badge>` 
+});
 
 ## Badge with numbers
 Using a badge with a number can be a good way to indicate specific status on an element.
@@ -30,7 +45,7 @@ Using a badge with a number can be a good way to indicate specific status on an 
     args={{
         text: '1',
       }}>
-    {Template.bind({})}
+    {Badge.bind({})}
   </Story>
   <Story
     name='Success - number'
@@ -38,7 +53,7 @@ Using a badge with a number can be a good way to indicate specific status on an 
         text: '7',
         themeColor: 'success'
       }}>
-    {Template.bind({})}
+    {Badge.bind({})}
   </Story>
   <Story
     name='Warning - number'
@@ -46,7 +61,7 @@ Using a badge with a number can be a good way to indicate specific status on an 
         text: '99',
         themeColor: 'warning'
       }}>
-    {Template.bind({})}
+    {Badge.bind({})}
   </Story>
   <Story
     name='Danger - number'
@@ -54,7 +69,7 @@ Using a badge with a number can be a good way to indicate specific status on an 
         text: '123',
         themeColor: 'danger'
       }}>
-    {Template.bind({})}
+    {Badge.bind({})}
   </Story>
 </Canvas>
 
@@ -67,7 +82,7 @@ Badges can also be used together with a text. Flags might in some cases be a bet
     args={{
         text: 'Default'
       }}>
-    {Template.bind({})}
+    {Badge.bind({})}
   </Story>
   <Story
     name='Success - text'
@@ -75,7 +90,7 @@ Badges can also be used together with a text. Flags might in some cases be a bet
         text: 'Success',
         themeColor: 'success'
       }}>
-    {Template.bind({})}
+    {Badge.bind({})}
   </Story>
   <Story
     name='Warning - text'
@@ -83,7 +98,7 @@ Badges can also be used together with a text. Flags might in some cases be a bet
         text: 'Warning',
         themeColor: 'warning'
       }}>
-    {Template.bind({})}
+    {Badge.bind({})}
   </Story>
   <Story
     name='Danger - text'
@@ -91,7 +106,18 @@ Badges can also be used together with a text. Flags might in some cases be a bet
         text: 'Danger',
         themeColor: 'danger'
       }}>
-    {Template.bind({})}
+    {Badge.bind({})}
+  </Story>
+</Canvas>
+
+## Badge with icons
+It is possible to slot an icon to display it in a badge. This might be used to indicate the existence of an associated element (e.g. an attachment).
+
+<Canvas>
+  <Story
+    name='Icon'
+  >
+    {BadgeWithIcon.bind({})}
   </Story>
 </Canvas>
 
