@@ -1,6 +1,6 @@
 {
   "name": "designsystem",
-  "version": "4.0.5",
+  "version": "4.0.8",
   "description": "Kirby Design Components",
   "engines": {
     "node": "^14.16"
@@ -51,6 +51,7 @@
     "e2e": "ng e2e",
     "dist": "npm run dist:cookbook",
     "dist:cookbook": "ng build cookbook --prod --aot --progress false",
+    "dist:storybook": "npm run docs:json && build-storybook --output-dir dist/storybook/",
     "predist:designsystem": "npm run extract-scss-variables",
     "dist:designsystem": "ng build designsystem",
     "postinstall": "npm run ngcc && npm run build-polyfills && npm run transpile:tools && npm run extract-scss-variables && npm run build:core && npm run transpile:generate-mocks && node ./decorate-angular-cli.js",
@@ -84,8 +85,7 @@
     "workspace-generator": "nx workspace-generator",
     "sync-node-version": "node ./scripts/sync-node-version.js",
     "docs:json": "compodoc -p ./libs/designsystem/tsconfig.lib.json -e json -d .",
-    "storybook": "npm run docs:json && start-storybook -p 6006",
-    "build-storybook": "npm run docs:json && build-storybook"
+    "storybook": "npm run docs:json && start-storybook -p 6006"
   },
   "private": true,
   "dependencies": {
@@ -110,7 +110,7 @@
     "highcharts": "8.0.4",
     "inputmask": "^5.0.5",
     "ngx-ui-scroll": "^2.0.1",
-    "prismjs": "1.24.0",
+    "prismjs": "1.25.0",
     "reflect-metadata": "0.1.8",
     "rxjs": "6.5.5",
     "tslib": "^2.0.3",
