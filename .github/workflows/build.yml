@@ -229,12 +229,12 @@ jobs:
             cp -R dist/apps/cookbook/* designsystem_web/
             cp designsystem_web/index.html designsystem_web/404.html
           else
-            mkdir -p designsystem_web/branch/$HOSTNAME
-            mkdir -p designsystem_web/branch/storybook/$HOSTNAME
+            mkdir -p designsystem_web/branch/$HOSTNAME/storybook
+            mkdir -p designsystem_web/branch/$HOSTNAME/cookbook
             sed -i -E "s,<base href=\"[^\"]*\".*>,<base href=\"/branch/$HOSTNAME/\">,g" dist/apps/cookbook/index.html
-            cp -R dist/apps/cookbook/* designsystem_web/branch/$HOSTNAME
-            cp -R dist/storybook/* designsystem_web/branch/storybook/$HOSTNAME
-            cp designsystem_web/branch/$HOSTNAME/index.html designsystem_web/branch/$HOSTNAME/404.html
+            cp -R dist/apps/cookbook/* designsystem_web/branch/$HOSTNAME/cookbook/
+            cp -R dist/storybook/* designsystem_web/branch/$HOSTNAME/storybook/
+            cp designsystem_web/branch/$HOSTNAME/cookbook/index.html designsystem_web/branch/$HOSTNAME/cookbook/404.html
           fi
 
           cd designsystem_web/branch/
