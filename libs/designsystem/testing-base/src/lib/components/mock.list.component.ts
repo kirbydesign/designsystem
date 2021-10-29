@@ -6,7 +6,7 @@ import {
   ListSwipeAction,
   LoadOnDemandEvent,
   ThemeColor,
-  VirtualScrollerSettings,
+  VirtualScrollSettings,
 } from '@kirbydesign/designsystem';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
@@ -32,7 +32,7 @@ export class MockListComponent {
   @Input() hasItemSpacing: boolean;
   @Input() useVirtualScroll: boolean;
   @Input() virtualScrollViewportHeight: number;
-  @Input() virtualScrollSettings: VirtualScrollerSettings;
+  @Input() virtualScrollSettings: VirtualScrollSettings;
   @Input() virtualScrollTimeout: number;
   @Input() isLoadOnDemandEnabled: boolean;
   @Output() loadOnDemand = new EventEmitter<LoadOnDemandEvent>();

@@ -1,5 +1,5 @@
 export { ListComponent } from './list.component';
-export { ListShape } from './list.component';
+export { ListShape, VirtualScrollSettings } from './list.component';
 export { ListHeaderComponent } from './list-header/list-header.component';
 export { ListSectionHeaderComponent } from './list-section-header/list-section-header.component';
 export { ListItemComponent } from './list-item/list-item.component';
