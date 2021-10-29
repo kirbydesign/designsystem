@@ -8,7 +8,7 @@
   --kirby-badge-position: absolute;
   --kirby-badge-top: -#{size('xxs')};
   --kirby-badge-right: #{size('xxs')};
-  --kirby-badge-z-index: z('segmentBadge');
+  --kirby-badge-z-index: #{z('segmentBadge')};
 
   &.sm {
     ion-segment-button {
