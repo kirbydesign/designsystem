@@ -38,6 +38,11 @@ nav {
     list-style: none;
     padding: 0;
     margin: 0;
+    line-height: normal;
+
+    li {
+      margin-block-start: 0;
+    }
 
     a {
       text-decoration: none;
