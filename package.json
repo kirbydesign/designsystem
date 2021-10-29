@@ -51,7 +51,7 @@
     "e2e": "ng e2e",
     "dist": "npm run dist:cookbook",
     "dist:cookbook": "ng build cookbook --prod --aot --progress false",
-    "dist:storybook": "npm run docs:json && build-storybook",
+    "dist:storybook": "npm run docs:json && build-storybook --output-dir dist/storybook/",
     "predist:designsystem": "npm run extract-scss-variables",
     "dist:designsystem": "ng build designsystem",
     "postinstall": "npm run ngcc && npm run build-polyfills && npm run transpile:tools && npm run extract-scss-variables && npm run build:core && npm run transpile:generate-mocks && node ./decorate-angular-cli.js",
