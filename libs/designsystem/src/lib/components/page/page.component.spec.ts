@@ -2,6 +2,7 @@ import { Component, NgZone } from '@angular/core';
 import { fakeAsync, flush, tick } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
+import { IonRefresher } from '@ionic/angular';
 import { createHostFactory, mockProvider, SpectatorHost, SpyObject } from '@ngneat/spectator';
 import { MockDirective } from 'ng-mocks';
 
@@ -139,6 +140,18 @@ describe('PageComponent', () => {
     expect(tabBar.tabBarBottomHidden).toBe(false);
     flush();
   }));
+
+  describe('pull-to-refresh', () => {
+    it('should be available when "refresh" is subscribed to', () => {
+      spectator.output('refresh').subscribe(() => {});
+      spectator.detectComponentChanges();
+      expect(spectator.query(IonRefresher)).not.toBeNull();
+    });
+
+    it('should not be available when "refresh" is not subscribed to', () => {
+      expect(spectator.query(IonRefresher)).toBeNull();
+    });
+  });
 
   async function triggerOnLeave(router: SpyObject<Router>) {
     await zone.run(() => router.navigate(['someUrl']));

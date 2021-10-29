@@ -1,6 +1,6 @@
 {
   "name": "designsystem",
-  "version": "4.0.5",
+  "version": "4.0.8",
   "description": "Kirby Design Components",
   "engines": {
     "node": "^14.16"
@@ -110,7 +110,7 @@
     "highcharts": "8.0.4",
     "inputmask": "^5.0.5",
     "ngx-ui-scroll": "^2.0.1",
-    "prismjs": "1.24.0",
+    "prismjs": "1.25.0",
     "reflect-metadata": "0.1.8",
     "rxjs": "6.5.5",
     "tslib": "^2.0.3",

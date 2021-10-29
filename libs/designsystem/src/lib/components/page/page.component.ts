@@ -40,6 +40,16 @@ import { TabsComponent } from '../tabs/tabs.component';
 type stickyConfig = { sticky: boolean };
 type fixedConfig = { fixed: boolean };
 
+/**
+ * Event emitted when "pull-to-refresh" begins.
+ */
+export interface PullToRefreshEvent {
+  /**
+   * Invoke this callback-method when action to perform upon "pull-to-refresh" completes.
+   */
+  complete();
+}
+
 @Directive({
   selector: '[kirbyPageTitle]',
 })
@@ -157,6 +167,7 @@ export class PageComponent
 
   @Output() enter = new EventEmitter<void>();
   @Output() leave = new EventEmitter<void>();
+  @Output() refresh = new EventEmitter<PullToRefreshEvent>();
 
   @ViewChild(IonContent, { static: true }) private content: IonContent;
   @ViewChild(IonContent, { static: true, read: ElementRef })
@@ -275,6 +286,12 @@ export class PageComponent
     this.pageTitleIntersectionObserverRef.disconnect();
     this.windowRef.nativeWindow.removeEventListener(selectedTabClickEvent, () => {
       this.content.scrollToTop(KirbyAnimation.Duration.LONG);
+    });
+  }
+
+  delegateRefreshEvent(event: any): void {
+    this.refresh.emit({
+      complete: event.target.complete.bind(event.target),
     });
   }
 
