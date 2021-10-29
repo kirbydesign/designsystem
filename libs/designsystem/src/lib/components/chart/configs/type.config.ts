@@ -77,7 +77,7 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
   line: {
     type: 'line',
     options: {
-      backgroundColor: getThemeColorRgbString('semi-light', 0.4),
+      backgroundColor: getThemeColorRgbString('semi-light', 0.5),
       scales: {
         x: {
           grid: {
