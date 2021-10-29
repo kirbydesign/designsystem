@@ -128,6 +128,8 @@ jobs:
         run: npm run postinstall 
       - name: Build Kirby Cookbook
         run: npm run dist:cookbook
+      - name: Build Kirby Storybook 
+        run: npm run dist:storybook
       - name: Upload Kirby Cookbook dist files
         uses: actions/cache@v2
         with:
@@ -228,7 +230,7 @@ jobs:
           else
             mkdir -p designsystem_web/branch/$HOSTNAME
             sed -i -E "s,<base href=\"[^\"]*\".*>,<base href=\"/branch/$HOSTNAME/\">,g" dist/apps/cookbook/index.html
-            cp -R dist/apps/cookbook/* designsystem_web/branch/$HOSTNAME
+            cp -R dist/apps/storybook/* designsystem_web/branch/$HOSTNAME
             cp designsystem_web/branch/$HOSTNAME/index.html designsystem_web/branch/$HOSTNAME/404.html
           fi
 
