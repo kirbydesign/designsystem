@@ -100,8 +100,9 @@ jobs:
       - name: Build Kirby lib
         run: npm run dist:designsystem
 
-  build_kirby_cookbook: 
-    name: Build Kirby Cookbook
+
+  build_kirby_documentation: 
+    name: Build Kirby Documentation
     needs: pre_build
     if: ${{ needs.pre_build.outputs.do_build == 'true' }}
     runs-on: ubuntu-latest 
@@ -126,10 +127,8 @@ jobs:
       - name: Run Postinstall Script
         if: steps.cache.outputs.cache-hit == 'true'
         run: npm run postinstall 
-      - name: Build Kirby Cookbook
-        run: npm run dist:cookbook
-      - name: Build Kirby Storybook 
-        run: npm run dist:storybook
+      - name: Build Kirby Documentation
+        run: npm run dist:cookbook & npm run dist:storybook
       - name: Upload Kirby Cookbook dist files
         uses: actions/cache@v2
         with:
@@ -230,7 +229,8 @@ jobs:
           else
             mkdir -p designsystem_web/branch/$HOSTNAME
             sed -i -E "s,<base href=\"[^\"]*\".*>,<base href=\"/branch/$HOSTNAME/\">,g" dist/apps/cookbook/index.html
-            cp -R dist/storybook/* designsystem_web/branch/$HOSTNAME
+            cp -R dist/apps/cookbook/* designsystem_web/branch/$HOSTNAME
+            cp -R dist/storybook/* designsystem_web/branch/storybook/$HOSTNAME
             cp designsystem_web/branch/$HOSTNAME/index.html designsystem_web/branch/$HOSTNAME/404.html
           fi
 
