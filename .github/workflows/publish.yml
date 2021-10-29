@@ -11,8 +11,7 @@ defaults:
     shell: bash
 
 jobs:
-  # If core has changes, we want to bump both core and designsystem
-  # If only designsystem has changes, we want to just bump designsystem
+  # Bump core if there's changes to it. Designsystem is always bumped due to being downstream.
   bump_package_versions: 
     name: Bump version and publish changed packages
     runs-on: ubuntu-latest
