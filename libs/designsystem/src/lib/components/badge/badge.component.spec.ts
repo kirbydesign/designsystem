@@ -1,6 +1,6 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
-import { customElementsInitializer } from '../../app-initialize';
+import { customElementsInitializer } from '../../custom-elements-initializer';
 import { BadgeComponent } from '../../index';
 import { TestHelper } from '../../testing/test-helper';
 
