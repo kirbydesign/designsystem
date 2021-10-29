@@ -5,7 +5,7 @@
   left: var(--kirby-badge-left, auto);
   right: var(--kirby-badge-right, auto);
   top: var(--kirby-badge-top, auto);
-  z-index: var(--kirby-badge-z-index, none);
+  z-index: var(--kirby-badge-z-index, auto);
   font-size: font-size('xxs');
   line-height: 1;
 
