@@ -127,8 +127,10 @@ jobs:
       - name: Run Postinstall Script
         if: steps.cache.outputs.cache-hit == 'true'
         run: npm run postinstall 
-      - name: Build Kirby Documentation
-        run: npm run dist:cookbook & npm run dist:storybook
+      - name: Build Cookbook
+        run: npm run dist:cookbook 
+      - name: Build Storybook
+        run: npm run dist:storybook
       - name: Upload Kirby Cookbook dist files
         uses: actions/cache@v2
         with:
