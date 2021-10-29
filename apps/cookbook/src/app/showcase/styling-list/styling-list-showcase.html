@@ -1,0 +1,41 @@
+<p>
+  Kirby offers default styling of ordered <code>&lt;ol&gt;</code> and unordered
+  <code>&lt;ul&gt;</code> lists (but not description lists <code>&lt;dl&gt;</code>).
+</p>
+<cookbook-styling-list-example></cookbook-styling-list-example>
+<h2>How to "opt-out" list styling</h2>
+<p>
+  In some cases you may not want the default styling. A common example is a navigation menu where an
+  HTML list is used but styled to not look like a list. You’re probably already overriding the
+  default user agent styles for lists. In addition you may want to override some or all of the Kirby
+  default list styling. Which declarations should be made could differ depending on the specific
+  case.
+</p>
+
+<p>To remove the custom markers (bullets):</p>
+<cookbook-code-viewer language="css">
+  li::before
+  <pre>
+  {{ '{' }}
+     display: none;
+  {{ '}' }} </pre
+  >
+</cookbook-code-viewer>
+<br />
+<p>
+  To remove or control the space between list items you’ll want to target list items with
+  sufficiently high specificity, e.g.:
+</p>
+<cookbook-code-viewer language="css">
+  ol li, ul li
+  <pre>
+  {{ '{' }}
+     margin-block-start: revert;
+  {{ '}' }} </pre
+  >
+</cookbook-code-viewer>
+<br />
+<p>
+  You may also want to change the display and line-height properties on list items li. Which values
+  to use will depend on the specific case.
+</p>
