@@ -1,7 +1,6 @@
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
 
-import { DesignTokenHelper } from '@kirbydesign/core';
-import { ThemeColor } from '@kirbydesign/core';
+import { DesignTokenHelper, ThemeColor } from '@kirbydesign/core';
 
 import { ProgressCircleRingComponent } from './progress-circle-ring.component';
 
