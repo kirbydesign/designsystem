@@ -136,11 +136,11 @@ jobs:
         with:
           path: |
             dist/
-          key: cookbook-dist-${{github.run_id}}
+          key: documentation-dist-${{github.run_id}}
 
 
-  deploy_to_cookbook:
-    name: Deploy cookbook
+  deploy_documentation:
+    name: Deploy Documentation
     needs: [lint_and_unittest, build_kirby, build_kirby_documentation]
     runs-on: ubuntu-latest
     env:
@@ -212,7 +212,7 @@ jobs:
         with:
           path: |
             dist/
-          key: cookbook-dist-${{github.run_id}}
+          key: documentation-dist-${{github.run_id}}
       - name: Deploy cookbook to GitHub pages
         run: |
           set -e
@@ -224,9 +224,11 @@ jobs:
           git config --global user.email 'dbrr00@bankdata.dk'          
           
           mkdir -p designsystem_web/branch
+          mkdir -p designsystem_web/storybook
           if [ $HOSTNAME == "cookbook" ]; then 
             sed -i -E "s,<base href=\"[^\"]*\".*>,<base href=\"/\">,g" dist/apps/cookbook/index.html
             cp -R dist/apps/cookbook/* designsystem_web/
+            cp -R dist/storybook/* designsystem_web/storybook/
             cp designsystem_web/index.html designsystem_web/404.html
           else
             mkdir -p designsystem_web/branch/$HOSTNAME/
