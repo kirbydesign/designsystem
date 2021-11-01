@@ -3,6 +3,7 @@ import {
   BarElement,
   CategoryScale,
   Chart,
+  Filler,
   Legend,
   LinearScale,
   LineController,
@@ -17,7 +18,7 @@ import { CHART_GLOBAL_DEFAULTS } from '../configs/global-defaults.config';
 const CHART_SCALES = [CategoryScale, LinearScale];
 const CHART_ELEMENTS = [BarElement, LineElement, PointElement];
 const CHART_CONTROLLERS = [BarController, LineController];
-const CHART_PLUGINS = [annotationPlugin];
+const CHART_PLUGINS = [annotationPlugin, Filler];
 
 /* Order matters; defaults must be merged after register as 
    register modifies the Chart.defaults objects */

@@ -82,6 +82,22 @@ describe('ChartJSService', () => {
   });
 
   describe('function: renderChart', () => {
+    it('should render chart with correct defaults for filler plugin', () => {
+      const data = [7, 7.37, 7.46];
+
+      chartJSService.renderChart({
+        targetElement: canvasElement,
+        type: 'line',
+        data: data,
+        dataLabels: ['one', 'two', 'three'],
+      });
+
+      const fillerOptions = chartJSService['chart'].options.plugins.filler;
+
+      expect(fillerOptions.propagate).toBeTrue();
+      expect(fillerOptions.drawTime).toBe('beforeDatasetDraw');
+    });
+
     describe('when annotations are given', () => {
       it('should render the chart with annotations applied', () => {
         const annotations: AnnotationOptions[] = [
