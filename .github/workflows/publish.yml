@@ -64,7 +64,7 @@ jobs:
           cd ../../ 
           echo $(jq --arg version "$NEW_VERSION" '.dependencies["@kirbydesign/core"]=$version' libs/designsystem/package.json) > libs/designsystem/package.json
           npx prettier --write libs/designsystem/package.json
-          git add libs/core/package.json libs/designsystem/package.json 
+          git add libs/core/package.json libs/core/package-lock.json libs/designsystem/package.json 
           GIT_MESSAGE=":bookmark:Bumping version to $NEW_VERSION (core)"
           git commit -m "$GIT_MESSAGE" 
       - name: Publish core package to npm
