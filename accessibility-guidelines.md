@@ -1,112 +1,87 @@
-<!--
-Noter fra Jesper:
-  - Hvad er accessibility?
-    - Husk at bruge de rigtige tags. Lav det semantisk.
-  - Hvad er accessibility ikke
-    - Not something you tag on. Aria er ikke en lifesaver
-      - Some things does not exist in HTML, you need to enrich the markup.
-  - Hvad er Kirbys role?
-  - Hvordan kommer jeg i gang
--->
+# Accessibility in Kirby
 
-# Accessibility, Kirby & You
+[ Index goes here when converted to HTML]
 
-- We want to get you started building accessible products with Kirby!
-- First we need to talk a bit accessibility and how we in team Kirby think about it.
-- We will clarify our role in the process of making your product accessible.
-- There's already a ton of great resources on accessibility, we will point to some of our favorites together with some quick wins to get you started!
+## Can Kirby make an application accessible?
 
-## Can Kirby make my product accessible?
+The short answer is no.
 
-We do not wish to point fingers but in the long run the accessibility of your product largely depends on **your** markup.
-This might be frustrating news if you're new to accessibility; where do you begin?
+The accessibility of an application largely depends on its markup. In other words, it depends on how the components in Kirby is used. The role of the components is to allow for developers to make their applications accessible; they should not be in the way.
 
-Lets start talking a bit about mindset and how we think about the topic in team Kirby.
+This means the developer has a lot of responsibility to ensure their application is accesible. This might be frustrating news for those new to accessibility; where to begin?
+
+Our suggestion is to read on!
 
 ### Mindset - what is accessibility?
 
-<!-- This section exists to make sure the reader and team kirby see eye to eye on the issue of accessibility. It is important to get the reader to understand that kirby can't provide a magic bullet to solve all their accessibility troubles -->
+In an attempt to make it easier to get started with accessibility, the following section details our mindset towards accessibilty and how we think about it in Team Kirby.
 
-- It's not something you tag on. By existing your product has some degree of accessibility (or lack thereof). Just like code quality; by existing your code has some kind of quality. Whether you think about it or not.
+#### Accessibility is not a feature
 
-- Okay... I want to improve the accessibility of my site, now that i figure it sucks, what do? I've heard ARIA tags and a lighthouse report should fix it!
+Accessibility is not something that is tagged onto an application like a feature.
 
-  - It's more than ARIA tags and stuff automated tests can catch.
-    - Your markup might be correct and you're using all the correct ARIA tags and so on. But if you rely on color to convey meaning, that meaning will be lost on someone who is colorblind.
-    - It's a whole different UX that is often neglected
-      - It has it's own patterns, pains and ways of being used.
-      - Consider someone using a screen reader to search through a list of hundreds of records based on date. If the date text says "Created on March 25" they will have to wait for "created on" to be read aloud for evey record. "March 25, created on" would give them the important information immediately.
+**All** applications have some degree of accessibility, whether it is considered or not. If it is not actively prioritized, the accessibility of an application is most likely poor. It is similar to the quality of a codebase; simply by existing it has some degree of quality. Not prioritizing it might have consequences in the long run, such as the codebase being hard to modify. Analogously not prioritizing accessibility might make an application impossible to use for people with various disabilities.
 
-- It's an ongoing process.
+Then how can it be improved? Beginning applying ARIA tags and using automated tests such as lighthouse, might spring to mind. This is definetly better than nothing. However accessibility is more than that.
 
-  - Make it part of your daily development pratice to test your product with a screen reader, WAVE, Accessibility Insights etc. Much the same way, you most likely have a test suite.
-  - Consider plopping it into your CI/CD pipeline. While automated testing won't catch everything, it is still useful.
-    - This will help keeping it top of mind.
+#### A whole different UX
 
-- It's not just about blind people. What about deaf people, they need captions. People with motorproblems might only be able to use a keyboard.
+The markup might be correct and all the correct ARIA tags can be utilized. But if for example an application relies on color to convey important information, that will be lost on someone who is color blind, unless it is supplemented in other ways. This is not something that can be caught by an automated test but requires context and the insight of a human.
 
-  - The goal should be to make your product TRULY accessible, ie. usable by people with various disabilities.
+Likewise consider someone using a screen reader to search through a list containing hundreds of records based on date. If the date text reads "Created on March 25", they will have to wait for "created on" to be read aloud for every record. If the structure was instead altered to be "March 25, created on" the important information would be read aloud first.
 
-- Begin caring about improving your accessibility now. As with code quality and behaviour tests it only gets more expensive the longer you wait.
+In many ways working with accessibility is improving a whole different UX than the one people without disabilities is used to. It has its own patterns, pains and ways of being used.
 
-- At last, a more self-centric argument for caring: it could (and most likely will) be yourself one day.
-  - You could break your arm tomorrow or get into a car accident next week impairing you from the neck down.
-  - What about when you get older?
-    - Your sight, motorskills and reaction time will most likely severly decrease (if it haven't already).
-  - In any case would you be able to rely on the tools you do now, in a world where the developers of these do not consider accessibility?
-  - Start caring :-)
+#### More than screen readers
 
-### That sound like a no... Then what is Kirby's role in making my product accessible?
+Many developers will be aware of the fact that their application might be accessed by users depending on screen readers. If this is the only focus in terms of accessibility, the application is mainly made more accessible for those with disabilities affecting sight.
 
-<!-- People should know what they can expect from us. And that Kirby can't fix their accessibliity problems for them. No magic bullet.  -->
+However there is a lot of disabilities to consider when improving accessibility. Someone who has trouble hearing or is deaf will need captions to understand videos. A person with motor problems will have a hard time clicking an element within a timespan.
 
-- As mentioned the accessibility of your product in large depends on your markup. BUT
+Someone with [vestibular or seizure](https://webaim.org/articles/seizure/) disorder would prefer that their [preference for reduced motion](https://web.dev/prefers-reduced-motion/) is respected. If not they might get nauseous or have an outright seizure if excessive motion such as parallax scrolling or strobelight like effects is used.
 
-  - Kirby should not be in the way
-  - We want to be a source of do's and don'ts when using Kirby components
-  - We want to give developers using Kirby the best possible foundation for working with accessibility in their product // BE THE BEACON
+#### An ego-centric argument for accessibility
 
-- We are on a learning journey ourselves and we could really use your help.
-  - If Kirby components ever limit you in improving the accessibility, please create an issue in our repository.
-  - If you notice any anti-patterns in our components, let us know!
-  - If you stumble upon any common problems and anti-patterns with your use of kirby components, please let us know, so we can learn from you! (Should we create a GH discussions post to document this?).
-    - We would like to document anti-patterns and best-pratice patterns in our cookbook.
+To conclude accessibility is many things. Various aspects of your application ranging from the markup to design is affected by it.
 
-## How do i get started with improving the accessibility of my product?
+And it might seem overwhelming... So besides helping those with disabilities to access and use the digital tools we all rely on in the 21st century; why care as a developer without any disabilities?
 
-- You got to know if it a problem to start with: take a look at the different forms of testing you can do!
-- You got to educate yourself and your team about accessibility. It does not have to be a big bang thing, just get started!
-  - Use tools as part of your education. They will point out common problems with your product to get you started!.
-  - We have found some resources to get you started
+So here is a more ego-centric argument for caring about accessibility: you will most likely be disabled to some degree in the future. Apologies if it sounds bleak.
 
-#### Can i do accessibility testing myself?
+You might break your dominant arm causing you to rely on keyboard navigation. More severely you could get into a car accident paralyzing you from the neck down. Moreover your sight, motorskills and reaction time will most likely decrease as you get older.
 
-<!-- We should encourage people to start caring about and testing accessibility of their products. But also drive home the point that they will never have the same experience as someone who relies on these tools. Users tests are required for this.  -->
+In any case would you be able to rely on the digital tools you do now in a world where developers does not consider accessibility?
 
-- Yes!\*
+## Kirby's role
 
-  - Tools for automated and semi-automated testing exists. As mentioned they won't catch everything tho.
-  - Perhaps get
-  - You can also do manual testing!
+As mentioned the accessibility of an application largely depends on how it is built and designed. This means that Kirby designsystem can not magically make an application accessible. So what is Kirby's role exactly when it comes to accessibility?
 
-- \* but...
+### Do not be in the way
 
-  - Semi- and Automated tools wont catch everything.
-  - When doing manual testing as someone without a disability you most likely miss the context and expertise using these tools and use them in different ways than someone that truly rely on them.
+Our primary goal is to not be in the way. The components in Kirby designsystem should allow developers to create accessible applications. If a developer ever experiences that a Kirby component causes problems when working with accessibility, they should not hesitate to create an issue in the Github repository: [here](https://github.com/kirbydesign/designsystem/issues/new/choose).
 
-- Should i impair myself in the name of accessibility? //(probably find a better wording for this... It's a bit... harsh?)
-  - Nah, do user testing instead and...
-  - ...Take a look at this great article from [a11y.coffe](Link to article regarding) and see what you can expect from the different kinds of testing with the resources you have available!
+### A knowledge source
 
-### Some quick wins to get you started
+While we are not there yet; we desire to give developers using Kirby designsystem the best possible foundation for working with accessibility in their applications. We wish to highligt do's, dont's, anti-patterns and best pratices as part of the documentation for the components in Kirby.
 
-<!-- Should conretize what some accessibility tasks might look like and give some actionable items to get started on -->
+## We need the help of developers
 
-- Find a pre-existing list of quick wins and plop into here with correct attribution
+In Team Kirby we are on a learning journey ourselves. In order to be able to meet our desire to become a knowledge source, we need the help of developers using Kirby.
 
-### Resources to get started
+If they have encountered any anti-patterns, best pratices, do's or don'ts in their applications. Then we would like to hear about it in order to highlight it as part of the documentation so other developers can learn from their experience.
 
-<!-- point people in the direction of where to go from here? -->
+We have created a Github discussions thread where experiences can be shared [here](create a gh discussions here). If a submission is highlighted in the documentation it will happen anonymously.
 
-- A11y.coffe
-- I think Jesper might have a single site or two :-)
+## How do i get started improving the acessibility of my application?
+
+A lot of great material is freely available online; so instead of reiterating what they already state, we will point you in the direction of some of our favorite resources. But we would like to say that you should assess your application. You got to know if there is a problem to start with. Furthermore it is also important to educate yourself and your team.
+
+### Resources for getting started
+
+The content on [a11y.coffee](https://a11y.coffee) is a great starting point; especially its [coffee metahpor](https://a11y.coffee/a11y-testing-making-coffee/) serves as a good overview of testing methods. Furthermore it also has a list of [quick wins](https://a11y.coffee/quick-wins/) for those who wants to get their hands dirty.
+
+While a11y.coffee has a [list of resources](https://a11y.coffee/dig-in/) to further explore the field of accessibility, we would like to supplement that with some of our own resources:
+
+- [WebAIM articles](https://webaim.org/articles/): a list of high quality articles from WebAIM ranging from a [beginner friendly introduction to a11y](https://webaim.org/intro/) to an [8-step implementation models](https://webaim.org/articles/implementation/).
+- [The a11y project checklist](https://www.a11yproject.com/checklist/): a user friendly checklist based on [WCAG](https://www.w3.org/WAI/standards-guidelines/wcag/) for evaluating and identifying opportunities for improving accessibility in applications. The a11y project also has a large [list of resources](https://www.a11yproject.com/resources/) from newsletters and books to podcasts.
+- [Web Content Accessibility (WCAG) overview](https://www.w3.org/WAI/standards-guidelines/wcag/): WCAG is a standard by the W3C Web Accessibility Initiative (WAI) that explains how to make content more accessible to people with disabilities. This overview serves as a good starting point for diving into the [WCAG standard](https://www.w3.org/TR/WCAG21/).
