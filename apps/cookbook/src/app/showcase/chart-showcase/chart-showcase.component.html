@@ -222,6 +222,23 @@
 </p>
 
 <kirby-divider [hasMargin]="true"></kirby-divider>
+
+<h2>Line Chart with fill</h2>
+<p>The fill allows for better visual explanation by allowing for different colors between lines.</p>
+<p>To render the fill set the <code>fill</code> inside your dataset.</p>
+<p>
+  More information can be found here:
+  <a href="https://www.chartjs.org/docs/latest/samples/area/line-datasets.html">Area charts</a>
+</p>
+<p>
+  <kirby-card [mode]="_cardMode" [hasPadding]="_cardHasPadding">
+    <cookbook-example-viewer [html]="lineAreaExample.template" [ts]="lineAreaExample.codeSnippet">
+      <cookbook-chart-example-area-line #lineAreaExample></cookbook-chart-example-area-line>
+    </cookbook-example-viewer>
+  </kirby-card>
+</p>
+
+<kirby-divider [hasMargin]="true"></kirby-divider>
 <h2>Responsiveness</h2>
 <p>
   The chart component takes 100% width of whatever container it is placed in. The height has to be
