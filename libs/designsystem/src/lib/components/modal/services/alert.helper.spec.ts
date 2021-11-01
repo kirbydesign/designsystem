@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { ModalController as IonicModalController } from '@ionic/angular';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 
-import { DesignTokenHelper } from '../../../helpers';
+import { DesignTokenHelper } from '@kirbydesign/core';
+
 import { TestHelper } from '../../../testing/test-helper';
 import { WindowRef } from '../../../types/window-ref';
 

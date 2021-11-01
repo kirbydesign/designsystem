@@ -1,33 +1,44 @@
-import { IonicModule } from '@ionic/angular';
-import { createComponentFactory, Spectator } from '@ngneat/spectator';
+import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
+import { customElementsInitializer } from '../../custom-elements-initializer';
+import { BadgeComponent } from '../../index';
 import { TestHelper } from '../../testing/test-helper';
 
-import { BadgeComponent } from './badge.component';
-
 describe('BadgeComponent', () => {
-  let spectator: Spectator<BadgeComponent>;
+  let spectator: SpectatorHost<BadgeComponent>;
   let ionBadge: HTMLIonBadgeElement;
 
-  let createHost = createComponentFactory({
+  let createHost = createHostFactory({
     component: BadgeComponent,
-    imports: [IonicModule.forRoot({ mode: 'ios', _testing: true })],
+    imports: [TestHelper.ionicModuleForTest],
+    providers: [customElementsInitializer()],
   });
 
   describe('by default', () => {
-    beforeEach(() => {
-      spectator = createHost({});
+    beforeEach(async () => {
+      spectator = createHost('<kirby-badge></kirby-badge>');
+      await TestHelper.whenReady(spectator.element);
     });
 
     it('should create', () => {
       expect(spectator.component).toBeTruthy();
     });
+
+    it("should have size 'md'", () => {
+      expect(spectator.component.size).toBe('md');
+    });
+
+    it("should have 'md' class ", () => {
+      expect(spectator.element).toHaveClass('md');
+    });
   });
 
   describe('when one character is slotted', () => {
     beforeEach(async () => {
-      spectator = createHost({ props: { text: 'x' } });
-      ionBadge = spectator.query('ion-badge');
+      spectator = createHost('<kirby-badge></kirby-badge>', { props: { text: 'x' } });
+      await TestHelper.whenReady(spectator.element);
+
+      ionBadge = spectator.element.shadowRoot.querySelector('ion-badge');
       await TestHelper.whenReady(ionBadge);
     });
 
@@ -37,6 +48,31 @@ describe('BadgeComponent', () => {
 
     it('should be rendered with height: 16px', () => {
       expect(ionBadge).toHaveComputedStyle({ height: '16px' });
+    });
+  });
+
+  describe("when size is 'sm'", () => {
+    beforeEach(async () => {
+      spectator = createHost(`<kirby-badge [size]="'sm'">Slotted Text</kirby-badge>`);
+      await TestHelper.whenReady(spectator.element);
+
+      ionBadge = spectator.element.shadowRoot.querySelector('ion-badge');
+      await TestHelper.whenReady(ionBadge);
+    });
+
+    it("should have the 'sm' class applied", () => {
+      expect(spectator.element).toHaveClass('sm');
+    });
+
+    it('should be rendered with correct dimensions', () => {
+      expect(ionBadge).toHaveComputedStyle({
+        width: '8px',
+        height: '8px',
+      });
+    });
+
+    it('should render without slotted text', () => {
+      expect(spectator.element.innerText).toBe('');
     });
   });
 });

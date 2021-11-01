@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { IonFooter } from '@ionic/angular';
+import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponents } from 'ng-mocks';
-import { SpectatorHost, createHostFactory } from '@ngneat/spectator';
 
+import { DesignTokenHelper } from '@kirbydesign/core';
+
+import { ThemeColorDirective } from '../../../directives';
 import { TestHelper } from '../../../testing/test-helper';
 import { ModalFooterComponent } from '../footer/modal-footer.component';
-import { DesignTokenHelper } from '../../../helpers/design-token-helper';
-import { ThemeColorDirective } from '../../../directives';
 
 const getColor = DesignTokenHelper.getColor;
 const size = DesignTokenHelper.size;

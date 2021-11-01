@@ -1,8 +1,14 @@
-@import '../../scss/utils';
+@import '~@kirbydesign/core/src/scss/utils';
 
 :host {
   display: block;
   user-select: none;
+
+  --kirby-badge-elevation: #{get-elevation(2)};
+  --kirby-badge-position: absolute;
+  --kirby-badge-top: -#{size('xxs')};
+  --kirby-badge-right: #{size('xxs')};
+  --kirby-badge-z-index: #{z('segmentBadge')};
 
   &.sm {
     ion-segment-button {
@@ -63,14 +69,6 @@ ion-segment-button {
 
 .segment-btn-wrapper {
   position: relative;
-}
-
-kirby-badge {
-  --kirby-badge-elevation: #{get-elevation(2)};
-  position: absolute;
-  top: -#{size('xxs')};
-  right: #{size('xxs')};
-  z-index: z('segmentBadge');
 }
 
 :host-context(.plt-desktop) {

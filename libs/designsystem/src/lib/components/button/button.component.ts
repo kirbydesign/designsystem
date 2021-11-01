@@ -7,7 +7,8 @@ import {
   Input,
 } from '@angular/core';
 
-import { NotificationColor } from '../../helpers';
+import { NotificationColor } from '@kirbydesign/core';
+
 import { IconComponent } from '../icon/icon.component';
 
 export enum ButtonSize {

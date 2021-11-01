@@ -17,20 +17,36 @@
     ></cookbook-segmented-control-example-grouped>
   </cookbook-example-viewer>
 
+  <h3>Default - with Badge</h3>
+  <p>
+    Badges can be applied to a Segmented Control when the mode is 'default'. A badge can be added to
+    any SegmentItem, using the badge property.
+  </p>
+  <p>
+    <a
+      href="https://github.com/kirbydesign/designsystem/blob/master/libs/designsystem/src/lib/components/segmented-control/segment-item.ts"
+      class="kirby-external-icon"
+      target="_blank"
+      >See SegmentItem on Github</a
+    >
+  </p>
+  <p>
+    The badge can contain either a plain text string through 'content', or an icon provided as
+    either the name of any default icon, or customName of any registered icon, in its 'icon'
+    property. The description of the badge is used as aria-label.
+  </p>
+
+  <cookbook-example-viewer [html]="badgeExample.template" [ts]="badgeExample.codeSnippet">
+    <cookbook-segmented-control-example-with-badge
+      #badgeExample
+    ></cookbook-segmented-control-example-with-badge>
+  </cookbook-example-viewer>
+
   <h2>Properties:</h2>
   <cookbook-api-description-properties
     [properties]="properties"
   ></cookbook-api-description-properties>
 
-  <p class="badge-note">
-    <sup>*</sup> If you want a badge on the SegmentItem then you add a badge object in the
-    SegmentItem array. The description of the badge is used as aria-label. Note that badges are only
-    applied when the mode is 'default'.
-    <a
-      href="https://github.com/kirbydesign/designsystem/blob/master/libs/designsystem/src/lib/components/segmented-control/segment-item.ts"
-      >See the interface for SegmentItem</a
-    >.
-  </p>
   <p>
     <strong>Note on size:</strong> For all modes, the touch area will always be a minimum of 44px by
     44px. If chip/segment is smaller than this, the surrounding area will still be clickable, to
