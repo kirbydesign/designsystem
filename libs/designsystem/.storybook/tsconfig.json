@@ -4,5 +4,6 @@
     "types": ["node"]
   },
   "exclude": ["../src/test.ts", "../src/**/*.spec.ts", "../projects/**/*.spec.ts"],
-  "include": ["../src/**/*", "../projects/**/*"]
+  "include": ["../src/**/*", "../projects/**/*"],
+  "files": ["./typings.d.ts"]
 }
