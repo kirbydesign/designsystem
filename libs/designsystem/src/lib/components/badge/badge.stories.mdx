@@ -31,7 +31,7 @@ export const BadgeWithIcon = (args) => ({
   props: args,
   template: `
   <kirby-badge>
-    <kirby-icon>
+    <kirby-icon name="attach">
     </kirby-icon>
   </kirby-badge>` 
 });
@@ -121,7 +121,31 @@ It is possible to slot an icon to display it in a badge. This might be used to i
 
 <Canvas>
   <Story
-    name='Icon'
+    name='Default - icon'
+  >
+    {BadgeWithIcon.bind({})}
+  </Story>
+  <Story
+    name='Success - icon'
+    args={{
+      themeColor: 'success'
+    }}
+  >
+    {BadgeWithIcon.bind({})}
+  </Story>
+  <Story
+    name='Warning - icon'
+    args={{
+      themeColor: 'warning'
+    }}
+  >
+    {BadgeWithIcon.bind({})}
+  </Story>
+  <Story
+    name='Danger - icon'
+    args={{
+      themeColor: 'danger'
+    }}
   >
     {BadgeWithIcon.bind({})}
   </Story>
