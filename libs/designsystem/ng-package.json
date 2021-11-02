@@ -17,6 +17,7 @@
   },
   "allowedNonPeerDependencies": [
     "@ionic/angular",
+    "@kirbydesign/core",
     "chart.js",
     "chartjs-plugin-annotation",
     "highcharts",

@@ -1,13 +1,12 @@
 import { Directive, HostBinding, Input } from '@angular/core';
 
-import { ColorHelper } from '../../helpers/color-helper';
-import { ThemeColor } from '../../helpers/theme-color.type';
+import { ColorHelper } from '@kirbydesign/core';
+import { ThemeColor } from '@kirbydesign/core';
 
 @Directive({
   // tslint:disable-next-line:directive-selector
   selector: `kirby-avatar[themeColor],
              kirby-card[themeColor],
-             kirby-badge[themeColor],
              kirby-icon[themeColor],
              kirby-progress-circle-ring[themeColor],
              kirby-modal-footer[themeColor],

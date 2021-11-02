@@ -7,7 +7,6 @@ import { AccordionExampleComponent } from './accordion-example/accordion-example
 import { ActionSheetExampleComponent } from './action-sheet-example/action-sheet-example.component';
 import { AlertExampleComponent } from './alert-example/alert-example.component';
 import { AvatarExampleComponent } from './avatar-example/avatar-example.component';
-import { BadgeExampleComponent } from './badge-example/badge-example.component';
 import { ButtonExampleComponent } from './button-example/button-example.component';
 import { CalendarCardExampleComponent } from './calendar-example/calendar-card-example.component';
 import { CalendarExampleComponent } from './calendar-example/calendar-example.component';
@@ -88,7 +87,6 @@ export const COMPONENT_DECLARATIONS: any[] = [
   SpinnerExampleComponent,
   SegmentedControlExampleComponent,
   ChipExampleComponent,
-  BadgeExampleComponent,
   IconExampleComponent,
   CalendarExampleComponent,
   CalendarCardExampleComponent,

@@ -8,7 +8,6 @@ import { AccordionItemComponent } from './components/accordion/accordion-item.co
 import { AccordionDirective } from './components/accordion/accordion.directive';
 import { AppModule } from './components/app/app.module';
 import { AvatarComponent } from './components/avatar/avatar.component';
-import { BadgeComponent } from './components/badge/badge.component';
 import { ButtonComponent } from './components/button/button.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { CardFooterComponent } from './components/card/card-footer/card-footer.component';
@@ -70,6 +69,8 @@ import { ToastController } from './components/toast/services/toast.controller';
 import { ToastHelper } from './components/toast/services/toast.helper';
 import { ToggleButtonModule } from './components/toggle-button/toggle-button.module';
 import { ToggleComponent } from './components/toggle/toggle.component';
+import { KirbyBadge as BadgeComponent } from './components/web-component-proxies.component';
+import { customElementsInitializer } from './custom-elements-initializer';
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
 import { ModalRouterLinkDirective } from './directives/modal-router-link/modal-router-link.directive';
 import { ThemeColorDirective } from './directives/theme-color/theme-color.directive';
@@ -159,6 +160,7 @@ const providers = [
   LoadingOverlayService,
   ResizeObserverFactory,
   ResizeObserverService,
+  customElementsInitializer(),
 ];
 
 const entryComponents = [

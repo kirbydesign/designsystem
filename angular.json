@@ -60,13 +60,10 @@
             "customWebpackConfig": {
               "path": "./webpack.sass-to-ts.config.ts",
               "sassToTs": {
-                "watchGlob": [
-                  "libs/designsystem/src/lib/helpers/**/*.scss",
-                  "libs/designsystem/src/lib/scss/**/*.scss"
-                ],
+                "watchGlob": ["libs/core/src/helpers/**/*.scss", "libs/core/src/scss/**/*.scss"],
                 "transform": [
-                  "libs/designsystem/src/lib/helpers/color-helper.scss",
-                  "libs/designsystem/src/lib/helpers/design-token-helper.scss"
+                  "libs/core/src/helpers/color-helper.scss",
+                  "libs/core/src/helpers/design-token-helper.scss"
                 ]
               }
             },

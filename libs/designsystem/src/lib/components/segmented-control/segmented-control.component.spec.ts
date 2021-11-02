@@ -1,11 +1,14 @@
+import { By } from '@angular/platform-browser';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponents, MockDirective } from 'ng-mocks';
 
+import { DesignTokenHelper } from '@kirbydesign/core';
+
 import { ThemeColorDirective } from '../../directives';
-import { DesignTokenHelper } from '../../helpers';
+import { BadgeComponent } from '../../index';
 import { TestHelper } from '../../testing/test-helper';
-import { BadgeComponent } from '../badge/badge.component';
 import { ChipComponent } from '../chip/chip.component';
+import { IconComponent } from '../icon';
 
 import { SegmentItem } from './segment-item';
 import { SegmentedControlComponent, SegmentedControlMode } from './segmented-control.component';
@@ -162,5 +165,82 @@ describe('SegmentedControlComponent', () => {
         expect(component.value).toBe(items[2]);
       });
     });
+  });
+});
+
+describe('SegmentedControl with Badge', () => {
+  let itemsWithBadge: SegmentItem[] = [
+    {
+      text: 'First Item',
+      id: 'first',
+      badge: {
+        content: '1',
+        themeColor: 'danger',
+      },
+    },
+    {
+      text: 'Second item',
+      id: 'second',
+      badge: {
+        icon: 'attach',
+        themeColor: 'danger',
+      },
+    },
+    {
+      text: 'Third item',
+      id: 'third',
+      badge: {
+        content: '1',
+        icon: 'attach',
+        themeColor: 'danger',
+      },
+    },
+  ];
+
+  let spectator: SpectatorHost<SegmentedControlComponent>;
+
+  const createHost = createHostFactory({
+    component: SegmentedControlComponent,
+    declarations: [MockComponents(ChipComponent, BadgeComponent, IconComponent)],
+    imports: [TestHelper.ionicModuleForTest],
+  });
+
+  beforeEach(() => {
+    spectator = createHost(
+      `<kirby-segmented-control>
+       </kirby-segmented-control>`
+    );
+  });
+
+  it('should render a badge per item with badge property defined', () => {
+    spectator.setInput({ items: itemsWithBadge });
+
+    expect(spectator.queryHostAll('kirby-badge').length).toBe(itemsWithBadge.length);
+  });
+
+  it('should render badge with content (text-string)', () => {
+    const item: SegmentItem = itemsWithBadge[0];
+    spectator.setInput({ items: [item] });
+    const badgeElement: HTMLElement = spectator.query('kirby-badge');
+
+    expect(badgeElement.innerText.trim).toContainText(item.badge.content);
+  });
+
+  it('should render icon in badge with correct name', () => {
+    const item: SegmentItem = itemsWithBadge[1];
+    spectator.setInput({ items: [item] });
+    const iconComponent = spectator.debugElement.query(By.directive(IconComponent))
+      .componentInstance;
+
+    expect(iconComponent.name).toBe(item.badge.icon);
+    expect(iconComponent.customName).toBe(item.badge.icon);
+  });
+
+  it('should render badge with icon if both icon and content is provided', () => {
+    spectator.setInput({ items: [itemsWithBadge[2]] });
+    const iconComponent = spectator.debugElement.query(By.directive(IconComponent))
+      .componentInstance;
+
+    expect(iconComponent).toBeDefined();
   });
 });

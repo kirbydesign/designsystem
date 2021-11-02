@@ -3,9 +3,9 @@ import CustomEqualityTester = jasmine.CustomEqualityTester;
 import CustomMatcherResult = jasmine.CustomMatcherResult;
 import MatchersUtil = jasmine.MatchersUtil;
 
+import { ColorHelper, ThemeColorDefinition } from '@kirbydesign/core';
+
 import { TestHelper } from './test-helper';
-import { ColorHelper } from '../helpers/color-helper';
-import { ThemeColorDefinition } from '../helpers/design-token-helper';
 
 export const ElementCssCustomMatchers: CustomMatcherFactories = {
   toHaveComputedStyle: (util: MatchersUtil, customEqualityTesters: CustomEqualityTester[]) =>

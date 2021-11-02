@@ -6,8 +6,9 @@ import { IonRefresher } from '@ionic/angular';
 import { createHostFactory, mockProvider, SpectatorHost, SpyObject } from '@ngneat/spectator';
 import { MockDirective } from 'ng-mocks';
 
+import { DesignTokenHelper } from '@kirbydesign/core';
+
 import { FitHeadingDirective } from '../../directives/fit-heading/fit-heading.directive';
-import { DesignTokenHelper } from '../../helpers/design-token-helper';
 import { TestHelper } from '../../testing/test-helper';
 import { WindowRef } from '../../types/window-ref';
 import { ModalNavigationService } from '../modal/services/modal-navigation.service';

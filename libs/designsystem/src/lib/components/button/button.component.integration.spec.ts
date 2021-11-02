@@ -3,8 +3,9 @@ import { IonIcon } from '@ionic/angular';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponent, MockComponents } from 'ng-mocks';
 
+import { DesignTokenHelper } from '@kirbydesign/core';
+
 import { FitHeadingDirective } from '../../directives/fit-heading/fit-heading.directive';
-import { DesignTokenHelper } from '../../helpers/design-token-helper';
 import { TestHelper } from '../../testing/test-helper';
 import { WindowRef } from '../../types/window-ref';
 import { CardComponent } from '../card/card.component';

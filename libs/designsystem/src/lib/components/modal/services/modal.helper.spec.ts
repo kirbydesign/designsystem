@@ -4,7 +4,8 @@ import { ModalController as IonicModalController } from '@ionic/angular';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 import { MockComponents } from 'ng-mocks';
 
-import { DesignTokenHelper } from '../../../helpers/design-token-helper';
+import { DesignTokenHelper } from '@kirbydesign/core';
+
 import { ScreenSize, TestHelper } from '../../../testing/test-helper';
 import { WindowRef } from '../../../types/window-ref';
 import { ButtonComponent } from '../../button/button.component';

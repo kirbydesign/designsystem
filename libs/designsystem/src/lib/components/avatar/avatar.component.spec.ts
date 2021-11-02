@@ -1,8 +1,8 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
+import { ColorHelper, DesignTokenHelper, ThemeColorExtended } from '@kirbydesign/core';
+
 import { ThemeColorDirective } from '../../directives';
-import { ColorHelper } from '../../helpers';
-import { DesignTokenHelper, ThemeColorExtended } from '../../helpers/design-token-helper';
 import { TestHelper } from '../../testing/test-helper';
 import { CardIsClickableDirective } from '../card/directives/card-is-clickable.directive';
 import { IconComponent } from '../icon/icon.component';

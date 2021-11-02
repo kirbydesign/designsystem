@@ -1,7 +1,7 @@
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
 
-import { DesignTokenHelper } from './../../helpers/design-token-helper';
-import { ThemeColor } from './../../helpers/theme-color.type';
+import { DesignTokenHelper, ThemeColor } from '@kirbydesign/core';
+
 import { ProgressCircleRingComponent } from './progress-circle-ring.component';
 
 const getColor = DesignTokenHelper.getColor;

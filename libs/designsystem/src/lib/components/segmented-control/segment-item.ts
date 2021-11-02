@@ -1,4 +1,4 @@
-import { ThemeColor } from '../../helpers/theme-color.type';
+import { ThemeColor } from '@kirbydesign/core';
 
 export interface SegmentItem {
   id: string;
@@ -8,7 +8,8 @@ export interface SegmentItem {
    */
   checked?: boolean;
   badge?: {
-    content: string;
+    content?: string;
+    icon?: string;
     description?: string;
     themeColor: ThemeColor;
   };
