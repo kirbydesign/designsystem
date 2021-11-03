@@ -1,20 +1,315 @@
-import { Meta, Story } from '@storybook/addon-docs';
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs';
+import { moduleMetadata, componentWrapperDecorator } from '@storybook/angular';
+import { IconModule, BadgeComponent} from '../../index.ts';
+import { IonicModule } from '@ionic/angular'
 
-import { BadgeComponent } from '../../index.ts';
+<Meta 
+  title='Components/Badge' 
+  component={BadgeComponent}
+  decorators={[
+    moduleMetadata({
+      declarations: [],
+      imports: [IonicModule.forRoot(), IconModule]
+    })
+  ]}
+  argTypes={ argTypeConfig }
+  />
 
+# Badge
+Badges are inline block elements that often are used on top of or close to another component. They can be used with numbers, text and icons.
+A small badge version also exists which does not support slotted content.
 
-<!--👇 The title prop determines where your story goes in the story list -->
-<Meta title="Components/Badge" component={BadgeComponent} />
+## Elevation on white badges
+A white badge can easily blend into the background and just appear as a number, icon or not at all if no content is passed. 
+Here it can be necesssary to apply some elevation to the badge; this is also done for the examples below where all the badges are displayed on a white background.
 
-<!--👇 We create a “template” of how args map to rendering -->
-export const Template = (args) => ({ props: args });
+The `--kirby-badge-elevation` property can be useful for this. You can see how it is applied to the examples below by inspecting the shared styling for the badge examples:
+[badge-example-shared.scss on Github](https://github.com/kirbydesign/designsystem/blob/master/apps/cookbook/src/app/examples/badge-example/examples/badge-example-shared.scss)
 
-<!-- 👇 The args you need here will depend on your component -->
+export const Badge = (args) => ({ props: args });
+export const BadgeWithIcon = (args) => ({ 
+  props: args,
+  template: `
+  <kirby-badge>
+    <kirby-icon name="attach">
+    </kirby-icon>
+  </kirby-badge>` 
+});
+
+## Badge with numbers
+Using a badge with a number can be a good way to indicate specific status on an element.
+
+<Canvas>
+  <Story
+    name='Default - number'
+    args={{
+        text: '1',
+      }}
+     decorators={[
+      componentWrapperDecorator((story) => `<div style="--kirby-badge-elevation: rgba(28, 28, 28, 0.3) 0px 5px 10px -10px, rgba(28, 28, 28, 0.08) 0px 0px 5px 0px">${story}</div>`)
+    ]}>
+    {Badge.bind({})}
+  </Story>
+  <Story
+    name='Success - number'
+    args={{
+        text: '7',
+        themeColor: 'success'
+      }}>
+    {Badge.bind({})}
+  </Story>
+  <Story
+    name='Warning - number'
+    args={{
+        text: '99',
+        themeColor: 'warning'
+      }}>
+    {Badge.bind({})}
+  </Story>
+  <Story
+    name='Danger - number'
+    args={{
+        text: '123',
+        themeColor: 'danger'
+      }}>
+    {Badge.bind({})}
+  </Story>
+</Canvas>
+
+## Badge with text
+Badges can also be used together with a text. Flags might in some cases be a better alternative.
+
+<Canvas>
+  <Story
+    name='Default - text'
+    args={{
+        text: 'Default'
+      }}
+    decorators={[
+      componentWrapperDecorator((story) => `<div style="--kirby-badge-elevation: rgba(28, 28, 28, 0.3) 0px 5px 10px -10px, rgba(28, 28, 28, 0.08) 0px 0px 5px 0px">${story}</div>`)
+    ]}>
+    {Badge.bind({})}
+  </Story>
+  <Story
+    name='Success - text'
+    args={{
+        text: 'Success',
+        themeColor: 'success'
+      }}>
+    {Badge.bind({})}
+  </Story>
+  <Story
+    name='Warning - text'
+    args={{
+        text: 'Warning',
+        themeColor: 'warning'
+      }}>
+    {Badge.bind({})}
+  </Story>
+  <Story
+    name='Danger - text'
+    args={{
+        text: 'Danger',
+        themeColor: 'danger'
+      }}>
+    {Badge.bind({})}
+  </Story>
+</Canvas>
+
+## Badge with icons
+It is possible to slot an icon to display it in a badge. This might be used to indicate the existence of an associated element (e.g. an attachment).
+
+<Canvas>
+  <Story
+    name='Default - icon'
+    decorators={[
+      componentWrapperDecorator((story) => `<div style="--kirby-badge-elevation: rgba(28, 28, 28, 0.3) 0px 5px 10px -10px, rgba(28, 28, 28, 0.08) 0px 0px 5px 0px">${story}</div>`)
+    ]}
+  >
+    {BadgeWithIcon.bind({})}
+  </Story>
+  <Story
+    name='Success - icon'
+    args={{
+      themeColor: 'success'
+    }}
+  >
+    {BadgeWithIcon.bind({})}
+  </Story>
+  <Story
+    name='Warning - icon'
+    args={{
+      themeColor: 'warning'
+    }}
+  >
+    {BadgeWithIcon.bind({})}
+  </Story>
+  <Story
+    name='Danger - icon'
+    args={{
+      themeColor: 'danger'
+    }}
+  >
+    {BadgeWithIcon.bind({})}
+  </Story>
+</Canvas>
+
+## Small Badge
+Setting the input property `size` to `'sm'` will display a small badge without any content. This can be useful to indicate status on an element.
+
+<Canvas>
+  <Story
+    name='Default - small'
+    args={{
+        size: 'sm'
+      }}
+    decorators={[
+      componentWrapperDecorator((story) => `<div style="--kirby-badge-elevation: rgba(28, 28, 28, 0.3) 0px 5px 10px -10px, rgba(28, 28, 28, 0.08) 0px 0px 5px 0px">${story}</div>`)
+    ]}>
+    {Badge.bind({})}
+  </Story>
+  <Story
+    name='Success - small'
+    args={{
+        size: 'sm',
+        themeColor: 'success'
+      }}>
+    {Badge.bind({})}
+  </Story>
+  <Story
+    name='Warning - small'
+    args={{
+        size: 'sm',
+        themeColor: 'warning'
+      }}>
+    {Badge.bind({})}
+  </Story>
+  <Story
+    name='Danger - small'
+    args={{
+        size: 'sm',
+        themeColor: 'danger'
+      }}>
+    {Badge.bind({})}
+  </Story>
+</Canvas>
+
+<!-- 
+The PropTable story is a workaround to be able to hide the controls in the ArgsTable.
+We need to hide it because when <ArgsTable /> uses one of the stories loaded into the DOM, 
+and a user tries to alter the control while on the doc page, storybook will break with an error message:
+"Type [ComponentName] is part of the declarations of 2 modules: StorybookModule and StorybookModule"
+
+With this workaround, the story will show in the menu to the left, but if we dont bind to the template, 
+we will not render anything else than the prop table, with default values. 
+
+The above is a side effect of <ArgsTable of={ComponentName} /> syntax not working with custom 
+args tables, so we can only generate it from a specific story: https://storybook.js.org/docs/angular/writing-docs/doc-blocks#customizing
+
+REMEMBER TO ADD ALL PROPERTIES TO BELOW ON THE PROPTABLE STORY, FOR THEM TO SHOW UP ON THE DOCS PAGE.
+-->
 <Story
-  name="First Story"
+  name='PropTable'
   args={{
-      text: "hello",
-      themeColor: "warning" 
-    }}>
-  {Template.bind({})}
+    text: 'Default',
+    themeColor: 'white'
+  }}
+  argTypes={{
+    text: { control: { disable: true } },
+    themeColor: { control: { disable: true } }
+  }}>
 </Story>
+
+<ArgsTable story='PropTable' />
+
+export const argTypeConfig = {
+  themeColor: {
+    options: ['success', 'warning', 'danger', 'white'],
+    description: 'Sets which color the badge should use from the theme palette.',
+    table: {
+      defaultValue: {
+        summary: 'white'
+      },
+      type: {
+        summary: 'Subset of ThemeColor',
+        detail: 'success | warning | danger | white'
+      },
+      category: "Inputs",
+    },
+    control: 'select',
+  },
+  text: {
+    description: 'Sets text content on the badge. Alternately, content can be slotted directly into the badge: `<kirby-badge>1</kirby-badge>`',
+    table: {
+      category: "Inputs"
+    },
+  },
+  "--kirby-badge-position": {
+    description: "Sets the position property of the badge.",
+    table: {
+      defaultValue: {
+        summary: 'relative'
+      },
+      category: "CSS Custom Properties",
+    },
+  },
+  "--kirby-badge-top": {
+    description: "Sets the vertical position of the badge.",
+    table: {
+      defaultValue: {
+        summary: 'auto'
+      },
+      category: "CSS Custom Properties",
+    },
+  },
+  "--kirby-badge-right": {
+    description: "Sets the horizontal position of the badge.",
+    table: {
+      defaultValue: {
+        summary: 'auto'
+      },
+      category: "CSS Custom Properties",
+    },
+  },
+  "--kirby-badge-left": {
+    description: "Sets the horizontal position of the badge.",
+    table: {
+      defaultValue: {
+        summary: 'auto'
+      },
+      category: "CSS Custom Properties",
+    },
+  },
+  "--kirby-badge-elevation": {
+    description: "Sets the box-shadow property of the badge.",
+    table: {
+      defaultValue: {
+        summary: 'auto'
+      },
+      category: "CSS Custom Properties",
+    },
+  },
+  "--kirby-badge-color": {
+    description: "Sets the text color of the badge. It is recommended to use the themeColor input property instead to not break the color scheme.	",
+    table: {
+      category: "CSS Custom Properties",
+    },
+  },
+  "--kirby-badge-background-color": {
+    description: "Sets the box-shadow property of the badge.",
+    table: {
+      category: "CSS Custom Properties",
+    },
+  },
+  "--kirby-badge-z-index": {
+    description: "Sets the z-index property of the badge.	",
+    table: {
+      category: "CSS Custom Properties",
+    },
+  },
+  el: {
+    table:{
+      disable: true
+    }
+  },
+}
