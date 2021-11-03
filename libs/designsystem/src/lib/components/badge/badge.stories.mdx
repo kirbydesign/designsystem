@@ -151,6 +151,46 @@ It is possible to slot an icon to display it in a badge. This might be used to i
   </Story>
 </Canvas>
 
+## Small Badge
+Setting the input property `size` to `'sm'` will display a small badge without any content. This can be useful to indicate status on an element.
+
+<Canvas>
+  <Story
+    name='Default - small'
+    args={{
+        size: 'sm'
+      }}
+    decorators={[
+      componentWrapperDecorator((story) => `<div style="--kirby-badge-elevation: rgba(28, 28, 28, 0.3) 0px 5px 10px -10px, rgba(28, 28, 28, 0.08) 0px 0px 5px 0px">${story}</div>`)
+    ]}>
+    {Badge.bind({})}
+  </Story>
+  <Story
+    name='Success - small'
+    args={{
+        size: 'sm',
+        themeColor: 'success'
+      }}>
+    {Badge.bind({})}
+  </Story>
+  <Story
+    name='Warning - small'
+    args={{
+        size: 'sm',
+        themeColor: 'warning'
+      }}>
+    {Badge.bind({})}
+  </Story>
+  <Story
+    name='Danger - small'
+    args={{
+        size: 'sm',
+        themeColor: 'danger'
+      }}>
+    {Badge.bind({})}
+  </Story>
+</Canvas>
+
 <!-- 
 The PropTable story is a workaround to be able to hide the controls in the ArgsTable.
 We need to hide it because when <ArgsTable /> uses one of the stories loaded into the DOM, 
@@ -191,17 +231,77 @@ export const argTypeConfig = {
         summary: 'Subset of ThemeColor',
         detail: 'success | warning | danger | white'
       },
+      category: "Inputs",
     },
     control: 'select',
+  },
+  text: {
+    table: {
+      category: "Inputs"
+    },
   },
   "--kirby-badge-position": {
     description: "Sets the position property of the badge.",
     table: {
-        defaultValue: {
+      defaultValue: {
         summary: 'relative'
       },
       category: "CSS Custom Properties",
-    }
+    },
+  },
+  "--kirby-badge-top": {
+    description: "Sets the vertical position of the badge.",
+    table: {
+      defaultValue: {
+        summary: 'auto'
+      },
+      category: "CSS Custom Properties",
+    },
+  },
+  "--kirby-badge-right": {
+    description: "Sets the horizontal position of the badge.",
+    table: {
+      defaultValue: {
+        summary: 'auto'
+      },
+      category: "CSS Custom Properties",
+    },
+  },
+  "--kirby-badge-left": {
+    description: "Sets the horizontal position of the badge.",
+    table: {
+      defaultValue: {
+        summary: 'auto'
+      },
+      category: "CSS Custom Properties",
+    },
+  },
+  "--kirby-badge-elevation": {
+    description: "Sets the box-shadow property of the badge.",
+    table: {
+      defaultValue: {
+        summary: 'auto'
+      },
+      category: "CSS Custom Properties",
+    },
+  },
+  "--kirby-badge-color": {
+    description: "Sets the text color of the badge. It is recommended to use the themeColor input property instead to not break the color scheme.	",
+    table: {
+      category: "CSS Custom Properties",
+    },
+  },
+  "--kirby-badge-background-color": {
+    description: "Sets the box-shadow property of the badge.",
+    table: {
+      category: "CSS Custom Properties",
+    },
+  },
+  "--kirby-badge-z-index": {
+    description: "Sets the z-index property of the badge.	",
+    table: {
+      category: "CSS Custom Properties",
+    },
   },
   el: {
     table:{
