@@ -4,5 +4,5 @@
 */
 @import './base/functions';
 @import './base/variables';
-@import './base/include-media';
 @import './themes/colors';
+@import '~include-media/dist/include-media';
