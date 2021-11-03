@@ -1,7 +1,8 @@
-import { SpectatorHost, createHostFactory } from '@ngneat/spectator';
 import { fakeAsync, tick } from '@angular/core/testing';
+import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
-import { DesignTokenHelper } from '../../../helpers/design-token-helper';
+import { DesignTokenHelper } from '@kirbydesign/core';
+
 import { TextareaComponent } from './textarea.component';
 
 const getColor = DesignTokenHelper.getColor;

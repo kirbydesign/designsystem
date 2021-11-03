@@ -5,7 +5,6 @@ import { ThemeColor, ThemeColorDirective } from '@kirbydesign/designsystem';
 @Directive({
   // tslint:disable-next-line:directive-selector
   selector: `kirby-card[themeColor],
-             kirby-badge[themeColor],
              kirby-icon[themeColor],
              kirby-empty-state[themeColor]`,
   providers: [

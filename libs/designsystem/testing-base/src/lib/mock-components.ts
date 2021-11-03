@@ -4,7 +4,6 @@ import { MockAccordionItemComponent } from './components/mock.accordion-item.com
 import { MockActionSheetComponent } from './components/mock.action-sheet.component';
 import { MockAppComponent } from './components/mock.app.component';
 import { MockAvatarComponent } from './components/mock.avatar.component';
-import { MockBadgeComponent } from './components/mock.badge.component';
 import { MockButtonComponent } from './components/mock.button.component';
 import { MockCalendarComponent } from './components/mock.calendar.component';
 import { MockCardFooterComponent } from './components/mock.card-footer.component';
@@ -65,7 +64,6 @@ export const MOCK_COMPONENTS = [
   MockAccordionItemComponent,
   MockAppComponent,
   MockAvatarComponent,
-  MockBadgeComponent,
   MockButtonComponent,
   MockCalendarComponent,
   MockCardFooterComponent,

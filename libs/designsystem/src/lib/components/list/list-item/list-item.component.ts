@@ -10,8 +10,9 @@ import {
 } from '@angular/core';
 import { IonItemSliding } from '@ionic/angular';
 
+import { ThemeColor } from '@kirbydesign/core';
+
 import { PlatformService } from '../../../helpers/platform.service';
-import { ThemeColor } from '../../../helpers/theme-color.type';
 import { ListSwipeAction, ListSwipeDirection, ListSwipeEnd } from '../list-swipe-action.type';
 
 export type BoundaryClass = 'first' | 'last';

@@ -26,7 +26,7 @@ export class SassToTypescriptEngine {
     return sass
       .renderSync({
         file: filename,
-        includePaths: ['libs/designsystem/src/lib/scss'],
+        includePaths: ['libs/designsystem/src/lib/scss', 'libs/core/src/scss'],
         outputStyle: 'compressed', // Don't render comments
       })
       .css.toString();

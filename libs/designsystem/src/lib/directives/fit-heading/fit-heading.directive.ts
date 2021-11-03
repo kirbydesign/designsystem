@@ -1,7 +1,8 @@
 import { Directive, ElementRef, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 
+import { DesignTokenHelper } from '@kirbydesign/core';
+
 import { ResizeObserverService } from '../../components/shared/resize-observer/resize-observer.service';
-import { DesignTokenHelper } from '../../helpers/design-token-helper';
 import { LineClampHelper } from '../../helpers/line-clamp-helper';
 
 const fontSize = DesignTokenHelper.fontSize;

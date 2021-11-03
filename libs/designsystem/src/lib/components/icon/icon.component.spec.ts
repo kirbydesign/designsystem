@@ -5,8 +5,9 @@ import { IonIcon } from '@ionic/angular';
 import { mockProvider, SpyObject } from '@ngneat/spectator';
 import { MockComponent } from 'ng-mocks';
 
+import { DesignTokenHelper } from '@kirbydesign/core';
+
 import { ThemeColorDirective } from '../../directives/theme-color/theme-color.directive';
-import { DesignTokenHelper } from '../../helpers/design-token-helper';
 
 import { IconRegistryService } from './icon-registry.service';
 import { IconComponent, IconSize } from './icon.component';

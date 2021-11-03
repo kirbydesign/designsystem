@@ -1,4 +1,4 @@
-@import '../../scss/utils';
+@import '~@kirbydesign/core/src/scss/utils';
 
 $diameter-xsmall: map-get($avatar-sizes, 'xs');
 $diameter-small: map-get($avatar-sizes, 's');
@@ -21,7 +21,7 @@ $badge-diameter: $avatar-badge-size;
   --kirby-badge-position: absolute;
   --kirby-badge-right: #{get-badge-position($diameter-small)};
   --kirby-badge-top: #{get-badge-position($diameter-small)};
-  --kirby-badge-zindex: 2;
+  --kirby-badge-z-index: #{z('avatarBadge')};
   position: relative;
 }
 

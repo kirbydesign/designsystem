@@ -1,4 +1,5 @@
 import { DropdownExampleComponent } from '~/app/examples/dropdown-example/dropdown-example.component';
+import { PagePullToRefreshExampleComponent } from '~/app/examples/page-example/pull-to-refresh/page-pull-to-refresh-example.component';
 
 import { IconSettings, ICON_SETTINGS } from '@kirbydesign/designsystem';
 
@@ -6,7 +7,6 @@ import { AccordionExampleComponent } from './accordion-example/accordion-example
 import { ActionSheetExampleComponent } from './action-sheet-example/action-sheet-example.component';
 import { AlertExampleComponent } from './alert-example/alert-example.component';
 import { AvatarExampleComponent } from './avatar-example/avatar-example.component';
-import { BadgeExampleComponent } from './badge-example/badge-example.component';
 import { ButtonExampleComponent } from './button-example/button-example.component';
 import { CalendarCardExampleComponent } from './calendar-example/calendar-card-example.component';
 import { CalendarExampleComponent } from './calendar-example/calendar-example.component';
@@ -85,7 +85,6 @@ export const COMPONENT_DECLARATIONS: any[] = [
   SpinnerExampleComponent,
   SegmentedControlExampleComponent,
   ChipExampleComponent,
-  BadgeExampleComponent,
   IconExampleComponent,
   CalendarExampleComponent,
   CalendarCardExampleComponent,
@@ -120,6 +119,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   CookbookExampleCardContentComponent,
   AccordionExampleComponent,
   LinkExampleComponent,
+  PagePullToRefreshExampleComponent,
 ];
 
 // Configure custom icons (used by example to show the usage of custom icons)

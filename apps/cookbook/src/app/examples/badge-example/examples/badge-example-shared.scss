@@ -1,0 +1,11 @@
+@import '~@kirbydesign/core/src/scss/utils';
+
+:host {
+  kirby-badge:first-child {
+    --kirby-badge-elevation: #{get-elevation(2)};
+  }
+
+  kirby-badge + kirby-badge {
+    margin-left: size('s');
+  }
+}

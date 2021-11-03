@@ -2,7 +2,7 @@ import { ColorHelper, DesignTokenHelper } from '../../../helpers';
 import { ChartTypesConfig } from '../chart.types';
 
 const { fontSize } = DesignTokenHelper;
-const { getThemeColorHexString } = ColorHelper;
+const { getThemeColorHexString, getThemeColorRgbString } = ColorHelper;
 
 export const CHART_TYPES_CONFIG: ChartTypesConfig = {
   bar: {
@@ -77,6 +77,7 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
   line: {
     type: 'line',
     options: {
+      backgroundColor: getThemeColorRgbString('semi-light', 0.5),
       scales: {
         x: {
           grid: {
