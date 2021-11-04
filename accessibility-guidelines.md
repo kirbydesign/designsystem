@@ -72,7 +72,7 @@ If they have encountered any anti-patterns, best pratices, do's or don'ts in the
 
 We have created a Github discussions thread where experiences can be shared [here](create a gh discussions here). If a submission is highlighted in the documentation it will happen anonymously.
 
-## How do i get started improving the acessibility of my application?
+## How do i get started improving the accessibility of my application?
 
 A lot of great material is freely available online; so instead of reiterating what they already state, we will point you in the direction of some of our favorite resources. But we would like to say that you should assess your application. You got to know if there is a problem to start with. Furthermore it is also important to educate yourself and your team.
 
