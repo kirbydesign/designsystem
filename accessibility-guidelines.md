@@ -78,7 +78,7 @@ A lot of great material is freely available online; so instead of reiterating wh
 
 ### Resources for getting started
 
-The content on [a11y.coffee](https://a11y.coffee) is a great starting point; especially its [coffee metahpor](https://a11y.coffee/a11y-testing-making-coffee/) serves as a good overview of testing methods. Furthermore it also has a list of [quick wins](https://a11y.coffee/quick-wins/) for those who wants to get their hands dirty.
+The content on [a11y.coffee](https://a11y.coffee) is a great starting point; especially its [coffee metaphor](https://a11y.coffee/a11y-testing-making-coffee/) serves as a good overview of testing methods. Furthermore it also has a list of [quick wins](https://a11y.coffee/quick-wins/) for those who wants to get their hands dirty.
 
 While a11y.coffee has a [list of resources](https://a11y.coffee/dig-in/) to further explore the field of accessibility, we would like to supplement that with some of our own resources:
 
