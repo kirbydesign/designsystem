@@ -6,7 +6,7 @@
 
 The short answer is no.
 
-The accessibility of an application largely depends on its markup. In other words, it depends on how the components in Kirby is used. The role of the components is to allow for developers to make their applications accessible; they should not be in the way.
+The accessibility of an application largely depends on its markup. In other words, it depends on how the components in Kirby are used. The role of the components is to allow for developers to make their applications accessible; they should not be in the way.
 
 This means the developer has a lot of responsibility to ensure their application is accesible. This might be frustrating news for those new to accessibility; where to begin?
 
