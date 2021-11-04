@@ -1,6 +1,6 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
-import { DesignTokenHelper } from '../../helpers/design-token-helper';
+import { DesignTokenHelper } from '@kirbydesign/core';
 
 import { ChipComponent } from './chip.component';
 

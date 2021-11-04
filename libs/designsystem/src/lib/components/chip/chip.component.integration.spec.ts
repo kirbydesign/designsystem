@@ -1,8 +1,9 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
-import { DesignTokenHelper } from '../../helpers';
+import { DesignTokenHelper } from '@kirbydesign/core';
+
+import { BadgeComponent } from '../../index';
 import { TestHelper } from '../../testing/test-helper';
-import { BadgeComponent } from '../badge/badge.component';
 import { ChipComponent } from '../chip/chip.component';
 import { SegmentItem } from '../segmented-control/segment-item';
 import {

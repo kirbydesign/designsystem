@@ -1,9 +1,11 @@
-import { SpectatorHost, createHostFactory } from '@ngneat/spectator';
 import { IonCheckbox, IonItem } from '@ionic/angular';
+import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponents } from 'ng-mocks';
 
-import { DesignTokenHelper } from '../../helpers';
+import { DesignTokenHelper } from '@kirbydesign/core';
+
 import { ItemComponent } from '../item';
+
 import { CheckboxComponent } from './checkbox.component';
 
 const size = DesignTokenHelper.size;

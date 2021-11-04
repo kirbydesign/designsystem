@@ -1,4 +1,4 @@
-@import './libs/designsystem/src/lib/scss/utils';
+@import '~@kirbydesign/core/src/scss/utils';
 
 $header-height-mobile: size('xxxl');
 $header-height-desktop: 2 * size('xxl');

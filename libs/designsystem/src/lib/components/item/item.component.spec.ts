@@ -2,7 +2,8 @@ import { IonicModule } from '@ionic/angular';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockModule } from 'ng-mocks';
 
-import { DesignTokenHelper } from '../../helpers/design-token-helper';
+import { DesignTokenHelper } from '@kirbydesign/core';
+
 import { IconModule } from '../icon/icon.module';
 
 import { ItemComponent, ItemSize } from './item.component';

@@ -1,8 +1,87 @@
-<div class="example">
-  <cookbook-badge-example></cookbook-badge-example>
-  <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
-  <h4>Properties:</h4>
-  <cookbook-api-description-properties
-    [properties]="properties"
-  ></cookbook-api-description-properties>
-</div>
+<p>
+  Badges are inline block elements that often are used on top of or close to another component. They
+  can be used with numbers, text and icons. A small badge version also exists which does not support
+  slotted content.
+</p>
+
+<kirby-divider [hasMargin]="true"></kirby-divider>
+
+<h2>Elevation on white badges</h2>
+<p>
+  A white badge can easily blend into the background and just appear as a number, icon or not at all
+  if no content is passed. Here it can be necesssary to apply some elevation to the badge; this is
+  also done for the examples below where all the badges are displayed on a white background.
+</p>
+<p>
+  The <code>--kirby-badge-elevation</code> property can be useful for this. You can see how it is
+  applied to the examples below by inspecting the shared styling for the badge examples:
+  <br />
+  <a
+    href="https://github.com/kirbydesign/designsystem/blob/master/apps/cookbook/src/app/examples/badge-example/examples/badge-example-shared.scss"
+    target="_blank"
+    class="kirby-external-icon"
+    >badge-example-shared.scss on Github</a
+  >
+</p>
+
+<kirby-divider [hasMargin]="true"></kirby-divider>
+
+<h2>Examples</h2>
+<h3>Badge with numbers</h3>
+<p>
+  Using a badge with a number can be a good way to indicate specific status on an element.
+</p>
+<p>
+  <kirby-card [mode]="_cardMode" [hasPadding]="_cardHasPadding">
+    <cookbook-badge-example-number #badgeExampleNumber></cookbook-badge-example-number>
+    <cookbook-example-viewer [html]="badgeExampleNumber.template"> </cookbook-example-viewer>
+  </kirby-card>
+</p>
+
+<h3>Badge with text</h3>
+<p>
+  Badges can also be used together with a text. Flags might in some cases be a better alternative.
+</p>
+<p>
+  <kirby-card [mode]="_cardMode" [hasPadding]="_cardHasPadding">
+    <cookbook-badge-example-text #badgeExampleText></cookbook-badge-example-text>
+    <cookbook-example-viewer [html]="badgeExampleText.template"> </cookbook-example-viewer>
+  </kirby-card>
+</p>
+
+<h3>Badge with icons</h3>
+<p>
+  It is possible to slot an icon to display it in a badge. This might be used to indicate the
+  existence of an associated element (e.g. an attachment).
+</p>
+<p>
+  <kirby-card [mode]="_cardMode" [hasPadding]="_cardHasPadding">
+    <cookbook-badge-example-icon #badgeExampleIcon></cookbook-badge-example-icon><br />
+    <cookbook-example-viewer [html]="badgeExampleIcon.template"> </cookbook-example-viewer>
+  </kirby-card>
+</p>
+
+<h3>Small Badges</h3>
+<p>
+  Setting the input property <code>size</code> to <code>'sm'</code> will display a small badge
+  without any content. This can be useful to indicate status on an element.
+</p>
+<p>
+  <kirby-card [mode]="_cardMode" [hasPadding]="_cardHasPadding">
+    <cookbook-badge-example-small #badgeExampleSmall></cookbook-badge-example-small>
+    <cookbook-example-viewer [html]="badgeExampleSmall.template"> </cookbook-example-viewer>
+  </kirby-card>
+</p>
+
+<kirby-divider [hasMargin]="true"></kirby-divider>
+<h2>API</h2>
+<h3>Properties</h3>
+<cookbook-api-description-properties
+  [properties]="_properties"
+></cookbook-api-description-properties>
+
+<h3>CSS Custom Properties</h3>
+<cookbook-api-description-properties
+  [properties]="_cssCustomProperties"
+  [columns]="_cssCustomPropertiesColumns"
+></cookbook-api-description-properties>

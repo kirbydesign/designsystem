@@ -1,6 +1,7 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
-import { DesignTokenHelper, ThemeColorExtended } from '../../helpers/design-token-helper';
+import { DesignTokenHelper, ThemeColorExtended } from '@kirbydesign/core';
+
 import { FlagComponent } from './flag.component';
 
 const getColor = DesignTokenHelper.getColor;

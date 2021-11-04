@@ -1,6 +1,6 @@
 import { Component, HostBinding, Input } from '@angular/core';
 
-import { NotificationColor } from '../../../helpers';
+import { NotificationColor } from '@kirbydesign/core';
 
 export type CardFlagLevel = NotificationColor | 'info' | null;
 
