@@ -100,9 +100,8 @@ jobs:
       - name: Build Kirby lib
         run: npm run dist:designsystem
 
-
-  build_kirby_documentation: 
-    name: Build Kirby Documentation
+  build_kirby_cookbook: 
+    name: Build Kirby Cookbook
     needs: pre_build
     if: ${{ needs.pre_build.outputs.do_build == 'true' }}
     runs-on: ubuntu-latest 
@@ -127,21 +126,19 @@ jobs:
       - name: Run Postinstall Script
         if: steps.cache.outputs.cache-hit == 'true'
         run: npm run postinstall 
-      - name: Build Cookbook
-        run: npm run dist:cookbook 
-      - name: Build Storybook
-        run: npm run dist:storybook:designsystem
+      - name: Build Kirby Cookbook
+        run: npm run dist:cookbook
       - name: Upload Kirby Cookbook dist files
         uses: actions/cache@v2
         with:
           path: |
             dist/
-          key: documentation-dist-${{github.run_id}}
+          key: cookbook-dist-${{github.run_id}}
 
 
-  deploy_documentation:
-    name: Deploy Documentation
-    needs: [lint_and_unittest, build_kirby, build_kirby_documentation]
+  deploy_to_cookbook:
+    name: Deploy cookbook
+    needs: [lint_and_unittest, build_kirby, build_kirby_cookbook]
     runs-on: ubuntu-latest
     env:
       DOMAIN: 'kirby.design'
@@ -212,7 +209,7 @@ jobs:
         with:
           path: |
             dist/
-          key: documentation-dist-${{github.run_id}}
+          key: cookbook-dist-${{github.run_id}}
       - name: Deploy cookbook to GitHub pages
         run: |
           set -e
@@ -224,19 +221,15 @@ jobs:
           git config --global user.email 'dbrr00@bankdata.dk'          
           
           mkdir -p designsystem_web/branch
-          mkdir -p designsystem_web/storybook
           if [ $HOSTNAME == "cookbook" ]; then 
             sed -i -E "s,<base href=\"[^\"]*\".*>,<base href=\"/\">,g" dist/apps/cookbook/index.html
             cp -R dist/apps/cookbook/* designsystem_web/
-            cp -R dist/storybook/* designsystem_web/storybook/
             cp designsystem_web/index.html designsystem_web/404.html
           else
-            mkdir -p designsystem_web/branch/$HOSTNAME/
-            mkdir -p designsystem_web/branch/$HOSTNAME/storybook
+            mkdir -p designsystem_web/branch/$HOSTNAME
             sed -i -E "s,<base href=\"[^\"]*\".*>,<base href=\"/branch/$HOSTNAME/\">,g" dist/apps/cookbook/index.html
-            cp -R dist/apps/cookbook/* designsystem_web/branch/$HOSTNAME/
-            cp -R dist/storybook/* designsystem_web/branch/$HOSTNAME/storybook/
-            cp designsystem_web/branch/$HOSTNAME/cookbook/index.html designsystem_web/branch/$HOSTNAME/cookbook/404.html
+            cp -R dist/apps/cookbook/* designsystem_web/branch/$HOSTNAME
+            cp designsystem_web/branch/$HOSTNAME/index.html designsystem_web/branch/$HOSTNAME/404.html
           fi
 
           cd designsystem_web/branch/
