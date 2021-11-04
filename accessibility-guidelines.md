@@ -22,7 +22,7 @@ Accessibility is not something that is tagged onto an application like a feature
 
 **All** applications have some degree of accessibility, whether it is considered or not. If it is not actively prioritized, the accessibility of an application is most likely poor. It is similar to the quality of a codebase; simply by existing it has some degree of quality. Not prioritizing it might have consequences in the long run, such as the codebase being hard to modify. Analogously not prioritizing accessibility might make an application impossible to use for people with various disabilities.
 
-Then how can it be improved? Beginning applying ARIA tags and using automated tests such as lighthouse, might spring to mind. This is definetly better than nothing. However accessibility is more than that.
+Then how can it be improved? Beginning applying ARIA tags and using automated tests such as Lighthouse, might spring to mind. This is definitely better than nothing. However accessibility is more than that.
 
 #### A whole different UX
 
