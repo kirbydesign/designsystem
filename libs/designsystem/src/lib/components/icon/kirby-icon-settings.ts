@@ -42,6 +42,7 @@ export const kirbyIconSettings: IconSettings = {
     { name: 'misc', svg: 'assets/kirby/icons/svg/misc.svg' },
     { name: 'more', svg: 'assets/kirby/icons/svg/more.svg' },
     { name: 'move', svg: 'assets/kirby/icons/svg/move.svg' },
+    { name: 'payment-card', svg: 'assets/kirby/icons/svg/payment-card.svg' },
     { name: 'pension', svg: 'assets/kirby/icons/svg/pension.svg' },
     { name: 'person-outline', svg: 'assets/kirby/icons/svg/person-outline.svg' },
     { name: 'person', svg: 'assets/kirby/icons/svg/person.svg' },
