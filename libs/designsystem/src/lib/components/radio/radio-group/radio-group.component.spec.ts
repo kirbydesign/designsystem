@@ -19,7 +19,7 @@ import { RadioGroupComponent } from './radio-group.component';
 
 const { getColor } = DesignTokenHelper;
 
-describe('RadioGroupComponent', () => {
+fdescribe('RadioGroupComponent', () => {
   const createHost = createHostFactory({
     component: RadioGroupComponent,
     declarations: [RadioComponent, ListItemTemplateDirective],
@@ -59,6 +59,12 @@ describe('RadioGroupComponent', () => {
       SLOTTED = 'slotted radios',
     }
 
+    const booleanItems = [
+      { text: 'Larry', value: true as any },
+      { text: 'Curly', value: false as any },
+      { text: 'Moe', value: 'neither' },
+    ];
+
     const dataScenarios = [
       {
         type: DataScenarioTypes.TEXT,
@@ -74,6 +80,11 @@ describe('RadioGroupComponent', () => {
         type: DataScenarioTypes.ASYNC_DATA,
         items: dataItems,
         selected: dataItems[defaultSelectedIndex],
+      },
+      {
+        type: 'test',
+        items: booleanItems,
+        selected: booleanItems[defaultSelectedIndex],
       },
     ];
 
