@@ -49,7 +49,7 @@ import { CookbookExampleCardContentComponent } from './slides-example/example-ca
 import { SlidesExampleComponent } from './slides-example/slides-example.component';
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
 import { StockChartDeprecatedExampleComponent } from './stock-chart-deprecated-example/stock-chart-deprecated-example.component';
-import { StylingListExampleComponent } from './styling-list-example/styling-list-example.component';
+import { StylingHtmlListsExampleComponent } from './styling-html-lists-example/styling-html-lists-example.component';
 import { TabExampleComponent } from './tabs-example/tab/tab-example.component';
 import { TabsExampleComponent } from './tabs-example/tabs-example.component';
 import { ToastExampleComponent } from './toast-example/toast-example.component';
@@ -123,7 +123,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   AccordionExampleComponent,
   LinkExampleComponent,
   PagePullToRefreshExampleComponent,
-  StylingListExampleComponent,
+  StylingHtmlListsExampleComponent,
 ];
 
 // Configure custom icons (used by example to show the usage of custom icons)

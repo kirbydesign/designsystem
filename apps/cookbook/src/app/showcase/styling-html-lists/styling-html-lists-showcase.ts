@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'cookbook-styling-list-showcase',
-  templateUrl: './styling-list-showcase.html',
+  templateUrl: './styling-html-lists-showcase.html',
   styleUrls: ['../_showcase.shared.scss'],
 })
-export class StylingListShowcaseComponent {}
+export class StylingHtmlListsShowcaseComponent {}
