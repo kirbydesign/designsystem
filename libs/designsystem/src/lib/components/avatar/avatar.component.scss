@@ -1,15 +1,17 @@
-@import '~@kirbydesign/core/src/scss/utils';
+@use "sass:map";
+@use "sass:math";
+@use '~@kirbydesign/core/src/scss/utils';
 
-$diameter-xsmall: map-get($avatar-sizes, 'xs');
-$diameter-small: map-get($avatar-sizes, 's');
-$diameter-medium: map-get($avatar-sizes, 'm');
-$diameter-large: map-get($avatar-sizes, 'l');
-$badge-diameter: $avatar-badge-size;
+$diameter-xsmall: map.get(utils.$avatar-sizes, 'xs');
+$diameter-small: map.get(utils.$avatar-sizes, 's');
+$diameter-medium: map.get(utils.$avatar-sizes, 'm');
+$diameter-large: map.get(utils.$avatar-sizes, 'l');
+$badge-diameter: utils.$avatar-badge-size;
 
 @function get-badge-position($avatar-diameter) {
   $cos-to-45-degrees: 0.70710678118;
   $avatar-radius: $avatar-diameter / 2;
-  $position-from-center: round($cos-to-45-degrees * $avatar-radius);
+  $position-from-center: math.round($cos-to-45-degrees * $avatar-radius);
   $position-from-edge: $avatar-radius - $position-from-center;
   $badge-radius: $badge-diameter / 2;
   $badge-position: $position-from-edge - $badge-radius;
@@ -17,11 +19,11 @@ $badge-diameter: $avatar-badge-size;
 }
 
 :host {
-  --kirby-badge-elevation: #{get-elevation(2)};
+  --kirby-badge-elevation: #{utils.get-elevation(2)};
   --kirby-badge-position: absolute;
   --kirby-badge-right: #{get-badge-position($diameter-small)};
   --kirby-badge-top: #{get-badge-position($diameter-small)};
-  --kirby-badge-z-index: #{z('avatarBadge')};
+  --kirby-badge-z-index: #{utils.z('avatarBadge')};
   position: relative;
 }
 
@@ -36,11 +38,11 @@ $badge-diameter: $avatar-badge-size;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: get-color('white');
-  color: get-color('light-contrast');
+  background-color: utils.get-color('white');
+  color: utils.get-color('light-contrast');
 
   //default to icon size 'sm'
-  --kirby-icon-font-size: #{icon-font-size('sm')};
+  --kirby-icon-font-size: #{utils.icon-font-size('sm')};
 
   &.shadow {
     box-shadow: 0px 2px 4px 2px rgba(113, 113, 113, 0.4);
@@ -48,7 +50,7 @@ $badge-diameter: $avatar-badge-size;
 
   &.overlay::before {
     content: '';
-    background-color: get-color('black');
+    background-color: utils.get-color('black');
     opacity: 0.05;
     width: 100%;
     height: 100%;
@@ -72,7 +74,7 @@ $badge-diameter: $avatar-badge-size;
     border-radius: 8px;
 
     .avatar-text {
-      font-size: font-size('s');
+      font-size: utils.font-size('s');
     }
   }
 }
@@ -84,7 +86,7 @@ $badge-diameter: $avatar-badge-size;
     height: $diameter-small;
 
     .avatar-text {
-      font-size: font-size('s');
+      font-size: utils.font-size('s');
     }
   }
 }
@@ -98,10 +100,10 @@ $badge-diameter: $avatar-badge-size;
     width: $diameter-medium;
     height: $diameter-medium;
 
-    --kirby-icon-font-size: #{icon-font-size('md')};
+    --kirby-icon-font-size: #{utils.icon-font-size('md')};
 
     .avatar-text {
-      font-size: font-size('m');
+      font-size: utils.font-size('m');
     }
   }
 }
@@ -115,36 +117,36 @@ $badge-diameter: $avatar-badge-size;
     width: $diameter-large;
     height: $diameter-large;
 
-    --kirby-icon-font-size: #{icon-font-size('lg')};
+    --kirby-icon-font-size: #{utils.icon-font-size('lg')};
 
     .avatar-text {
-      font-size: font-size('xl');
+      font-size: utils.font-size('xl');
     }
   }
 }
 
 :host-context(kirby-item)[slot='start'] {
-  margin-inline-end: size('xs');
+  margin-inline-end: utils.size('xs');
 
   &.xs {
-    margin-inline-end: size('s');
+    margin-inline-end: utils.size('s');
   }
 }
 
 @each $color-name,
   $color-value
-    in map-merge(
-      $main-colors,
+    in map.merge(
+      utils.$main-colors,
       (
-        'white': get-color('white'),
-        'semi-light': get-color('semi-light'),
+        'white': utils.get-color('white'),
+        'semi-light': utils.get-color('semi-light'),
       )
     )
 {
   :host(.#{$color-name}) {
     .avatar {
-      background-color: get-color($color-name);
-      color: get-color($color-name + '-contrast');
+      background-color: utils.get-color($color-name);
+      color: utils.get-color($color-name + '-contrast');
     }
   }
 }

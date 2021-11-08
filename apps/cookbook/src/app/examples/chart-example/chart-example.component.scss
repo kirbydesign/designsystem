@@ -1,20 +1,20 @@
-@import '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/utils';
 
 :host {
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow-x: hidden;
-  background: get-color('background-color');
-  padding: size('s');
+  background: utils.get-color('background-color');
+  padding: utils.size('s');
 
-  @include media('>=medium') {
-    padding: size('l');
+  @include utils.media('>=medium') {
+    padding: utils.size('l');
   }
 
   > * {
     display: block;
-    margin: size('s') 0;
+    margin: utils.size('s') 0;
   }
 
   kirby-card {

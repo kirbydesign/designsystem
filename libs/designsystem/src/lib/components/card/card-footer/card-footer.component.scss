@@ -1,8 +1,8 @@
-@import '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/utils';
 
 :host {
   display: block;
-  padding: size('s');
+  padding: utils.size('s');
   border-bottom-left-radius: inherit;
   border-bottom-right-radius: inherit;
   overflow: hidden;

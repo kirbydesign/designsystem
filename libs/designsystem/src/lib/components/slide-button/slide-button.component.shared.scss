@@ -1,10 +1,12 @@
+@use "~@kirbydesign/core/src/scss/utils";
+
 $slide-button-container-width: 256px;
 $slide-button-spacing: 2px;
 $slide-button-width: 52px;
 $slide-button-container-height: $slide-button-width + 2 * $slide-button-spacing;
-$slide-button-container-bg-color: get-color('primary');
-$slider-thumb-bg-color: get-color('white');
-$slide-button-text-color: get-color('primary-contrast');
+$slide-button-container-bg-color: utils.get-color('primary');
+$slider-thumb-bg-color: utils.get-color('white');
+$slide-button-text-color: utils.get-color('primary-contrast');
 $total-slider-thumb-width: $slide-button-width + $slide-button-spacing * 2;
 $slide-button-container-radius: $slide-button-width/2;
 $slide-button-text-padding: 0 $slide-button-container-radius 0 $total-slider-thumb-width;

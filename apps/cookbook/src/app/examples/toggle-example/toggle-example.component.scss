@@ -1,7 +1,7 @@
-@import '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/utils';
 
 :host {
   kirby-toggle {
-    margin-right: size('s');
+    margin-right: utils.size('s');
   }
 }

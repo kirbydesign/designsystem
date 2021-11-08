@@ -1,11 +1,12 @@
-@import '~@kirbydesign/core/src/scss/utils';
+@use "sass:map";
+@use '~@kirbydesign/core/src/scss/utils';
 
-$radio-icon-padding: size('xxxxs');
-$radio-icon-size: size('m');
+$radio-icon-padding: utils.size('xxxxs');
+$radio-icon-size: utils.size('m');
 $radio-icon-mark-size: 60%;
-$spacing-to-edge: map-get($checkbox-radio-spacing, 'to-edge');
-$spacing-to-label: map-get($checkbox-radio-spacing, 'to-label');
-$default-checkbox-radio-size: map-get($checkbox-radio-sizes, 'md');
+$spacing-to-edge: map.get(utils.$checkbox-radio-spacing, 'to-edge');
+$spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
+$default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
 
 @function getVerticalPadding($target-height) {
   @return ($target-height - $radio-icon-size) / 2;
@@ -16,7 +17,7 @@ $default-checkbox-radio-size: map-get($checkbox-radio-sizes, 'md');
 
   &.has-label {
     display: block;
-    line-height: line-height('n');
+    line-height: utils.line-height('n');
     white-space: pre-line;
 
     div.wrapper {
@@ -28,7 +29,7 @@ $default-checkbox-radio-size: map-get($checkbox-radio-sizes, 'md');
       padding-right: $spacing-to-label; // Ensure same padding on right side of label
     }
 
-    @each $size, $height in $checkbox-radio-sizes {
+    @each $size, $height in utils.$checkbox-radio-sizes {
       :host-context(.radio-#{$size}),
       &.#{$size} {
         .wrapper {
@@ -47,13 +48,13 @@ $default-checkbox-radio-size: map-get($checkbox-radio-sizes, 'md');
   }
 
   &[disabled] {
-    color: #{get-text-color('semi-dark')};
+    color: #{utils.get-text-color('semi-dark')};
     ion-radio {
       opacity: 1; // Reset Ionic disabled style
-      --color: #{get-color('medium')};
-      --color-checked: #{get-color('medium')};
+      --color: #{utils.get-color('medium')};
+      --color-checked: #{utils.get-color('medium')};
       &::part(container) {
-        background-color: get-color('semi-light');
+        background-color: utils.get-color('semi-light');
       }
     }
   }
@@ -65,11 +66,11 @@ ion-radio {
   padding: $radio-icon-padding;
   box-sizing: border-box; // Ensure padding is not added to radio width/height
   --border-width: 1px;
-  --color: #{get-color('semi-dark')};
-  --color-checked: #{get-color('success')};
+  --color: #{utils.get-color('semi-dark')};
+  --color-checked: #{utils.get-color('success')};
 
   &::part(container) {
-    background-color: get-color('white');
+    background-color: utils.get-color('white');
   }
 
   &::part(mark) {
@@ -81,7 +82,7 @@ ion-radio {
     --color: transparent;
 
     &::part(container) {
-      background-color: get-color('white-shade');
+      background-color: utils.get-color('white-shade');
     }
   }
 
@@ -89,16 +90,17 @@ ion-radio {
   :host-context(kirby-radio-group.ng-touched.ng-invalid) {
     ion-radio,
     ion-radio:active {
-      --color: #{get-color('danger')};
+      --color: #{utils.get-color('danger')};
     }
   }
 
   // Only apply focus ring if pointer device can hover
   // (effectively desktop/mouse devices):
-  @include focus() {
+  @include utils.focus() {
     &::part(container) {
       // Apply focus ring through box-shadow to keep circle shape and default border:
-      box-shadow: 0 0 0 1px #{get-color('background-color')}, 0 0 0 3px #{$focus-ring-color};
+      box-shadow: 0 0 0 1px #{utils.get-color('background-color')},
+        0 0 0 3px #{utils.$focus-ring-color};
     }
   }
 
@@ -107,14 +109,14 @@ ion-radio {
 
     &:not(:focus):not(.radio-disabled) {
       &::part(container) {
-        box-shadow: get-elevation(2);
+        box-shadow: utils.get-elevation(2);
       }
     }
   }
 }
 
 :host-context(kirby-item) {
-  z-index: z('default'); // Makes whole kirby-item clickable above item-inner.
+  z-index: utils.z('default'); // Makes whole kirby-item clickable above item-inner.
 
   ion-radio {
     margin: 0; // Reset Ionic in-item margins
