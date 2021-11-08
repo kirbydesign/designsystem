@@ -5,7 +5,7 @@ import { sass } from '@stencil/sass';
 export const config: Config = {
   namespace: 'kirby',
   srcDir: './src/',
-  plugins: [sass({ injectGlobalPaths: ['./src/scss/_utils.scss'] })],
+  // plugins: [sass({ injectGlobalPaths: ['./src/scss/_utils.scss'] })],
   globalStyle: './src/scss/_global-styles.scss',
   outputTargets: [
     angularOutputTarget({
