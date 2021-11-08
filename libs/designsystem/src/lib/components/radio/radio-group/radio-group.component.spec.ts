@@ -27,7 +27,8 @@ describe('RadioGroupComponent', () => {
   });
 
   describe('with plain binding', () => {
-    type defaultDataType = { text: string; value: number | boolean; disabled?: boolean };
+    type defaultDataType = { text: string; value: number; disabled?: boolean };
+    type booleanDataType = { text: string; value: boolean; disabled?: boolean };
 
     let ionRadioGroup: IonRadioGroup;
     let ionRadioElements: HTMLIonRadioElement[];
@@ -60,7 +61,7 @@ describe('RadioGroupComponent', () => {
       SLOTTED = 'slotted radios',
     }
 
-    const booleanDataItems = [
+    const booleanDataItems: booleanDataType[] = [
       { text: 'Larry', value: true },
       { text: 'Curly', value: false },
     ];
@@ -127,9 +128,9 @@ describe('RadioGroupComponent', () => {
             let spectator: SpectatorHost<
               RadioGroupComponent,
               {
-                items: string[] | defaultDataType[];
-                items$: Observable<string[] | defaultDataType[]>;
-                selected: string | defaultDataType;
+                items: string[] | booleanDataType[] | defaultDataType[];
+                items$: Observable<string[] | booleanDataType[] | defaultDataType[]>;
+                selected: string | booleanDataType | defaultDataType;
               }
             >;
 
@@ -488,8 +489,9 @@ describe('RadioGroupComponent', () => {
                     const newItems =
                       dataScenario.type === DataScenarioTypes.TEXT
                         ? ['New Guy'].concat(textItems)
-                        : /* @ts-ignore */
-                          [{ text: 'New Guy', value: 10 }].concat(dataScenario.items);
+                        : [{ text: 'New Guy', value: 10 }].concat(
+                            dataScenario.items as defaultDataType[]
+                          ); // Convert to allow mixing defaultDataType with booleanDataType
 
                     spectator.setHostInput('items', newItems);
                     spectator.setHostInput('items$', of(newItems));
@@ -521,10 +523,17 @@ describe('RadioGroupComponent', () => {
                 if (dataScenario.type !== DataScenarioTypes.TEXT) {
                   describe('by replacing items with new instances', () => {
                     it('should reset value and selected index', () => {
-                      const newItems = dataItems.map((item) => ({
-                        ...item,
-                        value: typeof item.value === 'boolean' ? !item.value : item.value + 10,
-                      }));
+                      let newItems: booleanDataType[] | defaultDataType[];
+
+                      if (DataScenarioTypes.BOOLEAN_DATA) {
+                        newItems = booleanDataItems.map((item) => ({
+                          ...item,
+                          value: !item.value,
+                        }));
+                      } else {
+                        newItems = dataItems.map((item) => ({ ...item, value: item.value + 10 }));
+                      }
+
                       spectator.setHostInput('items', newItems);
                       spectator.setHostInput('items$', of(newItems));
 
@@ -549,7 +558,7 @@ describe('RadioGroupComponent', () => {
               describe(`with ${templateScenario}`, () => {
                 let spectator: SpectatorHost<
                   RadioGroupComponent,
-                  { items: string[] | defaultDataType[]; selectedIndex: number }
+                  { items: string[] | defaultDataType[] | booleanDataType[]; selectedIndex: number }
                 >;
 
                 describe('through template one-time string initialization', () => {
