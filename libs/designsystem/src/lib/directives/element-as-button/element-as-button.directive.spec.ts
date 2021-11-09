@@ -1,11 +1,10 @@
-import { registerLocaleData } from '@angular/common';
 import { createDirectiveFactory, SpectatorDirective } from '@ngneat/spectator';
 
 import { CardComponent } from '../../components/card/card.component';
 
 import { ElementAsButtonDirective } from './element-as-button.directive';
 
-describe('CardIsClickableDirective', () => {
+describe('ElementAsButtonDirective', () => {
   let spectator: SpectatorDirective<ElementAsButtonDirective>;
 
   const createDirective = createDirectiveFactory({
