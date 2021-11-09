@@ -13,7 +13,6 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { CardFooterComponent } from './components/card/card-footer/card-footer.component';
 import { CardHeaderComponent } from './components/card/card-header/card-header.component';
 import { CardComponent } from './components/card/card.component';
-import { CardIsClickableDirective } from './components/card/directives/card-is-clickable.directive';
 import { ChartDeprecatedComponent } from './components/chart-deprecated/chart-deprecated.component';
 import { ChartModule } from './components/chart/chart.module';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
@@ -71,6 +70,7 @@ import { ToggleButtonModule } from './components/toggle-button/toggle-button.mod
 import { ToggleComponent } from './components/toggle/toggle.component';
 import { KirbyBadge as BadgeComponent } from './components/web-component-proxies.component';
 import { customElementsInitializer } from './custom-elements-initializer';
+import { ElementAsButtonDirective } from './directives/element-as-button/element-as-button.directive';
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
 import { ModalRouterLinkDirective } from './directives/modal-router-link/modal-router-link.directive';
 import { ThemeColorDirective } from './directives/theme-color/theme-color.directive';
@@ -118,7 +118,7 @@ const exportedDeclarations = [
   RadioComponent,
   RadioGroupComponent,
   RangeComponent,
-  CardIsClickableDirective,
+  ElementAsButtonDirective,
 ];
 
 const declarations = [

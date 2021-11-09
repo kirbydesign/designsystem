@@ -2,17 +2,17 @@ import { registerLocaleData } from '@angular/common';
 import localeDa from '@angular/common/locales/da';
 import { createDirectiveFactory, SpectatorDirective } from '@ngneat/spectator';
 
-import { CardComponent } from '../card.component';
+import { CardComponent } from '../../components/card/card.component';
 
-import { CardIsClickableDirective } from './card-is-clickable.directive';
+import { ElementAsButtonDirective } from './element-as-button.directive';
 
 describe('CardIsClickableDirective', () => {
-  let spectator: SpectatorDirective<CardIsClickableDirective>;
+  let spectator: SpectatorDirective<ElementAsButtonDirective>;
 
   registerLocaleData(localeDa);
 
   const createDirective = createDirectiveFactory({
-    directive: CardIsClickableDirective,
+    directive: ElementAsButtonDirective,
     imports: [],
     declarations: [CardComponent],
   });
