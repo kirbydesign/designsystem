@@ -48,6 +48,7 @@ testem.log
 *.bak
 .stencil/
 documentation.json
+libs/designsystem/src/.storybook/.static
 
 # System Files
 .DS_Store

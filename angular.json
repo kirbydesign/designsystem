@@ -39,6 +39,7 @@
         "storybook": {
           "builder": "@nrwl/storybook:storybook",
           "options": {
+            "staticDir": ["libs/designsystem/src/.storybook/static/"],
             "uiFramework": "@storybook/angular",
             "port": 4400,
             "config": {
@@ -55,6 +56,8 @@
           "builder": "@nrwl/storybook:build",
           "outputs": ["{options.outputPath}"],
           "options": {
+            "staticDir": ["libs/designsystem/src/assets/"],
+
             "uiFramework": "@storybook/angular",
             "outputPath": "dist/storybook/designsystem",
             "config": {
