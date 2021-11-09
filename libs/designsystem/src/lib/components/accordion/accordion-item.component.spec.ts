@@ -1,7 +1,7 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
+import { ElementAsButtonDirective } from '../../directives/element-as-button/element-as-button.directive';
 import { TestHelper } from '../../testing/test-helper';
-import { CardIsClickableDirective } from '../card/directives/card-is-clickable.directive';
 import { IconComponent } from '../icon/icon.component';
 
 import { AccordionItemComponent } from './accordion-item.component';
@@ -11,7 +11,7 @@ describe('AccordionItemComponent', () => {
 
   const createHost = createHostFactory({
     component: AccordionItemComponent,
-    declarations: [IconComponent, CardIsClickableDirective],
+    declarations: [IconComponent, ElementAsButtonDirective],
     imports: [TestHelper.ionicModuleForTest],
   });
 
