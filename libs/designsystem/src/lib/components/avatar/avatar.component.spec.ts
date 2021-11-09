@@ -3,7 +3,6 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { ColorHelper, DesignTokenHelper, ThemeColorExtended } from '@kirbydesign/core';
 
 import { ThemeColorDirective } from '../../directives';
-import { ElementAsButtonDirective } from '../../directives/element-as-button/element-as-button.directive';
 import { TestHelper } from '../../testing/test-helper';
 import { IconComponent } from '../icon/icon.component';
 import { ProgressCircleRingComponent } from '../progress-circle/progress-circle-ring.component';
@@ -25,7 +24,6 @@ describe('AvatarComponent', () => {
       ThemeColorDirective,
       ProgressCircleComponent,
       ProgressCircleRingComponent,
-      ElementAsButtonDirective,
     ],
     imports: [TestHelper.ionicModuleForTest],
   });

@@ -1,7 +1,6 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponent } from 'ng-mocks';
 
-import { ElementAsButtonDirective } from '../../directives/element-as-button/element-as-button.directive';
 import { DesignTokenHelper } from '../../helpers/design-token-helper';
 import { IconComponent } from '../icon/icon.component';
 
@@ -15,7 +14,7 @@ describe('ButtonComponent', () => {
 
   const createHost = createHostFactory({
     component: ButtonComponent,
-    declarations: [MockComponent(IconComponent), ElementAsButtonDirective],
+    declarations: [MockComponent(IconComponent)],
   });
 
   describe('by default', () => {

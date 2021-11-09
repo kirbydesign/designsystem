@@ -5,7 +5,6 @@ import { MockComponent, MockComponents } from 'ng-mocks';
 
 import { DesignTokenHelper } from '@kirbydesign/core';
 
-import { ElementAsButtonDirective } from '../../directives/element-as-button/element-as-button.directive';
 import { FitHeadingDirective } from '../../directives/fit-heading/fit-heading.directive';
 import { TestHelper } from '../../testing/test-helper';
 import { WindowRef } from '../../types/window-ref';
@@ -43,7 +42,6 @@ describe('ButtonComponent in Kirby Page', () => {
       PageTitleDirective,
       PageToolbarTitleDirective,
       FitHeadingDirective,
-      ElementAsButtonDirective,
     ],
     providers: [
       {
