@@ -1,6 +1,5 @@
 import { registerLocaleData } from '@angular/common';
 import localeDa from '@angular/common/locales/da';
-import { LOCALE_ID } from '@angular/core';
 import { createDirectiveFactory, SpectatorDirective } from '@ngneat/spectator';
 
 import { CardComponent } from '../card.component';
