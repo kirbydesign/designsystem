@@ -32,7 +32,7 @@
     box-shadow: none;
   }
 
-  &.card-is-clickable {
+  &[role='button'] {
     cursor: pointer;
   }
 }
