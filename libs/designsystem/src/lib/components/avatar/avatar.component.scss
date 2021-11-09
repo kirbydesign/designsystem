@@ -23,6 +23,10 @@ $badge-diameter: $avatar-badge-size;
   --kirby-badge-top: #{get-badge-position($diameter-small)};
   --kirby-badge-z-index: #{z('avatarBadge')};
   position: relative;
+
+  &[role='button'] {
+    cursor: pointer;
+  }
 }
 
 .avatar {
