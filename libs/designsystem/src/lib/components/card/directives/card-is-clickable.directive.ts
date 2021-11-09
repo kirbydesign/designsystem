@@ -1,4 +1,4 @@
-import { Directive, HostBinding, OnInit } from '@angular/core';
+import { Directive, HostBinding, OnInit, Optional } from '@angular/core';
 
 import { CardComponent } from '../card.component';
 
@@ -9,9 +9,11 @@ import { CardComponent } from '../card.component';
 export class CardIsClickableDirective implements OnInit {
   @HostBinding('attr.role') role: string = 'button';
 
-  constructor(private card: CardComponent) {}
+  constructor(@Optional() private card: CardComponent) {}
 
   ngOnInit(): void {
-    this.card.flat = false;
+    if (this.card) {
+      this.card.flat = false;
+    }
   }
 }
