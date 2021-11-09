@@ -12,7 +12,7 @@ export const kirbyIconSettings: IconSettings = {
     { name: 'arrow-down', svg: 'assets/kirby/icons/svg/arrow-down.svg' },
     { name: 'arrow-more', svg: 'assets/kirby/icons/svg/arrow-more.svg' },
     { name: 'arrow-up', svg: 'assets/kirby/icons/svg/arrow-up.svg' },
-    { name: 'attach', svg: 'kirby/icons/svg/attach.svg' },
+    { name: 'attach', svg: 'assets/kirby/icons/svg/attach.svg' },
     { name: 'backspace', svg: 'assets/kirby/icons/svg/backspace.svg' },
     { name: 'calendar', svg: 'assets/kirby/icons/svg/calendar.svg' },
     { name: 'camera', svg: 'assets/kirby/icons/svg/camera.svg' },
