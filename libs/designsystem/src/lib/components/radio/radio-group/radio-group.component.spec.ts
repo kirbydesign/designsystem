@@ -211,10 +211,10 @@ describe('RadioGroupComponent', () => {
                   // Wait for radio checked attribute to be updated;
                   await TestHelper.whenTrue(() => radioChecked(0));
 
-                  expect(dataScenario.items.length).toEqual(ionRadioElements.length);
+                  expect(dataScenario.items).not.toHaveLength(0);
                   ionRadioElements.forEach((_, index) => {
                     if (index === 0) {
-                      expect(radioChecked(0)).toBeTrue();
+                      expect(radioChecked(index)).toBeTrue();
                     } else {
                       expect(radioChecked(index)).toBeFalse();
                     }
@@ -649,7 +649,7 @@ describe('RadioGroupComponent', () => {
                       const newSelectedIndex = 0;
                       spectator.setInput('selectedIndex', newSelectedIndex);
                       // Wait for radio checked attribute to be updated;
-                      await TestHelper.whenTrue(() => radioChecked(0));
+                      await TestHelper.whenTrue(() => radioChecked(newSelectedIndex));
 
                       expect(spectator.component.value).toEqual(
                         dataScenario.items[newSelectedIndex]
