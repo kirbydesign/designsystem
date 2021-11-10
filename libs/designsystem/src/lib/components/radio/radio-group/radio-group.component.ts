@@ -84,6 +84,10 @@ export class RadioGroupComponent implements AfterContentInit, ControlValueAccess
     this.setSelectedItem(value);
   }
 
+  private get hasValue(): boolean {
+    return this.value !== undefined && this.value !== null;
+  }
+
   /**
    * Emitted when an option is selected
    */
@@ -182,7 +186,7 @@ export class RadioGroupComponent implements AfterContentInit, ControlValueAccess
 
   // #region private methods
   private getIndexOfSelectedValue() {
-    if (!this.value) return -1;
+    if (!this.hasValue) return -1;
     return this.hasItemsFromContentProjection
       ? this.getIndexOfProjectedRadio(this.value)
       : this.items.indexOf(this.value);
@@ -236,10 +240,12 @@ export class RadioGroupComponent implements AfterContentInit, ControlValueAccess
   }
 
   private refreshSelectionState() {
-    if (this.value) {
+    if (this.hasValue) {
       this._selectedIndex = this.getIndexOfSelectedValue(); // Ensure selectedIndex reflects value within items
     }
-    this._value = this.getValueFromSelectedIndex() || null; // Ensure value exists within items
+
+    const valueFromSelectedIndex = this.getValueFromSelectedIndex();
+    this._value = valueFromSelectedIndex !== undefined ? valueFromSelectedIndex : null;
   }
 
   private refreshStateFromProjectedContent() {
