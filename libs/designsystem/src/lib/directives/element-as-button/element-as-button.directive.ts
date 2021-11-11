@@ -4,7 +4,7 @@ import { CardComponent } from '../../components/card/card.component';
 
 @Directive({
   // tslint:disable-next-line
-  selector: 'kirby-card[click],kirby-avatar[click]',
+  selector: 'kirby-card[click]',
 })
 export class ElementAsButtonDirective implements OnInit {
   @HostBinding('attr.role') role: string = 'button';

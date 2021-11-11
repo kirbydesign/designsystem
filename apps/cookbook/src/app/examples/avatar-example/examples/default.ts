@@ -5,7 +5,7 @@ const config = {
   template: `<kirby-avatar size="xs" text="A" title="xs"></kirby-avatar>
 <kirby-avatar size="sm" text="A" title="sm"></kirby-avatar>
 <kirby-avatar size="md" text="A" title="md"></kirby-avatar>
-<kirby-avatar (click)="function()" size="lg" text="A" title="lg"></kirby-avatar>`,
+<kirby-avatar size="lg" text="A" title="lg"></kirby-avatar>`,
 };
 
 @Component({
@@ -15,8 +15,4 @@ const config = {
 })
 export class AvatarExampleDefaultComponent {
   template: string = config.template;
-
-  function() {
-    console.log('test');
-  }
 }
