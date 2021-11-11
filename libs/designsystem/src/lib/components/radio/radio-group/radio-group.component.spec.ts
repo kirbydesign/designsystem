@@ -28,6 +28,7 @@ describe('RadioGroupComponent', () => {
 
   describe('with plain binding', () => {
     type defaultDataType = { text: string; value: number; disabled?: boolean };
+    type booleanDataType = { text: string; value: boolean; disabled?: boolean };
 
     let ionRadioGroup: IonRadioGroup;
     let ionRadioElements: HTMLIonRadioElement[];
@@ -50,6 +51,7 @@ describe('RadioGroupComponent', () => {
     const enum DataScenarioTypes {
       TEXT = 'plain text',
       DATA = 'data items with default property names',
+      BOOLEAN_DATA = 'boolean data items with default property names',
       ASYNC_DATA = 'async data items with default property names',
     }
 
@@ -58,6 +60,11 @@ describe('RadioGroupComponent', () => {
       CUSTOM = 'custom item template',
       SLOTTED = 'slotted radios',
     }
+
+    const booleanDataItems: booleanDataType[] = [
+      { text: 'Larry', value: true },
+      { text: 'Curly', value: false },
+    ];
 
     const dataScenarios = [
       {
@@ -74,6 +81,11 @@ describe('RadioGroupComponent', () => {
         type: DataScenarioTypes.ASYNC_DATA,
         items: dataItems,
         selected: dataItems[defaultSelectedIndex],
+      },
+      {
+        type: DataScenarioTypes.BOOLEAN_DATA,
+        items: booleanDataItems,
+        selected: booleanDataItems[defaultSelectedIndex],
       },
     ];
 
@@ -116,9 +128,9 @@ describe('RadioGroupComponent', () => {
             let spectator: SpectatorHost<
               RadioGroupComponent,
               {
-                items: string[] | defaultDataType[];
-                items$: Observable<string[] | defaultDataType[]>;
-                selected: string | defaultDataType;
+                items: string[] | booleanDataType[] | defaultDataType[];
+                items$: Observable<string[] | booleanDataType[] | defaultDataType[]>;
+                selected: string | booleanDataType | defaultDataType;
               }
             >;
 
@@ -151,9 +163,10 @@ describe('RadioGroupComponent', () => {
                   // Assert initial state:
                   expect(ionRadioGroup.value).toBeNull();
                   // Assert initial state of radios:
-                  expect(radioChecked(0)).toBeFalse();
-                  expect(radioChecked(1)).toBeFalse();
-                  expect(radioChecked(2)).toBeFalse();
+                  expect(ionRadioElements).toHaveLength(dataScenario.items.length);
+                  ionRadioElements.forEach((_, index) => {
+                    expect(radioChecked(index)).toBeFalse();
+                  });
                 });
 
                 it('should not set the value of ion-radio-group', () => {
@@ -161,9 +174,10 @@ describe('RadioGroupComponent', () => {
                 });
 
                 it('should not have any selected radio', () => {
-                  expect(radioChecked(0)).toBeFalse();
-                  expect(radioChecked(1)).toBeFalse();
-                  expect(radioChecked(2)).toBeFalse();
+                  expect(ionRadioElements).toHaveLength(dataScenario.items.length);
+                  ionRadioElements.forEach((_, index) => {
+                    expect(radioChecked(index)).toBeFalse();
+                  });
                 });
 
                 it('should not have selected index', () => {
@@ -193,13 +207,18 @@ describe('RadioGroupComponent', () => {
                 });
 
                 it('should update the selected radio when the bound field is updated', async () => {
-                  spectator.setHostInput('selected', dataScenario.items[2]);
+                  spectator.setHostInput('selected', dataScenario.items[0]);
                   // Wait for radio checked attribute to be updated;
-                  await TestHelper.whenTrue(() => radioChecked(2));
+                  await TestHelper.whenTrue(() => radioChecked(0));
 
-                  expect(radioChecked(0)).toBeFalse();
-                  expect(radioChecked(1)).toBeFalse();
-                  expect(radioChecked(2)).toBeTrue();
+                  expect(dataScenario.items).not.toHaveLength(0);
+                  ionRadioElements.forEach((_, index) => {
+                    if (index === 0) {
+                      expect(radioChecked(index)).toBeTrue();
+                    } else {
+                      expect(radioChecked(index)).toBeFalse();
+                    }
+                  });
                 });
 
                 it('should not emit change event when the bound field is updated', () => {
@@ -247,37 +266,46 @@ describe('RadioGroupComponent', () => {
               });
 
               it('should render all items', () => {
-                expect(radios).toHaveLength(3);
-                expect(ionRadioElements).toHaveLength(3);
+                expect(radios).toHaveLength(dataScenario.items.length);
+                expect(ionRadioElements).toHaveLength(dataScenario.items.length);
               });
 
               if (templateScenario.type === TemplateScenarioTypes.DEFAULT) {
                 it('should set the text of each radio to the corresponding text item / item´s `text` property', () => {
-                  expect(radios[0].text).toEqual('Larry');
-                  expect(radios[1].text).toEqual('Curly');
-                  expect(radios[2].text).toEqual('Moe');
+                  const expectedTexts = ['Larry', 'Curly', 'Moe'];
+                  expect(radios.length).toEqual(dataScenario.items.length);
+                  radios.forEach((radio, index) => {
+                    expect(radio.text).toEqual(expectedTexts[index]);
+                  });
                 });
 
                 it('should set the value of each radio to the corresponding data item', () => {
-                  expect(radios[0].value).toEqual(dataScenario.items[0]);
-                  expect(radios[1].value).toEqual(dataScenario.items[1]);
-                  expect(radios[2].value).toEqual(dataScenario.items[2]);
+                  expect(radios.length).toEqual(dataScenario.items.length);
+                  radios.forEach((radio, index) => {
+                    expect(radio.value).toEqual(dataScenario.items[index]);
+                  });
                 });
               }
 
               if (templateScenario.type === TemplateScenarioTypes.CUSTOM) {
                 it('should set template variable `selected` for each item', () => {
                   const templateWrappers = spectator.queryAll('div.item-template');
-                  expect(templateWrappers[0]).toHaveAttribute('is-selected', 'false');
-                  expect(templateWrappers[1]).toHaveAttribute('is-selected', 'true');
-                  expect(templateWrappers[2]).toHaveAttribute('is-selected', 'false');
+                  const expectedIsSelectedValues = ['false', 'true', 'false'];
+                  expect(templateWrappers.length).toEqual(dataScenario.items.length);
+                  templateWrappers.forEach((templateWrapper, index) => {
+                    expect(templateWrapper).toHaveAttribute(
+                      'is-selected',
+                      expectedIsSelectedValues[index]
+                    );
+                  });
                 });
 
                 it('should set template variable `index` for each item', () => {
                   const templateWrappers = spectator.queryAll('div.item-template');
-                  expect(templateWrappers[0]).toHaveAttribute('index', '0');
-                  expect(templateWrappers[1]).toHaveAttribute('index', '1');
-                  expect(templateWrappers[2]).toHaveAttribute('index', '2');
+                  expect(templateWrappers).toHaveLength(dataScenario.items.length);
+                  templateWrappers.forEach((templateWrapper, index) => {
+                    expect(templateWrapper).toHaveAttribute('index', String(index));
+                  });
                 });
               }
 
@@ -286,9 +314,13 @@ describe('RadioGroupComponent', () => {
                   // Assert initial state:
                   expect(ionRadioGroup.value).toBe(dataScenario.selected);
                   // Assert initial state of radios:
-                  expect(radioChecked(0)).toBeFalse();
-                  expect(radioChecked(1)).toBeTrue();
-                  expect(radioChecked(2)).toBeFalse();
+                  ionRadioElements.forEach((_, index) => {
+                    if (index === defaultSelectedIndex) {
+                      expect(radioChecked(index)).toBeTrue();
+                    } else {
+                      expect(radioChecked(index)).toBeFalse();
+                    }
+                  });
                 });
 
                 it('should set the value of ion-radio-group to the corresponding selected data item', () => {
@@ -296,9 +328,14 @@ describe('RadioGroupComponent', () => {
                 });
 
                 it('should have selected radio corresponding to the selected data item', () => {
-                  expect(radioChecked(0)).toBeFalse();
-                  expect(radioChecked(1)).toBeTrue();
-                  expect(radioChecked(2)).toBeFalse();
+                  expect(ionRadioElements).toHaveLength(dataScenario.items.length);
+                  ionRadioElements.forEach((_, index) => {
+                    if (index === defaultSelectedIndex) {
+                      expect(radioChecked(index)).toBeTrue();
+                    } else {
+                      expect(radioChecked(index)).toBeFalse();
+                    }
+                  });
                 });
 
                 it('should have selected index corresponding to the selected data item', () => {
@@ -328,13 +365,19 @@ describe('RadioGroupComponent', () => {
                 });
 
                 it('should update the selected radio when the bound field is updated', async () => {
-                  spectator.setHostInput('selected', dataScenario.items[2]);
+                  const newSelectedItemIndex = 0;
+                  spectator.setHostInput('selected', dataScenario.items[newSelectedItemIndex]);
                   // Wait for radio checked attribute to be updated;
-                  await TestHelper.whenTrue(() => radioChecked(2));
+                  await TestHelper.whenTrue(() => radioChecked(newSelectedItemIndex));
 
-                  expect(radioChecked(0)).toBeFalse();
-                  expect(radioChecked(1)).toBeFalse();
-                  expect(radioChecked(2)).toBeTrue();
+                  expect(ionRadioElements.length).not.toBe(0);
+                  ionRadioElements.forEach((_, index) => {
+                    if (index === newSelectedItemIndex) {
+                      expect(radioChecked(index)).toBeTrue();
+                    } else {
+                      expect(radioChecked(index)).toBeFalse();
+                    }
+                  });
                 });
 
                 it('should not emit change event when the bound field is updated', () => {
@@ -446,7 +489,9 @@ describe('RadioGroupComponent', () => {
                     const newItems =
                       dataScenario.type === DataScenarioTypes.TEXT
                         ? ['New Guy'].concat(textItems)
-                        : [{ text: 'New Guy', value: 10 }].concat(dataItems);
+                        : [{ text: 'New Guy', value: 10 }].concat(
+                            dataScenario.items as defaultDataType[]
+                          ); // Convert to allow mixing defaultDataType with booleanDataType
 
                     spectator.setHostInput('items', newItems);
                     spectator.setHostInput('items$', of(newItems));
@@ -478,10 +523,17 @@ describe('RadioGroupComponent', () => {
                 if (dataScenario.type !== DataScenarioTypes.TEXT) {
                   describe('by replacing items with new instances', () => {
                     it('should reset value and selected index', () => {
-                      const newItems = dataItems.map((item) => ({
-                        ...item,
-                        value: item.value + 10,
-                      }));
+                      let newItems: booleanDataType[] | defaultDataType[];
+
+                      if (DataScenarioTypes.BOOLEAN_DATA) {
+                        newItems = booleanDataItems.map((item) => ({
+                          ...item,
+                          value: !item.value,
+                        }));
+                      } else {
+                        newItems = dataItems.map((item) => ({ ...item, value: item.value + 10 }));
+                      }
+
                       spectator.setHostInput('items', newItems);
                       spectator.setHostInput('items$', of(newItems));
 
@@ -506,7 +558,7 @@ describe('RadioGroupComponent', () => {
               describe(`with ${templateScenario}`, () => {
                 let spectator: SpectatorHost<
                   RadioGroupComponent,
-                  { items: string[] | defaultDataType[]; selectedIndex: number }
+                  { items: string[] | defaultDataType[] | booleanDataType[]; selectedIndex: number }
                 >;
 
                 describe('through template one-time string initialization', () => {
@@ -585,8 +637,6 @@ describe('RadioGroupComponent', () => {
                   });
 
                   describe('when changing selected index', () => {
-                    const newSelectedIndex = 2;
-
                     beforeEach(async () => {
                       spectator = createHostFromScenario();
                       const ionRadioGroupElement = spectator.query('ion-radio-group');
@@ -596,22 +646,28 @@ describe('RadioGroupComponent', () => {
                     });
 
                     it('should have correct new selected item', async () => {
+                      const newSelectedIndex = 0;
                       spectator.setInput('selectedIndex', newSelectedIndex);
                       // Wait for radio checked attribute to be updated;
-                      await TestHelper.whenTrue(() => radioChecked(2));
+                      await TestHelper.whenTrue(() => radioChecked(newSelectedIndex));
 
                       expect(spectator.component.value).toEqual(
                         dataScenario.items[newSelectedIndex]
                       );
-                      expect(radioChecked(0)).toBeFalse();
-                      expect(radioChecked(1)).toBeFalse();
-                      expect(radioChecked(2)).toBeTrue();
+                      expect(ionRadioElements).toHaveLength(dataScenario.items.length);
+                      ionRadioElements.forEach((_, index) => {
+                        if (index === newSelectedIndex) {
+                          expect(radioChecked(index)).toBeTrue();
+                        } else {
+                          expect(radioChecked(index)).toBeFalse();
+                        }
+                      });
                     });
 
                     it('should not emit change event', () => {
                       const onChangeSpy = spyOn(spectator.component.valueChange, 'emit');
 
-                      spectator.setInput('selectedIndex', newSelectedIndex);
+                      spectator.setInput('selectedIndex', 0);
 
                       expect(onChangeSpy).not.toHaveBeenCalled();
                     });
