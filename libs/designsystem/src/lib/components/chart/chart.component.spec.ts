@@ -1,3 +1,4 @@
+import { fakeAsync, tick } from '@angular/core/testing';
 import { createHostFactory, Spectator } from '@ngneat/spectator';
 import { MockProvider } from 'ng-mocks';
 
@@ -34,13 +35,14 @@ describe('ChartComponent', () => {
     });
   });
 
-  it('should render chart once after view init', () => {
+  it('should render chart once after view init', fakeAsync(() => {
     const renderChartSpy = spyOn<any>(component, 'renderChart');
 
     component.ngAfterViewInit();
+    tick();
 
     expect(renderChartSpy).toHaveBeenCalledTimes(1);
-  });
+  }));
 
   it("should be possible to set the height with the '--kirby-chart-height' CSS custom property", () => {
     const customHeight = '600px';
