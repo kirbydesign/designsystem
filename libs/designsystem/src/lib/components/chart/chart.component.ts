@@ -44,7 +44,7 @@ export class ChartComponent implements AfterViewInit, OnChanges {
   ngAfterViewInit() {
     /* 
        A chart is not rendered until it has both a height and a width. 
-       If ChartComponent has an ionic component as ancestor it will 
+       If ChartComponent is slotted in an ionic component it will
        not have any height or width on afterViewInit. This will cause 
        the animation to not be played on first draw. 
     */
