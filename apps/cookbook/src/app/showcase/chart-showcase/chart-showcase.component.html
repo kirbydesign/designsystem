@@ -57,6 +57,17 @@
   </kirby-card>
 </p>
 
+<h3>Stock Chart</h3>
+<p>The line chart visualizes data from different categories as a line along the x-axis.</p>
+<p>To render a line chart set <code>type</code> to <code>'stock'</code>.</p>
+<p>
+  <kirby-card [mode]="_cardMode" [hasPadding]="_cardHasPadding">
+    <cookbook-example-viewer [html]="stockExample.template">
+      <cookbook-chart-example-stock #stockExample></cookbook-chart-example-stock>
+    </cookbook-example-viewer>
+  </kirby-card>
+</p>
+
 <kirby-divider [hasMargin]="true"></kirby-divider>
 
 <h2 id="custom-options">Custom Options</h2>

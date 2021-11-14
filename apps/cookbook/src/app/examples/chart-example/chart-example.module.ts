@@ -14,6 +14,7 @@ import { ChartExampleInteractionComponent } from './examples/chart-example-inter
 import { ChartExampleLineComponent } from './examples/chart-example-line.component';
 import { ChartExampleMultipleDatasetsComponent } from './examples/chart-example-multiple-datasets.component';
 import { ChartExampleSimpleColumnComponent } from './examples/chart-example-simple-column-chart.component';
+import { ChartExampleStockComponent } from './examples/chart-example-stock.component';
 
 const COMPONENT_DECLARATIONS = [
   ChartExampleComponent,
@@ -26,6 +27,7 @@ const COMPONENT_DECLARATIONS = [
   ChartExampleAccessibilityComponent,
   ChartExampleAnnotationsComponent,
   ChartExampleLineComponent,
+  ChartExampleStockComponent,
   ChartExampleAreaLineComponent,
 ];
 
