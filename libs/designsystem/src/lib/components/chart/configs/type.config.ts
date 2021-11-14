@@ -98,4 +98,71 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
       },
     },
   },
+  stock: {
+    type: 'line',
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: {
+        duration: 0,
+      },
+      layout: {
+        padding: {
+          left: 0,
+          right: 0,
+          top: 30,
+          bottom: 0,
+        },
+      },
+      backgroundColor: getThemeColorRgbString('semi-light', 0.5),
+      scales: {
+        x: {
+          type: 'time',
+          time: {
+            unit: 'day',
+          },
+
+          grid: {
+            lineWidth: 0,
+          },
+          ticks: {
+            source: 'data',
+            autoSkipPadding: 40,
+            font: {
+              size: 11,
+            },
+          },
+        },
+        y: {
+          display: true,
+          grid: {
+            drawBorder: false,
+          },
+          ticks: {
+            display: true,
+            font: {
+              size: parseInt(fontSize('xs')),
+            },
+          },
+        },
+      },
+      elements: {
+        line: {
+          tension: 0, // Smooth curve (0 = no smoothing)
+          borderWidth: 2,
+        },
+        point: {
+          radius: 0,
+          hoverRadius: 8,
+          hoverBorderWidth: 0,
+        },
+      },
+      normalized: true,
+      hover: {
+        axis: 'xy',
+        mode: 'nearest',
+        intersect: false,
+      },
+    },
+  },
 };

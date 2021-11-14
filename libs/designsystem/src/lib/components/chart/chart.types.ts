@@ -2,7 +2,7 @@ import { ChartDataset as ChartJSDataset, ChartOptions, ChartType as ChartJSType 
 
 export type ChartHighlightedElements = number[][];
 
-export type ChartType = 'column' | 'bar' | 'line';
+export type ChartType = 'column' | 'bar' | 'line' | 'stock';
 
 export type ChartTypeConfig = { type: ChartJSType; options?: ChartOptions };
 

@@ -9,7 +9,9 @@ import {
   LineController,
   LineElement,
   PointElement,
+  registerables,
 } from 'chart.js';
+import 'chartjs-adapter-date-fns';
 import annotationPlugin from 'chartjs-plugin-annotation';
 
 import { mergeDeepAll } from '../../../helpers/merge-deep';
@@ -22,7 +24,14 @@ const CHART_PLUGINS = [annotationPlugin, Filler];
 
 /* Order matters; defaults must be merged after register as 
    register modifies the Chart.defaults objects */
-Chart.register(Legend, ...CHART_SCALES, ...CHART_ELEMENTS, ...CHART_CONTROLLERS, ...CHART_PLUGINS);
+Chart.register(
+  ...registerables,
+  Legend,
+  ...CHART_SCALES,
+  ...CHART_ELEMENTS,
+  ...CHART_CONTROLLERS,
+  ...CHART_PLUGINS
+);
 
 /* Chart.defaults is read only; set each key modified in 
    CHART_GLOBAL_DEFAULTS manually */
