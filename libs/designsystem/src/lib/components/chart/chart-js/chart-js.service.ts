@@ -188,9 +188,13 @@ export class ChartJSService {
     options: ChartOptions,
     dataLabels?: unknown[]
   ): ChartConfiguration {
-    /* chartJS requires labels; if none is provided create an empty string array
-    to make it optional for consumer */
-    const labels = !dataLabels ? this.createBlankLabels(datasets) : dataLabels;
+    // chartJS requires labels; if none is provided create an empty string array
+    // to make it optional for consumer.
+    // However the stock chart, shouldn't have any custom datalabels supplied.
+    // This type of chart generates it's own labels.
+    const noLabelsForStockType = type !== 'stock';
+    const labels =
+      !dataLabels && noLabelsForStockType ? this.createBlankLabels(datasets) : dataLabels;
     const typeConfig = this.chartConfigService.getTypeConfig(type);
 
     return mergeDeepAll(typeConfig, {
