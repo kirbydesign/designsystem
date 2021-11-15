@@ -58,7 +58,11 @@ As mentioned the accessibility of an application largely depends on how it is bu
 
 ### Do not be in the way
 
-Our primary goal is to not be in the way. The components in Kirby designsystem should allow developers to create accessible applications. If a developer ever experiences that a Kirby component causes problems when working with accessibility, they should not hesitate to create an issue in the Github repository: [here](https://github.com/kirbydesign/designsystem/issues/new/choose).
+The components in Kirby designsystem should allow developers to create accessible applications; they can be tought of as HTML elements. It is possible to use them in ways that allows for accessibility. On the contrary, it is also possible to use them in a lot of completely inaccessible ways.
+
+But the components in Kirby should never be in the way of making an application accessible.
+
+If a developer ever experiences that a Kirby component causes problems when working with accessibility; do not hesitate to create an issue in the [Kirby Design System Github repository](https://github.com/kirbydesign/designsystem/issues/new/choose).
 
 ### A knowledge source
 
