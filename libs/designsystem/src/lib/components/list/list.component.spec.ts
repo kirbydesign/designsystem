@@ -1,6 +1,11 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import * as ionic from '@ionic/angular';
-import { createComponentFactory, Spectator } from '@ngneat/spectator';
+import {
+  createComponentFactory,
+  createHostFactory,
+  Spectator,
+  SpectatorHost,
+} from '@ngneat/spectator';
 import { MockComponent } from 'ng-mocks';
 
 import { WindowRef } from '../../types/window-ref';
@@ -49,7 +54,7 @@ const TEST_ITEMS: any[] = [
   },
 ];
 
-describe('ListComponent', () => {
+describe('ListComponent with array of items', () => {
   let spectator: Spectator<ListComponent>;
   let component: ListComponent;
 
@@ -305,5 +310,39 @@ describe('ListComponent', () => {
         expect(section2last).toEqual('last');
       });
     });
+  });
+});
+
+describe('ListComponent with items declared in markup', () => {
+  let spectator: SpectatorHost<ListComponent>;
+
+  const createHost = createHostFactory({
+    component: ListComponent,
+    declarations: [ListComponent, MockComponent(ionic.IonList), MockComponent(ionic.IonItem)],
+    providers: [
+      ListHelper,
+      GroupByPipe,
+      {
+        provide: WindowRef,
+        useValue: <WindowRef>{ nativeWindow: window },
+      },
+    ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  });
+
+  beforeEach(() => {
+    spectator = createHost<ListComponent>(`
+      <kirby-list>
+        <kirby-item><h3>Test Item</h3></kirby-item>
+        <kirby-item><h3>Test Item</h3></kirby-item>
+        <kirby-item><h3>Test Item</h3></kirby-item>
+        <kirby-item><h3>Test Item</h3></kirby-item>
+      </kirby-list>`);
+  });
+
+  it('should render items in list', () => {
+    const items = spectator.queryHostAll('kirby-item');
+
+    expect(items).toHaveLength(4);
   });
 });
