@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Inject, InjectionToken, ModuleWithProviders, NgModule, Optional } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
-import { UiScrollModule } from 'ngx-ui-scroll';
 
 import { AccordionItemComponent } from './components/accordion/accordion-item.component';
 import { AccordionDirective } from './components/accordion/accordion.directive';
@@ -177,7 +176,6 @@ export interface KirbyConfig {
   imports: [
     CommonModule,
     RouterModule,
-    UiScrollModule,
     IonicModule.forRoot({
       mode: 'ios',
       inputShims: true,
