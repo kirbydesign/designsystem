@@ -1,3 +1,5 @@
-export function deepCopy(obj: Object) {
-  return JSON.parse(JSON.stringify(obj));
+import deepcopy from 'ts-deepcopy';
+
+export function deepCopy(obj: any): any {
+  return deepcopy(obj);
 }

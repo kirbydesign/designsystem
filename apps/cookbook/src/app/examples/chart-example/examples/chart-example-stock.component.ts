@@ -28,32 +28,7 @@ export class ChartExampleStockComponent {
     showCurrent: true,
   };
 
-  customOptions: ChartOptions = {
-    plugins: {
-      tooltip: {
-        // Hover labels,
-        mode: 'index',
-        intersect: true,
-        caretSize: 1,
-        caretPadding: 12,
-        cornerRadius: 2,
-        displayColors: false,
-        backgroundColor: 'red',
-        padding: 8,
-        titleFont: {
-          weight: 'normal',
-          size: 12,
-        },
-        bodyFont: {
-          size: 15,
-          weight: 'bold',
-        },
-        callbacks: {
-          title: (context): string => 'hej',
-        },
-      },
-    },
-  };
+  customOptions: ChartOptions = {};
 
   stock1 = [
     {
@@ -314,6 +289,7 @@ export class ChartExampleStockComponent {
     {
       label: 'stock1',
       data: this.stock1,
+      borderColor: getThemeColorHexString('secondary'),
     },
     {
       label: 'stock2',

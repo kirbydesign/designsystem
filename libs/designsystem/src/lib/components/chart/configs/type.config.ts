@@ -1,3 +1,6 @@
+import { format, toDate } from 'date-fns-tz';
+import { da } from 'date-fns/locale';
+
 import { ColorHelper, DesignTokenHelper } from '../../../helpers';
 import { ChartTypesConfig } from '../chart.types';
 
@@ -119,13 +122,18 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
         x: {
           type: 'time',
           time: {
-            unit: 'day',
+            unit: 'month',
+            displayFormats: {
+              hour: 'HH',
+              day: 'D MMM',
+            },
           },
 
           grid: {
             lineWidth: 0,
           },
           ticks: {
+            maxRotation: 0,
             source: 'data',
             autoSkipPadding: 40,
             font: {
@@ -134,6 +142,7 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
           },
         },
         y: {
+          position: 'right',
           display: true,
           grid: {
             drawBorder: false,
@@ -152,8 +161,10 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
           borderWidth: 2,
         },
         point: {
+          hitRadius: 20,
           radius: 0,
           hoverRadius: 8,
+          hoverBackgroundColor: getThemeColorHexString('primary'),
           hoverBorderWidth: 0,
         },
       },
@@ -162,6 +173,41 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
         axis: 'xy',
         mode: 'nearest',
         intersect: false,
+      },
+      plugins: {
+        tooltip: {
+          mode: 'nearest',
+          intersect: false,
+          caretSize: 1,
+          caretPadding: 12,
+          displayColors: false,
+          backgroundColor: getThemeColorHexString('semi-light'),
+          padding: 8,
+          titleColor: 'black',
+          bodyColor: 'black',
+          titleFont: {
+            weight: 'normal',
+            size: 12,
+          },
+          bodyFont: {
+            size: 15,
+            weight: 'bold',
+          },
+          filter: function(tooltipItem) {
+            return tooltipItem.datasetIndex === 0;
+          },
+          callbacks: {
+            label: (context) => {
+              return context.formattedValue;
+            },
+            title: (tooltipItems): string => {
+              const date = toDate(tooltipItems[0]?.parsed?.x);
+              if (date.valueOf()) {
+                return format(date, 'PP', { locale: da });
+              }
+            },
+          },
+        },
       },
     },
   },
