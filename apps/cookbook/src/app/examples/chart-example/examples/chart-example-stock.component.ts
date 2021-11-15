@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { ChartData, Plugin } from 'chart.js';
-import ChartDataLabels from 'chartjs-plugin-datalabels';
 
-import { ChartOptions } from '@kirbydesign/designsystem';
+import { ChartOptions, ColorHelper } from '@kirbydesign/designsystem';
+
+const { getThemeColorHexString } = ColorHelper;
 
 const config = {
   selector: 'cookbook-chart-example-stock',
@@ -11,6 +11,7 @@ const config = {
   type="stock" 
   [data]="data"
   [customOptions]="customOptions"
+  [tooltipOptions]="toolTipOptions"
   ></kirby-chart>`,
 };
 
@@ -21,7 +22,11 @@ const config = {
 export class ChartExampleStockComponent {
   template: string = config.template;
 
-  plugins: Plugin[] = [ChartDataLabels];
+  toolTipOptions = {
+    showMin: true,
+    showMax: true,
+    showCurrent: true,
+  };
 
   customOptions: ChartOptions = {
     plugins: {
@@ -46,20 +51,6 @@ export class ChartExampleStockComponent {
         callbacks: {
           title: (context): string => 'hej',
         },
-      },
-      datalabels: {
-        borderRadius: 3,
-        font: {
-          lineHeight: 1,
-          size: 11,
-        },
-        padding: {
-          top: 6,
-          left: 5,
-          right: 5,
-          bottom: 5,
-        },
-        offset: 5,
       },
     },
   };
@@ -308,12 +299,12 @@ export class ChartExampleStockComponent {
   ];
 
   stock2 = JSON.parse(JSON.stringify(this.stock1)).map((point) => {
-    point.y = Math.floor(Math.random() * 5) + 40;
+    point.y = Math.floor(Math.random() * 5) + 50;
     return point;
   });
   stock3 = JSON.parse(JSON.stringify(this.stock1))
     .map((point) => {
-      point.y = Math.floor(Math.random() * 5) + 30;
+      point.y = Math.floor(Math.random() * 5) + 50;
       return point;
     })
     // exclude a few points.
@@ -327,10 +318,12 @@ export class ChartExampleStockComponent {
     {
       label: 'stock2',
       data: this.stock2,
+      borderColor: getThemeColorHexString('primary'),
     },
     {
       label: 'stock3',
       data: this.stock3,
+      borderColor: getThemeColorHexString('semi-dark'),
     },
   ];
 }

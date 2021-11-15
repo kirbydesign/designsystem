@@ -10,6 +10,12 @@ export type ChartTypesConfig = {
   [key in ChartType]: ChartTypeConfig;
 };
 
+export type tooltipOptions = {
+  showMin: boolean;
+  showMax: boolean;
+  showCurrent: boolean;
+};
+
 export type ChartDataset = { kirbyOptions?: { highlightedElements?: number[] } } & ChartJSDataset;
 
 export function isNumberArray(value: any): value is number[] {

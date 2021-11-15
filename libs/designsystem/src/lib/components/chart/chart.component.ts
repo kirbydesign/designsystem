@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { ChartOptions } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
+import { tooltipOptions } from 'libs/designsystem/src';
 
 import { ResizeObserverFactory, ResizeObserverService } from '../shared';
 
@@ -27,6 +28,7 @@ export class ChartComponent implements AfterViewInit, OnChanges {
   @Input() data: ChartDataset[] | number[];
   @Input() dataLabels?: string[] | string[][];
   @Input() customOptions?: ChartOptions;
+  @Input() tooltipOptions?: tooltipOptions;
   @Input() annotations?: AnnotationOptions[];
   @Input() highlightedElements?: ChartHighlightedElements;
 
