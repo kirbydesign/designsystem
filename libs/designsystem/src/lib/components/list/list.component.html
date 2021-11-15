@@ -101,3 +101,7 @@
     </div>
   </div>
 </ng-template>
+
+<ion-list *ngIf="!items?.length">
+  <ng-content></ng-content>
+</ion-list>
