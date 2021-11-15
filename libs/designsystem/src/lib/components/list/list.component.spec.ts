@@ -319,15 +319,6 @@ describe('ListComponent with items declared in markup', () => {
   const createHost = createHostFactory({
     component: ListComponent,
     declarations: [ListComponent, MockComponent(ionic.IonList), MockComponent(ionic.IonItem)],
-    providers: [
-      ListHelper,
-      GroupByPipe,
-      {
-        provide: WindowRef,
-        useValue: <WindowRef>{ nativeWindow: window },
-      },
-    ],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA],
   });
 
   beforeEach(() => {
