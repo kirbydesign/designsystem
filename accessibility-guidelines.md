@@ -8,9 +8,13 @@ The short answer is no.
 
 The accessibility of an application largely depends on its markup. In other words, it depends on how the components in Kirby are used. The role of the components is to allow for developers to make their applications accessible; they should not be in the way.
 
-This means the developer has a lot of responsibility to ensure their application is accessible. This might be frustrating news for those new to accessibility; where to begin?
+This means the developer has a lot of responsibility to ensure their application is accessible. All of this might be frustrating news for those new to accessibility; where to begin?
 
-Our suggestion is to read on!
+Besides, accessibility is hard. There is a lot to consider when thinking about the accessibility of an application as can be seen in the following sections. But [as with fixing a bug](https://assets.deepsource.io/032e723/images/blog/cost-of-fixing-bugs/chart.jpg), it is easier to consider accessibility from the start; the further in an applications lifecycle it is improved, the more expensive and harder it is to do.
+
+We in team Kirby believe it is the job of an responsible frontend developer to prioritize and care about accessibility. See it as an opportunity to learn more about the web technologies you are building with every day and [exploring new ways of improving your product for everyone](https://uxdesign.cc/the-unseen-benefits-of-accessibility-ef259202b638).
+
+So where do you begin? Our suggestion is to read on!
 
 ### Mindset - what is accessibility?
 
