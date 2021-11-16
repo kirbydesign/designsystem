@@ -84,15 +84,19 @@ We have created a Github discussions thread where experiences can be shared [her
 
 A lot of great material is freely available online; so instead of reiterating what they already state, we will point you in the direction of some of our favorite resources.
 
-### Resources & topics for getting started
+### A11y.coffe: A great starting point
 
 The content on [a11y.coffee](https://a11y.coffee) is a great starting point; especially its [coffee metaphor](https://a11y.coffee/a11y-testing-making-coffee/) serves as a good overview of testing methods. Furthermore it also has a list of [quick wins](https://a11y.coffee/quick-wins/) for those who wants to get their hands dirty.
 
-We also believe it is important to have knowledge about:
+### Topics for exploration
+
+When diving into a new field it can be useful to have some topics and a general idea of which way to direct learning. We believe the following topics are important to have knowledge about, when getting into web accessibility:
 
 - [How to evaluate acessibility](https://a11y.coffee/start-testing/) in your application. As mentioned automatic testing can not be relied on alone; skill and education is required as an developer.
 - How to write proper [semantic markup](https://jerryjones.dev/2020/04/20/the-importance-of-html/). This is how to gain the most with the least effort. Not only does it benefit people with disabilities; it makes your application more robust, future proof and is easier for computers to process.
 - How and [when](https://gomakethings.com/when-should-you-use-aria/) to use ARIA attributes.
+
+### Additional resources
 
 While a11y.coffee has a [list of resources](https://a11y.coffee/dig-in/) to further explore the field of accessibility, we would like to supplement that with some of our own resources:
 
