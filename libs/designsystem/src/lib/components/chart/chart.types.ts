@@ -2,7 +2,14 @@ import { ChartDataset as ChartJSDataset, ChartOptions, ChartType as ChartJSType 
 
 export type ChartHighlightedElements = number[][];
 
-export type ChartType = 'column' | 'bar' | 'line' | 'stock';
+export enum ChartTypes {
+  column = 'column',
+  bar = 'bar',
+  line = 'line',
+  stock = 'stock',
+}
+
+export type ChartType = ChartTypes.column | ChartTypes.bar | ChartTypes.line | ChartTypes.stock;
 
 export type ChartTypeConfig = { type: ChartJSType; options?: ChartOptions };
 
@@ -10,14 +17,24 @@ export type ChartTypesConfig = {
   [key in ChartType]: ChartTypeConfig;
 };
 
-export type tooltipOptions = {
-  showMin: boolean;
-  showMax: boolean;
-  showCurrent: boolean;
+export type datalabelOptions = {
+  showMin?: boolean;
+  showMax?: boolean;
+  showCurrent?: boolean;
 };
 
 export type ChartDataset = { kirbyOptions?: { highlightedElements?: number[] } } & ChartJSDataset;
 
 export function isNumberArray(value: any): value is number[] {
   return Array.isArray(value) && value.every((item) => typeof item === 'number');
+}
+
+export enum dataDateSpan {
+  day = 'day',
+  week = 'week',
+  month = 'month',
+  threeMonths = 'threeMonths',
+  sixMonths = 'sixMonths',
+  year = 'year',
+  fiveYears = 'fiveYears',
 }

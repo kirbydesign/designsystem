@@ -10,12 +10,17 @@ import {
 } from '@angular/core';
 import { ChartOptions } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
-import { tooltipOptions } from 'libs/designsystem/src';
 
 import { ResizeObserverFactory, ResizeObserverService } from '../shared';
 
 import { ChartJSService } from './chart-js/chart-js.service';
-import { ChartDataset, ChartHighlightedElements, ChartType } from './chart.types';
+import {
+  ChartDataset,
+  ChartHighlightedElements,
+  ChartType,
+  ChartTypes,
+  datalabelOptions,
+} from './chart.types';
 
 @Component({
   selector: 'kirby-chart',
@@ -24,11 +29,11 @@ import { ChartDataset, ChartHighlightedElements, ChartType } from './chart.types
   providers: [ChartJSService],
 })
 export class ChartComponent implements AfterViewInit, OnChanges {
-  @Input() type: ChartType = 'column';
+  @Input() type: ChartType = ChartTypes.column;
   @Input() data: ChartDataset[] | number[];
   @Input() dataLabels?: string[] | string[][];
   @Input() customOptions?: ChartOptions;
-  @Input() tooltipOptions?: tooltipOptions;
+  @Input() datalabelOptions?: datalabelOptions;
   @Input() annotations?: AnnotationOptions[];
   @Input() highlightedElements?: ChartHighlightedElements;
 
@@ -101,6 +106,7 @@ export class ChartComponent implements AfterViewInit, OnChanges {
       dataLabels: this.dataLabels,
       customOptions: this.customOptions,
       annotations: this.annotations,
+      datalabelOptions: this.datalabelOptions,
       highlightedElements: this.highlightedElements,
     });
   }

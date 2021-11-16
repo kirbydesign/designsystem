@@ -1,9 +1,16 @@
 import { ElementRef, Injectable } from '@angular/core';
-import { ActiveElement, ChartConfiguration, ChartOptions } from 'chart.js';
+import { ActiveElement, ChartConfiguration, ChartOptions, ScatterDataPoint } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
 
 import { mergeDeepAll } from '../../../helpers/merge-deep';
-import { ChartDataset, ChartHighlightedElements, ChartType, isNumberArray } from '../chart.types';
+import {
+  ChartDataset,
+  ChartHighlightedElements,
+  ChartType,
+  ChartTypes,
+  datalabelOptions,
+  isNumberArray,
+} from '../chart.types';
 import { ChartConfigService } from '../configs/chart-config.service';
 
 import { Chart } from './configured-chart-js';
@@ -21,6 +28,7 @@ export class ChartJSService {
     dataLabels?: string[] | string[][];
     customOptions?: ChartOptions;
     annotations?: AnnotationOptions[];
+    datalabelOptions: datalabelOptions;
     highlightedElements?: ChartHighlightedElements;
   }): void {
     const {
@@ -30,10 +38,16 @@ export class ChartJSService {
       dataLabels,
       customOptions,
       annotations,
+      datalabelOptions,
       highlightedElements,
     } = args;
 
-    const datasets = this.createDatasets(data, highlightedElements);
+    // We need to modify the datasets in order to add tooltips.
+    const datasets =
+      datalabelOptions?.showCurrent || datalabelOptions?.showMax || datalabelOptions?.showMin
+        ? this.createDatasets(this.addTooltips(data, datalabelOptions), highlightedElements)
+        : this.createDatasets(data, highlightedElements);
+
     const options = this.createOptionsObject({ type, customOptions, annotations });
     const config = this.createConfigurationObject(type, datasets, options, dataLabels);
     this.initializeNewChart(targetElement.nativeElement, config);
@@ -192,7 +206,7 @@ export class ChartJSService {
     // to make it optional for consumer.
     // However the stock chart, shouldn't have any custom datalabels supplied.
     // This type of chart generates it's own labels.
-    const noLabelsForStockType = type !== 'stock';
+    const noLabelsForStockType = type !== ChartTypes.stock;
     const labels =
       !dataLabels && noLabelsForStockType ? this.createBlankLabels(datasets) : dataLabels;
     const typeConfig = this.chartConfigService.getTypeConfig(type);
@@ -233,5 +247,69 @@ export class ChartJSService {
     if (highlightedElements) this.addHighlightedElementsToDatasets(highlightedElements, datasets);
 
     return datasets;
+  }
+
+  private addTooltips(
+    data: ChartDataset[] | number[],
+    datalabelOptions: datalabelOptions
+  ): ChartDataset[] | number[] {
+    if (isNumberArray(data)) {
+      throw Error("Currently it's impossible to add tooltips to non ScatterDataPoint datasets");
+    }
+    data.map((set) => {
+      if (datalabelOptions.showMin) {
+        const { value, pointer } = this.locateValueIndexInDataset(set, 'y', 'low');
+        set.data[pointer] = {
+          ...(set.data[pointer] as ScatterDataPoint),
+          datalabel: {
+            value,
+            position: 'bottom',
+          },
+        } as ScatterDataPoint;
+      }
+      if (datalabelOptions.showMax) {
+        const { value, pointer } = this.locateValueIndexInDataset(set, 'y', 'high');
+        set.data[pointer] = {
+          ...(set.data[pointer] as ScatterDataPoint),
+          datalabel: {
+            value,
+            position: 'top',
+          },
+        } as ScatterDataPoint;
+      }
+      if (datalabelOptions.showCurrent) {
+        const { value, pointer } = this.locateValueIndexInDataset(set, 'x', 'high');
+        set.data[pointer] = {
+          ...(set.data[pointer] as ScatterDataPoint),
+          value,
+          datalabel: {
+            value,
+            position: 'right',
+          },
+        } as ScatterDataPoint;
+      }
+    });
+
+    return data;
+  }
+
+  private locateValueIndexInDataset(
+    dataset: ChartDataset,
+    axis: string,
+    direction: 'low' | 'high'
+  ): { value: number; pointer: number } {
+    let pointer;
+    let value;
+    dataset.data.forEach((datapoint, index) => {
+      if (direction == 'low' && (!value || datapoint[axis] < value)) {
+        value = datapoint['y'];
+        pointer = index;
+      }
+      if (direction == 'high' && (!value || datapoint[axis] > value)) {
+        value = datapoint['y'];
+        pointer = index;
+      }
+    });
+    return { value, pointer };
   }
 }

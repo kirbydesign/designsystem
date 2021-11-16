@@ -1,3 +1,6 @@
+import { Point } from 'chart.js';
+import { Context } from 'chartjs-plugin-datalabels';
+import { Align } from 'chartjs-plugin-datalabels/types/options';
 import { format, toDate } from 'date-fns-tz';
 import { da } from 'date-fns/locale';
 
@@ -6,6 +9,13 @@ import { ChartTypesConfig } from '../chart.types';
 
 const { fontSize } = DesignTokenHelper;
 const { getThemeColorHexString, getThemeColorRgbString } = ColorHelper;
+
+/**
+ * A filter to read a chartpoint from a Chart.js point context (used for chartdata points). Context is provided by Chart.js.
+ */
+const getChartPointFromContext = (context: Context): Point => {
+  return context.dataset.data[context.dataIndex] as Point;
+};
 
 export const CHART_TYPES_CONFIG: ChartTypesConfig = {
   bar: {
@@ -122,10 +132,10 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
         x: {
           type: 'time',
           time: {
-            unit: 'month',
+            unit: 'day', //todo calculate this based on input
             displayFormats: {
               hour: 'HH',
-              day: 'D MMM',
+              day: 'd MMM',
             },
           },
 
@@ -133,6 +143,9 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
             lineWidth: 0,
           },
           ticks: {
+            // callback: (context) => {
+            //   console.log(context)
+            //   return 'hej'},
             maxRotation: 0,
             source: 'data',
             autoSkipPadding: 40,
@@ -207,6 +220,27 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
               }
             },
           },
+        },
+        datalabels: {
+          backgroundColor: getThemeColorHexString('secondary'),
+          color: getThemeColorHexString('white'),
+          borderRadius: 3,
+          font: {
+            lineHeight: 1,
+            size: 11,
+          },
+          padding: {
+            top: 6,
+            left: 5,
+            right: 5,
+            bottom: 5,
+          },
+          offset: 5,
+          align: (context: Context): Align =>
+            (getChartPointFromContext(context) as any)?.datalabel.position,
+          display: (context: Context): boolean =>
+            !!(getChartPointFromContext(context) as any)?.datalabel,
+          formatter: (value: any, context: Context): string => value.datalabel.value,
         },
       },
     },

@@ -40,5 +40,8 @@ export const CHART_GLOBAL_DEFAULTS = {
     legend: {
       display: false,
     },
+    datalabels: {
+      display: false,
+    },
   },
 };

@@ -11,7 +11,7 @@ const config = {
   type="stock" 
   [data]="data"
   [customOptions]="customOptions"
-  [tooltipOptions]="toolTipOptions"
+  [datalabelOptions]="datalabelOptions"
   ></kirby-chart>`,
 };
 
@@ -22,7 +22,7 @@ const config = {
 export class ChartExampleStockComponent {
   template: string = config.template;
 
-  toolTipOptions = {
+  datalabelOptions = {
     showMin: true,
     showMax: true,
     showCurrent: true,
