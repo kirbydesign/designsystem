@@ -1,6 +1,13 @@
 import { ElementRef, Injectable } from '@angular/core';
-import { ActiveElement, ChartConfiguration, ChartOptions, ScatterDataPoint } from 'chart.js';
+import {
+  ActiveElement,
+  CartesianScaleOptions,
+  ChartConfiguration,
+  ChartOptions,
+  ScatterDataPoint,
+} from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
+import { toDate } from 'date-fns';
 
 import { mergeDeepAll } from '../../../helpers/merge-deep';
 import {
@@ -8,6 +15,7 @@ import {
   ChartHighlightedElements,
   ChartType,
   ChartTypes,
+  dataDateSpan,
   datalabelOptions,
   isNumberArray,
 } from '../chart.types';
@@ -202,14 +210,23 @@ export class ChartJSService {
     options: ChartOptions,
     dataLabels?: unknown[]
   ): ChartConfiguration {
+    const typeConfig = this.chartConfigService.getTypeConfig(type);
+
+    if (type === ChartTypes.stock) {
+      // assuming that the first dataset controls the datespan.
+      const chartPeriod = this.chartConfigService.findChartPeriod(datasets[0]);
+      // @todo fix type.
+      console.log(chartPeriod);
+      (options.scales.x as any).time.unit = chartPeriod;
+    }
+
     // chartJS requires labels; if none is provided create an empty string array
     // to make it optional for consumer.
     // However the stock chart, shouldn't have any custom datalabels supplied.
-    // This type of chart generates it's own labels.
+    // This type of chart uses `Time Cartesian Axis` and generates it's own labels.
     const noLabelsForStockType = type !== ChartTypes.stock;
     const labels =
       !dataLabels && noLabelsForStockType ? this.createBlankLabels(datasets) : dataLabels;
-    const typeConfig = this.chartConfigService.getTypeConfig(type);
 
     return mergeDeepAll(typeConfig, {
       data: {

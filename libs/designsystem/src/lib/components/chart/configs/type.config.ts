@@ -132,11 +132,7 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
         x: {
           type: 'time',
           time: {
-            unit: 'day', //todo calculate this based on input
-            displayFormats: {
-              hour: 'HH',
-              day: 'd MMM',
-            },
+            unit: 'hour', //todo calculate this based on input
           },
 
           grid: {

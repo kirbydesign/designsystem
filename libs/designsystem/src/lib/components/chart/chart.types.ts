@@ -30,11 +30,11 @@ export function isNumberArray(value: any): value is number[] {
 }
 
 export enum dataDateSpan {
-  day = 'day',
-  week = 'week',
-  month = 'month',
-  threeMonths = 'threeMonths',
-  sixMonths = 'sixMonths',
-  year = 'year',
-  fiveYears = 'fiveYears',
+  oneDay = 'hour',
+  oneWeek = 'day',
+  oneMonth = 'day',
+  threeMonths = 'day',
+  sixMonths = 'day',
+  oneYear = 'quarter',
+  fiveYears = 'year',
 }
