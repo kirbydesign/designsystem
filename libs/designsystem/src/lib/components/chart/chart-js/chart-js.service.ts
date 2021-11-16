@@ -215,8 +215,8 @@ export class ChartJSService {
     if (type === ChartTypes.stock) {
       // assuming that the first dataset controls the datespan.
       const chartPeriod = this.chartConfigService.findChartPeriod(datasets[0]);
+      // Update chart options with the given period.
       // @todo fix type.
-      console.log(chartPeriod);
       (options.scales.x as any).time.unit = chartPeriod;
     }
 
