@@ -28,7 +28,7 @@ export class ChartJSService {
     dataLabels?: string[] | string[][];
     customOptions?: ChartOptions;
     annotations?: AnnotationOptions[];
-    datalabelOptions: datalabelOptions;
+    datalabelOptions?: datalabelOptions;
     highlightedElements?: ChartHighlightedElements;
   }): void {
     const {

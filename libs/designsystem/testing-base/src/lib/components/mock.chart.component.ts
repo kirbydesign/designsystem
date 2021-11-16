@@ -7,7 +7,7 @@ import {
   ChartHighlightedElements,
   ChartOptions,
   ChartType,
-  tooltipOptions,
+  datalabelOptions,
 } from '@kirbydesign/designsystem';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
@@ -26,7 +26,7 @@ export class MockChartComponent {
   @Input() data: ChartDataset[] | number[];
   @Input() dataLabels: string[] | string[][];
   @Input() customOptions: ChartOptions;
-  @Input() tooltipOptions: tooltipOptions;
+  @Input() datalabelOptions: datalabelOptions;
   @Input() annotations: AnnotationOptions[];
   @Input() highlightedElements: ChartHighlightedElements;
   @Input() height: string | number;

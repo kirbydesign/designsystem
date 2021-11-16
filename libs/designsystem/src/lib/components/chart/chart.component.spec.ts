@@ -2,6 +2,7 @@ import { fakeAsync, tick } from '@angular/core/testing';
 import { createHostFactory, Spectator } from '@ngneat/spectator';
 import { MockProvider } from 'ng-mocks';
 
+import { ChartTypes } from '.';
 import { ChartJSService } from './chart-js/chart-js.service';
 import { ChartComponent } from './chart.component';
 
@@ -136,7 +137,7 @@ describe('ChartComponent', () => {
         spectator.setInput({
           data: [1, 2, 3],
           dataLabels: ['one', 'two', 'three'],
-          type: 'bar',
+          type: ChartTypes.bar,
           customOptions: { onClick: () => console.log('testing') },
           annotations: [{ type: 'line' }],
           highlightedElements: [[0, 1]],
@@ -153,7 +154,7 @@ describe('ChartComponent', () => {
         spectator.setInput({
           data: [1, 2, 3],
           dataLabels: ['one', 'two', 'three'],
-          type: 'bar',
+          type: ChartTypes.bar,
           customOptions: { onClick: () => console.log('testing') },
         });
 

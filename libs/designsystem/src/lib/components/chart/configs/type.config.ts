@@ -143,9 +143,6 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
             lineWidth: 0,
           },
           ticks: {
-            // callback: (context) => {
-            //   console.log(context)
-            //   return 'hej'},
             maxRotation: 0,
             source: 'data',
             autoSkipPadding: 40,
