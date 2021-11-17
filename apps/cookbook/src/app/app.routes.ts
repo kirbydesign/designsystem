@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 
+import { AccessibilityGuidelinesComponent } from './accessibility/accessibility-guidelines.component';
 import { HomeComponent } from './home/home.component';
 import { IntroComponent } from './intro/intro.component';
 
@@ -39,6 +40,10 @@ export const routes: Routes = [
         path: 'layout-recipes',
         loadChildren: () =>
           import('./layout-recipes/layout-recipes.module').then((m) => m.LayoutRecipesModule),
+      },
+      {
+        path: 'accessibility-in-kirby',
+        component: AccessibilityGuidelinesComponent,
       },
     ],
   },
