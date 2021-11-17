@@ -88,6 +88,14 @@ A lot of great material is freely available online; so instead of reiterating wh
 
 The content on [a11y.coffee](https://a11y.coffee) is a great starting point; especially its [coffee metaphor](https://a11y.coffee/a11y-testing-making-coffee/) serves as a good overview of testing methods. Furthermore it also has a list of [quick wins](https://a11y.coffee/quick-wins/) for those who want to get their hands dirty.
 
+### Check out the WCAG standard
+
+WCAG is the standard by the W3C Web Accessibility Initiative (WAI) that explains how to make content more accessible to people with disabilities.
+
+It is worth checking out as it is the standard upon which all other work in the web accessibility domain is based.
+
+[This overview](https://www.w3.org/WAI/standards-guidelines/wcag/) serves as a good starting point for diving into the [WCAG standard](https://www.w3.org/TR/WCAG21/).
+
 ### Topics for exploration
 
 When diving into a new field it can be useful to have some topics and a general idea of which way to direct learning. We believe the following topics are important to have knowledge about, when getting into web accessibility:
@@ -96,10 +104,9 @@ When diving into a new field it can be useful to have some topics and a general 
 - How to write proper [semantic markup](https://jerryjones.dev/2020/04/20/the-importance-of-html/). This is how to gain the most with the least effort. Not only does it benefit people with disabilities; it makes your application more robust, future proof and is easier for computers to process.
 - How and [when](https://gomakethings.com/when-should-you-use-aria/) to use ARIA attributes.
 
-### Additional resources
+### Resources
 
 While a11y.coffee has a [list of resources](https://a11y.coffee/dig-in/) to further explore the field of accessibility, we would like to supplement that with some of our own resources:
 
 - [WebAIM articles](https://webaim.org/articles/): a list of high quality articles from WebAIM ranging from a [beginner friendly introduction to a11y](https://webaim.org/intro/) to an [8-step implementation models](https://webaim.org/articles/implementation/).
 - [The a11y project checklist](https://www.a11yproject.com/checklist/): a user friendly checklist based on [WCAG](https://www.w3.org/WAI/standards-guidelines/wcag/) for evaluating and identifying opportunities for improving accessibility in applications. The a11y project also has a large [list of resources](https://www.a11yproject.com/resources/) from newsletters and books to podcasts.
-- [Web Content Accessibility (WCAG) overview](https://www.w3.org/WAI/standards-guidelines/wcag/): WCAG is a standard by the W3C Web Accessibility Initiative (WAI) that explains how to make content more accessible to people with disabilities. This overview serves as a good starting point for diving into the [WCAG standard](https://www.w3.org/TR/WCAG21/).
