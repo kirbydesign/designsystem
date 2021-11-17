@@ -47,9 +47,10 @@ export class SegmentedControlComponent {
   @Input() set items(value: SegmentItem[]) {
     this._items = value || [];
     this._items.forEach((item) => {
+      if (item.badge === undefined) return;
       // We need to verify whether badges icon is custom or default, so we can check for it in the template
       item.badge.isCustomIcon =
-        item.badge?.icon !== undefined &&
+        item.badge.icon !== undefined &&
         this.iconRegistryService.getIcon(item.badge.icon) !== undefined;
     });
 
