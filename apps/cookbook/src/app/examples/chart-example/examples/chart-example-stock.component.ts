@@ -12,7 +12,7 @@ const config = {
   <kirby-chart 
   type="stock" 
   [data]="singleData"
-  [datalabelOptions]="{showMin: true, showMax: true}"
+  [datalabelOptions]="{showMin: true, showMax: false, locale: 'da'}"
   ></kirby-chart>
   `,
 };
@@ -33,7 +33,7 @@ export class ChartExampleStockComponent {
   singleData = [
     {
       label: 'single',
-      data: StockExampleData.singleSecurity,
+      data: StockExampleData.months,
       borderColor: getThemeColorHexString('secondary'),
     },
   ];

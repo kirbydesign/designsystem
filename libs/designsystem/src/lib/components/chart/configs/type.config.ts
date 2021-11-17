@@ -1,8 +1,8 @@
-import { Point } from 'chart.js';
+import { Color, Point } from 'chart.js';
 import { Context } from 'chartjs-plugin-datalabels';
 import { Align } from 'chartjs-plugin-datalabels/types/options';
 import { format, toDate } from 'date-fns-tz';
-import { da } from 'date-fns/locale';
+import { da, he } from 'date-fns/locale';
 
 import { ColorHelper, DesignTokenHelper } from '../../../helpers';
 import { ChartTypesConfig } from '../chart.types';
@@ -114,6 +114,8 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
   stock: {
     type: 'line',
     options: {
+      // locale is overridden in handleLocalization().
+      locale: 'en-US',
       responsive: true,
       maintainAspectRatio: false,
       animation: {
@@ -122,7 +124,7 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
       layout: {
         padding: {
           left: 0,
-          right: 0,
+          right: 10,
           top: 30,
           bottom: 0,
         },
@@ -131,10 +133,8 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
       scales: {
         x: {
           type: 'time',
-          time: {
-            unit: 'hour', //todo calculate this based on input
-          },
-
+          // Time is overridden in handleLocalization().
+          time: {},
           grid: {
             lineWidth: 0,
           },
@@ -206,16 +206,12 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
             label: (context) => {
               return context.formattedValue;
             },
-            title: (tooltipItems): string => {
-              const date = toDate(tooltipItems[0]?.parsed?.x);
-              if (date.valueOf()) {
-                return format(date, 'PP', { locale: da });
-              }
-            },
+            // Title is overridden in handleLocalization().
+            // title: () => {},
           },
         },
         datalabels: {
-          backgroundColor: getThemeColorHexString('secondary'),
+          backgroundColor: (context: Context) => context.dataset.borderColor as Color,
           color: getThemeColorHexString('white'),
           borderRadius: 3,
           font: {

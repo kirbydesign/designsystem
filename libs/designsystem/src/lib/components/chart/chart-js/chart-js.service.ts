@@ -7,7 +7,9 @@ import {
   ScatterDataPoint,
 } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
-import { toDate } from 'date-fns';
+import { format, toDate } from 'date-fns';
+import da from 'date-fns/locale/da';
+import enUS from 'date-fns/locale/en-US';
 
 import { mergeDeepAll } from '../../../helpers/merge-deep';
 import {
@@ -57,8 +59,69 @@ export class ChartJSService {
         : this.createDatasets(data, highlightedElements);
 
     const options = this.createOptionsObject({ type, customOptions, annotations });
-    const config = this.createConfigurationObject(type, datasets, options, dataLabels);
+    let config = this.createConfigurationObject(type, datasets, options, dataLabels);
+
+    if (type === ChartTypes.stock) {
+      // assuming that the first dataset controls the datespan.
+      const chartPeriod = this.chartConfigService.findChartPeriod(datasets[0]);
+      config.options = this.handleLocalization(
+        config.options,
+        chartPeriod,
+        datalabelOptions.locale
+      );
+    }
+
     this.initializeNewChart(targetElement.nativeElement, config);
+  }
+
+  private handleLocalization(options, chartPeriod, language): ChartOptions {
+    // Handle localization in graph.
+    const locale = language === 'da' ? da : enUS;
+
+    if (language === 'da') {
+      options.locale = 'da-DK';
+    }
+
+    // Update chart options with the given period.
+    // @todo fix type.
+    const scaleX = options.scales.x as any;
+    scaleX.time.unit = chartPeriod;
+    scaleX.adapters = {
+      date: {
+        locale,
+      },
+    };
+    scaleX.time.displayFormats = {
+      hour: 'HH:mm',
+      day: language === 'da' ? 'd MMM' : 'MMM d',
+    };
+
+    let tooltipDateformat = '';
+    switch (chartPeriod) {
+      case dataDateSpan.oneDay:
+        tooltipDateformat = 'HH:mm';
+        break;
+      case dataDateSpan.oneWeek:
+      case dataDateSpan.oneMonth:
+      case dataDateSpan.threeMonths:
+      case dataDateSpan.sixMonths:
+      case dataDateSpan.oneMonth:
+      case dataDateSpan.oneYear:
+        tooltipDateformat = language === 'da' ? 'd MMM' : 'MMM d';
+        break;
+      case dataDateSpan.fiveYears:
+        tooltipDateformat = 'LLL yy';
+        break;
+    }
+
+    options.plugins.tooltip.callbacks.title = (tooltipItems) => {
+      const date = toDate(tooltipItems[0]?.parsed?.x);
+      if (date.valueOf()) {
+        return format(date, tooltipDateformat, { locale });
+      }
+    };
+
+    return options;
   }
 
   public redrawChart() {
@@ -211,14 +274,6 @@ export class ChartJSService {
     dataLabels?: unknown[]
   ): ChartConfiguration {
     const typeConfig = this.chartConfigService.getTypeConfig(type);
-
-    if (type === ChartTypes.stock) {
-      // assuming that the first dataset controls the datespan.
-      const chartPeriod = this.chartConfigService.findChartPeriod(datasets[0]);
-      // Update chart options with the given period.
-      // @todo fix type.
-      (options.scales.x as any).time.unit = chartPeriod;
-    }
 
     // chartJS requires labels; if none is provided create an empty string array
     // to make it optional for consumer.
