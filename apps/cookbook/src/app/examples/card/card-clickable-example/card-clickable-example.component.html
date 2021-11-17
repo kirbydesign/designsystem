@@ -3,8 +3,10 @@
   <div class="card-content">
     <p>
       Giving a card any click event <code>(click)="function()"</code> will change your cursor to a
-      pointer when hovering the card. There is also added accessibility so that you can focus the
-      card by tabbing and clicking with either space or enter.
+      pointer when hovering the card. To ensure that the card is accessible by keyboard, the card
+      gets a tab-index so it can be focused by tabbing. To mirror a button's behavior, any
+      registered click-event will also be called by pressing enter and space when the card is
+      focused.
     </p>
     <p>
       If <code>mode="flat"</code> has been given to the card, it will automatically be reverted to
