@@ -14,7 +14,7 @@ export interface SegmentItem {
    * @deprecated Will be removed in next major version. Use `selectedIndex` or `value` on `<kirby-segmented-control>` instead.
    */
   checked?: boolean;
-  badge?: Omit<SegmentItemBadge, 'isCustomIcon'>; // we do not expose the isCustom ...
+  badge?: Omit<SegmentItemBadge, 'isCustomIcon'>; // we do not expose the isCustomIcon for the external type
 }
 
 export interface SegmentItemInternal extends SegmentItem {
