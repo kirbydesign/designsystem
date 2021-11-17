@@ -9,8 +9,19 @@ ion-tab-button {
   --color-selected: get-color('black');
 
   --kirby-badge-position: absolute;
-  --kirby-badge-left: calc(50% + 5px);
   --kirby-badge-top: 0;
+  --kirby-badge-right: 0;
+
+  @include slotted(div kirby-badge) {
+    &.md {
+      --kirby-badge-top: -5px;
+      --kirby-badge-right: -5px;
+    }
+  }
+
+  .icon-container {
+    position: relative;
+  }
 
   @include media('>=medium') {
     flex: none;
@@ -24,12 +35,7 @@ ion-tab-button {
     font-size: font-size('s');
     flex-direction: row;
 
-    --kirby-badge-top: -5px;
-    --kirby-badge-left: auto;
-    --kirby-badge-right: -5px;
-
     .icon-container {
-      position: relative;
       margin-right: size('xxs');
     }
   }
