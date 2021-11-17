@@ -6,11 +6,22 @@ ion-tab-button {
   max-width: 168px;
   font-size: utils.font-size('xxs');
 
-  --color-selected: get-color('black');
+  --color-selected: utils.get-color('black');
 
   --kirby-badge-position: absolute;
-  --kirby-badge-left: calc(50% + 5px);
   --kirby-badge-top: 0;
+  --kirby-badge-right: 0;
+
+  @include utils.slotted(div kirby-badge) {
+    &.md {
+      --kirby-badge-top: -5px;
+      --kirby-badge-right: -5px;
+    }
+  }
+
+  .icon-container {
+    position: relative;
+  }
 
   @include utils.media('>=medium') {
     flex: none;
@@ -24,12 +35,7 @@ ion-tab-button {
     font-size: utils.font-size('s');
     flex-direction: row;
 
-    --kirby-badge-top: -5px;
-    --kirby-badge-left: auto;
-    --kirby-badge-right: -5px;
-
     .icon-container {
-      position: relative;
       margin-right: utils.size('xxs');
     }
   }
