@@ -11,6 +11,8 @@ import {
 import { ChartOptions } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
 
+import { ResizeObserverFactory, ResizeObserverService } from '../shared';
+
 import { ChartJSService } from './chart-js/chart-js.service';
 import { ChartDataset, ChartHighlightedElements, ChartType } from './chart.types';
 
@@ -40,7 +42,32 @@ export class ChartComponent implements AfterViewInit, OnChanges {
   constructor(private chartJSService: ChartJSService) {}
 
   ngAfterViewInit() {
-    this.renderChart();
+    /* 
+       A chart is not rendered until it has both a height and a width. 
+       If ChartComponent is slotted in an ionic component it will
+       not have any height or width on afterViewInit. This will cause 
+       the animation to not be played on first draw. 
+    */
+    const canvasElement = this.canvasElement.nativeElement;
+    this.whenElementHasHeightAndWidth(canvasElement).then(() => this.renderChart());
+  }
+
+  private whenElementHasHeightAndWidth(element: HTMLElement): Promise<void> {
+    const rectIs2D = ({ width, height }) => height > 0 && width > 0;
+
+    return new Promise((resolve) => {
+      const initialClientRect = element.getBoundingClientRect();
+      if (rectIs2D(initialClientRect)) resolve();
+
+      const resizeObserver = new ResizeObserverFactory().create(([resizeObserverEntry]) => {
+        if (rectIs2D(resizeObserverEntry.contentRect)) {
+          resizeObserver.unobserve(element);
+          resolve();
+        }
+      });
+
+      resizeObserver.observe(element);
+    });
   }
 
   ngOnChanges(simpleChanges: SimpleChanges) {
