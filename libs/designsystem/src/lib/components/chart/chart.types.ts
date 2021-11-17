@@ -21,7 +21,7 @@ export type datalabelOptions = {
   showMin?: boolean;
   showMax?: boolean;
   showCurrent?: boolean;
-  locale?: 'en' | 'da';
+  locale?: 'en-US' | 'da-DK';
 };
 
 export type ChartDataset = { kirbyOptions?: { highlightedElements?: number[] } } & ChartJSDataset;

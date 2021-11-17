@@ -74,27 +74,36 @@ export class ChartJSService {
     this.initializeNewChart(targetElement.nativeElement, config);
   }
 
-  private handleLocalization(options, chartPeriod, language): ChartOptions {
-    // Handle localization in graph.
-    const locale = language === 'da' ? da : enUS;
+  private getLocale(key: string) {
+    return { 'da-DK': da, 'en-US': enUS }[key];
+  }
+  private getDisplayFormats(key: string) {
+    return {
+      'da-DK': {
+        hour: 'HH:mm',
+        day: 'd MMM',
+      },
+      'en-US': {
+        hour: 'HH:mm',
+        day: 'MMM d',
+      },
+    }[key];
+  }
 
-    if (language === 'da') {
-      options.locale = 'da-DK';
-    }
+  private handleLocalization(options, chartPeriod, language): ChartOptions {
+    language = language || 'en-US';
+    // Handle localization in graph.
+    options.locale = language;
 
     // Update chart options with the given period.
-    // @todo fix type.
     const scaleX = options.scales.x as any;
     scaleX.time.unit = chartPeriod;
     scaleX.adapters = {
       date: {
-        locale,
+        locale: this.getLocale(language),
       },
     };
-    scaleX.time.displayFormats = {
-      hour: 'HH:mm',
-      day: language === 'da' ? 'd MMM' : 'MMM d',
-    };
+    scaleX.time.displayFormats = this.getDisplayFormats(language);
 
     let tooltipDateformat = '';
     switch (chartPeriod) {
@@ -107,7 +116,7 @@ export class ChartJSService {
       case dataDateSpan.sixMonths:
       case dataDateSpan.oneMonth:
       case dataDateSpan.oneYear:
-        tooltipDateformat = language === 'da' ? 'd MMM' : 'MMM d';
+        tooltipDateformat = this.getDisplayFormats(language).day;
         break;
       case dataDateSpan.fiveYears:
         tooltipDateformat = 'LLL yy';
@@ -117,7 +126,7 @@ export class ChartJSService {
     options.plugins.tooltip.callbacks.title = (tooltipItems) => {
       const date = toDate(tooltipItems[0]?.parsed?.x);
       if (date.valueOf()) {
-        return format(date, tooltipDateformat, { locale });
+        return format(date, tooltipDateformat, { locale: this.getLocale(language) });
       }
     };
 

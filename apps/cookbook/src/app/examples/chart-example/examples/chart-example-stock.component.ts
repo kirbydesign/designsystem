@@ -12,7 +12,7 @@ const config = {
   <kirby-chart 
   type="stock" 
   [data]="singleData"
-  [datalabelOptions]="{showMin: true, showMax: false, locale: 'da'}"
+  [datalabelOptions]="{showMin: true, showMax: false, locale: 'en-US'}"
   ></kirby-chart>
   `,
 };
