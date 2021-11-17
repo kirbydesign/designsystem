@@ -13,8 +13,13 @@
       [themeColor]="item.badge.themeColor"
     >
       <ng-container *ngIf="item.badge.icon; else badgeContent">
-        <kirby-icon *ngIf="!item.badge.isCustomIcon" [name]="item.badge.icon"></kirby-icon>
-        <kirby-icon *ngIf="item.badge.isCustomIcon" [customName]="item.badge.icon"></kirby-icon>
+        <kirby-icon
+          *ngIf="item.badge.isCustomIcon; else defaultIconName"
+          [customName]="item.badge.icon"
+        ></kirby-icon>
+        <ng-template #defaultIconName>
+          <kirby-icon [name]="item.badge.icon"></kirby-icon>
+        </ng-template>
       </ng-container>
       <ng-template #badgeContent>
         {{ item.badge.content }}
