@@ -48,12 +48,9 @@ export class SegmentedControlComponent {
     this._items = value || [];
     this._items.forEach((item) => {
       // We need to verify whether badges icon is custom or default, so we can check for it in the template
-      if (
+      item.badge.isCustomIcon =
         item.badge?.icon !== undefined &&
-        this.iconRegistryService.getIcon(item.badge.icon) !== undefined
-      ) {
-        item.badge.isCustomIcon = true;
-      }
+        this.iconRegistryService.getIcon(item.badge.icon) !== undefined;
     });
 
     const checkedItemIndex = this.items.findIndex((item) => item.checked);
