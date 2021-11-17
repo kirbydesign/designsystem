@@ -1,6 +1,6 @@
 import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 
-import { IconRegistryService } from '../icon';
+import { IconRegistryService } from '../icon/icon-registry.service';
 
 import { SegmentItem, SegmentItemInternal } from './segment-item';
 
