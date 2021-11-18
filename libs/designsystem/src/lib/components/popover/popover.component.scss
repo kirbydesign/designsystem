@@ -1,4 +1,4 @@
-@import '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/utils';
 
 :host {
   display: none;
@@ -7,7 +7,7 @@
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: z('popover');
+  z-index: utils.z('popover');
 }
 
 :host(.is-opening) {
@@ -21,6 +21,6 @@
 
 .wrapper {
   position: fixed;
-  margin-top: size('xxxs');
-  margin-bottom: size('xxxs');
+  margin-top: utils.size('xxxs');
+  margin-bottom: utils.size('xxxs');
 }

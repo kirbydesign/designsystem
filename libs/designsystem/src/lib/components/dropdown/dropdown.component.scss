@@ -1,7 +1,7 @@
-@import '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/utils';
 
-$dropdown-max-height: 8 * $dropdown-item-height;
-$margin-horizontal-total: 2 * size('s');
+$dropdown-max-height: 8 * utils.$dropdown-item-height;
+$margin-horizontal-total: 2 * utils.size('s');
 $min-screen-width-small: 320px;
 $min-screen-width: 375px;
 
@@ -26,17 +26,17 @@ $min-screen-width: 375px;
 
   // Only apply focus ring if pointer device can hover
   // (effectively desktop/mouse devices):
-  @include focus() {
+  @include utils.focus() {
     > button,
     > button.attention-level3 {
-      border-color: $focus-ring-color;
+      border-color: utils.$focus-ring-color;
     }
   }
 
   &.error,
   &.ng-touched.ng-invalid {
     > button {
-      border-color: get-color('danger');
+      border-color: utils.get-color('danger');
     }
   }
 }
@@ -66,12 +66,12 @@ kirby-popover {
 
 kirby-card {
   max-height: $dropdown-max-height;
-  margin-top: size('xxxs');
-  margin-bottom: size('xxxs');
+  margin-top: utils.size('xxxs');
+  margin-bottom: utils.size('xxxs');
   overflow-y: auto;
-  box-shadow: get-elevation(8);
+  box-shadow: utils.get-elevation(8);
   min-width: $min-screen-width-small - $margin-horizontal-total;
-  @include media('>=small') {
+  @include utils.media('>=small') {
     min-width: $min-screen-width - $margin-horizontal-total;
   }
   max-width: calc(100vw - #{$margin-horizontal-total});
@@ -82,7 +82,7 @@ kirby-card {
     display: none;
     opacity: 0;
     position: absolute;
-    z-index: z('dropdown');
+    z-index: utils.z('dropdown');
   }
 
   &.is-opening {
@@ -107,14 +107,14 @@ kirby-card {
   &.popout-up {
     kirby-card {
       top: 0;
-      margin-top: -#{size('xxxs')};
+      margin-top: -#{utils.size('xxxs')};
       transform: translateY(-100%);
     }
 
     &.is-open {
       > button {
         //Move button on top of card's shadow:
-        z-index: z('dropdown') + 1;
+        z-index: utils.z('dropdown') + 1;
       }
     }
   }
@@ -122,14 +122,14 @@ kirby-card {
 
 :host(.is-open) {
   & > button {
-    box-shadow: get-elevation(8);
+    box-shadow: utils.get-elevation(8);
   }
 }
 
 :host-context(kirby-calendar) {
   > button {
     border-color: transparent;
-    font-weight: font-weight('bold');
+    font-weight: utils.font-weight('bold');
     font-size: initial;
   }
 

@@ -1,18 +1,18 @@
-@import '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/utils';
 
 ion-tab-button {
   height: 100%;
   flex: 1 1 0%;
   max-width: 168px;
-  font-size: font-size('xxs');
+  font-size: utils.font-size('xxs');
 
-  --color-selected: get-color('black');
+  --color-selected: utils.get-color('black');
 
   --kirby-badge-position: absolute;
   --kirby-badge-top: 0;
   --kirby-badge-right: 0;
 
-  @include slotted(div kirby-badge) {
+  @include utils.slotted(div kirby-badge) {
     &.md {
       --kirby-badge-top: -5px;
       --kirby-badge-right: -5px;
@@ -23,26 +23,26 @@ ion-tab-button {
     position: relative;
   }
 
-  @include media('>=medium') {
+  @include utils.media('>=medium') {
     flex: none;
-    padding: 0 size('m');
-    margin-right: size('m');
+    padding: 0 utils.size('m');
+    margin-right: utils.size('m');
 
     &:last-child {
       margin-right: 0;
     }
 
-    font-size: font-size('s');
+    font-size: utils.font-size('s');
     flex-direction: row;
 
     .icon-container {
-      margin-right: size('xxs');
+      margin-right: utils.size('xxs');
     }
   }
 
-  @include media('>=large') {
-    @include not-touch {
-      padding: 0 size('xs');
+  @include utils.media('>=large') {
+    @include utils.not-touch {
+      padding: 0 utils.size('xs');
       margin-right: 0;
     }
   }

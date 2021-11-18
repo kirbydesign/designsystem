@@ -1,7 +1,7 @@
-@import 'kirby-app';
-@import 'kirby-fab-sheet';
-@import 'kirby-list';
-@import 'kirby-modal-wrapper';
-@import 'kirby-page';
-@import 'kirby-router-outlet';
-@import 'kirby-tab-bar';
+@forward 'kirby-app';
+@forward 'kirby-fab-sheet';
+@forward 'kirby-list';
+@forward 'kirby-modal-wrapper';
+@forward 'kirby-page';
+@forward 'kirby-router-outlet';
+@forward 'kirby-tab-bar';

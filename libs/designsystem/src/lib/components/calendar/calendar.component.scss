@@ -1,11 +1,11 @@
-@import '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/utils';
 $month-navigator-width: 80px;
 
 table {
   width: 100%;
   border-collapse: collapse;
   user-select: none;
-  margin-bottom: size('xxs');
+  margin-bottom: utils.size('xxs');
 }
 
 th,
@@ -14,17 +14,17 @@ td {
   padding: 0;
 
   &:first-child {
-    padding-left: size('xxs');
+    padding-left: utils.size('xxs');
   }
 
   &:last-child {
-    padding-right: size('xxs');
+    padding-right: utils.size('xxs');
   }
 }
 
 th {
   height: 50px;
-  border-bottom: 1px solid get-color('background-color');
+  border-bottom: 1px solid utils.get-color('background-color');
 }
 
 .header,
@@ -36,7 +36,7 @@ td {
 .header {
   display: flex;
   justify-content: space-between;
-  margin: size('xxs');
+  margin: utils.size('xxs');
   margin-bottom: 0;
 }
 
@@ -51,8 +51,8 @@ td {
     outline: none;
     border: none;
     cursor: pointer;
-    height: size('xl');
-    width: size('xl');
+    height: utils.size('xl');
+    width: utils.size('xl');
     padding: 0;
   }
 
@@ -66,8 +66,8 @@ td {
   user-select: none;
 
   .month {
-    font-weight: font-weight('bold');
-    margin-right: size('xxs');
+    font-weight: utils.font-weight('bold');
+    margin-right: utils.size('xxs');
   }
 }
 
@@ -78,7 +78,7 @@ td {
 
   .month-and-year {
     width: $month-navigator-width;
-    margin: 0 size('xxs');
+    margin: 0 utils.size('xxs');
     text-align: center;
   }
 
@@ -88,14 +88,14 @@ td {
 }
 
 .day {
-  $dayWidth: size('xl');
+  $dayWidth: utils.size('xl');
   display: inline-flex;
   align-items: center;
   justify-content: center;
   border-radius: $dayWidth / 2;
   width: $dayWidth;
   height: $dayWidth;
-  margin: size('xxxs') 0;
+  margin: utils.size('xxxs') 0;
 }
 
 .day.selectable,
@@ -105,17 +105,17 @@ td {
 
 .day.disabled,
 .day:not(.selectable) {
-  color: get-text-color('semi-dark');
+  color: utils.get-text-color('semi-dark');
 }
 
 .day.today {
-  color: get-color('medium-contrast');
-  background-color: get-color('medium');
+  color: utils.get-color('medium-contrast');
+  background-color: utils.get-color('medium');
 }
 
 .day.selected {
-  color: get-color('black-contrast');
-  background-color: get-color('black');
+  color: utils.get-color('black-contrast');
+  background-color: utils.get-color('black');
 }
 
 .day:not(.current-month) {
@@ -124,6 +124,6 @@ td {
 }
 
 .day.selectable:not(.selected):hover {
-  color: get-color('light-contrast');
-  background-color: get-color('light');
+  color: utils.get-color('light-contrast');
+  background-color: utils.get-color('light');
 }

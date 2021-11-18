@@ -1,9 +1,9 @@
-@import '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/utils';
 
 kirby-page-content > * {
   display: block;
 }
 
 kirby-page-content > * + * {
-  margin-top: size('m');
+  margin-top: utils.size('m');
 }

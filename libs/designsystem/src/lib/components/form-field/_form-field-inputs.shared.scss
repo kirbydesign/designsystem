@@ -1,13 +1,13 @@
-@import '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/utils';
 
 $form-field-label-height: 24px;
 $form-field-input-font-family: var(--kirby-font-family);
-$form-field-input-font-size: font-size('n');
-$form-field-input-line-height: line-height('n');
-$form-field-input-padding: size('s');
+$form-field-input-font-size: utils.font-size('n');
+$form-field-input-line-height: utils.line-height('n');
+$form-field-input-padding: utils.size('s');
 
 :host(.error) {
-  border: 1px solid get-color('danger');
+  border: 1px solid utils.get-color('danger');
 }
 
 // Ensures correct position of cloned input when Ionic scrollAssist is enabled
@@ -26,8 +26,8 @@ $form-field-input-padding: size('s');
 }
 
 :host {
-  background-color: get-color('white');
-  color: get-color('white-contrast');
+  background-color: utils.get-color('white');
+  color: utils.get-color('white-contrast');
   border: none;
   box-sizing: border-box;
   display: block;
@@ -37,8 +37,8 @@ $form-field-input-padding: size('s');
   outline: none;
   margin: 0;
   -webkit-appearance: none;
-  border-radius: size('s');
-  box-shadow: get-elevation(2);
+  border-radius: utils.size('s');
+  box-shadow: utils.get-elevation(2);
   padding: $form-field-input-padding;
   width: 100%;
 
@@ -51,18 +51,18 @@ $form-field-input-padding: size('s');
   }
 
   &:disabled {
-    background-color: get-color('light-tint');
-    color: get-text-color('semi-dark');
+    background-color: utils.get-color('light-tint');
+    color: utils.get-text-color('semi-dark');
     box-shadow: none;
   }
 
   &::placeholder {
-    color: get-text-color('semi-dark');
+    color: utils.get-text-color('semi-dark');
   }
 
   // for the browsers that has partial support, see https://caniuse.com/#feat=css-placeholder
   &::-webkit-input-placeholder,
   &::-ms-input-placeholder {
-    color: get-text-color('semi-dark');
+    color: utils.get-text-color('semi-dark');
   }
 }

@@ -1,5 +1,6 @@
+@use "sass:meta";
 @mixin _output-variable($key, $value) {
-  @if (type_of($value) == map) {
+  @if (meta.type_of($value) == map) {
     @include _output-map($value, $key);
   } @else {
     #{$key}: '#{$value}';
