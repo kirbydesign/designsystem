@@ -4,7 +4,7 @@ import { CardComponent } from '../../components/card/card.component';
 
 import { ElementAsButtonDirective } from './element-as-button.directive';
 
-fdescribe('ElementAsButtonDirective', () => {
+describe('ElementAsButtonDirective', () => {
   let spectator: SpectatorDirective<ElementAsButtonDirective>;
 
   const createDirective = createDirectiveFactory({
