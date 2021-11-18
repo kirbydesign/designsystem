@@ -52,16 +52,26 @@ export class ChartJSService {
       highlightedElements,
     } = args;
 
+    const suffix = datalabelOptions?.valueSuffix ? datalabelOptions.valueSuffix : '';
+
     // We need to modify the datasets in order to add tooltips.
     const datasets =
       datalabelOptions?.showCurrent || datalabelOptions?.showMax || datalabelOptions?.showMin
-        ? this.createDatasets(this.addTooltips(data, datalabelOptions), highlightedElements)
+        ? this.createDatasets(this.addTooltips(data, datalabelOptions, suffix), highlightedElements)
         : this.createDatasets(data, highlightedElements);
 
     const options = this.createOptionsObject({ type, customOptions, annotations });
     let config = this.createConfigurationObject(type, datasets, options, dataLabels);
 
     if (type === ChartTypes.stock) {
+      config.options.plugins.tooltip.callbacks.label = (context) => {
+        return context.formattedValue + suffix;
+      };
+
+      config.options.scales.y.ticks.callback = (value) => {
+        return value + suffix;
+      };
+
       // assuming that the first dataset controls the datespan.
       const chartPeriod = this.chartConfigService.findChartPeriod(datasets[0]);
       config.options = this.handleLocalization(
@@ -332,18 +342,20 @@ export class ChartJSService {
 
   private addTooltips(
     data: ChartDataset[] | number[],
-    datalabelOptions: datalabelOptions
+    datalabelOptions: datalabelOptions,
+    suffix: string
   ): ChartDataset[] | number[] {
     if (isNumberArray(data)) {
       throw Error("Currently it's impossible to add tooltips to non ScatterDataPoint datasets");
     }
+
     data.map((set) => {
       if (datalabelOptions.showMin) {
         const { value, pointer } = this.locateValueIndexInDataset(set, 'y', 'low');
         set.data[pointer] = {
           ...(set.data[pointer] as ScatterDataPoint),
           datalabel: {
-            value,
+            value: value + suffix,
             position: 'bottom',
           },
         } as ScatterDataPoint;
@@ -353,7 +365,7 @@ export class ChartJSService {
         set.data[pointer] = {
           ...(set.data[pointer] as ScatterDataPoint),
           datalabel: {
-            value,
+            value: value + suffix,
             position: 'top',
           },
         } as ScatterDataPoint;
@@ -364,7 +376,7 @@ export class ChartJSService {
           ...(set.data[pointer] as ScatterDataPoint),
           value,
           datalabel: {
-            value,
+            value: value + suffix,
             position: 'right',
           },
         } as ScatterDataPoint;
