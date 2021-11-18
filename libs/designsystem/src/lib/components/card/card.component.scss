@@ -34,7 +34,7 @@
 
   &[role='button'] {
     cursor: pointer;
-    outline-offset: size('xxxxs');
+    outline-offset: utils.size('xxxxs');
   }
 }
 
