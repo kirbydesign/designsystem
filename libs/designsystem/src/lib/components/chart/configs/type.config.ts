@@ -199,17 +199,23 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
             size: 15,
             weight: 'bold',
           },
-          filter: function(tooltipItem) {
-            return tooltipItem.datasetIndex === 0;
-          },
+          // filter: function(tooltipItem) {
+          //   return tooltipItem.datasetIndex === 0;
+          // },
           callbacks: {
-            label: (context) => {
-              return context.formattedValue;
-            },
+            // label: (context) => {
+            //   return context.formattedValue;
+            // },
             // Title is overridden in handleLocalization().
             // title: () => {},
           },
         },
+        crosshair: {
+          line: {
+            color: 'red',
+          },
+        },
+
         datalabels: {
           backgroundColor: (context: Context) => context.dataset.borderColor as Color,
           color: getThemeColorHexString('white'),
