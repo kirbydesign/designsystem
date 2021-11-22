@@ -331,6 +331,10 @@ describe('ListComponent with items declared in markup', () => {
       </kirby-list>`);
   });
 
+  it('should create', () => {
+    expect(spectator.component).toBeTruthy();
+  });
+
   it('should render items in list', () => {
     const items = spectator.queryHostAll('kirby-item');
 
