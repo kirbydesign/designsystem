@@ -70,6 +70,7 @@ import { ToggleButtonModule } from './components/toggle-button/toggle-button.mod
 import { ToggleComponent } from './components/toggle/toggle.component';
 import { KirbyBadge as BadgeComponent } from './components/web-component-proxies.component';
 import { customElementsInitializer } from './custom-elements-initializer';
+import { ElementAsButtonDirective } from './directives/element-as-button/element-as-button.directive';
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
 import { ModalRouterLinkDirective } from './directives/modal-router-link/modal-router-link.directive';
 import { ThemeColorDirective } from './directives/theme-color/theme-color.directive';
@@ -117,6 +118,7 @@ const exportedDeclarations = [
   RadioComponent,
   RadioGroupComponent,
   RangeComponent,
+  ElementAsButtonDirective,
 ];
 
 const declarations = [

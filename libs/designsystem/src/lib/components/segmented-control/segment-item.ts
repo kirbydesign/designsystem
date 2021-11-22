@@ -1,5 +1,12 @@
 import { ThemeColor } from '@kirbydesign/core';
 
+type SegmentItemBadge = {
+  content?: string;
+  icon?: string;
+  isCustomIcon?: boolean;
+  description?: string;
+  themeColor: ThemeColor;
+};
 export interface SegmentItem {
   id: string;
   text: string;
@@ -7,10 +14,9 @@ export interface SegmentItem {
    * @deprecated Will be removed in next major version. Use `selectedIndex` or `value` on `<kirby-segmented-control>` instead.
    */
   checked?: boolean;
-  badge?: {
-    content?: string;
-    icon?: string;
-    description?: string;
-    themeColor: ThemeColor;
-  };
+  badge?: Omit<SegmentItemBadge, 'isCustomIcon'>; // we do not expose the isCustomIcon for the external type
+}
+
+export interface SegmentItemInternal extends SegmentItem {
+  badge?: SegmentItemBadge;
 }
