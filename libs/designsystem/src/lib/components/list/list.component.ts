@@ -43,19 +43,37 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   @ViewChild('list', { static: true }) list: any;
   @ViewChild(InfiniteScrollDirective) scrollDirective: InfiniteScrollDirective;
 
+  /**
+   * Provide items for the list to render. Items must be provided in the order you expect them to be rendered.
+   */
   @Input()
   items: any[] = [];
 
   @Input() getItemColor: (item: any) => ThemeColor;
 
+  /**
+   * Callback to determine name of section. Sections will be ordered alphabetically.
+   */
   @Input() getSectionName: (item: any) => string;
 
+  /**
+   * Callback that defines how to track changes for items in the iterable.
+   */
   @Input() trackBy: TrackByFunction<any>;
 
+  /**
+   * Text to display when no more items can be loaded (used for "on demand"-loading).
+   */
   @Input() noMoreItemsText: string;
 
+  /**
+   * Determines if dividers (bottom-border on list items) should be shown or not.
+   */
   @Input() showDivider = false;
 
+  /**
+   * Determines if list row text should turn bold on selection
+   */
   @Input() markSelectedRow = false;
 
   /**
@@ -87,10 +105,21 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
    */
   @Input() isLoadOnDemandEnabled: boolean;
 
+  /**
+   * Emitting event when more items are to be loaded.
+   */
   @Output() loadOnDemand = new EventEmitter<LoadOnDemandEvent>();
 
+  /**
+   * Determines if list items should have swipe actions or not
+   * - the order of swipe actions is used to determine edge actions,
+   * as well as their order of appearance on the screen.
+   */
   @Input() swipeActions: ListSwipeAction[] = [];
 
+  /**
+   * Emitting event when an item is selected (tapped on mobile, clicked on web)
+   */
   @Output() itemSelect = new EventEmitter<any>();
 
   @ContentChildren(ItemComponent)
@@ -105,6 +134,10 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   @ContentChild(ListFooterDirective, { static: false, read: TemplateRef })
   footerTemplate: TemplateRef<any>;
 
+  /**
+   * The first element that matches ListItemDirective.
+   * As a structural directive it unfolds into a template. This is a reference to that.
+   */
   @ContentChild(ListItemTemplateDirective, { static: true, read: TemplateRef })
   itemTemplate: TemplateRef<any>;
 
