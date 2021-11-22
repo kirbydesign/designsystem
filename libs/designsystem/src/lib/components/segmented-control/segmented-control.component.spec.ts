@@ -233,7 +233,6 @@ describe('SegmentedControl with Badge', () => {
       .componentInstance;
 
     expect(iconComponent.name).toBe(item.badge.icon);
-    expect(iconComponent.customName).toBe(item.badge.icon);
   });
 
   it('should render badge with icon if both icon and content is provided', () => {

@@ -1,11 +1,11 @@
 import {
   Component,
-  OnInit,
-  Input,
   ElementRef,
-  Renderer2,
-  OnDestroy,
   HostBinding,
+  Input,
+  OnDestroy,
+  OnInit,
+  Renderer2,
 } from '@angular/core';
 
 import { ResizeObserverService } from '../shared/resize-observer/resize-observer.service';
