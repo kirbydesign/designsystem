@@ -169,24 +169,18 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
         point: {
           hitRadius: 20,
           radius: 0,
-          hoverRadius: 8,
-          hoverBackgroundColor: getThemeColorHexString('primary'),
+          hoverRadius: 0,
           hoverBorderWidth: 0,
         },
       },
       normalized: true,
-      hover: {
-        axis: 'xy',
-        mode: 'nearest',
-        intersect: false,
-      },
       plugins: {
         tooltip: {
-          mode: 'nearest',
+          mode: 'index',
           intersect: false,
           caretSize: 1,
           caretPadding: 12,
-          displayColors: false,
+          displayColors: true,
           backgroundColor: getThemeColorHexString('semi-light'),
           padding: 8,
           titleColor: 'black',
@@ -213,6 +207,9 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
         crosshair: {
           line: {
             color: 'red',
+          },
+          sync: {
+            enabled: false,
           },
         },
 
