@@ -15,14 +15,6 @@ $item-height: size('xxxl');
   padding: 0;
 }
 
-.viewport {
-  overflow-y: auto;
-}
-
-.item-wrapper {
-  min-height: #{map-get($item-heights, 'm')};
-}
-
 ion-list-header {
   background-color: get-color('white');
   border-bottom: 1px solid $divider-color;
@@ -158,14 +150,6 @@ ion-item-options[side='end'] {
   .list-items {
     box-shadow: $shadow;
     border-radius: $border-radius;
-  }
-
-  .virtual-group {
-    margin-top: size('m');
-  }
-
-  .section-header {
-    overflow: hidden;
   }
 
   .footer {
