@@ -1,6 +1,7 @@
 import { ElementRef, Injectable } from '@angular/core';
 import { ActiveElement, ChartConfiguration, ChartOptions, ScatterDataPoint } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
+import { ChartDataDateSpan } from 'libs/designsystem/src';
 
 import { mergeDeepAll } from '../../../helpers/merge-deep';
 import {
@@ -8,7 +9,6 @@ import {
   ChartDataset,
   ChartHighlightedElements,
   ChartType,
-  ChartTypes,
   isNumberArray,
 } from '../chart.types';
 import { ChartConfigService } from '../configs/chart-config.service';
@@ -48,26 +48,17 @@ export class ChartJSService {
 
     const datasets = this.createDatasets(data, highlightedElements, ChartDataLabelOptions);
 
-    const options = this.createOptionsObject({ type, customOptions, annotations });
+    // The first dataset controls the datespan.
+    const chartPeriod = this.chartConfigService.findChartPeriod(datasets[0]);
+
+    const options = this.createOptionsObject({
+      type,
+      customOptions,
+      annotations,
+      chartPeriod,
+      chartDataLabelsOptions: ChartDataLabelOptions,
+    });
     let config = this.createConfigurationObject(type, datasets, options, dataLabels);
-
-    if (type === ChartTypes.stock) {
-      config.options.plugins.tooltip.callbacks.label = (context) => {
-        return context.formattedValue + (ChartDataLabelOptions.valueSuffix || '');
-      };
-
-      config.options.scales.y.ticks.callback = (value) => {
-        return value + (ChartDataLabelOptions.valueSuffix || '');
-      };
-
-      // The first dataset controls the datespan.
-      const chartPeriod = this.chartConfigService.findChartPeriod(datasets[0]);
-      config.options = this.i18nService.handleLocalization(
-        config.options,
-        chartPeriod,
-        ChartDataLabelOptions.locale
-      );
-    }
 
     this.initializeNewChart(targetElement.nativeElement, config);
   }
@@ -199,8 +190,10 @@ export class ChartJSService {
     type: ChartType;
     customOptions?: ChartOptions;
     annotations?: AnnotationOptions[];
+    chartPeriod?: ChartDataDateSpan;
+    chartDataLabelsOptions?: ChartDataLabelOptions;
   }): ChartOptions {
-    const { type, customOptions, annotations } = args;
+    const { type, customOptions, annotations, chartPeriod, chartDataLabelsOptions } = args;
 
     const typeConfig = this.chartConfigService.getTypeConfig(type);
     const typeConfigOptions = typeConfig?.options;
@@ -212,6 +205,23 @@ export class ChartJSService {
       customOptions,
       annotationPluginOptions
     );
+
+    if (type === 'stock') {
+      options.plugins.tooltip.callbacks.label = (context) => {
+        return context.formattedValue + (chartDataLabelsOptions.valueSuffix || '');
+      };
+
+      options.scales.y.ticks.callback = (value) => {
+        return value + (chartDataLabelsOptions.valueSuffix || '');
+      };
+
+      options = this.i18nService.handleLocalization(
+        options,
+        chartPeriod,
+        chartDataLabelsOptions.locale
+      );
+    }
+
     return this.applyInteractionFunctionsExtensions(options);
   }
 
@@ -227,7 +237,7 @@ export class ChartJSService {
     // to make it optional for consumer.
     // However the stock chart, shouldn't have any custom datalabels supplied.
     // This type of chart uses `Time Cartesian Axis` and generates it's own labels.
-    const noLabelsForStockType = type !== ChartTypes.stock;
+    const noLabelsForStockType = type !== 'stock';
     const labels =
       !dataLabels && noLabelsForStockType ? this.createBlankLabels(datasets) : dataLabels;
 

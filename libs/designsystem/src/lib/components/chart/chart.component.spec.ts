@@ -2,7 +2,6 @@ import { fakeAsync, tick } from '@angular/core/testing';
 import { createHostFactory, Spectator } from '@ngneat/spectator';
 import { MockProvider } from 'ng-mocks';
 
-import { ChartTypes } from '.';
 import { ChartJSService } from './chart-js/chart-js.service';
 import { ChartComponent } from './chart.component';
 

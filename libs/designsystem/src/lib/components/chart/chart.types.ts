@@ -2,13 +2,6 @@ import { ChartDataset as ChartJSDataset, ChartOptions, ChartType as ChartJSType 
 
 export type ChartHighlightedElements = number[][];
 
-export enum ChartTypes {
-  column = 'column',
-  bar = 'bar',
-  line = 'line',
-  stock = 'stock',
-}
-
 export type ChartType = 'column' | 'bar' | 'line' | 'stock';
 
 export type ChartTypeConfig = { type: ChartJSType; options?: ChartOptions };

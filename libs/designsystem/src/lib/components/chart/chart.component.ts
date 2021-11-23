@@ -19,7 +19,6 @@ import {
   ChartDataset,
   ChartHighlightedElements,
   ChartType,
-  ChartTypes,
 } from './chart.types';
 
 @Component({

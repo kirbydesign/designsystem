@@ -4,7 +4,6 @@ import { Chart, ChartType as ChartJSType } from 'chart.js';
 import { AnnotationOptions, AnnotationTypeRegistry } from 'chartjs-plugin-annotation';
 import { MockProvider } from 'ng-mocks';
 
-import { ChartTypes } from '../..';
 import { deepCopy } from '../../../helpers/deep-copy';
 import { ChartDataset, ChartType, ChartTypesConfig } from '../chart.types';
 import { ChartHighlightedElements } from '../chart.types';
@@ -688,7 +687,7 @@ describe('ChartJSService', () => {
         {
           indexAxis: 'x',
         },
-        ChartTypes[chartType]
+        chartType
       );
       chartJSService['chart'].update();
 
