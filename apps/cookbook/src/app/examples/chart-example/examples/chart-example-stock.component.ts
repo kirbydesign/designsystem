@@ -12,7 +12,7 @@ const config = {
   <kirby-chart 
   type="stock" 
   [data]="singleData"
-  [ChartDataLabelOptions]="ChartDataLabelOptions"
+  [dataLabelOptions]="options"
   ></kirby-chart>
   `,
 };
@@ -24,11 +24,10 @@ const config = {
 export class ChartExampleStockComponent {
   template: string = config.template;
 
-  ChartDataLabelOptions: ChartDataLabelOptions = {
+  options: ChartDataLabelOptions = {
     showMin: true,
-    showMax: false,
+    showMax: true,
     locale: 'en-US',
-    valueSuffix: '%',
   };
 
   singleData = [

@@ -46,29 +46,18 @@ export class ChartJSService {
       highlightedElements,
     } = args;
 
-    const suffix = ChartDataLabelOptions?.valueSuffix ? ChartDataLabelOptions.valueSuffix : '';
-
-    // We need to modify the datasets in order to add tooltips.
-    const datasets =
-      ChartDataLabelOptions?.showCurrent ||
-      ChartDataLabelOptions?.showMax ||
-      ChartDataLabelOptions?.showMin
-        ? this.createDatasets(
-            this.addTooltips(data, ChartDataLabelOptions, suffix),
-            highlightedElements
-          )
-        : this.createDatasets(data, highlightedElements);
+    const datasets = this.createDatasets(data, highlightedElements, ChartDataLabelOptions);
 
     const options = this.createOptionsObject({ type, customOptions, annotations });
     let config = this.createConfigurationObject(type, datasets, options, dataLabels);
 
     if (type === ChartTypes.stock) {
       config.options.plugins.tooltip.callbacks.label = (context) => {
-        return context.formattedValue + suffix;
+        return context.formattedValue + (ChartDataLabelOptions.valueSuffix || '');
       };
 
       config.options.scales.y.ticks.callback = (value) => {
-        return value + suffix;
+        return value + (ChartDataLabelOptions.valueSuffix || '');
       };
 
       // The first dataset controls the datespan.
@@ -271,10 +260,14 @@ export class ChartJSService {
   }
   private createDatasets(
     data: ChartDataset[] | number[],
-    highlightedElements?: ChartHighlightedElements
+    highlightedElements?: ChartHighlightedElements,
+    datalabelOptions?: ChartDataLabelOptions
   ): ChartDataset[] {
+    // We need to modify the datasets in order to add tooltips.
+    if (datalabelOptions?.showCurrent || datalabelOptions?.showMax || datalabelOptions?.showMin) {
+      data = this.addTooltips(data, datalabelOptions);
+    }
     let datasets = isNumberArray(data) ? [{ data }] : data;
-
     if (highlightedElements) this.addHighlightedElementsToDatasets(highlightedElements, datasets);
 
     return datasets;
@@ -282,41 +275,40 @@ export class ChartJSService {
 
   private addTooltips(
     data: ChartDataset[] | number[],
-    ChartDataLabelOptions: ChartDataLabelOptions,
-    suffix: string
+    chartDataLabelOptions: ChartDataLabelOptions
   ): ChartDataset[] | number[] {
     if (isNumberArray(data)) {
       throw Error("Currently it's impossible to add tooltips to non ScatterDataPoint datasets");
     }
 
     data.map((set) => {
-      if (ChartDataLabelOptions.showMin) {
+      if (chartDataLabelOptions.showMin) {
         const { value, pointer } = this.locateValueIndexInDataset(set, 'y', 'low');
         set.data[pointer] = {
           ...(set.data[pointer] as ScatterDataPoint),
           datalabel: {
-            value: value + suffix,
+            value: value + (chartDataLabelOptions.valueSuffix || ''),
             position: 'bottom',
           },
         } as ScatterDataPoint;
       }
-      if (ChartDataLabelOptions.showMax) {
+      if (chartDataLabelOptions.showMax) {
         const { value, pointer } = this.locateValueIndexInDataset(set, 'y', 'high');
         set.data[pointer] = {
           ...(set.data[pointer] as ScatterDataPoint),
           datalabel: {
-            value: value + suffix,
+            value: value + (chartDataLabelOptions.valueSuffix || ''),
             position: 'top',
           },
         } as ScatterDataPoint;
       }
-      if (ChartDataLabelOptions.showCurrent) {
+      if (chartDataLabelOptions.showCurrent) {
         const { value, pointer } = this.locateValueIndexInDataset(set, 'x', 'high');
         set.data[pointer] = {
           ...(set.data[pointer] as ScatterDataPoint),
           value,
           datalabel: {
-            value: value + suffix,
+            value: value + (chartDataLabelOptions.valueSuffix || ''),
             position: 'right',
           },
         } as ScatterDataPoint;

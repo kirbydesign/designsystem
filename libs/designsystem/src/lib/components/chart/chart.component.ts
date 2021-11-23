@@ -33,7 +33,7 @@ export class ChartComponent implements AfterViewInit, OnChanges {
   @Input() data: ChartDataset[] | number[];
   @Input() dataLabels?: string[] | string[][];
   @Input() customOptions?: ChartOptions;
-  @Input() ChartDataLabelOptions?: ChartDataLabelOptions;
+  @Input() dataLabelOptions?: ChartDataLabelOptions;
   @Input() annotations?: AnnotationOptions[];
   @Input() highlightedElements?: ChartHighlightedElements;
 
@@ -106,7 +106,7 @@ export class ChartComponent implements AfterViewInit, OnChanges {
       dataLabels: this.dataLabels,
       customOptions: this.customOptions,
       annotations: this.annotations,
-      ChartDataLabelOptions: this.ChartDataLabelOptions,
+      ChartDataLabelOptions: this.dataLabelOptions,
       highlightedElements: this.highlightedElements,
     });
   }
