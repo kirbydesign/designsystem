@@ -11,7 +11,6 @@
       "highcharts/modules/annotations": "highcharts",
       "highcharts/highstock": "highcharts/highstock",
       "@ionic/angular": "ionic",
-      "ngx-ui-scroll": "ngx-ui-scroll",
       "inputmask/lib/inputmask": "inputmask"
     }
   },
@@ -24,7 +23,6 @@
     "date-fns",
     "date-fns-tz",
     "@fontsource/roboto",
-    "inputmask",
-    "ngx-ui-scroll"
+    "inputmask"
   ]
 }

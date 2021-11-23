@@ -20,7 +20,6 @@ import { GridLayoutExamplesModule } from './grid-layout-example/grid-layout-exam
 import { ItemExampleModule } from './item-example/item-example.module';
 import { LinkExampleModule } from './link-example/link-example.module';
 import { ListExamplesModule } from './list-example/list-example.module';
-import { ListVirtualScrollExamplesModule } from './list-virtual-scroll-example/list-virtual-scroll-example.module';
 import { ModalExampleModule } from './modal-example/modal-example.module';
 import { ProgressCircleExampleModule } from './progress-circle-example/progress-circle-example.module';
 import { RadioExampleModule } from './radio-example/radio-example.module';
@@ -33,7 +32,6 @@ const IMPORTS = [
   FormFieldExamplesModule,
   ItemExampleModule,
   ListExamplesModule,
-  ListVirtualScrollExamplesModule,
   DropdownExampleModule,
   SegmentedControlExampleModule,
   ChartDeprecatedExampleModule,
