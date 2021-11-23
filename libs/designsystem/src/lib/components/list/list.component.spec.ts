@@ -54,7 +54,7 @@ const TEST_ITEMS: any[] = [
   },
 ];
 
-describe('ListComponent with array of items', () => {
+describe("ListComponent using 'items' input property", () => {
   let spectator: Spectator<ListComponent>;
   let component: ListComponent;
 
