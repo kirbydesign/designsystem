@@ -1,13 +1,9 @@
 import { ElementRef, Injectable } from '@angular/core';
 import { ActiveElement, ChartConfiguration, ChartOptions, ScatterDataPoint } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
-import { format, toDate } from 'date-fns';
-import da from 'date-fns/locale/da';
-import enUS from 'date-fns/locale/en-US';
 
 import { mergeDeepAll } from '../../../helpers/merge-deep';
 import {
-  ChartDataDateSpan,
   ChartDataLabelOptions,
   ChartDataset,
   ChartHighlightedElements,
@@ -17,13 +13,17 @@ import {
 } from '../chart.types';
 import { ChartConfigService } from '../configs/chart-config.service';
 
+import { ChartI18nService } from './chart-i18n.service';
 import { Chart } from './configured-chart-js';
 
 @Injectable()
 export class ChartJSService {
   private chart: Chart;
 
-  constructor(private chartConfigService: ChartConfigService) {}
+  constructor(
+    private chartConfigService: ChartConfigService,
+    private i18nService: ChartI18nService
+  ) {}
 
   public renderChart(args: {
     targetElement: ElementRef<HTMLCanvasElement>;
@@ -73,7 +73,7 @@ export class ChartJSService {
 
       // The first dataset controls the datespan.
       const chartPeriod = this.chartConfigService.findChartPeriod(datasets[0]);
-      config.options = this.handleLocalization(
+      config.options = this.i18nService.handleLocalization(
         config.options,
         chartPeriod,
         ChartDataLabelOptions.locale
@@ -81,69 +81,6 @@ export class ChartJSService {
     }
 
     this.initializeNewChart(targetElement.nativeElement, config);
-  }
-
-  private getLocale(key: string) {
-    return { 'da-DK': da, 'en-US': enUS }[key];
-  }
-  private getDisplayFormats(key: string) {
-    return {
-      'da-DK': {
-        hour: 'HH:mm',
-        day: 'd MMM',
-      },
-      'en-US': {
-        hour: 'HH:mm',
-        day: 'MMM d',
-      },
-    }[key];
-  }
-
-  private handleLocalization(
-    options,
-    chartPeriod: ChartDataDateSpan,
-    language: string
-  ): ChartOptions {
-    language = language || 'en-US';
-    // Handle localization in graph.
-    options.locale = language;
-
-    // Update chart options with the given period.
-    const scaleX = options.scales.x;
-    scaleX.time.unit = chartPeriod;
-    scaleX.adapters = {
-      date: {
-        locale: this.getLocale(language),
-      },
-    };
-    scaleX.time.displayFormats = this.getDisplayFormats(language);
-
-    let tooltipDateformat = '';
-    switch (chartPeriod) {
-      case ChartDataDateSpan.oneDay:
-        tooltipDateformat = 'HH:mm';
-        break;
-      case ChartDataDateSpan.oneWeek:
-      case ChartDataDateSpan.oneMonth:
-      case ChartDataDateSpan.threeMonths:
-      case ChartDataDateSpan.sixMonths:
-      case ChartDataDateSpan.oneMonth:
-      case ChartDataDateSpan.oneYear:
-        tooltipDateformat = this.getDisplayFormats(language).day;
-        break;
-      case ChartDataDateSpan.fiveYears:
-        tooltipDateformat = 'LLL yy';
-        break;
-    }
-
-    options.plugins.tooltip.callbacks.title = (tooltipItems) => {
-      const date = toDate(tooltipItems[0]?.parsed?.x);
-      if (date.valueOf()) {
-        return format(date, tooltipDateformat, { locale: this.getLocale(language) });
-      }
-    };
-
-    return options;
   }
 
   public redrawChart() {
