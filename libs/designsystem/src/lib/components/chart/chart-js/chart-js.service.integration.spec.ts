@@ -32,22 +32,22 @@ describe('ChartJSService with ChartConfigService', () => {
       it('should use correct ChartJS type', () => {
         chartJSService.renderChart({
           targetElement: canvasElement,
-          type: ChartTypes.column,
+          type: 'column',
           data: [1, 2, 3],
         });
         const chart = chartJSService['chart'];
 
-        /* Our 'column' chart is a chart.js ChartTypes.bar type chart 
+        /* Our 'column' chart is a chart.js 'bar' type chart 
         with it's indexAxis set to y; therefore testing if 
         bar is being used. */
-        expect(chart.config.type).toBe(ChartTypes.bar);
+        expect(chart.config.type).toBe('bar');
       });
 
       describe('and no custom options are passed', () => {
         beforeEach(() => {
           chartJSService.renderChart({
             targetElement: canvasElement,
-            type: ChartTypes.column,
+            type: 'column',
             data: [1, 2, 3],
             dataLabels: ['one', 'two', 'three'],
           });
@@ -94,7 +94,7 @@ describe('ChartJSService with ChartConfigService', () => {
         beforeEach(() => {
           chartJSService.renderChart({
             targetElement: canvasElement,
-            type: ChartTypes.column,
+            type: 'column',
             data: [1, 2, 3],
             dataLabels: ['one', 'two', 'three'],
             customOptions: {
@@ -114,12 +114,12 @@ describe('ChartJSService with ChartConfigService', () => {
       it('should use correct ChartJS type', () => {
         chartJSService.renderChart({
           targetElement: canvasElement,
-          type: ChartTypes.line,
+          type: 'line',
           data: [1, 2, 3],
         });
         const chart = chartJSService['chart'];
 
-        expect(chart.config.type).toBe(ChartTypes.line);
+        expect(chart.config.type).toBe('line');
       });
 
       describe('and no custom options are passed', () => {
@@ -128,7 +128,7 @@ describe('ChartJSService with ChartConfigService', () => {
         beforeEach(() => {
           chartJSService.renderChart({
             targetElement: canvasElement,
-            type: ChartTypes.line,
+            type: 'line',
             data: [1, 2, 3],
             dataLabels: ['one', 'two', 'three'],
           });
@@ -193,19 +193,19 @@ describe('ChartJSService with ChartConfigService', () => {
       it('should use correct ChartJS type', () => {
         chartJSService.renderChart({
           targetElement: canvasElement,
-          type: ChartTypes.bar,
+          type: 'bar',
           data: [1, 2, 3],
         });
         const chart = chartJSService['chart'];
 
-        expect(chart.config.type).toBe(ChartTypes.bar);
+        expect(chart.config.type).toBe('bar');
       });
 
       describe('and no custom options are passed', () => {
         beforeEach(() => {
           chartJSService.renderChart({
             targetElement: canvasElement,
-            type: ChartTypes.bar,
+            type: 'bar',
             data: [1, 2, 3],
             dataLabels: ['one', 'two', 'three'],
           });
@@ -252,7 +252,7 @@ describe('ChartJSService with ChartConfigService', () => {
         beforeEach(() => {
           chartJSService.renderChart({
             targetElement: canvasElement,
-            type: ChartTypes.bar,
+            type: 'bar',
             data: [1, 2, 3],
             dataLabels: ['one', 'two', 'three'],
             customOptions: {

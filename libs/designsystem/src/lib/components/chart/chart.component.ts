@@ -29,7 +29,7 @@ import {
   providers: [ChartJSService],
 })
 export class ChartComponent implements AfterViewInit, OnChanges {
-  @Input() type: ChartType = ChartTypes.column;
+  @Input() type: ChartType = 'column';
   @Input() data: ChartDataset[] | number[];
   @Input() dataLabels?: string[] | string[][];
   @Input() customOptions?: ChartOptions;

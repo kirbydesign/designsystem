@@ -9,7 +9,7 @@ export enum ChartTypes {
   stock = 'stock',
 }
 
-export type ChartType = ChartTypes.column | ChartTypes.bar | ChartTypes.line | ChartTypes.stock;
+export type ChartType = 'column' | 'bar' | 'line' | 'stock';
 
 export type ChartTypeConfig = { type: ChartJSType; options?: ChartOptions };
 

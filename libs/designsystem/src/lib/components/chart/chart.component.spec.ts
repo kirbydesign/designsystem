@@ -137,7 +137,7 @@ describe('ChartComponent', () => {
         spectator.setInput({
           data: [1, 2, 3],
           dataLabels: ['one', 'two', 'three'],
-          type: ChartTypes.bar,
+          type: 'bar',
           customOptions: { onClick: () => console.log('testing') },
           annotations: [{ type: 'line' }],
           highlightedElements: [[0, 1]],
@@ -154,7 +154,7 @@ describe('ChartComponent', () => {
         spectator.setInput({
           data: [1, 2, 3],
           dataLabels: ['one', 'two', 'three'],
-          type: ChartTypes.bar,
+          type: 'bar',
           customOptions: { onClick: () => console.log('testing') },
         });
 
