@@ -61,6 +61,11 @@
 <p>The line chart visualizes data from different categories as a line along the x-axis.</p>
 <p>To render a line chart set <code>type</code> to <code>'stock'</code>.</p>
 <p>
+  The labels of the x-axis is controlled by the timespan of the first dataset. If you i.e. give data
+  that spans less than a day the x-axis will indicate hours or if you give data that spans a month
+  the x-axis will indicate days and so forth.
+</p>
+<p>
   <kirby-card [mode]="_cardMode" [hasPadding]="_cardHasPadding">
     <cookbook-example-viewer [html]="stockExample.template">
       <cookbook-chart-example-stock #stockExample></cookbook-chart-example-stock>

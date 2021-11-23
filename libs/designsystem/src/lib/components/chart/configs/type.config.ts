@@ -1,8 +1,6 @@
 import { Color, Point } from 'chart.js';
 import { Context } from 'chartjs-plugin-datalabels';
 import { Align } from 'chartjs-plugin-datalabels/types/options';
-import { format, toDate } from 'date-fns-tz';
-import { da, he } from 'date-fns/locale';
 
 import { ColorHelper, DesignTokenHelper } from '../../../helpers';
 import { ChartTypesConfig } from '../chart.types';
@@ -117,7 +115,6 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
       // locale is overridden in handleLocalization().
       locale: 'en-US',
       responsive: true,
-      maintainAspectRatio: false,
       animation: {
         duration: 0,
       },
@@ -143,7 +140,7 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
             source: 'data',
             autoSkipPadding: 40,
             font: {
-              size: 11,
+              size: parseInt(fontSize('xs')),
             },
           },
         },
@@ -187,22 +184,13 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
           bodyColor: 'black',
           titleFont: {
             weight: 'normal',
-            size: 12,
+            size: parseInt(fontSize('xs')),
           },
           bodyFont: {
-            size: 15,
+            size: parseInt(fontSize('n')),
             weight: 'bold',
           },
-          // filter: function(tooltipItem) {
-          //   return tooltipItem.datasetIndex === 0;
-          // },
-          callbacks: {
-            // label: (context) => {
-            //   return context.formattedValue;
-            // },
-            // Title is overridden in handleLocalization().
-            // title: () => {},
-          },
+          callbacks: {},
         },
         crosshair: {
           line: {
@@ -219,7 +207,7 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
           borderRadius: 3,
           font: {
             lineHeight: 1,
-            size: 11,
+            size: parseInt(fontSize('xs')),
           },
           padding: {
             top: 6,

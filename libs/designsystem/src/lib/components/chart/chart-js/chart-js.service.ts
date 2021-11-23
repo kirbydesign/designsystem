@@ -1,11 +1,5 @@
 import { ElementRef, Injectable } from '@angular/core';
-import {
-  ActiveElement,
-  CartesianScaleOptions,
-  ChartConfiguration,
-  ChartOptions,
-  ScatterDataPoint,
-} from 'chart.js';
+import { ActiveElement, ChartConfiguration, ChartOptions, ScatterDataPoint } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
 import { format, toDate } from 'date-fns';
 import da from 'date-fns/locale/da';
@@ -72,7 +66,7 @@ export class ChartJSService {
         return value + suffix;
       };
 
-      // assuming that the first dataset controls the datespan.
+      // The first dataset controls the datespan.
       const chartPeriod = this.chartConfigService.findChartPeriod(datasets[0]);
       config.options = this.handleLocalization(
         config.options,
@@ -100,13 +94,13 @@ export class ChartJSService {
     }[key];
   }
 
-  private handleLocalization(options, chartPeriod, language): ChartOptions {
+  private handleLocalization(options, chartPeriod: dataDateSpan, language: string): ChartOptions {
     language = language || 'en-US';
     // Handle localization in graph.
     options.locale = language;
 
     // Update chart options with the given period.
-    const scaleX = options.scales.x as any;
+    const scaleX = options.scales.x;
     scaleX.time.unit = chartPeriod;
     scaleX.adapters = {
       date: {
@@ -391,8 +385,8 @@ export class ChartJSService {
     axis: string,
     direction: 'low' | 'high'
   ): { value: number; pointer: number } {
-    let pointer;
-    let value;
+    let pointer: number;
+    let value: number;
     dataset.data.forEach((datapoint, index) => {
       if (direction == 'low' && (!value || datapoint[axis] < value)) {
         value = datapoint['y'];
