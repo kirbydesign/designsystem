@@ -324,10 +324,10 @@ describe('ListComponent with items declared in markup', () => {
   beforeEach(() => {
     spectator = createHost<ListComponent>(`
       <kirby-list>
-        <kirby-item><h3>Test Item</h3></kirby-item>
-        <kirby-item><h3>Test Item</h3></kirby-item>
-        <kirby-item><h3>Test Item</h3></kirby-item>
-        <kirby-item><h3>Test Item</h3></kirby-item>
+        <kirby-item>Test Item</kirby-item>
+        <kirby-item>Test Item</kirby-item>
+        <kirby-item>Test Item</kirby-item>
+        <kirby-item>Test Item</kirby-item>
       </kirby-list>`);
   });
 
