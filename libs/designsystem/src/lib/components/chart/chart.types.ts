@@ -31,7 +31,7 @@ export function isNumberArray(value: any): value is number[] {
   return Array.isArray(value) && value.every((item) => typeof item === 'number');
 }
 
-export enum dataDateSpan {
+export enum ChartDataDateSpan {
   oneDay = 'hour',
   oneWeek = 'day',
   oneMonth = 'day',

@@ -7,11 +7,11 @@ import enUS from 'date-fns/locale/en-US';
 
 import { mergeDeepAll } from '../../../helpers/merge-deep';
 import {
+  ChartDataDateSpan,
   ChartDataset,
   ChartHighlightedElements,
   ChartType,
   ChartTypes,
-  dataDateSpan,
   datalabelOptions,
   isNumberArray,
 } from '../chart.types';
@@ -94,7 +94,11 @@ export class ChartJSService {
     }[key];
   }
 
-  private handleLocalization(options, chartPeriod: dataDateSpan, language: string): ChartOptions {
+  private handleLocalization(
+    options,
+    chartPeriod: ChartDataDateSpan,
+    language: string
+  ): ChartOptions {
     language = language || 'en-US';
     // Handle localization in graph.
     options.locale = language;
@@ -111,18 +115,18 @@ export class ChartJSService {
 
     let tooltipDateformat = '';
     switch (chartPeriod) {
-      case dataDateSpan.oneDay:
+      case ChartDataDateSpan.oneDay:
         tooltipDateformat = 'HH:mm';
         break;
-      case dataDateSpan.oneWeek:
-      case dataDateSpan.oneMonth:
-      case dataDateSpan.threeMonths:
-      case dataDateSpan.sixMonths:
-      case dataDateSpan.oneMonth:
-      case dataDateSpan.oneYear:
+      case ChartDataDateSpan.oneWeek:
+      case ChartDataDateSpan.oneMonth:
+      case ChartDataDateSpan.threeMonths:
+      case ChartDataDateSpan.sixMonths:
+      case ChartDataDateSpan.oneMonth:
+      case ChartDataDateSpan.oneYear:
         tooltipDateformat = this.getDisplayFormats(language).day;
         break;
-      case dataDateSpan.fiveYears:
+      case ChartDataDateSpan.fiveYears:
         tooltipDateformat = 'LLL yy';
         break;
     }

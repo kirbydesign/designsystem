@@ -3,7 +3,7 @@ import { ChartDataset, ChartType as ChartJSType } from 'chart.js';
 import { AnnotationType, AnnotationTypeRegistry } from 'chartjs-plugin-annotation';
 
 import { deepCopy } from '../../../helpers/deep-copy';
-import { ChartType, ChartTypeConfig, dataDateSpan } from '../chart.types';
+import { ChartDataDateSpan, ChartType, ChartTypeConfig } from '../chart.types';
 
 import { CHART_ANNOTATIONS_CONFIG } from './annotations.config';
 import { CHART_INTERACTION_FUNCTIONS_EXTENSIONS } from './interaction-functions-extensions.config';
@@ -37,7 +37,7 @@ export class ChartConfigService {
    *
    * @returns a string representation of the chart period.
    */
-  public findChartPeriod(data: ChartDataset): dataDateSpan {
+  public findChartPeriod(data: ChartDataset): ChartDataDateSpan {
     // assuming that data is ordered chronologically.
     const start = (data.data[0] as any).x;
     const end = (data.data[data.data.length - 1] as any).x;
@@ -46,13 +46,13 @@ export class ChartConfigService {
 
     const aDayInSeconds = 86400;
     const possiblePeriods = {
-      [aDayInSeconds * 1000]: dataDateSpan.oneDay,
-      [aDayInSeconds * 7 * 1000]: dataDateSpan.oneWeek,
-      [aDayInSeconds * 31 * 1000]: dataDateSpan.oneMonth,
-      [aDayInSeconds * 31 * 3 * 1000]: dataDateSpan.threeMonths,
-      [aDayInSeconds * 31 * 6 * 1000]: dataDateSpan.sixMonths,
-      [aDayInSeconds * 365 * 1000]: dataDateSpan.oneYear,
-      [aDayInSeconds * 365 * 5 * 1000]: dataDateSpan.fiveYears,
+      [aDayInSeconds * 1000]: ChartDataDateSpan.oneDay,
+      [aDayInSeconds * 7 * 1000]: ChartDataDateSpan.oneWeek,
+      [aDayInSeconds * 31 * 1000]: ChartDataDateSpan.oneMonth,
+      [aDayInSeconds * 31 * 3 * 1000]: ChartDataDateSpan.threeMonths,
+      [aDayInSeconds * 31 * 6 * 1000]: ChartDataDateSpan.sixMonths,
+      [aDayInSeconds * 365 * 1000]: ChartDataDateSpan.oneYear,
+      [aDayInSeconds * 365 * 5 * 1000]: ChartDataDateSpan.fiveYears,
     };
 
     const findClosest = (needle) =>
