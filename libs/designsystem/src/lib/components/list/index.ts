@@ -7,7 +7,6 @@ export { BoundaryClass } from './list-item/list-item.component';
 
 export { LoadOnDemandEvent } from './list.event';
 export { ListSwipeAction, ListSwipeActionType, ListSwipeEnd } from './list-swipe-action.type';
-export { VirtualScrollerSettings } from './list-virtual-scroll-settings.type';
 
 export { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 export { ListItemColorDirective } from './directives/list-item-color.directive';
