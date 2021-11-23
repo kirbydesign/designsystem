@@ -12,7 +12,7 @@ const config = {
   <kirby-chart 
   type="stock" 
   [data]="compareData"
-  [datalabelOptions]="datalabelOptions"
+  [ChartDataLabelOptions]="ChartDataLabelOptions"
   ></kirby-chart>
   `,
 };
@@ -24,7 +24,7 @@ const config = {
 export class ChartExampleStockComparisonComponent {
   template: string = config.template;
 
-  datalabelOptions = {
+  ChartDataLabelOptions = {
     showMin: false,
     showMax: false,
     showCurrent: false,

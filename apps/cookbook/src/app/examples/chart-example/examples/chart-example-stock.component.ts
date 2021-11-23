@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ColorHelper, datalabelOptions } from '@kirbydesign/designsystem';
+import { ChartDataLabelOptions, ColorHelper } from '@kirbydesign/designsystem';
 
 import { StockExampleData } from './chart-example-stock.data';
 
@@ -12,7 +12,7 @@ const config = {
   <kirby-chart 
   type="stock" 
   [data]="singleData"
-  [datalabelOptions]="datalabelOptions"
+  [ChartDataLabelOptions]="ChartDataLabelOptions"
   ></kirby-chart>
   `,
 };
@@ -24,7 +24,7 @@ const config = {
 export class ChartExampleStockComponent {
   template: string = config.template;
 
-  datalabelOptions: datalabelOptions = {
+  ChartDataLabelOptions: ChartDataLabelOptions = {
     showMin: true,
     showMax: false,
     locale: 'en-US',

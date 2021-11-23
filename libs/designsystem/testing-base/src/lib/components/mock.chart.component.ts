@@ -3,11 +3,11 @@ import { Component, forwardRef, Input } from '@angular/core';
 import {
   AnnotationOptions,
   ChartComponent,
+  ChartDataLabelOptions,
   ChartDataset,
   ChartHighlightedElements,
   ChartOptions,
   ChartType,
-  datalabelOptions,
 } from '@kirbydesign/designsystem';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
@@ -26,7 +26,7 @@ export class MockChartComponent {
   @Input() data: ChartDataset[] | number[];
   @Input() dataLabels: string[] | string[][];
   @Input() customOptions: ChartOptions;
-  @Input() datalabelOptions: datalabelOptions;
+  @Input() ChartDataLabelOptions: ChartDataLabelOptions;
   @Input() annotations: AnnotationOptions[];
   @Input() highlightedElements: ChartHighlightedElements;
   @Input() height: string | number;

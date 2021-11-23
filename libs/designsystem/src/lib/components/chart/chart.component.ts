@@ -15,11 +15,11 @@ import { ResizeObserverFactory, ResizeObserverService } from '../shared';
 
 import { ChartJSService } from './chart-js/chart-js.service';
 import {
+  ChartDataLabelOptions,
   ChartDataset,
   ChartHighlightedElements,
   ChartType,
   ChartTypes,
-  datalabelOptions,
 } from './chart.types';
 
 @Component({
@@ -33,7 +33,7 @@ export class ChartComponent implements AfterViewInit, OnChanges {
   @Input() data: ChartDataset[] | number[];
   @Input() dataLabels?: string[] | string[][];
   @Input() customOptions?: ChartOptions;
-  @Input() datalabelOptions?: datalabelOptions;
+  @Input() ChartDataLabelOptions?: ChartDataLabelOptions;
   @Input() annotations?: AnnotationOptions[];
   @Input() highlightedElements?: ChartHighlightedElements;
 
@@ -106,7 +106,7 @@ export class ChartComponent implements AfterViewInit, OnChanges {
       dataLabels: this.dataLabels,
       customOptions: this.customOptions,
       annotations: this.annotations,
-      datalabelOptions: this.datalabelOptions,
+      ChartDataLabelOptions: this.ChartDataLabelOptions,
       highlightedElements: this.highlightedElements,
     });
   }

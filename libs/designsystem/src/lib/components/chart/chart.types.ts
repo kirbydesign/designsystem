@@ -17,7 +17,7 @@ export type ChartTypesConfig = {
   [key in ChartType]: ChartTypeConfig;
 };
 
-export type datalabelOptions = {
+export type ChartDataLabelOptions = {
   showMin?: boolean;
   showMax?: boolean;
   showCurrent?: boolean;

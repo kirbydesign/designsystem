@@ -8,11 +8,11 @@ import enUS from 'date-fns/locale/en-US';
 import { mergeDeepAll } from '../../../helpers/merge-deep';
 import {
   ChartDataDateSpan,
+  ChartDataLabelOptions,
   ChartDataset,
   ChartHighlightedElements,
   ChartType,
   ChartTypes,
-  datalabelOptions,
   isNumberArray,
 } from '../chart.types';
 import { ChartConfigService } from '../configs/chart-config.service';
@@ -32,7 +32,7 @@ export class ChartJSService {
     dataLabels?: string[] | string[][];
     customOptions?: ChartOptions;
     annotations?: AnnotationOptions[];
-    datalabelOptions?: datalabelOptions;
+    ChartDataLabelOptions?: ChartDataLabelOptions;
     highlightedElements?: ChartHighlightedElements;
   }): void {
     const {
@@ -42,16 +42,21 @@ export class ChartJSService {
       dataLabels,
       customOptions,
       annotations,
-      datalabelOptions,
+      ChartDataLabelOptions,
       highlightedElements,
     } = args;
 
-    const suffix = datalabelOptions?.valueSuffix ? datalabelOptions.valueSuffix : '';
+    const suffix = ChartDataLabelOptions?.valueSuffix ? ChartDataLabelOptions.valueSuffix : '';
 
     // We need to modify the datasets in order to add tooltips.
     const datasets =
-      datalabelOptions?.showCurrent || datalabelOptions?.showMax || datalabelOptions?.showMin
-        ? this.createDatasets(this.addTooltips(data, datalabelOptions, suffix), highlightedElements)
+      ChartDataLabelOptions?.showCurrent ||
+      ChartDataLabelOptions?.showMax ||
+      ChartDataLabelOptions?.showMin
+        ? this.createDatasets(
+            this.addTooltips(data, ChartDataLabelOptions, suffix),
+            highlightedElements
+          )
         : this.createDatasets(data, highlightedElements);
 
     const options = this.createOptionsObject({ type, customOptions, annotations });
@@ -71,7 +76,7 @@ export class ChartJSService {
       config.options = this.handleLocalization(
         config.options,
         chartPeriod,
-        datalabelOptions.locale
+        ChartDataLabelOptions.locale
       );
     }
 
@@ -340,7 +345,7 @@ export class ChartJSService {
 
   private addTooltips(
     data: ChartDataset[] | number[],
-    datalabelOptions: datalabelOptions,
+    ChartDataLabelOptions: ChartDataLabelOptions,
     suffix: string
   ): ChartDataset[] | number[] {
     if (isNumberArray(data)) {
@@ -348,7 +353,7 @@ export class ChartJSService {
     }
 
     data.map((set) => {
-      if (datalabelOptions.showMin) {
+      if (ChartDataLabelOptions.showMin) {
         const { value, pointer } = this.locateValueIndexInDataset(set, 'y', 'low');
         set.data[pointer] = {
           ...(set.data[pointer] as ScatterDataPoint),
@@ -358,7 +363,7 @@ export class ChartJSService {
           },
         } as ScatterDataPoint;
       }
-      if (datalabelOptions.showMax) {
+      if (ChartDataLabelOptions.showMax) {
         const { value, pointer } = this.locateValueIndexInDataset(set, 'y', 'high');
         set.data[pointer] = {
           ...(set.data[pointer] as ScatterDataPoint),
@@ -368,7 +373,7 @@ export class ChartJSService {
           },
         } as ScatterDataPoint;
       }
-      if (datalabelOptions.showCurrent) {
+      if (ChartDataLabelOptions.showCurrent) {
         const { value, pointer } = this.locateValueIndexInDataset(set, 'x', 'high');
         set.data[pointer] = {
           ...(set.data[pointer] as ScatterDataPoint),
