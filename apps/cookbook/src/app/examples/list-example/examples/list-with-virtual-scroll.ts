@@ -8,7 +8,6 @@ export const ListVirtualScrollExampleTemplate = `
   selector: 'list-with-virtual-scroll',
   template: `
     <kirby-page title="Items">
-      <h1>Hehe hello</h1>
       <kirby-page-content>
         <cdk-virtual-scroll-viewport
           minBufferPx="280"
@@ -16,11 +15,11 @@ export const ListVirtualScrollExampleTemplate = `
           itemSize="56"
           style="height: 280px;"
         >
-          <kirby-list>
+          <kirby-list-experimental>
             <kirby-item *cdkVirtualFor="let item of itemsFullList">
               <h1>{{ item.id }}: {{ item.title }}</h1>
             </kirby-item>
-          </kirby-list>
+          </kirby-list-experimental>
         </cdk-virtual-scroll-viewport>
       </kirby-page-content>
     </kirby-page>
