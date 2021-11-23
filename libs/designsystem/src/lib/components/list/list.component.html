@@ -12,25 +12,12 @@
     <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
   </ion-list-header>
 
-  <div
-    *ngIf="useVirtualScroll"
-    #viewport
-    [style.height]="virtualScrollViewportHeight + 'px'"
-    class="viewport"
-  >
-    <ng-container
-      *ngTemplateOutlet="virtualItemsTemplate; context: { $implicit: _virtualScrollData }"
-    ></ng-container>
-  </div>
-
-  <ng-container *ngIf="!useVirtualScroll">
-    <ng-container
-      *ngTemplateOutlet="
-        _isSectionsEnabled ? groupedListTemplate : itemsTemplate;
-        context: { $implicit: items }
-      "
-    ></ng-container>
-  </ng-container>
+  <ng-container
+    *ngTemplateOutlet="
+      _isSectionsEnabled ? groupedListTemplate : itemsTemplate;
+      context: { $implicit: items }
+    "
+  ></ng-container>
 
   <div *ngIf="footerTemplate" class="footer">
     <ng-container *ngTemplateOutlet="footerTemplate"></ng-container>
@@ -75,29 +62,4 @@
     [class.is-single]="items.length === 1"
   >
   </kirby-list-item>
-</ng-template>
-
-<ng-template #virtualItemsTemplate let-virtualScrollData>
-  <div *uiScroll="let item of virtualScrollData; let i = index">
-    <div [class.item-wrapper]="!item.headingName" [class.section-header]="item.headingName">
-      <ion-item-divider *ngIf="item.headingName" class="virtual-group">
-        <ng-container
-          *ngTemplateOutlet="sectionHeaderTemplate; context: { $implicit: item.headingName }"
-        ></ng-container>
-      </ion-item-divider>
-      <kirby-list-item
-        *ngIf="!item.headingName"
-        [item]="item"
-        [itemTemplate]="itemTemplate"
-        [swipeActions]="swipeActions"
-        [boundaryClass]="_getBoundaryClass(i)"
-        [isSelectable]="_isSelectable"
-        [getItemColor]="getItemColor"
-        [isSelected]="_isSelectable && item === _selectedItem"
-        (itemSelect)="onItemSelect($event)"
-        (swipeActionSelect)="onSwipeActionSelect($event)"
-      >
-      </kirby-list-item>
-    </div>
-  </div>
 </ng-template>
