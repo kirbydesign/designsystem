@@ -12,7 +12,7 @@
 
 <div class="page-example">
   <div>
-    <h2>With items</h2>
+    <h2>List with items</h2>
     <cookbook-code-viewer [html]="items"></cookbook-code-viewer>
   </div>
 
@@ -21,7 +21,11 @@
 
 <div class="page-example">
   <div>
-    <h2>List with bold text on row selection</h2>
+    <h2>List with selectable items</h2>
+    <p>
+      The selected item is highligted in bold by default. This behaviour can be suppressed by
+      passing <code>[disableSelectionHighlight]="true"</code> to the list component.
+    </p>
     <cookbook-code-viewer [html]="boldTextOnRowSelectionExampleTemplate"></cookbook-code-viewer>
   </div>
 
@@ -35,7 +39,7 @@
 
 <div class="page-example">
   <div>
-    <h2>List with dividers:</h2>
+    <h2>List with items and dividers:</h2>
     <cookbook-code-viewer [html]="dividersExampleTemplate"></cookbook-code-viewer>
   </div>
 
@@ -46,7 +50,11 @@
 
 <div class="page-example">
   <div>
-    <h2>List with selectable items:</h2>
+    <h2>List with selectable items and dividers:</h2>
+    <p>
+      The selected item is highligted in bold by default. This behaviour can be suppressed by
+      passing <code>[disableSelectionHighlight]="true"</code> to the list component.
+    </p>
     <cookbook-code-viewer [html]="selectableItemsExampleTemplate"></cookbook-code-viewer>
   </div>
 

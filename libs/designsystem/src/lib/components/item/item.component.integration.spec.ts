@@ -17,7 +17,7 @@ import { ListItemComponent } from '../list/list-item/list-item.component';
 
 import { ItemComponent } from './item.component';
 
-const size = DesignTokenHelper.size;
+const { fontWeight, size } = DesignTokenHelper;
 
 describe('ItemComponent', () => {
   let ionList: HTMLElement;
@@ -49,14 +49,52 @@ describe('ItemComponent', () => {
     beforeEach(async () => {
       spectator = createHost<ListComponent>(
         `
-        <kirby-list [items]="[{ name: 'Item1' }, { name: 'Item2' }, { name: 'Item3' }]">
-          <kirby-item *kirbyListItemTemplate="let item">{{ item.name }}</kirby-item>
+        <kirby-list [items]="[{ name: 'Item1' }, { name: 'Item2' }, { name: 'Item3' }]" (itemSelect)="($event)">
+          <kirby-item *kirbyListItemTemplate="let item"><h3>{{ item.name }}</h3></kirby-item>
         </kirby-list>
         `
       );
       ionList = spectator.queryHost('ion-list');
       await TestHelper.whenReady(ionList);
       itemsInList = spectator.queryAll('ion-list ion-item');
+    });
+
+    it('should highlight selected item in bold text', () => {
+      const listItems = spectator.queryAll('ion-list ion-item-sliding');
+      expect(listItems).toBeTruthy();
+      expect(listItems).toHaveSize(3);
+
+      const itemTexts = spectator.queryAll('ion-list ion-item-sliding h3');
+      expect(itemTexts).toBeTruthy();
+      expect(itemTexts).toHaveSize(3);
+
+      const selectItem = listItems[1];
+      spectator.click(selectItem);
+
+      for (let i = 0; i < itemTexts.length; i++) {
+        const fontWeightExpected = listItems[i] === selectItem ? 'bold' : 'normal';
+        expect(itemTexts[i]).toHaveComputedStyle({ 'font-weight': fontWeight(fontWeightExpected) });
+      }
+    });
+
+    it('should not highlight selected item in bold text on disableSelectionHighlight', () => {
+      spectator.setInput('disableSelectionHighlight', true);
+      spectator.detectChanges();
+
+      const listItems = spectator.queryAll('ion-list ion-item-sliding');
+      expect(listItems).toBeTruthy();
+      expect(listItems).toHaveSize(3);
+
+      const itemTexts = spectator.queryAll('ion-list ion-item-sliding h3');
+      expect(itemTexts).toBeTruthy();
+      expect(itemTexts).toHaveSize(3);
+
+      const selectItem = listItems[1];
+      spectator.click(selectItem);
+
+      for (let i = 0; i < itemTexts.length; i++) {
+        expect(itemTexts[i]).toHaveComputedStyle({ 'font-weight': fontWeight('normal') });
+      }
     });
 
     it('should create list wrapper', () => {

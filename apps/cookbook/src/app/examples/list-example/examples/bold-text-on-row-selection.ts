@@ -13,7 +13,7 @@ export const ListBoldTextOnRowSelectionExampleTemplate = `<kirby-list [items]="i
   // tslint:disable-next-line
   selector: 'list-bold-text-on-row-selection-example',
   template: `
-    <kirby-page title="Bold text on row selection">
+    <kirby-page title="Selectable items">
       <kirby-page-content>
         ${ListBoldTextOnRowSelectionExampleTemplate}
       </kirby-page-content>
