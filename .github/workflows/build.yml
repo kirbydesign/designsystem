@@ -10,6 +10,13 @@ defaults:
     shell: bash
 
 jobs:
+  test_with_mictro: 
+    name: Test With Mictro 
+    runs-on: ubuntu-latest 
+    steps: 
+      - name: Log an awesome message 
+        run: echo "This is an awesome message"
+
   pre_build:
     name: Check if build is needed
     runs-on: ubuntu-latest
