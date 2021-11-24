@@ -26,7 +26,13 @@ export class ChartI18nService {
   }
 
   public handleLocalization(
-    options,
+    // It was very unclear how to type the property options
+    // given that options is a DeepPartialObject of ?
+    // with options.scales.x.type set to 'time'
+    // options.scales.x.time.unit, options.scales.x.adapters
+    // and options.scales.x.time.displayFormats
+    // should be valid properties.
+    options: any,
     chartPeriod: ChartDataDateSpan,
     language: string
   ): ChartOptions {
@@ -47,13 +53,12 @@ export class ChartI18nService {
     let tooltipDateformat = '';
     switch (chartPeriod) {
       case ChartDataDateSpan.oneDay:
-        tooltipDateformat = 'HH:mm';
+        tooltipDateformat = this.getDisplayFormats(language).hour;
         break;
       case ChartDataDateSpan.oneWeek:
       case ChartDataDateSpan.oneMonth:
       case ChartDataDateSpan.threeMonths:
       case ChartDataDateSpan.sixMonths:
-      case ChartDataDateSpan.oneMonth:
       case ChartDataDateSpan.oneYear:
         tooltipDateformat = this.getDisplayFormats(language).day;
         break;

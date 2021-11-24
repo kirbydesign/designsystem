@@ -32,7 +32,7 @@ export class ChartJSService {
     dataLabels?: string[] | string[][];
     customOptions?: ChartOptions;
     annotations?: AnnotationOptions[];
-    ChartDataLabelOptions?: ChartDataLabelOptions;
+    chartDataLabelOptions?: ChartDataLabelOptions;
     highlightedElements?: ChartHighlightedElements;
   }): void {
     const {
@@ -42,11 +42,11 @@ export class ChartJSService {
       dataLabels,
       customOptions,
       annotations,
-      ChartDataLabelOptions,
+      chartDataLabelOptions,
       highlightedElements,
     } = args;
 
-    const datasets = this.createDatasets(data, highlightedElements, ChartDataLabelOptions);
+    const datasets = this.createDatasets(data, highlightedElements, chartDataLabelOptions);
 
     // The first dataset controls the datespan.
     const chartPeriod = this.chartConfigService.findChartPeriod(datasets[0]);
@@ -56,7 +56,7 @@ export class ChartJSService {
       customOptions,
       annotations,
       chartPeriod,
-      chartDataLabelsOptions: ChartDataLabelOptions,
+      chartDataLabelOptions,
     });
     let config = this.createConfigurationObject(type, datasets, options, dataLabels);
 
@@ -191,9 +191,9 @@ export class ChartJSService {
     customOptions?: ChartOptions;
     annotations?: AnnotationOptions[];
     chartPeriod?: ChartDataDateSpan;
-    chartDataLabelsOptions?: ChartDataLabelOptions;
+    chartDataLabelOptions?: ChartDataLabelOptions;
   }): ChartOptions {
-    const { type, customOptions, annotations, chartPeriod, chartDataLabelsOptions } = args;
+    const { type, customOptions, annotations, chartPeriod, chartDataLabelOptions } = args;
 
     const typeConfig = this.chartConfigService.getTypeConfig(type);
     const typeConfigOptions = typeConfig?.options;
@@ -208,17 +208,17 @@ export class ChartJSService {
 
     if (type === 'stock') {
       options.plugins.tooltip.callbacks.label = (context) => {
-        return context.formattedValue + (chartDataLabelsOptions.valueSuffix || '');
+        return context.formattedValue + (chartDataLabelOptions.valueSuffix || '');
       };
 
       options.scales.y.ticks.callback = (value) => {
-        return value + (chartDataLabelsOptions.valueSuffix || '');
+        return value + (chartDataLabelOptions.valueSuffix || '');
       };
 
       options = this.i18nService.handleLocalization(
         options,
         chartPeriod,
-        chartDataLabelsOptions.locale
+        chartDataLabelOptions?.locale
       );
     }
 
@@ -273,22 +273,28 @@ export class ChartJSService {
     highlightedElements?: ChartHighlightedElements,
     datalabelOptions?: ChartDataLabelOptions
   ): ChartDataset[] {
-    // We need to modify the datasets in order to add tooltips.
+    // We need to modify the datasets in order to add datalabels.
     if (datalabelOptions?.showCurrent || datalabelOptions?.showMax || datalabelOptions?.showMin) {
-      data = this.addTooltips(data, datalabelOptions);
+      data = this.addDataLabelsData(data, datalabelOptions);
     }
     let datasets = isNumberArray(data) ? [{ data }] : data;
     if (highlightedElements) this.addHighlightedElementsToDatasets(highlightedElements, datasets);
 
     return datasets;
   }
-
-  private addTooltips(
+  /**
+   * Decorate ChartDataset with properties to allow for datalabels.
+   *
+   * @param data
+   * @param chartDataLabelOptions
+   * @returns
+   */
+  private addDataLabelsData(
     data: ChartDataset[] | number[],
     chartDataLabelOptions: ChartDataLabelOptions
   ): ChartDataset[] | number[] {
     if (isNumberArray(data)) {
-      throw Error("Currently it's impossible to add tooltips to non ScatterDataPoint datasets");
+      throw Error("Currently it's impossible to add dataLabels to non ScatterDataPoint datasets");
     }
 
     data.map((set) => {

@@ -898,4 +898,21 @@ describe('ChartJSService', () => {
       });
     });
   });
+  describe('createConfigurationObject', () => {
+    it('should not be filled with blank labels if type is stock', () => {
+      pending('unimplemented');
+    });
+  });
+
+  describe('addDataLabelsData', () => {
+    it('should throw an error if dataset is a flat array', () => {
+      pending('unimplemented');
+    });
+    it('should have an datalabel propery in dataset if one of ChartDataLabelsOptions.showMin, showMax, showCurrent is true ', () => {
+      pending('unimplemented');
+    });
+    it('should NOT have an datalabel propery in dataset if niether ChartDataLabelsOptions.showMin, showMax, showCurrent is true ', () => {
+      pending('unimplemented');
+    });
+  });
 });
