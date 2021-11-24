@@ -17,4 +17,6 @@ export { ListItemTemplateDirective } from './list.directive';
 export { ListSectionHeaderDirective } from './list.directive';
 export { ListFooterDirective } from './list.directive';
 
+export { ListExperimentalComponent } from './list-experimental/list-experimental.component';
+
 export { GroupByPipe } from './pipes/group-by.pipe';
