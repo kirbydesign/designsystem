@@ -58,13 +58,30 @@
 </p>
 
 <h3>Stock Chart</h3>
-<p>The line chart visualizes data from different categories as a line along the x-axis.</p>
-<p>To render a line chart set <code>type</code> to <code>'stock'</code>.</p>
+<p>
+  The stock chart visualizes the price of a security over time where time is x-axis and the price or
+  evolution is on the y-axis.
+</p>
+<p>To render a stock chart set <code>type</code> to <code>'stock'</code>.</p>
 <p>
   The labels of the x-axis is controlled by the timespan of the first dataset. If you i.e. give data
   that spans less than a day the x-axis will indicate hours or if you give data that spans a month
   the x-axis will indicate days and so forth.
 </p>
+<p>
+  <b>Please note</b> that this chart doesn't accept simple data but each datapoint has to consist of
+  a value for both x and y.
+</p>
+<small
+  ><pre>
+  {{ '{' }}
+    x: 1231831920, // The time in MS when the security's price was set.
+    y: 10 // The price at this current moment.
+  {{ '}' }}
+</pre
+  ></small
+>
+
 <p>
   <kirby-card [mode]="_cardMode" [hasPadding]="_cardHasPadding">
     <cookbook-example-viewer [html]="stockExample.template">
@@ -72,16 +89,28 @@
     </cookbook-example-viewer>
   </kirby-card>
 </p>
-<h4>Stock Chart - multiple datasets (Compare securities)</h4>
+<h4>Stock Chart with multiple datasets</h4>
+<p>
+  It's possible to show and compare multiple price of securities in one chart. When showing more
+  than one security, you can set the valueSuffix as percent, as the data shown in the chart most
+  likely would come this way.
+</p>
 <p>
   <kirby-card [mode]="_cardMode" [hasPadding]="_cardHasPadding">
-    <cookbook-example-viewer [html]="stockComparisonExample.template">
+    <cookbook-example-viewer
+      [html]="stockComparisonExample.template"
+      [ts]="stockComparisonExample.codeSnippet"
+    >
       <cookbook-chart-example-stock-comparison
         #stockComparisonExample
       ></cookbook-chart-example-stock-comparison>
     </cookbook-example-viewer>
   </kirby-card>
 </p>
+<h4>ChartDataLabelOptions Description</h4>
+<cookbook-api-description-properties
+  [properties]="_chartDataLabelOptions"
+></cookbook-api-description-properties>
 
 <kirby-divider [hasMargin]="true"></kirby-divider>
 

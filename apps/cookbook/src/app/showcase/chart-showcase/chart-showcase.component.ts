@@ -52,6 +52,42 @@ export class ChartShowcaseComponent {
     },
   ];
 
+  _chartDataLabelOptions: ApiDescriptionProperty[] = [
+    {
+      name: 'showMin',
+      type: ['boolean'],
+      defaultValue: 'false',
+      description:
+        'Should there be a datalabel for the price over time that shows the lowest value?',
+    },
+    {
+      name: 'showMax',
+      type: ['boolean'],
+      defaultValue: 'false',
+      description:
+        'Should there be a datalabel for the price over time that shows the higest value?',
+    },
+    {
+      name: 'showCurrent',
+      type: ['boolean'],
+      defaultValue: 'false',
+      description:
+        'Should there be a datalabel for the price over time that shows the current value?',
+    },
+    {
+      name: 'locale',
+      type: ['string'],
+      defaultValue: 'en-US',
+      description: 'How should time and numeric fragments be displayed?',
+    },
+    {
+      name: 'valueSuffix',
+      type: ['string'],
+      defaultValue: '',
+      description: 'Add a suffix for the value on datalabels, tooltips and the Y-axis',
+    },
+  ];
+
   _cssCustomPropertiesColumns: ApiDescriptionPropertyColumns = {
     name: 'Name',
     description: 'Description',
