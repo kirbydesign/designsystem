@@ -7,6 +7,7 @@ import { SpinnerModule } from '../spinner/spinner.module';
 
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 import { ListItemColorDirective } from './directives/list-item-color.directive';
+import { ListExperimentalComponent } from './list-experimental/list-experimental.component';
 import { ListHeaderComponent } from './list-header/list-header.component';
 import { ListItemComponent } from './list-item/list-item.component';
 import { ListSectionHeaderComponent } from './list-section-header/list-section-header.component';
@@ -31,6 +32,7 @@ const exportedDeclarations = [
   ListHeaderDirective,
   ListHeaderComponent,
   ListFooterDirective,
+  ListExperimentalComponent,
 ];
 
 const declarations = [
