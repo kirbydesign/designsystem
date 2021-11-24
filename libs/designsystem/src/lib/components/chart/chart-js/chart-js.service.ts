@@ -289,7 +289,7 @@ export class ChartJSService {
    * @param chartDataLabelOptions
    * @returns
    */
-  private addDataLabelsData(
+  public addDataLabelsData(
     data: ChartDataset[] | number[],
     chartDataLabelOptions: ChartDataLabelOptions
   ): ChartDataset[] | number[] {

@@ -1,8 +1,10 @@
-import { TestBed } from '@angular/core/testing';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
-import { deepStrictEqual } from 'assert';
+
+import { ChartDataDateSpan } from '../chart.types';
+import { CHART_TYPES_CONFIG } from '../configs/type.config';
 
 import { ChartI18nService } from './chart-i18n.service';
+import { TEST_CHART_ANNOTATIONS_CONFIG, TEST_CHART_TYPES_CONFIG } from './test-utils';
 
 describe('ChartI18nService', () => {
   let service: ChartI18nService;
@@ -21,27 +23,42 @@ describe('ChartI18nService', () => {
     expect(service).toBeTruthy();
   });
 
-  describe('getLocale', () => {
+  describe('handleLocalization', () => {
     it('should return da locale if input is "da-DK"', () => {
-      pending('unimplemented');
+      expect(
+        service.handleLocalization(
+          TEST_CHART_TYPES_CONFIG['stock'].options,
+          ChartDataDateSpan.oneYear,
+          'da-DK'
+        ).locale
+      ).toEqual('da-DK');
     });
     it('should return enUS locale if input is "en-US"', () => {
-      pending('unimplemented');
+      expect(
+        service.handleLocalization(
+          TEST_CHART_TYPES_CONFIG['stock'].options,
+          ChartDataDateSpan.oneYear,
+          'en-US'
+        ).locale
+      ).toEqual('en-US');
     });
-  });
-
-  describe('getDisplayFormats', () => {
     it('day format should be d MMM if input is "da-DK', () => {
-      pending('unimplemented');
+      expect(
+        (service.handleLocalization(
+          TEST_CHART_TYPES_CONFIG['stock'].options,
+          ChartDataDateSpan.oneYear,
+          'da-DK'
+        ).scales.x as any).time.displayFormats.day
+      ).toEqual('d MMM');
     });
     it('day format should be MMM d if input is "en-US', () => {
-      pending('unimplemented');
-    });
-  });
-
-  describe('handleLocalization', () => {
-    it('should have tooltip format should be day for oneWeek, oneMonth, threeMonths, sixMonths, oneYear', () => {
-      pending('unimplemented');
+      expect(
+        (service.handleLocalization(
+          TEST_CHART_TYPES_CONFIG['stock'].options,
+          ChartDataDateSpan.oneYear,
+          'en-US'
+        ).scales.x as any).time.displayFormats.day
+      ).toEqual('MMM d');
     });
   });
 });

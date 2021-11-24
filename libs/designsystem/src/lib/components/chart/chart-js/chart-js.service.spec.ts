@@ -1,7 +1,13 @@
 import { ElementRef } from '@angular/core';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
-import { Chart, ChartType as ChartJSType } from 'chart.js';
+import {
+  Chart,
+  ChartData,
+  ChartDataset as ChartJSDataset,
+  ChartType as ChartJSType,
+} from 'chart.js';
 import { AnnotationOptions, AnnotationTypeRegistry } from 'chartjs-plugin-annotation';
+import { ChartDataLabelOptions } from 'libs/designsystem/src';
 import { MockProvider } from 'ng-mocks';
 
 import { deepCopy } from '../../../helpers/deep-copy';
@@ -11,61 +17,7 @@ import { ChartConfigService } from '../configs/chart-config.service';
 import { CHART_GLOBAL_DEFAULTS } from '../configs/global-defaults.config';
 
 import { ChartJSService } from './chart-js.service';
-
-const TEST_CHART_TYPES_CONFIG: ChartTypesConfig = {
-  bar: {
-    type: 'bar',
-    options: {
-      indexAxis: 'y',
-      elements: {
-        line: {
-          borderColor: 'blue',
-        },
-      },
-    },
-  },
-  column: {
-    type: 'bar',
-    options: {
-      backgroundColor: 'red',
-    },
-  },
-  line: {
-    type: 'line',
-    options: {
-      backgroundColor: 'blue',
-      elements: {
-        line: {
-          borderColor: 'red',
-        },
-      },
-    },
-  },
-  stock: {
-    type: 'line',
-    options: {
-      backgroundColor: 'blue',
-      elements: {
-        line: {
-          borderColor: 'red',
-        },
-      },
-    },
-  },
-};
-
-const TEST_CHART_ANNOTATIONS_CONFIG: AnnotationTypeRegistry = {
-  line: {
-    borderDash: [6, 3],
-  },
-  ellipse: {
-    borderDash: [3, 6],
-  },
-  box: {},
-  point: {
-    backgroundColor: 'initial',
-  },
-};
+import { TEST_CHART_ANNOTATIONS_CONFIG, TEST_CHART_TYPES_CONFIG } from './test-utils';
 
 describe('ChartJSService', () => {
   let spectator: SpectatorService<ChartJSService>;
@@ -898,21 +850,34 @@ describe('ChartJSService', () => {
       });
     });
   });
-  describe('createConfigurationObject', () => {
-    it('should not be filled with blank labels if type is stock', () => {
-      pending('unimplemented');
-    });
-  });
-
   describe('addDataLabelsData', () => {
+    const data: ChartDataset[] | number[] = [
+      {
+        data: [
+          { x: 10, y: 3 },
+          { x: 2, y: 7 },
+          { x: 19, y: -10 },
+        ],
+      },
+    ];
+    const flatDataset: ChartDataset[] | number[] = [1, 2, 3, 4, 5];
+
     it('should throw an error if dataset is a flat array', () => {
-      pending('unimplemented');
+      const chartDataLabelOptions: ChartDataLabelOptions = {};
+
+      expect(function() {
+        chartJSService.addDataLabelsData(flatDataset, chartDataLabelOptions);
+      }).toThrowError();
     });
     it('should have an datalabel propery in dataset if one of ChartDataLabelsOptions.showMin, showMax, showCurrent is true ', () => {
-      pending('unimplemented');
+      const chartDataLabelOptions: ChartDataLabelOptions = { showMax: true };
+      const result = chartJSService.addDataLabelsData(deepCopy(data), chartDataLabelOptions);
+      expect((result[0] as ChartJSDataset).data.find((item: any) => item.datalabel)).toBeTruthy();
     });
     it('should NOT have an datalabel propery in dataset if niether ChartDataLabelsOptions.showMin, showMax, showCurrent is true ', () => {
-      pending('unimplemented');
+      const chartDataLabelOptions: ChartDataLabelOptions = {};
+      const result = chartJSService.addDataLabelsData(deepCopy(data), chartDataLabelOptions);
+      expect((result[0] as ChartJSDataset).data.find((item: any) => item.datalabel)).toBeFalsy();
     });
   });
 });

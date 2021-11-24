@@ -3,6 +3,7 @@ import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 import { Chart, FontSpec } from 'chart.js';
 
 import { ColorHelper } from '../../../helpers';
+import { ChartType } from '../chart.types';
 import { ChartConfigService } from '../configs/chart-config.service';
 
 import { ChartJSService } from './chart-js.service';
@@ -309,6 +310,31 @@ describe('ChartJSService with ChartConfigService', () => {
           );
           expect(dataItemWithLabel.datalabel.value).toContain('%');
         });
+      });
+    });
+    describe('createConfigurationObject', () => {
+      let chart: Chart;
+      it('should not be filled with blank labels if type is stock', () => {
+        const lineChartConfig = {
+          targetElement: canvasElement,
+          type: 'line' as ChartType,
+          data: [
+            {
+              data: [
+                { x: 10, y: 5 },
+                { x: 11, y: 6 },
+                { x: 13, y: 6 },
+              ],
+            },
+          ],
+        };
+        chartJSService.renderChart({ ...lineChartConfig });
+        chart = chartJSService['chart'];
+        expect(chartJSService['chart'].data.labels.length).toEqual(3);
+        chartJSService['chart'].destroy();
+
+        chartJSService.renderChart({ ...lineChartConfig, type: 'stock' as ChartType });
+        expect(chartJSService['chart'].data.labels.length).toEqual(0);
       });
     });
   });
