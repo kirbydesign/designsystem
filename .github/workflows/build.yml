@@ -17,7 +17,9 @@ jobs:
       - name: Log an awesome message 
         run: echo "This is an awesome message"
       - name: Toolcheck 
-        run: where yq
+        run: which yq
+      - name: Toolcheck 2 
+        run: yq
 
   pre_build:
     name: Check if build is needed
