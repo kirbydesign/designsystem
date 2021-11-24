@@ -3,6 +3,7 @@ import { Inject, InjectionToken, ModuleWithProviders, NgModule, Optional } from 
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
+import { ItemGroupComponent } from './components';
 import { AccordionItemComponent } from './components/accordion/accordion-item.component';
 import { AccordionDirective } from './components/accordion/accordion.directive';
 import { AppModule } from './components/app/app.module';
@@ -118,6 +119,7 @@ const exportedDeclarations = [
   RadioGroupComponent,
   RangeComponent,
   ElementAsButtonDirective,
+  ItemGroupComponent,
 ];
 
 const declarations = [
