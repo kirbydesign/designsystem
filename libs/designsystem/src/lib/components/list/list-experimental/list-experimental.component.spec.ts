@@ -15,7 +15,7 @@ describe('ListExperimental', () => {
       ListExperimentalComponent,
       MockComponent(IonList),
       MockComponent(IonItem),
-      ItemComponent,
+      MockComponent(ItemComponent),
     ],
   });
 
