@@ -1,4 +1,4 @@
-import { Color, Point } from 'chart.js';
+import { ChartTypeRegistry, Color, Point, TooltipItem, TooltipLabelStyle } from 'chart.js';
 import { Context } from 'chartjs-plugin-datalabels';
 import { Align } from 'chartjs-plugin-datalabels/types/options';
 
@@ -176,21 +176,15 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
           mode: 'index',
           intersect: false,
           caretSize: 1,
-          caretPadding: 12,
-          displayColors: true,
-          backgroundColor: getThemeColorHexString('semi-light'),
-          padding: 8,
-          titleColor: 'black',
-          bodyColor: 'black',
-          titleFont: {
-            weight: 'normal',
-            size: parseInt(fontSize('xs')),
+          callbacks: {
+            labelColor: (tooltipItem: TooltipItem<keyof ChartTypeRegistry>) => {
+              return {
+                backgroundColor: tooltipItem.dataset.borderColor,
+                borderColor: tooltipItem.dataset.borderColor,
+                borderWidth: 0,
+              } as TooltipLabelStyle;
+            },
           },
-          bodyFont: {
-            size: parseInt(fontSize('n')),
-            weight: 'bold',
-          },
-          callbacks: {},
         },
         crosshair: {
           line: {
