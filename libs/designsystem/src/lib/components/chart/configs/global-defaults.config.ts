@@ -43,5 +43,8 @@ export const CHART_GLOBAL_DEFAULTS = {
     datalabels: {
       display: false,
     },
+    tooltip: {
+      enabled: false,
+    },
   },
 };

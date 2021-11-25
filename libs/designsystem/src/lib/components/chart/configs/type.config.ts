@@ -173,6 +173,7 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
       normalized: true,
       plugins: {
         tooltip: {
+          enabled: true,
           mode: 'index',
           intersect: false,
           caretSize: 1,
