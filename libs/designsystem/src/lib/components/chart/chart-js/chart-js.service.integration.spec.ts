@@ -267,6 +267,7 @@ describe('ChartJSService with ChartConfigService', () => {
         });
       });
     });
+    
     describe('when type is "stock"', () => {
       let chart: Chart;
 
