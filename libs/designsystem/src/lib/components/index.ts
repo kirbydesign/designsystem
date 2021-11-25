@@ -27,7 +27,6 @@ export { GridCardConfiguration } from './grid/grid-card-configuration';
 
 export * from './icon';
 export * from './item';
-
 export { ItemGroupComponent } from './item-group/item-group.component';
 
 export * from './loading-overlay';
