@@ -68,6 +68,9 @@ export const routes: Routes = [
       {
         path: 'item-group',
         component: ItemGroupShowcaseComponent,
+        data: {
+          hide: true,
+        },
       },
       {
         path: 'button',
