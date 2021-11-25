@@ -214,7 +214,7 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
             (getChartPointFromContext(context) as any)?.datalabel.position,
           display: (context: Context): boolean =>
             !!(getChartPointFromContext(context) as any)?.datalabel,
-          formatter: (value: any, context: Context): string => value.datalabel.value,
+          formatter: (value: any): string => value.datalabel.value,
         },
       },
     },
