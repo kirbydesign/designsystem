@@ -1,0 +1,7 @@
+@use '~@kirbydesign/core/src/scss/utils';
+
+:host {
+  display: block;
+  background: utils.get-color('background-color');
+  height: 100vh;
+}
