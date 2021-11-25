@@ -267,7 +267,7 @@ describe('ChartJSService with ChartConfigService', () => {
         });
       });
     });
-    
+
     describe('when type is "stock"', () => {
       let chart: Chart;
 
@@ -295,20 +295,20 @@ describe('ChartJSService with ChartConfigService', () => {
       it('should use correct ChartJS type', () => {
         expect(chart.config.type).toBe('line');
       });
-      
+
       it('should have correct tension', () => {
         expect(chart.options.elements.line.tension).toBe(0);
       });
-      
+
       it('should have datalabels configuration', () => {
         expect(chart.options.plugins.datalabels).toBeTruthy();
       });
-      
+
       describe('when ChartDataLabelOptions is passed', () => {
         it('chart should have locale if ChartDataLabelOptions.locale', () => {
           expect(chart.options.locale).toBe('da-DK');
         });
-        
+
         it('chart data should have suffix if ChartDataLabelOptions.valueSuffix', () => {
           const dataItemWithLabel: any = chart.data.datasets[0].data.find(
             (dataItem) => (dataItem as any).datalabel
@@ -319,9 +319,9 @@ describe('ChartJSService with ChartConfigService', () => {
     });
     describe('createConfigurationObject', () => {
       it('should not be filled with blank labels if type is stock', () => {
-        const lineChartConfig = {
+        const stockChartConfig = {
           targetElement: canvasElement,
-          type: 'line' as ChartType,
+          type: 'stock' as ChartType,
           data: [
             {
               data: [
@@ -332,12 +332,7 @@ describe('ChartJSService with ChartConfigService', () => {
             },
           ],
         };
-        chartJSService.renderChart({ ...lineChartConfig });
-        chart = chartJSService['chart'];
-        expect(chartJSService['chart'].data.labels.length).toEqual(3);
-        chartJSService['chart'].destroy();
-
-        chartJSService.renderChart({ ...lineChartConfig, type: 'stock' as ChartType });
+        chartJSService.renderChart(stockChartConfig);
         expect(chartJSService['chart'].data.labels.length).toEqual(0);
       });
     });
