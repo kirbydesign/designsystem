@@ -55,7 +55,7 @@ export class ChartConfigService {
       [aDayInSeconds * 365 * 5 * 1000]: ChartDataDateSpan.fiveYears,
     };
 
-    const findClosest = (needle) =>
+    const findClosest = (needle: number) =>
       Object.keys(possiblePeriods).reduce((a, b) =>
         Math.abs(+b - needle) < Math.abs(+a - needle) ? b : a
       );
