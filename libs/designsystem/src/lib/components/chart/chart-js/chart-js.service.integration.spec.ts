@@ -318,7 +318,6 @@ describe('ChartJSService with ChartConfigService', () => {
       });
     });
     describe('createConfigurationObject', () => {
-      let chart: Chart;
       it('should not be filled with blank labels if type is stock', () => {
         const lineChartConfig = {
           targetElement: canvasElement,
