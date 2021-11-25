@@ -72,7 +72,7 @@ export class ChartShowcaseComponent {
       type: ['boolean'],
       defaultValue: 'false',
       description:
-        'Should there be a datalabel for the price over time that shows the current value?',
+        'Should there be a data label that shows the current value?',
     },
     {
       name: 'locale',
