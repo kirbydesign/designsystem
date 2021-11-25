@@ -58,7 +58,7 @@ export class ChartShowcaseComponent {
       type: ['boolean'],
       defaultValue: 'false',
       description:
-        'Should there be a datalabel for the price over time that shows the lowest value?',
+        'Should there be a data label that shows the lowest value?',
     },
     {
       name: 'showMax',
