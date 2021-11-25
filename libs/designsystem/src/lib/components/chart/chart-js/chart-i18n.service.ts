@@ -77,5 +77,4 @@ export class ChartI18nService {
     return options;
   }
 
-  constructor() {}
 }
