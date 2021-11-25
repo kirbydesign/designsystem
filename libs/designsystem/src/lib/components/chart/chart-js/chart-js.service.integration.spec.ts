@@ -295,16 +295,20 @@ describe('ChartJSService with ChartConfigService', () => {
       it('should use correct ChartJS type', () => {
         expect(chart.config.type).toBe('line');
       });
+      
       it('should have correct tension', () => {
         expect(chart.options.elements.line.tension).toBe(0);
       });
+      
       it('should have datalabels configuration', () => {
         expect(chart.options.plugins.datalabels).toBeTruthy();
       });
+      
       describe('when ChartDataLabelOptions is passed', () => {
         it('chart should have locale if ChartDataLabelOptions.locale', () => {
           expect(chart.options.locale).toBe('da-DK');
         });
+        
         it('chart data should have suffix if ChartDataLabelOptions.valueSuffix', () => {
           const dataItemWithLabel: any = chart.data.datasets[0].data.find(
             (dataItem) => (dataItem as any).datalabel
