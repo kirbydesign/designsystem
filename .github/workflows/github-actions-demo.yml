@@ -22,7 +22,7 @@ jobs:
             **/node_modules
           key: node-modules-${{runner.os}}-${{env.NODE_VERSION}}-${{hashFiles('**/package.json', '**/package-lock.json')}}
       - name: Dump Hash
-        run: echo The cache hash key is 'node-modules-${{runner.os}}-${{env.NODE_VERSION}}-${{hashFiles('**/package.json', '**/package-lock.json')}}'."
+        run: echo "The cache hash key is 'node-modules-${{runner.os}}-${{env.NODE_VERSION}}-${{hashFiles('**/package.json', '**/package-lock.json')}}'."
       - name: Clean Install NPM Dependencies
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
