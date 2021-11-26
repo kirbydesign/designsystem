@@ -207,7 +207,6 @@ export class ChartJSService {
     );
 
     if (type === 'stock') {
-      console.log(options.plugins.tooltip);
       options.plugins.tooltip.callbacks.label = (context) => {
         // It's not possible to add spacing between color legend and text so we
         // prefix with a space.

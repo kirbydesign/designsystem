@@ -57,22 +57,19 @@ export class ChartShowcaseComponent {
       name: 'showMin',
       type: ['boolean'],
       defaultValue: 'false',
-      description:
-        'Should there be a data label that shows the lowest value?',
+      description: 'Should there be a data label that shows the lowest value?',
     },
     {
       name: 'showMax',
       type: ['boolean'],
       defaultValue: 'false',
-      description:
-        'Should there be a data label that shows the highest value?',
+      description: 'Should there be a data label that shows the highest value?',
     },
     {
       name: 'showCurrent',
       type: ['boolean'],
       defaultValue: 'false',
-      description:
-        'Should there be a data label that shows the current value?',
+      description: 'Should there be a data label that shows the current value?',
     },
     {
       name: 'locale',
