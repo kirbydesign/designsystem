@@ -32,7 +32,7 @@ export class ChartJSService {
     dataLabels?: string[] | string[][];
     customOptions?: ChartOptions;
     annotations?: AnnotationOptions[];
-    chartDataLabelOptions?: ChartDataLabelOptions;
+    dataLabelOptions?: ChartDataLabelOptions;
     highlightedElements?: ChartHighlightedElements;
   }): void {
     const {
@@ -42,11 +42,11 @@ export class ChartJSService {
       dataLabels,
       customOptions,
       annotations,
-      chartDataLabelOptions,
+      dataLabelOptions,
       highlightedElements,
     } = args;
 
-    const datasets = this.createDatasets(data, highlightedElements, chartDataLabelOptions);
+    const datasets = this.createDatasets(data, highlightedElements, dataLabelOptions);
 
     // The first dataset controls the datespan.
     const chartPeriod = this.chartConfigService.findChartPeriod(datasets[0]);
@@ -56,7 +56,7 @@ export class ChartJSService {
       customOptions,
       annotations,
       chartPeriod,
-      dataLabelOptions: chartDataLabelOptions,
+      dataLabelOptions,
     });
     let config = this.createConfigurationObject(type, datasets, options, dataLabels);
 

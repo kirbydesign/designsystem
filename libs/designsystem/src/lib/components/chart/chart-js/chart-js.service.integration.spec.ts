@@ -283,7 +283,7 @@ describe('ChartJSService with ChartConfigService', () => {
               ],
             },
           ],
-          chartDataLabelOptions: {
+          dataLabelOptions: {
             locale: 'da-DK',
             valueSuffix: '%',
             showMin: true,

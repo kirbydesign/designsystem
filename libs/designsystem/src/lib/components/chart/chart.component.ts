@@ -105,7 +105,7 @@ export class ChartComponent implements AfterViewInit, OnChanges {
       dataLabels: this.dataLabels,
       customOptions: this.customOptions,
       annotations: this.annotations,
-      chartDataLabelOptions: this.dataLabelOptions,
+      dataLabelOptions: this.dataLabelOptions,
       highlightedElements: this.highlightedElements,
     });
   }
