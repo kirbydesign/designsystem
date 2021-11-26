@@ -38,6 +38,8 @@ export * from './page';
 
 export { HorizontalDirection, PopoverComponent } from './popover/popover.component';
 
+export { ItemSlidingComponent } from './item-sliding/item-sliding.component';
+
 export * from './router-outlet';
 
 export * from './shared';
