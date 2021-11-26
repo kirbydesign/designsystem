@@ -112,8 +112,6 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
   stock: {
     type: 'line',
     options: {
-      // locale is overridden in handleLocalization().
-      locale: 'en-US',
       responsive: true,
       animation: {
         duration: 0,
@@ -130,8 +128,6 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
       scales: {
         x: {
           type: 'time',
-          // Time is overridden in handleLocalization().
-          time: {},
           grid: {
             lineWidth: 0,
           },

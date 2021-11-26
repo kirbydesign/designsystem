@@ -14,9 +14,11 @@ export type ChartDataLabelOptions = {
   showMin?: boolean;
   showMax?: boolean;
   showCurrent?: boolean;
-  locale?: 'en-US' | 'da-DK';
+  locale?: ChartLocale;
   valueSuffix?: string;
 };
+
+export type ChartLocale = 'da-DK' | 'en-US';
 
 export type ChartDataset = { kirbyOptions?: { highlightedElements?: number[] } } & ChartJSDataset;
 

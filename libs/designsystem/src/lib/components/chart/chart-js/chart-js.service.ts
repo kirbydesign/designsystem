@@ -56,7 +56,7 @@ export class ChartJSService {
       customOptions,
       annotations,
       chartPeriod,
-      chartDataLabelOptions,
+      dataLabelOptions: chartDataLabelOptions,
     });
     let config = this.createConfigurationObject(type, datasets, options, dataLabels);
 
@@ -191,9 +191,15 @@ export class ChartJSService {
     customOptions?: ChartOptions;
     annotations?: AnnotationOptions[];
     chartPeriod?: ChartPeriod;
-    chartDataLabelOptions?: ChartDataLabelOptions;
+    dataLabelOptions?: ChartDataLabelOptions;
   }): ChartOptions {
-    const { type, customOptions, annotations, chartPeriod, chartDataLabelOptions } = args;
+    const {
+      type,
+      customOptions,
+      annotations,
+      chartPeriod,
+      dataLabelOptions: chartDataLabelOptions,
+    } = args;
 
     const typeConfig = this.chartConfigService.getTypeConfig(type);
     const typeConfigOptions = typeConfig?.options;
@@ -288,45 +294,45 @@ export class ChartJSService {
    * Decorate ChartDataset with properties to allow for datalabels.
    *
    * @param data
-   * @param chartDataLabelOptions
-   * @returns
+   * @param dataLabelOptions
+   * @returns ChartDataset[]
    */
   public addDataLabelsData(
     data: ChartDataset[] | number[],
-    chartDataLabelOptions: ChartDataLabelOptions
-  ): ChartDataset[] | number[] {
+    dataLabelOptions: ChartDataLabelOptions
+  ): ChartDataset[] {
     if (isNumberArray(data)) {
       throw Error("Currently it's impossible to add dataLabels to non ScatterDataPoint datasets");
     }
 
     data.map((set) => {
-      if (chartDataLabelOptions.showMin) {
+      if (dataLabelOptions.showMin) {
         const { value, pointer } = this.locateValueIndexInDataset(set, 'y', 'low');
         set.data[pointer] = {
           ...(set.data[pointer] as ScatterDataPoint),
           datalabel: {
-            value: value + (chartDataLabelOptions.valueSuffix || ''),
+            value: value + (dataLabelOptions.valueSuffix || ''),
             position: 'bottom',
           },
         } as ScatterDataPoint;
       }
-      if (chartDataLabelOptions.showMax) {
+      if (dataLabelOptions.showMax) {
         const { value, pointer } = this.locateValueIndexInDataset(set, 'y', 'high');
         set.data[pointer] = {
           ...(set.data[pointer] as ScatterDataPoint),
           datalabel: {
-            value: value + (chartDataLabelOptions.valueSuffix || ''),
+            value: value + (dataLabelOptions.valueSuffix || ''),
             position: 'top',
           },
         } as ScatterDataPoint;
       }
-      if (chartDataLabelOptions.showCurrent) {
+      if (dataLabelOptions.showCurrent) {
         const { value, pointer } = this.locateValueIndexInDataset(set, 'x', 'high');
         set.data[pointer] = {
           ...(set.data[pointer] as ScatterDataPoint),
           value,
           datalabel: {
-            value: value + (chartDataLabelOptions.valueSuffix || ''),
+            value: value + (dataLabelOptions.valueSuffix || ''),
             position: 'right',
           },
         } as ScatterDataPoint;
