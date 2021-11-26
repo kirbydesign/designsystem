@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { ChartOptions } from 'chart.js';
 import { format, toDate } from 'date-fns';
 import { da, enUS } from 'date-fns/locale';
-import { ChartLocale } from 'libs/designsystem/src';
 
-import { ChartPeriod } from '../chart.types';
+import { ChartLocale, ChartPeriod } from '../chart.types';
 
 const CHART_LOCALE_DEFAULT = 'en-US';
 
