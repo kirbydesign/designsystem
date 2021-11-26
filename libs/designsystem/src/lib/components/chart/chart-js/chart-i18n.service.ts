@@ -38,7 +38,9 @@ export class ChartI18nService {
 
     const scaleX = options.scales.x as any;
     // Update chart options with the given period.
-    scaleX.time.unit = chartPeriod;
+    scaleX.time = {
+      unit: chartPeriod,
+    };
     scaleX.adapters = {
       date: {
         locale: this.getLocale(localeString),
