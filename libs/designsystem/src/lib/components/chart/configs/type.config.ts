@@ -138,7 +138,7 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
           ticks: {
             maxRotation: 0,
             source: 'data',
-            autoSkipPadding: 40,
+            autoSkipPadding: 120,
             font: {
               size: parseInt(fontSize('xs')),
             },
@@ -173,23 +173,32 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
       normalized: true,
       plugins: {
         tooltip: {
+          padding: 10,
+
           enabled: true,
           mode: 'index',
           intersect: false,
-          caretSize: 1,
+          backgroundColor: getThemeColorHexString('semi-light'),
+          titleColor: getThemeColorHexString('semi-light-contrast'),
+          bodyColor: getThemeColorHexString('semi-light-contrast'),
+          caretSize: 0,
+          bodySpacing: 5,
+          titleSpacing: 5,
+          borderColor: 'transparent',
           callbacks: {
             labelColor: (tooltipItem: TooltipItem<keyof ChartTypeRegistry>) => {
               return {
                 backgroundColor: tooltipItem.dataset.borderColor,
-                borderColor: tooltipItem.dataset.borderColor,
-                borderWidth: 0,
               } as TooltipLabelStyle;
             },
           },
         },
         crosshair: {
           line: {
-            color: 'red',
+            color: getThemeColorHexString('black-base'),
+          },
+          zoom: {
+            enabled: false,
           },
           sync: {
             enabled: false,

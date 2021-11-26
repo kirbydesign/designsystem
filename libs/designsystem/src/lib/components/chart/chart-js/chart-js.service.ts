@@ -207,8 +207,11 @@ export class ChartJSService {
     );
 
     if (type === 'stock') {
+      console.log(options.plugins.tooltip);
       options.plugins.tooltip.callbacks.label = (context) => {
-        return context.formattedValue + (chartDataLabelOptions.valueSuffix || '');
+        // It's not possible to add spacing between color legend and text so we
+        // prefix with a space.
+        return ' ' + context.formattedValue + (chartDataLabelOptions.valueSuffix || '');
       };
 
       options.scales.y.ticks.callback = (value) => {
