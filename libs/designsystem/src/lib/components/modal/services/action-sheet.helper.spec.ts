@@ -59,8 +59,7 @@ describe('ActionSheetHelper', () => {
       expect(modalWrapper).toHaveComputedStyle({ 'max-width': 'none', 'max-height': 'none' });
     });
 
-    // @todo reactivate before completing PR.
-    xit('backdrop click should dismiss action-sheet', async () => {
+    it('backdrop click should dismiss action-sheet', async () => {
       let modalDidDismiss = false;
       ionModal.onDidDismiss().then((_) => (modalDidDismiss = true));
       backdrop.dispatchEvent(new MouseEvent('click'));

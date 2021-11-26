@@ -306,8 +306,7 @@ describe('DropdownComponent (popover version)', () => {
           expect(spectator.element).toBeFocused();
         }));
 
-        // @todo reactivate before completing PR.
-        xit('should open dropdown within actual delay', async () => {
+        it('should open dropdown within actual delay', async () => {
           spectator.click('button');
           await TestHelper.whenTrue(() => spectator.component.isOpen, openDelayInMs + 1);
           expect(spectator.component.isOpen).toBeTruthy();
