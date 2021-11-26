@@ -3,7 +3,7 @@ import { ChartOptions } from 'chart.js';
 import { format, toDate } from 'date-fns';
 import { da, enUS } from 'date-fns/locale';
 
-import { ChartDataDateSpan } from '../chart.types';
+import { ChartPeriod } from '../chart.types';
 
 @Injectable({
   providedIn: 'root',
@@ -33,7 +33,7 @@ export class ChartI18nService {
     // and options.scales.x.time.displayFormats
     // should be valid properties.
     options: any,
-    chartPeriod: ChartDataDateSpan,
+    chartPeriod: ChartPeriod,
     language: string
   ): ChartOptions {
     language = language || 'en-US';
@@ -52,17 +52,17 @@ export class ChartI18nService {
 
     let tooltipDateformat = '';
     switch (chartPeriod) {
-      case ChartDataDateSpan.oneDay:
+      case ChartPeriod.oneDay:
         tooltipDateformat = this.getDisplayFormats(language).hour;
         break;
-      case ChartDataDateSpan.oneWeek:
-      case ChartDataDateSpan.oneMonth:
-      case ChartDataDateSpan.threeMonths:
-      case ChartDataDateSpan.sixMonths:
-      case ChartDataDateSpan.oneYear:
+      case ChartPeriod.oneWeek:
+      case ChartPeriod.oneMonth:
+      case ChartPeriod.threeMonths:
+      case ChartPeriod.sixMonths:
+      case ChartPeriod.oneYear:
         tooltipDateformat = this.getDisplayFormats(language).day;
         break;
-      case ChartDataDateSpan.fiveYears:
+      case ChartPeriod.fiveYears:
         tooltipDateformat = 'LLL yy';
         break;
     }

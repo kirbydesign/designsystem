@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 import { ChartDataset, ChartTypeRegistry, ScatterDataPoint } from 'chart.js';
-import { ChartDataDateSpan } from 'libs/designsystem/src';
+import { ChartPeriod } from 'libs/designsystem/src';
 
 import { ChartConfigService } from './chart-config.service';
 
@@ -39,17 +39,17 @@ describe('ChartConfigService', () => {
       return data;
     };
 
-    it(`should return ${ChartDataDateSpan.oneDay} when data span is closer to a day than one week`, () => {
+    it(`should return ${ChartPeriod.oneDay} when data span is closer to a day than one week`, () => {
       expect(
         service.findChartPeriod(buildDataSet(new Date(2001, 1, 1, 3), new Date(2001, 1, 1, 20)))
-      ).toBe(ChartDataDateSpan.oneDay);
+      ).toBe(ChartPeriod.oneDay);
     });
-    it(`should return ${ChartDataDateSpan.oneYear} when data span is closer to a year than six months or five years`, () => {
+    it(`should return ${ChartPeriod.oneYear} when data span is closer to a year than six months or five years`, () => {
       expect(
         service.findChartPeriod(buildDataSet(new Date(2001, 1, 1, 3), new Date(2002, 1, 1, 3)))
-      ).toBe(ChartDataDateSpan.oneYear);
+      ).toBe(ChartPeriod.oneYear);
     });
-    it(`should return ${ChartDataDateSpan.fiveYears} when data span is closer to five years than a year`, () => {
+    it(`should return ${ChartPeriod.fiveYears} when data span is closer to five years than a year`, () => {
       const years = {
         1: service.findChartPeriod(buildDataSet(new Date(2000, 1, 1, 3), new Date(2001, 1, 1, 3))),
         2: service.findChartPeriod(buildDataSet(new Date(2000, 1, 1, 3), new Date(2002, 1, 1, 3))),
@@ -58,14 +58,14 @@ describe('ChartConfigService', () => {
         5: service.findChartPeriod(buildDataSet(new Date(2000, 1, 1, 3), new Date(2005, 1, 1, 3))),
       };
       expect(years).toEqual({
-        1: ChartDataDateSpan.oneYear,
-        2: ChartDataDateSpan.oneYear,
-        3: ChartDataDateSpan.fiveYears,
-        4: ChartDataDateSpan.fiveYears,
-        5: ChartDataDateSpan.fiveYears,
+        1: ChartPeriod.oneYear,
+        2: ChartPeriod.oneYear,
+        3: ChartPeriod.fiveYears,
+        4: ChartPeriod.fiveYears,
+        5: ChartPeriod.fiveYears,
       });
 
-      expect(years[5]).toEqual(ChartDataDateSpan.fiveYears);
+      expect(years[5]).toEqual(ChartPeriod.fiveYears);
     });
   });
 });

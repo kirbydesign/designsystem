@@ -1,7 +1,7 @@
 import { ElementRef, Injectable } from '@angular/core';
 import { ActiveElement, ChartConfiguration, ChartOptions, ScatterDataPoint } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
-import { ChartDataDateSpan } from 'libs/designsystem/src';
+import { ChartPeriod } from 'libs/designsystem/src';
 
 import { mergeDeepAll } from '../../../helpers/merge-deep';
 import {
@@ -190,7 +190,7 @@ export class ChartJSService {
     type: ChartType;
     customOptions?: ChartOptions;
     annotations?: AnnotationOptions[];
-    chartPeriod?: ChartDataDateSpan;
+    chartPeriod?: ChartPeriod;
     chartDataLabelOptions?: ChartDataLabelOptions;
   }): ChartOptions {
     const { type, customOptions, annotations, chartPeriod, chartDataLabelOptions } = args;

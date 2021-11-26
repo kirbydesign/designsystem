@@ -850,6 +850,7 @@ describe('ChartJSService', () => {
       });
     });
   });
+
   describe('addDataLabelsData', () => {
     const data: ChartDataset[] | number[] = [
       {
@@ -864,16 +865,17 @@ describe('ChartJSService', () => {
 
     it('should throw an error if dataset is a flat array', () => {
       const chartDataLabelOptions: ChartDataLabelOptions = {};
-
       expect(function() {
         chartJSService.addDataLabelsData(flatDataset, chartDataLabelOptions);
       }).toThrowError();
     });
+
     it('should have an datalabel propery in dataset if one of ChartDataLabelsOptions.showMin, showMax, showCurrent is true ', () => {
       const chartDataLabelOptions: ChartDataLabelOptions = { showMax: true };
       const result = chartJSService.addDataLabelsData(deepCopy(data), chartDataLabelOptions);
       expect((result[0] as ChartJSDataset).data.find((item: any) => item.datalabel)).toBeTruthy();
     });
+
     it('should NOT have an datalabel propery in dataset if niether ChartDataLabelsOptions.showMin, showMax, showCurrent is true ', () => {
       const chartDataLabelOptions: ChartDataLabelOptions = {};
       const result = chartJSService.addDataLabelsData(deepCopy(data), chartDataLabelOptions);

@@ -1,10 +1,9 @@
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 
-import { ChartDataDateSpan } from '../chart.types';
-import { CHART_TYPES_CONFIG } from '../configs/type.config';
+import { ChartPeriod } from '../chart.types';
 
 import { ChartI18nService } from './chart-i18n.service';
-import { TEST_CHART_ANNOTATIONS_CONFIG, TEST_CHART_TYPES_CONFIG } from './test-utils';
+import { TEST_CHART_TYPES_CONFIG } from './test-utils';
 
 describe('ChartI18nService', () => {
   let service: ChartI18nService;
@@ -28,7 +27,7 @@ describe('ChartI18nService', () => {
       expect(
         service.handleLocalization(
           TEST_CHART_TYPES_CONFIG['stock'].options,
-          ChartDataDateSpan.oneYear,
+          ChartPeriod.oneYear,
           'da-DK'
         ).locale
       ).toEqual('da-DK');
@@ -37,7 +36,7 @@ describe('ChartI18nService', () => {
       expect(
         service.handleLocalization(
           TEST_CHART_TYPES_CONFIG['stock'].options,
-          ChartDataDateSpan.oneYear,
+          ChartPeriod.oneYear,
           'en-US'
         ).locale
       ).toEqual('en-US');
@@ -46,7 +45,7 @@ describe('ChartI18nService', () => {
       expect(
         (service.handleLocalization(
           TEST_CHART_TYPES_CONFIG['stock'].options,
-          ChartDataDateSpan.oneYear,
+          ChartPeriod.oneYear,
           'da-DK'
         ).scales.x as any).time.displayFormats.day
       ).toEqual('d MMM');
@@ -55,7 +54,7 @@ describe('ChartI18nService', () => {
       expect(
         (service.handleLocalization(
           TEST_CHART_TYPES_CONFIG['stock'].options,
-          ChartDataDateSpan.oneYear,
+          ChartPeriod.oneYear,
           'en-US'
         ).scales.x as any).time.displayFormats.day
       ).toEqual('MMM d');
