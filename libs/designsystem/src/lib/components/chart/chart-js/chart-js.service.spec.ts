@@ -852,7 +852,7 @@ describe('ChartJSService', () => {
   });
 
   describe('function: addDataLabelsData', () => {
-    const data: ChartDataset[] | number[] = [
+    const data: ChartDataset[] = [
       {
         data: [
           { x: 10, y: 3 },
