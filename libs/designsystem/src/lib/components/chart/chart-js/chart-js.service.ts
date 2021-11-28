@@ -305,40 +305,33 @@ export class ChartJSService {
       throw Error("Currently it's impossible to add dataLabels to non ScatterDataPoint datasets");
     }
 
+    const decorateDataPoint = (
+      set: ChartDataset,
+      axis: 'x' | 'y',
+      direction: 'high' | 'low',
+      position: 'bottom' | 'top' | 'left' | 'right'
+    ): void => {
+      const { value, pointer } = this.locateValueIndexInDataset(set, axis, direction);
+      set.data[pointer] = {
+        ...(set.data[pointer] as ScatterDataPoint),
+        datalabel: {
+          value: value + (dataLabelOptions.valueSuffix || ''),
+          position,
+        },
+      } as ScatterDataPoint;
+    };
+
     data.map((set) => {
       if (dataLabelOptions.showMin) {
-        const { value, pointer } = this.locateValueIndexInDataset(set, 'y', 'low');
-        set.data[pointer] = {
-          ...(set.data[pointer] as ScatterDataPoint),
-          datalabel: {
-            value: value + (dataLabelOptions.valueSuffix || ''),
-            position: 'bottom',
-          },
-        } as ScatterDataPoint;
+        decorateDataPoint(set, 'y', 'low', 'bottom');
       }
       if (dataLabelOptions.showMax) {
-        const { value, pointer } = this.locateValueIndexInDataset(set, 'y', 'high');
-        set.data[pointer] = {
-          ...(set.data[pointer] as ScatterDataPoint),
-          datalabel: {
-            value: value + (dataLabelOptions.valueSuffix || ''),
-            position: 'top',
-          },
-        } as ScatterDataPoint;
+        decorateDataPoint(set, 'y', 'high', 'top');
       }
       if (dataLabelOptions.showCurrent) {
-        const { value, pointer } = this.locateValueIndexInDataset(set, 'x', 'high');
-        set.data[pointer] = {
-          ...(set.data[pointer] as ScatterDataPoint),
-          value,
-          datalabel: {
-            value: value + (dataLabelOptions.valueSuffix || ''),
-            position: 'right',
-          },
-        } as ScatterDataPoint;
+        decorateDataPoint(set, 'x', 'high', 'right');
       }
     });
-
     return data;
   }
 
