@@ -7,10 +7,10 @@ import {
   ChartType as ChartJSType,
 } from 'chart.js';
 import { AnnotationOptions, AnnotationTypeRegistry } from 'chartjs-plugin-annotation';
-import { ChartDataLabelOptions } from 'libs/designsystem/src';
 import { MockProvider } from 'ng-mocks';
 
 import { deepCopy } from '../../../helpers/deep-copy';
+import { ChartDataLabelOptions } from '../chart.types';
 import { ChartDataset, ChartType, ChartTypesConfig } from '../chart.types';
 import { ChartHighlightedElements } from '../chart.types';
 import { ChartConfigService } from '../configs/chart-config.service';

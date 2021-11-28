@@ -1,7 +1,7 @@
-import { TestBed } from '@angular/core/testing';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 import { ChartDataset, ChartTypeRegistry, ScatterDataPoint } from 'chart.js';
-import { ChartPeriod } from 'libs/designsystem/src';
+
+import { ChartPeriod } from '../chart.types';
 
 import { ChartConfigService } from './chart-config.service';
 
