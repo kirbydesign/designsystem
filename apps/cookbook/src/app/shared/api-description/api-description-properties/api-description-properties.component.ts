@@ -19,10 +19,6 @@ export interface ApiDescriptionPropertyColumns {
   selector: 'cookbook-api-description-properties',
   templateUrl: './api-description-properties.component.html',
   styleUrls: ['../api-description.shared.scss'],
-  styles: [
-    // We need this for api-description to avoid breaking mobile.
-    ':host{ display: block; width: 100%; overflow-x: scroll; }',
-  ],
 })
 export class ApiDescriptionPropertiesComponent {
   @Input() properties: ApiDescriptionProperty[];

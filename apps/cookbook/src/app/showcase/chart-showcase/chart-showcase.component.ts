@@ -73,7 +73,7 @@ export class ChartShowcaseComponent {
     },
     {
       name: 'locale',
-      type: ['string'],
+      type: ['ChartLocale'],
       defaultValue: 'en-US',
       description: 'How should time and numeric fragments be displayed?',
     },

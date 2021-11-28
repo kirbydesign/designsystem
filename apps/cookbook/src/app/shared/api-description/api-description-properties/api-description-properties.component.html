@@ -7,7 +7,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let prop of properties">
-      <td *ngIf="columns.name">
+      <td class="property-name" *ngIf="columns.name">
         <code>{{ prop.name }}</code>
       </td>
       <td *ngIf="columns.description" class="description">{{ prop.description }}</td>
