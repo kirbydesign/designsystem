@@ -861,7 +861,7 @@ describe('ChartJSService', () => {
         ],
       },
     ];
-    const flatDataset: ChartDataset[] | number[] = [1, 2, 3, 4, 5];
+    const flatDataset:  number[] = [1, 2, 3, 4, 5];
 
     it('should throw an error if dataset is a flat array', () => {
       const chartDataLabelOptions: ChartDataLabelOptions = {};
