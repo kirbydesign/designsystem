@@ -870,11 +870,15 @@ describe('ChartJSService', () => {
       }).toThrowError();
     });
 
-    it('should have an datalabel propery in dataset if one of ChartDataLabelsOptions.showMin, showMax, showCurrent is true ', () => {
-      const chartDataLabelOptions: ChartDataLabelOptions = { showMax: true };
-      const result = chartJSService.addDataLabelsData(deepCopy(data), chartDataLabelOptions);
-      expect((result[0] as ChartJSDataset).data.find((item: any) => item.datalabel)).toBeTruthy();
-    });
+    const dataLabelOptionsProperties = ['showMax', 'showMin', 'showCurrent']; 
+    
+    dataLabelOptionsProperties.forEach((property) => {
+       it(`should have an datalabel propery in dataset if one of ChartDataLabelsOptions.${property} is true`, () => {
+         const chartDataLabelOptions: ChartDataLabelOptions = { [property]: true };
+         const result = chartJSService.addDataLabelsData(deepCopy(data), chartDataLabelOptions);
+         expect((result[0] as ChartJSDataset).data.find((item: any) => item.datalabel)).toBeTruthy();
+       });
+    };
 
     it('should NOT have an datalabel propery in dataset if niether ChartDataLabelsOptions.showMin, showMax, showCurrent is true ', () => {
       const chartDataLabelOptions: ChartDataLabelOptions = {};
