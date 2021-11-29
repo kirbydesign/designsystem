@@ -11,7 +11,7 @@ describe('ItemGroup', () => {
 
   const createHost = createHostFactory({
     component: ItemGroupComponent,
-    declarations: [ItemGroupComponent, MockComponent(IonItem), MockComponent(ItemComponent)],
+    declarations: [ItemGroupComponent, MockComponent(ItemComponent)],
   });
 
   beforeEach(() => {
