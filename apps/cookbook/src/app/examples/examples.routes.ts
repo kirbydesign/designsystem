@@ -35,6 +35,7 @@ import { ListColoredItemsExampleComponent } from './list-example/examples/colore
 import { ListWithDividersExampleComponent } from './list-example/examples/dividers';
 import { ListWithHeaderAndFooterExampleComponent } from './list-example/examples/header-and-footer';
 import { ListItemsExampleComponent } from './list-example/examples/items';
+import { ListVirtualScrollExampleComponent } from './list-example/examples/list-with-virtual-scroll';
 import { ListWithSectionsExampleComponent } from './list-example/examples/sections';
 import { ListWithSectionsAndColoredItemsExampleComponent } from './list-example/examples/sections-and-colored-items';
 import { ListSelectableItemsExampleComponent } from './list-example/examples/selectable-items';
@@ -42,10 +43,6 @@ import { ListExampleComponent } from './list-example/list-example.component';
 import { ListLoadOnDemandExampleComponent } from './list-load-on-demand-example/list-load-on-demand-example.component';
 import { ListNoShapeExampleComponent } from './list-no-shape-example/list-no-shape-example.component';
 import { ListSwipeExampleComponent } from './list-swipe-example/list-swipe-example.component';
-import { ListVirtualScrollItemsExampleComponent } from './list-virtual-scroll-example/examples/items';
-import { ListVirtualScrollLoadExampleComponent } from './list-virtual-scroll-example/examples/load-on-demand';
-import { ListVirtualScrollSectionsExampleComponent } from './list-virtual-scroll-example/examples/sections';
-import { ListVirtualScrollExampleComponent } from './list-virtual-scroll-example/list-virtual-scroll-example.component';
 import { LoadingOverlayExampleComponent } from './loading-overlay-example/loading-overlay-example.component';
 import { ModalExampleComponent } from './modal-example/modal-example.component';
 import { ModalRoutePage1ExampleComponent } from './modal-example/modal-route-example/modal-route-page1-example.component';
@@ -331,28 +328,6 @@ export const routes: Routes = [
     component: ListLoadOnDemandExampleComponent,
   },
   {
-    path: 'list-virtual-scroll',
-    component: ListVirtualScrollExampleComponent,
-    children: [
-      {
-        path: '',
-        redirectTo: 'with-items',
-      },
-      {
-        path: 'with-items',
-        component: ListVirtualScrollItemsExampleComponent,
-      },
-      {
-        path: 'load-on-demand',
-        component: ListVirtualScrollLoadExampleComponent,
-      },
-      {
-        path: 'with-sections',
-        component: ListVirtualScrollSectionsExampleComponent,
-      },
-    ],
-  },
-  {
     path: 'chart-deprecated',
     component: ChartDeprecatedExampleComponent,
   },
@@ -487,5 +462,9 @@ export const routes: Routes = [
   {
     path: 'styling-HTML-lists',
     component: StylingHtmlListsExampleComponent,
+  },
+  {
+    path: 'wip-list-virtual-scroll',
+    component: ListVirtualScrollExampleComponent,
   },
 ];

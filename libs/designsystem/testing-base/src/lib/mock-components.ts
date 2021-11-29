@@ -26,6 +26,7 @@ import { MockInputCounterComponent } from './components/mock.input-counter.compo
 import { MockInputComponent } from './components/mock.input.component';
 import { MockItemComponent } from './components/mock.item.component';
 import { MockLabelComponent } from './components/mock.label.component';
+import { MockListExperimentalComponent } from './components/mock.list-experimental.component';
 import { MockListHeaderComponent } from './components/mock.list-header.component';
 import { MockListItemComponent } from './components/mock.list-item.component';
 import { MockListSectionHeaderComponent } from './components/mock.list-section-header.component';
@@ -87,6 +88,7 @@ export const MOCK_COMPONENTS = [
   MockIconComponent,
   MockItemComponent,
   MockLabelComponent,
+  MockListExperimentalComponent,
   MockListHeaderComponent,
   MockListItemComponent,
   MockListSectionHeaderComponent,

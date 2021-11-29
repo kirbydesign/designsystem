@@ -32,7 +32,6 @@ import { ListLoadOnDemandShowcaseComponent } from './list-load-on-demand-showcas
 import { ListNoShapeShowcaseComponent } from './list-no-shape-showcase/list-no-shape-showcase.component';
 import { ListShowcaseComponent } from './list-showcase/list-showcase.component';
 import { ListSwipeShowcaseComponent } from './list-swipe-showcase/list-swipe-showcase.component';
-import { ListVirtualScrollShowcaseComponent } from './list-virtual-scroll-showcase/list-virtual-scroll-showcase.component';
 import { LoadingOverlayShowcaseComponent } from './loading-overlay-showcase/loading-overlay-showcase.component';
 import { ModalShowcaseComponent } from './modal-showcase/modal-showcase.component';
 import { PageShowcaseComponent } from './page-showcase/page-showcase.component';
@@ -109,10 +108,6 @@ export const routes: Routes = [
       {
         path: 'list-no-shape',
         component: ListNoShapeShowcaseComponent,
-      },
-      {
-        path: 'list-virtual-scroll',
-        component: ListVirtualScrollShowcaseComponent,
       },
       {
         path: 'page',
