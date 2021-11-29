@@ -25,10 +25,10 @@ jobs:
         run: echo "The cache hash key is 'node-modules-${{runner.os}}-${{env.NODE_VERSION}}-${{hashFiles('**/package.json', '**/package-lock.json')}}'."
       - name: Clean Install NPM Dependencies
         if: steps.cache.outputs.cache-hit != 'true'
-        run: npm ci
+        run: echo NO HIT!
       - name: Run Postinstall Script
         if: steps.cache.outputs.cache-hit == 'true'
-        run: npm run postinstall
+        run: echo HIT
       - name: --Demo--
         run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
