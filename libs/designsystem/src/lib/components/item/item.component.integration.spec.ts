@@ -46,6 +46,8 @@ describe('ItemComponent', () => {
   });
 
   describe('inside kirby-list', () => {
+    let itemTexts: HTMLElement[];
+
     beforeEach(async () => {
       spectator = createHost<ListComponent>(
         `
@@ -57,13 +59,10 @@ describe('ItemComponent', () => {
       ionList = spectator.queryHost('ion-list');
       await TestHelper.whenReady(ionList);
       itemsInList = spectator.queryAll('ion-list ion-item');
+      itemTexts = spectator.queryAll('ion-list ion-item h3');
     });
 
     it('should highlight selected item in bold text', () => {
-      const itemsInList = spectator.queryAll('ion-list ion-item-sliding');
-
-      const itemTexts = spectator.queryAll('ion-list ion-item-sliding h3');
-
       const selectItem = itemsInList[1];
       spectator.click(selectItem);
 
@@ -76,10 +75,6 @@ describe('ItemComponent', () => {
     it('should not highlight selected item in bold text on disableSelectionHighlight', () => {
       spectator.setInput('disableSelectionHighlight', true);
       spectator.detectChanges();
-
-      const itemsInList = spectator.queryAll('ion-list ion-item-sliding');
-
-      const itemTexts = spectator.queryAll('ion-list ion-item-sliding h3');
 
       const selectItem = itemsInList[1];
       spectator.click(selectItem);
