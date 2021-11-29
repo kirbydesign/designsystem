@@ -60,19 +60,15 @@ describe('ItemComponent', () => {
     });
 
     it('should highlight selected item in bold text', () => {
-      const listItems = spectator.queryAll('ion-list ion-item-sliding');
-      expect(listItems).toBeTruthy();
-      expect(listItems).toHaveSize(3);
+      const itemsInList = spectator.queryAll('ion-list ion-item-sliding');
 
       const itemTexts = spectator.queryAll('ion-list ion-item-sliding h3');
-      expect(itemTexts).toBeTruthy();
-      expect(itemTexts).toHaveSize(3);
 
-      const selectItem = listItems[1];
+      const selectItem = itemsInList[1];
       spectator.click(selectItem);
 
       for (let i = 0; i < itemTexts.length; i++) {
-        const fontWeightExpected = listItems[i] === selectItem ? 'bold' : 'normal';
+        const fontWeightExpected = itemsInList[i] === selectItem ? 'bold' : 'normal';
         expect(itemTexts[i]).toHaveComputedStyle({ 'font-weight': fontWeight(fontWeightExpected) });
       }
     });
@@ -81,15 +77,11 @@ describe('ItemComponent', () => {
       spectator.setInput('disableSelectionHighlight', true);
       spectator.detectChanges();
 
-      const listItems = spectator.queryAll('ion-list ion-item-sliding');
-      expect(listItems).toBeTruthy();
-      expect(listItems).toHaveSize(3);
+      const itemsInList = spectator.queryAll('ion-list ion-item-sliding');
 
       const itemTexts = spectator.queryAll('ion-list ion-item-sliding h3');
-      expect(itemTexts).toBeTruthy();
-      expect(itemTexts).toHaveSize(3);
 
-      const selectItem = listItems[1];
+      const selectItem = itemsInList[1];
       spectator.click(selectItem);
 
       for (let i = 0; i < itemTexts.length; i++) {
