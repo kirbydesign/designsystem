@@ -34,9 +34,9 @@ describe('ItemGroup', () => {
     expect(items).toHaveLength(4);
   });
 
-  it('should have ARIA role', () => {
+  it('should have correct ARIA role', () => {
     const itemGroup = spectator.queryHost('kirby-item-group');
 
-    expect(itemGroup.attributes['role']).toBeDefined();
+    expect(itemGroup.attributes['role'].value).toEqual('group');
   });
 });
