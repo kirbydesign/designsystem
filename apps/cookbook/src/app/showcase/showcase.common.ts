@@ -43,6 +43,7 @@ import { SlideButtonShowcaseComponent } from './slide-button-showcase/slide-butt
 import { SlidesShowcaseComponent } from './slides-showcase/slides-showcase.component';
 import { SpinnerShowcaseComponent } from './spinner-showcase/spinner-showcase.component';
 import { StockChartDeprecatedShowcaseComponent } from './stock-chart-deprecated-showcase/stock-chart-deprecated-showcase.component';
+import { StylingHtmlListsShowcaseComponent } from './styling-html-lists/styling-html-lists-showcase';
 import { TabsShowcaseComponent } from './tabs-showcase/tabs-showcase.component';
 import { ToastShowcaseComponent } from './toast-showcase/toast-showcase.component';
 import { ToggleButtonShowcaseComponent } from './toggle-button-showcase/toggle-button-showcase.component';
@@ -97,6 +98,7 @@ export const COMPONENT_EXPORTS: any[] = [
   RadioShowcaseComponent,
   RangeShowcaseComponent,
   LinkShowcaseComponent,
+  StylingHtmlListsShowcaseComponent,
 ];
 
 export const COMPONENT_DECLARATIONS: any[] = [...COMPONENT_EXPORTS, ShowcaseComponent];
