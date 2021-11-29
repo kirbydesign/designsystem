@@ -13,6 +13,8 @@ import { ItemSlidingComponent } from '@kirbydesign/designsystem';
     },
   ],
 })
-export class MockItemSlidingComponent {}
+export class MockItemSlidingComponent {
+  @Input() swipeActions: ListSwipeAction[];
+}
 
 // #endregion
