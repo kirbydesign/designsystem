@@ -30,7 +30,7 @@ jobs:
         if: steps.cache.outputs.cache-hit == 'true'
         run: echo HIT
       - name: Cat package
-        run: cat **/package.json
+        run: cat '**/package.json'
       - name: --Demo--
         run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
