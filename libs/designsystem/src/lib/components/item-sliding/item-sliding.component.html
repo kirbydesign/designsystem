@@ -1,3 +1,14 @@
 <ion-item-sliding>
   <ng-content></ng-content>
+
+  <ion-item-options *ngIf="_hasSwipeActions" side="start">
+    <ion-item-option *ngFor="let swipeAction of _swipeActions" [ngClass]="swipeAction.type">
+      <kirby-icon
+        *ngIf="swipeAction.icon !== undefined"
+        [name]="swipeAction.icon"
+        slot="top"
+      ></kirby-icon>
+      <ion-label>{{ swipeAction.title }}</ion-label>
+    </ion-item-option>
+  </ion-item-options>
 </ion-item-sliding>
