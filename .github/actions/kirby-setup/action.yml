@@ -1,19 +1,10 @@
 name: 'Setup Kirby environment'
 description: 'Will checkout the repository, install node, install npm dependencies either from a cache or as a clean install'
-inputs:
-  node-version: # Composite steps does not support env - added node version as input instead for DRYness
-    description: 'Node version to be used for setup'
-    required: true
-    default: '14.18.1'
 runs:
   using: 'composite'
   steps:
     - name: Checkout repo
-      uses: actions/checkout@v2
-      with:
-        token: ${{secrets.VERSION_BUMP_GITHUB_TOKEN}}
-    - name: Cat package
-      run: cat package.json
+      run: echo HELLO
 #    - name: Install Node.js
 #      uses: actions/setup-node@v2
 #      with:
