@@ -33,8 +33,8 @@ jobs:
       #  run: cp package.json hash-file1.json && cp package-lock.json hash-file2.json
       #- name: Prepare hash-files
       #  run: jq 'del(.version)' package.json > hash-file1.json && jq 'del(.version)' package-lock.json > hash-file2.json
-      - name: Change version in hash-files
-        run: jq '.version ="1.2.3"' package.json > package.json && jq '.version ="1.2.3"' package-lock.json > package-lock.json
+      #- name: Change version in hash-files
+      #  run: jq '.version ="1.2.3"' package.json > package.json && jq '.version ="1.2.3"' package-lock.json > package-lock.json
       - name: Prepare hash-files
         run: jq 'del(.version)' package.json > hash-file1.json && jq 'del(.version)' package-lock.json > hash-file2.json
       - name: Dump new Hash
