@@ -14,6 +14,10 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{env.NODE_VERSION}}
+      - name: Raw copy to tmp-hash-files
+        run: cp package.json hash-file1-tmp.json && cp package-lock.json hash-file2-tmp.json
+      - name: Change version in package files
+        run: jq '.version ="1.2.3"' hash-file1-tmp.json > package.json && jq '.version ="1.2.3"' hash-file2-tmp.json > package-lock.json          
       - name: Prepare hash-files
         run: jq 'del(.version)' package.json > hash-file1.json && jq 'del(.version)' package-lock.json > hash-file2.json
       - name: Fetch Node Modules Cache
