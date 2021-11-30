@@ -1,0 +1,12 @@
+@import '~@kirbydesign/core/src/scss/utils';
+
+ion-item-option {
+  min-width: 92px;
+
+  @each $color-name, $color-value in $main-colors {
+    &.#{$color-name} {
+      background-color: #{get-color($color-name)};
+      color: #{get-color($color-name + '-contrast')};
+    }
+  }
+}

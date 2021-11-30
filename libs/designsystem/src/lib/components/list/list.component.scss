@@ -113,6 +113,7 @@ ion-item-divider {
   color: #{get-color('black')};
   background-color: transparent;
 
+  /* TODO: This for loop is shared */
   @each $color-name, $color-value in $main-colors {
     .#{$color-name} {
       background-color: #{get-color($color-name)};
@@ -128,6 +129,7 @@ ion-item-divider {
 
   .item-content {
     display: inline-grid;
+    /* TODO: This min-width is shared*/
     min-width: 70px;
     flex-direction: column;
 
