@@ -1,5 +1,8 @@
 import { Component, Input } from '@angular/core';
 
+/* TODO: Find a better place to store list swipe actions type
+     perhaps it should also be aliased? */
+
 import { ListSwipeAction } from '../list';
 
 class SwipeAction implements ListSwipeAction {
@@ -34,9 +37,6 @@ class SwipeAction implements ListSwipeAction {
   styleUrls: ['./item-sliding.component.scss'],
 })
 export class ItemSlidingComponent {
-  /* TODO: Find a better place to store list swipe actions type
-     perhaps it should also be aliased? */
-
   _swipeActions: SwipeAction[] = [];
   @Input() set swipeActions(value: ListSwipeAction[]) {
     this._swipeActions = value.map(
@@ -45,9 +45,13 @@ export class ItemSlidingComponent {
     );
   }
 
+  _side: 'start' | 'end' = 'start';
+  @Input() set side(value: 'left' | 'right') {
+    this._side = value === 'left' ? 'start' : 'end';
+  }
+
   get _hasSwipeActions(): boolean {
     const returnValue = Array.isArray(this._swipeActions) && this._swipeActions.length !== 0;
-    console.log(returnValue);
     return returnValue;
   }
 }

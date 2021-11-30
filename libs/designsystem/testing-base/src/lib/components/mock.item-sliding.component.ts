@@ -15,6 +15,7 @@ import { ItemSlidingComponent } from '@kirbydesign/designsystem';
 })
 export class MockItemSlidingComponent {
   @Input() swipeActions: ListSwipeAction[];
+  @Input() side: 'left' | 'right';
 }
 
 // #endregion
