@@ -13,11 +13,13 @@ jobs:
           name: Mads
 
   kirby-setup-test:
-    name: Kirby settup test
+    name: Kirby setup test
     runs-on: ubuntu-latest
     steps:
       - name: Kirby setup
         uses: ./.github/actions/kirby-setup
+        with:
+          node-version: ${{env.NODE_VERSION}}
 
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
