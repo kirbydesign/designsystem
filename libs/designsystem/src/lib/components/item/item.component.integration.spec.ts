@@ -17,7 +17,7 @@ import { ListItemComponent } from '../list/list-item/list-item.component';
 
 import { ItemComponent } from './item.component';
 
-const size = DesignTokenHelper.size;
+const { fontWeight, size } = DesignTokenHelper;
 
 describe('ItemComponent', () => {
   let ionList: HTMLElement;
@@ -46,17 +46,42 @@ describe('ItemComponent', () => {
   });
 
   describe('inside kirby-list', () => {
+    let itemTexts: HTMLElement[];
+
     beforeEach(async () => {
       spectator = createHost<ListComponent>(
         `
-        <kirby-list [items]="[{ name: 'Item1' }, { name: 'Item2' }, { name: 'Item3' }]">
-          <kirby-item *kirbyListItemTemplate="let item">{{ item.name }}</kirby-item>
+        <kirby-list [items]="[{ name: 'Item1' }, { name: 'Item2' }, { name: 'Item3' }]" (itemSelect)="($event)">
+          <kirby-item *kirbyListItemTemplate="let item"><h3>{{ item.name }}</h3></kirby-item>
         </kirby-list>
         `
       );
       ionList = spectator.queryHost('ion-list');
       await TestHelper.whenReady(ionList);
       itemsInList = spectator.queryAll('ion-list ion-item');
+      itemTexts = spectator.queryAll('ion-list ion-item h3');
+    });
+
+    it('should highlight selected item in bold text', () => {
+      const selectItem = itemsInList[1];
+      spectator.click(selectItem);
+
+      for (let i = 0; i < itemTexts.length; i++) {
+        const fontWeightExpected = itemsInList[i] === selectItem ? 'bold' : 'normal';
+        expect(itemTexts[i]).toHaveComputedStyle({ 'font-weight': fontWeight(fontWeightExpected) });
+      }
+    });
+
+    it('should not highlight selected item in bold text on disableSelectionHighlight', () => {
+      spectator.setInput('disableSelectionHighlight', true);
+      spectator.detectChanges();
+
+      const selectItem = itemsInList[1];
+      spectator.click(selectItem);
+
+      for (let i = 0; i < itemTexts.length; i++) {
+        expect(itemTexts[i]).toHaveComputedStyle({ 'font-weight': fontWeight('normal') });
+      }
     });
 
     it('should create list wrapper', () => {
