@@ -13,7 +13,7 @@ export const ListSelectableItemsExampleTemplate = `<kirby-list [items]="items" (
   // tslint:disable-next-line
   selector: 'list-selectable-items-example',
   template: `
-    <kirby-page title="List with selectable items">
+    <kirby-page title="Selectable items using dividers">
       <kirby-page-content>
         ${ListSelectableItemsExampleTemplate}
       </kirby-page-content>
