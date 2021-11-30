@@ -28,6 +28,7 @@ export { GridCardConfiguration } from './grid/grid-card-configuration';
 export * from './icon';
 export * from './item';
 export { ItemGroupComponent } from './item-group/item-group.component';
+export { ItemGroupHeaderComponent } from './item-group-header/item-group-header.component';
 
 export * from './loading-overlay';
 export * from './list';

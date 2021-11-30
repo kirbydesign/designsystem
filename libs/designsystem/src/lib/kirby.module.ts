@@ -31,6 +31,7 @@ import { TextareaComponent } from './components/form-field/textarea/textarea.com
 import { BreakpointHelperService } from './components/grid/breakpoint-helper.service';
 import { GridComponent } from './components/grid/grid.component';
 import { IconModule } from './components/icon/icon.module';
+import { ItemGroupHeaderComponent } from './components/item-group-header/item-group-header.component';
 import { ItemGroupComponent } from './components/item-group/item-group.component';
 import { ItemModule } from './components/item/item.module';
 import { ListModule } from './components/list/list.module';
@@ -120,6 +121,7 @@ const exportedDeclarations = [
   RangeComponent,
   ElementAsButtonDirective,
   ItemGroupComponent,
+  ItemGroupHeaderComponent,
 ];
 
 const declarations = [
