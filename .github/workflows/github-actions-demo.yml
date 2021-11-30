@@ -29,10 +29,14 @@ jobs:
       - name: Run Postinstall Script
         if: steps.cache.outputs.cache-hit == 'true'
         run: echo HIT
-      - name: Prepare package.json for hashing
-        run: jq '.version ="1.2.3"' package.json > hash1.json && jq '.version ="1.2.3"' package-lock.json > hash2.json
+      - name: Change version in hash-files
+        run: jq '.version ="1.2.3"' package.json > hash-file1.json && jq '.version ="1.2.3"' package-lock.json > hash-file2.json
+      #- name: Prepare hash-files
+      #  run: jq 'del(.version)' package.json > hash-file1.json && jq 'del(.version)' package-lock.json > hash-file2.json
+      - name: Dump new Hash
+        run: echo "The new cache hash key is 'node-modules-${{runner.os}}-${{env.NODE_VERSION}}-${{hashFiles('**/hash-file1.json', '**/hash-file2.json')}}'."
       - name: Cat package
-        run: cat hash1.json
+        run: cat hash-file1.json
       - name: --Demo--
         run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
