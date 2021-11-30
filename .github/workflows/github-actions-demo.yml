@@ -30,7 +30,7 @@ jobs:
         if: steps.cache.outputs.cache-hit == 'true'
         run: echo HIT
       - name: Prepare package.json for hashing
-        run: jq '.version ="1.2.3"' package.json > hash1.json && jq '.version ="1.2.3"' package.lock.json > hash2.json
+        run: jq '.version ="1.2.3"' package.json > hash1.json && jq '.version ="1.2.3"' package-lock.json > hash2.json
       - name: Cat package
         run: cat hash1.json
       - name: --Demo--
