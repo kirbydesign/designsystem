@@ -1,6 +1,17 @@
 name: GitHub Actions Demo
 on: [push]
 jobs:
+  say-hello-test:
+    name: Say hello test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Say Hello
+        uses: ./.github/actions/say-hello
+        with:
+          name: Mads
+
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
@@ -17,14 +28,14 @@ jobs:
       - name: Raw copy to tmp-hash-files
         run: cp package.json hash-file1-tmp.json && cp package-lock.json hash-file2-tmp.json
       - name: Change version in package files
-        run: jq '.version ="1.2.3"' hash-file1-tmp.json > package.json && jq '.version ="1.2.3"' hash-file2-tmp.json > package-lock.json          
+        run: jq '.version ="1.2.3"' hash-file1-tmp.json > package.json && jq '.version ="1.2.3"' hash-file2-tmp.json > package-lock.json
       - name: Prepare hash-files
         run: jq 'del(.version)' package.json > hash-file1.json && jq 'del(.version)' package-lock.json > hash-file2.json
       - name: Fetch Node Modules Cache
         uses: actions/cache@v2
         id: cache
         with:
-          path: | 
+          path: |
             **/node_modules
           key: node-modules-${{runner.os}}-${{env.NODE_VERSION}}-${{hashFiles('**/hash-file1.json', '**/hash-file2.json')}}
       - name: Dump Hash
