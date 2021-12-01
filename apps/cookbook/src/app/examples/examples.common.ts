@@ -43,6 +43,7 @@ import { PageFixedTitleAndActionsExampleComponent } from './page-example/fixed-t
 import { PageSimpleExampleComponent } from './page-example/simple/page-simple-example.component';
 import { ProgressCircleExampleComponent } from './progress-circle-example/progress-circle-example.component';
 import { ReorderListExampleComponent } from './reorder-list-example/reorder-list-example.component';
+import { SectionHeaderExampleComponent } from './section-header-example/section-header-example.component';
 import { SegmentedControlExampleComponent } from './segmented-control-example/segmented-control-example.component';
 import { SlideButtonExampleComponent } from './slide-button-example/slide-button-example.component';
 import { CookbookExampleCardContentComponent } from './slides-example/example-card-content';
@@ -122,6 +123,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   LinkExampleComponent,
   PagePullToRefreshExampleComponent,
   ItemGroupExampleComponent,
+  SectionHeaderExampleComponent,
 ];
 
 // Configure custom icons (used by example to show the usage of custom icons)
