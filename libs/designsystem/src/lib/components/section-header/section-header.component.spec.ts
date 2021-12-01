@@ -4,7 +4,7 @@ import { MockComponent } from 'ng-mocks';
 
 import { SectionHeaderComponent } from './section-header.component';
 
-describe('ItemGroupHeaderComponent', () => {
+describe('SectionHeaderComponent', () => {
   let spectator: SpectatorHost<SectionHeaderComponent>;
 
   const createHost = createHostFactory({
