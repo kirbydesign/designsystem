@@ -6,7 +6,6 @@ import { ListWithSectionsExampleTemplate } from '~/app/examples/list-example/exa
 import { ListWithSectionsAndColoredItemsExampleTemplate } from '~/app/examples/list-example/examples/sections-and-colored-items';
 import { ListSelectableItemsExampleTemplate } from '~/app/examples/list-example/examples/selectable-items';
 
-import { ListBoldTextOnRowSelectionExampleTemplate } from '../../examples/list-example/examples/bold-text-on-row-selection';
 import { ListItemsExampleTemplate } from '../../examples/list-example/examples/items';
 
 @Component({
@@ -15,7 +14,6 @@ import { ListItemsExampleTemplate } from '../../examples/list-example/examples/i
   styleUrls: ['./list-showcase.component.scss'],
 })
 export class ListShowcaseComponent implements OnInit {
-  boldTextOnRowSelectionExampleTemplate: string = ListBoldTextOnRowSelectionExampleTemplate;
   dividersExampleTemplate: string = ListWithDividersExampleTemplate;
   selectableItemsExampleTemplate: string = ListSelectableItemsExampleTemplate;
   coloredItemsExampleTemplate: string = ListColoredItemsExampleTemplate;

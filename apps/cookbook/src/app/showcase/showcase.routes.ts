@@ -27,6 +27,7 @@ import { FontsShowcaseComponent } from './fonts-showcase/fonts-showcase.componen
 import { FormFieldShowcaseComponent } from './form-field-showcase/form-field-showcase.component';
 import { GridShowcaseComponent } from './grid-showcase/grid-showcase.component';
 import { IconShowcaseComponent } from './icon-showcase/icon-showcase.component';
+import { ItemGroupShowcaseComponent } from './item-group-showcase/item-group-showcase.component';
 import { ItemSlidingShowcaseComponent } from './item-sliding-showcase/item-sliding-showcase.component';
 import { LinkShowcaseComponent } from './link-showcase/link-showcase.component';
 import { ListLoadOnDemandShowcaseComponent } from './list-load-on-demand-showcase/list-load-on-demand-showcase.component';
@@ -68,6 +69,13 @@ export const routes: Routes = [
       {
         path: 'item-sliding',
         component: ItemSlidingShowcaseComponent,
+      },
+      {
+        path: 'item-group',
+        component: ItemGroupShowcaseComponent,
+        data: {
+          hide: true,
+        },
       },
       {
         path: 'button',

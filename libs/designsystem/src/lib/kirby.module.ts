@@ -32,6 +32,7 @@ import { TextareaComponent } from './components/form-field/textarea/textarea.com
 import { BreakpointHelperService } from './components/grid/breakpoint-helper.service';
 import { GridComponent } from './components/grid/grid.component';
 import { IconModule } from './components/icon/icon.module';
+import { ItemGroupComponent } from './components/item-group/item-group.component';
 import { ItemModule } from './components/item/item.module';
 import { ListModule } from './components/list/list.module';
 import { GroupByPipe } from './components/list/pipes/group-by.pipe';
@@ -120,6 +121,7 @@ const exportedDeclarations = [
   RadioGroupComponent,
   RangeComponent,
   ElementAsButtonDirective,
+  ItemGroupComponent,
 ];
 
 const declarations = [
