@@ -31,7 +31,6 @@ import { TextareaComponent } from './components/form-field/textarea/textarea.com
 import { BreakpointHelperService } from './components/grid/breakpoint-helper.service';
 import { GridComponent } from './components/grid/grid.component';
 import { IconModule } from './components/icon/icon.module';
-import { ItemGroupHeaderComponent } from './components/item-group-header/item-group-header.component';
 import { ItemGroupComponent } from './components/item-group/item-group.component';
 import { ItemModule } from './components/item/item.module';
 import { ListModule } from './components/list/list.module';
@@ -56,6 +55,7 @@ import { RadioComponent } from './components/radio/radio.component';
 import { RangeComponent } from './components/range/range.component';
 import { ReorderListComponent } from './components/reorder-list/reorder-list.component';
 import { RouterOutletModule } from './components/router-outlet/router-outlet.module';
+import { SectionHeaderComponent } from './components/section-header/section-header.component';
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
 import { ComponentLoaderDirective } from './components/shared/component-loader.directive';
 import { ResizeObserverFactory } from './components/shared/resize-observer/resize-observer.factory';
@@ -121,7 +121,7 @@ const exportedDeclarations = [
   RangeComponent,
   ElementAsButtonDirective,
   ItemGroupComponent,
-  ItemGroupHeaderComponent,
+  SectionHeaderComponent,
 ];
 
 const declarations = [

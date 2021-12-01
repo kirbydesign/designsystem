@@ -28,7 +28,6 @@ export { GridCardConfiguration } from './grid/grid-card-configuration';
 export * from './icon';
 export * from './item';
 export { ItemGroupComponent } from './item-group/item-group.component';
-export { ItemGroupHeaderComponent } from './item-group-header/item-group-header.component';
 
 export * from './loading-overlay';
 export * from './list';
@@ -43,6 +42,8 @@ export { HorizontalDirection, PopoverComponent } from './popover/popover.compone
 export * from './router-outlet';
 
 export * from './shared';
+
+export { SectionHeaderComponent } from './section-header/section-header.component';
 /* prettier-ignore */
 export { SegmentedControlComponent, SegmentedControlMode} from './segmented-control/segmented-control.component'; // See issue #1555 for prettier-ignore explanation
 export { SegmentItem } from './segmented-control/segment-item';
