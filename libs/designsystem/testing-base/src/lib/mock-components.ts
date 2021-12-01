@@ -24,7 +24,6 @@ import { MockGridComponent } from './components/mock.grid.component';
 import { MockIconComponent } from './components/mock.icon.component';
 import { MockInputCounterComponent } from './components/mock.input-counter.component';
 import { MockInputComponent } from './components/mock.input.component';
-import { MockItemGroupHeaderComponent } from './components/mock.item-group-header.component';
 import { MockItemGroupComponent } from './components/mock.item-group.component';
 import { MockItemComponent } from './components/mock.item.component';
 import { MockLabelComponent } from './components/mock.label.component';
@@ -54,6 +53,7 @@ import { MockRadioComponent } from './components/mock.radio.component';
 import { MockRangeComponent } from './components/mock.range.component';
 import { MockReorderListComponent } from './components/mock.reorder-list.component';
 import { MockRouterOutletComponent } from './components/mock.router-outlet.component';
+import { MockSectionHeaderComponent } from './components/mock.section-header.component';
 import { MockSegmentedControlComponent } from './components/mock.segmented-control.component';
 import { MockSlideButtonComponent } from './components/mock.slide-button.component';
 import { MockSpinnerComponent } from './components/mock.spinner.component';
@@ -91,7 +91,6 @@ export const MOCK_COMPONENTS = [
   MockItemComponent,
   MockLabelComponent,
   MockItemGroupComponent,
-  MockItemGroupHeaderComponent,
   MockListExperimentalComponent,
   MockListHeaderComponent,
   MockListItemComponent,
@@ -117,6 +116,7 @@ export const MOCK_COMPONENTS = [
   MockRangeComponent,
   MockReorderListComponent,
   MockRouterOutletComponent,
+  MockSectionHeaderComponent,
   MockSegmentedControlComponent,
   MockSlideButtonComponent,
   MockSpinnerComponent,
