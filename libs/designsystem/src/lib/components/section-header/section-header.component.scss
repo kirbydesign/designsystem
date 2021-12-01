@@ -1,0 +1,12 @@
+@import '~@kirbydesign/core/src/scss/utils';
+
+ion-item-divider {
+  --inner-padding-end: 0;
+  --color: unset;
+  --background: transparent;
+  --padding-top: 0;
+  --padding-end: #{size('s')};
+  --pading-bottom: #{size('xxs')};
+  --padding-start: #{size('s')};
+  font-weight: inherit;
+}

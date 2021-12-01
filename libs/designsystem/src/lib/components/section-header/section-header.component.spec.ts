@@ -2,19 +2,19 @@ import { IonItemDivider } from '@ionic/angular';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponent } from 'ng-mocks';
 
-import { ItemGroupHeaderComponent } from './item-group-header.component';
+import { SectionHeaderComponent } from './section-header.component';
 
 describe('ItemGroupHeaderComponent', () => {
-  let spectator: SpectatorHost<ItemGroupHeaderComponent>;
+  let spectator: SpectatorHost<SectionHeaderComponent>;
 
   const createHost = createHostFactory({
-    component: ItemGroupHeaderComponent,
-    declarations: [ItemGroupHeaderComponent, MockComponent(IonItemDivider)],
+    component: SectionHeaderComponent,
+    declarations: [SectionHeaderComponent, MockComponent(IonItemDivider)],
   });
 
   beforeEach(() => {
-    spectator = createHost<ItemGroupHeaderComponent>(`<kirby-item-group-header>
-    </kirby-item-group-header>`);
+    spectator = createHost<SectionHeaderComponent>(`<kirby-section-header>
+    </kirby-section-header>`);
   });
 
   it('should create', () => {
