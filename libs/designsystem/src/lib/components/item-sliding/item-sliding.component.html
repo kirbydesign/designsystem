@@ -2,7 +2,11 @@
   <ng-content></ng-content>
 
   <ion-item-options *ngIf="_hasSwipeActions" [side]="_side">
-    <ion-item-option *ngFor="let swipeAction of _swipeActions" [ngClass]="swipeAction.type">
+    <ion-item-option
+      *ngFor="let swipeAction of _swipeActions"
+      [ngClass]="swipeAction.type"
+      (click)="swipeAction.onSelected()"
+    >
       <kirby-icon
         *ngIf="swipeAction.icon !== undefined"
         [name]="swipeAction.icon"

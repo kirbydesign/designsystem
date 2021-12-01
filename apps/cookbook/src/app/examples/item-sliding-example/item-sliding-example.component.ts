@@ -8,12 +8,23 @@ import { ListSwipeAction } from '@kirbydesign/designsystem';
   styleUrls: [],
 })
 export class ItemSlidingExampleComponent {
-  swipeActions: ListSwipeAction[][] = [
-    [
+  items = [
+    {
+      id: 0,
+      value: 'brbrbrb',
+    },
+    {
+      id: 1,
+      value: 'ararar',
+    },
+  ];
+
+  swipeActions(index: number): ListSwipeAction[] {
+    return [
       {
         title: 'delete',
         position: 'left',
-        onSelected: (item) => console.log(item),
+        onSelected: () => console.log('delete clicked', this.items[index]),
         type: 'danger',
       },
       {
@@ -21,20 +32,17 @@ export class ItemSlidingExampleComponent {
         position: 'left',
         icon: 'link',
         type: 'success',
-        onSelected: (item) => console.log(item),
+        onSelected: () => console.log(index),
       },
       {
         title: 'archive',
         position: 'left',
         icon: () => 'link',
-        onSelected: (item) => console.log(item),
+        onSelected: () => console.log(index),
         type: 'warning',
       },
-    ],
-    [],
-  ];
-
-  toggleSwipeActions() {
-    this.swipeActions.reverse();
+    ];
   }
+
+  toggleSwipeActions() {}
 }

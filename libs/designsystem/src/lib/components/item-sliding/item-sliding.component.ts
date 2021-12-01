@@ -6,19 +6,22 @@ import { Component, Input } from '@angular/core';
 import { ListSwipeAction } from '../list';
 
 class SwipeAction implements ListSwipeAction {
-  public icon: string;
+  public icon?: string;
   public title: string;
 
   constructor(
+    /* TODO: delete this shit */
     public position: ListSwipeAction['position'],
     title: ListSwipeAction['title'],
     public onSelected: ListSwipeAction['onSelected'],
     icon?: ListSwipeAction['icon'],
+    /* TODO: make this do stuff */
     public isDisabled?: ListSwipeAction['isDisabled'],
     public type?: ListSwipeAction['type']
   ) {
     const extractValue = (value: any) => (value instanceof Function ? value() : value);
 
+    this.type = extractValue(type);
     this.icon = extractValue(icon);
     this.title = extractValue(title);
   }

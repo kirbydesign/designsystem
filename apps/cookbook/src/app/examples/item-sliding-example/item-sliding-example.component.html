@@ -1,8 +1,12 @@
 <button kirby-button (click)="toggleSwipeActions()"></button>
 
 <kirby-list-experimental>
-  <kirby-item-sliding [swipeActions]="swipeActions[0]" side="right">
-    <kirby-item>This is a sliding item</kirby-item>
+  <kirby-item-sliding
+    *ngFor="let item of items; let i = index"
+    [swipeActions]="swipeActions(i)"
+    side="right"
+  >
+    <kirby-item>{{ item.value }}</kirby-item>
   </kirby-item-sliding>
   <kirby-list-experimental> </kirby-list-experimental
 ></kirby-list-experimental>
