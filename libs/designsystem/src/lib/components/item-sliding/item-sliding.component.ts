@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { ListSwipeAction } from '../list';
-import { EvaluatedListSwipeAction } from '../list/list-swipe-action.type';
+import { EvaluatedListSwipeAction, ListSwipeAction } from '../list/list-swipe-action.type';
 
 @Component({
   selector: 'kirby-item-sliding',
@@ -21,9 +20,12 @@ export class ItemSlidingComponent {
   }
 
   private evaluateSwipeAction(swipeAction: ListSwipeAction): EvaluatedListSwipeAction {
+    const keysToExclude: (keyof ListSwipeAction)[] = ['onSelected'];
+
     const evaluatedEntries = Object.entries(swipeAction).map(([key, value]) => ({
-      [key]: value instanceof Function ? value() : value,
+      [key]: value instanceof Function && !keysToExclude.includes(key as any) ? value() : value,
     }));
+
     return Object.assign({}, ...evaluatedEntries);
   }
 
