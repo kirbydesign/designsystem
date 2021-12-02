@@ -1,0 +1,12 @@
+@import '~@kirbydesign/core/src/scss/utils';
+
+cookbook-example-viewer {
+  margin-bottom: 1rem;
+}
+
+:host {
+  h2 {
+    margin-top: size('l');
+    border-bottom: 1px dotted get-color('medium');
+  }
+}
