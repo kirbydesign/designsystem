@@ -7,7 +7,7 @@ import { ListSwipeAction, ListSwipeActionType } from '../list';
 
 import { ItemSlidingComponent, ItemSlidingSide } from './item-sliding.component';
 
-fdescribe('ItemSlidingComponent', () => {
+describe('ItemSlidingComponent', () => {
   let spectator: SpectatorHost<ItemSlidingComponent>;
 
   const createHost = createHostFactory({
@@ -99,7 +99,7 @@ fdescribe('ItemSlidingComponent', () => {
       expect(ionItemOptionElements).toHaveLength(swipeActions.length);
     });
 
-    fit('should render ion-item-option elements in same order as swipeActions are given', () => {
+    it('should render ion-item-option elements in same order as swipeActions are given', () => {
       // Verify each title is unique; it can then be used as identifier
       const uniqueSwipeActionTitles = new Set(swipeActions.map(({ title }) => title));
       expect(swipeActions.length).not.toBe(0);
