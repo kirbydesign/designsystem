@@ -55,9 +55,10 @@ export class SideNavComponent implements OnInit {
 
   private mapRoutes() {
     const routesWithPath = routes[0].children.filter((r) => r.path);
-    routesWithPath.sort(this.sortByPath);
+    const navigableRoutes = routesWithPath.filter((r) => !r.data?.hide);
+    navigableRoutes.sort(this.sortByPath);
 
-    this.allShowcaseRoutes = routesWithPath.map((route) => {
+    this.allShowcaseRoutes = navigableRoutes.map((route) => {
       return {
         path: `showcase/${route.path}`,
         name: kebabToTitleCase(route.path),
