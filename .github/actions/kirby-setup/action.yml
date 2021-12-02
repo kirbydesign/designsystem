@@ -19,7 +19,7 @@ runs:
       with:
         path: | 
           **/node_modules
-        key: node-modules-${{ runner.os }}-${{ inputs.node-version }}-${{hashFiles('**/hash-file1.json')}}-${{hashFiles('**/hash-file2.json')}}
+        key: node-modules-${{ runner.os }}-${{ inputs.node-version }}-${{hashFiles('**/hash-file1.json', '**/hash-file2.json')}}
     - name: Remove hash-files
       run: rm hash-file1.json && rm hash-file2.json
       shell: bash
