@@ -1,5 +1,5 @@
 name: 'Setup Kirby environment'
-description: 'Will checkout the repository, install node, install npm dependencies either from a cache or as a clean install'
+description: 'Will install node & install npm dependencies either from a cache or as a clean install'
 runs: 
   using: "composite"
   steps:
