@@ -24,6 +24,7 @@ import { ModalExampleModule } from './modal-example/modal-example.module';
 import { ProgressCircleExampleModule } from './progress-circle-example/progress-circle-example.module';
 import { RadioExampleModule } from './radio-example/radio-example.module';
 import { RangeExampleModule } from './range-example/range-example.module';
+import { SectionHeaderExampleModule } from './section-header-example/section-header-example.module';
 import { SegmentedControlExampleModule } from './segmented-control-example/segmented-control-example.module';
 import { ToggleButtonExampleModule } from './toggle-button-example/toggle-button-example.module';
 
@@ -48,6 +49,7 @@ const IMPORTS = [
   LinkExampleModule,
   ModalExampleModule,
   GridLayoutExamplesModule,
+  SectionHeaderExampleModule,
 ];
 
 @NgModule({

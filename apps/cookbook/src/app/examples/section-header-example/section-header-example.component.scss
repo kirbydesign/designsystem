@@ -1,0 +1,13 @@
+@import '~@kirbydesign/core/src/scss/utils';
+
+:host {
+  display: block;
+  height: 100%;
+  background: get-color('background-color');
+  padding: size('m');
+
+  h2:not(:first-child) {
+    margin-top: size('l');
+    border-bottom: 1px dotted get-color('medium');
+  }
+}
