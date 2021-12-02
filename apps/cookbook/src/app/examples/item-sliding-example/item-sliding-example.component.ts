@@ -26,6 +26,7 @@ export class ItemSlidingExampleComponent {
         position: 'left',
         onSelected: () => console.log('delete clicked', this.items[index]),
         type: 'danger',
+        isDisabled: index % 2 === 0,
       },
       {
         title: 'edit',
