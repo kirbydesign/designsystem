@@ -12,3 +12,14 @@ export interface ListSwipeAction {
   onSelected: (item: any) => void;
   isDisabled?: ((item: any) => boolean) | boolean;
 }
+
+/* TODO: Is it possible to create this type programatically? 
+https://stackoverflow.com/questions/52931116/decompose-a-typescript-union-type-into-specific-types
+ Could be neat to make a generic Evaluted<ListSwipeAction> type that would return the below type */
+export type EvaluatedListSwipeAction = {
+  title: string;
+  onSelected: (item: any) => void;
+  icon?: string;
+  type?: string;
+  isDisabled?: boolean;
+};

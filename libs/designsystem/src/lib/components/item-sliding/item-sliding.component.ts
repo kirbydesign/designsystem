@@ -1,38 +1,7 @@
 import { Component, Input } from '@angular/core';
 
-/* TODO: Find a better place to store list swipe actions type
-     perhaps it should also be aliased? */
-
 import { ListSwipeAction } from '../list';
-
-class SwipeAction implements ListSwipeAction {
-  public icon?: string;
-  public title: string;
-
-  constructor(
-    /* TODO: delete this shit */
-    public position: ListSwipeAction['position'],
-    title: ListSwipeAction['title'],
-    public onSelected: ListSwipeAction['onSelected'],
-    icon?: ListSwipeAction['icon'],
-    /* TODO: make this do stuff */
-    public isDisabled?: ListSwipeAction['isDisabled'],
-    public type?: ListSwipeAction['type']
-  ) {
-    const extractValue = (value: any) => (value instanceof Function ? value() : value);
-
-    this.type = extractValue(type);
-    this.icon = extractValue(icon);
-    this.title = extractValue(title);
-  }
-
-  public get side() {
-    return {
-      left: 'start',
-      right: 'end',
-    }[this.position];
-  }
-}
+import { EvaluatedListSwipeAction } from '../list/list-swipe-action.type';
 
 @Component({
   selector: 'kirby-item-sliding',
@@ -40,12 +9,10 @@ class SwipeAction implements ListSwipeAction {
   styleUrls: ['./item-sliding.component.scss'],
 })
 export class ItemSlidingComponent {
-  _swipeActions: SwipeAction[] = [];
-  @Input() set swipeActions(value: ListSwipeAction[]) {
-    this._swipeActions = value.map(
-      ({ position, title, icon, onSelected, isDisabled, type }) =>
-        new SwipeAction(position, title, onSelected, icon, isDisabled, type)
-    );
+  _evaluatedSwipeActions: EvaluatedListSwipeAction[] = [];
+
+  @Input() set swipeActions(values: ListSwipeAction[]) {
+    this._evaluatedSwipeActions = values.map((value) => this.evaluateSwipeAction(value));
   }
 
   _side: 'start' | 'end' = 'start';
@@ -53,8 +20,16 @@ export class ItemSlidingComponent {
     this._side = value === 'left' ? 'start' : 'end';
   }
 
+  private evaluateSwipeAction(swipeAction: ListSwipeAction): EvaluatedListSwipeAction {
+    const evaluatedEntries = Object.entries(swipeAction).map(([key, value]) => ({
+      [key]: value instanceof Function ? value() : value,
+    }));
+    return Object.assign({}, ...evaluatedEntries);
+  }
+
   get _hasSwipeActions(): boolean {
-    const returnValue = Array.isArray(this._swipeActions) && this._swipeActions.length !== 0;
+    const returnValue =
+      Array.isArray(this._evaluatedSwipeActions) && this._evaluatedSwipeActions.length !== 0;
     return returnValue;
   }
 }
