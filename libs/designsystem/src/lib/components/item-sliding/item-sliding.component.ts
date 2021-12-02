@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core';
 
 import { EvaluatedListSwipeAction, ListSwipeAction } from '../list/list-swipe-action.type';
 
+export type ItemSlidingSide = 'left' | 'right';
+
 @Component({
   selector: 'kirby-item-sliding',
   templateUrl: './item-sliding.component.html',
@@ -15,12 +17,13 @@ export class ItemSlidingComponent {
   }
 
   _side: 'start' | 'end' = 'start';
-  @Input() set side(value: 'left' | 'right') {
+  @Input() set side(value: ItemSlidingSide) {
     this._side = value === 'left' ? 'start' : 'end';
   }
 
   private evaluateSwipeAction(swipeAction: ListSwipeAction): EvaluatedListSwipeAction {
-    const keysToExclude: (keyof ListSwipeAction)[] = ['onSelected'];
+    /* TODO: is it possible to autogenerate these based on the type? */
+    const keysToExclude: (keyof ListSwipeAction)[] = ['onSelected', 'position'];
 
     const evaluatedEntries = Object.entries(swipeAction).map(([key, value]) => ({
       [key]: value instanceof Function && !keysToExclude.includes(key as any) ? value() : value,
