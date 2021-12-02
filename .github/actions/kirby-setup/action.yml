@@ -1,0 +1,33 @@
+name: 'Setup Kirby environment'
+description: 'Will checkout the repository, install node, install npm dependencies either from a cache or as a clean install'
+runs: 
+  using: "composite"
+  steps:
+    - name: Get Node.JS version from package.json
+      run: echo "NODE_VERSION=$(jq -r .engines.node ./package.json)" >> $GITHUB_ENV
+      shell: bash
+    - name: Install Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{env.NODE_VERSION}}
+    - name: Prepare hash-files
+      run: jq 'del(.version)' package.json > hash-file1.json && jq 'del(.version)' package-lock.json > hash-file2.json
+      shell: bash
+    - name: Fetch Node Modules Cache
+      uses: actions/cache@v2
+      id: cache
+      with:
+        path: | 
+          **/node_modules
+        key: node-modules-${{ runner.os }}-${{ inputs.node-version }}-${{hashFiles('**/hash-file1.json')}}-${{hashFiles('**/hash-file2.json')}}
+    - name: Remove hash-files
+      run: rm hash-file1.json && rm hash-file2.json
+      shell: bash
+    - name: Clean Install NPM Dependencies
+      if: steps.cache.outputs.cache-hit != 'true'
+      run: npm ci
+      shell: bash
+    - name: Run Postinstall Script
+      if: steps.cache.outputs.cache-hit == 'true'
+      run: npm run postinstall
+      shell: bash
