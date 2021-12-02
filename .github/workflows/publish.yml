@@ -41,8 +41,7 @@ jobs:
       - name: Version bump core and update core dependency version in designsystem
         id: bump-core
         if: steps.modified-files.outputs.core == 'true'
-        run:
-          | # For explanation: https://github.com/kirbydesign/designsystem/pull/1722#issuecomment-928181479
+        run: | # For explanation: https://github.com/kirbydesign/designsystem/pull/1722#issuecomment-928181479
           cd libs/core
           NEW_VERSION=$(npm version patch | cut -d v -f2) 
           cd ../../ 
