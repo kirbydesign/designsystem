@@ -45,7 +45,7 @@ describe('ItemComponent', () => {
       );
     });
 
-    it('should render general header, data and paragraph elements in bold', () => {
+    it('should render general header, data and paragraph elements with correct font-weight', () => {
       labelElements
         .filter((e) => !e.attributes.getNamedItem('detail'))
         .forEach((e) => {
