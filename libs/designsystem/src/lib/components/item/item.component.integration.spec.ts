@@ -10,7 +10,7 @@ import { ItemComponent } from './item.component';
 
 const { fontWeight } = DesignTokenHelper;
 
-describe('ItemComponent', () => {
+describe('ItemComponent with LabelComponent', () => {
   let ionItem: HTMLElement;
 
   let spectator: SpectatorHost<ItemComponent>;
