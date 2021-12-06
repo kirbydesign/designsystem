@@ -1,13 +1,13 @@
 import _deepCopy from 'ts-deepcopy';
 
 /**
- * Do a deep copy of object to remove references
+ * Do a deep copy of object that supports the composite data type Function
  *
- * Do so while retaining functions.
+ * @see https://stackoverflow.com/questions/122102/what-is-the-most-efficient-way-to-deep-clone-an-object-in-javascript#answer-122704
  *
  * @param obj
- * @returns
+ * @returns obj
  */
-export function deepCopy(obj: any): any {
-  return _deepCopy(obj);
+export function deepCopy<T>(obj: T): T {
+  return _deepCopy<T>(obj);
 }
