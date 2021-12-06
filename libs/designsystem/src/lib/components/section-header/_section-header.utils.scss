@@ -1,5 +1,11 @@
+/*
+* This mixin is applied both in the section-header styles, for using 
+* headings and paragraphs directly, and in kirby-label styles, for 
+* wrapping them in a kirby-label within a section-header. 
+*/
+
 @mixin section-header-typography() {
-  @include slotted(h3, p) {
+  @include slotted(h1, h2, h3, h4, h5, h6, p) {
     font-size: font-size('n');
     line-height: line-height('n');
     color: get-text-color('black');

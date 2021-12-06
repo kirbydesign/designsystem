@@ -1,4 +1,5 @@
 @import '~@kirbydesign/core/src/scss/utils';
+@import './section-header.utils';
 
 :host {
   ion-item-divider {
@@ -15,27 +16,6 @@
     // Without supplying a piece of content with the needed height
     min-height: 0;
 
-    /*
-    * The styling for slotted content is, for now, mirrored in the Kirby Label
-    * styles to also support using any of these within a kirby-label tag. 
-    */
-    @include slotted(h3, p) {
-      font-size: font-size('n');
-      line-height: line-height('n');
-      color: get-text-color('black');
-      margin: 0;
-
-      &.kirby-text-bold {
-        font-weight: font-weight('bold');
-      }
-    }
-
-    @include slotted('[detail]', '[label]') {
-      font-weight: font-weight('light');
-      font-size: font-size('s');
-      line-height: line-height('s');
-      color: get-text-color('black');
-      margin: 0;
-    }
+    @include section-header-typography();
   }
 }
