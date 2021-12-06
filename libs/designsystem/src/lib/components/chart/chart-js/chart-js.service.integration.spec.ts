@@ -317,24 +317,5 @@ describe('ChartJSService with ChartConfigService', () => {
         });
       });
     });
-    describe('createConfigurationObject', () => {
-      it('should not be filled with blank labels if type is stock', () => {
-        const stockChartConfig = {
-          targetElement: canvasElement,
-          type: 'stock' as ChartType,
-          data: [
-            {
-              data: [
-                { x: 10, y: 5 },
-                { x: 11, y: 6 },
-                { x: 13, y: 6 },
-              ],
-            },
-          ],
-        };
-        chartJSService.renderChart(stockChartConfig);
-        expect(chartJSService['chart'].data.labels.length).toEqual(0);
-      });
-    });
   });
 });

@@ -191,6 +191,26 @@ describe('ChartJSService', () => {
         });
       });
 
+      describe('function: createConfigurationObject', () => {
+        it('should not be filled with blank labels if type is stock', () => {
+          const stockChartConfig = {
+            targetElement: canvasElement,
+            type: 'stock' as ChartType,
+            data: [
+              {
+                data: [
+                  { x: 10, y: 5 },
+                  { x: 11, y: 6 },
+                  { x: 13, y: 6 },
+                ],
+              },
+            ],
+          };
+          chartJSService.renderChart(stockChartConfig);
+          expect(chartJSService['chart'].data.labels.length).toEqual(0);
+        });
+      });
+
       describe('when data is given as a chartJSDataset[]', () => {
         it('should render a new chart', () => {
           expect(chartJSService['chart']).toBeUndefined();
@@ -863,27 +883,35 @@ describe('ChartJSService', () => {
     ];
     const flatDataset: number[] = [1, 2, 3, 4, 5];
 
-    it('should throw an error if dataset is a flat array', () => {
-      const chartDataLabelOptions: ChartDataLabelOptions = {};
-      expect(function() {
-        chartJSService.addDataLabelsData(flatDataset, chartDataLabelOptions);
-      }).toThrowError();
+    describe('when dataset is a flat array', () => {
+      it('should throw an error if dataset is a flat array', () => {
+        const chartDataLabelOptions: ChartDataLabelOptions = {};
+        expect(function() {
+          chartJSService.addDataLabelsData(flatDataset, chartDataLabelOptions);
+        }).toThrowError();
+      });
     });
 
     const dataLabelOptionsProperties = ['showMax', 'showMin', 'showCurrent'];
 
     dataLabelOptionsProperties.forEach((property) => {
-      it(`should have an datalabel propery in dataset if one of ChartDataLabelsOptions.${property} is true`, () => {
-        const chartDataLabelOptions: ChartDataLabelOptions = { [property]: true };
-        const result = chartJSService.addDataLabelsData(deepCopy(data), chartDataLabelOptions);
-        expect((result[0] as ChartJSDataset).data.find((item: any) => item.datalabel)).toBeTruthy();
+      describe(`when one of ChartDataLabelsOptions.${property} is true`, () => {
+        it(`should have an datalabel propery in dataset`, () => {
+          const chartDataLabelOptions: ChartDataLabelOptions = { [property]: true };
+          const result = chartJSService.addDataLabelsData(deepCopy(data), chartDataLabelOptions);
+          expect(
+            (result[0] as ChartJSDataset).data.find((item: any) => item.datalabel)
+          ).toBeTruthy();
+        });
       });
     });
 
-    it('should NOT have an datalabel propery in dataset if niether ChartDataLabelsOptions.showMin, showMax, showCurrent is true ', () => {
-      const chartDataLabelOptions: ChartDataLabelOptions = {};
-      const result = chartJSService.addDataLabelsData(deepCopy(data), chartDataLabelOptions);
-      expect((result[0] as ChartJSDataset).data.find((item: any) => item.datalabel)).toBeFalsy();
+    describe('when niether ChartDataLabelsOptions.showMin, showMax, showCurrent is true', () => {
+      it('should NOT have an datalabel propery in dataset', () => {
+        const chartDataLabelOptions: ChartDataLabelOptions = {};
+        const result = chartJSService.addDataLabelsData(deepCopy(data), chartDataLabelOptions);
+        expect((result[0] as ChartJSDataset).data.find((item: any) => item.datalabel)).toBeFalsy();
+      });
     });
   });
 });

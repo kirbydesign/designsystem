@@ -22,45 +22,49 @@ describe('ChartI18nService', () => {
     expect(service).toBeTruthy();
   });
 
-  describe('handleLocalization', () => {
-    it('should return da locale if input is "da-DK"', () => {
-      expect(
-        service.handleLocalization(
-          TEST_CHART_TYPES_CONFIG['stock'].options,
-          ChartPeriod.oneYear,
-          'da-DK'
-        ).locale
-      ).toEqual('da-DK');
+  describe('function: handleLocalization', () => {
+    describe('when locale is "da-DK"', () => {
+      it('should return da locale', () => {
+        expect(
+          service.handleLocalization(
+            TEST_CHART_TYPES_CONFIG['stock'].options,
+            ChartPeriod.oneYear,
+            'da-DK'
+          ).locale
+        ).toEqual('da-DK');
+      });
+
+      it('day format should be d MMM', () => {
+        expect(
+          (service.handleLocalization(
+            TEST_CHART_TYPES_CONFIG['stock'].options,
+            ChartPeriod.oneYear,
+            'da-DK'
+          ).scales.x as any).time.displayFormats.day
+        ).toEqual('d MMM');
+      });
     });
 
-    it('should return enUS locale if input is "en-US"', () => {
-      expect(
-        service.handleLocalization(
-          TEST_CHART_TYPES_CONFIG['stock'].options,
-          ChartPeriod.oneYear,
-          'en-US'
-        ).locale
-      ).toEqual('en-US');
-    });
+    describe('when locale is "en-US"', () => {
+      it('should return enUS locale', () => {
+        expect(
+          service.handleLocalization(
+            TEST_CHART_TYPES_CONFIG['stock'].options,
+            ChartPeriod.oneYear,
+            'en-US'
+          ).locale
+        ).toEqual('en-US');
+      });
 
-    it('day format should be d MMM if input is "da-DK', () => {
-      expect(
-        (service.handleLocalization(
-          TEST_CHART_TYPES_CONFIG['stock'].options,
-          ChartPeriod.oneYear,
-          'da-DK'
-        ).scales.x as any).time.displayFormats.day
-      ).toEqual('d MMM');
-    });
-
-    it('day format should be MMM d if input is "en-US', () => {
-      expect(
-        (service.handleLocalization(
-          TEST_CHART_TYPES_CONFIG['stock'].options,
-          ChartPeriod.oneYear,
-          'en-US'
-        ).scales.x as any).time.displayFormats.day
-      ).toEqual('MMM d');
+      it('day format should be MMM d', () => {
+        expect(
+          (service.handleLocalization(
+            TEST_CHART_TYPES_CONFIG['stock'].options,
+            ChartPeriod.oneYear,
+            'en-US'
+          ).scales.x as any).time.displayFormats.day
+        ).toEqual('MMM d');
+      });
     });
   });
 });
