@@ -46,23 +46,8 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
-      - name: Install Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-      - name: Fetch Node Modules Cache
-        uses: actions/cache@v2
-        id: cache
-        with:
-          path: | 
-            **/node_modules
-          key: node-modules-${{ runner.os }}-${{env.NODE_VERSION}}-${{hashFiles('**/package.json', '**/package-lock.json')}}
-      - name: Clean Install NPM Dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: npm ci
-      - name: Run Postinstall Script
-        if: steps.cache.outputs.cache-hit == 'true'
-        run: npm run postinstall 
+      - name: Kirby setup
+        uses: ./.github/actions/kirby-setup
       - name: Run linting
         run: npm run lint
       - name: Run tests
@@ -80,52 +65,23 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
-      - name: Install Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-      - name: Fetch Node Modules Cache
-        uses: actions/cache@v2
-        id: cache
-        with:
-          path: |
-            **/node_modules
-          key: node-modules-${{ runner.os }}-${{env.NODE_VERSION}}-${{hashFiles('**/package.json', '**/package-lock.json')}}
-      - name: Clean Install NPM Dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: npm ci
-      - name: Run Postinstall Script
-        if: steps.cache.outputs.cache-hit == 'true'
-        run: npm run postinstall 
+      - name: Kirby setup
+        uses: ./.github/actions/kirby-setup
       - name: Build Kirby lib
         run: npm run dist:designsystem
 
-  build_kirby_cookbook: 
+  build_kirby_cookbook:
     name: Build Kirby Cookbook
     needs: pre_build
     if: ${{ needs.pre_build.outputs.do_build == 'true' }}
-    runs-on: ubuntu-latest 
+    runs-on: ubuntu-latest
     env:
       NODE_VERSION: ${{ needs.pre_build.outputs.node_version }}
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
-      - name: Install Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-      - name: Fetch Node Modules Cache
-        uses: actions/cache@v2
-        with:
-          path: |
-            **/node_modules
-          key: node-modules-${{ runner.os }}-${{env.NODE_VERSION}}-${{hashFiles('**/package.json', '**/package-lock.json')}}
-      - name: Clean Install NPM Dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: npm ci
-      - name: Run Postinstall Script
-        if: steps.cache.outputs.cache-hit == 'true'
-        run: npm run postinstall 
+      - name: Kirby setup
+        uses: ./.github/actions/kirby-setup
       - name: Build Kirby Cookbook
         run: npm run dist:cookbook
       - name: Upload Kirby Cookbook dist files
@@ -134,7 +90,6 @@ jobs:
           path: |
             dist/
           key: cookbook-dist-${{github.run_id}}
-
 
   deploy_to_cookbook:
     name: Deploy cookbook
@@ -219,7 +174,7 @@ jobs:
 
           git config --global user.name 'DRB-bot'
           git config --global user.email 'dbrr00@bankdata.dk'          
-          
+
           mkdir -p designsystem_web/branch
           if [ $HOSTNAME == "cookbook" ]; then 
             sed -i -E "s,<base href=\"[^\"]*\".*>,<base href=\"/\">,g" dist/apps/cookbook/index.html
@@ -262,7 +217,7 @@ jobs:
           done
 
           git add .
-          
+
           if ! git diff-index --quiet HEAD; then          
             git commit -m "Release: $RELEASENAME"
             git push
@@ -295,4 +250,4 @@ jobs:
           state: failure
           mediaType: '{"previews": ["ant-man"]}'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}          
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
