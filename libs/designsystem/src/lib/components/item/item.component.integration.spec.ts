@@ -20,7 +20,7 @@ describe('ItemComponent with LabelComponent', () => {
     declarations: [LabelComponent],
   });
 
-  describe('selectable and selected with kirby-label', () => {
+  describe('selectable and selected', () => {
     let labelElements: Element[];
 
     beforeEach(async () => {
