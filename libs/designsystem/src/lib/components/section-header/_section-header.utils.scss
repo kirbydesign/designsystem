@@ -1,0 +1,20 @@
+@mixin section-header-typography() {
+  @include slotted(h3, p) {
+    font-size: font-size('n');
+    line-height: line-height('n');
+    color: get-text-color('black');
+    margin: 0;
+
+    &.kirby-text-bold {
+      font-weight: font-weight('bold');
+    }
+  }
+
+  @include slotted('[detail]', '[label]') {
+    font-weight: font-weight('light');
+    font-size: font-size('s');
+    line-height: line-height('s');
+    color: get-text-color('black');
+    margin: 0;
+  }
+}
