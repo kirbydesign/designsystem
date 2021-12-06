@@ -32,6 +32,7 @@ describe('ChartI18nService', () => {
         ).locale
       ).toEqual('da-DK');
     });
+
     it('should return enUS locale if input is "en-US"', () => {
       expect(
         service.handleLocalization(
@@ -41,6 +42,7 @@ describe('ChartI18nService', () => {
         ).locale
       ).toEqual('en-US');
     });
+
     it('day format should be d MMM if input is "da-DK', () => {
       expect(
         (service.handleLocalization(
@@ -50,6 +52,7 @@ describe('ChartI18nService', () => {
         ).scales.x as any).time.displayFormats.day
       ).toEqual('d MMM');
     });
+
     it('day format should be MMM d if input is "en-US', () => {
       expect(
         (service.handleLocalization(
