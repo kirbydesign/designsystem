@@ -1,4 +1,5 @@
-import { Component, forwardRef } from '@angular/core';
+import { Component, forwardRef, Input } from '@angular/core';
+import { ItemSwipeAction } from 'libs/designsystem/src/lib/components/list/list-swipe-action.type';
 
 import { ItemSlidingComponent } from '@kirbydesign/designsystem';
 
@@ -14,7 +15,7 @@ import { ItemSlidingComponent } from '@kirbydesign/designsystem';
   ],
 })
 export class MockItemSlidingComponent {
-  @Input() swipeActions: ListSwipeAction[];
+  @Input() swipeActions: ItemSwipeAction[];
   @Input() side: 'left' | 'right';
 }
 
