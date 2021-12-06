@@ -53,7 +53,7 @@ describe('ItemComponent with LabelComponent', () => {
         });
     });
 
-    it('should render detail data and paragraph elements in default normal', () => {
+    it('should render detail data and paragraph elements with correct font-weight', () => {
       labelElements
         .filter((e) => !!e.attributes.getNamedItem('detail'))
         .forEach((e) => {
