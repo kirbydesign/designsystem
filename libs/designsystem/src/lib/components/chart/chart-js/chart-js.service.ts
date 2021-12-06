@@ -1,13 +1,14 @@
 import { ElementRef, Injectable } from '@angular/core';
 import { ActiveElement, ChartConfiguration, ChartOptions, ScatterDataPoint } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
-import { ChartPeriod } from 'libs/designsystem/src';
 
 import { mergeDeepAll } from '../../../helpers/merge-deep';
 import {
   ChartDataLabelOptions,
   ChartDataset,
   ChartHighlightedElements,
+  ChartLocale,
+  ChartPeriod,
   ChartType,
   isNumberArray,
 } from '../chart.types';
@@ -19,6 +20,9 @@ import { Chart } from './configured-chart-js';
 @Injectable()
 export class ChartJSService {
   private chart: Chart;
+  private dataLabelOptions: ChartDataLabelOptions;
+  private highlightedElements: ChartHighlightedElements;
+  private chartType: ChartType;
 
   constructor(
     private chartConfigService: ChartConfigService,
@@ -46,13 +50,16 @@ export class ChartJSService {
       highlightedElements,
     } = args;
 
-    const datasets = this.createDatasets(data, highlightedElements, dataLabelOptions);
+    this.dataLabelOptions = dataLabelOptions || null;
+    this.highlightedElements = highlightedElements || null;
+    this.chartType = type;
+
+    const datasets = this.createDatasets(data);
 
     // The first dataset controls the datespan.
     const chartPeriod = this.chartConfigService.findChartPeriod(datasets[0]);
 
     const options = this.createOptionsObject({
-      type,
       customOptions,
       annotations,
       chartPeriod,
@@ -69,6 +76,17 @@ export class ChartJSService {
 
   public updateData(data: ChartDataset[] | number[]): void {
     const datasets = this.createDatasets(data);
+
+    if (this.chartType === 'stock') {
+      this.chart.config.options = {
+        ...this.chart.config.options,
+        ...this.i18nService.handleLocalization(
+          this.chart.config.options,
+          this.chartConfigService.findChartPeriod(data[0] as ChartDataset),
+          this.chart.config.options.locale as ChartLocale
+        ),
+      };
+    }
     this.chart.data.datasets = datasets;
   }
 
@@ -86,9 +104,14 @@ export class ChartJSService {
     }
   }
 
+  public updateDataLabelOptions(dataLabelOptions: ChartDataLabelOptions) {
+    this.dataLabelOptions = dataLabelOptions;
+  }
+
   public updateOptions(customOptions: ChartOptions, type: ChartType) {
     const annotations = this.getExistingChartAnnotations();
-    this.chart.options = this.createOptionsObject({ type, customOptions, annotations });
+    this.chartType = type;
+    this.chart.options = this.createOptionsObject({ customOptions, annotations });
   }
 
   public updateAnnotations(annotations: AnnotationOptions[]) {
@@ -97,6 +120,7 @@ export class ChartJSService {
   }
 
   public updateHighlightedElements(highlightedElements?: ChartHighlightedElements) {
+    this.highlightedElements = highlightedElements;
     const oldDatasets = this.chart.data.datasets as ChartDataset[];
 
     // Clear old datasets of highlighted elements
@@ -106,7 +130,7 @@ export class ChartJSService {
       }
     });
 
-    this.chart.data.datasets = this.createDatasets(oldDatasets, highlightedElements);
+    this.chart.data.datasets = this.createDatasets(oldDatasets);
   }
 
   private getExistingChartAnnotations(): AnnotationOptions[] {
@@ -126,7 +150,8 @@ export class ChartJSService {
     const dataLabels = this.chart.data.labels;
     const annotations = this.getExistingChartAnnotations();
 
-    const options = this.createOptionsObject({ type, customOptions, annotations });
+    this.chartType = type;
+    const options = this.createOptionsObject({ customOptions, annotations });
     const config = this.createConfigurationObject(type, datasets, options, dataLabels);
     const canvasElement = this.chart.canvas;
 
@@ -136,8 +161,8 @@ export class ChartJSService {
 
   private nonDestructivelyUpdateType(chartType: ChartType, customOptions?: ChartOptions) {
     const annotations = this.getExistingChartAnnotations();
+    this.chartType = chartType;
     const options = this.createOptionsObject({
-      type: chartType,
       customOptions,
       annotations,
     });
@@ -187,21 +212,19 @@ export class ChartJSService {
   }
 
   private createOptionsObject(args: {
-    type: ChartType;
     customOptions?: ChartOptions;
     annotations?: AnnotationOptions[];
     chartPeriod?: ChartPeriod;
     dataLabelOptions?: ChartDataLabelOptions;
   }): ChartOptions {
     const {
-      type,
       customOptions,
       annotations,
       chartPeriod,
       dataLabelOptions: chartDataLabelOptions,
     } = args;
 
-    const typeConfig = this.chartConfigService.getTypeConfig(type);
+    const typeConfig = this.chartConfigService.getTypeConfig(this.chartType);
     const typeConfigOptions = typeConfig?.options;
     const annotationPluginOptions = annotations
       ? this.createAnnotationPluginOptionsObject(annotations)
@@ -212,7 +235,7 @@ export class ChartJSService {
       annotationPluginOptions
     );
 
-    if (type === 'stock') {
+    if (this.chartType === 'stock') {
       options.plugins.tooltip.callbacks.label = (context) => {
         // It's not possible to add spacing between color legend and text so we
         // prefix with a space.
@@ -276,17 +299,18 @@ export class ChartJSService {
       }
     });
   }
-  private createDatasets(
-    data: ChartDataset[] | number[],
-    highlightedElements?: ChartHighlightedElements,
-    datalabelOptions?: ChartDataLabelOptions
-  ): ChartDataset[] {
+  private createDatasets(data: ChartDataset[] | number[]): ChartDataset[] {
     // We need to modify the datasets in order to add datalabels.
-    if (datalabelOptions?.showCurrent || datalabelOptions?.showMax || datalabelOptions?.showMin) {
-      data = this.addDataLabelsData(data, datalabelOptions);
+    if (
+      this.dataLabelOptions?.showCurrent ||
+      this.dataLabelOptions?.showMax ||
+      this.dataLabelOptions?.showMin
+    ) {
+      data = this.addDataLabelsData(data);
     }
     let datasets = isNumberArray(data) ? [{ data }] : data;
-    if (highlightedElements) this.addHighlightedElementsToDatasets(highlightedElements, datasets);
+    if (this.highlightedElements)
+      this.addHighlightedElementsToDatasets(this.highlightedElements, datasets);
 
     return datasets;
   }
@@ -294,13 +318,9 @@ export class ChartJSService {
    * Decorate ChartDataset with properties to allow for datalabels.
    *
    * @param data
-   * @param dataLabelOptions
    * @returns ChartDataset[]
    */
-  public addDataLabelsData(
-    data: ChartDataset[] | number[],
-    dataLabelOptions: ChartDataLabelOptions
-  ): ChartDataset[] {
+  public addDataLabelsData(data: ChartDataset[] | number[]): ChartDataset[] {
     if (isNumberArray(data)) {
       throw Error("Currently it's impossible to add dataLabels to non ScatterDataPoint datasets");
     }
@@ -315,20 +335,20 @@ export class ChartJSService {
       set.data[pointer] = {
         ...(set.data[pointer] as ScatterDataPoint),
         datalabel: {
-          value: value + (dataLabelOptions.valueSuffix || ''),
+          value: value + (this.dataLabelOptions.valueSuffix || ''),
           position,
         },
       } as ScatterDataPoint;
     };
 
     data.map((set) => {
-      if (dataLabelOptions.showMin) {
+      if (this.dataLabelOptions.showMin) {
         decorateDataPoint(set, 'y', 'low', 'bottom');
       }
-      if (dataLabelOptions.showMax) {
+      if (this.dataLabelOptions.showMax) {
         decorateDataPoint(set, 'y', 'high', 'top');
       }
-      if (dataLabelOptions.showCurrent) {
+      if (this.dataLabelOptions.showCurrent) {
         decorateDataPoint(set, 'x', 'high', 'right');
       }
     });

@@ -446,7 +446,7 @@ describe('ChartJSService', () => {
         'applyInteractionFunctionsExtensions'
       );
 
-      chartJSService['createOptionsObject']({ type: 'bar' });
+      chartJSService['createOptionsObject']({});
 
       expect(applyInteractionFunctionsExtensionsSpy).toHaveBeenCalledTimes(1);
     });
@@ -885,9 +885,9 @@ describe('ChartJSService', () => {
 
     describe('when dataset is a flat array', () => {
       it('should throw an error if dataset is a flat array', () => {
-        const chartDataLabelOptions: ChartDataLabelOptions = {};
+        chartJSService.updateDataLabelOptions({});
         expect(function() {
-          chartJSService.addDataLabelsData(flatDataset, chartDataLabelOptions);
+          chartJSService.addDataLabelsData(flatDataset);
         }).toThrowError();
       });
     });
@@ -897,8 +897,8 @@ describe('ChartJSService', () => {
     dataLabelOptionsProperties.forEach((property) => {
       describe(`when one of ChartDataLabelsOptions.${property} is true`, () => {
         it(`should have an datalabel propery in dataset`, () => {
-          const chartDataLabelOptions: ChartDataLabelOptions = { [property]: true };
-          const result = chartJSService.addDataLabelsData(deepCopy(data), chartDataLabelOptions);
+          chartJSService.updateDataLabelOptions({ [property]: true });
+          const result = chartJSService.addDataLabelsData(deepCopy(data));
           expect(
             (result[0] as ChartJSDataset).data.find((item: any) => item.datalabel)
           ).toBeTruthy();
@@ -908,8 +908,9 @@ describe('ChartJSService', () => {
 
     describe('when niether ChartDataLabelsOptions.showMin, showMax, showCurrent is true', () => {
       it('should NOT have an datalabel propery in dataset', () => {
-        const chartDataLabelOptions: ChartDataLabelOptions = {};
-        const result = chartJSService.addDataLabelsData(deepCopy(data), chartDataLabelOptions);
+        chartJSService.updateDataLabelOptions({});
+
+        const result = chartJSService.addDataLabelsData(deepCopy(data));
         expect((result[0] as ChartJSDataset).data.find((item: any) => item.datalabel)).toBeFalsy();
       });
     });
