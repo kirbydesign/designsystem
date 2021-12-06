@@ -17,7 +17,7 @@ describe('ItemComponent', () => {
   const createHost = createHostFactory({
     component: ItemComponent,
     imports: [TestHelper.ionicModuleForTest],
-    declarations: [LabelComponent, IconComponent],
+    declarations: [LabelComponent],
   });
 
   describe('selectable and selected with kirby-label', () => {
