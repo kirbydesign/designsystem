@@ -264,9 +264,6 @@ export const routes: Routes = [
       {
         path: 'section-header',
         component: SectionHeaderShowcaseComponent,
-        data: {
-          hide: true,
-        },
       },
     ],
   },
