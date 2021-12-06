@@ -24,7 +24,7 @@ describe('ItemComponent with LabelComponent', () => {
     let labelElements: Element[];
 
     beforeEach(async () => {
-      spectator = createHost<ItemComponent>(
+      spectator = createHost(
         `
         <kirby-item selectable="true" selected="true">
           <kirby-label>
