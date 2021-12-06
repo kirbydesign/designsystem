@@ -17,3 +17,37 @@
 <h2>Section Header with Card</h2>
 <cookbook-section-header-with-card #sectionHeaderWithCard></cookbook-section-header-with-card>
 <cookbook-example-viewer [html]="sectionHeaderWithCard.template"> </cookbook-example-viewer>
+
+<br />
+<p>🚨 Below is WIP for showcasing detail, label and title styling within section header:</p>
+
+<h2>paragraph</h2>
+<kirby-section-header>
+  <p>Paragraph</p>
+  <kirby-label slot="end" class="kirby-text-bold">
+    <p>Paragraph</p>
+  </kirby-label>
+</kirby-section-header>
+
+<h2>H3</h2>
+<kirby-section-header>
+  <h3>Heading 3</h3>
+  <kirby-label slot="end">
+    <h3 class="kirby-text-bold">H3</h3>
+    <p>Inside label</p>
+  </kirby-label>
+</kirby-section-header>
+
+<h2>p + label inside label</h2>
+<kirby-section-header>
+  <kirby-label>
+    <p label>Hello</p>
+    <p detail>detail</p>
+  </kirby-label>
+</kirby-section-header>
+
+<h2>label + detail</h2>
+<kirby-section-header>
+  <p label>Hello</p>
+  <p detail slot="end">detail</p>
+</kirby-section-header>
