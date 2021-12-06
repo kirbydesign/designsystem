@@ -48,20 +48,12 @@ export class ChartI18nService {
     scaleX.time.displayFormats = this.getDisplayFormats(localeString);
 
     let tooltipDateformat = '';
-    switch (chartPeriod) {
-      case ChartPeriod.oneDay:
-        tooltipDateformat = this.getDisplayFormats(localeString).hour;
-        break;
-      case ChartPeriod.oneWeek:
-      case ChartPeriod.oneMonth:
-      case ChartPeriod.threeMonths:
-      case ChartPeriod.sixMonths:
-      case ChartPeriod.oneYear:
-        tooltipDateformat = this.getDisplayFormats(localeString).day;
-        break;
-      case ChartPeriod.fiveYears:
-        tooltipDateformat = 'LLL yy';
-        break;
+    if (chartPeriod == ChartPeriod.oneDay) {
+      tooltipDateformat = this.getDisplayFormats(localeString).hour;
+    } else if (chartPeriod == ChartPeriod.fiveYears) {
+      tooltipDateformat = 'LLL yyyy';
+    } else {
+      tooltipDateformat = this.getDisplayFormats(localeString).day;
     }
 
     options.plugins.tooltip.callbacks.title = (tooltipItems) => {
