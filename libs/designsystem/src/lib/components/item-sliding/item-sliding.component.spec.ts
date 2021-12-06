@@ -4,6 +4,7 @@ import { MockComponent, MockModule } from 'ng-mocks';
 
 import { ItemComponent } from '../item/item.component';
 import { ListSwipeAction, ListSwipeActionType } from '../list';
+import { ItemSwipeAction } from '../list/list-swipe-action.type';
 
 import { ItemSlidingComponent, ItemSlidingSide } from './item-sliding.component';
 
@@ -39,24 +40,21 @@ describe('ItemSlidingComponent', () => {
   });
 
   describe('with swipeActions', () => {
-    const swipeActions: ListSwipeAction[] = [
+    const swipeActions: ItemSwipeAction[] = [
       {
         title: 'Delete',
-        position: 'left',
         onSelected: () => console.log('test'),
         type: 'danger',
       },
       {
         title: 'Edit',
-        position: 'left',
         icon: 'link',
         type: 'success',
         onSelected: () => console.log('test'),
       },
       {
         title: 'Archive',
-        position: 'left',
-        icon: () => 'link',
+        icon: 'link',
         onSelected: () => console.log('test'),
         type: 'warning',
       },
@@ -111,15 +109,6 @@ describe('ItemSlidingComponent', () => {
         const optionLabel = ionItemOptionElement.querySelector('ion-label');
         expect(optionLabel.innerHTML).toEqual(swipeActions[index].title as string);
       });
-    });
-
-    // TODO: Maybe not test this? Too far in the metal.
-    it('should evaluate swipeActions given as functions', () => {
-      expect(true).toBeFalse();
-    });
-
-    it('should not evaluate swipeActions.onSelected', () => {
-      expect(true).toBeFalse();
     });
 
     it('should render buttons with correct width', () => {
