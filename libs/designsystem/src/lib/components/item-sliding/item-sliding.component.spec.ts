@@ -110,8 +110,6 @@ fdescribe('ItemSlidingComponent', () => {
       });
     });
 
-    it('should render buttons with correct min-width', () => {});
-
     it('should not render disabled swipeActions', () => {
       expect(true).toBeFalse();
     });
