@@ -9,4 +9,14 @@ cookbook-example-viewer {
     margin-top: size('l');
     border-bottom: 1px dotted get-color('medium');
   }
+
+  .section-header-illustration {
+    display: flex;
+    justify-content: center;
+    margin-bottom: size('xs');
+
+    svg {
+      max-width: 600px;
+    }
+  }
 }
