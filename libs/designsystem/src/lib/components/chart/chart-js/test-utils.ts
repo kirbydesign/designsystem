@@ -132,14 +132,11 @@ export const TEST_CHART_TYPES_CONFIG: ChartTypesConfig = {
           },
           callbacks: {},
         },
-        crosshair: {
-          line: {
-            color: 'red',
-          },
-          sync: {
-            enabled: false,
-          },
-        },
+        // marker: {
+        //   line: {
+        //     color: 'red',
+        //   },
+        // },
         datalabels: {
           color: '#ffffff',
           borderRadius: 3,

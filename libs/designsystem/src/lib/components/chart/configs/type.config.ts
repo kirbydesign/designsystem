@@ -189,17 +189,16 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
             },
           },
         },
-        crosshair: {
-          line: {
-            color: getThemeColorHexString('black-base'),
-          },
-          zoom: {
-            enabled: false,
-          },
-          sync: {
-            enabled: false,
-          },
-        },
+        // A failed attempt to get local typings working.
+        // The chartjs-plugin-marker is rewritten to not
+        // having to rely on own plugin settings, but using
+        // x-axis type time instead.
+        // @todo candidate for refactor once solved.
+        // marker: {
+        //   line: {
+        //     color: getThemeColorHexString('black-base'),
+        //   }
+        // },
 
         datalabels: {
           backgroundColor: (context: Context) => context.dataset.borderColor as Color,
