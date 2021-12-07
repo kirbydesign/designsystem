@@ -6,10 +6,6 @@
     --inner-padding-end: 0;
     --color: unset;
     --background: transparent;
-    --padding-top: 0;
-    --padding-end: #{size('s')};
-    --pading-bottom: #{size('xxs')};
-    --padding-start: #{size('s')};
     font-weight: inherit;
     // TODO: Determine if we really want this.
     // This way, section header cannot be used as simple spacer
