@@ -181,30 +181,5 @@ fdescribe('ItemSlidingComponent', () => {
         });
       });
     });
-
-    it('should render the title for each swipeAction', () => {
-      expect(true).toBeFalse();
-    });
-
-    it('should render swipeAction titles with correct typography', () => {
-      expect(true).toBeFalse();
-    });
-
-    const swipeActionPropertyFunctionScenarios: {
-      [key in keyof Omit<ListSwipeAction, 'onSelected' | 'position'>]: () => any;
-    } = {
-      title: () => 'title',
-      icon: () => 'link',
-      type: () => 'danger',
-      isDisabled: () => true,
-    };
-
-    Object.entries(swipeActionPropertyFunctionScenarios).forEach((property, fn) => {
-      describe(`when ${property} is given as function`, () => {
-        it('should use the result of the function for the property', () => {
-          expect(true).toBeFalse();
-        });
-      });
-    });
   });
 });
