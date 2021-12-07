@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 const config = {
   selector: 'cookbook-section-header-with-card',
   template: `<kirby-section-header>
-  <h3 class="kirby-text-bold">Contact Info</h3>
+  <h3 heading>Contact Info</h3>
 </kirby-section-header>
 <kirby-card [hasPadding]="true">
   <kirby-item>
