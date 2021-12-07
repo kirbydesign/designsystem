@@ -5,22 +5,24 @@
 */
 
 @mixin section-header-typography() {
-  @include slotted(h1, h2, h3, h4, h5, h6, p) {
-    font-size: font-size('n');
-    line-height: line-height('n');
-    color: get-text-color('black');
-    margin: 0;
+  --ion-text-color-rgb: #{get-text-color('black')}; //TODO: make this configurable
+  --padding-end: #{size('s')};
+  --padding-start: #{size('s')};
 
-    &.kirby-text-bold {
-      font-weight: font-weight('bold');
-    }
+  @include slotted('[heading]') {
+    font-weight: font-weight('bold');
+    font-size: font-size('m');
+    line-height: line-height('m');
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   @include slotted('[detail]', '[label]') {
     font-weight: font-weight('light');
     font-size: font-size('s');
     line-height: line-height('s');
-    color: get-text-color('black');
-    margin: 0;
+    margin: size('xxxs') 0 size('xxs');
   }
 }
