@@ -157,8 +157,11 @@ fdescribe('ItemSlidingComponent', () => {
     });
 
     describe('when a swipeAction is clicked', () => {
-      it('should evaluate onSelected', () => {
-        expect(true).toBeFalse();
+      it('should call onSelected', () => {
+        const idx = 0;
+        const onSelectedSpy = spyOn(spectator.component.swipeActions[idx], 'onSelected');
+        ionItemOptionElements[idx].click();
+        expect(onSelectedSpy).toHaveBeenCalled();
       });
     });
 
