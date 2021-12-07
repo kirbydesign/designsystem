@@ -20,12 +20,21 @@ fdescribe('ItemSlidingComponent', () => {
   let ionItemOptionsElement: HTMLIonItemOptionsElement;
   let ionItemOptionElements: NodeListOf<HTMLIonItemOptionElement>;
 
+  function queryItemOptionElements() {
+    ionItemOptionElements = spectator.element.querySelectorAll('ion-item-option');
+  }
+
+  function queryItemOptionsElement() {
+    ionItemOptionsElement = spectator.element.querySelector('ion-item-options');
+  }
+
   beforeEach(() => {
     spectator = createHost(
       '<kirby-item-sliding><kirby-item>Item</kirby-item></kirby-item-sliding>'
     );
-    ionItemOptionsElement = spectator.element.querySelector('ion-item-options');
-    ionItemOptionElements = spectator.element.querySelectorAll('ion-item-option');
+
+    queryItemOptionsElement();
+    queryItemOptionElements();
   });
 
   it('should create', () => {
@@ -66,10 +75,16 @@ fdescribe('ItemSlidingComponent', () => {
 
     beforeEach(() => {
       spectator.setInput('swipeActions', swipeActions);
+      queryItemOptionElements();
+      queryItemOptionsElement();
+
+      // Verify each title is unique; it can then be used as identifier in tests
+      const uniqueSwipeActionTitles = new Set(swipeActions.map(({ title }) => title));
+      expect(swipeActions.length).not.toBe(0);
+      expect(uniqueSwipeActionTitles.size).toBe(swipeActions.length);
     });
 
-    it("should render swipeActions in the 'start' slot by default", () => {
-      //TODO: Is there a better way to check this?
+    it('should render swipeActions in the correct slot by default', () => {
       expect(ionItemOptionsElement.getAttribute('ng-reflect-side')).toEqual('start');
     });
 
@@ -92,17 +107,11 @@ fdescribe('ItemSlidingComponent', () => {
       });
     });
 
-    it('should render an ion-item-option for each swipe action', () => {
-      expect(swipeActions.length).not.toBe(0);
-      expect(ionItemOptionElements).toHaveLength(swipeActions.length);
+    it('should render an ion-item-option element for each swipe action', () => {
+      expect(ionItemOptionElements.length).toEqual(swipeActions.length);
     });
 
     it('should render ion-item-option elements in same order as swipeActions are given', () => {
-      // Verify each title is unique; it can then be used as identifier
-      const uniqueSwipeActionTitles = new Set(swipeActions.map(({ title }) => title));
-      expect(swipeActions.length).not.toBe(0);
-      expect(uniqueSwipeActionTitles.size).toBe(swipeActions.length);
-
       // QuerySelectorAll returns elements in document order
       ionItemOptionElements.forEach((ionItemOptionElement, index) => {
         const optionLabel = ionItemOptionElement.querySelector('ion-label');
@@ -110,24 +119,39 @@ fdescribe('ItemSlidingComponent', () => {
       });
     });
 
-    it('should not render disabled swipeActions', () => {
-      expect(true).toBeFalse();
-    });
+    describe('when a swipeAction is disabled', () => {
+      beforeEach(() => {
+        const swipeActionsWithDisabled = JSON.parse(JSON.stringify(swipeActions));
+        swipeActionsWithDisabled[0]['isDisabled'] = true;
 
-    it('should SOMETHING ABOUT DEFAULT TYPE HERE', () => {
-      expect(true).toBeFalse();
+        expect(swipeActionsWithDisabled.length).toBe(swipeActions.length);
+
+        spectator.setInput('swipeActions', swipeActionsWithDisabled);
+        queryItemOptionElements();
+      });
+
+      it('should not render the disabled swipeAction', () => {
+        expect(ionItemOptionElements.length).toBe(swipeActions.length - 1);
+      });
     });
 
     const swipeActionTypesScenarios: { [key in ListSwipeActionType]: string } = {
-      warning: '#000',
-      success: '#000',
-      danger: '#000',
+      warning: '#ffca3a',
+      success: '#2cf287',
+      danger: '#ff595e',
     };
 
     Object.entries(swipeActionTypesScenarios).forEach(([type, color]) => {
       describe(`when a swipeAction has type ${type}`, () => {
+        let swipeActionWithType: HTMLIonItemOptionElement;
+        beforeEach(() => {
+          const typeIdx = swipeActions.findIndex((swipeAction) => swipeAction.type === type);
+          swipeActionWithType = ionItemOptionElements[typeIdx];
+          expect(swipeActionWithType).not.toBeUndefined();
+        });
+
         it('should render with correct background color', () => {
-          expect(true).toBeFalse();
+          expect(swipeActionWithType).toHaveComputedStyle({ 'background-color': color });
         });
       });
     });
