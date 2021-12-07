@@ -3,12 +3,12 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponent, MockModule } from 'ng-mocks';
 
 import { ItemComponent } from '../item/item.component';
-import { ListSwipeAction, ListSwipeActionType } from '../list';
+import { ListSwipeActionType } from '../list';
 import { ItemSwipeAction } from '../list/list-swipe-action.type';
 
 import { ItemSlidingComponent, ItemSlidingSide } from './item-sliding.component';
 
-fdescribe('ItemSlidingComponent', () => {
+describe('ItemSlidingComponent', () => {
   let spectator: SpectatorHost<ItemSlidingComponent>;
 
   const createHost = createHostFactory({
@@ -166,22 +166,25 @@ fdescribe('ItemSlidingComponent', () => {
     });
 
     describe('when a swipeAction has an icon', () => {
-      it('should render the correct icon', () => {
-        expect(true).toBeFalse();
+      let kirbyIconElement: HTMLElement;
+
+      beforeEach(() => {
+        const swipeActionsWithIcons = swipeActions.map((swipeAction) => ({
+          ...swipeAction,
+          icon: 'flash',
+        }));
+        spectator.setInput('swipeActions', swipeActionsWithIcons);
+        queryItemOptionElements();
+        kirbyIconElement = ionItemOptionElements[0].querySelector('kirby-icon');
       });
 
       it('should render the icon in the correct slot', () => {
-        expect(true).toBeFalse();
+        expect(kirbyIconElement.slot).toEqual('top');
       });
 
       it('should render the title', () => {
-        expect(true).toBeFalse();
-      });
-
-      describe('and it is custom', () => {
-        it('should render the custom icon', () => {
-          expect(true).toBeFalse();
-        });
+        const optionLabel = ionItemOptionElements[0].querySelector('ion-label');
+        expect(optionLabel.innerHTML).toEqual(swipeActions[0].title);
       });
     });
   });
