@@ -6,6 +6,7 @@ export type ListSwipeEnd = 'start' | 'end';
 
 export type ItemSwipeAction = {
   title: string;
+  // TODO: item is not provided in the function. Remove it.
   onSelected: (item: any) => void;
   icon?: string;
   type?: ListSwipeActionType;
