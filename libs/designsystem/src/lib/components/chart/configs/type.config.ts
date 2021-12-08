@@ -1,6 +1,7 @@
 import { ChartTypeRegistry, Color, Point, TooltipItem, TooltipLabelStyle } from 'chart.js';
 import { Context } from 'chartjs-plugin-datalabels';
 import { Align } from 'chartjs-plugin-datalabels/types/options';
+import { format, toDate } from 'date-fns';
 
 import { ColorHelper, DesignTokenHelper } from '../../../helpers';
 import { ChartTypesConfig } from '../chart.types';
@@ -118,8 +119,8 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
       },
       layout: {
         padding: {
-          left: 0,
-          right: 10,
+          left: 20,
+          right: 20,
           top: 30,
           bottom: 0,
         },
@@ -127,13 +128,11 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
       backgroundColor: getThemeColorRgbString('semi-light', 0.5),
       scales: {
         x: {
-          type: 'time',
           grid: {
             lineWidth: 0,
           },
           ticks: {
             maxRotation: 0,
-            source: 'data',
             autoSkipPadding: 120,
             font: {
               size: parseInt(fontSize('xs')),

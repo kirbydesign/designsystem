@@ -207,7 +207,10 @@ describe('ChartJSService', () => {
             ],
           };
           chartJSService.renderChart(stockChartConfig);
-          expect(chartJSService['chart'].data.labels.length).toEqual(0);
+          expect(chartJSService['chart'].data.labels.length).toEqual(3);
+          chartJSService['chart'].data.labels.forEach((label) => {
+            expect(label).not.toBe('');
+          });
         });
       });
 
