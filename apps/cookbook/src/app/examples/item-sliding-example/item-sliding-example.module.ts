@@ -5,8 +5,10 @@ import { KirbyModule } from '@kirbydesign/designsystem';
 
 import { ItemSlidingConditionalExampleComponent } from './examples/item-sliding-conditional-example.component';
 import { ItemSlidingSimpleExampleComponent } from './examples/item-sliding-simple-example.component';
+import { ItemSlidingExampleComponent } from './item-sliding-example.component';
 
 const COMPONENT_DECLARATIONS = [
+  ItemSlidingExampleComponent,
   ItemSlidingConditionalExampleComponent,
   ItemSlidingSimpleExampleComponent,
 ];

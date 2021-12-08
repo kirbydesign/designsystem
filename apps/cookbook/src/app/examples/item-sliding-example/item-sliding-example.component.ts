@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
 
-const config = {
-  selector: 'cookbook-item-sliding-example',
-  template: `hej`,
-};
 @Component({
-  selector: config.selector,
-  template: config.template,
+  selector: 'cookbook-item-sliding-example',
+  template: `
+    <cookbook-item-sliding-conditional-example></cookbook-item-sliding-conditional-example>
+  `,
 })
 export class ItemSlidingExampleComponent {}
