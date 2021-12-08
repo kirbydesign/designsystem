@@ -1,2 +1,33 @@
-<h1>🚧 Under construction, 90's style 🚧</h1>
-<cookbook-item-sliding-example></cookbook-item-sliding-example>
+<article>
+  <section class="introduction">
+    <h2>Overview</h2>
+    <p>
+      The <code>kirby-item-sliding</code> element is used to extend the
+      <code>kirby-item</code> component with the functionality to reveal buttons when swiped. These
+      buttons are created from a list of <code>swipeAction</code> objects which is provided via the
+      <code>swipeActions</code> input property.
+    </p>
+    <p>
+      Each <code>swipeAction</code> object can be given properties to configure the corresponding
+      button with a title, icon, type, disabled status and behaviour when selected.
+    </p>
+  </section>
+
+  <section>
+    <h2>Examples</h2>
+
+    <h3>Simple list with swipe actions</h3>
+    <p>
+      Below is an example of <code>kirby-item-sliding</code> used in a list. Three swipe actions are
+      given: save, archive and delete. Each are configured with a title, type and a function to call
+      when selected.
+    </p>
+    <cookbook-item-sliding-example></cookbook-item-sliding-example>
+    <h3>Conditional configuration of swipe actions</h3>
+    <p>
+      This example is an extension of the above "simple list with swipe actions" example; it
+      conditionally disables the 'delete' swipe action based on whether the list item is deleteable
+      i.e. <code>isDeleteable</code> is set to true.
+    </p>
+  </section>
+</article>
