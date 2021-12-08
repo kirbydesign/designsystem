@@ -7,12 +7,15 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   styleUrls: ['./item-sliding-showcase.component.scss'],
 })
 export class ItemSlidingShowcaseComponent {
+  _cardMode = 'flat';
+  _cardHasPadding = true;
+
   _inputPropertiesApiDescription: ApiDescriptionProperty[] = [
     {
       name: 'swipeActions',
       description:
-        '(Required) A list of swipe actions that is used to configure the buttons that is revealed when the item is swiped. See the below description of the SwipeAction object for more info on configuration.',
-      type: ['SwipeAction[]'],
+        '(Required) A list of swipe actions that is used to configure the buttons that is revealed when the item is swiped. See the below description of the ItemSwipeAction object for more info on configuration.',
+      type: ['ItemSwipeAction[]'],
       defaultValue: 'undefined',
     },
     {
