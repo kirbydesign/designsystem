@@ -1,17 +1,5 @@
-export type ListSwipeActionType = 'success' | 'warning' | 'danger';
-
-export type ListSwipeDirection = 'right' | 'left';
-
-export type ListSwipeEnd = 'start' | 'end';
-
-export type ItemSwipeAction = {
-  title: string;
-  // TODO: item is not provided in the function. Remove it.
-  onSelected: (item: any) => void;
-  icon?: string;
-  type?: ListSwipeActionType;
-  isDisabled?: boolean;
-};
+import { ItemSwipeAction } from '../item-sliding/item-sliding.types';
+import { ItemSlidingSide as ListSwipeDirection } from '../item-sliding/item-sliding.types';
 
 /* 
     Copy each property in ItemSwipeAction but make it possible to provide them via a function.
@@ -24,3 +12,11 @@ export type ListSwipeAction = {
 } & {
   position: ListSwipeDirection;
 };
+
+// To not break old imports relying on ListSwipeActionType
+export {
+  ItemSwipeActionType as ListSwipeActionType,
+  ItemSwipeActionSlots as ListSwipeEnd,
+} from '../item-sliding/item-sliding.types';
+
+export { ListSwipeDirection };

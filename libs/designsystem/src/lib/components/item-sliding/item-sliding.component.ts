@@ -1,8 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { ItemSwipeAction } from '../list/list-swipe-action.type';
-
-export type ItemSlidingSide = 'left' | 'right';
+import { ItemSlidingSide, ItemSwipeAction } from './item-sliding.types';
 
 @Component({
   selector: 'kirby-item-sliding',
