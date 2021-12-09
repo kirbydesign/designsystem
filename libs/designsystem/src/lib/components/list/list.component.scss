@@ -114,9 +114,6 @@ ion-item-divider {
   color: #{get-color('black')};
   background-color: transparent;
 
-  // TODO: why is this not working
-  @include swipe-action-type-styles;
-
   ion-item-option {
     height: 100%;
     display: inline-block;

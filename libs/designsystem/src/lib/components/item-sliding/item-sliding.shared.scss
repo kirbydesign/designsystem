@@ -1,5 +1,3 @@
-@import '~@kirbydesign/core/src/scss/utils';
-
 /* 
   These styles are moved here as they are shared between 
   the new kirby-item-sliding component and the old template driven 
@@ -9,7 +7,7 @@
   just be used directly in item-sliding.component.scss.
  */
 
-@mixin swipe-action-type-styles {
+ion-item-option {
   @each $color-name, $color-value in $main-colors {
     &.#{$color-name} {
       background-color: #{get-color($color-name)};
