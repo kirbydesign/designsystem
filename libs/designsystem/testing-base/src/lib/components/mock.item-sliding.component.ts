@@ -1,7 +1,6 @@
 import { Component, forwardRef, Input } from '@angular/core';
-import { ItemSwipeAction } from 'libs/designsystem/src/lib/components/list/list-swipe-action.type';
 
-import { ItemSlidingComponent } from '@kirbydesign/designsystem';
+import { ItemSlidingComponent, ItemSwipeAction } from '@kirbydesign/designsystem';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
