@@ -1,16 +1,15 @@
 import { ItemSwipeAction } from '../item-sliding/item-sliding.types';
 import { ItemSlidingSide as ListSwipeDirection } from '../item-sliding/item-sliding.types';
 
-/* 
-    Copy each property in ItemSwipeAction but make it possible to provide them via a function.
-    If the property is a function do not modify it.
-   */
+// Copy each property in ItemSwipeAction but make it possible to provide them via a function.
+type ListSwipeActionBaseTypes = Pick<ItemSwipeAction, 'title' | 'icon' | 'type' | 'isDisabled'>;
 export type ListSwipeAction = {
-  [Property in keyof ItemSwipeAction]: ItemSwipeAction[Property] extends Function
-    ? ItemSwipeAction[Property]
-    : ((item: any) => ItemSwipeAction[Property]) | ItemSwipeAction[Property];
+  [Property in keyof ListSwipeActionBaseTypes]:
+    | ((item: any) => ListSwipeActionBaseTypes[Property])
+    | ListSwipeActionBaseTypes[Property];
 } & {
   position: ListSwipeDirection;
+  onSelected: (item: any) => void;
 };
 
 // To not break old imports relying on ListSwipeActionType
