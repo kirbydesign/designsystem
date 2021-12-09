@@ -14,7 +14,7 @@ export class ItemSlidingShowcaseComponent {
     {
       name: 'swipeActions',
       description:
-        '(Required) A list of swipe actions that is used to configure the buttons that is revealed when the item is swiped. See the below description of the ItemSwipeAction object for more info on configuration.',
+        '(Required) A list of swipe actions that are used to configure the buttons which are revealed when the item is swiped. See the below description of the ItemSwipeAction object for more info on configuration.',
       type: ['ItemSwipeAction[]'],
       defaultValue: 'undefined',
     },
@@ -29,7 +29,7 @@ export class ItemSlidingShowcaseComponent {
   _swipeActionApiDescription: ApiDescriptionProperty[] = [
     {
       name: 'title',
-      description: '(Required) The text the swipe action button should be rendered with.',
+      description: '(Required) The text the swipe action button should be displayed with.',
       type: ['string'],
       defaultValue: 'undefined',
     },
@@ -55,7 +55,7 @@ export class ItemSlidingShowcaseComponent {
     },
     {
       name: 'isDisabled',
-      description: 'If true will cause the swipe action button to not be rendered.',
+      description: 'If true will cause the swipe action button to not be displayed.',
       type: ['boolean'],
       defaultValue: 'false',
     },
