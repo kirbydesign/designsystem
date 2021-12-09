@@ -9,6 +9,7 @@ export * from './chart-deprecated';
 export * from './chart';
 export * from './stock-chart-deprecated';
 export * from './calendar';
+export * from './item-sliding';
 
 export { CheckboxComponent } from './checkbox/checkbox.component';
 export { ChipComponent } from './chip/chip.component';

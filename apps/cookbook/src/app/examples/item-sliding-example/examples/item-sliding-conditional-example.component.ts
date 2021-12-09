@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ItemSwipeAction } from '@kirbydesign/designsystem/components/list/list-swipe-action.type';
+import { ItemSwipeAction } from '@kirbydesign/designsystem';
 
 const config = {
   selector: 'cookbook-item-sliding-conditional-example',
