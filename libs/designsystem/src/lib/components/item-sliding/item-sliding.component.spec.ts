@@ -4,9 +4,8 @@ import { MockComponent, MockModule } from 'ng-mocks';
 
 import { ItemComponent } from '../item/item.component';
 import { ListSwipeActionType } from '../list';
-import { ItemSwipeAction } from '../list/list-swipe-action.type';
 
-import { ItemSlidingComponent, ItemSlidingSide } from './item-sliding.component';
+import { ItemSlidingComponent, ItemSlidingSide, ItemSwipeAction } from './';
 
 describe('ItemSlidingComponent', () => {
   let spectator: SpectatorHost<ItemSlidingComponent>;
