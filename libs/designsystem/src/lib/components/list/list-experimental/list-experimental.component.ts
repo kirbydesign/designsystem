@@ -8,7 +8,7 @@ import { elementHasAncestor } from '../../../helpers/element-has-ancestor';
   templateUrl: './list-experimental.component.html',
 })
 export class ListExperimentalComponent {
-  @ViewChild('list', { static: true }) list: IonList;
+  @ViewChild(IonList, { static: true }) list: IonList;
 
   @HostListener('click', ['$event'])
   closeAllSlidingItems(e: MouseEvent) {
