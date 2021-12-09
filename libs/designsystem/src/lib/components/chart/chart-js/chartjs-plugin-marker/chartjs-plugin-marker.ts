@@ -16,7 +16,10 @@ var defaultOptions = {
 };
 
 const hasMarkerConfiguration = (chart) => {
-  return chart.config.options.scales.x && chart.config.options.scales.x.type === 'time';
+  // using another plugins options is not ideal, so the issue with marker plugin
+  // should be resolved. As of right now the only chart that uses
+  // tooltip is stock charts.
+  return chart.config.options.scales.x && chart.config.options.plugins.tooltip.enabled;
   // @todo when resolving the typings issue with the markerplugin,
   // this is a better conditional.
   // return chart.config.options.scales.x && chart.config.options.plugins.marker
