@@ -10,10 +10,10 @@ $badge-diameter: utils.$avatar-badge-size;
 
 @function get-badge-position($avatar-diameter) {
   $cos-to-45-degrees: 0.70710678118;
-  $avatar-radius: $avatar-diameter / 2;
+  $avatar-radius: $avatar-diameter * 0.5;
   $position-from-center: math.round($cos-to-45-degrees * $avatar-radius);
   $position-from-edge: $avatar-radius - $position-from-center;
-  $badge-radius: $badge-diameter / 2;
+  $badge-radius: $badge-diameter * 0.5;
   $badge-position: $position-from-edge - $badge-radius;
   @return $badge-position;
 }

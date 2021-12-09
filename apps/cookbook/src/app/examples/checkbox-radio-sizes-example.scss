@@ -42,7 +42,7 @@ kirby-radio::after {
   font-size: utils.font-size('xs');
   color: utils.get-color('danger');
   padding-right: utils.size('xxs');
-  margin-right: utils.size('xxs') / 2;
+  margin-right: utils.size('xxs') * 0.5;
   vertical-align: center;
 }
 
