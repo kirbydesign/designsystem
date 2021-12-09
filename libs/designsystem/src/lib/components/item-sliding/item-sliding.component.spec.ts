@@ -3,9 +3,9 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponent, MockModule } from 'ng-mocks';
 
 import { ItemComponent } from '../item/item.component';
-import { ListSwipeActionType } from '../list';
 
 import { ItemSlidingComponent, ItemSlidingSide, ItemSwipeAction } from './';
+import { ItemSwipeActionType } from './item-sliding.types';
 
 describe('ItemSlidingComponent', () => {
   let spectator: SpectatorHost<ItemSlidingComponent>;
@@ -134,7 +134,7 @@ describe('ItemSlidingComponent', () => {
       });
     });
 
-    const swipeActionTypesScenarios: { [key in ListSwipeActionType]: string } = {
+    const swipeActionTypesScenarios: { [key in ItemSwipeActionType]: string } = {
       warning: '#ffca3a',
       success: '#2cf287',
       danger: '#ff595e',

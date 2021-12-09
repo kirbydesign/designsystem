@@ -1,5 +1,7 @@
-import { ItemSwipeAction } from '../item-sliding/item-sliding.types';
-import { ItemSlidingSide as ListSwipeDirection } from '../item-sliding/item-sliding.types';
+import {
+  ItemSlidingSide as ListSwipeDirection,
+  ItemSwipeAction,
+} from '../item-sliding/item-sliding.types';
 
 // Copy each property in ItemSwipeAction but make it possible to provide them via a function.
 type ListSwipeActionBaseTypes = Pick<ItemSwipeAction, 'title' | 'icon' | 'type' | 'isDisabled'>;
