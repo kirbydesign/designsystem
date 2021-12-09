@@ -1,6 +1,6 @@
 /* 
   Utility function to check if a given element 
-  has a ancestor with a specific node name. 
+  has an ancestor with a specific node name. 
 
   Can be given a 'stopNodeName' to limit the search
   as to not climb all the way up through the DOM tree. 
