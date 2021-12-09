@@ -69,6 +69,9 @@ export const routes: Routes = [
       {
         path: 'item-sliding',
         component: ItemSlidingShowcaseComponent,
+        data: {
+          hide: true,
+        },
       },
       {
         path: 'item-group',
