@@ -72,7 +72,6 @@ export class ListItemComponent implements OnInit, AfterViewInit {
     }
   }
 
-  // TODO: This might be suitable for a shared class
   _hasSwipeActions(item: any): boolean {
     if (!Array.isArray(this.swipeActions)) {
       return false;
@@ -115,7 +114,6 @@ export class ListItemComponent implements OnInit, AfterViewInit {
     return 'end';
   }
 
-  /* TODO: implemented in swipeAction class */
   _getSwipeActionIcon(swipeAction: ListSwipeAction, item: any): string {
     if (!swipeAction.icon) return;
 
@@ -141,8 +139,7 @@ export class ListItemComponent implements OnInit, AfterViewInit {
 
   private initializeSwipeActions(): void {
     if (this.swipeActions && this.swipeActions.length) {
-      //this._isSwipingEnabled = this.platform.isTouch();
-      this._isSwipingEnabled = true;
+      this._isSwipingEnabled = this.platform.isTouch();
     }
   }
 }
