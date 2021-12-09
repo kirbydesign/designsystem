@@ -3,7 +3,7 @@
     <h2>Overview</h2>
     <p>
       The <code>kirby-item-sliding</code> element is used to extend the
-      <code>kirby-item</code> component with the functionality to reveal buttons when swiped. These
+      <code>kirby-item</code> component with functionality to reveal buttons when swiped. These
       buttons are created from a list of <code>swipeAction</code> objects which is provided via the
       <code>swipeActions</code> input property.
     </p>
@@ -19,8 +19,8 @@
     <h3>Simple list with swipe actions</h3>
     <p>
       Below is an example of <code>kirby-item-sliding</code> used in a list. Three swipe actions are
-      given: save, archive and delete. Each are configured with a title, type and a function to call
-      when selected. The delete action is also configured with a icon.
+      given: edit, archive and delete. Each are configured with a title, type and a function to call
+      when selected. The delete action has been configured to display an icon.
     </p>
 
     <kirby-card [mode]="_cardMode" [hasPadding]="_cardHasPadding">
@@ -32,8 +32,8 @@
 
     <h3>Conditional configuration of swipe actions</h3>
     <p>
-      This example is an extension of the above "simple list with swipe actions" example; it
-      conditionally disables the 'delete' swipe action on a per item basis based on whether it is
+      This example is an extension of the above "simple list with swipe actions" example. The
+      'delete' swipe action is conditionally disabled on a per item basis, based on whether it is
       deleteable.
     </p>
     <kirby-card [mode]="_cardMode" [hasPadding]="_cardHasPadding">
