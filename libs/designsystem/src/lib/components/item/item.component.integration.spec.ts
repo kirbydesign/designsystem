@@ -2,176 +2,63 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { DesignTokenHelper } from '@kirbydesign/core';
 
-import {
-  CardComponent,
-  IconComponent,
-  InfiniteScrollDirective,
-  ListComponent,
-  ListItemColorDirective,
-  ListItemTemplateDirective,
-  SpinnerComponent,
-} from '..';
+import { IconComponent } from '..';
 import { TestHelper } from '../../testing/test-helper';
-import { WindowRef } from '../../types/window-ref';
-import { ListItemComponent } from '../list/list-item/list-item.component';
 
+import { LabelComponent } from '.';
 import { ItemComponent } from './item.component';
 
-const { fontWeight, size } = DesignTokenHelper;
+const { fontWeight } = DesignTokenHelper;
 
-describe('ItemComponent', () => {
-  let ionList: HTMLElement;
-  let itemsInList: HTMLElement[];
+describe('ItemComponent with LabelComponent', () => {
+  let ionItem: HTMLElement;
 
-  let spectator: SpectatorHost<ListComponent>;
+  let spectator: SpectatorHost<ItemComponent>;
   const createHost = createHostFactory({
-    component: ListComponent,
+    component: ItemComponent,
     imports: [TestHelper.ionicModuleForTest],
-    providers: [
-      {
-        provide: WindowRef,
-        useValue: <WindowRef>{ nativeWindow: window },
-      },
-    ],
-    declarations: [
-      ItemComponent,
-      SpinnerComponent,
-      IconComponent,
-      CardComponent,
-      InfiniteScrollDirective,
-      ListItemColorDirective,
-      ListItemTemplateDirective,
-      ListItemComponent,
-    ],
+    declarations: [LabelComponent],
   });
 
-  describe('inside kirby-list', () => {
-    let itemTexts: HTMLElement[];
+  describe('selectable and selected', () => {
+    let labelElements: Element[];
 
     beforeEach(async () => {
-      spectator = createHost<ListComponent>(
+      spectator = createHost(
         `
-        <kirby-list [items]="[{ name: 'Item1' }, { name: 'Item2' }, { name: 'Item3' }]" (itemSelect)="($event)">
-          <kirby-item *kirbyListItemTemplate="let item"><h3>{{ item.name }}</h3></kirby-item>
-        </kirby-list>
-        `
-      );
-      ionList = spectator.queryHost('ion-list');
-      await TestHelper.whenReady(ionList);
-      itemsInList = spectator.queryAll('ion-list ion-item');
-      itemTexts = spectator.queryAll('ion-list ion-item h3');
-    });
-
-    it('should highlight selected item in bold text', () => {
-      const selectItem = itemsInList[1];
-      spectator.click(selectItem);
-
-      for (let i = 0; i < itemTexts.length; i++) {
-        const fontWeightExpected = itemsInList[i] === selectItem ? 'bold' : 'normal';
-        expect(itemTexts[i]).toHaveComputedStyle({ 'font-weight': fontWeight(fontWeightExpected) });
-      }
-    });
-
-    it('should not highlight selected item in bold text on disableSelectionHighlight', () => {
-      spectator.setInput('disableSelectionHighlight', true);
-      spectator.detectChanges();
-
-      const selectItem = itemsInList[1];
-      spectator.click(selectItem);
-
-      for (let i = 0; i < itemTexts.length; i++) {
-        expect(itemTexts[i]).toHaveComputedStyle({ 'font-weight': fontWeight('normal') });
-      }
-    });
-
-    it('should create list wrapper', () => {
-      expect(spectator.component).toBeTruthy();
-    });
-
-    it('should render items in list', () => {
-      expect(itemsInList).not.toBeEmpty();
-      itemsInList.forEach((item) => {
-        expect(item.shadowRoot.hasChildNodes()).toBeTrue();
-      });
-    });
-
-    it('should render first and last item with correct padding', async () => {
-      const firstItem = itemsInList[0].shadowRoot.querySelector('.item-native');
-      const lastItem = itemsInList[itemsInList.length - 1].shadowRoot.querySelector('.item-native');
-      expect(firstItem).toHaveComputedStyle({ 'padding-top': size('xxs') });
-      expect(lastItem).toHaveComputedStyle({ 'padding-bottom': size('xxs') });
-    });
-
-    describe('with hasItemSpacing set to true', () => {
-      it('should apply spacing to all but the last item', () => {
-        spectator.setInput('hasItemSpacing', true);
-        spectator.detectChanges();
-        const kirbyItemsInList = spectator.queryAll('kirby-list-item:not(:last-child)');
-
-        expect(kirbyItemsInList).not.toBeEmpty();
-        kirbyItemsInList.forEach((item) => {
-          expect(item).toHaveComputedStyle({ 'margin-bottom': size('s') });
-        });
-      });
-
-      it('should not apply spacing to the last item', () => {
-        spectator.setInput('hasItemSpacing', true);
-        spectator.detectChanges();
-        const kirbyItemsInList = spectator.queryAll('kirby-list-item:last-child');
-
-        expect(kirbyItemsInList).not.toBeEmpty();
-        kirbyItemsInList.forEach((item) => {
-          expect(item).toHaveComputedStyle({ 'margin-bottom': '0px' });
-        });
-      });
-    });
-
-    describe('with hasItemSpacing set to false', () => {
-      it('should not apply spacing to items', () => {
-        spectator.setInput('hasItemSpacing', false);
-        spectator.detectChanges();
-        const kirbyItemsInList = spectator.queryAll('kirby-list-item');
-
-        expect(kirbyItemsInList).not.toBeEmpty();
-        kirbyItemsInList.forEach((item) => {
-          expect(item).toHaveComputedStyle({ 'margin-bottom': '0px' });
-        });
-      });
-    });
-  });
-
-  describe('inside kirby-list with cards', () => {
-    beforeEach(async () => {
-      spectator = createHost<ListComponent>(
-        `
-        <kirby-list [items]="[{ name: 'Item1' }, { name: 'Item2' }, { name: 'Item3' }]">
-          <kirby-card *kirbyListItemTemplate="let item">
-            <kirby-item>{{ item.name }}</kirby-item>
-          </kirby-card>
-        </kirby-list>
+        <kirby-item selectable="true" selected="true">
+          <kirby-label>
+            <h3>Title</h3>
+            <p detail>Detail</p>
+          </kirby-label>
+          <kirby-label slot="end">
+            <data>Value</data>
+            <data detail>Detail</data>
+          </kirby-label>
+        </kirby-item>
         `
       );
-      ionList = spectator.queryHost('ion-list');
-      await TestHelper.whenReady(ionList);
-      itemsInList = spectator.queryAll('ion-list ion-item');
+      ionItem = spectator.queryHost('ion-label');
+      await TestHelper.whenReady(ionItem);
+      labelElements = spectator.queryAll(
+        'ion-item ion-label > :is(h1, h2, h3, h4, h5, h6, p, data)'
+      );
     });
 
-    it('should create list wrapper', () => {
-      expect(spectator.component).toBeTruthy();
+    it('should render general header, data and paragraph elements with correct font-weight', () => {
+      labelElements
+        .filter((e) => !e.attributes.getNamedItem('detail'))
+        .forEach((e) => {
+          expect(e).toHaveComputedStyle({ 'font-weight': fontWeight('bold') });
+        });
     });
 
-    it('should render items in list', () => {
-      expect(itemsInList).not.toBeEmpty();
-      itemsInList.forEach((item) => {
-        expect(item.shadowRoot.hasChildNodes()).toBeTrue();
-      });
-    });
-
-    it('should render first and last item without padding top/bottom', async () => {
-      const firstItem = itemsInList[0].shadowRoot.querySelector('.item-native');
-      const lastItem = itemsInList[itemsInList.length - 1].shadowRoot.querySelector('.item-native');
-      expect(firstItem).toHaveComputedStyle({ 'padding-top': '0px' });
-      expect(lastItem).toHaveComputedStyle({ 'padding-bottom': '0px' });
+    it('should render detail data and paragraph elements with correct font-weight', () => {
+      labelElements
+        .filter((e) => !!e.attributes.getNamedItem('detail'))
+        .forEach((e) => {
+          expect(e).toHaveComputedStyle({ 'font-weight': fontWeight('normal') });
+        });
     });
   });
 });
