@@ -7,7 +7,7 @@
 */
 
 @mixin section-header-typography() {
-  --ion-text-color-rgb: #{get-text-color('black')}; //TODO: make this configurable
+  --ion-text-color-rgb: #{get-text-color('black')}; //TODO: should we make this configurable?
   --padding-end: #{size('s')};
   --padding-start: #{size('s')};
 
@@ -26,5 +26,8 @@
     font-size: font-size('s');
     line-height: line-height('s');
     margin: size('xxxs') 0 size('xxs');
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
