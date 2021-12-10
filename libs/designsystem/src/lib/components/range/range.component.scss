@@ -38,7 +38,7 @@ ion-range {
   padding: 0;
 
   &.range-has-pin {
-    padding: 0 $tickWidth / 2;
+    padding: 0 $tickWidth * 0.5;
   }
 
   &::part(pin) {
@@ -68,7 +68,7 @@ ion-range {
     width: $tickWidth;
     height: $tickHeight;
     z-index: 1;
-    margin-inline-start: -$tickWidth / 2;
+    margin-inline-start: -$tickWidth * 0.5;
   }
 
   &::part(tick) {

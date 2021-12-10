@@ -19,14 +19,14 @@ $gap: utils.size('m');
 /* Tablet size and above */
 @include utils.media('>=medium') {
   .half-at-tablet-up {
-    grid-column: span ($columns / 2);
+    grid-column: span ($columns * 0.5);
   }
 }
 
 /* Desktop size and above */
 @include utils.media('>=large') {
   .half-at-desktop-up {
-    grid-column: span ($columns / 2);
+    grid-column: span ($columns * 0.5);
   }
 
   .third-at-desktop-up {

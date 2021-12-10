@@ -9,7 +9,7 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
 $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
 
 @function getVerticalPadding($target-height) {
-  @return ($target-height - $radio-icon-size) / 2;
+  @return ($target-height - $radio-icon-size) * 0.5;
 }
 
 :host {

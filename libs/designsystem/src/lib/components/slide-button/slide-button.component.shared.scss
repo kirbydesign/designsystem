@@ -8,5 +8,5 @@ $slide-button-container-bg-color: utils.get-color('primary');
 $slider-thumb-bg-color: utils.get-color('white');
 $slide-button-text-color: utils.get-color('primary-contrast');
 $total-slider-thumb-width: $slide-button-width + $slide-button-spacing * 2;
-$slide-button-container-radius: $slide-button-width/2;
+$slide-button-container-radius: $slide-button-width * 0.5;
 $slide-button-text-padding: 0 $slide-button-container-radius 0 $total-slider-thumb-width;
