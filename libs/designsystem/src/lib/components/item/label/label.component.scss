@@ -25,7 +25,7 @@
 }
 
 :host-context(kirby-item.selected) ion-label {
-  @include utils.slotted(h1, h2, h3, h4, h5, h6, p, data) {
+  @include utils.slotted(h1, h2, h3, h4, h5, h6, 'p:not([detail])', 'data:not([detail])') {
     font-weight: utils.font-weight('bold');
   }
 }

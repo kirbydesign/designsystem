@@ -29,8 +29,8 @@ import { GridLayoutMultipleContainersExampleComponent } from './grid-layout-exam
 import { GridLayoutSingleContainerExampleComponent } from './grid-layout-example/grid-layout-single-container-example/grid-layout-single-container-example.component';
 import { IconExampleComponent } from './icon-example/icon-example.component';
 import { ItemExampleComponent } from './item-example/item-example.component';
+import { ItemGroupExampleComponent } from './item-group-example/item-group-example.component';
 import { LinkExampleComponent } from './link-example/link-example.component';
-import { ListBoldTextOnRowSelectionExampleComponent } from './list-example/examples/bold-text-on-row-selection';
 import { ListColoredItemsExampleComponent } from './list-example/examples/colored-items';
 import { ListWithDividersExampleComponent } from './list-example/examples/dividers';
 import { ListWithHeaderAndFooterExampleComponent } from './list-example/examples/header-and-footer';
@@ -262,6 +262,10 @@ export const routes: Routes = [
     component: ItemExampleComponent,
   },
   {
+    path: 'item-group',
+    component: ItemGroupExampleComponent,
+  },
+  {
     path: 'button',
     component: ButtonExampleComponent,
   },
@@ -280,10 +284,6 @@ export const routes: Routes = [
       {
         path: '',
         redirectTo: 'with-items',
-      },
-      {
-        path: 'bold-text-on-row-selection',
-        component: ListBoldTextOnRowSelectionExampleComponent,
       },
       {
         path: 'with-dividers',
