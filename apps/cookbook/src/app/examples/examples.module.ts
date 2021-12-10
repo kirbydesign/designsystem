@@ -18,6 +18,7 @@ import { FlagExampleModule } from './flag-example/flag-example.module';
 import { FormFieldExamplesModule } from './form-field-example/form-field-example.module';
 import { GridLayoutExamplesModule } from './grid-layout-example/grid-layout-example.module';
 import { ItemExampleModule } from './item-example/item-example.module';
+import { ItemGroupExampleModule } from './item-group-example/item-group-example.module';
 import { LinkExampleModule } from './link-example/link-example.module';
 import { ListExamplesModule } from './list-example/list-example.module';
 import { ModalExampleModule } from './modal-example/modal-example.module';
@@ -50,6 +51,7 @@ const IMPORTS = [
   ModalExampleModule,
   GridLayoutExamplesModule,
   SectionHeaderExampleModule,
+  ItemGroupExampleModule,
 ];
 
 @NgModule({
