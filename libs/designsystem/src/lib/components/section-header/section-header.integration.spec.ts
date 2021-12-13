@@ -1,26 +1,34 @@
-import { IonItemDivider } from '@ionic/angular';
+import { IonItemDivider, IonLabel } from '@ionic/angular';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponent } from 'ng-mocks';
 
 import { DesignTokenHelper } from '../../helpers';
+import { LabelComponent } from '../item/label/label.component';
 
 import { SectionHeaderComponent } from './section-header.component';
 
 const { fontSize, fontWeight, lineHeight } = DesignTokenHelper;
 
-fdescribe('SectionHeaderComponent', () => {
+describe('SectionHeaderComponent with Kirby Label', () => {
   let spectator: SpectatorHost<SectionHeaderComponent>;
 
   const createHost = createHostFactory({
     component: SectionHeaderComponent,
-    declarations: [SectionHeaderComponent, MockComponent(IonItemDivider)],
+    declarations: [
+      SectionHeaderComponent,
+      LabelComponent,
+      MockComponent(IonItemDivider),
+      MockComponent(IonLabel),
+    ],
   });
 
   beforeEach(() => {
     spectator = createHost<SectionHeaderComponent>(`<kirby-section-header>
-      <p heading>Section Header</p>
-      <p label>Section Header</p>
-      <p detail>Section Header</p>
+      <kirby-label>
+        <p heading>Section Header</p>
+        <p label>Section Header</p>
+        <p detail>Section Header</p>
+      </kirby-label>
     </kirby-section-header>`);
   });
 
@@ -28,7 +36,7 @@ fdescribe('SectionHeaderComponent', () => {
     expect(spectator.component).toBeTruthy();
   });
 
-  describe('with heading, detail and label attributes', () => {
+  describe('with kirby-label around heading, detail and label', () => {
     it('should have heading with correct typography styles', () => {
       const heading = spectator.queryHost<HTMLElement>('[heading]');
       expect(heading).toHaveComputedStyle({
