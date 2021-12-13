@@ -1,21 +1,21 @@
-@import '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/utils';
 
 :host {
   display: block;
   user-select: none;
 
-  --kirby-badge-elevation: #{get-elevation(2)};
+  --kirby-badge-elevation: #{utils.get-elevation(2)};
   --kirby-badge-position: absolute;
-  --kirby-badge-top: -#{size('xxs')};
-  --kirby-badge-right: #{size('xxs')};
-  --kirby-badge-z-index: #{z('segmentBadge')};
+  --kirby-badge-top: -#{utils.size('xxs')};
+  --kirby-badge-right: #{utils.size('xxs')};
+  --kirby-badge-z-index: #{utils.z('segmentBadge')};
 
   &.sm {
     ion-segment-button {
-      min-height: size('l');
-      font-size: font-size('xs');
-      --padding-start: #{size('s')};
-      --padding-end: #{size('s')};
+      min-height: utils.size('l');
+      font-size: utils.font-size('xs');
+      --padding-start: #{utils.size('s')};
+      --padding-end: #{utils.size('s')};
     }
   }
 
@@ -25,7 +25,7 @@
     overflow-x: auto;
     overflow-y: hidden; // chip touch area height is bigger than segmented control height
     // Hide scrollbar on touch device:
-    @include touch() {
+    @include utils.touch() {
       scrollbar-width: none; /* Firefox */
       &::-webkit-scrollbar {
         display: none;
@@ -39,27 +39,27 @@ ion-segment {
   width: auto; //The segmented control itself is block-level, but we don't want the background to stretch
   overflow: visible; //Ensures the badge is not cut off
   contain: unset; //Ensures the badge is not cut off
-  --background: #{get-color('white')};
-  border-radius: $border-radius-round;
+  --background: #{utils.get-color('white')};
+  border-radius: utils.$border-radius-round;
 }
 
 ion-segment-button {
-  @include accessible-target-size();
+  @include utils.accessible-target-size();
 
-  min-height: size('xl');
-  font-weight: font-weight('normal');
-  font-size: font-size('s');
+  min-height: utils.size('xl');
+  font-weight: utils.font-weight('normal');
+  font-size: utils.font-size('s');
   text-transform: none;
-  --border-radius: #{$border-radius-round};
+  --border-radius: #{utils.$border-radius-round};
   --border-style: none;
   --background: none;
-  --color: #{get-color('white-contrast')};
-  --indicator-color: #{get-color('black')};
-  --color-checked: #{get-color('black-contrast')};
-  --color-hover: #{get-color('black-tint')};
+  --color: #{utils.get-color('white-contrast')};
+  --indicator-color: #{utils.get-color('black')};
+  --color-checked: #{utils.get-color('black-contrast')};
+  --color-hover: #{utils.get-color('black-tint')};
   --indicator-box-shadow: none;
-  --padding-start: #{size('m')};
-  --padding-end: #{size('m')};
+  --padding-start: #{utils.size('m')};
+  --padding-end: #{utils.size('m')};
   --margin-bottom: 0;
   --margin-end: 0;
   --margin-start: 0;

@@ -1,10 +1,10 @@
-@import '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/utils';
 
 fieldset {
   display: inline-block;
-  margin-top: size('l');
+  margin-top: utils.size('l');
 }
 
 h2:not(:first-child) {
-  margin-top: size('l');
+  margin-top: utils.size('l');
 }

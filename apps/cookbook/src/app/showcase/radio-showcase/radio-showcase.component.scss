@@ -1,6 +1,7 @@
-@import '../showcase.shared';
+@use '../showcase.shared';
+@use "~@kirbydesign/core/src/scss/utils";
 
 h3 {
-  margin-top: size('l');
+  margin-top: utils.size('l');
   border-bottom: none;
 }

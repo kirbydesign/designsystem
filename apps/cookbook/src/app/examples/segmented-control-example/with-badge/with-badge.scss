@@ -1,11 +1,11 @@
-@import '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/utils';
 
 :host {
   display: block;
 }
 
 kirby-segmented-control {
-  margin-bottom: size('l');
+  margin-bottom: utils.size('l');
 }
 
 fieldset {

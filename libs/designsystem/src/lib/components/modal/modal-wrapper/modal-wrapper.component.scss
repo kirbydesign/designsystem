@@ -1,4 +1,4 @@
-@import '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/utils';
 
 // Global modal styling can be found at scss/base/_ionic.scss
 
@@ -23,19 +23,19 @@
 
   &.drawer {
     ion-content::part(scroll) {
-      transition: padding-bottom $soft-keyboard-transition-leave;
+      transition: padding-bottom utils.$soft-keyboard-transition-leave;
     }
 
     &.keyboard-visible {
       ion-content::part(scroll) {
-        transition: padding-bottom $soft-keyboard-transition-enter;
+        transition: padding-bottom utils.$soft-keyboard-transition-enter;
       }
     }
   }
 }
 
 :host-context(ion-modal:not(.kirby-modal-full-height)) {
-  @include media('>=medium') {
+  @include utils.media('>=medium') {
     @include contain-content();
   }
 
@@ -59,12 +59,12 @@
   }
 }
 
-$toolbar-padding: size('s');
+$toolbar-padding: utils.size('s');
 
 @mixin phablet-toolbar-padding() {
-  $toolbar-top-spacing-total: size('m');
+  $toolbar-top-spacing-total: utils.size('m');
   $toolbar-padding-top: $toolbar-top-spacing-total - $toolbar-padding;
-  @include media('>=medium') {
+  @include utils.media('>=medium') {
     padding-top: $toolbar-padding-top;
   }
 }
@@ -77,7 +77,7 @@ ion-header ion-toolbar {
 
   --border-width: 0;
   --background: transparent;
-  --color: var(--kirby-modal-color, #{get-color('black')});
+  --color: var(--kirby-modal-color, #{utils.get-color('black')});
 
   button {
     color: var(--color);
@@ -100,38 +100,38 @@ ion-title {
   box-sizing: border-box;
   padding-inline-start: calc(48px + var(--padding-start));
   padding-inline-end: calc(48px + var(--padding-end));
-  font-size: font-size('l');
-  font-weight: font-weight('bold');
+  font-size: utils.font-size('l');
+  font-weight: utils.font-weight('bold');
 }
 
 :host(.drawer) ion-title {
-  font-size: font-size('m');
+  font-size: utils.font-size('m');
 }
 
 ion-content {
   --background: transparent;
-  --color: var(--kirby-modal-color, #{get-color('black')});
+  --color: var(--kirby-modal-color, #{utils.get-color('black')});
   display: flex;
   flex-direction: column;
 
-  @include slotted('*') {
+  @include utils.slotted('*') {
     box-sizing: border-box;
     display: block;
   }
 
-  --padding-top: #{size('m')};
-  --padding-bottom: #{size('m')};
-  --padding-start: #{size('s')};
-  --padding-end: #{size('s')};
+  --padding-top: #{utils.size('m')};
+  --padding-bottom: #{utils.size('m')};
+  --padding-start: #{utils.size('s')};
+  --padding-end: #{utils.size('s')};
 }
 
 // Ensure padding-rules are not merged with other media query,
 // as this rule has to come AFTER the default mobile-first rule in order to override:
 /* clean-css ignore:start */
-@include media('>=medium') {
+@include utils.media('>=medium') {
   ion-content {
-    --padding-start: #{size('xxxl')};
-    --padding-end: #{size('xxxl')};
+    --padding-start: #{utils.size('xxxl')};
+    --padding-end: #{utils.size('xxxl')};
   }
 }
 /* clean-css ignore:end */

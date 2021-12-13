@@ -1,5 +1,5 @@
-@import '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/utils';
 
 cookbook-example-viewer {
-  margin-bottom: size('l');
+  margin-bottom: utils.size('l');
 }

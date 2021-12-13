@@ -1,16 +1,16 @@
-@import '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/utils';
 
 $app-header-max-width: 1024px;
 
 :host {
   display: block;
-  background: get-color('background-color');
+  background: utils.get-color('background-color');
   height: 100%;
 }
 
 .logo {
   display: none;
-  @include media('>=large') {
+  @include utils.media('>=large') {
     display: block;
   }
 }
