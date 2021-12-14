@@ -1,4 +1,4 @@
-@import '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/utils';
 
 /*
 * This mixin is applied both in the section-header styles, for using 
@@ -6,26 +6,26 @@
 * wrapping them in a kirby-label within a section-header. 
 */
 
-@mixin section-header-typography() {
-  --ion-text-color-rgb: #{get-text-color('black')}; //TODO: should we make this configurable?
-  --padding-end: #{size('s')};
-  --padding-start: #{size('s')};
+@mixin typography() {
+  --ion-text-color-rgb: #{utils.get-text-color('black')}; //TODO: should we make this configurable?
+  --padding-end: #{utils.size('s')};
+  --padding-start: #{utils.size('s')};
 
-  @include slotted('[heading]') {
-    font-weight: font-weight('bold');
-    font-size: font-size('m');
-    line-height: line-height('m');
+  @include utils.slotted('[heading]') {
+    font-weight: utils.font-weight('bold');
+    font-size: utils.font-size('m');
+    line-height: utils.line-height('m');
     margin: 0;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
-  @include slotted('[detail]', '[label]') {
-    font-weight: font-weight('light');
-    font-size: font-size('s');
-    line-height: line-height('s');
-    margin: size('xxxs') 0 size('xxs');
+  @include utils.slotted('[detail]', '[label]') {
+    font-weight: utils.font-weight('light');
+    font-size: utils.font-size('s');
+    line-height: utils.line-height('s');
+    margin: utils.size('xxxs') 0 utils.size('xxs');
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

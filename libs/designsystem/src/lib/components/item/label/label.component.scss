@@ -20,7 +20,7 @@
 }
 
 :host-context(kirby-section-header) ion-label {
-  @include section-header.section-header-typography();
+  @include section-header.typography();
 }
 
 :host([slot='end']) ion-label {

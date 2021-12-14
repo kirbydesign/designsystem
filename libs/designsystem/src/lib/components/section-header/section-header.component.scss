@@ -1,5 +1,5 @@
-@import '~@kirbydesign/core/src/scss/utils';
-@import './section-header.utils';
+@use '~@kirbydesign/core/src/scss/utils';
+@use './section-header.utils';
 
 :host {
   ion-item-divider {
@@ -12,6 +12,6 @@
     // Without supplying a piece of content with the needed height
     min-height: 0;
 
-    @include section-header-typography();
+    @include section-header.typography();
   }
 }
