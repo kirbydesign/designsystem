@@ -9,7 +9,6 @@ import {
   ChartDataset,
   ChartHighlightedElements,
   ChartLocale,
-  ChartPeriod,
   ChartType,
   isNumberArray,
 } from '../chart.types';
@@ -57,13 +56,9 @@ export class ChartJSService {
 
     const datasets = this.createDatasets(data);
 
-    // The first dataset controls the datespan.
-    const chartPeriod = this.chartConfigService.findChartPeriod(datasets[0]);
-
     const options = this.createOptionsObject({
       customOptions,
       annotations,
-      chartPeriod,
       dataLabelOptions,
     });
     let config = this.createConfigurationObject(type, datasets, options, dataLabels);
@@ -205,15 +200,9 @@ export class ChartJSService {
   private createOptionsObject(args: {
     customOptions?: ChartOptions;
     annotations?: AnnotationOptions[];
-    chartPeriod?: ChartPeriod;
     dataLabelOptions?: ChartDataLabelOptions;
   }): ChartOptions {
-    const {
-      customOptions,
-      annotations,
-      chartPeriod,
-      dataLabelOptions: chartDataLabelOptions,
-    } = args;
+    const { customOptions, annotations, dataLabelOptions: chartDataLabelOptions } = args;
 
     const typeConfig = this.chartConfigService.getTypeConfig(this.chartType);
     const typeConfigOptions = typeConfig?.options;
