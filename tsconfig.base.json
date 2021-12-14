@@ -18,7 +18,5 @@
     "baseUrl": ".",
     "resolveJsonModule": true
   },
-  "files": [
-    "./libs/designsystem/src/lib/components/chart/chart-js/chartjs-plugin-marker/types/index.d.ts"
-  ]
+  "files": []
 }
