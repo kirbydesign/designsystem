@@ -16,6 +16,8 @@ export class ItemSlidingComponent {
   }
 
   get _hasSwipeActions(): boolean {
-    return Array.isArray(this.swipeActions) && this.swipeActions.length !== 0;
+    // Using '>' instead of '!==';
+    // will only return true when swipeActions is an array
+    return this.swipeActions?.length > 0;
   }
 }
