@@ -87,25 +87,6 @@ describe('ItemSlidingComponent', () => {
       expect(ionItemOptionsElement.getAttribute('ng-reflect-side')).toEqual('start');
     });
 
-    const sideScenarios: { [key in ItemSlidingSide]: string } = {
-      left: 'start',
-      right: 'end',
-    };
-
-    Object.entries(sideScenarios).forEach(([side, slot]) => {
-      describe(`when 'side' is set to '${side}'`, () => {
-        beforeEach(() => {
-          // TODO: why do i need any here?
-          spectator.setInput('side', side as any);
-        });
-
-        it(`should render swipe actions in the correct slot`, () => {
-          //TODO: Is there a better way to check this?
-          expect(ionItemOptionsElement.getAttribute('ng-reflect-side')).toEqual(slot);
-        });
-      });
-    });
-
     it('should render an ion-item-option element for each swipe action', () => {
       expect(ionItemOptionElements.length).toEqual(swipeActions.length);
     });
