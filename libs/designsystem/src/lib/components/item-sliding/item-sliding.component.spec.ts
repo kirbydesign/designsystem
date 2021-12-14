@@ -95,7 +95,7 @@ describe('ItemSlidingComponent', () => {
       // QuerySelectorAll returns elements in document order
       ionItemOptionElements.forEach((ionItemOptionElement, index) => {
         const optionLabel = ionItemOptionElement.querySelector('ion-label');
-        expect(optionLabel.innerHTML).toEqual(swipeActions[index].title as string);
+        expect(optionLabel.innerHTML).toEqual(swipeActions[index].title);
       });
     });
 
