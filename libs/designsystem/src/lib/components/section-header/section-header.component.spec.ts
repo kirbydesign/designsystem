@@ -8,7 +8,7 @@ import { SectionHeaderComponent } from './section-header.component';
 
 const { fontSize, fontWeight, lineHeight } = DesignTokenHelper;
 
-fdescribe('SectionHeaderComponent', () => {
+describe('SectionHeaderComponent', () => {
   let spectator: SpectatorHost<SectionHeaderComponent>;
 
   const createHost = createHostFactory({
