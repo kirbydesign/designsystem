@@ -2,10 +2,13 @@ import { IonicModule } from '@ionic/angular';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponent, MockModule } from 'ng-mocks';
 
+import { DesignTokenHelper } from '../../helpers';
 import { ItemComponent } from '../item/item.component';
 
-import { ItemSlidingComponent, ItemSlidingSide, ItemSwipeAction } from './';
+import { ItemSlidingComponent, ItemSwipeAction } from './';
 import { ItemSwipeActionType } from './item-sliding.types';
+
+const { getColor } = DesignTokenHelper;
 
 describe('ItemSlidingComponent', () => {
   let spectator: SpectatorHost<ItemSlidingComponent>;
@@ -116,9 +119,9 @@ describe('ItemSlidingComponent', () => {
     });
 
     const swipeActionTypesScenarios: { [key in ItemSwipeActionType]: string } = {
-      warning: '#ffca3a',
-      success: '#2cf287',
-      danger: '#ff595e',
+      warning: getColor('warning').hex,
+      success: getColor('success').hex,
+      danger: getColor('danger').hex,
     };
 
     Object.entries(swipeActionTypesScenarios).forEach(([type, color]) => {
