@@ -898,7 +898,7 @@ describe('ChartJSService', () => {
     const dataLabelOptionsProperties = ['showMax', 'showMin', 'showCurrent'];
 
     dataLabelOptionsProperties.forEach((property) => {
-      describe(`when one of ChartDataLabelsOptions.${property} is true`, () => {
+      describe(`when ChartDataLabelsOptions.${property} is true`, () => {
         it(`should have an datalabel propery in dataset`, () => {
           chartJSService.updateDataLabelOptions({ [property]: true });
           const result = chartJSService.addDataLabelsData(deepCopy(data));
