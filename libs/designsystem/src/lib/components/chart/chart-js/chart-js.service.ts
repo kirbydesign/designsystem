@@ -250,11 +250,11 @@ export class ChartJSService {
     return this.applyInteractionFunctionsExtensions(options);
   }
 
-  private getDefaultStockLabels(datasets, locale: ChartLocale) {
+  private getDefaultStockLabels(datasets: ChartDataset[], locale: ChartLocale) {
     const largestDataset = datasets.reduce((previousDataset, currentDataset) =>
       previousDataset.data.length > currentDataset.data.length ? previousDataset : currentDataset
     );
-    return largestDataset.data.map((point) =>
+    return largestDataset.data.map((point: ScatterDataPoint) =>
       toDate(point.x).toLocaleDateString(locale, {
         month: 'short',
         day: 'numeric',
