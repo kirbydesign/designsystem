@@ -4,7 +4,6 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
 @Component({
   selector: 'cookbook-item-sliding-showcase',
   templateUrl: './item-sliding-showcase.component.html',
-  styleUrls: ['./item-sliding-showcase.component.scss'],
 })
 export class ItemSlidingShowcaseComponent {
   _cardMode = 'flat';
