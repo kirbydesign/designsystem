@@ -12,7 +12,6 @@ import {
   TimeScale,
   Tooltip,
 } from 'chart.js';
-import 'chartjs-adapter-date-fns';
 import annotationPlugin from 'chartjs-plugin-annotation';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 
