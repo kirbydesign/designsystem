@@ -1,13 +1,13 @@
-@import '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/utils';
 
 h2 {
-  margin-top: size('l');
+  margin-top: utils.size('l');
   margin-bottom: 0;
 }
 
 .note {
-  color: get-text-color('danger');
-  font-size: font-size('xs');
+  color: utils.get-text-color('danger');
+  font-size: utils.font-size('xs');
 }
 
 .icon-item-container {
@@ -39,13 +39,13 @@ kirby-icon {
 
 .options {
   width: 100%;
-  margin-bottom: size('m');
+  margin-bottom: utils.size('m');
 }
 
 .colors {
   display: flex;
   width: 100%;
-  margin-bottom: size('m');
+  margin-bottom: utils.size('m');
   flex-wrap: wrap;
 }
 
@@ -53,7 +53,7 @@ kirby-icon {
   background: none;
   border: none;
   cursor: pointer;
-  margin: size('s');
+  margin: utils.size('s');
   width: 70px;
 
   &__txt {
@@ -69,8 +69,8 @@ kirby-icon {
   display: inline-block;
 }
 
-@each $color-name, $color-value in $main-colors {
+@each $color-name, $color-value in utils.$main-colors {
   .color--#{$color-name} {
-    background-color: get-color($color-name);
+    background-color: utils.get-color($color-name);
   }
 }

@@ -1,8 +1,8 @@
-@import '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/utils';
 
 // Global modal styling can be found at scss/base/_ionic.scss
 
 :host {
   display: block;
-  padding: size('m') size('s');
+  padding: utils.size('m') utils.size('s');
 }

@@ -1,15 +1,15 @@
-@import '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/utils';
 
 h2 {
-  margin-top: size('xl');
+  margin-top: utils.size('xl');
 }
 
 cookbook-toggle-button-example {
   padding: 0;
-  margin-bottom: size('s');
+  margin-bottom: utils.size('s');
 }
 
 cookbook-code-viewer {
   display: block;
-  margin-top: size('xl');
+  margin-top: utils.size('xl');
 }

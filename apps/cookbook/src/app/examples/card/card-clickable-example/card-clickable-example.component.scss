@@ -1,5 +1,5 @@
-@import '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/utils';
 
 .card-content {
-  padding: size('s');
+  padding: utils.size('s');
 }

@@ -1,4 +1,5 @@
-@import '../showcase.shared';
+@use '../showcase.shared';
+@use "~@kirbydesign/core/src/scss/utils";
 
 cookbook-iphone {
   float: right;
@@ -8,7 +9,7 @@ cookbook-iphone {
   display: none;
 }
 
-@include media('>medium') {
+@include utils.media('>medium') {
   .mobile {
     display: none;
   }
