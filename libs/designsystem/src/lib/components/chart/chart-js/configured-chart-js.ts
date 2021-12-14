@@ -20,7 +20,7 @@ import { mergeDeepAll } from '../../../helpers/merge-deep';
 import MarkerPlugin from '../chart-js/chartjs-plugin-marker/chartjs-plugin-marker';
 import { CHART_GLOBAL_DEFAULTS } from '../configs/global-defaults.config';
 
-const CHART_SCALES = [CategoryScale, LinearScale, TimeScale];
+const CHART_SCALES = [CategoryScale, LinearScale];
 const CHART_ELEMENTS = [BarElement, LineElement, PointElement];
 const CHART_CONTROLLERS = [BarController, LineController];
 const CHART_PLUGINS = [annotationPlugin, Filler, ChartDataLabels, Tooltip, MarkerPlugin];
