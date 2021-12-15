@@ -199,14 +199,14 @@ export class ChartJSService {
 
   private createStockOptionsObject(dataLabelOptions: ChartDataLabelOptions) {
     return {
-      locale: dataLabelOptions.locale,
+      locale: this.locale,
       plugins: {
         tooltip: {
           callbacks: {
             title: (tooltipItems) => {
               const date = toDate((tooltipItems[0]?.raw as any)?.x);
               if (date.valueOf()) {
-                return date.toLocaleTimeString(dataLabelOptions.locale, {
+                return date.toLocaleTimeString(this.locale, {
                   day: 'numeric',
                   month: 'short',
                   hour: '2-digit',
