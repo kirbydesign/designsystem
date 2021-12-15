@@ -197,6 +197,43 @@ export class ChartJSService {
     return options;
   }
 
+  private createStockOptionsObject(dataLabelOptions: ChartDataLabelOptions) {
+    return {
+      locale: dataLabelOptions.locale,
+      plugins: {
+        tooltip: {
+          callbacks: {
+            title: (tooltipItems) => {
+              const date = toDate((tooltipItems[0]?.raw as any)?.x);
+              if (date.valueOf()) {
+                return date.toLocaleTimeString(dataLabelOptions.locale, {
+                  day: 'numeric',
+                  month: 'short',
+                  hour: '2-digit',
+                  minute: '2-digit',
+                });
+              }
+            },
+            label: (context) => {
+              // It's not possible to add spacing between color legend and text so we
+              // prefix with a space.
+              return ' ' + context.formattedValue + (dataLabelOptions.valueSuffix || '');
+            },
+          },
+        },
+      },
+      scales: {
+        y: {
+          ticks: {
+            callback: (value) => {
+              return value + (dataLabelOptions.valueSuffix || '');
+            },
+          },
+        },
+      },
+    };
+  }
+
   private createOptionsObject(args: {
     customOptions?: ChartOptions;
     annotations?: AnnotationOptions[];
@@ -209,39 +246,11 @@ export class ChartJSService {
     const annotationPluginOptions = annotations
       ? this.createAnnotationPluginOptionsObject(annotations)
       : {};
-
-    let defaultOptions: ChartOptions = {
-      locale: this.locale,
-      plugins: { tooltip: { callbacks: {} } },
-      scales: { y: { ticks: {} } },
-    };
-
-    if (this.chartType === 'stock') {
-      defaultOptions.plugins.tooltip.callbacks.label = (context) => {
-        // It's not possible to add spacing between color legend and text so we
-        // prefix with a space.
-        return ' ' + context.formattedValue + (chartDataLabelOptions.valueSuffix || '');
-      };
-
-      defaultOptions.scales.y.ticks.callback = (value) => {
-        return value + (chartDataLabelOptions.valueSuffix || '');
-      };
-
-      defaultOptions.plugins.tooltip.callbacks.title = (tooltipItems) => {
-        const date = toDate((tooltipItems[0]?.raw as any)?.x);
-        if (date.valueOf()) {
-          return date.toLocaleTimeString(this.locale, {
-            day: 'numeric',
-            month: 'short',
-            hour: '2-digit',
-            minute: '2-digit',
-          });
-        }
-      };
-    }
+    const stockOptions: ChartOptions =
+      this.chartType === 'stock' ? this.createStockOptionsObject(chartDataLabelOptions) : {};
 
     let options: ChartOptions = mergeDeepAll(
-      defaultOptions,
+      stockOptions,
       typeConfigOptions,
       customOptions,
       annotationPluginOptions
