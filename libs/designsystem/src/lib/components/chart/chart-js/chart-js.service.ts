@@ -90,7 +90,7 @@ export class ChartJSService {
     }
   }
 
-  public updateDataLabelOptions(dataLabelOptions: ChartDataLabelOptions) {
+  public setDataLabelOptions(dataLabelOptions: ChartDataLabelOptions) {
     this.dataLabelOptions = dataLabelOptions;
   }
 

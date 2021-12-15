@@ -207,6 +207,7 @@ describe('ChartJSService', () => {
             ],
           };
           chartJSService.renderChart(stockChartConfig);
+          console.log(chartJSService['chart'].options.locale);
           expect(chartJSService['chart'].data.labels.length).toEqual(3);
           chartJSService['chart'].data.labels.forEach((label) => {
             expect(label).not.toBe('');
@@ -888,7 +889,7 @@ describe('ChartJSService', () => {
 
     describe('when dataset is a flat array', () => {
       it('should throw an error if dataset is a flat array', () => {
-        chartJSService.updateDataLabelOptions({});
+        chartJSService.setDataLabelOptions({});
         expect(function() {
           chartJSService.addDataLabelsData(flatDataset);
         }).toThrowError();
@@ -900,7 +901,7 @@ describe('ChartJSService', () => {
     dataLabelOptionsProperties.forEach((property) => {
       describe(`when ChartDataLabelsOptions.${property} is true`, () => {
         it(`should have an datalabel propery in dataset`, () => {
-          chartJSService.updateDataLabelOptions({ [property]: true });
+          chartJSService.setDataLabelOptions({ [property]: true });
           const result = chartJSService.addDataLabelsData(deepCopy(data));
           expect(
             (result[0] as ChartJSDataset).data.find((item: any) => item.datalabel)
@@ -911,7 +912,7 @@ describe('ChartJSService', () => {
 
     describe('when niether ChartDataLabelsOptions.showMin, showMax, showCurrent is true', () => {
       it('should NOT have an datalabel propery in dataset', () => {
-        chartJSService.updateDataLabelOptions({});
+        chartJSService.setDataLabelOptions({});
 
         const result = chartJSService.addDataLabelsData(deepCopy(data));
         expect((result[0] as ChartJSDataset).data.find((item: any) => item.datalabel)).toBeFalsy();
