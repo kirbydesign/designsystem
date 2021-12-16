@@ -268,3 +268,7 @@ ion-loading.kirby-loading-overlay {
   border-radius: utils.$border-radius;
   overflow: hidden;
 }
+
+.shadow {
+  box-shadow: utils.get-elevation(2);
+}
