@@ -26,12 +26,14 @@ const fs = require('fs-extra');
 const path = require('path');
 const isCI = require('is-ci');
 
+const packageAlias = '@kirbydesign';
+
 const libsRootDir = `libs`;
 
 const angularLibDir = `${libsRootDir}/designsystem`;
 const angularLibSrcDir = `${angularLibDir}/src/lib`;
 const coreLibDir = `${libsRootDir}/core`;
-const coreLibSrcDir = `${coreLibDir}/src`;
+//const coreLibSrcDir = `${coreLibDir}/src`;
 const dist = `dist`;
 const distTarget = `${dist}/${angularLibDir}`;
 const distPackageJsonPath = `${distTarget}/package.json`;
@@ -117,22 +119,10 @@ function copyReadme() {
   return fs.copy('readme.md', `${distTarget}/readme.md`);
 }
 
-function copyScssFiles() {
-  console.log('Copying SCSS files...');
-  const onlyScssFiles = (input) => ['', '.scss'].includes(path.extname(input));
-  return fs.copy(`${coreLibSrcDir}/scss`, `${distTarget}/scss`, { filter: onlyScssFiles });
-}
-
 function forwardCoreScssFilesToDesignsystem() {
-  Console.log('Forwarding core SCSS files designsystem ...');
-  // Promisifying to use in .then chain
+  console.log('Forwarding core SCSS files to designsystem ...');
   return new Promise((resolve) => {
-    forwardScssFiles(
-      `${coreLibDir}/scss`,
-      `${angularLibSrcDir}/lib/scss`,
-      '@kirbydesign',
-      libsRootDir
-    );
+    forwardScssFiles(`${coreLibDir}/scss`, `${distTarget}/scss`, packageAlias, libsRootDir);
     resolve();
   });
 }
@@ -192,7 +182,6 @@ cleanDistribution()
   .then(buildDesignsystem)
   .then(enhancePackageJson)
   .then(copyReadme)
-  .then(copyScssFiles)
   .then(forwardCoreScssFilesToDesignsystem)
   .then(copyIcons)
   .then(copyPolyfills)
