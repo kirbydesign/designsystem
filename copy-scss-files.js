@@ -1,9 +1,28 @@
 const fs = require('fs');
 const path = require('path');
 
+// Magic strings - should be entered as function arguments
+const PROJECT_LIBS_FOLDER = './libs';
+const PACKAGE_ALIAS = '@kirbydesign';
+const DIR_TO_SEARCH = './libs/core/scss';
+const TARGET_EXTENSION = 'scss';
+
+function pipe(...fns) {
+  return (x) => fns.reduce((v, f) => f(v), x);
+}
+
 function getExtension(filename) {
   const ext = path.extname(filename).split('.');
   return ext[ext.length - 1];
+}
+
+function createForwardRule(filePath, packageAlias, libsFolder) {
+  return pipe(
+    (fileName) => (fileName[0] === '_' ? fileName.slice(1) : fileName),
+    (fileName) => (fileName === 'index.scss' ? '' : fileName),
+    (fileName) =>
+      `@forward "~${path.dirname(filePath).replace(libsFolder, packageAlias)}/${fileName}";`
+  )(path.basename(filePath));
 }
 
 function findAllFilesWithExtension(extension, dir) {
@@ -21,26 +40,24 @@ function findAllFilesWithExtension(extension, dir) {
   return [...filesWithExtInDirectory, ...filesWithExtInSubdirectories.flat()];
 }
 
-function createForwardScssFile(sourceFilePath, rootDir, targetFilePath) {
-  const newFileName = targetFilePath + sourceFilePath.split(rootDir).pop();
+function createForwardScssFile(sourceFilePath, sourceRootDir, targetRootDir) {
+  const targetFilePath = targetRootDir + sourceFilePath.split(sourceRootDir).pop();
 
-  const newFileFolder = path.dirname(newFileName);
-  if (!fs.existsSync(newFileFolder)) {
-    fs.mkdirSync(newFileFolder, { recursive: true });
+  const targetFileDirName = path.dirname(targetFilePath);
+  if (!fs.existsSync(targetFileDirName)) {
+    fs.mkdirSync(targetFileDirName, { recursive: true });
   }
 
-  const forwardLocation = sourceFilePath.replace('./libs', '@kirbydesign');
-  fs.writeFileSync(newFileName, `@forward "${forwardLocation}";`);
+  const forwardRule = createForwardRule(sourceFilePath, PACKAGE_ALIAS, PROJECT_LIBS_FOLDER);
+  fs.writeFileSync(targetFilePath, forwardRule);
 }
 
 // --- Main --- //
-
-const dirToSearch = './libs/core/scss';
-const scssFilesToForward = findAllFilesWithExtension('scss', dirToSearch);
+const scssFilesToForward = findAllFilesWithExtension(TARGET_EXTENSION, DIR_TO_SEARCH);
 scssFilesToForward.forEach((filePath) => {
   createForwardScssFile(
     filePath,
-    dirToSearch,
+    DIR_TO_SEARCH,
     './libs/designsystem/scss-file-forwarding-test/scss'
   );
 });
