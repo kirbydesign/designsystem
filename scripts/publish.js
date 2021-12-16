@@ -33,7 +33,6 @@ const libsRootDir = `libs`;
 const angularLibDir = `${libsRootDir}/designsystem`;
 const angularLibSrcDir = `${angularLibDir}/src/lib`;
 const coreLibDir = `${libsRootDir}/core`;
-//const coreLibSrcDir = `${coreLibDir}/src`;
 const dist = `dist`;
 const distTarget = `${dist}/${angularLibDir}`;
 const distPackageJsonPath = `${distTarget}/package.json`;
