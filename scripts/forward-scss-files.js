@@ -27,7 +27,7 @@ function findAllFilesWithExtension(extension, directory) {
   const filesWithExtInDirectory = directoryEntries
     .filter((directoryEntry) => directoryEntry.isFile())
     .filter((directoryEntry) => getExtension(directoryEntry.name) === extension)
-    .map((directoryEntry) => `${dir}/${directoryEntry.name}`);
+    .map((directoryEntry) => `${directory}/${directoryEntry.name}`);
 
   const filesWithExtInSubdirectories = directoryEntries
     .filter((directoryEntry) => directoryEntry.isDirectory())

@@ -47,7 +47,7 @@ const {
   bugs,
   homepage,
 } = require('../package.json');
-const { forwardScssFiles } = require('../copy-scss-files');
+const { forwardScssFiles } = require('./forward-scss-files');
 
 function npm(args, options) {
   return new Promise((resolve, reject) => {
