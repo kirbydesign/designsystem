@@ -21,8 +21,8 @@ function createForwardRule(filePath, packageAlias, sharedRootDir) {
   )(path.basename(filePath));
 }
 
-function findAllFilesWithExtension(extension, dir) {
-  const directoryEntries = fs.readdirSync(dir, { withFileTypes: true });
+function findAllFilesWithExtension(extension, directory) {
+  const directoryEntries = fs.readdirSync(directory, { withFileTypes: true });
 
   const filesWithExtInDirectory = directoryEntries
     .filter((directoryEntry) => directoryEntry.isFile())
@@ -31,7 +31,9 @@ function findAllFilesWithExtension(extension, dir) {
 
   const filesWithExtInSubdirectories = directoryEntries
     .filter((directoryEntry) => directoryEntry.isDirectory())
-    .map((directoryEntry) => findAllFilesWithExtension(extension, `${dir}/${directoryEntry.name}`));
+    .map((directoryEntry) =>
+      findAllFilesWithExtension(extension, `${directory}/${directoryEntry.name}`)
+    );
 
   return [...filesWithExtInDirectory, ...filesWithExtInSubdirectories.flat()];
 }
@@ -54,17 +56,9 @@ function createForwardScssFile(
   fs.writeFileSync(targetFilePath, forwardRule);
 }
 
-// --- Main --- //
-const PROJECT_LIBS_FOLDER = 'libs';
-const PACKAGE_ALIAS = '@kirbydesign';
-const SOURCE_ROOT_DIR = 'libs/core/scss';
-const TARGET_ROOT_DIR = 'libs/designsystem/src/lib/scss';
-
 module.exports.forwardScssFiles = (sourceRootDir, targetRootDir, packageAlias, sharedRootDir) => {
   const scssFilesToForward = findAllFilesWithExtension('scss', sourceRootDir);
   scssFilesToForward.forEach((scssFilePath) => {
     createForwardScssFile(scssFilePath, sourceRootDir, targetRootDir, packageAlias, sharedRootDir);
   });
 };
-
-//forwardScssFiles(SOURCE_ROOT_DIR, TARGET_ROOT_DIR, PACKAGE_ALIAS, PROJECT_LIBS_FOLDER);
