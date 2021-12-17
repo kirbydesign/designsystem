@@ -7,7 +7,6 @@
 */
 
 @mixin typography() {
-  --ion-text-color-rgb: #{utils.get-text-color('black')}; //TODO: should we make this configurable?
   --padding-end: #{utils.size('s')};
   --padding-start: #{utils.size('s')};
 
@@ -15,6 +14,7 @@
     font-weight: utils.font-weight('bold');
     font-size: utils.font-size('m');
     line-height: utils.line-height('m');
+    color: var(--kirby-section-header-color);
     margin: 0;
     white-space: nowrap;
     overflow: hidden;
@@ -25,6 +25,7 @@
     font-weight: utils.font-weight('light');
     font-size: utils.font-size('s');
     line-height: utils.line-height('s');
+    color: var(--kirby-section-header-color);
     margin: utils.size('xxxs') 0 utils.size('xxs');
     white-space: nowrap;
     overflow: hidden;
