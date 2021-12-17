@@ -30,6 +30,7 @@ import { GridLayoutSingleContainerExampleComponent } from './grid-layout-example
 import { IconExampleComponent } from './icon-example/icon-example.component';
 import { ItemExampleComponent } from './item-example/item-example.component';
 import { ItemGroupExampleComponent } from './item-group-example/item-group-example.component';
+import { ItemSlidingExampleComponent } from './item-sliding-example/item-sliding-example.component';
 import { LinkExampleComponent } from './link-example/link-example.component';
 import { ListColoredItemsExampleComponent } from './list-example/examples/colored-items';
 import { ListWithDividersExampleComponent } from './list-example/examples/dividers';
@@ -260,6 +261,10 @@ export const routes: Routes = [
   {
     path: 'item',
     component: ItemExampleComponent,
+  },
+  {
+    path: 'item-sliding',
+    component: ItemSlidingExampleComponent,
   },
   {
     path: 'item-group',

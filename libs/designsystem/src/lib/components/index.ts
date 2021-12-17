@@ -9,6 +9,7 @@ export * from './chart-deprecated';
 export * from './chart';
 export * from './stock-chart-deprecated';
 export * from './calendar';
+export * from './item-sliding';
 
 export { CheckboxComponent } from './checkbox/checkbox.component';
 export { ChipComponent } from './chip/chip.component';
@@ -38,6 +39,8 @@ export * from './modal';
 export * from './page';
 
 export { HorizontalDirection, PopoverComponent } from './popover/popover.component';
+
+export { ItemSlidingComponent } from './item-sliding/item-sliding.component';
 
 export * from './router-outlet';
 
