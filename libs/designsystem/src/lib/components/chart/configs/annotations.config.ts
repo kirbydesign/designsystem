@@ -33,4 +33,11 @@ export const CHART_ANNOTATIONS_CONFIG: AnnotationTypeRegistry = {
   point: {
     backgroundColor: 'initial',
   },
+  //TODO: Had to add these bad boys to silence the compiler. What should the actual values be?
+  label: {
+    content: '',
+  },
+  polygon: {
+    backgroundColor: 'transparent',
+  },
 };
