@@ -34,7 +34,9 @@
 
   &[role='button'] {
     cursor: pointer;
-    outline-offset: utils.size('xxxxs');
+    @include utils.not-touch {
+      outline-offset: utils.size('xxxxs');
+    }
   }
 }
 
