@@ -1,0 +1,34 @@
+@use '~@kirbydesign/core/src/scss/utils';
+
+/*
+* This mixin is applied both in the section-header styles, for using 
+* headings and paragraphs directly, and in kirby-label styles, for 
+* wrapping them in a kirby-label within a section-header. 
+*/
+
+@mixin typography() {
+  --padding-end: #{utils.size('s')};
+  --padding-start: #{utils.size('s')};
+
+  @include utils.slotted('[heading]') {
+    font-weight: utils.font-weight('bold');
+    font-size: utils.font-size('m');
+    line-height: utils.line-height('m');
+    color: var(--kirby-section-header-color);
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  @include utils.slotted('[detail]', '[label]') {
+    font-weight: utils.font-weight('light');
+    font-size: utils.font-size('s');
+    line-height: utils.line-height('s');
+    color: var(--kirby-section-header-color);
+    margin: utils.size('xxxs') 0 utils.size('xxs');
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

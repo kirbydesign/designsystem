@@ -38,6 +38,7 @@ import { PageShowcaseComponent } from './page-showcase/page-showcase.component';
 import { ProgressCircleShowcaseComponent } from './progress-circle-showcase/progress-circle-showcase.component';
 import { RadioShowcaseComponent } from './radio-showcase/radio-showcase.component';
 import { RangeShowcaseComponent } from './range-showcase/range-showcase.component';
+import { SectionHeaderShowcaseComponent } from './section-header-showcase/section-header-showcase.component';
 import { SegmentedControlShowcaseComponent } from './segmented-control-showcase/segmented-control-showcase.component';
 import { ShowcaseRoutingModule } from './showcase-routing.module';
 import { ShowcaseComponent } from './showcase.component';
@@ -101,6 +102,7 @@ export const COMPONENT_EXPORTS: any[] = [
   RadioShowcaseComponent,
   RangeShowcaseComponent,
   LinkShowcaseComponent,
+  SectionHeaderShowcaseComponent,
   ItemSlidingShowcaseComponent,
   StylingHtmlListsShowcaseComponent,
 ];
