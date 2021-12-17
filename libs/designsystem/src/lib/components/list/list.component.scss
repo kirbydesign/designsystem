@@ -1,5 +1,6 @@
 @use "sass:map";
 @use '~@kirbydesign/core/src/scss/utils';
+@use '../item-sliding/item-sliding.shared.scss';
 
 $divider-color: utils.get-color('background-color');
 $shadow: utils.get-elevation(2);
@@ -113,13 +114,6 @@ ion-item-divider {
   display: flex;
   color: #{utils.get-color('black')};
   background-color: transparent;
-
-  @each $color-name, $color-value in utils.$main-colors {
-    .#{$color-name} {
-      background-color: #{utils.get-color($color-name)};
-      color: #{utils.get-color($color-name + '-contrast')};
-    }
-  }
 
   ion-item-option {
     height: 100%;
