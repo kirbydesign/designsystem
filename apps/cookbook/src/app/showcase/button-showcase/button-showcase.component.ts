@@ -31,7 +31,7 @@ export class ButtonShowcaseComponent {
       description:
         'Sets the attention level for the button. Button color will be updated automatically depending on host color.',
       defaultValue: '1',
-      type: ['1', '2', '3', '4'],
+      type: ['1', '2', '3'],
     },
     {
       name: 'isDestructive',

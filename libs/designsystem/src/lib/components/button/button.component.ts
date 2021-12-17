@@ -30,8 +30,9 @@ export class ButtonComponent implements AfterContentInit {
   isAttentionLevel2: boolean;
   @HostBinding('class.attention-level3')
   isAttentionLevel3: boolean;
-  @HostBinding('class.attention-level4')
-  isAttentionLevel4: boolean;
+  @HostBinding('class.no-decoration')
+  hasNoDecoration = false;
+
   @HostBinding('class.destructive')
   destructive: boolean = false; // Default
 
@@ -63,12 +64,25 @@ export class ButtonComponent implements AfterContentInit {
   @Input() set attentionLevel(level: '1' | '2' | '3' | '4') {
     this.isAttentionLevel1 = level === '1';
     this.isAttentionLevel2 = level === '2';
-    this.isAttentionLevel3 = level === '3';
-    this.isAttentionLevel4 = level === '4';
+    this.isAttentionLevel3 = level === '3' || level === '4';
+    if (level === '4') {
+      console.warn(
+        'Deprecated: Support for attentionLevel4 on kirby-button will be removed in a future release - please update.'
+      );
+    }
   }
+
+  @Input() set noDecoration(enable: boolean) {
+    this.hasNoDecoration = enable;
+    this.isAttentionLevel1 = !this.hasNoDecoration;
+    this.isAttentionLevel2 = false;
+    this.isAttentionLevel3 = false;
+  }
+
   @Input() set isDestructive(state: boolean) {
     this.destructive = state;
   }
+
   @Input()
   themeColor: NotificationColor;
   @Input() expand: 'full' | 'block';

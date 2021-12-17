@@ -273,9 +273,9 @@ describe('ButtonComponent', () => {
       });
     });
 
-    describe('when configured with attentionlevel 4', () => {
+    describe('when configured with no decoration', () => {
       beforeEach(() => {
-        spectator.component.attentionLevel = '4';
+        spectator.component.noDecoration = true;
         spectator.detectChanges();
       });
 

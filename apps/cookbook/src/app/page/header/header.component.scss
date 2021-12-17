@@ -32,6 +32,7 @@ nav {
   @include media('>=large') {
     display: block;
   }
+  //  margin: auto 0;
 
   ul {
     display: flex;
@@ -40,7 +41,11 @@ nav {
     margin: 0;
 
     a {
-      text-decoration: none;
+      display: flex;
+      align-items: center;
+      height: 38px;
+      padding: 0 24px;
+      margin: 5px;
     }
   }
 }
