@@ -264,11 +264,7 @@ ion-loading.kirby-loading-overlay {
   padding-right: calc(#{$icon-scaling-factor} + #{utils.size('xxxs')});
 }
 
-.rounded-corners {
-  border-radius: utils.$border-radius;
-  overflow: hidden;
-}
-
-.shadow {
-  box-shadow: utils.get-elevation(2);
+.base-shape {
+  @include utils.rounded-corners();
+  @include utils.shadow();
 }
