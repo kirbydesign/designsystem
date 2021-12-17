@@ -10,15 +10,23 @@ function getExtension(filename) {
   return ext[ext.length - 1];
 }
 
+const removeLeadingUnderscore = (fileName) => (fileName[0] === '_' ? fileName.slice(1) : fileName);
+const ignoreBarrelFileReference = (fileName) => (fileName === 'index.scss' ? '' : fileName);
+const excludeFileExtension = (fileName) => path.basename(fileName, '.scss');
+const removeTrailingSlash = (string) => (string.slice(-1) === '/' ? string.slice(0, -1) : string);
+
 function createForwardRule(filePath, packageAlias, sharedRootDir) {
-  return pipe(
-    (fileName) => (fileName[0] === '_' ? fileName.slice(1) : fileName),
-    (fileName) => (fileName === 'index.scss' ? '' : fileName),
-    (fileName) => path.basename(fileName, '.scss'),
-    (fileName) => `~${path.dirname(filePath).replace(sharedRootDir, packageAlias)}/${fileName}`,
-    (url) => (url[url.length - 1] === '/' ? url.slice(0, -1) : url),
-    (url) => `@forward "${url}";`
+  const fileNameToForward = pipe(
+    removeLeadingUnderscore,
+    ignoreBarrelFileReference,
+    excludeFileExtension
   )(path.basename(filePath));
+
+  const url = removeTrailingSlash(
+    `~${path.dirname(filePath).replace(sharedRootDir, packageAlias)}/${fileNameToForward}`
+  );
+
+  return `@forward "${url}";`;
 }
 
 function findAllFilesWithExtension(extension, directory) {
