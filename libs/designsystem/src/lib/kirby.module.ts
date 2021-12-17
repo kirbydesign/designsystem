@@ -32,6 +32,7 @@ import { BreakpointHelperService } from './components/grid/breakpoint-helper.ser
 import { GridComponent } from './components/grid/grid.component';
 import { IconModule } from './components/icon/icon.module';
 import { ItemGroupComponent } from './components/item-group/item-group.component';
+import { ItemSlidingComponent } from './components/item-sliding/item-sliding.component';
 import { ItemModule } from './components/item/item.module';
 import { ListModule } from './components/list/list.module';
 import { GroupByPipe } from './components/list/pipes/group-by.pipe';
@@ -116,6 +117,7 @@ const exportedDeclarations = [
   SlideDirective,
   AccordionDirective,
   AccordionItemComponent,
+  ItemSlidingComponent,
   RadioComponent,
   RadioGroupComponent,
   RangeComponent,
