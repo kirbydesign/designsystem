@@ -2,7 +2,10 @@
     General imports for components
     NOTICE: Must not contain anything that generates classes or else it will be generated for every component that imports this file.
 */
-@import './base/functions';
-@import './base/variables';
-@import './base/include-media';
-@import './themes/colors';
+@use 'base/variables';
+@forward '~include-media/dist/include-media' with (
+  $breakpoints: variables.$breakpoints
+);
+@forward 'base/functions';
+@forward 'base/variables' hide $breakpoints;
+@forward 'themes/colors';

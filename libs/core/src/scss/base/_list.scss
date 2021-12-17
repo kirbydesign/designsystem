@@ -1,0 +1,11 @@
+ul,
+ol {
+  margin-inline-start: 0.25em;
+  padding-inline-start: 1em;
+  line-height: 1.5;
+}
+
+li li,
+li + li {
+  margin-block-start: 0.5em;
+}

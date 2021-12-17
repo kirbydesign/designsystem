@@ -1,0 +1,52 @@
+<p>
+  Kirby offers default styling of ordered <code>&lt;ol&gt;</code> and unordered
+  <code>&lt;ul&gt;</code> HTML lists (but not description/definition lists <code>&lt;dl&gt;</code>).
+</p>
+<p>There are some good rules of thumb how to use a bulleted list</p>
+<ul>
+  <li>Don’t use a period at the end of an item</li>
+  <li>Don’t use a period at the end of the last bullet in a series of bullets</li>
+  <li>Try to keep the amount of bullets between 3 and 5</li>
+  <li>Try not to use nested lists</li>
+</ul>
+<cookbook-styling-html-lists-example></cookbook-styling-html-lists-example>
+<h2>How to "opt-out" of Kirby's default HTML list styles</h2>
+<p>
+  Kirby's default styles for HTML lists are mainly based on the user agent ("browser") styles. In
+  other words, Kirby list styles only change the horizontal "indentation" and the vertical space
+  between list items.
+</p>
+<p>
+  To control the space between list items you’ll want to target list items with sufficiently high
+  specificity, e.g.:
+</p>
+<cookbook-code-viewer language="css">
+  <pre>
+  ol li,
+  ul li {{ '{' }}
+    margin-block-start: revert;
+  {{ '}' }} </pre
+  >
+</cookbook-code-viewer>
+<p>
+  You may also need to adjust the line-height. Which value to use will depend on the specific case,
+  e.g.:
+</p>
+<cookbook-code-viewer language="css">
+  <pre>
+  ol, ul {{'{' }}
+    line-height: normal;
+  {{'}' }}</pre
+  >
+</cookbook-code-viewer>
+<p>
+  You can control the "indentation" of lists by changing the value of
+  <code>margin-inline-start</code>, e.g.
+</p>
+<cookbook-code-viewer language="css">
+  <pre>
+  ol, ul {{'{' }}
+    margin-inline-start: 1em;
+  {{'}' }}</pre
+  >
+</cookbook-code-viewer>

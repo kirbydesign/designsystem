@@ -1,9 +1,9 @@
-@import '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/utils';
 
 :host {
   display: block;
   position: relative; // Ensures correct position of cloned child input when Ionic scrollAssist is enabled
-  margin-bottom: size('s');
+  margin-bottom: utils.size('s');
 }
 
 :host-context(kirby-item) {
@@ -13,7 +13,7 @@
 .texts {
   display: flex;
   justify-content: space-between;
-  padding: 2px size('s') 0 size('s');
+  padding: 2px utils.size('s') 0 utils.size('s');
 
   .message {
     flex: 75%;
@@ -35,9 +35,9 @@ label {
 
 .text {
   display: block;
-  font-size: font-size('s');
-  font-weight: font-weight('light');
-  line-height: line-height('s');
-  margin-bottom: size('xxxs');
-  padding: 0 size('s');
+  font-size: utils.font-size('s');
+  font-weight: utils.font-weight('light');
+  line-height: utils.line-height('s');
+  margin-bottom: utils.size('xxxs');
+  padding: 0 utils.size('s');
 }

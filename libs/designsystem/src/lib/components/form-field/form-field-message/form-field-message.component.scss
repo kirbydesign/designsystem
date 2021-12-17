@@ -1,11 +1,11 @@
-@import '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/utils';
 
 :host {
   font-style: italic;
-  font-size: font-size('xs');
-  font-weight: font-weight('normal');
+  font-size: utils.font-size('xs');
+  font-weight: utils.font-weight('normal');
   font-stretch: normal;
-  line-height: line-height('xs');
+  line-height: utils.line-height('xs');
   letter-spacing: normal;
-  color: get-text-color('black');
+  color: utils.get-text-color('black');
 }

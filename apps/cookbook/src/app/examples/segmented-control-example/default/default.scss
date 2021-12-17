@@ -1,21 +1,21 @@
-@import '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/utils';
 
 :host {
   display: block;
 }
 
 kirby-segmented-control {
-  margin-bottom: size('l');
+  margin-bottom: utils.size('l');
 }
 
 kirby-card {
-  margin-bottom: size('s');
+  margin-bottom: utils.size('s');
 }
 
 fieldset {
   display: inline-block;
 
   .disabled {
-    color: get-text-color('semi-dark');
+    color: utils.get-text-color('semi-dark');
   }
 }

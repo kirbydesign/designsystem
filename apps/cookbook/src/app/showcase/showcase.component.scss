@@ -1,19 +1,19 @@
-@import '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/utils';
 
-$icon-size: size('s');
+$icon-size: utils.size('s');
 
 .show-case {
   margin-bottom: 2rem;
 
   h1 {
     text-transform: uppercase;
-    font-size: font-size('xxl');
-    color: get-color('dark');
-    font-weight: font-weight('light');
+    font-size: utils.font-size('xxl');
+    color: utils.get-color('dark');
+    font-weight: utils.font-weight('light');
     position: relative;
-    padding-bottom: 5 * size('xxxs');
-    border-bottom: solid 1px get-color('medium');
-    margin-bottom: size('xs');
+    padding-bottom: 5 * utils.size('xxxs');
+    border-bottom: solid 1px utils.get-color('medium');
+    margin-bottom: utils.size('xs');
   }
 }
 
@@ -22,16 +22,16 @@ $icon-size: size('s');
   justify-content: space-between;
 
   a {
-    color: get-text-color('semi-dark');
-    font-size: font-size('s');
+    color: utils.get-text-color('semi-dark');
+    font-size: utils.font-size('s');
   }
 }
 
 .cta-links {
   a {
     display: block;
-    margin-bottom: size('xxs');
-    @include media('>=large') {
+    margin-bottom: utils.size('xxs');
+    @include utils.media('>=large') {
       display: inline-block;
       margin-bottom: 0;
     }
@@ -39,14 +39,14 @@ $icon-size: size('s');
 }
 
 h4 {
-  margin-top: size('s');
+  margin-top: utils.size('s');
 }
 
 .icon {
   width: $icon-size;
   height: $icon-size;
-  margin-right: size('xxs');
-  margin-left: size('m');
+  margin-right: utils.size('xxs');
+  margin-left: utils.size('m');
   color: currentColor;
   fill: currentColor;
   vertical-align: bottom;
@@ -54,6 +54,6 @@ h4 {
 
 ::ng-deep :not(pre) > code[class*='language-'],
 ::ng-deep pre[class*='language-'] {
-  background-color: get-color('light-tint');
-  border: 1px solid get-color('medium');
+  background-color: utils.get-color('light-tint');
+  border: 1px solid utils.get-color('medium');
 }

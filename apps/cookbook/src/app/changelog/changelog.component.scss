@@ -1,26 +1,26 @@
-@import '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/utils';
 
 .changelog,
 .pull-requests {
   list-style: none;
-  margin-bottom: size('m');
+  margin-bottom: utils.size('m');
 
   li {
-    margin-bottom: size('xxs');
+    margin-bottom: utils.size('xxs');
   }
 }
 
 .version-title,
 a {
-  color: get-text-color('black');
+  color: utils.get-text-color('black');
   text-decoration: none;
   display: inline-block;
 
   &:hover {
-    color: get-color('primary');
+    color: utils.get-color('primary');
   }
 }
 
 kirby-badge {
-  margin-left: size('xxs');
+  margin-left: utils.size('xxs');
 }
