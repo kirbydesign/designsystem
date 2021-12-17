@@ -56,6 +56,7 @@ import { RadioComponent } from './components/radio/radio.component';
 import { RangeComponent } from './components/range/range.component';
 import { ReorderListComponent } from './components/reorder-list/reorder-list.component';
 import { RouterOutletModule } from './components/router-outlet/router-outlet.module';
+import { SectionHeaderComponent } from './components/section-header/section-header.component';
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
 import { ComponentLoaderDirective } from './components/shared/component-loader.directive';
 import { ResizeObserverFactory } from './components/shared/resize-observer/resize-observer.factory';
@@ -122,6 +123,7 @@ const exportedDeclarations = [
   RangeComponent,
   ElementAsButtonDirective,
   ItemGroupComponent,
+  SectionHeaderComponent,
 ];
 
 const declarations = [

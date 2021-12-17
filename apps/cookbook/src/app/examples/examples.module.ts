@@ -18,6 +18,7 @@ import { FlagExampleModule } from './flag-example/flag-example.module';
 import { FormFieldExamplesModule } from './form-field-example/form-field-example.module';
 import { GridLayoutExamplesModule } from './grid-layout-example/grid-layout-example.module';
 import { ItemExampleModule } from './item-example/item-example.module';
+import { ItemGroupExampleModule } from './item-group-example/item-group-example.module';
 import { ItemSlidingExampleModule } from './item-sliding-example/item-sliding-example.module';
 import { LinkExampleModule } from './link-example/link-example.module';
 import { ListExamplesModule } from './list-example/list-example.module';
@@ -25,6 +26,7 @@ import { ModalExampleModule } from './modal-example/modal-example.module';
 import { ProgressCircleExampleModule } from './progress-circle-example/progress-circle-example.module';
 import { RadioExampleModule } from './radio-example/radio-example.module';
 import { RangeExampleModule } from './range-example/range-example.module';
+import { SectionHeaderExampleModule } from './section-header-example/section-header-example.module';
 import { SegmentedControlExampleModule } from './segmented-control-example/segmented-control-example.module';
 import { ToggleButtonExampleModule } from './toggle-button-example/toggle-button-example.module';
 
@@ -50,6 +52,8 @@ const IMPORTS = [
   LinkExampleModule,
   ModalExampleModule,
   GridLayoutExamplesModule,
+  SectionHeaderExampleModule,
+  ItemGroupExampleModule,
 ];
 
 @NgModule({
