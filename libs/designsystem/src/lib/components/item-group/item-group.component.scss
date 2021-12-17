@@ -1,3 +1,10 @@
+@use '~@kirbydesign/core/scss/utils';
+
 :host {
   display: block;
+
+  &.first-last-item-padding {
+    @include utils.first-item-padding();
+    @include utils.last-item-padding();
+  }
 }

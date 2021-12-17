@@ -1,102 +1,35 @@
-<div class="example">
-  <p>
-    Lists are made up of multiple rows of items which can contain text, buttons, toggles, icons,
-    thumbnails, and much more. Lists generally contain items with similar data content, such as
-    images and text.
-  </p>
-  <p>
-    Lists support several interactions including swiping items to reveal options, dragging to
-    reorder items within the list, and deleting items.
-  </p>
-</div>
+<h2>Item</h2>
+<kirby-item class="base-shape">Plain Item</kirby-item>
 
-<div class="page-example">
-  <div>
-    <h2>List with items</h2>
-    <cookbook-code-viewer [html]="items"></cookbook-code-viewer>
+<h2>Items in group</h2>
+<kirby-item-group class="first-last-item-padding">
+  <ion-item-divider style="background: transparent;">Hello</ion-item-divider>
+  <div class="base-shape">
+    <kirby-item>Plain Item</kirby-item>
+    <kirby-item>Plain Item</kirby-item>
+    <kirby-item>Plain Item</kirby-item>
   </div>
+</kirby-item-group>
 
-  <cookbook-iphone src="/examples/list/with-items" showExternalLink="true"></cookbook-iphone>
-</div>
+<h2>Items in list</h2>
+<kirby-list-experimental class="base-shape">
+  <kirby-card><kirby-item>Plain Item</kirby-item></kirby-card>
+  <kirby-card><kirby-item>Plain Item</kirby-item></kirby-card>
+  <kirby-card><kirby-item>Plain Item</kirby-item></kirby-card>
+</kirby-list-experimental>
 
-<div class="page-example">
-  <div>
-    <h2>List with items using dividers:</h2>
-    <cookbook-code-viewer [html]="dividersExampleTemplate"></cookbook-code-viewer>
-  </div>
-
-  <div>
-    <cookbook-iphone src="/examples/list/with-dividers" showExternalLink="true"></cookbook-iphone>
-  </div>
-</div>
-
-<div class="page-example">
-  <div>
-    <h2>List with selectable items using dividers:</h2>
-    <p>
-      The selected item is highligted in bold by default. This behaviour can be suppressed by
-      passing <code>[disableSelectionHighlight]="true"</code> to the list component.
-    </p>
-    <cookbook-code-viewer [html]="selectableItemsExampleTemplate"></cookbook-code-viewer>
-  </div>
-
-  <div>
-    <cookbook-iphone
-      src="/examples/list/with-selectable-items"
-      showExternalLink="true"
-    ></cookbook-iphone>
-  </div>
-</div>
-
-<div class="page-example">
-  <div>
-    <h2>List with colored items:</h2>
-    <cookbook-code-viewer [html]="coloredItemsExampleTemplate"></cookbook-code-viewer>
-  </div>
-
-  <div>
-    <cookbook-iphone
-      src="/examples/list/with-colored-items"
-      showExternalLink="true"
-    ></cookbook-iphone>
-  </div>
-</div>
-
-<div class="page-example">
-  <div>
-    <h2>List with sections and colored items:</h2>
-    <cookbook-code-viewer [html]="sectionsAndColoredItemsExampleTemplate"></cookbook-code-viewer>
-  </div>
-
-  <div>
-    <cookbook-iphone
-      src="/examples/list/with-sections-and-colored-items"
-      showExternalLink="true"
-    ></cookbook-iphone>
-  </div>
-</div>
-
-<div class="page-example">
-  <div>
-    <h2>List with header and footer:</h2>
-    <cookbook-code-viewer [html]="headerAndFooterExampleTemplate"></cookbook-code-viewer>
-  </div>
-
-  <div>
-    <cookbook-iphone
-      src="/examples/list/with-header-and-footer"
-      showExternalLink="true"
-    ></cookbook-iphone>
-  </div>
-</div>
-
-<div class="page-example">
-  <div>
-    <h2>List with sections:</h2>
-    <cookbook-code-viewer [html]="sectionsExampleTemplate"></cookbook-code-viewer>
-  </div>
-
-  <div>
-    <cookbook-iphone src="/examples/list/with-sections" showExternalLink="true"></cookbook-iphone>
-  </div>
-</div>
+<h2>Items in group in list</h2>
+<kirby-list-experimental class="item-spacing first-last-item-padding">
+  <kirby-item-group class="base-shape">
+    <kirby-item>Plain Item</kirby-item>
+    <kirby-item>Plain Item</kirby-item>
+    <kirby-item>Plain Item</kirby-item>
+  </kirby-item-group>
+  <kirby-item-group class="base-shape">
+    <div class="base-shape">
+      <kirby-card><kirby-item>Plain Item</kirby-item></kirby-card>
+      <kirby-card><kirby-item>Plain Item</kirby-item></kirby-card>
+      <kirby-card><kirby-item>Plain Item</kirby-item></kirby-card>
+    </div>
+  </kirby-item-group>
+</kirby-list-experimental>

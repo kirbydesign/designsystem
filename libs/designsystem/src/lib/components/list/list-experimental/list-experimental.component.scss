@@ -1,6 +1,16 @@
+@use '~@kirbydesign/core/scss/utils';
+
 :host {
-  ion-list {
-    background: transparent;
-    border-radius: inherit;
+  display: block;
+
+  &.first-last-item-padding {
+    @include utils.first-item-padding();
+    @include utils.last-item-padding();
   }
+}
+
+ion-list {
+  background: transparent;
+  border-radius: inherit;
+  contain: inherit;
 }

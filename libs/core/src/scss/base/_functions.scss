@@ -195,3 +195,28 @@
 @mixin shadow() {
   box-shadow: get-elevation(2);
 }
+
+//very list-specific, could benefit from own module
+@mixin first-item-padding() {
+  ::ng-deep kirby-item:first-of-type,
+  ::ng-deep kirby-item-sliding:first-of-type {
+    ion-item {
+      --padding-top: #{size('xxs')};
+    }
+  }
+}
+
+@mixin last-item-padding() {
+  ::ng-deep kirby-item:last-of-type,
+  ::ng-deep kirby-item-sliding:last-of-type {
+    ion-item {
+      --padding-bottom: #{size('xxs')};
+    }
+  }
+}
+
+@mixin section-spacing {
+  kirby-item-group {
+    margin-bottom: 16px;
+  }
+}
