@@ -1,7 +1,7 @@
-@import '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/utils';
 
-$divider-color: get-color('medium');
-$padding: size('s');
+$divider-color: utils.get-color('medium');
+$padding: utils.size('s');
 
 :host {
   display: block;
@@ -11,7 +11,7 @@ $padding: size('s');
 .header {
   display: flex;
   align-items: center;
-  height: size('xxxl');
+  height: utils.size('xxxl');
   padding-left: $padding;
   padding-right: $padding;
   cursor: pointer;
@@ -21,7 +21,7 @@ $padding: size('s');
   flex-grow: 2;
 }
 .kirby-icon {
-  transition: transform get-transition-duration('quick');
+  transition: transform utils.get-transition-duration('quick');
 }
 .content {
   overflow: hidden;
@@ -32,7 +32,7 @@ $padding: size('s');
 
 .expanded {
   .title {
-    font-weight: font-weight('bold');
+    font-weight: utils.font-weight('bold');
   }
   .kirby-icon {
     transform: rotate(180deg);
@@ -46,7 +46,7 @@ $padding: size('s');
 }
 
 :host-context(kirby-card) {
-  border-color: get-color('background-color');
+  border-color: utils.get-color('background-color');
 
   &:first-child {
     border-top: none;

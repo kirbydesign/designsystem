@@ -1,4 +1,4 @@
-@import '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/utils';
 
 :host {
   display: inline-block;
@@ -13,7 +13,7 @@ kirby-progress-circle-ring {
 }
 
 kirby-progress-circle-ring {
-  z-index: z('default') + 1;
+  z-index: utils.z('default') + 1;
 }
 
 .transcluded-content {
@@ -22,7 +22,7 @@ kirby-progress-circle-ring {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: z('default');
+  z-index: utils.z('default');
   border-radius: 50%;
   overflow: hidden;
 }

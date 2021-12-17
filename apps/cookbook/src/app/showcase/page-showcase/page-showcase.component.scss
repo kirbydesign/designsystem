@@ -1,7 +1,7 @@
-@import '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/utils';
 
 .page-example {
   display: flex;
-  margin-top: size('xl');
-  margin-bottom: size('xl');
+  margin-top: utils.size('xl');
+  margin-bottom: utils.size('xl');
 }

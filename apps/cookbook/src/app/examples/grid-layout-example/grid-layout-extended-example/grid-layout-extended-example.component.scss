@@ -1,8 +1,8 @@
-@import '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/utils';
 
 /* Configure grid properties */
 $columns: 12;
-$gap: size('m');
+$gap: utils.size('m');
 
 /* Declare the grid container */
 .grid-container {
@@ -17,16 +17,16 @@ $gap: size('m');
 }
 
 /* Tablet size and above */
-@include media('>=medium') {
+@include utils.media('>=medium') {
   .half-at-tablet-up {
-    grid-column: span ($columns / 2);
+    grid-column: span ($columns * 0.5);
   }
 }
 
 /* Desktop size and above */
-@include media('>=large') {
+@include utils.media('>=large') {
   .half-at-desktop-up {
-    grid-column: span ($columns / 2);
+    grid-column: span ($columns * 0.5);
   }
 
   .third-at-desktop-up {

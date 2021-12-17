@@ -1,11 +1,11 @@
-@import '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/utils';
 
 .container {
   text-align: center;
 }
 
 .pop-out {
-  color: get-text-color('semi-dark');
+  color: utils.get-text-color('semi-dark');
   padding-left: 24px;
   background: no-repeat url('/assets/kirby/icons/svg/link.svg');
 }
@@ -89,7 +89,7 @@
   margin-right: 5px;
 }
 
-@include media('<medium') {
+@include utils.media('<medium') {
   .docs-demo-device,
   .pop-out {
     display: none;

@@ -1,15 +1,15 @@
-@import '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/utils';
 
-$header-height-mobile: size('xxxl');
-$header-height-desktop: 2 * size('xxl');
-$footer-height: 3 * size('xxl');
-$sidebar-width: 5 * size('xxl');
+$header-height-mobile: utils.size('xxxl');
+$header-height-desktop: 2 * utils.size('xxl');
+$footer-height: 3 * utils.size('xxl');
+$sidebar-width: 5 * utils.size('xxl');
 $content-max-width: 1020px;
-$mobile-gutter: size('s');
-$desktop-gutter: minmax(size('m'), 1fr);
+$mobile-gutter: utils.size('s');
+$desktop-gutter: minmax(utils.size('m'), 1fr);
 
 :host {
-  background-color: get-color('background-color');
+  background-color: utils.get-color('background-color');
   display: grid;
   grid-template-columns: $mobile-gutter minmax(0, 1fr) $mobile-gutter;
   grid-template-rows: $header-height-mobile minmax(0, 1fr) $footer-height;
@@ -17,17 +17,17 @@ $desktop-gutter: minmax(size('m'), 1fr);
     '. header .'
     '. main .'
     'footer footer footer';
-  gap: size('m');
+  gap: utils.size('m');
   min-height: 100vh;
 
-  @include media('>=large') {
+  @include utils.media('>=large') {
     grid-template-columns: $desktop-gutter $sidebar-width minmax(0, $content-max-width) $desktop-gutter;
     grid-template-rows: $header-height-desktop minmax(0, 1fr) $footer-height;
     grid-template-areas:
       '. header header .'
       '. sidebar main .'
       'footer footer footer footer';
-    gap: size('xl');
+    gap: utils.size('xl');
   }
 }
 

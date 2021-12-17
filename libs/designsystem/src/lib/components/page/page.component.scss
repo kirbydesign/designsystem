@@ -1,15 +1,15 @@
-@import '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/utils';
 
 /*
  * Page Header
  */
 ion-header,
 ion-toolbar {
-  --background: #{get-color('background-color')};
+  --background: #{utils.get-color('background-color')};
   margin: 0 auto;
 
-  @include media('>=large') {
-    @include not-touch {
+  @include utils.media('>=large') {
+    @include utils.not-touch {
       max-width: 768px;
     }
   }
@@ -17,8 +17,8 @@ ion-toolbar {
 
 ion-toolbar {
   --border-width: 0 !important;
-  --padding-start: #{size('xxxs')};
-  --padding-end: #{size('xxxs')};
+  --padding-start: #{utils.size('xxxs')};
+  --padding-end: #{utils.size('xxxs')};
   --padding-top: 0;
   --padding-bottom: 0;
 
@@ -37,7 +37,7 @@ ion-toolbar {
       pointer-events: auto;
       overflow: hidden;
 
-      @include slotted('*') {
+      @include utils.slotted('*') {
         text-overflow: ellipsis;
         white-space: nowrap;
         pointer-events: auto;
@@ -60,24 +60,24 @@ ion-toolbar {
 
 ion-title {
   box-sizing: border-box;
-  font-size: font-size('n');
-  font-weight: font-weight('normal');
+  font-size: utils.font-size('n');
+  font-weight: utils.font-weight('normal');
 }
 
 ion-back-button {
-  --color: #{get-color('black')};
+  --color: #{utils.get-color('black')};
   --icon-font-size: 24px;
-  height: $fat-finger-size;
-  width: $fat-finger-size;
+  height: utils.$fat-finger-size;
+  width: utils.$fat-finger-size;
 }
 
 /*
  * Page Title
  */
 .page-title {
-  margin-left: size('s');
-  margin-top: size('xxs');
-  margin-bottom: var(--kirby-page-title-margin-bottom, #{size('xl')});
+  margin-left: utils.size('s');
+  margin-top: utils.size('xxs');
+  margin-bottom: var(--kirby-page-title-margin-bottom, #{utils.size('xl')});
 
   &.has-actions {
     display: flex;
@@ -108,14 +108,14 @@ ion-back-button {
  * Page Content
  */
 ion-content {
-  --padding-start: var(--page-content-padding-start, #{size('s')});
-  --padding-end: var(--page-content-padding-end, #{size('s')});
-  --background: #{get-color('background-color')};
+  --padding-start: var(--page-content-padding-start, #{utils.size('s')});
+  --padding-end: var(--page-content-padding-end, #{utils.size('s')});
+  --background: #{utils.get-color('background-color')};
 
   .content-inner {
-    max-width: var(--page-content-max-width, $page-content-max-width);
+    max-width: var(--page-content-max-width, utils.$page-content-max-width);
     margin: 0 auto;
-    padding-bottom: size('xl');
+    padding-bottom: utils.size('xl');
   }
 
   /*

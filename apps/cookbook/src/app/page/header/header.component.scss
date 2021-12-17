@@ -1,7 +1,7 @@
-@import '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/utils';
 
-$logo-size-mobile: size('xl');
-$logo-size-desktop: 2 * size('l');
+$logo-size-mobile: utils.size('xl');
+$logo-size-desktop: 2 * utils.size('l');
 $text-delay: 500ms;
 $large-rect-delay: $text-delay + 400ms;
 $medium-rect-delay: $large-rect-delay + 300ms;
@@ -21,7 +21,7 @@ header {
 }
 
 .menu-button {
-  @include media('>=large') {
+  @include utils.media('>=large') {
     display: none;
   }
 }
@@ -29,7 +29,7 @@ header {
 nav {
   display: none;
 
-  @include media('>=large') {
+  @include utils.media('>=large') {
     display: block;
   }
 
@@ -38,6 +38,11 @@ nav {
     list-style: none;
     padding: 0;
     margin: 0;
+    line-height: normal;
+
+    li {
+      margin-block-start: 0;
+    }
 
     a {
       text-decoration: none;
@@ -49,7 +54,7 @@ nav {
   width: $logo-size-mobile;
   height: $logo-size-mobile;
 
-  @include media('>=large') {
+  @include utils.media('>=large') {
     width: $logo-size-desktop;
     height: $logo-size-desktop;
   }
@@ -63,21 +68,23 @@ nav {
 .logo {
   .text {
     opacity: 0;
-    animation: enter get-transition-duration('long') ease-in-out $text-delay forwards;
+    animation: enter utils.get-transition-duration('long') ease-in-out $text-delay forwards;
   }
   .large-rect {
     opacity: 0;
-    animation: enter get-transition-duration('long') ease-in-out $large-rect-delay forwards;
+    animation: enter utils.get-transition-duration('long') ease-in-out $large-rect-delay forwards;
   }
   .medium-rect {
     opacity: 0;
     transform-origin: center top;
-    animation: enter-pop get-transition-duration('short') ease-in-out $medium-rect-delay forwards;
+    animation: enter-pop utils.get-transition-duration('short') ease-in-out $medium-rect-delay
+      forwards;
   }
   .small-rect {
     opacity: 0;
     transform-origin: center;
-    animation: enter-pop get-transition-duration('short') ease-in-out $small-rect-delay forwards;
+    animation: enter-pop utils.get-transition-duration('short') ease-in-out $small-rect-delay
+      forwards;
   }
 }
 

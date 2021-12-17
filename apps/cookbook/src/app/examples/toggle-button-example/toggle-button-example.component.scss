@@ -1,5 +1,6 @@
-@import '../examples.shared';
+@use '../examples.shared';
+@use "~@kirbydesign/core/src/scss/utils";
 
 kirby-toggle-button {
-  margin-right: size('m');
+  margin-right: utils.size('m');
 }
