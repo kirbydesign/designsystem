@@ -46,13 +46,13 @@ function findAllFilesWithExtension(extension, directory) {
   return [...filesWithExtInDirectory, ...filesWithExtInSubdirectories.flat()];
 }
 
-function createForwardScssFile(
+function createForwardScssFile({
   sourceFilePath,
   sourceRootDir,
   targetRootDir,
   packageAlias,
-  sharedRootDir
-) {
+  sharedRootDir,
+}) {
   const targetFilePath = targetRootDir + sourceFilePath.split(sourceRootDir).pop();
 
   const targetFileDirName = path.dirname(targetFilePath);
@@ -64,9 +64,20 @@ function createForwardScssFile(
   fs.writeFileSync(targetFilePath, forwardRule);
 }
 
-module.exports.forwardScssFiles = (sourceRootDir, targetRootDir, packageAlias, sharedRootDir) => {
+module.exports.forwardScssFiles = ({
+  sourceRootDir,
+  targetRootDir,
+  packageAlias,
+  sharedRootDir,
+}) => {
   const scssFilesToForward = findAllFilesWithExtension('scss', sourceRootDir);
-  scssFilesToForward.forEach((scssFilePath) => {
-    createForwardScssFile(scssFilePath, sourceRootDir, targetRootDir, packageAlias, sharedRootDir);
+  scssFilesToForward.forEach((sourceFilePath) => {
+    createForwardScssFile({
+      sourceFilePath,
+      sourceRootDir,
+      targetRootDir,
+      packageAlias,
+      sharedRootDir,
+    });
   });
 };

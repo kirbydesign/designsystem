@@ -123,9 +123,12 @@ function copyReadme() {
 function forwardCoreScssFiles() {
   console.log('Forwarding core SCSS files...');
 
+  const sourceRootDir = `${coreLibDir}/scss`;
+  const sharedRootDir = libsRootDir;
+
   return new Promise((resolve) => {
-    pathsToForwardCoreScssFilesTo.forEach((targetPath) => {
-      forwardScssFiles(`${coreLibDir}/scss`, targetPath, packageAlias, libsRootDir);
+    pathsToForwardCoreScssFilesTo.forEach((targetRootDir) => {
+      forwardScssFiles({ sourceRootDir, targetRootDir, packageAlias, sharedRootDir });
       resolve();
     });
   });
