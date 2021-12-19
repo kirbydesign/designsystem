@@ -1,0 +1,63 @@
+<article>
+  <section>
+    <h2>Overview</h2>
+    <p>
+      The <code>kirby-item-sliding</code> element is used to extend the
+      <code>kirby-item</code> component with functionality to reveal buttons when swiped. These
+      buttons are created from a list of <code>swipeAction</code> objects which is provided via the
+      <code>swipeActions</code> input property.
+    </p>
+    <p>
+      Each <code>swipeAction</code> object can be given properties to configure the corresponding
+      button with a title, icon, type, disabled status and behaviour when selected.
+    </p>
+  </section>
+
+  <section>
+    <h2>Examples</h2>
+
+    <h3>Simple list with swipe actions</h3>
+    <p>
+      Below is an example of <code>kirby-item-sliding</code> used in a list. Three swipe actions are
+      given: edit, archive and delete. Each are configured with a title, type and a function to call
+      when selected. The delete action has been configured to display an icon.
+    </p>
+
+    <kirby-card [mode]="_cardMode" [hasPadding]="_cardHasPadding">
+      <cookbook-example-viewer [html]="simpleExample.template" [ts]="simpleExample.codeSnippet">
+        <cookbook-item-sliding-simple-example #simpleExample></cookbook-item-sliding-simple-example>
+      </cookbook-example-viewer>
+    </kirby-card>
+    <br />
+
+    <h3>Conditional configuration of swipe actions</h3>
+    <p>
+      This example is an extension of the above "simple list with swipe actions" example. The
+      'delete' swipe action is conditionally disabled on a per item basis, based on whether it is
+      deleteable.
+    </p>
+    <kirby-card [mode]="_cardMode" [hasPadding]="_cardHasPadding">
+      <cookbook-example-viewer
+        [html]="conditionalExample.template"
+        [ts]="conditionalExample.codeSnippet"
+      >
+        <cookbook-item-sliding-conditional-example
+          #conditionalExample
+        ></cookbook-item-sliding-conditional-example>
+      </cookbook-example-viewer>
+    </kirby-card>
+    <br />
+  </section>
+
+  <section>
+    <h2>API Description</h2>
+    <h3>Input properties</h3>
+    <cookbook-api-description-properties
+      [properties]="_inputPropertiesApiDescription"
+    ></cookbook-api-description-properties>
+    <h3>The <code>ItemSwipeAction</code> object</h3>
+    <cookbook-api-description-properties
+      [properties]="_swipeActionApiDescription"
+    ></cookbook-api-description-properties>
+  </section>
+</article>

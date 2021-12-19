@@ -32,6 +32,7 @@ import { BreakpointHelperService } from './components/grid/breakpoint-helper.ser
 import { GridComponent } from './components/grid/grid.component';
 import { IconModule } from './components/icon/icon.module';
 import { ItemGroupComponent } from './components/item-group/item-group.component';
+import { ItemSlidingComponent } from './components/item-sliding/item-sliding.component';
 import { ItemModule } from './components/item/item.module';
 import { ListModule } from './components/list/list.module';
 import { GroupByPipe } from './components/list/pipes/group-by.pipe';
@@ -55,6 +56,7 @@ import { RadioComponent } from './components/radio/radio.component';
 import { RangeComponent } from './components/range/range.component';
 import { ReorderListComponent } from './components/reorder-list/reorder-list.component';
 import { RouterOutletModule } from './components/router-outlet/router-outlet.module';
+import { SectionHeaderComponent } from './components/section-header/section-header.component';
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
 import { ComponentLoaderDirective } from './components/shared/component-loader.directive';
 import { ResizeObserverFactory } from './components/shared/resize-observer/resize-observer.factory';
@@ -115,11 +117,13 @@ const exportedDeclarations = [
   SlideDirective,
   AccordionDirective,
   AccordionItemComponent,
+  ItemSlidingComponent,
   RadioComponent,
   RadioGroupComponent,
   RangeComponent,
   ElementAsButtonDirective,
   ItemGroupComponent,
+  SectionHeaderComponent,
 ];
 
 const declarations = [

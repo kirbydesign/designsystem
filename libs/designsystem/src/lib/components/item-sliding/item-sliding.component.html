@@ -1,0 +1,20 @@
+<ion-item-sliding>
+  <ng-content></ng-content>
+
+  <ion-item-options *ngIf="_hasSwipeActions" [side]="_side">
+    <ng-container *ngFor="let swipeAction of swipeActions">
+      <ion-item-option
+        *ngIf="!swipeAction.isDisabled"
+        [ngClass]="swipeAction.type"
+        (click)="swipeAction.onSelected()"
+      >
+        <kirby-icon
+          *ngIf="swipeAction.icon !== undefined"
+          [name]="swipeAction.icon"
+          slot="top"
+        ></kirby-icon>
+        <ion-label>{{ swipeAction.title }}</ion-label>
+      </ion-item-option>
+    </ng-container>
+  </ion-item-options>
+</ion-item-sliding>
