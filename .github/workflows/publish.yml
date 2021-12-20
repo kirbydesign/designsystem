@@ -1,11 +1,17 @@
 name: Publish new version to npm - trigger on push to master (all changes)
 
 on:
-  push:
-    branches:
-      - experiment/1947-fix-publish-workflow-target
-    # paths:
-    #   - libs/**
+  pull_request:
+    types: closed
+    branches: experiment/1947-fix-publish-workflow-target
+    # paths: 'libs/**'
+
+# on:
+#   push:
+#     branches:
+#       - experiment/1947-fix-publish-workflow-target
+#     # paths:
+#     #   - libs/**
 
 defaults:
   run:
@@ -19,7 +25,7 @@ jobs:
     steps:
       - name: Echo something
         run: |
-          echo 'hello world'
+          echo 'replicate bug'
       # - name: Checkout repo
       #   uses: actions/checkout@v2
       #   with:
