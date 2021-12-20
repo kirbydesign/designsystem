@@ -1,4 +1,4 @@
-name: Test do not run when it should not
+name: Should run when push to target branch (merge PR)
 
 on:
   push:
@@ -17,9 +17,9 @@ jobs:
     name: Bump version and publish changed packages
     runs-on: ubuntu-latest
     steps:
-      - name: Do not run this when PR is closed without merge
+      - name: Should run when PR is merged
         run: |
-          echo 'Do not run this when PR is closed without merge'
+          echo 'Should run when PR is merged'
       # - name: Checkout repo
       #   uses: actions/checkout@v2
       #   with:
