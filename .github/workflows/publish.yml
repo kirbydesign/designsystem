@@ -1,10 +1,19 @@
-name: Publish new version to npm
+# name: Publish new version to npm
+
+# on:
+#   pull_request:
+#     types: closed
+#     branches: master
+#     paths: 'libs/**'
+
+name: Publish new version to npm - trigger on push to master (changes to libs/** only)
 
 on:
-  pull_request:
-    types: closed
-    branches: master
-    paths: 'libs/**'
+  push:
+    branches:
+      - master
+    paths:
+      - libs/**
 
 defaults:
   run:
