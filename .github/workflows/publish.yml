@@ -1,4 +1,4 @@
-name: Should not run when PR merged (no changes to libs/)
+name: Publish new version to npm
 
 on:
   push:
@@ -17,9 +17,9 @@ jobs:
     name: Bump version and publish changed packages
     runs-on: ubuntu-latest
     steps:
-      - name: Should not run when PR merged (no changes to libs/)
+      - name: Should run when PR is merged (changes made to libs/)
         run: |
-          echo 'Should not run when PR merged (no changes to libs/)'
+          echo 'Should run when PR is merged (changes made to libs/)'
       # - name: Checkout repo
       #   uses: actions/checkout@v2
       #   with:
