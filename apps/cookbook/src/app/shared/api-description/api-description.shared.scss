@@ -1,5 +1,12 @@
 @use '~@kirbydesign/core/src/scss/utils';
 
+// We need this for api-description to avoid breaking mobile.
+:host {
+  display: block;
+  width: 100%;
+  overflow-x: scroll;
+}
+
 table.api-description {
   margin-bottom: utils.size('xl');
 
@@ -23,6 +30,9 @@ table.api-description {
   th {
     border: 1px solid utils.get-color('medium');
     padding: 0.5rem 1rem;
+  }
+  .property-name code {
+    white-space: nowrap;
   }
 }
 

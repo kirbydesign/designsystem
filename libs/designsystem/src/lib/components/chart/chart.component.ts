@@ -14,7 +14,12 @@ import { AnnotationOptions } from 'chartjs-plugin-annotation';
 import { ResizeObserverFactory, ResizeObserverService } from '../shared';
 
 import { ChartJSService } from './chart-js/chart-js.service';
-import { ChartDataset, ChartHighlightedElements, ChartType } from './chart.types';
+import {
+  ChartDataLabelOptions,
+  ChartDataset,
+  ChartHighlightedElements,
+  ChartType,
+} from './chart.types';
 
 @Component({
   selector: 'kirby-chart',
@@ -27,6 +32,7 @@ export class ChartComponent implements AfterViewInit, OnChanges {
   @Input() data: ChartDataset[] | number[];
   @Input() dataLabels?: string[] | string[][];
   @Input() customOptions?: ChartOptions;
+  @Input() dataLabelOptions?: ChartDataLabelOptions;
   @Input() annotations?: AnnotationOptions[];
   @Input() highlightedElements?: ChartHighlightedElements;
 
@@ -99,6 +105,7 @@ export class ChartComponent implements AfterViewInit, OnChanges {
       dataLabels: this.dataLabels,
       customOptions: this.customOptions,
       annotations: this.annotations,
+      dataLabelOptions: this.dataLabelOptions,
       highlightedElements: this.highlightedElements,
     });
   }

@@ -3,6 +3,7 @@ import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 import { Chart, FontSpec } from 'chart.js';
 
 import { ColorHelper } from '../../../helpers';
+import { ChartType } from '../chart.types';
 import { ChartConfigService } from '../configs/chart-config.service';
 
 import { ChartJSService } from './chart-js.service';
@@ -26,7 +27,7 @@ describe('ChartJSService with ChartConfigService', () => {
   });
 
   describe('function: renderChart', () => {
-    describe('when type is ChartType.column', () => {
+    describe('when type is "column"', () => {
       let chart: Chart;
       it('should use correct ChartJS type', () => {
         chartJSService.renderChart({
@@ -109,7 +110,7 @@ describe('ChartJSService with ChartConfigService', () => {
       });
     });
 
-    describe('when type is ChartType.line', () => {
+    describe('when type is "line"', () => {
       it('should use correct ChartJS type', () => {
         chartJSService.renderChart({
           targetElement: canvasElement,
@@ -186,7 +187,7 @@ describe('ChartJSService with ChartConfigService', () => {
       });
     });
 
-    describe('when type is ChartType.bar', () => {
+    describe('when type is "bar"', () => {
       let chart: Chart;
 
       it('should use correct ChartJS type', () => {
@@ -263,6 +264,56 @@ describe('ChartJSService with ChartConfigService', () => {
 
         it('should have correct hover background color', () => {
           expect(chart.options.elements.bar.hoverBackgroundColor).toBe('#00e89a');
+        });
+      });
+    });
+
+    describe('when type is "stock"', () => {
+      let chart: Chart;
+
+      beforeEach(() => {
+        chartJSService.renderChart({
+          targetElement: canvasElement,
+          type: 'stock',
+          data: [
+            {
+              data: [
+                { x: 10, y: 5 },
+                { x: 11, y: 6 },
+              ],
+            },
+          ],
+          dataLabelOptions: {
+            locale: 'da-DK',
+            valueSuffix: '%',
+            showMin: true,
+          },
+        });
+        chart = chartJSService['chart'];
+      });
+
+      it('should use correct ChartJS type', () => {
+        expect(chart.config.type).toBe('line');
+      });
+
+      it('should have correct tension', () => {
+        expect(chart.options.elements.line.tension).toBe(0);
+      });
+
+      it('should have datalabels configuration', () => {
+        expect(chart.options.plugins.datalabels).toBeTruthy();
+      });
+
+      describe('when ChartDataLabelOptions is passed', () => {
+        it('chart should have locale if ChartDataLabelOptions.locale', () => {
+          expect(chart.options.locale).toBe('da-DK');
+        });
+
+        it('chart data should have suffix if ChartDataLabelOptions.valueSuffix', () => {
+          const dataItemWithLabel: any = chart.data.datasets[0].data.find(
+            (dataItem) => (dataItem as any).datalabel
+          );
+          expect(dataItemWithLabel.datalabel.value).toContain('%');
         });
       });
     });
