@@ -1,11 +1,11 @@
-name: Should run when push to target branch (merge PR)
+name: Should not run when PR merged (no changes to libs/)
 
 on:
   push:
     branches:
       - experiment/1947-fix-publish-workflow-target
-#     # paths:
-#     #   - libs/**
+    paths:
+      - libs/**
 
 defaults:
   run:
@@ -17,9 +17,9 @@ jobs:
     name: Bump version and publish changed packages
     runs-on: ubuntu-latest
     steps:
-      - name: Should run when PR is merged
+      - name: Should not run when PR merged (no changes to libs/)
         run: |
-          echo 'Should run when PR is merged'
+          echo 'Should not run when PR merged (no changes to libs/)'
       # - name: Checkout repo
       #   uses: actions/checkout@v2
       #   with:
