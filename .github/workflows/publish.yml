@@ -1,10 +1,13 @@
 name: Publish new version to npm
 
 on:
-  pull_request:
-    types: closed
-    branches: master
-    paths: 'libs/**'
+  push:
+    branches:
+      - master
+    paths:
+      - libs/**
+
+# TODO: Do not run if triggered by this workflow itself
 
 defaults:
   run:
