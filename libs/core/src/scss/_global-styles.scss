@@ -6,6 +6,10 @@
 @use 'base/line-clamp';
 @use 'base/list';
 
+:root {
+  --close-pr-without-merging: 'do not run publish workflow';
+}
+
 :root,
 :host {
   --kirby-font-family: 'Roboto';
