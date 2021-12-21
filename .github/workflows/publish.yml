@@ -1,10 +1,11 @@
 name: Publish new version to npm
 
 on:
-  pull_request:
-    types: closed
-    branches: master
-    paths: 'libs/**'
+  push:
+    branches:
+      - master
+    paths:
+      - libs/**
 
 defaults:
   run:
