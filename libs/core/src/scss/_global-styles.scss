@@ -6,10 +6,6 @@
 @use 'base/line-clamp';
 @use 'base/list';
 
-:root {
-  --when-merging-pull-request: 'should run publish workflow';
-}
-
 :root,
 :host {
   --kirby-font-family: 'Roboto';
