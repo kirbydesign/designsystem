@@ -7,7 +7,7 @@
     "chartjs-plugin-annotation": "^1.0.2",
     "chartjs-plugin-datalabels": "^2.0.0",
     "@ionic/angular": "5.5.2",
-    "@kirbydesign/core": "0.0.16",
+    "@kirbydesign/core": "0.0.17",
     "date-fns": "2.21.1",
     "date-fns-tz": "1.1.4",
     "highcharts": "8.0.4",
