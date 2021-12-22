@@ -42,3 +42,13 @@ fieldset {
     display: flex;
   }
 }
+
+.comment {
+  margin: 0.8rem 0 0 0;
+  font-style: italic;
+  color: get-text-color('semi-dark');
+
+  &.small {
+    font-size: smaller;
+  }
+}

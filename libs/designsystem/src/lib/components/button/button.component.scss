@@ -63,8 +63,8 @@ $button-width: (
 }
 
 @mixin button-attentionlevel2 {
-  --kirby-button-background-color: #{get-color('white')};
-  --kirby-button-color: #{get-color('white-contrast')};
+  --kirby-button-background-color: #{get-color('black')};
+  --kirby-button-color: #{get-color('black-contrast')};
 
   &.destructive {
     --kirby-button-background-color: #{get-color('light')};
@@ -181,19 +181,16 @@ $button-width: (
     pointer-events: none;
   }
 
-  :host-context(.default),
-  :host-context(.kirby-color-brightness-white),
-  :host-context(.kirby-color-brightness-light) {
-    &.attention-level2 {
-      --kirby-button-background-color: #{get-color('black')};
-      --kirby-button-color: #{get-color('black-contrast')};
-    }
-  }
-
   :host-context(.kirby-color-brightness-dark) {
     &.no-decoration {
       --kirby-button-color: #{get-color('white')};
     }
+
+    &.attention-level2 {
+      --kirby-button-background-color: #{get-color('white')};
+      --kirby-button-color: #{get-color('white-contrast')};
+    }
+
     &.attention-level3 {
       --kirby-button-border-color: #{get-color('white')};
       --kirby-button-color: #{get-color('white')};

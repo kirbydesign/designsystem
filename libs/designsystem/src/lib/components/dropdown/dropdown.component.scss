@@ -48,9 +48,11 @@ $min-screen-width: 375px;
   width: 100%;
   transition: box-shadow 0.2s, border-color 0.2s;
 
-  // Temporary fix for button-width as attention level 3 has border,
-  // and attention level 2 does not:
   &.attention-level2 {
+    --kirby-button-background-color: #{get-color('white')};
+    --kirby-button-color: #{get-color('white-contrast')};
+    // Temporary fix for button-width as attention level 3 has border,
+    // and attention level 2 does not:
     border: 1px solid transparent;
   }
 
