@@ -165,13 +165,13 @@ describe('ButtonComponent', () => {
 
       it('should render with correct background-color', () => {
         expect(element).toHaveComputedStyle({
-          'background-color': getColor('white'),
+          'background-color': getColor('black'),
         });
       });
 
       it('should render with correct color', () => {
         expect(element).toHaveComputedStyle({
-          color: getColor('white', 'contrast'),
+          color: getColor('black', 'contrast'),
         });
       });
 
