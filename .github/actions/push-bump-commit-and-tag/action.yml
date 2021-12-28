@@ -8,3 +8,4 @@ runs:
       run: |
         echo "'git push --follow-tags' step has been disabled. Push commits only instead."
         git push
+      shell: bash
