@@ -25,7 +25,6 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
         with:
-          token: ${{secrets.VERSION_BUMP_GITHUB_TOKEN}}
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Kirby setup
         uses: ./.github/actions/kirby-setup
