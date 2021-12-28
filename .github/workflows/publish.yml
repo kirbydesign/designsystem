@@ -1,5 +1,7 @@
 name: Publish new version to npm
 
+# This is just for testing publish workflow
+
 on:
   push:
     branches:
