@@ -20,6 +20,8 @@ jobs:
   bump_package_versions:
     name: Bump version and publish changed packages
     runs-on: ubuntu-latest
+    with:
+      github-token: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
@@ -73,5 +75,3 @@ jobs:
         run: |
           echo "'git push --follow-tags' step has been disabled. Push commits only instead."
           git push
-        with:
-          token: ${{secrets.VERSION_BUMP_GITHUB_TOKEN}}
