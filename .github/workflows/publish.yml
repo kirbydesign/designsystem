@@ -20,7 +20,7 @@ jobs:
   bump_package_versions:
     name: Bump version and publish changed packages
     runs-on: ubuntu-latest
-    with:
+    env:
       github-token: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Checkout repo
