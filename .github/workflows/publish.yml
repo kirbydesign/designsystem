@@ -20,13 +20,12 @@ jobs:
   bump_package_versions:
     name: Bump version and publish changed packages
     runs-on: ubuntu-latest
-    env:
-      github-token: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
         with:
-          token: ${{secrets.VERSION_BUMP_GITHUB_TOKEN}}
+          # token: ${{secrets.VERSION_BUMP_GITHUB_TOKEN}}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Kirby setup
         uses: ./.github/actions/kirby-setup
       - name: Configure git
@@ -72,6 +71,6 @@ jobs:
         run: echo "'npm run publish' step has been disabled"
       - name: Push version bump(s) and tag to Github
         # run: git push --follow-tags
-        run: |
-          echo "'git push --follow-tags' step has been disabled. Push commits only instead."
-          git push
+        uses: ./.github/actions/push-bump-commit-and-tag
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
