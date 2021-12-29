@@ -3,6 +3,7 @@ name: Publish new version to npm
 # This is just for testing publish workflow #1
 # This is just for testing publish workflow #2
 # This is just for testing publish workflow #3
+# This is just for testing publish workflow #4
 
 on:
   push:
