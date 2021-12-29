@@ -28,7 +28,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: Kirby setup
         uses: ./.github/actions/kirby-setup
       - name: Configure git
@@ -72,8 +72,8 @@ jobs:
       - name: Build designsystem package and publish to npm
         # run: npm run publish
         run: echo "'npm run publish' step has been disabled"
-      - name: Push version bump(s) and tag to Github
+      - name: Push version bump(s) and tag(s) to Github
         # run: git push --follow-tags
         uses: ./.github/actions/push-bump-commit-and-tag
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
