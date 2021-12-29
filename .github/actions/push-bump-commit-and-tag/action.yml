@@ -1,5 +1,9 @@
 name: 'Push bump commit and tag'
-description: '---'
+description: 'Push commit(s) containing version bump. Also pushes tag(s)'
+inputs:
+  token:
+    description: 'Secret token to use. Defaults to ${{ secrets.GITHUB_TOKEN }}'
+    default: ${{ secrets.GITHUB_TOKEN }}
 runs: 
   using: 'composite'
   steps:
