@@ -3,13 +3,9 @@ description: 'Push commit(s) containing version bump. Also pushes tag(s)'
 inputs:
   token:
     description: 'Secret token to use'
-    # default: ${{ github.token }}
 runs: 
   using: 'composite'
   steps:
     - name: Push version bump(s) and tag to Github
-      # run: git push --follow-tags
-      run: |
-        echo "'git push --follow-tags' step has been disabled. Push commits only instead."
-        git push
+      run: git push --follow-tags
       shell: bash
