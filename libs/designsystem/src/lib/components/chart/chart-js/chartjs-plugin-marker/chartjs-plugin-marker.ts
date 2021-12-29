@@ -1,8 +1,13 @@
-// The marker pluin was heavily inspired by https://chartjs-plugin-crosshair.netlify.app
-// This project apears stale, so the feature with the vertical line, which was the only
-// part of the plugin which actually was needed, was implemented here instead.
+/* 
+  The marker plugin is heavily inspired by https://chartjs-plugin-crosshair.netlify.app
+  The project appears stale and only the vertical line feature is needed
+   part of the plugin that was actually needed is implemented here. 
+*/
 
+import { Chart } from 'chart.js';
 import { valueOrDefault } from 'chart.js/helpers';
+
+import { ChartDataset } from '../../chart.types';
 
 var defaultOptions = {
   line: {
@@ -15,14 +20,11 @@ var defaultOptions = {
   },
 };
 
-const hasMarkerConfiguration = (chart) => {
-  // using another plugins options is not ideal, so the issue with marker plugin
-  // should be resolved. As of right now the only chart that uses
-  // tooltip is stock charts.
-  return chart.config.options.scales.x && chart.config.options?.plugins?.tooltip?.enabled;
-  // @todo when resolving the typings issue with the markerplugin,
-  // this is a better conditional.
-  // return chart.config.options.scales.x && chart.config.options.plugins.marker
+const hasMarkerConfiguration = (chart: Chart) => {
+  /* 
+    Hacky solution. Should be fixed in this issue: https://github.com/kirbydesign/designsystem/issues/1967
+  */
+  return chart.data.datasets.some((dataset: ChartDataset) => !!dataset?.kirbyOptions?.isStockChart);
 };
 
 export default {
