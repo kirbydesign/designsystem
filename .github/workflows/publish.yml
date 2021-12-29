@@ -26,7 +26,9 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{secrets.VERSION_BUMP_GITHUB_TOKEN}}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Kirby setup
         uses: ./.github/actions/kirby-setup
       - name: Configure git
@@ -73,5 +75,7 @@ jobs:
       - name: Push version bump(s) and tag to Github
         # run: git push --follow-tags
         uses: ./.github/actions/push-bump-commit-and-tag
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+        # with:
+        #   github-token: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
