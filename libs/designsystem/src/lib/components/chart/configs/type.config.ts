@@ -1,7 +1,6 @@
 import { ChartTypeRegistry, Color, Point, TooltipItem, TooltipLabelStyle } from 'chart.js';
 import { Context } from 'chartjs-plugin-datalabels';
 import { Align } from 'chartjs-plugin-datalabels/types/options';
-import { format, toDate } from 'date-fns';
 
 import { ColorHelper, DesignTokenHelper } from '../../../helpers';
 import { ChartTypesConfig } from '../chart.types';
@@ -188,17 +187,6 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
             },
           },
         },
-        // A failed attempt to get local typings working.
-        // The chartjs-plugin-marker is rewritten to not
-        // having to rely on own plugin settings, but using
-        // x-axis type time instead.
-        // @todo candidate for refactor once solved.
-        // marker: {
-        //   line: {
-        //     color: getThemeColorHexString('black-base'),
-        //   }
-        // },
-
         datalabels: {
           backgroundColor: (context: Context) => context.dataset.borderColor as Color,
           color: getThemeColorHexString('white'),
