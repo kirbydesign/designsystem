@@ -7,8 +7,6 @@ on:
     paths:
       - libs/**
 
-# TODO: Do not run if triggered by this workflow itself
-
 defaults:
   run:
     shell: bash
@@ -22,7 +20,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
         with:
-          token: ${{secrets.VERSION_BUMP_GITHUB_TOKEN}}
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: Kirby setup
         uses: ./.github/actions/kirby-setup
       - name: Configure git
