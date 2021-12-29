@@ -65,5 +65,7 @@ jobs:
         run: npm version patch -m ":bookmark:Bumping version to %s (designsystem)"
       - name: Build designsystem package and publish to npm
         run: npm run publish
-      - name: Push version bump(s) and tag to Github
-        run: git push --follow-tags
+      - name: Push version bump(s) and tag(s) to Github
+        uses: ./.github/actions/push-version-bump-and-tag
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
