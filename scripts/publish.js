@@ -25,12 +25,20 @@ const cp = require('child_process');
 const fs = require('fs-extra');
 const path = require('path');
 const isCI = require('is-ci');
+const { forwardScssFiles } = require('./forward-scss-files');
 
-const angularLibDir = 'libs/designsystem/src/lib';
-const coreLibDir = 'libs/core/src';
+const packageAlias = '@kirbydesign';
+
+const libsRootDir = `libs`;
+
+const angularLibDir = `${libsRootDir}/designsystem`;
+const angularLibSrcDir = `${angularLibDir}/src/lib`;
+const coreLibDir = `${libsRootDir}/core`;
 const dist = `dist`;
-const distTarget = `${dist}/libs/designsystem`;
+const distTarget = `${dist}/${angularLibDir}`;
 const distPackageJsonPath = `${distTarget}/package.json`;
+
+const pathsToForwardCoreScssFilesTo = [`${distTarget}/scss`];
 
 const {
   version,
@@ -112,31 +120,33 @@ function copyReadme() {
   return fs.copy('readme.md', `${distTarget}/readme.md`);
 }
 
-function copyScssFiles() {
-  console.log('Copying SCSS files...');
-  const onlyScssFiles = (input) => ['', '.scss'].includes(path.extname(input));
-  return fs.copy(`${coreLibDir}/scss`, `${distTarget}/scss`, { filter: onlyScssFiles });
-}
+function forwardCoreScssFiles() {
+  console.log('Forwarding core SCSS files...');
 
-function copyScssUtilsFile() {
-  console.log('Copying SCSS utils file...');
-  const onlyScssFiles = (input) => ['', '.scss'].includes(path.extname(input));
-  return fs.copy(`${angularLibDir}/scss/_utils.scss`, `${distTarget}/scss/_utils.scss`, {
-    filter: onlyScssFiles,
+  const sourceRootDir = `${coreLibDir}/scss`;
+  const sharedRootDir = libsRootDir;
+
+  return new Promise((resolve) => {
+    pathsToForwardCoreScssFilesTo.forEach((targetRootDir) => {
+      forwardScssFiles({ sourceRootDir, targetRootDir, packageAlias, sharedRootDir });
+      resolve();
+    });
   });
 }
 
 function copyIcons() {
   console.log('Copying Icons...');
   const onlySvgFiles = (input) => ['', '.svg'].includes(path.extname(input));
-  return fs.copy(`${angularLibDir}/icons/svg`, `${distTarget}/icons/svg`, { filter: onlySvgFiles });
+  return fs.copy(`${angularLibSrcDir}/icons/svg`, `${distTarget}/icons/svg`, {
+    filter: onlySvgFiles,
+  });
 }
 
 function copyPolyfills() {
   console.log('Copying Polyfills...');
   const onlyLoadersAndMinified = (input) =>
     path.extname(input) === '' || input.endsWith('-loader.js') || input.endsWith('.min.js');
-  return fs.copy(`${angularLibDir}/polyfills`, `${distTarget}/polyfills`, {
+  return fs.copy(`${angularLibSrcDir}/polyfills`, `${distTarget}/polyfills`, {
     filter: onlyLoadersAndMinified,
   });
 }
@@ -179,8 +189,7 @@ cleanDistribution()
   .then(buildDesignsystem)
   .then(enhancePackageJson)
   .then(copyReadme)
-  .then(copyScssFiles)
-  .then(copyScssUtilsFile)
+  .then(forwardCoreScssFiles)
   .then(copyIcons)
   .then(copyPolyfills)
   .then(publish)
