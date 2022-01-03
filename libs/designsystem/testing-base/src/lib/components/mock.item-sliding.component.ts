@@ -1,6 +1,6 @@
 import { Component, forwardRef, Input } from '@angular/core';
 
-import { ItemSlidingComponent, ItemSwipeAction } from '@kirbydesign/designsystem';
+import { ItemSlidingComponent, ItemSlidingSide, ItemSwipeAction } from '@kirbydesign/designsystem';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
@@ -15,7 +15,7 @@ import { ItemSlidingComponent, ItemSwipeAction } from '@kirbydesign/designsystem
 })
 export class MockItemSlidingComponent {
   @Input() swipeActions: ItemSwipeAction[];
-  @Input() side: 'left' | 'right';
+  @Input() side: ItemSlidingSide;
 }
 
 // #endregion
