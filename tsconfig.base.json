@@ -9,10 +9,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "target": "es2017",
-    "typeRoots": [
-      "node_modules/@types"
-      //"**/types"
-    ],
+    "typeRoots": ["node_modules/@types"],
 
     "lib": ["es2017", "dom"],
     "baseUrl": ".",
