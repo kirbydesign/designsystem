@@ -1,11 +1,10 @@
 name: Publish new version to npm
 
 on:
-  push:
-    branches:
-      - master
-    paths:
-      - libs/**
+  pull_request:
+    types: closed
+    branches: master
+    paths: 'libs/**'
 
 defaults:
   run:
@@ -20,7 +19,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{secrets.VERSION_BUMP_GITHUB_TOKEN}}
       - name: Kirby setup
         uses: ./.github/actions/kirby-setup
       - name: Configure git
@@ -63,7 +62,5 @@ jobs:
         run: npm version patch -m ":bookmark:Bumping version to %s (designsystem)"
       - name: Build designsystem package and publish to npm
         run: npm run publish
-      - name: Push version bump(s) and tag(s) to Github
-        uses: ./.github/actions/push-version-bump-and-tag
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Push version bump(s) and tag to Github
+        run: git push --follow-tags

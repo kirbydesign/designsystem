@@ -331,6 +331,19 @@ export class ChartJSService {
     if (this.highlightedElements)
       this.addHighlightedElementsToDatasets(this.highlightedElements, datasets);
 
+    /* 
+       Hacky solution. Should be fixed in this issue:
+      https://github.com/kirbydesign/designsystem/issues/1967 
+    */
+    if (this.chartType === 'stock') {
+      datasets.forEach((dataset) => {
+        dataset.kirbyOptions = {
+          ...dataset.kirbyOptions,
+          isStockChart: true,
+        };
+      });
+    }
+
     return datasets;
   }
   /**

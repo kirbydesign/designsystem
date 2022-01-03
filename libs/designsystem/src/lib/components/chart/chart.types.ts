@@ -20,7 +20,13 @@ export type ChartDataLabelOptions = {
 
 export type ChartLocale = 'da-DK' | 'en-US';
 
-export type ChartDataset = { kirbyOptions?: { highlightedElements?: number[] } } & ChartJSDataset;
+/* 
+  kirbyOptions.isStockChart is a hacky solution to this issue: 
+  https://github.com/kirbydesign/designsystem/issues/1967 
+*/
+export type ChartDataset = {
+  kirbyOptions?: { highlightedElements?: number[]; isStockChart?: boolean };
+} & ChartJSDataset;
 
 export function isNumberArray(value: any): value is number[] {
   return Array.isArray(value) && value.every((item) => typeof item === 'number');
