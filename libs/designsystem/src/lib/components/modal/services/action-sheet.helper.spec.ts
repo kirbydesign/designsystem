@@ -61,7 +61,7 @@ describe('ActionSheetHelper', () => {
       let modalDidDismiss = false;
       ionModal.onDidDismiss().then((_) => (modalDidDismiss = true));
       backdrop.dispatchEvent(new MouseEvent('click'));
-      await new Promise<void>((resolve) => setTimeout(resolve, 15));
+      await new Promise<void>((resolve) => setTimeout(resolve, 20));
       expect(modalDidDismiss).toBeTrue();
     });
 
