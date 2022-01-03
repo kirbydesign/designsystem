@@ -87,9 +87,9 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "12.2.15",
+    "@angular/cdk": "12.2.13",
     "@angular/common": "12.2.15",
     "@angular/compiler": "12.2.15",
-    "@angular/cdk": "12.2.13",
     "@angular/core": "12.2.15",
     "@angular/fire": "6.1.5",
     "@angular/forms": "12.2.15",
@@ -149,6 +149,7 @@
     "jasmine-spec-reporter": "5.0.2",
     "jest": "^26.6.3",
     "jest-cli": "^26.6.3",
+    "jest-config": "^27.4.5",
     "karma": "6.3.9",
     "karma-chrome-launcher": "3.1.0",
     "karma-coverage": "^2.0.3",
