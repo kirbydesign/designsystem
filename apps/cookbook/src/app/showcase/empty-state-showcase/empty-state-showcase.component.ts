@@ -7,8 +7,9 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   styleUrls: ['./empty-state-showcase.component.scss'],
 })
 export class EmptyStateShowcaseComponent {
-  exampleHtml: string = require('!raw-loader!../../examples/empty-state-example/empty-state-example.component.html')
-    .default;
+  exampleHtml: string =
+    require('!raw-loader!../../examples/empty-state-example/empty-state-example.component.html')
+      .default;
 
   properties: ApiDescriptionProperty[] = [
     {

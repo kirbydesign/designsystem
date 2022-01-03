@@ -20,9 +20,7 @@ export enum HorizontalDirection {
 
 @Component({
   selector: 'kirby-popover',
-  template: `
-    <div #wrapper class="wrapper"><ng-content></ng-content></div>
-  `,
+  template: ` <div #wrapper class="wrapper"><ng-content></ng-content></div> `,
   styleUrls: ['./popover.component.scss'],
 })
 export class PopoverComponent implements AfterViewInit, OnDestroy {

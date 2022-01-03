@@ -10,8 +10,8 @@ import {
   styleUrls: ['./badge-showcase.component.scss'],
 })
 export class BadgeShowcaseComponent {
-  exampleHtml: string = require('!raw-loader!../../examples/badge-example/badge-example.component.html')
-    .default;
+  exampleHtml: string =
+    require('!raw-loader!../../examples/badge-example/badge-example.component.html').default;
   _cardMode = 'flat';
   _cardHasPadding = true;
 

@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./list-no-shape-showcase.component.scss'],
 })
 export class ListNoShapeShowcaseComponent {
-  exampleHtml: string = require('!raw-loader!../../examples/list-no-shape-example/list-no-shape-example.component.html')
-    .default;
+  exampleHtml: string =
+    require('!raw-loader!../../examples/list-no-shape-example/list-no-shape-example.component.html')
+      .default;
 }

@@ -1,4 +1,4 @@
-@use "sass:meta";
+@use 'sass:meta';
 @mixin _output-variable($key, $value) {
   @if (meta.type_of($value) == map) {
     @include _output-map($value, $key);

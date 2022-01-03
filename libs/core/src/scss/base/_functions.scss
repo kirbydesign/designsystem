@@ -1,9 +1,9 @@
-@use "sass:list";
-@use "sass:map";
-@use "sass:math";
-@use "sass:string";
-@use "../themes/colors";
-@use "variables";
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:math';
+@use 'sass:string';
+@use '../themes/colors';
+@use 'variables';
 
 @function _get-map-prop($map, $key) {
   @if map.has-key($map, $key) {

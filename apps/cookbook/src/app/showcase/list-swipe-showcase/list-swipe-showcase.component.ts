@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./list-swipe-showcase.component.scss'],
 })
 export class ListSwipeShowcaseComponent {
-  exampleHtml: string = require('!raw-loader!../../examples/list-swipe-example/list-swipe-example.component.html')
-    .default;
+  exampleHtml: string =
+    require('!raw-loader!../../examples/list-swipe-example/list-swipe-example.component.html')
+      .default;
 }

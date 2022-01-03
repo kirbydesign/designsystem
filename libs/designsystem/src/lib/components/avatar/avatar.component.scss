@@ -1,5 +1,5 @@
-@use "sass:map";
-@use "sass:math";
+@use 'sass:map';
+@use 'sass:math';
 @use '~@kirbydesign/core/src/scss/utils';
 
 $diameter-xsmall: map.get(utils.$avatar-sizes, 'xs');

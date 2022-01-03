@@ -160,15 +160,11 @@ export class DynamicFooterEmbeddedComponent {
 export class InputEmbeddedComponent {}
 
 @Component({
-  template: `
-    <kirby-page-progress> </kirby-page-progress>
-  `,
+  template: ` <kirby-page-progress> </kirby-page-progress> `,
 })
 export class StaticPageProgressEmbeddedComponent {}
 @Component({
-  template: `
-    <kirby-page-progress *ngIf="showPageProgress"> </kirby-page-progress>
-  `,
+  template: ` <kirby-page-progress *ngIf="showPageProgress"> </kirby-page-progress> `,
 })
 export class DynamicPageProgressEmbeddedComponent {
   showPageProgress = false;

@@ -6,8 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./spinner-showcase.component.scss'],
 })
 export class SpinnerShowcaseComponent implements OnInit {
-  exampleHtml: string = require('!raw-loader!../../examples/spinner-example/spinner-example.component.html')
-    .default;
+  exampleHtml: string =
+    require('!raw-loader!../../examples/spinner-example/spinner-example.component.html').default;
 
   constructor() {}
 

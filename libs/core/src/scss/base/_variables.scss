@@ -1,5 +1,5 @@
-@use "sass:map";
-@use "sass:math";
+@use 'sass:map';
+@use 'sass:math';
 /*
   SPACINGS
 ****************************************************************************/
@@ -34,19 +34,19 @@ $font-sizes: (
 
 $line-height: (
   // h1:
-    xl: 38px,
+  xl: 38px,
   // h2:
-    l: 28px,
+  l: 28px,
   // h3:
-    m: 24px,
+  m: 24px,
   // p - please note: p and h3 share the same line-height, added the sizes to "match" with font-size:
-    n: 24px,
+  n: 24px,
   // text-small:
-    s: 20px,
+  s: 20px,
   // text-xsmall:
-    xs: 16px,
+  xs: 16px,
   // text-xxsmall:
-    xxs: 11px
+  xxs: 11px
 ) !default;
 
 $font-weight: (
@@ -54,7 +54,7 @@ $font-weight: (
   normal: 400,
   bold: 700,
   // black will be treated as a named css color if not quoted
-    'black': 900,
+  'black': 900,
 ) !default;
 
 /* Icon

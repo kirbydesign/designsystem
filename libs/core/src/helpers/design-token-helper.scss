@@ -1,5 +1,5 @@
-@use "sass:list";
-@use "sass:map";
+@use 'sass:list';
+@use 'sass:map';
 @use 'sass-to-ts';
 @use '../scss/base/variables';
 
@@ -36,7 +36,7 @@ $styles: map.merge(
   module-variables('variables'),
   (
     // window.getComputedStyle() returns box-shadow in a specific format, so re-map elevations:
-      'elevations': remap-elevation(variables.$elevations)
+    'elevations': remap-elevation(variables.$elevations)
   )
 );
 

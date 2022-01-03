@@ -10,8 +10,8 @@ export class DividerShowcaseComponent {
   themeColor = 'white';
   hasMargin = false;
 
-  exampleHtml: string = require('!raw-loader!../../examples/divider-example/divider-example.component.html')
-    .default;
+  exampleHtml: string =
+    require('!raw-loader!../../examples/divider-example/divider-example.component.html').default;
 
   onThemeChange(themeColor) {
     this.themeColor = themeColor;
