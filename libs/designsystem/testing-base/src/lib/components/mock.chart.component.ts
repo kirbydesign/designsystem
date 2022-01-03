@@ -3,6 +3,7 @@ import { Component, forwardRef, Input } from '@angular/core';
 import {
   AnnotationOptions,
   ChartComponent,
+  ChartDataLabelOptions,
   ChartDataset,
   ChartHighlightedElements,
   ChartOptions,
@@ -25,6 +26,7 @@ export class MockChartComponent {
   @Input() data: ChartDataset[] | number[];
   @Input() dataLabels: string[] | string[][];
   @Input() customOptions: ChartOptions;
+  @Input() dataLabelOptions: ChartDataLabelOptions;
   @Input() annotations: AnnotationOptions[];
   @Input() highlightedElements: ChartHighlightedElements;
   @Input() height: string | number;

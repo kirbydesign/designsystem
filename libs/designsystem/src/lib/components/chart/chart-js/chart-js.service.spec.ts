@@ -1,66 +1,23 @@
 import { ElementRef } from '@angular/core';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
-import { Chart, ChartType as ChartJSType } from 'chart.js';
+import {
+  Chart,
+  ChartData,
+  ChartDataset as ChartJSDataset,
+  ChartType as ChartJSType,
+} from 'chart.js';
 import { AnnotationOptions, AnnotationTypeRegistry } from 'chartjs-plugin-annotation';
 import { MockProvider } from 'ng-mocks';
 
 import { deepCopy } from '../../../helpers/deep-copy';
+import { ChartDataLabelOptions } from '../chart.types';
 import { ChartDataset, ChartType, ChartTypesConfig } from '../chart.types';
 import { ChartHighlightedElements } from '../chart.types';
 import { ChartConfigService } from '../configs/chart-config.service';
 import { CHART_GLOBAL_DEFAULTS } from '../configs/global-defaults.config';
 
 import { ChartJSService } from './chart-js.service';
-
-const TEST_CHART_TYPES_CONFIG: ChartTypesConfig = {
-  bar: {
-    type: 'bar',
-    options: {
-      indexAxis: 'y',
-      elements: {
-        line: {
-          borderColor: 'blue',
-        },
-      },
-    },
-  },
-  column: {
-    type: 'bar',
-    options: {
-      backgroundColor: 'red',
-    },
-  },
-  line: {
-    type: 'line',
-    options: {
-      backgroundColor: 'blue',
-      elements: {
-        line: {
-          borderColor: 'red',
-        },
-      },
-    },
-  },
-};
-
-const TEST_CHART_ANNOTATIONS_CONFIG: AnnotationTypeRegistry = {
-  line: {
-    borderDash: [6, 3],
-  },
-  ellipse: {
-    borderDash: [3, 6],
-  },
-  box: {},
-  point: {
-    backgroundColor: 'initial',
-  },
-  label: {
-    content: '',
-  },
-  polygon: {
-    backgroundColor: 'transparent',
-  },
-};
+import { TEST_CHART_ANNOTATIONS_CONFIG, TEST_CHART_TYPES_CONFIG } from './test-utils';
 
 describe('ChartJSService', () => {
   let spectator: SpectatorService<ChartJSService>;
@@ -231,6 +188,30 @@ describe('ChartJSService', () => {
         expect(chartDataLabels.length).toEqual(3);
         chartDataLabels.forEach((dataLabel) => {
           expect(dataLabel).toEqual('');
+        });
+      });
+
+      describe('function: createConfigurationObject', () => {
+        it('should not be filled with blank labels if type is stock', () => {
+          const stockChartConfig = {
+            targetElement: canvasElement,
+            type: 'stock' as ChartType,
+            data: [
+              {
+                data: [
+                  { x: 10, y: 5 },
+                  { x: 11, y: 6 },
+                  { x: 13, y: 6 },
+                ],
+              },
+            ],
+          };
+          chartJSService.renderChart(stockChartConfig);
+          console.log(chartJSService['chart'].options.locale);
+          expect(chartJSService['chart'].data.labels.length).toEqual(3);
+          chartJSService['chart'].data.labels.forEach((label) => {
+            expect(label).not.toBe('');
+          });
         });
       });
 
@@ -469,7 +450,7 @@ describe('ChartJSService', () => {
         'applyInteractionFunctionsExtensions'
       );
 
-      chartJSService['createOptionsObject']({ type: 'bar' });
+      chartJSService['createOptionsObject']({});
 
       expect(applyInteractionFunctionsExtensionsSpy).toHaveBeenCalledTimes(1);
     });
@@ -890,6 +871,51 @@ describe('ChartJSService', () => {
       const chartAnnotations = chart.options.plugins.annotation.annotations as AnnotationOptions[];
       chartAnnotations.forEach((chartAnnotation) => {
         expect(chartAnnotation.borderDash).toEqual([10, 10]);
+      });
+    });
+  });
+
+  describe('function: addDataLabelsData', () => {
+    const data: ChartDataset[] = [
+      {
+        data: [
+          { x: 10, y: 3 },
+          { x: 2, y: 7 },
+          { x: 19, y: -10 },
+        ],
+      },
+    ];
+    const flatDataset: number[] = [1, 2, 3, 4, 5];
+
+    describe('when dataset is a flat array', () => {
+      it('should throw an error if dataset is a flat array', () => {
+        chartJSService.setDataLabelOptions({});
+        expect(function () {
+          chartJSService.addDataLabelsData(flatDataset);
+        }).toThrowError();
+      });
+    });
+
+    const dataLabelOptionsProperties = ['showMax', 'showMin', 'showCurrent'];
+
+    dataLabelOptionsProperties.forEach((property) => {
+      describe(`when ChartDataLabelsOptions.${property} is true`, () => {
+        it(`should have an datalabel propery in dataset`, () => {
+          chartJSService.setDataLabelOptions({ [property]: true });
+          const result = chartJSService.addDataLabelsData(deepCopy(data));
+          expect(
+            (result[0] as ChartJSDataset).data.find((item: any) => item.datalabel)
+          ).toBeTruthy();
+        });
+      });
+    });
+
+    describe('when niether ChartDataLabelsOptions.showMin, showMax, showCurrent is true', () => {
+      it('should NOT have an datalabel propery in dataset', () => {
+        chartJSService.setDataLabelOptions({});
+
+        const result = chartJSService.addDataLabelsData(deepCopy(data));
+        expect((result[0] as ChartJSDataset).data.find((item: any) => item.datalabel)).toBeFalsy();
       });
     });
   });
