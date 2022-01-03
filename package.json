@@ -182,7 +182,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run sync-node-version && npm run generate-mocks && npm run prettier:fix && lint-staged",
+      "pre-commit": "npm run sync-node-version && npm run generate-mocks && lint-staged",
       "pre-push": "npm run test:libs",
       "post-merge": "post-npm-install"
     }
