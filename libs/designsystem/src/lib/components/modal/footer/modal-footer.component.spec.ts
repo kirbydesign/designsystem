@@ -167,7 +167,7 @@ describe('ModalFooterComponent', () => {
     });
   });
 
-  fdescribe('ModalFooterComponent inline style', () => {
+  describe('ModalFooterComponent inline style', () => {
     it('should have a transparent background color when inline style is set', () => {
       spectator = createHost(`<kirby-modal-footer [inline]="true"></kirby-modal-footer>`);
       expect(spectator.query('ion-footer')).toHaveComputedStyle({
