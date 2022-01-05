@@ -101,6 +101,12 @@ export class ModalShowcaseComponent implements AfterViewInit {
       type: ['white', 'light'],
       defaultValue: 'white',
     },
+    {
+      name: 'inline',
+      description: 'The footer while be rendered as inline without background color and boxshadow.',
+      type: ['true', 'false'],
+      defaultValue: 'false',
+    },
   ];
 
   events: ApiDescriptionEvent[] = [
