@@ -14,12 +14,12 @@ const config = {
 <kirby-chart 
   type="column" 
   [data]="[7, 12, 5, 9, 3]" 
-  [dataLabels]="_dataLabels" 
+  [labels]="labels" 
   [customOptions]="_customOptions"
   [highlightedElements]="_highlighted"
 ></kirby-chart>`,
   codeSnippet: `_text = 'Nothing has been clicked';
-_dataLabels = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+_labels = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 _highlighted: ChartHighlightedElements;
 
 _customOptions: ChartOptions = {
@@ -30,7 +30,7 @@ _customOptions: ChartOptions = {
       this._highlighted = [[activeElement.datasetIndex, activeElement.index]];
 
       // Change text
-      const activeElementLabel = this._dataLabels[activeElement.index];
+      const activeElementLabel = this._labels[activeElement.index];
       this._text = \`\${activeElementLabel} was clicked\`;
     } else {
       this._text = 'The background was clicked';
