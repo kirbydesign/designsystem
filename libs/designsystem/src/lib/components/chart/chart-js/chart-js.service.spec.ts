@@ -387,7 +387,7 @@ describe('ChartJSService', () => {
     });
 
     it('should update the labels of the chart', () => {
-      const newLabels = ['one', 'two', 'three'];
+      const newLabels = ['four', 'five', 'six'];
       expect(chart.data.labels).not.toEqual(newLabels);
 
       chartJSService.updateLabels(newLabels);
