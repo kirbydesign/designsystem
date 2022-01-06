@@ -73,6 +73,7 @@
             "polyfills": "apps/cookbook/src/polyfills.ts",
             "tsConfig": "apps/cookbook/tsconfig.app.json",
             "aot": false,
+            "buildOptimizer": false,
             "assets": [
               "apps/cookbook/src/favicon.ico",
               "apps/cookbook/src/assets",
