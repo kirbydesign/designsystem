@@ -3,9 +3,8 @@ import { Component } from '@angular/core';
 import { BasePageExampleComponent } from '../base-page-example.component';
 
 const config = {
-  template: `
-  <cdk-virtual-scroll-viewport itemSize="56" minBufferPx="900" maxBufferPx="1350">
-    <h1>Virtual Scroll</h1>
+  template: `<cdk-virtual-scroll-viewport itemSize="56" minBufferPx="900" maxBufferPx="1350">
+  <kirby-page title="Virtual Scroll">
     <kirby-page-content>
       <kirby-list-experimental>
         <kirby-item *cdkVirtualFor="let item of itemsFullList">
@@ -13,7 +12,9 @@ const config = {
         </kirby-item>
       </kirby-list-experimental>
     </kirby-page-content>
-  </cdk-virtual-scroll-viewport>`,
+  </kirby-page>
+</cdk-virtual-scroll-viewport>
+  `,
 };
 @Component({
   template: config.template,
