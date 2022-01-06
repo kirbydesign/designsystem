@@ -120,7 +120,7 @@ export class ChartComponent implements AfterViewInit, OnChanges {
       targetElement: this.canvasElement,
       type: this.type,
       data: this.data,
-      dataLabels: this.labels,
+      labels: this.labels,
       customOptions: this.customOptions,
       annotations: this.annotations,
       dataLabelOptions: this.dataLabelOptions,
@@ -133,7 +133,7 @@ export class ChartComponent implements AfterViewInit, OnChanges {
   }
 
   private updateLabels() {
-    this.chartJSService.updateDataLabels(this.labels);
+    this.chartJSService.updateLabels(this.labels);
   }
 
   private updateType() {
