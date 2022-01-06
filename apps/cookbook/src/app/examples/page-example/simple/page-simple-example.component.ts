@@ -4,20 +4,20 @@ import { BasePageExampleComponent } from '../base-page-example.component';
 
 const config = {
   template: `
-  <ion-content>
-    <cdk-virtual-scroll-viewport itemSize="56" minBufferPx="900" maxBufferPx="1350">
+  <cdk-virtual-scroll-viewport itemSize="56" minBufferPx="900" maxBufferPx="1350">
+    <h1>Virtual Scroll</h1>
+    <kirby-page-content>
       <kirby-list-experimental>
         <kirby-item *cdkVirtualFor="let item of itemsFullList">
           <h3>{{item.title }}</h3>
         </kirby-item>
       </kirby-list-experimental>
-    </cdk-virtual-scroll-viewport>
-  </ion-content>
-`,
+    </kirby-page-content>
+  </cdk-virtual-scroll-viewport>`,
 };
 @Component({
   template: config.template,
-  styles: ['cdk-virtual-scroll-viewport { width: 100%; height: 100%; }'],
+  styles: ['cdk-virtual-scroll-viewport { width: 100%; height: 100%}'],
 })
 export class PageSimpleExampleComponent extends BasePageExampleComponent {
   static readonly template = config.template
