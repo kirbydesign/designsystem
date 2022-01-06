@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ScatterDataPoint } from 'chart.js';
 
 import { ChartDataLabelOptions, ColorHelper } from '@kirbydesign/designsystem';
 
