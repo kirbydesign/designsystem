@@ -49,11 +49,7 @@ function generateMocks() {
   new GenerateMocks().renderMocks(inputPaths.angular, outputPaths, subFolder);
 }
 
-if (hasFlag('force')) {
-  generateMocks();
-} else {
   hasChanges(inputPaths).then((hasChanged) => {
-    if (!hasChanged) return;
+    if (!hasChanged || !hasFlag('force')) return;
     generateMocks();
   });
-}
