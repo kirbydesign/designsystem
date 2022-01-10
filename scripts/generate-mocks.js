@@ -51,6 +51,6 @@ function generateMocks() {
 }
 
   hasChanges(inputPaths).then((hasChanged) => {
-    if (!hasChanged || !hasFlag('force')) return;
+    if (!hasChanged && !hasFlag('force')) return;
     generateMocks();
   });
