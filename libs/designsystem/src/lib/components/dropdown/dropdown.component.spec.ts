@@ -1207,4 +1207,35 @@ describe('DropdownComponent', () => {
       });
     });
   });
+
+  describe('when inside form', () => {
+    let spectator: SpectatorHost<DropdownComponent>;
+    let buttonElement: HTMLButtonElement;
+
+    const createHost = createHostFactory({
+      component: DropdownComponent,
+      declarations: [
+        MockComponents(
+          ButtonComponent,
+          CardComponent,
+          IconComponent,
+          ItemComponent,
+          PopoverComponent
+        ),
+      ],
+    });
+
+    beforeEach(() => {
+      spectator = createHost(`<kirby-dropdown></kirby-dropdown>`, {
+        props: {
+          items: items,
+        },
+      });
+      buttonElement = spectator.queryHost('button[kirby-button]');
+    });
+
+    it('should have type="button" attribute', () => {
+      expect(buttonElement).toHaveAttribute('type', 'button');
+    });
+  });
 });
