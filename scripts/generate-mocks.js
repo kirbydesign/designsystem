@@ -13,11 +13,12 @@ const argv = process.argv;
 
 // Any 'npm run' positional arguments after -- are used to pass --prefixed flags
 // and options to the script which would otherwise be parsed by npm.
-const terminator = argv.indexOf('--');
+const terminator = '--'; 
+const terminatorIndex = argv.indexOf(terminator);
 function hasFlag(flag) {
-  flag = '--' + flag;
+  flag = terminator + flag;
   var pos = argv.indexOf(flag);
-  return pos !== -1 && (terminator !== -1 ? pos < terminator : true);
+  return pos !== -1 && (terminatorIndex !== -1 ? pos < terminatorIndex : true);
 }
 
 const inputPaths = {
