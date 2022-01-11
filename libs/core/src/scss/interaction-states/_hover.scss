@@ -1,4 +1,5 @@
 @use 'sass:color';
+@use '../utils';
 
 // Design token-ish
 // positive = lighten
@@ -74,3 +75,12 @@ $relative-lightness: -16%;
 //     background-color: color.mix($background-color, $foreground-color, $mix);
 //   }
 // }
+
+@mixin apply-hover() {
+  @include utils.hover() {
+    @content;
+
+    cursor: pointer;
+    // TODO: what else?
+  }
+}

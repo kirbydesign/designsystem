@@ -1,6 +1,6 @@
 @use "sass:map";
 @use '~@kirbydesign/core/src/scss/utils';
-@use '~@kirbydesign/core/src/scss/base/interaction-states' as state;
+@use '~@kirbydesign/core/src/scss/interaction-states' as state;
 
 $button-width: (
   sm: 44px,
@@ -173,7 +173,11 @@ $button-width: (
   //   opacity: 0.8;
   // }
 
-  @include state.apply-hover-use-custom-properties($background-color: crimson);
+  // @include state.apply-hover-use-custom-properties($background-color: crimson);
+
+  @include state.apply-hover() {
+    // --kirby-button-background-color: ???
+  }
 
   &:active {
     opacity: 0.8;
