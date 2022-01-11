@@ -128,6 +128,11 @@ describe('DropdownComponent', () => {
       expect(spectator.element).toBeFocused();
     });
 
+    // Fixes https://github.com/kirbydesign/designsystem/issues/1987
+    it('should have type="button" attribute', () => {
+      expect(buttonElement).toHaveAttribute('type', 'button');
+    });
+
     describe('when setting selected index', () => {
       let onChangeSpy: jasmine.Spy;
       const newSelectedIndex = 2;
@@ -1205,37 +1210,6 @@ describe('DropdownComponent', () => {
         expect(spectator.component['itemClickUnlisten']).toHaveLength(0);
         expect(unlistenCounter).toEqual(unlistenMockArrayLength);
       });
-    });
-  });
-
-  describe('when inside form', () => {
-    let spectator: SpectatorHost<DropdownComponent>;
-    let buttonElement: HTMLButtonElement;
-
-    const createHost = createHostFactory({
-      component: DropdownComponent,
-      declarations: [
-        MockComponents(
-          ButtonComponent,
-          CardComponent,
-          IconComponent,
-          ItemComponent,
-          PopoverComponent
-        ),
-      ],
-    });
-
-    beforeEach(() => {
-      spectator = createHost(`<kirby-dropdown></kirby-dropdown>`, {
-        props: {
-          items: items,
-        },
-      });
-      buttonElement = spectator.queryHost('button[kirby-button]');
-    });
-
-    it('should have type="button" attribute', () => {
-      expect(buttonElement).toHaveAttribute('type', 'button');
     });
   });
 });
