@@ -18,9 +18,9 @@ export class ToastShowcaseComponent {
     {
       name: 'messageType',
       description:
-        'Message type defines which color the toast will have. There are three different toast types: success (green), warning (yellow), danger (red).',
+        "Message type defines which color the toast will have. There are two different toast types: 'success' (green) and 'warning' (yellow)",
       defaultValue: 'success',
-      type: ['success', 'warning', 'danger'],
+      type: ['success', 'warning'],
     },
     {
       name: 'durationInMs',
