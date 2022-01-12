@@ -54,14 +54,30 @@ $button-width: (
     --kirby-button-color: #{utils.get-color('danger')};
   }
 }
+// TODO: Consider refactoring attentionlevel mixins => pass parameters and reuse (a single mixin)
+// First step could be something like:
+// @mixin button-attentionlevel1 {
+//   $color-variant: 'primary';
+
+//   --kirby-button-background-color: #{utils.get-color('#{$color-variant}')};
+//   --kirby-button-color: #{utils.get-color('#{$color-variant}-contrast')};
+
+//   @include state.apply-hover() {
+//     --kirby-button-background-color: #{state.get-hover-color('#{$color-variant}', $lightness: -8%)};
+//   }
+
+//   &.destructive {
+//     --kirby-button-background-color: #{utils.get-color('danger')};
+//     --kirby-button-color: #{utils.get-color('danger-contrast')};
+
+//     @include state.apply-hover() {
+//       --kirby-button-background-color: #{state.get-hover-color('danger', $lightness: -8%)};
+//     }
+//   }
+// }
 
 @mixin button-attentionlevel1 {
   --kirby-button-background-color: #{utils.get-color('primary')};
-  // --kirby-button-background-color: hsl(
-  //   #{utils.get-color('primary-hsl-hue')},
-  //   #{utils.get-color('primary-hsl-saturation')},
-  //   #{utils.get-color('primary-hsl-lightness')}
-  // );
   --kirby-button-color: #{utils.get-color('primary-contrast')};
 
   @include state.apply-hover() {
@@ -101,6 +117,10 @@ $button-width: (
   --kirby-button-background-color: transparent;
   --kirby-button-color: #{utils.get-color('black')};
   --kirby-button-border-color: #{utils.get-color('medium')};
+
+  @include state.apply-hover() {
+    --kirby-button-background-color: #{state.get-hover-color('light', $lightness: -4%)};
+  }
 
   &.destructive {
     --kirby-button-color: #{utils.get-color('danger')};
@@ -190,26 +210,13 @@ $button-width: (
     --kirby-button-border-color: #{utils.$focus-ring-color};
   }
 
-  // @include utils.hover() {
-  //   opacity: 0.8;
-  // }
-
-  // @include state.apply-hover-use-custom-properties($background-color: crimson);
-
   // TODO: Move to top of :host
+  // This is the hover styles that apply in general,
+  // ie., when no other hover styles are specified
   @include state.apply-hover() {
-    // // TODO: Move to apply-hover() mixin
-    // // TODO: Decide how to control lighter/darker
-    // $lightness: 4%;
-
-    // // TODO: Create Sass function that can return the correct HSL color value given the color variant name
-    // --kirby-button-background-color: hsl(
-    //   #{utils.get-color('primary-hsl-hue')},
-    //   #{utils.get-color('primary-hsl-saturation')},
-    //   calc(#{utils.get-color('primary-hsl-lightness')} + #{$lightness})
-    // );
-
-    --kirby-button-background-color: #{state.get-hover-color('primary', $lightness: 4%)};
+    // TODO: Decide how to control lighter/darker (design tokens)
+    // TODO: Decide how to handle default hover styles
+    // --kirby-button-background-color: #{state.get-hover-color('primary', $lightness: 4%)};
   }
 
   &:active {

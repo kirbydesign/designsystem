@@ -98,15 +98,10 @@ $main-colors: map.remove(
 @function generate-colors($colors: $_color-palette) {
   $color-list: ();
   @each $color-name, $color-value in $colors {
-    // TODO: only $color-value is of type "color"
-    // FIXME: all of the following assigned values will be type "string" (due to functions calls)
-
-    $contrast: _get-color-contrast($color-value);
-
+    // TODO: Clean up
     // @debug $color-name;
     // @debug meta.type-of(_get-color-contrast($color-value));
     // @debug meta.type-of(#{_get-color-contrast($color-value)});
-
     $color-list: map.merge(
       (
         $color-name: $color-value,
