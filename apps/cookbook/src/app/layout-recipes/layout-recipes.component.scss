@@ -1,4 +1,4 @@
-@import '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/utils';
 
 table {
   border-spacing: 0;
@@ -6,7 +6,7 @@ table {
   width: 100%;
 
   thead {
-    background-color: get-color('light-tint');
+    background-color: utils.get-color('light-tint');
   }
 
   th {
@@ -19,7 +19,7 @@ table {
 
   td,
   th {
-    border: 1px solid get-color('medium');
+    border: 1px solid utils.get-color('medium');
     padding: 1rem;
   }
 

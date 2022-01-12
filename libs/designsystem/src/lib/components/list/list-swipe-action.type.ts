@@ -1,14 +1,23 @@
-export type ListSwipeActionType = 'success' | 'warning' | 'danger';
+import {
+  ItemSlidingSide as ListSwipeDirection,
+  ItemSwipeAction,
+} from '../item-sliding/item-sliding.types';
 
-export type ListSwipeDirection = 'right' | 'left';
-
-export type ListSwipeEnd = 'start' | 'end';
-
-export interface ListSwipeAction {
+// Copy each property in ItemSwipeAction but make it possible to provide them via a function.
+type ListSwipeActionBaseTypes = Pick<ItemSwipeAction, 'title' | 'icon' | 'type' | 'isDisabled'>;
+export type ListSwipeAction = {
+  [Property in keyof ListSwipeActionBaseTypes]:
+    | ((item: any) => ListSwipeActionBaseTypes[Property])
+    | ListSwipeActionBaseTypes[Property];
+} & {
   position: ListSwipeDirection;
-  title: ((item: any) => string) | string;
-  icon?: ((item: any) => string) | string;
-  type?: ((item: any) => ListSwipeActionType) | ListSwipeActionType;
   onSelected: (item: any) => void;
-  isDisabled?: ((item: any) => boolean) | boolean;
-}
+};
+
+// To not break old imports relying on ListSwipeActionType
+export {
+  ItemSwipeActionType as ListSwipeActionType,
+  ItemSwipeActionSlots as ListSwipeEnd,
+} from '../item-sliding/item-sliding.types';
+
+export { ListSwipeDirection };

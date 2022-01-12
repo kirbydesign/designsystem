@@ -1,0 +1,15 @@
+@use '~@kirbydesign/core/src/scss/utils';
+
+:host {
+  display: block;
+  height: 100%;
+  background: utils.get-color('background-color');
+  padding: utils.size('m');
+
+  h2 {
+    &:not(:first-child) {
+      margin-top: utils.size('l');
+    }
+    border-bottom: 1px dotted utils.get-color('medium');
+  }
+}

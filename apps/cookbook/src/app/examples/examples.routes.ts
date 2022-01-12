@@ -30,6 +30,7 @@ import { GridLayoutSingleContainerExampleComponent } from './grid-layout-example
 import { IconExampleComponent } from './icon-example/icon-example.component';
 import { ItemExampleComponent } from './item-example/item-example.component';
 import { ItemGroupExampleComponent } from './item-group-example/item-group-example.component';
+import { ItemSlidingExampleComponent } from './item-sliding-example/item-sliding-example.component';
 import { LinkExampleComponent } from './link-example/link-example.component';
 import { ListColoredItemsExampleComponent } from './list-example/examples/colored-items';
 import { ListWithDividersExampleComponent } from './list-example/examples/dividers';
@@ -59,11 +60,13 @@ import { ProgressCircleExampleComponent } from './progress-circle-example/progre
 import { RadioExampleComponent } from './radio-example/radio-example.component';
 import { RangeExampleComponent } from './range-example/range-example.component';
 import { ReorderListExampleComponent } from './reorder-list-example/reorder-list-example.component';
+import { SectionHeaderExampleComponent } from './section-header-example/section-header-example.component';
 import { SegmentedControlExampleComponent } from './segmented-control-example/segmented-control-example.component';
 import { SlideButtonExampleComponent } from './slide-button-example/slide-button-example.component';
 import { SlidesExampleComponent } from './slides-example/slides-example.component';
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
 import { StockChartDeprecatedExampleComponent } from './stock-chart-deprecated-example/stock-chart-deprecated-example.component';
+import { StylingHtmlListsExampleComponent } from './styling-html-lists-example/styling-html-lists-example.component';
 import { TabExampleComponent } from './tabs-example/tab/tab-example.component';
 import { TabsExampleComponent } from './tabs-example/tabs-example.component';
 import { ToastExampleComponent } from './toast-example/toast-example.component';
@@ -261,8 +264,16 @@ export const routes: Routes = [
     component: ItemExampleComponent,
   },
   {
+    path: 'item-sliding',
+    component: ItemSlidingExampleComponent,
+  },
+  {
     path: 'item-group',
     component: ItemGroupExampleComponent,
+  },
+  {
+    path: 'section-header',
+    component: SectionHeaderExampleComponent,
   },
   {
     path: 'button',
@@ -458,5 +469,12 @@ export const routes: Routes = [
     path: 'link',
     component: LinkExampleComponent,
   },
-  { path: 'wip-list-virtual-scroll', component: ListVirtualScrollExampleComponent },
+  {
+    path: 'styling-HTML-lists',
+    component: StylingHtmlListsExampleComponent,
+  },
+  {
+    path: 'wip-list-virtual-scroll',
+    component: ListVirtualScrollExampleComponent,
+  },
 ];

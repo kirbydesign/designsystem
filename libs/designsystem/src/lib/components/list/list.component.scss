@@ -1,8 +1,10 @@
-@import '~@kirbydesign/core/src/scss/utils';
+@use "sass:map";
+@use '~@kirbydesign/core/src/scss/utils';
+@use '../item-sliding/item-sliding.shared.scss';
 
-$divider-color: get-color('background-color');
-$shadow: get-elevation(2);
-$item-height: size('xxxl');
+$divider-color: utils.get-color('background-color');
+$shadow: utils.get-elevation(2);
+$item-height: utils.size('xxxl');
 
 :host {
   display: block;
@@ -16,7 +18,7 @@ $item-height: size('xxxl');
 }
 
 ion-list-header {
-  background-color: get-color('white');
+  background-color: utils.get-color('white');
   border-bottom: 1px solid $divider-color;
   padding: 0;
   text-transform: inherit;
@@ -28,19 +30,19 @@ ion-list-header {
 }
 
 ion-item {
-  --background: #{get-color('white')};
-  --background-activated: #{get-color('white-shade')};
-  --background-hover: #{get-color('background-color')};
-  --background-focused: #{get-color('background-color')};
+  --background: #{utils.get-color('white')};
+  --background-activated: #{utils.get-color('white-shade')};
+  --background-hover: #{utils.get-color('background-color')};
+  --background-focused: #{utils.get-color('background-color')};
   --inner-border-width: 0;
   --ion-safe-area-right: 0;
   --min-height: #{$item-height};
-  --padding-bottom: #{size('xxs')};
-  --padding-end: #{size('s')};
-  --padding-start: #{size('s')};
-  --padding-top: #{size('xxs')};
+  --padding-bottom: #{utils.size('xxs')};
+  --padding-end: #{utils.size('s')};
+  --padding-start: #{utils.size('s')};
+  --padding-top: #{utils.size('xxs')};
   display: flex;
-  font-size: font-size('s');
+  font-size: utils.font-size('s');
   min-height: $item-height;
   overflow: visible;
   width: 100%;
@@ -60,23 +62,23 @@ ion-item-sliding {
   $list-colors: ('light'); // add supported list item theme colors here
   @each $color-name, $color-value in $list-colors {
     &.#{$color-name} {
-      --kirby-item-background: #{get-color($color-name)};
-      --kirby-item-background-activated: #{get-color($color-name + '-shade')};
-      --kirby-item-background-focused: #{get-color($color-name + '-shade')};
-      --kirby-item-background-hover: #{get-color($color-name + '-tint')};
+      --kirby-item-background: #{utils.get-color($color-name)};
+      --kirby-item-background-activated: #{utils.get-color($color-name + '-shade')};
+      --kirby-item-background-focused: #{utils.get-color($color-name + '-shade')};
+      --kirby-item-background-hover: #{utils.get-color($color-name + '-tint')};
       ion-item {
-        --background: #{get-color($color-name)};
-        --color: #{get-color($color-name + '-contrast')};
-        --background-activated: #{get-color($color-name + '-shade')};
-        --background-focused: #{get-color($color-name + '-shade')};
-        --background-hover: #{get-color($color-name + '-tint')};
+        --background: #{utils.get-color($color-name)};
+        --color: #{utils.get-color($color-name + '-contrast')};
+        --background-activated: #{utils.get-color($color-name + '-shade')};
+        --background-focused: #{utils.get-color($color-name + '-shade')};
+        --background-hover: #{utils.get-color($color-name + '-tint')};
       }
     }
   }
 }
 
 ion-item-group {
-  margin-bottom: size('m');
+  margin-bottom: utils.size('m');
 
   &:last-of-type {
     margin-bottom: 0;
@@ -89,11 +91,11 @@ ion-item-divider {
   background-color: transparent;
   border-color: transparent;
   min-height: 0;
-  padding: 0 size('s') size('xxs') size('s');
+  padding: 0 utils.size('s') utils.size('xxs') utils.size('s');
 }
 
 .footer {
-  background-color: get-color('white');
+  background-color: utils.get-color('white');
   border-top: 1px solid $divider-color;
   display: flex;
   align-items: center;
@@ -104,21 +106,14 @@ ion-item-divider {
 .no-more-items,
 .loading {
   width: 100%;
-  padding: size('m') 0;
+  padding: utils.size('m') 0;
   text-align: center;
 }
 
 .swipe-action {
   display: flex;
-  color: #{get-color('black')};
+  color: #{utils.get-color('black')};
   background-color: transparent;
-
-  @each $color-name, $color-value in $main-colors {
-    .#{$color-name} {
-      background-color: #{get-color($color-name)};
-      color: #{get-color($color-name + '-contrast')};
-    }
-  }
 
   ion-item-option {
     height: 100%;
@@ -149,7 +144,7 @@ ion-item-options[side='end'] {
 
   .list-items {
     box-shadow: $shadow;
-    border-radius: $border-radius;
+    border-radius: utils.$border-radius;
   }
 
   .footer {
@@ -166,14 +161,14 @@ ion-item-options[side='end'] {
 :host-context(.shape-rounded) {
   .list,
   .list-items {
-    border-radius: $border-radius;
+    border-radius: utils.$border-radius;
   }
 
   ion-item.first,
   ion-item-sliding.first,
   ion-list-header {
-    border-top-left-radius: $border-radius;
-    border-top-right-radius: $border-radius;
+    border-top-left-radius: utils.$border-radius;
+    border-top-right-radius: utils.$border-radius;
     -webkit-mask-image: -webkit-radial-gradient(
       white,
       black
@@ -190,8 +185,8 @@ ion-item-options[side='end'] {
   ion-item.last,
   ion-item-sliding.last,
   .footer {
-    border-bottom-left-radius: $border-radius;
-    border-bottom-right-radius: $border-radius;
+    border-bottom-left-radius: utils.$border-radius;
+    border-bottom-right-radius: utils.$border-radius;
     -webkit-mask-image: -webkit-radial-gradient(
       white,
       black
@@ -236,7 +231,7 @@ ion-item-options[side='end'] {
 :host-context(.item-spacing) {
   .list {
     kirby-list-item {
-      margin-bottom: size('s');
+      margin-bottom: utils.size('s');
 
       & > ion-item,
       &:last-child {

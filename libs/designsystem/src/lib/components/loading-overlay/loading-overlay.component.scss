@@ -1,8 +1,8 @@
-@import '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/utils';
 
 :host {
   display: block;
-  min-height: size('l');
+  min-height: utils.size('l');
 }
 
 .overlay-wrapper {
@@ -15,7 +15,7 @@
     height: 100%;
     width: 100%;
     position: absolute;
-    z-index: z('loading-overlay');
+    z-index: utils.z('loading-overlay');
     display: flex;
     background: transparent;
     justify-content: center;
@@ -24,14 +24,14 @@
 
     &.backdrop {
       background-color: rgba(
-        get-color('background-color', $getValueOnly: true),
-        $loading-overlay-backdrop-opacity
+        utils.get-color('background-color', $getValueOnly: true),
+        utils.$loading-overlay-backdrop-opacity
       );
     }
 
     .spinner {
-      width: size(l);
-      height: size(l);
+      width: utils.size(l);
+      height: utils.size(l);
     }
   }
 }

@@ -28,6 +28,7 @@ import { FormFieldShowcaseComponent } from './form-field-showcase/form-field-sho
 import { GridShowcaseComponent } from './grid-showcase/grid-showcase.component';
 import { IconShowcaseComponent } from './icon-showcase/icon-showcase.component';
 import { ItemGroupShowcaseComponent } from './item-group-showcase/item-group-showcase.component';
+import { ItemSlidingShowcaseComponent } from './item-sliding-showcase/item-sliding-showcase.component';
 import { LinkShowcaseComponent } from './link-showcase/link-showcase.component';
 import { ListLoadOnDemandShowcaseComponent } from './list-load-on-demand-showcase/list-load-on-demand-showcase.component';
 import { ListNoShapeShowcaseComponent } from './list-no-shape-showcase/list-no-shape-showcase.component';
@@ -39,12 +40,14 @@ import { PageShowcaseComponent } from './page-showcase/page-showcase.component';
 import { ProgressCircleShowcaseComponent } from './progress-circle-showcase/progress-circle-showcase.component';
 import { RangeShowcaseComponent } from './range-showcase/range-showcase.component';
 import { ReorderListShowcaseComponent } from './reorder-list-showcase/reorder-list-showcase.component';
+import { SectionHeaderShowcaseComponent } from './section-header-showcase/section-header-showcase.component';
 import { SegmentedControlShowcaseComponent } from './segmented-control-showcase/segmented-control-showcase.component';
 import { ShowcaseComponent } from './showcase.component';
 import { SlideButtonShowcaseComponent } from './slide-button-showcase/slide-button-showcase.component';
 import { SlidesShowcaseComponent } from './slides-showcase/slides-showcase.component';
 import { SpinnerShowcaseComponent } from './spinner-showcase/spinner-showcase.component';
 import { StockChartDeprecatedShowcaseComponent } from './stock-chart-deprecated-showcase/stock-chart-deprecated-showcase.component';
+import { StylingHtmlListsShowcaseComponent } from './styling-html-lists/styling-html-lists-showcase';
 import { TabsShowcaseComponent } from './tabs-showcase/tabs-showcase.component';
 import { ToastShowcaseComponent } from './toast-showcase/toast-showcase.component';
 import { ToggleButtonShowcaseComponent } from './toggle-button-showcase/toggle-button-showcase.component';
@@ -64,6 +67,13 @@ export const routes: Routes = [
       {
         path: 'item',
         component: ItemShowcaseComponent,
+      },
+      {
+        path: 'item-sliding',
+        component: ItemSlidingShowcaseComponent,
+        data: {
+          hide: true,
+        },
       },
       {
         path: 'item-group',
@@ -259,6 +269,14 @@ export const routes: Routes = [
       {
         path: 'link',
         component: LinkShowcaseComponent,
+      },
+      {
+        path: 'section-header',
+        component: SectionHeaderShowcaseComponent,
+      },
+      {
+        path: 'styling-HTML-lists',
+        component: StylingHtmlListsShowcaseComponent,
       },
     ],
   },

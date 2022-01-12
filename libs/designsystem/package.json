@@ -3,14 +3,17 @@
   "version": "0.0.0",
   "dependencies": {
     "chart.js": "3.3.2",
-    "chartjs-plugin-annotation": "1.0.2",
+    "chartjs-adapter-date-fns": "^2.0.0",
+    "chartjs-plugin-annotation": "^1.0.2",
+    "chartjs-plugin-datalabels": "^2.0.0",
     "@ionic/angular": "5.5.2",
-    "@kirbydesign/core": "0.0.10",
+    "@kirbydesign/core": "0.0.22",
     "date-fns": "2.21.1",
     "date-fns-tz": "1.1.4",
     "highcharts": "8.0.4",
     "@fontsource/roboto": "4.2.1",
-    "inputmask": "5.0.5"
+    "inputmask": "5.0.5",
+    "ts-deepcopy": "^0.1.4"
   },
   "peerDependencies": {
     "@angular/common": ">=9.0.0",

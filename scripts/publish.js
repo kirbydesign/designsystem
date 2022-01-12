@@ -25,12 +25,20 @@ const cp = require('child_process');
 const fs = require('fs-extra');
 const path = require('path');
 const isCI = require('is-ci');
+const { forwardScssFiles } = require('./forward-scss-files');
 
-const angularLibDir = 'libs/designsystem/src/lib';
-const coreLibDir = 'libs/core/src';
+const packageAlias = '@kirbydesign';
+
+const libsRootDir = `libs`;
+
+const angularLibDir = `${libsRootDir}/designsystem`;
+const angularLibSrcDir = `${angularLibDir}/src/lib`;
+const coreLibDir = `${libsRootDir}/core`;
 const dist = `dist`;
-const distTarget = `${dist}/libs/designsystem`;
+const distTarget = `${dist}/${angularLibDir}`;
 const distPackageJsonPath = `${distTarget}/package.json`;
+
+const pathsToForwardCoreScssFilesTo = [`${distTarget}/scss`];
 
 const {
   version,
@@ -112,23 +120,33 @@ function copyReadme() {
   return fs.copy('readme.md', `${distTarget}/readme.md`);
 }
 
-function copyScssFiles() {
-  console.log('Copying SCSS files...');
-  const onlyScssFiles = (input) => ['', '.scss'].includes(path.extname(input));
-  return fs.copy(`${coreLibDir}/scss`, `${distTarget}/scss`, { filter: onlyScssFiles });
+function forwardCoreScssFiles() {
+  console.log('Forwarding core SCSS files...');
+
+  const sourceRootDir = `${coreLibDir}/scss`;
+  const sharedRootDir = libsRootDir;
+
+  return new Promise((resolve) => {
+    pathsToForwardCoreScssFilesTo.forEach((targetRootDir) => {
+      forwardScssFiles({ sourceRootDir, targetRootDir, packageAlias, sharedRootDir });
+      resolve();
+    });
+  });
 }
 
 function copyIcons() {
   console.log('Copying Icons...');
   const onlySvgFiles = (input) => ['', '.svg'].includes(path.extname(input));
-  return fs.copy(`${angularLibDir}/icons/svg`, `${distTarget}/icons/svg`, { filter: onlySvgFiles });
+  return fs.copy(`${angularLibSrcDir}/icons/svg`, `${distTarget}/icons/svg`, {
+    filter: onlySvgFiles,
+  });
 }
 
 function copyPolyfills() {
   console.log('Copying Polyfills...');
   const onlyLoadersAndMinified = (input) =>
     path.extname(input) === '' || input.endsWith('-loader.js') || input.endsWith('.min.js');
-  return fs.copy(`${angularLibDir}/polyfills`, `${distTarget}/polyfills`, {
+  return fs.copy(`${angularLibSrcDir}/polyfills`, `${distTarget}/polyfills`, {
     filter: onlyLoadersAndMinified,
   });
 }
@@ -136,7 +154,7 @@ function copyPolyfills() {
 function createTarballPackage() {
   return npm(['pack', distTarget], {
     onFailMessage: 'Unable to create gzipped tar-ball package',
-  })
+  });
 }
 
 function publish() {
@@ -152,17 +170,17 @@ function publish() {
   } else {
     // Create a GZipped Tarball
     console.log('Running on non-CI, hence creating a gzipped tar-ball');
-    
+
     // Make sure any local core changes (proxies etc.) are included in the local .tgz package
     // For CI, we build and publish this package separately.
     npm(['run', 'build:core'], {
       onFailMessage: 'Unable to build core package (stencil compiler)',
-    }).then(createTarballPackage)
+    })
+      .then(createTarballPackage)
       .then(() => fs.promises.readdir('.'))
       .then(findTarball)
       .then((filename) => fs.move(filename, `${dist}/${filename}`, { overwrite: true }));
   }
-  
 }
 
 // Actual execution of script!
@@ -171,7 +189,7 @@ cleanDistribution()
   .then(buildDesignsystem)
   .then(enhancePackageJson)
   .then(copyReadme)
-  .then(copyScssFiles)
+  .then(forwardCoreScssFiles)
   .then(copyIcons)
   .then(copyPolyfills)
   .then(publish)

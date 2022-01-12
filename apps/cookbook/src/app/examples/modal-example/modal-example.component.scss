@@ -1,10 +1,11 @@
-@import '../examples.shared';
+@use '../examples.shared';
+@use "~@kirbydesign/core/src/scss/utils";
 
 h1 {
   text-align: center;
 }
 
-@include media('>medium') {
+@include utils.media('>medium') {
   .mobile {
     display: none;
   }

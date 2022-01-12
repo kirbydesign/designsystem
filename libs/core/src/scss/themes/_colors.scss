@@ -1,3 +1,5 @@
+@use "sass:color";
+@use "sass:map";
 $brand-colors: (
   'primary': #00e89a,
   'secondary': #005c3c,
@@ -31,13 +33,13 @@ $text-colors: (
 $focus-ring-color: rgb(77, 144, 254);
 
 @function getAllColors() {
-  @return map-merge(map-merge($brand-colors, $notification-colors), $system-colors);
+  @return map.merge(map.merge($brand-colors, $notification-colors), $system-colors);
 }
 
 $_color-palette: getAllColors();
 
 // TODO Deprecated variable, used to generate colors in some components - don't use it anymore!
-$main-colors: map-remove(
+$main-colors: map.remove(
   $_color-palette,
   'background-color',
   'black',
@@ -47,8 +49,8 @@ $main-colors: map-remove(
 );
 
 @function _get-color-contrast($color) {
-  $contrast-light: map-get($system-colors, 'white');
-  $contrast-dark: map-get($system-colors, 'black');
+  $contrast-light: map.get($system-colors, 'white');
+  $contrast-dark: map.get($system-colors, 'black');
   $color-brightness: _get-color-brightness($color);
   @if $color-brightness == 'dark' {
     @return $contrast-light;
@@ -58,14 +60,14 @@ $main-colors: map-remove(
 }
 
 @function _get-color-brightness($color) {
-  $red: red($color);
-  $green: green($color);
-  $blue: blue($color);
+  $red: color.red($color);
+  $green: color.green($color);
+  $blue: color.blue($color);
   /*
     Color brightness is determined by the following formula:
     ((Red value X 299) + (Green value X 587) + (Blue value X 114)) / 1000
   */
-  $color-brightness: (($red * 299) + ($green * 587) + ($blue * 114)) / 1000;
+  $color-brightness: (($red * 299) + ($green * 587) + ($blue * 114)) * 0.001;
   /* The range for color brightness difference is 125 */
   $color-range: 128;
 
@@ -79,21 +81,21 @@ $main-colors: map-remove(
 }
 
 @function _get-tint-value($color, $weight: 10) {
-  @return mix(white, $color, $weight);
+  @return color.mix(white, $color, $weight);
 }
 
 @function _get-shade-value($color, $weight: 12) {
-  @return mix(black, $color, $weight);
+  @return color.mix(black, $color, $weight);
 }
 
 @function _get-rgb-values($color) {
-  @return red($color), green($color), blue($color);
+  @return color.red($color), color.green($color), color.blue($color);
 }
 
 @function generate-colors($colors: $_color-palette) {
   $color-list: ();
   @each $color-name, $color-value in $colors {
-    $color-list: map-merge(
+    $color-list: map.merge(
       (
         $color-name: $color-value,
         #{$color-name}-rgb: #{_get-rgb-values($color-value)},
