@@ -218,6 +218,13 @@ $button-width: (
   --kirby-button-color: #{get-color('success-contrast')};
 }
 
+:host-context(kirby-dropdown) {
+  &.attention-level2 {
+    --kirby-button-background-color: #{get-color('white')};
+    --kirby-button-color: #{get-color('white-contrast')};
+  }
+}
+
 // Temp fix for https://github.com/angular/angular-cli/issues/13854#issuecomment-470831308
 /* clean-css ignore:start */
 :host-context(ion-toolbar kirby-page-actions) {
