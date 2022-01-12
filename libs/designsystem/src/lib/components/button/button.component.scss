@@ -52,16 +52,6 @@ $button-width: (
   }
 }
 
-@mixin button-white {
-  --kirby-button-background-color: #{get-color('white')};
-  --kirby-button-color: #{get-color('white-contrast')};
-
-  &.destructive {
-    --kirby-button-background-color: #{get-color('light')};
-    --kirby-button-color: #{get-color('danger')};
-  }
-}
-
 @mixin button-attentionlevel1 {
   --kirby-button-background-color: #{get-color('primary')};
   --kirby-button-color: #{get-color('primary-contrast')};
@@ -255,7 +245,7 @@ $button-width: (
   &.attention-level1,
   &.attention-level2,
   &.attention-level3 {
-    @include button-white;
+    @include button-attentionlevel3;
   }
 }
 /* clean-css ignore:end */
