@@ -83,11 +83,10 @@ $relative-lightness: -16%;
 // -----------------------------------------------------------------------------
 
 @mixin apply-hover() {
-  @include utils.hover() {
-    @content;
-
-    cursor: pointer;
-    // TODO: what else?
+  @if meta.content-exists() {
+    @include utils.hover() {
+      @content;
+    }
   }
 }
 
