@@ -5,6 +5,7 @@
 @use "../themes/colors";
 @use "variables";
 
+// TODO: Why is this function private?
 @function _get-map-prop($map, $key) {
   @if map.has-key($map, $key) {
     @return map.get($map, $key);

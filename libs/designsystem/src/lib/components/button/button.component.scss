@@ -57,11 +57,24 @@ $button-width: (
 
 @mixin button-attentionlevel1 {
   --kirby-button-background-color: #{utils.get-color('primary')};
+  // --kirby-button-background-color: hsl(
+  //   #{utils.get-color('primary-hsl-hue')},
+  //   #{utils.get-color('primary-hsl-saturation')},
+  //   #{utils.get-color('primary-hsl-lightness')}
+  // );
   --kirby-button-color: #{utils.get-color('primary-contrast')};
+
+  @include state.apply-hover() {
+    --kirby-button-background-color: #{state.get-hover-color('primary', $lightness: -8%)};
+  }
 
   &.destructive {
     --kirby-button-background-color: #{utils.get-color('danger')};
     --kirby-button-color: #{utils.get-color('danger-contrast')};
+
+    @include state.apply-hover() {
+      --kirby-button-background-color: #{state.get-hover-color('danger', $lightness: -8%)};
+    }
   }
 }
 
@@ -69,9 +82,17 @@ $button-width: (
   --kirby-button-background-color: #{utils.get-color('black')};
   --kirby-button-color: #{utils.get-color('black-contrast')};
 
+  @include state.apply-hover() {
+    --kirby-button-background-color: #{state.get-hover-color('white', $lightness: -8%)};
+  }
+
   &.destructive {
     --kirby-button-background-color: #{utils.get-color('light')};
     --kirby-button-color: #{utils.get-color('danger')};
+
+    @include state.apply-hover() {
+      --kirby-button-background-color: #{state.get-hover-color('light', $lightness: -8%)};
+    }
   }
 }
 
@@ -175,8 +196,20 @@ $button-width: (
 
   // @include state.apply-hover-use-custom-properties($background-color: crimson);
 
+  // TODO: Move to top of :host
   @include state.apply-hover() {
-    // --kirby-button-background-color: ???
+    // // TODO: Move to apply-hover() mixin
+    // // TODO: Decide how to control lighter/darker
+    // $lightness: 4%;
+
+    // // TODO: Create Sass function that can return the correct HSL color value given the color variant name
+    // --kirby-button-background-color: hsl(
+    //   #{utils.get-color('primary-hsl-hue')},
+    //   #{utils.get-color('primary-hsl-saturation')},
+    //   calc(#{utils.get-color('primary-hsl-lightness')} + #{$lightness})
+    // );
+
+    --kirby-button-background-color: #{state.get-hover-color('primary', $lightness: 4%)};
   }
 
   &:active {
