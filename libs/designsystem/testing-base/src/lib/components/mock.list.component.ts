@@ -33,6 +33,7 @@ export class MockListComponent {
   @Output() loadOnDemand = new EventEmitter<LoadOnDemandEvent>();
   @Input() swipeActions: ListSwipeAction[];
   @Output() itemSelect = new EventEmitter<any>();
+  @Input() disableSelectionHighlight: boolean;
 }
 
 // #endregion
