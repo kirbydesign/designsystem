@@ -145,7 +145,7 @@ describe('ButtonComponent in Kirby Page', () => {
     it('should render with correct background-color', async () => {
       await TestHelper.whenReady(ionContent);
       expect(actionButtonInPage).toHaveComputedStyle({
-        'background-color': getColor('white'),
+        'background-color': 'transparent',
       });
     });
 
@@ -161,7 +161,7 @@ describe('ButtonComponent in Kirby Page', () => {
       expect(actionButtonInPage).toHaveComputedStyle({
         'border-width': '1px',
         'border-style': 'solid',
-        'border-color': 'transparent',
+        'border-color': getColor('medium'),
       });
     });
   });
