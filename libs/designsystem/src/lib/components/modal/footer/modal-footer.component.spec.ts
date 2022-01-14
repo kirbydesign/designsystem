@@ -167,25 +167,25 @@ describe('ModalFooterComponent', () => {
     });
   });
 
-  describe('ModalFooterComponent inline style', () => {
-    it('should have a transparent background color when inline style is set', () => {
-      spectator = createHost(`<kirby-modal-footer [inline]="true"></kirby-modal-footer>`);
+  fdescribe('when inline type is set', () => {
+    it('should have a transparent background color', () => {
+      spectator = createHost(`<kirby-modal-footer type="inline"></kirby-modal-footer>`);
       expect(spectator.query('ion-footer')).toHaveComputedStyle({
         'background-color': 'transparent',
       });
     });
 
-    it('should have a transparent background when inline style is set and themeColor is specified', () => {
+    it('should have a transparent background even when themeColor is specified', () => {
       spectator = createHost(
-        `<kirby-modal-footer [inline]="true" themeColor="primary"></kirby-modal-footer>`
+        `<kirby-modal-footer type="inline" themeColor="primary"></kirby-modal-footer>`
       );
       expect(spectator.query('ion-footer')).toHaveComputedStyle({
         'background-color': 'transparent',
       });
     });
 
-    it('not show a box shadow when inline style is set', () => {
-      spectator = createHost(`<kirby-modal-footer [inline]="true"></kirby-modal-footer>`);
+    it('should not show a box shadow', () => {
+      spectator = createHost(`<kirby-modal-footer type="inline"></kirby-modal-footer>`);
       expect(spectator.query('ion-footer')).toHaveComputedStyle({
         'box-shadow': 'none',
       });

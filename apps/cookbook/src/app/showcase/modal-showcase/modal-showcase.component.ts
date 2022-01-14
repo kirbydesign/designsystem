@@ -102,10 +102,11 @@ export class ModalShowcaseComponent implements AfterViewInit {
       defaultValue: 'white',
     },
     {
-      name: 'inline',
-      description: 'Renders the footer as inline with a transparent background and no shadow.',
-      type: ['true', 'false'],
-      defaultValue: 'false',
+      name: 'type',
+      description:
+        'Sets the type of the footer. When inline the footer will have a transparent background and no shadow.',
+      type: ['fixed', 'inline'],
+      defaultValue: 'fixed',
     },
   ];
 
