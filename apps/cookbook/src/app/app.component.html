@@ -1,1 +1,6 @@
-<router-outlet></router-outlet>
+<h1>Hello my dude</h1>
+<cdk-virtual-scroll-viewport windowVirtualScrollStrategy>
+  <div *cdkVirtualFor="let item of items; let i = index" class="item">
+    {{ i }}
+  </div>
+</cdk-virtual-scroll-viewport>

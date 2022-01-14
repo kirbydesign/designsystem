@@ -1,3 +1,4 @@
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { HashLocationStrategy, LocationStrategy, registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import localeEn from '@angular/common/locales/en-GB';
@@ -10,6 +11,8 @@ import { KirbyModule } from '@kirbydesign/designsystem';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ExamplesModule } from './examples/examples.module';
+import { WindowVirtualScrollDirective } from './examples/page-example/simple/window-virtual-scroll/window-virtual-scroll.directive';
 import { HomeComponent } from './home/home.component';
 import { IntroComponent } from './intro/intro.component';
 import { FooterComponent } from './page/footer/footer.component';
@@ -27,8 +30,10 @@ registerLocaleData(localeEn);
     HeaderComponent,
     IntroComponent,
     FooterComponent,
+    WindowVirtualScrollDirective,
   ],
   imports: [
+    ScrollingModule,
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,

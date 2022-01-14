@@ -24,6 +24,7 @@ import { ItemSlidingExampleModule } from './item-sliding-example/item-sliding-ex
 import { LinkExampleModule } from './link-example/link-example.module';
 import { ListExamplesModule } from './list-example/list-example.module';
 import { ModalExampleModule } from './modal-example/modal-example.module';
+import { WindowVirtualScrollDirective } from './page-example/simple/window-virtual-scroll/window-virtual-scroll.directive';
 import { ProgressCircleExampleModule } from './progress-circle-example/progress-circle-example.module';
 import { RadioExampleModule } from './radio-example/radio-example.module';
 import { RangeExampleModule } from './range-example/range-example.module';
@@ -60,7 +61,7 @@ const IMPORTS = [
 
 @NgModule({
   imports: [CommonModule, RouterModule, KirbyModule, ...IMPORTS],
-  declarations: COMPONENT_DECLARATIONS,
+  declarations: [...COMPONENT_DECLARATIONS, WindowVirtualScrollDirective],
   exports: [...COMPONENT_DECLARATIONS, ...IMPORTS],
   entryComponents: [CardExampleComponent],
 })

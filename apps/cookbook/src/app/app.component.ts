@@ -7,4 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Kirby design system';
+  items: number[] = Array.from(Array(500).keys()).map((i) => (i % 2 ? 50 : 100));
 }

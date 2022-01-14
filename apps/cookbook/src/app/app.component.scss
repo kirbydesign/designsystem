@@ -1,0 +1,15 @@
+.item {
+  height: 50px;
+}
+
+::ng-deep .cdk-virtual-scroll-viewport {
+  display: block;
+  position: relative;
+  overflow: visible;
+  contain: none;
+
+  .cdk-virtual-scroll-content-wrapper {
+    overflow: auto;
+    width: 100%;
+  }
+}
