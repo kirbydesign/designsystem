@@ -47,6 +47,7 @@ $button-width: (
 @mixin button-no-decoration {
   --kirby-button-background-color: transparent;
   --kirby-button-color: #{utils.get-color('black')};
+  --kirby-button-border-color: transparent;
 
   &.destructive {
     --kirby-button-color: #{utils.get-color('danger')};
