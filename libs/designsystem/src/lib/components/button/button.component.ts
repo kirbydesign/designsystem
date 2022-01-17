@@ -17,6 +17,9 @@ export enum ButtonSize {
   LG = 'lg',
 }
 
+const ATTENTION_LEVEL_4_DEPRECATION_WARNING =
+  'Deprecation warning: The "kirby-button" support for using input property "attentionLevel" with the value "4" will be removed in a future release of Kirby designsystem.';
+
 @Component({
   // tslint:disable-next-line:component-selector
   selector: 'button[kirby-button],Button[kirby-button]',
@@ -66,9 +69,7 @@ export class ButtonComponent implements AfterContentInit {
     this.isAttentionLevel2 = level === '2';
     this.isAttentionLevel3 = level === '3' || level === '4';
     if (level === '4') {
-      console.warn(
-        'Deprecated: Support for attentionLevel4 on kirby-button will be removed in a future release - please update.'
-      );
+      console.warn(ATTENTION_LEVEL_4_DEPRECATION_WARNING);
     }
   }
 
