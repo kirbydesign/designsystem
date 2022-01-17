@@ -2,7 +2,6 @@
   <cookbook-button-example [themeColor]="themeColor"></cookbook-button-example>
   <div>
     <select (change)="onChange($event.target.value)">
-      <option value="">Card color: None</option>
       <option
         *ngFor="let color of themeColors"
         value="{{ color }}"
