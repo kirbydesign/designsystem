@@ -1,6 +1,20 @@
-<h1>Hello my dude</h1>
-<cdk-virtual-scroll-viewport windowVirtualScrollStrategy>
-  <div *cdkVirtualFor="let item of items; let i = index" class="item">
-    {{ i }}
-  </div>
-</cdk-virtual-scroll-viewport>
+<kirby-page title="Virtual Scroll Test">
+  <kirby-page-content>
+    <h1>This is an example of content in page</h1>
+    <p>
+      The min and max buffer values depends on how much content is before the viewport. More
+      experimentation is needed, but this is a start.
+    </p>
+    <cdk-virtual-scroll-viewport
+      windowVirtualScrollStrategy
+      [minBufferPx]="200"
+      [maxBufferPx]="400"
+    >
+      <kirby-list-experimental>
+        <kirby-item *cdkVirtualFor="let item of items">
+          {{ item }}
+        </kirby-item>
+      </kirby-list-experimental>
+    </cdk-virtual-scroll-viewport>
+  </kirby-page-content>
+</kirby-page>

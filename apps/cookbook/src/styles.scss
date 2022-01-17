@@ -15,6 +15,7 @@ html {
   font-size: utils.font-size('n');
   color: utils.get-color('black');
   height: 100vh;
+  overflow: hidden;
 }
 
 *,

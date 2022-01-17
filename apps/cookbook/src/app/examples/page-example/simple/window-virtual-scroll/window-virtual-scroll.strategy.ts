@@ -19,6 +19,8 @@ export class WindowVirtualScrollStrategy implements VirtualScrollStrategy {
 
   private readonly _scrolledIndexChange = new Subject<number>();
   private readonly destroy = new Subject<void>();
+  private scrollTarget = window;
+  private event: any;
 
   constructor(itemSizePx: number, offsetSizePx: number, minBufferPx: number, maxBufferPx: number) {
     this._itemSizePx = itemSizePx;
@@ -28,7 +30,6 @@ export class WindowVirtualScrollStrategy implements VirtualScrollStrategy {
 
     this.scrolledIndexChange = this._scrolledIndexChange.pipe(distinctUntilChanged());
     this.destroy$ = this.destroy.asObservable();
-    console.log('strategy constructor');
   }
 
   /**
@@ -41,9 +42,10 @@ export class WindowVirtualScrollStrategy implements VirtualScrollStrategy {
     this._updateTotalContentSize();
     this._updateRenderedRange();
 
-    fromEvent(window, 'scroll')
+    fromEvent(window, 'ionScroll')
       .pipe(takeUntil(this.destroy$))
-      .subscribe(() => {
+      .subscribe((event: any) => {
+        this.event = event;
         this._updateRenderedRange();
       });
   }
@@ -127,9 +129,12 @@ export class WindowVirtualScrollStrategy implements VirtualScrollStrategy {
       return;
     }
 
+    console.log('this.event:', this.event);
     // Use the window as a reference for viewPort size and offset
-    const viewportSize = window.innerHeight;
-    let scrollOffset = window.pageYOffset;
+    const viewportSize = this.scrollTarget.innerHeight;
+    let scrollOffset = this.event ? this.event.detail.scrollTop : this.scrollTarget.pageYOffset;
+    console.log('viewportSize:', viewportSize);
+    console.log('scrollOffset:', scrollOffset);
 
     const renderedRange = this._viewport.getRenderedRange();
     const newRange = { start: renderedRange.start, end: renderedRange.end };

@@ -2,6 +2,7 @@
 import { coerceNumberProperty } from '@angular/cdk/coercion';
 import { VIRTUAL_SCROLL_STRATEGY } from '@angular/cdk/scrolling';
 import { Directive, forwardRef, Input, OnChanges, OnInit } from '@angular/core';
+
 import { WindowVirtualScrollStrategy } from './window-virtual-scroll.strategy';
 
 const factory = (dir: WindowVirtualScrollDirective) => dir._scrollStrategy;
@@ -31,7 +32,7 @@ export class WindowVirtualScrollDirective implements OnChanges, OnInit {
   set itemSizePx(value: number) {
     this._itemSizePx = coerceNumberProperty(value);
   }
-  _itemSizePx = 50;
+  _itemSizePx = 56;
 
   /**
    * The minimum amount of buffer rendered beyond the viewport (in pixels).
