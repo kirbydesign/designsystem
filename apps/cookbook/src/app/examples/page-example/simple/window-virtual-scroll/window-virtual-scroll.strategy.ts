@@ -1,34 +1,55 @@
 /* eslint-disable no-underscore-dangle */
-import { CdkVirtualScrollViewport, VirtualScrollStrategy } from '@angular/cdk/scrolling';
+import {
+  CdkVirtualScrollViewport,
+  FixedSizeVirtualScrollStrategy,
+  VirtualScrollStrategy,
+} from '@angular/cdk/scrolling';
 import { fromEvent, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
 
 // This is an adapted version of the original FixedSizeVirtualScrollStrategy
 // https://github.com/angular/components/blob/master/src/cdk/scrolling/fixed-size-virtual-scroll.ts
 export class WindowVirtualScrollStrategy implements VirtualScrollStrategy {
-  scrolledIndexChange: Observable<number>;
+  get scrolledIndexChange(): Observable<number> {
+    return this.fixedSizeVirtualScrollStrategy.scrolledIndexChange;
+  }
+
+  // We're working as an adapter
+  private fixedSizeVirtualScrollStrategy: FixedSizeVirtualScrollStrategy;
 
   private destroy$: Observable<void>;
 
-  private _viewport: CdkVirtualScrollViewport | null = null;
+  private get _viewport(): CdkVirtualScrollViewport | null {
+    return this.fixedSizeVirtualScrollStrategy['_viewport'];
+  }
 
-  private _itemSizePx: number;
-  private _offsetSizePx: number;
-  private _minBufferPx: number;
-  private _maxBufferPx: number;
+  private get _itemSizePx(): number {
+    return this.fixedSizeVirtualScrollStrategy['_itemSize'];
+  }
+  private _offsetSizePx: number = 19;
 
-  private readonly _scrolledIndexChange = new Subject<number>();
+  private get _minBufferPx(): number {
+    return this.fixedSizeVirtualScrollStrategy['_minBufferPx'];
+  }
+  private get _maxBufferPx(): number {
+    return this.fixedSizeVirtualScrollStrategy['_maxBufferPx'];
+  }
+
+  private get _scrolledIndexChange() {
+    return this.fixedSizeVirtualScrollStrategy['_scrolledIndexChange'];
+  }
+
   private readonly destroy = new Subject<void>();
   private scrollTarget = window;
   private event: any;
 
   constructor(itemSizePx: number, offsetSizePx: number, minBufferPx: number, maxBufferPx: number) {
-    this._itemSizePx = itemSizePx;
+    this.fixedSizeVirtualScrollStrategy = new FixedSizeVirtualScrollStrategy(
+      itemSizePx,
+      minBufferPx,
+      maxBufferPx
+    );
     this._offsetSizePx = offsetSizePx;
-    this._minBufferPx = minBufferPx;
-    this._maxBufferPx = maxBufferPx;
-
-    this.scrolledIndexChange = this._scrolledIndexChange.pipe(distinctUntilChanged());
     this.destroy$ = this.destroy.asObservable();
   }
 
@@ -37,10 +58,7 @@ export class WindowVirtualScrollStrategy implements VirtualScrollStrategy {
    * @param viewport The viewport to attach this strategy to.
    */
   attach(viewport: CdkVirtualScrollViewport) {
-    console.log('attached:', viewport.elementRef);
-    this._viewport = viewport;
-    this._updateTotalContentSize();
-    this._updateRenderedRange();
+    this.fixedSizeVirtualScrollStrategy.attach(viewport);
 
     fromEvent(window, 'ionScroll')
       .pipe(takeUntil(this.destroy$))
@@ -52,8 +70,7 @@ export class WindowVirtualScrollStrategy implements VirtualScrollStrategy {
 
   /** Detaches this scroll strategy from the currently attached viewport. */
   detach() {
-    this._scrolledIndexChange.complete();
-    this._viewport = null;
+    this.fixedSizeVirtualScrollStrategy.detach();
 
     this.destroy.next();
     this.destroy.complete();
@@ -67,17 +84,11 @@ export class WindowVirtualScrollStrategy implements VirtualScrollStrategy {
    */
   updateItemAndBufferSize(
     itemSize: number,
-    offsetSizePx: number,
+    _offsetSizePx: number,
     minBufferPx: number,
     maxBufferPx: number
   ) {
-    this._itemSizePx = itemSize;
-    this._offsetSizePx = offsetSizePx;
-    this._minBufferPx = minBufferPx;
-    this._maxBufferPx = maxBufferPx;
-
-    this._updateTotalContentSize();
-    this._updateRenderedRange();
+    this.fixedSizeVirtualScrollStrategy.updateItemAndBufferSize(itemSize, minBufferPx, maxBufferPx);
   }
 
   /** @docs-private Implemented as part of VirtualScrollStrategy. */
@@ -86,6 +97,7 @@ export class WindowVirtualScrollStrategy implements VirtualScrollStrategy {
   }
 
   /** @docs-private Implemented as part of VirtualScrollStrategy. */
+  // TODO: what to do about this?
   onDataLengthChanged() {
     this._updateTotalContentSize();
     this._updateRenderedRange();
@@ -93,12 +105,12 @@ export class WindowVirtualScrollStrategy implements VirtualScrollStrategy {
 
   /** @docs-private Implemented as part of VirtualScrollStrategy. */
   onContentRendered() {
-    /* no-op */
+    this.fixedSizeVirtualScrollStrategy.onContentRendered();
   }
 
   /** @docs-private Implemented as part of VirtualScrollStrategy. */
   onRenderedOffsetChanged() {
-    /* no-op */
+    this.fixedSizeVirtualScrollStrategy.onRenderedOffsetChanged();
   }
 
   /**
@@ -107,25 +119,18 @@ export class WindowVirtualScrollStrategy implements VirtualScrollStrategy {
    * @param behavior The ScrollBehavior to use when scrolling.
    */
   scrollToIndex(index: number, behavior: ScrollBehavior): void {
-    if (this._viewport) {
-      this._viewport.scrollToOffset(index * this._itemSizePx, behavior);
-    }
+    this.fixedSizeVirtualScrollStrategy.scrollToIndex(index, behavior);
   }
 
   /** Update the viewport's total content size. */
   private _updateTotalContentSize() {
-    if (!this._viewport) {
-      return;
-    }
-
-    this._viewport.setTotalContentSize(
-      this._viewport.getDataLength() * this._itemSizePx + this._offsetSizePx
-    );
+    this.fixedSizeVirtualScrollStrategy['_updateTotalContentSize']();
   }
 
   /** Update the viewport's rendered range. */
   private _updateRenderedRange() {
     if (!this._viewport) {
+      console.log('returning');
       return;
     }
 

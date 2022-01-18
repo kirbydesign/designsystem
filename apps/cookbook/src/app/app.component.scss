@@ -1,9 +1,12 @@
+body {
+}
 .item {
   height: 50px;
 }
 
 ::ng-deep .cdk-virtual-scroll-viewport {
   display: block;
+  max-height: 100vh;
   position: relative;
   overflow: visible;
   contain: none;
