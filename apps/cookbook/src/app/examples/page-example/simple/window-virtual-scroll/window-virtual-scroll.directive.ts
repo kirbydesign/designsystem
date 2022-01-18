@@ -2,6 +2,7 @@
 import { coerceNumberProperty } from '@angular/cdk/coercion';
 import { VIRTUAL_SCROLL_STRATEGY } from '@angular/cdk/scrolling';
 import { Directive, forwardRef, Input, OnChanges, OnInit } from '@angular/core';
+import { fromEvent } from 'rxjs';
 
 import { WindowVirtualScrollStrategy } from './window-virtual-scroll.strategy';
 
@@ -20,8 +21,13 @@ const factory = (dir: WindowVirtualScrollDirective) => dir._scrollStrategy;
   ],
 })
 export class WindowVirtualScrollDirective implements OnChanges, OnInit {
+  observable$ = fromEvent(window, 'ionScroll');
+  event: any;
+
   ngOnInit() {
-    console.log('i don initted yo');
+    this.observable$.subscribe((value) => {
+      this.event = value;
+    });
   }
 
   /** The size of the items in the list (in pixels). */
@@ -63,7 +69,10 @@ export class WindowVirtualScrollDirective implements OnChanges, OnInit {
   _scrollStrategy: WindowVirtualScrollStrategy = new WindowVirtualScrollStrategy(
     this.itemSizePx,
     this.minBufferPx,
-    this.maxBufferPx
+    this.maxBufferPx,
+    this.observable$,
+    () => window.innerHeight,
+    () => (this.event ? this.event.detail.scrollTop : window.pageYOffset)
   );
 
   ngOnChanges() {

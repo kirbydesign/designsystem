@@ -1,29 +1,21 @@
 /* eslint-disable no-underscore-dangle */
-import {
-  CdkVirtualScrollViewport,
-  FixedSizeVirtualScrollStrategy,
-  VirtualScrollStrategy,
-} from '@angular/cdk/scrolling';
-import { fromEvent, Observable, Subject } from 'rxjs';
+import { CdkVirtualScrollViewport, FixedSizeVirtualScrollStrategy } from '@angular/cdk/scrolling';
+import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-// This is an adapted version of the original FixedSizeVirtualScrollStrategy
-// https://github.com/angular/components/blob/master/src/cdk/scrolling/fixed-size-virtual-scroll.ts
 export class WindowVirtualScrollStrategy {
-  get scrolledIndexChange(): Observable<number> {
-    return this.fixedSizeVirtualScrollStrategy.scrolledIndexChange;
-  }
-
-  // We're working as an adapter
   private fixedSizeVirtualScrollStrategy: FixedSizeVirtualScrollStrategy;
-
+  private readonly destroy = new Subject<void>();
   private destroy$: Observable<void>;
 
-  private readonly destroy = new Subject<void>();
-  private scrollTarget = window;
-  private event: any;
-
-  constructor(itemSizePx: number, minBufferPx: number, maxBufferPx: number) {
+  constructor(
+    itemSizePx: number,
+    minBufferPx: number,
+    maxBufferPx: number,
+    private observable$: Observable<any>,
+    private getViewportSize: () => number,
+    private measureScrollOffset: () => number
+  ) {
     this.fixedSizeVirtualScrollStrategy = new FixedSizeVirtualScrollStrategy(
       itemSizePx,
       minBufferPx,
@@ -33,23 +25,16 @@ export class WindowVirtualScrollStrategy {
   }
 
   attach(viewport: CdkVirtualScrollViewport) {
-    viewport['getViewportSize'] = () => {
-      return this.scrollTarget.innerHeight;
-    };
-    viewport['measureScrollOffset'] = () => {
-      return this.event ? this.event.detail.scrollTop : this.scrollTarget.pageYOffset;
-    };
+    viewport.getViewportSize = this.getViewportSize;
+    viewport.measureScrollOffset = this.measureScrollOffset;
+
     this.fixedSizeVirtualScrollStrategy.attach(viewport);
 
-    const observable$ = fromEvent(window, 'ionScroll');
-
-    observable$.pipe(takeUntil(this.destroy$)).subscribe((event: any) => {
-      this.event = event;
+    this.observable$.pipe(takeUntil(this.destroy$)).subscribe(() => {
       this.fixedSizeVirtualScrollStrategy['_updateRenderedRange']();
     });
   }
 
-  /** Detaches this scroll strategy from the currently attached viewport. */
   detach() {
     this.fixedSizeVirtualScrollStrategy.detach();
 
