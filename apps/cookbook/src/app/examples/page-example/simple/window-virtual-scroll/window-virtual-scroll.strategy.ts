@@ -26,7 +26,6 @@ export class WindowVirtualScrollStrategy implements VirtualScrollStrategy {
   private get _itemSizePx(): number {
     return this.fixedSizeVirtualScrollStrategy['_itemSize'];
   }
-  private _offsetSizePx: number = 19;
 
   private get _minBufferPx(): number {
     return this.fixedSizeVirtualScrollStrategy['_minBufferPx'];
@@ -43,13 +42,12 @@ export class WindowVirtualScrollStrategy implements VirtualScrollStrategy {
   private scrollTarget = window;
   private event: any;
 
-  constructor(itemSizePx: number, offsetSizePx: number, minBufferPx: number, maxBufferPx: number) {
+  constructor(itemSizePx: number, minBufferPx: number, maxBufferPx: number) {
     this.fixedSizeVirtualScrollStrategy = new FixedSizeVirtualScrollStrategy(
       itemSizePx,
       minBufferPx,
       maxBufferPx
     );
-    this._offsetSizePx = offsetSizePx;
     this.destroy$ = this.destroy.asObservable();
   }
 
@@ -76,27 +74,14 @@ export class WindowVirtualScrollStrategy implements VirtualScrollStrategy {
     this.destroy.complete();
   }
 
-  /**
-   * Update the item size and buffer size.
-   * @param itemSize The size of the items in the virtually scrolling list.
-   * @param minBufferPx The minimum amount of buffer (in pixels) before needing to render more
-   * @param maxBufferPx The amount of buffer (in pixels) to render when rendering more.
-   */
-  updateItemAndBufferSize(
-    itemSize: number,
-    _offsetSizePx: number,
-    minBufferPx: number,
-    maxBufferPx: number
-  ) {
+  updateItemAndBufferSize(itemSize: number, minBufferPx: number, maxBufferPx: number) {
     this.fixedSizeVirtualScrollStrategy.updateItemAndBufferSize(itemSize, minBufferPx, maxBufferPx);
   }
 
-  /** @docs-private Implemented as part of VirtualScrollStrategy. */
   onContentScrolled() {
     this._updateRenderedRange();
   }
 
-  /** @docs-private Implemented as part of VirtualScrollStrategy. */
   // TODO: what to do about this?
   onDataLengthChanged() {
     this._updateTotalContentSize();

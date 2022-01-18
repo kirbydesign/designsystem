@@ -59,20 +59,9 @@ export class WindowVirtualScrollDirective implements OnChanges, OnInit {
   }
   _maxBufferPx = 200;
 
-  /** The size of the offset (in pixels). */
-  @Input()
-  get offsetSizePx(): number {
-    return this._offsetSizePx;
-  }
-  set offsetSizePx(value: number) {
-    this._offsetSizePx = coerceNumberProperty(value);
-  }
-  _offsetSizePx = 0;
-
   /** The scroll strategy used by this directive. */
   _scrollStrategy: WindowVirtualScrollStrategy = new WindowVirtualScrollStrategy(
     this.itemSizePx,
-    this.offsetSizePx,
     this.minBufferPx,
     this.maxBufferPx
   );
@@ -80,7 +69,6 @@ export class WindowVirtualScrollDirective implements OnChanges, OnInit {
   ngOnChanges() {
     this._scrollStrategy.updateItemAndBufferSize(
       this.itemSizePx,
-      this.offsetSizePx,
       this.minBufferPx,
       this.maxBufferPx
     );
