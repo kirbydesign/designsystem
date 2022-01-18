@@ -3,84 +3,7 @@
 @use 'sass:meta';
 @use 'sass:string';
 @use '../utils';
-@use "../themes/colors";
-
-// Design token-ish
-// positive = lighten
-// negative = darken
-$relative-lightness: -16%;
-
-@mixin apply-background-color($background-color: transparent) {
-  --h: #{color.hue($background-color)};
-  --s: #{color.saturation($background-color)};
-  --l-base: #{color.lightness($background-color)};
-
-  --lighten: 0%;
-  --darken: 0%;
-  // TODO: Use a single custom property, e.g. "--relative-lightness"
-
-  --l: calc(var(--l-base) + var(--lighten) - var(--darken));
-
-  background-color: hsl(var(--h), var(--s), var(--l));
-}
-
-/**
- * Solution A - custom property
- *
- * Pros:
- *  + Simple and easy to control
- *  + ~~Does not require background color parameter~~
- *
- * Cons:
- *  - ~~Tighly couples two different mixins (apply-background and apply-hover)~~
- *  - ~~Requires background-color to be declared using HSL colors.~~
- */
-@mixin apply-hover-use-custom-properties($background-color: transparent) {
-  @include apply-background-color($background-color);
-
-  &:hover {
-    cursor: pointer;
-    //--darken: #{$relative-lightness * -1};
-    --lighten: #{$relative-lightness};
-  }
-}
-
-/**
- * Solution B - color.scale()
- *
- * Pros:
- *  + ~~Does not require custom properties~~ Uses apply-background-color()
- *
- * Cons:
- *  - Background color must be supplied as parameter for mixin (maybe not a con anymore)
- */
-@mixin apply-hover-use-sass-color-scale($background-color: transparent, $foreground-color: #000) {
-  @include apply-background-color($background-color);
-
-  color: $foreground-color;
-
-  &:hover {
-    cursor: pointer;
-    background-color: color.scale($background-color, $lightness: $relative-lightness);
-  }
-}
-
-// @mixin apply-hover-use-sass-color-mix(
-//   $background-color: transparent,
-//   $foreground-color: #000,
-//   $mix: 50%
-// ) {
-//   @include apply-background-color($background-color);
-
-//   color: $foreground-color;
-
-//   &:hover {
-//     cursor: pointer;
-//     background-color: color.mix($background-color, $foreground-color, $mix);
-//   }
-// }
-
-// -----------------------------------------------------------------------------
+@use '../themes/colors';
 
 @mixin apply-hover() {
   @if meta.content-exists() {
@@ -90,59 +13,15 @@ $relative-lightness: -16%;
   }
 }
 
-// TODO: Move utility function into _colors.scss partial
-// or even better use a methodology like ITCSS or similar to structure stylesheets
-
-// TODO: Deprecate and remove get-color-hsl()
-// @function get-color-hsl($variant, $map: colors.$kirby-colors, $relative-lightness: 0%) {
-//   $color-hex: utils.get-color($variant, $getValueOnly: true);
-
-//   @return color.scale($color-hex, $lightness: $relative-lightness);
-
-//   //   // TODO: utils._get-map-prop() should be public
-//   //   //   $color-hex: utils._get-map-prop($map, $variant);
-//   //   @if map.has-key($map, $variant) {
-//   //     $color-hex: map.get($map, $variant);
-
-//   //     @debug '$variant: #{$variant}';
-//   //     @debug '$color-hex: #{$color-hex}';
-
-//   //     // $h: color.hue($color-hex);
-//   //     // $h: color.hue($color-hex);
-
-//   //     // @debug '$h: #{$h}';
-//   //     // $s: color.saturation($color-hex);
-//   //     // $l: color.lightness($color-hex);
-//   //     // $hsl: #{hsl($h, $s, $l + $relative-lightness)};
-//   //     // @return $hsl;
-//   //     @return color.scale($color-hex, $lightness: $relative-lightness);
-//   //   }
-
-//   @error 'Unknown color variant `#{$variant}`.';
-//   @return null;
-// }
-
 @function get-hover-color($variant, $lightness: 0%) {
-  //   @each $color-name, $color-value in colors.$kirby-colors {
-  //     @debug meta.type-of($color-value);
-  //     // Type of most color-values are "string" - few are "color"
-  //   }
-
   // TODO: Verify parameter validity
 
   // TODO: lightness should be defined by design tokens - default to the most common
   // Could be "loudness" or something like that
 
-  //   @debug '$variant = #{$variant}';
-
   $color: utils.get-color($variant, $getValueOnly: true) !default;
 
-  //   @if meta.type-of($color) == string {
-  //     @debug 'before :: type-of #{$color} = #{meta.type-of($color)}';
-  //     $color: string.unquote('#{utils.get-color($variant, $getValueOnly: true)}');
-  //     @debug 'after :: type-of #{$color} = #{meta.type-of($color)}';
-  //   }
-
+  // TODO: Clean up
   @debug '#{$variant}: #{$color} ➡️  type = #{meta.type-of($color)}';
 
   @return color.scale($color, $lightness: $lightness);
