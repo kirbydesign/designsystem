@@ -84,10 +84,11 @@ $button-width: (
   $_config: (
     'color-variant': 'primary-contrast',
     'background-color-variant': 'primary',
-    'custom-property': '--kirby-button-background-color',
+    'custom-property-name': '--kirby-button-background-color',
   );
 
   @include state.apply-hover-with-params($_config...);
+
   // ---------------------------------------------------------------------------
 
   // @include state.apply-hover() {

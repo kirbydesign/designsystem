@@ -42,35 +42,42 @@
 // -----------------------------------------------------------------------------
 
 // TODO: Create design tokens for "loudness"
-$loudness: 8% !default;
+$_default-loudness: 8%;
 
 /// @color-variant {string}
 /// @background-color-variant {string}
 /// @custom-property {string}
 @mixin apply-hover-with-params(
-  $lightness: $loudness,
+  $loudness: $_default-loudness,
   $background-color-variant,
   $color-variant,
-  $custom-property
+  $custom-property-name
 ) {
   // TODO: Verify parameter validity
-  // TODO: determine if lightness should increase or decrease
 
-  $relative-lightness: $lightness !default;
-
-  $_new-color: utils.get-color(
+  $_background: utils.get-color(
     $variant: $background-color-variant,
     $getValueOnly: true,
     $map: colors.$kirby-colors,
   );
 
-  // @debug meta.inspect($_new-color);
+  $_foreground: utils.get-color(
+    $variant: $color-variant,
+    $getValueOnly: true,
+    $map: colors.$kirby-colors,
+  );
 
-  // @if background-color is lighter than color {
-  //    $relative-lightness: -1;
-  // }
+  // Determine if lightness should increase or decrease
+
+  // TODO: Should it be possible to invert relative lightness through configuration?
+
+  $relative-lightness: $loudness !default;
+
+  @if color.lightness($_background) > color.lightness($_foreground) {
+    $relative-lightness: $relative-lightness * -1;
+  }
 
   @include utils.hover() {
-    #{$custom-property}: #{color.scale($_new-color, $lightness: $lightness)};
+    #{$custom-property-name}: #{color.scale($_background, $lightness: $relative-lightness)};
   }
 }
