@@ -80,9 +80,19 @@ $button-width: (
   --kirby-button-background-color: #{utils.get-color('primary')};
   --kirby-button-color: #{utils.get-color('primary-contrast')};
 
-  @include state.apply-hover() {
-    --kirby-button-background-color: #{state.get-hover-color('primary', $lightness: -8%)};
-  }
+  // ---------------------------------------------------------------------------
+  $_config: (
+    'color-variant': 'primary-contrast',
+    'background-color-variant': 'primary',
+    'custom-property': '--kirby-button-background-color',
+  );
+
+  @include state.apply-hover-with-params($_config...);
+  // ---------------------------------------------------------------------------
+
+  // @include state.apply-hover() {
+  //   --kirby-button-background-color: #{state.get-hover-color('primary', $lightness: -8%)};
+  // }
 
   &.destructive {
     --kirby-button-background-color: #{utils.get-color('danger')};

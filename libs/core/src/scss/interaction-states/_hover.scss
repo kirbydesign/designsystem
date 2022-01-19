@@ -6,23 +6,71 @@
 @use '../themes/colors';
 
 @mixin apply-hover() {
-  @if meta.content-exists() {
-    @include utils.hover() {
-      @content;
-    }
+  @include utils.hover() {
+    @content;
   }
 }
 
 @function get-hover-color($variant, $lightness: 0%) {
-  // TODO: Verify parameter validity
+  // TODO: Verify parameter validity?
 
   // TODO: lightness should be defined by design tokens - default to the most common
   // Could be "loudness" or something like that
+  // Use get-lightness() defined below
 
-  $color: utils.get-color($variant, $getValueOnly: true) !default;
-
-  // TODO: Clean up
-  @debug '#{$variant}: #{$color} ➡️  type = #{meta.type-of($color)}';
+  $color: utils.get-color($variant, $getValueOnly: true, $map: colors.$kirby-colors);
 
   @return color.scale($color, $lightness: $lightness);
+}
+
+/**
+  TODO: Create helper function to determine if lightness should increase or decrease
+
+  - Will need to know both background and foreground colors
+
+  @function get-lightness($foreground-color: black, $background-color: white, $loudness) {
+    $lightness: 0%;
+    // $lightness must be calculated based on $loudness
+
+    // if contrast bla bla bla
+    // then positive lightness
+    // else negative lightness
+    @return $lightness;
+  }
+*/
+
+// -----------------------------------------------------------------------------
+
+// TODO: Create design tokens for "loudness"
+$loudness: 8% !default;
+
+/// @color-variant {string}
+/// @background-color-variant {string}
+/// @custom-property {string}
+@mixin apply-hover-with-params(
+  $lightness: $loudness,
+  $background-color-variant,
+  $color-variant,
+  $custom-property
+) {
+  // TODO: Verify parameter validity
+  // TODO: determine if lightness should increase or decrease
+
+  $relative-lightness: $lightness !default;
+
+  $_new-color: utils.get-color(
+    $variant: $background-color-variant,
+    $getValueOnly: true,
+    $map: colors.$kirby-colors,
+  );
+
+  // @debug meta.inspect($_new-color);
+
+  // @if background-color is lighter than color {
+  //    $relative-lightness: -1;
+  // }
+
+  @include utils.hover() {
+    #{$custom-property}: #{color.scale($_new-color, $lightness: $lightness)};
+  }
 }
