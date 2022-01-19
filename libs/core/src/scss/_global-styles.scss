@@ -263,3 +263,16 @@ ion-loading.kirby-loading-overlay {
   //place icon to the right of text, with icons own width + the actual spacing
   padding-right: calc(#{$icon-scaling-factor} + #{utils.size('xxxs')});
 }
+
+.base-shape {
+  @include utils.rounded-corners();
+  @include utils.shadow();
+}
+
+.rounded-corners {
+  @include utils.rounded-corners();
+}
+
+.shadow {
+  @include utils.shadow();
+}

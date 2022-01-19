@@ -186,3 +186,12 @@
     top: 50%;
   }
 }
+
+@mixin rounded-corners($border-radius: variables.$border-radius) {
+  border-radius: $border-radius;
+  overflow: hidden;
+}
+
+@mixin shadow() {
+  box-shadow: get-elevation(2);
+}
