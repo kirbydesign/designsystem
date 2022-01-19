@@ -1,3 +1,6 @@
 <ion-list>
-  <ng-content></ng-content>
+  <ng-content select="[list-header]"></ng-content>
+  <div class="rounded-corners shadow">
+    <ng-content></ng-content>
+  </div>
 </ion-list>
