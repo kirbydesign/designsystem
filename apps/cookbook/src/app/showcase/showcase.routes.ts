@@ -27,24 +27,27 @@ import { FontsShowcaseComponent } from './fonts-showcase/fonts-showcase.componen
 import { FormFieldShowcaseComponent } from './form-field-showcase/form-field-showcase.component';
 import { GridShowcaseComponent } from './grid-showcase/grid-showcase.component';
 import { IconShowcaseComponent } from './icon-showcase/icon-showcase.component';
+import { ItemGroupShowcaseComponent } from './item-group-showcase/item-group-showcase.component';
+import { ItemSlidingShowcaseComponent } from './item-sliding-showcase/item-sliding-showcase.component';
 import { LinkShowcaseComponent } from './link-showcase/link-showcase.component';
 import { ListLoadOnDemandShowcaseComponent } from './list-load-on-demand-showcase/list-load-on-demand-showcase.component';
 import { ListNoShapeShowcaseComponent } from './list-no-shape-showcase/list-no-shape-showcase.component';
 import { ListShowcaseComponent } from './list-showcase/list-showcase.component';
 import { ListSwipeShowcaseComponent } from './list-swipe-showcase/list-swipe-showcase.component';
-import { ListVirtualScrollShowcaseComponent } from './list-virtual-scroll-showcase/list-virtual-scroll-showcase.component';
 import { LoadingOverlayShowcaseComponent } from './loading-overlay-showcase/loading-overlay-showcase.component';
 import { ModalShowcaseComponent } from './modal-showcase/modal-showcase.component';
 import { PageShowcaseComponent } from './page-showcase/page-showcase.component';
 import { ProgressCircleShowcaseComponent } from './progress-circle-showcase/progress-circle-showcase.component';
 import { RangeShowcaseComponent } from './range-showcase/range-showcase.component';
 import { ReorderListShowcaseComponent } from './reorder-list-showcase/reorder-list-showcase.component';
+import { SectionHeaderShowcaseComponent } from './section-header-showcase/section-header-showcase.component';
 import { SegmentedControlShowcaseComponent } from './segmented-control-showcase/segmented-control-showcase.component';
 import { ShowcaseComponent } from './showcase.component';
 import { SlideButtonShowcaseComponent } from './slide-button-showcase/slide-button-showcase.component';
 import { SlidesShowcaseComponent } from './slides-showcase/slides-showcase.component';
 import { SpinnerShowcaseComponent } from './spinner-showcase/spinner-showcase.component';
 import { StockChartDeprecatedShowcaseComponent } from './stock-chart-deprecated-showcase/stock-chart-deprecated-showcase.component';
+import { StylingHtmlListsShowcaseComponent } from './styling-html-lists/styling-html-lists-showcase';
 import { TabsShowcaseComponent } from './tabs-showcase/tabs-showcase.component';
 import { ToastShowcaseComponent } from './toast-showcase/toast-showcase.component';
 import { ToggleButtonShowcaseComponent } from './toggle-button-showcase/toggle-button-showcase.component';
@@ -64,6 +67,20 @@ export const routes: Routes = [
       {
         path: 'item',
         component: ItemShowcaseComponent,
+      },
+      {
+        path: 'item-sliding',
+        component: ItemSlidingShowcaseComponent,
+        data: {
+          hide: true,
+        },
+      },
+      {
+        path: 'item-group',
+        component: ItemGroupShowcaseComponent,
+        data: {
+          hide: true,
+        },
       },
       {
         path: 'button',
@@ -108,10 +125,6 @@ export const routes: Routes = [
       {
         path: 'list-no-shape',
         component: ListNoShapeShowcaseComponent,
-      },
-      {
-        path: 'list-virtual-scroll',
-        component: ListVirtualScrollShowcaseComponent,
       },
       {
         path: 'page',
@@ -256,6 +269,14 @@ export const routes: Routes = [
       {
         path: 'link',
         component: LinkShowcaseComponent,
+      },
+      {
+        path: 'section-header',
+        component: SectionHeaderShowcaseComponent,
+      },
+      {
+        path: 'styling-HTML-lists',
+        component: StylingHtmlListsShowcaseComponent,
       },
     ],
   },

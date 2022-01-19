@@ -24,8 +24,11 @@ import { MockGridComponent } from './components/mock.grid.component';
 import { MockIconComponent } from './components/mock.icon.component';
 import { MockInputCounterComponent } from './components/mock.input-counter.component';
 import { MockInputComponent } from './components/mock.input.component';
+import { MockItemGroupComponent } from './components/mock.item-group.component';
+import { MockItemSlidingComponent } from './components/mock.item-sliding.component';
 import { MockItemComponent } from './components/mock.item.component';
 import { MockLabelComponent } from './components/mock.label.component';
+import { MockListExperimentalComponent } from './components/mock.list-experimental.component';
 import { MockListHeaderComponent } from './components/mock.list-header.component';
 import { MockListItemComponent } from './components/mock.list-item.component';
 import { MockListSectionHeaderComponent } from './components/mock.list-section-header.component';
@@ -51,6 +54,7 @@ import { MockRadioComponent } from './components/mock.radio.component';
 import { MockRangeComponent } from './components/mock.range.component';
 import { MockReorderListComponent } from './components/mock.reorder-list.component';
 import { MockRouterOutletComponent } from './components/mock.router-outlet.component';
+import { MockSectionHeaderComponent } from './components/mock.section-header.component';
 import { MockSegmentedControlComponent } from './components/mock.segmented-control.component';
 import { MockSlideButtonComponent } from './components/mock.slide-button.component';
 import { MockSpinnerComponent } from './components/mock.spinner.component';
@@ -87,6 +91,9 @@ export const MOCK_COMPONENTS = [
   MockIconComponent,
   MockItemComponent,
   MockLabelComponent,
+  MockItemGroupComponent,
+  MockItemSlidingComponent,
+  MockListExperimentalComponent,
   MockListHeaderComponent,
   MockListItemComponent,
   MockListSectionHeaderComponent,
@@ -111,6 +118,7 @@ export const MOCK_COMPONENTS = [
   MockRangeComponent,
   MockReorderListComponent,
   MockRouterOutletComponent,
+  MockSectionHeaderComponent,
   MockSegmentedControlComponent,
   MockSlideButtonComponent,
   MockSpinnerComponent,

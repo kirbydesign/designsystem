@@ -11,6 +11,7 @@ import { ButtonExampleComponent } from './button-example/button-example.componen
 import { CalendarCardExampleComponent } from './calendar-example/calendar-card-example.component';
 import { CalendarExampleComponent } from './calendar-example/calendar-example.component';
 import { CardExampleComponent } from './card-example/card-example.component';
+import { CardClickableExampleComponent } from './card/card-clickable-example/card-clickable-example.component';
 import { CardElevationsExampleComponent } from './card/card-elevations-example/card-elevations-example.component';
 import { CardThemecolorExampleComponent } from './card/card-themecolor-example/card-themecolor-example.component';
 import { CheckboxExampleComponent } from './checkbox-example/checkbox-example.component';
@@ -25,12 +26,12 @@ import { FormFieldExampleComponent } from './form-field-example/form-field-examp
 import { GridExampleComponent } from './grid-example/grid-example.component';
 import { IconExampleComponent } from './icon-example/icon-example.component';
 import { ItemExampleComponent } from './item-example/item-example.component';
+import { ItemGroupExampleComponent } from './item-group-example/item-group-example.component';
 import { LinkExampleComponent } from './link-example/link-example.component';
 import { ListExampleComponent } from './list-example/list-example.component';
 import { ListLoadOnDemandExampleComponent } from './list-load-on-demand-example/list-load-on-demand-example.component';
 import { ListNoShapeExampleComponent } from './list-no-shape-example/list-no-shape-example.component';
 import { ListSwipeExampleComponent } from './list-swipe-example/list-swipe-example.component';
-import { ListVirtualScrollExampleComponent } from './list-virtual-scroll-example/list-virtual-scroll-example.component';
 import { LoadingOverlayExampleComponent } from './loading-overlay-example/loading-overlay-example.component';
 import { PageAdvancedExampleComponent } from './page-example/advanced/page-advanced-example.component';
 import { PageCustomTitleExampleComponent } from './page-example/advanced/page-custom-title-example.component';
@@ -42,12 +43,14 @@ import { PageFixedTitleAndActionsExampleComponent } from './page-example/fixed-t
 import { PageSimpleExampleComponent } from './page-example/simple/page-simple-example.component';
 import { ProgressCircleExampleComponent } from './progress-circle-example/progress-circle-example.component';
 import { ReorderListExampleComponent } from './reorder-list-example/reorder-list-example.component';
+import { SectionHeaderExampleComponent } from './section-header-example/section-header-example.component';
 import { SegmentedControlExampleComponent } from './segmented-control-example/segmented-control-example.component';
 import { SlideButtonExampleComponent } from './slide-button-example/slide-button-example.component';
 import { CookbookExampleCardContentComponent } from './slides-example/example-card-content';
 import { SlidesExampleComponent } from './slides-example/slides-example.component';
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
 import { StockChartDeprecatedExampleComponent } from './stock-chart-deprecated-example/stock-chart-deprecated-example.component';
+import { StylingHtmlListsExampleComponent } from './styling-html-lists-example/styling-html-lists-example.component';
 import { TabExampleComponent } from './tabs-example/tab/tab-example.component';
 import { TabsExampleComponent } from './tabs-example/tabs-example.component';
 import { ToastExampleComponent } from './toast-example/toast-example.component';
@@ -72,13 +75,13 @@ export const COMPONENT_DECLARATIONS: any[] = [
   ButtonExampleComponent,
   SlideButtonExampleComponent,
   CardExampleComponent,
+  CardClickableExampleComponent,
   CardThemecolorExampleComponent,
   CardElevationsExampleComponent,
   ListExampleComponent,
   ListLoadOnDemandExampleComponent,
   ListSwipeExampleComponent,
   ListNoShapeExampleComponent,
-  ListVirtualScrollExampleComponent,
   GridExampleComponent,
   AvatarExampleComponent,
   FontsExampleComponent,
@@ -120,6 +123,9 @@ export const COMPONENT_DECLARATIONS: any[] = [
   AccordionExampleComponent,
   LinkExampleComponent,
   PagePullToRefreshExampleComponent,
+  StylingHtmlListsExampleComponent,
+  ItemGroupExampleComponent,
+  SectionHeaderExampleComponent,
 ];
 
 // Configure custom icons (used by example to show the usage of custom icons)

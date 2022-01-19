@@ -128,6 +128,11 @@ describe('DropdownComponent', () => {
       expect(spectator.element).toBeFocused();
     });
 
+    // Fixes https://github.com/kirbydesign/designsystem/issues/1987
+    it('should have type="button" attribute', () => {
+      expect(buttonElement).toHaveAttribute('type', 'button');
+    });
+
     describe('when setting selected index', () => {
       let onChangeSpy: jasmine.Spy;
       const newSelectedIndex = 2;

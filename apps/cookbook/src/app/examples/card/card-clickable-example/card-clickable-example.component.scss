@@ -1,0 +1,5 @@
+@use '~@kirbydesign/core/src/scss/utils';
+
+.card-content {
+  padding: utils.size('s');
+}

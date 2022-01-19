@@ -1,3 +1,5 @@
+@use "functions";
+
 @import '~@fontsource/roboto/300.css';
 @import '~@fontsource/roboto/400.css';
 @import '~@fontsource/roboto/700.css';
@@ -14,7 +16,7 @@ h4,
 p,
 .p {
   margin: 0;
-  margin-bottom: size('s');
+  margin-bottom: functions.size('s');
 }
 
 kirby-app .page-title {
@@ -29,75 +31,75 @@ kirby-app .page-title {
 }
 
 .kirby-text-display-1 {
-  font-size: font-size('xxxxl');
-  font-weight: font-weight('black');
+  font-size: functions.font-size('xxxxl');
+  font-weight: functions.font-weight('black');
   line-height: normal;
 }
 
 .kirby-text-display-2 {
-  font-size: font-size('xxxl');
-  font-weight: font-weight('black');
+  font-size: functions.font-size('xxxl');
+  font-weight: functions.font-weight('black');
   line-height: normal;
 }
 
 .kirby-text-display-3 {
-  font-size: font-size('xxl');
-  font-weight: font-weight('black');
+  font-size: functions.font-size('xxl');
+  font-weight: functions.font-weight('black');
   line-height: normal;
 }
 
 h1,
 .h1,
 .kirby-text-xlarge {
-  font-size: font-size('xl');
-  font-weight: font-weight('black');
-  line-height: line-height('xl');
+  font-size: functions.font-size('xl');
+  font-weight: functions.font-weight('black');
+  line-height: functions.line-height('xl');
 }
 
 h2,
 .h2,
 .kirby-text-large {
-  font-size: font-size('l');
-  font-weight: font-weight('bold');
-  line-height: line-height('l');
+  font-size: functions.font-size('l');
+  font-weight: functions.font-weight('bold');
+  line-height: functions.line-height('l');
 }
 
 h3,
 .h3,
 .kirby-text-medium {
-  font-size: font-size('m');
-  font-weight: font-weight('bold');
-  line-height: line-height('m');
+  font-size: functions.font-size('m');
+  font-weight: functions.font-weight('bold');
+  line-height: functions.line-height('m');
 }
 
 p,
 .p,
 .kirby-text-normal {
-  font-size: font-size('n');
-  line-height: line-height('n');
+  font-size: functions.font-size('n');
+  line-height: functions.line-height('n');
 }
 
 .kirby-text-small {
-  font-size: font-size('s');
-  line-height: line-height('s');
+  font-size: functions.font-size('s');
+  line-height: functions.line-height('s');
 }
 
 .kirby-text-small-light {
-  font-size: font-size('s');
-  font-weight: font-weight('light');
-  line-height: line-height('s');
+  font-size: functions.font-size('s');
+  font-weight: functions.font-weight('light');
+  line-height: functions.line-height('s');
 }
 
 .kirby-text-xsmall {
-  font-size: font-size('xs');
-  line-height: line-height('xs');
+  font-size: functions.font-size('xs');
+  line-height: functions.line-height('xs');
 }
 
 .kirby-text-xxsmall {
-  font-size: font-size('xxs');
-  line-height: line-height('xxs');
+  font-size: functions.font-size('xxs');
+  line-height: functions.line-height('xxs');
 }
 
 .kirby-text-bold {
-  font-weight: font-weight('bold');
+  font-weight: functions.font-weight('bold');
 }

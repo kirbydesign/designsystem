@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Inject, InjectionToken, ModuleWithProviders, NgModule, Optional } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
-import { UiScrollModule } from 'ngx-ui-scroll';
 
 import { AccordionItemComponent } from './components/accordion/accordion-item.component';
 import { AccordionDirective } from './components/accordion/accordion.directive';
@@ -32,6 +31,8 @@ import { TextareaComponent } from './components/form-field/textarea/textarea.com
 import { BreakpointHelperService } from './components/grid/breakpoint-helper.service';
 import { GridComponent } from './components/grid/grid.component';
 import { IconModule } from './components/icon/icon.module';
+import { ItemGroupComponent } from './components/item-group/item-group.component';
+import { ItemSlidingComponent } from './components/item-sliding/item-sliding.component';
 import { ItemModule } from './components/item/item.module';
 import { ListModule } from './components/list/list.module';
 import { GroupByPipe } from './components/list/pipes/group-by.pipe';
@@ -55,6 +56,7 @@ import { RadioComponent } from './components/radio/radio.component';
 import { RangeComponent } from './components/range/range.component';
 import { ReorderListComponent } from './components/reorder-list/reorder-list.component';
 import { RouterOutletModule } from './components/router-outlet/router-outlet.module';
+import { SectionHeaderComponent } from './components/section-header/section-header.component';
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
 import { ComponentLoaderDirective } from './components/shared/component-loader.directive';
 import { ResizeObserverFactory } from './components/shared/resize-observer/resize-observer.factory';
@@ -70,6 +72,7 @@ import { ToggleButtonModule } from './components/toggle-button/toggle-button.mod
 import { ToggleComponent } from './components/toggle/toggle.component';
 import { KirbyBadge as BadgeComponent } from './components/web-component-proxies.component';
 import { customElementsInitializer } from './custom-elements-initializer';
+import { ElementAsButtonDirective } from './directives/element-as-button/element-as-button.directive';
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
 import { ModalRouterLinkDirective } from './directives/modal-router-link/modal-router-link.directive';
 import { ThemeColorDirective } from './directives/theme-color/theme-color.directive';
@@ -114,9 +117,13 @@ const exportedDeclarations = [
   SlideDirective,
   AccordionDirective,
   AccordionItemComponent,
+  ItemSlidingComponent,
   RadioComponent,
   RadioGroupComponent,
   RangeComponent,
+  ElementAsButtonDirective,
+  ItemGroupComponent,
+  SectionHeaderComponent,
 ];
 
 const declarations = [
@@ -177,7 +184,6 @@ export interface KirbyConfig {
   imports: [
     CommonModule,
     RouterModule,
-    UiScrollModule,
     IonicModule.forRoot({
       mode: 'ios',
       inputShims: true,

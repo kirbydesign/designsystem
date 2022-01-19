@@ -1,8 +1,7 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponent } from 'ng-mocks';
 
-import { DesignTokenHelper } from '@kirbydesign/core';
-
+import { DesignTokenHelper } from '../../helpers/design-token-helper';
 import { IconComponent } from '../icon/icon.component';
 
 import { ButtonComponent, ButtonSize } from './button.component';

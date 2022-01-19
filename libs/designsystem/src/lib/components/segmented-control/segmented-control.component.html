@@ -12,11 +12,15 @@
       [attr.aria-label]="item.badge.description"
       [themeColor]="item.badge.themeColor"
     >
-      <kirby-icon
-        *ngIf="item.badge.icon; else badgeContent"
-        [customName]="item.badge.icon"
-        [name]="item.badge.icon"
-      ></kirby-icon>
+      <ng-container *ngIf="item.badge.icon; else badgeContent">
+        <kirby-icon
+          *ngIf="item.badge.isCustomIcon; else defaultIconName"
+          [customName]="item.badge.icon"
+        ></kirby-icon>
+        <ng-template #defaultIconName>
+          <kirby-icon [name]="item.badge.icon"></kirby-icon>
+        </ng-template>
+      </ng-container>
       <ng-template #badgeContent>
         {{ item.badge.content }}
       </ng-template>

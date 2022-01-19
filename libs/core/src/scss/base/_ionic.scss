@@ -1,17 +1,21 @@
-@import '../base/functions';
-@import '../themes/colors';
+@use '../base/functions';
+@use '../themes/colors';
 
 /* Core CSS required for Ionic components to work properly */
 @import '~@ionic/angular/css/core.css';
 
 @mixin ionic-color-map($ionic-variant, $kirby-variant: $ionic-variant) {
   --ion-color-#{$ionic-variant}: var(--kirby-#{$kirby-variant});
-  --ion-color-#{$ionic-variant}-rgb: #{get-color(#{$kirby-variant}-rgb, true, $kirby-colors)};
+  --ion-color-#{$ionic-variant}-rgb: #{functions.get-color(
+      #{$kirby-variant}-rgb,
+      true,
+      colors.$kirby-colors
+    )};
   --ion-color-#{$ionic-variant}-contrast: var(--kirby-#{$kirby-variant}-contrast);
-  --ion-color-#{$ionic-variant}-contrast-rgb: #{get-color(
+  --ion-color-#{$ionic-variant}-contrast-rgb: #{functions.get-color(
       #{$kirby-variant}-contrast-rgb,
       true,
-      $kirby-colors
+      colors.$kirby-colors
     )};
   --ion-color-#{$ionic-variant}-shade: var(--kirby-#{$kirby-variant}-shade);
   --ion-color-#{$ionic-variant}-tint: var(--kirby-#{$kirby-variant}-tint);

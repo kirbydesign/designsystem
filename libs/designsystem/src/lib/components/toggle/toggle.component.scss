@@ -1,5 +1,5 @@
-@import '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/utils';
 
 .toggle-checked {
-  --background-checked: #{get-color('success')};
+  --background-checked: #{utils.get-color('success')};
 }

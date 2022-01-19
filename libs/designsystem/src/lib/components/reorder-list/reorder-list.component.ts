@@ -1,4 +1,5 @@
 import {
+  ChangeDetectorRef,
   Component,
   ContentChild,
   ElementRef,
@@ -13,6 +14,7 @@ import {
 } from '@angular/core';
 
 import { ListItemTemplateDirective } from '../list/list.directive';
+
 import { ReorderEvent } from './reorder-event';
 
 @Component({
@@ -36,6 +38,8 @@ export class ReorderListComponent implements OnChanges, OnDestroy {
   private observer: MutationObserver;
   reorderActive: boolean = false;
 
+  constructor(private cdr: ChangeDetectorRef) {}
+
   ngOnChanges(): void {
     if (this.items && this.items.length > 0) {
       setTimeout(() => {
@@ -51,6 +55,7 @@ export class ReorderListComponent implements OnChanges, OnDestroy {
           this.reorderActive = mutation.target['className'].includes('reorder-list-active');
         }
       }
+      this.cdr.detectChanges();
     };
     this.observer = new MutationObserver(callback);
 

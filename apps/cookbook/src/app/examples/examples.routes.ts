@@ -29,12 +29,14 @@ import { GridLayoutMultipleContainersExampleComponent } from './grid-layout-exam
 import { GridLayoutSingleContainerExampleComponent } from './grid-layout-example/grid-layout-single-container-example/grid-layout-single-container-example.component';
 import { IconExampleComponent } from './icon-example/icon-example.component';
 import { ItemExampleComponent } from './item-example/item-example.component';
+import { ItemGroupExampleComponent } from './item-group-example/item-group-example.component';
+import { ItemSlidingExampleComponent } from './item-sliding-example/item-sliding-example.component';
 import { LinkExampleComponent } from './link-example/link-example.component';
-import { ListBoldTextOnRowSelectionExampleComponent } from './list-example/examples/bold-text-on-row-selection';
 import { ListColoredItemsExampleComponent } from './list-example/examples/colored-items';
 import { ListWithDividersExampleComponent } from './list-example/examples/dividers';
 import { ListWithHeaderAndFooterExampleComponent } from './list-example/examples/header-and-footer';
 import { ListItemsExampleComponent } from './list-example/examples/items';
+import { ListVirtualScrollExampleComponent } from './list-example/examples/list-with-virtual-scroll';
 import { ListWithSectionsExampleComponent } from './list-example/examples/sections';
 import { ListWithSectionsAndColoredItemsExampleComponent } from './list-example/examples/sections-and-colored-items';
 import { ListSelectableItemsExampleComponent } from './list-example/examples/selectable-items';
@@ -42,10 +44,6 @@ import { ListExampleComponent } from './list-example/list-example.component';
 import { ListLoadOnDemandExampleComponent } from './list-load-on-demand-example/list-load-on-demand-example.component';
 import { ListNoShapeExampleComponent } from './list-no-shape-example/list-no-shape-example.component';
 import { ListSwipeExampleComponent } from './list-swipe-example/list-swipe-example.component';
-import { ListVirtualScrollItemsExampleComponent } from './list-virtual-scroll-example/examples/items';
-import { ListVirtualScrollLoadExampleComponent } from './list-virtual-scroll-example/examples/load-on-demand';
-import { ListVirtualScrollSectionsExampleComponent } from './list-virtual-scroll-example/examples/sections';
-import { ListVirtualScrollExampleComponent } from './list-virtual-scroll-example/list-virtual-scroll-example.component';
 import { LoadingOverlayExampleComponent } from './loading-overlay-example/loading-overlay-example.component';
 import { ModalExampleComponent } from './modal-example/modal-example.component';
 import { ModalRoutePage1ExampleComponent } from './modal-example/modal-route-example/modal-route-page1-example.component';
@@ -62,11 +60,13 @@ import { ProgressCircleExampleComponent } from './progress-circle-example/progre
 import { RadioExampleComponent } from './radio-example/radio-example.component';
 import { RangeExampleComponent } from './range-example/range-example.component';
 import { ReorderListExampleComponent } from './reorder-list-example/reorder-list-example.component';
+import { SectionHeaderExampleComponent } from './section-header-example/section-header-example.component';
 import { SegmentedControlExampleComponent } from './segmented-control-example/segmented-control-example.component';
 import { SlideButtonExampleComponent } from './slide-button-example/slide-button-example.component';
 import { SlidesExampleComponent } from './slides-example/slides-example.component';
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
 import { StockChartDeprecatedExampleComponent } from './stock-chart-deprecated-example/stock-chart-deprecated-example.component';
+import { StylingHtmlListsExampleComponent } from './styling-html-lists-example/styling-html-lists-example.component';
 import { TabExampleComponent } from './tabs-example/tab/tab-example.component';
 import { TabsExampleComponent } from './tabs-example/tabs-example.component';
 import { ToastExampleComponent } from './toast-example/toast-example.component';
@@ -264,6 +264,18 @@ export const routes: Routes = [
     component: ItemExampleComponent,
   },
   {
+    path: 'item-sliding',
+    component: ItemSlidingExampleComponent,
+  },
+  {
+    path: 'item-group',
+    component: ItemGroupExampleComponent,
+  },
+  {
+    path: 'section-header',
+    component: SectionHeaderExampleComponent,
+  },
+  {
     path: 'button',
     component: ButtonExampleComponent,
   },
@@ -282,10 +294,6 @@ export const routes: Routes = [
       {
         path: '',
         redirectTo: 'with-items',
-      },
-      {
-        path: 'bold-text-on-row-selection',
-        component: ListBoldTextOnRowSelectionExampleComponent,
       },
       {
         path: 'with-dividers',
@@ -328,28 +336,6 @@ export const routes: Routes = [
   {
     path: 'list-load-on-demand',
     component: ListLoadOnDemandExampleComponent,
-  },
-  {
-    path: 'list-virtual-scroll',
-    component: ListVirtualScrollExampleComponent,
-    children: [
-      {
-        path: '',
-        redirectTo: 'with-items',
-      },
-      {
-        path: 'with-items',
-        component: ListVirtualScrollItemsExampleComponent,
-      },
-      {
-        path: 'load-on-demand',
-        component: ListVirtualScrollLoadExampleComponent,
-      },
-      {
-        path: 'with-sections',
-        component: ListVirtualScrollSectionsExampleComponent,
-      },
-    ],
   },
   {
     path: 'chart-deprecated',
@@ -482,5 +468,13 @@ export const routes: Routes = [
   {
     path: 'link',
     component: LinkExampleComponent,
+  },
+  {
+    path: 'styling-HTML-lists',
+    component: StylingHtmlListsExampleComponent,
+  },
+  {
+    path: 'wip-list-virtual-scroll',
+    component: ListVirtualScrollExampleComponent,
   },
 ];

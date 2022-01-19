@@ -1,3 +1,6 @@
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:meta';
 @use 'sass-to-ts';
 @use '../scss/base/variables';
 
@@ -6,17 +9,21 @@
   @each $elevation-key, $shadow-list in $elevations {
     $shadow-list-reordered: ();
     @each $shadow in $shadow-list {
-      $shadow-color: nth($shadow, -1);
+      $shadow-color: list.nth($shadow, -1);
       // window.getComputedStyle() returns box-shadow with color first, so re-order shadow components:
       $shadow-reordered: ($shadow-color);
-      @for $i from 1 through length($shadow)-1 {
+      @for $i from 1 through list.length($shadow)-1 {
         // Add and subtract 1px to ensure px-values in output:
-        $shadow-length-in-px: 1px + nth($shadow, $i) - 1px;
-        $shadow-reordered: append($shadow-reordered, $shadow-length-in-px);
+        $shadow-length-in-px: 1px + list.nth($shadow, $i) - 1px;
+        $shadow-reordered: list.append($shadow-reordered, $shadow-length-in-px);
       }
-      $shadow-list-reordered: append($shadow-list-reordered, $shadow-reordered, $separator: comma);
+      $shadow-list-reordered: list.append(
+        $shadow-list-reordered,
+        $shadow-reordered,
+        $separator: comma
+      );
     }
-    $elevation-list: map-merge(
+    $elevation-list: map.merge(
       $elevation-list,
       (
         $elevation-key: $shadow-list-reordered,
@@ -26,8 +33,8 @@
   @return $elevation-list;
 }
 
-$styles: map-merge(
-  module-variables('variables'),
+$styles: map.merge(
+  meta.module-variables('variables'),
   (
     // window.getComputedStyle() returns box-shadow in a specific format, so re-map elevations:
       'elevations': remap-elevation(variables.$elevations)

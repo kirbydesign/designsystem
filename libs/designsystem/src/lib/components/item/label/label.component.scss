@@ -1,5 +1,6 @@
-@import '~@kirbydesign/core/src/scss/utils';
-@import '../item.utils';
+@use '~@kirbydesign/core/src/scss/utils';
+@use '../item.utils';
+@use '../../section-header/section-header.utils';
 
 :host {
   &.horizontal ion-label {
@@ -8,24 +9,28 @@
     justify-content: space-between;
     align-items: center;
 
-    @include slotted(':not(:first-child)') {
-      margin-left: size('xs');
+    @include utils.slotted(':not(:first-child)') {
+      margin-left: utils.size('xs');
     }
   }
 }
 
 :host-context(kirby-item) ion-label {
-  @include item-typography();
+  @include item.item-typography();
+}
+
+:host-context(kirby-section-header) ion-label {
+  @include section-header.typography();
 }
 
 :host([slot='end']) ion-label {
-  @include slotted(data, '[detail]') {
-    margin-inline-start: size('s');
+  @include utils.slotted(data, '[detail]') {
+    margin-inline-start: utils.size('s');
   }
 }
 
 :host-context(kirby-item.selected) ion-label {
-  @include slotted(h1, h2, h3, h4, h5, h6, p, data) {
-    font-weight: font-weight('bold');
+  @include utils.slotted(h1, h2, h3, h4, h5, h6, 'p:not([detail])', 'data:not([detail])') {
+    font-weight: utils.font-weight('bold');
   }
 }

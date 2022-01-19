@@ -9,6 +9,7 @@ export * from './chart-deprecated';
 export * from './chart';
 export * from './stock-chart-deprecated';
 export * from './calendar';
+export * from './item-sliding';
 
 export { CheckboxComponent } from './checkbox/checkbox.component';
 export { ChipComponent } from './chip/chip.component';
@@ -27,6 +28,7 @@ export { GridCardConfiguration } from './grid/grid-card-configuration';
 
 export * from './icon';
 export * from './item';
+export { ItemGroupComponent } from './item-group/item-group.component';
 
 export * from './loading-overlay';
 export * from './list';
@@ -38,9 +40,13 @@ export * from './page';
 
 export { HorizontalDirection, PopoverComponent } from './popover/popover.component';
 
+export { ItemSlidingComponent } from './item-sliding/item-sliding.component';
+
 export * from './router-outlet';
 
 export * from './shared';
+
+export { SectionHeaderComponent } from './section-header/section-header.component';
 /* prettier-ignore */
 export { SegmentedControlComponent, SegmentedControlMode} from './segmented-control/segmented-control.component'; // See issue #1555 for prettier-ignore explanation
 export { SegmentItem } from './segmented-control/segment-item';

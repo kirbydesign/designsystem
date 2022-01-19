@@ -1,6 +1,8 @@
 import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 
-import { SegmentItem } from './segment-item';
+import { IconRegistryService } from '../icon/icon-registry.service';
+
+import { SegmentItem, SegmentItemInternal } from './segment-item';
 
 export enum SegmentedControlMode {
   chip = 'chip',
@@ -16,6 +18,8 @@ export enum SegmentedControlMode {
   host: { role: 'group' },
 })
 export class SegmentedControlComponent {
+  constructor(private iconRegistryService: IconRegistryService) {}
+
   preventWrapperClick(event: Event) {
     if (event.target instanceof HTMLElement) {
       if (event.target.classList.contains('segment-btn-wrapper')) {
@@ -35,13 +39,21 @@ export class SegmentedControlComponent {
     }[this.mode];
   }
 
-  private _items: SegmentItem[] = [];
+  private _items: SegmentItemInternal[] = [];
   get items(): SegmentItem[] {
     return this._items;
   }
 
   @Input() set items(value: SegmentItem[]) {
     this._items = value || [];
+    this._items.forEach((item) => {
+      if (!item.badge) return;
+      // We need to verify whether badges icon is custom or default, so we can check for it in the template
+      item.badge.isCustomIcon =
+        item.badge.icon !== undefined &&
+        this.iconRegistryService.getIcon(item.badge.icon) !== undefined;
+    });
+
     const checkedItemIndex = this.items.findIndex((item) => item.checked);
     if (checkedItemIndex > -1) {
       console.warn(

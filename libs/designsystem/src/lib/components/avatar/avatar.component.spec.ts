@@ -1,6 +1,6 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
-import { DesignTokenHelper, ThemeColorExtended, ColorHelper } from '@kirbydesign/core';
+import { ColorHelper, DesignTokenHelper, ThemeColorExtended } from '@kirbydesign/core';
 
 import { ThemeColorDirective } from '../../directives';
 import { TestHelper } from '../../testing/test-helper';

@@ -1,13 +1,13 @@
-@import '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/utils';
 
 :host {
-  --kirby-card-main-background-color: #{get-color('white')};
-  --kirby-card-main-color: #{get-color('white-contrast')};
-  --kirby-card-footer-background-color: #{get-color('white')};
-  --kirby-card-footer-color: #{get-color('white-contrast')};
+  --kirby-card-main-background-color: #{utils.get-color('white')};
+  --kirby-card-main-color: #{utils.get-color('white-contrast')};
+  --kirby-card-footer-background-color: #{utils.get-color('white')};
+  --kirby-card-footer-color: #{utils.get-color('white-contrast')};
 
-  border-radius: $border-radius;
-  box-shadow: get-elevation(2);
+  border-radius: utils.$border-radius;
+  box-shadow: utils.get-elevation(2);
   color: var(--kirby-card-main-color);
   background-color: var(--kirby-card-main-background-color);
   display: flex;
@@ -15,33 +15,38 @@
   justify-content: space-between;
   overflow: hidden;
   position: relative;
-  z-index: z('default');
+  z-index: utils.z('default');
   width: var(--kirby-card-width, auto);
 
   .content-wrapper {
     &.padding {
-      padding: size('s');
+      padding: utils.size('s');
     }
   }
 
   &.highlighted {
-    box-shadow: get-elevation(4);
+    box-shadow: utils.get-elevation(4);
   }
 
   &.flat {
     box-shadow: none;
   }
+
+  &[role='button'] {
+    cursor: pointer;
+    outline-offset: utils.size('xxxxs');
+  }
 }
 
 :host-context(.swiper-slide-active) {
-  box-shadow: get-elevation(4);
+  box-shadow: utils.get-elevation(4);
   transition: all 0.5s;
   transform: translateY(-3px);
 }
 
-@each $color-name, $color-value in $main-colors {
+@each $color-name, $color-value in utils.$main-colors {
   :host(.#{$color-name}) {
-    --kirby-card-main-background-color: #{get-color($color-name)};
-    --kirby-card-main-color: #{get-color($color-name + '-contrast')};
+    --kirby-card-main-background-color: #{utils.get-color($color-name)};
+    --kirby-card-main-color: #{utils.get-color($color-name + '-contrast')};
   }
 }

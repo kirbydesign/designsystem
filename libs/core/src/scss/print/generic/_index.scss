@@ -1,4 +1,4 @@
-@import 'colors';
-@import 'page';
-@import 'reset';
-@import 'typography';
+@forward 'colors';
+@forward 'page';
+@forward 'reset';
+@forward 'typography';
