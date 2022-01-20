@@ -5,23 +5,23 @@
 @use '../utils';
 @use '../themes/colors';
 
-@mixin apply-hover() {
-  @include utils.hover() {
-    @content;
-  }
-}
+// @mixin apply-hover() {
+//   @include utils.hover() {
+//     @content;
+//   }
+// }
 
-@function get-hover-color($variant, $lightness: 0%) {
-  // TODO: Verify parameter validity?
+// @function get-hover-color($variant, $lightness: 0%) {
+//   // TODO: Verify parameter validity?
 
-  // TODO: lightness should be defined by design tokens - default to the most common
-  // Could be "loudness" or something like that
-  // Use get-lightness() defined below
+//   // TODO: lightness should be defined by design tokens - default to the most common
+//   // Could be "loudness" or something like that
+//   // Use get-lightness() defined below
 
-  $color: utils.get-color($variant, $getValueOnly: true, $map: colors.$kirby-colors);
+//   $color: utils.get-color($variant, $getValueOnly: true, $map: colors.$kirby-colors);
 
-  @return color.scale($color, $lightness: $lightness);
-}
+//   @return color.scale($color, $lightness: $lightness);
+// }
 
 /**
   TODO: Create helper function to determine if lightness should increase or decrease
@@ -47,66 +47,57 @@ $_default-loudness: 32%;
 /// @color-variant {string}
 /// @background-color-variant {string}
 /// @custom-property {string}
-@mixin apply-hover-with-params(
-  $loudness: $_default-loudness,
-  $background-color-variant,
-  $color-variant,
-  $property
-) {
-  // TODO: Verify parameter validity
+// @mixin apply-hover-with-params(
+//   $loudness: $_default-loudness,
+//   $background-color-variant,
+//   $color-variant,
+//   $property
+// ) {
+//   // TODO: Verify parameter validity
 
-  $_background: utils.get-color(
-    $variant: $background-color-variant,
-    $getValueOnly: true,
-    $map: colors.$kirby-colors,
-  );
+//   $_background: utils.get-color(
+//     $variant: $background-color-variant,
+//     $getValueOnly: true,
+//     $map: colors.$kirby-colors,
+//   );
 
-  $_foreground: utils.get-color(
-    $variant: $color-variant,
-    $getValueOnly: true,
-    $map: colors.$kirby-colors,
-  );
+//   $_foreground: utils.get-color(
+//     $variant: $color-variant,
+//     $getValueOnly: true,
+//     $map: colors.$kirby-colors,
+//   );
 
-  // Determine if lightness should increase or decrease
+//   // Determine if lightness should increase or decrease
 
-  // TODO: Should it be possible to invert relative lightness through configuration?
+//   // TODO: Should it be possible to invert relative lightness through configuration?
 
-  $relative-lightness: $loudness !default;
+//   $relative-lightness: $loudness !default;
 
-  @if color.lightness($_background) > color.lightness($_foreground) {
-    $relative-lightness: $relative-lightness * -1;
-  }
+//   @if color.lightness($_background) > color.lightness($_foreground) {
+//     $relative-lightness: $relative-lightness * -1;
+//   }
 
-  @include utils.hover() {
-    #{$property}: #{color.scale($_background, $lightness: $relative-lightness)};
-  }
-}
+//   @include utils.hover() {
+//     #{$property}: #{color.scale($_background, $lightness: $relative-lightness)};
+//   }
+// }
 
 // -----------------------------------------------------------------------------
 
-@mixin apply-hover-with-color-params(
-  $loudness: $_default-loudness,
-  $background-color,
-  $color,
-  $property
-) {
-  @debug meta.inspect(color.lightness($background-color));
+@mixin apply-hover($background-color, $color, $loudness: $_default-loudness, $property) {
   // TODO: Verify parameter validity
-  // $_background: utils.get-color(
-  //   $variant: $background-color,
-  //   $getValueOnly: true,
-  //   $map: colors.$kirby-colors,
-  // );
-  // $_foreground: utils.get-color(
-  //   $variant: $color,
-  //   $getValueOnly: true,
-  //   $map: colors.$kirby-colors,
-  // );
+
+  // TODO: Default values for parameters ($color: kirby-black?)
+
   // Determine if lightness should increase or decrease
-  // TODO: Should it be possible to invert relative lightness through configuration?
   $relative-lightness: $loudness !default;
 
-  // TODO: This may not hold true if $background-color is transparent
+  // TODO: Should it be possible to invert relative lightness through configuration?
+
+  @debug '#{$background-color} lightness = #{color.lightness($background-color)}';
+  // If $background-color is transparent this condition will not work.
+  // The color transparent is defined as black with 100% transparency.
+  // TODO: Determine how to handle transparent background
   @if color.lightness($background-color) > color.lightness($color) {
     $relative-lightness: $relative-lightness * -1;
   }
