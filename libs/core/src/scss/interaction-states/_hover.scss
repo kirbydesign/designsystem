@@ -5,84 +5,8 @@
 @use '../utils';
 @use '../themes/colors';
 
-// @mixin apply-hover() {
-//   @include utils.hover() {
-//     @content;
-//   }
-// }
-
-// @function get-hover-color($variant, $lightness: 0%) {
-//   // TODO: Verify parameter validity?
-
-//   // TODO: lightness should be defined by design tokens - default to the most common
-//   // Could be "loudness" or something like that
-//   // Use get-lightness() defined below
-
-//   $color: utils.get-color($variant, $getValueOnly: true, $map: colors.$kirby-colors);
-
-//   @return color.scale($color, $lightness: $lightness);
-// }
-
-/**
-  TODO: Create helper function to determine if lightness should increase or decrease
-
-  - Will need to know both background and foreground colors
-
-  @function get-lightness($foreground-color: black, $background-color: white, $loudness) {
-    $lightness: 0%;
-    // $lightness must be calculated based on $loudness
-
-    // if contrast bla bla bla
-    // then positive lightness
-    // else negative lightness
-    @return $lightness;
-  }
-*/
-
-// -----------------------------------------------------------------------------
-
 // TODO: Create design tokens for "loudness"
 $_default-loudness: 32%;
-
-/// @color-variant {string}
-/// @background-color-variant {string}
-/// @custom-property {string}
-// @mixin apply-hover-with-params(
-//   $loudness: $_default-loudness,
-//   $background-color-variant,
-//   $color-variant,
-//   $property
-// ) {
-//   // TODO: Verify parameter validity
-
-//   $_background: utils.get-color(
-//     $variant: $background-color-variant,
-//     $getValueOnly: true,
-//     $map: colors.$kirby-colors,
-//   );
-
-//   $_foreground: utils.get-color(
-//     $variant: $color-variant,
-//     $getValueOnly: true,
-//     $map: colors.$kirby-colors,
-//   );
-
-//   // Determine if lightness should increase or decrease
-
-//   // TODO: Should it be possible to invert relative lightness through configuration?
-
-//   $relative-lightness: $loudness !default;
-
-//   @if color.lightness($_background) > color.lightness($_foreground) {
-//     $relative-lightness: $relative-lightness * -1;
-//   }
-
-//   @include utils.hover() {
-//     #{$property}: #{color.scale($_background, $lightness: $relative-lightness)};
-//   }
-// }
-
-// -----------------------------------------------------------------------------
 
 @mixin apply-hover($background-color, $color, $loudness: $_default-loudness, $property) {
   // TODO: Verify parameter validity

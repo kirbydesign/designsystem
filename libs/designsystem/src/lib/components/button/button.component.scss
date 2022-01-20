@@ -80,43 +80,21 @@ $button-width: (
   --kirby-button-background-color: #{utils.get-color('primary')};
   --kirby-button-color: #{utils.get-color('primary-contrast')};
 
-  // ---------------------------------------------------------------------------
-  // $_config: (
-  //   'color-variant': 'primary-contrast',
-  //   'background-color-variant': 'primary',
-  //   'property': '--kirby-button-background-color',
-  // );
-
-  // @include state.apply-hover-with-params($_config...);
-  // ---------------------------------------------------------------------------
-
-  // ---------------------------------------------------------------------------
   @include state.apply-hover(
     $background-color: utils.get-color($variant: 'primary', $getValueOnly: true),
     $color: utils.get-color($variant: 'primary-contrast', $getValueOnly: true),
     $property: '--kirby-button-background-color'
   );
-  // ---------------------------------------------------------------------------
-
-  // @include state.apply-hover() {
-  //   --kirby-button-background-color: #{state.get-hover-color('primary', $lightness: -8%)};
-  // }
 
   &.destructive {
     --kirby-button-background-color: #{utils.get-color('danger')};
     --kirby-button-color: #{utils.get-color('danger-contrast')};
 
-    // ---------------------------------------------------------------------------
     @include state.apply-hover(
       $background-color: utils.get-color($variant: 'danger', $getValueOnly: true),
       $color: utils.get-color($variant: 'danger-contrast', $getValueOnly: true),
       $property: '--kirby-button-background-color'
     );
-    // ---------------------------------------------------------------------------
-
-    // @include state.apply-hover() {
-    //   --kirby-button-background-color: #{state.get-hover-color('danger', $lightness: -8%)};
-    // }
   }
 }
 
@@ -130,33 +108,15 @@ $button-width: (
     $property: '--kirby-button-background-color'
   );
 
-  // @include state.apply-hover() {
-  //   --kirby-button-background-color: #{state.get-hover-color('white', $lightness: -8%)};
-  // }
-
   &.destructive {
     --kirby-button-background-color: #{utils.get-color('light')};
     --kirby-button-color: #{utils.get-color('danger')};
-
-    // ---------------------------------------------------------------------------
-    // $_config: (
-    //   'color-variant': 'danger',
-    //   'background-color-variant': 'light',
-    //   'property': '--kirby-button-background-color',
-    // );
-
-    // @include state.apply-hover-with-params($_config...);
-    // ---------------------------------------------------------------------------
 
     @include state.apply-hover(
       $background-color: utils.get-color($variant: 'light', $getValueOnly: true),
       $color: utils.get-color($variant: 'danger', $getValueOnly: true),
       $property: '--kirby-button-background-color'
     );
-
-    // @include state.apply-hover() {
-    //   --kirby-button-background-color: #{state.get-hover-color('light', $lightness: -8%)};
-    // }
   }
 }
 
@@ -166,37 +126,11 @@ $button-width: (
   --kirby-button-color: #{utils.get-color('black')};
   --kirby-button-border-color: #{utils.get-color('medium')};
 
-  // ---------------------------------------------------------------------------
-  // $_config: (
-  //   'color-variant': 'black',
-  //   'background-color-variant': 'transparent',
-  //   // WILL FAIL
-  //     'property': '--kirby-button-background-color',
-  // );
-
-  // @include state.apply-hover-with-params($_config...);
-
-  // $_config: (
-  //   'color':
-  //     utils.get-color(
-  //       $variant: 'black',
-  //       $getValueOnly: true,
-  //     ),
-  //   'background-color': transparent,
-  //   'property': '--kirby-button-background-color',
-  // );
-
-  // @include state.apply-hover-with-color-params($_config...);
   @include state.apply-hover(
     $color: utils.get-color($variant: 'black', $getValueOnly: true),
     $background-color: transparent,
     $property: '--kirby-button-background-color'
   );
-  // ---------------------------------------------------------------------------
-
-  // @include state.apply-hover() {
-  //   --kirby-button-background-color: #{state.get-hover-color('light', $lightness: -4%)};
-  // }
 
   &.destructive {
     --kirby-button-color: #{utils.get-color('danger')};
@@ -321,15 +255,6 @@ $button-width: (
       --kirby-button-background-color: #{utils.get-color('white')};
       --kirby-button-color: #{utils.get-color('white-contrast')};
 
-      // ---------------------------------------------------------------------------
-      // $_config: (
-      //   'color-variant': 'black-contrast',
-      //   'background-color-variant': 'black',
-      //   'property': '--kirby-button-background-color',
-      // );
-
-      // @include state.apply-hover-with-params($_config...);
-      // ---------------------------------------------------------------------------
       @include state.apply-hover(
         $background-color: utils.get-color($variant: 'black', $getValueOnly: true),
         $color: utils.get-color($variant: 'black-contrast', $getValueOnly: true),
@@ -425,16 +350,6 @@ $button-width: (
     &.#{$color-name} {
       --kirby-button-background-color: #{utils.get-color($color-name)};
       --kirby-button-color: #{utils.get-color($color-name + '-contrast')};
-
-      // ---------------------------------------------------------------------------
-      // $_config: (
-      //   'color-variant': '#{$color-name}-contrast',
-      //   'background-color-variant': '#{$color-name}',
-      //   'property': '--kirby-button-background-color',
-      // );
-
-      // @include state.apply-hover-with-params($_config...);
-      // ---------------------------------------------------------------------------
 
       @include state.apply-hover(
         $background-color: utils.get-color($variant: '#{$color-name}', $getValueOnly: true),
