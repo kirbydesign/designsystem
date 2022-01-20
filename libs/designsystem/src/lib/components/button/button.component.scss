@@ -229,6 +229,7 @@ $button-width: (
   // ie., when no other hover styles are specified
   // TODO: Decide how to handle default hover styles
   // @include interaction-state.apply-hover();
+  // TODO: Maybe the default is not necessary at all
 
   &:active {
     opacity: 0.8;
