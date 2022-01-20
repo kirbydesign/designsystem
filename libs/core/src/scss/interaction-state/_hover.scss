@@ -29,6 +29,9 @@ $_default-loudness: 32%;
   @include utils.hover() {
     #{$property}: #{color.scale($background-color, $lightness: $relative-lightness)};
 
+    // TODO: Transitions should be controlled by design tokens
+    transition: background-color 200ms linear;
+
     @content;
   }
 }

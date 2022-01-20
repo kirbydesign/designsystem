@@ -151,15 +151,12 @@ $button-width: (
   color: var(--kirby-button-color, inherit);
   border-radius: utils.$border-radius-round;
   box-sizing: border-box; // Ensure border is not added to button height
-  cursor: pointer;
+  // TODO: Move cursor declaration to _hover partial
+  // cursor: pointer;
   display: inline-flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  // TODO: Shouldn't transitions be controlled by design tokens?
-  // TODO: Move transition declaration to _hover partial
-  transition: background-color 200ms linear;
-  // transition: opacity 200ms linear;
   user-select: none;
   vertical-align: middle;
   white-space: nowrap;
