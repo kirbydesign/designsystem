@@ -28,5 +28,7 @@ $_default-loudness: 32%;
 
   @include utils.hover() {
     #{$property}: #{color.scale($background-color, $lightness: $relative-lightness)};
+
+    @content;
   }
 }
