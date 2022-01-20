@@ -32,10 +32,10 @@ nav {
   @include utils.media('>=large') {
     display: block;
   }
-  //  margin: auto 0;
 
   ul {
     display: flex;
+    column-gap: utils.size('xxxl');
     list-style: none;
     padding: 0;
     margin: 0;
@@ -43,14 +43,6 @@ nav {
 
     li {
       margin-block-start: 0;
-    }
-
-    a {
-      display: flex;
-      align-items: center;
-      height: 38px;
-      padding: 0 24px;
-      margin: 5px;
     }
   }
 }

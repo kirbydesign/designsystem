@@ -273,6 +273,68 @@ describe('ButtonComponent', () => {
       });
     });
 
+    describe('when configured with attentionlevel 4', () => {
+      beforeEach(() => {
+        spectator.component.attentionLevel = '4';
+        spectator.detectChanges();
+      });
+
+      it('should render with no background-color', () => {
+        expect(element).toHaveComputedStyle({ 'background-color': 'transparent' });
+      });
+
+      it('should render with correct border', () => {
+        expect(element).toHaveComputedStyle({
+          'border-color': getColor('medium'),
+          'border-width': '1px',
+          'border-style': 'solid',
+        });
+      });
+
+      it('should render with correct color', () => {
+        expect(element).toHaveComputedStyle({
+          color: getColor('black'),
+        });
+      });
+
+      describe('and is destructive', () => {
+        beforeEach(() => {
+          spectator.component.isDestructive = true;
+          spectator.detectChanges();
+        });
+
+        it('should render with correct background-color', () => {
+          expect(element).toHaveComputedStyle({ 'background-color': 'transparent' });
+        });
+
+        it('should render with correct border-color', () => {
+          expect(element).toHaveComputedStyle({
+            'border-color': getColor('medium'),
+          });
+        });
+
+        it('should render with correct color', () => {
+          expect(element).toHaveComputedStyle({
+            color: getColor('danger'),
+          });
+        });
+      });
+
+      describe('and is disabled', () => {
+        beforeEach(() => {
+          element.disabled = true;
+        });
+
+        it('should render with transparent border', () => {
+          expect(element).toHaveComputedStyle({
+            'border-width': '1px',
+            'border-style': 'solid',
+            'border-color': 'transparent',
+          });
+        });
+      });
+    });
+
     describe('when configured with no decoration', () => {
       beforeEach(() => {
         spectator.component.noDecoration = true;

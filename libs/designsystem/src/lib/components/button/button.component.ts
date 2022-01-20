@@ -18,7 +18,7 @@ export enum ButtonSize {
 }
 
 const ATTENTION_LEVEL_4_DEPRECATION_WARNING =
-  'Deprecation warning: The "kirby-button" support for using input property "attentionLevel" with the value "4" will be removed in a future release of Kirby designsystem.';
+  'Deprecation warning: The "kirby-button" support for using input property "attentionLevel" with the value "4" will be removed in a future release of Kirby designsystem. Usage of attention-level 4 will forcibly be rendered as a attention-level 3 button.';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -33,8 +33,24 @@ export class ButtonComponent implements AfterContentInit {
   isAttentionLevel2: boolean;
   @HostBinding('class.attention-level3')
   isAttentionLevel3: boolean;
+  @Input() set attentionLevel(level: '1' | '2' | '3' | '4') {
+    this.isAttentionLevel1 = level === '1';
+    this.isAttentionLevel2 = level === '2';
+    this.isAttentionLevel3 = level === '3' || level === '4';
+    if (level === '4') {
+      console.warn(ATTENTION_LEVEL_4_DEPRECATION_WARNING);
+    }
+  }
+
   @HostBinding('class.no-decoration')
   hasNoDecoration = false;
+  @Input()
+  set noDecoration(enable: boolean) {
+    this.hasNoDecoration = enable;
+    this.isAttentionLevel1 = !enable;
+    this.isAttentionLevel2 = false;
+    this.isAttentionLevel3 = false;
+  }
 
   @HostBinding('class.destructive')
   destructive: boolean = false; // Default
@@ -62,22 +78,6 @@ export class ButtonComponent implements AfterContentInit {
   @HostBinding('class')
   get _cssClass() {
     return [this.themeColor, this.size].filter((cssClass) => !!cssClass);
-  }
-
-  @Input() set attentionLevel(level: '1' | '2' | '3' | '4') {
-    this.isAttentionLevel1 = level === '1';
-    this.isAttentionLevel2 = level === '2';
-    this.isAttentionLevel3 = level === '3' || level === '4';
-    if (level === '4') {
-      console.warn(ATTENTION_LEVEL_4_DEPRECATION_WARNING);
-    }
-  }
-
-  @Input() set noDecoration(enable: boolean) {
-    this.hasNoDecoration = enable;
-    this.isAttentionLevel1 = !this.hasNoDecoration;
-    this.isAttentionLevel2 = false;
-    this.isAttentionLevel3 = false;
   }
 
   @Input() set isDestructive(state: boolean) {

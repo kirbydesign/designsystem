@@ -399,6 +399,17 @@ describe('ButtonComponent configured with icon only', () => {
         );
       });
     });
+
+    describe('and configured with noDecoration', () => {
+      it('should render with correct width and height for noDecoration', () => {
+        spectator.component.noDecoration = true;
+        spectator.detectChanges();
+        expect(element).toHaveComputedStyle({
+          width: iconButtonSizeLG,
+          height: iconButtonSizeLG,
+        });
+      });
+    });
   });
 });
 
