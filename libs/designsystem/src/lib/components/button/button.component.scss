@@ -1,6 +1,6 @@
 @use "sass:map";
 @use '~@kirbydesign/core/src/scss/utils';
-@use '~@kirbydesign/core/src/scss/interaction-states' as state;
+@use '~@kirbydesign/core/src/scss/interaction-state';
 
 $button-width: (
   sm: 44px,
@@ -80,7 +80,7 @@ $button-width: (
   --kirby-button-background-color: #{utils.get-color('primary')};
   --kirby-button-color: #{utils.get-color('primary-contrast')};
 
-  @include state.apply-hover(
+  @include interaction-state.apply-hover(
     $background-color: utils.get-color($variant: 'primary', $getValueOnly: true),
     $color: utils.get-color($variant: 'primary-contrast', $getValueOnly: true),
     $property: '--kirby-button-background-color'
@@ -90,7 +90,7 @@ $button-width: (
     --kirby-button-background-color: #{utils.get-color('danger')};
     --kirby-button-color: #{utils.get-color('danger-contrast')};
 
-    @include state.apply-hover(
+    @include interaction-state.apply-hover(
       $background-color: utils.get-color($variant: 'danger', $getValueOnly: true),
       $color: utils.get-color($variant: 'danger-contrast', $getValueOnly: true),
       $property: '--kirby-button-background-color'
@@ -102,7 +102,7 @@ $button-width: (
   --kirby-button-background-color: #{utils.get-color('black')};
   --kirby-button-color: #{utils.get-color('black-contrast')};
 
-  @include state.apply-hover(
+  @include interaction-state.apply-hover(
     $background-color: utils.get-color($variant: 'white', $getValueOnly: true),
     $color: utils.get-color($variant: 'white-contrast', $getValueOnly: true),
     $property: '--kirby-button-background-color'
@@ -112,7 +112,7 @@ $button-width: (
     --kirby-button-background-color: #{utils.get-color('light')};
     --kirby-button-color: #{utils.get-color('danger')};
 
-    @include state.apply-hover(
+    @include interaction-state.apply-hover(
       $background-color: utils.get-color($variant: 'light', $getValueOnly: true),
       $color: utils.get-color($variant: 'danger', $getValueOnly: true),
       $property: '--kirby-button-background-color'
@@ -126,7 +126,7 @@ $button-width: (
   --kirby-button-color: #{utils.get-color('black')};
   --kirby-button-border-color: #{utils.get-color('medium')};
 
-  @include state.apply-hover(
+  @include interaction-state.apply-hover(
     $color: utils.get-color($variant: 'black', $getValueOnly: true),
     $background-color: transparent,
     $property: '--kirby-button-background-color'
@@ -135,7 +135,7 @@ $button-width: (
   &.destructive {
     --kirby-button-color: #{utils.get-color('danger')};
 
-    @include state.apply-hover(
+    @include interaction-state.apply-hover(
       $background-color: utils.get-color($variant: 'danger', $getValueOnly: true),
       $color: utils.get-color($variant: 'danger-contrast', $getValueOnly: true),
       $property: '--kirby-button-background-color'
@@ -233,7 +233,7 @@ $button-width: (
   // This is the hover styles that apply in general,
   // ie., when no other hover styles are specified
   // TODO: Decide how to handle default hover styles
-  // @include state.apply-hover();
+  // @include interaction-state.apply-hover();
 
   &:active {
     opacity: 0.8;
@@ -255,7 +255,7 @@ $button-width: (
       --kirby-button-background-color: #{utils.get-color('white')};
       --kirby-button-color: #{utils.get-color('white-contrast')};
 
-      @include state.apply-hover(
+      @include interaction-state.apply-hover(
         $background-color: utils.get-color($variant: 'black', $getValueOnly: true),
         $color: utils.get-color($variant: 'black-contrast', $getValueOnly: true),
         $property: '--kirby-button-background-color'
@@ -288,7 +288,7 @@ $button-width: (
   --kirby-button-background-color: #{utils.get-color('success')};
   --kirby-button-color: #{utils.get-color('success-contrast')};
 
-  @include state.apply-hover(
+  @include interaction-state.apply-hover(
     $background-color: utils.get-color($variant: 'success', $getValueOnly: true),
     $color: utils.get-color($variant: 'success-contrast', $getValueOnly: true),
     $property: '--kirby-button-background-color'
@@ -351,7 +351,7 @@ $button-width: (
       --kirby-button-background-color: #{utils.get-color($color-name)};
       --kirby-button-color: #{utils.get-color($color-name + '-contrast')};
 
-      @include state.apply-hover(
+      @include interaction-state.apply-hover(
         $background-color: utils.get-color($variant: '#{$color-name}', $getValueOnly: true),
         $color: utils.get-color($variant: '#{$color-name}-contrast', $getValueOnly: true),
         $property: '--kirby-button-background-color'
