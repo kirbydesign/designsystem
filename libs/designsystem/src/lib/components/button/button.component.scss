@@ -151,8 +151,6 @@ $button-width: (
   color: var(--kirby-button-color, inherit);
   border-radius: utils.$border-radius-round;
   box-sizing: border-box; // Ensure border is not added to button height
-  // TODO: Move cursor declaration to _hover partial
-  // cursor: pointer;
   display: inline-flex;
   flex-direction: row;
   align-items: center;
