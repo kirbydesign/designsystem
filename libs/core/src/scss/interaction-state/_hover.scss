@@ -17,16 +17,22 @@ $_default-loudness: 32%;
     @error "$color must be a valid CSS color value. See https://developer.mozilla.org/en-US/docs/Web/CSS/color_value";
   }
 
-  // Determine if lightness should increase or decrease
+  // ---------------------------------------------------------------------------
+  // Determine if lightness should increase or decrease (default is increase)
+  //
+  // When background color is transparent assume that the canvas underneath is
+  // a light color. We cannot really determine if lightness should increase or
+  // decrease, but this is a best guess. It's possible to work around by passing
+  // a $background-color (or $color) parameter with a value other than
+  // transparent.
+  //
+  // Sidenote: The color transparent is defined as black with 0% opacity, i.e.,
+  // 100% transparent. Often declared as rgba(0, 0, 0, 0%) in browsers.
+  // ---------------------------------------------------------------------------
   $relative-lightness: $loudness !default;
 
-  // TODO: Should it be possible to invert relative lightness through configuration?
-
-  @debug '#{$background-color} lightness = #{color.lightness($background-color)}';
-  // If $background-color is transparent this condition will not work.
-  // The color transparent is defined as black with 0% opacity (=> 100% transparency)
-  // TODO: Determine how to handle transparent background
   @if color.lightness($background-color) > color.lightness($color) {
+    // Decrease relative lightness
     $relative-lightness: $relative-lightness * -1;
   }
 
