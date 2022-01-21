@@ -5,8 +5,9 @@
 @use '../utils';
 @use '../themes/colors';
 
-// TODO: Create design tokens for "loudness"
-$_default-loudness: 32%;
+// TODO: Accessibility - Respect user preferences.
+// Allow increased "loudness" depending on users' settings
+$_default-loudness: utils.get-loudness('loud');
 
 @mixin apply-hover($background-color, $color, $loudness: $_default-loudness, $property) {
   @if meta.type-of($background-color) != color {
