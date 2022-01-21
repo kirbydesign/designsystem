@@ -9,9 +9,13 @@
 $_default-loudness: 32%;
 
 @mixin apply-hover($background-color, $color, $loudness: $_default-loudness, $property) {
-  // TODO: Verify parameter validity
+  @if meta.type-of($background-color) != color {
+    @error "$background-color must be a valid CSS color value. See https://developer.mozilla.org/en-US/docs/Web/CSS/color_value";
+  }
 
-  // TODO: Default values for parameters ($color: kirby-black?)
+  @if meta.type-of($color) != color {
+    @error "$color must be a valid CSS color value. See https://developer.mozilla.org/en-US/docs/Web/CSS/color_value";
+  }
 
   // Determine if lightness should increase or decrease
   $relative-lightness: $loudness !default;
@@ -20,7 +24,7 @@ $_default-loudness: 32%;
 
   @debug '#{$background-color} lightness = #{color.lightness($background-color)}';
   // If $background-color is transparent this condition will not work.
-  // The color transparent is defined as black with 100% transparency.
+  // The color transparent is defined as black with 0% opacity (=> 100% transparency)
   // TODO: Determine how to handle transparent background
   @if color.lightness($background-color) > color.lightness($color) {
     $relative-lightness: $relative-lightness * -1;
