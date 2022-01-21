@@ -37,9 +37,9 @@ $_default-loudness: 32%;
   }
 
   cursor: pointer;
-
-  // TODO: Transitions should be controlled by design tokens
-  transition: background-color 2000ms linear;
+  transition-property: background-color;
+  transition-duration: utils.get-transition-duration('quick');
+  transition-timing-function: utils.get-transition-easing('static');
 
   @include utils.hover() {
     #{$property}: #{color.scale($background-color, $lightness: $relative-lightness)};
