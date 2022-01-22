@@ -18,7 +18,7 @@ export enum ButtonSize {
 }
 
 const ATTENTION_LEVEL_4_DEPRECATION_WARNING =
-  'Deprecation warning: The "kirby-button" support for using input property "attentionLevel" with the value "4" will be removed in a future release of Kirby designsystem. Usage of attention-level 4 will forcibly be rendered as a attention-level 3 button.';
+  'Deprecation warning: The "kirby-button" support for using input property "attentionLevel" with the value "4" will be removed in a future release of Kirby designsystem. While deprecated, all attention-level 4 buttons will be rendered as attention-level 3.';
 
 @Component({
   // tslint:disable-next-line:component-selector
