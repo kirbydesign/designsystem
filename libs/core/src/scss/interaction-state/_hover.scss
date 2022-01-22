@@ -7,9 +7,9 @@
 
 // TODO: Accessibility - Respect user preferences.
 // Allow increased "loudness" depending on users' settings
-$_default-loudness: utils.get-loudness('loud');
+$default-loudness: utils.get-loudness('loud');
 
-@mixin apply-hover($background-color, $color, $loudness: $_default-loudness, $property) {
+@mixin apply-hover($background-color, $color, $property, $loudness: null) {
   @if meta.type-of($background-color) != color {
     @error "$background-color must be a valid CSS color value. See https://developer.mozilla.org/en-US/docs/Web/CSS/color_value";
   }
@@ -30,7 +30,11 @@ $_default-loudness: utils.get-loudness('loud');
   // Sidenote: The color transparent is defined as black with 0% opacity, i.e.,
   // 100% transparent. Often declared as rgba(0, 0, 0, 0%) in browsers.
   // ---------------------------------------------------------------------------
-  $relative-lightness: $loudness !default;
+  $relative-lightness: $default-loudness !default;
+
+  @if $loudness {
+    $relative-lightness: $loudness;
+  }
 
   @if color.lightness($background-color) > color.lightness($color) {
     // Decrease relative lightness

@@ -77,12 +77,12 @@ $button-width: (
 // }
 // Mixin parameters must be a named color variant. CSS color values won't work.
 // See libs/core/src/scss/themes/_colors.scss
-@mixin _button-hover($background-color-variant, $color-variant) {
-  // TODO: Allow variable loudness (optional)
+@mixin _button-hover($background-color-variant, $color-variant, $loudness: null) {
   @include interaction-state.apply-hover(
     $background-color: utils.get-color($variant: $background-color-variant, $getValueOnly: true),
     $color: utils.get-color($variant: $color-variant, $getValueOnly: true),
-    $property: '--kirby-button-background-color'
+    $property: '--kirby-button-background-color',
+    $loudness: $loudness
   );
 }
 
@@ -104,13 +104,13 @@ $button-width: (
   --kirby-button-background-color: #{utils.get-color('black')};
   --kirby-button-color: #{utils.get-color('black-contrast')};
 
-  @include _button-hover('white', 'white-contrast');
+  @include _button-hover('white', 'white-contrast', utils.get-loudness('faint'));
 
   &.destructive {
     --kirby-button-background-color: #{utils.get-color('light')};
     --kirby-button-color: #{utils.get-color('danger')};
 
-    @include _button-hover('light', 'danger');
+    @include _button-hover('light', 'danger', utils.get-loudness('faint'));
   }
 }
 
