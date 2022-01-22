@@ -224,13 +224,6 @@ $button-width: (
     --kirby-button-border-color: #{utils.$focus-ring-color};
   }
 
-  // TODO: Move to top of :host
-  // This is the hover styles that apply in general,
-  // ie., when no other hover styles are specified
-  // TODO: Decide how to handle default hover styles
-  // @include interaction-state.apply-hover();
-  // TODO: Maybe the default is not necessary at all
-
   &:active {
     opacity: 0.8;
   }
