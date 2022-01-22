@@ -19,7 +19,8 @@ $default-loudness: utils.get-loudness('loud');
   }
 
   // ---------------------------------------------------------------------------
-  // Determine if lightness should increase or decrease (default is increase)
+  // Determine if lightness should increase or decrease.
+  // The default is increase (a positive percentage).
   //
   // When background color is transparent assume that the canvas underneath is
   // a light color. We cannot really determine if lightness should increase or
@@ -47,6 +48,7 @@ $default-loudness: utils.get-loudness('loud');
   transition-timing-function: utils.get-transition-easing('static');
 
   @include utils.hover() {
+    // TODO: Accessibility - check that contrast is sufficient
     #{$property}: #{color.scale($background-color, $lightness: $relative-lightness)};
 
     @content;
