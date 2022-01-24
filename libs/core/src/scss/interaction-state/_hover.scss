@@ -1,9 +1,6 @@
 @use 'sass:color';
-@use 'sass:map';
 @use 'sass:meta';
-@use 'sass:string';
 @use '../utils';
-@use '../themes/colors';
 
 // TODO: Accessibility - Loudness must respect user preferences
 // See https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-contrast
