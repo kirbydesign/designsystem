@@ -200,6 +200,11 @@ $loading-overlay-backdrop-opacity: 0.8;
 ****************************************************************************/
 // TODO: These values (and names) are temporary. Awaiting UX decision.
 // E.g., 'extreme' and 'painful' could be 'very-loud' and 'extremely-loud'.
+//
+// Other source(s) for inspiraiton:
+//
+// - https://www.viget.com/articles/visual-loudness/
+// - https://viget.com/uploads/image/blog/visual-loudness-3.png
 $loudness-scale: (
   faint: 4%,
   quiet: 8%,
