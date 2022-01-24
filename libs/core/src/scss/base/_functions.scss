@@ -137,6 +137,7 @@
   color: $text-color;
 }
 
+// TODO: Move hover() mixin to libs/core/src/scss/interaction-state/_hover.scss
 /// Only apply the :hover selector and styles if pointer device can hover
 /// (effectively desktop/mouse devices):
 @mixin hover() {
