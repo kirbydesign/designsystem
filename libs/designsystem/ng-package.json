@@ -5,26 +5,27 @@
   "lib": {
     "entryFile": "src/index.ts",
     "umdModuleIds": {
-      "date-fns": "date-fns",
-      "date-fns-tz": "date-fns-tz",
-      "highcharts": "highcharts",
-      "highcharts/modules/annotations": "highcharts",
-      "highcharts/highstock": "highcharts/highstock",
       "@ionic/angular": "ionic",
+      "date-fns-tz": "date-fns-tz",
+      "date-fns": "date-fns",
+      "highcharts": "highcharts",
+      "highcharts/highstock": "highcharts/highstock",
+      "highcharts/modules/annotations": "highcharts",
       "inputmask/lib/inputmask": "inputmask"
     }
   },
   "allowedNonPeerDependencies": [
+    "@fontsource/roboto",
     "@ionic/angular",
     "@kirbydesign/core",
     "chart.js",
     "chartjs-adapter-date-fns",
     "chartjs-plugin-annotation",
     "chartjs-plugin-datalabels",
-    "highcharts",
-    "date-fns",
     "date-fns-tz",
-    "@fontsource/roboto",
+    "date-fns",
+    "highcharts",
+    "include-media",
     "inputmask",
     "ts-deepcopy"
   ]
