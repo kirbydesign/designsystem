@@ -4,23 +4,23 @@ import { VIRTUAL_SCROLL_STRATEGY } from '@angular/cdk/scrolling';
 import { Directive, forwardRef, Input, OnChanges, OnInit } from '@angular/core';
 import { fromEvent } from 'rxjs';
 
-import { WindowVirtualScrollStrategy } from './window-virtual-scroll.strategy';
+import { GenericEventVirtualScrollStrategy } from './window-virtual-scroll.strategy';
 
-const factory = (dir: WindowVirtualScrollDirective) => dir._scrollStrategy;
+const factory = (dir: KirbyPageVirtualScrollDirective) => dir._scrollStrategy;
 
 // This is an adapted version of the original CdkFixedSizeVirtualScroll
 // https://github.com/angular/components/blob/master/src/cdk/scrolling/fixed-size-virtual-scroll.ts
 @Directive({
-  selector: 'cdk-virtual-scroll-viewport[windowVirtualScrollStrategy]',
+  selector: 'cdk-virtual-scroll-viewport[kirbyPageVirtualScrollStrategy]',
   providers: [
     {
       provide: VIRTUAL_SCROLL_STRATEGY,
       useFactory: factory,
-      deps: [forwardRef(() => WindowVirtualScrollDirective)],
+      deps: [forwardRef(() => KirbyPageVirtualScrollDirective)],
     },
   ],
 })
-export class WindowVirtualScrollDirective implements OnChanges, OnInit {
+export class KirbyPageVirtualScrollDirective implements OnChanges, OnInit {
   observable$ = fromEvent(window, 'ionScroll');
   event: any;
 
@@ -66,7 +66,7 @@ export class WindowVirtualScrollDirective implements OnChanges, OnInit {
   _maxBufferPx = 200;
 
   /** The scroll strategy used by this directive. */
-  _scrollStrategy: WindowVirtualScrollStrategy = new WindowVirtualScrollStrategy(
+  _scrollStrategy = new GenericEventVirtualScrollStrategy(
     this.itemSizePx,
     this.minBufferPx,
     this.maxBufferPx,

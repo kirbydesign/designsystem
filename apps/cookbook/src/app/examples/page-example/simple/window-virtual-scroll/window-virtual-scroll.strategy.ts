@@ -3,7 +3,7 @@ import { CdkVirtualScrollViewport, FixedSizeVirtualScrollStrategy } from '@angul
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-export class WindowVirtualScrollStrategy {
+export class GenericEventVirtualScrollStrategy {
   private fixedSizeVirtualScrollStrategy: FixedSizeVirtualScrollStrategy;
   private readonly destroy = new Subject<void>();
   private destroy$: Observable<void>;
