@@ -26,7 +26,7 @@ export class GenericEventVirtualScrollStrategy extends FixedSizeVirtualScrollStr
     super.attach(viewport);
 
     this.observable$.pipe(takeUntil(this.destroy$)).subscribe(() => {
-      super['_updateRenderedRange']();
+      super.onContentScrolled();
     });
   }
 
