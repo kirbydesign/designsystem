@@ -3,8 +3,7 @@ import { CdkVirtualScrollViewport, FixedSizeVirtualScrollStrategy } from '@angul
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-export class GenericEventVirtualScrollStrategy {
-  private fixedSizeVirtualScrollStrategy: FixedSizeVirtualScrollStrategy;
+export class GenericEventVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy {
   private readonly destroy = new Subject<void>();
   private destroy$: Observable<void>;
 
@@ -16,11 +15,7 @@ export class GenericEventVirtualScrollStrategy {
     private getViewportSize: () => number,
     private measureScrollOffset: () => number
   ) {
-    this.fixedSizeVirtualScrollStrategy = new FixedSizeVirtualScrollStrategy(
-      itemSizePx,
-      minBufferPx,
-      maxBufferPx
-    );
+    super(itemSizePx, minBufferPx, maxBufferPx);
     this.destroy$ = this.destroy.asObservable();
   }
 
@@ -28,21 +23,20 @@ export class GenericEventVirtualScrollStrategy {
     viewport.getViewportSize = this.getViewportSize;
     viewport.measureScrollOffset = this.measureScrollOffset;
 
-    this.fixedSizeVirtualScrollStrategy.attach(viewport);
+    super.attach(viewport);
 
     this.observable$.pipe(takeUntil(this.destroy$)).subscribe(() => {
-      this.fixedSizeVirtualScrollStrategy['_updateRenderedRange']();
+      super['_updateRenderedRange']();
     });
   }
 
   detach() {
-    this.fixedSizeVirtualScrollStrategy.detach();
-
+    super.detach();
     this.destroy.next();
     this.destroy.complete();
   }
 
   updateItemAndBufferSize(itemSize: number, minBufferPx: number, maxBufferPx: number) {
-    this.fixedSizeVirtualScrollStrategy.updateItemAndBufferSize(itemSize, minBufferPx, maxBufferPx);
+    super.updateItemAndBufferSize(itemSize, minBufferPx, maxBufferPx);
   }
 }
