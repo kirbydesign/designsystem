@@ -38,6 +38,6 @@ export class GenericEventVirtualScrollStrategy extends AutoSizeVirtualScrollStra
   }
 
   /*  updateItemAndBufferSize(itemSize: number, minBufferPx: number, maxBufferPx: number) {
-    //super.updateItemAndBufferSize(itemSize, minBufferPx, maxBufferPx);
+    super.updateItemAndBufferSize(itemSize, minBufferPx, maxBufferPx);
   }*/
 }

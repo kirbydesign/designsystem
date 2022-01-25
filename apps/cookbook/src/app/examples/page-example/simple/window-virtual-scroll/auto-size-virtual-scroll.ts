@@ -31,7 +31,7 @@ export class ItemSizeAverager {
   private _defaultItemSize: number;
 
   /** @param defaultItemSize The default size to use for items when no data is available. */
-  constructor(defaultItemSize = 50) {
+  constructor(defaultItemSize = 85) {
     this._defaultItemSize = defaultItemSize;
     this._averageItemSize = defaultItemSize;
   }
@@ -137,6 +137,11 @@ export class AutoSizeVirtualScrollStrategy implements VirtualScrollStrategy {
 
   /** @docs-private Implemented as part of VirtualScrollStrategy. */
   onContentScrolled() {
+    console.log(
+      this._lastScrollOffset,
+      this._lastRenderedContentSize,
+      this._lastRenderedContentOffset
+    );
     if (this._viewport) {
       this._updateRenderedContentAfterScroll();
     }

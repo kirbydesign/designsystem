@@ -65,12 +65,14 @@ export class KirbyPageVirtualScrollDirective implements OnInit {
   }
   _maxBufferPx = 200;
 
-  /** The scroll strategy used by this directive. */
+  /* The scroll strategy used by this directive. */
   _scrollStrategy = new GenericEventVirtualScrollStrategy(
     this.minBufferPx,
     this.maxBufferPx,
     this.observable$,
-    () => window.innerHeight,
+    () => {
+      return window.innerHeight;
+    },
     () => (this.event ? this.event.detail.scrollTop : window.pageYOffset)
   );
 
