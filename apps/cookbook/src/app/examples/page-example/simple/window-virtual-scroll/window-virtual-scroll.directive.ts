@@ -20,7 +20,7 @@ const factory = (dir: KirbyPageVirtualScrollDirective) => dir._scrollStrategy;
     },
   ],
 })
-export class KirbyPageVirtualScrollDirective implements OnChanges, OnInit {
+export class KirbyPageVirtualScrollDirective implements OnInit {
   observable$ = fromEvent(window, 'ionScroll');
   event: any;
 
@@ -67,7 +67,6 @@ export class KirbyPageVirtualScrollDirective implements OnChanges, OnInit {
 
   /** The scroll strategy used by this directive. */
   _scrollStrategy = new GenericEventVirtualScrollStrategy(
-    this.itemSizePx,
     this.minBufferPx,
     this.maxBufferPx,
     this.observable$,
@@ -75,11 +74,11 @@ export class KirbyPageVirtualScrollDirective implements OnChanges, OnInit {
     () => (this.event ? this.event.detail.scrollTop : window.pageYOffset)
   );
 
-  ngOnChanges() {
+  /*  ngOnChanges() {
     this._scrollStrategy.updateItemAndBufferSize(
       this.itemSizePx,
       this.minBufferPx,
       this.maxBufferPx
     );
-  }
+  }*/
 }

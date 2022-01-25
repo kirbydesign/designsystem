@@ -1,20 +1,8 @@
-<kirby-page title="Virtual Scroll Test">
-  <kirby-page-content>
-    <h1>This is an example of content in page</h1>
-    <p>
-      The min and max buffer values depends on how much content is before the viewport. More
-      experimentation is needed, but this is a start.
-    </p>
-    <cdk-virtual-scroll-viewport
-      kirbyPageVirtualScrollStrategy
-      [minBufferPx]="200"
-      [maxBufferPx]="400"
-    >
-      <kirby-list-experimental>
-        <kirby-item *cdkVirtualFor="let item of items">
-          {{ item }}
-        </kirby-item>
-      </kirby-list-experimental>
-    </cdk-virtual-scroll-viewport>
-  </kirby-page-content>
-</kirby-page>
+<cdk-virtual-scroll-viewport autosize [minBufferPx]="0" [maxBufferPx]="1">
+  <kirby-list-experimental>
+    <kirby-item *cdkVirtualFor="let item of items">
+      <ng-container *ngIf="item % 2 == 0">{{ item }}</ng-container>
+      <ng-container *ngIf="item % 2 == 1">{{ item }}<br />Double time!</ng-container>
+    </kirby-item>
+  </kirby-list-experimental>
+</cdk-virtual-scroll-viewport>

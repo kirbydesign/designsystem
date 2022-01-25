@@ -3,19 +3,20 @@ import { CdkVirtualScrollViewport, FixedSizeVirtualScrollStrategy } from '@angul
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-export class GenericEventVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy {
+import { AutoSizeVirtualScrollStrategy } from './auto-size-virtual-scroll';
+
+export class GenericEventVirtualScrollStrategy extends AutoSizeVirtualScrollStrategy {
   private readonly destroy = new Subject<void>();
   private destroy$: Observable<void>;
 
   constructor(
-    itemSizePx: number,
     minBufferPx: number,
     maxBufferPx: number,
     private observable$: Observable<any>,
     private getViewportSize: () => number,
     private measureScrollOffset: () => number
   ) {
-    super(itemSizePx, minBufferPx, maxBufferPx);
+    super(minBufferPx, maxBufferPx);
     this.destroy$ = this.destroy.asObservable();
   }
 
@@ -36,7 +37,7 @@ export class GenericEventVirtualScrollStrategy extends FixedSizeVirtualScrollStr
     this.destroy.complete();
   }
 
-  updateItemAndBufferSize(itemSize: number, minBufferPx: number, maxBufferPx: number) {
-    super.updateItemAndBufferSize(itemSize, minBufferPx, maxBufferPx);
-  }
+  /*  updateItemAndBufferSize(itemSize: number, minBufferPx: number, maxBufferPx: number) {
+    //super.updateItemAndBufferSize(itemSize, minBufferPx, maxBufferPx);
+  }*/
 }

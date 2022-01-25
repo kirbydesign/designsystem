@@ -6,7 +6,7 @@ const config = {
   template: `
   <h1>Heading 1</h1>
   <h2>Heading 2</h2>
-  <cdk-virtual-scroll-viewport windowVirtualScrollStrategy>
+  <cdk-virtual-scroll-viewport>
       <kirby-list-experimental>
         <kirby-item *cdkVirtualFor="let item of itemsFullList">
           <h3>{{item.title }}</h3>

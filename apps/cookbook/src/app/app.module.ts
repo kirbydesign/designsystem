@@ -11,7 +11,7 @@ import { KirbyModule } from '@kirbydesign/designsystem';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ExamplesModule } from './examples/examples.module';
+import { CdkAutoSizeVirtualScroll } from './examples/page-example/simple/window-virtual-scroll/auto-size-virtual-scroll';
 import { KirbyPageVirtualScrollDirective } from './examples/page-example/simple/window-virtual-scroll/window-virtual-scroll.directive';
 import { HomeComponent } from './home/home.component';
 import { IntroComponent } from './intro/intro.component';
@@ -31,6 +31,7 @@ registerLocaleData(localeEn);
     IntroComponent,
     FooterComponent,
     KirbyPageVirtualScrollDirective,
+    CdkAutoSizeVirtualScroll,
   ],
   imports: [
     ScrollingModule,

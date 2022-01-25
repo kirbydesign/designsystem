@@ -8,7 +8,7 @@
 
   ion-item {
     font-size: utils.font-size('s');
-    --min-height: #{map.get(utils.$item-heights, 'm')};
+    --min-height: var(--kirby-item-height, #{map.get(utils.$item-heights, 'm')});
     --padding-start: #{utils.size('s')};
     --inner-padding-top: #{utils.size('xxs')};
     --inner-padding-bottom: #{utils.size('xxs')};
