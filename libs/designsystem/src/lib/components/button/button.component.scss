@@ -45,36 +45,6 @@ $button-width: (
   }
 }
 
-@mixin button-no-decoration {
-  --kirby-button-background-color: transparent;
-  --kirby-button-color: #{utils.get-color('black')};
-  --kirby-button-border-color: transparent;
-
-  &.destructive {
-    --kirby-button-color: #{utils.get-color('danger')};
-  }
-}
-// TODO: Consider refactoring attentionlevel mixins => pass parameters and reuse (a single mixin)
-// First step could be something like:
-// @mixin button-attentionlevel1 {
-//   $color-variant: 'primary';
-
-//   --kirby-button-background-color: #{utils.get-color('#{$color-variant}')};
-//   --kirby-button-color: #{utils.get-color('#{$color-variant}-contrast')};
-
-//   @include state.apply-hover() {
-//     --kirby-button-background-color: #{state.get-hover-color('#{$color-variant}', $lightness: -8%)};
-//   }
-
-//   &.destructive {
-//     --kirby-button-background-color: #{utils.get-color('danger')};
-//     --kirby-button-color: #{utils.get-color('danger-contrast')};
-
-//     @include state.apply-hover() {
-//       --kirby-button-background-color: #{state.get-hover-color('danger', $lightness: -8%)};
-//     }
-//   }
-// }
 // Mixin parameters must be a named color variant. CSS color values won't work.
 // See libs/core/src/scss/themes/_colors.scss
 @mixin _button-hover(
@@ -88,6 +58,16 @@ $button-width: (
     $property: '--kirby-button-background-color',
     $loudness: $loudness
   );
+}
+
+@mixin button-no-decoration {
+  --kirby-button-background-color: transparent;
+  --kirby-button-color: #{utils.get-color('black')};
+  --kirby-button-border-color: transparent;
+
+  &.destructive {
+    --kirby-button-color: #{utils.get-color('danger')};
+  }
 }
 
 @mixin button-attentionlevel1 {
@@ -108,13 +88,13 @@ $button-width: (
   --kirby-button-background-color: #{utils.get-color('black')};
   --kirby-button-color: #{utils.get-color('black-contrast')};
 
-  @include _button-hover('white', 'white-contrast', utils.get-loudness('faint'));
+  @include _button-hover('black', 'black-contrast');
 
   &.destructive {
     --kirby-button-background-color: #{utils.get-color('light')};
     --kirby-button-color: #{utils.get-color('danger')};
 
-    @include _button-hover('light', 'danger', utils.get-loudness('faint'));
+    @include _button-hover('light', 'danger');
   }
 }
 
@@ -129,7 +109,7 @@ $button-width: (
   // Use the apply-hover() mixin directly instead.
   @include interaction-state.apply-hover(
     $background-color: transparent,
-    $color: utils.get-color($variant: 'black', $getValueOnly: true),
+    $color: utils.get-color('black', $getValueOnly: true),
     $property: '--kirby-button-background-color'
   );
 
@@ -138,7 +118,7 @@ $button-width: (
 
     @include interaction-state.apply-hover(
       $background-color: transparent,
-      $color: utils.get-color($variant: 'danger', $getValueOnly: true),
+      $color: utils.get-color('danger', $getValueOnly: true),
       $property: '--kirby-button-background-color'
     );
   }
@@ -245,7 +225,7 @@ $button-width: (
       --kirby-button-background-color: #{utils.get-color('white')};
       --kirby-button-color: #{utils.get-color('white-contrast')};
 
-      @include _button-hover('black', 'black-contrast');
+      @include _button-hover('white', 'white-contrast');
     }
 
     &.attention-level3 {
@@ -281,6 +261,8 @@ $button-width: (
   &.attention-level2 {
     --kirby-button-background-color: #{utils.get-color('white')};
     --kirby-button-color: #{utils.get-color('white-contrast')};
+
+    @include _button-hover('white', 'white-contrast');
   }
 }
 
