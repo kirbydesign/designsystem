@@ -199,7 +199,6 @@ $loading-overlay-backdrop-opacity: 0.8;
 /* Interaction states loudness
 ****************************************************************************/
 // TODO: These values (and names) are temporary. Awaiting UX decision.
-// E.g., 'extreme' and 'painful' could be 'very-loud' and 'extremely-loud'.
 //
 // Other source(s) for inspiraiton:
 //
@@ -210,6 +209,6 @@ $loudness-scale: (
   quiet: 8%,
   moderate: 12%,
   loud: 16%,
-  extreme: 24%,
-  painful: 32%,
+  very-loud: 24%,
+  extremely-loud: 32%,
 );
