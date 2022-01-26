@@ -77,7 +77,11 @@ $button-width: (
 // }
 // Mixin parameters must be a named color variant. CSS color values won't work.
 // See libs/core/src/scss/themes/_colors.scss
-@mixin _button-hover($background-color-variant, $color-variant, $loudness: null) {
+@mixin _button-hover(
+  $background-color-variant,
+  $color-variant,
+  $loudness: interaction-state.$default-loudness
+) {
   @include interaction-state.apply-hover(
     $background-color: utils.get-color($variant: $background-color-variant, $getValueOnly: true),
     $color: utils.get-color($variant: $color-variant, $getValueOnly: true),

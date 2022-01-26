@@ -1,4 +1,5 @@
 @use 'sass:color';
+@use 'sass:math';
 @use 'sass:meta';
 @use '../utils';
 
@@ -7,13 +8,17 @@
 // TODO: Await UX decision on default loudness and update
 $default-loudness: utils.get-loudness('loud');
 
-@mixin apply-hover($background-color, $color, $property, $loudness: null) {
+@mixin apply-hover($background-color, $color, $property, $loudness: $default-loudness) {
   @if meta.type-of($background-color) != color {
     @error "$background-color must be a valid CSS color value. See https://developer.mozilla.org/en-US/docs/Web/CSS/color_value";
   }
 
   @if meta.type-of($color) != color {
     @error "$color must be a valid CSS color value. See https://developer.mozilla.org/en-US/docs/Web/CSS/color_value";
+  }
+
+  @if not(meta.type-of($loudness) == number and math.unit($loudness) == '%') {
+    @error "$loudness must be a percentage";
   }
 
   // ---------------------------------------------------------------------------
@@ -29,11 +34,8 @@ $default-loudness: utils.get-loudness('loud');
   // Sidenote: The color transparent is defined as black with 0% opacity, i.e.,
   // 100% transparent. Often declared as rgba(0, 0, 0, 0%) in browsers.
   // ---------------------------------------------------------------------------
-  $relative-lightness: $default-loudness !default;
 
-  @if $loudness {
-    $relative-lightness: $loudness;
-  }
+  $relative-lightness: $loudness !default;
 
   @if color.lightness($background-color) > color.lightness($color) {
     // Decrease relative lightness
