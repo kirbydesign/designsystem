@@ -44,6 +44,16 @@ $button-width: (
   }
 }
 
+@mixin button-no-decoration {
+  --kirby-button-background-color: transparent;
+  --kirby-button-color: #{utils.get-color('black')};
+  --kirby-button-border-color: transparent;
+
+  &.destructive {
+    --kirby-button-color: #{utils.get-color('danger')};
+  }
+}
+
 @mixin button-attentionlevel1 {
   --kirby-button-background-color: #{utils.get-color('primary')};
   --kirby-button-color: #{utils.get-color('primary-contrast')};
@@ -55,8 +65,8 @@ $button-width: (
 }
 
 @mixin button-attentionlevel2 {
-  --kirby-button-background-color: #{utils.get-color('white')};
-  --kirby-button-color: #{utils.get-color('white-contrast')};
+  --kirby-button-background-color: #{utils.get-color('black')};
+  --kirby-button-color: #{utils.get-color('black-contrast')};
 
   &.destructive {
     --kirby-button-background-color: #{utils.get-color('light')};
@@ -69,16 +79,6 @@ $button-width: (
   --kirby-button-background-color: transparent;
   --kirby-button-color: #{utils.get-color('black')};
   --kirby-button-border-color: #{utils.get-color('medium')};
-
-  &.destructive {
-    --kirby-button-color: #{utils.get-color('danger')};
-  }
-}
-
-@mixin button-attentionlevel4 {
-  // Expect canvas underneath to be a light color
-  --kirby-button-background-color: transparent;
-  --kirby-button-color: #{utils.get-color('black')};
 
   &.destructive {
     --kirby-button-color: #{utils.get-color('danger')};
@@ -142,6 +142,10 @@ $button-width: (
     @include button-lg;
   }
 
+  &.no-decoration {
+    @include button-no-decoration;
+  }
+
   &.attention-level1 {
     @include button-attentionlevel1;
   }
@@ -152,10 +156,6 @@ $button-width: (
 
   &.attention-level3 {
     @include button-attentionlevel3;
-  }
-
-  &.attention-level4 {
-    @include button-attentionlevel4;
   }
 
   &[expand='block'] {
@@ -183,20 +183,18 @@ $button-width: (
     pointer-events: none;
   }
 
-  :host-context(.default),
-  :host-context(.kirby-color-brightness-white) {
-    &.attention-level2 {
-      --kirby-button-background-color: #{utils.get-color('black')};
-      --kirby-button-color: #{utils.get-color('black-contrast')};
-    }
-  }
-
   :host-context(.kirby-color-brightness-dark) {
-    &.attention-level3 {
-      --kirby-button-border-color: #{utils.get-color('white')};
+    &.no-decoration {
       --kirby-button-color: #{utils.get-color('white')};
     }
-    &.attention-level4 {
+
+    &.attention-level2 {
+      --kirby-button-background-color: #{utils.get-color('white')};
+      --kirby-button-color: #{utils.get-color('white-contrast')};
+    }
+
+    &.attention-level3 {
+      --kirby-button-border-color: #{utils.get-color('white')};
       --kirby-button-color: #{utils.get-color('white')};
     }
   }
@@ -222,6 +220,13 @@ $button-width: (
   --kirby-button-color: #{utils.get-color('success-contrast')};
 }
 
+:host-context(kirby-dropdown) {
+  &.attention-level2 {
+    --kirby-button-background-color: #{utils.get-color('white')};
+    --kirby-button-color: #{utils.get-color('white-contrast')};
+  }
+}
+
 // Temp fix for https://github.com/angular/angular-cli/issues/13854#issuecomment-470831308
 /* clean-css ignore:start */
 :host-context(ion-toolbar kirby-page-actions) {
@@ -233,11 +238,11 @@ $button-width: (
     width: utils.$fat-finger-size;
   }
 
+  &.no-decoration,
   &.attention-level1,
   &.attention-level2,
-  &.attention-level3,
-  &.attention-level4 {
-    @include button-attentionlevel4;
+  &.attention-level3 {
+    @include button-no-decoration;
   }
 }
 /* clean-css ignore:end */
@@ -245,11 +250,11 @@ $button-width: (
 // Temp fix for https://github.com/angular/angular-cli/issues/13854#issuecomment-470831308
 /* clean-css ignore:start */
 :host-context(.page-title kirby-page-actions) {
+  &.no-decoration,
   &.attention-level1,
   &.attention-level2,
-  &.attention-level3,
-  &.attention-level4 {
-    @include button-attentionlevel2;
+  &.attention-level3 {
+    @include button-attentionlevel3;
   }
 }
 /* clean-css ignore:end */

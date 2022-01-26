@@ -145,7 +145,7 @@ describe('ButtonComponent in Kirby Page', () => {
     it('should render with correct background-color', async () => {
       await TestHelper.whenReady(ionContent);
       expect(actionButtonInPage).toHaveComputedStyle({
-        'background-color': getColor('white'),
+        'background-color': 'transparent',
       });
     });
 
@@ -161,7 +161,7 @@ describe('ButtonComponent in Kirby Page', () => {
       expect(actionButtonInPage).toHaveComputedStyle({
         'border-width': '1px',
         'border-style': 'solid',
-        'border-color': 'transparent',
+        'border-color': getColor('medium'),
       });
     });
   });
@@ -266,8 +266,8 @@ describe('ButtonComponent configured with icon only', () => {
     declarations: [MockComponent(IconComponent)],
   });
 
-  const attentionLevels = ['1', '2', '3', '4'];
-  type AttentionLevel = '1' | '2' | '3' | '4';
+  type AttentionLevel = '1' | '2' | '3';
+  const attentionLevels: AttentionLevel[] = ['1', '2', '3'];
 
   const iconButtonSizeDefault = size('xl');
 
@@ -293,7 +293,7 @@ describe('ButtonComponent configured with icon only', () => {
       );
       element = spectator.element as HTMLButtonElement;
     });
-    attentionLevels.forEach((attentionLevel: AttentionLevel) => {
+    attentionLevels.forEach((attentionLevel) => {
       it(
         'should render with correct width and height for attentionlevel = ' + attentionLevel,
         () => {
@@ -323,7 +323,7 @@ describe('ButtonComponent configured with icon only', () => {
     });
 
     describe('and configured with attentionlevel', () => {
-      attentionLevels.forEach((attentionLevel: AttentionLevel) => {
+      attentionLevels.forEach((attentionLevel) => {
         it(
           'should render with correct width and height for attentionlevel = ' + attentionLevel,
           () => {
@@ -354,7 +354,7 @@ describe('ButtonComponent configured with icon only', () => {
     });
 
     describe('and configured with attentionlevel', () => {
-      attentionLevels.forEach((attentionLevel: AttentionLevel) => {
+      attentionLevels.forEach((attentionLevel) => {
         it(
           'should render with correct width and height for attentionlevel = ' + attentionLevel,
           () => {
@@ -385,7 +385,7 @@ describe('ButtonComponent configured with icon only', () => {
     });
 
     describe('and configured with attentionlevel', () => {
-      attentionLevels.forEach((attentionLevel: AttentionLevel) => {
+      attentionLevels.forEach((attentionLevel) => {
         it(
           'should render with correct width and height for attentionlevel = ' + attentionLevel,
           () => {
@@ -397,6 +397,17 @@ describe('ButtonComponent configured with icon only', () => {
             });
           }
         );
+      });
+    });
+
+    describe('and configured with noDecoration', () => {
+      it('should render with correct width and height for noDecoration', () => {
+        spectator.component.noDecoration = true;
+        spectator.detectChanges();
+        expect(element).toHaveComputedStyle({
+          width: iconButtonSizeLG,
+          height: iconButtonSizeLG,
+        });
       });
     });
   });

@@ -5,7 +5,7 @@
     kirby-button
     expand="block"
     size="lg"
-    attentionLevel="4"
+    [noDecoration]="true"
     (click)="onItemSelect(item)"
     *ngFor="let item of items"
   >
