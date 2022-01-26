@@ -9,7 +9,6 @@ interface HeaderLink {
 
 export const navigationItems: HeaderLink[] = [
   { text: 'Introduction', route: '/home/intro' },
-  { text: 'Ressources', route: '' },
   { text: 'Changelog', route: '/home/changelog' },
   { text: 'Component Status', route: '/home/component-status' },
   { text: 'Guides', route: '/home/guides' },

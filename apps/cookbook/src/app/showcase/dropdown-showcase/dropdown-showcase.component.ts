@@ -60,7 +60,7 @@ export class DropdownShowcaseComponent {
       description:
         'Sets the attention level for the button of the dropdown. Button color will be updated automatically depending on host color.',
       defaultValue: '3',
-      type: ['1', '2', '3', '4'],
+      type: ['1', '2', '3'],
     },
     {
       name: 'expand',

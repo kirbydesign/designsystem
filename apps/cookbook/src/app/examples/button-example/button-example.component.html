@@ -17,22 +17,14 @@
 
 <h2>Block button</h2>
 <button kirby-button [size]="buttonSize" expand="block">Block Button</button>
-<h2>Destructive Button</h2>
-<button kirby-button [size]="buttonSize" attentionLevel="1" isDestructive="true">
-  Destructive Level 1
-</button>
-<button kirby-button [size]="buttonSize" attentionLevel="2" isDestructive="true">
-  Destructive Level 2
-</button>
-<button kirby-button [size]="buttonSize" attentionLevel="3" isDestructive="true">
-  Destructive Level 3
-</button>
-<button kirby-button [size]="buttonSize" attentionLevel="4" isDestructive="true">
-  Destructive Level 4
-</button>
-<button kirby-button [size]="buttonSize" disabled>Disabled Button</button>
 
 <h2>Button with icon only</h2>
+<div class="button-example-container">
+  <button kirby-button [size]="buttonSize" [noDecoration]="true">
+    <kirby-icon name="close"></kirby-icon>
+  </button>
+  <label>Undecorated</label>
+</div>
 <div class="button-example-container">
   <button kirby-button [size]="buttonSize">
     <kirby-icon name="close"></kirby-icon>
@@ -52,17 +44,17 @@
   <label>Attention Level 3</label>
 </div>
 <div class="button-example-container">
-  <button kirby-button [size]="buttonSize" attentionLevel="4">
-    <kirby-icon name="close"></kirby-icon>
-  </button>
-  <label>Attention Level 4</label>
-</div>
-<div class="button-example-container">
   <button kirby-button [size]="buttonSize" disabled>
     <kirby-icon name="close"></kirby-icon>
   </button>
   <label>Disabled</label>
 </div>
+
+<p class="kirby-text-small">
+  <em>
+    <strong>Please note:</strong> The undecorated button is solely intended for use with icon only.
+  </em>
+</p>
 
 <h3>Custom Icon</h3>
 <div class="button-example-container">
@@ -82,12 +74,6 @@
     <kirby-icon customName="football"></kirby-icon>
   </button>
   <label>Attention Level 3</label>
-</div>
-<div class="button-example-container">
-  <button kirby-button [size]="buttonSize" attentionLevel="4">
-    <kirby-icon customName="football"></kirby-icon>
-  </button>
-  <label>Attention Level 4</label>
 </div>
 <div class="button-example-container">
   <button kirby-button [size]="buttonSize" disabled>
@@ -160,8 +146,5 @@
   </button>
   <button kirby-button [size]="buttonSize" attentionLevel="3" expand="block">
     Attention Level 3
-  </button>
-  <button kirby-button [size]="buttonSize" attentionLevel="4" expand="block">
-    Attention Level 4
   </button>
 </kirby-card>
