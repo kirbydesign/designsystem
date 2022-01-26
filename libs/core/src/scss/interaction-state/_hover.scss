@@ -38,7 +38,7 @@ $default-loudness: utils.get-loudness('loud');
   $relative-lightness: $loudness !default;
 
   @if color.lightness($background-color) > color.lightness($color) {
-    // Decrease relative lightness
+    // Make it darker
     $relative-lightness: $relative-lightness * -1;
   }
 
