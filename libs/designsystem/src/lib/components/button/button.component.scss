@@ -65,6 +65,15 @@ $button-width: (
   --kirby-button-color: #{utils.get-color('black')};
   --kirby-button-border-color: transparent;
 
+  // Because transparent is not defined as a named color variant
+  // the _button-hover() mixin cannot be used here.
+  // Use the apply-hover() mixin directly instead.
+  @include interaction-state.apply-hover(
+    $background-color: transparent,
+    $color: utils.get-color('black', $getValueOnly: true),
+    $property: '--kirby-button-background-color'
+  );
+
   &.destructive {
     --kirby-button-color: #{utils.get-color('danger')};
   }
