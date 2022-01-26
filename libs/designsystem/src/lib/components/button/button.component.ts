@@ -17,6 +17,9 @@ export enum ButtonSize {
   LG = 'lg',
 }
 
+const ATTENTION_LEVEL_4_DEPRECATION_WARNING =
+  'Deprecation warning: The "kirby-button" support for using input property "attentionLevel" with the value "4" will be removed in a future release of Kirby designsystem. While deprecated, all attention-level 4 buttons will be rendered as attention-level 3.';
+
 @Component({
   // tslint:disable-next-line:component-selector
   selector: 'button[kirby-button],Button[kirby-button]',
@@ -30,8 +33,25 @@ export class ButtonComponent implements AfterContentInit {
   isAttentionLevel2: boolean;
   @HostBinding('class.attention-level3')
   isAttentionLevel3: boolean;
-  @HostBinding('class.attention-level4')
-  isAttentionLevel4: boolean;
+  @Input() set attentionLevel(level: '1' | '2' | '3' | '4') {
+    this.isAttentionLevel1 = level === '1';
+    this.isAttentionLevel2 = level === '2';
+    this.isAttentionLevel3 = level === '3' || level === '4';
+    if (level === '4') {
+      console.warn(ATTENTION_LEVEL_4_DEPRECATION_WARNING);
+    }
+  }
+
+  @HostBinding('class.no-decoration')
+  hasNoDecoration = false;
+  @Input()
+  set noDecoration(enable: boolean) {
+    this.hasNoDecoration = enable;
+    this.isAttentionLevel1 = !enable;
+    this.isAttentionLevel2 = false;
+    this.isAttentionLevel3 = false;
+  }
+
   @HostBinding('class.destructive')
   destructive: boolean = false; // Default
 
@@ -60,15 +80,10 @@ export class ButtonComponent implements AfterContentInit {
     return [this.themeColor, this.size].filter((cssClass) => !!cssClass);
   }
 
-  @Input() set attentionLevel(level: '1' | '2' | '3' | '4') {
-    this.isAttentionLevel1 = level === '1';
-    this.isAttentionLevel2 = level === '2';
-    this.isAttentionLevel3 = level === '3';
-    this.isAttentionLevel4 = level === '4';
-  }
   @Input() set isDestructive(state: boolean) {
     this.destructive = state;
   }
+
   @Input()
   themeColor: NotificationColor;
   @Input() expand: 'full' | 'block';

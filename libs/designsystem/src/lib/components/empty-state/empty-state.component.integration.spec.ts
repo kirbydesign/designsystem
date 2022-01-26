@@ -25,7 +25,6 @@ describe('EmptyStateComponent with slotted buttons', () => {
               <button kirby-button>Call support</button>
               <button kirby-button>Mail support</button>
               <button kirby-button>Get directions</button>
-              <button kirby-button>Cancel</button>
           </kirby-empty-state>
       `);
 
@@ -58,10 +57,9 @@ describe('EmptyStateComponent with slotted buttons configured with attention lev
               title="No items"
               subtitle="You don't have any items. Call support to add some items to your account."
           >
-              <button kirby-button attentionLevel="4">Call support</button>
-              <button kirby-button attentionLevel="3">Mail support</button>
-              <button kirby-button attentionLevel="2">Get directions</button>
-              <button kirby-button attentionLevel="1">Cancel</button>
+              <button kirby-button attentionLevel="3">Call support</button>
+              <button kirby-button attentionLevel="2">Mail support</button>
+              <button kirby-button attentionLevel="1">Get directions</button>
           </kirby-empty-state>
       `);
 
@@ -92,7 +90,6 @@ describe('EmptyStateComponent with slotted buttons configured with attention lev
             <button kirby-button attentionLevel="1">Call support</button>
             <button kirby-button attentionLevel="2">Mail support</button>
             <button kirby-button attentionLevel="3">Get directions</button>
-            <button kirby-button attentionLevel="4">Cancel</button>
         </kirby-empty-state>
     `);
 
