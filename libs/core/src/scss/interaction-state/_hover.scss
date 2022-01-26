@@ -3,9 +3,6 @@
 @use 'sass:meta';
 @use '../utils';
 
-// TODO: Accessibility - Loudness must respect user preferences
-// See https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-contrast
-// TODO: Await UX decision on default loudness and update
 $default-loudness: utils.get-loudness('loud');
 
 @mixin apply-hover($background-color, $color, $property, $loudness: $default-loudness) {
@@ -48,7 +45,6 @@ $default-loudness: utils.get-loudness('loud');
   transition-timing-function: utils.get-transition-easing('static');
 
   @include utils.hover() {
-    // TODO: Accessibility - check that contrast is (still) sufficiently high
     #{$property}: #{color.scale($background-color, $lightness: $relative-lightness)};
 
     @content;
