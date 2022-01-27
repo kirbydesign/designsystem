@@ -40,7 +40,7 @@ $default-loudness: utils.get-loudness('loud');
   }
 
   cursor: pointer;
-  transition-property: background-color;
+  transition-property: var(#{$property});
   transition-duration: utils.get-transition-duration('quick');
   transition-timing-function: utils.get-transition-easing('static');
 
