@@ -72,7 +72,9 @@ import { TabsExampleComponent } from './tabs-example/tabs-example.component';
 import { ToastExampleComponent } from './toast-example/toast-example.component';
 import { ToggleButtonExampleComponent } from './toggle-button-example/toggle-button-example.component';
 import { ToggleExampleComponent } from './toggle-example/toggle-example.component';
+import { VirtualScrollListExampleComponent } from './virtual-scroll-example/virtual-scroll-list-example/virtual-scroll-list-example.component';
 
+VirtualScrollListExampleComponent;
 export const routes: Routes = [
   {
     path: '',
@@ -364,6 +366,10 @@ export const routes: Routes = [
   {
     path: 'grid-layout-extended',
     component: GridLayoutExtendedExampleComponent,
+  },
+  {
+    path: 'virtual-scroll-list',
+    component: VirtualScrollListExampleComponent,
   },
   {
     path: 'chip',
