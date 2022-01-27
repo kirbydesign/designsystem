@@ -12,7 +12,7 @@ export const navigationItems: HeaderLink[] = [
   { text: 'Ressources', route: '' },
   { text: 'Changelog', route: '/home/changelog' },
   { text: 'Component Status', route: '/home/component-status' },
-  { text: 'Layout Recipes', route: '/home/layout-recipes' },
+  { text: 'Guides', route: '/home/guides' },
   { text: 'Accessibility', route: '/home/accessibility-in-kirby' },
   { text: 'GitHub', externalUrl: 'https://github.com/kirbydesign/designsystem' },
 ];
