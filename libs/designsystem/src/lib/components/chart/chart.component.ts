@@ -11,7 +11,7 @@ import {
 import { ChartOptions } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
 
-import { ResizeObserverFactory, ResizeObserverService } from '../shared';
+import { ResizeObserverFactory } from '../shared';
 
 import { ChartJSService } from './chart-js/chart-js.service';
 import {
@@ -45,6 +45,8 @@ export class ChartComponent implements AfterViewInit, OnChanges {
   @ViewChild('chartCanvas')
   canvasElement: ElementRef<HTMLCanvasElement>;
 
+  private chartHaveBeenRendered: boolean = false;
+
   constructor(private chartJSService: ChartJSService) {}
 
   ngAfterViewInit() {
@@ -77,27 +79,30 @@ export class ChartComponent implements AfterViewInit, OnChanges {
   }
 
   ngOnChanges(simpleChanges: SimpleChanges) {
-    let shouldRedrawChart = false;
+    if (this.chartHaveBeenRendered) {
+      let shouldRedrawChart = false;
 
-    const keyUpdateFnPairs = {
-      data: () => this.updateData(),
-      dataLabels: () => this.updateDataLabels(),
-      type: () => this.updateType(),
-      customOptions: () => this.updateCustomOptions(),
-      annotations: () => this.updateAnnotations(),
-      highlightedElements: () => this.updateHighlightedElements(),
-    };
+      const keyUpdateFnPairs = {
+        data: () => this.updateData(),
+        dataLabels: () => this.updateDataLabels(),
+        type: () => this.updateType(),
+        customOptions: () => this.updateCustomOptions(),
+        annotations: () => this.updateAnnotations(),
+        highlightedElements: () => this.updateHighlightedElements(),
+      };
 
-    Object.entries(simpleChanges).forEach(([key]) => {
-      if (simpleChanges[key].firstChange || !keyUpdateFnPairs[key]) return;
-      shouldRedrawChart = true;
-      keyUpdateFnPairs[key]();
-    });
+      Object.entries(simpleChanges).forEach(([key]) => {
+        if (simpleChanges[key].firstChange || !keyUpdateFnPairs[key]) return;
+        shouldRedrawChart = true;
+        keyUpdateFnPairs[key]();
+      });
 
-    if (shouldRedrawChart) this.redrawChart();
+      if (shouldRedrawChart) this.redrawChart();
+    }
   }
 
   private renderChart() {
+    this.chartHaveBeenRendered = true;
     this.chartJSService.renderChart({
       targetElement: this.canvasElement,
       type: this.type,
