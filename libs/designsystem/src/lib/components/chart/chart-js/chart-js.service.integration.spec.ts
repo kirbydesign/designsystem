@@ -3,7 +3,6 @@ import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 import { Chart, FontSpec } from 'chart.js';
 
 import { ColorHelper } from '../../../helpers';
-import { ChartType } from '../chart.types';
 import { ChartConfigService } from '../configs/chart-config.service';
 
 import { ChartJSService } from './chart-js.service';
@@ -49,7 +48,7 @@ describe('ChartJSService with ChartConfigService', () => {
             targetElement: canvasElement,
             type: 'column',
             data: [1, 2, 3],
-            dataLabels: ['one', 'two', 'three'],
+            labels: ['one', 'two', 'three'],
           });
           chart = chartJSService['chart'];
         });
@@ -96,7 +95,7 @@ describe('ChartJSService with ChartConfigService', () => {
             targetElement: canvasElement,
             type: 'column',
             data: [1, 2, 3],
-            dataLabels: ['one', 'two', 'three'],
+            labels: ['one', 'two', 'three'],
             customOptions: {
               onClick: () => console.log('testing'),
             },
@@ -130,7 +129,7 @@ describe('ChartJSService with ChartConfigService', () => {
             targetElement: canvasElement,
             type: 'line',
             data: [1, 2, 3],
-            dataLabels: ['one', 'two', 'three'],
+            labels: ['one', 'two', 'three'],
           });
           chart = chartJSService['chart'];
         });
@@ -207,7 +206,7 @@ describe('ChartJSService with ChartConfigService', () => {
             targetElement: canvasElement,
             type: 'bar',
             data: [1, 2, 3],
-            dataLabels: ['one', 'two', 'three'],
+            labels: ['one', 'two', 'three'],
           });
           chart = chartJSService['chart'];
         });
@@ -254,7 +253,7 @@ describe('ChartJSService with ChartConfigService', () => {
             targetElement: canvasElement,
             type: 'bar',
             data: [1, 2, 3],
-            dataLabels: ['one', 'two', 'three'],
+            labels: ['one', 'two', 'three'],
             customOptions: {
               onClick: () => console.log('testing'),
             },
