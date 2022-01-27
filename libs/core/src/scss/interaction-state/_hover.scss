@@ -3,7 +3,7 @@
 @use 'sass:meta';
 @use '../utils';
 
-$default-loudness: utils.get-loudness('loud');
+$default-loudness: utils.get-loudness('moderate');
 
 @mixin apply-hover($background-color, $color, $property, $loudness: $default-loudness) {
   @if meta.type-of($background-color) != color {
