@@ -22,9 +22,9 @@ describe('ChartComponent in component with out height & width', () => {
   });
 
   it('should not render if no height and width', () => {
-    const redrawChartSpy = spyOn<any>(component, 'updateDataLabels');
+    const redrawChartSpy = spyOn<any>(component, 'updateLabels');
 
-    spectator.setInput('dataLabels', ['1', '2']);
+    spectator.setInput('labels', ['1', '2']);
 
     expect(redrawChartSpy).toHaveBeenCalledTimes(0);
   });
