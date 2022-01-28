@@ -1,11 +1,7 @@
-<kirby-list-experimental>
-  <kirby-section-header list-header><h2 label>Section 1</h2></kirby-section-header>
-  <kirby-item>Plain Item</kirby-item>
-  <kirby-item>Plain Item</kirby-item>
-</kirby-list-experimental>
+<cookbook-list-experimental-items-example #items></cookbook-list-experimental-items-example>
+<cookbook-example-viewer [html]="items.template"> </cookbook-example-viewer>
 
-<kirby-list-experimental>
-  <kirby-section-header list-header><h2 label>Section 2</h2></kirby-section-header>
-  <kirby-item>Plain Item</kirby-item>
-  <kirby-item>Plain Item</kirby-item>
-</kirby-list-experimental>
+<cookbook-list-experimental-sliding-items-example
+  #slidingItems
+></cookbook-list-experimental-sliding-items-example>
+<cookbook-example-viewer [html]="slidingItems.template"> </cookbook-example-viewer>
