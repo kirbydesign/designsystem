@@ -5,7 +5,7 @@ import { ItemSwipeAction } from '@kirbydesign/designsystem';
 import { BaseListComponent } from '../../list-shared/base-list.component';
 
 const template = `<kirby-list-experimental>
-<kirby-section-header list-header><h2 header>List with items</h2></kirby-section-header>
+<kirby-section-header list-header><h2 heading>List with items</h2></kirby-section-header>
 <kirby-item-sliding *ngFor="let item of items" [swipeActions]="swipeActions">
   <kirby-item><p> 
 {{ item.title }} </p></kirby-item>
