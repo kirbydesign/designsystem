@@ -21,6 +21,9 @@ import {
   ChartType,
 } from './chart.types';
 
+const DATA_LABELS_DEPRECATION_WARNING =
+  'Deprecation warning: The "kirby-chart" input property "dataLabels" will be removed in a future release of Kirby designsystem. Use "labels" instead. For more information see the following announcement: https://github.com/kirbydesign/designsystem/discussions/1980';
+
 @Component({
   selector: 'kirby-chart',
   templateUrl: './chart.component.html',
@@ -30,7 +33,20 @@ import {
 export class ChartComponent implements AfterViewInit, OnChanges {
   @Input() type: ChartType = 'column';
   @Input() data: ChartDataset[] | number[];
-  @Input() dataLabels?: string[] | string[][];
+
+  private _labels: string[] | string[][];
+
+  get labels(): string[] | string[][] {
+    return this._labels;
+  }
+  @Input() set labels(value: string[] | string[][]) {
+    this._labels = value;
+  }
+  @Input() set dataLabels(value: string[] | string[][]) {
+    console.warn(DATA_LABELS_DEPRECATION_WARNING);
+    this._labels = value;
+  }
+
   @Input() customOptions?: ChartOptions;
   @Input() dataLabelOptions?: ChartDataLabelOptions;
   @Input() annotations?: AnnotationOptions[];
@@ -82,9 +98,11 @@ export class ChartComponent implements AfterViewInit, OnChanges {
     if (this.chartHaveBeenRendered) {
       let shouldRedrawChart = false;
 
+      // TODO: Remove 'dataLabels' key when the input property is removed
       const keyUpdateFnPairs = {
         data: () => this.updateData(),
-        dataLabels: () => this.updateDataLabels(),
+        dataLabels: () => this.updateLabels(),
+        labels: () => this.updateLabels(),
         type: () => this.updateType(),
         customOptions: () => this.updateCustomOptions(),
         annotations: () => this.updateAnnotations(),
@@ -107,7 +125,7 @@ export class ChartComponent implements AfterViewInit, OnChanges {
       targetElement: this.canvasElement,
       type: this.type,
       data: this.data,
-      dataLabels: this.dataLabels,
+      labels: this.labels,
       customOptions: this.customOptions,
       annotations: this.annotations,
       dataLabelOptions: this.dataLabelOptions,
@@ -119,8 +137,8 @@ export class ChartComponent implements AfterViewInit, OnChanges {
     this.chartJSService.updateData(this.data);
   }
 
-  private updateDataLabels() {
-    this.chartJSService.updateDataLabels(this.dataLabels);
+  private updateLabels() {
+    this.chartJSService.updateLabels(this.labels);
   }
 
   private updateType() {
