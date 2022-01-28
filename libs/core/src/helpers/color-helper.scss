@@ -1,4 +1,5 @@
+@use 'sass:meta';
 @use 'sass-to-ts';
 @use '../scss/themes/colors';
 
-@include sass-to-ts.output-styles(module-variables('colors'));
+@include sass-to-ts.output-styles(meta.module-variables('colors'));
