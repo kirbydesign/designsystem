@@ -1,0 +1,15 @@
+@use '~@kirbydesign/core/src/scss/utils';
+
+:host {
+  display: block;
+}
+
+ion-list {
+  background: inherit;
+  contain: inherit;
+}
+
+.list-content {
+  @include utils.first-item-padding();
+  @include utils.last-item-padding();
+}

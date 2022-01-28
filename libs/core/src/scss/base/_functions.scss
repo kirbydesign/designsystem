@@ -186,3 +186,42 @@
     top: 50%;
   }
 }
+
+//TODO: should this be a module of its own?
+@mixin rounded($border-radius: variables.$border-radius) {
+  @include rounded-top($border-radius);
+  @include rounded-bottom($border-radius);
+}
+
+@mixin rounded-top($border-radius: variables.$border-radius) {
+  border-top-left-radius: $border-radius;
+  border-top-right-radius: $border-radius;
+  overflow: hidden;
+}
+
+@mixin rounded-bottom($border-radius: variables.$border-radius) {
+  border-bottom-left-radius: $border-radius;
+  border-bottom-right-radius: $border-radius;
+  overflow: hidden;
+}
+
+@mixin shadow() {
+  box-shadow: get-elevation(2);
+}
+
+// TODO: Very list-specific. Own module?
+@mixin first-item-padding() {
+  > ::ng-deep {
+    :first-child {
+      --item-padding-top: #{size('xxs')};
+    }
+  }
+}
+
+@mixin last-item-padding() {
+  > ::ng-deep {
+    :last-child {
+      --item-padding-bottom: #{size('xxs')};
+    }
+  }
+}

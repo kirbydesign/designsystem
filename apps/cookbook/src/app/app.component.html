@@ -7,14 +7,24 @@
     </p>
     <cdk-virtual-scroll-viewport
       kirbyPageVirtualScrollStrategy
-      [minBufferPx]="200"
-      [maxBufferPx]="400"
+      [minBufferPx]="1080 * 0.5"
+      [maxBufferPx]="1080 * 1"
     >
-      <kirby-list-experimental>
-        <kirby-item *cdkVirtualFor="let item of items">
-          {{ item }}
-        </kirby-item>
-      </kirby-list-experimental>
+      <section>
+        <div *cdkVirtualFor="let item of items; let idx = index">
+          <kirby-section-header style="height: 56px; display: block;" *ngIf="item.type === 'header'"
+            ><h2>{{ item.content }}</h2></kirby-section-header
+          >
+          <kirby-item
+            *ngIf="item.type === 'item'"
+            [class.first-item]="items[idx - 1]?.type === 'header'"
+            [class.last-item]="items[idx + 1]?.type === 'header'"
+            class="shadow"
+          >
+            {{ item.content }}
+          </kirby-item>
+        </div>
+      </section>
     </cdk-virtual-scroll-viewport>
   </kirby-page-content>
 </kirby-page>
