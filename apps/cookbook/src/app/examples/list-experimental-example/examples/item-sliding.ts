@@ -4,21 +4,21 @@ import { ItemSwipeAction } from '@kirbydesign/designsystem';
 
 import { BaseListComponent } from '../../list-shared/base-list.component';
 
-export const ListItemsSlidingExampleTemplate = `<kirby-list-experimental>
+const template = `<kirby-list-experimental>
 <kirby-section-header list-header><h2 header>List with items</h2></kirby-section-header>
 <kirby-item-sliding *ngFor="let item of items" [swipeActions]="swipeActions">
-  <kirby-item><p> {{ item.title }} </p></kirby-item>
+  <kirby-item><p> 
+{{ item.title }} </p></kirby-item>
 </kirby-item-sliding>
 </kirby-list-experimental>`;
-
 @Component({
   // tslint:disable-next-line
-  selector: 'list-experimental-sliding-items-example',
-  template: `
-    ${ListItemsSlidingExampleTemplate}
-  `,
+  selector: 'cookbook-list-experimental-sliding-items-example',
+  template: template,
 })
 export class ListExperimentalSlidingItemsExampleComponent extends BaseListComponent {
+  template: string = template;
+
   swipeActions: ItemSwipeAction[] = [
     {
       title: 'edit',
