@@ -30,6 +30,7 @@ import { IconShowcaseComponent } from './icon-showcase/icon-showcase.component';
 import { ItemGroupShowcaseComponent } from './item-group-showcase/item-group-showcase.component';
 import { ItemSlidingShowcaseComponent } from './item-sliding-showcase/item-sliding-showcase.component';
 import { LinkShowcaseComponent } from './link-showcase/link-showcase.component';
+import { ListExperimentalShowcaseComponent } from './list-experimental-showcase/list-experimental-showcase.component';
 import { ListLoadOnDemandShowcaseComponent } from './list-load-on-demand-showcase/list-load-on-demand-showcase.component';
 import { ListNoShapeShowcaseComponent } from './list-no-shape-showcase/list-no-shape-showcase.component';
 import { ListShowcaseComponent } from './list-showcase/list-showcase.component';
@@ -125,6 +126,13 @@ export const routes: Routes = [
       {
         path: 'list-no-shape',
         component: ListNoShapeShowcaseComponent,
+      },
+      {
+        path: 'list-experimental',
+        component: ListExperimentalShowcaseComponent,
+        data: {
+          hide: true,
+        },
       },
       {
         path: 'page',
