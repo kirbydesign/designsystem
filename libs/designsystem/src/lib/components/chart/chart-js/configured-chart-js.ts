@@ -9,7 +9,6 @@ import {
   LineController,
   LineElement,
   PointElement,
-  TimeScale,
   Tooltip,
 } from 'chart.js';
 import annotationPlugin from 'chartjs-plugin-annotation';
