@@ -5,11 +5,12 @@ import { ItemSwipeAction } from '@kirbydesign/designsystem';
 import { BaseListComponent } from '../../list-shared/base-list.component';
 
 const template = `<kirby-list-experimental>
-<kirby-section-header list-header><h2 heading>List with items</h2></kirby-section-header>
-<kirby-item-sliding *ngFor="let item of items" [swipeActions]="swipeActions">
-  <kirby-item><p> 
-{{ item.title }} </p></kirby-item>
-</kirby-item-sliding>
+  <kirby-item-sliding *ngFor="let item of items" [swipeActions]="swipeActions">
+    <kirby-item>
+      <p>{{ item.title }}</p>
+      <data slot="end" class="kirby-text-bold">{{item.amount}}</data>
+    </kirby-item>
+  </kirby-item-sliding>
 </kirby-list-experimental>`;
 @Component({
   // tslint:disable-next-line
