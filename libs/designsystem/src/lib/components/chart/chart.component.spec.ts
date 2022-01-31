@@ -58,7 +58,7 @@ describe('ChartComponent', () => {
     let updateFnSpy;
 
     beforeEach(() => {
-      updateFnSpy = spyOn<any>(component, 'updateDataLabels');
+      updateFnSpy = spyOn<any>(component, 'updateLabels');
       spectator.setInput('dataLabels', ['1', '2']);
     });
 
@@ -123,7 +123,7 @@ describe('ChartComponent', () => {
         newValue: { onClick: () => console.log('testing') },
       },
       data: { updateFn: 'updateData', newValue: [1, 2, 3] },
-      dataLabels: { updateFn: 'updateDataLabels', newValue: ['one', 'two', 'three'] },
+      labels: { updateFn: 'updateLabels', newValue: ['one', 'two', 'three'] },
       type: { updateFn: 'updateType', newValue: 'bar' },
       annotations: { updateFn: 'updateAnnotations', newValue: [{ type: 'line' }] },
       highlightedElements: { updateFn: 'updateHighlightedElements', newValue: [[0, 1]] },
@@ -175,7 +175,7 @@ describe('ChartComponent', () => {
       it('should update all of the properties once', () => {
         const updateFnSpies = [
           spyOn<any>(component, 'updateData'),
-          spyOn<any>(component, 'updateDataLabels'),
+          spyOn<any>(component, 'updateLabels'),
           spyOn<any>(component, 'updateType'),
           spyOn<any>(component, 'updateCustomOptions'),
           spyOn<any>(component, 'updateAnnotations'),
@@ -184,7 +184,7 @@ describe('ChartComponent', () => {
 
         spectator.setInput({
           data: [1, 2, 3],
-          dataLabels: ['one', 'two', 'three'],
+          labels: ['one', 'two', 'three'],
           type: 'bar',
           customOptions: { onClick: () => console.log('testing') },
           annotations: [{ type: 'line' }],
@@ -201,7 +201,7 @@ describe('ChartComponent', () => {
 
         spectator.setInput({
           data: [1, 2, 3],
-          dataLabels: ['one', 'two', 'three'],
+          labels: ['one', 'two', 'three'],
           type: 'bar',
           customOptions: { onClick: () => console.log('testing') },
         });
