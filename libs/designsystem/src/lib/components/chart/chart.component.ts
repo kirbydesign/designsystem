@@ -45,7 +45,7 @@ export class ChartComponent implements AfterViewInit, OnChanges {
   @ViewChild('chartCanvas')
   canvasElement: ElementRef<HTMLCanvasElement>;
 
-  private chartHaveBeenRendered: boolean = false;
+  private chartHasBeenRendered: boolean = false;
 
   constructor(private chartJSService: ChartJSService) {}
 
@@ -79,7 +79,7 @@ export class ChartComponent implements AfterViewInit, OnChanges {
   }
 
   ngOnChanges(simpleChanges: SimpleChanges) {
-    if (this.chartHaveBeenRendered) {
+    if (this.chartHasBeenRendered) {
       let shouldRedrawChart = false;
 
       const keyUpdateFnPairs = {
@@ -102,7 +102,7 @@ export class ChartComponent implements AfterViewInit, OnChanges {
   }
 
   private renderChart() {
-    this.chartHaveBeenRendered = true;
+    this.chartHasBeenRendered = true;
     this.chartJSService.renderChart({
       targetElement: this.canvasElement,
       type: this.type,

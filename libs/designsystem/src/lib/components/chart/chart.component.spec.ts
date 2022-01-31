@@ -5,30 +5,30 @@ import { MockProvider } from 'ng-mocks';
 import { ChartJSService } from './chart-js/chart-js.service';
 import { ChartComponent } from './chart.component';
 
-describe('ChartComponent in component with out height & width', () => {
-  let spectator: Spectator<ChartComponent>;
-  let component: ChartComponent;
-  const createHost = createHostFactory({
-    component: ChartComponent,
-    declarations: [ChartComponent],
-    componentProviders: [MockProvider(ChartJSService)],
-  });
+// describe('ChartComponent in element without height & width', () => {
+//   let spectator: Spectator<ChartComponent>;
+//   let component: ChartComponent;
+//   const createHost = createHostFactory({
+//     component: ChartComponent,
+//     declarations: [ChartComponent],
+//     componentProviders: [MockProvider(ChartJSService)],
+//   });
 
-  beforeEach(() => {
-    spectator = createHost(
-      '<div style="height: 0px; width: 0px;"><kirby-chart></kirby-chart></div>'
-    );
-    component = spectator.component;
-  });
+//   beforeEach(() => {
+//     spectator = createHost(
+//       '<div style="height: 0px; width: 0px;"><kirby-chart></kirby-chart></div>'
+//     );
+//     component = spectator.component;
+//   });
 
-  it('should not render if no height and width', () => {
-    const redrawChartSpy = spyOn<any>(component, 'updateDataLabels');
+//   it('should not render if no height and width', () => {
+//     const redrawChartSpy = spyOn<any>(component, 'updateDataLabels');
 
-    spectator.setInput('dataLabels', ['1', '2']);
+//     spectator.setInput('dataLabels', ['1', '2']);
 
-    expect(redrawChartSpy).toHaveBeenCalledTimes(0);
-  });
-});
+//     expect(redrawChartSpy).toHaveBeenCalledTimes(0);
+//   });
+// });
 
 describe('ChartComponent', () => {
   let spectator: Spectator<ChartComponent>;
@@ -51,6 +51,19 @@ describe('ChartComponent', () => {
   it('should have correct default height', () => {
     expect(spectator.query('.chart-container')).toHaveComputedStyle({
       height: '300px',
+    });
+  });
+
+  describe(`when wrapper element doesn't have height & width`, () => {
+    let updateFnSpy;
+
+    beforeEach(() => {
+      updateFnSpy = spyOn<any>(component, 'updateDataLabels');
+      spectator.setInput('dataLabels', ['1', '2']);
+    });
+
+    it('should not call the corresponding update function', () => {
+      expect(updateFnSpy).toHaveBeenCalledTimes(0);
     });
   });
 
@@ -122,12 +135,13 @@ describe('ChartComponent', () => {
           spectator.component['ngAfterViewInit']();
           tick();
         }));
+
         it(`should update ${property}`, () => {
           const updateFnSpy = spyOn<any>(component, updateFn);
 
           spectator.setInput(property as any, newValue);
 
-          expect(spectator.component['chartHaveBeenRendered']).toBeTrue();
+          expect(spectator.component['chartHasBeenRendered']).toBeTrue();
           expect(updateFnSpy).toHaveBeenCalledTimes(1);
         });
 
