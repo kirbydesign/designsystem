@@ -1,7 +1,46 @@
-<cookbook-list-experimental-items-example #items></cookbook-list-experimental-items-example>
-<cookbook-example-viewer [html]="items.template"> </cookbook-example-viewer>
+<p>
+  Lists are made up of multiple rows of items which can contain text, buttons, toggles, icons,
+  thumbnails, and much more. Lists generally contain items with similar data content, such as images
+  and text. The <a routerLink="/home/showcase/section-header">Section Header</a> can be used on a
+  list to create a set of grouped content.
+</p>
+<p>
+  The list itself is essentially a container with the correct styling for rounded corners and shadow
+  around the list content. Anything can be placed into the list, but it comes with a bit of extra
+  functionality when used together with <code>kirby-section-header</code> and
+  <code>kirby-item</code>.
+</p>
+<p>
+  When using the kirby-item, either on its own or wrapped in custom markup, the list expects each of
+  its children to represent a single item (e.g. not another container or wrapper element). This way,
+  the first and last kirby-item will correctly have <code>--item-padding-top</code> and
+  <code>--item-padding-bottom</code> applied, to provide the correct look and feel of the list.
+</p>
 
-<cookbook-list-experimental-sliding-items-example
-  #slidingItems
-></cookbook-list-experimental-sliding-items-example>
-<cookbook-example-viewer [html]="slidingItems.template"> </cookbook-example-viewer>
+<div class="example-snippets">
+  <div>
+    <h2>List with items</h2>
+    <p>
+      The list has two <code>slots</code>, the default slot and the named slot
+      <code>list-header</code>. The default slot is reserved for the list items, and receives the
+      aforementioned styling. The <code>list-header</code> slot is placed outside the styled part of
+      the list, and is meant to be used with the <code>kirby-section-header</code> or similar.
+    </p>
+    <cookbook-code-viewer [html]="items.template"> </cookbook-code-viewer>
+  </div>
+  <cookbook-list-experimental-items-example #items></cookbook-list-experimental-items-example>
+  <div>
+    <h2>Sliding items in list</h2>
+    <p>
+      Lists work out of the box with the interactive
+      <a routerLink="/home/showcase/item-sliding">Item Sliding</a>, allowing to swipe an item left
+      or right to reveal options. Try dragging right on one of the items, to see swipe actions
+      revealed to the left of the item content. See the page linked above for more details on
+      <code>kirby-item-sliding</code>.
+    </p>
+    <cookbook-code-viewer [html]="slidingItems.template"> </cookbook-code-viewer>
+  </div>
+  <cookbook-list-experimental-sliding-items-example
+    #slidingItems
+  ></cookbook-list-experimental-sliding-items-example>
+</div>
