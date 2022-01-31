@@ -5,31 +5,6 @@ import { MockProvider } from 'ng-mocks';
 import { ChartJSService } from './chart-js/chart-js.service';
 import { ChartComponent } from './chart.component';
 
-// describe('ChartComponent in element without height & width', () => {
-//   let spectator: Spectator<ChartComponent>;
-//   let component: ChartComponent;
-//   const createHost = createHostFactory({
-//     component: ChartComponent,
-//     declarations: [ChartComponent],
-//     componentProviders: [MockProvider(ChartJSService)],
-//   });
-
-//   beforeEach(() => {
-//     spectator = createHost(
-//       '<div style="height: 0px; width: 0px;"><kirby-chart></kirby-chart></div>'
-//     );
-//     component = spectator.component;
-//   });
-
-//   it('should not render if no height and width', () => {
-//     const redrawChartSpy = spyOn<any>(component, 'updateDataLabels');
-
-//     spectator.setInput('dataLabels', ['1', '2']);
-
-//     expect(redrawChartSpy).toHaveBeenCalledTimes(0);
-//   });
-// });
-
 describe('ChartComponent', () => {
   let spectator: Spectator<ChartComponent>;
   let component: ChartComponent;
