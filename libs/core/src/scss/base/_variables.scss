@@ -195,3 +195,14 @@ $transition-easings: (
 );
 
 $loading-overlay-backdrop-opacity: 0.8;
+
+/* Interaction states loudness
+****************************************************************************/
+$loudness-scale: (
+  faint: 4%,
+  quiet: 8%,
+  moderate: 12%,
+  loud: 16%,
+  very-loud: 24%,
+  extremely-loud: 32%,
+);
