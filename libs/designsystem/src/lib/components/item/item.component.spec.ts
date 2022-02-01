@@ -68,4 +68,16 @@ describe('ItemComponent', () => {
       });
     });
   });
+
+  describe('when --item-padding-top custom css property is set', () => {
+    it('should set correct bottom padding', () => {
+      expect(true).toBeFalse();
+    });
+  });
+
+  describe('when --item-padding-bottom custom css property is set', () => {
+    it('should set correct bottom padding', () => {
+      expect(true).toBeFalse();
+    });
+  });
 });
