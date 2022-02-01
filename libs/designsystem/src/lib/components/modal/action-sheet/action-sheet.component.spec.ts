@@ -166,7 +166,6 @@ describe('ActionSheetComponent', () => {
         'border-color': 'transparent',
         'background-color': getColor('white', 'contrast'),
         /* prettier-ignore */
-        // tslint:disable-next-line: prettier
         'color': getColor('white')
       });
     });
