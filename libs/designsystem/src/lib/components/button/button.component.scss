@@ -1,5 +1,6 @@
 @use "sass:map";
 @use '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/interaction-state';
 
 $button-width: (
   sm: 44px,
@@ -44,10 +45,33 @@ $button-width: (
   }
 }
 
+// Mixin parameters must be a named color variant. CSS color values won't work.
+@mixin _button-hover(
+  $background-color-variant,
+  $color-variant,
+  $loudness: interaction-state.$default-loudness
+) {
+  @include interaction-state.apply-hover(
+    $background-color: utils.get-color($variant: $background-color-variant, $getValueOnly: true),
+    $color: utils.get-color($variant: $color-variant, $getValueOnly: true),
+    $property: '--kirby-button-background-color',
+    $loudness: $loudness
+  );
+}
+
 @mixin button-no-decoration {
   --kirby-button-background-color: transparent;
   --kirby-button-color: #{utils.get-color('black')};
   --kirby-button-border-color: transparent;
+
+  // Because transparent is not defined as a named color variant
+  // the _button-hover() mixin cannot be used here.
+  // Use the apply-hover() mixin directly instead.
+  @include interaction-state.apply-hover(
+    $background-color: transparent,
+    $color: utils.get-color('black', $getValueOnly: true),
+    $property: '--kirby-button-background-color'
+  );
 
   &.destructive {
     --kirby-button-color: #{utils.get-color('danger')};
@@ -58,9 +82,13 @@ $button-width: (
   --kirby-button-background-color: #{utils.get-color('primary')};
   --kirby-button-color: #{utils.get-color('primary-contrast')};
 
+  @include _button-hover('primary', 'primary-contrast');
+
   &.destructive {
     --kirby-button-background-color: #{utils.get-color('danger')};
     --kirby-button-color: #{utils.get-color('danger-contrast')};
+
+    @include _button-hover('danger', 'danger-contrast');
   }
 }
 
@@ -68,9 +96,13 @@ $button-width: (
   --kirby-button-background-color: #{utils.get-color('black')};
   --kirby-button-color: #{utils.get-color('black-contrast')};
 
+  @include _button-hover('black', 'black-contrast');
+
   &.destructive {
     --kirby-button-background-color: #{utils.get-color('light')};
     --kirby-button-color: #{utils.get-color('danger')};
+
+    @include _button-hover('light', 'danger');
   }
 }
 
@@ -80,8 +112,23 @@ $button-width: (
   --kirby-button-color: #{utils.get-color('black')};
   --kirby-button-border-color: #{utils.get-color('medium')};
 
+  // Because transparent is not defined as a named color variant
+  // the _button-hover() mixin cannot be used here.
+  // Use the apply-hover() mixin directly instead.
+  @include interaction-state.apply-hover(
+    $background-color: transparent,
+    $color: utils.get-color('black', $getValueOnly: true),
+    $property: '--kirby-button-background-color'
+  );
+
   &.destructive {
     --kirby-button-color: #{utils.get-color('danger')};
+
+    @include interaction-state.apply-hover(
+      $background-color: transparent,
+      $color: utils.get-color('danger', $getValueOnly: true),
+      $property: '--kirby-button-background-color'
+    );
   }
 }
 
@@ -93,12 +140,10 @@ $button-width: (
   color: var(--kirby-button-color, inherit);
   border-radius: utils.$border-radius-round;
   box-sizing: border-box; // Ensure border is not added to button height
-  cursor: pointer;
   display: inline-flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  transition: opacity 200ms linear;
   user-select: none;
   vertical-align: middle;
   white-space: nowrap;
@@ -168,10 +213,6 @@ $button-width: (
     --kirby-button-border-color: #{utils.$focus-ring-color};
   }
 
-  @include utils.hover() {
-    opacity: 0.8;
-  }
-
   &:active {
     opacity: 0.8;
   }
@@ -191,6 +232,8 @@ $button-width: (
     &.attention-level2 {
       --kirby-button-background-color: #{utils.get-color('white')};
       --kirby-button-color: #{utils.get-color('white-contrast')};
+
+      @include _button-hover('white', 'white-contrast');
     }
 
     &.attention-level3 {
@@ -218,6 +261,8 @@ $button-width: (
 :host-context(kirby-alert).ok-btn {
   --kirby-button-background-color: #{utils.get-color('success')};
   --kirby-button-color: #{utils.get-color('success-contrast')};
+
+  @include _button-hover('success', 'success-contrast');
 }
 
 :host-context(kirby-dropdown),
@@ -225,6 +270,8 @@ $button-width: (
   &.attention-level2 {
     --kirby-button-background-color: #{utils.get-color('white')};
     --kirby-button-color: #{utils.get-color('white-contrast')};
+
+    @include _button-hover('white', 'white-contrast');
   }
 }
 
@@ -276,6 +323,8 @@ $button-width: (
     &.#{$color-name} {
       --kirby-button-background-color: #{utils.get-color($color-name)};
       --kirby-button-color: #{utils.get-color($color-name + '-contrast')};
+
+      @include _button-hover(#{$color-name}, '#{$color-name}-contrast');
     }
   }
 }

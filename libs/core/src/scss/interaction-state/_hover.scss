@@ -1,0 +1,52 @@
+@use 'sass:color';
+@use 'sass:math';
+@use 'sass:meta';
+@use '../utils';
+
+$default-loudness: utils.get-loudness('moderate');
+
+@mixin apply-hover($background-color, $color, $property, $loudness: $default-loudness) {
+  @if meta.type-of($background-color) != color {
+    @error "$background-color must be a valid CSS color value. See https://developer.mozilla.org/en-US/docs/Web/CSS/color_value";
+  }
+
+  @if meta.type-of($color) != color {
+    @error "$color must be a valid CSS color value. See https://developer.mozilla.org/en-US/docs/Web/CSS/color_value";
+  }
+
+  @if not(meta.type-of($loudness) == number and math.unit($loudness) == '%') {
+    @error "$loudness must be a percentage";
+  }
+
+  // ---------------------------------------------------------------------------
+  // Determine if lightness should increase or decrease.
+  // The default is increase (a positive percentage).
+  //
+  // When background color is transparent assume that the canvas underneath is
+  // a light color. We cannot really determine if lightness should increase or
+  // decrease, but this is a best guess. It's possible to work around by passing
+  // a $background-color (or $color) parameter with a value other than
+  // transparent.
+  //
+  // Sidenote: The color transparent is defined as black with 0% opacity, i.e.,
+  // 100% transparent. Often declared as rgba(0, 0, 0, 0%) in browsers.
+  // ---------------------------------------------------------------------------
+
+  $relative-lightness: $loudness !default;
+
+  @if color.lightness($background-color) > color.lightness($color) {
+    // Make it darker
+    $relative-lightness: $relative-lightness * -1;
+  }
+
+  cursor: pointer;
+  transition-property: var(#{$property});
+  transition-duration: utils.get-transition-duration('quick');
+  transition-timing-function: utils.get-transition-easing('static');
+
+  @include utils.hover() {
+    #{$property}: #{color.scale($background-color, $lightness: $relative-lightness)};
+
+    @content;
+  }
+}
