@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { PageAdvancedExampleComponent } from '~/app/examples/page-example/advanced/page-advanced-example.component';
 import { PageCustomTitleExampleComponent } from '~/app/examples/page-example/advanced/page-custom-title-example.component';
+import { WipPageCustomTitleExampleComponent } from '~/app/examples/page-example/advanced/wip-page-custom-title-example.component';
 import { PageAlignmentAndToolbarTitleExampleComponent } from '~/app/examples/page-example/alignment-and-toolbar-title/page-alignment-and-toolbar-title-example.component';
 import { PageFitHeadingExampleComponent } from '~/app/examples/page-example/fit-heading/fit-heading-example.component';
 import { PageFixedFooterTabExampleComponent } from '~/app/examples/page-example/fixed-footer-tabs/tab/fixed-footer-tab-example.component';
@@ -29,6 +30,7 @@ export class PageShowcaseComponent {
     PageFixedTitleAndActionsExampleComponent.customTitleTemplate;
   fixedActionsExampleHtml: string = PageFixedTitleAndActionsExampleComponent.fixedActionsTemplate;
   customTitleExampleHtml: string = PageCustomTitleExampleComponent.template;
+  wipCustomTitleExampleHtml: string = WipPageCustomTitleExampleComponent.template;
   advancedExampleHtml: string = PageAdvancedExampleComponent.template;
   pullToRefreshExampleHtml: string = PagePullToRefreshExampleComponent.template;
   pullToRefreshExampleTs: string = PagePullToRefreshExampleComponent.handler;
@@ -36,7 +38,12 @@ export class PageShowcaseComponent {
     {
       name: 'title',
       description:
-        'The title of the page. Will stick in the toolbar - including action buttons, if any - when the page is scrolled below the title.',
+        'The title of the page. Will stick in the toolbar - including action buttons, if any - when the page is scrolled past the title.',
+      type: ['string'],
+    },
+    {
+      name: 'subtitle',
+      description: 'The subtitle of the page - requires the presence of a page title.',
       type: ['string'],
     },
     {
@@ -47,7 +54,7 @@ export class PageShowcaseComponent {
     },
     {
       name: 'titleAlignment',
-      description: 'Horizontal alignment of the page title within the content pane.',
+      description: 'Horizontal alignment of the page title and subtitle within the content pane.',
       defaultValue: 'left',
       type: ['left', 'center', 'right'],
     },
@@ -120,9 +127,14 @@ export class PageShowcaseComponent {
         'The `*kirbyPageTitle` directive can be applied to any host or container element which will then be shown at the top of the page. For fixed titles use the `*kirbyPageToolbarTitle` directive instead.',
     },
     {
+      name: '*kirbyPageSubtitle',
+      description:
+        'The `*kirbyPageSubtitle` directive can be applied to any host or container element which will then be shown just below the page title at the top of the page.',
+    },
+    {
       name: '*kirbyPageToolbarTitle',
       description:
-        'The `*kirbyPageToolbarTitle` directive can be applied to any host or container element as an alternative toolbar title to be shown instead of the page title. The element will be shown in the toolbar when the page is scrolled below the title. If no page title is specified the toolbar title will be fixed.',
+        'The `*kirbyPageToolbarTitle` directive can be applied to any host or container element as an alternative toolbar title to be shown instead of the page title. The element will be shown in the toolbar when the page is scrolled past the title. If no page title is specified the toolbar title will be fixed.',
     },
     {
       name: '*kirbyPageActions',
@@ -149,7 +161,7 @@ export class PageShowcaseComponent {
   cssProperties: ApiDescriptionProperty[] = [
     {
       name: '--kirby-page-title-margin-bottom',
-      description: 'Spacing between page title and page content.',
+      description: 'Spacing between page title optionally with subtitle and page content.',
       defaultValue: `size('xl')`,
       type: ['unit'],
     },

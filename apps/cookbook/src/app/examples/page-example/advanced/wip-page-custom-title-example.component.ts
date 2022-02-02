@@ -11,28 +11,28 @@ const config = {
 
   <!-- Custom Page Title -->
   <div *kirbyPageTitle>
-    <h1>
-      <ng-container *ngTemplateOutlet="customTitle"></ng-container>
-    </h1>
+    <div style="display: flex; gap: 0.5rem;">
+      <h1 [kirbyFitHeading]="{ maxLines: 2 }">
+        Overfør penge til andre
+      </h1>
+    </div>
   </div>
 
-  <!-- Custom Page Subtitle -->
   <div *kirbyPageSubtitle>
-    <ng-container *ngTemplateOutlet="customSubtitle"></ng-container>
+    <div>
+     For at overføre penge til andre og evt. købe værdipapirer fra dine betalingskonto skal du acceptere følgende vilkår.
+    </div>
   </div>
-
-  <ng-template kirbyPageToolbarTitle>
-    <ng-container *ngTemplateOutlet="customTitle"></ng-container>
-  </ng-template>
-
-  <ng-template #customTitle>
-    <span>Custom Title with a very long name</span>
-  </ng-template>
-
-  <ng-template #customSubtitle>
-    <span>Custom subtitle with a long long long long name</span>
-  </ng-template>
   
+  <ng-template kirbyPageToolbarTitle>
+    <div style="display: flex; gap: 0.5rem;">
+      <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+        Custom Titles with very long names that span multiple lines will be truncated
+      </div>
+      <kirby-icon name="arrow-down"></kirby-icon>
+    </div>
+  </ng-template>
+
   <!-- Fixed Page Actions -->
   <kirby-page-actions *kirbyPageActions="{fixed: true}">
     <button kirby-button (click)="onMoreSelect()">
@@ -45,28 +45,18 @@ const config = {
     <button kirby-button (click)="onCogSelect()">
       <kirby-icon name="cog"></kirby-icon>
     </button>
-  </kirby-page-actions>
-  
+  </kirby-page-actions>  
+
   <!-- Custom Content Template (without wrapper) -->
   <div *kirbyPageContent [innerHTML]="content"></div>
   
-  <!-- Fixed Content -->
-  <kirby-fab-sheet *kirbyPageContent="{fixed: true}" horizontalAlignment="right">
-    <kirby-icon name="write-message"></kirby-icon>
-    <kirby-action-sheet
-      header="Your action sheet header"
-      subheader="Your action sheet subheader"
-      [items]="items"
-      (itemSelect)="onItemSelect($event)">
-    </kirby-action-sheet>
-  </kirby-fab-sheet>
 </kirby-page>`,
 };
 @Component({
   template: config.template,
   styles: ['.custom-page-title { display: inline-flex; }'],
 })
-export class PageAdvancedExampleComponent extends BasePageExampleComponent {
+export class WipPageCustomTitleExampleComponent extends BasePageExampleComponent {
   static readonly template = config.template
     .replace(' defaultBackHref="/"', '')
     .replace(' [innerHTML]="content">', '>...');
