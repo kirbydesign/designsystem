@@ -1,28 +1,29 @@
 <p>
-  Lists are made up of multiple rows of items which can contain text, buttons, toggles, icons,
-  thumbnails, and much more. Lists generally contain items with similar data content, such as images
-  and text. The <a routerLink="/home/showcase/section-header">Section Header</a> can be used on a
-  list to create a set of grouped content.
+  Lists are made up of multiple rows of items which can contain items, text, buttons, icons, and
+  much more. Lists generally contain items with similar data content, such as images and text.
 </p>
 <p>
-  The list itself is essentially a container with the correct styling for rounded corners and shadow
-  around the list content. Anything can be placed into the list, but it comes with a bit of extra
-  functionality when used together with <code>kirby-section-header</code> and
-  <code>kirby-item</code>.
+  The list itself is essentially a container with styling for rounded corners and shadow around the
+  list content. Anything can be placed into the list, but it comes with a bit of extra functionality
+  when used together with <code>kirby-section-header</code> and <code>kirby-item</code>.
 </p>
 <p>
-  When using the kirby-item, either on its own or wrapped in custom markup, the list expects each of
-  its children to represent a single item (e.g. not another container or wrapper element). This way,
-  the first and last kirby-item will correctly have <code>--item-padding-top</code> and
-  <code>--item-padding-bottom</code> applied, to provide the correct look and feel of the list.
+  When using <code>kirby-item</code>, either on its own or wrapped in custom markup, the list
+  expects its children to represent single item (e.g. not another container or wrapper element).
+  This way, the first and last item will correctly have top and bottom spacing applied, to provide
+  the correct appearance of the list.
 </p>
 
 <div class="example-snippets">
   <div>
     <h2>List with items</h2>
     <p>
-      The list has two <code>slots</code>, the default slot and the named slot <code>outside</code>.
-      The default slot is reserved for the list items, and receives the aforementioned styling. The
+      The <a routerLink="/home/showcase/section-header">Section Header</a> can be used on a list to
+      create a set of grouped content, making use of the lists <code>slots</code>.
+    </p>
+    <p>
+      The list has two <code>slots</code>, the default and the named <code>outside</code> slot. The
+      default slot is reserved for the list items, and receives the list-specific styling. The
       <code>outside</code> slot is placed outside the styled part of the list, and is meant to be
       used with the <code>kirby-section-header</code> or similar.
     </p>
