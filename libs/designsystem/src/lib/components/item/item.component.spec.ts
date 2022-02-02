@@ -77,7 +77,7 @@ describe('ItemComponent', () => {
   });
 
   describe('when --item-padding-bottom css custom property is set', () => {
-    fit('should set correct --padding-bottom css custom property', () => {
+    it('should set correct --padding-bottom css custom property', () => {
       spectator.element.style.setProperty('--item-padding-bottom', '8px');
       expect(spectator.query('ion-item')).toHaveComputedStyle({ '--padding-bottom': size('xxs') });
     });
