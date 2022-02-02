@@ -5,10 +5,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: utils.get-color('background-color');
-  height: 100%;
   flex-grow: 1;
-  padding: utils.size('s');
+  height: 100%;
+  background: utils.get-color('background-color');
+  gap: utils.size('m');
+  padding-top: utils.size('s');
 
   > * {
     width: 100%;
