@@ -1,17 +1,11 @@
 import { ElementRef } from '@angular/core';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
-import {
-  Chart,
-  ChartData,
-  ChartDataset as ChartJSDataset,
-  ChartType as ChartJSType,
-} from 'chart.js';
-import { AnnotationOptions, AnnotationTypeRegistry } from 'chartjs-plugin-annotation';
+import { Chart, ChartDataset as ChartJSDataset, ChartType as ChartJSType } from 'chart.js';
+import { AnnotationOptions } from 'chartjs-plugin-annotation';
 import { MockProvider } from 'ng-mocks';
 
 import { deepCopy } from '../../../helpers/deep-copy';
-import { ChartDataLabelOptions } from '../chart.types';
-import { ChartDataset, ChartType, ChartTypesConfig } from '../chart.types';
+import { ChartDataset, ChartType } from '../chart.types';
 import { ChartHighlightedElements } from '../chart.types';
 import { ChartConfigService } from '../configs/chart-config.service';
 import { CHART_GLOBAL_DEFAULTS } from '../configs/global-defaults.config';
@@ -52,7 +46,7 @@ describe('ChartJSService', () => {
         targetElement: canvasElement,
         type: 'line',
         data: data,
-        dataLabels: ['one', 'two', 'three'],
+        labels: ['one', 'two', 'three'],
       });
 
       const fillerOptions = chartJSService['chart'].options.plugins.filler;
@@ -72,7 +66,7 @@ describe('ChartJSService', () => {
           targetElement: canvasElement,
           type: 'bar',
           data: [1, 2, 3],
-          dataLabels: ['one', 'two', 'three'],
+          labels: ['one', 'two', 'three'],
           annotations,
         });
 
@@ -88,7 +82,7 @@ describe('ChartJSService', () => {
           targetElement: canvasElement,
           type: 'bar',
           data: [1, 2, 3],
-          dataLabels: ['one', 'two', 'three'],
+          labels: ['one', 'two', 'three'],
         });
 
         expect(chartJSService['chart']).toBeInstanceOf(Chart);
@@ -101,7 +95,7 @@ describe('ChartJSService', () => {
           targetElement: canvasElement,
           type: 'bar',
           data,
-          dataLabels: ['one', 'two', 'three'],
+          labels: ['one', 'two', 'three'],
         });
 
         const chart = chartJSService['chart'];
@@ -119,7 +113,7 @@ describe('ChartJSService', () => {
             targetElement: canvasElement,
             type: 'bar',
             data: [1, 2, 3],
-            dataLabels: ['one', 'two', 'three'],
+            labels: ['one', 'two', 'three'],
             highlightedElements,
           });
 
@@ -141,7 +135,7 @@ describe('ChartJSService', () => {
           targetElement: canvasElement,
           type: 'bar',
           data: [1, 2, 3],
-          dataLabels: ['one', 'two', 'three'],
+          labels: ['one', 'two', 'three'],
           customOptions: {
             elements: {
               bar: {
@@ -165,7 +159,7 @@ describe('ChartJSService', () => {
           targetElement: canvasElement,
           type: 'bar',
           data: [1, 2, 3],
-          dataLabels: ['one', 'two', 'three'],
+          labels: ['one', 'two', 'three'],
           customOptions: {
             indexAxis: customIndexAxis,
           },
@@ -184,10 +178,10 @@ describe('ChartJSService', () => {
           data: [1, 2, 3],
         });
 
-        const chartDataLabels = chartJSService['chart'].data.labels;
-        expect(chartDataLabels.length).toEqual(3);
-        chartDataLabels.forEach((dataLabel) => {
-          expect(dataLabel).toEqual('');
+        const chartLabels = chartJSService['chart'].data.labels;
+        expect(chartLabels.length).toEqual(3);
+        chartLabels.forEach((label) => {
+          expect(label).toEqual('');
         });
       });
 
@@ -223,7 +217,7 @@ describe('ChartJSService', () => {
             targetElement: canvasElement,
             type: 'bar',
             data: [{ data: [1, 2, 3] }],
-            dataLabels: ['one', 'two', 'three'],
+            labels: ['one', 'two', 'three'],
           });
 
           expect(chartJSService['chart']).toBeInstanceOf(Chart);
@@ -239,7 +233,7 @@ describe('ChartJSService', () => {
             targetElement: canvasElement,
             type: 'bar',
             data: [dataset],
-            dataLabels: ['one', 'two', 'three'],
+            labels: ['one', 'two', 'three'],
           });
 
           const chart = chartJSService['chart'];
@@ -261,7 +255,7 @@ describe('ChartJSService', () => {
               targetElement: canvasElement,
               type: 'bar',
               data: datasets,
-              dataLabels: ['one', 'two', 'three'],
+              labels: ['one', 'two', 'three'],
             });
 
             const chart = chartJSService['chart'];
@@ -281,7 +275,7 @@ describe('ChartJSService', () => {
               targetElement: canvasElement,
               type: 'bar',
               data: [{ data: [1, 2, 3] }],
-              dataLabels: ['one', 'two', 'three'],
+              labels: ['one', 'two', 'three'],
               highlightedElements,
             });
 
@@ -301,7 +295,7 @@ describe('ChartJSService', () => {
         targetElement: canvasElement,
         type: 'bar',
         data: [1, 2, 3],
-        dataLabels: ['one', 'two', 'three'],
+        labels: ['one', 'two', 'three'],
       });
     });
 
@@ -330,7 +324,7 @@ describe('ChartJSService', () => {
         targetElement: canvasElement,
         type: 'bar',
         data: [1, 2, 3],
-        dataLabels: ['one', 'two', 'three'],
+        labels: ['one', 'two', 'three'],
       });
       chart = chartJSService['chart'];
     });
@@ -379,7 +373,7 @@ describe('ChartJSService', () => {
     });
   });
 
-  describe('function: updateDataLabels', () => {
+  describe('function: updateLabels', () => {
     let chart: Chart;
 
     beforeEach(() => {
@@ -387,18 +381,18 @@ describe('ChartJSService', () => {
         targetElement: canvasElement,
         type: 'bar',
         data: [1, 2, 3],
-        dataLabels: ['one', 'two', 'three'],
+        labels: ['one', 'two', 'three'],
       });
       chart = chartJSService['chart'];
     });
 
-    it('should update the data labels of the chart', () => {
-      const newDatalabels = ['Tre', 'Fire', 'Fem'];
-      expect(chart.data.labels).not.toEqual(newDatalabels);
+    it('should update the labels of the chart', () => {
+      const newLabels = ['four', 'five', 'six'];
+      expect(chart.data.labels).not.toEqual(newLabels);
 
-      chartJSService.updateDataLabels(newDatalabels);
+      chartJSService.updateLabels(newLabels);
 
-      expect(chart.data.labels).toEqual(newDatalabels);
+      expect(chart.data.labels).toEqual(newLabels);
     });
   });
 
@@ -408,7 +402,7 @@ describe('ChartJSService', () => {
         targetElement: canvasElement,
         type: 'bar',
         data: [1, 2, 3],
-        dataLabels: ['one', 'two', 'three'],
+        labels: ['one', 'two', 'three'],
       });
     });
 
@@ -464,7 +458,7 @@ describe('ChartJSService', () => {
         targetElement: canvasElement,
         type: 'bar',
         data: [1, 2, 3],
-        dataLabels: ['one', 'two', 'three'],
+        labels: ['one', 'two', 'three'],
         annotations: [{ type: 'line', yMin: 10, yMax: 10 }],
       });
       chart = chartJSService['chart'];
@@ -512,7 +506,7 @@ describe('ChartJSService', () => {
       expect(chartJSService['chart'].id).toEqual(oldChartId);
     });
 
-    it('should preserve the original dataLabels', () => {
+    it('should preserve the original labels', () => {
       const oldDatalabels = chart.data.labels;
 
       chartJSService['nonDestructivelyUpdateType']('line');
@@ -540,7 +534,7 @@ describe('ChartJSService', () => {
         targetElement: canvasElement,
         type: 'bar',
         data: [1, 2, 3],
-        dataLabels: ['one', 'two', 'three'],
+        labels: ['one', 'two', 'three'],
         annotations: [{ type: 'line', yMin: 10, yMax: 10 }],
       });
       chart = chartJSService['chart'];
@@ -562,7 +556,7 @@ describe('ChartJSService', () => {
       expect(chartJSService['chart'].data.datasets).toEqual(oldDatasets);
     });
 
-    it('should preserve the original dataLabels', () => {
+    it('should preserve the original labels', () => {
       const oldDatalabels = chart.data.labels;
 
       chartJSService['destructivelyUpdateType']('bar');
@@ -591,7 +585,7 @@ describe('ChartJSService', () => {
         targetElement: canvasElement,
         type: chartType,
         data: [1, 2, 3],
-        dataLabels: ['one', 'two', 'three'],
+        labels: ['one', 'two', 'three'],
         customOptions: {
           borderColor: 'pink',
         },
@@ -683,7 +677,7 @@ describe('ChartJSService', () => {
         targetElement: canvasElement,
         type: 'bar',
         data,
-        dataLabels: ['one', 'two', 'three'],
+        labels: ['one', 'two', 'three'],
       });
       chart = chartJSService['chart'];
     });
@@ -780,7 +774,7 @@ describe('ChartJSService', () => {
         targetElement: canvasElement,
         type: chartType,
         data: [1, 2, 3],
-        dataLabels: ['one', 'two', 'three'],
+        labels: ['one', 'two', 'three'],
       });
       chart = chartJSService['chart'];
     });
@@ -890,7 +884,7 @@ describe('ChartJSService', () => {
     describe('when dataset is a flat array', () => {
       it('should throw an error if dataset is a flat array', () => {
         chartJSService.setDataLabelOptions({});
-        expect(function () {
+        expect(function() {
           chartJSService.addDataLabelsData(flatDataset);
         }).toThrowError();
       });
@@ -910,7 +904,7 @@ describe('ChartJSService', () => {
       });
     });
 
-    describe('when niether ChartDataLabelsOptions.showMin, showMax, showCurrent is true', () => {
+    describe('when neither ChartDataLabelsOptions.showMin, showMax, showCurrent is true', () => {
       it('should NOT have an datalabel propery in dataset', () => {
         chartJSService.setDataLabelOptions({});
 

@@ -6,8 +6,8 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   templateUrl: './toast-showcase.component.html',
 })
 export class ToastShowcaseComponent {
-  exampleHtml: string =
-    require('!raw-loader!../../examples/toast-example/toast-example.component.html').default;
+  exampleHtml: string = require('!raw-loader!../../examples/toast-example/toast-example.component.html')
+    .default;
   properties: ApiDescriptionProperty[] = [
     {
       name: 'message',
@@ -18,9 +18,9 @@ export class ToastShowcaseComponent {
     {
       name: 'messageType',
       description:
-        'Message type defines which color the toast will have. There are three different toast types: success (green), warning (yellow), danger (red).',
+        "Message type defines which color the toast will have. There are two different toast types: 'success' (green) and 'warning' (yellow)",
       defaultValue: 'success',
-      type: ['success', 'warning', 'danger'],
+      type: ['success', 'warning'],
     },
     {
       name: 'durationInMs',
