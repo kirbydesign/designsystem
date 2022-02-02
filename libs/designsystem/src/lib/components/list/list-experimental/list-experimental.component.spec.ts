@@ -88,7 +88,7 @@ describe('ListExperimental', () => {
     });
   });
 
-  describe("with content in the 'outside' slot", () => {
+  describe('with content in the "outside" slot', () => {
     let listContent: HTMLDivElement;
 
     beforeEach(() => {
