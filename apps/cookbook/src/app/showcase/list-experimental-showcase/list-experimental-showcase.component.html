@@ -14,7 +14,7 @@
   the correct appearance of the list.
 </p>
 
-<div class="example-snippets">
+<div class="examples">
   <div>
     <h2>List with items</h2>
     <p>
@@ -45,3 +45,14 @@
     #slidingItems
   ></cookbook-list-experimental-sliding-items-example>
 </div>
+
+<h2>Sections</h2>
+<p>
+  It is important to note that the list does not have any functionality for multiple sections nested
+  within the list itself. This would add extra (unnecessary) complexity to using the list.
+</p>
+
+<p>
+  Instead, multiple lists should just be added one after another in a flat structure, as seen below.
+</p>
+<cookbook-code-viewer [html]="multipleListsExample"> </cookbook-code-viewer>

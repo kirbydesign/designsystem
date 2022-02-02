@@ -1,6 +1,6 @@
-.example-snippets {
+.examples {
   display: grid;
   gap: 3rem;
   grid-template-columns: repeat(auto-fill, minmax(40ch, 1fr));
-  margin-top: 2rem;
+  margin: 2rem 0;
 }
