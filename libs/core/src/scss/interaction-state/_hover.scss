@@ -51,7 +51,7 @@ $default-loudness: utils.get-loudness('quiet');
   }
 
   cursor: pointer;
-  transition-property: var(#{$property});
+  transition-property: all;
   transition-duration: utils.get-transition-duration('quick');
   transition-timing-function: utils.get-transition-easing('static');
 
