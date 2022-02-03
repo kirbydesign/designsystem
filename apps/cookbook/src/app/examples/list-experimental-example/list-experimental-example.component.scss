@@ -12,7 +12,6 @@
   padding-top: utils.size('s');
 
   > * {
-    width: 100%;
-    max-width: map.get(utils.$breakpoints, 'medium');
+    width: min(100%, map.get(utils.$breakpoints, 'medium'));
   }
 }
