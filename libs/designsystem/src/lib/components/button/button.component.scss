@@ -1,6 +1,8 @@
-@use "sass:map";
-@use '~@kirbydesign/core/src/scss/utils';
+@use 'sass:map';
+@use 'sass:meta';
+
 @use '~@kirbydesign/core/src/scss/interaction-state';
+@use '~@kirbydesign/core/src/scss/utils';
 
 $button-width: (
   sm: 44px,
@@ -51,8 +53,20 @@ $button-width: (
   $color-variant,
   $loudness: interaction-state.$default-loudness
 ) {
+  // Handle transparent background so _button-hover() can be used for all attention levels
+  $_background-color: null !default;
+
+  @if meta.type-of($background-color-variant) == color {
+    $_background-color: $background-color-variant;
+  } @else {
+    $_background-color: utils.get-color(
+      $variant: $background-color-variant,
+      $getValueOnly: true,
+    );
+  }
+
   @include interaction-state.apply-hover(
-    $background-color: utils.get-color($variant: $background-color-variant, $getValueOnly: true),
+    $background-color: $_background-color,
     $color: utils.get-color($variant: $color-variant, $getValueOnly: true),
     $property: '--kirby-button-background-color',
     $loudness: $loudness
@@ -64,14 +78,7 @@ $button-width: (
   --kirby-button-color: #{utils.get-color('black')};
   --kirby-button-border-color: transparent;
 
-  // Because transparent is not defined as a named color variant
-  // the _button-hover() mixin cannot be used here.
-  // Use the apply-hover() mixin directly instead.
-  @include interaction-state.apply-hover(
-    $background-color: transparent,
-    $color: utils.get-color('black', $getValueOnly: true),
-    $property: '--kirby-button-background-color'
-  );
+  @include _button-hover(transparent, 'primary-contrast');
 
   &.destructive {
     --kirby-button-color: #{utils.get-color('danger')};
@@ -112,23 +119,12 @@ $button-width: (
   --kirby-button-color: #{utils.get-color('black')};
   --kirby-button-border-color: #{utils.get-color('medium')};
 
-  // Because transparent is not defined as a named color variant
-  // the _button-hover() mixin cannot be used here.
-  // Use the apply-hover() mixin directly instead.
-  @include interaction-state.apply-hover(
-    $background-color: transparent,
-    $color: utils.get-color('black', $getValueOnly: true),
-    $property: '--kirby-button-background-color'
-  );
+  @include _button-hover(transparent, 'black');
 
   &.destructive {
     --kirby-button-color: #{utils.get-color('danger')};
 
-    @include interaction-state.apply-hover(
-      $background-color: transparent,
-      $color: utils.get-color('danger', $getValueOnly: true),
-      $property: '--kirby-button-background-color'
-    );
+    @include _button-hover(transparent, 'danger');
   }
 }
 
