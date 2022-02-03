@@ -119,7 +119,7 @@ $button-width: (
   --kirby-button-color: #{utils.get-color('black')};
   --kirby-button-border-color: #{utils.get-color('medium')};
 
-  @include _button-hover(transparent, 'black', utils.get-loudness('faint'));
+  @include _button-hover(transparent, 'black');
 
   &.destructive {
     --kirby-button-color: #{utils.get-color('danger')};
