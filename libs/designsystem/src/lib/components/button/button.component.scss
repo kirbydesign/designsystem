@@ -96,7 +96,7 @@ $button-width: (
   --kirby-button-background-color: #{utils.get-color('black')};
   --kirby-button-color: #{utils.get-color('black-contrast')};
 
-  @include _button-hover('black', 'black-contrast');
+  @include _button-hover('black', 'black-contrast', utils.get-loudness('loud'));
 
   &.destructive {
     --kirby-button-background-color: #{utils.get-color('light')};
@@ -233,7 +233,7 @@ $button-width: (
       --kirby-button-background-color: #{utils.get-color('white')};
       --kirby-button-color: #{utils.get-color('white-contrast')};
 
-      @include _button-hover('white', 'white-contrast');
+      @include _button-hover('white', 'white-contrast', utils.get-loudness('faint'));
     }
 
     &.attention-level3 {
@@ -271,7 +271,7 @@ $button-width: (
     --kirby-button-background-color: #{utils.get-color('white')};
     --kirby-button-color: #{utils.get-color('white-contrast')};
 
-    @include _button-hover('white', 'white-contrast');
+    @include _button-hover('white', 'white-contrast', utils.get-loudness('faint'));
   }
 }
 
