@@ -1,5 +1,6 @@
 @use "sass:map";
 @use '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/base/list';
 
 :host {
   display: flex;
@@ -12,6 +13,6 @@
   padding-top: utils.size('s');
 
   > * {
-    width: min(100%, map.get(utils.$breakpoints, 'medium'));
+    width: min(100%, #{map.get(utils.$breakpoints, 'medium')});
   }
 }
