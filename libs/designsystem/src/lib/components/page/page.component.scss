@@ -113,6 +113,7 @@ ion-content {
   --padding-start: var(--page-content-padding-start, #{utils.size('s')});
   --padding-end: var(--page-content-padding-end, #{utils.size('s')});
   --background: #{utils.get-color('background-color')};
+  --color: #{utils.get-color('black')};
 
   .content-inner {
     max-width: var(--page-content-max-width, utils.$page-content-max-width);
