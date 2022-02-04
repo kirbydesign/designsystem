@@ -1,10 +1,6 @@
 @use '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/base/list';
 
 :host {
   display: block;
-}
-
-.list-content {
-  @include utils.first-item-padding();
-  @include utils.last-item-padding();
 }

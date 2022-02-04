@@ -4,7 +4,7 @@
 @use 'base/ionic';
 @use 'base/typography';
 @use 'base/line-clamp';
-@use 'base/list';
+@use 'base/html-list';
 
 :root,
 :host {
@@ -262,24 +262,4 @@ ion-loading.kirby-loading-overlay {
   background-size: $icon-scaling-factor;
   //place icon to the right of text, with icons own width + the actual spacing
   padding-right: calc(#{$icon-scaling-factor} + #{utils.size('xxxs')});
-}
-
-//TODO: Where to place these two generic styles (that are only used in list, at least for now)?
-.rounded {
-  @include utils.rounded();
-}
-
-.shadow {
-  @include utils.shadow();
-}
-
-//TODO: These are only relevant when building lists. Where should they be placed?
-.first-item {
-  @include utils.rounded-top();
-  @include utils.first-item-padding();
-}
-
-.last-item {
-  @include utils.rounded-bottom();
-  @include utils.last-item-padding();
 }
