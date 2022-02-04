@@ -322,7 +322,7 @@ $button-width: (
       --kirby-button-background-color: #{utils.get-color($color-name)};
       --kirby-button-color: #{utils.get-color($color-name + '-contrast')};
 
-      @include _button-hover(#{$color-name}, '#{$color-name}-contrast');
+      @include _button-hover(#{$color-name}, '#{$color-name}-contrast', utils.get-loudness('loud'));
     }
   }
 }
