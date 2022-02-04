@@ -73,9 +73,18 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
   }
 
   private observeResize(): void {
-    this.resizeObserverService.observe(this.elementRef, () => {
-      this.scaleHeader();
-    });
+    // Supress select errors thrown from ResizeObserver as they do not have any
+    // impact on the users.
+    // @see {@link https://stackoverflow.com/questions/49384120/resizeobserver-loop-limit-exceeded}
+    try {
+      this.resizeObserverService.observe(this.elementRef, () => {
+        this.scaleHeader();
+      });
+    } catch (e) {
+      if (e !== 'ResizeObserver loop limit exceeded') {
+        throw e;
+      }
+    }
   }
 
   private scaleHeader(): void {
