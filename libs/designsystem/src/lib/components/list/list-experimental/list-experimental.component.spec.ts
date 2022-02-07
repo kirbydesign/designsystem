@@ -24,7 +24,7 @@ describe('ListExperimental', () => {
   });
 
   describe('with slotted kirby-item elements', () => {
-    let listContent: HTMLDivElement;
+    let listContent: HTMLElement;
     let items: HTMLElement[];
 
     beforeEach(() => {
@@ -37,7 +37,7 @@ describe('ListExperimental', () => {
       </kirby-list-experimental>`);
 
       items = spectator.queryHostAll('kirby-item');
-      listContent = spectator.queryHost('.list-content');
+      listContent = items[0].parentElement;
       expect(listContent).not.toBeUndefined();
     });
 
@@ -89,20 +89,24 @@ describe('ListExperimental', () => {
   });
 
   describe('with content in the "outside" slot', () => {
-    let listContent: HTMLDivElement;
+    let listContent: HTMLElement;
 
     beforeEach(() => {
       spectator = createHost<ListExperimentalComponent>(`
       <kirby-list-experimental>
-        <div id="slotted-content" outside>Hello</div>
+        <div id="slotted-outside" outside>Hello</div>
+        <div id="slotted-default">List item</div>
       </kirby-list-experimental>`);
-      listContent = spectator.queryHost('.list-content');
+      listContent = spectator.queryHost('#slotted-default').parentElement;
       expect(listContent).not.toBeUndefined();
     });
 
     it('should place slotted content above the list-content', () => {
       const { previousElementSibling } = listContent;
-      expect(previousElementSibling.id).toEqual('slotted-content');
+      console.log(previousElementSibling);
+      console.log(listContent);
+
+      expect(previousElementSibling.id).toEqual('slotted-outside');
     });
   });
 });
