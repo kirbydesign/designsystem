@@ -36,7 +36,6 @@ import { ListColoredItemsExampleComponent } from './list-example/examples/colore
 import { ListWithDividersExampleComponent } from './list-example/examples/dividers';
 import { ListWithHeaderAndFooterExampleComponent } from './list-example/examples/header-and-footer';
 import { ListItemsExampleComponent } from './list-example/examples/items';
-import { ListVirtualScrollExampleComponent } from './list-example/examples/list-with-virtual-scroll';
 import { ListWithSectionsExampleComponent } from './list-example/examples/sections';
 import { ListWithSectionsAndColoredItemsExampleComponent } from './list-example/examples/sections-and-colored-items';
 import { ListSelectableItemsExampleComponent } from './list-example/examples/selectable-items';
@@ -478,9 +477,5 @@ export const routes: Routes = [
   {
     path: 'styling-HTML-lists',
     component: StylingHtmlListsExampleComponent,
-  },
-  {
-    path: 'wip-list-virtual-scroll',
-    component: ListVirtualScrollExampleComponent,
   },
 ];
