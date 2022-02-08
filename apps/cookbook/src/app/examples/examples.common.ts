@@ -29,6 +29,7 @@ import { ItemExampleComponent } from './item-example/item-example.component';
 import { ItemGroupExampleComponent } from './item-group-example/item-group-example.component';
 import { LinkExampleComponent } from './link-example/link-example.component';
 import { ListExampleComponent } from './list-example/list-example.component';
+import { ListExperimentalExampleComponent } from './list-experimental-example/list-experimental-example.component';
 import { ListLoadOnDemandExampleComponent } from './list-load-on-demand-example/list-load-on-demand-example.component';
 import { ListNoShapeExampleComponent } from './list-no-shape-example/list-no-shape-example.component';
 import { ListSwipeExampleComponent } from './list-swipe-example/list-swipe-example.component';
@@ -126,6 +127,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   StylingHtmlListsExampleComponent,
   ItemGroupExampleComponent,
   SectionHeaderExampleComponent,
+  ListExperimentalExampleComponent,
 ];
 
 // Configure custom icons (used by example to show the usage of custom icons)

@@ -1,11 +1,70 @@
-ul,
-ol {
-  margin-inline-start: 0.25em;
-  padding-inline-start: 1em;
-  line-height: 1.5;
+@use '~@kirbydesign/core/src/scss/utils';
+
+@mixin rounded($border-radius: utils.$border-radius) {
+  @include rounded-top($border-radius);
+  @include rounded-bottom($border-radius);
 }
 
-li li,
-li + li {
-  margin-block-start: 0.5em;
+@mixin rounded-top($border-radius: utils.$border-radius) {
+  border-top-left-radius: $border-radius;
+  border-top-right-radius: $border-radius;
+  overflow: hidden;
+}
+
+@mixin rounded-bottom($border-radius: utils.$border-radius) {
+  border-bottom-left-radius: $border-radius;
+  border-bottom-right-radius: $border-radius;
+  overflow: hidden;
+}
+
+@mixin shadow() {
+  box-shadow: utils.get-elevation(2);
+}
+
+@mixin first-item-padding() {
+  > ::ng-deep {
+    :first-child {
+      --item-padding-top: #{utils.size('xxs')};
+    }
+  }
+}
+
+@mixin last-item-padding() {
+  > ::ng-deep {
+    :last-child {
+      --item-padding-bottom: #{utils.size('xxs')};
+    }
+  }
+}
+
+/*
+ * Utilities for styling lists and items within the list. 
+ * These can be used to create list-like appearance of elements 
+ * in use-cases where more freedom is needed than the list-component can offer.
+ */
+
+.rounded {
+  @include rounded();
+}
+
+.shadow {
+  @include shadow();
+}
+
+.first-item-padding {
+  @include first-item-padding();
+}
+
+.last-item-padding {
+  @include last-item-padding();
+}
+
+.first-item {
+  @include rounded-top();
+  @include first-item-padding();
+}
+
+.last-item {
+  @include rounded-bottom();
+  @include last-item-padding();
 }
