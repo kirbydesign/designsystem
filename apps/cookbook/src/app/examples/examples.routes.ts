@@ -36,7 +36,6 @@ import { ListColoredItemsExampleComponent } from './list-example/examples/colore
 import { ListWithDividersExampleComponent } from './list-example/examples/dividers';
 import { ListWithHeaderAndFooterExampleComponent } from './list-example/examples/header-and-footer';
 import { ListItemsExampleComponent } from './list-example/examples/items';
-import { ListVirtualScrollExampleComponent } from './list-example/examples/list-with-virtual-scroll';
 import { ListWithSectionsExampleComponent } from './list-example/examples/sections';
 import { ListWithSectionsAndColoredItemsExampleComponent } from './list-example/examples/sections-and-colored-items';
 import { ListSelectableItemsExampleComponent } from './list-example/examples/selectable-items';
@@ -72,7 +71,9 @@ import { TabsExampleComponent } from './tabs-example/tabs-example.component';
 import { ToastExampleComponent } from './toast-example/toast-example.component';
 import { ToggleButtonExampleComponent } from './toggle-button-example/toggle-button-example.component';
 import { ToggleExampleComponent } from './toggle-example/toggle-example.component';
+import { VirtualScrollListExampleComponent } from './virtual-scroll-example/virtual-scroll-list-example/virtual-scroll-list-example.component';
 
+VirtualScrollListExampleComponent;
 export const routes: Routes = [
   {
     path: '',
@@ -366,6 +367,10 @@ export const routes: Routes = [
     component: GridLayoutExtendedExampleComponent,
   },
   {
+    path: 'virtual-scroll-list',
+    component: VirtualScrollListExampleComponent,
+  },
+  {
     path: 'chip',
     component: ChipExampleComponent,
   },
@@ -472,9 +477,5 @@ export const routes: Routes = [
   {
     path: 'styling-HTML-lists',
     component: StylingHtmlListsExampleComponent,
-  },
-  {
-    path: 'wip-list-virtual-scroll',
-    component: ListVirtualScrollExampleComponent,
   },
 ];

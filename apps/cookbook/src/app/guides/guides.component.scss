@@ -4,6 +4,7 @@ table {
   border-spacing: 0;
   border-collapse: collapse;
   width: 100%;
+  margin-bottom: utils.size('s');
 
   thead {
     background-color: utils.get-color('light-tint');
