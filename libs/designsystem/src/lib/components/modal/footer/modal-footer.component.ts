@@ -10,13 +10,7 @@ export class ModalFooterComponent {
   @Input()
   snapToKeyboard = false;
 
-  @HostBinding('class.fixed')
-  isFixed: boolean = true;
-  @HostBinding('class.inline')
-  isInline: boolean;
-
-  @Input() set type(type: 'inline' | 'fixed') {
-    this.isFixed = type === 'fixed';
-    this.isInline = type === 'inline';
-  }
+  @HostBinding('class')
+  @Input()
+  type: 'inline' | 'fixed' = 'fixed';
 }
