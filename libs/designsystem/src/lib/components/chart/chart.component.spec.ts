@@ -29,6 +29,19 @@ describe('ChartComponent', () => {
     });
   });
 
+  describe(`when wrapper element doesn't have height & width`, () => {
+    let updateFnSpy;
+
+    beforeEach(() => {
+      updateFnSpy = spyOn<any>(component, 'updateLabels');
+      spectator.setInput('dataLabels', ['1', '2']);
+    });
+
+    it('should not call the corresponding update function', () => {
+      expect(updateFnSpy).toHaveBeenCalledTimes(0);
+    });
+  });
+
   describe('when "type" is not provided', () => {
     it('should default to correct type', () => {
       expect(component.type).toBe('column');
@@ -85,7 +98,7 @@ describe('ChartComponent', () => {
         newValue: { onClick: () => console.log('testing') },
       },
       data: { updateFn: 'updateData', newValue: [1, 2, 3] },
-      dataLabels: { updateFn: 'updateDataLabels', newValue: ['one', 'two', 'three'] },
+      labels: { updateFn: 'updateLabels', newValue: ['one', 'two', 'three'] },
       type: { updateFn: 'updateType', newValue: 'bar' },
       annotations: { updateFn: 'updateAnnotations', newValue: [{ type: 'line' }] },
       highlightedElements: { updateFn: 'updateHighlightedElements', newValue: [[0, 1]] },
@@ -93,11 +106,17 @@ describe('ChartComponent', () => {
 
     Object.entries(scenarios).forEach(([property, { updateFn, newValue }]) => {
       describe(`${property}`, () => {
+        beforeEach(fakeAsync(() => {
+          spectator.component['ngAfterViewInit']();
+          tick();
+        }));
+
         it(`should update ${property}`, () => {
           const updateFnSpy = spyOn<any>(component, updateFn);
 
           spectator.setInput(property as any, newValue);
 
+          expect(spectator.component['chartHasBeenRendered']).toBeTrue();
           expect(updateFnSpy).toHaveBeenCalledTimes(1);
         });
 
@@ -123,10 +142,15 @@ describe('ChartComponent', () => {
     });
 
     describe('multiple chartJS related input properties at the same time', () => {
+      beforeEach(fakeAsync(() => {
+        spectator.component['ngAfterViewInit']();
+        tick();
+      }));
+
       it('should update all of the properties once', () => {
         const updateFnSpies = [
           spyOn<any>(component, 'updateData'),
-          spyOn<any>(component, 'updateDataLabels'),
+          spyOn<any>(component, 'updateLabels'),
           spyOn<any>(component, 'updateType'),
           spyOn<any>(component, 'updateCustomOptions'),
           spyOn<any>(component, 'updateAnnotations'),
@@ -135,7 +159,7 @@ describe('ChartComponent', () => {
 
         spectator.setInput({
           data: [1, 2, 3],
-          dataLabels: ['one', 'two', 'three'],
+          labels: ['one', 'two', 'three'],
           type: 'bar',
           customOptions: { onClick: () => console.log('testing') },
           annotations: [{ type: 'line' }],
@@ -152,7 +176,7 @@ describe('ChartComponent', () => {
 
         spectator.setInput({
           data: [1, 2, 3],
-          dataLabels: ['one', 'two', 'three'],
+          labels: ['one', 'two', 'three'],
           type: 'bar',
           customOptions: { onClick: () => console.log('testing') },
         });

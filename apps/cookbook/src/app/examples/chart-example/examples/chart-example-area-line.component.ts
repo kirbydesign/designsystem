@@ -6,7 +6,7 @@ const config = {
     <kirby-chart
       type="line"
       [data]="data"
-      [dataLabels]="[
+      [labels]="[
         '1950',
         '1951',
         '1952',
