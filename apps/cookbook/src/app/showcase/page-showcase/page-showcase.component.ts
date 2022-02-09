@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { PageAdvancedExampleComponent } from '~/app/examples/page-example/advanced/page-advanced-example.component';
 import { PageCustomTitleExampleComponent } from '~/app/examples/page-example/advanced/page-custom-title-example.component';
-import { WipPageCustomTitleExampleComponent } from '~/app/examples/page-example/advanced/wip-page-custom-title-example.component';
 import { PageAlignmentAndToolbarTitleExampleComponent } from '~/app/examples/page-example/alignment-and-toolbar-title/page-alignment-and-toolbar-title-example.component';
 import { PageFitHeadingExampleComponent } from '~/app/examples/page-example/fit-heading/fit-heading-example.component';
 import { PageFixedFooterTabExampleComponent } from '~/app/examples/page-example/fixed-footer-tabs/tab/fixed-footer-tab-example.component';
@@ -30,7 +29,6 @@ export class PageShowcaseComponent {
     PageFixedTitleAndActionsExampleComponent.customTitleTemplate;
   fixedActionsExampleHtml: string = PageFixedTitleAndActionsExampleComponent.fixedActionsTemplate;
   customTitleExampleHtml: string = PageCustomTitleExampleComponent.template;
-  wipCustomTitleExampleHtml: string = WipPageCustomTitleExampleComponent.template;
   advancedExampleHtml: string = PageAdvancedExampleComponent.template;
   pullToRefreshExampleHtml: string = PagePullToRefreshExampleComponent.template;
   pullToRefreshExampleTs: string = PagePullToRefreshExampleComponent.handler;

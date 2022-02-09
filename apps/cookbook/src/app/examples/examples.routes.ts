@@ -50,7 +50,6 @@ import { ModalRoutePage1ExampleComponent } from './modal-example/modal-route-exa
 import { ModalRoutePage2ExampleComponent } from './modal-example/modal-route-example/modal-route-page2-example.component';
 import { PageAdvancedExampleComponent } from './page-example/advanced/page-advanced-example.component';
 import { PageCustomTitleExampleComponent } from './page-example/advanced/page-custom-title-example.component';
-import { WipPageCustomTitleExampleComponent } from './page-example/advanced/wip-page-custom-title-example.component';
 import { PageAlignmentAndToolbarTitleExampleComponent } from './page-example/alignment-and-toolbar-title/page-alignment-and-toolbar-title-example.component';
 import { PageFitHeadingExampleComponent } from './page-example/fit-heading/fit-heading-example.component';
 import { PageFixedFooterTabsExampleComponent } from './page-example/fixed-footer-tabs/fixed-footer-tabs-example.component';
@@ -146,10 +145,6 @@ export const routes: Routes = [
                 },
               },
             ],
-          },
-          {
-            path: 'wip-custom-title',
-            component: WipPageCustomTitleExampleComponent,
           },
           {
             path: 'custom-title',
