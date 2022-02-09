@@ -267,12 +267,21 @@ $button-width: (
   @include _button-hover('success', 'success-contrast', utils.get-loudness('loud'));
 }
 
-:host-context(kirby-action-sheet) {
+:host-context(kirby-dropdown) {
   &.attention-level2 {
     --kirby-button-background-color: #{utils.get-color('white')};
     --kirby-button-color: #{utils.get-color('white-contrast')};
 
     @include _button-hover('white', 'white-contrast', utils.get-loudness('faint'));
+  }
+}
+
+:host-context(kirby-action-sheet) {
+  &.attention-level2 {
+    --kirby-button-background-color: #{utils.get-color('white')};
+    --kirby-button-color: #{utils.get-color('white-contrast')};
+
+    @include _button-hover('white', 'white-contrast');
   }
 }
 
