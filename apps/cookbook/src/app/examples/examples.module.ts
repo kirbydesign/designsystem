@@ -30,6 +30,7 @@ import { RangeExampleModule } from './range-example/range-example.module';
 import { SectionHeaderExampleModule } from './section-header-example/section-header-example.module';
 import { SegmentedControlExampleModule } from './segmented-control-example/segmented-control-example.module';
 import { ToggleButtonExampleModule } from './toggle-button-example/toggle-button-example.module';
+import { VirtualScrollExampleModule } from './virtual-scroll-example/virtual-scroll-example.module';
 
 const IMPORTS = [
   ExamplesSharedModule,
@@ -56,6 +57,7 @@ const IMPORTS = [
   SectionHeaderExampleModule,
   ItemGroupExampleModule,
   ListExperimentalExampleModule,
+  VirtualScrollExampleModule,
 ];
 
 @NgModule({
