@@ -167,6 +167,31 @@ describe('ModalFooterComponent', () => {
     });
   });
 
+  describe('when inline type is set', () => {
+    it('should have a transparent background color', () => {
+      spectator = createHost(`<kirby-modal-footer type="inline"></kirby-modal-footer>`);
+      expect(spectator.query('ion-footer')).toHaveComputedStyle({
+        'background-color': 'transparent',
+      });
+    });
+
+    it('should have a transparent background even when themeColor is specified', () => {
+      spectator = createHost(
+        `<kirby-modal-footer type="inline" themeColor="primary"></kirby-modal-footer>`
+      );
+      expect(spectator.query('ion-footer')).toHaveComputedStyle({
+        'background-color': 'transparent',
+      });
+    });
+
+    it('should not show a box shadow', () => {
+      spectator = createHost(`<kirby-modal-footer type="inline"></kirby-modal-footer>`);
+      expect(spectator.query('ion-footer')).toHaveComputedStyle({
+        'box-shadow': 'none',
+      });
+    });
+  });
+
   // utility functions
   function setSafeAreaBottom() {
     modalFooterElement.style.setProperty('--kirby-safe-area-bottom', SAFE_AREA_BOTTOM_PX);
