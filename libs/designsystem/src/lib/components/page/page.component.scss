@@ -22,6 +22,7 @@ ion-toolbar {
   --padding-end: #{utils.size('xxxs')};
   --padding-top: 0;
   --padding-bottom: 0;
+  --ion-toolbar-color: #{utils.get-color('black')};
 
   /*
   * This overrides Ionic's default ios styling for the position of secondary action buttons which are to the left of content: https://ionicframework.com/docs/api/toolbar#buttons
