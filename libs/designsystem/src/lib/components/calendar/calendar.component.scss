@@ -1,3 +1,4 @@
+@use '~@kirbydesign/core/src/scss/interaction-state';
 @use '~@kirbydesign/core/src/scss/utils';
 
 $month-navigator-width: 80px;
@@ -87,6 +88,8 @@ td {
   width: $dayWidth;
   height: $dayWidth;
   margin: utils.size('xxxs') 0;
+  color: var(--color, #{utils.get-color('black')});
+  background-color: var(--background-color, transparent);
 }
 
 .day.selectable,
@@ -96,17 +99,24 @@ td {
 
 .day.disabled,
 .day:not(.selectable) {
-  color: utils.get-text-color('semi-dark');
+  --color: #{utils.get-text-color('semi-dark')};
 }
 
-.day.today {
-  color: utils.get-color('medium-contrast');
-  background-color: utils.get-color('medium');
+// TODO: Find a different solution for specificity
+.day.today.today.today {
+  --color: #{utils.get-color('semi-light-contrast')};
+  --background-color: #{utils.get-color('semi-light')};
+  // TODO: improve, reuse - extract into local mixin like in button?
+  @include interaction-state.apply-hover(
+    $background-color: utils.get-color('semi-light', $getValueOnly: true),
+    $color: utils.get-color('semi-light-contrast', $getValueOnly: true),
+    $property: '--background-color'
+  );
 }
 
 .day.selected {
-  color: utils.get-color('black-contrast');
-  background-color: utils.get-color('black');
+  --color: #{utils.get-color('black-contrast')};
+  --background-color: #{utils.get-color('black')};
 }
 
 .day:not(.current-month) {
@@ -114,7 +124,15 @@ td {
   pointer-events: none;
 }
 
-.day.selectable:not(.selected):hover {
-  color: utils.get-color('light-contrast');
-  background-color: utils.get-color('light');
+// .day.selectable:not(.selected):hover {
+.day.selectable:not(.selected) {
+  // --color: #{utils.get-color('light-contrast')};
+  // --background-color: #{utils.get-color('light')};
+
+  @include interaction-state.apply-hover(
+    $background-color: transparent,
+    $color: utils.get-color('black', $getValueOnly: true),
+    $property: '--background-color',
+    $loudness: utils.get-loudness('faint')
+  );
 }
