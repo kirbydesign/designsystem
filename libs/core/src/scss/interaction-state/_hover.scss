@@ -34,6 +34,7 @@ $default-loudness: utils.get-loudness('quiet');
 
   $relative-lightness: $loudness !default;
 
+  // TODO: Extract into utility function
   @if color.lightness($background-color) > color.lightness($color) {
     // Make it darker
     $relative-lightness: $relative-lightness * -1;
@@ -59,5 +60,62 @@ $default-loudness: utils.get-loudness('quiet');
     #{$property}: #{$_hover-color};
 
     @content;
+  }
+}
+
+@mixin apply-hover-layer($loudness: $default-loudness, $flip: false) {
+  @if not(meta.type-of($loudness) == number and math.unit($loudness) == '%') {
+    @error "$loudness must be a percentage";
+  }
+
+  cursor: pointer;
+  position: relative;
+
+  @include utils.hover() {
+    @content;
+
+    .state-layer::before {
+      $_opacity: $loudness / 100%;
+
+      @if $flip {
+        background-color: #fff;
+      } @else {
+        background-color: #000;
+      }
+
+      opacity: #{$_opacity};
+      // background-color: hsl(0 0% 0% / #{$_opacity});
+    }
+  }
+
+  .state-layer {
+    position: absolute;
+    // TODO: Must be generic - not coupled with button
+    // inset: calc(var(--kirby-button-border-width, 1px) * -1); // negate border-width on button
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    border-radius: inherit;
+
+    z-index: 1;
+
+    &::before {
+      content: '';
+      position: absolute;
+      pointer-events: none;
+      inset: -50%;
+
+      opacity: 0;
+
+      // TODO: Extract transition into separate mixin?
+      transition-property: all;
+      transition-duration: utils.get-transition-duration('quick');
+      transition-timing-function: utils.get-transition-easing('static');
+    }
+  }
+
+  .content {
+    position: relative;
+    z-index: 2;
   }
 }
