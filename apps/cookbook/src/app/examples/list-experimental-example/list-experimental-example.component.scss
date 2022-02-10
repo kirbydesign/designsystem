@@ -1,0 +1,18 @@
+@use "sass:map";
+@use '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/base/list';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;
+  height: 100%;
+  background: utils.get-color('background-color');
+  gap: utils.size('m');
+  padding-top: utils.size('s');
+
+  > * {
+    width: min(100%, #{map.get(utils.$breakpoints, 'medium')});
+  }
+}

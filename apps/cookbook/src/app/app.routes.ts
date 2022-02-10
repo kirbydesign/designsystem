@@ -37,9 +37,8 @@ export const routes: Routes = [
         loadChildren: () => import('./changelog/changelog.module').then((m) => m.ChangelogModule),
       },
       {
-        path: 'layout-recipes',
-        loadChildren: () =>
-          import('./layout-recipes/layout-recipes.module').then((m) => m.LayoutRecipesModule),
+        path: 'guides',
+        loadChildren: () => import('./guides/guides.module').then((m) => m.GuideModule),
       },
       {
         path: 'accessibility-in-kirby',

@@ -22,6 +22,7 @@ import { ItemGroupExampleModule } from './item-group-example/item-group-example.
 import { ItemSlidingExampleModule } from './item-sliding-example/item-sliding-example.module';
 import { LinkExampleModule } from './link-example/link-example.module';
 import { ListExamplesModule } from './list-example/list-example.module';
+import { ListExperimentalExampleModule } from './list-experimental-example/list-experimental-example.module';
 import { ModalExampleModule } from './modal-example/modal-example.module';
 import { ProgressCircleExampleModule } from './progress-circle-example/progress-circle-example.module';
 import { RadioExampleModule } from './radio-example/radio-example.module';
@@ -29,6 +30,7 @@ import { RangeExampleModule } from './range-example/range-example.module';
 import { SectionHeaderExampleModule } from './section-header-example/section-header-example.module';
 import { SegmentedControlExampleModule } from './segmented-control-example/segmented-control-example.module';
 import { ToggleButtonExampleModule } from './toggle-button-example/toggle-button-example.module';
+import { VirtualScrollExampleModule } from './virtual-scroll-example/virtual-scroll-example.module';
 
 const IMPORTS = [
   ExamplesSharedModule,
@@ -54,6 +56,8 @@ const IMPORTS = [
   GridLayoutExamplesModule,
   SectionHeaderExampleModule,
   ItemGroupExampleModule,
+  ListExperimentalExampleModule,
+  VirtualScrollExampleModule,
 ];
 
 @NgModule({
