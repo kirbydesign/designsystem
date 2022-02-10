@@ -65,12 +65,15 @@ $button-width: (
     );
   }
 
-  @include interaction-state.apply-hover(
-    $background-color: $_background-color,
-    $color: utils.get-color($variant: $color-variant, $getValueOnly: true),
-    $property: '--kirby-button-background-color',
-    $loudness: $loudness
-  );
+  // @include interaction-state.apply-hover(
+  //   $background-color: $_background-color,
+  //   $color: utils.get-color($variant: $color-variant, $getValueOnly: true),
+  //   $property: '--kirby-button-background-color',
+  //   $loudness: $loudness
+  // );
+
+  // @include interaction-state.apply-hover-layer($flip: true);
+  @include interaction-state.apply-hover-layer();
 }
 
 @mixin button-no-decoration {
@@ -131,6 +134,8 @@ $button-width: (
 :host {
   @include utils.accessible-target-size();
 
+  --kirby-button-border-width: 1px;
+
   font-family: var(--kirby-font-family);
   background-color: var(--kirby-button-background-color, initial);
   color: var(--kirby-button-color, inherit);
@@ -155,7 +160,10 @@ $button-width: (
   // Outline is applied on button border instead,
   // to keep the rounded shape:
   outline: none;
-  border: 1px solid var(--kirby-button-border-color, transparent);
+  // TODO: Should border-width default value be 1px or initial/0px?
+  border-width: var(--kirby-button-border-width, 1px);
+  border-style: solid;
+  border-color: var(--kirby-button-border-color, transparent);
 
   &.no-margin {
     margin: 0;
