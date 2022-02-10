@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import {
+  ApiDescriptionProperty,
+  ApiDescriptionPropertyColumns,
+} from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
   selector: 'cookbook-card-showcase',
@@ -59,24 +62,30 @@ export class CardShowcaseComponent {
     },
   ];
 
+  customCssPropertiesColumns: ApiDescriptionPropertyColumns = {
+    name: 'Attribute',
+    description: 'Description',
+    default: 'Default',
+  };
+
   customCssProperties: ApiDescriptionProperty[] = [
     {
       name: '--kirby-card-background-image',
-      description: 'Background image of the card.',
+      description: "Sets the 'background-image' property of the card.",
     },
     {
       name: '--kirby-card-background-repeat',
-      description: "The 'background-repeat' property of the card",
+      description: "Sets the 'background-repeat' property of the card",
       defaultValue: 'no-repeat',
     },
     {
       name: '--kirby-card-background-position',
-      description: "The 'background-position' property of the card",
+      description: "Sets the 'background-position' property of the card",
       defaultValue: 'center',
     },
     {
       name: '--kirby-card-background-size',
-      description: "The 'background-position' property of the card",
+      description: "Sets the 'background-size' property of the card",
       defaultValue: 'cover',
     },
   ];
