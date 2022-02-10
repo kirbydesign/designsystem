@@ -23,6 +23,12 @@ export class CardShowcaseComponent {
       type: ['string'],
     },
     {
+      name: 'backgroundImageUrl',
+      description: '(Optional) Provided a valid URL will set the background image of the card.',
+      defaultValue: '',
+      type: ['string'],
+    },
+    {
       name: 'mode',
       description:
         '(Optional) Sets a custom elevation on the card. Default elevation = 2, flat = 0, highlighted = 4.',
@@ -50,6 +56,28 @@ export class CardShowcaseComponent {
         'medium',
         'dark',
       ],
+    },
+  ];
+
+  customCssProperties: ApiDescriptionProperty[] = [
+    {
+      name: '--kirby-card-background-image',
+      description: 'Background image of the card.',
+    },
+    {
+      name: '--kirby-card-background-repeat',
+      description: "The 'background-repeat' property of the card",
+      defaultValue: 'no-repeat',
+    },
+    {
+      name: '--kirby-card-background-position',
+      description: "The 'background-position' property of the card",
+      defaultValue: 'center',
+    },
+    {
+      name: '--kirby-card-background-size',
+      description: "The 'background-position' property of the card",
+      defaultValue: 'cover',
     },
   ];
 }

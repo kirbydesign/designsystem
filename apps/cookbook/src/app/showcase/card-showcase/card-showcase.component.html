@@ -59,14 +59,23 @@
     ></cookbook-card-example>
   </div>
   <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
-  <h4>Properties:</h4>
+  <h2>Colors:</h2>
+  <cookbook-card-themecolor-example></cookbook-card-themecolor-example>
+  <h2>Elevation:</h2>
+  <cookbook-card-elevations-example></cookbook-card-elevations-example>
+  <h2>Clickable:</h2>
+  <cookbook-card-clickable-example></cookbook-card-clickable-example>
+
+  <br />
+
+  <kirby-divider [hasMargin]="true"></kirby-divider>
+
+  <h2>API Description</h2>
+  <h3>Properties:</h3>
   <cookbook-api-description-properties
     [properties]="properties"
   ></cookbook-api-description-properties>
-  <h4>Colors:</h4>
-  <cookbook-card-themecolor-example></cookbook-card-themecolor-example>
-  <h4>Elevation:</h4>
-  <cookbook-card-elevations-example></cookbook-card-elevations-example>
-  <h4>Clickable:</h4>
-  <cookbook-card-clickable-example></cookbook-card-clickable-example>
+  <h3>Css Custom Properties</h3>
+  <cookbook-api-description-properties [properties]="customCssProperties">
+  </cookbook-api-description-properties>
 </div>
