@@ -157,6 +157,10 @@ $button-width: (
   outline: none;
   border: 1px solid var(--kirby-button-border-color, transparent);
 
+  &.no-margin {
+    margin: 0;
+  }
+
   &.icon-left {
     padding-left: utils.size('xs');
     padding-right: utils.size('s');
