@@ -59,12 +59,44 @@
     ></cookbook-card-example>
   </div>
   <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
-  <h2>Colors:</h2>
-  <cookbook-card-themecolor-example></cookbook-card-themecolor-example>
-  <h2>Elevation:</h2>
-  <cookbook-card-elevations-example></cookbook-card-elevations-example>
-  <h2>Clickable:</h2>
-  <cookbook-card-clickable-example></cookbook-card-clickable-example>
+  <h2>Colors</h2>
+  <p>
+    <cookbook-card-themecolor-example></cookbook-card-themecolor-example>
+  </p>
+
+  <h2>Elevation</h2>
+  <p>
+    <cookbook-card-elevations-example></cookbook-card-elevations-example>
+  </p>
+
+  <h2>Clickable</h2>
+  <p>
+    <cookbook-card-clickable-example></cookbook-card-clickable-example>
+  </p>
+
+  <h2>Background image</h2>
+  <p>
+    The card can use an image as a background by either using the
+    <code>backgroundImageUrl</code> input property or the
+    <code>--kirby-card-background-image</code> custom css property.
+  </p>
+  <p>
+    <cookbook-example-viewer
+      [html]="cssBackgroundImageExample.template"
+      [css]="cssBackgroundImageExample.style"
+    >
+      <cookbook-card-css-background-image-example
+        #cssBackgroundImageExample
+      ></cookbook-card-css-background-image-example>
+    </cookbook-example-viewer>
+    <cookbook-example-viewer
+      [html]="backgroundImageExample.template"
+      [css]="backgroundImageExample.style"
+    >
+      <cookbook-card-background-image-example #backgroundImageExample>
+      </cookbook-card-background-image-example>
+    </cookbook-example-viewer>
+  </p>
 
   <br />
 

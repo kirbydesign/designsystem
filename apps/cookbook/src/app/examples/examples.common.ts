@@ -11,6 +11,8 @@ import { ButtonExampleComponent } from './button-example/button-example.componen
 import { CalendarCardExampleComponent } from './calendar-example/calendar-card-example.component';
 import { CalendarExampleComponent } from './calendar-example/calendar-example.component';
 import { CardExampleComponent } from './card-example/card-example.component';
+import { CardBackgroundImageExampleComponent } from './card-example/examples/card-background-image-example';
+import { CardCssBackgroundImageExampleComponent } from './card-example/examples/card-css-background-image-example';
 import { CardClickableExampleComponent } from './card/card-clickable-example/card-clickable-example.component';
 import { CardElevationsExampleComponent } from './card/card-elevations-example/card-elevations-example.component';
 import { CardThemecolorExampleComponent } from './card/card-themecolor-example/card-themecolor-example.component';
@@ -77,6 +79,8 @@ export const COMPONENT_DECLARATIONS: any[] = [
   SlideButtonExampleComponent,
   CardExampleComponent,
   CardClickableExampleComponent,
+  CardBackgroundImageExampleComponent,
+  CardCssBackgroundImageExampleComponent,
   CardThemecolorExampleComponent,
   CardElevationsExampleComponent,
   ListExampleComponent,
