@@ -95,6 +95,8 @@ td {
 .day.selectable,
 .day.selected {
   cursor: pointer;
+
+  @include interaction-state.apply-hover-layer();
 }
 
 .day.disabled,
@@ -125,14 +127,6 @@ td {
 }
 
 // .day.selectable:not(.selected):hover {
-.day.selectable:not(.selected) {
-  // --color: #{utils.get-color('light-contrast')};
-  // --background-color: #{utils.get-color('light')};
-
-  @include interaction-state.apply-hover(
-    $background-color: transparent,
-    $color: utils.get-color('black', $getValueOnly: true),
-    $property: '--background-color',
-    $loudness: utils.get-loudness('faint')
-  );
-}
+//   color: utils.get-color('light-contrast');
+//   background-color: utils.get-color('light');
+// }
