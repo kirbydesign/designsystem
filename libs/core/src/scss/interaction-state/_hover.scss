@@ -3,7 +3,7 @@
 @use 'sass:meta';
 @use '../utils';
 
-$default-loudness: utils.get-loudness('moderate');
+$default-loudness: utils.get-loudness('quiet');
 
 @mixin apply-hover($background-color, $color, $property, $loudness: $default-loudness) {
   @if meta.type-of($background-color) != color {
@@ -39,13 +39,24 @@ $default-loudness: utils.get-loudness('moderate');
     $relative-lightness: $relative-lightness * -1;
   }
 
+  $_hover-color: color.scale($background-color, $lightness: $relative-lightness) !default;
+
+  @if color.alpha($background-color) == 0 {
+    // $background-color is transparent
+    $_hover-color: color.scale(
+      $background-color,
+      $lightness: $relative-lightness,
+      $alpha: $loudness
+    );
+  }
+
   cursor: pointer;
-  transition-property: var(#{$property});
+  transition-property: all;
   transition-duration: utils.get-transition-duration('quick');
   transition-timing-function: utils.get-transition-easing('static');
 
   @include utils.hover() {
-    #{$property}: #{color.scale($background-color, $lightness: $relative-lightness)};
+    #{$property}: #{$_hover-color};
 
     @content;
   }
