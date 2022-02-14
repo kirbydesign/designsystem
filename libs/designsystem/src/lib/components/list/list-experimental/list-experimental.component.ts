@@ -6,6 +6,7 @@ import { elementHasAncestor } from '../../../helpers/element-has-ancestor';
 @Component({
   selector: 'kirby-list-experimental',
   templateUrl: './list-experimental.component.html',
+  styleUrls: ['./list-experimental.component.scss'],
 })
 export class ListExperimentalComponent {
   @ViewChild(IonList, { static: true }) list: IonList;

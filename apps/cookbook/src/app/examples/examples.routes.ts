@@ -40,6 +40,7 @@ import { ListWithSectionsExampleComponent } from './list-example/examples/sectio
 import { ListWithSectionsAndColoredItemsExampleComponent } from './list-example/examples/sections-and-colored-items';
 import { ListSelectableItemsExampleComponent } from './list-example/examples/selectable-items';
 import { ListExampleComponent } from './list-example/list-example.component';
+import { ListExperimentalExampleComponent } from './list-experimental-example/list-experimental-example.component';
 import { ListLoadOnDemandExampleComponent } from './list-load-on-demand-example/list-load-on-demand-example.component';
 import { ListNoShapeExampleComponent } from './list-no-shape-example/list-no-shape-example.component';
 import { ListSwipeExampleComponent } from './list-swipe-example/list-swipe-example.component';
@@ -337,6 +338,10 @@ export const routes: Routes = [
   {
     path: 'list-load-on-demand',
     component: ListLoadOnDemandExampleComponent,
+  },
+  {
+    path: 'list-experimental',
+    component: ListExperimentalExampleComponent,
   },
   {
     path: 'chart-deprecated',

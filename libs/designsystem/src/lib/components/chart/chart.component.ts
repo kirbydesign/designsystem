@@ -61,6 +61,8 @@ export class ChartComponent implements AfterViewInit, OnChanges {
   @ViewChild('chartCanvas')
   canvasElement: ElementRef<HTMLCanvasElement>;
 
+  private chartHasBeenRendered: boolean = false;
+
   constructor(private chartJSService: ChartJSService) {}
 
   ngAfterViewInit() {
@@ -93,29 +95,32 @@ export class ChartComponent implements AfterViewInit, OnChanges {
   }
 
   ngOnChanges(simpleChanges: SimpleChanges) {
-    let shouldRedrawChart = false;
+    if (this.chartHasBeenRendered) {
+      let shouldRedrawChart = false;
 
-    // TODO: Remove 'dataLabels' key when the input property is removed
-    const keyUpdateFnPairs = {
-      data: () => this.updateData(),
-      dataLabels: () => this.updateLabels(),
-      labels: () => this.updateLabels(),
-      type: () => this.updateType(),
-      customOptions: () => this.updateCustomOptions(),
-      annotations: () => this.updateAnnotations(),
-      highlightedElements: () => this.updateHighlightedElements(),
-    };
+      // TODO: Remove 'dataLabels' key when the input property is removed
+      const keyUpdateFnPairs = {
+        data: () => this.updateData(),
+        dataLabels: () => this.updateLabels(),
+        labels: () => this.updateLabels(),
+        type: () => this.updateType(),
+        customOptions: () => this.updateCustomOptions(),
+        annotations: () => this.updateAnnotations(),
+        highlightedElements: () => this.updateHighlightedElements(),
+      };
 
-    Object.entries(simpleChanges).forEach(([key]) => {
-      if (simpleChanges[key].firstChange || !keyUpdateFnPairs[key]) return;
-      shouldRedrawChart = true;
-      keyUpdateFnPairs[key]();
-    });
+      Object.entries(simpleChanges).forEach(([key]) => {
+        if (simpleChanges[key].firstChange || !keyUpdateFnPairs[key]) return;
+        shouldRedrawChart = true;
+        keyUpdateFnPairs[key]();
+      });
 
-    if (shouldRedrawChart) this.redrawChart();
+      if (shouldRedrawChart) this.redrawChart();
+    }
   }
 
   private renderChart() {
+    this.chartHasBeenRendered = true;
     this.chartJSService.renderChart({
       targetElement: this.canvasElement,
       type: this.type,
