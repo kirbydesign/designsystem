@@ -74,6 +74,14 @@ ion-range {
   &::part(tick) {
     background: utils.get-color('medium');
   }
+
+  &:focus-within::part(knob) {
+    box-shadow: var(--knob-box-shadow), 0 0 0 2px #{utils.get-color('background-color')},
+      0 0 0 4px #{utils.$focus-ring-color};
+
+    transition: box-shadow utils.get-transition-duration('quick'),
+      border-color utils.get-transition-duration('quick');
+  }
 }
 
 label {
