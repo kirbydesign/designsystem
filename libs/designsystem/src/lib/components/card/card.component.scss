@@ -34,7 +34,11 @@
 
   &[role='button'] {
     cursor: pointer;
-    outline-offset: utils.size('xxxxs');
+    outline: none;
+    &:focus-within {
+      box-shadow: 0 0 0 2px #{utils.get-color('background-color')},
+        0 0 0 4px #{utils.$focus-ring-color};
+    }
   }
 }
 
