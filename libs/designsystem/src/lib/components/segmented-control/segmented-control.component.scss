@@ -32,6 +32,10 @@
       }
     }
   }
+  &.compact {
+    //TODO: verify if this is OK. It enables focus ring to not be cut off for first chip
+    padding-inline: utils.size('xxxxs');
+  }
 }
 
 ion-segment {
