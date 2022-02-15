@@ -70,11 +70,10 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
     }
 
     &:focus-within::part(container) {
-      @media (hover: hover) {
-        box-shadow: 0 0 0 1px var(--kirby-background-color), 0 0 0 2px #{utils.$focus-ring-color};
-        border-radius: utils.$border-radius;
-      }
+      box-shadow: 0 0 0 2px #{utils.get-color('background-color')},
+        0 0 0 4px #{utils.$focus-ring-color};
     }
+
     &:active {
       --background: #{utils.get-color('white-shade')};
     }
