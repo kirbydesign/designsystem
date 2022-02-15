@@ -96,11 +96,11 @@ ion-radio {
 
   // Only apply focus ring if pointer device can hover
   // (effectively desktop/mouse devices):
-  @include utils.focus() {
+  &:focus-within {
     &::part(container) {
       // Apply focus ring through box-shadow to keep circle shape and default border:
-      box-shadow: 0 0 0 1px #{utils.get-color('background-color')},
-        0 0 0 3px #{utils.$focus-ring-color};
+      box-shadow: 0 0 0 2px #{utils.get-color('background-color')},
+        0 0 0 4px #{utils.$focus-ring-color};
     }
   }
 
