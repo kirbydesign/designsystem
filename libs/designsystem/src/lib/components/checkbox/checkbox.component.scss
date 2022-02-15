@@ -1,7 +1,7 @@
 @use "sass:map";
 @use '~@kirbydesign/core/src/scss/utils';
 
-utils.$border-radius: 6px;
+$border-radius: 6px;
 $checkbox-icon-size: utils.size('m');
 $spacing-to-edge: map.get(utils.$checkbox-radio-spacing, 'to-edge');
 $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
@@ -60,7 +60,7 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
     --background: #{utils.get-color('white')};
     --border-width: 1px;
     --border-color: #{utils.get-color('semi-dark')};
-    --border-radius: #{utils.$border-radius};
+    --border-radius: #{$border-radius};
 
     margin-left: $spacing-to-edge;
     margin-right: $spacing-to-label;
