@@ -248,6 +248,15 @@ ion-loading.kirby-loading-overlay {
   color: inherit;
   cursor: pointer;
   text-decoration: underline;
+
+  &:focus-within {
+    outline: none;
+    border-radius: 4px;
+    box-shadow: 0 0 0 2px #{utils.get-color('background-color')},
+      0 0 0 4px #{utils.$focus-ring-color};
+    transition: box-shadow utils.get-transition-duration('quick'),
+      border-color utils.get-transition-duration('quick');
+  }
 }
 
 /*
