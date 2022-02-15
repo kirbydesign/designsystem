@@ -14,12 +14,25 @@ $loudness-scale: (
   'extremely-loud': 32%,
 );
 
-$default-hover-opacity: map.get($loudness-scale, 'moderate');
-@mixin hover-custom-properties() {
-  --kirby-background-hover-opacity: #{$default-hover-opacity};
-  --kirby-background-hover: #000;
+$default-hover-loudness: map.get($loudness-scale, 'moderate');
+// Layer 1 - calculate color/direction
+@function should-lighten($foregroundColor, $backgroundColor) {
+  //TODO: fill in
+  @return false;
 }
 
+// Layer 2 - create custom properties/api
+@mixin hover-custom-properties($hover-opacity: $default-hover-loudness, $lighten: false) {
+  $hover-background: #000;
+  @if $lighten {
+    $hover-background: #fff;
+  }
+
+  --kirby-background-hover-opacity: #{$hover-opacity};
+  --kirby-background-hover: #{$hover-background};
+}
+
+// Layer 3 - use properties for something
 @mixin hover-ionic-properties() {
   --background-hover-opacity: var(--kirby-background-hover-opacity);
   --background-hover: var(--kirby-background-hover);
@@ -30,7 +43,10 @@ $default-hover-opacity: map.get($loudness-scale, 'moderate');
   position: relative;
 
   ion-item {
-    @include hover-custom-properties();
+    // note scss supports named arguments hover-custom-properties($direction: 1) is supported!
+    @include hover-custom-properties(
+      $lighten: should-lighten($foregroundColor: #000, $backgroundColor: utils.get-color('white'))
+    );
     @include hover-ionic-properties();
 
     --padding-top: var(--item-padding-top);
