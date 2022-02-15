@@ -1,12 +1,38 @@
 @use "sass:map";
 @use '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/base/variables';
 @use 'item.utils';
+
+/* Interaction states loudness
+****************************************************************************/
+$loudness-scale: (
+  'faint': 4%,
+  'quiet': 8%,
+  'moderate': 12%,
+  'loud': 16%,
+  'very-loud': 24%,
+  'extremely-loud': 32%,
+);
+
+$default-hover-opacity: map.get($loudness-scale, 'moderate');
+@mixin hover-custom-properties() {
+  --kirby-background-hover-opacity: #{$default-hover-opacity};
+  --kirby-background-hover: #000;
+}
+
+@mixin hover-ionic-properties() {
+  --background-hover-opacity: var(--kirby-background-hover-opacity);
+  --background-hover: var(--kirby-background-hover);
+}
 
 :host {
   display: block;
   position: relative;
 
   ion-item {
+    @include hover-custom-properties();
+    @include hover-ionic-properties();
+
     --padding-top: var(--item-padding-top);
     --padding-bottom: var(--item-padding-bottom);
     font-size: utils.font-size('s');
@@ -29,8 +55,8 @@
       #{utils.get-color('background-color')}
     );
     --background-focused-opacity: 1;
-    --background-hover: var(--kirby-item-background-hover, #{utils.get-color('background-color')});
-    --background-hover-opacity: 1;
+    /*--background-hover: var(--kirby-item-background-hover, #{utils.get-color('background-color')});
+    --background-hover-opacity: 1;*/
 
     // Prevent additional padding in iOS Safari on devices with "screen notch"
     // by removing horizontal safe area when rotated to landscape orientation.
