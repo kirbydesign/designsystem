@@ -26,11 +26,11 @@ $min-screen-width: 375px;
 
   // Only apply focus ring if pointer device can hover
   // (effectively desktop/mouse devices):
-  @include utils.focus() {
-    > button,
-    > button.attention-level3 {
-      border-color: utils.$focus-ring-color;
-    }
+  &:focus-within > button {
+    box-shadow: 0 0 0 2px #{utils.get-color('background-color')},
+      0 0 0 4px #{utils.$focus-ring-color};
+    transition: box-shadow utils.get-transition-duration('quick'),
+      border-color utils.get-transition-duration('quick');
   }
 
   &.error,
@@ -46,7 +46,6 @@ $min-screen-width: 375px;
   margin: 0;
   outline: none;
   width: 100%;
-  transition: box-shadow 0.2s, border-color 0.2s;
 
   // Temporary fix for button-width as attention level 3 has border,
   // and attention level 2 does not:
