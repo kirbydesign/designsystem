@@ -45,6 +45,14 @@ ion-segment {
 
 ion-segment-button {
   @include utils.accessible-target-size();
+
+  &:focus-within {
+    box-shadow: 0 0 0 2px #{utils.get-color('background-color')},
+      0 0 0 4px #{utils.$focus-ring-color};
+    transition: box-shadow utils.get-transition-duration('quick'),
+      border-color utils.get-transition-duration('quick');
+  }
+
   &::part(indicator) {
     padding-inline: 0;
   }
