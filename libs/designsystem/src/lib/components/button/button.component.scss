@@ -207,10 +207,9 @@ $button-width: (
     width: 100%;
   }
 
-  // Only apply focus ring if pointer device can hover
-  // (effectively desktop/mouse devices):
-  @include utils.focus() {
-    --kirby-button-border-color: #{utils.$focus-ring-color};
+  &:focus-within {
+    box-shadow: 0 0 0 2px #{utils.get-color('background-color')},
+      0 0 0 4px #{utils.$focus-ring-color};
   }
 
   &:active {
