@@ -45,6 +45,9 @@ ion-segment {
 
 ion-segment-button {
   @include utils.accessible-target-size();
+  &::part(indicator) {
+    padding-inline: 0;
+  }
 
   min-height: utils.size('xl');
   font-weight: utils.font-weight('normal');
@@ -69,11 +72,4 @@ ion-segment-button {
 
 .segment-btn-wrapper {
   position: relative;
-}
-
-:host-context(.plt-desktop) {
-  ion-segment-button:focus-within {
-    outline-color: -webkit-focus-ring-color;
-    outline-style: auto;
-  }
 }
