@@ -145,6 +145,13 @@ $button-width: (
   // @include interaction-state.layer();
 
   @include interaction-state.layer;
+  @include interaction-state.content {
+    display: inherit;
+    flex-direction: inherit;
+    align-items: inherit;
+    justify-content: inherit;
+    padding-inline: var(--kirby-button-padding-left) var(--kirby-button-padding-right);
+  }
   @include interaction-state.apply-hover-layer;
 
   --border-width: 1px;

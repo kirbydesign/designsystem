@@ -104,11 +104,11 @@ $default-loudness: utils.get-loudness('quiet');
     z-index: 2;
 
     // TODO: These declarations are button specific - move out of generic layer styles. Use Sass @content block?
-    display: inherit;
-    flex-direction: inherit;
-    align-items: inherit;
-    justify-content: inherit;
-    padding-inline: var(--kirby-button-padding-left) var(--kirby-button-padding-right);
+    // display: inherit;
+    // flex-direction: inherit;
+    // align-items: inherit;
+    // justify-content: inherit;
+    // padding-inline: var(--kirby-button-padding-left) var(--kirby-button-padding-right);
   }
 
   .state-layer {
@@ -163,4 +163,10 @@ $default-loudness: utils.get-loudness('quiet');
   //   opacity: var(--state-layer-opacity);
   //   background-color: var(--state-layer-background-color);
   // }
+}
+
+@mixin content {
+  .content {
+    @content;
+  }
 }
