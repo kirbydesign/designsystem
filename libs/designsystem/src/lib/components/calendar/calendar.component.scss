@@ -106,7 +106,7 @@ td {
   color: utils.get-color('medium-contrast');
   background-color: utils.get-color('medium');
 
-  @include interaction-state.apply-hover-layer();
+  @include interaction-state.apply-hover-layer;
 }
 
 .day.selected {
