@@ -143,6 +143,8 @@ $button-width: (
   @include utils.accessible-target-size();
   @include interaction-state.apply-focus-visible();
   // @include interaction-state.layer();
+
+  @include interaction-state.layer();
   @include interaction-state.apply-hover-layer();
 
   --border-width: 1px;
