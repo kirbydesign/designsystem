@@ -180,15 +180,23 @@ $button-width: (
   }
 
   &.icon-left {
-    padding-left: utils.size('xs');
-    padding-right: utils.size('s');
+    // padding-left: utils.size('xs');
+    // padding-right: utils.size('s');
     --kirby-icon-margin-right: #{utils.size('xxs')};
+
+    --kirby-button-padding-left: #{utils.size('xs')};
+    --kirby-button-padding-right: #{utils.size('s')};
+    padding: 0;
   }
 
   &.icon-right {
-    padding-left: utils.size('s');
-    padding-right: utils.size('xs');
+    // padding-left: utils.size('s');
+    // padding-right: utils.size('xs');
     --kirby-icon-margin-left: #{utils.size('xxs')};
+
+    --kirby-button-padding-left: #{utils.size('s')};
+    --kirby-button-padding-right: #{utils.size('xs')};
+    padding: 0;
   }
 
   &.icon-only {
