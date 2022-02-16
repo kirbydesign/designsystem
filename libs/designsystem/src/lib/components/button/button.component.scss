@@ -130,6 +130,7 @@ $button-width: (
 
 :host {
   @include utils.accessible-target-size();
+  @include interaction-state.apply-focus();
 
   font-family: var(--kirby-font-family);
   background-color: var(--kirby-button-background-color, initial);
@@ -205,11 +206,6 @@ $button-width: (
 
   &[expand='block'] {
     width: 100%;
-  }
-
-  &:focus-within {
-    box-shadow: 0 0 0 2px #{utils.get-color('background-color')},
-      0 0 0 4px #{utils.$focus-ring-color};
   }
 
   &:active {
