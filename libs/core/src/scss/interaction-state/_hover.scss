@@ -88,6 +88,7 @@ $default-loudness: utils.get-loudness('quiet');
   }
 }
 
+// TODO: Move this mixin to shared interaction state styles
 @mixin layer {
   // @mixin layer($loudness: $default-loudness, $flip: false) {
   // @if not(meta.type-of($loudness) == number and math.unit($loudness) == '%') {
@@ -126,7 +127,6 @@ $default-loudness: utils.get-loudness('quiet');
       position: absolute;
       pointer-events: none;
       inset: -50%;
-      border-radius: inherit;
 
       // opacity: 0;
 
@@ -165,6 +165,7 @@ $default-loudness: utils.get-loudness('quiet');
   // }
 }
 
+// TODO: Move this mixin to shared interaction state styles
 @mixin content {
   .content {
     @content;
