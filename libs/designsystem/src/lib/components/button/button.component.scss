@@ -73,7 +73,8 @@ $button-width: (
   // );
 
   // @include interaction-state.apply-hover-layer($flip: true);
-  @include interaction-state.apply-hover-layer();
+  // @include interaction-state.apply-hover-layer();
+  // @include interaction-state.layer();
 }
 
 @mixin button-no-decoration {
@@ -81,7 +82,8 @@ $button-width: (
   --kirby-button-color: #{utils.get-color('black')};
   --kirby-button-border-color: transparent;
 
-  @include _button-hover(transparent, 'primary-contrast');
+  // @include _button-hover(transparent, 'primary-contrast');
+  @include interaction-state.apply-hover-layer($loudness: utils.get-loudness('faint'));
 
   &.destructive {
     --kirby-button-color: #{utils.get-color('danger')};
@@ -106,7 +108,11 @@ $button-width: (
   --kirby-button-background-color: #{utils.get-color('black')};
   --kirby-button-color: #{utils.get-color('black-contrast')};
 
-  @include _button-hover('black', 'black-contrast', utils.get-loudness('loud'));
+  // @include _button-hover('black', 'black-contrast', utils.get-loudness('loud'));
+  @include interaction-state.apply-hover-layer(
+    $loudness: utils.get-loudness('very-loud'),
+    $flip: true
+  );
 
   &.destructive {
     --kirby-button-background-color: #{utils.get-color('light')};
@@ -122,7 +128,9 @@ $button-width: (
   --kirby-button-color: #{utils.get-color('black')};
   --kirby-button-border-color: #{utils.get-color('medium')};
 
-  @include _button-hover(transparent, 'black', utils.get-loudness('faint'));
+  // @include _button-hover(transparent, 'black', utils.get-loudness('faint'));
+
+  @include interaction-state.apply-hover-layer($loudness: utils.get-loudness('faint'));
 
   &.destructive {
     --kirby-button-color: #{utils.get-color('danger')};
@@ -133,8 +141,10 @@ $button-width: (
 
 :host {
   @include utils.accessible-target-size();
+  // @include interaction-state.layer();
+  @include interaction-state.apply-hover-layer();
 
-  --kirby-button-border-width: 1px;
+  --border-width: 1px;
 
   font-family: var(--kirby-font-family);
   background-color: var(--kirby-button-background-color, initial);
@@ -160,8 +170,7 @@ $button-width: (
   // Outline is applied on button border instead,
   // to keep the rounded shape:
   outline: none;
-  // TODO: Should border-width default value be 1px or initial/0px?
-  border-width: var(--kirby-button-border-width, 1px);
+  border-width: var(--border-width, 0px);
   border-style: solid;
   border-color: var(--kirby-button-border-color, transparent);
 
@@ -241,14 +250,20 @@ $button-width: (
       --kirby-button-background-color: #{utils.get-color('white')};
       --kirby-button-color: #{utils.get-color('white-contrast')};
 
-      @include _button-hover('white', 'white-contrast');
+      // @include _button-hover('white', 'white-contrast');
+
+      @include interaction-state.apply-hover-layer();
     }
 
     &.attention-level3 {
       --kirby-button-border-color: #{utils.get-color('white')};
       --kirby-button-color: #{utils.get-color('white')};
 
-      @include _button-hover('white-contrast', 'white', utils.get-loudness('loud'));
+      // @include _button-hover('white-contrast', 'white', utils.get-loudness('loud'));
+      @include interaction-state.apply-hover-layer(
+        $loudness: utils.get-loudness('moderate'),
+        $flip: true
+      );
     }
   }
 
@@ -289,7 +304,8 @@ $button-width: (
     --kirby-button-background-color: #{utils.get-color('white')};
     --kirby-button-color: #{utils.get-color('white-contrast')};
 
-    @include _button-hover('white', 'white-contrast');
+    // @include _button-hover('white', 'white-contrast');
+    @include interaction-state.apply-hover-layer($loudness: utils.get-loudness('faint'));
   }
 }
 
@@ -342,7 +358,8 @@ $button-width: (
       --kirby-button-background-color: #{utils.get-color($color-name)};
       --kirby-button-color: #{utils.get-color($color-name + '-contrast')};
 
-      @include _button-hover(#{$color-name}, '#{$color-name}-contrast', utils.get-loudness('loud'));
+      // @include _button-hover(#{$color-name}, '#{$color-name}-contrast', utils.get-loudness('loud'));
+      @include interaction-state.apply-hover-layer();
     }
   }
 }

@@ -64,35 +64,27 @@ $default-loudness: utils.get-loudness('quiet');
 }
 
 @mixin apply-hover-layer($loudness: $default-loudness, $flip: false) {
+  @include layer($loudness, $flip);
+
+  cursor: pointer;
+}
+
+@mixin layer($loudness: $default-loudness, $flip: false) {
   @if not(meta.type-of($loudness) == number and math.unit($loudness) == '%') {
     @error "$loudness must be a percentage";
   }
 
-  cursor: pointer;
   position: relative;
 
-  @include utils.hover() {
-    @content;
-
-    .state-layer::before {
-      $_opacity: $loudness / 100%;
-
-      @if $flip {
-        background-color: #fff;
-      } @else {
-        background-color: #000;
-      }
-
-      opacity: #{$_opacity};
-      // background-color: hsl(0 0% 0% / #{$_opacity});
-    }
+  .content {
+    position: relative;
+    z-index: 2;
   }
 
   .state-layer {
     position: absolute;
-    // TODO: Must be generic - not coupled with button
-    // inset: calc(var(--kirby-button-border-width, 1px) * -1); // negate border-width on button
-    inset: 0;
+    // TODO: Set inset to 0 (zero) if state layer should not cover border of parent
+    inset: calc(var(--border-width, 0px) * -1); // negate border-width on parent
     overflow: hidden;
     pointer-events: none;
     border-radius: inherit;
@@ -104,18 +96,34 @@ $default-loudness: utils.get-loudness('quiet');
       position: absolute;
       pointer-events: none;
       inset: -50%;
+      border-radius: inherit;
 
       opacity: 0;
 
-      // TODO: Extract transition into separate mixin?
+      // TODO: Extract transition into "interaction state trasition" mixin
+      // transition-property: all;
+      // transition-duration: 180ms;
+      // transition-delay: 5ms;
       transition-property: all;
       transition-duration: utils.get-transition-duration('quick');
       transition-timing-function: utils.get-transition-easing('static');
     }
   }
 
-  .content {
-    position: relative;
-    z-index: 2;
+  @include utils.hover() {
+    cursor: pointer;
+
+    .state-layer::before {
+      $_opacity: $loudness / 100%;
+
+      // TODO: Use CSS custom property instead, e.g. --kirby-button-hover-background-color?
+      @if $flip {
+        background-color: #fff;
+      } @else {
+        background-color: #000;
+      }
+
+      opacity: #{$_opacity};
+    }
   }
 }

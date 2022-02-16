@@ -94,9 +94,7 @@ td {
 
 .day.selectable,
 .day.selected {
-  cursor: pointer;
-
-  @include interaction-state.apply-hover-layer();
+  // cursor: pointer;
 }
 
 .day.disabled,
@@ -104,21 +102,18 @@ td {
   --color: #{utils.get-text-color('semi-dark')};
 }
 
-// TODO: Find a different solution for specificity
-.day.today.today.today {
-  --color: #{utils.get-color('semi-light-contrast')};
-  --background-color: #{utils.get-color('semi-light')};
-  // TODO: improve, reuse - extract into local mixin like in button?
-  @include interaction-state.apply-hover(
-    $background-color: utils.get-color('semi-light', $getValueOnly: true),
-    $color: utils.get-color('semi-light-contrast', $getValueOnly: true),
-    $property: '--background-color'
-  );
+.day.today {
+  color: utils.get-color('medium-contrast');
+  background-color: utils.get-color('medium');
+
+  @include interaction-state.apply-hover-layer();
 }
 
 .day.selected {
-  --color: #{utils.get-color('black-contrast')};
-  --background-color: #{utils.get-color('black')};
+  color: utils.get-color('black-contrast');
+  background-color: utils.get-color('black');
+
+  @include interaction-state.apply-hover-layer($loudness: utils.get-loudness('loud'), $flip: true);
 }
 
 .day:not(.current-month) {
@@ -130,3 +125,8 @@ td {
 //   color: utils.get-color('light-contrast');
 //   background-color: utils.get-color('light');
 // }
+
+.has-state-layer {
+  // @include interaction-state.layer(50%);
+  @include interaction-state.apply-hover-layer($loudness: utils.get-loudness('faint'));
+}
