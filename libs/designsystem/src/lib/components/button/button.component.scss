@@ -142,8 +142,8 @@ $button-width: (
 :host {
   @include utils.accessible-target-size();
 
-  @include interaction-state.layer();
-  @include interaction-state.apply-hover-layer();
+  @include interaction-state.layer;
+  @include interaction-state.apply-hover-layer;
 
   --border-width: 1px;
 
@@ -261,7 +261,7 @@ $button-width: (
 
       // @include _button-hover('white', 'white-contrast');
 
-      @include interaction-state.apply-hover-layer();
+      @include interaction-state.apply-hover-layer;
     }
 
     &.attention-level3 {
@@ -368,7 +368,7 @@ $button-width: (
       --kirby-button-color: #{utils.get-color($color-name + '-contrast')};
 
       // @include _button-hover(#{$color-name}, '#{$color-name}-contrast', utils.get-loudness('loud'));
-      @include interaction-state.apply-hover-layer();
+      @include interaction-state.apply-hover-layer;
     }
   }
 }
