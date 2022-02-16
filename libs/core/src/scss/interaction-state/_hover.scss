@@ -79,6 +79,11 @@ $default-loudness: utils.get-loudness('quiet');
   .content {
     position: relative;
     z-index: 2;
+    display: inherit;
+    flex-direction: inherit;
+    align-items: inherit;
+    justify-content: inherit;
+    padding-inline: var(--kirby-button-padding-left) var(--kirby-button-padding-right);
   }
 
   .state-layer {
@@ -114,7 +119,7 @@ $default-loudness: utils.get-loudness('quiet');
     cursor: pointer;
 
     .state-layer::before {
-      $_opacity: $loudness / 100%;
+      opacity: #{$loudness / 100%};
 
       // TODO: Use CSS custom property instead, e.g. --kirby-button-hover-background-color?
       @if $flip {
@@ -122,8 +127,6 @@ $default-loudness: utils.get-loudness('quiet');
       } @else {
         background-color: #000;
       }
-
-      opacity: #{$_opacity};
     }
   }
 }
