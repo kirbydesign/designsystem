@@ -71,7 +71,7 @@ $default-loudness: utils.get-loudness('quiet');
   // @include layer($loudness, $flip);
   // @include layer();
 
-  @include utils.hover() {
+  @include utils.hover {
     cursor: pointer;
 
     --state-layer-opacity: #{$loudness / 100%};
@@ -88,7 +88,7 @@ $default-loudness: utils.get-loudness('quiet');
   }
 }
 
-@mixin layer() {
+@mixin layer {
   // @mixin layer($loudness: $default-loudness, $flip: false) {
   // @if not(meta.type-of($loudness) == number and math.unit($loudness) == '%') {
   //   @error "$loudness must be a percentage";
