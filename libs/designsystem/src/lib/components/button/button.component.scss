@@ -141,7 +141,8 @@ $button-width: (
 
 :host {
   @include utils.accessible-target-size();
-  // @include interaction-state.layer();
+
+  @include interaction-state.layer();
   @include interaction-state.apply-hover-layer();
 
   --border-width: 1px;

@@ -127,6 +127,6 @@ td {
 // }
 
 .has-state-layer {
-  // @include interaction-state.layer(50%);
+  @include interaction-state.layer();
   @include interaction-state.apply-hover-layer($loudness: utils.get-loudness('faint'));
 }
