@@ -1,0 +1,7 @@
+@use '../utils';
+
+@mixin apply-focus {
+  &:focus-within {
+    box-shadow: #{utils.$focus-ring};
+  }
+}
