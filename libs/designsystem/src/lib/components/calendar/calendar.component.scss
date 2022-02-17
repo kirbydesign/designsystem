@@ -92,10 +92,10 @@ td {
   background-color: var(--background-color, transparent);
 }
 
-.day.selectable,
-.day.selected {
-  // cursor: pointer;
-}
+// .day.selectable,
+// .day.selected {
+//   cursor: pointer;
+// }
 
 .day.disabled,
 .day:not(.selectable) {
@@ -121,17 +121,7 @@ td {
   pointer-events: none;
 }
 
-// .day.selectable:not(.selected):hover {
-//   color: utils.get-color('light-contrast');
-//   background-color: utils.get-color('light');
-// }
-
 .has-state-layer {
   @include interaction-state.layer;
   @include interaction-state.apply-hover-layer($loudness: utils.get-loudness('faint'));
 }
-
-// ion-item {
-//   @include interaction-state.apply-hover-layer($loudness: utils.get-loudness('faint'));
-//   @include apply-ionic-hover;
-// }
