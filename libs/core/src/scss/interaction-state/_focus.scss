@@ -3,13 +3,13 @@
 @use '../utils';
 @use '../themes/colors';
 
-@mixin apply-focus($shadow: '', $gap: utils.size('xxxxs')) {
+@mixin apply-focus($shadow: null, $gap: utils.size('xxxxs')) {
   &:focus-within {
     @include _focus-ring($shadow, $gap);
   }
 }
 
-@mixin apply-focus-part($part, $shadow: '', $gap: utils.size('xxxxs')) {
+@mixin apply-focus-part($part, $shadow: null, $gap: utils.size('xxxxs')) {
   &:focus-within {
     &::part($part) {
       @include _focus-ring($shadow, $gap);
@@ -20,6 +20,6 @@
 @mixin _focus-ring($shadow, $gap) {
   $stroke-width: utils.size('xxxxs');
   box-shadow: #{$shadow}, 0 0 0 $gap #{utils.get-color('background-color')},
-    0 0 0 $gap + $stroke-width rgb(34, 139, 236);
+    0 0 0 $gap + $stroke-width colors.$focus-ring-color;
   transition: box-shadow utils.get-transition-duration('quick');
 }
