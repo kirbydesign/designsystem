@@ -98,6 +98,7 @@ $button-width: (
   @include utils.accessible-target-size();
 
   @include interaction-state.setup-layer;
+  // @include interaction-state.apply-active;
   @include interaction-state.apply-hover;
   @include interaction-state.extend-content {
     display: inherit;
