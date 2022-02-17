@@ -1,6 +1,7 @@
-@use 'sass:color';
-@use 'sass:math';
-@use 'sass:meta';
+// @use 'sass:color';
+// @use 'sass:math';
+// @use 'sass:meta';
+@use '~@kirbydesign/core/src/scss/interaction-state/state-layer';
 @use '../utils';
 
 $default-loudness: utils.get-loudness('quiet');
@@ -12,23 +13,23 @@ $default-loudness: utils.get-loudness('quiet');
 }
 
 @mixin apply-hover($loudness: $default-loudness, $flip: false) {
-  @if not(meta.type-of($loudness) == number and math.unit($loudness) == '%') {
-    @error "$loudness must be a percentage";
-  }
-
-  // TODO: Extract into shared mixin for all states
+  // @if not(meta.type-of($loudness) == number and math.unit($loudness) == '%') {
+  //   @error "$loudness must be a percentage";
+  // }
 
   @include utils.hover {
     cursor: pointer;
 
-    // layer 2
-    --state-layer-opacity: #{$loudness / 100%};
+    @include state-layer.apply-state($loudness, $flip);
 
-    // layer 2
-    @if $flip {
-      --state-layer-background-color: #fff;
-    } @else {
-      --state-layer-background-color: #000;
-    }
+    // // layer 2
+    // --state-layer-opacity: #{$loudness / 100%};
+
+    // // layer 2
+    // @if $flip {
+    //   --state-layer-background-color: #fff;
+    // } @else {
+    //   --state-layer-background-color: #000;
+    // }
   }
 }
