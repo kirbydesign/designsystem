@@ -1,7 +1,13 @@
 @use '../utils';
+@use 'sass:map';
+@use '../themes/colors';
 
-@mixin apply-focus {
+@mixin apply-focus($shadow: '', $gap: utils.size('xxxxs')) {
+  $stroke-width: utils.size('xxxxs');
+
   &:focus-within {
-    box-shadow: #{utils.$focus-ring};
+    box-shadow: #{$shadow}, 0 0 0 $gap #{map.get(colors.$system-colors, 'background-color')},
+      0 0 0 $gap + $stroke-width green;
+    transition: box-shadow utils.get-transition-duration('quick');
   }
 }

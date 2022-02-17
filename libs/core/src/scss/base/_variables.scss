@@ -1,7 +1,5 @@
 @use "sass:map";
 @use "sass:math";
-
-@use "../themes/colors";
 /*
   SPACINGS
 ****************************************************************************/
@@ -198,7 +196,7 @@ $transition-easings: (
 
 $loading-overlay-backdrop-opacity: 0.8;
 
-/* Interaction states
+/* Interaction states loudness
 ****************************************************************************/
 $loudness-scale: (
   'faint': 4%,
@@ -208,6 +206,3 @@ $loudness-scale: (
   'very-loud': 24%,
   'extremely-loud': 32%,
 );
-
-$focus-ring: 0 0 0 2px #{map.get(colors.$system-colors, 'background-color')},
-  0 0 0 4px rgb(34, 139, 236);
