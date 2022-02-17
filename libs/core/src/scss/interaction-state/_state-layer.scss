@@ -1,0 +1,50 @@
+@use '../utils';
+
+@mixin layer {
+  // layer 2
+  --state-layer-opacity: 0;
+  --state-layer-background-color: transparent;
+
+  position: relative;
+
+  .content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .state-layer {
+    position: absolute;
+    // TODO: Set inset to 0 (zero) if state layer should not cover border of parent
+    inset: calc(var(--border-width, 0px) * -1); // negate border-width on parent
+    overflow: hidden;
+    pointer-events: none;
+    border-radius: inherit;
+
+    z-index: 1;
+
+    &::before {
+      content: '';
+      position: absolute;
+      pointer-events: none;
+      inset: -50%;
+
+      // layer 3
+      opacity: var(--state-layer-opacity);
+      background-color: var(--state-layer-background-color);
+
+      // TODO: Extract transition into "interaction state trasition" mixin
+      // transition-property: all;
+      // transition-duration: 180ms;
+      // transition-delay: 5ms;
+      transition-property: all;
+      transition-duration: utils.get-transition-duration('quick');
+      transition-timing-function: utils.get-transition-easing('static');
+    }
+  }
+}
+
+@mixin content {
+  .content {
+    @content;
+  }
+}
