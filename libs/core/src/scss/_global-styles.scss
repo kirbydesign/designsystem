@@ -250,11 +250,9 @@ ion-loading.kirby-loading-overlay {
   cursor: pointer;
   text-decoration: underline;
 
-  &:focus-within {
-    outline: none;
-    border-radius: #{utils.size('xxxs')};
-    @include interaction-state.apply-focus($gap: 3px);
-  }
+  outline: none;
+  border-radius: #{utils.size('xxxs')};
+  @include interaction-state.apply-focus($gap: 3px);
 }
 
 /*
