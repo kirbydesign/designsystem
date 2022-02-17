@@ -5,6 +5,7 @@
 @use 'base/typography';
 @use 'base/line-clamp';
 @use 'base/html-list';
+@use 'interaction-state';
 
 :root,
 :host {
@@ -251,11 +252,8 @@ ion-loading.kirby-loading-overlay {
 
   &:focus-within {
     outline: none;
-    border-radius: 4px;
-    box-shadow: 0 0 0 2px #{utils.get-color('background-color')},
-      0 0 0 4px #{utils.$focus-ring-color};
-    transition: box-shadow utils.get-transition-duration('quick'),
-      border-color utils.get-transition-duration('quick');
+    border-radius: #{utils.size('xxxs')};
+    @include interaction-state.apply-focus($gap: 3px);
   }
 }
 
