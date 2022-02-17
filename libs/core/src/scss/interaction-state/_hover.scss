@@ -1,4 +1,4 @@
-@use '~@kirbydesign/core/src/scss/interaction-state/state-layer';
+@use '~@kirbydesign/core/src/scss/interaction-state/layer';
 @use '../utils';
 
 $default-loudness: utils.get-loudness('quiet');
@@ -11,7 +11,7 @@ $default-loudness: utils.get-loudness('quiet');
 
 @mixin apply-hover($loudness: $default-loudness, $flip: false) {
   @include utils.hover {
-    @include state-layer.apply-state($loudness, $flip);
+    @include layer.apply-state($loudness, $flip);
     cursor: pointer;
   }
 }
