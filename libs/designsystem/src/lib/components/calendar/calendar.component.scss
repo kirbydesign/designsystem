@@ -106,14 +106,14 @@ td {
   color: utils.get-color('medium-contrast');
   background-color: utils.get-color('medium');
 
-  @include interaction-state.apply-hover-layer;
+  @include interaction-state.apply-hover;
 }
 
 .day.selected {
   color: utils.get-color('black-contrast');
   background-color: utils.get-color('black');
 
-  @include interaction-state.apply-hover-layer($loudness: utils.get-loudness('loud'), $flip: true);
+  @include interaction-state.apply-hover($loudness: utils.get-loudness('loud'), $flip: true);
 }
 
 .day:not(.current-month) {
@@ -122,6 +122,6 @@ td {
 }
 
 .has-state-layer {
-  @include interaction-state.layer;
-  @include interaction-state.apply-hover-layer($loudness: utils.get-loudness('faint'));
+  @include interaction-state.setup-layer;
+  @include interaction-state.apply-hover($loudness: utils.get-loudness('faint'));
 }

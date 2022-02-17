@@ -11,7 +11,7 @@ $default-loudness: utils.get-loudness('quiet');
   --background-hover: var(--state-layer-background-color);
 }
 
-@mixin apply-hover-layer($loudness: $default-loudness, $flip: false) {
+@mixin apply-hover($loudness: $default-loudness, $flip: false) {
   @if not(meta.type-of($loudness) == number and math.unit($loudness) == '%') {
     @error "$loudness must be a percentage";
   }
