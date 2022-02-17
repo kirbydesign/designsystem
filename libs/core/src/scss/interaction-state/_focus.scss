@@ -6,7 +6,7 @@
   $stroke-width: utils.size('xxxxs');
 
   &:focus-within {
-    box-shadow: #{$shadow}, 0 0 0 $gap #{map.get(colors.$system-colors, 'background-color')},
+    box-shadow: #{$shadow}, 0 0 0 $gap #{utils.get-color('background-color')},
       0 0 0 $gap + $stroke-width rgb(34, 139, 236);
     transition: box-shadow utils.get-transition-duration('quick');
   }
