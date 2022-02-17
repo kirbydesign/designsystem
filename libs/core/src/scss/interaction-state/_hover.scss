@@ -63,6 +63,14 @@ $default-loudness: utils.get-loudness('quiet');
   }
 }
 
+// 👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻 DELETE THIS 👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻
+
+// layer 3
+@mixin apply-ionic-hover {
+  // TODO: Finish implementation
+  --background-hover: var(--state-layer-background-color);
+}
+
 @mixin apply-hover-layer($loudness: $default-loudness, $flip: false) {
   @if not(meta.type-of($loudness) == number and math.unit($loudness) == '%') {
     @error "$loudness must be a percentage";
@@ -71,11 +79,15 @@ $default-loudness: utils.get-loudness('quiet');
   // @include layer($loudness, $flip);
   // @include layer();
 
+  // TODO: Extract into shared mixin for all states
+
   @include utils.hover {
     cursor: pointer;
 
+    // layer 2
     --state-layer-opacity: #{$loudness / 100%};
 
+    // layer 2
     @if $flip {
       --state-layer-background-color: #fff;
     } @else {
@@ -95,8 +107,10 @@ $default-loudness: utils.get-loudness('quiet');
   //   @error "$loudness must be a percentage";
   // }
 
+  // layer 2
   --state-layer-opacity: 0;
   --state-layer-background-color: transparent;
+  --state-layer-color: currentColor;
 
   position: relative;
 
@@ -130,6 +144,7 @@ $default-loudness: utils.get-loudness('quiet');
 
       // opacity: 0;
 
+      // layer 3
       opacity: var(--state-layer-opacity);
       background-color: var(--state-layer-background-color);
 
