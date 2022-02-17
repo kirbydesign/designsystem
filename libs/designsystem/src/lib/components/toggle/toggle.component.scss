@@ -1,17 +1,12 @@
 @use '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/interaction-state';
 
 .toggle-checked {
   --background-checked: #{utils.get-color('success')};
 }
 
 ion-toggle {
-  // Make focus ring visible
+  @include interaction-state.apply-focus-part($part: 'track');
   overflow: visible;
   contain: none;
-
-  &:focus-within::part(track) {
-    // Apply focus ring through box-shadow to keep circle shape and default border:
-    box-shadow: 0 0 0 2px #{utils.get-color('background-color')},
-      0 0 0 4px #{utils.$focus-ring-color};
-  }
 }
