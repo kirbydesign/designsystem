@@ -1,17 +1,19 @@
 @use '~@kirbydesign/core/src/scss/interaction-state/layer';
 @use '../utils';
 
-$default-loudness: utils.get-loudness('quiet');
+// TODO: Find a solution for default-loudness in general
+$_default-loudness: layer.$default-loudness;
 
-// layer 3
-@mixin apply-ionic-hover {
-  // TODO: Finish implementation
-  --background-hover: var(--state-layer-background-color);
-}
-
-@mixin apply-hover($loudness: $default-loudness, $flip: false) {
+@mixin apply-hover($loudness: $_default-loudness, $flip: false) {
   @include utils.hover {
     @include layer.apply-state($loudness, $flip);
     cursor: pointer;
   }
 }
+
+// // FIXME: This does *not* work - why?
+// @mixin apply-active($loudness: layer.$default-loudness, $flip: false) {
+//   :active {
+//     @include layer.apply-state(80%, $flip);
+//   }
+// }

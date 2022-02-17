@@ -2,6 +2,9 @@
 @use 'sass:meta';
 @use '../utils';
 
+// TODO: Different default loudness variables for each state?
+$default-loudness: utils.get-loudness('quiet');
+
 @mixin setup-layer {
   // layer 2
   --state-layer-opacity: 0;
@@ -45,6 +48,7 @@
   }
 }
 
+// TODO: Rename ("modify-state-layer" or something) and maybe move to another shared module?
 @mixin apply-state($loudness: $default-loudness, $flip: false) {
   @if not(meta.type-of($loudness) == number and math.unit($loudness) == '%') {
     @error "$loudness must be a percentage";

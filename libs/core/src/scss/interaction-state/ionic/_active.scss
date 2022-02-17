@@ -1,0 +1,11 @@
+@use '~@kirbydesign/core/src/scss/interaction-state/layer';
+@use '../../utils';
+
+// layer 3
+@mixin apply-active($loudness: layer.$default-loudness, $flip: false) {
+  &:active {
+    @include layer.apply-state($loudness, $flip);
+    --background-activated: var(--state-layer-background-color);
+    --background-activated-opacity: var(--state-layer-opacity);
+  }
+}
