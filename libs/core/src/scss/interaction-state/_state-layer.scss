@@ -1,3 +1,5 @@
+@use 'sass:math';
+@use 'sass:meta';
 @use '../utils';
 
 @mixin setup-layer {
@@ -40,6 +42,22 @@
       transition-duration: utils.get-transition-duration('quick');
       transition-timing-function: utils.get-transition-easing('static');
     }
+  }
+}
+
+@mixin apply-state($loudness: $default-loudness, $flip: false) {
+  @if not(meta.type-of($loudness) == number and math.unit($loudness) == '%') {
+    @error "$loudness must be a percentage";
+  }
+
+  // layer 2
+  --state-layer-opacity: #{$loudness / 100%};
+
+  // layer 2
+  @if $flip {
+    --state-layer-background-color: #fff;
+  } @else {
+    --state-layer-background-color: #000;
   }
 }
 
