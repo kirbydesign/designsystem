@@ -251,7 +251,7 @@ ion-loading.kirby-loading-overlay {
   text-decoration: underline;
 
   outline: none;
-  border-radius: #{utils.size('xxxs')};
+  border-radius: #{utils.size('xxxxs')};
   @include interaction-state.apply-focus($gap: 3px);
 }
 
