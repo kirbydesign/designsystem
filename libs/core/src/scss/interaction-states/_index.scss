@@ -1,0 +1,44 @@
+// TODO: all of the stuff in this file has to be split up properly
+@use "sass:map";
+
+$loudness-scale: (
+  'faint': 4%,
+  'quiet': 8%,
+  'moderate': 12%,
+  'loud': 16%,
+  'very-loud': 24%,
+  'extremely-loud': 32%,
+);
+
+$default-hover-loudness: map.get($loudness-scale, 'moderate');
+$default-hover-background-dark: #000;
+$default-hover-background-light: #fff;
+// --- Layer 1 - calculate color/direction
+
+// We might not need this
+@function calculate-hover-should-lighten($foregroundColor, $backgroundColor) {
+  @return false;
+}
+
+// --- Layer 2 - setup custom properties/api
+@mixin setup-hover-api-custom-properties(
+  $hover-opacity: $default-hover-loudness,
+  $shouldLighten: false
+) {
+  $hover-background: $default-hover-background-dark;
+  @if $shouldLighten {
+    $hover-background: $default-hover-background-light;
+  }
+
+  --kirby-background-hover-opacity: #{$hover-opacity};
+  --kirby-background-hover: #{$hover-background};
+}
+
+// Layer 3 - use properties for something
+@mixin use-hover-ionic-properties {
+  --background-hover-opacity: var(--kirby-background-hover-opacity);
+  --background-hover: var(--kirby-background-hover);
+}
+
+@mixin use-state-layer {
+}

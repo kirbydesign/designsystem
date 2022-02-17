@@ -1,41 +1,13 @@
 @use "sass:map";
 @use '~@kirbydesign/core/src/scss/utils';
 @use '~@kirbydesign/core/src/scss/base/variables';
+@use '~@kirbydesign/core/src/scss/interaction-states';
 @use 'item.utils';
 
-/* Interaction states loudness
-****************************************************************************/
-$loudness-scale: (
-  'faint': 4%,
-  'quiet': 8%,
-  'moderate': 12%,
-  'loud': 16%,
-  'very-loud': 24%,
-  'extremely-loud': 32%,
-);
-
-$default-hover-loudness: map.get($loudness-scale, 'moderate');
-// Layer 1 - calculate color/direction
-@function should-lighten($foregroundColor, $backgroundColor) {
-  //TODO: fill in
-  @return false;
-}
-
-// Layer 2 - create custom properties/api
-@mixin hover-custom-properties($hover-opacity: $default-hover-loudness, $lighten: false) {
-  $hover-background: #000;
-  @if $lighten {
-    $hover-background: #fff;
-  }
-
-  --kirby-background-hover-opacity: #{$hover-opacity};
-  --kirby-background-hover: #{$hover-background};
-}
-
-// Layer 3 - use properties for something
-@mixin hover-ionic-properties() {
-  --background-hover-opacity: var(--kirby-background-hover-opacity);
-  --background-hover: var(--kirby-background-hover);
+@mixin interaction-states {
+  // hover
+  @include interaction-states.setup-hover-api-custom-properties;
+  @include interaction-states.use-hover-ionic-properties;
 }
 
 :host {
@@ -43,11 +15,7 @@ $default-hover-loudness: map.get($loudness-scale, 'moderate');
   position: relative;
 
   ion-item {
-    // note scss supports named arguments hover-custom-properties($direction: 1) is supported!
-    @include hover-custom-properties(
-      $lighten: should-lighten($foregroundColor: #000, $backgroundColor: utils.get-color('white'))
-    );
-    @include hover-ionic-properties();
+    @include interaction-states;
 
     --padding-top: var(--item-padding-top);
     --padding-bottom: var(--item-padding-bottom);
