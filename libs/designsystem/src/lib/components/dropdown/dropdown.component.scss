@@ -1,4 +1,5 @@
 @use '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/interaction-state';
 
 $dropdown-max-height: 8 * utils.$dropdown-item-height;
 $margin-horizontal-total: 2 * utils.size('s');
@@ -26,12 +27,8 @@ $min-screen-width: 375px;
 
   // Only apply focus ring if pointer device can hover
   // (effectively desktop/mouse devices):
-  &:focus-within > button {
-    box-shadow: 0 0 0 2px #{utils.get-color('background-color')},
-      0 0 0 4px #{utils.$focus-ring-color};
-    transition: box-shadow utils.get-transition-duration('quick'),
-      border-color utils.get-transition-duration('quick');
-  }
+  border-radius: utils.$border-radius-round;
+  @include interaction-state.apply-focus();
 
   &.error,
   &.ng-touched.ng-invalid {
