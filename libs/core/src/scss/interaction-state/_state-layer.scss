@@ -1,6 +1,6 @@
 @use '../utils';
 
-@mixin layer {
+@mixin setup-layer {
   // layer 2
   --state-layer-opacity: 0;
   --state-layer-background-color: transparent;
@@ -43,7 +43,7 @@
   }
 }
 
-@mixin content {
+@mixin extend-content {
   .content {
     @content;
   }
