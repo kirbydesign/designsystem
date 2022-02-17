@@ -1,13 +1,25 @@
-@use '../utils';
 @use 'sass:map';
+@use "sass:selector";
+@use '../utils';
 @use '../themes/colors';
 
 @mixin apply-focus($shadow: '', $gap: utils.size('xxxxs')) {
-  $stroke-width: utils.size('xxxxs');
-
   &:focus-within {
-    box-shadow: #{$shadow}, 0 0 0 $gap #{utils.get-color('background-color')},
-      0 0 0 $gap + $stroke-width rgb(34, 139, 236);
-    transition: box-shadow utils.get-transition-duration('quick');
+    @include _focus-ring($shadow, $gap);
   }
+}
+
+@mixin apply-focus-part($part, $shadow: '', $gap: utils.size('xxxxs')) {
+  &:focus-within {
+    &::part($part) {
+      @include _focus-ring($shadow, $gap);
+    }
+  }
+}
+
+@mixin _focus-ring($shadow, $gap) {
+  $stroke-width: utils.size('xxxxs');
+  box-shadow: #{$shadow}, 0 0 0 $gap #{utils.get-color('background-color')},
+    0 0 0 $gap + $stroke-width rgb(34, 139, 236);
+  transition: box-shadow utils.get-transition-duration('quick');
 }
