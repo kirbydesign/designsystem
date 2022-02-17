@@ -130,3 +130,8 @@ td {
   @include interaction-state.layer;
   @include interaction-state.apply-hover-layer($loudness: utils.get-loudness('faint'));
 }
+
+// ion-item {
+//   @include interaction-state.apply-hover-layer($loudness: utils.get-loudness('faint'));
+//   @include apply-ionic-hover;
+// }
