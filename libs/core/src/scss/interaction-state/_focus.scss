@@ -10,10 +10,8 @@
 }
 
 @mixin apply-focus-part($part, $shadow: null, $gap: utils.size('xxxxs')) {
-  &:focus-within {
-    &::part($part) {
-      @include _focus-ring($shadow, $gap);
-    }
+  &:focus-within::part(#{$part}) {
+    @include _focus-ring($shadow, $gap);
   }
 }
 
