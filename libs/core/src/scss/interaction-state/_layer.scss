@@ -45,7 +45,6 @@
   }
 }
 
-// TODO: Rename ("modify-state-layer" or something) and maybe move to another shared module?
 @mixin apply-state($loudness: null, $flip: false) {
   $loudness-percent: utils.get-loudness($loudness);
 
