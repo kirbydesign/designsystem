@@ -4,7 +4,7 @@ const config = {
   selector: 'cookbook-card-background-image-example',
   template: `<kirby-card
   [hasPadding]="true"
-  backgroundImageUrl="https://images.unsplash.com/photo-1512917774080-9991f1c4c750"
+  backgroundImageUrl="https://images.unsplash.com/photo-1560840067-ddcaeb7831d2"
   themeColor="dark"
 >
   <h3>
