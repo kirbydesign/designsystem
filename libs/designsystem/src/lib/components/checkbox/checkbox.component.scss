@@ -1,5 +1,6 @@
 @use "sass:map";
 @use '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/interaction-state';
 
 $border-radius: 6px;
 $checkbox-icon-size: utils.size('m');
@@ -55,6 +56,8 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
   }
 
   ion-checkbox {
+    @include interaction-state.apply-focus-part($part: 'container');
+
     --size: #{$checkbox-icon-size};
     --checkmark-width: #{utils.size('xxxs')};
     --background: #{utils.get-color('white')};
@@ -67,11 +70,6 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
 
     &::part(container) {
       padding: utils.size('xxxs'); // Spacing between checkmark and container box
-    }
-
-    &:focus-within::part(container) {
-      box-shadow: 0 0 0 2px #{utils.get-color('background-color')},
-        0 0 0 4px #{utils.$focus-ring-color};
     }
 
     &:active {
