@@ -414,9 +414,10 @@ describe('ButtonComponent configured with icon only', () => {
 });
 
 describe('ButtonComponent configured with text and icon', () => {
-  let kirbyIcon: Element;
   let spectator: SpectatorHost<ButtonComponent>;
   let element: HTMLButtonElement;
+  let kirbyIcon: Element;
+  let content: Element;
   const createHost = createHostFactory({
     component: ButtonComponent,
     declarations: [IconComponent, MockComponent(IonIcon)],
@@ -446,11 +447,13 @@ describe('ButtonComponent configured with text and icon', () => {
       );
 
       element = spectator.element as HTMLButtonElement;
-      kirbyIcon = element.getElementsByTagName('kirby-icon')[0];
+      content = element.querySelector('span.content');
+      kirbyIcon = element.querySelector('kirby-icon');
     });
 
     it('should render with correct padding', () => {
-      expect(element).toHaveComputedStyle({
+      expect(element).toHaveComputedStyle({ padding: '0px' });
+      expect(content).toHaveComputedStyle({
         'padding-left': size('xs'),
         'padding-right': size('s'),
       });
@@ -474,11 +477,13 @@ describe('ButtonComponent configured with text and icon', () => {
       );
 
       element = spectator.element as HTMLButtonElement;
-      kirbyIcon = element.getElementsByTagName('kirby-icon')[0];
+      content = element.querySelector('span.content');
+      kirbyIcon = element.querySelector('kirby-icon');
     });
 
     it('should render with correct padding', () => {
-      expect(element).toHaveComputedStyle({
+      expect(element).toHaveComputedStyle({ padding: '0px' });
+      expect(content).toHaveComputedStyle({
         'padding-left': size('s'),
         'padding-right': size('xs'),
       });
