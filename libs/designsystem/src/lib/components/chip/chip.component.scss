@@ -1,4 +1,5 @@
 @use '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/interaction-state';
 
 @mixin selected-and-hover($background-color) {
   &.is-selected {
@@ -15,14 +16,9 @@
   @include selected-and-hover('black');
   @include utils.accessible-target-size();
   &[role='button'] {
+    @include interaction-state.apply-focus();
     cursor: pointer;
     outline: none;
-    &:focus-within {
-      box-shadow: 0 0 0 2px #{utils.get-color('background-color')},
-        0 0 0 4px #{utils.$focus-ring-color};
-      transition: box-shadow utils.get-transition-duration('quick'),
-        border-color utils.get-transition-duration('quick');
-    }
   }
 
   white-space: nowrap;
