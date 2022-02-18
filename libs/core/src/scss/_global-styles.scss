@@ -246,13 +246,13 @@ ion-loading.kirby-loading-overlay {
  */
 :link,
 :visited {
-  color: inherit;
-  cursor: pointer;
-  text-decoration: underline;
+  @include interaction-state.apply-focus($gap: 3px);
 
   outline: none;
   border-radius: #{utils.size('xxxxs')};
-  @include interaction-state.apply-focus($gap: 3px);
+  color: inherit;
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 /*

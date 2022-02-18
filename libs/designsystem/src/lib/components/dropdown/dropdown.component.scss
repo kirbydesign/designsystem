@@ -25,8 +25,6 @@ $min-screen-width: 375px;
   // to keep the rounded shape:
   outline: none;
 
-  // Only apply focus ring if pointer device can hover
-  // (effectively desktop/mouse devices):
   border-radius: utils.$border-radius-round;
   @include interaction-state.apply-focus();
 
