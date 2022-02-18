@@ -19,7 +19,7 @@ const config = {
       rgba(0, 0, 0, 0.6) 100%
     ),
     url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750');
-  min-height: 300px;
+    min-height: 300px;
 }
 `,
 };

@@ -80,6 +80,34 @@
     <code>backgroundImageUrl</code> input property or the
     <code>--kirby-card-background-image</code> custom css property.
   </p>
+  <h3>Setting background image from Javascript</h3>
+  <p>
+    In this example the <code>backgroundImageUrl</code> input property is used for setting the
+    background image. Notice the poor readability as the contrast between the text and background
+    image is too low. This could be improved by applying a linear gradient; using the
+    <code>backgroundImageUrl</code> this would have to be done by editing the image itself.
+  </p>
+  <p>
+    Furthermore using <code>backgroundImageUrl</code> requires a Javascript mechanism in order to
+    change based on viewport width. In contrast the
+    <code>--kirby-card-background-image</code> custom css property allows for media queries to be
+    used.
+  </p>
+  <p>
+    <cookbook-example-viewer
+      [html]="backgroundImageExample.template"
+      [css]="backgroundImageExample.style"
+    >
+      <cookbook-card-background-image-example #backgroundImageExample>
+      </cookbook-card-background-image-example>
+    </cookbook-example-viewer>
+  </p>
+  <h3>Setting background image from CSS with media queries & linear gradient</h3>
+  <p>
+    This example uses the <code>--kirby-card-background-image</code> custom css property to set the
+    background image. Furthermore a linear gradient is applied to improve the readability of the
+    text and a media query is used to change the image based on viewport width.
+  </p>
   <p>
     <cookbook-example-viewer
       [html]="cssBackgroundImageExample.template"
@@ -89,16 +117,7 @@
         #cssBackgroundImageExample
       ></cookbook-card-css-background-image-example>
     </cookbook-example-viewer>
-    <cookbook-example-viewer
-      [html]="backgroundImageExample.template"
-      [css]="backgroundImageExample.style"
-    >
-      <cookbook-card-background-image-example #backgroundImageExample>
-      </cookbook-card-background-image-example>
-    </cookbook-example-viewer>
   </p>
-
-  <br />
 
   <kirby-divider [hasMargin]="true"></kirby-divider>
 

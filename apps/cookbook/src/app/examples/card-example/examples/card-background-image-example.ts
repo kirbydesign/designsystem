@@ -4,8 +4,8 @@ const config = {
   selector: 'cookbook-card-background-image-example',
   template: `<kirby-card
   [hasPadding]="true"
-  themeColor="dark"
   backgroundImageUrl="https://images.unsplash.com/photo-1512917774080-9991f1c4c750"
+  themeColor="dark"
 >
   <h3>
     Example using input property to set background
