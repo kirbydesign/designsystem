@@ -2,15 +2,6 @@
 @use "~@kirbydesign/core/src/scss/utils";
 
 :host {
-  @include utils.focus {
-    &:focus-within {
-      box-shadow: 0 0 0 2px #{utils.get-color('background-color')},
-        0 0 0 4px #{utils.$focus-ring-color};
-      transition: box-shadow utils.get-transition-duration('quick'),
-        border-color utils.get-transition-duration('quick');
-    }
-  }
-
   font-family: var(--kirby-font-family);
   resize: none;
 
