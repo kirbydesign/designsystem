@@ -8,7 +8,7 @@
   position: relative;
 
   ion-item {
-    @include ionic.apply-hover($loudness: utils.get-loudness('faint'));
+    @include ionic.apply-hover('faint');
     // @include ionic.apply-active;
 
     --padding-top: var(--item-padding-top);

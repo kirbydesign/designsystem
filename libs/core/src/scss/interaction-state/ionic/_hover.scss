@@ -2,7 +2,7 @@
 @use '../../utils';
 
 // layer 3
-@mixin apply-hover($loudness: layer.$default-loudness, $flip: false) {
+@mixin apply-hover($loudness: 'quiet', $flip: false) {
   @include utils.hover {
     @include layer.apply-state($loudness, $flip);
     --background-hover: var(--state-layer-background-color);
