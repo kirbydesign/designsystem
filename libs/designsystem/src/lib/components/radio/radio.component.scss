@@ -1,5 +1,6 @@
 @use "sass:map";
 @use '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/interaction-state';
 
 $radio-icon-padding: utils.size('xxxxs');
 $radio-icon-size: utils.size('m');
@@ -61,6 +62,8 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
 }
 
 ion-radio {
+  @include interaction-state.apply-focus-part($part: 'container');
+
   min-height: $radio-icon-size;
   min-width: $radio-icon-size;
   padding: $radio-icon-padding;
@@ -91,16 +94,6 @@ ion-radio {
     ion-radio,
     ion-radio:active {
       --color: #{utils.get-color('danger')};
-    }
-  }
-
-  // Only apply focus ring if pointer device can hover
-  // (effectively desktop/mouse devices):
-  &:focus-within {
-    &::part(container) {
-      // Apply focus ring through box-shadow to keep circle shape and default border:
-      box-shadow: 0 0 0 2px #{utils.get-color('background-color')},
-        0 0 0 4px #{utils.$focus-ring-color};
     }
   }
 
