@@ -3,6 +3,8 @@
 @use '../utils';
 
 @mixin setup-layer {
+  $_z: utils.z('default');
+
   // layer 2
   --state-layer-opacity: 0;
   --state-layer-background-color: transparent;
@@ -11,7 +13,7 @@
 
   .content {
     position: relative;
-    z-index: 2;
+    z-index: $_z;
   }
 
   .state-layer {
@@ -22,7 +24,8 @@
     pointer-events: none;
     border-radius: inherit;
 
-    z-index: 1;
+    // Put state layer above content layer
+    z-index: $_z + 1;
 
     &::before {
       content: '';
@@ -61,6 +64,7 @@
   } @else {
     --state-layer-background-color: #000;
   }
+  // TODO: Introduce "on color" concept (see Material) instead of white and black
 }
 
 @mixin extend-content {
