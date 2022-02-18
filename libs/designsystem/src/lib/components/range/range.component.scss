@@ -1,7 +1,9 @@
 @use '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/interaction-state';
 
 $tickHeight: 6px;
 $tickWidth: 6px;
+$knob-shadow: 0 5px 10px 0px rgba(28, 28, 28, 0.3), 0 0 5px 0 rgba(28, 28, 28, 0.08);
 
 :host {
   display: flex;
@@ -10,8 +12,10 @@ $tickWidth: 6px;
 }
 
 ion-range {
+  @include interaction-state.apply-focus-part($part: 'knob', $shadow: $knob-shadow);
+
   --knob-background: #{utils.get-color('white')};
-  --knob-box-shadow: 0 5px 10px 0px rgba(28, 28, 28, 0.3), 0 0 5px 0 rgba(28, 28, 28, 0.08);
+  --knob-box-shadow: #{$knob-shadow};
   --knob-size: 24px;
 
   --pin-color: #{utils.get-text-color('black')};
@@ -73,14 +77,6 @@ ion-range {
 
   &::part(tick) {
     background: utils.get-color('medium');
-  }
-
-  &:focus-within::part(knob) {
-    box-shadow: var(--knob-box-shadow), 0 0 0 2px #{utils.get-color('background-color')},
-      0 0 0 4px #{utils.$focus-ring-color};
-
-    transition: box-shadow utils.get-transition-duration('quick'),
-      border-color utils.get-transition-duration('quick');
   }
 }
 
