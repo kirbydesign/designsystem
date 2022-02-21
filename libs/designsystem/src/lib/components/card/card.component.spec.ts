@@ -22,6 +22,30 @@ describe('CardComponent', () => {
     });
   });
 
+  describe("with 'backgroundImageUrl' set", () => {
+    const testUrl = 'https://notarealurl/';
+    let cardElement: HTMLElement;
+
+    beforeEach(() => {
+      spectator = createHost(`<kirby-card backgroundImageUrl='${testUrl}'></kirby-card>`);
+      cardElement = spectator.queryHost('kirby-card');
+    });
+
+    it("should use the url for the 'background-image' property", () => {
+      expect(cardElement).toHaveComputedStyle({
+        'background-image': `url("${testUrl}")`,
+      });
+    });
+
+    it('should have correct defaults for properties related to background', () => {
+      expect(cardElement).toHaveComputedStyle({
+        'background-repeat': 'no-repeat',
+        'background-position': '50% 50%',
+        'background-size': 'cover',
+      });
+    });
+  });
+
   describe('with mode attribute', () => {
     beforeEach(() => {
       spectator = createHost('<kirby-card mode="flat"></kirby-card>');
