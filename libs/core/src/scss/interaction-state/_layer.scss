@@ -2,12 +2,14 @@
 @use 'sass:meta';
 @use '../utils';
 
-@mixin setup-layer {
-  $_z: utils.z('default');
+$_z: utils.z('default');
+$_dark: utils.get-color('black');
+$_light: utils.get-color('black-contrast');
 
+@mixin setup-layer {
   // layer 2
   --state-layer-opacity: 0;
-  --state-layer-background-color: transparent;
+  --state-layer-background-color: $_dark;
 
   position: relative;
 
@@ -60,9 +62,9 @@
 
   // layer 2
   @if $flip {
-    --state-layer-background-color: #fff;
+    --state-layer-background-color: #{$_light};
   } @else {
-    --state-layer-background-color: #000;
+    --state-layer-background-color: #{$_dark};
   }
   // TODO: Introduce "on color" concept (see Material) instead of white and black
 }
