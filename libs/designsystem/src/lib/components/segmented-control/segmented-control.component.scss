@@ -50,10 +50,14 @@ ion-segment {
 
 ion-segment-button {
   @include utils.accessible-target-size();
-  @include interaction-state.apply-focus();
+  @include interaction-state.apply-focus-part($part: 'native');
 
   &::part(indicator) {
     padding-inline: 0;
+  }
+
+  &::part(native) {
+    border-radius: utils.$border-radius-round;
   }
 
   min-height: utils.size('xl');
