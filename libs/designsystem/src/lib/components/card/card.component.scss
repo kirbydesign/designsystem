@@ -34,7 +34,10 @@
   }
 
   &[role='button'] {
-    @include interaction-state.apply-focus($shadow: utils.get-elevation(4));
+    &.highlighted {
+      @include interaction-state.apply-focus($shadow: utils.get-elevation(4));
+    }
+    @include interaction-state.apply-focus($shadow: utils.get-elevation(2));
     cursor: pointer;
     outline: none;
   }
