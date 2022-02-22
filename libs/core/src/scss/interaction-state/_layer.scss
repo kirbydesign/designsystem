@@ -35,6 +35,8 @@ $_light: utils.get-color('black-contrast');
     z-index: $state-layer-z-index;
 
     &::before {
+      @include _transition;
+
       content: '';
       position: absolute;
       pointer-events: none;
@@ -42,14 +44,6 @@ $_light: utils.get-color('black-contrast');
 
       opacity: var(--state-layer-opacity, 0);
       background-color: var(--state-layer-background-color, $_dark);
-
-      // TODO: Extract transition into "interaction state transition" mixin
-      // transition-property: all;
-      // transition-duration: 180ms;
-      // transition-delay: 5ms;
-      transition-property: all;
-      transition-duration: utils.get-transition-duration('quick');
-      transition-timing-function: utils.get-transition-easing('static');
     }
   }
 }
@@ -74,4 +68,16 @@ $_light: utils.get-color('black-contrast');
   .content {
     @content;
   }
+}
+
+@mixin _transition($property: all) {
+  $duration: utils.get-transition-duration('quick');
+  $timing-function: utils.get-transition-easing('static');
+  $delay: 0ms;
+
+  // TODO: Discuss different transition with UX
+  // $duration: 180ms;
+  // $delay: 5ms;
+
+  transition: $property $duration $timing-function $delay;
 }
