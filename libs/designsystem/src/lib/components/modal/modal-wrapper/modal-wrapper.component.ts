@@ -226,6 +226,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     });
   }
 
+  // TODO: Suspect
   private moveEmbeddedElements() {
     const parentElement = this.getEmbeddedComponentElement();
     if (parentElement) {
@@ -447,15 +448,19 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     });
   }
 
+  // TODO: refactor this to not rely on order of elements in ion-content. It is very easy to break.
   private getEmbeddedComponentElement() {
     return !!this.config.modalRoute
       ? this.ionContentElement.nativeElement.lastElementChild
-      : this.ionContentElement.nativeElement.firstElementChild;
+      : this.ionContentElement.nativeElement.lastElementChild.previousElementSibling;
   }
 
   private getEmbeddedFooterElement() {
     return this.elementRef.nativeElement.querySelector<HTMLElement>('kirby-modal-footer');
   }
+
+  fullTitle: string;
+  truncateTreshold = 10;
 
   private moveChild(child: Element, newParent: Element) {
     this.renderer.removeChild(child.parentElement, child);
@@ -468,6 +473,12 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
         ];
         this.setCssVar(this.elementRef.nativeElement, property, pixelValue);
       });
+    } else if (child.tagName === 'KIRBY-PAGE-TITLE') {
+      const titleInnerHtml = child.innerHTML;
+      if (titleInnerHtml.length > this.truncateTreshold) {
+        this.fullTitle = titleInnerHtml;
+        child.innerHTML = titleInnerHtml.slice(0, this.truncateTreshold) + '...';
+      }
     }
   }
 
@@ -479,6 +490,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
 
   private observeEmbeddedElements() {
     const parentElement = this.getEmbeddedComponentElement();
+    console.log(parentElement);
     this.mutationObserver.observe(parentElement, {
       childList: true, // Listen for addition or removal of child nodes
     });
