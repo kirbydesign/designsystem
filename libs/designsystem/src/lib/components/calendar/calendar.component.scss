@@ -92,28 +92,23 @@ td {
   background-color: var(--background-color, transparent);
 }
 
-// .day.selectable,
-// .day.selected {
-//   cursor: pointer;
-// }
-
 .day.disabled,
 .day:not(.selectable) {
   --color: #{utils.get-text-color('semi-dark')};
 }
 
 .day.today {
+  @include interaction-state.apply-hover;
+
   color: utils.get-color('medium-contrast');
   background-color: utils.get-color('medium');
-
-  @include interaction-state.apply-hover;
 }
 
 .day.selected {
+  @include interaction-state.apply-hover('loud', $flip: true);
+
   color: utils.get-color('black-contrast');
   background-color: utils.get-color('black');
-
-  @include interaction-state.apply-hover('loud', $flip: true);
 }
 
 .day:not(.current-month) {
@@ -121,7 +116,7 @@ td {
   pointer-events: none;
 }
 
-.has-state-layer {
+.contain-state-layer {
   @include interaction-state.setup-layer;
   @include interaction-state.apply-hover('faint');
 }

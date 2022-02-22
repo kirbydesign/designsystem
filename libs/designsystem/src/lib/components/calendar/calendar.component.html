@@ -47,7 +47,7 @@
       <td *ngFor="let day of week">
         <div
           (click)="_onDateSelected(day)"
-          class="{{ day.cssClasses }} has-state-layer"
+          class="{{ day.cssClasses }} contain-state-layer"
           [class.selected]="day.isSelected"
         >
           <span class="state-layer"></span>
