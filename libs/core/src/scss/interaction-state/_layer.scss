@@ -2,7 +2,12 @@
 @use 'sass:meta';
 @use '../utils';
 
-// Put state layer above content layer as default
+// Put state layer above content layer as default.
+// You can change move the content layer on top by declaring e.g.:
+//
+//    --content-layer-z-index: calc(#{layer.$state-layer-z-index} + 1);
+//
+// in a component that uses interaction state layer.
 $_content-layer-z-index: utils.z('default');
 $state-layer-z-index: $_content-layer-z-index + 1;
 
@@ -10,7 +15,6 @@ $_dark: utils.get-color('black');
 $_light: utils.get-color('black-contrast');
 
 @mixin setup-layer {
-  // layer 2
   --state-layer-opacity: 0;
   --state-layer-background-color: $_dark;
 
@@ -23,7 +27,6 @@ $_light: utils.get-color('black-contrast');
 
   .state-layer {
     position: absolute;
-    // TODO: Set inset to 0 (zero) if state layer should not cover border of parent
     inset: calc(var(--border-width, 0px) * -1); // negate border-width on parent
     overflow: hidden;
     pointer-events: none;
@@ -37,11 +40,10 @@ $_light: utils.get-color('black-contrast');
       pointer-events: none;
       inset: -50%;
 
-      // layer 3
-      opacity: var(--state-layer-opacity);
-      background-color: var(--state-layer-background-color);
+      opacity: var(--state-layer-opacity, 0);
+      background-color: var(--state-layer-background-color, $_dark);
 
-      // TODO: Extract transition into "interaction state trasition" mixin
+      // TODO: Extract transition into "interaction state transition" mixin
       // transition-property: all;
       // transition-duration: 180ms;
       // transition-delay: 5ms;
@@ -59,16 +61,13 @@ $_light: utils.get-color('black-contrast');
     @error "$loudness-percent must be a percentage";
   }
 
-  // layer 2
   --state-layer-opacity: #{$loudness-percent / 100%};
 
-  // layer 2
   @if $flip {
     --state-layer-background-color: #{$_light};
   } @else {
     --state-layer-background-color: #{$_dark};
   }
-  // TODO: Introduce "on color" concept (see Material) instead of white and black
 }
 
 @mixin extend-content {
