@@ -50,7 +50,7 @@
           class="{{ day.cssClasses }} contain-state-layer"
           [class.selected]="day.isSelected"
         >
-          <span class="state-layer"></span>
+          <span class="state-layer" aria-hidden="true"></span>
           <span class="content">{{ day.date }}</span>
         </div>
       </td>
