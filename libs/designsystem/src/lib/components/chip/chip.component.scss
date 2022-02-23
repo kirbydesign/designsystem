@@ -1,19 +1,36 @@
 @use '~@kirbydesign/core/src/scss/interaction-state';
 @use '~@kirbydesign/core/src/scss/utils';
 
-@mixin selected-and-hover($background-color) {
+@mixin _theme-background($variant, $text-variant-override: null) {
+  $background-color: null;
+  $text-color: null;
+  @if $variant == transparent {
+    $background-color: transparent;
+    $text-color: utils.get-text-color('black');
+  } @else {
+    $background-color: utils.get-color($variant);
+    $text-color: utils.get-color($variant + '-contrast');
+  }
+  @if ($text-variant-override != null) {
+    $text-color: utils.get-text-color($text-variant-override);
+  }
+  background-color: $background-color;
+  color: $text-color;
+}
+
+@mixin _selected-and-hover($background-color) {
   &.is-selected {
-    @include utils.theme-background($background-color);
+    @include _theme-background($background-color);
   }
 
   @include utils.hover() {
-    @include utils.theme-background($background-color);
+    @include _theme-background($background-color);
   }
 }
 
 :host {
-  @include utils.theme-background('white');
-  @include selected-and-hover('black');
+  @include _theme-background('white');
+  @include _selected-and-hover('black');
   @include utils.accessible-target-size();
 
   &[role='button'] {
@@ -35,8 +52,8 @@
   user-select: none;
 
   :host-context(.kirby-color-brightness-dark) {
-    @include utils.theme-background(transparent, 'white');
-    @include selected-and-hover('white');
+    @include _theme-background(transparent, 'white');
+    @include _selected-and-hover('white');
   }
 
   :host-context(kirby-segmented-control.compact) {
@@ -45,8 +62,8 @@
     justify-content: center;
     --inline-margin: #{utils.size('xxxxs')};
     --inline-padding: #{13px};
-    @include utils.theme-background(transparent);
-    @include selected-and-hover('black');
+    @include _theme-background(transparent);
+    @include _selected-and-hover('black');
 
     @include utils.media('<=small') {
       --inline-margin: 0;
