@@ -35,7 +35,7 @@ $_light: utils.get-color('black-contrast');
     z-index: $state-layer-z-index;
 
     &::before {
-      @include _transition;
+      @include transition;
 
       content: '';
       position: absolute;
@@ -70,7 +70,7 @@ $_light: utils.get-color('black-contrast');
   }
 }
 
-@mixin _transition($property: all) {
+@mixin transition($property: all) {
   $duration: utils.get-transition-duration('quick');
   $timing-function: utils.get-transition-easing('static');
   $delay: 0ms;
