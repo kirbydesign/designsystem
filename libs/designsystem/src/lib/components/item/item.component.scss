@@ -9,7 +9,6 @@
 
   ion-item {
     @include ionic.apply-hover('faint');
-    // @include ionic.apply-active;
 
     --padding-top: var(--item-padding-top);
     --padding-bottom: var(--item-padding-bottom);
@@ -21,22 +20,19 @@
     --inner-padding-end: #{utils.size('s')};
 
     --background: var(--kirby-item-background, #{utils.get-color('white')});
-    // --background-activated: var(
-    //   --kirby-item-background-activated,
-    //   #{utils.get-color('white-shade')}
-    // );
+    --background-activated: var(
+      --kirby-item-background-activated,
+      #{utils.get-color('white-shade')}
+    );
 
     // WORKAROUND: Needed to fix ignored click on scrollend
     // https://github.com/ionic-team/ionic-framework/issues/21871
-    // --background-activated-opacity: 0.99;
+    --background-activated-opacity: 0.99;
     --background-focused: var(
       --kirby-item-background-focused,
       #{utils.get-color('background-color')}
     );
     --background-focused-opacity: 1;
-
-    // --background-hover: var(--kirby-item-background-hover, #{utils.get-color('background-color')});
-    // --background-hover-opacity: 1;
 
     // Prevent additional padding in iOS Safari on devices with "screen notch"
     // by removing horizontal safe area when rotated to landscape orientation.
