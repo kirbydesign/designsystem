@@ -226,7 +226,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     });
   }
 
-  // TODO: Suspect
   private moveEmbeddedElements() {
     const parentElement = this.getEmbeddedComponentElement();
     if (parentElement) {
@@ -465,20 +464,32 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   private moveChild(child: Element, newParent: Element) {
     this.renderer.removeChild(child.parentElement, child);
     this.renderer.appendChild(newParent, child);
-    if (child.tagName === 'KIRBY-MODAL-FOOTER') {
-      this.resizeObserverService.observe(child, (entry) => {
-        const [property, pixelValue] = [
-          '--footer-height',
-          `${Math.floor(entry.contentRect.height)}px`,
-        ];
-        this.setCssVar(this.elementRef.nativeElement, property, pixelValue);
-      });
-    } else if (child.tagName === 'KIRBY-PAGE-TITLE') {
-      const titleInnerHtml = child.innerHTML;
-      if (titleInnerHtml.length > this.truncateTreshold) {
-        this.fullTitle = titleInnerHtml;
-        child.innerHTML = titleInnerHtml.slice(0, this.truncateTreshold) + '...';
-      }
+
+    switch (child.tagName) {
+      case 'KIRBY-MODAL-FOOTER':
+        this.resizeObserverService.observe(child, (entry) => {
+          const [property, pixelValue] = [
+            '--footer-height',
+            `${Math.floor(entry.contentRect.height)}px`,
+          ];
+          this.setCssVar(this.elementRef.nativeElement, property, pixelValue);
+        });
+        break;
+
+      /* TODO: I think directly manipulating the DOM as is being done here 
+         results in the following:
+         "ERROR Error: NG0100: ExpressionChangedAfterItHasBeenCheckedError: Expression has changed after it was checked. 
+         Previous value: 'undefined'. Current value: 'Modal Title'.. Find more at https://angular.io/errors/NG0100"
+
+         Should be solved before we release it but it works for a POC.
+      */
+      case 'KIRBY-PAGE-TITLE':
+        const titleInnerHtml = child.innerHTML;
+        if (titleInnerHtml.length > this.truncateTreshold) {
+          this.fullTitle = titleInnerHtml;
+          child.innerHTML = titleInnerHtml.slice(0, this.truncateTreshold) + '...';
+        }
+        break;
     }
   }
 
