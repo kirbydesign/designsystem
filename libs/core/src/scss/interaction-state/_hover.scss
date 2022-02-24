@@ -5,5 +5,6 @@
   @include utils.hover {
     @include layer.apply-state($loudness, $flip);
     cursor: pointer;
+    @content;
   }
 }

@@ -6,5 +6,6 @@
     @include layer.apply-state($loudness, $flip);
     --background-hover: var(--state-layer-background-color);
     --background-hover-opacity: var(--state-layer-opacity);
+    @content;
   }
 }
