@@ -47,3 +47,8 @@ ion-footer {
 :host(.light) ion-footer {
   background-color: utils.get-color('background-color');
 }
+
+:host(.inline) ion-footer {
+  background: transparent;
+  box-shadow: none;
+}

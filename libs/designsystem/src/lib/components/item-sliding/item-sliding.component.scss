@@ -1,5 +1,9 @@
 @use './item-sliding.shared.scss';
 
+:host {
+  display: block;
+}
+
 ion-item-option {
   min-width: 92px;
 }
