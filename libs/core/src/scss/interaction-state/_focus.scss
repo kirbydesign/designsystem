@@ -4,23 +4,27 @@
 @use '../themes/colors';
 
 @mixin apply-focus-part($part, $shadow: null, $gap: utils.size('xxxxs')) {
-  &:focus-within::part(#{$part}) {
-    @include _focus-ring($shadow, $gap);
+  @include utils.not-touch {
+    &:focus-within::part(#{$part}) {
+      @include _focus-ring($shadow, $gap);
+    }
   }
 }
 
 @mixin apply-focus-visible($shadow: null, $gap: utils.size('xxxxs')) {
-  $reset-focus-ring: 0 0 0 0 transparent;
-  &:focus {
-    @include _focus-ring($shadow, $gap);
-  }
+  @include utils.not-touch {
+    $reset-focus-ring: 0 0 0 0 transparent;
+    &:focus {
+      @include _focus-ring($shadow, $gap);
+    }
 
-  &:focus:not(:focus-visible) {
-    box-shadow: $shadow, $reset-focus-ring;
-  }
+    &:focus:not(:focus-visible) {
+      box-shadow: $shadow, $reset-focus-ring;
+    }
 
-  &:focus-visible {
-    @include _focus-ring($shadow, $gap);
+    &:focus-visible {
+      @include _focus-ring($shadow, $gap);
+    }
   }
 }
 
