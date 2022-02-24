@@ -1,37 +1,21 @@
 @use '~@kirbydesign/core/src/scss/interaction-state';
 @use '~@kirbydesign/core/src/scss/utils';
 
-@mixin _theme-background($variant, $text-variant-override: null) {
-  $background-color: null;
-  $text-color: null;
-  @if $variant == transparent {
-    $background-color: transparent;
-    $text-color: utils.get-text-color('black');
-  } @else {
-    $background-color: utils.get-color($variant);
-    $text-color: utils.get-color($variant + '-contrast');
-  }
-  @if ($text-variant-override != null) {
-    $text-color: utils.get-text-color($text-variant-override);
-  }
-  background-color: $background-color;
-  color: $text-color;
-}
-
-@mixin _selected-and-hover($background-color) {
-  &.is-selected {
-    @include _theme-background($background-color);
-  }
-
-  @include utils.hover() {
-    @include _theme-background($background-color);
-  }
-}
-
 :host {
-  @include _theme-background('white');
-  @include _selected-and-hover('black');
-  @include utils.accessible-target-size();
+  @include interaction-state.setup-layer;
+  @include interaction-state.apply-hover('faint');
+
+  @include utils.accessible-target-size;
+
+  background-color: utils.get-color('white');
+  color: utils.get-color('white-contrast');
+
+  &.is-selected {
+    @include interaction-state.apply-hover('loud', $flip: true);
+
+    background-color: utils.get-color('black');
+    color: utils.get-color('black-contrast');
+  }
 
   &[role='button'] {
     @include interaction-state.apply-focus-visible() {
@@ -52,21 +36,51 @@
   user-select: none;
 
   :host-context(.kirby-color-brightness-dark) {
-    @include _theme-background(transparent, 'white');
-    @include _selected-and-hover('white');
+    @include interaction-state.apply-hover($flip: true);
+
+    background-color: transparent;
+    color: utils.get-text-color('white');
+
+    &.is-selected {
+      @include interaction-state.apply-hover('moderate');
+
+      background-color: utils.get-color('white');
+      color: utils.get-color('white-contrast');
+    }
+  }
+
+  :host-context(.kirby-color-brightness-light) {
+    background-color: transparent;
+    color: utils.get-text-color('black');
+
+    &.is-selected {
+      @include interaction-state.apply-hover;
+
+      background-color: utils.get-color('white');
+      color: utils.get-color('white-contrast');
+    }
   }
 
   :host-context(kirby-segmented-control.compact) {
-    min-width: 44px;
-    flex-shrink: 0;
-    justify-content: center;
+    background-color: transparent;
+    color: utils.get-text-color('black');
+
+    &.is-selected {
+      @include interaction-state.apply-hover('loud', $flip: true);
+
+      background-color: utils.get-color('black');
+      color: utils.get-color('black-contrast');
+    }
+
     --inline-margin: #{utils.size('xxxxs')};
     --inline-padding: #{13px};
-    @include _theme-background(transparent);
-    @include _selected-and-hover('black');
 
     @include utils.media('<=small') {
       --inline-margin: 0;
     }
+
+    min-width: 44px;
+    flex-shrink: 0;
+    justify-content: center;
   }
 }
