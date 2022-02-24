@@ -15,6 +15,21 @@
   }
 }
 
+@mixin apply-focus-visible($shadow: null, $gap: utils.size('xxxxs')) {
+  $reset-focus-ring: 0 0 0 0 transparent;
+  &:focus {
+    @include _focus-ring($shadow, $gap);
+  }
+
+  &:focus:not(:focus-visible) {
+    box-shadow: $shadow, $reset-focus-ring;
+  }
+
+  &:focus-visible {
+    @include _focus-ring($shadow, $gap);
+  }
+}
+
 @mixin _focus-ring($shadow, $gap) {
   $stroke-width: utils.size('xxxxs');
   box-shadow: #{$shadow}, 0 0 0 $gap #{utils.get-color('background-color')},
