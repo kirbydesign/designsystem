@@ -15,8 +15,9 @@
   @include utils.theme-background('white');
   @include selected-and-hover('black');
   @include utils.accessible-target-size();
+
   &[role='button'] {
-    @include interaction-state.apply-focus();
+    @include interaction-state.apply-focus-visible();
     cursor: pointer;
     outline: none;
   }

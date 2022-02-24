@@ -1,4 +1,5 @@
 @use '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/interaction-state';
 
 $fab-sheet-margin: utils.size('s');
 
@@ -14,17 +15,9 @@ ion-fab-button {
   height: 64px;
   user-select: none;
 
-  // Outline is applied on button border instead,
-  // to keep the rounded shape:
   outline: none;
-
-  // Only apply focus ring if pointer device can hover
-  // (effectively desktop/mouse devices):
-  @include utils.focus() {
-    --border-width: 1px;
-    --border-style: solid;
-    --border-color: #{utils.$focus-ring-color};
-  }
+  border-radius: utils.$border-radius-round;
+  @include interaction-state.apply-focus-visible();
 
   &[disabled] {
     --background: #{utils.get-color('semi-light')};

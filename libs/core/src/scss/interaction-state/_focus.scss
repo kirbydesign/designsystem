@@ -3,12 +3,6 @@
 @use '../utils';
 @use '../themes/colors';
 
-@mixin apply-focus($shadow: null, $gap: utils.size('xxxxs')) {
-  &:focus-within {
-    @include _focus-ring($shadow, $gap);
-  }
-}
-
 @mixin apply-focus-part($part, $shadow: null, $gap: utils.size('xxxxs')) {
   &:focus-within::part(#{$part}) {
     @include _focus-ring($shadow, $gap);

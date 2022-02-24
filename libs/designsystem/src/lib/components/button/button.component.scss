@@ -130,7 +130,7 @@ $button-width: (
 
 :host {
   @include utils.accessible-target-size();
-  @include interaction-state.apply-focus();
+  @include interaction-state.apply-focus-visible();
 
   font-family: var(--kirby-font-family);
   background-color: var(--kirby-button-background-color, initial);

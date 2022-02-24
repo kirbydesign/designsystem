@@ -21,12 +21,9 @@ $min-screen-width: 375px;
     }
   }
 
-  // Outline is applied on button border instead,
-  // to keep the rounded shape:
   outline: none;
-
   border-radius: utils.$border-radius-round;
-  @include interaction-state.apply-focus();
+  @include interaction-state.apply-focus-visible();
 
   &.error,
   &.ng-touched.ng-invalid {

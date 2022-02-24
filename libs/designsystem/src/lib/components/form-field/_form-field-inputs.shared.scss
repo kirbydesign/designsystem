@@ -27,7 +27,7 @@ $form-field-input-padding: utils.size('s');
 }
 
 :host {
-  @include interaction-state.apply-focus($shadow: utils.get-elevation(2));
+  @include interaction-state.apply-focus-visible($shadow: utils.get-elevation(2));
 
   background-color: utils.get-color('white');
   color: utils.get-color('white-contrast');
