@@ -74,7 +74,7 @@ ion-back-button {
   height: utils.$fat-finger-size;
   width: utils.$fat-finger-size;
 
-  // TODO: This solution seems to work but I don't like it. Consider to try and find a more Ionic-like way to do it
+  // TODO: Improve this solution - also see ion-segment-button in segmented control
   border-radius: utils.$border-radius-round;
   overflow: hidden;
   opacity: 1;
