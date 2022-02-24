@@ -1,4 +1,5 @@
 @use '~@kirbydesign/core/src/scss/interaction-state';
+@use '~@kirbydesign/core/src/scss/interaction-state/ionic';
 @use '~@kirbydesign/core/src/scss/utils';
 
 :host {
@@ -39,25 +40,18 @@
 }
 
 ion-segment {
+  --background: #{utils.get-color('white')};
   display: inline-flex; //The segmented control itself is block-level, but we don't want the background to stretch
   width: auto; //The segmented control itself is block-level, but we don't want the background to stretch
   overflow: visible; //Ensures the badge is not cut off
   contain: unset; //Ensures the badge is not cut off
-  --background: #{utils.get-color('white')};
   border-radius: utils.$border-radius-round;
 }
 
 ion-segment-button {
-  @include utils.accessible-target-size();
   @include interaction-state.apply-focus-part($part: 'native');
-
-  &::part(indicator) {
-    padding-inline: 0;
-  }
-
-  &::part(native) {
-    border-radius: utils.$border-radius-round;
-  }
+  @include ionic.apply-hover;
+  @include utils.accessible-target-size;
 
   min-height: utils.size('xl');
   font-weight: utils.font-weight('normal');
@@ -78,6 +72,21 @@ ion-segment-button {
   --margin-start: 0;
   --margin-top: 0;
   margin: 0;
+
+  // TODO: Improve this solution - also see ion-back-button in page component
+  &::part(native) {
+    opacity: 1;
+    border-radius: #{utils.$border-radius-round};
+
+    &::after {
+      @include ionic.transition;
+    }
+  }
+  // end TODO
+
+  &::part(indicator) {
+    padding-inline: 0;
+  }
 }
 
 .segment-btn-wrapper {
