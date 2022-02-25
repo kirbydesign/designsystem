@@ -11,7 +11,6 @@ import { ButtonExampleComponent } from './button-example/button-example.componen
 import { CalendarCardExampleComponent } from './calendar-example/calendar-card-example.component';
 import { CalendarExampleComponent } from './calendar-example/calendar-example.component';
 import { CardExampleComponent } from './card-example/card-example.component';
-import { ChartDeprecatedExampleComponent } from './chart-deprecated-example/chart-deprecated-example.component';
 import { ChartExampleComponent } from './chart-example/chart-example.component';
 import { CheckboxExampleComponent } from './checkbox-example/checkbox-example.component';
 import { ChipExampleComponent } from './chip-example/chip-example.component';
@@ -342,10 +341,6 @@ export const routes: Routes = [
   {
     path: 'list-experimental',
     component: ListExperimentalExampleComponent,
-  },
-  {
-    path: 'chart-deprecated',
-    component: ChartDeprecatedExampleComponent,
   },
   {
     path: 'chart',
