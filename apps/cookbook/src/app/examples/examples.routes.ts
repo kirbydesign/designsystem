@@ -64,7 +64,6 @@ import { SegmentedControlExampleComponent } from './segmented-control-example/se
 import { SlideButtonExampleComponent } from './slide-button-example/slide-button-example.component';
 import { SlidesExampleComponent } from './slides-example/slides-example.component';
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
-import { StockChartDeprecatedExampleComponent } from './stock-chart-deprecated-example/stock-chart-deprecated-example.component';
 import { StylingHtmlListsExampleComponent } from './styling-html-lists-example/styling-html-lists-example.component';
 import { TabExampleComponent } from './tabs-example/tab/tab-example.component';
 import { TabsExampleComponent } from './tabs-example/tabs-example.component';
@@ -348,7 +347,6 @@ export const routes: Routes = [
   },
   {
     path: 'stock-chart-deprecated',
-    component: StockChartDeprecatedExampleComponent,
   },
   {
     path: 'grid',
