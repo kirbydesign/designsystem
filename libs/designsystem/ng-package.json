@@ -8,9 +8,6 @@
       "@ionic/angular": "ionic",
       "date-fns-tz": "date-fns-tz",
       "date-fns": "date-fns",
-      "highcharts": "highcharts",
-      "highcharts/highstock": "highcharts/highstock",
-      "highcharts/modules/annotations": "highcharts",
       "inputmask/lib/inputmask": "inputmask"
     }
   },
@@ -24,7 +21,6 @@
     "chartjs-plugin-datalabels",
     "date-fns-tz",
     "date-fns",
-    "highcharts",
     "include-media",
     "inputmask",
     "ts-deepcopy"
