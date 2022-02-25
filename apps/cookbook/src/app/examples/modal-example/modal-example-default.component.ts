@@ -219,7 +219,10 @@ export class ModalExampleDefaultComponent {
   constructor(private modalController: ModalController, private windowRef: WindowRef) {}
 
   private async showOverlay(flavor: 'modal' | 'drawer') {
-    let title = flavor === 'modal' ? 'Modal Title' : 'Drawer Title';
+    let title =
+      flavor === 'modal'
+        ? 'Jeg har solbriller på, det et sjovt fænomen. Er man tilpas cool skinder solen altid på en'
+        : 'Drawer Title';
     if (this.customCssClass) {
       title = flavor === 'modal' ? 'Modal with Custom CSS' : 'Drawer with Custom CSS';
     }

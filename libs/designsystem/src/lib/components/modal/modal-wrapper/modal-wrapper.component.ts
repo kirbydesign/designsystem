@@ -458,8 +458,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     return this.elementRef.nativeElement.querySelector<HTMLElement>('kirby-modal-footer');
   }
 
-  fullTitle: string;
-  truncateTreshold = 10;
+  title: string;
 
   private moveChild(child: Element, newParent: Element) {
     this.renderer.removeChild(child.parentElement, child);
@@ -475,20 +474,8 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
           this.setCssVar(this.elementRef.nativeElement, property, pixelValue);
         });
         break;
-
-      /* TODO: I think directly manipulating the DOM as is being done here 
-         results in the following:
-         "ERROR Error: NG0100: ExpressionChangedAfterItHasBeenCheckedError: Expression has changed after it was checked. 
-         Previous value: 'undefined'. Current value: 'Modal Title'.. Find more at https://angular.io/errors/NG0100"
-
-         Should be solved before we release it but it works for a POC.
-      */
       case 'KIRBY-PAGE-TITLE':
-        const titleInnerHtml = child.innerHTML;
-        if (titleInnerHtml.length > this.truncateTreshold) {
-          this.fullTitle = titleInnerHtml;
-          child.innerHTML = titleInnerHtml.slice(0, this.truncateTreshold) + '...';
-        }
+        this.title = child.innerHTML;
         break;
     }
   }
