@@ -8,7 +8,6 @@ export { KirbyBadge as BadgeComponent } from './web-component-proxies.component'
 export { ButtonComponent, ButtonSize } from './button/button.component';
 
 export * from './card';
-export * from './chart-deprecated';
 export * from './chart';
 export * from './stock-chart-deprecated';
 export * from './calendar';
