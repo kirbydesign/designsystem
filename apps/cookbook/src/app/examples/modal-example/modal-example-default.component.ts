@@ -221,7 +221,7 @@ export class ModalExampleDefaultComponent {
   private async showOverlay(flavor: 'modal' | 'drawer') {
     let title =
       flavor === 'modal'
-        ? 'Jeg har solbriller på, det et sjovt fænomen. Er man tilpas cool skinder solen altid på en'
+        ? 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore!'
         : 'Drawer Title';
     if (this.customCssClass) {
       title = flavor === 'modal' ? 'Modal with Custom CSS' : 'Drawer with Custom CSS';
