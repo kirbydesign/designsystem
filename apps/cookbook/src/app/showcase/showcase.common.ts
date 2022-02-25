@@ -13,7 +13,6 @@ import { BadgeShowcaseComponent } from './badge-showcase/badge-showcase.componen
 import { ButtonShowcaseComponent } from './button-showcase/button-showcase.component';
 import { CalendarShowcaseComponent } from './calendar-showcase/calendar-showcase.component';
 import { CardShowcaseComponent } from './card-showcase/card-showcase.component';
-import { ChartDeprecatedShowcaseComponent } from './chart-deprecated-showcase/chart-deprecated-showcase.component';
 import { ChartShowcaseComponent } from './chart-showcase/chart-showcase.component';
 import { CheckboxShowcaseComponent } from './checkbox-showcase/checkbox-showcase.component';
 import { ChipShowcaseComponent } from './chip-showcase/chip-showcase.component';
@@ -67,7 +66,6 @@ export const COMPONENT_EXPORTS: any[] = [
   ListNoShapeShowcaseComponent,
   GridShowcaseComponent,
   AvatarShowcaseComponent,
-  ChartDeprecatedShowcaseComponent,
   ChartShowcaseComponent,
   FontsShowcaseComponent,
   SpinnerShowcaseComponent,
