@@ -1,28 +1,56 @@
-@use 'sass:map';
-@use "sass:selector";
 @use '../utils';
 @use '../themes/colors';
 
-@mixin apply-focus-part($part, $shadow: null, $gap: utils.size('xxxxs')) {
+// ---------------------------------------------------------------------------
+// The apply-focus-visible mixin is used by most interactive elements to apply
+// a focus ring around the element when navigated to via a keyboard on a
+// non-touch device.
+
+/// @param {box-shadow} $shadow
+///   Add/preserve additional box-shadow (e.g. elevation) alongside the focus ring.
+/// @param {number} $gap
+///   The distance (in pixels) from the element boundary to the focus ring
+// ---------------------------------------------------------------------------
+@mixin apply-focus-visible($shadow: null, $gap: utils.size('xxxxs')) {
   @include utils.not-touch {
-    &:focus-within::part(#{$part}) {
+    $reset-focus-ring: 0 0 0 0 transparent;
+
+    &:focus {
+      // This is a fallback for safari and other browsers, so we still show the focus
+      // ring on older versions that does not support this pseudo class.
+      @include _focus-ring($shadow, $gap);
+    }
+
+    &:focus:not(:focus-visible) {
+      // On browsers that do support focus-visible, we dont want anything to show on the
+      // standard focus pseudo-class, so we reset it here, while still allowing to preserve
+      // any shadow set on the element by the user.
+      box-shadow: $shadow, $reset-focus-ring;
+    }
+
+    &:focus-visible {
       @include _focus-ring($shadow, $gap);
     }
   }
 }
 
-@mixin apply-focus-visible($shadow: null, $gap: utils.size('xxxxs')) {
+// ---------------------------------------------------------------------------
+// The apply-focus-part mixin is used where ionics components does not allow
+// us to apply styling directly to the tabbed element, as it is hidden inside
+// a shadow root, and not exposed as a part. In some of these cases, we are
+// unable to provide focus-visible like functionality, and thus the focus ring
+// will always show.
+
+/// @param {string} $part
+///    Add focus styles to a specific CSS Shadow Part.
+/// @param {box-shadow} $shadow
+///   Add/preserve additional box-shadow (e.g. elevation) alongside the focus ring.
+/// @param {number} $gap
+///   The distance (in pixels) from the element boundary to the focus ring
+// ---------------------------------------------------------------------------
+@mixin apply-focus-part($part, $shadow: null, $gap: utils.size('xxxxs')) {
   @include utils.not-touch {
-    $reset-focus-ring: 0 0 0 0 transparent;
-    &:focus {
-      @include _focus-ring($shadow, $gap);
-    }
-
-    &:focus:not(:focus-visible) {
-      box-shadow: $shadow, $reset-focus-ring;
-    }
-
-    &:focus-visible {
+    &:focus-within::part(#{$part}) {
       @include _focus-ring($shadow, $gap);
     }
   }
