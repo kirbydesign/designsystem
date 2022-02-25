@@ -475,6 +475,9 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
         });
         break;
       case 'KIRBY-PAGE-TITLE':
+        /* TODO: Something triggers: 
+           `ERROR Error: NG0100: ExpressionChangedAfterItHasBeenCheckedError: Expression has changed after it was checked. Previous value: 'undefined'. Current value: 'Jeg har solbriller på, det et sjovt fænomen. Er man tilpas cool skinder solen altid på en'.. Find more at https://angular.io/errors/NG0100`
+           */
         this.title = child.innerHTML;
         break;
     }
@@ -488,7 +491,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
 
   private observeEmbeddedElements() {
     const parentElement = this.getEmbeddedComponentElement();
-    console.log(parentElement);
     this.mutationObserver.observe(parentElement, {
       childList: true, // Listen for addition or removal of child nodes
     });
