@@ -6,7 +6,6 @@ export { ButtonComponent, ButtonSize } from './button/button.component';
 
 export * from './card';
 export * from './chart';
-export * from './stock-chart-deprecated';
 export * from './calendar';
 export * from './item-sliding';
 
