@@ -9,7 +9,6 @@ import { MockCalendarComponent } from './components/mock.calendar.component';
 import { MockCardFooterComponent } from './components/mock.card-footer.component';
 import { MockCardHeaderComponent } from './components/mock.card-header.component';
 import { MockCardComponent } from './components/mock.card.component';
-import { MockChartDeprecatedComponent } from './components/mock.chart-deprecated.component';
 import { MockChartComponent } from './components/mock.chart.component';
 import { MockCheckboxComponent } from './components/mock.checkbox.component';
 import { MockChipComponent } from './components/mock.chip.component';
@@ -43,7 +42,6 @@ import {
   MockPageContentComponent,
   MockPageContentDirective,
   MockPageProgressComponent,
-  MockPageSubtitleDirective,
   MockPageTitleComponent,
   MockPageTitleDirective,
   MockPageToolbarTitleDirective,
@@ -64,7 +62,6 @@ import { MockTabsComponent } from './components/mock.tabs.component';
 import { MockTextareaComponent } from './components/mock.textarea.component';
 import { MockToggleButtonComponent } from './components/mock.toggle-button.component';
 import { MockToggleComponent } from './components/mock.toggle.component';
-import { MockBadgeComponent } from './components/mock.web-component-proxies.component';
 
 export const MOCK_COMPONENTS = [
   MockAccordionItemComponent,
@@ -76,7 +73,6 @@ export const MOCK_COMPONENTS = [
   MockCardHeaderComponent,
   MockCardComponent,
   MockChartComponent,
-  MockChartDeprecatedComponent,
   MockCheckboxComponent,
   MockChipComponent,
   MockDividerComponent,
@@ -105,7 +101,6 @@ export const MOCK_COMPONENTS = [
   MockModalFooterComponent,
   MockPageFooterComponent,
   MockPageTitleDirective,
-  MockPageSubtitleDirective,
   MockPageToolbarTitleDirective,
   MockPageActionsDirective,
   MockPageContentDirective,
@@ -129,5 +124,4 @@ export const MOCK_COMPONENTS = [
   MockTabsComponent,
   MockToggleComponent,
   MockToggleButtonComponent,
-  MockBadgeComponent,
 ];
