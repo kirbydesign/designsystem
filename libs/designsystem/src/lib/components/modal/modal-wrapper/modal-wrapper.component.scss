@@ -86,12 +86,21 @@ ion-header ion-toolbar {
   @include phablet-toolbar-padding();
 }
 
+ion-content ion-header ion-toolbar {
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-top: 0;
+}
+
 // Ensure iOS safe-area padding-top on default/modal flavor
 // when opened on presenting element (gets .modal-card class):
 :host-context(ion-modal.modal-card:not(.kirby-drawer)) {
+  :has(ion-content) {
+    --kirby-safe-area-top: 0px;
+  }
+
   ion-header ion-toolbar:first-of-type {
     padding-top: var(--kirby-safe-area-top, 0px);
-
     @include phablet-toolbar-padding();
   }
 }
