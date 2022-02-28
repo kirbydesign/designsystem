@@ -3,6 +3,7 @@
 
 :host {
   font-family: var(--kirby-font-family);
+
   resize: none;
 
   @include utils.media('>=medium') {

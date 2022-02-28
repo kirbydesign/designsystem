@@ -7,9 +7,12 @@ $min-screen-width-small: 320px;
 $min-screen-width: 375px;
 
 :host {
+  @include interaction-state.apply-focus-visible();
   display: inline-block;
   position: relative;
   max-width: calc(100vw - #{$margin-horizontal-total});
+  outline: none;
+  border-radius: utils.$border-radius-round;
 
   &.expand {
     display: block;
@@ -20,10 +23,6 @@ $min-screen-width: 375px;
       max-width: initial;
     }
   }
-
-  outline: none;
-  border-radius: utils.$border-radius-round;
-  @include interaction-state.apply-focus-visible();
 
   &.error,
   &.ng-touched.ng-invalid {

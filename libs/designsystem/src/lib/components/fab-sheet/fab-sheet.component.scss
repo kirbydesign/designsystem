@@ -11,13 +11,14 @@ $fab-sheet-margin: utils.size('s');
 // https://ionicframework.com/docs/api/fab-button
 ion-fab-button {
   --box-shadow: #{utils.get-elevation(8)};
-  width: 64px;
-  height: 64px;
-  user-select: none;
+
+  @include interaction-state.apply-focus-visible();
 
   outline: none;
   border-radius: utils.$border-radius-round;
-  @include interaction-state.apply-focus-visible();
+  width: 64px;
+  height: 64px;
+  user-select: none;
 
   &[disabled] {
     --background: #{utils.get-color('semi-light')};
