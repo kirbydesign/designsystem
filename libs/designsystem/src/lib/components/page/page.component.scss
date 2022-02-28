@@ -74,15 +74,19 @@ ion-back-button {
   height: utils.$fat-finger-size;
   width: utils.$fat-finger-size;
 
-  // TODO: Improve this solution - also see ion-segment-button in segmented control
-  border-radius: utils.$border-radius-round;
-  overflow: hidden;
-  opacity: 1;
+  // NOTE: Also see ion-segment-button in segmented control component
+  opacity: 1; // required for interaction states to work
+
+  &::part(native) {
+    opacity: 1; // required for interaction states to work
+    border-radius: utils.$border-radius-round;
+    overflow: hidden; // required for border radius to work
+  }
 
   &::part(native)::after {
     @include ionic.transition;
   }
-  // end TODO
+  // end NOTE
 }
 
 /*

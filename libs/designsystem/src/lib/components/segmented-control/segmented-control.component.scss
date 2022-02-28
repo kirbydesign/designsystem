@@ -74,16 +74,19 @@ ion-segment-button {
   text-transform: none;
   margin: 0;
 
-  // TODO: Improve this solution - also see ion-back-button in page component
-  &::part(native) {
-    opacity: 1;
-    border-radius: #{utils.$border-radius-round};
+  // NOTE: Also see ion-back-button in page component
+  opacity: 1; // not strictly required but declared to be consistent
 
-    &::after {
-      @include ionic.transition;
-    }
+  &::part(native) {
+    opacity: 1; // required for interaction states to work
+    border-radius: #{utils.$border-radius-round};
+    overflow: hidden; // not strictly required but declared to be consistent
   }
-  // end TODO
+
+  &::part(native)::after {
+    @include ionic.transition;
+  }
+  // end NOTE
 
   &::part(indicator) {
     padding-inline: 0;
