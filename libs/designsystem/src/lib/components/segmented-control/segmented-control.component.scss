@@ -53,10 +53,6 @@ ion-segment-button {
   @include ionic.apply-hover;
   @include utils.accessible-target-size;
 
-  min-height: utils.size('xl');
-  font-weight: utils.font-weight('normal');
-  font-size: utils.font-size('s');
-  text-transform: none;
   --border-radius: #{utils.$border-radius-round};
   --border-style: none;
   --background: none;
@@ -71,6 +67,11 @@ ion-segment-button {
   --margin-end: 0;
   --margin-start: 0;
   --margin-top: 0;
+
+  min-height: utils.size('xl');
+  font-weight: utils.font-weight('normal');
+  font-size: utils.font-size('s');
+  text-transform: none;
   margin: 0;
 
   // TODO: Improve this solution - also see ion-back-button in page component
