@@ -4,17 +4,23 @@ If you are looking for help or at any point have questions, check out "[Help!: i
 
 **Beware:** We reserve the right to close issues and pull requests that do not follow the steps outlined in: [Introduction to the contribution model](#introduction-to-the-contribution-model). This is not because we want to be mean or micro-manage the way things are done - but a project of this size requires some consistency in the way we cooperate in order to be manageable. 
 
-* [Introduction to the contribution model](#introduction-to-the-contribution-model)
-  + [The process of contributing](#the-process-of-contributing)
-  + [Before you get coding](#before-you-get-coding)
-  + [Checklist: I have a component request](#checklist-i-have-a-component-request)
-  + [Checklist: I have an enhancement](#checklist-i-have-an-enhancement)
-  + [Checklist: I have found a bug](#checklist-i-have-found-a-bug)
-* [Setup environment and tooling for contribution](#setup-environment-and-tooling-for-contribution)
-  + [Clone and install the repository](#clone-and-install-the-repository)
-  + [Node](#node)
-  + [TSlint](#tslint)
-  + [Prettier](#prettier)
+- [Introduction to the contribution model](#introduction-to-the-contribution-model)
+  - [The process of contributing](#the-process-of-contributing)
+    - [UX Refinement](#ux-refinement)
+    - [Tech Refinement](#tech-refinement)
+    - [Publish a WIP draft](#publish-a-wip-draft)
+    - [Self-review](#self-review)
+    - [UX review](#ux-review)
+  - [Before you get coding](#before-you-get-coding)
+  - [Checklist: I have a component request](#checklist-i-have-a-component-request)
+  - [Checklist: I have an enhancement](#checklist-i-have-an-enhancement)
+  - [Checklist: I have found a bug](#checklist-i-have-found-a-bug)
+- [Setup environment and tooling for contribution](#setup-environment-and-tooling-for-contribution)
+  - [Clone and install the repository](#clone-and-install-the-repository)
+  - [Node](#node)
+  - [TSlint](#tslint)
+    - [VSCode "workspace library execution"-issue](#vscode-workspace-library-execution-issue)
+  - [Prettier](#prettier)
 
 # Introduction to the contribution model
 
@@ -81,7 +87,7 @@ This consists of code-reviewing your own pull request, following guidelines foun
 
 > Confirmation from UXers that the implementation complies with what was decided during UX Refinement.
 
-If the implementation of the issue resulted in visual changes - then it has to be UX reviewed. This is to make sure that the introduced changes align with the design system. We strive to have every issue that introduces visual changes UX reviewed. If this is not done and the changes are merged to master, we might recieve issues about components not being properly aligned with the design system anymore from the users of Kirby.
+If the implementation of the issue resulted in visual changes - then it has to be UX reviewed. This is to make sure that the introduced changes align with the design system. We strive to have every issue that introduces visual changes UX reviewed. If this is not done and the changes are merged to stable, we might recieve issues about components not being properly aligned with the design system anymore from the users of Kirby.
 
 ## Before you get coding
 
@@ -103,7 +109,7 @@ If you got an idea for a component that you think should be part of Kirby you sh
 3. **Implementation:**
     - Make sure you have read: "[Before you get coding](#before-you-get-coding)".
     - Signal to others you are working on the issue by assigning yourself.
-    - Create a branch from the [master branch](https://github.com/kirbydesign/designsystem/tree/master) following our [branch naming convention](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Branch). 
+    - Create a branch from the [stable branch](https://github.com/kirbydesign/designsystem/tree/stable) following our [branch naming convention](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Branch). 
     - Publish a WIP implementation to Github as a draft PR and ask for feedback. 
     - Make sure you have implemented tests following the guidelines in: "[The good: Test](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Test)".
     - Update the [cookbook](https://cookbook.kirby.design) with examples and showcases.
@@ -112,7 +118,7 @@ If you got an idea for a component that you think should be part of Kirby you sh
     - Create a pull request. If you created a draft PR during implementation you can just mark that as "ready for review".
     - Request that the pull request is code-reviewed.
     - Request that the pull request is [UX reviewed](#ux-review).
-    - When the pull request has been approved it will be automatically merged to master via [automerge](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/automatically-merging-a-pull-request).
+    - When the pull request has been approved it will be automatically merged to stable via [automerge](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/automatically-merging-a-pull-request).
 5. **Celebrate! 🎉**
 
 ## Checklist: I have an enhancement 
@@ -133,7 +139,7 @@ If you have found a bug in Kirby you should follow these steps:
 3. **Implementation:** 
     - Make sure you have read: "[Before you get coding](#before-you-get-coding)".
     - Signal to others you are working on the issue by assigning yourself.
-    - Create a branch from the [master branch](https://github.com/kirbydesign/designsystem/tree/master) following our [branch naming convention](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Branch). 
+    - Create a branch from the [stable branch](https://github.com/kirbydesign/designsystem/tree/stable) following our [branch naming convention](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Branch). 
     - Create a test that reproduces the bug following guidelines in: "[The good: Test](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Test)". 
     - Write code to fix the bug
 4. **Follow steps 4 and 5 in "[Checklist: I have a component request](#checklist-i-have-a-component-request)".**
@@ -172,7 +178,7 @@ You should now be able to open `http://localhost:4200` in a browser to access th
 
 [Node](https://nodejs.org/en/) is the runtime used for development. 
 
-The supported version of NodeJS can be found in the file [`package.json`](https://github.com/kirbydesign/designsystem/blob/master/package.json) under `engines`. At the time of writing it for example looks like this: 
+The supported version of NodeJS can be found in the file [`package.json`](https://github.com/kirbydesign/designsystem/blob/stable/package.json) under `engines`. At the time of writing it for example looks like this: 
 
 ```Javascript
 ...
@@ -224,7 +230,7 @@ As with TSLint, we  strongly recommend installing Prettier as a plugin for your 
 It can however be used without an editor plugin; run `npm run prettier` to check for formatting errors, fix them by running `npm run prettier:fix` . 
 
 If there are changes only concerning formatting, in files you did not create - do not commit these. There is most likely something wrong with your Prettier settings. 
-Make sure that Prettier uses the config file that is shipped with the repository ([ `.prettierrc.json` ](https://github.com/kirbydesign/designsystem/blob/master/.prettierrc.json)) and not a global configuration located on your machine. 
+Make sure that Prettier uses the config file that is shipped with the repository ([ `.prettierrc.json` ](https://github.com/kirbydesign/designsystem/blob/stable/.prettierrc.json)) and not a global configuration located on your machine. 
 
 To check if the config file from the repository is used, try to alter the configuration in `.prettierrc.json` and format a file using Prettier - for example by changing `"singleQuote": true,` to `"singleQuote": false, ` . 
 If all quotation marks are changed to `"` instead of `'` when you format, it means the repository config file is used by Prettier. Remember to revert the changes made to `.prettierrc.json` .

@@ -6,7 +6,7 @@
 [![npm](https://img.shields.io/npm/v/@kirbydesign/designsystem.svg)](https://www.npmjs.com/package/@kirbydesign/designsystem)
 [![npm](https://img.shields.io/npm/l/@kirbydesign/designsystem.svg)](https://www.npmjs.com/package/@kirbydesign/designsystem)
 [![npm](https://img.shields.io/npm/dm/@kirbydesign/designsystem.svg)](https://www.npmjs.com/package/@kirbydesign/designsystem)
-[![Build Status](https://travis-ci.org/kirbydesign/designsystem.svg?branch=master)](https://travis-ci.org/kirbydesign/designsystem)
+[![Build Status](https://travis-ci.org/kirbydesign/designsystem.svg?branch=stable)](https://travis-ci.org/kirbydesign/designsystem)
 
 [![GitHub forks](https://img.shields.io/github/forks/kirbydesign/designsystem.svg?style=social&label=Fork)](https://github.com/kirbydesign/designsystem/fork)
 [![GitHub stars](https://img.shields.io/github/stars/kirbydesign/designsystem.svg?style=social&label=Star)](https://github.com/kirbydesign/designsystem/stargazers)
@@ -27,12 +27,23 @@ The Kirby Cookbook, containing samples, status of components etc. can be accesse
 
 ## Table of Contents
 
+- [Kirby Design System](#kirby-design-system)
+- [About](#about)
+- [💥 Kirby v. `1.0.0` has landed! Please see the Migration Guide if you're upgrading from `<= 0.8.x`](#-kirby-v-100-has-landed-please-see-the-migration-guide-if-youre-upgrading-from--08x)
+- [Table of Contents](#table-of-contents)
 - [Installation](#installation)
   - [Include KirbyModule](#include-kirbymodule)
   - [Sass](#sass)
-  - [Icons](#icons)
+    - [Generic Print Styles (Optional)](#generic-print-styles-optional)
   - [Testing](#testing)
   - [Migration Guide](#migration-guide)
+    - [Simplified namespaces](#simplified-namespaces)
+      - [Mac / Linux](#mac--linux)
+      - [Windows](#windows)
+    - [Change TypeScript configuration](#change-typescript-configuration)
+    - [Changed dependencies](#changed-dependencies)
+    - [Deprecation](#deprecation)
+  - [Icons](#icons)
 - [Folder Structure](#folder-structure)
 - [Scripts](#scripts)
 - [Developing new features in Kirby](#developing-new-features-in-kirby)
@@ -83,6 +94,7 @@ In each `.scss` file where you need to access the Sass utility functions from Ki
 ```
 
 #### Generic Print Styles (Optional)
+
 Kirby also provides a generic print stylesheet. It includes the basics. You most likely have to add local print styles specific to your app as well.
 
 Import it into your app, e.g., in `src/styles.scss` or in your local print stylesheet if you have one:

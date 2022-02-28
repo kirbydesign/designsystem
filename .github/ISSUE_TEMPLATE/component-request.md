@@ -28,19 +28,19 @@ The good issue: contains only one issue, is self-contained, is specific & unambi
 
 ## Checklist:
 
-The following tasks should be carried out in sequence in order to follow [the process of contributing](https://github.com/kirbydesign/designsystem/blob/master/.github/CONTRIBUTING.md/#the-process-of-contributing) correctly.
+The following tasks should be carried out in sequence in order to follow [the process of contributing](https://github.com/kirbydesign/designsystem/blob/stable/.github/CONTRIBUTING.md/#the-process-of-contributing) correctly.
 
 ### Refinement
 
-- [ ] Request that the issue is [UX refined](https://github.com/kirbydesign/designsystem/blob/master/.github/CONTRIBUTING.md/#ux-refinement); do not proceed until this is done.
-- [ ] Request that the issue is [tech refined](https://github.com/kirbydesign/designsystem/blob/master/.github/CONTRIBUTING.md/#tech-refinement); do not proceed until this is done.
+- [ ] Request that the issue is [UX refined](https://github.com/kirbydesign/designsystem/blob/stable/.github/CONTRIBUTING.md/#ux-refinement); do not proceed until this is done.
+- [ ] Request that the issue is [tech refined](https://github.com/kirbydesign/designsystem/blob/stable/.github/CONTRIBUTING.md/#tech-refinement); do not proceed until this is done.
 
 ### Implementation 
 The contributor who wants to implement this issue should: 
 
-- [ ] Make sure you have read: "[Before you get coding](https://github.com/kirbydesign/designsystem/blob/master/.github/CONTRIBUTING.md/#before-you-get-coding)".
+- [ ] Make sure you have read: "[Before you get coding](https://github.com/kirbydesign/designsystem/blob/stable/.github/CONTRIBUTING.md/#before-you-get-coding)".
 - [ ] Signal to others you are working on the issue by assigning yourself.
-- [ ] Create a branch from the [master branch](https://github.com/kirbydesign/designsystem/tree/master) following our [branch naming convention](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Branch). 
+- [ ] Create a branch from the [stable branch](https://github.com/kirbydesign/designsystem/tree/stable) following our [branch naming convention](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Branch). 
 - [ ] Publish a WIP implementation to Github as a draft PR and ask for feedback. 
 - [ ] Make sure you have implemented tests following the guidelines in: "[The good: Test](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Test)".
 - [ ] Update the [cookbook](https://cookbook.kirby.design) with examples and showcases.
