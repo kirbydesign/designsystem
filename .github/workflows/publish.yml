@@ -3,7 +3,7 @@ name: Publish new version to npm
 on:
   pull_request:
     types: closed
-    branches: master
+    branches: stable
     paths: 'libs/**'
 
 defaults:
