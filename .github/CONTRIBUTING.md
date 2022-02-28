@@ -4,23 +4,17 @@ If you are looking for help or at any point have questions, check out "[Help!: i
 
 **Beware:** We reserve the right to close issues and pull requests that do not follow the steps outlined in: [Introduction to the contribution model](#introduction-to-the-contribution-model). This is not because we want to be mean or micro-manage the way things are done - but a project of this size requires some consistency in the way we cooperate in order to be manageable. 
 
-- [Introduction to the contribution model](#introduction-to-the-contribution-model)
-  - [The process of contributing](#the-process-of-contributing)
-    - [UX Refinement](#ux-refinement)
-    - [Tech Refinement](#tech-refinement)
-    - [Publish a WIP draft](#publish-a-wip-draft)
-    - [Self-review](#self-review)
-    - [UX review](#ux-review)
-  - [Before you get coding](#before-you-get-coding)
-  - [Checklist: I have a component request](#checklist-i-have-a-component-request)
-  - [Checklist: I have an enhancement](#checklist-i-have-an-enhancement)
-  - [Checklist: I have found a bug](#checklist-i-have-found-a-bug)
-- [Setup environment and tooling for contribution](#setup-environment-and-tooling-for-contribution)
-  - [Clone and install the repository](#clone-and-install-the-repository)
-  - [Node](#node)
-  - [TSlint](#tslint)
-    - [VSCode "workspace library execution"-issue](#vscode-workspace-library-execution-issue)
-  - [Prettier](#prettier)
+* [Introduction to the contribution model](#introduction-to-the-contribution-model)
+  + [The process of contributing](#the-process-of-contributing)
+  + [Before you get coding](#before-you-get-coding)
+  + [Checklist: I have a component request](#checklist-i-have-a-component-request)
+  + [Checklist: I have an enhancement](#checklist-i-have-an-enhancement)
+  + [Checklist: I have found a bug](#checklist-i-have-found-a-bug)
+* [Setup environment and tooling for contribution](#setup-environment-and-tooling-for-contribution)
+  + [Clone and install the repository](#clone-and-install-the-repository)
+  + [Node](#node)
+  + [TSlint](#tslint)
+  + [Prettier](#prettier)
 
 # Introduction to the contribution model
 
