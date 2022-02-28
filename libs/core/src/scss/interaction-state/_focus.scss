@@ -35,9 +35,9 @@
 }
 
 // ---------------------------------------------------------------------------
-// The apply-focus-part mixin is used where ionics components does not allow
+// The apply-focus-part mixin is used where ionics components do not allow
 // us to apply styling directly to the tabbed element, as it is hidden inside
-// a shadow root, and not exposed as a part. In some of these cases, we are
+// a shadow root and not exposed as a part. In some of these cases, we are
 // unable to provide focus-visible like functionality, and thus the focus ring
 // will always show.
 
