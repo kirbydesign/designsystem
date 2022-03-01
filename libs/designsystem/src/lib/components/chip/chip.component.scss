@@ -3,7 +3,7 @@
 
 :host {
   @include interaction-state.setup-layer;
-  @include interaction-state.apply-hover('faint');
+  @include interaction-state.apply-hover;
 
   @include utils.accessible-target-size;
 
@@ -11,7 +11,7 @@
   color: utils.get-color('white-contrast');
 
   &.is-selected {
-    @include interaction-state.apply-hover('loud', $flip: true);
+    @include interaction-state.apply-hover('very-loud', $flip: true);
 
     background-color: utils.get-color('black');
     color: utils.get-color('black-contrast');
@@ -54,10 +54,10 @@
     color: utils.get-text-color('black');
 
     &.is-selected {
-      @include interaction-state.apply-hover;
+      @include interaction-state.apply-hover('very-loud', $flip: true);
 
-      background-color: utils.get-color('white');
-      color: utils.get-color('white-contrast');
+      background-color: utils.get-color('black');
+      color: utils.get-color('black-contrast');
     }
   }
 
