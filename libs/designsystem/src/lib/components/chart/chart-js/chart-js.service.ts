@@ -280,7 +280,7 @@ export class ChartJSService {
     const typeConfig = this.chartConfigService.getTypeConfig(type);
 
     const labelsToApply = (() => {
-      if (labels?.length > 0) return labels;
+      if (Array.isArray(labels)) return labels;
       else if (type === 'stock') return this.getDefaultStockLabels(datasets, this.locale);
       else return this.createBlankLabels(datasets); // ChartJS requires labels
     })();
