@@ -66,7 +66,7 @@ ion-title {
 }
 
 ion-back-button {
-  @include ionic.apply-hover('faint');
+  @include ionic.apply-hover('s');
 
   --color: #{utils.get-color('black')};
   --icon-font-size: 24px;

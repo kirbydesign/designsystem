@@ -20,7 +20,7 @@ $slide-button-text-padding: 0 $slide-button-container-radius 0 $total-slider-thu
   @include interaction-state.apply-hover {
     background-color: color.scale(
       utils.get-color('white', $getValueOnly: true),
-      $lightness: -1 * utils.get-loudness('quiet')
+      $lightness: -1 * utils.get-loudness('m')
     );
   }
 

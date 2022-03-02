@@ -105,7 +105,7 @@ td {
 }
 
 .day.selected {
-  @include interaction-state.apply-hover('loud', $flip: true);
+  @include interaction-state.apply-hover('xl', $flip: true);
 
   color: utils.get-color('black-contrast');
   background-color: utils.get-color('black');
@@ -118,5 +118,5 @@ td {
 
 .contain-state-layer {
   @include interaction-state.setup-layer;
-  @include interaction-state.apply-hover('faint');
+  @include interaction-state.apply-hover('s');
 }
