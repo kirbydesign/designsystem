@@ -73,7 +73,7 @@ $button-width: (
   --kirby-button-background-color: #{utils.get-color('black')};
   --kirby-button-color: #{utils.get-color('black-contrast')};
 
-  @include interaction-state.apply-hover($loudness: 'xxl', $flip: true);
+  @include interaction-state.apply-hover('xxl', $flip: true);
 
   &.destructive {
     --kirby-button-background-color: #{utils.get-color('light')};
@@ -218,7 +218,7 @@ $button-width: (
       --kirby-button-border-color: #{utils.get-color('white')};
       --kirby-button-color: #{utils.get-color('white')};
 
-      @include interaction-state.apply-hover($loudness: 'l', $flip: true);
+      @include interaction-state.apply-hover('l', $flip: true);
     }
   }
 
