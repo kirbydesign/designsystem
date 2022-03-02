@@ -70,14 +70,12 @@ $_light: utils.get-color('black-contrast');
   }
 }
 
+/// Apply streamlined transition to interaction state changes
+/// @param {*} $property [all]
 @mixin transition($property: all) {
   $duration: utils.get-transition-duration('quick');
   $timing-function: utils.get-transition-easing('static');
   $delay: 0ms;
-
-  // TODO: Discuss different transition with UX
-  // $duration: 180ms;
-  // $delay: 5ms;
 
   transition: $property $duration $timing-function $delay;
 }
