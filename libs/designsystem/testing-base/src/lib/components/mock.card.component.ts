@@ -16,6 +16,7 @@ import { CardComponent } from '@kirbydesign/designsystem';
 export class MockCardComponent {
   @Input() title: string;
   @Input() subtitle: string;
+  @Input() backgroundImageUrl: string;
   @Input() hasPadding: boolean;
   @Input() sizes: { [size: string]: number };
   @Input() mode: 'flat' | 'highlighted';
