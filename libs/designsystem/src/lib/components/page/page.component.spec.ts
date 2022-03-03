@@ -73,11 +73,7 @@ describe('PageComponent', () => {
 
   beforeEach(() => {
     spectator = createHost(
-      `<kirby-page title="` +
-        titleText +
-        `" subtitle="` +
-        subtitleText +
-        `">
+      `<kirby-page title="${titleText}" subtitle="${subtitleText}">
         <kirby-page-content>
           ${dummyContent}
         </kirby-page-content>
