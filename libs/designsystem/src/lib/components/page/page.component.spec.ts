@@ -104,6 +104,7 @@ describe('PageComponent', () => {
     await TestHelper.whenReady(ionContent);
     const pageTitle = ionContent.querySelector('.page-title');
     const pageTitleHeading = pageTitle.querySelector(':scope > h1');
+    
     expect(pageTitle).toHaveComputedStyle({
       'margin-left': '0px',
       'margin-right': '0px',
