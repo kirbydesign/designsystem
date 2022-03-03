@@ -22,7 +22,7 @@ const config = {
   <!-- Custom Page Subtitle -->
   <div *kirbyPageSubtitle>
     <div>
-      Custom subtitles with long long long long long long long long long names will wrap.
+      Custom subtitles with very long names that span multiple lines will wrap.
     </div>
   </div>
 

@@ -252,6 +252,10 @@ export class PageComponent
         maxLines: changes.titleMaxLines.currentValue,
       };
     }
+    if (changes.subtitle && !changes.subtitle.isFirstChange) {
+      this.subtitle = changes.title.currentValue;
+      this.hasPageSubtitle = this.subtitle !== undefined;
+    }
   }
 
   ngAfterViewInit(): void {

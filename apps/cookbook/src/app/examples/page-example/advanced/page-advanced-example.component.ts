@@ -26,11 +26,11 @@ const config = {
   </ng-template>
 
   <ng-template #customTitle>
-    <span>Custom Title with a very long name</span>
+    Custom Title with a very long name
   </ng-template>
 
   <ng-template #customSubtitle>
-    <span>Custom subtitle with a long long long long name</span>
+    Custom subtitle of custom title with a very long name
   </ng-template>
   
   <!-- Fixed Page Actions -->
