@@ -95,6 +95,7 @@ describe('PageComponent', () => {
   it('should have the configured title', async () => {
     await TestHelper.whenReady(ionContent);
     const pageTitleHeading = ionContent.querySelector('.page-title > h1');
+    
     expect(spectator.component.title).toEqual(titleText);
     expect(pageTitleHeading).toHaveText(titleText, true);
   });
