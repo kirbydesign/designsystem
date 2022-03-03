@@ -138,6 +138,7 @@ describe('PageComponent', () => {
   it('should render subitle with correct margin and padding', async () => {
     await TestHelper.whenReady(ionContent);
     const pageSubtitle = ionContent.querySelector('.page-subtitle');
+    
     expect(pageSubtitle).toHaveComputedStyle({
       'margin-left': '0px',
       'margin-right': '0px',
