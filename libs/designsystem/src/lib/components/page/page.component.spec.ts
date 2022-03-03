@@ -130,6 +130,7 @@ describe('PageComponent', () => {
   it('should have the configured subtitle', async () => {
     await TestHelper.whenReady(ionContent);
     const pageSubtitle = ionContent.querySelector('.page-subtitle');
+    
     expect(spectator.component.subtitle).toEqual(subtitleText);
     expect(pageSubtitle).toHaveText(subtitleText, true);
   });
