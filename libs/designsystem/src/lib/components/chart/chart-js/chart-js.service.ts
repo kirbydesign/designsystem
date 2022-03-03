@@ -280,9 +280,13 @@ export class ChartJSService {
     const typeConfig = this.chartConfigService.getTypeConfig(type);
 
     const labelsToApply = (() => {
-      if (Array.isArray(labels)) return labels;
-      else if (type === 'stock') return this.getDefaultStockLabels(datasets, this.locale);
-      else return this.createBlankLabels(datasets); // ChartJS requires labels
+      if (type === 'stock' && !Array.isArray(labels)) {
+        return this.getDefaultStockLabels(datasets, this.locale);
+      } else if (labels?.length > 0) {
+        return labels;
+      } else {
+        return this.createBlankLabels(datasets);
+      }
     })();
 
     return mergeDeepAll(typeConfig, {
