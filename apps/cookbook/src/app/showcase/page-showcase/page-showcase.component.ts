@@ -159,7 +159,7 @@ export class PageShowcaseComponent {
   cssProperties: ApiDescriptionProperty[] = [
     {
       name: '--kirby-page-title-margin-bottom',
-      description: 'Spacing between page title optionally with subtitle and page content.',
+      description: 'Spacing from the title and subtitle to the page content.`',
       defaultValue: `size('xl')`,
       type: ['unit'],
     },
