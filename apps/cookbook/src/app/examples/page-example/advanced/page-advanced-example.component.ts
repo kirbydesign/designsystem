@@ -18,7 +18,7 @@ const config = {
 
   <!-- Custom Page Subtitle -->
   <div *kirbyPageSubtitle>
-    <ng-container *ngTemplateOutlet="customSubtitle"></ng-container>
+<span>Custom subtitle with a long long long long name</span>
   </div>
 
   <ng-template kirbyPageToolbarTitle>
