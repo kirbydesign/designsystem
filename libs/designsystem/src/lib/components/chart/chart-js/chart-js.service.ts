@@ -280,9 +280,25 @@ export class ChartJSService {
     const typeConfig = this.chartConfigService.getTypeConfig(type);
 
     const labelsToApply = (() => {
-      if (labels?.length > 0) return labels;
-      else if (type === 'stock') return this.getDefaultStockLabels(datasets, this.locale);
-      else return this.createBlankLabels(datasets); // ChartJS requires labels
+      if (type === 'stock') {
+        /* 
+           The time scale will auto generate labels based on data. 
+           It should be possible to pass an empty array to get the default 
+           behaviour of chart.js when using stock chart. 
+
+           TODO: Simplify to always pass labels, if given, to chart.js.
+           Would be a breaking change. See issue: 
+           https://github.com/kirbydesign/designsystem/issues/2085
+        */
+        const shouldUseTimescaleLabels =
+          labels?.length === 0 && options?.scales?.x?.type === 'time';
+        if (shouldUseTimescaleLabels) return labels;
+        return this.getDefaultStockLabels(datasets, this.locale);
+      } else if (labels?.length > 0) {
+        return labels;
+      } else {
+        return this.createBlankLabels(datasets);
+      }
     })();
 
     return mergeDeepAll(typeConfig, {
