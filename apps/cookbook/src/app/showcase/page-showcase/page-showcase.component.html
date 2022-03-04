@@ -7,30 +7,35 @@
   <ul>
     <li>
       Simple configuration for
-      <a href="#" (click)="scrollTo(simple)">basic page title and actions</a>
+      <a href="#" (click)="scrollTo(simple)">basic page title, subtitle and actions</a>
     </li>
     <li>Back navigation</li>
     <li>Spacing of content</li>
     <li>
-      Scrollable page title and actions:
+      Scrollable page title with subtitle and actions:
       <ul>
-        <li>Sticks to the toolbar by default, when scrolling the page below the title</li>
+        <li>
+          The page title and actions sticks to the toolbar by default, when scrolled past the page
+          title.
+        </li>
         <li>
           Also supports
-          <a href="#" (click)="scrollTo(fixedTitleAndActions)">fixed page title and actions</a>
+          <a href="#" (click)="scrollTo(fixedTitleAndActions)">fixed page title and actions</a>.
         </li>
       </ul>
     </li>
     <li>
       (Optional)
       <a href="#" (click)="scrollTo(alignment)"
-        >Alignment of page title and alternative toolbar title</a
+        >Alignment of page title with subtitle and alternative toolbar title</a
       >
     </li>
     <li>(Optional) <a href="#" (click)="scrollTo(autoscale)">Scaling of page title</a></li>
     <li>
       Support for
-      <a href="#" (click)="scrollTo(advanced)">advanced page title and actions template</a>
+      <a href="#" (click)="scrollTo(advanced)"
+        >advanced page title with subtitle and actions template</a
+      >
     </li>
     <li>
       Support for <a href="#" (click)="scrollTo(advanced)">fixed page content</a> (e.g. a Floating
@@ -98,11 +103,11 @@
   <div>
     <h2 #alignment>Title Alignment & Alternative Toolbar Title</h2>
     <p>
-      Titles are default left aligned but can be centered (<code>titleAlignment="center"</code>) or
-      right aligned (<code>titleAlignment="right"</code>).
+      Titles and subtitles are by default left aligned but can also be centered
+      (<code>titleAlignment="center"</code>) or right aligned (<code>titleAlignment="right"</code>).
     </p>
     <p>
-      It also possible to supply an alternative toolbar title (<code
+      It is also possible to supply an alternative toolbar title (<code
         >toolbarTitle="A Different Title"</code
       >) - <em>that is shown instead of the page title</em> - when the page title is scrolled above
       the toolbar.
@@ -145,13 +150,15 @@
   <div>
     <h2 #customTitle>Custom Title</h2>
     <p>
-      If you need to supply a custom page title element you can do that with the
-      <code>*kirbyPageTitle</code> and <code>*kirbyPageToolbarTitle</code> directives.
+      If you need to supply a custom page title or subtitle element you can do that with the
+      <code>*kirbyPageTitle</code>, <code>*kirbyPageSubtitle</code> and
+      <code>*kirbyPageToolbarTitle</code>
+      directives.
     </p>
     <p>
       <strong>*Please note:</strong> When supplying a custom page title element you must supply both
       a page title and a toolbar title. You should also ensure the page title is wrapped in a
-      <code>h1</code> tag. See code example below on how to reuse a template for both titles.
+      <code>h1</code> tag. Usage of the page subtitle element requires the presence of a page title.
     </p>
     <p>
       <strong>*Auto-scale page title:</strong> If a custom page title is used you will need to add
@@ -173,14 +180,15 @@
   <div>
     <h2 #advanced>Advanced Page</h2>
     <p>
-      For more advanced scenarios, you can supply a custom page title element, action buttons and
-      fixed content with the <code>*kirbyPage</code>-directives.
+      For more advanced scenarios, you can supply a custom page element for title, subtitle, action
+      buttons and fixed content with the <code>*kirbyPage</code>-directives.
     </p>
     <p>
       <em
         ><strong>*Please note:</strong> When supplying a custom page title element you must supply
         both a page title and a toolbar title. You should also ensure the page title is wrapped in a
-        <code>h1</code> tag. See example below on how to reuse a template for both titles.<br />
+        <code>h1</code> tag. See example below on how to reuse a template for both titles. Usage of
+        the page subtitle element requires the presence of a page title.<br />
         <strong>*Custom page title wrapper:</strong> If you wrap your custom title (e.g. in a
         flex-container) you have to ensure the title is truncated. See "Custom Title" example.</em
       >
@@ -247,11 +255,16 @@
     <p>
       If the <code>kirby-page</code> component has been provided with an event-listener of type
       <code>refresh</code> a <code>kirby-spinner</code> will be displayed when
-      <em>dragging down</em> from the top of the screen. This can be useful for <em>updating</em> the data in the current view, if new data has arrived or something changed in the meantime. This could for instance be new messages added to the top of a list view. It should not be used as a load-more type of event for simply adding more data to the view. 
+      <em>dragging down</em> from the top of the screen. This can be useful for
+      <em>updating</em> the data in the current view, if new data has arrived or something changed
+      in the meantime. This could for instance be new messages added to the top of a list view. It
+      should not be used as a load-more type of event for simply adding more data to the view.
     </p>
     <cookbook-code-viewer [html]="pullToRefreshExampleHtml"></cookbook-code-viewer>
     <p>
-     The <code>PullToRefreshEvent</code>'s <code>complete()</code>-method can be invoked to indicate that the <code>refresh</code>-event has finished, e.g. when the required data has been loaded:
+      The <code>PullToRefreshEvent</code>'s <code>complete()</code>-method can be invoked to
+      indicate that the <code>refresh</code>-event has finished, e.g. when the required data has
+      been loaded:
     </p>
     <cookbook-code-viewer [ts]="pullToRefreshExampleTs"></cookbook-code-viewer>
   </div>
