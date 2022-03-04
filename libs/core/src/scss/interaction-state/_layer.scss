@@ -20,7 +20,7 @@ $_light: utils.get-color('black-contrast');
 
   position: relative;
 
-  .content {
+  .content-layer {
     position: relative;
     z-index: var(--content-layer-z-index, $_content-layer-z-index);
   }
@@ -65,7 +65,7 @@ $_light: utils.get-color('black-contrast');
 }
 
 @mixin extend-content {
-  .content {
+  .content-layer {
     @content;
   }
 }
