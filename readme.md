@@ -19,12 +19,6 @@ Kirby Components are built on top of [Angular][angular] and can be used in Angul
 
 The Kirby Cookbook, containing samples, status of components etc. can be accessed from [https://cookbook.kirby.design][kirby.cookbook].
 
----
-
-## 💥 Kirby v. `1.0.0` has landed! Please see the [Migration Guide](#migration-guide) if you're upgrading from `<= 0.8.x`
-
----
-
 ## Table of Contents
 
 - [Installation](#installation)
@@ -83,6 +77,7 @@ In each `.scss` file where you need to access the Sass utility functions from Ki
 ```
 
 #### Generic Print Styles (Optional)
+
 Kirby also provides a generic print stylesheet. It includes the basics. You most likely have to add local print styles specific to your app as well.
 
 Import it into your app, e.g., in `src/styles.scss` or in your local print stylesheet if you have one:
