@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ActionSheetItem, ActionSheetConfig } from '@kirbydesign/designsystem';
+import { ActionSheetConfig, ActionSheetItem } from '@kirbydesign/designsystem';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
 import { ModalController } from '@kirbydesign/designsystem';
 
@@ -14,7 +14,11 @@ const config = {
     <h1>
       <ng-container *ngTemplateOutlet="customTitle"></ng-container>
     </h1>
-    <ng-container *ngTemplateOutlet="customSubTitle"></ng-container>
+  </div>
+
+  <!-- Custom Page Subtitle -->
+  <div *kirbyPageSubtitle>
+<span>Custom subtitle with a long long long long name</span>
   </div>
 
   <ng-template kirbyPageToolbarTitle>
@@ -22,10 +26,11 @@ const config = {
   </ng-template>
 
   <ng-template #customTitle>
-    <span>Custom Title with a very long name</span>
+    Custom Title with a very long name
   </ng-template>
-  <ng-template #customSubTitle>
-    <span>Custom subtitle explaining something</span>
+
+  <ng-template #customSubtitle>
+    Custom subtitle of custom title with a very long name
   </ng-template>
   
   <!-- Fixed Page Actions -->
