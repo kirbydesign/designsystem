@@ -24,7 +24,7 @@ export class MockAvatarComponent {
   @Input() shadow: boolean;
   @Input() text: string;
   @Input() overlay: boolean;
-  @Input() size: AvatarSize;
+  @Input() size: AvatarSize | keyof AvatarSize;
   @Input() themeColor:
     | NotificationColor
     | BrandColor
