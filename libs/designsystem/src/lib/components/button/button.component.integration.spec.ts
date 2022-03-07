@@ -447,7 +447,7 @@ describe('ButtonComponent configured with text and icon', () => {
       );
 
       element = spectator.element as HTMLButtonElement;
-      content = element.querySelector('span.content');
+      content = element.querySelector('span.content-layer');
       kirbyIcon = element.querySelector('kirby-icon');
     });
 
@@ -477,7 +477,7 @@ describe('ButtonComponent configured with text and icon', () => {
       );
 
       element = spectator.element as HTMLButtonElement;
-      content = element.querySelector('span.content');
+      content = element.querySelector('span.content-layer');
       kirbyIcon = element.querySelector('kirby-icon');
     });
 
