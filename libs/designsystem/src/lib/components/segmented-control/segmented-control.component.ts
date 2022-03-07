@@ -28,7 +28,7 @@ export class SegmentedControlComponent {
     }
   }
 
-  @Input() mode: SegmentedControlMode = SegmentedControlMode.default;
+  @Input() mode: SegmentedControlMode | keyof SegmentedControlMode = SegmentedControlMode.default;
 
   @HostBinding('class')
   get _modeCssClass() {

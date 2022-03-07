@@ -74,7 +74,7 @@ export class ButtonComponent implements AfterContentInit {
   @Input() expand: 'full' | 'block';
   @Input() isFloating: boolean = false;
   @Input()
-  size: ButtonSize = ButtonSize.MD;
+  size: ButtonSize | keyof ButtonSize = ButtonSize.MD;
 
   @ContentChild(IconComponent) icon: IconComponent;
   @ContentChild(IconComponent, { read: ElementRef })
