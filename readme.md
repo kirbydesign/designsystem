@@ -6,7 +6,7 @@
 [![npm](https://img.shields.io/npm/v/@kirbydesign/designsystem.svg)](https://www.npmjs.com/package/@kirbydesign/designsystem)
 [![npm](https://img.shields.io/npm/l/@kirbydesign/designsystem.svg)](https://www.npmjs.com/package/@kirbydesign/designsystem)
 [![npm](https://img.shields.io/npm/dm/@kirbydesign/designsystem.svg)](https://www.npmjs.com/package/@kirbydesign/designsystem)
-[![Build Status](https://travis-ci.org/kirbydesign/designsystem.svg?branch=master)](https://travis-ci.org/kirbydesign/designsystem)
+[![Build Status](https://travis-ci.org/kirbydesign/designsystem.svg?branch=stable)](https://travis-ci.org/kirbydesign/designsystem)
 
 [![GitHub forks](https://img.shields.io/github/forks/kirbydesign/designsystem.svg?style=social&label=Fork)](https://github.com/kirbydesign/designsystem/fork)
 [![GitHub stars](https://img.shields.io/github/stars/kirbydesign/designsystem.svg?style=social&label=Star)](https://github.com/kirbydesign/designsystem/stargazers)
@@ -83,6 +83,7 @@ In each `.scss` file where you need to access the Sass utility functions from Ki
 ```
 
 #### Generic Print Styles (Optional)
+
 Kirby also provides a generic print stylesheet. It includes the basics. You most likely have to add local print styles specific to your app as well.
 
 Import it into your app, e.g., in `src/styles.scss` or in your local print stylesheet if you have one:

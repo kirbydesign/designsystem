@@ -2,7 +2,7 @@ name: Build & Deploy Cookbook
 
 on:
   push: # TODO: Change to `release` event when our release workflow is in place
-    branches: master
+    branches: stable
   pull_request:
 
 defaults:
@@ -120,19 +120,19 @@ jobs:
           echo "Releasename: ${releasename}"
           echo "GH_DEPLOY_ENVIRONMENT=pr-${branchname}" >> $GITHUB_ENV
           echo "RELEASENAME=${releasename}" >> $GITHUB_ENV
-      - name: Get deployment name for master branch
-        if: github.ref == 'refs/heads/master'
+      - name: Get deployment name for stable branch
+        if: github.ref == 'refs/heads/stable'
         run: |
           echo "GH_DEPLOY_ENVIRONMENT=production" >> $GITHUB_ENV
           echo "RELEASENAME=designsystem" >> $GITHUB_ENV
       - name: Get hostname for feature branch
-        if: github.ref != 'refs/heads/master'
+        if: github.ref != 'refs/heads/stable'
         run: |
           chmod +x ./.scripts/dns.pl
           hostname=$(perl ./.scripts/dns.pl $DOMAIN "${RELEASENAME}")
           echo "HOSTNAME=${hostname}" >> $GITHUB_ENV
-      - name: Get hostname for master branch
-        if: github.ref == 'refs/heads/master'
+      - name: Get hostname for stable branch
+        if: github.ref == 'refs/heads/stable'
         run: echo "HOSTNAME=cookbook" >> $GITHUB_ENV
       - name: Create Github Deployment
         id: create_deployment
@@ -142,7 +142,7 @@ jobs:
           repository: ${{ github.repository }}
           ref: ${{ github.event_name == 'pull_request' && format('refs/heads/{0}', github.head_ref) || github.ref }}
           environment: ${{ env.GH_DEPLOY_ENVIRONMENT }}
-          production_environment: ${{ github.ref == 'refs/heads/master' }}
+          production_environment: ${{ github.ref == 'refs/heads/stable' }}
           auto_merge: false
           required_contexts: '[]' # Skip commit checks
           mediaType: '{"previews": ["flash", "ant-man"]}' # some parameters need preview: https://docs.github.com/en/rest/reference/repos#list-deployment-statuses-preview-notices

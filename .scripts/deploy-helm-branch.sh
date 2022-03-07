@@ -13,7 +13,7 @@ else
     branchname=$TRAVIS_BRANCH;
 fi
 
-if [ "$TRAVIS_BRANCH" != "master" ] || [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
+if [ "$TRAVIS_BRANCH" != "stable" ] || [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
     branchname=${branchname//$feature\//}
     branchname=${branchname#?}
     releasename="$git_repo-${branchname//[^a-zA-Z0-9]/-}";
