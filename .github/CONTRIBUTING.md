@@ -81,7 +81,7 @@ This consists of code-reviewing your own pull request, following guidelines foun
 
 > Confirmation from UXers that the implementation complies with what was decided during UX Refinement.
 
-If the implementation of the issue resulted in visual changes - then it has to be UX reviewed. This is to make sure that the introduced changes align with the design system. We strive to have every issue that introduces visual changes UX reviewed. If this is not done and the changes are merged to stable, we might recieve issues about components not being properly aligned with the design system anymore from the users of Kirby.
+If the implementation of the issue resulted in visual changes - then it has to be UX reviewed. This is to make sure that the introduced changes align with the design system. We strive to have every issue that introduces visual changes UX reviewed. If this is not done and the changes are merged to `stable`, we might recieve issues about components not being properly aligned with the design system anymore from the users of Kirby.
 
 ## Before you get coding
 
@@ -112,7 +112,7 @@ If you got an idea for a component that you think should be part of Kirby you sh
     - Create a pull request. If you created a draft PR during implementation you can just mark that as "ready for review".
     - Request that the pull request is code-reviewed.
     - Request that the pull request is [UX reviewed](#ux-review).
-    - When the pull request has been approved it will be automatically merged to stable via [automerge](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/automatically-merging-a-pull-request).
+    - When the pull request has been approved it will be automatically merged to `stable` via [automerge](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/automatically-merging-a-pull-request).
 5. **Celebrate! 🎉**
 
 ## Checklist: I have an enhancement 
