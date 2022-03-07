@@ -16,7 +16,7 @@ import { InputComponent, InputSize } from '@kirbydesign/designsystem';
 })
 export class MockInputComponent {
   @Input() type: string;
-  @Input() size: InputSize | keyof InputSize;
+  @Input() size: InputSize;
   @Input() borderless: boolean;
   @Input() hasError: boolean;
   @Input() autocomplete: 'on' | 'off';
