@@ -447,10 +447,12 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     });
   }
 
+  /* TODO: Rewrite to make this function independent of element order. 
+     See: https://github.com/kirbydesign/designsystem/issues/2096
+  */
   private getEmbeddedComponentElement() {
-    return !!this.config.modalRoute
-      ? this.ionContentElement.nativeElement.lastElementChild
-      : this.ionContentElement.nativeElement.firstElementChild;
+    const { lastElementChild } = this.ionContentElement.nativeElement;
+    return !!this.config.modalRoute ? lastElementChild : lastElementChild.previousElementSibling;
   }
 
   private getEmbeddedFooterElement() {
