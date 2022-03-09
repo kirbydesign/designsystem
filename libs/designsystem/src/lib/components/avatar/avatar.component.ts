@@ -21,7 +21,7 @@ export class AvatarComponent {
   @Input() shadow: boolean;
   @Input() text: string;
   @Input() overlay: boolean;
-  @Input() size: AvatarSize | keyof AvatarSize = AvatarSize.SM;
+  @Input() size: AvatarSize | 'xs' | 'sm' | 'md' | 'lg' = AvatarSize.SM;
   @Input()
   themeColor: NotificationColor | BrandColor | 'medium' | 'white' | 'dark' | 'light' | 'semi-light';
 
