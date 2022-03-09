@@ -31,7 +31,7 @@ $text-colors: (
   'danger': #ee0d0d,
 );
 
-$focus-ring-color: rgb(34, 139, 236);
+$focus-ring-color: #228bec;
 
 @function getAllColors() {
   @return map.merge(map.merge($brand-colors, $notification-colors), $system-colors);

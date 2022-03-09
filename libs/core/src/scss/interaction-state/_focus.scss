@@ -1,5 +1,4 @@
 @use '../utils';
-@use '../themes/colors';
 
 // ---------------------------------------------------------------------------
 // The apply-focus-visible mixin is used by most interactive elements to apply
@@ -61,6 +60,6 @@
 @mixin _focus-ring($shadow, $gap) {
   $stroke-width: utils.size('xxxxs');
   box-shadow: #{$shadow}, 0 0 0 $gap #{utils.get-color('background-color')},
-    0 0 0 $gap + $stroke-width colors.$focus-ring-color;
+    0 0 0 $gap + $stroke-width utils.$focus-ring-color;
   transition: box-shadow utils.get-transition-duration('quick');
 }
