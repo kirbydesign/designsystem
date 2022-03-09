@@ -16,7 +16,7 @@
 
     &:focus {
       // This is a fallback for safari and other browsers, so we still show the focus
-      // ring on older versions that does not support this pseudo class.
+      // ring on older versions that do not support :focus-visible.
       @include _focus-ring($shadow, $gap);
     }
 
