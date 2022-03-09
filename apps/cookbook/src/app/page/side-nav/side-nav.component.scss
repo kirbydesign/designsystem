@@ -1,7 +1,6 @@
 @use '~@kirbydesign/core/src/scss/utils';
 
-$list-margin: utils.size('s');
-$link-padding: 5px utils.size('s');
+$link-padding: 5px;
 $link-border-radius: 3px;
 $menu-padding-mobile: utils.size('m');
 $divider-inset: utils.size('xxxxs');
@@ -67,10 +66,6 @@ section {
       max-height: 0;
       padding: 0 0;
       pointer-events: none;
-    }
-
-    &:first-child {
-      margin-top: $list-margin;
     }
   }
 }

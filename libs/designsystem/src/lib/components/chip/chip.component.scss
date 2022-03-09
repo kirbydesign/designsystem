@@ -1,3 +1,4 @@
+@use '~@kirbydesign/core/src/scss/interaction-state';
 @use '~@kirbydesign/core/src/scss/utils';
 
 @mixin selected-and-hover($background-color) {
@@ -15,6 +16,13 @@
   @include selected-and-hover('black');
   @include utils.accessible-target-size();
 
+  &[role='button'] {
+    @include interaction-state.apply-focus-visible() {
+      cursor: pointer;
+      outline: none;
+    }
+  }
+
   white-space: nowrap;
   padding: 0 var(--inline-padding, utils.size('s'));
   height: utils.size('l');
@@ -24,7 +32,6 @@
   align-items: center;
   border-radius: utils.$border-radius-round;
   margin: utils.size('xxxs') var(--inline-margin, utils.size('xxxs'));
-  cursor: pointer;
   user-select: none;
 
   :host-context(.kirby-color-brightness-dark) {

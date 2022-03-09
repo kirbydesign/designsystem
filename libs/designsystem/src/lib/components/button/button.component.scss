@@ -130,6 +130,7 @@ $button-width: (
 
 :host {
   @include utils.accessible-target-size();
+  @include interaction-state.apply-focus-visible();
 
   font-family: var(--kirby-font-family);
   background-color: var(--kirby-button-background-color, initial);
@@ -205,12 +206,6 @@ $button-width: (
 
   &[expand='block'] {
     width: 100%;
-  }
-
-  // Only apply focus ring if pointer device can hover
-  // (effectively desktop/mouse devices):
-  @include utils.focus() {
-    --kirby-button-border-color: #{utils.$focus-ring-color};
   }
 
   &:active {

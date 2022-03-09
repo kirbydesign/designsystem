@@ -24,8 +24,4 @@ describe('ElementAsButtonDirective', () => {
   it('should have cursor: pointer', () => {
     expect(spectator.element).toHaveComputedStyle({ cursor: 'pointer' });
   });
-
-  it('should have an outline-offset of 2px', () => {
-    expect(spectator.element).toHaveComputedStyle({ 'outline-offset': '2px' });
-  });
 });

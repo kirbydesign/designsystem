@@ -1,5 +1,15 @@
+@use '~@kirbydesign/core/src/scss/interaction-state';
 @use '~@kirbydesign/core/src/scss/utils';
 
 .toggle-checked {
   --background-checked: #{utils.get-color('success')};
+}
+
+ion-toggle {
+  @include interaction-state.apply-focus-part($part: 'track') {
+    // Overflow and contain style needed to make focus ring visible as per ionic docs
+    // https://ionicframework.com/docs/api/toggle#customizing-overflow
+    overflow: visible;
+    contain: none;
+  }
 }

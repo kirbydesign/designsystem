@@ -38,6 +38,7 @@
   <kirby-card
     (keydown.ArrowUp)="onLinksArrowUpDown($event)"
     (keydown.ArrowDown)="onLinksArrowUpDown($event)"
+    [hasPadding]="true"
   >
     <ng-container *ngFor="let item of filteredShowcaseRoutes">
       <a

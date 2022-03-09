@@ -1,3 +1,4 @@
+@use '~@kirbydesign/core/src/scss/interaction-state';
 @use '~@kirbydesign/core/src/scss/utils';
 
 $dropdown-max-height: 8 * utils.$dropdown-item-height;
@@ -6,6 +7,11 @@ $min-screen-width-small: 320px;
 $min-screen-width: 375px;
 
 :host {
+  @include interaction-state.apply-focus-visible() {
+    outline: none;
+    border-radius: utils.$border-radius-round;
+  }
+
   display: inline-block;
   position: relative;
   max-width: calc(100vw - #{$margin-horizontal-total});
@@ -17,19 +23,6 @@ $min-screen-width: 375px;
       width: 100%;
       min-width: initial;
       max-width: initial;
-    }
-  }
-
-  // Outline is applied on button border instead,
-  // to keep the rounded shape:
-  outline: none;
-
-  // Only apply focus ring if pointer device can hover
-  // (effectively desktop/mouse devices):
-  @include utils.focus() {
-    > button,
-    > button.attention-level3 {
-      border-color: utils.$focus-ring-color;
     }
   }
 
@@ -46,7 +39,6 @@ $min-screen-width: 375px;
   margin: 0;
   outline: none;
   width: 100%;
-  transition: box-shadow 0.2s, border-color 0.2s;
 
   // Temporary fix for button-width as attention level 3 has border,
   // and attention level 2 does not:
