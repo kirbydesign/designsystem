@@ -23,7 +23,7 @@ export class IconComponent implements OnChanges {
   private _icon = (this.icon = this.defaultIcon);
   @HostBinding('class')
   @Input()
-  size: IconSize | keyof IconSize;
+  size: IconSize | 'xs' | 'sm' | 'md' | 'lg';
 
   @Input() name: string;
   @Input() customName: string;
