@@ -58,6 +58,16 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
   ngOnInit(): void {
     if (this.config && this.config.maxLines) {
       this.lineClampHelper.setMaxLines(this.elementRef.nativeElement, this.config.maxLines);
+      window.addEventListener('error', (e) => {
+        if (
+          e.message === 'ResizeObserver loop completed with undelivered notifications.' ||
+          e.message === 'ResizeObserver loop limit exceeded'
+        ) {
+          console.log('Stopping ResizeObserver error propagation');
+          e.stopImmediatePropagation();
+          e.preventDefault();
+        }
+      });
       this.observeResize();
       this.isObservingHostElement = true;
     }
