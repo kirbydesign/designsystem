@@ -58,17 +58,10 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
   ngOnInit(): void {
     if (this.config && this.config.maxLines) {
       this.lineClampHelper.setMaxLines(this.elementRef.nativeElement, this.config.maxLines);
-      window.addEventListener('error', (e) => {
-        if (
-          e.message === 'ResizeObserver loop completed with undelivered notifications.' ||
-          e.message === 'ResizeObserver loop limit exceeded'
-        ) {
-          console.log('Stopping ResizeObserver error propagation');
-          e.stopImmediatePropagation();
-          e.preventDefault();
-        }
-      });
+      console.log('registering eventlistener');
+      window.addEventListener('error', this.muteResizeObserverError);
       this.observeResize();
+
       this.isObservingHostElement = true;
     }
   }
@@ -79,6 +72,10 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
       if (this.hostElementClone) {
         this.renderer.removeChild(this.elementRef.nativeElement, this.hostElementClone);
       }
+
+      console.log('removing eventlistener');
+
+      window.removeEventListener('error', this.muteResizeObserverError);
     }
   }
 
@@ -129,5 +126,16 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
   private setSize(el: Element, size: HeadingSize): void {
     this.renderer.setStyle(el, 'font-size', size.fontSize);
     this.renderer.setStyle(el, 'line-height', size.lineHeight);
+  }
+
+  private muteResizeObserverError(e: ErrorEvent) {
+    if (
+      e.message === 'ResizeObserver loop completed with undelivered notifications.' ||
+      e.message === 'ResizeObserver loop limit exceeded'
+    ) {
+      console.log('Muting...');
+      e.stopImmediatePropagation();
+      e.preventDefault();
+    }
   }
 }
