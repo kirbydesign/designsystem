@@ -29,7 +29,11 @@ $default-loudness: 'm';
 
   .state-layer {
     position: absolute;
-    inset: calc(var(--border-width, 0px) * -1); // negate border-width on parent
+    // When we use negated value of border-width on parent for inset then the
+    // hover effect (state layer) will also cover the border.
+    // Otherwise the border will not be affected on hover.
+    // We usually want the hover effect to also cover the border.
+    inset: calc(var(--border-width, 0px) * -1);
     overflow: hidden;
     pointer-events: none;
     border-radius: inherit;
