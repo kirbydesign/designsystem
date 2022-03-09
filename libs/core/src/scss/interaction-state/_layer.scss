@@ -14,6 +14,8 @@ $state-layer-z-index: $_content-layer-z-index + 1;
 $_dark: utils.get-color('black');
 $_light: utils.get-color('black-contrast');
 
+$default-loudness: 'm';
+
 @mixin setup-layer {
   --state-layer-opacity: 0;
   --state-layer-background-color: $_dark;
@@ -48,7 +50,7 @@ $_light: utils.get-color('black-contrast');
   }
 }
 
-@mixin apply-state($loudness: null, $flip: false) {
+@mixin apply-state($loudness: $default-loudness, $flip: false) {
   $loudness-percent: utils.get-loudness($loudness);
 
   @if not(meta.type-of($loudness-percent) == number and math.unit($loudness-percent) == '%') {
