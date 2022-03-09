@@ -135,7 +135,7 @@ $button-width: (
   // Outline is applied on button border instead,
   // to keep the rounded shape:
   outline: none;
-  border-width: var(--border-width, 0px);
+  border-width: var(--border-width);
   border-style: solid;
   border-color: var(--kirby-button-border-color, transparent);
 
