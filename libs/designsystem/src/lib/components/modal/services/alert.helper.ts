@@ -16,6 +16,7 @@ export class AlertHelper {
       cssClass: ['kirby-overlay', 'kirby-alert'],
       mode: 'ios',
       backdropDismiss: false,
+      animated: false,
     });
 
     await ionModal.present();

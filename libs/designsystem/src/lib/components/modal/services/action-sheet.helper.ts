@@ -24,6 +24,7 @@ export class ActionSheetHelper {
         cancel: cancel,
         itemSelect: itemSelect,
       },
+      animated: false,
       backdropDismiss: true,
     });
 

@@ -40,6 +40,7 @@ describe('ToastHelper', () => {
         overlay = await spectator.service.showToast({
           message: testMessage,
           messageType: 'success',
+          animated: false,
         });
 
         ionToast = window.document.getElementsByTagName('ion-toast')[0];
@@ -75,6 +76,7 @@ describe('ToastHelper', () => {
           overlay = await spectator.service.showToast({
             message: 'Test Message',
             messageType: messageType,
+            animated: false,
           });
           const ionToast = window.document.getElementsByTagName('ion-toast')[0];
           await TestHelper.whenReady(ionToast);
@@ -93,6 +95,7 @@ describe('ToastHelper', () => {
         overlay = await spectator.service.showToast({
           message: 'Test message',
           messageType: 'danger',
+          animated: false,
         });
 
         expect(console.warn).toHaveBeenCalledWith(

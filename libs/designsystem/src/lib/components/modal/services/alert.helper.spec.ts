@@ -72,6 +72,7 @@ describe('AlertHelper', () => {
       await overlay.dismiss();
       const ionModalElement = await ionModalController.create({
         component: EmbeddedDummyComponent,
+        animated: false,
       });
       await ionModalElement.present();
       const modalIonModal = await ionModalController.getTop();

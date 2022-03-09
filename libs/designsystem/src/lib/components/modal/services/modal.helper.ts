@@ -65,6 +65,7 @@ export class ModalHelper {
       swipeToClose: config.flavor != 'compact',
       presentingElement: modalPresentingElement,
       keyboardClose: false,
+      animated: false,
       enterAnimation,
       leaveAnimation,
     });
