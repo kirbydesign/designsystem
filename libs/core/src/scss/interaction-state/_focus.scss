@@ -54,6 +54,7 @@
     &:focus-within::part(#{$part}) {
       @include _focus-ring($shadow, $gap);
     }
+    @content;
   }
 }
 
