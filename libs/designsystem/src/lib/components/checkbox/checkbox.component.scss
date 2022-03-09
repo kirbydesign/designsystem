@@ -1,7 +1,8 @@
 @use "sass:map";
+@use '~@kirbydesign/core/src/scss/interaction-state';
 @use '~@kirbydesign/core/src/scss/utils';
 
-utils.$border-radius: 6px;
+$border-radius: 6px;
 $checkbox-icon-size: utils.size('m');
 $spacing-to-edge: map.get(utils.$checkbox-radio-spacing, 'to-edge');
 $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
@@ -55,12 +56,14 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
   }
 
   ion-checkbox {
+    @include interaction-state.apply-focus-part($part: 'container');
+
     --size: #{$checkbox-icon-size};
     --checkmark-width: #{utils.size('xxxs')};
     --background: #{utils.get-color('white')};
     --border-width: 1px;
     --border-color: #{utils.get-color('semi-dark')};
-    --border-radius: #{utils.$border-radius};
+    --border-radius: #{$border-radius};
 
     margin-left: $spacing-to-edge;
     margin-right: $spacing-to-label;
@@ -69,12 +72,6 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
       padding: utils.size('xxxs'); // Spacing between checkmark and container box
     }
 
-    &:focus-within::part(container) {
-      @media (hover: hover) {
-        box-shadow: 0 0 0 1px var(--kirby-background-color), 0 0 0 2px #{utils.$focus-ring-color};
-        border-radius: utils.$border-radius;
-      }
-    }
     &:active {
       --background: #{utils.get-color('white-shade')};
     }

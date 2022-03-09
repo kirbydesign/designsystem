@@ -5,6 +5,7 @@
 @use 'base/typography';
 @use 'base/line-clamp';
 @use 'base/html-list';
+@use 'interaction-state';
 
 :root,
 :host {
@@ -245,6 +246,11 @@ ion-loading.kirby-loading-overlay {
  */
 :link,
 :visited {
+  @include interaction-state.apply-focus-visible($gap: 3px) {
+    outline: none;
+    border-radius: #{utils.size('xxxxs')};
+  }
+
   color: inherit;
   cursor: pointer;
   text-decoration: underline;
