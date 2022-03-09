@@ -57,13 +57,15 @@
   }
 
   .slide-button {
-    @include interaction-state.apply-focus-visible();
+    @include interaction-state.apply-focus-visible() {
+      outline: none;
+    }
+
     width: 100%;
     height: 100%;
     -webkit-appearance: none;
     background: transparent;
     z-index: 2;
-    outline: none;
   }
 
   .slide-button::-webkit-slider-thumb {

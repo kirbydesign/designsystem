@@ -31,6 +31,8 @@
     &:focus-visible {
       @include _focus-ring($shadow, $gap);
     }
+
+    @content;
   }
 }
 

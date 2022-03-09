@@ -246,10 +246,11 @@ ion-loading.kirby-loading-overlay {
  */
 :link,
 :visited {
-  @include interaction-state.apply-focus-visible($gap: 3px);
+  @include interaction-state.apply-focus-visible($gap: 3px) {
+    outline: none;
+    border-radius: #{utils.size('xxxxs')};
+  }
 
-  outline: none;
-  border-radius: #{utils.size('xxxxs')};
   color: inherit;
   cursor: pointer;
   text-decoration: underline;

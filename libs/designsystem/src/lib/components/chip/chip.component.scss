@@ -17,9 +17,10 @@
   @include utils.accessible-target-size();
 
   &[role='button'] {
-    @include interaction-state.apply-focus-visible();
-    cursor: pointer;
-    outline: none;
+    @include interaction-state.apply-focus-visible() {
+      cursor: pointer;
+      outline: none;
+    }
   }
 
   white-space: nowrap;

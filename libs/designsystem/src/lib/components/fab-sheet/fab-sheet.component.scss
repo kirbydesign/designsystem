@@ -12,10 +12,11 @@ $fab-sheet-margin: utils.size('s');
 ion-fab-button {
   --box-shadow: #{utils.get-elevation(8)};
 
-  @include interaction-state.apply-focus-visible();
+  @include interaction-state.apply-focus-visible() {
+    outline: none;
+    border-radius: utils.$border-radius-round;
+  }
 
-  outline: none;
-  border-radius: utils.$border-radius-round;
   width: 64px;
   height: 64px;
   user-select: none;
