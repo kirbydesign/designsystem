@@ -40,7 +40,7 @@ export class PopoverComponent implements AfterViewInit, OnDestroy {
   wrapperElement: ElementRef<HTMLDivElement>;
 
   @Input()
-  popout: HorizontalDirection | keyof HorizontalDirection = HorizontalDirection.right;
+  popout: HorizontalDirection | `${HorizontalDirection}` = HorizontalDirection.right;
 
   @Input()
   target: HTMLElement | ElementRef<HTMLElement>;
