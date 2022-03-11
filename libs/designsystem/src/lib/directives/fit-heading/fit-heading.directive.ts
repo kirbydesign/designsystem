@@ -59,7 +59,15 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
     if (this.config && this.config.maxLines) {
       this.lineClampHelper.setMaxLines(this.elementRef.nativeElement, this.config.maxLines);
       console.log('registering eventlistener');
-      window.addEventListener('error', this.muteResizeObserverError);
+      const e = window.onerror;
+      window.onerror = function(err) {
+        if (err === 'ResizeObserver loop limit exceeded') {
+          console.log('Ignored: ResizeObserver loop limit exceeded');
+          return true;
+        } else {
+          return e;
+        }
+      };
       this.observeResize();
 
       this.isObservingHostElement = true;
