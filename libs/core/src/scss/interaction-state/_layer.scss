@@ -16,7 +16,10 @@ $_light: utils.get-color('black-contrast');
 
 $default-loudness: 'm';
 
-@mixin setup-layer {
+/// Prepare state layer and content layer for interaction state changes.
+/// Should be initialized before applying hover.
+/// @param {*} $border-width [0px] - Necessary for making the state layer cover border (if any) on parent element
+@mixin initialize-layer($border-width: 0px) {
   --state-layer-opacity: 0;
   --state-layer-background-color: $_dark;
 
@@ -29,11 +32,11 @@ $default-loudness: 'm';
 
   .state-layer {
     position: absolute;
-    // When we use negated value of border-width on parent for inset then the
-    // hover effect (state layer) will also cover the border.
+    // When we use negated value of border-width on parent for inset
+    // then the hover effect (state layer) will also cover the border.
     // Otherwise the border will not be affected on hover.
     // We usually want the hover effect to also cover the border.
-    inset: calc(var(--border-width, 0px) * -1);
+    inset: $border-width * -1;
     overflow: hidden;
     pointer-events: none;
     border-radius: inherit;

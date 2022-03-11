@@ -117,6 +117,6 @@ td {
 }
 
 .contain-state-layer {
-  @include interaction-state.setup-layer;
+  @include interaction-state.initialize-layer;
   @include interaction-state.apply-hover('s');
 }

@@ -2,7 +2,7 @@
 @use '~@kirbydesign/core/src/scss/utils';
 
 :host {
-  @include interaction-state.setup-layer;
+  @include interaction-state.initialize-layer;
   @include interaction-state.apply-hover;
 
   @include utils.accessible-target-size;
