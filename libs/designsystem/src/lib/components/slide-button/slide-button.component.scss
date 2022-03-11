@@ -16,7 +16,6 @@ $slide-button-text-padding: 0 $slide-button-container-radius 0 $total-slider-thu
 
 @mixin _slider-thumb() {
   @include interaction-state.transition;
-  // This actually doesn't use the state layer and the custom properties - only the mixin "shell"
   @include interaction-state.apply-hover {
     background-color: color.scale(
       utils.get-color('white', $getValueOnly: true),
