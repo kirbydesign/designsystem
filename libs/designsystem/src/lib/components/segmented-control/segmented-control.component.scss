@@ -74,7 +74,8 @@ ion-segment-button {
   text-transform: none;
   margin: 0;
 
-  // NOTE: Also see ion-back-button in page component
+  // NOTE: This is a custom implementation of the hover interaction state;
+  // identical to FabSheet's ion-fab-button & PageComponent's ion-back-button.
   opacity: 1; // not strictly required but declared to be consistent
 
   &::part(native) {

@@ -13,7 +13,9 @@ $fab-sheet-margin: utils.size('s');
 ion-fab-button {
   @include ionic.apply-hover;
 
-  // NOTE: Also see ion-back-button in page component and ion-segment-button in segmented control component
+  // NOTE: This is a custom implementation of the hover interaction state;
+  // identical to PageComponent's ion-back-button & SegmentedControlComponent's
+  // ion-segment-button.
   &::part(native)::after {
     @include ionic.transition;
   }

@@ -74,7 +74,9 @@ ion-back-button {
   height: utils.$fat-finger-size;
   width: utils.$fat-finger-size;
 
-  // NOTE: Also see ion-segment-button in segmented control component
+  // NOTE: This is a custom implementation of the hover interaction state;
+  // identical to FabSheet's ion-fab-button & SegmentedControlComponent's
+  // ion-segment-button.
   opacity: 1; // required for interaction states to work
 
   &::part(native) {
