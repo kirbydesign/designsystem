@@ -41,6 +41,9 @@ import { COMPONENT_PROPS } from './config/modal-config.helper';
   providers: [{ provide: Modal, useExisting: ModalWrapperComponent }],
 })
 export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDestroy {
+  //TODO: Do something with doTheThing :-)
+  doTheThing = true;
+
   static readonly KEYBOARD_HIDE_DELAY_IN_MS = 100;
 
   scrollY: number = Math.abs(this.windowRef.nativeWindow.scrollY);
