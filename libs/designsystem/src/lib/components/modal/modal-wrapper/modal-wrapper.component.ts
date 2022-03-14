@@ -70,6 +70,9 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   private ionTitleElement: ElementRef<HTMLIonTitleElement>;
   @ViewChild(RouterOutlet, { static: true }) private routerOutlet: RouterOutlet;
 
+  @ViewChild('contentTitle', { read: ElementRef })
+  private contentTitle: ElementRef<HTMLElement>;
+
   private keyboardVisible = false;
   private toolbarButtons: HTMLButtonElement[] = [];
   private delayedClose = () => {};
@@ -433,16 +436,22 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     }
   }
 
-  private readonly elementToParentMap: { [key: string]: () => HTMLElement } = {
-    'KIRBY-MODAL-FOOTER': () => this.elementRef.nativeElement,
-    'KIRBY-PAGE-TITLE': () => this.ionTitleElement.nativeElement,
-    'KIRBY-PAGE-PROGRESS': () => this.ionToolbarElement.nativeElement,
+  private readonly elementToParentMap: { [key: string]: () => HTMLElement[] } = {
+    'KIRBY-MODAL-FOOTER': () => [this.elementRef.nativeElement],
+    'KIRBY-PAGE-TITLE': () =>
+      [this.ionTitleElement.nativeElement, this.contentTitle?.nativeElement].filter(
+        (e) => e !== undefined
+      ),
+    'KIRBY-PAGE-PROGRESS': () => [this.ionToolbarElement.nativeElement],
   };
 
   private clearEmbeddedElements() {
-    Object.entries(this.elementToParentMap).forEach(([tagName, getParent]) => {
-      const embeddedElement = getParent().querySelector<HTMLElement>(`:scope > ${tagName}`);
-      this.removeChild(embeddedElement);
+    Object.entries(this.elementToParentMap).forEach(([tagName, getParents]) => {
+      const newParents = getParents();
+      newParents.forEach((newParent) => {
+        const embeddedElement = newParent.querySelector<HTMLElement>(`:scope > ${tagName}`);
+        this.removeChild(embeddedElement);
+      });
     });
   }
 
@@ -458,18 +467,25 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     return this.elementRef.nativeElement.querySelector<HTMLElement>('kirby-modal-footer');
   }
 
-  private moveChild(child: Element, newParent: Element) {
+  private moveChild(child: Element, newParents: Element[]) {
     this.renderer.removeChild(child.parentElement, child);
-    this.renderer.appendChild(newParent, child);
-    if (child.tagName === 'KIRBY-MODAL-FOOTER') {
-      this.resizeObserverService.observe(child, (entry) => {
-        const [property, pixelValue] = [
-          '--footer-height',
-          `${Math.floor(entry.contentRect.height)}px`,
-        ];
-        this.setCssVar(this.elementRef.nativeElement, property, pixelValue);
-      });
-    }
+
+    newParents.forEach((newParent, index) => {
+      const childToAppend = index > 0 ? child.cloneNode(true) : child;
+      this.renderer.appendChild(newParent, childToAppend);
+      // Append adds child as last element of parent; therefore retrieve with lastElementChild
+      const childElement = newParent.lastElementChild;
+
+      if (childElement.tagName === 'KIRBY-MODAL-FOOTER') {
+        this.resizeObserverService.observe(childElement, (entry) => {
+          const [property, pixelValue] = [
+            '--footer-height',
+            `${Math.floor(entry.contentRect.height)}px`,
+          ];
+          this.setCssVar(this.elementRef.nativeElement, property, pixelValue);
+        });
+      }
+    });
   }
 
   private removeChild(child?: Element) {
