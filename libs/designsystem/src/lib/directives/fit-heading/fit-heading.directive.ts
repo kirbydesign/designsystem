@@ -4,6 +4,7 @@ import { DesignTokenHelper } from '@kirbydesign/core';
 
 import { ResizeObserverService } from '../../components/shared/resize-observer/resize-observer.service';
 import { LineClampHelper } from '../../helpers/line-clamp-helper';
+import { MuteErrorService } from '../../helpers/mute-error.service';
 
 const fontSize = DesignTokenHelper.fontSize;
 const lineHeight = DesignTokenHelper.lineHeight;
@@ -52,24 +53,22 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
     private elementRef: ElementRef,
     private renderer: Renderer2,
     private resizeObserverService: ResizeObserverService,
-    private lineClampHelper: LineClampHelper
+    private lineClampHelper: LineClampHelper,
+    private muteErrorService: MuteErrorService
   ) {}
 
   ngOnInit(): void {
     if (this.config && this.config.maxLines) {
-      this.lineClampHelper.setMaxLines(this.elementRef.nativeElement, this.config.maxLines);
-      console.log('registering eventlistener');
-      const e = window.onerror;
-      window.onerror = function(err) {
-        if (err === 'ResizeObserver loop limit exceeded') {
-          console.log('Ignored: ResizeObserver loop limit exceeded');
-          return true;
-        } else {
-          return e;
-        }
-      };
-      this.observeResize();
+      const firefoxResizeObserverError: string =
+        'ResizeObserver loop completed with undelivered notifications.';
+      const chromeResizeObserverError: string = 'ResizeObserver loop limit exceeded';
+      this.muteErrorService.registerErrorMessages([
+        firefoxResizeObserverError,
+        chromeResizeObserverError,
+      ]);
 
+      this.lineClampHelper.setMaxLines(this.elementRef.nativeElement, this.config.maxLines);
+      this.observeResize();
       this.isObservingHostElement = true;
     }
   }
@@ -80,10 +79,6 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
       if (this.hostElementClone) {
         this.renderer.removeChild(this.elementRef.nativeElement, this.hostElementClone);
       }
-
-      console.log('removing eventlistener');
-
-      window.removeEventListener('error', this.muteResizeObserverError);
     }
   }
 
@@ -134,16 +129,5 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
   private setSize(el: Element, size: HeadingSize): void {
     this.renderer.setStyle(el, 'font-size', size.fontSize);
     this.renderer.setStyle(el, 'line-height', size.lineHeight);
-  }
-
-  private muteResizeObserverError(e: ErrorEvent) {
-    if (
-      e.message === 'ResizeObserver loop completed with undelivered notifications.' ||
-      e.message === 'ResizeObserver loop limit exceeded'
-    ) {
-      console.log('Muting...');
-      e.stopImmediatePropagation();
-      e.preventDefault();
-    }
   }
 }
