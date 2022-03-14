@@ -1,4 +1,4 @@
-@use '~@kirbydesign/core/src/scss/interaction-state/layer';
+@use '../layer';
 @use '../../utils';
 
 @mixin apply-hover($loudness: layer.$default-loudness, $flip: false) {
