@@ -1,6 +1,6 @@
 <ion-header (touchstart)="onHeaderTouchStart($event)">
   <ion-toolbar>
-    <ion-title>{{ config.title }}</ion-title>
+    <ion-title></ion-title>
     <ion-buttons slot="start" *ngIf="config.flavor === 'drawer'">
       <ng-container *ngTemplateOutlet="closeButton; context: { icon: 'arrow-down' }"></ng-container>
     </ion-buttons>
@@ -16,6 +16,14 @@
 </ion-header>
 
 <ion-content [scrollEvents]="true">
+  <ion-header *ngIf="doTheThing" collapse="condense">
+    <ion-toolbar>
+      <h1 class="kirby-text-large" #condensedTitle>
+        Hustlers er langt fra noget ensartet folkefærd. Der findes den beregnende type som Jazzy,
+        der aldrig mister overblikket og altid tænker stort.
+      </h1>
+    </ion-toolbar>
+  </ion-header>
   <ng-container
     *ngComponentOutlet="config.component; injector: componentPropsInjector"
   ></ng-container>
