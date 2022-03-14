@@ -79,6 +79,11 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() disableFutureDates = false;
   @Input() alwaysEnableToday = false;
   @Input() customLocales: { [key: string]: Locale } = {};
+  /* 
+    Experimental: Input property not documented on purpose. 
+    For context see: https://github.com/kirbydesign/designsystem/issues/2087
+  */
+  @Input() usePopover = false;
   /**
    * Configuration for the year navigator.
    *
