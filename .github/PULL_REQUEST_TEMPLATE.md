@@ -19,7 +19,7 @@ This PR closes # (insert issue number here)
 
 ## Checklist:
 
-The following tasks should be carried out in sequence in order to follow [the process of contributing](https://github.com/kirbydesign/designsystem/blob/master/.github/CONTRIBUTING.md/#the-process-of-contributing) correctly.
+The following tasks should be carried out in sequence in order to follow [the process of contributing](https://github.com/kirbydesign/designsystem/blob/stable/.github/CONTRIBUTING.md/#the-process-of-contributing) correctly.
 
 ### Reminders
 - [ ] Make sure you have implemented tests following the guidelines in: "[The good: Test](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Test)".
@@ -28,8 +28,8 @@ The following tasks should be carried out in sequence in order to follow [the pr
 ### Review  
 - [ ] Do a [self-review](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Self-review).
 - [ ] Request that the changes are code-reviewed 
-- [ ] Request that the changes are [UX reviewed](https://github.com/kirbydesign/designsystem/blob/master/.github/CONTRIBUTING.md/#ux-review) (only necessary if your PR introduces visual changes)
+- [ ] Request that the changes are [UX reviewed](https://github.com/kirbydesign/designsystem/blob/stable/.github/CONTRIBUTING.md/#ux-review) (only necessary if your PR introduces visual changes)
 
-When the pull request has been approved it will be automatically merged to master via [automerge](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/automatically-merging-a-pull-request).
+When the pull request has been approved it will be automatically merged to `stable` via [automerge](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/automatically-merging-a-pull-request).
 
 
