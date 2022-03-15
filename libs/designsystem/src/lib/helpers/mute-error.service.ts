@@ -4,14 +4,14 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class MuteErrorService {
+  private mutedErrors: string[] = [];
+
   constructor() {
     this.extendErrorHandler();
   }
-  private errorMessages: string[] = [];
 
-  public registerErrorMessages(messages: string[] | string) {
-    this.errorMessages = this.errorMessages.concat(messages);
-    console.log('Error messages: ', this.errorMessages);
+  public register(messages: string[] | string) {
+    this.mutedErrors = this.mutedErrors.concat(messages);
   }
 
   private extendErrorHandler() {
@@ -25,18 +25,21 @@ export class MuteErrorService {
         error,
       };
 
-      if (this.errorMessages.includes(originalError.message)) {
-        console.log('Muting resizeobserver error');
-        // Return true here, to prevent firing the default event handler
-        return true;
-      } else if (existingErrorHandler !== null) {
-        console.log('Old window.onerror exists, rethrow');
-        return existingErrorHandler(originalError.message);
-      } else {
-        console.log('Just throwing that old onerror as usual, nothing to see here.');
-        console.log(originalError);
-        return originalError;
-      }
+      this.handleError(originalError, existingErrorHandler);
     };
+  }
+
+  private handleError(error: any, errorHandler?: OnErrorEventHandlerNonNull) {
+    if (this.mutedErrors.includes(error.message)) {
+      // Return true here, which means we mute the error
+      // by preventing the firing of the default event handler
+      return true;
+    } else if (errorHandler !== null && errorHandler !== undefined) {
+      // If an error handler has previously been registered
+      // reuse it with the original error
+      return errorHandler(error);
+    } else {
+      return error;
+    }
   }
 }

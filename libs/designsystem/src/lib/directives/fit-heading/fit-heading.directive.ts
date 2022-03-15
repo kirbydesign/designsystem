@@ -62,10 +62,7 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
       const firefoxResizeObserverError: string =
         'ResizeObserver loop completed with undelivered notifications.';
       const chromeResizeObserverError: string = 'ResizeObserver loop limit exceeded';
-      this.muteErrorService.registerErrorMessages([
-        firefoxResizeObserverError,
-        chromeResizeObserverError,
-      ]);
+      this.muteErrorService.register([firefoxResizeObserverError, chromeResizeObserverError]);
 
       this.lineClampHelper.setMaxLines(this.elementRef.nativeElement, this.config.maxLines);
       this.observeResize();
