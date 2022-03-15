@@ -102,7 +102,8 @@ export class ButtonComponent implements AfterContentInit {
     this.hasText = !!this.elementRef.nativeElement.textContent;
     if (this.iconElementRef !== undefined && this.hasText) {
       this._isIconLeft =
-        this.elementRef.nativeElement.firstChild === this.iconElementRef.nativeElement;
+        this.elementRef.nativeElement.querySelector('.content-layer').firstChild ===
+        this.iconElementRef.nativeElement;
       this._isIconRight = !this._isIconLeft;
     }
   }

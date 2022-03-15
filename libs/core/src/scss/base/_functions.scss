@@ -120,23 +120,6 @@
   }
 }
 
-@mixin theme-background($variant, $text-variant-override: null) {
-  $background-color: null;
-  $text-color: null;
-  @if $variant == transparent {
-    $background-color: transparent;
-    $text-color: get-text-color('black');
-  } @else {
-    $background-color: get-color($variant);
-    $text-color: get-color($variant + '-contrast');
-  }
-  @if ($text-variant-override != null) {
-    $text-color: get-text-color($text-variant-override);
-  }
-  background-color: $background-color;
-  color: $text-color;
-}
-
 /// Only apply the :hover selector and styles if pointer device can hover
 /// (effectively desktop/mouse devices):
 @mixin hover() {

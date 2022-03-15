@@ -1,9 +1,13 @@
+@use '~@kirbydesign/core/src/scss/interaction-state';
 @use '~@kirbydesign/core/src/scss/utils';
 
 $divider-color: utils.get-color('medium');
 $padding: utils.size('s');
 
 :host {
+  @include interaction-state.initialize-layer;
+  @include interaction-state.apply-hover('s');
+
   display: block;
   border-top: 1px solid $divider-color;
   border-bottom: 1px solid $divider-color;

@@ -1,25 +1,44 @@
+@use 'sass:color';
+
 @use '~@kirbydesign/core/src/scss/interaction-state';
 @use '~@kirbydesign/core/src/scss/utils';
-@use 'slide-button.component.shared';
+
+$slide-button-container-width: 256px;
+$slide-button-spacing: 2px;
+$slide-button-width: 52px;
+$slide-button-container-height: $slide-button-width + 2 * $slide-button-spacing;
+$slide-button-container-bg-color: utils.get-color('primary');
+$slider-thumb-bg-color: utils.get-color('white');
+$slide-button-text-color: utils.get-color('primary-contrast');
+$total-slider-thumb-width: $slide-button-width + $slide-button-spacing * 2;
+$slide-button-container-radius: $slide-button-width * 0.5;
+$slide-button-text-padding: 0 $slide-button-container-radius 0 $total-slider-thumb-width;
 
 @mixin _slider-thumb() {
+  @include interaction-state.transition;
+  @include interaction-state.apply-hover {
+    background-color: color.scale(
+      utils.get-color('white', $getValueOnly: true),
+      $lightness: -1 * utils.get-loudness('m')
+    );
+  }
+
   -webkit-appearance: none;
   border-radius: 50%;
-  background-color: slide-button.$slider-thumb-bg-color;
+  background-color: $slider-thumb-bg-color;
   background-image: url('/assets/kirby/icons/svg/arrow-more.svg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: utils.size('m');
-  width: slide-button.$slide-button-width;
-  height: slide-button.$slide-button-width;
+  width: $slide-button-width;
+  height: $slide-button-width;
   border: none;
-  cursor: pointer;
 }
 
 :host {
   position: relative;
   display: inline-block;
-  width: slide-button.$slide-button-container-width;
+  width: $slide-button-container-width;
   user-select: none;
 
   &[expand='block'] {
@@ -32,10 +51,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: slide-button.$slide-button-text-color;
-    background-color: slide-button.$slide-button-container-bg-color;
-    height: slide-button.$slide-button-container-height;
-    border-radius: slide-button.$slide-button-container-radius;
+    color: $slide-button-text-color;
+    background-color: $slide-button-container-bg-color;
+    height: $slide-button-container-height;
+    border-radius: $slide-button-container-radius;
   }
 
   @for $i from 1 through 10 {
@@ -53,7 +72,7 @@
     z-index: 1;
     width: 100%;
     text-align: center;
-    padding: slide-button.$slide-button-text-padding;
+    padding: $slide-button-text-padding;
   }
 
   .slide-button {

@@ -1,4 +1,5 @@
 @use '~@kirbydesign/core/src/scss/interaction-state';
+@use '~@kirbydesign/core/src/scss/interaction-state/ionic';
 @use '~@kirbydesign/core/src/scss/utils';
 
 $fab-sheet-margin: utils.size('s');
@@ -10,6 +11,16 @@ $fab-sheet-margin: utils.size('s');
 // Ionic fab can be customized by using the css properties listed in the CSS Custom Properties section of the below docs page:
 // https://ionicframework.com/docs/api/fab-button
 ion-fab-button {
+  @include ionic.apply-hover;
+
+  // NOTE: This is a custom implementation of the hover interaction state;
+  // identical to PageComponent's ion-back-button & SegmentedControlComponent's
+  // ion-segment-button.
+  &::part(native)::after {
+    @include ionic.transition;
+  }
+  // end NOTE
+
   --box-shadow: #{utils.get-elevation(8)};
 
   @include interaction-state.apply-focus-visible() {

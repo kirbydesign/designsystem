@@ -28,10 +28,6 @@ export class ItemShowcaseComponent {
       name: '--kirby-item-background-focused',
       description: 'Background of the item when focused with the tab key',
     },
-    {
-      name: '--kirby-item-background-hover',
-      description: 'Background of the item on hover',
-    },
   ];
 
   scrollTo(target: Element) {

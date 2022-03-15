@@ -1,20 +1,21 @@
 @use '~@kirbydesign/core/src/scss/interaction-state';
 @use '~@kirbydesign/core/src/scss/utils';
 
-@mixin selected-and-hover($background-color) {
-  &.is-selected {
-    @include utils.theme-background($background-color);
-  }
-
-  @include utils.hover() {
-    @include utils.theme-background($background-color);
-  }
-}
-
 :host {
-  @include utils.theme-background('white');
-  @include selected-and-hover('black');
-  @include utils.accessible-target-size();
+  @include interaction-state.initialize-layer;
+  @include interaction-state.apply-hover;
+
+  @include utils.accessible-target-size;
+
+  background-color: utils.get-color('white');
+  color: utils.get-color('white-contrast');
+
+  &.is-selected {
+    @include interaction-state.apply-hover('xxl', $flip: true);
+
+    background-color: utils.get-color('black');
+    color: utils.get-color('black-contrast');
+  }
 
   &[role='button'] {
     @include interaction-state.apply-focus-visible() {
@@ -35,21 +36,51 @@
   user-select: none;
 
   :host-context(.kirby-color-brightness-dark) {
-    @include utils.theme-background(transparent, 'white');
-    @include selected-and-hover('white');
+    @include interaction-state.apply-hover($flip: true);
+
+    background-color: transparent;
+    color: utils.get-text-color('white');
+
+    &.is-selected {
+      @include interaction-state.apply-hover('l');
+
+      background-color: utils.get-color('white');
+      color: utils.get-color('white-contrast');
+    }
+  }
+
+  :host-context(.kirby-color-brightness-light) {
+    background-color: transparent;
+    color: utils.get-text-color('black');
+
+    &.is-selected {
+      @include interaction-state.apply-hover('xxl', $flip: true);
+
+      background-color: utils.get-color('black');
+      color: utils.get-color('black-contrast');
+    }
   }
 
   :host-context(kirby-segmented-control.compact) {
-    min-width: 44px;
-    flex-shrink: 0;
-    justify-content: center;
+    background-color: transparent;
+    color: utils.get-text-color('black');
+
+    &.is-selected {
+      @include interaction-state.apply-hover('xl', $flip: true);
+
+      background-color: utils.get-color('black');
+      color: utils.get-color('black-contrast');
+    }
+
     --inline-margin: #{utils.size('xxxxs')};
     --inline-padding: #{13px};
-    @include utils.theme-background(transparent);
-    @include selected-and-hover('black');
 
     @include utils.media('<=small') {
       --inline-margin: 0;
     }
+
+    min-width: 44px;
+    flex-shrink: 0;
+    justify-content: center;
   }
 }

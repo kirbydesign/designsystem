@@ -65,7 +65,6 @@ ion-item-sliding {
       --kirby-item-background: #{utils.get-color($color-name)};
       --kirby-item-background-activated: #{utils.get-color($color-name + '-shade')};
       --kirby-item-background-focused: #{utils.get-color($color-name + '-shade')};
-      --kirby-item-background-hover: #{utils.get-color($color-name + '-tint')};
       ion-item {
         --background: #{utils.get-color($color-name)};
         --color: #{utils.get-color($color-name + '-contrast')};

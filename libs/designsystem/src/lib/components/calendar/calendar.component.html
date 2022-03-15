@@ -48,10 +48,11 @@
       <td *ngFor="let day of week">
         <div
           (click)="_onDateSelected(day)"
-          class="{{ day.cssClasses }}"
+          class="{{ day.cssClasses }} contain-state-layer"
           [class.selected]="day.isSelected"
         >
-          {{ day.date }}
+          <span class="state-layer" aria-hidden="true"></span>
+          <span class="content-layer">{{ day.date }}</span>
         </div>
       </td>
     </tr>
