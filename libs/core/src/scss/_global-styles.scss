@@ -257,6 +257,47 @@ ion-loading.kirby-loading-overlay {
 /*
  * Link-styles (anchor tag with href)
  */
+a {
+  // TODO: Move to separate module
+
+  // TODO: Try to not use hard coded values (inset, border-radius etc.)
+
+  @include interaction-state.apply-hover('s') {
+    &::before {
+      inset: -5px;
+    }
+  }
+
+  position: relative;
+
+  // TODO: Fix links spanning multiple lines (probably hard to fix)
+  // If we use display: inline-block then text in links will not wrap!
+  display: inline-block;
+
+  &::before {
+    @include interaction-state.transition;
+
+    opacity: var(--state-layer-opacity, 0);
+    background-color: var(--state-layer-background-color);
+
+    content: '';
+    position: absolute;
+    // TODO: Should inset be part of transition? Otherwise, only set it here (-5px)
+    inset: 0;
+    border-radius: 6px;
+  }
+
+  // TODO: Easy opt-out: Would exporting a mixin be a good solution?
+  &.opt-out {
+    position: revert;
+    display: revert;
+
+    &::before {
+      content: none;
+    }
+  }
+}
+
 :link,
 :visited {
   @include interaction-state.apply-focus-visible($gap: 3px) {
