@@ -74,7 +74,15 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
 
   private observeResize(): void {
     this.resizeObserverService.observe(this.elementRef, () => {
-      this.scaleHeader();
+      /**
+       * setTimeout is used here to avoid repeated size changes
+       * while the first size change is still ongoing.
+       * This would result in the ResizeObserver being called again,
+       * giving 'ResizeObserver loop limit exceeded' types of errors.
+       */
+      setTimeout(() => {
+        this.scaleHeader();
+      }, 0);
     });
   }
 
