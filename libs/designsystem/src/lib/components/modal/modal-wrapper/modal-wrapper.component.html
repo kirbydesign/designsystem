@@ -16,7 +16,7 @@
 </ion-header>
 
 <ion-content [scrollEvents]="true">
-  <ion-header *ngIf="doTheThing" collapse="condense">
+  <ion-header *ngIf="config.collapseTitle" collapse="condense">
     <ion-toolbar>
       <h1 class="kirby-text-large" #contentTitle></h1>
     </ion-toolbar>
