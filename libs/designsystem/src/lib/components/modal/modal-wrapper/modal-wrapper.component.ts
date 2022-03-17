@@ -459,8 +459,10 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
      See: https://github.com/kirbydesign/designsystem/issues/2096
   */
   private getEmbeddedComponentElement() {
-    const { lastElementChild } = this.ionContentElement.nativeElement;
-    return !!this.config.modalRoute ? lastElementChild : lastElementChild.previousElementSibling;
+    const contentElementChildren = Array.from(
+      this.ionContentElement.nativeElement.children
+    ).reverse(); // Reverse makes it easier to retrieve the last children in the list
+    return !!this.config.modalRoute ? contentElementChildren[0] : contentElementChildren[1];
   }
 
   private getEmbeddedFooterElement() {
