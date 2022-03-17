@@ -12,8 +12,8 @@ a {
 
   position: relative;
 
-  // TODO: Fix links spanning multiple lines (probably hard to fix)
-  // If we use display: inline-block then text in links will not wrap!
+  // Using display: inline-block causes text in links to not wrap
+  // TODO: Try to fix (probably hard to fix) or make UX decision that it's ok
   display: inline-block;
 
   &::before {
