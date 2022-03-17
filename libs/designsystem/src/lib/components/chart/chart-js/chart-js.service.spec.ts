@@ -20,7 +20,7 @@ describe('ChartJSService', () => {
 
   const mockChartConfigService = MockProvider(ChartConfigService, {
     getTypeConfig: (chartType: ChartType) => deepCopy(TEST_CHART_TYPES_CONFIG[chartType]),
-    getInteractionFunctionsExtensions: () => ({ onHover: () => console.log('testing') }),
+    getInteractionFunctionsExtensions: () => ({ onHover: () => null }),
     getAnnotationDefaults: (type: string) => TEST_CHART_ANNOTATIONS_CONFIG[type],
     chartTypeToChartJSType: (type: ChartType) => TEST_CHART_TYPES_CONFIG[type].type as ChartJSType,
   });
@@ -201,7 +201,7 @@ describe('ChartJSService', () => {
             ],
           };
           chartJSService.renderChart(stockChartConfig);
-          console.log(chartJSService['chart'].options.locale);
+
           expect(chartJSService['chart'].data.labels.length).toEqual(3);
           chartJSService['chart'].data.labels.forEach((label) => {
             expect(label).not.toBe('');

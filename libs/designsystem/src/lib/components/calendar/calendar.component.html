@@ -15,6 +15,7 @@
   </div>
   <kirby-dropdown
     *ngIf="_hasYearNavigator"
+    [usePopover]="usePopover"
     [selectedIndex]="navigatedYear"
     [items]="navigableYears"
     popout="left"

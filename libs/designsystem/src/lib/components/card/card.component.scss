@@ -10,6 +10,10 @@
   box-shadow: utils.get-elevation(2);
   color: var(--kirby-card-main-color);
   background-color: var(--kirby-card-main-background-color);
+  background-image: var(--kirby-card-background-image);
+  background-repeat: var(--kirby-card-background-repeat, no-repeat);
+  background-position: var(--kirby-card-background-position, center);
+  background-size: var(--kirby-card-background-size, cover);
   display: flex;
   flex-direction: column;
   justify-content: space-between;

@@ -20,6 +20,14 @@ export class CardComponent implements OnInit, OnDestroy {
   @Input() title: string;
   @Input() subtitle: string;
 
+  @HostBinding('style.--kirby-card-background-image')
+  _backgroundImage: string;
+
+  @Input()
+  set backgroundImageUrl(value: string) {
+    this._backgroundImage = `url('${value}')`;
+  }
+
   @Input()
   hasPadding: boolean;
 
