@@ -1,12 +1,19 @@
 @use '../interaction-state';
 @use '../utils';
 
-a {
-  // TODO: Try to not use hard coded values (inset, border-radius etc.)
+$_focus-ring-gap: 3px;
+$_focus-ring-border-radius: utils.size('xxxxs');
 
+// Make state layer border-radius and inset dependent on focus ring styles.
+// Unfortunately, the calculations does not work for all sizes of focus ring gap.
+// Alternatively just use hardcoded values (6px and -5px).
+$_state-layer-border-radius: #{$_focus-ring-gap * utils.strip-unit($_focus-ring-border-radius)};
+$_state-layer-inset: calc(-1 * (#{$_state-layer-border-radius} - 1px));
+
+a {
   @include interaction-state.apply-hover('s') {
     &::before {
-      inset: -5px;
+      inset: $_state-layer-inset;
     }
   }
 
@@ -24,9 +31,9 @@ a {
 
     content: '';
     position: absolute;
-    // TODO: Should inset be part of transition? Otherwise, only set it here (-5px)
+    // TODO: Should inset be part of transition? Otherwise, only set it here.
     inset: 0;
-    border-radius: 6px;
+    border-radius: $_state-layer-border-radius;
   }
 }
 
@@ -35,9 +42,9 @@ a {
  */
 :link,
 :visited {
-  @include interaction-state.apply-focus-visible($gap: 3px) {
+  @include interaction-state.apply-focus-visible($gap: $_focus-ring-gap) {
     outline: none;
-    border-radius: #{utils.size('xxxxs')};
+    border-radius: $_focus-ring-border-radius;
   }
 
   color: inherit;
