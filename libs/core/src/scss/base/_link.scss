@@ -28,16 +28,6 @@ a {
     inset: 0;
     border-radius: 6px;
   }
-
-  // TODO: Easy opt-out: Would exporting a mixin be a good solution?
-  &.opt-out {
-    position: revert;
-    display: revert;
-
-    &::before {
-      content: none;
-    }
-  }
 }
 
 /*

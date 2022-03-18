@@ -1,0 +1,8 @@
+@mixin link {
+  position: revert;
+  display: revert;
+
+  &::before {
+    content: none;
+  }
+}
