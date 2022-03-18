@@ -45,7 +45,6 @@
         *ngFor="let link of item"
         [routerLink]="link.path"
         [class]="{ 'is-selected': link.active }"
-        class="opt-out"
         (click)="onComponentLinkClick(link.path)"
         #componentLink
         >{{ link.name }}

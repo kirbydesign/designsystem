@@ -1,4 +1,5 @@
 @use '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/opt-out';
 
 $link-padding: 5px;
 $link-border-radius: 3px;
@@ -42,6 +43,8 @@ section {
   }
 
   a {
+    @include opt-out.link;
+
     text-decoration: none;
     color: utils.get-text-color('semi-dark');
     display: block;
