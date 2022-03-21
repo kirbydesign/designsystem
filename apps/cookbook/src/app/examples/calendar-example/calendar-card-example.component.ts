@@ -40,7 +40,8 @@ export class CalendarCardExampleComponent implements OnChanges {
         if (this.useTimezoneUTC) {
           // realign local -> selectedDate
           this.selectedDate = zonedTimeToUtc(
-            this.subtractTimezoneOffset(this.selectedDate),
+            // this.subtractTimezoneOffset(this.selectedDate),
+            this.selectedDate,
             this.timeZoneName
           );
         } else {
