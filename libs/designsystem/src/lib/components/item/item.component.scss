@@ -7,8 +7,8 @@
   position: relative;
 
   ion-item {
-    --padding-top: var(--item-padding-top, 0);
-    --padding-bottom: var(--item-padding-bottom, 0);
+    --padding-top: var(--item-padding-top, initial);
+    --padding-bottom: var(--item-padding-bottom, initial);
     font-size: utils.font-size('s');
     --min-height: #{map.get(utils.$item-heights, 'm')};
     --padding-start: #{utils.size('s')};
