@@ -408,15 +408,10 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
       let newDate = new Date(this.activeMonth);
       newDate.setDate(newDay.date);
 
-      console.log(`${newDate} ⬅️ newDate`);
-
       if (this.timezone === 'UTC') {
-        newDate = zonedTimeToUtc(this.subtractTimezoneOffset(newDate), this.timeZoneName);
-        // newDate = zonedTimeToUtc(newDate, this.timeZoneName);
-        console.log(`${newDate} ⬅️ newDate (UTC)`);
+        newDate = zonedTimeToUtc(newDate, this.timeZoneName);
       }
 
-      // newDate.setDate(newDay.date);
       const dateToEmit = newDate;
 
       if (this.hasDateChanged(newDate, this._selectedDate)) {
@@ -496,11 +491,6 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
       weekDays: this._weekDays,
       month: this._month,
     };
-  }
-
-  private subtractTimezoneOffset(date: Date): Date {
-    const timezoneOffsetInMs = date.getTimezoneOffset() * 60 * 1000;
-    return new Date(date.getTime() - timezoneOffsetInMs);
   }
 
   private getDateFromNavigableYear(navigableYear: number | Date): Date {

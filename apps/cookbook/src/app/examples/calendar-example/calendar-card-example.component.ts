@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { addDays, startOfDay, subDays } from 'date-fns';
-import { format, utcToZonedTime, zonedTimeToUtc } from 'date-fns-tz';
+import { utcToZonedTime, zonedTimeToUtc } from 'date-fns-tz';
 
 @Component({
   selector: 'cookbook-calendar-card-example',
@@ -9,7 +9,6 @@ import { format, utcToZonedTime, zonedTimeToUtc } from 'date-fns-tz';
 })
 export class CalendarCardExampleComponent implements OnChanges {
   selectedDate: Date;
-  displayDate: string;
   @Input() disableWeekends = false;
   @Input() disablePastDates = false;
   @Input() disableFutureDates = false;
@@ -39,11 +38,7 @@ export class CalendarCardExampleComponent implements OnChanges {
         // be misleading and confusing
         if (this.useTimezoneUTC) {
           // realign local -> selectedDate
-          this.selectedDate = zonedTimeToUtc(
-            // this.subtractTimezoneOffset(this.selectedDate),
-            this.selectedDate,
-            this.timeZoneName
-          );
+          this.selectedDate = zonedTimeToUtc(this.selectedDate, this.timeZoneName);
         } else {
           // realign UTC -> local
           this.selectedDate = utcToZonedTime(this.selectedDate, this.timeZoneName);
@@ -54,9 +49,6 @@ export class CalendarCardExampleComponent implements OnChanges {
 
   onDateChange(selectedDate: Date) {
     this.selectedDate = selectedDate;
-    this.displayDate = format(this.selectedDate, 'yyyy-MM-dd HH:mm:ssXXX', {
-      timeZone: this.timeZoneName,
-    });
   }
 
   selectNextMonth() {
@@ -79,9 +71,5 @@ export class CalendarCardExampleComponent implements OnChanges {
     this.disabledDates = [3, 5, 7, 10, 15, 25, 28, 35].map((daysFromToday) =>
       addDays(today, daysFromToday)
     );
-  }
-
-  private subtractTimezoneOffset(date: Date): Date {
-    return new Date(date.getTime() - date.getTimezoneOffset() * 60 * 1000);
   }
 }
