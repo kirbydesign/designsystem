@@ -1,21 +1,65 @@
 import { fakeAsync, tick } from '@angular/core/testing';
-import { IonContent } from '@ionic/angular';
-import { Spectator } from '@ngneat/spectator';
+import { RouterTestingModule } from '@angular/router/testing';
+import { IonButtons, IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular';
+import { createComponentFactory, Spectator } from '@ngneat/spectator';
+import { MockComponents } from 'ng-mocks';
 
 import { KirbyAnimation } from '../../../animation/kirby-animation';
 import { TestHelper } from '../../../testing/test-helper';
+import { WindowRef } from '../../../types';
+import { ButtonComponent } from '../../button/button.component';
 import { IconComponent } from '../../icon/icon.component';
+import { PageProgressComponent } from '../../page';
+import { ModalFooterComponent } from '../footer/modal-footer.component';
 
 import { ModalWrapperComponent } from './modal-wrapper.component';
 import {
   DynamicFooterEmbeddedComponent,
   DynamicPageProgressEmbeddedComponent,
+  InputEmbeddedComponent,
   ModalWrapperTestBuilder,
+  StaticFooterEmbeddedComponent,
+  StaticPageProgressEmbeddedComponent,
 } from './modal-wrapper.testbuilder';
 
 describe('ModalWrapperComponent', () => {
-  const modalWrapperTestBuilder = new ModalWrapperTestBuilder();
+  const createComponent = createComponentFactory({
+    component: ModalWrapperComponent,
+    imports: [RouterTestingModule],
+    entryComponents: [
+      StaticFooterEmbeddedComponent,
+      DynamicFooterEmbeddedComponent,
+      InputEmbeddedComponent,
+      StaticPageProgressEmbeddedComponent,
+      DynamicPageProgressEmbeddedComponent,
+    ],
+    providers: [
+      {
+        provide: WindowRef,
+        useValue: <WindowRef>{ nativeWindow: window },
+      },
+    ],
+    declarations: [
+      MockComponents(
+        IconComponent,
+        ButtonComponent,
+        PageProgressComponent,
+        ModalFooterComponent,
+        IonHeader,
+        IonToolbar,
+        IonTitle,
+        IonButtons,
+        IonContent
+      ),
+    ],
+  });
+
+  let modalWrapperTestBuilder = new ModalWrapperTestBuilder(createComponent);
   let spectator: Spectator<ModalWrapperComponent>;
+
+  beforeEach(() => {
+    modalWrapperTestBuilder = new ModalWrapperTestBuilder(createComponent);
+  });
 
   it('should create', () => {
     spectator = modalWrapperTestBuilder.build();
@@ -27,10 +71,7 @@ describe('ModalWrapperComponent', () => {
 
   describe('title', () => {
     beforeEach(() => {
-      spectator = modalWrapperTestBuilder
-        .title('Test title')
-        .flavor('modal')
-        .build();
+      spectator = modalWrapperTestBuilder.title('Test title').flavor('modal').build();
     });
 
     afterEach(() => {
@@ -60,10 +101,7 @@ describe('ModalWrapperComponent', () => {
 
   describe('sizing', () => {
     beforeEach(() => {
-      spectator = modalWrapperTestBuilder
-        .flavor('modal')
-        .withEmbeddedInputComponent()
-        .build();
+      spectator = modalWrapperTestBuilder.flavor('modal').withEmbeddedInputComponent().build();
     });
     afterEach(() => {
       spectator.fixture.destroy();
@@ -124,10 +162,7 @@ describe('ModalWrapperComponent', () => {
 
     describe('when flavor is modal', () => {
       beforeEach(() => {
-        spectator = modalWrapperTestBuilder
-          .flavor('modal')
-          .interactWithBackground()
-          .build();
+        spectator = modalWrapperTestBuilder.flavor('modal').interactWithBackground().build();
         spectator.element.style.height = `${elementHeight}px`;
         spectator.element.style.width = `${elementWidth}px`;
         spectator.element.style.overflow = 'hidden';
@@ -167,10 +202,7 @@ describe('ModalWrapperComponent', () => {
 
     describe('when flavor is drawer', () => {
       beforeEach(() => {
-        spectator = modalWrapperTestBuilder
-          .flavor('drawer')
-          .interactWithBackground()
-          .build();
+        spectator = modalWrapperTestBuilder.flavor('drawer').interactWithBackground().build();
         spectator.element.style.height = `${elementHeight}px`;
         spectator.element.style.width = `${elementWidth}px`;
         spectator.element.style.overflow = 'hidden';
@@ -367,10 +399,7 @@ describe('ModalWrapperComponent', () => {
   describe('with embedded page progress component', () => {
     describe('with static page progress', () => {
       beforeEach(() => {
-        spectator = modalWrapperTestBuilder
-          .flavor('modal')
-          .withStaticPageProgress()
-          .build();
+        spectator = modalWrapperTestBuilder.flavor('modal').withStaticPageProgress().build();
         spectator.detectComponentChanges();
       });
 
@@ -384,9 +413,8 @@ describe('ModalWrapperComponent', () => {
         const ionToolbarElement = spectator.query('ion-toolbar');
         const embeddedComponentElement = ionContentElement.firstElementChild;
         const embeddedPageProgress = embeddedComponentElement.querySelector('kirby-page-progress');
-        const pageProgressAsIonToolbarChild = ionToolbarElement.querySelector(
-          'kirby-page-progress'
-        );
+        const pageProgressAsIonToolbarChild =
+          ionToolbarElement.querySelector('kirby-page-progress');
 
         expect(embeddedPageProgress).toBeNull();
         expect(pageProgressAsIonToolbarChild).not.toBeNull();
@@ -395,10 +423,7 @@ describe('ModalWrapperComponent', () => {
 
     describe('with dynamic page progress', () => {
       beforeEach(() => {
-        spectator = modalWrapperTestBuilder
-          .flavor('modal')
-          .withDynamicPageProgress()
-          .build();
+        spectator = modalWrapperTestBuilder.flavor('modal').withDynamicPageProgress().build();
         spectator.detectComponentChanges();
       });
 
@@ -420,9 +445,8 @@ describe('ModalWrapperComponent', () => {
         const ionToolbarElement = spectator.query('ion-toolbar');
         const embeddedComponentElement = ionContentElement.firstElementChild;
         const embeddedPageProgress = embeddedComponentElement.querySelector('kirby-page-progress');
-        const pageProgressAsIonToolbarChild = ionToolbarElement.querySelector(
-          'kirby-page-progress'
-        );
+        const pageProgressAsIonToolbarChild =
+          ionToolbarElement.querySelector('kirby-page-progress');
         expect(embeddedPageProgress).toBeNull();
         expect(pageProgressAsIonToolbarChild).not.toBeNull();
       });
@@ -517,10 +541,7 @@ describe('ModalWrapperComponent', () => {
 
   describe('with embedded component with dynamic footer', () => {
     beforeEach(() => {
-      spectator = modalWrapperTestBuilder
-        .flavor('modal')
-        .withDynamicFooter()
-        .build();
+      spectator = modalWrapperTestBuilder.flavor('modal').withDynamicFooter().build();
       spectator.detectComponentChanges();
     });
 
@@ -696,10 +717,7 @@ describe('ModalWrapperComponent', () => {
     let input: HTMLInputElement;
 
     beforeEach(async () => {
-      spectator = modalWrapperTestBuilder
-        .flavor('drawer')
-        .withEmbeddedInputComponent()
-        .build();
+      spectator = modalWrapperTestBuilder.flavor('drawer').withEmbeddedInputComponent().build();
 
       // Ensure ion-content gets height
       // or embedded component won't be visible:
