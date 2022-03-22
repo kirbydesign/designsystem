@@ -1,14 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterTestingModule } from '@angular/router/testing';
-import { IonButtons, IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular';
-import { createComponentFactory, Spectator } from '@ngneat/spectator';
-import { MockComponents } from 'ng-mocks';
-
-import { WindowRef } from '../../../types';
-import { ButtonComponent } from '../../button/button.component';
-import { IconComponent } from '../../icon';
-import { PageProgressComponent } from '../../page/page.component';
-import { ModalFooterComponent } from '../footer/modal-footer.component';
+import { Spectator, SpectatorFactory } from '@ngneat/spectator';
 
 import { ModalConfig } from './config/modal-config';
 import { ModalWrapperComponent } from './modal-wrapper.component';
@@ -16,39 +7,11 @@ import { ModalWrapperComponent } from './modal-wrapper.component';
 export class ModalWrapperTestBuilder {
   private config: ModalConfig = {
     title: null,
-    component: null,
+    component: DefaultTestComponent,
     flavor: null,
   };
-  private readonly createComponent = createComponentFactory({
-    component: ModalWrapperComponent,
-    imports: [RouterTestingModule],
-    entryComponents: [
-      StaticFooterEmbeddedComponent,
-      DynamicFooterEmbeddedComponent,
-      InputEmbeddedComponent,
-      StaticPageProgressEmbeddedComponent,
-      DynamicPageProgressEmbeddedComponent,
-    ],
-    providers: [
-      {
-        provide: WindowRef,
-        useValue: <WindowRef>{ nativeWindow: window },
-      },
-    ],
-    declarations: [
-      MockComponents(
-        IconComponent,
-        ButtonComponent,
-        PageProgressComponent,
-        ModalFooterComponent,
-        IonHeader,
-        IonToolbar,
-        IonTitle,
-        IonButtons,
-        IonContent
-      ),
-    ],
-  });
+
+  constructor(private readonly createComponent: SpectatorFactory<ModalWrapperComponent>) {}
 
   title(title: string) {
     this.config.title = title;
@@ -125,6 +88,11 @@ export class ModalWrapperTestBuilder {
     return spectator;
   }
 }
+
+@Component({
+  template: ``,
+})
+export class DefaultTestComponent {}
 
 @Component({
   template: `

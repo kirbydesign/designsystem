@@ -1,21 +1,65 @@
 import { fakeAsync, tick } from '@angular/core/testing';
-import { IonContent } from '@ionic/angular';
-import { Spectator } from '@ngneat/spectator';
+import { RouterTestingModule } from '@angular/router/testing';
+import { IonButtons, IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular';
+import { createComponentFactory, Spectator } from '@ngneat/spectator';
+import { MockComponents } from 'ng-mocks';
 
 import { KirbyAnimation } from '../../../animation/kirby-animation';
 import { TestHelper } from '../../../testing/test-helper';
+import { WindowRef } from '../../../types';
+import { ButtonComponent } from '../../button/button.component';
 import { IconComponent } from '../../icon/icon.component';
+import { PageProgressComponent } from '../../page';
+import { ModalFooterComponent } from '../footer/modal-footer.component';
 
 import { ModalWrapperComponent } from './modal-wrapper.component';
 import {
   DynamicFooterEmbeddedComponent,
   DynamicPageProgressEmbeddedComponent,
+  InputEmbeddedComponent,
   ModalWrapperTestBuilder,
+  StaticFooterEmbeddedComponent,
+  StaticPageProgressEmbeddedComponent,
 } from './modal-wrapper.testbuilder';
 
 describe('ModalWrapperComponent', () => {
-  const modalWrapperTestBuilder = new ModalWrapperTestBuilder();
+  const createComponent = createComponentFactory({
+    component: ModalWrapperComponent,
+    imports: [RouterTestingModule],
+    entryComponents: [
+      StaticFooterEmbeddedComponent,
+      DynamicFooterEmbeddedComponent,
+      InputEmbeddedComponent,
+      StaticPageProgressEmbeddedComponent,
+      DynamicPageProgressEmbeddedComponent,
+    ],
+    providers: [
+      {
+        provide: WindowRef,
+        useValue: <WindowRef>{ nativeWindow: window },
+      },
+    ],
+    declarations: [
+      MockComponents(
+        IconComponent,
+        ButtonComponent,
+        PageProgressComponent,
+        ModalFooterComponent,
+        IonHeader,
+        IonToolbar,
+        IonTitle,
+        IonButtons,
+        IonContent
+      ),
+    ],
+  });
+
+  let modalWrapperTestBuilder = new ModalWrapperTestBuilder(createComponent);
   let spectator: Spectator<ModalWrapperComponent>;
+
+  beforeEach(() => {
+    modalWrapperTestBuilder = new ModalWrapperTestBuilder(createComponent);
+  });
 
   it('should create', () => {
     spectator = modalWrapperTestBuilder.build();
