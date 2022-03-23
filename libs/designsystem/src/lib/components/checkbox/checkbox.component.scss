@@ -82,11 +82,12 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
   }
 
   ion-checkbox {
-    @include interaction-state.transition; // TODO: Make transition work
     @include interaction-state.apply-focus-part($part: 'container');
     @include interaction-state.apply-hover {
       --background: #{_get-hover-color('white', 's')};
     }
+
+    --transition: #{utils.get-transition-duration('quick')};
 
     --size: #{$checkbox-icon-size};
     --checkmark-width: #{utils.size('xxxs')};
