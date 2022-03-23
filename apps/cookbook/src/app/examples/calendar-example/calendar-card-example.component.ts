@@ -38,7 +38,10 @@ export class CalendarCardExampleComponent implements OnChanges {
         // be misleading and confusing
         if (this.useTimezoneUTC) {
           // realign local -> selectedDate
-          this.selectedDate = zonedTimeToUtc(this.selectedDate, this.timeZoneName);
+          this.selectedDate = zonedTimeToUtc(
+            this.subtractTimezoneOffset(this.selectedDate),
+            this.timeZoneName
+          );
         } else {
           // realign UTC -> local
           this.selectedDate = utcToZonedTime(this.selectedDate, this.timeZoneName);
@@ -71,5 +74,9 @@ export class CalendarCardExampleComponent implements OnChanges {
     this.disabledDates = [3, 5, 7, 10, 15, 25, 28, 35].map((daysFromToday) =>
       addDays(today, daysFromToday)
     );
+  }
+
+  private subtractTimezoneOffset(date: Date): Date {
+    return new Date(date.getTime() - date.getTimezoneOffset() * 60 * 1000);
   }
 }
