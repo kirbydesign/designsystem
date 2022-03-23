@@ -64,6 +64,13 @@
   text="Open in full height"
 ></kirby-checkbox>
 
+<kirby-checkbox
+  [checked]="collapseTitle"
+  (checkedChange)="toggleCollapseTitle($event)"
+  [disabled]="disabled"
+  text="Collapse title"
+></kirby-checkbox>
+
 <ng-container *ngIf="interactWithBackground !== undefined || customCssClass !== undefined">
   <kirby-divider [hasMargin]="true"></kirby-divider>
   <p>Custom modal/drawer:</p>
