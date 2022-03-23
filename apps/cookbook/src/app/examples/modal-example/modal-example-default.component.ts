@@ -15,6 +15,7 @@ const config = {
       <cookbook-modal-example-configuration [disabled]="preventInteraction" [(showDummyKeyboard)]="showDummyKeyboard"
       [(showPageProgress)]="showPageProgress"
       [(showFooter)]="showFooter"
+      [(collapseTitle)]="collapseTitle"
       [(showDummyContent)]="showDummyContent"
       [(delayLoadDummyContent)]="delayLoadDummyContent"
       [(loadAdditionalContent)]="loadAdditionalContent"
@@ -207,6 +208,7 @@ export class ModalExampleDefaultComponent {
   );
   showPageProgress = false;
   showFooter = false;
+  collapseTitle = false;
   showDummyContent = true;
   delayLoadDummyContent = true;
   loadAdditionalContent = false;
@@ -226,6 +228,7 @@ export class ModalExampleDefaultComponent {
     this.preventInteraction = this.interactWithBackground;
     const config: ModalConfig = {
       flavor,
+      collapseTitle: this.collapseTitle,
       component: EmbeddedModalExampleComponent,
       interactWithBackground: this.interactWithBackground,
       cssClass: this.customCssClass ? ['my-custom-modal-class'] : [],
