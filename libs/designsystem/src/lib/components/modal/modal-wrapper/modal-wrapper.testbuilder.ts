@@ -7,7 +7,7 @@ import { ModalWrapperComponent } from './modal-wrapper.component';
 export class ModalWrapperTestBuilder {
   private config: ModalConfig = {
     title: null,
-    component: DefaultTestComponent,
+    component: null,
     flavor: null,
   };
 
@@ -88,11 +88,6 @@ export class ModalWrapperTestBuilder {
     return spectator;
   }
 }
-
-@Component({
-  template: ``,
-})
-export class DefaultTestComponent {}
 
 @Component({
   template: `
