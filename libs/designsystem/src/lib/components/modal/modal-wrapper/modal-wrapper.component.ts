@@ -458,11 +458,22 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   /* TODO: Rewrite to make this function independent of element order. 
      See: https://github.com/kirbydesign/designsystem/issues/2096
   */
-  private getEmbeddedComponentElement() {
+  private getEmbeddedComponentElement(): null | Element {
     const contentElementChildren = Array.from(
       this.ionContentElement.nativeElement.children
     ).reverse(); // Reverse makes it easier to retrieve the last children in the list
-    return !!this.config.modalRoute ? contentElementChildren[0] : contentElementChildren[1];
+
+    const embeddedComponentElement = !!this.config.modalRoute
+      ? contentElementChildren[0]
+      : contentElementChildren[1];
+
+    /* 
+      As ModalConfig.component has type 'any' all values are valid for component; 
+      explicitly handle the case where no embedded component element is found due to 
+      this.
+    */
+    if (!embeddedComponentElement) return null;
+    return embeddedComponentElement;
   }
 
   private getEmbeddedFooterElement() {
@@ -498,6 +509,8 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
 
   private observeEmbeddedElements() {
     const parentElement = this.getEmbeddedComponentElement();
+    if (parentElement === null) return; // Mute observe warning when parentElement is null
+
     this.mutationObserver.observe(parentElement, {
       childList: true, // Listen for addition or removal of child nodes
     });
