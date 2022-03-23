@@ -7,6 +7,12 @@
   --kirby-card-footer-background-color: #{utils.get-color('white')};
   --kirby-card-footer-color: #{utils.get-color('white-contrast')};
 
+  @include interaction-state.extend-content {
+    display: inherit;
+    flex-direction: inherit;
+    justify-content: inherit;
+  }
+
   border-radius: utils.$border-radius;
   box-shadow: utils.get-elevation(2);
   color: var(--kirby-card-main-color);
@@ -38,11 +44,12 @@
   }
 
   &[role='button'] {
+    @include interaction-state.initialize-layer;
+    @include interaction-state.apply-hover('s');
     @include interaction-state.apply-focus-visible($shadow: utils.get-elevation(2));
     &.highlighted {
       @include interaction-state.apply-focus-visible($shadow: utils.get-elevation(4));
     }
-    cursor: pointer;
     outline: none;
   }
 }
