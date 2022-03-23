@@ -23,6 +23,15 @@
 ></kirby-checkbox>
 
 <kirby-checkbox
+  *ngIf="displayFooterAsInline !== undefined"
+  [checked]="displayFooterAsInline"
+  (checkedChange)="toggleDisplayFooterAsInline($event)"
+  [disabled]="disabled || !showFooter"
+  text="Display footer as inline"
+  class="indent"
+></kirby-checkbox>
+
+<kirby-checkbox
   *ngIf="disableScroll !== undefined"
   [checked]="disableScroll"
   (checkedChange)="toggleDisableScroll($event)"
