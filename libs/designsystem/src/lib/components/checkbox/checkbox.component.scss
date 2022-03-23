@@ -1,3 +1,4 @@
+@use "sass:color";
 @use "sass:map";
 @use '~@kirbydesign/core/src/scss/interaction-state';
 @use '~@kirbydesign/core/src/scss/utils';
@@ -12,6 +13,23 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
   @return ($target-height - $checkbox-icon-size) * 0.5;
 }
 
+@function _get-hover-color($variant, $loudness: interaction-state.$default-loudness, $flip: false) {
+  $_background: utils.get-color($variant, $getValueOnly: true);
+
+  $_lightness: 0% !default;
+
+  @if $flip {
+    $_lightness: utils.get-loudness($loudness);
+  } @else {
+    // negative number means "make it darker"
+    $_lightness: -1 * utils.get-loudness($loudness);
+  }
+
+  $hover-color: #{color.scale($_background, $lightness: $_lightness)};
+
+  @return $hover-color;
+}
+
 :host {
   display: inline-block;
 
@@ -19,6 +37,10 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
     --checkmark-color: #{utils.get-color('black')};
     --background-checked: #{utils.get-color('success')};
     --border-color-checked: #{utils.get-color('success')};
+
+    @include interaction-state.apply-hover {
+      --background-checked: #{_get-hover-color('success')};
+    }
 
     &:active {
       --background-checked: #{utils.get-color('success-shade')};
@@ -30,6 +52,10 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
     --checkmark-color: #{utils.get-color('white')};
     --background-checked: #{utils.get-color('black')};
     --border-color-checked: #{utils.get-color('black')};
+
+    @include interaction-state.apply-hover {
+      --background-checked: #{_get-hover-color('black', 'xxl', $flip: true)};
+    }
 
     &:active {
       --checkmark-color: #{utils.get-color('white-shade')};
@@ -56,7 +82,11 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
   }
 
   ion-checkbox {
+    @include interaction-state.transition; // TODO: Make transition work
     @include interaction-state.apply-focus-part($part: 'container');
+    @include interaction-state.apply-hover {
+      --background: #{_get-hover-color('white', 's')};
+    }
 
     --size: #{$checkbox-icon-size};
     --checkmark-width: #{utils.size('xxxs')};
