@@ -46,6 +46,7 @@ import { SlideButtonExampleComponent } from './slide-button-example/slide-button
 import { CookbookExampleCardContentComponent } from './slides-example/example-card-content';
 import { SlidesExampleComponent } from './slides-example/slides-example.component';
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
+import { StockChartDeprecatedExampleComponent } from './stock-chart-deprecated-example/stock-chart-deprecated-example.component';
 import { StylingHtmlListsExampleComponent } from './styling-html-lists-example/styling-html-lists-example.component';
 import { TabExampleComponent } from './tabs-example/tab/tab-example.component';
 import { TabsExampleComponent } from './tabs-example/tabs-example.component';
@@ -107,6 +108,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   DividerExampleComponent,
   ReorderListExampleComponent,
   DropdownExampleComponent,
+  StockChartDeprecatedExampleComponent,
   ProgressCircleExampleComponent,
   FlagExampleComponent,
   SlidesExampleComponent,

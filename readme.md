@@ -77,7 +77,6 @@ In each `.scss` file where you need to access the Sass utility functions from Ki
 ```
 
 #### Generic Print Styles (Optional)
-
 Kirby also provides a generic print stylesheet. It includes the basics. You most likely have to add local print styles specific to your app as well.
 
 Import it into your app, e.g., in `src/styles.scss` or in your local print stylesheet if you have one:
@@ -329,6 +328,10 @@ Finally, add the following to `index.html` :
 ```
 
 _**Please note:** If you don't want the additional http request for the polyfill loader, you can copy the contents of `node_modules/@kirbydesign/designsystem/polyfills/resize-observer-polyfill-loader.js` into a `script` tag in `index.html` instead_
+
+## Chart Components
+
+The Kirby chart components use Highcharts. Note that this is a licensed product.
 
 [angular]: https://angular.io
 [jasmine]: https://jasmine.github.io/
