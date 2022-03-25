@@ -1,3 +1,4 @@
+@use "sass:color";
 @use "sass:map";
 @use '~@kirbydesign/core/src/scss/interaction-state';
 @use '~@kirbydesign/core/src/scss/utils';
@@ -73,7 +74,14 @@ ion-radio {
   --color-checked: #{utils.get-color('success')};
 
   &::part(container) {
+    @include interaction-state.transition(background-color);
     background-color: utils.get-color('white');
+  }
+
+  @include interaction-state.apply-hover {
+    &::part(container) {
+      background-color: interaction-state.get-state-color('white', 's');
+    }
   }
 
   &::part(mark) {

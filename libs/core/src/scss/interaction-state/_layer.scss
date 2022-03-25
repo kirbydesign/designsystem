@@ -1,3 +1,4 @@
+@use 'sass:list';
 @use 'sass:math';
 @use 'sass:meta';
 @use '../utils';
@@ -80,11 +81,13 @@ $default-loudness: 'm';
 }
 
 /// Apply streamlined transition to interaction state changes
-/// @param {*} $property [all]
-@mixin transition($property: all) {
-  $duration: utils.get-transition-duration('quick');
-  $timing-function: utils.get-transition-easing('static');
-  $delay: 0ms;
-
-  transition: $property $duration $timing-function $delay;
+/// @param {*} $property-list [all]
+@mixin transition($property-list...) {
+  @if list.length($property-list) == 0 {
+    $property-list: all;
+  }
+  transition-property: $property-list;
+  transition-duration: utils.get-transition-duration('quick');
+  transition-timing-function: utils.get-transition-easing('static');
+  transition-delay: 0ms;
 }
