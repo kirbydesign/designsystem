@@ -1,0 +1,20 @@
+@use 'sass:color';
+@use 'layer';
+@use '../utils';
+
+@function get-state-color($variant, $loudness: layer.$default-loudness, $flip: false) {
+  $_background: utils.get-color($variant, $getValueOnly: true);
+
+  $_lightness: 0% !default;
+
+  @if $flip {
+    $_lightness: utils.get-loudness($loudness);
+  } @else {
+    // negative number means "make it darker"
+    $_lightness: -1 * utils.get-loudness($loudness);
+  }
+
+  $hover-color: #{color.scale($_background, $lightness: $_lightness)};
+
+  @return $hover-color;
+}
