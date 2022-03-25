@@ -1,0 +1,30 @@
+<kirby-page defaultBackHref="/">
+  <!-- Fixed Page Actions -->
+  <kirby-page-actions *kirbyPageActions="{ fixed: true }">
+    <button kirby-button (click)="onMoreSelect()">
+      <kirby-icon name="more"></kirby-icon>
+    </button>
+  </kirby-page-actions>
+
+  <!-- Sticky Page Actions -->
+  <kirby-page-actions *kirbyPageActions="{ sticky: true }">
+    <button kirby-button (click)="onCogSelect()">
+      <kirby-icon name="cog"></kirby-icon>
+    </button>
+  </kirby-page-actions>
+
+  <!-- Custom Page Title -->
+  <div *kirbyPageTitle>
+    <h1>Custom Title</h1>
+  </div>
+  <!-- Custom Page Subtitle -->
+  <div *kirbyPageSubtitle>
+    Custom subtitle
+  </div>
+  <ng-template kirbyPageToolbarTitle>
+    Toolbar Title
+  </ng-template>
+
+  <!-- Custom Content Template (without wrapper) -->
+  <div *kirbyPageContent [innerHTML]="content"></div>
+</kirby-page>

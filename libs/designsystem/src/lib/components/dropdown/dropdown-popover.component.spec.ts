@@ -261,7 +261,7 @@ describe('DropdownComponent (popover version)', () => {
     });
 
     describe('when configured with popout direction', () => {
-      it('should open card to the left when popout=left', fakeAsync(() => {
+      xit('should open card to the left when popout=left', fakeAsync(() => {
         spectator.component.popout = HorizontalDirection.left;
         spectator.element.style.cssFloat = 'right';
 

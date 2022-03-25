@@ -9,30 +9,6 @@ import { BasePageExampleComponent } from '../base-page-example.component';
 const config = {
   template: `<kirby-page defaultBackHref="/">
 
-  <!-- Custom Page Title -->
-  <div *kirbyPageTitle>
-    <h1>
-      <ng-container *ngTemplateOutlet="customTitle"></ng-container>
-    </h1>
-  </div>
-
-  <!-- Custom Page Subtitle -->
-  <div *kirbyPageSubtitle>
-<span>Custom subtitle with a long long long long name</span>
-  </div>
-
-  <ng-template kirbyPageToolbarTitle>
-    <ng-container *ngTemplateOutlet="customTitle"></ng-container>
-  </ng-template>
-
-  <ng-template #customTitle>
-    Custom Title with a very long name
-  </ng-template>
-
-  <ng-template #customSubtitle>
-    Custom subtitle of custom title with a very long name
-  </ng-template>
-  
   <!-- Fixed Page Actions -->
   <kirby-page-actions *kirbyPageActions="{fixed: true}">
     <button kirby-button (click)="onMoreSelect()">
@@ -47,23 +23,25 @@ const config = {
     </button>
   </kirby-page-actions>
   
+
+  <!-- Custom Page Title -->
+  <div *kirbyPageTitle>
+    <h1>Custom Title</h1>
+  </div>
+  <!-- Custom Page Subtitle -->
+  <div *kirbyPageSubtitle>
+    Custom subtitle
+  </div>
+  <ng-template kirbyPageToolbarTitle>
+     Toolbar Title
+  </ng-template>
+
   <!-- Custom Content Template (without wrapper) -->
-  <div *kirbyPageContent [innerHTML]="content"></div>
-  
-  <!-- Fixed Content -->
-  <kirby-fab-sheet *kirbyPageContent="{fixed: true}" horizontalAlignment="right">
-    <kirby-icon name="write-message"></kirby-icon>
-    <kirby-action-sheet
-      header="Your action sheet header"
-      subheader="Your action sheet subheader"
-      [items]="items"
-      (itemSelect)="onItemSelect($event)">
-    </kirby-action-sheet>
-  </kirby-fab-sheet>
+  <div *kirbyPageContent [innerHTML]="content"></div>  
 </kirby-page>`,
 };
 @Component({
-  template: config.template,
+  templateUrl: './page-advanced-example.component.html',
   styles: ['.custom-page-title { display: inline-flex; }'],
 })
 export class PageAdvancedExampleComponent extends BasePageExampleComponent {

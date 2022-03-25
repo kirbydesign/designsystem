@@ -65,10 +65,35 @@ ion-title {
 }
 
 ion-back-button {
-  --color: #{utils.get-color('black')};
+  --color: #{utils.get-color('white-contrast')};
+  --background: #{utils.get-color('white')};
+
+  --background-focused: none;
   --icon-font-size: 24px;
+
   height: utils.$fat-finger-size;
   width: utils.$fat-finger-size;
+
+  // Properly center back-icon
+  &::part(icon) {
+    margin-inline-start: unset;
+    margin-inline-end: unset;
+  }
+
+  &::part(native) {
+    border-radius: utils.$border-radius-round;
+    overflow: hidden; // required for border radius to work
+
+    border: 1px solid transparent;
+    @include utils.focus() {
+      border: 1px solid #{utils.$focus-ring-color};
+    }
+  }
+}
+
+ion-toolbar.content-scrolled ion-back-button::part(native) {
+  --color: #{utils.get-color('black')};
+  --background: transparent;
 }
 
 /*

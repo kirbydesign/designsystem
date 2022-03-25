@@ -237,9 +237,19 @@ $button-width: (
   &.attention-level2,
   &.attention-level3,
   &.attention-level4 {
+    @include button-attentionlevel2;
+  }
+}
+
+:host-context(ion-toolbar.content-scrolled kirby-page-actions) {
+  &.attention-level1,
+  &.attention-level2,
+  &.attention-level3,
+  &.attention-level4 {
     @include button-attentionlevel4;
   }
 }
+
 /* clean-css ignore:end */
 
 // Temp fix for https://github.com/angular/angular-cli/issues/13854#issuecomment-470831308
