@@ -4,8 +4,8 @@
 
 :host {
   @include interaction-state.transition(background-color);
-  @include interaction-state.apply-hover($loudness: 's') {
-    background-color: interaction-state.get-state-color('white');
+  @include interaction-state.apply-hover() {
+    background-color: interaction-state.get-state-color('white', 's');
     cursor: text;
   }
 
