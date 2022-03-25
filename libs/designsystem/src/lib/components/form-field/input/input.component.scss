@@ -1,7 +1,14 @@
 @use '../form-field-inputs.shared' as shared;
+@use "~@kirbydesign/core/src/scss/interaction-state";
 @use "~@kirbydesign/core/src/scss/utils";
 
 :host {
+  @include interaction-state.transition(background-color);
+  @include interaction-state.apply-hover($loudness: 's') {
+    background-color: interaction-state.get-state-color('white');
+    cursor: text;
+  }
+
   &[type='number'] {
     //fallback
     appearance: textfield;
