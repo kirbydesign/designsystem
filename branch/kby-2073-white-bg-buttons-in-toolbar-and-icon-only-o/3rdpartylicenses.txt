@@ -472,9 +472,6 @@ firebase/auth
 
 firebase/firestore
 
-highcharts
-https://www.highcharts.com/license
-
 inputmask
 MIT
 Copyright (c) 2010 - 2018 Robin Herbots
