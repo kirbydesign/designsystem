@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar [class.content-scrolled]="isContentScrolled">
     <ion-buttons slot="start">
       <ion-back-button
         text=""
@@ -13,18 +13,10 @@
         <ng-container *ngTemplateOutlet="toolbarTitleTemplate"></ng-container>
       </div>
     </ion-title>
-    <ion-buttons
-      class="hide"
-      slot="primary"
-      [class.fade-in]="toolbarStickyActionsVisible && stickyActionsTemplate"
-    >
+    <ion-buttons class="hide" slot="primary" [class.fade-in]="!!stickyActionsTemplate">
       <ng-container *ngTemplateOutlet="stickyActionsTemplate"></ng-container>
     </ion-buttons>
-    <ion-buttons
-      class="hide"
-      slot="secondary"
-      [class.fade-in]="toolbarFixedActionsVisible && fixedActionsTemplate"
-    >
+    <ion-buttons class="hide" slot="secondary" [class.fade-in]="!!fixedActionsTemplate">
       <ng-container *ngTemplateOutlet="fixedActionsTemplate"></ng-container>
     </ion-buttons>
   </ion-toolbar>
@@ -48,7 +40,7 @@
         'text-right': titleAlignment === 'right'
       }"
     >
-      <div #pageTitle class="page-title" [class.has-actions]="hasActionsInPage">
+      <div #pageTitle class="page-title" [class.has-actions]="!!pageActionsTemplate">
         <ng-container
           *ngTemplateOutlet="customTitleTemplate || defaultPageTitleTemplate"
         ></ng-container>

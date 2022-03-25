@@ -26,8 +26,9 @@ import {
 } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router, RouterEvent } from '@angular/router';
 import { IonContent, IonFooter, IonHeader } from '@ionic/angular';
+import { ScrollDetail } from '@ionic/core';
 import { Observable, Subject } from 'rxjs';
-import { filter, takeUntil } from 'rxjs/operators';
+import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
 
 import { KirbyAnimation } from '../../animation/kirby-animation';
 import { FitHeadingConfig } from '../../directives/fit-heading/fit-heading.directive';
@@ -36,6 +37,12 @@ import { ModalWrapperComponent } from '../modal/modal-wrapper/modal-wrapper.comp
 import { ModalNavigationService } from '../modal/services/modal-navigation.service';
 import { selectedTabClickEvent } from '../tabs/tab-button/tab-button.events';
 import { TabsComponent } from '../tabs/tabs.component';
+
+/**
+ * Specify scroll event debounce time in ms and scrolled offset from top in pixels
+ */
+const contentScrollDebounceTimeInMS = 10;
+const contentScrolledOffsetInPixels = 15;
 
 type stickyConfig = { sticky: boolean };
 type fixedConfig = { fixed: boolean };
@@ -196,10 +203,8 @@ export class PageComponent
 
   hasPageTitle: boolean;
   hasPageSubtitle: boolean;
-  hasActionsInPage: boolean;
   toolbarTitleVisible: boolean;
-  toolbarFixedActionsVisible: boolean;
-  toolbarStickyActionsVisible: boolean;
+  isContentScrolled: boolean;
 
   fitHeadingConfig: FitHeadingConfig;
 
@@ -215,6 +220,8 @@ export class PageComponent
   private hasEntered: boolean;
 
   private ngOnDestroy$ = new Subject();
+  private contentScrolled$: Observable<ScrollDetail>;
+
   private navigationStart$: Observable<RouterEvent> = this.router.events.pipe(
     takeUntil(this.ngOnDestroy$),
     filter((event: RouterEvent) => event instanceof NavigationStart)
@@ -253,6 +260,16 @@ export class PageComponent
   }
 
   ngAfterViewInit(): void {
+    this.contentScrolled$ = this.content.ionScroll.pipe(
+      takeUntil(this.ngOnDestroy$),
+      debounceTime(contentScrollDebounceTimeInMS),
+      map((event) => event.detail)
+    );
+
+    this.contentScrolled$.subscribe((scrollInfo: ScrollDetail) => {
+      this.isContentScrolled = scrollInfo.scrollTop > contentScrolledOffsetInPixels;
+    });
+
     this.navigationStart$.subscribe((event: NavigationStart) => {
       if (
         !this.urls.includes(event.url) &&
@@ -351,15 +368,12 @@ export class PageComponent
     this.customActions.forEach((pageAction) => {
       if (pageAction.isFixed) {
         this.fixedActionsTemplate = pageAction.template;
-        this.toolbarFixedActionsVisible = true;
+      } else if (pageAction.isSticky) {
+        this.stickyActionsTemplate = pageAction.template;
       } else {
         this.pageActionsTemplate = pageAction.template;
-        if (pageAction.isSticky) {
-          this.stickyActionsTemplate = pageAction.template;
-        }
       }
     });
-    this.hasActionsInPage = !!this.pageActionsTemplate;
   }
 
   private initializeContent() {
@@ -389,7 +403,7 @@ export class PageComponent
     const callback = (entries) => {
       if (initialized) {
         this.toolbarTitleVisible = !entries[0].isIntersecting;
-        this.toolbarStickyActionsVisible = !entries[0].isIntersecting;
+        // this.toolbarStickyActionsVisible = !entries[0].isIntersecting;
         this.changeDetectorRef.detectChanges();
       } else {
         initialized = true;

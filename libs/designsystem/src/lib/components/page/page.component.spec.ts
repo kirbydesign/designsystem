@@ -165,8 +165,8 @@ describe('PageComponent', () => {
     await TestHelper.whenReady(ionToolbar);
     const ionBackButton = spectator.queryHost('ion-toolbar ion-buttons ion-back-button');
     expect(ionBackButton).toHaveComputedStyle({
-      width: fatFingerSize,
-      height: fatFingerSize,
+      width: size('xl'),
+      height: size('xl'),
     });
   });
 
