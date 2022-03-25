@@ -1,10 +1,6 @@
 @use '~@kirbydesign/core/src/scss/interaction-state';
 @use '~@kirbydesign/core/src/scss/utils';
 
-.toggle-checked {
-  --background-checked: #{utils.get-color('success')};
-}
-
 ion-toggle {
   @include interaction-state.apply-focus-part($part: 'track') {
     // Overflow and contain style needed to make focus ring visible as per ionic docs
@@ -12,4 +8,28 @@ ion-toggle {
     overflow: visible;
     contain: none;
   }
+
+  $background: 'semi-dark';
+  $background-checked: 'success';
+  $handle-background: 'white';
+
+  @include interaction-state.apply-hover {
+    // Not checked
+    --background: #{interaction-state.get-state-color($background, 's')};
+    --handle-background: #{interaction-state.get-state-color($handle-background, 's')};
+
+    // Checked
+    --background-checked: #{interaction-state.get-state-color($background-checked, 's')};
+    --handle-background-checked: #{interaction-state.get-state-color($handle-background, 's')};
+  }
+
+  // Not checked
+  --background: #{utils.get-color($background)};
+  --handle-background: #{utils.get-color($handle-background)};
+
+  // Checked
+  --background-checked: #{utils.get-color($background-checked)};
+  --handle-background-checked: #{utils.get-color($handle-background)};
+
+  --handle-transition: #{utils.get-transition-duration('quick')};
 }
