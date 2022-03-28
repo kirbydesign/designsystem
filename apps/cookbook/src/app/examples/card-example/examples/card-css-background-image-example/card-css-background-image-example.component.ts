@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 const config = {
   selector: 'cookbook-card-css-background-image-example',
   template: `
-<kirby-card [hasPadding]="true" themeColor="dark">
+<kirby-card [hasPadding]="true" themeColor="dark" (click)="function()">
   <h3>
     Example using custom css property to set background
   </h3>

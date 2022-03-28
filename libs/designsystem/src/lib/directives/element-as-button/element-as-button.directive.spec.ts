@@ -20,8 +20,4 @@ describe('ElementAsButtonDirective', () => {
     const instance = spectator.directive;
     expect(instance).toBeDefined();
   });
-
-  it('should have cursor: pointer', () => {
-    expect(spectator.element).toHaveComputedStyle({ cursor: 'pointer' });
-  });
 });

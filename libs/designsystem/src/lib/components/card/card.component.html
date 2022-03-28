@@ -1,5 +1,8 @@
-<ng-content select="kirby-card-header"></ng-content>
-<div class="content-wrapper" [class.padding]="hasPadding">
-  <ng-content></ng-content>
+<div class="state-layer" aria-hidden="true"></div>
+<div class="content-layer">
+  <ng-content select="kirby-card-header"></ng-content>
+  <div class="content-wrapper" [class.padding]="hasPadding">
+    <ng-content></ng-content>
+  </div>
+  <ng-content select="kirby-card-footer"></ng-content>
 </div>
-<ng-content select="kirby-card-footer"></ng-content>

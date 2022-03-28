@@ -6,6 +6,7 @@ const config = {
   [hasPadding]="true"
   backgroundImageUrl="https://images.unsplash.com/photo-1560840067-ddcaeb7831d2"
   themeColor="dark"
+  (click)="function()"
 >
   <h3>
     Example using input property to set background
