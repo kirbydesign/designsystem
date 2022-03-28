@@ -32,4 +32,5 @@ ion-toggle {
   --handle-background-checked: #{utils.get-color($handle-background)};
 
   --handle-transition: #{utils.get-transition-duration('quick')};
+  --handle-box-shadow: #{utils.get-elevation(2)};
 }
