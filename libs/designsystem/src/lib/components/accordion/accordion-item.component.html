@@ -1,28 +1,26 @@
-<ng-container>
-  <span class="state-layer" aria-hidden="true"></span>
-  <div class="content-layer">
-    <div
-      (click)="isExpanded = !isExpanded"
-      class="header"
-      role="button"
-      [class.expanded]="isExpanded"
-      [attr.aria-expanded]="isExpanded"
-      [attr.aria-controls]="_contentId"
-      [id]="_titleId"
-    >
-      <div class="title">{{ title }}</div>
-      <kirby-icon name="arrow-down"></kirby-icon>
-    </div>
-    <div
-      class="content"
-      role="region"
-      [attr.aria-labelledby]="_titleId"
-      [id]="_contentId"
-      [@isExpanded]="!!isExpanded"
-    >
-      <div class="content-body">
-        <ng-content></ng-content>
-      </div>
+<span class="state-layer" aria-hidden="true"></span>
+<div class="content-layer">
+  <div
+    (click)="isExpanded = !isExpanded"
+    class="header"
+    role="button"
+    [class.expanded]="isExpanded"
+    [attr.aria-expanded]="isExpanded"
+    [attr.aria-controls]="_contentId"
+    [id]="_titleId"
+  >
+    <div class="title">{{ title }}</div>
+    <kirby-icon name="arrow-down"></kirby-icon>
+  </div>
+  <div
+    class="content"
+    role="region"
+    [attr.aria-labelledby]="_titleId"
+    [id]="_contentId"
+    [@isExpanded]="!!isExpanded"
+  >
+    <div class="content-body">
+      <ng-content></ng-content>
     </div>
   </div>
-</ng-container>
+</div>
