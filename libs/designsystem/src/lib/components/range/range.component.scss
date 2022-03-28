@@ -13,6 +13,9 @@ $knob-shadow: 0 5px 10px 0px rgba(28, 28, 28, 0.3), 0 0 5px 0 rgba(28, 28, 28, 0
 
 ion-range {
   @include interaction-state.apply-focus-part($part: 'knob', $shadow: $knob-shadow);
+  @include interaction-state.apply-hover {
+    --knob-background: #{interaction-state.get-state-color('white', 's')};
+  }
 
   --knob-background: #{utils.get-color('white')};
   --knob-box-shadow: #{$knob-shadow};
@@ -43,6 +46,10 @@ ion-range {
 
   &.range-has-pin {
     padding: 0 $tickWidth * 0.5;
+  }
+
+  &::part(knob) {
+    @include interaction-state.transition(background);
   }
 
   &::part(pin) {
