@@ -18,7 +18,6 @@ $padding: utils.size('s');
   height: utils.size('xxxl');
   padding-left: $padding;
   padding-right: $padding;
-  cursor: pointer;
   user-select: none;
 }
 .title {
@@ -29,6 +28,7 @@ $padding: utils.size('s');
 }
 .content {
   overflow: hidden;
+  cursor: default;
 }
 .content-body {
   padding: 0 $padding $padding $padding;
