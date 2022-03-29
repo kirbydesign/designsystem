@@ -12,6 +12,7 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { CardFooterComponent } from './components/card/card-footer/card-footer.component';
 import { CardHeaderComponent } from './components/card/card-header/card-header.component';
 import { CardComponent } from './components/card/card.component';
+import { ChartDeprecatedComponent } from './components/chart-deprecated/chart-deprecated.component';
 import { ChartModule } from './components/chart/chart.module';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { ChipComponent } from './components/chip/chip.component';
@@ -63,6 +64,7 @@ import { ResizeObserverService } from './components/shared/resize-observer/resiz
 import { SlideButtonComponent } from './components/slide-button/slide-button.component';
 import { SlideDirective, SlidesComponent } from './components/slides/slides.component';
 import { SpinnerModule } from './components/spinner/spinner.module';
+import { StockChartDeprecatedComponent } from './components/stock-chart-deprecated/stock-chart-deprecated.component';
 import { TabsModule } from './components/tabs/tabs.module';
 import { ToastController } from './components/toast/services/toast.controller';
 import { ToastHelper } from './components/toast/services/toast.helper';
@@ -80,6 +82,8 @@ const exportedDeclarations = [
   CardHeaderComponent,
   CardFooterComponent,
   ButtonComponent,
+  ChartDeprecatedComponent,
+  StockChartDeprecatedComponent,
   GridComponent,
   ComponentLoaderDirective,
   AvatarComponent,
