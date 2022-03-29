@@ -9,13 +9,11 @@ describe('StockChartDeprecatedComponent', () => {
 
   const expectedDefaultHeight = 300;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [StockChartDeprecatedComponent],
-      }).compileComponents();
-    })
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [StockChartDeprecatedComponent],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(StockChartDeprecatedComponent);
