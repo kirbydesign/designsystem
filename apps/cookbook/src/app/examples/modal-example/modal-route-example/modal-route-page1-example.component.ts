@@ -8,8 +8,8 @@ import { ActivatedRoute } from '@angular/router';
     <h4>The standard Lorem Ipsum passage, used since the 1500s</h4>
     <span
       >QueryParams:
-      <pre>{{ queryParams$ | async | json }}</pre></span
-    >
+      <pre>{{ queryParams$ | async | json }}</pre>
+    </span>
     <p>
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
       labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco

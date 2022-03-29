@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 declare var require;
 
 @Component({
@@ -7,8 +7,8 @@ declare var require;
   styleUrls: ['./fonts-showcase.component.scss'],
 })
 export class FontsShowcaseComponent implements OnInit {
-  exampleHtml: string = require('!raw-loader!../../examples/fonts-example/fonts-example.component.html')
-    .default;
+  exampleHtml: string =
+    require('!raw-loader!../../examples/fonts-example/fonts-example.component.html').default;
 
   @Output() isCTABoxShown = new EventEmitter();
 

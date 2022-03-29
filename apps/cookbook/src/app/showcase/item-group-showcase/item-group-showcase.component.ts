@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
   templateUrl: './item-group-showcase.component.html',
 })
 export class ItemGroupShowcaseComponent {
-  exampleHtml: string = require('!raw-loader!../../examples/item-group-example/item-group-example.component.html')
-    .default;
+  exampleHtml: string =
+    require('!raw-loader!../../examples/item-group-example/item-group-example.component.html')
+      .default;
 }
