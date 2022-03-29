@@ -140,8 +140,8 @@ export class ChartDeprecatedComponent implements OnChanges {
   }
 
   private setPieInput() {
-    (this.mergedOptions.plotOptions.pie
-      .dataLabels as PlotSeriesDataLabelsOptions).enabled = this.showDataLabels;
+    (this.mergedOptions.plotOptions.pie.dataLabels as PlotSeriesDataLabelsOptions).enabled =
+      this.showDataLabels;
     this.setSeries('pie');
   }
 
