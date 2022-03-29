@@ -36,7 +36,7 @@ $form-field-input-padding: utils.size('s');
   line-height: $form-field-input-line-height;
   outline: none;
   margin: 0;
-  -webkit-appearance: none;
+  appearance: none;
   border-radius: utils.size('s');
   box-shadow: utils.get-elevation(2);
   padding: $form-field-input-padding;
@@ -61,8 +61,8 @@ $form-field-input-padding: utils.size('s');
   }
 
   // for the browsers that has partial support, see https://caniuse.com/#feat=css-placeholder
-  &::-webkit-input-placeholder,
-  &::-ms-input-placeholder {
+  /* stylelint-disable-next-line selector-pseudo-element-no-unknown */
+  &::input-placeholder {
     color: utils.get-text-color('semi-dark');
   }
 }

@@ -1,9 +1,9 @@
 @media print {
   *,
-  ::after,
   ::after {
     color: #000 !important;
     background-color: transparent !important;
+
     --background: transparent !important;
   }
 }
