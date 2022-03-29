@@ -1,4 +1,4 @@
-@use "sass:list";
+@use 'sass:list';
 @use '~@kirbydesign/core/src/scss/utils';
 
 @mixin kirby-keys($start-index, $additional-keys: ()) {
@@ -51,7 +51,7 @@
     > * {
       background-color: utils.get-color('white');
       border-radius: utils.size('xxxs');
-      box-shadow: 0px 2px utils.get-color('semi-dark');
+      box-shadow: 0 2px utils.get-color('semi-dark');
       display: flex;
       align-items: center;
       justify-content: center;
