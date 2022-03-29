@@ -1,5 +1,11 @@
 import { ElementRef, Injectable } from '@angular/core';
-import { ActiveElement, ChartConfiguration, ChartOptions, ScatterDataPoint } from 'chart.js';
+import {
+  ActiveElement,
+  ChartConfiguration,
+  ChartData,
+  ChartOptions,
+  ScatterDataPoint,
+} from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
 import { toDate } from 'date-fns';
 
@@ -271,6 +277,15 @@ export class ChartJSService {
     );
   }
 
+  private datasetsHasLabels(datasets: ChartDataset[], indexAxis = 'x') {
+    if (isNumberArray(datasets)) return false;
+
+    return datasets.some(({ data }) => {
+      if (data === undefined) return false;
+      return data.some((datapoint) => typeof datapoint[indexAxis] === 'string');
+    });
+  }
+
   private createConfigurationObject(
     type: ChartType,
     datasets: ChartDataset[],
@@ -279,23 +294,22 @@ export class ChartJSService {
   ): ChartConfiguration {
     const typeConfig = this.chartConfigService.getTypeConfig(type);
 
+    /* 
+       TODO cases: 
+       1. Labels are given apply them - Should solve Troels lenda timescale issue & Jonas Rodells issue [X]
+       2. No labels are given 
+        - if dataset has labels use those - should solve Jørgens way of passing in data []
+        - else if stock use default stock labels - Troels Lenda [X]
+        - else generate blank labels. Can we just... Not provide them? - solves case where no labels are provided.[X]
+    */
+    const indexAxis = typeConfig?.options?.indexAxis ?? 'x';
     const labelsToApply = (() => {
-      if (type === 'stock') {
-        /* 
-           The time scale will auto generate labels based on data. 
-           It should be possible to pass an empty array to get the default 
-           behaviour of chart.js when using stock chart. 
-
-           TODO: Simplify to always pass labels, if given, to chart.js.
-           Would be a breaking change. See issue: 
-           https://github.com/kirbydesign/designsystem/issues/2085
-        */
-        const shouldUseTimescaleLabels =
-          labels?.length === 0 && options?.scales?.x?.type === 'time';
-        if (shouldUseTimescaleLabels) return labels;
-        return this.getDefaultStockLabels(datasets, this.locale);
-      } else if (labels?.length > 0) {
+      if (this.datasetsHasLabels(datasets, indexAxis)) {
+        return null;
+      } else if (labels !== undefined) {
         return labels;
+      } else if (type === 'stock') {
+        return this.getDefaultStockLabels(datasets, this.locale);
       } else {
         return this.createBlankLabels(datasets);
       }
