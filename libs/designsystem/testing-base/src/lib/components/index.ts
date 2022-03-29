@@ -1,3 +1,5 @@
+//TODO: This needs to be auto-generated!
+
 export { MockAccordionItemComponent } from './mock.accordion-item.component';
 export { MockActionSheetComponent } from './mock.action-sheet.component';
 export { MockAppComponent } from './mock.app.component';
@@ -7,7 +9,6 @@ export { MockCalendarComponent } from './mock.calendar.component';
 export { MockCardFooterComponent } from './mock.card-footer.component';
 export { MockCardHeaderComponent } from './mock.card-header.component';
 export { MockCardComponent } from './mock.card.component';
-export { MockChartDeprecatedComponent } from './mock.chart-deprecated.component';
 export { MockChartComponent } from './mock.chart.component';
 export { MockCheckboxComponent } from './mock.checkbox.component';
 export { MockChipComponent } from './mock.chip.component';
@@ -40,6 +41,7 @@ export {
   MockPageActionsDirective,
   MockPageContentDirective,
   MockPageProgressComponent,
+  MockPageSubtitleDirective,
   MockPageActionsComponent,
   MockPageComponent,
   MockPageContentComponent,
