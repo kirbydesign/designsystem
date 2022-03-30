@@ -1,5 +1,3 @@
-//TODO: This needs to be auto-generated!
-
 export { MockAccordionItemComponent } from './mock.accordion-item.component';
 export { MockActionSheetComponent } from './mock.action-sheet.component';
 export { MockAppComponent } from './mock.app.component';
