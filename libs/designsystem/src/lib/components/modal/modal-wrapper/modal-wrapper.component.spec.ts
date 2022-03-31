@@ -71,7 +71,10 @@ describe('ModalWrapperComponent', () => {
 
   describe('title', () => {
     beforeEach(() => {
-      spectator = modalWrapperTestBuilder.title('Test title').flavor('modal').build();
+      spectator = modalWrapperTestBuilder
+        .title('Test title')
+        .flavor('modal')
+        .build();
     });
 
     afterEach(() => {
@@ -101,7 +104,10 @@ describe('ModalWrapperComponent', () => {
 
   describe('sizing', () => {
     beforeEach(() => {
-      spectator = modalWrapperTestBuilder.flavor('modal').withEmbeddedInputComponent().build();
+      spectator = modalWrapperTestBuilder
+        .flavor('modal')
+        .withEmbeddedInputComponent()
+        .build();
     });
     afterEach(() => {
       spectator.fixture.destroy();
@@ -162,7 +168,10 @@ describe('ModalWrapperComponent', () => {
 
     describe('when flavor is modal', () => {
       beforeEach(() => {
-        spectator = modalWrapperTestBuilder.flavor('modal').interactWithBackground().build();
+        spectator = modalWrapperTestBuilder
+          .flavor('modal')
+          .interactWithBackground()
+          .build();
         spectator.element.style.height = `${elementHeight}px`;
         spectator.element.style.width = `${elementWidth}px`;
         spectator.element.style.overflow = 'hidden';
@@ -202,7 +211,10 @@ describe('ModalWrapperComponent', () => {
 
     describe('when flavor is drawer', () => {
       beforeEach(() => {
-        spectator = modalWrapperTestBuilder.flavor('drawer').interactWithBackground().build();
+        spectator = modalWrapperTestBuilder
+          .flavor('drawer')
+          .interactWithBackground()
+          .build();
         spectator.element.style.height = `${elementHeight}px`;
         spectator.element.style.width = `${elementWidth}px`;
         spectator.element.style.overflow = 'hidden';
@@ -399,7 +411,10 @@ describe('ModalWrapperComponent', () => {
   describe('with embedded page progress component', () => {
     describe('with static page progress', () => {
       beforeEach(() => {
-        spectator = modalWrapperTestBuilder.flavor('modal').withStaticPageProgress().build();
+        spectator = modalWrapperTestBuilder
+          .flavor('modal')
+          .withStaticPageProgress()
+          .build();
         spectator.detectComponentChanges();
       });
 
@@ -413,8 +428,9 @@ describe('ModalWrapperComponent', () => {
         const ionToolbarElement = spectator.query('ion-toolbar');
         const embeddedComponentElement = ionContentElement.firstElementChild;
         const embeddedPageProgress = embeddedComponentElement.querySelector('kirby-page-progress');
-        const pageProgressAsIonToolbarChild =
-          ionToolbarElement.querySelector('kirby-page-progress');
+        const pageProgressAsIonToolbarChild = ionToolbarElement.querySelector(
+          'kirby-page-progress'
+        );
 
         expect(embeddedPageProgress).toBeNull();
         expect(pageProgressAsIonToolbarChild).not.toBeNull();
@@ -423,7 +439,10 @@ describe('ModalWrapperComponent', () => {
 
     describe('with dynamic page progress', () => {
       beforeEach(() => {
-        spectator = modalWrapperTestBuilder.flavor('modal').withDynamicPageProgress().build();
+        spectator = modalWrapperTestBuilder
+          .flavor('modal')
+          .withDynamicPageProgress()
+          .build();
         spectator.detectComponentChanges();
       });
 
@@ -445,8 +464,9 @@ describe('ModalWrapperComponent', () => {
         const ionToolbarElement = spectator.query('ion-toolbar');
         const embeddedComponentElement = ionContentElement.firstElementChild;
         const embeddedPageProgress = embeddedComponentElement.querySelector('kirby-page-progress');
-        const pageProgressAsIonToolbarChild =
-          ionToolbarElement.querySelector('kirby-page-progress');
+        const pageProgressAsIonToolbarChild = ionToolbarElement.querySelector(
+          'kirby-page-progress'
+        );
         expect(embeddedPageProgress).toBeNull();
         expect(pageProgressAsIonToolbarChild).not.toBeNull();
       });
@@ -541,7 +561,10 @@ describe('ModalWrapperComponent', () => {
 
   describe('with embedded component with dynamic footer', () => {
     beforeEach(() => {
-      spectator = modalWrapperTestBuilder.flavor('modal').withDynamicFooter().build();
+      spectator = modalWrapperTestBuilder
+        .flavor('modal')
+        .withDynamicFooter()
+        .build();
       spectator.detectComponentChanges();
     });
 
@@ -717,7 +740,10 @@ describe('ModalWrapperComponent', () => {
     let input: HTMLInputElement;
 
     beforeEach(async () => {
-      spectator = modalWrapperTestBuilder.flavor('drawer').withEmbeddedInputComponent().build();
+      spectator = modalWrapperTestBuilder
+        .flavor('drawer')
+        .withEmbeddedInputComponent()
+        .build();
 
       // Ensure ion-content gets height
       // or embedded component won't be visible:
