@@ -59,10 +59,4 @@ $form-field-input-padding: utils.size('s');
   &::placeholder {
     color: utils.get-text-color('semi-dark');
   }
-
-  // for the browsers that has partial support, see https://caniuse.com/#feat=css-placeholder
-  /* stylelint-disable-next-line selector-pseudo-element-no-unknown */
-  &::input-placeholder {
-    color: utils.get-text-color('semi-dark');
-  }
 }
