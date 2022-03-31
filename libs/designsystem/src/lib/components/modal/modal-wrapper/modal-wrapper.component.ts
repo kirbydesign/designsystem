@@ -41,8 +41,10 @@ import { COMPONENT_PROPS } from './config/modal-config.helper';
   providers: [{ provide: Modal, useExisting: ModalWrapperComponent }],
 })
 export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDestroy {
-  //TODO: Do something with doTheThing :-)
-  doTheThing = true;
+  @HostBinding('class.collapsible-title')
+  get _hasCollapsibleTitle() {
+    return !!this.config?.collapseTitle;
+  }
 
   static readonly KEYBOARD_HIDE_DELAY_IN_MS = 100;
 
