@@ -36,7 +36,8 @@
 // See https://caniuse.com/mdn-css_properties_-webkit-line-clamp
 @supports (-webkit-line-clamp: 1) {
   .kirby-line-clamp {
-    display: box;
+    /* stylelint-disable value-no-vendor-prefix */
+    display: -webkit-box;
     -webkit-line-clamp: var(--line-clamp, none);
     -webkit-box-orient: vertical;
 
