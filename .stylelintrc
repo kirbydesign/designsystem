@@ -1,26 +1,23 @@
 {
-  "extends": [
-    "stylelint-config-standard-scss",
-    "stylelint-config-prettier-scss"
-  ],
+  "extends": ["stylelint-config-standard-scss", "stylelint-config-prettier-scss"],
   "rules": {
     "scss/at-mixin-pattern": [
-			"^(-?_?[a-z][a-z0-9]*)(-[a-z0-9]+)*$",
-			{
-				"message": "Expected mixin name to be kebab-case"
-			}
+      "^(-?_?[a-z][a-z0-9]*)(-[a-z0-9]+)*$",
+      {
+        "message": "Expected mixin name to be kebab-case"
+      }
     ],
     "scss/at-function-pattern": [
-			"^(-?_?[a-z][a-z0-9]*)(-[a-z0-9]+)*$",
-			{
-				"message": "Expected function name to be kebab-case"
-			}
+      "^(-?_?[a-z][a-z0-9]*)(-[a-z0-9]+)*$",
+      {
+        "message": "Expected function name to be kebab-case"
+      }
     ],
     "scss/dollar-variable-pattern": [
-			"^(-?_?[a-z][a-z0-9]*)(-[a-z0-9]+)*$",
-			{
-				"message": "Expected variable to be kebab-case"
-			}
+      "^(-?_?[a-z][a-z0-9]*)(-[a-z0-9]+)*$",
+      {
+        "message": "Expected variable to be kebab-case"
+      }
     ],
     "scss/at-extend-no-missing-placeholder": null,
     "no-descending-specificity": null
