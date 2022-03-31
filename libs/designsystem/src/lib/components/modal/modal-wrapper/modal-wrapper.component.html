@@ -1,8 +1,6 @@
 <ion-header (touchstart)="onHeaderTouchStart($event)">
   <ion-toolbar>
-    <span class="kirby-text-medium">
-      <ion-title></ion-title>
-    </span>
+    <ion-title></ion-title>
     <ion-buttons slot="start" *ngIf="config.flavor === 'drawer'">
       <ng-container *ngTemplateOutlet="closeButton; context: { icon: 'arrow-down' }"></ng-container>
     </ion-buttons>
