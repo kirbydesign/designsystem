@@ -6,8 +6,8 @@ import { ActivatedRoute } from '@angular/router';
   template: `
     <kirby-page-title>Modal Page 1/2</kirby-page-title>
     <h4>The standard Lorem Ipsum passage, used since the 1500s</h4>
-    <span
-      >QueryParams:
+    <span>
+      QueryParams:
       <pre>{{ queryParams$ | async | json }}</pre>
     </span>
     <p>
