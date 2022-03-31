@@ -134,4 +134,23 @@ ion-content {
     --padding-end: #{utils.size('xxxl')};
   }
 }
+
+:host(.collapsible-title) {
+  ion-content {
+    --padding-top: 0;
+
+    ion-header ion-toolbar:first-of-type {
+      padding-top: 0;
+      --padding-top: 0;
+      --padding-bottom: 0;
+      --padding-start: 0;
+      --padding-end: 0;
+    }
+  }
+  ion-title {
+    font-size: utils.font-size('m');
+    font-weight: utils.font-weight('bold');
+  }
+}
+
 /* clean-css ignore:end */
