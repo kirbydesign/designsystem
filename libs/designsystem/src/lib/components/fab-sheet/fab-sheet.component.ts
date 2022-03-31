@@ -61,7 +61,8 @@ export class FabSheetComponent implements AfterContentInit, AfterViewInit {
       const closeIcon = fabButtonElement.shadowRoot.querySelector('.close-icon ion-icon');
       if (closeIcon) {
         const closeIconSvgLoaded = closeIcon.shadowRoot.querySelector('.icon-inner svg');
-        const ionCloseIcon = closeIcon as unknown as IonIcon;
+        // prettier-ignore
+        const ionCloseIcon = (closeIcon as unknown) as IonIcon;
         if (ionCloseIcon && closeIconSvgLoaded) {
           ionCloseIcon.src = kirbyCloseIcon.svg;
           return;
