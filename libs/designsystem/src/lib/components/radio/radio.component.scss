@@ -1,4 +1,4 @@
-@use "sass:map";
+@use 'sass:map';
 @use '~@kirbydesign/core/src/scss/utils';
 
 $radio-icon-padding: utils.size('xxxxs');
@@ -8,7 +8,7 @@ $spacing-to-edge: map.get(utils.$checkbox-radio-spacing, 'to-edge');
 $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
 $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
 
-@function getVerticalPadding($target-height) {
+@function get-vertical-padding($target-height) {
   @return ($target-height - $radio-icon-size) * 0.5;
 }
 
@@ -25,7 +25,7 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
       display: inline-flex;
       align-items: flex-start;
       vertical-align: top;
-      padding: getVerticalPadding($default-checkbox-radio-size) 0;
+      padding: get-vertical-padding($default-checkbox-radio-size) 0;
       padding-right: $spacing-to-label; // Ensure same padding on right side of label
     }
 
@@ -33,9 +33,10 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
       :host-context(.radio-#{$size}),
       &.#{$size} {
         .wrapper {
-          $verticalPadding: getVerticalPadding($height);
-          padding-top: $verticalPadding;
-          padding-bottom: $verticalPadding;
+          $vertical-padding: get-vertical-padding($height);
+
+          padding-top: $vertical-padding;
+          padding-bottom: $vertical-padding;
         }
       }
     }
@@ -49,10 +50,13 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
 
   &[disabled] {
     color: #{utils.get-text-color('semi-dark')};
+
     ion-radio {
       opacity: 1; // Reset Ionic disabled style
+
       --color: #{utils.get-color('medium')};
       --color-checked: #{utils.get-color('medium')};
+
       &::part(container) {
         background-color: utils.get-color('semi-light');
       }
@@ -65,6 +69,7 @@ ion-radio {
   min-width: $radio-icon-size;
   padding: $radio-icon-padding;
   box-sizing: border-box; // Ensure padding is not added to radio width/height
+
   --border-width: 1px;
   --color: #{utils.get-color('semi-dark')};
   --color-checked: #{utils.get-color('success')};
@@ -96,7 +101,7 @@ ion-radio {
 
   // Only apply focus ring if pointer device can hover
   // (effectively desktop/mouse devices):
-  @include utils.focus() {
+  @include utils.focus {
     &::part(container) {
       // Apply focus ring through box-shadow to keep circle shape and default border:
       box-shadow: 0 0 0 1px #{utils.get-color('background-color')},
@@ -105,7 +110,7 @@ ion-radio {
   }
 
   &.radio-checked {
-    --border-width: 0px;
+    --border-width: 0;
 
     &:not(:focus):not(.radio-disabled) {
       &::part(container) {

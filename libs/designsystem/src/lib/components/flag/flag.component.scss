@@ -1,4 +1,4 @@
-@use "sass:map";
+@use 'sass:map';
 @use '~@kirbydesign/core/src/scss/utils';
 
 :host {
@@ -7,13 +7,8 @@
   color: var(--kirby-flag-color, utils.get-color('white-contrast'));
   border: 1px solid var(--kirby-flag-border-color, utils.get-color('medium'));
   border-radius: utils.size('xxxs');
-
   font-size: utils.font-size('n');
-
-  padding-top: utils.size('xxxxs');
-  padding-bottom: utils.size('xxxxs');
-  padding-left: utils.size('xxs');
-  padding-right: utils.size('xxs');
+  padding: utils.size('xxxxs') utils.size('xxs');
 
   &.sm {
     font-size: utils.font-size('s');

@@ -28,9 +28,7 @@ export const ListWithSectionsExampleTemplate = `<kirby-list
   selector: 'list-with-sections-example',
   template: `
     <kirby-page title="List with sections">
-      <kirby-page-content>
-        ${ListWithSectionsExampleTemplate}
-      </kirby-page-content>
+      <kirby-page-content> ${ListWithSectionsExampleTemplate} </kirby-page-content>
     </kirby-page>
   `,
 })

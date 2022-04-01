@@ -79,10 +79,7 @@ export class TestHelper {
   }
 
   public static getCssProperty(element: Element, propertyName: string) {
-    return window
-      .getComputedStyle(element)
-      .getPropertyValue(propertyName)
-      .trim();
+    return window.getComputedStyle(element).getPropertyValue(propertyName).trim();
   }
 
   public static screensize = {

@@ -1,9 +1,8 @@
 @use '../form-field-inputs.shared';
-@use "~@kirbydesign/core/src/scss/utils";
+@use '~@kirbydesign/core/src/scss/utils';
 
 :host {
   font-family: var(--kirby-font-family);
-
   resize: none;
 
   @include utils.media('>=medium') {

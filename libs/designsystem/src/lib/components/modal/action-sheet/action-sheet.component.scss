@@ -5,24 +5,22 @@ $margin-horizontal-narrow: utils.size('s');
 $max-width: 375px;
 
 :host {
-  --kirby_internal_margin_horizontal_default: #{$margin-horizontal};
+  --kirby-internal-margin-horizontal-default: #{$margin-horizontal};
   @include utils.media('<small') {
-    --kirby_internal_margin_horizontal_default: #{$margin-horizontal-narrow};
+    --kirby-internal-margin-horizontal-default: #{$margin-horizontal-narrow};
   }
 
-  --kirby_internal_margin_horizontal_total: calc(
-    2 * var(--kirby-action-sheet-margin-horizontal, var(--kirby_internal_margin_horizontal_default))
+  --kirby-internal-margin-horizontal-total: calc(
+    2 * var(--kirby-action-sheet-margin-horizontal, var(--kirby-internal-margin-horizontal-default))
   );
-}
 
-:host {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
   margin: 0 auto;
-  width: calc(100vw - var(--kirby_internal_margin_horizontal_total));
-  max-width: calc(#{$max-width} - var(--kirby_internal_margin_horizontal_total));
+  width: calc(100vw - var(--kirby-internal-margin-horizontal-total));
+  max-width: calc(#{$max-width} - var(--kirby-internal-margin-horizontal-total));
 }
 
 kirby-card {
@@ -33,6 +31,7 @@ kirby-card {
   button[kirby-button] {
     margin: 0;
     border-radius: 0;
+
     &:not(:focus) {
       border-top: 1px solid utils.get-color('background-color');
     }

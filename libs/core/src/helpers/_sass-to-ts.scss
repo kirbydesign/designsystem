@@ -1,6 +1,7 @@
-@use "sass:meta";
+@use 'sass:meta';
+
 @mixin _output-variable($key, $value) {
-  @if (meta.type_of($value) == map) {
+  @if meta.type_of($value) == map {
     @include _output-map($value, $key);
   } @else {
     #{$key}: '#{$value}';
@@ -11,7 +12,7 @@
   $separator: '.';
   @each $key, $value in $variable-map {
     $sub-key: '#{$key}';
-    @if ($prefix != null) {
+    @if $prefix {
       $sub-key: '#{$prefix}#{$separator}#{$key}';
     }
     @include _output-variable($sub-key, $value);
