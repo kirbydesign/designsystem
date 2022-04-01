@@ -57,18 +57,14 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     ElementRef<HTMLButtonElement>
   >;
   @ViewChild(IonContent, { static: true }) private ionContent: IonContent;
-  @ViewChild(IonContent, { static: true, read: ElementRef }) private ionContentElement: ElementRef<
-    HTMLIonContentElement
-  >;
-  @ViewChild(IonHeader, { static: true, read: ElementRef }) private ionHeaderElement: ElementRef<
-    HTMLIonHeaderElement
-  >;
-  @ViewChild(IonToolbar, { static: true, read: ElementRef }) private ionToolbarElement: ElementRef<
-    HTMLIonToolbarElement
-  >;
-  @ViewChild(IonTitle, { static: true, read: ElementRef }) private ionTitleElement: ElementRef<
-    HTMLIonTitleElement
-  >;
+  @ViewChild(IonContent, { static: true, read: ElementRef })
+  private ionContentElement: ElementRef<HTMLIonContentElement>;
+  @ViewChild(IonHeader, { static: true, read: ElementRef })
+  private ionHeaderElement: ElementRef<HTMLIonHeaderElement>;
+  @ViewChild(IonToolbar, { static: true, read: ElementRef })
+  private ionToolbarElement: ElementRef<HTMLIonToolbarElement>;
+  @ViewChild(IonTitle, { static: true, read: ElementRef })
+  private ionTitleElement: ElementRef<HTMLIonTitleElement>;
   @ViewChild(RouterOutlet, { static: true }) private routerOutlet: RouterOutlet;
 
   private keyboardVisible = false;

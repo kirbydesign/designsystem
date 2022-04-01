@@ -14,9 +14,7 @@ export const ListSelectableItemsExampleTemplate = `<kirby-list [items]="items" (
   selector: 'list-selectable-items-example',
   template: `
     <kirby-page title="Selectable items using dividers">
-      <kirby-page-content>
-        ${ListSelectableItemsExampleTemplate}
-      </kirby-page-content>
+      <kirby-page-content> ${ListSelectableItemsExampleTemplate} </kirby-page-content>
     </kirby-page>
   `,
 })

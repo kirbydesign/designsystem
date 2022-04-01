@@ -28,19 +28,17 @@ describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      const modalControllerSpy = jasmine.createSpyObj('ModalController', [
-        'registerPresentingElement',
-      ]);
+  beforeEach(waitForAsync(() => {
+    const modalControllerSpy = jasmine.createSpyObj('ModalController', [
+      'registerPresentingElement',
+    ]);
 
-      TestBed.configureTestingModule({
-        imports: [NoopAnimationsModule],
-        declarations: [AppComponent, IonAppMockComponent],
-        providers: [{ provide: ModalController, useValue: modalControllerSpy }],
-      }).compileComponents();
-    })
-  );
+    TestBed.configureTestingModule({
+      imports: [NoopAnimationsModule],
+      declarations: [AppComponent, IonAppMockComponent],
+      providers: [{ provide: ModalController, useValue: modalControllerSpy }],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AppComponent);
