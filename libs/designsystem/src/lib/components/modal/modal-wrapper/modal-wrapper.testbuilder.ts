@@ -18,6 +18,12 @@ export class ModalWrapperTestBuilder {
     return this;
   }
 
+  withCollapsibleTitle() {
+    this.config['collapseTitle'] = true;
+    this.config.component = TitleEmbeddedComponent;
+    return this;
+  }
+
   flavor(flavor: ModalConfig['flavor']) {
     this.config.flavor = flavor;
     return this;
@@ -128,6 +134,7 @@ export class InputEmbeddedComponent {}
   `,
 })
 export class StaticPageProgressEmbeddedComponent {}
+
 @Component({
   template: `
     <kirby-page-progress *ngIf="showPageProgress"> </kirby-page-progress>
@@ -136,3 +143,10 @@ export class StaticPageProgressEmbeddedComponent {}
 export class DynamicPageProgressEmbeddedComponent {
   showPageProgress = false;
 }
+
+@Component({
+  template: `
+    <kirby-page-title>This is a title</kirby-page-title>
+  `,
+})
+export class TitleEmbeddedComponent {}

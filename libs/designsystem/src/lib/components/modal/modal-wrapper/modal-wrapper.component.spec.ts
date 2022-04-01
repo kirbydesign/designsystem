@@ -22,7 +22,7 @@ import {
   StaticPageProgressEmbeddedComponent,
 } from './modal-wrapper.testbuilder';
 
-describe('ModalWrapperComponent', () => {
+fdescribe('ModalWrapperComponent', () => {
   const createComponent = createComponentFactory({
     component: ModalWrapperComponent,
     imports: [RouterTestingModule],
@@ -69,6 +69,39 @@ describe('ModalWrapperComponent', () => {
     spectator.fixture.destroy();
   });
 
+  describe("when 'collapseTitle' is enabled", () => {
+    let ionContent: HTMLIonContentElement;
+
+    beforeEach(() => {
+      spectator = modalWrapperTestBuilder
+        .flavor('modal')
+        .withCollapsibleTitle()
+        .build();
+
+      ionContent = spectator.query('ion-content');
+    });
+
+    afterEach(() => {
+      spectator.fixture.destroy();
+    });
+
+    it('should not have any padding between content & toolbar', () => {
+      const ionContentToolbarElement: HTMLIonToolbarElement = ionContent.querySelector(
+        'ion-toolbar'
+      );
+      expect(ionContentToolbarElement).not.toBeUndefined();
+
+      expect(ionContentToolbarElement).toHaveComputedStyle({
+        'padding-top': '0px',
+        '--padding-top': '0px',
+        '--padding-bottom': '0px',
+        '--padding-start': '0px',
+        '--padding-end': '0px',
+      });
+      expect(ionContent).toHaveComputedStyle({ '--padding-top': '0px' });
+    });
+  });
+
   describe('title', () => {
     beforeEach(() => {
       spectator = modalWrapperTestBuilder
@@ -82,6 +115,7 @@ describe('ModalWrapperComponent', () => {
       spectator.fixture.destroy();
     });
 
+    /* TODO: this test does not work... It's not possible to set title via config anymore*/
     it('should render', () => {
       expect(spectator.component.config.title).toEqual('Test title');
     });
