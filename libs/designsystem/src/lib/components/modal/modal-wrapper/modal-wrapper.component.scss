@@ -138,15 +138,15 @@ ion-content {
 
 :host(.collapsible-title) {
   ion-content {
-    --padding-top: 0;
+    --padding-top: 0px;
 
     ion-header ion-toolbar:first-of-type {
       padding-top: 0;
 
-      --padding-top: 0;
-      --padding-bottom: 0;
-      --padding-start: 0;
-      --padding-end: 0;
+      --padding-top: 0px;
+      --padding-bottom: 0px;
+      --padding-start: 0px;
+      --padding-end: 0px;
     }
   }
 

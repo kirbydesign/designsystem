@@ -22,7 +22,7 @@ import {
   StaticPageProgressEmbeddedComponent,
 } from './modal-wrapper.testbuilder';
 
-describe('ModalWrapperComponent', () => {
+fdescribe('ModalWrapperComponent', () => {
   const createComponent = createComponentFactory({
     component: ModalWrapperComponent,
     imports: [RouterTestingModule],
@@ -69,12 +69,38 @@ describe('ModalWrapperComponent', () => {
     spectator.fixture.destroy();
   });
 
+  describe("when 'collapseTitle' is enabled", () => {
+    let ionContent: HTMLIonContentElement;
+
+    beforeEach(() => {
+      spectator = modalWrapperTestBuilder.flavor('modal').withCollapsibleTitle().build();
+
+      ionContent = spectator.query('ion-content');
+    });
+
+    afterEach(() => {
+      spectator.fixture.destroy();
+    });
+
+    it('should not have any padding between content & toolbar', () => {
+      const ionContentToolbarElement: HTMLIonToolbarElement =
+        ionContent.querySelector('ion-toolbar');
+      expect(ionContentToolbarElement).not.toBeUndefined();
+
+      expect(ionContentToolbarElement).toHaveComputedStyle({
+        'padding-top': '0px',
+        '--padding-top': '0px',
+        '--padding-bottom': '0px',
+        '--padding-start': '0px',
+        '--padding-end': '0px',
+      });
+      expect(ionContent).toHaveComputedStyle({ '--padding-top': '0px' });
+    });
+  });
+
   describe('title', () => {
     beforeEach(() => {
-      spectator = modalWrapperTestBuilder
-        .title('Test title')
-        .flavor('modal')
-        .build();
+      spectator = modalWrapperTestBuilder.title('Test title').flavor('modal').build();
     });
 
     afterEach(() => {
@@ -82,6 +108,7 @@ describe('ModalWrapperComponent', () => {
       spectator.fixture.destroy();
     });
 
+    /* TODO: this test does not work... It's not possible to set title via config anymore*/
     it('should render', () => {
       expect(spectator.component.config.title).toEqual('Test title');
     });
@@ -104,10 +131,7 @@ describe('ModalWrapperComponent', () => {
 
   describe('sizing', () => {
     beforeEach(() => {
-      spectator = modalWrapperTestBuilder
-        .flavor('modal')
-        .withEmbeddedInputComponent()
-        .build();
+      spectator = modalWrapperTestBuilder.flavor('modal').withEmbeddedInputComponent().build();
     });
     afterEach(() => {
       spectator.fixture.destroy();
@@ -168,10 +192,7 @@ describe('ModalWrapperComponent', () => {
 
     describe('when flavor is modal', () => {
       beforeEach(() => {
-        spectator = modalWrapperTestBuilder
-          .flavor('modal')
-          .interactWithBackground()
-          .build();
+        spectator = modalWrapperTestBuilder.flavor('modal').interactWithBackground().build();
         spectator.element.style.height = `${elementHeight}px`;
         spectator.element.style.width = `${elementWidth}px`;
         spectator.element.style.overflow = 'hidden';
@@ -211,10 +232,7 @@ describe('ModalWrapperComponent', () => {
 
     describe('when flavor is drawer', () => {
       beforeEach(() => {
-        spectator = modalWrapperTestBuilder
-          .flavor('drawer')
-          .interactWithBackground()
-          .build();
+        spectator = modalWrapperTestBuilder.flavor('drawer').interactWithBackground().build();
         spectator.element.style.height = `${elementHeight}px`;
         spectator.element.style.width = `${elementWidth}px`;
         spectator.element.style.overflow = 'hidden';
@@ -411,10 +429,7 @@ describe('ModalWrapperComponent', () => {
   describe('with embedded page progress component', () => {
     describe('with static page progress', () => {
       beforeEach(() => {
-        spectator = modalWrapperTestBuilder
-          .flavor('modal')
-          .withStaticPageProgress()
-          .build();
+        spectator = modalWrapperTestBuilder.flavor('modal').withStaticPageProgress().build();
         spectator.detectComponentChanges();
       });
 
@@ -428,9 +443,8 @@ describe('ModalWrapperComponent', () => {
         const ionToolbarElement = spectator.query('ion-toolbar');
         const embeddedComponentElement = ionContentElement.firstElementChild;
         const embeddedPageProgress = embeddedComponentElement.querySelector('kirby-page-progress');
-        const pageProgressAsIonToolbarChild = ionToolbarElement.querySelector(
-          'kirby-page-progress'
-        );
+        const pageProgressAsIonToolbarChild =
+          ionToolbarElement.querySelector('kirby-page-progress');
 
         expect(embeddedPageProgress).toBeNull();
         expect(pageProgressAsIonToolbarChild).not.toBeNull();
@@ -439,10 +453,7 @@ describe('ModalWrapperComponent', () => {
 
     describe('with dynamic page progress', () => {
       beforeEach(() => {
-        spectator = modalWrapperTestBuilder
-          .flavor('modal')
-          .withDynamicPageProgress()
-          .build();
+        spectator = modalWrapperTestBuilder.flavor('modal').withDynamicPageProgress().build();
         spectator.detectComponentChanges();
       });
 
@@ -464,9 +475,8 @@ describe('ModalWrapperComponent', () => {
         const ionToolbarElement = spectator.query('ion-toolbar');
         const embeddedComponentElement = ionContentElement.firstElementChild;
         const embeddedPageProgress = embeddedComponentElement.querySelector('kirby-page-progress');
-        const pageProgressAsIonToolbarChild = ionToolbarElement.querySelector(
-          'kirby-page-progress'
-        );
+        const pageProgressAsIonToolbarChild =
+          ionToolbarElement.querySelector('kirby-page-progress');
         expect(embeddedPageProgress).toBeNull();
         expect(pageProgressAsIonToolbarChild).not.toBeNull();
       });
@@ -561,10 +571,7 @@ describe('ModalWrapperComponent', () => {
 
   describe('with embedded component with dynamic footer', () => {
     beforeEach(() => {
-      spectator = modalWrapperTestBuilder
-        .flavor('modal')
-        .withDynamicFooter()
-        .build();
+      spectator = modalWrapperTestBuilder.flavor('modal').withDynamicFooter().build();
       spectator.detectComponentChanges();
     });
 
@@ -740,10 +747,7 @@ describe('ModalWrapperComponent', () => {
     let input: HTMLInputElement;
 
     beforeEach(async () => {
-      spectator = modalWrapperTestBuilder
-        .flavor('drawer')
-        .withEmbeddedInputComponent()
-        .build();
+      spectator = modalWrapperTestBuilder.flavor('drawer').withEmbeddedInputComponent().build();
 
       // Ensure ion-content gets height
       // or embedded component won't be visible:
