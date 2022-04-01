@@ -9,6 +9,7 @@
   border-radius: utils.size('xxxs');
   font-size: utils.font-size('n');
   padding: utils.size('xxxxs') utils.size('xxs');
+  font-weight: utils.font-weight('medium');
 
   &.sm {
     font-size: utils.font-size('s');
