@@ -7,10 +7,6 @@ export type ModalFlavor = 'modal' | 'drawer' | 'compact';
 export type ModalSize = 'small' | 'medium' | 'large' | 'full-height';
 
 export interface ModalConfig {
-  /**
-   * @deprecated Will be removed in next major version. Embed a `<kirby-page-title>` element inside the component instead.
-   */
-  title?: string;
   collapseTitle?: boolean;
   component: any;
   size?: ModalSize;
