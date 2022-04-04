@@ -38,9 +38,7 @@
     // by removing horizontal safe area when rotated to landscape orientation.
     // See https://github.com/kirbydesign/designsystem/issues/1689
     @media screen and (orientation: landscape) {
-      /* stylelint-disable-next-line length-zero-no-unit */
       --ion-safe-area-left: 0px;
-      /* stylelint-disable-next-line length-zero-no-unit */
       --ion-safe-area-right: 0px;
     }
 
