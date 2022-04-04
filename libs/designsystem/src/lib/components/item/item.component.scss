@@ -38,8 +38,10 @@
     // by removing horizontal safe area when rotated to landscape orientation.
     // See https://github.com/kirbydesign/designsystem/issues/1689
     @media screen and (orientation: landscape) {
-      --ion-safe-area-left: 0;
-      --ion-safe-area-right: 0;
+      /* stylelint-disable-next-line length-zero-no-unit */
+      --ion-safe-area-left: 0px;
+      /* stylelint-disable-next-line length-zero-no-unit */
+      --ion-safe-area-right: 0px;
     }
 
     @include utils.slotted('[slot="end"]') {
