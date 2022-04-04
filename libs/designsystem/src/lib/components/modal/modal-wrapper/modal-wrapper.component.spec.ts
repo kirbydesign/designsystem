@@ -100,12 +100,12 @@ describe('ModalWrapperComponent', () => {
 
       expect(ionContentToolbarElement).toHaveComputedStyle({
         'padding-top': '0px',
-        '--padding-top': '0',
-        '--padding-bottom': '0',
-        '--padding-start': '0',
-        '--padding-end': '0',
+        '--padding-top': '0px',
+        '--padding-bottom': '0px',
+        '--padding-start': '0px',
+        '--padding-end': '0px',
       });
-      expect(ionContentElement).toHaveComputedStyle({ '--padding-top': '0' });
+      expect(ionContentElement).toHaveComputedStyle({ '--padding-top': '0px' });
     });
 
     it('should place the title in both the content & the header', () => {
