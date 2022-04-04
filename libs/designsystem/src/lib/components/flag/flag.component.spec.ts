@@ -114,7 +114,7 @@ describe('FlagComponent', () => {
   });
 
   describe(`when configured with themeColor`, () => {
-    const allowedThemeColors = ['success', 'warning', 'danger', 'semi-light'] as const;
+    const allowedThemeColors = ['success', 'warning', 'semi-light'] as const;
     type FlagThemeColor = typeof allowedThemeColors[number];
     const themeColors = allowedThemeColors.map((color) => getColor(color));
     themeColors.forEach((color) => {
@@ -127,6 +127,13 @@ describe('FlagComponent', () => {
           color: getColor(color.name as ThemeColorExtended, 'contrast'),
         });
       });
+    });
+
+    it(`should render with correct colors when themeColor = 'danger'`, async () => {
+      spectator.component.themeColor = 'danger';
+      spectator.detectChanges();
+
+      expect(element).toHaveComputedStyle({ 'background-color': '#ff878a' });
     });
 
     it(`should render with correct colors when themeColor = 'transparent'`, async () => {
