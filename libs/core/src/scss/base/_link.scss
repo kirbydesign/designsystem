@@ -4,39 +4,6 @@
 $_focus-ring-gap: 3px;
 $_focus-ring-border-radius: utils.size('xxxxs');
 
-// Make state layer border-radius and inset dependent on focus ring styles.
-// Unfortunately, the calculations does not work for all sizes of focus ring gap.
-// TODO: Decide if we should just use hardcoded values (6px and -5px) for now.
-$_state-layer-border-radius: #{$_focus-ring-gap * utils.strip-unit($_focus-ring-border-radius)};
-$_state-layer-inset: calc(-1 * (#{$_state-layer-border-radius} - 1px));
-
-a {
-  @include interaction-state.apply-hover('s') {
-    &::before {
-      inset: $_state-layer-inset;
-    }
-  }
-
-  position: relative;
-
-  // Using display: inline-block causes text in links to not wrap
-  // TODO: Request UX review => Remove this comment if ok - else find another solution
-  display: inline-block;
-
-  &::before {
-    @include interaction-state.transition;
-
-    opacity: var(--state-layer-opacity, 0);
-    background-color: var(--state-layer-background-color);
-
-    content: '';
-    position: absolute;
-    // TODO: Request UX review => Should inset be part of the transition? If not, only set it here.
-    inset: 0;
-    border-radius: $_state-layer-border-radius;
-  }
-}
-
 /*
  * Link-styles (anchor tag with href)
  */
@@ -50,4 +17,10 @@ a {
   color: inherit;
   cursor: pointer;
   text-decoration: underline;
+}
+
+a {
+  @include interaction-state.apply-hover {
+    text-decoration: none;
+  }
 }
