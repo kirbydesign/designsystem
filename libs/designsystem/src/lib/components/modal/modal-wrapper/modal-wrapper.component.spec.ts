@@ -20,6 +20,7 @@ import {
   ModalWrapperTestBuilder,
   StaticFooterEmbeddedComponent,
   StaticPageProgressEmbeddedComponent,
+  TitleEmbeddedComponent,
 } from './modal-wrapper.testbuilder';
 
 describe('ModalWrapperComponent', () => {
@@ -85,7 +86,9 @@ describe('ModalWrapperComponent', () => {
     beforeEach(() => {
       spectator = modalWrapperTestBuilder
         .flavor('modal')
-        .withCollapsibleTitle(testTitle)
+        .collapsibleTitle(true)
+        .title(testTitle)
+        .component(TitleEmbeddedComponent)
         .build();
 
       ionContentElement = spectator.query('ion-content');
@@ -121,12 +124,16 @@ describe('ModalWrapperComponent', () => {
     });
   });
 
-  describe('title', () => {
+  describe('with slotted kirby-page-title', () => {
+    let ionTitle: HTMLIonTitleElement;
+
     beforeEach(() => {
       spectator = modalWrapperTestBuilder
         .title('Test title')
+        .component(TitleEmbeddedComponent)
         .flavor('modal')
         .build();
+      ionTitle = spectator.query('ion-header kirby-page-title');
     });
 
     afterEach(() => {
@@ -134,9 +141,8 @@ describe('ModalWrapperComponent', () => {
       spectator.fixture.destroy();
     });
 
-    /* TODO: this test does not work... It's not possible to set title via config anymore*/
     it('should render', () => {
-      expect(spectator.component.config.title).toEqual('Test title');
+      expect(ionTitle.innerHTML).toEqual('Test title');
     });
 
     it('should have css class "drawer" when drawer flavor is used', () => {
