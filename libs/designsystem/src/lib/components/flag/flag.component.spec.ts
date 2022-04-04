@@ -7,6 +7,7 @@ import { FlagComponent } from './flag.component';
 const getColor = DesignTokenHelper.getColor;
 const size = DesignTokenHelper.size;
 const fontSize = DesignTokenHelper.fontSize;
+const fontWeight = DesignTokenHelper.fontWeight;
 
 describe('FlagComponent', () => {
   let spectator: SpectatorHost<FlagComponent>;
@@ -55,6 +56,10 @@ describe('FlagComponent', () => {
 
   it('should render with correct font-size', () => {
     expect(element).toHaveComputedStyle({ 'font-size': fontSize('n') });
+  });
+
+  it('should render with correct font-weight', () => {
+    expect(element).toHaveComputedStyle({ 'font-weight': fontWeight('medium') });
   });
 
   it('should render with correct padding', () => {
