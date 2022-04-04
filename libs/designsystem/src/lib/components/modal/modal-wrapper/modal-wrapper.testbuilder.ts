@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Spectator, SpectatorFactory } from '@ngneat/spectator';
 
 import { ModalConfig } from './config/modal-config';
@@ -18,8 +18,15 @@ export class ModalWrapperTestBuilder {
     return this;
   }
 
-  withCollapsibleTitle() {
-    this.config['collapseTitle'] = true;
+  withCollapsibleTitle(testTitle = 'Test Title') {
+    // TODO: u left off trying to pass testTitle to the titleEmbeddedComponent
+    this.config = {
+      ...this.config,
+      collapseTitle: true,
+      componentProps: { ...this.config.componentProps, testTitle },
+    };
+    this.config['componentProps'] = { ...this.config.componentProps, testTitle };
+    console.log(this.config.componentProps);
     this.config.component = TitleEmbeddedComponent;
     return this;
   }
@@ -146,7 +153,9 @@ export class DynamicPageProgressEmbeddedComponent {
 
 @Component({
   template: `
-    <kirby-page-title>This is a title</kirby-page-title>
+    <kirby-page-title>{{ testTitle }}</kirby-page-title>
   `,
 })
-export class TitleEmbeddedComponent {}
+export class TitleEmbeddedComponent {
+  @Input() public testTitle: string;
+}
