@@ -14,7 +14,7 @@ import { IconComponent, IconSize } from '@kirbydesign/designsystem';
   ],
 })
 export class MockIconComponent {
-  @Input() size: IconSize;
+  @Input() size: IconSize | `${IconSize}`;
   @Input() name: string;
   @Input() customName: string;
 }
