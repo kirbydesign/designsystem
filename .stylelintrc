@@ -20,6 +20,12 @@
       }
     ],
     "scss/at-extend-no-missing-placeholder": null,
-    "no-descending-specificity": null
+    "no-descending-specificity": null,
+    "length-zero-no-unit": [
+      true,
+      {
+        "ignore": ["custom-properties"]
+      }
+    ]
   }
 }
