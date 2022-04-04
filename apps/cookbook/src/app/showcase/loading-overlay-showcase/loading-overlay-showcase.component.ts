@@ -7,9 +7,8 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   styleUrls: ['./loading-overlay-showcase.component.scss'],
 })
 export class LoadingOverlayShowcaseComponent {
-  exampleHtml: string =
-    require('!raw-loader!../../examples/loading-overlay-example/loading-overlay-example.component.html')
-      .default;
+  exampleHtml: string = require('!raw-loader!../../examples/loading-overlay-example/loading-overlay-example.component.html')
+    .default;
   properties: ApiDescriptionProperty[] = [
     {
       name: 'isLoading',

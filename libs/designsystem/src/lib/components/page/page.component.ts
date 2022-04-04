@@ -94,7 +94,9 @@ export class PageContentDirective {
 
 @Component({
   selector: 'kirby-page-progress',
-  template: ` <ng-content></ng-content> `,
+  template: `
+    <ng-content></ng-content>
+  `,
   styles: [':host {display: flex}'],
 })
 export class PageProgressComponent implements OnInit {
@@ -113,19 +115,25 @@ export class PageProgressComponent implements OnInit {
 
 @Component({
   selector: 'kirby-page-title',
-  template: ` <ng-content></ng-content> `,
+  template: `
+    <ng-content></ng-content>
+  `,
 })
 export class PageTitleComponent {}
 
 @Component({
   selector: 'kirby-page-content',
-  template: ` <ng-content></ng-content> `,
+  template: `
+    <ng-content></ng-content>
+  `,
 })
 export class PageContentComponent {}
 
 @Component({
   selector: 'kirby-page-actions',
-  template: ` <ng-content select="button[kirby-button]"></ng-content> `,
+  template: `
+    <ng-content select="button[kirby-button]"></ng-content>
+  `,
 })
 export class PageActionsComponent {}
 
@@ -136,8 +144,7 @@ export class PageActionsComponent {}
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PageComponent
-  implements OnInit, OnDestroy, AfterViewInit, AfterContentChecked, OnChanges
-{
+  implements OnInit, OnDestroy, AfterViewInit, AfterContentChecked, OnChanges {
   @Input() title: string;
   @Input() toolbarTitle: string;
   @Input() titleAlignment: 'left' | 'center' | 'right' = 'left';
@@ -200,8 +207,7 @@ export class PageComponent
   fixedContentTemplate: TemplateRef<any>;
   stickyActionsTemplate: TemplateRef<any>;
   fixedActionsTemplate: TemplateRef<any>;
-  private pageTitleIntersectionObserverRef: IntersectionObserver =
-    this.pageTitleIntersectionObserver();
+  private pageTitleIntersectionObserverRef: IntersectionObserver = this.pageTitleIntersectionObserver();
   private urls: string[] = [];
   private hasEntered: boolean;
 

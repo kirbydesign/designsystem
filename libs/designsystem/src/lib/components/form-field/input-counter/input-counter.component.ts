@@ -1,13 +1,13 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { InputComponent } from '../input/input.component';
-
 import { TextareaComponent } from './../textarea/textarea.component';
+import { InputComponent } from '../input/input.component';
 
 @Component({
   selector: 'kirby-input-counter',
   templateUrl: './input-counter.component.html',
+  styleUrls: ['./input-counter.component.scss'],
 })
 export class InputCounterComponent implements OnInit, OnDestroy {
   @Input() listenTo: InputComponent | TextareaComponent;

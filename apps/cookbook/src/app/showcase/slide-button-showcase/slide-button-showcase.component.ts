@@ -4,11 +4,11 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
 @Component({
   selector: 'cookbook-slide-button-showcase',
   templateUrl: './slide-button-showcase.component.html',
+  styleUrls: ['./slide-button-showcase.component.scss'],
 })
 export class SlideButtonShowcaseComponent {
-  exampleHtml: string =
-    require('!raw-loader!../../examples/slide-button-example/slide-button-example.component.html')
-      .default;
+  exampleHtml: string = require('!raw-loader!../../examples/slide-button-example/slide-button-example.component.html')
+    .default;
   properties: ApiDescriptionProperty[] = [
     {
       name: 'expand',

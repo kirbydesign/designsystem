@@ -15,17 +15,19 @@ import { IconComponent, IconSize } from './icon.component';
 const { getColor, iconFontSize } = DesignTokenHelper;
 
 describe('IconComponent', () => {
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        IconComponent,
-        ThemeColorDirective,
-        TestWrapperComponent,
-        MockComponent(IonIcon),
-      ],
-      providers: [mockProvider(IconRegistryService)],
-    });
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [
+          IconComponent,
+          ThemeColorDirective,
+          TestWrapperComponent,
+          MockComponent(IonIcon),
+        ],
+        providers: [mockProvider(IconRegistryService)],
+      });
+    })
+  );
 
   it('should compile with custom hardcoded directives', () => {
     const fixture = createTestComponent('<kirby-icon themeColor="primary"></kirby-icon>');

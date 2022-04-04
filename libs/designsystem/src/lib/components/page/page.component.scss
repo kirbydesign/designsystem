@@ -6,7 +6,6 @@
 ion-header,
 ion-toolbar {
   --background: #{utils.get-color('background-color')};
-
   margin: 0 auto;
 
   @include utils.media('>=large') {
@@ -68,7 +67,6 @@ ion-title {
 ion-back-button {
   --color: #{utils.get-color('black')};
   --icon-font-size: 24px;
-
   height: utils.$fat-finger-size;
   width: utils.$fat-finger-size;
 }
@@ -127,7 +125,6 @@ ion-content {
     width: 100%;
     position: absolute;
     bottom: 0;
-
     .content-inner {
       position: relative;
     }

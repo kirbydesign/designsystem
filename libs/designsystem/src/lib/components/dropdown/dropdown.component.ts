@@ -44,14 +44,12 @@ import { KeyboardHandlerService } from './keyboard-handler.service';
   ],
 })
 export class DropdownComponent
-  implements AfterContentChecked, AfterViewInit, OnDestroy, ControlValueAccessor
-{
+  implements AfterContentChecked, AfterViewInit, OnDestroy, ControlValueAccessor {
   static readonly OPEN_DELAY_IN_MS = 100;
   private state = OpenState.closed;
   private hasConfiguredSlottedItems = false;
-  private horizontalDirection: HorizontalDirection | `${HorizontalDirection}` =
-    HorizontalDirection.right;
-  private verticalDirection: VerticalDirection | `${VerticalDirection}` = VerticalDirection.down;
+  private horizontalDirection = HorizontalDirection.right;
+  private verticalDirection = VerticalDirection.down;
 
   private _items: string[] | any[] = [];
   get items(): string[] | any[] {
@@ -81,7 +79,7 @@ export class DropdownComponent
   @Input()
   placeholder = 'Please select:';
 
-  @Input() set popout(direction: HorizontalDirection | `${HorizontalDirection}`) {
+  @Input() set popout(direction: HorizontalDirection) {
     this.horizontalDirection = direction || HorizontalDirection.right;
   }
 

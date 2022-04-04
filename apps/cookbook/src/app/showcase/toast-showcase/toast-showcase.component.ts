@@ -6,8 +6,8 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   templateUrl: './toast-showcase.component.html',
 })
 export class ToastShowcaseComponent {
-  exampleHtml: string =
-    require('!raw-loader!../../examples/toast-example/toast-example.component.html').default;
+  exampleHtml: string = require('!raw-loader!../../examples/toast-example/toast-example.component.html')
+    .default;
   properties: ApiDescriptionProperty[] = [
     {
       name: 'message',

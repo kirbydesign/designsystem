@@ -20,7 +20,7 @@ ion-backdrop {
   }
 
   @include utils.slotted('kirby-item') {
-    box-shadow: 0 0 10px rgb(0 0 0 / 40%);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
     transform: scale(1.05, 1.05);
     border-radius: utils.$border-radius;
     overflow: hidden;
@@ -32,11 +32,9 @@ ion-backdrop {
     position: relative;
     z-index: 103;
   }
-
   & > .reorder-selected {
     z-index: 104;
   }
-
   & div:first-child {
     border-top: none;
   }
@@ -49,7 +47,7 @@ ion-backdrop {
 
   .reorder-selected {
     @include utils.slotted('kirby-item') {
-      box-shadow: 0 0 10px rgb(0 0 0 / 40%);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
       transform: scale(1.05, 1.05);
       border-radius: utils.$border-radius;
       overflow: hidden;
@@ -57,7 +55,7 @@ ion-backdrop {
   }
 }
 
-.outer-group {
+.outerGroup {
   border-bottom: 20px transparent solid;
 }
 

@@ -36,7 +36,6 @@
 // See https://caniuse.com/mdn-css_properties_-webkit-line-clamp
 @supports (-webkit-line-clamp: 1) {
   .kirby-line-clamp {
-    /* stylelint-disable value-no-vendor-prefix */
     display: -webkit-box;
     -webkit-line-clamp: var(--line-clamp, none);
     -webkit-box-orient: vertical;
@@ -49,7 +48,6 @@
     // Reset fallback properties that are not needed when support for line-clamp
     max-height: initial;
     position: initial;
-
     &::before,
     &::after {
       display: none;

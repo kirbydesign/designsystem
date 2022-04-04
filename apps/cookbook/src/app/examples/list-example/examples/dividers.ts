@@ -14,7 +14,9 @@ export const ListWithDividersExampleTemplate = `<kirby-list [items]="items" [sho
   selector: 'list-with-dividers-example',
   template: `
     <kirby-page title="Items using dividers">
-      <kirby-page-content> ${ListWithDividersExampleTemplate} </kirby-page-content>
+      <kirby-page-content>
+        ${ListWithDividersExampleTemplate}
+      </kirby-page-content>
     </kirby-page>
   `,
 })

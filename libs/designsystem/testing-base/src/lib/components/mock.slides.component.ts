@@ -1,4 +1,4 @@
-import { Component, Directive, forwardRef, Input } from '@angular/core';
+import { forwardRef, Component, Directive, Input } from '@angular/core';
 
 import { SlideDirective, SlidesComponent } from '@kirbydesign/designsystem';
 

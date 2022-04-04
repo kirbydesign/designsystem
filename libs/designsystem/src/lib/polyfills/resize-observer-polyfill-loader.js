@@ -1,4 +1,4 @@
-(function () {
+(function() {
   // A technique for loading polyfills only when needed. Details here:
   // https://philipwalton.com/articles/loading-polyfills-only-when-needed/
   if (polyfillNeeded()) {

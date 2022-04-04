@@ -406,12 +406,12 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   _onDateSelected(newDay: CalendarCell) {
     if (newDay.isSelectable && newDay.date) {
       let newDate = new Date(this.activeMonth);
-      newDate.setDate(newDay.date);
 
       if (this.timezone === 'UTC') {
         newDate = zonedTimeToUtc(this.subtractTimezoneOffset(newDate), this.timeZoneName);
       }
 
+      newDate.setDate(newDay.date);
       const dateToEmit = newDate;
 
       if (this.hasDateChanged(newDate, this._selectedDate)) {

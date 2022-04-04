@@ -22,9 +22,11 @@ export const compare = {
       message: ':bookmark: Bumping version to 0.0.235',
       tree: {
         sha: '911fae601660524571fc0c7f734f30140e8e11d4',
-        url: 'https://api.github.com/repos/kirbydesign/designsystem/git/trees/911fae601660524571fc0c7f734f30140e8e11d4',
+        url:
+          'https://api.github.com/repos/kirbydesign/designsystem/git/trees/911fae601660524571fc0c7f734f30140e8e11d4',
       },
-      url: 'https://api.github.com/repos/kirbydesign/designsystem/git/commits/59e6a2603b1f0c78f40abac05172581e82777cd3',
+      url:
+        'https://api.github.com/repos/kirbydesign/designsystem/git/commits/59e6a2603b1f0c78f40abac05172581e82777cd3',
       comment_count: 0,
       verification: {
         verified: false,
@@ -33,7 +35,8 @@ export const compare = {
         payload: null,
       },
     },
-    url: 'https://api.github.com/repos/kirbydesign/designsystem/commits/59e6a2603b1f0c78f40abac05172581e82777cd3',
+    url:
+      'https://api.github.com/repos/kirbydesign/designsystem/commits/59e6a2603b1f0c78f40abac05172581e82777cd3',
     html_url:
       'https://github.com/kirbydesign/designsystem/commit/59e6a2603b1f0c78f40abac05172581e82777cd3',
     comments_url:
@@ -81,7 +84,8 @@ export const compare = {
     parents: [
       {
         sha: '891f4cdc591e4ce1153b3e11621fe09e08cf2cd6',
-        url: 'https://api.github.com/repos/kirbydesign/designsystem/commits/891f4cdc591e4ce1153b3e11621fe09e08cf2cd6',
+        url:
+          'https://api.github.com/repos/kirbydesign/designsystem/commits/891f4cdc591e4ce1153b3e11621fe09e08cf2cd6',
         html_url:
           'https://github.com/kirbydesign/designsystem/commit/891f4cdc591e4ce1153b3e11621fe09e08cf2cd6',
       },
@@ -104,9 +108,11 @@ export const compare = {
       message: ':bookmark: Bumping version to 0.0.235',
       tree: {
         sha: '911fae601660524571fc0c7f734f30140e8e11d4',
-        url: 'https://api.github.com/repos/kirbydesign/designsystem/git/trees/911fae601660524571fc0c7f734f30140e8e11d4',
+        url:
+          'https://api.github.com/repos/kirbydesign/designsystem/git/trees/911fae601660524571fc0c7f734f30140e8e11d4',
       },
-      url: 'https://api.github.com/repos/kirbydesign/designsystem/git/commits/59e6a2603b1f0c78f40abac05172581e82777cd3',
+      url:
+        'https://api.github.com/repos/kirbydesign/designsystem/git/commits/59e6a2603b1f0c78f40abac05172581e82777cd3',
       comment_count: 0,
       verification: {
         verified: false,
@@ -115,7 +121,8 @@ export const compare = {
         payload: null,
       },
     },
-    url: 'https://api.github.com/repos/kirbydesign/designsystem/commits/59e6a2603b1f0c78f40abac05172581e82777cd3',
+    url:
+      'https://api.github.com/repos/kirbydesign/designsystem/commits/59e6a2603b1f0c78f40abac05172581e82777cd3',
     html_url:
       'https://github.com/kirbydesign/designsystem/commit/59e6a2603b1f0c78f40abac05172581e82777cd3',
     comments_url:
@@ -163,7 +170,8 @@ export const compare = {
     parents: [
       {
         sha: '891f4cdc591e4ce1153b3e11621fe09e08cf2cd6',
-        url: 'https://api.github.com/repos/kirbydesign/designsystem/commits/891f4cdc591e4ce1153b3e11621fe09e08cf2cd6',
+        url:
+          'https://api.github.com/repos/kirbydesign/designsystem/commits/891f4cdc591e4ce1153b3e11621fe09e08cf2cd6',
         html_url:
           'https://github.com/kirbydesign/designsystem/commit/891f4cdc591e4ce1153b3e11621fe09e08cf2cd6',
       },
@@ -192,9 +200,11 @@ export const compare = {
           'fix(toast): export toast from index (#453)\n\n* fix(toast): export toast from index\r\n\r\n* fix(toast): add typescript definition file',
         tree: {
           sha: '0e34beb842c06845796ac75825fb648b943d5e09',
-          url: 'https://api.github.com/repos/kirbydesign/designsystem/git/trees/0e34beb842c06845796ac75825fb648b943d5e09',
+          url:
+            'https://api.github.com/repos/kirbydesign/designsystem/git/trees/0e34beb842c06845796ac75825fb648b943d5e09',
         },
-        url: 'https://api.github.com/repos/kirbydesign/designsystem/git/commits/babed2f961756e910b8b621aa416111e9306f6d0',
+        url:
+          'https://api.github.com/repos/kirbydesign/designsystem/git/commits/babed2f961756e910b8b621aa416111e9306f6d0',
         comment_count: 0,
         verification: {
           verified: true,
@@ -205,7 +215,8 @@ export const compare = {
             'tree 0e34beb842c06845796ac75825fb648b943d5e09\nparent 59e6a2603b1f0c78f40abac05172581e82777cd3\nauthor Alexander Hafstad <alexander@hafstad.dk> 1563958678 +0200\ncommitter GitHub <noreply@github.com> 1563958678 +0200\n\nfix(toast): export toast from index (#453)\n\n* fix(toast): export toast from index\r\n\r\n* fix(toast): add typescript definition file\r\n',
         },
       },
-      url: 'https://api.github.com/repos/kirbydesign/designsystem/commits/babed2f961756e910b8b621aa416111e9306f6d0',
+      url:
+        'https://api.github.com/repos/kirbydesign/designsystem/commits/babed2f961756e910b8b621aa416111e9306f6d0',
       html_url:
         'https://github.com/kirbydesign/designsystem/commit/babed2f961756e910b8b621aa416111e9306f6d0',
       comments_url:
@@ -253,7 +264,8 @@ export const compare = {
       parents: [
         {
           sha: '59e6a2603b1f0c78f40abac05172581e82777cd3',
-          url: 'https://api.github.com/repos/kirbydesign/designsystem/commits/59e6a2603b1f0c78f40abac05172581e82777cd3',
+          url:
+            'https://api.github.com/repos/kirbydesign/designsystem/commits/59e6a2603b1f0c78f40abac05172581e82777cd3',
           html_url:
             'https://github.com/kirbydesign/designsystem/commit/59e6a2603b1f0c78f40abac05172581e82777cd3',
         },
@@ -276,9 +288,11 @@ export const compare = {
         message: ':bookmark: Bumping version to 0.0.236',
         tree: {
           sha: 'a0149b33532e34e831171bf9759ade51f71793ff',
-          url: 'https://api.github.com/repos/kirbydesign/designsystem/git/trees/a0149b33532e34e831171bf9759ade51f71793ff',
+          url:
+            'https://api.github.com/repos/kirbydesign/designsystem/git/trees/a0149b33532e34e831171bf9759ade51f71793ff',
         },
-        url: 'https://api.github.com/repos/kirbydesign/designsystem/git/commits/4b12ff6e4e124d59967e24f04b0ee5698e8b02e0',
+        url:
+          'https://api.github.com/repos/kirbydesign/designsystem/git/commits/4b12ff6e4e124d59967e24f04b0ee5698e8b02e0',
         comment_count: 0,
         verification: {
           verified: false,
@@ -287,7 +301,8 @@ export const compare = {
           payload: null,
         },
       },
-      url: 'https://api.github.com/repos/kirbydesign/designsystem/commits/4b12ff6e4e124d59967e24f04b0ee5698e8b02e0',
+      url:
+        'https://api.github.com/repos/kirbydesign/designsystem/commits/4b12ff6e4e124d59967e24f04b0ee5698e8b02e0',
       html_url:
         'https://github.com/kirbydesign/designsystem/commit/4b12ff6e4e124d59967e24f04b0ee5698e8b02e0',
       comments_url:
@@ -335,7 +350,8 @@ export const compare = {
       parents: [
         {
           sha: 'babed2f961756e910b8b621aa416111e9306f6d0',
-          url: 'https://api.github.com/repos/kirbydesign/designsystem/commits/babed2f961756e910b8b621aa416111e9306f6d0',
+          url:
+            'https://api.github.com/repos/kirbydesign/designsystem/commits/babed2f961756e910b8b621aa416111e9306f6d0',
           html_url:
             'https://github.com/kirbydesign/designsystem/commit/babed2f961756e910b8b621aa416111e9306f6d0',
         },

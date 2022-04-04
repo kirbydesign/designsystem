@@ -20,35 +20,37 @@ describe('ActionSheetComponent', () => {
   let component: ActionSheetComponent;
   let fixture: ComponentFixture<ActionSheetComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        ActionSheetComponent,
-        ListComponent,
-        CardComponent,
-        CardHeaderComponent,
-        GroupByPipe,
-        SpinnerComponent,
-        InfiniteScrollDirective,
-        ButtonComponent,
-        ListItemColorDirective,
-        MockComponent(ionic.IonList),
-        MockComponent(ionic.IonListHeader),
-        MockComponent(ionic.IonLabel),
-        MockComponent(ionic.IonItem),
-        MockComponent(ionic.IonItemDivider),
-        MockComponent(ionic.IonItemGroup),
-        MockComponent(ionic.IonItemOptions),
-        MockComponent(ionic.IonItemSliding),
-      ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    }).compileComponents();
-    TestBed.overrideModule(BrowserDynamicTestingModule, {
-      set: {
-        entryComponents: [ActionSheetComponent],
-      },
-    });
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [
+          ActionSheetComponent,
+          ListComponent,
+          CardComponent,
+          CardHeaderComponent,
+          GroupByPipe,
+          SpinnerComponent,
+          InfiniteScrollDirective,
+          ButtonComponent,
+          ListItemColorDirective,
+          MockComponent(ionic.IonList),
+          MockComponent(ionic.IonListHeader),
+          MockComponent(ionic.IonLabel),
+          MockComponent(ionic.IonItem),
+          MockComponent(ionic.IonItemDivider),
+          MockComponent(ionic.IonItemGroup),
+          MockComponent(ionic.IonItemOptions),
+          MockComponent(ionic.IonItemSliding),
+        ],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      }).compileComponents();
+      TestBed.overrideModule(BrowserDynamicTestingModule, {
+        set: {
+          entryComponents: [ActionSheetComponent],
+        },
+      });
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ActionSheetComponent);

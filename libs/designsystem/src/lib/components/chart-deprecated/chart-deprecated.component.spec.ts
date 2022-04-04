@@ -10,11 +10,13 @@ describe('ChartDeprecatedComponent', () => {
 
   const expectedDefaultHeight = 300;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ChartDeprecatedComponent],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [ChartDeprecatedComponent],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ChartDeprecatedComponent);

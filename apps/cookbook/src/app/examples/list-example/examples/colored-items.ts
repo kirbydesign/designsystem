@@ -25,7 +25,9 @@ export const ListColoredItemsExampleTemplate = `<kirby-list
   selector: 'list-colored-items-example',
   template: `
     <kirby-page title="List colored items">
-      <kirby-page-content> ${ListColoredItemsExampleTemplate} </kirby-page-content>
+      <kirby-page-content>
+        ${ListColoredItemsExampleTemplate}
+      </kirby-page-content>
     </kirby-page>
   `,
 })

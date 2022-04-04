@@ -16,18 +16,20 @@ describe('AlertComponent', () => {
   let component: AlertComponent;
   let fixture: ComponentFixture<AlertComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [AlertComponent, ButtonComponent],
-      providers: [
-        {
-          provide: WindowRef,
-          useValue: <WindowRef>{ nativeWindow: window },
-        },
-      ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [AlertComponent, ButtonComponent],
+        providers: [
+          {
+            provide: WindowRef,
+            useValue: <WindowRef>{ nativeWindow: window },
+          },
+        ],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AlertComponent);

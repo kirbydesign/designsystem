@@ -10,7 +10,6 @@
     $shadow-list-reordered: ();
     @each $shadow in $shadow-list {
       $shadow-color: list.nth($shadow, -1);
-
       // window.getComputedStyle() returns box-shadow with color first, so re-order shadow components:
       $shadow-reordered: ($shadow-color);
       @for $i from 1 through list.length($shadow)-1 {
@@ -18,14 +17,12 @@
         $shadow-length-in-px: 1px + list.nth($shadow, $i) - 1px;
         $shadow-reordered: list.append($shadow-reordered, $shadow-length-in-px);
       }
-
       $shadow-list-reordered: list.append(
         $shadow-list-reordered,
         $shadow-reordered,
         $separator: comma
       );
     }
-
     $elevation-list: map.merge(
       $elevation-list,
       (
@@ -40,7 +37,7 @@ $styles: map.merge(
   meta.module-variables('variables'),
   (
     // window.getComputedStyle() returns box-shadow in a specific format, so re-map elevations:
-    'elevations': remap-elevation(variables.$elevations)
+      'elevations': remap-elevation(variables.$elevations)
   )
 );
 

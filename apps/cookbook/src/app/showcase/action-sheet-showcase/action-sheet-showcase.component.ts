@@ -7,9 +7,8 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   preserveWhitespaces: true,
 })
 export class ActionSheetShowcaseComponent {
-  exampleHtml: string =
-    require('!raw-loader!../../examples/action-sheet-example/action-sheet-example.component.html')
-      .default;
+  exampleHtml: string = require('!raw-loader!../../examples/action-sheet-example/action-sheet-example.component.html')
+    .default;
   properties: ApiDescriptionProperty[] = [
     {
       name: 'header',

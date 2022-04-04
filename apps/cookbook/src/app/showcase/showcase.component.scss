@@ -47,12 +47,11 @@ h4 {
   height: $icon-size;
   margin-right: utils.size('xxs');
   margin-left: utils.size('m');
-  color: currentcolor;
-  fill: currentcolor;
+  color: currentColor;
+  fill: currentColor;
   vertical-align: bottom;
 }
 
-/* stylelint-disable selector-pseudo-element-no-unknown */
 ::ng-deep :not(pre) > code[class*='language-'],
 ::ng-deep pre[class*='language-'] {
   background-color: utils.get-color('light-tint');

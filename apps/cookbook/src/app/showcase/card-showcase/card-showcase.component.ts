@@ -10,8 +10,8 @@ import {
   styleUrls: ['./card-showcase.component.scss'],
 })
 export class CardShowcaseComponent {
-  exampleHtml: string =
-    require('!raw-loader!../../examples/card-example/card-example.component.html').default;
+  exampleHtml: string = require('!raw-loader!../../examples/card-example/card-example.component.html')
+    .default;
   properties: ApiDescriptionProperty[] = [
     {
       name: 'title',

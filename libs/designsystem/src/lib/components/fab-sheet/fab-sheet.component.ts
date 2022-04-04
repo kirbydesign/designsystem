@@ -1,21 +1,21 @@
-import { DOCUMENT } from '@angular/common';
 import {
-  AfterContentInit,
-  AfterViewInit,
   Component,
   ContentChild,
-  ElementRef,
   HostBinding,
-  Inject,
   Input,
-  Renderer2,
+  AfterContentInit,
+  AfterViewInit,
   ViewChild,
+  ElementRef,
+  Renderer2,
+  Inject,
 } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { IonFab, IonFabButton, IonIcon } from '@ionic/angular';
 
-import { Icon } from '../icon/icon-settings';
-import { kirbyIconSettings } from '../icon/kirby-icon-settings';
 import { ActionSheetComponent } from '../modal/action-sheet/action-sheet.component';
+import { kirbyIconSettings } from '../icon/kirby-icon-settings';
+import { Icon } from '../icon/icon-settings';
 
 @Component({
   selector: 'kirby-fab-sheet',
@@ -40,8 +40,9 @@ export class FabSheetComponent implements AfterContentInit, AfterViewInit {
 
   @ContentChild(ActionSheetComponent, { static: false }) actionSheet: ActionSheetComponent;
 
-  @ViewChild(IonFabButton, { static: true, read: ElementRef })
-  ionFabButton: ElementRef<HTMLElement>;
+  @ViewChild(IonFabButton, { static: true, read: ElementRef }) ionFabButton: ElementRef<
+    HTMLElement
+  >;
 
   constructor(private renderer: Renderer2, @Inject(DOCUMENT) private document: any) {}
 
@@ -61,7 +62,6 @@ export class FabSheetComponent implements AfterContentInit, AfterViewInit {
       const closeIcon = fabButtonElement.shadowRoot.querySelector('.close-icon ion-icon');
       if (closeIcon) {
         const closeIconSvgLoaded = closeIcon.shadowRoot.querySelector('.icon-inner svg');
-        // prettier-ignore
         const ionCloseIcon = (closeIcon as unknown) as IonIcon;
         if (ionCloseIcon && closeIconSvgLoaded) {
           ionCloseIcon.src = kirbyCloseIcon.svg;

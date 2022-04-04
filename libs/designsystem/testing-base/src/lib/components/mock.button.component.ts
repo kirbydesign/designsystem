@@ -20,7 +20,7 @@ export class MockButtonComponent {
   @Input() themeColor: NotificationColor;
   @Input() expand: 'full' | 'block';
   @Input() isFloating: boolean;
-  @Input() size: ButtonSize | `${ButtonSize}`;
+  @Input() size: ButtonSize;
 }
 
 // #endregion

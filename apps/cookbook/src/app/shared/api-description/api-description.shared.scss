@@ -9,6 +9,7 @@
 
 table.api-description {
   margin-bottom: utils.size('xl');
+
   border-spacing: 0;
   border-collapse: collapse;
   width: 100%;
@@ -30,7 +31,6 @@ table.api-description {
     border: 1px solid utils.get-color('medium');
     padding: 0.5rem 1rem;
   }
-
   .property-name code {
     white-space: nowrap;
   }

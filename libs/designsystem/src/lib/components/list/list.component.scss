@@ -1,4 +1,4 @@
-@use 'sass:map';
+@use "sass:map";
 @use '~@kirbydesign/core/src/scss/utils';
 @use '../item-sliding/item-sliding.shared.scss';
 
@@ -41,12 +41,15 @@ ion-item {
   --padding-end: #{utils.size('s')};
   --padding-start: #{utils.size('s')};
   --padding-top: #{utils.size('xxs')};
-
   display: flex;
   font-size: utils.font-size('s');
   min-height: $item-height;
   overflow: visible;
   width: 100%;
+}
+
+ion-item-divider {
+  font-weight: inherit;
 }
 
 ion-item-sliding {
@@ -63,7 +66,6 @@ ion-item-sliding {
       --kirby-item-background-activated: #{utils.get-color($color-name + '-shade')};
       --kirby-item-background-focused: #{utils.get-color($color-name + '-shade')};
       --kirby-item-background-hover: #{utils.get-color($color-name + '-tint')};
-
       ion-item {
         --background: #{utils.get-color($color-name)};
         --color: #{utils.get-color($color-name + '-contrast')};
@@ -86,12 +88,10 @@ ion-item-group {
 ion-item-divider {
   --inner-padding-end: 0;
   --color: unset;
-
   background-color: transparent;
   border-color: transparent;
   min-height: 0;
   padding: 0 utils.size('s') utils.size('xxs') utils.size('s');
-  font-weight: inherit;
 }
 
 .footer {
@@ -169,7 +169,7 @@ ion-item-options[side='end'] {
   ion-list-header {
     border-top-left-radius: utils.$border-radius;
     border-top-right-radius: utils.$border-radius;
-    mask-image: radial-gradient(
+    -webkit-mask-image: -webkit-radial-gradient(
       white,
       black
     ); // Solves issues with round borders at iOS in certain scenarios
@@ -187,7 +187,7 @@ ion-item-options[side='end'] {
   .footer {
     border-bottom-left-radius: utils.$border-radius;
     border-bottom-right-radius: utils.$border-radius;
-    mask-image: radial-gradient(
+    -webkit-mask-image: -webkit-radial-gradient(
       white,
       black
     ); // Solves issues with round borders at iOS in certain scenarios
@@ -223,7 +223,6 @@ ion-item-options[side='end'] {
       --background-activated: none;
       --background-hover: none;
       --background-focused: none;
-
       overflow: visible;
     }
   }

@@ -29,12 +29,12 @@ export const TimeSeriesOptions: Options = {
   },
   tooltip: {
     shadow: false,
-    formatter: function () {
+    formatter: function() {
       // @ts-ignore
       return dateFormat('%e. %b', new Date(this.x)) + '.' + '<br/><b>' + this.y + '</b>';
     },
     //xDateFormat: '%d/%m',
-    positioner: function (_labelWidth, _labelHeight, point) {
+    positioner: function(_labelWidth, _labelHeight, point) {
       return { x: point.x, y: 0 };
     },
     borderWidth: 0,

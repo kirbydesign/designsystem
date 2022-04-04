@@ -55,7 +55,7 @@ export class SassToTypescriptEngine {
     const kebabToCamelCase = (kebabString: string) =>
       kebabString.replace(/-./g, (x) => x[1].toUpperCase());
 
-    const reviverFn = function (key: string, value: string) {
+    const reviverFn = function(key: string, value: string) {
       const nestedKeys = key.split('.').map(kebabToCamelCase);
       const rootKey = nestedKeys[0];
       // Return root value +  root entries as-is:

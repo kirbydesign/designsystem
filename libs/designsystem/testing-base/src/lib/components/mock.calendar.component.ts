@@ -24,7 +24,6 @@ export class MockCalendarComponent {
   @Input() disableFutureDates: boolean;
   @Input() alwaysEnableToday: boolean;
   @Input() customLocales: { [key: string]: Locale };
-  @Input() usePopover: boolean;
   @Input() yearNavigatorOptions: CalendarYearNavigatorConfig;
   @Input() selectedDate: Date;
   @Input() disabledDates: Date[];

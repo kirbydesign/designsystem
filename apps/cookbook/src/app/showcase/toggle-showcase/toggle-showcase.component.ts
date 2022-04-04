@@ -6,8 +6,8 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   templateUrl: './toggle-showcase.component.html',
 })
 export class ToggleShowcaseComponent {
-  exampleHtml: string =
-    require('!raw-loader!../../examples/toggle-example/toggle-example.component.html').default;
+  exampleHtml: string = require('!raw-loader!../../examples/toggle-example/toggle-example.component.html')
+    .default;
   properties: ApiDescriptionProperty[] = [
     {
       name: 'checked',

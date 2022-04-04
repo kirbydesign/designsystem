@@ -37,6 +37,7 @@ export class RadioComponent {
 
   _labelId = UniqueIdGenerator.scopedTo('kirby-radio-label').next();
 
-  @ViewChild(IonRadio, { read: ElementRef, static: true })
-  private ionRadioElement?: ElementRef<HTMLIonRadioElement>;
+  @ViewChild(IonRadio, { read: ElementRef, static: true }) private ionRadioElement?: ElementRef<
+    HTMLIonRadioElement
+  >;
 }

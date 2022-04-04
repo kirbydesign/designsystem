@@ -229,18 +229,16 @@ describe('SegmentedControl with Badge', () => {
   it('should render icon in badge with correct name', () => {
     const item: SegmentItem = itemsWithBadge[1];
     spectator.setInput({ items: [item] });
-    const iconComponent = spectator.debugElement.query(
-      By.directive(IconComponent)
-    ).componentInstance;
+    const iconComponent = spectator.debugElement.query(By.directive(IconComponent))
+      .componentInstance;
 
     expect(iconComponent.name).toBe(item.badge.icon);
   });
 
   it('should render badge with icon if both icon and content is provided', () => {
     spectator.setInput({ items: [itemsWithBadge[2]] });
-    const iconComponent = spectator.debugElement.query(
-      By.directive(IconComponent)
-    ).componentInstance;
+    const iconComponent = spectator.debugElement.query(By.directive(IconComponent))
+      .componentInstance;
 
     expect(iconComponent).toBeDefined();
   });

@@ -12,7 +12,6 @@
 
 .github-error {
   font-style: italic;
-
   ion-icon[name='alert'] {
     font-size: 24px;
     vertical-align: text-bottom;
@@ -45,7 +44,6 @@
   tr {
     &.component {
       vertical-align: middle;
-      border-top: 0.1rem solid utils.get-color('medium');
 
       .component {
         ion-icon {
@@ -66,6 +64,10 @@
       &.expanded ~ .enhancement-subcomponent {
         display: table-row;
       }
+    }
+
+    &.component {
+      border-top: 0.1rem solid utils.get-color('medium');
     }
 
     &.subcomponent,
@@ -99,7 +101,6 @@
       &-subcomponent td:first-child {
         padding-left: 2rem;
       }
-
       ion-icon[name='add-circle'] {
         font-size: 16px;
         vertical-align: sub;
@@ -125,7 +126,7 @@
     }
   }
 
-  a[href^='https:\/\/'] ion-icon {
+  a[href^="https://"] ion-icon {
     vertical-align: sub;
     font-size: 18px;
 
@@ -139,7 +140,6 @@
 
     &.version {
       margin-left: 0.5rem;
-
       --ion-color-base: #{utils.get-color('semi-dark')};
       --ion-color-contrast: #{utils.get-color('white')};
     }

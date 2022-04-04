@@ -1,7 +1,7 @@
 @use '~@kirbydesign/core/src/scss/utils';
 
 :host(:not(.tab-bar-bottom-hidden)) {
-  --kirby-page-footer-safe-area-bottom: 0;
+  --kirby-page-footer-safe-area-bottom: 0px;
 }
 
 ion-tabs {
@@ -9,14 +9,12 @@ ion-tabs {
     --background: rgba(#{utils.get-color('white-rgb')}, 0.94);
     --border: 1px solid #{utils.get-color('light')};
     --color: #{utils.get-color('black')};
-
     display: flex;
     max-width: var(--kirby-tab-bar-max-width, none);
     justify-content: center;
     height: var(--kirby-tab-bar-height);
 
     $padding: calc((100vw - var(--kirby-tab-bar-max-width, none)) / 2);
-
     padding-left: $padding;
     padding-right: $padding;
     width: 100%;
@@ -34,7 +32,6 @@ ion-tabs {
   @include utils.media('>=large') {
     @include utils.not-touch {
       flex-direction: column-reverse;
-
       // Ensure page-footer falls back to safe-area default
       --kirby-page-footer-safe-area-bottom: initial;
 

@@ -26,7 +26,7 @@ $min-screen-width: 375px;
 
   // Only apply focus ring if pointer device can hover
   // (effectively desktop/mouse devices):
-  @include utils.focus {
+  @include utils.focus() {
     > button,
     > button.attention-level3 {
       border-color: utils.$focus-ring-color;
@@ -74,7 +74,6 @@ kirby-card {
   @include utils.media('>=small') {
     min-width: $min-screen-width - $margin-horizontal-total;
   }
-
   max-width: calc(100vw - #{$margin-horizontal-total});
 }
 
@@ -114,7 +113,7 @@ kirby-card {
 
     &.is-open {
       > button {
-        // Move button on top of card's shadow:
+        //Move button on top of card's shadow:
         z-index: utils.z('dropdown') + 1;
       }
     }

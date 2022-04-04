@@ -9,9 +9,8 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
 export class FabSheetShowcaseComponent {
   disableFabSheet = false;
 
-  exampleHtml: string =
-    require('!raw-loader!../../examples/fab-sheet-example/fab-sheet-example.component.html')
-      .default;
+  exampleHtml: string = require('!raw-loader!../../examples/fab-sheet-example/fab-sheet-example.component.html')
+    .default;
   properties: ApiDescriptionProperty[] = [
     {
       name: 'disabled',

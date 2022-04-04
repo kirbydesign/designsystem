@@ -18,7 +18,7 @@ export const stockChartDeprecatedOptions = (locale: string, height: number) => {
 
   options.tooltip.backgroundColor = ColorHelper.getThemeColorRgbString('background-color');
   // Using a function instead of a lamdba-expression because of a reference to this.
-  options.tooltip.formatter = function () {
+  options.tooltip.formatter = function() {
     return (
       '<div class="kirby-text-xsmall">' +
       // @ts-ignore
@@ -104,7 +104,7 @@ export const annotations = (locale: string): Highcharts.AnnotationsOptions => {
         verticalAlign: 'top',
         backgroundColor: ColorHelper.getThemeColorRgbString('tertiary'),
         // Using a function instead of a lamdba-expression because of a reference to this.
-        formatter: function () {
+        formatter: function() {
           return formatNumber(this.y, locale, '1.1-1');
         },
       },
@@ -116,7 +116,7 @@ export const annotations = (locale: string): Highcharts.AnnotationsOptions => {
         verticalAlign: 'bottom',
         backgroundColor: ColorHelper.getThemeColorRgbString('tertiary'),
         // Using a function instead of a lamdba-expression because of a reference to this.
-        formatter: function () {
+        formatter: function() {
           return formatNumber(this.y, locale, '1.1-1');
         },
       },

@@ -18,7 +18,7 @@ import {
   ],
 })
 export class MockSegmentedControlComponent {
-  @Input() mode: SegmentedControlMode | `${SegmentedControlMode}`;
+  @Input() mode: SegmentedControlMode;
   @Input() items: SegmentItem[];
   @Input() selectedIndex: number;
   @Input() value: SegmentItem;

@@ -1,5 +1,4 @@
 @use '~@kirbydesign/core/src/scss/utils';
-
 $month-navigator-width: 80px;
 
 table {
@@ -90,14 +89,13 @@ td {
 }
 
 .day {
-  $day-width: utils.size('xl');
-
+  $dayWidth: utils.size('xl');
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: $day-width * 0.5;
-  width: $day-width;
-  height: $day-width;
+  border-radius: $dayWidth * 0.5;
+  width: $dayWidth;
+  height: $dayWidth;
   margin: utils.size('xxxs') 0;
 }
 

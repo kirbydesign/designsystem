@@ -48,7 +48,10 @@ describe('InputComponent in Item', () => {
 
     it('should render with correct width', () => {
       //window.getComputedStyle() returns width in pixels - so use element.computedStyleMap:
-      const styleWidth = (element as any).computedStyleMap().get('width').toString();
+      const styleWidth = (element as any)
+        .computedStyleMap()
+        .get('width')
+        .toString();
       expect(styleWidth).toBe('100%');
     });
   });
@@ -64,7 +67,10 @@ describe('InputComponent in Item', () => {
 
     it('should render with default width', () => {
       //window.getComputedStyle() returns width in pixels - so use element.computedStyleMap:
-      const styleWidth = (element as any).computedStyleMap().get('width').toString();
+      const styleWidth = (element as any)
+        .computedStyleMap()
+        .get('width')
+        .toString();
       expect(styleWidth).toBe('auto');
     });
 

@@ -1,14 +1,13 @@
-@use 'sass:map';
+@use "sass:map";
 @use '~@kirbydesign/core/src/scss/utils';
 
 utils.$border-radius: 6px;
-
 $checkbox-icon-size: utils.size('m');
 $spacing-to-edge: map.get(utils.$checkbox-radio-spacing, 'to-edge');
 $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
 $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
 
-@function get-vertical-padding($target-height) {
+@function getVerticalPadding($target-height) {
   @return ($target-height - $checkbox-icon-size) * 0.5;
 }
 
@@ -47,7 +46,6 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
 
     ion-checkbox {
       opacity: 1;
-
       --checkmark-color: #{utils.get-color('semi-dark')};
       --background: #{utils.get-color('semi-light')};
       --background-checked: #{utils.get-color('semi-light')};
@@ -77,7 +75,6 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
         border-radius: utils.$border-radius;
       }
     }
-
     &:active {
       --background: #{utils.get-color('white-shade')};
     }
@@ -93,7 +90,7 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
       display: inline-flex;
       align-items: flex-start;
       vertical-align: top;
-      padding: get-vertical-padding($default-checkbox-radio-size) 0;
+      padding: getVerticalPadding($default-checkbox-radio-size) 0;
       padding-right: $spacing-to-label; // Ensure same padding on right side of label
     }
 
@@ -101,10 +98,9 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
       :host-context(.checkbox-#{$size}),
       &.#{$size} {
         .wrapper {
-          $vertical-padding: get-vertical-padding($height);
-
-          padding-top: $vertical-padding;
-          padding-bottom: $vertical-padding;
+          $verticalPadding: getVerticalPadding($height);
+          padding-top: $verticalPadding;
+          padding-bottom: $verticalPadding;
         }
       }
     }

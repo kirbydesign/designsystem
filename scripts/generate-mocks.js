@@ -13,7 +13,7 @@ const argv = process.argv;
 
 // Any 'npm run' positional arguments after -- are used to pass --prefixed flags
 // and options to the script which would otherwise be parsed by npm.
-const terminator = '--';
+const terminator = '--'; 
 const terminatorIndex = argv.indexOf(terminator);
 function hasFlag(flag) {
   flag = terminator + flag;
@@ -50,7 +50,7 @@ function generateMocks() {
   new GenerateMocks().renderMocks(inputPaths.angular, outputPaths, subFolder);
 }
 
-hasChanges(inputPaths).then((hasChanged) => {
-  if (!hasChanged && !hasFlag('force')) return;
-  generateMocks();
-});
+  hasChanges(inputPaths).then((hasChanged) => {
+    if (!hasChanged && !hasFlag('force')) return;
+    generateMocks();
+  });

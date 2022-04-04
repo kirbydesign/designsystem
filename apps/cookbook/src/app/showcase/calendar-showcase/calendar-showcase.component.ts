@@ -33,11 +33,10 @@ export class CalendarShowcaseComponent {
     this.todayDate.setDate(today.getDate() + 3);
   }
 
-  exampleHtml: string =
-    require('!raw-loader!../../examples/calendar-example/calendar-example.component.html').default;
-  exampleWithCardHtml: string =
-    require('!raw-loader!../../examples/calendar-example/calendar-card-example.component.html')
-      .default;
+  exampleHtml: string = require('!raw-loader!../../examples/calendar-example/calendar-example.component.html')
+    .default;
+  exampleWithCardHtml: string = require('!raw-loader!../../examples/calendar-example/calendar-card-example.component.html')
+    .default;
   properties: ApiDescriptionProperty[] = [
     {
       name: 'selectedDate',

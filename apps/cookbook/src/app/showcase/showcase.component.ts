@@ -45,8 +45,9 @@ export class ShowcaseComponent implements OnDestroy {
     this.exampleComponentGitUrl = this.gitUrl + exampleComponentUrlSegment + '-example';
     this.exampleComponentName = this.replaceHyphens(exampleComponentUrlSegment);
     this.showCallToActionLinks = this.exampleComponentName !== 'colors';
-    this.propertiesTable =
-      this.elementRef.nativeElement.getElementsByClassName('api-description')[0];
+    this.propertiesTable = this.elementRef.nativeElement.getElementsByClassName(
+      'api-description'
+    )[0];
   }
 
   private getExampleComponentUrlSegment(url: string) {

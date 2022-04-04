@@ -22,8 +22,8 @@ export class ListShowcaseComponent implements OnInit {
   sectionsExampleTemplate: string = ListWithSectionsExampleTemplate;
   items: string = ListItemsExampleTemplate;
 
-  exampleHtml: string =
-    require('!raw-loader!../../examples/list-example/list-example.component.html').default;
+  exampleHtml: string = require('!raw-loader!../../examples/list-example/list-example.component.html')
+    .default;
 
   sectionHeaderExampleHtml: string =
     '<GridLayout *kirbyListSectionHeader="let section" ios:height="50">...</GridLayout>';

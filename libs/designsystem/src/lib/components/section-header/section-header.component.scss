@@ -3,12 +3,10 @@
 
 :host {
   --kirby-section-header-color: #{utils.get-text-color('black')};
-
   ion-item-divider {
     --inner-padding-end: 0;
     --background: transparent;
-    @include section-header.typography;
-
+    @include section-header.typography();
     font-weight: inherit;
     min-height: 0;
   }

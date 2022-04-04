@@ -8,7 +8,6 @@ $padding: utils.size('s');
   border-top: 1px solid $divider-color;
   border-bottom: 1px solid $divider-color;
 }
-
 .header {
   display: flex;
   align-items: center;
@@ -18,19 +17,15 @@ $padding: utils.size('s');
   cursor: pointer;
   user-select: none;
 }
-
 .title {
   flex-grow: 2;
 }
-
 .kirby-icon {
   transition: transform utils.get-transition-duration('quick');
 }
-
 .content {
   overflow: hidden;
 }
-
 .content-body {
   padding: 0 $padding $padding $padding;
 }
@@ -39,7 +34,6 @@ $padding: utils.size('s');
   .title {
     font-weight: utils.font-weight('bold');
   }
-
   .kirby-icon {
     transform: rotate(180deg);
   }
@@ -57,7 +51,6 @@ $padding: utils.size('s');
   &:first-child {
     border-top: none;
   }
-
   &:last-child {
     border-bottom: none;
   }

@@ -1,16 +1,18 @@
 @use '../form-field-inputs.shared' as shared;
-@use '~@kirbydesign/core/src/scss/utils';
+@use "~@kirbydesign/core/src/scss/utils";
 
 :host {
   &[type='number'] {
-    // fallback
+    //fallback
     appearance: textfield;
+    //Firefox
+    -moz-appearance: textfield;
   }
 
-  // Chrome, Safari, Edge, Opera
+  //Chrome, Safari, Edge, Opera */
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
-    appearance: none;
+    -webkit-appearance: none;
     margin: 0;
   }
 
@@ -28,7 +30,6 @@
     font-weight: utils.font-weight('bold');
   }
 }
-
 /* clean-css ignore:end */
 
 /*

@@ -6,11 +6,13 @@ describe('SlideButtonComponent', () => {
   let component: SlideButtonComponent;
   let fixture: ComponentFixture<SlideButtonComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [SlideButtonComponent],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [SlideButtonComponent],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SlideButtonComponent);

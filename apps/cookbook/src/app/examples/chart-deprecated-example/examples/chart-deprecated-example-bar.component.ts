@@ -6,7 +6,7 @@ import { DesignTokenHelper, ModalController } from '@kirbydesign/designsystem';
 const getColor = DesignTokenHelper.getColor;
 
 function colorPoints(selectedYear: string) {
-  return function () {
+  return function() {
     var series = this.series;
     for (var i = 0, ie = series.length; i < ie; ++i) {
       var points = series[i].data;

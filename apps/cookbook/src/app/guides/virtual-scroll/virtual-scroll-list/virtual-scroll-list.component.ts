@@ -5,7 +5,6 @@ import { Component } from '@angular/core';
   templateUrl: './virtual-scroll-list.component.html',
 })
 export class VirtualScrollListComponent {
-  exampleHtml: string =
-    require('!raw-loader!../../../examples/virtual-scroll-example/virtual-scroll-list-example/virtual-scroll-list-example.component.html')
-      .default;
+  exampleHtml: string = require('!raw-loader!../../../examples/virtual-scroll-example/virtual-scroll-list-example/virtual-scroll-list-example.component.html')
+    .default;
 }

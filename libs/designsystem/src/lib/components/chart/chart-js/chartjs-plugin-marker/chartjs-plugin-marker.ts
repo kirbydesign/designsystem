@@ -30,7 +30,7 @@ const hasMarkerConfiguration = (chart: Chart) => {
 export default {
   id: 'marker',
 
-  afterInit: function (chart) {
+  afterInit: function(chart) {
     if (!hasMarkerConfiguration(chart)) {
       return;
     }
@@ -64,7 +64,7 @@ export default {
     };
   },
 
-  getOption: function (chart, category, name) {
+  getOption: function(chart, category, name) {
     return valueOrDefault(
       chart.options.plugins.marker[category]
         ? chart.options.plugins.marker[category][name]
@@ -73,14 +73,14 @@ export default {
     );
   },
 
-  getXScale: function (chart) {
+  getXScale: function(chart) {
     return chart.data.datasets.length ? chart.scales[chart.getDatasetMeta(0).xAxisID] : null;
   },
-  getYScale: function (chart) {
+  getYScale: function(chart) {
     return chart.scales[chart.getDatasetMeta(0).yAxisID];
   },
 
-  afterEvent: function (chart, event) {
+  afterEvent: function(chart, event) {
     if (!hasMarkerConfiguration(chart)) {
       return;
     }
@@ -138,7 +138,7 @@ export default {
 
     chart.draw();
   },
-  doDraw: function (chart) {
+  doDraw: function(chart) {
     if (!hasMarkerConfiguration(chart)) {
       return;
     }
@@ -153,7 +153,7 @@ export default {
 
     return true;
   },
-  beforeDraw: function (chart) {
+  beforeDraw: function(chart) {
     return this.doDraw(chart);
   },
   // Logic moved to beforeDraw in order
@@ -163,7 +163,7 @@ export default {
   //   return this.doDraw(chart);
   // },
 
-  drawTraceLine: function (chart) {
+  drawTraceLine: function(chart) {
     if (!hasMarkerConfiguration(chart)) {
       return;
     }
@@ -190,7 +190,7 @@ export default {
     chart.ctx.setLineDash([]);
   },
 
-  drawTracePoints: function (chart) {
+  drawTracePoints: function(chart) {
     if (!hasMarkerConfiguration(chart)) {
       return;
     }
@@ -221,7 +221,7 @@ export default {
     }
   },
 
-  interpolateValues: function (chart) {
+  interpolateValues: function(chart) {
     for (var chartIndex = 0; chartIndex < chart.data.datasets.length; chartIndex++) {
       var dataset = chart.data.datasets[chartIndex];
 
@@ -235,7 +235,7 @@ export default {
       }
 
       var data = dataset.data;
-      var index = data.findIndex(function (o) {
+      var index = data.findIndex(function(o) {
         return o.x >= xValue;
       });
       var prev = data[index - 1];
