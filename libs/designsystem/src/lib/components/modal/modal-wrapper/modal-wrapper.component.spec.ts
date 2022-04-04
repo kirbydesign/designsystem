@@ -20,6 +20,7 @@ import {
   ModalWrapperTestBuilder,
   StaticFooterEmbeddedComponent,
   StaticPageProgressEmbeddedComponent,
+  TitleEmbeddedComponent,
 } from './modal-wrapper.testbuilder';
 
 fdescribe('ModalWrapperComponent', () => {
@@ -41,15 +42,15 @@ fdescribe('ModalWrapperComponent', () => {
     ],
     declarations: [
       MockComponents(
+        IonHeader,
+        IonToolbar,
+        IonTitle,
+        IonContent,
         IconComponent,
         ButtonComponent,
         PageProgressComponent,
         ModalFooterComponent,
-        IonHeader,
-        IonToolbar,
-        IonTitle,
-        IonButtons,
-        IonContent
+        IonButtons
       ),
     ],
   });
@@ -70,12 +71,22 @@ fdescribe('ModalWrapperComponent', () => {
   });
 
   describe("when 'collapseTitle' is enabled", () => {
-    let ionContent: HTMLIonContentElement;
+    /* 
+      Whether the title is displayed & truncated is not tested. 
+      This is the responsibility of the ionic components; we assume
+      they're working as intended. 
 
+      If needed, it should be implemented as an integration test. 
+    */
+
+    let ionContentElement: HTMLIonContentElement;
+    let ionTitleElement: HTMLIonTitleElement;
+    const testTitle = 'This is a long test title';
     beforeEach(() => {
-      spectator = modalWrapperTestBuilder.flavor('modal').withCollapsibleTitle().build();
+      spectator = modalWrapperTestBuilder.flavor('modal').withCollapsibleTitle(testTitle).build();
 
-      ionContent = spectator.query('ion-content');
+      ionContentElement = spectator.query('ion-content');
+      ionTitleElement = spectator.query('ion-title');
     });
 
     afterEach(() => {
@@ -84,7 +95,7 @@ fdescribe('ModalWrapperComponent', () => {
 
     it('should not have any padding between content & toolbar', () => {
       const ionContentToolbarElement: HTMLIonToolbarElement =
-        ionContent.querySelector('ion-toolbar');
+        ionContentElement.querySelector('ion-toolbar');
       expect(ionContentToolbarElement).not.toBeUndefined();
 
       expect(ionContentToolbarElement).toHaveComputedStyle({
@@ -94,7 +105,15 @@ fdescribe('ModalWrapperComponent', () => {
         '--padding-start': '0px',
         '--padding-end': '0px',
       });
-      expect(ionContent).toHaveComputedStyle({ '--padding-top': '0px' });
+      expect(ionContentElement).toHaveComputedStyle({ '--padding-top': '0px' });
+    });
+
+    it('should place the title in both the content & the header', () => {
+      const contentTitle = ionContentElement.querySelector('kirby-page-title').innerHTML;
+      const headerTitle = ionTitleElement.querySelector('kirby-page-title').innerHTML;
+
+      expect(contentTitle).toBe(testTitle);
+      expect(headerTitle).toBe(testTitle);
     });
   });
 
