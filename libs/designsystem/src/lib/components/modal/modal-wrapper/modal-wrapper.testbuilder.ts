@@ -7,7 +7,6 @@ import { ModalWrapperComponent } from './modal-wrapper.component';
 
 export class ModalWrapperTestBuilder {
   private config: ModalConfig = {
-    title: null,
     component: null,
     flavor: null,
   };
@@ -15,17 +14,12 @@ export class ModalWrapperTestBuilder {
   constructor(private readonly createComponent: SpectatorFactory<ModalWrapperComponent>) {}
 
   title(title: string) {
-    this.config.title = title;
+    this.config['componentProps'] = { ...this.config?.componentProps, title };
     return this;
   }
 
-  withCollapsibleTitle(title = 'Test Title') {
-    this.config = {
-      ...this.config,
-      collapseTitle: true,
-      component: TitleEmbeddedComponent,
-      componentProps: { ...this.config.componentProps, title },
-    };
+  collapsibleTitle(value: boolean) {
+    this.config['collapseTitle'] = value;
     return this;
   }
 
