@@ -64,7 +64,7 @@ class ContentWithNoOverflowEmbeddedComponent {}
 })
 class PageProgressEmbeddedComponent {}
 
-fdescribe('ModalHelper', () => {
+describe('ModalHelper', () => {
   let spectator: SpectatorService<ModalHelper>;
   let modalHelper: ModalHelper;
   let ionModalController: IonicModalController;
