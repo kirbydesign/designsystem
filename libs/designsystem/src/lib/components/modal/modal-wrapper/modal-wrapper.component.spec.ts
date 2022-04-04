@@ -20,10 +20,9 @@ import {
   ModalWrapperTestBuilder,
   StaticFooterEmbeddedComponent,
   StaticPageProgressEmbeddedComponent,
-  TitleEmbeddedComponent,
 } from './modal-wrapper.testbuilder';
 
-fdescribe('ModalWrapperComponent', () => {
+describe('ModalWrapperComponent', () => {
   const createComponent = createComponentFactory({
     component: ModalWrapperComponent,
     imports: [RouterTestingModule],
@@ -82,6 +81,7 @@ fdescribe('ModalWrapperComponent', () => {
     let ionContentElement: HTMLIonContentElement;
     let ionTitleElement: HTMLIonTitleElement;
     const testTitle = 'This is a long test title';
+
     beforeEach(() => {
       spectator = modalWrapperTestBuilder.flavor('modal').withCollapsibleTitle(testTitle).build();
 
