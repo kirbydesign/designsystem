@@ -1,5 +1,7 @@
 @use '~@kirbydesign/core/src/scss/utils';
 
+/* stylelint-disable declaration-block-no-redundant-longhand-properties */
+
 $header-height-mobile: utils.size('xxxl');
 $header-height-desktop: 2 * utils.size('xxl');
 $footer-height: 3 * utils.size('xxl');

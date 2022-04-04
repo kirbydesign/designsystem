@@ -32,10 +32,10 @@ export const AreaSplineOptions: Options = {
     style: {
       fontSize: '1.25rem',
     },
-    formatter: function(): string {
+    formatter: function (): string {
       return String(this.y);
     },
-    positioner: function() {
+    positioner: function () {
       return { x: this.chart.plotSizeX / 2 - this.label.width / 2, y: 0 };
     },
   },

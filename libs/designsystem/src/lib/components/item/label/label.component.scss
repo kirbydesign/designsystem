@@ -16,11 +16,11 @@
 }
 
 :host-context(kirby-item) ion-label {
-  @include item.item-typography();
+  @include item.item-typography;
 }
 
 :host-context(kirby-section-header) ion-label {
-  @include section-header.typography();
+  @include section-header.typography;
 }
 
 :host([slot='end']) ion-label {

@@ -11,6 +11,7 @@ article {
 
 .icon-outline {
   $icon-size: utils.size('xxl') * 2;
+
   width: $icon-size;
   height: $icon-size;
   margin-left: auto;
@@ -41,6 +42,7 @@ p.subtitle {
     .icon-outline {
       border-color: #{utils.get-color($color-name)};
     }
+
     kirby-icon {
       color: #{utils.get-color($color-name)};
     }
