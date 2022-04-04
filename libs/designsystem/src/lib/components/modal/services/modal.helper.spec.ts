@@ -146,7 +146,7 @@ describe('ModalHelper', () => {
   };
 
   const openModal = async (title: string = 'Modal', component?: any, size?: ModalSize) => {
-    await openOverlay({ flavor: 'modal', title, component, size });
+    await openOverlay({ flavor: 'modal', component, size });
   };
 
   const openDrawer = async (
@@ -155,7 +155,7 @@ describe('ModalHelper', () => {
     size?: ModalSize,
     interactWithBackground?: boolean
   ) => {
-    await openOverlay({ flavor: 'drawer', title, component, size, interactWithBackground });
+    await openOverlay({ flavor: 'drawer', component, size, interactWithBackground });
   };
 
   const expectShadowStyle = () => {
@@ -435,7 +435,6 @@ describe('ModalHelper', () => {
           beforeEach(async () => {
             await openOverlay({
               flavor: 'compact',
-              title: 'Compact Modal',
               component: undefined,
             });
           });
@@ -469,7 +468,6 @@ describe('ModalHelper', () => {
               beforeEach(async () => {
                 await openOverlay({
                   flavor: firstFlavor,
-                  title: `First Modal - flavor: ${firstFlavor}`,
                   component: undefined,
                 });
               });
@@ -485,7 +483,6 @@ describe('ModalHelper', () => {
                   beforeEach(async () => {
                     secondOverlay = await modalHelper.showModalWindow({
                       flavor: secondFlavor,
-                      title: `Second Modal - flavor: ${secondFlavor}`,
                       component: undefined,
                     });
                     const secondIonModal = await ionModalController.getTop();
@@ -742,7 +739,6 @@ describe('ModalHelper', () => {
             beforeEach(async () => {
               await openOverlay({
                 flavor: firstFlavor,
-                title: `First Modal - flavor: ${firstFlavor}`,
                 component: undefined,
               });
             });
@@ -758,7 +754,6 @@ describe('ModalHelper', () => {
                 beforeEach(async () => {
                   secondOverlay = await modalHelper.showModalWindow({
                     flavor: secondFlavor,
-                    title: `Second Modal - flavor: ${secondFlavor}`,
                     component: undefined,
                   });
                   const secondIonModal = await ionModalController.getTop();
