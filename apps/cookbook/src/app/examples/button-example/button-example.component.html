@@ -10,8 +10,9 @@
       *ngFor="let size of buttonSizes"
       value="{{ size.value }}"
       [attr.selected]="buttonSize === size.value ? true : null"
-      >{{ size.text }}</option
     >
+      {{ size.text }}
+    </option>
   </select>
 </fieldset>
 
@@ -82,9 +83,7 @@
   <label>Disabled</label>
 </div>
 
-<h2>
-  Button with icon and text
-</h2>
+<h2>Button with icon and text</h2>
 <button kirby-button [size]="buttonSize">
   <kirby-icon name="edit"></kirby-icon>
   Icon Left

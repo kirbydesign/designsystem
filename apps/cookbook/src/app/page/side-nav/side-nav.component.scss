@@ -64,7 +64,7 @@ section {
     &.is-hidden {
       opacity: 0;
       max-height: 0;
-      padding: 0 0;
+      padding: 0;
       pointer-events: none;
     }
   }
@@ -88,6 +88,7 @@ hr {
   margin-block-end: $divider-spacing;
   margin-inline-start: $divider-inset;
   margin-inline-end: $divider-inset;
+
   &:last-child {
     border-color: transparent;
   }

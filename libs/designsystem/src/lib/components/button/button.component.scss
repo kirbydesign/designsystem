@@ -32,6 +32,7 @@ $button-width: (
   &.icon-left,
   &.icon-right {
     --kirby-icon-font-size: #{utils.size('s')};
+
     min-width: button-width('md');
   }
 }
@@ -97,8 +98,8 @@ $button-width: (
 :host {
   $border-width: 1px;
 
-  @include utils.accessible-target-size();
-  @include interaction-state.apply-focus-visible();
+  @include utils.accessible-target-size;
+  @include interaction-state.apply-focus-visible;
   @include interaction-state.initialize-layer($border-width);
   @include interaction-state.apply-hover;
   @include interaction-state.extend-content {
@@ -145,6 +146,7 @@ $button-width: (
     --kirby-icon-margin-right: #{utils.size('xxs')};
     --kirby-button-padding-left: #{utils.size('xs')};
     --kirby-button-padding-right: #{utils.size('s')};
+
     padding: 0;
   }
 
@@ -152,6 +154,7 @@ $button-width: (
     --kirby-icon-margin-left: #{utils.size('xxs')};
     --kirby-button-padding-left: #{utils.size('s')};
     --kirby-button-padding-right: #{utils.size('xs')};
+
     padding: 0;
   }
 
@@ -222,6 +225,7 @@ $button-width: (
 
   &.floating {
     $fab-size: 64px;
+
     width: $fab-size !important;
     height: $fab-size !important;
     min-width: unset;
@@ -242,6 +246,8 @@ $button-width: (
 }
 
 :host-context(kirby-dropdown) {
+  justify-content: space-between;
+
   &.attention-level2 {
     --kirby-button-background-color: #{utils.get-color('white')};
     --kirby-button-color: #{utils.get-color('white-contrast')};
@@ -260,6 +266,7 @@ $button-width: (
 }
 
 // Temp fix for https://github.com/angular/angular-cli/issues/13854#issuecomment-470831308
+
 /* clean-css ignore:start */
 :host-context(ion-toolbar kirby-page-actions) {
   font-size: utils.font-size('s');
@@ -277,9 +284,11 @@ $button-width: (
     @include button-no-decoration;
   }
 }
+
 /* clean-css ignore:end */
 
 // Temp fix for https://github.com/angular/angular-cli/issues/13854#issuecomment-470831308
+
 /* clean-css ignore:start */
 :host-context(.page-title kirby-page-actions) {
   &.no-decoration,
@@ -289,18 +298,17 @@ $button-width: (
     @include button-attentionlevel3;
   }
 }
+
 /* clean-css ignore:end */
 
 // Temp fix for https://github.com/angular/angular-cli/issues/13854#issuecomment-470831308
+
 /* clean-css ignore:start */
 :host-context(kirby-empty-state .content) {
   @include button-lg;
 }
-/* clean-css ignore:end */
 
-:host-context(kirby-dropdown) {
-  justify-content: space-between;
-}
+/* clean-css ignore:end */
 
 :host-context(kirby-toggle-button) {
   @each $color-name, $color-value in utils.$notification-colors {

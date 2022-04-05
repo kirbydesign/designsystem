@@ -10,12 +10,13 @@
   --kirby-badge-position: absolute;
   --kirby-badge-top: -#{utils.size('xxs')};
   --kirby-badge-right: #{utils.size('xxs')};
-  --kirby-badge-z-index: #{utils.z('segmentBadge')};
+  --kirby-badge-z-index: #{utils.z('segment-badge')};
 
   &.sm {
     ion-segment-button {
       min-height: utils.size('l');
       font-size: utils.font-size('xs');
+
       --padding-start: #{utils.size('s')};
       --padding-end: #{utils.size('s')};
     }
@@ -27,24 +28,27 @@
     overflow-x: auto;
     overflow-y: hidden; // chip touch area height is bigger than segmented control height
     // Hide scrollbar on touch device:
-    @include utils.touch() {
+    @include utils.touch {
       scrollbar-width: none; /* Firefox */
       &::-webkit-scrollbar {
         display: none;
       }
     }
   }
+
   &.compact {
     padding-inline: utils.size('xxxxs');
   }
 }
 
 ion-segment {
+  display: inline-flex; // The segmented control itself is block-level, but we don't want the background to stretch
+  width: auto; // The segmented control itself is block-level, but we don't want the background to stretch
+  overflow: visible; // Ensures the badge is not cut off
+  contain: unset; // Ensures the badge is not cut off
+
   --background: #{utils.get-color('white')};
-  display: inline-flex; //The segmented control itself is block-level, but we don't want the background to stretch
-  width: auto; //The segmented control itself is block-level, but we don't want the background to stretch
-  overflow: visible; //Ensures the badge is not cut off
-  contain: unset; //Ensures the badge is not cut off
+
   border-radius: utils.$border-radius-round;
 }
 
@@ -87,6 +91,7 @@ ion-segment-button {
   &::part(native)::after {
     @include ionic.transition;
   }
+
   // end NOTE
 
   &::part(indicator) {

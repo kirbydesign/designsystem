@@ -1,9 +1,9 @@
-@use "sass:list";
-@use "sass:map";
-@use "sass:math";
-@use "sass:string";
-@use "../themes/colors";
-@use "variables";
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:math';
+@use 'sass:string';
+@use '../themes/colors';
+@use 'variables';
 
 @function _get-map-prop($map, $key) {
   @if map.has-key($map, $key) {
@@ -16,9 +16,10 @@
 
 @function size($key: 'm') {
   $negative: string.index($key, '-') == 1;
-  @if ($negative) {
+  @if $negative {
     $key: string.slice($key, 2, -1);
   }
+
   $value: _get-map-prop(variables.$sizes, $key);
   @return if($negative, string.unquote('-' + $value), $value);
 }
@@ -28,7 +29,7 @@
 }
 
 @function font-size($key: 'n') {
-  @if ($key == 'display') {
+  @if $key == 'display' {
     @warn 'Display key is deprecated';
   }
   @return _get-map-prop(variables.$font-sizes, $key);
@@ -113,6 +114,7 @@
 }
 
 @mixin slotted($selectors...) {
+  /* stylelint-disable-next-line selector-pseudo-element-no-unknown */
   ::ng-deep > {
     #{$selectors} {
       @content;

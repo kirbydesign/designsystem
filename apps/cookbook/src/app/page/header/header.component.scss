@@ -60,23 +60,24 @@ nav {
     height: 100%;
     width: 100%;
   }
-}
 
-.logo {
   .text {
     opacity: 0;
     animation: enter utils.get-transition-duration('long') ease-in-out $text-delay forwards;
   }
+
   .large-rect {
     opacity: 0;
     animation: enter utils.get-transition-duration('long') ease-in-out $large-rect-delay forwards;
   }
+
   .medium-rect {
     opacity: 0;
     transform-origin: center top;
     animation: enter-pop utils.get-transition-duration('short') ease-in-out $medium-rect-delay
       forwards;
   }
+
   .small-rect {
     opacity: 0;
     transform-origin: center;
@@ -89,6 +90,7 @@ nav {
   0% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
   }
@@ -99,9 +101,11 @@ nav {
     transform: scale(0);
     opacity: 1;
   }
+
   89% {
     transform: scale(1.2);
   }
+
   100% {
     transform: scale(1);
     opacity: 1;

@@ -15,12 +15,13 @@ import { ButtonComponent, ButtonSize, NotificationColor } from '@kirbydesign/des
   ],
 })
 export class MockButtonComponent {
-  @Input() attentionLevel: '1' | '2' | '3';
+  @Input() attentionLevel: '1' | '2' | '3' | '4';
+  @Input() noDecoration: boolean;
   @Input() isDestructive: boolean;
   @Input() themeColor: NotificationColor;
   @Input() expand: 'full' | 'block';
   @Input() isFloating: boolean;
-  @Input() size: ButtonSize;
+  @Input() size: ButtonSize | `${ButtonSize}`;
 }
 
 // #endregion

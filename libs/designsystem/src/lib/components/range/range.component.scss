@@ -1,9 +1,9 @@
 @use '~@kirbydesign/core/src/scss/interaction-state';
 @use '~@kirbydesign/core/src/scss/utils';
 
-$tickHeight: 6px;
-$tickWidth: 6px;
-$knob-shadow: 0 5px 10px 0px rgba(28, 28, 28, 0.3), 0 0 5px 0 rgba(28, 28, 28, 0.08);
+$tick-height: 6px;
+$tick-width: 6px;
+$knob-shadow: 0 5px 10px 0 rgb(28 28 28 / 30%), 0 0 5px 0 rgb(28 28 28 / 8%);
 
 :host {
   display: flex;
@@ -20,10 +20,8 @@ ion-range {
   --knob-background: #{utils.get-color('white')};
   --knob-box-shadow: #{$knob-shadow};
   --knob-size: 24px;
-
   --pin-color: #{utils.get-text-color('black')};
   --pin-background: #{utils.get-color('semi-light')};
-
   --bar-background: #{utils.get-color('medium')};
   --bar-background-active: #{utils.get-color('dark')};
   --bar-border-radius: #{utils.size('xxxs')};
@@ -32,7 +30,6 @@ ion-range {
   &.range-disabled {
     --knob-background: #{utils.get-color('semi-light')};
     --knob-box-shadow: none;
-
     --bar-background: #{utils.get-color('semi-light')};
     --bar-background-active: #{utils.get-color('semi-light')};
 
@@ -45,7 +42,7 @@ ion-range {
   padding: 0;
 
   &.range-has-pin {
-    padding: 0 $tickWidth * 0.5;
+    padding: 0 $tick-width * 0.5;
   }
 
   &::part(knob) {
@@ -61,7 +58,7 @@ ion-range {
     min-width: 40px;
     position: relative;
 
-    &:before {
+    &::before {
       content: '';
       position: absolute;
       top: 100%;
@@ -76,10 +73,10 @@ ion-range {
   &::part(tick),
   &::part(tick-active) {
     border-radius: 50%;
-    width: $tickWidth;
-    height: $tickHeight;
+    width: $tick-width;
+    height: $tick-height;
     z-index: 1;
-    margin-inline-start: -$tickWidth * 0.5;
+    margin-inline-start: -$tick-width * 0.5;
   }
 
   &::part(tick) {

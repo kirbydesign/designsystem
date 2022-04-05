@@ -19,11 +19,12 @@ ion-fab-button {
   &::part(native)::after {
     @include ionic.transition;
   }
+
   // end NOTE
 
   --box-shadow: #{utils.get-elevation(8)};
 
-  @include interaction-state.apply-focus-visible() {
+  @include interaction-state.apply-focus-visible {
     outline: none;
     border-radius: utils.$border-radius-round;
   }
@@ -35,6 +36,7 @@ ion-fab-button {
   &[disabled] {
     --background: #{utils.get-color('semi-light')};
     --box-shadow: none;
+
     opacity: 1;
   }
 }

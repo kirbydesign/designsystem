@@ -7,6 +7,7 @@
 ion-header,
 ion-toolbar {
   --background: #{utils.get-color('background-color')};
+
   margin: 0 auto;
 
   @include utils.media('>=large') {
@@ -88,6 +89,7 @@ ion-back-button {
   &::part(native)::after {
     @include ionic.transition;
   }
+
   // end NOTE
 }
 
@@ -145,6 +147,7 @@ ion-content {
     width: 100%;
     position: absolute;
     bottom: 0;
+
     .content-inner {
       position: relative;
     }

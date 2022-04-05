@@ -4,11 +4,11 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
 @Component({
   selector: 'cookbook-empty-state-showcase',
   templateUrl: './empty-state-showcase.component.html',
-  styleUrls: ['./empty-state-showcase.component.scss'],
 })
 export class EmptyStateShowcaseComponent {
-  exampleHtml: string = require('!raw-loader!../../examples/empty-state-example/empty-state-example.component.html')
-    .default;
+  exampleHtml: string =
+    require('!raw-loader!../../examples/empty-state-example/empty-state-example.component.html')
+      .default;
 
   properties: ApiDescriptionProperty[] = [
     {

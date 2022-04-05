@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 import { GridCardConfiguration } from '@kirbydesign/designsystem';
+
 import { CardExampleComponent } from '../card-example/card-example.component';
 
 @Component({
   selector: 'cookbook-grid-example',
   templateUrl: './grid-example.component.html',
-  styleUrls: ['./grid-example.component.scss'],
 })
 export class GridExampleComponent implements OnInit {
   cardConfigurations: GridCardConfiguration[] = [];

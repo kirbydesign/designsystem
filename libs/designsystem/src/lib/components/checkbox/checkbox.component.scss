@@ -1,4 +1,4 @@
-@use "sass:map";
+@use 'sass:map';
 @use '~@kirbydesign/core/src/scss/interaction-state';
 @use '~@kirbydesign/core/src/scss/utils';
 
@@ -8,7 +8,7 @@ $spacing-to-edge: map.get(utils.$checkbox-radio-spacing, 'to-edge');
 $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
 $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
 
-@function getVerticalPadding($target-height) {
+@function get-vertical-padding($target-height) {
   @return ($target-height - $checkbox-icon-size) * 0.5;
 }
 
@@ -55,6 +55,7 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
 
     ion-checkbox {
       opacity: 1;
+
       --checkmark-color: #{utils.get-color('semi-dark')};
       --background: #{utils.get-color('semi-light')};
       --background-checked: #{utils.get-color('semi-light')};
@@ -70,7 +71,6 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
     }
 
     --transition: #{utils.get-transition-duration('quick')};
-
     --size: #{$checkbox-icon-size};
     --checkmark-width: #{utils.size('xxxs')};
     --background: #{utils.get-color('white')};
@@ -100,7 +100,7 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
       display: inline-flex;
       align-items: flex-start;
       vertical-align: top;
-      padding: getVerticalPadding($default-checkbox-radio-size) 0;
+      padding: get-vertical-padding($default-checkbox-radio-size) 0;
       padding-right: $spacing-to-label; // Ensure same padding on right side of label
     }
 
@@ -108,9 +108,10 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
       :host-context(.checkbox-#{$size}),
       &.#{$size} {
         .wrapper {
-          $verticalPadding: getVerticalPadding($height);
-          padding-top: $verticalPadding;
-          padding-bottom: $verticalPadding;
+          $vertical-padding: get-vertical-padding($height);
+
+          padding-top: $vertical-padding;
+          padding-bottom: $vertical-padding;
         }
       }
     }

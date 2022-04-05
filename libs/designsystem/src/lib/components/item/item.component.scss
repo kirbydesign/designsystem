@@ -1,4 +1,4 @@
-@use "sass:map";
+@use 'sass:map';
 @use '~@kirbydesign/core/src/scss/interaction-state/ionic';
 @use '~@kirbydesign/core/src/scss/utils';
 @use 'item.utils';
@@ -17,17 +17,15 @@
     --inner-padding-bottom: #{utils.size('xxs')};
     --inner-padding-end: #{utils.size('s')};
     --min-height: #{map.get(utils.$item-heights, 'm')};
-
     --background: var(--kirby-item-background, #{utils.get-color('white')});
-
     --background-activated: var(
       --kirby-item-background-activated,
       #{utils.get-color('white-shade')}
     );
+
     // WORKAROUND: Needed to fix ignored click on scrollend
     // https://github.com/ionic-team/ionic-framework/issues/21871
     --background-activated-opacity: 0.99;
-
     --background-focused: var(
       --kirby-item-background-focused,
       #{utils.get-color('background-color')}
@@ -58,7 +56,7 @@
       margin-inline-start: utils.size('s');
     }
 
-    @include item.item-typography();
+    @include item.item-typography;
 
     @include utils.slotted(':not([slot])') {
       width: 100%;
@@ -114,6 +112,7 @@ ion-item {
     --padding-bottom: 0;
   }
 }
+
 /* clean-css ignore:end */
 
 :host(.selected),
