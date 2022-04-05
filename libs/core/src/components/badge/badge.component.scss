@@ -14,7 +14,8 @@
     --color: #{utils.get-color('white-contrast')};
     --ion-color-base: var(--kirby-badge-background-color);
     --ion-color-contrast: var(--kirby-badge-color);
-    box-sizing: border-box; //Fixes https://github.com/kirbydesign/designsystem/issues/537
+
+    box-sizing: border-box; // Fixes https://github.com/kirbydesign/designsystem/issues/537
     border-radius: utils.size('xxs');
     font-size: inherit;
     position: relative;
@@ -23,6 +24,7 @@
 
   ::slotted(kirby-icon) {
     --kirby-icon-font-size: #{utils.font-size('n')};
+
     position: absolute;
     top: 0;
     left: 0;
@@ -45,6 +47,7 @@
     --padding-end: 5px;
     --padding-bottom: 3px;
     --padding-start: 5px;
+
     min-width: utils.size('s');
     min-height: utils.size('s');
   }
@@ -52,7 +55,7 @@
 
 @each $color-name, $color-value in utils.$notification-colors {
   $text-color: utils.get-color($color-name + '-contrast');
-  @if ($color-name == 'danger') {
+  @if $color-name == 'danger' {
     $text-color: utils.get-text-color('white');
   }
   :host(.#{$color-name}) {

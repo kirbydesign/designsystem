@@ -1,5 +1,6 @@
 @use '~@kirbydesign/core/src/scss/utils';
 
+/* stylelint-disable custom-property-pattern */
 .container {
   text-align: center;
 }
@@ -21,7 +22,7 @@
 
 .docs-demo-device > figure {
   border-radius: 32px;
-  box-shadow: 0 0 0 14px #090a0d, 0 0 0 17px #9fa3a8, 0 0 34px 17px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 0 14px #090a0d, 0 0 0 17px #9fa3a8, 0 0 34px 17px rgb(0 0 0 / 20%);
   height: 0;
   margin: 0;
   max-width: 320px;
@@ -62,7 +63,7 @@
   font-weight: 700;
   letter-spacing: 0.1em;
   line-height: 24px;
-  margin: 0px 3px;
+  margin: 0 3px;
   padding: 0 9px;
   text-transform: uppercase;
   transition: 200ms background-color ease, 200ms color ease;
@@ -96,7 +97,7 @@
   }
 }
 
-.docs-demo-device__ios-notch {
+.docs-demo-device-ios-notch {
   display: none;
   fill: #090a0d;
   left: 50%;
@@ -107,8 +108,8 @@
   z-index: 2;
 }
 
-.docs-demo-device.ios figure:after {
-  background-color: rgba(0, 0, 0, 0.5);
+.docs-demo-device.ios figure::after {
+  background-color: rgb(0 0 0 / 50%);
   border-radius: 2px;
   bottom: 6px;
   content: '';
@@ -121,8 +122,8 @@
   z-index: 1;
 }
 
-.docs-demo-device.ios .docs-demo-device__ios-notch,
-.docs-demo-device.ios figure:after {
+.docs-demo-device.ios .docs-demo-device-ios-notch,
+.docs-demo-device.ios figure::after {
   display: block;
 }
 
@@ -130,11 +131,11 @@
   border-radius: 20px;
 }
 
-.docs-demo-device__md-bar {
+.docs-demo-device-md-bar {
   display: none;
 }
 
-.docs-demo-device.md .docs-demo-device__md-bar {
+.docs-demo-device.md .docs-demo-device-md-bar {
   display: block;
   fill: #090a0d;
   opacity: 0.1;

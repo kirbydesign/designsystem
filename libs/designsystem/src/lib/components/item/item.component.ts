@@ -22,7 +22,7 @@ export class ItemComponent {
   reorderable: boolean;
   @HostBinding('class')
   @Input()
-  size: ItemSize = ItemSize.MD;
+  size: ItemSize | `${ItemSize}` = ItemSize.MD;
 
   // Prevent default when inside kirby-dropdown to avoid blurring dropdown:
   onMouseDown(event: MouseEvent) {

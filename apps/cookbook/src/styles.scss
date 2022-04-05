@@ -18,8 +18,8 @@ html {
 }
 
 *,
-*:before,
-*:after {
+*::before,
+*::after {
   box-sizing: inherit;
 }
 
@@ -42,6 +42,7 @@ code:not([class*='language-']) {
       --kirby-button-border-color: #{utils.get-color('white')};
       --kirby-button-color: #{utils.get-color('white')};
     }
+
     &.attention-level4 {
       --kirby-button-color: #{utils.get-color('white')};
     }

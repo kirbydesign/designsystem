@@ -8,11 +8,11 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   preserveWhitespaces: true,
 })
 export class SlidesShowcaseComponent {
-  exampleHtml: string = require('!raw-loader!../../examples/slides-example/slides-example.component.html')
-    .default;
+  exampleHtml: string =
+    require('!raw-loader!../../examples/slides-example/slides-example.component.html').default;
 
-  exampleTS: string = require('!raw-loader!../../examples/slides-example/slides-example.component.ts')
-    .default;
+  exampleTS: string =
+    require('!raw-loader!../../examples/slides-example/slides-example.component.ts').default;
   properties: ApiDescriptionProperty[] = [
     {
       name: 'slidesOptions',

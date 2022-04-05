@@ -28,7 +28,8 @@ import { TextareaComponent } from './textarea/textarea.component';
   templateUrl: './form-field.component.html',
 })
 export class FormFieldComponent
-  implements AfterContentChecked, AfterContentInit, OnInit, OnDestroy {
+  implements AfterContentChecked, AfterContentInit, OnInit, OnDestroy
+{
   private isRegistered = false;
   private element: HTMLElement;
   private inputElement: HTMLInputElement | HTMLTextAreaElement;
@@ -40,9 +41,8 @@ export class FormFieldComponent
 
   @ContentChild(InputCounterComponent, { static: false }) counter: InputCounterComponent;
   @ContentChild(RadioGroupComponent) private radioGroupComponent: RadioGroupComponent;
-  @ContentChild(RadioGroupComponent, { read: ElementRef }) private radioGroupElement: ElementRef<
-    HTMLElement
-  >;
+  @ContentChild(RadioGroupComponent, { read: ElementRef })
+  private radioGroupElement: ElementRef<HTMLElement>;
 
   @ContentChild(InputComponent, { read: ElementRef }) input: ElementRef<HTMLInputElement>;
   @ContentChild(TextareaComponent, { read: ElementRef }) textarea: ElementRef<HTMLTextAreaElement>;
