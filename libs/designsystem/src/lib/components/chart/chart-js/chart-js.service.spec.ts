@@ -1,6 +1,11 @@
 import { ElementRef } from '@angular/core';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
-import { Chart, ChartDataset as ChartJSDataset, ChartType as ChartJSType } from 'chart.js';
+import {
+  Chart,
+  ChartData,
+  ChartDataset as ChartJSDataset,
+  ChartType as ChartJSType,
+} from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
 import { MockProvider } from 'ng-mocks';
 
@@ -157,7 +162,7 @@ describe('ChartJSService', () => {
 
         chartJSService.renderChart({
           targetElement: canvasElement,
-          type: 'bar',
+          type: type,
           data: [1, 2, 3],
           labels: ['one', 'two', 'three'],
           customOptions: {
@@ -170,18 +175,106 @@ describe('ChartJSService', () => {
       });
     });
 
-    describe('when no data labels are provided', () => {
+    describe('when labels are provided', () => {
+      describe("via 'labels' argument", () => {
+        it('should apply them to the graph', () => {
+          const data = [1, 2, 3];
+          const labels = ['one', 'two', 'three'];
+          expect(labels.length).toBeGreaterThan(0);
+          expect(data.length).toBeGreaterThan(0);
+
+          chartJSService.renderChart({
+            targetElement: canvasElement,
+            type: 'bar',
+            data,
+            labels,
+          });
+
+          const chartLabels = chartJSService['chart'].data.labels;
+          expect(chartLabels.length).toEqual(labels.length);
+          expect(chartLabels).toEqual(labels);
+        });
+
+        describe('and the dataset also contains labels', () => {
+          it('should apply argument labels', () => {
+            const data = [
+              {
+                data: [
+                  { x: 'en', y: 1 },
+                  { x: 'to', y: 2 },
+                  { x: 'tre', y: 3 },
+                ],
+              },
+            ] as any;
+            const labels = ['one', 'two', 'three'];
+            expect(labels.length).toBeGreaterThan(0);
+            expect(data.length).toBeGreaterThan(0);
+
+            chartJSService.renderChart({
+              targetElement: canvasElement,
+              type: 'column',
+              data,
+              labels,
+            });
+
+            const chartLabels = chartJSService['chart'].data.labels;
+            expect(chartLabels.length).toEqual(labels.length);
+            expect(chartLabels).toEqual(labels);
+          });
+        });
+      });
+    });
+
+    describe('when no labels are provided', () => {
       it('should have a blank label for each data point', () => {
+        const data = [1, 2, 3];
+        const expectedLabels = ['', '', ''];
+        expect(data.length).toBeGreaterThan(0);
+        expect(expectedLabels.length).toEqual(data.length);
+
         chartJSService.renderChart({
           targetElement: canvasElement,
           type: 'column',
-          data: [1, 2, 3],
+          data,
         });
 
         const chartLabels = chartJSService['chart'].data.labels;
-        expect(chartLabels.length).toEqual(3);
-        chartLabels.forEach((label) => {
-          expect(label).toEqual('');
+        expect(chartLabels.length).toEqual(data.length);
+        expect(chartLabels).toEqual(expectedLabels);
+      });
+
+      describe('but the dataset contains labels for the index axis', () => {
+        it('should use the dataset labels', () => {
+          const data = [
+            { x: 'en', y: 1 },
+            { x: 'to', y: 2 },
+            { x: 'tre', y: 3 },
+          ] as any;
+          const dataset = [
+            {
+              data,
+            },
+          ];
+          expect(data.length).toBeGreaterThan(0);
+          expect(data.every(({ x }) => typeof x === 'string')).toBeTrue();
+
+          chartJSService.renderChart({
+            targetElement: canvasElement,
+            type: 'column',
+            data: dataset,
+          });
+
+          /* This assertion relies on the assumption that:
+          1. if chart.data.labels is empty &
+          2. datasets contains string along the index axis 
+          : then the strings in datasets will be used as labels. 
+
+          This assumption comes from the internal logic of chartjs. 
+          */
+          const chartData = chartJSService['chart'].data;
+          expect(chartJSService['chart'].options.indexAxis).toEqual('x');
+          expect(chartData.labels.length).toEqual(0);
+          expect(chartData.datasets).toEqual(dataset);
         });
       });
 
