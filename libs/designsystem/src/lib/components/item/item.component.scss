@@ -7,8 +7,8 @@
   position: relative;
 
   ion-item {
-    --padding-top: var(--item-padding-top);
-    --padding-bottom: var(--item-padding-bottom);
+    --padding-top: var(--item-padding-top, 0px);
+    --padding-bottom: var(--item-padding-bottom, 0px);
 
     font-size: utils.font-size('s');
 
