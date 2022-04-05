@@ -47,9 +47,11 @@
     @include interaction-state.initialize-layer;
     @include interaction-state.apply-hover('s');
     @include interaction-state.apply-focus-visible($shadow: utils.get-elevation(2));
+
     &.highlighted {
       @include interaction-state.apply-focus-visible($shadow: utils.get-elevation(4));
     }
+
     outline: none;
   }
 }

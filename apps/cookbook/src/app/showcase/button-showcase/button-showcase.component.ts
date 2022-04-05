@@ -9,8 +9,8 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
 export class ButtonShowcaseComponent {
   themeColors = ['light', 'white', 'dark'];
   themeColor = 'light';
-  exampleHtml: string = require('!raw-loader!../../examples/button-example/button-example.component.html')
-    .default;
+  exampleHtml: string =
+    require('!raw-loader!../../examples/button-example/button-example.component.html').default;
   properties: ApiDescriptionProperty[] = [
     {
       name: 'expand',

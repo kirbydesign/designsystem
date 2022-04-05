@@ -18,7 +18,7 @@
   }
 
   &[role='button'] {
-    @include interaction-state.apply-focus-visible() {
+    @include interaction-state.apply-focus-visible {
       cursor: pointer;
       outline: none;
     }
