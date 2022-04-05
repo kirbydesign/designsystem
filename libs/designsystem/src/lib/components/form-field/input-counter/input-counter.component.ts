@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { InputComponent } from '../input/input.component';
@@ -8,6 +8,7 @@ import { TextareaComponent } from './../textarea/textarea.component';
 @Component({
   selector: 'kirby-input-counter',
   templateUrl: './input-counter.component.html',
+  changeDetection: ChangeDetectionStrategy.Default,
 })
 export class InputCounterComponent implements OnInit, OnDestroy {
   @Input() listenTo: InputComponent | TextareaComponent;

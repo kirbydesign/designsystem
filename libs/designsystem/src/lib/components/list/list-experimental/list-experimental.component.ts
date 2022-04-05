@@ -1,4 +1,4 @@
-import { Component, HostListener, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, ViewChild } from '@angular/core';
 import { IonList } from '@ionic/angular';
 
 import { elementHasAncestor } from '../../../helpers/element-has-ancestor';
@@ -7,6 +7,7 @@ import { elementHasAncestor } from '../../../helpers/element-has-ancestor';
   selector: 'kirby-list-experimental',
   templateUrl: './list-experimental.component.html',
   styleUrls: ['./list-experimental.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListExperimentalComponent {
   @ViewChild(IonList, { static: true }) list: IonList;
