@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, HostBinding, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  HostBinding,
+  ViewChild,
+} from '@angular/core';
 import { IonTabs } from '@ionic/angular';
 
 import { TabsService } from './tabs.service';
@@ -7,6 +13,7 @@ import { TabsService } from './tabs.service';
   selector: 'kirby-tab-bar',
   templateUrl: './tabs.component.html',
   styleUrls: ['./tabs.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TabsComponent implements AfterViewInit {
   @HostBinding('class.tab-bar-bottom-hidden')
