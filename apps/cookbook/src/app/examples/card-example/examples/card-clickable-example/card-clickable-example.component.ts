@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { noop } from 'rxjs';
 
 @Component({
   selector: 'cookbook-card-clickable-example',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./card-clickable-example.component.scss'],
 })
 export class CardClickableExampleComponent {
-  function() {}
+  noop: () => void = noop;
 }
