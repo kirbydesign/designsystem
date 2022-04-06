@@ -11,7 +11,7 @@ import {
 })
 export class CardShowcaseComponent {
   exampleHtml: string =
-    require('!raw-loader!../../examples/card-example/card-example.component.html').default;
+    require('!raw-loader!../../examples/card-example/examples/card-example.component.html').default;
   properties: ApiDescriptionProperty[] = [
     {
       name: 'title',
