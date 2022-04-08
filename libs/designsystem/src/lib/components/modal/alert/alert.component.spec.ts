@@ -2,7 +2,6 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { DesignTokenHelper } from '@kirbydesign/core';
 
-import { WindowRef } from '../../../types/window-ref';
 import { ButtonComponent } from '../../button/button.component';
 import { EmptyStateComponent } from '../../empty-state/empty-state.component';
 
@@ -17,12 +16,6 @@ describe('AlertComponent', () => {
   const createHost = createHostFactory({
     component: AlertComponent,
     declarations: [ButtonComponent, EmptyStateComponent],
-    providers: [
-      {
-        provide: WindowRef,
-        useValue: <WindowRef>{ nativeWindow: window },
-      },
-    ],
   });
 
   beforeEach(() => {
