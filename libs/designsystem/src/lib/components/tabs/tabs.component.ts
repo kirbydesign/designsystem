@@ -13,7 +13,6 @@ import { TabsService } from './tabs.service';
   selector: 'kirby-tab-bar',
   templateUrl: './tabs.component.html',
   styleUrls: ['./tabs.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TabsComponent implements AfterViewInit {
   @HostBinding('class.tab-bar-bottom-hidden')
