@@ -233,7 +233,7 @@ $button-width: (
 
 :host-context(ion-toolbar kirby-page-actions) {
   font-size: utils.font-size('s');
-  margin: 0 4px;
+  margin: 0 utils.size('xxxs');
   height: utils.size('xl');
 
   &.icon-only {
