@@ -403,7 +403,6 @@ export class PageComponent
     const callback = (entries) => {
       if (initialized) {
         this.toolbarTitleVisible = !entries[0].isIntersecting;
-        // this.toolbarStickyActionsVisible = !entries[0].isIntersecting;
         this.changeDetectorRef.detectChanges();
       } else {
         initialized = true;

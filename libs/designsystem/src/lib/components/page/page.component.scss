@@ -26,12 +26,12 @@ ion-toolbar {
   box-sizing: border-box;
   padding-left: #{utils.size('xs')};
   padding-right: #{utils.size('xs')};
-  transition: padding-left ease 0.3s, padding-right ease 0.3s;
+  transition: padding utils.get-transition-easing('enter-exit')
+    utils.get-transition-duration('short');
 
   &.content-scrolled {
     padding-left: 0;
     padding-right: 0;
-    transition: padding-left ease 0.3s, padding-right ease 0.3s;
   }
 
   /*
@@ -92,15 +92,17 @@ ion-back-button {
   }
 
   &::part(native) {
-    margin: 0 4px 0 0;
+    margin: 0 utils.size('xxxs') 0 0;
     border-radius: utils.$border-radius-round;
-    overflow: hidden; // required for border radius to work
     border: 1px solid transparent;
     @include utils.focus {
       border: 1px solid #{utils.$focus-ring-color};
     }
 
-    transition: color ease 0.3s, background-color ease 0.3s;
+    transition: color utils.get-transition-easing('enter-exit')
+      utils.get-transition-duration('short');
+    transition: background-color utils.get-transition-easing('enter-exit')
+      utils.get-transition-duration('short');
   }
 }
 
@@ -110,7 +112,6 @@ ion-toolbar.content-scrolled ion-back-button {
 
   &::part(native) {
     margin: 0;
-    transition: color ease 0.3s, background-color ease 0.3s;
   }
 }
 

@@ -240,14 +240,16 @@ $button-width: (
     width: utils.size('xl');
   }
 
+  transition: color utils.get-transition-easing('enter-exit') utils.get-transition-duration('short');
+  transition: background-color utils.get-transition-easing('enter-exit')
+    utils.get-transition-duration('short');
+
   &.attention-level1,
   &.attention-level2,
   &.attention-level3,
   &.attention-level4 {
     @include button-attentionlevel2;
   }
-
-  transition: color ease 0.3s, background-color ease 0.3s;
 }
 
 :host-context(ion-toolbar ion-buttons:last-child kirby-page-actions) {
@@ -263,8 +265,6 @@ $button-width: (
   &.attention-level4 {
     @include button-attentionlevel4;
   }
-
-  transition: color ease 0.3s, background-color ease 0.3s;
 }
 
 /* clean-css ignore:end */
