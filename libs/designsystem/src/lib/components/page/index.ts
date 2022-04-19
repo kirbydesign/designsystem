@@ -2,6 +2,7 @@ export { PageComponent } from './page.component';
 export { PageProgressComponent } from './page.component';
 export { PageTitleComponent } from './page.component';
 export { PageTitleDirective } from './page.component';
+export { PageSubtitleDirective } from './page.component';
 export { PageToolbarTitleDirective } from './page.component';
 export { PageActionsDirective } from './page.component';
 export { PageContentDirective } from './page.component';
