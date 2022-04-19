@@ -1,19 +1,12 @@
-import { Inject, Injectable, Optional } from '@angular/core';
+import { Injectable } from '@angular/core';
 
-import { Icon, IconSettings, ICON_SETTINGS } from './icon-settings';
+import { Icon } from './icon-settings';
 
 @Injectable({
   providedIn: 'root',
 })
 export class IconRegistryService {
   private iconRegistry = new Map<string, string>();
-
-  constructor(@Optional() @Inject(ICON_SETTINGS) iconSettings?: IconSettings) {
-    if (iconSettings) {
-      this.addIcons(iconSettings.icons);
-      console.warn(`Use of IconSettings is deprecated, use IconRegistryService instead`);
-    }
-  }
 
   public addIcon(iconName: string, svgPath: string): void {
     if (!this.iconRegistry.has(iconName)) {
