@@ -11,7 +11,6 @@ const getColor = DesignTokenHelper.getColor;
 
 describe('AlertComponent', () => {
   let spectator: SpectatorHost<AlertComponent>;
-  let element: HTMLElement;
 
   const createHost = createHostFactory({
     component: AlertComponent,
@@ -20,11 +19,12 @@ describe('AlertComponent', () => {
 
   beforeEach(() => {
     spectator = createHost(`
-    <kirby-alert okBtn="Test OK Button Text"
-    cancelBtnText="Test Cancel Button Text">
-    </kirby-alert>
+      <kirby-alert 
+        okBtn="Test OK Button Text"
+        cancelBtn="Test Cancel Button Text"
+      >
+      </kirby-alert>
     `);
-    element = spectator.element;
   });
 
   it('should create', () => {
