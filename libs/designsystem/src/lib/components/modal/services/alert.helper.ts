@@ -40,12 +40,7 @@ export class AlertHelper {
 
   private getOkBtnText(config: AlertConfig) {
     let text: string;
-    if (config.okBtnText) {
-      console.warn(
-        '`okBtnText` will be deprecated on next major version. Please use `okBtn` instead.'
-      );
-      text = config.okBtnText;
-    }
+
     if (config.okBtn) {
       if (typeof config.okBtn === 'string') {
         text = config.okBtn;
@@ -61,11 +56,6 @@ export class AlertHelper {
   }
 
   private getCancelBtnText(config: AlertConfig) {
-    if (config.cancelBtnText) {
-      console.warn(
-        '`cancelBtnText` will be deprecated on next major version. Please use `cancelBtn` instead.'
-      );
-    }
-    return config.cancelBtn || config.cancelBtnText;
+    return config.cancelBtn;
   }
 }
