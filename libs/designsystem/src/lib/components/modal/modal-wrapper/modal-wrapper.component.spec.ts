@@ -55,7 +55,7 @@ describe('ModalWrapperComponent', () => {
     ],
   });
 
-  let modalWrapperTestBuilder = new ModalWrapperTestBuilder(createComponent);
+  let modalWrapperTestBuilder: ModalWrapperTestBuilder;
   let spectator: Spectator<ModalWrapperComponent>;
 
   beforeEach(() => {
