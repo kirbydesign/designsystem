@@ -442,7 +442,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     'KIRBY-MODAL-FOOTER': () => [this.elementRef.nativeElement],
     'KIRBY-PAGE-TITLE': () =>
       [this.ionTitleElement.nativeElement, this.contentTitle?.nativeElement].filter(
-        (e) => e !== undefined
+        (element) => element !== undefined
       ),
     'KIRBY-PAGE-PROGRESS': () => [this.ionToolbarElement.nativeElement],
   };
