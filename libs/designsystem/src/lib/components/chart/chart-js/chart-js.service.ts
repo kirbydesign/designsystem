@@ -271,13 +271,28 @@ export class ChartJSService {
     );
   }
 
-  private datasetsHaveLabels(datasets: ChartDataset[], indexAxis = 'x') {
-    if (isNumberArray(datasets)) return false;
+  private getLabelsToApply(args: {
+    datasets: ChartDataset[];
+    type: ChartType;
+    indexAxis: string;
+    labels?: unknown[];
+  }) {
+    const { datasets, labels, type, indexAxis } = args;
 
-    return datasets.some(({ data }) => {
-      if (data === undefined) return false;
-      return data.some((datapoint) => typeof datapoint[indexAxis] === 'string');
-    });
+    const datasetHasLabels = ({ data }: ChartDataset) =>
+      !!data?.some(
+        (datapoint) => typeof datapoint === 'object' && typeof datapoint[indexAxis] === 'string'
+      );
+
+    if (labels !== undefined) {
+      return labels;
+    } else if (datasets.some(datasetHasLabels)) {
+      return null;
+    } else if (type === 'stock') {
+      return this.getDefaultStockLabels(datasets, this.locale);
+    } else {
+      return this.createBlankLabels(datasets);
+    }
   }
 
   private createConfigurationObject(
@@ -289,17 +304,7 @@ export class ChartJSService {
     const typeConfig = this.chartConfigService.getTypeConfig(type);
 
     const indexAxis = typeConfig?.options?.indexAxis ?? 'x';
-    const labelsToApply = (() => {
-      if (labels !== undefined) {
-        return labels;
-      } else if (this.datasetsHaveLabels(datasets, indexAxis)) {
-        return null;
-      } else if (type === 'stock') {
-        return this.getDefaultStockLabels(datasets, this.locale);
-      } else {
-        return this.createBlankLabels(datasets);
-      }
-    })();
+    const labelsToApply = this.getLabelsToApply({ labels, datasets, type, indexAxis });
 
     return mergeDeepAll(typeConfig, {
       data: {
