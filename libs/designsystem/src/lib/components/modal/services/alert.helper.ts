@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
-import { AlertConfig } from '../alert/config/alert-config';
 import { AlertComponent } from '../alert/alert.component';
+import { AlertConfig } from '../alert/config/alert-config';
+
 import { Overlay } from './modal.interfaces';
 
 @Injectable()
@@ -29,8 +30,8 @@ export class AlertHelper {
   private getComponentProps(config: AlertConfig) {
     return {
       ...config,
-      okBtnText: this.getOkBtnText(config),
-      cancelBtnText: this.getCancelBtnText(config),
+      okBtn: this.getOkBtnText(config),
+      cancelBtn: this.getCancelBtnText(config),
       okBtnIsDestructive: this.getOkBtnIsDestructive(config),
       iconName: config.icon && config.icon.name,
       iconThemeColor: config.icon && config.icon.themeColor,
