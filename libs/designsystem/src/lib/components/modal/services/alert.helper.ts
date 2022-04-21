@@ -31,7 +31,7 @@ export class AlertHelper {
     return {
       ...config,
       okBtn: this.getOkBtnText(config),
-      cancelBtn: this.getCancelBtnText(config),
+      cancelBtn: config.cancelBtn,
       okBtnIsDestructive: this.getOkBtnIsDestructive(config),
       iconName: config.icon && config.icon.name,
       iconThemeColor: config.icon && config.icon.themeColor,
@@ -53,9 +53,5 @@ export class AlertHelper {
 
   getOkBtnIsDestructive(config) {
     return typeof config.okBtn === 'object' ? config.okBtn.isDestructive : undefined;
-  }
-
-  private getCancelBtnText(config: AlertConfig) {
-    return config.cancelBtn;
   }
 }
