@@ -91,12 +91,13 @@ ion-back-button {
   }
 
   &::part(native) {
-    margin: 0 utils.size('xxxs') 0 0;
-    border-radius: utils.$border-radius-round;
-    border: 1px solid transparent;
     @include utils.focus {
       border: 1px solid #{utils.$focus-ring-color};
     }
+
+    margin: 0 utils.size('xxxs') 0 0;
+    border-radius: utils.$border-radius-round;
+    border: 1px solid transparent;
 
     transition: color utils.get-transition-easing('enter-exit')
       utils.get-transition-duration('short');
