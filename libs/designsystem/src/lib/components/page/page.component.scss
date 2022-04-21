@@ -26,7 +26,7 @@ ion-toolbar {
   box-sizing: border-box;
   padding-left: #{utils.size('xs')};
   padding-right: #{utils.size('xs')};
-  transition: padding utils.get-transition-easing('enter-exit')
+  transition: padding-inline utils.get-transition-easing('enter-exit')
     utils.get-transition-duration('short');
 
   &.content-scrolled {
