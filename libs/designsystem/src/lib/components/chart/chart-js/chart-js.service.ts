@@ -292,7 +292,7 @@ export class ChartJSService {
        a label for the indexAxis. 
        For example: { x: 'label1', y: 1} in the case where the index axis is 'x'. 
 
-       If no labels are provided default labels are used. 
+       If no labels are provided then default labels are used. 
     */
     const labelsAreGivenAsSeperateArray = labels !== undefined;
     const labelsAreGivenTogetherWithDataset = datasets.some(datasetHasLabels);
@@ -303,7 +303,7 @@ export class ChartJSService {
       return null;
     } else {
       /* 
-        Chart.js requires labels along the x-axis to render anything therefore
+        Chart.js requires labels along the index axis to render anything therefore
         all other types than stock uses empty labels as default. The stock type 
         displays day & month as default. 
       */
