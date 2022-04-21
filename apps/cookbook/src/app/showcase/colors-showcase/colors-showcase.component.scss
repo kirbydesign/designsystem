@@ -1,6 +1,6 @@
 @use '~@kirbydesign/core/src/scss/utils';
 
-@each $color-name, $color-value in utils.getAllColors() {
+@each $color-name, $color-value in utils.get-all-colors() {
   .#{$color-name} {
     background-color: utils.get-color($color-name);
     color: utils.get-color($color-name + '-contrast');
@@ -20,6 +20,7 @@
 
 .text-color-box {
   @extend .color-box;
+
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -37,12 +38,13 @@
 
 .text-color-samples {
   @extend .color-samples;
+
   margin-right: utils.size('s');
   margin-bottom: 0;
 }
 
 .color-sample {
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%);
   height: 100%;
   width: 100%;
   margin-top: auto;
@@ -54,11 +56,13 @@
   top: 0;
   left: 0;
   z-index: 3;
+
   &:nth-child(2) {
     top: utils.size('xxs');
     left: utils.size('xxs');
     z-index: 2;
   }
+
   &:nth-child(3) {
     top: utils.size('s');
     left: utils.size('s');
@@ -110,6 +114,7 @@
   color: utils.get-color('semi-dark');
   flex: 0 0 100px;
   margin-top: 0;
+
   dt:first-of-type,
   dd:first-of-type {
     color: utils.get-color('black');
@@ -131,9 +136,10 @@
     min-height: utils.size('xxxl');
     box-sizing: content-box;
     cursor: pointer;
+
     &:hover {
       transform: translateY(-2px);
-      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+      box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%);
     }
   }
 }

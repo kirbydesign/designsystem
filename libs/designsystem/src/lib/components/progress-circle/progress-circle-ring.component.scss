@@ -3,6 +3,7 @@
 .circle {
   stroke: utils.get-color('semi-light');
 }
+
 .progress {
   transition-property: stroke-dashoffset, stroke;
   transition-duration: utils.get-transition-duration('extra-long');

@@ -190,7 +190,8 @@ export class ChartJSService {
   }
 
   private applyInteractionFunctionsExtensions(options: ChartOptions): ChartOptions {
-    const interactionFunctionsExtensions = this.chartConfigService.getInteractionFunctionsExtensions();
+    const interactionFunctionsExtensions =
+      this.chartConfigService.getInteractionFunctionsExtensions();
     Object.entries(interactionFunctionsExtensions).forEach(([key, _]) => {
       const callback = options[key];
       options[key] = (e: Event, a: ActiveElement[], c: Chart) => {

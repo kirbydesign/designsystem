@@ -22,6 +22,7 @@
 }
 
 @mixin first-item-padding() {
+  /* stylelint-disable-next-line selector-pseudo-element-no-unknown */
   > ::ng-deep {
     :first-child {
       --item-padding-top: #{utils.size('xxs')};
@@ -30,6 +31,7 @@
 }
 
 @mixin last-item-padding() {
+  /* stylelint-disable-next-line selector-pseudo-element-no-unknown */
   > ::ng-deep {
     :last-child {
       --item-padding-bottom: #{utils.size('xxs')};
@@ -44,27 +46,27 @@
  */
 
 .rounded {
-  @include rounded();
+  @include rounded;
 }
 
 .shadow {
-  @include shadow();
+  @include shadow;
 }
 
 .first-item-padding {
-  @include first-item-padding();
+  @include first-item-padding;
 }
 
 .last-item-padding {
-  @include last-item-padding();
+  @include last-item-padding;
 }
 
 .first-item {
-  @include rounded-top();
-  @include first-item-padding();
+  @include rounded-top;
+  @include first-item-padding;
 }
 
 .last-item {
-  @include rounded-bottom();
-  @include last-item-padding();
+  @include rounded-bottom;
+  @include last-item-padding;
 }

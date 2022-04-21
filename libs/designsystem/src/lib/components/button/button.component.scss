@@ -1,4 +1,4 @@
-@use "sass:map";
+@use 'sass:map';
 @use '~@kirbydesign/core/src/scss/utils';
 
 $button-width: (
@@ -29,6 +29,7 @@ $button-width: (
   &.icon-left,
   &.icon-right {
     --kirby-icon-font-size: #{utils.size('s')};
+
     min-width: button-width('md');
   }
 }
@@ -86,7 +87,7 @@ $button-width: (
 }
 
 :host {
-  @include utils.accessible-target-size();
+  @include utils.accessible-target-size;
 
   font-family: var(--kirby-font-family);
   background-color: var(--kirby-button-background-color, initial);
@@ -119,12 +120,14 @@ $button-width: (
   &.icon-left {
     padding-left: utils.size('xs');
     padding-right: utils.size('s');
+
     --kirby-icon-margin-right: #{utils.size('xxs')};
   }
 
   &.icon-right {
     padding-left: utils.size('s');
     padding-right: utils.size('xs');
+
     --kirby-icon-margin-left: #{utils.size('xxs')};
   }
 
@@ -164,11 +167,11 @@ $button-width: (
 
   // Only apply focus ring if pointer device can hover
   // (effectively desktop/mouse devices):
-  @include utils.focus() {
+  @include utils.focus {
     --kirby-button-border-color: #{utils.$focus-ring-color};
   }
 
-  @include utils.hover() {
+  @include utils.hover {
     opacity: 0.8;
   }
 
@@ -196,6 +199,7 @@ $button-width: (
       --kirby-button-border-color: #{utils.get-color('white')};
       --kirby-button-color: #{utils.get-color('white')};
     }
+
     &.attention-level4 {
       --kirby-button-color: #{utils.get-color('white')};
     }
@@ -203,6 +207,7 @@ $button-width: (
 
   &.floating {
     $fab-size: 64px;
+
     width: $fab-size !important;
     height: $fab-size !important;
     min-width: unset;
@@ -223,6 +228,7 @@ $button-width: (
 }
 
 // Temp fix for https://github.com/angular/angular-cli/issues/13854#issuecomment-470831308
+
 /* clean-css ignore:start */
 :host-context(ion-toolbar kirby-page-actions) {
   font-size: utils.font-size('s');
@@ -240,9 +246,11 @@ $button-width: (
     @include button-attentionlevel4;
   }
 }
+
 /* clean-css ignore:end */
 
 // Temp fix for https://github.com/angular/angular-cli/issues/13854#issuecomment-470831308
+
 /* clean-css ignore:start */
 :host-context(.page-title kirby-page-actions) {
   &.attention-level1,
@@ -252,13 +260,16 @@ $button-width: (
     @include button-attentionlevel2;
   }
 }
+
 /* clean-css ignore:end */
 
 // Temp fix for https://github.com/angular/angular-cli/issues/13854#issuecomment-470831308
+
 /* clean-css ignore:start */
 :host-context(kirby-empty-state .content) {
   @include button-lg;
 }
+
 /* clean-css ignore:end */
 
 :host-context(kirby-dropdown) {

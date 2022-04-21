@@ -972,7 +972,7 @@ describe('ChartJSService', () => {
     describe('when dataset is a flat array', () => {
       it('should throw an error if dataset is a flat array', () => {
         chartJSService.setDataLabelOptions({});
-        expect(function() {
+        expect(function () {
           chartJSService.addDataLabelsData(flatDataset);
         }).toThrowError();
       });

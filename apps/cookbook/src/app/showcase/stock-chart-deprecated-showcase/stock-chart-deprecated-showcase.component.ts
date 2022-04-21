@@ -4,7 +4,6 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
 @Component({
   selector: 'cookbook-highstock-chart-deprecated-showcase',
   templateUrl: './stock-chart-deprecated-showcase.component.html',
-  styleUrls: ['./stock-chart-deprecated-showcase.component.scss'],
 })
 export class StockChartDeprecatedShowcaseComponent {
   properties: ApiDescriptionProperty[] = [

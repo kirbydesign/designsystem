@@ -5,8 +5,10 @@ import { Component } from '@angular/core';
   templateUrl: './grid-layout-extended.component.html',
 })
 export class GridLayoutExtendedComponent {
-  exampleHtml: string = require('!raw-loader!../../../examples/grid-layout-example/grid-layout-extended-example/grid-layout-extended-example.component.html')
-    .default;
-  exampleCss: string = require('!raw-loader!../../../examples/grid-layout-example/grid-layout-extended-example/grid-layout-extended-example.component.scss')
-    .default;
+  exampleHtml: string =
+    require('!raw-loader!../../../examples/grid-layout-example/grid-layout-extended-example/grid-layout-extended-example.component.html')
+      .default;
+  exampleCss: string =
+    require('!raw-loader!../../../examples/grid-layout-example/grid-layout-extended-example/grid-layout-extended-example.component.scss')
+      .default;
 }

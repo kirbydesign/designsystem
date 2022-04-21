@@ -7,8 +7,8 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   styleUrls: ['./tabs-showcase.component.scss'],
 })
 export class TabsShowcaseComponent implements OnInit {
-  exampleHtml: string = require('!raw-loader!../../examples/tabs-example/tabs-example.component.html')
-    .default;
+  exampleHtml: string =
+    require('!raw-loader!../../examples/tabs-example/tabs-example.component.html').default;
 
   exampleRouterHtml = `<kirby-tab-bar>
     <kirby-tab-button routerLink="dashboard">
