@@ -23,6 +23,15 @@ ion-toolbar {
   --padding-top: 0;
   --padding-bottom: 0;
 
+  box-sizing: border-box;
+  padding-inline: utils.size('xs');
+  transition: padding-inline utils.get-transition-easing('enter-exit')
+    utils.get-transition-duration('short');
+
+  &.content-scrolled {
+    padding-inline: 0;
+  }
+
   /*
   * This overrides Ionic's default ios styling for the position of secondary action buttons which are to the left of content: https://ionicframework.com/docs/api/toolbar#buttons
   * We would like the seconday actions to be to the far right after primary actions (usually as a falafel):
@@ -66,11 +75,43 @@ ion-title {
 }
 
 ion-back-button {
-  --color: #{utils.get-color('black')};
+  --color: #{utils.get-color('white-contrast')};
+  --background: #{utils.get-color('white')};
+  --background-focused: none;
   --icon-font-size: 24px;
 
-  height: utils.$fat-finger-size;
-  width: utils.$fat-finger-size;
+  $button-size: utils.size('xl');
+
+  height: $button-size;
+  width: $button-size;
+
+  // Properly center back-icon
+  &::part(icon) {
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+  }
+
+  &::part(native) {
+    @include utils.focus {
+      border: 1px solid #{utils.$focus-ring-color};
+    }
+
+    margin: 0 utils.size('xxxs') 0 0;
+    border-radius: utils.$border-radius-round;
+    border: 1px solid transparent;
+    transition-property: color, background-color;
+    transition-duration: utils.get-transition-duration('short');
+    transition-timing-function: utils.get-transition-easing('enter-exit');
+  }
+}
+
+ion-toolbar.content-scrolled ion-back-button {
+  --color: #{utils.get-color('black')};
+  --background: transparent;
+
+  &::part(native) {
+    margin: 0;
+  }
 }
 
 /*

@@ -230,14 +230,34 @@ $button-width: (
 // Temp fix for https://github.com/angular/angular-cli/issues/13854#issuecomment-470831308
 
 /* clean-css ignore:start */
+
 :host-context(ion-toolbar kirby-page-actions) {
   font-size: utils.font-size('s');
-  margin: 0;
-  height: utils.$fat-finger-size;
+  margin: 0 utils.size('xxxs');
+  height: utils.size('xl');
 
   &.icon-only {
-    width: utils.$fat-finger-size;
+    width: utils.size('xl');
   }
+
+  transition-property: color, background-color;
+  transition-duration: utils.get-transition-duration('short');
+  transition-timing-function: utils.get-transition-easing('enter-exit');
+
+  &.attention-level1,
+  &.attention-level2,
+  &.attention-level3,
+  &.attention-level4 {
+    @include button-attentionlevel2;
+  }
+}
+
+:host-context(ion-toolbar ion-buttons:last-child kirby-page-actions) {
+  margin-right: 0;
+}
+
+:host-context(ion-toolbar.content-scrolled kirby-page-actions) {
+  margin: 0;
 
   &.attention-level1,
   &.attention-level2,

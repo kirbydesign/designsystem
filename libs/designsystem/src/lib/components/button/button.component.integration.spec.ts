@@ -62,8 +62,12 @@ describe('ButtonComponent in Kirby Page', () => {
           Test Title
         </ng-template>
         <kirby-page-actions *kirbyPageActions>
-          <button kirby-button class="text">Test Action</button>
-          <button kirby-button class="icon-only">Icon</button>
+          <button kirby-button class="text">Test Static Action</button>
+          <button kirby-button class="icon-only">Static Icon</button>
+        </kirby-page-actions>
+        <kirby-page-actions *kirbyPageActions="{static: false}">
+          <button kirby-button class="text">Test Non-Static Action</button>
+          <button kirby-button class="icon-only">Non-Static  Icon</button>
         </kirby-page-actions>
         <kirby-page-content>
           <p class="my-content">Custom Content...</kirby-page-content>
@@ -96,7 +100,7 @@ describe('ButtonComponent in Kirby Page', () => {
 
     it('should render without background-color', async () => {
       await TestHelper.whenReady(ionToolbar);
-      expect(actionButtonInHeader).toHaveComputedStyle({ 'background-color': 'transparent' });
+      expect(actionButtonInHeader).toHaveComputedStyle({ 'background-color': getColor('white') });
     });
 
     it('should render with correct color', async () => {
@@ -118,11 +122,11 @@ describe('ButtonComponent in Kirby Page', () => {
     it('should render with correct size', () => {
       expect(actionButtonInHeader).toHaveComputedStyle({
         width: 'auto',
-        height: fatFingerSize,
+        height: size('xl'),
       });
       expect(actionButtonInHeaderIconOnly).toHaveComputedStyle({
-        width: fatFingerSize,
-        height: fatFingerSize,
+        width: size('xl'),
+        height: size('xl'),
       });
     });
   });
