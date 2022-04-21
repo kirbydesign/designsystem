@@ -30,8 +30,7 @@ ion-toolbar {
     utils.get-transition-duration('short');
 
   &.content-scrolled {
-    padding-left: 0;
-    padding-right: 0;
+    padding-inline: 0;
   }
 
   /*
