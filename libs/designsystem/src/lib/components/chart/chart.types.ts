@@ -9,6 +9,7 @@ export type ChartTypeConfig = { type: ChartJSType; options?: ChartOptions };
 export type ChartTypesConfig = {
   [key in ChartType]: ChartTypeConfig;
 };
+export type ChartLabel = string | string[]; // String[] allows for multi-line labels
 
 export type ChartDataLabelOptions = {
   showMin?: boolean;
