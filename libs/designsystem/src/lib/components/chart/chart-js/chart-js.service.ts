@@ -8,6 +8,7 @@ import {
   ChartDataLabelOptions,
   ChartDataset,
   ChartHighlightedElements,
+  ChartLabel,
   ChartLocale,
   ChartType,
   isNumberArray,
@@ -32,7 +33,7 @@ export class ChartJSService {
     targetElement: ElementRef<HTMLCanvasElement>;
     type: ChartType;
     data: ChartDataset[] | number[];
-    labels?: string[] | string[][];
+    labels?: ChartLabel[];
     customOptions?: ChartOptions;
     annotations?: AnnotationOptions[];
     dataLabelOptions?: ChartDataLabelOptions;
@@ -76,7 +77,7 @@ export class ChartJSService {
     this.chart.data.datasets = datasets;
   }
 
-  public updateLabels(labels: string[] | string[][]) {
+  public updateLabels(labels: ChartLabel[]) {
     this.chart.data.labels = labels;
   }
 
@@ -133,7 +134,7 @@ export class ChartJSService {
 
   private destructivelyUpdateType(type: ChartType, customOptions?: ChartOptions) {
     const datasets = this.chart.data.datasets as ChartDataset[];
-    const labels = this.chart.data.labels;
+    const labels = this.chart.data.labels as ChartLabel[]; // chart.js stores labels as unknown[]; cast it to ChartLabel[]
     const annotations = this.getExistingChartAnnotations();
 
     this.chartType = type;
@@ -275,7 +276,7 @@ export class ChartJSService {
     datasets: ChartDataset[];
     type: ChartType;
     indexAxis: string;
-    labels?: unknown[];
+    labels?: ChartLabel[];
   }) {
     const { datasets, labels, type, indexAxis } = args;
 
@@ -284,14 +285,31 @@ export class ChartJSService {
         (datapoint) => typeof datapoint === 'object' && typeof datapoint[indexAxis] === 'string'
       );
 
-    if (labels !== undefined) {
+    /*
+       Labels can be provided by the user two ways:
+       1. As a seperate ChartLabel[] via the 'labels' input prop - this has highest priority
+       2. Together with the dataset via the 'data' input prop - here each datapoint contains 
+       a label for the indexAxis. 
+       For example: { x: 'label1', y: 1} in the case where the index axis is 'x'. 
+
+       If no labels are provided default labels are used. 
+    */
+    const labelsAreGivenAsSeperateArray = labels !== undefined;
+    const labelsAreGivenTogetherWithDataset = datasets.some(datasetHasLabels);
+
+    if (labelsAreGivenAsSeperateArray) {
       return labels;
-    } else if (datasets.some(datasetHasLabels)) {
+    } else if (labelsAreGivenTogetherWithDataset) {
       return null;
-    } else if (type === 'stock') {
-      return this.getDefaultStockLabels(datasets, this.locale);
     } else {
-      return this.createBlankLabels(datasets);
+      /* 
+        Chart.js requires labels along the x-axis to render anything therefore
+        all other types than stock uses empty labels as default. The stock type 
+        displays day & month as default. 
+      */
+      return type === 'stock'
+        ? this.getDefaultStockLabels(datasets, this.locale)
+        : this.createBlankLabels(datasets);
     }
   }
 
@@ -299,7 +317,7 @@ export class ChartJSService {
     type: ChartType,
     datasets: ChartDataset[],
     options: ChartOptions,
-    labels?: unknown[]
+    labels?: ChartLabel[]
   ): ChartConfiguration {
     const typeConfig = this.chartConfigService.getTypeConfig(type);
 
