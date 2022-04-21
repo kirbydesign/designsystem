@@ -1,23 +1,32 @@
 import { Component, NgZone } from '@angular/core';
 import { fakeAsync, flush, tick } from '@angular/core/testing';
-import { Router } from '@angular/router';
+import { By } from '@angular/platform-browser';
+import { Router, Routes } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { IonRefresher } from '@ionic/angular';
 import { createHostFactory, mockProvider, SpectatorHost, SpyObject } from '@ngneat/spectator';
-import { MockDirective } from 'ng-mocks';
 
 import { DesignTokenHelper } from '@kirbydesign/core';
 
 import { FitHeadingDirective } from '../../directives/fit-heading/fit-heading.directive';
 import { TestHelper } from '../../testing/test-helper';
 import { WindowRef } from '../../types/window-ref';
+import { ButtonComponent } from '../button/button.component';
+import { backgroundColor } from '../chart/configs/shared.utils';
 import { ModalNavigationService } from '../modal/services/modal-navigation.service';
 import { TabsComponent } from '../tabs';
 
-import { PageComponent, PageContentComponent } from './page.component';
+import {
+  PageActionsComponent,
+  PageActionsDirective,
+  PageComponent,
+  PageContentComponent,
+  PageSubtitleDirective,
+  PageTitleDirective,
+  PageToolbarTitleDirective,
+} from './page.component';
 
 const size = DesignTokenHelper.size;
-const fatFingerSize = DesignTokenHelper.fatFingerSize();
 
 @Component({})
 class DummyComponent {}
@@ -27,7 +36,7 @@ describe('PageComponent', () => {
   const subtitleText = 'Page subtitle';
   let spectator: SpectatorHost<PageComponent>;
   let ionToolbar: HTMLElement;
-  let ionContent: HTMLElement;
+  let ionContent: HTMLIonContentElement;
   let tabBar: SpyObject<TabsComponent>;
   let router: SpyObject<Router>;
   let modalNavigationService: SpyObject<ModalNavigationService>;
@@ -45,21 +54,29 @@ describe('PageComponent', () => {
             aperiam, assumenda corporis culpa cum debitis exercitationem impedit laborum possimus quam qui repellat,
             saepe similique sint soluta. Unde.</p>`;
 
+  const routes: Routes = [
+    {
+      path: '',
+      component: PageComponent,
+    },
+    {
+      path: 'someUrl',
+      component: DummyComponent,
+    },
+  ];
+
   const createHost = createHostFactory({
     component: PageComponent,
-    declarations: [PageContentComponent, MockDirective(FitHeadingDirective)],
-    imports: [
-      TestHelper.ionicModuleForTest,
-      RouterTestingModule.withRoutes([
-        {
-          path: '',
-          component: PageComponent,
-        },
-        {
-          path: 'someUrl',
-          component: DummyComponent,
-        },
-      ]),
+    imports: [TestHelper.ionicModuleForTest, RouterTestingModule.withRoutes(routes)],
+    declarations: [
+      ButtonComponent,
+      FitHeadingDirective,
+      PageContentComponent,
+      PageActionsComponent,
+      PageActionsDirective,
+      PageSubtitleDirective,
+      PageTitleDirective,
+      PageToolbarTitleDirective,
     ],
     providers: [
       {
@@ -71,34 +88,58 @@ describe('PageComponent', () => {
     ],
   });
 
-  beforeEach(() => {
+  beforeEach(async () => {
     spectator = createHost(
       `<kirby-page title="${titleText}" subtitle="${subtitleText}">
-        <kirby-page-content>
+         <kirby-page-actions *kirbyPageActions>
+           <button kirby-button>Static</button>
+         </kirby-page-actions>
+         <kirby-page-content>
           ${dummyContent}
-        </kirby-page-content>
-      </kirby-page>`
+         </kirby-page-content>
+       </kirby-page>`
     );
-    zone = spectator.inject(NgZone);
-    ionToolbar = spectator.queryHost('ion-toolbar');
-    tabBar = spectator.inject(TabsComponent);
-    ionContent = spectator.queryHost('ion-content');
     modalNavigationService = spectator.inject(ModalNavigationService);
     modalNavigationService.isModalRoute.and.returnValue(false);
     router = spectator.inject(Router);
+    tabBar = spectator.inject(TabsComponent);
+    zone = spectator.inject(NgZone);
+
+    ionToolbar = spectator.queryHost('ion-toolbar');
+    ionContent = spectator.queryHost('ion-content');
+    await TestHelper.whenReady(ionToolbar);
+    await TestHelper.whenReady(ionContent);
+  });
+
+  describe('having static page action', () => {
+    it('should show the action in the toolbar when content not scrolled', () => {
+      const staticPageActionButton = ionToolbar.querySelector(
+        'ion-buttons[slot="primary"] button[kirby-button]'
+      );
+
+      expect(staticPageActionButton).toBeTruthy();
+    });
+
+    it('should show the action in the toolbar when content scrolled', async () => {
+      ionContent.style.height = '200px';
+      await ionContent.scrollToPoint(0, 16, 0);
+      spectator.detectChanges();
+      await TestHelper.whenTrue(() => spectator.component['isContentScrolled']);
+      spectator.detectChanges();
+
+      expect(ionToolbar).toHaveClass('content-scrolled');
+    });
   });
 
   describe('having a title and subtitle', () => {
-    it('should have the configured title', async () => {
-      await TestHelper.whenReady(ionContent);
+    it('should have the configured title', () => {
       const pageTitleHeading = ionContent.querySelector('.page-title > h1');
 
       expect(spectator.component.title).toEqual(titleText);
       expect(pageTitleHeading).toHaveText(titleText, true);
     });
 
-    it('should render title with correct margin and padding', async () => {
-      await TestHelper.whenReady(ionContent);
+    it('should render title with correct margin and padding', () => {
       const pageTitle = ionContent.querySelector('.page-title');
       const pageTitleHeading = pageTitle.querySelector(':scope > h1');
 
@@ -124,16 +165,14 @@ describe('PageComponent', () => {
       });
     });
 
-    it('should have the configured subtitle', async () => {
-      await TestHelper.whenReady(ionContent);
+    it('should have the configured subtitle', () => {
       const pageSubtitle = ionContent.querySelector('.page-subtitle');
 
       expect(spectator.component.subtitle).toEqual(subtitleText);
       expect(pageSubtitle).toHaveText(subtitleText, true);
     });
 
-    it('should render subitle with correct margin and padding', async () => {
-      await TestHelper.whenReady(ionContent);
+    it('should render subitle with correct margin and padding', () => {
       const pageSubtitle = ionContent.querySelector('.page-subtitle');
 
       expect(pageSubtitle).toHaveComputedStyle({
