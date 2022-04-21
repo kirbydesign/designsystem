@@ -8,6 +8,7 @@ import {
   ChartDataLabelOptions,
   ChartDataset,
   ChartHighlightedElements,
+  ChartLabel,
   ChartLocale,
   ChartType,
   isNumberArray,
@@ -32,7 +33,7 @@ export class ChartJSService {
     targetElement: ElementRef<HTMLCanvasElement>;
     type: ChartType;
     data: ChartDataset[] | number[];
-    labels?: string[] | string[][];
+    labels?: ChartLabel[];
     customOptions?: ChartOptions;
     annotations?: AnnotationOptions[];
     dataLabelOptions?: ChartDataLabelOptions;
@@ -76,7 +77,9 @@ export class ChartJSService {
     this.chart.data.datasets = datasets;
   }
 
-  public updateLabels(labels: string[] | string[][]) {
+  public updateLabels(labels: ChartLabel[]) {
+    /* As labels provided via the 'labels' input property always has 
+    highest priority - we can just set the property directly */
     this.chart.data.labels = labels;
   }
 
@@ -133,7 +136,7 @@ export class ChartJSService {
 
   private destructivelyUpdateType(type: ChartType, customOptions?: ChartOptions) {
     const datasets = this.chart.data.datasets as ChartDataset[];
-    const labels = this.chart.data.labels;
+    const labels = this.chart.data.labels as ChartLabel[]; // chart.js stores labels as unknown[]; cast it to ChartLabel[]
     const annotations = this.getExistingChartAnnotations();
 
     this.chartType = type;
@@ -272,35 +275,57 @@ export class ChartJSService {
     );
   }
 
+  private getLabelsToApply(args: {
+    datasets: ChartDataset[];
+    type: ChartType;
+    indexAxis: 'x' | 'y';
+    labels?: ChartLabel[];
+  }) {
+    const { datasets, labels, type, indexAxis } = args;
+
+    const datasetHasLabels = ({ data }: ChartDataset) =>
+      !!data?.some(
+        (datapoint) => typeof datapoint === 'object' && typeof datapoint[indexAxis] === 'string'
+      );
+
+    /*
+       Labels can be provided by the user two ways:
+       1. As a seperate ChartLabel[] via the 'labels' input prop - this has highest priority
+       2. Together with the dataset via the 'data' input prop - here each datapoint contains 
+       a label for the indexAxis. 
+       For example: { x: 'label1', y: 1} in the case where the index axis is 'x'. 
+
+       If no labels are provided then default labels are used. 
+    */
+    const labelsAreGivenAsSeperateArray = labels !== undefined;
+    const labelsAreGivenTogetherWithDataset = datasets.some(datasetHasLabels);
+
+    if (labelsAreGivenAsSeperateArray) {
+      return labels;
+    } else if (labelsAreGivenTogetherWithDataset) {
+      return null;
+    } else {
+      /* 
+        Chart.js requires labels along the index axis to render anything therefore
+        all other types than stock uses empty labels as default. The stock type 
+        displays day & month as default. 
+      */
+      return type === 'stock'
+        ? this.getDefaultStockLabels(datasets, this.locale)
+        : this.createBlankLabels(datasets);
+    }
+  }
+
   private createConfigurationObject(
     type: ChartType,
     datasets: ChartDataset[],
     options: ChartOptions,
-    labels?: unknown[]
+    labels?: ChartLabel[]
   ): ChartConfiguration {
     const typeConfig = this.chartConfigService.getTypeConfig(type);
 
-    const labelsToApply = (() => {
-      if (type === 'stock') {
-        /* 
-           The time scale will auto generate labels based on data. 
-           It should be possible to pass an empty array to get the default 
-           behaviour of chart.js when using stock chart. 
-
-           TODO: Simplify to always pass labels, if given, to chart.js.
-           Would be a breaking change. See issue: 
-           https://github.com/kirbydesign/designsystem/issues/2085
-        */
-        const shouldUseTimescaleLabels =
-          labels?.length === 0 && options?.scales?.x?.type === 'time';
-        if (shouldUseTimescaleLabels) return labels;
-        return this.getDefaultStockLabels(datasets, this.locale);
-      } else if (labels?.length > 0) {
-        return labels;
-      } else {
-        return this.createBlankLabels(datasets);
-      }
-    })();
+    const indexAxis = typeConfig?.options?.indexAxis ?? 'x';
+    const labelsToApply = this.getLabelsToApply({ labels, datasets, type, indexAxis });
 
     return mergeDeepAll(typeConfig, {
       data: {
