@@ -30,7 +30,7 @@ export class AlertHelper {
   private getComponentProps(config: AlertConfig) {
     return {
       ...config,
-      okBtn: this.getOkBtnText(config),
+      okBtn: this.getOkBtn(config),
       cancelBtn: config.cancelBtn,
       okBtnIsDestructive: this.getOkBtnIsDestructive(config),
       iconName: config.icon && config.icon.name,
@@ -38,7 +38,7 @@ export class AlertHelper {
     };
   }
 
-  private getOkBtnText(config: AlertConfig) {
+  private getOkBtn(config: AlertConfig) {
     let text: string;
 
     if (config.okBtn) {
