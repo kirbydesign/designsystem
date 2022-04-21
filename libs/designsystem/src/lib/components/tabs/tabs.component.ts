@@ -1,10 +1,4 @@
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  Component,
-  HostBinding,
-  ViewChild,
-} from '@angular/core';
+import { AfterViewInit, Component, HostBinding, ViewChild } from '@angular/core';
 import { IonTabs } from '@ionic/angular';
 
 import { TabsService } from './tabs.service';
