@@ -240,9 +240,9 @@ $button-width: (
     width: utils.size('xl');
   }
 
-  transition-property: color, background-color;
-  transition-duration: utils.get-transition-duration('short');
-  transition-timing-function: utils.get-transition-easing('enter-exit');
+  transition: color utils.get-transition-easing('enter-exit') utils.get-transition-duration('short');
+  transition: background-color utils.get-transition-easing('enter-exit')
+    utils.get-transition-duration('short');
 
   &.attention-level1,
   &.attention-level2,

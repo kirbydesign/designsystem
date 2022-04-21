@@ -26,11 +26,12 @@ ion-toolbar {
   box-sizing: border-box;
   padding-left: #{utils.size('xs')};
   padding-right: #{utils.size('xs')};
-  transition: padding-inline utils.get-transition-easing('enter-exit')
+  transition: padding utils.get-transition-easing('enter-exit')
     utils.get-transition-duration('short');
 
   &.content-scrolled {
-    padding-inline: 0;
+    padding-left: 0;
+    padding-right: 0;
   }
 
   /*
@@ -81,8 +82,10 @@ ion-back-button {
   --background-focused: none;
   --icon-font-size: 24px;
 
-  height: utils.size('xl');
-  width: utils.size('xl');
+  $button-size: utils.size('xl');
+
+  height: $button-size;
+  width: $button-size;
 
   // Properly center back-icon
   &::part(icon) {
@@ -91,18 +94,16 @@ ion-back-button {
   }
 
   &::part(native) {
+    margin: 0 utils.size('xxxs') 0 0;
+    border-radius: utils.$border-radius-round;
+    border: 1px solid transparent;
     @include utils.focus {
       border: 1px solid #{utils.$focus-ring-color};
     }
 
-    margin: 0 utils.size('xxxs') 0 0;
-    border-radius: utils.$border-radius-round;
-    border: 1px solid transparent;
-
-    transition: color utils.get-transition-easing('enter-exit')
-      utils.get-transition-duration('short');
-    transition: background-color utils.get-transition-easing('enter-exit')
-      utils.get-transition-duration('short');
+    transition-property: color, background-color;
+    transition-duration: utils.get-transition-duration('short');
+    transition-timing-function: utils.get-transition-easing('enter-exit');
   }
 }
 
