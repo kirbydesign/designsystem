@@ -78,6 +78,8 @@ export class ChartJSService {
   }
 
   public updateLabels(labels: ChartLabel[]) {
+    /* As labels provided via the 'labels' input property always has 
+    highest priority - we can just set the property directly */
     this.chart.data.labels = labels;
   }
 
@@ -275,7 +277,7 @@ export class ChartJSService {
   private getLabelsToApply(args: {
     datasets: ChartDataset[];
     type: ChartType;
-    indexAxis: string;
+    indexAxis: 'x' | 'y';
     labels?: ChartLabel[];
   }) {
     const { datasets, labels, type, indexAxis } = args;
