@@ -29,9 +29,9 @@ export class AlertComponent implements AfterViewInit {
 
   @Input() iconName: string;
   @Input() iconThemeColor: string;
-  @Input() okBtnText: string;
+  @Input() okBtn: string;
   @Input() okBtnIsDestructive: boolean;
-  @Input() cancelBtnText: string;
+  @Input() cancelBtn: string;
 
   constructor(private elementRef: ElementRef<HTMLElement>, private windowRef: WindowRef) {}
 

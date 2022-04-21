@@ -32,7 +32,7 @@ describe('AlertComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AlertComponent);
     component = fixture.componentInstance;
-    component.okBtnText = 'Test OK Button Text';
+    component.okBtn = 'Test OK Button Text';
     fixture.detectChanges();
   });
 
@@ -45,7 +45,7 @@ describe('AlertComponent', () => {
       const expected = 'Test OK Button Text';
       const okButton = fixture.debugElement.query(By.css('.ok-btn'));
 
-      expect(component.okBtnText).toEqual(expected);
+      expect(component.okBtn).toEqual(expected);
       expect(okButton.nativeElement.innerText).toEqual(expected);
     });
 
@@ -67,7 +67,7 @@ describe('AlertComponent', () => {
 
     it('should have default size', () => {
       const okButton = fixture.debugElement.query(By.css('.ok-btn'));
-      component.cancelBtnText = 'Test Cancel Button Text';
+      component.cancelBtn = 'Test Cancel Button Text';
       fixture.detectChanges();
 
       expect(okButton.attributes['ng-reflect-size']).toBeUndefined();
@@ -75,7 +75,7 @@ describe('AlertComponent', () => {
 
     it('should have large ok button when no cancel button', () => {
       const okButton = fixture.debugElement.query(By.css('.ok-btn'));
-      component.cancelBtnText = null;
+      component.cancelBtn = null;
       fixture.detectChanges();
 
       expect(okButton.attributes['ng-reflect-size']).toBe('lg');
@@ -85,7 +85,7 @@ describe('AlertComponent', () => {
   describe('cancel button', () => {
     it('should render', () => {
       const expected = 'Test Cancel Button Text';
-      component.cancelBtnText = 'Test Cancel Button Text';
+      component.cancelBtn = 'Test Cancel Button Text';
       fixture.detectChanges();
       const cancelButton = fixture.debugElement.query(By.css('.cancel-btn'));
 
@@ -93,7 +93,7 @@ describe('AlertComponent', () => {
     });
 
     it('should not render when cancelBtn not set', () => {
-      component.cancelBtnText = null;
+      component.cancelBtn = null;
       fixture.detectChanges();
       const cancelButton = fixture.debugElement.query(By.css('.cancel-btn'));
 
@@ -129,7 +129,7 @@ describe('AlertComponent with okBtn', () => {
 
   beforeEach(() => {
     spectator = createHost(`
-    <kirby-alert okBtnText="OK Button Text">
+    <kirby-alert okBtn="OK Button Text">
     </kirby-alert>
     `);
     element = spectator.element;
