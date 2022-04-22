@@ -62,8 +62,8 @@ ion-header ion-toolbar {
 
 :host {
   --vh100: var(--vh, 1vh) * 100; /// Fixes an issue with vh units on iOS Safari
-  --header-height: 0;
-  --footer-height: 0;
+  --header-height: 0px;
+  --footer-height: 0px;
 
   &.drawer {
     // Prevent iOS safe-area padding-top on drawer flavor
