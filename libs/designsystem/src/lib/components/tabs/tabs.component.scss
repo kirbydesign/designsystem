@@ -1,7 +1,7 @@
 @use '~@kirbydesign/core/src/scss/utils';
 
 :host(:not(.tab-bar-bottom-hidden)) {
-  --kirby-page-footer-safe-area-bottom: 0;
+  --kirby-page-footer-safe-area-bottom: 0px;
 }
 
 ion-tabs {
