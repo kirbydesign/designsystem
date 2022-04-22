@@ -11,9 +11,7 @@ export { ListSwipeAction, ListSwipeActionType, ListSwipeEnd } from './list-swipe
 
 export { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 export { ListItemColorDirective } from './directives/list-item-color.directive';
-export { ListFlexItemDirective } from './list.directive';
 export { ListHeaderDirective } from './list.directive';
-export { ListItemDirective } from './list.directive';
 export { ListItemTemplateDirective } from './list.directive';
 export { ListSectionHeaderDirective } from './list.directive';
 export { ListFooterDirective } from './list.directive';

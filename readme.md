@@ -77,6 +77,7 @@ In each `.scss` file where you need to access the Sass utility functions from Ki
 ```
 
 #### Generic Print Styles (Optional)
+
 Kirby also provides a generic print stylesheet. It includes the basics. You most likely have to add local print styles specific to your app as well.
 
 Import it into your app, e.g., in `src/styles.scss` or in your local print stylesheet if you have one:
@@ -170,22 +171,6 @@ Remove any previously installed dev-dependencies for `sass-extract` , `sass-extr
 This can be done by the following command:
 
 `npm uninstall --save-dev sass-extract sass-extract-loader ng-mocks`
-
-#### Deprecation
-
-The following legacy components have been removed:
-
-- `ListItemComponent` (`<kirby-list-item>`)
-- `ListFlexItemComponent` (`<kirby-list-flex-item>`)
-- `ListCellComponent` (`<kirby-list-cell>`)
-- `ListCellLineComponent` (`<kirby-list-cell-line>`)
-
-The following directives have been deprecated and will be removed in future versions:
-
-- `ListItemDirective` (`[kirbyListItem]`)
-- `ListFlexItemDirective` (`[kirbyListFlexItem]`)
-
-_Please see the [list documentation][kirby.cookbook.list] on how to use the list component(s) and directives._
 
 ### Icons
 
