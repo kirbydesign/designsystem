@@ -10,6 +10,7 @@ $fab-sheet-margin: utils.size('s');
 // https://ionicframework.com/docs/api/fab-button
 ion-fab-button {
   --box-shadow: #{utils.get-elevation(8)};
+
   width: 64px;
   height: 64px;
   user-select: none;
@@ -20,7 +21,7 @@ ion-fab-button {
 
   // Only apply focus ring if pointer device can hover
   // (effectively desktop/mouse devices):
-  @include utils.focus() {
+  @include utils.focus {
     --border-width: 1px;
     --border-style: solid;
     --border-color: #{utils.$focus-ring-color};
@@ -29,6 +30,7 @@ ion-fab-button {
   &[disabled] {
     --background: #{utils.get-color('semi-light')};
     --box-shadow: none;
+
     opacity: 1;
   }
 }

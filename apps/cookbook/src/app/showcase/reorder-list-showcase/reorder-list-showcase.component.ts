@@ -8,8 +8,9 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   styleUrls: ['./reorder-list-showcase.component.scss'],
 })
 export class ReorderListShowcaseComponent {
-  exampleHtml: string = require('!raw-loader!../../examples/reorder-list-example/reorder-list-example.component.html')
-    .default;
+  exampleHtml: string =
+    require('!raw-loader!../../examples/reorder-list-example/reorder-list-example.component.html')
+      .default;
 
   properties: ApiDescriptionProperty[] = [
     {

@@ -9,8 +9,8 @@
   margin-right: var(--kirby-icon-margin-right, unset);
 
   svg path {
-    fill: currentColor;
-    stroke: currentColor;
+    fill: currentcolor;
+    stroke: currentcolor;
   }
 }
 
@@ -40,6 +40,7 @@
   &[slot='start'] {
     margin-inline-end: utils.size('xxs');
   }
+
   &[slot='end'] {
     margin-inline-start: utils.size('xxs');
   }

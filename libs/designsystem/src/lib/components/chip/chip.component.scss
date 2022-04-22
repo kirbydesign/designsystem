@@ -5,7 +5,7 @@
     @include utils.theme-background($background-color);
   }
 
-  @include utils.hover() {
+  @include utils.hover {
     @include utils.theme-background($background-color);
   }
 }
@@ -13,7 +13,7 @@
 :host {
   @include utils.theme-background('white');
   @include selected-and-hover('black');
-  @include utils.accessible-target-size();
+  @include utils.accessible-target-size;
 
   white-space: nowrap;
   padding: 0 var(--inline-padding, utils.size('s'));
@@ -36,6 +36,7 @@
     min-width: 44px;
     flex-shrink: 0;
     justify-content: center;
+
     --inline-margin: #{utils.size('xxxxs')};
     --inline-padding: #{13px};
     @include utils.theme-background(transparent);

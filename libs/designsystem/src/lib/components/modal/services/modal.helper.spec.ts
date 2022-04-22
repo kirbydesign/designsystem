@@ -50,9 +50,7 @@ class ContentOverflowsWithFooterEmbeddedComponent {
 }
 
 @Component({
-  template: `
-    <div style="height: 1px;">Content</div>
-  `,
+  template: ` <div style="height: 1px;">Content</div> `,
 })
 class ContentWithNoOverflowEmbeddedComponent {}
 
@@ -404,9 +402,7 @@ describe('ModalHelper', () => {
             await TestHelper.whenReady(ionContent);
 
             const input: HTMLInputElement = ionContent.querySelector<HTMLInputElement>('input');
-            expect(input)
-              .withContext('Input is not defined')
-              .toEqual(jasmine.anything());
+            expect(input).withContext('Input is not defined').toEqual(jasmine.anything());
             expect(document.activeElement).toEqual(input);
           });
         });
@@ -542,9 +538,8 @@ describe('ModalHelper', () => {
           });
 
           it('should have correct padding', () => {
-            const toolbarContainer = ionToolbarElement.shadowRoot.querySelector(
-              '.toolbar-container'
-            );
+            const toolbarContainer =
+              ionToolbarElement.shadowRoot.querySelector('.toolbar-container');
             const expectedPadding = size('s');
             const expectedTopSpacingTotal = size('m');
             const expectedAdditionalTopPadding =
