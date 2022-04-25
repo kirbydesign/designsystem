@@ -6,6 +6,7 @@ import {
   ChartDataLabelOptions,
   ChartDataset,
   ChartHighlightedElements,
+  ChartLabel,
   ChartOptions,
   ChartType,
 } from '@kirbydesign/designsystem';
@@ -24,7 +25,7 @@ import {
 export class MockChartComponent {
   @Input() type: ChartType;
   @Input() data: ChartDataset[] | number[];
-  @Input() labels: string[] | string[][];
+  @Input() labels: ChartLabel[];
   @Input() customOptions: ChartOptions;
   @Input() dataLabelOptions: ChartDataLabelOptions;
   @Input() annotations: AnnotationOptions[];

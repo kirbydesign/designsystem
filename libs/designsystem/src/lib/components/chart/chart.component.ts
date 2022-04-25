@@ -18,6 +18,7 @@ import {
   ChartDataLabelOptions,
   ChartDataset,
   ChartHighlightedElements,
+  ChartLabel,
   ChartType,
 } from './chart.types';
 
@@ -31,7 +32,7 @@ export class ChartComponent implements AfterViewInit, OnChanges {
   @Input() type: ChartType = 'column';
   @Input() data: ChartDataset[] | number[];
 
-  @Input() labels: string[] | string[][];
+  @Input() labels: ChartLabel[];
 
   @Input() customOptions?: ChartOptions;
   @Input() dataLabelOptions?: ChartDataLabelOptions;
