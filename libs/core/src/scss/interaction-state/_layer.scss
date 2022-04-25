@@ -41,7 +41,7 @@ $_light: utils.get-color('black-contrast');
     z-index: $state-layer-z-index;
 
     &::before {
-      @include transition;
+      @include utilities.transition;
 
       content: '';
       position: absolute;
@@ -73,17 +73,4 @@ $_light: utils.get-color('black-contrast');
   .content-layer {
     @content;
   }
-}
-
-/// Apply streamlined transition to interaction state changes
-/// @param {*} $property-list [all]
-@mixin transition($property-list...) {
-  @if list.length($property-list) == 0 {
-    $property-list: all;
-  }
-
-  transition-property: $property-list;
-  transition-duration: utils.get-transition-duration('quick');
-  transition-timing-function: utils.get-transition-easing('static');
-  transition-delay: 0ms;
 }

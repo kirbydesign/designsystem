@@ -1,9 +1,7 @@
 @use 'sass:color';
+@use 'sass:list';
 @use '../utils';
 
-// ---------------------------------------------------------------------------
-// Shared interaction state variables
-// ---------------------------------------------------------------------------
 $default-loudness: 'm';
 
 @function get-state-color($variant, $loudness: $default-loudness, $flip: false) {
@@ -20,4 +18,17 @@ $default-loudness: 'm';
   $hover-color: #{color.scale($_background, $lightness: $_lightness)};
 
   @return $hover-color;
+}
+
+/// Apply streamlined transition to interaction state changes
+/// @param {*} $property-list [all]
+@mixin transition($property-list...) {
+  @if list.length($property-list) == 0 {
+    $property-list: all;
+  }
+
+  transition-property: $property-list;
+  transition-duration: utils.get-transition-duration('quick');
+  transition-timing-function: utils.get-transition-easing('static');
+  transition-delay: 0ms;
 }
