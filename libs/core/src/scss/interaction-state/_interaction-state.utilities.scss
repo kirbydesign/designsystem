@@ -5,11 +5,11 @@
 $default-loudness: 'm';
 $default-transition-duration: utils.get-transition-duration('quick');
 
-@function get-state-color($variant, $loudness: $default-loudness, $flip: false) {
+@function get-state-color($variant, $loudness: $default-loudness, $make-lighter: false) {
   $_background: utils.get-color($variant, $getValueOnly: true);
   $_lightness: 0% !default;
 
-  @if $flip {
+  @if $make-lighter {
     $_lightness: utils.get-loudness($loudness);
   } @else {
     // negative number means "make it darker"

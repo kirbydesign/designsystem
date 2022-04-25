@@ -106,7 +106,7 @@ td {
 }
 
 .day.selected {
-  @include interaction-state.apply-hover('xl', $flip: true);
+  @include interaction-state.apply-hover('xl', $make-lighter: true);
 
   color: utils.get-color('black-contrast');
   background-color: utils.get-color('black');

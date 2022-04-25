@@ -2,9 +2,9 @@
 @use '../layer';
 @use '../../utils';
 
-@mixin apply-hover($loudness: interaction-state.$default-loudness, $flip: false) {
+@mixin apply-hover($loudness: interaction-state.$default-loudness, $make-lighter: false) {
   @include utils.hover {
-    @include layer.apply-state($loudness, $flip);
+    @include layer.apply-state($loudness, $make-lighter);
 
     --background-hover: var(--state-layer-background-color);
     --background-hover-opacity: var(--state-layer-opacity);
