@@ -70,7 +70,7 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
       --background: #{interaction-state.get-state-color('white', 's')};
     }
 
-    --transition: #{utils.get-transition-duration('quick')};
+    --transition: #{interaction-state.$default-transition-duration};
     --size: #{$checkbox-icon-size};
     --checkmark-width: #{utils.size('xxxs')};
     --background: #{utils.get-color('white')};

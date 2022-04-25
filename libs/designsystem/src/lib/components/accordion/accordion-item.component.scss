@@ -27,7 +27,7 @@ $padding: utils.size('s');
 }
 
 .kirby-icon {
-  transition: transform utils.get-transition-duration('quick');
+  transition: transform interaction-state.$default-transition-duration;
 }
 
 .content {

@@ -3,6 +3,7 @@
 @use '../utils';
 
 $default-loudness: 'm';
+$default-transition-duration: utils.get-transition-duration('quick');
 
 @function get-state-color($variant, $loudness: $default-loudness, $flip: false) {
   $_background: utils.get-color($variant, $getValueOnly: true);
@@ -28,7 +29,7 @@ $default-loudness: 'm';
   }
 
   transition-property: $property-list;
-  transition-duration: utils.get-transition-duration('quick');
+  transition-duration: $default-transition-duration;
   transition-timing-function: utils.get-transition-easing('static');
   transition-delay: 0ms;
 }

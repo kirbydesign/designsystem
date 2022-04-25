@@ -30,6 +30,6 @@ ion-toggle {
   // Checked
   --background-checked: #{utils.get-color($background-checked)};
   --handle-background-checked: #{utils.get-color($handle-background)};
-  --handle-transition: #{utils.get-transition-duration('quick')};
+  --handle-transition: #{interaction-state.$default-transition-duration};
   --handle-box-shadow: #{utils.get-elevation(2)};
 }
