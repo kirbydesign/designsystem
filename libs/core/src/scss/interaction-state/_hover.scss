@@ -1,9 +1,11 @@
 @use 'layer';
+@use 'utilities';
 @use '../utils';
 
-@mixin apply-hover($loudness: layer.$default-loudness, $flip: false) {
+@mixin apply-hover($loudness: utilities.$default-loudness, $flip: false) {
   @include utils.hover {
     @include layer.apply-state($loudness, $flip);
+
     cursor: pointer;
     @content;
   }

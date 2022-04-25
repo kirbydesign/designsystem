@@ -1,10 +1,13 @@
 @use 'sass:color';
-@use 'layer';
 @use '../utils';
 
-@function get-state-color($variant, $loudness: layer.$default-loudness, $flip: false) {
-  $_background: utils.get-color($variant, $getValueOnly: true);
+// ---------------------------------------------------------------------------
+// Shared interaction state variables
+// ---------------------------------------------------------------------------
+$default-loudness: 'm';
 
+@function get-state-color($variant, $loudness: $default-loudness, $flip: false) {
+  $_background: utils.get-color($variant, $getValueOnly: true);
   $_lightness: 0% !default;
 
   @if $flip {

@@ -1,26 +1,22 @@
 @use 'sass:list';
 @use 'sass:math';
 @use 'sass:meta';
+@use 'utilities';
 @use '../utils';
 
 // Put state layer above content layer as default.
 // You can change move the content layer on top by declaring e.g.:
-//
 //    --content-layer-z-index: calc(#{layer.$state-layer-z-index} + 1);
-//
 // in a component that uses interaction state layer.
 $_content-layer-z-index: utils.z('default');
 $state-layer-z-index: $_content-layer-z-index + 1;
-
 $_dark: utils.get-color('black');
 $_light: utils.get-color('black-contrast');
-
-$default-loudness: 'm';
 
 /// Prepare state layer and content layer for interaction state changes.
 /// Should be initialized before applying hover.
 /// @param {*} $border-width [0px] - Necessary for making the state layer cover border (if any) on parent element
-@mixin initialize-layer($border-width: 0px) {
+@mixin initialize-layer($border-width: 0) {
   --state-layer-opacity: 0;
   --state-layer-background-color: $_dark;
 
@@ -33,6 +29,7 @@ $default-loudness: 'm';
 
   .state-layer {
     position: absolute;
+
     // When we use negated value of border-width on parent for inset
     // then the hover effect (state layer) will also cover the border.
     // Otherwise the border will not be affected on hover.
@@ -41,7 +38,6 @@ $default-loudness: 'm';
     overflow: hidden;
     pointer-events: none;
     border-radius: inherit;
-
     z-index: $state-layer-z-index;
 
     &::before {
@@ -51,14 +47,13 @@ $default-loudness: 'm';
       position: absolute;
       pointer-events: none;
       inset: -50%;
-
       opacity: var(--state-layer-opacity, 0);
       background-color: var(--state-layer-background-color, $_dark);
     }
   }
 }
 
-@mixin apply-state($loudness: $default-loudness, $flip: false) {
+@mixin apply-state($loudness: utilities.$default-loudness, $flip: false) {
   $loudness-percent: utils.get-loudness($loudness);
 
   @if not(meta.type-of($loudness-percent) == number and math.unit($loudness-percent) == '%') {
@@ -86,6 +81,7 @@ $default-loudness: 'm';
   @if list.length($property-list) == 0 {
     $property-list: all;
   }
+
   transition-property: $property-list;
   transition-duration: utils.get-transition-duration('quick');
   transition-timing-function: utils.get-transition-easing('static');
