@@ -14,7 +14,7 @@ import { HorizontalDirection, PopoverComponent } from '@kirbydesign/designsystem
   ],
 })
 export class MockPopoverComponent {
-  @Input() popout: HorizontalDirection;
+  @Input() popout: HorizontalDirection | `${HorizontalDirection}`;
   @Input() target: HTMLElement | ElementRef<HTMLElement>;
   @Output() willHide = new EventEmitter<void>();
 }

@@ -9,6 +9,7 @@
   border-radius: utils.size('xxxs');
   font-size: utils.font-size('n');
   padding: utils.size('xxxxs') utils.size('xxs');
+  font-weight: utils.font-weight('medium');
 
   &.sm {
     font-size: utils.font-size('s');
@@ -27,12 +28,13 @@
       utils.$notification-colors,
       (
         'semi-light': utils.get-color('semi-light'),
+        'danger': utils.$danger-background-weak,
       )
     )
 {
   :host(.#{$color-name}) {
-    --kirby-flag-background-color: #{utils.get-color($color-name)};
+    --kirby-flag-background-color: #{$color-value};
     --kirby-flag-color: #{utils.get-color($color-name + '-contrast')};
-    --kirby-flag-border-color: #{utils.get-color($color-name)};
+    --kirby-flag-border-color: #{$color-value};
   }
 }
