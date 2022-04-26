@@ -1,4 +1,11 @@
-import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  Input,
+  ViewChild,
+} from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { WindowRef } from '../../../types/window-ref';
@@ -9,6 +16,7 @@ import { WindowRef } from '../../../types/window-ref';
   styleUrls: ['./alert.component.scss'],
   // tslint:disable-next-line: no-host-metadata-property
   host: { '[class.ion-page]': 'false' }, //Ensure ion-page class doesn't get applied by Ionic Modal Controller
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AlertComponent implements AfterViewInit {
   readonly BLUR_WRAPPER_DELAY_IN_MS = 50;

@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   Input,
@@ -14,6 +15,7 @@ import { PageComponent } from '../page.component';
   selector: 'kirby-page-footer',
   templateUrl: './page-footer.component.html',
   styleUrls: ['./page-footer.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PageFooterComponent implements OnDestroy {
   @Input()
