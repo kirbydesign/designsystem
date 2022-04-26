@@ -40,43 +40,6 @@ $toolbar-padding: utils.size('s');
   $toolbar-top-spacing-total: utils.size('m');
   $toolbar-padding-top: $toolbar-top-spacing-total - $toolbar-padding;
   @include utils.media('>=medium') {
-    padding-top: $toolbar-padding-top;
-  }
-}
-
-ion-header ion-toolbar {
-  --padding-start: #{$toolbar-padding};
-  --padding-end: #{$toolbar-padding};
-  --padding-bottom: #{$toolbar-padding};
-  --padding-top: #{$toolbar-padding};
-  --border-width: 0;
-  --background: transparent;
-  --color: var(--kirby-modal-color, #{utils.get-color('black')});
-
-  button {
-    color: var(--color);
-  }
-
-  @include phablet-toolbar-padding;
-}
-
-:host {
-  --vh100: var(--vh, 1vh) * 100; /// Fixes an issue with vh units on iOS Safari
-  --header-height: 0;
-  --footer-height: 0;
-
-  &.drawer {
-    // Prevent iOS safe-area padding-top on drawer flavor
-    // as this is already applied on the top-level modal itself
-    // in /scss/_global-styles.scss:
-    ion-header ion-toolbar:first-of-type {
-      padding-top: 0;
-    }
-  }
-}
-
-:host-context(ion-modal:not(.kirby-modal-full-height)) {
-  @include utils.media('>=medium') {
     @include contain-content;
   }
 
