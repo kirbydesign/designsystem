@@ -1,13 +1,21 @@
-import { Component, ContentChild, ElementRef, AfterContentInit, ViewChild } from '@angular/core';
+import {
+  AfterContentInit,
+  ChangeDetectionStrategy,
+  Component,
+  ContentChild,
+  ElementRef,
+  ViewChild,
+} from '@angular/core';
 import { IonApp } from '@ionic/angular';
 
-import { RouterOutletComponent } from '../router-outlet/router-outlet.component';
 import { ModalController } from '../modal/services/modal.controller';
+import { RouterOutletComponent } from '../router-outlet/router-outlet.component';
 
 @Component({
   selector: 'kirby-app',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements AfterContentInit {
   @ViewChild(IonApp, { static: true, read: ElementRef })

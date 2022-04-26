@@ -140,7 +140,7 @@ this.modalController.showAlert(config);`;
   private onAlertDestructiveClosed(result?: boolean) {
     const config: ToastConfig = {
       message: result ? 'Message deleted' : 'Nothing happened',
-      messageType: result ? 'danger' : 'success',
+      messageType: result ? 'warning' : 'success',
       durationInMs: 1500,
     };
     this.toastController.showToast(config);

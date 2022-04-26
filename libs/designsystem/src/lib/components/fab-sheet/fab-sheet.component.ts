@@ -2,6 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import {
   AfterContentInit,
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   ContentChild,
   ElementRef,
@@ -21,6 +22,7 @@ import { ActionSheetComponent } from '../modal/action-sheet/action-sheet.compone
   selector: 'kirby-fab-sheet',
   templateUrl: './fab-sheet.component.html',
   styleUrls: ['./fab-sheet.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FabSheetComponent implements AfterContentInit, AfterViewInit {
   @Input() disabled: boolean = false;
