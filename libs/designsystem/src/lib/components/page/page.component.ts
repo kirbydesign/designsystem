@@ -1,3 +1,4 @@
+import { compileNgModule } from '@angular/compiler';
 import {
   AfterContentChecked,
   AfterViewInit,
@@ -268,6 +269,7 @@ export class PageComponent
 
     this.contentScrolled$.subscribe((scrollInfo: ScrollDetail) => {
       this.isContentScrolled = scrollInfo.scrollTop > contentScrolledOffsetInPixels;
+      this.changeDetectorRef.detectChanges();
     });
 
     this.navigationStart$.subscribe((event: NavigationStart) => {
