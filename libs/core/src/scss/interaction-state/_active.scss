@@ -1,0 +1,10 @@
+@use 'layer';
+
+$default-loudness-active: 'l';
+
+@mixin apply-active($loudness: $default-loudness-active, $make-lighter: false) {
+  &:active {
+    @include layer.apply-state($loudness, $make-lighter);
+    @content;
+  }
+}
