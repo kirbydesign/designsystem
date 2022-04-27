@@ -141,7 +141,12 @@ export class PopoverComponent implements AfterViewInit, OnDestroy {
   }
 
   hide() {
-    this.renderer.removeChild(this.document.body, this.elementRef.nativeElement);
+    if (this.isShowing) {
+      this.renderer.removeChild(
+        this.elementRef.nativeElement.parentElement,
+        this.elementRef.nativeElement
+      );
+    }
     this.releaseScroll();
 
     this.renderer.removeStyle(this.targetElement, 'z-index');
