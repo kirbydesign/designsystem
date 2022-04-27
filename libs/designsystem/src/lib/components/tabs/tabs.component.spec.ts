@@ -62,7 +62,7 @@ describe('TabsComponent', () => {
         it('should set footer safe area to 0px', () => {
           const ionTabBarElm = spectator.query('ion-tab-bar');
           expect(ionTabBarElm).toHaveComputedStyle({
-            '--kirby-page-footer-safe-area-bottom': '0',
+            '--kirby-page-footer-safe-area-bottom': '0px',
           });
         });
       });
