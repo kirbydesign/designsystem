@@ -3,6 +3,7 @@
 @use '../utils';
 
 $default-loudness: 'm';
+$default-loudness-active: 'l';
 $default-transition-duration: utils.get-transition-duration('quick');
 
 @function get-state-color($variant, $loudness: $default-loudness, $make-lighter: false) {
