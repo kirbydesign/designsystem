@@ -52,7 +52,7 @@ $_light: utils.get-color('black-contrast');
   }
 }
 
-@mixin apply-state($loudness: interaction-state.$default-loudness, $flip: false) {
+@mixin apply-state($loudness: interaction-state.$default-loudness, $make-lighter: false) {
   $loudness-percent: utils.get-loudness($loudness);
 
   @if not(meta.type-of($loudness-percent) == number and math.unit($loudness-percent) == '%') {
@@ -61,7 +61,7 @@ $_light: utils.get-color('black-contrast');
 
   --state-layer-opacity: #{$loudness-percent / 100%};
 
-  @if $flip {
+  @if $make-lighter {
     --state-layer-background-color: #{$_light};
   } @else {
     --state-layer-background-color: #{$_dark};

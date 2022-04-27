@@ -36,7 +36,7 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
     --border-color-checked: #{utils.get-color('black')};
 
     @include interaction-state.apply-hover {
-      --background-checked: #{interaction-state.get-state-color('black', 'xxl', $flip: true)};
+      --background-checked: #{interaction-state.get-state-color('black', 'xxl', $make-lighter: true)};
     }
 
     &:active {

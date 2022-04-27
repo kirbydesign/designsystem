@@ -11,7 +11,7 @@
   color: utils.get-color('white-contrast');
 
   &.is-selected {
-    @include interaction-state.apply-hover('xxl', $flip: true);
+    @include interaction-state.apply-hover('xxl', $make-lighter: true);
 
     background-color: utils.get-color('black');
     color: utils.get-color('black-contrast');
@@ -36,7 +36,7 @@
   user-select: none;
 
   :host-context(.kirby-color-brightness-dark) {
-    @include interaction-state.apply-hover($flip: true);
+    @include interaction-state.apply-hover($make-lighter: true);
 
     background-color: transparent;
     color: utils.get-text-color('white');
@@ -54,7 +54,7 @@
     color: utils.get-text-color('black');
 
     &.is-selected {
-      @include interaction-state.apply-hover('xxl', $flip: true);
+      @include interaction-state.apply-hover('xxl', $make-lighter: true);
 
       background-color: utils.get-color('black');
       color: utils.get-color('black-contrast');
@@ -66,7 +66,7 @@
     color: utils.get-text-color('black');
 
     &.is-selected {
-      @include interaction-state.apply-hover('xl', $flip: true);
+      @include interaction-state.apply-hover('xl', $make-lighter: true);
 
       background-color: utils.get-color('black');
       color: utils.get-color('black-contrast');
