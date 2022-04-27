@@ -56,12 +56,6 @@ export class PopoverComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  @HostListener('click')
-  _backdropClick() {
-    this.willHide.emit();
-    this.hide();
-  }
-
   @HostListener('window:resize')
   _onWindowResize() {
     if (this.isShowing) {
