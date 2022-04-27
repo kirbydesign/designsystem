@@ -102,6 +102,7 @@ $button-width: (
   @include interaction-state.apply-focus-visible;
   @include interaction-state.initialize-layer($border-width);
   @include interaction-state.apply-hover;
+  @include interaction-state.apply-active;
   @include interaction-state.extend-content {
     display: inherit;
     flex-direction: inherit;
@@ -190,10 +191,6 @@ $button-width: (
 
   &[expand='block'] {
     width: 100%;
-  }
-
-  &:active {
-    opacity: 0.8;
   }
 
   &:disabled {
