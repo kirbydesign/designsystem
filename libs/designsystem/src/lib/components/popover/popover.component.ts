@@ -58,9 +58,7 @@ export class PopoverComponent implements AfterViewInit, OnDestroy {
 
   @HostListener('window:resize')
   _onWindowResize() {
-    if (this.isShowing) {
-      this.hide();
-    }
+    this.hide();
   }
 
   constructor(private elementRef: ElementRef<HTMLElement>, private renderer: Renderer2) {
