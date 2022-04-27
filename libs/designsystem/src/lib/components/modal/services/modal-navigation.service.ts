@@ -93,9 +93,7 @@ export class ModalNavigationService {
   }
 
   private findChildRouteForUrl(url: string, routes: Routes) {
-    const moduleRelativePaths = this.getRoutePaths(routes, [''])
-      .sort()
-      .reverse(); // Ensure child paths are evaluated first
+    const moduleRelativePaths = this.getRoutePaths(routes, ['']).sort().reverse(); // Ensure child paths are evaluated first
     let matchedChildRoute = moduleRelativePaths.find((path) => url.endsWith(path));
     if (!matchedChildRoute) {
       // No static child route found matching current route - look for child route with url params:

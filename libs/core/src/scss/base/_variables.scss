@@ -1,5 +1,6 @@
-@use "sass:map";
-@use "sass:math";
+@use 'sass:map';
+@use 'sass:math';
+
 /*
   SPACINGS
 ****************************************************************************/
@@ -31,30 +32,29 @@ $font-sizes: (
   xs: 12px,
   xxs: 10px,
 ) !default;
-
 $line-height: (
   // h1:
-    xl: 38px,
+  xl: 38px,
   // h2:
-    l: 28px,
+  l: 28px,
   // h3:
-    m: 24px,
+  m: 24px,
   // p - please note: p and h3 share the same line-height, added the sizes to "match" with font-size:
-    n: 24px,
+  n: 24px,
   // text-small:
-    s: 20px,
+  s: 20px,
   // text-xsmall:
-    xs: 16px,
+  xs: 16px,
   // text-xxsmall:
-    xxs: 11px
+  xxs: 11px
 ) !default;
-
 $font-weight: (
   light: 300,
   normal: 400,
+  medium: 500,
   bold: 700,
   // black will be treated as a named css color if not quoted
-    'black': 900,
+  'black': 900,
 ) !default;
 
 /* Icon
@@ -71,15 +71,14 @@ $icon-font-sizes: (
 ****************************************************************************/
 $z-layers: (
   default: 1,
-  segmentBadge: 2,
-  avatarBadge: 2,
+  segment-badge: 2,
+  avatar-badge: 2,
   dropdown: 800,
   popover: 850,
   modal-overlay: 900,
   modal: 901,
   loading-overlay: 1001,
 ) !default;
-
 $border-radius: 16px !default;
 $border-radius-round: 999px !default;
 
@@ -97,16 +96,16 @@ $breakpoints: (
 ****************************************************************************/
 $elevations: (
   2: (
-    0 5px 10px -10px rgba(28, 28, 28, 0.3),
-    0 0 5px 0 rgba(28, 28, 28, 0.08),
+    0 5px 10px -10px rgb(28 28 28 / 30%),
+    0 0 5px 0 rgb(28 28 28 / 8%),
   ),
   4: (
-    0 10px 15px -10px rgba(28, 28, 28, 0.3),
-    0 0 5px 0 rgba(28, 28, 28, 0.08),
+    0 10px 15px -10px rgb(28 28 28 / 30%),
+    0 0 5px 0 rgb(28 28 28 / 8%),
   ),
   8: (
-    0 20px 30px -15px rgba(28, 28, 28, 0.3),
-    0 0 5px 0 rgba(28, 28, 28, 0.08),
+    0 20px 30px -15px rgb(28 28 28 / 30%),
+    0 0 5px 0 rgb(28 28 28 / 8%),
   ),
 ) !default;
 
@@ -118,7 +117,6 @@ $avatar-sizes: (
   m: 56px,
   l: 96px,
 ) !default;
-
 $avatar-badge-size: 16px;
 
 /* Page
@@ -130,13 +128,11 @@ $page-content-max-width: 720px;
 $alert-max-width: 359px;
 $compact-modal-max-width: 359px;
 $modal-max-width: 720px;
-
 $modal-heights: (
   s: math.floor($modal-max-width * 0.4),
   m: math.floor($modal-max-width * 0.64),
   l: math.floor($modal-max-width * 0.8),
 ) !default;
-
 $modal-default-height: map.get($modal-heights, 'm');
 $drawer-default-height: map.get($modal-heights, 's');
 
@@ -163,7 +159,6 @@ $checkbox-radio-sizes: (
   'sm': $fat-finger-size,
   'md': map.get($sizes, 'xxxl'),
 );
-
 $checkbox-radio-spacing: (
   'to-edge': map.get($sizes, 's'),
   'to-label': map.get($sizes, 'xs'),
@@ -173,7 +168,6 @@ $checkbox-radio-spacing: (
 ****************************************************************************/
 $soft-keyboard-transition-enter: 250ms ease-out 1ms; // Adding a 1ms delay seems to improve the smoothness on iPhone
 $soft-keyboard-transition-leave: 150ms ease-out;
-
 $transition-durations: (
   quick: 200ms,
   short: 300ms,
@@ -193,5 +187,4 @@ $transition-easings: (
     exit: cubic-bezier(0.32, 0.72, 0, 1),
   ),
 );
-
 $loading-overlay-backdrop-opacity: 0.8;
