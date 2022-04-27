@@ -65,7 +65,6 @@ export class PopoverComponent implements AfterViewInit, OnDestroy {
   @HostListener('window:resize')
   _onWindowResize() {
     if (this.isShowing) {
-      this.willHide.emit();
       this.hide();
     }
   }
@@ -141,12 +140,13 @@ export class PopoverComponent implements AfterViewInit, OnDestroy {
   }
 
   hide() {
-    if (this.isShowing) {
-      this.renderer.removeChild(
-        this.elementRef.nativeElement.parentElement,
-        this.elementRef.nativeElement
-      );
-    }
+    if (!this.isShowing) return;
+
+    this.willHide.emit();
+    this.renderer.removeChild(
+      this.elementRef.nativeElement.parentElement,
+      this.elementRef.nativeElement
+    );
     this.releaseScroll();
 
     this.renderer.removeStyle(this.targetElement, 'z-index');
