@@ -112,7 +112,7 @@ ion-radio {
   }
 
   &.radio-checked {
-    --border-width: 0;
+    --border-width: 0px;
 
     &:not(:focus):not(.radio-disabled) {
       &::part(container) {
