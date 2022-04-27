@@ -46,6 +46,7 @@
   &[role='button'] {
     @include interaction-state.initialize-layer;
     @include interaction-state.apply-hover('s');
+    @include interaction-state.apply-active('m');
     @include interaction-state.apply-focus-visible($shadow: utils.get-elevation(2));
 
     &.highlighted {
