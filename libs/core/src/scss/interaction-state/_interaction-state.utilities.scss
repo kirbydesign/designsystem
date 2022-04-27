@@ -1,0 +1,35 @@
+@use 'sass:color';
+@use 'sass:list';
+@use '../utils';
+
+$default-loudness: 'm';
+$default-transition-duration: utils.get-transition-duration('quick');
+
+@function get-state-color($variant, $loudness: $default-loudness, $flip: false) {
+  $_background: utils.get-color($variant, $getValueOnly: true);
+  $_lightness: 0% !default;
+
+  @if $flip {
+    $_lightness: utils.get-loudness($loudness);
+  } @else {
+    // negative number means "make it darker"
+    $_lightness: -1 * utils.get-loudness($loudness);
+  }
+
+  $hover-color: #{color.scale($_background, $lightness: $_lightness)};
+
+  @return $hover-color;
+}
+
+/// Apply streamlined transition to interaction state changes
+/// @param {*} $property-list [all]
+@mixin transition($property-list...) {
+  @if list.length($property-list) == 0 {
+    $property-list: all;
+  }
+
+  transition-property: $property-list;
+  transition-duration: $default-transition-duration;
+  transition-timing-function: utils.get-transition-easing('static');
+  transition-delay: 0ms;
+}
