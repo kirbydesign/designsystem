@@ -1,6 +1,6 @@
 @use 'sass:math';
 @use 'sass:meta';
-@use 'utilities';
+@use 'interaction-state.utilities';
 @use '../utils';
 
 // Put state layer above content layer as default.
@@ -40,7 +40,7 @@ $_light: utils.get-color('black-contrast');
     z-index: $state-layer-z-index;
 
     &::before {
-      @include utilities.transition;
+      @include interaction-state.transition;
 
       content: '';
       position: absolute;
@@ -52,7 +52,7 @@ $_light: utils.get-color('black-contrast');
   }
 }
 
-@mixin apply-state($loudness: utilities.$default-loudness, $flip: false) {
+@mixin apply-state($loudness: interaction-state.$default-loudness, $flip: false) {
   $loudness-percent: utils.get-loudness($loudness);
 
   @if not(meta.type-of($loudness-percent) == number and math.unit($loudness-percent) == '%') {
