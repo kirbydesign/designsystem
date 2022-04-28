@@ -155,6 +155,7 @@
 
 <kirby-modal-footer
   *ngIf="!isLoading && showFooter"
+  [type]="_footerType"
   themeColor="white"
   [snapToKeyboard]="snapFooterToKeyboard"
 >

@@ -41,6 +41,11 @@ import { COMPONENT_PROPS } from './config/modal-config.helper';
   providers: [{ provide: Modal, useExisting: ModalWrapperComponent }],
 })
 export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDestroy {
+  @HostBinding('class.collapsible-title')
+  get _hasCollapsibleTitle() {
+    return !!this.config?.collapseTitle;
+  }
+
   static readonly KEYBOARD_HIDE_DELAY_IN_MS = 100;
 
   scrollY: number = Math.abs(this.windowRef.nativeWindow.scrollY);
@@ -66,6 +71,9 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   @ViewChild(IonTitle, { static: true, read: ElementRef })
   private ionTitleElement: ElementRef<HTMLIonTitleElement>;
   @ViewChild(RouterOutlet, { static: true }) private routerOutlet: RouterOutlet;
+
+  @ViewChild('contentTitle', { read: ElementRef })
+  private contentTitle: ElementRef<HTMLElement>;
 
   private keyboardVisible = false;
   private toolbarButtons: HTMLButtonElement[] = [];
@@ -430,41 +438,69 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     }
   }
 
-  private readonly elementToParentMap: { [key: string]: () => HTMLElement } = {
-    'KIRBY-MODAL-FOOTER': () => this.elementRef.nativeElement,
-    'KIRBY-PAGE-TITLE': () => this.ionTitleElement.nativeElement,
-    'KIRBY-PAGE-PROGRESS': () => this.ionToolbarElement.nativeElement,
+  private readonly elementToParentMap: { [key: string]: () => HTMLElement[] } = {
+    'KIRBY-MODAL-FOOTER': () => [this.elementRef.nativeElement],
+    'KIRBY-PAGE-TITLE': () =>
+      [this.ionTitleElement.nativeElement, this.contentTitle?.nativeElement].filter(
+        (element) => element !== undefined
+      ),
+    'KIRBY-PAGE-PROGRESS': () => [this.ionToolbarElement.nativeElement],
   };
 
   private clearEmbeddedElements() {
-    Object.entries(this.elementToParentMap).forEach(([tagName, getParent]) => {
-      const embeddedElement = getParent().querySelector<HTMLElement>(`:scope > ${tagName}`);
-      this.removeChild(embeddedElement);
+    Object.entries(this.elementToParentMap).forEach(([tagName, getParents]) => {
+      const newParents = getParents();
+      newParents.forEach((newParent) => {
+        const embeddedElement = newParent.querySelector<HTMLElement>(`:scope > ${tagName}`);
+        this.removeChild(embeddedElement);
+      });
     });
   }
 
-  private getEmbeddedComponentElement() {
-    return !!this.config.modalRoute
-      ? this.ionContentElement.nativeElement.lastElementChild
-      : this.ionContentElement.nativeElement.firstElementChild;
+  /* TODO: Rewrite to make this function independent of element order. 
+     See: https://github.com/kirbydesign/designsystem/issues/2096
+  */
+  private getEmbeddedComponentElement(): null | Element {
+    const contentElementChildren = Array.from(
+      this.ionContentElement.nativeElement.children
+    ).reverse(); // Reverse makes it easier to retrieve the last children in the list
+
+    const embeddedComponentElement = !!this.config.modalRoute
+      ? contentElementChildren[0]
+      : contentElementChildren[1];
+
+    /* 
+      As ModalConfig.component has type 'any' all values are valid for component; 
+      explicitly handle the case where no embedded component element is found due to 
+      this.
+    */
+    if (!embeddedComponentElement) return null;
+    return embeddedComponentElement;
   }
 
   private getEmbeddedFooterElement() {
     return this.elementRef.nativeElement.querySelector<HTMLElement>('kirby-modal-footer');
   }
 
-  private moveChild(child: Element, newParent: Element) {
+  private moveChild(child: Element, newParents: Element[]) {
     this.renderer.removeChild(child.parentElement, child);
-    this.renderer.appendChild(newParent, child);
-    if (child.tagName === 'KIRBY-MODAL-FOOTER') {
-      this.resizeObserverService.observe(child, (entry) => {
-        const [property, pixelValue] = [
-          '--footer-height',
-          `${Math.floor(entry.contentRect.height)}px`,
-        ];
-        this.setCssVar(this.elementRef.nativeElement, property, pixelValue);
-      });
-    }
+
+    newParents.forEach((newParent, index) => {
+      const childToAppend = index > 0 ? child.cloneNode(true) : child;
+      this.renderer.appendChild(newParent, childToAppend);
+      // Append adds child as last element of parent; therefore retrieve with lastElementChild
+      const childElement = newParent.lastElementChild;
+
+      if (childElement.tagName === 'KIRBY-MODAL-FOOTER') {
+        this.resizeObserverService.observe(childElement, (entry) => {
+          const [property, pixelValue] = [
+            '--footer-height',
+            `${Math.floor(entry.contentRect.height)}px`,
+          ];
+          this.setCssVar(this.elementRef.nativeElement, property, pixelValue);
+        });
+      }
+    });
   }
 
   private removeChild(child?: Element) {
@@ -475,6 +511,8 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
 
   private observeEmbeddedElements() {
     const parentElement = this.getEmbeddedComponentElement();
+    if (parentElement === null) return; // Mute observe warning when parentElement is null
+
     this.mutationObserver.observe(parentElement, {
       childList: true, // Listen for addition or removal of child nodes
     });

@@ -1,21 +1,66 @@
 import { fakeAsync, tick } from '@angular/core/testing';
-import { IonContent } from '@ionic/angular';
-import { Spectator } from '@ngneat/spectator';
+import { RouterTestingModule } from '@angular/router/testing';
+import { IonButtons, IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular';
+import { createComponentFactory, Spectator } from '@ngneat/spectator';
+import { MockComponents } from 'ng-mocks';
 
 import { KirbyAnimation } from '../../../animation/kirby-animation';
 import { TestHelper } from '../../../testing/test-helper';
+import { WindowRef } from '../../../types';
+import { ButtonComponent } from '../../button/button.component';
 import { IconComponent } from '../../icon/icon.component';
+import { PageProgressComponent } from '../../page';
+import { ModalFooterComponent } from '../footer/modal-footer.component';
 
 import { ModalWrapperComponent } from './modal-wrapper.component';
 import {
   DynamicFooterEmbeddedComponent,
   DynamicPageProgressEmbeddedComponent,
+  InputEmbeddedComponent,
   ModalWrapperTestBuilder,
+  StaticFooterEmbeddedComponent,
+  StaticPageProgressEmbeddedComponent,
+  TitleEmbeddedComponent,
 } from './modal-wrapper.testbuilder';
 
 describe('ModalWrapperComponent', () => {
-  const modalWrapperTestBuilder = new ModalWrapperTestBuilder();
+  const createComponent = createComponentFactory({
+    component: ModalWrapperComponent,
+    imports: [RouterTestingModule],
+    entryComponents: [
+      StaticFooterEmbeddedComponent,
+      DynamicFooterEmbeddedComponent,
+      InputEmbeddedComponent,
+      StaticPageProgressEmbeddedComponent,
+      DynamicPageProgressEmbeddedComponent,
+    ],
+    providers: [
+      {
+        provide: WindowRef,
+        useValue: <WindowRef>{ nativeWindow: window },
+      },
+    ],
+    declarations: [
+      MockComponents(
+        IonHeader,
+        IonToolbar,
+        IonTitle,
+        IonContent,
+        IconComponent,
+        ButtonComponent,
+        PageProgressComponent,
+        ModalFooterComponent,
+        IonButtons
+      ),
+    ],
+  });
+
+  let modalWrapperTestBuilder: ModalWrapperTestBuilder;
   let spectator: Spectator<ModalWrapperComponent>;
+
+  beforeEach(() => {
+    modalWrapperTestBuilder = new ModalWrapperTestBuilder(createComponent);
+  });
 
   it('should create', () => {
     spectator = modalWrapperTestBuilder.build();
@@ -25,9 +70,69 @@ describe('ModalWrapperComponent', () => {
     spectator.fixture.destroy();
   });
 
-  describe('title', () => {
+  describe("when 'collapseTitle' is enabled", () => {
+    /* 
+      Whether the title is displayed & truncated is not tested. 
+      This is the responsibility of the ionic components; we assume
+      they're working as intended. 
+
+      If needed, it should be implemented as an integration test. 
+    */
+
+    let ionContentElement: HTMLIonContentElement;
+    let ionTitleElement: HTMLIonTitleElement;
+    const testTitle = 'This is a long test title';
+
     beforeEach(() => {
-      spectator = modalWrapperTestBuilder.title('Test title').flavor('modal').build();
+      spectator = modalWrapperTestBuilder
+        .flavor('modal')
+        .collapsibleTitle(true)
+        .title(testTitle)
+        .component(TitleEmbeddedComponent)
+        .build();
+
+      ionContentElement = spectator.query('ion-content');
+      ionTitleElement = spectator.query('ion-title');
+    });
+
+    afterEach(() => {
+      spectator.fixture.destroy();
+    });
+
+    it('should not have any padding between content & toolbar', () => {
+      const ionContentToolbarElement: HTMLIonToolbarElement =
+        ionContentElement.querySelector('ion-toolbar');
+      expect(ionContentToolbarElement).not.toBeUndefined();
+
+      expect(ionContentToolbarElement).toHaveComputedStyle({
+        'padding-top': '0px',
+        '--padding-top': '0px',
+        '--padding-bottom': '0px',
+        '--padding-start': '0px',
+        '--padding-end': '0px',
+      });
+      expect(ionContentElement).toHaveComputedStyle({ '--padding-top': '0px' });
+    });
+
+    it('should place the title in both the content & the header', () => {
+      const contentTitle = ionContentElement.querySelector('kirby-page-title').innerHTML;
+      const headerTitle = ionTitleElement.querySelector('kirby-page-title').innerHTML;
+
+      expect(contentTitle).toBe(testTitle);
+      expect(headerTitle).toBe(testTitle);
+    });
+  });
+
+  describe('with slotted kirby-page-title', () => {
+    let ionTitle: HTMLIonTitleElement;
+
+    beforeEach(() => {
+      spectator = modalWrapperTestBuilder
+        .title('Test title')
+        .component(TitleEmbeddedComponent)
+        .flavor('modal')
+        .build();
+      ionTitle = spectator.query('ion-header kirby-page-title');
     });
 
     afterEach(() => {
@@ -36,7 +141,7 @@ describe('ModalWrapperComponent', () => {
     });
 
     it('should render', () => {
-      expect(spectator.component.config.title).toEqual('Test title');
+      expect(ionTitle.innerHTML).toEqual('Test title');
     });
 
     it('should have css class "drawer" when drawer flavor is used', () => {

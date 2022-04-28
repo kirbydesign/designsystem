@@ -18,8 +18,14 @@ export class ModalExampleConfigurationComponent {
   @Input() showPageProgress: boolean;
   @Output() showPageProgressChange = new EventEmitter<boolean>();
 
+  @Input() collapseTitle: boolean;
+  @Output() collapseTitleChange = new EventEmitter<boolean>();
+
   @Input() showFooter: boolean;
   @Output() showFooterChange = new EventEmitter<boolean>();
+
+  @Input() displayFooterAsInline: boolean = false;
+  @Output() displayFooterAsInlineChange = new EventEmitter<boolean>();
 
   @Input() showDummyContent: boolean;
   @Output() showDummyContentChange = new EventEmitter<boolean>();
@@ -79,6 +85,18 @@ export class ModalExampleConfigurationComponent {
     if (this.preventChangeEvent) return;
     this.showFooter = show;
     this.showFooterChange.emit(this.showFooter);
+  }
+
+  toggleDisplayFooterAsInline(value: boolean) {
+    if (this.preventChangeEvent) return;
+    this.displayFooterAsInline = value;
+    this.displayFooterAsInlineChange.emit(this.displayFooterAsInline);
+  }
+
+  toggleCollapseTitle(value: boolean) {
+    if (this.preventChangeEvent) return;
+    this.collapseTitle = value;
+    this.collapseTitleChange.emit(this.collapseTitle);
   }
 
   toggleShowDummyContent(show: boolean) {
