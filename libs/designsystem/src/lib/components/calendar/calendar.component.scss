@@ -100,6 +100,7 @@ td {
 
 .day.today {
   @include interaction-state.apply-hover;
+  @include interaction-state.apply-active;
 
   color: utils.get-color('medium-contrast');
   background-color: utils.get-color('medium');
@@ -107,6 +108,7 @@ td {
 
 .day.selected {
   @include interaction-state.apply-hover('xl', $make-lighter: true);
+  @include interaction-state.apply-active('xxl', $make-lighter: true);
 
   color: utils.get-color('black-contrast');
   background-color: utils.get-color('black');
@@ -120,4 +122,5 @@ td {
 .contain-state-layer {
   @include interaction-state.initialize-layer;
   @include interaction-state.apply-hover('s');
+  @include interaction-state.apply-active('m');
 }

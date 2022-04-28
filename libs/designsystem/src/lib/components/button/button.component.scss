@@ -54,6 +54,7 @@ $button-width: (
   --kirby-button-border-color: transparent;
 
   @include interaction-state.apply-hover('s');
+  @include interaction-state.apply-active('m');
 
   &.destructive {
     --kirby-button-color: #{utils.get-color('danger')};
@@ -75,6 +76,7 @@ $button-width: (
   --kirby-button-color: #{utils.get-color('black-contrast')};
 
   @include interaction-state.apply-hover('xxl', $make-lighter: true);
+  @include interaction-state.apply-active('xxxl', $make-lighter: true);
 
   &.destructive {
     --kirby-button-background-color: #{utils.get-color('light')};
@@ -89,6 +91,7 @@ $button-width: (
   --kirby-button-border-color: #{utils.get-color('medium')};
 
   @include interaction-state.apply-hover('s');
+  @include interaction-state.apply-active('m');
 
   &.destructive {
     --kirby-button-color: #{utils.get-color('danger')};
@@ -102,6 +105,7 @@ $button-width: (
   @include interaction-state.apply-focus-visible;
   @include interaction-state.initialize-layer($border-width);
   @include interaction-state.apply-hover;
+  @include interaction-state.apply-active;
   @include interaction-state.extend-content {
     display: inherit;
     flex-direction: inherit;
@@ -192,10 +196,6 @@ $button-width: (
     width: 100%;
   }
 
-  &:active {
-    opacity: 0.8;
-  }
-
   &:disabled {
     background-color: utils.get-color('semi-light');
     color: utils.get-color('semi-dark-shade');
@@ -213,6 +213,7 @@ $button-width: (
       --kirby-button-color: #{utils.get-color('white-contrast')};
 
       @include interaction-state.apply-hover;
+      @include interaction-state.apply-active;
     }
 
     &.attention-level3 {
@@ -220,6 +221,7 @@ $button-width: (
       --kirby-button-color: #{utils.get-color('white')};
 
       @include interaction-state.apply-hover('l', $make-lighter: true);
+      @include interaction-state.apply-active('xl', $make-lighter: true);
     }
   }
 
@@ -253,6 +255,7 @@ $button-width: (
     --kirby-button-color: #{utils.get-color('white-contrast')};
 
     @include interaction-state.apply-hover('s');
+    @include interaction-state.apply-active('m');
   }
 }
 
@@ -262,6 +265,7 @@ $button-width: (
     --kirby-button-color: #{utils.get-color('white-contrast')};
 
     @include interaction-state.apply-hover;
+    @include interaction-state.apply-active;
   }
 }
 
@@ -317,6 +321,7 @@ $button-width: (
       --kirby-button-color: #{utils.get-color($color-name + '-contrast')};
 
       @include interaction-state.apply-hover;
+      @include interaction-state.apply-active;
     }
   }
 }
