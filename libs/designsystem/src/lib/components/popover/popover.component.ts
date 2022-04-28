@@ -56,18 +56,9 @@ export class PopoverComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  @HostListener('click')
-  _backdropClick() {
-    this.willHide.emit();
-    this.hide();
-  }
-
   @HostListener('window:resize')
   _onWindowResize() {
-    if (this.isShowing) {
-      this.willHide.emit();
-      this.hide();
-    }
+    this.hide();
   }
 
   constructor(private elementRef: ElementRef<HTMLElement>, private renderer: Renderer2) {
@@ -141,7 +132,13 @@ export class PopoverComponent implements AfterViewInit, OnDestroy {
   }
 
   hide() {
-    this.renderer.removeChild(this.document.body, this.elementRef.nativeElement);
+    if (!this.isShowing) return;
+
+    this.willHide.emit();
+    this.renderer.removeChild(
+      this.elementRef.nativeElement.parentElement,
+      this.elementRef.nativeElement
+    );
     this.releaseScroll();
 
     this.renderer.removeStyle(this.targetElement, 'z-index');
