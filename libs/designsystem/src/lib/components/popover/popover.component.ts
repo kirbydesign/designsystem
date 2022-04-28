@@ -98,7 +98,12 @@ export class PopoverComponent implements AfterViewInit, OnDestroy {
 
   // document.removeEventListener needs the exact same event handler & options reference:
   private preventEvent(event: TouchEvent) {
-    event.preventDefault();
+    if (event.target instanceof HTMLElement) {
+      const targetIsInPopover = !!event.target.closest('kirby-popover');
+      if (!targetIsInPopover) {
+        event.preventDefault();
+      }
+    }
   }
 
   private preventScroll() {
