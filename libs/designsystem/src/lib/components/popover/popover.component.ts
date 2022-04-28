@@ -97,7 +97,7 @@ export class PopoverComponent implements AfterViewInit, OnDestroy {
   }
 
   // document.removeEventListener needs the exact same event handler & options reference:
-  private preventEvent(event: TouchEvent) {
+  private preventEventOutsidePopover(event: TouchEvent) {
     if (event.target instanceof HTMLElement) {
       const targetIsInPopover = !!event.target.closest('kirby-popover');
       if (!targetIsInPopover) {
@@ -115,7 +115,7 @@ export class PopoverComponent implements AfterViewInit, OnDestroy {
     // preventDefault does not work with Renderer2.listen method; add event listener directly to document instead
     this.document.addEventListener(
       'touchmove',
-      this.preventEvent,
+      this.preventEventOutsidePopover,
       this.preventScrollEventListenerOptions
     );
   }
@@ -127,7 +127,7 @@ export class PopoverComponent implements AfterViewInit, OnDestroy {
 
     this.document.removeEventListener(
       'touchmove',
-      this.preventEvent,
+      this.preventEventOutsidePopover,
       this.preventScrollEventListenerOptions
     );
   }
