@@ -89,18 +89,18 @@ ion-radio {
       background-color: interaction-state.get-state-color('white', 's');
     }
   }
+  @include interaction-state.apply-active {
+    --color: transparent;
+    --color-checked: #{interaction-state.get-state-color('success')};
+
+    &::part(container) {
+      background-color: interaction-state.get-state-color('white');
+    }
+  }
 
   &::part(mark) {
     width: $radio-icon-mark-size;
     height: $radio-icon-mark-size;
-  }
-
-  &:active {
-    --color: transparent;
-
-    &::part(container) {
-      background-color: utils.get-color('white-shade');
-    }
   }
 
   :host-context(kirby-radio-group.error),

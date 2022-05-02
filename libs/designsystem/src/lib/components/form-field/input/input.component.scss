@@ -8,6 +8,9 @@
     background-color: interaction-state.get-state-color('white', 's');
     cursor: text;
   }
+  @include interaction-state.apply-active {
+    background-color: interaction-state.get-state-color('white', 'm');
+  }
 
   &[type='number'] {
     // fallback

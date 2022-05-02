@@ -23,6 +23,16 @@ ion-toggle {
     --handle-background-checked: #{interaction-state.get-state-color($handle-background, 's')};
   }
 
+  @include interaction-state.apply-active {
+    // Not checked
+    --background: #{interaction-state.get-state-color($background, 'm')};
+    --handle-background: #{interaction-state.get-state-color($handle-background, 'm')};
+
+    // Checked
+    --background-checked: #{interaction-state.get-state-color($background-checked, 'm')};
+    --handle-background-checked: #{interaction-state.get-state-color($handle-background, 'm')};
+  }
+
   // Not checked
   --background: #{utils.get-color($background)};
   --handle-background: #{utils.get-color($handle-background)};

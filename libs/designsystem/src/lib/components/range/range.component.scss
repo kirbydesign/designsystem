@@ -16,6 +16,9 @@ ion-range {
   @include interaction-state.apply-hover {
     --knob-background: #{interaction-state.get-state-color('white', 's')};
   }
+  @include interaction-state.apply-active {
+    --knob-background: #{interaction-state.get-state-color('white', 'm')};
+  }
 
   --knob-background: #{utils.get-color('white')};
   --knob-box-shadow: #{$knob-shadow};

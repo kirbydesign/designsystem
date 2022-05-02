@@ -23,10 +23,9 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
     @include interaction-state.apply-hover {
       --background-checked: #{interaction-state.get-state-color('success')};
     }
-
-    &:active {
-      --background-checked: #{utils.get-color('success-shade')};
-      --border-color-checked: #{utils.get-color('success-shade')};
+    @include interaction-state.apply-active {
+      --background-checked: #{interaction-state.get-state-color('success', 'xl')};
+      --border-color-checked: #{interaction-state.get-state-color('success', 'xl')};
     }
   }
 
@@ -38,11 +37,18 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
     @include interaction-state.apply-hover {
       --background-checked: #{interaction-state.get-state-color('black', 'xxl', $make-lighter: true)};
     }
-
-    &:active {
-      --checkmark-color: #{utils.get-color('white-shade')};
-      --background-checked: #{utils.get-color('black-tint')};
-      --border-color-checked: #{utils.get-color('black-tint')};
+    @include interaction-state.apply-active {
+      --checkmark-color: #{interaction-state.get-state-color('white')};
+      --background-checked: #{interaction-state.get-state-color(
+          'black',
+          'xxxl',
+          $make-lighter: true
+        )};
+      --border-color-checked: #{interaction-state.get-state-color(
+          'black',
+          'xxxl',
+          $make-lighter: true
+        )};
     }
   }
 
@@ -69,6 +75,9 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
     @include interaction-state.apply-hover {
       --background: #{interaction-state.get-state-color('white', 's')};
     }
+    @include interaction-state.apply-active {
+      --background: #{interaction-state.get-state-color('white', 'm')};
+    }
 
     --transition: #{utils.get-transition-duration('quick')};
     --size: #{$checkbox-icon-size};
@@ -83,10 +92,6 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
 
     &::part(container) {
       padding: utils.size('xxxs'); // Spacing between checkmark and container box
-    }
-
-    &:active {
-      --background: #{utils.get-color('white-shade')};
     }
   }
 
