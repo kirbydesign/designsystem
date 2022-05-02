@@ -24,12 +24,20 @@ ion-toolbar {
   --padding-bottom: 0;
 
   box-sizing: border-box;
-  padding-inline: utils.size('xs');
-  transition: padding-inline utils.get-transition-easing('enter-exit')
-    utils.get-transition-duration('short');
+
+  $button-padding: utils.size('xs');
+
+  padding-left: $button-padding;
+  padding-right: $button-padding;
+  transition-property: padding-left, padding-right;
+  transition-duration: utils.get-transition-duration('short');
+  transition-timing-function: utils.get-transition-easing('enter-exit');
 
   &.content-scrolled {
-    padding-inline: 0;
+    $button-padding: utils.size('xxxs');
+
+    padding-left: $button-padding;
+    padding-right: $button-padding;
   }
 
   /*
@@ -46,6 +54,7 @@ ion-toolbar {
       white-space: nowrap;
       pointer-events: auto;
       overflow: hidden;
+      font-weight: utils.font-weight('bold');
 
       @include utils.slotted('*') {
         text-overflow: ellipsis;
@@ -87,8 +96,8 @@ ion-back-button {
 
   // Properly center back-icon
   &::part(icon) {
-    margin-inline-start: 0;
-    margin-inline-end: 0;
+    margin-left: 0;
+    margin-right: 0;
   }
 
   &::part(native) {

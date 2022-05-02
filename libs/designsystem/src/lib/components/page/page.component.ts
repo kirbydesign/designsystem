@@ -43,7 +43,7 @@ import { TabsComponent } from '../tabs/tabs.component';
  * Specify scroll event debounce time in ms and scrolled offset from top in pixels
  */
 const contentScrollDebounceTimeInMS = 10;
-const contentScrolledOffsetInPixels = 15;
+const contentScrolledOffsetInPixels = 4;
 
 type stickyConfig = { sticky: boolean };
 type fixedConfig = { fixed: boolean };
