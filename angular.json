@@ -129,17 +129,8 @@
         },
         "serve": {
           "builder": "@angular-builders/custom-webpack:dev-server",
-          "defaultConfiguration": "development",
           "options": {
-            "browserTarget": "cookbook:build"
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "cookbook:build:production"
-            },
-            "development": {
-              "browserTarget": "cookbook:build:development"
-            }
+            "browserTarget": "cookbook:build:development"
           }
         },
         "extract-i18n": {
