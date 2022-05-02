@@ -95,6 +95,15 @@
             "scripts": []
           },
           "configurations": {
+            "development": {
+              "optimization": false,
+              "aot": false,
+              "buildOptimizer": false,
+              "sourceMap": true,
+              "extractLicenses": false,
+              "namedChunks": true,
+              "vendorChunk": true
+            },
             "production": {
               "fileReplacements": [
                 {
@@ -127,12 +136,16 @@
         },
         "serve": {
           "builder": "@angular-builders/custom-webpack:dev-server",
+          "defaultConfiguration": "development",
           "options": {
             "browserTarget": "cookbook:build"
           },
           "configurations": {
             "production": {
               "browserTarget": "cookbook:build:production"
+            },
+            "development": {
+              "browserTarget": "cookbook:build:development"
             }
           }
         },
