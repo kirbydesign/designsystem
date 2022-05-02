@@ -9,6 +9,7 @@
 
   ion-item {
     @include ionic.apply-hover('s');
+    @include ionic.apply-active('m');
 
     --padding-top: var(--item-padding-top, 0px);
     --padding-bottom: var(--item-padding-bottom, 0px);
@@ -18,10 +19,6 @@
     --inner-padding-bottom: #{utils.size('xxs')};
     --inner-padding-end: #{utils.size('s')};
     --background: var(--kirby-item-background, #{utils.get-color('white')});
-    --background-activated: var(
-      --kirby-item-background-activated,
-      #{utils.get-color('white-shade')}
-    );
 
     // WORKAROUND: Needed to fix ignored click on scrollend
     // https://github.com/ionic-team/ionic-framework/issues/21871

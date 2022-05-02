@@ -1,5 +1,3 @@
-@use 'sass:color';
-
 @use '~@kirbydesign/core/src/scss/interaction-state';
 @use '~@kirbydesign/core/src/scss/utils';
 
@@ -17,10 +15,10 @@ $slide-button-text-padding: 0 $slide-button-container-radius 0 $total-slider-thu
 @mixin _slider-thumb() {
   @include interaction-state.transition;
   @include interaction-state.apply-hover {
-    background-color: color.scale(
-      utils.get-color('white', $getValueOnly: true),
-      $lightness: -1 * utils.get-loudness('m')
-    );
+    background-color: interaction-state.get-state-color('white');
+  }
+  @include interaction-state.apply-active {
+    background-color: interaction-state.get-state-color('white', 'l');
   }
 
   appearance: none;
