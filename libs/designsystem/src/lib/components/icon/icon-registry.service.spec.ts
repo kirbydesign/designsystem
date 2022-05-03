@@ -1,5 +1,4 @@
 import { IconRegistryService } from './icon-registry.service';
-import { IconSettings } from './icon-settings';
 
 describe('KirbyIconRegistryService', () => {
   let service: IconRegistryService;
@@ -10,21 +9,6 @@ describe('KirbyIconRegistryService', () => {
 
   it('should create service', () => {
     expect(service).toBeTruthy();
-  });
-
-  it('should register icons if injected', () => {
-    const consoleWarnSpy = spyOn(console, 'warn');
-    const iconSettings: IconSettings = {
-      icons: [
-        { name: 'name1', svg: 'svg1' },
-        { name: 'name2', svg: 'svg2' },
-      ],
-    };
-    service = new IconRegistryService(iconSettings);
-    expect(service.getIcons()).toEqual(iconSettings.icons);
-    expect(consoleWarnSpy).toHaveBeenCalledWith(
-      'Use of IconSettings is deprecated, use IconRegistryService instead'
-    );
   });
 
   describe('getIcon', () => {

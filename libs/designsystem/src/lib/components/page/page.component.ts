@@ -56,6 +56,11 @@ export interface PullToRefreshEvent {
 export class PageTitleDirective {}
 
 @Directive({
+  selector: '[kirbyPageSubtitle]',
+})
+export class PageSubtitleDirective {}
+
+@Directive({
   selector: '[kirbyPageToolbarTitle]',
 })
 export class PageToolbarTitleDirective {}
@@ -139,6 +144,7 @@ export class PageComponent
   implements OnInit, OnDestroy, AfterViewInit, AfterContentChecked, OnChanges
 {
   @Input() title: string;
+  @Input() subtitle: string;
   @Input() toolbarTitle: string;
   @Input() titleAlignment: 'left' | 'center' | 'right' = 'left';
   @Input() defaultBackHref: string;
@@ -181,12 +187,15 @@ export class PageComponent
   private customToolbarTitleTemplate: TemplateRef<any>;
   @ContentChild(PageTitleDirective, { static: false, read: TemplateRef })
   customTitleTemplate: TemplateRef<any>;
+  @ContentChild(PageSubtitleDirective, { static: false, read: TemplateRef })
+  customSubtitleTemplate: TemplateRef<any>;
   @ContentChildren(PageActionsDirective)
   customActions: QueryList<PageActionsDirective>;
   @ContentChildren(PageContentDirective)
   private customContent: QueryList<PageContentDirective>;
 
   hasPageTitle: boolean;
+  hasPageSubtitle: boolean;
   hasActionsInPage: boolean;
   toolbarTitleVisible: boolean;
   toolbarFixedActionsVisible: boolean;
@@ -236,6 +245,10 @@ export class PageComponent
         ...this.fitHeadingConfig,
         maxLines: changes.titleMaxLines.currentValue,
       };
+    }
+    if (changes.subtitle && !changes.subtitle.isFirstChange) {
+      this.subtitle = changes.title.currentValue;
+      this.hasPageSubtitle = this.subtitle !== undefined;
     }
   }
 
@@ -314,9 +327,9 @@ export class PageComponent
   private initializeTitle() {
     // Ensures initializeTitle() won't run, if already initialized
     if (this.hasPageTitle) return;
-
     this.hasPageTitle = this.title !== undefined || !!this.customTitleTemplate;
     this.toolbarTitleVisible = !this.hasPageTitle;
+    this.hasPageSubtitle = this.subtitle !== undefined || !!this.customSubtitleTemplate;
 
     if (this.hasPageTitle) {
       setTimeout(() => {

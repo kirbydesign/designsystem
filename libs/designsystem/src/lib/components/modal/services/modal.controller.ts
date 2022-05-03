@@ -74,9 +74,6 @@ export class ModalController implements OnDestroy {
   }
 
   public async showModal(config: ModalConfig, onClose?: (data?: any) => void): Promise<void> {
-    if (config.hasOwnProperty('dim')) {
-      console.warn('ModalConfig.dim is deprecated - please remove from your configuration.');
-    }
     await this.showAndRegisterOverlay(() => this.modalHelper.showModalWindow(config), onClose);
   }
 

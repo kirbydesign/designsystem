@@ -136,7 +136,7 @@ export class ListSwipeExampleComponent {
     item.deleted = !item.deleted;
     const config: ToastConfig = {
       message: `Item '${item.title}' has been deleted.`,
-      messageType: 'danger',
+      messageType: 'warning',
       durationInMs: 1500,
     };
     this.toastController.showToast(config);

@@ -143,17 +143,17 @@ describe('ModalHelper', () => {
     expect(modalShadow).toBeTruthy();
   };
 
-  const openModal = async (title: string = 'Modal', component?: any, size?: ModalSize) => {
-    await openOverlay({ flavor: 'modal', title, component, size });
+  const openModal = async (component?: any, size?: ModalSize) => {
+    await openOverlay({ flavor: 'modal', component, size });
   };
 
   const openDrawer = async (
-    title: string = 'Drawer',
+    title?: string,
     component?: any,
     size?: ModalSize,
     interactWithBackground?: boolean
   ) => {
-    await openOverlay({ flavor: 'drawer', title, component, size, interactWithBackground });
+    await openOverlay({ flavor: 'drawer', component, size, interactWithBackground });
   };
 
   const expectShadowStyle = () => {
@@ -212,7 +212,7 @@ describe('ModalHelper', () => {
 
           describe(`modal`, () => {
             beforeEach(async () => {
-              await openModal('Modal On Presenting Element');
+              await openModal();
             });
 
             afterEach(async () => {
@@ -310,25 +310,25 @@ describe('ModalHelper', () => {
           });
 
           it('modal should be sized `small`', async () => {
-            await openModal('Small Modal', undefined, 'small');
+            await openModal(undefined, 'small');
 
             expectSize('small');
           });
 
           it('modal should be sized `medium`', async () => {
-            await openModal('Medium Modal', undefined, 'medium');
+            await openModal(undefined, 'medium');
 
             expectSize('medium');
           });
 
           it('modal should be sized `large`', async () => {
-            await openModal('Large Modal', undefined, 'large');
+            await openModal(undefined, 'large');
 
             expectSize('large');
           });
 
           it('modal should be sized `full-height`', async () => {
-            await openModal('Full-height Modal', undefined, 'full-height');
+            await openModal(undefined, 'full-height');
 
             expectSize('full-height');
             const expectedHeight = window.innerHeight - modalPaddingTop;
@@ -360,17 +360,14 @@ describe('ModalHelper', () => {
           });
 
           it('should NOT add class `full-height`, if content can fit in viewport', async () => {
-            await openModal('Modal with minimum height', ContentWithNoOverflowEmbeddedComponent);
+            await openModal(ContentWithNoOverflowEmbeddedComponent);
             await TestHelper.waitForResizeObserver();
 
             expect(ionModalWrapper.classList.contains('full-height')).toBeFalse();
           });
 
           it('should have footer visible at the bottom of viewport, when full-height', async () => {
-            await openModal(
-              'Modal with full height and footer',
-              ContentOverflowsWithFooterEmbeddedComponent
-            );
+            await openModal(ContentOverflowsWithFooterEmbeddedComponent);
             const footer = ionModal.querySelector('kirby-modal-footer');
             expect(footer).toBeTruthy();
             await TestHelper.waitForResizeObserver();
@@ -382,7 +379,7 @@ describe('ModalHelper', () => {
 
         describe(`with default flavor ('modal')`, () => {
           beforeEach(async () => {
-            await openModal('Modal', InputEmbeddedComponent);
+            await openModal(InputEmbeddedComponent);
           });
 
           afterEach(async () => {
@@ -431,7 +428,6 @@ describe('ModalHelper', () => {
           beforeEach(async () => {
             await openOverlay({
               flavor: 'compact',
-              title: 'Compact Modal',
               component: undefined,
             });
           });
@@ -465,7 +461,6 @@ describe('ModalHelper', () => {
               beforeEach(async () => {
                 await openOverlay({
                   flavor: firstFlavor,
-                  title: `First Modal - flavor: ${firstFlavor}`,
                   component: undefined,
                 });
               });
@@ -481,7 +476,6 @@ describe('ModalHelper', () => {
                   beforeEach(async () => {
                     secondOverlay = await modalHelper.showModalWindow({
                       flavor: secondFlavor,
-                      title: `Second Modal - flavor: ${secondFlavor}`,
                       component: undefined,
                     });
                     const secondIonModal = await ionModalController.getTop();
@@ -513,7 +507,7 @@ describe('ModalHelper', () => {
           let pageTitleVerticalCenter: number;
 
           beforeEach(async () => {
-            await openModal(null, PageProgressEmbeddedComponent);
+            await openModal(PageProgressEmbeddedComponent);
             ionToolbarElement = ionModalWrapper.querySelector('ion-toolbar');
             pageTitleElement = ionToolbarElement.querySelector('kirby-page-title');
             pageTitleVerticalCenter = getElementVerticalCenter(pageTitleElement);
@@ -575,7 +569,7 @@ describe('ModalHelper', () => {
         });
 
         it(`modal should have no visible backdrop`, async () => {
-          await openModal('Modal On Presenting Element');
+          await openModal();
 
           expect(ionBackdrop).toHaveComputedStyle({ opacity: invisibleBackdropOpacity });
           await overlay.dismiss();
@@ -600,7 +594,7 @@ describe('ModalHelper', () => {
           });
 
           it('modal toolbar should respect iOS safe-area', async () => {
-            await openModal('Modal On Presenting Element');
+            await openModal();
 
             const ionToolbar = ionModal.querySelector('ion-header > ion-toolbar');
             expect(ionToolbar).toHaveComputedStyle({ 'padding-top': safeAreaTop });
@@ -737,7 +731,6 @@ describe('ModalHelper', () => {
             beforeEach(async () => {
               await openOverlay({
                 flavor: firstFlavor,
-                title: `First Modal - flavor: ${firstFlavor}`,
                 component: undefined,
               });
             });
@@ -753,7 +746,6 @@ describe('ModalHelper', () => {
                 beforeEach(async () => {
                   secondOverlay = await modalHelper.showModalWindow({
                     flavor: secondFlavor,
-                    title: `Second Modal - flavor: ${secondFlavor}`,
                     component: undefined,
                   });
                   const secondIonModal = await ionModalController.getTop();
@@ -791,7 +783,7 @@ describe('ModalHelper', () => {
         let pageTitleVerticalCenter: number;
 
         beforeEach(async () => {
-          await openModal(null, PageProgressEmbeddedComponent);
+          await openModal(PageProgressEmbeddedComponent);
           ionToolbarElement = ionModalWrapper.querySelector('ion-toolbar');
           pageTitleElement = ionToolbarElement.querySelector('kirby-page-title');
           pageTitleVerticalCenter = getElementVerticalCenter(pageTitleElement);

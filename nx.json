@@ -16,10 +16,6 @@
     },
     "cookbook": {
       "tags": []
-    },
-    "cookbook-e2e": {
-      "tags": [],
-      "implicitDependencies": ["cookbook"]
     }
   },
   "tasksRunnerOptions": {

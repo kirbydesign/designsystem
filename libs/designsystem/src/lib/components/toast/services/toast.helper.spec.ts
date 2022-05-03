@@ -61,13 +61,12 @@ describe('ToastHelper', () => {
     });
 
     describe('when configured with messageType', () => {
-      type MessageType = 'success' | 'warning' | 'danger';
-      type NotificationColor = 'success' | 'warning' | 'danger';
+      type MessageType = 'success' | 'warning';
+      type NotificationColor = 'success' | 'warning';
 
       const messageTypeColorMap = new Map<MessageType, NotificationColor>([
         ['success', 'success'],
         ['warning', 'warning'],
-        ['danger', 'danger'],
       ]);
 
       messageTypeColorMap.forEach((notificationColor, messageType) => {
@@ -79,25 +78,11 @@ describe('ToastHelper', () => {
           const ionToast = window.document.getElementsByTagName('ion-toast')[0];
           await TestHelper.whenReady(ionToast);
           const toastWrapper = ionToast.shadowRoot.querySelector('.toast-wrapper');
-          const expectedColor =
-            messageType === 'danger' ? getColor('warning') : getColor(notificationColor);
+
           expect(toastWrapper).toHaveComputedStyle({
-            'background-color': expectedColor,
+            'background-color': getColor(notificationColor),
           });
         });
-      });
-
-      it(`should display warning in console when using 'danger' MessageType`, async () => {
-        spyOn(console, 'warn');
-
-        overlay = await spectator.service.showToast({
-          message: 'Test message',
-          messageType: 'danger',
-        });
-
-        expect(console.warn).toHaveBeenCalledWith(
-          `[DEPRECATED] 'danger' message type is deprecated. Use Kirby Alerts for critical warnings. Toast will be shown as 'warning'`
-        );
       });
     });
   });

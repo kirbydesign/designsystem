@@ -6,6 +6,7 @@ const config = {
   template: `<kirby-page
   titleAlignment="center"
   title="Centered Title"
+  subtitle="Centered Subtitle"
   toolbarTitle="A Different Title" defaultBackHref="/">
   <kirby-page-content>
     <div [innerHTML]="content"></div>

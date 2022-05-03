@@ -38,7 +38,7 @@ const config = {
   this.modalController.showAlert({
     title: 'Clicked chart',
     message: 'You clicked on year: ' + ev.point.category,
-    okBtnText: 'Ok',
+    okBtn: 'Ok',
   });
 
   this.selectedYear = ev.point.category;
@@ -109,7 +109,7 @@ export class ChartDeprecatedExampleBarComponent {
     this.modalController.showAlert({
       title: 'Clicked chart',
       message: 'You clicked on year: ' + ev.point.category,
-      okBtnText: 'Ok',
+      okBtn: 'Ok',
     });
 
     this.selectedYear = ev.point.category;
