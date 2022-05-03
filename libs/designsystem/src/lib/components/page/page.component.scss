@@ -67,7 +67,7 @@ ion-title {
 }
 
 ion-back-button {
-  @include ionic.apply-hover('s');
+  @include ionic.apply-hover('xxxs');
   @include ionic.apply-active('m');
 
   --color: #{utils.get-color('black')};
