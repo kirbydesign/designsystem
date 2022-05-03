@@ -12,7 +12,7 @@
   color: utils.get-color('white-contrast');
 
   &.is-selected {
-    @include interaction-state.apply-hover('xxl', $make-lighter: true);
+    @include interaction-state.apply-hover('l', $make-lighter: true);
     @include interaction-state.apply-active('xxxl', $make-lighter: true);
 
     background-color: utils.get-color('black');
@@ -58,7 +58,7 @@
     color: utils.get-text-color('black');
 
     &.is-selected {
-      @include interaction-state.apply-hover('xxl', $make-lighter: true);
+      @include interaction-state.apply-hover('l', $make-lighter: true);
       @include interaction-state.apply-active('xxxl', $make-lighter: true);
 
       background-color: utils.get-color('black');
@@ -72,7 +72,7 @@
 
     &.is-selected {
       @include interaction-state.apply-hover('s', $make-lighter: true);
-      @include interaction-state.apply-active('xxl', $make-lighter: true);
+      @include interaction-state.apply-active('l', $make-lighter: true);
 
       background-color: utils.get-color('black');
       color: utils.get-color('black-contrast');
