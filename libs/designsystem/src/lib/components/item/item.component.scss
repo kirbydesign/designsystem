@@ -9,7 +9,7 @@
 
   ion-item {
     @include ionic.apply-hover('xxxs');
-    @include ionic.apply-active('m');
+    @include ionic.apply-active('xxs');
 
     --padding-top: var(--item-padding-top, 0px);
     --padding-bottom: var(--item-padding-bottom, 0px);
