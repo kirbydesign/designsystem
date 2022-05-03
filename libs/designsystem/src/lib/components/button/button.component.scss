@@ -105,7 +105,7 @@ $button-width: (
   @include interaction-state.apply-focus-visible;
   @include interaction-state.initialize-layer($border-width);
   @include interaction-state.apply-hover;
-  @include interaction-state.apply-active;
+  @include interaction-state.apply-active('s');
   @include interaction-state.extend-content {
     display: inherit;
     flex-direction: inherit;
@@ -213,7 +213,7 @@ $button-width: (
       --kirby-button-color: #{utils.get-color('white-contrast')};
 
       @include interaction-state.apply-hover;
-      @include interaction-state.apply-active;
+      @include interaction-state.apply-active('s');
     }
 
     &.attention-level3 {
@@ -221,7 +221,7 @@ $button-width: (
       --kirby-button-color: #{utils.get-color('white')};
 
       @include interaction-state.apply-hover('xs', $make-lighter: true);
-      @include interaction-state.apply-active('s', $make-lighter: true);
+      @include interaction-state.apply-active('m', $make-lighter: true);
     }
   }
 
