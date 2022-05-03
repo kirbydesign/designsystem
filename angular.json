@@ -95,6 +95,15 @@
             "scripts": []
           },
           "configurations": {
+            "development": {
+              "optimization": false,
+              "aot": false,
+              "buildOptimizer": false,
+              "sourceMap": true,
+              "extractLicenses": false,
+              "namedChunks": true,
+              "vendorChunk": true
+            },
             "production": {
               "fileReplacements": [
                 {
@@ -102,14 +111,7 @@
                   "with": "apps/cookbook/src/environments/environment.prod.ts"
                 }
               ],
-              "optimization": true,
               "outputHashing": "all",
-              "sourceMap": false,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -128,7 +130,7 @@
         "serve": {
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
-            "browserTarget": "cookbook:build"
+            "browserTarget": "cookbook:build:development"
           },
           "configurations": {
             "production": {
@@ -175,11 +177,6 @@
             "cypressConfig": "apps/cookbook-e2e/cypress.json",
             "tsConfig": "apps/cookbook-e2e/tsconfig.e2e.json",
             "devServerTarget": "cookbook:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "cookbook:serve:production"
-            }
           }
         },
         "lint": {

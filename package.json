@@ -50,7 +50,7 @@
     "prettier:fix": "prettier --write \"./{libs,apps}/**/*.{ts,json,md,scss,html}\"",
     "e2e": "ng e2e",
     "dist": "npm run dist:cookbook",
-    "dist:cookbook": "ng build cookbook --prod --aot --progress false",
+    "dist:cookbook": "ng build cookbook --configuration production",
     "predist:designsystem": "npm run extract-scss-variables",
     "dist:designsystem": "ng build designsystem",
     "postinstall": "npm run ngcc && npm run build-polyfills && npm run transpile:tools && npm run extract-scss-variables && npm run build:core && npm run transpile:generate-mocks && node ./decorate-angular-cli.js",
