@@ -26,7 +26,7 @@ import {
   PageToolbarTitleDirective,
 } from './page.component';
 
-const size = DesignTokenHelper.size;
+const { fontWeight, size } = DesignTokenHelper;
 
 @Component({})
 class DummyComponent {}
@@ -128,10 +128,30 @@ describe('PageComponent', () => {
       spectator.detectChanges();
 
       expect(ionToolbar).toHaveClass('content-scrolled');
+
+      const staticPageActionButton = ionToolbar.querySelector(
+        'ion-buttons[slot="primary"] button[kirby-button]'
+      );
+
+      expect(staticPageActionButton).toBeTruthy();
     });
   });
 
   describe('having a title and subtitle', () => {
+    it('should have the configured title in the toolbar-title', () => {
+      const toolbarTitle = ionToolbar.querySelector('ion-title .toolbar-title');
+
+      expect(toolbarTitle).toHaveText(titleText);
+    });
+
+    it('should render the toolbar-title with the correct font-weight', () => {
+      const toolbarTitle = ionToolbar.querySelector('ion-title .toolbar-title');
+
+      expect(toolbarTitle).toHaveComputedStyle({
+        'font-weight': fontWeight('bold'),
+      });
+    });
+
     it('should have the configured title', () => {
       const pageTitleHeading = ionContent.querySelector('.page-title > h1');
 
