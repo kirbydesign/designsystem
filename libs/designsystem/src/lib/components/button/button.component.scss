@@ -54,7 +54,7 @@ $button-width: (
   --kirby-button-border-color: transparent;
 
   @include interaction-state.apply-hover('xxxs');
-  @include interaction-state.apply-active('m');
+  @include interaction-state.apply-active('xxs');
 
   &.destructive {
     --kirby-button-color: #{utils.get-color('danger')};
@@ -91,7 +91,7 @@ $button-width: (
   --kirby-button-border-color: #{utils.get-color('medium')};
 
   @include interaction-state.apply-hover('xxxs');
-  @include interaction-state.apply-active('m');
+  @include interaction-state.apply-active('xxs');
 
   &.destructive {
     --kirby-button-color: #{utils.get-color('danger')};
@@ -255,7 +255,7 @@ $button-width: (
     --kirby-button-color: #{utils.get-color('white-contrast')};
 
     @include interaction-state.apply-hover('xxxs');
-    @include interaction-state.apply-active('m');
+    @include interaction-state.apply-active('xxs');
   }
 }
 

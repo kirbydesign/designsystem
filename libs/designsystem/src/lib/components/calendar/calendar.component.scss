@@ -122,5 +122,5 @@ td {
 .contain-state-layer {
   @include interaction-state.initialize-layer;
   @include interaction-state.apply-hover('xxxs');
-  @include interaction-state.apply-active('m');
+  @include interaction-state.apply-active('xxs');
 }
