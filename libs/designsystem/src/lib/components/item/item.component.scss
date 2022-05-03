@@ -8,7 +8,7 @@
   position: relative;
 
   ion-item {
-    @include ionic.apply-hover('s');
+    @include ionic.apply-hover('xxxs');
     @include ionic.apply-active('m');
 
     --padding-top: var(--item-padding-top, 0px);
