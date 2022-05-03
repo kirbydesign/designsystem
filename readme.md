@@ -210,8 +210,6 @@ A basic walkthrough is outlined in the structure below:
 @kirbydesign/designsystem
 ├── apps                    # Contains source code for applications
 |  └── cookbook             # - Cookbook application (showcase and examples)
-├── config
-|  └── helm
 ├── dist                    # Contains output files when building artifacts (for distribution)
 |  ├── apps
 |  └── libs
