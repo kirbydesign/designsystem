@@ -173,8 +173,7 @@
   },
   "schematics": {
     "@nrwl/angular:application": {
-      "unitTestRunner": "karma",
-      "e2eTestRunner": "cypress"
+      "unitTestRunner": "karma"
     },
     "@nrwl/angular:library": {
       "unitTestRunner": "karma"
