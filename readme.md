@@ -209,10 +209,7 @@ A basic walkthrough is outlined in the structure below:
 ```
 @kirbydesign/designsystem
 ├── apps                    # Contains source code for applications
-|  ├── cookbook             # - Cookbook application (showcase and examples)
-|  └── cookbook-e2e         # - End-to-end tests for Cookbook application
-├── config
-|  └── helm
+|  └── cookbook             # - Cookbook application (showcase and examples)
 ├── dist                    # Contains output files when building artifacts (for distribution)
 |  ├── apps
 |  └── libs
