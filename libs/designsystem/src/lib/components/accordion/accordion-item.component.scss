@@ -6,8 +6,8 @@ $padding: utils.size('s');
 
 :host {
   @include interaction-state.initialize-layer;
-  @include interaction-state.apply-hover('s');
-  @include interaction-state.apply-active('m');
+  @include interaction-state.apply-hover('xxxs');
+  @include interaction-state.apply-active('xxs');
 
   display: block;
   border-top: 1px solid $divider-color;
