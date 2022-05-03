@@ -45,7 +45,7 @@
     color: utils.get-text-color('white');
 
     &.is-selected {
-      @include interaction-state.apply-hover('l');
+      @include interaction-state.apply-hover('xs');
       @include interaction-state.apply-active('xl');
 
       background-color: utils.get-color('white');
