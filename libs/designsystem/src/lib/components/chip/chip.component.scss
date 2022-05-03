@@ -13,7 +13,7 @@
 
   &.is-selected {
     @include interaction-state.apply-hover('l', $make-lighter: true);
-    @include interaction-state.apply-active('xxxl', $make-lighter: true);
+    @include interaction-state.apply-active('xxl', $make-lighter: true);
 
     background-color: utils.get-color('black');
     color: utils.get-color('black-contrast');
@@ -59,7 +59,7 @@
 
     &.is-selected {
       @include interaction-state.apply-hover('l', $make-lighter: true);
-      @include interaction-state.apply-active('xxxl', $make-lighter: true);
+      @include interaction-state.apply-active('xxl', $make-lighter: true);
 
       background-color: utils.get-color('black');
       color: utils.get-color('black-contrast');
