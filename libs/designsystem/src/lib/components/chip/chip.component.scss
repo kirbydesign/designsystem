@@ -46,7 +46,7 @@
 
     &.is-selected {
       @include interaction-state.apply-hover('xs');
-      @include interaction-state.apply-active('xl');
+      @include interaction-state.apply-active('s');
 
       background-color: utils.get-color('white');
       color: utils.get-color('white-contrast');
@@ -71,7 +71,7 @@
     color: utils.get-text-color('black');
 
     &.is-selected {
-      @include interaction-state.apply-hover('xl', $make-lighter: true);
+      @include interaction-state.apply-hover('s', $make-lighter: true);
       @include interaction-state.apply-active('xxl', $make-lighter: true);
 
       background-color: utils.get-color('black');
