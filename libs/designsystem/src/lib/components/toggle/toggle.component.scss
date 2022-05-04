@@ -15,22 +15,22 @@ ion-toggle {
 
   @include interaction-state.apply-hover {
     // Not checked
-    --background: #{interaction-state.get-state-color($background, 's')};
-    --handle-background: #{interaction-state.get-state-color($handle-background, 's')};
+    --background: #{interaction-state.get-state-color($background, 'xxxs')};
+    --handle-background: #{interaction-state.get-state-color($handle-background, 'xxxs')};
 
     // Checked
-    --background-checked: #{interaction-state.get-state-color($background-checked, 's')};
-    --handle-background-checked: #{interaction-state.get-state-color($handle-background, 's')};
+    --background-checked: #{interaction-state.get-state-color($background-checked, 'xxxs')};
+    --handle-background-checked: #{interaction-state.get-state-color($handle-background, 'xxxs')};
   }
 
   @include interaction-state.apply-active {
     // Not checked
-    --background: #{interaction-state.get-state-color($background, 'm')};
-    --handle-background: #{interaction-state.get-state-color($handle-background, 'm')};
+    --background: #{interaction-state.get-state-color($background, 'xxs')};
+    --handle-background: #{interaction-state.get-state-color($handle-background, 'xxs')};
 
     // Checked
-    --background-checked: #{interaction-state.get-state-color($background-checked, 'm')};
-    --handle-background-checked: #{interaction-state.get-state-color($handle-background, 'm')};
+    --background-checked: #{interaction-state.get-state-color($background-checked, 'xxs')};
+    --handle-background-checked: #{interaction-state.get-state-color($handle-background, 'xxs')};
   }
 
   // Not checked

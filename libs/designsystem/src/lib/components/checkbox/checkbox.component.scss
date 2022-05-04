@@ -24,8 +24,8 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
       --background-checked: #{interaction-state.get-state-color('success')};
     }
     @include interaction-state.apply-active {
-      --background-checked: #{interaction-state.get-state-color('success', 'xl')};
-      --border-color-checked: #{interaction-state.get-state-color('success', 'xl')};
+      --background-checked: #{interaction-state.get-state-color('success', 's')};
+      --border-color-checked: #{interaction-state.get-state-color('success', 's')};
     }
   }
 
@@ -35,7 +35,7 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
     --border-color-checked: #{utils.get-color('black')};
 
     @include interaction-state.apply-hover {
-      --background-checked: #{interaction-state.get-state-color('black', 'xxl', $make-lighter: true)};
+      --background-checked: #{interaction-state.get-state-color('black', 'l', $make-lighter: true)};
     }
     @include interaction-state.apply-active {
       --checkmark-color: #{interaction-state.get-state-color('white')};
@@ -73,10 +73,10 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
   ion-checkbox {
     @include interaction-state.apply-focus-part($part: 'container');
     @include interaction-state.apply-hover {
-      --background: #{interaction-state.get-state-color('white', 's')};
+      --background: #{interaction-state.get-state-color('white', 'xxxs')};
     }
     @include interaction-state.apply-active {
-      --background: #{interaction-state.get-state-color('white', 'm')};
+      --background: #{interaction-state.get-state-color('white')};
     }
 
     --transition: #{utils.get-transition-duration('quick')};

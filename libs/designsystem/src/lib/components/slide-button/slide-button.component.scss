@@ -18,7 +18,7 @@ $slide-button-text-padding: 0 $slide-button-container-radius 0 $total-slider-thu
     background-color: interaction-state.get-state-color('white');
   }
   @include interaction-state.apply-active {
-    background-color: interaction-state.get-state-color('white', 'l');
+    background-color: interaction-state.get-state-color('white', 'xs');
   }
 
   appearance: none;

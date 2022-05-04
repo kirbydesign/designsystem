@@ -5,11 +5,11 @@
 :host {
   @include interaction-state.transition(background-color);
   @include interaction-state.apply-hover {
-    background-color: interaction-state.get-state-color('white', 's');
+    background-color: interaction-state.get-state-color('white', 'xxxs');
     cursor: text;
   }
   @include interaction-state.apply-active {
-    background-color: interaction-state.get-state-color('white', 'm');
+    background-color: interaction-state.get-state-color('white');
   }
 
   &[type='number'] {
