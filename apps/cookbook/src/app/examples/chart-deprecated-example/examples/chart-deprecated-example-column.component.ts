@@ -39,7 +39,7 @@ const config = {
       this.modalController.showAlert({
     title: 'Clicked chart',
     message: 'You clicked on column: ' + ev.point.category,
-    okBtnText: 'Ok',
+    okBtn: 'Ok',
   });
 
   this.selectedIdx = this.categories.indexOf(ev.point.category);
@@ -94,7 +94,7 @@ export class ChartDeprecatedExampleColumnComponent {
     this.modalController.showAlert({
       title: 'Clicked chart',
       message: 'You clicked on column: ' + ev.point.category,
-      okBtnText: 'Ok',
+      okBtn: 'Ok',
     });
 
     this.selectedIdx = this.categories.indexOf(ev.point.category);

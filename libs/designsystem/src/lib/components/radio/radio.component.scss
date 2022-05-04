@@ -86,7 +86,7 @@ ion-radio {
 
   @include interaction-state.apply-hover {
     &::part(container) {
-      background-color: interaction-state.get-state-color('white', 's');
+      background-color: interaction-state.get-state-color('white', 'xxxs');
     }
   }
   @include interaction-state.apply-active {

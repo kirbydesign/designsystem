@@ -14,10 +14,10 @@ $knob-shadow: 0 5px 10px 0 rgb(28 28 28 / 30%), 0 0 5px 0 rgb(28 28 28 / 8%);
 ion-range {
   @include interaction-state.apply-focus-part($part: 'knob', $shadow: $knob-shadow);
   @include interaction-state.apply-hover {
-    --knob-background: #{interaction-state.get-state-color('white', 's')};
+    --knob-background: #{interaction-state.get-state-color('white', 'xxxs')};
   }
   @include interaction-state.apply-active {
-    --knob-background: #{interaction-state.get-state-color('white', 'm')};
+    --knob-background: #{interaction-state.get-state-color('white')};
   }
 
   --knob-background: #{utils.get-color('white')};

@@ -1,4 +1,11 @@
-import { Component, HostBinding, Input, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  HostBinding,
+  Input,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 
 import { IconRegistryService } from './icon-registry.service';
 import { Icon } from './icon-settings';
@@ -17,6 +24,7 @@ export enum IconSize {
   styleUrls: ['./icon.component.scss'],
   // tslint:disable-next-line: no-host-metadata-property
   host: { '[class.kirby-icon]': 'true' },
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IconComponent implements OnChanges {
   defaultIcon: Icon = this.findIcon(kirbyIconSettings.icons, 'cog');
