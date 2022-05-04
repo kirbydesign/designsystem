@@ -1,4 +1,11 @@
-import { AfterContentInit, Component, ContentChildren, Input, QueryList } from '@angular/core';
+import {
+  AfterContentInit,
+  ChangeDetectionStrategy,
+  Component,
+  ContentChildren,
+  Input,
+  QueryList,
+} from '@angular/core';
 
 import { ButtonComponent } from '../button/button.component';
 
@@ -6,6 +13,7 @@ import { ButtonComponent } from '../button/button.component';
   selector: 'kirby-empty-state',
   templateUrl: './empty-state.component.html',
   styleUrls: ['./empty-state.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EmptyStateComponent implements AfterContentInit {
   @Input() iconName: string;

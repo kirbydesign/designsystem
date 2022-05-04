@@ -30,14 +30,6 @@ export class ToastHelper {
   private getCssClass(messageType: MessageType): string {
     let cssClass = ToastHelper.CSS_CLASS;
 
-    if (messageType === 'danger') {
-      console.warn(
-        `[DEPRECATED] 'danger' message type is deprecated. Use Kirby Alerts for critical warnings. Toast will be shown as 'warning'`
-      );
-
-      messageType = 'warning';
-    }
-
     if (messageType) {
       cssClass += ' ' + messageType;
     }

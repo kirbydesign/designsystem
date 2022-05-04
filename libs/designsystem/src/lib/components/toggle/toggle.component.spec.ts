@@ -1,63 +1,62 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import * as ionic from '@ionic/angular';
-import { MockComponent } from 'ng-mocks';
+import { createComponentFactory, Spectator } from '@ngneat/spectator';
+
+import { TestHelper } from '../../testing/test-helper';
 
 import { ToggleComponent } from './toggle.component';
 
 describe('ToggleComponent', () => {
-  let component: ToggleComponent;
-  let fixture: ComponentFixture<ToggleComponent>;
+  let spectator: Spectator<ToggleComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ToggleComponent, MockComponent(ionic.IonToggle)],
-    }).compileComponents();
-  }));
+  const createComponent = createComponentFactory({
+    component: ToggleComponent,
+    imports: [TestHelper.ionicModuleForTest],
+  });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ToggleComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    spectator = createComponent();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(spectator.component).toBeTruthy();
   });
 
   describe('checked', () => {
     it('should not be checked by default', () => {
-      expect(component.checked).not.toBeTruthy();
+      expect(spectator.component.checked).toBeFalse();
     });
 
     it('should not be rendered as checked by default', () => {
-      var el = fixture.debugElement.query(By.directive(ionic.IonToggle));
-      expect(el.componentInstance.checked).not.toBeTruthy();
+      const ionToggle = spectator.debugElement.query(By.directive(ionic.IonToggle));
+
+      expect(ionToggle.componentInstance.checked).toBeFalse();
     });
 
     it('should be rendered as checked when checked is set to true', () => {
-      component.checked = true;
-      fixture.detectChanges();
-      var el = fixture.debugElement.query(By.directive(ionic.IonToggle));
-      expect(el.componentInstance.checked).toBeTruthy();
+      spectator.setInput({ checked: true });
+      const ionToggle = spectator.debugElement.query(By.directive(ionic.IonToggle));
+
+      expect(ionToggle.componentInstance.checked).toBeTrue();
     });
   });
 
   describe('disabled', () => {
     it('should not be disabled by default', () => {
-      expect(component.disabled).not.toBeTruthy();
+      expect(spectator.component.disabled).toBeFalse();
     });
 
     it('should not be rendered as disabled by default', () => {
-      var el = fixture.debugElement.query(By.directive(ionic.IonToggle));
-      expect(el.componentInstance.disabled).not.toBeTruthy();
+      const ionToggle = spectator.debugElement.query(By.directive(ionic.IonToggle));
+
+      expect(ionToggle.componentInstance.disabled).toBeFalse();
     });
 
     it('should be rendered as disabled when disabled is set to true', () => {
-      component.disabled = true;
-      fixture.detectChanges();
-      var el = fixture.debugElement.query(By.directive(ionic.IonToggle));
-      expect(el.componentInstance.disabled).toBeTruthy();
+      spectator.setInput({ disabled: true });
+      const ionToggle = spectator.debugElement.query(By.directive(ionic.IonToggle));
+
+      expect(ionToggle.componentInstance.disabled).toBeTrue();
     });
   });
 });

@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
 
 export enum ItemSize {
   XS = 'xs',
@@ -10,6 +10,7 @@ export enum ItemSize {
   selector: 'kirby-item',
   templateUrl: './item.component.html',
   styleUrls: ['./item.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ItemComponent {
   @Input() disabled: boolean;

@@ -172,22 +172,6 @@ This can be done by the following command:
 
 `npm uninstall --save-dev sass-extract sass-extract-loader ng-mocks`
 
-#### Deprecation
-
-The following legacy components have been removed:
-
-- `ListItemComponent` (`<kirby-list-item>`)
-- `ListFlexItemComponent` (`<kirby-list-flex-item>`)
-- `ListCellComponent` (`<kirby-list-cell>`)
-- `ListCellLineComponent` (`<kirby-list-cell-line>`)
-
-The following directives have been deprecated and will be removed in future versions:
-
-- `ListItemDirective` (`[kirbyListItem]`)
-- `ListFlexItemDirective` (`[kirbyListFlexItem]`)
-
-_Please see the [list documentation][kirby.cookbook.list] on how to use the list component(s) and directives._
-
 ### Icons
 
 Kirby comes bundled with a default set of icons. Make sure the `.svg` files used by Kirby are copied to your output folder by adding the following to `build > options > assets` in `angular.json` :
@@ -225,10 +209,7 @@ A basic walkthrough is outlined in the structure below:
 ```
 @kirbydesign/designsystem
 ├── apps                    # Contains source code for applications
-|  ├── cookbook             # - Cookbook application (showcase and examples)
-|  └── cookbook-e2e         # - End-to-end tests for Cookbook application
-├── config
-|  └── helm
+|  └── cookbook             # - Cookbook application (showcase and examples)
 ├── dist                    # Contains output files when building artifacts (for distribution)
 |  ├── apps
 |  └── libs
