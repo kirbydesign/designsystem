@@ -76,7 +76,7 @@ $button-width: (
   --kirby-button-color: #{utils.get-color('black-contrast')};
 
   @include interaction-state.apply-hover('l', $make-lighter: true);
-  @include interaction-state.apply-active('xxl', $make-lighter: true);
+  @include interaction-state.apply-active('xxxl', $make-lighter: true);
 
   &.destructive {
     --kirby-button-background-color: #{utils.get-color('light')};
