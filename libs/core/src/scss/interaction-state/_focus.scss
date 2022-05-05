@@ -60,9 +60,10 @@
 }
 
 @mixin _focus-ring($shadow, $gap) {
+  @include interaction-state.transition;
+
   $stroke-width: utils.size('xxxxs');
 
   box-shadow: #{$shadow}, 0 0 0 $gap #{utils.get-color('background-color')},
     0 0 0 $gap + $stroke-width utils.$focus-ring-color;
-  transition: box-shadow interaction-state.$default-transition-duration;
 }
