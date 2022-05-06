@@ -3,6 +3,35 @@ import { Component, Optional, SkipSelf } from '@angular/core';
 import { Modal, ModalController } from '@kirbydesign/designsystem';
 
 @Component({
+  selector: 'cookbook-debugging-modal-footer',
+  template: `
+    <kirby-modal-footer *ngIf="showFooter">
+      <button kirby-button attentionLevel="3" (click)="navigateToPreviousModal()">
+        <kirby-icon name="arrow-back"></kirby-icon>
+      </button>
+      <button kirby-button (click)="close()">Finish</button>
+    </kirby-modal-footer>
+  `,
+})
+export class DebuggingModalFooterComponent {
+  showFooter = true;
+
+  constructor(
+    private modalController: ModalController,
+    @Optional() @SkipSelf() private modal: Modal
+  ) {}
+
+  navigateToPreviousModal() {
+    this.modalController.navigateWithinModal('../page1');
+  }
+
+  close() {
+    let someTestData: number = Math.PI;
+    this.modal.close(someTestData);
+  }
+}
+
+@Component({
   selector: 'cookbook-modal-route-page-2-example',
   template: `
     <kirby-page-title>Modal Page 2/2</kirby-page-title>
@@ -17,12 +46,7 @@ import { Modal, ModalController } from '@kirbydesign/designsystem';
       voluptatem."
     </p>
     <button kirby-button (click)="toggleFooter()">Toggle footer</button>
-    <kirby-modal-footer *ngIf="showFooter">
-      <button kirby-button attentionLevel="3" (click)="navigateToPreviousModal()">
-        <kirby-icon name="arrow-back"></kirby-icon>
-      </button>
-      <button kirby-button (click)="close()">Finish</button>
-    </kirby-modal-footer>
+    <cookbook-debugging-modal-footer></cookbook-debugging-modal-footer>
   `,
   styles: [
     'h4 { margin-top: 24px; } ',
@@ -39,14 +63,5 @@ export class ModalRoutePage2ExampleComponent {
 
   toggleFooter() {
     this.showFooter = !this.showFooter;
-  }
-
-  navigateToPreviousModal() {
-    this.modalController.navigateWithinModal('../page1');
-  }
-
-  close() {
-    let someTestData: number = Math.PI;
-    this.modal.close(someTestData);
   }
 }
