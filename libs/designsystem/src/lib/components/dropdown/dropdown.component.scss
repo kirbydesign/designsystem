@@ -113,6 +113,14 @@ kirby-card {
   }
 }
 
+:host(.with-popover) {
+  &.is-open {
+    kirby-card {
+      display: block;
+    }
+  }
+}
+
 :host(.is-open) {
   & > button {
     box-shadow: utils.get-elevation(8);

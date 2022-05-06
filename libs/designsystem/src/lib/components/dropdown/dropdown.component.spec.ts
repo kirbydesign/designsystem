@@ -340,12 +340,6 @@ describe('DropdownComponent', () => {
           expect(spectator.component.isOpen).toBeTruthy();
           expect(spectator.element).toBeFocused();
         }));
-
-        it('should open dropdown within actual delay', async () => {
-          spectator.click('button');
-          await TestHelper.whenTrue(() => spectator.component.isOpen, openDelayInMs);
-          expect(spectator.component.isOpen).toBeTruthy();
-        });
       });
 
       describe('and Space key is pressed', () => {
