@@ -8,8 +8,8 @@
         [style.visibility]="hideBackButton ? 'hidden' : null"
       ></ion-back-button>
     </ion-buttons>
-    <ion-title>
-      <div class="toolbar-title hide" [class.fade-in]="toolbarTitleVisible">
+    <ion-title [class.slide-and-fade-in]="toolbarTitleVisible">
+      <div class="toolbar-title">
         <ng-container *ngTemplateOutlet="toolbarTitleTemplate"></ng-container>
       </div>
     </ion-title>

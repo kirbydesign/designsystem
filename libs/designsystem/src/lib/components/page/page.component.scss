@@ -23,6 +23,24 @@ ion-toolbar {
   --padding-top: 0;
   --padding-bottom: 0;
 
+  $toolbar-height-notch: utils.size('xxl');
+  $toolbar-height-default: utils.size('xxxl');
+  $notch-safe-area-top-trigger: 32px;
+
+  --notch-present: min(
+    max(calc(var(--kirby-safe-area-top, 0px) - #{$notch-safe-area-top-trigger} + 1px), 0px),
+    1px
+  );
+  --min-height: calc(
+    var(--notch-present) * #{utils.strip-unit($toolbar-height-notch)} + (
+        1px - var(--notch-present)
+      ) * #{utils.strip-unit($toolbar-height-default)}
+  );
+
+  @include utils.media('>=medium') {
+    --min-height: 64px; // TODO: #{utils.size('xxxxl')};
+  }
+
   box-sizing: border-box;
 
   $button-padding: utils.size('xs');
@@ -38,6 +56,7 @@ ion-toolbar {
 
     padding-left: $button-padding;
     padding-right: $button-padding;
+    border-bottom: 1px solid #{utils.get-color('semi-light')};
   }
 
   /*
@@ -49,6 +68,17 @@ ion-toolbar {
   }
 
   ion-title {
+    opacity: 0;
+    transform: translateY(10px);
+    transition-property: opacity, transform;
+    transition-duration: utils.get-transition-duration('quick');
+    transition-timing-function: utils.get-transition-easing('static');
+
+    &.slide-and-fade-in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     .toolbar-title {
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -166,6 +196,7 @@ ion-toolbar.content-scrolled ion-back-button {
  * Page Content
  */
 ion-content {
+  --padding-top: #{utils.size('xs')};
   --padding-start: var(--page-content-padding-start, #{utils.size('s')});
   --padding-end: var(--page-content-padding-end, #{utils.size('s')});
   --background: #{utils.get-color('background-color')};

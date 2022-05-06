@@ -111,6 +111,40 @@ describe('PageComponent', () => {
     await TestHelper.whenReady(ionContent);
   });
 
+  describe('should show the toolbar with the correct height', () => {
+    it('when on ios-phone without top safe-area', async () => {
+      ionToolbar.style.setProperty('--kirby-safe-area-top', '0px');
+      await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
+
+      expect(ionToolbar).toHaveComputedStyle({ height: size('xxxl') });
+    });
+
+    it('when on ios-phone with top safe-area', async () => {
+      ionToolbar.style.setProperty('--kirby-safe-area-top', '32px');
+      await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
+
+      expect(ionToolbar).toHaveComputedStyle({ height: size('xxl') });
+    });
+
+    it('when on non-ios-phone', async () => {
+      await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
+
+      expect(ionToolbar).toHaveComputedStyle({ height: size('xxxl') });
+    });
+
+    it('when on tablet', async () => {
+      await TestHelper.resizeTestWindow(TestHelper.screensize.tablet);
+
+      expect(ionToolbar).toHaveComputedStyle({ height: size('xxxxl') });
+    });
+
+    it('when on desktop', async () => {
+      await TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
+
+      expect(ionToolbar).toHaveComputedStyle({ height: size('xxxxl') });
+    });
+  });
+
   describe('having static page action', () => {
     it('should show the action in the toolbar when content not scrolled', () => {
       const staticPageActionButton = ionToolbar.querySelector(
