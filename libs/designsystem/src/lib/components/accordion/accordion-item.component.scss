@@ -6,8 +6,6 @@ $padding: utils.size('s');
 
 :host {
   @include interaction-state.initialize-layer;
-  @include interaction-state.apply-hover('xxxs');
-  @include interaction-state.apply-active('xxs');
 
   display: block;
   border-top: 1px solid $divider-color;
@@ -15,6 +13,9 @@ $padding: utils.size('s');
 }
 
 .header {
+  @include interaction-state.apply-hover('xxxs');
+  @include interaction-state.apply-active('xxs');
+
   display: flex;
   align-items: center;
   height: utils.size('xxxl');
