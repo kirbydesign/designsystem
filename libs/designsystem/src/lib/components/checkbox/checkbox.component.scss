@@ -22,6 +22,7 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
 
     @include interaction-state.apply-hover {
       --background-checked: #{interaction-state.get-state-color('success')};
+      --border-color-checked: #{interaction-state.get-state-color('success')};
     }
     @include interaction-state.apply-active {
       --background-checked: #{interaction-state.get-state-color('success', 's')};
@@ -36,6 +37,7 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
 
     @include interaction-state.apply-hover {
       --background-checked: #{interaction-state.get-state-color('black', 'l', $make-lighter: true)};
+      --border-color-checked: #{interaction-state.get-state-color('black', 'l', $make-lighter: true)};
     }
     @include interaction-state.apply-active {
       --checkmark-color: #{interaction-state.get-state-color('white')};
