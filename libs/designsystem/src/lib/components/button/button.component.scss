@@ -108,6 +108,7 @@ $button-width: (
   @include interaction-state.apply-active('s');
   @include interaction-state.extend-content {
     display: inherit;
+    width: inherit;
     flex-direction: inherit;
     align-items: inherit;
     justify-content: inherit;
