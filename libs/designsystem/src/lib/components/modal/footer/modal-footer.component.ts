@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  HostBinding,
+  Input,
+  OnDestroy,
+} from '@angular/core';
 
 @Component({
   selector: 'kirby-modal-footer',
@@ -6,7 +14,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular
   styleUrls: ['./modal-footer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ModalFooterComponent {
+export class ModalFooterComponent implements AfterViewInit, OnDestroy {
   @HostBinding('class.snap-to-keyboard')
   @Input()
   snapToKeyboard = false;
@@ -14,4 +22,18 @@ export class ModalFooterComponent {
   @HostBinding('class')
   @Input()
   type: 'inline' | 'fixed' = 'fixed';
+
+  constructor(private element: ElementRef<HTMLElement>) {}
+
+  ngAfterViewInit() {
+    const { nativeElement } = this.element;
+    const modalWrapper = nativeElement.closest('kirby-modal-wrapper');
+    if (modalWrapper) {
+      modalWrapper.appendChild(nativeElement);
+    }
+  }
+
+  ngOnDestroy() {
+    this.element.nativeElement.remove();
+  }
 }

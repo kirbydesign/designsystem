@@ -5,6 +5,7 @@ import {
   ElementRef,
   HostBinding,
   HostListener,
+  Injectable,
   Injector,
   Input,
   NgZone,
@@ -13,6 +14,7 @@ import {
   QueryList,
   Renderer2,
   RendererStyleFlags2,
+  Self,
   ViewChild,
   ViewChildren,
 } from '@angular/core';
@@ -439,7 +441,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   private readonly elementToParentMap: { [key: string]: () => HTMLElement[] } = {
-    'KIRBY-MODAL-FOOTER': () => [this.elementRef.nativeElement],
+    //'KIRBY-MODAL-FOOTER': () => [this.elementRef.nativeElement],
     'KIRBY-PAGE-TITLE': () =>
       [this.ionTitleElement.nativeElement, this.contentTitle?.nativeElement].filter(
         (element) => element !== undefined
@@ -491,7 +493,8 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
       // Append adds child as last element of parent; therefore retrieve with lastElementChild
       const childElement = newParent.lastElementChild;
 
-      if (childElement.tagName === 'KIRBY-MODAL-FOOTER') {
+      // TODO: Recreate this functionality in footer itself
+      /*if (childElement.tagName === 'KIRBY-MODAL-FOOTER') {
         this.resizeObserverService.observe(childElement, (entry) => {
           const [property, pixelValue] = [
             '--footer-height',
@@ -499,7 +502,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
           ];
           this.setCssVar(this.elementRef.nativeElement, property, pixelValue);
         });
-      }
+      }*/
     });
   }
 
