@@ -94,7 +94,7 @@ export class SegmentedControlComponent {
 
   private _disableChangeOnSwipe: boolean = false;
   get disableChangeOnSwipe(): boolean {
-    return this._disableChangeOnSwipe
+    return this._disableChangeOnSwipe;
   }
 
   @Input() set disableChangeOnSwipe(value: boolean) {
