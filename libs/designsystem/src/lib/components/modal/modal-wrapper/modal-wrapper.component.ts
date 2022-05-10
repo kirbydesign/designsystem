@@ -36,7 +36,7 @@ import { ModalConfig } from './config/modal-config';
 import { COMPONENT_PROPS } from './config/modal-config.helper';
 
 type ModalElementEntry = {
-  type: 'footer' | 'progress';
+  type: 'footer' | 'pageProgress';
   action: 'register' | 'deregister';
   elementRef: ElementRef<HTMLElement>;
 };
@@ -51,13 +51,16 @@ type ModalElementObservableSet = {
   removed$: ElementRefObservable;
 };
 
+// TODO: Naming ideas: ModalElementNotifier, ModalElementAdvertiser, ModalElementsAnnouncer
 export class ModalElementMover {
   private modalElementEntrySubject: Subject<ModalElementEntry> = new Subject<ModalElementEntry>();
 
   public footer: ModalElementObservableSet;
+  public pageProgress: ModalElementObservableSet;
 
   constructor() {
     this.footer = this.createModalElementObservableSet('footer');
+    this.pageProgress = this.createModalElementObservableSet('pageProgress');
   }
 
   private createModalElementObservableSet(
@@ -89,6 +92,22 @@ export class ModalElementMover {
       type: 'footer',
       action: 'deregister',
       elementRef: footer,
+    });
+  }
+
+  public registerPageProgress(pageProgress: ElementRef<HTMLElement>) {
+    this.modalElementEntrySubject.next({
+      type: 'pageProgress',
+      action: 'register',
+      elementRef: pageProgress,
+    });
+  }
+
+  public deregisterPageProgress(pageProgress: ElementRef<HTMLElement>) {
+    this.modalElementEntrySubject.next({
+      type: 'pageProgress',
+      action: 'register',
+      elementRef: pageProgress,
     });
   }
 }
@@ -192,8 +211,15 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
 
   ngOnInit(): void {
     console.log('modal ngOnInit');
+
     this.modalElementMover.footer.added$.subscribe((elementRef) => this.addFooter(elementRef));
     this.modalElementMover.footer.removed$.subscribe((elementRef) => this.removeFooter(elementRef));
+    this.modalElementMover.pageProgress.added$.subscribe((elementRef) =>
+      this.addPageProgress(elementRef)
+    );
+    this.modalElementMover.pageProgress.removed$.subscribe((elementRef) =>
+      this.removePageProgress(elementRef)
+    );
 
     this.ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
     this.initializeSizing();
@@ -210,7 +236,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   private currentFooter: HTMLElement;
 
   addFooter(elementRef: ElementRef<HTMLElement>) {
-    console.log('add footer');
     // Move the footer next to ion-content
     const footerElement = elementRef.nativeElement;
     const modalWrapperElement = this.elementRef.nativeElement;
@@ -228,13 +253,18 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     this.currentFooter = footerElement;
   }
 
-  removeFooter(elementRef: ElementRef<HTMLElement>) {
-    console.log('modal remove footer');
-    const footerElement = elementRef.nativeElement;
+  removeFooter(footerElementRef: ElementRef<HTMLElement>) {
     const modalWrapperElement = this.elementRef.nativeElement;
-    modalWrapperElement.removeChild(footerElement);
-
+    modalWrapperElement.removeChild(footerElementRef.nativeElement);
     this.currentFooter = null;
+  }
+
+  addPageProgress(pageProgressElementRef: ElementRef<HTMLElement>) {
+    this.ionToolbarElement.nativeElement.appendChild(pageProgressElementRef.nativeElement);
+  }
+
+  removePageProgress(pageProgressElementRef: ElementRef<HTMLElement>) {
+    this.ionToolbarElement.nativeElement.removeChild(pageProgressElementRef.nativeElement);
   }
 
   private initializeResizeModalToModalWrapper() {

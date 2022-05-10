@@ -32,7 +32,10 @@ import { filter, takeUntil } from 'rxjs/operators';
 import { KirbyAnimation } from '../../animation/kirby-animation';
 import { FitHeadingConfig } from '../../directives/fit-heading/fit-heading.directive';
 import { WindowRef } from '../../types/window-ref';
-import { ModalWrapperComponent } from '../modal/modal-wrapper/modal-wrapper.component';
+import {
+  ModalElementMover,
+  ModalWrapperComponent,
+} from '../modal/modal-wrapper/modal-wrapper.component';
 import { ModalNavigationService } from '../modal/services/modal-navigation.service';
 import { selectedTabClickEvent } from '../tabs/tab-button/tab-button.events';
 import { TabsComponent } from '../tabs/tabs.component';
@@ -102,16 +105,33 @@ export class PageContentDirective {
   template: ` <ng-content></ng-content> `,
   styles: [':host {display: flex}'],
 })
-export class PageProgressComponent implements OnInit {
+export class PageProgressComponent implements OnInit, AfterViewInit, OnDestroy {
   // TODO: Find alternative implementation, which aligns with future page configuration / consumption
   // This implementation was chosen over expanding `moveChild` method in component wrapper with yet another scenario
   @HostBinding('attr.slot') slot = 'start';
 
-  constructor(@Optional() @SkipSelf() private modalWrapper: ModalWrapperComponent) {}
+  constructor(
+    @Optional() @SkipSelf() private modalWrapper: ModalWrapperComponent,
+    @Optional() private modalElementMover: ModalElementMover,
+    private elementRef: ElementRef<HTMLElement>
+  ) {}
 
   ngOnInit(): void {
+    /* TODO: move this logic to the modalWrapper? */
     if (this.modalWrapper && this.modalWrapper.config.flavor === 'drawer') {
       this.slot = 'end';
+    }
+  }
+
+  ngAfterViewInit() {
+    if (this.modalElementMover !== undefined) {
+      this.modalElementMover.registerPageProgress(this.elementRef);
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.modalElementMover !== undefined) {
+      this.modalElementMover.deregisterPageProgress(this.elementRef);
     }
   }
 }
@@ -199,7 +219,7 @@ export class PageComponent
   hasActionsInPage: boolean;
   toolbarTitleVisible: boolean;
   toolbarFixedActionsVisible: boolean;
-  toolbarStickyActionsVisible: boolean;
+  /* TODO: move this logic to the modalWrapper? */ toolbarStickyActionsVisible: boolean;
 
   fitHeadingConfig: FitHeadingConfig;
 
