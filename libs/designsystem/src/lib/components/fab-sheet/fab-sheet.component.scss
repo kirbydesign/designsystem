@@ -1,5 +1,4 @@
 @use '~@kirbydesign/core/src/scss/interaction-state';
-@use '~@kirbydesign/core/src/scss/interaction-state/ionic';
 @use '~@kirbydesign/core/src/scss/utils';
 
 $fab-sheet-margin: utils.size('s');
@@ -11,7 +10,7 @@ $fab-sheet-margin: utils.size('s');
 // Ionic fab can be customized by using the css properties listed in the CSS Custom Properties section of the below docs page:
 // https://ionicframework.com/docs/api/fab-button
 ion-fab-button {
-  @include ionic.apply-hover;
+  @include interaction-state.apply-hover-ionic;
   @include ionic.apply-active;
 
   // NOTE: This is a custom implementation of the hover interaction state;
