@@ -322,7 +322,7 @@ $button-width: (
       --kirby-button-color: #{utils.get-color($color-name + '-contrast')};
 
       @include interaction-state.apply-hover;
-      @include interaction-state.apply-active;
+      @include interaction-state.apply-active('s');
     }
   }
 }
