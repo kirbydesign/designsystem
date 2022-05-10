@@ -36,49 +36,48 @@ import { ModalConfig } from './config/modal-config';
 import { COMPONENT_PROPS } from './config/modal-config.helper';
 
 type ModalElementEntry = {
-  type: 'footer';
+  type: 'footer' | 'progress';
   action: 'register' | 'deregister';
   elementRef: ElementRef<HTMLElement>;
+};
+
+type ElementRefObservable = Observable<ElementRef<HTMLElement>>;
+type ModalElementObservableSet = {
+  anyAction$: Observable<{
+    action: ModalElementEntry['action'];
+    elementRef: ElementRef<HTMLElement>;
+  }>;
+  added$: ElementRefObservable;
+  removed$: ElementRefObservable;
 };
 
 export class ModalElementMover {
   private modalElementEntrySubject: Subject<ModalElementEntry> = new Subject<ModalElementEntry>();
 
-  public modalFooter$: Observable<{
-    action: ModalElementEntry['action'];
-    elementRef: ElementRef<HTMLElement>;
-  }>;
-  public modalFooterAdded$: Observable<ElementRef<HTMLElement>>;
-  public modalFooterRemoved$: Observable<ElementRef<HTMLElement>>;
+  public footer: ModalElementObservableSet;
 
   constructor() {
-    const [modalFooter$, modalFooterAdded$, modalFooterRemoved$] =
-      this.setupObservablePairs('footer');
-    this.modalFooter$ = modalFooter$;
-    this.modalFooterAdded$ = modalFooterAdded$;
-    this.modalFooterRemoved$ = modalFooterRemoved$;
+    this.footer = this.createModalElementObservableSet('footer');
   }
 
-  private setupObservablePairs(argType: ModalElementEntry['type']) {
+  private createModalElementObservableSet(
+    argType: ModalElementEntry['type']
+  ): ModalElementObservableSet {
     // Setup observable that is activated on type
-    const typeObservable = this.modalElementEntrySubject.pipe(
+    const anyAction$ = this.modalElementEntrySubject.pipe(
       filter(({ type }) => argType === type),
       map(({ action, elementRef }) => ({ action, elementRef }))
     );
 
-    // Setup observables for each action type
     const actions: ModalElementEntry['action'][] = ['register', 'deregister'];
-    const [addObservable, removeObservable] = actions.map((action) =>
-      typeObservable.pipe(
+    const [added$, removed$] = actions.map((action) =>
+      anyAction$.pipe(
         filter((modalElementEntry) => action === modalElementEntry.action),
         map(({ elementRef }) => elementRef)
       )
     );
 
-    /* TODO: 
-       Why does type inference break down without any? 
-    It is inferred correctly unti it is read again in the constructor... */
-    return [typeObservable, addObservable, removeObservable] as any[];
+    return { added$, removed$, anyAction$ };
   }
 
   public registerFooter(footer: ElementRef<HTMLElement>) {
@@ -193,10 +192,8 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
 
   ngOnInit(): void {
     console.log('modal ngOnInit');
-    this.modalElementMover.modalFooterAdded$.subscribe((elementRef) => this.addFooter(elementRef));
-    this.modalElementMover.modalFooterRemoved$.subscribe((elementRef) =>
-      this.removeFooter(elementRef)
-    );
+    this.modalElementMover.footer.added$.subscribe((elementRef) => this.addFooter(elementRef));
+    this.modalElementMover.footer.removed$.subscribe((elementRef) => this.removeFooter(elementRef));
 
     this.ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
     this.initializeSizing();
@@ -547,7 +544,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
       [this.ionTitleElement.nativeElement, this.contentTitle?.nativeElement].filter(
         (element) => element !== undefined
       ),
-    'KIRBY-PAGE-PROGRESS': () => [this.ionToolbarElement.nativeElement],
+    //'KIRBY-PAGE-PROGRESS': () => [this.ionToolbarElement.nativeElement],
   };
 
   private clearEmbeddedElements() {
