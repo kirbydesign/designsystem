@@ -53,8 +53,8 @@ $button-width: (
   --kirby-button-color: #{utils.get-color('black')};
   --kirby-button-border-color: transparent;
 
-  @include interaction-state.apply-hover('xxxs');
-  @include interaction-state.apply-active('xxs');
+  @include interaction-state.apply-hover;
+  @include interaction-state.apply-active('s');
 
   &.destructive {
     --kirby-button-color: #{utils.get-color('danger')};

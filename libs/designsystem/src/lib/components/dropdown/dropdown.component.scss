@@ -129,6 +129,9 @@ kirby-card {
 
 :host-context(kirby-calendar) {
   > button {
+    @include interaction-state.apply-hover;
+    @include interaction-state.apply-active('s');
+
     border-color: transparent;
     font-weight: utils.font-weight('bold');
     font-size: initial;
