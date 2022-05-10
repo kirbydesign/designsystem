@@ -32,10 +32,8 @@ import { filter, takeUntil } from 'rxjs/operators';
 import { KirbyAnimation } from '../../animation/kirby-animation';
 import { FitHeadingConfig } from '../../directives/fit-heading/fit-heading.directive';
 import { WindowRef } from '../../types/window-ref';
-import {
-  ModalElementMover,
-  ModalWrapperComponent,
-} from '../modal/modal-wrapper/modal-wrapper.component';
+import { ModalElementsAdvertiser } from '../modal/modal-wrapper/modal-elements-advertiser.service';
+import { ModalWrapperComponent } from '../modal/modal-wrapper/modal-wrapper.component';
 import { ModalNavigationService } from '../modal/services/modal-navigation.service';
 import { selectedTabClickEvent } from '../tabs/tab-button/tab-button.events';
 import { TabsComponent } from '../tabs/tabs.component';
@@ -112,7 +110,7 @@ export class PageProgressComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     @Optional() @SkipSelf() private modalWrapper: ModalWrapperComponent,
-    @Optional() private modalElementMover: ModalElementMover,
+    @Optional() private modalElementsAdvertiser: ModalElementsAdvertiser,
     private elementRef: ElementRef<HTMLElement>
   ) {}
 
@@ -124,14 +122,14 @@ export class PageProgressComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    if (this.modalElementMover !== undefined) {
-      this.modalElementMover.registerPageProgress(this.elementRef);
+    if (this.modalElementsAdvertiser !== undefined) {
+      this.modalElementsAdvertiser.registerElement('pageProgress', this.elementRef);
     }
   }
 
   ngOnDestroy() {
-    if (this.modalElementMover !== undefined) {
-      this.modalElementMover.deregisterPageProgress(this.elementRef);
+    if (this.modalElementsAdvertiser !== undefined) {
+      this.modalElementsAdvertiser.deregisterElement('pageProgress', this.elementRef);
     }
   }
 }
@@ -143,18 +141,18 @@ export class PageProgressComponent implements OnInit, AfterViewInit, OnDestroy {
 export class PageTitleComponent implements AfterViewInit, OnDestroy {
   constructor(
     private elementRef: ElementRef<HTMLElement>,
-    @Optional() private modalElementMover: ModalElementMover
+    @Optional() private modalElementsAdvertiser: ModalElementsAdvertiser
   ) {}
 
   ngAfterViewInit() {
-    if (this.modalElementMover) {
-      this.modalElementMover.registerTitle(this.elementRef);
+    if (this.modalElementsAdvertiser) {
+      this.modalElementsAdvertiser.registerElement('title', this.elementRef);
     }
   }
 
   ngOnDestroy() {
-    if (this.modalElementMover) {
-      this.modalElementMover.deregisterTitle(this.elementRef);
+    if (this.modalElementsAdvertiser) {
+      this.modalElementsAdvertiser.deregisterElement('title', this.elementRef);
     }
   }
 }

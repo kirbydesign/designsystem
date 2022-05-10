@@ -20,7 +20,7 @@ import {
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular';
 import { merge, Observable, Subject } from 'rxjs';
-import { debounceTime, filter, first, map, take, takeUntil } from 'rxjs/operators';
+import { debounceTime, first, takeUntil } from 'rxjs/operators';
 
 import { DesignTokenHelper } from '@kirbydesign/core';
 
@@ -34,101 +34,7 @@ import { Modal } from '../services/modal.interfaces';
 
 import { ModalConfig } from './config/modal-config';
 import { COMPONENT_PROPS } from './config/modal-config.helper';
-
-type ModalElementEntry = {
-  type: 'footer' | 'pageProgress' | 'title';
-  action: 'register' | 'deregister';
-  elementRef: ElementRef<HTMLElement>;
-};
-
-type ElementRefObservable = Observable<ElementRef<HTMLElement>>;
-type ModalElementObservableSet = {
-  anyAction$: Observable<{
-    action: ModalElementEntry['action'];
-    elementRef: ElementRef<HTMLElement>;
-  }>;
-  added$: ElementRefObservable;
-  removed$: ElementRefObservable;
-};
-
-// TODO: Naming ideas: ModalElementNotifier, ModalElementAdvertiser, ModalElementsAnnouncer
-export class ModalElementMover {
-  private modalElementEntrySubject: Subject<ModalElementEntry> = new Subject<ModalElementEntry>();
-
-  public footer: ModalElementObservableSet;
-  public pageProgress: ModalElementObservableSet;
-  public title: ModalElementObservableSet;
-
-  constructor() {
-    this.footer = this.createModalElementObservableSet('footer');
-    this.pageProgress = this.createModalElementObservableSet('pageProgress');
-    this.title = this.createModalElementObservableSet('title');
-  }
-
-  private createModalElementObservableSet(
-    argType: ModalElementEntry['type']
-  ): ModalElementObservableSet {
-    // Setup observable that is activated on type
-    const anyAction$ = this.modalElementEntrySubject.pipe(
-      filter(({ type }) => argType === type),
-      map(({ action, elementRef }) => ({ action, elementRef }))
-    );
-
-    const actions: ModalElementEntry['action'][] = ['register', 'deregister'];
-    const [added$, removed$] = actions.map((action) =>
-      anyAction$.pipe(
-        filter((modalElementEntry) => action === modalElementEntry.action),
-        map(({ elementRef }) => elementRef)
-      )
-    );
-
-    return { added$, removed$, anyAction$ };
-  }
-
-  public registerFooter(footer: ElementRef<HTMLElement>) {
-    this.modalElementEntrySubject.next({ type: 'footer', action: 'register', elementRef: footer });
-  }
-
-  public deregisterFooter(footer: ElementRef<HTMLElement>) {
-    this.modalElementEntrySubject.next({
-      type: 'footer',
-      action: 'deregister',
-      elementRef: footer,
-    });
-  }
-
-  public registerPageProgress(pageProgress: ElementRef<HTMLElement>) {
-    this.modalElementEntrySubject.next({
-      type: 'pageProgress',
-      action: 'register',
-      elementRef: pageProgress,
-    });
-  }
-
-  public deregisterPageProgress(pageProgress: ElementRef<HTMLElement>) {
-    this.modalElementEntrySubject.next({
-      type: 'pageProgress',
-      action: 'register',
-      elementRef: pageProgress,
-    });
-  }
-
-  public registerTitle(title: ElementRef<HTMLElement>) {
-    this.modalElementEntrySubject.next({
-      type: 'title',
-      action: 'register',
-      elementRef: title,
-    });
-  }
-
-  public deregisterTitle(title: ElementRef<HTMLElement>) {
-    this.modalElementEntrySubject.next({
-      type: 'title',
-      action: 'deregister',
-      elementRef: title,
-    });
-  }
-}
+import { ModalElementsAdvertiser } from './modal-elements-advertiser.service';
 
 @Component({
   selector: 'kirby-modal-wrapper',
@@ -136,7 +42,7 @@ export class ModalElementMover {
   styleUrls: ['./modal-wrapper.component.scss'],
   providers: [
     { provide: Modal, useExisting: ModalWrapperComponent },
-    { provide: ModalElementMover },
+    { provide: ModalElementsAdvertiser },
   ],
 })
 export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDestroy {
@@ -215,15 +121,14 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     private componentFactoryResolver: ComponentFactoryResolver,
     private windowRef: WindowRef,
     private platform: PlatformService,
-    @Self() private modalElementMover: ModalElementMover
+    @Self() private modalElementsAdvertiser: ModalElementsAdvertiser
   ) {
     this.setViewportHeight();
     this.observeViewportResize();
   }
 
   ngOnInit(): void {
-    console.log('modal ngOnInit');
-    this.setupModalElementMoverSubscriptions();
+    this.setupModalElementsAdvertiserSubscriptions();
 
     this.ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
     this.initializeSizing();
@@ -238,26 +143,24 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   /* TODO: Introduce a better name... */
-  private setupModalElementMoverSubscriptions() {
+  private setupModalElementsAdvertiserSubscriptions() {
     /* 
        Some elements embedded in the component provided by the consumer should be moved elsewhere. 
-       Each element advertises their creation and destruction through the ModalElementMover - we 
-       setup subscriptions to each event to be able to react accordingly. 
+       Each element advertises their creation and destruction through the ModalElementsAdvertiser 
+       - we setup subscriptions to each event to be able to react accordingly. 
 
        This is a bit cumbersome; a consequence of the modal not being declaratively built. 
     */
-    this.modalElementMover.footer.added$.subscribe((elementRef) => this.addFooter(elementRef));
-    this.modalElementMover.footer.removed$.subscribe((elementRef) => this.removeFooter(elementRef));
+    const { footer, pageProgress, title } = this.modalElementsAdvertiser;
 
-    this.modalElementMover.pageProgress.added$.subscribe((elementRef) =>
-      this.addPageProgress(elementRef)
-    );
-    this.modalElementMover.pageProgress.removed$.subscribe((elementRef) =>
-      this.removePageProgress(elementRef)
-    );
+    footer.added$.subscribe((elementRef) => this.addFooter(elementRef));
+    footer.removed$.subscribe((elementRef) => this.removeFooter(elementRef));
 
-    this.modalElementMover.title.added$.subscribe((elementRef) => this.addTitle(elementRef));
-    this.modalElementMover.title.removed$.subscribe((elementRef) => this.removeTitle(elementRef));
+    pageProgress.added$.subscribe((elementRef) => this.addPageProgress(elementRef));
+    pageProgress.removed$.subscribe((elementRef) => this.removePageProgress(elementRef));
+
+    title.added$.subscribe((elementRef) => this.addTitle(elementRef));
+    title.removed$.subscribe((elementRef) => this.removeTitle(elementRef));
   }
 
   private currentFooter: HTMLElement;
@@ -397,7 +300,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   ngBeforeViewInit(): void {}
 
   ngAfterViewInit(): void {
-    console.log('modal afterViewInit');
     if (this.toolbarButtonsQuery) {
       this.toolbarButtons = this.toolbarButtonsQuery.map((buttonRef) => buttonRef.nativeElement);
     }

@@ -9,7 +9,7 @@ import {
   Optional,
 } from '@angular/core';
 
-import { ModalElementMover } from '../modal-wrapper/modal-wrapper.component';
+import { ModalElementsAdvertiser } from '../modal-wrapper/modal-elements-advertiser.service';
 
 @Component({
   selector: 'kirby-modal-footer',
@@ -28,20 +28,18 @@ export class ModalFooterComponent implements AfterViewInit, OnDestroy {
 
   constructor(
     private elementRef: ElementRef<HTMLElement>,
-    @Optional() private modalElementMover: ModalElementMover
+    @Optional() private modalElementsAdvertiser: ModalElementsAdvertiser
   ) {}
 
   ngAfterViewInit() {
-    console.log('footer afterViewInit');
-    if (this.modalElementMover !== undefined) {
-      this.modalElementMover.registerFooter(this.elementRef);
+    if (this.modalElementsAdvertiser !== undefined) {
+      this.modalElementsAdvertiser.registerElement('footer', this.elementRef);
     }
   }
 
   ngOnDestroy() {
-    console.log('footer onDestroy');
-    if (this.modalElementMover !== undefined) {
-      this.modalElementMover.deregisterFooter(this.elementRef);
+    if (this.modalElementsAdvertiser !== undefined) {
+      this.modalElementsAdvertiser.deregisterElement('footer', this.elementRef);
     }
   }
 }
