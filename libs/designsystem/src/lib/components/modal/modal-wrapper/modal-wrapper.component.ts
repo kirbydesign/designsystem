@@ -36,7 +36,7 @@ import { ModalConfig } from './config/modal-config';
 import { COMPONENT_PROPS } from './config/modal-config.helper';
 
 type ModalElementEntry = {
-  type: 'footer' | 'pageProgress';
+  type: 'footer' | 'pageProgress' | 'title';
   action: 'register' | 'deregister';
   elementRef: ElementRef<HTMLElement>;
 };
@@ -57,10 +57,12 @@ export class ModalElementMover {
 
   public footer: ModalElementObservableSet;
   public pageProgress: ModalElementObservableSet;
+  public title: ModalElementObservableSet;
 
   constructor() {
     this.footer = this.createModalElementObservableSet('footer');
     this.pageProgress = this.createModalElementObservableSet('pageProgress');
+    this.title = this.createModalElementObservableSet('title');
   }
 
   private createModalElementObservableSet(
@@ -108,6 +110,22 @@ export class ModalElementMover {
       type: 'pageProgress',
       action: 'register',
       elementRef: pageProgress,
+    });
+  }
+
+  public registerTitle(title: ElementRef<HTMLElement>) {
+    this.modalElementEntrySubject.next({
+      type: 'title',
+      action: 'register',
+      elementRef: title,
+    });
+  }
+
+  public deregisterTitle(title: ElementRef<HTMLElement>) {
+    this.modalElementEntrySubject.next({
+      type: 'title',
+      action: 'deregister',
+      elementRef: title,
     });
   }
 }
@@ -211,15 +229,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
 
   ngOnInit(): void {
     console.log('modal ngOnInit');
-
-    this.modalElementMover.footer.added$.subscribe((elementRef) => this.addFooter(elementRef));
-    this.modalElementMover.footer.removed$.subscribe((elementRef) => this.removeFooter(elementRef));
-    this.modalElementMover.pageProgress.added$.subscribe((elementRef) =>
-      this.addPageProgress(elementRef)
-    );
-    this.modalElementMover.pageProgress.removed$.subscribe((elementRef) =>
-      this.removePageProgress(elementRef)
-    );
+    this.setupModalElementMoverSubscriptions();
 
     this.ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
     this.initializeSizing();
@@ -231,6 +241,29 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
       providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
       parent: this.injector,
     });
+  }
+
+  /* TODO: Introduce a better name... */
+  private setupModalElementMoverSubscriptions() {
+    /* 
+       Some elements embedded in the component provided by the consumer should be moved elsewhere. 
+       Each element advertises their creation and destruction through the ModalElementMover - we 
+       setup subscriptions to each event to be able to react accordingly. 
+
+       This is a bit cumbersome; a consequence of the modal not being declaratively built. 
+    */
+    this.modalElementMover.footer.added$.subscribe((elementRef) => this.addFooter(elementRef));
+    this.modalElementMover.footer.removed$.subscribe((elementRef) => this.removeFooter(elementRef));
+
+    this.modalElementMover.pageProgress.added$.subscribe((elementRef) =>
+      this.addPageProgress(elementRef)
+    );
+    this.modalElementMover.pageProgress.removed$.subscribe((elementRef) =>
+      this.removePageProgress(elementRef)
+    );
+
+    this.modalElementMover.title.added$.subscribe((elementRef) => this.addTitle(elementRef));
+    this.modalElementMover.title.removed$.subscribe((elementRef) => this.removeTitle(elementRef));
   }
 
   private currentFooter: HTMLElement;
@@ -265,6 +298,38 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
 
   removePageProgress(pageProgressElementRef: ElementRef<HTMLElement>) {
     this.ionToolbarElement.nativeElement.removeChild(pageProgressElementRef.nativeElement);
+  }
+
+  addTitle(titleElementRef: ElementRef<HTMLElement>) {
+    const titleElement = titleElementRef.nativeElement;
+    const newParents: HTMLElement[] = [this.ionTitleElement.nativeElement];
+
+    /* 
+       If title is collapsible append it to content area as well.
+       This is required for the collapsible title functionality 
+       to work, as provided by ionic. 
+     */
+    if (this._hasCollapsibleTitle) {
+      /* TODO: Figure out why contentTitle is not working */
+
+      newParents.push(this.contentTitle.nativeElement);
+    }
+
+    this.moveChild(titleElement, newParents);
+  }
+
+  removeTitle(titleElementRef: ElementRef<HTMLElement>) {
+    const titleElement = titleElementRef.nativeElement;
+    this.ionTitleElement.nativeElement.removeChild(titleElement);
+
+    /* 
+       If title is collapsible append it to content area as well.
+       This is required for the collapsible title functionality 
+       to work, as provided by ionic. 
+     */
+    if (this._hasCollapsibleTitle) {
+      this.contentTitle.nativeElement.removeChild(titleElement);
+    }
   }
 
   private initializeResizeModalToModalWrapper() {
@@ -570,10 +635,10 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
 
   private readonly elementToParentMap: { [key: string]: () => HTMLElement[] } = {
     //'KIRBY-MODAL-FOOTER': () => [this.elementRef.nativeElement],
-    'KIRBY-PAGE-TITLE': () =>
+    /*'KIRBY-PAGE-TITLE': () =>
       [this.ionTitleElement.nativeElement, this.contentTitle?.nativeElement].filter(
         (element) => element !== undefined
-      ),
+      ),*/
     //'KIRBY-PAGE-PROGRESS': () => [this.ionToolbarElement.nativeElement],
   };
 

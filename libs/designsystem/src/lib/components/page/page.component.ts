@@ -140,7 +140,24 @@ export class PageProgressComponent implements OnInit, AfterViewInit, OnDestroy {
   selector: 'kirby-page-title',
   template: ` <ng-content></ng-content> `,
 })
-export class PageTitleComponent {}
+export class PageTitleComponent implements AfterViewInit, OnDestroy {
+  constructor(
+    private elementRef: ElementRef<HTMLElement>,
+    @Optional() private modalElementMover: ModalElementMover
+  ) {}
+
+  ngAfterViewInit() {
+    if (this.modalElementMover) {
+      this.modalElementMover.registerTitle(this.elementRef);
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.modalElementMover) {
+      this.modalElementMover.deregisterTitle(this.elementRef);
+    }
+  }
+}
 
 @Component({
   selector: 'kirby-page-content',
