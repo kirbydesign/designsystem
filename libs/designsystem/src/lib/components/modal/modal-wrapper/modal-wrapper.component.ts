@@ -190,12 +190,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     .asObservable()
     .pipe(debounceTime(this.VIEWPORT_RESIZE_DEBOUNCE_TIME));
   private _mutationObserver: MutationObserver;
-  private get mutationObserver(): MutationObserver {
-    if (!this._mutationObserver) {
-      this._mutationObserver = this.createEmbeddedElementsMutationObserver();
-    }
-    return this._mutationObserver;
-  }
   private _intersectionObserver: IntersectionObserver;
   private get intersectionObserver(): IntersectionObserver {
     if (!this._intersectionObserver) {
@@ -369,12 +363,9 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     if (!siblingModalRouteActivated$) return;
     siblingModalRouteActivated$.pipe(takeUntil(this.willClose$)).subscribe((route) => {
       if (this.routerOutlet.isActivated) {
-        this.mutationObserver.disconnect();
         this.routerOutlet.deactivate();
-        this.clearEmbeddedElements();
       }
       this.routerOutlet.activateWith(route, this.componentFactoryResolver);
-      this.checkForEmbeddedElements();
     });
   }
 
@@ -410,12 +401,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     if (this.toolbarButtonsQuery) {
       this.toolbarButtons = this.toolbarButtonsQuery.map((buttonRef) => buttonRef.nativeElement);
     }
-    this.checkForEmbeddedElements();
-  }
-
-  private checkForEmbeddedElements() {
-    this.moveEmbeddedElements();
-    this.observeEmbeddedElements();
   }
 
   private observeHeaderResize() {
@@ -423,18 +408,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
       const [property, pixelValue] = ['--header-height', `${entry.contentRect.height}px`];
       this.setCssVar(this.elementRef.nativeElement, property, pixelValue);
     });
-  }
-
-  private moveEmbeddedElements() {
-    const parentElement = this.getEmbeddedComponentElement();
-    if (parentElement) {
-      Object.entries(this.elementToParentMap).forEach(([tagName, getNewParent]) => {
-        const embeddedElement = parentElement.querySelector<HTMLElement>(tagName);
-        if (embeddedElement) {
-          this.moveChild(embeddedElement, getNewParent());
-        }
-      });
-    }
   }
 
   private listenForIonModalDidPresent() {
@@ -633,25 +606,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     }
   }
 
-  private readonly elementToParentMap: { [key: string]: () => HTMLElement[] } = {
-    //'KIRBY-MODAL-FOOTER': () => [this.elementRef.nativeElement],
-    /*'KIRBY-PAGE-TITLE': () =>
-      [this.ionTitleElement.nativeElement, this.contentTitle?.nativeElement].filter(
-        (element) => element !== undefined
-      ),*/
-    //'KIRBY-PAGE-PROGRESS': () => [this.ionToolbarElement.nativeElement],
-  };
-
-  private clearEmbeddedElements() {
-    Object.entries(this.elementToParentMap).forEach(([tagName, getParents]) => {
-      const newParents = getParents();
-      newParents.forEach((newParent) => {
-        const embeddedElement = newParent.querySelector<HTMLElement>(`:scope > ${tagName}`);
-        this.removeChild(embeddedElement);
-      });
-    });
-  }
-
   /* TODO: Rewrite to make this function independent of element order. 
      See: https://github.com/kirbydesign/designsystem/issues/2096
   */
@@ -693,40 +647,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     }
   }
 
-  private observeEmbeddedElements() {
-    const parentElement = this.getEmbeddedComponentElement();
-    if (parentElement === null) return; // Mute observe warning when parentElement is null
-
-    this.mutationObserver.observe(parentElement, {
-      childList: true, // Listen for addition or removal of child nodes
-    });
-  }
-
-  private createEmbeddedElementsMutationObserver(): MutationObserver {
-    const observedElements = Object.keys(this.elementToParentMap);
-    const callback = (mutations: MutationRecord[]) => {
-      const addedNodes = mutations
-        .filter((mutation) => mutation.type === 'childList') // Filter for mutation to the tree of nodes
-        .map((mutation) => {
-          // Only check for addedNodes as removal is handled by the Angular renderer:
-          return Array.from(mutation.addedNodes).filter((node) =>
-            observedElements.includes(node.nodeName)
-          );
-        });
-
-      const addedElements = Array.prototype
-        .concat(...addedNodes)
-        .filter((node): node is HTMLElement => node instanceof HTMLElement);
-
-      addedElements.forEach((addedElement) => {
-        const newParentElement = this.elementToParentMap[addedElement.nodeName]();
-        // Move embedded element out of content and append to new parent:
-        this.moveChild(addedElement, newParentElement);
-      });
-    };
-    return new MutationObserver(callback);
-  }
-
   private createModalWrapperIntersectionObserver(): IntersectionObserver {
     const callback: IntersectionObserverCallback = (entries) => {
       const entry = entries[0];
@@ -756,7 +676,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
       this.routerOutlet.deactivate();
     }
     //clean up the observer
-    this.mutationObserver.disconnect();
     delete this._mutationObserver;
     this.intersectionObserver.disconnect();
     delete this._intersectionObserver;
