@@ -2,11 +2,11 @@
 @use 'sass:list';
 @use '../utils';
 
-$default-loudness: 'xxs';
+$default-loudness-hover: 'xxs';
 $default-loudness-active: 'xs';
 $default-transition-duration: utils.get-transition-duration('quick');
 
-@function get-state-color($variant, $loudness: $default-loudness, $make-lighter: false) {
+@function get-state-color($variant, $loudness: $default-loudness-hover, $make-lighter: false) {
   $_background: utils.get-color($variant, $getValueOnly: true);
   $_lightness: 0% !default;
 
@@ -17,9 +17,9 @@ $default-transition-duration: utils.get-transition-duration('quick');
     $_lightness: -1 * utils.get-loudness($loudness);
   }
 
-  $hover-color: #{color.scale($_background, $lightness: $_lightness)};
+  $state-color: #{color.scale($_background, $lightness: $_lightness)};
 
-  @return $hover-color;
+  @return $state-color;
 }
 
 /// Apply streamlined transition to interaction state changes

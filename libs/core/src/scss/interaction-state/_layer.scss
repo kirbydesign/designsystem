@@ -52,7 +52,7 @@ $_light: utils.get-color('black-contrast');
   }
 }
 
-@mixin apply-state($loudness: interaction-state.$default-loudness, $make-lighter: false) {
+@mixin apply-state($loudness: interaction-state.$default-loudness-hover, $make-lighter: false) {
   $loudness-percent: utils.get-loudness($loudness);
 
   @if not(meta.type-of($loudness-percent) == number and math.unit($loudness-percent) == '%') {
