@@ -13,13 +13,14 @@ import {
   QueryList,
   Renderer2,
   RendererStyleFlags2,
+  Self,
   ViewChild,
   ViewChildren,
 } from '@angular/core';
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular';
 import { merge, Observable, Subject } from 'rxjs';
-import { debounceTime, first, takeUntil } from 'rxjs/operators';
+import { debounceTime, filter, first, map, take, takeUntil } from 'rxjs/operators';
 
 import { DesignTokenHelper } from '@kirbydesign/core';
 
@@ -34,11 +35,73 @@ import { Modal } from '../services/modal.interfaces';
 import { ModalConfig } from './config/modal-config';
 import { COMPONENT_PROPS } from './config/modal-config.helper';
 
+type ModalElementEntry = {
+  type: 'footer';
+  action: 'register' | 'deregister';
+  elementRef: ElementRef<HTMLElement>;
+};
+
+export class ModalElementMover {
+  private modalElementEntrySubject: Subject<ModalElementEntry> = new Subject<ModalElementEntry>();
+
+  public modalFooter$: Observable<{
+    action: ModalElementEntry['action'];
+    elementRef: ElementRef<HTMLElement>;
+  }>;
+  public modalFooterAdded$: Observable<ElementRef<HTMLElement>>;
+  public modalFooterRemoved$: Observable<ElementRef<HTMLElement>>;
+
+  constructor() {
+    const [modalFooter$, modalFooterAdded$, modalFooterRemoved$] =
+      this.setupObservablePairs('footer');
+    this.modalFooter$ = modalFooter$;
+    this.modalFooterAdded$ = modalFooterAdded$;
+    this.modalFooterRemoved$ = modalFooterRemoved$;
+  }
+
+  private setupObservablePairs(argType: ModalElementEntry['type']) {
+    // Setup observable that is activated on type
+    const typeObservable = this.modalElementEntrySubject.pipe(
+      filter(({ type }) => argType === type),
+      map(({ action, elementRef }) => ({ action, elementRef }))
+    );
+
+    // Setup observables for each action type
+    const actions: ModalElementEntry['action'][] = ['register', 'deregister'];
+    const [addObservable, removeObservable] = actions.map((action) =>
+      typeObservable.pipe(
+        filter((modalElementEntry) => action === modalElementEntry.action),
+        map(({ elementRef }) => elementRef)
+      )
+    );
+
+    /* TODO: 
+       Why does type inference break down without any? 
+    It is inferred correctly unti it is read again in the constructor... */
+    return [typeObservable, addObservable, removeObservable] as any[];
+  }
+
+  public registerFooter(footer: ElementRef<HTMLElement>) {
+    this.modalElementEntrySubject.next({ type: 'footer', action: 'register', elementRef: footer });
+  }
+
+  public deregisterFooter(footer: ElementRef<HTMLElement>) {
+    this.modalElementEntrySubject.next({
+      type: 'footer',
+      action: 'deregister',
+      elementRef: footer,
+    });
+  }
+}
+
 @Component({
   selector: 'kirby-modal-wrapper',
   templateUrl: './modal-wrapper.component.html',
   styleUrls: ['./modal-wrapper.component.scss'],
-  providers: [{ provide: Modal, useExisting: ModalWrapperComponent }],
+  providers: [
+    { provide: Modal, useExisting: ModalWrapperComponent },
+    { provide: ModalElementMover },
+  ],
 })
 export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDestroy {
   @HostBinding('class.collapsible-title')
@@ -121,13 +184,20 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     private resizeObserverService: ResizeObserverService,
     private componentFactoryResolver: ComponentFactoryResolver,
     private windowRef: WindowRef,
-    private platform: PlatformService
+    private platform: PlatformService,
+    @Self() private modalElementMover: ModalElementMover
   ) {
     this.setViewportHeight();
     this.observeViewportResize();
   }
 
   ngOnInit(): void {
+    console.log('modal ngOnInit');
+    this.modalElementMover.modalFooterAdded$.subscribe((elementRef) => this.addFooter(elementRef));
+    this.modalElementMover.modalFooterRemoved$.subscribe((elementRef) =>
+      this.removeFooter(elementRef)
+    );
+
     this.ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
     this.initializeSizing();
     this.initializeModalRoute();
@@ -138,6 +208,36 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
       providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
       parent: this.injector,
     });
+  }
+
+  private currentFooter: HTMLElement;
+
+  addFooter(elementRef: ElementRef<HTMLElement>) {
+    console.log('add footer');
+    // Move the footer next to ion-content
+    const footerElement = elementRef.nativeElement;
+    const modalWrapperElement = this.elementRef.nativeElement;
+    modalWrapperElement.appendChild(footerElement);
+
+    /* TODO: Is it possible to handle this another way? */
+    this.resizeObserverService.observe(footerElement, (entry) => {
+      const [property, pixelValue] = [
+        '--footer-height',
+        `${Math.floor(entry.contentRect.height)}px`,
+      ];
+      this.setCssVar(this.elementRef.nativeElement, property, pixelValue);
+    });
+
+    this.currentFooter = footerElement;
+  }
+
+  removeFooter(elementRef: ElementRef<HTMLElement>) {
+    console.log('modal remove footer');
+    const footerElement = elementRef.nativeElement;
+    const modalWrapperElement = this.elementRef.nativeElement;
+    modalWrapperElement.removeChild(footerElement);
+
+    this.currentFooter = null;
   }
 
   private initializeResizeModalToModalWrapper() {
@@ -211,7 +311,10 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     });
   }
 
+  ngBeforeViewInit(): void {}
+
   ngAfterViewInit(): void {
+    console.log('modal afterViewInit');
     if (this.toolbarButtonsQuery) {
       this.toolbarButtons = this.toolbarButtonsQuery.map((buttonRef) => buttonRef.nativeElement);
     }
@@ -439,7 +542,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   private readonly elementToParentMap: { [key: string]: () => HTMLElement[] } = {
-    'KIRBY-MODAL-FOOTER': () => [this.elementRef.nativeElement],
+    //'KIRBY-MODAL-FOOTER': () => [this.elementRef.nativeElement],
     'KIRBY-PAGE-TITLE': () =>
       [this.ionTitleElement.nativeElement, this.contentTitle?.nativeElement].filter(
         (element) => element !== undefined
@@ -478,8 +581,9 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     return embeddedComponentElement;
   }
 
+  /* TODO: Hook this up to the observable instead */
   private getEmbeddedFooterElement() {
-    return this.elementRef.nativeElement.querySelector<HTMLElement>('kirby-modal-footer');
+    return this.currentFooter;
   }
 
   private moveChild(child: Element, newParents: Element[]) {
@@ -488,18 +592,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     newParents.forEach((newParent, index) => {
       const childToAppend = index > 0 ? child.cloneNode(true) : child;
       this.renderer.appendChild(newParent, childToAppend);
-      // Append adds child as last element of parent; therefore retrieve with lastElementChild
-      const childElement = newParent.lastElementChild;
-
-      if (childElement.tagName === 'KIRBY-MODAL-FOOTER') {
-        this.resizeObserverService.observe(childElement, (entry) => {
-          const [property, pixelValue] = [
-            '--footer-height',
-            `${Math.floor(entry.contentRect.height)}px`,
-          ];
-          this.setCssVar(this.elementRef.nativeElement, property, pixelValue);
-        });
-      }
     });
   }
 
