@@ -163,16 +163,14 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     title.removed$.subscribe((elementRef) => this.removeTitle(elementRef));
   }
 
-  private currentFooter: HTMLElement;
+  private currentFooter: HTMLElement | null = null;
 
-  addFooter(elementRef: ElementRef<HTMLElement>) {
+  addFooter(footerElementRef: ElementRef<HTMLElement>) {
     // Move the footer next to ion-content
-    const footerElement = elementRef.nativeElement;
-    const modalWrapperElement = this.elementRef.nativeElement;
-    modalWrapperElement.appendChild(footerElement);
+    this.moveChild(footerElementRef, this.elementRef);
 
     /* TODO: Is it possible to handle this another way? */
-    this.resizeObserverService.observe(footerElement, (entry) => {
+    this.resizeObserverService.observe(footerElementRef.nativeElement, (entry) => {
       const [property, pixelValue] = [
         '--footer-height',
         `${Math.floor(entry.contentRect.height)}px`,
@@ -180,50 +178,40 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
       this.setCssVar(this.elementRef.nativeElement, property, pixelValue);
     });
 
-    this.currentFooter = footerElement;
+    this.currentFooter = footerElementRef.nativeElement;
   }
 
   removeFooter(footerElementRef: ElementRef<HTMLElement>) {
-    const modalWrapperElement = this.elementRef.nativeElement;
-    modalWrapperElement.removeChild(footerElementRef.nativeElement);
+    this.removeChild(footerElementRef);
     this.currentFooter = null;
   }
 
   addPageProgress(pageProgressElementRef: ElementRef<HTMLElement>) {
-    this.ionToolbarElement.nativeElement.appendChild(pageProgressElementRef.nativeElement);
+    this.moveChild(pageProgressElementRef, this.ionToolbarElement);
   }
 
   removePageProgress(pageProgressElementRef: ElementRef<HTMLElement>) {
-    this.ionToolbarElement.nativeElement.removeChild(pageProgressElementRef.nativeElement);
+    this.removeChild(pageProgressElementRef);
   }
 
   addTitle(titleElementRef: ElementRef<HTMLElement>) {
-    const titleElement = titleElementRef.nativeElement;
-    const newParents: HTMLElement[] = [this.ionTitleElement.nativeElement];
-
     /* 
        If title is collapsible append it to content area as well.
        This is required for the collapsible title functionality 
        to work, as provided by ionic. 
      */
+    const newParents: ElementRef<HTMLElement>[] = [this.ionTitleElement];
     if (this._hasCollapsibleTitle) {
       /* TODO: Figure out why contentTitle is not working */
-
-      newParents.push(this.contentTitle.nativeElement);
+      newParents.push(this.contentTitle);
     }
 
-    this.moveChild(titleElement, newParents);
+    this.moveChild(titleElementRef, newParents);
   }
 
   removeTitle(titleElementRef: ElementRef<HTMLElement>) {
     const titleElement = titleElementRef.nativeElement;
     this.ionTitleElement.nativeElement.removeChild(titleElement);
-
-    /* 
-       If title is collapsible append it to content area as well.
-       This is required for the collapsible title functionality 
-       to work, as provided by ionic. 
-     */
     if (this._hasCollapsibleTitle) {
       this.contentTitle.nativeElement.removeChild(titleElement);
     }
@@ -508,42 +496,30 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     }
   }
 
-  /* TODO: Rewrite to make this function independent of element order. 
-     See: https://github.com/kirbydesign/designsystem/issues/2096
-  */
-  private getEmbeddedComponentElement(): null | Element {
-    const contentElementChildren = Array.from(
-      this.ionContentElement.nativeElement.children
-    ).reverse(); // Reverse makes it easier to retrieve the last children in the list
-
-    const embeddedComponentElement = !!this.config.modalRoute
-      ? contentElementChildren[0]
-      : contentElementChildren[1];
-
-    /* 
-      As ModalConfig.component has type 'any' all values are valid for component; 
-      explicitly handle the case where no embedded component element is found due to 
-      this.
-    */
-    if (!embeddedComponentElement) return null;
-    return embeddedComponentElement;
-  }
-
-  /* TODO: Hook this up to the observable instead */
   private getEmbeddedFooterElement() {
     return this.currentFooter;
   }
 
-  private moveChild(child: Element, newParents: Element[]) {
+  private moveChild(
+    childElementRef: ElementRef<HTMLElement>,
+    newParentsElementRef: ElementRef<HTMLElement>[] | ElementRef<HTMLElement>
+  ) {
+    const child = childElementRef.nativeElement;
     this.renderer.removeChild(child.parentElement, child);
 
-    newParents.forEach((newParent, index) => {
+    if (!Array.isArray(newParentsElementRef)) {
+      newParentsElementRef = [newParentsElementRef];
+    }
+
+    newParentsElementRef.forEach((newParentElementRef, index) => {
+      const newParent = newParentElementRef.nativeElement;
       const childToAppend = index > 0 ? child.cloneNode(true) : child;
       this.renderer.appendChild(newParent, childToAppend);
     });
   }
 
-  private removeChild(child?: Element) {
+  private removeChild(childElementRef: ElementRef<HTMLElement>) {
+    const child = childElementRef.nativeElement;
     if (!!child) {
       this.renderer.removeChild(child.parentElement, child);
     }
