@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use '~@kirbydesign/core/src/scss/interaction-state';
 @use '~@kirbydesign/core/src/scss/utils';
 @use 'item.utils';
 
@@ -8,7 +9,7 @@
 
   ion-item {
     @include interaction-state.apply-hover-ionic('xxxs');
-    @include ionic.apply-active('xxs');
+    @include interaction-state.apply-active-ionic('xxs');
 
     --padding-top: var(--item-padding-top, 0px);
     --padding-bottom: var(--item-padding-bottom, 0px);

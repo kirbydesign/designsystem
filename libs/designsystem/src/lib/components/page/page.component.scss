@@ -68,7 +68,7 @@ ion-title {
 
 ion-back-button {
   @include interaction-state.apply-hover-ionic('xxxs');
-  @include ionic.apply-active('xxs');
+  @include interaction-state.apply-active-ionic('xxs');
 
   --color: #{utils.get-color('black')};
   --icon-font-size: 24px;
@@ -88,7 +88,7 @@ ion-back-button {
   }
 
   &::part(native)::after {
-    @include ionic.transition;
+    @include interaction-state.transition;
   }
 
   // end NOTE
