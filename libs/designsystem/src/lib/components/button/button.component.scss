@@ -20,8 +20,8 @@ $button-width: (
   min-width: button-width('sm');
 
   &:not(.icon-only) {
-    padding-left: utils.size('s');
-    padding-right: utils.size('s');
+    --kirby-button-padding-left: #{utils.size('s')};
+    --kirby-button-padding-right: #{utils.size('s')};
   }
 
   &.icon-only {
@@ -101,6 +101,9 @@ $button-width: (
 :host {
   $border-width: 1px;
 
+  --kirby-button-padding-left: #{utils.size('m')};
+  --kirby-button-padding-right: #{utils.size('m')};
+
   @include utils.accessible-target-size;
   @include interaction-state.apply-focus-visible;
   @include interaction-state.initialize-layer($border-width);
@@ -132,7 +135,7 @@ $button-width: (
   font-size: utils.font-size('s');
   height: utils.size('xl');
   min-width: button-width('md');
-  padding: 0 utils.size('m');
+  padding: 0;
   margin: utils.size('xxxs');
   line-height: utils.line-height('s');
 
