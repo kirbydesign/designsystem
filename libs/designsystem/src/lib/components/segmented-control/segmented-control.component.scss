@@ -1,5 +1,4 @@
 @use '~@kirbydesign/core/src/scss/interaction-state';
-@use '~@kirbydesign/core/src/scss/interaction-state/ionic';
 @use '~@kirbydesign/core/src/scss/utils';
 
 :host {
@@ -54,8 +53,8 @@ ion-segment {
 
 ion-segment-button {
   @include interaction-state.apply-focus-part($part: 'native');
-  @include ionic.apply-hover;
-  @include ionic.apply-active('s');
+  @include interaction-state.apply-hover-ionic;
+  @include interaction-state.apply-active-ionic('s');
   @include utils.accessible-target-size;
 
   --border-radius: #{utils.$border-radius-round};
@@ -90,7 +89,7 @@ ion-segment-button {
   }
 
   &::part(native)::after {
-    @include ionic.transition;
+    @include interaction-state.transition;
   }
 
   // end NOTE
