@@ -1,4 +1,4 @@
-@use '~@kirbydesign/core/src/scss/interaction-state/ionic';
+@use '~@kirbydesign/core/src/scss/interaction-state';
 @use '~@kirbydesign/core/src/scss/utils';
 
 /*
@@ -67,8 +67,8 @@ ion-title {
 }
 
 ion-back-button {
-  @include ionic.apply-hover('xxxs');
-  @include ionic.apply-active('xxs');
+  @include interaction-state.apply-hover-ionic('xxxs');
+  @include interaction-state.apply-active-ionic('xxs');
 
   --color: #{utils.get-color('black')};
   --icon-font-size: 24px;
@@ -88,7 +88,7 @@ ion-back-button {
   }
 
   &::part(native)::after {
-    @include ionic.transition;
+    @include interaction-state.transition;
   }
 
   // end NOTE
