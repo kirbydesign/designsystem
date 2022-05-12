@@ -9,7 +9,7 @@ import { TestHelper } from '../../../testing/test-helper';
 import { WindowRef } from '../../../types';
 import { ButtonComponent } from '../../button/button.component';
 import { IconComponent } from '../../icon/icon.component';
-import { PageProgressComponent } from '../../page';
+import { PageProgressComponent, PageTitleComponent } from '../../page';
 import { ModalFooterComponent } from '../footer/modal-footer.component';
 
 import { ModalWrapperComponent } from './modal-wrapper.component';
@@ -48,10 +48,12 @@ describe('ModalWrapperComponent', () => {
         IonContent,
         IconComponent,
         ButtonComponent,
-        PageProgressComponent,
-        ModalFooterComponent,
         IonButtons
       ),
+      /* TODO: split tests that break down when these are mocked out into integration tests */
+      ModalFooterComponent,
+      PageTitleComponent,
+      PageProgressComponent,
     ],
   });
 
