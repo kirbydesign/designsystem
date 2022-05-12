@@ -122,13 +122,13 @@ export class PageProgressComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    if (this.modalElementsAdvertiser !== undefined) {
+    if (this.modalElementsAdvertiser !== null) {
       this.modalElementsAdvertiser.registerElement('pageProgress', this.elementRef);
     }
   }
 
   ngOnDestroy() {
-    if (this.modalElementsAdvertiser !== undefined) {
+    if (this.modalElementsAdvertiser !== null) {
       this.modalElementsAdvertiser.deregisterElement('pageProgress', this.elementRef);
     }
   }
@@ -145,13 +145,13 @@ export class PageTitleComponent implements AfterViewInit, OnDestroy {
   ) {}
 
   ngAfterViewInit() {
-    if (this.modalElementsAdvertiser) {
+    if (this.modalElementsAdvertiser !== null) {
       this.modalElementsAdvertiser.registerElement('title', this.elementRef);
     }
   }
 
   ngOnDestroy() {
-    if (this.modalElementsAdvertiser) {
+    if (this.modalElementsAdvertiser !== null) {
       this.modalElementsAdvertiser.deregisterElement('title', this.elementRef);
     }
   }

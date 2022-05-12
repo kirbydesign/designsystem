@@ -32,13 +32,13 @@ export class ModalFooterComponent implements AfterViewInit, OnDestroy {
   ) {}
 
   ngAfterViewInit() {
-    if (this.modalElementsAdvertiser !== undefined) {
+    if (this.modalElementsAdvertiser !== null) {
       this.modalElementsAdvertiser.registerElement('footer', this.elementRef);
     }
   }
 
   ngOnDestroy() {
-    if (this.modalElementsAdvertiser !== undefined) {
+    if (this.modalElementsAdvertiser !== null) {
       this.modalElementsAdvertiser.deregisterElement('footer', this.elementRef);
     }
   }
