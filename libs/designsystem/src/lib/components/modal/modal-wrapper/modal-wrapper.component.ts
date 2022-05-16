@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   ComponentFactoryResolver,
   ElementRef,
@@ -77,8 +78,8 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   private ionTitleElement: ElementRef<HTMLIonTitleElement>;
   @ViewChild(RouterOutlet, { static: true }) private routerOutlet: RouterOutlet;
 
-  @ViewChild('contentTitle', { read: ElementRef })
-  private contentTitle: ElementRef<HTMLElement>;
+  @ViewChild('contentTitle', { static: false, read: ElementRef })
+  private contentTitleElement: ElementRef<HTMLElement>;
 
   private keyboardVisible = false;
   private toolbarButtons: HTMLButtonElement[] = [];
@@ -113,6 +114,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   willClose$ = this.ionModalWillDismiss.pipe(first());
 
   constructor(
+    private changeDetector: ChangeDetectorRef,
     private injector: Injector,
     private elementRef: ElementRef<HTMLElement>,
     private renderer: Renderer2,
@@ -202,10 +204,14 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
      */
     const newParents: ElementRef<HTMLElement>[] = [this.ionTitleElement];
     if (this._hasCollapsibleTitle) {
-      /* TODO: Figure out why contentTitle is not working */
-      newParents.push(this.contentTitle);
+      /* 
+        The contentTitleElement has an ngIf directive; manually trigger CD to make sure 
+        the element has been queried. Solution taken from: 
+        https://danieleyassu.com/angular-viewchild-and-ngif/
+      */
+      if (!this.contentTitleElement) this.changeDetector.detectChanges();
+      newParents.push(this.contentTitleElement);
     }
-
     this.moveChild(titleElementRef, newParents);
   }
 
@@ -213,7 +219,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     const titleElement = titleElementRef.nativeElement;
     this.ionTitleElement.nativeElement.removeChild(titleElement);
     if (this._hasCollapsibleTitle) {
-      this.contentTitle.nativeElement.removeChild(titleElement);
+      this.contentTitleElement.nativeElement.removeChild(titleElement);
     }
   }
 
@@ -284,8 +290,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
       this.intersectionObserver.observe(ionModalWrapper);
     });
   }
-
-  ngBeforeViewInit(): void {}
 
   ngAfterViewInit(): void {
     if (this.toolbarButtonsQuery) {
