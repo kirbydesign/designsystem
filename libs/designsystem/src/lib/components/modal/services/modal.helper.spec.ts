@@ -99,7 +99,9 @@ describe('ModalHelper', () => {
       ModalWrapperComponent,
       ModalCompactWrapperComponent,
       PageTitleComponent,
-      MockComponents(IconComponent, PageProgressComponent),
+      PageProgressComponent,
+      IconComponent,
+      PageProgressEmbeddedComponent,
     ],
     entryComponents: [
       InputEmbeddedComponent,
