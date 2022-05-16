@@ -12,7 +12,8 @@
   $loudness: interaction-state.$default-loudness-active,
   $make-lighter: false
 ) {
-  &:active {
+  &:active,
+  &.ion-activated {
     @include layer.apply-state($loudness, $make-lighter);
 
     --background-activated: var(--state-layer-background-color);
