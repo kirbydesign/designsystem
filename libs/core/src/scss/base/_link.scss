@@ -20,7 +20,8 @@ $_focus-ring-border-radius: utils.size('xxxxs');
 }
 
 a {
+  @include interaction-state.transition;
   @include interaction-state.apply-hover {
-    text-decoration: none;
+    text-decoration-color: transparent;
   }
 }
