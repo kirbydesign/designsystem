@@ -49,7 +49,9 @@ ion-range {
   }
 
   &::part(knob) {
-    @include interaction-state.transition(background);
+    @include interaction-state.transition {
+      transition-property: background;
+    }
   }
 
   &::part(pin) {

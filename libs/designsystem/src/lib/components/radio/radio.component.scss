@@ -79,7 +79,9 @@ ion-radio {
   --color-checked: #{utils.get-color('success')};
 
   &::part(container) {
-    @include interaction-state.transition(background-color);
+    @include interaction-state.transition {
+      transition-property: background-color;
+    }
 
     background-color: utils.get-color('white');
   }
