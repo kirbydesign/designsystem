@@ -64,6 +64,8 @@
       width: auto;
       text-align: right;
     }
+
+    --transition: #{interaction-state.transition()};
   }
 
   &.sm ion-item {

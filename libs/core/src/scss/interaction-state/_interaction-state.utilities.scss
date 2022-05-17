@@ -24,10 +24,15 @@ $default-transition-duration: 80ms;
 
 /// Apply streamlined transition to interaction state changes
 @mixin transition {
-  transition-property: all;
-  transition-duration: $default-transition-duration;
-  transition-timing-function: utils.get-transition-easing('static');
-  transition-delay: 0ms;
-
+  transition: transition();
   @content;
+}
+
+@function transition(
+  $property: all,
+  $duration: $default-transition-duration,
+  $timing-function: utils.get-transition-easing('static'),
+  $delay: 0ms
+) {
+  @return $property $duration $timing-function $delay;
 }
