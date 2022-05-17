@@ -54,7 +54,7 @@ ion-segment {
 ion-segment-button {
   @include interaction-state.apply-focus-part($part: 'native');
   @include interaction-state.apply-hover-ionic;
-  @include interaction-state.apply-active-ionic;
+  @include interaction-state.apply-active-ionic('s');
   @include utils.accessible-target-size;
 
   --border-radius: #{utils.$border-radius-round};

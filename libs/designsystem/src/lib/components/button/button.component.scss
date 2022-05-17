@@ -53,8 +53,8 @@ $button-width: (
   --kirby-button-color: #{utils.get-color('black')};
   --kirby-button-border-color: transparent;
 
-  @include interaction-state.apply-hover('xxxs');
-  @include interaction-state.apply-active('xxs');
+  @include interaction-state.apply-hover;
+  @include interaction-state.apply-active('s');
 
   &.destructive {
     --kirby-button-color: #{utils.get-color('danger')};
@@ -76,7 +76,7 @@ $button-width: (
   --kirby-button-color: #{utils.get-color('black-contrast')};
 
   @include interaction-state.apply-hover('l', $make-lighter: true);
-  @include interaction-state.apply-active('xxl', $make-lighter: true);
+  @include interaction-state.apply-active('xxxl', $make-lighter: true);
 
   &.destructive {
     --kirby-button-background-color: #{utils.get-color('light')};
@@ -108,7 +108,7 @@ $button-width: (
   @include interaction-state.apply-focus-visible;
   @include interaction-state.initialize-layer($border-width);
   @include interaction-state.apply-hover;
-  @include interaction-state.apply-active;
+  @include interaction-state.apply-active('s');
   @include interaction-state.extend-content {
     display: inherit;
     width: inherit;
@@ -217,7 +217,7 @@ $button-width: (
       --kirby-button-color: #{utils.get-color('white-contrast')};
 
       @include interaction-state.apply-hover;
-      @include interaction-state.apply-active;
+      @include interaction-state.apply-active('s');
     }
 
     &.attention-level3 {
@@ -225,7 +225,7 @@ $button-width: (
       --kirby-button-color: #{utils.get-color('white')};
 
       @include interaction-state.apply-hover('xs', $make-lighter: true);
-      @include interaction-state.apply-active('s', $make-lighter: true);
+      @include interaction-state.apply-active('m', $make-lighter: true);
     }
   }
 
@@ -327,7 +327,7 @@ $button-width: (
       --kirby-button-color: #{utils.get-color($color-name + '-contrast')};
 
       @include interaction-state.apply-hover;
-      @include interaction-state.apply-active;
+      @include interaction-state.apply-active('s');
     }
   }
 }

@@ -4,7 +4,7 @@
 :host {
   @include interaction-state.initialize-layer;
   @include interaction-state.apply-hover;
-  @include interaction-state.apply-active;
+  @include interaction-state.apply-active('s');
 
   @include utils.accessible-target-size;
 
@@ -13,7 +13,7 @@
 
   &.is-selected {
     @include interaction-state.apply-hover('l', $make-lighter: true);
-    @include interaction-state.apply-active('xxl', $make-lighter: true);
+    @include interaction-state.apply-active('xxxl', $make-lighter: true);
 
     background-color: utils.get-color('black');
     color: utils.get-color('black-contrast');
@@ -38,15 +38,15 @@
   user-select: none;
 
   :host-context(.kirby-color-brightness-dark) {
-    @include interaction-state.apply-hover($make-lighter: true);
-    @include interaction-state.apply-active($make-lighter: true);
+    @include interaction-state.apply-hover('xs', $make-lighter: true);
+    @include interaction-state.apply-active('m', $make-lighter: true);
 
     background-color: transparent;
     color: utils.get-text-color('white');
 
     &.is-selected {
       @include interaction-state.apply-hover('xs');
-      @include interaction-state.apply-active('s');
+      @include interaction-state.apply-active('m');
 
       background-color: utils.get-color('white');
       color: utils.get-color('white-contrast');
@@ -59,7 +59,7 @@
 
     &.is-selected {
       @include interaction-state.apply-hover('l', $make-lighter: true);
-      @include interaction-state.apply-active('xxl', $make-lighter: true);
+      @include interaction-state.apply-active('xxxl', $make-lighter: true);
 
       background-color: utils.get-color('black');
       color: utils.get-color('black-contrast');
@@ -71,8 +71,8 @@
     color: utils.get-text-color('black');
 
     &.is-selected {
-      @include interaction-state.apply-hover('s', $make-lighter: true);
-      @include interaction-state.apply-active('l', $make-lighter: true);
+      @include interaction-state.apply-hover('m', $make-lighter: true);
+      @include interaction-state.apply-active('xxl', $make-lighter: true);
 
       background-color: utils.get-color('black');
       color: utils.get-color('black-contrast');
