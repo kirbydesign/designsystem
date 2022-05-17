@@ -40,8 +40,7 @@ $_light: utils.get-color('black-contrast');
     z-index: $state-layer-z-index;
 
     &::before {
-      @include interaction-state.transition;
-
+      transition: interaction-state.transition();
       content: '';
       position: absolute;
       pointer-events: none;

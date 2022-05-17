@@ -13,7 +13,6 @@ $slide-button-container-radius: $slide-button-width * 0.5;
 $slide-button-text-padding: 0 $slide-button-container-radius 0 $total-slider-thumb-width;
 
 @mixin _slider-thumb() {
-  @include interaction-state.transition;
   @include interaction-state.apply-hover {
     background-color: interaction-state.get-state-color('white');
   }
@@ -21,6 +20,7 @@ $slide-button-text-padding: 0 $slide-button-container-radius 0 $total-slider-thu
     background-color: interaction-state.get-state-color('white', 'xs');
   }
 
+  transition: interaction-state.transition();
   appearance: none;
   border-radius: 50%;
   background-color: $slider-thumb-bg-color;

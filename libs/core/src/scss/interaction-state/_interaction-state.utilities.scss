@@ -23,11 +23,6 @@ $default-transition-duration: 80ms;
 }
 
 /// Apply streamlined transition to interaction state changes
-@mixin transition {
-  transition: transition();
-  @content;
-}
-
 @function transition(
   $property: all,
   $duration: $default-transition-duration,

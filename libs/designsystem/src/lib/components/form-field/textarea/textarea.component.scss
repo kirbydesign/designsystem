@@ -3,9 +3,6 @@
 @use '~@kirbydesign/core/src/scss/utils';
 
 :host {
-  @include interaction-state.transition {
-    transition-property: background-color;
-  }
   @include interaction-state.apply-hover {
     background-color: interaction-state.get-state-color('white', 'xxxs');
     cursor: text;
@@ -14,6 +11,8 @@
     background-color: interaction-state.get-state-color('white');
   }
 
+  transition: interaction-state.transition();
+  transition-property: background-color;
   font-family: var(--kirby-font-family);
   resize: none;
 
