@@ -26,6 +26,7 @@ export class ItemComponent {
   @Input()
   selected: boolean;
   @Input() set selectable(selectable: boolean) {
+    if (this._selectable === selectable) return;
     this._selectable = selectable;
     this.cdr.markForCheck();
   }
