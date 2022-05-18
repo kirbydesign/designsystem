@@ -30,6 +30,10 @@ export class SegmentedControlComponent {
 
   @Input() mode: SegmentedControlMode | `${SegmentedControlMode}` = SegmentedControlMode.default;
 
+  @HostBinding('class.scrollable')
+  @Input()
+  scrollable: boolean;
+
   @HostBinding('class')
   get _modeCssClass() {
     return {

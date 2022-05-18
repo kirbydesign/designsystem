@@ -33,6 +33,11 @@
       }
     }
   }
+
+  &.scrollable {
+    overflow-x: var(--kirby-segmented-control-overflow-x, scroll);
+    overflow-y: hidden; // segment touch area height is bigger than segmented control height
+  }
 }
 
 ion-segment {
