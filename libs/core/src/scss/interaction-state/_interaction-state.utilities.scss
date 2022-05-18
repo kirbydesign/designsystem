@@ -4,7 +4,7 @@
 
 $default-loudness-hover: 'xxs';
 $default-loudness-active: 'xs';
-$default-transition-duration: utils.get-transition-duration('quick');
+$default-transition-duration: 80ms;
 
 @function get-state-color($variant, $loudness: $default-loudness-hover, $make-lighter: false) {
   $_background: utils.get-color($variant, $getValueOnly: true);
