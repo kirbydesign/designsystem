@@ -26,7 +26,7 @@ $default-transition-duration: 80ms;
 @function transition(
   $property: all,
   $duration: $default-transition-duration,
-  $timing-function: utils.get-transition-easing('static'),
+  $timing-function: linear,
   $delay: 0ms
 ) {
   @return $property $duration $timing-function $delay;
