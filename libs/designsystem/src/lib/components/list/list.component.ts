@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   ContentChild,
   ContentChildren,
@@ -150,7 +151,11 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   _groupedItems: any[];
   _selectedItem: any;
 
-  constructor(private listHelper: ListHelper, private groupBy: GroupByPipe) {}
+  constructor(
+    private listHelper: ListHelper,
+    private groupBy: GroupByPipe,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
     this._isSelectable = this.itemSelect.observers.length > 0;
@@ -166,6 +171,11 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
         this.kirbyItems.forEach((item) => {
           item.selectable = true;
         });
+
+        // We are mutating the items directly, after they have been rendered in the template.
+        // Therefore, we make sure to detectChanges.
+        // kirby-item handles marking itself for check when selectable is set.
+        this.cdr.detectChanges();
       });
     }
   }
