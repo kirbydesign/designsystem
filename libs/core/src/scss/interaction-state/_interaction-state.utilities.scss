@@ -23,14 +23,11 @@ $default-transition-duration: 80ms;
 }
 
 /// Apply streamlined transition to interaction state changes
-/// @param {*} $property-list [all]
-@mixin transition($property-list...) {
-  @if list.length($property-list) == 0 {
-    $property-list: all;
-  }
-
-  transition-property: $property-list;
-  transition-duration: $default-transition-duration;
-  transition-timing-function: utils.get-transition-easing('static');
-  transition-delay: 0ms;
+@function transition(
+  $property: all,
+  $duration: $default-transition-duration,
+  $timing-function: linear,
+  $delay: 0ms
+) {
+  @return $property $duration $timing-function $delay;
 }

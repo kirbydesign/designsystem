@@ -89,7 +89,7 @@ ion-segment-button {
   }
 
   &::part(native)::after {
-    @include interaction-state.transition;
+    transition: interaction-state.transition();
   }
 
   // end NOTE
