@@ -52,5 +52,12 @@ export class SegmentedControlShowcaseComponent {
       defaultValue: 'undefined',
       type: ['number'],
     },
+    {
+      name: 'scrollable',
+      description:
+        'Makes the segmented control horizontally scrollable when segments take up more space than the width of the segmented control. It will also prevent segmentChange from emitting on swipe.',
+      defaultValue: 'false',
+      type: ['boolean'],
+    },
   ];
 }
