@@ -73,10 +73,6 @@
   @return map.get(variables.$transition-easings, $value);
 }
 
-@function get-loudness($value) {
-  @return map.get(variables.$loudness-scale, $value);
-}
-
 @function get-shadow-size($elevation) {
   $shadow-size: 0;
   $shadow-list: map.get(variables.$elevations, $elevation);
