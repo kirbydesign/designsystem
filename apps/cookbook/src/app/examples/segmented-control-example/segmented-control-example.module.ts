@@ -5,11 +5,15 @@ import { KirbyModule } from '@kirbydesign/designsystem';
 
 import { SegmentedControlExampleDefaultComponent } from './default/default';
 import { SegmentedControlExampleGroupedComponent } from './grouped/grouped';
+import { SegmentedControlExampleInsideScrollableComponent } from './scrollable/inside-scrollable-element';
+import { SegmentedControlExampleScrollableComponent } from './scrollable/scrollable';
 import { SegmentedControlExampleWithBadgeComponent } from './with-badge/with-badge';
 
 const COMPONENT_DECLARATIONS = [
   SegmentedControlExampleDefaultComponent,
   SegmentedControlExampleGroupedComponent,
+  SegmentedControlExampleScrollableComponent,
+  SegmentedControlExampleInsideScrollableComponent,
   SegmentedControlExampleWithBadgeComponent,
 ];
 

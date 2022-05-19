@@ -17,6 +17,35 @@
     ></cookbook-segmented-control-example-grouped>
   </cookbook-example-viewer>
 
+  <h3>Scrollable</h3>
+  <p>
+    If the Segmented Control should be horizontally scrollable when there are more segments than can
+    be shown in its full width, <code>[scrollable]="true"</code> can be set.
+  </p>
+  <p>This will also ensure that swiping and dragging will not select the underlying segment.</p>
+  <cookbook-example-viewer [html]="scrollableExample.template">
+    <cookbook-segmented-control-example-scrollable
+      #scrollableExample
+    ></cookbook-segmented-control-example-scrollable>
+  </cookbook-example-viewer>
+
+  <br />
+
+  <p>
+    In situations where the Segmented Control is placed inside other scrollable elements, you can
+    still set <code>[scrollable]="true"</code> to avoid interactions when swiping and dragging.
+  </p>
+  <p>
+    To remove the scrolling from the Segmented Control itself, you can use
+    <code>--kirby-segmented-control-overflow-x</code>, to take control of the behavior.
+  </p>
+
+  <cookbook-example-viewer [html]="insideScrollableExample.template">
+    <cookbook-segmented-control-example-inside-scrollable
+      #insideScrollableExample
+    ></cookbook-segmented-control-example-inside-scrollable>
+  </cookbook-example-viewer>
+
   <h3>Default - with Badge</h3>
   <p>
     Badges can be applied to a Segmented Control when the mode is 'default'. A badge can be added to
@@ -42,7 +71,7 @@
     ></cookbook-segmented-control-example-with-badge>
   </cookbook-example-viewer>
 
-  <h2>Properties:</h2>
+  <h2>Properties</h2>
   <cookbook-api-description-properties
     [properties]="properties"
   ></cookbook-api-description-properties>
@@ -52,4 +81,10 @@
     44px. If chip/segment is smaller than this, the surrounding area will still be clickable, to
     preserve accessibility.
   </p>
+
+  <h2>CSS Custom Properties</h2>
+  <cookbook-api-description-properties
+    [properties]="_cssCustomProperties"
+    [columns]="_cssCustomPropertiesColumns"
+  ></cookbook-api-description-properties>
 </div>
