@@ -396,7 +396,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     this.toggleCssClass(this.elementRef.nativeElement, 'keyboard-visible', keyboardHeight > 0);
     const keyboardOverlap = this.getKeyboardOverlap(keyboardHeight, this.elementRef.nativeElement);
     let snapFooterToKeyboard = false;
-    const embeddedFooterElement = this.getEmbeddedFooterElement();
+    const embeddedFooterElement = this.currentFooter;
     if (embeddedFooterElement) {
       this.setCssVar(embeddedFooterElement, '--keyboard-offset', `${keyboardOverlap}px`);
       snapFooterToKeyboard = embeddedFooterElement.classList.contains('snap-to-keyboard');
@@ -470,10 +470,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     }
   }
 
-  private getEmbeddedFooterElement() {
-    return this.currentFooter;
-  }
-
   private moveChild(
     childElementRef: ElementRef<HTMLElement>,
     newParentElementRef: ElementRef<HTMLElement>
@@ -529,7 +525,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     if (this.resizeObserverService) {
       this.resizeObserverService.unobserve(this.windowRef.nativeWindow.document.body);
       this.resizeObserverService.unobserve(this.ionHeaderElement.nativeElement);
-      this.resizeObserverService.unobserve(this.getEmbeddedFooterElement());
+      this.resizeObserverService.unobserve(this.currentFooter);
     }
     this.destroy$.next();
     this.destroy$.complete();
