@@ -22,7 +22,7 @@ export class SegmentedControlExampleInsideScrollableComponent implements OnInit 
   selectedSegment: SegmentItem;
   template: string = config.template;
 
-  private items: SegmentItem[] = [
+  items: SegmentItem[] = [
     {
       text: 'First item',
       id: 'first',
