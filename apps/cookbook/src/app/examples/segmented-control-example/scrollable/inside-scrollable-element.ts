@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { SegmentItem } from '@kirbydesign/designsystem';
 
 const config = {
-  template: `<div style="width: 100%; max-width: 500px; overflow-x: scroll; display: flex; align-items: center; --kirby-segmented-control-overflow-x: visible;">
+  template: `<div style="width: 100%; max-width: 500px; overflow-x: scroll; display: flex; align-items: center; --kirby-segmented-control-overflow-x: visible; --kirby-segmented-control-overflow-y: visible;">
     <button kirby-button>Option 1</button>
     <button kirby-button [attentionLevel]="'2'">Option 2</button>
     <kirby-segmented-control

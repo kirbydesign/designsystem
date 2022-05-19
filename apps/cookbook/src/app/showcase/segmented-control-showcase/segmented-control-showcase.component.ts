@@ -77,5 +77,11 @@ export class SegmentedControlShowcaseComponent {
         'Sets the overflow-x property of the Segmented Control. Only usable when the scrollable is set to true.',
       defaultValue: 'scroll',
     },
+    {
+      name: '--kirby-segmented-control-overflow-y',
+      description:
+        'Sets the overflow-y property of the Segmented Control. Only usable when the scrollable is set to true.',
+      defaultValue: 'hidden',
+    },
   ];
 }

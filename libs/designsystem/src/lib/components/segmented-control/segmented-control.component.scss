@@ -36,7 +36,10 @@
 
   &.scrollable {
     overflow-x: var(--kirby-segmented-control-overflow-x, scroll);
-    overflow-y: visible; // segment touch area height is bigger than segmented control height
+    overflow-y: var(
+      --kirby-segmented-control-overflow-y,
+      hidden
+    ); // segment touch area height is bigger than segmented control height
 
     @include utils.touch {
       scrollbar-width: none; /* Firefox */
