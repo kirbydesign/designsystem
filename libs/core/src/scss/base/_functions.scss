@@ -1,6 +1,7 @@
 @use 'sass:list';
 @use 'sass:map';
 @use 'sass:math';
+@use 'sass:meta';
 @use 'sass:string';
 @use '../themes/colors';
 @use 'variables';
@@ -117,7 +118,6 @@
   @if meta.type-of($number) == 'number' and not math.is-unitless($number) {
     @return $number / ($number * 0 + 1);
   }
-
   @return $number;
 }
 
