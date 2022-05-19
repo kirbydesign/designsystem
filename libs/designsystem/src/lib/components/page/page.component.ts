@@ -119,7 +119,6 @@ export class PageProgressComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    /* TODO: move this logic to the modalWrapper? */
     if (this.modalWrapper && this.modalWrapper.config.flavor === 'drawer') {
       this.slot = 'end';
     }
@@ -242,7 +241,7 @@ export class PageComponent
   hasActionsInPage: boolean;
   toolbarTitleVisible: boolean;
   toolbarFixedActionsVisible: boolean;
-  /* TODO: move this logic to the modalWrapper? */ toolbarStickyActionsVisible: boolean;
+  toolbarStickyActionsVisible: boolean;
 
   fitHeadingConfig: FitHeadingConfig;
 

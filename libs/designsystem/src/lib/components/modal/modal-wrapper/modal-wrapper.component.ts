@@ -14,7 +14,6 @@ import {
   QueryList,
   Renderer2,
   RendererStyleFlags2,
-  Self,
   ViewChild,
   ViewChildren,
 } from '@angular/core';
@@ -128,8 +127,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   ngOnInit(): void {
-    this.setupModalElementsAdvertiserSubscriptions();
-
     this.ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
     this.initializeSizing();
     this.initializeModalRoute();
@@ -142,34 +139,12 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     });
   }
 
-  /* TODO: Introduce a better name... */
-  private setupModalElementsAdvertiserSubscriptions() {
-    /* 
-       Some elements embedded in the component provided by the consumer should be moved elsewhere. 
-       Each element advertises their creation and destruction through the ModalElementsAdvertiser 
-       - we setup subscriptions to each event to be able to react accordingly. 
-
-       This is a bit cumbersome; a consequence of the modal not being declaratively built. 
-    */
-    /*  const { footer, pageProgress, title } = this.modalElementsAdvertiser;
-
-    footer.added$.subscribe((elementRef) => this.addFooter(elementRef));
-    footer.removed$.subscribe((elementRef) => this.removeFooter(elementRef));
-
-    pageProgress.added$.subscribe((elementRef) => this.addPageProgress(elementRef));
-    pageProgress.removed$.subscribe((elementRef) => this.removePageProgress(elementRef));
-
-    title.added$.subscribe((elementRef) => this.addTitle(elementRef));
-    title.removed$.subscribe((elementRef) => this.removeTitle(elementRef));*/
-  }
-
   private currentFooter: HTMLElement | null = null;
 
   addFooter(footerElementRef: ElementRef<HTMLElement>) {
     // Move the footer next to ion-content
     this.moveChild(footerElementRef, this.elementRef);
 
-    /* TODO: Is it possible to handle this another way? */
     this.resizeObserverService.observe(footerElementRef.nativeElement, (entry) => {
       const [property, pixelValue] = [
         '--footer-height',
@@ -507,14 +482,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     const newParent = newParentElementRef.nativeElement;
     this.renderer.removeChild(child.parentElement, child);
     this.renderer.appendChild(newParent, child);
-
-    /* TODO: Refactor such that this function is only responsible for moving. 
-       The cloning stuff is the responsibility of the caller. 
-    newParentsElementRef.forEach((newParentElementRef, index) => {
-      const newParent = newParentElementRef.nativeElement;
-      const childToAppend = index > 0 ? child.cloneNode(true) : child;
-      this.renderer.appendChild(newParent, childToAppend);
-    });*/
   }
 
   private removeChild(
