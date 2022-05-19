@@ -197,36 +197,26 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   addTitle(titleElementRef: ElementRef<HTMLElement>) {
-    /* 
-       If title is collapsible append it to content area as well.
-       This is required for the collapsible title functionality 
-       to work, as provided by ionic. 
-     */
-    const newParents: ElementRef<HTMLElement>[] = [this.ionTitleElement];
+    this.moveChild(titleElementRef, this.ionTitleElement);
+    // If title is collapsible append it to content area; required by ionic implementation.
     if (this._hasCollapsibleTitle) {
       /* 
-        The contentTitleElement has an ngIf directive; manually trigger CD to make sure 
-        the element has been queried. Solution taken from: 
-        https://danieleyassu.com/angular-viewchild-and-ngif/
+        contentTitleElement has ngIf directive; trigger CD to make sure element has been queried. 
+        Solution taken from: https://danieleyassu.com/angular-viewchild-and-ngif/
       */
       if (!this.contentTitleElement) this.changeDetector.detectChanges();
-      newParents.push(this.contentTitleElement);
+
+      const titleElementClone = titleElementRef.nativeElement.cloneNode(true) as HTMLElement;
+      this.moveChild(new ElementRef(titleElementClone), this.contentTitleElement);
     }
-    this.moveChild(titleElementRef, newParents);
   }
 
   removeTitle(titleElementRef: ElementRef<HTMLElement>) {
-    /*const titleElement = titleElementRef.nativeElement;*/
     this.removeChild(titleElementRef);
-    //this.ionTitleElement.nativeElement.removeChild(titleElement);
     if (this._hasCollapsibleTitle) {
-      console.log(titleElementRef);
-      console.log(this.contentTitleElement.nativeElement);
-      //this.removeChild(titleElementRef.nativeElement, this.contentTitleElement.nativeElement);
-      const kirbyPageTitle: HTMLElement =
+      const kirbyPageTitleElement: HTMLElement =
         this.contentTitleElement.nativeElement.querySelector('kirby-page-title');
-      this.removeChild(new ElementRef(kirbyPageTitle));
-      //this.contentTitleElement.nativeElement.removeChild(titleElement);
+      this.removeChild(new ElementRef(kirbyPageTitleElement));
     }
   }
 
