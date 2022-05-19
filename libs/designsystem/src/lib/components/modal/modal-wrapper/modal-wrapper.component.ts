@@ -216,10 +216,17 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   removeTitle(titleElementRef: ElementRef<HTMLElement>) {
-    const titleElement = titleElementRef.nativeElement;
-    this.ionTitleElement.nativeElement.removeChild(titleElement);
+    /*const titleElement = titleElementRef.nativeElement;*/
+    this.removeChild(titleElementRef);
+    //this.ionTitleElement.nativeElement.removeChild(titleElement);
     if (this._hasCollapsibleTitle) {
-      this.contentTitleElement.nativeElement.removeChild(titleElement);
+      console.log(titleElementRef);
+      console.log(this.contentTitleElement.nativeElement);
+      //this.removeChild(titleElementRef.nativeElement, this.contentTitleElement.nativeElement);
+      const kirbyPageTitle: HTMLElement =
+        this.contentTitleElement.nativeElement.querySelector('kirby-page-title');
+      this.removeChild(new ElementRef(kirbyPageTitle));
+      //this.contentTitleElement.nativeElement.removeChild(titleElement);
     }
   }
 
@@ -515,6 +522,8 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
       newParentsElementRef = [newParentsElementRef];
     }
 
+    /* TODO: Refactor such that this function is only responsible for moving. 
+       The cloning stuff is the responsibility of the caller. */
     newParentsElementRef.forEach((newParentElementRef, index) => {
       const newParent = newParentElementRef.nativeElement;
       const childToAppend = index > 0 ? child.cloneNode(true) : child;
@@ -522,10 +531,13 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     });
   }
 
-  private removeChild(childElementRef: ElementRef<HTMLElement>) {
+  private removeChild(
+    childElementRef: ElementRef<HTMLElement>,
+    parentElement?: HTMLElement | ElementRef<HTMLElement>
+  ) {
     const child = childElementRef.nativeElement;
     if (!!child) {
-      this.renderer.removeChild(child.parentElement, child);
+      this.renderer.removeChild(parentElement || child.parentElement, child);
     }
   }
 

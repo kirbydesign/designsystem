@@ -28,6 +28,7 @@ describe('ModalWrapperComponent', () => {
     component: ModalWrapperComponent,
     imports: [RouterTestingModule],
     entryComponents: [
+      TitleEmbeddedComponent,
       StaticFooterEmbeddedComponent,
       DynamicFooterEmbeddedComponent,
       InputEmbeddedComponent,
