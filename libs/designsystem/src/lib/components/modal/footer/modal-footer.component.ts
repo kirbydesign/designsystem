@@ -9,7 +9,7 @@ import {
   Optional,
 } from '@angular/core';
 
-import { ModalElementsAdvertiser } from '../modal-wrapper/modal-elements-advertiser.service';
+import { ModalElementsAdvertiser } from '../services/modal.interfaces';
 
 @Component({
   selector: 'kirby-modal-footer',
@@ -26,20 +26,24 @@ export class ModalFooterComponent implements AfterViewInit, OnDestroy {
   @Input()
   type: 'inline' | 'fixed' = 'fixed';
 
+  private get isContainedInModal() {
+    return this.modalElementsAdvertiser !== null;
+  }
+
   constructor(
     private elementRef: ElementRef<HTMLElement>,
     @Optional() private modalElementsAdvertiser: ModalElementsAdvertiser
   ) {}
 
   ngAfterViewInit() {
-    if (this.modalElementsAdvertiser !== null) {
-      this.modalElementsAdvertiser.registerElement('footer', this.elementRef);
+    if (this.isContainedInModal) {
+      this.modalElementsAdvertiser.addFooter(this.elementRef);
     }
   }
 
   ngOnDestroy() {
-    if (this.modalElementsAdvertiser !== null) {
-      this.modalElementsAdvertiser.deregisterElement('footer', this.elementRef);
+    if (this.isContainedInModal) {
+      this.modalElementsAdvertiser.removeFooter(this.elementRef);
     }
   }
 }

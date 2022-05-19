@@ -32,9 +32,9 @@ import { filter, takeUntil } from 'rxjs/operators';
 import { KirbyAnimation } from '../../animation/kirby-animation';
 import { FitHeadingConfig } from '../../directives/fit-heading/fit-heading.directive';
 import { WindowRef } from '../../types/window-ref';
-import { ModalElementsAdvertiser } from '../modal/modal-wrapper/modal-elements-advertiser.service';
 import { ModalWrapperComponent } from '../modal/modal-wrapper/modal-wrapper.component';
 import { ModalNavigationService } from '../modal/services/modal-navigation.service';
+import { ModalElementsAdvertiser } from '../modal/services/modal.interfaces';
 import { selectedTabClickEvent } from '../tabs/tab-button/tab-button.events';
 import { TabsComponent } from '../tabs/tabs.component';
 
@@ -108,6 +108,10 @@ export class PageProgressComponent implements OnInit, AfterViewInit, OnDestroy {
   // This implementation was chosen over expanding `moveChild` method in component wrapper with yet another scenario
   @HostBinding('attr.slot') slot = 'start';
 
+  private get isContainedInModal() {
+    return this.modalElementsAdvertiser !== null;
+  }
+
   constructor(
     @Optional() @SkipSelf() private modalWrapper: ModalWrapperComponent,
     @Optional() private modalElementsAdvertiser: ModalElementsAdvertiser,
@@ -122,14 +126,14 @@ export class PageProgressComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    if (this.modalElementsAdvertiser !== null) {
-      this.modalElementsAdvertiser.registerElement('pageProgress', this.elementRef);
+    if (this.isContainedInModal) {
+      this.modalElementsAdvertiser.addPageProgress(this.elementRef);
     }
   }
 
   ngOnDestroy() {
-    if (this.modalElementsAdvertiser !== null) {
-      this.modalElementsAdvertiser.deregisterElement('pageProgress', this.elementRef);
+    if (this.isContainedInModal) {
+      this.modalElementsAdvertiser.removePageProgress(this.elementRef);
     }
   }
 }
@@ -139,20 +143,24 @@ export class PageProgressComponent implements OnInit, AfterViewInit, OnDestroy {
   template: ` <ng-content></ng-content> `,
 })
 export class PageTitleComponent implements AfterViewInit, OnDestroy {
+  private get isContainedInModal() {
+    return this.modalElementsAdvertiser !== null;
+  }
+
   constructor(
     private elementRef: ElementRef<HTMLElement>,
     @Optional() private modalElementsAdvertiser: ModalElementsAdvertiser
   ) {}
 
   ngAfterViewInit() {
-    if (this.modalElementsAdvertiser !== null) {
-      this.modalElementsAdvertiser.registerElement('title', this.elementRef);
+    if (this.isContainedInModal) {
+      this.modalElementsAdvertiser.addTitle(this.elementRef);
     }
   }
 
   ngOnDestroy() {
-    if (this.modalElementsAdvertiser !== null) {
-      this.modalElementsAdvertiser.deregisterElement('title', this.elementRef);
+    if (this.isContainedInModal) {
+      this.modalElementsAdvertiser.removeTitle(this.elementRef);
     }
   }
 }

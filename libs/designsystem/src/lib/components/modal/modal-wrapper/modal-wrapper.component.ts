@@ -31,11 +31,10 @@ import { WindowRef } from '../../../types/window-ref';
 import { ButtonComponent } from '../../button/button.component';
 import { ResizeObserverService } from '../../shared/resize-observer/resize-observer.service';
 import { ResizeObserverEntry } from '../../shared/resize-observer/types/resize-observer-entry';
-import { Modal } from '../services/modal.interfaces';
+import { Modal, ModalElementsAdvertiser } from '../services/modal.interfaces';
 
 import { ModalConfig } from './config/modal-config';
 import { COMPONENT_PROPS } from './config/modal-config.helper';
-import { ModalElementsAdvertiser } from './modal-elements-advertiser.service';
 
 @Component({
   selector: 'kirby-modal-wrapper',
@@ -43,7 +42,7 @@ import { ModalElementsAdvertiser } from './modal-elements-advertiser.service';
   styleUrls: ['./modal-wrapper.component.scss'],
   providers: [
     { provide: Modal, useExisting: ModalWrapperComponent },
-    { provide: ModalElementsAdvertiser },
+    { provide: ModalElementsAdvertiser, useExisting: ModalWrapperComponent },
   ],
 })
 export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDestroy {
@@ -122,8 +121,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     private resizeObserverService: ResizeObserverService,
     private componentFactoryResolver: ComponentFactoryResolver,
     private windowRef: WindowRef,
-    private platform: PlatformService,
-    @Self() private modalElementsAdvertiser: ModalElementsAdvertiser
+    private platform: PlatformService
   ) {
     this.setViewportHeight();
     this.observeViewportResize();
@@ -153,7 +151,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
 
        This is a bit cumbersome; a consequence of the modal not being declaratively built. 
     */
-    const { footer, pageProgress, title } = this.modalElementsAdvertiser;
+    /*  const { footer, pageProgress, title } = this.modalElementsAdvertiser;
 
     footer.added$.subscribe((elementRef) => this.addFooter(elementRef));
     footer.removed$.subscribe((elementRef) => this.removeFooter(elementRef));
@@ -162,7 +160,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     pageProgress.removed$.subscribe((elementRef) => this.removePageProgress(elementRef));
 
     title.added$.subscribe((elementRef) => this.addTitle(elementRef));
-    title.removed$.subscribe((elementRef) => this.removeTitle(elementRef));
+    title.removed$.subscribe((elementRef) => this.removeTitle(elementRef));*/
   }
 
   private currentFooter: HTMLElement | null = null;
@@ -503,22 +501,20 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
 
   private moveChild(
     childElementRef: ElementRef<HTMLElement>,
-    newParentsElementRef: ElementRef<HTMLElement>[] | ElementRef<HTMLElement>
+    newParentElementRef: ElementRef<HTMLElement>
   ) {
     const child = childElementRef.nativeElement;
+    const newParent = newParentElementRef.nativeElement;
     this.renderer.removeChild(child.parentElement, child);
-
-    if (!Array.isArray(newParentsElementRef)) {
-      newParentsElementRef = [newParentsElementRef];
-    }
+    this.renderer.appendChild(newParent, child);
 
     /* TODO: Refactor such that this function is only responsible for moving. 
-       The cloning stuff is the responsibility of the caller. */
+       The cloning stuff is the responsibility of the caller. 
     newParentsElementRef.forEach((newParentElementRef, index) => {
       const newParent = newParentElementRef.nativeElement;
       const childToAppend = index > 0 ? child.cloneNode(true) : child;
       this.renderer.appendChild(newParent, childToAppend);
-    });
+    });*/
   }
 
   private removeChild(
