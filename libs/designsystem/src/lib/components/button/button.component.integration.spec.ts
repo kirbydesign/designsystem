@@ -98,9 +98,12 @@ describe('ButtonComponent in Kirby Page', () => {
       expect(actionButtonInHeader).toBeTruthy();
     });
 
-    it('should render without background-color', async () => {
+    it('should render with the correct background-color', async () => {
       await TestHelper.whenReady(ionToolbar);
-      expect(actionButtonInHeader).toHaveComputedStyle({ 'background-color': getColor('white') });
+      expect(actionButtonInHeader).toHaveComputedStyle({ 'background-color': getColor('primary') });
+      expect(actionButtonInHeaderIconOnly).toHaveComputedStyle({
+        'background-color': getColor('white'),
+      });
     });
 
     it('should render with correct color', async () => {

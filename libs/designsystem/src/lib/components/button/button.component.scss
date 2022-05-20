@@ -230,40 +230,41 @@ $button-width: (
 // Temp fix for https://github.com/angular/angular-cli/issues/13854#issuecomment-470831308
 
 /* clean-css ignore:start */
-
-:host-context(ion-toolbar kirby-page-actions) {
+:host-context(kirby-page ion-toolbar ion-buttons) {
   font-size: utils.font-size('s');
   margin: 0 utils.size('xxxs');
   height: utils.size('xl');
 
   &.icon-only {
     width: utils.size('xl');
+
+    &.attention-level1,
+    &.attention-level2,
+    &.attention-level3,
+    &.attention-level4 {
+      @include button-attentionlevel2;
+    }
   }
 
-  transition-property: color, background-color;
+  transition-property: color, background-color, margin;
   transition-duration: utils.get-transition-duration('short');
   transition-timing-function: utils.get-transition-easing('enter-exit');
-
-  &.attention-level1,
-  &.attention-level2,
-  &.attention-level3,
-  &.attention-level4 {
-    @include button-attentionlevel2;
-  }
 }
 
-:host-context(ion-toolbar ion-buttons:last-child kirby-page-actions) {
+:host-context(kirby-page ion-toolbar ion-buttons:last-child) {
   margin-right: 0;
 }
 
-:host-context(ion-toolbar.content-scrolled kirby-page-actions) {
+:host-context(kirby-page ion-toolbar.content-scrolled ion-buttons) {
   margin: 0;
 
-  &.attention-level1,
-  &.attention-level2,
-  &.attention-level3,
-  &.attention-level4 {
-    @include button-attentionlevel4;
+  &.icon-only {
+    &.attention-level1,
+    &.attention-level2,
+    &.attention-level3,
+    &.attention-level4 {
+      @include button-attentionlevel4;
+    }
   }
 }
 

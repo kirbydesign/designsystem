@@ -170,7 +170,6 @@ $checkbox-radio-spacing: (
 $soft-keyboard-transition-enter: 250ms ease-out 1ms; // Adding a 1ms delay seems to improve the smoothness on iPhone
 $soft-keyboard-transition-leave: 150ms ease-out;
 $transition-durations: (
-  very-quick: 100ms,
   quick: 200ms,
   short: 300ms,
   long: 500ms,

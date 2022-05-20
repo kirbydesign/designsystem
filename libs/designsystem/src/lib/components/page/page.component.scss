@@ -1,5 +1,9 @@
 @use '~@kirbydesign/core/src/scss/utils';
 
+:host {
+  display: contents;
+}
+
 /*
  * Page Header
  */
@@ -38,7 +42,7 @@ ion-toolbar {
   );
 
   @include utils.media('>=medium') {
-    --min-height: 64px; // TODO: #{utils.size('xxxxl')};
+    --min-height: #{utils.size('xxxxl')};
   }
 
   box-sizing: border-box;
@@ -71,8 +75,8 @@ ion-toolbar {
     opacity: 0;
     transform: translateY(10px);
     transition-property: opacity, transform;
-    transition-duration: utils.get-transition-duration('quick');
-    transition-timing-function: utils.get-transition-easing('static');
+    transition-duration: 150ms;
+    transition-timing-function: utils.get-transition-easing('enter-exit');
 
     &.slide-and-fade-in {
       opacity: 1;
