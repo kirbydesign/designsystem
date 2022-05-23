@@ -4,13 +4,14 @@ import {
   ApiDescriptionPropertyColumns,
 } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
+import exampleHtml from '../../examples/badge-example/badge-example.component.html?raw';
+
 @Component({
   selector: 'cookbook-badge-showcase',
   templateUrl: './badge-showcase.component.html',
 })
 export class BadgeShowcaseComponent {
-  exampleHtml: string =
-    require('!raw-loader!../../examples/badge-example/badge-example.component.html').default;
+  exampleHtml = exampleHtml;
   _cardMode = 'flat';
   _cardHasPadding = true;
 

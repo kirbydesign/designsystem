@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
+import exampleHtml from '../../examples/button-example/button-example.component.html?raw';
+
 @Component({
   selector: 'cookbook-button-showcase',
   templateUrl: './button-showcase.component.html',
@@ -9,8 +11,7 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
 export class ButtonShowcaseComponent {
   themeColors = ['light', 'white', 'dark'];
   themeColor = '';
-  exampleHtml: string =
-    require('!raw-loader!../../examples/button-example/button-example.component.html').default;
+  exampleHtml = exampleHtml;
   properties: ApiDescriptionProperty[] = [
     {
       name: 'expand',
