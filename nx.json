@@ -10,23 +10,29 @@
     "nx.json": "*",
     "tsconfig.base.json": "*"
   },
-  "projects": {
-    "designsystem": {
-      "tags": []
-    },
-    "cookbook": {
-      "tags": []
-    }
-  },
   "tasksRunnerOptions": {
     "default": {
-      "runner": "@nrwl/workspace/tasks-runners/default",
+      "runner": "nx/tasks-runners/default",
       "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
+        "cacheableOperations": ["build", "lint", "test", "e2e"],
+        "parallel": 1
       }
     }
   },
   "affected": {
     "defaultBase": "stable"
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular",
+    "analytics": false
+  },
+  "defaultProject": "designsystem",
+  "generators": {
+    "@nrwl/angular:application": {
+      "unitTestRunner": "karma"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "karma"
+    }
   }
 }
