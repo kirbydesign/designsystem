@@ -10,6 +10,8 @@ export class ElementAsButtonDirective implements OnInit {
   @HostBinding('attr.role') role: string = 'button';
   @HostBinding('attr.tabindex') tabindex: number = 0;
 
+  @HostBinding('attr.aria-pressed') pressed = false;
+
   constructor(@Optional() private card: CardComponent, private clickableElement: ElementRef) {}
 
   ngOnInit(): void {
@@ -21,6 +23,7 @@ export class ElementAsButtonDirective implements OnInit {
   @HostListener('keydown.space', ['$event'])
   @HostListener('keydown.enter', ['$event'])
   _onKeydownHandler(event: KeyboardEvent) {
+    this.pressed = true;
     this.clickableElement.nativeElement.click(event);
     /*
      * Prevent default event from firing so the UA wont
@@ -29,5 +32,12 @@ export class ElementAsButtonDirective implements OnInit {
      */
 
     event.preventDefault();
+  }
+
+  @HostListener('keyup.space', ['$event'])
+  @HostListener('keyup.enter', ['$event'])
+  @HostListener('blur', ['$event'])
+  _onNotActiveHandler(event: KeyboardEvent) {
+    this.pressed = false;
   }
 }
