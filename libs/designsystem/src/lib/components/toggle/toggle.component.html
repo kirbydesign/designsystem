@@ -2,8 +2,8 @@
   [checked]="checked"
   [disabled]="disabled"
   [class.interaction-state-active]="_pressed"
-  (blur)="_onInactive()"
   (keydown.space)="_onActive()"
   (keyup.space)="_onInactive()"
+  (blur)="_onInactive()"
   (ionChange)="onCheckedChange($event.detail.checked)"
 ></ion-toggle>
