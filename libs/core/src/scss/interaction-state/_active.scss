@@ -1,8 +1,13 @@
 @use 'interaction-state.utilities';
 @use 'layer';
 
-@mixin apply-active($loudness: interaction-state.$default-loudness-active, $make-lighter: false) {
-  &:active {
+@mixin apply-active(
+  $loudness: interaction-state.$default-loudness-active,
+  $make-lighter: false,
+  $alt-selector: ''
+) {
+  &:active,
+  #{$alt-selector} {
     @include layer.apply-state($loudness, $make-lighter);
     @content;
   }

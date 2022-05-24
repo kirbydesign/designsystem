@@ -46,18 +46,14 @@
   &[role='button'] {
     @include interaction-state.initialize-layer;
     @include interaction-state.apply-hover('xxxs');
-    @include interaction-state.apply-active('xxs');
     @include interaction-state.apply-focus-visible($shadow: utils.get-elevation(2));
+    @include interaction-state.apply-active('xxs', $alt-selector: '&[aria-pressed="true"]');
 
     &.highlighted {
       @include interaction-state.apply-focus-visible($shadow: utils.get-elevation(4));
     }
 
     outline: none;
-
-    &[aria-pressed='true'] {
-      background-color: goldenrod;
-    }
   }
 }
 
