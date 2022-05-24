@@ -1,4 +1,4 @@
-import { createDirectiveFactory, createKeyboardEvent, SpectatorDirective } from '@ngneat/spectator';
+import { createDirectiveFactory, SpectatorDirective } from '@ngneat/spectator';
 
 import { CardComponent } from '../../components/card/card.component';
 
