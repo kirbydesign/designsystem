@@ -56,18 +56,9 @@ export class PopoverComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  @HostListener('click')
-  _backdropClick() {
-    this.willHide.emit();
-    this.hide();
-  }
-
   @HostListener('window:resize')
   _onWindowResize() {
-    if (this.isShowing) {
-      this.willHide.emit();
-      this.hide();
-    }
+    this.hide();
   }
 
   constructor(private elementRef: ElementRef<HTMLElement>, private renderer: Renderer2) {
@@ -97,8 +88,13 @@ export class PopoverComponent implements AfterViewInit, OnDestroy {
   }
 
   // document.removeEventListener needs the exact same event handler & options reference:
-  private preventEvent(event: TouchEvent) {
-    event.preventDefault();
+  private static preventEventOutsidePopover(event: TouchEvent) {
+    if (event.target instanceof HTMLElement) {
+      const targetIsInPopover = !!event.target.closest('kirby-popover');
+      if (!targetIsInPopover) {
+        event.preventDefault();
+      }
+    }
   }
 
   private preventScroll() {
@@ -110,7 +106,7 @@ export class PopoverComponent implements AfterViewInit, OnDestroy {
     // preventDefault does not work with Renderer2.listen method; add event listener directly to document instead
     this.document.addEventListener(
       'touchmove',
-      this.preventEvent,
+      PopoverComponent.preventEventOutsidePopover,
       this.preventScrollEventListenerOptions
     );
   }
@@ -122,7 +118,7 @@ export class PopoverComponent implements AfterViewInit, OnDestroy {
 
     this.document.removeEventListener(
       'touchmove',
-      this.preventEvent,
+      PopoverComponent.preventEventOutsidePopover,
       this.preventScrollEventListenerOptions
     );
   }
@@ -141,7 +137,13 @@ export class PopoverComponent implements AfterViewInit, OnDestroy {
   }
 
   hide() {
-    this.renderer.removeChild(this.document.body, this.elementRef.nativeElement);
+    if (!this.isShowing) return;
+
+    this.willHide.emit();
+    this.renderer.removeChild(
+      this.elementRef.nativeElement.parentElement,
+      this.elementRef.nativeElement
+    );
     this.releaseScroll();
 
     this.renderer.removeStyle(this.targetElement, 'z-index');
