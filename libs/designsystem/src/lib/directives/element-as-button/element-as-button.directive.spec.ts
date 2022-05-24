@@ -28,33 +28,33 @@ describe('ElementAsButtonDirective', () => {
   keyScenarios.forEach((key) => {
     describe(`when keydown is activated for ${key}`, () => {
       beforeEach(() => {
-        expect(cardElement.getAttribute('aria-pressed')).toEqual('false');
+        expect(cardElement).not.toHaveClass('interaction-state-active');
         spectator.dispatchKeyboardEvent('kirby-card', 'keydown', key);
       });
 
-      it('should set host "aria-pressed" attribute to "true"', () => {
-        expect(cardElement.getAttribute('aria-pressed')).toEqual('true');
+      it('should add class "interaction-state-active" to host', () => {
+        expect(cardElement).toHaveClass('interaction-state-active');
       });
 
       describe(`and keyup is then activated for ${key}`, () => {
         beforeEach(() => {
-          expect(cardElement.getAttribute('aria-pressed')).toEqual('true');
+          expect(cardElement).toHaveClass('interaction-state-active');
           spectator.dispatchKeyboardEvent('kirby-card', 'keyup', key);
         });
 
-        it('should set host "aria-pressed" attribute to "false"', () => {
-          expect(cardElement.getAttribute('aria-pressed')).toEqual('false');
+        it('should remove class "interaction-state-active" from host', () => {
+          expect(cardElement).not.toHaveClass('interaction-state-active');
         });
       });
 
       describe('and the element is then unfocused', () => {
         beforeEach(() => {
-          expect(cardElement.getAttribute('aria-pressed')).toEqual('true');
+          expect(cardElement).toHaveClass('interaction-state-active');
           spectator.blur(cardElement);
         });
 
         it('should set host "aria-pressed" attribute to "false"', () => {
-          expect(cardElement.getAttribute('aria-pressed')).toEqual('false');
+          expect(cardElement).not.toHaveClass('interaction-state-active');
         });
       });
     });
