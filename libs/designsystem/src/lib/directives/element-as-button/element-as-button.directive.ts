@@ -33,9 +33,9 @@ export class ElementAsButtonDirective implements OnInit {
     event.preventDefault();
   }
 
-  @HostListener('keyup.space', ['$event'])
-  @HostListener('keyup.enter', ['$event'])
-  @HostListener('blur', ['$event'])
+  @HostListener('keyup.space')
+  @HostListener('keyup.enter')
+  @HostListener('blur')
   _onNotActiveHandler() {
     this.pressed = false;
   }
