@@ -66,7 +66,6 @@ const IMPORTS = [
   imports: [CommonModule, RouterModule, KirbyModule, ...IMPORTS],
   declarations: COMPONENT_DECLARATIONS,
   exports: [...COMPONENT_DECLARATIONS, ...IMPORTS],
-  entryComponents: [CardExampleComponent],
 })
 export class ExamplesModule {
   constructor(iconRegistryService: IconRegistryService) {
