@@ -1,16 +1,5 @@
 @use '~@kirbydesign/core/src/scss/interaction-state';
-@use '~@kirbydesign/core/src/scss/interaction-state/layer';
 @use '~@kirbydesign/core/src/scss/utils';
-
-@mixin card-apply-active {
-  $loudness: 'xxs';
-
-  @include interaction-state.apply-active($loudness);
-
-  &[aria-pressed='true'] {
-    @include layer.apply-state($loudness);
-  }
-}
 
 :host {
   --kirby-card-main-background-color: #{utils.get-color('white')};
@@ -58,8 +47,7 @@
     @include interaction-state.initialize-layer;
     @include interaction-state.apply-hover('xxxs');
     @include interaction-state.apply-focus-visible($shadow: utils.get-elevation(2));
-
-    @include card-apply-active;
+    @include interaction-state.apply-active('xxs', $alt-selector: '&[aria-pressed="true"]');
 
     &.highlighted {
       @include interaction-state.apply-focus-visible($shadow: utils.get-elevation(4));
