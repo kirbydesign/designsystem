@@ -1,6 +1,6 @@
 {
   "name": "designsystem",
-  "version": "5.3.1",
+  "version": "5.4.1",
   "description": "Kirby Design Angular Components. This library provides Angular wrappers for the @kirbydesign/core package, for smoother integration into Angular projects.",
   "engines": {
     "node": "^14.16"
@@ -24,12 +24,10 @@
   "scripts": {
     "ng": "nx",
     "nx": "nx",
-    "start": "npm-run-all --parallel \"ng serve\" \"build:core:watch\"",
+    "start": "npm-run-all --parallel \"ng serve cookbook\" \"build:core:watch\"",
     "build": "ng build",
     "build-polyfills": "webpack --config webpack.polyfills.config.js",
     "test": "ng test",
-    "test:cookbook": "ng test cookbook",
-    "test:designsystem": "ng test designsystem",
     "test:headless-browser": "npm run test -- --browsers=ChromeCustom",
     "test:headless-browser:single": "npm run test:headless-browser -- --watch=false",
     "test:libs": "npm run test:core:single && npm run test:headless-browser:single",

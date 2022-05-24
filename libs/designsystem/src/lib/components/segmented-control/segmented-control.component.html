@@ -1,6 +1,7 @@
 <ion-segment
   *ngIf="mode === 'default'"
   [value]="value?.id"
+  [scrollable]="disableChangeOnSwipe"
   (ionChange)="onSegmentSelect($event.detail.value)"
   (click)="preventWrapperClick($event)"
 >
