@@ -1,11 +1,11 @@
 import * as chokidar from 'chokidar';
 import validate from 'schema-utils';
-import { Compiler, Plugin } from 'webpack';
+import { Compiler, WebpackPluginInstance } from 'webpack';
 
 import { SassToTypescriptEngine } from './sass-to-ts.engine';
 import { SassToTsWebpackPluginOptions, SCHEMA } from './schema';
 
-export class SassToTsWebpackPlugin implements Plugin {
+export class SassToTsWebpackPlugin implements WebpackPluginInstance {
   static readonly NAME = 'SassToTsWebpackPlugin';
   engine: SassToTypescriptEngine;
   shouldLog = false;

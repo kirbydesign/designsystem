@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
+import exampleHtml from '../../examples/empty-state-example/empty-state-example.component.html?raw';
+
 @Component({
   selector: 'cookbook-empty-state-showcase',
   templateUrl: './empty-state-showcase.component.html',
 })
 export class EmptyStateShowcaseComponent {
-  exampleHtml: string =
-    require('!raw-loader!../../examples/empty-state-example/empty-state-example.component.html')
-      .default;
+  exampleHtml = exampleHtml;
 
   properties: ApiDescriptionProperty[] = [
     {
