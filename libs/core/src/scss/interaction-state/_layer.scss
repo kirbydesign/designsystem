@@ -58,7 +58,7 @@ $_light: utils.get-color('black-contrast');
     @error "$loudness-percent must be a percentage";
   }
 
-  --state-layer-opacity: #{$loudness-percent / 100%};
+  --state-layer-opacity: #{math.div($loudness-percent, 100%)};
 
   @if $make-lighter {
     --state-layer-background-color: #{$_light};
