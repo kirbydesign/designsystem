@@ -112,7 +112,7 @@ If you got an idea for a component that you think should be part of Kirby you sh
     - Create a pull request. If you created a draft PR during implementation you can just mark that as "ready for review".
     - Request that the pull request is code-reviewed.
     - Request that the pull request is [UX reviewed](#ux-review).
-    - When the pull request has been approved it will be automatically merged to `main` via [automerge](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/automatically-merging-a-pull-request).
+    - When the pull request has been approved it will be merged to `develop` by Team Kirby.
 5. **Celebrate! 🎉**
 
 ## Checklist: I have an enhancement 

@@ -30,6 +30,5 @@ The following tasks should be carried out in sequence in order to follow [the pr
 - [ ] Request that the changes are code-reviewed 
 - [ ] Request that the changes are [UX reviewed](https://github.com/kirbydesign/designsystem/blob/main/.github/CONTRIBUTING.md/#ux-review) (only necessary if your PR introduces visual changes)
 
-When the pull request has been approved it will be automatically merged to `main` via [automerge](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/automatically-merging-a-pull-request).
-
+When the pull request has been approved it will be merged to `develop` by Team Kirby.
 
