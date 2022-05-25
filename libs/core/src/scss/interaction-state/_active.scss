@@ -2,7 +2,8 @@
 @use 'layer';
 
 @mixin apply-active($loudness: interaction-state.$default-loudness-active, $make-lighter: false) {
-  &:active {
+  &:active,
+  &.interaction-state-active {
     @include layer.apply-state($loudness, $make-lighter);
     @content;
   }
