@@ -59,6 +59,11 @@ ion-segment-button {
   @include interaction-state.apply-active-ionic('s');
   @include utils.accessible-target-size;
 
+  &.segment-button-checked {
+    @include interaction-state.apply-hover-ionic($make-lighter: true);
+    @include interaction-state.apply-active-ionic('s', $make-lighter: true);
+  }
+
   --border-radius: #{utils.$border-radius-round};
   --border-style: none;
   --background: none;
