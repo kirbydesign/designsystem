@@ -103,7 +103,7 @@ If you got an idea for a component that you think should be part of Kirby you sh
 3. **Implementation:**
     - Make sure you have read: "[Before you get coding](#before-you-get-coding)".
     - Signal to others you are working on the issue by assigning yourself.
-    - Create a branch from the [develop branch](https://github.com/kirbydesign/designsystem/tree/main) following our [branch naming convention](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Branch). 
+    - Create a branch from the [develop branch](https://github.com/kirbydesign/designsystem/tree/develop) following our [branch naming convention](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Branch). 
     - Publish a WIP implementation to Github as a draft PR and ask for feedback. 
     - Make sure you have implemented tests following the guidelines in: "[The good: Test](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Test)".
     - Update the [cookbook](https://cookbook.kirby.design) with examples and showcases.
@@ -133,7 +133,7 @@ If you have found a bug in Kirby you should follow these steps:
 3. **Implementation:** 
     - Make sure you have read: "[Before you get coding](#before-you-get-coding)".
     - Signal to others you are working on the issue by assigning yourself.
-    - Create a branch from the [develop branch](https://github.com/kirbydesign/designsystem/tree/main) following our [branch naming convention](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Branch). 
+    - Create a branch from the [develop branch](https://github.com/kirbydesign/designsystem/tree/develop) following our [branch naming convention](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Branch). 
     - Create a test that reproduces the bug following guidelines in: "[The good: Test](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Test)". 
     - Write code to fix the bug
 4. **Follow steps 4 and 5 in "[Checklist: I have a component request](#checklist-i-have-a-component-request)".**
