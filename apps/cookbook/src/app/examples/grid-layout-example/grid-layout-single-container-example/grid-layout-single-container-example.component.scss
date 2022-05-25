@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 @use '~@kirbydesign/core/src/scss/utils';
 
 /* Configure grid properties */
@@ -30,7 +32,7 @@ $gap: utils.size('m');
   }
 
   .third-at-desktop-up {
-    grid-column: span ($columns / 3);
+    grid-column: span math.div($columns, 3);
   }
 }
 
