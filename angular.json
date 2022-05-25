@@ -2,47 +2,6 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "projects": {
-    "designsystem": {
-      "projectType": "library",
-      "root": "libs/designsystem",
-      "sourceRoot": "libs/designsystem/src",
-      "prefix": "kirby",
-      "architect": {
-        "build": {
-          "builder": "@nrwl/angular:package",
-          "options": {
-            "tsConfig": "libs/designsystem/tsconfig.lib.json",
-            "project": "libs/designsystem/ng-package.json",
-            "updateBuildableProjectDepsInPackageJson": false
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/designsystem/tsconfig.lib.json",
-              "libs/designsystem/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/designsystem/**/*"]
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "libs/designsystem/src/test.ts",
-            "tsConfig": "libs/designsystem/tsconfig.spec.json",
-            "karmaConfig": "libs/designsystem/karma.conf.js",
-            "styles": ["libs/designsystem/src/lib/testing/styles.scss"]
-          },
-          "outputs": ["coverage/libs/designsystem"]
-        }
-      },
-      "schematics": {
-        "@nrwl/angular:component": {
-          "styleext": "scss"
-        }
-      }
-    },
     "cookbook": {
       "projectType": "application",
       "schematics": {
@@ -144,13 +103,6 @@
             "browserTarget": "cookbook:build"
           }
         },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["apps/cookbook/tsconfig.app.json", "apps/cookbook/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!apps/cookbook/**/*"]
-          }
-        },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
@@ -164,20 +116,40 @@
           },
           "outputs": ["coverage/apps/cookbook"]
         }
-      }
-    }
-  },
-  "cli": {
-    "defaultCollection": "@nrwl/angular",
-    "analytics": false
-  },
-  "schematics": {
-    "@nrwl/angular:application": {
-      "unitTestRunner": "karma"
+      },
+      "tags": []
     },
-    "@nrwl/angular:library": {
-      "unitTestRunner": "karma"
+    "designsystem": {
+      "projectType": "library",
+      "root": "libs/designsystem",
+      "sourceRoot": "libs/designsystem/src",
+      "prefix": "kirby",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/designsystem/tsconfig.lib.json",
+            "project": "libs/designsystem/ng-package.json",
+            "updateBuildableProjectDepsInPackageJson": false
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/designsystem/src/test.ts",
+            "tsConfig": "libs/designsystem/tsconfig.spec.json",
+            "karmaConfig": "libs/designsystem/karma.conf.js",
+            "styles": ["libs/designsystem/src/lib/testing/styles.scss"]
+          },
+          "outputs": ["coverage/libs/designsystem"]
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      },
+      "tags": []
     }
-  },
-  "defaultProject": "designsystem"
+  }
 }

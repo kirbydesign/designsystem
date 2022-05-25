@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import exampleHtml from '../../examples/divider-example/divider-example.component.html?raw';
+
 @Component({
   selector: 'cookbook-divider-showcase',
   templateUrl: './divider-showcase.component.html',
@@ -9,8 +11,7 @@ export class DividerShowcaseComponent {
   themeColor = 'white';
   hasMargin = false;
 
-  exampleHtml: string =
-    require('!raw-loader!../../examples/divider-example/divider-example.component.html').default;
+  exampleHtml = exampleHtml;
 
   onThemeChange(themeColor) {
     this.themeColor = themeColor;

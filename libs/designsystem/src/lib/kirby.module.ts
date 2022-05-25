@@ -194,7 +194,6 @@ export interface KirbyConfig {
   ],
   declarations: declarations,
   providers: providers,
-  entryComponents: entryComponents,
   exports: exports,
 })
 export class KirbyModule {

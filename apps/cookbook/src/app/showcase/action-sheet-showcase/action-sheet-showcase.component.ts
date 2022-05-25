@@ -1,15 +1,14 @@
 import { Component } from '@angular/core';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
+import exampleHtml from '../../examples/action-sheet-example/action-sheet-example.component.html?raw';
 @Component({
   selector: 'cookbook-action-sheet-showcase',
   templateUrl: './action-sheet-showcase.component.html',
   preserveWhitespaces: true,
 })
 export class ActionSheetShowcaseComponent {
-  exampleHtml: string =
-    require('!raw-loader!../../examples/action-sheet-example/action-sheet-example.component.html')
-      .default;
+  exampleHtml = exampleHtml;
   properties: ApiDescriptionProperty[] = [
     {
       name: 'header',
