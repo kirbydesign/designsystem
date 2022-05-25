@@ -49,6 +49,8 @@ ion-segment {
   border-radius: utils.$border-radius-round;
 
   kirby-badge {
+    // 0 width here allows us to position the badge with top/right properties relative to the
+    // segment-button but without taking up horizontal space in the segmented control
     width: 0;
   }
 }
