@@ -5,8 +5,8 @@
   (ionChange)="onSegmentSelect($event.detail.value)"
   (click)="preventWrapperClick($event)"
 >
-  <div *ngFor="let item of items" class="segment-btn-wrapper">
-    <ion-segment-button [value]="item.id">{{ item.text }}</ion-segment-button>
+  <ng-container *ngFor="let item of items">
+    <ion-segment-button [value]="item.id">{{ item.text }} </ion-segment-button>
     <kirby-badge
       *ngIf="item.badge"
       role="text"
@@ -26,7 +26,7 @@
         {{ item.badge.content }}
       </ng-template>
     </kirby-badge>
-  </div>
+  </ng-container>
 </ion-segment>
 
 <ng-container *ngIf="mode === 'chip' || mode === 'compactChip'">
