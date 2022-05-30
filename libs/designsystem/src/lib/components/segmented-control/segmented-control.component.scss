@@ -82,6 +82,7 @@ ion-segment-button {
   --margin-top: 0;
 
   min-height: utils.size('xl');
+  min-width: fit-content;
   font-weight: utils.font-weight('normal');
   font-size: utils.font-size('s');
   text-transform: none;
