@@ -78,7 +78,7 @@ export class ModalWrapperComponent
   private ionTitleElement: ElementRef<HTMLIonTitleElement>;
   @ViewChild(RouterOutlet, { static: true }) private routerOutlet: RouterOutlet;
 
-  @ViewChild('contentTitle', { static: false, read: ElementRef })
+  @ViewChild('contentTitle', { read: ElementRef })
   private contentTitleElement: ElementRef<HTMLElement>;
 
   private keyboardVisible = false;
