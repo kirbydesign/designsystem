@@ -9,7 +9,11 @@ import {
   Optional,
 } from '@angular/core';
 
-import { ModalElementsAdvertiser } from '../services/modal.interfaces';
+import {
+  ModalElement,
+  ModalElementsAdvertiser,
+  ModalElementType,
+} from '../services/modal.interfaces';
 
 @Component({
   selector: 'kirby-modal-footer',
@@ -17,7 +21,7 @@ import { ModalElementsAdvertiser } from '../services/modal.interfaces';
   styleUrls: ['./modal-footer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ModalFooterComponent implements AfterViewInit, OnDestroy {
+export class ModalFooterComponent extends ModalElement {
   @HostBinding('class.snap-to-keyboard')
   @Input()
   snapToKeyboard = false;
@@ -26,24 +30,10 @@ export class ModalFooterComponent implements AfterViewInit, OnDestroy {
   @Input()
   type: 'inline' | 'fixed' = 'fixed';
 
-  private get isContainedInModal() {
-    return this.modalElementsAdvertiser !== null;
-  }
-
   constructor(
-    private elementRef: ElementRef<HTMLElement>,
-    @Optional() private modalElementsAdvertiser: ModalElementsAdvertiser
-  ) {}
-
-  ngAfterViewInit() {
-    if (this.isContainedInModal) {
-      this.modalElementsAdvertiser.addFooter(this.elementRef);
-    }
-  }
-
-  ngOnDestroy() {
-    if (this.isContainedInModal) {
-      this.modalElementsAdvertiser.removeFooter(this.elementRef);
-    }
+    elementRef: ElementRef<HTMLElement>,
+    @Optional() modalElementsAdvertiser: ModalElementsAdvertiser
+  ) {
+    super(ModalElementType.FOOTER, elementRef, modalElementsAdvertiser);
   }
 }

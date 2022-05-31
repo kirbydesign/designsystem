@@ -30,7 +30,7 @@ import { WindowRef } from '../../../types/window-ref';
 import { ButtonComponent } from '../../button/button.component';
 import { ResizeObserverService } from '../../shared/resize-observer/resize-observer.service';
 import { ResizeObserverEntry } from '../../shared/resize-observer/types/resize-observer-entry';
-import { Modal, ModalElementsAdvertiser } from '../services/modal.interfaces';
+import { Modal, ModalElementsAdvertiser, ModalElementType } from '../services/modal.interfaces';
 
 import { ModalConfig } from './config/modal-config';
 import { COMPONENT_PROPS } from './config/modal-config.helper';
@@ -44,7 +44,9 @@ import { COMPONENT_PROPS } from './config/modal-config.helper';
     { provide: ModalElementsAdvertiser, useExisting: ModalWrapperComponent },
   ],
 })
-export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDestroy {
+export class ModalWrapperComponent
+  implements Modal, AfterViewInit, OnInit, OnDestroy, ModalElementsAdvertiser
+{
   @HostBinding('class.collapsible-title')
   get _hasCollapsibleTitle() {
     return !!this.config?.collapseTitle;
@@ -141,7 +143,27 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
 
   private currentFooter: HTMLElement | null = null;
 
-  addFooter(footerElementRef: ElementRef<HTMLElement>) {
+  public addModalElement(type: ModalElementType, modalElement: ElementRef<HTMLElement>) {
+    const addModalElementFn = {
+      [ModalElementType.FOOTER]: () => this.addFooter(modalElement),
+      [ModalElementType.TITLE]: () => this.addTitle(modalElement),
+      [ModalElementType.PAGE_PROGRESS]: () => this.addPageProgress(modalElement),
+    }[type];
+
+    addModalElementFn();
+  }
+
+  public removeModalElement(type: ModalElementType, modalElement: ElementRef<HTMLElement>) {
+    const removeModalElementFn = {
+      [ModalElementType.FOOTER]: () => this.removeFooter(modalElement),
+      [ModalElementType.TITLE]: () => this.removeTitle(modalElement),
+      [ModalElementType.PAGE_PROGRESS]: () => this.removePageProgress(modalElement),
+    }[type];
+
+    removeModalElementFn();
+  }
+
+  private addFooter(footerElementRef: ElementRef<HTMLElement>) {
     // Move the footer next to ion-content
     this.moveChild(footerElementRef, this.elementRef);
 
@@ -156,20 +178,20 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     this.currentFooter = footerElementRef.nativeElement;
   }
 
-  removeFooter(footerElementRef: ElementRef<HTMLElement>) {
+  private removeFooter(footerElementRef: ElementRef<HTMLElement>) {
     this.removeChild(footerElementRef);
     this.currentFooter = null;
   }
 
-  addPageProgress(pageProgressElementRef: ElementRef<HTMLElement>) {
+  private addPageProgress(pageProgressElementRef: ElementRef<HTMLElement>) {
     this.moveChild(pageProgressElementRef, this.ionToolbarElement);
   }
 
-  removePageProgress(pageProgressElementRef: ElementRef<HTMLElement>) {
+  private removePageProgress(pageProgressElementRef: ElementRef<HTMLElement>) {
     this.removeChild(pageProgressElementRef);
   }
 
-  addTitle(titleElementRef: ElementRef<HTMLElement>) {
+  private addTitle(titleElementRef: ElementRef<HTMLElement>) {
     this.moveChild(titleElementRef, this.ionTitleElement);
     // If title is collapsible append it to content area; required by ionic implementation.
     if (this._hasCollapsibleTitle) {
@@ -184,7 +206,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     }
   }
 
-  removeTitle(titleElementRef: ElementRef<HTMLElement>) {
+  private removeTitle(titleElementRef: ElementRef<HTMLElement>) {
     this.removeChild(titleElementRef);
     if (this._hasCollapsibleTitle) {
       const kirbyPageTitleElement: HTMLElement =
