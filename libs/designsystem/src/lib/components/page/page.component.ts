@@ -35,7 +35,7 @@ import { WindowRef } from '../../types/window-ref';
 import { ModalWrapperComponent } from '../modal/modal-wrapper/modal-wrapper.component';
 import { ModalNavigationService } from '../modal/services/modal-navigation.service';
 import {
-  ModalElement,
+  ModalElementComponent,
   ModalElementsAdvertiser,
   ModalElementType,
 } from '../modal/services/modal.interfaces';
@@ -107,7 +107,7 @@ export class PageContentDirective {
   template: ` <ng-content></ng-content> `,
   styles: [':host {display: flex}'],
 })
-export class PageProgressComponent extends ModalElement implements OnInit {
+export class PageProgressComponent extends ModalElementComponent implements OnInit {
   // TODO: Find alternative implementation, which aligns with future page configuration / consumption
   // This implementation was chosen over expanding `moveChild` method in component wrapper with yet another scenario
   @HostBinding('attr.slot') slot = 'start';
@@ -130,7 +130,7 @@ export class PageProgressComponent extends ModalElement implements OnInit {
   selector: 'kirby-page-title',
   template: ` <ng-content></ng-content> `,
 })
-export class PageTitleComponent extends ModalElement {
+export class PageTitleComponent extends ModalElementComponent {
   constructor(
     elementRef: ElementRef<HTMLElement>,
     @Optional() modalElementsAdvertiser: ModalElementsAdvertiser

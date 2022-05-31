@@ -1,4 +1,4 @@
-import { AfterViewInit, ElementRef, OnDestroy, OnInit, Optional } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, Optional } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { KirbyAnimation } from '../../../animation/kirby-animation';
@@ -38,7 +38,8 @@ export abstract class ModalElementsAdvertiser {
   removeModalElement: (type: ModalElementType, elementRef: ElementRef<HTMLElement>) => void;
 }
 
-export abstract class ModalElement implements AfterViewInit, OnDestroy {
+@Component({ template: '' })
+export abstract class ModalElementComponent implements AfterViewInit, OnDestroy {
   private get isContainedInModal() {
     return this.modalElementsAdvertiser !== null;
   }

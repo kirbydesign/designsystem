@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 
 import {
-  ModalElement,
+  ModalElementComponent,
   ModalElementsAdvertiser,
   ModalElementType,
 } from '../services/modal.interfaces';
@@ -21,7 +21,7 @@ import {
   styleUrls: ['./modal-footer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ModalFooterComponent extends ModalElement {
+export class ModalFooterComponent extends ModalElementComponent {
   @HostBinding('class.snap-to-keyboard')
   @Input()
   snapToKeyboard = false;
