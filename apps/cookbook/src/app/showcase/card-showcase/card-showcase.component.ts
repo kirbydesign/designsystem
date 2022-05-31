@@ -4,14 +4,15 @@ import {
   ApiDescriptionPropertyColumns,
 } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
+import exampleHtml from '../../examples/card-example/card-example.component.html?raw';
+
 @Component({
   selector: 'cookbook-card-showcase',
   templateUrl: './card-showcase.component.html',
   styleUrls: ['./card-showcase.component.scss'],
 })
 export class CardShowcaseComponent {
-  exampleHtml: string =
-    require('!raw-loader!../../examples/card-example/card-example.component.html').default;
+  exampleHtml = exampleHtml;
   properties: ApiDescriptionProperty[] = [
     {
       name: 'title',
