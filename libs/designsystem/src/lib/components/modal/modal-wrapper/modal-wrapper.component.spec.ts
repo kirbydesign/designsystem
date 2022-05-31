@@ -23,7 +23,7 @@ import {
   TitleEmbeddedComponent,
 } from './modal-wrapper.testbuilder';
 
-fdescribe('ModalWrapperComponent', () => {
+describe('ModalWrapperComponent', () => {
   const createComponent = createComponentFactory({
     component: ModalWrapperComponent,
     imports: [RouterTestingModule],
@@ -50,10 +50,10 @@ fdescribe('ModalWrapperComponent', () => {
         IconComponent,
         ButtonComponent,
         IonButtons,
-        ModalFooterComponent
+        ModalFooterComponent,
+        PageTitleComponent
       ),
       /* TODO: split tests that break down when these are mocked out into integration tests */
-      PageTitleComponent,
       PageProgressComponent,
     ],
   });
@@ -116,35 +116,20 @@ fdescribe('ModalWrapperComponent', () => {
       });
       expect(ionContentElement).toHaveComputedStyle({ '--padding-top': '0px' });
     });
-
-    it('should place the title in both the content & the header', () => {
-      const contentTitle = ionContentElement.querySelector('kirby-page-title').innerHTML;
-      const headerTitle = ionTitleElement.querySelector('kirby-page-title').innerHTML;
-
-      expect(contentTitle).toBe(testTitle);
-      expect(headerTitle).toBe(testTitle);
-    });
   });
 
   describe('with slotted kirby-page-title', () => {
-    let ionTitle: HTMLIonTitleElement;
-
     beforeEach(() => {
       spectator = modalWrapperTestBuilder
         .title('Test title')
         .component(TitleEmbeddedComponent)
         .flavor('modal')
         .build();
-      ionTitle = spectator.query('ion-header kirby-page-title');
     });
 
     afterEach(() => {
       // Ensure any observers are destroyed:
       spectator.fixture.destroy();
-    });
-
-    it('should render', () => {
-      expect(ionTitle.innerHTML).toEqual('Test title');
     });
 
     it('should have css class "drawer" when drawer flavor is used', () => {
@@ -763,7 +748,7 @@ fdescribe('ModalWrapperComponent', () => {
 ### Footer integration tests
 ###
 */
-fdescribe('ModalWrapperComponent + ModalFooterComponent', () => {
+describe('ModalWrapperComponent + ModalFooterComponent', () => {
   const createComponent = createComponentFactory({
     component: ModalWrapperComponent,
     imports: [RouterTestingModule],
@@ -962,6 +947,69 @@ fdescribe('ModalWrapperComponent + ModalFooterComponent', () => {
           '--keyboard-offset': `${keyboardOverlap}px`,
         });
       });
+    });
+  });
+});
+
+/* 
+###
+### PageTitleComponent integration tests
+### 
+*/
+describe('ModalWrapperComponent + PageTitleComponent', () => {
+  const createComponent = createComponentFactory({
+    component: ModalWrapperComponent,
+    imports: [RouterTestingModule],
+    entryComponents: [TitleEmbeddedComponent],
+    declarations: [MockComponents(IonHeader, IonTitle, IonContent), PageTitleComponent],
+  });
+
+  let modalWrapperTestBuilder: ModalWrapperTestBuilder;
+  let spectator: Spectator<ModalWrapperComponent>;
+
+  const testTitle = 'This is a long test title';
+
+  beforeEach(() => {
+    modalWrapperTestBuilder = new ModalWrapperTestBuilder(createComponent)
+      .flavor('modal')
+      .title(testTitle)
+      .component(TitleEmbeddedComponent);
+  });
+
+  afterEach(() => {
+    spectator.fixture.destroy();
+  });
+
+  describe("when 'collapseTitle' is enabled", () => {
+    let ionContentElement: HTMLIonContentElement;
+    let ionTitleElement: HTMLIonTitleElement;
+
+    beforeEach(() => {
+      spectator = modalWrapperTestBuilder.collapsibleTitle(true).build();
+
+      ionContentElement = spectator.query('ion-content');
+      ionTitleElement = spectator.query('ion-title');
+    });
+
+    it('should place the title in both the content & the header', () => {
+      const contentTitle = ionContentElement.querySelector('kirby-page-title').innerHTML;
+      const headerTitle = ionTitleElement.querySelector('kirby-page-title').innerHTML;
+
+      expect(contentTitle).toBe(testTitle);
+      expect(headerTitle).toBe(testTitle);
+    });
+  });
+
+  describe('with slotted kirby-page-title', () => {
+    let ionTitle: HTMLIonTitleElement;
+
+    beforeEach(() => {
+      spectator = modalWrapperTestBuilder.build();
+      ionTitle = spectator.query('ion-header kirby-page-title');
+    });
+
+    it('should render', () => {
+      expect(ionTitle.innerHTML).toEqual(testTitle);
     });
   });
 });
