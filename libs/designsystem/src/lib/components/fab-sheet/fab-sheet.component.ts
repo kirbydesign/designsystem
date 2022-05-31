@@ -1,7 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import {
   AfterContentInit,
-  AfterViewInit,
   Component,
   ContentChild,
   ElementRef,
@@ -11,10 +10,8 @@ import {
   Renderer2,
   ViewChild,
 } from '@angular/core';
-import { IonFab, IonFabButton, IonIcon } from '@ionic/angular';
+import { IonFab, IonFabButton } from '@ionic/angular';
 
-import { Icon } from '../icon/icon-settings';
-import { kirbyIconSettings } from '../icon/kirby-icon-settings';
 import { ActionSheetComponent } from '../modal/action-sheet/action-sheet.component';
 
 @Component({
@@ -22,7 +19,7 @@ import { ActionSheetComponent } from '../modal/action-sheet/action-sheet.compone
   templateUrl: './fab-sheet.component.html',
   styleUrls: ['./fab-sheet.component.scss'],
 })
-export class FabSheetComponent implements AfterContentInit, AfterViewInit {
+export class FabSheetComponent implements AfterContentInit {
   @Input() disabled: boolean = false;
   @Input() horizontalAlignment: 'left' | 'center' | 'right' = 'right';
 
@@ -44,34 +41,6 @@ export class FabSheetComponent implements AfterContentInit, AfterViewInit {
   ionFabButton: ElementRef<HTMLElement>;
 
   constructor(private renderer: Renderer2, @Inject(DOCUMENT) private document: any) {}
-
-  ngAfterViewInit(): void {
-    const kirbyCloseIcon = kirbyIconSettings.icons.find((icon) => icon.name === 'close');
-    this.setCloseIcon(kirbyCloseIcon);
-  }
-
-  private setCloseIcon(kirbyCloseIcon: Icon, retryCount = 0) {
-    const maxRetryCount = 20;
-    const retryDelayInMs = 20;
-    const fabButtonElement = this.ionFabButton.nativeElement;
-    if (!fabButtonElement || !kirbyCloseIcon || retryCount >= maxRetryCount) {
-      return;
-    }
-    if (fabButtonElement.shadowRoot && fabButtonElement.shadowRoot.innerHTML) {
-      const closeIcon = fabButtonElement.shadowRoot.querySelector('.close-icon ion-icon');
-      if (closeIcon) {
-        const closeIconSvgLoaded = closeIcon.shadowRoot.querySelector('.icon-inner svg');
-        // prettier-ignore
-        const ionCloseIcon = (closeIcon as unknown) as IonIcon;
-        if (ionCloseIcon && closeIconSvgLoaded) {
-          ionCloseIcon.src = kirbyCloseIcon.svg;
-          return;
-        }
-      }
-    }
-    retryCount++;
-    setTimeout(() => this.setCloseIcon(kirbyCloseIcon, retryCount), retryDelayInMs);
-  }
 
   ngAfterContentInit(): void {
     if (this.actionSheet) {
