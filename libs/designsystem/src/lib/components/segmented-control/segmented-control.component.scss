@@ -69,6 +69,7 @@ ion-segment-button {
   --color-checked: #{utils.get-color('black-contrast')};
   --color-hover: #{utils.get-color('black-tint')};
   --indicator-box-shadow: none;
+  --indicator-transform: none;
   --padding-start: #{utils.size('m')};
   --padding-end: #{utils.size('m')};
   --margin-bottom: 0;
