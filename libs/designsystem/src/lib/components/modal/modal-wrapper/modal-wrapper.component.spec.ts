@@ -51,10 +51,10 @@ describe('ModalWrapperComponent', () => {
         ButtonComponent,
         IonButtons,
         ModalFooterComponent,
-        PageTitleComponent
+        PageTitleComponent,
+        PageProgressComponent
       ),
       /* TODO: split tests that break down when these are mocked out into integration tests */
-      PageProgressComponent,
     ],
   });
 
@@ -442,83 +442,6 @@ describe('ModalWrapperComponent', () => {
       const ionContent: IonContent = spectator.query(IonContent);
       spectator.component.scrollDisabled = true;
       expect(ionContent.scrollY).toBeFalse();
-    });
-  });
-
-  describe('with embedded page progress component', () => {
-    describe('with static page progress', () => {
-      beforeEach(() => {
-        spectator = modalWrapperTestBuilder.flavor('modal').withStaticPageProgress().build();
-        spectator.detectComponentChanges();
-      });
-
-      afterEach(() => {
-        // Ensure any observers are destroyed:
-        spectator.fixture.destroy();
-      });
-
-      it('should move embedded page progress to wrapper component', () => {
-        const ionContentElement = spectator.query('ion-content');
-        const ionToolbarElement = spectator.query('ion-toolbar');
-        const embeddedComponentElement = ionContentElement.firstElementChild;
-        const embeddedPageProgress = embeddedComponentElement.querySelector('kirby-page-progress');
-        const pageProgressAsIonToolbarChild =
-          ionToolbarElement.querySelector('kirby-page-progress');
-
-        expect(embeddedPageProgress).toBeNull();
-        expect(pageProgressAsIonToolbarChild).not.toBeNull();
-      });
-    });
-
-    describe('with dynamic page progress', () => {
-      beforeEach(() => {
-        spectator = modalWrapperTestBuilder.flavor('modal').withDynamicPageProgress().build();
-        spectator.detectComponentChanges();
-      });
-
-      afterEach(() => {
-        // Ensure any observers are destroyed:
-        spectator.fixture.destroy();
-      });
-
-      it('should move embedded page progress to wrapper component when rendered', async () => {
-        const pageProgressContent = spectator.element.querySelector('kirby-page-progress');
-        expect(pageProgressContent).toBeNull();
-
-        const embeddedComponent = spectator.query(DynamicPageProgressEmbeddedComponent);
-        embeddedComponent.showPageProgress = true;
-        spectator.detectChanges();
-        await TestHelper.waitForResizeObserver();
-
-        const ionContentElement = spectator.query('ion-content');
-        const ionToolbarElement = spectator.query('ion-toolbar');
-        const embeddedComponentElement = ionContentElement.firstElementChild;
-        const embeddedPageProgress = embeddedComponentElement.querySelector('kirby-page-progress');
-        const pageProgressAsIonToolbarChild =
-          ionToolbarElement.querySelector('kirby-page-progress');
-        expect(embeddedPageProgress).toBeNull();
-        expect(pageProgressAsIonToolbarChild).not.toBeNull();
-      });
-
-      it('should remove embedded page progress content from wrapper component when not rendered', async () => {
-        let pageProgress = spectator.element.querySelector('kirby-page-progress');
-        expect(pageProgress).toBeNull();
-
-        const embeddedComponent = spectator.query(DynamicPageProgressEmbeddedComponent);
-        embeddedComponent.showPageProgress = true;
-        spectator.detectChanges();
-        await TestHelper.waitForResizeObserver();
-
-        const ionToolbarElement = spectator.query('ion-toolbar');
-        let pageProgressAsIonToolbarChild = ionToolbarElement.querySelector('kirby-page-progress');
-        expect(pageProgressAsIonToolbarChild).not.toBeNull();
-
-        embeddedComponent.showPageProgress = false;
-        spectator.detectChanges();
-
-        pageProgressAsIonToolbarChild = ionToolbarElement.querySelector('kirby-page-progress');
-        expect(pageProgressAsIonToolbarChild).toBeNull();
-      });
     });
   });
 
@@ -1010,6 +933,94 @@ describe('ModalWrapperComponent + PageTitleComponent', () => {
 
     it('should render', () => {
       expect(ionTitle.innerHTML).toEqual(testTitle);
+    });
+  });
+});
+
+describe('ModalWrapperComponent + PageProgressComponent', () => {
+  const createComponent = createComponentFactory({
+    component: ModalWrapperComponent,
+    imports: [RouterTestingModule],
+    entryComponents: [StaticPageProgressEmbeddedComponent, DynamicPageProgressEmbeddedComponent],
+    declarations: [MockComponents(IonHeader, IonToolbar, IonContent), PageProgressComponent],
+  });
+
+  let modalWrapperTestBuilder: ModalWrapperTestBuilder;
+  let spectator: Spectator<ModalWrapperComponent>;
+
+  beforeEach(() => {
+    modalWrapperTestBuilder = new ModalWrapperTestBuilder(createComponent).flavor('modal');
+  });
+
+  afterEach(() => {
+    // Ensure any observers are destroyed:
+    spectator.fixture.destroy();
+  });
+
+  describe('with embedded page progress component', () => {
+    describe('with static page progress', () => {
+      beforeEach(() => {
+        spectator = modalWrapperTestBuilder.withStaticPageProgress().build();
+        spectator.detectComponentChanges();
+      });
+
+      it('should move embedded page progress to wrapper component', () => {
+        const ionContentElement = spectator.query('ion-content');
+        const ionToolbarElement = spectator.query('ion-toolbar');
+        const embeddedComponentElement = ionContentElement.firstElementChild;
+        const embeddedPageProgress = embeddedComponentElement.querySelector('kirby-page-progress');
+        const pageProgressAsIonToolbarChild =
+          ionToolbarElement.querySelector('kirby-page-progress');
+
+        expect(embeddedPageProgress).toBeNull();
+        expect(pageProgressAsIonToolbarChild).not.toBeNull();
+      });
+    });
+
+    describe('with dynamic page progress', () => {
+      beforeEach(() => {
+        spectator = modalWrapperTestBuilder.withDynamicPageProgress().build();
+        spectator.detectComponentChanges();
+      });
+
+      it('should move embedded page progress to wrapper component when rendered', async () => {
+        const pageProgressContent = spectator.element.querySelector('kirby-page-progress');
+        expect(pageProgressContent).toBeNull();
+
+        const embeddedComponent = spectator.query(DynamicPageProgressEmbeddedComponent);
+        embeddedComponent.showPageProgress = true;
+        spectator.detectChanges();
+        await TestHelper.waitForResizeObserver();
+
+        const ionContentElement = spectator.query('ion-content');
+        const ionToolbarElement = spectator.query('ion-toolbar');
+        const embeddedComponentElement = ionContentElement.firstElementChild;
+        const embeddedPageProgress = embeddedComponentElement.querySelector('kirby-page-progress');
+        const pageProgressAsIonToolbarChild =
+          ionToolbarElement.querySelector('kirby-page-progress');
+        expect(embeddedPageProgress).toBeNull();
+        expect(pageProgressAsIonToolbarChild).not.toBeNull();
+      });
+
+      it('should remove embedded page progress content from wrapper component when not rendered', async () => {
+        let pageProgress = spectator.element.querySelector('kirby-page-progress');
+        expect(pageProgress).toBeNull();
+
+        const embeddedComponent = spectator.query(DynamicPageProgressEmbeddedComponent);
+        embeddedComponent.showPageProgress = true;
+        spectator.detectChanges();
+        await TestHelper.waitForResizeObserver();
+
+        const ionToolbarElement = spectator.query('ion-toolbar');
+        let pageProgressAsIonToolbarChild = ionToolbarElement.querySelector('kirby-page-progress');
+        expect(pageProgressAsIonToolbarChild).not.toBeNull();
+
+        embeddedComponent.showPageProgress = false;
+        spectator.detectChanges();
+
+        pageProgressAsIonToolbarChild = ionToolbarElement.querySelector('kirby-page-progress');
+        expect(pageProgressAsIonToolbarChild).toBeNull();
+      });
     });
   });
 });
