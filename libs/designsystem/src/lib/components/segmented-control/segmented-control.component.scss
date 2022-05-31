@@ -6,8 +6,9 @@
   user-select: none;
 
   --kirby-badge-elevation: #{utils.get-elevation(2)};
+  --kirby-badge-position: absolute;
   --kirby-badge-top: -#{utils.size('xxs')};
-  --kirby-badge-right: #{utils.size('m')};
+  --kirby-badge-right: #{utils.size('xxs')};
   --kirby-badge-z-index: #{utils.z('segment-badge')};
 
   &.sm {
@@ -47,12 +48,6 @@ ion-segment {
   overflow: visible; // Ensures the badge is not cut off
   contain: unset; // Ensures the badge is not cut off
   border-radius: utils.$border-radius-round;
-
-  kirby-badge {
-    // 0 width here allows us to position the badge with top/right properties relative to the
-    // segment-button but without taking up horizontal space in the segmented control
-    width: 0;
-  }
 }
 
 ion-segment-button {
@@ -107,4 +102,8 @@ ion-segment-button {
   &::part(indicator) {
     padding-inline: 0;
   }
+}
+
+.badge-container {
+  position: relative;
 }
