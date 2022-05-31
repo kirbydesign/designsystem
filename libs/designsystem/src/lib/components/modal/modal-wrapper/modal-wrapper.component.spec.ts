@@ -54,7 +54,6 @@ describe('ModalWrapperComponent', () => {
         PageTitleComponent,
         PageProgressComponent
       ),
-      /* TODO: split tests that break down when these are mocked out into integration tests */
     ],
   });
 
