@@ -20,6 +20,10 @@
 :host(.md) {
   height: utils.size('xl');
   border-radius: utils.size('m');
+
+  & ~ .date-mask {
+    line-height: 10px; // MAGIC number. Please advise whether it could be taken from a relevant variable
+  }
 }
 
 /* clean-css ignore:start */
