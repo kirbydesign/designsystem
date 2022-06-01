@@ -118,7 +118,6 @@
   @if meta.type-of($number) == 'number' and not math.is-unitless($number) {
     @return $number / ($number * 0 + 1);
   }
-
   @return $number;
 }
 

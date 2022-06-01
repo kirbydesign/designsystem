@@ -92,6 +92,15 @@ export class SegmentedControlComponent {
     this.isSmallSize = size === 'sm';
   }
 
+  private _disableChangeOnSwipe: boolean = false;
+  get disableChangeOnSwipe(): boolean {
+    return this._disableChangeOnSwipe;
+  }
+
+  @Input() set disableChangeOnSwipe(value: boolean) {
+    this._disableChangeOnSwipe = value;
+  }
+
   @Output() segmentSelect: EventEmitter<SegmentItem> = new EventEmitter();
 
   onSegmentSelect(selectedId: string) {
