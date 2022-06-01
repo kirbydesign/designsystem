@@ -23,5 +23,9 @@
     "@angular/router": ">=9.0.0",
     "rxjs": ">=6.5.3",
     "zone.js": ">=0.10.2"
+  },
+  "exports": {
+    "./scss/global-styles": "./scss/_global-styles.scss",
+    "./scss/utils": "./scss/_utils.scss"
   }
 }
