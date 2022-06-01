@@ -1,4 +1,3 @@
-import { compileNgModule } from '@angular/compiler';
 import {
   AfterContentChecked,
   AfterViewInit,
