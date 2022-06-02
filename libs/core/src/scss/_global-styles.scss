@@ -51,10 +51,6 @@ ion-modal::part(backdrop) {
 ion-modal.kirby-overlay {
   position: fixed;
 
-  .modal-shadow {
-    display: none;
-  }
-
   &.kirby-modal {
     box-sizing: border-box;
 
@@ -165,32 +161,24 @@ ion-modal.kirby-overlay {
     }
   }
 
-  &.kirby-action-sheet {
+  &.kirby-action-sheet::part(content) {
     --background: transparent;
     --width: 100%;
     --height: 100%;
 
-    .modal-wrapper {
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
-      pointer-events: none;
+    pointer-events: none;
 
-      --max-width: auto;
-      --max-height: auto;
-    }
+    --box-shadow: none;
   }
 
-  &.kirby-alert {
+  &.kirby-alert::part(content) {
     --background: #{utils.get-color('background-color')};
     --border-radius: #{utils.$border-radius};
     --box-shadow: #{utils.get-elevation(8)};
+    --max-width: #{utils.$alert-max-width};
+    --height: auto;
 
-    .modal-wrapper {
-      max-width: utils.$alert-max-width;
-      height: auto;
-      text-align: center;
-    }
+    text-align: center;
   }
 }
 
