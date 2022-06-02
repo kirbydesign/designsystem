@@ -7,7 +7,6 @@ import { ModalCompactWrapperComponent } from '../modal-wrapper/compact/modal-com
 import { ModalConfig, ModalFlavor, ModalSize } from '../modal-wrapper/config/modal-config';
 import { ModalWrapperComponent } from '../modal-wrapper/modal-wrapper.component';
 
-import { ModalAnimationBuilderService } from './modal-animation-builder.service';
 import { Overlay } from './modal.interfaces';
 
 @Injectable()
@@ -16,24 +15,11 @@ export class ModalHelper {
   // forRoot()/singleton services has been solved:
   private static presentingElement: HTMLElement = undefined;
 
-  constructor(
-    private ionicModalController: ModalController,
-    private modalAnimationBuilder: ModalAnimationBuilderService,
-    private windowRef: WindowRef
-  ) {}
+  constructor(private ionicModalController: ModalController, private windowRef: WindowRef) {}
 
   public async showModalWindow(config: ModalConfig): Promise<Overlay> {
     config.flavor = config.flavor || 'modal';
     const modalPresentingElement = await this.getPresentingElement(config.flavor);
-
-    let currentBackdrop: HTMLIonBackdropElement;
-    const topMostModal = await this.ionicModalController.getTop();
-    if (topMostModal) {
-      currentBackdrop = topMostModal.querySelector<HTMLIonBackdropElement>('ion-backdrop');
-    }
-
-    const enterAnimation = this.modalAnimationBuilder.enterAnimation(currentBackdrop);
-    const leaveAnimation = this.modalAnimationBuilder.leaveAnimation(currentBackdrop);
 
     const defaultModalSize: ModalSize = config.flavor === 'modal' ? 'medium' : null;
     const modalSize = config.size || defaultModalSize;
@@ -65,8 +51,6 @@ export class ModalHelper {
       swipeToClose: config.flavor != 'compact',
       presentingElement: modalPresentingElement,
       keyboardClose: false,
-      enterAnimation,
-      leaveAnimation,
     });
 
     if (config.interactWithBackground) {
