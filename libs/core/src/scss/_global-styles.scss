@@ -161,17 +161,18 @@ ion-modal.kirby-overlay {
     }
   }
 
-  &.kirby-action-sheet::part(content) {
+  &.kirby-action-sheet {
     --background: transparent;
     --width: 100%;
     --height: 100%;
-
-    pointer-events: none;
-
     --box-shadow: none;
+
+    &::part(content) {
+      pointer-events: none;
+    }
   }
 
-  &.kirby-alert::part(content) {
+  &.kirby-alert {
     --background: #{utils.get-color('background-color')};
     --border-radius: #{utils.$border-radius};
     --box-shadow: #{utils.get-elevation(8)};
