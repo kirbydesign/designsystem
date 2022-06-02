@@ -30,7 +30,7 @@ The Kirby Cookbook, containing samples, status of components etc. can be accesse
 - [Scripts](#scripts)
 - [Polyfills](#polyfills)
 - [Chart Components](#chart-components)
-- [Contributing](#Contributing)
+- [Contributing](#contributing)
 
 ## Installation
 
