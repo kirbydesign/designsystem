@@ -52,7 +52,21 @@ export class ChartComponent implements AfterViewInit, OnChanges {
 
   constructor(private chartJSService: ChartJSService) {}
 
+  private throwStockDeprecationWarning() {
+    /* 
+    TODO: When `stock` ChartType has been removed - this method can be safely deleted. 
+    See issue: https://github.com/kirbydesign/designsystem/issues/2305 
+    */
+    if (this.type === 'stock') {
+      console.warn(
+        "DEPRECATION WARNING: The 'stock' ChartType will be removed in v7.0.0 of Kirby Designsystem. A new 'kirby-stock-chart' will be introduced in v7.0.0 which can be used as a replacement."
+      );
+    }
+  }
+
   ngAfterViewInit() {
+    this.throwStockDeprecationWarning();
+
     /* 
        A chart is not rendered until it has both a height and a width. 
        If ChartComponent is slotted in an ionic component it will
@@ -127,6 +141,7 @@ export class ChartComponent implements AfterViewInit, OnChanges {
   }
 
   private updateType() {
+    this.throwStockDeprecationWarning();
     this.chartJSService.updateType(this.type, this.customOptions);
   }
 
