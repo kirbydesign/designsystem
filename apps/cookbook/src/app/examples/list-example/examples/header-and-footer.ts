@@ -11,11 +11,11 @@ export const ListWithHeaderAndFooterExampleTemplate = `<kirby-list [items]="item
 
   <!-- BODY -->
   <kirby-item *kirbyListItemTemplate="let item">
-    <kirby-label>
+    <kirby-label direction="horizontal">
       <h3>{{item.title}}</h3>
       <p subtitle>{{item.subTitle}}</p>
     </kirby-label>
-    <kirby-label slot="end">
+    <kirby-label slot="end" direction="horizontal">
       <data [value]="item.amount">{{item.amount}}</data>
       <data [value]="item.detail" detail>{{item.detail}}</data>
     </kirby-label>

@@ -4,15 +4,21 @@
 
 :host {
   &.horizontal ion-label {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-
-    @include utils.slotted(':not(:first-child)') {
-      margin-left: utils.size('xs');
-    }
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    column-gap: 10px;
   }
+
+  // &.horizontal ion-label {
+  //   display: flex;
+  //   flex-direction: row;
+  //   justify-content: space-between;
+  //   align-items: center;
+
+  //   @include utils.slotted(':not(:first-child)') {
+  //     margin-left: utils.size('xs');
+  //   }
+  // }
 }
 
 :host-context(kirby-item) ion-label {
