@@ -14,12 +14,13 @@
     margin: 0;
   }
 
-  height: utils.size('xxxl');
+  // height: utils.size('xxxl');
 }
 
 :host(.md) {
-  height: utils.size('xl');
+  // height: utils.size('xl');
   border-radius: utils.size('m');
+  padding-block: 0.5em;
 }
 
 /* clean-css ignore:start */
@@ -36,6 +37,7 @@
  */
 .date-mask-wrapper {
   position: relative;
+  font-size: 1rem;
 }
 
 :host-context(.date-mask-wrapper) {
@@ -44,11 +46,21 @@
 
 .date-mask {
   font-family: shared.$form-field-input-font-family;
-  font-size: shared.$form-field-input-font-size;
-  line-height: shared.$form-field-input-line-height;
+
+  // font-size: shared.$form-field-input-font-size;
+  font-size: 1em;
+
+  // line-height: shared.$form-field-input-line-height;
+  line-height: 1.5;
   color: var(--kirby-white-contrast);
   position: absolute;
   top: 0;
   left: 0;
-  margin: shared.$form-field-input-padding;
+
+  // margin: shared.$form-field-input-padding;
+  padding: 1em;
+
+  :host(.md) + & {
+    padding-block: 0.5em;
+  }
 }

@@ -32,14 +32,20 @@ $form-field-input-padding: utils.size('s');
   box-sizing: border-box;
   display: block;
   font-family: $form-field-input-font-family;
-  font-size: $form-field-input-font-size;
-  line-height: $form-field-input-line-height;
+
+  // font-size: $form-field-input-font-size;
+  font-size: 1em;
+
+  // line-height: $form-field-input-line-height;
+  line-height: 1.5;
   outline: none;
   margin: 0;
   appearance: none;
   border-radius: utils.size('s');
   box-shadow: utils.get-elevation(2);
-  padding: $form-field-input-padding;
+
+  // padding: $form-field-input-padding;
+  padding: 1em;
   width: 100%;
 
   &:host-context(kirby-item),
