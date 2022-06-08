@@ -81,6 +81,12 @@ export class PageShowcaseComponent {
       description: 'Emitted when leaving the page',
       signature: 'func',
     },
+    {
+      name: 'backButtonClicked',
+      description:
+        'Emitted when the back-button is clicked. When bound, the default back-button click behaviour is disabled.',
+      signature: 'func',
+    },
   ];
 
   layoutColumns: ApiDescriptionPropertyColumns = {
