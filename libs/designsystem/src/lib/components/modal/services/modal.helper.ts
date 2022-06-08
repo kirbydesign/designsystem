@@ -41,7 +41,7 @@ export class ModalHelper {
         'kirby-modal',
         config.flavor === 'drawer' ? 'kirby-drawer' : null,
         config.flavor === 'compact' ? 'kirby-modal-compact' : null,
-        'kirby-modal-' + modalSize,
+        modalSize ? 'kirby-modal-' + modalSize : null,
         config.interactWithBackground ? 'interact-with-background' : null,
         ...customCssClasses,
       ],
