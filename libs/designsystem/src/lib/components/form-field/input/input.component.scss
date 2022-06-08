@@ -1,6 +1,8 @@
 @use '../form-field-inputs.shared' as shared;
 @use '~@kirbydesign/core/src/scss/utils';
 
+$padding-block-size-md: shared.$form-field-input-padding * 0.5;
+
 :host {
   &[type='number'] {
     // fallback
@@ -17,7 +19,7 @@
 
 :host(.md) {
   border-radius: utils.size('m');
-  padding-block: 0.5em;
+  padding-block: $padding-block-size-md;
 }
 
 /* clean-css ignore:start */
@@ -50,6 +52,6 @@
   padding: shared.$form-field-input-padding;
 
   :host(.md) + & {
-    padding-block: 0.5em;
+    padding-block: $padding-block-size-md;
   }
 }
