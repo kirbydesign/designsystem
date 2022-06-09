@@ -33,4 +33,6 @@ export const CHART_ANNOTATIONS_CONFIG: AnnotationTypeRegistry = {
   point: {
     backgroundColor: 'initial',
   },
+  label: { content: () => null },
+  polygon: { backgroundColor: 'initial' },
 };
