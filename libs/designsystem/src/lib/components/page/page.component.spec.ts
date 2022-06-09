@@ -1,6 +1,5 @@
 import { Component, NgZone } from '@angular/core';
 import { fakeAsync, flush, tick } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 import { Router, Routes } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { IonRefresher } from '@ionic/angular';
@@ -12,7 +11,6 @@ import { FitHeadingDirective } from '../../directives/fit-heading/fit-heading.di
 import { TestHelper } from '../../testing/test-helper';
 import { WindowRef } from '../../types/window-ref';
 import { ButtonComponent } from '../button/button.component';
-import { backgroundColor } from '../chart/configs/shared.utils';
 import { ModalNavigationService } from '../modal/services/modal-navigation.service';
 import { TabsComponent } from '../tabs';
 
@@ -109,6 +107,36 @@ describe('PageComponent', () => {
     ionContent = spectator.queryHost('ion-content');
     await TestHelper.whenReady(ionToolbar);
     await TestHelper.whenReady(ionContent);
+  });
+
+  describe('toolbar with dynamic height', () => {
+    it('should be correct height on ios-phone without top-safe-area', async () => {
+      ionToolbar.style.setProperty('--kirby-safe-area-top', '0px');
+      await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
+
+      expect(ionToolbar).toHaveComputedStyle({ height: size('xxxl') });
+    });
+    it('should be correct height on ios-phone with top-safe-area', async () => {
+      ionToolbar.style.setProperty('--kirby-safe-area-top', '33px');
+      await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
+
+      expect(ionToolbar).toHaveComputedStyle({ height: size('xxl') });
+    });
+    it('should be correct height on non-ios-phone', async () => {
+      await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
+
+      expect(ionToolbar).toHaveComputedStyle({ height: size('xxxl') });
+    });
+    it('should be correct height on tablet', async () => {
+      await TestHelper.resizeTestWindow(TestHelper.screensize.tablet);
+
+      expect(ionToolbar).toHaveComputedStyle({ height: size('xxxxl') });
+    });
+    it('should be correct height on desktop', async () => {
+      await TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
+
+      expect(ionToolbar).toHaveComputedStyle({ height: size('xxxxl') });
+    });
   });
 
   describe('having static page action', () => {

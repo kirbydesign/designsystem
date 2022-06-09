@@ -1,5 +1,9 @@
 @use '~@kirbydesign/core/src/scss/utils';
 
+:host {
+  display: contents;
+}
+
 /*
  * Page Header
  */
@@ -23,6 +27,41 @@ ion-toolbar {
   --padding-top: 0;
   --padding-bottom: 0;
 
+  // The toolbar height for iPhone's with a notched display.
+  $toolbar-height-notch: utils.size('xxl');
+
+  // The toolbar height for other displays.
+  $toolbar-height-default: utils.size('xxxl');
+
+  // An iPhone with a ios-safe-area-top exceeding 32px is considered to have notched display.
+  $notch-safe-area-top-trigger: 32px;
+
+  // Notch indicator:
+  // 0px represents FALSE
+  // 1px represents TRUE
+  // IF `--kirby-safe-area-top` is defined _and_ has a value strictly larger than `$notch-safe-area-top-trigger`
+  // THEN `--notch-present` = 1px (a notch _is_ present)
+  // ELSE `--notch-present` = 0px (no notch)
+  --notch-present: clamp(
+    0px,
+    var(--kirby-safe-area-top, 0px) - #{$notch-safe-area-top-trigger},
+    1px
+  );
+
+  // Equivalent to:
+  // IF --notch-present == 1px (i.e. the display _does_ have a notch)
+  // THEN --min-height = $toolbar-height-notch
+  // ELSE --min-height = $toolbar-height-default
+  --min-height: clamp(
+    #{$toolbar-height-notch},
+    (1px - var(--notch-present)) * #{utils.strip-unit($toolbar-height-default)},
+    #{$toolbar-height-default}
+  );
+
+  @include utils.media('>=medium') {
+    --min-height: #{utils.size('xxxxl')};
+  }
+
   box-sizing: border-box;
 
   $button-padding: utils.size('xs');
@@ -38,6 +77,7 @@ ion-toolbar {
 
     padding-left: $button-padding;
     padding-right: $button-padding;
+    border-bottom: 1px solid #{utils.get-color('semi-light')};
   }
 
   /*
@@ -49,6 +89,18 @@ ion-toolbar {
   }
 
   ion-title {
+    // Animation on opacity and a vertical translation with 10px gives visually pleasing experience
+    opacity: 0;
+    transform: translateY(10px);
+    transition-property: opacity, transform;
+    transition-duration: 150ms;
+    transition-timing-function: utils.get-transition-easing('enter-exit');
+
+    &.slide-and-fade-in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     .toolbar-title {
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -166,6 +218,7 @@ ion-toolbar.content-scrolled ion-back-button {
  * Page Content
  */
 ion-content {
+  --padding-top: #{utils.size('xs')};
   --padding-start: var(--page-content-padding-start, #{utils.size('s')});
   --padding-end: var(--page-content-padding-end, #{utils.size('s')});
   --background: #{utils.get-color('background-color')};
