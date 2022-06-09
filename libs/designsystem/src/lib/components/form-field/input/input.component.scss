@@ -1,6 +1,8 @@
 @use '../form-field-inputs.shared' as shared;
 @use '~@kirbydesign/core/src/scss/utils';
 
+$padding-block-size-md: shared.$form-field-input-padding * 0.5;
+
 :host {
   &[type='number'] {
     // fallback
@@ -13,13 +15,11 @@
     appearance: none;
     margin: 0;
   }
-
-  height: utils.size('xxxl');
 }
 
 :host(.md) {
-  height: utils.size('xl');
   border-radius: utils.size('m');
+  padding-block: $padding-block-size-md;
 }
 
 /* clean-css ignore:start */
@@ -44,11 +44,14 @@
 
 .date-mask {
   font-family: shared.$form-field-input-font-family;
-  font-size: shared.$form-field-input-font-size;
   line-height: shared.$form-field-input-line-height;
   color: var(--kirby-white-contrast);
   position: absolute;
   top: 0;
   left: 0;
-  margin: shared.$form-field-input-padding;
+  padding: shared.$form-field-input-padding;
+
+  :host(.md) + & {
+    padding-block: $padding-block-size-md;
+  }
 }
