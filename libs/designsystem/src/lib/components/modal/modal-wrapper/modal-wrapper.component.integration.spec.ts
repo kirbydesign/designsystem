@@ -17,7 +17,6 @@ import {
   TitleEmbeddedComponent,
 } from './modal-wrapper.testbuilder';
 
-/* TODO: Fix wording of these tests */
 describe('ModalWrapperComponent + ModalFooterComponent', () => {
   const createComponent = createComponentFactory({
     component: ModalWrapperComponent,

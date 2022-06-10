@@ -34,6 +34,7 @@ import { Modal, ModalElementsAdvertiser, ModalElementType } from '../services/mo
 
 import { ModalConfig } from './config/modal-config';
 import { COMPONENT_PROPS } from './config/modal-config.helper';
+import { ModalElementsMoverDelegate } from './modal-elements-mover.delegate';
 
 @Component({
   selector: 'kirby-modal-wrapper',
@@ -79,7 +80,18 @@ export class ModalWrapperComponent
   @ViewChild(RouterOutlet, { static: true }) private routerOutlet: RouterOutlet;
 
   @ViewChild('contentTitle', { read: ElementRef })
-  private contentTitleElement: ElementRef<HTMLElement>;
+  private _contentTitleElement: ElementRef<HTMLElement>;
+
+  get contentTitleElement(): ElementRef<HTMLElement> {
+    /* 
+        contentTitleElement has ngIf directive dependent on _hasCollapsibleTitle; trigger CD to make sure element has been queried. 
+        Solution taken from: https://danieleyassu.com/angular-viewchild-and-ngif/
+      */
+    if (!this._contentTitleElement && this._hasCollapsibleTitle) {
+      this.changeDetector.detectChanges();
+    }
+    return this._contentTitleElement;
+  }
 
   private keyboardVisible = false;
   private toolbarButtons: HTMLButtonElement[] = [];
@@ -113,6 +125,8 @@ export class ModalWrapperComponent
 
   willClose$ = this.ionModalWillDismiss.pipe(first());
 
+  private modalElementsMoverDelegate: ModalElementsMoverDelegate;
+
   constructor(
     private changeDetector: ChangeDetectorRef,
     private injector: Injector,
@@ -126,6 +140,7 @@ export class ModalWrapperComponent
   ) {
     this.setViewportHeight();
     this.observeViewportResize();
+    this.modalElementsMoverDelegate = new ModalElementsMoverDelegate(renderer, elementRef);
   }
 
   ngOnInit(): void {
@@ -141,13 +156,41 @@ export class ModalWrapperComponent
     });
   }
 
-  private currentFooter: HTMLElement | null = null;
+  private _currentFooter: HTMLElement | null = null;
+
+  private set currentFooter(footer: HTMLElement | null) {
+    if (footer !== null) {
+      this.resizeObserverService.observe(footer, (entry) => {
+        const [property, pixelValue] = [
+          '--footer-height',
+          `${Math.floor(entry.contentRect.height)}px`,
+        ];
+        this.setCssVar(this.elementRef.nativeElement, property, pixelValue);
+      });
+    }
+
+    this._currentFooter = footer;
+  }
+
+  private get currentFooter(): HTMLElement | null {
+    return this._currentFooter;
+  }
 
   public addModalElement(type: ModalElementType, modalElement: ElementRef<HTMLElement>) {
     const addModalElementFn = {
-      [ModalElementType.FOOTER]: () => this.addFooter(modalElement),
-      [ModalElementType.TITLE]: () => this.addTitle(modalElement),
-      [ModalElementType.PAGE_PROGRESS]: () => this.addPageProgress(modalElement),
+      [ModalElementType.FOOTER]: () => {
+        this.modalElementsMoverDelegate.addFooter(modalElement);
+        this.currentFooter = modalElement.nativeElement;
+      },
+      [ModalElementType.TITLE]: () =>
+        this.modalElementsMoverDelegate.addTitle(
+          modalElement,
+          this.contentTitleElement,
+          this._hasCollapsibleTitle,
+          this.ionTitleElement
+        ),
+      [ModalElementType.PAGE_PROGRESS]: () =>
+        this.modalElementsMoverDelegate.addPageProgress(modalElement, this.ionToolbarElement),
     }[type];
 
     addModalElementFn();
@@ -155,64 +198,21 @@ export class ModalWrapperComponent
 
   public removeModalElement(type: ModalElementType, modalElement: ElementRef<HTMLElement>) {
     const removeModalElementFn = {
-      [ModalElementType.FOOTER]: () => this.removeFooter(modalElement),
-      [ModalElementType.TITLE]: () => this.removeTitle(modalElement),
-      [ModalElementType.PAGE_PROGRESS]: () => this.removePageProgress(modalElement),
+      [ModalElementType.FOOTER]: () => {
+        this.modalElementsMoverDelegate.removeFooter(modalElement);
+        this.currentFooter = null;
+      },
+      [ModalElementType.TITLE]: () =>
+        this.modalElementsMoverDelegate.removeTitle(
+          modalElement,
+          this._hasCollapsibleTitle,
+          this.contentTitleElement
+        ),
+      [ModalElementType.PAGE_PROGRESS]: () =>
+        this.modalElementsMoverDelegate.removePageProgress(modalElement),
     }[type];
 
     removeModalElementFn();
-  }
-
-  private addFooter(footerElementRef: ElementRef<HTMLElement>) {
-    // Move the footer next to ion-content
-    this.moveChild(footerElementRef, this.elementRef);
-
-    this.resizeObserverService.observe(footerElementRef.nativeElement, (entry) => {
-      const [property, pixelValue] = [
-        '--footer-height',
-        `${Math.floor(entry.contentRect.height)}px`,
-      ];
-      this.setCssVar(this.elementRef.nativeElement, property, pixelValue);
-    });
-
-    this.currentFooter = footerElementRef.nativeElement;
-  }
-
-  private removeFooter(footerElementRef: ElementRef<HTMLElement>) {
-    this.removeChild(footerElementRef);
-    this.currentFooter = null;
-  }
-
-  private addPageProgress(pageProgressElementRef: ElementRef<HTMLElement>) {
-    this.moveChild(pageProgressElementRef, this.ionToolbarElement);
-  }
-
-  private removePageProgress(pageProgressElementRef: ElementRef<HTMLElement>) {
-    this.removeChild(pageProgressElementRef);
-  }
-
-  private addTitle(titleElementRef: ElementRef<HTMLElement>) {
-    this.moveChild(titleElementRef, this.ionTitleElement);
-    // If title is collapsible append it to content area; required by ionic implementation.
-    if (this._hasCollapsibleTitle) {
-      /* 
-        contentTitleElement has ngIf directive; trigger CD to make sure element has been queried. 
-        Solution taken from: https://danieleyassu.com/angular-viewchild-and-ngif/
-      */
-      if (!this.contentTitleElement) this.changeDetector.detectChanges();
-
-      const titleElementClone = titleElementRef.nativeElement.cloneNode(true) as HTMLElement;
-      this.moveChild(new ElementRef(titleElementClone), this.contentTitleElement);
-    }
-  }
-
-  private removeTitle(titleElementRef: ElementRef<HTMLElement>) {
-    this.removeChild(titleElementRef);
-    if (this._hasCollapsibleTitle) {
-      const kirbyPageTitleElement: HTMLElement =
-        this.contentTitleElement.nativeElement.querySelector('kirby-page-title');
-      this.removeChild(new ElementRef(kirbyPageTitleElement));
-    }
   }
 
   private initializeResizeModalToModalWrapper() {
@@ -489,26 +489,6 @@ export class ModalWrapperComponent
       ) {
         document.activeElement.blur();
       }
-    }
-  }
-
-  private moveChild(
-    childElementRef: ElementRef<HTMLElement>,
-    newParentElementRef: ElementRef<HTMLElement>
-  ) {
-    const child = childElementRef.nativeElement;
-    const newParent = newParentElementRef.nativeElement;
-    this.renderer.removeChild(child.parentElement, child);
-    this.renderer.appendChild(newParent, child);
-  }
-
-  private removeChild(
-    childElementRef: ElementRef<HTMLElement>,
-    parentElement?: HTMLElement | ElementRef<HTMLElement>
-  ) {
-    const child = childElementRef.nativeElement;
-    if (!!child) {
-      this.renderer.removeChild(parentElement || child.parentElement, child);
     }
   }
 
