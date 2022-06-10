@@ -25,6 +25,7 @@ import { MockIconComponent } from './components/mock.icon.component';
 import { MockInputCounterComponent } from './components/mock.input-counter.component';
 import { MockInputComponent } from './components/mock.input.component';
 import { MockItemGroupComponent } from './components/mock.item-group.component';
+import { MockItemResponsiveComponent } from './components/mock.item-responsive.component';
 import { MockItemSlidingComponent } from './components/mock.item-sliding.component';
 import { MockItemComponent } from './components/mock.item.component';
 import { MockLabelComponent } from './components/mock.label.component';
@@ -91,6 +92,7 @@ export const MOCK_COMPONENTS = [
   MockTextareaComponent,
   MockGridComponent,
   MockIconComponent,
+  MockItemResponsiveComponent,
   MockItemComponent,
   MockLabelComponent,
   MockItemGroupComponent,
