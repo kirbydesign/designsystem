@@ -2,12 +2,17 @@
 @use '../item.utils';
 
 :host {
+  @include item.item-typography;
+
   display: grid;
-  grid-template-columns: var(--kirby-item-outer-columns, 1fr 1fr);
+
+  // grid-template-columns: var(--kirby-item-outer-columns, 1fr 1fr);
+  grid-template-columns: 3fr 1fr 1fr 1fr;
+  grid-template-rows: auto;
   column-gap: 1rem;
   align-items: baseline;
 
   @include utils.media('>=medium') {
-    --kirby-item-inner-columns: 3fr 10fr;
+    // --kirby-item-inner-columns: 3fr 10fr;
   }
 }

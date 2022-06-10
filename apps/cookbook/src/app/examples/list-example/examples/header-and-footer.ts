@@ -11,15 +11,37 @@ export const ListWithHeaderAndFooterExampleTemplate = `<kirby-list [items]="item
 
   <!-- BODY -->
   <kirby-item *kirbyListItemTemplate="let item">
+    <kirby-label>
+      <h3>{{item.title}}</h3>
+      <p subtitle>{{item.subTitle}}</p>
+    </kirby-label>
+    <kirby-label slot="end">
+      <data [value]="item.amount">{{item.amount}}</data>
+      <data [value]="item.detail" detail>{{item.detail}}</data>
+    </kirby-label>
+  </kirby-item>
+
+  <!-- Footer -->
+  <div class="footer" *kirbyListFooter>
+    <p>An appropriate footer</p>
+    <button kirby-button>Click me!</button>
+  </div>
+</kirby-list>`;
+
+export const NoKirbyLabelExampleTemplate = `<kirby-list [items]="items" (itemSelect)="onItemSelect($event)">
+  <!-- HEADER-->
+  <kirby-list-header *kirbyListHeader>
+    <p>Name</p>
+    <p>Value</p>
+  </kirby-list-header>
+
+  <!-- BODY -->
+  <kirby-item *kirbyListItemTemplate="let item">
     <kirby-item-responsive>
-      <kirby-label>
-        <h3>{{item.title}}</h3>
-        <p subtitle>{{item.subTitle}}</p>
-      </kirby-label>
-      <kirby-label slot="end">
-        <data [value]="item.amount">{{item.amount}}</data>
-        <data [value]="item.detail" detail>{{item.detail}}</data>
-      </kirby-label>
+      <h3>{{item.title}}</h3>
+      <p subtitle>{{item.subTitle}}</p>
+      <data [value]="item.amount">{{item.amount}}</data>
+      <data [value]="item.detail" detail>{{item.detail}}</data>
     </kirby-item-responsive>
   </kirby-item>
 
@@ -35,7 +57,7 @@ export const ListWithHeaderAndFooterExampleTemplate = `<kirby-list [items]="item
   selector: 'list-with-header-and-footer-example',
   template: `
     <kirby-page title="List with header and footer">
-      <kirby-page-content> ${ListWithHeaderAndFooterExampleTemplate} </kirby-page-content>
+      <kirby-page-content> ${NoKirbyLabelExampleTemplate} </kirby-page-content>
     </kirby-page>
   `,
   styles: ['p { margin: 0; }', '.footer { text-align: center; width: 100%; }'],
