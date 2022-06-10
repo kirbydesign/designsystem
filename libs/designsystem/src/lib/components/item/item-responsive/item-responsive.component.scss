@@ -1,16 +1,13 @@
 @use '~@kirbydesign/core/src/scss/utils';
 @use '../item.utils';
-@use '../../section-header/section-header.utils';
 
 :host {
   display: grid;
-  grid-template-columns: var(--kirby-item-outer-columns-medium-up, 1fr 1fr);
+  grid-template-columns: var(--kirby-item-outer-columns, 1fr 1fr);
   column-gap: 1rem;
   align-items: baseline;
 
-  --kirby-item-inner-columns-medium-up: 3fr 1fr;
-
-  kirby-label {
-    text-align: right;
+  @include utils.media('>=medium') {
+    --kirby-item-inner-columns: 3fr 10fr;
   }
 }

@@ -25,6 +25,8 @@
   //    - Consumer projects just add their own container and style it
   //    - Can we allow control of inner layout (ion-label) using just custom properties?
   //  * Consider not using kirby-label - instead use some layout containers that can live in item-responsive...?
+  //    - Update: kirby-label appears to be a central part of this solution, so a lot is lost without it
+  //  * Would a Flexbox-based solution with breakpoints$ be better?
 
   :host-context(kirby-item-responsive) {
     ion-label {
@@ -35,7 +37,17 @@
 
       @include utils.media('>=medium') {
         // TODO: Allow for different number of columns
-        grid-template-columns: var(--kirby-item-inner-columns-medium-up, 1fr 1fr);
+        grid-template-columns: var(--kirby-item-inner-columns, 1fr 1fr);
+      }
+    }
+
+    &[slot='end'] {
+      ion-label {
+        justify-items: end;
+
+        @include utils.media('>=medium') {
+          grid-template-columns: var(--kirby-item-inner-columns-end, 1fr 1fr);
+        }
       }
     }
   }

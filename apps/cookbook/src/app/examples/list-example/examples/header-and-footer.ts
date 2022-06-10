@@ -16,7 +16,7 @@ export const ListWithHeaderAndFooterExampleTemplate = `<kirby-list [items]="item
         <h3>{{item.title}}</h3>
         <p subtitle>{{item.subTitle}}</p>
       </kirby-label>
-      <kirby-label>
+      <kirby-label slot="end">
         <data [value]="item.amount">{{item.amount}}</data>
         <data [value]="item.detail" detail>{{item.detail}}</data>
       </kirby-label>
