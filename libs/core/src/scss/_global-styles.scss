@@ -140,10 +140,9 @@ ion-modal.kirby-overlay {
             --min-height: #{map.get(utils.$modal-heights, 'l')};
           }
 
-          &.kirby-modal-full-height .modal-wrapper,
-          .modal-wrapper.full-height {
-            border-bottom-left-radius: 0;
-            border-bottom-right-radius: 0;
+          &.kirby-modal-full-height,
+          &.full-height {
+            --border-radius: #{utils.$border-radius} #{utils.$border-radius} 0px 0px;
           }
         }
       }
