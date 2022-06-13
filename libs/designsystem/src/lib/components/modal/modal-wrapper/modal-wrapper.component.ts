@@ -202,8 +202,19 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     });
   }
 
+  private closestElement(selector: string, base: Element) {
+    function __closestFrom(el: Element | Window | Document): Element {
+      if (!el || el === document || el === window) return null;
+      if ((el as Slottable).assignedSlot) el = (el as Slottable).assignedSlot;
+      let found = (el as Element).closest(selector);
+      return found ? found : __closestFrom(((el as Element).getRootNode() as ShadowRoot).host);
+    }
+    return __closestFrom(base);
+  }
+
   private observeModalFullHeight() {
-    const ionModalWrapper = this.elementRef.nativeElement.closest<HTMLElement>('.modal-wrapper');
+    const ionModalWrapper = this.closestElement('.modal-wrapper', this.elementRef.nativeElement);
+
     if (!ionModalWrapper) return;
     // Start observing when modal has finished animating:
     this.didPresent.then(() => {
@@ -548,9 +559,9 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
       const entry = entries[0];
       const isTouchingViewport = entry.intersectionRatio < 1;
       if (isTouchingViewport) {
-        this.renderer.addClass(entry.target, 'full-height');
+        this.ionModalElement.classList.add('full-height');
       } else {
-        this.renderer.removeClass(entry.target, 'full-height');
+        this.ionModalElement.classList.remove('full-height');
       }
     };
 
