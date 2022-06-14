@@ -37,11 +37,11 @@ export const NoKirbyLabelExampleTemplate = `<kirby-list [items]="items" (itemSel
 
   <!-- BODY -->
   <kirby-item *kirbyListItemTemplate="let item">
-    <kirby-item-responsive>
-      <h3>{{item.title}}</h3>
-      <p subtitle>{{item.subTitle}}</p>
-      <data [value]="item.amount">{{item.amount}}</data>
-      <data [value]="item.detail" detail>{{item.detail}}</data>
+    <kirby-item-responsive example-2>
+      <h3 slot="A">{{item.title}}</h3>
+      <p subtitle slot="B">{{item.subTitle}}</p>
+      <data [value]="item.amount" slot="C">{{item.amount}}</data>
+      <data [value]="item.detail" detail slot="D">{{item.detail}}</data>
     </kirby-item-responsive>
   </kirby-item>
 

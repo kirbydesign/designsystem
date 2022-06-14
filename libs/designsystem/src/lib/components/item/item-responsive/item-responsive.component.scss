@@ -2,17 +2,75 @@
 @use '../item.utils';
 
 :host {
-  @include item.item-typography;
+  &[example-1] {
+    @include item.item-typography;
 
-  display: grid;
+    display: grid;
+    column-gap: 1rem;
+    align-items: baseline;
+    grid-template-columns: var(--kirby-item-columns, repeat(12, 1fr));
+    grid-template-rows: var(--kirby-item-rows, repeat(2, 1fr));
 
-  // grid-template-columns: var(--kirby-item-outer-columns, 1fr 1fr);
-  grid-template-columns: 3fr 1fr 1fr 1fr;
-  grid-template-rows: auto;
-  column-gap: 1rem;
-  align-items: baseline;
+    @include utils.slotted(':nth-child(1), :nth-child(2)') {
+      grid-column: 1 / span 6;
+    }
 
-  @include utils.media('>=medium') {
-    // --kirby-item-inner-columns: 3fr 10fr;
+    @include utils.slotted(':nth-child(1)') {
+      grid-row: 1 / 2;
+    }
+
+    @include utils.slotted(':nth-child(2)') {
+      grid-row: 2 / 3;
+    }
+
+    @include utils.slotted(':nth-child(3), :nth-child(4)') {
+      grid-column: 7 / -1;
+      justify-self: end;
+    }
+
+    @include utils.slotted(':nth-child(3)') {
+      grid-row: 1;
+    }
+
+    @include utils.slotted(':nth-child(4)') {
+      grid-row: 2;
+    }
+  }
+
+  // TODO: Make grid columns and areas configurable through custom properties
+
+  &[example-2] {
+    @include item.item-typography;
+
+    display: grid;
+    column-gap: 1rem;
+    align-items: baseline;
+    grid-template-columns: var(--kirby-item-columns, repeat(2, 1fr));
+    grid-template-areas: var(--kirby-item-areas, 'A C' 'B D');
+
+    @include utils.media('>=medium') {
+      --kirby-item-columns: repeat(12, 1fr);
+      --kirby-item-areas: 'A A A A A A B B C C C D';
+    }
+
+    // TODO: Try to target slots instead - might not work
+    @include utils.slotted(':nth-child(1)') {
+      grid-area: A;
+    }
+    @include utils.slotted(':nth-child(2)') {
+      grid-area: B;
+    }
+    @include utils.slotted(':nth-child(3)') {
+      grid-area: C;
+
+      // TODO: Expose justification in custom property
+      justify-self: end;
+    }
+    @include utils.slotted(':nth-child(4)') {
+      grid-area: D;
+
+      // TODO: Expose justification in custom property
+      justify-self: end;
+    }
   }
 }
