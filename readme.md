@@ -299,7 +299,7 @@ The Kirby chart components use Highcharts. Note that this is a licensed product.
 
 ## Contributing
 
-If you wish to contribute new features, bug fixes or something third to the project have a look at the contribution guidelines: [link](./github/CONTRIBUTING.md).
+If you wish to contribute new features, bug fixes or something third to the project have a look at the [contribution guidelines](./github/CONTRIBUTING.md).
 
 [angular]: https://angular.io
 [jasmine]: https://jasmine.github.io/
