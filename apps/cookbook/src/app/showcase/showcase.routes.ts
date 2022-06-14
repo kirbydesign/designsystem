@@ -46,7 +46,6 @@ import { ShowcaseComponent } from './showcase.component';
 import { SlideButtonShowcaseComponent } from './slide-button-showcase/slide-button-showcase.component';
 import { SlidesShowcaseComponent } from './slides-showcase/slides-showcase.component';
 import { SpinnerShowcaseComponent } from './spinner-showcase/spinner-showcase.component';
-import { StockChartDeprecatedShowcaseComponent } from './stock-chart-deprecated-showcase/stock-chart-deprecated-showcase.component';
 import { StylingHtmlListsShowcaseComponent } from './styling-html-lists/styling-html-lists-showcase';
 import { TabsShowcaseComponent } from './tabs-showcase/tabs-showcase.component';
 import { ToastShowcaseComponent } from './toast-showcase/toast-showcase.component';
@@ -151,10 +150,6 @@ export const routes: Routes = [
       {
         path: 'chart',
         component: ChartShowcaseComponent,
-      },
-      {
-        path: 'stock-chart-deprecated',
-        component: StockChartDeprecatedShowcaseComponent,
       },
       {
         path: 'fonts',
