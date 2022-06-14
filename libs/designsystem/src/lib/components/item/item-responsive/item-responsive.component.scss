@@ -37,8 +37,6 @@
     }
   }
 
-  // TODO: Make grid columns and areas configurable through custom properties
-
   &[example-2] {
     @include item.item-typography;
 
@@ -53,7 +51,7 @@
       --kirby-item-areas: 'A A A A A A B B C C C D';
     }
 
-    // TODO: Try to target slots instead - might not work
+    // TODO: Find other (better) selectors
     @include utils.slotted(':nth-child(1)') {
       grid-area: A;
     }
@@ -71,6 +69,37 @@
 
       // TODO: Expose justification in custom property
       justify-self: end;
+    }
+  }
+
+  &[example-3] {
+    @include item.item-typography;
+
+    display: grid;
+    gap: var(--gap, 0 1rem);
+    align-items: baseline;
+    grid-template-columns: var(--grid-template-columns, 1fr max-content);
+    grid-template-rows: var(--grid-template-rows, repeat(2, 1fr));
+    grid-auto-flow: var(--grid-auto-flow, column);
+
+    @include utils.media('>=medium') {
+      --grid-template-columns: 2fr 1fr minmax(max-content, 2fr) minmax(max-content, 1fr);
+      --grid-template-rows: auto;
+      --grid-auto-flow: initial;
+    }
+
+    // TODO: Find other (better) selectors - can we use slots?
+    @include utils.slotted(':nth-child(1)') {
+      justify-self: var(--justify-self-1, auto);
+    }
+    @include utils.slotted(':nth-child(2)') {
+      justify-self: var(--justify-self-2, auto);
+    }
+    @include utils.slotted(':nth-child(3)') {
+      justify-self: var(--justify-self-3, end);
+    }
+    @include utils.slotted(':nth-child(4)') {
+      justify-self: var(--justify-self-4, end);
     }
   }
 }
