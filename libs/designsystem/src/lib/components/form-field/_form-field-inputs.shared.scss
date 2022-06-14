@@ -1,13 +1,15 @@
 @use '~@kirbydesign/core/src/scss/utils';
 
-$form-field-label-height: 24px;
 $form-field-input-font-family: var(--kirby-font-family);
-$form-field-input-font-size: utils.font-size('n');
-$form-field-input-line-height: utils.line-height('n');
-$form-field-input-padding: utils.size('s');
+$form-field-input-line-height: 1.5;
+$form-field-input-padding: 1em;
+$form-field-label-height: 24px;
 
 :host(.error) {
   border: 1px solid utils.get-color('danger');
+  padding: calc(
+    #{$form-field-input-padding} - 1px
+  ); // subtract border width from padding to maintain overall height
 }
 
 // Ensures correct position of cloned input when Ionic scrollAssist is enabled
@@ -32,7 +34,11 @@ $form-field-input-padding: utils.size('s');
   box-sizing: border-box;
   display: block;
   font-family: $form-field-input-font-family;
-  font-size: $form-field-input-font-size;
+
+  // `font-size` should be declared in `em` units but to simplify the solution
+  // to https://github.com/kirbydesign/designsystem/issues/2301 we're using `rem`.
+  // Must be fixed by https://github.com/kirbydesign/designsystem/issues/2313
+  font-size: 1rem;
   line-height: $form-field-input-line-height;
   outline: none;
   margin: 0;
@@ -46,7 +52,7 @@ $form-field-input-padding: utils.size('s');
   &.borderless {
     border-radius: 0;
     box-shadow: none;
-    padding: 0;
+    padding-inline: 0;
     width: auto;
   }
 
