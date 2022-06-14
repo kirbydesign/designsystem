@@ -89,7 +89,7 @@ describe('InputComponent', () => {
 
     it('should render with correct padding', () => {
       expect(element).toHaveComputedStyle({
-        padding: '0px',
+        'padding-inline': '0px',
       });
     });
 
