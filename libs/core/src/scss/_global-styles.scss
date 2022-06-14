@@ -68,6 +68,7 @@ ion-modal.kirby-overlay {
     &.kirby-drawer {
       --min-height: #{utils.$drawer-default-height};
       --kirby-modal-padding-top: calc(var(--kirby-safe-area-top, 0px) + #{utils.size('m')});
+      --border-radius: #{utils.$border-radius} #{utils.$border-radius} 0px 0px;
 
       padding-top: var(--kirby-modal-padding-top);
       align-items: flex-end;
@@ -76,11 +77,6 @@ ion-modal.kirby-overlay {
         &.kirby-modal.kirby-drawer {
           --kirby-modal-padding-top: 0;
         }
-      }
-
-      .modal-wrapper {
-        border-top-left-radius: #{utils.$border-radius};
-        border-top-right-radius: #{utils.$border-radius};
       }
     }
 
@@ -95,19 +91,8 @@ ion-modal.kirby-overlay {
     }
 
     &.modal-card:not(.kirby-drawer) {
-      .modal-wrapper {
-        @include utils.media('<medium') {
-          // Reset Ionic Card style height + top border radius:
-          --height: 100%;
-
-          border-top-left-radius: 0;
-          border-top-right-radius: 0;
-        }
-
-        @include utils.media('>=medium') {
-          // Reset Ionic Card style border radius:
-          border-radius: utils.$border-radius;
-        }
+      @include utils.media('<medium') {
+        --height: 100%;
       }
     }
 
@@ -151,11 +136,6 @@ ion-modal.kirby-overlay {
         --kirby-modal-padding-top: calc(
           var(--kirby-modal-padding-top-base) + #{get-drawer-additional-padding-top()}
         );
-
-        .modal-wrapper {
-          border-bottom-left-radius: 0;
-          border-bottom-right-radius: 0;
-        }
       }
     }
   }
