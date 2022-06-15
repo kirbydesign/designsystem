@@ -346,9 +346,6 @@ export const routes: Routes = [
     component: ChartExampleComponent,
   },
   {
-    path: 'stock-chart-deprecated',
-  },
-  {
     path: 'grid',
     component: GridExampleComponent,
   },
