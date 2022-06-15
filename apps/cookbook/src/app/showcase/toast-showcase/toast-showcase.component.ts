@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
+import exampleHtml from '../../examples/toast-example/toast-example.component.html?raw';
+
 @Component({
   selector: 'cookbook-toast-showcase',
   templateUrl: './toast-showcase.component.html',
 })
 export class ToastShowcaseComponent {
-  exampleHtml: string =
-    require('!raw-loader!../../examples/toast-example/toast-example.component.html').default;
+  exampleHtml = exampleHtml;
   properties: ApiDescriptionProperty[] = [
     {
       name: 'message',

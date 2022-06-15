@@ -1,13 +1,15 @@
 import { ElementRef, Injectable } from '@angular/core';
 import { chart, Options } from 'highcharts';
 import * as Highcharts from 'highcharts';
+import more from 'highcharts/highcharts-more';
+import brokenAxis from 'highcharts/modules/broken-axis';
+import solidGauge from 'highcharts/modules/solid-gauge';
 
 // Docs on importing accessibility: https://www.highcharts.com/docs/chart-concepts/accessibility
 
-declare var require: any;
-require('highcharts/highcharts-more')(Highcharts);
-require('highcharts/modules/solid-gauge')(Highcharts);
-require('highcharts/modules/broken-axis')(Highcharts);
+more(Highcharts);
+solidGauge(Highcharts);
+brokenAxis(Highcharts);
 
 @Injectable()
 export class ChartDeprecatedHelper {

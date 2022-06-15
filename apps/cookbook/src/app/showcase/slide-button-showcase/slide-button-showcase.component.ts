@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
+import exampleHtml from '../../examples/slide-button-example/slide-button-example.component.html?raw';
+
 @Component({
   selector: 'cookbook-slide-button-showcase',
   templateUrl: './slide-button-showcase.component.html',
 })
 export class SlideButtonShowcaseComponent {
-  exampleHtml: string =
-    require('!raw-loader!../../examples/slide-button-example/slide-button-example.component.html')
-      .default;
+  exampleHtml = exampleHtml;
   properties: ApiDescriptionProperty[] = [
     {
       name: 'expand',

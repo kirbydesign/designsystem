@@ -26,7 +26,6 @@ export class MockChartComponent {
   @Input() type: ChartType;
   @Input() data: ChartDataset[] | number[];
   @Input() labels: ChartLabel[];
-  @Input() dataLabels: string[] | string[][];
   @Input() customOptions: ChartOptions;
   @Input() dataLabelOptions: ChartDataLabelOptions;
   @Input() annotations: AnnotationOptions[];

@@ -34,7 +34,7 @@ describe('ChartComponent', () => {
 
     beforeEach(() => {
       updateFnSpy = spyOn<any>(component, 'updateLabels');
-      spectator.setInput('dataLabels', ['1', '2']);
+      spectator.setInput('labels', ['1', '2']);
     });
 
     it('should not call the corresponding update function', () => {

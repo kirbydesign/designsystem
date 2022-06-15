@@ -2,15 +2,15 @@ import { Component } from '@angular/core';
 import { ApiDescriptionMethod } from '~/app/shared/api-description/api-description-methods/api-description-methods.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
+import exampleHtml from '../../examples/reorder-list-example/reorder-list-example.component.html?raw';
+
 @Component({
   selector: 'cookbook-reorder-showcase',
   templateUrl: './reorder-list-showcase.component.html',
   styleUrls: ['./reorder-list-showcase.component.scss'],
 })
 export class ReorderListShowcaseComponent {
-  exampleHtml: string =
-    require('!raw-loader!../../examples/reorder-list-example/reorder-list-example.component.html')
-      .default;
+  exampleHtml = exampleHtml;
 
   properties: ApiDescriptionProperty[] = [
     {

@@ -74,17 +74,32 @@ ion-back-button {
 }
 
 /*
- * Page Title
+ * Page Header
  */
-.page-title {
+.page-header {
   margin-left: utils.size('s');
   margin-top: utils.size('xxs');
   margin-bottom: var(--kirby-page-title-margin-bottom, #{utils.size('xl')});
 
-  &.has-actions {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+  .page-title {
+    &.has-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin: 0;
+    }
+  }
+
+  .page-subtitle {
+    margin-top: #{utils.size('xxs')};
   }
 
   &.text-center {
@@ -94,15 +109,6 @@ ion-back-button {
 
   &.text-right {
     text-align: right;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    margin: 0;
   }
 }
 

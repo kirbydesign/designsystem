@@ -7,6 +7,7 @@ import {
   PageContentComponent,
   PageContentDirective,
   PageProgressComponent,
+  PageSubtitleDirective,
   PageTitleComponent,
   PageTitleDirective,
   PageToolbarTitleDirective,
@@ -27,6 +28,17 @@ type fixedConfig = { fixed: boolean };
   ],
 })
 export class MockPageTitleDirective {}
+
+@Directive({
+  selector: '[kirbyPageSubtitle]',
+  providers: [
+    {
+      provide: PageSubtitleDirective,
+      useExisting: forwardRef(() => MockPageSubtitleDirective),
+    },
+  ],
+})
+export class MockPageSubtitleDirective {}
 
 @Directive({
   selector: '[kirbyPageToolbarTitle]',
@@ -125,6 +137,7 @@ export class MockPageActionsComponent {}
 })
 export class MockPageComponent {
   @Input() title: string;
+  @Input() subtitle: string;
   @Input() toolbarTitle: string;
   @Input() titleAlignment: 'left' | 'center' | 'right';
   @Input() defaultBackHref: string;
