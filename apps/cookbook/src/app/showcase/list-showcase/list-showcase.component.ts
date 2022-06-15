@@ -7,6 +7,7 @@ import { ListWithSectionsAndColoredItemsExampleTemplate } from '~/app/examples/l
 import { ListSelectableItemsExampleTemplate } from '~/app/examples/list-example/examples/selectable-items';
 
 import { ListItemsExampleTemplate } from '../../examples/list-example/examples/items';
+import exampleHtml from '../../examples/list-example/list-example.component.html?raw';
 
 @Component({
   selector: 'cookbook-list-showcase',
@@ -22,8 +23,7 @@ export class ListShowcaseComponent implements OnInit {
   sectionsExampleTemplate: string = ListWithSectionsExampleTemplate;
   items: string = ListItemsExampleTemplate;
 
-  exampleHtml: string =
-    require('!raw-loader!../../examples/list-example/list-example.component.html').default;
+  exampleHtml = exampleHtml;
 
   sectionHeaderExampleHtml: string =
     '<GridLayout *kirbyListSectionHeader="let section" ios:height="50">...</GridLayout>';

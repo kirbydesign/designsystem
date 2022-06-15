@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
+import exampleWithCardHtml from '../../examples/calendar-example/calendar-card-example.component.html?raw';
+import exampleHtml from '../../examples/calendar-example/calendar-example.component.html?raw';
 @Component({
   selector: 'cookbook-calendar-showcase',
   templateUrl: './calendar-showcase.component.html',
@@ -33,11 +35,9 @@ export class CalendarShowcaseComponent {
     this.todayDate.setDate(today.getDate() + 3);
   }
 
-  exampleHtml: string =
-    require('!raw-loader!../../examples/calendar-example/calendar-example.component.html').default;
-  exampleWithCardHtml: string =
-    require('!raw-loader!../../examples/calendar-example/calendar-card-example.component.html')
-      .default;
+  exampleHtml = exampleHtml;
+  exampleWithCardHtml = exampleWithCardHtml;
+
   properties: ApiDescriptionProperty[] = [
     {
       name: 'selectedDate',

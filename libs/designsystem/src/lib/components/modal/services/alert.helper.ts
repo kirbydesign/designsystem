@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
-import { AlertConfig } from '../alert/config/alert-config';
 import { AlertComponent } from '../alert/alert.component';
+import { AlertConfig } from '../alert/config/alert-config';
+
 import { Overlay } from './modal.interfaces';
 
 @Injectable()
@@ -29,22 +30,17 @@ export class AlertHelper {
   private getComponentProps(config: AlertConfig) {
     return {
       ...config,
-      okBtnText: this.getOkBtnText(config),
-      cancelBtnText: this.getCancelBtnText(config),
+      okBtn: this.getOkBtn(config),
+      cancelBtn: config.cancelBtn,
       okBtnIsDestructive: this.getOkBtnIsDestructive(config),
       iconName: config.icon && config.icon.name,
       iconThemeColor: config.icon && config.icon.themeColor,
     };
   }
 
-  private getOkBtnText(config: AlertConfig) {
+  private getOkBtn(config: AlertConfig) {
     let text: string;
-    if (config.okBtnText) {
-      console.warn(
-        '`okBtnText` will be deprecated on next major version. Please use `okBtn` instead.'
-      );
-      text = config.okBtnText;
-    }
+
     if (config.okBtn) {
       if (typeof config.okBtn === 'string') {
         text = config.okBtn;
@@ -57,14 +53,5 @@ export class AlertHelper {
 
   getOkBtnIsDestructive(config) {
     return typeof config.okBtn === 'object' ? config.okBtn.isDestructive : undefined;
-  }
-
-  private getCancelBtnText(config: AlertConfig) {
-    if (config.cancelBtnText) {
-      console.warn(
-        '`cancelBtnText` will be deprecated on next major version. Please use `cancelBtn` instead.'
-      );
-    }
-    return config.cancelBtn || config.cancelBtnText;
   }
 }

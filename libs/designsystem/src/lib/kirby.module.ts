@@ -150,7 +150,7 @@ const exportedModules = [
   SpinnerModule,
 ];
 
-const exports = [...exportedModules, ...exportedDeclarations];
+const allExports = [...exportedModules, ...exportedDeclarations];
 
 const importedModules = [...exportedModules];
 
@@ -194,8 +194,7 @@ export interface KirbyConfig {
   ],
   declarations: declarations,
   providers: providers,
-  entryComponents: entryComponents,
-  exports: exports,
+  exports: allExports,
 })
 export class KirbyModule {
   static forChild(config?: KirbyConfig): ModuleWithProviders<KirbyModule> {

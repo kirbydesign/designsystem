@@ -45,6 +45,13 @@ export class ModalShowcaseComponent implements AfterViewInit {
       type: ['undefined', 'modal', 'drawer', 'compact'],
     },
     {
+      name: 'collapseTitle',
+      description: `(Optional) If \`true\` will cause the title to initially be rendered as part of the content; once scrolled out of view it collapses and appears in the header area. 
+      \n Useful for long titles that would otherwise truncate. `,
+      defaultValue: 'false',
+      type: ['boolean'],
+    },
+    {
       name: 'size',
       description: `(Optional) The initial size of the modal before content is loaded.
         The \`full-height\` option will take up as much vertical space as possible and not resize with content or native keyboard.`,

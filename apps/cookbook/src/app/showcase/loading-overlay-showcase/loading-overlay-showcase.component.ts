@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
+import exampleHtml from '../../examples/loading-overlay-example/loading-overlay-example.component.html?raw';
+
 @Component({
   selector: 'cookbook-loading-overlay-showcase',
   templateUrl: './loading-overlay-showcase.component.html',
   styleUrls: ['./loading-overlay-showcase.component.scss'],
 })
 export class LoadingOverlayShowcaseComponent {
-  exampleHtml: string =
-    require('!raw-loader!../../examples/loading-overlay-example/loading-overlay-example.component.html')
-      .default;
+  exampleHtml = exampleHtml;
   properties: ApiDescriptionProperty[] = [
     {
       name: 'isLoading',

@@ -23,6 +23,15 @@
 ></kirby-checkbox>
 
 <kirby-checkbox
+  *ngIf="displayFooterAsInline !== undefined"
+  [checked]="displayFooterAsInline"
+  (checkedChange)="toggleDisplayFooterAsInline($event)"
+  [disabled]="disabled || !showFooter"
+  text="Display footer as inline"
+  class="indent"
+></kirby-checkbox>
+
+<kirby-checkbox
   *ngIf="disableScroll !== undefined"
   [checked]="disableScroll"
   (checkedChange)="toggleDisableScroll($event)"
@@ -63,6 +72,18 @@
   [disabled]="interactWithBackground || disabled"
   text="Open in full height"
 ></kirby-checkbox>
+
+<kirby-checkbox
+  [checked]="collapseTitle"
+  (checkedChange)="toggleCollapseTitle($event)"
+  [disabled]="disabled"
+  text="Collapse title"
+></kirby-checkbox>
+<small
+  >(Collapse title is unavailable for routed modals. See
+  <a href="https://github.com/kirbydesign/designsystem/issues/2192" target="_blank">issue #2192</a
+  >.)
+</small>
 
 <ng-container *ngIf="interactWithBackground !== undefined || customCssClass !== undefined">
   <kirby-divider [hasMargin]="true"></kirby-divider>

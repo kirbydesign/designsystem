@@ -14,6 +14,7 @@ import { BadgeComponent } from '@kirbydesign/designsystem';
   ],
 })
 export class MockBadgeComponent {
+  @Input() size: 'md' | 'sm';
   @Input() text: string;
   @Input() themeColor:
     | 'danger'

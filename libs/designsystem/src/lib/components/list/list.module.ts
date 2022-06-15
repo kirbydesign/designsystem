@@ -13,10 +13,8 @@ import { ListItemComponent } from './list-item/list-item.component';
 import { ListSectionHeaderComponent } from './list-section-header/list-section-header.component';
 import { ListComponent } from './list.component';
 import {
-  ListFlexItemDirective,
   ListFooterDirective,
   ListHeaderDirective,
-  ListItemDirective,
   ListItemTemplateDirective,
   ListSectionHeaderDirective,
 } from './list.directive';
@@ -24,8 +22,6 @@ import {
 const exportedDeclarations = [
   ListComponent,
   ListItemComponent,
-  ListItemDirective,
-  ListFlexItemDirective,
   ListItemTemplateDirective,
   ListSectionHeaderComponent,
   ListSectionHeaderDirective,
