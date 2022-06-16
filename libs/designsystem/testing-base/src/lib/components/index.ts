@@ -23,6 +23,7 @@ export { MockIconComponent } from './mock.icon.component';
 export { MockInputCounterComponent } from './mock.input-counter.component';
 export { MockInputComponent } from './mock.input.component';
 export { MockItemGroupComponent } from './mock.item-group.component';
+export { MockItemResponsiveComponent } from './mock.item-responsive.component';
 export { MockItemSlidingComponent } from './mock.item-sliding.component';
 export { MockItemComponent } from './mock.item.component';
 export { MockLabelComponent } from './mock.label.component';
