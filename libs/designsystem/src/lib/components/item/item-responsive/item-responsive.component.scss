@@ -83,7 +83,7 @@
     grid-auto-flow: var(--grid-auto-flow, column);
 
     @include utils.media('>=medium') {
-      --grid-template-columns: 2fr 1fr minmax(max-content, 2fr) minmax(max-content, 1fr);
+      --grid-template-columns: 1fr 1fr max-content max-content;
       --grid-template-rows: auto;
       --grid-auto-flow: initial;
     }
