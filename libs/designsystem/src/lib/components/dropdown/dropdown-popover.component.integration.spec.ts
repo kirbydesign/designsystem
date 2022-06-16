@@ -173,5 +173,22 @@ describe('DropdownComponent + PopoverComponent', () => {
     it('should have options be visible', () => {
       expect(cardElement).toBeVisible();
     });
+
+    it('should select the selected item', () => {
+      const expectedItem = items[0];
+
+      spectator.click('kirby-item');
+
+      expect(spectator.component.value).toEqual(expectedItem);
+    });
+
+    it('should emit change event with the selected item', () => {
+      const expectedItem = items[0];
+      const onChangeSpy = spyOn(spectator.component.change, 'emit');
+
+      spectator.click('kirby-item');
+
+      expect(onChangeSpy).toHaveBeenCalledWith(expectedItem);
+    });
   });
 });
