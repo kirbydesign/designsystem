@@ -236,6 +236,67 @@ describe('PageComponent', () => {
     });
   });
 
+  describe('having a title and subtitle', () => {
+    it('should have the configured title', async () => {
+      await TestHelper.whenReady(ionContent);
+      const pageTitleHeading = ionContent.querySelector('.page-title > h1');
+
+      expect(spectator.component.title).toEqual(titleText);
+      expect(pageTitleHeading).toHaveText(titleText, true);
+    });
+
+    it('should render title with correct margin and padding', async () => {
+      await TestHelper.whenReady(ionContent);
+      const pageTitle = ionContent.querySelector('.page-title');
+      const pageTitleHeading = pageTitle.querySelector(':scope > h1');
+
+      expect(pageTitle).toHaveComputedStyle({
+        'margin-left': '0px',
+        'margin-right': '0px',
+        'margin-top': '0px',
+        'margin-bottom': '0px',
+        'padding-left': '0px',
+        'padding-right': '0px',
+        'padding-top': '0px',
+        'padding-bottom': '0px',
+      });
+      expect(pageTitleHeading).toHaveComputedStyle({
+        'margin-left': '0px',
+        'margin-right': '0px',
+        'margin-top': '0px',
+        'margin-bottom': '0px',
+        'padding-left': '0px',
+        'padding-right': '0px',
+        'padding-top': '0px',
+        'padding-bottom': '0px',
+      });
+    });
+
+    it('should have the configured subtitle', async () => {
+      await TestHelper.whenReady(ionContent);
+      const pageSubtitle = ionContent.querySelector('.page-subtitle');
+
+      expect(spectator.component.subtitle).toEqual(subtitleText);
+      expect(pageSubtitle).toHaveText(subtitleText, true);
+    });
+
+    it('should render subitle with correct margin and padding', async () => {
+      await TestHelper.whenReady(ionContent);
+      const pageSubtitle = ionContent.querySelector('.page-subtitle');
+
+      expect(pageSubtitle).toHaveComputedStyle({
+        'margin-left': '0px',
+        'margin-right': '0px',
+        'margin-top': size('xxs'),
+        'margin-bottom': '0px',
+        'padding-left': '0px',
+        'padding-right': '0px',
+        'padding-top': '0px',
+        'padding-bottom': '0px',
+      });
+    });
+  });
+
   it('should render toolbar with correct padding', async () => {
     await TestHelper.whenReady(ionToolbar);
     const toolbarContainer = ionToolbar.shadowRoot.querySelector('.toolbar-container');

@@ -7,7 +7,9 @@ $form-field-label-height: 24px;
 
 :host(.error) {
   border: 1px solid utils.get-color('danger');
-  padding: calc(#{$form-field-input-padding} - 1px); // subtract border width from padding to maintain overall height
+  padding: calc(
+    #{$form-field-input-padding} - 1px
+  ); // subtract border width from padding to maintain overall height
 }
 
 // Ensures correct position of cloned input when Ionic scrollAssist is enabled

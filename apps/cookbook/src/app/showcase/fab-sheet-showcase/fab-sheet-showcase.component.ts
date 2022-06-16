@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
+import exampleHtml from '../../examples/fab-sheet-example/fab-sheet-example.component.html?raw';
 @Component({
   selector: 'cookbook-fab-sheet-showcase',
   templateUrl: './fab-sheet-showcase.component.html',
@@ -9,9 +10,7 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
 export class FabSheetShowcaseComponent {
   disableFabSheet = false;
 
-  exampleHtml: string =
-    require('!raw-loader!../../examples/fab-sheet-example/fab-sheet-example.component.html')
-      .default;
+  exampleHtml = exampleHtml;
   properties: ApiDescriptionProperty[] = [
     {
       name: 'disabled',

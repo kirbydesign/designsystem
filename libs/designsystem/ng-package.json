@@ -3,16 +3,7 @@
   "dest": "../../dist/libs/designsystem",
   "assets": ["ngcc.config.js"],
   "lib": {
-    "entryFile": "src/index.ts",
-    "umdModuleIds": {
-      "@ionic/angular": "ionic",
-      "date-fns-tz": "date-fns-tz",
-      "date-fns": "date-fns",
-      "highcharts": "highcharts",
-      "highcharts/highstock": "highcharts/highstock",
-      "highcharts/modules/annotations": "highcharts",
-      "inputmask/lib/inputmask": "inputmask"
-    }
+    "entryFile": "src/index.ts"
   },
   "allowedNonPeerDependencies": [
     "@fontsource/roboto",
@@ -26,7 +17,6 @@
     "date-fns",
     "highcharts",
     "include-media",
-    "inputmask",
-    "ts-deepcopy"
+    "inputmask"
   ]
 }
