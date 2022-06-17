@@ -17,15 +17,13 @@ import { ChartConfigService } from '../configs/chart-config.service';
 
 import { Chart } from './configured-chart-js';
 
-const CHART_LOCALE_DEFAULT = 'en-US';
-
 @Injectable()
 export class ChartJSService {
   private chart: Chart;
-  private dataLabelOptions: ChartDataLabelOptions;
+  protected dataLabelOptions: ChartDataLabelOptions;
   private highlightedElements: ChartHighlightedElements;
   private chartType: ChartType;
-  private locale: ChartLocale;
+  //protected locale: ChartLocale;
 
   constructor(private chartConfigService: ChartConfigService) {}
 
@@ -53,14 +51,14 @@ export class ChartJSService {
     this.dataLabelOptions = dataLabelOptions || null;
     this.highlightedElements = highlightedElements || null;
     this.chartType = type;
-    this.locale = dataLabelOptions?.locale || CHART_LOCALE_DEFAULT;
+    //this.locale = dataLabelOptions?.locale || CHART_LOCALE_DEFAULT;
 
     const datasets = this.createDatasets(data);
 
     const options = this.createOptionsObject({
       customOptions,
       annotations,
-      dataLabelOptions,
+      //dataLabelOptions,
     });
     let config = this.createConfigurationObject(type, datasets, options, labels);
 
@@ -201,7 +199,7 @@ export class ChartJSService {
     return options;
   }
 
-  private createStockOptionsObject(dataLabelOptions: ChartDataLabelOptions) {
+  /*private createStockOptionsObject(dataLabelOptions: ChartDataLabelOptions) {
     return {
       locale: this.locale,
       plugins: {
@@ -236,43 +234,40 @@ export class ChartJSService {
         },
       },
     };
-  }
+  }*/
 
   private createOptionsObject(args: {
     customOptions?: ChartOptions;
     annotations?: AnnotationOptions[];
-    dataLabelOptions?: ChartDataLabelOptions;
+    /*dataLabelOptions?: ChartDataLabelOptions;*/
   }): ChartOptions {
-    const { customOptions, annotations, dataLabelOptions: chartDataLabelOptions } = args;
+    const { customOptions, annotations /*dataLabelOptions: chartDataLabelOptions */ } = args;
 
     const typeConfig = this.chartConfigService.getTypeConfig(this.chartType);
     const typeConfigOptions = typeConfig?.options;
     const annotationPluginOptions = annotations
       ? this.createAnnotationPluginOptionsObject(annotations)
       : {};
-    const stockOptions: ChartOptions =
-      this.chartType === 'stock' ? this.createStockOptionsObject(chartDataLabelOptions) : {};
+    /*const stockOptions: ChartOptions =
+      this.chartType === 'stock' ? this.createStockOptionsObject(chartDataLabelOptions) : {};*/
 
-    let options: ChartOptions = mergeDeepAll(
-      stockOptions,
+    /* TODO: better name ... */
+    const modifiedOptions = this.createOptionsObjectHook([
       typeConfigOptions,
       customOptions,
-      annotationPluginOptions
-    );
+      annotationPluginOptions,
+    ]);
 
-    return this.applyInteractionFunctionsExtensions(options);
+    let mergedOptions: ChartOptions = mergeDeepAll(...modifiedOptions);
+
+    return this.applyInteractionFunctionsExtensions(mergedOptions);
   }
 
-  private getDefaultStockLabels(datasets: ChartDataset[], locale: ChartLocale) {
-    const largestDataset = datasets.reduce((previousDataset, currentDataset) =>
-      previousDataset.data.length > currentDataset.data.length ? previousDataset : currentDataset
-    );
-    return largestDataset.data.map((point: ScatterDataPoint) =>
-      toDate(point.x).toLocaleDateString(locale, {
-        month: 'short',
-        day: 'numeric',
-      })
-    );
+  /* TODO: properly type this */
+  protected createOptionsObjectHook(
+    args: [typeConfigOptions: any, customOptions: any, annotationPluginOptions: any]
+  ): any {
+    return args;
   }
 
   private getLabelsToApply(args: {
@@ -305,15 +300,18 @@ export class ChartJSService {
     } else if (labelsAreGivenTogetherWithDataset) {
       return null;
     } else {
-      /* 
+      return this.getDefaultLabels(datasets);
+    }
+  }
+
+  protected getDefaultLabels(datasets: ChartDataset[]) {
+    /* 
         Chart.js requires labels along the index axis to render anything therefore
         all other types than stock uses empty labels as default. The stock type 
         displays day & month as default. 
       */
-      return type === 'stock'
-        ? this.getDefaultStockLabels(datasets, this.locale)
-        : this.createBlankLabels(datasets);
-    }
+
+    return this.createBlankLabels(datasets);
   }
 
   private createConfigurationObject(
@@ -441,5 +439,72 @@ export class ChartJSService {
       }
     });
     return { value, pointer };
+  }
+}
+
+/* TODO: Make it part of class */
+const CHART_LOCALE_DEFAULT = 'en-US';
+
+export class StockChartJSService extends ChartJSService {
+  private get locale(): ChartLocale {
+    return this.dataLabelOptions?.locale || CHART_LOCALE_DEFAULT;
+  }
+
+  protected getDefaultLabels(datasets: ChartDataset[]) {
+    return this.getDefaultStockLabels(datasets, this.locale);
+  }
+
+  protected createOptionsObjectHook(args: any[]) {
+    const stockOptions: ChartOptions = this.createStockOptionsObject(this.dataLabelOptions);
+    return [stockOptions, ...args];
+  }
+
+  private createStockOptionsObject(dataLabelOptions: ChartDataLabelOptions) {
+    return {
+      locale: this.locale,
+      plugins: {
+        tooltip: {
+          callbacks: {
+            title: (tooltipItems) => {
+              const date = toDate((tooltipItems[0]?.raw as any)?.x);
+              if (date.valueOf()) {
+                return date.toLocaleTimeString(this.locale, {
+                  day: 'numeric',
+                  month: 'short',
+                  hour: '2-digit',
+                  minute: '2-digit',
+                });
+              }
+            },
+            label: (context) => {
+              // It's not possible to add spacing between color legend and text so we
+              // prefix with a space.
+              return ' ' + context.formattedValue + (dataLabelOptions.valueSuffix || '');
+            },
+          },
+        },
+      },
+      scales: {
+        y: {
+          ticks: {
+            callback: (value) => {
+              return value + (dataLabelOptions.valueSuffix || '');
+            },
+          },
+        },
+      },
+    };
+  }
+
+  private getDefaultStockLabels(datasets: ChartDataset[], locale: ChartLocale) {
+    const largestDataset = datasets.reduce((previousDataset, currentDataset) =>
+      previousDataset.data.length > currentDataset.data.length ? previousDataset : currentDataset
+    );
+    return largestDataset.data.map((point: ScatterDataPoint) =>
+      toDate(point.x).toLocaleDateString(locale, {
+        month: 'short',
+        day: 'numeric',
+      })
+    );
   }
 }
