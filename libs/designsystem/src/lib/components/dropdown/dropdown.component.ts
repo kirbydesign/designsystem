@@ -471,7 +471,7 @@ export class DropdownComponent
 
   @HostListener('keydown.enter')
   @HostListener('keydown.escape')
-  _onEnterOrEsscape(event?: FocusEvent) {
+  _onEnterOrEscape() {
     this.close();
     this._onTouched();
   }

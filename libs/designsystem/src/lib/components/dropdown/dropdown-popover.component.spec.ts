@@ -567,9 +567,10 @@ describe('DropdownComponent (popover version)', () => {
         });
       });
 
-      describe('and looses focus', () => {
+      describe('and popover is clicked', () => {
         it('should close dropdown', () => {
-          spectator.dispatchFakeEvent(spectator.element, 'blur');
+          spectator.click('kirby-popover');
+
           expect(spectator.component.isOpen).toBeFalsy();
         });
       });
@@ -802,14 +803,6 @@ describe('DropdownComponent (popover version)', () => {
         spectator.component.registerOnChange(onChangeSpy);
         spectator.component.onItemSelect(selectedIndex);
         expect(onChangeSpy).toHaveBeenCalledWith(expectedItem);
-      });
-
-      it('should invoke callback from registerOnTouched() function on blur', () => {
-        const onTouchedSpy = jasmine.createSpy('_onTouched');
-        spectator.component.registerOnTouched(onTouchedSpy);
-        spectator.blur();
-        spectator.detectChanges();
-        expect(onTouchedSpy).toHaveBeenCalled();
       });
 
       describe('when setDisabledState() function is invoked', () => {
