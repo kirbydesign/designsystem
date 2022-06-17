@@ -308,20 +308,20 @@ export class ChartJSService {
     });
   }
   private createDatasets(data: ChartDataset[] | number[]): ChartDataset[] {
-    // We need to modify the datasets in order to add datalabels.
+    let datasets = isNumberArray(data) ? [{ data }] : data;
+    if (this.highlightedElements)
+      this.addHighlightedElementsToDatasets(this.highlightedElements, datasets);
+
+    datasets = this.createDatasetsHook(datasets);
+    /*    // We need to modify the datasets in order to add datalabels.
     if (
       this.dataLabelOptions?.showCurrent ||
       this.dataLabelOptions?.showMax ||
       this.dataLabelOptions?.showMin
     ) {
       data = this.addDataLabelsData(data);
-    }
-    let datasets = isNumberArray(data) ? [{ data }] : data;
-    if (this.highlightedElements)
-      this.addHighlightedElementsToDatasets(this.highlightedElements, datasets);
+    }*/
 
-    datasets = this.createDatasetsHook(datasets);
-    console.log(datasets);
     return datasets;
   }
 

@@ -82,6 +82,15 @@ export class StockChartJSService extends ChartJSService {
        Hacky solution. Should be fixed in this issue:
       https://github.com/kirbydesign/designsystem/issues/1967 
     */
+    // We need to modify the datasets in order to add datalabels.
+    if (
+      this.dataLabelOptions?.showCurrent ||
+      this.dataLabelOptions?.showMax ||
+      this.dataLabelOptions?.showMin
+    ) {
+      datasets = this.addDataLabelsData(datasets);
+    }
+
     return datasets.map((dataset: any) => ({
       ...dataset,
       kirbyOptions: { ...dataset.kirbyOptions, isStockChart: true },
