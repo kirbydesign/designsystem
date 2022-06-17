@@ -7,11 +7,11 @@ const { getThemeColorHexString } = ColorHelper;
 const config = {
   selector: 'cookbook-chart-example-stock-comparison',
   template: `
-  <kirby-chart 
+  <kirby-stock-chart 
   type="stock" 
   [data]="_datasets"
   [dataLabelOptions]="_dataLabelOptions"
-  ></kirby-chart>
+  ></kirby-stock-chart>
   `,
   codeSnippet: `
   _dataLabelOptions: ChartDataLabelOptions = {

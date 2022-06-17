@@ -14,28 +14,20 @@ import { AnnotationOptions } from 'chartjs-plugin-annotation';
 import { ResizeObserverFactory } from '../shared';
 
 import { ChartJSService } from './chart-js/chart-js.service';
-import {
-  ChartDataLabelOptions,
-  ChartDataset,
-  ChartHighlightedElements,
-  ChartLabel,
-  ChartType,
-} from './chart.types';
+import { ChartDataset, ChartHighlightedElements, ChartLabel, ChartType } from './chart.types';
 
 @Component({
-  selector: 'kirby-chart',
+  selector: 'kirby-base-chart',
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.scss'],
-  providers: [ChartJSService],
 })
-export class ChartComponent implements AfterViewInit, OnChanges {
+export class BaseChartComponent implements AfterViewInit, OnChanges {
   @Input() type: ChartType = 'column';
   @Input() data: ChartDataset[] | number[];
 
   @Input() labels: ChartLabel[];
 
   @Input() customOptions?: ChartOptions;
-  @Input() dataLabelOptions?: ChartDataLabelOptions;
   @Input() annotations?: AnnotationOptions[];
   @Input() highlightedElements?: ChartHighlightedElements;
 
@@ -48,9 +40,9 @@ export class ChartComponent implements AfterViewInit, OnChanges {
   @ViewChild('chartCanvas')
   canvasElement: ElementRef<HTMLCanvasElement>;
 
-  private chartHasBeenRendered: boolean = false;
+  protected chartHasBeenRendered: boolean = false;
 
-  constructor(private chartJSService: ChartJSService) {}
+  constructor(protected chartJSService: ChartJSService) {}
 
   ngAfterViewInit() {
     /* 
@@ -104,7 +96,7 @@ export class ChartComponent implements AfterViewInit, OnChanges {
     }
   }
 
-  private renderChart() {
+  protected renderChart(additionalArgs?: any) {
     this.chartHasBeenRendered = true;
     this.chartJSService.renderChart({
       targetElement: this.canvasElement,
@@ -113,8 +105,8 @@ export class ChartComponent implements AfterViewInit, OnChanges {
       labels: this.labels,
       customOptions: this.customOptions,
       annotations: this.annotations,
-      dataLabelOptions: this.dataLabelOptions,
       highlightedElements: this.highlightedElements,
+      ...additionalArgs,
     });
   }
 
@@ -146,3 +138,11 @@ export class ChartComponent implements AfterViewInit, OnChanges {
     this.chartJSService.redrawChart();
   }
 }
+
+@Component({
+  selector: 'kirby-chart',
+  templateUrl: './chart.component.html',
+  styleUrls: ['./chart.component.scss'],
+  providers: [ChartJSService],
+})
+export class ChartComponent extends BaseChartComponent {}

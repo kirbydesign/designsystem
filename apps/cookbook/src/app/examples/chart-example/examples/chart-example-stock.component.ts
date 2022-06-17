@@ -6,11 +6,10 @@ const { getThemeColorHexString } = ColorHelper;
 const config = {
   selector: 'cookbook-chart-example-stock',
   template: `
-  <kirby-chart 
-  type="stock" 
+  <kirby-stock-chart 
   [data]="_dataset"
   [dataLabelOptions]="_dataLabelOptions"
-  ></kirby-chart>
+  ></kirby-stock-chart>
   `,
   codeSnippet: `
   _dataLabelOptions: ChartDataLabelOptions = {
