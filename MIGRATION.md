@@ -21,6 +21,12 @@ This document provides information about breaking changes and their migrations f
 
 From v6 and onwards, Kirby no longer supports Angular projects using the Legacy View Engine. Applications already using Ivy should see no differences other than Kirby not needing an additional compile-step on their side via `ngcc`.
 
+### Styles
+
+`global-styles` and `utils` are now the only modules that can be loaded from `~@kirbydesign/designsystem/scss`.
+This means that modules like `~@kirbydesign/designsystem/scss/theme/colors` is no longer available as a standalone module, and should instead be changed to `~@kirbydesign/designsystem/scss/utils`,
+which forwards all mixins and functions exposed by Kirby.
+
 ### Components
 
 #### Alert

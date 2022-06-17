@@ -17,7 +17,6 @@
     "date-fns",
     "highcharts",
     "include-media",
-    "inputmask",
-    "ts-deepcopy"
+    "inputmask"
   ]
 }

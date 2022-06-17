@@ -59,6 +59,11 @@ export const kirbyIconSettings: IconSettings = {
     { name: 'warning', svg: 'assets/kirby/icons/svg/warning.svg' },
     { name: 'write-message', svg: 'assets/kirby/icons/svg/write-message.svg' },
     { name: 'reorder', svg: 'assets/kirby/icons/svg/reorder.svg' },
+    { name: 'accident', svg: 'assets/kirby/icons/svg/accident.svg' },
+    { name: 'health', svg: 'assets/kirby/icons/svg/health.svg' },
+    { name: 'illness', svg: 'assets/kirby/icons/svg/illness.svg' },
+    { name: 'incapacity', svg: 'assets/kirby/icons/svg/incapacity.svg' },
+    { name: 'life', svg: 'assets/kirby/icons/svg/life.svg' },
   ],
 };
 
