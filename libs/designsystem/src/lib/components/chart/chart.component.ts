@@ -22,9 +22,6 @@ import {
   ChartType,
 } from './chart.types';
 
-const DATA_LABELS_DEPRECATION_WARNING =
-  'Deprecation warning: The "kirby-chart" input property "dataLabels" will be removed in a future release of Kirby designsystem. Use "labels" instead. For more information see the following announcement: https://github.com/kirbydesign/designsystem/discussions/1980';
-
 @Component({
   selector: 'kirby-chart',
   templateUrl: './chart.component.html',
@@ -35,18 +32,7 @@ export class ChartComponent implements AfterViewInit, OnChanges {
   @Input() type: ChartType = 'column';
   @Input() data: ChartDataset[] | number[];
 
-  private _labels: ChartLabel[];
-
-  get labels(): ChartLabel[] {
-    return this._labels;
-  }
-  @Input() set labels(value: ChartLabel[]) {
-    this._labels = value;
-  }
-  @Input() set dataLabels(value: string[] | string[][]) {
-    console.warn(DATA_LABELS_DEPRECATION_WARNING);
-    this._labels = value;
-  }
+  @Input() labels: ChartLabel[];
 
   @Input() customOptions?: ChartOptions;
   @Input() dataLabelOptions?: ChartDataLabelOptions;
@@ -99,10 +85,8 @@ export class ChartComponent implements AfterViewInit, OnChanges {
     if (this.chartHasBeenRendered) {
       let shouldRedrawChart = false;
 
-      // TODO: Remove 'dataLabels' key when the input property is removed
       const keyUpdateFnPairs = {
         data: () => this.updateData(),
-        dataLabels: () => this.updateLabels(),
         labels: () => this.updateLabels(),
         type: () => this.updateType(),
         customOptions: () => this.updateCustomOptions(),

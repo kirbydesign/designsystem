@@ -13,8 +13,8 @@ export class SlideButtonExampleComponent {
     const config: AlertConfig = {
       title: 'Your alert',
       message: 'Your alert message',
-      okBtnText: 'Ok',
-      cancelBtnText: 'Cancel',
+      okBtn: 'Ok',
+      cancelBtn: 'Cancel',
     };
     this.modalController.showAlert(config, this.onAlertClosed);
   }

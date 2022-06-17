@@ -115,13 +115,13 @@ describe('DateInputDirective', () => {
       expect(datemaskLineHeight).toEqual(inputLineHeight);
     });
 
-    it('should have same margin as input padding', () => {
+    it('should have same padding as input padding', () => {
       const datemask = spectator.element.parentNode.querySelector('.date-mask');
 
       const inputPadding = TestHelper.getCssProperty(spectator.element, 'padding');
-      const datemaskMargin = TestHelper.getCssProperty(datemask, 'margin');
+      const datemaskPadding = TestHelper.getCssProperty(datemask, 'padding');
 
-      expect(datemaskMargin).toEqual(inputPadding);
+      expect(datemaskPadding).toEqual(inputPadding);
     });
   });
 });

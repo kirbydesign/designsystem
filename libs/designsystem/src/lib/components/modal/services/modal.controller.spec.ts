@@ -95,9 +95,9 @@ describe('ModalController', () => {
         Promise.resolve(overlaySpy3)
       );
 
-      await modalController.showModal({ title: 'Modal 1', component: undefined });
-      await modalController.showModal({ title: 'Modal 2', component: undefined });
-      await modalController.showModal({ title: 'Modal 3', component: undefined });
+      await modalController.showModal({ component: undefined });
+      await modalController.showModal({ component: undefined });
+      await modalController.showModal({ component: undefined });
       expect(modalController['overlays'].length).toBe(3);
 
       await modalController.hideAll();
@@ -123,20 +123,20 @@ describe('ModalController', () => {
     });
 
     it('should invoke the registered callback when closed', async () => {
-      await modalController.showModal({ title: 'Modal 1', component: undefined }, callbackSpy);
+      await modalController.showModal({ component: undefined }, callbackSpy);
       await modalController.hideTopmost();
       expect(callbackSpy).toHaveBeenCalled();
     });
 
     it('should invoke the registered callback with data when closed', async () => {
       const expectedValue = 'Returned Data 123';
-      await modalController.showModal({ title: 'Modal 1', component: undefined }, callbackSpy);
+      await modalController.showModal({ component: undefined }, callbackSpy);
       await modalController.hideTopmost(expectedValue);
       expect(callbackSpy).toHaveBeenCalledWith(expectedValue);
     });
 
     it('should call close() on the returned modal when closed', async () => {
-      await modalController.showModal({ title: 'Modal 1', component: undefined });
+      await modalController.showModal({ component: undefined });
       await modalController.hideTopmost();
       expect(overlaySpy.dismiss).toHaveBeenCalled();
     });

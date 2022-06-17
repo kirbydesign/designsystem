@@ -11,31 +11,28 @@ const config = {
 
   <!-- Custom Page Title -->
   <div *kirbyPageTitle>
-    <ng-container *ngTemplateOutlet="pageTitle"></ng-container>
-  </div>
-
-  <ng-template kirbyPageToolbarTitle>
-    <ng-container *ngTemplateOutlet="toolbarTitle"></ng-container>
-  </ng-template>
-
-  <ng-template #pageTitle>
     <div style="display: flex; gap: 0.5rem;">
       <h1 [kirbyFitHeading]="{ maxLines: 2 }">
         Custom Titles with very long names that span multiple lines will be truncated
       </h1>
       <kirby-icon name="arrow-down"></kirby-icon>
     </div>
-  </ng-template>
+  </div>
 
-  <ng-template #toolbarTitle>
-    <div style="display: flex; gap: 0.5rem;">
-      <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-        Custom Titles with very long names that span multiple lines will be truncated
-      </div>
-      <kirby-icon name="arrow-down"></kirby-icon>
+  <!-- Custom Page Subtitle -->
+  <div *kirbyPageSubtitle>
+    <div>
+      Custom subtitles with very long names that span multiple lines will wrap.
     </div>
-  </ng-template>
-  
+  </div>
+
+  <div *kirbyPageToolbarTitle style="display: flex; gap: 0.5rem;">
+    <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+      Custom Titles with very long names that span multiple lines will be truncated
+    </div>
+    <kirby-icon name="arrow-down"></kirby-icon>
+  </div>
+
   <!-- Fixed Page Actions -->
   <kirby-page-actions *kirbyPageActions="{fixed: true}">
     <button kirby-button (click)="onMoreSelect()">

@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
+import exampleHtml from '../../examples/tabs-example/tabs-example.component.html?raw';
+
 @Component({
   selector: 'cookbook-tabs-showcase',
   templateUrl: './tabs-showcase.component.html',
   styleUrls: ['./tabs-showcase.component.scss'],
 })
 export class TabsShowcaseComponent implements OnInit {
-  exampleHtml: string =
-    require('!raw-loader!../../examples/tabs-example/tabs-example.component.html').default;
+  exampleHtml = exampleHtml;
 
   exampleRouterHtml = `<kirby-tab-bar>
     <kirby-tab-button routerLink="dashboard">

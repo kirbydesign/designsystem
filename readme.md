@@ -25,7 +25,7 @@ The Kirby Cookbook, containing samples, status of components etc. can be accesse
   - [Sass](#sass)
   - [Icons](#icons)
   - [Testing](#testing)
-  - [Migration Guide](#migration-guide)
+  - [Migration Guides](#migration-guides)
 - [Folder Structure](#folder-structure)
 - [Scripts](#scripts)
 - [Developing new features in Kirby](#developing-new-features-in-kirby)
@@ -113,80 +113,6 @@ describe('AppComponent', () => {
 For unit test performance reasons it's highly recommended to utilize these modules, since they provide a template-less implementation of the Kirby Components, but still translude content through `<ng-content></ng-content>` and provide `@Input` -decorated properties and `@Output` -decorated `EventEmitter` s, without
 having to reflow the DOM, execute component logic etc.
 
-### Migration Guide
-
-To upgrade, please perform the following tasks:
-
-- `v0.x.x` => `v1.0.0`
-
-  #### Simplified namespaces
-
-  Import `@kirbydesign/designsystem` instead of `@kirbydesign/designsystem/list` or `@kirbydesign/designsystem/modal` . This can be done by executing the following commands (Mac/Linux and Windows respectively):
-
-  ##### Mac / Linux
-
-```sh
-  cd <root folder of your application>
-  find . -name "*.ts" ! -name "*.spec.ts" -type f -exec sed -i '' -e "s|from '@kirbydesign/designsystem/.*';$|from '@kirbydesign/designsystem';|g" {} \;
-  find . -name "*.spec.ts" -type f -exec sed -i '' -e "s|from '@kirbydesign/designsystem/testing';$|from '@kirbydesign/designsystem/testing-jasmine';|g" {} \;
-```
-
-_Note: If you're using `jest` you should replace with `@kirbydesign/designsystem/testing-jest` instead._
-
-##### Windows
-
-```sh
-  cd <root folder of your application>
-  Get-ChildItem "*.ts" -Recurse | ForEach {
-  (Get-Content $_ | ForEach  { $_ `
-    -replace "from '@kirbydesign/designsystem/((?!testing).)*';$", "from '@kirbydesign/designsystem';" `
-    -replace "from '@kirbydesign/designsystem/testing';$", "from '@kirbydesign/designsystem/testing-jasmine';" `
-  }) | Set-Content $_
-  }
-```
-
-_Note: If you're using `jest` you should replace with `@kirbydesign/designsystem/testing-jest` instead._
-
-#### Change TypeScript configuration
-
-Due to Kirby not being distributed as a source-distribution package any more, changes to `tsconfig.json` , `tsconfig.app.json` as well as `tsconfig.spec.json` should be reverted:
-
-In `tsconfig.json` :
-
-- Remove the line `"./node_modules/@kirbydesign/designsystem/**/*.ts"` from the `includes`-array
-
-In `tsconfig.app.json` :
-
-- Remove the line `"./node_modules/@kirbydesign/designsystem/**/*.ts"` from the `includes`-array
-- Remove the line `"../node_modules/@kirbydesign/designsystem/testing/**/*.*"` from the `excludes` -array
-
-In `tsconfig.spec.json` :
-
-- Remove the line `"../node_modules/@kirbydesign/designsystem/**/*.ts",` from the `includes`-array
-
-#### Changed dependencies
-
-Remove any previously installed dev-dependencies for `sass-extract` , `sass-extract-loader` and `ng-mocks` _(unless otherwise used in your application)_.
-This can be done by the following command:
-
-`npm uninstall --save-dev sass-extract sass-extract-loader ng-mocks`
-
-#### Deprecation
-
-The following legacy components have been removed:
-
-- `ListItemComponent` (`<kirby-list-item>`)
-- `ListFlexItemComponent` (`<kirby-list-flex-item>`)
-- `ListCellComponent` (`<kirby-list-cell>`)
-- `ListCellLineComponent` (`<kirby-list-cell-line>`)
-
-The following directives have been deprecated and will be removed in future versions:
-
-- `ListItemDirective` (`[kirbyListItem]`)
-- `ListFlexItemDirective` (`[kirbyListFlexItem]`)
-
-_Please see the [list documentation][kirby.cookbook.list] on how to use the list component(s) and directives._
-
 ### Icons
 
 Kirby comes bundled with a default set of icons. Make sure the `.svg` files used by Kirby are copied to your output folder by adding the following to `build > options > assets` in `angular.json` :
@@ -215,6 +141,10 @@ Kirby comes bundled with a default set of icons. Make sure the `.svg` files used
 }
 ```
 
+### Migration Guides
+
+For details on migrating from earlier versions of Kirby see our [Migration Guides](./MIGRATION.md).
+
 ## Folder Structure
 
 The folder structure of the repository is based on [Nrwl][nrwl]'s [NX][nx] mono-repository project.
@@ -224,10 +154,7 @@ A basic walkthrough is outlined in the structure below:
 ```
 @kirbydesign/designsystem
 ├── apps                    # Contains source code for applications
-|  ├── cookbook             # - Cookbook application (showcase and examples)
-|  └── cookbook-e2e         # - End-to-end tests for Cookbook application
-├── config
-|  └── helm
+|  └── cookbook             # - Cookbook application (showcase and examples)
 ├── dist                    # Contains output files when building artifacts (for distribution)
 |  ├── apps
 |  └── libs
