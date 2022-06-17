@@ -1,6 +1,6 @@
 {
   "name": "designsystem",
-  "version": "5.4.1",
+  "version": "6.0.1",
   "description": "Kirby Design Angular Components. This library provides Angular wrappers for the @kirbydesign/core package, for smoother integration into Angular projects.",
   "engines": {
     "node": "^14.16"
@@ -108,7 +108,6 @@
     "prismjs": "1.27.0",
     "reflect-metadata": "0.1.8",
     "rxjs": "6.5.5",
-    "ts-deepcopy": "^0.1.4",
     "tslib": "^2.0.3",
     "zone.js": "0.11.5"
   },

@@ -16,7 +16,6 @@
     "date-fns-tz",
     "date-fns",
     "include-media",
-    "inputmask",
-    "ts-deepcopy"
+    "inputmask"
   ]
 }

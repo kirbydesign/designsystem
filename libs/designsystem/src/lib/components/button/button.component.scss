@@ -25,6 +25,8 @@ $button-width: (
   }
 
   &.icon-only {
+    --kirby-icon-font-size: #{utils.size('s')};
+
     width: utils.size('l');
     min-width: unset;
   }
