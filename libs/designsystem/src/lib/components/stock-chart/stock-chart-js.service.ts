@@ -96,4 +96,61 @@ export class StockChartJSService extends ChartJSService {
       kirbyOptions: { ...dataset.kirbyOptions, isStockChart: true },
     }));
   }
+
+  /**
+   * Decorate ChartDataset with properties to allow for datalabels.
+   *
+   * @param data
+   * @returns ChartDataset[]
+   */
+  private addDataLabelsData(data: ChartDataset[]): ChartDataset[] {
+    const decorateDataPoint = (
+      set: ChartDataset,
+      axis: 'x' | 'y',
+      direction: 'high' | 'low',
+      position: 'bottom' | 'top' | 'left' | 'right'
+    ): void => {
+      const { value, pointer } = this.locateValueIndexInDataset(set, axis, direction);
+      set.data[pointer] = {
+        ...(set.data[pointer] as ScatterDataPoint),
+        datalabel: {
+          value: value + (this.dataLabelOptions.valueSuffix || ''),
+          position,
+        },
+      } as ScatterDataPoint;
+    };
+
+    data.map((set) => {
+      if (this.dataLabelOptions.showMin) {
+        decorateDataPoint(set, 'y', 'low', 'bottom');
+      }
+      if (this.dataLabelOptions.showMax) {
+        decorateDataPoint(set, 'y', 'high', 'top');
+      }
+      if (this.dataLabelOptions.showCurrent) {
+        decorateDataPoint(set, 'x', 'high', 'right');
+      }
+    });
+    return data;
+  }
+
+  private locateValueIndexInDataset(
+    dataset: ChartDataset,
+    axis: string,
+    direction: 'low' | 'high'
+  ): { value: number; pointer: number } {
+    let pointer: number;
+    let value: number;
+    dataset.data.forEach((datapoint, index) => {
+      if (direction == 'low' && (!value || datapoint[axis] < value)) {
+        value = datapoint['y'];
+        pointer = index;
+      }
+      if (direction == 'high' && (!value || datapoint[axis] > value)) {
+        value = datapoint['y'];
+        pointer = index;
+      }
+    });
+    return { value, pointer };
+  }
 }

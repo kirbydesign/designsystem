@@ -231,7 +231,7 @@ export class ChartJSService {
     indexAxis: 'x' | 'y';
     labels?: ChartLabel[];
   }) {
-    const { datasets, labels, type, indexAxis } = args;
+    const { datasets, labels, indexAxis } = args;
 
     const datasetHasLabels = ({ data }: ChartDataset) =>
       !!data?.some(
@@ -313,79 +313,11 @@ export class ChartJSService {
       this.addHighlightedElementsToDatasets(this.highlightedElements, datasets);
 
     datasets = this.createDatasetsHook(datasets);
-    /*    // We need to modify the datasets in order to add datalabels.
-    if (
-      this.dataLabelOptions?.showCurrent ||
-      this.dataLabelOptions?.showMax ||
-      this.dataLabelOptions?.showMin
-    ) {
-      data = this.addDataLabelsData(data);
-    }*/
 
     return datasets;
   }
 
   protected createDatasetsHook(datasets: ChartDataset[]): ChartDataset[] {
     return datasets;
-  }
-  /**
-   * Decorate ChartDataset with properties to allow for datalabels.
-   *
-   * @param data
-   * @returns ChartDataset[]
-   */
-  public addDataLabelsData(data: ChartDataset[] | number[]): ChartDataset[] {
-    if (isNumberArray(data)) {
-      throw Error("Currently it's impossible to add dataLabels to non ScatterDataPoint datasets");
-    }
-
-    const decorateDataPoint = (
-      set: ChartDataset,
-      axis: 'x' | 'y',
-      direction: 'high' | 'low',
-      position: 'bottom' | 'top' | 'left' | 'right'
-    ): void => {
-      const { value, pointer } = this.locateValueIndexInDataset(set, axis, direction);
-      set.data[pointer] = {
-        ...(set.data[pointer] as ScatterDataPoint),
-        datalabel: {
-          value: value + (this.dataLabelOptions.valueSuffix || ''),
-          position,
-        },
-      } as ScatterDataPoint;
-    };
-
-    data.map((set) => {
-      if (this.dataLabelOptions.showMin) {
-        decorateDataPoint(set, 'y', 'low', 'bottom');
-      }
-      if (this.dataLabelOptions.showMax) {
-        decorateDataPoint(set, 'y', 'high', 'top');
-      }
-      if (this.dataLabelOptions.showCurrent) {
-        decorateDataPoint(set, 'x', 'high', 'right');
-      }
-    });
-    return data;
-  }
-
-  private locateValueIndexInDataset(
-    dataset: ChartDataset,
-    axis: string,
-    direction: 'low' | 'high'
-  ): { value: number; pointer: number } {
-    let pointer: number;
-    let value: number;
-    dataset.data.forEach((datapoint, index) => {
-      if (direction == 'low' && (!value || datapoint[axis] < value)) {
-        value = datapoint['y'];
-        pointer = index;
-      }
-      if (direction == 'high' && (!value || datapoint[axis] > value)) {
-        value = datapoint['y'];
-        pointer = index;
-      }
-    });
-    return { value, pointer };
   }
 }
