@@ -57,6 +57,7 @@ ion-modal.kirby-overlay {
     --background: var(--kirby-modal-background, #{utils.get-color('background-color')});
     --border-radius: 0;
     --height: auto;
+    --box-shadow: #{utils.get-elevation(8)};
 
     &.kirby-modal-compact {
       --border-radius: #{utils.$border-radius};
@@ -99,7 +100,6 @@ ion-modal.kirby-overlay {
     @include utils.media('>=medium') {
       --width: #{utils.$modal-max-width};
       --border-radius: #{utils.$border-radius};
-      --box-shadow: #{utils.get-elevation(8)};
 
       &:not(.kirby-modal-compact) {
         --max-height: 100%;
