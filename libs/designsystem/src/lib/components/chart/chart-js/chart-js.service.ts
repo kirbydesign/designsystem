@@ -1,7 +1,6 @@
 import { ElementRef, Injectable } from '@angular/core';
 import { ActiveElement, ChartConfiguration, ChartOptions, ScatterDataPoint } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
-import { toDate } from 'date-fns';
 
 import { mergeDeepAll } from '../../../helpers/merge-deep';
 import {
@@ -9,7 +8,6 @@ import {
   ChartDataset,
   ChartHighlightedElements,
   ChartLabel,
-  ChartLocale,
   ChartType,
   isNumberArray,
 } from '../chart.types';
@@ -89,10 +87,6 @@ export class ChartJSService {
     } else {
       this.nonDestructivelyUpdateType(type, customOptions);
     }
-  }
-
-  public setDataLabelOptions(dataLabelOptions: ChartDataLabelOptions) {
-    this.dataLabelOptions = dataLabelOptions;
   }
 
   public updateOptions(customOptions: ChartOptions, type: ChartType) {
@@ -176,6 +170,7 @@ export class ChartJSService {
     });
   }
 
+  /* TODO: I think this is just stock related */
   private createAnnotationPluginOptionsObject(annotations: AnnotationOptions[]) {
     const annotationsWithDefaults = this.applyDefaultsToAnnotations(annotations);
     return {
@@ -199,57 +194,17 @@ export class ChartJSService {
     return options;
   }
 
-  /*private createStockOptionsObject(dataLabelOptions: ChartDataLabelOptions) {
-    return {
-      locale: this.locale,
-      plugins: {
-        tooltip: {
-          callbacks: {
-            title: (tooltipItems) => {
-              const date = toDate((tooltipItems[0]?.raw as any)?.x);
-              if (date.valueOf()) {
-                return date.toLocaleTimeString(this.locale, {
-                  day: 'numeric',
-                  month: 'short',
-                  hour: '2-digit',
-                  minute: '2-digit',
-                });
-              }
-            },
-            label: (context) => {
-              // It's not possible to add spacing between color legend and text so we
-              // prefix with a space.
-              return ' ' + context.formattedValue + (dataLabelOptions.valueSuffix || '');
-            },
-          },
-        },
-      },
-      scales: {
-        y: {
-          ticks: {
-            callback: (value) => {
-              return value + (dataLabelOptions.valueSuffix || '');
-            },
-          },
-        },
-      },
-    };
-  }*/
-
   private createOptionsObject(args: {
     customOptions?: ChartOptions;
     annotations?: AnnotationOptions[];
-    /*dataLabelOptions?: ChartDataLabelOptions;*/
   }): ChartOptions {
-    const { customOptions, annotations /*dataLabelOptions: chartDataLabelOptions */ } = args;
+    const { customOptions, annotations } = args;
 
     const typeConfig = this.chartConfigService.getTypeConfig(this.chartType);
     const typeConfigOptions = typeConfig?.options;
     const annotationPluginOptions = annotations
       ? this.createAnnotationPluginOptionsObject(annotations)
       : {};
-    /*const stockOptions: ChartOptions =
-      this.chartType === 'stock' ? this.createStockOptionsObject(chartDataLabelOptions) : {};*/
 
     /* TODO: better name ... */
     const modifiedOptions = this.createOptionsObjectHook([
@@ -365,19 +320,12 @@ export class ChartJSService {
     if (this.highlightedElements)
       this.addHighlightedElementsToDatasets(this.highlightedElements, datasets);
 
-    /* 
-       Hacky solution. Should be fixed in this issue:
-      https://github.com/kirbydesign/designsystem/issues/1967 
-    */
-    if (this.chartType === 'stock') {
-      datasets.forEach((dataset) => {
-        dataset.kirbyOptions = {
-          ...dataset.kirbyOptions,
-          isStockChart: true,
-        };
-      });
-    }
+    datasets = this.createDatasetsHook(datasets);
+    console.log(datasets);
+    return datasets;
+  }
 
+  protected createDatasetsHook(datasets: ChartDataset[]): ChartDataset[] {
     return datasets;
   }
   /**
@@ -439,72 +387,5 @@ export class ChartJSService {
       }
     });
     return { value, pointer };
-  }
-}
-
-/* TODO: Make it part of class */
-const CHART_LOCALE_DEFAULT = 'en-US';
-
-export class StockChartJSService extends ChartJSService {
-  private get locale(): ChartLocale {
-    return this.dataLabelOptions?.locale || CHART_LOCALE_DEFAULT;
-  }
-
-  protected getDefaultLabels(datasets: ChartDataset[]) {
-    return this.getDefaultStockLabels(datasets, this.locale);
-  }
-
-  protected createOptionsObjectHook(args: any[]) {
-    const stockOptions: ChartOptions = this.createStockOptionsObject(this.dataLabelOptions);
-    return [stockOptions, ...args];
-  }
-
-  private createStockOptionsObject(dataLabelOptions: ChartDataLabelOptions) {
-    return {
-      locale: this.locale,
-      plugins: {
-        tooltip: {
-          callbacks: {
-            title: (tooltipItems) => {
-              const date = toDate((tooltipItems[0]?.raw as any)?.x);
-              if (date.valueOf()) {
-                return date.toLocaleTimeString(this.locale, {
-                  day: 'numeric',
-                  month: 'short',
-                  hour: '2-digit',
-                  minute: '2-digit',
-                });
-              }
-            },
-            label: (context) => {
-              // It's not possible to add spacing between color legend and text so we
-              // prefix with a space.
-              return ' ' + context.formattedValue + (dataLabelOptions.valueSuffix || '');
-            },
-          },
-        },
-      },
-      scales: {
-        y: {
-          ticks: {
-            callback: (value) => {
-              return value + (dataLabelOptions.valueSuffix || '');
-            },
-          },
-        },
-      },
-    };
-  }
-
-  private getDefaultStockLabels(datasets: ChartDataset[], locale: ChartLocale) {
-    const largestDataset = datasets.reduce((previousDataset, currentDataset) =>
-      previousDataset.data.length > currentDataset.data.length ? previousDataset : currentDataset
-    );
-    return largestDataset.data.map((point: ScatterDataPoint) =>
-      toDate(point.x).toLocaleDateString(locale, {
-        month: 'short',
-        day: 'numeric',
-      })
-    );
   }
 }

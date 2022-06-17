@@ -1,8 +1,10 @@
 import { Component, Input } from '@angular/core';
 
 import { ChartDataLabelOptions } from '../chart';
-import { ChartJSService, StockChartJSService } from '../chart/chart-js/chart-js.service';
+import { ChartJSService } from '../chart/chart-js/chart-js.service';
 import { BaseChartComponent } from '../chart/chart.component';
+
+import { StockChartJSService } from './stock-chart-js.service';
 
 /* 
 TODO: Find a better way to share decorator settings
