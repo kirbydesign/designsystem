@@ -36,6 +36,7 @@ import { ListColoredItemsExampleComponent } from './list-example/examples/colore
 import { ListWithDividersExampleComponent } from './list-example/examples/dividers';
 import { ListWithHeaderAndFooterExampleComponent } from './list-example/examples/header-and-footer';
 import { ListItemsExampleComponent } from './list-example/examples/items';
+import { ListResponsiveExperimentalExampleComponent } from './list-example/examples/responsive-experimental';
 import { ListWithSectionsExampleComponent } from './list-example/examples/sections';
 import { ListWithSectionsAndColoredItemsExampleComponent } from './list-example/examples/sections-and-colored-items';
 import { ListSelectableItemsExampleComponent } from './list-example/examples/selectable-items';
@@ -316,6 +317,10 @@ export const routes: Routes = [
       {
         path: 'with-header-and-footer',
         component: ListWithHeaderAndFooterExampleComponent,
+      },
+      {
+        path: 'responsive-experimental',
+        component: ListResponsiveExperimentalExampleComponent,
       },
       {
         path: 'with-sections',

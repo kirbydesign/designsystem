@@ -2,6 +2,7 @@
 @use '../item.utils';
 
 :host {
+  // TODO: Try to get rid of this - find a better solution if possible
   @include item.item-typography;
 
   display: grid;
