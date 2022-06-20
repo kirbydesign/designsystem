@@ -40,7 +40,15 @@ export class StockChartJSService extends ChartJSService {
   }
 
   protected getDefaultLabels(datasets: ChartDataset[]) {
-    return this.getDefaultStockLabels(datasets, this.locale);
+    const largestDataset = datasets.reduce((previousDataset, currentDataset) =>
+      previousDataset.data.length > currentDataset.data.length ? previousDataset : currentDataset
+    );
+    return largestDataset.data.map((point: ScatterDataPoint) =>
+      toDate(point.x).toLocaleDateString(this.locale, {
+        month: 'short',
+        day: 'numeric',
+      })
+    );
   }
 
   protected createOptionsObjectHook(args: any[]) {
@@ -83,18 +91,6 @@ export class StockChartJSService extends ChartJSService {
         },
       },
     };
-  }
-
-  private getDefaultStockLabels(datasets: ChartDataset[], locale: ChartLocale) {
-    const largestDataset = datasets.reduce((previousDataset, currentDataset) =>
-      previousDataset.data.length > currentDataset.data.length ? previousDataset : currentDataset
-    );
-    return largestDataset.data.map((point: ScatterDataPoint) =>
-      toDate(point.x).toLocaleDateString(locale, {
-        month: 'short',
-        day: 'numeric',
-      })
-    );
   }
 
   /* TODO: This might just be used for testing...? */

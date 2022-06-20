@@ -4,7 +4,6 @@ import { AnnotationOptions } from 'chartjs-plugin-annotation';
 
 import { mergeDeepAll } from '../../../helpers/merge-deep';
 import {
-  ChartDataLabelOptions,
   ChartDataset,
   ChartHighlightedElements,
   ChartLabel,
@@ -44,7 +43,7 @@ export class ChartJSService {
       customOptions,
       annotations,
     });
-    let config = this.createConfigurationObject(type, datasets, options, labels);
+    const config = this.createConfigurationObject(type, datasets, options, labels);
 
     this.initializeNewChart(targetElement.nativeElement, config);
   }
@@ -140,13 +139,6 @@ export class ChartJSService {
 
   private initializeNewChart(canvasElement: HTMLCanvasElement, config: ChartConfiguration) {
     this.chart = new Chart(canvasElement, config);
-  }
-
-  private createBlankLabels(datasets: ChartDataset[]): string[] {
-    const largestDataset = datasets.reduce((previousDataset, currentDataset) =>
-      previousDataset.data.length > currentDataset.data.length ? previousDataset : currentDataset
-    );
-    return Array(largestDataset.data.length).fill('');
   }
 
   private applyDefaultsToAnnotations(annotations: AnnotationOptions[]) {
@@ -245,14 +237,15 @@ export class ChartJSService {
     }
   }
 
-  protected getDefaultLabels(datasets: ChartDataset[]) {
+  protected getDefaultLabels(datasets: ChartDataset[]): ChartLabel | ChartLabel[] {
     /* 
-        Chart.js requires labels along the index axis to render anything therefore
-        all other types than stock uses empty labels as default. The stock type 
-        displays day & month as default. 
-      */
-
-    return this.createBlankLabels(datasets);
+      Chart.js requires labels along the index axis to render anything therefore
+      use blank labels 
+    */
+    const largestDataset = datasets.reduce((previousDataset, currentDataset) =>
+      previousDataset.data.length > currentDataset.data.length ? previousDataset : currentDataset
+    );
+    return Array(largestDataset.data.length).fill('');
   }
 
   private createConfigurationObject(
