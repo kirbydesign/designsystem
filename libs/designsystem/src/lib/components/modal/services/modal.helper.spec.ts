@@ -374,53 +374,6 @@ describe('ModalHelper', () => {
       });
     });
 
-    describe(`when modal is opened on top of another modal`, () => {
-      const modalFlavors: ModalFlavor[] = ['modal', 'drawer', 'compact'];
-      modalFlavors.forEach((firstFlavor) => {
-        describe(`when first modal has '${firstFlavor}' flavor`, () => {
-          beforeEach(async () => {
-            await openOverlay({
-              flavor: firstFlavor,
-              component: undefined,
-            });
-          });
-
-          afterEach(async () => {
-            await overlay.dismiss();
-          });
-
-          modalFlavors.forEach((secondFlavor) => {
-            describe(`and second modal has '${secondFlavor}' flavor`, () => {
-              let secondOverlay: Overlay;
-              let secondBackdrop: HTMLIonBackdropElement;
-              beforeEach(async () => {
-                secondOverlay = await modalHelper.showModalWindow({
-                  flavor: secondFlavor,
-                  component: undefined,
-                });
-                const secondIonModal = await ionModalController.getTop();
-                expect(secondIonModal).toBeTruthy();
-                secondBackdrop = secondIonModal.querySelector(':scope > ion-backdrop');
-                expect(secondBackdrop).toBeTruthy();
-              });
-
-              afterEach(async () => {
-                await secondOverlay.dismiss();
-              });
-
-              it(`first modal should have no visible backdrop`, () => {
-                expect(ionBackdrop).toHaveComputedStyle({ opacity: invisibleBackdropOpacity });
-              });
-
-              it(`second modal should have should have correct backdrop style`, () => {
-                expect(secondBackdrop).toHaveComputedStyle({ opacity: defaultBackdropOpacity });
-              });
-            });
-          });
-        });
-      });
-    });
-
     describe('title', () => {
       let ionToolbarElement: HTMLIonToolbarElement;
       let pageTitleElement: HTMLDivElement;
@@ -620,59 +573,6 @@ describe('ModalHelper', () => {
           const ionToolbar = ionModal.querySelector('ion-header > ion-toolbar');
           expect(ionToolbar).toHaveComputedStyle({ 'padding-top': '0px' });
           await overlay.dismiss();
-        });
-      });
-
-      describe(`when modal is opened on top of another modal`, () => {
-        const modalFlavors: ModalFlavor[] = ['modal', 'drawer', 'compact'];
-        modalFlavors.forEach((firstFlavor) => {
-          describe(`when first modal has '${firstFlavor}' flavor`, () => {
-            beforeEach(async () => {
-              await openOverlay({
-                flavor: firstFlavor,
-                component: undefined,
-              });
-            });
-
-            afterEach(async () => {
-              await overlay.dismiss();
-            });
-
-            modalFlavors.forEach((secondFlavor) => {
-              describe(`and second modal has '${secondFlavor}' flavor`, () => {
-                let secondOverlay: Overlay;
-                let secondBackdrop: HTMLIonBackdropElement;
-                beforeEach(async () => {
-                  secondOverlay = await modalHelper.showModalWindow({
-                    flavor: secondFlavor,
-                    component: undefined,
-                  });
-                  const secondIonModal = await ionModalController.getTop();
-                  expect(secondIonModal).toBeTruthy();
-                  secondBackdrop = secondIonModal.querySelector(':scope > ion-backdrop');
-                  expect(secondBackdrop).toBeTruthy();
-                });
-
-                afterEach(async () => {
-                  await secondOverlay.dismiss();
-                });
-
-                if (firstFlavor === 'drawer') {
-                  it(`first drawer should have no visible backdrop`, () => {
-                    expect(ionBackdrop).toHaveComputedStyle({ opacity: invisibleBackdropOpacity });
-                  });
-                }
-
-                it(`second modal should have should have correct backdrop style`, () => {
-                  let expectedBackdropOpacity = defaultBackdropOpacity;
-                  if (firstFlavor === 'modal' && secondFlavor === 'modal') {
-                    expectedBackdropOpacity = invisibleBackdropOpacity;
-                  }
-                  expect(secondBackdrop).toHaveComputedStyle({ opacity: expectedBackdropOpacity });
-                });
-              });
-            });
-          });
         });
       });
 
