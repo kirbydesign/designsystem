@@ -157,7 +157,7 @@ export const TEST_CHART_TYPES_CONFIG: ChartTypesConfig = {
   },
 };
 
-export const TEST_CHART_ANNOTATIONS_CONFIG: AnnotationTypeRegistry = {
+export const TEST_CHART_ANNOTATIONS_CONFIG: Omit<AnnotationTypeRegistry, 'label' | 'polygon'> = {
   line: {
     borderDash: [6, 3],
   },
@@ -168,6 +168,4 @@ export const TEST_CHART_ANNOTATIONS_CONFIG: AnnotationTypeRegistry = {
   point: {
     backgroundColor: 'initial',
   },
-  label: { content: () => null },
-  polygon: { backgroundColor: 'initial' },
 };
