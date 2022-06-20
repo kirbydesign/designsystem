@@ -20,8 +20,7 @@ export class ChartJSService {
   private chart: Chart;
   protected dataLabelOptions: ChartDataLabelOptions;
   private highlightedElements: ChartHighlightedElements;
-  private chartType: ChartType;
-  //protected locale: ChartLocale;
+  protected chartType: ChartType;
 
   constructor(private chartConfigService: ChartConfigService) {}
 
@@ -49,7 +48,6 @@ export class ChartJSService {
     this.dataLabelOptions = dataLabelOptions || null;
     this.highlightedElements = highlightedElements || null;
     this.chartType = type;
-    //this.locale = dataLabelOptions?.locale || CHART_LOCALE_DEFAULT;
 
     const datasets = this.createDatasets(data);
 

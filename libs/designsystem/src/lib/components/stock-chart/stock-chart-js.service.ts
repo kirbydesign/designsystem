@@ -10,6 +10,8 @@ const CHART_LOCALE_DEFAULT = 'en-US';
 
 @Injectable()
 export class StockChartJSService extends ChartJSService {
+  protected readonly chartType = 'stock';
+
   private get locale(): ChartLocale {
     return this.dataLabelOptions?.locale || CHART_LOCALE_DEFAULT;
   }
