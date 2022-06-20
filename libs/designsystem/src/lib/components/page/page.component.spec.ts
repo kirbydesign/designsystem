@@ -206,6 +206,32 @@ describe('PageComponent', () => {
     flush();
   }));
 
+  describe('with a back-button', () => {
+    let ionBackButton;
+
+    beforeEach(() => {
+      ionBackButton = spectator.queryHost('ion-toolbar ion-buttons ion-back-button');
+    });
+
+    it('should call the default click handler if no back-button-click observer is provided', () => {
+      const defaultHandler = jasmine.createSpy();
+      ionBackButton.onclick = defaultHandler;
+
+      spectator.click(ionBackButton);
+
+      expect(defaultHandler).toHaveBeenCalledTimes(1);
+    });
+
+    it('should emit an event on click if a back-button-click observer is provided', () => {
+      const subscriber = jasmine.createSpy();
+      spectator.output('backButtonClick').subscribe(subscriber);
+
+      spectator.click(ionBackButton);
+
+      expect(subscriber).toHaveBeenCalledTimes(1);
+    });
+  });
+
   describe('pull-to-refresh', () => {
     it('should be available when "refresh" is subscribed to', () => {
       spectator.output('refresh').subscribe(() => {});
