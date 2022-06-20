@@ -2,18 +2,17 @@ import { Component, ElementRef, OnInit, Optional, ViewChild } from '@angular/cor
 import { RouterTestingModule } from '@angular/router/testing';
 import { ModalController as IonicModalController } from '@ionic/angular';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
-import { MockComponents } from 'ng-mocks';
 
 import { DesignTokenHelper } from '@kirbydesign/core';
 
-import { ScreenSize, TestHelper } from '../../../testing/test-helper';
+import { TestHelper } from '../../../testing/test-helper';
 import { WindowRef } from '../../../types/window-ref';
 import { ButtonComponent } from '../../button/button.component';
 import { IconComponent } from '../../icon';
 import { PageProgressComponent, PageTitleComponent } from '../../page/page.component';
 import { ModalFooterComponent } from '../footer/modal-footer.component';
 import { ModalCompactWrapperComponent } from '../modal-wrapper/compact/modal-compact-wrapper.component';
-import { ModalConfig, ModalFlavor, ModalSize } from '../modal-wrapper/config/modal-config';
+import { ModalConfig, ModalSize } from '../modal-wrapper/config/modal-config';
 import { ModalWrapperComponent } from '../modal-wrapper/modal-wrapper.component';
 
 import { ModalNavigationService } from './modal-navigation.service';
@@ -64,22 +63,20 @@ class ContentWithNoOverflowEmbeddedComponent {}
 })
 class PageProgressEmbeddedComponent {}
 
+function getElementVerticalCenter(element: Element): number {
+  const elementDOMRect = element.getBoundingClientRect();
+  return elementDOMRect.top + elementDOMRect.height / 2;
+}
+
 describe('ModalHelper', () => {
   let spectator: SpectatorService<ModalHelper>;
   let modalHelper: ModalHelper;
   let ionModalController: IonicModalController;
   let overlay: Overlay;
   let ionModal: HTMLIonModalElement;
-  let ionBackdrop: HTMLIonBackdropElement;
-  let modalShadow: HTMLElement;
-  let ionModalWrapper: HTMLElement;
   let dummyPresentingElement: HTMLElement;
 
-  const defaultBackdropOpacity = '0.4';
-  const invisibleBackdropOpacity = '0.01';
-  const defaultBorderRadius = DesignTokenHelper.borderRadius();
   const size = DesignTokenHelper.size;
-  const backgroundColor = DesignTokenHelper.backgroundColor();
   const modalPaddingTopPx = size('xl');
   const modalPaddingTop = parseInt(modalPaddingTopPx);
   const modalHeaderHeight = 46;
@@ -135,12 +132,6 @@ describe('ModalHelper', () => {
     overlay = await modalHelper.showModalWindow(config);
     ionModal = await ionModalController.getTop();
     expect(ionModal).toBeTruthy();
-    ionModalWrapper = ionModal.querySelector(':scope > .modal-wrapper');
-    expect(ionModalWrapper).toBeTruthy();
-    ionBackdrop = ionModal.querySelector(':scope > ion-backdrop');
-    expect(ionBackdrop).toBeTruthy();
-    modalShadow = ionModal.querySelector<HTMLElement>(':scope > .modal-shadow');
-    expect(modalShadow).toBeTruthy();
   };
 
   const openModal = async (component?: any, size?: ModalSize) => {
@@ -148,7 +139,6 @@ describe('ModalHelper', () => {
   };
 
   const openDrawer = async (
-    title?: string,
     component?: any,
     size?: ModalSize,
     interactWithBackground?: boolean
@@ -159,9 +149,19 @@ describe('ModalHelper', () => {
   describe('showModalWindow', () => {
     const allow_scroll_class = 'allow-background-scroll';
 
-    describe(`When drawer can interact with background`, () => {
+    it('modal window should not take focus from embedded input after opening', async () => {
+      await openModal(InputEmbeddedComponent);
+      const ionContent = ionModal.querySelector<HTMLElement>('ion-content');
+      await TestHelper.whenReady(ionContent);
+
+      const input: HTMLInputElement = ionContent.querySelector<HTMLInputElement>('input');
+      expect(input).withContext('Input is not defined').toEqual(jasmine.anything());
+      expect(document.activeElement).toEqual(input);
+    });
+
+    describe(`when drawer can interact with background`, () => {
       beforeEach(async () => {
-        await openDrawer('Drawer with interact with background', null, null, true);
+        await openDrawer(null, null, true);
       });
 
       it(`body should be scrollable`, async () => {
@@ -172,27 +172,21 @@ describe('ModalHelper', () => {
         await overlay.dismiss();
       });
 
-      it(`Drawer close should remove '${allow_scroll_class}'`, async () => {
+      it(`should remove '${allow_scroll_class}'`, async () => {
         await overlay.dismiss();
         expect(window.document.body.classList).not.toContain(allow_scroll_class);
       });
     });
 
-    describe(`When drawer can not interact with background`, () => {
-      beforeEach(async () => {
-        await openDrawer('Drawer with no interact with background', null, null, false);
-      });
+    describe(`when drawer can not interact with background`, () => {
+      it(`body should not be scrollable`, async () => {
+        await openDrawer(null, null, false);
 
-      afterEach(async () => {
-        await overlay.dismiss();
-      });
-
-      it(`body should not be scrollable`, () => {
         expect(window.document.body.classList).not.toContain(allow_scroll_class);
       });
     });
 
-    describe('sizing', () => {
+    describe('size', () => {
       beforeEach(() => {
         TestHelper.scrollMainWindowToTop();
       });
@@ -210,7 +204,7 @@ describe('ModalHelper', () => {
       it('modal should have min-height', async () => {
         await openModal();
 
-        expect(ionModalWrapper).toHaveComputedStyle({
+        expect(ionModal).toHaveComputedStyle({
           '--min-height': DesignTokenHelper.modalDefaultHeight,
         });
       });
@@ -218,7 +212,7 @@ describe('ModalHelper', () => {
       it('drawer should have min-height', async () => {
         await openDrawer();
 
-        expect(ionModalWrapper).toHaveComputedStyle({
+        expect(ionModal).toHaveComputedStyle({
           '--min-height': DesignTokenHelper.drawerDefaultHeight,
         });
       });
@@ -251,19 +245,14 @@ describe('ModalHelper', () => {
         await openModal(undefined, 'full-height');
 
         expectSize('full-height');
-        const expectedHeight = window.innerHeight - modalPaddingTop;
-        expect(ionModalWrapper).toHaveComputedStyle({ '--height': '100%' });
-        expect(ionModalWrapper).toHaveComputedStyle({ height: `${expectedHeight}px` });
+        expect(ionModal).toHaveComputedStyle({ '--height': '100%' });
       });
 
       it('drawer should be sized `full-height`', async () => {
-        await openDrawer('Full-height Drawer', undefined, 'full-height');
+        await openDrawer(undefined, 'full-height');
 
         expectSize('full-height');
-        const drawerPaddingTop = modalPaddingTop + modalHeaderHeight / 2;
-        const expectedHeight = window.innerHeight - drawerPaddingTop;
-        expect(ionModalWrapper).toHaveComputedStyle({ '--height': '100%' });
-        expect(ionModalWrapper).toHaveComputedStyle({ height: `${expectedHeight}px` });
+        expect(ionModal).toHaveComputedStyle({ '--height': '100%' });
       });
 
       it('should not set default size class if flavor is `drawer`', async () => {
@@ -272,18 +261,18 @@ describe('ModalHelper', () => {
         expectSize(undefined);
       });
 
-      it("should add class `full-height`, if content can't fit in viewport", async () => {
-        await openDrawer('Modal with full height', ContentOverflowsWithFooterEmbeddedComponent);
+      it('should add class `full-height`, if content can not fit in viewport', async () => {
+        await openDrawer(ContentOverflowsWithFooterEmbeddedComponent);
         await TestHelper.waitForResizeObserver();
 
-        expect(ionModalWrapper.classList.contains('full-height')).toBeTrue();
+        expect(ionModal.classList.contains('full-height')).toBeTrue();
       });
 
       it('should NOT add class `full-height`, if content can fit in viewport', async () => {
         await openModal(ContentWithNoOverflowEmbeddedComponent);
         await TestHelper.waitForResizeObserver();
 
-        expect(ionModalWrapper.classList.contains('full-height')).toBeFalse();
+        expect(ionModal.classList.contains('full-height')).toBeFalse();
       });
 
       it('should have footer visible at the bottom of viewport, when full-height', async () => {
@@ -292,73 +281,36 @@ describe('ModalHelper', () => {
         expect(footer).toBeTruthy();
         await TestHelper.waitForResizeObserver();
 
-        expect(ionModalWrapper.classList.contains('full-height')).toBeTrue();
+        expect(ionModal.classList.contains('full-height')).toBeTrue();
         expect(footer.getBoundingClientRect().bottom).toEqual(window.innerHeight);
       });
     });
 
-    describe(`with default flavor ('modal')`, () => {
-      beforeEach(async () => {
-        await openModal(InputEmbeddedComponent);
-      });
-
+    describe(`padding top`, () => {
       afterEach(async () => {
         await overlay.dismiss();
       });
 
-      it('modal should have correct padding-top', () => {
+      it('should have correct value for modal flavor (default)', async () => {
+        await openModal();
+
         expect(ionModal).toHaveComputedStyle({ 'padding-top': modalPaddingTopPx });
       });
 
-      it('modal window should not take focus from embedded input after opening', async () => {
-        const ionContent = ionModal.querySelector<HTMLElement>('ion-content');
-        await TestHelper.whenReady(ionContent);
-
-        const input: HTMLInputElement = ionContent.querySelector<HTMLInputElement>('input');
-        expect(input).withContext('Input is not defined').toEqual(jasmine.anything());
-        expect(document.activeElement).toEqual(input);
-      });
-    });
-
-    describe(`with 'drawer' flavor`, () => {
-      beforeEach(async () => {
+      it('should have correct value for drawer flavor', async () => {
         await openDrawer();
-      });
 
-      afterEach(async () => {
-        await overlay.dismiss();
-      });
-
-      it('modal should have correct padding-top', () => {
         expect(ionModal).toHaveComputedStyle({
           'padding-top': `${modalPaddingTop + modalHeaderHeight / 2}px`,
         });
       });
-    });
 
-    describe(`with 'compact' flavor`, () => {
-      beforeEach(async () => {
+      it('should have correct value for compact flavor', async () => {
         await openOverlay({
           flavor: 'compact',
           component: undefined,
         });
-      });
 
-      afterEach(async () => {
-        await overlay.dismiss();
-      });
-
-      it('wrapper should have correct style', () => {
-        expect(ionModalWrapper).toHaveComputedStyle({
-          'background-color': backgroundColor,
-          'border-radius': defaultBorderRadius,
-          'max-width': DesignTokenHelper.compactModalMaxWidth(),
-          'text-align': 'center',
-        });
-        expect(ionModalWrapper.style.height).toEqual('');
-      });
-
-      it('modal should have correct padding-top', () => {
         expect(ionModal).toHaveComputedStyle({ 'padding-top': '0px' });
       });
     });
@@ -370,7 +322,7 @@ describe('ModalHelper', () => {
 
       beforeEach(async () => {
         await openModal(PageProgressEmbeddedComponent);
-        ionToolbarElement = ionModalWrapper.querySelector('ion-toolbar');
+        ionToolbarElement = ionModal.querySelector('ion-toolbar');
         pageTitleElement = ionToolbarElement.querySelector('kirby-page-title');
         pageTitleVerticalCenter = getElementVerticalCenter(pageTitleElement);
       });
@@ -393,7 +345,7 @@ describe('ModalHelper', () => {
         expect(pageTitleVerticalCenter).toEqual(pageProgressVerticalCenter);
       });
 
-      it('should have correct padding', () => {
+      it('should have correct padding on tablet/desktop', () => {
         const toolbarContainer = ionToolbarElement.shadowRoot.querySelector('.toolbar-container');
         const expectedPadding = size('s');
         const expectedTopSpacingTotal = size('m');
@@ -407,188 +359,66 @@ describe('ModalHelper', () => {
           'padding-top': `${expectedAdditionalTopPadding}px`,
         });
       });
-    });
 
-    describe('on small screens', () => {
-      beforeAll(async () => {
+      it('should have correct padding on phone', async () => {
         await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
-      });
+        const toolbarContainer = ionToolbarElement.shadowRoot.querySelector('.toolbar-container');
+        const expectedInlinePadding = size('s');
+        const expectedBlockPadding = size('xs');
 
-      afterAll(() => {
+        expect(toolbarContainer).toHaveComputedStyle({
+          padding: `${expectedBlockPadding} ${expectedInlinePadding}`,
+        });
+        expect(ionToolbarElement).toHaveComputedStyle({
+          'padding-top': '0px',
+        });
+
         TestHelper.resetTestWindow();
       });
+    });
+  });
 
-      describe('when iOS safe-area is present', () => {
-        const safeAreaTop = '20px';
+  describe('on phone', () => {
+    beforeAll(async () => {
+      await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
+    });
 
-        beforeAll(() => {
-          window.document.documentElement.style.setProperty('--ion-safe-area-top', safeAreaTop);
-        });
+    afterAll(() => {
+      TestHelper.resetTestWindow();
+    });
 
-        afterAll(() => {
-          window.document.documentElement.style.removeProperty('--ion-safe-area-top');
-        });
+    describe('when iOS safe-area is present', () => {
+      const safeAreaTop = '20px';
 
-        it('modal toolbar should respect iOS safe-area', async () => {
-          await openModal();
-
-          const ionToolbar = ionModal.querySelector('ion-header > ion-toolbar');
-          expect(ionToolbar).toHaveComputedStyle({ 'padding-top': safeAreaTop });
-          await overlay.dismiss();
-        });
-
-        it('drawer should respect iOS safe-area', async () => {
-          await openDrawer('Drawer On Presenting Element');
-
-          const expectedPaddingTop = `${parseInt(size('m')) + parseInt(safeAreaTop)}px`;
-          expect(ionModal).toHaveComputedStyle({ 'padding-top': expectedPaddingTop });
-          await overlay.dismiss();
-        });
-
-        it('drawer toolbar should not have additional padding', async () => {
-          await openDrawer('Drawer On Presenting Element');
-
-          const ionToolbar = ionModal.querySelector('ion-header > ion-toolbar');
-          expect(ionToolbar).toHaveComputedStyle({ 'padding-top': '0px' });
-          await overlay.dismiss();
-        });
+      beforeAll(() => {
+        window.document.documentElement.style.setProperty('--ion-safe-area-top', safeAreaTop);
       });
 
-      describe('sizing', () => {
-        afterEach(async () => {
-          await overlay.dismiss();
-        });
-
-        const expectSize = (size: ModalSize | undefined) => {
-          expect(ionModal.classList.contains('small')).toBe(size === 'small');
-          expect(ionModal.classList.contains('medium')).toBe(size === 'medium');
-          expect(ionModal.classList.contains('large')).toBe(size === 'large');
-        };
-
-        it('modal should be full height', async () => {
-          await openModal();
-
-          expect(ionModalWrapper).toHaveComputedStyle({
-            '--height': '100%',
-          });
-        });
-
-        it('drawer should have min-height', async () => {
-          await openDrawer();
-
-          expect(ionModalWrapper).toHaveComputedStyle({
-            '--min-height': DesignTokenHelper.drawerDefaultHeight,
-          });
-        });
-
-        it('drawer should be sized `full-height`', async () => {
-          await openDrawer('Full-height Drawer', undefined, 'full-height');
-
-          expectSize('full-height');
-          const drawerPaddingTop = parseInt(size('m'));
-          const expectedHeight = window.innerHeight - drawerPaddingTop;
-          expect(ionModalWrapper).toHaveComputedStyle({ '--height': '100%' });
-          expect(ionModalWrapper).toHaveComputedStyle({ height: `${expectedHeight}px` });
-        });
+      afterAll(async () => {
+        await overlay.dismiss();
+        window.document.documentElement.style.removeProperty('--ion-safe-area-top');
       });
 
-      describe(`with 'drawer' flavor`, () => {
-        beforeEach(async () => {
-          await openDrawer();
-        });
+      it('modal toolbar should respect iOS safe-area', async () => {
+        await openModal();
+        const ionToolbar = ionModal.querySelector('ion-header > ion-toolbar');
 
-        afterEach(async () => {
-          await overlay.dismiss();
-        });
-
-        it('drawer should have correct padding-top', () => {
-          expect(ionModal).toHaveComputedStyle({ 'padding-top': size('m') });
-        });
+        expect(ionToolbar).toHaveComputedStyle({ 'padding-top': safeAreaTop });
       });
 
-      describe('when iOS safe-area is present', () => {
-        const safeAreaTop = '20px';
-        beforeAll(() => {
-          window.document.documentElement.style.setProperty('--ion-safe-area-top', safeAreaTop);
-        });
+      it('drawer should respect iOS safe-area', async () => {
+        await openDrawer();
+        const expectedPaddingTop = `${parseInt(size('m')) + parseInt(safeAreaTop)}px`;
 
-        afterAll(() => {
-          window.document.documentElement.style.removeProperty('--ion-safe-area-top');
-        });
-
-        it('modal toolbar should respect iOS safe-area', async () => {
-          await openModal();
-
-          const ionToolbar = ionModal.querySelector('ion-header > ion-toolbar');
-          expect(ionToolbar).toHaveComputedStyle({ 'padding-top': safeAreaTop });
-          await overlay.dismiss();
-        });
-
-        it('drawer should respect iOS safe-area', async () => {
-          await openDrawer();
-
-          const expectedPaddingTop = `${parseInt(size('m')) + parseInt(safeAreaTop)}px`;
-          expect(ionModal).toHaveComputedStyle({ 'padding-top': expectedPaddingTop });
-          await overlay.dismiss();
-        });
-
-        it('drawer toolbar should not have additional padding', async () => {
-          await openDrawer();
-
-          const ionToolbar = ionModal.querySelector('ion-header > ion-toolbar');
-          expect(ionToolbar).toHaveComputedStyle({ 'padding-top': '0px' });
-          await overlay.dismiss();
-        });
+        expect(ionModal).toHaveComputedStyle({ 'padding-top': expectedPaddingTop });
       });
 
-      describe('title', () => {
-        let ionToolbarElement: HTMLIonToolbarElement;
-        let pageTitleElement: HTMLDivElement;
-        let pageTitleVerticalCenter: number;
+      it('drawer toolbar should not have additional padding', async () => {
+        await openDrawer();
+        const ionToolbar = ionModal.querySelector('ion-header > ion-toolbar');
 
-        beforeEach(async () => {
-          await openModal(PageProgressEmbeddedComponent);
-          ionToolbarElement = ionModalWrapper.querySelector('ion-toolbar');
-          pageTitleElement = ionToolbarElement.querySelector('kirby-page-title');
-          pageTitleVerticalCenter = getElementVerticalCenter(pageTitleElement);
-        });
-
-        afterEach(async () => {
-          await overlay.dismiss();
-        });
-
-        it('should align vertically with close button', () => {
-          const closeButtonElement = ionToolbarElement.querySelector('[kirby-button]');
-          const closeButtonVerticalCenter = getElementVerticalCenter(closeButtonElement);
-
-          expect(closeButtonVerticalCenter).toEqual(pageTitleVerticalCenter);
-        });
-
-        it('should align vertically with page progress', () => {
-          const pageProgressElement = ionToolbarElement.querySelector('kirby-page-progress');
-          const pageProgressVerticalCenter = getElementVerticalCenter(pageProgressElement);
-
-          expect(pageTitleVerticalCenter).toEqual(pageProgressVerticalCenter);
-        });
-
-        it('should have correct padding', () => {
-          const toolbarContainer = ionToolbarElement.shadowRoot.querySelector('.toolbar-container');
-          const expectedInlinePadding = size('s');
-          const expectedBlockPadding = size('xs');
-
-          expect(toolbarContainer).toHaveComputedStyle({
-            padding: `${expectedBlockPadding} ${expectedInlinePadding}`,
-          });
-          expect(ionToolbarElement).toHaveComputedStyle({
-            'padding-top': '0px',
-          });
-        });
+        expect(ionToolbar).toHaveComputedStyle({ 'padding-top': '0px' });
       });
     });
   });
 });
-
-function getElementVerticalCenter(element: Element): number {
-  const elementDOMRect = element.getBoundingClientRect();
-  return elementDOMRect.top + elementDOMRect.height / 2;
-}
