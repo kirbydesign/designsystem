@@ -22,7 +22,7 @@ import { ChartDataset, ChartHighlightedElements, ChartLabel, ChartType } from '.
   styleUrls: ['./chart.component.scss'],
 })
 export class BaseChartComponent implements AfterViewInit, OnChanges {
-  @Input() type: ChartType = 'column';
+  @Input() type: ChartType;
   @Input() data: ChartDataset[] | number[];
 
   @Input() labels: ChartLabel[];
@@ -145,4 +145,6 @@ export class BaseChartComponent implements AfterViewInit, OnChanges {
   styleUrls: ['./chart.component.scss'],
   providers: [ChartJSService],
 })
-export class ChartComponent extends BaseChartComponent {}
+export class ChartComponent extends BaseChartComponent {
+  @Input() type: Exclude<ChartType, 'stock'> = 'column';
+}
