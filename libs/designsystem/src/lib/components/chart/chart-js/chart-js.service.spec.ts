@@ -1,6 +1,6 @@
 import { ElementRef } from '@angular/core';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
-import { Chart, ChartDataset as ChartJSDataset, ChartType as ChartJSType } from 'chart.js';
+import { Chart, ChartType as ChartJSType } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
 import { MockProvider } from 'ng-mocks';
 
@@ -270,31 +270,6 @@ fdescribe('ChartJSService', () => {
           expect(chartJSService['chart'].options.indexAxis).toEqual('x');
           expect(chartData.labels.length).toEqual(0);
           expect(chartData.datasets).toEqual(dataset);
-        });
-      });
-
-      describe('function: createConfigurationObject', () => {
-        // TODO: should be moved to a stock specific test suite
-        xit('should not be filled with blank labels if type is stock', () => {
-          const stockChartConfig = {
-            targetElement: canvasElement,
-            type: 'stock' as ChartType,
-            data: [
-              {
-                data: [
-                  { x: 10, y: 5 },
-                  { x: 11, y: 6 },
-                  { x: 13, y: 6 },
-                ],
-              },
-            ],
-          };
-          chartJSService.renderChart(stockChartConfig);
-
-          expect(chartJSService['chart'].data.labels.length).toEqual(3);
-          chartJSService['chart'].data.labels.forEach((label) => {
-            expect(label).not.toBe('');
-          });
         });
       });
 
@@ -957,50 +932,4 @@ fdescribe('ChartJSService', () => {
       });
     });
   });
-
-  // TODO: Reintroduce this - but in the stockChartJSService instead
-  /*describe('function: addDataLabelsData', () => {
-    const data: ChartDataset[] = [
-      {
-        data: [
-          { x: 10, y: 3 },
-          { x: 2, y: 7 },
-          { x: 19, y: -10 },
-        ],
-      },
-    ];
-    const flatDataset: number[] = [1, 2, 3, 4, 5];
-
-    xdescribe('when dataset is a flat array', () => {
-      it('should throw an error if dataset is a flat array', () => {
-        chartJSService.setDataLabelOptions({});
-        expect(function () {
-          chartJSService.addDataLabelsData(flatDataset);
-        }).toThrowError();
-      });
-    });
-
-    const dataLabelOptionsProperties = ['showMax', 'showMin', 'showCurrent'];
-
-    dataLabelOptionsProperties.forEach((property) => {
-      xdescribe(`when ChartDataLabelsOptions.${property} is true`, () => {
-        it(`should have an datalabel propery in dataset`, () => {
-          chartJSService.setDataLabelOptions({ [property]: true });
-          const result = chartJSService.addDataLabelsData(deepCopy(data));
-          expect(
-            (result[0] as ChartJSDataset).data.find((item: any) => item.datalabel)
-          ).toBeTruthy();
-        });
-      });
-    });
-
-    describe('when neither ChartDataLabelsOptions.showMin, showMax, showCurrent is true', () => {
-      it('should NOT have an datalabel propery in dataset', () => {
-        chartJSService.setDataLabelOptions({});
-
-        const result = chartJSService.addDataLabelsData(deepCopy(data));
-        expect((result[0] as ChartJSDataset).data.find((item: any) => item.datalabel)).toBeFalsy();
-      });
-    });
-  });*/
 });
