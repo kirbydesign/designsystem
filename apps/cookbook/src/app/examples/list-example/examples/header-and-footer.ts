@@ -37,41 +37,11 @@ export const NoKirbyLabelExampleTemplate = `<kirby-list [items]="items" (itemSel
 
   <!-- BODY -->
   <kirby-item *kirbyListItemTemplate="let item">
-    <kirby-item-responsive example-3>
+    <kirby-item-responsive>
       <h3 slot="A">{{item.title}}</h3>
       <p subtitle slot="B">{{item.subTitle}}</p>
       <data [value]="item.amount" slot="C">{{item.amount}}</data>
       <data [value]="item.detail" detail slot="D">{{item.detail}}</data>
-    </kirby-item-responsive>
-  </kirby-item>
-
-  <!-- Footer -->
-  <div class="footer" *kirbyListFooter>
-    <p>An appropriate footer</p>
-    <button kirby-button>Click me!</button>
-  </div>
-</kirby-list>`;
-
-export const ExampleTemplate4 = `<kirby-list [items]="items" (itemSelect)="onItemSelect($event)">
-  <!-- HEADER-->
-  <kirby-list-header *kirbyListHeader>
-    <p>Name</p>
-    <p>Value</p>
-  </kirby-list-header>
-
-  <!-- BODY -->
-  <kirby-item *kirbyListItemTemplate="let item">
-    <kirby-item-responsive example-4>
-      <div>
-        <h3 slot="A">{{item.title}}</h3>
-        <p subtitle slot="B">{{item.subTitle}}</p>
-      </div>
-      <div>
-        <data [value]="item.amount" slot="C">{{item.amount}}</data>
-      </div>
-      <div>
-        <data [value]="item.detail" detail slot="D">{{item.detail}}</data>
-      </div>
     </kirby-item-responsive>
   </kirby-item>
 
