@@ -293,17 +293,13 @@ export class ChartJSService {
       }
     });
   }
-  private createDatasets(data: ChartDataset[] | number[]): ChartDataset[] {
+
+  protected createDatasets(data: ChartDataset[] | number[]): ChartDataset[] {
     let datasets = isNumberArray(data) ? [{ data }] : data;
+
     if (this.highlightedElements)
       this.addHighlightedElementsToDatasets(this.highlightedElements, datasets);
 
-    datasets = this.createDatasetsHook(datasets);
-
-    return datasets;
-  }
-
-  protected createDatasetsHook(datasets: ChartDataset[]): ChartDataset[] {
     return datasets;
   }
 }

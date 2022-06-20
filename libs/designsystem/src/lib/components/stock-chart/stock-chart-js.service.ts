@@ -102,7 +102,8 @@ export class StockChartJSService extends ChartJSService {
     this.dataLabelOptions = dataLabelOptions;
   }
 
-  protected createDatasetsHook(datasets: ChartDataset[]) {
+  protected createDatasets(data: ChartDataset[] | number[]) {
+    let datasets = super.createDatasets(data);
     /* 
        Hacky solution. Should be fixed in this issue:
       https://github.com/kirbydesign/designsystem/issues/1967 
