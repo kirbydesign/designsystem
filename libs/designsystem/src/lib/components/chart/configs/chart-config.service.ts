@@ -22,7 +22,7 @@ export class ChartConfigService {
   }
 
   /* Our types does not always map 1 to 1 to the same type 
-  that the chart.js chart is actually oconfigured with. Therefore this function 
+  that the chart.js chart is actually configured with. Therefore this function 
   for looking up the ChartJSType of a type.  */
   public chartTypeToChartJSType(chartType: ChartType): ChartJSType {
     return CHART_TYPES_CONFIG[chartType]['type'] as ChartJSType;

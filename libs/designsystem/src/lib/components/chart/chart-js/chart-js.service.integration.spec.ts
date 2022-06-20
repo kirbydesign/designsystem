@@ -267,4 +267,17 @@ describe('ChartJSService with ChartConfigService', () => {
       });
     });
   });
+
+  describe('private function: createOptionsObject', () => {
+    it('should apply interaction functions extensions', () => {
+      const applyInteractionFunctionsExtensionsSpy = spyOn<any>(
+        chartJSService['chartConfigService'],
+        'applyInteractionFunctionsExtensions'
+      );
+
+      chartJSService['createOptionsObject']({});
+
+      expect(applyInteractionFunctionsExtensionsSpy).toHaveBeenCalledTimes(1);
+    });
+  });
 });

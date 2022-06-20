@@ -1,6 +1,6 @@
 import { ElementRef } from '@angular/core';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
-import { ChartDataset as ChartJSDataset, ChartType as ChartJSType } from 'chart.js';
+import { ChartDataset as ChartJSDataset, ChartOptions, ChartType as ChartJSType } from 'chart.js';
 import { MockProvider } from 'ng-mocks';
 
 import { deepCopy } from '../../helpers/deep-copy';
@@ -20,9 +20,9 @@ describe('StockChartJSService', () => {
 
   const mockChartConfigService = MockProvider(ChartConfigService, {
     getTypeConfig: (chartType: ChartType) => deepCopy(TEST_CHART_TYPES_CONFIG[chartType]),
-    getInteractionFunctionsExtensions: () => ({ onHover: () => null }),
     getAnnotationDefaults: (type: string) => TEST_CHART_ANNOTATIONS_CONFIG[type],
     chartTypeToChartJSType: (type: ChartType) => TEST_CHART_TYPES_CONFIG[type].type as ChartJSType,
+    applyInteractionFunctionsExtensions: (options: ChartOptions) => options,
   });
 
   const createService = createServiceFactory({

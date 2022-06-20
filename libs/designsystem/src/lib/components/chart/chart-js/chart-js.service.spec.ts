@@ -1,6 +1,6 @@
 import { ElementRef } from '@angular/core';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
-import { Chart, ChartType as ChartJSType } from 'chart.js';
+import { Chart, ChartOptions, ChartType as ChartJSType } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
 import { MockProvider } from 'ng-mocks';
 
@@ -20,9 +20,9 @@ describe('ChartJSService', () => {
 
   const mockChartConfigService = MockProvider(ChartConfigService, {
     getTypeConfig: (chartType: ChartType) => deepCopy(TEST_CHART_TYPES_CONFIG[chartType]),
-    getInteractionFunctionsExtensions: () => ({ onHover: () => null }),
     getAnnotationDefaults: (type: string) => TEST_CHART_ANNOTATIONS_CONFIG[type],
     chartTypeToChartJSType: (type: ChartType) => TEST_CHART_TYPES_CONFIG[type].type as ChartJSType,
+    applyInteractionFunctionsExtensions: (options: ChartOptions) => options,
   });
 
   const createService = createServiceFactory({
@@ -498,19 +498,6 @@ describe('ChartJSService', () => {
           expect(nonDestructivelyUpdateTypeSpy).toHaveBeenCalledTimes(1);
         });
       });
-    });
-  });
-
-  describe('private function: createOptionsObject', () => {
-    it('should apply interaction functions extensions', () => {
-      const applyInteractionFunctionsExtensionsSpy = spyOn<any>(
-        chartJSService,
-        'applyInteractionFunctionsExtensions'
-      );
-
-      chartJSService['createOptionsObject']({});
-
-      expect(applyInteractionFunctionsExtensionsSpy).toHaveBeenCalledTimes(1);
     });
   });
 
