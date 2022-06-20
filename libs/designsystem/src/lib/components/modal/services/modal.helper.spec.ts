@@ -158,37 +158,6 @@ describe('ModalHelper', () => {
     await openOverlay({ flavor: 'drawer', component, size, interactWithBackground });
   };
 
-  const expectShadowStyle = () => {
-    it('should not show shadow', () => {
-      expect(modalShadow).toHaveComputedStyle({ display: 'none' });
-    });
-  };
-
-  const expectBackdropStyle = () => {
-    it('should have correct backdrop style', () => {
-      expect(ionBackdrop).toHaveComputedStyle({ opacity: defaultBackdropOpacity });
-    });
-  };
-
-  const expectModalWrapperStyle = (screenSize?: ScreenSize) => {
-    it('wrapper should have correct style', () => {
-      const expectedRadius = screenSize === 'phone' ? '0px' : defaultBorderRadius;
-      expect(ionModalWrapper).toHaveComputedStyle({
-        'background-color': backgroundColor,
-        'border-radius': expectedRadius,
-      });
-    });
-  };
-
-  const expectDrawerWrapperStyle = () => {
-    it('wrapper should have correct style', () => {
-      expect(ionModalWrapper).toHaveComputedStyle({
-        'background-color': backgroundColor,
-        'border-radius': `${defaultBorderRadius} ${defaultBorderRadius} 0px 0px`,
-      });
-    });
-  };
-
   describe('showModalWindow', () => {
     const screenSizes: ScreenSize[] = ['phablet-landscape', 'tablet', 'desktop'];
     const allow_scroll_class = 'allow-background-scroll';
@@ -210,34 +179,6 @@ describe('ModalHelper', () => {
 
           afterEach(() => {
             modalHelper.registerPresentingElement(undefined);
-          });
-
-          describe(`modal`, () => {
-            beforeEach(async () => {
-              await openModal();
-            });
-
-            afterEach(async () => {
-              await overlay.dismiss();
-            });
-
-            expectShadowStyle();
-            expectBackdropStyle();
-            expectModalWrapperStyle();
-          });
-
-          describe(`drawer`, () => {
-            beforeEach(async () => {
-              await openDrawer('Drawer On Presenting Element');
-            });
-
-            afterEach(async () => {
-              await overlay.dismiss();
-            });
-
-            expectShadowStyle();
-            expectBackdropStyle();
-            expectDrawerWrapperStyle();
           });
         });
 
@@ -388,10 +329,6 @@ describe('ModalHelper', () => {
             await overlay.dismiss();
           });
 
-          expectShadowStyle();
-          expectBackdropStyle();
-          expectModalWrapperStyle();
-
           it('modal should have correct padding-top', () => {
             expect(ionModal).toHaveComputedStyle({ 'padding-top': modalPaddingTopPx });
           });
@@ -415,10 +352,6 @@ describe('ModalHelper', () => {
             await overlay.dismiss();
           });
 
-          expectShadowStyle();
-          expectBackdropStyle();
-          expectDrawerWrapperStyle();
-
           it('modal should have correct padding-top', () => {
             expect(ionModal).toHaveComputedStyle({
               'padding-top': `${modalPaddingTop + modalHeaderHeight / 2}px`,
@@ -437,9 +370,6 @@ describe('ModalHelper', () => {
           afterEach(async () => {
             await overlay.dismiss();
           });
-
-          expectShadowStyle();
-          expectBackdropStyle();
 
           it('wrapper should have correct style', () => {
             expect(ionModalWrapper).toHaveComputedStyle({
@@ -658,20 +588,6 @@ describe('ModalHelper', () => {
         });
       });
 
-      describe(`with default flavor ('modal')`, () => {
-        beforeEach(async () => {
-          await openModal();
-        });
-
-        afterEach(async () => {
-          await overlay.dismiss();
-        });
-
-        expectShadowStyle();
-        expectBackdropStyle();
-        expectModalWrapperStyle('phone');
-      });
-
       describe(`with 'drawer' flavor`, () => {
         beforeEach(async () => {
           await openDrawer();
@@ -680,10 +596,6 @@ describe('ModalHelper', () => {
         afterEach(async () => {
           await overlay.dismiss();
         });
-
-        expectShadowStyle();
-        expectBackdropStyle();
-        expectDrawerWrapperStyle();
 
         it('drawer should have correct padding-top', () => {
           expect(ionModal).toHaveComputedStyle({ 'padding-top': size('m') });
