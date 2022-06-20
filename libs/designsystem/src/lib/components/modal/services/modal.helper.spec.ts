@@ -158,15 +158,6 @@ describe('ModalHelper', () => {
 
   describe('showModalWindow', () => {
     const allow_scroll_class = 'allow-background-scroll';
-    describe(`when opened on presenting element`, () => {
-      beforeEach(() => {
-        modalHelper.registerPresentingElement(dummyPresentingElement);
-      });
-
-      afterEach(() => {
-        modalHelper.registerPresentingElement(undefined);
-      });
-    });
 
     describe(`When drawer can interact with background`, () => {
       beforeEach(async () => {
@@ -427,63 +418,39 @@ describe('ModalHelper', () => {
         TestHelper.resetTestWindow();
       });
 
-      describe(`when opened on presenting element`, () => {
-        beforeEach(() => {
-          modalHelper.registerPresentingElement(dummyPresentingElement);
+      describe('when iOS safe-area is present', () => {
+        const safeAreaTop = '20px';
+
+        beforeAll(() => {
+          window.document.documentElement.style.setProperty('--ion-safe-area-top', safeAreaTop);
         });
 
-        afterEach(() => {
-          modalHelper.registerPresentingElement(undefined);
+        afterAll(() => {
+          window.document.documentElement.style.removeProperty('--ion-safe-area-top');
         });
 
-        it(`modal should have no visible backdrop`, async () => {
+        it('modal toolbar should respect iOS safe-area', async () => {
           await openModal();
 
-          expect(ionBackdrop).toHaveComputedStyle({ opacity: invisibleBackdropOpacity });
+          const ionToolbar = ionModal.querySelector('ion-header > ion-toolbar');
+          expect(ionToolbar).toHaveComputedStyle({ 'padding-top': safeAreaTop });
           await overlay.dismiss();
         });
 
-        it('drawer should have correct backdrop style', async () => {
+        it('drawer should respect iOS safe-area', async () => {
           await openDrawer('Drawer On Presenting Element');
 
-          expect(ionBackdrop).toHaveComputedStyle({ opacity: defaultBackdropOpacity });
+          const expectedPaddingTop = `${parseInt(size('m')) + parseInt(safeAreaTop)}px`;
+          expect(ionModal).toHaveComputedStyle({ 'padding-top': expectedPaddingTop });
           await overlay.dismiss();
         });
 
-        describe('when iOS safe-area is present', () => {
-          const safeAreaTop = '20px';
+        it('drawer toolbar should not have additional padding', async () => {
+          await openDrawer('Drawer On Presenting Element');
 
-          beforeAll(() => {
-            window.document.documentElement.style.setProperty('--ion-safe-area-top', safeAreaTop);
-          });
-
-          afterAll(() => {
-            window.document.documentElement.style.removeProperty('--ion-safe-area-top');
-          });
-
-          it('modal toolbar should respect iOS safe-area', async () => {
-            await openModal();
-
-            const ionToolbar = ionModal.querySelector('ion-header > ion-toolbar');
-            expect(ionToolbar).toHaveComputedStyle({ 'padding-top': safeAreaTop });
-            await overlay.dismiss();
-          });
-
-          it('drawer should respect iOS safe-area', async () => {
-            await openDrawer('Drawer On Presenting Element');
-
-            const expectedPaddingTop = `${parseInt(size('m')) + parseInt(safeAreaTop)}px`;
-            expect(ionModal).toHaveComputedStyle({ 'padding-top': expectedPaddingTop });
-            await overlay.dismiss();
-          });
-
-          it('drawer toolbar should not have additional padding', async () => {
-            await openDrawer('Drawer On Presenting Element');
-
-            const ionToolbar = ionModal.querySelector('ion-header > ion-toolbar');
-            expect(ionToolbar).toHaveComputedStyle({ 'padding-top': '0px' });
-            await overlay.dismiss();
-          });
+          const ionToolbar = ionModal.querySelector('ion-header > ion-toolbar');
+          expect(ionToolbar).toHaveComputedStyle({ 'padding-top': '0px' });
+          await overlay.dismiss();
         });
       });
 
