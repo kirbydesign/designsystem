@@ -7,7 +7,7 @@ import { ChartConfigService } from '../configs/chart-config.service';
 
 import { ChartJSService } from './chart-js.service';
 
-fdescribe('ChartJSService with ChartConfigService', () => {
+describe('ChartJSService with ChartConfigService', () => {
   let spectator: SpectatorService<ChartJSService>;
   let chartJSService: ChartJSService;
   let canvasElement: ElementRef<HTMLCanvasElement>;

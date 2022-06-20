@@ -13,7 +13,7 @@ import { CHART_GLOBAL_DEFAULTS } from '../configs/global-defaults.config';
 import { ChartJSService } from './chart-js.service';
 import { TEST_CHART_ANNOTATIONS_CONFIG, TEST_CHART_TYPES_CONFIG } from './test-utils';
 
-fdescribe('ChartJSService', () => {
+describe('ChartJSService', () => {
   let spectator: SpectatorService<ChartJSService>;
   let chartJSService: ChartJSService;
   let canvasElement: ElementRef<HTMLCanvasElement>;

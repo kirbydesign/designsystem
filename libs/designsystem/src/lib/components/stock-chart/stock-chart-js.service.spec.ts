@@ -13,7 +13,7 @@ import { ChartConfigService } from '../chart/configs/chart-config.service';
 
 import { StockChartJSService } from './stock-chart-js.service';
 
-fdescribe('StockChartJSService', () => {
+describe('StockChartJSService', () => {
   let spectator: SpectatorService<StockChartJSService>;
   let chartJSService: StockChartJSService;
   let canvasElement: ElementRef<HTMLCanvasElement>;
