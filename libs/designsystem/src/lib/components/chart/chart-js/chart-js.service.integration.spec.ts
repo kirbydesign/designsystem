@@ -7,7 +7,7 @@ import { ChartConfigService } from '../configs/chart-config.service';
 
 import { ChartJSService } from './chart-js.service';
 
-describe('ChartJSService with ChartConfigService', () => {
+fdescribe('ChartJSService with ChartConfigService', () => {
   let spectator: SpectatorService<ChartJSService>;
   let chartJSService: ChartJSService;
   let canvasElement: ElementRef<HTMLCanvasElement>;
@@ -267,7 +267,7 @@ describe('ChartJSService with ChartConfigService', () => {
       });
     });
 
-    describe('when type is "stock"', () => {
+    xdescribe('when type is "stock"', () => {
       let chart: Chart;
 
       beforeEach(() => {
@@ -282,11 +282,11 @@ describe('ChartJSService with ChartConfigService', () => {
               ],
             },
           ],
-          dataLabelOptions: {
+          /*dataLabelOptions: {
             locale: 'da-DK',
             valueSuffix: '%',
             showMin: true,
-          },
+          },*/
         });
         chart = chartJSService['chart'];
       });
