@@ -1,5 +1,5 @@
 import { ElementRef, Injectable } from '@angular/core';
-import { ActiveElement, ChartConfiguration, ChartOptions, ScatterDataPoint } from 'chart.js';
+import { ActiveElement, ChartConfiguration, ChartOptions } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
 
 import { mergeDeepAll } from '../../../helpers/merge-deep';
@@ -18,7 +18,6 @@ import { Chart } from './configured-chart-js';
 @Injectable()
 export class ChartJSService {
   private chart: Chart;
-  protected dataLabelOptions: ChartDataLabelOptions;
   private highlightedElements: ChartHighlightedElements;
   protected chartType: ChartType;
 
@@ -31,21 +30,11 @@ export class ChartJSService {
     labels?: ChartLabel[];
     customOptions?: ChartOptions;
     annotations?: AnnotationOptions[];
-    dataLabelOptions?: ChartDataLabelOptions;
     highlightedElements?: ChartHighlightedElements;
   }): void {
-    const {
-      targetElement,
-      type,
-      data,
-      labels,
-      customOptions,
-      annotations,
-      dataLabelOptions,
-      highlightedElements,
-    } = args;
+    const { targetElement, type, data, labels, customOptions, annotations, highlightedElements } =
+      args;
 
-    this.dataLabelOptions = dataLabelOptions || null;
     this.highlightedElements = highlightedElements || null;
     this.chartType = type;
 
@@ -54,7 +43,6 @@ export class ChartJSService {
     const options = this.createOptionsObject({
       customOptions,
       annotations,
-      //dataLabelOptions,
     });
     let config = this.createConfigurationObject(type, datasets, options, labels);
 

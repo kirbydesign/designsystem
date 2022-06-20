@@ -1,8 +1,15 @@
-import { Injectable } from '@angular/core';
+import { ElementRef, Injectable } from '@angular/core';
 import { ChartDataset, ChartOptions, ScatterDataPoint } from 'chart.js';
 import { toDate } from 'date-fns';
 
-import { ChartDataLabelOptions, ChartLocale } from '../chart';
+import {
+  AnnotationOptions,
+  ChartDataLabelOptions,
+  ChartHighlightedElements,
+  ChartLabel,
+  ChartLocale,
+  ChartType,
+} from '../chart';
 import { ChartJSService } from '../chart/chart-js/chart-js.service';
 
 // TODO: Make it part of Class
@@ -11,6 +18,22 @@ const CHART_LOCALE_DEFAULT = 'en-US';
 @Injectable()
 export class StockChartJSService extends ChartJSService {
   protected readonly chartType = 'stock';
+  private dataLabelOptions: ChartDataLabelOptions;
+
+  public renderChart(args: {
+    targetElement: ElementRef<HTMLCanvasElement>;
+    type: ChartType;
+    data: ChartDataset[] | number[];
+    labels?: ChartLabel[];
+    customOptions?: ChartOptions;
+    annotations?: AnnotationOptions[];
+    dataLabelOptions?: ChartDataLabelOptions;
+    highlightedElements?: ChartHighlightedElements;
+  }): void {
+    const { dataLabelOptions, ...superArgs } = args;
+    this.dataLabelOptions = args.dataLabelOptions || null;
+    super.renderChart(superArgs);
+  }
 
   private get locale(): ChartLocale {
     return this.dataLabelOptions?.locale || CHART_LOCALE_DEFAULT;
