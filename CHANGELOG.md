@@ -42,7 +42,7 @@ For a more comprehensive list of changes needed in v6 see the [migration notes](
 
 ### Features
 
-*- *segmented-control\*\* - add new option to disable change on swipe ([#2237](https://github.com/kirbydesign/designsystem/pull/2237))
+- **segmented-control** - add new option to disable change on swipe ([#2237](https://github.com/kirbydesign/designsystem/pull/2237))
 
 ## [5.3.0](https://github.com/kirbydesign/designsystem/pull/2182) (22-04-2022)
 
