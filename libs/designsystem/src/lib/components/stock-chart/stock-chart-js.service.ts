@@ -2,6 +2,7 @@ import { ElementRef, Injectable } from '@angular/core';
 import { ChartDataset, ChartOptions, ScatterDataPoint } from 'chart.js';
 import { toDate } from 'date-fns';
 
+import { mergeDeepAll } from '../../helpers/merge-deep';
 import {
   AnnotationOptions,
   ChartDataLabelOptions,
@@ -51,12 +52,18 @@ export class StockChartJSService extends ChartJSService {
     );
   }
 
-  protected createOptionsObjectHook(args: any[]) {
+  protected createOptionsObject(args: {
+    customOptions?: ChartOptions;
+    annotations?: AnnotationOptions[];
+  }): ChartOptions {
+    const superOptions = super.createOptionsObject(args);
     const stockOptions: ChartOptions = this.createStockOptionsObject(this.dataLabelOptions);
-    return [stockOptions, ...args];
+
+    return mergeDeepAll(stockOptions, superOptions);
   }
 
-  private createStockOptionsObject(dataLabelOptions: ChartDataLabelOptions) {
+  // TODO: Move this to chart config service - it seems better suited for that
+  protected createStockOptionsObject(dataLabelOptions: ChartDataLabelOptions) {
     return {
       locale: this.locale,
       plugins: {

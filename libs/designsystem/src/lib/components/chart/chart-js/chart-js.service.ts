@@ -172,7 +172,7 @@ export class ChartJSService {
     return options;
   }
 
-  private createOptionsObject(args: {
+  protected createOptionsObject(args: {
     customOptions?: ChartOptions;
     annotations?: AnnotationOptions[];
   }): ChartOptions {
