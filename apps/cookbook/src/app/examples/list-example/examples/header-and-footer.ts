@@ -28,36 +28,12 @@ export const ListWithHeaderAndFooterExampleTemplate = `<kirby-list [items]="item
   </div>
 </kirby-list>`;
 
-export const NoKirbyLabelExampleTemplate = `<kirby-list [items]="items" (itemSelect)="onItemSelect($event)">
-  <!-- HEADER-->
-  <kirby-list-header *kirbyListHeader>
-    <p>Name</p>
-    <p>Value</p>
-  </kirby-list-header>
-
-  <!-- BODY -->
-  <kirby-item *kirbyListItemTemplate="let item">
-    <kirby-item-responsive>
-      <h3 slot="A">{{item.title}}</h3>
-      <p subtitle slot="B">{{item.subTitle}}</p>
-      <data [value]="item.amount" slot="C">{{item.amount}}</data>
-      <data [value]="item.detail" detail slot="D">{{item.detail}}</data>
-    </kirby-item-responsive>
-  </kirby-item>
-
-  <!-- Footer -->
-  <div class="footer" *kirbyListFooter>
-    <p>An appropriate footer</p>
-    <button kirby-button>Click me!</button>
-  </div>
-</kirby-list>`;
-
 @Component({
   // tslint:disable-next-line
   selector: 'list-with-header-and-footer-example',
   template: `
     <kirby-page title="List with header and footer">
-      <kirby-page-content> ${NoKirbyLabelExampleTemplate} </kirby-page-content>
+      <kirby-page-content> ${ListWithHeaderAndFooterExampleTemplate} </kirby-page-content>
     </kirby-page>
   `,
   styles: ['p { margin: 0; }', '.footer { text-align: center; width: 100%; }'],
