@@ -13,14 +13,18 @@ import {
 import { ChartConfigService } from '../configs/chart-config.service';
 
 import { Chart } from './configured-chart-js';
+import { AnnotationsDelegate } from './delegates/annotations.delegate';
 
 @Injectable()
 export class ChartJSService {
   private chart: Chart;
   private highlightedElements: ChartHighlightedElements;
   protected chartType: ChartType;
+  private annotationsDelegate: AnnotationsDelegate;
 
-  constructor(private chartConfigService: ChartConfigService) {}
+  constructor(private chartConfigService: ChartConfigService) {
+    this.annotationsDelegate = new AnnotationsDelegate(chartConfigService);
+  }
 
   public renderChart(args: {
     targetElement: ElementRef<HTMLCanvasElement>;
@@ -75,13 +79,14 @@ export class ChartJSService {
   }
 
   public updateOptions(customOptions: ChartOptions, type: ChartType) {
-    const annotations = this.getExistingChartAnnotations();
+    const annotations = this.annotationsDelegate.getExistingChartAnnotations(this.chart);
     this.chartType = type;
     this.chart.options = this.createOptionsObject({ customOptions, annotations });
   }
 
   public updateAnnotations(annotations: AnnotationOptions[]) {
-    const annotationsWithDefaults = this.applyDefaultsToAnnotations(annotations);
+    const annotationsWithDefaults =
+      this.annotationsDelegate.applyDefaultsToAnnotations(annotations);
     this.chart.options.plugins.annotation.annotations = annotationsWithDefaults;
   }
 
@@ -99,22 +104,71 @@ export class ChartJSService {
     this.chart.data.datasets = this.createDatasets(oldDatasets);
   }
 
-  private getExistingChartAnnotations(): AnnotationOptions[] {
-    const annotations = this.chart.options.plugins?.annotation?.annotations;
-    /* In browser chart.js might return annotations as a Proxy object; force it to be an array.
-       Each annotationOption in the resulting array  will also be a Proxy object. 
-       But internally chart.js will just work with them as normal values */
-    if (annotations !== undefined) {
-      return Object.keys(annotations).map((key) => annotations[key]);
-    } else {
-      return [];
-    }
+  protected createOptionsObject(args: {
+    customOptions?: ChartOptions;
+    annotations?: AnnotationOptions[];
+  }): ChartOptions {
+    const { customOptions, annotations } = args;
+
+    const typeConfig = this.chartConfigService.getTypeConfig(this.chartType);
+    const typeConfigOptions = typeConfig?.options;
+    const annotationPluginOptions = annotations
+      ? this.annotationsDelegate.createAnnotationPluginOptionsObject(annotations)
+      : {};
+
+    let mergedOptions: ChartOptions = mergeDeepAll(
+      typeConfigOptions,
+      customOptions,
+      annotationPluginOptions
+    );
+
+    return this.chartConfigService.applyInteractionFunctionsExtensions(mergedOptions);
+  }
+
+  protected getDefaultLabels(datasets: ChartDataset[]): ChartLabel | ChartLabel[] {
+    /* 
+      Chart.js requires labels along the index axis to render anything therefore
+      use blank labels 
+    */
+    const largestDataset = datasets.reduce((previousDataset, currentDataset) =>
+      previousDataset.data.length > currentDataset.data.length ? previousDataset : currentDataset
+    );
+    return Array(largestDataset.data.length).fill('');
+  }
+
+  private createConfigurationObject(
+    type: ChartType,
+    datasets: ChartDataset[],
+    options: ChartOptions,
+    labels?: ChartLabel[]
+  ): ChartConfiguration {
+    const typeConfig = this.chartConfigService.getTypeConfig(type);
+
+    const indexAxis = typeConfig?.options?.indexAxis ?? 'x';
+    const labelsToApply = this.getLabelsToApply({ labels, datasets, type, indexAxis });
+
+    return mergeDeepAll(typeConfig, {
+      data: {
+        labels: labelsToApply,
+        datasets,
+      },
+      options,
+    }) as ChartConfiguration;
+  }
+
+  protected createDatasets(data: ChartDataset[] | number[]): ChartDataset[] {
+    let datasets = isNumberArray(data) ? [{ data }] : data;
+
+    if (this.highlightedElements)
+      this.addHighlightedElementsToDatasets(this.highlightedElements, datasets);
+
+    return datasets;
   }
 
   private destructivelyUpdateType(type: ChartType, customOptions?: ChartOptions) {
     const datasets = this.chart.data.datasets as ChartDataset[];
     const labels = this.chart.data.labels as ChartLabel[]; // chart.js stores labels as unknown[]; cast it to ChartLabel[]
-    const annotations = this.getExistingChartAnnotations();
+    const annotations = this.annotationsDelegate.getExistingChartAnnotations(this.chart);
 
     this.chartType = type;
     const options = this.createOptionsObject({ customOptions, annotations });
@@ -126,7 +180,7 @@ export class ChartJSService {
   }
 
   private nonDestructivelyUpdateType(chartType: ChartType, customOptions?: ChartOptions) {
-    const annotations = this.getExistingChartAnnotations();
+    const annotations = this.annotationsDelegate.getExistingChartAnnotations(this.chart);
     this.chartType = chartType;
     const options = this.createOptionsObject({
       customOptions,
@@ -141,66 +195,23 @@ export class ChartJSService {
     this.chart = new Chart(canvasElement, config);
   }
 
-  private applyDefaultsToAnnotations(annotations: AnnotationOptions[]) {
-    return annotations.map((annotation) => {
-      const annotationTypeDefaults = this.chartConfigService.getAnnotationDefaults(annotation.type);
-      return mergeDeepAll(annotationTypeDefaults, annotation);
+  private addHighlightedElementsToDatasets(
+    highlightedElements: ChartHighlightedElements,
+    datasets: ChartDataset[]
+  ) {
+    highlightedElements.forEach(([datasetIndex, dataIndex]) => {
+      const dataset = datasets[datasetIndex];
+      if (!dataset) return;
+
+      if (dataset?.kirbyOptions?.highlightedElements) {
+        dataset.kirbyOptions.highlightedElements.push(dataIndex);
+      } else {
+        dataset.kirbyOptions = {
+          ...dataset.kirbyOptions,
+          highlightedElements: [dataIndex],
+        };
+      }
     });
-  }
-
-  /* TODO: I think this is just stock related */
-  private createAnnotationPluginOptionsObject(annotations: AnnotationOptions[]) {
-    const annotationsWithDefaults = this.applyDefaultsToAnnotations(annotations);
-    return {
-      plugins: {
-        annotation: {
-          annotations: annotationsWithDefaults,
-        },
-      },
-    };
-  }
-
-  private applyInteractionFunctionsExtensions(options: ChartOptions): ChartOptions {
-    const interactionFunctionsExtensions =
-      this.chartConfigService.getInteractionFunctionsExtensions();
-    Object.entries(interactionFunctionsExtensions).forEach(([key, _]) => {
-      const callback = options[key];
-      options[key] = (e: Event, a: ActiveElement[], c: Chart) => {
-        interactionFunctionsExtensions[key](e, a, c, callback);
-      };
-    });
-    return options;
-  }
-
-  protected createOptionsObject(args: {
-    customOptions?: ChartOptions;
-    annotations?: AnnotationOptions[];
-  }): ChartOptions {
-    const { customOptions, annotations } = args;
-
-    const typeConfig = this.chartConfigService.getTypeConfig(this.chartType);
-    const typeConfigOptions = typeConfig?.options;
-    const annotationPluginOptions = annotations
-      ? this.createAnnotationPluginOptionsObject(annotations)
-      : {};
-
-    /* TODO: better name ... */
-    const modifiedOptions = this.createOptionsObjectHook([
-      typeConfigOptions,
-      customOptions,
-      annotationPluginOptions,
-    ]);
-
-    let mergedOptions: ChartOptions = mergeDeepAll(...modifiedOptions);
-
-    return this.applyInteractionFunctionsExtensions(mergedOptions);
-  }
-
-  /* TODO: properly type this */
-  protected createOptionsObjectHook(
-    args: [typeConfigOptions: any, customOptions: any, annotationPluginOptions: any]
-  ): any {
-    return args;
   }
 
   private getLabelsToApply(args: {
@@ -235,64 +246,5 @@ export class ChartJSService {
     } else {
       return this.getDefaultLabels(datasets);
     }
-  }
-
-  protected getDefaultLabels(datasets: ChartDataset[]): ChartLabel | ChartLabel[] {
-    /* 
-      Chart.js requires labels along the index axis to render anything therefore
-      use blank labels 
-    */
-    const largestDataset = datasets.reduce((previousDataset, currentDataset) =>
-      previousDataset.data.length > currentDataset.data.length ? previousDataset : currentDataset
-    );
-    return Array(largestDataset.data.length).fill('');
-  }
-
-  private createConfigurationObject(
-    type: ChartType,
-    datasets: ChartDataset[],
-    options: ChartOptions,
-    labels?: ChartLabel[]
-  ): ChartConfiguration {
-    const typeConfig = this.chartConfigService.getTypeConfig(type);
-
-    const indexAxis = typeConfig?.options?.indexAxis ?? 'x';
-    const labelsToApply = this.getLabelsToApply({ labels, datasets, type, indexAxis });
-
-    return mergeDeepAll(typeConfig, {
-      data: {
-        labels: labelsToApply,
-        datasets,
-      },
-      options,
-    }) as ChartConfiguration;
-  }
-
-  private addHighlightedElementsToDatasets(
-    highlightedElements: ChartHighlightedElements,
-    datasets: ChartDataset[]
-  ) {
-    highlightedElements.forEach(([datasetIndex, dataIndex]) => {
-      const dataset = datasets[datasetIndex];
-      if (!dataset) return;
-
-      if (dataset?.kirbyOptions?.highlightedElements) {
-        dataset.kirbyOptions.highlightedElements.push(dataIndex);
-      } else {
-        dataset.kirbyOptions = {
-          ...dataset.kirbyOptions,
-          highlightedElements: [dataIndex],
-        };
-      }
-    });
-  }
-
-  protected createDatasets(data: ChartDataset[] | number[]): ChartDataset[] {
-    let datasets = isNumberArray(data) ? [{ data }] : data;
-
-    if (this.highlightedElements)
-      this.addHighlightedElementsToDatasets(this.highlightedElements, datasets);
-
-    return datasets;
   }
 }
