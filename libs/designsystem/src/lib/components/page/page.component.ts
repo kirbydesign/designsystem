@@ -24,7 +24,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router, RouterEvent } from '@angular/router';
-import { IonContent, IonFooter, IonHeader } from '@ionic/angular';
+import { IonBackButtonDelegate, IonContent, IonFooter, IonHeader } from '@ionic/angular';
 import { ScrollDetail } from '@ionic/core';
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
@@ -171,6 +171,7 @@ export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChec
   @Output() enter = new EventEmitter<void>();
   @Output() leave = new EventEmitter<void>();
   @Output() refresh = new EventEmitter<PullToRefreshEvent>();
+  @Output() backButtonClick = new EventEmitter<Event>();
 
   @ViewChild(IonContent, { static: true }) private content: IonContent;
   @ViewChild(IonContent, { static: true, read: ElementRef })
@@ -180,6 +181,8 @@ export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChec
   @ViewChild(IonFooter, { static: true, read: ElementRef })
   private ionFooterElement: ElementRef<HTMLIonFooterElement>;
 
+  @ViewChild(IonBackButtonDelegate, { static: false })
+  private backButtonDelegate: IonBackButtonDelegate;
   @ViewChild('pageTitle', { static: false, read: ElementRef })
   private pageTitle: ElementRef;
 
@@ -281,6 +284,8 @@ export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChec
     this.windowRef.nativeWindow.addEventListener(selectedTabClickEvent, () => {
       this.content.scrollToTop(KirbyAnimation.Duration.LONG);
     });
+
+    this.interceptBackButtonClicksSetup();
   }
 
   ngAfterContentChecked(): void {
@@ -331,6 +336,18 @@ export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChec
     if (this.tabBarBottomHidden && this.tabsComponent) {
       this.tabsComponent.tabBarBottomHidden = false;
     }
+  }
+
+  private interceptBackButtonClicksSetup() {
+    // Intercept back-button click events, defaulting to the built-in click-handler.
+    if (this.backButtonClick.observers.length === 0) {
+      this.backButtonClick
+        .pipe(takeUntil(this.ngOnDestroy$))
+        .subscribe(this.backButtonDelegate.onClick.bind(this.backButtonDelegate));
+    }
+    this.backButtonDelegate.onClick = (event: Event) => {
+      this.backButtonClick.emit(event);
+    };
   }
 
   private initializeTitle() {
