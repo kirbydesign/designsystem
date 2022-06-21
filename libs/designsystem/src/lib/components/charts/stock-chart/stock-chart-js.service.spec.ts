@@ -3,13 +3,14 @@ import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 import { ChartDataset as ChartJSDataset, ChartOptions, ChartType as ChartJSType } from 'chart.js';
 import { MockProvider } from 'ng-mocks';
 
-import { deepCopy } from '../../helpers/deep-copy';
+import { deepCopy } from '../../../helpers/deep-copy';
 import {
+  ChartConfigService,
+  ChartDataset,
+  ChartType,
   TEST_CHART_ANNOTATIONS_CONFIG,
   TEST_CHART_TYPES_CONFIG,
-} from '../chart/chart-js/test-utils';
-import { ChartDataset, ChartType } from '../chart/chart.types';
-import { ChartConfigService } from '../chart/configs/chart-config.service';
+} from '../shared';
 
 import { StockChartJSService } from './stock-chart-js.service';
 

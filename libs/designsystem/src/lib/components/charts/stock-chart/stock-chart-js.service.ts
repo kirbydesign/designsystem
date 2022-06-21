@@ -1,17 +1,17 @@
 import { ElementRef, Injectable } from '@angular/core';
 import { ChartDataset, ChartOptions, ScatterDataPoint } from 'chart.js';
+import { AnnotationOptions } from 'chartjs-plugin-annotation';
 import { toDate } from 'date-fns';
 
-import { mergeDeepAll } from '../../helpers/merge-deep';
+import { mergeDeepAll } from '../../../helpers/merge-deep';
 import {
-  AnnotationOptions,
   ChartDataLabelOptions,
   ChartHighlightedElements,
+  ChartJSService,
   ChartLabel,
   ChartLocale,
   ChartType,
-} from '../chart';
-import { ChartJSService } from '../chart/chart-js/chart-js.service';
+} from '../shared';
 
 // TODO: Make it part of Class
 const CHART_LOCALE_DEFAULT = 'en-US';

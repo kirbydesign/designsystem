@@ -2,7 +2,7 @@ import { ElementRef } from '@angular/core';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 import { Chart } from 'chart.js';
 
-import { ChartConfigService } from '../chart/configs/chart-config.service';
+import { ChartConfigService } from '../shared';
 
 import { StockChartJSService } from './stock-chart-js.service';
 

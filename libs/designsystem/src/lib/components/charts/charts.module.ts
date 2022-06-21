@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 
-import { StockChartComponent } from '../stock-chart/stock-chart.component';
-
 import { ChartComponent } from './chart';
 import { ChartConfigService } from './shared/base-chart';
+import { StockChartComponent } from './stock-chart';
 
 @NgModule({
   declarations: [ChartComponent, StockChartComponent],
