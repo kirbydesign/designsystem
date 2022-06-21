@@ -15,7 +15,6 @@ import { IntroComponent } from './intro/intro.component';
 import { FooterComponent } from './page/footer/footer.component';
 import { HeaderComponent } from './page/header/header.component';
 import { SideNavComponent } from './page/side-nav/side-nav.component';
-import { FirebaseModule } from './shared/firebase/firebase.module';
 
 registerLocaleData(localeEn);
 
@@ -35,7 +34,6 @@ registerLocaleData(localeEn);
     HttpClientModule,
     FormsModule,
     KirbyModule,
-    FirebaseModule,
   ],
 
   providers: [
