@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { ActiveElement, Chart, ChartOptions, ChartType as ChartJSType } from 'chart.js';
 import { AnnotationType, AnnotationTypeRegistry } from 'chartjs-plugin-annotation';
 
-import { deepCopy } from '../../../helpers/deep-copy';
-import { ChartType, ChartTypeConfig } from '../chart.types';
+import { ChartType, ChartTypeConfig } from '../../';
+import { deepCopy } from '../../../../../helpers/deep-copy';
 
 import { CHART_ANNOTATIONS_CONFIG } from './annotations.config';
 import { CHART_INTERACTION_FUNCTIONS_EXTENSIONS } from './interaction-functions-extensions.config';

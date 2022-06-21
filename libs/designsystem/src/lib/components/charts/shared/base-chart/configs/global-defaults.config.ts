@@ -1,4 +1,4 @@
-import { ColorHelper } from '../../../helpers';
+import { ColorHelper } from '../../../../../helpers';
 
 import { scriptedBackgroundColor, scriptedHoverBackgroundColor } from './shared.utils';
 

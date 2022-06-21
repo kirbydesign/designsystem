@@ -2,8 +2,8 @@ import { ChartTypeRegistry, Color, Point, TooltipItem, TooltipLabelStyle } from 
 import { Context } from 'chartjs-plugin-datalabels';
 import { Align } from 'chartjs-plugin-datalabels/types/options';
 
-import { ColorHelper, DesignTokenHelper } from '../../../helpers';
-import { ChartTypesConfig } from '../chart.types';
+import { ChartTypesConfig } from '../../';
+import { ColorHelper, DesignTokenHelper } from '../../../../../helpers';
 
 const { fontSize } = DesignTokenHelper;
 const { getThemeColorHexString, getThemeColorRgbString } = ColorHelper;

@@ -11,10 +11,10 @@ import {
 import { ChartOptions } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
 
-import { ResizeObserverFactory } from '../shared';
+import { ChartDataset, ChartHighlightedElements, ChartLabel, ChartType } from '../';
+import { ResizeObserverFactory } from '../../../shared';
 
 import { ChartJSService } from './chart-js/chart-js.service';
-import { ChartDataset, ChartHighlightedElements, ChartLabel, ChartType } from './chart.types';
 
 @Component({
   selector: 'kirby-base-chart',
@@ -137,14 +137,4 @@ export class BaseChartComponent implements AfterViewInit, OnChanges {
   private redrawChart() {
     this.chartJSService.redrawChart();
   }
-}
-
-@Component({
-  selector: 'kirby-chart',
-  templateUrl: './chart.component.html',
-  styleUrls: ['./chart.component.scss'],
-  providers: [ChartJSService],
-})
-export class ChartComponent extends BaseChartComponent {
-  @Input() type: Exclude<ChartType, 'stock'> = 'column';
 }

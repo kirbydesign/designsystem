@@ -4,9 +4,8 @@ import { Chart, ChartOptions, ChartType as ChartJSType } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
 import { MockProvider } from 'ng-mocks';
 
-import { deepCopy } from '../../../helpers/deep-copy';
-import { ChartDataset, ChartType } from '../chart.types';
-import { ChartHighlightedElements } from '../chart.types';
+import { ChartDataset, ChartHighlightedElements, ChartType } from '../../';
+import { deepCopy } from '../../../../../helpers/deep-copy';
 import { ChartConfigService } from '../configs/chart-config.service';
 import { CHART_GLOBAL_DEFAULTS } from '../configs/global-defaults.config';
 

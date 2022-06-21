@@ -2,7 +2,7 @@ import { ElementRef } from '@angular/core';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 import { Chart, FontSpec } from 'chart.js';
 
-import { ColorHelper } from '../../../helpers';
+import { ColorHelper } from '../../../../../helpers';
 import { ChartConfigService } from '../configs/chart-config.service';
 
 import { ChartJSService } from './chart-js.service';

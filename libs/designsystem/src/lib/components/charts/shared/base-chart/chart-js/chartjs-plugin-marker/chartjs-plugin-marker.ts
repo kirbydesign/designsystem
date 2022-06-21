@@ -7,7 +7,7 @@
 import { Chart } from 'chart.js';
 import { valueOrDefault } from 'chart.js/helpers';
 
-import { ChartDataset } from '../../chart.types';
+import { ChartDataset } from '../../../';
 
 var defaultOptions = {
   line: {

@@ -1,5 +1,6 @@
-export * from './chart.types';
-export { ChartComponent } from './chart.component';
+export * from './chart';
+export * from './shared/charts.types';
 export { ChartOptions, ChartEvent, ActiveElement, Chart } from 'chart.js';
 export { AnnotationOptions } from 'chartjs-plugin-annotation';
-export { ChartModule } from './chart.module';
+
+export { ChartsModule } from './charts.module';

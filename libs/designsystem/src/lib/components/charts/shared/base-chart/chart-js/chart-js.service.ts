@@ -2,14 +2,14 @@ import { ElementRef, Injectable } from '@angular/core';
 import { ChartConfiguration, ChartOptions } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
 
-import { mergeDeepAll } from '../../../helpers/merge-deep';
 import {
   ChartDataset,
   ChartHighlightedElements,
   ChartLabel,
   ChartType,
   isNumberArray,
-} from '../chart.types';
+} from '../../';
+import { mergeDeepAll } from '../../../../../helpers/merge-deep';
 import { ChartConfigService } from '../configs/chart-config.service';
 
 import { Chart } from './configured-chart-js';

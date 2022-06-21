@@ -12,7 +12,7 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { CardFooterComponent } from './components/card/card-footer/card-footer.component';
 import { CardHeaderComponent } from './components/card/card-header/card-header.component';
 import { CardComponent } from './components/card/card.component';
-import { ChartModule } from './components/chart/chart.module';
+import { ChartsModule } from './components/charts';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { ChipComponent } from './components/chip/chip.component';
 import { DividerComponent } from './components/divider/divider.component';
@@ -142,7 +142,7 @@ const exportedModules = [
   ItemModule,
   ToggleButtonModule,
   ListModule,
-  ChartModule,
+  ChartsModule,
   SpinnerModule,
 ];
 

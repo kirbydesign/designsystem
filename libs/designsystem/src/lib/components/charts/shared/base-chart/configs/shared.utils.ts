@@ -1,7 +1,8 @@
+// TODO: take a look at this file. There must be a more meaningful way to store it.
 import { ChartType, ScriptableContext } from 'chart.js';
 
-import { ColorHelper } from '../../../helpers';
-import { ChartDataset } from '../chart.types';
+import { ChartDataset } from '../../';
+import { ColorHelper } from '../../../../../helpers';
 
 const { getThemeColorHexString } = ColorHelper;
 
