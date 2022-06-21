@@ -41,22 +41,28 @@
 
   <div class="content-inner">
     <div
-      class="page-title"
-      #pageTitle
+      class="page-header"
       *ngIf="hasPageTitle"
-      [class.has-actions]="hasActionsInPage"
       [ngClass]="{
         'text-center': titleAlignment === 'center',
         'text-right': titleAlignment === 'right'
       }"
     >
-      <ng-container
-        *ngTemplateOutlet="customTitleTemplate || defaultPageTitleTemplate"
-      ></ng-container>
-      <ng-container
-        *ngTemplateOutlet="pageActionsTemplate || defaultPageActionsTemplate"
-      ></ng-container>
+      <div #pageTitle class="page-title" [class.has-actions]="hasActionsInPage">
+        <ng-container
+          *ngTemplateOutlet="customTitleTemplate || defaultPageTitleTemplate"
+        ></ng-container>
+        <ng-container
+          *ngTemplateOutlet="pageActionsTemplate || defaultPageActionsTemplate"
+        ></ng-container>
+      </div>
+      <div *ngIf="hasPageSubtitle" class="page-subtitle">
+        <ng-container
+          *ngTemplateOutlet="customSubtitleTemplate || defaultPageSubtitleTemplate"
+        ></ng-container>
+      </div>
     </div>
+
     <!-- Content -->
     <ng-container
       *ngTemplateOutlet="customContentTemplate || defaultContentTemplate"
@@ -79,7 +85,9 @@
     <ng-container *ngTemplateOutlet="simpleTitleTemplate"></ng-container>
   </h1>
 </ng-template>
-
+<ng-template #defaultPageSubtitleTemplate>
+  <ng-container *ngTemplateOutlet="simpleSubtitleTemplate"></ng-container>
+</ng-template>
 <ng-template #defaultPageActionsTemplate>
   <ng-content select="kirby-page-actions"></ng-content>
 </ng-template>
@@ -89,4 +97,5 @@
 </ng-template>
 
 <ng-template #simpleTitleTemplate>{{ title }}</ng-template>
+<ng-template #simpleSubtitleTemplate>{{ subtitle }}</ng-template>
 <ng-template #simpleToolbarTitleTemplate>{{ toolbarTitle }}</ng-template>

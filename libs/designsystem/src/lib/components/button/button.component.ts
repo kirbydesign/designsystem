@@ -1,5 +1,6 @@
 import {
   AfterContentInit,
+  ChangeDetectionStrategy,
   Component,
   ContentChild,
   ElementRef,
@@ -22,6 +23,7 @@ export enum ButtonSize {
   selector: 'button[kirby-button],Button[kirby-button]',
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonComponent implements AfterContentInit {
   @HostBinding('class.attention-level1')

@@ -23,6 +23,7 @@ export class MockSegmentedControlComponent {
   @Input() selectedIndex: number;
   @Input() value: SegmentItem;
   @Input() size: 'sm' | 'md';
+  @Input() disableChangeOnSwipe: boolean;
   @Output() segmentSelect = new EventEmitter();
 }
 

@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   forwardRef,
@@ -20,6 +21,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
       useExisting: forwardRef(() => RangeComponent),
     },
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RangeComponent implements OnChanges, ControlValueAccessor {
   @Input() minLabel: string;

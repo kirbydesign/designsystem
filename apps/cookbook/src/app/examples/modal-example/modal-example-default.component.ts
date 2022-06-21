@@ -15,6 +15,8 @@ const config = {
       <cookbook-modal-example-configuration [disabled]="preventInteraction" [(showDummyKeyboard)]="showDummyKeyboard"
       [(showPageProgress)]="showPageProgress"
       [(showFooter)]="showFooter"
+      [(displayFooterAsInline)]="displayFooterAsInline"
+      [(collapseTitle)]="collapseTitle"
       [(showDummyContent)]="showDummyContent"
       [(delayLoadDummyContent)]="delayLoadDummyContent"
       [(loadAdditionalContent)]="loadAdditionalContent"
@@ -207,6 +209,8 @@ export class ModalExampleDefaultComponent {
   );
   showPageProgress = false;
   showFooter = false;
+  displayFooterAsInline = false;
+  collapseTitle = false;
   showDummyContent = true;
   delayLoadDummyContent = true;
   loadAdditionalContent = false;
@@ -226,12 +230,14 @@ export class ModalExampleDefaultComponent {
     this.preventInteraction = this.interactWithBackground;
     const config: ModalConfig = {
       flavor,
+      collapseTitle: this.collapseTitle,
       component: EmbeddedModalExampleComponent,
       interactWithBackground: this.interactWithBackground,
       cssClass: this.customCssClass ? ['my-custom-modal-class'] : [],
       size: this.openFullHeight ? 'full-height' : null,
       componentProps: {
         title,
+        displayFooterAsInline: this.displayFooterAsInline,
         subtitle: 'Hello from the first embedded example component!',
         exampleProperties: {
           stringProperty: 'Value injected from parent component',

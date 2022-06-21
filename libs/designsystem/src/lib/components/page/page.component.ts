@@ -25,7 +25,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router, RouterEvent } from '@angular/router';
-import { IonContent, IonFooter, IonHeader } from '@ionic/angular';
+import { IonBackButtonDelegate, IonContent, IonFooter, IonHeader } from '@ionic/angular';
 import { Observable, Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 
@@ -54,6 +54,11 @@ export interface PullToRefreshEvent {
   selector: '[kirbyPageTitle]',
 })
 export class PageTitleDirective {}
+
+@Directive({
+  selector: '[kirbyPageSubtitle]',
+})
+export class PageSubtitleDirective {}
 
 @Directive({
   selector: '[kirbyPageToolbarTitle]',
@@ -139,6 +144,7 @@ export class PageComponent
   implements OnInit, OnDestroy, AfterViewInit, AfterContentChecked, OnChanges
 {
   @Input() title: string;
+  @Input() subtitle: string;
   @Input() toolbarTitle: string;
   @Input() titleAlignment: 'left' | 'center' | 'right' = 'left';
   @Input() defaultBackHref: string;
@@ -161,6 +167,7 @@ export class PageComponent
   @Output() enter = new EventEmitter<void>();
   @Output() leave = new EventEmitter<void>();
   @Output() refresh = new EventEmitter<PullToRefreshEvent>();
+  @Output() backButtonClick = new EventEmitter<Event>();
 
   @ViewChild(IonContent, { static: true }) private content: IonContent;
   @ViewChild(IonContent, { static: true, read: ElementRef })
@@ -170,6 +177,8 @@ export class PageComponent
   @ViewChild(IonFooter, { static: true, read: ElementRef })
   private ionFooterElement: ElementRef<HTMLIonFooterElement>;
 
+  @ViewChild(IonBackButtonDelegate, { static: false })
+  private backButtonDelegate: IonBackButtonDelegate;
   @ViewChild('pageTitle', { static: false, read: ElementRef })
   private pageTitle: ElementRef;
 
@@ -181,12 +190,15 @@ export class PageComponent
   private customToolbarTitleTemplate: TemplateRef<any>;
   @ContentChild(PageTitleDirective, { static: false, read: TemplateRef })
   customTitleTemplate: TemplateRef<any>;
+  @ContentChild(PageSubtitleDirective, { static: false, read: TemplateRef })
+  customSubtitleTemplate: TemplateRef<any>;
   @ContentChildren(PageActionsDirective)
   customActions: QueryList<PageActionsDirective>;
   @ContentChildren(PageContentDirective)
   private customContent: QueryList<PageContentDirective>;
 
   hasPageTitle: boolean;
+  hasPageSubtitle: boolean;
   hasActionsInPage: boolean;
   toolbarTitleVisible: boolean;
   toolbarFixedActionsVisible: boolean;
@@ -237,6 +249,10 @@ export class PageComponent
         maxLines: changes.titleMaxLines.currentValue,
       };
     }
+    if (changes.subtitle && !changes.subtitle.isFirstChange) {
+      this.subtitle = changes.title.currentValue;
+      this.hasPageSubtitle = this.subtitle !== undefined;
+    }
   }
 
   ngAfterViewInit(): void {
@@ -259,6 +275,8 @@ export class PageComponent
     this.windowRef.nativeWindow.addEventListener(selectedTabClickEvent, () => {
       this.content.scrollToTop(KirbyAnimation.Duration.LONG);
     });
+
+    this.interceptBackButtonClicksSetup();
   }
 
   ngAfterContentChecked(): void {
@@ -311,12 +329,24 @@ export class PageComponent
     }
   }
 
+  private interceptBackButtonClicksSetup() {
+    // Intercept back-button click events, defaulting to the built-in click-handler.
+    if (this.backButtonClick.observers.length === 0) {
+      this.backButtonClick
+        .pipe(takeUntil(this.ngOnDestroy$))
+        .subscribe(this.backButtonDelegate.onClick.bind(this.backButtonDelegate));
+    }
+    this.backButtonDelegate.onClick = (event: Event) => {
+      this.backButtonClick.emit(event);
+    };
+  }
+
   private initializeTitle() {
     // Ensures initializeTitle() won't run, if already initialized
     if (this.hasPageTitle) return;
-
     this.hasPageTitle = this.title !== undefined || !!this.customTitleTemplate;
     this.toolbarTitleVisible = !this.hasPageTitle;
+    this.hasPageSubtitle = this.subtitle !== undefined || !!this.customSubtitleTemplate;
 
     if (this.hasPageTitle) {
       setTimeout(() => {

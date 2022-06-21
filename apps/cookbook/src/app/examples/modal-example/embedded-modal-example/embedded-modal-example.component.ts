@@ -38,11 +38,16 @@ export class EmbeddedModalExampleComponent implements OnInit {
   delayLoadDummyContent: boolean;
   loadAdditionalContent: boolean;
   disableScroll: boolean = false;
+  displayFooterAsInline: boolean = false;
   openFullHeight: boolean;
 
   isLoading = false;
   isLoadingAdditionalContent = false;
   snapFooterToKeyboard = false;
+
+  get _footerType(): 'inline' | 'fixed' {
+    return this.displayFooterAsInline ? 'inline' : 'fixed';
+  }
 
   constructor(
     @Inject(COMPONENT_PROPS) componentProps,

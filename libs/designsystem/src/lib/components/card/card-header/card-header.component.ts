@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
 
 import { NotificationColor } from '@kirbydesign/core';
 
@@ -8,6 +8,7 @@ export type CardFlagLevel = NotificationColor | 'info' | null;
   selector: 'kirby-card-header',
   templateUrl: './card-header.component.html',
   styleUrls: ['./card-header.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardHeaderComponent {
   @Input() title: string;
