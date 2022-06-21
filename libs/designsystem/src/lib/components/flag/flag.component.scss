@@ -22,19 +22,30 @@
   }
 }
 
-@each $color-name,
-  $color-value
-    in map.merge(
-      utils.$notification-colors,
-      (
-        'semi-light': utils.get-color('semi-light'),
-        'danger': utils.$danger-background-weak,
-      )
-    )
-{
+$_flag-notification-colors: map.merge(
+  utils.$notification-colors,
+  (
+    'semi-light': utils.get-color('semi-light'),
+  )
+);
+$_flag-notification-colors: map.remove($_flag-notification-colors, 'danger');
+
+@each $color-name, $color-value in $_flag-notification-colors {
   :host(.#{$color-name}) {
-    --kirby-flag-background-color: #{$color-value};
+    // Use utils.get-color() to assign a custom property instead of a color value.
+    // Custom properties can be overridden in consumer projects.
+    --kirby-flag-background-color: #{utils.get-color($color-name)};
     --kirby-flag-color: #{utils.get-color($color-name + '-contrast')};
-    --kirby-flag-border-color: #{$color-value};
+    --kirby-flag-border-color: #{utils.get-color($color-name)};
   }
+}
+
+// <kirby-flag> uses a different "danger" notification color.
+// Overriding `--kirby-danger` in a consumer project will not have any effect on
+// the background color for danger flags.
+// See https://github.com/kirbydesign/designsystem/issues/2041
+:host(.danger) {
+  --kirby-flag-background-color: #{utils.$danger-background-weak};
+  --kirby-flag-color: #{utils.$danger-background-weak-contrast};
+  --kirby-flag-border-color: #{utils.$danger-background-weak};
 }
