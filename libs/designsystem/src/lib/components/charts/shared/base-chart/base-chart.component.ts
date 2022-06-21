@@ -18,8 +18,8 @@ import { ChartJSService } from './chart-js/chart-js.service';
 
 @Component({
   selector: 'kirby-base-chart',
-  templateUrl: './chart.component.html',
-  styleUrls: ['./chart.component.scss'],
+  templateUrl: './base-chart.component.html',
+  styleUrls: ['./base-chart.component.scss'],
 })
 export class BaseChartComponent implements AfterViewInit, OnChanges {
   @Input() type: ChartType;

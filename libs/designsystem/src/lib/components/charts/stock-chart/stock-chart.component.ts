@@ -7,8 +7,8 @@ import { StockChartJSService } from './stock-chart-js.service';
 @Component({
   selector: 'kirby-stock-chart',
   providers: [{ provide: ChartJSService, useClass: StockChartJSService }],
-  templateUrl: '../chart/chart.component.html',
-  styleUrls: ['../chart/chart.component.scss'],
+  templateUrl: '../shared/base-chart/base-chart.component.html',
+  styleUrls: ['../shared/base-chart/base-chart.component.scss'],
 })
 export class StockChartComponent extends BaseChartComponent {
   @Input() dataLabelOptions?: ChartDataLabelOptions;
