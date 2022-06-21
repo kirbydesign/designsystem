@@ -274,18 +274,8 @@ export class ModalWrapperComponent
     });
   }
 
-  private closestElement(selector: string, base: Element) {
-    function __closestFrom(el: Element | Window | Document): Element {
-      if (!el || el === document || el === window) return null;
-      if ((el as Slottable).assignedSlot) el = (el as Slottable).assignedSlot;
-      let found = (el as Element).closest(selector);
-      return found ? found : __closestFrom(((el as Element).getRootNode() as ShadowRoot).host);
-    }
-    return __closestFrom(base);
-  }
-
   private observeModalFullHeight() {
-    const ionModalWrapper = this.closestElement('.modal-wrapper', this.elementRef.nativeElement);
+    const ionModalWrapper = this.ionModalElement.shadowRoot.querySelector('.modal-wrapper');
 
     if (!ionModalWrapper) return;
     // Start observing when modal has finished animating:
