@@ -1,6 +1,17 @@
 @use 'sass:map';
 @use '~@kirbydesign/core/src/scss/utils';
 
+// returns the total target height including padding and borders
+@function _calculate-line-height(
+  $border: 1px,
+  $padding: utils.size('xxxxs'),
+  $fontSize: utils.font-size('n'),
+  $targetHeight
+) {
+  // line-height should be unitless; Sass seems to take care of it.
+  @return ($targetHeight - 2 * ($padding + $border)) / $fontSize;
+}
+
 :host {
   display: inline-block;
   background-color: var(--kirby-flag-background-color, transparent);
@@ -10,13 +21,16 @@
   font-size: utils.font-size('n');
   padding: utils.size('xxxxs') utils.size('xxs');
   font-weight: utils.font-weight('medium');
+  line-height: _calculate-line-height($targetHeight: 28px, $fontSize: utils.font-size('n'));
 
   &.sm {
     font-size: utils.font-size('s');
+    line-height: _calculate-line-height($targetHeight: 24px, $fontSize: utils.font-size('s'));
   }
 
   &.xs {
     font-size: utils.font-size('xs');
+    line-height: _calculate-line-height($targetHeight: 20px, $fontSize: utils.font-size('xs'));
     padding-left: utils.size('xxxs');
     padding-right: utils.size('xxxs');
   }
