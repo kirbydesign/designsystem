@@ -47,7 +47,7 @@ describe('AlertHelper', () => {
       overlay = await alertHelper.showAlert({ title: 'Alert' });
       ionModal = await ionModalController.getTop();
       expect(ionModal).toBeTruthy();
-      backdrop = ionModal.querySelector('ion-backdrop');
+      backdrop = ionModal.shadowRoot.querySelector('ion-backdrop');
       expect(backdrop).toBeTruthy();
     });
 
@@ -56,13 +56,11 @@ describe('AlertHelper', () => {
     });
 
     it('alert should have correct backdrop style', () => {
-      const modalShadow = ionModal.querySelector<HTMLElement>(':scope > .modal-shadow');
-      expect(modalShadow).toHaveComputedStyle({ display: 'none' });
-      expect(backdrop).toHaveComputedStyle({ opacity: backdropOpacity });
+      expect(ionModal).toHaveComputedStyle({ '--backdrop-opacity': backdropOpacity });
     });
 
     it('modal wrapper should have correct max width', () => {
-      const modalWrapper = ionModal.querySelector(':scope > .modal-wrapper');
+      const modalWrapper = ionModal.shadowRoot.querySelector('.modal-wrapper');
       expect(modalWrapper).toHaveComputedStyle({
         'max-width': DesignTokenHelper.compactModalMaxWidth(),
       });
@@ -81,8 +79,8 @@ describe('AlertHelper', () => {
 
       ionModal = await ionModalController.getTop();
       expect(ionModal).toBeTruthy();
-      backdrop = ionModal.querySelector('ion-backdrop');
-      expect(backdrop).toHaveComputedStyle({ opacity: backdropOpacity });
+      backdrop = ionModal.shadowRoot.querySelector('ion-backdrop');
+      expect(backdrop).toHaveComputedStyle({ '--backdrop-opacity': backdropOpacity });
       await ionModalElement.dismiss();
     });
   });
