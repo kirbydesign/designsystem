@@ -38,7 +38,7 @@ describe('ActionSheetHelper', () => {
       overlay = await actionSheetHelper.showActionSheet({ items: [{ text: 'Option 1', id: '1' }] });
       ionModal = await ionModalController.getTop();
       expect(ionModal).toBeTruthy();
-      backdrop = ionModal.querySelector('ion-backdrop');
+      backdrop = ionModal.shadowRoot.querySelector('ion-backdrop');
       expect(backdrop).toBeTruthy();
     });
 
@@ -47,13 +47,11 @@ describe('ActionSheetHelper', () => {
     });
 
     it('action-sheet should have correct backdrop style', () => {
-      const modalShadow = ionModal.querySelector<HTMLElement>(':scope > .modal-shadow');
-      expect(modalShadow).toHaveComputedStyle({ display: 'none' });
-      expect(backdrop).toHaveComputedStyle({ opacity: backdropOpacity });
+      expect(backdrop).toHaveComputedStyle({ '--backdrop-opacity': backdropOpacity });
     });
 
     it('modal wrapper should not have max width or height', () => {
-      const modalWrapper = ionModal.querySelector(':scope > .modal-wrapper');
+      const modalWrapper = ionModal.shadowRoot.querySelector('.modal-wrapper');
       expect(modalWrapper).toHaveComputedStyle({ 'max-width': 'none', 'max-height': 'none' });
     });
 
@@ -78,8 +76,8 @@ describe('ActionSheetHelper', () => {
 
       ionModal = await ionModalController.getTop();
       expect(ionModal).toBeTruthy();
-      backdrop = ionModal.querySelector('ion-backdrop');
-      expect(backdrop).toHaveComputedStyle({ opacity: backdropOpacity });
+      backdrop = ionModal.shadowRoot.querySelector('ion-backdrop');
+      expect(backdrop).toHaveComputedStyle({ '--backdrop-opacity': backdropOpacity });
       await ionModalElement.dismiss();
     });
   });
