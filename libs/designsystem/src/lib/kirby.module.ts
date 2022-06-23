@@ -21,7 +21,7 @@ import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { EmptyStateComponent } from './components/empty-state/empty-state.component';
 import { FabSheetComponent } from './components/fab-sheet/fab-sheet.component';
 import { FlagComponent } from './components/flag/flag.component';
-import { AffixDirective } from './components/form-field/directives/affix/affix.directive';
+import { AffixModule } from './components/form-field/affix/affix.module';
 import { DateInputDirective } from './components/form-field/directives/date/date-input.directive';
 import { DecimalMaskDirective } from './components/form-field/directives/decimal-mask/decimal-mask.directive';
 import { FormFieldMessageComponent } from './components/form-field/form-field-message/form-field-message.component';
@@ -125,7 +125,6 @@ const exportedDeclarations = [
   ElementAsButtonDirective,
   ItemGroupComponent,
   SectionHeaderComponent,
-  AffixDirective,
 ];
 
 const declarations = [
@@ -150,6 +149,7 @@ const exportedModules = [
   ListModule,
   ChartModule,
   SpinnerModule,
+  AffixModule,
 ];
 
 const allExports = [...exportedModules, ...exportedDeclarations];

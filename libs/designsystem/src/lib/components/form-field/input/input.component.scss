@@ -4,6 +4,8 @@
 $padding-block-size-md: shared.$form-field-input-padding * 0.5;
 
 :host {
+  --input-padding: #{shared.$form-field-input-padding};
+
   &[type='number'] {
     // fallback
     appearance: textfield;
@@ -20,6 +22,8 @@ $padding-block-size-md: shared.$form-field-input-padding * 0.5;
 :host(.md) {
   border-radius: utils.size('m');
   padding-block: $padding-block-size-md;
+
+  --input-padding: #{shared.$form-field-input-padding};
 }
 
 /* clean-css ignore:start */
