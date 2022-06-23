@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, Optional, ViewChild } from '@angular/cor
 import { RouterTestingModule } from '@angular/router/testing';
 import { ModalController as IonicModalController } from '@ionic/angular';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
+import { MockComponents } from 'ng-mocks';
 
 import { DesignTokenHelper } from '@kirbydesign/core';
 
