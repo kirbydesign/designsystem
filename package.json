@@ -1,6 +1,6 @@
 {
   "name": "designsystem",
-  "version": "6.0.1",
+  "version": "6.0.01",
   "description": "Kirby Design Angular Components. This library provides Angular wrappers for the @kirbydesign/core package, for smoother integration into Angular projects.",
   "engines": {
     "node": ">=16.0.0",
@@ -96,7 +96,7 @@
     "@ionic/angular": "^5.5.2",
     "@nrwl/angular": "14.1.7",
     "@types/prismjs": "1.9.0",
-    "chart.js": "3.4",
+    "chart.js": "3.3.2",
     "chartjs-adapter-date-fns": "^2.0.0",
     "chartjs-plugin-annotation": "^1.0.2",
     "chartjs-plugin-datalabels": "^2.0.0",
