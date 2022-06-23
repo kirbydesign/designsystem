@@ -5,7 +5,7 @@ import { InputSize } from '@kirbydesign/designsystem';
 const config = {
   selector: 'cookbook-form-field-input-example',
   template: `<kirby-form-field>
-  <input kirby-input [size]="size" placeholder="Default input with placeholder text" />
+  <input kirby-input [size]="size" placeholder="Default input with placeholder text." />
 </kirby-form-field>`,
 };
 

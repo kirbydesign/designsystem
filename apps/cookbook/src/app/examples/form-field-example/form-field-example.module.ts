@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { KirbyModule } from '@kirbydesign/designsystem';
 
+import { FormFieldInputAffixExampleComponent } from './examples/input/affix';
 import { FormFieldInputBorderlessExampleComponent } from './examples/input/borderless';
 import { FormFieldInputCounterExampleComponent } from './examples/input/counter';
 import { FormFieldInputDateExampleComponent } from './examples/input/date';
@@ -35,6 +36,7 @@ const COMPONENT_DECLARATIONS = [
   FormFieldTextareaDefaultExampleComponent,
   FormFieldTextareaLabelExampleComponent,
   FormFieldTextareaCounterExampleComponent,
+  FormFieldInputAffixExampleComponent,
 ];
 
 @NgModule({

@@ -1,8 +1,14 @@
-<h2>Input</h2>
 <cookbook-form-field-example-configuration
   [(size)]="size"
 ></cookbook-form-field-example-configuration>
-<h3>Default</h3>
+
+<h3>Affix</h3>
+<cookbook-example-viewer [html]="inputAffixExample.template">
+  <cookbook-form-field-input-affix-example
+    [size]="size"
+    #inputAffixExample
+  ></cookbook-form-field-input-affix-example>
+</cookbook-example-viewer>
 <cookbook-example-viewer [html]="inputDefaultExample.template">
   <cookbook-form-field-input-example
     [size]="size"
@@ -40,6 +46,14 @@
     [size]="size"
     #inputNumericExample
   ></cookbook-form-field-input-numeric-example>
+</cookbook-example-viewer>
+
+<h3>Affix</h3>
+<cookbook-example-viewer [html]="inputAffixExample.template">
+  <cookbook-form-field-input-affix-example
+    [size]="size"
+    #inputAffixExample
+  ></cookbook-form-field-input-affix-example>
 </cookbook-example-viewer>
 
 <h4>Decimal mask</h4>
