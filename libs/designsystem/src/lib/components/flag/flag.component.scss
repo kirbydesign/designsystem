@@ -1,3 +1,4 @@
+@use 'sass:list';
 @use 'sass:map';
 @use '~@kirbydesign/core/src/scss/utils';
 
@@ -22,21 +23,17 @@
   }
 }
 
-$_flag-notification-colors: map.merge(
-  utils.$notification-colors,
-  (
-    'semi-light': utils.get-color('semi-light'),
-  )
-);
-$_flag-notification-colors: map.remove($_flag-notification-colors, 'danger');
+$_flag-notification-colors-map: map.remove(utils.$notification-colors, 'danger');
+$_color-names: map.keys($_flag-notification-colors-map);
+$_color-names: list.append($_color-names, 'semi-light');
 
-@each $color-name, $color-value in $_flag-notification-colors {
-  :host(.#{$color-name}) {
+@each $name in $_color-names {
+  :host(.#{$name}) {
     // Use utils.get-color() to assign a custom property instead of a color value.
     // Custom properties can be overridden in consumer projects.
-    --kirby-flag-background-color: #{utils.get-color($color-name)};
-    --kirby-flag-color: #{utils.get-color($color-name + '-contrast')};
-    --kirby-flag-border-color: #{utils.get-color($color-name)};
+    --kirby-flag-background-color: #{utils.get-color($name)};
+    --kirby-flag-color: #{utils.get-color($name + '-contrast')};
+    --kirby-flag-border-color: #{utils.get-color($name)};
   }
 }
 
