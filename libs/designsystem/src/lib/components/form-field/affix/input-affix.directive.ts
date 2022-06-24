@@ -47,13 +47,15 @@ export class InputAffixDirective implements OnInit, OnChanges, AfterViewChecked 
   }
   public updateLayout(): void {
     let parent = this.inputEl.parentElement;
+
+    // look out. Hackz away
     let dateMask: HTMLElement;
-    //
     if (parent && parent.classList.contains('date-mask-wrapper')) {
       dateMask = parent.querySelector('.date-mask');
       if (dateMask) parent.removeChild(dateMask);
       parent = parent.parentElement;
-    }
+    } // whew
+
     const inputBounds: DOMRect = this.inputEl.getBoundingClientRect();
     if (parent) {
       const cssVar = 'var(--input-padding)';
