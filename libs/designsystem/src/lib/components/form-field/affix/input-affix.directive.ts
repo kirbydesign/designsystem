@@ -47,7 +47,11 @@ export class InputAffixDirective implements OnInit, OnChanges, AfterViewChecked 
   }
   public updateLayout(): void {
     let parent = this.inputEl.parentElement;
+    let dateMask: HTMLElement;
+    //
     if (parent && parent.classList.contains('date-mask-wrapper')) {
+      dateMask = parent.querySelector('.date-mask');
+      if (dateMask) parent.removeChild(dateMask);
       parent = parent.parentElement;
     }
     const inputBounds: DOMRect = this.inputEl.getBoundingClientRect();
@@ -61,7 +65,11 @@ export class InputAffixDirective implements OnInit, OnChanges, AfterViewChecked 
         elm.style.top = `${centerY}px`;
         elm.style.left = `${cssVar}`;
         const bb = elm.getBoundingClientRect();
-        this.inputEl.style.paddingLeft = `calc(${cssVar} + ${bb.width}px + calc(${cssVar}/2))`;
+        const pad = `calc(${cssVar} + ${bb.width}px + calc(${cssVar}/2))`;
+        this.inputEl.style.paddingLeft = pad;
+        if (dateMask) {
+          dateMask.style.paddingLeft = pad;
+        }
       }
       if (this.suffixComp) {
         const elm: HTMLElement = this.suffixComp.instance.wrapperEl.nativeElement;

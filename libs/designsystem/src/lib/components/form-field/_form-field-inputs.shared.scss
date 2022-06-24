@@ -1,9 +1,5 @@
 @use '~@kirbydesign/core/src/scss/utils';
-
-$form-field-input-font-family: var(--kirby-font-family);
-$form-field-input-line-height: 1.5;
-$form-field-input-padding: 1em;
-$form-field-label-height: 24px;
+@import '~@kirbydesign/core/src/scss/base/variables';
 
 :host(.error) {
   border: 1px solid utils.get-color('danger');
