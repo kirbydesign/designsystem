@@ -12,8 +12,8 @@ import {
 import { mergeDeepAll } from '../../../../../helpers/merge-deep';
 import { ChartConfigService } from '../configs/chart-config.service';
 
+import { AnnotationsDelegate } from './annotations.delegate';
 import { Chart } from './configured-chart-js';
-import { AnnotationsDelegate } from './delegates/annotations.delegate';
 
 @Injectable()
 export class ChartJSService {
