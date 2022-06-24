@@ -1,3 +1,4 @@
+@use 'sass:list';
 @use 'sass:map';
 @use '~@kirbydesign/core/src/scss/utils';
 
@@ -22,19 +23,26 @@
   }
 }
 
-@each $color-name,
-  $color-value
-    in map.merge(
-      utils.$notification-colors,
-      (
-        'semi-light': utils.get-color('semi-light'),
-        'danger': utils.$danger-background-weak,
-      )
-    )
-{
-  :host(.#{$color-name}) {
-    --kirby-flag-background-color: #{$color-value};
-    --kirby-flag-color: #{utils.get-color($color-name + '-contrast')};
-    --kirby-flag-border-color: #{$color-value};
+$_flag-notification-colors-map: map.remove(utils.$notification-colors, 'danger');
+$_color-names: map.keys($_flag-notification-colors-map);
+$_color-names: list.append($_color-names, 'semi-light');
+
+@each $name in $_color-names {
+  :host(.#{$name}) {
+    // Use utils.get-color() to assign a custom property instead of a color value.
+    // Custom properties can be overridden in consumer projects.
+    --kirby-flag-background-color: #{utils.get-color($name)};
+    --kirby-flag-color: #{utils.get-color($name + '-contrast')};
+    --kirby-flag-border-color: #{utils.get-color($name)};
   }
+}
+
+// <kirby-flag> uses a different "danger" notification color.
+// Overriding `--kirby-danger` in a consumer project will not have any effect on
+// the background color for danger flags.
+// See https://github.com/kirbydesign/designsystem/issues/2041
+:host(.danger) {
+  --kirby-flag-background-color: #{utils.$danger-background-weak};
+  --kirby-flag-color: #{utils.$danger-background-weak-contrast};
+  --kirby-flag-border-color: #{utils.$danger-background-weak};
 }
