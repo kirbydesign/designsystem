@@ -1,5 +1,6 @@
 @use 'sass:list';
 @use 'sass:map';
+@use 'sass:math';
 @use '~@kirbydesign/core/src/scss/utils';
 
 // returns the total target height including padding and borders
@@ -10,7 +11,7 @@
   $targetHeight
 ) {
   // line-height should be unitless; Sass seems to take care of it.
-  @return ($targetHeight - 2 * ($padding + $border)) / $fontSize;
+  @return math.div($targetHeight - 2 * ($padding + $border), $fontSize);
 }
 
 :host {
