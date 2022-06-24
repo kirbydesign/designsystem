@@ -16,9 +16,10 @@ import 'chartjs-adapter-date-fns';
 import annotationPlugin from 'chartjs-plugin-annotation';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 
-import { mergeDeepAll } from '../../../../../helpers/merge-deep';
-import MarkerPlugin from '../chart-js/chartjs-plugin-marker/chartjs-plugin-marker';
-import { CHART_GLOBAL_DEFAULTS } from '../configs/global-defaults.config';
+import { mergeDeepAll } from '../../../../helpers/merge-deep';
+
+import MarkerPlugin from './chartjs-plugin-marker/chartjs-plugin-marker';
+import { CHART_GLOBAL_DEFAULTS } from './configs/global-defaults.config';
 
 const CHART_SCALES = [CategoryScale, LinearScale, TimeScale];
 const CHART_ELEMENTS = [BarElement, LineElement, PointElement];

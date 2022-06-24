@@ -9,10 +9,10 @@ import {
   ChartType,
   isNumberArray,
 } from '../../';
-import { mergeDeepAll } from '../../../../../helpers/merge-deep';
-import { ChartConfigService } from '../configs/chart-config.service';
+import { mergeDeepAll } from '../../../../helpers/merge-deep';
 
 import { AnnotationsDelegate } from './annotations.delegate';
+import { ChartConfigService } from './configs/chart-config.service';
 import { Chart } from './configured-chart-js';
 
 @Injectable()

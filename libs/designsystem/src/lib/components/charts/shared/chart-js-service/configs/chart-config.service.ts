@@ -9,6 +9,7 @@ import { CHART_ANNOTATIONS_CONFIG } from './annotations.config';
 import { CHART_INTERACTION_FUNCTIONS_EXTENSIONS } from './interaction-functions-extensions.config';
 import { CHART_TYPES_CONFIG } from './type.config';
 
+// TODO: I do not think this has to be an injectable. It contains absolutely no state that needs to be maintained.
 @Injectable()
 export class ChartConfigService {
   public getTypeConfig(chartType: ChartType): ChartTypeConfig {
