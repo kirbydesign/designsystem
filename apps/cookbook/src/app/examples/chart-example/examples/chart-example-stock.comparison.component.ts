@@ -8,7 +8,6 @@ const config = {
   selector: 'cookbook-chart-example-stock-comparison',
   template: `
   <kirby-stock-chart 
-  type="stock" 
   [data]="_datasets"
   [dataLabelOptions]="_dataLabelOptions"
   ></kirby-stock-chart>
