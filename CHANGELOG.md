@@ -2,6 +2,21 @@
 
 Notable changes to the project will be documented in this file.
 
+## [6.1.1](https://github.com/kirbydesign/designsystem/pull/2373) (27-06-2022)
+
+### Bugfixes
+
+- **chart** - fix problem where chart.js plugins imported as default are not loading ([#2369](https://github.com/kirbydesign/designsystem/pull/2369)
+- **dropdown** - experimental popover feature: fix item-selection on dropdown with popover in safari ([#2356](https://github.com/kirbydesign/designsystem/pull/2356)
+- **flag** - calculate total height correctly using line height ([#2365](https://github.com/kirbydesign/designsystem/pull/2365)
+- **modal** - fix modal `closeButton` and `supplementaryButton` too small ([#2350](https://github.com/kirbydesign/designsystem/pull/2350)
+
+### Features
+
+- **flag** - allow flag notification colors to be overridden ([#2361](https://github.com/kirbydesign/designsystem/pull/2361)
+- **page** - add backButtonClicked event to page component ([#2316](https://github.com/kirbydesign/designsystem/pull/2316)
+- **icons** - add 'insurance' icon ([#2360](https://github.com/kirbydesign/designsystem/pull/2360)
+
 ## [6.0.0](https://github.com/kirbydesign/designsystem/pull/2337) (15-06-2022)
 
 ### Bugfixes
