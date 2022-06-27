@@ -75,7 +75,7 @@ kirby-card {
     z-index: 1; // for showing rounded corners on ios devices
   }
 
-  @include utils.slotted('div:first-child>kirby-item') {
+  @include utils.slotted('.content-layer > div:first-child > kirby-item') {
     border-radius: utils.$border-radius;
     overflow: hidden;
   }

@@ -24,7 +24,9 @@ import MarkerPlugin from './chartjs-plugin-marker/chartjs-plugin-marker';
 const CHART_SCALES = [CategoryScale, LinearScale, TimeScale];
 const CHART_ELEMENTS = [BarElement, LineElement, PointElement];
 const CHART_CONTROLLERS = [BarController, LineController];
-const CHART_PLUGINS = [annotationPlugin, Filler, ChartDataLabels, Tooltip, MarkerPlugin];
+const CHART_PLUGINS = [annotationPlugin, Filler, ChartDataLabels, Tooltip, MarkerPlugin].map(
+  (plugin: any) => (plugin?.__esModule ? plugin.default : plugin)
+);
 
 /* Order matters; defaults must be merged after register as 
    register modifies the Chart.defaults objects */
