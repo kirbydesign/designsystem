@@ -2,7 +2,7 @@ import { Chart } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
 import { mergeDeepAll } from 'libs/designsystem/src/lib/helpers/merge-deep';
 
-import { ChartConfigService } from './configs/chart-config.service';
+import { ChartConfigService } from '../';
 
 export class AnnotationsDelegate {
   constructor(private chartConfigService: ChartConfigService) {}
