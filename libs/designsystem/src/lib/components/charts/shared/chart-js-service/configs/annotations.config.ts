@@ -12,7 +12,7 @@ const borderColor = getThemeColorHexString('semi-dark');
 const borderDash: [number, number] = [6, 3];
 const borderWidth = 1;
 
-export const CHART_ANNOTATIONS_CONFIG: AnnotationTypeRegistry = {
+export const CHART_ANNOTATIONS_CONFIG: Omit<AnnotationTypeRegistry, 'label' | 'polygon'> = {
   line: {
     borderDash,
     borderWidth,

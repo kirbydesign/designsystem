@@ -3,7 +3,8 @@
   "version": "6.0.1",
   "description": "Kirby Design Angular Components. This library provides Angular wrappers for the @kirbydesign/core package, for smoother integration into Angular projects.",
   "engines": {
-    "node": "^14.16"
+    "node": ">=16.0.0",
+    "npm": ">=8.5.0"
   },
   "repository": {
     "type": "git",
@@ -87,7 +88,6 @@
     "@angular/common": "13.3.9",
     "@angular/compiler": "13.3.9",
     "@angular/core": "13.3.9",
-    "@angular/fire": "6.1.5",
     "@angular/forms": "13.3.9",
     "@angular/platform-browser": "13.3.9",
     "@angular/platform-browser-dynamic": "13.3.9",
@@ -102,12 +102,12 @@
     "chartjs-plugin-datalabels": "^2.0.0",
     "date-fns": "2.21.1",
     "date-fns-tz": "1.1.4",
-    "firebase": "8.3.1",
+    "highcharts": "8.0.4",
     "include-media": "^1.4.10",
     "inputmask": "^5.0.5",
     "prismjs": "1.27.0",
     "reflect-metadata": "0.1.8",
-    "rxjs": "6.5.5",
+    "rxjs": "6.6.7",
     "tslib": "^2.0.3",
     "zone.js": "0.11.5"
   },

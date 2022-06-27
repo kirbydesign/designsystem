@@ -471,14 +471,19 @@ export class DropdownComponent
 
   @HostListener('keydown.enter')
   @HostListener('keydown.escape')
+  _onEnterOrEscape() {
+    this.close();
+    this._onTouched();
+  }
+
+  _onPopoverClick(event: PointerEvent) {
+    this.close();
+  }
+
   @HostListener('blur', ['$event'])
   _onBlur(event?: FocusEvent) {
-    if (this.disabled) return;
-    if (this.isOpen) {
-      if (!this.cardElement.nativeElement.contains(event?.relatedTarget as HTMLElement)) {
-        this.close();
-      }
-    }
+    if (this.usePopover) return;
+    this.close();
     this._onTouched();
   }
 
