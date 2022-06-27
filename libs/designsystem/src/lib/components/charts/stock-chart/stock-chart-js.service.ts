@@ -99,11 +99,6 @@ export class StockChartJSService extends ChartJSService {
     };
   }
 
-  /* TODO: This might just be used for testing...? */
-  public setDataLabelOptions(dataLabelOptions: ChartDataLabelOptions) {
-    this.dataLabelOptions = dataLabelOptions;
-  }
-
   protected createDatasets(data: ChartDataset[] | number[]) {
     let datasets = super.createDatasets(data);
     /* 

@@ -83,7 +83,7 @@ describe('StockChartJSService', () => {
     dataLabelOptionsProperties.forEach((property) => {
       xdescribe(`when ChartDataLabelsOptions.${property} is true`, () => {
         it(`should have an datalabel propery in dataset`, () => {
-          chartJSService.setDataLabelOptions({ [property]: true });
+          chartJSService['dataLabelOptions'] = { [property]: true };
           const result = chartJSService['addDataLabelsData'](deepCopy(data));
           expect(
             (result[0] as ChartJSDataset).data.find((item: any) => item.datalabel)
@@ -94,7 +94,7 @@ describe('StockChartJSService', () => {
 
     describe('when neither ChartDataLabelsOptions.showMin, showMax, showCurrent is true', () => {
       it('should NOT have an datalabel propery in dataset', () => {
-        chartJSService.setDataLabelOptions({});
+        chartJSService['dataLabelOptions'] = {};
 
         const result = chartJSService['addDataLabelsData'](deepCopy(data));
         expect((result[0] as ChartJSDataset).data.find((item: any) => item.datalabel)).toBeFalsy();
