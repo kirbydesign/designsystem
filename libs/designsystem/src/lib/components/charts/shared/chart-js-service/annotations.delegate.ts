@@ -24,6 +24,7 @@ export class AnnotationsDelegate {
       },
     };
   }
+
   public getExistingChartAnnotations(chart: Chart): AnnotationOptions[] {
     const annotations = chart.options.plugins?.annotation?.annotations;
     /* In browser chart.js might return annotations as a Proxy object; force it to be an array.

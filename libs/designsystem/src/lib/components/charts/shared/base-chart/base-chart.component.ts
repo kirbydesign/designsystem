@@ -39,7 +39,7 @@ export class BaseChartComponent implements AfterViewInit, OnChanges {
   @ViewChild('chartCanvas')
   canvasElement: ElementRef<HTMLCanvasElement>;
 
-  protected chartHasBeenRendered: boolean = false;
+  private chartHasBeenRendered: boolean = false;
 
   constructor(protected chartJSService: ChartJSService) {}
 
