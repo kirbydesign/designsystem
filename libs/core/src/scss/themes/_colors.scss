@@ -31,6 +31,12 @@ $focus-ring-color: rgb(77 144 254);
 $red-30: #ff878a;
 $danger-background-weak: $red-30;
 
+// Assigning the return value of function call
+// _get-color-contrast($danger-background-weak) does not work.
+// Could't find a solution. Decided to assign color directly
+// (we know $danger-background-weak's contrast color should be kirby-black).
+$danger-background-weak-contrast: map.get($system-colors, 'black');
+
 @function get-all-colors() {
   @return map.merge(map.merge($brand-colors, $notification-colors), $system-colors);
 }
