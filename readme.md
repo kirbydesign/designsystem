@@ -28,11 +28,9 @@ The Kirby Cookbook, containing samples, status of components etc. can be accesse
   - [Migration Guides](#migration-guides)
 - [Folder Structure](#folder-structure)
 - [Scripts](#scripts)
-- [Developing new features in Kirby](#developing-new-features-in-kirby)
-  - ["New feature"-process](#new-feature-process)
-  - [Testing new features](#testing-new-features)
 - [Polyfills](#polyfills)
 - [Chart Components](#chart-components)
+- [Contributing](#contributing)
 
 ## Installation
 
@@ -184,40 +182,6 @@ Use them in your terminal like: `npm run <script>` :
 | dist:designsystem | Builds a distribution folder of the Designsystem library                                                                                               |
 | transpile:tools   | Transpiles tools, required to produce library distribution (this is done as a `post-install` hook, but may have value if altering tool implementation) |
 
-## Developing new features in Kirby
-
-When developing new features in the Kirby Designsystem library, please follow the process described below:
-
-### "New feature"-process
-
-TBD
-
-### Testing new features
-
-Developing new features should also include that they should be tested.
-
-1. Make sure that the code is unit tested.
-2. Make sure that examples and showcases are added for the new features (in the cookbook)
-
-   ... this will also act as documentation for users of the Designsystem library.
-
-3. Test the new features in your own application
-
-   The easiest way to do this is to build a distribution package, and install it in your own project.
-
-```
-   # 1. From the root of this repository, run (this may take a minute or two):
-   npm run publish
-
-   # Then, from the root of your application, execute:
-   npm i <path-to-root-of-designsystem>/dist/kirbydesign-designsystem-<version>.tgz
-
-   # ... where <path-to-root-of-designsystem> is replaced with the real path
-   #     and <version> is the version of designsystem that was build (in the previous step)
-
-   # You do NOT want to commit the changes made to package.json and package-lock.json to your code base!
-```
-
 ## Polyfills
 
 Some features of Kirby requires polyfills to ensure compability across all major browsers _(e.g. the `ResizeObserverService` used by the automagic sizing feature of the `Kirby Card` component)_.
@@ -259,6 +223,10 @@ _**Please note:** If you don't want the additional http request for the polyfill
 ## Chart Components
 
 The Kirby chart components use Highcharts. Note that this is a licensed product.
+
+## Contributing
+
+If you wish to contribute new features, bug fixes or something third to the project have a look at the [contribution guidelines](./github/CONTRIBUTING.md).
 
 [angular]: https://angular.io
 [jasmine]: https://jasmine.github.io/
