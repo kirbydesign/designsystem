@@ -34,6 +34,11 @@ import { FitHeadingConfig } from '../../directives/fit-heading/fit-heading.direc
 import { WindowRef } from '../../types/window-ref';
 import { ModalWrapperComponent } from '../modal/modal-wrapper/modal-wrapper.component';
 import { ModalNavigationService } from '../modal/services/modal-navigation.service';
+import {
+  ModalElementComponent,
+  ModalElementsAdvertiser,
+  ModalElementType,
+} from '../modal/services/modal.interfaces';
 import { selectedTabClickEvent } from '../tabs/tab-button/tab-button.events';
 import { TabsComponent } from '../tabs/tabs.component';
 
@@ -108,12 +113,18 @@ export class PageContentDirective {
   template: ` <ng-content></ng-content> `,
   styles: [':host {display: flex}'],
 })
-export class PageProgressComponent implements OnInit {
+export class PageProgressComponent extends ModalElementComponent implements OnInit {
   // TODO: Find alternative implementation, which aligns with future page configuration / consumption
   // This implementation was chosen over expanding `moveChild` method in component wrapper with yet another scenario
   @HostBinding('attr.slot') slot = 'start';
 
-  constructor(@Optional() @SkipSelf() private modalWrapper: ModalWrapperComponent) {}
+  constructor(
+    @Optional() @SkipSelf() private modalWrapper: ModalWrapperComponent,
+    @Optional() modalElementsAdvertiser: ModalElementsAdvertiser,
+    elementRef: ElementRef<HTMLElement>
+  ) {
+    super(ModalElementType.PAGE_PROGRESS, elementRef, modalElementsAdvertiser);
+  }
 
   ngOnInit(): void {
     if (this.modalWrapper && this.modalWrapper.config.flavor === 'drawer') {
@@ -121,12 +132,18 @@ export class PageProgressComponent implements OnInit {
     }
   }
 }
-
 @Component({
   selector: 'kirby-page-title',
   template: ` <ng-content></ng-content> `,
 })
-export class PageTitleComponent {}
+export class PageTitleComponent extends ModalElementComponent {
+  constructor(
+    elementRef: ElementRef<HTMLElement>,
+    @Optional() modalElementsAdvertiser: ModalElementsAdvertiser
+  ) {
+    super(ModalElementType.TITLE, elementRef, modalElementsAdvertiser);
+  }
+}
 
 @Component({
   selector: 'kirby-page-content',

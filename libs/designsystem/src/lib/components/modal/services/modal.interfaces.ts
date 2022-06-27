@@ -1,3 +1,4 @@
+import { AfterViewInit, Component, ElementRef, OnDestroy, Optional } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { KirbyAnimation } from '../../../animation/kirby-animation';
@@ -25,4 +26,39 @@ export abstract class Modal {
   scrollToTop: (scrollDuration?: KirbyAnimation.Duration) => void;
   scrollToBottom: (scrollDuration?: KirbyAnimation.Duration) => void;
   scrollDisabled: boolean;
+}
+export enum ModalElementType {
+  PAGE_PROGRESS,
+  FOOTER,
+  TITLE,
+}
+
+export abstract class ModalElementsAdvertiser {
+  addModalElement: (type: ModalElementType, elementRef: ElementRef<HTMLElement>) => void;
+  removeModalElement: (type: ModalElementType, elementRef: ElementRef<HTMLElement>) => void;
+}
+
+@Component({ template: '' })
+export abstract class ModalElementComponent implements AfterViewInit, OnDestroy {
+  private get isContainedInModal() {
+    return this.modalElementsAdvertiser !== null;
+  }
+
+  constructor(
+    private modalElementType: ModalElementType,
+    private elementRef: ElementRef<HTMLElement>,
+    @Optional() private modalElementsAdvertiser: ModalElementsAdvertiser
+  ) {}
+
+  ngAfterViewInit() {
+    if (this.isContainedInModal) {
+      this.modalElementsAdvertiser.addModalElement(this.modalElementType, this.elementRef);
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.isContainedInModal) {
+      this.modalElementsAdvertiser.removeModalElement(this.modalElementType, this.elementRef);
+    }
+  }
 }
