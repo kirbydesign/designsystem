@@ -34,21 +34,21 @@
   }
 }
 
-$toolbar-padding: utils.size('s');
+$toolbar-padding-inline: utils.size('s');
+$toolbar-padding-block: utils.size('xs');
 
 @mixin phablet-toolbar-padding() {
-  $toolbar-top-spacing-total: utils.size('m');
-  $toolbar-padding-top: $toolbar-top-spacing-total - $toolbar-padding;
+  $toolbar-padding-top: utils.size('xxs');
   @include utils.media('>=medium') {
     padding-top: $toolbar-padding-top;
   }
 }
 
 ion-header ion-toolbar {
-  --padding-start: #{$toolbar-padding};
-  --padding-end: #{$toolbar-padding};
-  --padding-bottom: #{$toolbar-padding};
-  --padding-top: #{$toolbar-padding};
+  --padding-start: #{$toolbar-padding-inline};
+  --padding-end: #{$toolbar-padding-inline};
+  --padding-bottom: #{$toolbar-padding-block};
+  --padding-top: #{$toolbar-padding-block};
   --border-width: 0;
   --background: transparent;
   --color: var(--kirby-modal-color, #{utils.get-color('black')});
