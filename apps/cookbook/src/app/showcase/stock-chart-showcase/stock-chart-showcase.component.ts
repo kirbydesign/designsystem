@@ -18,7 +18,7 @@ export class StockChartShowcaseComponent {
       name: 'data',
       description:
         "The data which the chart should display. \n\n The 'x' value of each datapoint is time as epoch timestamp; 'y' is value at time 'x'.",
-      type: ['{x: number, y: number}[]'],
+      type: ['{data: {x: number, y: number}[]}[]', 'ChartDataset[]'],
     },
     ...baseChartApi,
     {
