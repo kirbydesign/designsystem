@@ -147,6 +147,7 @@ export class MockPageComponent {
   @Output() enter = new EventEmitter<void>();
   @Output() leave = new EventEmitter<void>();
   @Output() refresh = new EventEmitter<PullToRefreshEvent>();
+  @Output() backButtonClick = new EventEmitter<Event>();
 }
 
 // #endregion

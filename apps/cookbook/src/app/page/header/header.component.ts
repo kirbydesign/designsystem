@@ -10,10 +10,13 @@ interface HeaderLink {
 export const navigationItems: HeaderLink[] = [
   { text: 'Introduction', route: '/home/intro' },
   { text: 'Ressources', route: '' },
-  { text: 'Changelog', route: '/home/changelog' },
-  { text: 'Component Status', route: '/home/component-status' },
   { text: 'Guides', route: '/home/guides' },
   { text: 'Accessibility', route: '/home/accessibility-in-kirby' },
+  {
+    text: 'Changelog',
+    externalUrl: 'https://github.com/kirbydesign/designsystem/blob/main/CHANGELOG.MD',
+  },
+
   { text: 'GitHub', externalUrl: 'https://github.com/kirbydesign/designsystem' },
 ];
 
