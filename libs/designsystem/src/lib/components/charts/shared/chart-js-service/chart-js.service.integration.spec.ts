@@ -2,10 +2,10 @@ import { ElementRef } from '@angular/core';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 import { Chart, FontSpec } from 'chart.js';
 
-import { ColorHelper } from '../../../../../helpers';
-import { ChartConfigService } from '../configs/chart-config.service';
+import { ColorHelper } from '../../../../helpers';
 
 import { ChartJSService } from './chart-js.service';
+import { ChartConfigService } from './configs/chart-config.service';
 
 describe('ChartJSService with ChartConfigService', () => {
   let spectator: SpectatorService<ChartJSService>;

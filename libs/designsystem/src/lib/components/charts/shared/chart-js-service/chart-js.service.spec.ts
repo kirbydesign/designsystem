@@ -5,11 +5,11 @@ import { AnnotationOptions } from 'chartjs-plugin-annotation';
 import { MockProvider } from 'ng-mocks';
 
 import { ChartDataset, ChartHighlightedElements, ChartType } from '../../';
-import { deepCopy } from '../../../../../helpers/deep-copy';
-import { ChartConfigService } from '../configs/chart-config.service';
-import { CHART_GLOBAL_DEFAULTS } from '../configs/global-defaults.config';
+import { deepCopy } from '../../../../helpers/deep-copy';
 
 import { ChartJSService } from './chart-js.service';
+import { ChartConfigService } from './configs/chart-config.service';
+import { CHART_GLOBAL_DEFAULTS } from './configs/global-defaults.config';
 import { TEST_CHART_ANNOTATIONS_CONFIG, TEST_CHART_TYPES_CONFIG } from './test-utils';
 
 describe('ChartJSService', () => {
