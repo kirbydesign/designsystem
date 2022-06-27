@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   ComponentFactoryResolver,
   ElementRef,
@@ -29,18 +30,24 @@ import { WindowRef } from '../../../types/window-ref';
 import { ButtonComponent } from '../../button/button.component';
 import { ResizeObserverService } from '../../shared/resize-observer/resize-observer.service';
 import { ResizeObserverEntry } from '../../shared/resize-observer/types/resize-observer-entry';
-import { Modal } from '../services/modal.interfaces';
+import { Modal, ModalElementsAdvertiser, ModalElementType } from '../services/modal.interfaces';
 
 import { ModalConfig } from './config/modal-config';
 import { COMPONENT_PROPS } from './config/modal-config.helper';
+import { ModalElementsMoverDelegate } from './modal-elements-mover.delegate';
 
 @Component({
   selector: 'kirby-modal-wrapper',
   templateUrl: './modal-wrapper.component.html',
   styleUrls: ['./modal-wrapper.component.scss'],
-  providers: [{ provide: Modal, useExisting: ModalWrapperComponent }],
+  providers: [
+    { provide: Modal, useExisting: ModalWrapperComponent },
+    { provide: ModalElementsAdvertiser, useExisting: ModalWrapperComponent },
+  ],
 })
-export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDestroy {
+export class ModalWrapperComponent
+  implements Modal, AfterViewInit, OnInit, OnDestroy, ModalElementsAdvertiser
+{
   @HostBinding('class.collapsible-title')
   get _hasCollapsibleTitle() {
     return !!this.config?.collapseTitle;
@@ -73,7 +80,18 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   @ViewChild(RouterOutlet, { static: true }) private routerOutlet: RouterOutlet;
 
   @ViewChild('contentTitle', { read: ElementRef })
-  private contentTitle: ElementRef<HTMLElement>;
+  private _contentTitleElement: ElementRef<HTMLElement>;
+
+  get contentTitleElement(): ElementRef<HTMLElement> {
+    /* 
+        contentTitleElement has ngIf directive dependent on _hasCollapsibleTitle; trigger CD to make sure element has been queried. 
+        Solution taken from: https://danieleyassu.com/angular-viewchild-and-ngif/
+      */
+    if (!this._contentTitleElement && this._hasCollapsibleTitle) {
+      this.changeDetector.detectChanges();
+    }
+    return this._contentTitleElement;
+  }
 
   private keyboardVisible = false;
   private toolbarButtons: HTMLButtonElement[] = [];
@@ -91,12 +109,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     .asObservable()
     .pipe(debounceTime(this.VIEWPORT_RESIZE_DEBOUNCE_TIME));
   private _mutationObserver: MutationObserver;
-  private get mutationObserver(): MutationObserver {
-    if (!this._mutationObserver) {
-      this._mutationObserver = this.createEmbeddedElementsMutationObserver();
-    }
-    return this._mutationObserver;
-  }
   private _intersectionObserver: IntersectionObserver;
   private get intersectionObserver(): IntersectionObserver {
     if (!this._intersectionObserver) {
@@ -113,7 +125,10 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
 
   willClose$ = this.ionModalWillDismiss.pipe(first());
 
+  private modalElementsMoverDelegate: ModalElementsMoverDelegate;
+
   constructor(
+    private changeDetector: ChangeDetectorRef,
     private injector: Injector,
     private elementRef: ElementRef<HTMLElement>,
     private renderer: Renderer2,
@@ -125,6 +140,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   ) {
     this.setViewportHeight();
     this.observeViewportResize();
+    this.modalElementsMoverDelegate = new ModalElementsMoverDelegate(renderer, elementRef);
   }
 
   ngOnInit(): void {
@@ -138,6 +154,65 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
       providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
       parent: this.injector,
     });
+  }
+
+  private _currentFooter: HTMLElement | null = null;
+
+  private set currentFooter(footer: HTMLElement | null) {
+    if (footer !== null) {
+      this.resizeObserverService.observe(footer, (entry) => {
+        const [property, pixelValue] = [
+          '--footer-height',
+          `${Math.floor(entry.contentRect.height)}px`,
+        ];
+        this.setCssVar(this.elementRef.nativeElement, property, pixelValue);
+      });
+    }
+
+    this._currentFooter = footer;
+  }
+
+  private get currentFooter(): HTMLElement | null {
+    return this._currentFooter;
+  }
+
+  public addModalElement(type: ModalElementType, modalElement: ElementRef<HTMLElement>) {
+    const addModalElementFn = {
+      [ModalElementType.FOOTER]: () => {
+        this.modalElementsMoverDelegate.addFooter(modalElement);
+        this.currentFooter = modalElement.nativeElement;
+      },
+      [ModalElementType.TITLE]: () =>
+        this.modalElementsMoverDelegate.addTitle(
+          modalElement,
+          this.contentTitleElement,
+          this._hasCollapsibleTitle,
+          this.ionTitleElement
+        ),
+      [ModalElementType.PAGE_PROGRESS]: () =>
+        this.modalElementsMoverDelegate.addPageProgress(modalElement, this.ionToolbarElement),
+    }[type];
+
+    addModalElementFn();
+  }
+
+  public removeModalElement(type: ModalElementType, modalElement: ElementRef<HTMLElement>) {
+    const removeModalElementFn = {
+      [ModalElementType.FOOTER]: () => {
+        this.modalElementsMoverDelegate.removeFooter(modalElement);
+        this.currentFooter = null;
+      },
+      [ModalElementType.TITLE]: () =>
+        this.modalElementsMoverDelegate.removeTitle(
+          modalElement,
+          this._hasCollapsibleTitle,
+          this.contentTitleElement
+        ),
+      [ModalElementType.PAGE_PROGRESS]: () =>
+        this.modalElementsMoverDelegate.removePageProgress(modalElement),
+    }[type];
+
+    removeModalElementFn();
   }
 
   private initializeResizeModalToModalWrapper() {
@@ -177,12 +252,9 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     if (!siblingModalRouteActivated$) return;
     siblingModalRouteActivated$.pipe(takeUntil(this.willClose$)).subscribe((route) => {
       if (this.routerOutlet.isActivated) {
-        this.mutationObserver.disconnect();
         this.routerOutlet.deactivate();
-        this.clearEmbeddedElements();
       }
       this.routerOutlet.activateWith(route, this.componentFactoryResolver);
-      this.checkForEmbeddedElements();
     });
   }
 
@@ -215,12 +287,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     if (this.toolbarButtonsQuery) {
       this.toolbarButtons = this.toolbarButtonsQuery.map((buttonRef) => buttonRef.nativeElement);
     }
-    this.checkForEmbeddedElements();
-  }
-
-  private checkForEmbeddedElements() {
-    this.moveEmbeddedElements();
-    this.observeEmbeddedElements();
   }
 
   private observeHeaderResize() {
@@ -228,18 +294,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
       const [property, pixelValue] = ['--header-height', `${entry.contentRect.height}px`];
       this.setCssVar(this.elementRef.nativeElement, property, pixelValue);
     });
-  }
-
-  private moveEmbeddedElements() {
-    const parentElement = this.getEmbeddedComponentElement();
-    if (parentElement) {
-      Object.entries(this.elementToParentMap).forEach(([tagName, getNewParent]) => {
-        const embeddedElement = parentElement.querySelector<HTMLElement>(tagName);
-        if (embeddedElement) {
-          this.moveChild(embeddedElement, getNewParent());
-        }
-      });
-    }
   }
 
   private listenForIonModalDidPresent() {
@@ -364,7 +418,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     this.toggleCssClass(this.elementRef.nativeElement, 'keyboard-visible', keyboardHeight > 0);
     const keyboardOverlap = this.getKeyboardOverlap(keyboardHeight, this.elementRef.nativeElement);
     let snapFooterToKeyboard = false;
-    const embeddedFooterElement = this.getEmbeddedFooterElement();
+    const embeddedFooterElement = this.currentFooter;
     if (embeddedFooterElement) {
       this.setCssVar(embeddedFooterElement, '--keyboard-offset', `${keyboardOverlap}px`);
       snapFooterToKeyboard = embeddedFooterElement.classList.contains('snap-to-keyboard');
@@ -438,111 +492,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     }
   }
 
-  private readonly elementToParentMap: { [key: string]: () => HTMLElement[] } = {
-    'KIRBY-MODAL-FOOTER': () => [this.elementRef.nativeElement],
-    'KIRBY-PAGE-TITLE': () =>
-      [this.ionTitleElement.nativeElement, this.contentTitle?.nativeElement].filter(
-        (element) => element !== undefined
-      ),
-    'KIRBY-PAGE-PROGRESS': () => [this.ionToolbarElement.nativeElement],
-  };
-
-  private clearEmbeddedElements() {
-    Object.entries(this.elementToParentMap).forEach(([tagName, getParents]) => {
-      const newParents = getParents();
-      newParents.forEach((newParent) => {
-        const embeddedElement = newParent.querySelector<HTMLElement>(`:scope > ${tagName}`);
-        this.removeChild(embeddedElement);
-      });
-    });
-  }
-
-  /* TODO: Rewrite to make this function independent of element order. 
-     See: https://github.com/kirbydesign/designsystem/issues/2096
-  */
-  private getEmbeddedComponentElement(): null | Element {
-    const contentElementChildren = Array.from(
-      this.ionContentElement.nativeElement.children
-    ).reverse(); // Reverse makes it easier to retrieve the last children in the list
-
-    const embeddedComponentElement = !!this.config.modalRoute
-      ? contentElementChildren[0]
-      : contentElementChildren[1];
-
-    /* 
-      As ModalConfig.component has type 'any' all values are valid for component; 
-      explicitly handle the case where no embedded component element is found due to 
-      this.
-    */
-    if (!embeddedComponentElement) return null;
-    return embeddedComponentElement;
-  }
-
-  private getEmbeddedFooterElement() {
-    return this.elementRef.nativeElement.querySelector<HTMLElement>('kirby-modal-footer');
-  }
-
-  private moveChild(child: Element, newParents: Element[]) {
-    this.renderer.removeChild(child.parentElement, child);
-
-    newParents.forEach((newParent, index) => {
-      const childToAppend = index > 0 ? child.cloneNode(true) : child;
-      this.renderer.appendChild(newParent, childToAppend);
-      // Append adds child as last element of parent; therefore retrieve with lastElementChild
-      const childElement = newParent.lastElementChild;
-
-      if (childElement.tagName === 'KIRBY-MODAL-FOOTER') {
-        this.resizeObserverService.observe(childElement, (entry) => {
-          const [property, pixelValue] = [
-            '--footer-height',
-            `${Math.floor(entry.contentRect.height)}px`,
-          ];
-          this.setCssVar(this.elementRef.nativeElement, property, pixelValue);
-        });
-      }
-    });
-  }
-
-  private removeChild(child?: Element) {
-    if (!!child) {
-      this.renderer.removeChild(child.parentElement, child);
-    }
-  }
-
-  private observeEmbeddedElements() {
-    const parentElement = this.getEmbeddedComponentElement();
-    if (parentElement === null) return; // Mute observe warning when parentElement is null
-
-    this.mutationObserver.observe(parentElement, {
-      childList: true, // Listen for addition or removal of child nodes
-    });
-  }
-
-  private createEmbeddedElementsMutationObserver(): MutationObserver {
-    const observedElements = Object.keys(this.elementToParentMap);
-    const callback = (mutations: MutationRecord[]) => {
-      const addedNodes = mutations
-        .filter((mutation) => mutation.type === 'childList') // Filter for mutation to the tree of nodes
-        .map((mutation) => {
-          // Only check for addedNodes as removal is handled by the Angular renderer:
-          return Array.from(mutation.addedNodes).filter((node) =>
-            observedElements.includes(node.nodeName)
-          );
-        });
-
-      const addedElements = Array.prototype
-        .concat(...addedNodes)
-        .filter((node): node is HTMLElement => node instanceof HTMLElement);
-
-      addedElements.forEach((addedElement) => {
-        const newParentElement = this.elementToParentMap[addedElement.nodeName]();
-        // Move embedded element out of content and append to new parent:
-        this.moveChild(addedElement, newParentElement);
-      });
-    };
-    return new MutationObserver(callback);
-  }
-
   private createModalWrapperIntersectionObserver(): IntersectionObserver {
     const callback: IntersectionObserverCallback = (entries) => {
       const entry = entries[0];
@@ -572,14 +521,13 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
       this.routerOutlet.deactivate();
     }
     //clean up the observer
-    this.mutationObserver.disconnect();
     delete this._mutationObserver;
     this.intersectionObserver.disconnect();
     delete this._intersectionObserver;
     if (this.resizeObserverService) {
       this.resizeObserverService.unobserve(this.windowRef.nativeWindow.document.body);
       this.resizeObserverService.unobserve(this.ionHeaderElement.nativeElement);
-      this.resizeObserverService.unobserve(this.getEmbeddedFooterElement());
+      this.resizeObserverService.unobserve(this.currentFooter);
     }
     this.destroy$.next();
     this.destroy$.complete();
