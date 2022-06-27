@@ -22,7 +22,7 @@ export class ChartJSService {
   protected chartType: ChartType;
   private annotationsDelegate: AnnotationsDelegate;
 
-  constructor(private chartConfigService: ChartConfigService) {
+  constructor(protected chartConfigService: ChartConfigService) {
     this.annotationsDelegate = new AnnotationsDelegate(chartConfigService);
   }
 

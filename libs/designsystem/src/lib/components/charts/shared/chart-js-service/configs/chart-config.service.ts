@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ActiveElement, Chart, ChartOptions, ChartType as ChartJSType } from 'chart.js';
 import { AnnotationType, AnnotationTypeRegistry } from 'chartjs-plugin-annotation';
+import { toDate } from 'date-fns';
 
-import { ChartType, ChartTypeConfig } from '../../';
+import { ChartDataLabelOptions, ChartLocale, ChartType, ChartTypeConfig } from '../../';
 import { deepCopy } from '../../../../../helpers/deep-copy';
 
 import { CHART_ANNOTATIONS_CONFIG } from './annotations.config';
@@ -38,5 +39,42 @@ export class ChartConfigService {
       };
     });
     return options;
+  }
+
+  public getStockChartOptions(dataLabelOptions: ChartDataLabelOptions, locale: ChartLocale) {
+    return {
+      locale: locale,
+      plugins: {
+        tooltip: {
+          callbacks: {
+            title: (tooltipItems) => {
+              const date = toDate((tooltipItems[0]?.raw as any)?.x);
+              if (date.valueOf()) {
+                return date.toLocaleTimeString(locale, {
+                  day: 'numeric',
+                  month: 'short',
+                  hour: '2-digit',
+                  minute: '2-digit',
+                });
+              }
+            },
+            label: (context) => {
+              // It's not possible to add spacing between color legend and text so we
+              // prefix with a space.
+              return ' ' + context.formattedValue + (dataLabelOptions.valueSuffix || '');
+            },
+          },
+        },
+      },
+      scales: {
+        y: {
+          ticks: {
+            callback: (value) => {
+              return value + (dataLabelOptions.valueSuffix || '');
+            },
+          },
+        },
+      },
+    };
   }
 }

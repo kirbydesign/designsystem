@@ -56,47 +56,12 @@ export class StockChartJSService extends ChartJSService {
     annotations?: AnnotationOptions[];
   }): ChartOptions {
     const superOptions = super.createOptionsObject(args);
-    const stockOptions: ChartOptions = this.createStockOptionsObject(this.dataLabelOptions);
+    const stockOptions: ChartOptions = this.chartConfigService.getStockChartOptions(
+      this.dataLabelOptions,
+      this.locale
+    );
 
     return mergeDeepAll(stockOptions, superOptions);
-  }
-
-  // TODO: Move this to chart config service - it seems better suited for that
-  protected createStockOptionsObject(dataLabelOptions: ChartDataLabelOptions) {
-    return {
-      locale: this.locale,
-      plugins: {
-        tooltip: {
-          callbacks: {
-            title: (tooltipItems) => {
-              const date = toDate((tooltipItems[0]?.raw as any)?.x);
-              if (date.valueOf()) {
-                return date.toLocaleTimeString(this.locale, {
-                  day: 'numeric',
-                  month: 'short',
-                  hour: '2-digit',
-                  minute: '2-digit',
-                });
-              }
-            },
-            label: (context) => {
-              // It's not possible to add spacing between color legend and text so we
-              // prefix with a space.
-              return ' ' + context.formattedValue + (dataLabelOptions.valueSuffix || '');
-            },
-          },
-        },
-      },
-      scales: {
-        y: {
-          ticks: {
-            callback: (value) => {
-              return value + (dataLabelOptions.valueSuffix || '');
-            },
-          },
-        },
-      },
-    };
   }
 
   protected createDatasets(data: ChartDataset[] | number[]) {
