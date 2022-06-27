@@ -1,5 +1,7 @@
 import { DropdownShowcaseComponent } from '~/app/showcase/dropdown-showcase/dropdown-showcase.component';
 
+import { StockChartComponent } from '@kirbydesign/designsystem/components/charts/stock-chart';
+
 import { ExamplesModule } from '../examples/examples.module';
 import { DividerShowcaseComponent } from '../showcase/divider-showcase/divider-showcase.component';
 import { ItemShowcaseComponent } from '../showcase/item-showcase/item-showcase.component';
@@ -45,6 +47,7 @@ import { ShowcaseComponent } from './showcase.component';
 import { SlideButtonShowcaseComponent } from './slide-button-showcase/slide-button-showcase.component';
 import { SlidesShowcaseComponent } from './slides-showcase/slides-showcase.component';
 import { SpinnerShowcaseComponent } from './spinner-showcase/spinner-showcase.component';
+import { StockChartShowcaseComponent } from './stock-chart-showcase/stock-chart-showcase.component';
 import { StylingHtmlListsShowcaseComponent } from './styling-html-lists/styling-html-lists-showcase';
 import { TabsShowcaseComponent } from './tabs-showcase/tabs-showcase.component';
 import { ToastShowcaseComponent } from './toast-showcase/toast-showcase.component';
@@ -66,6 +69,7 @@ export const COMPONENT_EXPORTS: any[] = [
   GridShowcaseComponent,
   AvatarShowcaseComponent,
   ChartShowcaseComponent,
+  StockChartShowcaseComponent,
   FontsShowcaseComponent,
   SpinnerShowcaseComponent,
   ModalShowcaseComponent,

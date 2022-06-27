@@ -1,4 +1,11 @@
 <p>
+  <em
+    >Looking for the stock chart? It has been moved to a separate
+    <code>kirby-stock-chart</code> element! <br />See:
+    <a routerLink="/home/showcase/stock-chart">the stock chart showcase</a>.</em
+  >
+</p>
+<p>
   The <code>kirby-chart</code> component is used to show data in various chart types. To show the
   default column chart all that is needed is a <code>number[]</code> which will produce a simple
   chart using colors from the
@@ -53,65 +60,6 @@
   <kirby-card [mode]="_cardMode" [hasPadding]="_cardHasPadding">
     <cookbook-example-viewer [html]="lineExample.template">
       <cookbook-chart-example-line #lineExample></cookbook-chart-example-line>
-    </cookbook-example-viewer>
-  </kirby-card>
-</p>
-
-<h3>Stock Chart</h3>
-<p>
-  <em
-    ><strong>Note:</strong> the default behaviour and styling of the stock chart might change in the
-    near future as work is still being done to enhance it. More details can be found on
-    <a href="https://github.com/kirbydesign/designsystem/issues/1943" target="_blank">this issue</a>
-    in the Github repository.</em
-  >
-</p>
-<p>
-  The stock chart visualizes the price of a security over time where time is along the x-axis and
-  the price is on the y-axis.
-</p>
-<p>To render a stock chart set <code>type</code> to <code>'stock'</code>.</p>
-<p>
-  The labels of the x-axis show the day and month of the datapoints. If you need a different
-  increment, ie. hours or years you should provide your own labels through the `labels` property.
-</p>
-<p>
-  <b>Please note</b> that this chart only accepts data where each datapoint consists of a value for
-  both x and y.
-</p>
-<small>
-  <pre>
-  {{ '{' }}
-    x: 1231831920, // Time as epoch timestamp
-    y: 10 // Value at time 'x'
-  {{ '}' }}
-</pre
-  >
-</small>
-
-<p>
-  <kirby-card [mode]="_cardMode" [hasPadding]="_cardHasPadding">
-    <cookbook-example-viewer [html]="stockExample.template" [ts]="stockExample.codeSnippet">
-      <cookbook-chart-example-stock #stockExample></cookbook-chart-example-stock>
-    </cookbook-example-viewer>
-  </kirby-card>
-</p>
-<h4>Stock Chart with multiple datasets</h4>
-<p>
-  It is possible to show and compare the price of multiple securities in one chart. The
-  <code>ChartDataLabelOptions</code> property <code>valueSuffix</code> can be useful if for example
-  data comes In percent. By setting <code>valueSuffix</code> to the string <code>'%'</code> values
-  in the data labels will be suffixed with '%' as can be seen on the below example.
-</p>
-<p>
-  <kirby-card [mode]="_cardMode" [hasPadding]="_cardHasPadding">
-    <cookbook-example-viewer
-      [html]="stockComparisonExample.template"
-      [ts]="stockComparisonExample.codeSnippet"
-    >
-      <cookbook-chart-example-stock-comparison
-        #stockComparisonExample
-      ></cookbook-chart-example-stock-comparison>
     </cookbook-example-viewer>
   </kirby-card>
 </p>
@@ -368,10 +316,6 @@ to <code>false</code>.
 <h2>API Description</h2>
 <cookbook-api-description-properties
   [properties]="_apiDescriptionProperties"
-></cookbook-api-description-properties>
-<h2>ChartDataLabelOptions Description</h2>
-<cookbook-api-description-properties
-  [properties]="_chartDataLabelOptions"
 ></cookbook-api-description-properties>
 <h2>CSS Custom Properties</h2>
 <cookbook-api-description-properties
