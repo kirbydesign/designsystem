@@ -15,7 +15,7 @@ import {
 
 @Injectable()
 export class StockChartJSService extends ChartJSService {
-  static CHART_LOCALE_DEFAULT: ChartLocale = 'en-US';
+  static STOCK_CHART_LOCALE_DEFAULT: ChartLocale = 'en-US';
 
   protected readonly chartType = 'stock';
   private dataLabelOptions: ChartDataLabelOptions;
@@ -36,7 +36,7 @@ export class StockChartJSService extends ChartJSService {
   }
 
   private get locale(): ChartLocale {
-    return this.dataLabelOptions?.locale || StockChartJSService.CHART_LOCALE_DEFAULT;
+    return this.dataLabelOptions?.locale || StockChartJSService.STOCK_CHART_LOCALE_DEFAULT;
   }
 
   protected getDefaultLabels(datasets: ChartDataset[]) {
