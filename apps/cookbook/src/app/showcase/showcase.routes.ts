@@ -152,7 +152,7 @@ export const routes: Routes = [
         path: 'chart',
         component: ChartShowcaseComponent,
       },
-      { path: 'stock-chart', component: StockChartShowcaseComponent },
+      { path: 'chart-stock', component: StockChartShowcaseComponent },
       {
         path: 'fonts',
         component: FontsShowcaseComponent,
