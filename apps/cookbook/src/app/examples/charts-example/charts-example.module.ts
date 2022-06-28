@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { KirbyModule } from '@kirbydesign/designsystem';
 
-import { ChartExampleComponent } from './chart-example.component';
+import { ChartsExampleComponent } from './charts-example.component';
 import { ChartExampleAccessibilityComponent } from './examples/chart-example-accessibility.component';
 import { ChartExampleAnnotationsComponent } from './examples/chart-example-annotations.component';
 import { ChartExampleAreaLineComponent } from './examples/chart-example-area-line.component';
@@ -18,7 +18,7 @@ import { ChartExampleStockComparisonComponent } from './examples/chart-example-s
 import { ChartExampleStockComponent } from './examples/chart-example-stock.component';
 
 const COMPONENT_DECLARATIONS = [
-  ChartExampleComponent,
+  ChartsExampleComponent,
   ChartExampleSimpleColumnComponent,
   ChartExampleColumnComponent,
   ChartExampleBarComponent,
@@ -38,4 +38,4 @@ const COMPONENT_DECLARATIONS = [
   imports: [CommonModule, KirbyModule],
   exports: COMPONENT_DECLARATIONS,
 })
-export class ChartExampleModule {}
+export class ChartsExampleModule {}
