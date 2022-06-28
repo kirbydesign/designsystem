@@ -1,5 +1,4 @@
 import {
-  AfterContentChecked,
   AfterViewInit,
   ChangeDetectorRef,
   Component,
@@ -43,12 +42,9 @@ import { KeyboardHandlerService } from './keyboard-handler.service';
     },
   ],
 })
-export class DropdownComponent
-  implements AfterContentChecked, AfterViewInit, OnDestroy, ControlValueAccessor
-{
+export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValueAccessor {
   static readonly OPEN_DELAY_IN_MS = 100;
   private state = OpenState.closed;
-  private hasConfiguredSlottedItems = false;
   private horizontalDirection: HorizontalDirection | `${HorizontalDirection}` =
     HorizontalDirection.right;
   private verticalDirection: VerticalDirection | `${VerticalDirection}` = VerticalDirection.down;
@@ -183,8 +179,31 @@ export class DropdownComponent
   buttonElement: ElementRef<HTMLElement>;
   @ViewChildren(ItemComponent, { read: ElementRef })
   kirbyItemsDefault: QueryList<ElementRef<HTMLElement>>;
+
+  _kirbyItemsSlotted: QueryList<ElementRef<HTMLElement>>;
   @ContentChildren(ItemComponent, { read: ElementRef })
-  kirbyItemsSlotted: QueryList<ElementRef<HTMLElement>>;
+  set kirbyItemsSlotted(kirbyItems: QueryList<ElementRef<HTMLElement>>) {
+    const hasSlottedItems = this.itemClickUnlisten?.length > 0;
+    if (hasSlottedItems) {
+      this.unlistenAllSlottedItems();
+    }
+
+    // Setup a click listener for each new slotted items
+    kirbyItems.forEach((kirbyItem, index) => {
+      this.renderer.setAttribute(kirbyItem.nativeElement, 'role', 'option');
+      const unlisten = this.renderer.listen(kirbyItem.nativeElement, 'click', () => {
+        this.onItemSelect(index);
+      });
+
+      this.itemClickUnlisten.push(unlisten);
+    });
+
+    this._kirbyItemsSlotted = kirbyItems;
+  }
+
+  get kirbyItemsSlotted(): QueryList<ElementRef<HTMLElement>> {
+    return this._kirbyItemsSlotted;
+  }
 
   private itemClickUnlisten: (() => void)[] = [];
   private intersectionObserverRef: IntersectionObserver;
@@ -215,19 +234,6 @@ export class DropdownComponent
   onButtonMouseEvent(event: Event) {
     // Prevent button focus;
     event.preventDefault();
-  }
-
-  ngAfterContentChecked() {
-    if (!this.hasConfiguredSlottedItems && this.kirbyItemsSlotted.length) {
-      this.kirbyItemsSlotted.forEach((kirbyItem, index) => {
-        this.renderer.setAttribute(kirbyItem.nativeElement, 'role', 'option');
-        const unlisten = this.renderer.listen(kirbyItem.nativeElement, 'click', () => {
-          this.onItemSelect(index);
-        });
-        this.itemClickUnlisten.push(unlisten);
-      });
-      this.hasConfiguredSlottedItems = true;
-    }
   }
 
   /* Utility that makes it easier to set styles on card element 
@@ -531,11 +537,15 @@ export class DropdownComponent
     return false;
   }
 
-  ngOnDestroy(): void {
-    let unlisten: () => void;
-    while ((unlisten = this.itemClickUnlisten.pop()) !== undefined) {
-      unlisten();
+  private unlistenAllSlottedItems() {
+    let unlistenItem: () => void;
+    while ((unlistenItem = this.itemClickUnlisten.pop()) !== undefined) {
+      unlistenItem();
     }
+  }
+
+  ngOnDestroy(): void {
+    this.unlistenAllSlottedItems();
     if (this.intersectionObserverRef) {
       this.intersectionObserverRef.disconnect();
     }
