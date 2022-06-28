@@ -14,8 +14,8 @@ import { ChartExampleInteractionComponent } from './examples/chart-example-inter
 import { ChartExampleLineComponent } from './examples/chart-example-line.component';
 import { ChartExampleMultipleDatasetsComponent } from './examples/chart-example-multiple-datasets.component';
 import { ChartExampleSimpleColumnComponent } from './examples/chart-example-simple-column-chart.component';
-import { ChartExampleStockComparisonComponent } from './examples/chart-example-stock.comparison.component';
-import { ChartExampleStockComponent } from './examples/chart-example-stock.component';
+import { StockChartExampleComparisonComponent } from './examples/stock-chart-example-comparison.component';
+import { StockChartExampleComponent } from './examples/stock-chart-example.component';
 
 const COMPONENT_DECLARATIONS = [
   ChartsExampleComponent,
@@ -28,8 +28,8 @@ const COMPONENT_DECLARATIONS = [
   ChartExampleAccessibilityComponent,
   ChartExampleAnnotationsComponent,
   ChartExampleLineComponent,
-  ChartExampleStockComponent,
-  ChartExampleStockComparisonComponent,
+  StockChartExampleComponent,
+  StockChartExampleComparisonComponent,
   ChartExampleAreaLineComponent,
 ];
 

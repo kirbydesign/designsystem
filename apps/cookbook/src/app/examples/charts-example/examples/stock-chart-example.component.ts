@@ -41,7 +41,7 @@ const config = {
   selector: config.selector,
   template: config.template,
 })
-export class ChartExampleStockComponent {
+export class StockChartExampleComponent {
   template: string = config.template;
   codeSnippet: string = config.codeSnippet;
 

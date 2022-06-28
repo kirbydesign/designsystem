@@ -72,7 +72,7 @@ const config = {
   selector: config.selector,
   template: config.template,
 })
-export class ChartExampleStockComparisonComponent {
+export class StockChartExampleComparisonComponent {
   template: string = config.template;
   codeSnippet: string = config.codeSnippet;
 
