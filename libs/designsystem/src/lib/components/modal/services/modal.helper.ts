@@ -46,9 +46,8 @@ export class ModalHelper {
         ...customCssClasses,
       ],
       backdropDismiss: config.flavor === 'compact' || config.interactWithBackground ? false : true,
-      showBackdrop: !config.interactWithBackground,
       componentProps: { config: config },
-      swipeToClose: config.flavor != 'compact',
+      canDismiss: config.flavor != 'compact',
       presentingElement: modalPresentingElement,
       keyboardClose: false,
     });
