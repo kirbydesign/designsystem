@@ -99,7 +99,9 @@ describe('ModalHelper', () => {
       ModalWrapperComponent,
       ModalCompactWrapperComponent,
       PageTitleComponent,
-      MockComponents(IconComponent, PageProgressComponent),
+      PageProgressComponent,
+      IconComponent,
+      PageProgressEmbeddedComponent,
     ],
     entryComponents: [
       InputEmbeddedComponent,
@@ -534,16 +536,15 @@ describe('ModalHelper', () => {
           it('should have correct padding', () => {
             const toolbarContainer =
               ionToolbarElement.shadowRoot.querySelector('.toolbar-container');
-            const expectedPadding = size('s');
-            const expectedTopSpacingTotal = size('m');
-            const expectedAdditionalTopPadding =
-              parseInt(expectedTopSpacingTotal) - parseInt(expectedPadding);
+            const expectedInlinePadding = size('s');
+            const expectedBlockPadding = size('xs');
+            const expectedAdditionalTopPadding = size('xxs');
 
             expect(toolbarContainer).toHaveComputedStyle({
-              padding: expectedPadding,
+              padding: `${expectedBlockPadding} ${expectedInlinePadding}`,
             });
             expect(ionToolbarElement).toHaveComputedStyle({
-              'padding-top': `${expectedAdditionalTopPadding}px`,
+              'padding-top': `${expectedAdditionalTopPadding}`,
             });
           });
         });
@@ -809,9 +810,11 @@ describe('ModalHelper', () => {
 
         it('should have correct padding', () => {
           const toolbarContainer = ionToolbarElement.shadowRoot.querySelector('.toolbar-container');
+          const expectedInlinePadding = size('s');
+          const expectedBlockPadding = size('xs');
 
           expect(toolbarContainer).toHaveComputedStyle({
-            padding: size('s'),
+            padding: `${expectedBlockPadding} ${expectedInlinePadding}`,
           });
           expect(ionToolbarElement).toHaveComputedStyle({
             'padding-top': '0px',
