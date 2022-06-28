@@ -174,7 +174,7 @@ describe('ModalWrapperComponent', () => {
       spectator.component['ionModalDidPresent'].complete();
       await TestHelper.waitForTimeout();
 
-      const dummyWrapper = spectator.element.closest('.modal-wrapper');
+      const dummyWrapper = spectator.component['ionModalElement'];
       expect(observeSpy).toHaveBeenCalledWith(dummyWrapper);
     });
 
