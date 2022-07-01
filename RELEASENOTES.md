@@ -70,7 +70,16 @@ Interaction states are not relevant for all components. See the table below for 
 
 #### Attention level 4 is deprecated
 
-No longer provide attention level 4. Use other levels instead. In deprecation period level 4 gets mapped to ???. With future release (which version?) using attention level 4 will throw and error.
+In order to clarify and simplify the design of the `<kirby-button>` attention levels it has been revised. Attention level 4 has been deprecated and the continued usage of this level will result in a console deprecation warning message and the button will be rendered as attention level 3.
+
+Up until now attention level 4 has primarily been used for transparent icon-only buttons. The continued need for this specific kind of buttons has been recognized and is now available through a new `noDecoration` parameter of `<kirby-button>` .
+
+Furthermore the design of `<kirby-button>` on all light backgrounds is now identical to the their former presence on a _white_ kirby-card background. The biggest visual change will be on `<kirby-button>` s with attention level 2 on a _light_ `<kirby-card>` which will have their background color change from _white_ to _black_.
+
+##### Migration
+
+- When migrating change attention level 2 to attention level 3 on all `<kirby-button>` s which aren't black by design
+- Also replace all attention level 4 usage on icon-only `<kirby-button>` s with the new no-decoration parameter
 
 ### Where can I find more details?
 
