@@ -13,7 +13,7 @@ Version 7 is mostly about improving the user experience for other devices than m
 ### What's new?
 
 - [Interaction States](#interaction-states)
-- [Button attention level 4 is deprecated](#attention-level-4-is-deprecated)
+- [Button attention level 4 is deprecated](#button-attention-level-4-is-deprecated)
 - Charts
   - New _Stock Chart_ component
   - Dependency on _Highcharts_ removed
@@ -22,7 +22,7 @@ Version 7 is mostly about improving the user experience for other devices than m
   - Various bugfixes
   - Refactor moving of modal elements to solve multiple issues
 
-#### Interaction States
+### Interaction States
 
 Most Kirby components have had an overhaul of how they look and behave when you interact with them using a keyboard or a pointing device like a mouse. This has been done by improving _Interaction States_ - and adding some that where missing.
 
@@ -35,7 +35,7 @@ Most Kirby components have had an overhaul of how they look and behave when you 
 <dd>When an element receives focus you can interact with it using a keyboard. E.g. submitting a form or following a link Elements can receive focus by using <code>TAB</code> on a keyboard, but also programmatically or by clicking on it. Not all elements will (or should) receive focus.</dd>
 </dl>
 
-##### How desktop ready are Kirby components?
+#### How desktop ready are Kirby components?
 
 Interaction states are not relevant for all components. See the table below for the current state of how _desktop ready_ each relevant component is:
 
@@ -68,7 +68,7 @@ Interaction states are not relevant for all components. See the table below for 
 | Toggle            |  ✅   |   🟡   |        ❌        |         ?         |
 | Toggle Button     |  ✅   |   🟡   |        ❌        |         ?         |
 
-#### Attention level 4 is deprecated
+### Button attention level 4 is deprecated
 
 In order to clarify and simplify the design of the `<kirby-button>` attention levels it has been revised. Attention level 4 has been deprecated and the continued usage of this level will result in a console deprecation warning message and the button will be rendered as attention level 3.
 
@@ -76,7 +76,7 @@ Up until now attention level 4 has primarily been used for transparent icon-only
 
 Furthermore the design of `<kirby-button>` on all light backgrounds is now identical to the their former presence on a _white_ kirby-card background. The biggest visual change will be on `<kirby-button>` s with attention level 2 on a _light_ `<kirby-card>` which will have their background color change from _white_ to _black_.
 
-##### Migration
+#### Migration
 
 - When migrating change attention level 2 to attention level 3 on all `<kirby-button>` s which aren't black by design
 - Also replace all attention level 4 usage on icon-only `<kirby-button>` s with the new no-decoration parameter
