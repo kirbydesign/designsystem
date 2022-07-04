@@ -10,7 +10,7 @@ Version 7 is mostly about improving the user experience for other devices than m
 
 ### What's new?
 
-- [Button attention level 4 is deprecated](#button-attention-level-4-is-deprecated)
+- [Button attention level 4 has been deprecated](#button-attention-level-4-has-been-deprecated)
 - [Interaction States](#interaction-states)
 - Charts
   - New _Stock Chart_ component
@@ -20,7 +20,7 @@ Version 7 is mostly about improving the user experience for other devices than m
   - Various bugfixes
   - Refactor moving of modal elements to solve multiple issues
 
-### Button attention level 4 is deprecated
+### Button attention level 4 has been deprecated
 
 In order to clarify and simplify the design of the `<kirby-button>` attention levels it has been revised. Attention level 4 has been deprecated and the continued usage of this level will result in a console deprecation warning message and the button will be rendered as attention level 3.
 
@@ -38,12 +38,12 @@ Furthermore the design of `<kirby-button>` on all light backgrounds is now ident
 Most Kirby components have had an overhaul of how they look and behave when you interact with them using a keyboard or a pointing device such as a mouse. This has been done by improving _Interaction States_ - and adding some that where missing.
 
 <dl>
-<dt>Hover</dt>
-<dd>When you move the mouse cursor over an element. It's not a thing on touch devices.</dd>
-<dt>Active</dt>
-<dd>While you click or press an element it becomes active. When you release it, the element is no longer active.</dd>
-<dt>Focus</dt>
-<dd>When an element receives focus you can interact with it using a keyboard. E.g. submitting a form or following a link. Elements can receive focus by using <code>TAB</code> on a keyboard, but also programmatically or by clicking on it. Not all elements will (or should) receive focus.</dd>
+  <dt>Hover</dt>
+  <dd>When you move the mouse cursor over an element. It's not a thing on touch devices.</dd>
+  <dt>Active</dt>
+  <dd>While you click or press an element it becomes active. When you release it, the element is no longer active.</dd>
+  <dt>Focus</dt>
+  <dd>When an element receives focus you can interact with it using a keyboard. E.g. submitting a form or following a link. Elements can receive focus by using <code>TAB</code> on a keyboard, but also programmatically or by clicking on it. Not all elements will (or should) receive focus.</dd>
 </dl>
 
 #### How desktop ready are Kirby components?
