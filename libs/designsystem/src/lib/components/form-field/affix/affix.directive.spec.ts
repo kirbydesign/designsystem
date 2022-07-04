@@ -14,7 +14,7 @@ class AffixInputHostComponent {
   numericInput = new FormControl('');
 }
 
-describe('NumberInputDirective', () => {
+describe('InputAffixDirective', () => {
   let locale: 'da' | 'en-GB' = 'en-GB';
   let spectator: SpectatorDirective<InputAffixDirective>;
 
