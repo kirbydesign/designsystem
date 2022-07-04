@@ -2,13 +2,7 @@
   [(size)]="size"
 ></cookbook-form-field-example-configuration>
 
-<h3>Affix</h3>
-<cookbook-example-viewer [html]="inputAffixExample.template">
-  <cookbook-form-field-input-affix-example
-    [size]="size"
-    #inputAffixExample
-  ></cookbook-form-field-input-affix-example>
-</cookbook-example-viewer>
+<h3>Default</h3>
 <cookbook-example-viewer [html]="inputDefaultExample.template">
   <cookbook-form-field-input-example
     [size]="size"
@@ -48,7 +42,16 @@
   ></cookbook-form-field-input-numeric-example>
 </cookbook-example-viewer>
 
-<h3>Affix</h3>
+<h4>Affix</h4>
+<p>Allows for prefix or suffix elements on an inputfield</p>
+<p>
+  A suffix will be displayed at the end of the inputfield while a prefix will be displayed at the
+  start of the inputfield
+</p>
+<p>
+  While affixes will default to simple affix components when a <code>string</code>
+  is supplied. You can also supply your own custom template.
+</p>
 <cookbook-example-viewer [html]="inputAffixExample.template">
   <cookbook-form-field-input-affix-example
     [size]="size"
@@ -180,6 +183,12 @@
 <h4>Properties:</h4>
 <cookbook-api-description-properties
   [properties]="decimalMaskProperties"
+></cookbook-api-description-properties>
+
+<h2>Affix directive</h2>
+<h4>Properties:</h4>
+<cookbook-api-description-properties
+  [properties]="affixProperties"
 ></cookbook-api-description-properties>
 
 <h2>Textarea: Specific properties</h2>

@@ -14,16 +14,25 @@ const config = {
     <kirby-form-field label="Use a custom template">
       <input kirby-input affix [prefix]="spinner" [size]="size" />
     </kirby-form-field>
+    <kirby-form-field label="Custom template with ctx">
+      <input
+        kirby-input
+        affix
+        [affixCtx]="{time: '1656925981782'}"
+        [suffix]="withContext"
+        [size]="size"
+      />
+    </kirby-form-field>
     <kirby-form-field label="Also works with a date mask">
-      <input kirby-input type="date" affix prefix="Hello" [size]="size" />
+      <input kirby-input type="date" affix prefix="Birthdate" [affixCtx]="{time: '1656925981782'}" [suffix]="withContext" [size]="size" />
     </kirby-form-field>
 
     <!-- templates for example -->
     <ng-template #spinner>
       <kirby-spinner></kirby-spinner>
     </ng-template>
-    <ng-template #withContext let-config="config">
-    {{config.date | date: 'hh:mm'}}
+    <ng-template #withContext let-ctx="time">
+      kl. {{ctx | date: 'HH:mm'}}
     </ng-template>
   `,
 };

@@ -155,6 +155,26 @@ On native devices this method also ensures the form field is scrolled into the v
       type: ['true', 'false'],
     },
   ];
+  affixProperties: ApiDescriptionProperty[] = [
+    {
+      name: 'prefix',
+      defaultValue: undefined,
+      description: 'What to add in front of the input.',
+      type: ['string', 'TemplateRef<any>'],
+    },
+    {
+      name: 'suffix',
+      defaultValue: undefined,
+      description: 'What to add behind the input.',
+      type: ['string', 'TemplateRef<any>'],
+    },
+    {
+      name: 'affixCtx',
+      defaultValue: undefined,
+      description: 'Context supplied via ngTemplateOutletContext to prefix / suffix TemplateRefs',
+      type: ['object'],
+    },
+  ];
 
   sharedEvents: ApiDescriptionEvent[] = [
     {
