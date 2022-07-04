@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
+import { Component, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
 
 import { IconRegistryService } from '../icon/icon-registry.service';
 
@@ -101,5 +101,26 @@ export class SegmentedControlComponent {
       this.selectedIndex = selectedItemIndex;
       this.segmentSelect.emit(this.value);
     }
+  }
+
+  @HostListener('keydown.arrowup', ['$event'])
+  @HostListener('keydown.arrowdown', ['$event'])
+  @HostListener('keydown.arrowleft', ['$event'])
+  @HostListener('keydown.arrowright', ['$event'])
+  _onArrowKeys(event: KeyboardEvent) {
+    // TODO: Decide which key events to listen for
+
+    // TODO: Write unit tests
+
+    // TODO: Condition: Only chip and compact chip mode - Ionic 6 will handle the rest?
+    if (this.mode === SegmentedControlMode.chip || this.mode === SegmentedControlMode.compactChip) {
+      console.log(event);
+    }
+
+    // TODO: Mimic functionality from Ionic
+    // See https://github.com/ionic-team/ionic-framework/blob/main/core/src/components/segment/segment.tsx#L458-L487
+
+    // TODO: Expose option to selectOnFocus like Ionic
+    // See https://github.com/ionic-team/ionic-framework/blob/main/core/src/components/segment/segment.tsx#L93-L97
   }
 }
