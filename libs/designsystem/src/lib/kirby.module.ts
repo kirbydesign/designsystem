@@ -21,7 +21,7 @@ import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { EmptyStateComponent } from './components/empty-state/empty-state.component';
 import { FabSheetComponent } from './components/fab-sheet/fab-sheet.component';
 import { FlagComponent } from './components/flag/flag.component';
-import { AffixModule } from './components/form-field/affix/affix.module';
+import { AffixModule } from './components/form-field/affix';
 import { DateInputDirective } from './components/form-field/directives/date/date-input.directive';
 import { DecimalMaskDirective } from './components/form-field/directives/decimal-mask/decimal-mask.directive';
 import { FormFieldMessageComponent } from './components/form-field/form-field-message/form-field-message.component';
