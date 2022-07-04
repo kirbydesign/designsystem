@@ -13,7 +13,6 @@ import { CalendarExampleComponent } from './calendar-example/calendar-example.co
 import { CardExampleComponent } from './card-example/card-example.component';
 import { ChartsExampleComponent } from './charts-example/charts-example.component';
 import { CheckboxExampleComponent } from './checkbox-example/checkbox-example.component';
-import { ChipExampleComponent } from './chip-example/chip-example.component';
 import { EmptyStateExampleComponent } from './empty-state-example/empty-state-example.component';
 import { ExamplesComponent } from './examples.component';
 import { FabSheetExampleComponent } from './fab-sheet-example/fab-sheet-example.component';
@@ -364,10 +363,6 @@ export const routes: Routes = [
   {
     path: 'virtual-scroll-list',
     component: VirtualScrollListExampleComponent,
-  },
-  {
-    path: 'chip',
-    component: ChipExampleComponent,
   },
   {
     path: 'avatar',
