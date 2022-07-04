@@ -1,3 +1,4 @@
+@use '~@kirbydesign/core/src/scss/interaction-state';
 @use '~@kirbydesign/core/src/scss/utils';
 
 $margin-horizontal: utils.size('l');
@@ -39,9 +40,10 @@ kirby-card {
 }
 
 .cancel-btn {
+  @include interaction-state.apply-focus-visible($shadow: utils.get-elevation(8));
+
   font-weight: utils.font-weight('bold');
   margin-top: utils.size('s');
   margin-bottom: utils.size('m');
   pointer-events: auto;
-  box-shadow: utils.get-elevation(8);
 }
