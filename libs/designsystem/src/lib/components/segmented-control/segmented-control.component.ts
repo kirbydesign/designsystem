@@ -103,19 +103,21 @@ export class SegmentedControlComponent {
     }
   }
 
-  @HostListener('keydown.arrowup', ['$event'])
-  @HostListener('keydown.arrowdown', ['$event'])
   @HostListener('keydown.arrowleft', ['$event'])
   @HostListener('keydown.arrowright', ['$event'])
+  @HostListener('keydown.home', ['$event'])
+  @HostListener('keydown.end', ['$event'])
+  @HostListener('keydown.space', ['$event'])
+  @HostListener('keydown.enter', ['$event'])
   _onArrowKeys(event: KeyboardEvent) {
-    // TODO: Decide which key events to listen for
+    // Only chip and compact chip mode - Ionic 6 will handle default mode
+    if (this.mode === SegmentedControlMode.default) {
+      return;
+    }
+
+    console.log(event.code);
 
     // TODO: Write unit tests
-
-    // TODO: Condition: Only chip and compact chip mode - Ionic 6 will handle the rest?
-    if (this.mode === SegmentedControlMode.chip || this.mode === SegmentedControlMode.compactChip) {
-      console.log(event);
-    }
 
     // TODO: Mimic functionality from Ionic
     // See https://github.com/ionic-team/ionic-framework/blob/main/core/src/components/segment/segment.tsx#L458-L487
