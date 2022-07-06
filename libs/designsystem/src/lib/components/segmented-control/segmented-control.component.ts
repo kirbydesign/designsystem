@@ -103,6 +103,8 @@ export class SegmentedControlComponent {
     }
   }
 
+  // TODO: Add function similar to Ionic's getSegmentButton() (see https://github.com/ionic-team/ionic-framework/blob/main/core/src/components/segment/segment.tsx#L440-L456)
+
   @HostListener('keydown.arrowleft', ['$event'])
   @HostListener('keydown.arrowright', ['$event'])
   @HostListener('keydown.home', ['$event'])
@@ -110,7 +112,7 @@ export class SegmentedControlComponent {
   @HostListener('keydown.space', ['$event'])
   @HostListener('keydown.enter', ['$event'])
   _onArrowKeys(event: KeyboardEvent) {
-    // Only chip and compact chip mode - Ionic 6 will handle default mode
+    // Only chip and compact chip modes - Ionic 6 will handle default mode
     if (this.mode === SegmentedControlMode.default) {
       return;
     }
@@ -121,8 +123,38 @@ export class SegmentedControlComponent {
 
     // TODO: Mimic functionality from Ionic
     // See https://github.com/ionic-team/ionic-framework/blob/main/core/src/components/segment/segment.tsx#L458-L487
+    let current;
+
+    switch (event.key) {
+      case 'ArrowRight':
+        event.preventDefault();
+        // current = rtl ? this.getSegmentButton('previous') : this.getSegmentButton('next');
+        current = this.items[this.selectedIndex + 1];
+        break;
+      case 'ArrowLeft':
+        event.preventDefault();
+        // current = rtl ? this.getSegmentButton('next') : this.getSegmentButton('previous');
+        break;
+      case 'Home':
+        event.preventDefault();
+        // current = this.getSegmentButton('first');
+        break;
+      case 'End':
+        event.preventDefault();
+        // current = this.getSegmentButton('last');
+        break;
+      case ' ':
+      case 'Enter':
+        event.preventDefault();
+      // current = document.activeElement as HTMLIonSegmentButtonElement;
+      // keyDownSelectsButton = true;
+      default:
+        break;
+    }
 
     // TODO: Expose option to selectOnFocus like Ionic
     // See https://github.com/ionic-team/ionic-framework/blob/main/core/src/components/segment/segment.tsx#L93-L97
+
+    // current.focus();
   }
 }
