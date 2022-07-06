@@ -164,6 +164,29 @@ describe('SegmentedControlComponent', () => {
 
         expect(component.value).toBe(items[2]);
       });
+
+      describe('when navigating using a keyboard', () => {
+        describe('and pressing ArrowRight key', () => {
+          it('should move focus to next segment chip', () => {
+            expect(component.value).toBe(items[1]);
+            // spectator.dispatchKeyboardEvent(???, 'keydown', 'ArrowLeft');
+            // expect(???).toBeFocused();
+          });
+          describe('except if focus is on last item', () => {
+            it('should move focus to first item', () => {});
+          });
+        });
+        describe('and pressing ArrowLeft key', () => {
+          it('should move focus to previous segment chip', () => {});
+          describe('except if focus is on first item', () => {
+            it('should move focus to last item', () => {});
+          });
+        });
+        // TODO: Add tests for Home and End buttons
+        describe('and pressing Enter or Space key', () => {
+          it('should activate focused segment chip', () => {});
+        });
+      });
     });
   });
 });
