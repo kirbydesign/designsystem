@@ -103,7 +103,28 @@ export class SegmentedControlComponent {
     }
   }
 
-  // TODO: Add function similar to Ionic's getSegmentButton() (see https://github.com/ionic-team/ionic-framework/blob/main/core/src/components/segment/segment.tsx#L440-L456)
+  // Similar to Ionic's getSegmentButton()
+  // See https://github.com/ionic-team/ionic-framework/blob/main/core/src/components/segment/segment.tsx#L440-L456
+  getSegmentItem(selector: 'first' | 'last' | 'next' | 'previous'): SegmentItem {
+    switch (selector) {
+      case 'first':
+        return this.items[0];
+      case 'last':
+        return this.items[this.items.length - 1];
+      case 'next':
+        return this.items[this.selectedIndex + 1] || this.items[0];
+      case 'previous':
+        return this.items[this.selectedIndex - 1] || this.items[this.items.length - 1];
+      default:
+        return null;
+    }
+  }
+
+  // TODO: Implement function that makes element with id = itemID receive focus
+  moveFocusToSegmentItem(itemId: string) {
+    // something like element.focus();
+    console.log(`Move focus to segment item with id = ${itemId}`);
+  }
 
   @HostListener('keydown.arrowleft', ['$event'])
   @HostListener('keydown.arrowright', ['$event'])
@@ -117,44 +138,55 @@ export class SegmentedControlComponent {
       return;
     }
 
-    console.log(event.code);
+    console.log(`${event.code} was pressed`);
 
     // TODO: Write unit tests
 
+    let current: SegmentItem;
+
     // TODO: Mimic functionality from Ionic
     // See https://github.com/ionic-team/ionic-framework/blob/main/core/src/components/segment/segment.tsx#L458-L487
-    let current;
+
+    // TODO: Consider handling RTL
 
     switch (event.key) {
       case 'ArrowRight':
         event.preventDefault();
-        // current = rtl ? this.getSegmentButton('previous') : this.getSegmentButton('next');
-        current = this.items[this.selectedIndex + 1];
+        current = this.getSegmentItem('next');
         break;
       case 'ArrowLeft':
         event.preventDefault();
-        // current = rtl ? this.getSegmentButton('next') : this.getSegmentButton('previous');
+        current = this.getSegmentItem('previous');
         break;
       case 'Home':
         event.preventDefault();
-        // current = this.getSegmentButton('first');
+        current = this.getSegmentItem('first');
         break;
       case 'End':
         event.preventDefault();
-        // current = this.getSegmentButton('last');
+        current = this.getSegmentItem('last');
         break;
       case ' ':
       case 'Enter':
         event.preventDefault();
+      // The following line only works if we first move focus to the chip segment
+      // that we have navigated to using the arrow keys.
       // current = document.activeElement as HTMLIonSegmentButtonElement;
       // keyDownSelectsButton = true;
       default:
         break;
     }
 
-    // TODO: Expose option to selectOnFocus like Ionic
+    // TODO: Consider to handle Escape key down => blur()
+
+    // TODO: Expose option to selectOnFocus similar to Ionic
     // See https://github.com/ionic-team/ionic-framework/blob/main/core/src/components/segment/segment.tsx#L93-L97
 
-    // current.focus();
+    // TODO: Let highlighted/current element receive focus
+    this.moveFocusToSegmentItem(current.id);
+
+    // TODO: Only select segment on "submit" i.e. Enter or Space
+    // (unless selectOnFocus is implemented and is set to true)
+    this.onSegmentSelect(current.id);
   }
 }
