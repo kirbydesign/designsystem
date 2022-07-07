@@ -37,6 +37,7 @@
     [text]="item.text"
     [isSelected]="index === selectedIndex"
     (click)="onSegmentSelect(item.id)"
+    [id]="'itemId-' + item.id"
     role="button"
   ></kirby-chip>
 </ng-container>

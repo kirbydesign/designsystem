@@ -122,8 +122,11 @@ export class SegmentedControlComponent {
 
   // TODO: Implement function that makes element with id = itemID receive focus
   moveFocusToSegmentItem(itemId: string) {
-    // something like element.focus();
     console.log(`Move focus to segment item with id = ${itemId}`);
+
+    // TODO: This seems to work but should be improved
+    let element = document.querySelector(`#itemId-${itemId}`) as HTMLElement;
+    element.focus();
   }
 
   @HostListener('keydown.arrowleft', ['$event'])
@@ -169,15 +172,21 @@ export class SegmentedControlComponent {
       case ' ':
       case 'Enter':
         event.preventDefault();
-      // The following line only works if we first move focus to the chip segment
-      // that we have navigated to using the arrow keys.
-      // current = document.activeElement as HTMLIonSegmentButtonElement;
-      // keyDownSelectsButton = true;
+        // The following only works if we first move focus to the chip segment
+        // that we have navigated to using the arrow keys.
+        // current = document.activeElement as HTMLIonSegmentButtonElement;
+        // keyDownSelectsButton = true;
+        current = this.items[this.selectedIndex];
+        this.onSegmentSelect(current.id);
       default:
         break;
     }
 
-    // TODO: Consider to handle Escape key down => blur()
+    // TODO: Introduce and keep track of this.focusedIndex. getSegmentItem() must also be updated.
+
+    // TODO: Optional: Consider to handle Escape key down => blur()
+
+    // TODO: Should segmentItem (Chip) look like :hover when "focused" using arrow keys?
 
     // TODO: Expose option to selectOnFocus similar to Ionic
     // See https://github.com/ionic-team/ionic-framework/blob/main/core/src/components/segment/segment.tsx#L93-L97
@@ -187,6 +196,12 @@ export class SegmentedControlComponent {
 
     // TODO: Only select segment on "submit" i.e. Enter or Space
     // (unless selectOnFocus is implemented and is set to true)
-    this.onSegmentSelect(current.id);
+    // this.onSegmentSelect(current.id);
+
+    // TODO: Use role="tablist" and role="tab" and aria-selected attributes
+
+    // TODO: Consider to use a "focused" CSS class (similar to `.ion-focused`)
+
+    // TODO: Consider to refactor: Separate the non-Ionic parts (chip modes) into own sub-component(s)
   }
 }
