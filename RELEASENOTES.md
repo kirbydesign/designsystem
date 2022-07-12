@@ -52,62 +52,62 @@ Interaction states are not relevant for all components. See the table below for 
 
 ##### Before
 
-| Component         | Hover | Active | Focus with `TAB` | `ENTER` / `SPACE` |
-| :---------------- | :---: | :----: | :--------------: | :---------------: |
-| Accordion         |  🟡   |   🟡   |        ❌        |        ❌         |
-| Action Sheet      |  ❌   |   ❌   |        ✅        |        ✅         |
-| Alert             |  ✅   |   ❌   |        ✅        |        ✅         |
-| Button            |  ✅   |   ❌   |        ✅        |         ?         |
-| Calendar          |   ?   |   ?    |        🟡        |        🟡         |
-| Card              |  🟡   |   ❌   |        ❌        |        ❌         |
-| Chart             |  ✅   |   ✅   |        🟡        |        🟡         |
-| Checkbox          |  ✅   |   ✅   |        ✅        |        ✅         |
-| Chip              |  ✅   |   ❌   |        ❌        |        ❌         |
-| Dropdown          |  ✅   |   🟡   |        ✅        |        ✅         |
-| Fab Sheet         |  ✅   |   ❌   |        ✅        |        ❌         |
-| Form Field        |  ✅   |   ✅   |        ✅        |         ?         |
-| Item - Picker     |  🟡   |   ❌   |        ✅        |        ✅         |
-| Link              |  ❌   |   ❌   |        ✅        |        ✅         |
-| List              |  🟡   |   ❌   |        🟡        |        ✅         |
-| List Swipe        |  ❌   |   ❌   |        ❌        |        ❌         |
-| Modal             |  ✅   |   ❌   |        ✅        |        ✅         |
-| Radio             |  🟡   |   ✅   |        ✅        |        ✅         |
-| Range             |   ?   |   ?    |        ❌        |         ?         |
-| Reorder List      |   ?   |   ✅   |        ❌        |        ❌         |
-| Segmented Control |  ✅   |   ❌   |        ✅        |        ✅         |
-| Slide Button      |   ?   |   ?    |        ?         |         ?         |
-| Slides            |  🟡   |   🟡   |        ❌        |        ❌         |
-| Tabs              |  ❌   |   ❌   |        🟡        |        ✅         |
-| Toggle            |   ?   |   ✅   |        ❌        |        ✅         |
-| Toggle Button     |  ✅   |   ❌   |        ✅        |         ?         |
+| Component         | Hover | Active | Focus `TAB` | `ENTER` / `SPACE` |
+| :---------------- | :---: | :----: | :---------: | :---------------: |
+| Accordion         |  🟡   |   🟡   |     ❌      |        ❌         |
+| Action Sheet      |  ❌   |   ❌   |     ✅      |        ✅         |
+| Alert             |  ✅   |   ❌   |     ✅      |        ✅         |
+| Button            |  ✅   |   ❌   |     ✅      |         ?         |
+| Calendar          |   ?   |   ?    |     🟡      |        🟡         |
+| Card              |  🟡   |   ❌   |     ❌      |        ❌         |
+| Chart             |  ✅   |   ✅   |     🟡      |        🟡         |
+| Checkbox          |  ✅   |   ✅   |     ✅      |        ✅         |
+| Chip              |  ✅   |   ❌   |     ❌      |        ❌         |
+| Dropdown          |  ✅   |   🟡   |     ✅      |        ✅         |
+| Fab Sheet         |  ✅   |   ❌   |     ✅      |        ❌         |
+| Form Field        |  ✅   |   ✅   |     ✅      |         ?         |
+| Item - Picker     |  🟡   |   ❌   |     ✅      |        ✅         |
+| Link              |  ❌   |   ❌   |     ✅      |        ✅         |
+| List              |  🟡   |   ❌   |     🟡      |        ✅         |
+| List Swipe        |  ❌   |   ❌   |     ❌      |        ❌         |
+| Modal             |  ✅   |   ❌   |     ✅      |        ✅         |
+| Radio             |  🟡   |   ✅   |     ✅      |        ✅         |
+| Range             |   ?   |   ?    |     ❌      |         ?         |
+| Reorder List      |   ?   |   ✅   |     ❌      |        ❌         |
+| Segmented Control |  ✅   |   ❌   |     ✅      |        ✅         |
+| Slide Button      |   ?   |   ?    |      ?      |         ?         |
+| Slides            |  🟡   |   🟡   |     ❌      |        ❌         |
+| Tabs              |  ❌   |   ❌   |     🟡      |        ✅         |
+| Toggle            |   ?   |   ✅   |     ❌      |        ✅         |
+| Toggle Button     |  ✅   |   ❌   |     ✅      |         ?         |
 
 ##### After
 
-| Component         | Hover | Active | Focus with `TAB` | `ENTER` / `SPACE` |
-| :---------------- | :---: | :----: | :--------------: | :---------------: |
-| Accordion         |  ✅   |   ✅   |        🟡        |        🟡         |
-| Action Sheet      |  ✅   |   ✅   |        🟡        |        ✅         |
-| Alert             |  ✅   |   ✅   |        ✅        |        ✅         |
-| Button            |  ✅   |   ✅   |        ✅        |        ✅         |
-| Calendar          |  ✅   |   ✅   |        🟡        |        🟡         |
-| Card              |  ✅   |   ✅   |        ✅        |        ✅         |
-| Chart             |  ✅   |   🟡   |        🟡        |         ?         |
-| Checkbox          |  ✅   |   ✅   |        ✅        |        🟡         |
-| Chip              |  ✅   |   ✅   |        ✅        |        ✅         |
-| Dropdown          |  ✅   |   ✅   |        ✅        |        ✅         |
-| Fab Sheet         |  ✅   |   ✅   |        🟡        |        🟡         |
-| Form Field        |  ✅   |   ✅   |        ✅        |         ?         |
-| Item - Picker     |  ✅   |   ✅   |        🟡        |        ✅         |
-| Link              |  ✅   |   ✅   |        ✅        |        ✅         |
-| List              |  ✅   |   ✅   |        ✅        |        ✅         |
-| List Swipe        |  🟡   |   🟡   |        🟡        |        🟡         |
-| Modal             |   ?   |   ?    |        ?         |         ?         |
-| Radio             |  ✅   |   ✅   |        ✅        |        ✅         |
-| Range             |  ✅   |   ✅   |        ✅        |        ✅         |
-| Reorder List      |  🟡   |   🟡   |        ❌        |        ❌         |
-| Segmented Control |  ✅   |   ✅   |        ✅        |        ✅         |
-| Slide Button      |  ✅   |   ✅   |        ?         |         ?         |
-| Slides            |  ❌   |   ❌   |        ❌        |        ❌         |
-| Tabs              |  ❌   |   ❌   |        🟡        |        ✅         |
-| Toggle            |  ✅   |   ✅   |        ✅        |        ✅         |
-| Toggle Button     |  ✅   |   ✅   |        ✅        |        ✅         |
+| Component         | Hover | Active | Focus `TAB` | `ENTER` / `SPACE` |
+| :---------------- | :---: | :----: | :---------: | :---------------: |
+| Accordion         |  ✅   |   ✅   |     🟡      |        🟡         |
+| Action Sheet      |  ✅   |   ✅   |     🟡      |        ✅         |
+| Alert             |  ✅   |   ✅   |     ✅      |        ✅         |
+| Button            |  ✅   |   ✅   |     ✅      |        ✅         |
+| Calendar          |  ✅   |   ✅   |     🟡      |        🟡         |
+| Card              |  ✅   |   ✅   |     ✅      |        ✅         |
+| Chart             |  ✅   |   🟡   |     🟡      |         ?         |
+| Checkbox          |  ✅   |   ✅   |     ✅      |        🟡         |
+| Chip              |  ✅   |   ✅   |     ✅      |        ✅         |
+| Dropdown          |  ✅   |   ✅   |     ✅      |        ✅         |
+| Fab Sheet         |  ✅   |   ✅   |     🟡      |        🟡         |
+| Form Field        |  ✅   |   ✅   |     ✅      |         ?         |
+| Item - Picker     |  ✅   |   ✅   |     🟡      |        ✅         |
+| Link              |  ✅   |   ✅   |     ✅      |        ✅         |
+| List              |  ✅   |   ✅   |     ✅      |        ✅         |
+| List Swipe        |  🟡   |   🟡   |     🟡      |        🟡         |
+| Modal             |   ?   |   ?    |      ?      |         ?         |
+| Radio             |  ✅   |   ✅   |     ✅      |        ✅         |
+| Range             |  ✅   |   ✅   |     ✅      |        ✅         |
+| Reorder List      |  🟡   |   🟡   |     ❌      |        ❌         |
+| Segmented Control |  ✅   |   ✅   |     ✅      |        ✅         |
+| Slide Button      |  ✅   |   ✅   |      ?      |         ?         |
+| Slides            |  ❌   |   ❌   |     ❌      |        ❌         |
+| Tabs              |  ❌   |   ❌   |     🟡      |        ✅         |
+| Toggle            |  ✅   |   ✅   |     ✅      |        ✅         |
+| Toggle Button     |  ✅   |   ✅   |     ✅      |        ✅         |
