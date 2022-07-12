@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 import { InputSize } from '@kirbydesign/designsystem';
 
@@ -40,6 +40,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormFieldInputAffixExampleComponent {
   template: string = config.template;
