@@ -49,7 +49,6 @@ export class InputAffixDirective implements OnInit, OnChanges, AfterViewChecked 
   }
   public updateLayout(): void {
     requestAnimationFrame(() => {
-      console.log('update layout');
       let parent = this.inputEl.parentElement;
 
       // look out. Hackz away
