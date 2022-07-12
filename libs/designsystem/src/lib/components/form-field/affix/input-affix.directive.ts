@@ -43,44 +43,48 @@ export class InputAffixDirective implements OnInit, OnChanges, AfterViewChecked 
     }
   }
   ngAfterViewChecked(): void {
-    this.updateLayout();
+    requestAnimationFrame(() => {
+      this.updateLayout();
+    });
   }
   public updateLayout(): void {
-    let parent = this.inputEl.parentElement;
+    requestAnimationFrame(() => {
+      let parent = this.inputEl.parentElement;
 
-    // look out. Hackz away
-    let dateMask: HTMLElement;
-    if (parent && parent.classList.contains('date-mask-wrapper')) {
-      dateMask = parent.querySelector('.date-mask');
-      if (dateMask) parent.removeChild(dateMask);
-      parent = parent.parentElement;
-    } // whew
+      // look out. Hackz away
+      let dateMask: HTMLElement;
+      if (parent && parent.classList.contains('date-mask-wrapper')) {
+        dateMask = parent.querySelector('.date-mask');
+        if (dateMask) parent.removeChild(dateMask);
+        parent = parent.parentElement;
+      } // whew
 
-    const inputBounds: DOMRect = this.inputEl.getBoundingClientRect();
-    if (parent) {
-      const cssVar = 'var(--input-padding)';
-      const parentBounds: DOMRect = parent.getBoundingClientRect();
-      const relativeTop = inputBounds.top - parentBounds.top;
-      const centerY = relativeTop + inputBounds.height * 0.5;
-      if (this.prefixComp) {
-        const elm: HTMLElement = this.prefixComp.instance.wrapperEl.nativeElement;
-        elm.style.top = `${centerY}px`;
-        elm.style.left = `${cssVar}`;
-        const bb = elm.getBoundingClientRect();
-        const pad = `calc(${cssVar} + ${bb.width}px + calc(${cssVar}/2))`;
-        this.inputEl.style.paddingLeft = pad;
-        if (dateMask) {
-          dateMask.style.paddingLeft = pad;
+      const inputBounds: DOMRect = this.inputEl.getBoundingClientRect();
+      if (parent) {
+        const cssVar = 'var(--input-padding)';
+        const parentBounds: DOMRect = parent.getBoundingClientRect();
+        const relativeTop = inputBounds.top - parentBounds.top;
+        const centerY = relativeTop + inputBounds.height * 0.5;
+        if (this.prefixComp) {
+          const elm: HTMLElement = this.prefixComp.instance.wrapperEl.nativeElement;
+          elm.style.top = `${centerY}px`;
+          elm.style.left = `${cssVar}`;
+          const bb = elm.getBoundingClientRect();
+          const pad = `calc(${cssVar} + ${bb.width}px + calc(${cssVar}/2))`;
+          this.inputEl.style.paddingLeft = pad;
+          if (dateMask) {
+            dateMask.style.paddingLeft = pad;
+          }
+        }
+        if (this.suffixComp) {
+          const elm: HTMLElement = this.suffixComp.instance.wrapperEl.nativeElement;
+          elm.style.top = `${centerY}px`;
+          elm.style.right = `${cssVar}`;
+          const bb = elm.getBoundingClientRect();
+          this.inputEl.style.paddingRight = `calc(${cssVar} + ${bb.width}px + calc(${cssVar}/2))`;
         }
       }
-      if (this.suffixComp) {
-        const elm: HTMLElement = this.suffixComp.instance.wrapperEl.nativeElement;
-        elm.style.top = `${centerY}px`;
-        elm.style.right = `${cssVar}`;
-        const bb = elm.getBoundingClientRect();
-        this.inputEl.style.paddingRight = `calc(${cssVar} + ${bb.width}px + calc(${cssVar}/2))`;
-      }
-    }
+    });
   }
   ngOnInit(): void {
     // we are going to assume that kirby input fields are always
