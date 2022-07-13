@@ -14,11 +14,10 @@ Version 7 is mostly about improving the user experience for other devices than m
 - [Interaction States](#interaction-states)
 - Charts
   - New _Stock Chart_ component
-  - Dependency on _Highcharts_ removed
+  - _Highcharts_ dependency removed
   - General refactoring
-- Other
-  - Various bugfixes
-  - Refactor moving of modal elements to solve multiple issues
+- Refactor moving of modal elements to solve multiple issues
+- Various bugfixes
 
 ### Button attention level 4 has been deprecated
 
