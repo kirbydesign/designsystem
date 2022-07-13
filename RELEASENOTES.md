@@ -20,12 +20,6 @@ Version 7 is mostly about improving the user experience for other devices than m
   - Various bugfixes
   - Refactor moving of modal elements to solve multiple issues
 
-### What needs to be done?
-
-(on a high level)
-
-TBD
-
 ### Button attention level 4 has been deprecated
 
 In order to clarify and simplify the design of the `<kirby-button>` attention levels it has been revised. Attention level 4 has been deprecated and the continued usage of this level will result in a console deprecation warning message and the button will be rendered as attention level 3.
@@ -51,6 +45,12 @@ Most Kirby components have had an overhaul of how they look and behave when you 
   <dt>Focus</dt>
   <dd>When an element receives focus you can interact with it using a keyboard. Types of interaction could be e.g. activating a button, following a link, checking/unchecking checkboxes or selecting an option. Elements receive focus by using <code>TAB</code> on a keyboard to navigate to it. Not all elements will (or should) receive focus.</dd>
 </dl>
+
+#### What needs to be done?
+
+On a high level: Not much. You should check that the Kirby components you use look and behave as described in this section. You do not have to check every instance of Kirby components. A few samples should suffice.
+
+You _should_ test more thoroughly if you have applied your own styling and/or behavior. This could be either modifications made to existing interaction states or to make up for lacking ones. In either case you should aim for removing modifications and prefer to use the new baked-in interaction states.
 
 #### How desktop ready are Kirby components?
 
