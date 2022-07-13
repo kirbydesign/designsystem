@@ -20,6 +20,12 @@ Version 7 is mostly about improving the user experience for other devices than m
   - Various bugfixes
   - Refactor moving of modal elements to solve multiple issues
 
+### What needs to be done?
+
+(on a high level)
+
+TBD
+
 ### Button attention level 4 has been deprecated
 
 In order to clarify and simplify the design of the `<kirby-button>` attention levels it has been revised. Attention level 4 has been deprecated and the continued usage of this level will result in a console deprecation warning message and the button will be rendered as attention level 3.
@@ -35,20 +41,20 @@ Furthermore the design of `<kirby-button>` on all light backgrounds is now ident
 
 ### Interaction States
 
-Most Kirby components have had an overhaul of how they look and behave when you interact with them using a keyboard or a pointing device such as a mouse. This has been done by improving _Interaction States_ - and adding some that where missing.
+Most Kirby components have had an overhaul of how they look and behave when you interact with them using a keyboard or a pointing device such as a mouse. Interaction includes _clicking_ with a mouse, _navigating_ using the `TAB` key and _activating_ interactive elements using `ENTER` or `SPACE` keys.
 
 <dl>
   <dt>Hover</dt>
-  <dd>When you move the mouse cursor over an element. It's not a thing on touch devices.</dd>
+  <dd>When you move the mouse cursor over an element. Does not apply to touch devices.</dd>
   <dt>Active</dt>
-  <dd>While you click or press an element it becomes active. When you release it, the element is no longer active.</dd>
+  <dd>While you click or press (activate) an element it becomes active. When you release, the element is no longer active.</dd>
   <dt>Focus</dt>
-  <dd>When an element receives focus you can interact with it using a keyboard. E.g. submitting a form or following a link. Elements can receive focus by using <code>TAB</code> on a keyboard, but also programmatically or by clicking on it. Not all elements will (or should) receive focus.</dd>
+  <dd>When an element receives focus you can interact with it using a keyboard. Types of interaction could be e.g. activating a button, following a link, checking/unchecking checkboxes or selecting an option. Elements receive focus by using <code>TAB</code> on a keyboard to navigate to it. Not all elements will (or should) receive focus.</dd>
 </dl>
 
 #### How desktop ready are Kirby components?
 
-Interaction states are not relevant for all components. See the table below for the current state of how _desktop ready_ each relevant component is.
+Interaction states are not relevant for all components. See the tables below for the state of _desktop readiness_ for each relevant component before and after the improvements.
 
 ##### Before
 
