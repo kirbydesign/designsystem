@@ -52,15 +52,12 @@ jobs:
           git commit -m "$GIT_MESSAGE"
       - name: Publish core package to npm
         if: steps.modified-files.outputs.core == 'true'
-        run: |
-          npm run build:core
-          cd libs/core
-          npm publish --access public
+        run: npm run publish -- core
       - name: Create npm config
         run: echo '//registry.npmjs.org/:_authToken=${{secrets.NPM_PUBLISH_TOKEN}}' > ~/.npmrc
       - name: Bump designsystem package
         run: npm version patch -m ":bookmark:Bumping version to %s (designsystem)"
       - name: Build designsystem package and publish to npm
-        run: npm run publish
+        run: npm run publish -- designsystem
       - name: Push version bump(s) and tag to Github
         run: git push --follow-tags
