@@ -3,9 +3,14 @@ import { Animation, AnimationBuilder, createAnimation } from '@ionic/angular';
 import { ModalAnimationOptions } from '@ionic/core';
 
 import { KirbyAnimation } from '../../../animation/kirby-animation';
+import { PlatformService } from '../../../helpers';
 
 @Injectable({ providedIn: 'root' })
 export class ModalAnimationBuilderService {
+  constructor(private platform: PlatformService) {}
+
+  private readonly easingEnter = KirbyAnimation.Easing.modal.enter;
+  private readonly easingLeave = KirbyAnimation.Easing.modal.exit;
   private readonly duration = KirbyAnimation.Duration.LONG;
   private readonly SwipeToCloseDefaults = {
     MIN_PRESENTING_SCALE: 0.93,
@@ -25,7 +30,7 @@ export class ModalAnimationBuilderService {
 
       const baseAnimation = createAnimation('entering-base')
         .addElement(baseEl)
-        .easing('cubic-bezier(0.32,0.72,0,1)')
+        .easing(this.easingEnter)
         .duration(this.duration)
         .addAnimation(wrapperAnimation);
 
@@ -37,7 +42,7 @@ export class ModalAnimationBuilderService {
       }
 
       if (presentingEl) {
-        const isMobile = window.innerWidth < 768;
+        const isMobile = !this.platform.isPhabletOrBigger();
         const hasCardModal =
           presentingEl.tagName === 'ION-MODAL' &&
           (presentingEl as HTMLIonModalElement).presentingElement !== undefined;
@@ -153,7 +158,7 @@ export class ModalAnimationBuilderService {
 
       const baseAnimation = createAnimation('leaving-base')
         .addElement(baseEl)
-        .easing('cubic-bezier(0.32,0.72,0,1)')
+        .easing(this.easingLeave)
         .duration(duration)
         .addAnimation(wrapperAnimation);
 
@@ -166,7 +171,7 @@ export class ModalAnimationBuilderService {
       }
 
       if (presentingEl) {
-        const isMobile = window.innerWidth < 768;
+        const isMobile = !this.platform.isPhabletOrBigger();
         const hasCardModal =
           presentingEl.tagName === 'ION-MODAL' &&
           (presentingEl as HTMLIonModalElement).presentingElement !== undefined;
