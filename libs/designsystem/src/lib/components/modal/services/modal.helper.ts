@@ -7,6 +7,7 @@ import { ModalCompactWrapperComponent } from '../modal-wrapper/compact/modal-com
 import { ModalConfig, ModalFlavor, ModalSize } from '../modal-wrapper/config/modal-config';
 import { ModalWrapperComponent } from '../modal-wrapper/modal-wrapper.component';
 
+import { iosEnterAnimation, iosLeaveAnimation } from './modal-animations';
 import { Overlay } from './modal.interfaces';
 
 @Injectable()
@@ -51,6 +52,8 @@ export class ModalHelper {
       swipeToClose: config.flavor != 'compact',
       presentingElement: modalPresentingElement,
       keyboardClose: false,
+      enterAnimation: iosEnterAnimation,
+      leaveAnimation: iosLeaveAnimation,
     });
 
     if (config.interactWithBackground) {
