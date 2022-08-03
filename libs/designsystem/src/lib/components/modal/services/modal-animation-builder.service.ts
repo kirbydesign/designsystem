@@ -17,7 +17,7 @@ export class ModalAnimationBuilderService {
   };
 
   public enterAnimation(currentBackdrop?: HTMLIonBackdropElement): AnimationBuilder {
-    return (baseEl?: HTMLElement, opts?: ModalAnimationOptions): Animation => {
+    return (baseEl: HTMLElement, opts: ModalAnimationOptions): Animation => {
       const { presentingEl } = opts;
       const root = this.getElementRoot(baseEl);
       const { wrapperAnimation, backdropAnimation } = this.createEnterAnimation();
