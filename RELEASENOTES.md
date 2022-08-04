@@ -53,40 +53,7 @@ You _should_ test more thoroughly if you have applied your own styling and/or be
 
 #### How desktop ready are Kirby components?
 
-Interaction states are not relevant for all components. See the tables below for the state of _desktop readiness_ for each relevant component before and after the improvements.
-
-##### Before
-
-| Component         | Hover | Active | Focus `TAB` | `ENTER` / `SPACE` |
-| :---------------- | :---: | :----: | :---------: | :---------------: |
-| Accordion         |  🟡   |   🟡   |     ❌      |        ❌         |
-| Action Sheet      |  ❌   |   ❌   |     ✅      |        ✅         |
-| Alert             |  ✅   |   ❌   |     ✅      |        ✅         |
-| Button            |  ✅   |   ❌   |     ✅      |         ?         |
-| Calendar          |   ?   |   ?    |     🟡      |        🟡         |
-| Card              |  🟡   |   ❌   |     ❌      |        ❌         |
-| Chart             |  ✅   |   ✅   |     🟡      |        🟡         |
-| Checkbox          |  ✅   |   ✅   |     ✅      |        ✅         |
-| Chip              |  ✅   |   ❌   |     ❌      |        ❌         |
-| Dropdown          |  ✅   |   🟡   |     ✅      |        ✅         |
-| Fab Sheet         |  ✅   |   ❌   |     ✅      |        ❌         |
-| Form Field        |  ✅   |   ✅   |     ✅      |         ?         |
-| Item - Picker     |  🟡   |   ❌   |     ✅      |        ✅         |
-| Link              |  ❌   |   ❌   |     ✅      |        ✅         |
-| List              |  🟡   |   ❌   |     🟡      |        ✅         |
-| List Swipe        |  ❌   |   ❌   |     ❌      |        ❌         |
-| Modal             |  ✅   |   ❌   |     ✅      |        ✅         |
-| Radio             |  🟡   |   ✅   |     ✅      |        ✅         |
-| Range             |   ?   |   ?    |     ❌      |         ?         |
-| Reorder List      |   ?   |   ✅   |     ❌      |        ❌         |
-| Segmented Control |  ✅   |   ❌   |     ✅      |        ✅         |
-| Slide Button      |   ?   |   ?    |      ?      |         ?         |
-| Slides            |  🟡   |   🟡   |     ❌      |        ❌         |
-| Tabs              |  ❌   |   ❌   |     🟡      |        ✅         |
-| Toggle            |   ?   |   ✅   |     ❌      |        ✅         |
-| Toggle Button     |  ✅   |   ❌   |     ✅      |         ?         |
-
-##### After
+Interaction states are not relevant for all components. The current state of _desktop readiness_ for each relevant component after the improvements is:
 
 | Component         | Hover | Active | Focus `TAB` | `ENTER` / `SPACE` |
 | :---------------- | :---: | :----: | :---------: | :---------------: |
