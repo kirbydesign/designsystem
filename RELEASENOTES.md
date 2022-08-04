@@ -16,7 +16,7 @@ Version 7 is mostly about improving the user experience for other devices than m
   - New _Stock Chart_ component
   - _Highcharts_ dependency removed
   - General refactoring
-- Refactor moving of modal elements to solve multiple issues
+- Refactor moving of modal elements to solve multiple issues (see [https://github.com/kirbydesign/designsystem/pull/2238](https://github.com/kirbydesign/designsystem/pull/2238) for details)
   - Housekeeping: Make getEmbeddedComponentElement independent of markup order
   - Bug: kirby-modal-footer does not render correctly when footer is dynamically added and removed
   - Bug: Title and footer do not render correctly in modal with outlet in some cases
