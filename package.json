@@ -93,7 +93,7 @@
     "@angular/platform-browser-dynamic": "13.3.9",
     "@angular/router": "13.3.9",
     "@fontsource/roboto": "4.2.1",
-    "@ionic/angular": "6.1.11",
+    "@ionic/angular": "6.2.1",
     "@nrwl/angular": "14.1.7",
     "@types/prismjs": "1.9.0",
     "chart.js": "3.3.2",
