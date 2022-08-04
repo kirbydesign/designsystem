@@ -33,6 +33,7 @@ export const kirbyIconSettings: IconSettings = {
     { name: 'inbox', svg: 'assets/kirby/icons/svg/inbox.svg' },
     { name: 'inbox-outline', svg: 'assets/kirby/icons/svg/inbox-outline.svg' },
     { name: 'information', svg: 'assets/kirby/icons/svg/information.svg' },
+    { name: 'insurance', svg: 'assets/kirby/icons/svg/insurance.svg' },
     { name: 'investment', svg: 'assets/kirby/icons/svg/investment.svg' },
     { name: 'kirby', svg: 'assets/kirby/icons/svg/kirby.svg' },
     { name: 'link', svg: 'assets/kirby/icons/svg/link.svg' },
@@ -59,6 +60,11 @@ export const kirbyIconSettings: IconSettings = {
     { name: 'warning', svg: 'assets/kirby/icons/svg/warning.svg' },
     { name: 'write-message', svg: 'assets/kirby/icons/svg/write-message.svg' },
     { name: 'reorder', svg: 'assets/kirby/icons/svg/reorder.svg' },
+    { name: 'accident', svg: 'assets/kirby/icons/svg/accident.svg' },
+    { name: 'health', svg: 'assets/kirby/icons/svg/health.svg' },
+    { name: 'illness', svg: 'assets/kirby/icons/svg/illness.svg' },
+    { name: 'incapacity', svg: 'assets/kirby/icons/svg/incapacity.svg' },
+    { name: 'life', svg: 'assets/kirby/icons/svg/life.svg' },
   ],
 };
 

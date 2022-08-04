@@ -58,6 +58,6 @@ $notification-levels-class-selectors: utils.keys-to-classes($notification-levels
 
   h2 {
     --kirby-internal-card-header-line-height: #{utils.line-height('n')};
-    --kirby-internal-card-header-margin-bottom: 0;
+    --kirby-internal-card-header-margin-bottom: 0px;
   }
 }

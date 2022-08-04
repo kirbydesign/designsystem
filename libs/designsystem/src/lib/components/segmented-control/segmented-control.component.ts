@@ -20,9 +20,14 @@ export enum SegmentedControlMode {
 export class SegmentedControlComponent {
   constructor(private iconRegistryService: IconRegistryService) {}
 
-  preventWrapperClick(event: Event) {
+  /**
+   * Ensure that the click actually did originate from within the segment-button.
+   * We do not want to react to clicks on e.g. segment-btn-wrapper or badge.
+   */
+  preventOutsideClick(event: TouchEvent) {
     if (event.target instanceof HTMLElement) {
-      if (event.target.classList.contains('segment-btn-wrapper')) {
+      const targetIsInSegmentBtn = !!event.target.closest('ion-segment-button');
+      if (!targetIsInSegmentBtn) {
         event.stopImmediatePropagation();
       }
     }
@@ -53,14 +58,6 @@ export class SegmentedControlComponent {
         item.badge.icon !== undefined &&
         this.iconRegistryService.getIcon(item.badge.icon) !== undefined;
     });
-
-    const checkedItemIndex = this.items.findIndex((item) => item.checked);
-    if (checkedItemIndex > -1) {
-      console.warn(
-        'SegmentItem.checked is deprecated - please remove from your `items` configuration. Use `selectedIndex` or `value` on `<kirby-segmented-control>` instead '
-      );
-      this._selectedIndex = checkedItemIndex;
-    }
     this._value = this.items[this.selectedIndex];
   }
 
@@ -90,6 +87,15 @@ export class SegmentedControlComponent {
 
   @Input() set size(size: 'sm' | 'md') {
     this.isSmallSize = size === 'sm';
+  }
+
+  private _disableChangeOnSwipe: boolean = false;
+  get disableChangeOnSwipe(): boolean {
+    return this._disableChangeOnSwipe;
+  }
+
+  @Input() set disableChangeOnSwipe(value: boolean) {
+    this._disableChangeOnSwipe = value;
   }
 
   @Output() segmentSelect: EventEmitter<SegmentItem> = new EventEmitter();

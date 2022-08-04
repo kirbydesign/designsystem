@@ -40,7 +40,7 @@ describe('ItemSlidingComponent', () => {
   });
 
   it('should create', () => {
-    expect(spectator.component).toBeTruthy;
+    expect(spectator.component).toBeTruthy();
   });
 
   it('should project slotted content', () => {

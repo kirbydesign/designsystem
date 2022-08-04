@@ -52,5 +52,12 @@ export class SegmentedControlShowcaseComponent {
       defaultValue: 'undefined',
       type: ['number'],
     },
+    {
+      name: 'disableChangeOnSwipe',
+      description:
+        'Sets the `scrollable` attribute on ion-segment. Note that this will not make the segmented-control scrollable but it will prevent segmentChange from emitting on swipe, when set to true',
+      defaultValue: 'false',
+      type: ['boolean'],
+    },
   ];
 }

@@ -25,7 +25,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router, RouterEvent } from '@angular/router';
-import { IonContent, IonFooter, IonHeader } from '@ionic/angular';
+import { IonBackButtonDelegate, IonContent, IonFooter, IonHeader } from '@ionic/angular';
 import { Observable, Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 
@@ -34,6 +34,11 @@ import { FitHeadingConfig } from '../../directives/fit-heading/fit-heading.direc
 import { WindowRef } from '../../types/window-ref';
 import { ModalWrapperComponent } from '../modal/modal-wrapper/modal-wrapper.component';
 import { ModalNavigationService } from '../modal/services/modal-navigation.service';
+import {
+  ModalElementComponent,
+  ModalElementsAdvertiser,
+  ModalElementType,
+} from '../modal/services/modal.interfaces';
 import { selectedTabClickEvent } from '../tabs/tab-button/tab-button.events';
 import { TabsComponent } from '../tabs/tabs.component';
 
@@ -54,6 +59,11 @@ export interface PullToRefreshEvent {
   selector: '[kirbyPageTitle]',
 })
 export class PageTitleDirective {}
+
+@Directive({
+  selector: '[kirbyPageSubtitle]',
+})
+export class PageSubtitleDirective {}
 
 @Directive({
   selector: '[kirbyPageToolbarTitle]',
@@ -97,12 +107,18 @@ export class PageContentDirective {
   template: ` <ng-content></ng-content> `,
   styles: [':host {display: flex}'],
 })
-export class PageProgressComponent implements OnInit {
+export class PageProgressComponent extends ModalElementComponent implements OnInit {
   // TODO: Find alternative implementation, which aligns with future page configuration / consumption
   // This implementation was chosen over expanding `moveChild` method in component wrapper with yet another scenario
   @HostBinding('attr.slot') slot = 'start';
 
-  constructor(@Optional() @SkipSelf() private modalWrapper: ModalWrapperComponent) {}
+  constructor(
+    @Optional() @SkipSelf() private modalWrapper: ModalWrapperComponent,
+    @Optional() modalElementsAdvertiser: ModalElementsAdvertiser,
+    elementRef: ElementRef<HTMLElement>
+  ) {
+    super(ModalElementType.PAGE_PROGRESS, elementRef, modalElementsAdvertiser);
+  }
 
   ngOnInit(): void {
     if (this.modalWrapper && this.modalWrapper.config.flavor === 'drawer') {
@@ -110,12 +126,18 @@ export class PageProgressComponent implements OnInit {
     }
   }
 }
-
 @Component({
   selector: 'kirby-page-title',
   template: ` <ng-content></ng-content> `,
 })
-export class PageTitleComponent {}
+export class PageTitleComponent extends ModalElementComponent {
+  constructor(
+    elementRef: ElementRef<HTMLElement>,
+    @Optional() modalElementsAdvertiser: ModalElementsAdvertiser
+  ) {
+    super(ModalElementType.TITLE, elementRef, modalElementsAdvertiser);
+  }
+}
 
 @Component({
   selector: 'kirby-page-content',
@@ -139,6 +161,7 @@ export class PageComponent
   implements OnInit, OnDestroy, AfterViewInit, AfterContentChecked, OnChanges
 {
   @Input() title: string;
+  @Input() subtitle: string;
   @Input() toolbarTitle: string;
   @Input() titleAlignment: 'left' | 'center' | 'right' = 'left';
   @Input() defaultBackHref: string;
@@ -161,6 +184,7 @@ export class PageComponent
   @Output() enter = new EventEmitter<void>();
   @Output() leave = new EventEmitter<void>();
   @Output() refresh = new EventEmitter<PullToRefreshEvent>();
+  @Output() backButtonClick = new EventEmitter<Event>();
 
   @ViewChild(IonContent, { static: true }) private content: IonContent;
   @ViewChild(IonContent, { static: true, read: ElementRef })
@@ -170,6 +194,8 @@ export class PageComponent
   @ViewChild(IonFooter, { static: true, read: ElementRef })
   private ionFooterElement: ElementRef<HTMLIonFooterElement>;
 
+  @ViewChild(IonBackButtonDelegate, { static: false })
+  private backButtonDelegate: IonBackButtonDelegate;
   @ViewChild('pageTitle', { static: false, read: ElementRef })
   private pageTitle: ElementRef;
 
@@ -181,12 +207,15 @@ export class PageComponent
   private customToolbarTitleTemplate: TemplateRef<any>;
   @ContentChild(PageTitleDirective, { static: false, read: TemplateRef })
   customTitleTemplate: TemplateRef<any>;
+  @ContentChild(PageSubtitleDirective, { static: false, read: TemplateRef })
+  customSubtitleTemplate: TemplateRef<any>;
   @ContentChildren(PageActionsDirective)
   customActions: QueryList<PageActionsDirective>;
   @ContentChildren(PageContentDirective)
   private customContent: QueryList<PageContentDirective>;
 
   hasPageTitle: boolean;
+  hasPageSubtitle: boolean;
   hasActionsInPage: boolean;
   toolbarTitleVisible: boolean;
   toolbarFixedActionsVisible: boolean;
@@ -237,6 +266,10 @@ export class PageComponent
         maxLines: changes.titleMaxLines.currentValue,
       };
     }
+    if (changes.subtitle && !changes.subtitle.isFirstChange) {
+      this.subtitle = changes.title.currentValue;
+      this.hasPageSubtitle = this.subtitle !== undefined;
+    }
   }
 
   ngAfterViewInit(): void {
@@ -259,6 +292,8 @@ export class PageComponent
     this.windowRef.nativeWindow.addEventListener(selectedTabClickEvent, () => {
       this.content.scrollToTop(KirbyAnimation.Duration.LONG);
     });
+
+    this.interceptBackButtonClicksSetup();
   }
 
   ngAfterContentChecked(): void {
@@ -311,12 +346,24 @@ export class PageComponent
     }
   }
 
+  private interceptBackButtonClicksSetup() {
+    // Intercept back-button click events, defaulting to the built-in click-handler.
+    if (this.backButtonClick.observers.length === 0) {
+      this.backButtonClick
+        .pipe(takeUntil(this.ngOnDestroy$))
+        .subscribe(this.backButtonDelegate.onClick.bind(this.backButtonDelegate));
+    }
+    this.backButtonDelegate.onClick = (event: Event) => {
+      this.backButtonClick.emit(event);
+    };
+  }
+
   private initializeTitle() {
     // Ensures initializeTitle() won't run, if already initialized
     if (this.hasPageTitle) return;
-
     this.hasPageTitle = this.title !== undefined || !!this.customTitleTemplate;
     this.toolbarTitleVisible = !this.hasPageTitle;
+    this.hasPageSubtitle = this.subtitle !== undefined || !!this.customSubtitleTemplate;
 
     if (this.hasPageTitle) {
       setTimeout(() => {

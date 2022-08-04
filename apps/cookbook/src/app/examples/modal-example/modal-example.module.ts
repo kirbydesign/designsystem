@@ -30,11 +30,5 @@ const COMPONENT_DECLARATIONS = [
   imports: [CommonModule, RouterModule, KirbyModule, ExamplesSharedModule],
   declarations: COMPONENT_DECLARATIONS,
   exports: COMPONENT_DECLARATIONS,
-  entryComponents: [
-    EmbeddedModalExampleComponent,
-    ModalCompactExampleComponent,
-    ModalRoutePage1ExampleComponent,
-    ModalRoutePage2ExampleComponent,
-  ],
 })
 export class ModalExampleModule {}

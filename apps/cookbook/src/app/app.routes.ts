@@ -28,15 +28,6 @@ export const routes: Routes = [
         loadChildren: () => import('./showcase/showcase.module').then((m) => m.ShowcaseModule),
       },
       {
-        path: 'component-status',
-        loadChildren: () =>
-          import('./component-status/component-status.module').then((m) => m.ComponentStatusModule),
-      },
-      {
-        path: 'changelog',
-        loadChildren: () => import('./changelog/changelog.module').then((m) => m.ChangelogModule),
-      },
-      {
         path: 'guides',
         loadChildren: () => import('./guides/guides.module').then((m) => m.GuideModule),
       },

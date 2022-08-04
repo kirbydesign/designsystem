@@ -1,4 +1,11 @@
-import { Component, ElementRef, HostBinding, Input, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  HostBinding,
+  Input,
+  ViewChild,
+} from '@angular/core';
 import { IonRadio } from '@ionic/angular';
 
 import { UniqueIdGenerator } from '../../helpers/unique-id-generator.helper';
@@ -7,6 +14,7 @@ import { UniqueIdGenerator } from '../../helpers/unique-id-generator.helper';
   selector: 'kirby-radio',
   templateUrl: './radio.component.html',
   styleUrls: ['./radio.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RadioComponent {
   @Input()

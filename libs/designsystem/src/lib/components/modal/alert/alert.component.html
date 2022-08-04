@@ -8,22 +8,22 @@
   <div class="buttongroup">
     <button
       kirby-button
-      *ngIf="cancelBtnText"
+      *ngIf="cancelBtn"
       attentionLevel="3"
       class="cancel-btn"
       (click)="onCancel()"
     >
-      {{ cancelBtnText }}
+      {{ cancelBtn }}
     </button>
     <button
       kirby-button
-      [size]="cancelBtnText ? null : 'lg'"
+      [size]="cancelBtn ? null : 'lg'"
       attentionLevel="1"
       class="ok-btn"
       [isDestructive]="okBtnIsDestructive"
       (click)="onOk()"
     >
-      {{ okBtnText }}
+      {{ okBtn }}
     </button>
   </div>
 </article>

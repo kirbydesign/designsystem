@@ -1,5 +1,4 @@
 import {
-  AfterContentChecked,
   AfterViewInit,
   ChangeDetectorRef,
   Component,
@@ -43,12 +42,9 @@ import { KeyboardHandlerService } from './keyboard-handler.service';
     },
   ],
 })
-export class DropdownComponent
-  implements AfterContentChecked, AfterViewInit, OnDestroy, ControlValueAccessor
-{
+export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValueAccessor {
   static readonly OPEN_DELAY_IN_MS = 100;
   private state = OpenState.closed;
-  private hasConfiguredSlottedItems = false;
   private horizontalDirection: HorizontalDirection | `${HorizontalDirection}` =
     HorizontalDirection.right;
   private verticalDirection: VerticalDirection | `${VerticalDirection}` = VerticalDirection.down;
@@ -183,8 +179,31 @@ export class DropdownComponent
   buttonElement: ElementRef<HTMLElement>;
   @ViewChildren(ItemComponent, { read: ElementRef })
   kirbyItemsDefault: QueryList<ElementRef<HTMLElement>>;
+
+  _kirbyItemsSlotted: QueryList<ElementRef<HTMLElement>>;
   @ContentChildren(ItemComponent, { read: ElementRef })
-  kirbyItemsSlotted: QueryList<ElementRef<HTMLElement>>;
+  set kirbyItemsSlotted(kirbyItems: QueryList<ElementRef<HTMLElement>>) {
+    const hasSlottedItems = this.itemClickUnlisten?.length > 0;
+    if (hasSlottedItems) {
+      this.unlistenAllSlottedItems();
+    }
+
+    // Setup a click listener for each new slotted items
+    kirbyItems.forEach((kirbyItem, index) => {
+      this.renderer.setAttribute(kirbyItem.nativeElement, 'role', 'option');
+      const unlisten = this.renderer.listen(kirbyItem.nativeElement, 'click', () => {
+        this.onItemSelect(index);
+      });
+
+      this.itemClickUnlisten.push(unlisten);
+    });
+
+    this._kirbyItemsSlotted = kirbyItems;
+  }
+
+  get kirbyItemsSlotted(): QueryList<ElementRef<HTMLElement>> {
+    return this._kirbyItemsSlotted;
+  }
 
   private itemClickUnlisten: (() => void)[] = [];
   private intersectionObserverRef: IntersectionObserver;
@@ -217,20 +236,7 @@ export class DropdownComponent
     event.preventDefault();
   }
 
-  ngAfterContentChecked() {
-    if (!this.hasConfiguredSlottedItems && this.kirbyItemsSlotted.length) {
-      this.kirbyItemsSlotted.forEach((kirbyItem, index) => {
-        this.renderer.setAttribute(kirbyItem.nativeElement, 'role', 'option');
-        const unlisten = this.renderer.listen(kirbyItem.nativeElement, 'click', () => {
-          this.onItemSelect(index);
-        });
-        this.itemClickUnlisten.push(unlisten);
-      });
-      this.hasConfiguredSlottedItems = true;
-    }
-  }
-
-  /* Utility that makes it easier to set styles on card element 
+  /* Utility that makes it easier to set styles on card element
   when using popover*/
   private setPopoverCardStyle(style: string, value: string) {
     if (!this.usePopover) return;
@@ -457,6 +463,13 @@ export class DropdownComponent
     }
   }
 
+  @HostListener('touchstart', ['$event'])
+  _onTouchStart(event: TouchEvent) {
+    if (this.isOpen) {
+      event.stopPropagation();
+    }
+  }
+
   @HostListener('focus')
   _onFocus() {
     if (this.disabled) {
@@ -471,14 +484,19 @@ export class DropdownComponent
 
   @HostListener('keydown.enter')
   @HostListener('keydown.escape')
+  _onEnterOrEscape() {
+    this.close();
+    this._onTouched();
+  }
+
+  _onPopoverClick(event: PointerEvent) {
+    this.close();
+  }
+
   @HostListener('blur', ['$event'])
   _onBlur(event?: FocusEvent) {
-    if (this.disabled) return;
-    if (this.isOpen) {
-      if (!this.cardElement.nativeElement.contains(event?.relatedTarget as HTMLElement)) {
-        this.close();
-      }
-    }
+    if (this.usePopover) return;
+    this.close();
     this._onTouched();
   }
 
@@ -526,11 +544,15 @@ export class DropdownComponent
     return false;
   }
 
-  ngOnDestroy(): void {
-    let unlisten: () => void;
-    while ((unlisten = this.itemClickUnlisten.pop()) !== undefined) {
-      unlisten();
+  private unlistenAllSlottedItems() {
+    let unlistenItem: () => void;
+    while ((unlistenItem = this.itemClickUnlisten.pop()) !== undefined) {
+      unlistenItem();
     }
+  }
+
+  ngOnDestroy(): void {
+    this.unlistenAllSlottedItems();
     if (this.intersectionObserverRef) {
       this.intersectionObserverRef.disconnect();
     }
