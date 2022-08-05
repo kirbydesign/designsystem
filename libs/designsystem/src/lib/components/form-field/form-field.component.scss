@@ -48,11 +48,13 @@ label {
 }
 
 .input-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background-color: utils.get-color('white');
   color: utils.get-color('white-contrast');
   border: none;
   box-sizing: border-box;
-  display: block;
   font-family: $form-field-input-font-family;
 
   // `font-size` should be declared in `em` units but to simplify the solution
@@ -65,13 +67,56 @@ label {
   appearance: none;
   border-radius: utils.size('s');
   box-shadow: utils.get-elevation(2);
-  padding: $form-field-input-padding;
+  padding: 0 $form-field-input-padding;
   width: 100%;
 
   &:disabled {
     background-color: utils.get-color('light-tint');
     color: utils.get-text-color('semi-dark');
     box-shadow: none;
+  }
+
+  .prefix,
+  .suffix {
+    color: utils.get-text-color('semi-dark');
+    font-size: utils.font-size('s');
+    font-weight: utils.font-weight('light');
+    display: flex;
+    justify-content: center;
+  }
+
+  /* stylelint-disable-next-line selector-pseudo-element-no-unknown */
+  .prefix > ::ng-deep * {
+    padding-right: $form-field-input-padding * 0.5;
+  }
+
+  /* stylelint-disable-next-line selector-pseudo-element-no-unknown */
+  .suffix > ::ng-deep * {
+    padding-left: $form-field-input-padding * 0.5;
+  }
+
+  /* stylelint-disable-next-line selector-pseudo-element-no-unknown */
+  ::ng-deep {
+    input[kirby-input],
+    textarea {
+      border: none;
+      width: 100%;
+      flex-grow: 2;
+      box-shadow: none;
+      height: 100%;
+      appearance: none;
+      padding: $form-field-input-padding;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    input[kirby-input] {
+      &:focus {
+        outline: none;
+        border: none;
+        box-shadow: none;
+      }
+    }
   }
 
   &::placeholder {

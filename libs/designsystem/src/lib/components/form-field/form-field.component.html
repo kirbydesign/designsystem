@@ -21,12 +21,16 @@
 </div>
 
 <ng-template #slottedInputTemplate>
-  <div style="display: flex; align-items: center" class="input-wrapper">
-    <ng-content select="[start]"></ng-content>
+  <div class="input-wrapper">
+    <div class="prefix" #prefix>
+      <ng-content select="[prefix]"></ng-content>
+    </div>
     <ng-content select="input[kirby-input]"></ng-content>
     <ng-content select="textarea[kirby-textarea]"></ng-content>
     <ng-content select="kirby-radio-group"></ng-content>
-    <ng-content select="[end]"></ng-content>
+    <div class="suffix" #suffix>
+      <ng-content select="[suffix]"></ng-content>
+    </div>
   </div>
 </ng-template>
 
