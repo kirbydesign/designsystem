@@ -11,7 +11,7 @@ const config = {
     </kirby-form-field>
 
     <kirby-form-field label="With suffix">
-      <input kirby-input kirby-decimal-mask type="number" placeholder="Monthly payments" [size]="size" />
+      <input kirby-input kirby-decimal-mask [size]="size" type="number" placeholder="Monthly payments" [size]="size" />
       <span suffix>$/m</span>
     </kirby-form-field>
     

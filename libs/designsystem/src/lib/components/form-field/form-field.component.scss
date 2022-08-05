@@ -1,9 +1,11 @@
 @use '~@kirbydesign/core/src/scss/utils';
+@use './form-field-inputs.shared' as shared;
 
 $form-field-input-font-family: var(--kirby-font-family);
 $form-field-input-line-height: 1.5;
 $form-field-input-padding: 1em;
 $form-field-label-height: 24px;
+$padding-block-size-md: shared.$form-field-input-padding * 0.5;
 
 :host {
   display: block;
@@ -76,9 +78,19 @@ label {
     box-shadow: none;
   }
 
+  &.md {
+    border-radius: utils.size('m');
+    padding-block: $padding-block-size-md;
+  }
+
+  &::placeholder,
   .prefix,
   .suffix {
     color: utils.get-text-color('semi-dark');
+  }
+
+  .prefix,
+  .suffix {
     font-size: utils.font-size('s');
     font-weight: utils.font-weight('light');
     display: flex;
@@ -117,9 +129,5 @@ label {
         box-shadow: none;
       }
     }
-  }
-
-  &::placeholder {
-    color: utils.get-text-color('semi-dark');
   }
 }

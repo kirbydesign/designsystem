@@ -21,7 +21,7 @@
 </div>
 
 <ng-template #slottedInputTemplate>
-  <div class="input-wrapper">
+  <div class="input-wrapper" [ngClass]="inputElementSize()">
     <div class="prefix" #prefix>
       <ng-content select="[prefix]"></ng-content>
     </div>
