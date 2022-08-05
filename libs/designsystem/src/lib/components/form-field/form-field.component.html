@@ -21,9 +21,13 @@
 </div>
 
 <ng-template #slottedInputTemplate>
-  <ng-content select="input[kirby-input]"></ng-content>
-  <ng-content select="textarea[kirby-textarea]"></ng-content>
-  <ng-content select="kirby-radio-group"></ng-content>
+  <div style="display: flex; align-items: center" class="input-wrapper">
+    <ng-content select="[start]"></ng-content>
+    <ng-content select="input[kirby-input]"></ng-content>
+    <ng-content select="textarea[kirby-textarea]"></ng-content>
+    <ng-content select="kirby-radio-group"></ng-content>
+    <ng-content select="[end]"></ng-content>
+  </div>
 </ng-template>
 
 <ng-template #labelTextTemplate>
