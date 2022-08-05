@@ -15,7 +15,6 @@ import { CalendarShowcaseComponent } from './calendar-showcase/calendar-showcase
 import { CardShowcaseComponent } from './card-showcase/card-showcase.component';
 import { ChartShowcaseComponent } from './chart-showcase/chart-showcase.component';
 import { CheckboxShowcaseComponent } from './checkbox-showcase/checkbox-showcase.component';
-import { ChipShowcaseComponent } from './chip-showcase/chip-showcase.component';
 import { ColorsShowcaseComponent } from './colors-showcase/colors-showcase.component';
 import { DividerShowcaseComponent } from './divider-showcase/divider-showcase.component';
 import { DropdownShowcaseComponent } from './dropdown-showcase/dropdown-showcase.component';
@@ -89,10 +88,6 @@ export const routes: Routes = [
       {
         path: 'slide-button',
         component: SlideButtonShowcaseComponent,
-      },
-      {
-        path: 'chip',
-        component: ChipShowcaseComponent,
       },
       {
         path: 'divider',

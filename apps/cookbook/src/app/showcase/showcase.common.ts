@@ -17,7 +17,6 @@ import { CalendarShowcaseComponent } from './calendar-showcase/calendar-showcase
 import { CardShowcaseComponent } from './card-showcase/card-showcase.component';
 import { ChartShowcaseComponent } from './chart-showcase/chart-showcase.component';
 import { CheckboxShowcaseComponent } from './checkbox-showcase/checkbox-showcase.component';
-import { ChipShowcaseComponent } from './chip-showcase/chip-showcase.component';
 import { ColorsShowcaseComponent } from './colors-showcase/colors-showcase.component';
 import { EmptyStateShowcaseComponent } from './empty-state-showcase/empty-state-showcase.component';
 import { FabSheetShowcaseComponent } from './fab-sheet-showcase/fab-sheet-showcase.component';
@@ -74,7 +73,6 @@ export const COMPONENT_EXPORTS: any[] = [
   SpinnerShowcaseComponent,
   ModalShowcaseComponent,
   SegmentedControlShowcaseComponent,
-  ChipShowcaseComponent,
   BadgeShowcaseComponent,
   IconShowcaseComponent,
   CalendarShowcaseComponent,
