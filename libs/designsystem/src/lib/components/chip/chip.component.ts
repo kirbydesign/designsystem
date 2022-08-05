@@ -9,7 +9,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular
 export class ChipComponent {
   constructor() {
     console.warn(
-      'DEPRECATION WARNING: `<kirby-chip>` will be removed from the API in an upcoming major version of Kirby.'
+      'DEPRECATION WARNING: `<kirby-chip>` will be removed from the API in Kirby v8. Use the Kirby button component instead.'
     );
   }
 
