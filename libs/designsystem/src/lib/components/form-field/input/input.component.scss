@@ -15,11 +15,12 @@ $padding-block-size-md: shared.$form-field-input-padding * 0.5;
     appearance: none;
     margin: 0;
   }
+
+  padding: shared.$form-field-input-padding 0;
 }
 
 :host(.md) {
-  border-radius: utils.size('m');
-  padding-block: $padding-block-size-md;
+  padding: $padding-block-size-md 0;
 }
 
 /* clean-css ignore:start */
@@ -36,6 +37,7 @@ $padding-block-size-md: shared.$form-field-input-padding * 0.5;
  */
 .date-mask-wrapper {
   position: relative;
+  width: 100%;
 }
 
 :host-context(.date-mask-wrapper) {
@@ -49,9 +51,9 @@ $padding-block-size-md: shared.$form-field-input-padding * 0.5;
   position: absolute;
   top: 0;
   left: 0;
-  padding: shared.$form-field-input-padding;
+  padding: shared.$form-field-input-padding 0;
 
   :host(.md) + & {
-    padding-block: $padding-block-size-md;
+    padding: $padding-block-size-md 0;
   }
 }

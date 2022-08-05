@@ -5,6 +5,7 @@ import {
   Component,
   ContentChild,
   ElementRef,
+  HostBinding,
   HostListener,
   Input,
   OnDestroy,
@@ -30,7 +31,7 @@ import { TextareaComponent } from './textarea/textarea.component';
 export class FormFieldComponent
   implements AfterContentChecked, AfterContentInit, OnInit, OnDestroy
 {
-  #inputElementSize: 'lg' | 'md' = 'lg';
+  @HostBinding('class') inputElementSize: 'lg' | 'md' = 'lg';
   private isRegistered = false;
   private element: HTMLElement;
   private inputElement: HTMLInputElement | HTMLTextAreaElement;
@@ -80,11 +81,6 @@ export class FormFieldComponent
   onLabelClick() {
     this.radioGroupComponent && this.radioGroupComponent.focus();
   }
-  public inputElementSize(): 'lg' | 'md' {
-    if (!this.inputElement) return 'lg';
-    console.log(this.inputElement);
-    return this.inputElement.classList.contains('md') ? 'md' : 'lg';
-  }
   public focus() {
     if (!this.inputElement) return;
 
@@ -132,7 +128,7 @@ export class FormFieldComponent
       this.dispatchLoadEvent();
     }
     if (this.inputElement) {
-      this.#inputElementSize = this.inputElement.classList.contains('md') ? 'md' : 'lg';
+      this.inputElementSize = this.inputElement.classList.contains('md') ? 'md' : 'lg';
     }
   }
 
