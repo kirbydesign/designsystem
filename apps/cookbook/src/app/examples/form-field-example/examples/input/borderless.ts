@@ -5,9 +5,7 @@ import { InputSize } from '@kirbydesign/designsystem';
 const config = {
   selector: 'cookbook-form-field-input-borderless-example',
   template: `<kirby-form-field label="Input field with no borders and initial width">
-  <kirby-icon name="kirby" start></kirby-icon>
   <input kirby-input [size]="size" borderless="true" />
-  <span end>dkk</span>
 </kirby-form-field>`,
 };
 
