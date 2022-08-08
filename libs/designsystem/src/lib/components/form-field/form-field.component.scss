@@ -11,6 +11,10 @@ $padding-block-size-md: shared.$form-field-input-padding * 0.5;
   display: block;
   position: relative; // Ensures correct position of cloned child input when Ionic scrollAssist is enabled
   margin-bottom: utils.size('s');
+
+  &.md .input-wrapper {
+    border-radius: utils.size('m');
+  }
 }
 
 :host-context(kirby-item) {
@@ -85,11 +89,6 @@ label {
     box-shadow: none;
   }
 
-  &.md {
-    background-color: red;
-    border-radius: utils.size('m');
-  }
-
   &::placeholder,
   .prefix,
   .suffix {
@@ -122,10 +121,12 @@ label {
       width: 100%;
       flex-grow: 2;
       box-shadow: none;
-      height: 100%;
       appearance: none;
       padding-left: 0;
       padding-right: 0;
+      font-size: 1rem;
+      font-family: $form-field-input-font-family;
+      line-height: $form-field-input-line-height;
     }
 
     input[kirby-input] {
