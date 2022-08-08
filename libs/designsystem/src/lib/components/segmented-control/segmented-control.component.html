@@ -3,7 +3,7 @@
   [value]="value?.id"
   [scrollable]="disableChangeOnSwipe"
   (ionChange)="onSegmentSelect($event.detail.value)"
-  (click)="preventWrapperClick($event)"
+  (click)="preventOutsideClick($event)"
 >
   <ng-container *ngFor="let item of items">
     <ion-segment-button [value]="item.id">{{ item.text }} </ion-segment-button>
