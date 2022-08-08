@@ -32,6 +32,7 @@ export class FormFieldComponent
   implements AfterContentChecked, AfterContentInit, OnInit, OnDestroy
 {
   @HostBinding('class') inputElementSize: 'lg' | 'md' = 'lg';
+  @HostBinding('class.disabled') inputElementDisabled = false;
   private isRegistered = false;
   private element: HTMLElement;
   private inputElement: HTMLInputElement | HTMLTextAreaElement;
@@ -130,6 +131,7 @@ export class FormFieldComponent
     if (this.inputElement) {
       setTimeout(() => {
         this.inputElementSize = this.inputElement.classList.contains('md') ? 'md' : 'lg';
+        this.inputElementDisabled = this.inputElement.disabled;
       }, 0);
     }
   }

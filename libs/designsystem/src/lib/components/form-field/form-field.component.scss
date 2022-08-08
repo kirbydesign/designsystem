@@ -15,6 +15,12 @@ $padding-block-size-md: shared.$form-field-input-padding * 0.5;
   &.md .input-wrapper {
     border-radius: utils.size('m');
   }
+
+  &.disabled .input-wrapper {
+    background-color: utils.get-color('light-tint');
+    color: utils.get-text-color('semi-dark');
+    box-shadow: none;
+  }
 }
 
 :host-context(kirby-item) {
@@ -82,12 +88,6 @@ label {
   box-shadow: utils.get-elevation(2);
   padding: 0 $form-field-input-padding;
   width: 100%;
-
-  &:disabled {
-    background-color: utils.get-color('light-tint');
-    color: utils.get-text-color('semi-dark');
-    box-shadow: none;
-  }
 
   &::placeholder,
   .prefix,
