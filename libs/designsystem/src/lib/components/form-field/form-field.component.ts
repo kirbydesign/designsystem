@@ -128,7 +128,9 @@ export class FormFieldComponent
       this.dispatchLoadEvent();
     }
     if (this.inputElement) {
-      this.inputElementSize = this.inputElement.classList.contains('md') ? 'md' : 'lg';
+      setTimeout(() => {
+        this.inputElementSize = this.inputElement.classList.contains('md') ? 'md' : 'lg';
+      }, 0);
     }
   }
 
