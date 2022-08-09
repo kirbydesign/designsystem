@@ -1,5 +1,6 @@
+import { fakeAsync, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
+import { createHostFactory, Spectator, SpectatorHost } from '@ngneat/spectator';
 import { MockComponents, MockDirective } from 'ng-mocks';
 
 import { DesignTokenHelper } from '@kirbydesign/core';
@@ -17,7 +18,6 @@ const fatFingerSize = DesignTokenHelper.fatFingerSize;
 
 describe('SegmentedControlComponent', () => {
   let component: SegmentedControlComponent;
-  let onSegmentSelectSpy: jasmine.Spy;
   let items: SegmentItem[] = [
     {
       text: 'First item',
@@ -59,7 +59,6 @@ describe('SegmentedControlComponent', () => {
       }
     );
     component = spectator.component;
-    onSegmentSelectSpy = spyOn(component.segmentSelect, 'emit');
   });
 
   it('should create', () => {
@@ -114,6 +113,7 @@ describe('SegmentedControlComponent', () => {
 
     describe('when updating items', () => {
       it('should not emit segmentSelect event', async () => {
+        const onSegmentSelectSpy = spyOn(component.segmentSelect, 'emit');
         const ionSegmentElement = spectator.queryHost<HTMLIonSegmentElement>('ion-segment');
         await TestHelper.whenReady(ionSegmentElement);
 
@@ -164,6 +164,32 @@ describe('SegmentedControlComponent', () => {
 
         expect(component.value).toBe(items[2]);
       });
+
+      it('should set the correct value when changing the selected-index', () => {
+        spectator.setInput('selectedIndex', 2);
+
+        expect(component.value).toBe(items[2]);
+      });
+
+      it('should invoke the selected-index-change when changing the selected-index', () => {
+        const subscriber = jasmine.createSpy('subcriber');
+        spectator.output('selectedIndexChange').subscribe(subscriber);
+
+        spectator.setInput('selectedIndex', 2);
+
+        expect(subscriber).toHaveBeenCalledTimes(1);
+      });
+
+      it('should set the correct value when changing the selected-index in segment-select call-back', fakeAsync(() => {
+        spectator
+          .output('segmentSelect')
+          .subscribe((value) => spectator.setInput('selectedIndex', 2));
+
+        spectator.dispatchMouseEvent('kirby-chip:first-of-type', 'click');
+        tick();
+
+        expect(component.value).toBe(items[2]);
+      }));
     });
   });
 });

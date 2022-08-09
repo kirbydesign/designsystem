@@ -48,8 +48,8 @@ export class SegmentedControlShowcaseComponent {
     {
       name: 'selectedIndex',
       description:
-        'Gets/sets the index of the selected segment within the `segmentItems` array. The value -1 indicates no element is selected.',
-      defaultValue: 'undefined',
+        'The index of the segment selected within the provided `Items` array. The value -1 means no element selected. Define this parameter as two-way-binding when used for controlling the selection',
+      defaultValue: '-1',
       type: ['number'],
     },
     {
