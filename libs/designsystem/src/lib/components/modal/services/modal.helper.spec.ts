@@ -131,6 +131,10 @@ describe('ModalHelper', () => {
     ionModalController = spectator.inject(IonicModalController);
   });
 
+  afterEach(async () => {
+    await overlay.dismiss();
+  });
+
   const openOverlay = async (config: ModalConfig) => {
     overlay = await modalHelper.showModalWindow(config);
     ionModal = await ionModalController.getTop();
@@ -152,10 +156,6 @@ describe('ModalHelper', () => {
   describe('showModalWindow', () => {
     const allow_scroll_class = 'allow-background-scroll';
 
-    afterEach(async () => {
-      overlay.dismiss();
-    });
-
     it('modal window should not take focus from embedded input after opening', async () => {
       await openModal(InputEmbeddedComponent);
       const ionContent = ionModal.querySelector<HTMLElement>('ion-content');
@@ -176,7 +176,6 @@ describe('ModalHelper', () => {
         expect(window.document.body).toHaveComputedStyle({
           overflow: 'visible',
         });
-        await overlay.dismiss();
       });
 
       it(`should remove '${allow_scroll_class}'`, async () => {
@@ -196,10 +195,6 @@ describe('ModalHelper', () => {
     describe('size', () => {
       beforeEach(() => {
         TestHelper.scrollMainWindowToTop();
-      });
-
-      afterEach(async () => {
-        await overlay.dismiss();
       });
 
       const expectSize = (size: ModalSize | undefined) => {
@@ -294,10 +289,6 @@ describe('ModalHelper', () => {
     });
 
     describe(`padding top`, () => {
-      afterEach(async () => {
-        await overlay.dismiss();
-      });
-
       it('should have correct value for modal flavor (default)', async () => {
         await openModal();
 
@@ -332,10 +323,6 @@ describe('ModalHelper', () => {
         ionToolbarElement = ionModal.querySelector('ion-toolbar');
         pageTitleElement = ionToolbarElement.querySelector('kirby-page-title');
         pageTitleVerticalCenter = getElementVerticalCenter(pageTitleElement);
-      });
-
-      afterEach(async () => {
-        await overlay.dismiss();
       });
 
       it('should align vertically with close button', () => {
@@ -391,10 +378,6 @@ describe('ModalHelper', () => {
 
     afterAll(() => {
       TestHelper.resetTestWindow();
-    });
-
-    afterEach(async () => {
-      await overlay.dismiss();
     });
 
     describe('when iOS safe-area is present', () => {
