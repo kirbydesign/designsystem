@@ -128,14 +128,17 @@ export class FormFieldComponent
       this.isRegistered = true;
       this.dispatchLoadEvent();
     }
+
     if (this.inputElement) {
       setTimeout(() => {
         const sizeClass = this.inputElement.classList.contains('md') ? 'md' : 'lg';
         if (sizeClass !== this.inputElementSize) {
           this.inputElementSize = sizeClass;
         }
-        this.inputElementDisabled = this.inputElement.disabled;
-      }, 0);
+        if (this.inputElementDisabled !== this.inputElement.disabled) {
+          this.inputElementDisabled = this.inputElement.disabled;
+        }
+      }, 1);
     }
   }
 
