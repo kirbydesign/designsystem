@@ -26,6 +26,16 @@ export class ModalHelper {
     config.flavor = config.flavor || 'modal';
     const modalPresentingElement = await this.getPresentingElement(config.flavor);
 
+    let currentBackdrop: HTMLIonBackdropElement;
+    const topMostModal = await this.ionicModalController.getTop();
+    if (topMostModal) {
+      currentBackdrop =
+        topMostModal.shadowRoot.querySelector<HTMLIonBackdropElement>('ion-backdrop');
+    }
+
+    const enterAnimation = this.modalAnimationBuilder.enterAnimation(currentBackdrop);
+    const leaveAnimation = this.modalAnimationBuilder.leaveAnimation(currentBackdrop);
+
     const defaultModalSize: ModalSize = config.flavor === 'modal' ? 'medium' : null;
     const modalSize = config.size || defaultModalSize;
     const allow_scroll_class = 'allow-background-scroll';
@@ -38,16 +48,6 @@ export class ModalHelper {
     if (config.interactWithBackground) {
       this.windowRef.nativeWindow.document.body.classList.add(allow_scroll_class);
     }
-
-    let currentBackdrop: HTMLIonBackdropElement;
-    const topMostModal = await this.ionicModalController.getTop();
-    if (topMostModal) {
-      currentBackdrop =
-        topMostModal.shadowRoot.querySelector<HTMLIonBackdropElement>('ion-backdrop');
-    }
-
-    const enterAnimation = this.modalAnimationBuilder.enterAnimation(currentBackdrop);
-    const leaveAnimation = this.modalAnimationBuilder.leaveAnimation(currentBackdrop);
 
     const ionModal = await this.ionicModalController.create({
       component: config.flavor === 'compact' ? ModalCompactWrapperComponent : ModalWrapperComponent,
@@ -66,8 +66,8 @@ export class ModalHelper {
       swipeToClose: config.flavor != 'compact',
       presentingElement: modalPresentingElement,
       keyboardClose: false,
-      enterAnimation: enterAnimation,
-      leaveAnimation: leaveAnimation,
+      enterAnimation,
+      leaveAnimation,
     });
 
     if (config.interactWithBackground) {
