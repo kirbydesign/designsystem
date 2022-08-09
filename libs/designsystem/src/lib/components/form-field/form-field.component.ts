@@ -130,7 +130,10 @@ export class FormFieldComponent
     }
     if (this.inputElement) {
       setTimeout(() => {
-        this.inputElementSize = this.inputElement.classList.contains('md') ? 'md' : 'lg';
+        const sizeClass = this.inputElement.classList.contains('md') ? 'md' : 'lg';
+        if (sizeClass !== this.inputElementSize) {
+          this.inputElementSize = sizeClass;
+        }
         this.inputElementDisabled = this.inputElement.disabled;
       }, 0);
     }

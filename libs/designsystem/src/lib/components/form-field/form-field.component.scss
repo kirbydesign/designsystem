@@ -129,7 +129,8 @@ label {
       line-height: $form-field-input-line-height;
     }
 
-    input[kirby-input] {
+    input[kirby-input],
+    textarea[kirby-textarea] {
       &:focus {
         outline: none;
         border: none;
