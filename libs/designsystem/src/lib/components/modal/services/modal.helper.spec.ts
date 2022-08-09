@@ -152,6 +152,10 @@ describe('ModalHelper', () => {
   describe('showModalWindow', () => {
     const allow_scroll_class = 'allow-background-scroll';
 
+    afterEach(async () => {
+      overlay.dismiss();
+    });
+
     it('modal window should not take focus from embedded input after opening', async () => {
       await openModal(InputEmbeddedComponent);
       const ionContent = ionModal.querySelector<HTMLElement>('ion-content');
@@ -389,6 +393,10 @@ describe('ModalHelper', () => {
       TestHelper.resetTestWindow();
     });
 
+    afterEach(async () => {
+      await overlay.dismiss();
+    });
+
     describe('when iOS safe-area is present', () => {
       const safeAreaTop = '20px';
 
@@ -397,7 +405,6 @@ describe('ModalHelper', () => {
       });
 
       afterAll(async () => {
-        await overlay.dismiss();
         window.document.documentElement.style.removeProperty('--ion-safe-area-top');
       });
 
