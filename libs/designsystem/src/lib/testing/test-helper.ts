@@ -147,7 +147,7 @@ export class TestHelper {
   }
 
   public static waitForResizeObserver(): Promise<void> {
-    return TestHelper.waitForTimeout();
+    return TestHelper.waitForTimeout(1);
   }
 
   public static waitForTimeout(timeoutInMs?: number): Promise<void> {
