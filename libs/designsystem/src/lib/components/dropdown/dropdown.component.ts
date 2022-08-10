@@ -236,7 +236,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     event.preventDefault();
   }
 
-  /* Utility that makes it easier to set styles on card element 
+  /* Utility that makes it easier to set styles on card element
   when using popover*/
   private setPopoverCardStyle(style: string, value: string) {
     if (!this.usePopover) return;
@@ -460,6 +460,13 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     if (this.disabled) {
       event.preventDefault();
       event.stopImmediatePropagation();
+    }
+  }
+
+  @HostListener('touchstart', ['$event'])
+  _onTouchStart(event: TouchEvent) {
+    if (this.isOpen) {
+      event.stopPropagation();
     }
   }
 
