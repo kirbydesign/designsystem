@@ -4,12 +4,7 @@
   (click)="hideActions(fab)"
 ></ion-backdrop>
 <ion-fab #fab (click)="disabled || onFabClick(fab)">
-  <ion-fab-button
-    [disabled]="disabled"
-    [attr.disabled]="disabled ? true : null"
-    tabindex="-1"
-    closeIcon="close-outline"
-  >
+  <ion-fab-button [disabled]="disabled" [attr.disabled]="disabled ? true : null" tabindex="-1">
     <ng-content select="kirby-icon"></ng-content>
   </ion-fab-button>
   <ion-fab-list *ngIf="actionSheet" side="top" class="{{ horizontalAlignment }}">
