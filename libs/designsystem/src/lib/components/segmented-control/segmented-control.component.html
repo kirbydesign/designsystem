@@ -1,7 +1,6 @@
 <ion-segment
-  *ngIf="mode === 'default'"
   [value]="value?.id"
-  [scrollable]="disableChangeOnSwipe"
+  [scrollable]="true"
   (ionChange)="onSegmentSelect($event.detail.value)"
   (click)="preventOutsideClick($event)"
 >
@@ -30,13 +29,3 @@
     </div>
   </ng-container>
 </ion-segment>
-
-<ng-container *ngIf="mode === 'chip' || mode === 'compactChip'">
-  <kirby-chip
-    *ngFor="let item of items; let index = index"
-    [text]="item.text"
-    [isSelected]="index === selectedIndex"
-    (click)="onSegmentSelect(item.id)"
-    role="button"
-  ></kirby-chip>
-</ng-container>
