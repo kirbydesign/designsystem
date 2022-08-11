@@ -20,9 +20,14 @@ export enum SegmentedControlMode {
 export class SegmentedControlComponent {
   constructor(private iconRegistryService: IconRegistryService) {}
 
-  preventWrapperClick(event: Event) {
+  /**
+   * Ensure that the click actually did originate from within the segment-button.
+   * We do not want to react to clicks on e.g. segment-btn-wrapper or badge.
+   */
+  preventOutsideClick(event: TouchEvent) {
     if (event.target instanceof HTMLElement) {
-      if (event.target.classList.contains('segment-btn-wrapper')) {
+      const targetIsInSegmentBtn = !!event.target.closest('ion-segment-button');
+      if (!targetIsInSegmentBtn) {
         event.stopImmediatePropagation();
       }
     }
