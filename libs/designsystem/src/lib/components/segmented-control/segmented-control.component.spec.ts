@@ -70,61 +70,11 @@ describe('SegmentedControlComponent', () => {
     expect(component.value).toBe(items[1]);
   });
 
-  describe("in 'default' mode", () => {
-    it("should have a 'default' mode when created", () => {
-      expect(component.mode).toBe(SegmentedControlMode.default);
-    });
-
-    it('should have a segment button per item', () => {
-      expect(spectator.queryHostAll('ion-segment-button').length).toBe(items.length);
-    });
-
-    it('should not have any segmented chips', () => {
-      expect(spectator.queryHostAll('kirby-chip').length).toBe(0);
-    });
-
-    it('should call onSegmentSelect when ionChange event fires', async () => {
-      expect(component.value).toBe(items[1]);
-      const ionSegmentElement = spectator.queryHost<HTMLIonSegmentElement>('ion-segment');
-      await TestHelper.whenReady(ionSegmentElement);
-      spyOn(component, 'onSegmentSelect');
-      const changeEvent = new CustomEvent('ionChange', { detail: { value: items[0].id } });
-      ionSegmentElement.dispatchEvent(changeEvent);
-      expect(component.onSegmentSelect).toHaveBeenCalledWith(items[0].id);
-    });
-
-    it('should set value to event.detail.value when ionChange event fires', async () => {
-      expect(component.value).toBe(items[1]);
-      const ionSegmentElement = spectator.queryHost<HTMLIonSegmentElement>('ion-segment');
-      await TestHelper.whenReady(ionSegmentElement);
-      const changeEvent = new CustomEvent('ionChange', { detail: { value: items[2].id } });
-      ionSegmentElement.dispatchEvent(changeEvent);
-      expect(component.value).toBe(items[2]);
-    });
-
-    it('should have touch area with minimum size equal to fat finger size', () => {
-      const touchArea = window.getComputedStyle(
-        spectator.element.querySelector('ion-segment-button'),
-        '::after'
-      );
-
-      expect(parseInt(touchArea.height)).toBeGreaterThanOrEqual(parseInt(fatFingerSize()));
-      expect(parseInt(touchArea.width)).toBeGreaterThanOrEqual(parseInt(fatFingerSize()));
-    });
-
-    describe('when updating items', () => {
-      it('should not emit segmentSelect event', async () => {
-        const ionSegmentElement = spectator.queryHost<HTMLIonSegmentElement>('ion-segment');
-        await TestHelper.whenReady(ionSegmentElement);
-
-        const clonedItems = JSON.parse(JSON.stringify(items));
-        spectator.setHostInput({ items: clonedItems });
-        expect(onSegmentSelectSpy).not.toHaveBeenCalled();
-      });
-    });
-  });
-
-  const testModes = [SegmentedControlMode.chip, SegmentedControlMode.compactChip];
+  const testModes = [
+    SegmentedControlMode.default,
+    SegmentedControlMode.chip,
+    SegmentedControlMode.compactChip,
+  ];
 
   testModes.forEach((testMode) => {
     describe(`in '${testMode}' mode`, () => {
@@ -136,33 +86,52 @@ describe('SegmentedControlComponent', () => {
         expect(component.mode).toBe(testMode);
       });
 
-      it('should not have an ion-segment control', () => {
-        expect(spectator.queryHost('ion-segment')).toBeNull();
+      it('should have an ion-segment control', () => {
+        expect(spectator.queryHost('ion-segment')).toBeDefined();
       });
 
-      it('should not have any segments buttons', () => {
-        expect(spectator.queryHostAll('ion-segment-button').length).toBe(0);
+      it('should have a segment button per item', () => {
+        expect(spectator.queryHostAll('ion-segment-button').length).toBe(items.length);
       });
 
-      it('should have a segment chip per item', () => {
-        expect(spectator.queryHostAll('kirby-chip').length).toBe(items.length);
-      });
-
-      it('should call onSegmentSelect when clicking a different segment chip', () => {
+      it('should call onSegmentSelect when ionChange event fires', async () => {
         expect(component.value).toBe(items[1]);
-
+        const ionSegmentElement = spectator.queryHost<HTMLIonSegmentElement>('ion-segment');
+        await TestHelper.whenReady(ionSegmentElement);
         spyOn(component, 'onSegmentSelect');
-        spectator.dispatchMouseEvent('kirby-chip:first-of-type', 'click');
-
-        expect(component.onSegmentSelect).toHaveBeenCalled();
+        const changeEvent = new CustomEvent('ionChange', { detail: { value: items[0].id } });
+        ionSegmentElement.dispatchEvent(changeEvent);
+        expect(component.onSegmentSelect).toHaveBeenCalledWith(items[0].id);
       });
 
-      it('should set value when clicking a different segment chip', () => {
+      it('should set value to event.detail.value when ionChange event fires', async () => {
         expect(component.value).toBe(items[1]);
-
-        spectator.dispatchMouseEvent('kirby-chip:last-of-type', 'click');
-
+        const ionSegmentElement = spectator.queryHost<HTMLIonSegmentElement>('ion-segment');
+        await TestHelper.whenReady(ionSegmentElement);
+        const changeEvent = new CustomEvent('ionChange', { detail: { value: items[2].id } });
+        ionSegmentElement.dispatchEvent(changeEvent);
         expect(component.value).toBe(items[2]);
+      });
+
+      it('should have touch area with minimum size equal to fat finger size', () => {
+        const touchArea = window.getComputedStyle(
+          spectator.element.querySelector('ion-segment-button'),
+          '::after'
+        );
+
+        expect(parseInt(touchArea.height)).toBeGreaterThanOrEqual(parseInt(fatFingerSize()));
+        expect(parseInt(touchArea.width)).toBeGreaterThanOrEqual(parseInt(fatFingerSize()));
+      });
+
+      describe('when updating items', () => {
+        it('should not emit segmentSelect event', async () => {
+          const ionSegmentElement = spectator.queryHost<HTMLIonSegmentElement>('ion-segment');
+          await TestHelper.whenReady(ionSegmentElement);
+
+          const clonedItems = JSON.parse(JSON.stringify(items));
+          spectator.setHostInput({ items: clonedItems });
+          expect(onSegmentSelectSpy).not.toHaveBeenCalled();
+        });
       });
     });
   });
