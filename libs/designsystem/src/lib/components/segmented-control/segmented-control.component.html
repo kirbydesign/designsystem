@@ -1,6 +1,6 @@
 <ion-segment
   [value]="value?.id"
-  [scrollable]="true"
+  [scrollable]="disableChangeOnSwipe || mode !== 'default'"
   (ionChange)="onSegmentSelect($event.detail.value)"
   (click)="preventOutsideClick($event)"
 >
