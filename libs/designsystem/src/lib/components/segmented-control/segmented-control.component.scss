@@ -42,6 +42,7 @@
       }
 
       border-radius: 0;
+      padding: #{utils.size('xxxs')} #{utils.size('xxxxs')};
 
       --background: none;
     }
@@ -52,6 +53,8 @@
       --padding-start: #{utils.size('s')};
       --padding-end: #{utils.size('s')};
 
+      min-width: 1em;
+
       &::part(indicator) {
         // Remove padding as the selected segment will otherwise have additional space to its neighbors
         padding-inline: 0;
@@ -60,7 +63,7 @@
 
     .scroll-container {
       display: flex;
-      gap: #{utils.size('xxxs')};
+      gap: #{utils.size('xxs')};
     }
   }
 
@@ -72,7 +75,11 @@
     ion-segment-button {
       --background: transparent;
 
-      min-width: 24px;
+      min-width: 1em;
+    }
+
+    .scroll-container {
+      gap: #{utils.size('xxxs')};
     }
   }
 }
