@@ -1,4 +1,5 @@
 @use 'interaction-state.utilities';
+@use 'layer';
 @use '../utils';
 
 // ---------------------------------------------------------------------------
@@ -38,9 +39,13 @@
 
 // -----------------------------------------------------------------------------
 // In some cases a focus ring is not desirable, e.g., when buttons are stacked
-// (see Action Sheet). As an alternative use the state layer.
+// (see Action Sheet).
+// As an alternative change the state layer opacity - similar to hover.
 // -----------------------------------------------------------------------------
-@mixin apply-focus-without-ring {
+@mixin apply-focus-visible-without-ring(
+  $loudness: interaction-state.$default-loudness-hover,
+  $make-lighter: false
+) {
   @include utils.not-touch {
     &:focus,
     &:focus:not(:focus-visible),
@@ -48,8 +53,8 @@
       // Remove the focus ring
       box-shadow: none;
 
-      // Change background color instead
-      --state-layer-opacity: 0.08;
+      // Change "background color" (state layer opacity) instead
+      @include layer.apply-state($loudness, $make-lighter);
     }
 
     @content;
