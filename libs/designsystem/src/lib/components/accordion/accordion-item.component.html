@@ -3,6 +3,7 @@
     (click)="isExpanded = !isExpanded"
     class="header"
     role="button"
+    tabindex="0"
     [class.expanded]="isExpanded"
     [attr.aria-expanded]="isExpanded"
     [attr.aria-controls]="_contentId"
