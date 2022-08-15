@@ -36,6 +36,26 @@
   }
 }
 
+// -----------------------------------------------------------------------------
+// In some cases a focus ring is not desirable, e.g., when buttons are stacked
+// (see Action Sheet). As an alternative use the state layer.
+// -----------------------------------------------------------------------------
+@mixin apply-focus-without-ring {
+  @include utils.not-touch {
+    &:focus,
+    &:focus:not(:focus-visible),
+    &:focus-visible {
+      // Remove the focus ring
+      box-shadow: none;
+
+      // Change background color instead
+      --state-layer-opacity: 0.08;
+    }
+
+    @content;
+  }
+}
+
 // ---------------------------------------------------------------------------
 // The apply-focus-part mixin is used where ionics components do not allow
 // us to apply styling directly to the tabbed element, as it is hidden inside

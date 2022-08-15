@@ -24,16 +24,7 @@ $max-width: 375px;
   max-width: calc(#{$max-width} - var(--kirby-internal-margin-horizontal-total));
 
   button[kirby-button].no-decoration {
-    // TODO: Move this reset/change/alternative focus into the focus partial
-    @include interaction-state.apply-focus-visible {
-      // Remove the focus ring
-      box-shadow: none !important;
-
-      // Change background color instead
-      &:focus-visible {
-        --state-layer-opacity: 0.08;
-      }
-    }
+    @include interaction-state.apply-focus-without-ring;
   }
 }
 
