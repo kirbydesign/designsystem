@@ -1,6 +1,14 @@
 @use '~@kirbydesign/core/src/scss/utils';
 
 ion-tab-button {
+  // TODO: Uncomment when https://github.com/kirbydesign/designsystem/pull/2419 is merged
+  // &.ion-focused {
+  //   @include interaction-state.apply-focus-visible-without-ring {
+  //     --background: #{interaction-state.get-state-color('white', 'xxxs')};
+  //     --background-focused-opacity: 0;
+  //   }
+  // }
+
   height: 100%;
   flex: 1 1 0%;
   max-width: 168px;
