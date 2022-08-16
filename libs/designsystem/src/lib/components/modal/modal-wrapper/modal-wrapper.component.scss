@@ -44,20 +44,24 @@ $toolbar-padding-block: utils.size('xs');
   }
 }
 
-ion-header ion-toolbar {
-  --padding-start: #{$toolbar-padding-inline};
-  --padding-end: #{$toolbar-padding-inline};
-  --padding-bottom: #{$toolbar-padding-block};
-  --padding-top: #{$toolbar-padding-block};
-  --border-width: 0;
-  --background: transparent;
-  --color: var(--kirby-modal-color, #{utils.get-color('black')});
+ion-header {
+  box-sizing: border-box;
 
-  button {
-    color: var(--color);
+  ion-toolbar {
+    --padding-start: #{$toolbar-padding-inline};
+    --padding-end: #{$toolbar-padding-inline};
+    --padding-bottom: #{$toolbar-padding-block};
+    --padding-top: #{$toolbar-padding-block};
+    --border-width: 0;
+    --background: transparent;
+    --color: var(--kirby-modal-color, #{utils.get-color('black')});
+
+    button {
+      color: var(--color);
+    }
+
+    @include phablet-toolbar-padding;
   }
-
-  @include phablet-toolbar-padding;
 }
 
 :host {

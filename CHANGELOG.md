@@ -2,6 +2,10 @@
 
 Notable changes to the project will be documented in this file.
 
+## [6.3.1](https://github.com/kirbydesign/designsystem/pull/2421) (16-08-2022)
+
+- Upgrade to Ionic 6
+
 ## [6.2.1](https://github.com/kirbydesign/designsystem/pull/2414) (11-08-2022)
 
 ### Bugfixes

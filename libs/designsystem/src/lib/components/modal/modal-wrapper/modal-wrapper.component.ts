@@ -275,12 +275,18 @@ export class ModalWrapperComponent
   }
 
   private observeModalFullHeight() {
-    const ionModalWrapper = this.elementRef.nativeElement.closest<HTMLElement>('.modal-wrapper');
+    const ionModalWrapper = this.getIonModalWrapperElement();
+
     if (!ionModalWrapper) return;
     // Start observing when modal has finished animating:
     this.didPresent.then(() => {
       this.intersectionObserver.observe(ionModalWrapper);
     });
+  }
+
+  // Extracted into function for ease of testing
+  private getIonModalWrapperElement(): HTMLElement {
+    return this.ionModalElement.shadowRoot.querySelector('.modal-wrapper');
   }
 
   ngAfterViewInit(): void {
@@ -497,9 +503,9 @@ export class ModalWrapperComponent
       const entry = entries[0];
       const isTouchingViewport = entry.intersectionRatio < 1;
       if (isTouchingViewport) {
-        this.renderer.addClass(entry.target, 'full-height');
+        this.ionModalElement.classList.add('full-height');
       } else {
-        this.renderer.removeClass(entry.target, 'full-height');
+        this.ionModalElement.classList.remove('full-height');
       }
     };
 
