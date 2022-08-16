@@ -20,6 +20,10 @@ ion-footer {
   }
 }
 
+:host {
+  box-sizing: border-box;
+}
+
 :host(.snap-to-keyboard) {
   ion-footer {
     transition: transform utils.$soft-keyboard-transition-leave;
