@@ -24,4 +24,9 @@ export class AccordionItemComponent {
   // IDs used for a11y labelling
   _titleId = `kirby-accordion-item-title-${++uniqueId}`;
   _contentId = `kirby-accordion-item-content-${uniqueId}`;
+
+  _onToggleExpanded(event: KeyboardEvent) {
+    event.preventDefault();
+    this.isExpanded = !this.isExpanded;
+  }
 }

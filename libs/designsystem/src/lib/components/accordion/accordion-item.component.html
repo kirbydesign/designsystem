@@ -1,7 +1,8 @@
 <div class="content-layer">
   <div
-    (click)="isExpanded = !isExpanded"
-    (keydown.ENTER)="isExpanded = !isExpanded"
+    (click)="_onToggleExpanded($event)"
+    (keydown.ENTER)="_onToggleExpanded($event)"
+    (keydown.space)="_onToggleExpanded($event)"
     class="header"
     role="button"
     tabindex="0"
