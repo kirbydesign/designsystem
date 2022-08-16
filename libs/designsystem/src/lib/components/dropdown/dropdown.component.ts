@@ -516,6 +516,8 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     this.toggle();
   }
 
+  // TODO: There will be changes - possibly here
+
   @HostListener('keydown.arrowup', ['$event'])
   @HostListener('keydown.arrowdown', ['$event'])
   @HostListener('keydown.arrowleft', ['$event'])
