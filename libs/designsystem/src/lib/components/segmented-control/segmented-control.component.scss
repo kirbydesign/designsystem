@@ -52,7 +52,6 @@
       --background: #{utils.get-color('white')};
       --indicator-transition: none;
 
-      min-width: min-content;
       flex: initial;
 
       &::part(indicator) {
