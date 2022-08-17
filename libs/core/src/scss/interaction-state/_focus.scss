@@ -42,7 +42,7 @@
 // (see Action Sheet).
 // As an alternative change the state layer opacity - similar to hover.
 // -----------------------------------------------------------------------------
-@mixin apply-focus-visible-without-ring(
+@mixin apply-focus-visible-background(
   $loudness: interaction-state.$default-loudness-hover,
   $make-lighter: false
 ) {

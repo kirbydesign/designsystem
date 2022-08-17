@@ -24,7 +24,7 @@ $max-width: 375px;
   max-width: calc(#{$max-width} - var(--kirby-internal-margin-horizontal-total));
 
   button[kirby-button].no-decoration {
-    @include interaction-state.apply-focus-visible-without-ring;
+    @include interaction-state.apply-focus-visible-background;
   }
 }
 

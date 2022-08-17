@@ -13,7 +13,7 @@ $padding: utils.size('s');
 }
 
 .header {
-  @include interaction-state.apply-focus-visible-without-ring('xxxs') {
+  @include interaction-state.apply-focus-visible-background('xxxs') {
     outline: 0;
   }
   @include interaction-state.apply-hover('xxxs');

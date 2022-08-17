@@ -3,7 +3,7 @@
 
 ion-tab-button {
   &.ion-focused {
-    @include interaction-state.apply-focus-visible-without-ring {
+    @include interaction-state.apply-focus-visible-background {
       --background: #{interaction-state.get-state-color('white', 'xxxs')};
       --background-focused-opacity: 0;
     }
