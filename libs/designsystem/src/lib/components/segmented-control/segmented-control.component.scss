@@ -42,7 +42,8 @@
       }
 
       border-radius: 0;
-      padding: #{utils.size('xxxs')} #{utils.size('xxxxs')};
+      padding: #{utils.size('xxxs')} 0;
+      gap: #{utils.size('xxs')};
 
       --background: none;
     }
@@ -50,36 +51,28 @@
     ion-segment-button {
       --background: #{utils.get-color('white')};
       --indicator-transition: none;
-      --padding-start: #{utils.size('s')};
-      --padding-end: #{utils.size('s')};
 
-      min-width: 1em;
+      min-width: min-content;
+      flex: initial;
 
       &::part(indicator) {
         // Remove padding as the selected segment will otherwise have additional space to its neighbors
         padding-inline: 0;
       }
     }
-
-    .scroll-container {
-      display: flex;
-      gap: #{utils.size('xxs')};
-    }
   }
 
   &.compact {
     ion-segment {
       --background: transparent;
+
+      gap: #{utils.size('xxxs')};
     }
 
     ion-segment-button {
       --background: transparent;
-
-      min-width: 1em;
-    }
-
-    .scroll-container {
-      gap: #{utils.size('xxxs')};
+      --padding-start: #{utils.size('xs')};
+      --padding-end: #{utils.size('xs')};
     }
   }
 }
