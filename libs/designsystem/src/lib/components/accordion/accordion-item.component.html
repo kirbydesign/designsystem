@@ -1,8 +1,11 @@
 <div class="content-layer">
   <div
-    (click)="isExpanded = !isExpanded"
+    (click)="_onToggleExpanded($event)"
+    (keydown.ENTER)="_onToggleExpanded($event)"
+    (keydown.space)="_onToggleExpanded($event)"
     class="header"
     role="button"
+    tabindex="0"
     [class.expanded]="isExpanded"
     [attr.aria-expanded]="isExpanded"
     [attr.aria-controls]="_contentId"

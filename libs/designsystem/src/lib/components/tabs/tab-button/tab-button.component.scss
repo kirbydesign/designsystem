@@ -2,6 +2,13 @@
 @use '~@kirbydesign/core/src/scss/utils';
 
 ion-tab-button {
+  &.ion-focused {
+    @include interaction-state.apply-focus-visible-background {
+      --background: #{interaction-state.get-state-color('white', 'xxxs')};
+      --background-focused-opacity: 0;
+    }
+  }
+
   @include interaction-state.apply-hover {
     --background: #{interaction-state.get-state-color('white', 'xxxs')};
   }
