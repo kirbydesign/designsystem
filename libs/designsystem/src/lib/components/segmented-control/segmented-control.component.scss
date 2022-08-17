@@ -42,7 +42,7 @@
       }
 
       border-radius: 0;
-      padding: #{utils.size('xxxs')} 0;
+      padding: #{utils.size('xxxs')} #{utils.size('xxxs')};
       gap: #{utils.size('xxs')};
 
       --background: none;
