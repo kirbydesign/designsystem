@@ -23,12 +23,12 @@
 
   &.default-mode {
     ion-segment {
+      --background: #{utils.get-color('white')};
+
       display: inline-flex; // The segmented control itself is block-level, but we don't want the background to stretch
       width: auto; // The segmented control itself is block-level, but we don't want the background to stretch
       overflow: visible; // Ensures the badge is not cut off
       contain: unset; // Ensures the badge is not cut off
-
-      --background: #{utils.get-color('white')};
     }
   }
 
@@ -41,11 +41,11 @@
         }
       }
 
+      --background: none;
+
       border-radius: 0;
       padding: #{utils.size('xxxs')} #{utils.size('xxxs')};
       gap: #{utils.size('xxs')};
-
-      --background: none;
     }
 
     ion-segment-button {
