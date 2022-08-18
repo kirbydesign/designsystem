@@ -27,7 +27,7 @@
 
       width: fit-content; // The segmented control itself is block-level, but we don't want it to stretch
       overflow: visible; // Ensures the badge is not cut off
-      contain: unset; // Ensures the badge is not cut off
+      contain: none; // Ensures the badge is not cut off
     }
   }
 
