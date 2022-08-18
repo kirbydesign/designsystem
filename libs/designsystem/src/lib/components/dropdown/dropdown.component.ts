@@ -460,6 +460,12 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     }
   }
 
+  // TODO: We may not need this
+  onItemFocus(index: number) {
+    this.focusItem(index);
+    // this.close();
+  }
+
   /**
    * Give an Item focus by adding a "focused" CSS class
    * @param index The Item that should get focus
@@ -482,12 +488,13 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
         selectedKirbyItem.nativeElement.classList.add('focused');
       }
     }
-    // if (index != this.selectedIndex) {
-    //   this.selectedIndex = index;
-    //   this.change.emit(this.value);
-    //   this._onChange(this.value);
-    //   this.scrollItemIntoView(index);
-    // }
+
+    if (index !== this.focusedIndex) {
+      this.focusedIndex = index;
+      // this.change.emit(this.value);
+      // this._onChange(this.value);
+      this.scrollItemIntoView(index);
+    }
   }
 
   @HostListener('keydown.tab', ['$event'])
@@ -575,11 +582,12 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     if (this.isOpen && (event.key === 'ArrowLeft' || event.key === 'ArrowRight')) {
       return;
     }
-    // TODO: Make service work for focused Items too
+    // TODO: Make service work for focused Items too/instead
     const newIndex = this.keyboardHandlerService.handle(event, this.items, this.selectedIndex);
+    // const newIndex = this.keyboardHandlerService.handle(event, this.items, this.focusedIndex);
     if (newIndex > -1) {
       // TODO: Do not select item on arrow up/down - wait for ENTER/Space press
-      // this.selectItem(newIndex);
+      this.selectItem(newIndex);
       // TODO: Do apply focus and active styles
       this.focusItem(newIndex);
     }
