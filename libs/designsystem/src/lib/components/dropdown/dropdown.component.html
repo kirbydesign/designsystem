@@ -39,6 +39,7 @@
 </ng-template>
 
 <ng-template #defaultItemTemplate let-item let-selected="selected" let-index="index">
+  <!-- TODO: Consider if we need more input properties ("focused"/"hovered" and "active") and event handlers (keydown) -->
   <kirby-item [selectable]="true" [selected]="selected" (click)="onItemSelect(index)" role="option">
     <!-- Tabindex fixes issue with popover dropdown not working in safari -->
     <h3 tabindex="0">{{ getTextFromItem(item) }}</h3>

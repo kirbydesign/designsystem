@@ -71,6 +71,19 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     }
   }
 
+  // _focusedIndex keeps track of which element has focus and will be selected
+  // if it is activated (by pressing ENTER or SPACE key)
+  private _focusedIndex: number = -1;
+  get focusedIndex(): number {
+    return this._focusedIndex;
+  }
+
+  @Input() set focusedIndex(value: number) {
+    if (this._focusedIndex !== value) {
+      this._focusedIndex = value;
+    }
+  }
+
   @Input()
   itemTextProperty = 'text';
 
@@ -447,6 +460,36 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     }
   }
 
+  /**
+   * Give an Item focus by adding a "focused" CSS class
+   * @param index The Item that should get focus
+   */
+  private focusItem(index: number) {
+    console.log(`focusItem(index = ${index})`);
+    const kirbyItems =
+      this.kirbyItemsSlotted && this.kirbyItemsSlotted.length
+        ? this.kirbyItemsSlotted
+        : this.kirbyItemsDefault;
+    if (kirbyItems && kirbyItems.length) {
+      // TODO: Remove focused class from all Items
+      kirbyItems.toArray().forEach((kirbyItem) => {
+        kirbyItem.nativeElement.classList.remove('focused');
+      });
+
+      const selectedKirbyItem = kirbyItems.toArray()[index];
+
+      if (selectedKirbyItem && selectedKirbyItem.nativeElement) {
+        selectedKirbyItem.nativeElement.classList.add('focused');
+      }
+    }
+    // if (index != this.selectedIndex) {
+    //   this.selectedIndex = index;
+    //   this.change.emit(this.value);
+    //   this._onChange(this.value);
+    //   this.scrollItemIntoView(index);
+    // }
+  }
+
   @HostListener('keydown.tab', ['$event'])
   _onTab(event: KeyboardEvent) {
     if (this.isOpen) {
@@ -495,11 +538,14 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
 
   @HostListener('blur', ['$event'])
   _onBlur(event?: FocusEvent) {
-    if (this.usePopover) return;
-    this.close();
-    this._onTouched();
+    // TODO: Enable this again
+    return;
+    // if (this.usePopover) return;
+    // this.close();
+    // this._onTouched();
   }
 
+  // TODO: This behavior may need to change
   @HostListener('keydown.space', ['$event'])
   _onSpace(event: KeyboardEvent) {
     event.preventDefault();
@@ -509,6 +555,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     }
   }
 
+  // TODO: This behavior may need to change
   @HostListener('keydown.enter', ['$event'])
   _onEnter(event: KeyboardEvent) {
     event.preventDefault();
@@ -528,9 +575,13 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     if (this.isOpen && (event.key === 'ArrowLeft' || event.key === 'ArrowRight')) {
       return;
     }
+    // TODO: Make service work for focused Items too
     const newIndex = this.keyboardHandlerService.handle(event, this.items, this.selectedIndex);
     if (newIndex > -1) {
-      this.selectItem(newIndex);
+      // TODO: Do not select item on arrow up/down - wait for ENTER/Space press
+      // this.selectItem(newIndex);
+      // TODO: Do apply focus and active styles
+      this.focusItem(newIndex);
     }
     return false;
   }
