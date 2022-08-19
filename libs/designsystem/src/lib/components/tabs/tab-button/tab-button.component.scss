@@ -13,8 +13,8 @@ ion-tab-button {
 
   @include utils.slotted(div kirby-badge) {
     &.md {
-      --kirby-badge-top: -5px;
-      --kirby-badge-right: -5px;
+      --kirby-badge-top: -#{utils.size('xxxs')};
+      --kirby-badge-left: #{utils.size('xs')};
     }
   }
 
