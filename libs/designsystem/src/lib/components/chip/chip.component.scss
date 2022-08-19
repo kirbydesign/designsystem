@@ -65,28 +65,4 @@
       color: utils.get-color('black-contrast');
     }
   }
-
-  :host-context(kirby-segmented-control.compact) {
-    background-color: transparent;
-    color: utils.get-text-color('black');
-
-    &.is-selected {
-      @include interaction-state.apply-hover('m', $make-lighter: true);
-      @include interaction-state.apply-active('xxl', $make-lighter: true);
-
-      background-color: utils.get-color('black');
-      color: utils.get-color('black-contrast');
-    }
-
-    --inline-margin: #{utils.size('xxxxs')};
-    --inline-padding: #{13px};
-
-    @include utils.media('<=small') {
-      --inline-margin: 0;
-    }
-
-    min-width: 44px;
-    flex-shrink: 0;
-    justify-content: center;
-  }
 }
