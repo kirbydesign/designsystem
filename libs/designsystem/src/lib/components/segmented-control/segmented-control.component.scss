@@ -63,8 +63,6 @@
   &.compact {
     ion-segment {
       --background: transparent;
-
-      gap: #{utils.size('xxxs')};
     }
 
     ion-segment-button {
