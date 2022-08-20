@@ -419,6 +419,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
 
   private selectItem(index: number) {
     if (index != this.selectedIndex) {
+      this.focusItem(index);
       this.selectedIndex = index;
       this.change.emit(this.value);
       this._onChange(this.value);
@@ -460,7 +461,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     }
   }
 
-  // TODO: We may not need this
+  // TODO: We probably do not need this
   onItemFocus(index: number) {
     this.focusItem(index);
     // this.close();
@@ -478,6 +479,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
 
     if (kirbyItems && kirbyItems.length) {
       // "Un-focus" all Items
+      // TODO: Consider putting "Unfocusing" in its' own separate method
       kirbyItems.toArray().forEach((kirbyItem) => {
         kirbyItem.nativeElement.classList.remove('focused');
       });
@@ -552,12 +554,29 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     // this._onTouched();
   }
 
-  // TODO: Clean up
+  // TODO: Clean up - also rename private method + _onEnter() has been removed: is that a problem?
   @HostListener('keydown.enter', ['$event'])
   @HostListener('keydown.space', ['$event'])
   _onSpace(event: KeyboardEvent) {
     event.preventDefault();
     event.stopPropagation();
+
+    // TODO: Move this block to a separate method
+    // TODO: keyboardHandlerService.handle() does not work for Enter/Space
+    // const newSelectedIndex = this.keyboardHandlerService.handle(
+    //   event,
+    //   this.items,
+    //   this.selectedIndex
+    // );
+    // console.log(`newSelectedIndex = ${newSelectedIndex}`);
+    // if (newSelectedIndex > -1) {
+    //   // TODO: Do not select item on arrow up/down - wait for ENTER/Space press
+    //   this.selectItem(newSelectedIndex);
+    // }
+
+    // TODO: Idea: Could we just pass focusedIndex to selectItem()?
+    this.selectItem(this.focusedIndex);
+
     this.toggle();
     // if (!this.isOpen) {
     //   this.open();
@@ -571,6 +590,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   //   this.toggle();
   // }
 
+  // TODO: Refactor/clean up _onArrowKeys()
   @HostListener('keydown.arrowup', ['$event'])
   @HostListener('keydown.arrowdown', ['$event'])
   @HostListener('keydown.arrowleft', ['$event'])
@@ -594,18 +614,43 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
       return;
     }
 
-    // TODO: Make service work for focused Items too/instead
-    const newIndex = this.keyboardHandlerService.handle(event, this.items, this.selectedIndex);
-    // const newIndex = this.keyboardHandlerService.handle(event, this.items, this.focusedIndex);
-    if (newIndex > -1) {
-      // TODO: Do not select item on arrow up/down - wait for ENTER/Space press
-      this.selectItem(newIndex);
-      // TODO: Do apply focus and active styles
-      this.focusItem(newIndex);
+    // TODO: Fork setting new index into separate indices for selected and focused
+    const newFocusedIndex = this.keyboardHandlerService.handle(
+      event,
+      this.items,
+      this.focusedIndex
+    );
+
+    if (newFocusedIndex > -1) {
+      this.focusItem(newFocusedIndex);
     }
+
+    // // TODO: Move this to event listener for Enter and Space keypress
+    // const newSelectedIndex = this.keyboardHandlerService.handle(
+    //   event,
+    //   this.items,
+    //   this.selectedIndex
+    // );
+    // if (newSelectedIndex > -1) {
+    //   // TODO: Do not select item on arrow up/down - wait for ENTER/Space press
+    //   this.selectItem(newSelectedIndex);
+    // }
+
+    // // TODO: Make service work for focused Items too/instead?
+    // const newIndex = this.keyboardHandlerService.handle(event, this.items, this.selectedIndex);
+    // // const newIndex = this.keyboardHandlerService.handle(event, this.items, this.focusedIndex);
+    // if (newIndex > -1) {
+    //   // TODO: Do not select item on arrow up/down - wait for ENTER/Space press
+    //   this.selectItem(newIndex);
+    //   // TODO: Do apply focus and active styles
+    //   this.focusItem(newIndex);
+    // }
+
+    // TODO: Is this the best return value? Should other returns be changed to return booleans?
     return false;
   }
 
+  // TODO: Should HOME and END keys apply to focused? Both focused and selected?
   @HostListener('keydown.home', ['$event'])
   @HostListener('keydown.end', ['$event'])
   _onHomeEndKeys(event: KeyboardEvent) {
