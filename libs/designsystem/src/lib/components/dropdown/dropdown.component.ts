@@ -471,21 +471,21 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
    * @param index The Item that should get focus
    */
   private focusItem(index: number) {
-    console.log(`focusItem(index = ${index})`);
     const kirbyItems =
       this.kirbyItemsSlotted && this.kirbyItemsSlotted.length
         ? this.kirbyItemsSlotted
         : this.kirbyItemsDefault;
+
     if (kirbyItems && kirbyItems.length) {
-      // TODO: Remove focused class from all Items
+      // "Un-focus" all Items
       kirbyItems.toArray().forEach((kirbyItem) => {
         kirbyItem.nativeElement.classList.remove('focused');
       });
 
-      const selectedKirbyItem = kirbyItems.toArray()[index];
+      const focusedKirbyItem = kirbyItems.toArray()[index];
 
-      if (selectedKirbyItem && selectedKirbyItem.nativeElement) {
-        selectedKirbyItem.nativeElement.classList.add('focused');
+      if (focusedKirbyItem && focusedKirbyItem.nativeElement) {
+        focusedKirbyItem.nativeElement.classList.add('focused');
       }
     }
 
@@ -552,25 +552,24 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     // this._onTouched();
   }
 
-  // TODO: This behavior may need to change
+  // TODO: Clean up
+  @HostListener('keydown.enter', ['$event'])
   @HostListener('keydown.space', ['$event'])
   _onSpace(event: KeyboardEvent) {
     event.preventDefault();
     event.stopPropagation();
-    if (!this.isOpen) {
-      this.open();
-    }
-  }
-
-  // TODO: This behavior may need to change
-  @HostListener('keydown.enter', ['$event'])
-  _onEnter(event: KeyboardEvent) {
-    event.preventDefault();
-    event.stopPropagation();
     this.toggle();
+    // if (!this.isOpen) {
+    //   this.open();
+    // }
   }
 
-  // TODO: There will be changes - possibly here
+  // @HostListener('keydown.enter', ['$event'])
+  // _onEnter(event: KeyboardEvent) {
+  //   event.preventDefault();
+  //   event.stopPropagation();
+  //   this.toggle();
+  // }
 
   @HostListener('keydown.arrowup', ['$event'])
   @HostListener('keydown.arrowdown', ['$event'])
