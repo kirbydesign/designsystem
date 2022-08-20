@@ -577,10 +577,23 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   @HostListener('keydown.arrowright', ['$event'])
   _onArrowKeys(event: KeyboardEvent) {
     if (this.disabled) return;
+
     // Mirror default HTML5 select behaviour - prevent left/right arrows when open:
     if (this.isOpen && (event.key === 'ArrowLeft' || event.key === 'ArrowRight')) {
       return;
     }
+
+    // TODO: Use this if we want to mimic Material Dropdown Menu behavior
+    // if (!this.isOpen) return;
+
+    // TODO: Use this if we want to mimic Carbon Dropdown behavior
+    if (!this.isOpen) {
+      // Avoid page scroll
+      event.preventDefault();
+      this.open();
+      return;
+    }
+
     // TODO: Make service work for focused Items too/instead
     const newIndex = this.keyboardHandlerService.handle(event, this.items, this.selectedIndex);
     // const newIndex = this.keyboardHandlerService.handle(event, this.items, this.focusedIndex);
