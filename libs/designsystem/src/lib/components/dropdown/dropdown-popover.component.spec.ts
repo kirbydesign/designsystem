@@ -700,6 +700,10 @@ describe('DropdownComponent (popover version)', () => {
               for (let counter = 0; counter < scenario.keypressCount; counter++) {
                 spectator.dispatchKeyboardEvent(spectator.element, 'keydown', keyEvent.key);
               }
+              // focused
+              expect(spectator.component.focusedIndex).toEqual(scenario.expectedIndex);
+              spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'Enter');
+              // selected
               expect(spectator.component.selectedIndex).toEqual(scenario.expectedIndex);
               expect(spectator.component.value).toEqual(items[scenario.expectedIndex]);
             });
