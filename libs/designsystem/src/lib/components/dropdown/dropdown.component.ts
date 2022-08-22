@@ -343,6 +343,9 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
         () => this.showDropdown(),
         DropdownComponent.OPEN_DELAY_IN_MS
       );
+
+      // Move focus to selected item (if any)
+      this.focusItem(this.selectedIndex);
     }
   }
 
