@@ -552,10 +552,10 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   @HostListener('blur', ['$event'])
   _onBlur(event?: FocusEvent) {
     // TODO: Enable this again
-    return;
-    // if (this.usePopover) return;
-    // this.close();
-    // this._onTouched();
+    // return;
+    if (this.usePopover) return;
+    this.close();
+    this._onTouched();
   }
 
   // TODO: Clean up - also rename private method + _onEnter() has been removed: is that a problem?
