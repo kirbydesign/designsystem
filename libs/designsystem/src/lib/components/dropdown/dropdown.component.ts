@@ -575,7 +575,9 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     // }
 
     // TODO: Idea: Could we just pass focusedIndex to selectItem()?
-    this.selectItem(this.focusedIndex);
+    if (this.isOpen) {
+      this.selectItem(this.focusedIndex);
+    }
 
     this.toggle();
     // if (!this.isOpen) {
