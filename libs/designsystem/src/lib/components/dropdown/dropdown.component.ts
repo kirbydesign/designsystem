@@ -551,8 +551,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
 
   @HostListener('blur', ['$event'])
   _onBlur(event?: FocusEvent) {
-    // TODO: Enable this again
-    // return;
+    // TODO: Disable this for easier inspection in browser
     if (this.usePopover) return;
     this.close();
     this._onTouched();
