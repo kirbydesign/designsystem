@@ -41,35 +41,16 @@
   @return $modal-header-vertical-center;
 }
 
-$backdrop-opacity: 0.4;
-
 body.allow-background-scroll {
   overflow: initial !important;
 }
 
+ion-modal::part(backdrop) {
+  --backdrop-opacity: 0.4;
+}
+
 ion-modal.kirby-overlay {
   position: fixed;
-
-  // Ensure consistent backdrop on all overlays:
-  &:not(.modal-card) {
-    --backdrop-opacity: #{$backdrop-opacity};
-
-    ion-backdrop {
-      opacity: var(--backdrop-opacity);
-    }
-  }
-
-  // Ensure consistent backdrop on card style modals, as Ionic 5 only applies --backdrop-opacity to :first-of-type:
-  // See https://github.com/ionic-team/ionic/commit/253cd96164914a803f6bb42ff95ca74880c940d0
-  // and https://github.com/ionic-team/ionic/issues/20800#issuecomment-606670762
-  &.modal-card,
-  &.modal-card:first-of-type {
-    --backdrop-opacity: #{$backdrop-opacity};
-  }
-
-  .modal-shadow {
-    display: none;
-  }
 
   &.kirby-modal {
     box-sizing: border-box;
@@ -77,6 +58,7 @@ ion-modal.kirby-overlay {
     --background: var(--kirby-modal-background, #{utils.get-color('background-color')});
     --border-radius: 0;
     --height: auto;
+    --box-shadow: #{utils.get-elevation(8)};
 
     &.kirby-modal-compact {
       --border-radius: #{utils.$border-radius};
@@ -88,6 +70,7 @@ ion-modal.kirby-overlay {
     &.kirby-drawer {
       --min-height: #{utils.$drawer-default-height};
       --kirby-modal-padding-top: calc(var(--kirby-safe-area-top, 0px) + #{utils.size('m')});
+      --border-radius: #{utils.$border-radius} #{utils.$border-radius} 0px 0px;
 
       padding-top: var(--kirby-modal-padding-top);
       align-items: flex-end;
@@ -96,11 +79,6 @@ ion-modal.kirby-overlay {
         &.kirby-modal.kirby-drawer {
           --kirby-modal-padding-top: 0;
         }
-      }
-
-      .modal-wrapper {
-        border-top-left-radius: #{utils.$border-radius};
-        border-top-right-radius: #{utils.$border-radius};
       }
     }
 
@@ -115,26 +93,14 @@ ion-modal.kirby-overlay {
     }
 
     &.modal-card:not(.kirby-drawer) {
-      .modal-wrapper {
-        @include utils.media('<medium') {
-          // Reset Ionic Card style height + top border radius:
-          --height: 100%;
-
-          border-top-left-radius: 0;
-          border-top-right-radius: 0;
-        }
-
-        @include utils.media('>=medium') {
-          // Reset Ionic Card style border radius:
-          border-radius: utils.$border-radius;
-        }
+      @include utils.media('<medium') {
+        --height: 100%;
       }
     }
 
     @include utils.media('>=medium') {
       --width: #{utils.$modal-max-width};
       --border-radius: #{utils.$border-radius};
-      --box-shadow: #{utils.get-elevation(8)};
 
       &:not(.kirby-modal-compact) {
         --max-height: 100%;
@@ -160,8 +126,8 @@ ion-modal.kirby-overlay {
             --min-height: #{map.get(utils.$modal-heights, 'l')};
           }
 
-          &.kirby-modal-full-height .modal-wrapper,
-          .modal-wrapper.full-height {
+          &.kirby-modal-full-height::part(content),
+          &.full-height::part(content) {
             border-bottom-left-radius: 0;
             border-bottom-right-radius: 0;
           }
@@ -172,11 +138,6 @@ ion-modal.kirby-overlay {
         --kirby-modal-padding-top: calc(
           var(--kirby-modal-padding-top-base) + #{get-drawer-additional-padding-top()}
         );
-
-        .modal-wrapper {
-          border-bottom-left-radius: 0;
-          border-bottom-right-radius: 0;
-        }
       }
     }
   }
@@ -185,15 +146,10 @@ ion-modal.kirby-overlay {
     --background: transparent;
     --width: 100%;
     --height: 100%;
+    --box-shadow: none;
 
-    .modal-wrapper {
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
+    &::part(content) {
       pointer-events: none;
-
-      --max-width: auto;
-      --max-height: auto;
     }
   }
 
@@ -201,12 +157,8 @@ ion-modal.kirby-overlay {
     --background: #{utils.get-color('background-color')};
     --border-radius: #{utils.$border-radius};
     --box-shadow: #{utils.get-elevation(8)};
-
-    .modal-wrapper {
-      max-width: utils.$alert-max-width;
-      height: auto;
-      text-align: center;
-    }
+    --max-width: #{utils.$alert-max-width};
+    --height: auto;
   }
 }
 

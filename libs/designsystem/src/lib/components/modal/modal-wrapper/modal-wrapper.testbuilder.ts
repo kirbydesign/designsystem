@@ -82,11 +82,11 @@ export class ModalWrapperTestBuilder {
     const ionModalWrapper = document.createElement('div');
     const ionModal = document.createElement('div');
     ionModal['dismiss'] = jasmine.createSpy('dissmissSpy').and.resolveTo(true);
-    spyOn(spectator.element, 'closest')
-      .withArgs('.modal-wrapper')
-      .and.returnValue(ionModalWrapper)
-      .withArgs('ion-modal')
-      .and.returnValue(ionModal);
+    spyOn(spectator.element, 'closest').withArgs('ion-modal').and.returnValue(ionModal);
+
+    spectator.component['getIonModalWrapperElement'] = () => {
+      return ionModalWrapper;
+    };
 
     spectator.detectChanges();
 
