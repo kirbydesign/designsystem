@@ -1,6 +1,6 @@
 import { fakeAsync, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { createHostFactory, Spectator, SpectatorHost } from '@ngneat/spectator';
+import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponents, MockDirective } from 'ng-mocks';
 
 import { DesignTokenHelper } from '@kirbydesign/core';
@@ -38,6 +38,7 @@ describe('SegmentedControlComponent', () => {
   ];
 
   let spectator: SpectatorHost<SegmentedControlComponent>;
+  let ionSegmentElement: HTMLIonSegmentElement;
 
   const createHost = createHostFactory({
     component: SegmentedControlComponent,
@@ -48,7 +49,7 @@ describe('SegmentedControlComponent', () => {
     imports: [TestHelper.ionicModuleForTest],
   });
 
-  beforeEach(() => {
+  beforeEach(async () => {
     spectator = createHost(
       `<kirby-segmented-control [items]="items" selectedIndex="1">
        </kirby-segmented-control>`,
@@ -59,6 +60,9 @@ describe('SegmentedControlComponent', () => {
       }
     );
     component = spectator.component;
+
+    ionSegmentElement = spectator.queryHost<HTMLIonSegmentElement>('ion-segment');
+    await TestHelper.whenReady(ionSegmentElement);
   });
 
   it('should create', () => {
@@ -93,20 +97,16 @@ describe('SegmentedControlComponent', () => {
         expect(spectator.queryHostAll('ion-segment-button').length).toBe(items.length);
       });
 
-      it('should call onSegmentSelect when ionChange event fires', async () => {
+      it('should call onSegmentSelect when ionChange event fires', () => {
         expect(component.value).toBe(items[1]);
-        const ionSegmentElement = spectator.queryHost<HTMLIonSegmentElement>('ion-segment');
-        await TestHelper.whenReady(ionSegmentElement);
         spyOn(component, 'onSegmentSelect');
         const changeEvent = new CustomEvent('ionChange', { detail: { value: items[0].id } });
         ionSegmentElement.dispatchEvent(changeEvent);
         expect(component.onSegmentSelect).toHaveBeenCalledWith(items[0].id);
       });
 
-      it('should set value to event.detail.value when ionChange event fires', async () => {
+      it('should set value to event.detail.value when ionChange event fires', () => {
         expect(component.value).toBe(items[1]);
-        const ionSegmentElement = spectator.queryHost<HTMLIonSegmentElement>('ion-segment');
-        await TestHelper.whenReady(ionSegmentElement);
         const changeEvent = new CustomEvent('ionChange', { detail: { value: items[2].id } });
         ionSegmentElement.dispatchEvent(changeEvent);
         expect(component.value).toBe(items[2]);
@@ -123,10 +123,8 @@ describe('SegmentedControlComponent', () => {
       });
 
       describe('when updating items', () => {
-        it('should not emit segmentSelect event', async () => {
+        it('should not emit segmentSelect event', () => {
           const onSegmentSelectSpy = spyOn(component.segmentSelect, 'emit');
-          const ionSegmentElement = spectator.queryHost<HTMLIonSegmentElement>('ion-segment');
-          await TestHelper.whenReady(ionSegmentElement);
 
           const clonedItems = JSON.parse(JSON.stringify(items));
           spectator.setHostInput({ items: clonedItems });
@@ -149,12 +147,12 @@ describe('SegmentedControlComponent', () => {
         expect(subscriber).toHaveBeenCalledTimes(1);
       });
 
-      xit('should set the correct value when changing the selected-index in segment-select call-back', fakeAsync(() => {
+      it('should set the correct value when changing the selected-index in segment-select call-back', fakeAsync(() => {
         spectator
           .output('segmentSelect')
           .subscribe((value) => spectator.setInput('selectedIndex', 2));
 
-        spectator.dispatchMouseEvent('kirby-chip:first-of-type', 'click');
+        spectator.dispatchMouseEvent('ion-segment-button:first-of-type', 'click');
         tick();
 
         expect(component.value).toBe(items[2]);
