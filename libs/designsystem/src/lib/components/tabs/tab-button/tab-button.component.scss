@@ -9,12 +9,12 @@ ion-tab-button {
   --color-selected: utils.get-color('black');
   --kirby-badge-position: absolute;
   --kirby-badge-top: 0;
-  --kirby-badge-right: 0;
+  --kirby-badge-left: 0;
 
   @include utils.slotted(div kirby-badge) {
     &.md {
       --kirby-badge-top: -#{utils.size('xxxs')};
-      --kirby-badge-left: #{utils.size('xs')};
+      --kirby-badge-left: #{utils.size('s')};
     }
   }
 
@@ -36,6 +36,15 @@ ion-tab-button {
 
     .icon-container {
       margin-right: utils.size('xxs');
+    }
+
+    @include utils.slotted(div kirby-badge) {
+      &.md {
+        // Magic constants here as we have no tokens that gives
+        // badge the correct position in relation to the tab icon
+        --kirby-badge-top: -10px;
+        --kirby-badge-left: 14px;
+      }
     }
   }
 
