@@ -660,9 +660,15 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   @HostListener('keydown.end', ['$event'])
   _onHomeEndKeys(event: KeyboardEvent) {
     if (this.disabled) return;
-    const newIndex = this.keyboardHandlerService.handle(event, this.items, this.selectedIndex);
-    if (newIndex > -1) {
-      this.selectItem(newIndex);
+    if (!this.isOpen) return;
+
+    const newFocusedIndex = this.keyboardHandlerService.handle(
+      event,
+      this.items,
+      this.focusedIndex
+    );
+    if (newFocusedIndex > -1) {
+      this.focusItem(newFocusedIndex);
     }
     return false;
   }
