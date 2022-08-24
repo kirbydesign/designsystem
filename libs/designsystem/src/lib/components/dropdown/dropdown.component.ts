@@ -616,6 +616,21 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
       // Avoid page scroll
       event.preventDefault();
       this.open();
+
+      // If no selected item then focus first or last item
+      if (this.selectedIndex < 0) {
+        switch (event.key) {
+          case 'ArrowUp':
+            this.focusItem(this.items.length - 1);
+            break;
+          case 'ArrowDown':
+            this.focusItem(0);
+            break;
+          default:
+            break;
+        }
+      }
+
       return;
     }
 
