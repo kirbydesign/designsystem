@@ -152,6 +152,7 @@
     "karma-jasmine-html-reporter": "1.7.0",
     "karma-junit-reporter": "^2.0.1",
     "karma-spec-reporter": "0.0.32",
+    "lerna": "^5.4.3",
     "lint-staged": "^9.4.2",
     "multimatch": "^4.0.0",
     "ng-mocks": "^13.5.2",
@@ -182,5 +183,8 @@
       "pre-push": "npm run test:libs",
       "post-merge": "post-npm-install"
     }
-  }
+  },
+  "workspaces": [
+    "packages/*"
+  ]
 }
