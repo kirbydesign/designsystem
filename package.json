@@ -185,6 +185,6 @@
     }
   },
   "workspaces": [
-    "packages/*"
+    "libs/*"
   ]
 }
