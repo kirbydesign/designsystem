@@ -73,7 +73,7 @@ describe('ListComponent', () => {
       });
     });
 
-    it('should render first and last item with correct padding', async () => {
+    xit('should render first and last item with correct padding', async () => {
       const firstItem = itemsInList[0].shadowRoot.querySelector('.item-native');
       const lastItem = itemsInList[itemsInList.length - 1].shadowRoot.querySelector('.item-native');
       expect(firstItem).toHaveComputedStyle({ 'padding-top': size('xxs') });
