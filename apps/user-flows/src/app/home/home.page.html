@@ -1,0 +1,22 @@
+<kirby-page title="Items">
+  <kirby-page-actions *kirbyPageActions="{sticky: true}">
+    <button kirby-button (click)="onCogSelect()">
+      <kirby-icon name="cog"></kirby-icon>
+    </button>
+    <button kirby-button (click)="onBtnSelect()" [attentionLevel]="'1'">Click me!</button>
+  </kirby-page-actions>
+
+  <kirby-page-content>
+    <kirby-list
+      [items]="transactions"
+      [getSectionName]="getSectionName"
+      [swipeActions]="swipeActions"
+    >
+      <kirby-section-header *kirbyListSectionHeader="let section">
+        <h3 heading>{{section}}</h3>
+      </kirby-section-header>
+      <transaction-item *kirbyListItemTemplate="let transaction" [transaction]="transaction">
+      </transaction-item>
+    </kirby-list>
+  </kirby-page-content>
+</kirby-page>

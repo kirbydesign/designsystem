@@ -40,6 +40,11 @@
                 "output": "./kirby/polyfills"
               },
               {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "assets"
+              },
+              {
                 "glob": "**/*.svg",
                 "input": "libs/designsystem/src/lib/icons/svg",
                 "output": "./assets/kirby/icons/svg"
@@ -106,6 +111,115 @@
         }
       },
       "tags": []
+    },
+    "user-flows": {
+      "projectType": "application",
+      "root": "apps/user-flows",
+      "sourceRoot": "apps/user-flows/src",
+      "prefix": "kirbydesign",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/user-flows",
+            "index": "apps/user-flows/src/index.html",
+            "main": "apps/user-flows/src/main.ts",
+            "polyfills": "apps/user-flows/src/polyfills.ts",
+            "tsConfig": "apps/user-flows/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "apps/user-flows/src/favicon.ico",
+              "apps/user-flows/src/assets",
+              {
+                "glob": "**/*.svg",
+                "input": "node_modules/@kirbydesign/designsystem/icons/svg",
+                "output": "./assets/kirby/icons/svg"
+              },
+              {
+                "glob": "**/*.svg",
+                "input": "libs/designsystem/src/lib/icons/svg",
+                "output": "./assets/kirby/icons/svg"
+              },
+              {
+                "glob": "**/*.svg",
+                "input": "node_modules/ionicons/dist/ionicons/svg",
+                "output": "./svg"
+              }
+            ],
+            "styles": ["apps/user-flows/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/user-flows/src/environments/environment.ts",
+                  "with": "apps/user-flows/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "user-flows:build:production"
+            },
+            "development": {
+              "browserTarget": "user-flows:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "user-flows:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/user-flows/**/*.ts", "apps/user-flows/**/*.html"]
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "apps/user-flows/src/test.ts",
+            "tsConfig": "apps/user-flows/tsconfig.spec.json",
+            "karmaConfig": "apps/user-flows/karma.conf.js",
+            "polyfills": "apps/user-flows/src/polyfills.ts",
+            "styles": [],
+            "scripts": [],
+            "assets": []
+          }
+        }
+      }
     },
     "designsystem": {
       "projectType": "library",

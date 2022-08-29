@@ -29,10 +29,17 @@
   "defaultProject": "designsystem",
   "generators": {
     "@nrwl/angular:application": {
-      "unitTestRunner": "karma"
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "karma",
+      "e2eTestRunner": "cypress"
     },
     "@nrwl/angular:library": {
+      "linter": "eslint",
       "unitTestRunner": "karma"
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
     }
   }
 }
