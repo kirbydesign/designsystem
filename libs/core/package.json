@@ -11,5 +11,8 @@
     "loader/",
     "scss/"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "build": "stencil build --config=./libs/core/stencil.config.ts"
+  }
 }

@@ -25,7 +25,6 @@
   "scripts": {
     "ng": "nx",
     "nx": "nx",
-    "start": "npm-run-all --parallel \"ng serve cookbook\" \"build:core:watch\"",
     "build": "ng build",
     "build-polyfills": "webpack --config webpack.polyfills.config.js",
     "test": "ng test",

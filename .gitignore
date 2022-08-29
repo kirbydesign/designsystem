@@ -18,7 +18,8 @@
 /libs/core/src/components.d.ts
 
 # dependencies
-/node_modules
+**/node_modules/
+
 
 # IDEs and editors
 /.idea

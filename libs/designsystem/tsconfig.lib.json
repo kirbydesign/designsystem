@@ -4,7 +4,6 @@
     "outDir": "../../dist/out-tsc",
     "target": "es2015",
     "declaration": true,
-    "inlineSources": true,
     "types": [],
     "lib": ["dom", "es2018"]
   },
@@ -15,6 +14,7 @@
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true,
     "enableResourceInlining": true,
+    "inlineSources": true,
     "inlineSourceMap": true,
     "compilationMode": "partial"
   },
