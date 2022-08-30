@@ -49,4 +49,23 @@ describe('AccordionItemComponent', () => {
       });
     });
   });
+
+  describe('Disabled', () => {
+    it('should not show content if disabled', () => {
+      spectator.setInput('isDisabled', true);
+      spectator.detectChanges();
+      expect(spectator.query('.content')).toHaveComputedStyle({
+        visibility: 'hidden',
+      });
+    });
+
+    it('should not show content if disabled and expanded', () => {
+      spectator.setInput('isExpanded', true);
+      spectator.setInput('isDisabled', true);
+      spectator.detectChanges();
+      expect(spectator.query('.content')).toHaveComputedStyle({
+        visibility: 'hidden',
+      });
+    });
+  });
 });

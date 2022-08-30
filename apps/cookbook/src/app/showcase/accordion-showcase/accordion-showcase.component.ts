@@ -20,5 +20,18 @@ export class AccordionShowcaseComponent {
       defaultValue: 'false',
       type: ['boolean'],
     },
+    {
+      name: 'isDisabled',
+      description: 'Disables expansion of the item',
+      defaultValue: 'false',
+      type: ['boolean'],
+    },
+    {
+      name: 'disabledTitle',
+      description:
+        'Optional title shown when isDisabled is true - if null then the title property will be used ',
+      defaultValue: 'null',
+      type: ['string'],
+    },
   ];
 }
