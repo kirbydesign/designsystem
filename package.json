@@ -80,7 +80,12 @@
     "test:core": "stencil test --config=./libs/core/stencil.config.ts --spec --watchAll",
     "test:core:single": "stencil test --config=./libs/core/stencil.config.ts --spec",
     "workspace-generator": "nx workspace-generator",
-    "sync-node-version": "node ./scripts/sync-node-version.js"
+    "sync-node-version": "node ./scripts/sync-node-version.js",
+    "start:prod": "ng serve --configuration production",
+    "build:user-flows": "ng build user-flows",
+    "build:user-flows:prod": "npm run build:user-flows -- --configuration production",
+    "build:user-flows:prod:stats": "npm run build:user-flows:prod -- --stats-json",
+    "analyze:user-flows:prod:stats": "npx webpack-bundle-analyzer ./measures/stats.json"
   },
   "private": true,
   "dependencies": {
@@ -130,6 +135,7 @@
     "@nrwl/eslint-plugin-nx": "14.1.7",
     "@nrwl/linter": "14.1.7",
     "@nrwl/workspace": "14.1.7",
+    "@push-based/user-flow": "^0.8.0",
     "@stencil/angular-output-target": "0.0.6",
     "@stencil/core": "^2.14.2",
     "@stencil/sass": "^1.5.2",
@@ -187,6 +193,7 @@
     "tslint-plugin-prettier": "^2.3.0",
     "typescript": "4.6.4",
     "webpack": "^5.70.0",
+    "webpack-bundle-analyzer": "^4.6.1",
     "webpack-cli": "^4.9.0"
   },
   "husky": {
