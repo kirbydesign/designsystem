@@ -81,11 +81,12 @@
     "test:core:single": "stencil test --config=./libs/core/stencil.config.ts --spec",
     "workspace-generator": "nx workspace-generator",
     "sync-node-version": "node ./scripts/sync-node-version.js",
-    "start:prod": "ng serve --configuration production",
+    "start:user-flows:prod": "ng serve --configuration production",
     "build:user-flows": "ng build user-flows",
     "build:user-flows:prod": "npm run build:user-flows -- --configuration production",
-    "build:user-flows:prod:stats": "npm run build:user-flows:prod -- --stats-json",
-    "analyze:user-flows:prod:stats": "npx webpack-bundle-analyzer ./measures/stats.json"
+    "build:user-flows:prod:stats": "npm run build:user-flows:prod -- --stats-json && npm run copy-bundle-stats",
+    "analyze:user-flows:bundle": "npx webpack-bundle-analyzer ./measures/stats.json",
+    "copy-bundle-stats": "copyfiles -f ./dist/apps/user-flows/stats.json measures"
   },
   "private": true,
   "dependencies": {
@@ -148,6 +149,7 @@
     "chokidar": "^3.3.1",
     "codelyzer": "6.0.1",
     "copy-webpack-plugin": "^5.1.1",
+    "copyfiles": "^2.4.1",
     "core-js": "^2.6.11",
     "coveralls": "3.0.2",
     "cypress": "^9.1.0",
