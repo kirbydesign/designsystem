@@ -180,6 +180,26 @@ describe('CalendarComponent', () => {
     expect(captured.event).toBeUndefined();
   });
 
+  it('should not emit a dateChange event if clicking a date that was not passed in enabledDates', () => {
+    spectator.setInput('enabledDates', ['1997-08-25', '1997-08-26'].map(localMidnightDate));
+    spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+
+    const captured = captureDateChangeEvents();
+
+    clickDayOfMonth(27); // August 27st was implicitly disabled
+    expect(captured.event).toBeUndefined();
+  });
+
+  it('should emit a dateChange event if clicking a date that was passed in enabledDates', () => {
+    spectator.setInput('enabledDates', ['1997-08-25', '1997-08-26'].map(localMidnightDate));
+    spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+
+    const captured = captureDateChangeEvents();
+
+    clickDayOfMonth(26); // August 26st was explicitly enabled
+    expect(captured.event).toBeTruthy();
+  });
+
   it('should not emit a dateChange event if clicking the already selected date', () => {
     spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
 
@@ -271,6 +291,11 @@ describe('CalendarComponent', () => {
     expect(spectator.component.disabledDates).toEqual(localDates);
     spectator.setInput('disabledDates', utcDates);
     expect(spectator.component.disabledDates).toEqual(localDates);
+
+    spectator.setInput('enabledDates', localDates);
+    expect(spectator.component.enabledDates).toEqual(localDates);
+    spectator.setInput('enabledDates', utcDates);
+    expect(spectator.component.enabledDates).toEqual(localDates);
   });
 
   it('should render days from Monday to Sunday', () => {
