@@ -36,7 +36,7 @@ $padding: utils.size('s');
 }
 
 .disabled {
-  cursor: default;
+  pointer-events: none;
 
   .title {
     color: utils.get-text-color('semi-dark');

@@ -22,7 +22,7 @@ export class AccordionShowcaseComponent {
     },
     {
       name: 'isDisabled',
-      description: 'Disables expansion of the item',
+      description: 'Disables expansion of the item and styles it as disabled.',
       defaultValue: 'false',
       type: ['boolean'],
     },
