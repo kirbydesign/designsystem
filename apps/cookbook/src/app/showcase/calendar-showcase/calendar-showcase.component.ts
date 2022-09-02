@@ -18,6 +18,7 @@ export class CalendarShowcaseComponent {
   setMaxDate = false;
   setTodayDate = false;
   setDisabledDates = false;
+  setEnabledDates = false;
   useTimezoneUTC = false;
   showYearNavigator = false;
   minDate: Date;
