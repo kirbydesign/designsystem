@@ -116,7 +116,7 @@ export class ModalWrapperComponent
     }
     return this._intersectionObserver;
   }
-  private destroy$ = new Subject();
+  private destroy$: Subject<boolean> = new Subject<boolean>();
 
   @HostBinding('class.drawer')
   get _isDrawer() {
@@ -535,7 +535,7 @@ export class ModalWrapperComponent
       this.resizeObserverService.unobserve(this.ionHeaderElement.nativeElement);
       this.resizeObserverService.unobserve(this.currentFooter);
     }
-    this.destroy$.next();
+    this.destroy$.next(true);
     this.destroy$.complete();
   }
 }
