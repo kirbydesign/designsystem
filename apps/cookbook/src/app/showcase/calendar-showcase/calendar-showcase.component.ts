@@ -92,7 +92,15 @@ export class CalendarShowcaseComponent {
     },
     {
       name: 'disabledDates',
-      description: '(Optional) Array of dates that should not be selectable.',
+      description:
+        '(Optional) Array of dates that should not be selectable. Should not be used together with enabledDates.',
+      defaultValue: 'null',
+      type: ['Date[]'],
+    },
+    {
+      name: 'enabledDates',
+      description:
+        '(Optional) Array of dates that should be selectable. Should not be used together with disabledDates.',
       defaultValue: 'null',
       type: ['Date[]'],
     },
