@@ -1,6 +1,8 @@
 <ng-container>
   <div
-    (click)="toggleExpanded()"
+    (click)="_onToggleExpanded($event)"
+    (keydown.ENTER)="_onToggleExpanded($event)"
+    (keydown.space)="_onToggleExpanded($event)"
     class="header"
     role="button"
     [class.disabled]="isDisabled"

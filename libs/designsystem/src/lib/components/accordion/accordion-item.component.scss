@@ -38,9 +38,12 @@ $padding: utils.size('s');
 .disabled {
   pointer-events: none;
 
+  .kirby-icon {
+    color: utils.get-color('semi-dark');
+  }
+
   .title {
     color: utils.get-text-color('semi-dark');
-    font-weight: utils.font-weight('light');
   }
 }
 
