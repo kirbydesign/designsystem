@@ -53,6 +53,11 @@
       @include interaction-state.apply-focus-visible($shadow: utils.get-elevation(4));
     }
 
+    &.interaction-state-make-lighter-and-louder {
+      @include interaction-state.apply-hover('xxs', $make-lighter: true);
+      @include interaction-state.apply-active('s', $make-lighter: true);
+    }
+
     outline: none;
   }
 }
