@@ -62,6 +62,10 @@ describe('AccordionItemComponent', () => {
       expect(spectator.query('.content')).toHaveComputedStyle({
         visibility: 'hidden',
       });
+    });
+    it('should use disabled-style if disabled', () => {
+      spectator.setInput('isDisabled', true);
+      spectator.detectChanges();
       expect(spectator.query('.title')).toHaveComputedStyle({
         color: getTextColor('semi-dark'),
       });
