@@ -2,6 +2,25 @@
 
 Notable changes to the project will be documented in this file.
 
+## [6.3.1](https://github.com/kirbydesign/designsystem/pull/2421) (16-08-2022)
+
+- Upgrade to Ionic 6
+
+## [6.2.1](https://github.com/kirbydesign/designsystem/pull/2414) (11-08-2022)
+
+### Bugfixes
+
+- **dropdown** - fix scroll problem on touch devices ([#2396](https://github.com/kirbydesign/designsystem/pull/2396))
+- **fabsheet** - add missing close icon ([#2403](https://github.com/kirbydesign/designsystem/pull/2403))
+- **fabsheet** - fix missing backdrop on mobile devices ([#2401](https://github.com/kirbydesign/designsystem/pull/2401))
+- **item** - fix slotted items being unclickable ([#2381](https://github.com/kirbydesign/designsystem/pull/2381))
+- **modal** - refactor moving of modal elements, solves multiple issues ([#2238](https://github.com/kirbydesign/designsystem/pull/2238))
+- **segmented-control** - avoid removing focus on embedded badge click ([#2400](https://github.com/kirbydesign/designsystem/pull/2400))
+
+### Features
+
+- **icons** - add menu icons ([#2409](https://github.com/kirbydesign/designsystem/pull/2409))
+
 ## [6.1.1](https://github.com/kirbydesign/designsystem/pull/2373) (27-06-2022)
 
 ### Bugfixes

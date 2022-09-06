@@ -1,5 +1,4 @@
-import { Component, NgZone } from '@angular/core';
-import { fakeAsync, flush, tick } from '@angular/core/testing';
+import { fakeAsync, tick } from '@angular/core/testing';
 import { Router, Routes } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { IonRefresher } from '@ionic/angular';
@@ -14,6 +13,8 @@ import { ButtonComponent } from '../button/button.component';
 import { ModalNavigationService } from '../modal/services/modal-navigation.service';
 import { TabsComponent } from '../tabs';
 
+const { size, fontWeight } = DesignTokenHelper;
+
 import {
   PageActionsComponent,
   PageActionsDirective,
@@ -24,21 +25,18 @@ import {
   PageToolbarTitleDirective,
 } from './page.component';
 
-const { fontWeight, size } = DesignTokenHelper;
-
-@Component({})
-class DummyComponent {}
-
 describe('PageComponent', () => {
   const titleText = 'Test Page';
   const subtitleText = 'Page subtitle';
+  const pageUrl = '';
+  const firstOtherUrl = 'firstOther';
+  const secondOtherUrl = 'secondOther';
   let spectator: SpectatorHost<PageComponent>;
   let ionToolbar: HTMLElement;
   let ionContent: HTMLIonContentElement;
   let tabBar: SpyObject<TabsComponent>;
   let router: SpyObject<Router>;
   let modalNavigationService: SpyObject<ModalNavigationService>;
-  let zone: NgZone;
 
   const dummyContent = `<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi aperiam deserunt dolore error esse
             laborum magni natus nihil optio perferendis placeat, quae sed, sequi sunt totam voluptatem! Dicta,
@@ -54,12 +52,16 @@ describe('PageComponent', () => {
 
   const routes: Routes = [
     {
-      path: '',
+      path: pageUrl,
       component: PageComponent,
     },
     {
-      path: 'someUrl',
-      component: DummyComponent,
+      path: firstOtherUrl,
+      component: PageComponent,
+    },
+    {
+      path: secondOtherUrl,
+      component: PageComponent,
     },
   ];
 
@@ -101,8 +103,6 @@ describe('PageComponent', () => {
     modalNavigationService.isModalRoute.and.returnValue(false);
     router = spectator.inject(Router);
     tabBar = spectator.inject(TabsComponent);
-    zone = spectator.inject(NgZone);
-
     ionToolbar = spectator.queryHost('ion-toolbar');
     ionContent = spectator.queryHost('ion-content');
     await TestHelper.whenReady(ionToolbar);
@@ -343,16 +343,69 @@ describe('PageComponent', () => {
     expect(tabBar.tabBarBottomHidden).toBe(false);
   }));
 
-  it('should show tab bar when tabBarBottomHidden is true on leave', fakeAsync(async () => {
+  it('should show tab bar when tabBarBottomHidden is true on leave', () => {
     spectator.setInput('tabBarBottomHidden', true);
-    tick();
-    expect(tabBar.tabBarBottomHidden).toBe(true);
 
-    await triggerOnLeave(router);
+    navigateToUrl(firstOtherUrl);
 
     expect(tabBar.tabBarBottomHidden).toBe(false);
-    flush();
-  }));
+  });
+
+  describe('with enter and leave event binding', () => {
+    let enterEventHandler: jasmine.Spy<jasmine.Func>;
+    let leaveEventHandler: jasmine.Spy<jasmine.Func>;
+
+    beforeEach(() => {
+      enterEventHandler = jasmine.createSpy();
+      leaveEventHandler = jasmine.createSpy();
+      spectator.output('enter').subscribe(enterEventHandler);
+      spectator.output('leave').subscribe(leaveEventHandler);
+    });
+
+    it('should emit the correct event(s) when navigating navigating to the page', () => {
+      navigateToUrl(firstOtherUrl);
+      enterEventHandler.calls.reset();
+      leaveEventHandler.calls.reset();
+
+      navigateUrls([secondOtherUrl, pageUrl]);
+
+      expect(enterEventHandler).toHaveBeenCalledTimes(1);
+      expect(leaveEventHandler).toHaveBeenCalledTimes(0);
+    });
+
+    it('should emit the correct event(s) when navigating away from the page', () => {
+      navigateToUrl(pageUrl);
+      enterEventHandler.calls.reset();
+      leaveEventHandler.calls.reset();
+
+      navigateUrls([firstOtherUrl, secondOtherUrl]);
+
+      expect(enterEventHandler).toHaveBeenCalledTimes(0);
+      expect(leaveEventHandler).toHaveBeenCalledTimes(1);
+    });
+
+    it('should emit the correct event(s) when navigating away from the page and back again', () => {
+      navigateToUrl(pageUrl);
+      enterEventHandler.calls.reset();
+      leaveEventHandler.calls.reset();
+
+      navigateUrls([firstOtherUrl, secondOtherUrl, pageUrl]);
+
+      expect(enterEventHandler).toHaveBeenCalledTimes(1);
+      expect(leaveEventHandler).toHaveBeenCalledTimes(1);
+    });
+
+    it('should emit the correct event(s) when navigating to the page and away again', () => {
+      navigateToUrl(secondOtherUrl);
+      enterEventHandler.calls.reset();
+      leaveEventHandler.calls.reset();
+
+      navigateUrls([firstOtherUrl, secondOtherUrl, pageUrl, firstOtherUrl, secondOtherUrl]);
+
+      expect(enterEventHandler).toHaveBeenCalledTimes(1);
+      expect(leaveEventHandler).toHaveBeenCalledTimes(1);
+    });
+  });
 
   describe('with a back-button', () => {
     let ionBackButton;
@@ -392,7 +445,12 @@ describe('PageComponent', () => {
     });
   });
 
-  async function triggerOnLeave(router: SpyObject<Router>) {
-    await zone.run(() => router.navigate(['someUrl']));
-  }
+  const navigateUrls = (urls: string[]) => {
+    urls.forEach((url: string) => navigateToUrl(url));
+  };
+
+  const navigateToUrl = fakeAsync((url: string) => {
+    router.navigateByUrl(url);
+    tick();
+  });
 });

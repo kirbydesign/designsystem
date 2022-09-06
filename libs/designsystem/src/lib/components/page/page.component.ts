@@ -233,8 +233,8 @@ export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChec
   fixedActionsTemplate: TemplateRef<any>;
   private pageTitleIntersectionObserverRef: IntersectionObserver =
     this.pageTitleIntersectionObserver();
-  private urls: string[] = [];
-  private hasEntered: boolean;
+  private url: string;
+  private isActive: boolean;
 
   private ngOnDestroy$ = new Subject();
   private contentScrolled$: Observable<ScrollDetail>;
@@ -282,18 +282,23 @@ export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChec
       this.changeDetectorRef.detectChanges();
     });
 
+    // This instance has observed a page enter so register the correct url for this instance
+    this.url = this.router.url;
+    this.onEnter();
+
+    // Watch navigation events for page enter and leave
     this.navigationStart$.subscribe((event: NavigationStart) => {
       if (
-        !this.urls.includes(event.url) &&
-        !this.modalNavigationService.isModalRoute(event.url) &&
-        !this.modalNavigationService.isModalRoute(this.router.url)
+        event.url !== this.url &&
+        !this.modalNavigationService.isModalRoute(this.url) &&
+        !this.modalNavigationService.isModalRoute(event.url)
       ) {
         this.onLeave();
       }
     });
 
     this.navigationEnd$.subscribe((event: NavigationEnd) => {
-      if (this.urls.includes(event.urlAfterRedirects)) {
+      if (event.urlAfterRedirects === this.url) {
         this.onEnter();
       }
     });
@@ -306,11 +311,6 @@ export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChec
   }
 
   ngAfterContentChecked(): void {
-    if (!this.urls.includes(this.router.url)) {
-      this.urls.push(this.router.url);
-      this.onEnter();
-    }
-
     this.initializeTitle();
     this.initializeActions();
     this.initializeContent();
@@ -334,8 +334,8 @@ export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChec
   }
 
   private onEnter() {
-    if (this.hasEntered) return;
-    this.hasEntered = true;
+    if (this.isActive) return;
+    this.isActive = true;
 
     this.enter.emit();
     if (this.pageTitle) {
@@ -344,11 +344,13 @@ export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChec
   }
 
   private onLeave() {
+    if (!this.isActive) return;
+    this.isActive = false;
+
     this.leave.emit();
     if (this.pageTitle) {
       this.pageTitleIntersectionObserverRef.unobserve(this.pageTitle.nativeElement);
     }
-    this.hasEntered = false;
 
     if (this.tabBarBottomHidden && this.tabsComponent) {
       this.tabsComponent.tabBarBottomHidden = false;
