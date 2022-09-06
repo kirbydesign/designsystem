@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "dependencies": {
     "@fontsource/roboto": "4.2.1",
-    "@ionic/angular": "5.5.2",
-    "@kirbydesign/core": "0.0.28",
+    "@ionic/angular": "6.2.1",
+    "@kirbydesign/core": "0.0.29",
     "chart.js": "3.3.2",
     "chartjs-adapter-date-fns": "^2.0.0",
     "chartjs-plugin-annotation": "^1.0.2",
@@ -16,11 +16,11 @@
     "inputmask": "5.0.5"
   },
   "peerDependencies": {
-    "@angular/common": ">=9.0.0",
-    "@angular/core": ">=9.0.0",
-    "@angular/forms": ">=9.0.0",
-    "@angular/router": ">=9.0.0",
-    "rxjs": ">=6.5.3",
+    "@angular/common": ">=12.0.0",
+    "@angular/core": ">=12.0.0",
+    "@angular/forms": ">=12.0.0",
+    "@angular/router": ">=12.0.0",
+    "rxjs": ">=6.5.5",
     "zone.js": ">=0.10.2"
   },
   "exports": {

@@ -20,9 +20,14 @@ export enum SegmentedControlMode {
 export class SegmentedControlComponent {
   constructor(private iconRegistryService: IconRegistryService) {}
 
-  preventWrapperClick(event: Event) {
+  /**
+   * Ensure that the click actually did originate from within the segment-button.
+   * We do not want to react to clicks on e.g. segment-btn-wrapper or badge.
+   */
+  preventOutsideClick(event: TouchEvent) {
     if (event.target instanceof HTMLElement) {
-      if (event.target.classList.contains('segment-btn-wrapper')) {
+      const targetIsInSegmentBtn = !!event.target.closest('ion-segment-button');
+      if (!targetIsInSegmentBtn) {
         event.stopImmediatePropagation();
       }
     }
@@ -61,12 +66,15 @@ export class SegmentedControlComponent {
     return this._selectedIndex;
   }
 
-  @Input() set selectedIndex(value: number) {
-    if (value !== this._selectedIndex) {
-      this._selectedIndex = value;
+  @Input() set selectedIndex(index: number) {
+    if (index !== this._selectedIndex) {
+      this._selectedIndex = index;
       this._value = this.items[this.selectedIndex];
+      this.selectedIndexChange.emit(this.selectedIndex);
     }
   }
+
+  @Output() selectedIndexChange = new EventEmitter<number>();
 
   private _value: SegmentItem;
   get value(): SegmentItem {
@@ -97,9 +105,12 @@ export class SegmentedControlComponent {
 
   onSegmentSelect(selectedId: string) {
     const selectedItemIndex = this.items.findIndex((item) => selectedId === item.id);
+
     if (selectedItemIndex !== this.selectedIndex) {
       this.selectedIndex = selectedItemIndex;
-      this.segmentSelect.emit(this.value);
+      setTimeout(() => {
+        this.segmentSelect.emit(this.value);
+      });
     }
   }
 }

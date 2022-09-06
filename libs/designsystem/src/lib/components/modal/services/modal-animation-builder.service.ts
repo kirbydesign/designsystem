@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Animation, AnimationBuilder, AnimationController } from '@ionic/angular';
+import { Animation, AnimationBuilder, createAnimation } from '@ionic/angular';
+import { ModalAnimationOptions } from '@ionic/core';
 
 import { KirbyAnimation } from '../../../animation/kirby-animation';
 import { PlatformService } from '../../../helpers/platform.service';
 
 @Injectable({ providedIn: 'root' })
 export class ModalAnimationBuilderService {
-  constructor(private animationCtrl: AnimationController, private platform: PlatformService) {}
+  constructor(private platform: PlatformService) {}
 
   private readonly easingEnter = KirbyAnimation.Easing.modal.enter;
   private readonly easingLeave = KirbyAnimation.Easing.modal.exit;
@@ -16,24 +17,18 @@ export class ModalAnimationBuilderService {
   };
 
   public enterAnimation(currentBackdrop?: HTMLIonBackdropElement): AnimationBuilder {
-    return (baseEl: HTMLElement, presentingEl?: HTMLElement): Animation => {
-      const backdropAnimation = this.animationCtrl
-        .create()
-        .addElement(baseEl.querySelector('ion-backdrop')!)
-        .fromTo('opacity', 0.01, 'var(--backdrop-opacity)')
-        .beforeStyles({
-          'pointer-events': 'none',
-        })
-        .afterClearStyles(['pointer-events']);
+    return (baseEl: HTMLElement, opts: ModalAnimationOptions): Animation => {
+      const { presentingEl } = opts;
+      const root = this.getElementRoot(baseEl);
+      const { wrapperAnimation, backdropAnimation } = this.createEnterAnimation();
 
-      const wrapperAnimation = this.animationCtrl
-        .create()
-        .addElement(baseEl.querySelectorAll('.modal-wrapper, .modal-shadow')!)
-        .beforeStyles({ opacity: 1 })
-        .fromTo('transform', 'translateY(100vh)', 'translateY(0vh)');
+      backdropAnimation.addElement(root.querySelector('ion-backdrop')!);
 
-      const baseAnimation = this.animationCtrl
-        .create()
+      wrapperAnimation
+        .addElement(root.querySelectorAll('.modal-wrapper, .modal-shadow')!)
+        .beforeStyles({ opacity: 1 });
+
+      const baseAnimation = createAnimation('entering-base')
         .addElement(baseEl)
         .easing(this.easingEnter)
         .duration(this.duration)
@@ -41,8 +36,7 @@ export class ModalAnimationBuilderService {
 
       let currentBackdropAnimation: Animation;
       if (currentBackdrop) {
-        currentBackdropAnimation = this.animationCtrl
-          .create()
+        currentBackdropAnimation = createAnimation()
           .addElement(currentBackdrop)
           .fromTo('opacity', 'var(--backdrop-opacity)', 0.01);
       }
@@ -52,8 +46,9 @@ export class ModalAnimationBuilderService {
         const hasCardModal =
           presentingEl.tagName === 'ION-MODAL' &&
           (presentingEl as HTMLIonModalElement).presentingElement !== undefined;
+        const presentingElRoot = this.getElementRoot(presentingEl);
 
-        const presentingAnimation = this.animationCtrl.create().beforeStyles({
+        const presentingAnimation = createAnimation().beforeStyles({
           transform: 'translateY(0)',
           'transform-origin': 'top center',
           overflow: 'hidden',
@@ -65,7 +60,7 @@ export class ModalAnimationBuilderService {
           /**
            * Fallback for browsers that does not support `max()` (ex: Firefox)
            * No need to worry about statusbar padding since engines like Gecko
-           * are not used as the engine for standlone Cordova/Capacitor apps
+           * are not used as the engine for standalone Cordova/Capacitor apps
            */
           const transformOffset = !CSS.supports('width', 'max(0px, 1px)')
             ? '30px'
@@ -94,9 +89,11 @@ export class ModalAnimationBuilderService {
                 borderRadius: '10px 10px 0 0',
               },
             ]);
+
           baseAnimation.addAnimation(presentingAnimation);
         } else {
           baseAnimation.addAnimation(backdropAnimation);
+
           if (currentBackdropAnimation) {
             baseAnimation.addAnimation(currentBackdropAnimation);
           }
@@ -113,18 +110,17 @@ export class ModalAnimationBuilderService {
               .afterStyles({
                 transform: finalTransform,
               })
-              .addElement(presentingEl.querySelector('.modal-wrapper')!)
+              .addElement(presentingElRoot.querySelector('.modal-wrapper')!)
               .keyframes([
                 { offset: 0, filter: 'contrast(1)', transform: 'translateY(0) scale(1)' },
                 { offset: 1, filter: 'contrast(0.85)', transform: finalTransform },
               ]);
 
-            const shadowAnimation = this.animationCtrl
-              .create()
+            const shadowAnimation = createAnimation()
               .afterStyles({
                 transform: finalTransform,
               })
-              .addElement(presentingEl.querySelector('.modal-shadow')!)
+              .addElement(presentingElRoot.querySelector('.modal-shadow')!)
               .keyframes([
                 { offset: 0, opacity: '1', transform: 'translateY(0) scale(1)' },
                 { offset: 1, opacity: '0', transform: finalTransform },
@@ -145,29 +141,30 @@ export class ModalAnimationBuilderService {
   }
 
   public leaveAnimation(currentBackdrop?: HTMLIonBackdropElement): AnimationBuilder {
-    return (baseEl: HTMLElement, presentingEl?: HTMLElement): Animation => {
-      const backdropAnimation = this.animationCtrl
-        .create()
-        .addElement(baseEl.querySelector('ion-backdrop')!)
-        .fromTo('opacity', 'var(--backdrop-opacity)', 0.0);
+    return (
+      baseEl: HTMLElement,
+      opts: ModalAnimationOptions,
+      duration = this.duration
+    ): Animation => {
+      const { presentingEl } = opts;
+      const root = this.getElementRoot(baseEl);
+      const { wrapperAnimation, backdropAnimation } = this.createLeaveAnimation();
 
-      const wrapperAnimation = this.animationCtrl
-        .create()
-        .addElement(baseEl.querySelectorAll('.modal-wrapper, .modal-shadow')!)
-        .beforeStyles({ opacity: 1 })
-        .fromTo('transform', 'translateY(0vh)', 'translateY(100vh)');
+      backdropAnimation.addElement(root.querySelector('ion-backdrop')!);
 
-      const baseAnimation = this.animationCtrl
-        .create()
+      wrapperAnimation
+        .addElement(root.querySelectorAll('.modal-wrapper, .modal-shadow')!)
+        .beforeStyles({ opacity: 1 });
+
+      const baseAnimation = createAnimation('leaving-base')
         .addElement(baseEl)
         .easing(this.easingLeave)
-        .duration(this.duration)
+        .duration(duration)
         .addAnimation(wrapperAnimation);
 
       let currentBackdropAnimation: Animation;
       if (currentBackdrop) {
-        currentBackdropAnimation = this.animationCtrl
-          .create()
+        currentBackdropAnimation = createAnimation()
           .addElement(currentBackdrop)
           .fromTo('opacity', 0.01, 'var(--backdrop-opacity)')
           .afterStyles({ opacity: 'var(--backdrop-opacity)' }); //Ensures backdrop is reset to default opacity after swipe to close
@@ -178,9 +175,9 @@ export class ModalAnimationBuilderService {
         const hasCardModal =
           presentingEl.tagName === 'ION-MODAL' &&
           (presentingEl as HTMLIonModalElement).presentingElement !== undefined;
+        const presentingElRoot = this.getElementRoot(presentingEl);
 
-        const presentingAnimation = this.animationCtrl
-          .create()
+        const presentingAnimation = createAnimation()
           .beforeClearStyles(['transform'])
           .afterClearStyles(['transform'])
           .onFinish((currentStep) => {
@@ -240,7 +237,7 @@ export class ModalAnimationBuilderService {
             const finalTransform = `translateY(-10px) scale(${toPresentingScale})`;
 
             presentingAnimation
-              .addElement(presentingEl.querySelector('.modal-wrapper')!)
+              .addElement(presentingElRoot.querySelector('.modal-wrapper')!)
               .afterStyles({
                 transform: 'translate3d(0, 0, 0)',
               })
@@ -249,9 +246,8 @@ export class ModalAnimationBuilderService {
                 { offset: 1, filter: 'contrast(1)', transform: 'translateY(0) scale(1)' },
               ]);
 
-            const shadowAnimation = this.animationCtrl
-              .create()
-              .addElement(presentingEl.querySelector('.modal-shadow')!)
+            const shadowAnimation = createAnimation()
+              .addElement(presentingElRoot.querySelector('.modal-shadow')!)
               .afterStyles({
                 transform: 'translateY(0) scale(1)',
               })
@@ -273,4 +269,46 @@ export class ModalAnimationBuilderService {
       return baseAnimation;
     };
   }
+
+  private createEnterAnimation = () => {
+    const backdropAnimation = createAnimation()
+      .fromTo('opacity', 0.01, 'var(--backdrop-opacity)')
+      .beforeStyles({
+        'pointer-events': 'none',
+      })
+      .afterClearStyles(['pointer-events']);
+
+    const wrapperAnimation = createAnimation().fromTo(
+      'transform',
+      'translateY(100vh)',
+      'translateY(0vh)'
+    );
+
+    return { backdropAnimation, wrapperAnimation };
+  };
+
+  private createLeaveAnimation = () => {
+    const backdropAnimation = createAnimation().fromTo('opacity', 'var(--backdrop-opacity)', 0);
+
+    const wrapperAnimation = createAnimation().fromTo(
+      'transform',
+      'translateY(0vh)',
+      'translateY(100vh)'
+    );
+
+    return { backdropAnimation, wrapperAnimation };
+  };
+
+  /**
+   * Gets the root context of a shadow dom element
+   * On newer browsers this will be the shadowRoot,
+   * but for older browser this may just be the
+   * element itself.
+   *
+   * Useful for whenever you need to explicitly
+   * do "myElement.shadowRoot!.querySelector(...)".
+   */
+  private getElementRoot = (el: HTMLElement, fallback: HTMLElement = el) => {
+    return el.shadowRoot || fallback;
+  };
 }

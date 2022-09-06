@@ -2,6 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ContentChild,
   ElementRef,
@@ -42,7 +43,11 @@ export class FabSheetComponent implements AfterContentInit {
   @ViewChild(IonFabButton, { static: true, read: ElementRef })
   ionFabButton: ElementRef<HTMLElement>;
 
-  constructor(private renderer: Renderer2, @Inject(DOCUMENT) private document: any) {}
+  constructor(
+    private renderer: Renderer2,
+    private changeDetectorRef: ChangeDetectorRef,
+    @Inject(DOCUMENT) private document: any
+  ) {}
 
   ngAfterContentInit(): void {
     if (this.actionSheet) {
@@ -64,6 +69,11 @@ export class FabSheetComponent implements AfterContentInit {
     } else {
       this.renderer.removeClass(this.document.body, 'fab-sheet-active');
     }
-    setTimeout(() => (this._isBackdropVisible = this.isFabSheetOpen));
+
+    // Postpone backdrop visibility update to allow for animation of opacity
+    setTimeout(() => {
+      this._isBackdropVisible = this.isFabSheetOpen;
+      this.changeDetectorRef.markForCheck();
+    });
   }
 }

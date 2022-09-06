@@ -1,14 +1,17 @@
 <ng-container>
   <div
-    (click)="isExpanded = !isExpanded"
+    (click)="_onToggleExpanded($event)"
+    (keydown.ENTER)="_onToggleExpanded($event)"
+    (keydown.space)="_onToggleExpanded($event)"
     class="header"
     role="button"
+    [class.disabled]="isDisabled"
     [class.expanded]="isExpanded"
     [attr.aria-expanded]="isExpanded"
     [attr.aria-controls]="_contentId"
     [id]="_titleId"
   >
-    <div class="title">{{ title }}</div>
+    <div class="title">{{ getTitle() }}</div>
     <kirby-icon name="arrow-down"></kirby-icon>
   </div>
   <div

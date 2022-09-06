@@ -27,6 +27,10 @@ export class ActionSheetHelper {
       backdropDismiss: true,
     });
 
+    // Remove 'modal-shadow' element as we are no longer able to hide it with CSS in Ionic 6.
+    // We need to remove it so it does not obstruct the backdrop-click to dismiss functionality.
+    ionModal.shadowRoot.querySelector('.modal-shadow').remove();
+
     const cancelSubscription: Subscription = cancel.subscribe(() => ionModal.dismiss());
     const itemSelectSubscription: Subscription = itemSelect.subscribe((item) =>
       ionModal.dismiss(item)
