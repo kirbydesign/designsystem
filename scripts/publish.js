@@ -134,7 +134,7 @@ function createScssCoreForwardFiles(coreLibSrcDir, sccsCoreForwardFilePaths) {
     });
   };
 
-  const generateSccsCoreForwardFiles = () => {
+  const generateScssCoreForwardFiles = () => {
     console.log('Creating SCSS core forwarding files...');
     return new Promise((resolve) => {
       sccsCoreForwardFilePaths.forEach((targetRootDir) => {
