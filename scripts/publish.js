@@ -144,7 +144,7 @@ function createScssCoreForwardFiles(coreLibSrcDir, scssCoreForwardFilePaths) {
     });
   };
 
-  const deleteSccsCoreTargetFiles = () => {
+  const deleteScssCoreTargetFiles = () => {
     console.log('Deleting SCSS core target files...');
     return fs.remove(`${sourceRootDir}`);
   };
