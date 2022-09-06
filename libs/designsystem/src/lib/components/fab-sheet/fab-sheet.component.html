@@ -1,5 +1,5 @@
 <ion-backdrop
-  [visible]="actionSheet && isFabSheetOpen"
+  *ngIf="actionSheet && isFabSheetOpen"
   (ionBackdropTap)="hideActions(fab)"
   (click)="hideActions(fab)"
 ></ion-backdrop>
