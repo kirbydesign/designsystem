@@ -149,7 +149,7 @@ function createScssCoreForwardFiles(coreLibSrcDir, scssCoreForwardFilePaths) {
     return fs.remove(`${sourceRootDir}`);
   };
 
-  return copySccsCoreTargetFiles()
+  return copyScssCoreTargetFiles()
     .then(generateScssCoreForwardFiles)
     .then(deleteScssCoreTargetFiles);
 }
