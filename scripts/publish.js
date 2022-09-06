@@ -125,7 +125,7 @@ function createScssCoreForwardFiles(coreLibSrcDir, sccsCoreForwardFilePaths) {
   const sourceRootDir = `${coreLibDir}/scss`;
   const sharedRootDir = libsRootDir;
 
-  const copySccsCoreTargetFiles = () => {
+  const copyScssCoreTargetFiles = () => {
     console.log('Copying SCSS core target files...');
 
     const onlyScssFiles = (input) => ['', '.scss'].includes(path.extname(input));
