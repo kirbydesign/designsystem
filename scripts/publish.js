@@ -150,8 +150,8 @@ function createScssCoreForwardFiles(coreLibSrcDir, scssCoreForwardFilePaths) {
   };
 
   return copySccsCoreTargetFiles()
-    .then(generateSccsCoreForwardFiles)
-    .then(deleteSccsCoreTargetFiles);
+    .then(generateScssCoreForwardFiles)
+    .then(deleteScssCoreTargetFiles);
 }
 
 function copyIcons(libSrcDir, distTarget) {
