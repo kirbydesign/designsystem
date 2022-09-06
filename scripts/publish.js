@@ -121,7 +121,7 @@ function copyReadme(distTarget) {
   return fs.copy('readme.md', `${distTarget}/readme.md`);
 }
 
-function createScssCoreForwardFiles(coreLibSrcDir, sccsCoreForwardFilePaths) {
+function createScssCoreForwardFiles(coreLibSrcDir, scssCoreForwardFilePaths) {
   const sourceRootDir = `${coreLibDir}/scss`;
   const sharedRootDir = libsRootDir;
 
