@@ -171,8 +171,8 @@ function copyPolyfills(libSrcDir, distTarget) {
   });
 }
 
-function copyCoreStencilBuildFiles(stencilBuildDir, distTarget) {
-  console.log('Copying core stencil build files...');
+function copyCoreDistributionFiles(stencilBuildDir, distTarget) {
+  console.log('Copying core distribution files...');
 
   const copyDistFiles = () => fs.copy(`${stencilBuildDir}/dist`, `${distTarget}/dist`);
   const copyLoaderFiles = () => fs.copy(`${stencilBuildDir}/loader`, `${distTarget}/loader`);
