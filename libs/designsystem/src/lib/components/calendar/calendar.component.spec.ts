@@ -56,7 +56,6 @@ describe('CalendarComponent', () => {
   it('should initially render the current month if selectedDate is not specified', () => {
     const currentDay = startOfDay(new Date());
     const currentMonth = startOfMonth(new Date());
-
     verifyMonthAndYear(format(currentMonth, 'MMMM yyyy'));
     expect(spectator.query('.day.today')).toHaveText(format(currentDay, 'd'));
   });
@@ -64,13 +63,10 @@ describe('CalendarComponent', () => {
   it('should initially render the month of selectedDate if specified', () => {
     spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
 
-    verifyMonthAndYear('August 1997');
-
     const headerTexts = trimmedTexts('th');
-    expect(headerTexts).toEqual(['M', 'T', 'W', 'T', 'F', 'S', 'S']);
-
     const dayTexts = trimmedTexts('.day.current-month');
-
+    verifyMonthAndYear('August 1997');
+    expect(headerTexts).toEqual(['M', 'T', 'W', 'T', 'F', 'S', 'S']);
     expect(dayTexts.slice(0, 5)).toEqual(['1', '2', '3', '4', '5']);
     expect(dayTexts.length).toEqual(31);
   });
@@ -94,6 +90,7 @@ describe('CalendarComponent', () => {
     verifyMonthAndYear('August 1997');
 
     spectator.click(SEL_NAV_FORWARD);
+
     verifyMonthAndYear('September 1997');
 
     spectator.click(SEL_NAV_FORWARD);
@@ -107,6 +104,7 @@ describe('CalendarComponent', () => {
   it('should not be possible to navigate to any month preceding minDate, if specified', () => {
     spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
     spectator.setInput('minDate', localMidnightDate('1997-06-15'));
+
     spectator.click(SEL_NAV_BACK);
     spectator.click(SEL_NAV_BACK);
 
@@ -121,6 +119,7 @@ describe('CalendarComponent', () => {
   it('should not be possible to navigate to any month exceeding maxDate, if specified', () => {
     spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
     spectator.setInput('maxDate', localMidnightDate('1997-10-01'));
+
     spectator.click(SEL_NAV_FORWARD);
     spectator.click(SEL_NAV_FORWARD);
 
@@ -134,8 +133,8 @@ describe('CalendarComponent', () => {
 
   it('should emit a dateChange event when a valid date is clicked', () => {
     const captured = captureDateChangeEvents();
-
     spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+
     clickDayOfMonth(14);
 
     expect(captured.event).toEqual(localMidnightDate('1997-08-14'));
@@ -151,9 +150,9 @@ describe('CalendarComponent', () => {
 
   it('should not emit a dateChange event if disableWeekends is true and a weekend date is clicked', () => {
     const captured = captureDateChangeEvents();
-
     spectator.setInput('disableWeekends', true);
     spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+
     clickDayOfMonth(24); // August 24th is a Sunday
 
     expect(captured.event).toBeUndefined();
@@ -161,10 +160,10 @@ describe('CalendarComponent', () => {
 
   it('should not emit a dateChange event if disablePastDates is true and a date in the past is clicked', () => {
     const captured = captureDateChangeEvents();
-
     spectator.setInput('disablePastDates', true);
     spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
     spectator.setInput('todayDate', localMidnightDate('1997-08-29'));
+
     clickDayOfMonth(1); // August 1st is in the past
 
     expect(captured.event).toBeUndefined();
@@ -172,10 +171,10 @@ describe('CalendarComponent', () => {
 
   it('should not emit a dateChange event if disableFutureDates is true and a date in the future is clicked', () => {
     const captured = captureDateChangeEvents();
-
     spectator.setInput('disableFutureDates', true);
     spectator.setInput('todayDate', localMidnightDate('1997-08-29'));
     spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+
     clickDayOfMonth(31); // August 31st is in the future
 
     expect(captured.event).toBeUndefined();
@@ -183,9 +182,9 @@ describe('CalendarComponent', () => {
 
   it('should not emit a dateChange event if clicking a date that was passed in disabledDates', () => {
     const captured = captureDateChangeEvents();
-
     spectator.setInput('disabledDates', ['1997-08-25', '1997-08-26'].map(localMidnightDate));
     spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+
     clickDayOfMonth(26); // August 26st was explicitly disabled
 
     expect(captured.event).toBeUndefined();
@@ -193,9 +192,9 @@ describe('CalendarComponent', () => {
 
   it('should not emit a dateChange event if clicking a date that was not passed in enabledDates', () => {
     const captured = captureDateChangeEvents();
-
     spectator.setInput('enabledDates', ['1997-08-25', '1997-08-26'].map(localMidnightDate));
     spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+
     clickDayOfMonth(27); // August 27st was implicitly disabled
 
     expect(captured.event).toBeUndefined();
@@ -203,9 +202,9 @@ describe('CalendarComponent', () => {
 
   it('should emit a dateChange event if clicking a date that was passed in enabledDates', () => {
     const captured = captureDateChangeEvents();
-
     spectator.setInput('enabledDates', ['1997-08-25', '1997-08-26'].map(localMidnightDate));
     spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+
     clickDayOfMonth(26); // August 26st was explicitly enabled
 
     expect(captured.event).toBeTruthy();
@@ -213,8 +212,8 @@ describe('CalendarComponent', () => {
 
   it('should not emit a dateChange event if clicking the already selected date', () => {
     const captured = captureDateChangeEvents();
-
     spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+
     clickDayOfMonth(29);
 
     expect(captured.event).toBeUndefined();
@@ -223,11 +222,11 @@ describe('CalendarComponent', () => {
   it('should always emit a dateChange event when clicking today if alwaysEnableToday is set to true', () => {
     const captured = captureDateChangeEvents();
     const today = localMidnightDate('1997-08-28');
-
     spectator.setInput('disabledDates', [today]);
     spectator.setInput('todayDate', today);
     spectator.setInput('alwaysEnableToday', true);
     spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+
     clickDayOfMonth(28); // August 28th is was disabled but we override
 
     expect(captured.event).toEqual(today);
@@ -235,9 +234,9 @@ describe('CalendarComponent', () => {
 
   it('should emit dateChange event as UTC midnights when timezone is set to UTC', () => {
     const captured = captureDateChangeEvents();
-
     spectator.setInput('timezone', 'UTC');
     spectator.setInput('selectedDate', utcMidnightDate('1997-08-29'));
+
     clickDayOfMonth(14);
 
     expect(captured.event).toEqual(utcMidnightDate('1997-08-14'));
@@ -245,8 +244,8 @@ describe('CalendarComponent', () => {
 
   it('should emit dateSelect event when clicking a date that is not already selected', () => {
     const captured = captureDateSelectEvents();
-
     spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+
     clickDayOfMonth(14);
 
     expect(captured.event).toEqual(localMidnightDate('1997-08-14'));
@@ -254,8 +253,8 @@ describe('CalendarComponent', () => {
 
   it('should emit dateSelect event when clicking the already selected date', () => {
     const captured = captureDateSelectEvents();
-
     spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+
     clickDayOfMonth(29);
 
     expect(captured.event).toEqual(localMidnightDate('1997-08-29'));
@@ -263,9 +262,9 @@ describe('CalendarComponent', () => {
 
   it('should emit dateSelect event as UTC midnights when timezone is set to UTC', () => {
     const captured = captureDateSelectEvents();
-
     spectator.setInput('timezone', 'UTC');
     spectator.setInput('selectedDate', utcMidnightDate('1997-08-29'));
+
     clickDayOfMonth(14);
 
     expect(captured.event).toEqual(utcMidnightDate('1997-08-14'));
