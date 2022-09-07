@@ -1,7 +1,8 @@
 {
   "root": true,
+  "extends": ["prettier"],
   "ignorePatterns": ["**/*"],
-  "plugins": ["@nrwl/nx"],
+  "plugins": ["@nrwl/nx", "prettier"],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
@@ -52,5 +53,9 @@
       "files": ["*.html"],
       "rules": {}
     }
-  ]
+  ],
+  "rules": {
+    "prettier/prettier": ["error"],
+    "@typescript-eslint/no-inferrable-types": "off"
+  }
 }
