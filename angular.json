@@ -142,6 +142,12 @@
             "styles": ["libs/designsystem/src/lib/testing/styles.scss"]
           },
           "outputs": ["coverage/libs/designsystem"]
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/designsystem/**/*.ts", "libs/designsystem/**/*.html"]
+          }
         }
       },
       "schematics": {

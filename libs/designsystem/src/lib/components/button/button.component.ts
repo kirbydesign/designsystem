@@ -19,7 +19,7 @@ export enum ButtonSize {
 }
 
 @Component({
-  // tslint:disable-next-line:component-selector
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'button[kirby-button],Button[kirby-button]',
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.scss'],

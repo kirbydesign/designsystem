@@ -4,7 +4,7 @@ import { ButtonComponent, ButtonSize, NotificationColor } from '@kirbydesign/des
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
-  // tslint:disable-next-line: component-selector
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'button[kirby-button],Button[kirby-button]',
   template: '<ng-content></ng-content>',
   providers: [
