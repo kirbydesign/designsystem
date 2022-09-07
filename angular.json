@@ -112,6 +112,36 @@
       },
       "tags": []
     },
+    "designsystem": {
+      "projectType": "library",
+      "root": "libs/designsystem",
+      "sourceRoot": "libs/designsystem/src",
+      "prefix": "kirby",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/designsystem/tsconfig.lib.json",
+            "project": "libs/designsystem/ng-package.json",
+            "updateBuildableProjectDepsInPackageJson": false
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/designsystem/src/test.ts",
+            "tsConfig": "libs/designsystem/tsconfig.spec.json",
+            "karmaConfig": "libs/designsystem/karma.conf.js",
+            "styles": ["libs/designsystem/src/lib/testing/styles.scss"]
+          },
+          "outputs": ["coverage/libs/designsystem"]
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {}
+      },
+      "tags": []
+    },
     "user-flows": {
       "projectType": "application",
       "root": "apps/user-flows",
@@ -208,38 +238,6 @@
           }
         }
       }
-    },
-    "designsystem": {
-      "projectType": "library",
-      "root": "libs/designsystem",
-      "sourceRoot": "libs/designsystem/src",
-      "prefix": "kirby",
-      "architect": {
-        "build": {
-          "builder": "@nrwl/angular:package",
-          "options": {
-            "tsConfig": "libs/designsystem/tsconfig.lib.json",
-            "project": "libs/designsystem/ng-package.json",
-            "updateBuildableProjectDepsInPackageJson": false
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "libs/designsystem/src/test.ts",
-            "tsConfig": "libs/designsystem/tsconfig.spec.json",
-            "karmaConfig": "libs/designsystem/karma.conf.js",
-            "styles": ["libs/designsystem/src/lib/testing/styles.scss"]
-          },
-          "outputs": ["coverage/libs/designsystem"]
-        }
-      },
-      "schematics": {
-        "@nrwl/angular:component": {
-          "styleext": "scss"
-        }
-      },
-      "tags": []
     }
   }
 }
