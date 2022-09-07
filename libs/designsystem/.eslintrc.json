@@ -6,7 +6,8 @@
       "files": ["*.ts"],
       "extends": [
         "plugin:@nrwl/nx/angular",
-        "plugin:@angular-eslint/template/process-inline-templates"
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "../../eslintrc-custom-overrides.json"
       ],
       "parserOptions": {
         "project": ["libs/designsystem/tsconfig.*?.json"]

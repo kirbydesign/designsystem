@@ -56,8 +56,6 @@
   ],
   "rules": {
     "prettier/prettier": ["error"],
-    "@typescript-eslint/no-inferrable-types": "off",
-    "@angular-eslint/no-empty-lifecycle-method": "off",
     "sort-imports": [
       "error",
       {
