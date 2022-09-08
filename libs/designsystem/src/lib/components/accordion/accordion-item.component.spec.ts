@@ -1,9 +1,14 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
+import { DesignTokenHelper } from '@kirbydesign/core';
+
 import { TestHelper } from '../../testing/test-helper';
 import { IconComponent } from '../icon/icon.component';
 
 import { AccordionItemComponent } from './accordion-item.component';
+
+const getColor = DesignTokenHelper.getColor;
+const getTextColor = DesignTokenHelper.getTextColor;
 
 describe('AccordionItemComponent', () => {
   let spectator: SpectatorHost<AccordionItemComponent>;
@@ -46,6 +51,26 @@ describe('AccordionItemComponent', () => {
       spectator.detectChanges();
       expect(spectator.query('.content')).toHaveComputedStyle({
         visibility: 'visible',
+      });
+    });
+  });
+
+  describe('Disabled', () => {
+    it('should not show content if disabled', () => {
+      spectator.setInput('isDisabled', true);
+      spectator.detectChanges();
+      expect(spectator.query('.content')).toHaveComputedStyle({
+        visibility: 'hidden',
+      });
+    });
+    it('should use disabled-style if disabled', () => {
+      spectator.setInput('isDisabled', true);
+      spectator.detectChanges();
+      expect(spectator.query('.title')).toHaveComputedStyle({
+        color: getTextColor('semi-dark'),
+      });
+      expect(spectator.query('.kirby-icon')).toHaveComputedStyle({
+        color: getColor('semi-dark'),
       });
     });
   });
