@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
+import { TransactionDetailsFlowComponent } from './transaction-details-flow/transaction-details-flow.component';
+import { TransactionDetailsForyouComponent } from './transaction-details-flow/transaction-details-foryou/transaction-details-foryou.component';
+
 const routes: Routes = [
   {
     path: 'home',
@@ -10,6 +13,21 @@ const routes: Routes = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full',
+  },
+  {
+    path: 'transaction-details-flow',
+    component: TransactionDetailsFlowComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'foryou',
+        pathMatch: 'full',
+      },
+      {
+        path: 'foryou',
+        component: TransactionDetailsForyouComponent,
+      },
+    ],
   },
 ];
 
