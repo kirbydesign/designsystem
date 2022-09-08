@@ -47,8 +47,6 @@
   $make-lighter: false
 ) {
   @include utils.not-touch {
-    &:focus,
-    &:focus:not(:focus-visible),
     &:focus-visible {
       // Remove the focus ring
       box-shadow: none;
