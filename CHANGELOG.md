@@ -2,6 +2,20 @@
 
 Notable changes to the project will be documented in this file.
 
+## [6.4.1](https://github.com/kirbydesign/designsystem/pull/2470) (09-09-2022)
+
+### Bugfixes
+
+- **accordion** - add note for using Accordion in microfrontends (#2436)
+- **fab-sheet** - fix backdrop showing up when fab is closed (#2459)
+- **page** - fix emission of enter and leave events (#2387)
+- **segmented-control** - add option for setting selectedIndex in segmentSelect call-back (#2407)
+
+### Features
+
+- **accordion** - add option to disable accordion items (#2451)
+- **calendar** - add option to specify which dates should be enabled (#2454)
+
 ## [6.3.1](https://github.com/kirbydesign/designsystem/pull/2421) (16-08-2022)
 
 - Upgrade to Ionic 6
