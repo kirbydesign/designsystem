@@ -1,0 +1,7 @@
+<kirby-list [items]="transactions" [getSectionName]="getSectionName">
+  <kirby-section-header *kirbyListSectionHeader="let section">
+    <h3 heading>{{ section }}</h3>
+  </kirby-section-header>
+  <transaction-item *kirbyListItemTemplate="let transaction" [transaction]="transaction">
+  </transaction-item>
+</kirby-list>

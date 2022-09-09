@@ -1,0 +1,40 @@
+<!-- This container is only needed due to layout of larger screen sizes -->
+<kirby-page title="Konto">
+  <kirby-page-actions *kirbyPageActions="{ sticky: true }">
+    <button kirby-button [size]="'sm'" [attentionLevel]="'3'">
+      Card
+      <kirby-icon name="payment-card"></kirby-icon>
+    </button>
+  </kirby-page-actions>
+  <kirby-page-content>
+    <div class="container">
+      <div class="app-header">
+        <!-- Hidden on small screen sizes-->
+      </div>
+
+      <kirby-card>
+        <kirby-item routerLink="transactions" routerLinkActive="active">Konto 1</kirby-item>
+        <kirby-item
+          routerLink="/account/transactions"
+          routerLinkActive="active"
+          ariaCurrentWhenActive="page"
+          >Konto 2</kirby-item
+        >
+        <kirby-item
+          routerLink="/account/transactions"
+          routerLinkActive="active"
+          ariaCurrentWhenActive="page"
+          >Konto 3</kirby-item
+        >
+        <kirby-item
+          routerLink="/account/transactions"
+          routerLinkActive="active"
+          ariaCurrentWhenActive="page"
+          >Konto 4</kirby-item
+        >
+      </kirby-card>
+
+      <router-outlet></router-outlet>
+    </div>
+  </kirby-page-content>
+</kirby-page>
