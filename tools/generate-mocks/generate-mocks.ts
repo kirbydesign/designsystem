@@ -302,7 +302,6 @@ ${endRegion}
     } else {
       writeFileSync(newFilename, content);
     }
-
     this.saveFileLinted(newFilename, content);
     return classNames;
   }
@@ -318,12 +317,12 @@ ${endRegion}
       componentMetaData.selector &&
       (componentMetaData.selector.startsWith(`'kirby`) ||
         componentMetaData.selector.startsWith(`'[kirby`));
-    const tsLintDisableSelector =
+    const esLintDisableSelector =
       componentMetaData.selector && !validSelector
-        ? `${newLine}  // tslint:disable-next-line: component-selector`
+        ? `${newLine}  // eslint-disable-next-line @angular-eslint/component-selector`
         : '';
     const selector = componentMetaData.selector
-      ? `${tsLintDisableSelector}${newLine}  selector: ${componentMetaData.selector},`
+      ? `${esLintDisableSelector}${newLine}  selector: ${componentMetaData.selector},`
       : '';
     const template =
       componentMetaData.decorator === 'Component'
@@ -700,7 +699,7 @@ export class ${mockClassName} {${propertiesString}${methodsString}}
 
   private async saveFileLinted(filename: string, content: string) {
     const linter = new ESLint({ fix: true });
-    const result = await linter.lintFiles(filename);
+    const result = await linter.lintText(content, { filePath: filename });
     ESLint.outputFixes(result);
   }
 }
