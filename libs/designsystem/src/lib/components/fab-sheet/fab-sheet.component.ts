@@ -63,7 +63,8 @@ export class FabSheetComponent implements AfterContentInit {
   }
 
   onFabClick(fab: IonFab) {
-    this._isFabSheetOpen = !fab.activated;
+    this._isFabSheetOpen = fab.activated;
+
     if (this._isFabSheetOpen) {
       this.renderer.addClass(this.document.body, 'fab-sheet-active');
     } else {
