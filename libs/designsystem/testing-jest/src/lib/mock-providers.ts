@@ -1,7 +1,5 @@
 // AUTO-GENERATED - PLEASE DON'T EDIT THIS FILE MANUALLY
 
-import { EMPTY } from 'rxjs';
-
 import {
   IconRegistryService,
   LoadingOverlayService,
@@ -9,6 +7,7 @@ import {
   TabsService,
   ToastController,
 } from '@kirbydesign/designsystem';
+import { EMPTY } from 'rxjs';
 
 export function iconRegistryServiceFactory() {
   return {
