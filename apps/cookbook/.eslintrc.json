@@ -18,14 +18,10 @@
             "style": "camelCase"
           }
         ],
-        "@angular-eslint/component-selector": [
-          "error",
-          {
-            "type": "element",
-            "prefix": "kirby",
-            "style": "kebab-case"
-          }
-        ]
+        "no-empty-function": "off",
+        "prefer-const": "off",
+        "no-useless-escape": "off",
+        "@typescript-eslint/no-empty-function": "off"
       },
       "plugins": ["@angular-eslint/eslint-plugin", "@typescript-eslint"]
     },

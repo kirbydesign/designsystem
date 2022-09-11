@@ -3,9 +3,7 @@
     {
       "files": ["*.ts"],
       "rules": {
-        "@angular-eslint/no-empty-lifecycle-method": "off",
-        "@typescript-eslint/member-ordering": "off",
-        "@typescript-eslint/no-inferrable-types": "off",
+        "no-var": "off",
         "sort-imports": [
           "error",
           {
@@ -14,7 +12,11 @@
             "ignoreMemberSort": false,
             "memberSyntaxSortOrder": ["none", "all", "multiple", "single"]
           }
-        ]
+        ],
+        "@angular-eslint/no-empty-lifecycle-method": "off",
+        "@typescript-eslint/member-ordering": "off",
+        "@typescript-eslint/no-inferrable-types": "off",
+        "@angular-eslint/no-host-metadata-property": "off"
       }
     }
   ]
