@@ -17,11 +17,7 @@
             "prefix": "kirby",
             "style": "camelCase"
           }
-        ],
-        "no-empty-function": "off",
-        "prefer-const": "off",
-        "no-useless-escape": "off",
-        "@typescript-eslint/no-empty-function": "off"
+        ]
       },
       "plugins": ["@angular-eslint/eslint-plugin", "@typescript-eslint"]
     },

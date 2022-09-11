@@ -3,7 +3,13 @@
     {
       "files": ["*.ts"],
       "rules": {
-        "no-var": "off",
+        "prefer-const": "off",
+        "prefer-rest-params": "warn",
+        "prefer-spread": "warn",
+        "no-empty-function": "warn",
+        "no-extra-boolean-cast": "warn",
+        "no-useless-escape": "off",
+        "no-var": "warn",
         "sort-imports": [
           "error",
           {
@@ -13,10 +19,19 @@
             "memberSyntaxSortOrder": ["none", "all", "multiple", "single"]
           }
         ],
-        "@angular-eslint/no-empty-lifecycle-method": "off",
-        "@typescript-eslint/member-ordering": "off",
+        "@angular-eslint/component-class-suffix": "warn",
+        "@angular-eslint/no-empty-lifecycle-method": "warn",
+        "@angular-eslint/no-host-metadata-property": "off",
+        "@angular-eslint/no-inputs-metadata-property": "warn",
+        "@angular-eslint/no-output-native": "warn",
+        "@typescript-eslint/ban-ts-comment": "warn",
+        "@typescript-eslint/ban-types": "warn",
+        "@typescript-eslint/no-empty-function": "off",
+        "@typescript-eslint/no-empty-interface": "warn",
         "@typescript-eslint/no-inferrable-types": "off",
-        "@angular-eslint/no-host-metadata-property": "off"
+        "@typescript-eslint/no-non-null-assertion": "warn",
+        "@typescript-eslint/member-ordering": "off",
+        "@typescript-eslint/triple-slash-reference": "off"
       }
     }
   ]
