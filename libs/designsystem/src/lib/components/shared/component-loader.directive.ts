@@ -1,7 +1,7 @@
 import {
+  ComponentFactoryResolver,
   Directive,
   Input,
-  ComponentFactoryResolver,
   OnInit,
   Renderer2,
   ViewContainerRef,

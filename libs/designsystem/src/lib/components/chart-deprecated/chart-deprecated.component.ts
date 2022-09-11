@@ -11,12 +11,12 @@ import { mergeDeep } from '../../helpers/merge-deep';
 
 import { ChartDeprecatedHelper } from './chart-deprecated-helper';
 import { ChartDeprecatedType } from './chart-deprecated-type';
-import { ActivityGaugeOptions, ACTIVITYGAUGE_OPTIONS } from './options/activitygauge';
-import { AreaSplineOptions, AREASPLINE_OPTIONS } from './options/areaspline';
+import { ACTIVITYGAUGE_OPTIONS, ActivityGaugeOptions } from './options/activitygauge';
+import { AREASPLINE_OPTIONS, AreaSplineOptions } from './options/areaspline';
 import { barOptions } from './options/bar';
 import { columnOptions } from './options/column';
-import { DonutOptions, DONUT_OPTIONS } from './options/donut';
-import { TimeSeriesOptions, TIMESERIES_OPTIONS } from './options/timeseries';
+import { DONUT_OPTIONS, DonutOptions } from './options/donut';
+import { TIMESERIES_OPTIONS, TimeSeriesOptions } from './options/timeseries';
 
 @Component({
   selector: 'kirby-chart-deprecated',
@@ -134,7 +134,7 @@ export class ChartDeprecatedComponent implements OnChanges {
         break;
       }
     }
-    if (!!this.options) {
+    if (this.options) {
       this.mergedOptions = mergeDeep(this.mergedOptions, this.options);
     }
   }
@@ -172,7 +172,7 @@ export class ChartDeprecatedComponent implements OnChanges {
     ];
     const dataMaxValue = Math.max(...this.data);
     ((this.mergedOptions.yAxis as YAxisOptions).tickPositioner = () => {
-      var positions = [0, dataMaxValue];
+      let positions = [0, dataMaxValue];
       return positions;
     }),
       (this.mergedOptions.series = [
