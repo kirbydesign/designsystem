@@ -7,11 +7,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { TransactionFlowComponent } from './transaction-flow/transaction-flow.component';
-import { TransactionListModule } from './transaction-flow/transaction-list/transaction-list.module';
+import { TransactionItemComponent } from './transaction-flow/transaction-item/transaction-item.component';
+import { TransactionListComponent } from './transaction-flow/transaction-list/transaction-list.component';
 
 @NgModule({
-  declarations: [AppComponent, TransactionFlowComponent, HomeComponent],
-  imports: [BrowserModule, AppRoutingModule, KirbyModule, TransactionListModule],
+  declarations: [
+    AppComponent,
+    TransactionFlowComponent,
+    HomeComponent,
+    TransactionListComponent,
+    TransactionItemComponent,
+  ],
+  imports: [BrowserModule, AppRoutingModule, KirbyModule],
   providers: [],
   bootstrap: [AppComponent],
 })
