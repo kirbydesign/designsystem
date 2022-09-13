@@ -3,11 +3,14 @@
     <button kirby-button (click)="onCogSelect()">
       <kirby-icon name="cog"></kirby-icon>
     </button>
-    <button kirby-button (click)="onBtnSelect()" [attentionLevel]="'1'">Click me!</button>
+    <button kirby-button (click)="onModeSelect()" [attentionLevel]="'1'">
+      {{ this.listMode === 'default' ? 'experimental' : 'default' }}
+    </button>
   </kirby-page-actions>
 
   <kirby-page-content>
     <kirby-list
+      *ngIf="listMode === 'default'; else experimental"
       [items]="transactions"
       [getSectionName]="getSectionName"
       [swipeActions]="swipeActions"
@@ -20,3 +23,15 @@
     </kirby-list>
   </kirby-page-content>
 </kirby-page>
+
+<ng-template #experimental>
+  <kirby-list-experimental *ngFor="let section of transactionSections | keyvalue">
+    <kirby-section-header outside>Section</kirby-section-header>
+    <kirby-item-sliding
+      *ngFor="let transaction of section.value.transactions"
+      [swipeActions]="swipeActions"
+    >
+      <transaction-item [transaction]="transaction"></transaction-item>
+    </kirby-item-sliding>
+  </kirby-list-experimental>
+</ng-template>

@@ -12,7 +12,10 @@ import transactionsData from '../transactions-data.json';
   styleUrls: ['./transaction-list.component.scss'],
 })
 export class TransactionListComponent implements OnInit {
-  transactions: Transaction[] = [];
+  transactions: Transaction[];
+  transactionSections: Map<string, { transactions: Transaction[] }>;
+
+  listMode: 'default' | 'experimental' = 'default';
 
   constructor(private toastController: ToastController) {}
 
@@ -41,6 +44,19 @@ export class TransactionListComponent implements OnInit {
 
   ngOnInit(): void {
     this.transactions = transactionsData.transactions;
+
+    this.transactionSections = new Map<string, { transactions: Transaction[] }>();
+
+    this.transactions.forEach((transaction) => {
+      const sectionName = this.getSectionName(transaction);
+      const section = this.transactionSections.get(sectionName);
+
+      if (section) {
+        section.transactions.push(transaction);
+      } else {
+        this.transactionSections.set(sectionName, { transactions: [transaction] });
+      }
+    });
   }
 
   getSectionName(transaction: Transaction): string {
@@ -56,12 +72,7 @@ export class TransactionListComponent implements OnInit {
     this.toastController.showToast(config);
   }
 
-  onBtnSelect() {
-    const config: ToastConfig = {
-      message: 'Your toast message',
-      messageType: 'warning',
-      durationInMs: 10000,
-    };
-    this.toastController.showToast(config);
+  onModeSelect() {
+    this.listMode = this.listMode === 'default' ? 'experimental' : 'default';
   }
 }
