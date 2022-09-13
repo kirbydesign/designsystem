@@ -495,10 +495,13 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
       }
     }
 
+    console.log(`index = ${index}, this.focusedIndex = ${this.focusedIndex}`);
+
     if (index !== this.focusedIndex) {
       this.focusedIndex = index;
       // this.change.emit(this.value);
       // this._onChange(this.value);
+      console.log(`this.scrollItemIntoView(${index})`);
       this.scrollItemIntoView(index);
     }
   }
