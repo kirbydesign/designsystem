@@ -31,4 +31,32 @@ export class GroupByPipe implements PipeTransform {
         return { name, items };
       });
   }
+
+  transformStandAlone(items: any[], standAloneProperty: string) {
+    let currentArrayIndex = 0;
+
+    const list = items.reduce((accumulator, item) => {
+      if (!accumulator[currentArrayIndex]) {
+        accumulator[currentArrayIndex] = [];
+      }
+
+      if (item[standAloneProperty]) {
+        accumulator.push([item]);
+
+        /**
+         * currentArrayIndex is incrementet by 2 to skip the index of
+         * the stand alone item array, that is pushed into the multidimensional array
+         */
+        currentArrayIndex += 2;
+      } else {
+        accumulator[currentArrayIndex].push(item);
+      }
+
+      return accumulator;
+    }, []);
+
+    return list.map((items) => {
+      return { items };
+    });
+  }
 }

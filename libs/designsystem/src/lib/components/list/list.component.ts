@@ -62,6 +62,11 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() trackBy: TrackByFunction<any>;
 
   /**
+   * Property name to decide which items should be stand alone
+   */
+  @Input() getStandAloneByProperty: string;
+
+  /**
    * Text to display when no more items can be loaded (used for "on demand"-loading).
    */
   @Input() noMoreItemsText: string;
@@ -144,6 +149,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   itemTemplate: TemplateRef<any>;
 
   @HostBinding('class.has-sections') _isSectionsEnabled: boolean;
+  @HostBinding('class.has-stand-alone') _isStandAloneEnabled: boolean;
 
   _isSelectable: boolean;
   _isLoading: boolean;
@@ -172,9 +178,16 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
 
   ngOnChanges(): void {
     this._isSectionsEnabled = !!this.getSectionName;
-    this._groupedItems = this._isSectionsEnabled
-      ? this.groupBy.transform(this.items, this.getSectionName)
-      : null;
+    this._isStandAloneEnabled = !!this.getStandAloneByProperty;
+
+    if (this._isSectionsEnabled) {
+      this._groupedItems = this.groupBy.transform(this.items, this.getSectionName);
+    } else if (this._isStandAloneEnabled) {
+      this._groupedItems = this.groupBy.transformStandAlone(
+        this.items,
+        this.getStandAloneByProperty
+      );
+    }
   }
 
   _onLoadOnDemand(event?: LoadOnDemandEventData) {

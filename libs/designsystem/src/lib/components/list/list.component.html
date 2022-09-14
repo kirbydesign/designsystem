@@ -14,7 +14,7 @@
 
   <ng-container
     *ngTemplateOutlet="
-      _isSectionsEnabled ? groupedListTemplate : itemsTemplate;
+      _isSectionsEnabled || _isStandAloneEnabled ? groupedListTemplate : itemsTemplate;
       context: { $implicit: items }
     "
   ></ng-container>
@@ -33,7 +33,7 @@
 
 <ng-template #groupedListTemplate>
   <ion-item-group *ngFor="let section of _groupedItems; trackBy: sectionTrackBy">
-    <ion-item-divider>
+    <ion-item-divider *ngIf="_isSectionsEnabled">
       <ng-container
         *ngTemplateOutlet="sectionHeaderTemplate; context: { $implicit: section.name }"
       ></ng-container>
