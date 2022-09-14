@@ -11,6 +11,7 @@ import { ListItemsExampleComponent } from './examples/items';
 import { ListWithSectionsExampleComponent } from './examples/sections';
 import { ListWithSectionsAndColoredItemsExampleComponent } from './examples/sections-and-colored-items';
 import { ListSelectableItemsExampleComponent } from './examples/selectable-items';
+import { ListWithStandAloneExampleComponent } from './examples/stand-alone';
 
 const listExamples = [
   ListWithDividersExampleComponent,
@@ -20,6 +21,7 @@ const listExamples = [
   ListWithHeaderAndFooterExampleComponent,
   ListWithSectionsExampleComponent,
   ListItemsExampleComponent,
+  ListWithStandAloneExampleComponent,
 ];
 
 @NgModule({

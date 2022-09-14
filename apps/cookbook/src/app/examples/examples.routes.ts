@@ -39,6 +39,7 @@ import { ListItemsExampleComponent } from './list-example/examples/items';
 import { ListWithSectionsExampleComponent } from './list-example/examples/sections';
 import { ListWithSectionsAndColoredItemsExampleComponent } from './list-example/examples/sections-and-colored-items';
 import { ListSelectableItemsExampleComponent } from './list-example/examples/selectable-items';
+import { ListWithStandAloneExampleComponent } from './list-example/examples/stand-alone';
 import { ListExampleComponent } from './list-example/list-example.component';
 import { ListExperimentalExampleComponent } from './list-experimental-example/list-experimental-example.component';
 import { ListLoadOnDemandExampleComponent } from './list-load-on-demand-example/list-load-on-demand-example.component';
@@ -324,6 +325,10 @@ export const routes: Routes = [
       {
         path: 'with-items',
         component: ListItemsExampleComponent,
+      },
+      {
+        path: 'with-stand-alone',
+        component: ListWithStandAloneExampleComponent,
       },
     ],
   },
