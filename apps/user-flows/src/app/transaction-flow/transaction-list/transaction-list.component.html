@@ -16,7 +16,7 @@
       [swipeActions]="swipeActions"
     >
       <kirby-section-header *kirbyListSectionHeader="let section">
-        <h3 heading>{{ section }}</h3>
+        <h2 heading>{{ section }}</h2>
       </kirby-section-header>
       <transaction-item *kirbyListItemTemplate="let transaction" [transaction]="transaction">
       </transaction-item>
@@ -26,7 +26,9 @@
 
 <ng-template #experimental>
   <kirby-list-experimental *ngFor="let section of transactionSections | keyvalue">
-    <kirby-section-header outside>Section</kirby-section-header>
+    <kirby-section-header outside
+      ><h2 heading>{{ section.key }}</h2></kirby-section-header
+    >
     <kirby-item-sliding
       *ngFor="let transaction of section.value.transactions"
       [swipeActions]="swipeActions"
