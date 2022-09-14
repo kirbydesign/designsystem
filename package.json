@@ -26,7 +26,7 @@
     "ng": "nx",
     "nx": "nx",
     "start": "npm-run-all --parallel \"ng serve cookbook\" \"build:core:watch\"",
-    "start:user-flows": "ng serve user-flows",
+    "start:flows": "ng serve flows",
     "build": "ng build",
     "build-polyfills": "webpack --config webpack.polyfills.config.js",
     "test": "ng test",
