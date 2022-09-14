@@ -6,7 +6,6 @@ import { Transaction } from '../transaction';
 import transactionsData from '../transactions-data.json';
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'transaction-list',
   templateUrl: './transaction-list.component.html',
   styleUrls: ['./transaction-list.component.scss'],

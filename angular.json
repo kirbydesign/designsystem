@@ -146,7 +146,7 @@
       "projectType": "application",
       "root": "apps/user-flows",
       "sourceRoot": "apps/user-flows/src",
-      "prefix": "kirbydesign",
+      "prefix": "flows",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -212,30 +212,6 @@
             }
           },
           "defaultConfiguration": "development"
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "user-flows:build"
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["apps/user-flows/**/*.ts", "apps/user-flows/**/*.html"]
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "apps/user-flows/src/test.ts",
-            "tsConfig": "apps/user-flows/tsconfig.spec.json",
-            "karmaConfig": "apps/user-flows/karma.conf.js",
-            "polyfills": "apps/user-flows/src/polyfills.ts",
-            "styles": [],
-            "scripts": [],
-            "assets": []
-          }
         }
       }
     }
