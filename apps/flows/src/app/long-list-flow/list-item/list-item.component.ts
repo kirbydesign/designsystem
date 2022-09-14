@@ -3,9 +3,9 @@ import { Component, Input } from '@angular/core';
 import { Transaction } from '../transaction';
 
 @Component({
-  selector: 'transaction-item',
-  templateUrl: './transaction-item.component.html',
+  selector: 'list-item',
+  templateUrl: './list-item.component.html',
 })
-export class TransactionItemComponent {
+export class ListItemComponent {
   @Input() transaction: Transaction;
 }

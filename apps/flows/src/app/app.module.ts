@@ -6,17 +6,17 @@ import { KirbyModule } from '@kirbydesign/designsystem';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { TransactionFlowComponent } from './transaction-flow/transaction-flow.component';
-import { TransactionItemComponent } from './transaction-flow/transaction-item/transaction-item.component';
-import { TransactionListComponent } from './transaction-flow/transaction-list/transaction-list.component';
+import { ListItemComponent } from './long-list-flow/list-item/list-item.component';
+import { LongListFlowComponent } from './long-list-flow/long-list-flow.component';
+import { LongListComponent } from './long-list-flow/long-list/long-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TransactionFlowComponent,
+    LongListFlowComponent,
     HomeComponent,
-    TransactionListComponent,
-    TransactionItemComponent,
+    LongListComponent,
+    ListItemComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, KirbyModule],
   providers: [],

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 import { HomeComponent } from './home/home.component';
-import { TransactionFlowComponent } from './transaction-flow/transaction-flow.component';
+import { LongListFlowComponent } from './long-list-flow/long-list-flow.component';
 
 const routes: Routes = [
   {
@@ -10,8 +10,8 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
-    path: 'transaction-flow',
-    component: TransactionFlowComponent,
+    path: 'long-list-flow',
+    component: LongListFlowComponent,
   },
 ];
 

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'kirbydesign-root',
+  selector: 'flows-root',
   templateUrl: './app.component.html',
 })
 export class AppComponent {
-  title = 'user-flows';
+  title = 'flows';
 }

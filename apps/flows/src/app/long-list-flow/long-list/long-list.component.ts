@@ -6,11 +6,11 @@ import { Transaction } from '../transaction';
 import transactionsData from '../transactions-data.json';
 
 @Component({
-  selector: 'transaction-list',
-  templateUrl: './transaction-list.component.html',
-  styleUrls: ['./transaction-list.component.scss'],
+  selector: 'long-list',
+  templateUrl: './long-list.component.html',
+  styleUrls: ['./long-list.component.scss'],
 })
-export class TransactionListComponent implements OnInit {
+export class LongListComponent implements OnInit {
   transactions: Transaction[];
   transactionSections: Map<string, { transactions: Transaction[] }>;
 
