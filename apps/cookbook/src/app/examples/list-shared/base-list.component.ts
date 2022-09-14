@@ -15,7 +15,6 @@ export class BaseListComponent {
       amount: '76.980 DKK',
       detail: -3,
       color: 'light',
-      isStandAlone: true,
     },
     {
       id: 2,
@@ -40,6 +39,7 @@ export class BaseListComponent {
       amount: '33.830 DKK',
       detail: -154,
       color: 'white',
+      isStandAlone: true,
     },
     {
       id: 5,
@@ -57,7 +57,6 @@ export class BaseListComponent {
       amount: '61.196 DKK',
       detail: 220,
       color: 'white',
-      isStandAlone: true,
     },
     {
       id: 7,

@@ -4,6 +4,7 @@ import { ListWithDividersExampleTemplate } from '~/app/examples/list-example/exa
 import { ListWithHeaderAndFooterExampleTemplate } from '~/app/examples/list-example/examples/header-and-footer';
 import { ListWithSectionsExampleTemplate } from '~/app/examples/list-example/examples/sections';
 import { ListWithSectionsAndColoredItemsExampleTemplate } from '~/app/examples/list-example/examples/sections-and-colored-items';
+import { ListWithSectionsAndStandAloneExampleTemplate } from '~/app/examples/list-example/examples/sections-with-standalone';
 import { ListSelectableItemsExampleTemplate } from '~/app/examples/list-example/examples/selectable-items';
 import { ListWithStandAloneExampleTemplate } from '~/app/examples/list-example/examples/stand-alone';
 
@@ -23,6 +24,7 @@ export class ListShowcaseComponent implements OnInit {
   headerAndFooterExampleTemplate: string = ListWithHeaderAndFooterExampleTemplate;
   sectionsExampleTemplate: string = ListWithSectionsExampleTemplate;
   standAloneExampleTemplate: string = ListWithStandAloneExampleTemplate;
+  sectionsAndStandAloneExampleTemplate: string = ListWithSectionsAndStandAloneExampleTemplate;
   items: string = ListItemsExampleTemplate;
 
   exampleHtml = exampleHtml;

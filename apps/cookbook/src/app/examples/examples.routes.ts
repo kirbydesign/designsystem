@@ -38,6 +38,7 @@ import { ListWithHeaderAndFooterExampleComponent } from './list-example/examples
 import { ListItemsExampleComponent } from './list-example/examples/items';
 import { ListWithSectionsExampleComponent } from './list-example/examples/sections';
 import { ListWithSectionsAndColoredItemsExampleComponent } from './list-example/examples/sections-and-colored-items';
+import { ListWithSectionsAndStandAloneExampleComponent } from './list-example/examples/sections-with-standalone';
 import { ListSelectableItemsExampleComponent } from './list-example/examples/selectable-items';
 import { ListWithStandAloneExampleComponent } from './list-example/examples/stand-alone';
 import { ListExampleComponent } from './list-example/list-example.component';
@@ -329,6 +330,10 @@ export const routes: Routes = [
       {
         path: 'with-stand-alone',
         component: ListWithStandAloneExampleComponent,
+      },
+      {
+        path: 'with-sections-and-stand-alone',
+        component: ListWithSectionsAndStandAloneExampleComponent,
       },
     ],
   },
