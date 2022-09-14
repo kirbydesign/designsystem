@@ -32,7 +32,11 @@ export class GroupByPipe implements PipeTransform {
       });
   }
 
-  transformStandAlone(items: any[], standAloneProperty: string) {
+  transformListWithStandAlone(
+    items: any[],
+    standAloneProperty: string,
+    returnValue: 'arrays' | 'objects'
+  ) {
     let currentArrayIndex = 0;
 
     const list = items.reduce((accumulator, item) => {
@@ -44,7 +48,7 @@ export class GroupByPipe implements PipeTransform {
         accumulator.push([item]);
 
         /**
-         * currentArrayIndex is incrementet by 2 to skip the index of
+         * currentArrayIndex is incremented by 2 to skip the index of
          * the stand alone item array, that is pushed into the multidimensional array
          */
         currentArrayIndex += 2;
@@ -55,8 +59,31 @@ export class GroupByPipe implements PipeTransform {
       return accumulator;
     }, []);
 
+    if (returnValue === 'arrays') {
+      return list;
+    }
+
     return list.map((items) => {
       return { items };
     });
+  }
+
+  transformGroupedListWithStandAlone(
+    items: any[],
+    getGroupName: (item: any) => string,
+    standAloneProperty: string
+  ): any[] {
+    const sections = this.transform(items, getGroupName);
+
+    const sectionsWithStandAloneItems = sections.map((section) => {
+      const sectionsLists = this.transformListWithStandAlone(
+        section.items,
+        standAloneProperty,
+        'arrays'
+      );
+      return { name: section.name, lists: sectionsLists };
+    });
+
+    return sectionsWithStandAloneItems;
   }
 }

@@ -180,12 +180,19 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     this._isSectionsEnabled = !!this.getSectionName;
     this._isStandAloneEnabled = !!this.getStandAloneByProperty;
 
-    if (this._isSectionsEnabled) {
+    if (this._isSectionsEnabled && this._isStandAloneEnabled) {
+      this._groupedItems = this.groupBy.transformGroupedListWithStandAlone(
+        this.items,
+        this.getSectionName,
+        this.getStandAloneByProperty
+      );
+    } else if (this._isSectionsEnabled) {
       this._groupedItems = this.groupBy.transform(this.items, this.getSectionName);
     } else if (this._isStandAloneEnabled) {
-      this._groupedItems = this.groupBy.transformStandAlone(
+      this._groupedItems = this.groupBy.transformListWithStandAlone(
         this.items,
-        this.getStandAloneByProperty
+        this.getStandAloneByProperty,
+        'objects'
       );
     }
   }

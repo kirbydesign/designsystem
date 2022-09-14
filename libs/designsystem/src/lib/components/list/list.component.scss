@@ -159,6 +159,12 @@ ion-item-options[side='end'] {
   }
 }
 
+:host-context(.has-stand-alone) {
+  .list-items {
+    margin-bottom: 24px;
+  }
+}
+
 :host-context(.shape-rounded) {
   .list,
   .list-items {
