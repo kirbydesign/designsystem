@@ -7,11 +7,6 @@ $min-screen-width-small: 320px;
 $min-screen-width: 375px;
 
 :host {
-  @include interaction-state.apply-focus-visible {
-    outline: none;
-    border-radius: utils.$border-radius-round;
-  }
-
   display: inline-block;
   position: relative;
   max-width: calc(100vw - #{$margin-horizontal-total});

@@ -107,17 +107,17 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   @Input()
   size: 'sm' | 'md' = 'md';
 
-  @Input()
-  tabindex = 0;
+  // @Input()
+  // tabindex = 0;
 
   @HostBinding('class.with-popover')
   @Input()
   usePopover = false;
 
-  @HostBinding('attr.tabindex')
-  get _tabindex() {
-    return this.disabled ? -1 : this.tabindex;
-  }
+  // @HostBinding('attr.tabindex')
+  // get _tabindex() {
+  //   return this.disabled ? -1 : this.tabindex;
+  // }
 
   // Prevent Ionic blur on scroll
   @HostBinding('attr.no-blur')
@@ -229,11 +229,6 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
       return;
     }
     this.isOpen ? this.close() : this.open();
-  }
-
-  onButtonMouseEvent(event: Event) {
-    // Prevent button focus;
-    event.preventDefault();
   }
 
   /* Utility that makes it easier to set styles on card element
@@ -493,6 +488,8 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     this.close();
   }
 
+  // TODO: This blur event no longer occurs and hence does not close the dropdown
+  // TODO: Can we listen for blur event on the button inside Dropdown?
   @HostListener('blur', ['$event'])
   _onBlur(event?: FocusEvent) {
     if (this.usePopover) return;

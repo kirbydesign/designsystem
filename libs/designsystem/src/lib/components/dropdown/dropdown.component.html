@@ -2,9 +2,7 @@
   kirby-button
   [size]="size"
   [attentionLevel]="isOpen ? attentionLevelOpen : attentionLevel"
-  tabindex="-1"
   (click)="onToggle($event)"
-  (mousedown)="onButtonMouseEvent($event)"
   [disabled]="disabled"
   type="button"
 >
