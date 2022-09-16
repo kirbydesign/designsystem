@@ -1,0 +1,24 @@
+@use 'interaction-state.utilities';
+@use 'layer';
+
+@mixin apply-active($loudness: interaction-state.$default-loudness-active, $make-lighter: false) {
+  &:active,
+  &.interaction-state-active {
+    @include layer.apply-state($loudness, $make-lighter);
+    @content;
+  }
+}
+
+@mixin apply-active-ionic(
+  $loudness: interaction-state.$default-loudness-active,
+  $make-lighter: false
+) {
+  &:active,
+  &.ion-activated {
+    @include layer.apply-state($loudness, $make-lighter);
+
+    --background-activated: var(--state-layer-background-color);
+    --background-activated-opacity: var(--state-layer-opacity);
+    @content;
+  }
+}

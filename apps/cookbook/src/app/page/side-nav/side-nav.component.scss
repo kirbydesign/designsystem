@@ -1,7 +1,7 @@
 @use '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/opt-out';
 
-$list-margin: utils.size('s');
-$link-padding: 5px utils.size('s');
+$link-padding: 5px;
 $link-border-radius: 3px;
 $menu-padding-mobile: utils.size('m');
 $divider-inset: utils.size('xxxxs');
@@ -43,6 +43,8 @@ section {
   }
 
   a {
+    @include opt-out.link;
+
     text-decoration: none;
     color: utils.get-text-color('semi-dark');
     display: block;
@@ -67,10 +69,6 @@ section {
       max-height: 0;
       padding: 0;
       pointer-events: none;
-    }
-
-    &:first-child {
-      margin-top: $list-margin;
     }
   }
 }

@@ -86,7 +86,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   }
 
   @Input()
-  attentionLevel: '1' | '2' | '3' | '4' = '3';
+  attentionLevel: '1' | '2' | '3' = '3';
   readonly attentionLevelOpen = '2';
 
   @Input()
