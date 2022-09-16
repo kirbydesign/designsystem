@@ -70,12 +70,12 @@ export class GroupByPipe implements PipeTransform {
     const sectionsWithStandAloneItems = sections.map((section) => {
       const sectionItems = this.transformListWithStandAlone(section.items, standAloneProperty);
 
-      const sectionsLists = sectionItems.reduce((accumulator, list, index) => {
+      const sectionLists = sectionItems.reduce((accumulator, list, index) => {
         accumulator[index] = [...list.items];
         return accumulator;
       }, []);
 
-      return { name: section.name, lists: sectionsLists };
+      return { name: section.name, lists: sectionLists };
     });
 
     return sectionsWithStandAloneItems;

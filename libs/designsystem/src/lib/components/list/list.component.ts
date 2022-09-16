@@ -29,7 +29,6 @@ import {
   ListSectionHeaderDirective,
 } from './list.directive';
 import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
-import { GroupByPipe } from './pipes/group-by.pipe';
 
 export type ListShape = 'square' | 'rounded' | 'none';
 
@@ -37,7 +36,7 @@ export type ListShape = 'square' | 'rounded' | 'none';
   selector: 'kirby-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
-  providers: [ListHelper, GroupByPipe],
+  providers: [ListHelper],
 })
 export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   @ViewChild('list', { static: true }) list: any;
@@ -156,7 +155,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   _groupedItems: any[];
   _selectedItem: any;
 
-  constructor(private listHelper: ListHelper, private groupBy: GroupByPipe) {}
+  constructor(private listHelper: ListHelper) {}
 
   ngOnInit() {
     this._isSelectable = this.itemSelect.observers.length > 0;
@@ -181,15 +180,15 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     this._isStandAloneEnabled = !!this.getStandAloneByProperty;
 
     if (this._isSectionsEnabled && this._isStandAloneEnabled) {
-      this._groupedItems = this.groupBy.transformGroupedListWithStandAlone(
+      this._groupedItems = this.listHelper.groupSectionsWithStandAloneItems(
         this.items,
         this.getSectionName,
         this.getStandAloneByProperty
       );
     } else if (this._isSectionsEnabled) {
-      this._groupedItems = this.groupBy.transform(this.items, this.getSectionName);
+      this._groupedItems = this.listHelper.groupSections(this.items, this.getSectionName);
     } else if (this._isStandAloneEnabled) {
-      this._groupedItems = this.groupBy.transformListWithStandAlone(
+      this._groupedItems = this.listHelper.groupStandAloneItems(
         this.items,
         this.getStandAloneByProperty
       );
