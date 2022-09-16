@@ -191,8 +191,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     } else if (this._isStandAloneEnabled) {
       this._groupedItems = this.groupBy.transformListWithStandAlone(
         this.items,
-        this.getStandAloneByProperty,
-        'objects'
+        this.getStandAloneByProperty
       );
     }
   }
