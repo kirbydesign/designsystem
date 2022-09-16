@@ -12,7 +12,6 @@ import { ListHelper } from './helpers/list-helper';
 import { ListItemComponent } from './list-item/list-item.component';
 import { ListComponent } from './list.component';
 import { LoadOnDemandEvent } from './list.event';
-import { GroupByPipe } from './pipes/group-by.pipe';
 
 const TEST_ITEMS: any[] = [
   {
@@ -57,7 +56,6 @@ describe('ListComponent', () => {
     component: ListComponent,
     declarations: [
       ListComponent,
-      GroupByPipe,
       SpinnerComponent,
       InfiniteScrollDirective,
       ListItemColorDirective,
@@ -72,7 +70,6 @@ describe('ListComponent', () => {
     ],
     providers: [
       ListHelper,
-      GroupByPipe,
       {
         provide: WindowRef,
         useValue: <WindowRef>{ nativeWindow: window },

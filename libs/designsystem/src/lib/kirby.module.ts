@@ -35,7 +35,6 @@ import { ItemGroupComponent } from './components/item-group/item-group.component
 import { ItemSlidingComponent } from './components/item-sliding/item-sliding.component';
 import { ItemModule } from './components/item/item.module';
 import { ListModule } from './components/list/list.module';
-import { GroupByPipe } from './components/list/pipes/group-by.pipe';
 import { LoadingOverlayComponent } from './components/loading-overlay/loading-overlay.component';
 import { LoadingOverlayService } from './components/loading-overlay/loading-overlay.service';
 import { ActionSheetComponent } from './components/modal/action-sheet/action-sheet.component';
@@ -87,7 +86,6 @@ const exportedDeclarations = [
   GridComponent,
   ComponentLoaderDirective,
   AvatarComponent,
-  GroupByPipe,
   CalendarComponent,
   CheckboxComponent,
   ActionSheetComponent,
