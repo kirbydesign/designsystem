@@ -153,8 +153,8 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   itemTemplate: TemplateRef<any>;
 
   @HostBinding('class.has-sections') _isSectionsEnabled: boolean;
+  @HostBinding('class.has-stand-alone') _isStandAloneEnabled: boolean;
 
-  _isStandAloneEnabled: boolean;
   _isSelectable: boolean;
   _isLoading: boolean;
   _groupedItems: any[];
