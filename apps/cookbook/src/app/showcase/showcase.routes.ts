@@ -13,10 +13,8 @@ import { BadgeShowcaseComponent } from './badge-showcase/badge-showcase.componen
 import { ButtonShowcaseComponent } from './button-showcase/button-showcase.component';
 import { CalendarShowcaseComponent } from './calendar-showcase/calendar-showcase.component';
 import { CardShowcaseComponent } from './card-showcase/card-showcase.component';
-import { ChartDeprecatedShowcaseComponent } from './chart-deprecated-showcase/chart-deprecated-showcase.component';
 import { ChartShowcaseComponent } from './chart-showcase/chart-showcase.component';
 import { CheckboxShowcaseComponent } from './checkbox-showcase/checkbox-showcase.component';
-import { ChipShowcaseComponent } from './chip-showcase/chip-showcase.component';
 import { ColorsShowcaseComponent } from './colors-showcase/colors-showcase.component';
 import { DividerShowcaseComponent } from './divider-showcase/divider-showcase.component';
 import { DropdownShowcaseComponent } from './dropdown-showcase/dropdown-showcase.component';
@@ -47,7 +45,7 @@ import { ShowcaseComponent } from './showcase.component';
 import { SlideButtonShowcaseComponent } from './slide-button-showcase/slide-button-showcase.component';
 import { SlidesShowcaseComponent } from './slides-showcase/slides-showcase.component';
 import { SpinnerShowcaseComponent } from './spinner-showcase/spinner-showcase.component';
-import { StockChartDeprecatedShowcaseComponent } from './stock-chart-deprecated-showcase/stock-chart-deprecated-showcase.component';
+import { StockChartShowcaseComponent } from './stock-chart-showcase/stock-chart-showcase.component';
 import { StylingHtmlListsShowcaseComponent } from './styling-html-lists/styling-html-lists-showcase';
 import { TabsShowcaseComponent } from './tabs-showcase/tabs-showcase.component';
 import { ToastShowcaseComponent } from './toast-showcase/toast-showcase.component';
@@ -90,10 +88,6 @@ export const routes: Routes = [
       {
         path: 'slide-button',
         component: SlideButtonShowcaseComponent,
-      },
-      {
-        path: 'chip',
-        component: ChipShowcaseComponent,
       },
       {
         path: 'divider',
@@ -150,17 +144,10 @@ export const routes: Routes = [
         },
       },
       {
-        path: 'chart-deprecated',
-        component: ChartDeprecatedShowcaseComponent,
-      },
-      {
         path: 'chart',
         component: ChartShowcaseComponent,
       },
-      {
-        path: 'stock-chart-deprecated',
-        component: StockChartDeprecatedShowcaseComponent,
-      },
+      { path: 'chart-stock', component: StockChartShowcaseComponent },
       {
         path: 'fonts',
         component: FontsShowcaseComponent,

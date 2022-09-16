@@ -4,6 +4,7 @@
 @use 'base/ionic';
 @use 'base/typography';
 @use 'base/line-clamp';
+@use 'base/link';
 @use 'base/html-list';
 
 :root,
@@ -203,16 +204,6 @@ ion-loading.kirby-loading-overlay {
   ion-tab-bar {
     z-index: -1;
   }
-}
-
-/*
- * Link-styles (anchor tag with href)
- */
-:link,
-:visited {
-  color: inherit;
-  cursor: pointer;
-  text-decoration: underline;
 }
 
 /*

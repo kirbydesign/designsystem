@@ -1,4 +1,6 @@
+@use 'sass:color';
 @use 'sass:map';
+@use '~@kirbydesign/core/src/scss/interaction-state';
 @use '~@kirbydesign/core/src/scss/utils';
 
 $radio-icon-padding: utils.size('xxxxs');
@@ -65,6 +67,8 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
 }
 
 ion-radio {
+  @include interaction-state.apply-focus-part($part: 'container');
+
   min-height: $radio-icon-size;
   min-width: $radio-icon-size;
   padding: $radio-icon-padding;
@@ -75,7 +79,23 @@ ion-radio {
   --color-checked: #{utils.get-color('success')};
 
   &::part(container) {
+    transition: interaction-state.transition();
+    transition-property: background-color;
     background-color: utils.get-color('white');
+  }
+
+  @include interaction-state.apply-hover {
+    &::part(container) {
+      background-color: interaction-state.get-state-color('white', 'xxs');
+    }
+  }
+  @include interaction-state.apply-active {
+    --color: transparent;
+    --color-checked: #{interaction-state.get-state-color('success')};
+
+    &::part(container) {
+      background-color: interaction-state.get-state-color('white', 'xs');
+    }
   }
 
   &::part(mark) {
@@ -83,29 +103,11 @@ ion-radio {
     height: $radio-icon-mark-size;
   }
 
-  &:active {
-    --color: transparent;
-
-    &::part(container) {
-      background-color: utils.get-color('white-shade');
-    }
-  }
-
   :host-context(kirby-radio-group.error),
   :host-context(kirby-radio-group.ng-touched.ng-invalid) {
     ion-radio,
     ion-radio:active {
       --color: #{utils.get-color('danger')};
-    }
-  }
-
-  // Only apply focus ring if pointer device can hover
-  // (effectively desktop/mouse devices):
-  @include utils.focus {
-    &::part(container) {
-      // Apply focus ring through box-shadow to keep circle shape and default border:
-      box-shadow: 0 0 0 1px #{utils.get-color('background-color')},
-        0 0 0 3px #{utils.$focus-ring-color};
     }
   }
 
