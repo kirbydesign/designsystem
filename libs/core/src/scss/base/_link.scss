@@ -1,0 +1,28 @@
+@use '../interaction-state';
+@use '../utils';
+
+$_focus-ring-gap: 3px;
+$_focus-ring-border-radius: utils.size('xxxxs');
+
+/*
+ * Link-styles (anchor tag with href)
+ */
+:link,
+:visited {
+  @include interaction-state.apply-focus-visible($gap: $_focus-ring-gap) {
+    outline: none;
+    border-radius: $_focus-ring-border-radius;
+  }
+
+  color: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+a {
+  @include interaction-state.apply-hover {
+    text-decoration-color: transparent;
+  }
+
+  transition: interaction-state.transition();
+}

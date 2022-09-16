@@ -1,0 +1,50 @@
+@use 'sass:color';
+@use 'sass:list';
+@use 'sass:map';
+@use '../utils';
+
+$default-loudness-hover: 'xxs';
+$default-loudness-active: 'xs';
+$default-transition-duration: 80ms;
+$loudness-scale: (
+  'xxxs': 4%,
+  'xxs': 8%,
+  'xs': 12%,
+  's': 16%,
+  'm': 20%,
+  'l': 24%,
+  'xl': 28%,
+  'xxl': 32%,
+  'xxxl': 36%,
+  'xxxxl': 40%,
+);
+
+@function get-loudness($value) {
+  @return map.get($loudness-scale, $value);
+}
+
+@function get-state-color($variant, $loudness: $default-loudness-hover, $make-lighter: false) {
+  $_background: utils.get-color($variant, $getValueOnly: true);
+  $_lightness: 0% !default;
+
+  @if $make-lighter {
+    $_lightness: get-loudness($loudness);
+  } @else {
+    // negative number means "make it darker"
+    $_lightness: -1 * get-loudness($loudness);
+  }
+
+  $state-color: #{color.scale($_background, $lightness: $_lightness)};
+
+  @return $state-color;
+}
+
+/// Apply streamlined transition to interaction state changes
+@function transition(
+  $property: all,
+  $duration: $default-transition-duration,
+  $timing-function: linear,
+  $delay: 0ms
+) {
+  @return $property $duration $timing-function $delay;
+}

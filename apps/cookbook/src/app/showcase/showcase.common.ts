@@ -1,5 +1,7 @@
 import { DropdownShowcaseComponent } from '~/app/showcase/dropdown-showcase/dropdown-showcase.component';
 
+import { StockChartComponent } from '@kirbydesign/designsystem/components/charts/stock-chart';
+
 import { ExamplesModule } from '../examples/examples.module';
 import { DividerShowcaseComponent } from '../showcase/divider-showcase/divider-showcase.component';
 import { ItemShowcaseComponent } from '../showcase/item-showcase/item-showcase.component';
@@ -13,10 +15,8 @@ import { BadgeShowcaseComponent } from './badge-showcase/badge-showcase.componen
 import { ButtonShowcaseComponent } from './button-showcase/button-showcase.component';
 import { CalendarShowcaseComponent } from './calendar-showcase/calendar-showcase.component';
 import { CardShowcaseComponent } from './card-showcase/card-showcase.component';
-import { ChartDeprecatedShowcaseComponent } from './chart-deprecated-showcase/chart-deprecated-showcase.component';
 import { ChartShowcaseComponent } from './chart-showcase/chart-showcase.component';
 import { CheckboxShowcaseComponent } from './checkbox-showcase/checkbox-showcase.component';
-import { ChipShowcaseComponent } from './chip-showcase/chip-showcase.component';
 import { ColorsShowcaseComponent } from './colors-showcase/colors-showcase.component';
 import { EmptyStateShowcaseComponent } from './empty-state-showcase/empty-state-showcase.component';
 import { FabSheetShowcaseComponent } from './fab-sheet-showcase/fab-sheet-showcase.component';
@@ -46,7 +46,7 @@ import { ShowcaseComponent } from './showcase.component';
 import { SlideButtonShowcaseComponent } from './slide-button-showcase/slide-button-showcase.component';
 import { SlidesShowcaseComponent } from './slides-showcase/slides-showcase.component';
 import { SpinnerShowcaseComponent } from './spinner-showcase/spinner-showcase.component';
-import { StockChartDeprecatedShowcaseComponent } from './stock-chart-deprecated-showcase/stock-chart-deprecated-showcase.component';
+import { StockChartShowcaseComponent } from './stock-chart-showcase/stock-chart-showcase.component';
 import { StylingHtmlListsShowcaseComponent } from './styling-html-lists/styling-html-lists-showcase';
 import { TabsShowcaseComponent } from './tabs-showcase/tabs-showcase.component';
 import { ToastShowcaseComponent } from './toast-showcase/toast-showcase.component';
@@ -67,13 +67,12 @@ export const COMPONENT_EXPORTS: any[] = [
   ListNoShapeShowcaseComponent,
   GridShowcaseComponent,
   AvatarShowcaseComponent,
-  ChartDeprecatedShowcaseComponent,
   ChartShowcaseComponent,
+  StockChartShowcaseComponent,
   FontsShowcaseComponent,
   SpinnerShowcaseComponent,
   ModalShowcaseComponent,
   SegmentedControlShowcaseComponent,
-  ChipShowcaseComponent,
   BadgeShowcaseComponent,
   IconShowcaseComponent,
   CalendarShowcaseComponent,
@@ -95,7 +94,6 @@ export const COMPONENT_EXPORTS: any[] = [
   DividerShowcaseComponent,
   ReorderListShowcaseComponent,
   DropdownShowcaseComponent,
-  StockChartDeprecatedShowcaseComponent,
   ProgressCircleShowcaseComponent,
   FlagShowcaseComponent,
   SlidesShowcaseComponent,

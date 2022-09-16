@@ -7,7 +7,6 @@ export { MockCalendarComponent } from './mock.calendar.component';
 export { MockCardFooterComponent } from './mock.card-footer.component';
 export { MockCardHeaderComponent } from './mock.card-header.component';
 export { MockCardComponent } from './mock.card.component';
-export { MockChartDeprecatedComponent } from './mock.chart-deprecated.component';
 export { MockChartComponent } from './mock.chart.component';
 export { MockCheckboxComponent } from './mock.checkbox.component';
 export { MockChipComponent } from './mock.chip.component';

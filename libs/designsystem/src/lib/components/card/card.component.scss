@@ -1,3 +1,4 @@
+@use '~@kirbydesign/core/src/scss/interaction-state';
 @use '~@kirbydesign/core/src/scss/utils';
 
 :host {
@@ -5,6 +6,12 @@
   --kirby-card-main-color: #{utils.get-color('white-contrast')};
   --kirby-card-footer-background-color: #{utils.get-color('white')};
   --kirby-card-footer-color: #{utils.get-color('white-contrast')};
+
+  @include interaction-state.extend-content {
+    display: inherit;
+    flex-direction: inherit;
+    justify-content: inherit;
+  }
 
   border-radius: utils.$border-radius;
   box-shadow: utils.get-elevation(2);
@@ -37,8 +44,21 @@
   }
 
   &[role='button'] {
-    cursor: pointer;
-    outline-offset: utils.size('xxxxs');
+    @include interaction-state.initialize-layer;
+    @include interaction-state.apply-hover('xxxs');
+    @include interaction-state.apply-active('xxs');
+    @include interaction-state.apply-focus-visible($shadow: utils.get-elevation(2));
+
+    &.highlighted {
+      @include interaction-state.apply-focus-visible($shadow: utils.get-elevation(4));
+    }
+
+    &.interaction-state-make-lighter-and-louder {
+      @include interaction-state.apply-hover('xxs', $make-lighter: true);
+      @include interaction-state.apply-active('s', $make-lighter: true);
+    }
+
+    outline: none;
   }
 }
 

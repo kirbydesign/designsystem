@@ -15,7 +15,6 @@
     "chartjs-plugin-datalabels",
     "date-fns-tz",
     "date-fns",
-    "highcharts",
     "include-media",
     "inputmask"
   ]

@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use '~@kirbydesign/core/src/scss/interaction-state';
 @use '~@kirbydesign/core/src/scss/utils';
 @use 'item.utils';
 
@@ -7,21 +8,17 @@
   position: relative;
 
   ion-item {
+    @include interaction-state.apply-hover-ionic('xxxs');
+    @include interaction-state.apply-active-ionic('xxs');
+
     --padding-top: var(--item-padding-top, 0px);
     --padding-bottom: var(--item-padding-bottom, 0px);
-
-    font-size: utils.font-size('s');
-
     --min-height: #{map.get(utils.$item-heights, 'm')};
     --padding-start: #{utils.size('s')};
     --inner-padding-top: #{utils.size('xxs')};
     --inner-padding-bottom: #{utils.size('xxs')};
     --inner-padding-end: #{utils.size('s')};
     --background: var(--kirby-item-background, #{utils.get-color('white')});
-    --background-activated: var(
-      --kirby-item-background-activated,
-      #{utils.get-color('white-shade')}
-    );
 
     // WORKAROUND: Needed to fix ignored click on scrollend
     // https://github.com/ionic-team/ionic-framework/issues/21871
@@ -31,8 +28,8 @@
       #{utils.get-color('background-color')}
     );
     --background-focused-opacity: 1;
-    --background-hover: var(--kirby-item-background-hover, #{utils.get-color('background-color')});
-    --background-hover-opacity: 1;
+
+    font-size: utils.font-size('s');
 
     // Prevent additional padding in iOS Safari on devices with "screen notch"
     // by removing horizontal safe area when rotated to landscape orientation.
@@ -67,6 +64,8 @@
       width: auto;
       text-align: right;
     }
+
+    --transition: #{interaction-state.transition()};
   }
 
   &.sm ion-item {

@@ -1,9 +1,21 @@
 @use '../form-field-inputs.shared' as shared;
+@use '~@kirbydesign/core/src/scss/interaction-state';
 @use '~@kirbydesign/core/src/scss/utils';
 
 $padding-block-size-md: shared.$form-field-input-padding * 0.5;
 
 :host {
+  @include interaction-state.apply-hover {
+    background-color: interaction-state.get-state-color('white', 'xxxs');
+    cursor: text;
+  }
+  @include interaction-state.apply-active {
+    background-color: interaction-state.get-state-color('white');
+  }
+
+  transition: interaction-state.transition();
+  transition-property: background-color;
+
   &[type='number'] {
     // fallback
     appearance: textfield;
