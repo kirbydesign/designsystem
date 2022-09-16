@@ -59,7 +59,11 @@
       ></ng-container>
     </ion-item-divider>
 
-    <div class="list-items" *ngFor="let list of section.lists">
+    <div
+      class="list-items"
+      [style.margin-bottom]="standAloneMargin"
+      *ngFor="let list of section.lists"
+    >
       <ng-container *ngTemplateOutlet="itemsTemplate; context: { $implicit: list }"></ng-container>
     </div>
   </ion-item-group>

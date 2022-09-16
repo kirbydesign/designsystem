@@ -66,6 +66,11 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() getStandAloneByProperty: string;
 
   /**
+   * Bottom margin for stand alone items
+   */
+  @Input() standAloneMargin: string = '8px';
+
+  /**
    * Text to display when no more items can be loaded (used for "on demand"-loading).
    */
   @Input() noMoreItemsText: string;
@@ -148,8 +153,8 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   itemTemplate: TemplateRef<any>;
 
   @HostBinding('class.has-sections') _isSectionsEnabled: boolean;
-  @HostBinding('class.has-stand-alone') _isStandAloneEnabled: boolean;
 
+  _isStandAloneEnabled: boolean;
   _isSelectable: boolean;
   _isLoading: boolean;
   _groupedItems: any[];
