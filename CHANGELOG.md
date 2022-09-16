@@ -4,6 +4,15 @@ Notable changes to the project will be documented in this file.
 
 ## [7.0.0](https://github.com/kirbydesign/designsystem/pull/2442) (16-09-2022)
 
+### Breaking Changes
+
+- **button** - deprecate attention-level 4 on kirby-button ([#1993](https://github.com/kirbydesign/designsystem/pull/1993))
+- **chart** - remove deprecated Highchart variants ([#2334](https://github.com/kirbydesign/designsystem/pull/2334))
+
+### Deprecations
+
+- **chip** - deprecate chip component ([#2391](https://github.com/kirbydesign/designsystem/pull/2391))
+
 ### Features
 
 - **card** - make it possible to use alternative hover and active on dark cards ([#2469](https://github.com/kirbydesign/designsystem/pull/2469))
@@ -38,15 +47,6 @@ Notable changes to the project will be documented in this file.
   | Tabs              |  ✅   |   ✅   |     ✅      |        ✅         |
   | Toggle            |  ✅   |   ✅   |     ✅      |        ✅         |
   | Toggle Button     |  ✅   |   ✅   |     ✅      |        ✅         |
-
-### Breaking Changes
-
-- **button** - deprecate attention-level 4 on kirby-button ([#1993](https://github.com/kirbydesign/designsystem/pull/1993))
-- **chart** - remove deprecated Highchart variants ([#2334](https://github.com/kirbydesign/designsystem/pull/2334))
-
-### Deprecations
-
-- **chip** - deprecate chip component ([#2391](https://github.com/kirbydesign/designsystem/pull/2391))
 
 ## [6.4.1](https://github.com/kirbydesign/designsystem/pull/2470) (09-09-2022)
 
