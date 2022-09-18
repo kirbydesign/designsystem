@@ -76,7 +76,6 @@ export const MOCK_COMPONENTS = [
   MockCardHeaderComponent,
   MockCardComponent,
   MockChartComponent,
-  MockChartDeprecatedComponent,
   MockCheckboxComponent,
   MockChipComponent,
   MockDividerComponent,

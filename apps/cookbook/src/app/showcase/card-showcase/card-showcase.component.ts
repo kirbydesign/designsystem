@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
+import exampleHtml from '../../examples/card-example/card-example.component.html?raw';
 import {
   ApiDescriptionProperty,
   ApiDescriptionPropertyColumns,
 } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
-
-import exampleHtml from '../../examples/card-example/card-example.component.html?raw';
 
 @Component({
   selector: 'cookbook-card-showcase',
@@ -60,6 +59,13 @@ export class CardShowcaseComponent {
         'medium',
         'dark',
       ],
+    },
+    {
+      name: 'hasDarkBackgroundColor',
+      description:
+        'Use this to make the hover and active interaction states be lighter instead of darker (which is the default)',
+      defaultValue: 'false',
+      type: ['boolean'],
     },
   ];
 

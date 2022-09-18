@@ -1,6 +1,3 @@
-import { DropdownExampleComponent } from '~/app/examples/dropdown-example/dropdown-example.component';
-import { PagePullToRefreshExampleComponent } from '~/app/examples/page-example/pull-to-refresh/page-pull-to-refresh-example.component';
-
 import { AccordionExampleComponent } from './accordion-example/accordion-example.component';
 import { ActionSheetExampleComponent } from './action-sheet-example/action-sheet-example.component';
 import { AlertExampleComponent } from './alert-example/alert-example.component';
@@ -9,7 +6,6 @@ import { ButtonExampleComponent } from './button-example/button-example.componen
 import { CalendarCardExampleComponent } from './calendar-example/calendar-card-example.component';
 import { CalendarExampleComponent } from './calendar-example/calendar-example.component';
 import { CheckboxExampleComponent } from './checkbox-example/checkbox-example.component';
-import { ChipExampleComponent } from './chip-example/chip-example.component';
 import { DividerExampleComponent } from './divider-example/divider-example.component';
 import { EmptyStateExampleComponent } from './empty-state-example/empty-state-example.component';
 import { ExamplesComponent } from './examples.component';
@@ -44,12 +40,13 @@ import { SlideButtonExampleComponent } from './slide-button-example/slide-button
 import { CookbookExampleCardContentComponent } from './slides-example/example-card-content';
 import { SlidesExampleComponent } from './slides-example/slides-example.component';
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
-import { StockChartDeprecatedExampleComponent } from './stock-chart-deprecated-example/stock-chart-deprecated-example.component';
 import { StylingHtmlListsExampleComponent } from './styling-html-lists-example/styling-html-lists-example.component';
 import { TabExampleComponent } from './tabs-example/tab/tab-example.component';
 import { TabsExampleComponent } from './tabs-example/tabs-example.component';
 import { ToastExampleComponent } from './toast-example/toast-example.component';
 import { ToggleExampleComponent } from './toggle-example/toggle-example.component';
+import { PagePullToRefreshExampleComponent } from '~/app/examples/page-example/pull-to-refresh/page-pull-to-refresh-example.component';
+import { DropdownExampleComponent } from '~/app/examples/dropdown-example/dropdown-example.component';
 
 export const COMPONENT_DECLARATIONS: any[] = [
   ExamplesComponent,
@@ -64,7 +61,6 @@ export const COMPONENT_DECLARATIONS: any[] = [
   FontsExampleComponent,
   SpinnerExampleComponent,
   SegmentedControlExampleComponent,
-  ChipExampleComponent,
   IconExampleComponent,
   CalendarExampleComponent,
   CalendarCardExampleComponent,
@@ -92,7 +88,6 @@ export const COMPONENT_DECLARATIONS: any[] = [
   DividerExampleComponent,
   ReorderListExampleComponent,
   DropdownExampleComponent,
-  StockChartDeprecatedExampleComponent,
   ProgressCircleExampleComponent,
   FlagExampleComponent,
   SlidesExampleComponent,
