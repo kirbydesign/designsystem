@@ -51,7 +51,7 @@ import { ToastShowcaseComponent } from './toast-showcase/toast-showcase.componen
 import { ToggleButtonShowcaseComponent } from './toggle-button-showcase/toggle-button-showcase.component';
 import { ToggleShowcaseComponent } from './toggle-showcase/toggle-showcase.component';
 import { ToolbarShowcaseComponent } from './toolbar-showcase/toolbar-showcase.component';
-import { RadioShowcaseComponent } from '~/app/showcase/radio-showcase/radio-showcase.component';
+import { RadioShowcaseComponent } from './radio-showcase/radio-showcase.component';
 
 export const routes: Routes = [
   {
