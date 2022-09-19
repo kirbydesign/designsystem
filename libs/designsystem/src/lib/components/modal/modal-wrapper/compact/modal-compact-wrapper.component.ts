@@ -23,8 +23,8 @@ export class ModalCompactWrapperComponent implements Modal, OnInit {
   private ionModalElement: HTMLIonModalElement;
   private readonly ionModalDidPresent = new Subject<void>();
   private readonly ionModalWillDismiss = new Subject<void>();
-  readonly didPresent = lastValueFrom(this.ionModalDidPresent);
-  readonly willClose = lastValueFrom(this.ionModalWillDismiss);
+  readonly didPresent = firstValueFrom(this.ionModalDidPresent);
+  readonly willClose = firstValueFrom(this.ionModalWillDismiss);
 
   constructor(
     private injector: Injector,
