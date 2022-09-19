@@ -21,7 +21,7 @@ jobs:
       - name: Check for new release
         id: event_type
         env:
-          IS_NEW_RELEASE: ${{ github.event_name != 'pull_request' && contains(github.event.head_commit.message, 'Bumping version to') }}
+          IS_NEW_RELEASE: 'true'
         run: echo "::set-output name=is_new_release::$IS_NEW_RELEASE"
       - name: Checkout repo
         uses: actions/checkout@v2
