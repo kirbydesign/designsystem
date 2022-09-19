@@ -18,9 +18,7 @@ export const proxyMethods = (Cmp: any, methods: string[]) => {
   const Prototype = Cmp.prototype;
   methods.forEach((methodName) => {
     Prototype[methodName] = function () {
-      // eslint-disable-next-line prefer-rest-params
       const args = arguments;
-      // eslint-disable-next-line prefer-spread
       return this.z.runOutsideAngular(() => this.el[methodName].apply(this.el, args));
     };
   });

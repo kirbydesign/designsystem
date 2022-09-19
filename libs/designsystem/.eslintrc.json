@@ -1,6 +1,6 @@
 {
   "extends": ["../../.eslintrc.json"],
-  "ignorePatterns": ["!**/*", "web-component-proxies.component.ts"],
+  "ignorePatterns": ["!**/*", "web-component-proxies.component.ts", "utils.ts"],
   "overrides": [
     {
       "files": ["*.ts"],
