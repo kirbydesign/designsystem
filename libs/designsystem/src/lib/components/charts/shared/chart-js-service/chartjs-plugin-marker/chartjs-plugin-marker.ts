@@ -9,7 +9,7 @@ import { valueOrDefault } from 'chart.js/helpers';
 
 import { ChartDataset } from '../../../';
 
-let defaultOptions = {
+const defaultOptions = {
   line: {
     color: 'black',
     width: 1,
@@ -35,7 +35,7 @@ export default {
       return;
     }
 
-    let xScaleType = chart.config.options.scales.x.type;
+    const xScaleType = chart.config.options.scales.x.type;
 
     if (
       xScaleType !== 'linear' &&
@@ -88,9 +88,9 @@ export default {
       return;
     }
 
-    let e = event.event;
+    const e = event.event;
 
-    let xScaleType = chart.config.options.scales.x.type;
+    const xScaleType = chart.config.options.scales.x.type;
 
     if (
       xScaleType !== 'linear' &&
@@ -101,7 +101,7 @@ export default {
       return;
     }
 
-    let xScale = this.getXScale(chart);
+    const xScale = this.getXScale(chart);
 
     if (!xScale) {
       return;
@@ -167,12 +167,12 @@ export default {
     if (!hasMarkerConfiguration(chart)) {
       return;
     }
-    let yScale = this.getYScale(chart);
+    const yScale = this.getYScale(chart);
 
-    let lineWidth = this.getOption(chart, 'line', 'width');
-    let color = this.getOption(chart, 'line', 'color');
-    let dashPattern = this.getOption(chart, 'line', 'dashPattern');
-    let snapEnabled = this.getOption(chart, 'snap', 'enabled');
+    const lineWidth = this.getOption(chart, 'line', 'width');
+    const color = this.getOption(chart, 'line', 'color');
+    const dashPattern = this.getOption(chart, 'line', 'dashPattern');
+    const snapEnabled = this.getOption(chart, 'snap', 'enabled');
 
     let lineX = chart.marker.x;
 
@@ -195,10 +195,10 @@ export default {
       return;
     }
     for (let chartIndex = 0; chartIndex < chart.data.datasets.length; chartIndex++) {
-      let dataset = chart.data.datasets[chartIndex];
-      let meta = chart.getDatasetMeta(chartIndex);
+      const dataset = chart.data.datasets[chartIndex];
+      const meta = chart.getDatasetMeta(chartIndex);
 
-      let yScale = chart.scales[meta.yAxisID];
+      const yScale = chart.scales[meta.yAxisID];
 
       if (meta.hidden || !dataset.interpolate) {
         continue;
@@ -223,28 +223,28 @@ export default {
 
   interpolateValues: function (chart) {
     for (let chartIndex = 0; chartIndex < chart.data.datasets.length; chartIndex++) {
-      let dataset = chart.data.datasets[chartIndex];
+      const dataset = chart.data.datasets[chartIndex];
 
-      let meta = chart.getDatasetMeta(chartIndex);
+      const meta = chart.getDatasetMeta(chartIndex);
 
-      let xScale = chart.scales[meta.xAxisID];
-      var xValue = xScale.getValueForPixel(chart.marker.x);
+      const xScale = chart.scales[meta.xAxisID];
+      const xValue = xScale.getValueForPixel(chart.marker.x);
 
       if (meta.hidden || !dataset.interpolate) {
         continue;
       }
 
-      let data = dataset.data;
-      let index = data.findIndex(function (o) {
+      const data = dataset.data;
+      const index = data.findIndex(function (o) {
         return o.x >= xValue;
       });
-      let prev = data[index - 1];
-      let next = data[index];
+      const prev = data[index - 1];
+      const next = data[index];
 
       if (chart.data.datasets[chartIndex].steppedLine && prev) {
         dataset.interpolatedValue = prev.y;
       } else if (prev && next) {
-        let slope = (next.y - prev.y) / (next.x - prev.x);
+        const slope = (next.y - prev.y) / (next.x - prev.x);
         dataset.interpolatedValue = prev.y + (xValue - prev.x) * slope;
       } else {
         dataset.interpolatedValue = NaN;

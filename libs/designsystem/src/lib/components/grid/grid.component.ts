@@ -26,7 +26,7 @@ class GridCard {
   // eslint-disable-next-line
   host: { '[attr.max-columns]': 'maxColumns' },
 })
-export class GridComponent implements OnInit, OnDestroy {
+export class GridComponent implements OnDestroy {
   cardConfigs: GridCardConfiguration[];
   cards: GridCard[] = [];
   private breakpointSubscription: Subscription;
@@ -90,12 +90,6 @@ export class GridComponent implements OnInit, OnDestroy {
         currentCard.colSpan += restColumns;
       }
     });
-  }
-
-  ngOnInit() {
-    // this.breakpointSubscription = this.breakpointHelper.observe().subscribe(() => {
-    //   this.configureGrid();
-    // });
   }
 
   ngOnDestroy() {

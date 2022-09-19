@@ -1,6 +1,8 @@
 // AUTO-GENERATED - PLEASE DON'T EDIT THIS FILE MANUALLY
 
 import {
+  ChartConfigService,
+  ChartJSService,
   IconRegistryService,
   LoadingOverlayService,
   ModalController,
@@ -8,6 +10,29 @@ import {
   ToastController,
 } from '@kirbydesign/designsystem';
 import { EMPTY } from 'rxjs';
+
+export function chartConfigServiceFactory() {
+  return jasmine.createSpyObj<ChartConfigService>('ChartConfigService', [
+    'getTypeConfig',
+    'getAnnotationDefaults',
+    'chartTypeToChartJSType',
+    'applyInteractionFunctionsExtensions',
+    'getStockChartOptions',
+  ]);
+}
+
+export function chartJSServiceFactory() {
+  return jasmine.createSpyObj<ChartJSService>('ChartJSService', [
+    'renderChart',
+    'redrawChart',
+    'updateData',
+    'updateLabels',
+    'updateType',
+    'updateOptions',
+    'updateAnnotations',
+    'updateHighlightedElements',
+  ]);
+}
 
 export function iconRegistryServiceFactory() {
   return jasmine.createSpyObj<IconRegistryService>('IconRegistryService', ['addIcon', 'addIcons']);
@@ -44,6 +69,14 @@ export function toastControllerFactory() {
 }
 
 export const MOCK_PROVIDERS = [
+  {
+    provide: ChartConfigService,
+    useFactory: chartConfigServiceFactory,
+  },
+  {
+    provide: ChartJSService,
+    useFactory: chartJSServiceFactory,
+  },
   {
     provide: IconRegistryService,
     useFactory: iconRegistryServiceFactory,

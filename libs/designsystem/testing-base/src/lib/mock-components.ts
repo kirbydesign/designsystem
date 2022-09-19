@@ -9,7 +9,7 @@ import { MockCardFooterComponent } from './components/mock.card-footer.component
 import { MockCardHeaderComponent } from './components/mock.card-header.component';
 import { MockCardComponent } from './components/mock.card.component';
 import { MockChartComponent } from './components/mock.chart.component';
-import { MockChartDeprecatedComponent } from './components/mock.chart-deprecated.component';
+import { MockBaseChartComponent } from './components/mock.base-chart.component';
 import { MockCheckboxComponent } from './components/mock.checkbox.component';
 import { MockChipComponent } from './components/mock.chip.component';
 import { MockDividerComponent } from './components/mock.divider.component';
@@ -76,6 +76,7 @@ export const MOCK_COMPONENTS = [
   MockCardHeaderComponent,
   MockCardComponent,
   MockChartComponent,
+  MockBaseChartComponent,
   MockCheckboxComponent,
   MockChipComponent,
   MockDividerComponent,
