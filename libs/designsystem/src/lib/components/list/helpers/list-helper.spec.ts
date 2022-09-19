@@ -228,7 +228,7 @@ describe('list helper', () => {
   });
 
   describe('function: groupSectionsWithStandAloneItems', () => {
-    fit('should create sections with sublists"', () => {
+    it('should create sections with sublists"', () => {
       const callback = (item: any) => {
         return item.title;
       };
