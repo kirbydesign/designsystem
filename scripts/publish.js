@@ -137,7 +137,7 @@ function createScssCoreForwardFiles(coreLibSrcDir, scssCoreForwardFilePaths) {
   const generateScssCoreForwardFiles = () => {
     console.log('Creating SCSS core forwarding files...');
     return new Promise((resolve) => {
-      sccsCoreForwardFilePaths.forEach((targetRootDir) => {
+      scssCoreForwardFilePaths.forEach((targetRootDir) => {
         forwardScssFiles({ sourceRootDir, targetRootDir, packageAlias, sharedRootDir });
         resolve();
       });
@@ -171,11 +171,11 @@ function copyPolyfills(libSrcDir, distTarget) {
   });
 }
 
-function copyCoreDistributionFiles(stencilBuildDir, distTarget) {
+function copyCoreDistributionFiles(coreLibDir, distTarget) {
   console.log('Copying core distribution files...');
 
-  const copyDistFiles = () => fs.copy(`${stencilBuildDir}/dist`, `${distTarget}/dist`);
-  const copyLoaderFiles = () => fs.copy(`${stencilBuildDir}/loader`, `${distTarget}/loader`);
+  const copyDistFiles = () => fs.copy(`${coreLibDir}/dist`, `${distTarget}/dist`);
+  const copyLoaderFiles = () => fs.copy(`${coreLibDir}/loader`, `${distTarget}/loader`);
 
   return copyDistFiles().then(copyLoaderFiles);
 }
