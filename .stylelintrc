@@ -26,6 +26,12 @@
       {
         "ignore": ["custom-properties"]
       }
+    ],
+    "declaration-block-no-redundant-longhand-properties": [
+      true,
+      {
+        "ignoreShorthands": ["transition"]
+      }
     ]
   }
 }

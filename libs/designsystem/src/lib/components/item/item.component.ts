@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  HostBinding,
+  Input,
+} from '@angular/core';
 
 export enum ItemSize {
   XS = 'xs',
@@ -13,12 +19,17 @@ export enum ItemSize {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ItemComponent {
+  _selectable: boolean;
+
   @Input() disabled: boolean;
   @HostBinding('class.selected')
   @Input()
   selected: boolean;
-  @Input()
-  selectable: boolean;
+  @Input() set selectable(selectable: boolean) {
+    if (this._selectable === selectable) return;
+    this._selectable = selectable;
+    this.cdr.markForCheck();
+  }
   @Input()
   reorderable: boolean;
   @HostBinding('class')
@@ -34,4 +45,6 @@ export class ItemComponent {
       event.preventDefault();
     }
   }
+
+  constructor(private cdr: ChangeDetectorRef) {}
 }
