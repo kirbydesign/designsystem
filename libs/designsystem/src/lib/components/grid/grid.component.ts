@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostBinding, Input, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { ScssHelper } from '../../scss/scss-helper';
@@ -23,15 +23,15 @@ class GridCard {
   selector: 'kirby-grid',
   templateUrl: './grid.component.html',
   styleUrls: ['./grid.component.scss'],
-  // eslint-disable-next-line
-  host: { '[attr.max-columns]': 'maxColumns' },
 })
 export class GridComponent implements OnDestroy {
   cardConfigs: GridCardConfiguration[];
   cards: GridCard[] = [];
   private breakpointSubscription: Subscription;
 
-  @Input() maxColumns: number;
+  @HostBinding('attr.max-columns')
+  @Input()
+  maxColumns: number;
 
   @Input()
   set cardConfigurations(cardConfigurations: GridCardConfiguration[]) {
