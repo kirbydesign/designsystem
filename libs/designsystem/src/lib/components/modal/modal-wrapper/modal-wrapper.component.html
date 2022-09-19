@@ -31,13 +31,13 @@
 </ion-content>
 
 <ng-template #closeButton let-icon="icon">
-  <button kirby-button attentionLevel="4" size="md" (click)="close()">
+  <button kirby-button [noDecoration]="true" size="md" (click)="close()">
     <kirby-icon [name]="icon"></kirby-icon>
   </button>
 </ng-template>
 
 <ng-template #supplementaryButton let-btn="btn">
-  <button kirby-button attentionLevel="2" size="md" (click)="btn.action($event)">
+  <button kirby-button [noDecoration]="true" size="md" (click)="btn.action($event)">
     <kirby-icon [name]="btn.iconName"></kirby-icon>
   </button>
 </ng-template>

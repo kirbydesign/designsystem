@@ -1,3 +1,3 @@
 module.exports = {
-  ignorableDeepImportMatchers: [/highcharts\//, /inputmask\//],
+  ignorableDeepImportMatchers: [/inputmask\//],
 };

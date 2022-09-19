@@ -1,6 +1,23 @@
+@use '~@kirbydesign/core/src/scss/interaction-state';
 @use '~@kirbydesign/core/src/scss/utils';
 
 ion-tab-button {
+  &.ion-focused {
+    @include interaction-state.apply-focus-visible-background {
+      --background: #{interaction-state.get-state-color('white', 'xxxs')};
+      --background-focused-opacity: 0;
+    }
+  }
+
+  @include interaction-state.apply-hover {
+    --background: #{interaction-state.get-state-color('white', 'xxxs')};
+  }
+
+  @include interaction-state.apply-active {
+    --background: #{interaction-state.get-state-color('white', 'xxs')};
+  }
+
+  transition: interaction-state.transition();
   height: 100%;
   flex: 1 1 0%;
   max-width: 168px;
