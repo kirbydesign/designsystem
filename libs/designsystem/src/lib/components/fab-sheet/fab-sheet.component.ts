@@ -33,7 +33,6 @@ export class FabSheetComponent implements AfterContentInit {
   }
 
   private _isBackdropVisible: boolean = false;
-  @HostBinding('class.backdrop-visible')
   get isBackdropVisible() {
     return this._isBackdropVisible;
   }
@@ -43,38 +42,46 @@ export class FabSheetComponent implements AfterContentInit {
   @ViewChild(IonFabButton, { static: true, read: ElementRef })
   ionFabButton: ElementRef<HTMLElement>;
 
+  @ViewChild(IonFab, { static: true })
+  ionFab: IonFab;
+
   constructor(
-    private renderer: Renderer2,
     private changeDetectorRef: ChangeDetectorRef,
+    private renderer: Renderer2,
     @Inject(DOCUMENT) private document: any
   ) {}
 
   ngAfterContentInit(): void {
-    if (this.actionSheet) {
+    if (!!this.actionSheet) {
       this.actionSheet.hideCancel = true;
     }
   }
 
-  hideActions(fab: IonFab) {
-    fab.close();
-    this._isFabSheetOpen = false;
-    this._isBackdropVisible = false;
-    this.renderer.removeClass(this.document.body, 'fab-sheet-active');
+  hideActions() {
+    this.ionFab.close().then(() => this.fabSheetStateChanged(false));
   }
 
-  onFabClick(fab: IonFab) {
-    this._isFabSheetOpen = fab.activated;
+  onFabButtonClick() {
+    setTimeout(() => {
+      this.fabSheetStateChanged(this.ionFab.activated);
+    });
+  }
 
-    if (this._isFabSheetOpen) {
+  onFabListClick() {
+    this.ionFab.close().then(() => {
+      this.fabSheetStateChanged(false);
+    });
+  }
+
+  fabSheetStateChanged(isOpen: boolean) {
+    this._isFabSheetOpen = isOpen;
+    if (this.isFabSheetOpen) {
       this.renderer.addClass(this.document.body, 'fab-sheet-active');
     } else {
       this.renderer.removeClass(this.document.body, 'fab-sheet-active');
     }
 
-    // Postpone backdrop visibility update to allow for animation of opacity
-    setTimeout(() => {
-      this._isBackdropVisible = this.isFabSheetOpen;
-      this.changeDetectorRef.markForCheck();
-    });
+    this._isBackdropVisible = !!this.actionSheet && isOpen;
+    this.changeDetectorRef.detectChanges();
   }
 }
