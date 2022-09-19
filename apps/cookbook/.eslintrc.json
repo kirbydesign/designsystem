@@ -17,6 +17,14 @@
             "prefix": "kirby",
             "style": "camelCase"
           }
+        ],
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": "cookbook",
+            "style": "kebab-case"
+          }
         ]
       },
       "plugins": ["@angular-eslint/eslint-plugin", "@typescript-eslint"]
