@@ -244,7 +244,7 @@ if (doPublishCore) {
   console.log('--- Publishing core ---');
   cleanDistribution(distCoreTarget)
     .then(() => buildPackage('dist:core'))
-    .then(() => copyCoreStencilBuildFiles(coreLibDir, distCoreTarget))
+    .then(() => copyCoreDistributionFiles(coreLibDir, distCoreTarget))
     .then(() => copyScssFiles(coreLibSrcDir, distCoreTarget))
     .then(() => copyPackageJson(coreLibDir, distCorePackageJsonPath))
     .then(() => publish(distCoreTarget, 'kirbydesign-core'))
