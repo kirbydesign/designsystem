@@ -70,19 +70,7 @@
                   "with": "apps/cookbook/src/environments/environment.prod.ts"
                 }
               ],
-              "outputHashing": "all",
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
-                }
-              ]
+              "outputHashing": "all"
             }
           }
         },
@@ -142,6 +130,12 @@
             "styles": ["libs/designsystem/src/lib/testing/styles.scss"]
           },
           "outputs": ["coverage/libs/designsystem"]
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/designsystem/**/*.ts", "libs/designsystem/**/*.html"]
+          }
         }
       },
       "schematics": {

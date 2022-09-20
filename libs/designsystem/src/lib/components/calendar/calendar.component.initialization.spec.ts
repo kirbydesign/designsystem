@@ -3,6 +3,7 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponent } from 'ng-mocks';
 
 import {
+  ButtonComponent,
   CalendarComponent,
   CardComponent,
   DropdownComponent,
@@ -24,6 +25,7 @@ describe('CalendarComponent', () => {
       RadioComponent,
       CardComponent,
       ItemComponent,
+      ButtonComponent,
     ],
     providers: [
       {

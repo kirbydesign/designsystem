@@ -25,7 +25,7 @@ SOFTWARE.
  */
 export function deepCopy<Tp>(tgt: Tp): Tp {
   let cp: Tp;
-  let ptn: number = 0;
+  const ptn: number = 0;
   if (tgt === null) {
     cp = tgt;
   } else if (tgt instanceof Date) {
@@ -37,7 +37,7 @@ export function deepCopy<Tp>(tgt: Tp): Tp {
     });
     cp = (cp as any).map((n: any) => deepCopy<any>(n));
   } else if (typeof tgt === 'object' && tgt !== {}) {
-    cp = { ...(tgt as Object) } as Tp;
+    cp = { ...(tgt as Tp) } as Tp;
     Object.keys(cp).forEach((k) => {
       (cp as any)[k] = deepCopy<any>((cp as any)[k]);
     });

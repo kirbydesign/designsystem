@@ -383,7 +383,7 @@ export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChec
     }
 
     const defaultTitleTemplate = this.customTitleTemplate || this.simpleTitleTemplate;
-    // tslint:disable:prettier
+    /* eslint-disable */
     // prettier-ignore
     this.toolbarTitleTemplate = this.customToolbarTitleTemplate
       ? this.customToolbarTitleTemplate

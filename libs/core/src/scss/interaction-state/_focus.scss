@@ -1,0 +1,91 @@
+@use 'interaction-state.utilities';
+@use 'layer';
+@use '../utils';
+
+// ---------------------------------------------------------------------------
+// The apply-focus-visible mixin is used by most interactive elements to apply
+// a focus ring around the element when navigated to via a keyboard on a
+// non-touch device.
+
+/// @param {box-shadow} $shadow
+///   Add/preserve additional box-shadow (e.g. elevation) alongside the focus ring.
+/// @param {number} $gap
+///   The distance (in pixels) from the element boundary to the focus ring
+// ---------------------------------------------------------------------------
+@mixin apply-focus-visible($shadow: null, $gap: utils.size('xxxxs')) {
+  @include utils.not-touch {
+    $reset-focus-ring: 0 0 0 0 transparent;
+
+    &:focus {
+      // This is a fallback for safari and other browsers, so we still show the focus
+      // ring on older versions that do not support :focus-visible.
+      @include _focus-ring($shadow, $gap);
+    }
+
+    &:focus:not(:focus-visible) {
+      // On browsers that do support focus-visible, we dont want anything to show on the
+      // standard focus pseudo-class, so we reset it here, while still allowing to preserve
+      // any shadow set on the element by the user.
+      box-shadow: $shadow, $reset-focus-ring;
+    }
+
+    &:focus-visible {
+      @include _focus-ring($shadow, $gap);
+    }
+
+    @content;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// In some cases a focus ring is not desirable, e.g., when buttons are stacked
+// (see Action Sheet).
+// As an alternative change the state layer opacity - similar to hover.
+// -----------------------------------------------------------------------------
+@mixin apply-focus-visible-background(
+  $loudness: interaction-state.$default-loudness-hover,
+  $make-lighter: false
+) {
+  @include utils.not-touch {
+    &:focus-visible {
+      // Remove the focus ring
+      box-shadow: none;
+
+      // Change "background color" (state layer opacity) instead
+      @include layer.apply-state($loudness, $make-lighter);
+    }
+
+    @content;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// The apply-focus-part mixin is used where ionics components do not allow
+// us to apply styling directly to the tabbed element, as it is hidden inside
+// a shadow root and not exposed as a part. In some of these cases, we are
+// unable to provide focus-visible like functionality, and thus the focus ring
+// will always show.
+
+/// @param {string} $part
+///    Add focus styles to a specific CSS Shadow Part.
+/// @param {box-shadow} $shadow
+///   Add/preserve additional box-shadow (e.g. elevation) alongside the focus ring.
+/// @param {number} $gap
+///   The distance (in pixels) from the element boundary to the focus ring
+// ---------------------------------------------------------------------------
+@mixin apply-focus-part($part, $shadow: null, $gap: utils.size('xxxxs')) {
+  @include utils.not-touch {
+    &:focus-within::part(#{$part}) {
+      @include _focus-ring($shadow, $gap);
+    }
+    @content;
+  }
+}
+
+@mixin _focus-ring($shadow, $gap) {
+  $stroke-width: utils.size('xxxxs');
+
+  transition: interaction-state.transition();
+  box-shadow: #{$shadow}, 0 0 0 $gap #{utils.get-color('background-color')},
+    0 0 0 $gap + $stroke-width utils.$focus-ring-color;
+}

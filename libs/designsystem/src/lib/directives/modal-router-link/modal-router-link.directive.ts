@@ -10,7 +10,7 @@ export class ModalRouterLinkDirective {
   constructor(private modalNavigationService: ModalNavigationService) {}
 
   @Input('kirbyModalRouterLink') path: string | string[];
-  // tslint:disable-next-line:no-input-rename
+  // eslint-disable-next-line @angular-eslint/no-input-rename
   @Input('kirbyModalQueryParams') queryParams?: Params;
 
   @HostListener('click')

@@ -91,22 +91,24 @@
   <nav>
     <ul>
       <li *ngFor="let item of navigationItems">
-        <a *ngIf="item.externalUrl" [href]="item.externalUrl" target="blank">
-          <button kirby-button attentionLevel="4">
-            {{ item.text }}<kirby-icon name="link"></kirby-icon>
-          </button>
+        <a
+          *ngIf="item.externalUrl"
+          [href]="item.externalUrl"
+          class="kirby-external-icon kirby-text-small"
+          target="blank"
+        >
+          {{ item.text }}
         </a>
         <a
           *ngIf="item.route"
           href="#"
+          class="kirby-text-small"
           [routerLink]="item.route"
           routerLinkActive
           [routerLinkActiveOptions]="{ exact: false }"
           #routerLinkActive="routerLinkActive"
         >
-          <button kirby-button [attentionLevel]="routerLinkActive.isActive ? '3' : '4'">
-            {{ item.text }}
-          </button>
+          {{ item.text }}
         </a>
       </li>
     </ul>

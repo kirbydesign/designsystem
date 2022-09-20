@@ -1,40 +1,30 @@
 <ion-segment
-  *ngIf="mode === 'default'"
   [value]="value?.id"
-  [scrollable]="disableChangeOnSwipe"
+  [scrollable]="disableChangeOnSwipe || mode !== 'default'"
   (ionChange)="onSegmentSelect($event.detail.value)"
   (click)="preventOutsideClick($event)"
 >
-  <div *ngFor="let item of items" class="segment-btn-wrapper">
-    <ion-segment-button [value]="item.id">{{ item.text }}</ion-segment-button>
-    <kirby-badge
-      *ngIf="item.badge"
-      role="text"
-      [attr.aria-label]="item.badge.description"
-      [themeColor]="item.badge.themeColor"
-    >
-      <ng-container *ngIf="item.badge.icon; else badgeContent">
-        <kirby-icon
-          *ngIf="item.badge.isCustomIcon; else defaultIconName"
-          [customName]="item.badge.icon"
-        ></kirby-icon>
-        <ng-template #defaultIconName>
-          <kirby-icon [name]="item.badge.icon"></kirby-icon>
+  <ng-container *ngFor="let item of items">
+    <ion-segment-button [value]="item.id">{{ item.text }} </ion-segment-button>
+    <div class="badge-container" *ngIf="item.badge">
+      <kirby-badge
+        role="text"
+        [attr.aria-label]="item.badge.description"
+        [themeColor]="item.badge.themeColor"
+      >
+        <ng-container *ngIf="item.badge.icon; else badgeContent">
+          <kirby-icon
+            *ngIf="item.badge.isCustomIcon; else defaultIconName"
+            [customName]="item.badge.icon"
+          ></kirby-icon>
+          <ng-template #defaultIconName>
+            <kirby-icon [name]="item.badge.icon"></kirby-icon>
+          </ng-template>
+        </ng-container>
+        <ng-template #badgeContent>
+          {{ item.badge.content }}
         </ng-template>
-      </ng-container>
-      <ng-template #badgeContent>
-        {{ item.badge.content }}
-      </ng-template>
-    </kirby-badge>
-  </div>
+      </kirby-badge>
+    </div>
+  </ng-container>
 </ion-segment>
-
-<ng-container *ngIf="mode === 'chip' || mode === 'compactChip'">
-  <kirby-chip
-    *ngFor="let item of items; let index = index"
-    [text]="item.text"
-    [isSelected]="index === selectedIndex"
-    (click)="onSegmentSelect(item.id)"
-    role="button"
-  ></kirby-chip>
-</ng-container>

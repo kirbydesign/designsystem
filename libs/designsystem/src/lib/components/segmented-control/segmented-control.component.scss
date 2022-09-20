@@ -1,3 +1,4 @@
+@use '~@kirbydesign/core/src/scss/interaction-state';
 @use '~@kirbydesign/core/src/scss/utils';
 
 :host {
@@ -20,39 +21,72 @@
     }
   }
 
+  &.default-mode {
+    ion-segment {
+      --background: #{utils.get-color('white')};
+
+      width: fit-content; // The segmented control itself is block-level, but we don't want it to stretch
+      overflow: visible; // Ensures the badge is not cut off
+      contain: none; // Ensures the badge is not cut off
+    }
+  }
+
   &.chip-mode {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    overflow-y: hidden; // chip touch area height is bigger than segmented control height
-    // Hide scrollbar on touch device:
-    @include utils.touch {
-      scrollbar-width: none; /* Firefox */
-      &::-webkit-scrollbar {
-        display: none;
+    ion-segment {
+      @include utils.touch {
+        scrollbar-width: none; /* Firefox */
+        &::-webkit-scrollbar {
+          display: none;
+        }
       }
+
+      --background: none;
+
+      border-radius: 0;
+      padding: #{utils.size('xxxs')};
+      gap: #{utils.size('xxs')};
+    }
+
+    ion-segment-button {
+      --background: #{utils.get-color('white')};
+      --indicator-transition: none;
+
+      flex: initial;
+
+      &::part(indicator) {
+        // Remove padding as the selected segment will otherwise have additional space to its neighbors
+        padding-inline: 0;
+      }
+    }
+  }
+
+  &.compact {
+    ion-segment {
+      --background: transparent;
+    }
+
+    ion-segment-button {
+      --background: transparent;
+      --padding-start: #{utils.size('xs')};
+      --padding-end: #{utils.size('xs')};
     }
   }
 }
 
 ion-segment {
-  display: inline-flex; // The segmented control itself is block-level, but we don't want the background to stretch
-  width: auto; // The segmented control itself is block-level, but we don't want the background to stretch
-  overflow: visible; // Ensures the badge is not cut off
-  contain: unset; // Ensures the badge is not cut off
-
-  --background: #{utils.get-color('white')};
-
   border-radius: utils.$border-radius-round;
 }
 
 ion-segment-button {
+  @include interaction-state.apply-focus-part($part: 'native');
+  @include interaction-state.apply-hover-ionic;
+  @include interaction-state.apply-active-ionic('s');
   @include utils.accessible-target-size;
 
-  min-height: utils.size('xl');
-  font-weight: utils.font-weight('normal');
-  font-size: utils.font-size('s');
-  text-transform: none;
+  &.segment-button-checked {
+    @include interaction-state.apply-hover-ionic('l', $make-lighter: true);
+    @include interaction-state.apply-active-ionic('xxxl', $make-lighter: true);
+  }
 
   --border-radius: #{utils.$border-radius-round};
   --border-style: none;
@@ -62,6 +96,7 @@ ion-segment-button {
   --color-checked: #{utils.get-color('black-contrast')};
   --color-hover: #{utils.get-color('black-tint')};
   --indicator-box-shadow: none;
+  --indicator-transform: none;
   --padding-start: #{utils.size('m')};
   --padding-end: #{utils.size('m')};
   --margin-bottom: 0;
@@ -69,16 +104,34 @@ ion-segment-button {
   --margin-start: 0;
   --margin-top: 0;
 
+  min-height: utils.size('xl');
+  min-width: fit-content;
+  font-weight: utils.font-weight('normal');
+  font-size: utils.font-size('s');
+  text-transform: none;
   margin: 0;
-}
 
-.segment-btn-wrapper {
-  position: relative;
-}
+  // NOTE: This is a custom implementation of the hover interaction state;
+  // identical to FabSheet's ion-fab-button & PageComponent's ion-back-button.
+  opacity: 1; // not strictly required but declared to be consistent
 
-:host-context(.plt-desktop) {
-  ion-segment-button:focus-within {
-    outline-color: -webkit-focus-ring-color;
-    outline-style: auto;
+  &::part(native) {
+    opacity: 1; // required for interaction states to work
+    border-radius: #{utils.$border-radius-round};
+    overflow: hidden; // not strictly required but declared to be consistent
   }
+
+  &::part(native)::after {
+    transition: interaction-state.transition();
+  }
+
+  // end NOTE
+
+  &::part(indicator) {
+    padding-inline: 0;
+  }
+}
+
+.badge-container {
+  position: relative;
 }

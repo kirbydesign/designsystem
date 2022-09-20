@@ -6,7 +6,12 @@
   </div>
 </kirby-card>
 
-<kirby-card [hasPadding]="true" themeColor="secondary">
+<kirby-card
+  [hasPadding]="true"
+  themeColor="secondary"
+  (click)="noop()"
+  [hasDarkBackgroundColor]="true"
+>
   <kirby-card-header title="Secondary" subtitle='themeColor="secondary"'></kirby-card-header>
   <div>
     Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia facere molestias recusandae

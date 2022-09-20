@@ -102,6 +102,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   private activeMonth: Date;
   private _selectedDate: Date;
   private _disabledDates: Date[] = [];
+  private _enabledDates: Date[] = [];
   private _todayDate: Date;
   private _minDate: Date;
   private _maxDate: Date;
@@ -129,6 +130,14 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
 
   @Input() set disabledDates(value: Date[]) {
     this._disabledDates = (value || []).map((date) => this.normalizeDate(date));
+  }
+
+  get enabledDates(): Date[] {
+    return this._enabledDates;
+  }
+
+  @Input() set enabledDates(value: Date[]) {
+    this._enabledDates = (value || []).map((date) => this.normalizeDate(date));
   }
 
   get todayDate(): Date {
@@ -233,6 +242,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
       changes.disablePastDates ||
       changes.disableFutureDates ||
       changes.disabledDates ||
+      changes.enabledDates ||
       changes.minDate ||
       changes.maxDate ||
       changes.todayDate ||
@@ -301,9 +311,14 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   private isDisabledDate(date: Date): boolean {
-    return this.disabledDates.some((disabledDate) => {
-      return isSameDay(disabledDate, date);
-    });
+    return this.disabledDates.some((disabledDate) => isSameDay(disabledDate, date));
+  }
+
+  private isEnabledDate(date: Date): boolean {
+    return (
+      this._enabledDates.length === 0 ||
+      this.enabledDates.some((enabledDate) => isSameDay(enabledDate, date))
+    );
   }
 
   refreshActiveMonth() {
@@ -346,7 +361,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
       isFuture: isAfter(date, today),
       isWeekend: isWeekend(date),
       isCurrentMonth: isSameMonth(date, monthStart),
-      isDisabled: this.isDisabledDate(date),
+      isDisabled: this.isDisabledDate(date) || !this.isEnabledDate(date),
     };
   }
 
@@ -470,7 +485,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   private getCell(date: Date) {
     let foundDay = null;
     if (date) {
-      for (let week of this._month) {
+      for (const week of this._month) {
         foundDay = week.find((day) => {
           return day.isCurrentMonth && day.date === date.getDate();
         });
