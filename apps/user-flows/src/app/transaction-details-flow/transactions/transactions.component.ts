@@ -4,14 +4,14 @@ import { Transaction } from '~/app/transaction-flow/transaction';
 import { ListSwipeAction } from '@kirbydesign/designsystem';
 
 import transactionsData from '../../transaction-flow/transactions-data.json';
-import { TransactionDetailsTransactionDetailsComponent } from '../transaction-details-transaction-details/transaction-details-transaction-details.component';
+import { TransactionDetailsComponent } from '../transaction-details/transaction-details.component';
 
 @Component({
-  selector: 'kirbydesign-transaction-details-transactions',
-  templateUrl: './transaction-details-transactions.component.html',
-  styleUrls: ['./transaction-details-transactions.component.scss'],
+  selector: 'kirbydesign-transactions',
+  templateUrl: './transactions.component.html',
+  styleUrls: ['./transactions.component.scss'],
 })
-export class TransactionDetailsTransactionsComponent implements OnInit {
+export class TransactionsComponent implements OnInit {
   constructor() {}
 
   transactions: Transaction[] = [];
