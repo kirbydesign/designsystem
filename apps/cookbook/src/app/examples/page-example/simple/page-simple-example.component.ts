@@ -4,7 +4,6 @@ import { BasePageExampleComponent } from '../base-page-example.component';
 
 const config = {
   template: `<kirby-page title="Simple Page" subtitle="Subtitle of simple page" defaultBackHref="/">
-  <div *kirbyFixedTopContent>Hello</div>
   <kirby-page-content>
     <div [innerHTML]="content"></div>
   </kirby-page-content>
