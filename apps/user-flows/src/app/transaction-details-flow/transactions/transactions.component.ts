@@ -4,7 +4,6 @@ import { Transaction } from '~/app/transaction-flow/transaction';
 import { ListSwipeAction } from '@kirbydesign/designsystem';
 
 import transactionsData from '../../transaction-flow/transactions-data.json';
-import { TransactionDetailsComponent } from '../transaction-details/transaction-details.component';
 
 @Component({
   selector: 'kirbydesign-transactions',

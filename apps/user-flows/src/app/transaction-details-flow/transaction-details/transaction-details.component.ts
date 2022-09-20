@@ -7,7 +7,6 @@ import transactionsData from '../../transaction-flow/transactions-data.json';
 @Component({
   selector: 'kirbydesign-transaction-details',
   templateUrl: './transaction-details.component.html',
-  styleUrls: ['./transaction-details.component.scss'],
 })
 export class TransactionDetailsComponent implements OnInit {
   transactions: Transaction;
