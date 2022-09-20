@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { ListItemsExampleTemplate } from '../../examples/list-example/examples/items';
+import exampleHtml from '../../examples/list-example/list-example.component.html?raw';
 import { ListColoredItemsExampleTemplate } from '~/app/examples/list-example/examples/colored-items';
 import { ListWithDividersExampleTemplate } from '~/app/examples/list-example/examples/dividers';
 import { ListWithHeaderAndFooterExampleTemplate } from '~/app/examples/list-example/examples/header-and-footer';
@@ -8,15 +10,12 @@ import { ListWithSectionsAndStandAloneExampleTemplate } from '~/app/examples/lis
 import { ListSelectableItemsExampleTemplate } from '~/app/examples/list-example/examples/selectable-items';
 import { ListWithStandAloneExampleTemplate } from '~/app/examples/list-example/examples/stand-alone';
 
-import { ListItemsExampleTemplate } from '../../examples/list-example/examples/items';
-import exampleHtml from '../../examples/list-example/list-example.component.html?raw';
-
 @Component({
   selector: 'cookbook-list-showcase',
   templateUrl: './list-showcase.component.html',
   styleUrls: ['./list-showcase.component.scss'],
 })
-export class ListShowcaseComponent implements OnInit {
+export class ListShowcaseComponent {
   dividersExampleTemplate: string = ListWithDividersExampleTemplate;
   selectableItemsExampleTemplate: string = ListSelectableItemsExampleTemplate;
   coloredItemsExampleTemplate: string = ListColoredItemsExampleTemplate;
@@ -31,7 +30,4 @@ export class ListShowcaseComponent implements OnInit {
 
   sectionHeaderExampleHtml: string =
     '<GridLayout *kirbyListSectionHeader="let section" ios:height="50">...</GridLayout>';
-  constructor() {}
-
-  ngOnInit() {}
 }

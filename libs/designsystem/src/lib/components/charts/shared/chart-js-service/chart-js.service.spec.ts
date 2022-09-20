@@ -1,6 +1,6 @@
 import { ElementRef } from '@angular/core';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
-import { Chart, ChartOptions, ChartType as ChartJSType } from 'chart.js';
+import { Chart, ChartType as ChartJSType, ChartOptions } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
 import { MockProvider } from 'ng-mocks';
 

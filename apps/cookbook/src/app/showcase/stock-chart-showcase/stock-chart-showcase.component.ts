@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
+import { baseChartApi, baseChartCssCustomProperties } from '../chart-showcase/base-chart-api';
 import {
   ApiDescriptionProperty,
   ApiDescriptionPropertyColumns,
 } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
-
-import { baseChartApi, baseChartCssCustomProperties } from '../chart-showcase/base-chart-api';
 
 @Component({
   selector: 'cookbook-stock-chart-showcase',

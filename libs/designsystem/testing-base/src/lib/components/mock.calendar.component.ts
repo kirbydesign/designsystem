@@ -28,6 +28,7 @@ export class MockCalendarComponent {
   @Input() yearNavigatorOptions: CalendarYearNavigatorConfig;
   @Input() selectedDate: Date;
   @Input() disabledDates: Date[];
+  @Input() enabledDates: Date[];
   @Input() todayDate: Date;
   @Input() minDate: Date;
   @Input() maxDate: Date;
