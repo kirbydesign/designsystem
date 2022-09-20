@@ -102,6 +102,11 @@ export class PageContentDirective {
   }
 }
 
+@Directive({
+  selector: '[kirbyFixedTopContent]',
+})
+export class PageFixedTopContentDirective {}
+
 @Component({
   selector: 'kirby-page-progress',
   template: ` <ng-content></ng-content> `,
@@ -214,12 +219,18 @@ export class PageComponent
   @ContentChildren(PageContentDirective)
   private customContent: QueryList<PageContentDirective>;
 
+  @ContentChild(PageFixedTopContentDirective, { static: false, read: TemplateRef })
+  fixedTopContent: TemplateRef<any>;
+  @ViewChild('fixedTopContent', { static: false, read: ElementRef })
+  private fixedTopContentElement;
+
   hasPageTitle: boolean;
   hasPageSubtitle: boolean;
   hasActionsInPage: boolean;
   toolbarTitleVisible: boolean;
   toolbarFixedActionsVisible: boolean;
   toolbarStickyActionsVisible: boolean;
+  fixedTopContentVisible = true;
 
   fitHeadingConfig: FitHeadingConfig;
 
@@ -229,12 +240,16 @@ export class PageComponent
   fixedContentTemplate: TemplateRef<any>;
   stickyActionsTemplate: TemplateRef<any>;
   fixedActionsTemplate: TemplateRef<any>;
+  fixedTopContentTemplate: TemplateRef<any>;
+
+  private fixedTopContentIntersectionObserverRef = this.fixedTopContentIntersectionObserver();
   private pageTitleIntersectionObserverRef: IntersectionObserver =
     this.pageTitleIntersectionObserver();
+
   private url: string;
   private isActive: boolean;
-
   private ngOnDestroy$ = new Subject();
+
   private navigationStart$: Observable<RouterEvent> = this.router.events.pipe(
     takeUntil(this.ngOnDestroy$),
     filter((event: RouterEvent) => event instanceof NavigationStart)
@@ -305,6 +320,7 @@ export class PageComponent
     this.initializeTitle();
     this.initializeActions();
     this.initializeContent();
+    this.initializeLocalNavigation();
     this.changeDetectorRef.detectChanges();
   }
 
@@ -313,6 +329,7 @@ export class PageComponent
     this.ngOnDestroy$.complete();
 
     this.pageTitleIntersectionObserverRef.disconnect();
+    this.fixedTopContentIntersectionObserverRef.disconnect();
     this.windowRef.nativeWindow.removeEventListener(selectedTabClickEvent, () => {
       this.content.scrollToTop(KirbyAnimation.Duration.LONG);
     });
@@ -332,6 +349,11 @@ export class PageComponent
     if (this.pageTitle) {
       this.pageTitleIntersectionObserverRef.observe(this.pageTitle.nativeElement);
     }
+    if (this.fixedTopContentElement) {
+      this.fixedTopContentIntersectionObserverRef.observe(
+        this.fixedTopContentElement.nativeElement
+      );
+    }
   }
 
   private onLeave() {
@@ -341,6 +363,11 @@ export class PageComponent
     this.leave.emit();
     if (this.pageTitle) {
       this.pageTitleIntersectionObserverRef.unobserve(this.pageTitle.nativeElement);
+    }
+    if (this.fixedTopContentElement) {
+      this.fixedTopContentIntersectionObserverRef.unobserve(
+        this.fixedTopContentElement.nativeElement
+      );
     }
 
     if (this.tabBarBottomHidden && this.tabsComponent) {
@@ -408,6 +435,10 @@ export class PageComponent
     });
   }
 
+  private initializeLocalNavigation() {
+    this.fixedTopContentTemplate = this.fixedTopContent;
+  }
+
   private removeWrapper() {
     const parent = this.elementRef.nativeElement.parentNode;
     this.renderer.removeChild(parent, this.elementRef.nativeElement);
@@ -447,5 +478,24 @@ export class PageComponent
   @HostListener('window:keyboardWillHide')
   _onKeyboardWillHide() {
     this.ionContentElement.nativeElement.style.setProperty('--keyboard-offset', '0px');
+  }
+
+  private fixedTopContentIntersectionObserver() {
+    const options = {
+      rootMargin: '0px',
+      threshold: 0,
+    };
+
+    let initialized = false;
+    const callback = (entries) => {
+      if (initialized) {
+        this.fixedTopContentVisible = entries[0].isIntersecting;
+        this.changeDetectorRef.detectChanges();
+      } else {
+        initialized = true;
+      }
+    };
+
+    return new IntersectionObserver(callback, options);
   }
 }

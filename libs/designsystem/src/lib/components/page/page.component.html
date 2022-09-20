@@ -39,10 +39,10 @@
     <kirby-spinner></kirby-spinner>
   </ion-refresher>
 
-  <div class="content-inner">
+  <!-- Page header -->
+  <div class="page-header-container" *ngIf="hasPageTitle">
     <div
       class="page-header"
-      *ngIf="hasPageTitle"
       [ngClass]="{
         'text-center': titleAlignment === 'center',
         'text-right': titleAlignment === 'right'
@@ -62,8 +62,25 @@
         ></ng-container>
       </div>
     </div>
+  </div>
 
-    <!-- Content -->
+  <!-- Fixed top content -->
+  <ng-container *ngIf="fixedTopContentTemplate">
+    <div #fixedTopContent></div>
+
+    <div slot="fixed" [class.hidden]="fixedTopContentVisible" class="fixed-top-content-container">
+      <div class="fixed-top-content">
+        <ng-container *ngTemplateOutlet="fixedTopContentTemplate"></ng-container>
+      </div>
+    </div>
+
+    <div class="fixed-top-content" [class.hidden]="!fixedTopContentVisible">
+      <ng-container *ngTemplateOutlet="fixedTopContentTemplate"></ng-container>
+    </div>
+  </ng-container>
+
+  <!-- Content -->
+  <div class="content-inner">
     <ng-container
       *ngTemplateOutlet="customContentTemplate || defaultContentTemplate"
     ></ng-container>

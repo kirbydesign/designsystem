@@ -76,10 +76,16 @@ ion-back-button {
 /*
  * Page Header
  */
+.page-header-container {
+  max-width: var(--page-content-max-width, utils.$page-content-max-width);
+  margin: 0 auto;
+}
+
 .page-header {
   margin-left: utils.size('s');
   margin-top: utils.size('xxs');
   margin-bottom: var(--kirby-page-title-margin-bottom, #{utils.size('xl')});
+  max-width: var(--page-content-max-width, utils.$page-content-max-width);
 
   .page-title {
     &.has-actions {
@@ -132,10 +138,32 @@ ion-content {
   .fixed-content {
     width: 100%;
     position: absolute;
-    bottom: 0;
+    top: 0;
 
     .content-inner {
       position: relative;
     }
   }
+}
+
+/*
+ * Fixed top content
+ */
+.fixed-top-content-container {
+  width: 100vw;
+
+  .fixed-top-content {
+    padding: 0 utils.size('s');
+    margin: 0 auto;
+  }
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.fixed-top-content {
+  position: relative;
+  background-color: utils.get-color('background-color');
+  margin-bottom: utils.size('s');
 }

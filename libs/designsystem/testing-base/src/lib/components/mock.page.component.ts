@@ -6,6 +6,8 @@ import {
   PageComponent,
   PageContentComponent,
   PageContentDirective,
+  PageFixedTopContentDirective,
+  PageLocalNavigationComponent,
   PageProgressComponent,
   PageSubtitleDirective,
   PageTitleComponent,
