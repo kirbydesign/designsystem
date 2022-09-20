@@ -8,6 +8,7 @@
         "prefer-spread": "error",
         "no-empty-function": "warn",
         "no-extra-boolean-cast": "warn",
+        "no-nested-ternary": "warn",
         "no-useless-escape": "warn",
         "no-var": "error",
         "sort-imports": [
