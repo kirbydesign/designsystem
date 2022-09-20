@@ -10,7 +10,7 @@ type Section<T> = {
 
 type SectionWithStandAloneItems<T> = {
   name: string;
-  lists: T[][];
+  lists: [T[]];
 };
 
 @Injectable()
@@ -49,27 +49,23 @@ export class ListHelper {
   }
 
   public groupStandAloneItems<T>(items: T[], standAloneProperty: string): { items: T[] }[] {
-    let currentArrayIndex = 0;
+    const list = items.reduce(
+      (accumulator, item) => {
+        const lastList = accumulator[accumulator.length - 1];
+        const lastItemInList = lastList[lastList.length - 1];
 
-    const list = items.reduce((accumulator, item) => {
-      if (!accumulator[currentArrayIndex]) {
-        accumulator[currentArrayIndex] = [];
-      }
+        if (!lastItemInList) {
+          lastList.push(item);
+        } else if (!item[standAloneProperty] && !lastItemInList[standAloneProperty]) {
+          lastList.push(item);
+        } else {
+          accumulator.push([item]);
+        }
 
-      if (item[standAloneProperty]) {
-        accumulator.push([item]);
-
-        /**
-         * currentArrayIndex is incremented by 2 to skip the index of
-         * the stand alone item array, that is pushed into the multidimensional array
-         */
-        currentArrayIndex += 2;
-      } else {
-        accumulator[currentArrayIndex].push(item);
-      }
-
-      return accumulator;
-    }, [] as T[][]);
+        return accumulator;
+      },
+      [[]] as [T[]]
+    );
 
     return list.map((items) => {
       return { items };
