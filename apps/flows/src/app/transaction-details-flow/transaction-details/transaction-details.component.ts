@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Transaction } from '~/app/transaction-flow/transaction';
 
-import transactionsData from '../../transaction-flow/transactions-data.json';
+import { Transaction } from '../../transaction';
+import transactionsData from '../../transactions-data.json';
 
 @Component({
   selector: 'kirbydesign-transaction-details',

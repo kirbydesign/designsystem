@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ForyouComponent } from './foryou.component';
+import { ForYouComponent } from './for-you.component';
 
 describe('ForyouComponent', () => {
-  let component: ForyouComponent;
-  let fixture: ComponentFixture<ForyouComponent>;
+  let component: ForYouComponent;
+  let fixture: ComponentFixture<ForYouComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ForyouComponent],
+      declarations: [ForYouComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ForyouComponent);
+    fixture = TestBed.createComponent(ForYouComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

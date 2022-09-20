@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Transaction } from '~/app/transaction-flow/transaction';
 
 import { ListSwipeAction } from '@kirbydesign/designsystem';
 
-import transactionsData from '../../transaction-flow/transactions-data.json';
+import { Transaction } from '../../transaction';
+import transactionsData from '../../transactions-data.json';
 
 @Component({
   selector: 'kirbydesign-transactions',
