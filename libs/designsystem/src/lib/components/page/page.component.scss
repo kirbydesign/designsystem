@@ -106,7 +106,6 @@ ion-back-button {
   margin-left: utils.size('s');
   margin-top: utils.size('xxs');
   margin-bottom: var(--kirby-page-title-margin-bottom, #{utils.size('xl')});
-  max-width: var(--page-content-max-width, utils.$page-content-max-width);
 
   .page-title {
     &.has-actions {
