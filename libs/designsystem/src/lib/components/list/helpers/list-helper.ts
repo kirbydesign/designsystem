@@ -81,19 +81,30 @@ export class ListHelper {
     getGroupName: (item: T) => string,
     standAloneProperty: string
   ): SectionWithStandAloneItems<T>[] {
-    const sections = this.groupSections(items, getGroupName);
+    const sectionsMap = new Map<string, [T[]]>();
 
-    const sectionsWithStandAloneItems = sections.map((section) => {
-      const sectionItems = this.groupStandAloneItems(section.items, standAloneProperty);
+    items.forEach((item) => {
+      const sectionName = getGroupName(item);
 
-      const sectionLists = sectionItems.reduce((accumulator, list, index) => {
-        accumulator[index] = [...list.items];
-        return accumulator;
-      }, [] as T[][]);
+      if (sectionsMap.has(sectionName)) {
+        const section = sectionsMap.get(sectionName);
+        const lastListInSection = section![section!.length - 1];
+        const lastItemInList = lastListInSection[lastListInSection.length - 1];
 
-      return { name: section.name, lists: sectionLists };
+        if (!item[standAloneProperty] && !lastItemInList[standAloneProperty]) {
+          lastListInSection.push(item);
+        } else {
+          section!.push([item]);
+        }
+      } else {
+        sectionsMap.set(sectionName, [[item]]);
+      }
     });
 
-    return sectionsWithStandAloneItems;
+    return Array.from(sectionsMap)
+      .sort(([name], [otherName]) => name.localeCompare(otherName))
+      .map(([name, lists]) => {
+        return { name, lists };
+      });
   }
 }
