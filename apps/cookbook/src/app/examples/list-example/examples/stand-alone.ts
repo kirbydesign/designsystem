@@ -20,7 +20,6 @@ export const ListWithStandAloneExampleTemplate = `<kirby-list
 </kirby-list>`;
 
 @Component({
-  // tslint:disable-next-line
   selector: 'cookbook-list-with-stand-alone-example',
   template: `
     <kirby-page title="List with stand alone">
