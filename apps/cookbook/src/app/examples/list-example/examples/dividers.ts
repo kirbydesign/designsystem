@@ -10,8 +10,7 @@ export const ListWithDividersExampleTemplate = `<kirby-list [items]="items" [sho
 </kirby-list>`;
 
 @Component({
-  // tslint:disable-next-line
-  selector: 'list-with-dividers-example',
+  selector: 'cookbook-list-with-dividers-example',
   template: `
     <kirby-page title="Items using dividers">
       <kirby-page-content> ${ListWithDividersExampleTemplate} </kirby-page-content>

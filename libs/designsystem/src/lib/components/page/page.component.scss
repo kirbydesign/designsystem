@@ -1,3 +1,4 @@
+@use '~@kirbydesign/core/src/scss/interaction-state';
 @use '~@kirbydesign/core/src/scss/utils';
 
 /*
@@ -66,11 +67,31 @@ ion-title {
 }
 
 ion-back-button {
+  @include interaction-state.apply-hover-ionic;
+  @include interaction-state.apply-active-ionic('s');
+
   --color: #{utils.get-color('black')};
   --icon-font-size: 24px;
 
   height: utils.$fat-finger-size;
   width: utils.$fat-finger-size;
+
+  // NOTE: This is a custom implementation of the hover interaction state;
+  // identical to FabSheet's ion-fab-button & SegmentedControlComponent's
+  // ion-segment-button.
+  opacity: 1; // required for interaction states to work
+
+  &::part(native) {
+    opacity: 1; // required for interaction states to work
+    border-radius: utils.$border-radius-round;
+    overflow: hidden; // required for border radius to work
+  }
+
+  &::part(native)::after {
+    transition: interaction-state.transition();
+  }
+
+  // end NOTE
 }
 
 /*

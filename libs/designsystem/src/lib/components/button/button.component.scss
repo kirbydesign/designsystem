@@ -1,4 +1,7 @@
 @use 'sass:map';
+@use 'sass:meta';
+
+@use '~@kirbydesign/core/src/scss/interaction-state';
 @use '~@kirbydesign/core/src/scss/utils';
 
 $button-width: (
@@ -17,8 +20,8 @@ $button-width: (
   min-width: button-width('sm');
 
   &:not(.icon-only) {
-    padding-left: utils.size('s');
-    padding-right: utils.size('s');
+    --kirby-button-padding-left: #{utils.size('s')};
+    --kirby-button-padding-right: #{utils.size('s')};
   }
 
   &.icon-only {
@@ -47,6 +50,19 @@ $button-width: (
   }
 }
 
+@mixin button-no-decoration {
+  --kirby-button-background-color: transparent;
+  --kirby-button-color: #{utils.get-color('black')};
+  --kirby-button-border-color: transparent;
+
+  @include interaction-state.apply-hover;
+  @include interaction-state.apply-active('s');
+
+  &.destructive {
+    --kirby-button-color: #{utils.get-color('danger')};
+  }
+}
+
 @mixin button-attentionlevel1 {
   --kirby-button-background-color: #{utils.get-color('primary')};
   --kirby-button-color: #{utils.get-color('primary-contrast')};
@@ -58,8 +74,11 @@ $button-width: (
 }
 
 @mixin button-attentionlevel2 {
-  --kirby-button-background-color: #{utils.get-color('white')};
-  --kirby-button-color: #{utils.get-color('white-contrast')};
+  --kirby-button-background-color: #{utils.get-color('black')};
+  --kirby-button-color: #{utils.get-color('black-contrast')};
+
+  @include interaction-state.apply-hover('l', $make-lighter: true);
+  @include interaction-state.apply-active('xxxl', $make-lighter: true);
 
   &.destructive {
     --kirby-button-background-color: #{utils.get-color('light')};
@@ -73,15 +92,8 @@ $button-width: (
   --kirby-button-color: #{utils.get-color('black')};
   --kirby-button-border-color: #{utils.get-color('medium')};
 
-  &.destructive {
-    --kirby-button-color: #{utils.get-color('danger')};
-  }
-}
-
-@mixin button-attentionlevel4 {
-  // Expect canvas underneath to be a light color
-  --kirby-button-background-color: transparent;
-  --kirby-button-color: #{utils.get-color('black')};
+  @include interaction-state.apply-hover('xxxs');
+  @include interaction-state.apply-active('xxs');
 
   &.destructive {
     --kirby-button-color: #{utils.get-color('danger')};
@@ -89,19 +101,34 @@ $button-width: (
 }
 
 :host {
+  $border-width: 1px;
+
+  --kirby-button-padding-left: #{utils.size('m')};
+  --kirby-button-padding-right: #{utils.size('m')};
+
   @include utils.accessible-target-size;
+  @include interaction-state.apply-focus-visible;
+  @include interaction-state.initialize-layer($border-width);
+  @include interaction-state.apply-hover;
+  @include interaction-state.apply-active('s');
+  @include interaction-state.extend-content {
+    display: inherit;
+    width: inherit;
+    flex-direction: inherit;
+    align-items: inherit;
+    justify-content: inherit;
+    padding-inline: var(--kirby-button-padding-left) var(--kirby-button-padding-right);
+  }
 
   font-family: var(--kirby-font-family);
   background-color: var(--kirby-button-background-color, initial);
   color: var(--kirby-button-color, inherit);
   border-radius: utils.$border-radius-round;
   box-sizing: border-box; // Ensure border is not added to button height
-  cursor: pointer;
   display: inline-flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  transition: opacity 200ms linear;
   user-select: none;
   vertical-align: middle;
   white-space: nowrap;
@@ -110,27 +137,35 @@ $button-width: (
   font-size: utils.font-size('s');
   height: utils.size('xl');
   min-width: button-width('md');
-  padding: 0 utils.size('m');
+  padding: 0;
   margin: utils.size('xxxs');
   line-height: utils.line-height('s');
 
   // Outline is applied on button border instead,
   // to keep the rounded shape:
   outline: none;
-  border: 1px solid var(--kirby-button-border-color, transparent);
+  border-width: $border-width;
+  border-style: solid;
+  border-color: var(--kirby-button-border-color, transparent);
+
+  &.no-margin {
+    margin: 0;
+  }
 
   &.icon-left {
-    padding-left: utils.size('xs');
-    padding-right: utils.size('s');
-
     --kirby-icon-margin-right: #{utils.size('xxs')};
+    --kirby-button-padding-left: #{utils.size('xs')};
+    --kirby-button-padding-right: #{utils.size('s')};
+
+    padding: 0;
   }
 
   &.icon-right {
-    padding-left: utils.size('s');
-    padding-right: utils.size('xs');
-
     --kirby-icon-margin-left: #{utils.size('xxs')};
+    --kirby-button-padding-left: #{utils.size('s')};
+    --kirby-button-padding-right: #{utils.size('xs')};
+
+    padding: 0;
   }
 
   &.icon-only {
@@ -147,6 +182,10 @@ $button-width: (
     @include button-lg;
   }
 
+  &.no-decoration {
+    @include button-no-decoration;
+  }
+
   &.attention-level1 {
     @include button-attentionlevel1;
   }
@@ -159,26 +198,8 @@ $button-width: (
     @include button-attentionlevel3;
   }
 
-  &.attention-level4 {
-    @include button-attentionlevel4;
-  }
-
   &[expand='block'] {
     width: 100%;
-  }
-
-  // Only apply focus ring if pointer device can hover
-  // (effectively desktop/mouse devices):
-  @include utils.focus {
-    --kirby-button-border-color: #{utils.$focus-ring-color};
-  }
-
-  @include utils.hover {
-    opacity: 0.8;
-  }
-
-  &:active {
-    opacity: 0.8;
   }
 
   &:disabled {
@@ -188,22 +209,25 @@ $button-width: (
     pointer-events: none;
   }
 
-  :host-context(.default),
-  :host-context(.kirby-color-brightness-white) {
-    &.attention-level2 {
-      --kirby-button-background-color: #{utils.get-color('black')};
-      --kirby-button-color: #{utils.get-color('black-contrast')};
-    }
-  }
-
   :host-context(.kirby-color-brightness-dark) {
+    &.no-decoration {
+      --kirby-button-color: #{utils.get-color('white')};
+    }
+
+    &.attention-level2 {
+      --kirby-button-background-color: #{utils.get-color('white')};
+      --kirby-button-color: #{utils.get-color('white-contrast')};
+
+      @include interaction-state.apply-hover;
+      @include interaction-state.apply-active('s');
+    }
+
     &.attention-level3 {
       --kirby-button-border-color: #{utils.get-color('white')};
       --kirby-button-color: #{utils.get-color('white')};
-    }
 
-    &.attention-level4 {
-      --kirby-button-color: #{utils.get-color('white')};
+      @include interaction-state.apply-hover('xs', $make-lighter: true);
+      @include interaction-state.apply-active('m', $make-lighter: true);
     }
   }
 
@@ -229,6 +253,30 @@ $button-width: (
   --kirby-button-color: #{utils.get-color('success-contrast')};
 }
 
+:host-context(kirby-dropdown) {
+  justify-content: space-between;
+
+  &.attention-level2 {
+    --kirby-button-background-color: #{utils.get-color('white')};
+    --kirby-button-color: #{utils.get-color('white-contrast')};
+
+    @include interaction-state.apply-hover('xxxs');
+    @include interaction-state.apply-active('xxs');
+
+    box-shadow: utils.get-elevation(2);
+  }
+}
+
+:host-context(kirby-action-sheet) {
+  &.attention-level2 {
+    --kirby-button-background-color: #{utils.get-color('white')};
+    --kirby-button-color: #{utils.get-color('white-contrast')};
+
+    @include interaction-state.apply-hover;
+    @include interaction-state.apply-active;
+  }
+}
+
 // Temp fix for https://github.com/angular/angular-cli/issues/13854#issuecomment-470831308
 
 /* clean-css ignore:start */
@@ -241,11 +289,11 @@ $button-width: (
     width: utils.$fat-finger-size;
   }
 
+  &.no-decoration,
   &.attention-level1,
   &.attention-level2,
-  &.attention-level3,
-  &.attention-level4 {
-    @include button-attentionlevel4;
+  &.attention-level3 {
+    @include button-no-decoration;
   }
 }
 
@@ -255,11 +303,11 @@ $button-width: (
 
 /* clean-css ignore:start */
 :host-context(.page-title kirby-page-actions) {
+  &.no-decoration,
   &.attention-level1,
   &.attention-level2,
-  &.attention-level3,
-  &.attention-level4 {
-    @include button-attentionlevel2;
+  &.attention-level3 {
+    @include button-attentionlevel3;
   }
 }
 
@@ -274,15 +322,14 @@ $button-width: (
 
 /* clean-css ignore:end */
 
-:host-context(kirby-dropdown) {
-  justify-content: space-between;
-}
-
 :host-context(kirby-toggle-button) {
   @each $color-name, $color-value in utils.$notification-colors {
     &.#{$color-name} {
       --kirby-button-background-color: #{utils.get-color($color-name)};
       --kirby-button-color: #{utils.get-color($color-name + '-contrast')};
+
+      @include interaction-state.apply-hover;
+      @include interaction-state.apply-active('s');
     }
   }
 }

@@ -4,7 +4,7 @@ import { format, startOfDay, startOfMonth } from 'date-fns';
 import { zonedTimeToUtc } from 'date-fns-tz';
 import { MockComponent } from 'ng-mocks';
 
-import { CalendarComponent, IconComponent } from '..';
+import { ButtonComponent, CalendarComponent, IconComponent } from '..';
 import { TestHelper } from '../../testing/test-helper';
 import { WindowRef } from '../../types/window-ref';
 import { CardComponent } from '../card';
@@ -30,6 +30,7 @@ describe('CalendarComponent', () => {
       RadioComponent,
       CardComponent,
       ItemComponent,
+      ButtonComponent,
     ],
     providers: [
       {
@@ -493,7 +494,7 @@ describe('CalendarComponent', () => {
   }
 
   function captureDateChangeEvents() {
-    let captured: { event?: Date } = {};
+    const captured: { event?: Date } = {};
     spectator.output<Date>('dateChange').subscribe((result) => (captured.event = result));
     return captured;
   }

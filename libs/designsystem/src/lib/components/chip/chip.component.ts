@@ -7,6 +7,12 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChipComponent {
+  constructor() {
+    console.warn(
+      'DEPRECATION WARNING: `<kirby-chip>` will be removed from the API in Kirby v8. Use the Kirby button component instead.'
+    );
+  }
+
   @Input() text: string;
 
   @Input()

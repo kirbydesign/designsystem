@@ -485,7 +485,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   private getCell(date: Date) {
     let foundDay = null;
     if (date) {
-      for (let week of this._month) {
+      for (const week of this._month) {
         foundDay = week.find((day) => {
           return day.isCurrentMonth && day.date === date.getDate();
         });

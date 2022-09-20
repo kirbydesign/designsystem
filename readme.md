@@ -164,7 +164,6 @@ A basic walkthrough is outlined in the structure below:
    |                        #   and `@kirbydesign/designsystem/testing-jest` entry points.
    ├── sass-to-ts           # - CLI and Webpack plugin for extract global variables from SASS to TS
    ├── schematics           # - Angular schematics
-   └── tslint-rules         # - Custom lintiong rules
 ```
 
 ## Scripts
