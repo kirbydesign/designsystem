@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
-import { TranactionDetailsAccountComponent } from './transaction-details-flow/tranaction-details-account/tranaction-details-account.component';
+import { AccountComponent } from './transaction-details-flow/account/account.component';
+import { ForyouComponent } from './transaction-details-flow/foryou/foryou.component';
 import { TransactionDetailsFlowComponent } from './transaction-details-flow/transaction-details-flow.component';
-import { TransactionDetailsForyouComponent } from './transaction-details-flow/transaction-details-foryou/transaction-details-foryou.component';
 import { TransactionDetailsComponent } from './transaction-details-flow/transaction-details/transaction-details.component';
 import { TransactionsComponent } from './transaction-details-flow/transactions/transactions.component';
 
@@ -28,11 +28,11 @@ const routes: Routes = [
       },
       {
         path: 'foryou',
-        component: TransactionDetailsForyouComponent,
+        component: ForyouComponent,
       },
       {
         path: 'account',
-        component: TranactionDetailsAccountComponent,
+        component: AccountComponent,
       },
       { path: 'transactions', component: TransactionsComponent },
       {
