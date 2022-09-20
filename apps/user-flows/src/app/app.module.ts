@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { KirbyModule } from '@kirbydesign/designsystem';
@@ -23,6 +23,5 @@ import { TransactionsComponent } from './transaction-details-flow/transactions/t
   imports: [BrowserModule, AppRoutingModule, KirbyModule],
   providers: [],
   bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}
