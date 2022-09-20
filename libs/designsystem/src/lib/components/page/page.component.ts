@@ -248,6 +248,7 @@ export class PageComponent
 
   private url: string;
   private isActive: boolean;
+
   private ngOnDestroy$ = new Subject();
 
   private navigationStart$: Observable<RouterEvent> = this.router.events.pipe(
@@ -320,7 +321,7 @@ export class PageComponent
     this.initializeTitle();
     this.initializeActions();
     this.initializeContent();
-    this.initializeLocalNavigation();
+    this.initializeFixedTopContent();
     this.changeDetectorRef.detectChanges();
   }
 
@@ -435,7 +436,7 @@ export class PageComponent
     });
   }
 
-  private initializeLocalNavigation() {
+  private initializeFixedTopContent() {
     this.fixedTopContentTemplate = this.fixedTopContent;
   }
 
