@@ -253,7 +253,7 @@ describe('ButtonComponent in Kirby dropdown', () => {
       `<kirby-dropdown>
       </kirby-dropdown>`
     );
-    const button = spectator.queryHost('button[kirby-button]');
+    let button = spectator.queryHost('button[kirby-button]');
     expect(button).toHaveComputedStyle({ 'justify-content': 'space-between' });
   });
 });

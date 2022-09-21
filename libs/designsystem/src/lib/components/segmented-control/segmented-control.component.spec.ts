@@ -18,7 +18,7 @@ const fatFingerSize = DesignTokenHelper.fatFingerSize;
 
 describe('SegmentedControlComponent', () => {
   let component: SegmentedControlComponent;
-  const items: SegmentItem[] = [
+  let items: SegmentItem[] = [
     {
       text: 'First item',
       id: 'first',
@@ -162,7 +162,7 @@ describe('SegmentedControlComponent', () => {
 });
 
 describe('SegmentedControl with Badge', () => {
-  const itemsWithBadge: SegmentItem[] = [
+  let itemsWithBadge: SegmentItem[] = [
     {
       text: 'First Item',
       id: 'first',

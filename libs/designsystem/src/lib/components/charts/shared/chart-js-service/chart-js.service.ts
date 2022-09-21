@@ -116,7 +116,7 @@ export class ChartJSService {
       ? this.annotationsDelegate.createAnnotationPluginOptionsObject(annotations)
       : {};
 
-    const mergedOptions: ChartOptions = mergeDeepAll(
+    let mergedOptions: ChartOptions = mergeDeepAll(
       typeConfigOptions,
       customOptions,
       annotationPluginOptions
@@ -157,7 +157,7 @@ export class ChartJSService {
   }
 
   protected createDatasets(data: ChartDataset[] | number[]): ChartDataset[] {
-    const datasets = isNumberArray(data) ? [{ data }] : data;
+    let datasets = isNumberArray(data) ? [{ data }] : data;
 
     if (this.highlightedElements)
       this.addHighlightedElementsToDatasets(this.highlightedElements, datasets);

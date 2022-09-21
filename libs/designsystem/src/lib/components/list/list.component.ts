@@ -213,7 +213,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   _getBoundaryClass(index: number, section?: any[]): BoundaryClass {
-    const _items = section || this.items;
+    let _items = section || this.items;
 
     if (index === 0 || _items[index - 1]?.headingName) return this.headerTemplate ? null : 'first';
 
