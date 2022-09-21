@@ -1,7 +1,7 @@
 <!-- This container is only needed due to layout of larger screen sizes -->
 <kirby-page title="Konto">
   <kirby-page-actions *kirbyPageActions="{ sticky: true }">
-    <button kirby-button [size]="'sm'" [attentionLevel]="'3'">
+    <button kirby-button [size]="'sm'" [attentionLevel]="'3'" (click)="onCardSelect()">
       Card
       <kirby-icon name="payment-card"></kirby-icon>
     </button>
