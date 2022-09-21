@@ -24,7 +24,6 @@ export class PageLocalNavigationComponent implements AfterViewInit {
   selectedIndex$ = new BehaviorSubject(0);
   private _selectedIndex = 0;
   @Input() set selectedIndex(value: number) {
-    console.log(value);
     if (value > -1 && value !== this._selectedIndex) {
       this._selectedIndex = value;
       this.selectedIndex$.next(value);

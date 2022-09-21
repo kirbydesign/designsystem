@@ -6,7 +6,7 @@ import { BasePageExampleComponent } from '../base-page-example.component';
 
 const config = {
   template: `<kirby-page title="Simple Page" subtitle="Subtitle of simple page" defaultBackHref="/">
-<kirby-page-local-navigation *kirbyFixedTopContent [items]="items" [selectedIndex]="selectedIndex$ | async" (itemSelect)="onItemSelect($event)"></kirby-page-local-navigation>
+<kirby-page-local-navigation *kirbyPageFixedTopContent [items]="items" [selectedIndex]="selectedIndex$ | async" (itemSelect)="onItemSelect($event)"></kirby-page-local-navigation>
   <kirby-page-content>
     <div [innerHTML]="content"></div>
   </kirby-page-content>
@@ -21,6 +21,7 @@ export class PageSimpleExampleComponent extends BasePageExampleComponent {
     .replace('<div [innerHTML]="content"></div>', '...');
 
   onItemSelect(selected: LocalNavigationItem) {
+    console.log(selected);
     const index = this.items.findIndex((item) => item.id === selected.id);
     if (index > -1) {
       this.selectedIndex$.next(index);

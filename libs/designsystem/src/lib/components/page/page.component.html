@@ -32,6 +32,7 @@
 
 <ion-content scrollEvents="true" forceOverscroll="false">
   <ion-refresher
+    #ionRefresher
     *ngIf="refresh.observers.length > 0"
     (ionRefresh)="delegateRefreshEvent($event)"
     slot="fixed"

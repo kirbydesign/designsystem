@@ -25,9 +25,15 @@ import {
   ViewChild,
 } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router, RouterEvent } from '@angular/router';
-import { IonBackButtonDelegate, IonContent, IonFooter, IonHeader } from '@ionic/angular';
+import {
+  IonBackButtonDelegate,
+  IonContent,
+  IonFooter,
+  IonHeader,
+  IonRefresher,
+} from '@ionic/angular';
 import { Observable, Subject } from 'rxjs';
-import { filter, takeUntil } from 'rxjs/operators';
+import { distinctUntilChanged, filter, takeUntil } from 'rxjs/operators';
 
 import { KirbyAnimation } from '../../animation/kirby-animation';
 import { FitHeadingConfig } from '../../directives/fit-heading/fit-heading.directive';
@@ -103,7 +109,7 @@ export class PageContentDirective {
 }
 
 @Directive({
-  selector: '[kirbyFixedTopContent]',
+  selector: '[kirbyPageFixedTopContent]',
 })
 export class PageFixedTopContentDirective {}
 
@@ -222,7 +228,10 @@ export class PageComponent
   @ContentChild(PageFixedTopContentDirective, { static: false, read: TemplateRef })
   fixedTopContent: TemplateRef<any>;
   @ViewChild('fixedTopContent', { static: false, read: ElementRef })
-  private fixedTopContentElement;
+  private fixedTopContentRef;
+
+  @ViewChild('ionRefresher', { static: false, read: ElementRef })
+  private ionRefresher: ElementRef;
 
   hasPageTitle: boolean;
   hasPageSubtitle: boolean;
@@ -245,6 +254,9 @@ export class PageComponent
   private fixedTopContentIntersectionObserverRef = this.fixedTopContentIntersectionObserver();
   private pageTitleIntersectionObserverRef: IntersectionObserver =
     this.pageTitleIntersectionObserver();
+
+  private refresherMutationObserverRef = this.refresherMutationObserver();
+  private refresherActive$ = new Subject<boolean>();
 
   private url: string;
   private isActive: boolean;
@@ -273,6 +285,16 @@ export class PageComponent
 
   ngOnInit(): void {
     this.removeWrapper();
+    this.refresherActive$
+      .pipe(
+        takeUntil(this.ngOnDestroy$),
+        filter((value) => value === true || value === false),
+        distinctUntilChanged()
+      )
+      .subscribe((active) => {
+        console.log('refresher active: ', active);
+        this.toggleFixedTopContentIntersectionObserver(!active);
+      });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -331,6 +353,8 @@ export class PageComponent
 
     this.pageTitleIntersectionObserverRef.disconnect();
     this.fixedTopContentIntersectionObserverRef.disconnect();
+    this.refresherMutationObserverRef.disconnect();
+
     this.windowRef.nativeWindow.removeEventListener(selectedTabClickEvent, () => {
       this.content.scrollToTop(KirbyAnimation.Duration.LONG);
     });
@@ -350,11 +374,9 @@ export class PageComponent
     if (this.pageTitle) {
       this.pageTitleIntersectionObserverRef.observe(this.pageTitle.nativeElement);
     }
-    if (this.fixedTopContentElement) {
-      this.fixedTopContentIntersectionObserverRef.observe(
-        this.fixedTopContentElement.nativeElement
-      );
-    }
+
+    this.toggleFixedTopContentIntersectionObserver(true);
+    this.toggleRefresherMutationObserver(true);
   }
 
   private onLeave() {
@@ -365,11 +387,9 @@ export class PageComponent
     if (this.pageTitle) {
       this.pageTitleIntersectionObserverRef.unobserve(this.pageTitle.nativeElement);
     }
-    if (this.fixedTopContentElement) {
-      this.fixedTopContentIntersectionObserverRef.unobserve(
-        this.fixedTopContentElement.nativeElement
-      );
-    }
+
+    this.toggleFixedTopContentIntersectionObserver(false);
+    this.toggleRefresherMutationObserver(false);
 
     if (this.tabBarBottomHidden && this.tabsComponent) {
       this.tabsComponent.tabBarBottomHidden = false;
@@ -481,6 +501,27 @@ export class PageComponent
     this.ionContentElement.nativeElement.style.setProperty('--keyboard-offset', '0px');
   }
 
+  private toggleFixedTopContentIntersectionObserver(observe: boolean) {
+    const fixedContentNativeElement = this.fixedTopContentRef?.nativeElement;
+
+    if (fixedContentNativeElement) {
+      observe
+        ? this.fixedTopContentIntersectionObserverRef.observe(fixedContentNativeElement)
+        : this.fixedTopContentIntersectionObserverRef.unobserve(fixedContentNativeElement);
+    }
+  }
+
+  private toggleRefresherMutationObserver(observe: boolean) {
+    const refresherNativeElement = this.ionRefresher?.nativeElement;
+    const options = { attributes: true, childList: false };
+
+    if (refresherNativeElement && observe) {
+      this.refresherMutationObserverRef.observe(refresherNativeElement, options);
+    } else if (!observe) {
+      this.refresherMutationObserverRef.disconnect();
+    }
+  }
+
   private fixedTopContentIntersectionObserver() {
     const options = {
       rootMargin: '0px',
@@ -498,5 +539,28 @@ export class PageComponent
     };
 
     return new IntersectionObserver(callback, options);
+  }
+
+  private refresherMutationObserver(): MutationObserver {
+    let initialized = false;
+    const callback = (mutationList: MutationRecord[], _observer: MutationObserver) => {
+      if (initialized) {
+        mutationList.forEach((mutation) => {
+          if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+            const className: string[] = (mutation.target as any).className.split(' ');
+
+            if (className.includes('refresher-active')) {
+              this.refresherActive$.next(true);
+            } else {
+              this.refresherActive$.next(false);
+            }
+          }
+        });
+      } else {
+        initialized = true;
+      }
+    };
+
+    return new MutationObserver(callback);
   }
 }
