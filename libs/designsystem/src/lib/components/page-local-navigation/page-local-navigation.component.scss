@@ -1,0 +1,116 @@
+@use '~@kirbydesign/core/src/scss/utils';
+
+$tab-item-extended-min-width: 102px;
+$tab-item-min-width: 86px;
+$tab-item-text-max-width: 82px;
+$bottom-border-height: 2px;
+$border-color-standard: utils.get-color('semi-light');
+$border-color-selected: utils.get-color('dark');
+$bottom-border-standard: $bottom-border-height solid $border-color-standard;
+$bottom-border-selected: $bottom-border-height solid $border-color-selected;
+
+.tab-bar {
+  position: relative;
+  max-width: var(--page-content-max-width, utils.$page-content-max-width);
+  background-color: utils.get-color('background-color');
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  flex-wrap: nowrap;
+  overflow-y: hidden;
+  overflow-x: scroll;
+
+  /* Important - selected:before will not show otherwise on iOS */
+  -webkit-overflow-scrolling: auto !important;
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.container {
+  position: relative;
+  background-color: utils.get-color('background-color');
+
+  /* Divider */
+  &::before {
+    content: '';
+    background-color: $border-color-standard;
+    position: absolute;
+    height: $bottom-border-height;
+    bottom: 0;
+    z-index: 1;
+
+    /* HAX */
+    width: 200vw;
+    left: -100vw;
+  }
+}
+
+.placeholder {
+  padding-top: 2px;
+  position: relative;
+}
+
+.tab-item {
+  position: relative;
+  cursor: pointer;
+  box-sizing: border-box;
+  outline: none;
+  padding-bottom: $bottom-border-height;
+
+  &::before {
+    content: '';
+    background-color: $border-color-standard;
+    position: absolute;
+    height: $bottom-border-height;
+    width: 100%;
+    bottom: 0;
+    z-index: 2;
+  }
+
+  &.selected::before,
+  &:focus::before {
+    background-color: $border-color-selected;
+  }
+
+  &.selected,
+  &:focus {
+    font-weight: utils.font-weight('bold');
+  }
+}
+
+.tab-item-inner {
+  min-width: $tab-item-min-width;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  white-space: nowrap;
+  margin: utils.size('xs') utils.size('s');
+
+  /* Disable text selection on tab items */
+  -webkit-touch-callout: none; /* iOS Safari */
+  user-select: none; /* Safari */
+  user-select: none;
+
+  kirby-badge {
+    margin-left: utils.size('xxxs');
+  }
+
+  & > span {
+    max-width: $tab-item-text-max-width;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: utils.size('m');
+  }
+
+  &.extended {
+    min-width: $tab-item-extended-min-width;
+  }
+}

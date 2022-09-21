@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="tab-bar" #tabBar>
+    <div
+      class="tab-item"
+      *ngFor="let item of items; let i = index"
+      (click)="onTabChange(i, item)"
+      [ngClass]="i === (selectedIndex$ | async) ? 'selected' : ''"
+      [tabIndex]="i + 1"
+      (keydown.enter)="onTabChange(i, item)"
+      (keydown.arrowLeft)="focusNext(i - 1)"
+      (keydown.arrowRight)="focusNext(i + 1)"
+    >
+      <div class="tab-item-inner" [class.extended]="!!item.badge">
+        <span>{{ item.text }}</span>
+        <ng-container *ngIf="item.badge">
+          <kirby-badge
+            role="text"
+            [attr.aria-label]="item.badge.description"
+            [themeColor]="item.badge.themeColor"
+          >
+            <ng-container *ngIf="item.badge.icon; else badgeContent">
+              <kirby-icon
+                *ngIf="item.badge.isCustomIcon; else defaultIconName"
+                [customName]="item.badge.icon"
+              ></kirby-icon>
+              <ng-template #defaultIconName>
+                <kirby-icon [name]="item.badge.icon"></kirby-icon>
+              </ng-template>
+            </ng-container>
+            <ng-template #badgeContent>
+              {{ item.badge.content }}
+            </ng-template>
+          </kirby-badge>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

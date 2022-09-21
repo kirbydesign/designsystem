@@ -46,6 +46,7 @@ import { ActionSheetHelper } from './components/modal/services/action-sheet.help
 import { AlertHelper } from './components/modal/services/alert.helper';
 import { ModalController } from './components/modal/services/modal.controller';
 import { ModalHelper } from './components/modal/services/modal.helper';
+import { PageLocalNavigationComponent } from './components/page-local-navigation';
 import { PageModule } from './components/page/page.module';
 import { PopoverComponent } from './components/popover/popover.component';
 import { ProgressCircleRingComponent } from './components/progress-circle/progress-circle-ring.component';
@@ -120,6 +121,7 @@ const exportedDeclarations = [
   ElementAsButtonDirective,
   ItemGroupComponent,
   SectionHeaderComponent,
+  PageLocalNavigationComponent,
 ];
 
 const declarations = [
