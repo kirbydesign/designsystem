@@ -97,7 +97,6 @@ $bottom-border-selected: $bottom-border-height solid $border-color-selected;
   /* Disable text selection on tab items */
   -webkit-touch-callout: none; /* iOS Safari */
   user-select: none; /* Safari */
-  user-select: none;
 
   kirby-badge {
     margin-left: utils.size('xxxs');
