@@ -165,7 +165,7 @@
             "tsConfig": "apps/flows/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "apps/flows/src/favicon.ico",
+              "apps/flows/src/favicon.svg",
               "apps/flows/src/assets",
               {
                 "glob": "**/*.svg",
