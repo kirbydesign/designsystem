@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Params, Route, Router, Routes } from '@angular/router';
-import { EMPTY, Observable } from 'rxjs';
-import { filter, first, map, pairwise, startWith } from 'rxjs/operators';
+import { EMPTY, firstValueFrom, Observable } from 'rxjs';
+import { filter, map, pairwise, startWith } from 'rxjs/operators';
 
 import { ModalRouteActivation } from './modal.interfaces';
 
@@ -60,7 +60,7 @@ export class ModalNavigationService {
 
     if (currentNavigation) {
       // Wait for current navigation to finish:
-      await this.navigationEndListener$.pipe(first()).toPromise();
+      await firstValueFrom(this.navigationEndListener$);
     }
 
     let childRoute = this.route.snapshot.root;
@@ -199,7 +199,7 @@ export class ModalNavigationService {
 
   private async waitForCurrentThenGetNavigationEndStream(): Promise<Observable<NavigationEnd>> {
     if (this.router.getCurrentNavigation()) {
-      const currentNavigationEnd = await this.navigationEndListener$.pipe(first()).toPromise();
+      const currentNavigationEnd = await firstValueFrom(this.navigationEndListener$);
       return this.navigationEndListener$.pipe(startWith(currentNavigationEnd));
     }
     return this.navigationEndListener$;
