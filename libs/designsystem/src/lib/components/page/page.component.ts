@@ -292,7 +292,6 @@ export class PageComponent
         distinctUntilChanged()
       )
       .subscribe((active) => {
-        console.log('refresher active: ', active);
         this.toggleFixedTopContentIntersectionObserver(!active);
       });
   }

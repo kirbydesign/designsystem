@@ -53,11 +53,6 @@ $bottom-border-selected: $bottom-border-height solid $border-color-selected;
   }
 }
 
-.placeholder {
-  padding-top: 2px;
-  position: relative;
-}
-
 .tab-item {
   position: relative;
   cursor: pointer;
@@ -81,7 +76,8 @@ $bottom-border-selected: $bottom-border-height solid $border-color-selected;
   }
 
   &.selected,
-  &:focus {
+  &:focus,
+  &:hover {
     font-weight: utils.font-weight('bold');
   }
 }
