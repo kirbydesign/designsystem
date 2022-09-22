@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-namespace */
 import { DesignTokenHelper } from '@kirbydesign/core';
 
 export namespace KirbyAnimation {

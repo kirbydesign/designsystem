@@ -1,4 +1,4 @@
-import { ChartDataset as ChartJSDataset, ChartOptions, ChartType as ChartJSType } from 'chart.js';
+import { ChartDataset as ChartJSDataset, ChartType as ChartJSType, ChartOptions } from 'chart.js';
 
 export type ChartHighlightedElements = number[][];
 
