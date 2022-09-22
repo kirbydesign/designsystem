@@ -68,7 +68,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     if (this._selectedIndex != value) {
       this._selectedIndex = value;
       this._value = this.items[this.selectedIndex] || null;
-      this.focusItem(this._selectedIndex);
+      this.scrollItemIntoView(this._selectedIndex);
     }
   }
 
@@ -82,6 +82,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   @Input() set focusedIndex(value: number) {
     if (this._focusedIndex !== value) {
       this._focusedIndex = value;
+      this.scrollItemIntoView(this._focusedIndex);
     }
   }
 
@@ -345,8 +346,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
         DropdownComponent.OPEN_DELAY_IN_MS
       );
 
-      // Move focus to selected item (if any)
-      this.focusItem(this.selectedIndex);
+      this.scrollItemIntoView(this.selectedIndex);
     }
   }
 
@@ -423,11 +423,10 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
 
   private selectItem(index: number) {
     if (index != this.selectedIndex) {
-      this.focusItem(index);
       this.selectedIndex = index;
+      this.focusedIndex = index;
       this.change.emit(this.value);
       this._onChange(this.value);
-      this.scrollItemIntoView(index);
     }
   }
 
@@ -462,26 +461,6 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
           scrollContainer.scrollTop = itemBottom - scrollContainer.clientHeight;
         }
       }
-    }
-  }
-
-  // TODO: We probably do not need this
-  onItemFocus(index: number) {
-    this.focusItem(index);
-    // this.close();
-  }
-
-  /**
-   * Give an Item focus by adding a "focused" CSS class
-   * @param index The Item that should get focus
-   */
-  private focusItem(index: number) {
-    if (index !== this.focusedIndex) {
-      this.focusedIndex = index;
-      // this.change.emit(this.value);
-      // this._onChange(this.value);
-      console.log(`this.scrollItemIntoView(${index})`);
-      this.scrollItemIntoView(index);
     }
   }
 
@@ -590,10 +569,6 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
       return;
     }
 
-    // TODO: Use this if we want to mimic Material Dropdown Menu behavior
-    // if (!this.isOpen) return;
-
-    // TODO: Use this if we want to mimic Carbon Dropdown behavior
     if (!this.isOpen) {
       // Avoid page scroll
       event.preventDefault();
@@ -603,10 +578,10 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
       if (this.selectedIndex < 0) {
         switch (event.key) {
           case 'ArrowUp':
-            this.focusItem(this.items.length - 1);
+            this.focusedIndex = this.items.length - 1;
             break;
           case 'ArrowDown':
-            this.focusItem(0);
+            this.focusedIndex = 0;
             break;
           default:
             break;
@@ -624,7 +599,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     );
 
     if (newFocusedIndex > -1) {
-      this.focusItem(newFocusedIndex);
+      this.focusedIndex = newFocusedIndex;
     }
 
     // // TODO: Move this to event listener for Enter and Space keypress
@@ -665,7 +640,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
       this.focusedIndex
     );
     if (newFocusedIndex > -1) {
-      this.focusItem(newFocusedIndex);
+      this.focusedIndex = newFocusedIndex;
     }
     return false;
   }
