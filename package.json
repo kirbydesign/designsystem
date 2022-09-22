@@ -107,7 +107,7 @@
     "inputmask": "^5.0.5",
     "prismjs": "1.27.0",
     "reflect-metadata": "0.1.8",
-    "rxjs": "6.6.7",
+    "rxjs": "7.5.6",
     "tslib": "^2.0.3",
     "zone.js": "0.11.5"
   },
