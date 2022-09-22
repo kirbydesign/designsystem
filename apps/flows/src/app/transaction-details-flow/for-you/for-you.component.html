@@ -1,5 +1,5 @@
 <!-- This container is only needed due to layout of larger screen sizes -->
-<kirby-page title="Til dig" defaultBackHref="/">
+<kirby-page title="For you" defaultBackHref="/">
   <kirby-page-content>
     <div class="container">
       <div class="app-header">
@@ -7,19 +7,19 @@
       </div>
 
       <kirby-card [hasPadding]="true"
-        ><h2>Totalkonto u.</h2>
+        ><h2>Credits in account</h2>
         <h1>2.000.000 DKK</h1></kirby-card
       >
       <br />
       <kirby-card [hasPadding]="true"
-        ><H2>Investeringer - Samlet</H2> <H1>400.000 DKK</H1> Kursudvikling siden køb
+        ><H2>Investments - In Total</H2> <H1>400.000 DKK</H1> Price movement since bought
         <kirby-flag class="right" themeColor="danger">-500 DKK</kirby-flag><br />
         <br />
-        Afkast i år <kirby-flag class="right" themeColor="success">2000 DKK</kirby-flag><br />
+        Return this year<kirby-flag class="right" themeColor="success">2000 DKK</kirby-flag><br />
       </kirby-card>
       <br />
       <kirby-card [hasPadding]="true"
-        ><h2>Oversigt over forbrug</h2>
+        ><h2>Overview of spending</h2>
 
         <kirby-chart type="column" [data]="data" [labels]="labels"></kirby-chart>
       </kirby-card>
@@ -29,7 +29,7 @@
           <div class="grid-item half-at-tablet-up third-at-desktop-up">
             <article>
               <kirby-card class="align-center" [hasPadding]="true" (click)="onCardSelect()">
-                <kirby-icon name="recurring"></kirby-icon><br />Faste betalinger</kirby-card
+                <kirby-icon name="recurring"></kirby-icon><br />Fixed payments</kirby-card
               >
             </article>
           </div>
@@ -40,14 +40,14 @@
                 [hasPadding]="true"
                 themeColor="secondary"
                 (click)="onCardSelect()"
-                ><kirby-icon name="swap"></kirby-icon><br />Betal og overfør</kirby-card
+                ><kirby-icon name="swap"></kirby-icon><br />Pay and transfer</kirby-card
               >
             </article>
           </div>
           <div class="grid-item half-at-tablet-up third-at-desktop-up">
             <article>
               <kirby-card class="align-center" [hasPadding]="true" (click)="onCardSelect()"
-                ><kirby-icon name="payment-card"></kirby-icon><br />Kort</kirby-card
+                ><kirby-icon name="payment-card"></kirby-icon><br />Card</kirby-card
               >
             </article>
           </div>
