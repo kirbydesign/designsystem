@@ -476,27 +476,6 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
    * @param index The Item that should get focus
    */
   private focusItem(index: number) {
-    const kirbyItems =
-      this.kirbyItemsSlotted && this.kirbyItemsSlotted.length
-        ? this.kirbyItemsSlotted
-        : this.kirbyItemsDefault;
-
-    if (kirbyItems && kirbyItems.length) {
-      // "Un-focus" all Items
-      // TODO: Consider putting "Unfocusing" in its' own separate method
-      kirbyItems.toArray().forEach((kirbyItem) => {
-        kirbyItem.nativeElement.classList.remove('focused');
-      });
-
-      const focusedKirbyItem = kirbyItems.toArray()[index];
-
-      if (focusedKirbyItem && focusedKirbyItem.nativeElement) {
-        focusedKirbyItem.nativeElement.classList.add('focused');
-      }
-    }
-
-    console.log(`index = ${index}, this.focusedIndex = ${this.focusedIndex}`);
-
     if (index !== this.focusedIndex) {
       this.focusedIndex = index;
       // this.change.emit(this.value);
