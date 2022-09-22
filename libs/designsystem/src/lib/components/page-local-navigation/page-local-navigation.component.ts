@@ -54,7 +54,11 @@ export class PageLocalNavigationComponent implements AfterViewInit {
     return this.tabBarElementRef?.nativeElement;
   }
 
-  constructor(private window: WindowRef) {}
+  constructor(private window: WindowRef) {
+    console.warn(
+      'kirby-local-navigation component is an experimental feature and should not be used in a production environment.'
+    );
+  }
 
   ngAfterViewInit(): void {
     setTimeout(() => {
