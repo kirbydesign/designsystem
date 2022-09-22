@@ -1,5 +1,5 @@
 import { Component, ElementRef, HostListener, Injector, Input, OnInit } from '@angular/core';
-import { firstValueFrom, lastValueFrom, Subject } from 'rxjs';
+import { firstValueFrom, Subject } from 'rxjs';
 
 import { WindowRef } from '../../../../types/window-ref';
 import { Modal } from '../../services/modal.interfaces';
