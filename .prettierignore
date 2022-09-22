@@ -1,7 +1,6 @@
 /.github/
 /libs/designsystem/src/lib/components/web-component-proxies.component.ts
 /libs/designsystem/src/lib/components/angular-component-lib/**
-/libs/core/scss/**
 /libs/core/dist/**
 /libs/core/loader/**
 /libs/core/component-docs.d.ts
