@@ -67,8 +67,8 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   @Input() set selectedIndex(value: number) {
     if (this._selectedIndex != value) {
       this._selectedIndex = value;
+      this.focusedIndex = this._selectedIndex;
       this._value = this.items[this.selectedIndex] || null;
-      this.scrollItemIntoView(this._selectedIndex);
     }
   }
 
@@ -346,7 +346,8 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
         DropdownComponent.OPEN_DELAY_IN_MS
       );
 
-      this.scrollItemIntoView(this.selectedIndex);
+      // Move focus to selected item (if any)
+      this.focusedIndex = this.selectedIndex;
     }
   }
 
@@ -549,14 +550,6 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     // }
   }
 
-  // @HostListener('keydown.enter', ['$event'])
-  // _onEnter(event: KeyboardEvent) {
-  //   event.preventDefault();
-  //   event.stopPropagation();
-  //   this.toggle();
-  // }
-
-  // TODO: Refactor/clean up _onArrowKeys()
   @HostListener('keydown.arrowup', ['$event'])
   @HostListener('keydown.arrowdown', ['$event'])
   @HostListener('keydown.arrowleft', ['$event'])
@@ -591,7 +584,6 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
       return;
     }
 
-    // TODO: Fork setting new index into separate indices for selected and focused
     const newFocusedIndex = this.keyboardHandlerService.handle(
       event,
       this.items,
