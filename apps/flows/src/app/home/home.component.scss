@@ -1,0 +1,62 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-gap: 24px;
+  gap: 24px;
+}
+
+/* Let grid items span all columns by default */
+.grid-item {
+  grid-column: span 12;
+}
+
+kirby-card {
+  min-height: 15em;
+}
+
+/* Tablet size and above */
+@media (min-width: 721px) {
+  .half-at-tablet-up {
+    grid-column: span 6;
+  }
+}
+
+/* Desktop size and above */
+@media (min-width: 1025px) {
+  .half-at-desktop-up {
+    grid-column: span 6;
+  }
+
+  .third-at-desktop-up {
+    grid-column: span 4;
+  }
+}
+
+.max-width-container {
+  max-width: 1196px;
+  margin-inline: auto;
+}
+
+.gutter {
+  padding-inline: 16px;
+}
+
+.safe-area-inline {
+  padding-inline: 16px;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+
+.align-center {
+  text-align: center;
+}
+
+.card-title {
+  margin-top: 0.5em;
+}
