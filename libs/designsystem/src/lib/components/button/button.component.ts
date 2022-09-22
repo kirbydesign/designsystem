@@ -22,7 +22,7 @@ const ATTENTION_LEVEL_4_DEPRECATION_WARNING =
   'Deprecation warning: The "kirby-button" support for using input property "attentionLevel" with the value "4" will be removed in a future release of Kirby designsystem. While deprecated, all attention-level 4 buttons will be rendered as attention-level 3.';
 
 @Component({
-  // tslint:disable-next-line:component-selector
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'button[kirby-button],Button[kirby-button]',
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.scss'],

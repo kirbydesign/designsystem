@@ -1,14 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
-
+import { Component } from '@angular/core';
 import { AvatarSize } from '@kirbydesign/designsystem';
+import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
   selector: 'cookbook-avatar-showcase',
   templateUrl: './avatar-showcase.component.html',
   styleUrls: ['./avatar-showcase.component.scss'],
 })
-export class AvatarShowcaseComponent implements OnInit {
+export class AvatarShowcaseComponent {
   properties: ApiDescriptionProperty[] = [
     {
       name: 'imageSrc',
@@ -43,7 +42,4 @@ export class AvatarShowcaseComponent implements OnInit {
       type: ['true', 'false'],
     },
   ];
-  constructor() {}
-
-  ngOnInit() {}
 }

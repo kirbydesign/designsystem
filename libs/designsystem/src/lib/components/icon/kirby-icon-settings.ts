@@ -1,6 +1,6 @@
 import { IconSettings } from './icon-settings';
 
-// tslint:disable:prettier
+/* eslint-disable */
 export const kirbyIconSettings: IconSettings = {
   icons: [
     { name: 'accounts-outline', svg: 'assets/kirby/icons/svg/accounts-outline.svg' },
