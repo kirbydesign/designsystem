@@ -23,14 +23,7 @@ import {
   ],
 })
 export class MockChartComponent {
-  @Input() type: ChartType;
-  @Input() data: ChartDataset[] | number[];
-  @Input() labels: ChartLabel[];
-  @Input() customOptions: ChartOptions;
-  @Input() dataLabelOptions: ChartDataLabelOptions;
-  @Input() annotations: AnnotationOptions[];
-  @Input() highlightedElements: ChartHighlightedElements;
-  @Input() height: string | number;
+  @Input() type: Exclude<ChartType, 'stock'>;
 }
 
 // #endregion

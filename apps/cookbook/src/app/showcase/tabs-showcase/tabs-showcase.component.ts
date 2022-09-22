@@ -1,14 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
-
+import { Component } from '@angular/core';
 import exampleHtml from '../../examples/tabs-example/tabs-example.component.html?raw';
+import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
   selector: 'cookbook-tabs-showcase',
   templateUrl: './tabs-showcase.component.html',
   styleUrls: ['./tabs-showcase.component.scss'],
 })
-export class TabsShowcaseComponent implements OnInit {
+export class TabsShowcaseComponent {
   exampleHtml = exampleHtml;
 
   exampleRouterHtml = `<kirby-tab-bar>
@@ -65,8 +64,4 @@ const routes: Routes = [
       type: ['string'],
     },
   ];
-
-  constructor() {}
-
-  ngOnInit() {}
 }

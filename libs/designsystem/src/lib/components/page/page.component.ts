@@ -374,7 +374,7 @@ export class PageComponent
     }
 
     const defaultTitleTemplate = this.customTitleTemplate || this.simpleTitleTemplate;
-    // tslint:disable:prettier
+    /* eslint-disable */
     // prettier-ignore
     this.toolbarTitleTemplate = this.customToolbarTitleTemplate
       ? this.customToolbarTitleTemplate

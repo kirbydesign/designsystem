@@ -1,6 +1,4 @@
 import { Routes } from '@angular/router';
-import { DropdownExampleComponent } from '~/app/examples/dropdown-example/dropdown-example.component';
-import { PagePullToRefreshExampleComponent } from '~/app/examples/page-example/pull-to-refresh/page-pull-to-refresh-example.component';
 
 import { AccordionExampleComponent } from './accordion-example/accordion-example.component';
 import { ActionSheetExampleComponent } from './action-sheet-example/action-sheet-example.component';
@@ -70,6 +68,8 @@ import { ToastExampleComponent } from './toast-example/toast-example.component';
 import { ToggleButtonExampleComponent } from './toggle-button-example/toggle-button-example.component';
 import { ToggleExampleComponent } from './toggle-example/toggle-example.component';
 import { VirtualScrollListExampleComponent } from './virtual-scroll-example/virtual-scroll-list-example/virtual-scroll-list-example.component';
+import { PagePullToRefreshExampleComponent } from './page-example/pull-to-refresh/page-pull-to-refresh-example.component';
+import { DropdownExampleComponent } from './dropdown-example/dropdown-example.component';
 
 VirtualScrollListExampleComponent;
 export const routes: Routes = [
