@@ -4,14 +4,14 @@
     <p>{{ transactions.date.utc }}</p>
 
     <div>
-      <button kirby-button [size]="'sm'" [attentionLevel]="'3'">Afstem</button>
-      <button kirby-button [size]="'sm'" [attentionLevel]="'3'">Opdel Beløb</button>
+      <button kirby-button [size]="'sm'" [attentionLevel]="'3'">Reconcile amount</button>
+      <button kirby-button [size]="'sm'" [attentionLevel]="'3'">Divide amount</button>
     </div>
 
-    <H2>Kategori</H2>
+    <H2>Category</H2>
     <kirby-card [hasPadding]="true"> {{ transactions.category.id }}</kirby-card>
     <br />
-    <H2>Detajler</H2>
+    <H2>Details</H2>
     <div>
       <p>{{ transactions.balance.amount }} {{ transactions.amount.currencyCode }}</p>
     </div>
