@@ -64,20 +64,9 @@ ion-toolbar {
   }
 
   box-sizing: border-box;
-
-  $button-padding: utils.size('xs');
-
-  padding-left: $button-padding;
-  padding-right: $button-padding;
-  transition-property: padding-left, padding-right;
-  transition-duration: utils.get-transition-duration('short');
-  transition-timing-function: utils.get-transition-easing('enter-exit');
+  padding-inline: utils.size('xxxs');
 
   &.content-scrolled {
-    $button-padding: utils.size('xxxs');
-
-    padding-left: $button-padding;
-    padding-right: $button-padding;
     border-bottom: 1px solid #{utils.get-color('semi-light')};
   }
 
@@ -140,7 +129,7 @@ ion-back-button {
   @include interaction-state.apply-hover-ionic;
   @include interaction-state.apply-active-ionic('s');
 
-  --color: #{utils.get-color('white-contrast')};
+  --color: #{utils.get-color('black')};
   --icon-font-size: 24px;
 
   $button-size: utils.size('xl');
@@ -150,8 +139,7 @@ ion-back-button {
 
   // Properly center back-icon
   &::part(icon) {
-    margin-left: 0;
-    margin-right: 0;
+    margin-inline: 0;
   }
 
   // NOTE: This is a custom implementation of the hover interaction state;
@@ -163,25 +151,13 @@ ion-back-button {
     opacity: 1; // required for interaction states to work
     border-radius: utils.$border-radius-round;
     overflow: hidden; // required for border radius to work
-    margin: 0 utils.size('xxxs') 0 0;
-    border: 1px solid transparent;
-    transition-property: color, background-color;
-    transition-duration: utils.get-transition-duration('short');
-    transition-timing-function: utils.get-transition-easing('enter-exit');
-  }
-}
-
-ion-toolbar.content-scrolled ion-back-button {
-  --color: #{utils.get-color('black')};
-  --background: transparent;
-
-  &::part(native) {
-    margin: 0;
   }
 
   &::part(native)::after {
     transition: interaction-state.transition();
   }
+
+  // end NOTE
 }
 
 /*

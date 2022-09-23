@@ -125,7 +125,6 @@ $button-width: (
   color: var(--kirby-button-color, inherit);
   border-radius: utils.$border-radius-round;
   box-sizing: border-box; // Ensure border is not added to button height
-  cursor: pointer;
   display: inline-flex;
   flex-direction: row;
   align-items: center;
@@ -154,17 +153,19 @@ $button-width: (
   }
 
   &.icon-left {
-    padding-left: utils.size('xs');
-    padding-right: utils.size('s');
-
     --kirby-icon-margin-right: #{utils.size('xxs')};
+    --kirby-button-padding-left: #{utils.size('xs')};
+    --kirby-button-padding-right: #{utils.size('s')};
+
+    padding: 0;
   }
 
   &.icon-right {
-    padding-left: utils.size('s');
-    padding-right: utils.size('xs');
-
     --kirby-icon-margin-left: #{utils.size('xxs')};
+    --kirby-button-padding-left: #{utils.size('s')};
+    --kirby-button-padding-right: #{utils.size('xs')};
+
+    padding: 0;
   }
 
   &.icon-only {
@@ -281,33 +282,12 @@ $button-width: (
 /* clean-css ignore:start */
 :host-context(kirby-page ion-toolbar ion-buttons) {
   font-size: utils.font-size('s');
-  margin: 0 utils.size('xxxs');
+  margin: 0;
   height: utils.size('xl');
 
   &.icon-only {
     width: utils.size('xl');
 
-    &.no-decoration,
-    &.attention-level1,
-    &.attention-level2,
-    &.attention-level3 {
-      @include button-no-decoration;
-    }
-  }
-
-  transition-property: color, background-color, margin;
-  transition-duration: utils.get-transition-duration('short');
-  transition-timing-function: utils.get-transition-easing('enter-exit');
-}
-
-:host-context(kirby-page ion-toolbar ion-buttons:last-child) {
-  margin-right: 0;
-}
-
-:host-context(kirby-page ion-toolbar.content-scrolled ion-buttons) {
-  margin: 0;
-
-  &.icon-only {
     &.no-decoration,
     &.attention-level1,
     &.attention-level2,

@@ -27,7 +27,6 @@ import { ButtonComponent } from './button.component';
 const getColor = DesignTokenHelper.getColor;
 const size = DesignTokenHelper.size;
 const fontSize = DesignTokenHelper.fontSize;
-const fatFingerSize = DesignTokenHelper.fatFingerSize();
 
 describe('ButtonComponent in Kirby Page', () => {
   let spectator: SpectatorHost<PageComponent>;
@@ -102,7 +101,7 @@ describe('ButtonComponent in Kirby Page', () => {
       await TestHelper.whenReady(ionToolbar);
       expect(actionButtonInHeader).toHaveComputedStyle({ 'background-color': getColor('primary') });
       expect(actionButtonInHeaderIconOnly).toHaveComputedStyle({
-        'background-color': getColor('white'),
+        'background-color': 'transparent',
       });
     });
 
