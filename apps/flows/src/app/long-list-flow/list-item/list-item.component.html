@@ -1,0 +1,22 @@
+<kirby-item>
+  <kirby-badge
+    *ngIf="transaction.balanced"
+    slot="outside"
+    [size]="'sm'"
+    [themeColor]="'warning'"
+  ></kirby-badge>
+  <kirby-avatar slot="start">
+    <kirby-badge [themeColor]="'danger'" *ngIf="transaction.amount.amount < -11000">!</kirby-badge>
+    <kirby-icon name="kirby"></kirby-icon>
+  </kirby-avatar>
+  <kirby-label>
+    <h3>{{ transaction.text }}</h3>
+    <p detail>Category: {{ transaction.category.id }}</p>
+  </kirby-label>
+  <kirby-label slot="end">
+    <kirby-flag themeColor="success">
+      <data>{{ transaction.amount.amount }}</data>
+    </kirby-flag>
+    <p detail>{{ transaction.balance.amount }}</p>
+  </kirby-label>
+</kirby-item>
