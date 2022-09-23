@@ -451,16 +451,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
       const selectedKirbyItem = kirbyItems.toArray()[index];
       if (selectedKirbyItem && selectedKirbyItem.nativeElement) {
         const itemElement = selectedKirbyItem.nativeElement;
-        const scrollContainer = this.cardElement.nativeElement;
-        const itemTop = itemElement.offsetTop;
-        const itemBottom = itemElement.offsetTop + itemElement.offsetHeight;
-        const containerVisibleTop = scrollContainer.scrollTop;
-        const containerVisibleBottom = scrollContainer.clientHeight + scrollContainer.scrollTop;
-        if (itemTop < containerVisibleTop) {
-          scrollContainer.scrollTop = itemTop;
-        } else if (itemBottom > containerVisibleBottom) {
-          scrollContainer.scrollTop = itemBottom - scrollContainer.clientHeight;
-        }
+        itemElement.scrollIntoView({ block: 'nearest' });
       }
     }
   }
