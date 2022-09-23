@@ -513,41 +513,22 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
 
   @HostListener('blur', ['$event'])
   _onBlur(event?: FocusEvent) {
-    // TODO: Disable this for easier inspection in browser
     if (this.usePopover) return;
     this.close();
     this._onTouched();
   }
 
-  // TODO: Clean up - also rename private method + _onEnter() has been removed: is that a problem?
   @HostListener('keydown.enter', ['$event'])
   @HostListener('keydown.space', ['$event'])
-  _onSpace(event: KeyboardEvent) {
+  _onEnterOrSpace(event: KeyboardEvent) {
     event.preventDefault();
     event.stopPropagation();
 
-    // TODO: Move this block to a separate method
-    // TODO: keyboardHandlerService.handle() does not work for Enter/Space
-    // const newSelectedIndex = this.keyboardHandlerService.handle(
-    //   event,
-    //   this.items,
-    //   this.selectedIndex
-    // );
-    // console.log(`newSelectedIndex = ${newSelectedIndex}`);
-    // if (newSelectedIndex > -1) {
-    //   // TODO: Do not select item on arrow up/down - wait for ENTER/Space press
-    //   this.selectItem(newSelectedIndex);
-    // }
-
-    // TODO: Idea: Could we just pass focusedIndex to selectItem()?
     if (this.isOpen) {
       this.selectItem(this.focusedIndex);
     }
 
     this.toggle();
-    // if (!this.isOpen) {
-    //   this.open();
-    // }
   }
 
   @HostListener('keydown.arrowup', ['$event'])
@@ -555,11 +536,11 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   @HostListener('keydown.arrowleft', ['$event'])
   @HostListener('keydown.arrowright', ['$event'])
   _onArrowKeys(event: KeyboardEvent) {
-    if (this.disabled) return;
+    if (this.disabled) return false;
 
     // Mirror default HTML5 select behaviour - prevent left/right arrows when open:
     if (this.isOpen && (event.key === 'ArrowLeft' || event.key === 'ArrowRight')) {
-      return;
+      return false;
     }
 
     if (!this.isOpen) {
@@ -581,7 +562,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
         }
       }
 
-      return;
+      return false;
     }
 
     const newFocusedIndex = this.keyboardHandlerService.handle(
@@ -594,32 +575,9 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
       this.focusedIndex = newFocusedIndex;
     }
 
-    // // TODO: Move this to event listener for Enter and Space keypress
-    // const newSelectedIndex = this.keyboardHandlerService.handle(
-    //   event,
-    //   this.items,
-    //   this.selectedIndex
-    // );
-    // if (newSelectedIndex > -1) {
-    //   // TODO: Do not select item on arrow up/down - wait for ENTER/Space press
-    //   this.selectItem(newSelectedIndex);
-    // }
-
-    // // TODO: Make service work for focused Items too/instead?
-    // const newIndex = this.keyboardHandlerService.handle(event, this.items, this.selectedIndex);
-    // // const newIndex = this.keyboardHandlerService.handle(event, this.items, this.focusedIndex);
-    // if (newIndex > -1) {
-    //   // TODO: Do not select item on arrow up/down - wait for ENTER/Space press
-    //   this.selectItem(newIndex);
-    //   // TODO: Do apply focus and active styles
-    //   this.focusItem(newIndex);
-    // }
-
-    // TODO: Is this the best return value? Should other returns be changed to return booleans?
     return false;
   }
 
-  // TODO: Should HOME and END keys apply to focused? Both focused and selected?
   @HostListener('keydown.home', ['$event'])
   @HostListener('keydown.end', ['$event'])
   _onHomeEndKeys(event: KeyboardEvent) {
