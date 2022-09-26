@@ -47,6 +47,7 @@ import { ToastExampleComponent } from './toast-example/toast-example.component';
 import { ToggleExampleComponent } from './toggle-example/toggle-example.component';
 import { PagePullToRefreshExampleComponent } from './page-example/pull-to-refresh/page-pull-to-refresh-example.component';
 import { DropdownExampleComponent } from './dropdown-example/dropdown-example.component';
+import { DataTableExampleComponent } from './data-table-example/data-table-example.component';
 
 export const COMPONENT_DECLARATIONS: any[] = [
   ExamplesComponent,
@@ -99,4 +100,5 @@ export const COMPONENT_DECLARATIONS: any[] = [
   ItemGroupExampleComponent,
   SectionHeaderExampleComponent,
   ListExperimentalExampleComponent,
+  DataTableExampleComponent,
 ];
