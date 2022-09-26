@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 const config = {
   selector: 'cookbook-data-table-card-example',
   template: `<kirby-card [hasPadding]="true">
-      <table style="width: 100%;">
+      <table kirbyDataTable style="width: 100%;">
         <thead>
           <tr style="text-align: left;">
             <th>Hello there,</th>
