@@ -29,10 +29,14 @@
   "defaultProject": "designsystem",
   "generators": {
     "@nrwl/angular:application": {
+      "style": "scss",
       "unitTestRunner": "karma"
     },
     "@nrwl/angular:library": {
       "unitTestRunner": "karma"
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
     }
   }
 }
