@@ -5,6 +5,14 @@
 $divider-color: utils.get-color('background-color');
 $shadow: utils.get-elevation(2);
 $item-height: utils.size('xxxl');
+$spacing-xxs: utils.size('xxs');
+$spacing-xs: utils.size('xs');
+$spacing-sm: utils.size('s');
+$spacing-md: utils.size('m');
+$spacing-lg: utils.size('l');
+$spacing-xl: utils.size('xl');
+$spacing-xxl: utils.size('xxl');
+$spacing-xxxl: utils.size('xxxl');
 
 :host {
   display: block;
@@ -240,5 +248,61 @@ ion-item-options[side='end'] {
         margin-bottom: 0;
       }
     }
+  }
+}
+
+:host(.stand-alone-spacing-xxs) {
+  .item-group-stand-alone,
+  .list-items.stand-alone {
+    margin-bottom: $spacing-xxs;
+  }
+}
+
+:host(.stand-alone-spacing-xs) {
+  .item-group-stand-alone,
+  .list-items.stand-alone {
+    margin-bottom: $spacing-xs;
+  }
+}
+
+:host(.stand-alone-spacing-sm) {
+  .item-group-stand-alone,
+  .list-items.stand-alone {
+    margin-bottom: $spacing-sm;
+  }
+}
+
+:host(.stand-alone-spacing-md) {
+  .item-group-stand-alone,
+  .stand-alone {
+    margin-bottom: $spacing-md;
+  }
+}
+
+:host(.stand-alone-spacing-lg) {
+  .item-group-stand-alone,
+  .stand-alone {
+    margin-bottom: $spacing-lg;
+  }
+}
+
+:host(.stand-alone-spacing-xl) {
+  .item-group-stand-alone,
+  .stand-alone {
+    margin-bottom: $spacing-xl;
+  }
+}
+
+:host(.stand-alone-spacing-xxl) {
+  .item-group-stand-alone,
+  .stand-alone {
+    margin-bottom: $spacing-xxl;
+  }
+}
+
+:host(.stand-alone-spacing-xxxl) {
+  .item-group-stand-alone,
+  .stand-alone {
+    margin-bottom: $spacing-xxxl;
   }
 }

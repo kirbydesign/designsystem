@@ -33,6 +33,13 @@ import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
 
 export type ListShape = 'square' | 'rounded' | 'none';
 
+export enum StandAloneSpacing {
+  XXS = 'xxs',
+  XS = 'xs',
+  SM = 'sm',
+  MD = 'md',
+}
+
 @Component({
   selector: 'kirby-list',
   templateUrl: './list.component.html',
@@ -69,7 +76,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   /**
    * Bottom margin for stand alone items
    */
-  @Input() standAloneMargin: string = '8px';
+  @Input() standAloneSpacing: StandAloneSpacing = StandAloneSpacing.XXS;
 
   /**
    * Text to display when no more items can be loaded (used for "on demand"-loading).
@@ -108,6 +115,13 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   @HostBinding('class.item-spacing')
   @Input()
   hasItemSpacing: boolean;
+
+  @HostBinding('class')
+  get _cssClass() {
+    if (this._isStandAloneEnabled) {
+      return `stand-alone-spacing-${this.standAloneSpacing}`;
+    }
+  }
 
   /**
    * Determines if the loadOnDemand event should be emitted.
@@ -232,7 +246,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   _getBoundaryClass(index: number, section?: any[]): BoundaryClass {
-    let _items = section || this.items;
+    const _items = section || this.items;
 
     if (index === 0 || _items[index - 1]?.headingName) return this.headerTemplate ? null : 'first';
 
