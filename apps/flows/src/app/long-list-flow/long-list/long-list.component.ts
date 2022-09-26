@@ -6,7 +6,7 @@ import { Transaction } from '../transaction';
 import transactionsData from '../transactions-data.json';
 
 @Component({
-  selector: 'long-list',
+  selector: 'flows-long-list',
   templateUrl: './long-list.component.html',
   styleUrls: ['./long-list.component.scss'],
 })

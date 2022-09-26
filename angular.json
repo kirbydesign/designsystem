@@ -218,6 +218,13 @@
             }
           },
           "defaultConfiguration": "development"
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/flows/**/*.ts"],
+            "eslintConfig": "./apps/flows/.eslintrc.json"
+          }
         }
       }
     }

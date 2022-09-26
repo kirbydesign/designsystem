@@ -18,7 +18,10 @@
       <kirby-section-header *kirbyListSectionHeader="let section">
         <h2 heading>{{ section }}</h2>
       </kirby-section-header>
-      <list-item *kirbyListItemTemplate="let transaction" [transaction]="transaction"> </list-item>
+      <flows-list-item
+        *kirbyListItemTemplate="let transaction"
+        [transaction]="transaction"
+      ></flows-list-item>
     </kirby-list>
   </kirby-page-content>
 </kirby-page>
@@ -32,7 +35,7 @@
       *ngFor="let transaction of section.value.transactions"
       [swipeActions]="swipeActions"
     >
-      <list-item [transaction]="transaction"></list-item>
+      <flows-list-item [transaction]="transaction"></flows-list-item>
     </kirby-item-sliding>
   </kirby-list-experimental>
 </ng-template>
