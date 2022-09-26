@@ -8,6 +8,7 @@ export const ListWithSectionsAndStandAloneExampleTemplate = `<kirby-list
   [getStandAloneByProperty]="'isStandAlone'"
   [getSectionName]="getSectionName"
   [showDivider]="true"
+  standAloneSpacing="xxs"
 >
   <kirby-list-section-header
     *kirbyListSectionHeader="let section"
