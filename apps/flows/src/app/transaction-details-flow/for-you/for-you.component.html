@@ -3,17 +3,12 @@
     <div class="container">
       <div class="app-header"></div>
 
-      <kirby-card [hasPadding]="true"
+      <kirby-card class="spacing" [hasPadding]="true"
         >Card 1
-
         <kirby-chart type="column" [data]="ChartData" [labels]="ChartLabels"></kirby-chart>
       </kirby-card>
-      <br />
-      <kirby-card [hasPadding]="true">Card 2</kirby-card>
-      <br />
-      <kirby-card [hasPadding]="true">Card 3</kirby-card>
-      <br />
-
+      <kirby-card class="spacing" [hasPadding]="true">Card 2</kirby-card>
+      <kirby-card class="spacing" [hasPadding]="true">Card 3</kirby-card>
       <div>
         <kirby-card [hasPadding]="true" themeColor="secondary">(Nested)Betal og overfør</kirby-card>
         <kirby-card [hasPadding]="true">(Nested)4</kirby-card>

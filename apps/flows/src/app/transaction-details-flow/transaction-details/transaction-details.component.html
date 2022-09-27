@@ -3,14 +3,13 @@
     <h1>{{ transactions.amount.amount }}</h1>
     <p>{{ transactions.date.utc }}</p>
 
-    <div>
+    <div class="spacing">
       <button kirby-button [size]="'sm'" [attentionLevel]="'3'">Reconcile amount</button>
       <button kirby-button [size]="'sm'" [attentionLevel]="'3'">Divide amount</button>
     </div>
 
     <h2>Category</h2>
-    <kirby-card [hasPadding]="true"> {{ transactions.category.id }}</kirby-card>
-    <br />
+    <kirby-card class="spacing" [hasPadding]="true"> {{ transactions.category.id }}</kirby-card>
     <h2>Details</h2>
     <div>
       <p>{{ transactions.balance.amount }} {{ transactions.amount.currencyCode }}</p>
