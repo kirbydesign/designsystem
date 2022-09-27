@@ -244,8 +244,7 @@ ion-item-options[side='end'] {
 }
 
 @each $sizeName, $size in utils.$sizes {
-  .stand-alone-item-group.#{$sizeName},
-  .stand-alone-list.#{$sizeName} {
+  .#{$sizeName} {
     margin-bottom: $size;
   }
 }
