@@ -70,13 +70,13 @@ export const kirbyIconSettings: IconSettings = {
     { name: 'illness', svg: 'assets/kirby/icons/svg/illness.svg' },
     { name: 'incapacity', svg: 'assets/kirby/icons/svg/incapacity.svg' },
     { name: 'life', svg: 'assets/kirby/icons/svg/life.svg' },
-    { name: 'PlaceholderBell', svg: 'assets/kirby/icons/svg/PlaceholderBell.svg' },
-    { name: 'PlaceholderQuestionMark', svg: 'assets/kirby/icons/svg/PlaceholderQuestionMark.svg' },
+    { name: 'help-decoration', svg: 'assets/kirby/icons/svg/help-decoration.svg' },
     {
-      name: 'PlaceholderExclamationMark',
-      svg: 'assets/kirby/icons/svg/PlaceholderExclamationMark.svg',
+      name: 'information-decoration',
+      svg: 'assets/kirby/icons/svg/information-decoration.svg',
     },
-    { name: 'PlaceholderKey', svg: 'assets/kirby/icons/svg/PlaceholderKey.svg' },
+    { name: 'notification', svg: 'assets/kirby/icons/svg/notification.svg' },
+    { name: 'transfer-ownership', svg: 'assets/kirby/icons/svg/transfer-ownership.svg' },
   ],
 };
 
