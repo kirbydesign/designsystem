@@ -10,7 +10,9 @@ import { ListWithHeaderAndFooterExampleComponent } from './examples/header-and-f
 import { ListItemsExampleComponent } from './examples/items';
 import { ListWithSectionsExampleComponent } from './examples/sections';
 import { ListWithSectionsAndColoredItemsExampleComponent } from './examples/sections-and-colored-items';
+import { ListWithSectionsAndStandAloneExampleComponent } from './examples/sections-with-standalone';
 import { ListSelectableItemsExampleComponent } from './examples/selectable-items';
+import { ListWithStandAloneExampleComponent } from './examples/stand-alone';
 
 const listExamples = [
   ListWithDividersExampleComponent,
@@ -20,6 +22,8 @@ const listExamples = [
   ListWithHeaderAndFooterExampleComponent,
   ListWithSectionsExampleComponent,
   ListItemsExampleComponent,
+  ListWithStandAloneExampleComponent,
+  ListWithSectionsAndStandAloneExampleComponent,
 ];
 
 @NgModule({
