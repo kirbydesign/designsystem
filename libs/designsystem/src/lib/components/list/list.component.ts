@@ -34,10 +34,16 @@ import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
 export type ListShape = 'square' | 'rounded' | 'none';
 
 export enum StandAloneSpacing {
+  XXXXS = 'xxxxs',
+  XXXS = 'xxxs',
   XXS = 'xxs',
   XS = 'xs',
   SM = 'sm',
   MD = 'md',
+  LG = 'lg',
+  XL = 'xl',
+  XXL = 'xxl',
+  XXXL = 'xxxl',
 }
 
 @Component({
@@ -115,13 +121,6 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   @HostBinding('class.item-spacing')
   @Input()
   hasItemSpacing: boolean;
-
-  @HostBinding('class')
-  get _cssClass() {
-    if (this._isStandAloneEnabled) {
-      return `stand-alone-spacing-${this.standAloneSpacing}`;
-    }
-  }
 
   /**
    * Determines if the loadOnDemand event should be emitted.
