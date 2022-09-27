@@ -243,58 +243,9 @@ ion-item-options[side='end'] {
   }
 }
 
-:host(.stand-alone-spacing-xxs) {
-  .item-group-stand-alone,
-  .list-items.stand-alone {
-    margin-bottom: utils.size('xxs');
-  }
-}
-
-:host(.stand-alone-spacing-xs) {
-  .item-group-stand-alone,
-  .list-items.stand-alone {
-    margin-bottom: utils.size('xs');
-  }
-}
-
-:host(.stand-alone-spacing-sm) {
-  .item-group-stand-alone,
-  .list-items.stand-alone {
-    margin-bottom: utils.size('s');
-  }
-}
-
-:host(.stand-alone-spacing-md) {
-  .item-group-stand-alone,
-  .stand-alone {
-    margin-bottom: utils.size('m');
-  }
-}
-
-:host(.stand-alone-spacing-lg) {
-  .item-group-stand-alone,
-  .stand-alone {
-    margin-bottom: utils.size('l');
-  }
-}
-
-:host(.stand-alone-spacing-xl) {
-  .item-group-stand-alone,
-  .stand-alone {
-    margin-bottom: utils.size('xl');
-  }
-}
-
-:host(.stand-alone-spacing-xxl) {
-  .item-group-stand-alone,
-  .stand-alone {
-    margin-bottom: utils.size('xxl');
-  }
-}
-
-:host(.stand-alone-spacing-xxxl) {
-  .item-group-stand-alone,
-  .stand-alone {
-    margin-bottom: utils.size('xxxl');
+@each $sizeName, $size in utils.$sizes {
+  .stand-alone-item-group.#{$sizeName},
+  .stand-alone-list.#{$sizeName} {
+    margin-bottom: $size;
   }
 }
