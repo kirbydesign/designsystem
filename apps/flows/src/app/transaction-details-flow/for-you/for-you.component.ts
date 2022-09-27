@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./for-you.component.scss'],
 })
 export class ForYouComponent {
-  data = [7, 12, 5, 9, 3, 11, 6, 2, 1, 10, 4, 12];
+  ChartData = [7, 12, 5, 9, 3, 11, 6, 2, 1, 10, 4, 12];
 
-  labels = ['Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  ChartLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 }

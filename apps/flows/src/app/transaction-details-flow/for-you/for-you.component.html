@@ -1,15 +1,12 @@
-<!-- This container is only needed due to layout of larger screen sizes -->
 <kirby-page title="Til dig" defaultBackHref="/">
   <kirby-page-content>
     <div class="container">
-      <div class="app-header">
-        <!-- Hidden on small screen sizes-->
-      </div>
+      <div class="app-header"></div>
 
       <kirby-card [hasPadding]="true"
         >Card 1
 
-        <kirby-chart type="column" [data]="data" [labels]="labels"></kirby-chart>
+        <kirby-chart type="column" [data]="ChartData" [labels]="ChartLabels"></kirby-chart>
       </kirby-card>
       <br />
       <kirby-card [hasPadding]="true">Card 2</kirby-card>

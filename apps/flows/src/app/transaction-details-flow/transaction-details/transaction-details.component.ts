@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Transaction } from '../../transaction';
@@ -8,7 +8,7 @@ import transactionsData from '../../transactions-data.json';
   selector: 'kirbydesign-transaction-details',
   templateUrl: './transaction-details.component.html',
 })
-export class TransactionDetailsComponent implements OnInit {
+export class TransactionDetailsComponent implements OnInit, OnDestroy {
   transactions: Transaction;
 
   constructor(private route: ActivatedRoute) {}
@@ -22,5 +22,9 @@ export class TransactionDetailsComponent implements OnInit {
 
       this.transactions = transactionsData.transactions.find((x) => x.id === this.id.toString());
     });
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 }
