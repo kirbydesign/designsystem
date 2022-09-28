@@ -15,7 +15,7 @@ import { CardComponent } from './components/card/card.component';
 import { ChartsModule } from './components/charts';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { ChipComponent } from './components/chip/chip.component';
-import { DataTableDirective } from './components/data-table/data-table.directive';
+import { DataTableModule } from './components/data-table/data-table.module';
 import { DividerComponent } from './components/divider/divider.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { EmptyStateComponent } from './components/empty-state/empty-state.component';
@@ -121,7 +121,6 @@ const exportedDeclarations = [
   ElementAsButtonDirective,
   ItemGroupComponent,
   SectionHeaderComponent,
-  DataTableDirective,
 ];
 
 const declarations = [
@@ -146,6 +145,7 @@ const exportedModules = [
   ListModule,
   ChartsModule,
   SpinnerModule,
+  DataTableModule,
 ];
 
 const allExports = [...exportedModules, ...exportedDeclarations];
