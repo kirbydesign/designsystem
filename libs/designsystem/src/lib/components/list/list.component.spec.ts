@@ -13,7 +13,7 @@ import { ListItemComponent } from './list-item/list-item.component';
 import { ListComponent } from './list.component';
 import { LoadOnDemandEvent } from './list.event';
 
-type Item = {
+type Transaction = {
   id: number;
   title: string;
   subTitle: string;
@@ -22,7 +22,7 @@ type Item = {
   color: string;
 };
 
-const TEST_ITEMS: Item[] = [
+const transactions: Transaction[] = [
   {
     id: 0,
     title: 'Vestas Wind Systems has a very long name',
@@ -117,7 +117,7 @@ describe('ListComponent', () => {
 
     it('should be enabled if a section callback is defined', () => {
       spectator.setInput({
-        items: TEST_ITEMS,
+        items: transactions,
         getSectionName: () => 'this is a test',
       });
 
@@ -126,7 +126,7 @@ describe('ListComponent', () => {
 
     it('should have no groupedItems when last item in items input is removed', () => {
       spectator.setInput({
-        items: [TEST_ITEMS[0]],
+        items: [transactions[0]],
         getSectionName: () => 'this is a test',
       });
 
@@ -141,7 +141,7 @@ describe('ListComponent', () => {
   describe('divider', () => {
     it('should set class "has-divider" on list element when showDivider is true', () => {
       spectator.setInput({
-        items: TEST_ITEMS,
+        items: transactions,
         showDivider: true,
       });
 
@@ -151,7 +151,7 @@ describe('ListComponent', () => {
 
     it('should not set class "has-divider" on list element when showDivider is false', () => {
       spectator.setInput({
-        items: TEST_ITEMS,
+        items: transactions,
         showDivider: false,
       });
 
