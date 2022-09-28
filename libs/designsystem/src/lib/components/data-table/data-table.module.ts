@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DataTableDirective } from './data-table.directive';
+import { TableDirective } from './table.directive';
 
 @NgModule({
-  declarations: [DataTableDirective],
+  declarations: [TableDirective],
   imports: [CommonModule],
+  exports: [TableDirective],
 })
 export class DataTableModule {}
