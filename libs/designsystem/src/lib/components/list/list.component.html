@@ -34,7 +34,7 @@
 <ng-template #groupedListTemplate>
   <ion-item-group
     *ngFor="let section of _groupedItems; trackBy: sectionTrackBy"
-    [ngClass]="[_isStandAloneEnabled ? standAloneSpacing : null]"
+    [ngClass]="[_isStandAloneEnabled ? standAloneSpacing : '']"
   >
     <ion-item-divider *ngIf="_isSectionsEnabled">
       <ng-container
