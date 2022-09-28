@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ModalConfig, ModalController } from '@kirbydesign/designsystem';
+import { AlertConfig, ModalConfig, ModalController } from '@kirbydesign/designsystem';
 import { WindowRef } from '@kirbydesign/designsystem/types/window-ref';
 
 import { ModalCompactExampleComponent } from './compact-example/modal-compact-example.component';
@@ -17,6 +17,7 @@ const config = {
       [(showFooter)]="showFooter"
       [(displayFooterAsInline)]="displayFooterAsInline"
       [(collapseTitle)]="collapseTitle"
+      [(alertBeforeClose)]="alertBeforeClose"
       [(showDummyContent)]="showDummyContent"
       [(delayLoadDummyContent)]="delayLoadDummyContent"
       [(loadAdditionalContent)]="loadAdditionalContent"
@@ -115,6 +116,21 @@ export class EmbeddedComponent() {
   const returnData: CustomDataType = {...};
   this.modal?.close(returnData);
 }`,
+  alertBeforeCloseCodeSnippet: `// Inside the parent (caller) component:
+@Component()
+export class ParentComponent() {
+  const alertConfig: AlertConfig = {
+    title: 'Do you want to close the modal?',
+    okBtn: {
+      text: 'Yes',
+      isDestructive: true,
+    },
+    cancelBtn: 'No',
+  };
+
+  this.modalController.showModal(config, null, alertConfig)
+}
+`,
   scrollingCodeSnippet: `import { KirbyAnimation, Modal } from '@kirbydesign/designsystem';
 ...
 constructor(@Optional() @SkipSelf() private modal: Modal) {}
@@ -197,6 +213,7 @@ export class ModalExampleDefaultComponent {
   drawerCodeSnippet = config.drawerCodeSnippet;
   callbackCodeSnippet = config.callbackCodeSnippet;
   callbackWithDataCodeSnippet = config.callbackWithDataCodeSnippet;
+  alertBeforeCloseCodeSnippet = config.alertBeforeCloseCodeSnippet;
   didPresentCodeSnippet = config.didPresentCodeSnippet;
   willCloseCodeSnippet = config.willCloseCodeSnippet;
   scrollingCodeSnippet = config.scrollingCodeSnippet;
@@ -211,6 +228,7 @@ export class ModalExampleDefaultComponent {
   showFooter = false;
   displayFooterAsInline = false;
   collapseTitle = false;
+  alertBeforeClose = false;
   showDummyContent = true;
   delayLoadDummyContent = true;
   loadAdditionalContent = false;
@@ -256,7 +274,20 @@ export class ModalExampleDefaultComponent {
         openFullHeight: this.openFullHeight,
       },
     };
-    await this.modalController.showModal(config, this.onOverlayClose.bind(this));
+
+    let alertConfig: AlertConfig = null;
+    if (this.alertBeforeClose) {
+      alertConfig = {
+        title: 'Do you want to close the modal?',
+        okBtn: {
+          text: 'Yes',
+          isDestructive: true,
+        },
+        cancelBtn: 'No',
+      };
+    }
+
+    await this.modalController.showModal(config, this.onOverlayClose.bind(this), alertConfig);
   }
 
   async showModal() {
