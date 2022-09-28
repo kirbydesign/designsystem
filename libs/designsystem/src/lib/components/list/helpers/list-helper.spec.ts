@@ -11,7 +11,7 @@ type Item = {
   isStandAlone?: boolean;
 };
 
-fdescribe('list helper', () => {
+describe('list helper', () => {
   let listHelper: ListHelper;
 
   beforeEach(() => {
