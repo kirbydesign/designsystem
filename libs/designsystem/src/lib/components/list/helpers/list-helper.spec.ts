@@ -5,6 +5,12 @@ import { LoadOnDemandEvent } from '../list.event';
 
 import { ListHelper } from './list-helper';
 
+type Item = {
+  title: string;
+  value: number;
+  isStandAlone?: boolean;
+};
+
 describe('list helper', () => {
   let listHelper: ListHelper;
 
@@ -109,10 +115,10 @@ describe('list helper', () => {
 
   describe('function: groupSections', () => {
     it('should section list by callback function', () => {
-      const callback = (item: any) => {
+      const callback = (item: Item) => {
         return item.title;
       };
-      const collection = [
+      const collection: Item[] = [
         {
           title: 'section 1',
           value: 1,
@@ -130,17 +136,17 @@ describe('list helper', () => {
       const result = listHelper.groupSections(collection, callback);
 
       expect(result.length).toBe(3);
-      result.forEach((section: any, index: number) => {
+      result.forEach((section, index: number) => {
         expect(section.items.length).toBe(1);
         expect(section.items[0]).toEqual(collection[index]);
       });
     });
 
     it('should order sections by alphabetical order', () => {
-      const callback = (item: any) => {
+      const callback = (item: Item) => {
         return item.title;
       };
-      const collection = [
+      const collection: Item[] = [
         {
           title: 'section 202',
           value: 1,
@@ -229,11 +235,11 @@ describe('list helper', () => {
 
   describe('function: groupSectionsWithStandAloneItems', () => {
     it('should create sections with sublists"', () => {
-      const callback = (item: any) => {
+      const callback = (item: Item) => {
         return item.title;
       };
       const standAloneProperty = 'isStandAlone';
-      const collection = [
+      const collection: Item[] = [
         {
           title: 'Section 1',
           value: 1,

@@ -13,7 +13,16 @@ import { ListItemComponent } from './list-item/list-item.component';
 import { ListComponent } from './list.component';
 import { LoadOnDemandEvent } from './list.event';
 
-const TEST_ITEMS: any[] = [
+type Item = {
+  id: number;
+  title: string;
+  subTitle: string;
+  amount: string;
+  detail: number;
+  color: string;
+};
+
+const TEST_ITEMS: Item[] = [
   {
     id: 0,
     title: 'Vestas Wind Systems has a very long name',
@@ -109,7 +118,7 @@ describe('ListComponent', () => {
     it('should be enabled if a section callback is defined', () => {
       spectator.setInput({
         items: TEST_ITEMS,
-        getSectionName: (_item: any) => 'this is a test',
+        getSectionName: () => 'this is a test',
       });
 
       expect(spectator.component._isSectionsEnabled).toBeTruthy();
@@ -118,7 +127,7 @@ describe('ListComponent', () => {
     it('should have no groupedItems when last item in items input is removed', () => {
       spectator.setInput({
         items: [TEST_ITEMS[0]],
-        getSectionName: (_item: any) => 'this is a test',
+        getSectionName: () => 'this is a test',
       });
 
       expect(spectator.component._groupedItems).toHaveLength(1);
