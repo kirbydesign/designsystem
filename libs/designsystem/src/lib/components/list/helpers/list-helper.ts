@@ -84,13 +84,13 @@ export class ListHelper {
 
       if (sectionsMap.has(sectionName)) {
         const section = sectionsMap.get(sectionName);
-        const lastListInSection = section?.[section?.length - 1];
+        const lastListInSection = section[section.length - 1];
         const lastItemInList = lastListInSection[lastListInSection.length - 1];
 
         if (!item[standAloneProperty] && !lastItemInList[standAloneProperty]) {
           lastListInSection.push(item);
         } else {
-          section?.push([item]);
+          section.push([item]);
         }
       } else {
         sectionsMap.set(sectionName, [[item]]);
