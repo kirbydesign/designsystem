@@ -236,7 +236,7 @@ export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChec
   private url: string;
   private isActive: boolean;
 
-  private ngOnDestroy$ = new Subject();
+  private ngOnDestroy$: Subject<void> = new Subject<void>();
   private contentScrolled$: Observable<ScrollDetail>;
 
   private navigationStart$: Observable<RouterEvent> = this.router.events.pipe(

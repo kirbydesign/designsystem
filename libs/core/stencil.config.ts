@@ -15,7 +15,6 @@ export const config: Config = {
     {
       type: 'dist',
       esmLoaderPath: '../loader',
-      copy: [{ src: 'scss', dest: '../../scss', warn: true }],
     },
     { type: 'docs-readme' },
     { type: 'docs-json', file: './custom-elements.json' },
