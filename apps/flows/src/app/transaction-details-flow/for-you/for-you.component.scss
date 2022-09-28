@@ -72,8 +72,12 @@ $gap: utils.size('m');
 
 .inside-kirby-card-grid {
   display: grid;
-  grid-template-columns: 300px 100px;
+  grid-template-columns: 300px 1fr;
   grid-template-rows: 30px 30px;
   gap: 5px;
   justify-items: left;
+}
+
+.item-inside-kirby-card {
+  justify-items: right;
 }
