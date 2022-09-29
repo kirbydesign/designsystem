@@ -107,7 +107,7 @@ describe('ListComponent', () => {
   });
 
   describe('sections', () => {
-    it('should be disabled if no section callback is defined', () => {
+    it('should be disabled if no getSectionName function is defined', () => {
       spectator.setInput({
         getSectionName: undefined,
       });
@@ -115,7 +115,7 @@ describe('ListComponent', () => {
       expect(spectator.component._isSectionsEnabled).toBeFalsy();
     });
 
-    it('should be enabled if a section callback is defined', () => {
+    it('should be enabled if a getSectionName function is defined', () => {
       spectator.setInput({
         items: transactions,
         getSectionName: () => 'this is a test',
