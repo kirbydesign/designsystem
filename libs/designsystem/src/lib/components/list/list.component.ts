@@ -252,8 +252,6 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   getStandAloneClass() {
-    if (this._isStandAloneEnabled) {
-      return `stand-alone-bottom-margin-${this.standAloneSpacing}`;
-    }
+    return this._isStandAloneEnabled ? `stand-alone-bottom-margin-${this.standAloneSpacing}` : '';
   }
 }
