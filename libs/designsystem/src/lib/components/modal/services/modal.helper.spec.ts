@@ -19,6 +19,7 @@ import { ModalWrapperComponent } from '../modal-wrapper/modal-wrapper.component'
 import { ModalNavigationService } from './modal-navigation.service';
 import { ModalHelper } from './modal.helper';
 import { Modal, Overlay } from './modal.interfaces';
+import { AlertHelper } from './alert.helper';
 
 @Component({
   template: `
@@ -86,6 +87,7 @@ describe('ModalHelper', () => {
     service: ModalHelper,
     imports: [TestHelper.ionicModuleForTest, RouterTestingModule],
     providers: [
+      AlertHelper,
       {
         provide: WindowRef,
         useValue: <WindowRef>{ nativeWindow: window },
