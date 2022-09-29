@@ -33,12 +33,17 @@ const routes: Routes = [
       },
       {
         path: 'account',
-        component: AccountComponent,
-      },
-      { path: 'transactions', component: TransactionsComponent },
-      {
-        path: 'transactions-details/:id',
-        component: TransactionDetailsComponent,
+        children: [
+          {
+            path: '',
+            component: AccountComponent,
+          },
+          { path: 'transactions', component: TransactionsComponent },
+          {
+            path: 'transactions-details/:id',
+            component: TransactionDetailsComponent,
+          },
+        ],
       },
     ],
   },

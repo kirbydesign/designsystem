@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
 
@@ -7,7 +8,11 @@ import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
   templateUrl: './account.component.html',
 })
 export class AccountComponent implements OnInit {
-  constructor(private toastController: ToastController) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private toastController: ToastController
+  ) {}
 
   ngOnInit(): void {}
 
@@ -18,5 +23,9 @@ export class AccountComponent implements OnInit {
       durationInMs: 10000,
     };
     this.toastController.showToast(config);
+  }
+
+  navigateToAccountSub() {
+    this.router.navigate(['transactions'], { relativeTo: this.route });
   }
 }
