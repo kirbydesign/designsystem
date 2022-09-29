@@ -1,8 +1,81 @@
+@use 'sass:math';
+
 @use '~@kirbydesign/core/src/scss/utils';
 
 :host {
   position: absolute;
   inset: 0;
+}
+
+/* Configure grid properties */
+$columns: 12;
+$gap: utils.size('m');
+
+/* Declare the grid container */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+  gap: $gap;
+}
+
+/* Let grid items span all columns by default */
+.grid-item {
+  grid-column: span $columns;
+}
+
+/* Tablet size and above */
+@include utils.media('>=medium') {
+  .half-at-tablet-up {
+    grid-column: span ($columns * 0.5);
+  }
+}
+
+/* Desktop size and above */
+@include utils.media('>=large') {
+  .half-at-desktop-up {
+    grid-column: span ($columns * 0.5);
+  }
+
+  .third-at-desktop-up {
+    grid-column: span math.div($columns, 3);
+  }
+}
+
+.max-width-container {
+  max-width: 1196px;
+  margin-inline: auto;
+}
+
+.gutter {
+  padding-inline: 16px;
+}
+
+.safe-area-inline {
+  padding-inline: 16px;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+
+.align-center {
+  text-align: center;
+}
+
+.inside-kirby-card-grid {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  grid-template-rows: 30px 30px;
+  gap: 5px;
+  justify-items: left;
+}
+
+.item-inside-kirby-card {
+  justify-items: right;
 }
 
 .spacing {
