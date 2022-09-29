@@ -7,7 +7,7 @@ export const ListWithStandAloneExampleTemplate = `<kirby-list
   (itemSelect)="onItemSelect($event)"
   [getStandAloneByProperty]="'isStandAlone'"
   [showDivider]="true"
-  standAloneSpacing="xxs"
+  [standAloneSpacing]="'xxs'"
 >
   <kirby-item *kirbyListItemTemplate="let item">
     <kirby-label>

@@ -33,19 +33,17 @@ import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
 
 export type ListShape = 'square' | 'rounded' | 'none';
 
-export enum StandAloneSpacing {
-  XXXXS = 'xxxxs',
-  XXXS = 'xxxs',
-  XXS = 'xxs',
-  XS = 'xs',
-  SM = 'sm',
-  MD = 'md',
-  LG = 'lg',
-  XL = 'xl',
-  XXL = 'xxl',
-  XXXL = 'xxxl',
-}
-
+export type StandAloneSpacing =
+  | 'xxxxs'
+  | 'xxxs'
+  | 'xxs'
+  | 'xs'
+  | 'sm'
+  | 'md'
+  | 'lg'
+  | 'xl'
+  | 'xxl'
+  | 'xxxl';
 @Component({
   selector: 'kirby-list',
   templateUrl: './list.component.html',
@@ -82,7 +80,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   /**
    * Bottom margin for stand alone items
    */
-  @Input() standAloneSpacing: StandAloneSpacing = StandAloneSpacing.XXS;
+  @Input() standAloneSpacing: StandAloneSpacing = 'xxs';
 
   /**
    * Text to display when no more items can be loaded (used for "on demand"-loading).
@@ -251,5 +249,9 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
 
     if (index === _items.length - 1 || _items[index + 1]?.headingName)
       return this.footerTemplate ? null : 'last';
+  }
+
+  standAloneClass() {
+    return this._isStandAloneEnabled ? `stand-alone-bottom-margin-${this.standAloneSpacing}` : '';
   }
 }
