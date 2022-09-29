@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'kirby-card-footer',
@@ -6,8 +6,4 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   styleUrls: ['./card-footer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CardFooterComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit() {}
-}
+export class CardFooterComponent {}

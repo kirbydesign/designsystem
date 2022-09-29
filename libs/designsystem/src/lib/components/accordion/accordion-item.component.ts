@@ -1,5 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges } from '@angular/core';
 
 // Counter for generating unique element ids
 let uniqueId = 0;
@@ -17,16 +17,32 @@ let uniqueId = 0;
     ]),
   ],
 })
-export class AccordionItemComponent {
+export class AccordionItemComponent implements OnChanges {
   @Input() title: string;
   @Input() isExpanded: boolean = false;
+  @Input() isDisabled: boolean = false;
+  @Input() disabledTitle: string;
+
+  ngOnChanges(): void {
+    if (this.isDisabled) {
+      this.isExpanded = false;
+    }
+  }
+
+  getTitle() {
+    if (this.isDisabled && !!this.disabledTitle) {
+      return this.disabledTitle;
+    } else {
+      return this.title;
+    }
+  }
+
+  _onToggleExpanded(event: KeyboardEvent) {
+    event.preventDefault();
+    this.isExpanded = !this.isExpanded && !this.isDisabled;
+  }
 
   // IDs used for a11y labelling
   _titleId = `kirby-accordion-item-title-${++uniqueId}`;
   _contentId = `kirby-accordion-item-content-${uniqueId}`;
-
-  _onToggleExpanded(event: KeyboardEvent) {
-    event.preventDefault();
-    this.isExpanded = !this.isExpanded;
-  }
 }

@@ -13,6 +13,7 @@ export class CalendarCardExampleComponent implements OnChanges {
   @Input() disablePastDates = false;
   @Input() disableFutureDates = false;
   @Input() setDisabledDates = false;
+  @Input() setEnabledDates = false;
   @Input() setMinDate = false;
   @Input() setMaxDate = false;
   @Input() setTodayDate = false;
@@ -23,6 +24,7 @@ export class CalendarCardExampleComponent implements OnChanges {
   maxDate: Date;
   todayDate: Date;
   disabledDates: Date[];
+  enabledDates: Date[];
   yearNavigatorOptions = { from: -6, to: 3 };
   timeZoneName = Intl.DateTimeFormat().resolvedOptions().timeZone;
   constructor() {
@@ -72,6 +74,10 @@ export class CalendarCardExampleComponent implements OnChanges {
     this.todayDate = addDays(today, 3); // artificial but works for demo
 
     this.disabledDates = [3, 5, 7, 10, 15, 25, 28, 35].map((daysFromToday) =>
+      addDays(today, daysFromToday)
+    );
+
+    this.enabledDates = [3, 5, 7, 10, 15, 25, 28, 35].map((daysFromToday) =>
       addDays(today, daysFromToday)
     );
   }

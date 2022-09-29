@@ -1,11 +1,7 @@
-<!-- This container is only needed due to layout of larger screen sizes -->
 <kirby-page title="For you" defaultBackHref="/">
   <kirby-page-content>
+    <div class="app-header"></div>
     <div class="container">
-      <div class="app-header">
-        <!-- Hidden on small screen sizes-->
-      </div>
-
       <kirby-card class="spacing" [hasPadding]="true"
         ><h2>Credits in account</h2>
         <h1>2.000.000 DKK</h1>
@@ -26,8 +22,7 @@
       </kirby-card>
       <kirby-card class="spacing" [hasPadding]="true"
         ><h2>Overview of spending</h2>
-
-        <kirby-chart type="column" [data]="data" [labels]="labels"></kirby-chart>
+        <kirby-chart type="column" [data]="ChartData" [labels]="ChartLabels"></kirby-chart>
       </kirby-card>
 
       <div class="max-width-container">

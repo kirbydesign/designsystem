@@ -5,6 +5,7 @@
     (keydown.space)="_onToggleExpanded($event)"
     class="header"
     role="button"
+    [class.disabled]="isDisabled"
     tabindex="0"
     [class.expanded]="isExpanded"
     [attr.aria-expanded]="isExpanded"
@@ -12,7 +13,7 @@
     [id]="_titleId"
   >
     <span class="state-layer" aria-hidden="true"></span>
-    <div class="title">{{ title }}</div>
+    <div class="title">{{ getTitle() }}</div>
     <kirby-icon name="arrow-down"></kirby-icon>
   </div>
   <div

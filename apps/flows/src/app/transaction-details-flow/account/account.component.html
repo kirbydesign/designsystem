@@ -1,4 +1,3 @@
-<!-- This container is only needed due to layout of larger screen sizes -->
 <kirby-page title="Account">
   <kirby-page-actions *kirbyPageActions="{ sticky: true }">
     <button kirby-button [size]="'sm'" [attentionLevel]="'3'" (click)="onCardSelect()">
@@ -8,30 +7,13 @@
   </kirby-page-actions>
   <kirby-page-content>
     <div class="container">
-      <div class="app-header">
-        <!-- Hidden on small screen sizes-->
-      </div>
+      <div class="app-header"></div>
 
       <kirby-card>
         <kirby-item routerLink="../transactions" routerLinkActive="active">Account 1</kirby-item>
-        <kirby-item
-          routerLink="../transactions"
-          routerLinkActive="active"
-          ariaCurrentWhenActive="page"
-          >Account 2</kirby-item
-        >
-        <kirby-item
-          routerLink="../transactions"
-          routerLinkActive="active"
-          ariaCurrentWhenActive="page"
-          >Account 3</kirby-item
-        >
-        <kirby-item
-          routerLink="../transactions"
-          routerLinkActive="active"
-          ariaCurrentWhenActive="page"
-          >Account 4</kirby-item
-        >
+        <kirby-item routerLink="../transactions" routerLinkActive="active">Account 2</kirby-item>
+        <kirby-item routerLink="../transactions" routerLinkActive="active">Account 3</kirby-item>
+        <kirby-item routerLink="../transactions" routerLinkActive="active">Account 4</kirby-item>
       </kirby-card>
     </div>
   </kirby-page-content>

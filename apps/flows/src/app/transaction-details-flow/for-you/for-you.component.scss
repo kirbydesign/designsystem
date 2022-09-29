@@ -66,10 +66,6 @@ $gap: utils.size('m');
   text-align: center;
 }
 
-.spacing {
-  margin: 15px;
-}
-
 .inside-kirby-card-grid {
   display: grid;
   grid-template-columns: 300px 1fr;
@@ -80,4 +76,14 @@ $gap: utils.size('m');
 
 .item-inside-kirby-card {
   justify-items: right;
+}
+
+.spacing {
+  margin: utils.size('s') 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: utils.size('s');
 }
