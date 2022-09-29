@@ -13,25 +13,22 @@
       </div>
 
       <kirby-card>
-        <kirby-item routerLink="../transactions" routerLinkActive="active">Account 1</kirby-item>
+        <kirby-item (click)="navigateToAccountSub()" routerLinkActive="active"
+          >Account 1</kirby-item
+        >
         <kirby-item
-          routerLink="../transactions"
+          (click)="navigateToAccountSub()"
           routerLinkActive="active"
           ariaCurrentWhenActive="page"
           >Account 2</kirby-item
         >
         <kirby-item
-          routerLink="../transactions"
+          (click)="navigateToAccountSub()"
           routerLinkActive="active"
           ariaCurrentWhenActive="page"
           >Account 3</kirby-item
         >
-        <kirby-item
-          routerLink="../transactions"
-          routerLinkActive="active"
-          ariaCurrentWhenActive="page"
-          >Account 4</kirby-item
-        >
+        <kirby-item (click)="navigateToAccountSub()">Account 4</kirby-item>
       </kirby-card>
     </div>
   </kirby-page-content>
