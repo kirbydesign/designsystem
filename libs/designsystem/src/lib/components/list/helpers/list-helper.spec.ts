@@ -5,6 +5,12 @@ import { LoadOnDemandEvent } from '../list.event';
 
 import { ListHelper } from './list-helper';
 
+type Item = {
+  title: string;
+  value: number;
+  isStandAlone?: boolean;
+};
+
 describe('list helper', () => {
   let listHelper: ListHelper;
 
@@ -108,54 +114,40 @@ describe('list helper', () => {
   });
 
   describe('function: groupSections', () => {
-    it('should section list by callback function', () => {
-      const callback = (item: any) => {
-        return item.title;
-      };
-      const collection = [
-        {
-          title: 'section 1',
-          value: 1,
-        },
-        {
-          title: 'section 2',
-          value: 2,
-        },
-        {
-          title: 'section 3',
-          value: 3,
-        },
-      ];
+    const items: Item[] = [
+      {
+        title: 'section 202',
+        value: 1,
+      },
+      {
+        title: 'section 1',
+        value: 2,
+      },
+      {
+        title: 'section 44',
+        value: 3,
+      },
+    ];
 
-      const result = listHelper.groupSections(collection, callback);
+    const groupBy = (item: Item) => {
+      return item.title;
+    };
+
+    it('should section list by the provided function', () => {
+      const result = listHelper.groupSections(items, groupBy);
 
       expect(result.length).toBe(3);
-      result.forEach((section: any, index: number) => {
-        expect(section.items.length).toBe(1);
-        expect(section.items[0]).toEqual(collection[index]);
+      items.forEach((item) => {
+        const sections = result.filter((section) => section.name == groupBy(item));
+        expect(sections.length).toBe(1);
+        expect(sections[0].items.length).toBe(1);
+        expect(groupBy(sections[0].items[0])).toBe(groupBy(item));
       });
     });
 
     it('should order sections by alphabetical order', () => {
-      const callback = (item: any) => {
-        return item.title;
-      };
-      const collection = [
-        {
-          title: 'section 202',
-          value: 1,
-        },
-        {
-          title: 'section 1',
-          value: 2,
-        },
-        {
-          title: 'section 44',
-          value: 3,
-        },
-      ];
+      const result = listHelper.groupSections(items, groupBy);
 
-      const result = listHelper.groupSections(collection, callback);
       expect(result[0].name).toEqual('section 1');
       expect(result[1].name).toEqual('section 202');
       expect(result[2].name).toEqual('section 44');
@@ -163,33 +155,33 @@ describe('list helper', () => {
   });
 
   describe('function: groupStandAloneItems', () => {
-    it('should divide items into sublists based on "standAloneProperty"', () => {
-      const standAloneProperty = 'isStandAlone';
-      const collection = [
-        {
-          title: 'Item 1',
-          value: 1,
-        },
-        {
-          title: 'Item 2',
-          value: 2,
-        },
-        {
-          title: 'Item 3',
-          value: 3,
-          isStandAlone: true,
-        },
-        {
-          title: 'Item 4',
-          value: 4,
-        },
-        {
-          title: 'Item 5',
-          value: 5,
-        },
-      ];
+    const standAloneProperty = 'isStandAlone';
+    const items: Item[] = [
+      {
+        title: 'Item 1',
+        value: 1,
+      },
+      {
+        title: 'Item 2',
+        value: 2,
+      },
+      {
+        title: 'Item 3',
+        value: 3,
+        isStandAlone: true,
+      },
+      {
+        title: 'Item 4',
+        value: 4,
+      },
+      {
+        title: 'Item 5',
+        value: 5,
+      },
+    ];
 
-      const result = listHelper.groupStandAloneItems(collection, standAloneProperty);
+    it('should divide items into sublists based on "standAloneProperty"', () => {
+      const result = listHelper.groupStandAloneItems(items, standAloneProperty);
 
       expect(result[0]).toEqual({
         items: [
@@ -228,38 +220,38 @@ describe('list helper', () => {
   });
 
   describe('function: groupSectionsWithStandAloneItems', () => {
-    it('should create sections with sublists"', () => {
-      const callback = (item: any) => {
-        return item.title;
-      };
-      const standAloneProperty = 'isStandAlone';
-      const collection = [
-        {
-          title: 'Section 1',
-          value: 1,
-        },
-        {
-          title: 'Section 2',
-          value: 2,
-        },
-        {
-          title: 'Section 1',
-          value: 3,
-        },
-        {
-          title: 'Section 2',
-          value: 4,
-          isStandAlone: true,
-        },
-        {
-          title: 'Section 2',
-          value: 5,
-        },
-      ];
+    const groupBy = (item: Item) => {
+      return item.title;
+    };
+    const standAloneProperty = 'isStandAlone';
+    const items: Item[] = [
+      {
+        title: 'Section 1',
+        value: 1,
+      },
+      {
+        title: 'Section 2',
+        value: 2,
+      },
+      {
+        title: 'Section 1',
+        value: 3,
+      },
+      {
+        title: 'Section 2',
+        value: 4,
+        isStandAlone: true,
+      },
+      {
+        title: 'Section 2',
+        value: 5,
+      },
+    ];
 
+    it('should create sections with sublists"', () => {
       const result = listHelper.groupSectionsWithStandAloneItems(
-        collection,
-        callback,
+        items,
+        groupBy,
         standAloneProperty
       );
 
