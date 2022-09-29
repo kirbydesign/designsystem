@@ -1,6 +1,6 @@
 <kirby-page [title]="transactions.text">
   <kirby-page-content>
-    <h1>{{ transactions.amount.amount }}</h1>
+    <h2>{{ transactions.amount.amount }}</h2>
     <p>{{ transactions.date.utc }}</p>
 
     <div class="spacing">
@@ -8,11 +8,9 @@
       <button kirby-button [size]="'sm'" [attentionLevel]="'3'">Divide amount</button>
     </div>
 
-    <h2>Category</h2>
+    <h3>Category</h3>
     <kirby-card class="spacing" [hasPadding]="true"> {{ transactions.category.id }}</kirby-card>
-    <h2>Details</h2>
-    <div>
-      <p>{{ transactions.balance.amount }} {{ transactions.amount.currencyCode }}</p>
-    </div>
+    <h3>Details</h3>
+    <p>{{ transactions.balance.amount }} {{ transactions.amount.currencyCode }}</p>
   </kirby-page-content>
 </kirby-page>
