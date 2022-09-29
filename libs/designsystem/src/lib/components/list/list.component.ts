@@ -251,7 +251,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
       return this.footerTemplate ? null : 'last';
   }
 
-  getStandAloneClass() {
+  standAloneClass() {
     return this._isStandAloneEnabled ? `stand-alone-bottom-margin-${this.standAloneSpacing}` : '';
   }
 }

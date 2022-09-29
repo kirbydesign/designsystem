@@ -34,7 +34,7 @@
 <ng-template #groupedListTemplate>
   <ion-item-group
     *ngFor="let section of _groupedItems; trackBy: sectionTrackBy"
-    [ngClass]="getStandAloneClass()"
+    [ngClass]="standAloneClass()"
   >
     <ion-item-divider *ngIf="_isSectionsEnabled">
       <ng-container
@@ -43,7 +43,7 @@
     </ion-item-divider>
 
     <ng-container *ngIf="_isSectionsEnabled && _isStandAloneEnabled; else groupedFlatList">
-      <div class="list-items" [ngClass]="getStandAloneClass()" *ngFor="let list of section.lists">
+      <div class="list-items" [ngClass]="standAloneClass()" *ngFor="let list of section.lists">
         <ng-container
           *ngTemplateOutlet="itemsTemplate; context: { $implicit: list }"
         ></ng-container>
@@ -51,7 +51,7 @@
     </ng-container>
 
     <ng-template #groupedFlatList>
-      <div class="list-items" [ngClass]="getStandAloneClass()">
+      <div class="list-items" [ngClass]="standAloneClass()">
         <ng-container
           *ngTemplateOutlet="itemsTemplate; context: { $implicit: section.items }"
         ></ng-container>
