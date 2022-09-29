@@ -1,29 +1,30 @@
-<!-- This container is only needed due to layout of larger screen sizes -->
 <kirby-page title="For you" defaultBackHref="/">
   <kirby-page-content>
+    <div class="app-header"></div>
     <div class="container">
-      <div class="app-header">
-        <!-- Hidden on small screen sizes-->
-      </div>
-
-      <kirby-card [hasPadding]="true"
+      <kirby-card class="spacing" [hasPadding]="true"
         ><h2>Credits in account</h2>
-        <h1>2.000.000 DKK</h1></kirby-card
-      >
-      <br />
-      <kirby-card [hasPadding]="true"
-        ><H2>Investments - In Total</H2> <H1>400.000 DKK</H1> Price movement since bought
-        <kirby-flag class="right" themeColor="danger">-500 DKK</kirby-flag><br />
-        <br />
-        Return this year<kirby-flag class="right" themeColor="success">2000 DKK</kirby-flag><br />
+        <h1>2.000.000 DKK</h1>
       </kirby-card>
-      <br />
-      <kirby-card [hasPadding]="true"
+      <kirby-card class="spacing" [hasPadding]="true">
+        <h2>Investments - In Total</h2>
+        <h1>400.000 DKK</h1>
+        <div class="inside-kirby-card-grid">
+          <p>Price movement since bought</p>
+          <kirby-flag class="align-center" style="justify-self: end" themeColor="danger"
+            >-500 DKK</kirby-flag
+          >
+          <p>Return this year</p>
+          <kirby-flag class="align-center" style="justify-self: end" themeColor="success"
+            >2000 DKK</kirby-flag
+          >
+        </div>
+      </kirby-card>
+      <kirby-card class="spacing" [hasPadding]="true"
         ><h2>Overview of spending</h2>
-
-        <kirby-chart type="column" [data]="data" [labels]="labels"></kirby-chart>
+        <kirby-chart type="column" [data]="ChartData" [labels]="ChartLabels"></kirby-chart>
       </kirby-card>
-      <br />
+
       <div class="max-width-container">
         <div class="grid-container">
           <div class="grid-item half-at-tablet-up third-at-desktop-up">

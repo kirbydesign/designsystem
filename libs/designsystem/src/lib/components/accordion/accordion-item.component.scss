@@ -44,6 +44,18 @@ $padding: utils.size('s');
   padding: 0 $padding $padding $padding;
 }
 
+.disabled {
+  pointer-events: none;
+
+  .kirby-icon {
+    color: utils.get-color('semi-dark');
+  }
+
+  .title {
+    color: utils.get-text-color('semi-dark');
+  }
+}
+
 .expanded {
   .title {
     font-weight: utils.font-weight('bold');

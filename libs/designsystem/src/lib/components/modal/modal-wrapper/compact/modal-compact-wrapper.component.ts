@@ -1,5 +1,5 @@
 import { Component, ElementRef, HostListener, Injector, Input, OnInit } from '@angular/core';
-import { firstValueFrom, lastValueFrom, Subject } from 'rxjs';
+import { firstValueFrom, Subject } from 'rxjs';
 
 import { WindowRef } from '../../../../types/window-ref';
 import { Modal } from '../../services/modal.interfaces';
@@ -11,7 +11,7 @@ import { COMPONENT_PROPS } from '../config/modal-config.helper';
   templateUrl: './modal-compact-wrapper.component.html',
   styleUrls: ['./modal-compact-wrapper.component.scss'],
   providers: [{ provide: Modal, useExisting: ModalCompactWrapperComponent }],
-  // tslint:disable-next-line: no-host-metadata-property
+  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: { '[class.ion-page]': 'false' }, //Ensure ion-page class doesn't get applied by Ionic Modal Controller
 })
 export class ModalCompactWrapperComponent implements Modal, OnInit {
@@ -23,8 +23,8 @@ export class ModalCompactWrapperComponent implements Modal, OnInit {
   private ionModalElement: HTMLIonModalElement;
   private readonly ionModalDidPresent = new Subject<void>();
   private readonly ionModalWillDismiss = new Subject<void>();
-  readonly didPresent = lastValueFrom(this.ionModalDidPresent);
-  readonly willClose = lastValueFrom(this.ionModalWillDismiss);
+  readonly didPresent = firstValueFrom(this.ionModalDidPresent);
+  readonly willClose = firstValueFrom(this.ionModalWillDismiss);
 
   constructor(
     private injector: Injector,

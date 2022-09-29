@@ -2,6 +2,66 @@
 
 Notable changes to the project will be documented in this file.
 
+## [7.0.0](https://github.com/kirbydesign/designsystem/pull/2442) (16-09-2022)
+
+### Breaking Changes
+
+- **button** - deprecate attention-level 4 on kirby-button ([#1993](https://github.com/kirbydesign/designsystem/pull/1993))
+- **chart** - remove deprecated Highchart variants ([#2334](https://github.com/kirbydesign/designsystem/pull/2334))
+
+### Deprecations
+
+- **chip** - deprecate chip component ([#2391](https://github.com/kirbydesign/designsystem/pull/2391))
+
+### Features
+
+- **card** - make it possible to use alternative hover and active on dark cards ([#2469](https://github.com/kirbydesign/designsystem/pull/2469))
+- **stock-chart** - add stock chart component ([#2377](https://github.com/kirbydesign/designsystem/pull/2377))
+- **interaction-states** - hover, active, pressed and focussed state for our interative components has been implemented where relevant:
+
+  | Component         | Hover | Active | Focus `TAB` | `ENTER` / `SPACE` |
+  | :---------------- | :---: | :----: | :---------: | :---------------: |
+  | Accordion         |  ✅   |   ✅   |     ✅      |        ✅         |
+  | Action Sheet      |  ✅   |   ✅   |     ✅      |        ✅         |
+  | Alert             |  ✅   |   ✅   |     ✅      |        ✅         |
+  | Button            |  ✅   |   ✅   |     ✅      |        ✅         |
+  | Calendar          |  ✅   |   ✅   |             |                   |
+  | Card              |  ✅   |   ✅   |     ✅      |        ✅         |
+  | Chart             |  ✅   |        |             |                   |
+  | Checkbox          |  ✅   |   ✅   |     ✅      |                   |
+  | Chip              |  ✅   |   ✅   |     ✅      |        ✅         |
+  | Dropdown          |  ✅   |   ✅   |     ✅      |        ✅         |
+  | Fab Sheet         |  ✅   |   ✅   |             |                   |
+  | Form Field        |  ✅   |   ✅   |     ✅      |                   |
+  | Item - Picker     |  ✅   |   ✅   |             |        ✅         |
+  | Link              |  ✅   |   ✅   |     ✅      |        ✅         |
+  | List              |  ✅   |   ✅   |     ✅      |        ✅         |
+  | List Swipe        |       |        |             |                   |
+  | Modal             |       |        |             |                   |
+  | Radio             |  ✅   |   ✅   |     ✅      |        ✅         |
+  | Range             |  ✅   |   ✅   |     ✅      |        ✅         |
+  | Reorder List      |       |        |             |                   |
+  | Segmented Control |  ✅   |   ✅   |     ✅      |        ✅         |
+  | Slide Button      |  ✅   |   ✅   |             |                   |
+  | Slides            |       |        |             |                   |
+  | Tabs              |  ✅   |   ✅   |     ✅      |        ✅         |
+  | Toggle            |  ✅   |   ✅   |     ✅      |        ✅         |
+  | Toggle Button     |  ✅   |   ✅   |     ✅      |        ✅         |
+
+## [6.4.1](https://github.com/kirbydesign/designsystem/pull/2470) (09-09-2022)
+
+### Bugfixes
+
+- **accordion** - add note for using Accordion in microfrontends (#2436)
+- **fab-sheet** - fix backdrop showing up when fab is closed (#2459)
+- **page** - fix emission of enter and leave events (#2387)
+- **segmented-control** - add option for setting selectedIndex in segmentSelect call-back (#2407)
+
+### Features
+
+- **accordion** - add option to disable accordion items (#2451)
+- **calendar** - add option to specify which dates should be enabled (#2454)
+
 ## [6.3.1](https://github.com/kirbydesign/designsystem/pull/2421) (16-08-2022)
 
 - Upgrade to Ionic 6

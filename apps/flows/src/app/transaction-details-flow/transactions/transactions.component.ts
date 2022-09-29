@@ -16,7 +16,6 @@ export class TransactionsComponent implements OnInit {
   transactions: Transaction[] = [];
   ngOnInit(): void {
     this.transactions = transactionsData.transactions;
-    console.log(this.transactions);
   }
 
   getSectionName(transaction: Transaction): string {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import exampleHtml from '../../examples/spinner-example/spinner-example.component.html?raw';
 
@@ -6,10 +6,6 @@ import exampleHtml from '../../examples/spinner-example/spinner-example.componen
   selector: 'cookbook-spinner-showcase',
   templateUrl: './spinner-showcase.component.html',
 })
-export class SpinnerShowcaseComponent implements OnInit {
+export class SpinnerShowcaseComponent {
   exampleHtml = exampleHtml;
-
-  constructor() {}
-
-  ngOnInit() {}
 }

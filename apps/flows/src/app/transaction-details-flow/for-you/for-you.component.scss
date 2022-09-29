@@ -1,44 +1,44 @@
+@use 'sass:math';
+
+@use '~@kirbydesign/core/src/scss/utils';
+
 :host {
   position: absolute;
   inset: 0;
 }
 
+/* Configure grid properties */
+$columns: 12;
+$gap: utils.size('m');
+
+/* Declare the grid container */
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-gap: 24px;
-  gap: 24px;
+  grid-template-columns: repeat($columns, 1fr);
+  gap: $gap;
 }
 
 /* Let grid items span all columns by default */
 .grid-item {
-  grid-column: span 12;
+  grid-column: span $columns;
 }
 
 /* Tablet size and above */
-@media (min-width: 721px) {
+@include utils.media('>=medium') {
   .half-at-tablet-up {
-    grid-column: span 6;
+    grid-column: span ($columns * 0.5);
   }
 }
 
 /* Desktop size and above */
-@media (min-width: 1025px) {
+@include utils.media('>=large') {
   .half-at-desktop-up {
-    grid-column: span 6;
+    grid-column: span ($columns * 0.5);
   }
 
   .third-at-desktop-up {
-    grid-column: span 4;
+    grid-column: span math.div($columns, 3);
   }
-}
-
-/*********************************************************
-  Additional styles that are not essential to the example
- *********************************************************/
-main {
-  background-color: var(--kirby-background-color);
-  min-height: 100%;
 }
 
 .max-width-container {
@@ -66,7 +66,24 @@ main {
   text-align: center;
 }
 
-.right {
-  position: relative;
-  float: right;
+.inside-kirby-card-grid {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  grid-template-rows: 30px 30px;
+  gap: 5px;
+  justify-items: left;
+}
+
+.item-inside-kirby-card {
+  justify-items: right;
+}
+
+.spacing {
+  margin-block: utils.size('s');
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: utils.size('s');
 }
