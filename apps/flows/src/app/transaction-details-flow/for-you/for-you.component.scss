@@ -1,8 +1,16 @@
+@use '~@kirbydesign/core/src/scss/utils';
+
 :host {
   position: absolute;
   inset: 0;
 }
 
 .spacing {
-  margin: 15px;
+  margin: utils.size('s') 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: utils.size('s');
 }

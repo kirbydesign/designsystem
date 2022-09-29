@@ -1,19 +1,18 @@
 <kirby-page title="Til dig" defaultBackHref="/">
   <kirby-page-content>
+    <div class="app-header"></div>
     <div class="container">
-      <div class="app-header"></div>
-
-      <kirby-card class="spacing" [hasPadding]="true"
+      <kirby-card [hasPadding]="true"
         >Card 1
         <kirby-chart type="column" [data]="ChartData" [labels]="ChartLabels"></kirby-chart>
       </kirby-card>
-      <kirby-card class="spacing" [hasPadding]="true">Card 2</kirby-card>
-      <kirby-card class="spacing" [hasPadding]="true">Card 3</kirby-card>
-      <div>
-        <kirby-card [hasPadding]="true" themeColor="secondary">(Nested)Betal og overfør</kirby-card>
-        <kirby-card [hasPadding]="true">(Nested)4</kirby-card>
-        <kirby-card [hasPadding]="true">(Nested)5</kirby-card>
-      </div>
+      <kirby-card [hasPadding]="true">Card 2</kirby-card>
+      <kirby-card [hasPadding]="true">Card 3</kirby-card>
+    </div>
+    <div class="spacing">
+      <kirby-card [hasPadding]="true" themeColor="secondary">(Nested)Betal og overfør</kirby-card>
+      <kirby-card [hasPadding]="true">(Nested)4</kirby-card>
+      <kirby-card [hasPadding]="true">(Nested)5</kirby-card>
     </div>
   </kirby-page-content>
 </kirby-page>
