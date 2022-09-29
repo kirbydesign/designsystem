@@ -56,6 +56,10 @@ export class CardComponent implements OnInit, OnDestroy {
     this.highlighted = value === 'highlighted';
   }
 
+  @HostBinding('class.interaction-state-make-lighter-and-louder')
+  @Input()
+  hasDarkBackgroundColor: boolean;
+
   constructor(
     private elementRef: ElementRef,
     private resizeObserverService: ResizeObserverService,

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
+import exampleWithCardHtml from '../../examples/calendar-example/calendar-card-example.component.html?raw';
+import exampleHtml from '../../examples/calendar-example/calendar-example.component.html?raw';
 import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
-import exampleWithCardHtml from '../../examples/calendar-example/calendar-card-example.component.html?raw';
-import exampleHtml from '../../examples/calendar-example/calendar-example.component.html?raw';
 @Component({
   selector: 'cookbook-calendar-showcase',
   templateUrl: './calendar-showcase.component.html',
@@ -18,6 +18,7 @@ export class CalendarShowcaseComponent {
   setMaxDate = false;
   setTodayDate = false;
   setDisabledDates = false;
+  setEnabledDates = false;
   useTimezoneUTC = false;
   showYearNavigator = false;
   minDate: Date;
@@ -91,7 +92,15 @@ export class CalendarShowcaseComponent {
     },
     {
       name: 'disabledDates',
-      description: '(Optional) Array of dates that should not be selectable.',
+      description:
+        '(Optional) Array of dates that should not be selectable. Should not be used together with enabledDates.',
+      defaultValue: 'null',
+      type: ['Date[]'],
+    },
+    {
+      name: 'enabledDates',
+      description:
+        '(Optional) Array of dates that should be selectable. Should not be used together with disabledDates.',
       defaultValue: 'null',
       type: ['Date[]'],
     },

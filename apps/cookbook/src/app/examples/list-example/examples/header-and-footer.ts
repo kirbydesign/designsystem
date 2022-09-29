@@ -29,8 +29,7 @@ export const ListWithHeaderAndFooterExampleTemplate = `<kirby-list [items]="item
 </kirby-list>`;
 
 @Component({
-  // tslint:disable-next-line
-  selector: 'list-with-header-and-footer-example',
+  selector: 'cookbook-list-with-header-and-footer-example',
   template: `
     <kirby-page title="List with header and footer">
       <kirby-page-content> ${ListWithHeaderAndFooterExampleTemplate} </kirby-page-content>

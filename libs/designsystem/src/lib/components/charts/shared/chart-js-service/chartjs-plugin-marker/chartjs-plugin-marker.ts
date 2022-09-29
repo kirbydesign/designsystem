@@ -9,7 +9,7 @@ import { valueOrDefault } from 'chart.js/helpers';
 
 import { ChartDataset } from '../../../';
 
-var defaultOptions = {
+const defaultOptions = {
   line: {
     color: 'black',
     width: 1,
@@ -35,7 +35,7 @@ export default {
       return;
     }
 
-    var xScaleType = chart.config.options.scales.x.type;
+    const xScaleType = chart.config.options.scales.x.type;
 
     if (
       xScaleType !== 'linear' &&
@@ -88,9 +88,9 @@ export default {
       return;
     }
 
-    let e = event.event;
+    const e = event.event;
 
-    var xScaleType = chart.config.options.scales.x.type;
+    const xScaleType = chart.config.options.scales.x.type;
 
     if (
       xScaleType !== 'linear' &&
@@ -101,7 +101,7 @@ export default {
       return;
     }
 
-    var xScale = this.getXScale(chart);
+    const xScale = this.getXScale(chart);
 
     if (!xScale) {
       return;
@@ -113,7 +113,7 @@ export default {
     }
 
     // fix for Safari
-    var buttons = e.native.buttons === undefined ? e.native.which : e.native.buttons;
+    let buttons = e.native.buttons === undefined ? e.native.which : e.native.buttons;
     if (e.native.type === 'mouseup') {
       buttons = 0;
     }
@@ -167,14 +167,14 @@ export default {
     if (!hasMarkerConfiguration(chart)) {
       return;
     }
-    var yScale = this.getYScale(chart);
+    const yScale = this.getYScale(chart);
 
-    var lineWidth = this.getOption(chart, 'line', 'width');
-    var color = this.getOption(chart, 'line', 'color');
-    var dashPattern = this.getOption(chart, 'line', 'dashPattern');
-    var snapEnabled = this.getOption(chart, 'snap', 'enabled');
+    const lineWidth = this.getOption(chart, 'line', 'width');
+    const color = this.getOption(chart, 'line', 'color');
+    const dashPattern = this.getOption(chart, 'line', 'dashPattern');
+    const snapEnabled = this.getOption(chart, 'snap', 'enabled');
 
-    var lineX = chart.marker.x;
+    let lineX = chart.marker.x;
 
     if (snapEnabled && chart._active.length) {
       lineX = chart._active[0].element.x;
@@ -194,11 +194,11 @@ export default {
     if (!hasMarkerConfiguration(chart)) {
       return;
     }
-    for (var chartIndex = 0; chartIndex < chart.data.datasets.length; chartIndex++) {
-      var dataset = chart.data.datasets[chartIndex];
-      var meta = chart.getDatasetMeta(chartIndex);
+    for (let chartIndex = 0; chartIndex < chart.data.datasets.length; chartIndex++) {
+      const dataset = chart.data.datasets[chartIndex];
+      const meta = chart.getDatasetMeta(chartIndex);
 
-      var yScale = chart.scales[meta.yAxisID];
+      const yScale = chart.scales[meta.yAxisID];
 
       if (meta.hidden || !dataset.interpolate) {
         continue;
@@ -222,29 +222,29 @@ export default {
   },
 
   interpolateValues: function (chart) {
-    for (var chartIndex = 0; chartIndex < chart.data.datasets.length; chartIndex++) {
-      var dataset = chart.data.datasets[chartIndex];
+    for (let chartIndex = 0; chartIndex < chart.data.datasets.length; chartIndex++) {
+      const dataset = chart.data.datasets[chartIndex];
 
-      var meta = chart.getDatasetMeta(chartIndex);
+      const meta = chart.getDatasetMeta(chartIndex);
 
-      var xScale = chart.scales[meta.xAxisID];
-      var xValue = xScale.getValueForPixel(chart.marker.x);
+      const xScale = chart.scales[meta.xAxisID];
+      const xValue = xScale.getValueForPixel(chart.marker.x);
 
       if (meta.hidden || !dataset.interpolate) {
         continue;
       }
 
-      var data = dataset.data;
-      var index = data.findIndex(function (o) {
+      const data = dataset.data;
+      const index = data.findIndex(function (o) {
         return o.x >= xValue;
       });
-      var prev = data[index - 1];
-      var next = data[index];
+      const prev = data[index - 1];
+      const next = data[index];
 
       if (chart.data.datasets[chartIndex].steppedLine && prev) {
         dataset.interpolatedValue = prev.y;
       } else if (prev && next) {
-        var slope = (next.y - prev.y) / (next.x - prev.x);
+        const slope = (next.y - prev.y) / (next.x - prev.x);
         dataset.interpolatedValue = prev.y + (xValue - prev.x) * slope;
       } else {
         dataset.interpolatedValue = NaN;
