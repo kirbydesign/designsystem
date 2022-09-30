@@ -2,7 +2,6 @@ import { Component, ElementRef, OnInit, Optional, ViewChild } from '@angular/cor
 import { RouterTestingModule } from '@angular/router/testing';
 import { ModalController as IonicModalController } from '@ionic/angular';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
-import { MockComponents } from 'ng-mocks';
 
 import { DesignTokenHelper } from '@kirbydesign/core';
 
@@ -16,6 +15,7 @@ import { ModalCompactWrapperComponent } from '../modal-wrapper/compact/modal-com
 import { ModalConfig, ModalSize } from '../modal-wrapper/config/modal-config';
 import { ModalWrapperComponent } from '../modal-wrapper/modal-wrapper.component';
 
+import { AlertConfig } from '../alert/config/alert-config';
 import { ModalNavigationService } from './modal-navigation.service';
 import { ModalHelper } from './modal.helper';
 import { Modal, Overlay } from './modal.interfaces';
@@ -70,7 +70,7 @@ function getElementVerticalCenter(element: Element): number {
   return elementDOMRect.top + elementDOMRect.height / 2;
 }
 
-describe('ModalHelper', () => {
+fdescribe('ModalHelper', () => {
   let spectator: SpectatorService<ModalHelper>;
   let modalHelper: ModalHelper;
   let ionModalController: IonicModalController;
@@ -87,7 +87,6 @@ describe('ModalHelper', () => {
     service: ModalHelper,
     imports: [TestHelper.ionicModuleForTest, RouterTestingModule],
     providers: [
-      AlertHelper,
       {
         provide: WindowRef,
         useValue: <WindowRef>{ nativeWindow: window },
@@ -108,7 +107,7 @@ describe('ModalHelper', () => {
       ContentOverflowsWithFooterEmbeddedComponent,
       ContentWithNoOverflowEmbeddedComponent,
     ],
-    mocks: [ModalNavigationService],
+    mocks: [ModalNavigationService, AlertHelper],
   });
 
   beforeAll(() => {
@@ -137,14 +136,14 @@ describe('ModalHelper', () => {
     await overlay.dismiss();
   });
 
-  const openOverlay = async (config: ModalConfig) => {
-    overlay = await modalHelper.showModalWindow(config);
+  const openOverlay = async (config: ModalConfig, alertConfig?: AlertConfig) => {
+    overlay = await modalHelper.showModalWindow(config, alertConfig);
     ionModal = await ionModalController.getTop();
     expect(ionModal).toBeTruthy();
   };
 
-  const openModal = async (component?: any, size?: ModalSize) => {
-    await openOverlay({ flavor: 'modal', component, size });
+  const openModal = async (component?: any, size?: ModalSize, alertConfig?: AlertConfig) => {
+    await openOverlay({ flavor: 'modal', component, size }, alertConfig);
   };
 
   const openDrawer = async (
@@ -166,6 +165,30 @@ describe('ModalHelper', () => {
       const input: HTMLInputElement = ionContent.querySelector<HTMLInputElement>('input');
       expect(input).withContext('Input is not defined').toEqual(jasmine.anything());
       expect(document.activeElement).toEqual(input);
+    });
+
+    fdescribe('canDismiss', () => {
+      it('should pass "true" to "canDismiss", if no alertConfig is provided', async () => {
+        await openModal();
+
+        expect(ionModal.canDismiss).toEqual(true);
+      });
+
+      it('should pass a function to "canDismiss", if an alertConfig is provided', async () => {
+        const alertConfig: AlertConfig = {
+          title: 'Alert With Icon',
+          okBtn: 'I agree',
+          cancelBtn: 'Take me back',
+        };
+
+        // Mock 'showAlert' to prevent the test
+        // from timing out, due to nested async
+        // that is not resolved
+        const spy = spyOn(spectator.service, 'showAlert');
+
+        await openModal(null, null, alertConfig);
+        expect(typeof ionModal?.canDismiss).toEqual('function');
+      });
     });
 
     describe(`when drawer can interact with background`, () => {
