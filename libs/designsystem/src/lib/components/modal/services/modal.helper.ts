@@ -55,9 +55,8 @@ export class ModalHelper {
     let canDismiss: boolean | (() => Promise<boolean>) = true;
     if (alertConfig) {
       canDismiss = async () => {
-        const alert = await this.alertHelper.showAlert(alertConfig);
-        const result = await alert.onWillDismiss;
-        return result.data;
+        const canBeDismissed = await this.showAlert(alertConfig);
+        return canBeDismissed;
       };
     }
 
@@ -100,6 +99,12 @@ export class ModalHelper {
 
   public registerPresentingElement(element: HTMLElement) {
     ModalHelper.presentingElement = element;
+  }
+
+  public async showAlert(config: AlertConfig): Promise<boolean> {
+    const alert = await this.alertHelper.showAlert(config);
+    const result = await alert.onWillDismiss;
+    return result.data;
   }
 
   private async getPresentingElement(flavor?: ModalFlavor) {
