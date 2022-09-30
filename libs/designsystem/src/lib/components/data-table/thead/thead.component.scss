@@ -1,0 +1,16 @@
+@use '~@kirbydesign/core/src/scss/utils';
+@use '../data-table.utils';
+
+:host-context([kirbyThead]) {
+  @include utils.slotted([kirbyTr]) {
+    height: 32px;
+    text-align: left;
+
+    @include utils.slotted(th) {
+      @include data-table.header-typgraphy;
+      @include data-table.header-padding;
+      @include data-table.header-hover;
+      @include data-table.border-bottom;
+    }
+  }
+}

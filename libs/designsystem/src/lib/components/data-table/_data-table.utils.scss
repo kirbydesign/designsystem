@@ -1,0 +1,48 @@
+@use '~@kirbydesign/core/src/scss/utils';
+@use '~@kirbydesign/core/src/scss/interaction-state';
+
+@mixin header-typgraphy() {
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 16px;
+  color: utils.get-text-color('semi-dark');
+}
+
+@mixin header-padding() {
+  padding: 8px 16px;
+}
+
+@mixin header-hover() {
+  &:hover {
+    @include interaction-state.apply-hover;
+  }
+}
+
+@mixin body-typgraphy() {
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+  color: utils.get-text-color('black');
+  vertical-align: middle;
+  min-height: 44px;
+}
+
+@mixin body-text-padding() {
+  padding: 0 16px;
+}
+
+@mixin body-action-padding() {
+  padding: 0 8px 0 0;
+}
+
+@mixin body-hover() {
+  &:hover {
+    @include interaction-state.apply-hover;
+
+    background-color: #eee;
+  }
+}
+
+@mixin border-bottom() {
+  border-bottom: 1px solid rgb(28 28 28 / 10%);
+}

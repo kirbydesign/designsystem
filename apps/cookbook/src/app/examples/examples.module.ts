@@ -10,7 +10,7 @@ import { BadgeExampleModule } from './badge-example/badge-example.module';
 import { CardExampleModule } from './card-example/card-example.module';
 import { ChartsExampleModule } from './charts-example/charts-example.module';
 import { CheckboxExampleModule } from './checkbox-example/checkbox-example.module';
-import { DataTableExampleModule } from './data-table-example/data-table-example.module';
+import { DataTableExampleModule } from './data-table-example/table-example.module';
 import { DropdownExampleModule } from './dropdown-example/dropdown-example.module';
 import { COMPONENT_DECLARATIONS } from './examples.common';
 import { ExamplesSharedModule } from './examples.shared.module';

@@ -5,14 +5,14 @@ const config = {
   template: `<table kirbyTable>
   <thead kirbyThead>
     <tr kirbyTr>
-      <th kirbyTh>Hello there,</th>
-      <th kirbyTh>Hello there,</th>
+      <th>Hello there,</th>
+      <th>Hello there,</th>
     </tr>
   </thead>
   <tbody kirbyTbody>
     <tr kirbyTr>
-      <td kirbyTd>General Kenobi</td>
-      <td kirbyTd>General Kenobi</td>
+      <td>General Kenobi</td>
+      <td>General Kenobi</td>
     </tr>
   </tbody>
 </table>`,
