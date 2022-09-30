@@ -70,7 +70,7 @@ function getElementVerticalCenter(element: Element): number {
   return elementDOMRect.top + elementDOMRect.height / 2;
 }
 
-fdescribe('ModalHelper', () => {
+describe('ModalHelper', () => {
   let spectator: SpectatorService<ModalHelper>;
   let modalHelper: ModalHelper;
   let ionModalController: IonicModalController;
@@ -167,7 +167,7 @@ fdescribe('ModalHelper', () => {
       expect(document.activeElement).toEqual(input);
     });
 
-    fdescribe('canDismiss', () => {
+    describe('canDismiss', () => {
       it('should pass "true" to "canDismiss", if no alertConfig is provided', async () => {
         await openModal();
 
@@ -176,14 +176,13 @@ fdescribe('ModalHelper', () => {
 
       it('should pass a function to "canDismiss", if an alertConfig is provided', async () => {
         const alertConfig: AlertConfig = {
-          title: 'Alert With Icon',
-          okBtn: 'I agree',
-          cancelBtn: 'Take me back',
+          title: 'Do you want to close the modal?',
+          okBtn: 'Yes',
+          cancelBtn: 'No',
         };
 
-        // Mock 'showAlert' to prevent the test
-        // from timing out, due to nested async
-        // that is not resolved
+        // Mock 'showAlert' to prevent the test from timing out
+        // due to nested async that is not resolved
         const spy = spyOn(spectator.service, 'showAlert');
 
         await openModal(null, null, alertConfig);
