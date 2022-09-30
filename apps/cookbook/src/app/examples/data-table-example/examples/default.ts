@@ -7,12 +7,14 @@ const config = {
     <tr kirbyTr>
       <th>Hello there,</th>
       <th>Hello there,</th>
+      <th>Han shot</th>
     </tr>
   </thead>
   <tbody kirbyTbody>
     <tr kirbyTr>
       <td>General Kenobi</td>
       <td>General Kenobi</td>
+      <td>First</td>
     </tr>
   </tbody>
 </table>`,
