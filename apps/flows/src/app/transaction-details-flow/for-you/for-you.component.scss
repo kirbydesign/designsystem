@@ -47,11 +47,11 @@ $gap: utils.size('m');
 }
 
 .gutter {
-  padding-inline: 16px;
+  padding-inline: utils.size(s);
 }
 
 .safe-area-inline {
-  padding-inline: 16px;
+  padding-inline: utils.size(s);
 }
 
 .box {
@@ -59,7 +59,7 @@ $gap: utils.size('m');
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 200px;
+  min-height: 12.5rem;
 }
 
 .align-center {
@@ -68,14 +68,14 @@ $gap: utils.size('m');
 
 .inside-kirby-card-grid {
   display: grid;
-  grid-template-columns: 300px 1fr;
-  grid-template-rows: 30px 30px;
-  gap: 5px;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: min-content;
+  gap: utils.size('xxxs');
   justify-items: left;
 }
 
 .item-inside-kirby-card {
-  justify-items: right;
+  justify-self: end;
 }
 
 .spacing {
@@ -86,4 +86,8 @@ $gap: utils.size('m');
   display: flex;
   flex-direction: column;
   gap: utils.size('s');
+}
+
+.no-margin {
+  margin: 0;
 }
