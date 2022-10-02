@@ -183,7 +183,7 @@ describe('ModalHelper', () => {
 
         // Mock 'showAlert' to prevent the test from timing out
         // due to nested async that is not resolved
-        const spy = spyOn(spectator.service, 'showAlert');
+        spectator.service.showAlert = async () => true;
 
         await openModal(null, null, alertConfig);
         expect(typeof ionModal?.canDismiss).toEqual('function');
