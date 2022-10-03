@@ -185,5 +185,6 @@ ion-content {
 .fixed-top-content {
   position: relative;
   background-color: utils.get-color('background-color');
-  margin-bottom: utils.size('s');
+  margin-top: utils.size('s');
+  margin-bottom: utils.size('m');
 }

@@ -66,6 +66,7 @@ $bottom-border-selected: $bottom-border-height solid $border-color-selected;
     position: absolute;
     height: $bottom-border-height;
     width: 100%;
+    border-radius: 1px;
     bottom: 0;
     z-index: 2;
   }

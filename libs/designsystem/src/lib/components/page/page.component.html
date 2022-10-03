@@ -67,8 +67,6 @@
 
   <!-- Fixed top content -->
   <ng-container *ngIf="fixedTopContentTemplate">
-    <div #fixedTopContent></div>
-
     <div slot="fixed" [class.hidden]="fixedTopContentVisible" class="fixed-top-content-container">
       <div class="fixed-top-content">
         <ng-container *ngTemplateOutlet="fixedTopContentTemplate"></ng-container>
@@ -76,6 +74,7 @@
     </div>
 
     <div class="fixed-top-content" [class.hidden]="!fixedTopContentVisible">
+      <div #fixedTopContent></div>
       <ng-container *ngTemplateOutlet="fixedTopContentTemplate"></ng-container>
     </div>
   </ng-container>
