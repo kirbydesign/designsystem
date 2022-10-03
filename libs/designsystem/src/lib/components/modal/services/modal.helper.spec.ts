@@ -180,12 +180,12 @@ describe('ModalHelper', () => {
           okBtn: 'Yes',
           cancelBtn: 'No',
         };
-
         // Mock 'showAlert' to prevent the test from timing out
         // due to nested async that is not resolved
         spectator.service.showAlert = async () => true;
 
         await openModal(null, null, alertConfig);
+
         expect(typeof ionModal?.canDismiss).toEqual('function');
       });
     });
