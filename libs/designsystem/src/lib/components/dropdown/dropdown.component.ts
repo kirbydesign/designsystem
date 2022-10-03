@@ -222,6 +222,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
       // TODO: Is this even necessary? Clicking the native button should give it focus.
       this.buttonElement.nativeElement.focus();
     }
+    // TODO: Maybe all `onToggle()` has to do is call `this.toggle()`?
     this.toggle();
   }
 
@@ -466,6 +467,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     }
   }
 
+  // TODO: This is probably obsolete - host element never gets focus
   @HostListener('focus')
   _onFocus() {
     if (this.disabled) {
@@ -475,6 +477,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
 
   _onPopoverWillHide() {
     this.state = OpenState.closed;
+    // TODO: This should probably focus buttonElement instead
     this.elementRef.nativeElement.focus();
   }
 
@@ -489,8 +492,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     this.close();
   }
 
-  // TODO: This blur event no longer occurs and hence does not close the dropdown
-  // TODO: Can we listen for blur event on the button inside Dropdown?
+  // TODO: Is @HostListener still relevant or should it be removed?
   @HostListener('blur', ['$event'])
   _onBlur(event?: FocusEvent) {
     if (this.usePopover) return;
