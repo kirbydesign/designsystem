@@ -24,7 +24,6 @@ export class MockDropdownComponent {
   @Input() disabled: boolean;
   @Input() hasError: boolean;
   @Input() size: 'sm' | 'md';
-  @Input() tabindex: number;
   @Input() usePopover: boolean;
   @Output() change = new EventEmitter<string | any>();
 }
