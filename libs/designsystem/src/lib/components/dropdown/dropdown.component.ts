@@ -107,17 +107,9 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   @Input()
   size: 'sm' | 'md' = 'md';
 
-  // @Input()
-  // tabindex = 0;
-
   @HostBinding('class.with-popover')
   @Input()
   usePopover = false;
-
-  // @HostBinding('attr.tabindex')
-  // get _tabindex() {
-  //   return this.disabled ? -1 : this.tabindex;
-  // }
 
   // Prevent Ionic blur on scroll
   @HostBinding('attr.no-blur')
