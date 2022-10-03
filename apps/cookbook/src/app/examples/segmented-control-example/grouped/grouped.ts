@@ -10,11 +10,14 @@ const config = {
     [selectedIndex]="selectedIndex"
     (segmentSelect)="onSegmentSelect($event)"
   ></kirby-segmented-control>
-  <kirby-chip
-    [text]="separateSegment.text"
+  <button
+    kirby-button
+    size="sm"
+    [attentionLevel]="selectedSegment === separateSegment ? '2' : '3'"
     (click)="onSegmentSelect(separateSegment)"
-    [isSelected]="selectedSegment === separateSegment">
-  </kirby-chip>
+  >
+    {{ separateSegment.text }}
+  </button>
 </div>
 <kirby-list [items]="filteredListItems">
   <kirby-item *kirbyListItemTemplate="let item">

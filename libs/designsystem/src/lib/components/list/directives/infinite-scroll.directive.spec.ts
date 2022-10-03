@@ -4,7 +4,7 @@ import { SpyObject } from '@ngneat/spectator';
 
 import { WindowRef } from '../../../types/window-ref';
 
-import { InfiniteScrollDirective, INFINITE_SCROLL_DEBOUNCE } from './infinite-scroll.directive';
+import { INFINITE_SCROLL_DEBOUNCE, InfiniteScrollDirective } from './infinite-scroll.directive';
 
 describe('InfiniteScrollDirective', () => {
   let nativeElement: SpyObject<any>;

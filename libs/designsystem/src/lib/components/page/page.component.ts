@@ -234,7 +234,7 @@ export class PageComponent
   private url: string;
   private isActive: boolean;
 
-  private ngOnDestroy$ = new Subject();
+  private ngOnDestroy$: Subject<void> = new Subject<void>();
   private navigationStart$: Observable<RouterEvent> = this.router.events.pipe(
     takeUntil(this.ngOnDestroy$),
     filter((event: RouterEvent) => event instanceof NavigationStart)
@@ -374,7 +374,7 @@ export class PageComponent
     }
 
     const defaultTitleTemplate = this.customTitleTemplate || this.simpleTitleTemplate;
-    // tslint:disable:prettier
+    /* eslint-disable */
     // prettier-ignore
     this.toolbarTitleTemplate = this.customToolbarTitleTemplate
       ? this.customToolbarTitleTemplate

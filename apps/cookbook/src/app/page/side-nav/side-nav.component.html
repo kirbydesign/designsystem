@@ -27,7 +27,7 @@
       *ngIf="filter.length > 0"
       kirby-button
       size="sm"
-      attentionLevel="4"
+      [noDecoration]="true"
       class="clear-button"
       (click)="onFilterChange('')"
     >
@@ -38,6 +38,7 @@
   <kirby-card
     (keydown.ArrowUp)="onLinksArrowUpDown($event)"
     (keydown.ArrowDown)="onLinksArrowUpDown($event)"
+    [hasPadding]="true"
   >
     <ng-container *ngFor="let item of filteredShowcaseRoutes">
       <a

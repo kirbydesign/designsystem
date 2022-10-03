@@ -4,14 +4,13 @@
   "dependencies": {
     "@fontsource/roboto": "4.2.1",
     "@ionic/angular": "6.2.1",
-    "@kirbydesign/core": "0.0.29",
+    "@kirbydesign/core": "0.0.32",
     "chart.js": "3.3.2",
     "chartjs-adapter-date-fns": "^2.0.0",
     "chartjs-plugin-annotation": "^1.0.2",
     "chartjs-plugin-datalabels": "^2.0.0",
     "date-fns-tz": "1.1.4",
     "date-fns": "2.21.1",
-    "highcharts": "8.0.4",
     "include-media": "^1.4.10",
     "inputmask": "5.0.5"
   },

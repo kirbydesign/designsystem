@@ -1,0 +1,25 @@
+@use 'interaction-state.utilities';
+@use 'layer';
+@use '../utils';
+
+@mixin apply-hover($loudness: interaction-state.$default-loudness-hover, $make-lighter: false) {
+  @include utils.hover {
+    @include layer.apply-state($loudness, $make-lighter);
+
+    cursor: pointer;
+    @content;
+  }
+}
+
+@mixin apply-hover-ionic(
+  $loudness: interaction-state.$default-loudness-hover,
+  $make-lighter: false
+) {
+  @include utils.hover {
+    @include layer.apply-state($loudness, $make-lighter);
+
+    --background-hover: var(--state-layer-background-color);
+    --background-hover-opacity: var(--state-layer-opacity);
+    @content;
+  }
+}

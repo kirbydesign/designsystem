@@ -1,6 +1,4 @@
 import { Routes } from '@angular/router';
-import { DropdownExampleComponent } from '~/app/examples/dropdown-example/dropdown-example.component';
-import { PagePullToRefreshExampleComponent } from '~/app/examples/page-example/pull-to-refresh/page-pull-to-refresh-example.component';
 
 import { AccordionExampleComponent } from './accordion-example/accordion-example.component';
 import { ActionSheetExampleComponent } from './action-sheet-example/action-sheet-example.component';
@@ -11,10 +9,8 @@ import { ButtonExampleComponent } from './button-example/button-example.componen
 import { CalendarCardExampleComponent } from './calendar-example/calendar-card-example.component';
 import { CalendarExampleComponent } from './calendar-example/calendar-example.component';
 import { CardExampleComponent } from './card-example/card-example.component';
-import { ChartDeprecatedExampleComponent } from './chart-deprecated-example/chart-deprecated-example.component';
-import { ChartExampleComponent } from './chart-example/chart-example.component';
+import { ChartsExampleComponent } from './charts-example/charts-example.component';
 import { CheckboxExampleComponent } from './checkbox-example/checkbox-example.component';
-import { ChipExampleComponent } from './chip-example/chip-example.component';
 import { EmptyStateExampleComponent } from './empty-state-example/empty-state-example.component';
 import { ExamplesComponent } from './examples.component';
 import { FabSheetExampleComponent } from './fab-sheet-example/fab-sheet-example.component';
@@ -38,7 +34,9 @@ import { ListWithHeaderAndFooterExampleComponent } from './list-example/examples
 import { ListItemsExampleComponent } from './list-example/examples/items';
 import { ListWithSectionsExampleComponent } from './list-example/examples/sections';
 import { ListWithSectionsAndColoredItemsExampleComponent } from './list-example/examples/sections-and-colored-items';
+import { ListWithSectionsAndStandAloneExampleComponent } from './list-example/examples/sections-with-standalone';
 import { ListSelectableItemsExampleComponent } from './list-example/examples/selectable-items';
+import { ListWithStandAloneExampleComponent } from './list-example/examples/stand-alone';
 import { ListExampleComponent } from './list-example/list-example.component';
 import { ListExperimentalExampleComponent } from './list-experimental-example/list-experimental-example.component';
 import { ListLoadOnDemandExampleComponent } from './list-load-on-demand-example/list-load-on-demand-example.component';
@@ -65,7 +63,6 @@ import { SegmentedControlExampleComponent } from './segmented-control-example/se
 import { SlideButtonExampleComponent } from './slide-button-example/slide-button-example.component';
 import { SlidesExampleComponent } from './slides-example/slides-example.component';
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
-import { StockChartDeprecatedExampleComponent } from './stock-chart-deprecated-example/stock-chart-deprecated-example.component';
 import { StylingHtmlListsExampleComponent } from './styling-html-lists-example/styling-html-lists-example.component';
 import { TabExampleComponent } from './tabs-example/tab/tab-example.component';
 import { TabsExampleComponent } from './tabs-example/tabs-example.component';
@@ -73,6 +70,8 @@ import { ToastExampleComponent } from './toast-example/toast-example.component';
 import { ToggleButtonExampleComponent } from './toggle-button-example/toggle-button-example.component';
 import { ToggleExampleComponent } from './toggle-example/toggle-example.component';
 import { VirtualScrollListExampleComponent } from './virtual-scroll-example/virtual-scroll-list-example/virtual-scroll-list-example.component';
+import { PagePullToRefreshExampleComponent } from './page-example/pull-to-refresh/page-pull-to-refresh-example.component';
+import { DropdownExampleComponent } from './dropdown-example/dropdown-example.component';
 
 VirtualScrollListExampleComponent;
 export const routes: Routes = [
@@ -325,6 +324,14 @@ export const routes: Routes = [
         path: 'with-items',
         component: ListItemsExampleComponent,
       },
+      {
+        path: 'with-stand-alone',
+        component: ListWithStandAloneExampleComponent,
+      },
+      {
+        path: 'with-sections-and-stand-alone',
+        component: ListWithSectionsAndStandAloneExampleComponent,
+      },
     ],
   },
   {
@@ -344,16 +351,8 @@ export const routes: Routes = [
     component: ListExperimentalExampleComponent,
   },
   {
-    path: 'chart-deprecated',
-    component: ChartDeprecatedExampleComponent,
-  },
-  {
     path: 'chart',
-    component: ChartExampleComponent,
-  },
-  {
-    path: 'stock-chart-deprecated',
-    component: StockChartDeprecatedExampleComponent,
+    component: ChartsExampleComponent,
   },
   {
     path: 'grid',
@@ -374,10 +373,6 @@ export const routes: Routes = [
   {
     path: 'virtual-scroll-list',
     component: VirtualScrollListExampleComponent,
-  },
-  {
-    path: 'chip',
-    component: ChipExampleComponent,
   },
   {
     path: 'avatar',

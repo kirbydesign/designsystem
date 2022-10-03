@@ -164,7 +164,6 @@ A basic walkthrough is outlined in the structure below:
    |                        #   and `@kirbydesign/designsystem/testing-jest` entry points.
    ├── sass-to-ts           # - CLI and Webpack plugin for extract global variables from SASS to TS
    ├── schematics           # - Angular schematics
-   └── tslint-rules         # - Custom lintiong rules
 ```
 
 ## Scripts
@@ -226,7 +225,7 @@ The Kirby chart components use Highcharts. Note that this is a licensed product.
 
 ## Contributing
 
-If you wish to contribute new features, bug fixes or something third to the project have a look at the [contribution guidelines](./github/CONTRIBUTING.md).
+If you wish to contribute new features, bug fixes or something third to the project have a look at the [contribution guidelines](./.github/CONTRIBUTING.md).
 
 [angular]: https://angular.io
 [jasmine]: https://jasmine.github.io/
