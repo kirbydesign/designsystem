@@ -1,5 +1,5 @@
 import { Component, ElementRef, HostListener, Injector, Input, OnInit } from '@angular/core';
-import { firstValueFrom, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 
 import { WindowRef } from '../../../../types/window-ref';
 import { Modal } from '../../services/modal.interfaces';
@@ -23,8 +23,8 @@ export class ModalCompactWrapperComponent implements Modal, OnInit {
   private ionModalElement: HTMLIonModalElement;
   private readonly ionModalDidPresent = new Subject<void>();
   private readonly ionModalWillDismiss = new Subject<void>();
-  readonly didPresent = firstValueFrom(this.ionModalDidPresent);
-  readonly willClose = firstValueFrom(this.ionModalWillDismiss);
+  readonly didPresent = this.ionModalDidPresent.toPromise();
+  readonly willClose = this.ionModalWillDismiss.toPromise();
 
   constructor(
     private injector: Injector,
