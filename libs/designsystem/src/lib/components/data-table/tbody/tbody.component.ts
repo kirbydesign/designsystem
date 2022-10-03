@@ -7,5 +7,5 @@ import { Component, ElementRef } from '@angular/core';
   styleUrls: ['./tbody.component.scss'],
 })
 export class TbodyComponent {
-  constructor(private element: ElementRef) {}
+  constructor() {}
 }

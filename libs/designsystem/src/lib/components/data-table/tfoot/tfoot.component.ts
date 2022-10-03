@@ -7,5 +7,5 @@ import { Component, ElementRef } from '@angular/core';
   styleUrls: ['./tfoot.component.scss'],
 })
 export class TfootComponent {
-  constructor(private element: ElementRef) {}
+  constructor() {}
 }

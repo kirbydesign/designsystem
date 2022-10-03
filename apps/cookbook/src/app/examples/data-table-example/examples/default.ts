@@ -6,15 +6,17 @@ const config = {
   <thead kirbyThead>
     <tr kirbyTr>
       <th>Hello there,</th>
-      <th>Hello there,</th>
       <th>Han shot</th>
     </tr>
   </thead>
   <tbody kirbyTbody>
     <tr kirbyTr>
       <td>General Kenobi</td>
-      <td>General Kenobi</td>
       <td>First</td>
+    </tr>
+    <tr kirbyTr>
+      <td>You are a bold one.</td>
+      <td>Last</td>
     </tr>
   </tbody>
 </table>`,

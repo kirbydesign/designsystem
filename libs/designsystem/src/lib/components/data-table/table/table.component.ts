@@ -7,5 +7,5 @@ import { Component, ElementRef } from '@angular/core';
   styleUrls: ['./table.component.scss'],
 })
 export class TableComponent {
-  constructor(private element: ElementRef) {}
+  constructor() {}
 }
