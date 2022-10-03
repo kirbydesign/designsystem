@@ -219,7 +219,8 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   onToggle(event: MouseEvent) {
     event.stopPropagation();
     if (!this.isOpen) {
-      this.elementRef.nativeElement.focus();
+      // TODO: Is this even necessary? Clicking the native button should give it focus.
+      this.buttonElement.nativeElement.focus();
     }
     this.toggle();
   }

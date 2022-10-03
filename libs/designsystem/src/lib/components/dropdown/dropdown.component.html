@@ -3,6 +3,7 @@
   [size]="size"
   [attentionLevel]="isOpen ? attentionLevelOpen : attentionLevel"
   (click)="onToggle($event)"
+  (blur)="_onBlur($event)"
   [disabled]="disabled"
   type="button"
 >
