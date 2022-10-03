@@ -13,6 +13,7 @@ export * from './chart';
 export * from './stock-chart-deprecated';
 export * from './calendar';
 export * from './item-sliding';
+export * from './slides';
 
 export { CheckboxComponent } from './checkbox/checkbox.component';
 export { ChipComponent } from './chip/chip.component';
@@ -53,7 +54,7 @@ export * from './shared';
 
 export { SectionHeaderComponent } from './section-header/section-header.component';
 /* prettier-ignore */
-export { SegmentedControlComponent, SegmentedControlMode} from './segmented-control/segmented-control.component'; // See issue #1555 for prettier-ignore explanation
+export { SegmentedControlComponent, SegmentedControlMode } from "./segmented-control/segmented-control.component"; // See issue #1555 for prettier-ignore explanation
 export { SegmentItem } from './segmented-control/segment-item';
 export { SlideButtonComponent } from './slide-button/slide-button.component';
 export * from './slides/slides.component';

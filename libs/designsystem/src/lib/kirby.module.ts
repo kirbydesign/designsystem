@@ -62,7 +62,7 @@ import { ComponentLoaderDirective } from './components/shared/component-loader.d
 import { ResizeObserverFactory } from './components/shared/resize-observer/resize-observer.factory';
 import { ResizeObserverService } from './components/shared/resize-observer/resize-observer.service';
 import { SlideButtonComponent } from './components/slide-button/slide-button.component';
-import { SlideDirective, SlidesComponent } from './components/slides/slides.component';
+import { SlidesModule } from './components/slides/slides.module';
 import { SpinnerModule } from './components/spinner/spinner.module';
 import { StockChartDeprecatedComponent } from './components/stock-chart-deprecated/stock-chart-deprecated.component';
 import { TabsModule } from './components/tabs/tabs.module';
@@ -113,8 +113,6 @@ const exportedDeclarations = [
   LoadingOverlayComponent,
   ProgressCircleComponent,
   FlagComponent,
-  SlidesComponent,
-  SlideDirective,
   AccordionDirective,
   AccordionItemComponent,
   ItemSlidingComponent,
@@ -148,6 +146,7 @@ const exportedModules = [
   ListModule,
   ChartModule,
   SpinnerModule,
+  SlidesModule,
 ];
 
 const allExports = [...exportedModules, ...exportedDeclarations];
@@ -176,6 +175,7 @@ const entryComponents = [
 ];
 
 const ConfigToken = new InjectionToken<any>('USERCONFIG');
+
 export interface KirbyConfig {
   moduleRootRoutePath?: string;
 }

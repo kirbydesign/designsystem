@@ -145,9 +145,7 @@
         }
       },
       "schematics": {
-        "@nrwl/angular:component": {
-          "styleext": "scss"
-        }
+        "@nrwl/angular:component": {}
       },
       "tags": []
     }

@@ -21,7 +21,8 @@
     "@angular/forms": ">=12.0.0",
     "@angular/router": ">=12.0.0",
     "rxjs": ">=6.5.5",
-    "zone.js": ">=0.10.2"
+    "zone.js": ">=0.10.2",
+    "swiper": "8.3.2"
   },
   "exports": {
     "./scss/global-styles": "./scss/_global-styles.scss",

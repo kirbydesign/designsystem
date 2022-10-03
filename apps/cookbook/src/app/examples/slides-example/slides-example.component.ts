@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 
-import { SlidesComponent } from '@kirbydesign/designsystem';
+import { KirbySelectedSlide, KirbySlidesOptions, SlidesComponent } from '@kirbydesign/designsystem';
 
 @Component({
   selector: 'cookbook-slides-example',
@@ -8,9 +8,10 @@ import { SlidesComponent } from '@kirbydesign/designsystem';
 })
 export class SlidesExampleComponent {
   @ViewChild(SlidesComponent) slidesComponent: SlidesComponent;
+
   constructor() {}
 
-  slidesOptions = {
+  slidesOptions: KirbySlidesOptions = {
     spaceBetween: 5,
     centeredSlides: true,
     slidesPerView: 1.15,
@@ -57,9 +58,9 @@ export class SlidesExampleComponent {
   data: any;
   selectedSlideIndex: number;
 
-  getDataFromActiveSlide(activeSlide: { selectedData: any; selectedSlideIndex: number }) {
-    this.data = activeSlide.selectedData;
-    this.selectedSlideIndex = activeSlide.selectedSlideIndex;
+  getDataFromActiveSlide(activeSlide: KirbySelectedSlide) {
+    this.data = activeSlide.slide;
+    this.selectedSlideIndex = activeSlide.index;
 
     console.log('Output: ', activeSlide);
   }
