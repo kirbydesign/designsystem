@@ -1,0 +1,54 @@
+<kirby-page title="For you" defaultBackHref="/">
+  <kirby-page-content>
+    <div class="container">
+      <kirby-card [hasPadding]="true"
+        ><h1>Credits in account</h1>
+        <h2>2.000.000 DKK</h2>
+      </kirby-card>
+      <kirby-card [hasPadding]="true">
+        <h1>Investments - In Total</h1>
+        <h2>400.000 DKK</h2>
+        <div class="inside-kirby-card-grid">
+          <p class="no-margin">Price movement since bought</p>
+          <kirby-flag class="item-inside-kirby-card" themeColor="danger">-500 DKK</kirby-flag>
+          <p class="no-margin">Return this year</p>
+          <kirby-flag class="item-inside-kirby-card" themeColor="success">2000 DKK</kirby-flag>
+        </div>
+      </kirby-card>
+      <kirby-card [hasPadding]="true"
+        ><h2>Overview of spending</h2>
+        <kirby-chart type="column" [data]="ChartData" [labels]="ChartLabels"></kirby-chart>
+      </kirby-card>
+
+      <div class="max-width-container">
+        <div class="grid-container">
+          <div class="grid-item half-at-tablet-up third-at-desktop-up">
+            <article>
+              <kirby-card class="align-center" [hasPadding]="true" (click)="onCardSelect()">
+                <kirby-icon name="recurring"></kirby-icon><br />Fixed payments</kirby-card
+              >
+            </article>
+          </div>
+          <div class="grid-item half-at-tablet-up third-at-desktop-up">
+            <article>
+              <kirby-card
+                class="align-center"
+                [hasPadding]="true"
+                themeColor="secondary"
+                (click)="onCardSelect()"
+                ><kirby-icon name="swap"></kirby-icon><br />Pay and transfer</kirby-card
+              >
+            </article>
+          </div>
+          <div class="grid-item half-at-tablet-up third-at-desktop-up">
+            <article>
+              <kirby-card class="align-center" [hasPadding]="true" (click)="onCardSelect()"
+                ><kirby-icon name="payment-card"></kirby-icon><br />Card</kirby-card
+              >
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </kirby-page-content>
+</kirby-page>

@@ -141,10 +141,10 @@ export class ModalNavigationService {
 
   private getRoutePath(route: Route, parentPath: string[]): string[] {
     const routes: string[] = [];
-    if (!!route.outlet) return routes; // Don't return relative paths for outlet routes
+    if (route.outlet) return routes; // Don't return relative paths for outlet routes
 
     const currentPath = [...parentPath];
-    if (!!route.path) {
+    if (route.path) {
       currentPath.push(route.path);
       routes.push(currentPath.join('/'));
     }
@@ -160,7 +160,7 @@ export class ModalNavigationService {
       return [modalRoutePath];
     }
     const currentPath = [...parentPath];
-    if (!!route.path) {
+    if (route.path) {
       currentPath.push(route.path);
     }
     return ([] as string[]).concat(...this.getModalRoutePaths(route.children, currentPath));
@@ -249,7 +249,7 @@ export class ModalNavigationService {
     let hasRoute = modalRouteSet.has(pathname);
     if (!hasRoute && modalRoutesContainsUrlParams) {
       // Use `for ... of` instead of `forEach` so we can break out of the loop if route is found:
-      for (let route of modalRouteSet) {
+      for (const route of modalRouteSet) {
         const exactMatch = true;
         const routeMatchesPath = this.pathContainsChildRouteWithUrlParams(
           pathname,

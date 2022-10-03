@@ -469,8 +469,8 @@ describe('ChartJSService', () => {
       });
     });
 
-    let chartTypesThatDestructivelyUpdate: ChartType[] = ['bar', 'column'];
-    let chartTypesThatUpdateNormally: ChartType[] = ['line'];
+    const chartTypesThatDestructivelyUpdate: ChartType[] = ['bar', 'column'];
+    const chartTypesThatUpdateNormally: ChartType[] = ['line'];
 
     chartTypesThatDestructivelyUpdate.forEach((chartType) => {
       describe(`if the new type is ChartType.${chartType}`, () => {

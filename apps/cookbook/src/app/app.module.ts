@@ -1,6 +1,6 @@
 import { HashLocationStrategy, LocationStrategy, registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import localeEn from '@angular/common/locales/en-GB';
+import localeData from '@angular/common/locales/en-DK';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -16,7 +16,7 @@ import { FooterComponent } from './page/footer/footer.component';
 import { HeaderComponent } from './page/header/header.component';
 import { SideNavComponent } from './page/side-nav/side-nav.component';
 
-registerLocaleData(localeEn);
+registerLocaleData(localeData);
 
 @NgModule({
   declarations: [
@@ -37,7 +37,7 @@ registerLocaleData(localeEn);
   ],
 
   providers: [
-    { provide: LOCALE_ID, useValue: 'en-GB' },
+    { provide: LOCALE_ID, useValue: 'en-DK' },
     { provide: LocationStrategy, useClass: HashLocationStrategy },
   ],
   bootstrap: [AppComponent],
