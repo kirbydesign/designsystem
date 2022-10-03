@@ -1,8 +1,8 @@
 @use '~@kirbydesign/core/src/scss/utils';
 @use '../data-table.utils';
 
-:host-context([kirbyTbody]) {
-  @include utils.slotted([kirbyTr]) {
+:host-context([kirby-tbody]) {
+  @include utils.slotted([kirby-tr]) {
     height: 44px;
     @include data-table.body-hover;
 

@@ -1,8 +1,8 @@
-import { Component, ElementRef } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'thead[kirbyThead]',
+  selector: 'thead[kirby-thead]',
   template: `<ng-content></ng-content>`,
   styleUrls: ['./thead.component.scss'],
 })

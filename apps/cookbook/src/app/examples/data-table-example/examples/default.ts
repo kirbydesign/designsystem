@@ -2,19 +2,19 @@ import { Component } from '@angular/core';
 
 const config = {
   selector: 'cookbook-data-table-default-example',
-  template: `<table kirbyTable>
-  <thead kirbyThead>
-    <tr kirbyTr>
+  template: `<table kirby-table class="table-layout-fixed">
+  <thead kirby-thead>
+    <tr kirby-tr>
       <th>Hello there,</th>
       <th>Han shot</th>
     </tr>
   </thead>
-  <tbody kirbyTbody>
-    <tr kirbyTr>
+  <tbody kirby-tbody>
+    <tr kirby-tr>
       <td>General Kenobi</td>
       <td>First</td>
     </tr>
-    <tr kirbyTr>
+    <tr kirby-tr>
       <td>You are a bold one.</td>
       <td>Last</td>
     </tr>

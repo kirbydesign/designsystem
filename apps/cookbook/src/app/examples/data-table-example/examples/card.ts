@@ -1,5 +1,3 @@
-import { map } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { table_example_data } from '../table_example_data';
 
@@ -16,9 +14,9 @@ interface TableIF {
 const config = {
   selector: 'cookbook-data-table-card-example',
   template: `<kirby-card>
-  <table kirbyTable>
-    <thead kirbyThead>
-      <tr kirbyTr>
+  <table kirby-table>
+    <thead kirby-thead>
+      <tr kirby-tr>
         <ng-container *ngIf="tableData">
           <th>Name</th>
           <th>Eyes</th>
@@ -30,8 +28,8 @@ const config = {
         </ng-container>
       </tr>
     </thead>
-    <tbody kirbyTbody>
-      <tr kirbyTr *ngFor="let rowData of tableData">
+    <tbody kirby-tbody>
+      <tr kirby-tr *ngFor="let rowData of tableData">
           <td>{{rowData.name}}</td>
           <td>{{rowData.eye_color}}</td>
           <td>{{rowData.gender}}</td>
