@@ -1,6 +1,11 @@
 @use '~@kirbydesign/core/src/scss/utils';
 @use '~@kirbydesign/core/src/scss/interaction-state';
 
+$divider-color: utils.get-color('medium');
+$highlight-color: utils.get-color('light');
+$padding-md: utils.size('s');
+$padding-sm: 8px;
+
 @mixin header-typgraphy() {
   font-weight: normal;
   font-size: 13px;
@@ -9,7 +14,7 @@
 }
 
 @mixin header-padding() {
-  padding: 8px 16px;
+  padding: $padding-sm $padding-md;
 }
 
 @mixin header-hover() {
@@ -28,21 +33,21 @@
 }
 
 @mixin body-text-padding() {
-  padding: 0 16px;
+  padding: 0 $padding-md;
 }
 
 @mixin body-action-padding() {
-  padding: 0 8px 0 0;
+  padding: 0 $padding-sm 0 0;
 }
 
 @mixin body-hover() {
   &:hover {
     @include interaction-state.apply-hover;
 
-    background-color: #eee;
+    background-color: $highlight-color;
   }
 }
 
 @mixin border-bottom() {
-  border-bottom: 1px solid rgb(28 28 28 / 10%);
+  border-bottom: 1px solid $divider-color;
 }
