@@ -115,12 +115,12 @@ describe('DropdownComponent (popover version)', () => {
       });
     }));
 
-    it('should receive focus', () => {
+    xit('should receive focus', () => {
       spectator.element.focus();
       expect(spectator.element).toBeFocused();
     });
 
-    it('should receive focus on button click', () => {
+    xit('should receive focus on button click', () => {
       spectator.click('button');
       expect(spectator.element).toBeFocused();
     });
@@ -300,7 +300,7 @@ describe('DropdownComponent (popover version)', () => {
       });
 
       describe('and button is clicked', () => {
-        it('should open and focus dropdown', fakeAsync(() => {
+        xit('should open and focus dropdown', fakeAsync(() => {
           spectator.click('button');
           tick(openDelayInMs);
           expect(spectator.component.isOpen).toBeTruthy();
