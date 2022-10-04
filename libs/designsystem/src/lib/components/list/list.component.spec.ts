@@ -115,7 +115,7 @@ describe('ListComponent', () => {
       expect(spectator.component._isSectionsEnabled).toBeFalsy();
     });
 
-    xit('should be enabled if a getSectionName function is defined', () => {
+    it('should be enabled if a getSectionName function is defined', () => {
       spectator.setInput({
         items: transactions,
         getSectionName: () => 'this is a test',
@@ -124,7 +124,7 @@ describe('ListComponent', () => {
       expect(spectator.component._isSectionsEnabled).toBeTruthy();
     });
 
-    xit('should have no groupedItems when last item in items input is removed', () => {
+    it('should have no groupedItems when last item in items input is removed', () => {
       spectator.setInput({
         items: [transactions[0]],
         getSectionName: () => 'this is a test',
