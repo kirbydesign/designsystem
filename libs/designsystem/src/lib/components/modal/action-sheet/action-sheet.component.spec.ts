@@ -12,7 +12,6 @@ import { CardComponent } from '../../card/card.component';
 import { InfiniteScrollDirective } from '../../list/directives/infinite-scroll.directive';
 import { ListItemColorDirective } from '../../list/directives/list-item-color.directive';
 import { ListComponent } from '../../list/list.component';
-import { GroupByPipe } from '../../list/pipes/group-by.pipe';
 import { SpinnerComponent } from '../../spinner/spinner.component';
 
 import { ActionSheetComponent } from './action-sheet.component';
@@ -30,7 +29,6 @@ describe('ActionSheetComponent', () => {
         ListComponent,
         CardComponent,
         CardHeaderComponent,
-        GroupByPipe,
         SpinnerComponent,
         InfiniteScrollDirective,
         ButtonComponent,
