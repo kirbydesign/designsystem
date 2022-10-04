@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   ContentChild,
@@ -47,8 +46,10 @@ export class SlideDirective {}
 })
 export class SlidesComponent {
   private _slidesOptions: KirbySlidesOptions;
-
   @ViewChild('swiperSlides', { static: false }) swiper: SwiperComponent;
+
+  @Input() slides: any[];
+  @Output() selectedSlide = new EventEmitter<KirbySelectedSlide>();
 
   @Input()
   set slidesOptions(val: KirbySlidesOptions) {
@@ -58,9 +59,6 @@ export class SlidesComponent {
   get slidesOptions(): KirbySlidesOptions {
     return this.mergeOptions();
   }
-
-  @Input() slides: any[];
-  @Output() selectedSlide = new EventEmitter<KirbySelectedSlide>();
 
   @ContentChild(SlideDirective, { static: true, read: TemplateRef })
   public slideTemplate: TemplateRef<any>;
