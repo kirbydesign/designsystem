@@ -210,11 +210,20 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
 
   onToggle(event: MouseEvent) {
     event.stopPropagation();
+    // TODO: Should this block be removed?
+    //
+    // Keep it:
+    // - "Desktop Safari" 15.6.1 works as intended but it has a glimpse
+    //   of the focus ring on first click
+    // - "Mobile Safari" 16 is broken: dropdown will only close when selecting
+    //   an item
+    //
+    // Remove it:
+    // - Seems to work in both "Desktop" and "Mobile" Safari, but Dropdown will
+    //   not close when you click/tap "outside" it.
     if (!this.isOpen) {
-      // TODO: Is this even necessary? Clicking the native button should give it focus.
       this.buttonElement.nativeElement.focus();
     }
-    // TODO: Maybe all `onToggle()` has to do is call `this.toggle()`?
     this.toggle();
   }
 
