@@ -18,7 +18,7 @@ import { HorizontalDirection, PopoverComponent } from '../popover/popover.compon
 import { DropdownComponent } from './dropdown.component';
 import { OpenState } from './dropdown.types';
 
-fdescribe('DropdownComponent (popover version)', () => {
+describe('DropdownComponent (popover version)', () => {
   const items = [
     { text: 'Item 1', value: 1 },
     { text: 'Item 2', value: 2 },
