@@ -4,12 +4,12 @@
 $divider-color: utils.get-color('medium');
 $highlight-color: utils.get-color('light');
 $padding-md: utils.size('s');
-$padding-sm: 8px;
+$padding-sm: utils.size('xxs');
 
 @mixin header-typgraphy() {
-  font-weight: normal;
-  font-size: 13px;
-  line-height: 16px;
+  font-weight: utils.font-weight('normal');
+  font-size: utils.font-size('xs');
+  line-height: utils.line-height('xs');
   color: utils.get-text-color('semi-dark');
 }
 
@@ -24,12 +24,12 @@ $padding-sm: 8px;
 }
 
 @mixin body-typgraphy() {
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 16px;
+  font-weight: utils.font-weight('normal');
+  font-size: utils.font-size('s');
+  line-height: utils.line-height('xs');
   color: utils.get-text-color('black');
   vertical-align: middle;
-  min-height: 44px;
+  min-height: utils.size('xl');
 }
 
 @mixin body-text-padding() {

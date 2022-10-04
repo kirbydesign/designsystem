@@ -3,14 +3,15 @@
 
 :host-context([kirby-thead]) {
   @include utils.slotted([kirby-tr]) {
-    height: 32px;
+    height: utils.size('l');
     text-align: left;
+
+    @include data-table.border-bottom;
 
     @include utils.slotted(th) {
       @include data-table.header-typgraphy;
       @include data-table.header-padding;
       @include data-table.header-hover;
-      @include data-table.border-bottom;
     }
   }
 }
