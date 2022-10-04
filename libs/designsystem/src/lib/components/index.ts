@@ -63,3 +63,5 @@ export { ToggleComponent } from './toggle/toggle.component';
 
 export { ProgressCircleComponent } from './progress-circle/progress-circle.component';
 export * from './toggle-button';
+
+export * from './data-table';
