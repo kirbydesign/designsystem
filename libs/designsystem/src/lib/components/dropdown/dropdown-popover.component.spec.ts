@@ -18,7 +18,7 @@ import { HorizontalDirection, PopoverComponent } from '../popover/popover.compon
 import { DropdownComponent } from './dropdown.component';
 import { OpenState } from './dropdown.types';
 
-describe('DropdownComponent (popover version)', () => {
+fdescribe('DropdownComponent (popover version)', () => {
   const items = [
     { text: 'Item 1', value: 1 },
     { text: 'Item 2', value: 2 },
@@ -309,43 +309,39 @@ describe('DropdownComponent (popover version)', () => {
       });
 
       describe('and Space key is pressed', () => {
-        beforeEach(fakeAsync(() => {
+        it('should open dropdown', fakeAsync(() => {
           spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'Space');
           tick(openDelayInMs);
-        }));
-        it('should open dropdown', () => {
+
           expect(spectator.component.isOpen).toBeTruthy();
-        });
+        }));
       });
 
       describe('and Enter key is pressed', () => {
-        beforeEach(fakeAsync(() => {
+        it('should open dropdown', fakeAsync(() => {
           spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'Enter');
           tick(openDelayInMs);
-        }));
-        it('should open dropdown', () => {
+
           expect(spectator.component.isOpen).toBeTruthy();
-        });
+        }));
       });
 
       describe('and ArrowDown key is pressed', () => {
-        beforeEach(fakeAsync(() => {
+        it('should open dropdown', fakeAsync(() => {
           spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowDown');
           tick(openDelayInMs);
-        }));
-        it('should open dropdown', () => {
+
           expect(spectator.component.isOpen).toBeTruthy();
-        });
+        }));
       });
 
       describe('and ArrowUp key is pressed', () => {
-        beforeEach(fakeAsync(() => {
+        it('should open dropdown', fakeAsync(() => {
           spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowUp');
           tick(openDelayInMs);
-        }));
-        it('should open dropdown', () => {
+
           expect(spectator.component.isOpen).toBeTruthy();
-        });
+        }));
       });
 
       describe('and first item is selected', () => {
