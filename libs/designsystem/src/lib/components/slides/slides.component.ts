@@ -14,11 +14,11 @@ import {
 import SwiperCore, { A11y, Navigation, Pagination, SwiperOptions } from 'swiper';
 import { SwiperComponent } from 'swiper/angular';
 
-export interface KirbySlidesOptions extends SwiperOptions {}
+export type KirbySlidesOptions = SwiperOptions;
 
 export interface KirbySelectedSlide {
-  slide: any;
-  index: number;
+  selectedData: any;
+  selectedSlideIndex: number;
 }
 
 SwiperCore.use([Pagination, Navigation, A11y]);
@@ -55,15 +55,15 @@ export class SlidesComponent {
     this._slidesOptions = val;
   }
 
+  get slidesOptions(): KirbySlidesOptions {
+    return this.mergeOptions();
+  }
+
   @Input() slides: any[];
   @Output() selectedSlide = new EventEmitter<KirbySelectedSlide>();
 
   @ContentChild(SlideDirective, { static: true, read: TemplateRef })
   public slideTemplate: TemplateRef<any>;
-
-  get slidesOptions(): KirbySlidesOptions {
-    return this.mergeOptions();
-  }
 
   private mergeOptions(): KirbySlidesOptions {
     return {
@@ -84,8 +84,8 @@ export class SlidesComponent {
   onSlideChanged(params: any) {
     const { activeIndex } = params[0];
     this.selectedSlide.emit({
-      slide: this.slides[activeIndex],
-      index: activeIndex,
+      selectedData: this.slides[activeIndex],
+      selectedSlideIndex: activeIndex,
     });
   }
 

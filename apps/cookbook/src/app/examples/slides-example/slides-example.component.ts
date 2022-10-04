@@ -59,8 +59,8 @@ export class SlidesExampleComponent {
   selectedSlideIndex: number;
 
   getDataFromActiveSlide(activeSlide: KirbySelectedSlide) {
-    this.data = activeSlide.slide;
-    this.selectedSlideIndex = activeSlide.index;
+    this.data = activeSlide.selectedData;
+    this.selectedSlideIndex = activeSlide.selectedSlideIndex;
 
     console.log('Output: ', activeSlide);
   }
