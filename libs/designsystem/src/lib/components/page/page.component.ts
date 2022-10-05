@@ -25,19 +25,12 @@ import {
   ViewChild,
 } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router, RouterEvent } from '@angular/router';
-import {
-  IonBackButtonDelegate,
-  IonContent,
-  IonFooter,
-  IonHeader,
-  IonRefresher,
-} from '@ionic/angular';
+import { IonBackButtonDelegate, IonContent, IonFooter, IonHeader } from '@ionic/angular';
 import { Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, filter, takeUntil } from 'rxjs/operators';
 
 import { KirbyAnimation } from '../../animation/kirby-animation';
 import { FitHeadingConfig } from '../../directives/fit-heading/fit-heading.directive';
-import { WindowRef } from '../../types/window-ref';
 import { ModalWrapperComponent } from '../modal/modal-wrapper/modal-wrapper.component';
 import { ModalNavigationService } from '../modal/services/modal-navigation.service';
 import {
@@ -347,10 +340,6 @@ export class PageComponent
     this.pageTitleIntersectionObserverRef.disconnect();
     this.fixedTopContentIntersectionObserverRef.disconnect();
     this.refresherMutationObserverRef.disconnect();
-
-    this.windowRef.nativeWindow.removeEventListener(selectedTabClickEvent, () => {
-      this.content.scrollToTop(KirbyAnimation.Duration.LONG);
-    });
   }
 
   delegateRefreshEvent(event: any): void {
@@ -541,12 +530,7 @@ export class PageComponent
         mutationList.forEach((mutation) => {
           if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
             const className: string[] = (mutation.target as any).className.split(' ');
-
-            if (className.includes('refresher-active')) {
-              this.refresherActive$.next(true);
-            } else {
-              this.refresherActive$.next(false);
-            }
+            this.refresherActive$.next(className.includes('refresher-active'));
           }
         });
       } else {
