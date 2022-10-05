@@ -197,7 +197,7 @@ export class PageComponent
   @Output() refresh = new EventEmitter<PullToRefreshEvent>();
   @Output() backButtonClick = new EventEmitter<Event>();
 
-  @ViewChild(IonContent, { static: true }) private content: IonContent;
+  @ViewChild(IonContent, { static: true }) private content?: IonContent;
   @ViewChild(IonContent, { static: true, read: ElementRef })
   private ionContentElement: ElementRef<HTMLIonContentElement>;
   @ViewChild(IonHeader, { static: true, read: ElementRef })
@@ -277,7 +277,6 @@ export class PageComponent
     private renderer: Renderer2,
     private router: Router,
     private changeDetectorRef: ChangeDetectorRef,
-    private windowRef: WindowRef,
     private modalNavigationService: ModalNavigationService,
     @Optional() @SkipSelf() private tabsComponent: TabsComponent
   ) {}
@@ -328,10 +327,6 @@ export class PageComponent
       if (event.urlAfterRedirects === this.url) {
         this.onEnter();
       }
-    });
-
-    this.windowRef.nativeWindow.addEventListener(selectedTabClickEvent, () => {
-      this.content.scrollToTop(KirbyAnimation.Duration.LONG);
     });
 
     this.interceptBackButtonClicksSetup();
@@ -560,5 +555,12 @@ export class PageComponent
     };
 
     return new MutationObserver(callback);
+  }
+
+  @HostListener(`window:${selectedTabClickEvent}`)
+  _onSelectedTabClick() {
+    if (this.content) {
+      this.content.scrollToTop(KirbyAnimation.Duration.LONG);
+    }
   }
 }
