@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
   template: `<ng-content></ng-content>`,
   styleUrls: ['./tbody.component.scss'],
 })
-export class TableTbodyComponent {
+export class TableBodyComponent {
   constructor() {}
 }
