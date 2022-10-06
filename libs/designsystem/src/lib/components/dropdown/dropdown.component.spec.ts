@@ -20,7 +20,7 @@ import { OpenState } from './dropdown.types';
 })
 class OnPushHostComponent {}
 
-fdescribe('DropdownComponent', () => {
+describe('DropdownComponent', () => {
   const items = [
     { text: 'Item 1', value: 1 },
     { text: 'Item 2', value: 2 },
@@ -175,7 +175,7 @@ fdescribe('DropdownComponent', () => {
           expect(spectator.component.selectedIndex).toEqual(newSelectedIndex);
         });
 
-        fit('should have correct new focused index', () => {
+        it('should have correct new focused index', () => {
           expect(spectator.component.focusedIndex).toEqual(newSelectedIndex);
         });
 
@@ -382,6 +382,11 @@ fdescribe('DropdownComponent', () => {
             spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowUp');
             expect(spectator.component.selectedIndex).toEqual(0);
           });
+
+          it('should not change focused item', () => {
+            spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowUp');
+            expect(spectator.component.focusedIndex).toEqual(0);
+          });
         });
         describe('and Home key is pressed', () => {
           it('should not change selected item', () => {
@@ -408,11 +413,68 @@ fdescribe('DropdownComponent', () => {
             spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowDown');
             expect(spectator.component.selectedIndex).toEqual(lastIndex);
           });
+
+          it('should not change focused item', () => {
+            spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowDown');
+            expect(spectator.component.focusedIndex).toEqual(lastIndex);
+          });
         });
         describe('and End key is pressed', () => {
           it('should not change selected item', () => {
             spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'End');
             expect(spectator.component.selectedIndex).toEqual(lastIndex);
+          });
+        });
+
+        describe('and focused', () => {
+          beforeEach(() => {
+            spectator.element.focus();
+          });
+
+          it('should open the dropdown when ArrowUp key is pressed', fakeAsync(() => {
+            spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowUp');
+            tick(openDelayInMs);
+
+            expect(spectator.component.isOpen).toBeTruthy();
+          }));
+
+          it('should open the dropdown when ArrowDown key is pressed', fakeAsync(() => {
+            spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowDown');
+            tick(openDelayInMs);
+
+            expect(spectator.component.isOpen).toBeTruthy();
+          }));
+
+          it('should highlight the first item in the list, if no item is selected and ArrowDown key is pressed', () => {
+            spectator.setInput('selectedIndex', -1);
+
+            spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowDown');
+
+            expect(spectator.component.focusedIndex).toEqual(0);
+          });
+
+          it('should highlight the last item in the list, if no item is selected and ArrowUp key is pressed', () => {
+            spectator.setInput('selectedIndex', -1);
+
+            spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowUp');
+
+            expect(spectator.component.focusedIndex).toEqual(4);
+          });
+
+          it('should highlight the selected item, when the ArrowUp key is pressed', () => {
+            spectator.setInput('selectedIndex', 2);
+
+            spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowUp');
+
+            expect(spectator.component.focusedIndex).toEqual(2);
+          });
+
+          it('should highlight the selected item, when the ArrowDown key is pressed', () => {
+            spectator.setInput('selectedIndex', 3);
+
+            spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowDown');
+
+            expect(spectator.component.focusedIndex).toEqual(3);
           });
         });
       });
@@ -593,7 +655,7 @@ fdescribe('DropdownComponent', () => {
 
       testMatrix.forEach((keyEvent) => {
         keyEvent.scenario.forEach((scenario) => {
-          describe(`and selected item = ${scenario.selectedIndex} and ${keyEvent.key} key is pressed ${scenario.keypressCount} time(s)`, () => {
+          describe(`and selected item = ${scenario.selectedIndex} and focused item = ${scenario.selectedIndex} and ${keyEvent.key} key is pressed ${scenario.keypressCount} time(s)`, () => {
             it(`should set selected item = ${scenario.expectedIndex}`, () => {
               spectator.setInput('selectedIndex', scenario.selectedIndex);
               for (let counter = 0; counter < scenario.keypressCount; counter++) {
