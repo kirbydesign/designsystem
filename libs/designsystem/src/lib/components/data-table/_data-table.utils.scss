@@ -3,8 +3,8 @@
 
 $divider-color: utils.get-color('medium');
 $highlight-color: utils.get-color('light');
-$padding-md: utils.size('s');
-$padding-sm: utils.size('xxs');
+$padding-horizontal: utils.size('s');
+$padding-vertical: utils.size('xxs');
 
 @mixin header-typgraphy() {
   font-weight: utils.font-weight('normal');
@@ -14,13 +14,7 @@ $padding-sm: utils.size('xxs');
 }
 
 @mixin header-padding() {
-  padding: $padding-sm $padding-md;
-}
-
-@mixin header-hover() {
-  &:hover {
-    @include interaction-state.apply-hover;
-  }
+  padding: $padding-vertical $padding-horizontal;
 }
 
 @mixin body-typgraphy() {
@@ -33,14 +27,14 @@ $padding-sm: utils.size('xxs');
 }
 
 @mixin body-text-padding() {
-  padding: 0 $padding-md;
+  padding: 0 $padding-horizontal;
 }
 
 @mixin body-action-padding() {
-  padding: 0 $padding-sm 0 0;
+  padding: 0 $padding-vertical 0 0;
 }
 
-@mixin body-hover() {
+@mixin hover() {
   &:hover {
     @include interaction-state.apply-hover;
 

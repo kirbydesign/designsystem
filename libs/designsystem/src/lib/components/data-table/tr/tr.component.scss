@@ -1,2 +1,8 @@
 @use '@kirbydesign/core/src/scss/utils';
 @use '../data-table.utils';
+
+:host-context([kirby-tr]) {
+  &.selectable {
+    @include data-table.hover;
+  }
+}

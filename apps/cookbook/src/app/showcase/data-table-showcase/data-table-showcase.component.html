@@ -1,7 +1,13 @@
 <div class="example">
-  <p>A data table is a display of information showed with rows and columns.</p>
+  <p>A data table displays similar information in rows and columns.</p>
   <p>
-    <em> <strong>Note:</strong> For now, Kirby Data Table does not inlcude all functionality. </em>
+    The Kirby Data Table adds styling on top of the built in table HTML element which makes it very
+    flexible as consumers are in complete control of the layout.
+  </p>
+  <p>
+    <strong>Please note:</strong>
+    This also means that Kirby Data Table is not intended for highly complex use cases where large
+    datasets need to be manipulated and rendered efficiently.
   </p>
 
   <h2>Data table with minimal data</h2>
@@ -11,7 +17,8 @@
     ></cookbook-data-table-default-example>
   </cookbook-example-viewer>
 
-  <h2>Data table wrapped with Kirby Card and Accordian</h2>
+  <h2>Data table wrapped with Kirby Card</h2>
+  <p>Data table wrapped with card and with selectable rows.</p>
   <cookbook-example-viewer [html]="dataTableCardExample.template">
     <cookbook-data-table-card-example #dataTableCardExample></cookbook-data-table-card-example>
   </cookbook-example-viewer>

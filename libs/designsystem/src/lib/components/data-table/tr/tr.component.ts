@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -6,6 +6,8 @@ import { Component } from '@angular/core';
   template: ` <ng-content></ng-content> `,
   styleUrls: ['./tr.component.scss'],
 })
-export class TrComponent {
+export class TableTrComponent {
+  @HostBinding('class.selectable') @Input() selectable: boolean = false;
+
   constructor() {}
 }

@@ -4,7 +4,6 @@
 :host-context([kirby-tbody]) {
   @include utils.slotted([kirby-tr]) {
     height: utils.size(xxl);
-    @include data-table.body-hover;
 
     &:not(:last-child) {
       @include data-table.border-bottom;
