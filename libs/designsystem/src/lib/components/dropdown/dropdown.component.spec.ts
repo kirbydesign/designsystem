@@ -20,7 +20,7 @@ import { OpenState } from './dropdown.types';
 })
 class OnPushHostComponent {}
 
-describe('DropdownComponent', () => {
+fdescribe('DropdownComponent', () => {
   const items = [
     { text: 'Item 1', value: 1 },
     { text: 'Item 2', value: 2 },
@@ -173,6 +173,10 @@ describe('DropdownComponent', () => {
 
         it('should have correct new selected index', () => {
           expect(spectator.component.selectedIndex).toEqual(newSelectedIndex);
+        });
+
+        fit('should have correct new focused index', () => {
+          expect(spectator.component.focusedIndex).toEqual(newSelectedIndex);
         });
 
         it('should have correct new selected item', () => {
