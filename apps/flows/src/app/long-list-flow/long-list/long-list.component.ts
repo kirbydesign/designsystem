@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { ListSwipeAction, ToastConfig, ToastController } from '@kirbydesign/designsystem';
 
-import { Transaction } from '../transaction';
-import transactionsData from '../transactions-data.json';
+import { Transaction } from '../../transaction';
+import transactionsData from '../../transactions-data.json';
 
 @Component({
   selector: 'long-list',

@@ -1,0 +1,18 @@
+<kirby-page title="Account">
+  <kirby-page-actions *kirbyPageActions="{ sticky: true }">
+    <button kirby-button [size]="'sm'" [attentionLevel]="'3'" (click)="onCardSelect()">
+      Card
+      <kirby-icon name="payment-card"></kirby-icon>
+    </button>
+  </kirby-page-actions>
+  <kirby-page-content>
+    <div class="container">
+      <kirby-card>
+        <kirby-item (click)="navigateToAccountSub()">Account 1</kirby-item>
+        <kirby-item (click)="navigateToAccountSub()">Account 2</kirby-item>
+        <kirby-item (click)="navigateToAccountSub()">Account 3</kirby-item>
+        <kirby-item (click)="navigateToAccountSub()">Account 4</kirby-item>
+      </kirby-card>
+    </div>
+  </kirby-page-content>
+</kirby-page>

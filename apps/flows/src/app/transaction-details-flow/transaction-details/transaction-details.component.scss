@@ -1,0 +1,5 @@
+@use '~@kirbydesign/core/src/scss/utils';
+
+.spacing {
+  margin-block: utils.size('s');
+}

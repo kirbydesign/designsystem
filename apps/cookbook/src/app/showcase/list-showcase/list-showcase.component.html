@@ -100,3 +100,38 @@
     <cookbook-iphone src="/examples/list/with-sections" showExternalLink="true"></cookbook-iphone>
   </div>
 </div>
+
+<div class="page-example">
+  <div>
+    <h2>List with standalone items:</h2>
+    <p>
+      Stand alone items are enabled by passing the <code>getStandAloneByProperty</code> to the list.
+      <code>getStandAloneByProperty</code> is the name of the property on the item that defines if
+      the item should stand alone. In this example some of the items have
+      <code>isStandAlone: true</code>.
+    </p>
+
+    <cookbook-code-viewer [html]="standAloneExampleTemplate"></cookbook-code-viewer>
+  </div>
+
+  <div>
+    <cookbook-iphone
+      src="/examples/list/with-stand-alone"
+      showExternalLink="true"
+    ></cookbook-iphone>
+  </div>
+</div>
+
+<div class="page-example">
+  <div>
+    <h2>List with sections and standalone items:</h2>
+    <cookbook-code-viewer [html]="sectionsAndStandAloneExampleTemplate"></cookbook-code-viewer>
+  </div>
+
+  <div>
+    <cookbook-iphone
+      src="/examples/list/with-sections-and-stand-alone"
+      showExternalLink="true"
+    ></cookbook-iphone>
+  </div>
+</div>
