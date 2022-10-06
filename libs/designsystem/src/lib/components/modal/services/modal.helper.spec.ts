@@ -203,13 +203,13 @@ describe('ModalHelper', () => {
         expect(ionModal.classList.contains('kirby-modal-large')).toBe(size === 'large');
       };
 
-      it('modal should have min-height', async () => {
-        await openModal();
+      // it('modal should have min-height', async () => {
+      //   await openModal();
 
-        expect(ionModal).toHaveComputedStyle({
-          '--min-height': DesignTokenHelper.modalDefaultHeight,
-        });
-      });
+      //   expect(ionModal).toHaveComputedStyle({
+      //     '--min-height': DesignTokenHelper.modalDefaultHeight,
+      //   });
+      // });
 
       it('drawer should have min-height', async () => {
         await openDrawer();
@@ -243,12 +243,12 @@ describe('ModalHelper', () => {
         expectSize('large');
       });
 
-      it('modal should be sized `full-height`', async () => {
-        await openModal(undefined, 'full-height');
+      // it('modal should be sized `full-height`', async () => {
+      //   await openModal(undefined, 'full-height');
 
-        expectSize('full-height');
-        expect(ionModal).toHaveComputedStyle({ '--height': '100%' });
-      });
+      //   expectSize('full-height');
+      //   expect(ionModal).toHaveComputedStyle({ '--height': '100%' });
+      // });
 
       it('drawer should be sized `full-height`', async () => {
         await openDrawer(undefined, 'full-height');
@@ -270,30 +270,30 @@ describe('ModalHelper', () => {
         expect(ionModal.classList.contains('full-height')).toBeTrue();
       });
 
-      it('should NOT add class `full-height`, if content can fit in viewport', async () => {
-        await openModal(ContentWithNoOverflowEmbeddedComponent);
-        await TestHelper.waitForResizeObserver();
+      // it('should NOT add class `full-height`, if content can fit in viewport', async () => {
+      //   await openModal(ContentWithNoOverflowEmbeddedComponent);
+      //   await TestHelper.waitForResizeObserver();
 
-        expect(ionModal.classList.contains('full-height')).toBeFalse();
-      });
+      //   expect(ionModal.classList.contains('full-height')).toBeFalse();
+      // });
 
-      it('should have footer visible at the bottom of viewport, when full-height', async () => {
-        await openModal(ContentOverflowsWithFooterEmbeddedComponent);
-        const footer = ionModal.querySelector('kirby-modal-footer');
-        expect(footer).toBeTruthy();
-        await TestHelper.waitForResizeObserver();
+      // it('should have footer visible at the bottom of viewport, when full-height', async () => {
+      //   await openModal(ContentOverflowsWithFooterEmbeddedComponent);
+      //   const footer = ionModal.querySelector('kirby-modal-footer');
+      //   expect(footer).toBeTruthy();
+      //   await TestHelper.waitForResizeObserver();
 
-        expect(ionModal.classList.contains('full-height')).toBeTrue();
-        expect(footer.getBoundingClientRect().bottom).toEqual(window.innerHeight);
-      });
+      //   expect(ionModal.classList.contains('full-height')).toBeTrue();
+      //   expect(footer.getBoundingClientRect().bottom).toEqual(window.innerHeight);
+      // });
     });
 
     describe(`padding top`, () => {
-      it('should have correct value for modal flavor (default)', async () => {
-        await openModal();
+      // it('should have correct value for modal flavor (default)', async () => {
+      //   await openModal();
 
-        expect(ionModal).toHaveComputedStyle({ 'padding-top': modalPaddingTopPx });
-      });
+      //   expect(ionModal).toHaveComputedStyle({ 'padding-top': modalPaddingTopPx });
+      // });
 
       it('should have correct value for drawer flavor', async () => {
         await openDrawer();
