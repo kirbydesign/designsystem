@@ -118,18 +118,9 @@ describe('DropdownComponent', () => {
       });
     });
 
-    fit('should receive focus', () => {
-      const button = spectator.query<HTMLButtonElement>('[kirby-button]');
-      button.focus();
-      expect(button).toBeFocused();
-      // spectator.element.focus();
-      // expect(spectator.element).toBeFocused();
-    });
-
-    // TODO: This test is obsolete - should no longer expect Dropdown host element to be focused but the button itself
-    xit('should receive focus on button click', () => {
-      spectator.click('button');
-      expect(spectator.element).toBeFocused();
+    it('should receive focus', () => {
+      buttonElement.focus();
+      expect(buttonElement).toBeFocused();
     });
 
     // Fixes https://github.com/kirbydesign/designsystem/issues/1987
@@ -337,18 +328,19 @@ describe('DropdownComponent', () => {
         expect(icon.name).toEqual('arrow-down');
       });
 
-      xdescribe('and button is clicked', () => {
-        // fit('should open and focus dropdown', fakeAsync(() => {
-        // TODO: Should not test focus - the button that was clicked should have focus
-        // TODO: Consider introducing tests that test focus separately
-        // TODO: Why is this test constructed differently than the following tests?
+      describe('and button is clicked', () => {
         it('should open dropdown', fakeAsync(() => {
           spectator.click('button');
           tick(openDelayInMs);
+
           expect(spectator.component.isOpen).toBeTruthy();
-          // TODO: Fix this expectation or remove
-          // expect(spectator.element).toBeFocused();
         }));
+
+        it('should focus the button', () => {
+          spectator.click('button');
+
+          expect(buttonElement).toBeFocused();
+        });
       });
 
       describe('and Space key is pressed', () => {
