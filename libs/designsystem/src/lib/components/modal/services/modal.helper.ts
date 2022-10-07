@@ -7,6 +7,7 @@ import { ModalCompactWrapperComponent } from '../modal-wrapper/compact/modal-com
 import { ModalConfig, ModalFlavor, ModalSize } from '../modal-wrapper/config/modal-config';
 import { ModalWrapperComponent } from '../modal-wrapper/modal-wrapper.component';
 
+import { PlatformService } from '../../../helpers/platform.service';
 import { ModalAnimationBuilderService } from './modal-animation-builder.service';
 import { Overlay } from './modal.interfaces';
 
@@ -19,7 +20,8 @@ export class ModalHelper {
   constructor(
     private ionicModalController: ModalController,
     private modalAnimationBuilder: ModalAnimationBuilderService,
-    private windowRef: WindowRef
+    private windowRef: WindowRef,
+    private platform: PlatformService
   ) {}
 
   public async showModalWindow(config: ModalConfig): Promise<Overlay> {
@@ -49,11 +51,14 @@ export class ModalHelper {
       this.windowRef.nativeWindow.document.body.classList.add(allow_scroll_class);
     }
 
+    const isMobile = !this.platform.isPhabletOrBigger();
+    const shouldApplyClasses = !isMobile || config.flavor !== 'modal';
+
     const ionModal = await this.ionicModalController.create({
       component: config.flavor === 'compact' ? ModalCompactWrapperComponent : ModalWrapperComponent,
       cssClass: [
-        config.flavor !== 'modal' ? 'kirby-overlay' : null,
-        config.flavor !== 'modal' ? 'kirby-modal' : null,
+        shouldApplyClasses ? 'kirby-overlay' : null,
+        shouldApplyClasses ? 'kirby-modal' : null,
         config.flavor === 'drawer' ? 'kirby-drawer' : null,
         config.flavor === 'compact' ? 'kirby-modal-compact' : null,
         modalSize ? 'kirby-modal-' + modalSize : null,
