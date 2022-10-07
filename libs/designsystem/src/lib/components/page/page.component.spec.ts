@@ -12,7 +12,7 @@ import { FitHeadingDirective } from '../../directives/fit-heading/fit-heading.di
 import { TestHelper } from '../../testing/test-helper';
 import { WindowRef } from '../../types/window-ref';
 import { ModalNavigationService } from '../modal/services/modal-navigation.service';
-import { TabsComponent } from '../tabs';
+import { selectedTabClickEvent, TabsComponent } from '../tabs';
 
 import { PageComponent, PageContentComponent } from './page.component';
 
@@ -297,6 +297,17 @@ describe('PageComponent', () => {
 
     it('should not be available when "refresh" is not subscribed to', () => {
       expect(spectator.query(IonRefresher)).toBeNull();
+    });
+  });
+
+  describe('tab navigation', () => {
+    it('should scroll to top when tab is clicked', () => {
+      const scrollToTopSpy = jasmine.createSpy();
+      (spectator.component as any).content.scrollToTop = scrollToTopSpy;
+
+      window.dispatchEvent(new Event(selectedTabClickEvent));
+
+      expect(scrollToTopSpy).toHaveBeenCalledTimes(1);
     });
   });
 
