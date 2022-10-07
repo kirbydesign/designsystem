@@ -21,6 +21,17 @@
     ></cookbook-dropdown-example-scroll>
   </div>
 </cookbook-example-viewer>
+
+<h3>Disabled</h3>
+<cookbook-example-viewer [html]="disabledExample.template">
+  <div>
+    <cookbook-dropdown-example-disabled
+      [size]="size"
+      #disabledExample
+    ></cookbook-dropdown-example-disabled>
+  </div>
+</cookbook-example-viewer>
+
 <h3>Pre-selected</h3>
 <cookbook-example-viewer [html]="preSelectedExample.template">
   <div>
