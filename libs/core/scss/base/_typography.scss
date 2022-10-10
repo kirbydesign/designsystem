@@ -1,0 +1,106 @@
+@use 'functions';
+
+@import '~@fontsource/roboto/300.css';
+@import '~@fontsource/roboto/400.css';
+@import '~@fontsource/roboto/500.css';
+@import '~@fontsource/roboto/700.css';
+@import '~@fontsource/roboto/900.css';
+
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+p,
+.p {
+  margin: 0;
+  margin-bottom: functions.size('s');
+}
+
+kirby-app .page-title {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 0;
+  }
+}
+
+.kirby-text-display-1 {
+  font-size: functions.font-size('xxxxl');
+  font-weight: functions.font-weight('black');
+  line-height: normal;
+}
+
+.kirby-text-display-2 {
+  font-size: functions.font-size('xxxl');
+  font-weight: functions.font-weight('black');
+  line-height: normal;
+}
+
+.kirby-text-display-3 {
+  font-size: functions.font-size('xxl');
+  font-weight: functions.font-weight('black');
+  line-height: normal;
+}
+
+h1,
+.h1,
+.kirby-text-xlarge {
+  font-size: functions.font-size('xl');
+  font-weight: functions.font-weight('black');
+  line-height: functions.line-height('xl');
+}
+
+h2,
+.h2,
+.kirby-text-large {
+  font-size: functions.font-size('l');
+  font-weight: functions.font-weight('bold');
+  line-height: functions.line-height('l');
+}
+
+h3,
+.h3,
+.kirby-text-medium {
+  font-size: functions.font-size('m');
+  font-weight: functions.font-weight('bold');
+  line-height: functions.line-height('m');
+}
+
+p,
+.p,
+.kirby-text-normal {
+  font-size: functions.font-size('n');
+  line-height: functions.line-height('n');
+}
+
+.kirby-text-small {
+  font-size: functions.font-size('s');
+  line-height: functions.line-height('s');
+}
+
+.kirby-text-small-light {
+  font-size: functions.font-size('s');
+  font-weight: functions.font-weight('light');
+  line-height: functions.line-height('s');
+}
+
+.kirby-text-xsmall {
+  font-size: functions.font-size('xs');
+  line-height: functions.line-height('xs');
+}
+
+.kirby-text-xxsmall {
+  font-size: functions.font-size('xxs');
+  line-height: functions.line-height('xxs');
+}
+
+.kirby-text-bold {
+  font-weight: functions.font-weight('bold');
+}

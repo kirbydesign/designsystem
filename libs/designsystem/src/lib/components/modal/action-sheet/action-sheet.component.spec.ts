@@ -5,16 +5,18 @@ import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/t
 import * as ionic from '@ionic/angular';
 import { MockComponent } from 'ng-mocks';
 
+import { DesignTokenHelper } from '../../..';
 import { ButtonComponent } from '../../button/button.component';
 import { CardHeaderComponent } from '../../card/card-header/card-header.component';
 import { CardComponent } from '../../card/card.component';
 import { InfiniteScrollDirective } from '../../list/directives/infinite-scroll.directive';
 import { ListItemColorDirective } from '../../list/directives/list-item-color.directive';
 import { ListComponent } from '../../list/list.component';
-import { GroupByPipe } from '../../list/pipes/group-by.pipe';
 import { SpinnerComponent } from '../../spinner/spinner.component';
 
 import { ActionSheetComponent } from './action-sheet.component';
+
+const getColor = DesignTokenHelper.getColor;
 
 describe('ActionSheetComponent', () => {
   let component: ActionSheetComponent;
@@ -27,7 +29,6 @@ describe('ActionSheetComponent', () => {
         ListComponent,
         CardComponent,
         CardHeaderComponent,
-        GroupByPipe,
         SpinnerComponent,
         InfiniteScrollDirective,
         ButtonComponent,
@@ -148,6 +149,21 @@ describe('ActionSheetComponent', () => {
       const cancelButton = fixture.debugElement.query(By.css('.cancel-btn'));
       expect(component.cancelButtonText).toEqual(expected);
       expect(cancelButton.nativeElement.innerText).toEqual(expected);
+    });
+  });
+
+  describe('cancel button color', () => {
+    it('should render with correct color', () => {
+      const cancelButton = fixture.debugElement.query(By.css('.cancel-btn'));
+      const element = cancelButton.nativeElement as HTMLElement;
+      expect(element).toHaveComputedStyle({
+        'border-width': '1px',
+        'border-style': 'solid',
+        'border-color': 'transparent',
+        'background-color': getColor('white', 'contrast'),
+        /* prettier-ignore */
+        'color': getColor('white'),
+      });
     });
   });
 });

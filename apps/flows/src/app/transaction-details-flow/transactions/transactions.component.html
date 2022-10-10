@@ -1,0 +1,41 @@
+<kirby-page title="Overview of transactions">
+  <kirby-page-content>
+    <kirby-list
+      [items]="transactions.slice(0, 10)"
+      [getSectionName]="getSectionName"
+      [swipeActions]="swipeActions"
+    >
+      <kirby-section-header *kirbyListSectionHeader="let section">
+        <h3 heading>{{ section }}</h3>
+      </kirby-section-header>
+      <kirby-item
+        *kirbyListItemTemplate="let transaction"
+        [transaction]="transaction"
+        [routerLink]="['../transactions-details', transaction.id]"
+      >
+        <kirby-badge
+          *ngIf="transaction.balanced"
+          slot="outside"
+          [size]="'sm'"
+          [themeColor]="'warning'"
+        ></kirby-badge>
+        <kirby-avatar slot="start">
+          <kirby-badge [themeColor]="'danger'" *ngIf="transaction.amount.amount < -11000"
+            >!</kirby-badge
+          >
+          <kirby-icon [name]="transaction.iconName"></kirby-icon>
+        </kirby-avatar>
+        <kirby-label>
+          <h3>{{ transaction.text }}</h3>
+          <p detail>Category: {{ transaction.category.id }}</p>
+        </kirby-label>
+        <kirby-label slot="end">
+          <kirby-flag themeColor="success">
+            <data>{{ transaction.amount.amount }}</data>
+          </kirby-flag>
+          <p detail>{{ transaction.balance.amount }}</p>
+        </kirby-label>
+      </kirby-item>
+    </kirby-list>
+  </kirby-page-content>
+</kirby-page>

@@ -12,6 +12,7 @@
         [disablePastDates]="disablePastDates"
         [disableFutureDates]="disableFutureDates"
         [setDisabledDates]="setDisabledDates"
+        [setEnabledDates]="setEnabledDates"
         [setMinDate]="setMinDate"
         [setMaxDate]="setMaxDate"
         [setTodayDate]="setTodayDate"
@@ -26,6 +27,7 @@
           <kirby-checkbox [(checked)]="disablePastDates" text="Disable past dates"></kirby-checkbox>
           <kirby-checkbox [(checked)]="disableFutureDates" text="Disable future dates"></kirby-checkbox>
           <kirby-checkbox [(checked)]="setDisabledDates" text="Set disabled dates"></kirby-checkbox>
+          <kirby-checkbox [(checked)]="setEnabledDates" text="Set enabled dates"></kirby-checkbox>
           <kirby-checkbox [(checked)]="setMinDate" text="Set min date ({{minDate | date:'dd-MM-yyyy':(useTimezoneUTC ? 'UTC' : undefined)}})"></kirby-checkbox>
           <kirby-checkbox [(checked)]="setMaxDate" text="Set max date ({{maxDate | date:'dd-MM-yyyy':(useTimezoneUTC ? 'UTC' : undefined)}})"></kirby-checkbox>
           <kirby-checkbox [(checked)]="setTodayDate" text="Set today date ({{todayDate | date:'dd-MM-yyyy':(useTimezoneUTC ? 'UTC' : undefined)}})"></kirby-checkbox>

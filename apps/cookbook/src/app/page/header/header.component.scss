@@ -35,6 +35,7 @@ nav {
 
   ul {
     display: flex;
+    column-gap: utils.size('xxxl');
     list-style: none;
     padding: 0;
     margin: 0;
@@ -42,10 +43,6 @@ nav {
 
     li {
       margin-block-start: 0;
-    }
-
-    a {
-      text-decoration: none;
     }
   }
 }

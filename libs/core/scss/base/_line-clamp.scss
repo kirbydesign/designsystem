@@ -1,0 +1,58 @@
+.kirby-line-clamp {
+  // Needed both for line-clamp support and for fallback solution
+  overflow: hidden;
+
+  // Fallback solution with "explicit ellipsis"
+  // line-height value is expected to be in px unit
+
+  line-height: var(--line-height);
+  max-height: calc(var(--line-clamp) * var(--line-height));
+  position: relative;
+
+  // Ellipsis
+  &::before {
+    content: '…';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background-color: var(--kirby-background-color);
+    line-height: var(--line-height);
+    height: var(--line-height);
+  }
+
+  // Cover ellipsis when number of lines is less than or equal to line-clamp value
+  &::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    width: 1em;
+    height: var(--line-height);
+    line-height: var(--line-height);
+    background-color: var(--kirby-background-color);
+  }
+}
+
+// Non-standard line-clamp solution with wide browser support
+// See https://caniuse.com/mdn-css_properties_-webkit-line-clamp
+@supports (-webkit-line-clamp: 1) {
+  .kirby-line-clamp {
+    /* stylelint-disable value-no-vendor-prefix */
+    display: -webkit-box;
+    -webkit-line-clamp: var(--line-clamp, none);
+    -webkit-box-orient: vertical;
+
+    // Work around weird bug by setting visibility
+    // See https://bugs.webkit.org/show_bug.cgi?id=207013
+    // and https://stackoverflow.com/questions/41995229/webkit-line-clamp-does-not-work-on-chrome-unless-i-make-some-unrelated-css-chan
+    visibility: visible;
+
+    // Reset fallback properties that are not needed when support for line-clamp
+    max-height: initial;
+    position: initial;
+
+    &::before,
+    &::after {
+      display: none;
+    }
+  }
+}

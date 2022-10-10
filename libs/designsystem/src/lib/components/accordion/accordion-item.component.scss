@@ -1,21 +1,29 @@
+@use '~@kirbydesign/core/src/scss/interaction-state';
 @use '~@kirbydesign/core/src/scss/utils';
 
 $divider-color: utils.get-color('medium');
 $padding: utils.size('s');
 
 :host {
+  @include interaction-state.initialize-layer;
+
   display: block;
   border-top: 1px solid $divider-color;
   border-bottom: 1px solid $divider-color;
 }
 
 .header {
+  @include interaction-state.apply-focus-visible-background('xxxs') {
+    outline: 0;
+  }
+  @include interaction-state.apply-hover('xxxs');
+  @include interaction-state.apply-active('xxs');
+
   display: flex;
   align-items: center;
   height: utils.size('xxxl');
   padding-left: $padding;
   padding-right: $padding;
-  cursor: pointer;
   user-select: none;
 }
 
@@ -29,10 +37,23 @@ $padding: utils.size('s');
 
 .content {
   overflow: hidden;
+  cursor: default;
 }
 
 .content-body {
   padding: 0 $padding $padding $padding;
+}
+
+.disabled {
+  pointer-events: none;
+
+  .kirby-icon {
+    color: utils.get-color('semi-dark');
+  }
+
+  .title {
+    color: utils.get-text-color('semi-dark');
+  }
 }
 
 .expanded {

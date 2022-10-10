@@ -29,7 +29,8 @@ export class ModalHelper {
     let currentBackdrop: HTMLIonBackdropElement;
     const topMostModal = await this.ionicModalController.getTop();
     if (topMostModal) {
-      currentBackdrop = topMostModal.querySelector<HTMLIonBackdropElement>('ion-backdrop');
+      currentBackdrop =
+        topMostModal.shadowRoot.querySelector<HTMLIonBackdropElement>('ion-backdrop');
     }
 
     const enterAnimation = this.modalAnimationBuilder.enterAnimation(currentBackdrop);
@@ -55,7 +56,7 @@ export class ModalHelper {
         'kirby-modal',
         config.flavor === 'drawer' ? 'kirby-drawer' : null,
         config.flavor === 'compact' ? 'kirby-modal-compact' : null,
-        'kirby-modal-' + modalSize,
+        modalSize ? 'kirby-modal-' + modalSize : null,
         config.interactWithBackground ? 'interact-with-background' : null,
         ...customCssClasses,
       ],

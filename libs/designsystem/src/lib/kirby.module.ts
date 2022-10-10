@@ -12,8 +12,7 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { CardFooterComponent } from './components/card/card-footer/card-footer.component';
 import { CardHeaderComponent } from './components/card/card-header/card-header.component';
 import { CardComponent } from './components/card/card.component';
-import { ChartDeprecatedComponent } from './components/chart-deprecated/chart-deprecated.component';
-import { ChartModule } from './components/chart/chart.module';
+import { ChartsModule } from './components/charts';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { ChipComponent } from './components/chip/chip.component';
 import { DividerComponent } from './components/divider/divider.component';
@@ -35,7 +34,6 @@ import { ItemGroupComponent } from './components/item-group/item-group.component
 import { ItemSlidingComponent } from './components/item-sliding/item-sliding.component';
 import { ItemModule } from './components/item/item.module';
 import { ListModule } from './components/list/list.module';
-import { GroupByPipe } from './components/list/pipes/group-by.pipe';
 import { LoadingOverlayComponent } from './components/loading-overlay/loading-overlay.component';
 import { LoadingOverlayService } from './components/loading-overlay/loading-overlay.service';
 import { ActionSheetComponent } from './components/modal/action-sheet/action-sheet.component';
@@ -64,7 +62,6 @@ import { ResizeObserverService } from './components/shared/resize-observer/resiz
 import { SlideButtonComponent } from './components/slide-button/slide-button.component';
 import { SlideDirective, SlidesComponent } from './components/slides/slides.component';
 import { SpinnerModule } from './components/spinner/spinner.module';
-import { StockChartDeprecatedComponent } from './components/stock-chart-deprecated/stock-chart-deprecated.component';
 import { TabsModule } from './components/tabs/tabs.module';
 import { ToastController } from './components/toast/services/toast.controller';
 import { ToastHelper } from './components/toast/services/toast.helper';
@@ -82,12 +79,9 @@ const exportedDeclarations = [
   CardHeaderComponent,
   CardFooterComponent,
   ButtonComponent,
-  ChartDeprecatedComponent,
-  StockChartDeprecatedComponent,
   GridComponent,
   ComponentLoaderDirective,
   AvatarComponent,
-  GroupByPipe,
   CalendarComponent,
   CheckboxComponent,
   ActionSheetComponent,
@@ -146,7 +140,7 @@ const exportedModules = [
   ItemModule,
   ToggleButtonModule,
   ListModule,
-  ChartModule,
+  ChartsModule,
   SpinnerModule,
 ];
 

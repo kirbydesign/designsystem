@@ -186,7 +186,7 @@ export class PageComponent
   @Output() refresh = new EventEmitter<PullToRefreshEvent>();
   @Output() backButtonClick = new EventEmitter<Event>();
 
-  @ViewChild(IonContent, { static: true }) private content: IonContent;
+  @ViewChild(IonContent, { static: true }) private content?: IonContent;
   @ViewChild(IonContent, { static: true, read: ElementRef })
   private ionContentElement: ElementRef<HTMLIonContentElement>;
   @ViewChild(IonHeader, { static: true, read: ElementRef })
@@ -231,10 +231,10 @@ export class PageComponent
   fixedActionsTemplate: TemplateRef<any>;
   private pageTitleIntersectionObserverRef: IntersectionObserver =
     this.pageTitleIntersectionObserver();
-  private urls: string[] = [];
-  private hasEntered: boolean;
+  private url: string;
+  private isActive: boolean;
 
-  private ngOnDestroy$ = new Subject();
+  private ngOnDestroy$: Subject<void> = new Subject<void>();
   private navigationStart$: Observable<RouterEvent> = this.router.events.pipe(
     takeUntil(this.ngOnDestroy$),
     filter((event: RouterEvent) => event instanceof NavigationStart)
@@ -250,7 +250,6 @@ export class PageComponent
     private renderer: Renderer2,
     private router: Router,
     private changeDetectorRef: ChangeDetectorRef,
-    private windowRef: WindowRef,
     private modalNavigationService: ModalNavigationService,
     @Optional() @SkipSelf() private tabsComponent: TabsComponent
   ) {}
@@ -273,35 +272,31 @@ export class PageComponent
   }
 
   ngAfterViewInit(): void {
+    // This instance has observed a page enter so register the correct url for this instance
+    this.url = this.router.url;
+    this.onEnter();
+
+    // Watch navigation events for page enter and leave
     this.navigationStart$.subscribe((event: NavigationStart) => {
       if (
-        !this.urls.includes(event.url) &&
-        !this.modalNavigationService.isModalRoute(event.url) &&
-        !this.modalNavigationService.isModalRoute(this.router.url)
+        event.url !== this.url &&
+        !this.modalNavigationService.isModalRoute(this.url) &&
+        !this.modalNavigationService.isModalRoute(event.url)
       ) {
         this.onLeave();
       }
     });
 
     this.navigationEnd$.subscribe((event: NavigationEnd) => {
-      if (this.urls.includes(event.urlAfterRedirects)) {
+      if (event.urlAfterRedirects === this.url) {
         this.onEnter();
       }
-    });
-
-    this.windowRef.nativeWindow.addEventListener(selectedTabClickEvent, () => {
-      this.content.scrollToTop(KirbyAnimation.Duration.LONG);
     });
 
     this.interceptBackButtonClicksSetup();
   }
 
   ngAfterContentChecked(): void {
-    if (!this.urls.includes(this.router.url)) {
-      this.urls.push(this.router.url);
-      this.onEnter();
-    }
-
     this.initializeTitle();
     this.initializeActions();
     this.initializeContent();
@@ -313,9 +308,6 @@ export class PageComponent
     this.ngOnDestroy$.complete();
 
     this.pageTitleIntersectionObserverRef.disconnect();
-    this.windowRef.nativeWindow.removeEventListener(selectedTabClickEvent, () => {
-      this.content.scrollToTop(KirbyAnimation.Duration.LONG);
-    });
   }
 
   delegateRefreshEvent(event: any): void {
@@ -325,8 +317,8 @@ export class PageComponent
   }
 
   private onEnter() {
-    if (this.hasEntered) return;
-    this.hasEntered = true;
+    if (this.isActive) return;
+    this.isActive = true;
 
     this.enter.emit();
     if (this.pageTitle) {
@@ -335,11 +327,13 @@ export class PageComponent
   }
 
   private onLeave() {
+    if (!this.isActive) return;
+    this.isActive = false;
+
     this.leave.emit();
     if (this.pageTitle) {
       this.pageTitleIntersectionObserverRef.unobserve(this.pageTitle.nativeElement);
     }
-    this.hasEntered = false;
 
     if (this.tabBarBottomHidden && this.tabsComponent) {
       this.tabsComponent.tabBarBottomHidden = false;
@@ -372,7 +366,7 @@ export class PageComponent
     }
 
     const defaultTitleTemplate = this.customTitleTemplate || this.simpleTitleTemplate;
-    // tslint:disable:prettier
+    /* eslint-disable */
     // prettier-ignore
     this.toolbarTitleTemplate = this.customToolbarTitleTemplate
       ? this.customToolbarTitleTemplate
@@ -445,5 +439,12 @@ export class PageComponent
   @HostListener('window:keyboardWillHide')
   _onKeyboardWillHide() {
     this.ionContentElement.nativeElement.style.setProperty('--keyboard-offset', '0px');
+  }
+
+  @HostListener(`window:${selectedTabClickEvent}`)
+  _onSelectedTabClick() {
+    if (this.content) {
+      this.content.scrollToTop(KirbyAnimation.Duration.LONG);
+    }
   }
 }

@@ -14,7 +14,7 @@ export enum SegmentedControlMode {
   selector: 'kirby-segmented-control',
   templateUrl: './segmented-control.component.html',
   styleUrls: ['./segmented-control.component.scss'],
-  // tslint:disable-next-line: no-host-metadata-property
+  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: { role: 'group' },
 })
 export class SegmentedControlComponent {
@@ -66,12 +66,15 @@ export class SegmentedControlComponent {
     return this._selectedIndex;
   }
 
-  @Input() set selectedIndex(value: number) {
-    if (value !== this._selectedIndex) {
-      this._selectedIndex = value;
+  @Input() set selectedIndex(index: number) {
+    if (index !== this._selectedIndex) {
+      this._selectedIndex = index;
       this._value = this.items[this.selectedIndex];
+      this.selectedIndexChange.emit(this.selectedIndex);
     }
   }
+
+  @Output() selectedIndexChange = new EventEmitter<number>();
 
   private _value: SegmentItem;
   get value(): SegmentItem {
@@ -102,9 +105,12 @@ export class SegmentedControlComponent {
 
   onSegmentSelect(selectedId: string) {
     const selectedItemIndex = this.items.findIndex((item) => selectedId === item.id);
+
     if (selectedItemIndex !== this.selectedIndex) {
       this.selectedIndex = selectedItemIndex;
-      this.segmentSelect.emit(this.value);
+      setTimeout(() => {
+        this.segmentSelect.emit(this.value);
+      });
     }
   }
 }

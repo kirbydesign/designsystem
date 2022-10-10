@@ -1,3 +1,4 @@
+@use '~@kirbydesign/core/src/scss/interaction-state';
 @use '~@kirbydesign/core/src/scss/utils';
 
 $month-navigator-width: 80px;
@@ -47,17 +48,6 @@ td {
   align-items: center;
   justify-content: space-between;
 
-  button {
-    background-color: transparent;
-    outline: none;
-    border: none;
-    color: inherit;
-    cursor: pointer;
-    height: utils.size('xl');
-    width: utils.size('xl');
-    padding: 0;
-  }
-
   button:disabled {
     opacity: 0.5;
     pointer-events: none;
@@ -99,24 +89,27 @@ td {
   width: $day-width;
   height: $day-width;
   margin: utils.size('xxxs') 0;
-}
-
-.day.selectable,
-.day.selected {
-  cursor: pointer;
+  color: var(--color, #{utils.get-color('black')});
+  background-color: var(--background-color, transparent);
 }
 
 .day.disabled,
 .day:not(.selectable) {
-  color: utils.get-text-color('semi-dark');
+  --color: #{utils.get-text-color('semi-dark')};
 }
 
 .day.today {
+  @include interaction-state.apply-hover;
+  @include interaction-state.apply-active('s');
+
   color: utils.get-color('medium-contrast');
   background-color: utils.get-color('medium');
 }
 
 .day.selected {
+  @include interaction-state.apply-hover('l', $make-lighter: true);
+  @include interaction-state.apply-active('xxxl', $make-lighter: true);
+
   color: utils.get-color('black-contrast');
   background-color: utils.get-color('black');
 }
@@ -126,7 +119,8 @@ td {
   pointer-events: none;
 }
 
-.day.selectable:not(.selected):hover {
-  color: utils.get-color('light-contrast');
-  background-color: utils.get-color('light');
+.contain-state-layer {
+  @include interaction-state.initialize-layer;
+  @include interaction-state.apply-hover;
+  @include interaction-state.apply-active('s');
 }

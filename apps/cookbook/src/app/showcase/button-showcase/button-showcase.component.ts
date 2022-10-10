@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
-
 import exampleHtml from '../../examples/button-example/button-example.component.html?raw';
+import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
   selector: 'cookbook-button-showcase',
@@ -10,7 +9,7 @@ import exampleHtml from '../../examples/button-example/button-example.component.
 })
 export class ButtonShowcaseComponent {
   themeColors = ['light', 'white', 'dark'];
-  themeColor = '';
+  themeColor = 'light';
   exampleHtml = exampleHtml;
   properties: ApiDescriptionProperty[] = [
     {
@@ -32,7 +31,7 @@ export class ButtonShowcaseComponent {
       description:
         'Sets the attention level for the button. Button color will be updated automatically depending on host color.',
       defaultValue: '1',
-      type: ['1', '2', '3', '4'],
+      type: ['1', '2', '3'],
     },
     {
       name: 'isDestructive',

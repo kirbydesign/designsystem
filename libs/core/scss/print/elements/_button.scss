@@ -1,0 +1,6 @@
+@media print {
+  // Buttons do not make much sense on print, but this may be too far reaching
+  button {
+    display: none !important;
+  }
+}

@@ -1,0 +1,38 @@
+<kirby-page title="Items" defaultBackHref="/">
+  <kirby-page-actions *kirbyPageActions="{ sticky: true }">
+    <button kirby-button (click)="onCogSelect()">
+      <kirby-icon name="cog"></kirby-icon>
+    </button>
+    <button kirby-button (click)="onModeSelect()" [attentionLevel]="'1'">
+      {{ this.listMode === 'default' ? 'experimental' : 'default' }}
+    </button>
+  </kirby-page-actions>
+
+  <kirby-page-content>
+    <kirby-list
+      *ngIf="listMode === 'default'; else experimental"
+      [items]="transactions"
+      [getSectionName]="getSectionName"
+      [swipeActions]="swipeActions"
+    >
+      <kirby-section-header *kirbyListSectionHeader="let section">
+        <h2 heading>{{ section }}</h2>
+      </kirby-section-header>
+      <list-item *kirbyListItemTemplate="let transaction" [transaction]="transaction"> </list-item>
+    </kirby-list>
+  </kirby-page-content>
+</kirby-page>
+
+<ng-template #experimental>
+  <kirby-list-experimental *ngFor="let section of transactionSections | keyvalue">
+    <kirby-section-header outside
+      ><h2 heading>{{ section.key }}</h2></kirby-section-header
+    >
+    <kirby-item-sliding
+      *ngFor="let transaction of section.value.transactions"
+      [swipeActions]="swipeActions"
+    >
+      <list-item [transaction]="transaction"></list-item>
+    </kirby-item-sliding>
+  </kirby-list-experimental>
+</ng-template>
