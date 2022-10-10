@@ -1,6 +1,23 @@
 @use '~@kirbydesign/core/src/scss/utils';
 @use '../data-table.utils';
 
+@mixin body-typgraphy() {
+  font-weight: utils.font-weight('normal');
+  font-size: utils.font-size('s');
+  line-height: utils.line-height('xs');
+  color: utils.get-text-color('black');
+  vertical-align: middle;
+  min-height: utils.size('xl');
+}
+
+@mixin body-text-padding() {
+  padding: 0 utils.size('s');
+}
+
+@mixin body-action-padding() {
+  padding: 0 utils.size('xxs') 0 0;
+}
+
 :host-context([kirby-tbody]) {
   @include utils.slotted([kirby-tr]) {
     height: utils.size(xxl);
@@ -10,8 +27,8 @@
     }
 
     @include utils.slotted(td) {
-      @include data-table.body-typgraphy;
-      @include data-table.body-text-padding;
+      @include body-typgraphy;
+      @include body-text-padding;
     }
   }
 }

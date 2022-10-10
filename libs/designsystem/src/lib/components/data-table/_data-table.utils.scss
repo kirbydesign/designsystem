@@ -3,36 +3,6 @@
 
 $divider-color: utils.get-color('medium');
 $highlight-color: utils.get-color('light');
-$padding-horizontal: utils.size('s');
-$padding-vertical: utils.size('xxs');
-
-@mixin header-typgraphy() {
-  font-weight: utils.font-weight('normal');
-  font-size: utils.font-size('xs');
-  line-height: utils.line-height('xs');
-  color: utils.get-text-color('semi-dark');
-}
-
-@mixin header-padding() {
-  padding: $padding-vertical $padding-horizontal;
-}
-
-@mixin body-typgraphy() {
-  font-weight: utils.font-weight('normal');
-  font-size: utils.font-size('s');
-  line-height: utils.line-height('xs');
-  color: utils.get-text-color('black');
-  vertical-align: middle;
-  min-height: utils.size('xl');
-}
-
-@mixin body-text-padding() {
-  padding: 0 $padding-horizontal;
-}
-
-@mixin body-action-padding() {
-  padding: 0 $padding-vertical 0 0;
-}
 
 @mixin hover() {
   &:hover {
