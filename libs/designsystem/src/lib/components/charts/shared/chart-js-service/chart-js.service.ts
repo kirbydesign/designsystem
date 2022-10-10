@@ -116,7 +116,7 @@ export class ChartJSService {
       ? this.annotationsDelegate.createAnnotationPluginOptionsObject(annotations)
       : {};
 
-    let mergedOptions: ChartOptions = mergeDeepAll(
+    const mergedOptions: ChartOptions = mergeDeepAll(
       typeConfigOptions,
       customOptions,
       annotationPluginOptions
@@ -157,7 +157,7 @@ export class ChartJSService {
   }
 
   protected createDatasets(data: ChartDataset[] | number[]): ChartDataset[] {
-    let datasets = isNumberArray(data) ? [{ data }] : data;
+    const datasets = isNumberArray(data) ? [{ data }] : data;
 
     if (this.highlightedElements)
       this.addHighlightedElementsToDatasets(this.highlightedElements, datasets);
@@ -188,7 +188,7 @@ export class ChartJSService {
     });
 
     this.chart.options = options;
-    this.chart.config.type = this.chartConfigService.chartTypeToChartJSType(chartType);
+    //this.chart.config.type = this.chartConfigService.chartTypeToChartJSType(chartType);
   }
 
   private initializeNewChart(canvasElement: HTMLCanvasElement, config: ChartConfiguration) {

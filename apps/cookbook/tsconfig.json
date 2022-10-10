@@ -9,7 +9,8 @@
       "~/environments/*": ["apps/cookbook/src/environments/*"],
       "@kirbydesign/designsystem": ["libs/designsystem/src/lib/index.ts"],
       "@kirbydesign/designsystem/*": ["libs/designsystem/src/lib/*"]
-    }
+    },
+    "target": "es2020"
   },
   "include": [],
   "files": [],
