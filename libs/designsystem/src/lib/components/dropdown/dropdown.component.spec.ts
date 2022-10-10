@@ -604,7 +604,7 @@ describe('DropdownComponent', () => {
 
       describe('and looses focus', () => {
         it('should close dropdown', () => {
-          spectator.dispatchFakeEvent(spectator.element, 'blur');
+          spectator.dispatchFakeEvent(buttonElement, 'blur');
           expect(spectator.component.isOpen).toBeFalsy();
         });
       });
@@ -856,7 +856,7 @@ describe('DropdownComponent', () => {
       it('should invoke callback from registerOnTouched() function on blur', () => {
         const onTouchedSpy = jasmine.createSpy('_onTouched');
         spectator.component.registerOnTouched(onTouchedSpy);
-        spectator.blur();
+        spectator.dispatchFakeEvent(buttonElement, 'blur');
         spectator.detectChanges();
         expect(onTouchedSpy).toHaveBeenCalled();
       });
