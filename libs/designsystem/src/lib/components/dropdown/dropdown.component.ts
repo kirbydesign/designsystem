@@ -468,18 +468,9 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     }
   }
 
-  // TODO: This is probably obsolete - host element never gets focus
-  @HostListener('focus')
-  _onFocus() {
-    if (this.disabled) {
-      this.elementRef.nativeElement.blur();
-    }
-  }
-
   _onPopoverWillHide() {
     this.state = OpenState.closed;
-    // TODO: This should probably focus buttonElement instead
-    this.elementRef.nativeElement.focus();
+    this.buttonElement.nativeElement.focus();
   }
 
   @HostListener('keydown.enter')
@@ -493,8 +484,6 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     this.close();
   }
 
-  // TODO: Is @HostListener still relevant or should it be removed?
-  @HostListener('blur', ['$event'])
   _onBlur(event?: FocusEvent) {
     if (this.usePopover) return;
     this.close();
