@@ -14,10 +14,6 @@
   padding: 0 utils.size('s');
 }
 
-@mixin body-action-padding() {
-  padding: 0 utils.size('xxs') 0 0;
-}
-
 :host-context([kirby-tbody]) {
   @include utils.slotted([kirby-tr]) {
     height: utils.size(xxl);
