@@ -158,6 +158,7 @@ describe('ModalWrapperComponent', () => {
     it('should observe Ionic modal-wrapper intersecting with viewport after ion-modal has been presented', async () => {
       const observeSpy = spyOn(spectator.component['intersectionObserver'], 'observe');
 
+      spectator.component['ionModalDidPresent'].next();
       spectator.component['ionModalDidPresent'].complete();
       await TestHelper.waitForTimeout();
 
@@ -167,6 +168,8 @@ describe('ModalWrapperComponent', () => {
 
     it('should clean up intersection observer of Ionic modal-wrapper on destroy', async () => {
       const disconnectSpy = spyOn(spectator.component['intersectionObserver'], 'disconnect');
+
+      spectator.component['ionModalDidPresent'].next();
       spectator.component['ionModalDidPresent'].complete();
       await TestHelper.waitForTimeout();
 
@@ -314,14 +317,14 @@ describe('ModalWrapperComponent', () => {
     it('should render as a close icon by default', () => {
       spectator.component.config.flavor = 'modal';
       spectator.detectChanges();
-      var el = spectator.query(IconComponent);
+      const el = spectator.query(IconComponent);
       expect(el.name).toBe('close');
     });
 
     it("should render arrow-down when flavor is set to 'drawer'", () => {
       spectator.component.config.flavor = 'drawer';
       spectator.detectChanges();
-      var el = spectator.query(IconComponent);
+      const el = spectator.query(IconComponent);
       expect(el.name).toBe('arrow-down');
     });
   });
@@ -359,7 +362,7 @@ describe('ModalWrapperComponent', () => {
       spectator.component.config.flavor = 'drawer';
       spectator.component.config.drawerSupplementaryAction = {
         iconName: 'qr',
-        action: (_: any) => {},
+        action: () => {},
       };
       spyOn(spectator.component.config.drawerSupplementaryAction, 'action');
 

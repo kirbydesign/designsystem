@@ -40,6 +40,11 @@
                 "output": "./kirby/polyfills"
               },
               {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "assets"
+              },
+              {
                 "glob": "**/*.svg",
                 "input": "libs/designsystem/src/lib/icons/svg",
                 "output": "./assets/kirby/icons/svg"
@@ -130,14 +135,91 @@
             "styles": ["libs/designsystem/src/lib/testing/styles.scss"]
           },
           "outputs": ["coverage/libs/designsystem"]
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/designsystem/**/*.ts", "libs/designsystem/**/*.html"]
+          }
         }
       },
       "schematics": {
-        "@nrwl/angular:component": {
-          "styleext": "scss"
-        }
+        "@nrwl/angular:component": {}
       },
       "tags": []
+    },
+    "flows": {
+      "projectType": "application",
+      "root": "apps/flows",
+      "sourceRoot": "apps/flows/src",
+      "prefix": "flows",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/flows",
+            "index": "apps/flows/src/index.html",
+            "main": "apps/flows/src/main.ts",
+            "polyfills": "apps/flows/src/polyfills.ts",
+            "tsConfig": "apps/flows/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "apps/flows/src/favicon.svg",
+              "apps/flows/src/assets",
+              {
+                "glob": "**/*.svg",
+                "input": "node_modules/@kirbydesign/designsystem/icons/svg",
+                "output": "./assets/kirby/icons/svg"
+              },
+              {
+                "glob": "**/*.svg",
+                "input": "libs/designsystem/src/lib/icons/svg",
+                "output": "./assets/kirby/icons/svg"
+              },
+              {
+                "glob": "**/*.svg",
+                "input": "node_modules/ionicons/dist/ionicons/svg",
+                "output": "./svg"
+              }
+            ],
+            "styles": ["apps/flows/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/flows/src/environments/environment.ts",
+                  "with": "apps/flows/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "flows:build:production"
+            },
+            "development": {
+              "browserTarget": "flows:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        }
+      }
     }
   }
 }

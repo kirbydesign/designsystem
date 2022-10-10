@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { RadioShowcaseComponent } from '~/app/showcase/radio-showcase/radio-showcase.component';
 
 import { ModalRoutePage1ExampleComponent } from '../examples/modal-example/modal-route-example/modal-route-page1-example.component';
 import { ModalRoutePage2ExampleComponent } from '../examples/modal-example/modal-route-example/modal-route-page2-example.component';
@@ -52,6 +51,7 @@ import { ToastShowcaseComponent } from './toast-showcase/toast-showcase.componen
 import { ToggleButtonShowcaseComponent } from './toggle-button-showcase/toggle-button-showcase.component';
 import { ToggleShowcaseComponent } from './toggle-showcase/toggle-showcase.component';
 import { ToolbarShowcaseComponent } from './toolbar-showcase/toolbar-showcase.component';
+import { RadioShowcaseComponent } from './radio-showcase/radio-showcase.component';
 
 export const routes: Routes = [
   {

@@ -186,7 +186,7 @@ export class PageComponent
   @Output() refresh = new EventEmitter<PullToRefreshEvent>();
   @Output() backButtonClick = new EventEmitter<Event>();
 
-  @ViewChild(IonContent, { static: true }) private content: IonContent;
+  @ViewChild(IonContent, { static: true }) private content?: IonContent;
   @ViewChild(IonContent, { static: true, read: ElementRef })
   private ionContentElement: ElementRef<HTMLIonContentElement>;
   @ViewChild(IonHeader, { static: true, read: ElementRef })
@@ -234,7 +234,7 @@ export class PageComponent
   private url: string;
   private isActive: boolean;
 
-  private ngOnDestroy$ = new Subject();
+  private ngOnDestroy$: Subject<void> = new Subject<void>();
   private navigationStart$: Observable<RouterEvent> = this.router.events.pipe(
     takeUntil(this.ngOnDestroy$),
     filter((event: RouterEvent) => event instanceof NavigationStart)
@@ -250,7 +250,6 @@ export class PageComponent
     private renderer: Renderer2,
     private router: Router,
     private changeDetectorRef: ChangeDetectorRef,
-    private windowRef: WindowRef,
     private modalNavigationService: ModalNavigationService,
     @Optional() @SkipSelf() private tabsComponent: TabsComponent
   ) {}
@@ -294,10 +293,6 @@ export class PageComponent
       }
     });
 
-    this.windowRef.nativeWindow.addEventListener(selectedTabClickEvent, () => {
-      this.content.scrollToTop(KirbyAnimation.Duration.LONG);
-    });
-
     this.interceptBackButtonClicksSetup();
   }
 
@@ -313,9 +308,6 @@ export class PageComponent
     this.ngOnDestroy$.complete();
 
     this.pageTitleIntersectionObserverRef.disconnect();
-    this.windowRef.nativeWindow.removeEventListener(selectedTabClickEvent, () => {
-      this.content.scrollToTop(KirbyAnimation.Duration.LONG);
-    });
   }
 
   delegateRefreshEvent(event: any): void {
@@ -374,7 +366,7 @@ export class PageComponent
     }
 
     const defaultTitleTemplate = this.customTitleTemplate || this.simpleTitleTemplate;
-    // tslint:disable:prettier
+    /* eslint-disable */
     // prettier-ignore
     this.toolbarTitleTemplate = this.customToolbarTitleTemplate
       ? this.customToolbarTitleTemplate
@@ -447,5 +439,12 @@ export class PageComponent
   @HostListener('window:keyboardWillHide')
   _onKeyboardWillHide() {
     this.ionContentElement.nativeElement.style.setProperty('--keyboard-offset', '0px');
+  }
+
+  @HostListener(`window:${selectedTabClickEvent}`)
+  _onSelectedTabClick() {
+    if (this.content) {
+      this.content.scrollToTop(KirbyAnimation.Duration.LONG);
+    }
   }
 }

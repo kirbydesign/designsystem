@@ -1,6 +1,10 @@
 @use '~@kirbydesign/core/src/scss/interaction-state';
 @use '~@kirbydesign/core/src/scss/utils';
 
+:host {
+  display: inline-flex;
+}
+
 ion-toggle {
   @include interaction-state.apply-focus-part($part: 'track') {
     // Overflow and contain style needed to make focus ring visible as per ionic docs
