@@ -263,7 +263,7 @@ $button-width: (
     @include interaction-state.apply-hover('xxxs');
     @include interaction-state.apply-active('xxs');
 
-    box-shadow: utils.get-elevation(2);
+    @include interaction-state.apply-focus-visible($shadow: utils.get-elevation(2));
   }
 }
 
