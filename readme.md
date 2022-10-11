@@ -64,13 +64,13 @@ export class AppModule {}
 Include the Kirby global styles in your app, e.g., in `src/styles.scss`:
 
 ```css
-@import '~@kirbydesign/designsystem/scss/global-styles';
+@import '@kirbydesign/designsystem/scss/global-styles';
 ```
 
 In each `.scss` file where you need to access the Sass utility functions from Kirby (e.g. [colors][kirby.cookbook.colors] or [fonts][kirby.cookbook.fonts]) you must import the scss utilities:
 
 ```css
-@import '~@kirbydesign/designsystem/scss/utils';
+@import '@kirbydesign/designsystem/scss/utils';
 ```
 
 #### Generic Print Styles (Optional)
@@ -80,7 +80,7 @@ Kirby also provides a generic print stylesheet. It includes the basics. You most
 Import it into your app, e.g., in `src/styles.scss` or in your local print stylesheet if you have one:
 
 ```css
-@import '~@kirbydesign/designsystem/scss/print';
+@import '@kirbydesign/designsystem/scss/print';
 ```
 
 ### Testing

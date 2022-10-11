@@ -1,5 +1,5 @@
 @use 'avatar-examples.shared.scss';
-@use '~@kirbydesign/core/src/scss/utils';
+@use '@kirbydesign/core/src/scss/utils';
 
 :host {
   padding: utils.size('l');

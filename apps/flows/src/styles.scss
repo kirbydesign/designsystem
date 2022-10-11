@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
-@use '~@kirbydesign/core/src/scss/global-styles';
-@use '~@kirbydesign/core/src/scss/utils';
+@use '@kirbydesign/core/src/scss/global-styles';
+@use '@kirbydesign/core/src/scss/utils';
 
 html {
   background-color: var(--kirby-background-color);

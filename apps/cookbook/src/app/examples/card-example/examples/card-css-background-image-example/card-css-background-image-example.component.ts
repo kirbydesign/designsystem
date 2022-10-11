@@ -3,7 +3,7 @@ import { noop } from 'rxjs';
 
 const config = {
   selector: 'cookbook-card-css-background-image-example',
-  style: `@use '~@kirbydesign/core/src/scss/utils';
+  style: `@use '@kirbydesign/core/src/scss/utils';
 
 kirby-card {
   min-height: 300px;

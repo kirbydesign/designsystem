@@ -1,6 +1,6 @@
 @use '../form-field-inputs.shared';
-@use '~@kirbydesign/core/src/scss/interaction-state';
-@use '~@kirbydesign/core/src/scss/utils';
+@use '@kirbydesign/core/src/scss/interaction-state';
+@use '@kirbydesign/core/src/scss/utils';
 
 :host {
   @include interaction-state.apply-hover {

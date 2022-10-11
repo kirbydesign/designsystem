@@ -1,5 +1,5 @@
-@use '~@kirbydesign/core/src/scss/interaction-state';
-@use '~@kirbydesign/core/src/scss/utils';
+@use '@kirbydesign/core/src/scss/interaction-state';
+@use '@kirbydesign/core/src/scss/utils';
 
 $dropdown-max-height: 8 * utils.$dropdown-item-height;
 $margin-horizontal-total: 2 * utils.size('s');

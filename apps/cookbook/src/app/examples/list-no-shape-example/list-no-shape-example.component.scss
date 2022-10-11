@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '~@kirbydesign/core/src/scss/utils';
+@use '@kirbydesign/core/src/scss/utils';
 
 kirby-card {
   width: map.get(utils.$breakpoints, small);

@@ -1,7 +1,7 @@
 @use 'sass:color';
 @use 'sass:map';
-@use '~@kirbydesign/core/src/scss/interaction-state';
-@use '~@kirbydesign/core/src/scss/utils';
+@use '@kirbydesign/core/src/scss/interaction-state';
+@use '@kirbydesign/core/src/scss/utils';
 
 $radio-icon-padding: utils.size('xxxxs');
 $radio-icon-size: utils.size('m');

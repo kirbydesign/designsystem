@@ -1,6 +1,6 @@
 @use '../form-field-inputs.shared' as shared;
-@use '~@kirbydesign/core/src/scss/interaction-state';
-@use '~@kirbydesign/core/src/scss/utils';
+@use '@kirbydesign/core/src/scss/interaction-state';
+@use '@kirbydesign/core/src/scss/utils';
 
 $padding-block-size-md: shared.$form-field-input-padding * 0.5;
 

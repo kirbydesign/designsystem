@@ -1,6 +1,6 @@
 @use 'sass:map';
-@use '~@kirbydesign/core/src/scss/interaction-state';
-@use '~@kirbydesign/core/src/scss/utils';
+@use '@kirbydesign/core/src/scss/interaction-state';
+@use '@kirbydesign/core/src/scss/utils';
 @use 'item.utils';
 
 :host {

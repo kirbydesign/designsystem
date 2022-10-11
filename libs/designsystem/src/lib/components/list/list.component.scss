@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '~@kirbydesign/core/src/scss/utils';
+@use '@kirbydesign/core/src/scss/utils';
 @use '../item-sliding/item-sliding.shared.scss';
 
 $divider-color: utils.get-color('background-color');
