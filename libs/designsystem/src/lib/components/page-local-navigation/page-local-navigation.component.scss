@@ -3,6 +3,7 @@
 $tab-item-extended-min-width: 102px;
 $tab-item-min-width: 86px;
 $tab-item-text-max-width: 82px;
+$tab-item-text-line-height: 28px;
 $bottom-border-height: 1px;
 $border-color-standard: utils.get-color('medium');
 $border-color-selected: utils.get-color('dark');
@@ -91,7 +92,7 @@ $bottom-border-selected: calc(#{$bottom-border-height} * 2) solid $border-color-
     max-width: $tab-item-text-max-width;
     overflow: hidden;
     text-overflow: ellipsis;
-    line-height: 28px;
+    line-height: $tab-item-text-line-height;
   }
 
   &.extended {
