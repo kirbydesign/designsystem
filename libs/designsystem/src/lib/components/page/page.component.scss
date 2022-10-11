@@ -27,6 +27,7 @@ ion-toolbar {
   --padding-end: #{utils.size('xxxs')};
   --padding-top: 0;
   --padding-bottom: 0;
+  --ion-toolbar-color: #{utils.get-color('black')};
 
   // The toolbar height for iPhone's with a notched display.
   $toolbar-height-notch: utils.size('xxl');
@@ -207,6 +208,7 @@ ion-content {
   --padding-start: var(--page-content-padding-start, #{utils.size('s')});
   --padding-end: var(--page-content-padding-end, #{utils.size('s')});
   --background: #{utils.get-color('background-color')};
+  --color: #{utils.get-color('black')};
 
   .content-inner {
     max-width: var(--page-content-max-width, utils.$page-content-max-width);

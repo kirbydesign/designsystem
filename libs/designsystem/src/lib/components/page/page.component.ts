@@ -190,7 +190,7 @@ export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChec
   @Output() refresh = new EventEmitter<PullToRefreshEvent>();
   @Output() backButtonClick = new EventEmitter<Event>();
 
-  @ViewChild(IonContent, { static: true }) private content: IonContent;
+  @ViewChild(IonContent, { static: true }) private content?: IonContent;
   @ViewChild(IonContent, { static: true, read: ElementRef })
   private ionContentElement: ElementRef<HTMLIonContentElement>;
   @ViewChild(IonHeader, { static: true, read: ElementRef })
@@ -252,7 +252,6 @@ export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChec
   constructor(
     private router: Router,
     private changeDetectorRef: ChangeDetectorRef,
-    private windowRef: WindowRef,
     private modalNavigationService: ModalNavigationService,
     @Optional() @SkipSelf() private tabsComponent: TabsComponent
   ) {}
@@ -303,10 +302,6 @@ export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChec
       }
     });
 
-    this.windowRef.nativeWindow.addEventListener(selectedTabClickEvent, () => {
-      this.content.scrollToTop(KirbyAnimation.Duration.LONG);
-    });
-
     this.interceptBackButtonClicksSetup();
   }
 
@@ -322,9 +317,6 @@ export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChec
     this.ngOnDestroy$.complete();
 
     this.pageTitleIntersectionObserverRef.disconnect();
-    this.windowRef.nativeWindow.removeEventListener(selectedTabClickEvent, () => {
-      this.content.scrollToTop(KirbyAnimation.Duration.LONG);
-    });
   }
 
   delegateRefreshEvent(event: any): void {
@@ -444,5 +436,12 @@ export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChec
   @HostListener('window:keyboardWillHide')
   _onKeyboardWillHide() {
     this.ionContentElement.nativeElement.style.setProperty('--keyboard-offset', '0px');
+  }
+
+  @HostListener(`window:${selectedTabClickEvent}`)
+  _onSelectedTabClick() {
+    if (this.content) {
+      this.content.scrollToTop(KirbyAnimation.Duration.LONG);
+    }
   }
 }
