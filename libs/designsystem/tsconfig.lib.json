@@ -4,7 +4,6 @@
     "outDir": "../../dist/out-tsc",
     "target": "es2020",
     "declaration": true,
-    "inlineSources": true,
     "types": [],
     "lib": ["dom", "es2018"]
   },
