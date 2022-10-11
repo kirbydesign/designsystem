@@ -36,7 +36,7 @@ export function deepCopy<Tp>(tgt: Tp): Tp {
       (cp as any).push(v);
     });
     cp = (cp as any).map((n: any) => deepCopy<any>(n));
-  } else if (typeof tgt === 'object' && tgt !== {}) {
+  } else if (typeof tgt === 'object') {
     cp = { ...(tgt as Tp) } as Tp;
     Object.keys(cp).forEach((k) => {
       (cp as any)[k] = deepCopy<any>((cp as any)[k]);
