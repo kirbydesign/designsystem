@@ -1,14 +1,25 @@
 <div class="example">
-  <p>A data table displays similar information in rows and columns.</p>
   <p>
-    The Kirby Data Table adds styling on top of the built in table HTML element which makes it very
-    flexible as consumers are in complete control of the layout.
+    Data Tables allow the consumer to show large amounts of complex data in tabular form, with rows
+    and columns. Columns can be named through the use of headers.
   </p>
   <p>
-    <strong>Please note:</strong>
-    This also means that Kirby Data Table is not intended for highly complex use cases where large
-    datasets need to be manipulated and rendered efficiently.
+    <i>
+      <strong>Please note:</strong>
+      Kirby Data Table is not a finished component, and it is very modular. This means that it lacks
+      a number of features and all uses should be thoroughly aligned with a designer before use (use
+      the corresponding design guidelines).
+    </i>
   </p>
+  Prominant features that are missing include:
+  <ul>
+    <li>EventEmitters on headers</li>
+    <li>Selectable headers</li>
+    <li>Asc/desc sorting arrows in headers</li>
+    <li>EventEmitters on rows</li>
+    <li>Draggable rows</li>
+    <li>Responsivity (i.e., no scroll/collapsible columns/etc.)</li>
+  </ul>
 
   <h2>Data table with minimal data</h2>
   <cookbook-example-viewer [html]="dataTableDefaultExample.template">
@@ -23,3 +34,14 @@
     <cookbook-data-table-card-example #dataTableCardExample></cookbook-data-table-card-example>
   </cookbook-example-viewer>
 </div>
+
+<h2>API Description</h2>
+<cookbook-api-description-properties
+  [properties]="_apiDescriptionProperties"
+></cookbook-api-description-properties>
+
+<h2>CSS Custom Properties</h2>
+<cookbook-api-description-properties
+  [properties]="_cssCustomProperties"
+  [columns]="_cssCustomPropertiesColumns"
+></cookbook-api-description-properties>
