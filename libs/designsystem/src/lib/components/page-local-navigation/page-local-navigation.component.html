@@ -3,32 +3,32 @@
     <div
       class="tab-item"
       *ngFor="let item of items; let i = index"
-      (click)="onTabChange(i, item)"
-      [ngClass]="i === (selectedIndex$ | async) ? 'selected' : ''"
+      (click)="onTabChange(i)"
+      [ngClass]="i === selectedIndex ? 'selected' : ''"
       [tabIndex]="i + 1"
-      (keydown.enter)="onTabChange(i, item)"
+      (keydown.enter)="onTabChange(i)"
       (keydown.arrowLeft)="focusNext(i - 1)"
       (keydown.arrowRight)="focusNext(i + 1)"
     >
       <div class="tab-item-inner" [class.extended]="!!item.badge">
         <span>{{ item.text }}</span>
-        <ng-container *ngIf="item.badge">
+        <ng-container *ngIf="item.badge; let badge">
           <kirby-badge
             role="text"
-            [attr.aria-label]="item.badge.description"
-            [themeColor]="item.badge.themeColor"
+            [attr.aria-label]="badge.description"
+            [themeColor]="badge.themeColor"
           >
-            <ng-container *ngIf="item.badge.icon; else badgeContent">
+            <ng-container *ngIf="badge.content.name; else badgeTextContent">
               <kirby-icon
-                *ngIf="item.badge.isCustomIcon; else defaultIconName"
-                [customName]="item.badge.icon"
+                *ngIf="badge.content.isCustom; else defaultIconName"
+                [customName]="badge.content.name"
               ></kirby-icon>
               <ng-template #defaultIconName>
-                <kirby-icon [name]="item.badge.icon"></kirby-icon>
+                <kirby-icon [name]="badge.content.name"></kirby-icon>
               </ng-template>
             </ng-container>
-            <ng-template #badgeContent>
-              {{ item.badge.content }}
+            <ng-template #badgeTextContent>
+              {{ badge.content.text }}
             </ng-template>
           </kirby-badge>
         </ng-container>

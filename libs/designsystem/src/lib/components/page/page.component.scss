@@ -169,24 +169,15 @@ ion-content {
 }
 
 /*
- * Fixed top content
+ * Sticky content
  */
-.fixed-top-content-container {
-  width: 100vw;
-
-  .fixed-top-content {
-    padding: 0 utils.size('s');
-    margin: 0 auto;
-  }
+.sticky-content-container {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 
-.hidden {
-  visibility: hidden;
-}
-
-.fixed-top-content {
-  position: relative;
-  background-color: utils.get-color('background-color');
-  margin-top: utils.size('s');
-  margin-bottom: utils.size('m');
+.sticky-content-spacer {
+  height: utils.size('m');
 }

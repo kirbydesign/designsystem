@@ -32,7 +32,6 @@
 
 <ion-content scrollEvents="true" forceOverscroll="false">
   <ion-refresher
-    #ionRefresher
     *ngIf="refresh.observers.length > 0"
     (ionRefresh)="delegateRefreshEvent($event)"
     slot="fixed"
@@ -65,18 +64,12 @@
     </div>
   </div>
 
-  <!-- Fixed top content -->
-  <ng-container *ngIf="fixedTopContentTemplate">
-    <div slot="fixed" [class.hidden]="fixedTopContentVisible" class="fixed-top-content-container">
-      <div class="fixed-top-content">
-        <ng-container *ngTemplateOutlet="fixedTopContentTemplate"></ng-container>
-      </div>
+  <!--  Sticky content -->
+  <ng-container *ngIf="stickyContentTemplate">
+    <div class="sticky-content-container">
+      <ng-container *ngTemplateOutlet="stickyContentTemplate"></ng-container>
     </div>
-
-    <div class="fixed-top-content" [class.hidden]="!fixedTopContentVisible">
-      <div #fixedTopContent></div>
-      <ng-container *ngTemplateOutlet="fixedTopContentTemplate"></ng-container>
-    </div>
+    <div class="sticky-content-spacer"></div>
   </ng-container>
 
   <!-- Content -->

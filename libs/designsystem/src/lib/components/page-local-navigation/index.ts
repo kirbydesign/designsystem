@@ -1,2 +1,2 @@
-export * from './page-local-navigation.component';
-export * from './page-local-navigation-item';
+export { PageLocalNavigationComponent } from './page-local-navigation.component';
+export { LocalNavigationItem } from './page-local-navigation-item';

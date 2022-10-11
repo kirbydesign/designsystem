@@ -8,7 +8,6 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
 import { WindowRef } from '../../types';
 import { LocalNavigationItem } from './page-local-navigation-item';
 
@@ -21,32 +20,10 @@ import { LocalNavigationItem } from './page-local-navigation-item';
 export class PageLocalNavigationComponent implements AfterViewInit {
   private readonly DEBOUNCE_TIME_MS = 250;
 
-  selectedIndex$ = new BehaviorSubject(0);
-  private _selectedIndex = 0;
-  @Input() set selectedIndex(value: number) {
-    if (value > -1 && value !== this._selectedIndex) {
-      this._selectedIndex = value;
-      this.selectedIndex$.next(value);
-    }
-  }
-  get selectedIndex(): number {
-    return this._selectedIndex;
-  }
+  @Input() items: LocalNavigationItem[] = [];
+  @Input() selectedIndex = 0;
 
-  items$ = new BehaviorSubject<LocalNavigationItem[]>([]);
-  private _items: LocalNavigationItem[] = [];
-  @Input() set items(value: LocalNavigationItem[]) {
-    this._items = value;
-    this.items$.next(value ?? []);
-  }
-  get items(): LocalNavigationItem[] {
-    return this._items;
-  }
-
-  /**
-   * Emits the selected item
-   */
-  @Output() itemSelect = new EventEmitter<LocalNavigationItem>();
+  @Output() selectedIndexChange = new EventEmitter<number>();
 
   @ViewChild('tabBar') tabBarElementRef?: ElementRef<HTMLElement>;
   private get tabBarNativeElement(): HTMLElement | undefined {
@@ -65,11 +42,11 @@ export class PageLocalNavigationComponent implements AfterViewInit {
     }, this.DEBOUNCE_TIME_MS);
   }
 
-  onTabChange(index: number, item: LocalNavigationItem): void {
-    if (this.selectedIndex !== index && index > -1) {
+  onTabChange(index: number): void {
+    if (this.selectedIndex !== index) {
       this.selectedIndex = index;
       this.scrollToSelectedTab(index);
-      this.itemSelect.emit(item);
+      this.selectedIndexChange.emit(index);
     }
   }
 
@@ -97,15 +74,13 @@ export class PageLocalNavigationComponent implements AfterViewInit {
       const selectedTabElementWidth = selectedTabElement.getBoundingClientRect().width;
       const selectedTabElementOffsetLeft = selectedTabElement.offsetLeft;
       const tabBarElementWidth = tabBarElement.getBoundingClientRect().width;
-      const tabBarElementOffset = tabBarElement.offsetLeft;
 
       this.window.nativeWindow.requestAnimationFrame(() => {
         tabBarElement?.scrollTo({
           behavior: 'smooth',
           left: Math.max(
             0,
-            selectedTabElementOffsetLeft -
-              (tabBarElementWidth - tabBarElementOffset - selectedTabElementWidth) / 2
+            selectedTabElementOffsetLeft - (tabBarElementWidth - selectedTabElementWidth) / 2
           ),
         });
       });

@@ -1,10 +1,17 @@
 import { ThemeColor } from '@kirbydesign/core';
 
-export type LocalNavigationItemBadge = {
-  icon?: string;
-  content?: string;
+type BadgeIcon = {
+  name: string;
+  isCustom: boolean;
+};
+
+type BadgeText = {
+  text: string;
+};
+
+type ItemBadge = {
+  content: BadgeIcon | BadgeText;
   description?: string;
-  isCustomIcon?: boolean;
   themeColor: ThemeColor;
 };
 
@@ -15,12 +22,7 @@ export interface LocalNavigationItem {
   text: string;
 
   /**
-   * Id of the item. Must be unique!
-   */
-  id: string;
-
-  /**
    * Optional badge to show with the item
    */
-  badge?: LocalNavigationItemBadge;
+  badge?: ItemBadge;
 }
