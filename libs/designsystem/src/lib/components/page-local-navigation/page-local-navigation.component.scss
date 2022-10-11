@@ -3,11 +3,11 @@
 $tab-item-extended-min-width: 102px;
 $tab-item-min-width: 86px;
 $tab-item-text-max-width: 82px;
-$bottom-border-height: 2px;
-$border-color-standard: utils.get-color('semi-light');
+$bottom-border-height: 1px;
+$border-color-standard: utils.get-color('medium');
 $border-color-selected: utils.get-color('dark');
 $bottom-border-standard: $bottom-border-height solid $border-color-standard;
-$bottom-border-selected: $bottom-border-height solid $border-color-selected;
+$bottom-border-selected: calc(#{$bottom-border-height} * 2) solid $border-color-selected;
 
 .tab-bar {
   position: relative;
@@ -21,7 +21,7 @@ $bottom-border-selected: $bottom-border-height solid $border-color-selected;
   overflow-y: hidden;
   overflow-x: scroll;
 
-  /* Important - selected:before will not show otherwise on iOS */
+  /* Important - selected tab state will not show correctly otherwise on iOS */
   -webkit-overflow-scrolling: auto !important;
 
   /* Hide scrollbar for IE, Edge and Firefox */
@@ -58,22 +58,10 @@ $bottom-border-selected: $bottom-border-height solid $border-color-selected;
   cursor: pointer;
   box-sizing: border-box;
   outline: none;
-  padding-bottom: $bottom-border-height;
 
-  &::before {
-    content: '';
-    background-color: $border-color-standard;
-    position: absolute;
-    height: $bottom-border-height;
-    width: 100%;
-    border-radius: 1px;
-    bottom: 0;
+  &.selected {
+    border-bottom: $bottom-border-selected;
     z-index: 2;
-  }
-
-  &.selected::before,
-  &:focus::before {
-    background-color: $border-color-selected;
   }
 
   &.selected,
@@ -86,7 +74,7 @@ $bottom-border-selected: $bottom-border-height solid $border-color-selected;
 .tab-item-inner {
   min-width: $tab-item-min-width;
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: center;
   white-space: nowrap;
   margin: utils.size('xs') utils.size('s');
@@ -103,7 +91,7 @@ $bottom-border-selected: $bottom-border-height solid $border-color-selected;
     max-width: $tab-item-text-max-width;
     overflow: hidden;
     text-overflow: ellipsis;
-    line-height: utils.size('m');
+    line-height: 28px;
   }
 
   &.extended {

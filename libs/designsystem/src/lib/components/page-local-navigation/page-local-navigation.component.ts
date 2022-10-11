@@ -27,7 +27,6 @@ export class PageLocalNavigationComponent implements AfterViewInit {
     if (value > -1 && value !== this._selectedIndex) {
       this._selectedIndex = value;
       this.selectedIndex$.next(value);
-      this.scrollToSelectedTab(value);
     }
   }
   get selectedIndex(): number {
@@ -67,7 +66,7 @@ export class PageLocalNavigationComponent implements AfterViewInit {
   }
 
   onTabChange(index: number, item: LocalNavigationItem): void {
-    if (this.selectedIndex !== index) {
+    if (this.selectedIndex !== index && index > -1) {
       this.selectedIndex = index;
       this.scrollToSelectedTab(index);
       this.itemSelect.emit(item);
@@ -98,13 +97,15 @@ export class PageLocalNavigationComponent implements AfterViewInit {
       const selectedTabElementWidth = selectedTabElement.getBoundingClientRect().width;
       const selectedTabElementOffsetLeft = selectedTabElement.offsetLeft;
       const tabBarElementWidth = tabBarElement.getBoundingClientRect().width;
+      const tabBarElementOffset = tabBarElement.offsetLeft;
 
       this.window.nativeWindow.requestAnimationFrame(() => {
         tabBarElement?.scrollTo({
           behavior: 'smooth',
           left: Math.max(
             0,
-            selectedTabElementOffsetLeft - (tabBarElementWidth - selectedTabElementWidth) / 2
+            selectedTabElementOffsetLeft -
+              (tabBarElementWidth - tabBarElementOffset - selectedTabElementWidth) / 2
           ),
         });
       });
