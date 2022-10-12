@@ -136,13 +136,14 @@ export class FormFieldComponent
 
       const inputBounds = this.input.nativeElement.getBoundingClientRect();
       this.affixElements.forEach((affix) => {
-        const elm = affix.el.nativeElement;
-        const affixBounds = elm.getBoundingClientRect();
+        const affixEl = affix.el.nativeElement;
+        const affixBounds = affixEl.getBoundingClientRect();
         this.renderer.setStyle(affix.el.nativeElement, 'position', 'absolute');
-        this.renderer.setStyle(elm, affix.type === 'prefix' ? 'left' : 'right', '0.5em');
+        this.renderer.setStyle(affixEl, affix.type === 'prefix' ? 'left' : 'right', '0.5em');
+        this.renderer.setStyle(affixEl, 'transform', 'translateY(-50%)');
         const offset = this.input.nativeElement.offsetTop;
         const top = offset + inputBounds.height * 0.5;
-        this.renderer.setStyle(elm, 'top', `${top}px`);
+        this.renderer.setStyle(affixEl, 'top', `${top}px`);
       });
     }
   }
