@@ -2,6 +2,7 @@ import {
   AfterContentChecked,
   AfterContentInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ContentChild,
   ElementRef,
@@ -12,6 +13,7 @@ import {
   OnInit,
   Renderer2,
 } from '@angular/core';
+import { ReplaySubject } from 'rxjs';
 
 import { PlatformService } from '../../helpers/platform.service';
 import { UniqueIdGenerator } from '../../helpers/unique-id-generator.helper';
@@ -31,8 +33,6 @@ import { TextareaComponent } from './textarea/textarea.component';
 export class FormFieldComponent
   implements AfterContentChecked, AfterContentInit, OnInit, OnDestroy
 {
-  @HostBinding('class') inputElementSize: 'lg' | 'md' = 'lg';
-  @HostBinding('class.disabled') inputElementDisabled = false;
   private isRegistered = false;
   private element: HTMLElement;
   private inputElement: HTMLInputElement | HTMLTextAreaElement;
@@ -50,11 +50,14 @@ export class FormFieldComponent
   @ContentChild(InputComponent, { read: ElementRef }) input: ElementRef<HTMLInputElement>;
   @ContentChild(TextareaComponent, { read: ElementRef }) textarea: ElementRef<HTMLTextAreaElement>;
 
+  @HostBinding('class') computedClasses = '';
+
   constructor(
     elementRef: ElementRef<HTMLElement>,
     private platform: PlatformService,
     private renderer: Renderer2,
-    private windowRef: WindowRef
+    private windowRef: WindowRef,
+    private cdr: ChangeDetectorRef
   ) {
     this.element = elementRef.nativeElement;
   }
@@ -82,6 +85,7 @@ export class FormFieldComponent
   onLabelClick() {
     this.radioGroupComponent && this.radioGroupComponent.focus();
   }
+
   public focus() {
     if (!this.inputElement) return;
 
@@ -129,16 +133,13 @@ export class FormFieldComponent
       this.dispatchLoadEvent();
     }
 
-    if (this.inputElement) {
-      setTimeout(() => {
-        const sizeClass = this.inputElement.classList.contains('md') ? 'md' : 'lg';
-        if (sizeClass !== this.inputElementSize) {
-          this.inputElementSize = sizeClass;
-        }
-        if (this.inputElementDisabled !== this.inputElement.disabled) {
-          this.inputElementDisabled = this.inputElement.disabled;
-        }
-      }, 1);
+    // Copy classes from input tag to formfield.
+    if (this.input) {
+      let classes = [];
+      classes.push('with-input');
+      if (this.input.nativeElement.disabled) classes.push('disabled');
+      classes = classes.concat(Array.from(this.input.nativeElement.classList));
+      this.computedClasses = classes.join(' ');
     }
   }
 
