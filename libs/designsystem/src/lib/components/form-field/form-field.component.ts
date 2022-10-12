@@ -4,11 +4,13 @@ import {
   ChangeDetectionStrategy,
   Component,
   ContentChild,
+  ContentChildren,
   ElementRef,
   HostListener,
   Input,
   OnDestroy,
   OnInit,
+  QueryList,
   Renderer2,
 } from '@angular/core';
 
@@ -16,6 +18,7 @@ import { PlatformService } from '../../helpers/platform.service';
 import { UniqueIdGenerator } from '../../helpers/unique-id-generator.helper';
 import { WindowRef } from '../../types/window-ref';
 import { RadioGroupComponent } from '../radio/radio-group/radio-group.component';
+import { AffixDirective } from './directives/affix/affix.directive';
 
 import { InputCounterComponent } from './input-counter/input-counter.component';
 import { InputComponent } from './input/input.component';
@@ -39,6 +42,7 @@ export class FormFieldComponent
   @Input() label: string;
   @Input() message: string;
 
+  @ContentChildren(AffixDirective) affixElements: QueryList<AffixDirective>;
   @ContentChild(InputCounterComponent, { static: false }) counter: InputCounterComponent;
   @ContentChild(RadioGroupComponent) private radioGroupComponent: RadioGroupComponent;
   @ContentChild(RadioGroupComponent, { read: ElementRef })
@@ -125,6 +129,21 @@ export class FormFieldComponent
       // Host is connected to dom and slotted input/textarea is present:
       this.isRegistered = true;
       this.dispatchLoadEvent();
+    }
+    if (this.affixElements.length > 0 && this.input) {
+      // layout suffix and/or prefix and modify input padding
+      // but ignore if there's no input (because there's a textarea or radiobuttons instead)
+
+      const inputBounds = this.input.nativeElement.getBoundingClientRect();
+      this.affixElements.forEach((affix) => {
+        const elm = affix.el.nativeElement;
+        const affixBounds = elm.getBoundingClientRect();
+        this.renderer.setStyle(affix.el.nativeElement, 'position', 'absolute');
+        this.renderer.setStyle(elm, affix.type === 'prefix' ? 'left' : 'right', '0.5em');
+        const offset = this.input.nativeElement.offsetTop;
+        const top = offset + inputBounds.height * 0.5;
+        this.renderer.setStyle(elm, 'top', `${top}px`);
+      });
     }
   }
 
