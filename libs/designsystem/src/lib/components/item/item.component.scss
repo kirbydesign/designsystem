@@ -96,8 +96,6 @@
 // Intented for use with keyboard navigation in <kirby-dropdown>
 :host-context(kirby-dropdown .focused) ion-item {
   --background: #{interaction-state.get-state-color('white', 'xxxs')};
-
-  // TODO: Try using Ionics custom properties (--background-focused etc)
 }
 
 /* clean-css ignore:start */
