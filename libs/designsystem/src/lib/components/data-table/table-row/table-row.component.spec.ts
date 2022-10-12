@@ -1,7 +1,7 @@
 import { MockComponent } from 'ng-mocks';
 import { createHostFactory, Spectator } from '@ngneat/spectator';
-import { TableComponent } from './../table/table.component';
-import { TableRowComponent } from './tr.component';
+import { TableComponent } from '../table/table.component';
+import { TableRowComponent } from './table-row.component';
 
 describe('TableComponent', () => {
   let spectator: Spectator<TableRowComponent>;
