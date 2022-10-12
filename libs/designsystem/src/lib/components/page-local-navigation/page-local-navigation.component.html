@@ -11,7 +11,7 @@
       (keydown.arrowRight)="focusNext(i + 1)"
     >
       <div class="tab-item-inner" [class.extended]="!!item.badge">
-        <span>{{ item.text }}</span>
+        <span [title]="item.text">{{ item.text }}</span>
         <ng-container *ngIf="item.badge; let badge">
           <kirby-badge
             role="text"

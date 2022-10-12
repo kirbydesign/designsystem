@@ -258,6 +258,13 @@ export const routes: Routes = [
           },
         ],
       },
+      {
+        path: 'experimental',
+        loadChildren: () =>
+          import('./experimental-examples/experimental-examples.module').then(
+            (m) => m.ExperimentalExamplesModule
+          ),
+      },
     ],
   },
   {

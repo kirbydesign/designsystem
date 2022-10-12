@@ -1,14 +1,9 @@
 @use '~@kirbydesign/core/src/scss/utils';
 
-$tab-item-extended-min-width: 102px;
-$tab-item-min-width: 86px;
-$tab-item-text-max-width: 82px;
-$tab-item-text-line-height: 28px;
+$tab-item-text-max-width: 100px;
 $bottom-border-height: 1px;
 $border-color-standard: utils.get-color('medium');
 $border-color-selected: utils.get-color('dark');
-$bottom-border-standard: $bottom-border-height solid $border-color-standard;
-$bottom-border-selected: calc(#{$bottom-border-height} * 2) solid $border-color-selected;
 
 .tab-bar {
   position: relative;
@@ -22,7 +17,7 @@ $bottom-border-selected: calc(#{$bottom-border-height} * 2) solid $border-color-
   overflow-y: hidden;
   overflow-x: scroll;
 
-  /* Important - selected tab state will not show correctly otherwise on iOS */
+  /* Important - Ensures correct rendering of selected tab state and tab bar bottom divider on iOS */
   -webkit-overflow-scrolling: auto !important;
 
   /* Hide scrollbar for IE, Edge and Firefox */
@@ -59,9 +54,16 @@ $bottom-border-selected: calc(#{$bottom-border-height} * 2) solid $border-color-
   cursor: pointer;
   box-sizing: border-box;
   outline: none;
+  padding-bottom: calc(#{$bottom-border-height} * 2);
 
-  &.selected {
-    border-bottom: $bottom-border-selected;
+  &.selected::before {
+    content: '';
+    width: 100%;
+    background-color: $border-color-selected;
+    position: absolute;
+    border-radius: 1px;
+    height: calc(#{$bottom-border-height} * 2);
+    bottom: 0;
     z-index: 2;
   }
 
@@ -73,12 +75,11 @@ $bottom-border-selected: calc(#{$bottom-border-height} * 2) solid $border-color-
 }
 
 .tab-item-inner {
-  min-width: $tab-item-min-width;
   display: flex;
   align-items: center;
   justify-content: center;
   white-space: nowrap;
-  margin: utils.size('xs') utils.size('s');
+  margin: utils.size('s');
 
   /* Disable text selection on tab items */
   -webkit-touch-callout: none; /* iOS Safari */
@@ -92,10 +93,15 @@ $bottom-border-selected: calc(#{$bottom-border-height} * 2) solid $border-color-
     max-width: $tab-item-text-max-width;
     overflow: hidden;
     text-overflow: ellipsis;
-    line-height: $tab-item-text-line-height;
   }
 
-  &.extended {
-    min-width: $tab-item-extended-min-width;
+  /* Ensures static container size when changing from bold to normal font-weight */
+  & > span::before {
+    display: block;
+    content: attr(title);
+    font-weight: bold;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
   }
 }
