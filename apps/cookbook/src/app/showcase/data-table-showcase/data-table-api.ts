@@ -28,7 +28,7 @@ export const dataTableCssCustomProperties: {
   },
   apiDescription: [
     {
-      name: '--kirby-selectable-th',
+      name: 'kirby-selectable-th',
       description: 'Sets th to selectable - curser pointer',
     },
   ],
