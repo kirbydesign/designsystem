@@ -13,26 +13,6 @@ $highlight-color: utils.get-color('light');
   width: 100%;
   border-collapse: collapse;
 
-  @include utils.slotted(tbody) {
-    @include utils.slotted(tr, [kirby-tr]) {
-      height: utils.size(xxl);
-
-      &:not(:last-child) {
-        @include border-bottom;
-      }
-
-      @include utils.slotted(td) {
-        padding: 0 utils.size('s');
-        font-weight: utils.font-weight('normal');
-        font-size: utils.font-size('s');
-        line-height: utils.line-height('xs');
-        color: utils.get-text-color('black');
-        vertical-align: middle;
-        min-height: utils.size('xl');
-      }
-    }
-  }
-
   @include utils.slotted(thead) {
     @include utils.slotted(tr) {
       height: utils.size('l');
@@ -50,6 +30,26 @@ $highlight-color: utils.get-color('light');
         &.kirby-selectable-th {
           @include interaction-state.apply-hover;
         }
+      }
+    }
+  }
+
+  @include utils.slotted(tbody) {
+    @include utils.slotted(tr, [kirby-tr]) {
+      height: utils.size(xxl);
+
+      &:not(:last-child) {
+        @include border-bottom;
+      }
+
+      @include utils.slotted(td) {
+        padding: 0 utils.size('s');
+        font-weight: utils.font-weight('normal');
+        font-size: utils.font-size('s');
+        line-height: utils.line-height('xs');
+        color: utils.get-text-color('black');
+        vertical-align: middle;
+        min-height: utils.size('xl');
       }
     }
   }

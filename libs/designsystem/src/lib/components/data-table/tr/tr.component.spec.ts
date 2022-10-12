@@ -1,24 +1,57 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { MockComponent } from 'ng-mocks';
+import { createHostFactory, Spectator } from '@ngneat/spectator';
+import { TableComponent } from './../table/table.component';
 import { TableRowComponent } from './tr.component';
 
-describe('TrComponent', () => {
-  let component: TableRowComponent;
-  let fixture: ComponentFixture<TableRowComponent>;
+describe('TableComponent', () => {
+  let spectator: Spectator<TableRowComponent>;
+  let element: HTMLElement;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [TableRowComponent],
-    }).compileComponents();
+  const createHost = createHostFactory({
+    component: TableRowComponent,
+    declarations: [MockComponent(TableComponent)],
   });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(TableRowComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+  describe('by default', () => {
+    beforeEach(() => {
+      spectator = createHost(`
+      <table kirby-table>
+        <tbody id="tbody">
+          <tr kirby-tr>
+            <td>Data1</td>
+            <td>Data2</td>
+          </tr>
+        </tbody>
+      </table>`);
+      element = spectator.element as HTMLElement;
+    });
+
+    it('should create', () => {
+      expect(spectator.component).toBeTruthy();
+    });
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  describe('with selectable rows', () => {
+    beforeEach(() => {
+      spectator = createHost(`
+      <table kirby-table>
+        <tbody id="tbody">
+          <tr kirby-tr [selectable]=true>
+            <td>Data1</td>
+            <td>Data2</td>
+          </tr>
+        </tbody>
+      </table>`);
+      element = spectator.element as HTMLElement;
+    });
+
+    it('should create', () => {
+      expect(spectator.component).toBeTruthy();
+    });
+
+    it('have selectable rows', () => {
+      // windows.innerWidth - 16px because of default margin
+      expect(element).toHaveClass('selectable');
+    });
   });
 });
