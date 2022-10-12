@@ -11,7 +11,7 @@ import {
   styleUrls: ['./data-table-showcase.component.scss'],
 })
 export class DataTableShowcaseComponent {
-  _apiDescriptionProperties: ApiDescriptionProperty[] = [...dataTableApi];
+  _apiDescriptionPropertiesTable: ApiDescriptionProperty[] = [...dataTableApi];
   _cssCustomPropertiesColumns: ApiDescriptionPropertyColumns = dataTableCssCustomProperties.columns;
   _cssCustomProperties: ApiDescriptionProperty[] = dataTableCssCustomProperties.apiDescription;
 }

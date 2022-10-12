@@ -3,14 +3,16 @@ import {
   ApiDescriptionPropertyColumns,
 } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
-/* 
-    This part of the API is stored in this file as it is shared between 
-    the ChartComponent & StockChartComponent
-  */
 export const dataTableApi: ApiDescriptionProperty[] = [
   {
-    name: 'selectable',
-    description: `(Optional) Is row selectable.`,
+    name: '[fixedLayout]',
+    description: `(Optional) [kirby-table] Is layout of table fixed.`,
+    type: ['boolean'],
+    defaultValue: 'false',
+  },
+  {
+    name: '[selectable]',
+    description: `(Optional) [kirby-tr] Is row selectable.`,
     type: ['boolean'],
     defaultValue: 'false',
   },
@@ -26,8 +28,8 @@ export const dataTableCssCustomProperties: {
   },
   apiDescription: [
     {
-      name: '--kirby-table-layout-fixed',
-      description: 'Sets table layout to fixed instead of auto',
+      name: '--kirby-selectable-th',
+      description: 'Sets th to selectable - curser pointer',
     },
   ],
 };

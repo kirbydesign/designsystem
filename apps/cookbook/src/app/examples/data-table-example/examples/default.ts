@@ -1,25 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Person, table_example_data } from '../table_example_data';
 
 const config = {
   selector: 'cookbook-data-table-default-example',
-  template: `<table kirby-table class="table-layout-fixed">
-  <thead kirby-thead>
-    <tr kirby-tr>
-      <th>Hello there,</th>
-      <th>Han shot</th>
-    </tr>
-  </thead>
-  <tbody kirby-tbody>
-    <tr kirby-tr>
-      <td>General Kenobi</td>
-      <td>First</td>
-    </tr>
-    <tr kirby-tr>
-      <td>You are a bold one.</td>
-      <td>Last</td>
-    </tr>
-  </tbody>
-</table>`,
+  template: `<table kirby-table [fixedLayout]=true>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th style="text-align:right;">Height (cm)</th>
+        <th style="text-align:right;">Weight (kg)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr kirby-tr *ngFor="let rowData of tableData">
+          <td>{{rowData.name}}</td>
+          <td style="text-align:right;">{{rowData.height}}</td>
+          <td style="text-align:right;">{{rowData.mass}}</td>
+      </tr>
+    </tbody>
+  </table>`,
 };
 
 @Component({
@@ -28,4 +27,5 @@ const config = {
 })
 export class DataTableDefaultExampleComponent {
   template: string = config.template;
+  tableData: Person[] = table_example_data.slice(0, 3);
 }

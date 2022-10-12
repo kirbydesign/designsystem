@@ -1,4 +1,15 @@
-export const table_example_data = [
+export interface Person {
+  name: string;
+  eye_color: string;
+  gender: string;
+  hair_color: string;
+  skin_color: string;
+  birth_year: string;
+  height: string;
+  mass: string;
+}
+
+export const table_example_data: Person[] = [
   {
     name: 'Luke Skywalker',
     height: '172',

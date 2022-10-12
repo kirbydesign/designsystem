@@ -1,8 +1,12 @@
 @use '@kirbydesign/core/src/scss/utils';
-@use '../data-table.utils';
+@use '~@kirbydesign/core/src/scss/interaction-state';
 
-:host-context([kirby-tr]) {
+$highlight-color: utils.get-color('light');
+
+:host {
   &.selectable {
-    @include data-table.hover;
+    @include interaction-state.apply-hover {
+      background-color: $highlight-color;
+    }
   }
 }

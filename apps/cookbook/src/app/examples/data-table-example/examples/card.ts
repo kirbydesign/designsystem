@@ -1,69 +1,61 @@
 import { Component, OnInit } from '@angular/core';
-import { table_example_data } from '../table_example_data';
-
-interface TableIF {
-  name: string;
-  eye_color: string;
-  gender: string;
-  hair_color: string;
-  birth_year: string;
-  height: string;
-  mass: string;
-}
+import { ToastController } from '@kirbydesign/designsystem';
+import { Person, table_example_data } from '../table_example_data';
 
 const config = {
   selector: 'cookbook-data-table-card-example',
   template: `<kirby-card>
   <table kirby-table>
-    <thead kirby-thead>
-      <tr kirby-tr>
-        <ng-container *ngIf="tableData">
-          <th>Name</th>
-          <th>Eyes</th>
-          <th>Gender</th>
-          <th>Hair</th>
-          <th>Birth year</th>
-          <th style="text-align:right;">Height (cm)</th>
-          <th style="text-align:right;">Weight (kg)</th>
-        </ng-container>
+    <thead>
+      <tr>
+        <th class="kirby-selectable-th" (click)="onClickHeading('Name')">Name</th>
+        <th class="kirby-selectable-th" (click)="onClickHeading('Eyes')">Eyes</th>
+        <th>Gender</th>
+        <th class="kirby-selectable-th" (click)="onClickHeading('Hair')">Hair</th>
+        <th>Skin</th>
+        <th>Birth year</th>
+        <th style="text-align:right;">Height (cm)</th>
+        <th style="text-align:right;">Weight (kg)</th>
       </tr>
     </thead>
-    <tbody kirby-tbody>
-      <tr kirby-tr *ngFor="let rowData of tableData" [selectable]="true">
+    <tbody>
+      <tr kirby-tr *ngFor="let rowData of tableData; let i = index" [selectable]="true" (click)="onClickRow(i)">
           <td>{{rowData.name}}</td>
           <td>{{rowData.eye_color}}</td>
           <td>{{rowData.gender}}</td>
           <td>{{rowData.hair_color}}</td>
+          <td>{{rowData.skin_color}}</td>
           <td>{{rowData.birth_year}}</td>
           <td style="text-align:right;">{{rowData.height}}</td>
           <td style="text-align:right;">{{rowData.mass}}</td>
       </tr>
     </tbody>
   </table>
-</kirby-card>
-  `,
+</kirby-card>`,
 };
 
 @Component({
   selector: config.selector,
   template: config.template,
 })
-export class DataTableCardExampleComponent implements OnInit {
-  tableData: TableIF[] = [];
-
+export class DataTableCardExampleComponent {
+  tableData: Person[] = table_example_data;
   template: string = config.template;
 
-  ngOnInit(): void {
-    for (const person of table_example_data) {
-      this.tableData.push({
-        name: person.name,
-        eye_color: person.eye_color,
-        gender: person.gender,
-        hair_color: person.hair_color,
-        birth_year: person.birth_year,
-        height: person.height,
-        mass: person.mass,
-      });
-    }
+  constructor(private toastController: ToastController) {}
+
+  onClickRow(index: number) {
+    this.toastController.showToast({
+      message: `You pressed row number ${index}`,
+      messageType: 'success',
+      durationInMs: 2000,
+    });
+  }
+  onClickHeading(headingTitle: string) {
+    this.toastController.showToast({
+      message: `You pressed heading: "${headingTitle}"`,
+      messageType: 'success',
+      durationInMs: 2000,
+    });
   }
 }

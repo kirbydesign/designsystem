@@ -8,6 +8,4 @@ import { Component, HostBinding, Input } from '@angular/core';
 })
 export class TableRowComponent {
   @HostBinding('class.selectable') @Input() selectable: boolean = false;
-
-  constructor() {}
 }
