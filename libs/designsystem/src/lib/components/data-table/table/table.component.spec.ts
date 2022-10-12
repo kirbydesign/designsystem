@@ -4,7 +4,7 @@ import { TableComponent } from './table.component';
 
 const { fontWeight, fontSize, lineHeight, getTextColor, size, getColor } = DesignTokenHelper;
 
-describe('TableComponent', () => {
+fdescribe('TableComponent', () => {
   let spectator: Spectator<TableComponent>;
   let element: HTMLTableElement;
 
@@ -42,9 +42,8 @@ describe('TableComponent', () => {
     });
 
     it('style table correctly', () => {
-      // windows.innerWidth - 16px because of default margin
       expect(element).toHaveComputedStyle({
-        width: `${window.innerWidth - 16}px`,
+        width: `${element.parentElement.clientWidth}px`,
         'border-collapse': 'collapse',
         'table-layout': 'auto',
       });
