@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ToastController } from '@kirbydesign/designsystem';
 import { Person, table_example_data } from '../table_example_data';
 
