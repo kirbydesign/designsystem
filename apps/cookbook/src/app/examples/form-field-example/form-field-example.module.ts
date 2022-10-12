@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { KirbyModule } from '@kirbydesign/designsystem';
 
+import { FormFieldInputAffixExampleComponent } from './examples/input/affix';
 import { FormFieldInputBorderlessExampleComponent } from './examples/input/borderless';
 import { FormFieldInputCounterExampleComponent } from './examples/input/counter';
 import { FormFieldInputDateExampleComponent } from './examples/input/date';
@@ -29,6 +30,7 @@ const COMPONENT_DECLARATIONS = [
   FormFieldInputDecimalMaskExampleComponent,
   FormFieldInputDateExampleComponent,
   FormFieldInputDisabledExampleComponent,
+  FormFieldInputAffixExampleComponent,
   FormFieldInputErrorExampleComponent,
   FormFieldInputBorderlessExampleComponent,
   FormFieldFocusExampleComponent,
