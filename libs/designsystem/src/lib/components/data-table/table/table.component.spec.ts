@@ -117,7 +117,6 @@ fdescribe('TableComponent', () => {
     });
 
     it('style table with fixed-layout', () => {
-      // windows.innerWidth - 16px because of default margin
       expect(element).toHaveClass('--kirby-table-layout-fixed');
     });
   });

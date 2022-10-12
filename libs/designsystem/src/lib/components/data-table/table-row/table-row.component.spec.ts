@@ -50,7 +50,6 @@ describe('TableComponent', () => {
     });
 
     it('have selectable rows', () => {
-      // windows.innerWidth - 16px because of default margin
       expect(element).toHaveClass('selectable');
     });
   });
