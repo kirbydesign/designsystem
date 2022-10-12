@@ -17,7 +17,7 @@ const config = {
     <kirby-form-field label="With prefix and suffix">
       <kirby-icon name="search" kirby-affix="prefix"></kirby-icon>
       <input kirby-input decimal-mask placeholder="Search..." [size]="size" />
-      <kirby-spinner suffix></kirby-spinner>
+      <kirby-spinner kirby-affix="suffix"></kirby-spinner>
     </kirby-form-field>
   `,
 };
