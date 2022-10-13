@@ -51,6 +51,7 @@ export class FormFieldComponent
   @ContentChild(InputComponent, { read: ElementRef }) input: ElementRef<HTMLInputElement>;
   @ContentChild(TextareaComponent, { read: ElementRef }) textarea: ElementRef<HTMLTextAreaElement>;
 
+  private observers: ResizeObserver[] = [];
   constructor(
     elementRef: ElementRef<HTMLElement>,
     private platform: PlatformService,
@@ -78,6 +79,7 @@ export class FormFieldComponent
   @HostListener('kirbyRegisterFormField')
   _onRegisterFormField() {
     this.dispatchLoadEvent();
+    console.log('hello');
   }
 
   onLabelClick() {
@@ -111,6 +113,9 @@ export class FormFieldComponent
         this._labelId
       );
     }
+    requestAnimationFrame(() => {
+      this.calculateAffixLayouts();
+    });
   }
 
   ngAfterContentChecked(): void {
@@ -130,16 +135,16 @@ export class FormFieldComponent
       this.isRegistered = true;
       this.dispatchLoadEvent();
     }
+  }
+
+  calculateAffixLayouts() {
     if (this.affixElements.length > 0 && this.input) {
       // layout suffix and/or prefix and modify input padding
       // but ignore if there's no input (because there's a textarea or radiobuttons instead)
-
       const inputEl = this.input.nativeElement;
       const inputBounds = inputEl.getBoundingClientRect();
       this.affixElements.forEach((affix) => {
         const affixEl = affix.el.nativeElement;
-        const affixBounds = affixEl.getBoundingClientRect();
-        const affixWidth = affixBounds.width;
         const dir = affix.type === 'prefix' ? 'left' : 'right';
         this.renderer.setStyle(affix.el.nativeElement, 'position', 'absolute');
         this.renderer.setStyle(affixEl, dir, '0.5em');
@@ -147,11 +152,17 @@ export class FormFieldComponent
         const offset = this.input.nativeElement.offsetTop;
         const top = offset + inputBounds.height * 0.5;
         this.renderer.setStyle(affixEl, 'top', `${top}px`);
-        this.renderer.setStyle(
-          inputEl,
-          `padding-${dir}`,
-          `calc(${affixWidth}px + var(--input-padding))`
-        );
+        const observer = new ResizeObserver((entries) => {
+          const entry = entries[0];
+          const rect = entry.contentRect;
+          this.renderer.setStyle(
+            inputEl,
+            `padding-${dir}`,
+            `calc(${rect.width}px + var(--input-padding))`
+          );
+        });
+        observer.observe(affixEl);
+        this.observers.push(observer);
       });
     }
   }
@@ -165,5 +176,6 @@ export class FormFieldComponent
         detail: this.element,
       })
     );
+    this.observers.forEach((o) => o.disconnect());
   }
 }
