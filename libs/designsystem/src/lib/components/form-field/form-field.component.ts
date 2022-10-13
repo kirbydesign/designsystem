@@ -53,7 +53,6 @@ export class FormFieldComponent
   @ContentChild(InputComponent, { read: ElementRef }) input: ElementRef<HTMLInputElement>;
   @ContentChild(TextareaComponent, { read: ElementRef }) textarea: ElementRef<HTMLTextAreaElement>;
 
-  private observers: ResizeObserver[] = [];
   constructor(
     elementRef: ElementRef<HTMLElement>,
     private platform: PlatformService,
@@ -82,7 +81,6 @@ export class FormFieldComponent
   @HostListener('kirbyRegisterFormField')
   _onRegisterFormField() {
     this.dispatchLoadEvent();
-    console.log('hello');
   }
 
   onLabelClick() {
@@ -120,16 +118,18 @@ export class FormFieldComponent
     // Measure the width of all slotted affix element,
     // and apply the width + standard padding to the input elements
     // padding, so the start/end of the input is correctly indented.
-    this.affixElements.forEach((affix) => {
-      this.resizeObserverService.observe(affix.el, (entry) => {
-        const dir = affix.type === 'prefix' ? 'left' : 'right';
-        this.renderer.setStyle(
-          this.inputElement,
-          `padding-${dir}`,
-          `${entry.contentRect.width + parseInt(DesignTokenHelper.size('s'))}px`
-        );
+    if (this.input) {
+      this.affixElements?.forEach((affix) => {
+        this.resizeObserverService.observe(affix.el, (entry) => {
+          const dir = affix.type === 'prefix' ? 'left' : 'right';
+          this.renderer.setStyle(
+            this.input.nativeElement,
+            `padding-${dir}`,
+            `${entry.contentRect.width + parseInt(DesignTokenHelper.size('s'))}px`
+          );
+        });
       });
-    });
+    }
   }
 
   ngAfterContentChecked(): void {
