@@ -42,20 +42,22 @@ label {
   padding: 0 utils.size('s');
 }
 
-.affix-input {
-  display: flex;
-  align-items: center;
+.affix-container {
+  position: relative;
+
+  .vertical-align {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+  }
 
   .prefix {
-    display: flex;
-    position: absolute;
-    padding-left: 12px;
+    left: utils.size('xs');
   }
 
   .suffix {
-    display: flex;
-    position: absolute;
-    right: 0;
-    padding-right: 12px;
+    right: utils.size('xs');
   }
 }
