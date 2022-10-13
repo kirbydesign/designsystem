@@ -116,7 +116,7 @@ export class ChartJSService {
       ? this.annotationsDelegate.createAnnotationPluginOptionsObject(annotations)
       : {};
 
-    let mergedOptions: ChartOptions = mergeDeepAll(
+    const mergedOptions: ChartOptions = mergeDeepAll(
       typeConfigOptions,
       customOptions,
       annotationPluginOptions
@@ -157,7 +157,7 @@ export class ChartJSService {
   }
 
   protected createDatasets(data: ChartDataset[] | number[]): ChartDataset[] {
-    let datasets = isNumberArray(data) ? [{ data }] : data;
+    const datasets = isNumberArray(data) ? [{ data }] : data;
 
     if (this.highlightedElements)
       this.addHighlightedElementsToDatasets(this.highlightedElements, datasets);
@@ -188,7 +188,14 @@ export class ChartJSService {
     });
 
     this.chart.options = options;
-    this.chart.config.type = this.chartConfigService.chartTypeToChartJSType(chartType);
+
+    /* Type guard is needed as of chart.js@3.8.1. The config type has been updated to a union type, 
+    and the newly added type 'ChartConfigurationCustomTypesPerDataset' does not contain the 'type' property.
+    Typescript will throw an error, when trying to access a property that doesn't exist on all union types,
+    unless a type guard is used. */
+    if ('type' in this.chart.config) {
+      this.chart.config.type = this.chartConfigService.chartTypeToChartJSType(chartType);
+    }
   }
 
   private initializeNewChart(canvasElement: HTMLCanvasElement, config: ChartConfiguration) {
