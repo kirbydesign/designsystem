@@ -134,16 +134,24 @@ export class FormFieldComponent
       // layout suffix and/or prefix and modify input padding
       // but ignore if there's no input (because there's a textarea or radiobuttons instead)
 
-      const inputBounds = this.input.nativeElement.getBoundingClientRect();
+      const inputEl = this.input.nativeElement;
+      const inputBounds = inputEl.getBoundingClientRect();
       this.affixElements.forEach((affix) => {
         const affixEl = affix.el.nativeElement;
         const affixBounds = affixEl.getBoundingClientRect();
+        const affixWidth = affixBounds.width;
+        const dir = affix.type === 'prefix' ? 'left' : 'right';
         this.renderer.setStyle(affix.el.nativeElement, 'position', 'absolute');
-        this.renderer.setStyle(affixEl, affix.type === 'prefix' ? 'left' : 'right', '0.5em');
+        this.renderer.setStyle(affixEl, dir, '0.5em');
         this.renderer.setStyle(affixEl, 'transform', 'translateY(-50%)');
         const offset = this.input.nativeElement.offsetTop;
         const top = offset + inputBounds.height * 0.5;
         this.renderer.setStyle(affixEl, 'top', `${top}px`);
+        this.renderer.setStyle(
+          inputEl,
+          `padding-${dir}`,
+          `calc(${affixWidth}px + var(--input-padding))`
+        );
       });
     }
   }

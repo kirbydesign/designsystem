@@ -1,9 +1,12 @@
 @use '~@kirbydesign/core/src/scss/utils';
+@use './form-field-variables' as vars;
 
 :host {
   display: block;
   position: relative; // Ensures correct position of cloned child input when Ionic scrollAssist is enabled
   margin-bottom: utils.size('s');
+
+  --input-padding: #{vars.$form-field-input-padding};
 }
 
 :host-context(kirby-item) {

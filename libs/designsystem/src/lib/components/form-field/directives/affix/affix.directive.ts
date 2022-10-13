@@ -1,14 +1,4 @@
-import { FormatWidth, getLocaleDateFormat } from '@angular/common';
-import {
-  AfterViewInit,
-  Directive,
-  ElementRef,
-  HostListener,
-  Inject,
-  Input,
-  LOCALE_ID,
-  Renderer2,
-} from '@angular/core';
+import { Directive, ElementRef, Input } from '@angular/core';
 
 @Directive({
   selector: '[kirby-affix]',

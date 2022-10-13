@@ -1,8 +1,9 @@
 @use '../form-field-inputs.shared' as shared;
 @use '~@kirbydesign/core/src/scss/interaction-state';
 @use '~@kirbydesign/core/src/scss/utils';
+@use '../form-field-variables' as vars;
 
-$padding-block-size-md: shared.$form-field-input-padding * 0.5;
+$padding-block-size-md: vars.$form-field-input-padding * 0.5;
 
 :host {
   @include interaction-state.apply-hover {
@@ -55,13 +56,13 @@ $padding-block-size-md: shared.$form-field-input-padding * 0.5;
 }
 
 .date-mask {
-  font-family: shared.$form-field-input-font-family;
-  line-height: shared.$form-field-input-line-height;
+  font-family: vars.$form-field-input-font-family;
+  line-height: vars.$form-field-input-line-height;
   color: var(--kirby-white-contrast);
   position: absolute;
   top: 0;
   left: 0;
-  padding: shared.$form-field-input-padding;
+  padding: vars.$form-field-input-padding;
 
   :host(.md) + & {
     padding-block: $padding-block-size-md;
