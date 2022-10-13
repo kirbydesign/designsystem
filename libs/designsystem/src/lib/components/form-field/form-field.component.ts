@@ -116,6 +116,20 @@ export class FormFieldComponent
         this._labelId
       );
     }
+
+    // Measure the width of all slotted affix element,
+    // and apply the width + standard padding to the input elements
+    // padding, so the start/end of the input is correctly indented.
+    this.affixElements.forEach((affix) => {
+      this.resizeObserverService.observe(affix.el, (entry) => {
+        const dir = affix.type === 'prefix' ? 'left' : 'right';
+        this.renderer.setStyle(
+          this.inputElement,
+          `padding-${dir}`,
+          `${entry.contentRect.width + parseInt(DesignTokenHelper.size('s'))}px`
+        );
+      });
+    });
   }
 
   ngAfterContentChecked(): void {
@@ -135,20 +149,6 @@ export class FormFieldComponent
       this.isRegistered = true;
       this.dispatchLoadEvent();
     }
-
-    // Measure the width of all slotted affix element,
-    // and apply the width + standard padding to the input elements
-    // padding, so the start/end of the input is correctly indented.
-    this.affixElements.forEach((affix) => {
-      this.resizeObserverService.observe(affix.el, (entry) => {
-        const dir = affix.type === 'prefix' ? 'left' : 'right';
-        this.renderer.setStyle(
-          this.inputElement,
-          `padding-${dir}`,
-          `${entry.contentRect.width + parseInt(DesignTokenHelper.size('s'))}px`
-        );
-      });
-    });
   }
 
   ngOnDestroy(): void {
