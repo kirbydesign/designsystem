@@ -13,11 +13,13 @@ import {
   QueryList,
   Renderer2,
 } from '@angular/core';
+import { DesignTokenHelper } from '../../helpers';
 
 import { PlatformService } from '../../helpers/platform.service';
 import { UniqueIdGenerator } from '../../helpers/unique-id-generator.helper';
 import { WindowRef } from '../../types/window-ref';
 import { RadioGroupComponent } from '../radio/radio-group/radio-group.component';
+import { ResizeObserverService } from '../shared/resize-observer/resize-observer.service';
 import { AffixDirective } from './directives/affix/affix.directive';
 
 import { InputCounterComponent } from './input-counter/input-counter.component';
@@ -56,7 +58,8 @@ export class FormFieldComponent
     elementRef: ElementRef<HTMLElement>,
     private platform: PlatformService,
     private renderer: Renderer2,
-    private windowRef: WindowRef
+    private windowRef: WindowRef,
+    private resizeObserverService: ResizeObserverService
   ) {
     this.element = elementRef.nativeElement;
   }
@@ -113,9 +116,6 @@ export class FormFieldComponent
         this._labelId
       );
     }
-    requestAnimationFrame(() => {
-      this.calculateAffixLayouts();
-    });
   }
 
   ngAfterContentChecked(): void {
@@ -135,36 +135,20 @@ export class FormFieldComponent
       this.isRegistered = true;
       this.dispatchLoadEvent();
     }
-  }
 
-  calculateAffixLayouts() {
-    if (this.affixElements.length > 0 && this.input) {
-      // layout suffix and/or prefix and modify input padding
-      // but ignore if there's no input (because there's a textarea or radiobuttons instead)
-      const inputEl = this.input.nativeElement;
-      const inputBounds = inputEl.getBoundingClientRect();
-      this.affixElements.forEach((affix) => {
-        const affixEl = affix.el.nativeElement;
+    // Measure the width of all slotted affix element,
+    // and apply the width + standard padding to the input elements
+    // padding, so the start/end of the input is correctly indented.
+    this.affixElements.forEach((affix) => {
+      this.resizeObserverService.observe(affix.el, (entry) => {
         const dir = affix.type === 'prefix' ? 'left' : 'right';
-        this.renderer.setStyle(affix.el.nativeElement, 'position', 'absolute');
-        this.renderer.setStyle(affixEl, dir, '0.5em');
-        this.renderer.setStyle(affixEl, 'transform', 'translateY(-50%)');
-        const offset = this.input.nativeElement.offsetTop;
-        const top = offset + inputBounds.height * 0.5;
-        this.renderer.setStyle(affixEl, 'top', `${top}px`);
-        const observer = new ResizeObserver((entries) => {
-          const entry = entries[0];
-          const rect = entry.contentRect;
-          this.renderer.setStyle(
-            inputEl,
-            `padding-${dir}`,
-            `calc(${rect.width}px + var(--input-padding))`
-          );
-        });
-        observer.observe(affixEl);
-        this.observers.push(observer);
+        this.renderer.setStyle(
+          this.inputElement,
+          `padding-${dir}`,
+          `${entry.contentRect.width + parseInt(DesignTokenHelper.size('s'))}px`
+        );
       });
-    }
+    });
   }
 
   ngOnDestroy(): void {
@@ -176,6 +160,9 @@ export class FormFieldComponent
         detail: this.element,
       })
     );
-    this.observers.forEach((o) => o.disconnect());
+
+    this.affixElements.forEach((affix) => {
+      this.resizeObserverService.unobserve(affix.el);
+    });
   }
 }
