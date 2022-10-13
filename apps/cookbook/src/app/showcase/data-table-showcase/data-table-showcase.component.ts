@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
-import { dataTableApi, dataTableCssCustomProperties } from './data-table-api';
-import {
-  ApiDescriptionProperty,
-  ApiDescriptionPropertyColumns,
-} from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { dataTableApi } from './data-table-api';
+import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
   selector: 'cookbook-data-table-showcase',
@@ -12,6 +9,4 @@ import {
 })
 export class DataTableShowcaseComponent {
   _apiDescriptionPropertiesTable: ApiDescriptionProperty[] = [...dataTableApi];
-  _cssCustomPropertiesColumns: ApiDescriptionPropertyColumns = dataTableCssCustomProperties.columns;
-  _cssCustomProperties: ApiDescriptionProperty[] = dataTableCssCustomProperties.apiDescription;
 }

@@ -8,10 +8,10 @@ const config = {
   <table kirby-table>
     <thead>
       <tr>
-        <th class="kirby-selectable-th" (click)="onClickHeading('Name')">Name</th>
-        <th class="kirby-selectable-th" (click)="onClickHeading('Eyes')">Eyes</th>
+        <th>Name</th>
+        <th>Eyes</th>
         <th>Gender</th>
-        <th class="kirby-selectable-th" (click)="onClickHeading('Hair')">Hair</th>
+        <th>Hair</th>
         <th>Skin</th>
         <th>Birth year</th>
         <th style="text-align:right;">Height (cm)</th>

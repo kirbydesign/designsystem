@@ -17,19 +17,3 @@ export const dataTableApi: ApiDescriptionProperty[] = [
     defaultValue: 'false',
   },
 ];
-
-export const dataTableCssCustomProperties: {
-  columns: ApiDescriptionPropertyColumns;
-  apiDescription: ApiDescriptionProperty[];
-} = {
-  columns: {
-    name: 'Name',
-    description: 'Description',
-  },
-  apiDescription: [
-    {
-      name: 'kirby-selectable-th',
-      description: 'Sets th to selectable - curser pointer',
-    },
-  ],
-};

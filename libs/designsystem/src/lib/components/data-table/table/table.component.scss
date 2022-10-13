@@ -9,40 +9,47 @@ $highlight-color: utils.get-color('light');
   border-bottom: 1px solid $divider-color;
 }
 
-:host {
+table[kirby-table] {
   width: 100%;
   border-collapse: collapse;
 
-  @include utils.slotted(thead) {
-    @include utils.slotted(tr) {
+  &.kirby-table-layout-fixed {
+    table-layout: fixed;
+  }
+
+  thead {
+    tr {
       height: utils.size('l');
       text-align: left;
 
       @include border-bottom;
 
-      @include utils.slotted(th) {
+      th {
         font-weight: utils.font-weight('normal');
         font-size: utils.font-size('xs');
         line-height: utils.line-height('xs');
         color: utils.get-text-color('semi-dark');
         padding: utils.size('xxs') utils.size('s');
-
-        &.kirby-selectable-th {
-          @include interaction-state.apply-hover;
-        }
       }
     }
   }
 
-  @include utils.slotted(tbody) {
-    @include utils.slotted(tr, [kirby-tr]) {
+  tbody {
+    tr,
+    kirby-tr {
       height: utils.size(xxl);
 
       &:not(:last-child) {
         @include border-bottom;
       }
 
-      @include utils.slotted(td) {
+      &.kirby-selectable-row {
+        @include interaction-state.apply-hover {
+          background-color: $highlight-color;
+        }
+      }
+
+      td {
         padding: 0 utils.size('s');
         font-weight: utils.font-weight('normal');
         font-size: utils.font-size('s');

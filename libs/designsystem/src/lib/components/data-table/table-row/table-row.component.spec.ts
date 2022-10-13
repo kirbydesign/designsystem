@@ -3,7 +3,7 @@ import { createHostFactory, Spectator } from '@ngneat/spectator';
 import { TableComponent } from '../table/table.component';
 import { TableRowComponent } from './table-row.component';
 
-describe('TableComponent', () => {
+describe('TableRowComponent', () => {
   let spectator: Spectator<TableRowComponent>;
   let element: HTMLElement;
 
@@ -50,7 +50,7 @@ describe('TableComponent', () => {
     });
 
     it('have selectable rows', () => {
-      expect(element).toHaveClass('selectable');
+      expect(element).toHaveClass('kirby-selectable-row');
     });
   });
 });

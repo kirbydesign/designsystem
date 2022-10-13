@@ -4,7 +4,7 @@ import { TableComponent } from './table.component';
 
 const { fontWeight, fontSize, lineHeight, getTextColor, size, getColor } = DesignTokenHelper;
 
-fdescribe('TableComponent', () => {
+describe('TableComponent', () => {
   let spectator: Spectator<TableComponent>;
   let element: HTMLTableElement;
 
@@ -117,7 +117,7 @@ fdescribe('TableComponent', () => {
     });
 
     it('style table with fixed-layout', () => {
-      expect(element).toHaveClass('--kirby-table-layout-fixed');
+      expect(element).toHaveClass('kirby-table-layout-fixed');
     });
   });
 });
