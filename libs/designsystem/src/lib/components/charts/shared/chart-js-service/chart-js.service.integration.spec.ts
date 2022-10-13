@@ -2,6 +2,7 @@ import { ElementRef } from '@angular/core';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 import { Chart, FontSpec } from 'chart.js';
 
+import { chartConfigHasType } from '../../../../helpers';
 import { ChartConfigService } from '../';
 import { ColorHelper } from '../../../../helpers';
 
@@ -39,7 +40,9 @@ describe('ChartJSService with ChartConfigService', () => {
         /* Our 'column' chart is a chart.js 'bar' type chart 
         with it's indexAxis set to y; therefore testing if 
         bar is being used. */
-        expect(chart.config.type).toBe('bar');
+        if (chartConfigHasType(chart.config)) {
+          expect(chart.config.type).toBe('bar');
+        }
       });
 
       describe('and no custom options are passed', () => {
@@ -118,7 +121,9 @@ describe('ChartJSService with ChartConfigService', () => {
         });
         const chart = chartJSService['chart'];
 
-        expect(chart.config.type).toBe('line');
+        if (chartConfigHasType(chart.config)) {
+          expect(chart.config.type).toBe('line');
+        }
       });
 
       describe('and no custom options are passed', () => {
@@ -197,7 +202,9 @@ describe('ChartJSService with ChartConfigService', () => {
         });
         const chart = chartJSService['chart'];
 
-        expect(chart.config.type).toBe('bar');
+        if (chartConfigHasType(chart.config)) {
+          expect(chart.config.type).toBe('bar');
+        }
       });
 
       describe('and no custom options are passed', () => {

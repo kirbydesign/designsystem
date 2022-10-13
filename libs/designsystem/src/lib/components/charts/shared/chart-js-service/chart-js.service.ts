@@ -3,6 +3,7 @@ import { ChartConfiguration, ChartOptions } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
 
 import { mergeDeepAll } from '../../../../helpers/merge-deep';
+import { chartConfigHasType } from '../../../../helpers';
 import { ChartConfigService } from '../chart-config-service';
 import {
   ChartDataset,
@@ -189,11 +190,7 @@ export class ChartJSService {
 
     this.chart.options = options;
 
-    /* Type guard is needed as of chart.js@3.8.1. The config type has been updated to a union type, 
-    and the newly added type 'ChartConfigurationCustomTypesPerDataset' does not contain the 'type' property.
-    Typescript will throw an error, when trying to access a property that doesn't exist on all union types,
-    unless a type guard is used. */
-    if ('type' in this.chart.config) {
+    if (chartConfigHasType(this.chart.config)) {
       this.chart.config.type = this.chartConfigService.chartTypeToChartJSType(chartType);
     }
   }
