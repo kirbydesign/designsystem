@@ -4,11 +4,10 @@ $tab-item-text-max-width: 100px;
 $bottom-border-height: 1px;
 $border-color-standard: utils.get-color('medium');
 $border-color-selected: utils.get-color('dark');
+$divider-max-width-breakpoint: calc(#{utils.$page-content-max-width} + (#{utils.size('s')} * 2));
 
 .tab-bar {
   position: relative;
-  max-width: var(--page-content-max-width, utils.$page-content-max-width);
-  background-color: utils.get-color('background-color');
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -33,6 +32,7 @@ $border-color-selected: utils.get-color('dark');
 .container {
   position: relative;
   background-color: utils.get-color('background-color');
+  max-width: var(--page-content-max-width, utils.$page-content-max-width);
 
   /* Divider */
   &::before {
@@ -42,10 +42,13 @@ $border-color-selected: utils.get-color('dark');
     height: $bottom-border-height;
     bottom: 0;
     z-index: 1;
+    left: 0;
+    width: 100%;
 
-    /* HAX */
-    width: 200vw;
-    left: -100vw;
+    @media only screen and (max-width: $divider-max-width-breakpoint) {
+      left: -#{utils.size('s')};
+      width: calc(100% + (#{utils.size('s')} * 2));
+    }
   }
 }
 
@@ -55,7 +58,9 @@ $border-color-selected: utils.get-color('dark');
   box-sizing: border-box;
   outline: none;
   padding-bottom: calc(#{$bottom-border-height} * 2);
+  margin-right: utils.size('s');
 
+  /* Selected divider */
   &.selected::before {
     content: '';
     width: 100%;
@@ -72,6 +77,10 @@ $border-color-selected: utils.get-color('dark');
   &:hover {
     font-weight: utils.font-weight('bold');
   }
+
+  &:last-child {
+    margin-right: 0;
+  }
 }
 
 .tab-item-inner {
@@ -79,7 +88,7 @@ $border-color-selected: utils.get-color('dark');
   align-items: center;
   justify-content: center;
   white-space: nowrap;
-  margin: utils.size('s');
+  margin: utils.size('s') utils.size('xs');
 
   /* Disable text selection on tab items */
   -webkit-touch-callout: none; /* iOS Safari */
@@ -93,6 +102,7 @@ $border-color-selected: utils.get-color('dark');
     max-width: $tab-item-text-max-width;
     overflow: hidden;
     text-overflow: ellipsis;
+    line-height: utils.size('m');
   }
 
   /* Ensures static container size when changing from bold to normal font-weight */

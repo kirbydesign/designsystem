@@ -176,6 +176,11 @@ ion-content {
   top: 0;
   left: 0;
   right: 0;
+
+  div {
+    max-width: var(--page-content-max-width, utils.$page-content-max-width);
+    margin: 0 auto;
+  }
 }
 
 .sticky-content-spacer {
