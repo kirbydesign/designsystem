@@ -22,13 +22,13 @@
 
 <ng-template #slottedInputTemplate>
   <div class="affix-container">
-    <div class="prefix vertical-align">
+    <div class="prefix vertical-align semi-dark-text">
       <ng-content select="[kirby-affix='prefix']"></ng-content>
     </div>
     <ng-content select="input[kirby-input]"></ng-content>
     <ng-content select="textarea[kirby-textarea]"></ng-content>
     <ng-content select="kirby-radio-group"></ng-content>
-    <div class="suffix vertical-align">
+    <div class="suffix vertical-align semi-dark-text">
       <ng-content select="[kirby-affix='suffix']"></ng-content>
     </div>
   </div>

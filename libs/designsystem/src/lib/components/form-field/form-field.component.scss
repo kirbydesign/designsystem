@@ -60,4 +60,10 @@ label {
   .suffix {
     right: utils.size('xs');
   }
+
+  .semi-dark-text {
+    @include utils.slotted(span, h1, h2, h3, h4, h5, h6, p, data) {
+      color: utils.get-text-color('semi-dark');
+    }
+  }
 }
