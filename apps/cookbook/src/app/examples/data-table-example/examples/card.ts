@@ -51,11 +51,4 @@ export class DataTableCardExampleComponent {
       durationInMs: 2000,
     });
   }
-  onClickHeading(headingTitle: string) {
-    this.toastController.showToast({
-      message: `You pressed heading: "${headingTitle}"`,
-      messageType: 'success',
-      durationInMs: 2000,
-    });
-  }
 }
