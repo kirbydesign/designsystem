@@ -67,7 +67,22 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   @Input() set selectedIndex(value: number) {
     if (this._selectedIndex != value) {
       this._selectedIndex = value;
+      this.focusedIndex = this._selectedIndex;
       this._value = this.items[this.selectedIndex] || null;
+    }
+  }
+
+  // _focusedIndex keeps track of which element has focus and will be selected
+  // if it is activated (by pressing ENTER or SPACE key)
+  private _focusedIndex: number = -1;
+  get focusedIndex(): number {
+    return this._focusedIndex;
+  }
+
+  @Input() set focusedIndex(value: number) {
+    if (this._focusedIndex !== value) {
+      this._focusedIndex = value;
+      this.scrollItemIntoView(this._focusedIndex);
     }
   }
 
@@ -343,6 +358,9 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
         () => this.showDropdown(),
         DropdownComponent.OPEN_DELAY_IN_MS
       );
+
+      // Move focus to selected item (if any)
+      this.focusedIndex = this.selectedIndex;
     }
   }
 
@@ -420,9 +438,9 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   private selectItem(index: number) {
     if (index != this.selectedIndex) {
       this.selectedIndex = index;
+      this.focusedIndex = index;
       this.change.emit(this.value);
       this._onChange(this.value);
-      this.scrollItemIntoView(index);
     }
   }
 
@@ -446,16 +464,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
       const selectedKirbyItem = kirbyItems.toArray()[index];
       if (selectedKirbyItem && selectedKirbyItem.nativeElement) {
         const itemElement = selectedKirbyItem.nativeElement;
-        const scrollContainer = this.cardElement.nativeElement;
-        const itemTop = itemElement.offsetTop;
-        const itemBottom = itemElement.offsetTop + itemElement.offsetHeight;
-        const containerVisibleTop = scrollContainer.scrollTop;
-        const containerVisibleBottom = scrollContainer.clientHeight + scrollContainer.scrollTop;
-        if (itemTop < containerVisibleTop) {
-          scrollContainer.scrollTop = itemTop;
-        } else if (itemBottom > containerVisibleBottom) {
-          scrollContainer.scrollTop = itemBottom - scrollContainer.clientHeight;
-        }
+        itemElement.scrollIntoView({ block: 'nearest' });
       }
     }
   }
@@ -520,19 +529,16 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     this._onTouched();
   }
 
-  @HostListener('keydown.space', ['$event'])
-  _onSpace(event: KeyboardEvent) {
-    event.preventDefault();
-    event.stopPropagation();
-    if (!this.isOpen) {
-      this.open();
-    }
-  }
-
   @HostListener('keydown.enter', ['$event'])
-  _onEnter(event: KeyboardEvent) {
+  @HostListener('keydown.space', ['$event'])
+  _onEnterOrSpace(event: KeyboardEvent) {
     event.preventDefault();
     event.stopPropagation();
+
+    if (this.isOpen) {
+      this.selectItem(this.focusedIndex);
+    }
+
     this.toggle();
   }
 
@@ -541,15 +547,45 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   @HostListener('keydown.arrowleft', ['$event'])
   @HostListener('keydown.arrowright', ['$event'])
   _onArrowKeys(event: KeyboardEvent) {
-    if (this.disabled) return;
+    if (this.disabled) return false;
+
     // Mirror default HTML5 select behaviour - prevent left/right arrows when open:
     if (this.isOpen && (event.key === 'ArrowLeft' || event.key === 'ArrowRight')) {
-      return;
+      return false;
     }
-    const newIndex = this.keyboardHandlerService.handle(event, this.items, this.selectedIndex);
-    if (newIndex > -1) {
-      this.selectItem(newIndex);
+
+    if (!this.isOpen) {
+      // Avoid page scroll
+      event.preventDefault();
+      this.open();
+
+      // If no selected item then focus first or last item
+      if (this.selectedIndex < 0) {
+        switch (event.key) {
+          case 'ArrowUp':
+            this.focusedIndex = this.items.length - 1;
+            break;
+          case 'ArrowDown':
+            this.focusedIndex = 0;
+            break;
+          default:
+            break;
+        }
+      }
+
+      return false;
     }
+
+    const newFocusedIndex = this.keyboardHandlerService.handle(
+      event,
+      this.items,
+      this.focusedIndex
+    );
+
+    if (newFocusedIndex > -1) {
+      this.focusedIndex = newFocusedIndex;
+    }
+
     return false;
   }
 
@@ -557,9 +593,15 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   @HostListener('keydown.end', ['$event'])
   _onHomeEndKeys(event: KeyboardEvent) {
     if (this.disabled) return;
-    const newIndex = this.keyboardHandlerService.handle(event, this.items, this.selectedIndex);
-    if (newIndex > -1) {
-      this.selectItem(newIndex);
+    if (!this.isOpen) return;
+
+    const newFocusedIndex = this.keyboardHandlerService.handle(
+      event,
+      this.items,
+      this.focusedIndex
+    );
+    if (newFocusedIndex > -1) {
+      this.focusedIndex = newFocusedIndex;
     }
     return false;
   }

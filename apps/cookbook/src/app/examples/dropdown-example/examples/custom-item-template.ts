@@ -8,9 +8,11 @@ const config = {
   [items]="items"
   itemTextProperty="title">
   <kirby-item
-    *kirbyListItemTemplate="let item; let selected = selected"
+    *kirbyListItemTemplate="let item; let selected = selected; let focused = focused"
     selectable="true"
-    [selected]="selected">
+    [selected]="selected"
+    [class.focused]="focused"
+  >
     <kirby-icon *ngIf="selected" name="checkmark-selected" slot="start"></kirby-icon>
     <kirby-label>
       <h3>{{ item.title }}</h3>
