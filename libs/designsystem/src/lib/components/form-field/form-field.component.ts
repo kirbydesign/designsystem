@@ -115,11 +115,11 @@ export class FormFieldComponent
       );
     }
 
-    // Measure the width of all slotted affix element,
-    // and apply the width + standard padding to the input elements
+    // Measure the width of all slotted affix elements,
+    // and apply their width + standard padding to the input elements
     // padding, so the start/end of the input is correctly indented.
     if (this.input) {
-      this.affixElements?.forEach((affix) => {
+      this.affixElements.forEach((affix) => {
         this.resizeObserverService.observe(affix.el, (entry) => {
           const dir = affix.type === 'prefix' ? 'left' : 'right';
           this.renderer.setStyle(
