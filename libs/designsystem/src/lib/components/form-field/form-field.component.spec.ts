@@ -520,12 +520,8 @@ describe('FormFieldComponent', () => {
       expect(secondEvent.type).toBe('touchend');
     });
   });
+
   describe('affix', () => {
-    const wait = (ms: number = 25): Promise<void> => {
-      return new Promise((resolve) => {
-        setTimeout(resolve, ms);
-      });
-    };
     describe('with prefix', () => {
       beforeEach(() => {
         spectator = createHost(
@@ -535,23 +531,31 @@ describe('FormFieldComponent', () => {
            </kirby-form-field>`
         );
       });
+
       it('should render prefix content', () => {
         const affix = spectator.query(byText('foo'));
+
         expect(affix).toBeTruthy();
       });
+
       it('should render prefix content in correct slot', () => {
         const affix = spectator.query(byText('foo'));
+
         expect(affix.parentElement.classList).toContain('prefix');
       });
+
       it('should add width of prefix content to padding-left of <input>', async () => {
-        await wait();
-        const input = spectator.queryHost('input');
+        await TestHelper.waitForTimeout();
+
+        const inputElement = spectator.queryHost<HTMLInputElement>('input[kirby-input]');
         const expectedPadding = 50 + parseInt(DesignTokenHelper.size('s'));
-        expect(input).toHaveComputedStyle({
+
+        expect(inputElement).toHaveComputedStyle({
           'padding-left': `${expectedPadding}px`,
         });
       });
     });
+
     describe('with suffix', () => {
       beforeEach(() => {
         spectator = createHost(
@@ -561,23 +565,31 @@ describe('FormFieldComponent', () => {
            </kirby-form-field>`
         );
       });
+
       it('should render suffix content', () => {
         const affix = spectator.query(byText('foo'));
+
         expect(affix).toBeTruthy();
       });
+
       it('should render suffix content in correct slot', () => {
         const affix = spectator.query(byText('foo'));
+
         expect(affix.parentElement.classList).toContain('suffix');
       });
+
       it('should add width of suffix content to padding-right of <input>', async () => {
-        await wait();
-        const input = spectator.queryHost('input');
+        const inputElement = spectator.queryHost('input');
         const expectedPadding = 50 + parseInt(DesignTokenHelper.size('s'));
-        expect(input).toHaveComputedStyle({
+
+        await TestHelper.waitForTimeout();
+
+        expect(inputElement).toHaveComputedStyle({
           'padding-right': `${expectedPadding}px`,
         });
       });
     });
+
     describe('with suffix and prefix', () => {
       beforeEach(() => {
         spectator = createHost(
@@ -588,10 +600,12 @@ describe('FormFieldComponent', () => {
            </kirby-form-field>`
         );
       });
+
       it('should render both prefix and suffix content', () => {
         const suffix = spectator.query(byText('foo'));
-        expect(suffix).toBeTruthy();
         const prefix = spectator.query(byText('bar'));
+
+        expect(suffix).toBeTruthy();
         expect(prefix).toBeTruthy();
       });
     });
