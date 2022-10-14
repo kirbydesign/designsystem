@@ -5,13 +5,13 @@
       *ngFor="let item of items; let i = index"
       (click)="onTabChange(i)"
       [ngClass]="i === selectedIndex ? 'selected' : ''"
-      [tabIndex]="i + 1"
+      [tabIndex]="0"
       (keydown.enter)="onTabChange(i)"
       (keydown.arrowLeft)="focusNext(i - 1)"
       (keydown.arrowRight)="focusNext(i + 1)"
     >
       <div class="tab-item-inner" [class.extended]="!!item.badge">
-        <span [title]="item.text">{{ item.text }}</span>
+        <span [attr.text]="item.text">{{ item.text }}</span>
         <ng-container *ngIf="item.badge; let badge">
           <kirby-badge
             role="text"

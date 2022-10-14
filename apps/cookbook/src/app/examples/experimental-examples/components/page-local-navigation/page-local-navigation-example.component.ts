@@ -16,17 +16,17 @@ const config = {
 export class PageLocalNavigationExampleComponent extends BasePageExampleComponent {
   items: LocalNavigationItem[] = [
     {
-      text: 'Beholdning',
+      text: 'Item 1',
     },
     {
-      text: 'Marked',
+      text: 'Item 2',
       badge: {
         content: { name: 'attach', isCustom: false },
         themeColor: 'warning',
       },
     },
     {
-      text: 'Inspiration',
+      text: 'Item 3',
       badge: {
         themeColor: 'success',
         content: { text: '2' },
