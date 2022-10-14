@@ -520,8 +520,8 @@ describe('FormFieldComponent', () => {
       expect(secondEvent.type).toBe('touchend');
     });
   });
-  fdescribe('affix', () => {
-    const wait = (ms: number = 10): Promise<void> => {
+  describe('affix', () => {
+    const wait = (ms: number = 25): Promise<void> => {
       return new Promise((resolve) => {
         setTimeout(resolve, ms);
       });
