@@ -1,4 +1,4 @@
-import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
+import { byText, createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { DesignTokenHelper } from '@kirbydesign/core';
 
@@ -14,6 +14,7 @@ import { FormFieldComponent } from './form-field.component';
 import { InputCounterComponent } from './input-counter/input-counter.component';
 import { InputComponent } from './input/input.component';
 import { TextareaComponent } from './textarea/textarea.component';
+import { AffixDirective } from './directives/affix/affix.directive';
 
 const { size, fontSize, fontWeight, lineHeight, getElevation } = DesignTokenHelper;
 
@@ -24,6 +25,7 @@ describe('FormFieldComponent', () => {
     component: FormFieldComponent,
     declarations: [
       FormFieldMessageComponent,
+      AffixDirective,
       InputComponent,
       TextareaComponent,
       RadioGroupComponent,
@@ -516,6 +518,82 @@ describe('FormFieldComponent', () => {
       const secondEvent: Event = dispatchEventSpy.calls.argsFor(1)[0];
       expect(secondEvent).toBeInstanceOf(TouchEvent);
       expect(secondEvent.type).toBe('touchend');
+    });
+  });
+  fdescribe('affix', () => {
+    const wait = (ms: number = 10): Promise<void> => {
+      return new Promise((resolve) => {
+        setTimeout(resolve, ms);
+      });
+    };
+    describe('with prefix', () => {
+      beforeEach(() => {
+        spectator = createHost(
+          `<kirby-form-field>
+            <span kirby-affix="prefix" style="width: 50px">foo</span>
+            <input kirby-input />
+           </kirby-form-field>`
+        );
+      });
+      it('should render prefix content', () => {
+        const affix = spectator.query(byText('foo'));
+        expect(affix).toBeTruthy();
+      });
+      it('should render prefix content in correct slot', () => {
+        const affix = spectator.query(byText('foo'));
+        expect(affix.parentElement.classList).toContain('prefix');
+      });
+      it('should add width of prefix content to padding-left of <input>', async () => {
+        await wait();
+        const input = spectator.queryHost('input');
+        const expectedPadding = 50 + parseInt(DesignTokenHelper.size('s'));
+        expect(input).toHaveComputedStyle({
+          'padding-left': `${expectedPadding}px`,
+        });
+      });
+    });
+    describe('with suffix', () => {
+      beforeEach(() => {
+        spectator = createHost(
+          `<kirby-form-field>
+            <span kirby-affix="suffix" style="width: 50px">foo</span>
+            <input kirby-input />
+           </kirby-form-field>`
+        );
+      });
+      it('should render suffix content', () => {
+        const affix = spectator.query(byText('foo'));
+        expect(affix).toBeTruthy();
+      });
+      it('should render suffix content in correct slot', () => {
+        const affix = spectator.query(byText('foo'));
+        expect(affix.parentElement.classList).toContain('suffix');
+      });
+      it('should add width of suffix content to padding-right of <input>', async () => {
+        await wait();
+        const input = spectator.queryHost('input');
+        const expectedPadding = 50 + parseInt(DesignTokenHelper.size('s'));
+        expect(input).toHaveComputedStyle({
+          'padding-right': `${expectedPadding}px`,
+        });
+      });
+    });
+    describe('with suffix and prefix', () => {
+      beforeEach(() => {
+        spectator = createHost(
+          `<kirby-form-field>
+            <span kirby-affix="suffix">foo</span>
+            <span kirby-affix="prefix">bar</span>
+            <input kirby-input />
+           </kirby-form-field>`
+        );
+      });
+      it('should render both prefix and suffix content', () => {
+        const suffix = spectator.query(byText('foo'));
+        expect(suffix).toBeTruthy();
+        const prefix = spectator.query(byText('bar'));
+        expect(prefix).toBeTruthy();
+      });
     });
   });
 });
