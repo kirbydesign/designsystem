@@ -121,11 +121,14 @@ export class FormFieldComponent
     if (this.input) {
       this.affixElements.forEach((affix) => {
         this.resizeObserverService.observe(affix.el, (entry) => {
-          const dir = affix.type === 'prefix' ? 'left' : 'right';
+          const padding = affix.type === 'prefix' ? 'padding-left' : 'padding-right';
+          const affixWidth = entry.contentRect.width;
+          const existingPadding = parseInt(DesignTokenHelper.size('s'));
+
           this.renderer.setStyle(
             this.input.nativeElement,
-            `padding-${dir}`,
-            `${entry.contentRect.width + parseInt(DesignTokenHelper.size('s'))}px`
+            `${padding}`,
+            `${affixWidth + existingPadding}px`
           );
         });
       });
