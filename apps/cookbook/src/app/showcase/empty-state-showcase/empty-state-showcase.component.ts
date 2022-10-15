@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
-
 import exampleHtml from '../../examples/empty-state-example/empty-state-example.component.html?raw';
+import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
   selector: 'cookbook-empty-state-showcase',
@@ -14,6 +13,12 @@ export class EmptyStateShowcaseComponent {
     {
       name: 'iconName',
       description: 'Name of the icon (see icons).',
+      defaultValue: 'null',
+      type: ['string'],
+    },
+    {
+      name: 'customIconName',
+      description: 'Name of the custom icon (see icons for custom icon example).',
       defaultValue: 'null',
       type: ['string'],
     },
