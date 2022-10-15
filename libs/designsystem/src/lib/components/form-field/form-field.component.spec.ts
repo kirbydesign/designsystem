@@ -543,17 +543,6 @@ describe('FormFieldComponent', () => {
 
         expect(affix.parentElement.classList).toContain('prefix');
       });
-
-      it('should add width of prefix content to padding-left of <input>', async () => {
-        await TestHelper.waitForTimeout();
-
-        const inputElement = spectator.queryHost<HTMLInputElement>('input[kirby-input]');
-        const expectedPadding = 50 + parseInt(DesignTokenHelper.size('s'));
-
-        expect(inputElement).toHaveComputedStyle({
-          'padding-left': `${expectedPadding}px`,
-        });
-      });
     });
 
     describe('with suffix', () => {
@@ -576,17 +565,6 @@ describe('FormFieldComponent', () => {
         const affix = spectator.query(byText('foo'));
 
         expect(affix.parentElement.classList).toContain('suffix');
-      });
-
-      it('should add width of suffix content to padding-right of <input>', async () => {
-        const inputElement = spectator.queryHost('input');
-        const expectedPadding = 50 + parseInt(DesignTokenHelper.size('s'));
-
-        await TestHelper.waitForTimeout();
-
-        expect(inputElement).toHaveComputedStyle({
-          'padding-right': `${expectedPadding}px`,
-        });
       });
     });
 
