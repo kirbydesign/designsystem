@@ -49,7 +49,7 @@ describe('TableRowComponent', () => {
       expect(spectator.component).toBeTruthy();
     });
 
-    it('have selectable rows', () => {
+    it('should have selectable rows', () => {
       expect(element).toHaveClass('kirby-selectable-row');
     });
   });

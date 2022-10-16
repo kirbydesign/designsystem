@@ -15,6 +15,8 @@ export * from './item-sliding';
 export { CheckboxComponent } from './checkbox/checkbox.component';
 export { ChipComponent } from './chip/chip.component';
 
+export * from './data-table';
+
 export { DividerComponent } from './divider/divider.component';
 
 export { DropdownComponent } from './dropdown/dropdown.component';
@@ -63,5 +65,3 @@ export { ToggleComponent } from './toggle/toggle.component';
 
 export { ProgressCircleComponent } from './progress-circle/progress-circle.component';
 export * from './toggle-button';
-
-export * from './data-table';

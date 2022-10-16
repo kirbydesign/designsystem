@@ -4,10 +4,7 @@
 // Color variables
 $divider-color: utils.get-color('medium');
 $highlight-color: utils.get-color('light');
-
-@mixin border-bottom() {
-  border-bottom: 1px solid $divider-color;
-}
+$border-bottom: 1px solid $divider-color;
 
 table[kirby-table] {
   width: 100%;
@@ -16,48 +13,36 @@ table[kirby-table] {
   &.kirby-table-layout-fixed {
     table-layout: fixed;
   }
+}
 
-  thead {
-    tr {
-      height: utils.size('l');
-      text-align: left;
-
-      @include border-bottom;
-
-      th {
-        font-weight: utils.font-weight('normal');
-        font-size: utils.font-size('xs');
-        line-height: utils.line-height('xs');
-        color: utils.get-text-color('semi-dark');
-        padding: utils.size('xxs') utils.size('s');
-      }
-    }
+tr {
+  &:not(:last-child) {
+    border-bottom: $border-bottom;
   }
 
-  tbody {
-    tr,
-    kirby-tr {
-      height: utils.size(xxl);
-
-      &:not(:last-child) {
-        @include border-bottom;
-      }
-
-      &.kirby-selectable-row {
-        @include interaction-state.apply-hover {
-          background-color: $highlight-color;
-        }
-      }
-
-      td {
-        padding: 0 utils.size('s');
-        font-weight: utils.font-weight('normal');
-        font-size: utils.font-size('s');
-        line-height: utils.line-height('xs');
-        color: utils.get-text-color('black');
-        vertical-align: middle;
-        min-height: utils.size('xl');
-      }
+  &.kirby-selectable-row {
+    @include interaction-state.apply-hover {
+      background-color: $highlight-color;
     }
   }
+}
+
+thead tr {
+  border-bottom: $border-bottom;
+}
+
+th {
+  text-align: left;
+  font-weight: utils.font-weight('normal');
+  font-size: utils.font-size('xs');
+  color: utils.get-text-color('semi-dark');
+  padding: utils.size('xxs') utils.size('s');
+}
+
+td {
+  padding: utils.size('s');
+  font-weight: utils.font-weight('normal');
+  font-size: utils.font-size('s');
+  color: utils.get-text-color('black');
+  vertical-align: middle;
 }

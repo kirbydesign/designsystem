@@ -2,7 +2,7 @@ import { createHostFactory, Spectator } from '@ngneat/spectator';
 import { DesignTokenHelper } from '../../../helpers/design-token-helper';
 import { TableComponent } from './table.component';
 
-const { fontWeight, fontSize, lineHeight, getTextColor, size, getColor } = DesignTokenHelper;
+const { fontWeight, fontSize, getTextColor, size, getColor } = DesignTokenHelper;
 
 describe('TableComponent', () => {
   let spectator: Spectator<TableComponent>;
@@ -41,7 +41,7 @@ describe('TableComponent', () => {
       expect(spectator.component).toBeTruthy();
     });
 
-    it('style table correctly', () => {
+    it('should style table correctly', () => {
       expect(element).toHaveComputedStyle({
         width: `${element.parentElement.clientWidth}px`,
         'border-collapse': 'collapse',
@@ -49,41 +49,39 @@ describe('TableComponent', () => {
       });
     });
 
-    it('style [thead] cells correctly', () => {
+    it('should style [thead] cells correctly', () => {
       expect(element.children.namedItem('thead').firstChild.firstChild).toHaveComputedStyle({
+        'text-align': 'left',
         'font-weight': fontWeight('normal'),
         'font-size': fontSize('xs'),
-        'line-height': lineHeight('xs'),
         color: getTextColor('semi-dark'),
         padding: `${size('xxs')} ${size('s')}`,
       });
     });
 
-    it('style [tbody] cells correctly', () => {
+    it('should style [tbody] cells correctly', () => {
       expect(element.children.namedItem('tbody').firstChild.firstChild).toHaveComputedStyle({
-        padding: `0px ${size('s')}`,
+        padding: `${size('s')}`,
         'font-weight': fontWeight('normal'),
         'font-size': fontSize('s'),
         color: getTextColor('black'),
-        'line-height': lineHeight('xs'),
         'vertical-align': 'middle',
-        'min-height': size('xl'),
       });
     });
 
-    it('add divider on header', () => {
+    it('should add divider on header', () => {
       expect(element.children.namedItem('thead').firstChild).toHaveComputedStyle({
         'border-bottom': `1px solid ${getColor('medium').value}`,
       });
     });
 
-    it('add divider on body rows', () => {
+    it('should add divider on body rows', () => {
       expect(element.children.namedItem('tbody').firstChild).toHaveComputedStyle({
         'border-bottom': `1px solid ${getColor('medium').value}`,
       });
     });
 
-    it('not add divider to bottom row', () => {
+    it('should not add divider to bottom row', () => {
       expect(element.children.namedItem('tbody').lastChild).not.toHaveComputedStyle({
         'border-bottom': `1px solid ${getColor('medium').value}`,
       });
@@ -116,7 +114,7 @@ describe('TableComponent', () => {
       expect(spectator.component).toBeTruthy();
     });
 
-    it('style table with fixed-layout', () => {
+    it('should style table with fixed-layout', () => {
       expect(element).toHaveClass('kirby-table-layout-fixed');
     });
   });
