@@ -4,7 +4,7 @@
   "dependencies": {
     "@fontsource/roboto": "4.2.1",
     "@ionic/angular": "6.2.1",
-    "@kirbydesign/core": "0.0.34",
+    "@kirbydesign/core": "0.0.35",
     "chart.js": "3.3.2",
     "chartjs-adapter-date-fns": "^2.0.0",
     "chartjs-plugin-annotation": "^1.0.2",
