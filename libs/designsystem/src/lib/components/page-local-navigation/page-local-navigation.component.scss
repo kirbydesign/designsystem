@@ -4,7 +4,7 @@ $tab-item-text-max-width: 100px;
 $bottom-border-height: 1px;
 $border-color-standard: utils.get-color('medium');
 $border-color-selected: utils.get-color('dark');
-$divider-max-width-breakpoint: calc(#{utils.$page-content-max-width} + (#{utils.size('s')} * 2));
+$divider-max-width-breakpoint: utils.$page-content-max-width + (utils.size('s') * 2);
 
 .tab-bar {
   position: relative;
@@ -17,13 +17,14 @@ $divider-max-width-breakpoint: calc(#{utils.$page-content-max-width} + (#{utils.
   overflow-y: hidden;
   overflow-x: scroll;
 
-  /* Ensures correct rendering of selected tab state and tab bar bottom divider on iOS */
-   -webkit-overflow-scrolling: auto;
+  // Ensures that the .container divider pseudo-element does not overlap the .selected divider pseudo-element.
+  // There seems be a weird bug with the iOS browser where z-index of scrollable elements are not respected with momentum scrolling active - so we disable it for now.
+  -webkit-overflow-scrolling: auto;
 
-  /* Hide scrollbar for IE, Edge and Firefox */
-   scrollbar-width: none;
+  // Hide scrollbar for Firefox
+  scrollbar-width: none;
 
-  /* Hide scrollbar for Chrome, Safari and Opera */
+  // Hide scrollbar for Chrome, Edge, Safari and Opera
   &::-webkit-scrollbar {
     display: none;
   }
@@ -34,7 +35,7 @@ $divider-max-width-breakpoint: calc(#{utils.$page-content-max-width} + (#{utils.
   background-color: utils.get-color('background-color');
   max-width: var(--page-content-max-width, utils.$page-content-max-width);
 
-  /* Divider */
+  // Divider
   &::before {
     content: '';
     background-color: $border-color-standard;
@@ -45,7 +46,7 @@ $divider-max-width-breakpoint: calc(#{utils.$page-content-max-width} + (#{utils.
     left: 0;
     width: 100%;
 
-    @media only screen and (max-width: $divider-max-width-breakpoint) {
+    @include utils.media('<=#{$divider-max-width-breakpoint}') {
       left: -#{utils.size('s')};
       width: calc(100% + (#{utils.size('s')} * 2));
     }
@@ -57,16 +58,16 @@ $divider-max-width-breakpoint: calc(#{utils.$page-content-max-width} + (#{utils.
   cursor: pointer;
   box-sizing: border-box;
   outline: none;
-  padding-bottom: calc(#{$bottom-border-height} * 2);
+  padding-bottom: $bottom-border-height * 2;
 
-  /* Selected divider */
+  // Selected divider
   &.selected::before {
     content: '';
     width: 100%;
     background-color: $border-color-selected;
     position: absolute;
     border-radius: 1px;
-    height: calc(#{$bottom-border-height} * 2);
+    height: $bottom-border-height * 2;
     bottom: 0;
     z-index: 2;
   }
@@ -85,7 +86,7 @@ $divider-max-width-breakpoint: calc(#{utils.$page-content-max-width} + (#{utils.
   white-space: nowrap;
   margin: utils.size('s');
 
-  /* Disable text selection on tab items */
+  // Disable text selection on tab items
   user-select: none;
 
   kirby-badge {
@@ -96,10 +97,15 @@ $divider-max-width-breakpoint: calc(#{utils.$page-content-max-width} + (#{utils.
     max-width: $tab-item-text-max-width;
     overflow: hidden;
     text-overflow: ellipsis;
+
+    // The larger line-height ensures no vertical layout shifts when changing the span's text content from bold to normal font-weight.
+    // See lines 75-79
     line-height: utils.size('m');
   }
 
-  /* Ensures static container size when changing from bold to normal font-weight */
+  // Using the before selector to insert a hidden pseudo-element with the same text content in bold,
+  // ensures no horizontal layout shifts when changing the visible span's text content from bold to normal font-weight.
+  // See lines 75-79
   & > span::before {
     display: block;
     content: attr(text);
