@@ -3,7 +3,7 @@ import { Person, table_example_data } from '../table_example_data';
 
 const config = {
   selector: 'cookbook-data-table-default-example',
-  template: `<table kirby-table [fixedLayout]=true>
+  template: `<table kirby-table [fixedLayout]="true">
     <thead>
       <tr>
         <th>Name</th>
