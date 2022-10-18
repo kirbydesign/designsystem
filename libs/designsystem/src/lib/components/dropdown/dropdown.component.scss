@@ -73,6 +73,10 @@ $min-screen-width: 375px;
       display: block;
       opacity: 1;
     }
+
+    & > button {
+      box-shadow: utils.get-elevation(8);
+    }
   }
 
   &.popout-left {
@@ -115,11 +119,11 @@ kirby-card {
   max-width: calc(100vw - #{$margin-horizontal-total});
 }
 
-:host(.is-open) {
-  & > button {
-    box-shadow: utils.get-elevation(8);
-  }
-}
+// :host(.is-open) {
+//   & > button {
+//     box-shadow: utils.get-elevation(8);
+//   }
+// }
 
 :host-context(kirby-calendar) {
   > button {
