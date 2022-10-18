@@ -15,6 +15,8 @@ export * from './item-sliding';
 export { CheckboxComponent } from './checkbox/checkbox.component';
 export { ChipComponent } from './chip/chip.component';
 
+export * from './data-table';
+
 export { DividerComponent } from './divider/divider.component';
 
 export { DropdownComponent } from './dropdown/dropdown.component';

@@ -15,6 +15,7 @@ import { CardShowcaseComponent } from './card-showcase/card-showcase.component';
 import { ChartShowcaseComponent } from './chart-showcase/chart-showcase.component';
 import { CheckboxShowcaseComponent } from './checkbox-showcase/checkbox-showcase.component';
 import { ColorsShowcaseComponent } from './colors-showcase/colors-showcase.component';
+import { DataTableShowcaseComponent } from './data-table-showcase/data-table-showcase.component';
 import { DividerShowcaseComponent } from './divider-showcase/divider-showcase.component';
 import { DropdownShowcaseComponent } from './dropdown-showcase/dropdown-showcase.component';
 import { EmptyStateShowcaseComponent } from './empty-state-showcase/empty-state-showcase.component';
@@ -275,6 +276,10 @@ export const routes: Routes = [
       {
         path: 'styling-HTML-lists',
         component: StylingHtmlListsShowcaseComponent,
+      },
+      {
+        path: 'data-table',
+        component: DataTableShowcaseComponent,
       },
     ],
   },
