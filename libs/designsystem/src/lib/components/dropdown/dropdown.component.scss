@@ -115,15 +115,6 @@ kirby-card {
   max-width: calc(100vw - #{$margin-horizontal-total});
 }
 
-:host(.with-popover) {
-  &.is-open {
-    kirby-card {
-      display: block;
-      position: relative;
-    }
-  }
-}
-
 :host(.is-open) {
   & > button {
     box-shadow: utils.get-elevation(8);
