@@ -14,6 +14,10 @@ import { ForYouComponent } from './transaction-details-flow/for-you/for-you.comp
 import { TransactionDetailsFlowComponent } from './transaction-details-flow/transaction-details-flow.component';
 import { TransactionDetailsComponent } from './transaction-details-flow/transaction-details/transaction-details.component';
 import { TransactionsComponent } from './transaction-details-flow/transactions/transactions.component';
+import { HomePageComponent } from './transfer-and-pay-flow/home-page/home-page.component';
+import { TransferAndPayModalComponent } from './transfer-and-pay-flow/transfer-and-pay-modal/transfer-and-pay-modal.component';
+import { TransferAndPayFlowComponent } from './transfer-and-pay-flow/transfer-and-pay-flow.component';
+import { ChooseRecieverComponent } from './transfer-and-pay-flow/choose-reciever/choose-reciever.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +31,10 @@ import { TransactionsComponent } from './transaction-details-flow/transactions/t
     TransactionDetailsComponent,
     ForYouComponent,
     AccountComponent,
+    HomePageComponent,
+    TransferAndPayModalComponent,
+    TransferAndPayFlowComponent,
+    ChooseRecieverComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, KirbyModule],
   providers: [],

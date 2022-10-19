@@ -42,7 +42,19 @@
       </div>
       <div class="grid-item half-at-tablet-up">
         <article>
-          <kirby-card hasPadding="true" mode="highlighted"> </kirby-card>
+          <kirby-card
+            hasPadding="true"
+            mode="highlighted"
+            (click)="navigate('transfer-and-pay-flow')"
+          >
+            <kirby-avatar
+              imageSrc="https://picsum.photos/100?random=3"
+              size="md"
+              shadow="true"
+            ></kirby-avatar>
+            <h2 class="card-title">Navigate to Transfer and pay</h2>
+            <p>Modal Showcase</p>
+          </kirby-card>
         </article>
       </div>
       <div class="grid-item half-at-tablet-up">
