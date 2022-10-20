@@ -1,8 +1,3 @@
-.align-center {
-  display: flex;
-  justify-content: center;
-}
-
 .grid {
   display: flex;
   justify-content: space-between;
@@ -13,6 +8,7 @@ input {
   margin-right: auto;
   all: unset;
   text-align: right;
+  width: 80%;
 }
 
 input::-webkit-outer-spin-button,
@@ -21,6 +17,28 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-.container {
-  width: 90%;
+.container-over {
+  width: 80%;
+}
+
+.container-under {
+  display: flex;
+  justify-content: center;
+}
+
+/* stylelint-disable selector-pseudo-element-no-unknown */
+::ng-deep ion-footer {
+  box-sizing: border-box;
+}
+
+.large-text {
+  font-size: 100px;
+}
+
+.medium-text {
+  font-size: 75px;
+}
+
+.small-text {
+  font-size: 50px;
 }

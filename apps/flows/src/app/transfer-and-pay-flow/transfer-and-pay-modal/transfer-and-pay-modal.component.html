@@ -1,16 +1,25 @@
 <kirby-page-title>Transfer and pay</kirby-page-title>
-
-<div class="align-center"><input type="number" /> <span>Kr.</span></div>
+<div>
+  <input
+    class="large-text"
+    maxlength="14"
+    type="text"
+    #input
+    [(ngModel)]="currency"
+    (input)="onChange()"
+  />
+  <span class="small-text">Kr.</span>
+</div>
 
 <kirby-modal-footer>
-  <!-- <div class="container"> -->
-  <!-- <div class="grid" (click)="showModalChoose()" >
-            <p>Fra</p>
-            <p>Accounts</p>
+  <div class="container-over">
+    <div class="grid" (click)="showModalChooseOwnAccount()">
+      <p>Fra</p>
+      <p>Accounts</p>
     </div>
-     <kirby-divider></kirby-divider> 
-    <div>
-    <button class="align-center" kirby-button (click)="showModalChoose()">Choose reciever</button> -->
-  <!-- </div> -->
-  <!-- </div> -->
+    <kirby-divider></kirby-divider>
+    <div class="container-under">
+      <button kirby-button (click)="showModalChooseReciever()">Choose reciever</button>
+    </div>
+  </div>
 </kirby-modal-footer>
