@@ -35,7 +35,7 @@ ion-tab-button {
     &.md {
       // Magic values here as we have no tokens that gives
       // badge the correct position in relation to the tab icon
-      --kirby-badge-top: 0.35em;
+      --kirby-badge-top: 0.3em;
       --kirby-badge-left: calc(50% + 0.2em);
     }
   }
@@ -66,6 +66,7 @@ ion-tab-button {
         --kirby-badge-left: 0;
 
         margin-left: utils.size('xxxxs');
+        margin-bottom: calc(utils.size('xxxxs') / 2); // 799 -> 798
       }
     }
 
