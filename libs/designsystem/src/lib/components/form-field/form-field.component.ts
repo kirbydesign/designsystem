@@ -4,18 +4,23 @@ import {
   ChangeDetectionStrategy,
   Component,
   ContentChild,
+  ContentChildren,
   ElementRef,
   HostListener,
   Input,
   OnDestroy,
   OnInit,
+  QueryList,
   Renderer2,
 } from '@angular/core';
+import { DesignTokenHelper } from '../../helpers';
 
 import { PlatformService } from '../../helpers/platform.service';
 import { UniqueIdGenerator } from '../../helpers/unique-id-generator.helper';
 import { WindowRef } from '../../types/window-ref';
 import { RadioGroupComponent } from '../radio/radio-group/radio-group.component';
+import { ResizeObserverService } from '../shared/resize-observer/resize-observer.service';
+import { AffixDirective } from './directives/affix/affix.directive';
 
 import { InputCounterComponent } from './input-counter/input-counter.component';
 import { InputComponent } from './input/input.component';
@@ -39,6 +44,7 @@ export class FormFieldComponent
   @Input() label: string;
   @Input() message: string;
 
+  @ContentChildren(AffixDirective) affixElements: QueryList<AffixDirective>;
   @ContentChild(InputCounterComponent, { static: false }) counter: InputCounterComponent;
   @ContentChild(RadioGroupComponent) private radioGroupComponent: RadioGroupComponent;
   @ContentChild(RadioGroupComponent, { read: ElementRef })
@@ -51,7 +57,8 @@ export class FormFieldComponent
     elementRef: ElementRef<HTMLElement>,
     private platform: PlatformService,
     private renderer: Renderer2,
-    private windowRef: WindowRef
+    private windowRef: WindowRef,
+    private resizeObserverService: ResizeObserverService
   ) {
     this.element = elementRef.nativeElement;
   }
@@ -107,6 +114,25 @@ export class FormFieldComponent
         this._labelId
       );
     }
+
+    // Measure the width of all slotted affix elements,
+    // and apply their width + standard padding to the input elements
+    // padding, so the start/end of the input is correctly indented.
+    if (this.input) {
+      this.affixElements.forEach((affix) => {
+        this.resizeObserverService.observe(affix.el, (entry) => {
+          const padding = affix.type === 'prefix' ? 'padding-left' : 'padding-right';
+          const affixWidth = entry.contentRect.width;
+          const existingPadding = parseInt(DesignTokenHelper.size('s'));
+
+          this.renderer.setStyle(
+            this.input.nativeElement,
+            `${padding}`,
+            `${affixWidth + existingPadding}px`
+          );
+        });
+      });
+    }
   }
 
   ngAfterContentChecked(): void {
@@ -137,5 +163,9 @@ export class FormFieldComponent
         detail: this.element,
       })
     );
+
+    this.affixElements.forEach((affix) => {
+      this.resizeObserverService.unobserve(affix.el);
+    });
   }
 }
