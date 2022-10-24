@@ -1,3 +1,5 @@
+@use '~@kirbydesign/core/src/scss/utils';
+
 .transparent-modal {
   --background: #f6f6f6;
 
@@ -6,6 +8,18 @@
   }
 }
 
-ion-modal {
+ion-toolbar {
   box-sizing: border-box;
+
+  & .toolbar-background {
+    border-bottom: none;
+  }
+}
+
+ion-title {
+  box-sizing: border-box;
+  padding-inline-start: calc(48px + var(--padding-start));
+  padding-inline-end: calc(48px + var(--padding-end));
+  font-size: utils.font-size('l');
+  font-weight: utils.font-weight('bold');
 }
