@@ -13,6 +13,7 @@ import {
   PageContentComponent,
   PageContentDirective,
   PageProgressComponent,
+  PageStickyContentDirective,
   PageSubtitleDirective,
   PageTitleComponent,
   PageTitleDirective,
@@ -32,6 +33,7 @@ import {
     PageTitleDirective,
     PageSubtitleDirective,
     PageToolbarTitleDirective,
+    PageStickyContentDirective,
   ],
   imports: [CommonModule, IonicModule, FitHeadingModule, SpinnerModule],
   exports: [
@@ -47,6 +49,7 @@ import {
     PageSubtitleDirective,
     PageToolbarTitleDirective,
     FitHeadingModule,
+    PageStickyContentDirective,
   ],
 })
 export class PageModule {}
