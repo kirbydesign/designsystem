@@ -74,6 +74,7 @@ export const kirbyIconSettings: IconSettings = {
     { name: 'information-decoration', svg: 'assets/kirby/icons/svg/information-decoration.svg' },
     { name: 'notification', svg: 'assets/kirby/icons/svg/notification.svg' },
     { name: 'transfer-ownership', svg: 'assets/kirby/icons/svg/transfer-ownership.svg' },
+    { name: 'update', svg: 'assets/kirby/icons/svg/update.svg' },
   ],
 };
 
