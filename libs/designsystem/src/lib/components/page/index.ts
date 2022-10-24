@@ -11,3 +11,4 @@ export { PageActionsComponent } from './page.component';
 export { PageFooterComponent } from './page-footer/page-footer.component';
 export { PageModule } from './page.module';
 export { PullToRefreshEvent } from './page.component';
+export { PageStickyContentDirective } from './page.component';
