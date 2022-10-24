@@ -22,6 +22,9 @@ export class ModalExampleConfigurationComponent {
   @Input() collapseTitle: boolean;
   @Output() collapseTitleChange = new EventEmitter<boolean>();
 
+  @Input() alertBeforeClose: boolean;
+  @Output() alertBeforeCloseChange = new EventEmitter<boolean>();
+
   @Input() showFooter: boolean;
   @Output() showFooterChange = new EventEmitter<boolean>();
 
@@ -98,6 +101,12 @@ export class ModalExampleConfigurationComponent {
     if (this.preventChangeEvent) return;
     this.collapseTitle = value;
     this.collapseTitleChange.emit(this.collapseTitle);
+  }
+
+  toggleAlertBeforeClose(value: boolean) {
+    if (this.preventChangeEvent) return;
+    this.alertBeforeClose = value;
+    this.alertBeforeCloseChange.emit(this.alertBeforeClose);
   }
 
   toggleShowDummyContent(show: boolean) {
