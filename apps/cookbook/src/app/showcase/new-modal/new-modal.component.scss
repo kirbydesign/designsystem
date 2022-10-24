@@ -1,0 +1,11 @@
+.transparent-modal {
+  --background: #f6f6f6;
+
+  ion-content {
+    --background: transparent;
+  }
+}
+
+ion-modal {
+  box-sizing: border-box;
+}

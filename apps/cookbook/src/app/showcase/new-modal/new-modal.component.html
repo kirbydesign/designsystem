@@ -1,0 +1,30 @@
+<ion-button id="open-modal" expand="block">Open</ion-button>
+<ion-modal trigger="open-modal" class="transparent-modal">
+  <ng-template>
+    <ion-header (touchstart)="onHeaderTouchStart($event)">
+      <ion-toolbar>
+        <ion-title>Modal title</ion-title>
+        <ion-buttons slot="start" *ngIf="config.flavor === 'drawer'">
+          <ng-container
+            *ngTemplateOutlet="closeButton; context: { icon: 'arrow-down' }"
+          ></ng-container>
+        </ion-buttons>
+        <ion-buttons slot="end" *ngIf="config.flavor === 'modal'">
+          <ng-container *ngTemplateOutlet="closeButton; context: { icon: 'close' }"></ng-container>
+        </ion-buttons>
+        <ion-buttons
+          slot="end"
+          *ngIf="config.flavor === 'drawer' && config.drawerSupplementaryAction"
+        >
+          <ng-container
+            *ngTemplateOutlet="
+              supplementaryButton;
+              context: { btn: config.drawerSupplementaryAction }
+            "
+          >
+          </ng-container>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+  </ng-template>
+</ion-modal>

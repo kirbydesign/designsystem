@@ -53,6 +53,7 @@ import { ToggleButtonShowcaseComponent } from './toggle-button-showcase/toggle-b
 import { ToggleShowcaseComponent } from './toggle-showcase/toggle-showcase.component';
 import { ToolbarShowcaseComponent } from './toolbar-showcase/toolbar-showcase.component';
 import { RadioShowcaseComponent } from './radio-showcase/radio-showcase.component';
+import { NewModalComponent } from './new-modal/new-modal.component';
 
 export const routes: Routes = [
   {
@@ -280,6 +281,10 @@ export const routes: Routes = [
       {
         path: 'data-table',
         component: DataTableShowcaseComponent,
+      },
+      {
+        path: 'new-modal',
+        component: NewModalComponent,
       },
     ],
   },
