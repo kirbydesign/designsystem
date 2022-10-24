@@ -52,6 +52,7 @@ import { ToggleButtonShowcaseComponent } from './toggle-button-showcase/toggle-b
 import { ToggleShowcaseComponent } from './toggle-showcase/toggle-showcase.component';
 import { ToolbarShowcaseComponent } from './toolbar-showcase/toolbar-showcase.component';
 import { DropdownShowcaseComponent } from './dropdown-showcase/dropdown-showcase.component';
+import { DataTableShowcaseComponent } from './data-table-showcase/data-table-showcase.component';
 
 export const COMPONENT_IMPORTS: any[] = [ExamplesModule, ShowcaseRoutingModule];
 
@@ -104,6 +105,7 @@ export const COMPONENT_EXPORTS: any[] = [
   ItemSlidingShowcaseComponent,
   StylingHtmlListsShowcaseComponent,
   ListExperimentalShowcaseComponent,
+  DataTableShowcaseComponent,
 ];
 
 export const COMPONENT_DECLARATIONS: any[] = [...COMPONENT_EXPORTS, ShowcaseComponent];

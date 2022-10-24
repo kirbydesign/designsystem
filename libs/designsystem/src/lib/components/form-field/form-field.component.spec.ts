@@ -1,4 +1,4 @@
-import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
+import { byText, createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { DesignTokenHelper } from '@kirbydesign/core';
 
@@ -14,6 +14,7 @@ import { FormFieldComponent } from './form-field.component';
 import { InputCounterComponent } from './input-counter/input-counter.component';
 import { InputComponent } from './input/input.component';
 import { TextareaComponent } from './textarea/textarea.component';
+import { AffixDirective } from './directives/affix/affix.directive';
 
 const { size, fontSize, fontWeight, lineHeight, getElevation } = DesignTokenHelper;
 
@@ -24,6 +25,7 @@ describe('FormFieldComponent', () => {
     component: FormFieldComponent,
     declarations: [
       FormFieldMessageComponent,
+      AffixDirective,
       InputComponent,
       TextareaComponent,
       RadioGroupComponent,
@@ -226,10 +228,10 @@ describe('FormFieldComponent', () => {
         expect(inputElement).toBeTruthy();
       });
 
-      it('should render the input as a direct descendant', () => {
+      it('should render the input as a descendant', () => {
         const inputElement = spectator.queryHost('input[kirby-input]');
         expect(inputElement).toBeTruthy();
-        expect(inputElement.parentElement).toEqual(spectator.element);
+        expect(inputElement.closest('kirby-form-field')).toEqual(spectator.element);
       });
 
       it('should not render the input within a label', () => {
@@ -314,10 +316,10 @@ describe('FormFieldComponent', () => {
         expect(textareaElement).toBeTruthy();
       });
 
-      it('should render the textarea as a direct descendant', () => {
+      it('should render the textarea as a descendant', () => {
         const textareaElement = spectator.queryHost('textarea[kirby-textarea]');
         expect(textareaElement).toBeTruthy();
-        expect(textareaElement.parentElement).toEqual(spectator.element);
+        expect(textareaElement.closest('kirby-form-field')).toEqual(spectator.element);
       });
 
       it('should not render the textarea within a label', () => {
@@ -368,9 +370,9 @@ describe('FormFieldComponent', () => {
         label = spectator.queryHost('label');
       });
 
-      it('should render the radio-group as a direct descendant', () => {
+      it('should render the radio-group as a descendant', () => {
         expect(radioGroupElement).toBeTruthy();
-        expect(radioGroupElement.parentElement).toEqual(spectator.element);
+        expect(radioGroupElement.closest('kirby-form-field')).toEqual(spectator.element);
       });
 
       it('should not render the radio-group within a label', () => {
@@ -516,6 +518,74 @@ describe('FormFieldComponent', () => {
       const secondEvent: Event = dispatchEventSpy.calls.argsFor(1)[0];
       expect(secondEvent).toBeInstanceOf(TouchEvent);
       expect(secondEvent.type).toBe('touchend');
+    });
+  });
+
+  describe('affix', () => {
+    describe('with prefix', () => {
+      beforeEach(() => {
+        spectator = createHost(
+          `<kirby-form-field>
+            <span kirby-affix="prefix" style="width: 50px">foo</span>
+            <input kirby-input />
+           </kirby-form-field>`
+        );
+      });
+
+      it('should render prefix content', () => {
+        const affix = spectator.query(byText('foo'));
+
+        expect(affix).toBeTruthy();
+      });
+
+      it('should render prefix content in correct slot', () => {
+        const affix = spectator.query(byText('foo'));
+
+        expect(affix.parentElement.classList).toContain('prefix');
+      });
+    });
+
+    describe('with suffix', () => {
+      beforeEach(() => {
+        spectator = createHost(
+          `<kirby-form-field>
+            <span kirby-affix="suffix" style="width: 50px">foo</span>
+            <input kirby-input />
+           </kirby-form-field>`
+        );
+      });
+
+      it('should render suffix content', () => {
+        const affix = spectator.query(byText('foo'));
+
+        expect(affix).toBeTruthy();
+      });
+
+      it('should render suffix content in correct slot', () => {
+        const affix = spectator.query(byText('foo'));
+
+        expect(affix.parentElement.classList).toContain('suffix');
+      });
+    });
+
+    describe('with suffix and prefix', () => {
+      beforeEach(() => {
+        spectator = createHost(
+          `<kirby-form-field>
+            <span kirby-affix="suffix">foo</span>
+            <span kirby-affix="prefix">bar</span>
+            <input kirby-input />
+           </kirby-form-field>`
+        );
+      });
+
+      it('should render both prefix and suffix content', () => {
+        const suffix = spectator.query(byText('foo'));
+        const prefix = spectator.query(byText('bar'));
+
+        expect(suffix).toBeTruthy();
+        expect(prefix).toBeTruthy();
+      });
     });
   });
 });
