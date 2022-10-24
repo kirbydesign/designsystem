@@ -242,7 +242,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     This solution can potentially be refactored, when popover is not experimental anymore. Then it could be possible 
     to close the dropdown when the popover backdrop is clicked, instead of relying on the blur event, which is utilized
     by this line below: this.elementRef.nativeElement.focus(). Right now this forces the blur event to be triggered, when
-    clicking outside of the modal.
+    clicking outside of the dropdown.
     */
     this.elementRef.nativeElement.classList.add('clicked');
 
@@ -477,7 +477,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     }
 
     if (this.elementRef.nativeElement.classList.contains('clicked')) {
-      // Remove the 'clicked' class if the user has previously opened the modal by clicking,
+      // Remove the 'clicked' class if the user has previously opened the dropdown by clicking,
       // since the class prevents the focus ring from showing,
       // which is expected to happen, when using the tab key
       this.elementRef.nativeElement.classList.remove('clicked');
