@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { ResizeObserver } from './types/resize-observer';
 import { ResizeObserverCallback } from './types/resize-observer-callback';
 
-declare var ResizeObserver: {
+declare const ResizeObserver: {
   prototype: ResizeObserver;
   new (callback: ResizeObserverCallback): ResizeObserver;
 };

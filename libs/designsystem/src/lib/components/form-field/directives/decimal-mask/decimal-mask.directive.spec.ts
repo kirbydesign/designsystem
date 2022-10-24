@@ -8,7 +8,7 @@ import { InputComponent } from '../../input/input.component';
 
 import { DecimalMaskDirective } from './decimal-mask.directive';
 
-// tslint:disable-next-line:component-selector
+// eslint-disable-next-line @angular-eslint/component-selector
 @Component({ selector: 'numeric-input-host', template: '' })
 class NumericInputHostComponent {
   numericInput = new FormControl('');

@@ -23,7 +23,7 @@ export interface FitHeadingConfig {
   providers: [LineClampHelper],
 })
 export class FitHeadingDirective implements OnInit, OnDestroy {
-  // tslint:disable-next-line:no-input-rename
+  // eslint-disable-next-line @angular-eslint/no-input-rename
   @Input('kirbyFitHeading') config?: FitHeadingConfig;
 
   private isObservingHostElement: boolean;

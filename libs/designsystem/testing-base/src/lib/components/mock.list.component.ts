@@ -5,6 +5,7 @@ import {
   ListShape,
   ListSwipeAction,
   LoadOnDemandEvent,
+  StandAloneSpacing,
   ThemeColor,
 } from '@kirbydesign/designsystem';
 
@@ -24,6 +25,8 @@ export class MockListComponent {
   @Input() getItemColor: (item: any) => ThemeColor;
   @Input() getSectionName: (item: any) => string;
   @Input() trackBy: TrackByFunction<any>;
+  @Input() getStandAloneByProperty: string;
+  @Input() standAloneSpacing: StandAloneSpacing;
   @Input() noMoreItemsText: string;
   @Input() showDivider: boolean;
   @Input() markSelectedRow: boolean;

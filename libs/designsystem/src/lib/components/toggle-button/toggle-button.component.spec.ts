@@ -1,4 +1,4 @@
-import { Spectator, createComponentFactory } from '@ngneat/spectator';
+import { createComponentFactory, Spectator } from '@ngneat/spectator';
 import { first } from 'rxjs/operators';
 
 import { ToggleButtonComponent } from './toggle-button.component';

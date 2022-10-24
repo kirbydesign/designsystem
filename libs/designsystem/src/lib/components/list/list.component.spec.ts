@@ -12,9 +12,17 @@ import { ListHelper } from './helpers/list-helper';
 import { ListItemComponent } from './list-item/list-item.component';
 import { ListComponent } from './list.component';
 import { LoadOnDemandEvent } from './list.event';
-import { GroupByPipe } from './pipes/group-by.pipe';
 
-const TEST_ITEMS: any[] = [
+type Transaction = {
+  id: number;
+  title: string;
+  subTitle: string;
+  amount: string;
+  detail: number;
+  color: string;
+};
+
+const transactions: Transaction[] = [
   {
     id: 0,
     title: 'Vestas Wind Systems has a very long name',
@@ -57,7 +65,6 @@ describe('ListComponent', () => {
     component: ListComponent,
     declarations: [
       ListComponent,
-      GroupByPipe,
       SpinnerComponent,
       InfiniteScrollDirective,
       ListItemColorDirective,
@@ -72,7 +79,6 @@ describe('ListComponent', () => {
     ],
     providers: [
       ListHelper,
-      GroupByPipe,
       {
         provide: WindowRef,
         useValue: <WindowRef>{ nativeWindow: window },
@@ -101,7 +107,7 @@ describe('ListComponent', () => {
   });
 
   describe('sections', () => {
-    it('should be disabled if no section callback is defined', () => {
+    it('should be disabled if no getSectionName function is defined', () => {
       spectator.setInput({
         getSectionName: undefined,
       });
@@ -109,10 +115,10 @@ describe('ListComponent', () => {
       expect(spectator.component._isSectionsEnabled).toBeFalsy();
     });
 
-    it('should be enabled if a section callback is defined', () => {
+    it('should be enabled if a getSectionName function is defined', () => {
       spectator.setInput({
-        items: TEST_ITEMS,
-        getSectionName: (_item: any) => 'this is a test',
+        items: transactions,
+        getSectionName: () => 'this is a test',
       });
 
       expect(spectator.component._isSectionsEnabled).toBeTruthy();
@@ -120,8 +126,8 @@ describe('ListComponent', () => {
 
     it('should have no groupedItems when last item in items input is removed', () => {
       spectator.setInput({
-        items: [TEST_ITEMS[0]],
-        getSectionName: (_item: any) => 'this is a test',
+        items: [transactions[0]],
+        getSectionName: () => 'this is a test',
       });
 
       expect(spectator.component._groupedItems).toHaveLength(1);
@@ -135,7 +141,7 @@ describe('ListComponent', () => {
   describe('divider', () => {
     it('should set class "has-divider" on list element when showDivider is true', () => {
       spectator.setInput({
-        items: TEST_ITEMS,
+        items: transactions,
         showDivider: true,
       });
 
@@ -145,7 +151,7 @@ describe('ListComponent', () => {
 
     it('should not set class "has-divider" on list element when showDivider is false', () => {
       spectator.setInput({
-        items: TEST_ITEMS,
+        items: transactions,
         showDivider: false,
       });
 

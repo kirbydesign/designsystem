@@ -33,7 +33,7 @@ export function mergeDeep(originalObject, overrideObject, config = { mergeArrays
   }, {});
 }
 
-export function mergeDeepAll(...objects: Object[]): Object {
+export function mergeDeepAll(...objects: object[]): object {
   const objectsWithoutUndefined = objects.filter((object) => object !== undefined);
   return objectsWithoutUndefined.reduce((originalObject, overrideObject) =>
     mergeDeep(originalObject, overrideObject)

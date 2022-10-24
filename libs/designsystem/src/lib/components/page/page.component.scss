@@ -23,6 +23,7 @@ ion-toolbar {
   --padding-end: #{utils.size('xxxs')};
   --padding-top: 0;
   --padding-bottom: 0;
+  --ion-toolbar-color: #{utils.get-color('black')};
 
   /*
   * This overrides Ionic's default ios styling for the position of secondary action buttons which are to the left of content: https://ionicframework.com/docs/api/toolbar#buttons
@@ -97,6 +98,11 @@ ion-back-button {
 /*
  * Page Header
  */
+.page-header-container {
+  max-width: var(--page-content-max-width, utils.$page-content-max-width);
+  margin: 0 auto;
+}
+
 .page-header {
   margin-left: utils.size('s');
   margin-top: utils.size('xxs');
@@ -140,6 +146,7 @@ ion-content {
   --padding-start: var(--page-content-padding-start, #{utils.size('s')});
   --padding-end: var(--page-content-padding-end, #{utils.size('s')});
   --background: #{utils.get-color('background-color')};
+  --color: #{utils.get-color('black')};
 
   .content-inner {
     max-width: var(--page-content-max-width, utils.$page-content-max-width);
@@ -158,5 +165,21 @@ ion-content {
     .content-inner {
       position: relative;
     }
+  }
+}
+
+/*
+ * Sticky content
+ */
+.sticky-content-container {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin-block-end: utils.size('m');
+
+  div {
+    max-width: var(--page-content-max-width, utils.$page-content-max-width);
+    margin: 0 auto;
   }
 }

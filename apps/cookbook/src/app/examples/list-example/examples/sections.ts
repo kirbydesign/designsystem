@@ -25,7 +25,7 @@ export const ListWithSectionsExampleTemplate = `<kirby-list
 
 @Component({
   // tslint:disable-next-line
-  selector: 'list-with-sections-example',
+  selector: 'cookbook-list-with-sections-example',
   template: `
     <kirby-page title="List with sections">
       <kirby-page-content> ${ListWithSectionsExampleTemplate} </kirby-page-content>

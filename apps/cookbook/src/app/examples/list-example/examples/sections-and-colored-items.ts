@@ -25,8 +25,7 @@ export const ListWithSectionsAndColoredItemsExampleTemplate = `<kirby-list
 </kirby-list>`;
 
 @Component({
-  // tslint:disable-next-line
-  selector: 'list-with-sections-and-colored-items-example',
+  selector: 'cookbook-list-with-sections-and-colored-items-example',
   template: `
     <kirby-page title="List with sections and colored items">
       <kirby-page-content> ${ListWithSectionsAndColoredItemsExampleTemplate} </kirby-page-content>

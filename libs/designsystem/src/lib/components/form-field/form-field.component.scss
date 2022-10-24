@@ -41,3 +41,29 @@ label {
   margin-bottom: utils.size('xxxs');
   padding: 0 utils.size('s');
 }
+
+.affix-container {
+  position: relative;
+
+  .vertical-align {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+  }
+
+  .prefix {
+    left: utils.size('xs');
+  }
+
+  .suffix {
+    right: utils.size('xs');
+  }
+
+  .semi-dark-text {
+    @include utils.slotted(span, h1, h2, h3, h4, h5, h6, p, data) {
+      color: utils.get-text-color('semi-dark');
+    }
+  }
+}

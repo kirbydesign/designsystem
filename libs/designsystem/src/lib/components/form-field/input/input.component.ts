@@ -16,7 +16,7 @@ export enum InputSize {
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  // tslint:disable-next-line:component-selector
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'input[kirby-input]',
   styleUrls: ['./input.component.scss'],
   template: '',

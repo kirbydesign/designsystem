@@ -14,7 +14,7 @@ export enum SegmentedControlMode {
   selector: 'kirby-segmented-control',
   templateUrl: './segmented-control.component.html',
   styleUrls: ['./segmented-control.component.scss'],
-  // tslint:disable-next-line: no-host-metadata-property
+  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: { role: 'group' },
 })
 export class SegmentedControlComponent {

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActiveElement, Chart, ChartOptions, ChartType as ChartJSType } from 'chart.js';
+import { ActiveElement, Chart, ChartType as ChartJSType, ChartOptions } from 'chart.js';
 import { AnnotationType, AnnotationTypeRegistry } from 'chartjs-plugin-annotation';
 import { toDate } from 'date-fns';
 

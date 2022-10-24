@@ -1,17 +1,17 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  Input,
-  HostBinding,
   EventEmitter,
+  HostBinding,
   HostListener,
-  SimpleChanges,
+  Input,
   OnChanges,
+  SimpleChanges,
 } from '@angular/core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  // tslint:disable-next-line:component-selector
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'textarea[kirby-textarea]',
   styleUrls: ['./textarea.component.scss'],
   templateUrl: './textarea.component.html',

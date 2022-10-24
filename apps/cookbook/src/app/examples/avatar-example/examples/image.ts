@@ -13,7 +13,8 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./avatar-examples.shared.scss'],
-  // tslint:disable-next-line: no-host-metadata-property
+
+  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: { '[class.align-top]': 'true' },
 })
 export class AvatarExampleImageComponent {

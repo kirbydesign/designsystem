@@ -79,7 +79,7 @@ toggleRequired(required: boolean) {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./ng-forms.shared.scss'],
-  // tslint:disable-next-line: no-host-metadata-property
+  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: { '[class.checkbox-xs]': 'true' }, // Extra small checkboxes
 })
 export class RadioReactiveFormsExampleComponent implements OnInit {

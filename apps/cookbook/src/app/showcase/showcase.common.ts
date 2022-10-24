@@ -1,5 +1,3 @@
-import { DropdownShowcaseComponent } from '~/app/showcase/dropdown-showcase/dropdown-showcase.component';
-
 import { StockChartComponent } from '@kirbydesign/designsystem/components/charts/stock-chart';
 
 import { ExamplesModule } from '../examples/examples.module';
@@ -53,6 +51,8 @@ import { ToastShowcaseComponent } from './toast-showcase/toast-showcase.componen
 import { ToggleButtonShowcaseComponent } from './toggle-button-showcase/toggle-button-showcase.component';
 import { ToggleShowcaseComponent } from './toggle-showcase/toggle-showcase.component';
 import { ToolbarShowcaseComponent } from './toolbar-showcase/toolbar-showcase.component';
+import { DropdownShowcaseComponent } from './dropdown-showcase/dropdown-showcase.component';
+import { DataTableShowcaseComponent } from './data-table-showcase/data-table-showcase.component';
 
 export const COMPONENT_IMPORTS: any[] = [ExamplesModule, ShowcaseRoutingModule];
 
@@ -105,6 +105,7 @@ export const COMPONENT_EXPORTS: any[] = [
   ItemSlidingShowcaseComponent,
   StylingHtmlListsShowcaseComponent,
   ListExperimentalShowcaseComponent,
+  DataTableShowcaseComponent,
 ];
 
 export const COMPONENT_DECLARATIONS: any[] = [...COMPONENT_EXPORTS, ShowcaseComponent];

@@ -3,7 +3,7 @@ import { Directive, forwardRef, Input } from '@angular/core';
 import { ThemeColor, ThemeColorDirective } from '@kirbydesign/designsystem';
 
 @Directive({
-  // tslint:disable-next-line:directive-selector
+  // eslint-disable-next-line @angular-eslint/directive-selector
   selector: `kirby-card[themeColor],
              kirby-icon[themeColor],
              kirby-empty-state[themeColor]`,

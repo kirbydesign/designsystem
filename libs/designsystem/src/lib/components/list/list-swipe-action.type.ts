@@ -1,6 +1,6 @@
 import {
-  ItemSlidingSide as ListSwipeDirection,
   ItemSwipeAction,
+  ItemSlidingSide as ListSwipeDirection,
 } from '../item-sliding/item-sliding.types';
 
 // Copy each property in ItemSwipeAction but make it possible to provide them via a function.

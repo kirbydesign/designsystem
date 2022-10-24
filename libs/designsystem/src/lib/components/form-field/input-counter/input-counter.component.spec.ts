@@ -1,9 +1,9 @@
-import { Spectator, createComponentFactory } from '@ngneat/spectator';
+import { createComponentFactory, Spectator } from '@ngneat/spectator';
 
-import { InputCounterComponent } from './input-counter.component';
 import { FormFieldMessageComponent } from '../form-field-message/form-field-message.component';
 import { InputComponent } from '../input/input.component';
 import { TextareaComponent } from '../textarea/textarea.component';
+import { InputCounterComponent } from './input-counter.component';
 
 describe('InputCounterComponent', () => {
   let component: InputCounterComponent;

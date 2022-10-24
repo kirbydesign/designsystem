@@ -15,14 +15,9 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       #Build on PRs, new releases & changes not including 'libs' (which gets build as part of new release)
-      do_build: ${{ github.event_name == 'pull_request' || steps.event_type.outputs.is_new_release == 'true' || steps.filter.outputs.libs == 'false' }}
+      do_build: ${{ github.event_name == 'pull_request' || steps.filter.outputs.libs == 'false' }}
       node_version: ${{ steps.get_node_version.outputs.node_version }}
     steps:
-      - name: Check for new release
-        id: event_type
-        env:
-          IS_NEW_RELEASE: ${{ github.event_name != 'pull_request' && contains(github.event.head_commit.message, 'Bumping version to') }}
-        run: echo "::set-output name=is_new_release::$IS_NEW_RELEASE"
       - name: Checkout repo
         uses: actions/checkout@v2
       - name: Check modified files

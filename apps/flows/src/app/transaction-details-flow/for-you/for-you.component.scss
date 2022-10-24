@@ -1,0 +1,93 @@
+@use 'sass:math';
+
+@use '~@kirbydesign/core/src/scss/utils';
+
+:host {
+  position: absolute;
+  inset: 0;
+}
+
+/* Configure grid properties */
+$columns: 12;
+$gap: utils.size('m');
+
+/* Declare the grid container */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+  gap: $gap;
+}
+
+/* Let grid items span all columns by default */
+.grid-item {
+  grid-column: span $columns;
+}
+
+/* Tablet size and above */
+@include utils.media('>=medium') {
+  .half-at-tablet-up {
+    grid-column: span ($columns * 0.5);
+  }
+}
+
+/* Desktop size and above */
+@include utils.media('>=large') {
+  .half-at-desktop-up {
+    grid-column: span ($columns * 0.5);
+  }
+
+  .third-at-desktop-up {
+    grid-column: span math.div($columns, 3);
+  }
+}
+
+.max-width-container {
+  max-width: 1196px;
+  margin-inline: auto;
+}
+
+.gutter {
+  padding-inline: utils.size(s);
+}
+
+.safe-area-inline {
+  padding-inline: utils.size(s);
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 12.5rem;
+}
+
+.align-center {
+  text-align: center;
+}
+
+.inside-kirby-card-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: min-content;
+  gap: utils.size('xxxs');
+  justify-items: left;
+}
+
+.item-inside-kirby-card {
+  justify-self: end;
+}
+
+.spacing {
+  margin-block: utils.size('s');
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: utils.size('s');
+}
+
+.no-margin {
+  margin: 0;
+}

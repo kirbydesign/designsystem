@@ -32,7 +32,7 @@ this.modalController.showAlert(config);`;
       .replace(/"/g, "'");
   }
 
-  private alertClose$ = new Subject();
+  private alertClose$: Subject<void> = new Subject<void>();
 
   static readonly alertConfigWithDynamicValues = `const title$ = of('Need more time?');
   const message$ = remainingSeconds$.pipe(

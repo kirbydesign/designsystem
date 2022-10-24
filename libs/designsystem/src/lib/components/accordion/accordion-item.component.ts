@@ -1,5 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges } from '@angular/core';
 
 // Counter for generating unique element ids
 let uniqueId = 0;
@@ -17,13 +17,13 @@ let uniqueId = 0;
     ]),
   ],
 })
-export class AccordionItemComponent implements OnInit {
+export class AccordionItemComponent implements OnChanges {
   @Input() title: string;
   @Input() isExpanded: boolean = false;
   @Input() isDisabled: boolean = false;
   @Input() disabledTitle: string;
 
-  ngOnInit(): void {
+  ngOnChanges(): void {
     if (this.isDisabled) {
       this.isExpanded = false;
     }

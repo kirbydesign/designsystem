@@ -1,7 +1,7 @@
 import {
+  ComponentFactoryResolver,
   Directive,
   Input,
-  ComponentFactoryResolver,
   OnInit,
   Renderer2,
   ViewContainerRef,
@@ -14,7 +14,7 @@ import { DynamicComponent } from './dynamic-component';
   selector: '[kirbyLoadComponent]',
 })
 export class ComponentLoaderDirective implements OnInit {
-  // tslint:disable-next-line:no-input-rename
+  // eslint-disable-next-line @angular-eslint/no-input-rename
   @Input('kirbyLoadComponent') configuration: ComponentConfiguration;
   @Input() cssClass: string;
 

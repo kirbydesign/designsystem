@@ -3,7 +3,7 @@ import { Directive, ElementRef, HostBinding, HostListener, OnInit, Optional } fr
 import { CardComponent } from '../../components/card/card.component';
 
 @Directive({
-  // tslint:disable-next-line
+  // eslint-disable-next-line @angular-eslint/directive-selector
   selector: 'kirby-card[click], kirby-chip',
 })
 export class ElementAsButtonDirective implements OnInit {

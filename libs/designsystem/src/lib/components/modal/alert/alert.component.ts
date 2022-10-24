@@ -14,7 +14,7 @@ import { WindowRef } from '../../../types/window-ref';
   selector: 'kirby-alert',
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.scss'],
-  // tslint:disable-next-line: no-host-metadata-property
+  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: { '[class.ion-page]': 'false' }, //Ensure ion-page class doesn't get applied by Ionic Modal Controller
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -22,7 +22,8 @@ const config = {
   selector: config.selector,
   template: config.template,
   styles: config.styles,
-  // tslint:disable-next-line: no-host-metadata-property
+
+  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: { '[class.right-align]': 'true' },
 })
 export class DropdownExampleRightAlignedComponent {

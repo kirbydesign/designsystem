@@ -1,13 +1,13 @@
 import {
   Component,
+  ContentChildren,
   ElementRef,
   EventEmitter,
   Input,
   OnInit,
   Output,
-  Renderer2,
   QueryList,
-  ContentChildren,
+  Renderer2,
 } from '@angular/core';
 
 import { IconComponent } from '../../icon/icon.component';

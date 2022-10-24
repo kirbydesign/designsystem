@@ -8,6 +8,7 @@ export { MockCardFooterComponent } from './mock.card-footer.component';
 export { MockCardHeaderComponent } from './mock.card-header.component';
 export { MockCardComponent } from './mock.card.component';
 export { MockChartComponent } from './mock.chart.component';
+export { MockBaseChartComponent } from './mock.base-chart.component';
 export { MockCheckboxComponent } from './mock.checkbox.component';
 export { MockChipComponent } from './mock.chip.component';
 export { MockDividerComponent } from './mock.divider.component';

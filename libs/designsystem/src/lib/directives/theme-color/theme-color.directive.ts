@@ -4,7 +4,7 @@ import { ColorHelper } from '@kirbydesign/core';
 import { ThemeColor } from '@kirbydesign/core';
 
 @Directive({
-  // tslint:disable-next-line:directive-selector
+  // eslint-disable-next-line @angular-eslint/directive-selector
   selector: `kirby-avatar[themeColor],
              kirby-card[themeColor],
              kirby-icon[themeColor],

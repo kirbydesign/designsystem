@@ -1,6 +1,3 @@
-import { DropdownExampleComponent } from '~/app/examples/dropdown-example/dropdown-example.component';
-import { PagePullToRefreshExampleComponent } from '~/app/examples/page-example/pull-to-refresh/page-pull-to-refresh-example.component';
-
 import { AccordionExampleComponent } from './accordion-example/accordion-example.component';
 import { ActionSheetExampleComponent } from './action-sheet-example/action-sheet-example.component';
 import { AlertExampleComponent } from './alert-example/alert-example.component';
@@ -48,6 +45,9 @@ import { TabExampleComponent } from './tabs-example/tab/tab-example.component';
 import { TabsExampleComponent } from './tabs-example/tabs-example.component';
 import { ToastExampleComponent } from './toast-example/toast-example.component';
 import { ToggleExampleComponent } from './toggle-example/toggle-example.component';
+import { PagePullToRefreshExampleComponent } from './page-example/pull-to-refresh/page-pull-to-refresh-example.component';
+import { DropdownExampleComponent } from './dropdown-example/dropdown-example.component';
+import { DataTableExampleComponent } from './data-table-example/data-table-example.component';
 
 export const COMPONENT_DECLARATIONS: any[] = [
   ExamplesComponent,
@@ -100,4 +100,5 @@ export const COMPONENT_DECLARATIONS: any[] = [
   ItemGroupExampleComponent,
   SectionHeaderExampleComponent,
   ListExperimentalExampleComponent,
+  DataTableExampleComponent,
 ];

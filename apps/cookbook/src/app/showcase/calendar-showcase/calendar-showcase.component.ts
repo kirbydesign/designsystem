@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
+import exampleWithCardHtml from '../../examples/calendar-example/calendar-card-example.component.html?raw';
+import exampleHtml from '../../examples/calendar-example/calendar-example.component.html?raw';
 import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
-import exampleWithCardHtml from '../../examples/calendar-example/calendar-card-example.component.html?raw';
-import exampleHtml from '../../examples/calendar-example/calendar-example.component.html?raw';
 @Component({
   selector: 'cookbook-calendar-showcase',
   templateUrl: './calendar-showcase.component.html',

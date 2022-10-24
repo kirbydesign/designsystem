@@ -15,6 +15,7 @@ import { CardComponent } from './components/card/card.component';
 import { ChartsModule } from './components/charts';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { ChipComponent } from './components/chip/chip.component';
+import { DataTableModule } from './components/data-table/data-table.module';
 import { DividerComponent } from './components/divider/divider.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { EmptyStateComponent } from './components/empty-state/empty-state.component';
@@ -22,6 +23,7 @@ import { FabSheetComponent } from './components/fab-sheet/fab-sheet.component';
 import { FlagComponent } from './components/flag/flag.component';
 import { DateInputDirective } from './components/form-field/directives/date/date-input.directive';
 import { DecimalMaskDirective } from './components/form-field/directives/decimal-mask/decimal-mask.directive';
+import { AffixDirective } from './components/form-field/directives/affix/affix.directive';
 import { FormFieldMessageComponent } from './components/form-field/form-field-message/form-field-message.component';
 import { FormFieldComponent } from './components/form-field/form-field.component';
 import { InputCounterComponent } from './components/form-field/input-counter/input-counter.component';
@@ -34,7 +36,6 @@ import { ItemGroupComponent } from './components/item-group/item-group.component
 import { ItemSlidingComponent } from './components/item-sliding/item-sliding.component';
 import { ItemModule } from './components/item/item.module';
 import { ListModule } from './components/list/list.module';
-import { GroupByPipe } from './components/list/pipes/group-by.pipe';
 import { LoadingOverlayComponent } from './components/loading-overlay/loading-overlay.component';
 import { LoadingOverlayService } from './components/loading-overlay/loading-overlay.service';
 import { ActionSheetComponent } from './components/modal/action-sheet/action-sheet.component';
@@ -83,7 +84,6 @@ const exportedDeclarations = [
   GridComponent,
   ComponentLoaderDirective,
   AvatarComponent,
-  GroupByPipe,
   CalendarComponent,
   CheckboxComponent,
   ActionSheetComponent,
@@ -98,6 +98,7 @@ const exportedDeclarations = [
   SlideButtonComponent,
   ToggleComponent,
   EmptyStateComponent,
+  AffixDirective,
   FormFieldComponent,
   InputComponent,
   InputCounterComponent,
@@ -144,6 +145,7 @@ const exportedModules = [
   ListModule,
   ChartsModule,
   SpinnerModule,
+  DataTableModule,
 ];
 
 const allExports = [...exportedModules, ...exportedDeclarations];

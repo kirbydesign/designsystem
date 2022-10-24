@@ -9,7 +9,6 @@ interface HeaderLink {
 
 export const navigationItems: HeaderLink[] = [
   { text: 'Introduction', route: '/home/intro' },
-  { text: 'Ressources', route: '' },
   { text: 'Guides', route: '/home/guides' },
   { text: 'Accessibility', route: '/home/accessibility-in-kirby' },
   {

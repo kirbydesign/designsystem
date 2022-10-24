@@ -26,6 +26,18 @@
   ></cookbook-form-field-input-label-message-example>
 </cookbook-example-viewer>
 
+<h3>Affix</h3>
+<p>
+  <strong>Please note:</strong> Affix functionality is <em>only</em> intended for use with
+  kirby-input. Date mask input currently does not support prefixed content.
+</p>
+<cookbook-example-viewer [html]="affixExample.template">
+  <cookbook-form-field-input-affix-example
+    [size]="size"
+    #affixExample
+  ></cookbook-form-field-input-affix-example>
+</cookbook-example-viewer>
+
 <h3>Character counter</h3>
 <cookbook-example-viewer [html]="inputCounterExample.template">
   <cookbook-form-field-input-counter-example

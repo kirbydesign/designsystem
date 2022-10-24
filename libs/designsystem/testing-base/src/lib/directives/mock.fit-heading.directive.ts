@@ -14,6 +14,6 @@ import { FitHeadingConfig, FitHeadingDirective } from '@kirbydesign/designsystem
   ],
 })
 export class MockFitHeadingDirective {
-  // tslint:disable-next-line:no-input-rename
+  // eslint-disable-next-line @angular-eslint/no-input-rename
   @Input('kirbyFitHeading') config?: FitHeadingConfig;
 }

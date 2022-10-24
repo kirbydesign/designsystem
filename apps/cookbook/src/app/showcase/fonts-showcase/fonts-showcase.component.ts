@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 import exampleHtml from '../../examples/fonts-example/fonts-example.component.html?raw';
 
@@ -7,12 +7,8 @@ import exampleHtml from '../../examples/fonts-example/fonts-example.component.ht
   templateUrl: './fonts-showcase.component.html',
   styleUrls: ['./fonts-showcase.component.scss'],
 })
-export class FontsShowcaseComponent implements OnInit {
+export class FontsShowcaseComponent {
   exampleHtml = exampleHtml;
 
   @Output() isCTABoxShown = new EventEmitter();
-
-  constructor() {}
-
-  ngOnInit() {}
 }

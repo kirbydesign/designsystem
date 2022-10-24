@@ -1,11 +1,11 @@
 import {
-  Component,
-  OnDestroy,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
-  Input,
-  Output,
+  Component,
   EventEmitter,
+  Input,
+  OnDestroy,
+  Output,
 } from '@angular/core';
 
 @Component({

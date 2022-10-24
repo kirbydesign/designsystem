@@ -1,4 +1,4 @@
-import { ElementRef, Injectable, OnDestroy, NgZone } from '@angular/core';
+import { ElementRef, Injectable, NgZone, OnDestroy } from '@angular/core';
 
 import { ResizeObserver } from './types/resize-observer';
 import { ResizeObserverEntry } from './types/resize-observer-entry';

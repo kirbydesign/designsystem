@@ -6,7 +6,8 @@ import { WindowRef } from '@kirbydesign/designsystem/types/window-ref';
   selector: 'cookbook-modal-example-configuration',
   templateUrl: './modal-example-configuration.component.html',
   styleUrls: ['./modal-example-configuration.component.scss'],
-  // tslint:disable-next-line: no-host-metadata-property
+
+  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: { '[class.checkbox-xs]': 'true' }, // Extra small checkboxes
 })
 export class ModalExampleConfigurationComponent {

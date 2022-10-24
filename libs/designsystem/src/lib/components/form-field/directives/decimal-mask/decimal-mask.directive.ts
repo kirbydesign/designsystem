@@ -10,7 +10,7 @@ interface InputMask {
 }
 
 @Directive({
-  // tslint:disable-next-line
+  // eslint-disable-next-line
   selector: '[kirby-decimal-mask]',
   providers: [
     {

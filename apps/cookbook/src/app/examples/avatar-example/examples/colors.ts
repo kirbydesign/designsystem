@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 
 const config = {
   selector: 'cookbook-avatar-example-colors',
@@ -51,9 +51,10 @@ const config = {
   selector: config.selector,
   template: config.template,
   styleUrls: ['./avatar-examples.shared.scss'],
-  // tslint:disable-next-line: no-host-metadata-property
-  host: { '[class.wrap]': 'true' },
 })
 export class AvatarExampleColorsComponent {
   template: string = config.template;
+
+  @HostBinding('class.wrap')
+  shouldWrap: boolean = true;
 }

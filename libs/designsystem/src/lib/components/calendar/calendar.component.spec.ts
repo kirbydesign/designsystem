@@ -494,7 +494,7 @@ describe('CalendarComponent', () => {
   }
 
   function captureDateChangeEvents() {
-    let captured: { event?: Date } = {};
+    const captured: { event?: Date } = {};
     spectator.output<Date>('dateChange').subscribe((result) => (captured.event = result));
     return captured;
   }
