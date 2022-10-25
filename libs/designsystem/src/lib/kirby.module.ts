@@ -76,6 +76,9 @@ import { KeyHandlerDirective } from './directives/key-handler/key-handler.direct
 import { ModalRouterLinkDirective } from './directives/modal-router-link/modal-router-link.directive';
 import { ThemeColorDirective } from './directives/theme-color/theme-color.directive';
 
+//New modal
+import { FullscreenModalComponent } from './components/new-modal/fullscreen/fullscreen-modal.component';
+
 const exportedDeclarations = [
   CardComponent,
   CardHeaderComponent,
@@ -121,6 +124,7 @@ const exportedDeclarations = [
   ElementAsButtonDirective,
   ItemGroupComponent,
   SectionHeaderComponent,
+  FullscreenModalComponent,
 ];
 
 const declarations = [

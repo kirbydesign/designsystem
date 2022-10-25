@@ -53,7 +53,7 @@ import { ToggleButtonShowcaseComponent } from './toggle-button-showcase/toggle-b
 import { ToggleShowcaseComponent } from './toggle-showcase/toggle-showcase.component';
 import { ToolbarShowcaseComponent } from './toolbar-showcase/toolbar-showcase.component';
 import { RadioShowcaseComponent } from './radio-showcase/radio-showcase.component';
-import { NewModalComponent } from './new-modal/new-modal.component';
+import { NewModalShowcaseComponent } from './new-modal/new-modal-showcase.component';
 
 export const routes: Routes = [
   {
@@ -284,7 +284,7 @@ export const routes: Routes = [
       },
       {
         path: 'new-modal',
-        component: NewModalComponent,
+        component: NewModalShowcaseComponent,
       },
     ],
   },
