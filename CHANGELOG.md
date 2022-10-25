@@ -2,6 +2,10 @@
 
 Notable changes to the project will be documented in this file.
 
+## [7.1.1](https://github.com/kirbydesign/designsystem/compare/v7.1.0...v7.1.1) (12-10-2022)
+
+Fixes missing stylesheets in core packages. Due to modified publish flow made in v7.1.0. This only affects the published npm packages.
+
 ## [7.1.0](https://github.com/kirbydesign/designsystem/compare/v7.0.0...v7.1.0) (07-10-2022)
 
 ### Features

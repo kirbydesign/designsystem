@@ -31,7 +31,6 @@ import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
 
 import { KirbyAnimation } from '../../animation/kirby-animation';
 import { FitHeadingConfig } from '../../directives/fit-heading/fit-heading.directive';
-import { WindowRef } from '../../types/window-ref';
 import { ModalWrapperComponent } from '../modal/modal-wrapper/modal-wrapper.component';
 import { ModalNavigationService } from '../modal/services/modal-navigation.service';
 import {
@@ -107,6 +106,11 @@ export class PageContentDirective {
     return this.config && this.config.fixed;
   }
 }
+
+@Directive({
+  selector: '[kirbyPageStickyContent]',
+})
+export class PageStickyContentDirective {}
 
 @Component({
   selector: 'kirby-page-progress',
@@ -217,6 +221,8 @@ export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChec
   customActions: QueryList<PageActionsDirective>;
   @ContentChildren(PageContentDirective)
   private customContent: QueryList<PageContentDirective>;
+  @ContentChild(PageStickyContentDirective, { static: false, read: TemplateRef })
+  private stickyContentRef: TemplateRef<any>;
 
   hasPageTitle: boolean;
   hasPageSubtitle: boolean;
@@ -231,8 +237,11 @@ export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChec
   fixedContentTemplate: TemplateRef<any>;
   stickyActionsTemplate: TemplateRef<any>;
   fixedActionsTemplate: TemplateRef<any>;
+  stickyContentTemplate: TemplateRef<PageStickyContentDirective>;
+
   private pageTitleIntersectionObserverRef: IntersectionObserver =
     this.pageTitleIntersectionObserver();
+
   private url: string;
   private isActive: boolean;
 
@@ -309,6 +318,7 @@ export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChec
     this.initializeTitle();
     this.initializeActions();
     this.initializeContent();
+    this.initializeStickyContent();
     this.changeDetectorRef.detectChanges();
   }
 
@@ -404,6 +414,10 @@ export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChec
         this.customContentTemplate = content.template;
       }
     });
+  }
+
+  private initializeStickyContent() {
+    this.stickyContentTemplate = this.stickyContentRef;
   }
 
   private pageTitleIntersectionObserver() {
