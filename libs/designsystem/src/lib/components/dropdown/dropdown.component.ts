@@ -182,6 +182,19 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     return this.verticalDirection === VerticalDirection.up;
   }
 
+  /* The 'clicked' class is applied through Hostbinding to prevent the dropdown from getting a focus ring on click.
+    There is a bug that causes the dropdown to get a focus ring on click, if it is the first element that is interacted with
+    after the page is loaded. If the user interacts with any other element before, then the dropdown won't get a focus ring.
+    See issue: https://github.com/kirbydesign/designsystem/issues/2477.
+
+    This solution can potentially be refactored, when popover is not experimental anymore. Then it could be possible 
+    to close the dropdown when the popover backdrop is clicked, instead of relying on the blur event, which is utilized
+    by this line below: this.elementRef.nativeElement.focus(). Right now this forces the blur event to be triggered, when
+    clicking outside of the dropdown.
+    */
+  @HostBinding('class.clicked')
+  clicked = false;
+
   @ContentChild(ListItemTemplateDirective, { static: true, read: TemplateRef })
   itemTemplate: TemplateRef<any>;
   @ContentChildren(ListItemTemplateDirective, { read: ElementRef })
@@ -234,17 +247,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   onToggle(event: MouseEvent) {
     event.stopPropagation();
 
-    /* The 'clicked' class is applied to prevent the dropdown from getting a focus ring on click.
-    There is a bug that causes the dropdown to get a focus ring on click, if it is the first element that is interacted with
-    after the page is loaded. If the user interacts with any other element before, then the dropdown won't get a focus ring.
-    See issue: https://github.com/kirbydesign/designsystem/issues/2477.
-
-    This solution can potentially be refactored, when popover is not experimental anymore. Then it could be possible 
-    to close the dropdown when the popover backdrop is clicked, instead of relying on the blur event, which is utilized
-    by this line below: this.elementRef.nativeElement.focus(). Right now this forces the blur event to be triggered, when
-    clicking outside of the dropdown.
-    */
-    this.elementRef.nativeElement.classList.add('clicked');
+    this.clicked = true;
 
     if (!this.isOpen) {
       this.elementRef.nativeElement.focus();
@@ -476,11 +479,11 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
       this.close();
     }
 
-    if (this.elementRef.nativeElement.classList.contains('clicked')) {
-      // Remove the 'clicked' class if the user has previously opened the dropdown by clicking,
+    if (this.clicked) {
+      // Remove the 'clicked' class (Hostbinding) if the user has previously opened the dropdown by clicking,
       // since the class prevents the focus ring from showing,
       // which is expected to happen, when using the tab key
-      this.elementRef.nativeElement.classList.remove('clicked');
+      this.clicked = false;
     }
   }
 
@@ -525,7 +528,6 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   @HostListener('blur', ['$event'])
   _onBlur(event?: FocusEvent) {
     if (this.usePopover) return;
-    this.close();
     this._onTouched();
   }
 
