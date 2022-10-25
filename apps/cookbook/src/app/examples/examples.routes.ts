@@ -34,7 +34,9 @@ import { ListWithHeaderAndFooterExampleComponent } from './list-example/examples
 import { ListItemsExampleComponent } from './list-example/examples/items';
 import { ListWithSectionsExampleComponent } from './list-example/examples/sections';
 import { ListWithSectionsAndColoredItemsExampleComponent } from './list-example/examples/sections-and-colored-items';
+import { ListWithSectionsAndStandAloneExampleComponent } from './list-example/examples/sections-with-standalone';
 import { ListSelectableItemsExampleComponent } from './list-example/examples/selectable-items';
+import { ListWithStandAloneExampleComponent } from './list-example/examples/stand-alone';
 import { ListExampleComponent } from './list-example/list-example.component';
 import { ListExperimentalExampleComponent } from './list-experimental-example/list-experimental-example.component';
 import { ListLoadOnDemandExampleComponent } from './list-load-on-demand-example/list-load-on-demand-example.component';
@@ -70,6 +72,7 @@ import { ToggleExampleComponent } from './toggle-example/toggle-example.componen
 import { VirtualScrollListExampleComponent } from './virtual-scroll-example/virtual-scroll-list-example/virtual-scroll-list-example.component';
 import { PagePullToRefreshExampleComponent } from './page-example/pull-to-refresh/page-pull-to-refresh-example.component';
 import { DropdownExampleComponent } from './dropdown-example/dropdown-example.component';
+import { DataTableExampleComponent } from './data-table-example/data-table-example.component';
 
 VirtualScrollListExampleComponent;
 export const routes: Routes = [
@@ -256,6 +259,13 @@ export const routes: Routes = [
           },
         ],
       },
+      {
+        path: 'experimental',
+        loadChildren: () =>
+          import('./experimental-examples/experimental-examples.module').then(
+            (m) => m.ExperimentalExamplesModule
+          ),
+      },
     ],
   },
   {
@@ -321,6 +331,14 @@ export const routes: Routes = [
       {
         path: 'with-items',
         component: ListItemsExampleComponent,
+      },
+      {
+        path: 'with-stand-alone',
+        component: ListWithStandAloneExampleComponent,
+      },
+      {
+        path: 'with-sections-and-stand-alone',
+        component: ListWithSectionsAndStandAloneExampleComponent,
       },
     ],
   },
@@ -467,5 +485,9 @@ export const routes: Routes = [
   {
     path: 'styling-HTML-lists',
     component: StylingHtmlListsExampleComponent,
+  },
+  {
+    path: 'data-table',
+    component: DataTableExampleComponent,
   },
 ];

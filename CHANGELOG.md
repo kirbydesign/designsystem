@@ -2,6 +2,24 @@
 
 Notable changes to the project will be documented in this file.
 
+## [7.1.1](https://github.com/kirbydesign/designsystem/compare/v7.1.0...v7.1.1) (12-10-2022)
+
+Fixes missing stylesheets in core packages. Due to modified publish flow made in v7.1.0. This only affects the published npm packages.
+
+## [7.1.0](https://github.com/kirbydesign/designsystem/compare/v7.0.0...v7.1.0) (07-10-2022)
+
+### Features
+
+- **icons** - new icons: help-decoration, information-decoration, notification, transfer-ownership ([#2504](https://github.com/kirbydesign/designsystem/pull/2504))
+- **list** - sub sections ([#2478](https://github.com/kirbydesign/designsystem/pull/2478))
+
+### Bugfixes
+
+- **accordion** - always close accordion when disabled ([#2499](https://github.com/kirbydesign/designsystem/pull/2499))
+- **item** - toggles inside kirby item placed too high ([#2518](https://github.com/kirbydesign/designsystem/pull/2518))
+- **page** - fix memory leak in kirby-page ([#2519](https://github.com/kirbydesign/designsystem/pull/2519))
+- **toolbar** - use kirby black on ion-toolbar and ion-content ([#2520](https://github.com/kirbydesign/designsystem/pull/2520))
+
 ## [7.0.0](https://github.com/kirbydesign/designsystem/pull/2442) (16-09-2022)
 
 ### Breaking Changes

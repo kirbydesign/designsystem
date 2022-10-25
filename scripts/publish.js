@@ -30,15 +30,16 @@ const { forwardScssFiles } = require('./forward-scss-files');
 const packageAlias = '@kirbydesign';
 
 const libsRootDir = `libs`;
-
-const angularLibDir = `${libsRootDir}/designsystem`;
-const angularLibSrcDir = `${angularLibDir}/src/lib`;
+const designsystemLibDir = `${libsRootDir}/designsystem`;
+const designsystemLibSrcDir = `${designsystemLibDir}/src/lib`;
 const coreLibDir = `${libsRootDir}/core`;
-const dist = `dist`;
-const distTarget = `${dist}/${angularLibDir}`;
-const distPackageJsonPath = `${distTarget}/package.json`;
+const coreLibSrcDir = `${coreLibDir}/src`;
 
-const pathsToForwardCoreScssFilesTo = [`${distTarget}/scss`];
+const dist = `dist`;
+const distDesignsystemTarget = `${dist}/${designsystemLibDir}`;
+const distDesignsystemPackageJsonPath = `${distDesignsystemTarget}/package.json`;
+const distCoreTarget = `${dist}/${coreLibDir}`;
+const distCorePackageJsonPath = `${distCoreTarget}/package.json`;
 
 const {
   version,
@@ -75,7 +76,7 @@ function npm(args, options) {
   });
 }
 
-function cleanDistribution() {
+function cleanDistribution(distTarget) {
   if (!isCI && fs.existsSync(distTarget)) {
     console.log(`Removing contents of "${distTarget}"`);
     return fs.remove(distTarget);
@@ -84,113 +85,168 @@ function cleanDistribution() {
   }
 }
 
-function buildPolyfills() {
-  return npm(['run', 'build-polyfills'], {
+function buildPackage(npmBuildScript) {
+  return npm(['run', npmBuildScript], {
+    onFailMessage: 'Unable to build package (with ng-packagr)',
+  });
+}
+
+function buildPolyfills(npmBuildScript) {
+  return npm(['run', npmBuildScript], {
     onFailMessage: 'Unable to build polyfills',
   });
 }
 
-function buildDesignsystem() {
-  return npm(['run', 'dist:designsystem'], {
-    onFailMessage: 'Unable to build designsystem package (with ng-packagr)',
-  });
-}
-
-function enhancePackageJson() {
-  return fs.readJson(distPackageJsonPath, 'utf-8').then((distPackageJson) => {
+function enhancePackageJson(distPackageJsonPath) {
+  return fs.readJson(distPackageJsonPath, 'utf-8').then((packageJson) => {
     // Modify contents
-    distPackageJson.version = version;
-    distPackageJson.description = description;
-    distPackageJson.repository = repository;
-    distPackageJson.keywords = keywords;
-    distPackageJson.author = author;
-    distPackageJson.license = license;
-    distPackageJson.bugs = bugs;
-    distPackageJson.homepage = homepage;
+    packageJson.version = version;
+    packageJson.description = description;
+    packageJson.repository = repository;
+    packageJson.keywords = keywords;
+    packageJson.author = author;
+    packageJson.license = license;
+    packageJson.bugs = bugs;
+    packageJson.homepage = homepage;
 
     // (over-)write destination package.json file
-    const json = JSON.stringify(distPackageJson, null, 2);
+    const json = JSON.stringify(packageJson, null, 2);
     console.log(`Writing new package.json (to: ${distPackageJsonPath}):\n\n${json}`);
-    return fs.writeJson(distPackageJsonPath, distPackageJson, { spaces: 2 });
+    return fs.writeJson(distPackageJsonPath, packageJson, { spaces: 2 });
   });
 }
 
-function copyReadme() {
+function copyReadme(distTarget) {
   console.log('Copying README.md file...');
   return fs.copy('readme.md', `${distTarget}/readme.md`);
 }
 
-function forwardCoreScssFiles() {
-  console.log('Forwarding core SCSS files...');
-
+function createScssCoreForwardFiles(coreLibSrcDir, scssCoreForwardFilePaths) {
   const sourceRootDir = `${coreLibDir}/scss`;
   const sharedRootDir = libsRootDir;
 
-  return new Promise((resolve) => {
-    pathsToForwardCoreScssFilesTo.forEach((targetRootDir) => {
-      forwardScssFiles({ sourceRootDir, targetRootDir, packageAlias, sharedRootDir });
-      resolve();
+  const copyScssCoreTargetFiles = () => {
+    console.log('Copying SCSS core target files...');
+
+    const onlyScssFiles = (input) => ['', '.scss'].includes(path.extname(input));
+    return fs.copy(`${coreLibSrcDir}/scss`, `${sourceRootDir}`, {
+      filter: onlyScssFiles,
     });
-  });
+  };
+
+  const generateScssCoreForwardFiles = () => {
+    console.log('Creating SCSS core forwarding files...');
+    return new Promise((resolve) => {
+      scssCoreForwardFilePaths.forEach((targetRootDir) => {
+        forwardScssFiles({ sourceRootDir, targetRootDir, packageAlias, sharedRootDir });
+        resolve();
+      });
+    });
+  };
+
+  const deleteScssCoreTargetFiles = () => {
+    console.log('Deleting SCSS core target files...');
+    return fs.remove(`${sourceRootDir}`);
+  };
+
+  return copyScssCoreTargetFiles()
+    .then(generateScssCoreForwardFiles)
+    .then(deleteScssCoreTargetFiles);
 }
 
-function copyIcons() {
+function copyIcons(libSrcDir, distTarget) {
   console.log('Copying Icons...');
   const onlySvgFiles = (input) => ['', '.svg'].includes(path.extname(input));
-  return fs.copy(`${angularLibSrcDir}/icons/svg`, `${distTarget}/icons/svg`, {
+  return fs.copy(`${libSrcDir}/icons/svg`, `${distTarget}/icons/svg`, {
     filter: onlySvgFiles,
   });
 }
 
-function copyPolyfills() {
+function copyPolyfills(libSrcDir, distTarget) {
   console.log('Copying Polyfills...');
   const onlyLoadersAndMinified = (input) =>
     path.extname(input) === '' || input.endsWith('-loader.js') || input.endsWith('.min.js');
-  return fs.copy(`${angularLibSrcDir}/polyfills`, `${distTarget}/polyfills`, {
+  return fs.copy(`${libSrcDir}/polyfills`, `${distTarget}/polyfills`, {
     filter: onlyLoadersAndMinified,
   });
 }
 
-function createTarballPackage() {
+function copyCoreDistributionFiles(coreLibDir, distTarget) {
+  console.log('Copying core distribution files...');
+
+  const copyDistFiles = () => fs.copy(`${coreLibDir}/dist`, `${distTarget}/dist`);
+  const copyLoaderFiles = () => fs.copy(`${coreLibDir}/loader`, `${distTarget}/loader`);
+
+  return copyDistFiles().then(copyLoaderFiles);
+}
+
+function copyScssFiles(libSrcDir, distTarget) {
+  console.log('Copying SCSS files...');
+  return fs.copy(`${libSrcDir}/scss`, `${distTarget}/scss`);
+}
+
+function copyPackageJson(libDir, distJsonPath) {
+  console.log('Copying package.json file...');
+  return fs.copy(`${libDir}/package.json`, distJsonPath);
+}
+
+function createTarballPackage(distTarget) {
   return npm(['pack', distTarget], {
     onFailMessage: 'Unable to create gzipped tar-ball package',
   });
 }
 
-function publish() {
-  const findTarball = (files) =>
+function publish(distTarget, tarballNamePrefix) {
+  const findCoreTarball = (files) =>
     files.find(
-      (candidate) => candidate.startsWith('kirbydesign-designsystem') && candidate.endsWith('.tgz')
+      (candidate) => candidate.startsWith(tarballNamePrefix) && candidate.endsWith('.tgz')
     );
 
   if (isCI) {
     // Publish to NPM
     console.log('Running on CI, hence publishing package');
-    return npm(['publish', distTarget], { onFailMessage: 'Unable to publish package' });
+
+    return npm(['publish', distTarget], { onFailMessage: 'Unable to publishpackage' });
   } else {
     // Create a GZipped Tarball
-    console.log('Running on non-CI, hence creating a gzipped tar-ball');
+    console.log('Running on non-CI, hence creating package as a gzipped tar-ball');
 
-    // Make sure any local core changes (proxies etc.) are included in the local .tgz package
-    // For CI, we build and publish this package separately.
-    npm(['run', 'build:core'], {
-      onFailMessage: 'Unable to build core package (stencil compiler)',
-    })
-      .then(createTarballPackage)
+    return createTarballPackage(distTarget)
       .then(() => fs.promises.readdir('.'))
-      .then(findTarball)
+      .then(findCoreTarball)
       .then((filename) => fs.move(filename, `${dist}/${filename}`, { overwrite: true }));
   }
 }
 
 // Actual execution of script!
-cleanDistribution()
-  .then(buildPolyfills)
-  .then(buildDesignsystem)
-  .then(enhancePackageJson)
-  .then(copyReadme)
-  .then(forwardCoreScssFiles)
-  .then(copyIcons)
-  .then(copyPolyfills)
-  .then(publish)
-  .catch((err) => console.warn('*** ERROR WHEN PUBLISHING ***', err));
+
+const args = process.argv.slice(2).map((value) => value.toLowerCase());
+const doPublishDesignsystem = args.length === 0 || args.includes('designsystem');
+const doPublishCore = args.length === 0 || args.includes('core');
+
+if (doPublishDesignsystem) {
+  // Publish designsystem
+  console.log('--- Publishing designsystem ---');
+  cleanDistribution(distDesignsystemTarget)
+    .then(() => buildPolyfills('build-polyfills'))
+    .then(() => buildPackage('dist:designsystem'))
+    .then(() => enhancePackageJson(distDesignsystemPackageJsonPath))
+    .then(() => copyReadme(distDesignsystemTarget))
+    .then(() => createScssCoreForwardFiles(coreLibSrcDir, [`${distDesignsystemTarget}/scss`]))
+    .then(() => copyIcons(designsystemLibSrcDir, distDesignsystemTarget))
+    .then(() => copyPolyfills(designsystemLibSrcDir, distDesignsystemTarget))
+    .then(() => publish(distDesignsystemTarget, 'kirbydesign-designsystem'))
+    .catch((err) => console.warn('*** ERROR WHEN PUBLISHING DESIGNSYSTEM ***', err));
+}
+
+if (doPublishCore) {
+  // Publish core
+  console.log('--- Publishing core ---');
+  cleanDistribution(distCoreTarget)
+    .then(() => buildPackage('dist:core'))
+    .then(() => copyCoreDistributionFiles(coreLibDir, distCoreTarget))
+    .then(() => copyScssFiles(coreLibSrcDir, distCoreTarget))
+    .then(() => copyPackageJson(coreLibDir, distCorePackageJsonPath))
+    .then(() => publish(distCoreTarget, 'kirbydesign-core'))
+    .catch((err) => console.warn('*** ERROR WHEN PUBLISHING CORE PACKAGE ***', err));
+}

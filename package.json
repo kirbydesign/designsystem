@@ -1,6 +1,6 @@
 {
   "name": "designsystem",
-  "version": "7.0.0",
+  "version": "7.1.1",
   "description": "Kirby Design Angular Components. This library provides Angular wrappers for the @kirbydesign/core package, for smoother integration into Angular projects.",
   "engines": {
     "node": ">=16.0.0",
@@ -26,6 +26,7 @@
     "ng": "nx",
     "nx": "nx",
     "start": "npm-run-all --parallel \"ng serve cookbook\" \"build:core:watch\"",
+    "start:flows": "ng serve flows",
     "build": "ng build",
     "build-polyfills": "webpack --config webpack.polyfills.config.js",
     "test": "ng test",
@@ -79,7 +80,13 @@
     "test:core": "stencil test --config=./libs/core/stencil.config.ts --spec --watchAll",
     "test:core:single": "stencil test --config=./libs/core/stencil.config.ts --spec",
     "workspace-generator": "nx workspace-generator",
-    "sync-node-version": "node ./scripts/sync-node-version.js"
+    "sync-node-version": "node ./scripts/sync-node-version.js",
+    "start:flows:prod": "ng serve flows --configuration production",
+    "build:flows": "ng build flows",
+    "build:flows:prod": "npm run build:flows -- --configuration production",
+    "build:flows:prod:stats": "npm run build:flows:prod -- --stats-json && npm run copy-bundle-stats",
+    "analyze:flows:bundle": "npx webpack-bundle-analyzer ./measures/stats.json",
+    "copy-bundle-stats": "copyfiles -f ./dist/apps/user-flows/stats.json measures"
   },
   "private": true,
   "dependencies": {
@@ -107,7 +114,7 @@
     "inputmask": "^5.0.5",
     "prismjs": "1.27.0",
     "reflect-metadata": "0.1.8",
-    "rxjs": "6.6.7",
+    "rxjs": "7.5.6",
     "tslib": "^2.0.3",
     "zone.js": "0.11.5"
   },
@@ -120,6 +127,7 @@
     "@angular-eslint/template-parser": "~13.1.0",
     "@angular/cli": "13.3.6",
     "@angular/compiler-cli": "13.3.9",
+    "@angular/language-service": "~13.3.0",
     "@babel/core": "^7.14.6",
     "@kirbydesign/core": "file:libs/core",
     "@ngneat/spectator": "^10.0.1",
@@ -127,6 +135,7 @@
     "@nrwl/eslint-plugin-nx": "14.1.7",
     "@nrwl/linter": "14.1.7",
     "@nrwl/workspace": "14.1.7",
+    "@push-based/user-flow": "^0.8.0",
     "@stencil/angular-output-target": "0.0.6",
     "@stencil/core": "^2.14.2",
     "@stencil/sass": "^1.5.2",
@@ -139,6 +148,7 @@
     "@typescript-eslint/parser": "~5.18.0",
     "chokidar": "^3.3.1",
     "copy-webpack-plugin": "^5.1.1",
+    "copyfiles": "^2.4.1",
     "core-js": "^2.6.11",
     "coveralls": "3.0.2",
     "eslint": "~8.12.0",
@@ -183,6 +193,7 @@
     "ts-node": "9.1.1",
     "typescript": "4.6.4",
     "webpack": "^5.70.0",
+    "webpack-bundle-analyzer": "^4.6.1",
     "webpack-cli": "^4.9.0"
   },
   "husky": {

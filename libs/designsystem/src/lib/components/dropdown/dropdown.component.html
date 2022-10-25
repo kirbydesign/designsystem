@@ -31,15 +31,32 @@
       <ng-container
         *ngTemplateOutlet="
           itemTemplate || defaultItemTemplate;
-          context: { $implicit: item, selected: i === selectedIndex, index: i }
+          context: {
+            $implicit: item,
+            selected: i === selectedIndex,
+            focused: i === focusedIndex,
+            index: i
+          }
         "
       ></ng-container>
     </ng-container>
   </kirby-card>
 </ng-template>
 
-<ng-template #defaultItemTemplate let-item let-selected="selected" let-index="index">
-  <kirby-item [selectable]="true" [selected]="selected" (click)="onItemSelect(index)" role="option">
+<ng-template
+  #defaultItemTemplate
+  let-item
+  let-selected="selected"
+  let-index="index"
+  let-focused="focused"
+>
+  <kirby-item
+    [selectable]="true"
+    [selected]="selected"
+    (click)="onItemSelect(index)"
+    [class.focused]="focused"
+    role="option"
+  >
     <!-- Tabindex fixes issue with popover dropdown not working in safari -->
     <h3 tabindex="0">{{ getTextFromItem(item) }}</h3>
     <kirby-icon *ngIf="selected" name="checkmark-selected" slot="end"></kirby-icon>

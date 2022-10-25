@@ -116,7 +116,7 @@ export class ModalWrapperComponent
     }
     return this._intersectionObserver;
   }
-  private destroy$ = new Subject();
+  private destroy$: Subject<void> = new Subject<void>();
 
   @HostBinding('class.drawer')
   get _isDrawer() {

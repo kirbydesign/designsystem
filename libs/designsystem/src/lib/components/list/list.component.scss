@@ -137,7 +137,8 @@ ion-item-options[side='end'] {
   border-bottom-width: 0;
 }
 
-:host-context(.has-sections) {
+:host-context(.has-sections),
+:host-context(.has-stand-alone) {
   .list {
     box-shadow: none;
   }
@@ -239,5 +240,11 @@ ion-item-options[side='end'] {
         margin-bottom: 0;
       }
     }
+  }
+}
+
+@each $sizeName, $size in utils.$sizes {
+  .stand-alone-bottom-margin-#{$sizeName} {
+    margin-bottom: $size;
   }
 }

@@ -158,6 +158,7 @@ describe('ModalWrapperComponent', () => {
     it('should observe Ionic modal-wrapper intersecting with viewport after ion-modal has been presented', async () => {
       const observeSpy = spyOn(spectator.component['intersectionObserver'], 'observe');
 
+      spectator.component['ionModalDidPresent'].next();
       spectator.component['ionModalDidPresent'].complete();
       await TestHelper.waitForTimeout();
 
@@ -167,6 +168,8 @@ describe('ModalWrapperComponent', () => {
 
     it('should clean up intersection observer of Ionic modal-wrapper on destroy', async () => {
       const disconnectSpy = spyOn(spectator.component['intersectionObserver'], 'disconnect');
+
+      spectator.component['ionModalDidPresent'].next();
       spectator.component['ionModalDidPresent'].complete();
       await TestHelper.waitForTimeout();
 

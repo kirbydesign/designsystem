@@ -31,7 +31,6 @@ import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
 
 import { KirbyAnimation } from '../../animation/kirby-animation';
 import { FitHeadingConfig } from '../../directives/fit-heading/fit-heading.directive';
-import { WindowRef } from '../../types/window-ref';
 import { ModalWrapperComponent } from '../modal/modal-wrapper/modal-wrapper.component';
 import { ModalNavigationService } from '../modal/services/modal-navigation.service';
 import {
@@ -107,6 +106,11 @@ export class PageContentDirective {
     return this.config && this.config.fixed;
   }
 }
+
+@Directive({
+  selector: '[kirbyPageStickyContent]',
+})
+export class PageStickyContentDirective {}
 
 @Component({
   selector: 'kirby-page-progress',
@@ -190,7 +194,7 @@ export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChec
   @Output() refresh = new EventEmitter<PullToRefreshEvent>();
   @Output() backButtonClick = new EventEmitter<Event>();
 
-  @ViewChild(IonContent, { static: true }) private content: IonContent;
+  @ViewChild(IonContent, { static: true }) private content?: IonContent;
   @ViewChild(IonContent, { static: true, read: ElementRef })
   private ionContentElement: ElementRef<HTMLIonContentElement>;
   @ViewChild(IonHeader, { static: true, read: ElementRef })
@@ -217,6 +221,8 @@ export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChec
   customActions: QueryList<PageActionsDirective>;
   @ContentChildren(PageContentDirective)
   private customContent: QueryList<PageContentDirective>;
+  @ContentChild(PageStickyContentDirective, { static: false, read: TemplateRef })
+  private stickyContentRef: TemplateRef<any>;
 
   hasPageTitle: boolean;
   hasPageSubtitle: boolean;
@@ -231,12 +237,15 @@ export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChec
   fixedContentTemplate: TemplateRef<any>;
   stickyActionsTemplate: TemplateRef<any>;
   fixedActionsTemplate: TemplateRef<any>;
+  stickyContentTemplate: TemplateRef<PageStickyContentDirective>;
+
   private pageTitleIntersectionObserverRef: IntersectionObserver =
     this.pageTitleIntersectionObserver();
+
   private url: string;
   private isActive: boolean;
 
-  private ngOnDestroy$ = new Subject();
+  private ngOnDestroy$: Subject<void> = new Subject<void>();
   private contentScrolled$: Observable<ScrollDetail>;
 
   private navigationStart$: Observable<RouterEvent> = this.router.events.pipe(
@@ -252,7 +261,6 @@ export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChec
   constructor(
     private router: Router,
     private changeDetectorRef: ChangeDetectorRef,
-    private windowRef: WindowRef,
     private modalNavigationService: ModalNavigationService,
     @Optional() @SkipSelf() private tabsComponent: TabsComponent
   ) {}
@@ -303,10 +311,6 @@ export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChec
       }
     });
 
-    this.windowRef.nativeWindow.addEventListener(selectedTabClickEvent, () => {
-      this.content.scrollToTop(KirbyAnimation.Duration.LONG);
-    });
-
     this.interceptBackButtonClicksSetup();
   }
 
@@ -314,6 +318,7 @@ export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChec
     this.initializeTitle();
     this.initializeActions();
     this.initializeContent();
+    this.initializeStickyContent();
     this.changeDetectorRef.detectChanges();
   }
 
@@ -322,9 +327,6 @@ export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChec
     this.ngOnDestroy$.complete();
 
     this.pageTitleIntersectionObserverRef.disconnect();
-    this.windowRef.nativeWindow.removeEventListener(selectedTabClickEvent, () => {
-      this.content.scrollToTop(KirbyAnimation.Duration.LONG);
-    });
   }
 
   delegateRefreshEvent(event: any): void {
@@ -414,6 +416,10 @@ export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChec
     });
   }
 
+  private initializeStickyContent() {
+    this.stickyContentTemplate = this.stickyContentRef;
+  }
+
   private pageTitleIntersectionObserver() {
     const options = {
       rootMargin: '0px',
@@ -444,5 +450,12 @@ export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChec
   @HostListener('window:keyboardWillHide')
   _onKeyboardWillHide() {
     this.ionContentElement.nativeElement.style.setProperty('--keyboard-offset', '0px');
+  }
+
+  @HostListener(`window:${selectedTabClickEvent}`)
+  _onSelectedTabClick() {
+    if (this.content) {
+      this.content.scrollToTop(KirbyAnimation.Duration.LONG);
+    }
   }
 }

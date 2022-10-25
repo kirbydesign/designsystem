@@ -30,15 +30,25 @@ import {
   ListSectionHeaderDirective,
 } from './list.directive';
 import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
-import { GroupByPipe } from './pipes/group-by.pipe';
 
 export type ListShape = 'square' | 'rounded' | 'none';
 
+export type StandAloneSpacing =
+  | 'xxxxs'
+  | 'xxxs'
+  | 'xxs'
+  | 'xs'
+  | 'sm'
+  | 'md'
+  | 'lg'
+  | 'xl'
+  | 'xxl'
+  | 'xxxl';
 @Component({
   selector: 'kirby-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
-  providers: [ListHelper, GroupByPipe],
+  providers: [ListHelper],
 })
 export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   @ViewChild('list', { static: true }) list: any;
@@ -61,6 +71,16 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
    * Callback that defines how to track changes for items in the iterable.
    */
   @Input() trackBy: TrackByFunction<any>;
+
+  /**
+   * Property name to decide which items should be stand alone
+   */
+  @Input() getStandAloneByProperty: string;
+
+  /**
+   * Bottom margin for stand alone items
+   */
+  @Input() standAloneSpacing: StandAloneSpacing = 'xxs';
 
   /**
    * Text to display when no more items can be loaded (used for "on demand"-loading).
@@ -145,17 +165,14 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   itemTemplate: TemplateRef<any>;
 
   @HostBinding('class.has-sections') _isSectionsEnabled: boolean;
+  @HostBinding('class.has-stand-alone') _isStandAloneEnabled: boolean;
 
   _isSelectable: boolean;
   _isLoading: boolean;
   _groupedItems: any[];
   _selectedItem: any;
 
-  constructor(
-    private listHelper: ListHelper,
-    private groupBy: GroupByPipe,
-    private cdr: ChangeDetectorRef
-  ) {}
+  constructor(private listHelper: ListHelper, private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
     this._isSelectable = this.itemSelect.observers.length > 0;
@@ -182,9 +199,22 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
 
   ngOnChanges(): void {
     this._isSectionsEnabled = !!this.getSectionName;
-    this._groupedItems = this._isSectionsEnabled
-      ? this.groupBy.transform(this.items, this.getSectionName)
-      : null;
+    this._isStandAloneEnabled = !!this.getStandAloneByProperty;
+
+    if (this._isSectionsEnabled && this._isStandAloneEnabled) {
+      this._groupedItems = this.listHelper.groupSectionsWithStandAloneItems(
+        this.items,
+        this.getSectionName,
+        this.getStandAloneByProperty
+      );
+    } else if (this._isSectionsEnabled) {
+      this._groupedItems = this.listHelper.groupSections(this.items, this.getSectionName);
+    } else if (this._isStandAloneEnabled) {
+      this._groupedItems = this.listHelper.groupStandAloneItems(
+        this.items,
+        this.getStandAloneByProperty
+      );
+    }
   }
 
   _onLoadOnDemand(event?: LoadOnDemandEventData) {
@@ -219,5 +249,9 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
 
     if (index === _items.length - 1 || _items[index + 1]?.headingName)
       return this.footerTemplate ? null : 'last';
+  }
+
+  standAloneClass() {
+    return this._isStandAloneEnabled ? `stand-alone-bottom-margin-${this.standAloneSpacing}` : '';
   }
 }

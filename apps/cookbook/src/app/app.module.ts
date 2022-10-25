@@ -1,12 +1,12 @@
 import { HashLocationStrategy, LocationStrategy, registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import localeEn from '@angular/common/locales/en-GB';
+import localeData from '@angular/common/locales/en-DK';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { KirbyModule } from '@kirbydesign/designsystem';
+import { KirbyExperimentalModule, KirbyModule } from '@kirbydesign/designsystem';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,7 +16,7 @@ import { FooterComponent } from './page/footer/footer.component';
 import { HeaderComponent } from './page/header/header.component';
 import { SideNavComponent } from './page/side-nav/side-nav.component';
 
-registerLocaleData(localeEn);
+registerLocaleData(localeData);
 
 @NgModule({
   declarations: [
@@ -34,10 +34,11 @@ registerLocaleData(localeEn);
     HttpClientModule,
     FormsModule,
     KirbyModule,
+    KirbyExperimentalModule,
   ],
 
   providers: [
-    { provide: LOCALE_ID, useValue: 'en-GB' },
+    { provide: LOCALE_ID, useValue: 'en-DK' },
     { provide: LocationStrategy, useClass: HashLocationStrategy },
   ],
   bootstrap: [AppComponent],
