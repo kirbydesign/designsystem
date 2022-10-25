@@ -11,7 +11,7 @@ import { ActionSheetComponent, ActionSheetItem } from '../modal';
 
 import { FabSheetComponent } from './fab-sheet.component';
 
-fdescribe('FabSheetComponent', () => {
+describe('FabSheetComponent', () => {
   let spectator: SpectatorHost<FabSheetComponent>;
   let component: FabSheetComponent;
   let ionFabButtonElement: HTMLIonFabButtonElement;
