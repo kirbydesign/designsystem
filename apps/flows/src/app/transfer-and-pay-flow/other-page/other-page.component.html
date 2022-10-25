@@ -1,0 +1,58 @@
+<div class="container">
+  <kirby-form-field label="Reg.no." borderless="true">
+    <input
+      kirby-input
+      [size]="'md'"
+      type="number"
+      pattern="/d*"
+      placeholder=""
+      (input)="onChangedReg()"
+      [(ngModel)]="regNo"
+      id="regNo"
+    />
+  </kirby-form-field>
+
+  <kirby-form-field label="Acc. no." borderless="true">
+    <input
+      kirby-input
+      [size]="'md'"
+      type="number"
+      placeholder=""
+      (input)="onChangedAcc()"
+      [(ngModel)]="accNo"
+      id="accNo"
+    />
+  </kirby-form-field>
+</div>
+
+<kirby-checkbox
+  [checked]="false"
+  text="Save receiver"
+  (checkedChange)="onCheckedChange($event)"
+></kirby-checkbox>
+
+<kirby-form-field *ngIf="receiverInputSelected" label="Name on receiver">
+  <input
+    kirby-input
+    [size]="'md'"
+    placeholder="Enter name"
+    #tweet
+    maxlength="32"
+    (input)="onChangedName()"
+    [(ngModel)]="name"
+    id="name"
+  />
+  <kirby-input-counter [listenTo]="tweet"></kirby-input-counter>
+</kirby-form-field>
+
+<kirby-label> <h3 heading>Saved receivers</h3></kirby-label>
+<kirby-list [items]="Others" [showDivider]="true">
+  <kirby-list-section-header> </kirby-list-section-header>
+
+  <kirby-item *kirbyListItemTemplate="let other" (click)="setSelected(other.id)">
+    <kirby-label>
+      <h3>{{ other.name }}</h3>
+      <data detail>{{ other.regNo }} {{ other.accNo }}</data>
+    </kirby-label>
+  </kirby-item>
+</kirby-list>
