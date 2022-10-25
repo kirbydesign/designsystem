@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ModalConfig, ModalController } from '@kirbydesign/designsystem';
-import { ChooseRecieverComponent } from '../choose-reciever/choose-reciever.component';
+import { ChooseReceiverComponent } from '../choose-receiver/choose-receiver.component';
 import { ChooseOwnAccountComponent } from '../choose-own-account/choose-own-account.component';
 
 @Component({
@@ -19,7 +19,7 @@ export class TransferAndPayModalComponent implements OnInit {
   showModalChooseReciever() {
     const config: ModalConfig = {
       flavor: 'drawer',
-      component: ChooseRecieverComponent,
+      component: ChooseReceiverComponent,
       componentProps: {
         prop1: 'value1',
         prop2: 'value2',
