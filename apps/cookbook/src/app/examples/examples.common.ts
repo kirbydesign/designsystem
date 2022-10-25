@@ -1,3 +1,4 @@
+import { ModalFullScreenExampleComponent } from './new-modal-example/fullscreen-example/new-modal-fullscreen-example.component';
 import { AccordionExampleComponent } from './accordion-example/accordion-example.component';
 import { ActionSheetExampleComponent } from './action-sheet-example/action-sheet-example.component';
 import { AlertExampleComponent } from './alert-example/alert-example.component';
@@ -101,4 +102,5 @@ export const COMPONENT_DECLARATIONS: any[] = [
   SectionHeaderExampleComponent,
   ListExperimentalExampleComponent,
   DataTableExampleComponent,
+  ModalFullScreenExampleComponent,
 ];

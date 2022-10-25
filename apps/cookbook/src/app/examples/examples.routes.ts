@@ -73,6 +73,7 @@ import { VirtualScrollListExampleComponent } from './virtual-scroll-example/virt
 import { PagePullToRefreshExampleComponent } from './page-example/pull-to-refresh/page-pull-to-refresh-example.component';
 import { DropdownExampleComponent } from './dropdown-example/dropdown-example.component';
 import { DataTableExampleComponent } from './data-table-example/data-table-example.component';
+import { ModalFullScreenExampleComponent } from './new-modal-example/fullscreen-example/new-modal-fullscreen-example.component';
 
 VirtualScrollListExampleComponent;
 export const routes: Routes = [
@@ -241,6 +242,22 @@ export const routes: Routes = [
             component: ModalRoutePage2ExampleComponent,
           },
         ],
+      },
+      {
+        path: 'new-modal',
+        component: ModalFullScreenExampleComponent,
+        // children: [
+        //   {
+        //     path: 'page1',
+        //     outlet: 'modal',
+        //     component: ModalRoutePage1ExampleComponent,
+        //   },
+        //   {
+        //     path: 'page2',
+        //     outlet: 'modal',
+        //     component: ModalRoutePage2ExampleComponent,
+        //   },
+        // ],
       },
       {
         path: 'form-field',
