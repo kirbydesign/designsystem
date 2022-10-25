@@ -1,12 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-
+import { OwnAccount } from '../own-account';
+import { OwnAccountService } from '../own-account.service';
 @Component({
   selector: 'flows-choose-own-account',
   templateUrl: './choose-own-account.component.html',
-  styleUrls: ['./choose-own-account.component.scss'],
 })
 export class ChooseOwnAccountComponent implements OnInit {
-  constructor() {}
+  constructor(private OwnAccountService: OwnAccountService) {}
 
-  ngOnInit(): void {}
+  accounts: OwnAccount[] = [];
+
+  ngOnInit(): void {
+    this.accounts = this.OwnAccountService.getOwnAccounts();
+  }
+  setSelected(id: number) {
+    this.OwnAccountService.setSelected(id);
+  }
 }
