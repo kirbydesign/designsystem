@@ -2,7 +2,11 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { IconRegistryService, KirbyModule } from '@kirbydesign/designsystem';
+import {
+  IconRegistryService,
+  KirbyExperimentalModule,
+  KirbyModule,
+} from '@kirbydesign/designsystem';
 
 import { AccordionExampleModule } from './accordion-example/accordion-example.module';
 import { AvatarExampleModule } from './avatar-example/avatar-example.module';
@@ -10,9 +14,11 @@ import { BadgeExampleModule } from './badge-example/badge-example.module';
 import { CardExampleModule } from './card-example/card-example.module';
 import { ChartsExampleModule } from './charts-example/charts-example.module';
 import { CheckboxExampleModule } from './checkbox-example/checkbox-example.module';
+import { DataTableExampleModule } from './data-table-example/table-example.module';
 import { DropdownExampleModule } from './dropdown-example/dropdown-example.module';
 import { COMPONENT_DECLARATIONS } from './examples.common';
 import { ExamplesSharedModule } from './examples.shared.module';
+import { ExperimentalExamplesModule } from './experimental-examples/experimental-examples.module';
 import { FlagExampleModule } from './flag-example/flag-example.module';
 import { FormFieldExamplesModule } from './form-field-example/form-field-example.module';
 import { GridLayoutExamplesModule } from './grid-layout-example/grid-layout-example.module';
@@ -57,10 +63,12 @@ const IMPORTS = [
   ItemGroupExampleModule,
   ListExperimentalExampleModule,
   VirtualScrollExampleModule,
+  ExperimentalExamplesModule,
+  DataTableExampleModule,
 ];
 
 @NgModule({
-  imports: [CommonModule, RouterModule, KirbyModule, ...IMPORTS],
+  imports: [CommonModule, RouterModule, KirbyModule, KirbyExperimentalModule, ...IMPORTS],
   declarations: COMPONENT_DECLARATIONS,
   exports: [...COMPONENT_DECLARATIONS, ...IMPORTS],
 })
