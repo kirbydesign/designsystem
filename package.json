@@ -29,7 +29,7 @@
     "start:flows": "ng serve flows",
     "build": "ng build cookbook",
     "build-polyfills": "webpack --config webpack.polyfills.config.js",
-    "test": "ng test",
+    "test": "ng test designsystem",
     "test:headless-browser": "npm run test -- --browsers=ChromeCustom",
     "test:headless-browser:single": "npm run test:headless-browser -- --watch=false",
     "test:libs": "npm run test:core:single && npm run test:headless-browser:single",
