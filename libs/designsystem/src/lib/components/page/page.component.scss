@@ -98,6 +98,11 @@ ion-back-button {
 /*
  * Page Header
  */
+.page-header-container {
+  max-width: var(--page-content-max-width, utils.$page-content-max-width);
+  margin: 0 auto;
+}
+
 .page-header {
   margin-left: utils.size('s');
   margin-top: utils.size('xxs');
@@ -160,5 +165,21 @@ ion-content {
     .content-inner {
       position: relative;
     }
+  }
+}
+
+/*
+ * Sticky content
+ */
+.sticky-content-container {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin-block-end: utils.size('m');
+
+  div {
+    max-width: var(--page-content-max-width, utils.$page-content-max-width);
+    margin: 0 auto;
   }
 }

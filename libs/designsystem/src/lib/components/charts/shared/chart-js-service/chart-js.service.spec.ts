@@ -4,6 +4,7 @@ import { Chart, ChartType as ChartJSType, ChartOptions } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
 import { MockProvider } from 'ng-mocks';
 
+import { chartConfigHasType } from '../../../../helpers';
 import { ChartConfigService } from '../';
 import { ChartDataset, ChartHighlightedElements, ChartType } from '../../';
 import { deepCopy } from '../../../../helpers/deep-copy';
@@ -515,14 +516,16 @@ describe('ChartJSService', () => {
     });
 
     it('should set a new type', () => {
-      const oldType = chart.config.type;
-      const newType = 'line';
-      expect(oldType).not.toBe(newType);
+      if (chartConfigHasType(chart.config)) {
+        const oldType = chart.config.type;
+        const newType = 'line';
+        expect(oldType).not.toBe(newType);
 
-      chartJSService['nonDestructivelyUpdateType']('line');
+        chartJSService['nonDestructivelyUpdateType']('line');
 
-      expect(chart.config.type).not.toBe(oldType);
-      expect(newType).toBe('line');
+        expect(chart.config.type).not.toBe(oldType);
+        expect(newType).toBe('line');
+      }
     });
 
     it('should apply config from new type', () => {

@@ -52,17 +52,19 @@ ion-fab {
 }
 
 ion-backdrop {
+  visibility: hidden;
   opacity: 0;
   transition: opacity 750ms;
   position: fixed;
   z-index: 999;
-}
 
-:host(.backdrop-visible) ion-backdrop {
-  opacity: 0.4;
+  &.backdrop-visible {
+    visibility: visible;
+    opacity: 0.4;
 
-  @include utils.media('>=medium') {
-    opacity: 0;
+    @include utils.media('>=medium') {
+      opacity: 0;
+    }
   }
 }
 

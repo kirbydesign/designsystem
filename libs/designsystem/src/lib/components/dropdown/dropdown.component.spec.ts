@@ -175,6 +175,10 @@ describe('DropdownComponent', () => {
           expect(spectator.component.selectedIndex).toEqual(newSelectedIndex);
         });
 
+        it('should have correct new focused index', () => {
+          expect(spectator.component.focusedIndex).toEqual(newSelectedIndex);
+        });
+
         it('should have correct new selected item', () => {
           expect(spectator.component.value).toEqual(expectedItem);
         });
@@ -378,6 +382,11 @@ describe('DropdownComponent', () => {
             spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowUp');
             expect(spectator.component.selectedIndex).toEqual(0);
           });
+
+          it('should not change focused item', () => {
+            spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowUp');
+            expect(spectator.component.focusedIndex).toEqual(0);
+          });
         });
         describe('and Home key is pressed', () => {
           it('should not change selected item', () => {
@@ -404,6 +413,11 @@ describe('DropdownComponent', () => {
             spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowDown');
             expect(spectator.component.selectedIndex).toEqual(lastIndex);
           });
+
+          it('should not change focused item', () => {
+            spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowDown');
+            expect(spectator.component.focusedIndex).toEqual(lastIndex);
+          });
         });
         describe('and End key is pressed', () => {
           it('should not change selected item', () => {
@@ -411,142 +425,56 @@ describe('DropdownComponent', () => {
             expect(spectator.component.selectedIndex).toEqual(lastIndex);
           });
         });
-      });
 
-      const testMatrix = [
-        {
-          key: 'ArrowLeft',
-          scenario: [
-            {
-              selectedIndex: 1,
-              keypressCount: 1,
-              expectedIndex: 0,
-            },
-            {
-              selectedIndex: 2,
-              keypressCount: 1,
-              expectedIndex: 1,
-            },
-            {
-              selectedIndex: 2,
-              keypressCount: 2,
-              expectedIndex: 0,
-            },
-          ],
-        },
-        {
-          key: 'ArrowUp',
-          scenario: [
-            {
-              selectedIndex: 1,
-              keypressCount: 1,
-              expectedIndex: 0,
-            },
-            {
-              selectedIndex: 2,
-              keypressCount: 1,
-              expectedIndex: 1,
-            },
-            {
-              selectedIndex: 2,
-              keypressCount: 2,
-              expectedIndex: 0,
-            },
-          ],
-        },
-        {
-          key: 'ArrowRight',
-          scenario: [
-            {
-              selectedIndex: 0,
-              keypressCount: 1,
-              expectedIndex: 1,
-            },
-            {
-              selectedIndex: 0,
-              keypressCount: 2,
-              expectedIndex: 2,
-            },
-            {
-              selectedIndex: 1,
-              keypressCount: 1,
-              expectedIndex: 2,
-            },
-          ],
-        },
-        {
-          key: 'ArrowDown',
-          scenario: [
-            {
-              selectedIndex: 0,
-              keypressCount: 1,
-              expectedIndex: 1,
-            },
-            {
-              selectedIndex: 0,
-              keypressCount: 2,
-              expectedIndex: 2,
-            },
-            {
-              selectedIndex: 1,
-              keypressCount: 1,
-              expectedIndex: 2,
-            },
-          ],
-        },
-        {
-          key: 'Home',
-          scenario: [
-            {
-              selectedIndex: 1,
-              keypressCount: 1,
-              expectedIndex: 0,
-            },
-            {
-              selectedIndex: 2,
-              keypressCount: 1,
-              expectedIndex: 0,
-            },
-            {
-              selectedIndex: 4,
-              keypressCount: 1,
-              expectedIndex: 0,
-            },
-          ],
-        },
-        {
-          key: 'End',
-          scenario: [
-            {
-              selectedIndex: 0,
-              keypressCount: 1,
-              expectedIndex: 4,
-            },
-            {
-              selectedIndex: 1,
-              keypressCount: 1,
-              expectedIndex: 4,
-            },
-            {
-              selectedIndex: 2,
-              keypressCount: 1,
-              expectedIndex: 4,
-            },
-          ],
-        },
-      ];
+        describe('and focused', () => {
+          beforeEach(() => {
+            spectator.element.focus();
+          });
 
-      testMatrix.forEach((keyEvent) => {
-        keyEvent.scenario.forEach((scenario) => {
-          describe(`and selected item = ${scenario.selectedIndex} and ${keyEvent.key} key is pressed ${scenario.keypressCount} time(s)`, () => {
-            it(`should set selected item = ${scenario.expectedIndex}`, () => {
-              spectator.setInput('selectedIndex', scenario.selectedIndex);
-              for (let counter = 0; counter < scenario.keypressCount; counter++) {
-                spectator.dispatchKeyboardEvent(spectator.element, 'keydown', keyEvent.key);
-              }
-              expect(spectator.component.selectedIndex).toEqual(scenario.expectedIndex);
-              expect(spectator.component.value).toEqual(items[scenario.expectedIndex]);
-            });
+          it('should open the dropdown when ArrowUp key is pressed', fakeAsync(() => {
+            spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowUp');
+            tick(openDelayInMs);
+
+            expect(spectator.component.isOpen).toBeTruthy();
+          }));
+
+          it('should open the dropdown when ArrowDown key is pressed', fakeAsync(() => {
+            spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowDown');
+            tick(openDelayInMs);
+
+            expect(spectator.component.isOpen).toBeTruthy();
+          }));
+
+          it('should highlight the first item in the list, if no item is selected and ArrowDown key is pressed', () => {
+            spectator.setInput('selectedIndex', -1);
+
+            spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowDown');
+
+            expect(spectator.component.focusedIndex).toEqual(0);
+          });
+
+          it('should highlight the last item in the list, if no item is selected and ArrowUp key is pressed', () => {
+            spectator.setInput('selectedIndex', -1);
+
+            spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowUp');
+
+            expect(spectator.component.focusedIndex).toEqual(4);
+          });
+
+          it('should highlight the selected item, when the ArrowUp key is pressed', () => {
+            spectator.setInput('selectedIndex', 2);
+
+            spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowUp');
+
+            expect(spectator.component.focusedIndex).toEqual(2);
+          });
+
+          it('should highlight the selected item, when the ArrowDown key is pressed', () => {
+            spectator.setInput('selectedIndex', 3);
+
+            spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'ArrowDown');
+
+            expect(spectator.component.focusedIndex).toEqual(3);
           });
         });
       });
@@ -574,9 +502,9 @@ describe('DropdownComponent', () => {
       });
 
       describe('and Space key is pressed', () => {
-        it('should not close dropdown', () => {
+        it('should close dropdown', () => {
           spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'Space');
-          expect(spectator.component.isOpen).toBeTruthy();
+          expect(spectator.component.isOpen).toBeFalsy();
         });
       });
 
@@ -727,12 +655,16 @@ describe('DropdownComponent', () => {
 
       testMatrix.forEach((keyEvent) => {
         keyEvent.scenario.forEach((scenario) => {
-          describe(`and selected item = ${scenario.selectedIndex} and ${keyEvent.key} key is pressed ${scenario.keypressCount} time(s)`, () => {
+          describe(`and selected item = ${scenario.selectedIndex} and focused item = ${scenario.selectedIndex} and ${keyEvent.key} key is pressed ${scenario.keypressCount} time(s)`, () => {
             it(`should set selected item = ${scenario.expectedIndex}`, () => {
               spectator.setInput('selectedIndex', scenario.selectedIndex);
               for (let counter = 0; counter < scenario.keypressCount; counter++) {
                 spectator.dispatchKeyboardEvent(spectator.element, 'keydown', keyEvent.key);
               }
+              // focused
+              expect(spectator.component.focusedIndex).toEqual(scenario.expectedIndex);
+              // selected
+              spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'Enter');
               expect(spectator.component.selectedIndex).toEqual(scenario.expectedIndex);
               expect(spectator.component.value).toEqual(items[scenario.expectedIndex]);
             });

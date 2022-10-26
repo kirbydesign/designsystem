@@ -3,6 +3,7 @@ import { ChartConfiguration, ChartOptions } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
 
 import { mergeDeepAll } from '../../../../helpers/merge-deep';
+import { chartConfigHasType } from '../../../../helpers';
 import { ChartConfigService } from '../chart-config-service';
 import {
   ChartDataset,
@@ -188,7 +189,10 @@ export class ChartJSService {
     });
 
     this.chart.options = options;
-    this.chart.config.type = this.chartConfigService.chartTypeToChartJSType(chartType);
+
+    if (chartConfigHasType(this.chart.config)) {
+      this.chart.config.type = this.chartConfigService.chartTypeToChartJSType(chartType);
+    }
   }
 
   private initializeNewChart(canvasElement: HTMLCanvasElement, config: ChartConfiguration) {

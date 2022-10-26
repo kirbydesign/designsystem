@@ -1,5 +1,7 @@
-@use '@kirbydesign/core/src/scss/interaction-state';
-@use '@kirbydesign/core/src/scss/utils';
+@use 'sass:math';
+
+@use '~@kirbydesign/core/src/scss/interaction-state';
+@use '~@kirbydesign/core/src/scss/utils';
 
 ion-tab-button {
   &.ion-focused {
@@ -24,14 +26,19 @@ ion-tab-button {
   font-size: utils.font-size('xxs');
 
   --color-selected: utils.get-color('black');
-  --kirby-badge-position: absolute;
-  --kirby-badge-top: 0;
-  --kirby-badge-right: 0;
 
-  @include utils.slotted(div kirby-badge) {
+  // Magic values here as we have no tokens that gives
+  // badge the correct position in relation to the tab icon
+  --kirby-badge-position: absolute;
+  --kirby-badge-top: 0.55em;
+  --kirby-badge-left: calc(50% + 0.4em);
+
+  @include utils.slotted(kirby-badge) {
     &.md {
-      --kirby-badge-top: -5px;
-      --kirby-badge-right: -5px;
+      // Magic values here as we have no tokens that gives
+      // badge the correct position in relation to the tab icon
+      --kirby-badge-top: 0.3em;
+      --kirby-badge-left: calc(50% + 0.2em);
     }
   }
 
@@ -41,15 +48,33 @@ ion-tab-button {
 
   @include utils.media('>=medium') {
     flex: none;
+    flex-direction: row;
     padding: 0 utils.size('m');
     margin-right: utils.size('m');
+    font-size: utils.font-size('s');
+
+    --color-selected: #{utils.get-color('black')};
+
+    // Magic values here as we have no tokens that gives
+    // badge the correct position in relation to the tab icon
+    --kirby-badge-position: absolute; // Repeated for readability
+    --kirby-badge-top: calc(50% - 1.35em);
+    --kirby-badge-left: 1.6em;
+
+    @include utils.slotted(kirby-badge) {
+      &.md {
+        --kirby-badge-position: relative;
+        --kirby-badge-top: 0;
+        --kirby-badge-left: 0;
+
+        margin-left: utils.size('xxxxs');
+        margin-bottom: math.div(utils.size('xxxxs'), 2);
+      }
+    }
 
     &:last-child {
       margin-right: 0;
     }
-
-    font-size: utils.font-size('s');
-    flex-direction: row;
 
     .icon-container {
       margin-right: utils.size('xxs');

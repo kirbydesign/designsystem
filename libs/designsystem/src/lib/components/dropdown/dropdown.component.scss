@@ -16,6 +16,10 @@ $min-screen-width: 375px;
   position: relative;
   max-width: calc(100vw - #{$margin-horizontal-total});
 
+  &.clicked {
+    box-shadow: none;
+  }
+
   &.expand {
     display: block;
 
