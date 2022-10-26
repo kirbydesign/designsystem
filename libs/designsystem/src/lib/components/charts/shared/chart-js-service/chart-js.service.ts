@@ -3,6 +3,7 @@ import { ChartConfiguration, ChartOptions } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
 
 import { mergeDeepAll } from '../../../../helpers/merge-deep';
+import { chartConfigHasType } from '../../../../helpers';
 import { ChartConfigService } from '../chart-config-service';
 import {
   ChartDataset,
@@ -116,7 +117,7 @@ export class ChartJSService {
       ? this.annotationsDelegate.createAnnotationPluginOptionsObject(annotations)
       : {};
 
-    let mergedOptions: ChartOptions = mergeDeepAll(
+    const mergedOptions: ChartOptions = mergeDeepAll(
       typeConfigOptions,
       customOptions,
       annotationPluginOptions
@@ -157,7 +158,7 @@ export class ChartJSService {
   }
 
   protected createDatasets(data: ChartDataset[] | number[]): ChartDataset[] {
-    let datasets = isNumberArray(data) ? [{ data }] : data;
+    const datasets = isNumberArray(data) ? [{ data }] : data;
 
     if (this.highlightedElements)
       this.addHighlightedElementsToDatasets(this.highlightedElements, datasets);
@@ -188,7 +189,10 @@ export class ChartJSService {
     });
 
     this.chart.options = options;
-    this.chart.config.type = this.chartConfigService.chartTypeToChartJSType(chartType);
+
+    if (chartConfigHasType(this.chart.config)) {
+      this.chart.config.type = this.chartConfigService.chartTypeToChartJSType(chartType);
+    }
   }
 
   private initializeNewChart(canvasElement: HTMLCanvasElement, config: ChartConfiguration) {

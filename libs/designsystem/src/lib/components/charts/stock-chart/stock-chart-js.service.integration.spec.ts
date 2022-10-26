@@ -2,6 +2,7 @@ import { ElementRef } from '@angular/core';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 import { Chart } from 'chart.js';
 
+import { chartConfigHasType } from '../../../helpers';
 import { ChartConfigService } from '../shared';
 
 import { StockChartJSService } from './stock-chart-js.service';
@@ -49,7 +50,9 @@ describe('StockChartJSService with ChartConfigService', () => {
     });
 
     it('should use correct ChartJS type', () => {
-      expect(chart.config.type).toBe('line');
+      if (chartConfigHasType(chart.config)) {
+        expect(chart.config.type).toBe('line');
+      }
     });
 
     it('should have correct tension', () => {
