@@ -188,7 +188,7 @@ export class ChartJSService {
     });
 
     this.chart.options = options;
-    //this.chart.config.type = this.chartConfigService.chartTypeToChartJSType(chartType);
+    this.chart.config.type = this.chartConfigService.chartTypeToChartJSType(chartType);
   }
 
   private initializeNewChart(canvasElement: HTMLCanvasElement, config: ChartConfiguration) {
