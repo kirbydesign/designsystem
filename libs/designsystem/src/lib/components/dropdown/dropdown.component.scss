@@ -37,7 +37,7 @@ $min-screen-width: 375px;
     }
   }
 
-  & button {
+  button {
     position: relative;
     margin: 0;
     outline: none;
@@ -77,7 +77,7 @@ $min-screen-width: 375px;
       opacity: 1;
     }
 
-    & > button {
+    > button {
       box-shadow: utils.get-elevation(8);
     }
   }
@@ -110,8 +110,7 @@ kirby-popover {
 
 kirby-card {
   max-height: $dropdown-max-height;
-  margin-top: utils.size('xxxs');
-  margin-bottom: utils.size('xxxs');
+  margin-block: utils.size('xxxs');
   overflow-y: auto;
   box-shadow: utils.get-elevation(8);
   min-width: $min-screen-width-small - $margin-horizontal-total;
