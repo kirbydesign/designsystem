@@ -1,5 +1,5 @@
 import * as chokidar from 'chokidar';
-import validate from 'schema-utils';
+import { validate } from 'schema-utils';
 import { Compiler, WebpackPluginInstance } from 'webpack';
 
 import { SassToTypescriptEngine } from './sass-to-ts.engine';

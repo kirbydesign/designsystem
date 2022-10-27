@@ -7,7 +7,7 @@ import { routes } from './app.routes';
   imports: [
     RouterModule.forRoot(routes, {
       scrollPositionRestoration: 'enabled',
-      relativeLinkResolution: 'legacy',
+      // relativeLinkResolution: 'legacy',
     }),
   ],
   exports: [RouterModule],

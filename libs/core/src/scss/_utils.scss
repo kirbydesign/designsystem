@@ -3,7 +3,7 @@
     NOTICE: Must not contain anything that generates classes or else it will be generated for every component that imports this file.
 */
 @use 'base/variables';
-@forward '~include-media/dist/include-media' with (
+@forward 'include-media/dist/include-media' with (
   $breakpoints: variables.$breakpoints
 );
 @forward 'base/functions';
