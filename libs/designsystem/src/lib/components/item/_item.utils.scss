@@ -1,4 +1,4 @@
-@use '~@kirbydesign/core/src/scss/utils';
+@use '@kirbydesign/core/src/scss/utils';
 
 @mixin item-typography() {
   @include utils.slotted(h1, h2, h3, h4, h5, h6, p, data) {

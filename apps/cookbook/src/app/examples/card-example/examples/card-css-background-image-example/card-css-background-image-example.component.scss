@@ -3,7 +3,7 @@
   has to be stored in a seperate scss file. Otherwise the preprocessor
   won't kick in.
  */
-@use '~@kirbydesign/core/src/scss/utils';
+@use '@kirbydesign/core/src/scss/utils';
 
 kirby-card {
   --kirby-card-background-image: linear-gradient(

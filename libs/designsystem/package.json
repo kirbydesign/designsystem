@@ -5,7 +5,7 @@
     "@fontsource/roboto": "4.2.1",
     "@ionic/angular": "6.2.1",
     "@kirbydesign/core": "0.0.35",
-    "chart.js": "3.3.2",
+    "chart.js": "3.9.1",
     "chartjs-adapter-date-fns": "^2.0.0",
     "chartjs-plugin-annotation": "^1.0.2",
     "chartjs-plugin-datalabels": "^2.0.0",
