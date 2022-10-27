@@ -2,19 +2,36 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ModalConfig, ModalController } from '@kirbydesign/designsystem';
 import { ChooseReceiverComponent } from '../choose-receiver/choose-receiver.component';
 import { ChooseOwnAccountComponent } from '../choose-own-account/choose-own-account.component';
-
+import { OtherService } from '../other.service';
+import { OwnAccountService } from '../own-account.service';
+import { OwnAccount } from '../own-account';
+import { Other } from '../other';
 @Component({
   selector: 'flows-transfer-and-pay-modal',
   templateUrl: './transfer-and-pay-modal.component.html',
   styleUrls: ['./transfer-and-pay-modal.component.scss'],
 })
 export class TransferAndPayModalComponent implements OnInit {
-  constructor(private modalController: ModalController) {}
-
-  ngOnInit(): void {}
+  constructor(
+    private modalController: ModalController,
+    private OtherService: OtherService,
+    private OwnAccountService: OwnAccountService
+  ) {}
 
   @ViewChild('input') input: ElementRef<HTMLInputElement>;
   currency: string;
+  state: boolean = false;
+  selectedAccount: OwnAccount[];
+  selectedOther: Other[];
+  ngOnInit(): void {
+    this.OtherService.getReceiverBoolean().subscribe((boolean) => (this.state = boolean));
+    this.OwnAccountService.getOwnAccountSelected().subscribe(
+      (selected) => (this.selectedAccount = selected)
+    );
+    this.OwnAccountService.setSelected(1);
+    this.OtherService.getReceiver().subscribe((selected) => (this.selectedOther = selected));
+    console.log(this.selectedAccount);
+  }
 
   showModalChooseReciever() {
     const config: ModalConfig = {

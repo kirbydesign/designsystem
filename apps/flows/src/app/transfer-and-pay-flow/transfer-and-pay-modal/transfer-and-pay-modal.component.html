@@ -12,14 +12,51 @@
 </div>
 
 <kirby-modal-footer>
-  <div class="container-over">
+  <div class="container-over" *ngIf="state === false">
     <div class="grid" (click)="showModalChooseOwnAccount()">
       <p>From</p>
-      <p>Accounts</p>
+      <span *ngFor="let account of selectedAccount"
+        ><b>{{ account.name }}</b></span
+      >
     </div>
     <kirby-divider></kirby-divider>
     <div class="container-under">
       <button kirby-button (click)="showModalChooseReciever()">Choose reciever</button>
+    </div>
+  </div>
+
+  <div class="container-over" *ngIf="state === true">
+    <div class="grid" (click)="showModalChooseOwnAccount()">
+      <p>From</p>
+      <span *ngFor="let account of selectedAccount"
+        ><b>{{ account.name }}</b></span
+      >
+    </div>
+    <kirby-divider></kirby-divider>
+    <div class="grid" (click)="showModalChooseReciever()">
+      <p>To</p>
+      <span *ngFor="let other of selectedOther"
+        ><b>{{ other.name }}</b></span
+      >
+    </div>
+    <kirby-divider></kirby-divider>
+    <div class="grid">
+      <p>Date</p>
+      <p><b>date</b></p>
+    </div>
+    <kirby-divider></kirby-divider>
+    <div class="grid">
+      <p>Text</p>
+      <p><b>text</b></p>
+    </div>
+    <kirby-divider></kirby-divider>
+    <div class="grid">
+      <p>Message</p>
+      <p><b>message</b></p>
+    </div>
+
+    <div class="container-under">
+      <button kirby-button>Continue</button>
     </div>
   </div>
 </kirby-modal-footer>
