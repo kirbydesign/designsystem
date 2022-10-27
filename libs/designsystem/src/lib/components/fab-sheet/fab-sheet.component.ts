@@ -52,7 +52,7 @@ export class FabSheetComponent implements AfterContentInit {
   ) {}
 
   ngAfterContentInit(): void {
-    if (!!this.actionSheet) {
+    if (this.actionSheet) {
       this.actionSheet.hideCancel = true;
     }
   }
