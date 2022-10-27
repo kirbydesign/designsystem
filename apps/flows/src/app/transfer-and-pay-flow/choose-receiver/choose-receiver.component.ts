@@ -20,6 +20,7 @@ export class ChooseReceiverComponent implements OnInit {
     },
   ];
 
+  isDisabled: boolean;
   selectedSegment = this.items[0];
 
   constructor(private OtherService: OtherService) {}
@@ -30,6 +31,7 @@ export class ChooseReceiverComponent implements OnInit {
 
   ngOnInit(): void {
     this.selectedSegment = this.items[0];
+    this.OtherService.getFormFilled().subscribe((formFilled) => (this.isDisabled = !formFilled));
   }
 
   saveReceiver() {

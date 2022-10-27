@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Other } from './other';
+import { Observable, of, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -16,8 +17,28 @@ export class OtherService {
   ];
 
   otherSelectedId: number;
+  private formFilledSource = new Subject<boolean>(); //Observeable boolean source
+  formFilled$ = this.formFilledSource.asObservable();
+
+  private receiverSelectedSource = new Subject<Other[]>();
+  receiverSelected$ = this.receiverSelectedSource.asObservable();
+
+  private receiverSeletecIdSource = new Subject<number>();
+  receiverSelectedId$ = this.receiverSeletecIdSource.asObservable();
+
+  private receiverSeletecBooleanSource = new Subject<boolean>();
+  receiverSelectedBoolean$ = this.receiverSeletecBooleanSource.asObservable();
 
   constructor() {}
+
+  public setFormFilled(boolean: boolean) {
+    this.formFilledSource.next(boolean);
+  }
+
+  public getFormFilled(): Observable<boolean> {
+    const FORMFILLED = this.formFilledSource;
+    return FORMFILLED;
+  }
 
   public getOther(): Other[] {
     return this.Others;
@@ -49,5 +70,26 @@ export class OtherService {
 
   public setName(name: string) {
     this.name = name;
+  }
+
+  public setReceiver(id: number) {
+    this.receiverSeletecBooleanSource.next(true);
+    this.receiverSeletecIdSource.next(id);
+    this.receiverSelectedSource.next(this.Others.filter((accounts) => accounts.id === id));
+  }
+
+  public getReceiver(): Observable<Other[]> {
+    const RECEIVER = this.receiverSelectedSource;
+    return RECEIVER;
+  }
+
+  public getReceiverId(): Observable<number> {
+    const RECEIVERID = this.receiverSeletecIdSource;
+    return RECEIVERID;
+  }
+
+  public getReceiverBoolean(): Observable<boolean> {
+    const RECEIVERBOOLEAN = this.receiverSeletecBooleanSource;
+    return RECEIVERBOOLEAN;
   }
 }

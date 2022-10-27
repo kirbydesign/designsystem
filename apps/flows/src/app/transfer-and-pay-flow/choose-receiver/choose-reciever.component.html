@@ -1,3 +1,4 @@
+<kirby-page-title>Choose receiver</kirby-page-title>
 <kirby-segmented-control
   [items]="items"
   mode="chip"
@@ -10,5 +11,7 @@
 <flows-other-page *ngIf="selectedSegment.id === 'OtherPage'"></flows-other-page>
 
 <kirby-modal-footer *ngIf="selectedSegment.id === 'OtherPage'">
-  <button kirby-button (click)="saveReceiver()">OK</button>
+  <button kirby-button (click)="saveReceiver()" [attr.disabled]="isDisabled ? true : null">
+    OK
+  </button>
 </kirby-modal-footer>
