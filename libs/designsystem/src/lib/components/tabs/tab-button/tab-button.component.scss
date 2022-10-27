@@ -1,7 +1,7 @@
 @use 'sass:math';
 
-@use '~@kirbydesign/core/src/scss/interaction-state';
-@use '~@kirbydesign/core/src/scss/utils';
+@use '@kirbydesign/core/src/scss/interaction-state';
+@use '@kirbydesign/core/src/scss/utils';
 
 ion-tab-button {
   &.ion-focused {
