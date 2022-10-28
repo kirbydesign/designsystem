@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       #Build on PRs, new releases & changes not including 'libs' (which gets build as part of new release)
-      do_build: ${{ github.event_name == 'pull_request' || steps.filter.outputs.libs == 'false' }}
+      do_build: ${{ github.event_name == 'pull_request' || steps.filter.outputs.libs == 'true' }}
       node_version: ${{ steps.get_node_version.outputs.node_version }}
     steps:
       - name: Checkout repo
