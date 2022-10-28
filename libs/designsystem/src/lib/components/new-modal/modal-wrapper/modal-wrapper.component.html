@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Modal title</ion-title>
+    <ion-buttons slot="start" *ngIf="true">
+      <ng-container *ngTemplateOutlet="closeButton; context: { icon: 'arrow-down' }"></ng-container>
+    </ion-buttons>
+    <ion-buttons slot="end" *ngIf="true">
+      <ng-container *ngTemplateOutlet="closeButton; context: { icon: 'close' }"></ng-container>
+    </ion-buttons>
+    <ion-buttons slot="end" *ngIf="false">
+      <!-- <ng-container
+          *ngTemplateOutlet="
+            supplementaryButton;
+            context: { btn: config.drawerSupplementaryAction }
+          "
+        >
+        </ng-container> -->
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [scrollEvents]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <span class="kirby-text-large" #contentTitle>Modal title</span>
+    </ion-toolbar>
+  </ion-header>
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et diam libero. Mauris blandit
+    quam eget velit semper molestie. Etiam luctus ultricies leo. Fusce quam ligula, interdum sit
+    amet posuere in, dapibus ac quam. Quisque vel mi commodo dui vehicula facilisis vel ut massa.
+    Vestibulum neque odio, tempus id felis sit amet, mattis mollis erat. Morbi viverra efficitur
+    consectetur. Duis pharetra libero id diam lacinia, eu tristique mauris maximus. Cras eros
+    turpis, pretium sed tortor vitae, varius volutpat felis. Nullam mollis, ex ac vulputate
+    dignissim, sapien diam tempus metus, sit amet scelerisque tellus lectus quis enim. Aenean lacus
+    nisi, imperdiet at venenatis sed, sollicitudin id risus. Proin pretium ut enim nec consectetur.
+    Curabitur volutpat placerat quam nec auctor. Mauris efficitur suscipit consequat. Vestibulum
+    odio risus, sagittis vel ex quis, dapibus rhoncus nisi. Etiam dictum suscipit quam ut
+    scelerisque. Praesent a maximus nibh, quis egestas dolor. Aenean imperdiet et sapien non
+    scelerisque. Praesent eu tempor neque. Quisque ac hendrerit enim. Integer eu gravida erat. Nam
+    id finibus nisi, in euismod justo. Sed dictum porta est ut hendrerit. Maecenas consequat vel
+    elit ut porta. Fusce imperdiet urna at neque pharetra, in ultricies risus rhoncus. Donec non
+    egestas nisi. Morbi ut erat vel urna laoreet facilisis. Mauris viverra eros id quam sagittis
+    dignissim. Sed tortor ante, efficitur suscipit porttitor vitae, porttitor et nunc. Orci varius
+    natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas aliquam
+    justo in massa maximus vulputate. Interdum et malesuada fames ac ante ipsum primis in faucibus.
+    Duis tellus diam, ullamcorper eget nunc a, tincidunt tempor quam. Vestibulum porta lectus nec
+    ipsum semper, at consectetur purus hendrerit. Cras eu ipsum a dolor congue molestie sit amet sit
+    amet nunc. Nulla facilisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. In
+    euismod vel ligula quis varius. Maecenas porta lectus eu imperdiet consequat. Nunc imperdiet
+    condimentum nunc, et dapibus enim bibendum nec. Donec mattis ligula sit amet neque condimentum
+    rhoncus. Aenean a tortor blandit, ullamcorper sapien ut, pellentesque sem. Phasellus diam metus,
+    vestibulum vitae nunc quis, imperdiet pulvinar sem. Sed dictum sollicitudin dapibus. Etiam
+    dapibus gravida arcu a eleifend. Morbi scelerisque eros sit amet consequat tristique. Cras quis
+    justo ut est aliquam sollicitudin id nec enim. Integer ac leo at arcu vulputate interdum.
+    Pellentesque euismod magna in eleifend congue. Aliquam id tortor a sem scelerisque viverra a sit
+    amet sapien. Phasellus volutpat mi elit, in rutrum dolor hendrerit eget. Praesent at tincidunt
+    mauris. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
+    himenaeos. Etiam consequat pellentesque augue, id luctus urna. Etiam nulla lorem, varius non
+    porttitor id, aliquam et sem. Ut nec ligula eget enim facilisis euismod. Pellentesque suscipit
+    suscipit orci quis malesuada. Ut consectetur arcu quis ligula tincidunt tincidunt. Nullam eu
+    orci eu elit porta mattis. Nullam laoreet auctor semper. Nam convallis tellus eget quam
+    faucibus, in venenatis arcu porttitor. Suspendisse enim nulla, pellentesque ut dignissim ac,
+    dignissim id diam. Cras tincidunt nunc in enim euismod, eu commodo risus suscipit. Vivamus
+    ultricies, mi eget scelerisque tincidunt, augue ex venenatis elit, in varius lorem purus eget
+    eros. Maecenas condimentum dapibus augue, nec tincidunt massa tristique eu. Nulla maximus diam
+    quis efficitur ornare. Nulla vitae nibh placerat, placerat tellus in, hendrerit nulla.
+  </p>
+</ion-content>
+
+<ng-template #closeButton let-icon="icon">
+  <button kirby-button [noDecoration]="true" size="md">
+    <kirby-icon [name]="icon"></kirby-icon>
+  </button>
+</ng-template>

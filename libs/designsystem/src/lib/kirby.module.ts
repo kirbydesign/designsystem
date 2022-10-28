@@ -80,6 +80,8 @@ import { ThemeColorDirective } from './directives/theme-color/theme-color.direct
 import { FullscreenModalComponent } from './components/new-modal/fullscreen/fullscreen-modal.component';
 import { SheetModalComponent } from './components/new-modal/sheet/sheet-modal.component';
 import { CardModalComponent } from './components/new-modal/card/card-modal.component';
+import { ModalWrapperComponent as NewModalWrapper } from './components/new-modal/modal-wrapper/modal-wrapper.component';
+import { CustomModalComponent } from './components/new-modal/custom/custom-modal.component';
 
 const exportedDeclarations = [
   CardComponent,
@@ -129,6 +131,8 @@ const exportedDeclarations = [
   FullscreenModalComponent,
   SheetModalComponent,
   CardModalComponent,
+  NewModalWrapper,
+  CustomModalComponent,
 ];
 
 const declarations = [
