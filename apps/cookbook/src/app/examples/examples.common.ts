@@ -50,6 +50,7 @@ import { PagePullToRefreshExampleComponent } from './page-example/pull-to-refres
 import { DropdownExampleComponent } from './dropdown-example/dropdown-example.component';
 import { DataTableExampleComponent } from './data-table-example/data-table-example.component';
 import { ModalSheetExampleComponent } from './new-modal-example/sheet/new-modal-sheet-example.component';
+import { ModalCardExampleComponent } from './new-modal-example/card/new-modal-card-example.component';
 
 export const COMPONENT_DECLARATIONS: any[] = [
   ExamplesComponent,
@@ -105,4 +106,5 @@ export const COMPONENT_DECLARATIONS: any[] = [
   DataTableExampleComponent,
   ModalFullScreenExampleComponent,
   ModalSheetExampleComponent,
+  ModalCardExampleComponent,
 ];

@@ -75,6 +75,7 @@ import { DropdownExampleComponent } from './dropdown-example/dropdown-example.co
 import { DataTableExampleComponent } from './data-table-example/data-table-example.component';
 import { ModalFullScreenExampleComponent } from './new-modal-example/fullscreen-example/new-modal-fullscreen-example.component';
 import { ModalSheetExampleComponent } from './new-modal-example/sheet/new-modal-sheet-example.component';
+import { ModalCardExampleComponent } from './new-modal-example/card/new-modal-card-example.component';
 
 VirtualScrollListExampleComponent;
 export const routes: Routes = [
@@ -252,7 +253,10 @@ export const routes: Routes = [
         path: 'new-sheet-modal',
         component: ModalSheetExampleComponent,
       },
-
+      {
+        path: 'new-card-modal',
+        component: ModalCardExampleComponent,
+      },
       {
         path: 'form-field',
         children: [
