@@ -2,6 +2,25 @@
 
 Notable changes to the project will be documented in this file.
 
+## [7.2.1](https://github.com/kirbydesign/designsystem/compare/v7.1.1...v7.2.1) (28-10-2022)
+
+### Features
+
+- **data table** - introduce new Kirby Data Table component ([#2517](https://github.com/kirbydesign/designsystem/pull/2517))
+- **dropdown** - enable keyboard navigation in the dropdown ([#2424](https://github.com/kirbydesign/designsystem/pull/2424))
+- **formfield** - introduce affix functionality (pre- and suffix) ([#2545](https://github.com/kirbydesign/designsystem/pull/2545))
+- **icon** - add update icon ([#2558](https://github.com/kirbydesign/designsystem/pull/2558))
+- **local navigation** - introduce **experimental** local navigation component ([#2501](https://github.com/kirbydesign/designsystem/pull/2501))
+- **modal** - Add option to show an alert before dismissing modal ([#2514](https://github.com/kirbydesign/designsystem/pull/2514))
+- **tabs** - change position of badges([#2555](https://github.com/kirbydesign/designsystem/pull/2555))
+
+### Bugfixes
+
+- **chart** - upgrade Chart.js dependency to avoid chart-annotations version warning ([#2548 ](https://github.com/kirbydesign/designsystem/pull/2548))
+- **dropdown** - prevent dropdown focus ring on click ([#2544](https://github.com/kirbydesign/designsystem/pull/2544))
+- **dropdown** - fix opening direction when button intersects bottom of viewport ([#2544](https://github.com/kirbydesign/designsystem/pull/2544))
+- **fab-sheet** - fix no automatic close of fab-sheet on item click([#2472](https://github.com/kirbydesign/designsystem/pull/2472))
+
 ## [7.1.1](https://github.com/kirbydesign/designsystem/compare/v7.1.0...v7.1.1) (12-10-2022)
 
 Fixes missing stylesheets in core packages. Due to modified publish flow made in v7.1.0. This only affects the published npm packages.
