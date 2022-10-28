@@ -1,8 +1,8 @@
 @use 'sass:map';
 @use 'sass:meta';
 
-@use '~@kirbydesign/core/src/scss/interaction-state';
-@use '~@kirbydesign/core/src/scss/utils';
+@use '@kirbydesign/core/src/scss/interaction-state';
+@use '@kirbydesign/core/src/scss/utils';
 
 $button-width: (
   sm: 44px,
