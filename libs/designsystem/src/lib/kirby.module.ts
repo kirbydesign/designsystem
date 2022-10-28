@@ -78,6 +78,7 @@ import { ThemeColorDirective } from './directives/theme-color/theme-color.direct
 
 //New modal
 import { FullscreenModalComponent } from './components/new-modal/fullscreen/fullscreen-modal.component';
+import { SheetModalComponent } from './components/new-modal/sheet/sheet-modal.component';
 
 const exportedDeclarations = [
   CardComponent,
@@ -125,6 +126,7 @@ const exportedDeclarations = [
   ItemGroupComponent,
   SectionHeaderComponent,
   FullscreenModalComponent,
+  SheetModalComponent,
 ];
 
 const declarations = [

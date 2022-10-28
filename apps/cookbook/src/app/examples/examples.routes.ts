@@ -74,6 +74,7 @@ import { PagePullToRefreshExampleComponent } from './page-example/pull-to-refres
 import { DropdownExampleComponent } from './dropdown-example/dropdown-example.component';
 import { DataTableExampleComponent } from './data-table-example/data-table-example.component';
 import { ModalFullScreenExampleComponent } from './new-modal-example/fullscreen-example/new-modal-fullscreen-example.component';
+import { ModalSheetExampleComponent } from './new-modal-example/sheet/new-modal-sheet-example.component';
 
 VirtualScrollListExampleComponent;
 export const routes: Routes = [
@@ -244,21 +245,14 @@ export const routes: Routes = [
         ],
       },
       {
-        path: 'new-modal',
+        path: 'new-fullscreen-modal',
         component: ModalFullScreenExampleComponent,
-        // children: [
-        //   {
-        //     path: 'page1',
-        //     outlet: 'modal',
-        //     component: ModalRoutePage1ExampleComponent,
-        //   },
-        //   {
-        //     path: 'page2',
-        //     outlet: 'modal',
-        //     component: ModalRoutePage2ExampleComponent,
-        //   },
-        // ],
       },
+      {
+        path: 'new-sheet-modal',
+        component: ModalSheetExampleComponent,
+      },
+
       {
         path: 'form-field',
         children: [
@@ -319,6 +313,7 @@ export const routes: Routes = [
     children: [
       {
         path: '',
+        pathMatch: 'full',
         redirectTo: 'with-items',
       },
       {
