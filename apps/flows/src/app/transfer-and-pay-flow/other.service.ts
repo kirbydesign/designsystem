@@ -50,7 +50,7 @@ export class OtherService {
 
   public saveReceiver() {
     const other: Other = {
-      id: this.Others.length,
+      id: this.Others.length + 1,
       name: this.name,
       regNo: this.regNo,
       accNo: this.accNo,
