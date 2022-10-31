@@ -1,4 +1,4 @@
-import { Account } from './other';
+import { Account } from './account';
 
 export interface OwnAccount extends Account {
   balance: number;

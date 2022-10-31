@@ -78,17 +78,17 @@ export class OtherService {
     this.receiverSelectedSource.next(this.Others.filter((accounts) => accounts.id === id));
   }
 
-  public getReceiver(): Observable<Other[]> {
+  public getReceiver$(): Observable<Other[]> {
     const RECEIVER = this.receiverSelectedSource;
     return RECEIVER;
   }
 
-  public getReceiverId(): Observable<number> {
+  public getReceiverId$(): Observable<number> {
     const RECEIVERID = this.receiverSeletecIdSource;
     return RECEIVERID;
   }
 
-  public getReceiverBoolean(): Observable<boolean> {
+  public getReceiverBoolean$(): Observable<boolean> {
     const RECEIVERBOOLEAN = this.receiverSeletecBooleanSource;
     return RECEIVERBOOLEAN;
   }
