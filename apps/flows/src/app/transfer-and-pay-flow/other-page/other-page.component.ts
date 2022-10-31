@@ -20,7 +20,7 @@ export class OtherPageComponent implements OnInit {
   ngOnInit(): void {
     this.Others = this.OtherService.getOther();
     this.OtherService.setFormFilled(false);
-    this.OtherService.getReceiverId().subscribe((number) => (this.selectedId = number));
+    this.OtherService.getReceiverId$().subscribe((number) => (this.selectedId = number));
   }
 
   receiverInputSelected = false;
