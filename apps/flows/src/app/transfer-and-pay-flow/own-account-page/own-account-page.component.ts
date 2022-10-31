@@ -8,15 +8,16 @@ import { OwnAccount } from '../own-account';
 })
 export class OwnAccountPageComponent implements OnInit {
   receiverID: number;
-  constructor(private OwnAccountService: OwnAccountService) {}
+  constructor(private ownAccountService: OwnAccountService) {}
   accounts: OwnAccount[] = [];
   ngOnInit(): void {
-    this.accounts = this.OwnAccountService.getOwnAccounts();
-    this.OwnAccountService.getSelectedReceiver().subscribe((number) => (this.receiverID = number));
+    this.accounts = this.ownAccountService.getOwnAccounts();
+    this.ownAccountService
+      .getSelectedReceiverNumber$()
+      .subscribe((number) => (this.receiverID = number));
   }
 
   setSelectedReceiver(id: number) {
-    this.OwnAccountService.setSelectedReceiver(id);
-    console.log(this.receiverID);
+    this.ownAccountService.setSelectedReceiver(id);
   }
 }

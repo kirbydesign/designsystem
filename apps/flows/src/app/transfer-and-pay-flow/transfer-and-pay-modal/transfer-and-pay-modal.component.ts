@@ -5,7 +5,8 @@ import { ChooseOwnAccountComponent } from '../choose-own-account/choose-own-acco
 import { OtherService } from '../other.service';
 import { OwnAccountService } from '../own-account.service';
 import { OwnAccount } from '../own-account';
-import { Other } from '../other';
+import { Account } from '../account';
+
 @Component({
   selector: 'flows-transfer-and-pay-modal',
   templateUrl: './transfer-and-pay-modal.component.html',
@@ -24,15 +25,18 @@ export class TransferAndPayModalComponent implements OnInit {
   receiverChosen: boolean = false;
   isDisabled: boolean;
   selectedAccount: OwnAccount[];
-  selectedOther: Other[];
+  selectedReceiver: Account[];
 
   ngOnInit(): void {
-    this.OtherService.getReceiverBoolean().subscribe((boolean) => (this.receiverChosen = boolean));
-    this.OwnAccountService.getOwnAccountSelected().subscribe(
+    this.OtherService.getReceiverBoolean$().subscribe((boolean) => (this.receiverChosen = boolean));
+    this.OwnAccountService.getOwnAccountSelected$().subscribe(
       (selected) => (this.selectedAccount = selected)
     );
     this.OwnAccountService.setSelected(1);
-    this.OtherService.getReceiver().subscribe((selected) => (this.selectedOther = selected));
+    this.OwnAccountService.getSelectedReceiver$().subscribe(
+      (selected) => (this.selectedReceiver = selected)
+    );
+    this.OtherService.getReceiver$().subscribe((selected) => (this.selectedReceiver = selected));
     console.log(this.selectedAccount);
   }
 
