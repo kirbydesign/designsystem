@@ -1,14 +1,27 @@
 <!-- <kirby-fullscreen-modal></kirby-fullscreen-modal> -->
-
+<h2>Controller modals</h2>
 <button kirby-button (click)="openModal()">Fullscreen modal</button>
 <button kirby-button (click)="openModal()">Sheet modal</button>
 <button kirby-button (click)="openModal('custom')">Custom modal</button>
 
-<h2>Fullscreen modal</h2>
-<cookbook-iphone src="/examples/new-fullscreen-modal" showExternalLink="true"></cookbook-iphone>
+<div class="container">
+  <div class="column">
+    <h2>Fullscreen modal</h2>
+    <cookbook-iphone src="/examples/new-fullscreen-modal" showExternalLink="true"></cookbook-iphone>
+  </div>
+  <div class="column">
+    <h2>Sheet modal</h2>
+    <cookbook-iphone src="/examples/new-sheet-modal" showExternalLink="true"></cookbook-iphone>
+  </div>
+</div>
 
-<h2>Sheet modal</h2>
-<cookbook-iphone src="/examples/new-sheet-modal" showExternalLink="true"></cookbook-iphone>
-
-<h2>Card modal</h2>
-<cookbook-iphone src="/examples/new-card-modal" showExternalLink="true"></cookbook-iphone>
+<div class="container">
+  <div class="column">
+    <h2>Card modal</h2>
+    <cookbook-iphone src="/examples/new-card-modal" showExternalLink="true"></cookbook-iphone>
+  </div>
+  <div class="column">
+    <h2>Custom modal</h2>
+    <cookbook-iphone src="/examples/new-sheet-modal" showExternalLink="true"></cookbook-iphone>
+  </div>
+</div>

@@ -14,7 +14,7 @@ export class NewModalShowcaseComponent {
   async openModal(flavor?: string) {
     const modal = await this.modalCtrl.create({
       component: flavor === 'custom' ? CustomModalComponent : ModalWrapperComponent,
-      cssClass: flavor === 'custom' ? 'example-modal' : '',
+      cssClass: flavor === 'custom' ? 'example-modal' : 'transparent-modal',
       // breakpoints: [0, 0.5],
       // initialBreakpoint: 0.5,
     });
