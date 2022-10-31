@@ -1,6 +1,6 @@
-export interface OwnAccount {
-  name: string;
+import { Account } from './other';
+
+export interface OwnAccount extends Account {
   balance: number;
   selected: boolean;
-  id: number;
 }
