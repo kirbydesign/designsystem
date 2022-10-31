@@ -20,11 +20,14 @@ export class TransferAndPayModalComponent implements OnInit {
 
   @ViewChild('input') input: ElementRef<HTMLInputElement>;
   currency: string;
-  state: boolean = false;
+  currencyEntered: boolean = false;
+  receiverChosen: boolean = false;
+  isDisabled: boolean;
   selectedAccount: OwnAccount[];
   selectedOther: Other[];
+
   ngOnInit(): void {
-    this.OtherService.getReceiverBoolean().subscribe((boolean) => (this.state = boolean));
+    this.OtherService.getReceiverBoolean().subscribe((boolean) => (this.receiverChosen = boolean));
     this.OwnAccountService.getOwnAccountSelected().subscribe(
       (selected) => (this.selectedAccount = selected)
     );
@@ -58,6 +61,14 @@ export class TransferAndPayModalComponent implements OnInit {
   }
 
   onChange(): void {
+    if (this.currency.length === 0) {
+      this.currencyEntered = false;
+    }
+    if (this.currency.length >= 1) {
+      if (this.receiverChosen === true) {
+        this.currencyEntered = true;
+      }
+    }
     if (this.currency.length > 5) {
       this.input.nativeElement.classList.remove('medium-text');
       this.input.nativeElement.classList.add('large-text');

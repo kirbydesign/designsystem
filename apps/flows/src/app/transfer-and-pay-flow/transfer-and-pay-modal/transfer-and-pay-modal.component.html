@@ -12,7 +12,7 @@
 </div>
 
 <kirby-modal-footer>
-  <div class="container-over" *ngIf="state === false">
+  <div class="container-over" *ngIf="receiverChosen === false">
     <div class="grid" (click)="showModalChooseOwnAccount()">
       <p>From</p>
       <span *ngFor="let account of selectedAccount"
@@ -25,7 +25,7 @@
     </div>
   </div>
 
-  <div class="container-over" *ngIf="state === true">
+  <div class="container-over" *ngIf="receiverChosen === true">
     <div class="grid" (click)="showModalChooseOwnAccount()">
       <p>From</p>
       <span *ngFor="let account of selectedAccount"
@@ -56,7 +56,7 @@
     </div>
 
     <div class="container-under">
-      <button kirby-button>Continue</button>
+      <button kirby-button [attr.disabled]="!currencyEntered ? true : null">Continue</button>
     </div>
   </div>
 </kirby-modal-footer>
