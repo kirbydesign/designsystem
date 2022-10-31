@@ -5,7 +5,7 @@ import { SegmentItem } from '@kirbydesign/designsystem';
 import { OtherService } from '../other.service';
 @Component({
   selector: 'flows-choose-receiver',
-  templateUrl: './choose-reciever.component.html',
+  templateUrl: './choose-receiver.component.html',
   styleUrls: ['./choose-receiver.component.scss'],
 })
 export class ChooseReceiverComponent implements OnInit {
