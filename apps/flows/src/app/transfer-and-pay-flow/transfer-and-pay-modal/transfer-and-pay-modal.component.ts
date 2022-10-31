@@ -37,7 +37,6 @@ export class TransferAndPayModalComponent implements OnInit {
       .getSelectedReceiver$()
       .subscribe((selected) => (this.selectedReceiver = selected));
     this.otherService.getReceiver$().subscribe((selected) => (this.selectedReceiver = selected));
-    console.log(this.selectedAccount);
   }
 
   showModalChooseReciever() {

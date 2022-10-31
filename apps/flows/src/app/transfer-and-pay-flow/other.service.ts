@@ -57,7 +57,6 @@ export class OtherService {
       accNo: this.accNo,
     };
 
-    console.log(other);
     this.Others.push(other);
   }
 

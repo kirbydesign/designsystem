@@ -27,17 +27,13 @@ export class OtherPageComponent implements OnInit {
 
   onCheckedChange(checked: boolean) {
     this.receiverInputSelected = checked;
-    console.log(this.receiverInputSelected);
   }
 
   onChangedReg() {
     this.OtherService.setRegNo(this.regNo);
-    console.log(this.regNo.toString().length);
     if (this.regNo.toString().length > 3 && this.accNo.toString().length >= 7) {
-      console.log('in');
       this.OtherService.setFormFilled(true);
     } else {
-      console.log('out');
       this.OtherService.setFormFilled(false);
     }
   }
@@ -56,6 +52,5 @@ export class OtherPageComponent implements OnInit {
 
   setSelected(number: number) {
     this.OtherService.setReceiver(number);
-    console.log(this.selectedId);
   }
 }
