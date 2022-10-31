@@ -10,6 +10,7 @@ export class OwnAccountPageComponent implements OnInit {
   receiverID: number;
   constructor(private ownAccountService: OwnAccountService) {}
   accounts: OwnAccount[] = [];
+
   ngOnInit(): void {
     this.accounts = this.ownAccountService.getOwnAccounts();
     this.ownAccountService

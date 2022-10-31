@@ -15,8 +15,8 @@ import { Account } from '../account';
 export class TransferAndPayModalComponent implements OnInit {
   constructor(
     private modalController: ModalController,
-    private OtherService: OtherService,
-    private OwnAccountService: OwnAccountService
+    private otherService: OtherService,
+    private ownAccountService: OwnAccountService
   ) {}
 
   @ViewChild('input') input: ElementRef<HTMLInputElement>;
@@ -28,15 +28,15 @@ export class TransferAndPayModalComponent implements OnInit {
   selectedReceiver: Account[];
 
   ngOnInit(): void {
-    this.OtherService.getReceiverBoolean$().subscribe((boolean) => (this.receiverChosen = boolean));
-    this.OwnAccountService.getOwnAccountSelected$().subscribe(
-      (selected) => (this.selectedAccount = selected)
-    );
-    this.OwnAccountService.setSelected(1);
-    this.OwnAccountService.getSelectedReceiver$().subscribe(
-      (selected) => (this.selectedReceiver = selected)
-    );
-    this.OtherService.getReceiver$().subscribe((selected) => (this.selectedReceiver = selected));
+    this.otherService.getReceiverBoolean$().subscribe((boolean) => (this.receiverChosen = boolean));
+    this.ownAccountService
+      .getOwnAccountSelected$()
+      .subscribe((selected) => (this.selectedAccount = selected));
+    this.ownAccountService.setSelected(1);
+    this.ownAccountService
+      .getSelectedReceiver$()
+      .subscribe((selected) => (this.selectedReceiver = selected));
+    this.otherService.getReceiver$().subscribe((selected) => (this.selectedReceiver = selected));
     console.log(this.selectedAccount);
   }
 

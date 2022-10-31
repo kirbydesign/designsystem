@@ -17,7 +17,7 @@ export class OwnAccountService {
   selectedReceiverNumber$ = this.selectedReceiverNumberSource.asObservable();
 
   private selectedReceiverSource = new Subject<OwnAccount[]>();
-  private selectedReceiver$ = this.selectedReceiverSource.asObservable();
+  selectedReceiver$ = this.selectedReceiverSource.asObservable();
 
   accounts: OwnAccount[] = [
     { balance: 200, selected: false, name: 'Account1', id: 1 },
@@ -54,8 +54,7 @@ export class OwnAccountService {
   }
 
   getSelectedReceiverNumber$(): Observable<number> {
-    const selectedReceiverNumber = this.selectedReceiverNumberSource;
-    return selectedReceiverNumber;
+    return this.selectedReceiverNumberSource.asObservable();
   }
 
   public getOwnAccountSelected$(): Observable<OwnAccount[]> {

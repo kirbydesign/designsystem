@@ -6,14 +6,14 @@ import { OwnAccountService } from '../own-account.service';
   templateUrl: './choose-own-account.component.html',
 })
 export class ChooseOwnAccountComponent implements OnInit {
-  constructor(private OwnAccountService: OwnAccountService) {}
+  constructor(private ownAccountService: OwnAccountService) {}
 
   accounts: OwnAccount[] = [];
 
   ngOnInit(): void {
-    this.accounts = this.OwnAccountService.getOwnAccounts();
+    this.accounts = this.ownAccountService.getOwnAccounts();
   }
   setSelected(id: number) {
-    this.OwnAccountService.setSelected(id);
+    this.ownAccountService.setSelected(id);
   }
 }

@@ -17,7 +17,8 @@ export class OtherService {
   ];
 
   otherSelectedId: number;
-  private formFilledSource = new Subject<boolean>(); //Observeable boolean source
+
+  private formFilledSource = new Subject<boolean>(); //Observable boolean source
   formFilled$ = this.formFilledSource.asObservable();
 
   private receiverSelectedSource = new Subject<Other[]>();
@@ -79,17 +80,14 @@ export class OtherService {
   }
 
   public getReceiver$(): Observable<Other[]> {
-    const RECEIVER = this.receiverSelectedSource;
-    return RECEIVER;
+    return this.receiverSelectedSource.asObservable();
   }
 
   public getReceiverId$(): Observable<number> {
-    const RECEIVERID = this.receiverSeletecIdSource;
-    return RECEIVERID;
+    return this.receiverSeletecIdSource.asObservable();
   }
 
   public getReceiverBoolean$(): Observable<boolean> {
-    const RECEIVERBOOLEAN = this.receiverSeletecBooleanSource;
-    return RECEIVERBOOLEAN;
+    return this.receiverSeletecBooleanSource.asObservable();
   }
 }
