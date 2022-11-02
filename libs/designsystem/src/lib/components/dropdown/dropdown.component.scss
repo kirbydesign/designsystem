@@ -1,5 +1,5 @@
-@use '~@kirbydesign/core/src/scss/interaction-state';
-@use '~@kirbydesign/core/src/scss/utils';
+@use '@kirbydesign/core/src/scss/interaction-state';
+@use '@kirbydesign/core/src/scss/utils';
 
 $dropdown-max-height: 8 * utils.$dropdown-item-height;
 $margin-horizontal-total: 2 * utils.size('s');
@@ -36,47 +36,30 @@ $min-screen-width: 375px;
       border-color: utils.get-color('danger');
     }
   }
-}
 
-:host > button {
-  position: relative;
-  margin: 0;
-  outline: none;
-  width: 100%;
+  > button {
+    position: relative;
+    margin: 0;
+    outline: none;
+    width: 100%;
 
-  // Temporary fix for button-width as attention level 3 has border,
-  // and attention level 2 does not:
-  &.attention-level2 {
-    border: 1px solid transparent;
+    // Temporary fix for button-width as attention level 3 has border,
+    // and attention level 2 does not:
+    &.attention-level2 {
+      border: 1px solid transparent;
+    }
+
+    .text {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 
-  .text {
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-}
-
-kirby-popover {
-  --max-height: #{$dropdown-max-height};
-}
-
-kirby-card {
-  max-height: $dropdown-max-height;
-  margin-top: utils.size('xxxs');
-  margin-bottom: utils.size('xxxs');
-  overflow-y: auto;
-  box-shadow: utils.get-elevation(8);
-  min-width: $min-screen-width-small - $margin-horizontal-total;
-  @include utils.media('>=small') {
-    min-width: $min-screen-width - $margin-horizontal-total;
-  }
-
-  max-width: calc(100vw - #{$margin-horizontal-total});
-}
-
-:host(:not(.with-popover)) {
   kirby-card {
     display: none;
+
+    // Opacity is used to prevent visible flicker,
+    // if a dropdown has to change horizontal or vertical direction
     opacity: 0;
     position: absolute;
     z-index: utils.z('dropdown');
@@ -92,6 +75,10 @@ kirby-card {
     kirby-card {
       display: block;
       opacity: 1;
+    }
+
+    > button {
+      box-shadow: utils.get-elevation(8);
     }
   }
 
@@ -117,18 +104,21 @@ kirby-card {
   }
 }
 
-:host(.with-popover) {
-  &.is-open {
-    kirby-card {
-      display: block;
-    }
-  }
+kirby-popover {
+  --max-height: #{$dropdown-max-height};
 }
 
-:host(.is-open) {
-  & > button {
-    box-shadow: utils.get-elevation(8);
+kirby-card {
+  max-height: $dropdown-max-height;
+  margin-block: utils.size('xxxs');
+  overflow-y: auto;
+  box-shadow: utils.get-elevation(8);
+  min-width: $min-screen-width-small - $margin-horizontal-total;
+  @include utils.media('>=small') {
+    min-width: $min-screen-width - $margin-horizontal-total;
   }
+
+  max-width: calc(100vw - #{$margin-horizontal-total});
 }
 
 :host-context(kirby-calendar) {

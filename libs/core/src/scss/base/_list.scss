@@ -1,4 +1,4 @@
-@use '~@kirbydesign/core/src/scss/utils';
+@use '@kirbydesign/core/src/scss/utils';
 
 @mixin rounded($border-radius: utils.$border-radius) {
   @include rounded-top($border-radius);
