@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar [class.content-scrolled]="isContentScrolled">
+  <ion-toolbar [class.content-scrolled]="!stickyContentTemplate && isContentScrolled">
     <ion-buttons slot="start">
       <ion-back-button
         text=""
@@ -58,7 +58,8 @@
 
   <!--  Sticky content -->
   <ng-container *ngIf="stickyContentTemplate">
-    <div class="sticky-content-container">
+    <span #stickyContentContainerPreamble></span>
+    <div class="sticky-content-container" [class.content-sticking]="isStickyContentSticking">
       <div>
         <ng-container *ngTemplateOutlet="stickyContentTemplate"></ng-container>
       </div>

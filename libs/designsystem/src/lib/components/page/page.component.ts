@@ -206,6 +206,8 @@ export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChec
   private backButtonDelegate: IonBackButtonDelegate;
   @ViewChild('pageTitle', { static: false, read: ElementRef })
   private pageTitle: ElementRef;
+  @ViewChild('stickyContentContainerPreamble', { static: false, read: ElementRef })
+  private stickyContentContainerPreamble: ElementRef;
 
   @ViewChild('simpleTitleTemplate', { static: true, read: TemplateRef })
   private simpleTitleTemplate: TemplateRef<any>;
@@ -228,6 +230,7 @@ export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChec
   hasPageSubtitle: boolean;
   toolbarTitleVisible: boolean;
   isContentScrolled: boolean;
+  isStickyContentSticking: boolean;
 
   fitHeadingConfig: FitHeadingConfig;
 
@@ -241,6 +244,8 @@ export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChec
 
   private pageTitleIntersectionObserverRef: IntersectionObserver =
     this.pageTitleIntersectionObserver();
+  private stickyContentPreableIntersectionObserverRef =
+    this.stickyContentPreambleIntersectionObserver();
 
   private url: string;
   private isActive: boolean;
@@ -249,13 +254,13 @@ export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChec
   private contentScrolled$: Observable<ScrollDetail>;
 
   private navigationStart$: Observable<RouterEvent> = this.router.events.pipe(
-    takeUntil(this.ngOnDestroy$),
-    filter((event: RouterEvent) => event instanceof NavigationStart)
+    filter((event: RouterEvent) => event instanceof NavigationStart),
+    takeUntil(this.ngOnDestroy$)
   );
 
   private navigationEnd$: Observable<RouterEvent> = this.router.events.pipe(
-    takeUntil(this.ngOnDestroy$),
-    filter((event: RouterEvent) => event instanceof NavigationEnd)
+    filter((event: RouterEvent) => event instanceof NavigationEnd),
+    takeUntil(this.ngOnDestroy$)
   );
 
   constructor(
@@ -280,9 +285,9 @@ export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChec
 
   ngAfterViewInit(): void {
     this.contentScrolled$ = this.content.ionScroll.pipe(
-      takeUntil(this.ngOnDestroy$),
       debounceTime(contentScrollDebounceTimeInMS),
-      map((event) => event.detail)
+      map((event) => event.detail),
+      takeUntil(this.ngOnDestroy$)
     );
 
     this.contentScrolled$.subscribe((scrollInfo: ScrollDetail) => {
@@ -312,6 +317,7 @@ export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChec
     });
 
     this.interceptBackButtonClicksSetup();
+    this.initializeStickyIntersectionObserver();
   }
 
   ngAfterContentChecked(): void {
@@ -327,6 +333,7 @@ export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChec
     this.ngOnDestroy$.complete();
 
     this.pageTitleIntersectionObserverRef.disconnect();
+    this.stickyContentPreableIntersectionObserverRef.disconnect();
   }
 
   delegateRefreshEvent(event: any): void {
@@ -369,6 +376,17 @@ export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChec
     this.backButtonDelegate.onClick = (event: Event) => {
       this.backButtonClick.emit(event);
     };
+  }
+
+  private initializeStickyIntersectionObserver() {
+    if (this.stickyContentTemplate) {
+      // Sticky content present - start observing for stickiness
+      setTimeout(() => {
+        this.stickyContentPreableIntersectionObserverRef.observe(
+          this.stickyContentContainerPreamble.nativeElement
+        );
+      });
+    }
   }
 
   private initializeTitle() {
@@ -435,6 +453,14 @@ export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChec
       }
     };
     return new IntersectionObserver(callback, options);
+  }
+
+  private stickyContentPreambleIntersectionObserver() {
+    const callback = (entries) => {
+      // The sticky content preamble doesn't intersect when sticky content sticks
+      this.isStickyContentSticking = !entries[0].isIntersecting;
+    };
+    return new IntersectionObserver(callback);
   }
 
   @HostListener('window:keyboardWillShow', ['$event'])

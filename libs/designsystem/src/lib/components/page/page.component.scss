@@ -240,7 +240,7 @@ ion-content {
  */
 .sticky-content-container {
   position: sticky;
-  top: 0;
+  top: -#{utils.size('xs')}; // Adjust for padding-top of ion-content to position static content properly.
   left: 0;
   right: 0;
   margin-block-end: utils.size('m');
@@ -248,5 +248,23 @@ ion-content {
   div {
     max-width: var(--page-content-max-width, utils.$page-content-max-width);
     margin: 0 auto;
+  }
+
+  &.content-sticking {
+    // Adjust for inine padding of ion-content to stretch divider to full width.
+    margin-inline-start: calc(-1 * var(--page-content-padding-start, #{utils.size('s')}));
+    margin-inline-end: calc(-1 * var(--page-content-padding-end, #{utils.size('s')}));
+
+    // Divider
+    &::before {
+      content: '';
+      background-color: utils.get-color('medium');
+      position: absolute;
+      height: 1px;
+      bottom: 0;
+      z-index: 1;
+      left: 0;
+      width: 100%;
+    }
   }
 }
