@@ -7,6 +7,15 @@
 @use 'base/link';
 @use 'base/html-list';
 
+// As of iOS 16 it is needed to set overflow: hidden on the html tag,
+// otherwise the whole application will overscroll. See issue: https://github.com/kirbydesign/designsystem/issues/2534.
+// It is a WebKit issue that is being worked on and the fix will likely be released in iOS 16.2 or 16.3. See comment: https://github.com/apache/cordova-ios/issues/1244#issuecomment-1246935718.
+// We should be able to remove the styling below, when the fix is released.
+
+html {
+  overflow: hidden;
+}
+
 :root,
 :host {
   --kirby-font-family: 'Roboto';
