@@ -146,8 +146,10 @@ export class ModalController implements OnDestroy {
     });
   }
 
-  public registerPresentingElement(element: HTMLElement) {
-    this.modalHelper.registerPresentingElement(element);
+  public registerPresentingElement() {
+    console.log(
+      'registerPresentingElement has been deprecated. It is no longer needed to register a presenting element.'
+    );
   }
 
   public async hideTopmost(data?: any): Promise<boolean> {
