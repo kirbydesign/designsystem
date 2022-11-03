@@ -384,7 +384,7 @@ describe('ButtonComponent', () => {
     });
   });
 
-  const testScenarios: { size: ButtonSize; expected: any }[] = [
+  const sizeTestScenarios: { size: ButtonSize; expected: any }[] = [
     {
       size: ButtonSize.SM,
       expected: { fontSize: fontSize('xs'), height: size('l'), minWidth: '44px' },
@@ -398,7 +398,7 @@ describe('ButtonComponent', () => {
       expected: { fontSize: fontSize('n'), height: size('xxl'), minWidth: '220px' },
     },
   ];
-  testScenarios.forEach((scenario) => {
+  sizeTestScenarios.forEach((scenario) => {
     describe(`when configured with size = ${scenario.size}`, () => {
       describe(`through one-time string initialization`, () => {
         beforeEach(() => {
@@ -459,6 +459,100 @@ describe('ButtonComponent', () => {
 
         it('should render with correct min-width', () => {
           expect(element).toHaveComputedStyle({ 'min-width': scenario.expected.minWidth });
+        });
+      });
+    });
+  });
+
+  const iconTestScenarios: { size: ButtonSize; iconPosition: 'left' | 'right'; expected: any }[] = [
+    {
+      size: ButtonSize.SM,
+      iconPosition: 'left',
+      expected: { paddingInline: '12px 16px' },
+    },
+    {
+      size: ButtonSize.SM,
+      iconPosition: 'right',
+      expected: { paddingInline: '16px 12px' },
+    },
+    {
+      size: ButtonSize.MD,
+      iconPosition: 'left',
+      expected: { paddingInline: '12px 16px' },
+    },
+    {
+      size: ButtonSize.MD,
+      iconPosition: 'right',
+      expected: { paddingInline: '16px 12px' },
+    },
+    {
+      size: ButtonSize.LG,
+      iconPosition: 'left',
+      expected: { paddingInline: '12px 16px' },
+    },
+    {
+      size: ButtonSize.LG,
+      iconPosition: 'right',
+      expected: { paddingInline: '16px 12px' },
+    },
+  ];
+  iconTestScenarios.forEach((scenario) => {
+    describe(`when configured with size = ${scenario.size}`, () => {
+      describe(`through one-time string initialization`, () => {
+        beforeEach(() => {
+          spectator = createHost(
+            `<button kirby-button size="${scenario.size}">
+              ${scenario.iconPosition === 'left' ? '<kirby-icon name="edit"></kirby-icon>' : ''}
+              <span>Text</span>
+              ${scenario.iconPosition === 'right' ? '<kirby-icon name="edit"></kirby-icon>' : ''}
+            </button>`
+          );
+          element = spectator.element as HTMLButtonElement;
+        });
+        it('should render with correct padding-inline', () => {
+          expect(element.getElementsByClassName('content-layer').length).toBe(1);
+          expect(element.getElementsByClassName('content-layer')[0]).toHaveComputedStyle({
+            'padding-inline': scenario.expected.paddingInline,
+          });
+        });
+      });
+
+      describe(`through an input property`, () => {
+        beforeEach(() => {
+          spectator = createHost(
+            `<button kirby-button size="${scenario.size}">
+              ${scenario.iconPosition === 'left' ? '<kirby-icon name="edit"></kirby-icon>' : ''}
+              <span>Text</span>
+              ${scenario.iconPosition === 'right' ? '<kirby-icon name="edit"></kirby-icon>' : ''}
+            </button>`
+          );
+          element = spectator.element as HTMLButtonElement;
+        });
+        it('should render with correct padding-inline', () => {
+          expect(element.getElementsByClassName('content-layer').length).toBe(1);
+          expect(element.getElementsByClassName('content-layer')[0]).toHaveComputedStyle({
+            'padding-inline': scenario.expected.paddingInline,
+          });
+        });
+      });
+
+      describe(`through template property binding`, () => {
+        beforeEach(() => {
+          spectator = createHost(
+            `<button kirby-button size="${scenario.size}">
+              ${scenario.iconPosition === 'left' ? '<kirby-icon name="edit"></kirby-icon>' : ''}
+              <span>Text</span>
+              ${scenario.iconPosition === 'right' ? '<kirby-icon name="edit"></kirby-icon>' : ''}
+            </button>`
+          );
+          element = spectator.element as HTMLButtonElement;
+        });
+
+        it('should render with correct padding-inline', () => {
+          expect(element.getElementsByClassName('content-layer').length).toBe(1);
+          expect(element.getElementsByClassName('content-layer')[0]).toHaveComputedStyle({
+            'padding-inline': scenario.expected.paddingInline,
+          });
         });
       });
     });
