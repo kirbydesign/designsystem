@@ -73,7 +73,6 @@ export class OtherService {
   }
 
   public setReceiver(id: number) {
-    this.receiverSeletecBooleanSource.next(true);
     this.receiverSeletecIdSource.next(id);
     this.receiverSelectedSource.next(this.Others.filter((accounts) => accounts.id === id));
   }
@@ -88,5 +87,9 @@ export class OtherService {
 
   public getReceiverBoolean$(): Observable<boolean> {
     return this.receiverSeletecBooleanSource.asObservable();
+  }
+
+  public setReceiverSelectedTrue() {
+    this.receiverSeletecBooleanSource.next(true);
   }
 }
