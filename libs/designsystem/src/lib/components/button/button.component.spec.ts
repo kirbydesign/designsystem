@@ -464,40 +464,49 @@ describe('ButtonComponent', () => {
     });
   });
 
-  const iconTestScenarios: { size: ButtonSize; iconPosition: 'left' | 'right'; expected: any }[] = [
+  const iconTestExpectations = {
+    left: { paddingInline: '12px 16px' },
+    right: { paddingInline: '16px 12px' },
+  };
+
+  const iconTestScenarios: {
+    size: ButtonSize;
+    iconPosition: 'left' | 'right';
+    expected: { paddingInline: string };
+  }[] = [
     {
       size: ButtonSize.SM,
       iconPosition: 'left',
-      expected: { paddingInline: '12px 16px' },
+      expected: iconTestExpectations.left,
     },
     {
       size: ButtonSize.SM,
       iconPosition: 'right',
-      expected: { paddingInline: '16px 12px' },
+      expected: iconTestExpectations.right,
     },
     {
       size: ButtonSize.MD,
       iconPosition: 'left',
-      expected: { paddingInline: '12px 16px' },
+      expected: iconTestExpectations.left,
     },
     {
       size: ButtonSize.MD,
       iconPosition: 'right',
-      expected: { paddingInline: '16px 12px' },
+      expected: iconTestExpectations.right,
     },
     {
       size: ButtonSize.LG,
       iconPosition: 'left',
-      expected: { paddingInline: '12px 16px' },
+      expected: iconTestExpectations.left,
     },
     {
       size: ButtonSize.LG,
       iconPosition: 'right',
-      expected: { paddingInline: '16px 12px' },
+      expected: iconTestExpectations.right,
     },
   ];
   iconTestScenarios.forEach((scenario) => {
-    describe(`when configured with size = ${scenario.size}`, () => {
+    describe(`when configured with size = ${scenario.size} & used with kirby-icon`, () => {
       describe(`through one-time string initialization`, () => {
         beforeEach(() => {
           spectator = createHost(
