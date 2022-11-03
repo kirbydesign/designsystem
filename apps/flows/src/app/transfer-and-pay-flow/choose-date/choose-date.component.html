@@ -1,0 +1,9 @@
+<kirby-page-title>Choose date</kirby-page-title>
+<kirby-card>
+  <kirby-calendar [todayDate]="true" [disableWeekends]="true" (dateChange)="onDateChange($event)">
+  </kirby-calendar>
+</kirby-card>
+
+<div class="container-under">
+  <button kirby-button (click)="saveDate()">Save</button>
+</div>
