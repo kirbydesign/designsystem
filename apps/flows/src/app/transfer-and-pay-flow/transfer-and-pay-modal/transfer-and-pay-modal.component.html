@@ -40,19 +40,25 @@
       >
     </div>
     <kirby-divider></kirby-divider>
-    <div class="grid">
+    <div class="grid" (click)="showModalChooseDate()">
       <p>Date</p>
-      <p><b>date</b></p>
+      <p>
+        <b>{{ date }}</b>
+      </p>
     </div>
     <kirby-divider></kirby-divider>
-    <div class="grid">
+    <div class="grid" (click)="showModalChooseTextAndMessage()">
       <p>Text</p>
-      <p><b>text</b></p>
+      <p>
+        <b>{{ text }}</b>
+      </p>
     </div>
     <kirby-divider></kirby-divider>
-    <div class="grid">
+    <div class="grid" (click)="showModalChooseTextAndMessage()">
       <p>Message</p>
-      <p><b>message</b></p>
+      <p>
+        <b>{{ message }}</b>
+      </p>
     </div>
 
     <div class="container-under">

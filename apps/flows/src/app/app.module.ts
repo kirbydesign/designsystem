@@ -22,6 +22,8 @@ import { FormsModule } from '@angular/forms';
 import { ChooseOwnAccountComponent } from './transfer-and-pay-flow/choose-own-account/choose-own-account.component';
 import { OwnAccountPageComponent } from './transfer-and-pay-flow/own-account-page/own-account-page.component';
 import { OtherPageComponent } from './transfer-and-pay-flow/other-page/other-page.component';
+import { ChooseDateComponent } from './transfer-and-pay-flow/choose-date/choose-date.component';
+import { ChooseTextAndMessageComponent } from './transfer-and-pay-flow/choose-text-and-message/choose-text-and-message.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +43,8 @@ import { OtherPageComponent } from './transfer-and-pay-flow/other-page/other-pag
     ChooseOwnAccountComponent,
     OwnAccountPageComponent,
     OtherPageComponent,
+    ChooseDateComponent,
+    ChooseTextAndMessageComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, KirbyModule, FormsModule],
   providers: [],
