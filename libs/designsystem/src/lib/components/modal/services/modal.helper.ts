@@ -3,9 +3,11 @@ import { ModalController } from '@ionic/angular';
 
 import { KirbyAnimation } from '../../../animation/kirby-animation';
 import { WindowRef } from '../../../types/window-ref';
+import { AlertConfig } from '../alert/config/alert-config';
 import { ModalCompactWrapperComponent } from '../modal-wrapper/compact/modal-compact-wrapper.component';
 import { ModalConfig, ModalFlavor, ModalSize } from '../modal-wrapper/config/modal-config';
 import { ModalWrapperComponent } from '../modal-wrapper/modal-wrapper.component';
+import { AlertHelper } from './alert.helper';
 
 import { ModalAnimationBuilderService } from './modal-animation-builder.service';
 import { Overlay } from './modal.interfaces';
@@ -19,10 +21,11 @@ export class ModalHelper {
   constructor(
     private ionicModalController: ModalController,
     private modalAnimationBuilder: ModalAnimationBuilderService,
-    private windowRef: WindowRef
+    private windowRef: WindowRef,
+    private alertHelper: AlertHelper
   ) {}
 
-  public async showModalWindow(config: ModalConfig): Promise<Overlay> {
+  public async showModalWindow(config: ModalConfig, alertConfig?: AlertConfig): Promise<Overlay> {
     config.flavor = config.flavor || 'modal';
     const modalPresentingElement = await this.getPresentingElement(config.flavor);
 
@@ -49,6 +52,14 @@ export class ModalHelper {
       this.windowRef.nativeWindow.document.body.classList.add(allow_scroll_class);
     }
 
+    let canDismiss: boolean | (() => Promise<boolean>) = true;
+    if (alertConfig) {
+      canDismiss = async () => {
+        const canBeDismissed = await this.showAlert(alertConfig);
+        return canBeDismissed;
+      };
+    }
+
     const ionModal = await this.ionicModalController.create({
       component: config.flavor === 'compact' ? ModalCompactWrapperComponent : ModalWrapperComponent,
       cssClass: [
@@ -65,6 +76,7 @@ export class ModalHelper {
       componentProps: { config: config },
       swipeToClose: config.flavor === 'drawer',
       keyboardClose: false,
+      canDismiss,
       enterAnimation,
       leaveAnimation,
     });
@@ -86,6 +98,12 @@ export class ModalHelper {
 
   public registerPresentingElement(element: HTMLElement) {
     ModalHelper.presentingElement = element;
+  }
+
+  public async showAlert(config: AlertConfig): Promise<boolean> {
+    const alert = await this.alertHelper.showAlert(config);
+    const result = await alert.onWillDismiss;
+    return result.data;
   }
 
   private async getPresentingElement(flavor?: ModalFlavor) {

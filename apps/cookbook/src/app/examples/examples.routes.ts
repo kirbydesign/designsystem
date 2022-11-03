@@ -72,6 +72,7 @@ import { ToggleExampleComponent } from './toggle-example/toggle-example.componen
 import { VirtualScrollListExampleComponent } from './virtual-scroll-example/virtual-scroll-list-example/virtual-scroll-list-example.component';
 import { PagePullToRefreshExampleComponent } from './page-example/pull-to-refresh/page-pull-to-refresh-example.component';
 import { DropdownExampleComponent } from './dropdown-example/dropdown-example.component';
+import { DataTableExampleComponent } from './data-table-example/data-table-example.component';
 
 VirtualScrollListExampleComponent;
 export const routes: Routes = [
@@ -257,6 +258,13 @@ export const routes: Routes = [
             component: FormFieldInputDecimalMaskExampleComponent,
           },
         ],
+      },
+      {
+        path: 'experimental',
+        loadChildren: () =>
+          import('./experimental-examples/experimental-examples.module').then(
+            (m) => m.ExperimentalExamplesModule
+          ),
       },
     ],
   },
@@ -477,5 +485,9 @@ export const routes: Routes = [
   {
     path: 'styling-HTML-lists',
     component: StylingHtmlListsExampleComponent,
+  },
+  {
+    path: 'data-table',
+    component: DataTableExampleComponent,
   },
 ];

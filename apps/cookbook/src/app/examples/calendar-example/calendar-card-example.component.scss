@@ -1,4 +1,4 @@
-@use '~@kirbydesign/core/src/scss/utils';
+@use '@kirbydesign/core/src/scss/utils';
 
 kirby-card {
   z-index: 3; // Ensure dropdown opens over configuration checkboxes

@@ -1,6 +1,6 @@
 @use 'sass:map';
-@use '~@kirbydesign/core/src/scss/utils';
-@use '~@kirbydesign/core/src/scss/base/list';
+@use '@kirbydesign/core/src/scss/utils';
+@use '@kirbydesign/core/src/scss/base/list';
 
 :host {
   display: flex;

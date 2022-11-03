@@ -33,6 +33,9 @@
     Support for <a href="#" (click)="scrollTo(returnData)">returning data</a> from the modal to the
     parent/caller component
   </li>
+  <li>
+    Support for <a href="#" (click)="scrollTo(alertBeforeClose)">showing an alert before closing</a>
+  </li>
   <li>Support for <a href="#" (click)="scrollTo(scrolling)">scrolling</a></li>
   <li>Support for <a href="#" (click)="scrollTo(disableScrolling)">disabling of scrolling</a></li>
   <li>(Optional) <a href="#" (click)="scrollTo(footer)">Fixed footer</a></li>
@@ -167,6 +170,13 @@
 <p>
   If you need to obtain data back from the modal, you can pass a callback function:
   <cookbook-code-viewer [ts]="defaultExample.callbackWithDataCodeSnippet"></cookbook-code-viewer>
+</p>
+
+<h2 #alertBeforeClose>Show an alert before dismissing the modal <em>(optional)</em>:</h2>
+<p>
+  If you need the user to confirm that the modal should be closed, you can pass an AlertConfig as an
+  optional third argument
+  <cookbook-code-viewer [ts]="defaultExample.alertBeforeCloseCodeSnippet"></cookbook-code-viewer>
 </p>
 
 <h2>Inside the embedded component:</h2>

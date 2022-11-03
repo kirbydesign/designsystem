@@ -5,3 +5,4 @@ export { InputCounterComponent } from './input-counter/input-counter.component';
 export { TextareaComponent } from './textarea/textarea.component';
 export { DateInputDirective } from './directives/date/date-input.directive';
 export { DecimalMaskDirective } from './directives/decimal-mask/decimal-mask.directive';
+export { AffixDirective } from './directives/affix/affix.directive';

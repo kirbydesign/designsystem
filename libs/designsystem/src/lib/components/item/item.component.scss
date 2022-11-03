@@ -1,6 +1,6 @@
 @use 'sass:map';
-@use '~@kirbydesign/core/src/scss/interaction-state';
-@use '~@kirbydesign/core/src/scss/utils';
+@use '@kirbydesign/core/src/scss/interaction-state';
+@use '@kirbydesign/core/src/scss/utils';
 @use 'item.utils';
 
 :host {
@@ -8,6 +8,7 @@
   position: relative;
 
   ion-item {
+    @include interaction-state.apply-focus-visible-background('xxxs');
     @include interaction-state.apply-hover-ionic('xxxs');
     @include interaction-state.apply-active-ionic('xxs');
 
@@ -90,6 +91,11 @@
 :host-context(kirby-dropdown) ion-item,
 :host-context(kirby-popover) ion-item {
   --min-height: #{utils.$dropdown-item-height};
+}
+
+// Intented for use with keyboard navigation in <kirby-dropdown>
+:host-context(kirby-dropdown .focused) ion-item {
+  --background: #{interaction-state.get-state-color('white', 'xxxs')};
 }
 
 /* clean-css ignore:start */
