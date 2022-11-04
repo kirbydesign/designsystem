@@ -1,5 +1,10 @@
 <kirby-page-title>Transfer and pay</kirby-page-title>
-<div>
+
+<flows-transfer-registered
+  *ngIf="transferRegistered"
+  [verifiedDetails]="verifiedDetails"
+></flows-transfer-registered>
+<div *ngIf="!transferRegistered">
   <input
     class="large-text"
     maxlength="14"
@@ -11,7 +16,7 @@
   <span class="small-text">Kr.</span>
 </div>
 
-<kirby-modal-footer>
+<kirby-modal-footer *ngIf="transferRegistered === false">
   <div class="container-over" *ngIf="receiverChosen === false">
     <div class="grid" (click)="showModalChooseOwnAccount()">
       <p>From</p>
@@ -62,7 +67,23 @@
     </div>
 
     <div class="container-under">
-      <button kirby-button [attr.disabled]="!currencyEntered ? true : null">Continue</button>
+      <button
+        kirby-button
+        [attr.disabled]="!currencyEntered ? true : null"
+        (click)="
+          showModalVerifyDetails(
+            false,
+            currency,
+            selectedReceiver[0].name,
+            selectedAccount[0].name,
+            text,
+            message,
+            date
+          )
+        "
+      >
+        Continue
+      </button>
     </div>
   </div>
 </kirby-modal-footer>
