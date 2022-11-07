@@ -1,23 +1,48 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ModalConfig, ModalController } from '@kirbydesign/designsystem';
-import { ChooseRecieverComponent } from '../choose-reciever/choose-reciever.component';
+import { ChooseReceiverComponent } from '../choose-receiver/choose-receiver.component';
 import { ChooseOwnAccountComponent } from '../choose-own-account/choose-own-account.component';
+import { OtherService } from '../other.service';
+import { OwnAccountService } from '../own-account.service';
+import { OwnAccount } from '../own-account';
+import { Account } from '../account';
 
 @Component({
   selector: 'flows-transfer-and-pay-modal',
   templateUrl: './transfer-and-pay-modal.component.html',
   styleUrls: ['./transfer-and-pay-modal.component.scss'],
 })
-export class TransferAndPayModalComponent {
-  constructor(private modalController: ModalController) {}
+export class TransferAndPayModalComponent implements OnInit {
+  constructor(
+    private modalController: ModalController,
+    private otherService: OtherService,
+    private ownAccountService: OwnAccountService
+  ) {}
 
-  @ViewChild('input') public input: ElementRef<HTMLInputElement>;
+  @ViewChild('input') input: ElementRef<HTMLInputElement>;
   currency: string;
+  currencyEntered: boolean = false;
+  receiverChosen: boolean = false;
+  isDisabled: boolean;
+  selectedAccount: OwnAccount[];
+  selectedReceiver: Account[];
+
+  ngOnInit(): void {
+    this.otherService.getReceiverBoolean$().subscribe((boolean) => (this.receiverChosen = boolean));
+    this.ownAccountService
+      .getOwnAccountSelected$()
+      .subscribe((selected) => (this.selectedAccount = selected));
+    this.ownAccountService.setSelected(1);
+    this.ownAccountService
+      .getSelectedReceiver$()
+      .subscribe((selected) => (this.selectedReceiver = selected));
+    this.otherService.getReceiver$().subscribe((selected) => (this.selectedReceiver = selected));
+  }
 
   showModalChooseReciever() {
     const config: ModalConfig = {
       flavor: 'drawer',
-      component: ChooseRecieverComponent,
+      component: ChooseReceiverComponent,
       componentProps: {
         prop1: 'value1',
         prop2: 'value2',
@@ -39,6 +64,14 @@ export class TransferAndPayModalComponent {
   }
 
   onCurrencyEntered(): void {
+    if (this.currency.length === 0) {
+      this.currencyEntered = false;
+    }
+    if (this.currency.length >= 1) {
+      if (this.receiverChosen === true) {
+        this.currencyEntered = true;
+      }
+    }
     if (this.currency.length > 5) {
       this.input.nativeElement.classList.remove('currency-input_medium-text');
       this.input.nativeElement.classList.add('currency-input_large-text');

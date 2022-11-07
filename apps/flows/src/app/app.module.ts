@@ -17,9 +17,11 @@ import { TransactionsComponent } from './transaction-details-flow/transactions/t
 import { HomePageComponent } from './transfer-and-pay-flow/home-page/home-page.component';
 import { TransferAndPayModalComponent } from './transfer-and-pay-flow/transfer-and-pay-modal/transfer-and-pay-modal.component';
 import { TransferAndPayFlowComponent } from './transfer-and-pay-flow/transfer-and-pay-flow.component';
-import { ChooseRecieverComponent } from './transfer-and-pay-flow/choose-reciever/choose-reciever.component';
+import { ChooseReceiverComponent } from './transfer-and-pay-flow/choose-receiver/choose-receiver.component';
 import { FormsModule } from '@angular/forms';
 import { ChooseOwnAccountComponent } from './transfer-and-pay-flow/choose-own-account/choose-own-account.component';
+import { OwnAccountPageComponent } from './transfer-and-pay-flow/own-account-page/own-account-page.component';
+import { OtherPageComponent } from './transfer-and-pay-flow/other-page/other-page.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,8 +37,10 @@ import { ChooseOwnAccountComponent } from './transfer-and-pay-flow/choose-own-ac
     HomePageComponent,
     TransferAndPayModalComponent,
     TransferAndPayFlowComponent,
-    ChooseRecieverComponent,
+    ChooseReceiverComponent,
     ChooseOwnAccountComponent,
+    OwnAccountPageComponent,
+    OtherPageComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, KirbyModule, FormsModule],
   providers: [],
