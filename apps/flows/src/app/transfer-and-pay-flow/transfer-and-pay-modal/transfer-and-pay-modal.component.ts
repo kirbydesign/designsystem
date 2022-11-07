@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ModalConfig, ModalController } from '@kirbydesign/designsystem';
+import { COMPONENT_PROPS, ModalConfig, ModalController } from '@kirbydesign/designsystem';
 import { ChooseReceiverComponent } from '../choose-receiver/choose-receiver.component';
 import { ChooseOwnAccountComponent } from '../choose-own-account/choose-own-account.component';
 import { OtherService } from '../other.service';
@@ -9,6 +9,11 @@ import { Account } from '../account';
 import { ChooseDateComponent } from '../choose-date/choose-date.component';
 import { ChooseTextAndMessageComponent } from '../choose-text-and-message/choose-text-and-message.component';
 import { TextAndDateService } from '../text-and-date.service';
+import { TransferRegisteredComponent } from '../transfer-registered/transfer-registered.component';
+import { DetailsComponent } from '../details/details.component';
+import { VerifyService } from '../verify.service';
+import { Details } from '../details';
+
 @Component({
   selector: 'flows-transfer-and-pay-modal',
   templateUrl: './transfer-and-pay-modal.component.html',
@@ -19,7 +24,8 @@ export class TransferAndPayModalComponent implements OnInit {
     private modalController: ModalController,
     private otherService: OtherService,
     private ownAccountService: OwnAccountService,
-    private textAndDateService: TextAndDateService
+    private textAndDateService: TextAndDateService,
+    private verifyService: VerifyService
   ) {}
 
   @ViewChild('input') input: ElementRef<HTMLInputElement>;
@@ -27,11 +33,13 @@ export class TransferAndPayModalComponent implements OnInit {
   currencyEntered: boolean = false;
   receiverChosen: boolean = false;
   isDisabled: boolean;
+  transferRegistered: boolean = false;
   selectedAccount: OwnAccount[];
   selectedReceiver: Account[];
   date: string;
   text: string;
   message: string;
+  verifiedDetails: Details;
 
   ngOnInit(): void {
     this.otherService.getReceiverBoolean$().subscribe((boolean) => (this.receiverChosen = boolean));
@@ -51,6 +59,11 @@ export class TransferAndPayModalComponent implements OnInit {
     this.textAndDateService.setDate('Today');
     this.textAndDateService.setText('Text to account');
     this.textAndDateService.setMessage('Text to other');
+
+    this.verifyService
+      .getVerifyStatus$()
+      .subscribe((verifyStatus) => (this.transferRegistered = verifyStatus));
+    this.verifyService.setVerifyStatus(false);
   }
 
   showModalChooseReciever() {
@@ -99,6 +112,46 @@ export class TransferAndPayModalComponent implements OnInit {
       },
     };
     this.modalController.showModal(config);
+  }
+
+  showModalVerifyDetails(
+    verified: boolean,
+    amount: number,
+    from: string,
+    receiver: string,
+    text: string,
+    message: string,
+    date: string
+  ) {
+    const config: ModalConfig = {
+      flavor: 'drawer',
+      component: DetailsComponent,
+      componentProps: {
+        prop1: verified,
+        amount: amount,
+        from: from,
+        receiver: receiver,
+        text: text,
+        message: message,
+        date: date,
+      },
+    };
+    this.modalController.showModal(config, this.onClose);
+  }
+
+  private onClose = (dataReturnedByModal) => {
+    this.serVerifiedDetails(dataReturnedByModal);
+  };
+
+  private serVerifiedDetails(verifiedDetails: Details) {
+    this.verifiedDetails = {
+      amount: verifiedDetails.amount,
+      date: verifiedDetails.date,
+      from: verifiedDetails.from,
+      message: verifiedDetails.message,
+      text: verifiedDetails.text,
+      receiver: verifiedDetails.receiver,
+    };
   }
 
   onCurrencyEntered(): void {

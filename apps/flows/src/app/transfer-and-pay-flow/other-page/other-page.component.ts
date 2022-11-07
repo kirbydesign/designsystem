@@ -1,4 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Modal } from '@kirbydesign/designsystem';
 import { Other } from '../other';
 import { OtherService } from '../other.service';
 
@@ -13,7 +14,7 @@ export class OtherPageComponent implements OnInit {
   name: string;
   selectedId: number;
 
-  constructor(private otherService: OtherService) {}
+  constructor(private otherService: OtherService, private modal: Modal) {}
 
   Others: Other[] = [];
 
@@ -21,6 +22,7 @@ export class OtherPageComponent implements OnInit {
     this.Others = this.otherService.getOther();
     this.otherService.setFormFilled(false);
     this.otherService.getReceiverId$().subscribe((number) => (this.selectedId = number));
+    this.otherService.setName('New receiver');
   }
 
   receiverInputSelected = false;
@@ -47,11 +49,16 @@ export class OtherPageComponent implements OnInit {
   }
 
   onChangedName() {
-    this.otherService.setName(this.name);
+    if (this.name.length >= 1) {
+      this.otherService.setName(this.name);
+    } else {
+      this.otherService.setName(this.regNo.toString() + ' ' + this.accNo.toString());
+    }
   }
 
   setSelected(number: number) {
     this.otherService.setReceiver(number);
     this.otherService.setReceiverSelectedTrue();
+    this.modal?.close();
   }
 }

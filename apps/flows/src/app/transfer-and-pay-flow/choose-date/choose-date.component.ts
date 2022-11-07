@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CalendarComponent } from '@kirbydesign/designsystem';
+import { CalendarComponent, Modal } from '@kirbydesign/designsystem';
 import { TextAndDateService } from '../text-and-date.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { TextAndDateService } from '../text-and-date.service';
 export class ChooseDateComponent implements OnInit {
   private date: string;
 
-  constructor(private textAndDateService: TextAndDateService) {}
+  constructor(private textAndDateService: TextAndDateService, private modal: Modal) {}
 
   ngOnInit(): void {}
 
@@ -21,5 +21,6 @@ export class ChooseDateComponent implements OnInit {
 
   saveDate() {
     this.textAndDateService.setDate(this.date);
+    this.modal?.close();
   }
 }

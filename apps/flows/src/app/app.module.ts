@@ -24,6 +24,9 @@ import { OwnAccountPageComponent } from './transfer-and-pay-flow/own-account-pag
 import { OtherPageComponent } from './transfer-and-pay-flow/other-page/other-page.component';
 import { ChooseDateComponent } from './transfer-and-pay-flow/choose-date/choose-date.component';
 import { ChooseTextAndMessageComponent } from './transfer-and-pay-flow/choose-text-and-message/choose-text-and-message.component';
+import { TransferRegisteredComponent } from './transfer-and-pay-flow/transfer-registered/transfer-registered.component';
+import { DetailsComponent } from './transfer-and-pay-flow/details/details.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,6 +48,8 @@ import { ChooseTextAndMessageComponent } from './transfer-and-pay-flow/choose-te
     OtherPageComponent,
     ChooseDateComponent,
     ChooseTextAndMessageComponent,
+    TransferRegisteredComponent,
+    DetailsComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, KirbyModule, FormsModule],
   providers: [],
