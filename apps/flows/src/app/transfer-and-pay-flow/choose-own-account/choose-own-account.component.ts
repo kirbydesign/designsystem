@@ -4,8 +4,6 @@ import { Component, OnInit } from '@angular/core';
   selector: 'flows-choose-own-account',
   templateUrl: './choose-own-account.component.html',
 })
-export class ChooseOwnAccountComponent implements OnInit {
+export class ChooseOwnAccountComponent {
   constructor() {}
-
-  ngOnInit(): void {}
 }

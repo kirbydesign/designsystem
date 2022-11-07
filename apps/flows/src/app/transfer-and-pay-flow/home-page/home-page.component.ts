@@ -14,10 +14,6 @@ export class HomePageComponent implements OnInit {
     const config: ModalConfig = {
       flavor: 'modal',
       component: TransferAndPayModalComponent,
-      componentProps: {
-        prop1: 'value1',
-        prop2: 'value2',
-      },
     };
     this.modalController.showModal(config);
   }

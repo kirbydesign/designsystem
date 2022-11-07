@@ -8,12 +8,10 @@ import { ChooseOwnAccountComponent } from '../choose-own-account/choose-own-acco
   templateUrl: './transfer-and-pay-modal.component.html',
   styleUrls: ['./transfer-and-pay-modal.component.scss'],
 })
-export class TransferAndPayModalComponent implements OnInit {
+export class TransferAndPayModalComponent {
   constructor(private modalController: ModalController) {}
 
-  ngOnInit(): void {}
-
-  @ViewChild('input') input: ElementRef<HTMLInputElement>;
+  @ViewChild('input') public input: ElementRef<HTMLInputElement>;
   currency: string;
 
   showModalChooseReciever() {
@@ -40,7 +38,7 @@ export class TransferAndPayModalComponent implements OnInit {
     this.modalController.showModal(config);
   }
 
-  onChange(): void {
+  onCurrencyEntered(): void {
     if (this.currency.length > 5) {
       this.input.nativeElement.classList.remove('medium-text');
       this.input.nativeElement.classList.add('large-text');

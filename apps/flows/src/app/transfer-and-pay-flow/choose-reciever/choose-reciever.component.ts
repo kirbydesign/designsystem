@@ -4,8 +4,6 @@ import { Component, OnInit } from '@angular/core';
   selector: 'flows-choose-reciever',
   templateUrl: './choose-reciever.component.html',
 })
-export class ChooseRecieverComponent implements OnInit {
+export class ChooseRecieverComponent {
   constructor() {}
-
-  ngOnInit(): void {}
 }
