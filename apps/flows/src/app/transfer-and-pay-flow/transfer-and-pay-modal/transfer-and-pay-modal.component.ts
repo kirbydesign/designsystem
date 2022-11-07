@@ -6,7 +6,9 @@ import { OtherService } from '../other.service';
 import { OwnAccountService } from '../own-account.service';
 import { OwnAccount } from '../own-account';
 import { Account } from '../account';
-
+import { ChooseDateComponent } from '../choose-date/choose-date.component';
+import { ChooseTextAndMessageComponent } from '../choose-text-and-message/choose-text-and-message.component';
+import { TextAndDateService } from '../text-and-date.service';
 @Component({
   selector: 'flows-transfer-and-pay-modal',
   templateUrl: './transfer-and-pay-modal.component.html',
@@ -16,7 +18,8 @@ export class TransferAndPayModalComponent implements OnInit {
   constructor(
     private modalController: ModalController,
     private otherService: OtherService,
-    private ownAccountService: OwnAccountService
+    private ownAccountService: OwnAccountService,
+    private textAndDateService: TextAndDateService
   ) {}
 
   @ViewChild('input') input: ElementRef<HTMLInputElement>;
@@ -26,6 +29,9 @@ export class TransferAndPayModalComponent implements OnInit {
   isDisabled: boolean;
   selectedAccount: OwnAccount[];
   selectedReceiver: Account[];
+  date: string;
+  text: string;
+  message: string;
 
   ngOnInit(): void {
     this.otherService.getReceiverBoolean$().subscribe((boolean) => (this.receiverChosen = boolean));
@@ -37,6 +43,14 @@ export class TransferAndPayModalComponent implements OnInit {
       .getSelectedReceiver$()
       .subscribe((selected) => (this.selectedReceiver = selected));
     this.otherService.getReceiver$().subscribe((selected) => (this.selectedReceiver = selected));
+
+    this.textAndDateService.getDate$().subscribe((date) => (this.date = date));
+    this.textAndDateService.getText$().subscribe((text) => (this.text = text));
+    this.textAndDateService.getMessage$().subscribe((message) => (this.message = message));
+
+    this.textAndDateService.setDate('Today');
+    this.textAndDateService.setText('Text to account');
+    this.textAndDateService.setMessage('Text to other');
   }
 
   showModalChooseReciever() {
@@ -55,6 +69,30 @@ export class TransferAndPayModalComponent implements OnInit {
     const config: ModalConfig = {
       flavor: 'drawer',
       component: ChooseOwnAccountComponent,
+      componentProps: {
+        prop1: 'value1',
+        prop2: 'value2',
+      },
+    };
+    this.modalController.showModal(config);
+  }
+
+  showModalChooseDate() {
+    const config: ModalConfig = {
+      flavor: 'drawer',
+      component: ChooseDateComponent,
+      componentProps: {
+        prop1: 'value1',
+        prop2: 'value2',
+      },
+    };
+    this.modalController.showModal(config);
+  }
+
+  showModalChooseTextAndMessage() {
+    const config: ModalConfig = {
+      flavor: 'drawer',
+      component: ChooseTextAndMessageComponent,
       componentProps: {
         prop1: 'value1',
         prop2: 'value2',
