@@ -40,16 +40,16 @@ export class TransferAndPayModalComponent {
 
   onCurrencyEntered(): void {
     if (this.currency.length > 5) {
-      this.input.nativeElement.classList.remove('medium-text');
-      this.input.nativeElement.classList.add('large-text');
+      this.input.nativeElement.classList.remove('currency-input_medium-text');
+      this.input.nativeElement.classList.add('currency-input_large-text');
     }
     if (this.currency.length > 7) {
-      this.input.nativeElement.classList.remove('small-text');
-      this.input.nativeElement.classList.add('medium-text');
+      this.input.nativeElement.classList.remove('currency-input_small-text');
+      this.input.nativeElement.classList.add('currency-input_medium-text');
     }
     if (this.currency.length > 9) {
-      this.input.nativeElement.classList.remove('medium-text');
-      this.input.nativeElement.classList.add('small-text');
+      this.input.nativeElement.classList.remove('currency-input_medium-text');
+      this.input.nativeElement.classList.add('currency-input_small-text');
     }
   }
 }

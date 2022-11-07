@@ -1,14 +1,14 @@
 <kirby-page-title>Transfer and pay</kirby-page-title>
 <div>
   <input
-    class="large-text"
+    class="currency-input currency-input_large-text"
     maxlength="14"
     type="text"
     #input
     [(ngModel)]="currency"
     (input)="onCurrencyEntered()"
   />
-  <span class="small-text">Kr.</span>
+  <span class="currency-input_small-text">Kr.</span>
 </div>
 
 <kirby-modal-footer>

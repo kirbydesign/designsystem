@@ -7,7 +7,7 @@ import { TransferAndPayModalComponent } from '../transfer-and-pay-modal/transfer
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss'],
 })
-export class HomePageComponent implements OnInit {
+export class HomePageComponent {
   constructor(private modalController: ModalController) {}
 
   showModal() {
@@ -17,6 +17,4 @@ export class HomePageComponent implements OnInit {
     };
     this.modalController.showModal(config);
   }
-
-  ngOnInit(): void {}
 }
