@@ -1,0 +1,46 @@
+.grid {
+  display: flex;
+  justify-content: space-between;
+}
+
+.currency-input {
+  margin-left: auto;
+  margin-right: auto;
+  all: unset;
+  text-align: right;
+  width: 80%;
+
+  &_ {
+    &large-text {
+      font-size: 100px;
+    }
+
+    &medium-text {
+      font-size: 75px;
+    }
+
+    &small-text {
+      font-size: 50px;
+    }
+  }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  appearance: none;
+  margin: 0;
+}
+
+.container-over {
+  width: 80%;
+}
+
+.container-under {
+  display: flex;
+  justify-content: center;
+}
+
+/* stylelint-disable selector-pseudo-element-no-unknown */
+::ng-deep ion-footer {
+  box-sizing: border-box;
+}
