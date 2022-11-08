@@ -4,15 +4,15 @@ import { ChooseReceiverComponent } from '../choose-receiver/choose-receiver.comp
 import { ChooseOwnAccountComponent } from '../choose-own-account/choose-own-account.component';
 import { OtherService } from '../other.service';
 import { OwnAccountService } from '../own-account.service';
-import { OwnAccount } from '../own-account';
-import { Account } from '../account';
+import { OwnAccount } from '../own-account.model';
+import { Account } from '../account.model';
 import { ChooseDateComponent } from '../choose-date/choose-date.component';
 import { ChooseTextAndMessageComponent } from '../choose-text-and-message/choose-text-and-message.component';
 import { TextAndDateService } from '../text-and-date.service';
 import { TransferRegisteredComponent } from '../transfer-registered/transfer-registered.component';
 import { DetailsComponent } from '../details/details.component';
 import { VerifyService } from '../verify.service';
-import { Details } from '../details';
+import { Details } from '../details.model';
 
 @Component({
   selector: 'flows-transfer-and-pay-modal',

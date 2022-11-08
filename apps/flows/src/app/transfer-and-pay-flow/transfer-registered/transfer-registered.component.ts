@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalConfig, ModalController } from '@kirbydesign/designsystem';
 import { DetailsComponent } from '../details/details.component';
-import { Details } from '../details';
+import { Details } from '../details.model';
 
 @Component({
   selector: 'flows-transfer-registered',

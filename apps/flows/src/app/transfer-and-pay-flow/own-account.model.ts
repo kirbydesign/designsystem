@@ -1,4 +1,4 @@
-import { Account } from './account';
+import { Account } from './account.model';
 
 export interface OwnAccount extends Account {
   balance: number;

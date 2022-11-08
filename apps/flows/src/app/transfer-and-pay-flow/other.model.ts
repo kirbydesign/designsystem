@@ -1,4 +1,4 @@
-import { Account } from './account';
+import { Account } from './account.model';
 
 export interface Other extends Account {
   regNo: number;

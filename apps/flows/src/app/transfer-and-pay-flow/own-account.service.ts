@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { OwnAccount } from './own-account';
+import { OwnAccount } from './own-account.model';
 import { Observable, Subject } from 'rxjs';
 import { RangeValueAccessor } from '@angular/forms';
 

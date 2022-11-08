@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OwnAccountService } from '../own-account.service';
-import { OwnAccount } from '../own-account';
+import { OwnAccount } from '../own-account.model';
 import { OtherService } from '../other.service';
 import { Modal } from '@kirbydesign/designsystem';
 @Component({

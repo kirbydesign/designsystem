@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Modal } from '@kirbydesign/designsystem';
-import { Other } from '../other';
+import { Other } from '../other.model';
 import { OtherService } from '../other.service';
 
 @Component({

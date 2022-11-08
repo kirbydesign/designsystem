@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Inject, Optional, SkipSelf } from '@angular/core';
 import { COMPONENT_PROPS, Modal } from '@kirbydesign/designsystem';
-import { Other } from '../other';
+import { Other } from '../other.model';
 import { OtherService } from '../other.service';
 import { VerifyService } from '../verify.service';
 
