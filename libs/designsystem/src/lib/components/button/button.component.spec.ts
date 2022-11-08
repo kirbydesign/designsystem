@@ -529,11 +529,16 @@ describe('ButtonComponent', () => {
       describe(`through an input property`, () => {
         beforeEach(() => {
           spectator = createHost(
-            `<button kirby-button size="${scenario.size}">
+            `<button kirby-button>
               ${scenario.iconPosition === 'left' ? '<kirby-icon name="edit"></kirby-icon>' : ''}
               <span>Text</span>
               ${scenario.iconPosition === 'right' ? '<kirby-icon name="edit"></kirby-icon>' : ''}
-            </button>`
+            </button>`,
+            {
+              props: {
+                size: scenario.size,
+              },
+            }
           );
           element = spectator.element as HTMLButtonElement;
         });
@@ -548,7 +553,7 @@ describe('ButtonComponent', () => {
       describe(`through template property binding`, () => {
         beforeEach(() => {
           spectator = createHost(
-            `<button kirby-button size="${scenario.size}">
+            `<button kirby-button [size]="'${scenario.size}'">
               ${scenario.iconPosition === 'left' ? '<kirby-icon name="edit"></kirby-icon>' : ''}
               <span>Text</span>
               ${scenario.iconPosition === 'right' ? '<kirby-icon name="edit"></kirby-icon>' : ''}
