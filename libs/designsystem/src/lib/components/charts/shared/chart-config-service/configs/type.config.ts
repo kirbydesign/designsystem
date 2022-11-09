@@ -1,6 +1,14 @@
-import { ChartTypeRegistry, Color, Point, TooltipItem, TooltipLabelStyle } from 'chart.js';
+import {
+  ChartTypeRegistry,
+  Color,
+  LinearScale,
+  Point,
+  TooltipItem,
+  TooltipLabelStyle,
+} from 'chart.js';
 import { Context } from 'chartjs-plugin-datalabels';
 import { Align } from 'chartjs-plugin-datalabels/types/options';
+import { chart } from 'highcharts';
 
 import { ChartTypesConfig } from '../../';
 import { ColorHelper, DesignTokenHelper } from '../../../../../helpers';
@@ -94,6 +102,7 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
           grid: {
             borderColor: getThemeColorHexString('medium'),
             borderWidth: 1,
+            offset: true,
           },
           ticks: {
             font: {
@@ -127,10 +136,23 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
       backgroundColor: getThemeColorRgbString('semi-light', 0.5),
       scales: {
         x: {
+          beforeUpdate: (linearScale: LinearScale) => {
+            const yValues = (linearScale.chart.data.datasets[0].data as any).map((x) => x.x).sort();
+            const lowersYvalue = yValues[0];
+            const highestYValue = yValues[yValues.length - 1];
+            const yBuffer = highestYValue - lowersYvalue;
+
+            linearScale.options.max = highestYValue - yBuffer;
+            console.log(linearScale.options.min);
+
+            return linearScale;
+          },
+          offset: false,
           grid: {
             lineWidth: 0,
           },
           ticks: {
+            // padding: 20,
             maxRotation: 0,
             autoSkipPadding: 120,
             font: {
@@ -139,12 +161,28 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
           },
         },
         y: {
+          beforeUpdate: (linearScale: LinearScale) => {
+            // console.log(linearScale.options.suggestedMin);
+
+            const yValues = (linearScale.chart.data.datasets[0].data as any).map((y) => y.y).sort();
+            const lowersYvalue = yValues[0];
+            const highestYValue = yValues[yValues.length - 1];
+            const yBuffer = (highestYValue - lowersYvalue) / 5;
+
+            linearScale.options.min = lowersYvalue - yBuffer;
+            // console.log(linearScale.options.min);
+
+            return linearScale;
+          },
+          // suggestedMin: 990,
+
           position: 'right',
           display: true,
           grid: {
             drawBorder: false,
           },
           ticks: {
+            // padding: 20,
             display: true,
             font: {
               size: parseInt(fontSize('xs')),
