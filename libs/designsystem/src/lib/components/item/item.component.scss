@@ -101,16 +101,8 @@
 /* clean-css ignore:start */
 // Fixes https://github.com/kirbydesign/designsystem/issues/1745
 ion-item {
-  :host-context(kirby-list-item:first-of-type) & {
-    --padding-top: #{utils.size('xxs')};
-  }
-
   :host-context(kirby-list-item:first-of-type kirby-card) & {
     --padding-top: 0;
-  }
-
-  :host-context(kirby-list-item:last-of-type) & {
-    --padding-bottom: #{utils.size('xxs')};
   }
 
   :host-context(kirby-list-item:last-of-type kirby-card) & {
