@@ -7,17 +7,15 @@ import { TextAndDateService } from '../text-and-date.service';
   templateUrl: './choose-text-and-message.component.html',
   styleUrls: ['./choose-text-and-message.component.scss'],
 })
-export class ChooseTextAndMessageComponent implements OnInit {
-  text: string;
-  message: string;
+export class ChooseTextAndMessageComponent {
+  public text: string;
+  public message: string;
 
   constructor(private textAndDateService: TextAndDateService, private modal: Modal) {}
 
-  ngOnInit(): void {}
-
-  okButton() {
+  setTextAndMessage() {
     this.textAndDateService.setText(this.text);
     this.textAndDateService.setMessage(this.message);
-    this.modal?.close();
+    this.modal.close();
   }
 }

@@ -1,4 +1,4 @@
-export interface Details {
+export interface Detail {
   amount: string;
   from: string;
   receiver: string;

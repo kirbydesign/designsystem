@@ -6,17 +6,16 @@ import { Observable, of, Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class OtherService {
-  regNo: number;
-  accNo: number;
-  name: string;
+  public registerNumber: string;
+  public accountNumber: string;
+  public name: string;
+  public otherSelectedId: number;
 
   Others: Other[] = [
-    { id: 1, name: 'Harvey Specter', regNo: 1234, accNo: 12345678 },
-    { id: 2, name: 'Darth Vader', regNo: 1234, accNo: 12345678 },
-    { id: 3, name: 'Rasmoose', regNo: 1234, accNo: 12345678 },
+    { id: 1, name: 'Harvey Specter', registerNumber: '1234', accountNumber: '12345678' },
+    { id: 2, name: 'Darth Vader', registerNumber: '1234', accountNumber: '12345678' },
+    { id: 3, name: 'Rasmoose', registerNumber: '1234', accountNumber: '12345678' },
   ];
-
-  otherSelectedId: number;
 
   private formFilledSource = new Subject<boolean>(); //Observable boolean source
   formFilled$ = this.formFilledSource.asObservable();
@@ -30,15 +29,12 @@ export class OtherService {
   private receiverSeletecBooleanSource = new Subject<boolean>();
   receiverSelectedBoolean$ = this.receiverSeletecBooleanSource.asObservable();
 
-  constructor() {}
-
   public setFormFilled(boolean: boolean) {
     this.formFilledSource.next(boolean);
   }
 
   public getFormFilled(): Observable<boolean> {
-    const FORMFILLED = this.formFilledSource;
-    return FORMFILLED;
+    return this.formFilledSource.asObservable();
   }
 
   public getOther(): Other[] {
@@ -49,23 +45,23 @@ export class OtherService {
     this.otherSelectedId = id;
   }
 
-  public saveReceiver() {
+  public addReceiver() {
     const other: Other = {
       id: this.Others.length + 1,
       name: this.name,
-      regNo: this.regNo,
-      accNo: this.accNo,
+      registerNumber: this.registerNumber,
+      accountNumber: this.accountNumber,
     };
 
     this.Others.push(other);
   }
 
-  public setRegNo(number: number) {
-    this.regNo = number;
+  public setRegNo(number: string) {
+    this.registerNumber = number;
   }
 
-  public setAccNo(number: number) {
-    this.accNo = number;
+  public setAccNo(number: string) {
+    this.accountNumber = number;
   }
 
   public setName(name: string) {
@@ -74,7 +70,10 @@ export class OtherService {
 
   public setReceiver(id: number) {
     this.receiverSeletecIdSource.next(id);
-    this.receiverSelectedSource.next(this.Others.filter((accounts) => accounts.id === id));
+    const selectedOther = this.Others.filter((accounts) => accounts.id === id);
+    if (selectedOther) {
+      this.receiverSelectedSource.next(selectedOther);
+    }
   }
 
   public getReceiver$(): Observable<Other[]> {

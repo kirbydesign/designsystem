@@ -16,8 +16,8 @@
   <span class="currency-input_small-text">Kr.</span>
 </div>
 
-<kirby-modal-footer *ngIf="transferRegistered === false">
-  <div class="container-over" *ngIf="receiverChosen === false">
+<kirby-modal-footer *ngIf="!transferRegistered">
+  <div class="container-over" *ngIf="!receiverChosen">
     <div class="grid" (click)="showModalChooseOwnAccount()">
       <p>From</p>
       <span *ngFor="let account of selectedAccount"
@@ -30,7 +30,7 @@
     </div>
   </div>
 
-  <div class="container-over" *ngIf="receiverChosen === true">
+  <div class="container-over" *ngIf="receiverChosen">
     <div class="grid" (click)="showModalChooseOwnAccount()">
       <p>From</p>
       <span *ngFor="let account of selectedAccount"
@@ -70,17 +70,7 @@
       <button
         kirby-button
         [attr.disabled]="!currencyEntered ? true : null"
-        (click)="
-          showModalVerifyDetails(
-            false,
-            currency,
-            selectedReceiver[0].name,
-            selectedAccount[0].name,
-            text,
-            message,
-            date
-          )
-        "
+        (click)="showModalVerifyDetails()"
       >
         Continue
       </button>

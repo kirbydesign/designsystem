@@ -8,24 +8,25 @@ import { Modal } from '@kirbydesign/designsystem';
   templateUrl: './own-account-page.component.html',
 })
 export class OwnAccountPageComponent implements OnInit {
-  receiverID: number;
+  public receiverID: number;
+  public accounts: OwnAccount[] = [];
+
   constructor(
     private ownAccountService: OwnAccountService,
     private otherService: OtherService,
     private modal: Modal
   ) {}
-  accounts: OwnAccount[] = [];
 
   ngOnInit(): void {
     this.accounts = this.ownAccountService.getOwnAccounts();
     this.ownAccountService
       .getSelectedReceiverNumber$()
-      .subscribe((number) => (this.receiverID = number));
+      .subscribe((receiverID) => (this.receiverID = receiverID));
   }
 
   setSelectedReceiver(id: number) {
     this.ownAccountService.setSelectedReceiver(id);
     this.otherService.setReceiverSelectedTrue();
-    this.modal?.close();
+    this.modal.close();
   }
 }

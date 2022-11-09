@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, Inject, Optional, SkipSelf } from '@angular/core';
 import { COMPONENT_PROPS, Modal } from '@kirbydesign/designsystem';
+import { Detail } from '../detail.model';
 import { Other } from '../other.model';
 import { OtherService } from '../other.service';
 import { VerifyService } from '../verify.service';
@@ -9,14 +10,17 @@ import { VerifyService } from '../verify.service';
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.scss'],
 })
-export class DetailsComponent implements OnInit {
+export class DetailsComponent {
   verified: boolean = false;
-  amount: number;
-  from: string;
-  receiver: string;
-  text: string;
-  message: string;
-  date: string;
+
+  verifyDetail: Detail = {
+    amount: '',
+    from: '',
+    receiver: '',
+    text: '',
+    message: '',
+    date: '',
+  };
 
   constructor(
     @Inject(COMPONENT_PROPS) private componentProps,
@@ -25,34 +29,33 @@ export class DetailsComponent implements OnInit {
   ) {
     this.verified = componentProps.prop1;
     if (this.verified === false) {
-      this.amount = componentProps.amount;
-      this.from = componentProps.from;
-      this.receiver = componentProps.receiver;
-      this.text = componentProps.text;
-      this.message = componentProps.message;
-      this.date = componentProps.date;
+      this.verifyDetail.amount = componentProps.amount;
+      this.verifyDetail.from = componentProps.from;
+      this.verifyDetail.receiver = componentProps.receiver;
+      this.verifyDetail.text = componentProps.text;
+      this.verifyDetail.message = componentProps.message;
+      this.verifyDetail.date = componentProps.date;
     } else if (this.verified === true) {
-      this.amount = componentProps.verifiedDetails.amount;
-      this.from = componentProps.verifiedDetails.from;
-      this.receiver = componentProps.verifiedDetails.receiver;
-      this.text = componentProps.verifiedDetails.text;
-      this.message = componentProps.verifiedDetails.message;
-      this.date = componentProps.verifiedDetails.date;
+      this.verifyDetail.amount = componentProps.verifiedDetails.amount;
+      this.verifyDetail.from = componentProps.verifiedDetails.from;
+      this.verifyDetail.receiver = componentProps.verifiedDetails.receiver;
+      this.verifyDetail.text = componentProps.verifiedDetails.text;
+      this.verifyDetail.message = componentProps.verifiedDetails.message;
+      this.verifyDetail.date = componentProps.verifiedDetails.date;
     }
   }
 
-  onClick() {
+  onVerify() {
     this.verifyService.setVerifyStatus(true);
     const returnData = {
       verified: this.verified,
-      amount: this.amount,
-      from: this.from,
-      receiver: this.receiver,
-      text: this.text,
-      message: this.message,
-      date: this.date,
+      amount: this.verifyDetail.amount,
+      from: this.verifyDetail.from,
+      receiver: this.verifyDetail.receiver,
+      text: this.verifyDetail.text,
+      message: this.verifyDetail.message,
+      date: this.verifyDetail.date,
     };
     this.modal?.close(returnData);
   }
-  ngOnInit(): void {}
 }

@@ -5,8 +5,6 @@ import { Observable, Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class VerifyService {
-  constructor() {}
-
   private verifyStatusSource = new Subject<boolean>();
   verifyStatus$ = this.verifyStatusSource.asObservable();
 

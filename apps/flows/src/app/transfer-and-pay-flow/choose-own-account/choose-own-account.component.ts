@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ConnectableObservable } from 'rxjs';
 import { OwnAccount } from '../own-account.model';
 import { OwnAccountService } from '../own-account.service';
 @Component({
@@ -9,10 +10,14 @@ export class ChooseOwnAccountComponent implements OnInit {
   constructor(private ownAccountService: OwnAccountService) {}
 
   accounts: OwnAccount[] = [];
-
+  selectedOwnAccountId: number;
   ngOnInit(): void {
     this.accounts = this.ownAccountService.getOwnAccounts();
+    this.ownAccountService
+      .getSelectedSenderId$()
+      .subscribe((id) => (this.selectedOwnAccountId = id));
   }
+
   setSelected(id: number) {
     this.ownAccountService.setSelected(id);
   }

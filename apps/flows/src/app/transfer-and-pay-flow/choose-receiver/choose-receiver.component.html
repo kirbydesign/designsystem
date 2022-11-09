@@ -5,14 +5,12 @@
   mode="chip"
   size="sm"
   [value]="selectedSegment"
-  (segmentSelect)="onSegmentSelect($event)"
+  (segmentSelect)="changeSegment($event)"
 ></kirby-segmented-control>
 
 <flows-own-account-page *ngIf="selectedSegment.id === 'OwnAccountPage'"></flows-own-account-page>
 <flows-other-page *ngIf="selectedSegment.id === 'OtherPage'"></flows-other-page>
 
 <kirby-modal-footer *ngIf="selectedSegment.id === 'OtherPage'">
-  <button kirby-button (click)="saveReceiver()" [attr.disabled]="isDisabled ? true : null">
-    OK
-  </button>
+  <button kirby-button (click)="saveReceiver()" [disabled]="isDisabled">OK</button>
 </kirby-modal-footer>

@@ -9,14 +9,15 @@ import { OtherService } from '../other.service';
   styleUrls: ['./other-page.component.scss'],
 })
 export class OtherPageComponent implements OnInit {
-  regNo: number;
-  accNo: number;
-  name: string;
-  selectedId: number;
+  public registerNumber: string;
+  public accountNumber: string;
+  public name: string;
+  public selectedId: number;
+  public receiverInputSelected = false;
 
   constructor(private otherService: OtherService, private modal: Modal) {}
 
-  Others: Other[] = [];
+  public Others: Other[] = [];
 
   ngOnInit(): void {
     this.Others = this.otherService.getOther();
@@ -25,34 +26,33 @@ export class OtherPageComponent implements OnInit {
     this.otherService.setName('New receiver');
   }
 
-  receiverInputSelected = false;
-
-  onCheckedChange(checked: boolean) {
+  updateReceiverInputSelected(checked: boolean) {
     this.receiverInputSelected = checked;
   }
 
-  onChangedReg() {
-    this.otherService.setRegNo(this.regNo);
-    if (this.regNo.toString().length > 3 && this.accNo.toString().length >= 7) {
-      this.otherService.setFormFilled(true);
-    } else {
-      this.otherService.setFormFilled(false);
-    }
-  }
-  onChangedAcc() {
-    this.otherService.setAccNo(this.accNo);
-    if (this.regNo.toString().length >= 4 && this.accNo.toString().length >= 7) {
+  updateRegisterNumberUpdateButtonState() {
+    this.otherService.setRegNo(this.registerNumber);
+    if (this.registerNumber.length > 3 && this.accountNumber.length >= 7) {
       this.otherService.setFormFilled(true);
     } else {
       this.otherService.setFormFilled(false);
     }
   }
 
-  onChangedName() {
+  updateAccountNumberUpdateButtonState() {
+    this.otherService.setAccNo(this.accountNumber);
+    if (this.registerNumber.length >= 4 && this.accountNumber.length >= 7) {
+      this.otherService.setFormFilled(true);
+    } else {
+      this.otherService.setFormFilled(false);
+    }
+  }
+
+  updateName() {
     if (this.name.length >= 1) {
       this.otherService.setName(this.name);
     } else {
-      this.otherService.setName(this.regNo.toString() + ' ' + this.accNo.toString());
+      this.otherService.setName(this.registerNumber + ' ' + this.accountNumber);
     }
   }
 

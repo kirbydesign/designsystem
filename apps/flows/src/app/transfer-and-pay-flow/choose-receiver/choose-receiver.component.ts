@@ -20,21 +20,20 @@ export class ChooseReceiverComponent implements OnInit {
     },
   ];
 
-  isDisabled: boolean;
+  public isDisabled: boolean = true;
   selectedSegment = this.items[0];
 
   constructor(private otherService: OtherService) {}
 
-  onSegmentSelect(segment: SegmentItem) {
+  changeSegment(segment: SegmentItem) {
     this.selectedSegment = segment;
   }
 
   ngOnInit(): void {
-    this.selectedSegment = this.items[0];
     this.otherService.getFormFilled().subscribe((formFilled) => (this.isDisabled = !formFilled));
   }
 
   saveReceiver() {
-    this.otherService.saveReceiver();
+    this.otherService.addReceiver();
   }
 }

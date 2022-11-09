@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { OwnAccount } from './own-account.model';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { RangeValueAccessor } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OwnAccountService {
-  SenderID: number;
-  receiverID: number;
+  private senderID: number;
+  private receiverID: number;
 
-  private selectedAccountSource = new Subject<OwnAccount[]>(); //Observeable boolean source
+  private selectedAccountSource = new Subject<OwnAccount[]>();
   selectedAccount$ = this.selectedAccountSource.asObservable();
 
   private selectedReceiverNumberSource = new Subject<number>();
@@ -19,7 +19,10 @@ export class OwnAccountService {
   private selectedReceiverSource = new Subject<OwnAccount[]>();
   selectedReceiver$ = this.selectedReceiverSource.asObservable();
 
-  accounts: OwnAccount[] = [
+  private selectedSenderIndexSource = new BehaviorSubject<number>(0);
+  selectedSenderIndex$ = this.selectedSenderIndexSource.asObservable();
+
+  private accounts: OwnAccount[] = [
     { balance: 200, selected: false, name: 'Account1', id: 1 },
     { balance: 2000, selected: false, name: 'Account2', id: 2 },
     { balance: 20000, selected: false, name: 'Account3', id: 3 },
@@ -30,26 +33,24 @@ export class OwnAccountService {
     { balance: 2000000000, selected: false, name: 'Account8', id: 8 },
   ];
 
-  constructor() {}
-
   public getOwnAccounts(): OwnAccount[] {
     return this.accounts;
   }
 
   setSelected(id: number) {
-    this.SenderID = id;
-    this.selectedAccountSource.next(
-      this.accounts.filter((accounts) => accounts.id === this.SenderID)
-    );
-    this.accounts = this.accounts.map((account) => {
-      account.selected = account.id == id;
-      return account;
-    });
+    this.senderID = id;
+    const selectedOwnAccount = this.accounts.filter((accounts) => accounts.id === this.senderID);
+    if (selectedOwnAccount) {
+      this.selectedAccountSource.next(selectedOwnAccount);
+    }
+
+    this.selectedSenderIndexSource.next(id);
   }
 
   setSelectedReceiver(id: number) {
     this.receiverID = id;
     this.selectedReceiverNumberSource.next(this.receiverID);
+
     this.selectedReceiverSource.next(this.accounts.filter((accounts) => accounts.id === id));
   }
 
@@ -63,5 +64,9 @@ export class OwnAccountService {
 
   public getSelectedReceiver$(): Observable<OwnAccount[]> {
     return this.selectedReceiverSource.asObservable();
+  }
+
+  public getSelectedSenderId$(): Observable<number> {
+    return this.selectedSenderIndexSource.asObservable();
   }
 }

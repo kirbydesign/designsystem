@@ -5,6 +5,4 @@ import { ToastController, ToastConfig } from '@kirbydesign/designsystem';
   selector: 'kirbydesign-transfer-and-pay-flow',
   templateUrl: './transfer-and-pay-flow.component.html',
 })
-export class TransferAndPayFlowComponent {
-  constructor() {}
-}
+export class TransferAndPayFlowComponent {}

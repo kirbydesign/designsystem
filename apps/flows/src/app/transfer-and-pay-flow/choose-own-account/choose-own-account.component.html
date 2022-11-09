@@ -1,8 +1,13 @@
 <kirby-page-title>Choose account</kirby-page-title>
 <kirby-list [items]="accounts">
   <kirby-item *kirbyListItemTemplate="let account" (click)="setSelected(account.id)">
-    <kirby-icon style="width: 10%" name="verify" *ngIf="account.selected"></kirby-icon>
+    <kirby-icon
+      *ngIf="selectedOwnAccountId == account.id"
+      style="width: 10%"
+      name="verify"
+    ></kirby-icon>
     <span>{{ account.name }}</span>
+    <span>{{ index }}</span>
     <data slot="end">{{ account.balance }}</data>
   </kirby-item>
 </kirby-list>

@@ -6,8 +6,8 @@
       type="number"
       pattern="/d*"
       placeholder=""
-      (input)="onChangedReg()"
-      [(ngModel)]="regNo"
+      (input)="updateRegisterNumberUpdateButtonState()"
+      [(ngModel)]="registerNumber"
       id="regNo"
     />
   </kirby-form-field>
@@ -18,8 +18,8 @@
       [size]="'md'"
       type="number"
       placeholder=""
-      (input)="onChangedAcc()"
-      [(ngModel)]="accNo"
+      (input)="updateAccountNumberUpdateButtonState()"
+      [(ngModel)]="accountNumber"
       id="accNo"
     />
   </kirby-form-field>
@@ -28,7 +28,7 @@
 <kirby-checkbox
   [checked]="false"
   text="Save receiver"
-  (checkedChange)="onCheckedChange($event)"
+  (checkedChange)="updateReceiverInputSelected($event)"
 ></kirby-checkbox>
 
 <kirby-form-field *ngIf="receiverInputSelected" label="Name on receiver">
@@ -38,7 +38,7 @@
     placeholder="Enter name"
     #tweet
     maxlength="32"
-    (input)="onChangedName()"
+    (input)="updateName()"
     [(ngModel)]="name"
     id="name"
   />
@@ -48,7 +48,6 @@
 <kirby-label> <h3 class="padding-title" heading>Saved receivers</h3></kirby-label>
 <kirby-list [items]="Others" [showDivider]="true">
   <kirby-list-section-header> </kirby-list-section-header>
-
   <kirby-item *kirbyListItemTemplate="let other" (click)="setSelected(other.id)">
     <kirby-icon style="width: 10%" name="verify" *ngIf="other.id === selectedId"></kirby-icon>
     <kirby-label>

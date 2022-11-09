@@ -7,12 +7,10 @@ import { TextAndDateService } from '../text-and-date.service';
   templateUrl: './choose-date.component.html',
   styleUrls: ['./choose-date.component.scss'],
 })
-export class ChooseDateComponent implements OnInit {
+export class ChooseDateComponent {
   private date: string;
 
   constructor(private textAndDateService: TextAndDateService, private modal: Modal) {}
-
-  ngOnInit(): void {}
 
   onDateChange(date: Date) {
     this.date = date.toDateString();
@@ -21,6 +19,6 @@ export class ChooseDateComponent implements OnInit {
 
   saveDate() {
     this.textAndDateService.setDate(this.date);
-    this.modal?.close();
+    this.modal.close();
   }
 }

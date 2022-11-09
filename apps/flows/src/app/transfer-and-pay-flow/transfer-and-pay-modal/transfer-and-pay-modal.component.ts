@@ -12,7 +12,7 @@ import { TextAndDateService } from '../text-and-date.service';
 import { TransferRegisteredComponent } from '../transfer-registered/transfer-registered.component';
 import { DetailsComponent } from '../details/details.component';
 import { VerifyService } from '../verify.service';
-import { Details } from '../details.model';
+import { Detail } from '../detail.model';
 
 @Component({
   selector: 'flows-transfer-and-pay-modal',
@@ -29,20 +29,22 @@ export class TransferAndPayModalComponent implements OnInit {
   ) {}
 
   @ViewChild('input') input: ElementRef<HTMLInputElement>;
-  currency: string;
-  currencyEntered: boolean = false;
-  receiverChosen: boolean = false;
-  isDisabled: boolean;
-  transferRegistered: boolean = false;
-  selectedAccount: OwnAccount[];
-  selectedReceiver: Account[];
-  date: string;
-  text: string;
-  message: string;
-  verifiedDetails: Details;
+  public currency: string;
+  public currencyEntered: boolean = false;
+  public receiverChosen: boolean = false;
+  public isDisabled: boolean;
+  public transferRegistered: boolean = false;
+  public selectedAccount: OwnAccount[];
+  public selectedReceiver: Account[];
+  public date: string;
+  public text: string;
+  public message: string;
+  public verifiedDetails: Detail;
 
   ngOnInit(): void {
-    this.otherService.getReceiverBoolean$().subscribe((boolean) => (this.receiverChosen = boolean));
+    this.otherService
+      .getReceiverBoolean$()
+      .subscribe((receiverChosen) => (this.receiverChosen = receiverChosen));
     this.ownAccountService
       .getOwnAccountSelected$()
       .subscribe((selected) => (this.selectedAccount = selected));
@@ -70,10 +72,6 @@ export class TransferAndPayModalComponent implements OnInit {
     const config: ModalConfig = {
       flavor: 'drawer',
       component: ChooseReceiverComponent,
-      componentProps: {
-        prop1: 'value1',
-        prop2: 'value2',
-      },
     };
     this.modalController.showModal(config);
   }
@@ -82,10 +80,6 @@ export class TransferAndPayModalComponent implements OnInit {
     const config: ModalConfig = {
       flavor: 'drawer',
       component: ChooseOwnAccountComponent,
-      componentProps: {
-        prop1: 'value1',
-        prop2: 'value2',
-      },
     };
     this.modalController.showModal(config);
   }
@@ -94,10 +88,6 @@ export class TransferAndPayModalComponent implements OnInit {
     const config: ModalConfig = {
       flavor: 'drawer',
       component: ChooseDateComponent,
-      componentProps: {
-        prop1: 'value1',
-        prop2: 'value2',
-      },
     };
     this.modalController.showModal(config);
   }
@@ -106,34 +96,22 @@ export class TransferAndPayModalComponent implements OnInit {
     const config: ModalConfig = {
       flavor: 'drawer',
       component: ChooseTextAndMessageComponent,
-      componentProps: {
-        prop1: 'value1',
-        prop2: 'value2',
-      },
     };
     this.modalController.showModal(config);
   }
 
-  showModalVerifyDetails(
-    verified: boolean,
-    amount: number,
-    from: string,
-    receiver: string,
-    text: string,
-    message: string,
-    date: string
-  ) {
+  showModalVerifyDetails() {
     const config: ModalConfig = {
       flavor: 'drawer',
       component: DetailsComponent,
       componentProps: {
-        prop1: verified,
-        amount: amount,
-        from: from,
-        receiver: receiver,
-        text: text,
-        message: message,
-        date: date,
+        prop1: false,
+        amount: this.currency,
+        from: this.selectedAccount[0].name,
+        receiver: this.selectedReceiver[0].name,
+        text: this.text,
+        message: this.message,
+        date: this.date,
       },
     };
     this.modalController.showModal(config, this.onClose);
@@ -143,7 +121,7 @@ export class TransferAndPayModalComponent implements OnInit {
     this.serVerifiedDetails(dataReturnedByModal);
   };
 
-  private serVerifiedDetails(verifiedDetails: Details) {
+  private serVerifiedDetails(verifiedDetails: Detail) {
     this.verifiedDetails = {
       amount: verifiedDetails.amount,
       date: verifiedDetails.date,

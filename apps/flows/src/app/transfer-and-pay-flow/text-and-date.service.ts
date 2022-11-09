@@ -5,8 +5,6 @@ import { Observable, Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class TextAndDateService {
-  constructor() {}
-
   private textSource = new Subject<string>();
   Text$ = this.textSource.asObservable();
 
