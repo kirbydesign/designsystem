@@ -76,8 +76,8 @@ describe('ListComponent', () => {
     it('should render first and last item with correct padding', async () => {
       const firstItem = itemsInList[0].shadowRoot.querySelector('.item-native');
       const lastItem = itemsInList[itemsInList.length - 1].shadowRoot.querySelector('.item-native');
-      expect(firstItem).toHaveComputedStyle({ 'padding-top': size('xxs') });
-      expect(lastItem).toHaveComputedStyle({ 'padding-bottom': size('xxs') });
+      expect(firstItem).toHaveComputedStyle({ 'padding-top': '0px' });
+      expect(lastItem).toHaveComputedStyle({ 'padding-bottom': '0px' });
     });
 
     it('should highlight selected item in bold text', () => {
