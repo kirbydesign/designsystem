@@ -1,3 +1,3 @@
 export interface Transfer {
-  verify: false;
+  detailAreVerified: false;
 }

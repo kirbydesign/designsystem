@@ -7,12 +7,7 @@
   <p><b>Your payment is registered</b></p>
 </div>
 <div class="center">
-  <button
-    kirby-button
-    [size]="'lg'"
-    attentionLevel="3"
-    (click)="showModalDetails(true, verifiedDetails)"
-  >
+  <button kirby-button [size]="'lg'" attentionLevel="3" (click)="showModalDetails(verifiedDetails)">
     See details
   </button>
 </div>

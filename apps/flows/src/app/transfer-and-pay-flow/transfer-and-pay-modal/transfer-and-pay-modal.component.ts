@@ -106,14 +106,14 @@ export class TransferAndPayModalComponent implements OnInit {
       flavor: 'drawer',
       component: DetailsComponent,
       componentProps: {
-        prop1: false,
+        detailAreVerified: false,
         amount: this.currency,
         from: this.selectedAccount[0].name,
         receiver: this.selectedReceiver[0].name,
         text: this.text,
         message: this.message,
         date: this.date,
-      },
+      } as Detail,
     };
     this.modalController.showModal(config, this.onClose);
   }
@@ -123,15 +123,7 @@ export class TransferAndPayModalComponent implements OnInit {
   };
 
   private serVerifiedDetails(verifiedDetails: Detail) {
-    this.verifiedDetails = {
-      verify: verifiedDetails.verify,
-      amount: verifiedDetails.amount,
-      date: verifiedDetails.date,
-      from: verifiedDetails.from,
-      message: verifiedDetails.message,
-      text: verifiedDetails.text,
-      receiver: verifiedDetails.receiver,
-    };
+    this.verifiedDetails = verifiedDetails;
   }
 
   onCurrencyEntered(): void {

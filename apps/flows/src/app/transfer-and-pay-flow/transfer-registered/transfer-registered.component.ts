@@ -13,14 +13,11 @@ export class TransferRegisteredComponent {
 
   constructor(private modalController: ModalController) {}
 
-  showModalDetails(verified: boolean, verifiedDetails: Detail) {
+  showModalDetails(verifiedDetails: Detail) {
     const config: ModalConfig = {
       flavor: 'drawer',
       component: DetailsComponent,
-      componentProps: {
-        prop1: verified,
-        verifiedDetails: verifiedDetails,
-      },
+      componentProps: verifiedDetails,
     };
     this.modalController.showModal(config);
   }
