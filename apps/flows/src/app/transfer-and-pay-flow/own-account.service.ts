@@ -19,8 +19,8 @@ export class OwnAccountService {
   private selectedReceiverSource = new Subject<OwnAccount[]>();
   selectedReceiver$ = this.selectedReceiverSource.asObservable();
 
-  private selectedSenderIndexSource = new BehaviorSubject<number>(0);
-  selectedSenderIndex$ = this.selectedSenderIndexSource.asObservable();
+  private selectedSenderIdSource = new BehaviorSubject<number>(0);
+  selectedSenderId$ = this.selectedSenderIdSource.asObservable();
 
   private accounts: OwnAccount[] = [
     { balance: 200, selected: false, name: 'Account1', id: 1 },
@@ -44,7 +44,7 @@ export class OwnAccountService {
       this.selectedAccountSource.next(selectedOwnAccount);
     }
 
-    this.selectedSenderIndexSource.next(id);
+    this.selectedSenderIdSource.next(id);
   }
 
   setSelectedReceiver(id: number) {
@@ -67,6 +67,6 @@ export class OwnAccountService {
   }
 
   public getSelectedSenderId$(): Observable<number> {
-    return this.selectedSenderIndexSource.asObservable();
+    return this.selectedSenderIdSource.asObservable();
   }
 }
