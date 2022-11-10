@@ -3,7 +3,7 @@
     <input
       kirby-input
       [size]="'md'"
-      type="number"
+      type="text"
       pattern="/d*"
       placeholder=""
       (input)="updateRegisterNumberUpdateButtonState()"
@@ -16,7 +16,7 @@
     <input
       kirby-input
       [size]="'md'"
-      type="number"
+      type="text"
       placeholder=""
       (input)="updateAccountNumberUpdateButtonState()"
       [(ngModel)]="accountNumber"
@@ -52,7 +52,7 @@
     <kirby-icon style="width: 10%" name="verify" *ngIf="other.id === selectedId"></kirby-icon>
     <kirby-label>
       <h3>{{ other.name }}</h3>
-      <data detail>{{ other.regNo }} {{ other.accNo }}</data>
+      <data detail>{{ other.registerNumber }} {{ other.accountNumber }}</data>
     </kirby-label>
   </kirby-item>
 </kirby-list>

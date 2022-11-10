@@ -59,6 +59,6 @@ export class OtherPageComponent implements OnInit {
   setSelected(number: number) {
     this.otherService.setReceiver(number);
     this.otherService.setReceiverSelectedTrue();
-    this.modal?.close();
+    this.modal.close();
   }
 }
