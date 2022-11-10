@@ -1,8 +1,10 @@
 import {
+  CategoryScale,
   ChartTypeRegistry,
   Color,
   LinearScale,
   Point,
+  ScatterDataPoint,
   TooltipItem,
   TooltipLabelStyle,
 } from 'chart.js';
@@ -136,16 +138,21 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
       backgroundColor: getThemeColorRgbString('semi-light', 0.5),
       scales: {
         x: {
-          beforeUpdate: (linearScale: LinearScale) => {
-            const yValues = (linearScale.chart.data.datasets[0].data as any).map((x) => x.x).sort();
+          beforeUpdate: (categoryScale: CategoryScale) => {
+            const yValues = (categoryScale.chart.data.datasets[0].data as ScatterDataPoint[])
+              .map((x) => x.x)
+              .sort();
+
             const lowersYvalue = yValues[0];
             const highestYValue = yValues[yValues.length - 1];
             const yBuffer = highestYValue - lowersYvalue;
+            const maximumXScaleValue = highestYValue - yBuffer;
 
-            linearScale.options.max = highestYValue - yBuffer;
-            console.log(linearScale.options.min);
-
-            return linearScale;
+            if (maximumXScaleValue) {
+              categoryScale.options.max = maximumXScaleValue;
+              console.log('max x: ' + categoryScale.options.max);
+            }
+            // return categoryScale;
           },
           offset: false,
           grid: {
@@ -162,15 +169,19 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
         },
         y: {
           beforeUpdate: (linearScale: LinearScale) => {
-            // console.log(linearScale.options.suggestedMin);
+            const yValues = (linearScale.chart.data.datasets[0].data as ScatterDataPoint[])
+              .map((y) => y.y)
+              .sort();
 
-            const yValues = (linearScale.chart.data.datasets[0].data as any).map((y) => y.y).sort();
             const lowersYvalue = yValues[0];
             const highestYValue = yValues[yValues.length - 1];
             const yBuffer = (highestYValue - lowersYvalue) / 5;
 
-            linearScale.options.min = lowersYvalue - yBuffer;
-            // console.log(linearScale.options.min);
+            const minimumYScaleValue = lowersYvalue - yBuffer;
+            if (minimumYScaleValue) {
+              linearScale.options.min = minimumYScaleValue;
+              console.log('min y: ' + linearScale.options.min);
+            }
 
             return linearScale;
           },
@@ -182,6 +193,7 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
             drawBorder: false,
           },
           ticks: {
+            stepSize: 10,
             // padding: 20,
             display: true,
             font: {
