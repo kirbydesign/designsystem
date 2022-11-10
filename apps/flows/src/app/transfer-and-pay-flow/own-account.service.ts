@@ -51,7 +51,10 @@ export class OwnAccountService {
     this.receiverID = id;
     this.selectedReceiverNumberSource.next(this.receiverID);
 
-    this.selectedReceiverSource.next(this.accounts.filter((accounts) => accounts.id === id));
+    const selectedReceiver = this.accounts.filter((accounts) => accounts.id === id);
+    if (selectedReceiver) {
+      this.selectedReceiverSource.next(selectedReceiver);
+    }
   }
 
   getSelectedReceiverNumber$(): Observable<number> {

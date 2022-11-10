@@ -136,10 +136,8 @@ export class TransferAndPayModalComponent implements OnInit {
     if (this.currency.length === 0) {
       this.currencyEntered = false;
     }
-    if (this.currency.length >= 1) {
-      if (this.receiverChosen === true) {
-        this.currencyEntered = true;
-      }
+    if (this.currency.length >= 1 && this.receiverChosen) {
+      this.currencyEntered = true;
     }
     if (this.currency.length > 5) {
       this.input.nativeElement.classList.remove('currency-input_medium-text');
