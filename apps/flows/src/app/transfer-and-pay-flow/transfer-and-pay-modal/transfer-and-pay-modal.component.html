@@ -7,7 +7,7 @@
 <div *ngIf="!transferRegistered">
   <input
     class="currency-input currency-input_large-text"
-    maxlength="14"
+    maxlength="12"
     type="text"
     #input
     [(ngModel)]="currency"
@@ -20,9 +20,9 @@
   <div class="container-over" *ngIf="!receiverChosen">
     <div class="grid" (click)="showModalChooseOwnAccount()">
       <p>From</p>
-      <span *ngFor="let account of selectedAccount"
-        ><b>{{ account.name }}</b></span
-      >
+      <p *ngFor="let account of selectedAccount">
+        <b>{{ account.name }}</b>
+      </p>
     </div>
     <kirby-divider></kirby-divider>
     <div class="container-under">

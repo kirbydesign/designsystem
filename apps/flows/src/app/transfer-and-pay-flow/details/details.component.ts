@@ -4,7 +4,7 @@ import { Detail } from '../detail.model';
 import { Other } from '../other.model';
 import { OtherService } from '../other.service';
 import { VerifyService } from '../verify.service';
-
+import { Transfer } from '../transfer.model';
 @Component({
   selector: 'flows-details',
   templateUrl: './details.component.html',
