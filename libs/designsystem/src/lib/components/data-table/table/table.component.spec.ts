@@ -61,7 +61,7 @@ describe('TableComponent', () => {
 
     it('should style [tbody] cells correctly', () => {
       expect(element.children.namedItem('tbody').firstChild.firstChild).toHaveComputedStyle({
-        padding: `${size('s')}`,
+        padding: `${size('xxxs')} ${size('s')}`,
         'font-weight': fontWeight('normal'),
         'font-size': fontSize('s'),
         color: getTextColor('black'),
