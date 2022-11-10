@@ -14,6 +14,7 @@ export class DetailsComponent {
   verified: boolean = false;
 
   verifyDetail: Detail = {
+    verify: false,
     amount: '',
     from: '',
     receiver: '',

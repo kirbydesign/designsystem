@@ -13,6 +13,7 @@ import { TransferRegisteredComponent } from '../transfer-registered/transfer-reg
 import { DetailsComponent } from '../details/details.component';
 import { VerifyService } from '../verify.service';
 import { Detail } from '../detail.model';
+import { Transfer } from '../transfer.model';
 
 @Component({
   selector: 'flows-transfer-and-pay-modal',
@@ -123,6 +124,7 @@ export class TransferAndPayModalComponent implements OnInit {
 
   private serVerifiedDetails(verifiedDetails: Detail) {
     this.verifiedDetails = {
+      verify: verifiedDetails.verify,
       amount: verifiedDetails.amount,
       date: verifiedDetails.date,
       from: verifiedDetails.from,

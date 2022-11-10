@@ -1,4 +1,5 @@
-export interface Detail {
+import { Transfer } from './transfer.model';
+export interface Detail extends Transfer {
   amount: string;
   from: string;
   receiver: string;
