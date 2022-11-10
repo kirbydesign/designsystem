@@ -40,7 +40,8 @@ th {
 }
 
 td {
-  padding: utils.size('s');
+  height: 44px;
+  padding: utils.size('xxxs') utils.size('s');
   font-weight: utils.font-weight('normal');
   font-size: utils.font-size('s');
   color: utils.get-text-color('black');
