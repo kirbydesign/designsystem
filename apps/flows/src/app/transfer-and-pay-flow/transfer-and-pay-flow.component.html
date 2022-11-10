@@ -1,15 +1,13 @@
 <kirby-app>
   <kirby-tab-bar>
-    <button kirby-button>
-      <kirby-icon name="person-outline"></kirby-icon>
-      <kirby-icon name="person" selected-tab></kirby-icon>
+    <kirby-tab-button kirby-button (click)="showToast()">
+      <kirby-icon name="person"></kirby-icon>
       For you
-    </button>
+    </kirby-tab-button>
 
-    <button kirby-button>
+    <kirby-tab-button kirby-button (click)="showToast()">
       <kirby-icon name="accounts-outline"></kirby-icon>
-      <kirby-icon name="accounts" selected-tab></kirby-icon>
       Account
-    </button>
+    </kirby-tab-button>
   </kirby-tab-bar>
 </kirby-app>
