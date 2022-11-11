@@ -49,7 +49,9 @@
 <kirby-list [items]="Others" [showDivider]="true">
   <kirby-list-section-header> </kirby-list-section-header>
   <kirby-item *kirbyListItemTemplate="let other" (click)="setSelected(other.id)">
-    <kirby-icon style="width: 10%" name="verify" *ngIf="other.id === selectedId"></kirby-icon>
+    <data slot="start">
+      <kirby-icon name="verify" *ngIf="other.id === selectedId"></kirby-icon>
+    </data>
     <kirby-label>
       <h3>{{ other.name }}</h3>
       <data detail>{{ other.registerNumber }} {{ other.accountNumber }}</data>

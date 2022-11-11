@@ -1,6 +1,8 @@
 <kirby-list [items]="accounts">
   <kirby-item *kirbyListItemTemplate="let account" (click)="setSelectedReceiver(account.id)">
-    <kirby-icon *ngIf="account.id === receiverID" style="width: 10%" name="verify"></kirby-icon>
+    <data slot="start">
+      <kirby-icon *ngIf="account.id === receiverID" name="verify"></kirby-icon>
+    </data>
     <span>{{ account.name }}</span>
     <data slot="end">{{ account.balance }}</data>
   </kirby-item></kirby-list
