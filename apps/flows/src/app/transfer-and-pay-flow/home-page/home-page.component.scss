@@ -1,11 +1,11 @@
-.align-center {
+.align-text-center {
   text-align: center;
 }
 
 .container-middle {
+  width: 10rem;
+  height: 5rem;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-right: -50%;
-  transform: translate(-50%, -50%);
+  inset: 0;
+  margin: auto;
 }
