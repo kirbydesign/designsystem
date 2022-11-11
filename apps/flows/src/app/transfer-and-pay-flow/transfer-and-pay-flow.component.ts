@@ -8,7 +8,7 @@ import { ToastController, ToastConfig } from '@kirbydesign/designsystem';
 export class TransferAndPayFlowComponent {
   constructor(private toastController: ToastController) {}
 
-  showToast() {
+  showToastMessage() {
     const config: ToastConfig = {
       message: 'Your toast message',
       messageType: 'success',
