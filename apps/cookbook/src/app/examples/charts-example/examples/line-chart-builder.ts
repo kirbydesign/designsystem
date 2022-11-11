@@ -1,13 +1,24 @@
-import { ChartType, ChartTypesConfig } from '@kirbydesign/designsystem';
+import { ChartType } from '@kirbydesign/designsystem';
 import {
+  Align,
   ChartConfiguration,
   ChartData,
   ChartOptions,
   ChartTypeRegistry,
+  Color,
+  Point,
   TooltipItem,
   TooltipLabelStyle,
-  TooltipOptions,
 } from 'chart.js';
+import { Context } from 'chartjs-plugin-datalabels';
+
+const semiLightRGB = 'rgb(0,0,150)';
+const semiLightContrastRGB = 'rgb(0,0,190)';
+const whiteRGB = 'rgb(255,255,255)';
+
+const fontSize = {
+  xs: 16,
+};
 
 export interface ChartConfig {
   type: ChartType;
@@ -18,15 +29,7 @@ export class LineChartBuilder {
   private _config: ChartConfiguration;
 
   constructor() {
-    this._config = {
-      type: 'line',
-      data: {
-        datasets: [],
-      },
-      options: {
-        responsive: true,
-      },
-    };
+    this._config = this.theKirbyChartOptions;
   }
 
   public data(data: ChartData): LineChartBuilder {
@@ -39,6 +42,10 @@ export class LineChartBuilder {
     this._config.options = options;
 
     return this;
+  }
+
+  public getOptions(): ChartOptions {
+    return this._config.options;
   }
 
   public getKirbyToolTip(): any {
@@ -68,4 +75,91 @@ export class LineChartBuilder {
   }
 
   public build = (): ChartConfiguration => this._config;
+
+  private theKirbyChartOptions: any = {
+    type: 'line',
+    options: {
+      responsive: true,
+      animation: {
+        duration: 0,
+      },
+      layout: {
+        padding: {
+          left: 20,
+          right: 20,
+          top: 30,
+          bottom: 0,
+        },
+      },
+      backgroundColor: semiLightRGB,
+      x: {
+        grid: {
+          lineWidth: 0,
+        },
+        ticks: {
+          maxRotation: 0,
+          autoSkipPadding: 120,
+          font: {
+            size: 16,
+          },
+        },
+      },
+      y: {
+        position: 'right',
+        display: true,
+        grid: {
+          drawBorder: false,
+        },
+        ticks: {
+          display: true,
+          font: {
+            size: 16,
+          },
+        },
+      },
+    },
+    elements: {
+      line: {
+        tension: 0, // Smooth curve (0 = no smoothing)
+        borderWidth: 2,
+      },
+      point: {
+        hitRadius: 20,
+        radius: 0,
+        hoverRadius: 0,
+        hoverBorderWidth: 0,
+      },
+    },
+    normalized: true,
+    plugins: {
+      datalabels: {
+        backgroundColor: (context: Context) => context.dataset.borderColor as Color,
+        color: whiteRGB,
+        borderRadius: 3,
+        font: {
+          lineHeight: 1,
+          size: fontSize.xs,
+        },
+        padding: {
+          top: 6,
+          left: 5,
+          right: 5,
+          bottom: 5,
+        },
+        offset: 5,
+        align: (context: Context): Align =>
+          (this.getChartPointFromContext(context) as any)?.datalabel.position,
+        display: (context: Context): boolean =>
+          !!(this.getChartPointFromContext(context) as any)?.datalabel,
+        formatter: (value: any): string => value.datalabel.value,
+      },
+    },
+  };
+
+  /**
+   * A filter to read a chartpoint from a Chart.js point context (used for chartdata points). Context is provided by Chart.js.
+   */
+  getChartPointFromContext = (context: Context): Point => {
+    return context.dataset.data[context.dataIndex] as Point;
+  };
 }
