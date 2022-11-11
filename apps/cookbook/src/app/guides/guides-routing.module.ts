@@ -1,0 +1,35 @@
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { GridLayoutExtendedComponent } from './grid-layout/grid-layout-extended/grid-layout-extended.component';
+import { GridLayoutMultipleContainersComponent } from './grid-layout/grid-layout-multiple-containers/grid-layout-multiple-containers.component';
+import { GridLayoutSingleContainerComponent } from './grid-layout/grid-layout-single-container/grid-layout-single-container.component';
+import { GuidesComponent } from './guides.component';
+import { VirtualScrollListComponent } from './virtual-scroll/virtual-scroll-list/virtual-scroll-list.component';
+
+const routes = [
+  {
+    path: '',
+    component: GuidesComponent,
+  },
+  {
+    path: 'virtual-scroll-list',
+    component: VirtualScrollListComponent,
+  },
+  {
+    path: 'grid-layout-single-container',
+    component: GridLayoutSingleContainerComponent,
+  },
+  {
+    path: 'grid-layout-multiple-containers',
+    component: GridLayoutMultipleContainersComponent,
+  },
+  {
+    path: 'grid-layout-extended',
+    component: GridLayoutExtendedComponent,
+  },
+];
+
+@NgModule({
+  imports: [RouterModule, RouterModule.forChild(routes)],
+})
+export class GuidesRouterModule {}
