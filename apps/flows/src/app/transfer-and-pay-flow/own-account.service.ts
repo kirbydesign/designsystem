@@ -7,8 +7,8 @@ import { RangeValueAccessor } from '@angular/forms';
   providedIn: 'root',
 })
 export class OwnAccountService {
-  private senderID: number;
-  private receiverID: number;
+  private senderId: number;
+  private receiverId: number;
 
   private selectedAccountSource = new Subject<OwnAccount[]>();
   selectedAccount$ = this.selectedAccountSource.asObservable();
@@ -38,8 +38,8 @@ export class OwnAccountService {
   }
 
   setSelected(id: number) {
-    this.senderID = id;
-    const selectedOwnAccount = this.accounts.filter((accounts) => accounts.id === this.senderID);
+    this.senderId = id;
+    const selectedOwnAccount = this.accounts.filter((accounts) => accounts.id === this.senderId);
     if (selectedOwnAccount) {
       this.selectedAccountSource.next(selectedOwnAccount);
     }
@@ -48,8 +48,8 @@ export class OwnAccountService {
   }
 
   setSelectedReceiver(id: number) {
-    this.receiverID = id;
-    this.selectedReceiverNumberSource.next(this.receiverID);
+    this.receiverId = id;
+    this.selectedReceiverNumberSource.next(this.receiverId);
 
     const selectedReceiver = this.accounts.filter((accounts) => accounts.id === id);
     if (selectedReceiver) {
