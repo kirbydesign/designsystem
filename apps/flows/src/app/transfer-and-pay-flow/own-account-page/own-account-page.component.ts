@@ -21,7 +21,7 @@ export class OwnAccountPageComponent implements OnInit {
     this.accounts = this.ownAccountService.getOwnAccounts();
     this.ownAccountService
       .getSelectedReceiverNumber$()
-      .subscribe((receiverID) => (this.receiverId = receiverID));
+      .subscribe((receiverId) => (this.receiverId = receiverId));
   }
 
   setSelectedReceiver(id: number) {
