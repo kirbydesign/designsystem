@@ -98,20 +98,6 @@
   --background: #{interaction-state.get-state-color('white', 'xxxs')};
 }
 
-/* clean-css ignore:start */
-// Fixes https://github.com/kirbydesign/designsystem/issues/1745
-ion-item {
-  :host-context(kirby-list-item:first-of-type kirby-card) & {
-    --padding-top: 0;
-  }
-
-  :host-context(kirby-list-item:last-of-type kirby-card) & {
-    --padding-bottom: 0;
-  }
-}
-
-/* clean-css ignore:end */
-
 :host(.selected),
 :host-context(kirby-list .selected) {
   ion-item {
