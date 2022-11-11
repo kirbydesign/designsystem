@@ -12,9 +12,8 @@ export class ChooseDateComponent {
 
   constructor(private textAndDateService: TextAndDateService, private modal: Modal) {}
 
-  onDateChange(date: Date) {
+  newDateSelectedSetNewDate(date: Date) {
     this.date = date.toDateString();
-    console.log(this.date);
   }
 
   saveDate() {

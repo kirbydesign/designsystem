@@ -115,10 +115,10 @@ export class TransferAndPayModalComponent implements OnInit {
         date: this.date,
       } as Detail,
     };
-    this.modalController.showModal(config, this.onClose);
+    this.modalController.showModal(config, this.closeModalSaveReturnedDetail);
   }
 
-  private onClose = (dataReturnedByModal) => {
+  private closeModalSaveReturnedDetail = (dataReturnedByModal) => {
     this.serVerifiedDetails(dataReturnedByModal);
   };
 
@@ -126,7 +126,7 @@ export class TransferAndPayModalComponent implements OnInit {
     this.verifiedDetails = verifiedDetails;
   }
 
-  onCurrencyEntered(): void {
+  currencyEnteredUpdateStyle(): void {
     if (this.currency.length === 0) {
       this.currencyEntered = false;
     }
