@@ -8,7 +8,7 @@ import { Modal } from '@kirbydesign/designsystem';
   templateUrl: './own-account-page.component.html',
 })
 export class OwnAccountPageComponent implements OnInit {
-  public receiverID: number;
+  public receiverId: number;
   public accounts: OwnAccount[] = [];
 
   constructor(
@@ -21,7 +21,7 @@ export class OwnAccountPageComponent implements OnInit {
     this.accounts = this.ownAccountService.getOwnAccounts();
     this.ownAccountService
       .getSelectedReceiverNumber$()
-      .subscribe((receiverID) => (this.receiverID = receiverID));
+      .subscribe((receiverID) => (this.receiverId = receiverID));
   }
 
   setSelectedReceiver(id: number) {
