@@ -96,12 +96,11 @@ $button-width: (
 
 @mixin button-attentionlevel3 {
   // Expect canvas underneath to be a light color
-  --kirby-button-background-color: transparent;
+  --kirby-button-background-color: #{utils.get-color('white')};
   --kirby-button-color: #{utils.get-color('black')};
-  --kirby-button-border-color: #{utils.get-color('medium')};
 
-  @include interaction-state.apply-hover('xxxs');
-  @include interaction-state.apply-active('xxs');
+  @include interaction-state.apply-hover('xs');
+  @include interaction-state.apply-active('s');
 
   &.destructive {
     --kirby-button-color: #{utils.get-color('danger')};
@@ -217,6 +216,13 @@ $button-width: (
     pointer-events: none;
   }
 
+  :host-context(.kirby-color-brightness-white) {
+    &.attention-level3 {
+      --kirby-button-background-color: rgb(28 28 28 / 5%);
+      --kirby-button-color: #{utils.get-color('black')};
+    }
+  }
+
   :host-context(.kirby-color-brightness-dark) {
     &.no-decoration {
       --kirby-button-color: #{utils.get-color('white')};
@@ -231,7 +237,7 @@ $button-width: (
     }
 
     &.attention-level3 {
-      --kirby-button-border-color: #{utils.get-color('white')};
+      --kirby-button-background-color: rgb(255 255 255 / 10%);
       --kirby-button-color: #{utils.get-color('white')};
 
       @include interaction-state.apply-hover('xs', $make-lighter: true);
