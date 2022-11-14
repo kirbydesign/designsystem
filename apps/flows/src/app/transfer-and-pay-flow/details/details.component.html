@@ -1,0 +1,31 @@
+<kirby-page-title> See details <span *ngIf="!verified">and verify</span> </kirby-page-title>
+<kirby-card>
+  <kirby-item>
+    <h3>Amount</h3>
+    <data slot="end">{{ this.verifyDetail.amount }}</data>
+  </kirby-item>
+  <kirby-item>
+    <h3>From</h3>
+    <data slot="end">{{ this.verifyDetail.from }}</data>
+  </kirby-item>
+  <kirby-item>
+    <h3>Date</h3>
+    <data slot="end">{{ this.verifyDetail.date }}</data>
+  </kirby-item>
+  <kirby-item>
+    <h3>To</h3>
+    <data slot="end">{{ this.verifyDetail.receiver }}</data>
+  </kirby-item>
+  <kirby-item>
+    <h3>Message</h3>
+    <data slot="end">{{ this.verifyDetail.message }}</data>
+  </kirby-item>
+  <kirby-item>
+    <h3>Text</h3>
+    <data slot="end">{{ this.verifyDetail.text }}</data>
+  </kirby-item>
+</kirby-card>
+
+<div class="center-button" *ngIf="!verified">
+  <button kirby-button (click)="onVerify()">Verify</button>
+</div>

@@ -1,0 +1,15 @@
+<kirby-page-title>Text And Message</kirby-page-title>
+
+<kirby-form-field label="Text to account">
+  <input kirby-input type="text" [size]="'md'" #tweet maxlength="32" [(ngModel)]="text" />
+  <kirby-input-counter [listenTo]="tweet"></kirby-input-counter>
+</kirby-form-field>
+
+<kirby-form-field label="Message to receiver">
+  <input kirby-input type="text" [size]="'md'" #tweet1 maxlength="32" [(ngModel)]="message" />
+  <kirby-input-counter [listenTo]="tweet1"></kirby-input-counter>
+</kirby-form-field>
+
+<div class="ok-button">
+  <button kirby-button (click)="setTextAndMessage()">OK</button>
+</div>
