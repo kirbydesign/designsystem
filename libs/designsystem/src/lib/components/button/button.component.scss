@@ -66,6 +66,8 @@ $button-width: (
   @include interaction-state.apply-hover;
   @include interaction-state.apply-active('s');
 
+  box-shadow: none;
+
   &.destructive {
     --kirby-button-color: #{utils.get-color('danger')};
   }
@@ -114,7 +116,7 @@ $button-width: (
   --kirby-button-padding-right: #{utils.size('m')};
 
   @include utils.accessible-target-size;
-  @include interaction-state.apply-focus-visible;
+  @include interaction-state.apply-focus-visible($shadow: utils.get-elevation(2));
   @include interaction-state.initialize-layer($border-width);
   @include interaction-state.apply-hover;
   @include interaction-state.apply-active('s');
@@ -154,6 +156,7 @@ $button-width: (
   border-width: $border-width;
   border-style: solid;
   border-color: var(--kirby-button-border-color, transparent);
+  box-shadow: utils.get-elevation(2);
 
   &.no-margin {
     margin: 0;
@@ -282,6 +285,8 @@ $button-width: (
 }
 
 :host-context(kirby-action-sheet) {
+  box-shadow: none;
+
   &.attention-level2 {
     --kirby-button-background-color: #{utils.get-color('white')};
     --kirby-button-color: #{utils.get-color('white-contrast')};
