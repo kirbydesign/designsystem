@@ -240,7 +240,7 @@ $button-width: (
     }
 
     &.attention-level3 {
-      --kirby-button-background-color: rgb(255 255 255 / 10%);
+      --kirby-button-background-color: rgb(255 255 255 / 5%);
       --kirby-button-color: #{utils.get-color('white')};
 
       @include interaction-state.apply-hover('xs', $make-lighter: true);
