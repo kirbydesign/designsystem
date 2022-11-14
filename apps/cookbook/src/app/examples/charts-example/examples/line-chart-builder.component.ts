@@ -27,8 +27,9 @@ export class LineChartBuilderComponent implements OnInit {
 
     const stockOptions = getStockChartOptions('da-DK');
     const defaultOptions = this.lineChartBuilder.getOptions();
+
     const options: ChartOptions = {
-      ...stockOptions,
+      ...defaultOptions,
       aspectRatio: 1,
       backgroundColor: 'rgb(255,0,0)',
       plugins: {
