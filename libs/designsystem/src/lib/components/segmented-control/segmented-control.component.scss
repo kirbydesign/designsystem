@@ -28,6 +28,7 @@
       width: fit-content; // The segmented control itself is block-level, but we don't want it to stretch
       overflow: visible; // Ensures the badge is not cut off
       contain: none; // Ensures the badge is not cut off
+      box-shadow: utils.get-elevation(2);
     }
   }
 
@@ -52,6 +53,7 @@
       --indicator-transition: none;
 
       flex: initial;
+      box-shadow: utils.get-elevation(2);
 
       &::part(indicator) {
         // Remove padding as the selected segment will otherwise have additional space to its neighbors
@@ -69,6 +71,8 @@
       --background: transparent;
       --padding-start: #{utils.size('xs')};
       --padding-end: #{utils.size('xs')};
+
+      box-shadow: none;
     }
   }
 }
