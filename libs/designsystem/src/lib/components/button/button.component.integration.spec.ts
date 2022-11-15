@@ -145,7 +145,7 @@ describe('ButtonComponent in Kirby Page', () => {
     it('should render with correct background-color', async () => {
       await TestHelper.whenReady(ionContent);
       expect(actionButtonInPage).toHaveComputedStyle({
-        'background-color': 'transparent',
+        'background-color': getColor('white'),
       });
     });
 
@@ -153,15 +153,6 @@ describe('ButtonComponent in Kirby Page', () => {
       await TestHelper.whenReady(ionContent);
       expect(actionButtonInPage).toHaveComputedStyle({
         color: getColor('white', 'contrast'),
-      });
-    });
-
-    it('should render with transparent border', async () => {
-      await TestHelper.whenReady(ionContent);
-      expect(actionButtonInPage).toHaveComputedStyle({
-        'border-width': '1px',
-        'border-style': 'solid',
-        'border-color': getColor('medium'),
       });
     });
   });
@@ -253,7 +244,7 @@ describe('ButtonComponent in Kirby dropdown', () => {
       `<kirby-dropdown>
       </kirby-dropdown>`
     );
-    let button = spectator.queryHost('button[kirby-button]');
+    const button = spectator.queryHost('button[kirby-button]');
     expect(button).toHaveComputedStyle({ 'justify-content': 'space-between' });
   });
 });

@@ -218,15 +218,7 @@ describe('ButtonComponent', () => {
       });
 
       it('should render with no background-color', () => {
-        expect(element).toHaveComputedStyle({ 'background-color': 'transparent' });
-      });
-
-      it('should render with correct border', () => {
-        expect(element).toHaveComputedStyle({
-          'border-color': getColor('medium'),
-          'border-width': '1px',
-          'border-style': 'solid',
-        });
+        expect(element).toHaveComputedStyle({ 'background-color': getColor('white') });
       });
 
       it('should render with correct color', () => {
@@ -242,13 +234,7 @@ describe('ButtonComponent', () => {
         });
 
         it('should render with correct background-color', () => {
-          expect(element).toHaveComputedStyle({ 'background-color': 'transparent' });
-        });
-
-        it('should render with correct border-color', () => {
-          expect(element).toHaveComputedStyle({
-            'border-color': getColor('medium'),
-          });
+          expect(element).toHaveComputedStyle({ 'background-color': getColor('white') });
         });
 
         it('should render with correct color', () => {
@@ -280,15 +266,7 @@ describe('ButtonComponent', () => {
       });
 
       it('should render with no background-color', () => {
-        expect(element).toHaveComputedStyle({ 'background-color': 'transparent' });
-      });
-
-      it('should render with correct border', () => {
-        expect(element).toHaveComputedStyle({
-          'border-color': getColor('medium'),
-          'border-width': '1px',
-          'border-style': 'solid',
-        });
+        expect(element).toHaveComputedStyle({ 'background-color': getColor('white') });
       });
 
       it('should render with correct color', () => {
@@ -304,13 +282,7 @@ describe('ButtonComponent', () => {
         });
 
         it('should render with correct background-color', () => {
-          expect(element).toHaveComputedStyle({ 'background-color': 'transparent' });
-        });
-
-        it('should render with correct border-color', () => {
-          expect(element).toHaveComputedStyle({
-            'border-color': getColor('medium'),
-          });
+          expect(element).toHaveComputedStyle({ 'background-color': getColor('white') });
         });
 
         it('should render with correct color', () => {
