@@ -131,6 +131,8 @@
     "@babel/core": "^7.14.6",
     "@capacitor/android": "^4.4.0",
     "@capacitor/angular": "^2.0.3",
+    "@capacitor/cli": "^4.4.0",
+    "@capacitor/core": "^4.4.0",
     "@capacitor/ios": "^4.4.0",
     "@kirbydesign/core": "file:libs/core",
     "@ngneat/spectator": "^10.0.1",
