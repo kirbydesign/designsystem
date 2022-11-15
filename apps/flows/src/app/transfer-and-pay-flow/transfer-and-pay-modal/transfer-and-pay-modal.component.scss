@@ -1,0 +1,50 @@
+.grid {
+  display: flex;
+  justify-content: space-between;
+  align-self: center;
+  margin-top: 1em;
+}
+
+.currency-input {
+  margin-left: auto;
+  margin-right: auto;
+  all: unset;
+  text-align: right;
+  width: 80%;
+
+  &_ {
+    &large-text {
+      font-size: 80px;
+    }
+
+    &medium-text {
+      font-size: 60px;
+    }
+
+    &small-text {
+      font-size: 40px;
+    }
+  }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  appearance: none;
+  margin: 0;
+}
+
+.container-over {
+  width: 90%;
+}
+
+.container-under {
+  margin-top: 1em;
+  padding-bottom: 0.5em;
+  display: flex;
+  justify-content: center;
+}
+
+/* stylelint-disable selector-pseudo-element-no-unknown */
+::ng-deep ion-footer {
+  box-sizing: border-box;
+}
