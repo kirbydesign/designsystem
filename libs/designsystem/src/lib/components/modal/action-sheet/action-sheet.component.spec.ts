@@ -160,9 +160,9 @@ describe('ActionSheetComponent', () => {
         'border-width': '1px',
         'border-style': 'solid',
         'border-color': 'transparent',
-        'background-color': getColor('white', 'contrast'),
+        'background-color': getColor('white'),
         /* prettier-ignore */
-        'color': getColor('white'),
+        'color': getColor('white', 'contrast'),
       });
     });
   });
