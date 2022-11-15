@@ -1,21 +1,28 @@
-import { Chart, ChartConfiguration, ChartType } from 'chart.js';
+import { ChartConfiguration, ChartType } from 'chart.js';
 
-export abstract class BaseChartOptions {
-  public get options(): ChartConfiguration<'line'> {
+export abstract class ChartBaseOptions {
+  public get options(): ChartConfiguration<ChartType> {
     return this._options;
   }
-  public set options(value: ChartConfiguration<'line'>) {
-    this._options = value;
+
+  public set options(options: ChartConfiguration<ChartType>) {
+    if (options.type !== this._chartType) {
+      throw new Error(`Unable to change type. Type is: ${this._chartType}`);
+    }
+    this._options = options;
   }
+
   private _chartType: ChartType;
-  private _options: ChartConfiguration<'line'>;
+  private _options: ChartConfiguration<ChartType> = {} as ChartConfiguration<ChartType>;
 
   constructor(chartType: ChartType) {
     this._chartType = chartType;
-
-    const chart = new Chart(this._chartType, this._options);
-    chart.options;
+    this._options = {
+      ...this._options,
+      options: {},
+      type: chartType,
+    };
   }
 
-  public abstract getBasicConfig(): unknown;
+  public abstract getBasicConfig(): ChartConfiguration<ChartType>;
 }

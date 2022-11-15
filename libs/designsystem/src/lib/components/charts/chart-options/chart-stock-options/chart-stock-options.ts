@@ -1,19 +1,29 @@
-import { ChartTypeRegistry, Point, TooltipItem, TooltipLabelStyle } from 'chart.js';
+import {
+  ChartConfiguration,
+  ChartType,
+  ChartTypeRegistry,
+  Point,
+  TooltipItem,
+  TooltipLabelStyle,
+} from 'chart.js';
 import { Context } from 'chartjs-plugin-datalabels/types/context';
 import { Align, Color } from 'chartjs-plugin-datalabels/types/options';
-import { ColorHelper, DesignTokenHelper } from '../../../helpers';
-import { BaseChartOptions } from './chart-base-options';
+import { ColorHelper, DesignTokenHelper } from '../../../../helpers';
+import { ChartBaseOptions } from '../chart-base-options';
 const { getThemeColorHexString, getThemeColorRgbString } = ColorHelper;
 const { fontSize } = DesignTokenHelper;
 
-export class StockChartOptions extends BaseChartOptions {
+export class StockChartOptions extends ChartBaseOptions {
   constructor() {
     super('line');
   }
 
-  public getBasicConfig(): unknown {
+  public getBasicConfig(): ChartConfiguration<ChartType> {
     return {
       type: 'line',
+      data: {
+        datasets: [],
+      },
       options: {
         responsive: true,
         animation: {
