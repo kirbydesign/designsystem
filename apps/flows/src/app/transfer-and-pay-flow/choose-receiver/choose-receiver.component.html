@@ -1,0 +1,16 @@
+<kirby-page-title>Choose receiver</kirby-page-title>
+<kirby-segmented-control
+  class="segmented-control"
+  [items]="items"
+  mode="chip"
+  size="sm"
+  [value]="selectedSegment"
+  (segmentSelect)="changeSegment($event)"
+></kirby-segmented-control>
+
+<flows-own-account-page *ngIf="selectedSegment.id === 'OwnAccountPage'"></flows-own-account-page>
+<flows-other-page *ngIf="selectedSegment.id === 'OtherPage'"></flows-other-page>
+
+<kirby-modal-footer *ngIf="selectedSegment.id === 'OtherPage'">
+  <button kirby-button (click)="saveReceiver()" [disabled]="isDisabled">OK</button>
+</kirby-modal-footer>

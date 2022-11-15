@@ -19,10 +19,14 @@ module.exports = () => {
       path: path.resolve(__dirname, 'libs/designsystem/src/lib/polyfills/'),
     },
     plugins: [
-      new CopyWebpackPlugin([
-        { from: './libs/designsystem/src/lib/polyfills/resize-observer-polyfill-loader.js' },
-        { from: './libs/designsystem/src/lib/polyfills/intersection-observer-polyfill-loader.js' },
-      ]),
+      new CopyWebpackPlugin({
+        patterns: [
+          { from: './libs/designsystem/src/lib/polyfills/resize-observer-polyfill-loader.js' },
+          {
+            from: './libs/designsystem/src/lib/polyfills/intersection-observer-polyfill-loader.js',
+          },
+        ],
+      }),
     ],
   };
 
