@@ -3,13 +3,16 @@ import {
   ChartType,
   ChartTypeRegistry,
   Point,
+  TooltipCallbacks,
   TooltipItem,
   TooltipLabelStyle,
+  TooltipOptions,
 } from 'chart.js';
 import { Context } from 'chartjs-plugin-datalabels/types/context';
 import { Align, Color } from 'chartjs-plugin-datalabels/types/options';
 import { ColorHelper, DesignTokenHelper } from '../../../../helpers';
 import { ChartBaseConfig } from '../chart-base-config';
+
 const { getThemeColorHexString, getThemeColorRgbString } = ColorHelper;
 const { fontSize } = DesignTokenHelper;
 
@@ -126,6 +129,32 @@ export class StockChartConfig extends ChartBaseConfig {
           },
         },
       },
+    };
+  }
+
+  public getTooltipPlugin(): Partial<TooltipOptions<'line'>> {
+    return {
+      padding: 10,
+      enabled: true,
+      mode: 'index',
+      intersect: false,
+      backgroundColor: getThemeColorHexString('semi-light'),
+      titleColor: getThemeColorHexString('semi-light-contrast'),
+      bodyColor: getThemeColorHexString('semi-light-contrast'),
+      caretSize: 0,
+      bodySpacing: 5,
+      titleSpacing: 5,
+      borderColor: 'transparent',
+      callbacks: {
+        labelColor: (tooltipItem: TooltipItem<keyof ChartTypeRegistry>) => {
+          return {
+            backgroundColor: tooltipItem.dataset.borderColor,
+            borderColor: getThemeColorHexString('semi-light'),
+            borderWidth: 2, // This value must be exactly 2. If it is less, a white "border" will appear, if greater than, a shadow around the box will be shown.
+            // An issue has been created, requesting a test to check this value doesn´t change: https://github.com/kirbydesign/designsystem/issues/2578
+          } as TooltipLabelStyle;
+        },
+      } as TooltipCallbacks<'line'>,
     };
   }
 
