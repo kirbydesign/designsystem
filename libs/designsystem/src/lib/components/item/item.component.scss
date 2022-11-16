@@ -30,7 +30,7 @@
     );
     --background-focused-opacity: 1;
 
-    font-size: utils.font-size('s');
+    font-size: utils.font-size('n');
 
     // Prevent additional padding in iOS Safari on devices with "screen notch"
     // by removing horizontal safe area when rotated to landscape orientation.

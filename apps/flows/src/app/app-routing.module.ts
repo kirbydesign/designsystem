@@ -8,6 +8,8 @@ import { ForYouComponent } from './transaction-details-flow/for-you/for-you.comp
 import { TransactionDetailsFlowComponent } from './transaction-details-flow/transaction-details-flow.component';
 import { TransactionDetailsComponent } from './transaction-details-flow/transaction-details/transaction-details.component';
 import { TransactionsComponent } from './transaction-details-flow/transactions/transactions.component';
+import { HomePageComponent } from './transfer-and-pay-flow/home-page/home-page.component';
+import { TransferAndPayFlowComponent } from './transfer-and-pay-flow/transfer-and-pay-flow.component';
 
 const routes: Routes = [
   {
@@ -44,6 +46,21 @@ const routes: Routes = [
             component: TransactionDetailsComponent,
           },
         ],
+      },
+    ],
+  },
+  {
+    path: 'transfer-and-pay-flow',
+    component: TransferAndPayFlowComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'home-page',
+        pathMatch: 'full',
+      },
+      {
+        path: 'home-page',
+        component: HomePageComponent,
       },
     ],
   },

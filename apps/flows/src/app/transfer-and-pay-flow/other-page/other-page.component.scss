@@ -1,0 +1,11 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  gap: 2em;
+  white-space: nowrap;
+}
+
+.padding-title {
+  padding-bottom: 1em;
+  padding-top: 1em;
+}

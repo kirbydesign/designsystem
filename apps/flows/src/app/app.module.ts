@@ -14,6 +14,18 @@ import { ForYouComponent } from './transaction-details-flow/for-you/for-you.comp
 import { TransactionDetailsFlowComponent } from './transaction-details-flow/transaction-details-flow.component';
 import { TransactionDetailsComponent } from './transaction-details-flow/transaction-details/transaction-details.component';
 import { TransactionsComponent } from './transaction-details-flow/transactions/transactions.component';
+import { HomePageComponent } from './transfer-and-pay-flow/home-page/home-page.component';
+import { TransferAndPayModalComponent } from './transfer-and-pay-flow/transfer-and-pay-modal/transfer-and-pay-modal.component';
+import { TransferAndPayFlowComponent } from './transfer-and-pay-flow/transfer-and-pay-flow.component';
+import { ChooseReceiverComponent } from './transfer-and-pay-flow/choose-receiver/choose-receiver.component';
+import { FormsModule } from '@angular/forms';
+import { ChooseOwnAccountComponent } from './transfer-and-pay-flow/choose-own-account/choose-own-account.component';
+import { OwnAccountPageComponent } from './transfer-and-pay-flow/own-account-page/own-account-page.component';
+import { OtherPageComponent } from './transfer-and-pay-flow/other-page/other-page.component';
+import { ChooseDateComponent } from './transfer-and-pay-flow/choose-date/choose-date.component';
+import { ChooseTextAndMessageComponent } from './transfer-and-pay-flow/choose-text-and-message/choose-text-and-message.component';
+import { TransferRegisteredComponent } from './transfer-and-pay-flow/transfer-registered/transfer-registered.component';
+import { DetailsComponent } from './transfer-and-pay-flow/details/details.component';
 
 @NgModule({
   declarations: [
@@ -27,8 +39,19 @@ import { TransactionsComponent } from './transaction-details-flow/transactions/t
     TransactionDetailsComponent,
     ForYouComponent,
     AccountComponent,
+    HomePageComponent,
+    TransferAndPayModalComponent,
+    TransferAndPayFlowComponent,
+    ChooseReceiverComponent,
+    ChooseOwnAccountComponent,
+    OwnAccountPageComponent,
+    OtherPageComponent,
+    ChooseDateComponent,
+    ChooseTextAndMessageComponent,
+    TransferRegisteredComponent,
+    DetailsComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, KirbyModule],
+  imports: [BrowserModule, AppRoutingModule, KirbyModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })
