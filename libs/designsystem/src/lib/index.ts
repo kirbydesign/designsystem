@@ -7,3 +7,4 @@ export * from './scss/scss-helper';
 
 export { KirbyModule } from './kirby.module';
 export { KirbyExperimentalModule } from './kirby-experimental.module';
+export { KirbyModalModule } from './kirby-modal.module';

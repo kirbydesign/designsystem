@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { KirbyExperimentalModule, KirbyModule } from '@kirbydesign/designsystem';
+import { KirbyExperimentalModule, KirbyModalModule, KirbyModule } from '@kirbydesign/designsystem';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -35,6 +35,7 @@ registerLocaleData(localeData);
     FormsModule,
     KirbyModule,
     KirbyExperimentalModule,
+    KirbyModalModule,
   ],
 
   providers: [
