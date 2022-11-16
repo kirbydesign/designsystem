@@ -13,7 +13,7 @@ class TestChartConfigurations extends ChartBaseConfig {
   }
 }
 
-fdescribe(`Basic chart with type 'line' is loaded`, () => {
+describe(`Basic chart with type 'line' is loaded`, () => {
   let chartBaseConfigurations: TestChartConfigurations;
   const chartType: ChartType = 'line';
 

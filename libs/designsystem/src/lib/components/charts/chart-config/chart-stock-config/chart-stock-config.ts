@@ -2,14 +2,14 @@ import {
   ChartConfiguration,
   ChartType,
   ChartTypeRegistry,
-  Point,
+  ScatterDataPoint,
   TooltipCallbacks,
   TooltipItem,
   TooltipLabelStyle,
   TooltipOptions,
 } from 'chart.js';
 import { Context } from 'chartjs-plugin-datalabels/types/context';
-import { Align, Color } from 'chartjs-plugin-datalabels/types/options';
+import { Align, Options } from 'chartjs-plugin-datalabels/types/options';
 import { ColorHelper, DesignTokenHelper } from '../../../../helpers';
 import { ChartBaseConfig } from '../chart-base-config';
 
@@ -81,53 +81,7 @@ export class StockChartConfig extends ChartBaseConfig {
           },
         },
         normalized: true,
-        plugins: {
-          tooltip: {
-            padding: 10,
-
-            enabled: true,
-            mode: 'index',
-            intersect: false,
-            backgroundColor: getThemeColorHexString('semi-light'),
-            titleColor: getThemeColorHexString('semi-light-contrast'),
-            bodyColor: getThemeColorHexString('semi-light-contrast'),
-            caretSize: 0,
-            bodySpacing: 5,
-            titleSpacing: 5,
-            borderColor: 'transparent',
-            callbacks: {
-              labelColor: (tooltipItem: TooltipItem<keyof ChartTypeRegistry>) => {
-                return {
-                  backgroundColor: tooltipItem.dataset.borderColor,
-                  borderColor: getThemeColorHexString('semi-light'),
-                  borderWidth: 2, // This value must be exactly 2. If it is less, a white "border" will appear, if greater than, a shadow around the box will be shown.
-                  // An issue has been created, requesting a test to check this value doesn´t change: https://github.com/kirbydesign/designsystem/issues/2578
-                } as TooltipLabelStyle;
-              },
-            },
-          },
-          datalabels: {
-            backgroundColor: (context: Context) => context.dataset.borderColor as Color,
-            color: getThemeColorHexString('white'),
-            borderRadius: 3,
-            font: {
-              lineHeight: 1,
-              size: parseInt(fontSize('xs')),
-            },
-            padding: {
-              top: 6,
-              left: 5,
-              right: 5,
-              bottom: 5,
-            },
-            offset: 5,
-            align: (context: Context): Align =>
-              (this.getChartPointFromContext(context) as any)?.datalabel.position,
-            display: (context: Context): boolean =>
-              !!(this.getChartPointFromContext(context) as any)?.datalabel,
-            formatter: (value: any): string => value.datalabel.value,
-          },
-        },
+        plugins: {},
       },
     };
   }
@@ -158,10 +112,63 @@ export class StockChartConfig extends ChartBaseConfig {
     };
   }
 
-  /**
-   * A filter to read a chartpoint from a Chart.js point context (used for chartdata points). Context is provided by Chart.js.
-   */
-  private getChartPointFromContext = (context: Context): Point => {
-    return context.dataset.data[context.dataIndex] as Point;
+  public getDataLabelsPluginConfig(): Partial<Options> {
+    return {
+      backgroundColor: '#005c3c',
+      color: getThemeColorHexString('white'),
+      borderRadius: 3,
+      font: {
+        lineHeight: 1,
+        size: parseInt(fontSize('xs')),
+      },
+      padding: {
+        top: 6,
+        left: 5,
+        right: 5,
+        bottom: 5,
+      },
+      offset: 5,
+      align: (context: Context): Align =>
+        this.getDataLabelPosition(context.dataset.data as ScatterDataPoint[], context.dataIndex),
+      display: (context: Context): boolean => {
+        return this.showDataLabel(context);
+      },
+      formatter: (dataPoint: ScatterDataPoint): string => dataPoint.y.toString(),
+    };
+  }
+
+  public getDataLabelPosition = (data: ScatterDataPoint[], dataIndex: number): Align | null => {
+    const scatterPointDataYvalues: number[] = (data as ScatterDataPoint[]).map(
+      (scatterDatapoint) => scatterDatapoint.y
+    );
+
+    const minValue = Math.min(...scatterPointDataYvalues);
+    const minValueIndex = scatterPointDataYvalues.indexOf(minValue);
+
+    if (dataIndex === minValueIndex) {
+      return 'bottom';
+    }
+
+    const maxValue = Math.max(...scatterPointDataYvalues);
+    const maxValueIndex = scatterPointDataYvalues.indexOf(maxValue);
+
+    if (dataIndex === maxValueIndex) {
+      return 'top';
+    }
+
+    return null;
   };
+
+  private showDataLabel(context: Context) {
+    const data: ScatterDataPoint[] = [...context.dataset.data] as ScatterDataPoint[];
+    const yValues = data.map((dataPoints) => dataPoints.y);
+
+    const minValue = Math.min(...yValues);
+    const minValueIndex = yValues.indexOf(minValue);
+
+    const maxValue = Math.max(...yValues);
+    const maxValueIndex = yValues.indexOf(maxValue);
+
+    return context.dataIndex === maxValueIndex || context.dataIndex === minValueIndex;
+  }
 }
