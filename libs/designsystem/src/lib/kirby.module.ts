@@ -47,6 +47,7 @@ import { ActionSheetHelper } from './components/modal/services/action-sheet.help
 import { AlertHelper } from './components/modal/services/alert.helper';
 import { ModalController } from './components/modal/services/modal.controller';
 import { ModalHelper } from './components/modal/services/modal.helper';
+import { ModalModule } from './components/modal-experimental/modal.module';
 import { PageModule } from './components/page/page.module';
 import { PopoverComponent } from './components/popover/popover.component';
 import { ProgressCircleRingComponent } from './components/progress-circle/progress-circle-ring.component';
@@ -146,6 +147,7 @@ const exportedModules = [
   ChartsModule,
   SpinnerModule,
   DataTableModule,
+  ModalModule,
 ];
 
 const allExports = [...exportedModules, ...exportedDeclarations];
