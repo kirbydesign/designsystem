@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { IonModal } from '@ionic/angular';
+import { IonContent, IonModal } from '@ionic/angular';
+import { KirbyAnimation } from '../../../animation/kirby-animation';
 
 @Component({
   selector: 'kirby-fullscreen-modal-experimental',
@@ -8,6 +9,7 @@ import { IonModal } from '@ionic/angular';
 })
 export class FullscreenModalExperimentalComponent {
   @ViewChild(IonModal) modal: IonModal;
+  @ViewChild(IonContent) ionContent: IonContent;
 
   @Input() open = false;
   @Input() canDismiss = true;
@@ -37,5 +39,13 @@ export class FullscreenModalExperimentalComponent {
 
   _onDidDismiss(event) {
     this.didDismiss.emit(event);
+  }
+
+  public scrollToTop(scrollDuration?: KirbyAnimation.Duration) {
+    this.ionContent.scrollToTop(scrollDuration || 0);
+  }
+
+  public scrollToBottom(scrollDuration?: KirbyAnimation.Duration) {
+    this.ionContent.scrollToBottom(scrollDuration || 0);
   }
 }
