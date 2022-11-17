@@ -113,6 +113,11 @@ export class StockChartConfig extends ChartBaseConfig {
       titleSpacing: 5,
       borderColor: 'transparent',
       callbacks: {
+        title: (toolTipItem) => {
+          const dateInMiliseconds = parseInt(toolTipItem[0].label); // TODO: Right now we use index === 0. I expect multiple datasets will change this
+          return getChartStockShortDateTime(dateInMiliseconds);
+        },
+        label: (context) => context.parsed.y.toString(),
         labelColor: (tooltipItem: TooltipItem<keyof ChartTypeRegistry>) => {
           return {
             backgroundColor: tooltipItem.dataset.borderColor,
@@ -189,10 +194,19 @@ export class StockChartConfig extends ChartBaseConfig {
 const getChartStockShortDate = (dateInMiliseconds: number) => {
   const newDate = new Date(dateInMiliseconds);
 
-  const newDateString = newDate.toLocaleDateString('en-US', {
+  return newDate.toLocaleDateString('en-US', {
     day: 'numeric',
     month: 'short',
   });
+};
 
-  return newDateString;
+const getChartStockShortDateTime = (dateInMiliseconds: number) => {
+  const newDate = new Date(dateInMiliseconds);
+
+  return newDate.toLocaleDateString('en-US', {
+    day: 'numeric',
+    month: 'short',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
 };

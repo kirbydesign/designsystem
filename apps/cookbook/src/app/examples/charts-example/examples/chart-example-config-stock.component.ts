@@ -16,11 +16,16 @@ export class ChartExampleConfigStockComponent implements AfterViewInit {
   private _chart: Chart;
   private _stockChartConfig: StockChartConfig;
   private demoData: ScatterDataPoint[] = [
-    { x: 1368377918249, y: 401 },
-    { x: 1668477933534, y: 32 },
-    { x: 1668577933534, y: 98 },
-    { x: 1668597933534, y: 8 },
-    { x: 1668677933534, y: 552 },
+    { x: 1637049659000, y: 127.15 },
+    { x: 1637049662000, y: 127.15 },
+    { x: 1637049760000, y: 127.08 },
+    { x: 1637049926000, y: 127.08 },
+    { x: 1637050490000, y: 126.93 },
+    { x: 1637050637000, y: 127.25 },
+    { x: 1637050736000, y: 127.08 },
+    { x: 1637050797000, y: 127.03 },
+    { x: 1637050923000, y: 127.03 },
+    { x: 1637051160000, y: 127.08 },
   ];
 
   public ngAfterViewInit(): void {
