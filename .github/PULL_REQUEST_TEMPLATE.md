@@ -26,6 +26,7 @@ The following tasks should be carried out in sequence in order to follow [the pr
 - [ ] Make sure you have updated the cookbook with examples and showcases (for bug fixes, enhancements & new components).
 
 ### Review  
+- [ ] Determine if your changes are a bug, feature or breaking-change, and add the matching label to your PR. If it is tooling, dependency updates or similar, add ignore-for-release.
 - [ ] Do a [self-review](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Self-review).
 - [ ] Request that the changes are code-reviewed 
 - [ ] Request that the changes are [UX reviewed](https://github.com/kirbydesign/designsystem/blob/main/.github/CONTRIBUTING.md/#ux-review) (only necessary if your PR introduces visual changes)
