@@ -44,9 +44,7 @@ export class FabSheetComponent implements AfterContentInit {
     private changeDetectorRef: ChangeDetectorRef,
     private renderer: Renderer2,
     @Inject(DOCUMENT) private document: Document
-  ) {
-    // do nothing.
-  }
+  ) {}
 
   ngAfterContentInit(): void {
     if (this.actionSheet) {
