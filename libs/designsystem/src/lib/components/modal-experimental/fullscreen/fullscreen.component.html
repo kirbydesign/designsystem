@@ -1,8 +1,14 @@
-<ion-modal [isOpen]="open">
+<ion-modal
+  [isOpen]="open"
+  (willPresent)="onWillPresent($event)"
+  (didPresent)="onDidPresent($event)"
+  (willDismiss)="onWillDismiss($event)"
+  (didDismiss)="onDidDismiss($event)"
+>
   <ng-template>
     <ion-header>
       <ion-toolbar>
-        <ion-title></ion-title>
+        <ion-title>Test title</ion-title>
         <ion-buttons slot="end">
           <button kirby-button [noDecoration]="true" size="md" (click)="closeModal()">
             <kirby-icon [name]="'close'"></kirby-icon>
@@ -14,7 +20,7 @@
     <ion-content [scrollEvents]="true">
       <ion-header *ngIf="hasCollapsibleTitle" collapse="condense">
         <ion-toolbar>
-          <span class="kirby-text-large" #contentTitle></span>
+          <span class="kirby-text-large" #contentTitle>Test title</span>
         </ion-toolbar>
       </ion-header>
       <ng-container>
