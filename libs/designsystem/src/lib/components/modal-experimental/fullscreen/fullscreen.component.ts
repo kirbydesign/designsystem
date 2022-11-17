@@ -10,6 +10,7 @@ export class FullscreenModalExperimentalComponent {
   @ViewChild(IonModal) modal: IonModal;
 
   @Input() open = false;
+  @Input() canDismiss = true;
   @Input() hasCollapsibleTitle = true;
 
   //TODO - replace any
@@ -18,23 +19,23 @@ export class FullscreenModalExperimentalComponent {
   @Output() didDismiss = new EventEmitter<any>();
   @Output() willDismiss = new EventEmitter<any>();
 
-  closeModal() {
+  _closeModal() {
     this.modal.dismiss(null, 'cancel');
   }
 
-  onWillPresent(event) {
+  _onWillPresent(event) {
     this.willPresent.emit(event);
   }
 
-  onDidPresent(event) {
+  _onDidPresent(event) {
     this.didPresent.emit(event);
   }
 
-  onWillDismiss(event) {
+  _onWillDismiss(event) {
     this.willDismiss.emit(event);
   }
 
-  onDidDismiss(event) {
+  _onDidDismiss(event) {
     this.didDismiss.emit(event);
   }
 }

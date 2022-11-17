@@ -1,9 +1,10 @@
 <ion-modal
   [isOpen]="open"
-  (willPresent)="onWillPresent($event)"
-  (didPresent)="onDidPresent($event)"
-  (willDismiss)="onWillDismiss($event)"
-  (didDismiss)="onDidDismiss($event)"
+  [canDismiss]="canDismiss"
+  (willPresent)="_onWillPresent($event)"
+  (didPresent)="_onDidPresent($event)"
+  (willDismiss)="_onWillDismiss($event)"
+  (didDismiss)="_onDidDismiss($event)"
 >
   <ng-template>
     <ion-header>
@@ -11,7 +12,7 @@
         <ng-content select="[header-start]"></ng-content>
         <ion-title>Modal title</ion-title>
         <ion-buttons slot="end">
-          <button kirby-button [noDecoration]="true" size="md" (click)="closeModal()">
+          <button kirby-button [noDecoration]="true" size="md" (click)="_closeModal()">
             <kirby-icon [name]="'close'"></kirby-icon>
           </button>
         </ion-buttons>

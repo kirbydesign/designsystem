@@ -1,5 +1,9 @@
 <button kirby-button (click)="openModal()">Open Modal</button>
-<kirby-fullscreen-modal-experimental [open]="open" (willDismiss)="close()">
+<kirby-fullscreen-modal-experimental
+  [open]="open"
+  [canDismiss]="canDismiss"
+  (willDismiss)="close()"
+>
   <kirby-page-progress header-start>
     <kirby-progress-circle themeColor="warning" value="25" size="sm" class="kirby-text-xsmall">
       1/4
@@ -45,5 +49,6 @@
 
   <kirby-modal-footer [type]="'inline'" themeColor="white" footer>
     <button kirby-button (click)="close()">Close</button>
+    <button kirby-button (click)="toggleCanDismiss()">Can dismiss: {{ canDismiss }}</button>
   </kirby-modal-footer>
 </kirby-fullscreen-modal-experimental>

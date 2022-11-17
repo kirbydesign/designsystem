@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
 })
 export class FullscreenModalExperimentalExampleComponent {
   open = false;
+  canDismiss = true;
 
   openModal() {
     this.open = true;
@@ -12,5 +13,9 @@ export class FullscreenModalExperimentalExampleComponent {
 
   close() {
     this.open = false;
+  }
+
+  toggleCanDismiss() {
+    this.canDismiss = !this.canDismiss;
   }
 }
