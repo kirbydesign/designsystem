@@ -1,6 +1,7 @@
 <button kirby-button (click)="openModal()">Open Modal</button>
 <kirby-fullscreen-modal-experimental
   [open]="open"
+  [title]="'Modal title'"
   [canDismiss]="canDismiss"
   (willDismiss)="close()"
 >
