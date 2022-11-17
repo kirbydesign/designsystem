@@ -15,17 +15,12 @@ export class ChartExampleConfigStockComponent implements AfterViewInit {
 
   private _chart: Chart;
   private _stockChartConfig: StockChartConfig;
-  private demoData: { value: ScatterDataPoint; label: string }[] = [
-    { value: { x: 1, y: 19 }, label: 'K' },
-    { value: { x: 2, y: 252 }, label: 'I' },
-    { value: { x: 3, y: 13 }, label: 'R' },
-    { value: { x: 4, y: 282 }, label: 'B' },
-    { value: { x: 5, y: 45 }, label: 'Y' },
-    { value: { x: 6, y: 15 }, label: '_' },
-    { value: { x: 7, y: 67 }, label: 'T' },
-    { value: { x: 8, y: 325 }, label: 'E' },
-    { value: { x: 9, y: 89 }, label: 'A' },
-    { value: { x: 10, y: 43 }, label: 'M' },
+  private demoData: ScatterDataPoint[] = [
+    { x: 1368377918249, y: 401 },
+    { x: 1668477933534, y: 32 },
+    { x: 1668577933534, y: 98 },
+    { x: 1668597933534, y: 8 },
+    { x: 1668677933534, y: 552 },
   ];
 
   public ngAfterViewInit(): void {
@@ -56,10 +51,10 @@ export class ChartExampleConfigStockComponent implements AfterViewInit {
         datasets: [
           {
             borderColor: '#005c3c',
-            data: this.demoData.map((demoDataEntry) => demoDataEntry.value),
+            data: this.demoData.map((demoDataEntry) => demoDataEntry),
           },
         ],
-        labels: this.demoData.map((demoDataEntry) => demoDataEntry.label),
+        labels: this.demoData.map((demoDataEntry) => demoDataEntry.x),
       },
     };
     this._chart = new Chart(this.canvasId, config);

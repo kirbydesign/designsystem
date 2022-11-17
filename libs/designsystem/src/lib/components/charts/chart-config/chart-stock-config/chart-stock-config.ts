@@ -11,12 +11,15 @@ import {
 import { Context } from 'chartjs-plugin-datalabels/types/context';
 import { Align, Options } from 'chartjs-plugin-datalabels/types/options';
 import { ColorHelper, DesignTokenHelper } from '../../../../helpers';
+import { ChartLocale } from '../../shared';
 import { ChartBaseConfig } from '../chart-base-config';
 
 const { getThemeColorHexString, getThemeColorRgbString } = ColorHelper;
 const { fontSize } = DesignTokenHelper;
 
 export class StockChartConfig extends ChartBaseConfig {
+  private STOCK_CHART_LOCALE_DEFAULT: ChartLocale = 'en-US';
+
   constructor() {
     super('line');
   }
@@ -43,6 +46,11 @@ export class StockChartConfig extends ChartBaseConfig {
         backgroundColor: getThemeColorRgbString('semi-light', 0.5),
         scales: {
           x: {
+            adapters: {
+              date: {
+                locale: this.STOCK_CHART_LOCALE_DEFAULT,
+              },
+            },
             grid: {
               lineWidth: 0,
             },
@@ -51,6 +59,11 @@ export class StockChartConfig extends ChartBaseConfig {
               autoSkipPadding: 120,
               font: {
                 size: parseInt(fontSize('xs')),
+              },
+              callback(tickValue) {
+                const dateInMiliseconds = parseInt(this.getLabelForValue(parseInt(tickValue + '')));
+
+                return getChartStockShortDate(dateInMiliseconds);
               },
             },
           },
@@ -172,3 +185,14 @@ export class StockChartConfig extends ChartBaseConfig {
     return context.dataIndex === maxValueIndex || context.dataIndex === minValueIndex;
   }
 }
+
+const getChartStockShortDate = (dateInMiliseconds: number) => {
+  const newDate = new Date(dateInMiliseconds);
+
+  const newDateString = newDate.toLocaleDateString('en-US', {
+    day: 'numeric',
+    month: 'short',
+  });
+
+  return newDateString;
+};
