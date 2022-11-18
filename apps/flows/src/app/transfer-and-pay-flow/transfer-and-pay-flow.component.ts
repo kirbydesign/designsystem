@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastController, ToastConfig } from '@kirbydesign/designsystem';
+import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
 
 @Component({
   selector: 'kirbydesign-transfer-and-pay-flow',

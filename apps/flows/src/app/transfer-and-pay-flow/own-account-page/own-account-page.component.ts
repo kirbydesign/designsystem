@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Modal } from '@kirbydesign/designsystem';
 import { OwnAccountService } from '../own-account.service';
 import { OwnAccount } from '../own-account.model';
 import { OtherService } from '../other.service';
-import { Modal } from '@kirbydesign/designsystem';
 @Component({
   selector: 'flows-own-account-page',
   templateUrl: './own-account-page.component.html',

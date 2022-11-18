@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { KirbyModule } from '@kirbydesign/designsystem';
 
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -18,7 +19,6 @@ import { HomePageComponent } from './transfer-and-pay-flow/home-page/home-page.c
 import { TransferAndPayModalComponent } from './transfer-and-pay-flow/transfer-and-pay-modal/transfer-and-pay-modal.component';
 import { TransferAndPayFlowComponent } from './transfer-and-pay-flow/transfer-and-pay-flow.component';
 import { ChooseReceiverComponent } from './transfer-and-pay-flow/choose-receiver/choose-receiver.component';
-import { FormsModule } from '@angular/forms';
 import { ChooseOwnAccountComponent } from './transfer-and-pay-flow/choose-own-account/choose-own-account.component';
 import { OwnAccountPageComponent } from './transfer-and-pay-flow/own-account-page/own-account-page.component';
 import { OtherPageComponent } from './transfer-and-pay-flow/other-page/other-page.component';
