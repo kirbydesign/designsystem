@@ -1,0 +1,25 @@
+name: Publish new versions to npm
+
+# Tags starting with 'v.' are protected tags and can only be pushed by admins.
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+
+jobs:
+  publish_packages:
+    name: Publish packages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Kirby setup
+        uses: ./.github/actions/kirby-setup
+      - name: Create npm config
+        run: |
+          cd libs/core 
+          echo '//registry.npmjs.org/:_authToken=${{secrets.NPM_PUBLISH_TOKEN}}' > ~/.npmrc
+      - name: Build core package and publish to npm
+        run: npm run publish -- core
+      - name: Build designsystem package and publish to npm
+        run: npm run publish -- designsystem
