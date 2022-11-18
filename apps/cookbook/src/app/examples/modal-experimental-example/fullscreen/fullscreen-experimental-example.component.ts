@@ -15,6 +15,7 @@ export class FullscreenModalExperimentalExampleComponent {
   showPageProgress = true;
   isInlineFooter = true;
   collapseTitle = true;
+  scrollDisabled = false;
 
   openModal() {
     this.open = true;
@@ -50,5 +51,9 @@ export class FullscreenModalExperimentalExampleComponent {
 
   toggleCollapseTitle() {
     this.collapseTitle = !this.collapseTitle;
+  }
+
+  toggleScrollDisabled() {
+    this.scrollDisabled = !this.scrollDisabled;
   }
 }

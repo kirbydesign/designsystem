@@ -27,6 +27,12 @@
       (checkedChange)="toggleCollapseTitle()"
       text="Collapse title"
     ></kirby-checkbox>
+
+    <kirby-checkbox
+      [checked]="scrollDisabled"
+      (checkedChange)="toggleScrollDisabled()"
+      text="Scroll disabled"
+    ></kirby-checkbox>
   </div>
 
   <button kirby-button (click)="openModal()">Open Modal</button>
@@ -35,6 +41,7 @@
     [open]="open"
     [title]="'Modal title'"
     [hasCollapsibleTitle]="collapseTitle"
+    [scrollDisabled]="scrollDisabled"
     [canDismiss]="canDismiss"
     (willDismiss)="close()"
   >

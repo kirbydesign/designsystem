@@ -19,7 +19,7 @@
       </ion-toolbar>
     </ion-header>
 
-    <ion-content [scrollEvents]="true">
+    <ion-content [scrollEvents]="true" [scrollY]="!scrollDisabled">
       <ion-header *ngIf="hasCollapsibleTitle" collapse="condense">
         <ion-toolbar>
           <span class="kirby-text-large">{{ title }}</span>
