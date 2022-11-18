@@ -66,7 +66,6 @@ describe('FabSheetComponent', () => {
       spectator.click(ionFabButtonElement);
       tick();
       expect(component.isFabSheetOpen).toBe(true);
-      expect(component.isBackdropVisible).toBe(true);
     }));
   });
 
@@ -80,7 +79,6 @@ describe('FabSheetComponent', () => {
       spectator.click('button[kirby-button]');
       tick();
       expect(component.isFabSheetOpen).toBe(false);
-      expect(component.isBackdropVisible).toBe(false);
     }));
   });
 });
