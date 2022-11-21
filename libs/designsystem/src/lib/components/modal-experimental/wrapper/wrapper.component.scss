@@ -1,0 +1,128 @@
+@use '@kirbydesign/core/src/scss/utils';
+
+// Global modal styling can be found at scss/base/_ionic.scss
+
+@mixin contain-content() {
+  padding-top: 0;
+  position: relative;
+  contain: inherit;
+  min-height: min(var(--min-height), calc(var(--vh100) - var(--kirby-modal-padding-top, 0px)));
+
+  ion-content {
+    contain: content;
+    max-height: calc(
+      var(--vh100) - var(--kirby-modal-padding-top, 0px) - var(--header-height) -
+        var(--footer-height)
+    );
+
+    &::part(scroll) {
+      height: '100%';
+      position: relative;
+    }
+  }
+}
+
+$toolbar-padding-inline: utils.size('s');
+$toolbar-padding-block: utils.size('xs');
+
+@mixin phablet-toolbar-padding() {
+  $toolbar-padding-top: utils.size('xxs');
+  @include utils.media('>=medium') {
+    padding-top: $toolbar-padding-top;
+  }
+}
+
+ion-header {
+  box-sizing: border-box;
+
+  ion-toolbar {
+    --padding-start: #{$toolbar-padding-inline};
+    --padding-end: #{$toolbar-padding-inline};
+    --padding-bottom: #{$toolbar-padding-block};
+    --padding-top: #{$toolbar-padding-block};
+    --border-width: 0;
+    --background: transparent;
+    --color: var(--kirby-modal-color, #{utils.get-color('black')});
+
+    button {
+      color: var(--color);
+    }
+
+    @include phablet-toolbar-padding;
+  }
+}
+
+:host {
+  --vh100: var(--vh, 1vh) * 100; /// Fixes an issue with vh units on iOS Safari
+  --header-height: 0px;
+  --footer-height: 0px;
+}
+
+// Ensure iOS safe-area padding-top on default/modal flavor
+// when opened on presenting element (gets .modal-card class):
+:host-context(ion-modal.modal-card) {
+  ion-header ion-toolbar:first-of-type {
+    padding-top: var(--kirby-safe-area-top, 0);
+
+    @include phablet-toolbar-padding;
+  }
+}
+
+ion-title {
+  box-sizing: border-box;
+  padding-inline-start: calc(48px + var(--padding-start));
+  padding-inline-end: calc(48px + var(--padding-end));
+  font-size: utils.font-size('l');
+  font-weight: utils.font-weight('bold');
+}
+
+ion-content {
+  --background: transparent;
+  --color: var(--kirby-modal-color, #{utils.get-color('black')});
+
+  display: flex;
+  flex-direction: column;
+
+  @include utils.slotted('*') {
+    box-sizing: border-box;
+    display: block;
+  }
+
+  --padding-top: #{utils.size('m')};
+  --padding-bottom: #{utils.size('m')};
+  --padding-start: #{utils.size('s')};
+  --padding-end: #{utils.size('s')};
+}
+
+// Ensure padding-rules are not merged with other media query,
+// as this rule has to come AFTER the default mobile-first rule in order to override:
+
+/* clean-css ignore:start */
+@include utils.media('>=medium') {
+  ion-content {
+    --padding-start: #{utils.size('xxxl')};
+    --padding-end: #{utils.size('xxxl')};
+  }
+}
+
+:host(.collapsible-title) {
+  ion-content {
+    --padding-top: 0px;
+
+    ion-header ion-toolbar:first-of-type {
+      padding-top: 0;
+
+      --padding-top: 0px;
+      --padding-bottom: 0px;
+      --padding-start: 0px;
+      --padding-end: 0px;
+    }
+  }
+
+  ion-title {
+    font-size: utils.font-size('n');
+    font-weight: utils.font-weight('bold');
+  }
+}
+
+/* clean-css ignore:end */
