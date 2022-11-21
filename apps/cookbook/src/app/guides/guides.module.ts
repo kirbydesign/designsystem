@@ -7,6 +7,8 @@ import { KirbyModule } from '@kirbydesign/designsystem';
 import { ExamplesModule } from '../examples/examples.module';
 import { IphoneModule } from '../iphone/iphone.module';
 import { CodeViewerModule } from '../shared/code-viewer/code-viewer.module';
+import { ShowcaseModule } from '../showcase/showcase.module';
+import { ChartConfigGuideComponent } from './ chart-config-guide/chart-config-guide.component';
 
 import { GridLayoutExtendedComponent } from './grid-layout/grid-layout-extended/grid-layout-extended.component';
 import { GridLayoutMultipleContainersComponent } from './grid-layout/grid-layout-multiple-containers/grid-layout-multiple-containers.component';
@@ -21,6 +23,7 @@ const guidesComponents = [
   GridLayoutMultipleContainersComponent,
   GridLayoutExtendedComponent,
   VirtualScrollListComponent,
+  ChartConfigGuideComponent,
 ];
 
 @NgModule({
@@ -32,6 +35,7 @@ const guidesComponents = [
     IphoneModule,
     CodeViewerModule,
     ExamplesModule,
+    ShowcaseModule,
   ],
   declarations: [...guidesComponents],
   exports: [...guidesComponents],

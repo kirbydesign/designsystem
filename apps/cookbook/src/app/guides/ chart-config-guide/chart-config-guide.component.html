@@ -1,0 +1,92 @@
+<h2>Chart config</h2>
+<p>
+  The Kirby charts are based on a config strategy. The aim of this is to give the implementer full
+  control of the chart. Kirby simply provide some configurations which can be injected into a
+  <a href="https://www.chartjs.org/">ChartJS</a> chart.
+</p>
+
+<h3>Structure</h3>
+<p>
+  Each chart type (line, stock, bar, pie) are served through a Kirby chart config class which is
+  inherited from a base class
+  <code
+    ><a
+      href="https://github.com/kirbydesign/designsystem/blob/enhancement/2599-chart-configurations-for-stock-chart/libs/designsystem/src/lib/components/charts/chart-config/chart-base-config.ts"
+      >ChartBaseConfig</a
+    ></code
+  >:
+  <br />
+  <code>
+    <a
+      href="https://github.com/kirbydesign/designsystem/blob/enhancement/2599-chart-configurations-for-stock-chart/libs/designsystem/src/lib/components/charts/chart-config/chart-stock-config/chart-stock-config.ts"
+      >StockChartConfig</a
+    ></code
+  >
+  <br />
+  <code>
+    <a href="">BarChartConfig</a>
+  </code>
+</p>
+
+<h3>A basic implementation</h3>
+<p>In order to implement a Kirby chart, you'll need tree things;</p>
+<ul>
+  <li><a href="https://www.chartjs.org/">ChartJS</a></li>
+  <li>
+    A HTML <a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API">canvas</a> element
+  </li>
+  <li>Kirby chart config</li>
+</ul>
+
+<p>Below is a short guide on how to implement a simple stock chart</p>
+
+<p>In your component template, add a canvas to your html and give it an <code>id</code>:</p>
+
+<cookbook-code-viewer
+  [html]="guideChartHtml"
+  [language]="'html'"
+  [inlineLabel]="true"
+></cookbook-code-viewer>
+The canvas must be wrapped in an element with <code>position: relative</code>. The reason for this
+is explained
+<a href="https://www.chartjs.org/docs/latest/configuration/responsive.html#important-note">here</a>
+<br />
+<br />
+
+Add a chart and a StockChartConfig property.
+<cookbook-code-viewer
+  [inlineLabel]="true"
+  [ts]="guideChartTs[0]"
+  [language]="'ts'"
+></cookbook-code-viewer>
+Add some <code>ScatterPoint</code> test data.
+<cookbook-code-viewer
+  [inlineLabel]="true"
+  [ts]="guideChartTs[1]"
+  [language]="'ts'"
+></cookbook-code-viewer>
+
+In a function, perform the following steps
+<ul>
+  <li>Instantiate the config class and get the config</li>
+  <li>Set the data</li>
+  <li>
+    Create the <code>Chart</code> object with the same id as on your canvas element and the config
+  </li>
+</ul>
+<cookbook-code-viewer
+  [inlineLabel]="true"
+  [ts]="guideChartTs[2]"
+  [language]="'ts'"
+></cookbook-code-viewer>
+The <code>createChart</code> function must be called in the <code>ngOnInit</code> or
+<code>ngAfterViewIinit</code> hook.
+<br />
+
+<h3>Destruct the chart</h3>
+Make sure to destruct the chart object when the component is destroyed:
+<cookbook-code-viewer
+  [inlineLabel]="true"
+  [ts]="guideChartTs[3]"
+  [language]="'ts'"
+></cookbook-code-viewer>

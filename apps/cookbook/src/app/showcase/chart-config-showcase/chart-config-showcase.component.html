@@ -1,0 +1,42 @@
+<h2>Stock Chart build from configs</h2>
+
+<p>This page describes how to implement charts using Kirby standart configurations</p>
+<p>
+  The philisophy of the Kirby chart configs is to give the implementer full control over the chart,
+  while providing standart configs which makes it easier to create custom charts which complies with
+  the Kirby design.
+</p>
+
+<h2>Basic stock chart</h2>
+<p>
+  The idea behind Kirby chart config is to <em>only</em> provide configurations and not the canvas
+  itself. It is for the implementer to provide the canvas, because it gives the implementer
+  ownership.
+</p>
+<p>Below is a guide on how to implement a basic stock chart.</p>
+
+<p>
+  <kirby-card [hasPadding]="true">
+    <cookbook-example-viewer
+      [html]="stockConfigExample.template"
+      [ts]="stockConfigExample.codeSnippet"
+    >
+      <cookbook-chart-example-config-basic-stock
+        #stockConfigExample
+      ></cookbook-chart-example-config-basic-stock>
+    </cookbook-example-viewer>
+  </kirby-card>
+</p>
+
+<p>
+  <kirby-card [hasPadding]="true">
+    <cookbook-example-viewer
+      [html]="stockConfigExample.template"
+      [ts]="stockConfigExample.codeSnippet"
+    >
+      <cookbook-chart-example-config-stock
+        #stockConfigExample
+      ></cookbook-chart-example-config-stock>
+    </cookbook-example-viewer>
+  </kirby-card>
+</p>

@@ -10,13 +10,14 @@ import { ChartExampleAreaLineComponent } from './examples/chart-example-area-lin
 import { ChartExampleBarComponent } from './examples/chart-example-bar.component';
 import { ChartExampleColumnComponent } from './examples/chart-example-column-chart.component';
 import { ChartExampleColumnStackedComponent } from './examples/chart-example-column-stacked.component';
-import { ChartExampleConfigStockComponent } from './examples/chart-example-config-stock.component';
+import { ChartExampleConfigStockComponent } from './examples/stock-config/chart-example-config-stock.component';
 import { ChartExampleInteractionComponent } from './examples/chart-example-interaction.component';
 import { ChartExampleLineComponent } from './examples/chart-example-line.component';
 import { ChartExampleMultipleDatasetsComponent } from './examples/chart-example-multiple-datasets.component';
 import { ChartExampleSimpleColumnComponent } from './examples/chart-example-simple-column-chart.component';
 import { StockChartExampleComparisonComponent } from './examples/stock-chart-example-comparison.component';
 import { StockChartExampleComponent } from './examples/stock-chart-example.component';
+import { ChartExampleConfigBasicStockComponent } from './examples/stock-config/chart-example-config-basic-stock.component';
 
 const COMPONENT_DECLARATIONS = [
   ChartsExampleComponent,
@@ -33,6 +34,7 @@ const COMPONENT_DECLARATIONS = [
   StockChartExampleComparisonComponent,
   ChartExampleAreaLineComponent,
   ChartExampleConfigStockComponent,
+  ChartExampleConfigBasicStockComponent,
 ];
 
 @NgModule({
