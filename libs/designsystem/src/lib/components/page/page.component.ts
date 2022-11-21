@@ -206,8 +206,8 @@ export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChec
   private backButtonDelegate: IonBackButtonDelegate;
   @ViewChild('pageTitle', { static: false, read: ElementRef })
   private pageTitle: ElementRef;
-  @ViewChild('stickyContentContainerPreamble', { static: false, read: ElementRef })
-  private stickyContentContainerPreamble: ElementRef;
+  @ViewChild('stickyContentContainer', { static: false, read: ElementRef })
+  private stickyContentContainer: ElementRef;
 
   @ViewChild('simpleTitleTemplate', { static: true, read: TemplateRef })
   private simpleTitleTemplate: TemplateRef<any>;
@@ -230,7 +230,7 @@ export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChec
   hasPageSubtitle: boolean;
   toolbarTitleVisible: boolean;
   isContentScrolled: boolean;
-  isStickyContentSticking: boolean;
+  isStickyContentPinned: boolean;
 
   fitHeadingConfig: FitHeadingConfig;
 
@@ -244,8 +244,7 @@ export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChec
 
   private pageTitleIntersectionObserverRef: IntersectionObserver =
     this.pageTitleIntersectionObserver();
-  private stickyContentPreableIntersectionObserverRef =
-    this.stickyContentPreambleIntersectionObserver();
+  private stickyContentIntersectionObserverRef = this.stickyContentIntersectionObserver();
 
   private url: string;
   private isActive: boolean;
@@ -333,7 +332,7 @@ export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChec
     this.ngOnDestroy$.complete();
 
     this.pageTitleIntersectionObserverRef.disconnect();
-    this.stickyContentPreableIntersectionObserverRef.disconnect();
+    this.stickyContentIntersectionObserverRef.disconnect();
   }
 
   delegateRefreshEvent(event: any): void {
@@ -382,8 +381,8 @@ export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChec
     if (this.stickyContentTemplate) {
       // Sticky content present - start observing for stickiness
       setTimeout(() => {
-        this.stickyContentPreableIntersectionObserverRef.observe(
-          this.stickyContentContainerPreamble.nativeElement
+        this.stickyContentIntersectionObserverRef.observe(
+          this.stickyContentContainer.nativeElement
         );
       });
     }
@@ -455,12 +454,16 @@ export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChec
     return new IntersectionObserver(callback, options);
   }
 
-  private stickyContentPreambleIntersectionObserver() {
-    const callback = (entries) => {
-      // The sticky content preamble doesn't intersect when sticky content sticks
-      this.isStickyContentSticking = !entries[0].isIntersecting;
+  private stickyContentIntersectionObserver() {
+    const options: IntersectionObserverInit = {
+      threshold: 1,
     };
-    return new IntersectionObserver(callback);
+
+    const callback = (entries) => {
+      // The sticky content is pinned when it doesn't fully intersect the viewport
+      this.isStickyContentPinned = !entries[0].isIntersecting;
+    };
+    return new IntersectionObserver(callback, options);
   }
 
   @HostListener('window:keyboardWillShow', ['$event'])

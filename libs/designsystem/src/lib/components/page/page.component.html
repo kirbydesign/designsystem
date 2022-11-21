@@ -58,8 +58,11 @@
 
   <!--  Sticky content -->
   <ng-container *ngIf="stickyContentTemplate">
-    <span #stickyContentContainerPreamble></span>
-    <div class="sticky-content-container" [class.content-sticking]="isStickyContentSticking">
+    <div
+      #stickyContentContainer
+      class="sticky-content-container"
+      [class.content-pinned]="isStickyContentPinned"
+    >
       <div>
         <ng-container *ngTemplateOutlet="stickyContentTemplate"></ng-container>
       </div>
