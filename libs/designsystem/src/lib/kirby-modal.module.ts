@@ -14,10 +14,11 @@ const components = [
   ModalWrapperExperimentalComponent,
 ];
 
-const exports = [...components, ModalExperimentalController];
+const exports = [...components];
 @NgModule({
   declarations: components,
   imports: [CommonModule, IonicModule, IconModule, KirbyModule],
   exports: exports,
+  providers: [ModalExperimentalController],
 })
 export class KirbyModalModule {}
