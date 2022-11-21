@@ -7,8 +7,12 @@ import { KirbyModalModule, KirbyModule } from '@kirbydesign/designsystem';
 import { ExamplesSharedModule } from '../examples.shared.module';
 
 import { FullscreenModalExperimentalExampleComponent } from './fullscreen/fullscreen-experimental-example.component';
+import { ModalControllerExperimentalExampleComponent } from './controller/modal-controller-experimental-example.component';
 
-const COMPONENT_DECLARATIONS = [FullscreenModalExperimentalExampleComponent];
+const COMPONENT_DECLARATIONS = [
+  FullscreenModalExperimentalExampleComponent,
+  ModalControllerExperimentalExampleComponent,
+];
 
 @NgModule({
   imports: [CommonModule, RouterModule, KirbyModule, KirbyModalModule, ExamplesSharedModule],
