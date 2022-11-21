@@ -104,7 +104,7 @@
     </div>
 
     <!-- FOOTER SLOT -->
-    <kirby-modal-footer
+    <kirby-modal-footer-experimental
       *ngIf="showFooter"
       [type]="isInlineFooter ? 'inline' : 'fixed'"
       themeColor="white"
@@ -115,6 +115,6 @@
         <kirby-icon name="arrow-up"></kirby-icon>
       </button>
       <button kirby-button (click)="close()">Close</button>
-    </kirby-modal-footer>
+    </kirby-modal-footer-experimental>
   </kirby-fullscreen-modal-experimental>
 </div>

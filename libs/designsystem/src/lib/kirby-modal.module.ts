@@ -4,10 +4,14 @@ import { CommonModule } from '@angular/common';
 import { IconModule } from './components/icon/icon.module';
 import { KirbyModule } from './kirby.module';
 import { FullscreenModalExperimentalComponent } from './components/modal-experimental/fullscreen/fullscreen.component';
+import { ModalFooterExperimentalComponent } from './components/modal-experimental/footer/footer.component';
 
+const components = [FullscreenModalExperimentalComponent, ModalFooterExperimentalComponent];
+
+const exports = [...components];
 @NgModule({
-  declarations: [FullscreenModalExperimentalComponent],
+  declarations: components,
   imports: [CommonModule, IonicModule, IconModule, KirbyModule],
-  exports: [FullscreenModalExperimentalComponent],
+  exports: exports,
 })
 export class KirbyModalModule {}
