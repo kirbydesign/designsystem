@@ -1,9 +1,6 @@
 import { AfterViewInit, Component } from '@angular/core';
-import { Chart, Filler, ScatterDataPoint, Tooltip } from 'chart.js';
+import { Chart, ScatterDataPoint } from 'chart.js';
 import { StockChartConfig } from '@kirbydesign/designsystem';
-import ChartDataLabels from 'chartjs-plugin-datalabels';
-import annotationPlugin from 'chartjs-plugin-annotation';
-
 @Component({
   selector: 'cookbook-chart-example-config-stock',
   template: `<div style="position: relative; height: 300px;">
@@ -38,13 +35,7 @@ export class ChartExampleConfigStockComponent implements AfterViewInit {
 
     config = {
       ...config,
-      plugins: [
-        annotationPlugin,
-        Filler,
-        ChartDataLabels,
-        Tooltip,
-        // MarkerPlugin
-      ],
+      plugins: [this._stockChartConfig.getVerticalLinePluginConfig()],
       options: {
         ...config.options,
         plugins: {

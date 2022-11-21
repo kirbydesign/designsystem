@@ -1,4 +1,4 @@
-import { ChartConfiguration, ChartType } from 'chart.js';
+import { ChartConfiguration, ChartType, TooltipOptions } from 'chart.js';
 
 export abstract class ChartBaseConfig {
   public get config(): ChartConfiguration<ChartType> {
@@ -25,4 +25,5 @@ export abstract class ChartBaseConfig {
   }
 
   public abstract getBasicConfig(): ChartConfiguration<ChartType>;
+  public abstract getTooltipPlugin(): Partial<TooltipOptions<ChartType>>;
 }

@@ -1,7 +1,10 @@
-import { ChartConfiguration, ChartType } from 'chart.js';
+import { ChartConfiguration, ChartType, TooltipOptions } from 'chart.js';
 import { ChartBaseConfig } from './chart-base-config';
 
 class TestChartConfigurations extends ChartBaseConfig {
+  public getTooltipPlugin(): Partial<TooltipOptions<'line'>> {
+    throw new Error('Method not implemented.');
+  }
   public getBasicConfig() {
     return {
       type: this.config.type,
