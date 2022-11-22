@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { KirbyModalModule, KirbyModule } from '@kirbydesign/designsystem';
@@ -15,7 +16,14 @@ const COMPONENT_DECLARATIONS = [
 ];
 
 @NgModule({
-  imports: [CommonModule, RouterModule, KirbyModule, KirbyModalModule, ExamplesSharedModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    KirbyModule,
+    KirbyModalModule,
+    ExamplesSharedModule,
+    FormsModule,
+  ],
   declarations: COMPONENT_DECLARATIONS,
   exports: COMPONENT_DECLARATIONS,
 })

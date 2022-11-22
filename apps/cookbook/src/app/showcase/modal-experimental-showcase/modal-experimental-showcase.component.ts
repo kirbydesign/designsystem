@@ -9,10 +9,17 @@ import { ModalControllerExperimentalExampleComponent } from '../../examples/moda
 export class ModalExperimentalShowcaseComponent {
   constructor(private modalController: ModalExperimentalController) {}
 
-  openModal() {
-    this.modalController.showModal({
+  async openModal() {
+    const modal = await this.modalController.showModal({
       flavor: 'modal',
       component: ModalControllerExperimentalExampleComponent,
+      componentProps: {
+        title: 'Hi there',
+      },
     });
+
+    const { data, role } = await modal.onWillDismiss();
+
+    console.log('This is data and role', data, role);
   }
 }
