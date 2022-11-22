@@ -73,8 +73,16 @@ ion-toolbar {
   box-sizing: border-box;
   padding-inline: utils.size('xxxs');
 
-  &.content-scrolled {
-    border-bottom: 1px solid #{utils.get-color('semi-light')};
+  &.content-scrolled::before {
+    // Divider
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    z-index: 1;
+    background-color: utils.get-color('medium');
   }
 
   /*
@@ -247,7 +255,7 @@ ion-content {
   position: sticky;
 
   // Adjust for padding-top of ion-content to position static content properly
-  // and subtract 1px to let it intersect with viewport when pinned.
+  // and subtract 1px to let it not fully intersect with viewport when pinned.
   top: calc(-1 * $ion-content-padding-top - 1px);
   left: 0;
   right: 0;
@@ -258,19 +266,17 @@ ion-content {
     margin: 0 auto;
   }
 
-  &.content-pinned {
+  &.content-pinned::before {
     // Divider
-    &::before {
-      position: absolute;
+    content: '';
+    position: absolute;
 
-      // Adjust for padding of ion-content to stretch divider to full width.
-      left: calc(-1 * $ion-content-padding-start);
-      right: calc(-1 * $ion-content-padding-end);
-      bottom: 0;
-      content: '';
-      background-color: utils.get-color('medium');
-      height: 1px;
-      z-index: 1;
-    }
+    // Adjust for padding of ion-content to stretch divider to full width.
+    left: calc(-1 * $ion-content-padding-start);
+    right: calc(-1 * $ion-content-padding-end);
+    bottom: 0;
+    height: 1px;
+    z-index: 1;
+    background-color: utils.get-color('medium');
   }
 }
