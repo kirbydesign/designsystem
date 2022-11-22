@@ -1,0 +1,12 @@
+.components {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  &-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+}

@@ -5,6 +5,7 @@ import { ModalControllerExperimentalExampleComponent } from '../../examples/moda
 @Component({
   selector: 'cookbook-modal-experimental-showcase',
   templateUrl: './modal-experimental-showcase.component.html',
+  styleUrls: ['./modal-experimental-showcase.component.scss'],
 })
 export class ModalExperimentalShowcaseComponent {
   constructor(private modalController: ModalExperimentalController) {}
