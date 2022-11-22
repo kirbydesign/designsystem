@@ -1,10 +1,10 @@
 import { AfterViewInit, Component, OnDestroy } from '@angular/core';
-import { Chart } from 'chart.js';
 import { StockChartConfig } from '@kirbydesign/designsystem';
+import { Chart } from 'chart.js';
 import { ChartConfigExample } from './chart-config-example';
 
 const config = {
-  selector: 'cookbook-chart-example-config-stock',
+  selector: 'cookbook-chart-example-config-tooltip-stock',
   template: `<div style="position: relative; height: 300px;">
   <canvas id="{{ canvasId }}"></canvas>
 </div>`, // container must be positioned relative: https://www.chartjs.org/docs/latest/configuration/responsive.html#important-note
@@ -27,18 +27,16 @@ const config = {
 
     config = {
       ...config,
-      plugins: [this._stockChartConfig.getVerticalLinePluginConfig()],
+      plugins: [this._stockChartConfig.getVerticalLinePluginConfig()], // <-- Optional vertical line, plugin
       options: {
         ...config.options,
         plugins: {
-          tooltip: this._stockChartConfig.getTooltipPlugin(),
-          datalabels: this._stockChartConfig.getDataLabelsPluginConfig(),
+            tooltip: this._stockChartConfig.getTooltipPlugin(),
         },
       },
       data: {
         datasets: [
           {
-            borderColor: '#005c3c',
             data: this.demoData.map((demoDataEntry) => demoDataEntry),
           },
         ],
@@ -53,11 +51,11 @@ const config = {
   selector: config.selector,
   template: config.template,
 })
-export class ChartExampleConfigStockComponent implements AfterViewInit, OnDestroy {
+export class ChartExampleConfigTooltipStockComponent implements AfterViewInit, OnDestroy {
   public template: string = config.template;
   public codeSnippet: string = config.codeSnippet;
 
-  public canvasId = 'configStockCanvas';
+  public canvasId = 'configStockTooltipCanvas' + Math.random() * 1000; // nessesary as dublicate ids are causing the chart not to be loaded
 
   private _chart: Chart;
   private _stockChartConfig: StockChartConfig;
@@ -67,7 +65,7 @@ export class ChartExampleConfigStockComponent implements AfterViewInit, OnDestro
     this.createChart();
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this._chart.destroy();
   }
 
@@ -82,13 +80,11 @@ export class ChartExampleConfigStockComponent implements AfterViewInit, OnDestro
         ...config.options,
         plugins: {
           tooltip: this._stockChartConfig.getTooltipPlugin(),
-          datalabels: this._stockChartConfig.getDataLabelsPluginConfig(),
         },
       },
       data: {
         datasets: [
           {
-            borderColor: '#005c3c',
             data: this.demoData.map((demoDataEntry) => demoDataEntry),
           },
         ],

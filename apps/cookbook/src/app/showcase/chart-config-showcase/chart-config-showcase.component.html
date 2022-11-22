@@ -1,6 +1,10 @@
 <h2>Stock Chart build from configs</h2>
 
-<p>This page describes how to implement charts using Kirby standart configurations</p>
+<p>
+  This page describes how to implement charts using Kirby standart configurations If you would like
+  a guide on how to get started, go to <a routerLink="../../guides/chart-config">this guide</a>
+</p>
+
 <p>
   The philisophy of the Kirby chart configs is to give the implementer full control over the chart,
   while providing standart configs which makes it easier to create custom charts which complies with
@@ -18,24 +22,53 @@
 <p>
   <kirby-card [hasPadding]="true">
     <cookbook-example-viewer
-      [html]="stockConfigExample.template"
-      [ts]="stockConfigExample.codeSnippet"
+      [html]="basicStockConfigExample.template"
+      [ts]="basicStockConfigExample.codeSnippet"
     >
       <cookbook-chart-example-config-basic-stock
-        #stockConfigExample
+        #basicStockConfigExample
       ></cookbook-chart-example-config-basic-stock>
     </cookbook-example-viewer>
   </kirby-card>
 </p>
 
+<h3>Chart with min & max datalabels</h3>
 <p>
   <kirby-card [hasPadding]="true">
     <cookbook-example-viewer
-      [html]="stockConfigExample.template"
-      [ts]="stockConfigExample.codeSnippet"
+      [html]="stockDatalabelsExample.template"
+      [ts]="stockDatalabelsExample.codeSnippet"
+    >
+      <cookbook-chart-example-config-datalabels-stock
+        #stockDatalabelsExample
+      ></cookbook-chart-example-config-datalabels-stock>
+    </cookbook-example-viewer>
+  </kirby-card>
+</p>
+
+<h3>Chart with a tooltip</h3>
+<p>
+  <kirby-card [hasPadding]="true">
+    <cookbook-example-viewer
+      [html]="stockTooltipExample.template"
+      [ts]="stockTooltipExample.codeSnippet"
+    >
+      <cookbook-chart-example-config-tooltip-stock
+        #stockTooltipExample
+      ></cookbook-chart-example-config-tooltip-stock>
+    </cookbook-example-viewer>
+  </kirby-card>
+</p>
+
+<h3>A chart with all features available</h3>
+<p>
+  <kirby-card [hasPadding]="true">
+    <cookbook-example-viewer
+      [html]="stockAllFeaturesConfigExample.template"
+      [ts]="stockAllFeaturesConfigExample.codeSnippet"
     >
       <cookbook-chart-example-config-stock
-        #stockConfigExample
+        #stockAllFeaturesConfigExample
       ></cookbook-chart-example-config-stock>
     </cookbook-example-viewer>
   </kirby-card>

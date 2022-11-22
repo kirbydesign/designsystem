@@ -3,6 +3,10 @@
   The Kirby charts are based on a config strategy. The aim of this is to give the implementer full
   control of the chart. Kirby simply provide some configurations which can be injected into a
   <a href="https://www.chartjs.org/">ChartJS</a> chart.
+  <br />
+  <br />
+  To see more examples on how to implement charts, go to
+  <a routerLink="../../showcase/chart-config">examples</a>.
 </p>
 
 <h3>Structure</h3>
@@ -28,7 +32,14 @@
   </code>
 </p>
 
+<p>This is what we are aiminig to implement</p>
+<kirby-card [hasPadding]="true">
+  <cookbook-chart-example-config-basic-stock></cookbook-chart-example-config-basic-stock>
+</kirby-card>
+<br />
+
 <h3>A basic implementation</h3>
+
 <p>In order to implement a Kirby chart, you'll need tree things;</p>
 <ul>
   <li><a href="https://www.chartjs.org/">ChartJS</a></li>

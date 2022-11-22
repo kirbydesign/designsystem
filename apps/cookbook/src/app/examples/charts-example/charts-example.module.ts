@@ -18,6 +18,8 @@ import { ChartExampleSimpleColumnComponent } from './examples/chart-example-simp
 import { StockChartExampleComparisonComponent } from './examples/stock-chart-example-comparison.component';
 import { StockChartExampleComponent } from './examples/stock-chart-example.component';
 import { ChartExampleConfigBasicStockComponent } from './examples/stock-config/chart-example-config-basic-stock.component';
+import { ChartExampleConfigDatalabelsStockComponent } from './examples/stock-config/chart-example-config-datalabels-stock.component';
+import { ChartExampleConfigTooltipStockComponent } from './examples/stock-config/chart-example-config-tooltip-stock.component';
 
 const COMPONENT_DECLARATIONS = [
   ChartsExampleComponent,
@@ -35,6 +37,8 @@ const COMPONENT_DECLARATIONS = [
   ChartExampleAreaLineComponent,
   ChartExampleConfigStockComponent,
   ChartExampleConfigBasicStockComponent,
+  ChartExampleConfigDatalabelsStockComponent,
+  ChartExampleConfigTooltipStockComponent,
 ];
 
 @NgModule({
