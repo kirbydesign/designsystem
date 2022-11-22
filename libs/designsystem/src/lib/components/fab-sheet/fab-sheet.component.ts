@@ -32,11 +32,6 @@ export class FabSheetComponent implements AfterContentInit {
     return this._isFabSheetOpen;
   }
 
-  private _isBackdropVisible: boolean = false;
-  get isBackdropVisible() {
-    return this._isBackdropVisible;
-  }
-
   @ContentChild(ActionSheetComponent, { static: false }) actionSheet: ActionSheetComponent;
 
   @ViewChild(IonFabButton, { static: true, read: ElementRef })
@@ -48,7 +43,7 @@ export class FabSheetComponent implements AfterContentInit {
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
     private renderer: Renderer2,
-    @Inject(DOCUMENT) private document: any
+    @Inject(DOCUMENT) private document: Document
   ) {}
 
   ngAfterContentInit(): void {
@@ -77,11 +72,12 @@ export class FabSheetComponent implements AfterContentInit {
     this._isFabSheetOpen = isOpen;
     if (this.isFabSheetOpen) {
       this.renderer.addClass(this.document.body, 'fab-sheet-active');
+      this.renderer.addClass(this.document.body, 'backdrop-no-scroll');
     } else {
       this.renderer.removeClass(this.document.body, 'fab-sheet-active');
+      this.renderer.removeClass(this.document.body, 'backdrop-no-scroll');
     }
 
-    this._isBackdropVisible = !!this.actionSheet && isOpen;
     this.changeDetectorRef.detectChanges();
   }
 }

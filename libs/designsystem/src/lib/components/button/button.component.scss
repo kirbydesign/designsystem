@@ -31,6 +31,14 @@ $button-width: (
     min-width: unset;
   }
 
+  &.icon-left {
+    --kirby-button-padding-left: #{utils.size('xs')};
+  }
+
+  &.icon-right {
+    --kirby-button-padding-right: #{utils.size('xs')};
+  }
+
   &.icon-left,
   &.icon-right {
     --kirby-icon-font-size: #{utils.size('s')};
