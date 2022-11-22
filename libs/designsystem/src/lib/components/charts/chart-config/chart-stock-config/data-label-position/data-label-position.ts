@@ -29,29 +29,27 @@ export const getDataLabelPosition = (data: ScatterDataPoint[], dataIndex: number
   return null;
 };
 
-export const getDataLabelsPluginConfig = (): Partial<Options> => {
-  return {
-    backgroundColor: '#005c3c',
-    color: getThemeColorHexString('white'),
-    borderRadius: 3,
-    font: {
-      lineHeight: 1,
-      size: parseInt(fontSize('xs')),
-    },
-    padding: {
-      top: 6,
-      left: 5,
-      right: 5,
-      bottom: 5,
-    },
-    offset: 5,
-    align: (context: Context): Align =>
-      getDataLabelPosition(context.dataset.data as ScatterDataPoint[], context.dataIndex),
-    display: (context: Context): boolean => {
-      return showDataLabel(context);
-    },
-    formatter: (dataPoint: ScatterDataPoint): string => dataPoint.y.toString(),
-  };
+export const dataLabelsPluginConfig: Partial<Options> = {
+  backgroundColor: '#005c3c',
+  color: getThemeColorHexString('white'),
+  borderRadius: 3,
+  font: {
+    lineHeight: 1,
+    size: parseInt(fontSize('xs')),
+  },
+  padding: {
+    top: 6,
+    left: 5,
+    right: 5,
+    bottom: 5,
+  },
+  offset: 5,
+  align: (context: Context): Align =>
+    getDataLabelPosition(context.dataset.data as ScatterDataPoint[], context.dataIndex),
+  display: (context: Context): boolean => {
+    return showDataLabel(context);
+  },
+  formatter: (dataPoint: ScatterDataPoint): string => dataPoint.y.toString(),
 };
 
 function showDataLabel(context: Context) {

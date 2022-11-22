@@ -10,7 +10,6 @@ const config = {
 </div>`, // container must be positioned relative: https://www.chartjs.org/docs/latest/configuration/responsive.html#important-note
   codeSnippet: `
   private _chart: Chart;
-  private _stockChartConfig: StockChartConfig;
   private demoData = ChartConfigExample.demoData;
 
   public ngAfterViewInit(): void {
@@ -22,17 +21,16 @@ const config = {
   }
 
   private createChart() {
-    this._stockChartConfig = new StockChartConfig();
-    let config = this._stockChartConfig.getBasicConfig();
+    let config = StockChartConfig.basicConfig;
 
     config = {
       ...config,
-      plugins: [this._stockChartConfig.getVerticalLinePluginConfig()],
+      plugins: [StockChartConfig.verticalLinePluginConfig],
       options: {
         ...config.options,
         plugins: {
-          tooltip: this._stockChartConfig.getTooltipPlugin(),
-          datalabels: this._stockChartConfig.getDataLabelsPluginConfig(),
+          tooltip: StockChartConfig.tooltipPlugin,
+          datalabels: StockChartConfig.dataLabelsPluginConfig,
         },
       },
       data: {
@@ -60,7 +58,6 @@ export class ChartExampleConfigStockComponent implements AfterViewInit, OnDestro
   public canvasId = 'configStockCanvas';
 
   private _chart: Chart;
-  private _stockChartConfig: StockChartConfig;
   private demoData = ChartConfigExample.demoData;
 
   public ngAfterViewInit(): void {
@@ -72,17 +69,16 @@ export class ChartExampleConfigStockComponent implements AfterViewInit, OnDestro
   }
 
   private createChart() {
-    this._stockChartConfig = new StockChartConfig();
-    let config = this._stockChartConfig.getBasicConfig();
+    let config = StockChartConfig.basicConfig;
 
     config = {
       ...config,
-      plugins: [this._stockChartConfig.getVerticalLinePluginConfig()],
+      plugins: [StockChartConfig.verticalLinePluginConfig],
       options: {
         ...config.options,
         plugins: {
-          tooltip: this._stockChartConfig.getTooltipPlugin(),
-          datalabels: this._stockChartConfig.getDataLabelsPluginConfig(),
+          tooltip: StockChartConfig.tooltipPlugin,
+          datalabels: StockChartConfig.dataLabelsPluginConfig,
         },
       },
       data: {

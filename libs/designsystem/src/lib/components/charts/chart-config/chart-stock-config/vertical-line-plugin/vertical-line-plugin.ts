@@ -2,7 +2,7 @@ import { VerticalLinePlugin } from './vertical-line-plugin.model';
 
 const verticalLineId = 'verticalLine';
 
-export const getVerticalLinePluginConfig = (): VerticalLinePlugin => ({
+export const getVerticalLinePluginConfig: VerticalLinePlugin = {
   id: verticalLineId,
   drawTime: 'beforeDraw',
   defaults: {
@@ -40,4 +40,4 @@ export const getVerticalLinePluginConfig = (): VerticalLinePlugin => ({
 
     ctx.restore();
   },
-});
+};

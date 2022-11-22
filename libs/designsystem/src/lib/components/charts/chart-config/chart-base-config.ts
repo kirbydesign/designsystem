@@ -24,6 +24,6 @@ export abstract class ChartBaseConfig {
     };
   }
 
-  public abstract getBasicConfig(): ChartConfiguration<ChartType>;
-  public abstract getTooltipPlugin(): Partial<TooltipOptions<ChartType>>;
+  public static basicConfig: ChartConfiguration<ChartType>;
+  public static tooltipPlugin: Partial<TooltipOptions<'line'>>;
 }

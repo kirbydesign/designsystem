@@ -10,28 +10,26 @@ const config = {
 </div>`, // container must be positioned relative: https://www.chartjs.org/docs/latest/configuration/responsive.html#important-note
   codeSnippet: `
   private _chart: Chart;
-  private _stockChartConfig: StockChartConfig;
   private demoData = ChartConfigExample.demoData;
 
   public ngAfterViewInit(): void {
     this.createChart();
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this._chart.destroy();
   }
 
   private createChart() {
-    this._stockChartConfig = new StockChartConfig();
-    let config = this._stockChartConfig.getBasicConfig();
+    let config = StockChartConfig.basicConfig;
 
     config = {
       ...config,
-      plugins: [this._stockChartConfig.getVerticalLinePluginConfig()], // <-- Optional vertical line, plugin
+      plugins: [StockChartConfig.verticalLinePluginConfig],
       options: {
         ...config.options,
         plugins: {
-            tooltip: this._stockChartConfig.getTooltipPlugin(),
+          tooltip: StockChartConfig.tooltipPlugin,
         },
       },
       data: {
@@ -58,7 +56,6 @@ export class ChartExampleConfigTooltipStockComponent implements AfterViewInit, O
   public canvasId = 'configStockTooltipCanvas' + Math.random() * 1000; // nessesary as dublicate ids are causing the chart not to be loaded
 
   private _chart: Chart;
-  private _stockChartConfig: StockChartConfig;
   private demoData = ChartConfigExample.demoData;
 
   public ngAfterViewInit(): void {
@@ -70,16 +67,15 @@ export class ChartExampleConfigTooltipStockComponent implements AfterViewInit, O
   }
 
   private createChart() {
-    this._stockChartConfig = new StockChartConfig();
-    let config = this._stockChartConfig.getBasicConfig();
+    let config = StockChartConfig.basicConfig;
 
     config = {
       ...config,
-      plugins: [this._stockChartConfig.getVerticalLinePluginConfig()],
+      plugins: [StockChartConfig.verticalLinePluginConfig],
       options: {
         ...config.options,
         plugins: {
-          tooltip: this._stockChartConfig.getTooltipPlugin(),
+          tooltip: StockChartConfig.tooltipPlugin,
         },
       },
       data: {

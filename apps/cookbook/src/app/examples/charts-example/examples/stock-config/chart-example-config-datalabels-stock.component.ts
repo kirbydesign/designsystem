@@ -10,27 +10,25 @@ const config = {
 </div>`, // container must be positioned relative: https://www.chartjs.org/docs/latest/configuration/responsive.html#important-note
   codeSnippet: `
   private _chart: Chart;
-  private _stockChartConfig: StockChartConfig;
   private demoData = ChartConfigExample.demoData;
 
   public ngAfterViewInit(): void {
     this.createChart();
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this._chart.destroy();
   }
 
   private createChart() {
-    this._stockChartConfig = new StockChartConfig();
-    let config = this._stockChartConfig.getBasicConfig();
+    let config = StockChartConfig.basicConfig;
 
     config = {
       ...config,
       options: {
         ...config.options,
         plugins: {
-          datalabels: this._stockChartConfig.getDataLabelsPluginConfig(),
+          datalabels: StockChartConfig.dataLabelsPluginConfig,
         },
       },
       data: {
@@ -57,7 +55,6 @@ export class ChartExampleConfigDatalabelsStockComponent implements AfterViewInit
   public canvasId = 'configStockDatalabelsCanvas' + Math.random() * 1000; // nessesary as dublicate ids are causing the chart not to be loaded
 
   private _chart: Chart;
-  private _stockChartConfig: StockChartConfig;
   private demoData = ChartConfigExample.demoData;
 
   public ngAfterViewInit(): void {
@@ -69,15 +66,14 @@ export class ChartExampleConfigDatalabelsStockComponent implements AfterViewInit
   }
 
   private createChart() {
-    this._stockChartConfig = new StockChartConfig();
-    let config = this._stockChartConfig.getBasicConfig();
+    let config = StockChartConfig.basicConfig;
 
     config = {
       ...config,
       options: {
         ...config.options,
         plugins: {
-          datalabels: this._stockChartConfig.getDataLabelsPluginConfig(),
+          datalabels: StockChartConfig.dataLabelsPluginConfig,
         },
       },
       data: {
