@@ -1,6 +1,6 @@
 {
   "name": "designsystem",
-  "version": "7.2.1",
+  "version": "7.3.0",
   "description": "Kirby Design Angular Components. This library provides Angular wrappers for the @kirbydesign/core package, for smoother integration into Angular projects.",
   "engines": {
     "node": ">=16.0.0",
@@ -37,7 +37,7 @@
     "test:libs": "npm run test:core:single && npm run test:headless-browser:single",
     "ci-test": "npm run test:ci",
     "test:ci": "npm run test:core:single && ng test designsystem --progress false --watch false --code-coverage",
-    "lint": "npm run lint:cookbook && npm run lint:designsystem",
+    "lint": "npm run lint:cookbook && npm run lint:designsystem && npm run lint:flows",
     "lint:cookbook": "npm run lint:cookbook:ts && npm run lint:cookbook:css",
     "lint:cookbook:ts": "eslint './apps/cookbook/src/**/*.ts'",
     "lint:cookbook:ts:fix": "npm run lint:cookbook:ts -- --fix",
@@ -48,6 +48,11 @@
     "lint:designsystem:ts:fix": "npm run lint:designsystem:ts -- --fix",
     "lint:designsystem:css": "stylelint './libs/designsystem/src/**/*.scss'",
     "lint:designsystem:css:fix": "npm run lint:designsystem:css -- --fix",
+    "lint:flows": "npm run lint:flows:ts && npm run lint:cookbook:css",
+    "lint:flows:ts": "eslint './apps/flows/src/**/*.ts'",
+    "lint:flows:ts:fix": "npm run lint:flows:ts -- --fix",
+    "lint:flows:css": "stylelint './apps/flows/src/**/*.scss'",
+    "lint:flows:css:fix": "npm run lint:flows:css -- --fix",
     "prettier": "prettier --check \"./{libs,apps}/**/*.{ts,json,md,scss,html}\"",
     "prettier:fix": "prettier --write \"./{libs,apps}/**/*.{ts,json,md,scss,html}\"",
     "dist": "npm run dist:cookbook",
