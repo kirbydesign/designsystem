@@ -67,13 +67,13 @@ is explained
 Add a chart and a StockChartConfig property.
 <cookbook-code-viewer
   [inlineLabel]="true"
-  [ts]="guideChartTs[0]"
+  [ts]="chartProperties"
   [language]="'ts'"
 ></cookbook-code-viewer>
 Add some <code>ScatterPoint</code> test data.
 <cookbook-code-viewer
   [inlineLabel]="true"
-  [ts]="guideChartTs[1]"
+  [ts]="demoDataExample"
   [language]="'ts'"
 ></cookbook-code-viewer>
 
@@ -87,7 +87,7 @@ In a function, perform the following steps
 </ul>
 <cookbook-code-viewer
   [inlineLabel]="true"
-  [ts]="guideChartTs[2]"
+  [ts]="createChartFunctionExample"
   [language]="'ts'"
 ></cookbook-code-viewer>
 The <code>createChart</code> function must be called in the <code>ngOnInit</code> or
@@ -98,6 +98,6 @@ The <code>createChart</code> function must be called in the <code>ngOnInit</code
 Make sure to destruct the chart object when the component is destroyed:
 <cookbook-code-viewer
   [inlineLabel]="true"
-  [ts]="guideChartTs[3]"
+  [ts]="destroyExample"
   [language]="'ts'"
 ></cookbook-code-viewer>

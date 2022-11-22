@@ -11,14 +11,21 @@
   the Kirby design.
 </p>
 
-<h2>Basic stock chart</h2>
 <p>
   The idea behind Kirby chart config is to <em>only</em> provide configurations and not the canvas
   itself. It is for the implementer to provide the canvas, because it gives the implementer
   ownership.
 </p>
-<p>Below is a guide on how to implement a basic stock chart.</p>
+<p>
+  Below is a guide on how to implenent different variations of the stock chart. Please note that the
+  <code>demoData</code> used for these examples is this:
+</p>
 
+<p>
+  <cookbook-code-viewer [inlineLabel]="true" [ts]="data" [language]="'ts'"></cookbook-code-viewer>
+</p>
+
+<h3>Basic stock chart</h3>
 <p>
   <kirby-card [hasPadding]="true">
     <cookbook-example-viewer

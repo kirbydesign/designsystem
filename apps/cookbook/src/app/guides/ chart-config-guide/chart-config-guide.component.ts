@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ChartConfigExample } from '~/app/examples/charts-example/examples/stock-config/chart-config-example';
 
 @Component({
   selector: 'cookbook-chart-config-guide',
@@ -8,21 +9,10 @@ export class ChartConfigGuideComponent {
   public guideChartHtml = `<div style="position: relative; height: 300px;">
   <canvas id="{{ canvasId }}"></canvas>
 </div>`;
-  public guideChartTs = [
-    `
-private _chart: Chart;
-private _stockChartConfig: StockChartConfig;
-    `,
-    `
-private demoData: ScatterDataPoint[] = [
-    { x: 1, y: 127.15 },
-    { x: 2, y: 127.15 },
-    { x: 3, y: 127.08 },
-    { x: 4, y: 127.08 },
-    { x: 4, y: 126.93 },
-    { x: 5, y: 127.25 }
-  ];`,
-    `
+  public demoDataExample = `private ${ChartConfigExample.demoDataString}`;
+  public chartProperties = `private _chart: Chart;
+private _stockChartConfig: StockChartConfig;`;
+  public createChartFunctionExample = `
 private createChart() {
   this._stockChartConfig = new StockChartConfig();
   let config = this._stockChartConfig.getBasicConfig();
@@ -41,11 +31,9 @@ private createChart() {
   };
 
   this._chart = new Chart('myId', config);
-}
-`,
-    `
-ngOnDestroy(): void {
+}`;
+
+  public destroyExample = `ngOnDestroy(): void {
   this._chart.destroy();
-}`,
-  ];
+}`;
 }
