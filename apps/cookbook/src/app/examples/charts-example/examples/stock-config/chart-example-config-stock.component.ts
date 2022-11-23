@@ -10,7 +10,6 @@ const config = {
 </div>`, // container must be positioned relative: https://www.chartjs.org/docs/latest/configuration/responsive.html#important-note
   codeSnippet: `
   private _chart: Chart;
-  private demoData = ChartConfigExample.demoData;
 
   public ngAfterViewInit(): void {
     this.createChart();
@@ -84,7 +83,6 @@ export class ChartExampleConfigStockComponent implements AfterViewInit, OnDestro
       data: {
         datasets: [
           {
-            borderColor: '#005c3c',
             data: this.demoData.map((demoDataEntry) => demoDataEntry),
           },
         ],

@@ -27,9 +27,7 @@
     ></code
   >
   <br />
-  <code>
-    <a href="">BarChartConfig</a>
-  </code>
+  <code> <a href="">BarChartConfig</a> // Not yet implemented </code>
 </p>
 
 <p>This is what we are aiminig to implement</p>
@@ -40,7 +38,7 @@
 
 <h3>A basic implementation</h3>
 
-<p>In order to implement a Kirby chart, you'll need tree things;</p>
+<p>In order to implement a Kirby chart, you'll need three things:</p>
 <ul>
   <li><a href="https://www.chartjs.org/">ChartJS</a></li>
   <li>
@@ -49,8 +47,6 @@
   <li>Kirby chart config</li>
 </ul>
 
-<p>Below is a short guide on how to implement a simple stock chart</p>
-
 <p>In your component template, add a canvas to your html and give it an <code>id</code>:</p>
 
 <cookbook-code-viewer
@@ -58,19 +54,21 @@
   [language]="'html'"
   [inlineLabel]="true"
 ></cookbook-code-viewer>
-The canvas must be wrapped in an element with <code>position: relative</code>. The reason for this
-is explained
+The canvas must be wrapped in an element with <code>position: relative</code> in order to be
+responsive. A thorough explanation can be found
 <a href="https://www.chartjs.org/docs/latest/configuration/responsive.html#important-note">here</a>
 <br />
 <br />
 
-Add a chart and a StockChartConfig property.
+<p>
+  Add a property of type <code>ChartJS</code>. This will be used later for destroying the object.
+</p>
 <cookbook-code-viewer
   [inlineLabel]="true"
   [ts]="chartProperties"
   [language]="'ts'"
 ></cookbook-code-viewer>
-Add some <code>ScatterPoint</code> test data.
+Add some test data of type <code>ScatterPoint[]</code>.
 <cookbook-code-viewer
   [inlineLabel]="true"
   [ts]="demoDataExample"
@@ -79,7 +77,7 @@ Add some <code>ScatterPoint</code> test data.
 
 In a function, perform the following steps
 <ul>
-  <li>Instantiate the config class and get the config</li>
+  <li>Get the basic config from the <code>StockChartConfig</code></li>
   <li>Set the data</li>
   <li>
     Create the <code>Chart</code> object with the same id as on your canvas element and the config
@@ -90,12 +88,28 @@ In a function, perform the following steps
   [ts]="createChartFunctionExample"
   [language]="'ts'"
 ></cookbook-code-viewer>
-The <code>createChart</code> function must be called in the <code>ngOnInit</code> or
-<code>ngAfterViewIinit</code> hook.
+The <code>createChart</code> function must be called in the
+<code>
+  <a href="https://angular.io/api/core/OnInit">ngOnInit</a>
+</code>
+or
+<code>
+  <a href="https://angular.io/api/core/AfterViewInit"> ngAfterViewIinit</a>
+</code>
+hook.
+<cookbook-code-viewer
+  [inlineLabel]="true"
+  [ts]="inintExample"
+  [language]="'ts'"
+></cookbook-code-viewer>
 <br />
 
 <h3>Destruct the chart</h3>
-Make sure to destruct the chart object when the component is destroyed:
+Make sure to destruct the chart object when the component is destroyed in the
+<code>
+  <a href="https://angular.io/api/core/OnDestroy">ngOnDestroy</a>
+</code>
+hook:
 <cookbook-code-viewer
   [inlineLabel]="true"
   [ts]="destroyExample"

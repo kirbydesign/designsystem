@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ChartConfigExample } from '~/app/examples/charts-example/examples/stock-config/chart-config-example';
+import { ChartConfigExample } from '../../examples/charts-example/examples/stock-config/chart-config-example';
 
 @Component({
   selector: 'cookbook-chart-config-guide',
@@ -13,25 +13,33 @@ export class ChartConfigGuideComponent {
   public chartProperties = `private _chart: Chart;
 private _stockChartConfig: StockChartConfig;`;
   public createChartFunctionExample = `
-private createChart() {
-  this._stockChartConfig = new StockChartConfig();
-  let config = this._stockChartConfig.getBasicConfig();
+  private _chart: Chart;
 
-  config = {
-    ...config, <-- Remember to spread the existing config. If you don´t, the existing configurations will be lost
-    data: {
-      datasets: [
-        {
-          borderColor: '#005c3c',
-          data: this.demoData.map((demoDataEntry) => demoDataEntry),
-        },
-      ],
-      labels: this.demoData.map((demoDataEntry) => demoDataEntry.x),
-    },
-  };
+  public ngOnDestroy(): void {
+    this._chart.destroy();
+  }
 
-  this._chart = new Chart('myId', config);
-}`;
+  private createChart() {
+    let config = StockChartConfig.basicConfig;
+
+    config = {
+      ...config,
+      data: {
+        datasets: [
+          {
+            data: this.demoData.map((demoDataEntry) => demoDataEntry),
+          },
+        ],
+        labels: this.demoData.map((demoDataEntry) => demoDataEntry.x),
+      },
+    };
+    this._chart = new Chart(this.canvasId, config);
+  }`;
+
+  public inintExample = `  
+  public ngAfterViewInit(): void {
+    this.createChart();
+  }`;
 
   public destroyExample = `ngOnDestroy(): void {
   this._chart.destroy();

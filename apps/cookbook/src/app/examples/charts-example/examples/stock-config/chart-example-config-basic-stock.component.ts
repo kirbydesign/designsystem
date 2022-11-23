@@ -10,7 +10,6 @@ const config = {
 </div>`, // container must be positioned relative: https://www.chartjs.org/docs/latest/configuration/responsive.html#important-note
   codeSnippet: `
   private _chart: Chart;
-  private demoData = ChartConfigExample.demoData;
 
   public ngAfterViewInit(): void {
     this.createChart();
