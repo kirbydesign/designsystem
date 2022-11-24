@@ -25,8 +25,7 @@ export class ModalExperimentalController {
     return this.ionModal;
   }
 
-  public async closeModal(data?: any) {
-    // Should we let the developers provide the role as an argument?
-    return this.ionModal.dismiss(data, 'cancel');
+  public async closeModal(role: string, data?: any) {
+    return this.ionModal.dismiss(data, role);
   }
 }

@@ -10,6 +10,8 @@ export class ModalControllerExperimentalExampleComponent {
   @Input() title = '';
 
   async close() {
-    this.modalController.closeModal();
+    this.modalController.closeModal('cancel', {
+      title: this.title,
+    });
   }
 }
