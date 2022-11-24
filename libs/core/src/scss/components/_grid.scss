@@ -1,0 +1,91 @@
+@use 'sass:map';
+
+/* stylelint-disable custom-property-pattern */
+$breakpoint-map: (
+  'xs': 0,
+  'sm': 576px,
+  'md': 768px,
+  'lg': 992px,
+  'xl': 1200px,
+);
+
+.kirby-grid {
+  --kirby-grid-columns: 12;
+  --kirby-grid-columnSpacing: 16px;
+  --kirby-grid-rowSpacing: 16px;
+
+  min-width: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: row wrap;
+  margin: calc(var(--kirby-grid-rowSpacing) / -2) calc(var(--kirby-grid-columnSpacing) / -2);
+
+  &[spacing='1'] {
+    --kirby-grid-columnSpacing: 8px;
+    --kirby-grid-rowSpacing: 8px;
+  }
+
+  &[spacing='2'] {
+    --kirby-grid-columnSpacing: 16px;
+    --kirby-grid-rowSpacing: 16px;
+  }
+
+  &[spacing='3'] {
+    --kirby-grid-columnSpacing: 24px;
+    --kirby-grid-rowSpacing: 24px;
+  }
+
+  &[spacing='4'] {
+    --kirby-grid-columnSpacing: 32px;
+    --kirby-grid-rowSpacing: 32px;
+  }
+
+  &[spacing='5'] {
+    --kirby-grid-columnSpacing: 40px;
+    --kirby-grid-rowSpacing: 40px;
+  }
+}
+
+@mixin column-style($breakpoint, $size) {
+  &[#{$breakpoint}='#{$size}'] {
+    width: calc(100% * #{$size} / var(--kirby-grid-columns));
+    flex-grow: 0;
+    flex-basis: auto;
+  }
+}
+
+@mixin breakpoint-style($breakpoint) {
+  @media (min-width: map.get($breakpoint-map, $breakpoint)) {
+    @include column-style($breakpoint, 1);
+    @include column-style($breakpoint, 2);
+    @include column-style($breakpoint, 3);
+    @include column-style($breakpoint, 4);
+    @include column-style($breakpoint, 5);
+    @include column-style($breakpoint, 6);
+    @include column-style($breakpoint, 7);
+    @include column-style($breakpoint, 8);
+    @include column-style($breakpoint, 9);
+    @include column-style($breakpoint, 10);
+    @include column-style($breakpoint, 11);
+    @include column-style($breakpoint, 12);
+  }
+}
+
+.kirby-grid-item {
+  flex-grow: 1;
+  flex-basis: 0;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box !important;
+  padding: calc(var(--kirby-grid-rowSpacing) / 2) calc(var(--kirby-grid-columnSpacing) / 2);
+
+  @include breakpoint-style('xs');
+
+  @include breakpoint-style('sm');
+
+  @include breakpoint-style('md');
+
+  @include breakpoint-style('lg');
+
+  @include breakpoint-style('xl');
+}

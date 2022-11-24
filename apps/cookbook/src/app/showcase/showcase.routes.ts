@@ -140,9 +140,6 @@ export const routes: Routes = [
       {
         path: 'grid',
         component: GridShowcaseComponent,
-        data: {
-          hide: true,
-        },
       },
       {
         path: 'chart',
