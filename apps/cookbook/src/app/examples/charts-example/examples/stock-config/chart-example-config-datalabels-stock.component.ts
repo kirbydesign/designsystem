@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { StockChartConfig } from '@kirbydesign/designsystem';
 import { Chart } from 'chart.js';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { ChartConfigExample } from './chart-config-example';
 
 const config = {
@@ -57,6 +58,7 @@ export class ChartExampleConfigDatalabelsStockComponent implements AfterViewInit
   private demoData = ChartConfigExample.demoData;
 
   public ngAfterViewInit(): void {
+    StockChartConfig.registerPlugins();
     this.createChart();
   }
 
@@ -69,6 +71,7 @@ export class ChartExampleConfigDatalabelsStockComponent implements AfterViewInit
 
     config = {
       ...config,
+      plugins: [ChartDataLabels],
       options: {
         ...config.options,
         plugins: {

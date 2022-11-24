@@ -1,17 +1,28 @@
 import {
-  BubbleDataPoint,
+  BarController,
+  BarElement,
+  CategoryScale,
+  Chart,
   ChartConfiguration,
   ChartType,
   ChartTypeRegistry,
-  ScatterDataPoint,
+  Filler,
+  LinearScale,
+  LineController,
+  LineElement,
+  PointElement,
+  TimeScale,
+  Tooltip,
   TooltipCallbacks,
   TooltipItem,
   TooltipLabelStyle,
   TooltipOptions,
 } from 'chart.js';
+import annotationPlugin from 'chartjs-plugin-annotation';
 import { ColorHelper, DesignTokenHelper } from '../../../../helpers';
 import { ChartLocale } from '../../shared';
 import { ChartBaseConfig } from '../chart-base-config';
+
 import {
   dataLabelsPluginConfig,
   getDataLabelPosition,
@@ -24,8 +35,32 @@ const { fontSize } = DesignTokenHelper;
 export class StockChartConfig extends ChartBaseConfig {
   private static STOCK_CHART_LOCALE_DEFAULT: ChartLocale = 'en-US';
 
+  private static scales = [CategoryScale, LinearScale, TimeScale];
+  private static elements = [BarElement, LineElement, PointElement];
+  private static controllers = [BarController, LineController];
+  private static plugins = [annotationPlugin, Filler, Tooltip];
+  private static registeredElements = [
+    ...this.scales,
+    ...this.controllers,
+    ...this.elements,
+    ...this.plugins,
+  ];
+
+  private static pluginsRegistered = false;
+
   constructor() {
     super('line');
+  }
+
+  public static registerPlugins() {
+    if (StockChartConfig.pluginsRegistered) {
+      return;
+    }
+
+    this.registeredElements.forEach((scale) => {
+      Chart.register(scale);
+    });
+    StockChartConfig.pluginsRegistered = true;
   }
 
   public static basicConfig: ChartConfiguration<ChartType> = {

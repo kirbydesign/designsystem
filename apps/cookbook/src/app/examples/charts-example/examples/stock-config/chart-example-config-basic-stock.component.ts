@@ -51,6 +51,7 @@ export class ChartExampleConfigBasicStockComponent implements AfterViewInit, OnD
   private demoData = ChartConfigExample.demoData;
 
   public ngAfterViewInit(): void {
+    StockChartConfig.registerPlugins();
     this.createChart();
   }
 

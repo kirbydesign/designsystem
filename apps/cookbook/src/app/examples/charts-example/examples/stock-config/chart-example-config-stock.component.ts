@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnDestroy } from '@angular/core';
-import { Chart } from 'chart.js';
+import { Chart, Tooltip } from 'chart.js';
 import { StockChartConfig } from '@kirbydesign/designsystem';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { ChartConfigExample } from './chart-config-example';
 
 const config = {
@@ -60,10 +61,11 @@ export class ChartExampleConfigStockComponent implements AfterViewInit, OnDestro
   private demoData = ChartConfigExample.demoData;
 
   public ngAfterViewInit(): void {
+    StockChartConfig.registerPlugins();
     this.createChart();
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this._chart.destroy();
   }
 
@@ -72,7 +74,7 @@ export class ChartExampleConfigStockComponent implements AfterViewInit, OnDestro
 
     config = {
       ...config,
-      plugins: [StockChartConfig.verticalLinePluginConfig],
+      plugins: [StockChartConfig.verticalLinePluginConfig, ChartDataLabels],
       options: {
         ...config.options,
         plugins: {

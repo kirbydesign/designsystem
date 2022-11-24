@@ -2,15 +2,12 @@ import { ScatterDataPoint } from 'chart.js';
 import { StockChartConfig } from './chart-stock-config';
 
 describe('StockChartConfig', () => {
-  let stockChartConfig: StockChartConfig;
   beforeEach(() => {
-    stockChartConfig = new StockChartConfig();
+    StockChartConfig.registerPlugins();
   });
 
-  describe('Instiantiate config', () => {
-    it('should instantiate config class', () => {
-      expect(stockChartConfig).toBeTruthy();
-    });
+  afterAll(() => {
+    StockChartConfig.unRegisterPlugins();
   });
 
   describe('Get min value from number array data', () => {
@@ -21,19 +18,19 @@ describe('StockChartConfig', () => {
     ];
 
     it(`should return label position 'bottom' when dataIndex is '0'`, () => {
-      const res = stockChartConfig.getDataLabelPosition(data, 0);
+      const res = StockChartConfig.getDataLabelPosition(data, 0);
 
       expect(res).toBe('bottom');
     });
 
     it(`should return label position 'null' when dataIndex is '1'`, () => {
-      const res = stockChartConfig.getDataLabelPosition(data, 1);
+      const res = StockChartConfig.getDataLabelPosition(data, 1);
 
       expect(res).toBe(null);
     });
 
     it(`should return label position 'top' when dataIndex is '2'`, () => {
-      const res = stockChartConfig.getDataLabelPosition(data, 2);
+      const res = StockChartConfig.getDataLabelPosition(data, 2);
 
       expect(res).toBe('top');
     });

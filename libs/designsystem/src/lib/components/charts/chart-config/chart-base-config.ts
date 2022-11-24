@@ -26,4 +26,6 @@ export abstract class ChartBaseConfig {
 
   public static basicConfig: ChartConfiguration<ChartType>;
   public static tooltipPlugin: Partial<TooltipOptions<'line'>>;
+  public static registerPlugins = () => {};
+  public static unRegisterPlugins = () => {};
 }

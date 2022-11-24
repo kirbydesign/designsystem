@@ -58,6 +58,7 @@ export class ChartExampleConfigTooltipStockComponent implements AfterViewInit, O
   private demoData = ChartConfigExample.demoData;
 
   public ngAfterViewInit(): void {
+    StockChartConfig.registerPlugins();
     this.createChart();
   }
 
