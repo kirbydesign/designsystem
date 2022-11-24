@@ -1,44 +1,44 @@
 <h1>Chart config</h1>
 <p>
   The Kirby charts are based on a config strategy. The aim of this is to give the implementer full
-  control of the chart. Kirby simply provide some configurations which can be injected into a
+  control of the chart. Kirby simply provides some configurations which can be injected into a
   <a href="https://www.chartjs.org/">ChartJS</a> chart.
   <br />
   <br />
-  To see more examples on how to implement charts, go to
-  <a routerLink="../../showcase/chart-config">examples</a>.
+  To see more showcases on how to implement charts, please click
+  <a routerLink="../../showcase/chart-config">here</a>.
 </p>
 
 <h3>Structure</h3>
 <p>
-  Each chart type (line, stock, bar, pie) are served through a Kirby chart config class which is
+  Each chart type (line, stock, bar, pie) is served through a Kirby chart config class which is
   inherited from a base class
   <code
     ><a
-      href="https://github.com/kirbydesign/designsystem/blob/enhancement/2599-chart-configurations-for-stock-chart/libs/designsystem/src/lib/components/charts/chart-config/chart-base-config.ts"
+      href="https://github.com/kirbydesign/designsystem/blob/develop/libs/designsystem/src/lib/components/charts/chart-config/chart-base-config.ts"
       >ChartBaseConfig</a
     ></code
   >:
   <br />
   <code>
     <a
-      href="https://github.com/kirbydesign/designsystem/blob/enhancement/2599-chart-configurations-for-stock-chart/libs/designsystem/src/lib/components/charts/chart-config/chart-stock-config/chart-stock-config.ts"
+      href="https://github.com/kirbydesign/designsystem/blob/develop/libs/designsystem/src/lib/components/charts/chart-config/chart-stock-config/chart-stock-config.ts"
       >StockChartConfig</a
     ></code
   >
   <br />
-  <code> <a href="">BarChartConfig</a> // Not yet implemented </code>
+  <code><a href="">BarChartConfig</a> // Not yet implemented </code>
 </p>
 
-<p>This is what we are aiminig to implement</p>
+<p>In this guide we'll implement the following chart:</p>
 <kirby-card [hasPadding]="true">
   <cookbook-chart-example-config-basic-stock></cookbook-chart-example-config-basic-stock>
 </kirby-card>
 <br />
 
-<h3>A basic implementation</h3>
+<h3>Getting started</h3>
 
-<p>In order to implement a Kirby chart, you'll need three things:</p>
+<p>To implement a Kirby chart, you'll need three things:</p>
 <ul>
   <li><a href="https://www.chartjs.org/">ChartJS</a></li>
   <li>
@@ -47,40 +47,46 @@
   <li>Kirby chart config</li>
 </ul>
 
-<p>In your component template, add a canvas to your html and give it an <code>id</code>:</p>
+<p>In your component template, add a canvas to your HTML and give it an <code>id</code>:</p>
 
 <cookbook-code-viewer
   [html]="guideChartHtml"
   [language]="'html'"
   [inlineLabel]="true"
 ></cookbook-code-viewer>
-The canvas must be wrapped in an element with <code>position: relative</code> in order to be
-responsive. A thorough explanation can be found
-<a href="https://www.chartjs.org/docs/latest/configuration/responsive.html#important-note">here</a>
-<br />
-<br />
+<p>
+  The canvas must be wrapped in an element with <code>position: relative</code> in order to be
+  responsive. A thorough explanation can be found
+  <a href="https://www.chartjs.org/docs/latest/configuration/responsive.html#important-note"
+    >here</a
+  >
+</p>
 
 <p>
-  Add a property of type <code>ChartJS</code>. This will be used later for destroying the object.
+  Add a property of type <code>Chart</code> (from ChartJS). This will be used later to destroy the
+  object.
 </p>
 <cookbook-code-viewer
   [inlineLabel]="true"
   [ts]="chartProperties"
   [language]="'ts'"
 ></cookbook-code-viewer>
-Add some test data of type <code>ScatterPoint[]</code>.
+<h3>Test data</h3>
+<p>Add some test data of type <code>ScatterPoint[]</code>.</p>
 <cookbook-code-viewer
   [inlineLabel]="true"
   [ts]="demoDataExample"
   [language]="'ts'"
 ></cookbook-code-viewer>
 
+<h3>Configure the chart</h3>
 In a function, perform the following steps
 <ul>
   <li>Get the basic config from the <code>StockChartConfig</code></li>
   <li>Set the data</li>
   <li>
-    Create the <code>Chart</code> object with the same id as on your canvas element and the config
+    Create the <code>Chart</code> object with the same id as on your canvas element and pass the
+    config
   </li>
 </ul>
 <cookbook-code-viewer
@@ -88,15 +94,19 @@ In a function, perform the following steps
   [ts]="createChartFunctionExample"
   [language]="'ts'"
 ></cookbook-code-viewer>
-The <code>createChart</code> function must be called in the
-<code>
-  <a href="https://angular.io/api/core/OnInit">ngOnInit</a>
-</code>
-or
-<code>
-  <a href="https://angular.io/api/core/AfterViewInit"> ngAfterViewIinit</a>
-</code>
-hook.
+
+<h3>Instantiate the chart</h3>
+<p>
+  The <code>createChart</code> and <code>registerPlugins</code> functions must be called in the
+  <code>
+    <a href="https://angular.io/api/core/OnInit">ngOnInit</a>
+  </code>
+  or
+  <code>
+    <a href="https://angular.io/api/core/AfterViewInit"> ngAfterViewIinit</a>
+  </code>
+  hook.
+</p>
 <cookbook-code-viewer
   [inlineLabel]="true"
   [ts]="inintExample"
@@ -105,11 +115,13 @@ hook.
 <br />
 
 <h3>Destruct the chart</h3>
-Make sure to destruct the chart object when the component is destroyed in the
-<code>
-  <a href="https://angular.io/api/core/OnDestroy">ngOnDestroy</a>
-</code>
-hook:
+<p>
+  Make sure to destruct the chart object when the component is destroyed in the
+  <code>
+    <a href="https://angular.io/api/core/OnDestroy">ngOnDestroy</a>
+  </code>
+  hook:
+</p>
 <cookbook-code-viewer
   [inlineLabel]="true"
   [ts]="destroyExample"

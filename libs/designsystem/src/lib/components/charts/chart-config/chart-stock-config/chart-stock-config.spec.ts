@@ -6,10 +6,6 @@ describe('StockChartConfig', () => {
     StockChartConfig.registerPlugins();
   });
 
-  afterAll(() => {
-    StockChartConfig.unRegisterPlugins();
-  });
-
   describe('Get min value from number array data', () => {
     const data: ScatterDataPoint[] = [
       { x: 1, y: 1 },

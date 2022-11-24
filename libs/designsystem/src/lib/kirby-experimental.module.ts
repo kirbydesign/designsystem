@@ -4,6 +4,7 @@ import { PageLocalNavigationComponent } from './components';
 import { KirbyModule } from './kirby.module';
 
 const COMPONENT_DECLARATIONS = [PageLocalNavigationComponent];
+export { StockChartConfig } from './components/charts/chart-config';
 
 /**
  * This module contains experimental components, that should not be used in a production environment.

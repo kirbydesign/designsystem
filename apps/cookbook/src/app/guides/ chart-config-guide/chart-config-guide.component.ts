@@ -10,38 +10,34 @@ export class ChartConfigGuideComponent {
   <canvas id="{{ canvasId }}"></canvas>
 </div>`;
   public demoDataExample = `private ${ChartConfigExample.demoDataString}`;
-  public chartProperties = `private _chart: Chart;
-private _stockChartConfig: StockChartConfig;`;
-  public createChartFunctionExample = `
-  private _chart: Chart;
+  public chartProperties = `private _chart: Chart;`;
+  public createChartFunctionExample = `private _chart: Chart;
+public ngOnDestroy(): void {
+   this._chart.destroy();
+ }
 
-  public ngOnDestroy(): void {
-    this._chart.destroy();
-  }
+private createChart() {
+   let config = StockChartConfig.basicConfig;
 
-  private createChart() {
-    let config = StockChartConfig.basicConfig;
+   config = {
+     ...config,
+     data: {
+       datasets: [
+         {
+           data: this.demoData.map((demoDataEntry) => demoDataEntry),
+         },
+       ],
+       labels: this.demoData.map((demoDataEntry) => demoDataEntry.x),
+     },
+   };
+   this._chart = new Chart(this.canvasId, config);
+ }`;
 
-    config = {
-      ...config,
-      data: {
-        datasets: [
-          {
-            data: this.demoData.map((demoDataEntry) => demoDataEntry),
-          },
-        ],
-        labels: this.demoData.map((demoDataEntry) => demoDataEntry.x),
-      },
-    };
-    this._chart = new Chart(this.canvasId, config);
-  }`;
+  public inintExample = `public ngAfterViewInit(): void {
+    StockChartConfig.registerPlugins();
+    this.createChart();\n}`;
 
-  public inintExample = `  
-  public ngAfterViewInit(): void {
-    this.createChart();
-  }`;
-
-  public destroyExample = `ngOnDestroy(): void {
+  public destroyExample = `public ngOnDestroy(): void {
   this._chart.destroy();
 }`;
 }
