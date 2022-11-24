@@ -33,7 +33,7 @@ const { getThemeColorHexString, getThemeColorRgbString } = ColorHelper;
 const { fontSize } = DesignTokenHelper;
 
 /**
- * This class is still emperimental. Feel free to use it, but please note that it is still subject to breaking changes.
+ * This class is still experimental. Feel free to use it, but please note that it is still subject to breaking changes.
  */
 export class StockChartConfig extends ChartBaseConfig {
   private static STOCK_CHART_LOCALE_DEFAULT: ChartLocale = 'en-US';

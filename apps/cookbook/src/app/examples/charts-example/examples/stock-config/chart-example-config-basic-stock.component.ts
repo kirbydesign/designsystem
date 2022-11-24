@@ -46,7 +46,7 @@ export class ChartExampleConfigBasicStockComponent implements AfterViewInit, OnD
   public template: string = config.template;
   public codeSnippet: string = config.codeSnippet;
 
-  public canvasId = 'configStockBasicCanvas' + Math.random() * 1000; // nessesary as dublicate ids are causing the chart not to be loaded
+  public canvasId = 'configStockBasicCanvas' + Math.random() * 1000; // nessesary as dublicate ids are causing the chart not to be loaded when moving between guide and showcase where the same example is used
 
   private _chart: Chart;
   private demoData = ChartConfigExample.demoData;
