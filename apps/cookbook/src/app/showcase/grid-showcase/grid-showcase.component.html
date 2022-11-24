@@ -1,4 +1,23 @@
 <div class="example">
+  <p>
+    Grid works well for a layout with a known number of columns. The columns can be configured with
+    multiple breakpoints to specify the column span of each child. Breakpoints makes is easy to
+    adapt the layout to different screen sizes.
+  </p>
+  <h3>Breakpoints</h3>
+  <p>
+    Each breakpoint is named using t-shirt sizes and relates to a defined screen size or bigger:
+  </p>
+  <ul>
+    <li>xs, extra-small: 0px</li>
+    <li>sm, small: 576px</li>
+    <li>md, medium: 768px</li>
+    <li>lg, large: 992px</li>
+    <li>xl, extra-large: 1200px</li>
+  </ul>
+</div>
+
+<div class="page-example">
   <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
   <cookbook-grid-example></cookbook-grid-example>
 
