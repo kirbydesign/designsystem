@@ -12,6 +12,7 @@ const config = {
   private _chart: Chart;
 
   public ngAfterViewInit(): void {
+    StockChartConfig.registerPlugins();
     this.createChart();
   }
 

@@ -13,10 +13,11 @@ const config = {
   private _chart: Chart;
 
   public ngAfterViewInit(): void {
+    StockChartConfig.registerPlugins();
     this.createChart();
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this._chart.destroy();
   }
 
@@ -25,7 +26,7 @@ const config = {
 
     config = {
       ...config,
-      plugins: [StockChartConfig.verticalLinePluginConfig],
+      plugins: [StockChartConfig.verticalLinePluginConfig, ChartDataLabels],
       options: {
         ...config.options,
         plugins: {
@@ -36,7 +37,6 @@ const config = {
       data: {
         datasets: [
           {
-            borderColor: '#005c3c',
             data: this.demoData.map((demoDataEntry) => demoDataEntry),
           },
         ],

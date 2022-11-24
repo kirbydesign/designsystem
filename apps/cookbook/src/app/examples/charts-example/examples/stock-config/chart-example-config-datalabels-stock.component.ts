@@ -13,6 +13,7 @@ const config = {
   private _chart: Chart;
 
   public ngAfterViewInit(): void {
+    StockChartConfig.registerPlugins();
     this.createChart();
   }
 
@@ -25,6 +26,7 @@ const config = {
 
     config = {
       ...config,
+      plugins: [ChartDataLabels],
       options: {
         ...config.options,
         plugins: {
