@@ -243,12 +243,15 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   _getBoundaryClass(index: number, section?: any[]): BoundaryClass {
-    const _items = section || this.items;
+    if (index === 0) {
+      return section.length === 1 ? 'first last' : 'first';
+    }
 
-    if (index === 0 || _items[index - 1]?.headingName) return this.headerTemplate ? null : 'first';
+    if (index === section.length - 1) {
+      return 'last';
+    }
 
-    if (index === _items.length - 1 || _items[index + 1]?.headingName)
-      return this.footerTemplate ? null : 'last';
+    return null;
   }
 
   standAloneClass() {

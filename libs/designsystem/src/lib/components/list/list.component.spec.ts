@@ -222,4 +222,59 @@ describe('ListComponent', () => {
       });
     });
   });
+
+  describe('List have 1 element', () => {
+    it(`should apply the CSS class 'first' and 'last' on the first and only element in the list`, () => {
+      spectator.setInput({
+        items: [transactions[0]],
+      });
+      const list = spectator.queryAll('ion-item-sliding');
+
+      expect(list.length).toBe(1);
+
+      expect(list[0].classList).toContain('first');
+      expect(list[0].classList).toContain('last');
+    });
+  });
+
+  describe('List have 2 elements', () => {
+    it(`should apply the CSS class 'first' on the first element and apply 'last' on last element`, () => {
+      spectator.setInput({
+        items: [transactions[0], transactions[0]],
+      });
+      const list = spectator.queryAll('ion-item-sliding');
+
+      expect(list.length).toBe(2);
+
+      //First element
+      expect(list[0].classList).toContain('first');
+      expect(list[0].classList).not.toContain('last');
+
+      //Last element
+      expect(list[1].classList).toContain('last');
+      expect(list[1].classList).not.toContain('first');
+    });
+  });
+
+  describe('List have 3 elements', () => {
+    it(`should apply the CSS class 'first' on the first element and apply 'last' on last element, the element(s) between first and last should neither have 'first' or 'last' applied`, () => {
+      spectator.setInput({
+        items: [transactions[0], transactions[0], transactions[0]],
+      });
+      const list = spectator.queryAll('ion-item-sliding');
+
+      expect(list.length).toBe(3);
+
+      //First element
+      expect(list[0].classList).toContain('first');
+      expect(list[0].classList).not.toContain('last');
+      //middle element
+      expect(list[1].classList).not.toContain('first');
+      expect(list[1].classList).not.toContain('last');
+
+      //Last element
+      expect(list[2].classList).toContain('last');
+      expect(list[2].classList).not.toContain('first');
+    });
+  });
 });

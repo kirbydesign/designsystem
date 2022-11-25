@@ -15,7 +15,7 @@ import { ThemeColor } from '@kirbydesign/core';
 import { PlatformService } from '../../../helpers/platform.service';
 import { ListSwipeAction, ListSwipeDirection, ListSwipeEnd } from '../list-swipe-action.type';
 
-export type BoundaryClass = 'first' | 'last';
+export type BoundaryClass = 'first' | 'last' | 'first last';
 
 @Component({
   selector: 'kirby-list-item',
