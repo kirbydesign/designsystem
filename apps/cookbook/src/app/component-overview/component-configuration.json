@@ -1,0 +1,52 @@
+{
+  "componentConfiguration": [
+    {
+      "title": "Accordion",
+      "paragraph": "An accordion is a vertically stacked list of headers that reveal or hide related sections of content.",
+      "svgPath": "../../assets/component-svg/Accordion-Kirby-Component-Overview.svg",
+      "route": "home/showcase/accordion"
+    },
+    {
+      "title": "Action Sheet",
+      "paragraph": "An action sheet is a modal view that presents choices related to an action people initiate.",
+      "svgPath": "../../assets/component-svg/Action-Sheet-Kirby-Component-Overview.svg",
+      "route": "home/showcase/action-sheet"
+    },
+    {
+      "title": "Alert",
+      "paragraph": "An alert gives people critical information they need right away.",
+      "svgPath": "../../assets/component-svg/Alert-Kirby-Component-Overview.svg",
+      "route": "home/showcase/alert"
+    },
+    {
+      "title": "Avatar",
+      "paragraph": "An avatar is a visual representation of a user or entity.",
+      "svgPath": "../../assets/component-svg/Avatar-Kirby-Component-Overview.svg",
+      "route": "home/showcase/avatar"
+    },
+    {
+      "title": "Badge",
+      "paragraph": "A badge is a small label, generally appearing inside or in close proximity to another larger interface.",
+      "svgPath": "../../assets/component-svg/Badge-Kirby-Component-Overview.svg",
+      "route": "home/showcase/badge"
+    },
+    {
+      "title": "Button",
+      "paragraph": "Buttons give people simple, familiar ways to do tasks in your app.",
+      "svgPath": "../../assets/component-svg/Button-Kirby-Component-Overview.svg",
+      "route": "home/showcase/button"
+    },
+    {
+      "title": "Calendar",
+      "paragraph": "Buttons give people simple, familiar ways to do tasks in your app.",
+      "svgPath": "../../assets/component-svg/Calender-Kirby-Component-Overview.svg",
+      "route": "home/showcase/calendar"
+    },
+    {
+      "title": "Card",
+      "paragraph": "A container for content representing a single entity. E.g. a contact, article, or task.",
+      "svgPath": "../../assets/component-svg/Card-Kirby-Component-Overview.svg",
+      "route": "home/showcase/card"
+    }
+  ]
+}
