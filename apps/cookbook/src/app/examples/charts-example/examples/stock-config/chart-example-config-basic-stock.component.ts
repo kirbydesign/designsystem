@@ -6,7 +6,7 @@ import { ChartConfigExample } from './chart-config-example';
 const config = {
   selector: 'cookbook-chart-example-config-basic-stock',
   template: `<div style="position: relative; height: 300px;">
-  <canvas id="{{ canvasId }}"></canvas>
+  <canvas id="{{ canvasId }}"> <!-- Your accessible content here --> </canvas>
 </div>`, // container must be positioned relative: https://www.chartjs.org/docs/latest/configuration/responsive.html#important-note
   codeSnippet: `
   private _chart: Chart;
@@ -46,7 +46,7 @@ export class ChartExampleConfigBasicStockComponent implements AfterViewInit, OnD
   public template: string = config.template;
   public codeSnippet: string = config.codeSnippet;
 
-  public canvasId = 'configStockBasicCanvas' + Math.random() * 1000; // nessesary as dublicate ids are causing the chart not to be loaded when moving between guide and showcase where the same example is used
+  public canvasId = 'configStockBasicCanvas' + Math.random() * 1000; // necessary as duplicate ids are causing the chart not to be loaded when moving between guide and showcase where the same example is used
 
   private _chart: Chart;
   private demoData = ChartConfigExample.demoData;

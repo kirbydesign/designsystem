@@ -7,7 +7,7 @@ import { ChartConfigExample } from '../../examples/charts-example/examples/stock
 })
 export class ChartConfigGuideComponent {
   public guideChartHtml = `<div style="position: relative; height: 300px;">
-  <canvas id="{{ canvasId }}"></canvas>
+  <canvas id="{{ canvasId }}"> <!-- Your accessible content here --></canvas>
 </div>`;
   public demoDataExample = `private ${ChartConfigExample.demoDataString}`;
   public chartProperties = `private _chart: Chart;`;

@@ -6,7 +6,7 @@ describe('StockChartConfig', () => {
     StockChartConfig.registerPlugins();
   });
 
-  describe('Get min value from number array data', () => {
+  describe('DataLabel min & max values', () => {
     const data: ScatterDataPoint[] = [
       { x: 1, y: 1 },
       { x: 2, y: 2 },

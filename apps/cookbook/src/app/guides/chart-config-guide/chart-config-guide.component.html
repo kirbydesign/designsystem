@@ -1,7 +1,7 @@
 <h1>Chart config</h1>
 <p>
   The Kirby charts are based on a config strategy. The aim of this is to give the implementer full
-  control of the chart. Kirby simply provides some configurations which can be injected into a
+  control of the chart. Kirby simply provides some configurations which must be passed to a
   <a href="https://www.chartjs.org/">ChartJS</a> chart.
   <br />
   <br />
@@ -55,11 +55,15 @@
   [inlineLabel]="true"
 ></cookbook-code-viewer>
 <p>
+  It is up to the implementer to ensure the proper accessibility for the chart. Read more about
+  ChartJS accessibility
+  <a href="https://www.chartjs.org/docs/latest/general/accessibility.html">here</a>.
+</p>
+<p>
   The canvas must be wrapped in an element with <code>position: relative</code> in order to be
   responsive. A thorough explanation can be found
-  <a href="https://www.chartjs.org/docs/latest/configuration/responsive.html#important-note"
-    >here</a
-  >
+  <a href="https://www.chartjs.org/docs/latest/configuration/responsive.html#important-note">here</a
+  >.
 </p>
 
 <p>
@@ -96,6 +100,10 @@ In a function, perform the following steps
 ></cookbook-code-viewer>
 
 <h3>Instantiate the chart</h3>
+<p>
+  The StockChart utilizes some standard plugins from ChartJS. These are registered using
+  <code>registerPlugins</code>
+</p>
 <p>
   The <code>createChart</code> and <code>registerPlugins</code> functions must be called in the
   <code>

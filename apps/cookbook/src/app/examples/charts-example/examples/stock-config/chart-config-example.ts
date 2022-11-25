@@ -15,16 +15,11 @@ export class ChartConfigExample {
   ];
 
   static get demoDataString() {
-    const demoDataString = JSON.stringify(ChartConfigExample.demoData)
-      .split('[')
-      .reduce((prev, current) => prev + current)
-      .split(']')
-      .reduce((prev, current) => prev + current)
-      .split('},')
-      .map((val, index, arr) => (index !== arr.length - 1 ? val + '},\n' : val))
-      .map((val) => ' ' + val)
-      .reduce((current, prev) => current + prev);
+    let demoDataString = '';
+    ChartConfigExample.demoData.forEach((datapoint) => {
+      demoDataString += `  x: ${datapoint.x}, y: ${datapoint.y},\n`;
+    });
 
-    return `demoData: ScatterDataPoint[] = [ \n${demoDataString}\n]`;
+    return `demoData: ScatterDataPoint[] = [ \n${demoDataString}]`;
   }
 }

@@ -7,7 +7,7 @@ import { ChartConfigExample } from './chart-config-example';
 const config = {
   selector: 'cookbook-chart-example-config-datalabels-stock',
   template: `<div style="position: relative; height: 300px;">
-  <canvas id="{{ canvasId }}"></canvas>
+  <canvas id="{{ canvasId }}"> <!-- Your accessible content here --> </canvas>
 </div>`, // container must be positioned relative: https://www.chartjs.org/docs/latest/configuration/responsive.html#important-note
   codeSnippet: `
   private _chart: Chart;
