@@ -390,11 +390,11 @@ describe('ChartJSService', () => {
       });
     });
     it('should destroy the chart', () => {
-      const updateSpy = spyOn(chartJSService['chart'], 'destroy');
+      const destroySpy = spyOn(chartJSService['chart'], 'destroy');
 
       chartJSService.destroyChart();
 
-      expect(chartJSService['chart'].destroy).toHaveBeenCalledTimes(1);
+      expect(destroySpy).toHaveBeenCalledTimes(1);
     });
   });
 
