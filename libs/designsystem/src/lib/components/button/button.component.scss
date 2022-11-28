@@ -288,20 +288,20 @@ $button-width: (
 // Temp fix for https://github.com/angular/angular-cli/issues/13854#issuecomment-470831308
 
 /* clean-css ignore:start */
-:host-context(ion-toolbar kirby-page-actions) {
+:host-context(kirby-page ion-toolbar ion-buttons) {
   font-size: utils.font-size('s');
   margin: 0;
-  height: utils.$fat-finger-size;
+  height: utils.size('xl');
 
   &.icon-only {
-    width: utils.$fat-finger-size;
-  }
+    width: utils.size('xl');
 
-  &.no-decoration,
-  &.attention-level1,
-  &.attention-level2,
-  &.attention-level3 {
-    @include button-no-decoration;
+    &.no-decoration,
+    &.attention-level1,
+    &.attention-level2,
+    &.attention-level3 {
+      @include button-no-decoration;
+    }
   }
 }
 
