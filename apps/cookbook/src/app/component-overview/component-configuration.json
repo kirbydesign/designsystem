@@ -39,7 +39,7 @@
     {
       "title": "Calendar",
       "paragraph": "Buttons give people simple, familiar ways to do tasks in your app.",
-      "svgPath": "../../assets/component-svg/Calender-Kirby-Component-Overview.svg",
+      "svgPath": "../../assets/component-svg/Calendar-Kirby-Component-Overview.svg",
       "route": "home/showcase/calendar"
     },
     {
@@ -47,6 +47,96 @@
       "paragraph": "A container for content representing a single entity. E.g. a contact, article, or task.",
       "svgPath": "../../assets/component-svg/Card-Kirby-Component-Overview.svg",
       "route": "home/showcase/card"
+    },
+    {
+      "title": "Chart",
+      "paragraph": "Chart",
+      "svgPath": "../../assets/component-svg/Chart-Kirby-Component-Overview.svg",
+      "route": "home/showcase/chart"
+    },
+    {
+      "title": "Chart Stock",
+      "paragraph": "Chart Stock",
+      "svgPath": "../../assets/component-svg/Chart-Stock-Kirby-Component-Overview.svg",
+      "route": "home/showcase/chart-stock"
+    },
+    {
+      "title": "Checkbox",
+      "paragraph": "A container for content representing a single entity. E.g. a contact, article, or task.",
+      "svgPath": "../../assets/component-svg/Checkbox-Kirby-Component-Overview.svg",
+      "route": "home/showcase/checkbox"
+    },
+    {
+      "title": "Colors",
+      "paragraph": "Colors",
+      "svgPath": "../../assets/component-svg/Colors-Kirby-Component-Overview.svg",
+      "route": "home/showcase/colors"
+    },
+    {
+      "title": "Dropdown",
+      "paragraph": "Dropdown",
+      "svgPath": "../../assets/component-svg/Dropdown-Kirby-Component-Overview.svg",
+      "route": "home/showcase/dropdown"
+    },
+    {
+      "title": "Flag",
+      "paragraph": "Flag",
+      "svgPath": "../../assets/component-svg/Flag-Kirby-Component-Overview.svg",
+      "route": "home/showcase/flag"
+    },
+    {
+      "title": "Fonts",
+      "paragraph": "Fonts",
+      "svgPath": "../../assets/component-svg/Fonts-Kirby-Component-Overview.svg",
+      "route": "home/showcase/fonts"
+    },
+    {
+      "title": "icons",
+      "paragraph": "icons",
+      "svgPath": "../../assets/component-svg/Icons-Kirby-Component-Overview.svg",
+      "route": "home/showcase/icon"
+    },
+    {
+      "title": "Progress Circle",
+      "paragraph": "Progress circle",
+      "svgPath": "../../assets/component-svg/Progress-Circle-Kirby-Component-Overview.svg",
+      "route": "home/showcase/progress-circle"
+    },
+    {
+      "title": "Radio Buttons",
+      "paragraph": "Radio buttons",
+      "svgPath": "../../assets/component-svg/Radio-Buttons-Kirby-Component-Overview.svg",
+      "route": "home/showcase/radio"
+    },
+    {
+      "title": "Range Slider",
+      "paragraph": "Range Slider",
+      "svgPath": "../../assets/component-svg/Range-Slider-Kirby-Component-Overview.svg",
+      "route": "home/showcase/range"
+    },
+    {
+      "title": "Segmented Control",
+      "paragraph": "Segmented control",
+      "svgPath": "../../assets/component-svg/Segmented-Control-Kirby-Component-Overview.svg",
+      "route": "home/showcase/segmented-control"
+    },
+    {
+      "title": "Slide Button",
+      "paragraph": "Slide Button",
+      "svgPath": "../../assets/component-svg/Slide-Button-Kirby-Component-Overview.svg",
+      "route": "home/showcase/slide-button"
+    },
+    {
+      "title": "Spinner",
+      "paragraph": "Spinner",
+      "svgPath": "../../assets/component-svg/Spinner-Kirby-Component-Overview.svg",
+      "route": "home/showcase/spinner"
+    },
+    {
+      "title": "Toggle",
+      "paragraph": "Toggle",
+      "svgPath": "../../assets/component-svg/Toggle-Kirby-Component-Overview.svg",
+      "route": "home/showcase/toggle"
     }
   ]
 }
