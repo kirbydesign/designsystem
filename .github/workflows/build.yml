@@ -5,7 +5,7 @@ on:
     branches:
       - developactiontest
     tags:
-      - 'v[0-9]+.[0-9]+.[0-9]+'
+      - 'vt[0-9]+.[0-9]+.[0-9]+'
   pull_request:
 
 defaults:
