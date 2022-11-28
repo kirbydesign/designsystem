@@ -30,7 +30,7 @@
     );
     --background-focused-opacity: 1;
 
-    font-size: utils.font-size('s');
+    font-size: utils.font-size('n');
 
     // Prevent additional padding in iOS Safari on devices with "screen notch"
     // by removing horizontal safe area when rotated to landscape orientation.
@@ -66,7 +66,7 @@
       text-align: right;
     }
 
-    --transition: #{interaction-state.transition()};
+    --transition: #{interaction-state.transition('background-color')};
   }
 
   &.sm ion-item {
@@ -97,28 +97,6 @@
 :host-context(kirby-dropdown .focused) ion-item {
   --background: #{interaction-state.get-state-color('white', 'xxxs')};
 }
-
-/* clean-css ignore:start */
-// Fixes https://github.com/kirbydesign/designsystem/issues/1745
-ion-item {
-  :host-context(kirby-list-item:first-of-type) & {
-    --padding-top: #{utils.size('xxs')};
-  }
-
-  :host-context(kirby-list-item:first-of-type kirby-card) & {
-    --padding-top: 0;
-  }
-
-  :host-context(kirby-list-item:last-of-type) & {
-    --padding-bottom: #{utils.size('xxs')};
-  }
-
-  :host-context(kirby-list-item:last-of-type kirby-card) & {
-    --padding-bottom: 0;
-  }
-}
-
-/* clean-css ignore:end */
 
 :host(.selected),
 :host-context(kirby-list .selected) {

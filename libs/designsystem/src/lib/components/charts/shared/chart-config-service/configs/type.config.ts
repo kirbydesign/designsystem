@@ -183,6 +183,9 @@ export const CHART_TYPES_CONFIG: ChartTypesConfig = {
             labelColor: (tooltipItem: TooltipItem<keyof ChartTypeRegistry>) => {
               return {
                 backgroundColor: tooltipItem.dataset.borderColor,
+                borderColor: getThemeColorHexString('semi-light'),
+                borderWidth: 2, // This value must be exactly 2. If it is less, a white "border" will appear, if greater than, a shadow around the box will be shown.
+                // An issue has been created, requesting a test to check this value doesn´t change: https://github.com/kirbydesign/designsystem/issues/2578
               } as TooltipLabelStyle;
             },
           },
