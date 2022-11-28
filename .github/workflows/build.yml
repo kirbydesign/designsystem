@@ -101,7 +101,8 @@ jobs:
       - name: Get deployment name for feature branch
         if: "github.event_name == 'pull_request' || github.event_name == 'push' && !startsWith(github.ref, 'refs/tags/v')"
         run: |
-          branchname="${GITHUB_HEAD_REF}"
+          echo "Test branchname: ${GITHUB_HEAD_REF} ${GITHUB_REF}"
+          branchname="${{ github.head_ref || github.ref }}"
           echo "Github branchname: ${branchname}"
           branchname="${branchname##*/}"
           echo "Removed leading paths - branchname: ${branchname}"
