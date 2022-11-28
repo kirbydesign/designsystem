@@ -22,7 +22,7 @@ const config = {
   }
 
   private createChart() {
-    let config = StockChartConfig.basicConfig;
+    let config = StockChartConfig.baseConfig;
 
     config = {
       ...config,
@@ -70,7 +70,7 @@ export class ChartExampleConfigStockComponent implements AfterViewInit, OnDestro
   }
 
   private createChart() {
-    let config = StockChartConfig.basicConfig;
+    let config = StockChartConfig.baseConfig;
 
     config = {
       ...config,

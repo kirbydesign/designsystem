@@ -21,7 +21,7 @@ const config = {
   }
 
   private createChart() {
-    let config = StockChartConfig.basicConfig;
+    let config = StockChartConfig.baseConfig;
 
     config = {
       ...config,
@@ -68,7 +68,7 @@ export class ChartExampleConfigTooltipStockComponent implements AfterViewInit, O
   }
 
   private createChart() {
-    let config = StockChartConfig.basicConfig;
+    let config = StockChartConfig.baseConfig;
 
     config = {
       ...config,

@@ -62,7 +62,7 @@ export class StockChartConfig extends ChartBaseConfig {
     StockChartConfig.pluginsRegistered = true;
   }
 
-  public static basicConfig: ChartConfiguration<ChartType> = {
+  public static baseConfig: ChartConfiguration<ChartType> = {
     type: 'line',
     data: {
       datasets: [],

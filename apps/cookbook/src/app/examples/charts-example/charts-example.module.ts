@@ -17,7 +17,7 @@ import { ChartExampleMultipleDatasetsComponent } from './examples/chart-example-
 import { ChartExampleSimpleColumnComponent } from './examples/chart-example-simple-column-chart.component';
 import { StockChartExampleComparisonComponent } from './examples/stock-chart-example-comparison.component';
 import { StockChartExampleComponent } from './examples/stock-chart-example.component';
-import { ChartExampleConfigBasicStockComponent } from './examples/stock-config/chart-example-config-basic-stock.component';
+import { ChartExampleConfigBaseStockComponent } from './examples/stock-config/chart-example-config-base-stock.component';
 import { ChartExampleConfigDatalabelsStockComponent } from './examples/stock-config/chart-example-config-datalabels-stock.component';
 import { ChartExampleConfigTooltipStockComponent } from './examples/stock-config/chart-example-config-tooltip-stock.component';
 
@@ -36,7 +36,7 @@ const COMPONENT_DECLARATIONS = [
   StockChartExampleComparisonComponent,
   ChartExampleAreaLineComponent,
   ChartExampleConfigStockComponent,
-  ChartExampleConfigBasicStockComponent,
+  ChartExampleConfigBaseStockComponent,
   ChartExampleConfigDatalabelsStockComponent,
   ChartExampleConfigTooltipStockComponent,
 ];

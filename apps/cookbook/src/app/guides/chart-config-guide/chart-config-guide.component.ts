@@ -17,7 +17,7 @@ public ngOnDestroy(): void {
  }
 
 private createChart() {
-   let config = StockChartConfig.basicConfig;
+   let config = StockChartConfig.baseConfig;
 
    config = {
      ...config,

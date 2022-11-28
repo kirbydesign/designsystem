@@ -4,7 +4,7 @@ import { Chart } from 'chart.js';
 import { ChartConfigExample } from './chart-config-example';
 
 const config = {
-  selector: 'cookbook-chart-example-config-basic-stock',
+  selector: 'cookbook-chart-example-config-base-stock',
   template: `<div style="position: relative; height: 300px;">
   <canvas id="{{ canvasId }}"> <!-- Your accessible content here --> </canvas>
 </div>`, // container must be positioned relative: https://www.chartjs.org/docs/latest/configuration/responsive.html#important-note
@@ -21,7 +21,7 @@ const config = {
   }
 
   private createChart() {
-    let config = StockChartConfig.basicConfig;
+    let config = StockChartConfig.baseConfig;
 
     config = {
       ...config,
@@ -42,11 +42,11 @@ const config = {
   selector: config.selector,
   template: config.template,
 })
-export class ChartExampleConfigBasicStockComponent implements AfterViewInit, OnDestroy {
+export class ChartExampleConfigBaseStockComponent implements AfterViewInit, OnDestroy {
   public template: string = config.template;
   public codeSnippet: string = config.codeSnippet;
 
-  public canvasId = 'configStockBasicCanvas' + Math.random() * 1000; // necessary as duplicate ids are causing the chart not to be loaded when moving between guide and showcase where the same example is used
+  public canvasId = 'configStockBaseCanvas' + Math.random() * 1000; // necessary as duplicate ids are causing the chart not to be loaded when moving between guide and showcase where the same example is used
 
   private _chart: Chart;
   private demoData = ChartConfigExample.demoData;
@@ -61,7 +61,7 @@ export class ChartExampleConfigBasicStockComponent implements AfterViewInit, OnD
   }
 
   private createChart() {
-    let config = StockChartConfig.basicConfig;
+    let config = StockChartConfig.baseConfig;
 
     config = {
       ...config,
