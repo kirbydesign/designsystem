@@ -96,8 +96,9 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
       - name: Get deployment name for feature branch
-        if: github.event_name == 'pull_request'
+        if: "github.event_name == 'pull_request' || github.event_name == 'push' && !startsWith(github.ref, 'refs/tags/v')"
         run: |
+          echo "Test: ${github.event_name} ${github.ref}"
           branchname="${GITHUB_HEAD_REF}"
           echo "Github branchname: ${branchname}"
           branchname="${branchname##*/}"
