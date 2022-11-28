@@ -88,6 +88,14 @@
   }
 }
 
+.disclosure {
+  text-align: center;
+  height: 24px;
+  padding-right: 8px;
+  padding-left: 4px;
+  color: #d1d1d1;
+}
+
 :host-context(kirby-dropdown) ion-item,
 :host-context(kirby-popover) ion-item {
   --min-height: #{utils.$dropdown-item-height};
@@ -104,6 +112,12 @@
     @include utils.slotted(h1, h2, h3, h4, h5, h6, p, data) {
       font-weight: utils.font-weight('bold');
     }
+  }
+}
+
+:host(.disclosure) {
+  ion-item {
+    --inner-padding-end: 0px;
   }
 }
 
