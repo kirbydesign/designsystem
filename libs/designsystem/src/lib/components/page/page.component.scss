@@ -1,6 +1,16 @@
 @use '@kirbydesign/core/src/scss/interaction-state';
 @use '@kirbydesign/core/src/scss/utils';
 
+$ion-content-padding-top: utils.size('xs');
+$ion-content-padding-start: var(--page-content-padding-start, #{utils.size('s')});
+$ion-content-padding-end: var(--page-content-padding-end, #{utils.size('s')});
+
+:host {
+  // Ignoring wrapper introduced with #640 remove the need for discarding it
+  // through DOM manipulation on page init.
+  display: contents;
+}
+
 /*
  * Page Header
  */
@@ -25,6 +35,56 @@ ion-toolbar {
   --padding-bottom: 0;
   --ion-toolbar-color: #{utils.get-color('black')};
 
+  // The toolbar height for iPhone's with a notched display.
+  $toolbar-height-notch: utils.size('xxl');
+
+  // The toolbar height for other displays.
+  $toolbar-height-default: utils.size('xxxl');
+
+  // An iPhone with a ios-safe-area-top exceeding 32px is considered to have notched display.
+  $notch-safe-area-top-trigger: 32px;
+
+  // Notch indicator:
+  // 0px represents FALSE
+  // 1px represents TRUE
+  // IF `--kirby-safe-area-top` is defined _and_ has a value strictly larger than `$notch-safe-area-top-trigger`
+  // THEN `--notch-present` = 1px (a notch _is_ present)
+  // ELSE `--notch-present` = 0px (no notch)
+  --notch-present: clamp(
+    0px,
+    var(--kirby-safe-area-top, 0px) - #{$notch-safe-area-top-trigger},
+    1px
+  );
+
+  // Equivalent to:
+  // IF --notch-present == 1px (i.e. the display _does_ have a notch)
+  // THEN --min-height = $toolbar-height-notch
+  // ELSE --min-height = $toolbar-height-default
+  --min-height: clamp(
+    #{$toolbar-height-notch},
+    (1px - var(--notch-present)) * #{utils.strip-unit($toolbar-height-default)},
+    #{$toolbar-height-default}
+  );
+
+  @include utils.media('>=medium') {
+    --min-height: #{utils.size('xxxxl')};
+  }
+
+  box-sizing: border-box;
+  padding-inline: utils.size('xxxs');
+
+  &.content-scrolled::before {
+    // Divider
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    z-index: 1;
+    background-color: utils.get-color('medium');
+  }
+
   /*
   * This overrides Ionic's default ios styling for the position of secondary action buttons which are to the left of content: https://ionicframework.com/docs/api/toolbar#buttons
   * We would like the seconday actions to be to the far right after primary actions (usually as a falafel):
@@ -34,11 +94,23 @@ ion-toolbar {
   }
 
   ion-title {
+    opacity: 0;
+    transform: translateY(10px);
+    transition-property: opacity, transform;
+    transition-duration: 150ms;
+    transition-timing-function: utils.get-transition-easing('enter-exit');
+
+    &.slide-and-fade-in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     .toolbar-title {
       text-overflow: ellipsis;
       white-space: nowrap;
       pointer-events: auto;
       overflow: hidden;
+      font-weight: utils.font-weight('bold');
 
       @include utils.slotted('*') {
         text-overflow: ellipsis;
@@ -74,8 +146,15 @@ ion-back-button {
   --color: #{utils.get-color('black')};
   --icon-font-size: 24px;
 
-  height: utils.$fat-finger-size;
-  width: utils.$fat-finger-size;
+  $button-size: utils.size('xl');
+
+  height: $button-size;
+  width: $button-size;
+
+  // Properly center back-icon
+  &::part(icon) {
+    margin-inline: 0;
+  }
 
   // NOTE: This is a custom implementation of the hover interaction state;
   // identical to FabSheet's ion-fab-button & SegmentedControlComponent's
@@ -143,8 +222,9 @@ ion-back-button {
  * Page Content
  */
 ion-content {
-  --padding-start: var(--page-content-padding-start, #{utils.size('s')});
-  --padding-end: var(--page-content-padding-end, #{utils.size('s')});
+  --padding-top: #{$ion-content-padding-top};
+  --padding-start: #{$ion-content-padding-start};
+  --padding-end: #{$ion-content-padding-end};
   --background: #{utils.get-color('background-color')};
   --color: #{utils.get-color('black')};
 
@@ -173,7 +253,10 @@ ion-content {
  */
 .sticky-content-container {
   position: sticky;
-  top: 0;
+
+  // Adjust for padding-top of ion-content to position static content properly
+  // and subtract 1px to let it not fully intersect with viewport when pinned.
+  top: calc(-1 * $ion-content-padding-top - 1px);
   left: 0;
   right: 0;
   margin-block-end: utils.size('m');
@@ -181,5 +264,19 @@ ion-content {
   div {
     max-width: var(--page-content-max-width, utils.$page-content-max-width);
     margin: 0 auto;
+  }
+
+  &.content-pinned::before {
+    // Divider
+    content: '';
+    position: absolute;
+
+    // Adjust for padding of ion-content to stretch divider to full width.
+    left: calc(-1 * $ion-content-padding-start);
+    right: calc(-1 * $ion-content-padding-end);
+    bottom: 0;
+    height: 1px;
+    z-index: 1;
+    background-color: utils.get-color('medium');
   }
 }

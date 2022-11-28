@@ -1,0 +1,12 @@
+{
+  "appId": "io.ionic.starter",
+  "appName": "flows-app",
+  "webDir": "./dist/apps/flows",
+  "bundledWebRuntime": false,
+  "ios": {
+    "path": "./apps/flows/ios"
+  },
+  "android": {
+    "path": "./apps/flows/android"
+  }
+}
