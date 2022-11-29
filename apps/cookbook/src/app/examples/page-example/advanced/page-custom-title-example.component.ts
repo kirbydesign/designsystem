@@ -21,9 +21,7 @@ const config = {
 
   <!-- Custom Page Subtitle -->
   <div *kirbyPageSubtitle>
-    <div>
-      Custom subtitles with very long names that span multiple lines will wrap.
-    </div>
+    Custom subtitles with very long names that span multiple lines will wrap.
   </div>
 
   <div *kirbyPageToolbarTitle style="display: flex; gap: 0.5rem;">
