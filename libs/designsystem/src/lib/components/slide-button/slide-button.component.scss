@@ -97,4 +97,12 @@ $slide-button-text-padding: 0 $slide-button-container-radius 0 $total-slider-thu
     transform: scale(0);
     pointer-events: none;
   }
+
+  .slide-button-interaction-blocker {
+    position: absolute;
+    right: 0;
+    width: calc(100% - $slide-button-width + 2 * $slide-button-spacing);
+    height: 100%;
+    z-index: 3;
+  }
 }
