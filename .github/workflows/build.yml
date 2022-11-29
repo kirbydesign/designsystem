@@ -2,7 +2,10 @@ name: Build & Deploy Cookbook
 
 on:
   push: # TODO: Change to `release` event when our release workflow is in place
-    branches: main
+    branches:
+      - developactiontest
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
   pull_request:
 
 defaults:
@@ -15,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       #Build on PRs, new releases & changes not including 'libs' (which gets build as part of new release)
-      do_build: ${{ github.event_name == 'pull_request' || steps.filter.outputs.libs == 'false' }}
+      do_build: ${{ github.event_name == 'pull_request' || github.event_name == 'push' && !startsWith(github.ref, 'refs/tags/v') || steps.filter.outputs.libs == 'false' }}
       node_version: ${{ steps.get_node_version.outputs.node_version }}
     steps:
       - name: Checkout repo
@@ -88,17 +91,17 @@ jobs:
 
   deploy_to_cookbook:
     name: Deploy cookbook
-    needs: [lint_and_unittest, build_kirby, build_kirby_cookbook]
+    needs: [build_kirby_cookbook]
     runs-on: ubuntu-latest
     env:
       DOMAIN: 'kirby.design'
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
-      - name: Get deployment name for feature branch
-        if: github.event_name == 'pull_request'
+      - name: Get deployment name for develop or feature branch
+        if: "github.event_name == 'pull_request' || github.event_name == 'push' && !startsWith(github.ref, 'refs/tags/v')"
         run: |
-          branchname="${GITHUB_HEAD_REF}"
+          branchname="${{ github.head_ref || github.ref }}"
           echo "Github branchname: ${branchname}"
           branchname="${branchname##*/}"
           echo "Removed leading paths - branchname: ${branchname}"
@@ -115,19 +118,19 @@ jobs:
           echo "Releasename: ${releasename}"
           echo "GH_DEPLOY_ENVIRONMENT=pr-${branchname}" >> $GITHUB_ENV
           echo "RELEASENAME=${releasename}" >> $GITHUB_ENV
-      - name: Get deployment name for main branch
-        if: github.ref == 'refs/heads/main'
+      - name: Get deployment name for release branch
+        if: "github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')"
         run: |
           echo "GH_DEPLOY_ENVIRONMENT=production" >> $GITHUB_ENV
           echo "RELEASENAME=designsystem" >> $GITHUB_ENV
-      - name: Get hostname for feature branch
-        if: github.ref != 'refs/heads/main'
+      - name: Get hostname for develop or feature branch
+        if: "github.event_name != 'push' || !startsWith(github.ref, 'refs/tags/v')"
         run: |
           chmod +x ./.scripts/dns.pl
           hostname=$(perl ./.scripts/dns.pl $DOMAIN "${RELEASENAME}")
           echo "HOSTNAME=${hostname}" >> $GITHUB_ENV
-      - name: Get hostname for main branch
-        if: github.ref == 'refs/heads/main'
+      - name: Get hostname for release branch
+        if: "github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')"
         run: echo "HOSTNAME=cookbook" >> $GITHUB_ENV
       - name: Create Github Deployment
         id: create_deployment
@@ -137,7 +140,7 @@ jobs:
           repository: ${{ github.repository }}
           ref: ${{ github.event_name == 'pull_request' && format('refs/heads/{0}', github.head_ref) || github.ref }}
           environment: ${{ env.GH_DEPLOY_ENVIRONMENT }}
-          production_environment: ${{ github.ref == 'refs/heads/main' }}
+          production_environment: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v') }}
           auto_merge: false
           required_contexts: '[]' # Skip commit checks
           mediaType: '{"previews": ["flash", "ant-man"]}' # some parameters need preview: https://docs.github.com/en/rest/reference/repos#list-deployment-statuses-preview-notices
@@ -227,7 +230,7 @@ jobs:
           route: POST /repos/:repository/deployments/:deployment/statuses
           repository: ${{ github.repository }}
           deployment: ${{ fromJson(steps.create_deployment.outputs.data).id }}
-          environment_url: ${{ env.HOSTNAME == 'cookbook' && format('https://cookbook.{0}', env.DOMAIN) || format('https://cookbook.{0}/branch/{1}/index.html', env.DOMAIN, env.HOSTNAME) }}
+          environment_url: ${{ env.HOSTNAME == 'cookbook' && format('https://cookbook.{0}/test', env.DOMAIN) || format('https://cookbook.{0}/branch/{1}/index.html', env.DOMAIN, env.HOSTNAME) }}
           log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
           state: success
           mediaType: '{"previews": ["ant-man"]}'
