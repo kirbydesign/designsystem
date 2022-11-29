@@ -1,0 +1,79 @@
+<kirby-page-title>Transfer and pay</kirby-page-title>
+
+<flows-transfer-registered
+  *ngIf="transferRegistered"
+  [verifiedDetails]="verifiedDetails"
+></flows-transfer-registered>
+<div *ngIf="!transferRegistered">
+  <input
+    class="currency-input currency-input_large-text"
+    maxlength="12"
+    type="text"
+    #input
+    [(ngModel)]="currency"
+    (input)="currencyEnteredUpdateStyle()"
+  />
+  <span class="currency-input_small-text">kr.</span>
+</div>
+
+<kirby-modal-footer *ngIf="!transferRegistered">
+  <div class="container-over" *ngIf="!receiverChosen">
+    <div class="grid" (click)="showModalChooseOwnAccount()">
+      <p>From</p>
+      <p *ngFor="let account of selectedAccount">
+        <b>{{ account.name }}</b>
+      </p>
+    </div>
+    <kirby-divider></kirby-divider>
+    <div class="container-under">
+      <button kirby-button (click)="showModalChooseReciever()">Choose receiver</button>
+    </div>
+  </div>
+
+  <div class="container-over" *ngIf="receiverChosen">
+    <div class="grid" (click)="showModalChooseOwnAccount()">
+      <p>From</p>
+      <span *ngFor="let account of selectedAccount"
+        ><b>{{ account.name }}</b></span
+      >
+    </div>
+    <kirby-divider></kirby-divider>
+    <div class="grid" (click)="showModalChooseReciever()">
+      <p>To</p>
+      <span *ngFor="let other of selectedReceiver"
+        ><b>{{ other.name }}</b></span
+      >
+    </div>
+    <kirby-divider></kirby-divider>
+    <div class="grid" (click)="showModalChooseDate()">
+      <p>Date</p>
+      <p>
+        <b>{{ date }}</b>
+      </p>
+    </div>
+    <kirby-divider></kirby-divider>
+    <div class="grid" (click)="showModalChooseTextAndMessage()">
+      <p>Text</p>
+      <p>
+        <b>{{ text }}</b>
+      </p>
+    </div>
+    <kirby-divider></kirby-divider>
+    <div class="grid" (click)="showModalChooseTextAndMessage()">
+      <p>Message</p>
+      <p>
+        <b>{{ message }}</b>
+      </p>
+    </div>
+
+    <div class="container-under">
+      <button
+        kirby-button
+        [attr.disabled]="!currencyEntered ? true : null"
+        (click)="showModalVerifyDetails()"
+      >
+        Continue
+      </button>
+    </div>
+  </div>
+</kirby-modal-footer>

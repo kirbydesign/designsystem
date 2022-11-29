@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
@@ -7,14 +7,12 @@ import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
   selector: 'kirbydesign-account',
   templateUrl: './account.component.html',
 })
-export class AccountComponent implements OnInit {
+export class AccountComponent {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private toastController: ToastController
   ) {}
-
-  ngOnInit(): void {}
 
   onCardSelect() {
     const config: ToastConfig = {

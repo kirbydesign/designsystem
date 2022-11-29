@@ -42,7 +42,22 @@
       </div>
       <div class="grid-item half-at-tablet-up">
         <article>
-          <kirby-card hasPadding="true" mode="highlighted"> </kirby-card>
+          <kirby-card
+            hasPadding="true"
+            mode="highlighted"
+            (click)="navigate('transfer-and-pay-flow')"
+          >
+            <kirby-avatar
+              imageSrc="https://picsum.photos/100?random=3"
+              size="md"
+              shadow="true"
+            ></kirby-avatar>
+            <h2 class="card-title">Transfer and pay - Modals in Modal</h2>
+            <p>
+              Showcase of a standard flow of transfering money between own accounts or to others by
+              opening a modal that can open even more modals.
+            </p>
+          </kirby-card>
         </article>
       </div>
       <div class="grid-item half-at-tablet-up">
