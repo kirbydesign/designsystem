@@ -120,7 +120,7 @@ jobs:
           echo "RELEASENAME=${releasename}" >> $GITHUB_ENV
       - name: Get deployment name for release branch
         if: "github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')"
-        run: | #  echo "GH_DEPLOY_REF=${{format('refs/heads/{0}', github.head_ref)}}"
+        run: |
           branchname="$(git branch -r --contains ${{ github.ref }})" 
           echo "TEST Github branchname: ${branchname}"
           branchname="${branchname##*/}"
