@@ -11,7 +11,7 @@ $mobile-gutter: utils.size('s');
 $desktop-gutter: minmax(utils.size('m'), 1fr);
 
 :host {
-  background-color: goldenrod;
+  background-color: utils.get-color('background-color');
   display: grid;
   grid-template-columns: $mobile-gutter minmax(0, 1fr) $mobile-gutter;
   grid-template-rows: $header-height-mobile minmax(0, 1fr) $footer-height;
