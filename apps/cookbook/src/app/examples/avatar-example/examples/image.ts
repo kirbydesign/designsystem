@@ -6,7 +6,8 @@ const config = {
 
 <kirby-avatar imageSrc="/assets/images/woman.png" altText="Example" size="lg" overlay="true" title="Overlay"></kirby-avatar>
 
-<kirby-avatar imageSrc="/assets/images/woman.png" altText="Example" size="lg" shadow="true" title="Shadow"></kirby-avatar>`,
+<kirby-avatar imageSrc="/assets/images/woman.png" altText="Example" size="lg" shadow="true" title="Shadow"></kirby-avatar>
+<kirby-avatar imageSrc="/assets/images/woman.png" altText="Example" size="lg" stroke="true" title="Stroke"></kirby-avatar>`,
 };
 
 @Component({

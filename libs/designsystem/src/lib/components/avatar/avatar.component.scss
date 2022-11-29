@@ -49,6 +49,10 @@ $badge-diameter: utils.$avatar-badge-size;
     border: 1px solid utils.get-color('semi-light');
   }
 
+  &.stroke {
+    border: 1px solid utils.get-color('semi-light');
+  }
+
   &.overlay::before {
     content: '';
     background-color: utils.get-color('black');

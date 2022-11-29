@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input, OnInit } from '@angular/core';
 
 import { BrandColor, NotificationColor } from '@kirbydesign/core';
 
@@ -19,6 +19,7 @@ export class AvatarComponent {
   @Input() imageSrc: string;
   @Input() altText: string;
   @Input() shadow: boolean;
+  @Input() stroke: boolean;
   @Input() text: string;
   @Input() overlay: boolean;
   @Input() size: AvatarSize | `${AvatarSize}` = AvatarSize.SM;
