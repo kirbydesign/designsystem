@@ -67,6 +67,10 @@
   The <em>outside</em> slot can be used for flags as in
   <a href="#" (click)="scrollTo(flagged)">this example</a>.
 </p>
+<p>
+  The <em>disclosure</em> slot can be used for navgation icons which are toned down to Kirby grey-4
+  as in <a href="#" (click)="scrollTo(disclosure)">this example</a>.
+</p>
 
 <section class="sizes">
   <h2>Sizes</h2>
@@ -210,6 +214,17 @@
 <cookbook-example-viewer [html]="inputNumericExample.template">
   <cookbook-item-example-input-numeric #inputNumericExample></cookbook-item-example-input-numeric>
 </cookbook-example-viewer>
+
+<h2 #disclosure>Disclosure slot</h2>
+<cookbook-example-viewer [html]="disclosureExample.template">
+  <cookbook-item-example-disclosure #disclosureExample></cookbook-item-example-disclosure>
+</cookbook-example-viewer>
+<p class="comment small">
+  <em
+    ><strong>Please note</strong>, set disclosure attribute on <code>kirby-item</code> to current
+    available icons in disclosure slot <code> 'link' | 'arrow-more' | 'reorder'</code>
+  </em>
+</p>
 
 <h2>Card with item</h2>
 <cookbook-example-viewer [html]="cardExample.template">
