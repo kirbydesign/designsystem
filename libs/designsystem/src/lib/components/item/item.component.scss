@@ -91,9 +91,9 @@
 .disclosure {
   text-align: center;
   height: 24px;
-  padding-right: 8px;
-  padding-left: 4px;
-  color: #d1d1d1;
+  padding-right: #{utils.size('xxs')};
+  padding-left: #{utils.size('xxxs')};
+  color: #{utils.get-color('medium')};
 }
 
 :host-context(kirby-dropdown) ion-item,
