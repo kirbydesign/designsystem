@@ -121,10 +121,6 @@ jobs:
       - name: Get deployment name for release branch
         if: "github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')"
         run: |
-          branchname=$(git branch -r --contains ${{ github.ref }}) 
-          echo "TEST Github branchname: ${branchname}"
-          branchname="${branchname##*/}"
-          echo "TEST Removed leading paths - branchname: ${branchname}"
           echo "GH_DEPLOY_ENVIRONMENT=production" >> $GITHUB_ENV
           echo "RELEASENAME=designsystem" >> $GITHUB_ENV
       - name: Get hostname for develop or feature branch
