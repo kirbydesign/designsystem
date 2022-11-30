@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Pre
-        run echo Runnnung...
+        run: echo Running...
       - name: Get deployment name for develop or feature branch
         if: "github.event_name == 'pull_request' || github.event_name == 'push' && !startsWith(github.ref, 'refs/tags/v')"
         run: |
@@ -26,5 +26,5 @@ jobs:
           branchname="$(git branch -r --contains ${{ github.ref }})"
           echo "Github branchname: ${branchname}"
       - name: Post
-        run echo End!
+        run: echo End!
 
