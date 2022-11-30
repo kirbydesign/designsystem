@@ -238,7 +238,7 @@ describe('ListComponent', () => {
   });
 
   describe('List have 2 elements', () => {
-    it(`should apply the CSS class 'first' on the first element and apply 'last' on last element`, () => {
+    it(`should apply the CSS class 'first' on the first element`, () => {
       spectator.setInput({
         items: [transactions[0], transactions[0]],
       });
@@ -249,6 +249,17 @@ describe('ListComponent', () => {
       //First element
       expect(list[0].classList).toContain('first');
       expect(list[0].classList).not.toContain('last');
+    });
+  });
+
+  describe('List have 2 elements', () => {
+    it(`should apply the CSS class'last' on last element`, () => {
+      spectator.setInput({
+        items: [transactions[0], transactions[0]],
+      });
+      const list = spectator.queryAll('ion-item-sliding');
+
+      expect(list.length).toBe(2);
 
       //Last element
       expect(list[1].classList).toContain('last');
@@ -257,7 +268,7 @@ describe('ListComponent', () => {
   });
 
   describe('List have 3 elements', () => {
-    it(`should apply the CSS class 'first' on the first element and apply 'last' on last element, the element(s) between first and last should neither have 'first' or 'last' applied`, () => {
+    it(`should apply the CSS class 'first' on the first element`, () => {
       spectator.setInput({
         items: [transactions[0], transactions[0], transactions[0]],
       });
@@ -268,9 +279,32 @@ describe('ListComponent', () => {
       //First element
       expect(list[0].classList).toContain('first');
       expect(list[0].classList).not.toContain('last');
+    });
+  });
+
+  describe('List have 3 elements', () => {
+    it(`should neither apply 'first' or 'last' on the element(s) between first and last`, () => {
+      spectator.setInput({
+        items: [transactions[0], transactions[0], transactions[0]],
+      });
+      const list = spectator.queryAll('ion-item-sliding');
+
+      expect(list.length).toBe(3);
+
       //middle element
       expect(list[1].classList).not.toContain('first');
       expect(list[1].classList).not.toContain('last');
+    });
+  });
+
+  describe('List have 3 elements', () => {
+    it(`should apply 'last' on last element`, () => {
+      spectator.setInput({
+        items: [transactions[0], transactions[0], transactions[0]],
+      });
+      const list = spectator.queryAll('ion-item-sliding');
+
+      expect(list.length).toBe(3);
 
       //Last element
       expect(list[2].classList).toContain('last');
