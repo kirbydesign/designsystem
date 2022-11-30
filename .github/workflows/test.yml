@@ -43,8 +43,8 @@ jobs:
         run: |
           echo "GH_DEPLOY_ENVIRONMENT=production" >> $GITHUB_ENV
           echo "RELEASENAME=designsystem" >> $GITHUB_ENV
-          branchname="test1"
-          echo "Test Github branchname: ${branchname}"
+          branchname1="test1"
+          echo "Test Github branchname: ${branchname1}"
       - name: Get hostname for develop or feature branch
         if: "github.event_name != 'push' || !startsWith(github.ref, 'refs/tags/v')"
         run: |

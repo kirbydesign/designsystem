@@ -3,7 +3,7 @@ name: Build & Deploy Cookbook
 on:
   push: # TODO: Change to `release` event when our release workflow is in place
     branches:
-      - developactiontest
+      - developactiontest1
     tags:
       - 'vt[0-9]+.[0-9]+.[0-9]+'
   pull_request:
