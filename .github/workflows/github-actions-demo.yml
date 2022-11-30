@@ -11,17 +11,20 @@ jobs:
     name: Say hello test
     runs-on: ubuntu-latest
     steps:
-      - name: Hello
+      - name: Pre
+        run echo Runnnung...
+      - name: Get deployment name for develop or feature branch
+        if: "github.event_name == 'pull_request' || github.event_name == 'push' && !startsWith(github.ref, 'refs/tags/v')"
         run: |
           echo Hello feature Branch.
           branchname="${{ github.head_ref || github.ref }}"
           echo "Github feature branchname: ${branchname}"
-      - name: Get deployment name for develop or feature branch
-        if: "github.event_name == 'pull_request' || github.event_name == 'push' && !startsWith(github.ref, 'refs/tags/v')"
       - name: Get hostname for release branch
         if: "github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')"
         run: |
           echo Hello Release Branch.
           branchname="$(git branch -r --contains ${{ github.ref }})"
           echo "Github branchname: ${branchname}"
+      - name: Post
+        run echo End!
 
