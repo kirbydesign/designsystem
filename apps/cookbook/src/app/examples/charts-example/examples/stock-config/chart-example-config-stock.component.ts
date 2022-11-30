@@ -26,7 +26,10 @@ const config = {
 
     config = {
       ...config,
-      plugins: [StockChartConfig.verticalLinePluginConfig, ChartDataLabels],
+      plugins: [
+        StockChartConfig.verticalLinePluginConfig,
+        ChartDataLabels // 'chartjs-plugin-datalabels' package must be installed;
+        ], 
       options: {
         ...config.options,
         plugins: {

@@ -26,7 +26,7 @@ const config = {
 
     config = {
       ...config,
-      plugins: [ChartDataLabels],
+      plugins: [ChartDataLabels],  // 'chartjs-plugin-datalabels' package must be installed;
       options: {
         ...config.options,
         plugins: {

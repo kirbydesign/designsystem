@@ -17,7 +17,7 @@ export class ChartConfigExample {
   static get demoDataString() {
     let demoDataString = '';
     ChartConfigExample.demoData.forEach((datapoint) => {
-      demoDataString += `  x: ${datapoint.x}, y: ${datapoint.y},\n`;
+      demoDataString += `  {x: ${datapoint.x}, y: ${datapoint.y}},\n`;
     });
 
     return `demoData: ScatterDataPoint[] = [ \n${demoDataString}]`;
