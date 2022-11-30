@@ -138,7 +138,7 @@ jobs:
         with:
           route: POST /repos/:repository/deployments
           repository: ${{ github.repository }}
-          ref: ${{ github.event_name == 'pull_request' && format('refs/heads/{0}', github.head_ref) || github.ref }}
+          ref: ${{ github.event_name == 'pull_request' && format('refs/heads/{0}', github.head_ref) || startsWith(github.ref, 'refs/tags/v') && 'refs/heads/develop' || github.ref }}
           environment: ${{ env.GH_DEPLOY_ENVIRONMENT }}
           production_environment: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v') }}
           auto_merge: false
@@ -230,7 +230,7 @@ jobs:
           route: POST /repos/:repository/deployments/:deployment/statuses
           repository: ${{ github.repository }}
           deployment: ${{ fromJson(steps.create_deployment.outputs.data).id }}
-          environment_url: ${{ env.HOSTNAME == 'cookbook' && format('https://cookbook.{0}/test', env.DOMAIN) || format('https://cookbook.{0}/branch/{1}/index.html', env.DOMAIN, env.HOSTNAME) }}
+          environment_url: ${{ env.HOSTNAME == 'cookbook' && format('https://cookbook.{0}', env.DOMAIN) || format('https://cookbook.{0}/branch/{1}/index.html', env.DOMAIN, env.HOSTNAME) }}
           log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
           state: success
           mediaType: '{"previews": ["ant-man"]}'

@@ -1,0 +1,53 @@
+name: Build & Deploy Cookbook
+
+on:
+    tags:
+      - 'vtest[0-9]+'
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  test_deploy_to_cookbook:
+    name: Test deploy cookbook
+    runs-on: ubuntu-latest
+    env:
+      DOMAIN: 'kirby.design'
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Get deployment name for develop or feature branch
+        if: "github.event_name == 'pull_request' || github.event_name == 'push' && !startsWith(github.ref, 'refs/tags/v')"
+        run: |
+          branchname="${{ github.head_ref || github.ref }}"
+          echo "Github branchname: ${branchname}"
+          branchname="${branchname##*/}"
+          echo "Removed leading paths - branchname: ${branchname}"
+          branchname=$(tr [:upper:] [:lower:] <<< "$branchname")
+          echo "Converted to lowercase - branchname: ${branchname}"
+          branchname="${branchname//[^a-zA-Z0-9]/-}"
+          echo "Replaced illegal chars - branchname: ${branchname}"
+          branchname=$(tr -s '-' '-' <<< "$branchname")
+          echo "Removed duplicated dashes - branchname: ${branchname}"
+          branchname="${branchname%%-}"
+          echo "Removed trailing dash - final branchname: ${branchname}"
+          releasename="kby-${branchname}"
+          releasename=$(cut -c 1-53 <<< "$releasename")
+          echo "Releasename: ${releasename}"
+          echo "GH_DEPLOY_ENVIRONMENT=pr-${branchname}" >> $GITHUB_ENV
+          echo "RELEASENAME=${releasename}" >> $GITHUB_ENV
+      - name: Get deployment name for release branch
+        if: "github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')"
+        run: |
+          echo "GH_DEPLOY_ENVIRONMENT=production" >> $GITHUB_ENV
+          echo "RELEASENAME=designsystem" >> $GITHUB_ENV
+      - name: Get hostname for develop or feature branch
+        if: "github.event_name != 'push' || !startsWith(github.ref, 'refs/tags/v')"
+        run: |
+          chmod +x ./.scripts/dns.pl
+          hostname=$(perl ./.scripts/dns.pl $DOMAIN "${RELEASENAME}")
+          echo "HOSTNAME=${hostname}" >> $GITHUB_ENV
+      - name: Get hostname for release branch
+        if: "github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')"
+        run: echo "HOSTNAME=cookbook" >> $GITHUB_ENV
