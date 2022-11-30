@@ -175,7 +175,7 @@ describe('ListComponent', () => {
     });
   });
 
-  fdescribe('when a list have 1 element', () => {
+  describe('when a list have 1 element', () => {
     beforeEach(async () => {
       spectator = createHost<ListComponent>(
         `
@@ -195,7 +195,7 @@ describe('ListComponent', () => {
     });
   });
 
-  fdescribe('when a list have 2 elements', () => {
+  describe('when a list have 2 elements', () => {
     beforeEach(async () => {
       spectator = createHost<ListComponent>(
         `
@@ -226,7 +226,7 @@ describe('ListComponent', () => {
     });
   });
 
-  fdescribe('when a list have 3 elements', () => {
+  describe('when a list have 3 elements', () => {
     beforeEach(async () => {
       spectator = createHost<ListComponent>(
         `
@@ -266,7 +266,7 @@ describe('ListComponent', () => {
     });
   });
 
-  fdescribe('when a list have 3 elements', () => {
+  describe('when a list have 3 elements', () => {
     beforeEach(async () => {
       spectator = createHost<ListComponent>(
         `
