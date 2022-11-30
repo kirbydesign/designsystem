@@ -1,6 +1,7 @@
-name: Build & Deploy Cookbook
+name: Test Only
 
 on:
+  push: 
     tags:
       - 'vtest[0-9]+'
 
