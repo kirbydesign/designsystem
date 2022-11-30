@@ -19,7 +19,7 @@ export class ItemComponent {
   selected: boolean;
   @HostBinding('class.disclosure')
   @Input()
-  disclosure: 'link' | 'arrow-more' | 'reorder';
+  disclosure: 'link' | 'arrow-more' | 'arrow-down' | 'arrow-up';
   @Input() selectable: boolean;
 
   @Input()
