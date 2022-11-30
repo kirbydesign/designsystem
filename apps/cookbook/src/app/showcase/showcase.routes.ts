@@ -53,6 +53,7 @@ import { ToggleButtonShowcaseComponent } from './toggle-button-showcase/toggle-b
 import { ToggleShowcaseComponent } from './toggle-showcase/toggle-showcase.component';
 import { ToolbarShowcaseComponent } from './toolbar-showcase/toolbar-showcase.component';
 import { RadioShowcaseComponent } from './radio-showcase/radio-showcase.component';
+import { CookbookChartConfigShowcaseComponent } from './chart-config-showcase/chart-config-showcase.component';
 
 export const routes: Routes = [
   {
@@ -149,6 +150,13 @@ export const routes: Routes = [
         component: ChartShowcaseComponent,
       },
       { path: 'chart-stock', component: StockChartShowcaseComponent },
+      {
+        path: 'chart-config',
+        component: CookbookChartConfigShowcaseComponent,
+        data: {
+          hide: true, // hidden until we are ready to get users on it.
+        },
+      },
       {
         path: 'fonts',
         component: FontsShowcaseComponent,
