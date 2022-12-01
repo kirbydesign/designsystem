@@ -1,6 +1,6 @@
 {
   "root": true,
-  "extends": ["prettier", "plugin:jasmine/recommended"],
+  "extends": ["prettier"],
   "ignorePatterns": ["**/*"],
   "plugins": ["@nrwl/nx", "prettier", "jasmine"],
   "overrides": [
@@ -45,7 +45,8 @@
         "@angular-eslint/no-outputs-metadata-property": "error",
         "@angular-eslint/use-lifecycle-interface": "error",
         "@angular-eslint/use-pipe-transform-interface": "error",
-        "import/order": "warn"
+        "import/order": "warn",
+        "jasmine/no-focused-tests": 2
       },
       "plugins": ["eslint-plugin-import", "@angular-eslint/eslint-plugin", "@typescript-eslint"]
     },
