@@ -21,6 +21,13 @@ export class ChartConfigExample {
     { x: 4, y: 102 },
   ];
 
+  static barDateDemoData: ScatterDataPoint[] = [
+    { x: 1637049659000, y: 50 },
+    { x: 1633049659000, y: 200 },
+    { x: 1733049659000, y: 83 },
+    { x: 1933049659000, y: 102 },
+  ];
+
   static get demoDataString() {
     let demoDataString = '';
     ChartConfigExample.demoData.forEach((datapoint) => {

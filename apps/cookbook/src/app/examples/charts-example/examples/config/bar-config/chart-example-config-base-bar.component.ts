@@ -22,7 +22,7 @@ export class ChartExampleConfigBaseBarComponent implements AfterViewInit, OnDest
   public canvasId = 'configBarBaseCanvas' + Math.random() * 1000; // necessary as duplicate ids are causing the chart not to be loaded when moving between guide and showcase where the same example is used
 
   private _chart: Chart;
-  private demoData = ChartConfigExample.barDemoData;
+  private demoData = ChartConfigExample.barDateDemoData;
 
   public ngAfterViewInit(): void {
     StockChartConfig.registerPlugins();
@@ -44,7 +44,7 @@ export class ChartExampleConfigBaseBarComponent implements AfterViewInit, OnDest
             data: this.demoData.map((demoDataEntry) => demoDataEntry),
           },
         ],
-        labels: this.demoData.map((demoDataEntry) => ''),
+        labels: this.demoData.map((demoDataEntry) => demoDataEntry.x),
       },
     };
     this._chart = new Chart(this.canvasId, config);
