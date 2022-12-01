@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Lag_1" data-name="Lag 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 150">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #00e89a;
+      }
+
+      .cls-2 {
+        fill: #d1d1d1;
+      }
+    </style>
+  </defs>
+  <rect class="cls-1" x="85.15" y="70.5" width="69.44" height="9" rx="3" ry="3" transform="translate(194.88 -44.88) rotate(90)"/>
+  <rect class="cls-2" x="68.65" y="83" width="44.44" height="9" rx="3" ry="3" transform="translate(178.38 -3.38) rotate(90)"/>
+  <rect class="cls-2" x="126.9" y="83" width="44.44" height="9" rx="3" ry="3" transform="translate(236.63 -61.63) rotate(90)"/>
+  <rect class="cls-2" x="163.96" y="90.41" width="29.63" height="9" rx="3" ry="3" transform="translate(273.68 -83.87) rotate(90)"/>
+</svg>
