@@ -1,8 +1,8 @@
 {
   "root": true,
-  "extends": ["prettier"],
+  "extends": ["prettier", "plugin:jasmine/recommended"],
   "ignorePatterns": ["**/*"],
-  "plugins": ["@nrwl/nx", "prettier"],
+  "plugins": ["@nrwl/nx", "prettier", "jasmine"],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
