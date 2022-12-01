@@ -21,31 +21,31 @@ export class GridShowcaseComponent {
     {
       name: 'xs',
       description: 'Defines the column span for xtra-small screen sizes.',
-      defaultValue: 'null',
+      defaultValue: '',
       type: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
     },
     {
       name: 'sm',
       description: 'Defines the column span for small screen sizes.',
-      defaultValue: 'null',
+      defaultValue: '',
       type: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
     },
     {
       name: 'md',
       description: 'Defines the column span for medium screen sizes.',
-      defaultValue: 'null',
+      defaultValue: '',
       type: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
     },
     {
       name: 'lg',
       description: 'Defines the column span for large screen sizes.',
-      defaultValue: 'null',
+      defaultValue: '',
       type: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
     },
     {
       name: 'xl',
       description: 'Defines the column span for xtra-large screen sizes.',
-      defaultValue: 'null',
+      defaultValue: '',
       type: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
     },
   ];
