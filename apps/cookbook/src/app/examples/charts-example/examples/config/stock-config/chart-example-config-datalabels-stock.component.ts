@@ -2,7 +2,7 @@ import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { StockChartConfig } from '@kirbydesign/designsystem';
 import { Chart } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-import { ChartConfigExample } from './chart-config-example';
+import { ChartConfigExample } from '../chart-config-example';
 
 const config = {
   selector: 'cookbook-chart-example-config-datalabels-stock',
