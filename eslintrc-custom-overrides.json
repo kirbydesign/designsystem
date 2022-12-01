@@ -6,7 +6,12 @@
         "prefer-const": "warn",
         "prefer-rest-params": "error",
         "prefer-spread": "error",
-        "no-empty-function": "warn",
+        "no-empty-function": [
+          "warn",
+          {
+            "allow": ["constructors"]
+          }
+        ],
         "no-extra-boolean-cast": "warn",
         "no-nested-ternary": "warn",
         "no-useless-escape": "warn",

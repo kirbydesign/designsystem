@@ -13,7 +13,7 @@ export const navigationItems: HeaderLink[] = [
   { text: 'Accessibility', route: '/home/accessibility-in-kirby' },
   {
     text: 'Changelog',
-    externalUrl: 'https://github.com/kirbydesign/designsystem/blob/main/CHANGELOG.md',
+    externalUrl: 'https://github.com/kirbydesign/designsystem/releases',
   },
 
   { text: 'GitHub', externalUrl: 'https://github.com/kirbydesign/designsystem' },

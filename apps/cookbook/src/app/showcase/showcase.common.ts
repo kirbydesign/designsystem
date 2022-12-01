@@ -1,10 +1,9 @@
-import { StockChartComponent } from '@kirbydesign/designsystem/components/charts/stock-chart';
-
 import { ExamplesModule } from '../examples/examples.module';
 import { DividerShowcaseComponent } from '../showcase/divider-showcase/divider-showcase.component';
 import { ItemShowcaseComponent } from '../showcase/item-showcase/item-showcase.component';
 import { ReorderListShowcaseComponent } from '../showcase/reorder-list-showcase/reorder-list-showcase.component';
 
+import { ExampleViewerComponent } from '../shared/example-viewer/example-viewer.component';
 import { AccordionShowcaseComponent } from './accordion-showcase/accordion-showcase.component';
 import { ActionSheetShowcaseComponent } from './action-sheet-showcase/action-sheet-showcase.component';
 import { AlertShowcaseComponent } from './alert-showcase/alert-showcase.component';
@@ -53,6 +52,7 @@ import { ToggleShowcaseComponent } from './toggle-showcase/toggle-showcase.compo
 import { ToolbarShowcaseComponent } from './toolbar-showcase/toolbar-showcase.component';
 import { DropdownShowcaseComponent } from './dropdown-showcase/dropdown-showcase.component';
 import { DataTableShowcaseComponent } from './data-table-showcase/data-table-showcase.component';
+import { CookbookChartConfigShowcaseComponent } from './chart-config-showcase/chart-config-showcase.component';
 
 export const COMPONENT_IMPORTS: any[] = [ExamplesModule, ShowcaseRoutingModule];
 
@@ -106,6 +106,8 @@ export const COMPONENT_EXPORTS: any[] = [
   StylingHtmlListsShowcaseComponent,
   ListExperimentalShowcaseComponent,
   DataTableShowcaseComponent,
+  CookbookChartConfigShowcaseComponent,
+  ExampleViewerComponent,
 ];
 
 export const COMPONENT_DECLARATIONS: any[] = [...COMPONENT_EXPORTS, ShowcaseComponent];
