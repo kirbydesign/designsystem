@@ -14,26 +14,27 @@ export class ChartConfigExample {
     { x: 1637051160000, y: 127.08 },
   ];
 
-  static barDemoData: ScatterDataPoint[] = [
+  public static barDemoData: ScatterDataPoint[] = [
     { x: 1, y: 50 },
     { x: 2, y: 200 },
     { x: 3, y: 83 },
     { x: 4, y: 102 },
   ];
 
-  static barDateDemoData: ScatterDataPoint[] = [
-    { x: 1637049659000, y: 50 },
-    { x: 1633049659000, y: 200 },
-    { x: 1733049659000, y: 83 },
-    { x: 1933049659000, y: 102 },
-  ];
+  public static get barDemoDataString() {
+    return this.demoDataToString(ChartConfigExample.barDemoData);
+  }
 
-  static get demoDataString() {
+  public static get demoDataString() {
+    return this.demoDataToString(ChartConfigExample.demoData);
+  }
+
+  private static demoDataToString = (data: ScatterDataPoint[]) => {
     let demoDataString = '';
-    ChartConfigExample.demoData.forEach((datapoint) => {
-      demoDataString += `  {x: ${datapoint.x}, y: ${datapoint.y}},\n`;
+    data.forEach((datapoint) => {
+      demoDataString += `  { x: ${datapoint.x}, y: ${datapoint.y} },\n`;
     });
 
     return `demoData: ScatterDataPoint[] = [ \n${demoDataString}]`;
-  }
+  };
 }

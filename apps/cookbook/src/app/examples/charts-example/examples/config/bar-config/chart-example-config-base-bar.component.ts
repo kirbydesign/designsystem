@@ -1,6 +1,8 @@
+import { JSDocComment } from '@angular/compiler';
 import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { BarChartConfig, StockChartConfig } from '@kirbydesign/designsystem';
-import { Chart } from 'chart.js';
+import { Chart, ScatterDataPoint } from 'chart.js';
+import { Color } from 'highcharts';
 import { ChartConfigExample } from '../chart-config-example';
 
 const config = {
@@ -8,7 +10,36 @@ const config = {
   template: `<div style="position: relative; height: 300px;">
   <canvas id="{{ canvasId }}"> <!-- Your accessible content here --> </canvas>
 </div>`, // container must be positioned relative: https://www.chartjs.org/docs/latest/configuration/responsive.html#important-note
-  codeSnippet: `yolo`,
+  codeSnippet: `private _chart: Chart;
+  
+public ngAfterViewInit(): void {
+  StockChartConfig.registerPlugins();
+  this.createChart();
+}
+
+public ngOnDestroy(): void {
+  this._chart.destroy();
+}
+
+private createChart() {
+  let config = BarChartConfig.baseConfig;
+
+  config = {
+    ...config,
+    options: {
+      ...config.options,
+    },
+    data: {
+      datasets: [
+        {
+          data: this.demoData,
+        },
+      ],
+      labels: this.demoData.map((_) => ''),
+    },
+  };
+  this._chart = new Chart(this.canvasId, config);
+}`,
 };
 
 @Component({
@@ -22,7 +53,7 @@ export class ChartExampleConfigBaseBarComponent implements AfterViewInit, OnDest
   public canvasId = 'configBarBaseCanvas' + Math.random() * 1000; // necessary as duplicate ids are causing the chart not to be loaded when moving between guide and showcase where the same example is used
 
   private _chart: Chart;
-  private demoData = ChartConfigExample.barDateDemoData;
+  private demoData = ChartConfigExample.barDemoData;
 
   public ngAfterViewInit(): void {
     StockChartConfig.registerPlugins();
@@ -38,13 +69,16 @@ export class ChartExampleConfigBaseBarComponent implements AfterViewInit, OnDest
 
     config = {
       ...config,
+      options: {
+        ...config.options,
+      },
       data: {
         datasets: [
           {
-            data: this.demoData.map((demoDataEntry) => demoDataEntry),
+            data: this.demoData,
           },
         ],
-        labels: this.demoData.map((demoDataEntry) => demoDataEntry.x),
+        labels: this.demoData.map((_) => ''),
       },
     };
     this._chart = new Chart(this.canvasId, config);
