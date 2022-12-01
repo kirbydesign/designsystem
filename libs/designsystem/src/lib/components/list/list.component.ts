@@ -242,10 +242,10 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     args.event.stopPropagation();
   }
 
-  _getBoundaryClass(index: number, section?: any[]): BoundaryClass {
+  _getBoundaryClass(index: number, section?: any[]): BoundaryClass[] | BoundaryClass {
     if (index === 0) {
       if (this.headerTemplate) return null;
-      else return section.length === 1 ? 'first last' : 'first';
+      else return section.length === 1 ? ['first', 'last'] : 'first';
     }
 
     if (index === section.length - 1) {
