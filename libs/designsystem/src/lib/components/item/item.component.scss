@@ -89,11 +89,8 @@
 }
 
 .disclosure {
-  text-align: center;
-  height: 24px;
-  padding-right: #{utils.size('xxs')};
   padding-left: #{utils.size('xxxs')};
-  color: #{utils.get-color('medium')};
+  color: #{utils.get-color('semi-dark')};
 }
 
 :host-context(kirby-dropdown) ion-item,
@@ -117,7 +114,7 @@
 
 :host(.disclosure) {
   ion-item {
-    --inner-padding-end: 0px;
+    --inner-padding-end: #{utils.size('xxs')};
   }
 }
 
