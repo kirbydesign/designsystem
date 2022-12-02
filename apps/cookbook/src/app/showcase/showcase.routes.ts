@@ -4,6 +4,7 @@ import { ModalRoutePage1ExampleComponent } from '../examples/modal-example/modal
 import { ModalRoutePage2ExampleComponent } from '../examples/modal-example/modal-route-example/modal-route-page2-example.component';
 import { ItemShowcaseComponent } from '../showcase/item-showcase/item-showcase.component';
 
+import { ModalRouteExperimentalPage1ExampleComponent } from '../examples/modal-experimental-example/modal-route-example/modal-route-page1-example.component';
 import { AccordionShowcaseComponent } from './accordion-showcase/accordion-showcase.component';
 import { ActionSheetShowcaseComponent } from './action-sheet-showcase/action-sheet-showcase.component';
 import { AlertShowcaseComponent } from './alert-showcase/alert-showcase.component';
@@ -177,6 +178,18 @@ export const routes: Routes = [
       {
         path: 'modal-experimental',
         component: ModalExperimentalShowcaseComponent,
+        children: [
+          {
+            path: 'page1',
+            outlet: 'modal',
+            component: ModalRouteExperimentalPage1ExampleComponent,
+          },
+          // {
+          //   path: 'page2',
+          //   outlet: 'modal',
+          //   component: ModalRoutePage2ExampleComponent,
+          // },
+        ],
       },
       {
         path: 'loading-overlay',

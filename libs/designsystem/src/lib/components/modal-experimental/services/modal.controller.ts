@@ -1,5 +1,5 @@
-import { Inject, Injectable, Optional } from '@angular/core';
-import { ActivatedRoute, ROUTES, Routes } from '@angular/router';
+import { Inject, Injectable, OnDestroy, Optional } from '@angular/core';
+import { ActivatedRoute, Params, ROUTES, Routes } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { Observable, Subject } from 'rxjs';
 import { filter, map, takeUntil } from 'rxjs/operators';
@@ -15,7 +15,7 @@ export type ModalConfig = {
 };
 
 @Injectable()
-export class ModalExperimentalController {
+export class ModalExperimentalController implements OnDestroy {
   private ionModal: HTMLIonModalElement;
   private destroy$ = new Subject<void>();
 
@@ -49,21 +49,23 @@ export class ModalExperimentalController {
     return this.ionModal.dismiss(data, role);
   }
 
-  private onModalRouteActivated(modalRouteActivated$: Observable<ModalRouteActivation>) {
-    // const navigateOnWillClose = () => {
-    //   this.modalNavigationService.navigateOutOfModalOutlet();
-    // };
-
+  private async onModalRouteActivated(modalRouteActivated$: Observable<ModalRouteActivation>) {
     modalRouteActivated$.pipe(takeUntil(this.destroy$)).subscribe(async (modalRouteActivation) => {
       if (modalRouteActivation.isNewModal) {
-        this.showModalRoute(modalRouteActivation.route);
+        const modal = await this.showModalRoute(modalRouteActivation.route);
+        await modal.onWillDismiss();
+        this.modalNavigationService.navigateOutOfModalOutlet();
       }
     });
   }
 
   private onModalRouteDeactivated(modalRouteDeactivated$: Observable<boolean>) {
     modalRouteDeactivated$.pipe(takeUntil(this.destroy$)).subscribe(async () => {
-      this.ionModal.dismiss();
+      this.modalNavigationService.navigateOutOfModalOutlet();
+
+      if (this.ionModal) {
+        this.ionModal.dismiss();
+      }
     });
   }
 
@@ -75,5 +77,14 @@ export class ModalExperimentalController {
 
     const modal = await this.showModal(config);
     return modal;
+  }
+
+  public async navigateToModal(path: string | string[], queryParams?: Params): Promise<boolean> {
+    return this.modalNavigationService.navigateToModal(path, queryParams);
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

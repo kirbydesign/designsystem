@@ -23,4 +23,8 @@ export class ModalExperimentalShowcaseComponent {
 
     console.log('This is data and role', data, role);
   }
+
+  openRoute() {
+    this.modalController.navigateToModal('page1');
+  }
 }
