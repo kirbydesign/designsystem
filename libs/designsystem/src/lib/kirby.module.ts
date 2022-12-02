@@ -211,6 +211,6 @@ export class KirbyModule {
     modalController: ModalController,
     @Optional() @Inject(ConfigToken) config?: KirbyConfig
   ) {
-    // modalController.initialize(config && config.moduleRootRoutePath);
+    modalController.initialize(config && config.moduleRootRoutePath);
   }
 }
