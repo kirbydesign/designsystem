@@ -3,10 +3,10 @@ import { ActivatedRoute, NavigationEnd, Params, Route, Router, Routes } from '@a
 import { EMPTY, Observable } from 'rxjs';
 import { filter, first, map, pairwise, startWith } from 'rxjs/operators';
 
-import { ModalRouteActivation } from './modal.interfaces';
+import { ModalRouteActivation } from '../../modal/services/modal.interfaces';
 
 @Injectable({ providedIn: 'root' })
-export class ModalNavigationService {
+export class ModalExperimentalNavigationService {
   constructor(private router: Router, private route: ActivatedRoute) {}
 
   isModalRoute(url: string): boolean {
@@ -21,31 +21,17 @@ export class ModalNavigationService {
     return childRoute;
   }
 
-  private async getModalRoutes(
-    routeConfig: Routes[],
-    moduleRootRoutePath?: string
-  ): Promise<string[]> {
+  private async getModalRoutes(routeConfig: Routes[]): Promise<string[]> {
     const flattenedRoutes: Routes = [].concat(...routeConfig);
     let modalRoutes: string[] = [];
-    const moduleRootPaths = await this.getModuleRootPath(flattenedRoutes, moduleRootRoutePath);
+    const moduleRootPaths = await this.getModuleRootPath(flattenedRoutes);
     if (moduleRootPaths) {
       modalRoutes = this.getModalRoutePaths(flattenedRoutes, moduleRootPaths);
     }
-    console.log('modalRoutes', modalRoutes);
     return modalRoutes;
   }
 
-  private async getModuleRootPath(routes: Routes, moduleRootRoutePath?: string): Promise<string[]> {
-    if (moduleRootRoutePath) {
-      const trimmedPaths = moduleRootRoutePath
-        .trim()
-        .split('/')
-        .filter((path) => !!path);
-      const rootPath = [''];
-      console.log('This is trimmed paths', trimmedPaths);
-      return rootPath.concat(trimmedPaths);
-    }
-
+  private async getModuleRootPath(routes: Routes): Promise<string[]> {
     const currentRoutePaths = await this.getCurrentRoutePaths();
     const moduleRootPaths = this.getRoutePathsWithoutChildSegments(currentRoutePaths, routes);
     return moduleRootPaths;
@@ -268,12 +254,11 @@ export class ModalNavigationService {
   }
 
   async getModalNavigation(
-    routeConfig: Routes[],
-    moduleRootRoutePath?: string
+    routeConfig: Routes[]
   ): Promise<{ activated$: Observable<ModalRouteActivation>; deactivated$: Observable<boolean> }> {
     if (Array.isArray(routeConfig)) {
       const navigationEnd$ = await this.waitForCurrentThenGetNavigationEndStream();
-      const modalRoutes = await this.getModalRoutes(routeConfig, moduleRootRoutePath);
+      const modalRoutes = await this.getModalRoutes(routeConfig);
       const hasModalRoutes = modalRoutes.length > 0;
       if (hasModalRoutes) {
         const modalRoutesContainsUrlParams = modalRoutes.some((route) => route.includes('/:'));
@@ -294,7 +279,7 @@ export class ModalNavigationService {
     return { activated$: EMPTY, deactivated$: EMPTY };
   }
 
-  async navigateToModal(path: string | string[], queryParams?: Params): Promise<boolean> {
+  public async navigateToModal(path: string | string[], queryParams?: Params): Promise<boolean> {
     const commands = Array.isArray(path) ? path : path.split('/');
     const childPath = commands.pop();
     const result = await this.router.navigate([...commands, { outlets: { modal: [childPath] } }], {
@@ -304,14 +289,14 @@ export class ModalNavigationService {
     return result;
   }
 
-  async navigateWithinModal(relativePath: string, queryParams?: Params): Promise<boolean> {
+  public async navigateWithinModal(relativePath: string, queryParams?: Params): Promise<boolean> {
     return this.router.navigate([relativePath], {
       queryParams,
       relativeTo: this.getCurrentActivatedRoute(),
     });
   }
 
-  async navigateOutOfModalOutlet(): Promise<boolean> {
+  public async navigateOutOfModalOutlet(): Promise<boolean> {
     let result = Promise.resolve(true);
     const currentActivatedRoute = this.getCurrentActivatedRoute();
     if (currentActivatedRoute.outlet === 'modal') {
