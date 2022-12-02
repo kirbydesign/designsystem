@@ -18,7 +18,7 @@ import { CalendarYearNavigatorConfig } from './options/calendar-year-navigator-c
 // as the last one. This makes the component update without the need to
 // explicitly call spectator.component.ngOnChanges()
 
-describe('CalendarComponent', () => {
+fdescribe('CalendarComponent', () => {
   let spectator: SpectatorHost<CalendarComponent>;
 
   const createHost = createHostFactory({
@@ -462,6 +462,22 @@ describe('CalendarComponent', () => {
       });
     });
   });
+
+  // describe('Locale', () => {
+  //   let createHost;
+  //   beforeAll(() => {
+  //     createHost = createHostFactory({
+  //       component: CalendarComponent,
+  //       providers: [{ provide: LOCALE_ID, useValue: 'da-DK' }],
+  //     });
+  //   });
+
+  //   it(`should display month in Danish as Module local provided is 'da-dk'`, () => {
+  //     // spectator.setInput('selectedDate', localMidnightDate('2021-02-02'));
+  //     expect(spectator.query('kirby-calendar')).toHaveText('February');
+
+  //   });
+  // });
 
   // constants and utility functions
 
