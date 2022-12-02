@@ -1,8 +1,6 @@
-import { JSDocComment } from '@angular/compiler';
 import { AfterViewInit, Component, OnDestroy } from '@angular/core';
-import { BarChartConfig, StockChartConfig } from '@kirbydesign/designsystem';
-import { Chart, ScatterDataPoint } from 'chart.js';
-import { Color } from 'highcharts';
+import { BarChartConfig } from '@kirbydesign/designsystem';
+import { Chart } from 'chart.js';
 import { ChartConfigExample } from '../chart-config-example';
 
 const config = {
@@ -13,7 +11,6 @@ const config = {
   codeSnippet: `private _chart: Chart;
   
 public ngAfterViewInit(): void {
-  StockChartConfig.registerPlugins();
   this.createChart();
 }
 
@@ -56,7 +53,6 @@ export class ChartExampleConfigBaseBarComponent implements AfterViewInit, OnDest
   private demoData = ChartConfigExample.barDemoData;
 
   public ngAfterViewInit(): void {
-    StockChartConfig.registerPlugins();
     this.createChart();
   }
 
