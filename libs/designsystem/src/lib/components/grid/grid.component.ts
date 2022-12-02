@@ -6,7 +6,7 @@ import { BreakpointHelperService } from './breakpoint-helper.service';
 import { GridCardConfiguration } from './grid-card-configuration';
 
 const GRID_DEPRICATION_WARNING =
-  'Deprecation warning: The "kirby-grid" component will be removed in a future release of Kirby designsystem. Consider using kirby-grid, kirby-grid-item css-classes as an alternative solution.';
+  'Deprecation warning: The "kirby-grid" component will be removed in a future release of Kirby designsystem. Consider using kirby-grid, kirby-grid-item css-classes as an alternative solution. See grid docs at https://cookbook.kirby.design/#/home/showcase/grid';
 
 class GridCard {
   configuration: GridCardConfiguration;
