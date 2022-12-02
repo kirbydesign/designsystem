@@ -146,10 +146,6 @@
   The <em>outside</em> slot can be used for flags as in
   <a href="#" (click)="scrollTo(flagged)">this example</a>.
 </p>
-<p>
-  The <em>disclosure</em> slot can be used for navigation icons which are toned down to Kirby grey-4
-  as in <a href="#" (click)="scrollTo(disclosure)">this example</a>.
-</p>
 
 <section class="sizes">
   <h2>Sizes</h2>
@@ -294,14 +290,13 @@
   <cookbook-item-example-input-numeric #inputNumericExample></cookbook-item-example-input-numeric>
 </cookbook-example-viewer>
 
-<h2 #disclosure>Disclosure slot</h2>
+<h2 #disclosure>Disclosure</h2>
 <cookbook-example-viewer [html]="disclosureExample.template">
   <cookbook-item-example-disclosure #disclosureExample></cookbook-item-example-disclosure>
 </cookbook-example-viewer>
 <p class="comment small">
   <em
-    ><strong>Please note</strong>, set disclosure attribute on <code>kirby-item</code> to current
-    available icons in disclosure slot
+    ><strong>Please note</strong>, the disclosure input is limited to a set of predefined icons:
     <code> 'link' | 'arrow-more' | 'arrow-down' | 'arrow-up'</code>
   </em>
 </p>
@@ -311,8 +306,13 @@
   <cookbook-item-example-card #cardExample></cookbook-item-example-card>
 </cookbook-example-viewer>
 
-<h2>CSS Custom Properties</h2>
+<h2>API</h2>
 <cookbook-api-description-properties
   [properties]="properties"
-  [columns]="columns"
+></cookbook-api-description-properties>
+
+<h2>CSS Custom Properties</h2>
+<cookbook-api-description-properties
+  [properties]="customCssProperties"
+  [columns]="customCssPropertiesColumns"
 ></cookbook-api-description-properties>
