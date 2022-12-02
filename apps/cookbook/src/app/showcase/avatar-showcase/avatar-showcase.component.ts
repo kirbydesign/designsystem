@@ -43,7 +43,7 @@ export class AvatarShowcaseComponent {
     },
     {
       name: 'stroke',
-      description: 'Adds a inside stroke to the avatar.',
+      description: 'Adds an outline to the avatar.',
       defaultValue: 'false',
       type: ['true', 'false'],
     },
