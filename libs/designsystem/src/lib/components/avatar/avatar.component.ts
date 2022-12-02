@@ -32,11 +32,13 @@ export class AvatarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.shadow) {
-      this.stroke = true;
-      console.warn(
-        'Shadow input binding on avatar will be deprecated next major. Use stroke instead'
-      );
+    if (!this.shadow) {
+      return;
     }
+
+    this.stroke = true;
+    console.warn(
+      'Shadow input binding on avatar will be deprecated next major. Use stroke instead'
+    );
   }
 }
