@@ -82,4 +82,15 @@ describe('ItemComponent', () => {
       expect(spectator.query('ion-item')).toHaveComputedStyle({ '--padding-bottom': size('xxs') });
     });
   });
+
+  describe('when disclosure is set to something valid', () => {
+    it('should Inner-padding-end be 8px', () => {
+      spectator.component.disclosure = 'arrow-more';
+      spectator.detectChanges();
+
+      expect(spectator.query('ion-item')).toHaveComputedStyle({
+        '--inner-padding-end': size('xxs'),
+      });
+    });
+  });
 });
