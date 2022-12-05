@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { StockChartConfig } from '@kirbydesign/designsystem';
 import { Chart } from 'chart.js';
-import { ChartConfigExample } from './chart-config-example';
+import { ChartConfigExample } from '../chart-config-example';
 
 const config = {
   selector: 'cookbook-chart-example-config-base-stock',

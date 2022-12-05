@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ChartConfigExample } from '../../examples/charts-example/examples/stock-config/chart-config-example';
+import { ChartConfigExample } from '../../examples/charts-example/examples/config/chart-config-example';
 
 @Component({
   selector: 'cookbook-chart-config-guide',
