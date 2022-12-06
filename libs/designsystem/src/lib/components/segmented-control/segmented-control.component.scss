@@ -152,8 +152,12 @@ ion-segment-button {
   }
 
   ion-segment-button {
-    --indicator-color: rgb(255 255 255 / 30%);
+    --indicator-color: white;
     --color: #{utils.get-color('medium')};
+
+    &.segment-button-checked {
+      color: utils.get-color('black');
+    }
   }
 }
 
