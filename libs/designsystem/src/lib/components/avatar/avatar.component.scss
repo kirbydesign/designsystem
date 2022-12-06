@@ -45,8 +45,8 @@ $badge-diameter: utils.$avatar-badge-size;
   // default to icon size 'sm'
   --kirby-icon-font-size: #{utils.icon-font-size('sm')};
 
-  &.shadow {
-    box-shadow: 0 2px 4px 2px rgb(113 113 113 / 40%);
+  &.stroke {
+    border: 1px solid utils.get-color('semi-light');
   }
 
   &.overlay::before {
