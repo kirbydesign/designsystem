@@ -31,6 +31,7 @@ $slide-button-text-padding: 0 $slide-button-container-radius 0 $total-slider-thu
   width: $slide-button-width;
   height: $slide-button-width;
   border: none;
+  pointer-events: all;
 }
 
 :host {
@@ -71,6 +72,7 @@ $slide-button-text-padding: 0 $slide-button-container-radius 0 $total-slider-thu
     width: 100%;
     text-align: center;
     padding: $slide-button-text-padding;
+    pointer-events: none;
   }
 
   .slide-button {
@@ -80,6 +82,7 @@ $slide-button-text-padding: 0 $slide-button-container-radius 0 $total-slider-thu
     appearance: none;
     background: transparent;
     z-index: 2;
+    pointer-events: none;
   }
 
   .slide-button::-webkit-slider-thumb {

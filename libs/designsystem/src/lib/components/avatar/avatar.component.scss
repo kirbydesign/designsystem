@@ -47,6 +47,7 @@ $badge-diameter: utils.$avatar-badge-size;
 
   &.shadow {
     box-shadow: utils.get-elevation(2);
+
   }
 
   &.overlay::before {

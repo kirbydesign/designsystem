@@ -1,1 +1,90 @@
-<kirby-grid [maxColumns]="2" [cardConfigurations]="cardConfigurations"></kirby-grid>
+<div class="grid-example-container">
+  <h2>Basic Grid</h2>
+  <div class="kirby-grid">
+    <div class="kirby-grid-item" xs="8">
+      <kirby-card>
+        <kirby-card-header title="xs='8'"></kirby-card-header>
+      </kirby-card>
+    </div>
+    <div class="kirby-grid-item" xs="4">
+      <kirby-card>
+        <kirby-card-header title="xs='4'"></kirby-card-header>
+      </kirby-card>
+    </div>
+    <div class="kirby-grid-item" xs="4">
+      <kirby-card>
+        <kirby-card-header title="xs='8'"></kirby-card-header>
+      </kirby-card>
+    </div>
+    <div class="kirby-grid-item" xs="8">
+      <kirby-card>
+        <kirby-card-header title="xs='8'"></kirby-card-header>
+      </kirby-card>
+    </div>
+  </div>
+</div>
+
+<div class="grid-example-container">
+  <h2>Multiple breakpoints</h2>
+  <div class="kirby-grid">
+    <div class="kirby-grid-item" xs="12" sm="8">
+      <kirby-card>
+        <kirby-card-header title="xs='12' sm='8'"></kirby-card-header>
+      </kirby-card>
+    </div>
+    <div class="kirby-grid-item" xs="12" sm="4">
+      <kirby-card>
+        <kirby-card-header title="xs='12' sm='4'"></kirby-card-header>
+      </kirby-card>
+    </div>
+    <div class="kirby-grid-item" xs="12" sm="4">
+      <kirby-card>
+        <kirby-card-header title="xs='12' sm='4'"></kirby-card-header>
+      </kirby-card>
+    </div>
+    <div class="kirby-grid-item" xs="12" sm="8">
+      <kirby-card>
+        <kirby-card-header title="xs='12' sm='8'"></kirby-card-header>
+      </kirby-card>
+    </div>
+  </div>
+</div>
+
+<div class="grid-example-container">
+  <h2>Spacing</h2>
+  <fieldset>
+    <legend>Grid Spacing</legend>
+    <select (change)="onSpacingSizeChange($event.target.value)">
+      <option value="">-</option>
+      <option
+        *ngFor="let size of spacingSizes"
+        value="{{ size.value }}"
+        [attr.selected]="spacingSizes === size.value ? true : null"
+      >
+        {{ size.text }}
+      </option>
+    </select>
+  </fieldset>
+  <div class="kirby-grid" attr.spacing="{{ spacing }}">
+    <div class="kirby-grid-item" xs="8">
+      <kirby-card>
+        <kirby-card-header title="xs='8'"></kirby-card-header>
+      </kirby-card>
+    </div>
+    <div class="kirby-grid-item" xs="4">
+      <kirby-card>
+        <kirby-card-header title="xs='4'"></kirby-card-header>
+      </kirby-card>
+    </div>
+    <div class="kirby-grid-item" xs="4">
+      <kirby-card>
+        <kirby-card-header title="xs='8'"></kirby-card-header>
+      </kirby-card>
+    </div>
+    <div class="kirby-grid-item" xs="8">
+      <kirby-card>
+        <kirby-card-header title="xs='8'"></kirby-card-header>
+      </kirby-card>
+    </div>
+  </div>
+</div>
