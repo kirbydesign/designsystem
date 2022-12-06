@@ -18,7 +18,6 @@ import {
   Optional,
   Output,
   QueryList,
-  Renderer2,
   SimpleChanges,
   SkipSelf,
   TemplateRef,
@@ -26,8 +25,9 @@ import {
 } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router, RouterEvent } from '@angular/router';
 import { IonBackButtonDelegate, IonContent, IonFooter, IonHeader } from '@ionic/angular';
+import { ScrollDetail } from '@ionic/core';
 import { Observable, Subject } from 'rxjs';
-import { filter, takeUntil } from 'rxjs/operators';
+import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
 
 import { KirbyAnimation } from '../../animation/kirby-animation';
 import { FitHeadingConfig } from '../../directives/fit-heading/fit-heading.directive';
@@ -40,6 +40,12 @@ import {
 } from '../modal/services/modal.interfaces';
 import { selectedTabClickEvent } from '../tabs/tab-button/tab-button.events';
 import { TabsComponent } from '../tabs/tabs.component';
+
+/**
+ * Specify scroll event debounce time in ms and scrolled offset from top in pixels
+ */
+const contentScrollDebounceTimeInMS = 10;
+const contentScrolledOffsetInPixels = 4;
 
 type stickyConfig = { sticky: boolean };
 type fixedConfig = { fixed: boolean };
@@ -161,9 +167,7 @@ export class PageActionsComponent {}
   styleUrls: ['./page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PageComponent
-  implements OnInit, OnDestroy, AfterViewInit, AfterContentChecked, OnChanges
-{
+export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChecked, OnChanges {
   @Input() title: string;
   @Input() subtitle: string;
   @Input() toolbarTitle: string;
@@ -202,6 +206,8 @@ export class PageComponent
   private backButtonDelegate: IonBackButtonDelegate;
   @ViewChild('pageTitle', { static: false, read: ElementRef })
   private pageTitle: ElementRef;
+  @ViewChild('stickyContentContainer', { static: false, read: ElementRef })
+  private stickyContentContainer: ElementRef;
 
   @ViewChild('simpleTitleTemplate', { static: true, read: TemplateRef })
   private simpleTitleTemplate: TemplateRef<any>;
@@ -222,10 +228,9 @@ export class PageComponent
 
   hasPageTitle: boolean;
   hasPageSubtitle: boolean;
-  hasActionsInPage: boolean;
   toolbarTitleVisible: boolean;
-  toolbarFixedActionsVisible: boolean;
-  toolbarStickyActionsVisible: boolean;
+  isContentScrolled: boolean;
+  isStickyContentPinned: boolean;
 
   fitHeadingConfig: FitHeadingConfig;
 
@@ -239,33 +244,30 @@ export class PageComponent
 
   private pageTitleIntersectionObserverRef: IntersectionObserver =
     this.pageTitleIntersectionObserver();
+  private stickyContentIntersectionObserverRef = this.stickyContentIntersectionObserver();
 
   private url: string;
   private isActive: boolean;
 
   private ngOnDestroy$: Subject<void> = new Subject<void>();
+  private contentScrolled$: Observable<ScrollDetail>;
+
   private navigationStart$: Observable<RouterEvent> = this.router.events.pipe(
-    takeUntil(this.ngOnDestroy$),
-    filter((event: RouterEvent) => event instanceof NavigationStart)
+    filter((event: RouterEvent) => event instanceof NavigationStart),
+    takeUntil(this.ngOnDestroy$)
   );
 
   private navigationEnd$: Observable<RouterEvent> = this.router.events.pipe(
-    takeUntil(this.ngOnDestroy$),
-    filter((event: RouterEvent) => event instanceof NavigationEnd)
+    filter((event: RouterEvent) => event instanceof NavigationEnd),
+    takeUntil(this.ngOnDestroy$)
   );
 
   constructor(
-    private elementRef: ElementRef,
-    private renderer: Renderer2,
     private router: Router,
     private changeDetectorRef: ChangeDetectorRef,
     private modalNavigationService: ModalNavigationService,
     @Optional() @SkipSelf() private tabsComponent: TabsComponent
   ) {}
-
-  ngOnInit(): void {
-    this.removeWrapper();
-  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.titleMaxLines) {
@@ -281,6 +283,17 @@ export class PageComponent
   }
 
   ngAfterViewInit(): void {
+    this.contentScrolled$ = this.content.ionScroll.pipe(
+      debounceTime(contentScrollDebounceTimeInMS),
+      map((event) => event.detail),
+      takeUntil(this.ngOnDestroy$)
+    );
+
+    this.contentScrolled$.subscribe((scrollInfo: ScrollDetail) => {
+      this.isContentScrolled = scrollInfo.scrollTop > contentScrolledOffsetInPixels;
+      this.changeDetectorRef.detectChanges();
+    });
+
     // This instance has observed a page enter so register the correct url for this instance
     this.url = this.router.url;
     this.onEnter();
@@ -303,6 +316,7 @@ export class PageComponent
     });
 
     this.interceptBackButtonClicksSetup();
+    this.initializeStickyIntersectionObserver();
   }
 
   ngAfterContentChecked(): void {
@@ -318,6 +332,7 @@ export class PageComponent
     this.ngOnDestroy$.complete();
 
     this.pageTitleIntersectionObserverRef.disconnect();
+    this.stickyContentIntersectionObserverRef.disconnect();
   }
 
   delegateRefreshEvent(event: any): void {
@@ -362,6 +377,17 @@ export class PageComponent
     };
   }
 
+  private initializeStickyIntersectionObserver() {
+    if (this.stickyContentTemplate) {
+      // Sticky content present - start observing for stickiness
+      setTimeout(() => {
+        this.stickyContentIntersectionObserverRef.observe(
+          this.stickyContentContainer.nativeElement
+        );
+      });
+    }
+  }
+
   private initializeTitle() {
     // Ensures initializeTitle() won't run, if already initialized
     if (this.hasPageTitle) return;
@@ -389,15 +415,12 @@ export class PageComponent
     this.customActions.forEach((pageAction) => {
       if (pageAction.isFixed) {
         this.fixedActionsTemplate = pageAction.template;
-        this.toolbarFixedActionsVisible = true;
+      } else if (pageAction.isSticky) {
+        this.stickyActionsTemplate = pageAction.template;
       } else {
         this.pageActionsTemplate = pageAction.template;
-        if (pageAction.isSticky) {
-          this.stickyActionsTemplate = pageAction.template;
-        }
       }
     });
-    this.hasActionsInPage = !!this.pageActionsTemplate;
   }
 
   private initializeContent() {
@@ -414,14 +437,6 @@ export class PageComponent
     this.stickyContentTemplate = this.stickyContentRef;
   }
 
-  private removeWrapper() {
-    const parent = this.elementRef.nativeElement.parentNode;
-    this.renderer.removeChild(parent, this.elementRef.nativeElement);
-    this.renderer.appendChild(parent, this.ionHeaderElement.nativeElement);
-    this.renderer.appendChild(parent, this.ionContentElement.nativeElement);
-    this.renderer.appendChild(parent, this.ionFooterElement.nativeElement);
-  }
-
   private pageTitleIntersectionObserver() {
     const options = {
       rootMargin: '0px',
@@ -431,11 +446,22 @@ export class PageComponent
     const callback = (entries) => {
       if (initialized) {
         this.toolbarTitleVisible = !entries[0].isIntersecting;
-        this.toolbarStickyActionsVisible = !entries[0].isIntersecting;
         this.changeDetectorRef.detectChanges();
       } else {
         initialized = true;
       }
+    };
+    return new IntersectionObserver(callback, options);
+  }
+
+  private stickyContentIntersectionObserver() {
+    const options: IntersectionObserverInit = {
+      threshold: 1,
+    };
+
+    const callback = (entries) => {
+      // The sticky content is pinned when it doesn't fully intersect the viewport
+      this.isStickyContentPinned = !entries[0].isIntersecting;
     };
     return new IntersectionObserver(callback, options);
   }

@@ -53,6 +53,8 @@ import { ToggleButtonShowcaseComponent } from './toggle-button-showcase/toggle-b
 import { ToggleShowcaseComponent } from './toggle-showcase/toggle-showcase.component';
 import { ToolbarShowcaseComponent } from './toolbar-showcase/toolbar-showcase.component';
 import { RadioShowcaseComponent } from './radio-showcase/radio-showcase.component';
+import { CookbookChartStockConfigShowcaseComponent } from './chart-config-showcase/stock/chart-config-stock-showcase.component';
+import { CookbookChartBarConfigShowcaseComponent } from './chart-config-showcase/bar/chart-config-bar-showcase.component';
 
 export const routes: Routes = [
   {
@@ -140,15 +142,26 @@ export const routes: Routes = [
       {
         path: 'grid',
         component: GridShowcaseComponent,
-        data: {
-          hide: true,
-        },
       },
       {
         path: 'chart',
         component: ChartShowcaseComponent,
       },
       { path: 'chart-stock', component: StockChartShowcaseComponent },
+      {
+        path: 'chart-stock-config',
+        component: CookbookChartStockConfigShowcaseComponent,
+        data: {
+          hide: true, // hidden until we are ready to get users on it.
+        },
+      },
+      {
+        path: 'chart-bar-config',
+        component: CookbookChartBarConfigShowcaseComponent,
+        data: {
+          hide: true, // hidden until we are ready to get users on it.
+        },
+      },
       {
         path: 'fonts',
         component: FontsShowcaseComponent,
