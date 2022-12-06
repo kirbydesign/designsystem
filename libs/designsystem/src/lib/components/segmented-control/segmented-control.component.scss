@@ -82,14 +82,14 @@ ion-segment {
 }
 
 ion-segment-button {
-  @include interaction-state.apply-focus-part($part: 'native');
-  @include interaction-state.apply-hover-ionic;
-  @include interaction-state.apply-active-ionic('s');
+  // @include interaction-state.apply-focus-visible();
+  // @include interaction-state.apply-hover-ionic;
+  // @include interaction-state.apply-active-ionic('s');
   @include utils.accessible-target-size;
 
   &.segment-button-checked {
-    @include interaction-state.apply-hover-ionic('l', $make-lighter: true);
-    @include interaction-state.apply-active-ionic('xxxl', $make-lighter: true);
+    // @include interaction-state.apply-hover-ionic('l', $make-lighter: true);
+    // @include interaction-state.apply-active-ionic('xxxl', $make-lighter: true);
   }
 
   --border-radius: #{utils.$border-radius-round};
@@ -138,4 +138,27 @@ ion-segment-button {
 
 .badge-container {
   position: relative;
+}
+
+:host-context(.kirby-color-brightness-white) {
+  ion-segment {
+    --background: rgb(28 28 28 / 6%);
+  }
+}
+
+:host-context(.kirby-color-brightness-dark) {
+  ion-segment {
+    --background: rgb(255 255 255 / 15%);
+  }
+
+  ion-segment-button {
+    --indicator-color: rgb(255 255 255 / 30%);
+    --color: #{utils.get-color('medium')};
+  }
+}
+
+:host-context(.kirby-color-brightness-light) {
+  ion-segment {
+    box-shadow: utils.get-elevation(2);
+  }
 }

@@ -22,3 +22,77 @@
     margin-bottom: utils.size('s');
   }
 }
+
+kirby-page-content > * {
+  display: block;
+}
+
+kirby-page-content > * + * {
+  margin-top: utils.size('m');
+}
+
+/* 
+ * Just setup stuff below. What matters is up there 👆
+ */
+
+/* 
+ * Hover and active alpha values are not completely true to actual kirby-button
+ */
+
+[column='tertiary'] button:hover span,
+[dark-bg] button:hover span {
+  background-color: rgb(255 255 255 / 4%);
+}
+
+[column='tertiary'] button:active span,
+[dark-bg] button:active span {
+  background-color: rgb(255 255 255 / 8%);
+}
+
+[light-bg] button:hover span,
+[white-bg] button:hover span {
+  background-color: rgb(28 28 28 / 4%);
+}
+
+[light-bg] button:active span,
+[white-bg] button:active span {
+  background-color: rgb(28 28 28 / 8%);
+}
+
+.app {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  font-family: sans-serif;
+  background-color: #efefef;
+}
+
+[column='greyscale'] div {
+  display: grid;
+  place-content: center;
+  flex: 1;
+}
+
+[column] {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+[column='tertiary'] {
+  flex-flow: row wrap;
+}
+
+[column='tertiary'] div {
+  width: 50%;
+  display: grid;
+  place-content: center;
+}
+
+[dark-bg] {
+  background-color: #1c1c1c;
+}
+
+[white-bg] {
+  background-color: white;
+}
