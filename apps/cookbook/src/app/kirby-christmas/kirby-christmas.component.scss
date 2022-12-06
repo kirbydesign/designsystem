@@ -1,0 +1,180 @@
+.snow-container {
+  overflow-y: hidden;
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  background-color: #313163;
+}
+
+.kirbylight1 {
+  right: 0;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+}
+
+.title {
+  color: #fff;
+  font-size: 50px;
+  padding: 10px;
+}
+
+.middle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 50rem;
+  height: 50rem;
+  z-index: 3;
+}
+
+.tree {
+  left: 100px;
+  position: absolute;
+  bottom: 50px;
+  z-index: 3;
+}
+
+ellipse {
+  animation: glowing 1s infinite 1000ms alternate ease-out;
+}
+
+.kirbylight2 {
+  left: 0;
+  top: 0;
+  position: absolute;
+  z-index: 1;
+}
+
+.kirbybulb1 {
+  animation: glowing 2000ms infinite 1000ms alternate ease-out;
+}
+
+.kirbybulb2 {
+  animation: glowing 2000ms infinite 2000ms alternate ease-out;
+}
+
+.kirbybulb3 {
+  animation: glowing 2000ms infinite 3000ms alternate ease-out;
+}
+
+.kirbybulb4 {
+  animation: glowing 2000ms infinite 4000ms alternate ease-out;
+}
+
+.kirbybulb5 {
+  animation: glowing 2000ms infinite 5000ms alternate ease-out;
+}
+
+.kirbybulb6 {
+  animation: glowing 2000ms infinite 6000ms alternate ease-out;
+}
+
+.kirbybulb7 {
+  animation: glowing 2000ms infinite 7000ms alternate ease-out;
+}
+
+.kirbybulb8 {
+  animation: glowing 2000ms infinite 8000ms alternate ease-out;
+}
+
+.kirbybulb9 {
+  animation: glowing 2000ms infinite 9000ms alternate ease-out;
+}
+
+.kirbybulb10 {
+  animation: glowing 2000ms infinite 10000ms alternate ease-out;
+}
+
+.snow,
+.snow::after,
+.snow::before {
+  content: '';
+  position: absolute;
+  top: -650px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: radial-gradient(4px 4px at 100px 50px, #f6f6fc, transparent),
+    radial-gradient(6px 4px at 200px 150px, #f6f6fc, transparent),
+    radial-gradient(3px 4px at 300px 250px, #f6f6fc, transparent),
+    radial-gradient(4px 4px at 400px 350px, #f6f6fc, transparent),
+    radial-gradient(6px 4px at 500px 100px, #fff, transparent),
+    radial-gradient(3px 4px at 50px 200px, #fff, transparent),
+    radial-gradient(4px 4px at 150px 300px, #fff, transparent),
+    radial-gradient(4px 4px at 250px 400px, #fff, transparent),
+    radial-gradient(4px 4px at 350px 500px, #fff, transparent);
+  background-size: 650px 650px;
+  z-index: 1;
+  animation: snow-animation 3s linear;
+  animation-iteration-count: infinite;
+}
+
+.snow::after {
+  margin-left: -250px;
+  opacity: 0.5;
+  filter: blur(2px);
+  animation-direction: reverse;
+  animation-duration: 6s;
+}
+
+.snow::before {
+  margin-left: -350px;
+  opacity: 0.7;
+  filter: blur(1px);
+  animation-direction: reverse;
+  animation-duration: 6s;
+}
+
+.snowpile {
+  position: absolute;
+  bottom: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100vw;
+  z-index: 1;
+}
+
+.snowpile-stroke {
+  stroke-width: 400;
+  animation: snowpile-stocking 20000ms linear;
+  animation-iteration-count: 1;
+}
+
+@keyframes snow-animation {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(1000px);
+  }
+}
+
+@keyframes glowing {
+  0% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes snowpile-stocking {
+  from {
+    stroke-width: 0;
+  }
+
+  to {
+    stroke-width: 400;
+  }
+}
