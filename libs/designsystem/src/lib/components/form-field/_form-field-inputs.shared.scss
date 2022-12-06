@@ -69,3 +69,19 @@ $form-field-label-height: 24px;
     color: utils.get-text-color('semi-dark');
   }
 }
+
+:host-context(.kirby-color-brightness-white) {
+  background-color: rgb(28 28 28 / 6%);
+}
+
+:host-context(.kirby-color-brightness-dark) {
+  background-color: rgb(255 255 255 / 15%);
+
+  &::placeholder {
+    color: utils.get-color('medium');
+  }
+}
+
+:host-context(.kirby-color-brightness-light) {
+  box-shadow: utils.get-elevation(2);
+}

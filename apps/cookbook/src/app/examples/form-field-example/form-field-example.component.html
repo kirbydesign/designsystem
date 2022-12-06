@@ -1,47 +1,64 @@
-<kirby-page title="Form Field">
-  <kirby-page-content>
-    <cookbook-form-field-example-configuration
-      [(size)]="size"
-    ></cookbook-form-field-example-configuration>
-    <h2>Input</h2>
-    <cookbook-form-field-input-example [size]="size"></cookbook-form-field-input-example>
-    <cookbook-form-field-input-label-example
-      [size]="size"
-    ></cookbook-form-field-input-label-example>
-    <cookbook-form-field-input-label-message-example
-      [size]="size"
-    ></cookbook-form-field-input-label-message-example>
-    <cookbook-form-field-input-affix-example [size]="size">
-    </cookbook-form-field-input-affix-example>
-    <cookbook-form-field-input-counter-example
-      [size]="size"
-    ></cookbook-form-field-input-counter-example>
-    <cookbook-form-field-input-numeric-example
-      [size]="size"
-    ></cookbook-form-field-input-numeric-example>
-    <cookbook-form-field-input-date-example [size]="size"></cookbook-form-field-input-date-example>
-    <cookbook-form-field-input-disabled-example
-      [size]="size"
-    ></cookbook-form-field-input-disabled-example>
-    <cookbook-form-field-input-error-example
-      [size]="size"
-    ></cookbook-form-field-input-error-example>
-    <cookbook-form-field-input-borderless-example
-      [size]="size"
-    ></cookbook-form-field-input-borderless-example>
-    <cookbook-form-field-focus-example [size]="size"></cookbook-form-field-focus-example>
+<div class="app">
+  <div column="tertiary" class="kirby-color-brightness-dark">
+    <div style="background-color: #005b67">
+      <kirby-form-field>
+        <input kirby-input placeholder="Djurslands Bank" />
+      </kirby-form-field>
+    </div>
+    <div style="background-color: #01352c">
+      <kirby-form-field>
+        <input kirby-input placeholder="Jyske Bank" />
+      </kirby-form-field>
+    </div>
+    <div style="background-color: #1a4341">
+      <kirby-form-field>
+        <input kirby-input placeholder="Kreditbanken" />
+      </kirby-form-field>
+    </div>
+    <div style="background-color: #2c872d">
+      <kirby-form-field>
+        <input kirby-input placeholder="Landbobanken" />
+      </kirby-form-field>
+    </div>
+    <div style="background-color: #064060">
+      <kirby-form-field>
+        <input kirby-input placeholder="Nordfyns Bank" />
+      </kirby-form-field>
+    </div>
+    <div style="background-color: #353535">
+      <kirby-form-field>
+        <input kirby-input placeholder="Skjern Bank" />
+      </kirby-form-field>
+    </div>
+    <div style="background-color: #00594e">
+      <kirby-form-field>
+        <input kirby-input placeholder="Spks. Sjælland" />
+      </kirby-form-field>
+    </div>
+    <div style="background-color: #002c5b">
+      <kirby-form-field>
+        <input kirby-input placeholder="Sydbank" />
+      </kirby-form-field>
+    </div>
+  </div>
 
-    <h2>Textarea</h2>
-    <cookbook-form-field-textarea-example></cookbook-form-field-textarea-example>
-    <cookbook-form-field-textarea-label-example></cookbook-form-field-textarea-label-example>
-    <cookbook-form-field-textarea-counter-example></cookbook-form-field-textarea-counter-example>
+  <div column="greyscale">
+    <div dark-bg class="kirby-color-brightness-dark">
+      <kirby-form-field>
+        <input kirby-input placeholder="Default input with placeholder text" />
+      </kirby-form-field>
+    </div>
 
-    <cookbook-example-configuration-wrapper [snapToViewport]="true" style="--header-height: 44px">
-      <kirby-checkbox
-        [checked]="showDummyKeyboard"
-        (checkedChange)="toggleDummyKeyboard($event)"
-        text="Show dummy keyboard"
-      ></kirby-checkbox>
-    </cookbook-example-configuration-wrapper>
-  </kirby-page-content>
-</kirby-page>
+    <div light-bg class="kirby-color-brightness-light">
+      <kirby-form-field>
+        <input kirby-input placeholder="Default input with placeholder text" />
+      </kirby-form-field>
+    </div>
+
+    <div white-bg class="kirby-color-brightness-white">
+      <kirby-form-field>
+        <input kirby-input placeholder="Default input with placeholder text" />
+      </kirby-form-field>
+    </div>
+  </div>
+</div>
