@@ -1,0 +1,113 @@
+@use 'sass:map';
+@use '../utils';
+
+/* stylelint-disable custom-property-pattern */
+$breakpoint-map: (
+  'xs': 0,
+  'sm': 632px,
+  'md': 768px,
+  'lg': 992px,
+  'xl': 1200px,
+);
+
+.kirby-grid {
+  --kirby-grid-columns: 12;
+  --kirby-grid-column-spacing: #{utils.size('m')};
+  --kirby-grid-row-spacing: #{utils.size('m')};
+
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: row wrap;
+
+  /*
+  We use negative margins to be able to add column and row padding consistently
+  around every grid-item even when it is adjacent to the edge of the grid
+  */
+  margin: calc(var(--kirby-grid-row-spacing) / -2) calc(var(--kirby-grid-column-spacing) / -2);
+
+  &[spacing='0'],
+  &[data-spacing='0'] {
+    --kirby-grid-column-spacing: 0px;
+    --kirby-grid-row-spacing: 0px;
+  }
+
+  &[spacing='1'],
+  &[data-spacing='1'] {
+    --kirby-grid-column-spacing: #{utils.size('xxs')};
+    --kirby-grid-row-spacing: #{utils.size('xxs')};
+  }
+
+  &[spacing='2'],
+  &[data-spacing='2'] {
+    --kirby-grid-column-spacing: #{utils.size('s')};
+    --kirby-grid-row-spacing: #{utils.size('s')};
+  }
+
+  &[spacing='3'],
+  &[data-spacing='3'] {
+    --kirby-grid-column-spacing: #{utils.size('m')};
+    --kirby-grid-row-spacing: #{utils.size('m')};
+  }
+
+  &[spacing='4'],
+  &[data-spacing='4'] {
+    --kirby-grid-column-spacing: #{utils.size('l')};
+    --kirby-grid-row-spacing: #{utils.size('l')};
+  }
+
+  &[spacing='5'],
+  &[data-spacing='5'] {
+    --kirby-grid-column-spacing: #{utils.size('xl')};
+    --kirby-grid-row-spacing: #{utils.size('xl')};
+  }
+}
+
+@mixin column-style($breakpoint, $size) {
+  &[#{$breakpoint}='#{$size}'],
+  &[data-#{$breakpoint}='#{$size}'] {
+    width: calc(100% * #{$size} / var(--kirby-grid-columns));
+    flex-grow: 0;
+    flex-basis: auto;
+  }
+}
+
+@mixin breakpoint-style($breakpoint) {
+  @media (min-width: map.get($breakpoint-map, $breakpoint)) {
+    @include column-style($breakpoint, 1);
+    @include column-style($breakpoint, 2);
+    @include column-style($breakpoint, 3);
+    @include column-style($breakpoint, 4);
+    @include column-style($breakpoint, 5);
+    @include column-style($breakpoint, 6);
+    @include column-style($breakpoint, 7);
+    @include column-style($breakpoint, 8);
+    @include column-style($breakpoint, 9);
+    @include column-style($breakpoint, 10);
+    @include column-style($breakpoint, 11);
+    @include column-style($breakpoint, 12);
+  }
+}
+
+.kirby-grid-item {
+  flex-grow: 1;
+  flex-basis: 0;
+  min-width: 0;
+  max-width: 100%;
+
+  /*
+  The grid relies on the box-sizing to be 'border-box'.
+  To prevent accidental overwrites !important is used.
+  */
+  box-sizing: border-box !important;
+  padding: calc(var(--kirby-grid-row-spacing) / 2) calc(var(--kirby-grid-column-spacing) / 2);
+
+  @include breakpoint-style('xs');
+
+  @include breakpoint-style('sm');
+
+  @include breakpoint-style('md');
+
+  @include breakpoint-style('lg');
+
+  @include breakpoint-style('xl');
+}
