@@ -22,6 +22,7 @@ export class MockAvatarComponent {
   @Input() imageSrc: string;
   @Input() altText: string;
   @Input() shadow: boolean;
+  @Input() stroke: boolean;
   @Input() text: string;
   @Input() overlay: boolean;
   @Input() size: AvatarSize | `${AvatarSize}`;

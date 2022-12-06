@@ -36,8 +36,14 @@ export class AvatarShowcaseComponent {
       type: ['true', 'false'],
     },
     {
-      name: 'shadow',
+      name: 'shadow (deprecated - use stroke instead)',
       description: 'Adds a box-shadow to the avatar.',
+      defaultValue: 'false',
+      type: ['true', 'false'],
+    },
+    {
+      name: 'stroke',
+      description: 'Adds an outline to the avatar.',
       defaultValue: 'false',
       type: ['true', 'false'],
     },
