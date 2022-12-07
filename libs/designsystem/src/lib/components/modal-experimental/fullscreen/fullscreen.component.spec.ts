@@ -1,18 +1,53 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { IonModal } from '@ionic/angular';
+import {
+  IonButtons,
+  IonContent,
+  IonHeader,
+  IonIcon,
+  IonModal,
+  IonTitle,
+  IonToolbar,
+} from '@ionic/angular';
+import { MockComponents } from 'ng-mocks';
+import { ButtonComponent } from '../../button/button.component';
+import { IconComponent } from '../../icon/icon.component';
 import { FullscreenModalExperimentalComponent } from './fullscreen.component';
 
 fdescribe('FullscreenComponent', () => {
+  const titleText = 'Test Modal';
+
   let spectator: SpectatorHost<FullscreenModalExperimentalComponent>;
 
   const createHost = createHostFactory({
     component: FullscreenModalExperimentalComponent,
-    declarations: [IonModal],
+    declarations: [
+      MockComponents(
+        IonModal,
+        IonHeader,
+        IonToolbar,
+        IonTitle,
+        IonContent,
+        IonButtons,
+        IonIcon,
+        ButtonComponent,
+        IconComponent
+      ),
+    ],
   });
 
   beforeEach(() => {
     spectator = createHost(
-      '<kirby-fullscreen-modal-experimental><p>Test</p></kirby-fullscreen-modal-experimental>'
+      `
+      <kirby-fullscreen-modal-experimental [title]="title" [open]="open">
+        <p>Test</p>
+      </kirby-fullscreen-modal-experimental>
+    `,
+      {
+        hostProps: {
+          title: titleText,
+          open: true,
+        },
+      }
     );
   });
 
@@ -67,4 +102,12 @@ fdescribe('FullscreenComponent', () => {
       expect(didDismissSpy).toHaveBeenCalled();
     });
   });
+
+  // describe('title', () => {
+  //   it('should have the provided title', () => {
+  //     const modalTitle = spectator.query(IonTitle);
+
+  //     expect(modalTitle).toHaveText(titleText, true);
+  //   });
+  // });
 });

@@ -20,18 +20,6 @@
       position: relative;
     }
   }
-
-  &.drawer {
-    ion-content::part(scroll) {
-      transition: padding-bottom utils.$soft-keyboard-transition-leave;
-    }
-
-    &.keyboard-visible {
-      ion-content::part(scroll) {
-        transition: padding-bottom utils.$soft-keyboard-transition-enter;
-      }
-    }
-  }
 }
 
 $toolbar-padding-inline: utils.size('s');
@@ -68,34 +56,11 @@ ion-header {
   --vh100: var(--vh, 1vh) * 100; /// Fixes an issue with vh units on iOS Safari
   --header-height: 0px;
   --footer-height: 0px;
-
-  &.drawer {
-    // Prevent iOS safe-area padding-top on drawer flavor
-    // as this is already applied on the top-level modal itself
-    // in /scss/_global-styles.scss:
-    ion-header ion-toolbar:first-of-type {
-      padding-top: 0;
-    }
-  }
 }
 
-:host-context(ion-modal:not(.kirby-modal-full-height)) {
+:host-context(ion-modal) {
   @include utils.media('>=medium') {
     @include contain-content;
-  }
-
-  &.drawer {
-    @include contain-content;
-  }
-}
-
-// Ensure iOS safe-area padding-top on default/modal flavor
-// when opened on presenting element (gets .modal-card class):
-:host-context(ion-modal.modal-card:not(.kirby-drawer)) {
-  ion-header ion-toolbar:first-of-type {
-    padding-top: var(--kirby-safe-area-top, 0);
-
-    @include phablet-toolbar-padding;
   }
 }
 
@@ -105,10 +70,6 @@ ion-title {
   padding-inline-end: calc(48px + var(--padding-end));
   font-size: utils.font-size('l');
   font-weight: utils.font-weight('bold');
-}
-
-:host(.drawer) ion-title {
-  font-size: utils.font-size('m');
 }
 
 ion-content {

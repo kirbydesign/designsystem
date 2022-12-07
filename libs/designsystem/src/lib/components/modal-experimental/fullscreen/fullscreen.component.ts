@@ -28,7 +28,6 @@ export class FullscreenModalExperimentalComponent {
   }
 
   _onWillPresent(event: OverlayEventDetail) {
-    console.log('I WILL PRESETN', event);
     this.willPresent.emit(event);
   }
 
