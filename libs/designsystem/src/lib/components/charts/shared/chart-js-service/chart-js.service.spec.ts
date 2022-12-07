@@ -380,6 +380,24 @@ describe('ChartJSService', () => {
     });
   });
 
+  describe('function: destroyChart', () => {
+    beforeEach(() => {
+      chartJSService.renderChart({
+        targetElement: canvasElement,
+        type: 'bar',
+        data: [1, 2, 3],
+        labels: ['one', 'two', 'three'],
+      });
+    });
+    it('should destroy the chart', () => {
+      const destroySpy = spyOn(chartJSService['chart'], 'destroy');
+
+      chartJSService.destroyChart();
+
+      expect(destroySpy).toHaveBeenCalledTimes(1);
+    });
+  });
+
   describe('function: updateData', () => {
     let chart: Chart;
 

@@ -57,6 +57,10 @@ export class ChartJSService {
     this.chart.update();
   }
 
+  public destroyChart() {
+    this.chart?.destroy();
+  }
+
   public updateData(data: ChartDataset[] | number[]): void {
     const datasets = this.createDatasets(data);
 

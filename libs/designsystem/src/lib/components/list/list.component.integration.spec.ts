@@ -167,4 +167,107 @@ describe('ListComponent', () => {
       expect(lastItem).toHaveComputedStyle({ 'padding-bottom': '0px' });
     });
   });
+
+  describe('when a list have 1 element', () => {
+    beforeEach(async () => {
+      spectator = createHost<ListComponent>(
+        `
+        <kirby-list [items]="[{ name: 'Item1' }]" (itemSelect)="($event)">
+          <kirby-item *kirbyListItemTemplate="let item"><h3>{{ item.name }}</h3></kirby-item>
+        </kirby-list>
+        `
+      );
+    });
+    it(`should apply the CSS class 'first' and 'last' on the first and only element in the list`, () => {
+      const list = spectator.queryAll('ion-item-sliding');
+
+      expect(list.length).toBe(1);
+
+      expect(list[0].classList).toContain('first');
+      expect(list[0].classList).toContain('last');
+    });
+  });
+
+  describe('when a list have 2 elements', () => {
+    beforeEach(async () => {
+      spectator = createHost<ListComponent>(
+        `
+          <kirby-list [items]="[{ name: 'Item1' }, { name: 'Item2' }]" (itemSelect)="($event)">
+            <kirby-item *kirbyListItemTemplate="let item"><h3>{{ item.name }}</h3></kirby-item>
+          </kirby-list>
+          `
+      );
+    });
+    it(`should apply the CSS class 'first' on the first element`, () => {
+      const list = spectator.queryAll('ion-item-sliding');
+
+      expect(list.length).toBe(2);
+
+      //First element
+      expect(list[0].classList).toContain('first');
+      expect(list[0].classList).not.toContain('last');
+    });
+
+    it(`should apply the CSS class'last' on last element`, () => {
+      const list = spectator.queryAll('ion-item-sliding');
+
+      expect(list.length).toBe(2);
+
+      //Last element
+      expect(list[1].classList).toContain('last');
+      expect(list[1].classList).not.toContain('first');
+    });
+  });
+
+  describe('when a list have 3 elements', () => {
+    beforeEach(async () => {
+      spectator = createHost<ListComponent>(
+        `
+          <kirby-list [items]="[{ name: 'Item1' }, { name: 'Item2' }, { name: 'Item3' }]" (itemSelect)="($event)">
+            <kirby-item *kirbyListItemTemplate="let item"><h3>{{ item.name }}</h3></kirby-item>
+          </kirby-list>
+          `
+      );
+    });
+    it(`should apply the CSS class 'first' on the first element`, () => {
+      const list = spectator.queryAll('ion-item-sliding');
+
+      expect(list.length).toBe(3);
+
+      //First element
+      expect(list[0].classList).toContain('first');
+      expect(list[0].classList).not.toContain('last');
+    });
+    it(`should neither apply 'first' or 'last' on the element(s) between first and last`, () => {
+      const list = spectator.queryAll('ion-item-sliding');
+
+      expect(list.length).toBe(3);
+
+      //middle element
+      expect(list[1].classList).not.toContain('first');
+      expect(list[1].classList).not.toContain('last');
+    });
+
+    it(`should apply 'last' on last element`, () => {
+      const list = spectator.queryAll('ion-item-sliding');
+
+      expect(list.length).toBe(3);
+
+      //Last element
+      expect(list[2].classList).toContain('last');
+      expect(list[2].classList).not.toContain('first');
+    });
+  });
+
+  describe('when a list have 3 elements', () => {
+    beforeEach(async () => {
+      spectator = createHost<ListComponent>(
+        `
+          <kirby-list [items]="[{ name: 'Item1' }, { name: 'Item2' }, { name: 'Item3' }]" (itemSelect)="($event)">
+            <kirby-item *kirbyListItemTemplate="let item"><h3>{{ item.name }}</h3></kirby-item>
+          </kirby-list>
+          `
+      );
+    });
+  });
 });
