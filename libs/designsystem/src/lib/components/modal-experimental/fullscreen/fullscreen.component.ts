@@ -15,7 +15,7 @@ export class FullscreenModalExperimentalComponent {
   @Input() open = false;
   @Input() canDismiss = true;
   @Input() title = '';
-  @Input() hasCollapsibleTitle = true;
+  @Input() hasCollapsibleTitle = false;
   @Input() scrollDisabled = false;
 
   @Output() willPresent = new EventEmitter<OverlayEventDetail>();
