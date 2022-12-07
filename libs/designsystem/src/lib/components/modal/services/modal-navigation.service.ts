@@ -31,7 +31,6 @@ export class ModalNavigationService {
     if (moduleRootPaths) {
       modalRoutes = this.getModalRoutePaths(flattenedRoutes, moduleRootPaths);
     }
-    console.log('modalRoutes', modalRoutes);
     return modalRoutes;
   }
 
@@ -42,7 +41,6 @@ export class ModalNavigationService {
         .split('/')
         .filter((path) => !!path);
       const rootPath = [''];
-      console.log('This is trimmed paths', trimmedPaths);
       return rootPath.concat(trimmedPaths);
     }
 
