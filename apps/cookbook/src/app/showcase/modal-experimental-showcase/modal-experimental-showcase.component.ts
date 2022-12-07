@@ -19,9 +19,14 @@ export class ModalExperimentalShowcaseComponent {
       },
     });
 
-    const { data, role } = await modal.onWillDismiss();
+    modal.data.subscribe((modalData) => {
+      const { data, role } = modalData;
+      console.log('this is data & role', data, role);
+    });
 
-    console.log('This is data and role', data, role);
+    // const { data, role } = await modal.onWillDismiss();
+
+    // console.log('This is data and role', data, role);
   }
 
   openRoute() {

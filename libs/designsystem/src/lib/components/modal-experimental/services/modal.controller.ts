@@ -2,7 +2,8 @@ import { Inject, Injectable, OnDestroy, Optional } from '@angular/core';
 import { ActivatedRoute, Params, ROUTES, Routes } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { Observable, Subject } from 'rxjs';
-import { filter, map, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
+import { OverlayEventDetail } from '@ionic/core/components';
 import { ModalRouteActivation } from '../../modal/services/modal.interfaces';
 import { ModalExperimentalNavigationService } from './modal-navigation.service';
 
@@ -12,6 +13,11 @@ export type ModalConfig = {
   flavor?: ModalFlavor;
   component: any;
   componentProps?: { [key: string]: any };
+};
+
+type ModalInstanceAndData = {
+  modal: HTMLIonModalElement;
+  data: Subject<OverlayEventDetail>;
 };
 
 @Injectable()
@@ -34,15 +40,25 @@ export class ModalExperimentalController implements OnDestroy {
     this.onModalRouteDeactivated(modalNavigation.deactivated$);
   }
 
-  public async showModal(config: ModalConfig): Promise<HTMLIonModalElement> {
+  public async showModal(config: ModalConfig): Promise<ModalInstanceAndData> {
+    const modalDataObserver$ = new Subject<OverlayEventDetail>();
+
     this.ionModal = await this.ionicModalController.create({
       component: config.component,
       componentProps: config.componentProps,
     });
 
-    await this.ionModal.present();
+    this.ionModal.present();
 
-    return this.ionModal;
+    this.ionModal.onWillDismiss().then((data) => {
+      modalDataObserver$.next(data);
+      modalDataObserver$.complete();
+    });
+
+    return {
+      modal: this.ionModal,
+      data: modalDataObserver$,
+    };
   }
 
   public async closeModal(role: string, data?: any) {
@@ -76,7 +92,7 @@ export class ModalExperimentalController implements OnDestroy {
     };
 
     const modal = await this.showModal(config);
-    return modal;
+    return modal.modal;
   }
 
   public async navigateToModal(path: string | string[], queryParams?: Params): Promise<boolean> {
