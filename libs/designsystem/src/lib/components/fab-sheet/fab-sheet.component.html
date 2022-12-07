@@ -1,5 +1,6 @@
 <ion-backdrop
-  [class.backdrop-visible]="isBackdropVisible"
+  [class.backdrop-visible]="isFabSheetOpen"
+  [stopPropagation]="false"
   (ionBackdropTap)="hideActions()"
   (click)="hideActions()"
 ></ion-backdrop>

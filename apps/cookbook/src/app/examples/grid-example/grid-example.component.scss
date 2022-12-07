@@ -1,0 +1,14 @@
+@use '@kirbydesign/core/src/scss/utils';
+
+.grid-example-container {
+  margin-bottom: utils.size('l');
+}
+
+fieldset {
+  margin: utils.size('m') 0;
+  width: 300px;
+
+  legend {
+    display: flex;
+  }
+}

@@ -18,7 +18,7 @@ const config = {
 
   <!-- Custom Page Subtitle -->
   <div *kirbyPageSubtitle>
-<span>Custom subtitle with a long long long long name</span>
+    Custom subtitle with a long long long long name
   </div>
 
   <ng-template kirbyPageToolbarTitle>
@@ -32,7 +32,7 @@ const config = {
   <ng-template #customSubtitle>
     Custom subtitle of custom title with a very long name
   </ng-template>
-  
+
   <!-- Fixed Page Actions -->
   <kirby-page-actions *kirbyPageActions="{fixed: true}">
     <button kirby-button (click)="onMoreSelect()">

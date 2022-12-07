@@ -47,6 +47,10 @@ kirby-avatar[title] {
     content: 'Shadow';
   }
 
+  &[title='Stroke']::before {
+    content: 'Stroke';
+  }
+
   &[title='light (default)']::before {
     content: '(default)';
   }

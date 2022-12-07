@@ -1,10 +1,10 @@
-import { StockChartComponent } from '@kirbydesign/designsystem/components/charts/stock-chart';
-
 import { ExamplesModule } from '../examples/examples.module';
 import { DividerShowcaseComponent } from '../showcase/divider-showcase/divider-showcase.component';
 import { ItemShowcaseComponent } from '../showcase/item-showcase/item-showcase.component';
 import { ReorderListShowcaseComponent } from '../showcase/reorder-list-showcase/reorder-list-showcase.component';
 
+import { ExampleViewerComponent } from '../shared/example-viewer/example-viewer.component';
+import { ChartExampleConfigBaseBarComponent } from '../examples/charts-example/examples/config/bar-config/chart-example-config-base-bar.component';
 import { AccordionShowcaseComponent } from './accordion-showcase/accordion-showcase.component';
 import { ActionSheetShowcaseComponent } from './action-sheet-showcase/action-sheet-showcase.component';
 import { AlertShowcaseComponent } from './alert-showcase/alert-showcase.component';
@@ -54,6 +54,8 @@ import { ToggleShowcaseComponent } from './toggle-showcase/toggle-showcase.compo
 import { ToolbarShowcaseComponent } from './toolbar-showcase/toolbar-showcase.component';
 import { DropdownShowcaseComponent } from './dropdown-showcase/dropdown-showcase.component';
 import { DataTableShowcaseComponent } from './data-table-showcase/data-table-showcase.component';
+import { CookbookChartStockConfigShowcaseComponent } from './chart-config-showcase/stock/chart-config-stock-showcase.component';
+import { CookbookChartBarConfigShowcaseComponent } from './chart-config-showcase/bar/chart-config-bar-showcase.component';
 
 export const COMPONENT_IMPORTS: any[] = [ExamplesModule, ShowcaseRoutingModule];
 
@@ -108,6 +110,10 @@ export const COMPONENT_EXPORTS: any[] = [
   StylingHtmlListsShowcaseComponent,
   ListExperimentalShowcaseComponent,
   DataTableShowcaseComponent,
+  CookbookChartStockConfigShowcaseComponent,
+  ExampleViewerComponent,
+  ChartExampleConfigBaseBarComponent,
+  CookbookChartBarConfigShowcaseComponent,
 ];
 
 export const COMPONENT_DECLARATIONS: any[] = [...COMPONENT_EXPORTS, ShowcaseComponent];

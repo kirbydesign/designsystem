@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { OwnAccount } from './own-account.model';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { RangeValueAccessor } from '@angular/forms';
+import { OwnAccount } from './own-account.model';
 
 @Injectable({
   providedIn: 'root',
