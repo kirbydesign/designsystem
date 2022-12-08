@@ -13,6 +13,7 @@ export type ModalConfig = {
   flavor?: ModalFlavor;
   component: any;
   componentProps?: { [key: string]: any };
+  cssClass?: string | string[];
 };
 
 type ModalInstanceAndData = {
@@ -51,6 +52,7 @@ export class ModalExperimentalController implements OnDestroy {
     this.ionModal = await this.ionicModalController.create({
       component: config.component,
       componentProps: config.componentProps,
+      cssClass: config.cssClass,
     });
 
     await this.ionModal.present();
