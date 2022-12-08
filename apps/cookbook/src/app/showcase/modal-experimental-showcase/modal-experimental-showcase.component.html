@@ -41,16 +41,18 @@
   </div> -->
 </div>
 
-<h2>Modal config:</h2>
-<cookbook-api-description-properties
-  [properties]="componentProperties"
-></cookbook-api-description-properties>
+<div class="description">
+  <h2>Modal config:</h2>
+  <cookbook-api-description-properties
+    [properties]="componentProperties"
+  ></cookbook-api-description-properties>
 
-<h2>Events:</h2>
-<cookbook-api-description-events [events]="events"></cookbook-api-description-events>
+  <h2>Events:</h2>
+  <cookbook-api-description-events [events]="events"></cookbook-api-description-events>
 
-<h2>Methods:</h2>
-<cookbook-api-description-methods [methods]="methods"></cookbook-api-description-methods>
+  <h2>Methods:</h2>
+  <cookbook-api-description-methods [methods]="methods"></cookbook-api-description-methods>
+</div>
 
 <hr />
 
@@ -63,3 +65,10 @@
 <button kirby-button (click)="openModal()">Open modal</button>
 <button kirby-button (click)="openRoute()">Open route</button>
 <button kirby-button (click)="openModal(true)">Open modal with canDismiss</button>
+
+<div class="description">
+  <h2>Modal config:</h2>
+  <cookbook-api-description-properties
+    [properties]="controllerProperties"
+  ></cookbook-api-description-properties>
+</div>

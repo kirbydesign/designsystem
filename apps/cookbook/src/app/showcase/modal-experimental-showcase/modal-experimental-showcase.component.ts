@@ -91,6 +91,44 @@ export class ModalExperimentalShowcaseComponent {
     },
   ];
 
+  controllerProperties: ApiDescriptionProperty[] = [
+    {
+      name: 'flavor',
+      description: `(Optional) The flavor of the modal. 
+      
+      Modals with \`modal\` flavor have a close button placed in the top right corner and are full-screen on small screens.`,
+      defaultValue: 'modal',
+      type: ['modal'],
+    },
+    {
+      name: 'component',
+      description: 'The component which will be rendered inside the modal.',
+      defaultValue: '',
+      type: ['Component'],
+    },
+    {
+      name: 'componentProps',
+      description: '(Optional) The data to pass to the modal component.',
+      defaultValue: 'undefined',
+      type: ['undefined | { [key: string]: any; }'],
+    },
+    {
+      name: 'cssClass',
+      description: `(Optional) Adds custom css classes to the modal. This allows for custom styling of the modal (see 'CSS Custom Properties' section).`,
+      defaultValue: 'undefined',
+      type: ['string | string[]'],
+    },
+    {
+      name: 'canDismiss',
+      description: `(Optional) If canDismiss is true, then the modal will close when users attempt to dismiss the modal. If canDismiss is false, then the modal will not close when users attempt to dismiss the modal.
+      
+      canDismiss can also be a function, which must return a Promise that resolves to either true or false. If the promise resolves to true, then the modal will dismiss. If the promise resolves to false, then the modal will not dismiss.
+      `,
+      defaultValue: 'undefined',
+      type: ['boolean | (() => Promise<boolean>)'],
+    },
+  ];
+
   canDismiss = async () => {
     const actionSheet = await this.actionSheetCtrl.create({
       header: 'Are you sure?',
