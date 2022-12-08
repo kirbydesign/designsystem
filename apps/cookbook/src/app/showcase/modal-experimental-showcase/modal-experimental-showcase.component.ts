@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ModalExperimentalController } from '@kirbydesign/designsystem/components/modal-experimental/services/modal.controller';
+import { ActionSheetController } from '@ionic/angular';
 import { ModalControllerExperimentalExampleComponent } from '../../examples/modal-experimental-example/controller/modal-controller-experimental-example.component';
 import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
@@ -11,7 +12,10 @@ import { ApiDescriptionMethod } from '~/app/shared/api-description/api-descripti
   styleUrls: ['./modal-experimental-showcase.component.scss'],
 })
 export class ModalExperimentalShowcaseComponent {
-  constructor(private modalController: ModalExperimentalController) {}
+  constructor(
+    private modalController: ModalExperimentalController,
+    private actionSheetCtrl: ActionSheetController
+  ) {}
 
   componentProperties: ApiDescriptionProperty[] = [
     {
@@ -87,23 +91,42 @@ export class ModalExperimentalShowcaseComponent {
     },
   ];
 
-  async openModal() {
+  canDismiss = async () => {
+    const actionSheet = await this.actionSheetCtrl.create({
+      header: 'Are you sure?',
+      buttons: [
+        {
+          text: 'Yes',
+          role: 'confirm',
+        },
+        {
+          text: 'No',
+          role: 'cancel',
+        },
+      ],
+    });
+
+    actionSheet.present();
+
+    const { role } = await actionSheet.onWillDismiss();
+
+    return role === 'confirm';
+  };
+
+  async openModal(enableCanDismiss?: boolean) {
     const modal = await this.modalController.showModal({
       flavor: 'modal',
       component: ModalControllerExperimentalExampleComponent,
       componentProps: {
         title: 'Hi there',
       },
+      canDismiss: enableCanDismiss ? this.canDismiss : undefined,
     });
 
     modal?.data.subscribe((modalData) => {
       const { data, role } = modalData;
       console.log('this is data & role', data, role);
     });
-
-    // const { data, role } = await modal.onWillDismiss();
-
-    // console.log('This is data and role', data, role);
   }
 
   openRoute() {

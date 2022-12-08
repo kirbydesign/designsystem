@@ -14,6 +14,7 @@ export type ModalConfig = {
   component: any;
   componentProps?: { [key: string]: any };
   cssClass?: string | string[];
+  canDismiss?: boolean | (() => Promise<boolean>);
 };
 
 type ModalInstanceAndData = {
@@ -53,6 +54,7 @@ export class ModalExperimentalController implements OnDestroy {
       component: config.component,
       componentProps: config.componentProps,
       cssClass: config.cssClass,
+      canDismiss: config.canDismiss,
     });
 
     await this.ionModal.present();
