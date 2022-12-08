@@ -13,7 +13,7 @@ import { ButtonComponent } from '../../button/button.component';
 import { IconComponent } from '../../icon/icon.component';
 import { FullscreenModalExperimentalComponent } from './fullscreen.component';
 
-fdescribe('FullscreenComponent', () => {
+describe('FullscreenComponent', () => {
   const titleText = 'Test Modal';
 
   let spectator: SpectatorHost<FullscreenModalExperimentalComponent>;
