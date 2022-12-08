@@ -15,8 +15,13 @@
 
 .title {
   color: #fff;
-  font-size: 50px;
+  font-size: 3rem;
   padding: 10px;
+  text-align: center;
+
+  @media screen and (max-width: 769px) {
+    font-size: 2rem;
+  }
 }
 
 .middle {
@@ -27,16 +32,29 @@
   position: absolute;
   inset: 0;
   margin: auto;
-  width: 50rem;
-  height: 50rem;
-  z-index: 3;
+  width: 40rem;
+  height: 40rem;
+  @media screen and (max-width: 769px) {
+    width: 20rem;
+    height: 20rem;
+  }
+
+  z-index: 4;
 }
 
 .tree {
-  left: 100px;
+  margin-left: 10%;
+  margin-right: auto;
+  width: 40%;
+  height: 40%;
   position: absolute;
-  bottom: 50px;
+  bottom: 0;
   z-index: 3;
+
+  @media screen and (max-width: 769px) {
+    width: 30%;
+    height: 15%;
+  }
 }
 
 ellipse {
@@ -136,11 +154,14 @@ ellipse {
   margin-left: auto;
   margin-right: auto;
   width: 100vw;
+  height: auto;
   z-index: 1;
 }
 
 .snowpile-stroke {
   stroke-width: 400;
+  position: absolute;
+  bottom: 0;
   animation: snowpile-stocking 20000ms linear;
   animation-iteration-count: 1;
 }
