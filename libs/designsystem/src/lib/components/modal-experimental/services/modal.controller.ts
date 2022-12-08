@@ -23,6 +23,7 @@ type ModalInstanceAndData = {
 @Injectable()
 export class ModalExperimentalController implements OnDestroy {
   private ionModal: HTMLIonModalElement;
+  private isModalOpening = false;
   private destroy$ = new Subject<void>();
 
   constructor(
@@ -41,19 +42,25 @@ export class ModalExperimentalController implements OnDestroy {
   }
 
   public async showModal(config: ModalConfig): Promise<ModalInstanceAndData> {
+    if (this.isModalOpening) return;
+
     const modalDataObserver$ = new Subject<OverlayEventDetail>();
+
+    this.isModalOpening = true;
 
     this.ionModal = await this.ionicModalController.create({
       component: config.component,
       componentProps: config.componentProps,
     });
 
-    this.ionModal.present();
+    await this.ionModal.present();
 
     this.ionModal.onWillDismiss().then((data) => {
       modalDataObserver$.next(data);
       modalDataObserver$.complete();
     });
+
+    this.isModalOpening = false;
 
     return {
       modal: this.ionModal,

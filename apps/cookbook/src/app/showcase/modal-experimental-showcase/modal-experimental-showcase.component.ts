@@ -96,7 +96,7 @@ export class ModalExperimentalShowcaseComponent {
       },
     });
 
-    modal.data.subscribe((modalData) => {
+    modal?.data.subscribe((modalData) => {
       const { data, role } = modalData;
       console.log('this is data & role', data, role);
     });
