@@ -68,44 +68,10 @@ ellipse {
   z-index: 1;
 }
 
-.kirbybulb1 {
-  animation: glowing 2000ms infinite 1000ms alternate ease-out;
-}
-
-.kirbybulb2 {
-  animation: glowing 2000ms infinite 2000ms alternate ease-out;
-}
-
-.kirbybulb3 {
-  animation: glowing 2000ms infinite 3000ms alternate ease-out;
-}
-
-.kirbybulb4 {
-  animation: glowing 2000ms infinite 4000ms alternate ease-out;
-}
-
-.kirbybulb5 {
-  animation: glowing 2000ms infinite 5000ms alternate ease-out;
-}
-
-.kirbybulb6 {
-  animation: glowing 2000ms infinite 6000ms alternate ease-out;
-}
-
-.kirbybulb7 {
-  animation: glowing 2000ms infinite 7000ms alternate ease-out;
-}
-
-.kirbybulb8 {
-  animation: glowing 2000ms infinite 8000ms alternate ease-out;
-}
-
-.kirbybulb9 {
-  animation: glowing 2000ms infinite 9000ms alternate ease-out;
-}
-
-.kirbybulb10 {
-  animation: glowing 2000ms infinite 10000ms alternate ease-out;
+@for $i from 1 to 10 {
+  .kirbybulb#{$i} {
+    animation: glowing 2000ms infinite #{$i * 1000}ms alternate ease-out;
+  }
 }
 
 .snow,
