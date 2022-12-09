@@ -259,7 +259,7 @@ describe('ListComponent', () => {
     });
   });
 
-  describe('when a list have 3 elements', () => {
+  xdescribe('when a list have 3 elements', () => {
     beforeEach(async () => {
       spectator = createHost<ListComponent>(
         `
