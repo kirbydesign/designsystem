@@ -11,6 +11,8 @@ export type ModalConfig = {
   componentProps?: { [key: string]: any };
   cssClass?: string | string[];
   canDismiss?: boolean | (() => Promise<boolean>);
+  backdropDismiss?: boolean;
+  showBackdrop?: boolean;
 };
 
 type ModalInstanceAndData = {
@@ -37,6 +39,8 @@ export class ModalExperimentalController {
       componentProps: config.componentProps,
       cssClass: config.cssClass,
       canDismiss: config.canDismiss,
+      backdropDismiss: config.backdropDismiss,
+      showBackdrop: config.showBackdrop,
     });
 
     await this.ionModal.present();
@@ -54,7 +58,7 @@ export class ModalExperimentalController {
     };
   }
 
-  public async closeModal(role: string, data?: any) {
+  public async closeModal(role?: string, data?: any) {
     return this.ionModal.dismiss(data, role);
   }
 }

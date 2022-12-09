@@ -127,6 +127,18 @@ export class ModalExperimentalShowcaseComponent {
       defaultValue: 'undefined',
       type: ['boolean | (() => Promise<boolean>)'],
     },
+    {
+      name: 'backdropDismiss',
+      description: `(Optional) If true, the modal will be dismissed when the backdrop is clicked.`,
+      defaultValue: 'true',
+      type: ['boolean'],
+    },
+    {
+      name: 'showBackdrop',
+      description: `(Optional) If true, a backdrop will be displayed behind the modal. This property controls whether or not the backdrop darkens the screen when the modal is presented. It does not control whether or not the backdrop is active or present in the DOM..`,
+      defaultValue: 'true',
+      type: ['boolean'],
+    },
   ];
 
   canDismiss = async () => {
