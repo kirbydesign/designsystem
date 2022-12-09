@@ -9,12 +9,10 @@ import { ExamplesSharedModule } from '../examples.shared.module';
 
 import { FullscreenModalExperimentalExampleComponent } from './fullscreen/fullscreen-experimental-example.component';
 import { ModalControllerExperimentalExampleComponent } from './controller/modal-controller-experimental-example.component';
-import { ModalRouteExperimentalPage1ExampleComponent } from './modal-route-example/modal-route-page1-example.component';
 
 const COMPONENT_DECLARATIONS = [
   FullscreenModalExperimentalExampleComponent,
   ModalControllerExperimentalExampleComponent,
-  ModalRouteExperimentalPage1ExampleComponent,
 ];
 
 @NgModule({

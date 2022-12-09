@@ -166,8 +166,4 @@ export class ModalExperimentalShowcaseComponent {
       console.log('this is data & role', data, role);
     });
   }
-
-  openRoute() {
-    this.modalController.navigateToModal('page1');
-  }
 }
