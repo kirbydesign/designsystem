@@ -88,11 +88,11 @@ $main-colors: map.remove(
 }
 
 @function _get-tint-value($color, $weight: 10) {
-  @return color.mix(white, $color, $weight);
+  @return color.mix(white, $color, $weight * 1%);
 }
 
 @function _get-shade-value($color, $weight: 12) {
-  @return color.mix(black, $color, $weight);
+  @return color.mix(black, $color, $weight * 1%);
 }
 
 @function _get-rgb-values($color) {
