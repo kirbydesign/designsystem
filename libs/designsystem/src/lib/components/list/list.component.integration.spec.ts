@@ -258,16 +258,4 @@ describe('ListComponent', () => {
       expect(list[2].classList).not.toContain('first');
     });
   });
-
-  xdescribe('when a list have 3 elements', () => {
-    beforeEach(async () => {
-      spectator = createHost<ListComponent>(
-        `
-          <kirby-list [items]="[{ name: 'Item1' }, { name: 'Item2' }, { name: 'Item3' }]" (itemSelect)="($event)">
-            <kirby-item *kirbyListItemTemplate="let item"><h3>{{ item.name }}</h3></kirby-item>
-          </kirby-list>
-          `
-      );
-    });
-  });
 });
