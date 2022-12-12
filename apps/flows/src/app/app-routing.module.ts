@@ -64,6 +64,11 @@ const routes: Routes = [
       },
     ],
   },
+  {
+    path: 'ion-lifecycle',
+    loadChildren: () =>
+      import('./ion-lifecycle/ion-lifecycle.module').then((m) => m.IonLifecycleModule),
+  },
 ];
 
 @NgModule({
