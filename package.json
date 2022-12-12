@@ -117,7 +117,6 @@
     "date-fns": "2.21.1",
     "date-fns-tz": "1.1.4",
     "highcharts": "8.0.4",
-    "include-media": "^1.4.10",
     "inputmask": "^5.0.5",
     "prismjs": "1.27.0",
     "reflect-metadata": "0.1.8",
