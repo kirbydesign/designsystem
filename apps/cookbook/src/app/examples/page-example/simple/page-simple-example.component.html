@@ -1,0 +1,42 @@
+<kirby-page title="Simple Page" subtitle="SSubtitle of simple page" defaultBackHref="/">
+  <!-- kirby-page-local-navigation
+    *kirbyPageStickyContent
+    [items]="items"
+    [selectedIndex]="0"
+  ></kirby-page-local-navigation -->
+  <kirby-local-navigation-poc *kirbyPageStickyContent>
+    <kirby-local-navigation-item-poc>
+      <span>Item 1</span>
+    </kirby-local-navigation-item-poc>
+    <kirby-local-navigation-item-poc>
+      <span>Item 2</span>
+      <kirby-badge themeColor="warning">
+        <kirby-icon name="attach"></kirby-icon>
+      </kirby-badge>
+    </kirby-local-navigation-item-poc>
+    <kirby-local-navigation-item-poc>
+      <span>Item 3</span>
+      <kirby-badge themeColor="success">3</kirby-badge>
+    </kirby-local-navigation-item-poc>
+    <kirby-local-navigation-item-poc><span>Item 4</span></kirby-local-navigation-item-poc>
+    <kirby-local-navigation-item-poc><span>Item 5 longer</span></kirby-local-navigation-item-poc>
+    <kirby-local-navigation-item-poc><span>Item 6 longer</span></kirby-local-navigation-item-poc>
+  </kirby-local-navigation-poc>
+  <kirby-page-content>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi aperiam deserunt
+      dolore error esse laborum magni natus nihil optio perferendis placeat, quae sed, sequi sunt
+      totam voluptatem! Dicta, quaerat!
+    </p>
+    <p>
+      Aut, dignissimos dolorum ducimus et rem reprehenderit rerum sunt ut! Ad aliquid beatae cum
+      esse et eveniet facere natus numquam obcaecati qui quia quisquam quo repellat repudiandae sit,
+      soluta voluptatibus!
+    </p>
+    <p>
+      Aspernatur dolore enim incidunt libero molestiae nostrum quasi? Accusamus aut culpa dolores
+      doloribus laborum nesciunt voluptates! Consectetur cumque doloremque eius esse et excepturi
+      hic, inventore mollitia nisi, reiciendis, tempora unde!
+    </p></kirby-page-content
+  >
+</kirby-page>

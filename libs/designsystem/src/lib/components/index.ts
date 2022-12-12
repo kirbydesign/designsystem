@@ -27,6 +27,9 @@ export * from './form-field';
 export { FabSheetComponent } from './fab-sheet/fab-sheet.component';
 export { FlagComponent } from './flag/flag.component';
 
+export { LocalNavigationPocComponent } from './local-navigation-poc/local-navigation-poc.component';
+export { LocalNavigationItemPocComponent } from './local-navigation-item-poc/local-navigation-item-poc.component';
+
 export { GridComponent } from './grid/grid.component';
 export { GridCardConfiguration } from './grid/grid-card-configuration';
 

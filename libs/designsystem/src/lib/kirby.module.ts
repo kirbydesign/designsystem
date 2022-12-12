@@ -75,6 +75,8 @@ import { ElementAsButtonDirective } from './directives/element-as-button/element
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
 import { ModalRouterLinkDirective } from './directives/modal-router-link/modal-router-link.directive';
 import { ThemeColorDirective } from './directives/theme-color/theme-color.directive';
+import { LocalNavigationPocComponent } from './components/local-navigation-poc/local-navigation-poc.component';
+import { LocalNavigationItemPocComponent } from './components/local-navigation-item-poc/local-navigation-item-poc.component';
 
 const exportedDeclarations = [
   CardComponent,
@@ -121,6 +123,8 @@ const exportedDeclarations = [
   ElementAsButtonDirective,
   ItemGroupComponent,
   SectionHeaderComponent,
+  LocalNavigationPocComponent,
+  LocalNavigationItemPocComponent,
 ];
 
 const declarations = [
