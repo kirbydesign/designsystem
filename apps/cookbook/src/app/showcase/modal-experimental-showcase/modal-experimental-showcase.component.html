@@ -8,41 +8,50 @@
 
 <hr />
 
-<h2>Components</h2>
+<h1>Components</h1>
 <p>
   The modal components must be used within a <code>kirby-page</code> or on a page with no scrolling
   as the modal will automatically apply a class to the body that prevents scrolling. This is not an
   issue within a <code>kirby-page</code> as that will handle the overflow and not the body.
 </p>
 
-<div class="components">
-  <div class="components-column">
-    <h3>Fullscreen</h3>
-    <cookbook-iphone
-      src="/examples/modal-experimental-fullscreen"
-      showExternalLink="true"
-    ></cookbook-iphone>
+<div class="page-example">
+  <div>
+    <h2>Fullscreen modal</h2>
+    <cookbook-code-viewer [html]="fullscreenModalExampleTemplate"></cookbook-code-viewer>
   </div>
 
-  <!-- <div class="components-column">
-    <h3>Sheet</h3>
-    <cookbook-iphone
-      src="/examples/modal-experimental-fullscreen"
-      showExternalLink="true"
-    ></cookbook-iphone>
-  </div>
-
-  <div class="components-column">
-    <h3>Custom</h3>
-    <cookbook-iphone
-      src="/examples/modal-experimental-fullscreen"
-      showExternalLink="true"
-    ></cookbook-iphone>
-  </div> -->
+  <cookbook-iphone
+    src="/examples/modal-experimental-fullscreen"
+    showExternalLink="true"
+  ></cookbook-iphone>
 </div>
 
+<h2>Slots:</h2>
+<p>The modal component accepts 2 slots: <code>header-start</code> & <code>footer</code></p>
+
+<h3>header-start</h3>
+
+<p>
+  The <code>header-start</code> slot places content in the upper left corner of the modal header. In
+  the example above a <code>kirby-page-progress</code> component is slotted in like this:
+</p>
+
+<cookbook-code-viewer [html]="headerStartSlotExampleTemplate"></cookbook-code-viewer>
+
+<h3>footer</h3>
+
+<p>
+  The <code>footer</code> slot places content in the bottom of the modal underneath the scrollable
+  container, so it will always stick to the bottom. We recommend using the
+  <code>kirby-modal-footer-experimental</code> component, which is documented right here. In the
+  example above the <code>kirby-modal-footer-experimental</code> component is slotted in like this:
+</p>
+
+<cookbook-code-viewer [html]="footerSlotExampleTemplate"></cookbook-code-viewer>
+
 <div class="description">
-  <h2>Modal config:</h2>
+  <h2>Fullscreen modal properties:</h2>
   <cookbook-api-description-properties
     [properties]="componentProperties"
   ></cookbook-api-description-properties>
@@ -54,9 +63,24 @@
   <cookbook-api-description-methods [methods]="methods"></cookbook-api-description-methods>
 </div>
 
+<h2>Footer component</h2>
+
+<p>
+  The <code>kirby-modal-footer-experimental</code> component only accepts a default slot as shown
+  below:
+</p>
+
+<cookbook-code-viewer [html]="footerSlotExampleTemplate"></cookbook-code-viewer>
+
+<h2>Modal footer properties:</h2>
+
+<cookbook-api-description-properties
+  [properties]="footerProperties"
+></cookbook-api-description-properties>
+
 <hr />
 
-<h2>Controller</h2>
+<h1>Controller</h1>
 
 <p>
   Modals can also be opened programmatically by using the <code>ModalExperimentalController</code>

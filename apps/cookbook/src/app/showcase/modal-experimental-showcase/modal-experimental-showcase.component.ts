@@ -2,6 +2,11 @@ import { Component } from '@angular/core';
 import { ModalExperimentalController } from '@kirbydesign/designsystem/components/modal-experimental/services/modal.controller';
 import { ActionSheetController } from '@ionic/angular';
 import { ModalControllerExperimentalExampleComponent } from '../../examples/modal-experimental-example/controller/modal-controller-experimental-example.component';
+import {
+  footerSlotExampleTemplate,
+  fullscreenModalExampleTemplate,
+  headerStartSlotExampleTemplate,
+} from '~/app/examples/modal-experimental-example/fullscreen/fullscreen-experimental-example.component';
 import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionMethod } from '~/app/shared/api-description/api-description-methods/api-description-methods.component';
@@ -16,6 +21,10 @@ export class ModalExperimentalShowcaseComponent {
     private modalController: ModalExperimentalController,
     private actionSheetCtrl: ActionSheetController
   ) {}
+
+  fullscreenModalExampleTemplate: string = fullscreenModalExampleTemplate;
+  headerStartSlotExampleTemplate: string = headerStartSlotExampleTemplate;
+  footerSlotExampleTemplate: string = footerSlotExampleTemplate;
 
   componentProperties: ApiDescriptionProperty[] = [
     {
@@ -88,6 +97,16 @@ export class ModalExperimentalShowcaseComponent {
       description:
         'Scrolls to the bottom of the modal body. It takes an optional input of "KirbyAnimation.Duration", fx. KirbyAnimation.Duration.SHORT. This method will have no effect if "scrollDisabled" is set to "true"',
       signature: 'void',
+    },
+  ];
+
+  footerProperties: ApiDescriptionProperty[] = [
+    {
+      name: 'type',
+      description:
+        'Sets the type of the footer. When inline the footer will have a transparent background and no shadow.',
+      type: ['fixed', 'inline'],
+      defaultValue: 'fixed',
     },
   ];
 

@@ -1,16 +1,8 @@
-.components {
+@use '@kirbydesign/core/src/scss/utils';
+
+.page-example {
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
-
-  &-column {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-}
-
-.description {
-  margin-top: 15px;
+  margin-top: utils.size('xl');
+  margin-bottom: utils.size('xl');
 }
