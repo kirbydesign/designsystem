@@ -78,13 +78,15 @@
   [properties]="footerProperties"
 ></cookbook-api-description-properties>
 
-<hr />
-
 <h1>Controller</h1>
 
 <p>
-  Modals can also be opened programmatically by using the <code>ModalExperimentalController</code>
+  Modals can also be opened programmatically by using the <code>ModalExperimentalController</code>.
+  To show the modal, create a <code>ModalConfig</code> and pass it to the
+  <code>ModalController.showModal</code> method:
 </p>
+
+<cookbook-code-viewer [ts]="showModalCodeSnippet"></cookbook-code-viewer>
 
 <button kirby-button (click)="openModal()">Open modal</button>
 <button kirby-button (click)="openModal(true)">Open modal with canDismiss</button>
@@ -95,3 +97,17 @@
     [properties]="controllerProperties"
   ></cookbook-api-description-properties>
 </div>
+
+<p>INSERT OBSERVABLES EXAMPLE</p>
+
+<p>
+  We recommend wrapping your component in the
+  <code>kirby-modal-wrapper-experimental</code> component to get the default Kirby styling. It
+  accepts the same two slots as described above - <code>header-start</code> & <code>footer</code>.
+</p>
+
+<h2>Modal wrapper properties:</h2>
+
+<cookbook-api-description-properties
+  [properties]="wrapperComponentProperties"
+></cookbook-api-description-properties>

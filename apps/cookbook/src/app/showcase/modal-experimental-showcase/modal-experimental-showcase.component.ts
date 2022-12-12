@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { ModalExperimentalController } from '@kirbydesign/designsystem/components/modal-experimental/services/modal.controller';
 import { ActionSheetController } from '@ionic/angular';
-import { ModalControllerExperimentalExampleComponent } from '../../examples/modal-experimental-example/controller/modal-controller-experimental-example.component';
+import {
+  ModalControllerExperimentalExampleComponent,
+  showModalCodeSnippet,
+} from '../../examples/modal-experimental-example/controller/modal-controller-experimental-example.component';
 import {
   footerSlotExampleTemplate,
   fullscreenModalExampleTemplate,
@@ -25,6 +28,7 @@ export class ModalExperimentalShowcaseComponent {
   fullscreenModalExampleTemplate: string = fullscreenModalExampleTemplate;
   headerStartSlotExampleTemplate: string = headerStartSlotExampleTemplate;
   footerSlotExampleTemplate: string = footerSlotExampleTemplate;
+  showModalCodeSnippet: string = showModalCodeSnippet;
 
   componentProperties: ApiDescriptionProperty[] = [
     {
@@ -157,6 +161,28 @@ export class ModalExperimentalShowcaseComponent {
       description: `(Optional) If true, a backdrop will be displayed behind the modal. This property controls whether or not the backdrop darkens the screen when the modal is presented. It does not control whether or not the backdrop is active or present in the DOM..`,
       defaultValue: 'true',
       type: ['boolean'],
+    },
+  ];
+
+  wrapperComponentProperties: ApiDescriptionProperty[] = [
+    {
+      name: 'title',
+      description: `The title of the modal`,
+      defaultValue: '',
+      type: ['string'],
+    },
+    {
+      name: 'hasCollapsibleTitle',
+      description: `(Optional) If \`true\` will cause the title to initially be rendered as part of the content; once scrolled out of view it collapses and appears in the header area. 
+      \n Useful for long titles that would otherwise truncate. `,
+      defaultValue: 'true',
+      type: ['boolean'],
+    },
+    {
+      name: 'scrollDisabled',
+      description: 'Disable scrolling in the modal',
+      type: ['true', 'false'],
+      defaultValue: 'false',
     },
   ];
 
