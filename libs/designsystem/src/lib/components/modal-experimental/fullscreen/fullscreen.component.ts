@@ -18,28 +18,28 @@ export class FullscreenModalExperimentalComponent {
   @Input() hasCollapsibleTitle = false;
   @Input() scrollDisabled = false;
 
-  @Output() willPresent = new EventEmitter<OverlayEventDetail>();
-  @Output() didPresent = new EventEmitter<OverlayEventDetail>();
-  @Output() didDismiss = new EventEmitter<OverlayEventDetail>();
-  @Output() willDismiss = new EventEmitter<OverlayEventDetail>();
+  @Output() willPresent = new EventEmitter<CustomEvent<OverlayEventDetail>>();
+  @Output() didPresent = new EventEmitter<CustomEvent<OverlayEventDetail>>();
+  @Output() didDismiss = new EventEmitter<CustomEvent<OverlayEventDetail>>();
+  @Output() willDismiss = new EventEmitter<CustomEvent<OverlayEventDetail>>();
 
   _closeModal() {
     this.modal.dismiss(null, 'cancel');
   }
 
-  _onWillPresent(event: OverlayEventDetail) {
+  _onWillPresent(event: CustomEvent<OverlayEventDetail>) {
     this.willPresent.emit(event);
   }
 
-  _onDidPresent(event: OverlayEventDetail) {
+  _onDidPresent(event: CustomEvent<OverlayEventDetail>) {
     this.didPresent.emit(event);
   }
 
-  _onWillDismiss(event: OverlayEventDetail) {
+  _onWillDismiss(event: CustomEvent<OverlayEventDetail>) {
     this.willDismiss.emit(event);
   }
 
-  _onDidDismiss(event: OverlayEventDetail) {
+  _onDidDismiss(event: CustomEvent<OverlayEventDetail>) {
     this.didDismiss.emit(event);
   }
 
