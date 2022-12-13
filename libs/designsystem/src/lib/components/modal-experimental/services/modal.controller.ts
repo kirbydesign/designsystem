@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { Subject } from 'rxjs';
+import { from, map, Observable, Subject, switchMap, tap } from 'rxjs';
 import { OverlayEventDetail } from '@ionic/core/components';
+import { TestModalController } from './test-modal.controller';
 
 export type ModalFlavor = 'modal' | 'compact';
 
@@ -20,45 +21,47 @@ type ModalInstanceAndData = {
   data: Subject<OverlayEventDetail>;
 };
 
+type returnValues = {
+  onWillDismiss: Observable<OverlayEventDetail<unknown>>;
+  onDidDismiss: Observable<OverlayEventDetail<unknown>>;
+};
 @Injectable()
 export class ModalExperimentalController {
   private ionModal: HTMLIonModalElement;
   private isModalOpening = false;
+  private $onWillDismiss = new Subject<OverlayEventDetail>();
+  private onWillDismiss$ = this.$onWillDismiss.asObservable();
 
   constructor(private ionicModalController: ModalController) {}
 
-  public async showModal(config: ModalConfig): Promise<ModalInstanceAndData> {
-    if (this.isModalOpening) return;
+  public showModal(config: ModalConfig): ModalExperimentalController {
+    const modal$ = from(
+      this.ionicModalController.create({
+        component: config.component,
+        componentProps: config.componentProps,
+        cssClass: config.cssClass,
+        canDismiss: config.canDismiss,
+        backdropDismiss: config.backdropDismiss,
+        showBackdrop: config.showBackdrop,
+      })
+    );
 
-    const modalDataObserver$ = new Subject<OverlayEventDetail>();
+    modal$
+      .pipe(
+        tap((modal) => from(modal.present())),
+        switchMap((modal) => modal.onWillDismiss())
+      )
+      .subscribe((res) => {
+        this.$onWillDismiss.next(res);
+        this.$onWillDismiss.complete();
+      });
 
-    this.isModalOpening = true;
-
-    this.ionModal = await this.ionicModalController.create({
-      component: config.component,
-      componentProps: config.componentProps,
-      cssClass: config.cssClass,
-      canDismiss: config.canDismiss,
-      backdropDismiss: config.backdropDismiss,
-      showBackdrop: config.showBackdrop,
-    });
-
-    await this.ionModal.present();
-
-    this.ionModal.onWillDismiss().then((data) => {
-      modalDataObserver$.next(data);
-      modalDataObserver$.complete();
-    });
-
-    this.isModalOpening = false;
-
-    return {
-      modal: this.ionModal,
-      data: modalDataObserver$,
-    };
+    return this;
   }
 
-  public async closeModal(role?: string, data?: any) {
-    return this.ionModal.dismiss(data, role);
+  public closeModal(role?: string, data?: any): void {
+    this.ionicModalController.dismiss(data, role);
   }
+
+  public onWillDismiss = (): Observable<OverlayEventDetail> => this.onWillDismiss$;
 }

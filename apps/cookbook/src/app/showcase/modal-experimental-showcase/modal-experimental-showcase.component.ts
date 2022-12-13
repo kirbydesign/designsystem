@@ -208,8 +208,8 @@ export class ModalExperimentalShowcaseComponent {
     return role === 'confirm';
   };
 
-  async openModal(enableCanDismiss?: boolean) {
-    const modal = await this.modalController.showModal({
+  openModal(enableCanDismiss?: boolean) {
+    const modal = this.modalController.showModal({
       flavor: 'modal',
       component: ModalControllerExperimentalExampleComponent,
       componentProps: {
@@ -218,9 +218,10 @@ export class ModalExperimentalShowcaseComponent {
       canDismiss: enableCanDismiss ? this.canDismiss : undefined,
     });
 
-    modal?.data.subscribe((modalData) => {
-      const { data, role } = modalData;
-      console.log('this is data & role', data, role);
+    modal.onWillDismiss().subscribe((response) => {
+      const { role, data } = response;
+      console.log('This is the role from the subscription', role);
+      console.log('This is the data from the subscription', data);
     });
   }
 }
