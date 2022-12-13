@@ -68,15 +68,39 @@
     },
     {
       "title": "Colors",
-      "paragraph": "Kirby color palette.",
+      "paragraph": "Set of Kirby Colors which lets you try out different color combinations.",
       "svgPath": "../../assets/component-svg/Colors-Kirby-Component-Overview.svg",
       "route": "home/showcase/colors"
+    },
+    {
+      "title": "Data table",
+      "paragraph": "Data tables allow the us er to show large amount of complex data in tabular form.",
+      "svgPath": "../../assets/component-svg/Data-Table-Kirby-Component-Overview.svg",
+      "route": "home/showcase/data-table"
+    },
+    {
+      "title": "Divider",
+      "paragraph": "The divider is a thin line which is there to visually separate to elements or text. ",
+      "svgPath": "../../assets/component-svg/Divider-Kirby-Component-Overview.svg",
+      "route": "home/showcase/divider"
     },
     {
       "title": "Dropdown",
       "paragraph": "A dropdown hides options by default but can be shown by interacting with a button.",
       "svgPath": "../../assets/component-svg/Dropdown-Kirby-Component-Overview.svg",
       "route": "home/showcase/dropdown"
+    },
+    {
+      "title": "Empty State",
+      "paragraph": "Empty state occurs when an item og page can’t be shown.",
+      "svgPath": "../../assets/component-svg/Empty-State-Kirby-Component-Overview.svg",
+      "route": "home/showcase/empty-state"
+    },
+    {
+      "title": "FAB",
+      "paragraph": "A Floating Action Button performs a most common action on a screen.",
+      "svgPath": "../../assets/component-svg/FAB-Kirby-Component-Overview.svg",
+      "route": "home/showcase/fab-sheet"
     },
     {
       "title": "Flag",
@@ -86,15 +110,33 @@
     },
     {
       "title": "Fonts",
-      "paragraph": "Overview of all Kirby Fonts",
+      "paragraph": "Kirby font set which shows how to use the font through weight, hierarchy, size and color.",
       "svgPath": "../../assets/component-svg/Fonts-Kirby-Component-Overview.svg",
       "route": "home/showcase/fonts"
     },
     {
+      "title": "Form Field",
+      "paragraph": "Form field is a component which is used as an input field for text and data.",
+      "svgPath": "../../assets/component-svg/Form-Field-Kirby-Component-Overview.svg",
+      "route": "home/showcase/form-field"
+    },
+    {
       "title": "Icons",
-      "paragraph": "Set of Kirby Icons",
+      "paragraph": "Kirbys own icon collection which is constantly growing.",
       "svgPath": "../../assets/component-svg/Icons-Kirby-Component-Overview.svg",
       "route": "home/showcase/icon"
+    },
+    {
+      "title": "Item",
+      "paragraph": "The Kirby-item component is a layout which consists of three possible columns.",
+      "svgPath": "../../assets/component-svg/Item-Kirby-Component-Overview.svg",
+      "route": "home/showcase/item"
+    },
+    {
+      "title": "Page",
+      "paragraph": "Page is a layout container for a Kirby Page. ",
+      "svgPath": "../../assets/component-svg/Page-Kirby-Component-Overview.svg",
+      "route": "home/showcase/page"
     },
     {
       "title": "Progress Circle",
@@ -137,6 +179,12 @@
       "paragraph": "The spinner indicates the loading state of a component or page.",
       "svgPath": "../../assets/component-svg/Spinner-Kirby-Component-Overview.svg",
       "route": "home/showcase/spinner"
+    },
+    {
+      "title": "Toast",
+      "paragraph": "Toast is a non-disruptive message that appears at the top or bottom of the interface.",
+      "svgPath": "../../assets/component-svg/Toast-Kirby-Component-Overview.svg",
+      "route": "home/showcase/toast"
     },
     {
       "title": "Toggle",
