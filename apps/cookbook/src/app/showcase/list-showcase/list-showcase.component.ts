@@ -46,7 +46,8 @@ export class ListShowcaseComponent {
     },
     {
       name: 'getItemColor',
-      description: 'Will give every other item in the list a ThemeColor',
+      description:
+        ' Callback used by each item in the list. Should return a ThemeColor which will become the background color of that item',
       defaultValue: 'null',
       type: ['ThemeColor'],
     },
@@ -66,7 +67,7 @@ export class ListShowcaseComponent {
       name: 'standAloneSpacing',
       description: 'Bottom margin for stand alone items',
       defaultValue: 'null',
-      type: ['string'],
+      type: ["'xxxxs' | 'xxxs' | 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxxl'"],
     },
   ];
 }
