@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, HostBinding, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, HostBinding, OnDestroy, ViewChild } from '@angular/core';
 import { IonTabs } from '@ionic/angular';
 
 import { TabsService } from './tabs.service';
@@ -8,7 +8,7 @@ import { TabsService } from './tabs.service';
   templateUrl: './tabs.component.html',
   styleUrls: ['./tabs.component.scss'],
 })
-export class TabsComponent implements AfterViewInit {
+export class TabsComponent implements AfterViewInit, OnDestroy {
   @HostBinding('class.tab-bar-bottom-hidden')
   tabBarBottomHidden = false;
   @ViewChild(IonTabs, { static: true }) tabs: IonTabs;
@@ -17,5 +17,9 @@ export class TabsComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.tabsService.setOutlet(this.tabs.outlet);
+  }
+
+  ngOnDestroy() {
+    this.tabsService.resetOutlet();
   }
 }

@@ -1,10 +1,11 @@
 import { AfterViewInit, Component, OnDestroy } from '@angular/core';
-import { StockChartConfig } from '@kirbydesign/designsystem';
 import { Chart } from 'chart.js';
-import { ChartConfigExample } from './chart-config-example';
+import { StockChartConfig } from '@kirbydesign/designsystem';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+import { ChartConfigExample } from '../chart-config-example';
 
 const config = {
-  selector: 'cookbook-chart-example-config-tooltip-stock',
+  selector: 'cookbook-chart-example-config-stock',
   template: `<div style="position: relative; height: 300px;">
   <canvas id="{{ canvasId }}"> <!-- Your accessible content here --> </canvas>
 </div>`, // container must be positioned relative: https://www.chartjs.org/docs/latest/configuration/responsive.html#important-note
@@ -25,11 +26,15 @@ const config = {
 
     config = {
       ...config,
-      plugins: [StockChartConfig.verticalLinePluginConfig],
+      plugins: [
+        StockChartConfig.verticalLinePluginConfig,
+        ChartDataLabels // 'chartjs-plugin-datalabels' package must be installed;
+        ], 
       options: {
         ...config.options,
         plugins: {
           tooltip: StockChartConfig.tooltipPlugin,
+          datalabels: StockChartConfig.dataLabelsPluginConfig,
         },
       },
       data: {
@@ -49,11 +54,11 @@ const config = {
   selector: config.selector,
   template: config.template,
 })
-export class ChartExampleConfigTooltipStockComponent implements AfterViewInit, OnDestroy {
+export class ChartExampleConfigStockComponent implements AfterViewInit, OnDestroy {
   public template: string = config.template;
   public codeSnippet: string = config.codeSnippet;
 
-  public canvasId = 'configStockTooltipCanvas';
+  public canvasId = 'configStockCanvas';
 
   private _chart: Chart;
   private demoData = ChartConfigExample.demoData;
@@ -72,11 +77,12 @@ export class ChartExampleConfigTooltipStockComponent implements AfterViewInit, O
 
     config = {
       ...config,
-      plugins: [StockChartConfig.verticalLinePluginConfig],
+      plugins: [StockChartConfig.verticalLinePluginConfig, ChartDataLabels],
       options: {
         ...config.options,
         plugins: {
           tooltip: StockChartConfig.tooltipPlugin,
+          datalabels: StockChartConfig.dataLabelsPluginConfig,
         },
       },
       data: {
