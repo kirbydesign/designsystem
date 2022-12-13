@@ -9,6 +9,7 @@ import { ListWithSectionsAndColoredItemsExampleTemplate } from '~/app/examples/l
 import { ListWithSectionsAndStandAloneExampleTemplate } from '~/app/examples/list-example/examples/sections-with-standalone';
 import { ListSelectableItemsExampleTemplate } from '~/app/examples/list-example/examples/selectable-items';
 import { ListWithStandAloneExampleTemplate } from '~/app/examples/list-example/examples/stand-alone';
+import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
   selector: 'cookbook-list-showcase',
@@ -30,4 +31,42 @@ export class ListShowcaseComponent {
 
   sectionHeaderExampleHtml: string =
     '<GridLayout *kirbyListSectionHeader="let section" ios:height="50">...</GridLayout>';
+  properties: ApiDescriptionProperty[] = [
+    {
+      name: 'showDivider',
+      description: 'Determines if dividers (bottom-border on list items) should be shown or not',
+      defaultValue: 'true',
+      type: ['boolean'],
+    },
+    {
+      name: 'itemSelect',
+      description: 'Emitting event when an item is selected',
+      defaultValue: 'null',
+      type: ['any'],
+    },
+    {
+      name: 'getItemColor',
+      description: 'Will give every other item in the list a ThemeColor',
+      defaultValue: 'null',
+      type: ['ThemeColor'],
+    },
+    {
+      name: 'getSectionName',
+      description: 'Callback to determine name of section. Sections will be ordered alphabetically',
+      defaultValue: 'null',
+      type: ['string'],
+    },
+    {
+      name: 'getStandAloneByProperty',
+      description: 'Property name to decide which items should be stand alone',
+      defaultValue: 'null',
+      type: ['string'],
+    },
+    {
+      name: 'standAloneSpacing',
+      description: 'Bottom margin for stand alone items',
+      defaultValue: 'null',
+      type: ['string'],
+    },
+  ];
 }
