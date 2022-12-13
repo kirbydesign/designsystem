@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { ListItemsExampleTemplate } from '../../examples/list-example/examples/items';
+import { ListItemsNoDividersExampleTemplate } from '../../examples/list-example/examples/items';
 import exampleHtml from '../../examples/list-example/list-example.component.html?raw';
 import { ListColoredItemsExampleTemplate } from '~/app/examples/list-example/examples/colored-items';
-import { ListWithDividersExampleTemplate } from '~/app/examples/list-example/examples/dividers';
+import { ListItemsExampleTemplate } from '~/app/examples/list-example/examples/dividers';
 import { ListWithHeaderAndFooterExampleTemplate } from '~/app/examples/list-example/examples/header-and-footer';
 import { ListWithSectionsExampleTemplate } from '~/app/examples/list-example/examples/sections';
 import { ListWithSectionsAndColoredItemsExampleTemplate } from '~/app/examples/list-example/examples/sections-and-colored-items';
@@ -17,7 +17,7 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   styleUrls: ['./list-showcase.component.scss'],
 })
 export class ListShowcaseComponent {
-  dividersExampleTemplate: string = ListWithDividersExampleTemplate;
+  dividersExampleTemplate: string = ListItemsExampleTemplate;
   selectableItemsExampleTemplate: string = ListSelectableItemsExampleTemplate;
   coloredItemsExampleTemplate: string = ListColoredItemsExampleTemplate;
   sectionsAndColoredItemsExampleTemplate: string = ListWithSectionsAndColoredItemsExampleTemplate;
@@ -25,7 +25,7 @@ export class ListShowcaseComponent {
   sectionsExampleTemplate: string = ListWithSectionsExampleTemplate;
   standAloneExampleTemplate: string = ListWithStandAloneExampleTemplate;
   sectionsAndStandAloneExampleTemplate: string = ListWithSectionsAndStandAloneExampleTemplate;
-  items: string = ListItemsExampleTemplate;
+  items: string = ListItemsNoDividersExampleTemplate;
 
   exampleHtml = exampleHtml;
 
@@ -59,7 +59,7 @@ export class ListShowcaseComponent {
     },
     {
       name: 'getStandAloneByProperty',
-      description: 'Property name to decide which items should be stand alone',
+      description: 'A boolean property on the item that decides if the item should stand alone',
       defaultValue: 'null',
       type: ['string'],
     },

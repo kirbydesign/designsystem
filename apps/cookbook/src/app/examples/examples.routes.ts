@@ -29,9 +29,9 @@ import { ItemGroupExampleComponent } from './item-group-example/item-group-examp
 import { ItemSlidingExampleComponent } from './item-sliding-example/item-sliding-example.component';
 import { LinkExampleComponent } from './link-example/link-example.component';
 import { ListColoredItemsExampleComponent } from './list-example/examples/colored-items';
-import { ListWithDividersExampleComponent } from './list-example/examples/dividers';
+import { ListItemsExampleComponent } from './list-example/examples/dividers';
 import { ListWithHeaderAndFooterExampleComponent } from './list-example/examples/header-and-footer';
-import { ListItemsExampleComponent } from './list-example/examples/items';
+import { ListItemsNoDividersExampleComponent } from './list-example/examples/items';
 import { ListWithSectionsExampleComponent } from './list-example/examples/sections';
 import { ListWithSectionsAndColoredItemsExampleComponent } from './list-example/examples/sections-and-colored-items';
 import { ListWithSectionsAndStandAloneExampleComponent } from './list-example/examples/sections-with-standalone';
@@ -306,7 +306,7 @@ export const routes: Routes = [
       },
       {
         path: 'with-dividers',
-        component: ListWithDividersExampleComponent,
+        component: ListItemsExampleComponent,
       },
       {
         path: 'with-selectable-items',
@@ -330,7 +330,7 @@ export const routes: Routes = [
       },
       {
         path: 'with-items',
-        component: ListItemsExampleComponent,
+        component: ListItemsNoDividersExampleComponent,
       },
       {
         path: 'with-stand-alone',
