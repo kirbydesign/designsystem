@@ -13,7 +13,7 @@ export const ListItemsExampleTemplate = `<kirby-list [items]="items" [showDivide
   // tslint:disable-next-line
   selector: 'cookbook-list-items-example',
   template: `
-    <kirby-page title="Items">
+    <kirby-page title="Items with no dividers">
       <kirby-page-content> ${ListItemsExampleTemplate} </kirby-page-content>
     </kirby-page>
   `,
