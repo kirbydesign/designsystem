@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { stringifyPretty } from '~/app/shared/code-viewer/code-viewer.component';
 
 const items = ['Bacon', 'Salami', 'Tenderloin', 'Tongue', 'Drumstick'];
@@ -86,8 +86,8 @@ export class RadioReactiveFormsExampleComponent implements OnInit {
   template: string = config.template.split('<cookbook-example-configuration-wrapper>')[0];
   codeSnippet: string = config.codeSnippet;
 
-  form: FormGroup;
-  favoriteFoodControl: FormControl;
+  form: UntypedFormGroup;
+  favoriteFoodControl: UntypedFormControl;
   items = items;
 
   canSelectFavorite = true;
@@ -115,14 +115,14 @@ export class RadioReactiveFormsExampleComponent implements OnInit {
   }
 
   private buildForm() {
-    this.favoriteFoodControl = new FormControl(
+    this.favoriteFoodControl = new UntypedFormControl(
       null,
       this.favoriteRequired ? Validators.required : null
     );
     if (!this.canSelectFavorite) {
       this.favoriteFoodControl.disable();
     }
-    this.form = new FormGroup({
+    this.form = new UntypedFormGroup({
       favoriteFood: this.favoriteFoodControl,
     });
   }

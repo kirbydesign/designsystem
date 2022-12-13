@@ -1,25 +1,21 @@
+import { ColorHelper, ThemeColorDefinition } from '@kirbydesign/core';
+import { TestHelper } from './test-helper';
 import CustomMatcherFactories = jasmine.CustomMatcherFactories;
-import CustomEqualityTester = jasmine.CustomEqualityTester;
 import CustomMatcherResult = jasmine.CustomMatcherResult;
 import MatchersUtil = jasmine.MatchersUtil;
 
-import { ColorHelper, ThemeColorDefinition } from '@kirbydesign/core';
-
-import { TestHelper } from './test-helper';
-
 export const ElementCssCustomMatchers: CustomMatcherFactories = {
-  toHaveComputedStyle: (util: MatchersUtil, customEqualityTesters: CustomEqualityTester[]) =>
-    cssPropertyMatcher(util, customEqualityTesters),
+  toHaveComputedStyle: (util: MatchersUtil) => cssPropertyMatcher(util),
 };
 
-function cssPropertyMatcher(util: MatchersUtil, customEqualityTesters: CustomEqualityTester[]) {
+function cssPropertyMatcher(util: MatchersUtil) {
   return {
     compare: (
       element: Element,
       expectedStyles: { [cssProperty: string]: string | ThemeColorDefinition }
     ) => {
       let allPassed = Object.keys(expectedStyles).length !== 0;
-      let messages = [];
+      const messages = [];
       Object.keys(expectedStyles).forEach((cssProperty) => {
         const expectedValue = expectedStyles[cssProperty];
         const { expectedStringValue, expectedValueAlias } = getExpectedStringValueAndAlias(
@@ -28,7 +24,6 @@ function cssPropertyMatcher(util: MatchersUtil, customEqualityTesters: CustomEqu
         );
         const { pass, message } = compareCssProperty(
           util,
-          customEqualityTesters,
           element,
           cssProperty,
           expectedStringValue,
@@ -85,17 +80,13 @@ function getExpectedStringValueAndAlias(
 
 function compareCssProperty(
   util: MatchersUtil,
-  customEqualityTesters: CustomEqualityTester[],
   element: Element,
   cssProperty: string,
   expectedValue: string,
   expectedValueAlias?: string
 ): CustomMatcherResult {
   const actualValue = TestHelper.getCssProperty(element, cssProperty);
-  if (expectedValue.startsWith('<') || expectedValue.startsWith('>')) {
-    customEqualityTesters.push(compareSize);
-  }
-  const pass = util.equals(actualValue, expectedValue, customEqualityTesters);
+  const pass = util.equals(actualValue, expectedValue) || !!compareSize(actualValue, expectedValue);
   const message = pass
     ? null
     : getErrorMessage(element, cssProperty, actualValue, expectedValue, expectedValueAlias);
@@ -106,10 +97,12 @@ function compareCssProperty(
   return result;
 }
 
-function compareSize(first: string, second: string): boolean | void {
-  const matches = second.match(/(?<operator>\<\=|\<|\>\=|\>)(?<value>\d*)px/);
+function compareSize(actualValue: string, expectedValue: string): boolean | void {
+  if (!expectedValue.startsWith('<') && !expectedValue.startsWith('>')) return;
+
+  const matches = expectedValue.match(/(?<operator>\<\=|\<|\>\=|\>)(?<value>\d*)px/);
   if (matches && matches.groups) {
-    const actualValueNumber = parseInt(first);
+    const actualValueNumber = parseInt(actualValue);
     const operator = matches.groups['operator'];
     const expectedValueNumber = parseInt(matches.groups['value']);
     switch (operator) {
