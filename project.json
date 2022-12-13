@@ -1,15 +1,6 @@
 {
   "npmScope": "kirbydesign",
-  "implicitDependencies": {
-    "angular.json": "*",
-    "package.json": {
-      "dependencies": "*",
-      "devDependencies": "*"
-    },
-    "tslint.json": "*",
-    "nx.json": "*",
-    "tsconfig.base.json": "*"
-  },
+  "implicitDependencies": [],
   "tasksRunnerOptions": {
     "default": {
       "runner": "nx/tasks-runners/default",
@@ -39,5 +30,6 @@
     "@nrwl/angular:component": {
       "style": "scss"
     }
-  }
+  },
+  "name": "."
 }

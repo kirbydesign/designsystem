@@ -1,8 +1,8 @@
 import {
-  FormControl,
-  FormGroup,
   FormsModule,
   ReactiveFormsModule,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { IonRadioGroup } from '@ionic/angular';
@@ -1067,19 +1067,19 @@ describe('RadioGroupComponent', () => {
     });
 
     describe('with a reactive form', () => {
-      let favoriteFoodControl: FormControl;
+      let favoriteFoodControl: UntypedFormControl;
 
       let spectator: SpectatorHost<
         RadioGroupComponent,
         {
-          favoriteFoodForm: FormGroup;
+          favoriteFoodForm: UntypedFormGroup;
           items: string[];
         }
       >;
 
       describe('and no pre-selected item', () => {
         beforeEach(async () => {
-          favoriteFoodControl = new FormControl();
+          favoriteFoodControl = new UntypedFormControl();
 
           spectator = createHost(
             `<form [formGroup]="favoriteFoodForm">
@@ -1088,7 +1088,7 @@ describe('RadioGroupComponent', () => {
             </form>`,
             {
               hostProps: {
-                favoriteFoodForm: new FormGroup({
+                favoriteFoodForm: new UntypedFormGroup({
                   favoriteFood: favoriteFoodControl,
                 }),
                 items: items,
@@ -1132,7 +1132,7 @@ describe('RadioGroupComponent', () => {
 
       describe('and pre-selected item', () => {
         beforeEach(async () => {
-          favoriteFoodControl = new FormControl(items[defaultSelectedIndex]);
+          favoriteFoodControl = new UntypedFormControl(items[defaultSelectedIndex]);
 
           spectator = createHost(
             `<form [formGroup]="favoriteFoodForm">
@@ -1141,7 +1141,7 @@ describe('RadioGroupComponent', () => {
             </form>`,
             {
               hostProps: {
-                favoriteFoodForm: new FormGroup({
+                favoriteFoodForm: new UntypedFormGroup({
                   favoriteFood: favoriteFoodControl,
                 }),
                 items: items,
@@ -1230,7 +1230,7 @@ describe('RadioGroupComponent', () => {
 
       describe('error state when the bound form control is required', () => {
         beforeEach(async () => {
-          favoriteFoodControl = new FormControl(null, Validators.required);
+          favoriteFoodControl = new UntypedFormControl(null, Validators.required);
 
           spectator = createHost(
             `<form [formGroup]="favoriteFoodForm">
@@ -1239,7 +1239,7 @@ describe('RadioGroupComponent', () => {
             </form>`,
             {
               hostProps: {
-                favoriteFoodForm: new FormGroup({
+                favoriteFoodForm: new UntypedFormGroup({
                   favoriteFood: favoriteFoodControl,
                 }),
                 items: items,

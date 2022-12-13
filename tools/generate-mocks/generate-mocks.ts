@@ -468,8 +468,8 @@ export class ${mockClassName} {${propertiesString}${methodsString}}
     const className = classDeclaration.name.getText();
     componentMetaData.className = className;
 
-    if (classDeclaration && classDeclaration.decorators) {
-      classDeclaration.decorators.forEach((decorator) => {
+    if (classDeclaration && ts.canHaveDecorators(classDeclaration)) {
+      ts.getDecorators(classDeclaration).forEach((decorator) => {
         if (ts.isCallExpression(decorator.expression)) {
           if (ts.isIdentifier(decorator.expression.expression)) {
             const decoratorName = decorator.expression.expression.getText();
@@ -591,8 +591,8 @@ export class ${mockClassName} {${propertiesString}${methodsString}}
     propertyDeclaration: ts.SetAccessorDeclaration | ts.PropertyDeclaration
   ): { type: 'Input' | 'Output'; bindingProperty: string } {
     const inputOutputDecorator = { type: undefined, bindingProperty: undefined };
-    if (propertyDeclaration && propertyDeclaration.decorators) {
-      propertyDeclaration.decorators.forEach((decorator) => {
+    if (propertyDeclaration && ts.canHaveDecorators(propertyDeclaration)) {
+      ts.getDecorators(propertyDeclaration).forEach((decorator) => {
         if (ts.isCallExpression(decorator.expression)) {
           if (ts.isIdentifier(decorator.expression.expression)) {
             const decoratorName = decorator.expression.expression.getText();
