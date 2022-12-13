@@ -7,7 +7,6 @@ export const ListWithSectionsAndColoredItemsExampleTemplate = `<kirby-list
   (itemSelect)="onItemSelect($event)"
   [getSectionName]="getSectionName"
   [getItemColor]="getItemColor"
-  [showDivider]="true"
 >
   <kirby-list-section-header
     *kirbyListSectionHeader="let section"

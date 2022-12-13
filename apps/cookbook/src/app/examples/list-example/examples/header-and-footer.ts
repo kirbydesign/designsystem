@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { BaseListComponent } from '../../list-shared/base-list.component';
 
-export const ListWithHeaderAndFooterExampleTemplate = `<kirby-list [items]="items" (itemSelect)="onItemSelect($event)">
+export const ListWithHeaderAndFooterExampleTemplate = `<kirby-list [items]="items" (itemSelect)="onItemSelect($event)" [showDivider]="false">
   <!-- HEADER-->
   <kirby-list-header *kirbyListHeader>
     <p>Name</p>

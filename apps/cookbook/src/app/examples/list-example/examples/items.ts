@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { BaseListComponent } from '../../list-shared/base-list.component';
 
-export const ListItemsExampleTemplate = `<kirby-list [items]="items">
+export const ListItemsExampleTemplate = `<kirby-list [items]="items" [showDivider]="false">
   <kirby-item *kirbyListItemTemplate="let item">
     <h3>{{item.title}}</h3>
     <data slot="end">{{item.amount}}</data>
