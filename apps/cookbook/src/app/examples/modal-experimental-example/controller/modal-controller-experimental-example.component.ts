@@ -19,7 +19,7 @@ export class ModalControllerExperimentalExampleComponent {
   @Input() title = '';
 
   async close() {
-    this.modalController.closeModal('cancel', {
+    this.modalController.closeModal<{ title: string }>('cancel', {
       title: this.title,
     });
   }
