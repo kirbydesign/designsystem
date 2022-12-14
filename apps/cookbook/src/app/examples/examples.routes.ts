@@ -31,7 +31,7 @@ import { LinkExampleComponent } from './link-example/link-example.component';
 import { ListColoredItemsExampleComponent } from './list-example/examples/colored-items';
 import { ListItemsExampleComponent } from './list-example/examples/dividers';
 import { ListWithHeaderAndFooterExampleComponent } from './list-example/examples/header-and-footer';
-import { ListItemsNoDividersExampleComponent } from './list-example/examples/items';
+import { ListItemsNoDividersExampleComponent } from './list-example/examples/items-no-dividers';
 import { ListWithSectionsExampleComponent } from './list-example/examples/sections';
 import { ListWithSectionsAndColoredItemsExampleComponent } from './list-example/examples/sections-and-colored-items';
 import { ListWithSectionsAndStandAloneExampleComponent } from './list-example/examples/sections-with-standalone';
@@ -302,7 +302,7 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'with-items',
+        redirectTo: 'with-items-no',
       },
       {
         path: 'with-dividers',
@@ -329,7 +329,7 @@ export const routes: Routes = [
         component: ListWithSectionsExampleComponent,
       },
       {
-        path: 'with-items',
+        path: 'with-items-no-dividers',
         component: ListItemsNoDividersExampleComponent,
       },
       {

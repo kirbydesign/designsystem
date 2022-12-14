@@ -7,7 +7,7 @@ import { KirbyModule } from '@kirbydesign/designsystem';
 import { ListColoredItemsExampleComponent } from './examples/colored-items';
 import { ListItemsExampleComponent } from './examples/dividers';
 import { ListWithHeaderAndFooterExampleComponent } from './examples/header-and-footer';
-import { ListItemsNoDividersExampleComponent } from './examples/items';
+import { ListItemsNoDividersExampleComponent } from './examples/items-no-dividers';
 import { ListWithSectionsExampleComponent } from './examples/sections';
 import { ListWithSectionsAndColoredItemsExampleComponent } from './examples/sections-and-colored-items';
 import { ListWithSectionsAndStandAloneExampleComponent } from './examples/sections-with-standalone';

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ListItemsNoDividersExampleTemplate } from '../../examples/list-example/examples/items';
+import { ListItemsNoDividersExampleTemplate } from '../../examples/list-example/examples/items-no-dividers';
 import exampleHtml from '../../examples/list-example/list-example.component.html?raw';
 import { ListColoredItemsExampleTemplate } from '~/app/examples/list-example/examples/colored-items';
 import { ListItemsExampleTemplate } from '~/app/examples/list-example/examples/dividers';
