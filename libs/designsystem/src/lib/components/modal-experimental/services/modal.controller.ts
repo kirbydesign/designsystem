@@ -26,6 +26,8 @@ export class ModalExperimentalController {
   constructor(private ionicModalController: ModalController) {}
 
   public showModal(config: ModalConfig): ModalDismissObservables {
+    if (this.isModalOpening) return;
+
     const $onWillDismiss = new Subject<OverlayEventDetail>();
     const onWillDismiss$ = $onWillDismiss.asObservable();
 
@@ -43,12 +45,16 @@ export class ModalExperimentalController {
       })
     );
 
+    this.isModalOpening = true;
+
     modal$
       .pipe(
         tap((modal) => from(modal.present())),
         switchMap((modal) => modal.onWillDismiss())
       )
       .subscribe((res) => {
+        this.isModalOpening = false;
+
         $onWillDismiss.next(res);
         $onWillDismiss.complete();
 
