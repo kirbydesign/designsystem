@@ -174,7 +174,7 @@ export class PageShowcaseComponent {
   public pageHtml = `<kirby-page\n (enter)="startSubscription()"\n (leave)="stopSubscription()"\n></kirby-page>`;
   public pageComponent = `@Component({
  selector: 'app-a-page',
- templateUrl: './-a-page.component.html'
+ templateUrl: './a-page.component.html'
 })
 export class APageComponent implements OnInit, OnDestroy {
  private $destroy = new Subject<void>();

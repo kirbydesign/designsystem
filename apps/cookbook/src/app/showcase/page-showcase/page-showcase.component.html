@@ -64,10 +64,10 @@
 
   <cookbook-code-viewer [html]="pageHtml"></cookbook-code-viewer>
   <p>
-    <code>kirby-page</code> has an `enter` and `leave` event which is triggers whenever the page is
+    <code>kirby-page</code> has an `enter` and `leave` event which triggers whenever the page is
     entered and left. If your component has subscriptions, it is important to unsubscribe when the
     component is in the background. Otherwise the subscriptions will keep firing, causing
-    performance issues
+    performance issues.
   </p>
   <cookbook-code-viewer [ts]="pageComponent"></cookbook-code-viewer>
 
