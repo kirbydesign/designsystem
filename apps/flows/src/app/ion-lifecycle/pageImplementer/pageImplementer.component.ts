@@ -1,32 +1,47 @@
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import { EmitterService } from '../emitter.service';
+// import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+// import { Subject } from 'rxjs';
+// import { EmitterService } from '../emitter.service';
 
-@Component({
-  selector: 'app-pageImplementer',
-  templateUrl: './pageImplementer.component.html',
-  styleUrls: ['./pageImplementer.component.scss'],
-})
-export class PageImplementerComponent implements OnInit, OnDestroy {
-  constructor(@Inject('name') name: string, private emitterService: EmitterService) {
-    this._componentName = name;
-  }
+// @Component({
+//   selector: 'app-pageImplementer',
+//   templateUrl: './pageImplementer.component.html',
+//   styleUrls: ['./pageImplementer.component.scss'],
+// })
+// export abstract class PageImplementerComponent implements OnInit, OnDestroy {
+//   protected $destroy = new Subject<void>();
+//   // protected emitterService: EmitterService;
 
-  public ngOnDestroy(): void {
-    console.log(`${this._componentName} component onDestroy`);
-    this.emitterService.componentDestroyed.emit(`${this._componentName} component OnInit`);
-  }
+//   constructor(@Inject('name') name: string, protected emitterService: EmitterService) {
+//     this._componentName = name;
+//     this.emitterService = emitterService;
+//   }
 
-  public ngOnInit(): void {
-    this.emitterService.componentInit.emit(`${this._componentName} component OnInit`);
-    console.log(`${this._componentName} component OnInit`);
-  }
+//   public ngOnDestroy(): void {
+//     this.$destroy.next();
+//     this.$destroy.complete;
 
-  private _componentName: string;
+//     console.log(`${this._componentName} component onDestroy`);
+//     this.emitterService.componentDestroyed.emit(`${this._componentName} component OnInit`);
+//   }
 
-  setName(componentName: string) {
-    this._componentName = componentName;
-  }
+//   public ngOnInit(): void {
+//     this.emitterService.componentInit.emit(`${this._componentName} component OnInit`);
+//     console.log(`${this._componentName} component OnInit`);
+//   }
 
-  public enterMessage = () => console.log(`enter from ${this._componentName}`);
-  public leaveMessage = () => console.log(`leave from ${this._componentName}`);
-}
+//   private _componentName: string;
+
+//   setName(componentName: string) {
+//     this._componentName = componentName;
+//   }
+
+//   public enterMessage = () => {
+//     console.log(`enter from ${this._componentName}`);
+//   };
+//   public leaveMessage = () => {
+//     console.log(`leave from ${this._componentName}`);
+
+//     this.$destroy.next();
+//     this.$destroy.complete;
+//   };
+// }

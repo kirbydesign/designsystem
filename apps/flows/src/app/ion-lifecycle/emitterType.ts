@@ -3,9 +3,8 @@ import { Subject } from 'rxjs/internal/Subject';
 
 export class EmitterType {
   private emitter$: Subject<string>;
-  private $emitter: Observable<string>;
+  public $emitter: Observable<string>;
 
-  public listen = () => this.$emitter;
   public emit = (text: string) => this.emitter$.next(text);
 
   constructor() {

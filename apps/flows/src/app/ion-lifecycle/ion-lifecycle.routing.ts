@@ -8,11 +8,10 @@ const routes: Routes = [
     path: '',
     component: IonLifecycleComponent,
     children: [
-      {
-        path: '',
-        pathMatch: 'full',
-        redirectTo: 'one',
-      },
+      // {
+      //   path: '',
+      //   pathMatch: 'full',
+      // },
       {
         path: 'one',
         component: OneComponent,

@@ -176,6 +176,8 @@ export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChec
   @Input() hideBackButton: boolean;
   @Input() titleMaxLines: number;
 
+  viewWillEnter = () => console.log('view did enter');
+
   private _tabBarBottomHidden: boolean;
   public get tabBarBottomHidden(): boolean {
     return this._tabBarBottomHidden;

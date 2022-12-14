@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { TwoComponent } from './two.component';
+import TwoComponent from './two.component';
 
 describe('TwoComponent', () => {
   let component: TwoComponent;
@@ -11,9 +11,8 @@ describe('TwoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TwoComponent ]
-    })
-    .compileComponents();
+      declarations: [TwoComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
