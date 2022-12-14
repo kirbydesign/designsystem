@@ -30,7 +30,10 @@
 </div>
 
 <h2>Slots:</h2>
-<p>The modal component accepts 2 slots: <code>header-start</code> & <code>footer</code></p>
+<p>
+  The modal component accepts 3 slots: <code>header-start</code>, <code>default</code> &
+  <code>footer</code>
+</p>
 
 <h3>header-start</h3>
 
@@ -40,6 +43,10 @@
 </p>
 
 <cookbook-code-viewer [html]="headerStartSlotExampleTemplate"></cookbook-code-viewer>
+
+<h3>default</h3>
+
+<p>The <code>default</code> slot places the provided markup or component in the modals' content.</p>
 
 <h3>footer</h3>
 
@@ -84,8 +91,8 @@
 
 <p>
   Modals can also be opened programmatically by using the <code>ModalExperimentalController</code>.
-  To show the modal, create a <code>ModalConfig</code> and pass it to the
-  <code>ModalController.showModal</code> method:
+  To show the modal, create a <code>ModalExperimentalConfig</code> and pass it to the
+  <code>modalController.showModal</code> method:
 </p>
 
 <cookbook-code-viewer [ts]="showModalCodeSnippet"></cookbook-code-viewer>
@@ -107,8 +114,7 @@
   The <code>showModal</code> method returns observables for the <code>onWillDismiss</code> and
   <code>onDidDismiss</code> events, so it's possible to subscribe to either one or both at the same
   time. The subscriptions both return an object that contains <code>data</code> and
-  <code>role</code>. <code>data</code> is the first argument passed to the closeModal method, and
-  the role is the second argument.
+  <code>role</code> as described in the <code>closeModal</code> method described here.
 </p>
 
 <cookbook-code-viewer [ts]="observableCodeSnippet"></cookbook-code-viewer>

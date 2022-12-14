@@ -38,7 +38,7 @@ export class ModalExperimentalShowcaseComponent {
   componentProperties: ApiDescriptionProperty[] = [
     {
       name: 'open',
-      description: `Determines if the modal should be shown or not`,
+      description: `Determines if the modal should be shown or not.`,
       defaultValue: 'false',
       type: ['boolean'],
     },
@@ -46,13 +46,16 @@ export class ModalExperimentalShowcaseComponent {
       name: 'canDismiss',
       description: `(Optional) Determines whether or not a modal can dismiss when calling the dismiss method.
 
-      If the value is true or the value's function returns true, the modal will close when trying to dismiss. If the value is false or the value's function returns false, the modal will not close when trying to dismiss.`,
+      If the value is true or the value's function returns true, the modal will close when trying to dismiss. If the value is false or the value's function returns false, the modal will not close when trying to dismiss.
+      
+      This can be used to show an alert or action sheet, that prompts the user and asks if they are sure that they want to close the modal.
+      `,
       defaultValue: 'true',
       type: ['(() => Promise<boolean>)', 'boolean'],
     },
     {
       name: 'title',
-      description: `The title of the modal`,
+      description: `The title of the modal.`,
       defaultValue: '',
       type: ['string'],
     },
@@ -65,8 +68,8 @@ export class ModalExperimentalShowcaseComponent {
     },
     {
       name: 'scrollDisabled',
-      description: 'Disable scrolling in the modal',
-      type: ['true', 'false'],
+      description: 'Disable scrolling in the modal.',
+      type: ['boolean'],
       defaultValue: 'false',
     },
   ];
@@ -186,7 +189,7 @@ export class ModalExperimentalShowcaseComponent {
     {
       name: 'scrollDisabled',
       description: 'Disable scrolling in the modal',
-      type: ['true', 'false'],
+      type: ['boolean'],
       defaultValue: 'false',
     },
   ];
@@ -195,10 +198,10 @@ export class ModalExperimentalShowcaseComponent {
     {
       name: 'showModal',
       description:
-        'Generates a modal and append it to the DOM. It takes a required argument of "ModalExperimentalConfig".',
+        'Generates and presents a modal. It takes a required argument of "ModalExperimentalConfig".',
       signature: `{
-        onWillDismiss: Observable<OverlayEventDetail<T>>;
-        onDidDismiss: Observable<OverlayEventDetail<T>>;
+        onWillDismiss: Observable<OverlayEventDetail>;
+        onDidDismiss: Observable<OverlayEventDetail>;
       }`,
     },
     {
@@ -207,7 +210,7 @@ export class ModalExperimentalShowcaseComponent {
 
         data is the data you want to get out of the modal, by subscribing to either "onWillDismiss" or "onDidDismiss" as described below. 
 
-        role is a string, that describes to role, which could be "cancel", "confirm", "submit" or anything else you think describes to closeModal action.
+        role is a string, that describes the role, which could be "cancel", "confirm", "submit" or anything else you think describes to closeModal action.
         `,
       signature: 'void',
     },
@@ -249,14 +252,14 @@ export class ModalExperimentalShowcaseComponent {
 
     modal?.onWillDismiss.subscribe((response) => {
       const { role, data } = response;
-      console.log('This is the role from the subscription will', role);
-      console.log('This is the data from the subscription will', data);
+      console.log('This is the role from the onWillDismiss subscription', role);
+      console.log('This is the data from the onWillDismiss subscription', data);
     });
 
     modal?.onDidDismiss.subscribe((response) => {
       const { role, data } = response;
-      console.log('This is the role from the subscription did', role);
-      console.log('This is the data from the subscription did', data);
+      console.log('This is the role from the onDidDismiss subscription', role);
+      console.log('This is the data from the onDidDismiss subscription', data);
     });
   }
 }
