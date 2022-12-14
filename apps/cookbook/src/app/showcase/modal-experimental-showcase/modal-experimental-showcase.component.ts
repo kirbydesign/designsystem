@@ -243,7 +243,7 @@ export class ModalExperimentalShowcaseComponent {
       flavor: 'modal',
       component: ModalControllerExperimentalExampleComponent,
       componentProps: {
-        title: 'Hi there',
+        title: 'Modal title',
       },
       canDismiss: enableCanDismiss ? this.canDismiss : undefined,
     };
@@ -252,14 +252,14 @@ export class ModalExperimentalShowcaseComponent {
 
     modal?.onWillDismiss.subscribe((response) => {
       const { role, data } = response;
-      console.log('This is the role from the onWillDismiss subscription', role);
-      console.log('This is the data from the onWillDismiss subscription', data);
+      console.log('This is the role from the onWillDismiss subscription:', role);
+      console.log('This is the data from the onWillDismiss subscription:', data);
     });
 
     modal?.onDidDismiss.subscribe((response) => {
       const { role, data } = response;
-      console.log('This is the role from the onDidDismiss subscription', role);
-      console.log('This is the data from the onDidDismiss subscription', data);
+      console.log('This is the role from the onDidDismiss subscription:', role);
+      console.log('This is the data from the onDidDismiss subscription:', data);
     });
   }
 }

@@ -61,12 +61,7 @@ export class ModalControllerExperimentalExampleComponent {
 
   @Input() title = '';
 
-  close() {
-    this.modalController.closeModal(
-      {
-        title: this.title,
-      },
-      'confirm'
-    );
+  close(role: string) {
+    this.modalController.closeModal({ title: this.title }, role);
   }
 }
