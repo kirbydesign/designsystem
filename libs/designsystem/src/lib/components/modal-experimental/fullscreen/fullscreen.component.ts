@@ -13,7 +13,7 @@ export class FullscreenModalExperimentalComponent {
   @ViewChild(IonContent) ionContent: IonContent;
 
   @Input() open = false;
-  @Input() canDismiss = true;
+  @Input() canDismiss: boolean | (() => Promise<boolean>) = true;
   @Input() title = '';
   @Input() hasCollapsibleTitle = false;
   @Input() scrollDisabled = false;
