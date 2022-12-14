@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ListItemsNoDividersExampleTemplate } from '../../examples/list-example/examples/items-no-dividers';
 import exampleHtml from '../../examples/list-example/list-example.component.html?raw';
 import { ListColoredItemsExampleTemplate } from '~/app/examples/list-example/examples/colored-items';
-import { ListItemsExampleTemplate } from '~/app/examples/list-example/examples/dividers';
+import { ListItemsExampleTemplate } from '~/app/examples/list-example/examples/items';
 import { ListWithHeaderAndFooterExampleTemplate } from '~/app/examples/list-example/examples/header-and-footer';
 import { ListWithSectionsExampleTemplate } from '~/app/examples/list-example/examples/sections';
 import { ListWithSectionsAndColoredItemsExampleTemplate } from '~/app/examples/list-example/examples/sections-and-colored-items';
@@ -17,7 +17,7 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   styleUrls: ['./list-showcase.component.scss'],
 })
 export class ListShowcaseComponent {
-  dividersExampleTemplate: string = ListItemsExampleTemplate;
+  items: string = ListItemsExampleTemplate;
   selectableItemsExampleTemplate: string = ListSelectableItemsExampleTemplate;
   coloredItemsExampleTemplate: string = ListColoredItemsExampleTemplate;
   sectionsAndColoredItemsExampleTemplate: string = ListWithSectionsAndColoredItemsExampleTemplate;
@@ -25,7 +25,7 @@ export class ListShowcaseComponent {
   sectionsExampleTemplate: string = ListWithSectionsExampleTemplate;
   standAloneExampleTemplate: string = ListWithStandAloneExampleTemplate;
   sectionsAndStandAloneExampleTemplate: string = ListWithSectionsAndStandAloneExampleTemplate;
-  items: string = ListItemsNoDividersExampleTemplate;
+  noDividersExampleTemplate: string = ListItemsNoDividersExampleTemplate;
 
   exampleHtml = exampleHtml;
 

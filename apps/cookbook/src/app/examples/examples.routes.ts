@@ -29,7 +29,7 @@ import { ItemGroupExampleComponent } from './item-group-example/item-group-examp
 import { ItemSlidingExampleComponent } from './item-sliding-example/item-sliding-example.component';
 import { LinkExampleComponent } from './link-example/link-example.component';
 import { ListColoredItemsExampleComponent } from './list-example/examples/colored-items';
-import { ListItemsExampleComponent } from './list-example/examples/dividers';
+import { ListItemsExampleComponent } from './list-example/examples/items';
 import { ListWithHeaderAndFooterExampleComponent } from './list-example/examples/header-and-footer';
 import { ListItemsNoDividersExampleComponent } from './list-example/examples/items-no-dividers';
 import { ListWithSectionsExampleComponent } from './list-example/examples/sections';
@@ -302,10 +302,10 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'with-items-no',
+        redirectTo: 'with-items',
       },
       {
-        path: 'with-dividers',
+        path: 'with-items',
         component: ListItemsExampleComponent,
       },
       {

@@ -5,7 +5,7 @@ import { NgModule } from '@angular/core';
 import { KirbyModule } from '@kirbydesign/designsystem';
 
 import { ListColoredItemsExampleComponent } from './examples/colored-items';
-import { ListItemsExampleComponent } from './examples/dividers';
+import { ListItemsExampleComponent } from './examples/items';
 import { ListWithHeaderAndFooterExampleComponent } from './examples/header-and-footer';
 import { ListItemsNoDividersExampleComponent } from './examples/items-no-dividers';
 import { ListWithSectionsExampleComponent } from './examples/sections';
