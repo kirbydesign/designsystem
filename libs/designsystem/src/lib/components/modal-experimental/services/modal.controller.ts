@@ -3,9 +3,9 @@ import { ModalController } from '@ionic/angular';
 import { from, Observable, Subject, switchMap, tap } from 'rxjs';
 import { OverlayEventDetail } from '@ionic/core/components';
 
-export type ModalFlavor = 'modal' | 'compact';
+export type ModalFlavor = 'modal';
 
-export type ModalConfig = {
+export type ModalExperimentalConfig = {
   flavor?: ModalFlavor;
   component: any;
   componentProps?: { [key: string]: any };
@@ -25,7 +25,7 @@ export class ModalExperimentalController {
 
   constructor(private ionicModalController: ModalController) {}
 
-  public showModal(config: ModalConfig): ModalDismissObservables {
+  public showModal(config: ModalExperimentalConfig): ModalDismissObservables {
     if (this.isModalOpening) return;
 
     const $onWillDismiss = new Subject<OverlayEventDetail>();

@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { ModalExperimentalController } from '@kirbydesign/designsystem/components/modal-experimental/services/modal.controller';
+import {
+  ModalExperimentalConfig,
+  ModalExperimentalController,
+} from '@kirbydesign/designsystem/components/modal-experimental/services/modal.controller';
 import { ActionSheetController } from '@ionic/angular';
 import {
   ModalControllerExperimentalExampleComponent,
@@ -209,14 +212,16 @@ export class ModalExperimentalShowcaseComponent {
   };
 
   openModal(enableCanDismiss?: boolean) {
-    const modal = this.modalController.showModal({
+    const config: ModalExperimentalConfig = {
       flavor: 'modal',
       component: ModalControllerExperimentalExampleComponent,
       componentProps: {
         title: 'Hi there',
       },
       canDismiss: enableCanDismiss ? this.canDismiss : undefined,
-    });
+    };
+
+    const modal = this.modalController.showModal(config);
 
     modal?.onWillDismiss.subscribe((response) => {
       const { role, data } = response;
