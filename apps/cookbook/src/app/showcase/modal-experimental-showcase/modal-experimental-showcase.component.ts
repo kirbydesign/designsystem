@@ -6,6 +6,7 @@ import {
 import { ActionSheetController } from '@ionic/angular';
 import {
   ModalControllerExperimentalExampleComponent,
+  observableCodeSnippet,
   showModalCodeSnippet,
 } from '../../examples/modal-experimental-example/controller/modal-controller-experimental-example.component';
 import {
@@ -32,6 +33,7 @@ export class ModalExperimentalShowcaseComponent {
   headerStartSlotExampleTemplate: string = headerStartSlotExampleTemplate;
   footerSlotExampleTemplate: string = footerSlotExampleTemplate;
   showModalCodeSnippet: string = showModalCodeSnippet;
+  observableCodeSnippet: string = observableCodeSnippet;
 
   componentProperties: ApiDescriptionProperty[] = [
     {
@@ -186,6 +188,28 @@ export class ModalExperimentalShowcaseComponent {
       description: 'Disable scrolling in the modal',
       type: ['true', 'false'],
       defaultValue: 'false',
+    },
+  ];
+
+  controllerMethods: ApiDescriptionMethod[] = [
+    {
+      name: 'showModal',
+      description:
+        'Generates a modal and append it to the DOM. It takes a required argument of "ModalExperimentalConfig".',
+      signature: `{
+        onWillDismiss: Observable<OverlayEventDetail<T>>;
+        onDidDismiss: Observable<OverlayEventDetail<T>>;
+      }`,
+    },
+    {
+      name: 'closeModal',
+      description: `Closes the top-most modal. It takes two optional arguments: data & role.
+
+        data is the data you want to get out of the modal, by subscribing to either "onWillDismiss" or "onDidDismiss" as described below. 
+
+        role is a string, that describes to role, which could be "cancel", "confirm", "submit" or anything else you think describes to closeModal action.
+        `,
+      signature: 'void',
     },
   ];
 

@@ -10,6 +10,49 @@ showModal() {
   };
   this.modalController.showModal(config);
 }`;
+
+export const observableCodeSnippet = `constructor(private modalController: ModalExperimentalController) {}
+
+showModal() {
+  const config: ModalExperimentalConfig = {
+    flavor: 'modal',
+    component: YourEmbeddedModalComponent,
+  };
+
+  const modal = this.modalController.showModal(config);
+
+  modal?.onWillDismiss.subscribe((response) => {
+    const { role, data } = response;
+
+    // role is: 'confirm'
+    // data is: {
+    //  title: 'myTitle',
+    //  items: [{id: 1}, {id: 2}]
+    }
+  });
+
+  modal?.onDidDismiss.subscribe((response) => {
+    const { role, data } = response;
+
+    // role is: 'confirm'
+    // data is: {
+    //  title: 'myTitle',
+    //  items: [{id: 1}, {id: 2}]
+    }
+  });
+
+
+  // Inside the embedded component
+  
+  constructor(private modalController: ModalExperimentalController) {}
+
+  close() {
+    this.modalController.closeModal({
+      title: 'myTitle',
+      items: [{id: 1}, {id: 2}]
+    }, 'confirm');
+  }
+}`;
 @Component({
   templateUrl: './modal-controller-experimental-example.component.html',
 })
@@ -18,9 +61,12 @@ export class ModalControllerExperimentalExampleComponent {
 
   @Input() title = '';
 
-  async close() {
-    this.modalController.closeModal<{ title: string }>('cancel', {
-      title: this.title,
-    });
+  close() {
+    this.modalController.closeModal(
+      {
+        title: this.title,
+      },
+      'confirm'
+    );
   }
 }

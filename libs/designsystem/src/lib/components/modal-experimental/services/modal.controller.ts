@@ -68,7 +68,7 @@ export class ModalExperimentalController {
     };
   }
 
-  public closeModal<T>(role?: string, data?: T): void {
+  public closeModal(data?: unknown, role?: string): void {
     this.ionicModalController.dismiss(data, role);
   }
 }

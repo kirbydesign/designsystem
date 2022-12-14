@@ -1,10 +1,12 @@
+<p><b>This is an experimental feature and is subject to change.</b></p>
+
 <p>
   A Modal is a dialog that appears on top of the app's content, and must be dismissed by the app
   before interaction can resume. It is useful as a select component when there are a lot of options
   to choose from, or when filtering items in a list, as well as many other use cases.
 </p>
 
-<p>Modals can be generated programmatically or used as components.</p>
+<p>Modals can be used as components or generated programmatically</p>
 
 <hr />
 
@@ -12,7 +14,7 @@
 <p>
   The modal components must be used within a <code>kirby-page</code> or on a page with no scrolling
   as the modal will automatically apply a class to the body that prevents scrolling. This is not an
-  issue within a <code>kirby-page</code> as that will handle the overflow and not the body.
+  issue within a <code>kirby-page</code> as that will handle the overflow.
 </p>
 
 <div class="page-example">
@@ -91,14 +93,25 @@
 <button kirby-button (click)="openModal()">Open modal</button>
 <button kirby-button (click)="openModal(true)">Open modal with canDismiss</button>
 
-<div class="description">
-  <h2>Modal config:</h2>
-  <cookbook-api-description-properties
-    [properties]="controllerProperties"
-  ></cookbook-api-description-properties>
-</div>
+<h2>Controller methods:</h2>
+<cookbook-api-description-methods [methods]="controllerMethods"></cookbook-api-description-methods>
 
-<p>INSERT OBSERVABLES EXAMPLE</p>
+<h2>Modal config:</h2>
+<cookbook-api-description-properties
+  [properties]="controllerProperties"
+></cookbook-api-description-properties>
+
+<h2>Subscribe to <code>onWillDismiss</code> or <code>onDidDismiss</code></h2>
+
+<p>
+  The <code>showModal</code> method returns observables for the <code>onWillDismiss</code> and
+  <code>onDidDismiss</code> events, so it's possible to subscribe to either one or both at the same
+  time. The subscriptions both return an object that contains <code>data</code> and
+  <code>role</code>. <code>data</code> is the first argument passed to the closeModal method, and
+  the role is the second argument.
+</p>
+
+<cookbook-code-viewer [ts]="observableCodeSnippet"></cookbook-code-viewer>
 
 <p>
   We recommend wrapping your component in the
