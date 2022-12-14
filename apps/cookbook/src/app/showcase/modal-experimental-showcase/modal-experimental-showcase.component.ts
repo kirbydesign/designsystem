@@ -216,6 +216,11 @@ export class ModalExperimentalShowcaseComponent {
     },
   ];
 
+  scrollTo(target: Element) {
+    target.scrollIntoView({ behavior: 'smooth' });
+    return false;
+  }
+
   canDismiss = async () => {
     const actionSheet = await this.actionSheetCtrl.create({
       header: 'Are you sure?',

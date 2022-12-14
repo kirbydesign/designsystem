@@ -53,8 +53,9 @@
 <p>
   The <code>footer</code> slot places content in the bottom of the modal underneath the scrollable
   container, so it will always stick to the bottom. We recommend using the
-  <code>kirby-modal-footer-experimental</code> component, which is documented right here. In the
-  example above the <code>kirby-modal-footer-experimental</code> component is slotted in like this:
+  <code>kirby-modal-footer-experimental</code> component, which is documented right
+  <a href="#" (click)="scrollTo(modalFooter)">here</a>. In the example above the
+  <code>kirby-modal-footer-experimental</code> component is slotted in like this:
 </p>
 
 <cookbook-code-viewer [html]="footerSlotExampleTemplate"></cookbook-code-viewer>
@@ -72,7 +73,7 @@
   <cookbook-api-description-methods [methods]="methods"></cookbook-api-description-methods>
 </div>
 
-<h2>Footer component</h2>
+<h2 #modalFooter>Footer component</h2>
 
 <p>
   The <code>kirby-modal-footer-experimental</code> component only accepts a default slot as shown
@@ -100,7 +101,8 @@
 <button kirby-button (click)="openModal()">Open modal</button>
 <button kirby-button (click)="openModal(true)">Open modal with canDismiss</button>
 
-<h2>Controller methods:</h2>
+<h2 #controllerMethodsTable>Controller methods:</h2>
+
 <cookbook-api-description-methods [methods]="controllerMethods"></cookbook-api-description-methods>
 
 <h2>Modal config:</h2>
@@ -114,7 +116,8 @@
   The <code>showModal</code> method returns observables for the <code>onWillDismiss</code> and
   <code>onDidDismiss</code> events, so it's possible to subscribe to either one or both at the same
   time. The subscriptions both return an object that contains <code>data</code> and
-  <code>role</code> as described in the <code>closeModal</code> method described here.
+  <code>role</code> as described in the <code>closeModal</code> method described
+  <a href="#" (click)="scrollTo(controllerMethodsTable)">here</a>.
 </p>
 
 <cookbook-code-viewer [ts]="observableCodeSnippet"></cookbook-code-viewer>
