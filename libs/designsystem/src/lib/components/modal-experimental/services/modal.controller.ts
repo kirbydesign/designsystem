@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { from, map, Observable, Subject, switchMap, tap } from 'rxjs';
+import { from, Observable, Subject, switchMap, tap } from 'rxjs';
 import { OverlayEventDetail } from '@ionic/core/components';
-import { TestModalController } from './test-modal.controller';
 
 export type ModalFlavor = 'modal' | 'compact';
 
@@ -16,25 +15,23 @@ export type ModalConfig = {
   showBackdrop?: boolean;
 };
 
-type ModalInstanceAndData = {
-  modal: HTMLIonModalElement;
-  data: Subject<OverlayEventDetail>;
-};
-
-type returnValues = {
-  onWillDismiss: Observable<OverlayEventDetail<unknown>>;
-  onDidDismiss: Observable<OverlayEventDetail<unknown>>;
+type ModalDismissObservables = {
+  onWillDismiss: Observable<OverlayEventDetail>;
+  onDidDismiss: Observable<OverlayEventDetail>;
 };
 @Injectable()
 export class ModalExperimentalController {
-  private ionModal: HTMLIonModalElement;
   private isModalOpening = false;
-  private $onWillDismiss = new Subject<OverlayEventDetail>();
-  private onWillDismiss$ = this.$onWillDismiss.asObservable();
 
   constructor(private ionicModalController: ModalController) {}
 
-  public showModal(config: ModalConfig): ModalExperimentalController {
+  public showModal(config: ModalConfig): ModalDismissObservables {
+    const $onWillDismiss = new Subject<OverlayEventDetail>();
+    const onWillDismiss$ = $onWillDismiss.asObservable();
+
+    const $onDidDismiss = new Subject<OverlayEventDetail>();
+    const onDidDismiss$ = $onDidDismiss.asObservable();
+
     const modal$ = from(
       this.ionicModalController.create({
         component: config.component,
@@ -52,16 +49,20 @@ export class ModalExperimentalController {
         switchMap((modal) => modal.onWillDismiss())
       )
       .subscribe((res) => {
-        this.$onWillDismiss.next(res);
-        this.$onWillDismiss.complete();
+        $onWillDismiss.next(res);
+        $onWillDismiss.complete();
+
+        $onDidDismiss.next(res);
+        $onDidDismiss.complete();
       });
 
-    return this;
+    return {
+      onWillDismiss: onWillDismiss$,
+      onDidDismiss: onDidDismiss$,
+    };
   }
 
   public closeModal(role?: string, data?: any): void {
     this.ionicModalController.dismiss(data, role);
   }
-
-  public onWillDismiss = (): Observable<OverlayEventDetail> => this.onWillDismiss$;
 }

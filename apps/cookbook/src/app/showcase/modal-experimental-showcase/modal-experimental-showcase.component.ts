@@ -218,10 +218,16 @@ export class ModalExperimentalShowcaseComponent {
       canDismiss: enableCanDismiss ? this.canDismiss : undefined,
     });
 
-    modal.onWillDismiss().subscribe((response) => {
+    modal.onWillDismiss.subscribe((response) => {
       const { role, data } = response;
-      console.log('This is the role from the subscription', role);
-      console.log('This is the data from the subscription', data);
+      console.log('This is the role from the subscription will', role);
+      console.log('This is the data from the subscription will', data);
+    });
+
+    modal.onDidDismiss.subscribe((response) => {
+      const { role, data } = response;
+      console.log('This is the role from the subscription did', role);
+      console.log('This is the data from the subscription did', data);
     });
   }
 }
