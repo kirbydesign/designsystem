@@ -7,7 +7,6 @@ export const ListWithSectionsAndStandAloneExampleTemplate = `<kirby-list
   (itemSelect)="onItemSelect($event)"
   [getStandAloneByProperty]="'isStandAlone'"
   [getSectionName]="getSectionName"
-  [showDivider]="true"
   [standAloneSpacing]="'xxs'"
 >
   <kirby-list-section-header
