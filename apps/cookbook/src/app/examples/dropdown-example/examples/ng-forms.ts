@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 
 const config = {
   selector: 'cookbook-dropdown-example-ng-forms',
@@ -86,8 +86,8 @@ export class DropdownExampleNgFormsComponent implements OnInit {
     { title: 'Tongue', subtitle: 'Tongue bresaola tail swine', value: 4 },
     { title: 'Drumstick', subtitle: 'Drumstick pastrami sirloin ', value: 5 },
   ];
-  form: FormGroup;
-  favoriteFoodControl: FormControl;
+  form: UntypedFormGroup;
+  favoriteFoodControl: UntypedFormControl;
   @Input() size: string;
 
   ngOnInit(): void {
@@ -108,14 +108,14 @@ export class DropdownExampleNgFormsComponent implements OnInit {
   }
 
   private buildForm() {
-    this.favoriteFoodControl = new FormControl(
+    this.favoriteFoodControl = new UntypedFormControl(
       null,
       this.favoriteRequired ? Validators.required : null
     );
     if (!this.canSelectFavorite) {
       this.favoriteFoodControl.disable();
     }
-    this.form = new FormGroup({
+    this.form = new UntypedFormGroup({
       favoriteFood: this.favoriteFoodControl,
     });
   }
