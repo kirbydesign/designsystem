@@ -5,14 +5,12 @@
   intuitive user experiences.
 </p>
 <kirby-divider [hasMargin]="true"></kirby-divider>
-<div style="padding-top: 35px"></div>
-<div class="flex">
-  <div *ngFor="let item of listOfComponents; let i = index">
-    <cookbook-component-display
-      [route]="item.route"
-      [svgPath]="item.svgPath"
-      [paragraph]="item.paragraph"
-      [title]="item.title"
-    ></cookbook-component-display>
-  </div>
+<div class="grid">
+  <cookbook-component-display
+    *ngFor="let item of listOfComponents; let i = index"
+    [route]="item.route"
+    [svgPath]="item.svgPath"
+    [paragraph]="item.paragraph"
+    [title]="item.title"
+  ></cookbook-component-display>
 </div>

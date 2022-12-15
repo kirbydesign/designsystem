@@ -1,6 +1,7 @@
-.flex {
-  display: flex;
-  flex-wrap: wrap;
+.grid {
+  padding-top: 35px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 237px);
   column-gap: 24px;
   row-gap: 35px;
   justify-content: space-around;
