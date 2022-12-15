@@ -90,7 +90,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   /**
    * Determines if dividers (bottom-border on list items) should be shown or not.
    */
-  @Input() showDivider = false;
+  @Input() showDivider = true;
 
   /**
    * Determines if list row text should turn bold on selection
