@@ -102,12 +102,4 @@ describe('FullscreenComponent', () => {
       expect(didDismissSpy).toHaveBeenCalled();
     });
   });
-
-  // describe('title', () => {
-  //   it('should have the provided title', () => {
-  //     const modalTitle = spectator.query(IonTitle);
-
-  //     expect(modalTitle).toHaveText(titleText, true);
-  //   });
-  // });
 });

@@ -22,13 +22,14 @@ const SAFE_AREA_BOTTOM_PX = `${SAFE_AREA_BOTTOM}px`;
 const TRANSFORM_PUSHED_BY_KEYBOARD = `matrix(1, 0, 0, 1, 0, -${KEYBOARD_HEIGHT})`;
 
 @Component({
-  template: '<kirby-modal-footer [snapToKeyboard]="snapToKeyboard"></kirby-modal-footer>',
+  template:
+    '<kirby-modal-footer-experimental [snapToKeyboard]="snapToKeyboard"></kirby-modal-footer-experimental>',
 })
 class TestHostComponent {
   snapToKeyboard = false;
 }
 
-xdescribe('ModalFooterComponent', () => {
+describe('ModalFooterComponent', () => {
   let spectator: SpectatorHost<ModalFooterExperimentalComponent, TestHostComponent>;
   let modalFooterElement: HTMLElement;
   let ionFooterElement: HTMLIonFooterElement;
@@ -42,12 +43,12 @@ xdescribe('ModalFooterComponent', () => {
   beforeEach(() => {});
 
   it('should create', () => {
-    spectator = createHost(`<kirby-modal-footer></kirby-modal-footer>`);
+    spectator = createHost(`<kirby-modal-footer-experimental></kirby-modal-footer-experimental>`);
     expect(spectator.component).toBeTruthy();
   });
 
   it('should set correct padding', () => {
-    spectator = createHost(`<kirby-modal-footer></kirby-modal-footer>`);
+    spectator = createHost(`<kirby-modal-footer-experimental></kirby-modal-footer-experimental>`);
     expect(spectator.component).toBeTruthy();
     ionFooterElement = spectator.query('ion-footer');
     expect(ionFooterElement).toHaveComputedStyle({
@@ -60,7 +61,7 @@ xdescribe('ModalFooterComponent', () => {
 
   describe('Set bottom padding', () => {
     beforeEach(() => {
-      spectator = createHost(`<kirby-modal-footer></kirby-modal-footer>`);
+      spectator = createHost(`<kirby-modal-footer-experimental></kirby-modal-footer-experimental>`);
       modalFooterElement = spectator.element;
       ionFooterElement = spectator.query('ion-footer');
     });
@@ -100,7 +101,7 @@ xdescribe('ModalFooterComponent', () => {
   describe('Snap to keyboard', () => {
     beforeEach(() => {
       spectator = createHost(
-        `<kirby-modal-footer [snapToKeyboard]="snapToKeyboard"></kirby-modal-footer>`
+        `<kirby-modal-footer-experimental [snapToKeyboard]="snapToKeyboard"></kirby-modal-footer-experimental>`
       );
       modalFooterElement = spectator.element;
       ionFooterElement = spectator.query('ion-footer');
@@ -137,47 +138,10 @@ xdescribe('ModalFooterComponent', () => {
     });
   });
 
-  describe('ModalFooterComponent background color', () => {
-    it('should be background-color when themeColor is light', () => {
-      spectator = createHost(`<kirby-modal-footer themeColor="light"></kirby-modal-footer>`);
-      expect(spectator.query('ion-footer')).toHaveComputedStyle({
-        'background-color': getColor('background-color'),
-      });
-    });
-
-    it('should be white when themeColor is white', () => {
-      spectator = createHost(`<kirby-modal-footer themeColor="white"></kirby-modal-footer>`);
-      expect(spectator.query('ion-footer')).toHaveComputedStyle({
-        'background-color': getColor('white'),
-      });
-    });
-
-    it('should be white when themeColor not set', () => {
-      spectator = createHost(`<kirby-modal-footer></kirby-modal-footer>`);
-      expect(spectator.query('ion-footer')).toHaveComputedStyle({
-        'background-color': getColor('white'),
-      });
-    });
-
-    it('should be white when color set by themeColor is not supported', () => {
-      spectator = createHost(`<kirby-modal-footer themeColor="primary"></kirby-modal-footer>`);
-      expect(spectator.query('ion-footer')).toHaveComputedStyle({
-        'background-color': getColor('white'),
-      });
-    });
-  });
-
   describe('when inline type is set', () => {
     it('should have a transparent background color', () => {
-      spectator = createHost(`<kirby-modal-footer type="inline"></kirby-modal-footer>`);
-      expect(spectator.query('ion-footer')).toHaveComputedStyle({
-        'background-color': 'transparent',
-      });
-    });
-
-    it('should have a transparent background even when themeColor is specified', () => {
       spectator = createHost(
-        `<kirby-modal-footer type="inline" themeColor="primary"></kirby-modal-footer>`
+        `<kirby-modal-footer-experimental type="inline"></kirby-modal-footer-experimental>`
       );
       expect(spectator.query('ion-footer')).toHaveComputedStyle({
         'background-color': 'transparent',
@@ -185,7 +149,9 @@ xdescribe('ModalFooterComponent', () => {
     });
 
     it('should not show a box shadow', () => {
-      spectator = createHost(`<kirby-modal-footer type="inline"></kirby-modal-footer>`);
+      spectator = createHost(
+        `<kirby-modal-footer-experimental type="inline"></kirby-modal-footer-experimental>`
+      );
       expect(spectator.query('ion-footer')).toHaveComputedStyle({
         'box-shadow': 'none',
       });
