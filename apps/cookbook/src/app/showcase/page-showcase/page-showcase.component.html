@@ -56,7 +56,7 @@
   <p>
     The <code>kirby-router-outlet</code> stacks the pages/components when it navigates. This means
     that when one component is stacked on top of another, the component on the bottom won't be
-    destroyed. This means that eg. subscriptions aren't unsubscribed. This can result in severe
+    destroyed. This means that the <code>ngOnDestroy</code> hook will not run as expected, and any logic for eg. unsubscribing from subscriptions is not taking place. This can result in severe
     performance issues.
   </p>
 
