@@ -8,17 +8,15 @@ import { ModalFooterExperimentalComponent } from './components/modal-experimenta
 import { ModalWrapperExperimentalComponent } from './components/modal-experimental/wrapper/wrapper.component';
 import { ModalExperimentalController } from './components/modal-experimental/services/modal.controller';
 
-const components = [
+const COMPONENT_DECLARATIONS = [
   FullscreenModalExperimentalComponent,
   ModalFooterExperimentalComponent,
   ModalWrapperExperimentalComponent,
 ];
-
-const exports = [...components];
 @NgModule({
-  declarations: components,
+  declarations: COMPONENT_DECLARATIONS,
   imports: [CommonModule, IonicModule, IconModule, KirbyModule],
-  exports: exports,
+  exports: COMPONENT_DECLARATIONS,
   providers: [ModalExperimentalController],
 })
 export class KirbyModalModule {}
