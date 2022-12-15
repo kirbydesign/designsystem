@@ -10,16 +10,7 @@ const config = {
     <kirby-flag slot="end" themeColor="success">
         <data value="60.0">60</data>
     </kirby-flag>
-  </kirby-item> 
-<br>
-  <kirby-item [disclosure]="'arrow-down'">
-    <kirby-label>
-      <h3>Title</h3>
-      <p subtitle>Subtitle</p>
-      <p detail>Detail</p>
-    </kirby-label>
-  </kirby-item>
-  `,
+  </kirby-item>`,
 };
 
 @Component({
