@@ -23,7 +23,7 @@ function createForwardRule(filePath, packageAlias, sharedRootDir) {
   )(path.basename(filePath));
 
   const url = removeTrailingSlash(
-    `~${path.dirname(filePath).replace(sharedRootDir, packageAlias)}/${fileNameToForward}`
+    `${path.dirname(filePath).replace(sharedRootDir, packageAlias)}/${fileNameToForward}`
   );
 
   return `@forward "${url}";`;
