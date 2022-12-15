@@ -11,8 +11,8 @@
       }
     </style>
   </defs>
-  <rect class="cls-1" x="85.15" y="70.5" width="69.44" height="9" rx="3" ry="3" transform="translate(194.88 -44.88) rotate(90)"/>
-  <rect class="cls-2" x="68.65" y="83" width="44.44" height="9" rx="3" ry="3" transform="translate(178.38 -3.38) rotate(90)"/>
-  <rect class="cls-2" x="126.9" y="83" width="44.44" height="9" rx="3" ry="3" transform="translate(236.63 -61.63) rotate(90)"/>
-  <rect class="cls-2" x="163.96" y="90.41" width="29.63" height="9" rx="3" ry="3" transform="translate(273.68 -83.87) rotate(90)"/>
+  <rect class="cls-1" x="70.33" y="70.5" width="69.44" height="9" rx="3" ry="3" transform="translate(180.05 -30.05) rotate(90)"/>
+  <rect class="cls-2" x="53.83" y="83" width="44.44" height="9" rx="3" ry="3" transform="translate(163.55 11.45) rotate(90)"/>
+  <rect class="cls-2" x="112.08" y="83" width="44.44" height="9" rx="3" ry="3" transform="translate(221.8 -46.8) rotate(90)"/>
+  <rect class="cls-2" x="149.14" y="90.41" width="29.63" height="9" rx="3" ry="3" transform="translate(258.86 -69.04) rotate(90)"/>
 </svg>
