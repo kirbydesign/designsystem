@@ -469,7 +469,7 @@ export class ${mockClassName} {${propertiesString}${methodsString}}
     componentMetaData.className = className;
 
     if (classDeclaration && ts.canHaveDecorators(classDeclaration)) {
-      ts.getDecorators(classDeclaration).forEach((decorator) => {
+      ts.getDecorators(classDeclaration)?.forEach((decorator) => {
         if (ts.isCallExpression(decorator.expression)) {
           if (ts.isIdentifier(decorator.expression.expression)) {
             const decoratorName = decorator.expression.expression.getText();
@@ -592,7 +592,7 @@ export class ${mockClassName} {${propertiesString}${methodsString}}
   ): { type: 'Input' | 'Output'; bindingProperty: string } {
     const inputOutputDecorator = { type: undefined, bindingProperty: undefined };
     if (propertyDeclaration && ts.canHaveDecorators(propertyDeclaration)) {
-      ts.getDecorators(propertyDeclaration).forEach((decorator) => {
+      ts.getDecorators(propertyDeclaration)?.forEach((decorator) => {
         if (ts.isCallExpression(decorator.expression)) {
           if (ts.isIdentifier(decorator.expression.expression)) {
             const decoratorName = decorator.expression.expression.getText();
