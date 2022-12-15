@@ -1,0 +1,3 @@
+export { FullscreenModalExperimentalComponent } from './fullscreen/fullscreen.component';
+export { ModalFooterExperimentalComponent } from './footer/footer.component';
+export { ModalWrapperExperimentalComponent } from './wrapper/wrapper.component';

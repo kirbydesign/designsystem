@@ -39,6 +39,7 @@ export * from './loading-overlay';
 export * from './list';
 
 export * from './modal';
+export * from './modal-experimental';
 
 export * from './page';
 
