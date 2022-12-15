@@ -171,6 +171,36 @@ export class PageShowcaseComponent {
     },
   ];
 
+  public pageHtml = `<kirby-page\n (enter)="startSubscription()"\n (leave)="stopSubscription()"\n></kirby-page>`;
+  public pageComponent = `@Component({
+ selector: 'app-a-page',
+ templateUrl: './a-page.component.html'
+})
+export class APageComponent implements OnInit, OnDestroy {
+ private $destroy = new Subject<void>();
+ private aService: AService;
+
+ constructor(private aService: AService){}
+
+ public ngOnInit(): void {
+   this.subscribe();
+ }
+  
+ public ngOnDestroy(): void {
+   this.unsubscribe();
+ }
+
+ public startSubscription = () => this.subscribe();
+ public stopSubscription = () => this.unsubscribe();
+   
+ private subscribe = () => this.aService.get().pipe(takeUntil(this.$destroy));
+   
+ private unsubscribe = () => {
+   this.$destroy.next();
+   this.$destroy.complete;
+ }
+}
+    `;
   scrollTo(target: Element) {
     target.scrollIntoView({ behavior: 'smooth' });
     return false;
