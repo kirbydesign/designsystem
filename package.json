@@ -116,10 +116,8 @@
     "chartjs-plugin-datalabels": "^2.0.0",
     "date-fns": "2.21.1",
     "date-fns-tz": "1.1.4",
-    "highcharts": "8.0.4",
     "inputmask": "^5.0.5",
     "prismjs": "1.27.0",
-    "reflect-metadata": "0.1.8",
     "rxjs": "~7.5.0",
     "tslib": "^2.0.3",
     "zone.js": "0.11.5"
