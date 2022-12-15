@@ -6,7 +6,6 @@ export const ListWithSectionsExampleTemplate = `<kirby-list
   [items]="items"
   (itemSelect)="onItemSelect($event)"
   [getSectionName]="getSectionName"
-  [showDivider]="true"
 >
   <kirby-list-section-header
     *kirbyListSectionHeader="let section"
