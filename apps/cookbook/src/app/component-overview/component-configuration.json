@@ -38,7 +38,7 @@
     },
     {
       "title": "Calendar",
-      "paragraph": "Buttons give people simple, familiar ways to do tasks in your app.",
+      "paragraph": "The calendar component is used to visually represent a date and allows user to pick a date and navigate between days, months and years.",
       "svgPath": "./assets/component-svg/Calendar-Kirby-Component-Overview.svg",
       "route": "home/showcase/calendar"
     },
@@ -50,7 +50,7 @@
     },
     {
       "title": "Chart",
-      "paragraph": "Graphical representation for data visualization, in which the date is represented by symbols such as bars and lines.",
+      "paragraph": "Graphical representation for data visualization, in which the data is represented by symbols such as bars and lines.",
       "svgPath": "./assets/component-svg/Chart-Kirby-Component-Overview.svg",
       "route": "home/showcase/chart"
     },
@@ -164,7 +164,7 @@
     },
     {
       "title": "Slide Button",
-      "paragraph": "The slide button is used to verify actions",
+      "paragraph": "The slide button is used to verify actions.",
       "svgPath": "./assets/component-svg/Slide-Button-Kirby-Component-Overview.svg",
       "route": "home/showcase/slide-button"
     },
