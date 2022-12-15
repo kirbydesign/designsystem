@@ -51,13 +51,25 @@
     Using page with the <code>kirby-router-outlet</code> will cause the views to be stacked instead
     of replaced.
   </p>
-
   <h3>Life-cycle hooks</h3>
+
   <p>
-    As the views are stacked and not replaced when using <code>kirby-router-outlet</code> the
-    life-cycle hooks <code>onInit</code> and <code>onDestroy</code> can't be relied on. Instead the
-    <code>kirby-page</code> events <code>(enter)</code> and <code>(leave)</code> should be used.
+    The <code>kirby-router-outlet</code> stacks the pages/components when it navigates. This means
+    that when one component is stacked on top of another, the component on the bottom won't be
+    destroyed. This means that the <code>ngOnDestroy</code> hook will not run as expected, and any logic for eg. unsubscribing from subscriptions is not taking place. This can result in severe
+    performance issues.
   </p>
+
+  <p>Below is an example on the recommended approach for 'pausing' subscriptions when a kirby-page is animating out of view.</p>
+
+  <cookbook-code-viewer [html]="pageHtml"></cookbook-code-viewer>
+  <p>
+    <code>kirby-page</code> has an `enter` and `leave` event which triggers whenever the page is
+    entered and left. If your component has subscriptions, it is important to unsubscribe when the
+    component is in the background. Otherwise the subscriptions will keep firing, causing
+    performance issues.
+  </p>
+  <cookbook-code-viewer [ts]="pageComponent"></cookbook-code-viewer>
 
   <h3>Navigation</h3>
   <p>
