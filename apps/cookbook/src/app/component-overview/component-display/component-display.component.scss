@@ -1,3 +1,5 @@
+@use '@kirbydesign/core/src/scss/utils';
+
 .component-display {
   width: 237px;
 }
@@ -12,5 +14,5 @@ h3 {
 }
 
 p {
-  color: #1c1c1c;
+  color: utils.get-color('black');
 }

@@ -9,10 +9,10 @@ import { Router } from '@angular/router';
 export class ComponentDisplayComponent {
   constructor(private _router: Router) {}
 
-  @Input() title = 'Title';
-  @Input() paragraph = 'Text';
-  @Input() svgPath: string = '../../assets/component-svg/Accordion-Kirby-Component-Overview.svg';
-  @Input() route: string = 'home/showcase/accordion';
+  @Input() title: string;
+  @Input() paragraph: string;
+  @Input() svgPath: string;
+  @Input() route: string;
 
   navigate(path: string) {
     this._router.navigate([path]);

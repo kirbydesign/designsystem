@@ -1,4 +1,4 @@
-export interface display {
+export interface Display {
   title: string;
   paragraph: string;
   svgPath: string;
