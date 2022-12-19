@@ -71,10 +71,8 @@
 <p>
   With the <strong><code>modal</code></strong> flavor, the dialog opens with a slide-up animation,
   it's title is aligned to the left and it's close button is placed in the top right corner. The
-  modal includes a gesture to drag the modal down to close it.<br />
-  On mobile/small screens the presenting page will be pushed back in a card-like style (when used
-  inside a <code>kirby-app</code>). Any additional modals with the <code>modal</code> flavor opened
-  on top will also scale/push back the existing modal, similar to a card stack.
+  modal can't be closed by swiping. If nested modals are opened, they will simply slide up and
+  appear on top of the modal(s) underneath.
 </p>
 
 <h3 #modalFlavorsModalWithOutlet>Modal (default) - with outlet</h3>
