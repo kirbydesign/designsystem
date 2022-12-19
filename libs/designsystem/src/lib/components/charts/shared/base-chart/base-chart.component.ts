@@ -136,4 +136,8 @@ export class BaseChartComponent implements AfterViewInit, OnChanges {
   private redrawChart() {
     this.chartJSService.redrawChart();
   }
+
+  ngOnDestroy() {
+    this.chartJSService.destroyChart();
+  }
 }
