@@ -223,10 +223,6 @@ Finally, add the following to `index.html` :
 
 _**Please note:** If you don't want the additional http request for the polyfill loader, you can copy the contents of `node_modules/@kirbydesign/designsystem/polyfills/resize-observer-polyfill-loader.js` into a `script` tag in `index.html` instead_
 
-## Chart Components
-
-The Kirby chart components use Highcharts. Note that this is a licensed product.
-
 ## Contributing
 
 If you wish to contribute new features, bug fixes or something third to the project have a look at the [contribution guidelines](./.github/CONTRIBUTING.md).
