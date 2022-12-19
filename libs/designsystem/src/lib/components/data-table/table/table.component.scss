@@ -1,6 +1,9 @@
 @use '@kirbydesign/core/src/scss/utils';
 @use '@kirbydesign/core/src/scss/interaction-state';
 
+// Height variables
+$cell-height: 44px;
+
 // Color variables
 $divider-color: utils.get-color('medium');
 $highlight-color: utils.get-color('light');
@@ -40,7 +43,8 @@ th {
 }
 
 td {
-  padding: utils.size('s');
+  height: $cell-height;
+  padding: utils.size('xxxs') utils.size('s');
   font-weight: utils.font-weight('normal');
   font-size: utils.font-size('s');
   color: utils.get-text-color('black');
