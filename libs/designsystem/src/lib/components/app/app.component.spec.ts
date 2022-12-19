@@ -29,9 +29,7 @@ describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
 
   beforeEach(waitForAsync(() => {
-    const modalControllerSpy = jasmine.createSpyObj('ModalController', [
-      'registerPresentingElement',
-    ]);
+    const modalControllerSpy = jasmine.createSpy('ModalController');
 
     TestBed.configureTestingModule({
       imports: [NoopAnimationsModule],
