@@ -18,6 +18,7 @@ import {
   Optional,
   Output,
   QueryList,
+  Renderer2,
   SimpleChanges,
   SkipSelf,
   TemplateRef,
@@ -167,7 +168,9 @@ export class PageActionsComponent {}
   styleUrls: ['./page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChecked, OnChanges {
+export class PageComponent
+  implements OnInit, OnDestroy, AfterViewInit, AfterContentChecked, OnChanges
+{
   @Input() title: string;
   @Input() subtitle: string;
   @Input() toolbarTitle: string;
@@ -263,11 +266,17 @@ export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChec
   );
 
   constructor(
+    private elementRef: ElementRef,
+    private renderer: Renderer2,
     private router: Router,
     private changeDetectorRef: ChangeDetectorRef,
     private modalNavigationService: ModalNavigationService,
     @Optional() @SkipSelf() private tabsComponent: TabsComponent
   ) {}
+
+  ngOnInit(): void {
+    this.removeWrapper();
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.titleMaxLines) {
@@ -339,6 +348,14 @@ export class PageComponent implements OnDestroy, AfterViewInit, AfterContentChec
     this.refresh.emit({
       complete: event.target.complete.bind(event.target),
     });
+  }
+
+  private removeWrapper() {
+    const parent = this.elementRef.nativeElement.parentNode;
+    this.renderer.removeChild(parent, this.elementRef.nativeElement);
+    this.renderer.appendChild(parent, this.ionHeaderElement.nativeElement);
+    this.renderer.appendChild(parent, this.ionContentElement.nativeElement);
+    this.renderer.appendChild(parent, this.ionFooterElement.nativeElement);
   }
 
   private onEnter() {
