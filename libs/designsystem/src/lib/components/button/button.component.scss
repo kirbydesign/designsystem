@@ -288,7 +288,7 @@ $button-width: (
 // Temp fix for https://github.com/angular/angular-cli/issues/13854#issuecomment-470831308
 
 /* clean-css ignore:start */
-:host-context(kirby-page ion-toolbar ion-buttons) {
+:host-context(ion-toolbar ion-buttons) {
   font-size: utils.font-size('s');
   margin: 0;
   height: utils.size('xl');
