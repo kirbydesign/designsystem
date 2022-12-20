@@ -88,10 +88,17 @@ ion-toolbar {
   }
 
   ion-title {
+    visibility: hidden;
     opacity: 0;
+    transform: translateY(10px);
+    transition-property: opacity, transform;
+    transition-duration: 150ms;
+    transition-timing-function: utils.get-transition-easing('enter-exit');
 
     &.slide-and-fade-in {
+      visibility: visible;
       opacity: 1;
+      transform: translateY(0);
     }
 
     .toolbar-title {
