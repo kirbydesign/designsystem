@@ -19,7 +19,7 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular';
-import { merge, Observable, Subject } from 'rxjs';
+import { firstValueFrom, merge, Observable, Subject } from 'rxjs';
 import { debounceTime, first, takeUntil } from 'rxjs/operators';
 
 import { DesignTokenHelper } from '@kirbydesign/core';
@@ -101,9 +101,9 @@ export class ModalWrapperComponent
   private viewportResized = false;
   private ionModalElement?: HTMLIonModalElement;
   private readonly ionModalDidPresent = new Subject<void>();
-  readonly didPresent = this.ionModalDidPresent.toPromise();
+  readonly didPresent = firstValueFrom(this.ionModalDidPresent);
   private readonly ionModalWillDismiss = new Subject<void>();
-  readonly willClose = this.ionModalWillDismiss.toPromise();
+  readonly willClose = firstValueFrom(this.ionModalWillDismiss);
   private viewportResize = new Subject<void>();
   private viewportResize$ = this.viewportResize
     .asObservable()
