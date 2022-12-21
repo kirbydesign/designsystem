@@ -10,7 +10,7 @@ export const ListWithHeaderAndFooterExampleTemplate = `<kirby-list [items]="item
   </kirby-list-header>
 
   <!-- BODY -->
-  <kirby-item *kirbyListItemTemplate="let item">
+  <kirby-item *kirbyListItemTemplate="let item" [selectable]="true">
     <kirby-label>
       <h3>{{item.title}}</h3>
       <p subtitle>{{item.subTitle}}</p>
