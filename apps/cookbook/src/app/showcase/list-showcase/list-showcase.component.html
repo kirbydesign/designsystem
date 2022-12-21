@@ -37,8 +37,12 @@
   <div>
     <h2>List with selectable items:</h2>
     <p>
-      The selected item is highligted in bold by default. This behaviour can be suppressed by
-      passing <code>[disableSelectionHighlight]="true"</code> to the list component.
+      In order to make items selectable a callback must provided to <code>(itemSelect)</code> as
+      shown below. If the item should have a darker background on hover and change the cursor to a
+      pointer, then <code>[selectable]="true"</code> must be provided to the
+      <code>kirby-item</code> component in the template. The selected item is highligted in bold by
+      default. This behaviour can be suppressed by passing
+      <code>[disableSelectionHighlight]="true"</code> to the list component.
     </p>
     <cookbook-code-viewer [html]="selectableItemsExampleTemplate"></cookbook-code-viewer>
   </div>
