@@ -7,7 +7,6 @@
 /dist-lib
 /test-reports
 *.styles.ts
-/libs/designsystem/src/lib/polyfills/*.min.js
 
 # compiled core library output
 /libs/core/loader
