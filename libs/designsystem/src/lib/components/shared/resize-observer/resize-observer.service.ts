@@ -1,6 +1,5 @@
 import { ElementRef, Injectable, NgZone, OnDestroy } from '@angular/core';
 
-import { ResizeObserver } from './types/resize-observer';
 import { ResizeObserverEntry } from './types/resize-observer-entry';
 import { ResizeObserverFactory } from './resize-observer.factory';
 
@@ -22,10 +21,7 @@ export class ResizeObserverService implements OnDestroy {
     const element = elementOrRef instanceof ElementRef ? elementOrRef.nativeElement : elementOrRef;
     if (!this.observedElements.has(element)) {
       if (this.observer) {
-        // IMPORTANT: Has to be run outside the Angular zone, for it to work with ResizeObserver polyfill:
-        this.zone.runOutsideAngular(() => {
-          this.observer.observe(element);
-        });
+        this.observer.observe(element);
       }
       this.observedElements.set(element, action);
     }
@@ -33,10 +29,7 @@ export class ResizeObserverService implements OnDestroy {
 
   ngOnDestroy() {
     if (this.observer) {
-      // IMPORTANT: Has to be run outside the Angular zone, for it to work with ResizeObserver polyfill:
-      this.zone.runOutsideAngular(() => {
-        this.observer.disconnect();
-      });
+      this.observer.disconnect();
     }
     this.observedElements = null;
   }
@@ -45,10 +38,7 @@ export class ResizeObserverService implements OnDestroy {
     const element = elementOrRef instanceof ElementRef ? elementOrRef.nativeElement : elementOrRef;
     if (this.observedElements.has(element)) {
       if (this.observer) {
-        // IMPORTANT: Has to be run outside the Angular zone, for it to work with ResizeObserver polyfill:
-        this.zone.runOutsideAngular(() => {
-          this.observer.unobserve(element);
-        });
+        this.observer.unobserve(element);
       }
       this.observedElements.delete(element);
     }

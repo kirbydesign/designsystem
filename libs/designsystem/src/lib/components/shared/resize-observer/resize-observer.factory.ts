@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 
-import { ResizeObserver } from './types/resize-observer';
 import { ResizeObserverCallback } from './types/resize-observer-callback';
 
 declare const ResizeObserver: {
