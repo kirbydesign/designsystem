@@ -1,9 +1,6 @@
 import {
-  AfterViewInit,
-  ChangeDetectorRef,
   Component,
   ContentChild,
-  ContentChildren,
   EventEmitter,
   HostBinding,
   Input,
@@ -16,8 +13,6 @@ import {
 } from '@angular/core';
 
 import { ThemeColor } from '@kirbydesign/core';
-
-import { ItemComponent } from '../item/item.component';
 
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 import { ListHelper } from './helpers/list-helper';
@@ -50,7 +45,7 @@ export type StandAloneSpacing =
   styleUrls: ['./list.component.scss'],
   providers: [ListHelper],
 })
-export class ListComponent implements OnInit, AfterViewInit, OnChanges {
+export class ListComponent implements OnInit, OnChanges {
   @ViewChild('list', { static: true }) list: any;
   @ViewChild(InfiniteScrollDirective) scrollDirective: InfiniteScrollDirective;
 
@@ -145,9 +140,6 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
 
   @Input() disableSelectionHighlight: boolean = false;
 
-  @ContentChildren(ItemComponent)
-  kirbyItems: ItemComponent[];
-
   @ContentChild(ListHeaderDirective, { static: false, read: TemplateRef })
   headerTemplate: TemplateRef<any>;
 
@@ -172,28 +164,13 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   _groupedItems: any[];
   _selectedItem: any;
 
-  constructor(private listHelper: ListHelper, private cdr: ChangeDetectorRef) {}
+  constructor(private listHelper: ListHelper) {}
 
   ngOnInit() {
     this._isSelectable = this.itemSelect.observers.length > 0;
 
     if (this.isLoadOnDemandEnabled === undefined) {
       this.isLoadOnDemandEnabled = this.loadOnDemand.observers.length > 0;
-    }
-  }
-
-  ngAfterViewInit(): void {
-    if (this._isSelectable) {
-      setTimeout(() => {
-        this.kirbyItems.forEach((item) => {
-          item.selectable = true;
-        });
-
-        // We are mutating the items directly, after they have been rendered in the template.
-        // Therefore, we make sure to detectChanges.
-        // kirby-item handles marking itself for check when selectable is set.
-        this.cdr.detectChanges();
-      });
     }
   }
 
