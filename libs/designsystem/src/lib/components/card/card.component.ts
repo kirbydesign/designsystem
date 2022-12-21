@@ -9,7 +9,6 @@ import {
 } from '@angular/core';
 
 import { ResizeObserverService } from '../shared/resize-observer/resize-observer.service';
-import { ResizeObserverEntry } from '../shared/resize-observer/types/resize-observer-entry';
 
 @Component({
   selector: 'kirby-card',

@@ -1,6 +1,4 @@
 import { ElementRef, Injectable, NgZone, OnDestroy } from '@angular/core';
-
-import { ResizeObserverEntry } from './types/resize-observer-entry';
 import { ResizeObserverFactory } from './resize-observer.factory';
 
 @Injectable({ providedIn: 'root' })
@@ -10,7 +8,7 @@ export class ResizeObserverService implements OnDestroy {
   private observer: ResizeObserver | null;
   private observedElements = new WeakMap<Element, (entry: ResizeObserverEntry) => void>();
 
-  constructor(private _resizeObserverFactory: ResizeObserverFactory, private zone: NgZone) {
+  constructor(private _resizeObserverFactory: ResizeObserverFactory) {
     this.observer = this._resizeObserverFactory.create((entries) => this.handleResize(entries));
   }
 
