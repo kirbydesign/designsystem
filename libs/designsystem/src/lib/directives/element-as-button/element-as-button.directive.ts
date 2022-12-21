@@ -4,7 +4,7 @@ import { CardComponent } from '../../components/card/card.component';
 
 @Directive({
   // eslint-disable-next-line @angular-eslint/directive-selector
-  selector: 'kirby-card[click], kirby-chip',
+  selector: 'kirby-card[click]',
 })
 export class ElementAsButtonDirective implements OnInit {
   @HostBinding('attr.role') role: string = 'button';

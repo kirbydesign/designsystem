@@ -10,7 +10,6 @@ export { MockCardComponent } from './mock.card.component';
 export { MockChartComponent } from './mock.chart.component';
 export { MockBaseChartComponent } from './mock.base-chart.component';
 export { MockCheckboxComponent } from './mock.checkbox.component';
-export { MockChipComponent } from './mock.chip.component';
 export { MockDividerComponent } from './mock.divider.component';
 export { MockDropdownComponent } from './mock.dropdown.component';
 export { MockEmptyStateComponent } from './mock.empty-state.component';
