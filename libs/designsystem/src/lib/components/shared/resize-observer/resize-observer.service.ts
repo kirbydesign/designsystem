@@ -1,7 +1,4 @@
 import { ElementRef, Injectable, NgZone, OnDestroy } from '@angular/core';
-
-import { ResizeObserver } from './types/resize-observer';
-import { ResizeObserverEntry } from './types/resize-observer-entry';
 import { ResizeObserverFactory } from './resize-observer.factory';
 
 @Injectable({ providedIn: 'root' })
@@ -11,7 +8,7 @@ export class ResizeObserverService implements OnDestroy {
   private observer: ResizeObserver | null;
   private observedElements = new WeakMap<Element, (entry: ResizeObserverEntry) => void>();
 
-  constructor(private _resizeObserverFactory: ResizeObserverFactory, private zone: NgZone) {
+  constructor(private _resizeObserverFactory: ResizeObserverFactory) {
     this.observer = this._resizeObserverFactory.create((entries) => this.handleResize(entries));
   }
 
@@ -22,10 +19,7 @@ export class ResizeObserverService implements OnDestroy {
     const element = elementOrRef instanceof ElementRef ? elementOrRef.nativeElement : elementOrRef;
     if (!this.observedElements.has(element)) {
       if (this.observer) {
-        // IMPORTANT: Has to be run outside the Angular zone, for it to work with ResizeObserver polyfill:
-        this.zone.runOutsideAngular(() => {
-          this.observer.observe(element);
-        });
+        this.observer.observe(element);
       }
       this.observedElements.set(element, action);
     }
@@ -33,10 +27,7 @@ export class ResizeObserverService implements OnDestroy {
 
   ngOnDestroy() {
     if (this.observer) {
-      // IMPORTANT: Has to be run outside the Angular zone, for it to work with ResizeObserver polyfill:
-      this.zone.runOutsideAngular(() => {
-        this.observer.disconnect();
-      });
+      this.observer.disconnect();
     }
     this.observedElements = null;
   }
@@ -45,10 +36,7 @@ export class ResizeObserverService implements OnDestroy {
     const element = elementOrRef instanceof ElementRef ? elementOrRef.nativeElement : elementOrRef;
     if (this.observedElements.has(element)) {
       if (this.observer) {
-        // IMPORTANT: Has to be run outside the Angular zone, for it to work with ResizeObserver polyfill:
-        this.zone.runOutsideAngular(() => {
-          this.observer.unobserve(element);
-        });
+        this.observer.unobserve(element);
       }
       this.observedElements.delete(element);
     }
