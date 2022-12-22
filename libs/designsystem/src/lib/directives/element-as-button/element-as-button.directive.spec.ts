@@ -1,6 +1,6 @@
 import { createDirectiveFactory, SpectatorDirective } from '@ngneat/spectator';
 
-import { CardComponent } from '../../components/card/card.component';
+import { CardComponent } from '../../../../card/card.component';
 
 import { ElementAsButtonDirective } from './element-as-button.directive';
 

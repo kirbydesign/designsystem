@@ -1,12 +1,16 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
+    "baseUrl":".",
+    "paths":{
+      "@lib/components/*":["src/lib/components/*"]
+    },
     "esModuleInterop": true,
-    "paths": {},
-    "target": "es2020"
+        "target": "es2020"
   },
   "include": [],
   "files": [],
+  
   "references": [
     {
       "path": "./tsconfig.lib.json"

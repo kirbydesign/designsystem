@@ -5,7 +5,7 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { TestHelper } from '../../testing/test-helper';
 import { ButtonComponent } from '../button/button.component';
-import { CardComponent, CardHeaderComponent } from '../card';
+import { CardComponent, CardHeaderComponent } from '../../../../card';
 import { IconComponent } from '../icon';
 import { ActionSheetComponent, ActionSheetItem } from '../modal';
 

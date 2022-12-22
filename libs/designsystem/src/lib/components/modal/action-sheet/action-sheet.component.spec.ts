@@ -7,8 +7,8 @@ import { MockComponent } from 'ng-mocks';
 
 import { DesignTokenHelper } from '../../..';
 import { ButtonComponent } from '../../button/button.component';
-import { CardHeaderComponent } from '../../card/card-header/card-header.component';
-import { CardComponent } from '../../card/card.component';
+import { CardHeaderComponent } from '../../../../../card/card-header/card-header.component';
+import { CardComponent } from '../../../../../card/card.component';
 import { InfiniteScrollDirective } from '../../list/directives/infinite-scroll.directive';
 import { ListItemColorDirective } from '../../list/directives/list-item-color.directive';
 import { ListComponent } from '../../list/list.component';

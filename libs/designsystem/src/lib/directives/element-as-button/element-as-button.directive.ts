@@ -1,6 +1,6 @@
 import { Directive, ElementRef, HostBinding, HostListener, OnInit, Optional } from '@angular/core';
 
-import { CardComponent } from '../../components/card/card.component';
+import { CardComponent } from '../../../../card/card.component';
 
 @Directive({
   // eslint-disable-next-line @angular-eslint/directive-selector

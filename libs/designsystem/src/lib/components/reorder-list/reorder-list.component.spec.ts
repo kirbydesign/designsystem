@@ -2,7 +2,7 @@ import { createComponentFactory, Spectator } from '@ngneat/spectator';
 import { MockComponent } from 'ng-mocks';
 
 import { TestHelper } from '../../testing/test-helper';
-import { CardComponent } from '../card';
+import { CardComponent } from '../../../../card';
 import { IconModule } from '../icon/icon.module';
 import { ItemComponent } from '../item';
 

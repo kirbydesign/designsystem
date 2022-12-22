@@ -7,7 +7,7 @@ import { MockComponent } from 'ng-mocks';
 import { ButtonComponent, CalendarComponent, IconComponent } from '..';
 import { TestHelper } from '../../testing/test-helper';
 import { WindowRef } from '../../types/window-ref';
-import { CardComponent } from '../card';
+import { CardComponent } from '../../../../card';
 import { DropdownComponent } from '../dropdown/dropdown.component';
 import { ItemComponent } from '../item';
 import { RadioComponent } from '../radio';

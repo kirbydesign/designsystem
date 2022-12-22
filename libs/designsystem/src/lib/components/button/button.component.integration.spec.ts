@@ -8,7 +8,7 @@ import { DesignTokenHelper } from '@kirbydesign/core';
 import { FitHeadingDirective } from '../../directives/fit-heading/fit-heading.directive';
 import { TestHelper } from '../../testing/test-helper';
 import { WindowRef } from '../../types/window-ref';
-import { CardComponent } from '../card/card.component';
+import { CardComponent } from '../../../../card/card.component';
 import { DropdownComponent } from '../dropdown/dropdown.component';
 import { EmptyStateComponent } from '../empty-state/empty-state.component';
 import { IconComponent } from '../icon/icon.component';

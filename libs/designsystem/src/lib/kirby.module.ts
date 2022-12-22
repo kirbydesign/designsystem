@@ -3,15 +3,15 @@ import { Inject, InjectionToken, ModuleWithProviders, NgModule, Optional } from 
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
+import { CardFooterComponent } from '../../card/src/card-footer/card-footer.component';
+import { CardHeaderComponent } from '../../card/card-header/card-header.component';
+import { CardComponent } from '../../card/card.component';
 import { AccordionItemComponent } from './components/accordion/accordion-item.component';
 import { AccordionDirective } from './components/accordion/accordion.directive';
 import { AppModule } from './components/app/app.module';
 import { AvatarComponent } from './components/avatar/avatar.component';
 import { ButtonComponent } from './components/button/button.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
-import { CardFooterComponent } from './components/card/card-footer/card-footer.component';
-import { CardHeaderComponent } from './components/card/card-header/card-header.component';
-import { CardComponent } from './components/card/card.component';
 import { ChartsModule } from './components/charts';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { DataTableModule } from './components/data-table/data-table.module';
