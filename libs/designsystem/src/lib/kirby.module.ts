@@ -4,11 +4,7 @@ import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { CardModule } from '@kirbydesign/designsystem/card';
-import {
-  ComponentLoaderDirective,
-  ResizeObserverFactory,
-  ResizeObserverService,
-} from '@kirbydesign/designsystem/shared';
+import { ResizeObserverFactory, ResizeObserverService } from '@kirbydesign/designsystem/shared';
 import { Component } from '@angular/core';
 import { AccordionItemComponent } from './components/accordion/accordion-item.component';
 import { AccordionDirective } from './components/accordion/accordion.directive';
