@@ -310,7 +310,7 @@ export class PageComponent
     // Watch navigation events for page enter and leave
     this.navigationStart$.subscribe((event: NavigationStart) => {
       if (
-        event.url !== this.url &&
+        this.getPathname(event.url) !== this.getPathname(this.url) &&
         !this.modalNavigationService.isModalRoute(this.url) &&
         !this.modalNavigationService.isModalRoute(event.url)
       ) {
@@ -319,7 +319,7 @@ export class PageComponent
     });
 
     this.navigationEnd$.subscribe((event: NavigationEnd) => {
-      if (event.urlAfterRedirects === this.url) {
+      if (this.getPathname(event.urlAfterRedirects) === this.getPathname(this.url)) {
         this.onEnter();
       }
     });
@@ -481,6 +481,10 @@ export class PageComponent
       this.isStickyContentPinned = !entries[0].isIntersecting;
     };
     return new IntersectionObserver(callback, options);
+  }
+
+  private getPathname(url: string) {
+    return url.split('?')[0];
   }
 
   @HostListener('window:keyboardWillShow', ['$event'])
