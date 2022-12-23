@@ -78,6 +78,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() disablePastDates = false;
   @Input() disableFutureDates = false;
   @Input() alwaysEnableToday = false;
+  @Input() locales: { [key: string]: Locale } = {}; // Extra list of already existing locales
   @Input() customLocales: { [key: string]: Locale } = {};
   /* 
     Experimental: Input property not documented on purpose. 
@@ -217,7 +218,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
       locale = 'enGB'; // if english locale is provided without region, we default to GB
     }
     locale = locale.replace('-', '');
-    const availableLocales = { ...this.includedLocales, ...this.customLocales };
+    const availableLocales = { ...this.includedLocales, ...this.locales, ...this.customLocales };
     return availableLocales[locale] || this.includedLocales.enGB; // Default to enGB if injected locale doesnt exist
   }
 
