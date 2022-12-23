@@ -5,7 +5,6 @@ import { IonicModule } from '@ionic/angular';
 
 import { CardModule } from '@kirbydesign/designsystem/card';
 import { ResizeObserverFactory, ResizeObserverService } from '@kirbydesign/designsystem/shared';
-import { Component } from '@angular/core';
 import { AccordionItemComponent } from './components/accordion/accordion-item.component';
 import { AccordionDirective } from './components/accordion/accordion.directive';
 import { AppModule } from './components/app/app.module';

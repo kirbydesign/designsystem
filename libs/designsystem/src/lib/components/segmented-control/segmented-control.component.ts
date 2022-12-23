@@ -5,7 +5,6 @@ import { KirbyBadgeModule } from '../kirby-badge.module';
 import { IconModule } from '../icon';
 
 import { IconRegistryService } from '../icon/icon-registry.service';
-import { KirbyBadge } from '../web-component-proxies.component';
 
 import { SegmentItem, SegmentItemInternal } from './segment-item';
 
