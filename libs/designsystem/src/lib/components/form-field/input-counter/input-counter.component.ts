@@ -7,8 +7,8 @@ import { InputComponent } from '../input/input.component';
 import { TextareaComponent } from './../textarea/textarea.component';
 
 @Component({
-  standalone: true,
-  imports: [FormFieldModule],
+  // standalone: true,
+  // imports: [FormFieldModule],
   selector: 'kirby-input-counter',
   templateUrl: './input-counter.component.html',
 })

@@ -1,9 +1,9 @@
 import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
+import { KirbyBadgeModule } from '../kirby-badge.module';
 import { IconModule } from '../icon';
 
 import { IconRegistryService } from '../icon/icon-registry.service';
-import { KirbyBadge } from '../web-component-proxies.component';
 
 import { SegmentItem, SegmentItemInternal } from './segment-item';
 
@@ -15,7 +15,7 @@ export enum SegmentedControlMode {
 
 @Component({
   standalone: true,
-  imports: [IonicModule, KirbyBadge, IconModule],
+  imports: [IonicModule, IconModule, KirbyBadgeModule],
   selector: 'kirby-segmented-control',
   templateUrl: './segmented-control.component.html',
   styleUrls: ['./segmented-control.component.scss'],

@@ -27,8 +27,7 @@ import { FlagComponent } from './components/flag/flag.component';
 import { DateInputDirective } from './components/form-field/directives/date/date-input.directive';
 import { DecimalMaskDirective } from './components/form-field/directives/decimal-mask/decimal-mask.directive';
 import { AffixDirective } from './components/form-field/directives/affix/affix.directive';
-import { FormFieldMessageComponent } from './components/form-field/form-field-message/form-field-message.component';
-import { FormFieldComponent } from './components/form-field/form-field.component';
+
 import { InputCounterComponent } from './components/form-field/input-counter/input-counter.component';
 import { InputComponent } from './components/form-field/input/input.component';
 import { TextareaComponent } from './components/form-field/textarea/textarea.component';
@@ -69,7 +68,7 @@ import { ToastController } from './components/toast/services/toast.controller';
 import { ToastHelper } from './components/toast/services/toast.helper';
 import { ToggleButtonModule } from './components/toggle-button/toggle-button.module';
 import { ToggleComponent } from './components/toggle/toggle.component';
-import { KirbyBadge as BadgeComponent } from './components/web-component-proxies.component';
+// import { KirbyBadge as BadgeComponent } from './components/web-component-proxies.component';
 import { customElementsInitializer } from './custom-elements-initializer';
 import { ElementAsButtonDirective } from './directives/element-as-button/element-as-button.directive';
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
@@ -78,18 +77,15 @@ import { ThemeColorDirective } from './directives/theme-color/theme-color.direct
 import { RadioModule } from './components';
 import { EmptyStateModule } from './components/empty-state/empty-state.module';
 import { DropdownModule } from './components/dropdown';
+import { KirbyBadgeModule } from './components/kirby-badge.module';
+import { FormFieldModule } from './components/form-field/form-field.module';
 
 const exportedDeclarations = [
   GridComponent,
-  ComponentLoaderDirective,
   ModalRouterLinkDirective,
-  SegmentedControlComponent,
-  BadgeComponent,
-  ThemeColorDirective,
   DateInputDirective,
   DecimalMaskDirective,
   AffixDirective,
-  FormFieldComponent,
   InputComponent,
   TextareaComponent,
   DividerComponent,
@@ -99,15 +95,13 @@ const exportedDeclarations = [
   ItemGroupComponent,
 ];
 
-const declarations = [
-  ...exportedDeclarations,
-  KeyHandlerDirective,
-  // FormFieldMessageComponent,
-  AlertComponent,
-  ModalCompactWrapperComponent,
-];
+const declarations = [...exportedDeclarations, KeyHandlerDirective, ModalCompactWrapperComponent];
 
 const standaloneComponents = [
+  ThemeColorDirective,
+  SegmentedControlComponent,
+  AlertComponent,
+  ThemeColorDirective,
   PopoverComponent,
   ProgressCircleRingComponent,
   ModalWrapperComponent,
@@ -121,10 +115,8 @@ const standaloneComponents = [
   ReorderListComponent,
   LoadingOverlayComponent,
   FabSheetComponent,
-  InputCounterComponent,
   ToggleComponent,
   SlideButtonComponent,
-  BadgeComponent,
   SegmentedControlComponent,
   CheckboxComponent,
   ActionSheetComponent,
@@ -149,7 +141,9 @@ const exportedModules = [
   RadioModule,
   EmptyStateModule,
   DropdownModule,
-  [...standaloneComponents],
+  KirbyBadgeModule,
+  FormFieldModule,
+  ...standaloneComponents,
 ];
 
 const allExports = [...exportedModules, ...exportedDeclarations];
@@ -194,9 +188,9 @@ export interface KirbyConfig {
     }),
     ...importedModules,
   ],
-  declarations: [],
+  declarations: [declarations],
   providers: providers,
-  exports: [],
+  exports: [allExports],
 })
 export class KirbyModule {
   static forChild(config?: KirbyConfig): ModuleWithProviders<KirbyModule> {

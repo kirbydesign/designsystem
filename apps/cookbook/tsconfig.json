@@ -8,7 +8,12 @@
       "~/app/*": ["apps/cookbook/src/app/*"],
       "~/environments/*": ["apps/cookbook/src/environments/*"],
       "@kirbydesign/designsystem": ["libs/designsystem/src/lib/index.ts"],
-      "@kirbydesign/designsystem/*": ["libs/designsystem/src/lib/*"]
+      "@kirbydesign/designsystem/*": ["libs/designsystem/src/lib/*"],
+      "@kirbydesign/designsystem/card": ["libs/designsystem/card/index.ts"],
+      "@kirbydesign/designsystem/helpers": ["libs/designsystem/helpers/index.ts"],
+      "@kirbydesign/designsystem/shared": ["libs/designsystem/shared/index.ts"],
+      "@kirbydesign/designsystem/types": ["libs/designsystem/types/index.ts"]
+
     },
     "target": "es2020"
   },

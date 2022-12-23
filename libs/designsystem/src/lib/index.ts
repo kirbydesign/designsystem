@@ -8,6 +8,8 @@ export * from './scss/scss-helper';
 export * from './testing';
 
 export * from './components/charts/chart-config';
+export * from '@kirbydesign/designsystem/card';
+
 export { KirbyModule } from './kirby.module';
 export { KirbyExperimentalModule } from './kirby-experimental.module';
 export { StockChartConfig, BarChartConfig } from './components/charts/chart-config';

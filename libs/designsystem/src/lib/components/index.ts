@@ -18,11 +18,9 @@ export * from './data-table';
 
 export { DividerComponent } from './divider/divider.component';
 
-export { DropdownComponent } from './dropdown/dropdown.component';
-
-export { EmptyStateComponent } from './empty-state/empty-state.component';
-
 export * from './form-field';
+export * from './dropdown';
+export * from './empty-state';
 export { FabSheetComponent } from './fab-sheet/fab-sheet.component';
 export { FlagComponent } from './flag/flag.component';
 
@@ -62,7 +60,9 @@ export * from './tabs';
 export * from './toast';
 export { ToggleComponent } from './toggle/toggle.component';
 
-export { ProgressCircleComponent } from './progress-circle/progress-circle.component';
+export * from './progress-circle';
 export * from './toggle-button';
 
 export * from './page-local-navigation';
+
+export * from './kirby-badge.module';

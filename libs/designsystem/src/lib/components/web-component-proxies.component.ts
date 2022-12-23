@@ -11,7 +11,6 @@ export declare interface KirbyBadge extends Components.KirbyBadge {}
   inputs: ['size', 'text', 'themeColor']
 })
 @Component({
-  standalone: true, 
   selector: 'kirby-badge',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
