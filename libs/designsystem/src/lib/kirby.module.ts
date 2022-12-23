@@ -161,7 +161,7 @@ const providers = [
 ];
 
 const entryComponents = [
-  ModalWrapperComponent,
+  // ModalWrapperComponent,
   ModalCompactWrapperComponent,
   ActionSheetComponent,
   AlertComponent,

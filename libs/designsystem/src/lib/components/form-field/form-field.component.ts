@@ -21,7 +21,6 @@ import {
 import { ResizeObserverService } from '@kirbydesign/designsystem/shared';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { RadioGroupComponent } from '../radio';
-
 import { AffixDirective } from './directives/affix/affix.directive';
 import { InputCounterComponent } from './input-counter/input-counter.component';
 import { InputComponent } from './input/input.component';
