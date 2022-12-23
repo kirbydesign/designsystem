@@ -3,6 +3,14 @@ import exampleWithCardHtml from '../../examples/calendar-example/calendar-card-e
 import exampleHtml from '../../examples/calendar-example/calendar-example.component.html?raw';
 import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import {
+  additionalLocalesExampleHTML,
+  additionalLocalesExampleTS,
+  componentProviderExample,
+  customLocaleExampleHTML,
+  customLocaleExampleTS,
+  moduleProviderExample,
+} from '~/app/examples/calendar-example/calendar-locales-examples';
 
 @Component({
   selector: 'cookbook-calendar-showcase',
@@ -38,6 +46,13 @@ export class CalendarShowcaseComponent {
 
   exampleHtml = exampleHtml;
   exampleWithCardHtml = exampleWithCardHtml;
+
+  moduleProviderExample = moduleProviderExample;
+  componentProviderExample = componentProviderExample;
+  additionalLocalesExampleTS = additionalLocalesExampleTS;
+  additionalLocalesExampleHTML = additionalLocalesExampleHTML;
+  customLocaleExampleTS = customLocaleExampleTS;
+  customLocaleExampleHTML = customLocaleExampleHTML;
 
   properties: ApiDescriptionProperty[] = [
     {
@@ -117,6 +132,13 @@ export class CalendarShowcaseComponent {
         '(Optional) Displays a dropdown to navigate between years and specifies the navigable year interval with either numbers or dates. Navigable years are set by getting the year difference between `from` and `to`, but prioritize `minDate` and `maxDate`: if `minDate` and `maxDate` are set, they override `from` and `to`.',
       defaultValue: 'null',
       type: ['{ from: number | Date; to: number | Date }'],
+    },
+    {
+      name: 'locales',
+      description:
+        '(Optional) Danish and English locales are built in, but if additional existing locales are needed (fx. Spanish), they can be specified here.',
+      defaultValue: '{}',
+      type: ['{ [key: string]: Locale }'],
     },
     {
       name: 'customLocales',
