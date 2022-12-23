@@ -1,6 +1,5 @@
 import { ElementRef, Injectable } from '@angular/core';
-
-import { WindowRef } from '../../../types/window-ref';
+import { WindowRef } from '@kirbydesign/designsystem/types';
 
 import { CalendarOptions } from './calendar-options.model';
 

@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -8,10 +9,13 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { WindowRef } from '../../types';
+import { WindowRef } from '@kirbydesign/designsystem/types';
+import { BadgeComponent, IconModule } from '..';
 import { LocalNavigationItem } from './page-local-navigation-item';
 
 @Component({
+  standalone: true,
+  imports: [BadgeComponent, IconModule, CommonModule],
   selector: 'kirby-page-local-navigation',
   templateUrl: './page-local-navigation.component.html',
   styleUrls: ['./page-local-navigation.component.scss'],

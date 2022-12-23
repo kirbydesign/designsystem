@@ -48,7 +48,7 @@ export { RangeComponent } from './range/range.component';
 export * from './router-outlet';
 export * from './reorder-list';
 
-export * from './shared';
+// export * from './shared';
 
 export { SectionHeaderComponent } from './section-header/section-header.component';
 /* prettier-ignore */

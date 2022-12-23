@@ -3,9 +3,13 @@ import { Inject, InjectionToken, ModuleWithProviders, NgModule, Optional } from 
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
-import { CardFooterComponent } from '../../card/src/card-footer/card-footer.component';
-import { CardHeaderComponent } from '../../card/card-header/card-header.component';
-import { CardComponent } from '../../card/card.component';
+import { CardModule } from '@kirbydesign/designsystem/card';
+import {
+  ComponentLoaderDirective,
+  ResizeObserverFactory,
+  ResizeObserverService,
+} from '@kirbydesign/designsystem/shared';
+import { Component } from '@angular/core';
 import { AccordionItemComponent } from './components/accordion/accordion-item.component';
 import { AccordionDirective } from './components/accordion/accordion.directive';
 import { AppModule } from './components/app/app.module';
@@ -16,8 +20,8 @@ import { ChartsModule } from './components/charts';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { DataTableModule } from './components/data-table/data-table.module';
 import { DividerComponent } from './components/divider/divider.component';
-import { DropdownComponent } from './components/dropdown/dropdown.component';
-import { EmptyStateComponent } from './components/empty-state/empty-state.component';
+// import { DropdownComponent } from './components/dropdown/dropdown.component';
+// import { EmptyStateComponent } from './components/empty-state/empty-state.component';
 import { FabSheetComponent } from './components/fab-sheet/fab-sheet.component';
 import { FlagComponent } from './components/flag/flag.component';
 import { DateInputDirective } from './components/form-field/directives/date/date-input.directive';
@@ -57,9 +61,6 @@ import { ReorderListComponent } from './components/reorder-list/reorder-list.com
 import { RouterOutletModule } from './components/router-outlet/router-outlet.module';
 import { SectionHeaderComponent } from './components/section-header/section-header.component';
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
-import { ComponentLoaderDirective } from './components/shared/component-loader.directive';
-import { ResizeObserverFactory } from './components/shared/resize-observer/resize-observer.factory';
-import { ResizeObserverService } from './components/shared/resize-observer/resize-observer.service';
 import { SlideButtonComponent } from './components/slide-button/slide-button.component';
 import { SlideDirective, SlidesComponent } from './components/slides/slides.component';
 import { SpinnerModule } from './components/spinner/spinner.module';
@@ -74,64 +75,64 @@ import { ElementAsButtonDirective } from './directives/element-as-button/element
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
 import { ModalRouterLinkDirective } from './directives/modal-router-link/modal-router-link.directive';
 import { ThemeColorDirective } from './directives/theme-color/theme-color.directive';
+import { RadioModule } from './components';
+import { EmptyStateModule } from './components/empty-state/empty-state.module';
+import { DropdownModule } from './components/dropdown';
 
 const exportedDeclarations = [
-  CardComponent,
-  CardHeaderComponent,
-  CardFooterComponent,
-  ButtonComponent,
   GridComponent,
   ComponentLoaderDirective,
-  AvatarComponent,
-  CalendarComponent,
-  CheckboxComponent,
-  ActionSheetComponent,
-  ModalFooterComponent,
   ModalRouterLinkDirective,
   SegmentedControlComponent,
   BadgeComponent,
   ThemeColorDirective,
   DateInputDirective,
   DecimalMaskDirective,
-  SlideButtonComponent,
-  ToggleComponent,
-  EmptyStateComponent,
   AffixDirective,
   FormFieldComponent,
   InputComponent,
-  InputCounterComponent,
   TextareaComponent,
-  FabSheetComponent,
   DividerComponent,
-  ReorderListComponent,
-  DropdownComponent,
-  LoadingOverlayComponent,
-  ProgressCircleComponent,
   FlagComponent,
-  SlidesComponent,
   SlideDirective,
-  AccordionDirective,
-  AccordionItemComponent,
-  ItemSlidingComponent,
-  RadioComponent,
-  RadioGroupComponent,
-  RangeComponent,
   ElementAsButtonDirective,
   ItemGroupComponent,
-  SectionHeaderComponent,
 ];
 
 const declarations = [
   ...exportedDeclarations,
   KeyHandlerDirective,
-  FormFieldMessageComponent,
+  // FormFieldMessageComponent,
   AlertComponent,
-  ModalWrapperComponent,
   ModalCompactWrapperComponent,
-  ProgressCircleRingComponent,
-  PopoverComponent,
 ];
 
+const standaloneComponents = [
+  PopoverComponent,
+  ProgressCircleRingComponent,
+  ModalWrapperComponent,
+  SectionHeaderComponent,
+  RangeComponent,
+  ItemSlidingComponent,
+  AccordionItemComponent,
+  AccordionDirective,
+  SlidesComponent,
+  ProgressCircleComponent,
+  ReorderListComponent,
+  LoadingOverlayComponent,
+  FabSheetComponent,
+  InputCounterComponent,
+  ToggleComponent,
+  SlideButtonComponent,
+  BadgeComponent,
+  SegmentedControlComponent,
+  CheckboxComponent,
+  ActionSheetComponent,
+  ModalFooterComponent,
+  AvatarComponent,
+  CalendarComponent,
+  ButtonComponent,
+];
 const exportedModules = [
   AppModule,
   RouterOutletModule,
@@ -144,6 +145,11 @@ const exportedModules = [
   ChartsModule,
   SpinnerModule,
   DataTableModule,
+  CardModule,
+  RadioModule,
+  EmptyStateModule,
+  DropdownModule,
+  [...standaloneComponents],
 ];
 
 const allExports = [...exportedModules, ...exportedDeclarations];
@@ -188,9 +194,9 @@ export interface KirbyConfig {
     }),
     ...importedModules,
   ],
-  declarations: declarations,
+  declarations: [],
   providers: providers,
-  exports: allExports,
+  exports: [],
 })
 export class KirbyModule {
   static forChild(config?: KirbyConfig): ModuleWithProviders<KirbyModule> {

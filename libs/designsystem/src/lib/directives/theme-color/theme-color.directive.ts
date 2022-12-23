@@ -4,6 +4,7 @@ import { ColorHelper } from '@kirbydesign/core';
 import { ThemeColor } from '@kirbydesign/core';
 
 @Directive({
+  standalone: true,
   // eslint-disable-next-line @angular-eslint/directive-selector
   selector: `kirby-avatar[themeColor],
              kirby-card[themeColor],

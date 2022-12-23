@@ -20,10 +20,10 @@ import {
   ViewChildren,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { DesignTokenHelper } from '../../helpers';
+import { CardComponent } from '@kirbydesign/designsystem/card';
+import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { ButtonComponent } from '../button/button.component';
-import { CardComponent } from '../../../../card/card.component';
 import { ItemComponent } from '../item/item.component';
 import { ListItemTemplateDirective } from '../list/list.directive';
 import { HorizontalDirection, PopoverComponent } from '../popover/popover.component';

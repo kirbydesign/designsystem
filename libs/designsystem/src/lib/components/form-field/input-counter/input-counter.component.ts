@@ -1,11 +1,14 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { FormFieldModule } from '../form-field.module';
 
 import { InputComponent } from '../input/input.component';
 
 import { TextareaComponent } from './../textarea/textarea.component';
 
 @Component({
+  standalone: true,
+  imports: [FormFieldModule],
   selector: 'kirby-input-counter',
   templateUrl: './input-counter.component.html',
 })

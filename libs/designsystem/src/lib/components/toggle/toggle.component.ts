@@ -6,8 +6,11 @@ import {
   Input,
   Output,
 } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
+  standalone: true,
+  imports: [IonicModule],
   selector: 'kirby-toggle',
   templateUrl: './toggle.component.html',
   styleUrls: ['./toggle.component.scss'],

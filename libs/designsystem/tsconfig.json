@@ -2,8 +2,11 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "baseUrl":".",
+    "rootDir": ".",
     "paths":{
-      "@lib/components/*":["src/lib/components/*"]
+      // "@lib/components/*":["src/lib/components/*"],
+      // "@kirbytypes/*":["types/src/*"],
+      "@kirbydesign/designsystem/*":["*"]
     },
     "esModuleInterop": true,
         "target": "es2020"

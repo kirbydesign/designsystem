@@ -1,6 +1,7 @@
+import { ColorHelper } from '@kirbydesign/designsystem/helpers';
 import { AnnotationTypeRegistry } from 'chartjs-plugin-annotation';
 
-import { ColorHelper } from '../../../../../helpers';
+// import { ColorHelper } from '../../../../../helpers';
 
 const { getThemeColorHexString } = ColorHelper;
 

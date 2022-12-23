@@ -9,7 +9,7 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
-import { IonSlides } from '@ionic/angular';
+import { IonicModule, IonSlides } from '@ionic/angular';
 
 @Directive({
   selector: '[kirbySlide]',
@@ -17,6 +17,8 @@ import { IonSlides } from '@ionic/angular';
 export class SlideDirective {}
 
 @Component({
+  standalone: true,
+  imports: [IonicModule],
   selector: 'kirby-slides',
   template: `
     <ion-slides

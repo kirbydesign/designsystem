@@ -1,8 +1,13 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
+import { IconModule } from '../icon';
 
 import { ItemSlidingSide, ItemSwipeAction } from './item-sliding.types';
 
 @Component({
+  standalone: true,
+  imports: [IconModule, IonicModule, CommonModule], // TODO: Figure out if all ionic need to be imported form this module,
   selector: 'kirby-item-sliding',
   templateUrl: './item-sliding.component.html',
   styleUrls: ['./item-sliding.component.scss'],

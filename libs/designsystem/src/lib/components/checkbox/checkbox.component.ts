@@ -6,10 +6,12 @@ import {
   Input,
   Output,
 } from '@angular/core';
-
-import { UniqueIdGenerator } from '../../helpers/unique-id-generator.helper';
+import { IonicModule } from '@ionic/angular';
+import { UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
 
 @Component({
+  standalone: true,
+  imports: [IonicModule],
   selector: 'kirby-checkbox',
   templateUrl: './checkbox.component.html',
   styleUrls: ['./checkbox.component.scss'],

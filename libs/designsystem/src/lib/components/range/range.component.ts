@@ -9,8 +9,11 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
+  standalone: true,
+  imports: [IonicModule],
   selector: 'kirby-range',
   templateUrl: './range.component.html',
   styleUrls: ['./range.component.scss'],

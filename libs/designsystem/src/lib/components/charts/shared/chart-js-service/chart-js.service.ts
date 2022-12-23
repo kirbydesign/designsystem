@@ -1,9 +1,8 @@
 import { ElementRef, Injectable } from '@angular/core';
+import { chartConfigHasType, mergeDeepAll } from '@kirbydesign/designsystem/helpers';
 import { ChartConfiguration, ChartOptions } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
 
-import { mergeDeepAll } from '../../../../helpers/merge-deep';
-import { chartConfigHasType } from '../../../../helpers';
 import { ChartConfigService } from '../chart-config-service';
 import {
   ChartDataset,

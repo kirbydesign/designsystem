@@ -1,9 +1,10 @@
+import { ColorHelper, DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { ChartTypeRegistry, Color, Point, TooltipItem, TooltipLabelStyle } from 'chart.js';
 import { Context } from 'chartjs-plugin-datalabels';
 import { Align } from 'chartjs-plugin-datalabels/types/options';
 
 import { ChartTypesConfig } from '../../';
-import { ColorHelper, DesignTokenHelper } from '../../../../../helpers';
+// import { ColorHelper, DesignTokenHelper } from '../../../../../helpers';
 
 const { fontSize } = DesignTokenHelper;
 const { getThemeColorHexString, getThemeColorRgbString } = ColorHelper;
