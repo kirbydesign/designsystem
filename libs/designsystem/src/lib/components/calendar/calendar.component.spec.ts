@@ -102,6 +102,22 @@ describe('CalendarComponent', () => {
     verifyMonthAndYear('January 1998');
   });
 
+  it('should emit the previousMonthClicked event, when navigating to a past month', () => {
+    const previousMonthClickedSpy = spyOn(spectator.component.previousMonthClicked, 'emit');
+
+    spectator.click(SEL_NAV_BACK);
+
+    expect(previousMonthClickedSpy).toHaveBeenCalled();
+  });
+
+  it('should emit the nextMonthClicked event, when navigating to a future month', () => {
+    const nextMonthClickedSpy = spyOn(spectator.component.nextMonthClicked, 'emit');
+
+    spectator.click(SEL_NAV_FORWARD);
+
+    expect(nextMonthClickedSpy).toHaveBeenCalled();
+  });
+
   it('should not be possible to navigate to any month preceding minDate, if specified', () => {
     spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
     spectator.setInput('minDate', localMidnightDate('1997-06-15'));
