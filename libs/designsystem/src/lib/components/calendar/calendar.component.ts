@@ -73,6 +73,8 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   @Output() dateChange = new EventEmitter<Date>();
   @Output() dateSelect = new EventEmitter<Date>();
   @Output() yearSelect = new EventEmitter<number>();
+  @Output() previousMonthClicked = new EventEmitter<void>();
+  @Output() nextMonthClicked = new EventEmitter<void>();
   @Input() timezone: 'local' | 'UTC' = 'local';
   @Input() disableWeekends = false;
   @Input() disablePastDates = false;
@@ -445,6 +447,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
 
   _changeMonth(index: number) {
     this.changeActiveView(index, TimeUnit.months);
+    index > 0 ? this.nextMonthClicked.emit() : this.previousMonthClicked.emit();
   }
 
   _changeYear(year: string) {
