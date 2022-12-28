@@ -1,1 +1,13 @@
+name: Bug Report
+description: Report a bug in the Angular Framework
 
+body:
+  - type: dropdown
+    id: is-regression
+    attributes:
+      label: Is this a regression?
+      options:
+        - 'Yes'
+        - 'No'
+    validations:
+      required: true
