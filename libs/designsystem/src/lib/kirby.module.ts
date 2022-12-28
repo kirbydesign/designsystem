@@ -15,15 +15,12 @@ import { ChartsModule } from './components/charts';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { DataTableModule } from './components/data-table/data-table.module';
 import { DividerComponent } from './components/divider/divider.component';
-// import { DropdownComponent } from './components/dropdown/dropdown.component';
-// import { EmptyStateComponent } from './components/empty-state/empty-state.component';
 import { FabSheetComponent } from './components/fab-sheet/fab-sheet.component';
 import { FlagComponent } from './components/flag/flag.component';
 import { DateInputDirective } from './components/form-field/directives/date/date-input.directive';
 import { DecimalMaskDirective } from './components/form-field/directives/decimal-mask/decimal-mask.directive';
 import { AffixDirective } from './components/form-field/directives/affix/affix.directive';
 
-import { InputCounterComponent } from './components/form-field/input-counter/input-counter.component';
 import { InputComponent } from './components/form-field/input/input.component';
 import { TextareaComponent } from './components/form-field/textarea/textarea.component';
 import { BreakpointHelperService } from './components/grid/breakpoint-helper.service';
@@ -48,8 +45,6 @@ import { PageModule } from './components/page/page.module';
 import { PopoverComponent } from './components/popover/popover.component';
 import { ProgressCircleRingComponent } from './components/progress-circle/progress-circle-ring.component';
 import { ProgressCircleComponent } from './components/progress-circle/progress-circle.component';
-import { RadioGroupComponent } from './components/radio/radio-group/radio-group.component';
-import { RadioComponent } from './components/radio/radio.component';
 import { RangeComponent } from './components/range/range.component';
 import { ReorderListComponent } from './components/reorder-list/reorder-list.component';
 import { RouterOutletModule } from './components/router-outlet/router-outlet.module';
@@ -63,7 +58,6 @@ import { ToastController } from './components/toast/services/toast.controller';
 import { ToastHelper } from './components/toast/services/toast.helper';
 import { ToggleButtonModule } from './components/toggle-button/toggle-button.module';
 import { ToggleComponent } from './components/toggle/toggle.component';
-// import { KirbyBadge as BadgeComponent } from './components/web-component-proxies.component';
 import { customElementsInitializer } from './custom-elements-initializer';
 import { ElementAsButtonDirective } from './directives/element-as-button/element-as-button.directive';
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
@@ -159,12 +153,7 @@ const providers = [
   customElementsInitializer(),
 ];
 
-const entryComponents = [
-  // ModalWrapperComponent,
-  ModalCompactWrapperComponent,
-  ActionSheetComponent,
-  AlertComponent,
-];
+const entryComponents = [ModalCompactWrapperComponent, ActionSheetComponent, AlertComponent];
 
 const ConfigToken = new InjectionToken<any>('USERCONFIG');
 export interface KirbyConfig {
