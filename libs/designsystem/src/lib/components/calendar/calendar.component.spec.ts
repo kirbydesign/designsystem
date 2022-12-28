@@ -1,6 +1,7 @@
 import { LOCALE_ID } from '@angular/core';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { format, startOfDay, startOfMonth } from 'date-fns';
+import { format, Locale, startOfDay, startOfMonth } from 'date-fns';
+import { es } from 'date-fns/locale';
 import { zonedTimeToUtc } from 'date-fns-tz';
 import { MockComponent } from 'ng-mocks';
 
@@ -379,6 +380,54 @@ describe('CalendarComponent', () => {
     });
   });
 
+  describe('locales', () => {
+    describe('built-in locales', () => {
+      it('should have English as the default locale', () => {
+        spectator = createHostWithLocale();
+
+        spectator.setInput('selectedDate', localMidnightDate('2022-07-01'));
+
+        expect(
+          spectator
+            .queryAll('th')
+            .map((_) => _.textContent)
+            .join(' ')
+        ).toEqual('M T W T F S S');
+        expect(spectator.component.activeMonthName).toBe('July');
+      });
+
+      it('should be possible to change the locale to Danish', () => {
+        spectator = createHostWithLocale('da');
+
+        spectator.setInput('selectedDate', localMidnightDate('2022-07-01'));
+
+        expect(
+          spectator
+            .queryAll('th')
+            .map((_) => _.textContent)
+            .join(' ')
+        ).toEqual('M T O T F L S');
+        expect(spectator.component.activeMonthName).toBe('Juli');
+      });
+    });
+
+    describe('additional locales', () => {
+      it('should be possible to provide a locale that is not build into the calendar by default', () => {
+        spectator = createHostWithLocale('es', es);
+
+        spectator.setInput('selectedDate', localMidnightDate('2022-07-01'));
+
+        expect(
+          spectator
+            .queryAll('th')
+            .map((_) => _.textContent)
+            .join(' ')
+        ).toEqual('l m m j v s d');
+        expect(spectator.component.activeMonthName).toBe('Julio');
+      });
+    });
+  });
+
   describe('active month', () => {
     let todayDate: Date;
 
@@ -569,5 +618,26 @@ describe('CalendarComponent', () => {
     const captured: { event?: number } = {};
     spectator.output<number>('yearSelect').subscribe((result) => (captured.event = result));
     return captured;
+  }
+
+  function createHostWithLocale(selectedLocale: string = '', additionalLocale?: Locale) {
+    const overrides = {
+      providers: [
+        {
+          provide: LOCALE_ID,
+          useValue: selectedLocale,
+        },
+      ],
+    };
+
+    if (additionalLocale) {
+      overrides['props'] = {
+        locales: {
+          [selectedLocale]: additionalLocale,
+        },
+      };
+    }
+
+    return createHost(`<kirby-calendar></kirby-calendar>`, overrides);
   }
 });
