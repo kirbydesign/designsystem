@@ -105,6 +105,8 @@ describe('CalendarComponent', () => {
   it('should emit the previousMonthClicked event, when navigating to a past month', () => {
     const previousMonthClickedSpy = spyOn(spectator.component.previousMonthClicked, 'emit');
 
+    expect(previousMonthClickedSpy).not.toHaveBeenCalled();
+
     spectator.click(SEL_NAV_BACK);
 
     expect(previousMonthClickedSpy).toHaveBeenCalled();
@@ -112,6 +114,8 @@ describe('CalendarComponent', () => {
 
   it('should emit the nextMonthClicked event, when navigating to a future month', () => {
     const nextMonthClickedSpy = spyOn(spectator.component.nextMonthClicked, 'emit');
+
+    expect(nextMonthClickedSpy).not.toHaveBeenCalled();
 
     spectator.click(SEL_NAV_FORWARD);
 
