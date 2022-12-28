@@ -27,6 +27,7 @@ import { DesignTokenHelper } from '@kirbydesign/core';
 import { ResizeObserverService } from '@kirbydesign/designsystem/shared';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { PlatformService } from '@kirbydesign/designsystem/helpers';
+import { CommonModule } from '@angular/common';
 import { Modal, ModalElementsAdvertiser, ModalElementType } from '../services/modal.interfaces';
 
 import { ButtonComponent } from '../../button/button.component';
@@ -38,7 +39,7 @@ import { ModalElementsMoverDelegate } from './modal-elements-mover.delegate';
 
 @Component({
   standalone: true,
-  imports: [IonicModule, RouterModule, ButtonComponent, IconModule],
+  imports: [IonicModule, RouterModule, ButtonComponent, IconModule, CommonModule],
   selector: 'kirby-modal-wrapper',
   templateUrl: './modal-wrapper.component.html',
   styleUrls: ['./modal-wrapper.component.scss'],

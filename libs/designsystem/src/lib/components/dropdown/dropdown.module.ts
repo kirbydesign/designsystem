@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { CardModule } from '@kirbydesign/designsystem/card';
 import { ButtonComponent } from '../button/button.component';
@@ -11,7 +12,15 @@ import { KeyboardHandlerService } from './keyboard-handler.service';
 const declarations = [DropdownComponent];
 
 @NgModule({
-  imports: [CardModule, IconModule, ItemModule, FormFieldModule, PopoverComponent, ButtonComponent],
+  imports: [
+    CardModule,
+    IconModule,
+    ItemModule,
+    FormFieldModule,
+    PopoverComponent,
+    ButtonComponent,
+    CommonModule,
+  ],
   declarations: [...declarations],
   exports: [...declarations],
   providers: [KeyboardHandlerService], // TODO: Figure out if this belongs here.

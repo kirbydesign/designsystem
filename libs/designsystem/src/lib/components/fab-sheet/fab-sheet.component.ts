@@ -1,4 +1,4 @@
-import { DOCUMENT } from '@angular/common';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
@@ -18,7 +18,7 @@ import { ActionSheetComponent } from '../modal/action-sheet/action-sheet.compone
 
 @Component({
   standalone: true,
-  imports: [IonicModule],
+  imports: [IonicModule, CommonModule],
   selector: 'kirby-fab-sheet',
   templateUrl: './fab-sheet.component.html',
   styleUrls: ['./fab-sheet.component.scss'],

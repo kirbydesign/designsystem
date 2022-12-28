@@ -36,6 +36,7 @@ import { da, enGB, enUS } from 'date-fns/locale';
 
 import { capitalizeFirstLetter } from '@kirbydesign/core';
 
+import { CommonModule } from '@angular/common';
 import { DropdownModule } from '../dropdown';
 import { ButtonComponent } from '../button/button.component';
 import { IconModule } from '../icon';
@@ -67,7 +68,7 @@ enum TimeUnit {
 
 @Component({
   standalone: true,
-  imports: [DropdownModule, ButtonComponent, IconModule],
+  imports: [DropdownModule, ButtonComponent, IconModule, CommonModule],
   selector: 'kirby-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss'],

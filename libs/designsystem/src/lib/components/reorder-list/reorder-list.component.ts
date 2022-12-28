@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectorRef,
   Component,
@@ -22,7 +23,7 @@ import { ReorderEvent } from './reorder-event';
 
 @Component({
   standalone: true,
-  imports: [IonicModule, CardModule, ItemModule],
+  imports: [IonicModule, CardModule, ItemModule, CommonModule],
   selector: 'kirby-reorder-list',
   templateUrl: './reorder-list.component.html',
   styleUrls: ['./reorder-list.component.scss'],

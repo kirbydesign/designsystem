@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { EventEmitter } from '@angular/core';
 import {
   ChangeDetectionStrategy,
@@ -18,7 +19,7 @@ export class SlideDirective {}
 
 @Component({
   standalone: true,
-  imports: [IonicModule],
+  imports: [IonicModule, CommonModule],
   selector: 'kirby-slides',
   template: `
     <ion-slides

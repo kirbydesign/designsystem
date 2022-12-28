@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -11,7 +12,7 @@ import { UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
 
 @Component({
   standalone: true,
-  imports: [IonicModule],
+  imports: [IonicModule, CommonModule],
   selector: 'kirby-checkbox',
   templateUrl: './checkbox.component.html',
   styleUrls: ['./checkbox.component.scss'],

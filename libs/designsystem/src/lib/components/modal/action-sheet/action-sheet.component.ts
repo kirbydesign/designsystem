@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CardModule } from '@kirbydesign/designsystem/card';
 import { ButtonComponent } from '../../button/button.component';
@@ -6,7 +7,7 @@ import { ActionSheetItem } from './config/action-sheet-item';
 
 @Component({
   standalone: true,
-  imports: [CardModule, ButtonComponent],
+  imports: [CardModule, ButtonComponent, CommonModule],
   selector: 'kirby-action-sheet',
   templateUrl: './action-sheet.component.html',
   styleUrls: ['./action-sheet.component.scss'],

@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -13,7 +14,7 @@ import { IonicModule } from '@ionic/angular';
 
 @Component({
   standalone: true,
-  imports: [IonicModule],
+  imports: [IonicModule, CommonModule],
   selector: 'kirby-range',
   templateUrl: './range.component.html',
   styleUrls: ['./range.component.scss'],
