@@ -78,7 +78,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() disablePastDates = false;
   @Input() disableFutureDates = false;
   @Input() alwaysEnableToday = false;
-  @Input() locales: { [key: string]: Locale } = {}; // Extra list of already existing locales
+  @Input() locales: { [key: string]: Locale } = {};
   @Input() customLocales: { [key: string]: Locale } = {};
   /* 
     Experimental: Input property not documented on purpose. 
