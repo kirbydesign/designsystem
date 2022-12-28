@@ -146,12 +146,12 @@ export class CalendarShowcaseComponent {
     {
       name: 'previousMonthClicked',
       description: 'Emitted when clicking the button to navigate to the previous month.',
-      signature: 'EventEmitter<void>',
+      signature: 'EventEmitter<Date>',
     },
     {
       name: 'nextMonthClicked',
       description: 'Emitted when clicking the button to navigate to the next month.',
-      signature: 'EventEmitter<void>',
+      signature: 'EventEmitter<Date>',
     },
   ];
 }
