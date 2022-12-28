@@ -18,6 +18,11 @@
 
       --padding-start: #{utils.size('s')};
       --padding-end: #{utils.size('s')};
+
+      @include interaction-state.apply-focus-visible {
+        outline: none;
+        border-radius: utils.$border-radius-round;
+      }
     }
   }
 
@@ -78,7 +83,10 @@ ion-segment {
 }
 
 ion-segment-button {
-  @include interaction-state.apply-focus-part($part: 'native');
+  @include interaction-state.apply-focus-visible {
+    outline: none;
+    border-radius: utils.$border-radius-round;
+  }
   @include interaction-state.apply-hover-ionic;
   @include interaction-state.apply-active-ionic('s');
   @include utils.accessible-target-size;
