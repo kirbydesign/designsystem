@@ -9,4 +9,5 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 export class LoadingOverlayComponent {
   @Input() public isLoading = true;
   @Input() public showBackdrop = true;
+  @Input() public hideContent = false;
 }
