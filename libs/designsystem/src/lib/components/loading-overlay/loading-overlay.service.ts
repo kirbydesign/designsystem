@@ -30,7 +30,7 @@ export class LoadingOverlayService {
         cssClass: cssClasses,
         duration: 0,
         message: null,
-        showBackdrop: showBackdrop,
+        showBackdrop: showBackdrop || hideContent,
         spinner: null,
       });
 
