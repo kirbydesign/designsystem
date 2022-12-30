@@ -1,6 +1,56 @@
+<p>The loading overlay is available both as a component and as a service.</p>
+
+<h2>Component</h2>
+
+<p>
+  The loading overlay component will add the overlay on top of the content that is slotted into the
+  component.
+</p>
+
 <cookbook-example-viewer [html]="exampleHtml">
   <cookbook-loading-overlay-example></cookbook-loading-overlay-example>
 </cookbook-example-viewer>
+
+<h2>Properties</h2>
 <cookbook-api-description-properties
   [properties]="properties"
 ></cookbook-api-description-properties>
+
+<h2>Service</h2>
+
+<p>The service will show a full page loading overlay. It takes two arguments:</p>
+
+<ol>
+  <li><code>showBackdrop: boolean</code> - Shows the transparent loading overlay.</li>
+  <li><code>hideContent: boolean</code> - Shows the loading overlay with 100% opacity.</li>
+</ol>
+
+<button
+  kirby-button
+  attentionLevel="2"
+  size="lg"
+  expand="block"
+  (click)="showFullscreenLoadingOverlay(true)"
+>
+  Show full page loading overlay
+</button>
+<button
+  kirby-button
+  attentionLevel="2"
+  size="lg"
+  expand="block"
+  (click)="showFullscreenLoadingOverlay(false, true)"
+>
+  Show full page loading overlay that hides content
+</button>
+<button
+  kirby-button
+  attentionLevel="2"
+  size="lg"
+  expand="block"
+  (click)="showFullscreenLoadingOverlay(false)"
+>
+  Show full page loading overlay without backdrop
+</button>
+
+<cookbook-code-viewer [ts]="loadingOverlayServiceExample"></cookbook-code-viewer>
