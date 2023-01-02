@@ -7,7 +7,9 @@
       // "@lib/components/*":["src/lib/components/*"],
       // "@kirbytypes/*":["types/src/*"],
       "@kirbydesign/designsystem/*":["*"],
-      "@kirbydesign/designsystem/card":["card/index.ts"]
+      "@kirbydesign/designsystem/card":["card/index.ts"],
+      "@kirbydesign/designsystem/testing":["testing/index.ts"],
+
 
     },
     "esModuleInterop": true,

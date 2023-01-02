@@ -1,4 +1,4 @@
-import { TestHelper } from '@kirbydesign/designsystem/src/lib/testing';
+import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { CardComponent } from './card.component';

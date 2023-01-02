@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
-
 import { WindowRef } from '@kirbydesign/designsystem/types';
+import { DesignTokenHelper } from './design-token-helper';
 
 @Injectable({
   providedIn: 'root',
