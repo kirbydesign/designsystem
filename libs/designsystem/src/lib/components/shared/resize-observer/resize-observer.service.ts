@@ -1,4 +1,4 @@
-import { ElementRef, Injectable, NgZone, OnDestroy } from '@angular/core';
+import { ElementRef, Injectable, OnDestroy } from '@angular/core';
 import { ResizeObserverFactory } from './resize-observer.factory';
 
 @Injectable({ providedIn: 'root' })
