@@ -13,6 +13,7 @@ import {
   ViewChildren,
 } from '@angular/core';
 
+import { ItemReorderEventDetail } from '@ionic/core';
 import { ListItemTemplateDirective } from '../list/list.directive';
 
 import { ReorderEvent } from './reorder-event';
@@ -50,7 +51,7 @@ export class ReorderListComponent implements OnChanges, OnDestroy {
 
   private setupDomListener() {
     const callback = (mutationsList: any) => {
-      for (let mutation of mutationsList) {
+      for (const mutation of mutationsList) {
         if (mutation.oldValue !== mutation.target['className']) {
           this.reorderActive = mutation.target['className'].includes('reorder-list-active');
         }
@@ -70,12 +71,14 @@ export class ReorderListComponent implements OnChanges, OnDestroy {
     });
   }
 
-  doReorder(ev: CustomEvent) {
-    this.itemReorder.emit(new ReorderEvent(ev));
+  doReorder(ev: Event) {
+    const customEvent = ev as CustomEvent<ItemReorderEventDetail>;
+    this.itemReorder.emit(new ReorderEvent(customEvent));
   }
 
-  doSubReorder(ev: CustomEvent, parentItem: any) {
-    this.subItemReorder.emit(new ReorderEvent(ev, parentItem));
+  doSubReorder(ev: Event, parentItem: any) {
+    const customEvent = ev as CustomEvent<ItemReorderEventDetail>;
+    this.subItemReorder.emit(new ReorderEvent(customEvent, parentItem));
   }
 
   ngOnDestroy() {

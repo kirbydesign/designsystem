@@ -7,6 +7,8 @@ import {
   Output,
 } from '@angular/core';
 
+import { ToggleChangeEventDetail } from '@ionic/core';
+
 @Component({
   selector: 'kirby-toggle',
   templateUrl: './toggle.component.html',
@@ -21,8 +23,9 @@ export class ToggleComponent {
 
   _pressed = false;
 
-  onCheckedChange(checked: boolean): void {
-    this.checked = checked;
+  onCheckedChange(event: Event): void {
+    const customEvent = event as CustomEvent<ToggleChangeEventDetail>;
+    this.checked = customEvent.detail.checked;
     this.checkedChange.emit(this.checked);
   }
 

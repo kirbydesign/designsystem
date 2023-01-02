@@ -7,6 +7,7 @@ import {
   Output,
 } from '@angular/core';
 
+import { CheckboxChangeEventDetail } from '@ionic/core';
 import { UniqueIdGenerator } from '../../helpers/unique-id-generator.helper';
 
 @Component({
@@ -46,8 +47,10 @@ export class CheckboxComponent {
 
   @Output() checkedChange = new EventEmitter<boolean>();
 
-  onChecked(checked: boolean): void {
-    this.checked = checked;
+  onChecked(event: Event): void {
+    const customEvent = event as CustomEvent<CheckboxChangeEventDetail>;
+
+    this.checked = customEvent.detail.checked;
     this.checkedChange.emit(this.checked);
   }
 

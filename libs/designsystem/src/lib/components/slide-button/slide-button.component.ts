@@ -65,7 +65,9 @@ export class SlideButtonComponent implements OnDestroy {
     }
   }
 
-  onSliderValueChange(val: string) {
+  onSliderValueChange(event: Event) {
+    const val = (event.target as HTMLInputElement).value;
+    console.log('This is val', val);
     this.value = +val;
     this.slidingPercentageChanged.emit(this.value);
   }

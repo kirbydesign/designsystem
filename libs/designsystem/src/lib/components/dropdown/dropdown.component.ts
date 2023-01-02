@@ -529,7 +529,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     this._onTouched();
   }
 
-  _onPopoverClick(event: PointerEvent) {
+  _onPopoverClick() {
     this.close();
   }
 

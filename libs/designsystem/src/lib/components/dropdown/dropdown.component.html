@@ -18,7 +18,7 @@
   <kirby-popover
     [target]="buttonElement"
     [popout]="popout"
-    (click)="_onPopoverClick($event)"
+    (click)="_onPopoverClick()"
     (willHide)="_onPopoverWillHide()"
   >
     <ng-container *ngTemplateOutlet="itemWrapperTemplate"></ng-container>

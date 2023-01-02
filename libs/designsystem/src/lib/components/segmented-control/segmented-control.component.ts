@@ -1,5 +1,6 @@
 import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 
+import { SegmentChangeEventDetail } from '@ionic/core';
 import { IconRegistryService } from '../icon/icon-registry.service';
 
 import { SegmentItem, SegmentItemInternal } from './segment-item';
@@ -24,7 +25,7 @@ export class SegmentedControlComponent {
    * Ensure that the click actually did originate from within the segment-button.
    * We do not want to react to clicks on e.g. segment-btn-wrapper or badge.
    */
-  preventOutsideClick(event: TouchEvent) {
+  preventOutsideClick(event: MouseEvent | TouchEvent) {
     if (event.target instanceof HTMLElement) {
       const targetIsInSegmentBtn = !!event.target.closest('ion-segment-button');
       if (!targetIsInSegmentBtn) {
@@ -103,7 +104,10 @@ export class SegmentedControlComponent {
 
   @Output() segmentSelect: EventEmitter<SegmentItem> = new EventEmitter();
 
-  onSegmentSelect(selectedId: string) {
+  onSegmentSelect(event: Event) {
+    const customEvent = event as CustomEvent<SegmentChangeEventDetail>;
+
+    const selectedId = customEvent.detail.value;
     const selectedItemIndex = this.items.findIndex((item) => selectedId === item.id);
 
     if (selectedItemIndex !== this.selectedIndex) {

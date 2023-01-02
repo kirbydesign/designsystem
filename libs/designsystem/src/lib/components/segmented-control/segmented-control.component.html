@@ -1,7 +1,7 @@
 <ion-segment
   [value]="value?.id"
   [scrollable]="disableChangeOnSwipe || mode !== 'default'"
-  (ionChange)="onSegmentSelect($event.detail.value)"
+  (ionChange)="onSegmentSelect($event)"
   (click)="preventOutsideClick($event)"
 >
   <ng-container *ngFor="let item of items">
@@ -14,7 +14,7 @@
       >
         <ng-container *ngIf="item.badge.icon; else badgeContent">
           <kirby-icon
-            *ngIf="item.badge.isCustomIcon; else defaultIconName"
+            *ngIf="$any(item).badge.isCustomIcon; else defaultIconName"
             [customName]="item.badge.icon"
           ></kirby-icon>
           <ng-template #defaultIconName>

@@ -3,7 +3,7 @@
     mode="md"
     [checked]="checked"
     [disabled]="disabled"
-    (ionChange)="onChecked($event.detail.checked)"
+    (ionChange)="onChecked($event)"
     [attr.aria-labelledby]="text ? _labelId : null"
   ></ion-checkbox>
   <span [id]="_labelId" *ngIf="text">{{ text }}</span>

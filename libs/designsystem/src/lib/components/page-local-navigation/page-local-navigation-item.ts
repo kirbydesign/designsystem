@@ -15,7 +15,7 @@ type ItemBadge = {
   themeColor: ThemeColor;
 };
 
-export interface LocalNavigationItem {
+export type LocalNavigationItem = {
   /**
    * Text of the item
    */
@@ -25,4 +25,4 @@ export interface LocalNavigationItem {
    * Optional badge to show with the item
    */
   badge?: ItemBadge;
-}
+};
