@@ -10,7 +10,6 @@
 //
 //    The created bundle contains:
 //    - Transpiled distribution bundle
-//    - Polyfills (required by kirby)
 //    - SCSS sources files (containing utilities exposed by kirby)
 //    - SVG Icons (icons provided / used by kirby)
 //    - README.md file
@@ -91,12 +90,6 @@ function buildPackage(npmBuildScript) {
   });
 }
 
-function buildPolyfills(npmBuildScript) {
-  return npm(['run', npmBuildScript], {
-    onFailMessage: 'Unable to build polyfills',
-  });
-}
-
 function enhancePackageJson(distPackageJsonPath) {
   return fs.readJson(distPackageJsonPath, 'utf-8').then((packageJson) => {
     // Modify contents
@@ -162,15 +155,6 @@ function copyIcons(libSrcDir, distTarget) {
   });
 }
 
-function copyPolyfills(libSrcDir, distTarget) {
-  console.log('Copying Polyfills...');
-  const onlyLoadersAndMinified = (input) =>
-    path.extname(input) === '' || input.endsWith('-loader.js') || input.endsWith('.min.js');
-  return fs.copy(`${libSrcDir}/polyfills`, `${distTarget}/polyfills`, {
-    filter: onlyLoadersAndMinified,
-  });
-}
-
 function copyCoreDistributionFiles(coreLibDir, distTarget) {
   console.log('Copying core distribution files...');
 
@@ -228,13 +212,11 @@ if (doPublishDesignsystem) {
   // Publish designsystem
   console.log('--- Publishing designsystem ---');
   cleanDistribution(distDesignsystemTarget)
-    .then(() => buildPolyfills('build-polyfills'))
     .then(() => buildPackage('dist:designsystem'))
     .then(() => enhancePackageJson(distDesignsystemPackageJsonPath))
     .then(() => copyReadme(distDesignsystemTarget))
     .then(() => createScssCoreForwardFiles(coreLibSrcDir, [`${distDesignsystemTarget}/scss`]))
     .then(() => copyIcons(designsystemLibSrcDir, distDesignsystemTarget))
-    .then(() => copyPolyfills(designsystemLibSrcDir, distDesignsystemTarget))
     .then(() => publish(distDesignsystemTarget, 'kirbydesign-designsystem'))
     .catch((err) => console.warn('*** ERROR WHEN PUBLISHING DESIGNSYSTEM ***', err));
 }
