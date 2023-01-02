@@ -12,7 +12,7 @@
     "annotateForClosureCompiler": true,
     "skipTemplateCodegen": true,
     "strictMetadataEmit": true,
-    "fullTemplateTypeCheck": true,
+    "strictTemplates": true,
     "strictInjectionParameters": true,
     "enableResourceInlining": true,
     "inlineSourceMap": true,
