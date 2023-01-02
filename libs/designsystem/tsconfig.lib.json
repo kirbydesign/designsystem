@@ -13,6 +13,7 @@
     "skipTemplateCodegen": true,
     "strictMetadataEmit": true,
     "strictTemplates": true,
+    "strictDomEventTypes": false,
     "strictInjectionParameters": true,
     "enableResourceInlining": true,
     "inlineSourceMap": true,

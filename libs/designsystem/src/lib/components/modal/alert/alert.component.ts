@@ -9,6 +9,7 @@ import {
 import { Observable, of } from 'rxjs';
 
 import { WindowRef } from '../../../types/window-ref';
+import { ThemeColor } from '../../../helpers';
 
 @Component({
   selector: 'kirby-alert',
@@ -36,7 +37,7 @@ export class AlertComponent implements AfterViewInit {
   }
 
   @Input() iconName: string;
-  @Input() iconThemeColor: string;
+  @Input() iconThemeColor: ThemeColor;
   @Input() okBtn: string;
   @Input() okBtnIsDestructive: boolean;
   @Input() cancelBtn: string;
