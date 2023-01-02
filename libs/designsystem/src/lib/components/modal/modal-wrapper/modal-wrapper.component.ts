@@ -19,7 +19,7 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular';
-import { merge, Observable, Subject } from 'rxjs';
+import { firstValueFrom, merge, Observable, Subject } from 'rxjs';
 import { debounceTime, first, takeUntil } from 'rxjs/operators';
 
 import { DesignTokenHelper } from '@kirbydesign/core';
@@ -29,7 +29,6 @@ import { PlatformService } from '../../../helpers/platform.service';
 import { WindowRef } from '../../../types/window-ref';
 import { ButtonComponent } from '../../button/button.component';
 import { ResizeObserverService } from '../../shared/resize-observer/resize-observer.service';
-import { ResizeObserverEntry } from '../../shared/resize-observer/types/resize-observer-entry';
 import { Modal, ModalElementsAdvertiser, ModalElementType } from '../services/modal.interfaces';
 
 import { ModalConfig } from './config/modal-config';
@@ -101,9 +100,9 @@ export class ModalWrapperComponent
   private viewportResized = false;
   private ionModalElement?: HTMLIonModalElement;
   private readonly ionModalDidPresent = new Subject<void>();
-  readonly didPresent = this.ionModalDidPresent.toPromise();
+  readonly didPresent = firstValueFrom(this.ionModalDidPresent);
   private readonly ionModalWillDismiss = new Subject<void>();
-  readonly willClose = this.ionModalWillDismiss.toPromise();
+  readonly willClose = firstValueFrom(this.ionModalWillDismiss);
   private viewportResize = new Subject<void>();
   private viewportResize$ = this.viewportResize
     .asObservable()

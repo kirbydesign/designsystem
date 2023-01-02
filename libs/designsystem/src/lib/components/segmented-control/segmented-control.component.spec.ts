@@ -8,7 +8,6 @@ import { DesignTokenHelper } from '@kirbydesign/core';
 import { ThemeColorDirective } from '../../directives';
 import { BadgeComponent } from '../../index';
 import { TestHelper } from '../../testing/test-helper';
-import { ChipComponent } from '../chip/chip.component';
 import { IconComponent } from '../icon';
 
 import { SegmentItem } from './segment-item';
@@ -42,10 +41,7 @@ describe('SegmentedControlComponent', () => {
 
   const createHost = createHostFactory({
     component: SegmentedControlComponent,
-    declarations: [
-      MockComponents(ChipComponent, BadgeComponent),
-      MockDirective(ThemeColorDirective),
-    ],
+    declarations: [MockComponents(BadgeComponent), MockDirective(ThemeColorDirective)],
     imports: [TestHelper.ionicModuleForTest],
   });
 
@@ -194,7 +190,7 @@ describe('SegmentedControl with Badge', () => {
 
   const createHost = createHostFactory({
     component: SegmentedControlComponent,
-    declarations: [MockComponents(ChipComponent, BadgeComponent, IconComponent)],
+    declarations: [MockComponents(BadgeComponent, IconComponent)],
     imports: [TestHelper.ionicModuleForTest],
   });
 
