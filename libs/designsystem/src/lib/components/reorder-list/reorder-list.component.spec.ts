@@ -1,7 +1,7 @@
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
 import { MockComponent } from 'ng-mocks';
 
-import { TestHelper } from 'src/lib/testing';
+import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { CardComponent } from '../../../../card';
 import { IconModule } from '../icon/icon.module';
 import { ItemComponent } from '../item';

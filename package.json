@@ -124,7 +124,7 @@
   },
   "devDependencies": {
     "@angular-builders/custom-webpack": "15.0.0-beta.0",
-    "@angular-devkit/build-angular": "15.0.2",
+    "@angular-devkit/build-angular": "15.0.4",
     "@angular-eslint/eslint-plugin": "15.0.0",
     "@angular-eslint/eslint-plugin-template": "15.0.0",
     "@angular-eslint/template-parser": "15.0.0",
@@ -133,7 +133,7 @@
     "@babel/core": "^7.14.6",
     "@capacitor/android": "^4.4.0",
     "@capacitor/cli": "^4.4.0",
-    "@capacitor/core": "^4.4.0",
+    "@capacitor/core": "^4.4.0", 
     "@capacitor/ios": "^4.4.0",
     "@kirbydesign/core": "file:libs/core",
     "@ngneat/spectator": "^10.0.1",

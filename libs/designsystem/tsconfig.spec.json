@@ -13,9 +13,11 @@
       "@kirbydesign/designsystem/card": ["card/index.ts"],
       "@kirbydesign/designsystem/types": ["types/index.ts"],
       "@kirbydesign/designsystem/testing":["testing/index.ts"],
+      "@kirbydesign/designsystem/testing/*":["testing/*"],
 
     }
   },
   "files": ["src/test.ts"],
-  "include": ["**/*.spec.ts", "**/*.d.ts"]
+  "include": ["**/*.spec.ts", "**/*.d.ts"],
+  "exclude": []
 }

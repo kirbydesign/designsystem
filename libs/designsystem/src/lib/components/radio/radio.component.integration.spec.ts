@@ -4,7 +4,7 @@ import { MockComponents } from 'ng-mocks';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
-import { TestHelper } from 'src/lib/testing';
+import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { ItemComponent } from '../item';
 
 import { RadioGroupComponent } from './radio-group/radio-group.component';

@@ -4,7 +4,7 @@ import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { PlatformService } from '@kirbydesign/designsystem/helpers';
 import { WindowRef } from '@kirbydesign/designsystem/types';
-import { TestHelper } from 'src/lib/testing';
+import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { ItemComponent } from '../item/item.component';
 import { RadioComponent } from '../radio';
 import { RadioGroupComponent } from '../radio/radio-group/radio-group.component';

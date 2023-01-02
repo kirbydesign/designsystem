@@ -5,7 +5,7 @@ import { WindowRef } from '@kirbydesign/designsystem/types';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
 import { MockComponents } from 'ng-mocks';
 
-import { TestHelper } from 'src/lib/testing';
+import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { KirbyAnimation } from '../../../animation/kirby-animation';
 import { ButtonComponent } from '../../button/button.component';
 import { IconComponent } from '../../icon/icon.component';

@@ -7,7 +7,7 @@ import { createHostFactory, mockProvider, SpectatorHost, SpyObject } from '@ngne
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { WindowRef } from '@kirbydesign/designsystem/types';
-import { TestHelper } from 'src/lib/testing';
+import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { FitHeadingDirective } from '../../directives/fit-heading/fit-heading.directive';
 import { ButtonComponent } from '../button/button.component';
 import { ModalNavigationService } from '../modal/services/modal-navigation.service';

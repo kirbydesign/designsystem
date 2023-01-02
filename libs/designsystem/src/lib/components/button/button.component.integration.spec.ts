@@ -5,7 +5,7 @@ import { MockComponent, MockComponents } from 'ng-mocks';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
-import { TestHelper } from 'src/lib/testing';
+import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { CardComponent } from '@kirbydesign/designsystem/card';
 import { FitHeadingDirective } from '../../directives/fit-heading/fit-heading.directive';

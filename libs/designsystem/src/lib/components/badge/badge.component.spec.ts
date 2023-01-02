@@ -1,6 +1,6 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
-import { TestHelper } from 'src/lib/testing';
+import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { customElementsInitializer } from '../../custom-elements-initializer';
 import { BadgeComponent } from '../../index';
 

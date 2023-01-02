@@ -6,7 +6,7 @@ import {
   SpectatorHost,
 } from '@ngneat/spectator';
 
-import { TestHelper } from 'src/lib/testing';
+import { TestHelper } from '@kirbydesign/designsystem/testing';
 
 import { ProgressCircleRingComponent } from './progress-circle-ring.component';
 import { ProgressCircleComponent } from './progress-circle.component';

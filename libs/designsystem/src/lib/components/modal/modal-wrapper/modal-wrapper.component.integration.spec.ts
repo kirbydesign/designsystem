@@ -3,7 +3,7 @@ import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
 import { MockComponents } from 'ng-mocks';
 
-import { TestHelper } from 'src/lib/testing';
+import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { PageProgressComponent, PageTitleComponent } from '../../page';
 import { ModalFooterComponent } from '../footer/modal-footer.component';
 

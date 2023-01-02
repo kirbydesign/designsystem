@@ -4,7 +4,7 @@ import { format, startOfDay, startOfMonth } from 'date-fns';
 import { zonedTimeToUtc } from 'date-fns-tz';
 import { MockComponent } from 'ng-mocks';
 
-import { TestHelper } from 'src/lib/testing';
+import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { ButtonComponent, CalendarComponent, IconComponent } from '..';
 import { CardComponent } from '../../../../card';

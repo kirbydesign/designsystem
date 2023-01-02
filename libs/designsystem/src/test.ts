@@ -9,7 +9,7 @@ import {
   platformBrowserDynamicTesting,
 } from '@angular/platform-browser-dynamic/testing';
 
-import { ElementCssCustomMatchers } from './lib/testing/element-css-custom-matchers';
+import { ElementCssCustomMatchers } from '@kirbydesign/designsystem/testing';
 
 // First, initialize the Angular testing environment.
 getTestBed().initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting(), {

@@ -1,4 +1,4 @@
-import { ColorHelper } from '@kirbydesign/designsystem/helpers';
+import { ColorHelper } from './color-helper';
 import { styles } from './design-token-helper.styles';
 import { ThemeColor } from './theme-color.type';
 

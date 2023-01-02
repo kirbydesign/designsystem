@@ -3,7 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { IonBackdrop, IonFab, IonFabButton, IonFabList, IonIcon } from '@ionic/angular';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
-import { TestHelper } from 'src/lib/testing';
+import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { ButtonComponent } from '../button/button.component';
 import { CardComponent, CardHeaderComponent } from '../../../../card';
 import { IconComponent } from '../icon';

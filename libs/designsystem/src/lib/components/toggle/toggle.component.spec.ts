@@ -2,7 +2,7 @@ import { By } from '@angular/platform-browser';
 import * as ionic from '@ionic/angular';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
 
-import { TestHelper } from 'src/lib/testing';
+import { TestHelper } from '@kirbydesign/designsystem/testing';
 
 import { ToggleComponent } from './toggle.component';
 
