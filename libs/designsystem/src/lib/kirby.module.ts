@@ -14,7 +14,6 @@ import { CardHeaderComponent } from './components/card/card-header/card-header.c
 import { CardComponent } from './components/card/card.component';
 import { ChartsModule } from './components/charts';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
-import { ChipComponent } from './components/chip/chip.component';
 import { DataTableModule } from './components/data-table/data-table.module';
 import { DividerComponent } from './components/divider/divider.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
@@ -90,7 +89,6 @@ const exportedDeclarations = [
   ModalFooterComponent,
   ModalRouterLinkDirective,
   SegmentedControlComponent,
-  ChipComponent,
   BadgeComponent,
   ThemeColorDirective,
   DateInputDirective,
