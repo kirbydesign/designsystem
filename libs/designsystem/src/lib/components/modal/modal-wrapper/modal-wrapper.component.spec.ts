@@ -1,12 +1,12 @@
 import { fakeAsync, tick } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { IonButtons, IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular';
+import { WindowRef } from '@kirbydesign/designsystem/types';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
 import { MockComponents } from 'ng-mocks';
 
+import { TestHelper } from 'src/lib/testing';
 import { KirbyAnimation } from '../../../animation/kirby-animation';
-import { TestHelper } from '../../../testing/test-helper';
-import { WindowRef } from '../../../types';
 import { ButtonComponent } from '../../button/button.component';
 import { IconComponent } from '../../icon/icon.component';
 import { PageProgressComponent, PageTitleComponent } from '../../page';

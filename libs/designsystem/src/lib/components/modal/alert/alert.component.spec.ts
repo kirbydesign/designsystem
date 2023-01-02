@@ -1,6 +1,6 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
-import { DesignTokenHelper } from '@kirbydesign/core';
+import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { ButtonComponent } from '../../button/button.component';
 import { EmptyStateComponent } from '../../empty-state/empty-state.component';

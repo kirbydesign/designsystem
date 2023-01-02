@@ -4,11 +4,11 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { IonRefresher } from '@ionic/angular';
 import { createHostFactory, mockProvider, SpectatorHost, SpyObject } from '@ngneat/spectator';
 
-import { DesignTokenHelper } from '@kirbydesign/core';
+import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
+import { WindowRef } from '@kirbydesign/designsystem/types';
+import { TestHelper } from 'src/lib/testing';
 import { FitHeadingDirective } from '../../directives/fit-heading/fit-heading.directive';
-import { TestHelper } from '../../testing/test-helper';
-import { WindowRef } from '../../types/window-ref';
 import { ButtonComponent } from '../button/button.component';
 import { ModalNavigationService } from '../modal/services/modal-navigation.service';
 import { selectedTabClickEvent, TabsComponent } from '../tabs';

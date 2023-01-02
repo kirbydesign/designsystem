@@ -1,14 +1,14 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
+import { TestHelper } from 'src/lib/testing';
 import { customElementsInitializer } from '../../custom-elements-initializer';
 import { BadgeComponent } from '../../index';
-import { TestHelper } from '../../testing/test-helper';
 
 describe('BadgeComponent', () => {
   let spectator: SpectatorHost<BadgeComponent>;
   let ionBadge: HTMLIonBadgeElement;
 
-  let createHost = createHostFactory({
+  const createHost = createHostFactory({
     component: BadgeComponent,
     imports: [TestHelper.ionicModuleForTest],
     providers: [customElementsInitializer()],

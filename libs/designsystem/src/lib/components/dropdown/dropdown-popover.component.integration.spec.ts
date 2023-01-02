@@ -9,8 +9,9 @@ import { fakeAsync, tick } from '@angular/core/testing';
 import { IonItem } from '@ionic/angular';
 import { createHostFactory, Spectator } from '@ngneat/spectator';
 import { MockComponents } from 'ng-mocks';
+import { CardComponent } from '@kirbydesign/designsystem/card';
 
-import { ButtonComponent, CardComponent, IconComponent, ItemComponent } from '..';
+import { ButtonComponent, IconComponent, ItemComponent } from '..';
 import { PopoverComponent } from '../popover/popover.component';
 
 import { DropdownComponent } from './dropdown.component';

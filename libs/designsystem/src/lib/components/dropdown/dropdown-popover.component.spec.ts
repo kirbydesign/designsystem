@@ -9,9 +9,11 @@ import { IonItem } from '@ionic/angular';
 import { createHostFactory, Spectator, SpectatorHost } from '@ngneat/spectator';
 import { MockComponents } from 'ng-mocks';
 
-import { ButtonComponent, CardComponent, IconComponent, ItemComponent } from '..';
-import { DesignTokenHelper } from '../../helpers';
-import { TestHelper } from '../../testing/test-helper';
+import { CardComponent } from '@kirbydesign/designsystem/card';
+
+import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
+import { TestHelper } from 'src/lib/testing';
+import { ButtonComponent, IconComponent, ItemComponent } from '..';
 import { ListItemTemplateDirective } from '../list';
 import { HorizontalDirection, PopoverComponent } from '../popover/popover.component';
 

@@ -5,7 +5,7 @@ import { AnnotationType, AnnotationTypeRegistry } from 'chartjs-plugin-annotatio
 import { toDate } from 'date-fns';
 
 import { ChartDataLabelOptions, ChartLocale, ChartType, ChartTypeConfig } from '../../';
-// import { deepCopy } from '../../../../helpers/deep-copy';
+// import { deepCopy } from '@kirbydesign/designsystem/helpers';
 
 import { CHART_ANNOTATIONS_CONFIG } from './configs/annotations.config';
 import { CHART_INTERACTION_FUNCTIONS_EXTENSIONS } from './configs/interaction-functions-extensions.config';

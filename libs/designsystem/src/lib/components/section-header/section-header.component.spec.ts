@@ -1,8 +1,7 @@
 import { IonItemDivider } from '@ionic/angular';
+import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponent } from 'ng-mocks';
-
-import { DesignTokenHelper } from '../../helpers';
 
 import { SectionHeaderComponent } from './section-header.component';
 

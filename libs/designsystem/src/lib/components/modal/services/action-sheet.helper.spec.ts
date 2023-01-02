@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ModalController as IonicModalController } from '@ionic/angular';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 
-import { TestHelper } from '../../../testing/test-helper';
+import { TestHelper } from 'src/lib/testing';
 
 import { ActionSheetHelper } from './action-sheet.helper';
 import { Overlay } from './modal.interfaces';

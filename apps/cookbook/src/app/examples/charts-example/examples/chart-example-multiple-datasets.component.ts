@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ColorHelper } from '@kirbydesign/designsystem';
+import { ColorHelper } from '@kirbydesign/designsystem/helpers';
 
 const { getThemeColorHexString } = ColorHelper;
 
@@ -11,7 +11,8 @@ const config = {
   [data]="_datasets" 
   [labels]="['Monday', 'Tuesday', ['Wednes-','day'], 'Thursday', 'Friday']">
 </kirby-chart>`,
-  codeSnippet: `import { ColorHelper } from '@kirbydesign/designsystem';
+  codeSnippet: `import { ColorHelper } from '@kirbydesign/designsystem/helpers'
+;
 
 const { getThemeColorHexString } = ColorHelper;
 

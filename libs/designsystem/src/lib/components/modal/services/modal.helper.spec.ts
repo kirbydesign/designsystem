@@ -3,10 +3,10 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { ModalController as IonicModalController } from '@ionic/angular';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 
-import { DesignTokenHelper } from '@kirbydesign/core';
+import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
-import { TestHelper } from '../../../testing/test-helper';
-import { WindowRef } from '../../../types/window-ref';
+import { WindowRef } from '@kirbydesign/designsystem/types';
+import { TestHelper } from 'src/lib/testing';
 import { ButtonComponent } from '../../button/button.component';
 import { IconComponent } from '../../icon';
 import { PageProgressComponent, PageTitleComponent } from '../../page/page.component';

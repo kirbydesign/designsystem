@@ -3,10 +3,10 @@ import { IonFooter } from '@ionic/angular';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponents } from 'ng-mocks';
 
-import { DesignTokenHelper } from '@kirbydesign/core';
+import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
+import { TestHelper } from 'src/lib/testing';
 import { ThemeColorDirective } from '../../../directives';
-import { TestHelper } from '../../../testing/test-helper';
 import { ModalFooterComponent } from '../footer/modal-footer.component';
 
 const getColor = DesignTokenHelper.getColor;

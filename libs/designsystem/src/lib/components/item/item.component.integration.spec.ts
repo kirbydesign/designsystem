@@ -1,12 +1,12 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
-import { DesignTokenHelper } from '@kirbydesign/core';
+import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
+import { TestHelper } from 'src/lib/testing';
 import { IconComponent } from '..';
-import { TestHelper } from '../../testing/test-helper';
 
-import { LabelComponent } from '.';
 import { ItemComponent } from './item.component';
+import { LabelComponent } from '.';
 
 const { fontWeight } = DesignTokenHelper;
 

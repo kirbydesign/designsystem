@@ -22,7 +22,7 @@ import { IonContent, IonHeader, IonicModule, IonTitle, IonToolbar } from '@ionic
 import { firstValueFrom, merge, Observable, Subject } from 'rxjs';
 import { debounceTime, first, takeUntil } from 'rxjs/operators';
 
-import { DesignTokenHelper } from '@kirbydesign/core';
+import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { ResizeObserverService } from '@kirbydesign/designsystem/shared';
 import { WindowRef } from '@kirbydesign/designsystem/types';

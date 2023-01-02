@@ -3,11 +3,11 @@ import { By } from '@angular/platform-browser';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponents, MockDirective } from 'ng-mocks';
 
-import { DesignTokenHelper } from '@kirbydesign/core';
+import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { ThemeColorDirective } from '../../directives';
 import { BadgeComponent } from '../../index';
-import { TestHelper } from '../../testing/test-helper';
+import { TestHelper } from 'src/lib/testing';
 import { IconComponent } from '../icon';
 
 import { SegmentItem } from './segment-item';

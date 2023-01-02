@@ -1,9 +1,9 @@
 import { IonicModule } from '@ionic/angular';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
 
-import { DesignTokenHelper } from '@kirbydesign/core';
+import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
-import { TestHelper } from '../../testing/test-helper';
+import { TestHelper } from 'src/lib/testing';
 
 import { CheckboxComponent } from './checkbox.component';
 

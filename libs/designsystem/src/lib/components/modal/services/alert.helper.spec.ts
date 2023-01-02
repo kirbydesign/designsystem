@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { ModalController as IonicModalController } from '@ionic/angular';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 
-import { DesignTokenHelper } from '@kirbydesign/core';
+import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
-import { TestHelper } from '../../../testing/test-helper';
-import { WindowRef } from '../../../types/window-ref';
+import { WindowRef } from '@kirbydesign/designsystem/types';
+import { TestHelper } from 'src/lib/testing';
 
 import { AlertHelper } from './alert.helper';
 import { Overlay } from './modal.interfaces';

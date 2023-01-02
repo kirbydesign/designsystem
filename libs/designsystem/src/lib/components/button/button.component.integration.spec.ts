@@ -3,12 +3,12 @@ import { IonIcon } from '@ionic/angular';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponent, MockComponents } from 'ng-mocks';
 
-import { DesignTokenHelper } from '@kirbydesign/core';
+import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
+import { TestHelper } from 'src/lib/testing';
+import { WindowRef } from '@kirbydesign/designsystem/types';
+import { CardComponent } from '@kirbydesign/designsystem/card';
 import { FitHeadingDirective } from '../../directives/fit-heading/fit-heading.directive';
-import { TestHelper } from '../../testing/test-helper';
-import { WindowRef } from '../../types/window-ref';
-import { CardComponent } from '../../../../card/card.component';
 import { DropdownComponent } from '../dropdown/dropdown.component';
 import { EmptyStateComponent } from '../empty-state/empty-state.component';
 import { IconComponent } from '../icon/icon.component';

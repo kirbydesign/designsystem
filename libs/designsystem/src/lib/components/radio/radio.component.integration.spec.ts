@@ -2,9 +2,9 @@ import { IonItem, IonRadio } from '@ionic/angular';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponents } from 'ng-mocks';
 
-import { DesignTokenHelper } from '@kirbydesign/core';
+import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
-import { TestHelper } from '../../testing/test-helper';
+import { TestHelper } from 'src/lib/testing';
 import { ItemComponent } from '../item';
 
 import { RadioGroupComponent } from './radio-group/radio-group.component';

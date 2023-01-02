@@ -1,6 +1,5 @@
+import { TestHelper } from '@kirbydesign/designsystem/src/lib/testing';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-
-import { TestHelper } from '../../testing/test-helper';
 
 import { CardComponent } from './card.component';
 
