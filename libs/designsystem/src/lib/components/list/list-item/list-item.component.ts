@@ -33,7 +33,7 @@ export class ListItemComponent implements OnInit, AfterViewInit {
 
   @Input() item: any;
 
-  @Input() boundaryClass: BoundaryClass | BoundaryClass[];
+  @Input() boundaryClass: BoundaryClass;
 
   @Input() swipeActions: ListSwipeAction[] = [];
 

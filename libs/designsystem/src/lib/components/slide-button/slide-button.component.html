@@ -3,7 +3,7 @@
     type="range"
     (mouseup)="onSliderMouseup()"
     (touchend)="onSliderMouseup()"
-    (input)="onSliderValueChange($event)"
+    (input)="onSliderValueChange($event.target.value)"
     (mousedown)="onSliderMousedown()"
     (touchstart)="onSliderMousedown()"
     class="slide-button"

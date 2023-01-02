@@ -1,4 +1,4 @@
-<ion-radio-group *ngIf="_hasItems" [value]="value" (ionChange)="_onChange($event)">
+<ion-radio-group *ngIf="_hasItems" [value]="value" (ionChange)="_onChange($event.detail.value)">
   <ng-container *ngIf="!items || !items.length; else itemsTemplate">
     <ng-content></ng-content>
   </ng-container>

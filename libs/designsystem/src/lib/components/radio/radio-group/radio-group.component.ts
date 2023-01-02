@@ -14,7 +14,6 @@ import {
 import { Component, HostListener, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { RadioGroupChangeEventDetail } from '@ionic/core';
 import { ListItemTemplateDirective } from '../../list/list.directive';
 import { RadioComponent } from '../radio.component';
 
@@ -172,13 +171,11 @@ export class RadioGroupComponent implements AfterContentInit, ControlValueAccess
     return this.items.length > 0 || this.hasItemsFromContentProjection;
   }
 
-  _onChange(event: Event) {
-    const customEvent = event as CustomEvent<RadioGroupChangeEventDetail>;
-
-    if (customEvent.detail.value === this._value) return;
-    this.setSelectedItem(customEvent.detail.value);
-    this.valueChange.emit(customEvent.detail.value);
-    this._onChangeCallback(customEvent.detail.value);
+  _onChange(value: string | any) {
+    if (value === this._value) return;
+    this.setSelectedItem(value);
+    this.valueChange.emit(value);
+    this._onChangeCallback(value);
   }
 
   @HostListener('ionBlur')
