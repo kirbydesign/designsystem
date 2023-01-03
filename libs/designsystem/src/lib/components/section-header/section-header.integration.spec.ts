@@ -1,7 +1,5 @@
-import { IonItemDivider, IonLabel } from '@ionic/angular';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { MockComponent } from 'ng-mocks';
 
 import { LabelComponent } from '../item/label/label.component';
 

@@ -6,7 +6,6 @@ import { MockComponents } from 'ng-mocks';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { CardComponent } from '@kirbydesign/designsystem/card';
-import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { ButtonComponent, IconComponent, ItemComponent } from '..';
 import { ListItemTemplateDirective } from '../list';
 import { HorizontalDirection, PopoverComponent } from '../popover/popover.component';

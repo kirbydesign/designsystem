@@ -7,13 +7,9 @@ import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
-import { ButtonComponent } from '../../button/button.component';
-import { IconComponent } from '../../icon';
 import { PageProgressComponent, PageTitleComponent } from '../../page/page.component';
-import { ModalFooterComponent } from '../footer/modal-footer.component';
 import { ModalCompactWrapperComponent } from '../modal-wrapper/compact/modal-compact-wrapper.component';
 import { ModalConfig, ModalSize } from '../modal-wrapper/config/modal-config';
-import { ModalWrapperComponent } from '../modal-wrapper/modal-wrapper.component';
 
 import { AlertConfig } from '../alert/config/alert-config';
 import { ModalNavigationService } from './modal-navigation.service';

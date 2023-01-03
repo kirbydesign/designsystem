@@ -1,16 +1,7 @@
 import { LOCALE_ID } from '@angular/core';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { MockComponent } from 'ng-mocks';
-import { CardComponent } from '@kirbydesign/designsystem/card';
 import { WindowRef } from '@kirbydesign/designsystem/types';
-import {
-  ButtonComponent,
-  CalendarComponent,
-  DropdownComponent,
-  IconComponent,
-  RadioComponent,
-} from '..';
-import { ItemComponent } from '../item';
+import { CalendarComponent } from '..';
 
 describe('CalendarComponent', () => {
   let spectator: SpectatorHost<CalendarComponent>;

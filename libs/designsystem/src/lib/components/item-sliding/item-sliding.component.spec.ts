@@ -1,9 +1,5 @@
-import { IonicModule } from '@ionic/angular';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { MockComponent, MockModule } from 'ng-mocks';
-
-import { ItemComponent } from '../item/item.component';
 
 import { ItemSwipeActionType } from './item-sliding.types';
 import { ItemSlidingComponent, ItemSwipeAction } from './';

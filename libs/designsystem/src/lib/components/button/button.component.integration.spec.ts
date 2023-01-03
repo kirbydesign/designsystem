@@ -13,12 +13,7 @@ import { DropdownComponent } from '../dropdown/dropdown.component';
 import { EmptyStateComponent } from '../empty-state/empty-state.component';
 import { IconComponent } from '../icon/icon.component';
 import { ItemComponent } from '../item/item.component';
-import {
-  PageActionsDirective,
-  PageComponent,
-  PageTitleDirective,
-  PageToolbarTitleDirective,
-} from '../page/page.component';
+import { PageActionsDirective, PageComponent, PageTitleDirective } from '../page/page.component';
 
 import { ButtonComponent } from './button.component';
 

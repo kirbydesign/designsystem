@@ -2,9 +2,6 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
-import { TestHelper } from '@kirbydesign/designsystem/testing';
-import { IconComponent } from '../icon/icon.component';
-
 import { AccordionItemComponent } from './accordion-item.component';
 
 const getColor = DesignTokenHelper.getColor;

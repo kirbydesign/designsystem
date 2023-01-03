@@ -11,7 +11,6 @@ import {
   ViewChild,
 } from '@angular/core';
 import { IonicModule, IonSlides } from '@ionic/angular';
-import { Subject } from 'rxjs';
 
 @Directive({
   selector: '[kirbySlide]',

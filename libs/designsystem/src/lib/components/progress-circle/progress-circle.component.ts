@@ -1,4 +1,3 @@
-import { truncate } from 'fs';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,

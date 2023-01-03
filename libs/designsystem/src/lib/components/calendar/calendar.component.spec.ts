@@ -2,15 +2,11 @@ import { LOCALE_ID } from '@angular/core';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { format, startOfDay, startOfMonth } from 'date-fns';
 import { zonedTimeToUtc } from 'date-fns-tz';
-import { MockComponent } from 'ng-mocks';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { WindowRef } from '@kirbydesign/designsystem/types';
-import { CardComponent, CardModule } from '@kirbydesign/designsystem/card';
-import { ButtonComponent, CalendarComponent, IconComponent } from '..';
+import { CalendarComponent } from '..';
 import { DropdownComponent } from '../dropdown/dropdown.component';
-import { ItemComponent } from '../item';
-import { RadioComponent } from '../radio';
 
 import { CalendarYearNavigatorConfig } from './options/calendar-year-navigator-config';
 

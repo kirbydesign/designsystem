@@ -3,7 +3,6 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
-import { IconComponent } from '..';
 
 import { ItemComponent } from './item.component';
 import { LabelComponent } from '.';

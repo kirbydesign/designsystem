@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { IonFooter } from '@ionic/angular';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { MockComponents } from 'ng-mocks';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 

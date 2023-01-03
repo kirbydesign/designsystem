@@ -1,4 +1,3 @@
-import { IonCheckbox, IonItem } from '@ionic/angular';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponents } from 'ng-mocks';
 

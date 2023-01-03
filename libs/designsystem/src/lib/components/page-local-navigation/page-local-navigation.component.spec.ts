@@ -1,7 +1,5 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { MockComponents } from 'ng-mocks';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
-import { BadgeComponent, IconComponent } from '../index';
 import { LocalNavigationItem } from './page-local-navigation-item';
 import { PageLocalNavigationComponent } from './page-local-navigation.component';
 

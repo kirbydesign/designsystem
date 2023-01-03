@@ -5,9 +5,9 @@ import { AnnotationOptions } from 'chartjs-plugin-annotation';
 import { MockProvider } from 'ng-mocks';
 
 import { chartConfigHasType } from '@kirbydesign/designsystem/helpers';
+import { deepCopy } from '@kirbydesign/designsystem/helpers';
 import { ChartConfigService } from '../';
 import { ChartDataset, ChartHighlightedElements, ChartType } from '../../';
-import { deepCopy } from '@kirbydesign/designsystem/helpers';
 import { CHART_GLOBAL_DEFAULTS } from '../chart-config-service/configs/global-defaults.config';
 
 import { ChartJSService } from './chart-js.service';

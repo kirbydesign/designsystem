@@ -1,11 +1,9 @@
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   ElementRef,
   HostBinding,
   Input,
-  OnDestroy,
   Optional,
 } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
