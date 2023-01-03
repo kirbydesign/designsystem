@@ -43,7 +43,7 @@
     [hasCollapsibleTitle]="collapseTitle"
     [scrollDisabled]="scrollDisabled"
     [canDismiss]="canDismiss"
-    (willDismiss)="close()"
+    (willDismiss)="closeModal()"
   >
     <!-- HEADER SLOT -->
     <kirby-page-progress *ngIf="showPageProgress" header-start>

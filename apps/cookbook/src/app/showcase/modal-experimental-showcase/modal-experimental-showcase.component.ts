@@ -13,10 +13,10 @@ import {
   footerSlotExampleTemplate,
   fullscreenModalExampleTemplate,
   headerStartSlotExampleTemplate,
-} from '~/app/examples/modal-experimental-example/fullscreen/fullscreen-experimental-example.component';
-import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
-import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
-import { ApiDescriptionMethod } from '~/app/shared/api-description/api-description-methods/api-description-methods.component';
+} from '../../examples/modal-experimental-example/fullscreen/fullscreen-experimental-example.component';
+import { ApiDescriptionEvent } from '../../shared/api-description/api-description-events/api-description-events.component';
+import { ApiDescriptionProperty } from '../../shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionMethod } from '../../shared/api-description/api-description-methods/api-description-methods.component';
 
 @Component({
   selector: 'cookbook-modal-experimental-showcase',
@@ -61,8 +61,8 @@ export class ModalExperimentalShowcaseComponent {
     },
     {
       name: 'collapseTitle',
-      description: `(Optional) If \`true\` will cause the title to initially be rendered as part of the content; once scrolled out of view it collapses and appears in the header area. 
-      \n Useful for long titles that would otherwise truncate. `,
+      description: `(Optional) If \`true\` will cause the title to initially be rendered as part of the content; Once scrolled out of view it collapses and appears in the header area. 
+      \n Useful for long titles that would otherwise truncate.`,
       defaultValue: 'false',
       type: ['boolean'],
     },
@@ -87,12 +87,12 @@ export class ModalExperimentalShowcaseComponent {
     },
     {
       name: 'willDismiss',
-      description: 'Emitted before the modal has dismissed.',
+      description: 'Emitted before the modal is dismissed.',
       signature: 'Promise<void>',
     },
     {
       name: 'didDismiss',
-      description: 'Emitted after the modal has dismissed.',
+      description: 'Emitted after the modal is dismissed.',
       signature: 'Promise<void>',
     },
   ];
@@ -160,13 +160,13 @@ export class ModalExperimentalShowcaseComponent {
     },
     {
       name: 'backdropDismiss',
-      description: `(Optional) If true, the modal will be dismissed when the backdrop is clicked.`,
+      description: `(Optional) If true, the modal will be dismissed when the backdrop is clicked. It is still possible to use this property even if 'showBackdrop' is set to false, because the backdrop is still rendered, but have a transparent background.`,
       defaultValue: 'true',
       type: ['boolean'],
     },
     {
       name: 'showBackdrop',
-      description: `(Optional) If true, a backdrop will be displayed behind the modal. This property controls whether or not the backdrop darkens the screen when the modal is presented. It does not control whether or not the backdrop is active or present in the DOM..`,
+      description: `(Optional) If true, a backdrop will be displayed behind the modal. This property controls whether or not the backdrop darkens the screen when the modal is presented. It does not control whether or not the backdrop is active or present in the DOM.`,
       defaultValue: 'true',
       type: ['boolean'],
     },
@@ -181,7 +181,7 @@ export class ModalExperimentalShowcaseComponent {
     },
     {
       name: 'hasCollapsibleTitle',
-      description: `(Optional) If \`true\` will cause the title to initially be rendered as part of the content; once scrolled out of view it collapses and appears in the header area. 
+      description: `(Optional) If \`true\` will cause the title to initially be rendered as part of the content; Once scrolled out of view it collapses and appears in the header area. 
       \n Useful for long titles that would otherwise truncate. `,
       defaultValue: 'true',
       type: ['boolean'],
@@ -208,9 +208,9 @@ export class ModalExperimentalShowcaseComponent {
       name: 'closeModal',
       description: `Closes the top-most modal. It takes two optional arguments: data & role.
 
-        data is the data you want to get out of the modal, by subscribing to either "onWillDismiss" or "onDidDismiss" as described below. 
+        Data is the data you want to get out of the modal by subscribing to either "onWillDismiss" or "onDidDismiss" as described below. 
 
-        role is a string, that describes the role, which could be "cancel", "confirm", "submit" or anything else you think describes to closeModal action.
+        Role is a string that is being returned as the second key in the response object from "onWillDismiss" and "onDidDismiss". This can be used to check if role === 'cancel' or 'confirm' (or other) and execute logic based on the result.
         `,
       signature: 'void',
     },

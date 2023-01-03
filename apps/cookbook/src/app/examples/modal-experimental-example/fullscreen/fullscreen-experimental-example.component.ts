@@ -56,7 +56,7 @@ export class FullscreenModalExperimentalExampleComponent {
     this.open = true;
   }
 
-  close() {
+  closeModal() {
     this.open = false;
   }
 
