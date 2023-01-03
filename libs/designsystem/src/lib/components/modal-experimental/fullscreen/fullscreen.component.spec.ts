@@ -75,7 +75,7 @@ describe('FullscreenComponent', () => {
 
       spectator.triggerEventHandler(IonModal, 'willPresent', new CustomEvent('willPresent'));
 
-      expect(willPresentSpy).toHaveBeenCalled();
+      expect(willPresentSpy).toHaveBeenCalledTimes(1);
     });
 
     it('should emit the didPresent event, when ion-modal emit its own didPresent event', () => {
@@ -83,7 +83,7 @@ describe('FullscreenComponent', () => {
 
       spectator.triggerEventHandler(IonModal, 'didPresent', new CustomEvent('didPresent'));
 
-      expect(didPresentSpy).toHaveBeenCalled();
+      expect(didPresentSpy).toHaveBeenCalledTimes(1);
     });
 
     it('should emit the willDismiss event, when ion-modal emit its own willDismiss event', () => {
@@ -91,7 +91,7 @@ describe('FullscreenComponent', () => {
 
       spectator.triggerEventHandler(IonModal, 'willDismiss', new CustomEvent('willDismiss'));
 
-      expect(willDismissSpy).toHaveBeenCalled();
+      expect(willDismissSpy).toHaveBeenCalledTimes(1);
     });
 
     it('should emit the didDismiss event, when ion-modal emit its own didDismiss event', () => {
@@ -99,7 +99,7 @@ describe('FullscreenComponent', () => {
 
       spectator.triggerEventHandler(IonModal, 'didDismiss', new CustomEvent('didDismiss'));
 
-      expect(didDismissSpy).toHaveBeenCalled();
+      expect(didDismissSpy).toHaveBeenCalledTimes(1);
     });
   });
 });

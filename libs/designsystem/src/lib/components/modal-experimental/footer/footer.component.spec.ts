@@ -9,7 +9,6 @@ import { ThemeColorDirective } from '../../../directives';
 import { TestHelper } from '../../../testing/test-helper';
 import { ModalFooterExperimentalComponent } from './footer.component';
 
-const getColor = DesignTokenHelper.getColor;
 const size = DesignTokenHelper.size;
 
 const KEYBOARD_HEIGHT = 216; // sample value, depends upon device
@@ -40,22 +39,24 @@ describe('ModalFooterComponent', () => {
     declarations: [MockComponents(IonFooter), ThemeColorDirective],
   });
 
-  beforeEach(() => {});
+  describe('by default', () => {
+    beforeEach(() => {
+      spectator = createHost(`<kirby-modal-footer-experimental></kirby-modal-footer-experimental>`);
+    });
 
-  it('should create', () => {
-    spectator = createHost(`<kirby-modal-footer-experimental></kirby-modal-footer-experimental>`);
-    expect(spectator.component).toBeTruthy();
-  });
+    it('should create', () => {
+      expect(spectator.component).toBeTruthy();
+    });
 
-  it('should set correct padding', () => {
-    spectator = createHost(`<kirby-modal-footer-experimental></kirby-modal-footer-experimental>`);
-    expect(spectator.component).toBeTruthy();
-    ionFooterElement = spectator.query('ion-footer');
-    expect(ionFooterElement).toHaveComputedStyle({
-      'padding-left': BASE_PADDING_HORIZONTAL_PX,
-      'padding-right': BASE_PADDING_HORIZONTAL_PX,
-      'padding-top': BASE_PADDING_VERTICAL_PX,
-      'padding-bottom': BASE_PADDING_VERTICAL_PX,
+    it('should set correct padding on the footer', () => {
+      ionFooterElement = spectator.query('ion-footer');
+
+      expect(ionFooterElement).toHaveComputedStyle({
+        'padding-left': BASE_PADDING_HORIZONTAL_PX,
+        'padding-right': BASE_PADDING_HORIZONTAL_PX,
+        'padding-top': BASE_PADDING_VERTICAL_PX,
+        'padding-bottom': BASE_PADDING_VERTICAL_PX,
+      });
     });
   });
 
@@ -72,6 +73,7 @@ describe('ModalFooterComponent', () => {
 
     it('when --kirby-safe-area-bottom is set', () => {
       setSafeAreaBottom();
+
       expect(ionFooterElement).toHaveComputedStyle({ 'padding-bottom': BASE_PADDING_VERTICAL_PX });
     });
 
@@ -92,7 +94,9 @@ describe('ModalFooterComponent', () => {
 
       it('when --kirby-safe-area-bottom is set', () => {
         setSafeAreaBottom();
+
         const expected = BASE_PADDING_VERTICAL + SAFE_AREA_BOTTOM + 'px';
+
         expect(ionFooterElement).toHaveComputedStyle({ 'padding-bottom': expected });
       });
     });
@@ -114,6 +118,7 @@ describe('ModalFooterComponent', () => {
 
       it('should follow the keyboard up', () => {
         keyboardSlideIn();
+
         expect(ionFooterElement).toHaveComputedStyle({
           transform: TRANSFORM_PUSHED_BY_KEYBOARD,
         });
@@ -121,16 +126,17 @@ describe('ModalFooterComponent', () => {
 
       it('should follow the keyboard down', () => {
         keyboardSlideOut();
+
         expect(ionFooterElement).toHaveComputedStyle({
           transform: 'none',
         });
       });
     });
 
-    describe('when snapToKeyboard is false', () => {
+    describe('when snapToKeyboard is false (default value)', () => {
       it('should not follow the keyboard up', () => {
-        spectator.setHostInput('snapToKeyboard', false);
         keyboardSlideIn();
+
         expect(ionFooterElement).toHaveComputedStyle({
           transform: 'none',
         });
@@ -139,19 +145,19 @@ describe('ModalFooterComponent', () => {
   });
 
   describe('when inline type is set', () => {
-    it('should have a transparent background color', () => {
+    beforeEach(() => {
       spectator = createHost(
         `<kirby-modal-footer-experimental type="inline"></kirby-modal-footer-experimental>`
       );
+    });
+
+    it('should have a transparent background color', () => {
       expect(spectator.query('ion-footer')).toHaveComputedStyle({
         'background-color': 'transparent',
       });
     });
 
     it('should not show a box shadow', () => {
-      spectator = createHost(
-        `<kirby-modal-footer-experimental type="inline"></kirby-modal-footer-experimental>`
-      );
       expect(spectator.query('ion-footer')).toHaveComputedStyle({
         'box-shadow': 'none',
       });

@@ -10,9 +10,7 @@ describe('WrapperComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ModalWrapperExperimentalComponent],
     }).compileComponents();
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(ModalWrapperExperimentalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
