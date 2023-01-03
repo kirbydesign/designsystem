@@ -68,9 +68,12 @@ describe('PageComponent', () => {
 
   const createHost = createHostFactory({
     component: PageComponent,
-    imports: [TestHelper.ionicModuleForTest, RouterTestingModule.withRoutes(routes)],
-    declarations: [
+    imports: [
+      TestHelper.ionicModuleForTest,
+      RouterTestingModule.withRoutes(routes),
       ButtonComponent,
+    ],
+    declarations: [
       FitHeadingDirective,
       PageContentComponent,
       PageActionsComponent,

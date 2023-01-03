@@ -190,7 +190,6 @@ describe('SegmentedControl with Badge', () => {
 
   const createHost = createHostFactory({
     component: SegmentedControlComponent,
-    declarations: [MockComponents(BadgeComponent, IconComponent)],
     imports: [TestHelper.ionicModuleForTest],
   });
 

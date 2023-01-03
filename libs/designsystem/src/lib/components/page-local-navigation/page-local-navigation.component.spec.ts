@@ -40,7 +40,6 @@ describe('PageLocalNavigationComponent', () => {
 
   const createHost = createHostFactory({
     component: PageLocalNavigationComponent,
-    declarations: [MockComponents(BadgeComponent, IconComponent)],
     imports: [TestHelper.ionicModuleForTest],
   });
 

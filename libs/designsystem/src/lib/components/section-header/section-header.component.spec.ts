@@ -1,5 +1,4 @@
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
-import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { SectionHeaderComponent } from './section-header.component';
@@ -11,7 +10,6 @@ describe('SectionHeaderComponent', async () => {
 
   const createHost = createHostFactory({
     component: SectionHeaderComponent,
-    // declarations: [SectionHeaderComponent, MockComponent(IonItemDivider)],
   });
 
   beforeEach(async () => {
@@ -21,9 +19,6 @@ describe('SectionHeaderComponent', async () => {
       <p detail>Section Header</p>
     </kirby-section-header>`);
   });
-  const ionContent = spectator.query('ion-slides');
-
-  await TestHelper.ionComponentOnReady(ionContent);
 
   it('should create', () => {
     expect(spectator.component).toBeTruthy();

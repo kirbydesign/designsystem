@@ -14,12 +14,8 @@ describe('SectionHeaderComponent with Kirby Label', () => {
 
   const createHost = createHostFactory({
     component: SectionHeaderComponent,
-    declarations: [
-      SectionHeaderComponent,
-      LabelComponent,
-      MockComponent(IonItemDivider),
-      MockComponent(IonLabel),
-    ],
+    declarations: [LabelComponent],
+    imports: [SectionHeaderComponent],
   });
 
   beforeEach(() => {

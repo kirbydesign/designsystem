@@ -20,9 +20,8 @@ import {
 describe('ModalWrapperComponent + ModalFooterComponent', () => {
   const createComponent = createComponentFactory({
     component: ModalWrapperComponent,
-    imports: [RouterTestingModule],
+    imports: [RouterTestingModule, ModalFooterComponent],
     entryComponents: [StaticFooterEmbeddedComponent, DynamicFooterEmbeddedComponent],
-    declarations: [MockComponents(IonHeader, IonContent), ModalFooterComponent],
   });
 
   let modalWrapperTestBuilder: ModalWrapperTestBuilder;
@@ -225,7 +224,7 @@ describe('ModalWrapperComponent + PageTitleComponent', () => {
     component: ModalWrapperComponent,
     imports: [RouterTestingModule],
     entryComponents: [TitleEmbeddedComponent],
-    declarations: [MockComponents(IonHeader, IonTitle, IonContent), PageTitleComponent],
+    declarations: [PageTitleComponent],
   });
 
   let modalWrapperTestBuilder: ModalWrapperTestBuilder;
@@ -283,7 +282,7 @@ describe('ModalWrapperComponent + PageProgressComponent', () => {
     component: ModalWrapperComponent,
     imports: [RouterTestingModule],
     entryComponents: [StaticPageProgressEmbeddedComponent, DynamicPageProgressEmbeddedComponent],
-    declarations: [MockComponents(IonHeader, IonToolbar, IonContent), PageProgressComponent],
+    declarations: [PageProgressComponent],
   });
 
   let modalWrapperTestBuilder: ModalWrapperTestBuilder;

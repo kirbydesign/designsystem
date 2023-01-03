@@ -14,10 +14,8 @@ import { EmptyStateComponent } from '../empty-state/empty-state.component';
 import { IconComponent } from '../icon/icon.component';
 import { ItemComponent } from '../item/item.component';
 import {
-  PageActionsComponent,
   PageActionsDirective,
   PageComponent,
-  PageContentComponent,
   PageTitleDirective,
   PageToolbarTitleDirective,
 } from '../page/page.component';
@@ -207,8 +205,8 @@ describe('ButtonComponent in kirby empty state', () => {
   let actionButtonInEmptyState: HTMLButtonElement;
   const createHost = createHostFactory({
     component: EmptyStateComponent,
-    imports: [TestHelper.ionicModuleForTest, RouterTestingModule],
-    declarations: [ButtonComponent, IconComponent],
+    imports: [TestHelper.ionicModuleForTest, RouterTestingModule, ButtonComponent],
+    declarations: [IconComponent],
   });
 
   beforeEach(() => {
