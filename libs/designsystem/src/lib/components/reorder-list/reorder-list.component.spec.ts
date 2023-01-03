@@ -1,10 +1,4 @@
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
-import { MockComponent } from 'ng-mocks';
-
-import { TestHelper } from '@kirbydesign/designsystem/testing';
-import { CardComponent } from '../../../../card';
-import { IconModule } from '../icon/icon.module';
-import { ItemComponent } from '../item';
 
 import { ReorderEvent } from './reorder-event';
 import { ReorderListComponent } from './reorder-list.component';
@@ -26,9 +20,8 @@ describe('ReorderListComponent', () => {
   }
 
   const createHost = createComponentFactory({
-    imports: [TestHelper.ionicModuleForTest, IconModule],
     component: ReorderListComponent,
-    declarations: [MockComponent(CardComponent), MockComponent(ItemComponent)],
+    // declarations: [MockComponent(CardComponent), MockComponent(ItemComponent)],
   });
 
   beforeEach(() => {

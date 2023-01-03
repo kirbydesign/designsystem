@@ -6,7 +6,7 @@ import { SectionHeaderComponent } from './section-header.component';
 
 const { fontSize, fontWeight, lineHeight } = DesignTokenHelper;
 
-fdescribe('SectionHeaderComponent', async () => {
+describe('SectionHeaderComponent', async () => {
   let spectator: SpectatorHost<SectionHeaderComponent>;
 
   const createHost = createHostFactory({
@@ -20,10 +20,6 @@ fdescribe('SectionHeaderComponent', async () => {
       <p label>Section Header</p>
       <p detail>Section Header</p>
     </kirby-section-header>`);
-
-    // const ionContent = spectator.query('ion-slide');
-
-    // await TestHelper.ionComponentOnReady(ionContent);
   });
   const ionContent = spectator.query('ion-slides');
 

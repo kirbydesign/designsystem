@@ -32,16 +32,8 @@ describe('ButtonComponent in Kirby Page', () => {
   let spectator: SpectatorHost<PageComponent>;
   const createHost = createHostFactory({
     component: PageComponent,
-    imports: [TestHelper.ionicModuleForTest, RouterTestingModule],
-    declarations: [
-      ButtonComponent,
-      PageContentComponent,
-      PageActionsComponent,
-      PageActionsDirective,
-      PageTitleDirective,
-      PageToolbarTitleDirective,
-      FitHeadingDirective,
-    ],
+    imports: [TestHelper.ionicModuleForTest, RouterTestingModule, ButtonComponent],
+    declarations: [PageActionsDirective, PageTitleDirective, FitHeadingDirective],
     providers: [
       {
         provide: WindowRef,

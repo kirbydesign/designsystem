@@ -17,15 +17,6 @@ describe('CalendarComponent', () => {
 
   const createHost = createHostFactory({
     component: CalendarComponent,
-    declarations: [
-      CalendarComponent,
-      MockComponent(IconComponent),
-      DropdownComponent,
-      RadioComponent,
-      CardComponent,
-      ItemComponent,
-      ButtonComponent,
-    ],
     providers: [
       {
         provide: LOCALE_ID,
@@ -37,6 +28,7 @@ describe('CalendarComponent', () => {
         useValue: <WindowRef>{ nativeWindow: window },
       },
     ],
+    imports: [CalendarComponent],
   });
 
   type calendarProps = keyof CalendarComponent;

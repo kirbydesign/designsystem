@@ -5,9 +5,9 @@ import { MockComponents, MockDirective } from 'ng-mocks';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
+import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { ThemeColorDirective } from '../../directives';
 import { BadgeComponent } from '../../index';
-import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { IconComponent } from '../icon';
 
 import { SegmentItem } from './segment-item';
@@ -41,7 +41,7 @@ describe('SegmentedControlComponent', () => {
 
   const createHost = createHostFactory({
     component: SegmentedControlComponent,
-    declarations: [MockComponents(BadgeComponent), MockDirective(ThemeColorDirective)],
+    declarations: [MockDirective(ThemeColorDirective)],
     imports: [TestHelper.ionicModuleForTest],
   });
 

@@ -6,7 +6,7 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { ButtonComponent } from '../button/button.component';
 import { CardComponent, CardHeaderComponent } from '../../../../card';
-import { IconComponent } from '../icon';
+import { IconComponent, IconModule } from '../icon';
 import { ActionSheetComponent, ActionSheetItem } from '../modal';
 
 import { FabSheetComponent } from './fab-sheet.component';
@@ -18,18 +18,12 @@ describe('FabSheetComponent', () => {
 
   const createHost = createHostFactory({
     component: FabSheetComponent,
-    imports: [TestHelper.ionicModuleForTest, RouterTestingModule],
-    declarations: [
-      IonFab,
-      IonFabButton,
-      IonFabList,
-      IonBackdrop,
-      IconComponent,
-      IonIcon,
-      ActionSheetComponent,
-      CardComponent,
-      CardHeaderComponent,
+    imports: [
+      TestHelper.ionicModuleForTest,
+      RouterTestingModule,
       ButtonComponent,
+      IconModule,
+      ActionSheetComponent,
     ],
   });
 

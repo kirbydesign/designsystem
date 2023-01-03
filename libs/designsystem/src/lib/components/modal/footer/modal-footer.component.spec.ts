@@ -36,7 +36,7 @@ describe('ModalFooterComponent', () => {
   const createHost = createHostFactory({
     component: ModalFooterComponent,
     host: TestHostComponent,
-    declarations: [MockComponents(IonFooter), ThemeColorDirective],
+    imports: [ThemeColorDirective],
   });
 
   beforeEach(() => {});

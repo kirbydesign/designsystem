@@ -6,8 +6,8 @@ import { MockComponent } from 'ng-mocks';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { WindowRef } from '@kirbydesign/designsystem/types';
+import { CardComponent, CardModule } from '@kirbydesign/designsystem/card';
 import { ButtonComponent, CalendarComponent, IconComponent } from '..';
-import { CardComponent } from '../../../../card';
 import { DropdownComponent } from '../dropdown/dropdown.component';
 import { ItemComponent } from '../item';
 import { RadioComponent } from '../radio';
@@ -23,15 +23,6 @@ describe('CalendarComponent', () => {
 
   const createHost = createHostFactory({
     component: CalendarComponent,
-    declarations: [
-      CalendarComponent,
-      MockComponent(IconComponent),
-      DropdownComponent,
-      RadioComponent,
-      CardComponent,
-      ItemComponent,
-      ButtonComponent,
-    ],
     providers: [
       {
         provide: LOCALE_ID,
@@ -43,7 +34,7 @@ describe('CalendarComponent', () => {
         useValue: <WindowRef>{ nativeWindow: window },
       },
     ],
-    imports: [TestHelper.ionicModuleForTest],
+    imports: [TestHelper.ionicModuleForTest, CalendarComponent],
   });
 
   beforeEach(() => {

@@ -8,7 +8,6 @@ import {
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 
-import { ProgressCircleRingComponent } from './progress-circle-ring.component';
 import { ProgressCircleComponent } from './progress-circle.component';
 
 describe('ProgressCircleComponent', () => {
