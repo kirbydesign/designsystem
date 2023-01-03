@@ -32,32 +32,4 @@
 
 <p><code>hideLoadingOverlay</code> is required to dismiss the overlay. It takes no arguments.</p>
 
-<cookbook-code-viewer [ts]="loadingOverlayServiceExample"></cookbook-code-viewer>
-
-<button
-  kirby-button
-  attentionLevel="2"
-  size="lg"
-  expand="block"
-  (click)="showFullscreenLoadingOverlay(true)"
->
-  Show full page loading overlay
-</button>
-<button
-  kirby-button
-  attentionLevel="2"
-  size="lg"
-  expand="block"
-  (click)="showFullscreenLoadingOverlay(false, true)"
->
-  Show full page loading overlay that hides content
-</button>
-<button
-  kirby-button
-  attentionLevel="2"
-  size="lg"
-  expand="block"
-  (click)="showFullscreenLoadingOverlay(false)"
->
-  Show full page loading overlay without backdrop
-</button>
+<cookbook-loading-overlay-service-example></cookbook-loading-overlay-service-example>
