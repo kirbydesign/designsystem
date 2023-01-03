@@ -14,10 +14,6 @@ import { Overlay } from './modal.interfaces';
 
 @Injectable()
 export class ModalHelper {
-  // TODO: Make presentingElement an instance field when
-  // forRoot()/singleton services has been solved:
-  private static presentingElement: HTMLElement = undefined;
-
   constructor(
     private ionicModalController: ModalController,
     private modalAnimationBuilder: ModalAnimationBuilderService,
@@ -37,7 +33,6 @@ export class ModalHelper {
     if (this.isModalOpening) return;
 
     config.flavor = config.flavor || 'modal';
-    const modalPresentingElement = await this.getPresentingElement(config.flavor);
 
     let currentBackdrop: HTMLIonBackdropElement;
     const topMostModal = await this.ionicModalController.getTop();
@@ -86,8 +81,7 @@ export class ModalHelper {
       backdropDismiss: config.flavor === 'compact' || config.interactWithBackground ? false : true,
       showBackdrop: !config.interactWithBackground,
       componentProps: { config: config },
-      swipeToClose: config.flavor != 'compact',
-      presentingElement: modalPresentingElement,
+      swipeToClose: config.flavor === 'drawer',
       keyboardClose: false,
       canDismiss,
       enterAnimation,
@@ -111,30 +105,16 @@ export class ModalHelper {
     };
   }
 
-  public registerPresentingElement(element: HTMLElement) {
-    ModalHelper.presentingElement = element;
+  public registerPresentingElement() {
+    console.log(
+      'registerPresentingElement has been deprecated. It is no longer needed to register a presenting element.'
+    );
   }
 
   public async showAlert(config: AlertConfig): Promise<boolean> {
     const alert = await this.alertHelper.showAlert(config);
     const result = await alert.onWillDismiss;
     return result.data;
-  }
-
-  private async getPresentingElement(flavor?: ModalFlavor) {
-    let modalPresentingElement: HTMLElement = undefined;
-    if (!flavor || flavor === 'modal') {
-      const topMostModal = await this.ionicModalController.getTop();
-      if (!topMostModal) {
-        modalPresentingElement = ModalHelper.presentingElement;
-      } else if (
-        !topMostModal.classList.contains('kirby-drawer') &&
-        !topMostModal.classList.contains('kirby-modal-compact')
-      ) {
-        modalPresentingElement = topMostModal;
-      }
-    }
-    return modalPresentingElement;
   }
 
   public async scrollToTop(

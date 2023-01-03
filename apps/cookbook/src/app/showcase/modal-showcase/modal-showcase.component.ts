@@ -1,11 +1,10 @@
-import { AfterViewInit, Component, ElementRef } from '@angular/core';
+import { Component } from '@angular/core';
+import { ModalController } from '@kirbydesign/designsystem';
 import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
 import {
   ApiDescriptionProperty,
   ApiDescriptionPropertyColumns,
 } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
-
-import { ModalController } from '@kirbydesign/designsystem';
 
 @Component({
   selector: 'cookbook-modal-showcase',
@@ -13,17 +12,8 @@ import { ModalController } from '@kirbydesign/designsystem';
   styleUrls: ['./modal-showcase.component.scss'],
   preserveWhitespaces: true,
 })
-export class ModalShowcaseComponent implements AfterViewInit {
-  constructor(
-    private elementRef: ElementRef<HTMLElement>,
-    private modalController: ModalController
-  ) {}
-
-  ngAfterViewInit(): void {
-    this.modalController.registerPresentingElement(
-      this.elementRef.nativeElement.closest('cookbook-home')
-    );
-  }
+export class ModalShowcaseComponent {
+  constructor(private modalController: ModalController) {}
 
   scrollTo(target: Element) {
     target.scrollIntoView({ behavior: 'smooth' });

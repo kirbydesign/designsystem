@@ -1,8 +1,8 @@
 <ion-item
   lines="none"
   [attr.disabled]="disabled"
-  [attr.button]="_selectable ? true : null"
-  [attr.tabindex]="_selectable ? null : 0"
+  [attr.button]="selectable ? true : null"
+  [attr.tabindex]="selectable ? null : 0"
   detail="false"
   (mousedown)="onMouseDown($event)"
 >

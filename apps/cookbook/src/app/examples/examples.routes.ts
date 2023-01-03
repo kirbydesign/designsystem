@@ -29,9 +29,9 @@ import { ItemGroupExampleComponent } from './item-group-example/item-group-examp
 import { ItemSlidingExampleComponent } from './item-sliding-example/item-sliding-example.component';
 import { LinkExampleComponent } from './link-example/link-example.component';
 import { ListColoredItemsExampleComponent } from './list-example/examples/colored-items';
-import { ListWithDividersExampleComponent } from './list-example/examples/dividers';
-import { ListWithHeaderAndFooterExampleComponent } from './list-example/examples/header-and-footer';
 import { ListItemsExampleComponent } from './list-example/examples/items';
+import { ListWithHeaderAndFooterExampleComponent } from './list-example/examples/header-and-footer';
+import { ListItemsNoDividersExampleComponent } from './list-example/examples/items-no-dividers';
 import { ListWithSectionsExampleComponent } from './list-example/examples/sections';
 import { ListWithSectionsAndColoredItemsExampleComponent } from './list-example/examples/sections-and-colored-items';
 import { ListWithSectionsAndStandAloneExampleComponent } from './list-example/examples/sections-with-standalone';
@@ -311,8 +311,8 @@ export const routes: Routes = [
         redirectTo: 'with-items',
       },
       {
-        path: 'with-dividers',
-        component: ListWithDividersExampleComponent,
+        path: 'with-items',
+        component: ListItemsExampleComponent,
       },
       {
         path: 'with-selectable-items',
@@ -335,8 +335,8 @@ export const routes: Routes = [
         component: ListWithSectionsExampleComponent,
       },
       {
-        path: 'with-items',
-        component: ListItemsExampleComponent,
+        path: 'with-items-no-dividers',
+        component: ListItemsNoDividersExampleComponent,
       },
       {
         path: 'with-stand-alone',
