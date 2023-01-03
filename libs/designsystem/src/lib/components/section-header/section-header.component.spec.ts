@@ -5,14 +5,14 @@ import { SectionHeaderComponent } from './section-header.component';
 
 const { fontSize, fontWeight, lineHeight } = DesignTokenHelper;
 
-describe('SectionHeaderComponent', async () => {
+describe('SectionHeaderComponent', () => {
   let spectator: SpectatorHost<SectionHeaderComponent>;
 
   const createHost = createHostFactory({
     component: SectionHeaderComponent,
   });
 
-  beforeEach(async () => {
+  beforeEach(() => {
     spectator = createHost<SectionHeaderComponent>(`<kirby-section-header>
       <p heading>Section Header</p>
       <p label>Section Header</p>

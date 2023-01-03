@@ -21,7 +21,6 @@ describe('ReorderListComponent', () => {
 
   const createHost = createComponentFactory({
     component: ReorderListComponent,
-    // declarations: [MockComponent(CardComponent), MockComponent(ItemComponent)],
   });
 
   beforeEach(() => {

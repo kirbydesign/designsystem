@@ -4,9 +4,6 @@ import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { LineClampHelper } from '@kirbydesign/designsystem/helpers';
 import { ResizeObserverService } from '@kirbydesign/designsystem/shared';
 
-// import { ResizeObserverService } from '../../components/shared/resize-observer/resize-observer.service';
-// import { LineClampHelper } from '../../helpers/line-clamp-helper';
-
 const fontSize = DesignTokenHelper.fontSize;
 const lineHeight = DesignTokenHelper.lineHeight;
 

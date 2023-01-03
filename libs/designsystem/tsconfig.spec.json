@@ -12,9 +12,7 @@
       "@kirbydesign/designsystem/shared": ["shared/index.ts"],
       "@kirbydesign/designsystem/card": ["card/index.ts"],
       "@kirbydesign/designsystem/types": ["types/index.ts"],
-      "@kirbydesign/designsystem/testing":["testing/index.ts"],
-      // "@kirbydesign/designsystem/testing/*":["testing/*"],
-
+      "@kirbydesign/designsystem/testing":["testing/index.ts"]
     }
   },
   "files": ["src/test.ts"],

@@ -13,7 +13,6 @@
       "@kirbydesign/designsystem/helpers": ["libs/designsystem/helpers/index.ts"],
       "@kirbydesign/designsystem/shared": ["libs/designsystem/shared/index.ts"],
       "@kirbydesign/designsystem/types": ["libs/designsystem/types/index.ts"]
-
     },
     "target": "es2020"
   },

@@ -10,8 +10,6 @@ describe('ItemSlidingComponent', () => {
   let spectator: SpectatorHost<ItemSlidingComponent>;
 
   const createHost = createHostFactory({
-    // imports: [MockModule(IonicModule)],
-    // declarations: [MockComponent(ItemComponent)],
     component: ItemSlidingComponent,
   });
 

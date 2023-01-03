@@ -11,8 +11,7 @@ const config = {
   [data]="_datasets" 
   [labels]="['Monday', 'Tuesday', ['Wednes-','day'], 'Thursday', 'Friday']">
 </kirby-chart>`,
-  codeSnippet: `import { ColorHelper } from '@kirbydesign/designsystem/helpers'
-;
+  codeSnippet: `import { ColorHelper } from '@kirbydesign/designsystem/helpers';
 
 const { getThemeColorHexString } = ColorHelper;
 

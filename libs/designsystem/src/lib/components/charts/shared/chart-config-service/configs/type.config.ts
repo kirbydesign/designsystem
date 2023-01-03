@@ -4,7 +4,6 @@ import { Context } from 'chartjs-plugin-datalabels';
 import { Align } from 'chartjs-plugin-datalabels/types/options';
 
 import { ChartTypesConfig } from '../../';
-// import { ColorHelper, DesignTokenHelper } from '../../../../../helpers';
 
 const { fontSize } = DesignTokenHelper;
 const { getThemeColorHexString, getThemeColorRgbString } = ColorHelper;

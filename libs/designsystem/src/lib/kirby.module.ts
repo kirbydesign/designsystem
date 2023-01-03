@@ -153,8 +153,6 @@ const providers = [
   customElementsInitializer(),
 ];
 
-const entryComponents = [ModalCompactWrapperComponent, ActionSheetComponent, AlertComponent];
-
 const ConfigToken = new InjectionToken<any>('USERCONFIG');
 export interface KirbyConfig {
   moduleRootRoutePath?: string;

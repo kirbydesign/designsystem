@@ -5,6 +5,7 @@ import { RadioGroupComponent } from './radio-group/radio-group.component';
 import { RadioComponent } from './radio.component';
 
 const declarations = [RadioComponent, RadioGroupComponent];
+
 @NgModule({
   imports: [CommonModule, IonicModule],
   declarations: [...declarations],

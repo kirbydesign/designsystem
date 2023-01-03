@@ -6,8 +6,7 @@ const config = {
   selector: 'cookbook-chart-example-column-stacked',
   template: `<kirby-chart type="column" [data]="_datasets" [labels]="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']" [customOptions]="_customOptions"></kirby-chart>`,
   codeSnippet: `
-  import { ColorHelper } from '@kirbydesign/designsystem/helpers'
-;
+  import { ColorHelper } from '@kirbydesign/designsystem/helpers';
 
   const { getThemeColorHexString } = ColorHelper; 
 
