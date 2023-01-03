@@ -1,20 +1,9 @@
 import { Component } from '@angular/core';
 import { fakeAsync } from '@angular/core/testing';
-import { IonSlide, IonSlides } from '@ionic/angular';
+import { IonSlide } from '@ionic/angular';
 import { byTestId, createHostFactory, HostComponent, SpectatorHost } from '@ngneat/spectator';
 
 import { SlideDirective, SlidesComponent } from './slides.component';
-
-class IonSlidesFake extends IonSlides {
-  getSwiper = () =>
-    Promise.resolve({
-      on: () => {},
-      params: {
-        slidesPerView: 1,
-      },
-    });
-  slideTo = (_index: number, _speed?: number, _runCallbacks?: boolean) => Promise.resolve();
-}
 
 describe('SlidesComponent', () => {
   let spectator: SpectatorHost<SlidesComponent, HostComponent>;
@@ -38,7 +27,7 @@ describe('SlidesComponent', () => {
   const createHost = createHostFactory({
     component: SlidesComponent,
     host: KirbySlidesHostComponent,
-    declarations: [IonSlidesFake, IonSlide, SlideDirective],
+    declarations: [IonSlide, SlideDirective],
   });
 
   beforeEach(() => {
@@ -63,14 +52,11 @@ describe('SlidesComponent', () => {
     expect(spectator.component.slidesOptions).toEqual(new KirbySlidesHostComponent().slidesOptions);
   });
 
-  it('should call slideTo with 4', () => {
-    // Arrange
-    spyOn(spectator.component.ionSlides, 'slideTo');
+  it('should call slideTo with 2', () => {
+    const slideToSpy = spyOn(spectator.component, 'slideTo');
 
-    // Act
     spectator.component.slideTo(2);
 
-    // Assert
-    expect(spectator.component.ionSlides.slideTo).toHaveBeenCalledWith(2);
+    expect(slideToSpy).toHaveBeenCalledWith(2);
   });
 });
