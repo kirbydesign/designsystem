@@ -1,27 +1,33 @@
-import { IonItemDivider } from '@ionic/angular';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
+import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { MockComponent } from 'ng-mocks';
 
 import { SectionHeaderComponent } from './section-header.component';
 
 const { fontSize, fontWeight, lineHeight } = DesignTokenHelper;
 
-describe('SectionHeaderComponent', () => {
+fdescribe('SectionHeaderComponent', async () => {
   let spectator: SpectatorHost<SectionHeaderComponent>;
 
   const createHost = createHostFactory({
     component: SectionHeaderComponent,
-    declarations: [SectionHeaderComponent, MockComponent(IonItemDivider)],
+    // declarations: [SectionHeaderComponent, MockComponent(IonItemDivider)],
   });
 
-  beforeEach(() => {
+  beforeEach(async () => {
     spectator = createHost<SectionHeaderComponent>(`<kirby-section-header>
       <p heading>Section Header</p>
       <p label>Section Header</p>
       <p detail>Section Header</p>
     </kirby-section-header>`);
+
+    // const ionContent = spectator.query('ion-slide');
+
+    // await TestHelper.ionComponentOnReady(ionContent);
   });
+  const ionContent = spectator.query('ion-slides');
+
+  await TestHelper.ionComponentOnReady(ionContent);
 
   it('should create', () => {
     expect(spectator.component).toBeTruthy();

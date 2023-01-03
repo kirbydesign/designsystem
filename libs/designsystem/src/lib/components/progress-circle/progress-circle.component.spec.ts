@@ -19,7 +19,6 @@ describe('ProgressCircleComponent', () => {
 
     const createHost = createComponentFactory({
       component: ProgressCircleComponent,
-      declarations: [ProgressCircleRingComponent],
     });
 
     beforeEach(() => {
@@ -313,7 +312,6 @@ describe('ProgressCircleComponent', () => {
 
     const createHost = createHostFactory({
       component: ProgressCircleComponent,
-      declarations: [ProgressCircleRingComponent],
     });
 
     beforeEach(() => {

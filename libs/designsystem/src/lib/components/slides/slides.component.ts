@@ -11,6 +11,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { IonicModule, IonSlides } from '@ionic/angular';
+import { Subject } from 'rxjs';
 
 @Directive({
   selector: '[kirbySlide]',
@@ -26,7 +27,7 @@ export class SlideDirective {}
       [options]="slidesOptions"
       #ionslides
       (ionSlideDidChange)="onSlideChanged()"
-      (ionSlidesDidLoad)="slideTo(0)"
+      ionSlidesDidLoad="slideTo(0)"
     >
       <ion-slide *ngFor="let slide of slides; let i = index">
         <ng-container

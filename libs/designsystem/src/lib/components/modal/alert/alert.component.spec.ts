@@ -14,7 +14,6 @@ describe('AlertComponent', () => {
 
   const createHost = createHostFactory({
     component: AlertComponent,
-    declarations: [ButtonComponent, EmptyStateComponent],
   });
 
   beforeEach(() => {

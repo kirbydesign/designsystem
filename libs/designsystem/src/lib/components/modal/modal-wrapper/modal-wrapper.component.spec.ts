@@ -26,7 +26,6 @@ import {
 describe('ModalWrapperComponent', () => {
   const createComponent = createComponentFactory({
     component: ModalWrapperComponent,
-    imports: [RouterTestingModule],
     entryComponents: [
       TitleEmbeddedComponent,
       StaticFooterEmbeddedComponent,
@@ -41,20 +40,7 @@ describe('ModalWrapperComponent', () => {
         useValue: <WindowRef>{ nativeWindow: window },
       },
     ],
-    declarations: [
-      MockComponents(
-        IonHeader,
-        IonToolbar,
-        IonTitle,
-        IonContent,
-        IconComponent,
-        ButtonComponent,
-        IonButtons,
-        ModalFooterComponent,
-        PageTitleComponent,
-        PageProgressComponent
-      ),
-    ],
+    declarations: [MockComponents(ButtonComponent)],
   });
 
   let modalWrapperTestBuilder: ModalWrapperTestBuilder;

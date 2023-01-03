@@ -15,8 +15,6 @@ describe('AccordionItemComponent', () => {
 
   const createHost = createHostFactory({
     component: AccordionItemComponent,
-    declarations: [IconComponent],
-    imports: [TestHelper.ionicModuleForTest],
   });
 
   beforeEach(() => {
