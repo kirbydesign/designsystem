@@ -263,7 +263,7 @@ ion-content {
     margin: 0 auto;
   }
 
-  &::before {
+  &.content-pinned::before {
     // Background
     content: '';
     position: absolute;
