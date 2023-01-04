@@ -75,6 +75,7 @@ import { customElementsInitializer } from './custom-elements-initializer';
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
 import { ModalRouterLinkDirective } from './directives/modal-router-link/modal-router-link.directive';
 import { KirbyBadgeModule } from './components/kirby-badge.module';
+import { TabNavigationModule } from './components/tab-navigation/tab-navigation.module';
 
 const exportedDeclarations = [ModalRouterLinkDirective];
 
@@ -119,6 +120,7 @@ const exportedModules = [
   KirbyAppModule,
   RouterOutletModule,
   PageModule,
+  TabNavigationModule,
   TabsModule,
   IconModule,
   ItemModule,
