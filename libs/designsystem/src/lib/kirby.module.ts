@@ -4,7 +4,11 @@ import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { CardModule } from '@kirbydesign/designsystem/card';
-import { ResizeObserverFactory, ResizeObserverService } from '@kirbydesign/designsystem/shared';
+import {
+  ComponentLoaderDirective,
+  ResizeObserverFactory,
+  ResizeObserverService,
+} from '@kirbydesign/designsystem/shared';
 import { AccordionItemComponent } from './components/accordion/accordion-item.component';
 import { AccordionDirective } from './components/accordion/accordion.directive';
 import { AppModule } from './components/app/app.module';
@@ -113,6 +117,7 @@ const standaloneComponents = [
   AvatarComponent,
   CalendarComponent,
   ButtonComponent,
+  ComponentLoaderDirective,
 ];
 const exportedModules = [
   AppModule,

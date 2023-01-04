@@ -12,6 +12,7 @@ import { DynamicComponent } from './dynamic-component';
 
 @Directive({
   selector: '[kirbyLoadComponent]',
+  standalone: true,
 })
 export class ComponentLoaderDirective implements OnInit {
   // eslint-disable-next-line @angular-eslint/no-input-rename
