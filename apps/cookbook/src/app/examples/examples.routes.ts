@@ -74,6 +74,7 @@ import { VirtualScrollListExampleComponent } from './virtual-scroll-example/virt
 import { PagePullToRefreshExampleComponent } from './page-example/pull-to-refresh/page-pull-to-refresh-example.component';
 import { DropdownExampleComponent } from './dropdown-example/dropdown-example.component';
 import { DataTableExampleComponent } from './data-table-example/data-table-example.component';
+import { PageTabNavExampleComponent } from './page-example/tab-navigation/page-tab-nav-example.component';
 
 VirtualScrollListExampleComponent;
 export const routes: Routes = [
@@ -86,7 +87,7 @@ export const routes: Routes = [
         children: [
           {
             path: '',
-            redirectTo: 'simple',
+            redirectTo: 'tab-navigation',
             pathMatch: 'full',
           },
           {
@@ -156,6 +157,10 @@ export const routes: Routes = [
           {
             path: 'advanced',
             component: PageAdvancedExampleComponent,
+          },
+          {
+            path: 'tab-navigation',
+            component: PageTabNavExampleComponent,
           },
           {
             path: 'pull-to-refresh',

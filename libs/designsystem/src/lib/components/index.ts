@@ -38,6 +38,8 @@ export * from './reorder-list';
 export { SegmentedControlComponent, SegmentedControlMode} from './segmented-control/segmented-control.component'; // See issue #1555 for prettier-ignore explanation
 export { SegmentItem } from './segmented-control/segment-item';
 
+export * from './tab-navigation';
+export * from './tabs';
 export * from './toast';
 
 export * from './progress-circle';

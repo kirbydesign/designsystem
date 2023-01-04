@@ -63,6 +63,7 @@ import { ProgressCircleComponent } from './components/progress-circle/progress-c
 import { ReorderListComponent } from './components/reorder-list/reorder-list.component';
 import { RouterOutletModule } from './components/router-outlet/router-outlet.module';
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
+import { TabsModule } from './components/tabs/tabs.module';
 import { ToastController } from './components/toast/services/toast.controller';
 import { ToastHelper } from './components/toast/services/toast.helper';
 import { customElementsInitializer } from './custom-elements-initializer';
@@ -121,6 +122,7 @@ const exportedModules = [
   AppModule,
   RouterOutletModule,
   PageModule,
+  TabNavigationModule,
   TabsModule,
   IconModule,
   ItemModule,
