@@ -58,6 +58,7 @@ export { SlideButtonComponent } from './slide-button/slide-button.component';
 export * from './slides/slides.component';
 export * from './spinner';
 
+export * from './tab-navigation';
 export * from './tabs';
 export * from './toast';
 export { ToggleComponent } from './toggle/toggle.component';

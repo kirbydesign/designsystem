@@ -7,6 +7,7 @@ import { PageFixedFooterTabExampleComponent } from '~/app/examples/page-example/
 import { PageFixedTitleAndActionsExampleComponent } from '~/app/examples/page-example/fixed-title-and-actions/page-fixed-title-and-actions-example.component';
 import { PagePullToRefreshExampleComponent } from '~/app/examples/page-example/pull-to-refresh/page-pull-to-refresh-example.component';
 import { PageSimpleExampleComponent } from '~/app/examples/page-example/simple/page-simple-example.component';
+import { PageTabNavExampleComponent } from '~/app/examples/page-example/tab-navigation/page-tab-nav-example.component';
 import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
 import {
   ApiDescriptionProperty,
@@ -30,6 +31,7 @@ export class PageShowcaseComponent {
   fixedActionsExampleHtml: string = PageFixedTitleAndActionsExampleComponent.fixedActionsTemplate;
   customTitleExampleHtml: string = PageCustomTitleExampleComponent.template;
   advancedExampleHtml: string = PageAdvancedExampleComponent.template;
+  tabNavigationHtml = PageTabNavExampleComponent.template;
   pullToRefreshExampleHtml: string = PagePullToRefreshExampleComponent.template;
   pullToRefreshExampleTs: string = PagePullToRefreshExampleComponent.handler;
   properties: ApiDescriptionProperty[] = [
