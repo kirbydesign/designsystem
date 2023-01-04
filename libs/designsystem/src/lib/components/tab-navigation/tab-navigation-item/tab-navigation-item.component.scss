@@ -34,6 +34,7 @@ $divider-max-width-breakpoint: utils.$page-content-max-width + (utils.size('s') 
 
 .tab-item-inner {
   display: flex;
+  gap: utils.size('xxxs');
   align-items: center;
   justify-content: center;
   white-space: nowrap;
@@ -45,10 +46,6 @@ $divider-max-width-breakpoint: utils.$page-content-max-width + (utils.size('s') 
 
 /* stylelint-disable-next-line selector-pseudo-element-no-unknown */
 :host ::ng-deep .tab-item-inner {
-  kirby-badge {
-    margin-left: utils.size('xxxs');
-  }
-
   span {
     max-width: $tab-item-text-max-width;
     overflow: hidden;
