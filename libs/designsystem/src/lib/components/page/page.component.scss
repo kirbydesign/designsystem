@@ -264,6 +264,20 @@ ion-content {
   }
 
   &.content-pinned::before {
+    // Background
+    content: '';
+    position: absolute;
+
+    // Adjust for padding of ion-content to stretch divider to full width.
+    left: calc(-1 * $ion-content-padding-start);
+    right: calc(-1 * $ion-content-padding-end);
+    bottom: 0;
+    top: 0;
+    z-index: 0;
+    background-color: var(--kirby-background-color);
+  }
+
+  &.content-pinned::after {
     // Divider
     content: '';
     position: absolute;
