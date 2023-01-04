@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import exampleHtml from '../../examples/loading-overlay-example/loading-overlay-example.component.html?raw';
 import { ApiDescriptionProperty } from '../../shared/api-description/api-description-properties/api-description-properties.component';
+
 @Component({
   selector: 'cookbook-loading-overlay-showcase',
   templateUrl: './loading-overlay-showcase.component.html',
