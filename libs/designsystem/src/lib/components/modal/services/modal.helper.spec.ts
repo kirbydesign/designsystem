@@ -89,13 +89,9 @@ describe('ModalHelper', () => {
       },
     ],
     declarations: [
-      // ButtonComponent,
-      // ModalFooterComponent,
-      // ModalWrapperComponent,
       ModalCompactWrapperComponent,
       PageTitleComponent,
       PageProgressComponent,
-      // IconComponent,
       PageProgressEmbeddedComponent,
     ],
     entryComponents: [

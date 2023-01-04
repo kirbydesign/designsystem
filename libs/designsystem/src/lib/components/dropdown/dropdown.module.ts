@@ -23,6 +23,6 @@ const declarations = [DropdownComponent];
   ],
   declarations: [...declarations],
   exports: [...declarations],
-  providers: [KeyboardHandlerService], // TODO: Figure out if this belongs here.
+  providers: [KeyboardHandlerService],
 })
 export class DropdownModule {}
