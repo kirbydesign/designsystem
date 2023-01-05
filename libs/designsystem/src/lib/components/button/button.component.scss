@@ -89,9 +89,9 @@ $button-width: (
 
 @mixin button-attentionlevel3 {
   // Expect canvas underneath to be a light color
-  --kirby-button-background-color: transparent;
-  --kirby-button-color: #{utils.get-color('black')};
-  --kirby-button-border-color: #{utils.get-color('medium')};
+  background-color: var(--kirby-button-background-color, transparent);
+  color: var(--kirby-button-color, #{utils.get-color('black', $getValueOnly: true)});
+  border-color: var(--kirby-button-border-color, #{utils.get-color('medium', $getValueOnly: true)});
 
   @include interaction-state.apply-hover('xxxs');
   @include interaction-state.apply-active('xxs');
