@@ -13,6 +13,7 @@ import { ModalConfig, ModalSize } from '../modal-wrapper/config/modal-config';
 
 import { AlertConfig } from '../alert/config/alert-config';
 import { ModalFooterComponent } from '../footer/modal-footer.component';
+import { ButtonComponent } from '../../button/button.component';
 import { ModalNavigationService } from './modal-navigation.service';
 import { ModalHelper } from './modal.helper';
 import { Modal, Overlay } from './modal.interfaces';
@@ -82,7 +83,12 @@ describe('ModalHelper', () => {
 
   const createService = createServiceFactory({
     service: ModalHelper,
-    imports: [TestHelper.ionicModuleForTest, RouterTestingModule, ModalFooterComponent],
+    imports: [
+      TestHelper.ionicModuleForTest,
+      RouterTestingModule,
+      ModalFooterComponent,
+      ButtonComponent,
+    ],
     providers: [
       {
         provide: WindowRef,
@@ -298,6 +304,7 @@ describe('ModalHelper', () => {
         await openModal(ContentOverflowsWithFooterEmbeddedComponent);
         const footer = ionModal.querySelector('kirby-modal-footer');
         expect(footer).toBeTruthy();
+
         await TestHelper.waitForResizeObserver();
 
         expect(ionModal.classList.contains('full-height')).toBeTrue();
