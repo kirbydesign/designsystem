@@ -31,6 +31,7 @@ describe('PageComponent', () => {
   const pageUrl = '';
   const firstOtherUrl = 'firstOther';
   const secondOtherUrl = 'secondOther';
+  const firstOtherUrlWithQueryParams = 'firstOther?query=params';
   let spectator: SpectatorHost<PageComponent>;
   let ionToolbar: HTMLElement;
   let ionContent: HTMLIonContentElement;
@@ -404,6 +405,17 @@ describe('PageComponent', () => {
 
       expect(enterEventHandler).toHaveBeenCalledTimes(1);
       expect(leaveEventHandler).toHaveBeenCalledTimes(1);
+    });
+
+    it('should not emit event(s) when changing query params', () => {
+      navigateToUrl(firstOtherUrl);
+      enterEventHandler.calls.reset();
+      leaveEventHandler.calls.reset();
+
+      navigateToUrl(firstOtherUrlWithQueryParams);
+
+      expect(enterEventHandler).toHaveBeenCalledTimes(0);
+      expect(leaveEventHandler).toHaveBeenCalledTimes(0);
     });
   });
 

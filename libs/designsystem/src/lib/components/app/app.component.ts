@@ -8,9 +8,6 @@ import {
 } from '@angular/core';
 import { IonApp } from '@ionic/angular';
 
-import { ModalController } from '../modal/services/modal.controller';
-import { RouterOutletComponent } from '../router-outlet/router-outlet.component';
-
 @Component({
   selector: 'kirby-app',
   templateUrl: './app.component.html',
@@ -21,16 +18,7 @@ export class AppComponent implements AfterContentInit {
   @ViewChild(IonApp, { static: true, read: ElementRef })
   private ionAppElement: ElementRef<HTMLIonAppElement>;
 
-  @ContentChild(RouterOutletComponent, { static: false, read: ElementRef })
-  private routerOutlet?: ElementRef<HTMLElement>;
-
-  constructor(private modalController: ModalController) {}
-
   ngAfterContentInit(): void {
-    if (this.routerOutlet && this.routerOutlet.nativeElement) {
-      this.modalController.registerPresentingElement(this.routerOutlet.nativeElement);
-    }
-
     this.ionAppElement.nativeElement.componentOnReady().then(() => this.registerInputs());
   }
 
