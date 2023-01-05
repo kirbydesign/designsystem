@@ -1,7 +1,7 @@
+import { ColorHelper } from '@kirbydesign/designsystem/helpers';
 import { ChartType, ScriptableContext } from 'chart.js';
 
 import { ChartDataset } from '../../';
-import { ColorHelper } from '../../../../../helpers';
 
 const { getThemeColorHexString } = ColorHelper;
 

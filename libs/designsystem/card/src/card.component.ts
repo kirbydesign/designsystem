@@ -7,8 +7,7 @@ import {
   OnInit,
   Renderer2,
 } from '@angular/core';
-
-import { ResizeObserverService } from '../shared/resize-observer/resize-observer.service';
+import { ResizeObserverService } from '@kirbydesign/designsystem/shared';
 
 @Component({
   selector: 'kirby-card',

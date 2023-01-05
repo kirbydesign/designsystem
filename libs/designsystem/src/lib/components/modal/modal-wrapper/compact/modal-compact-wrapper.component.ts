@@ -1,7 +1,7 @@
 import { Component, ElementRef, HostListener, Injector, Input, OnInit } from '@angular/core';
 import { firstValueFrom, Subject } from 'rxjs';
+import { WindowRef } from '@kirbydesign/designsystem/types';
 
-import { WindowRef } from '../../../../types/window-ref';
 import { Modal } from '../../services/modal.interfaces';
 import { ModalConfig } from '../config/modal-config';
 import { COMPONENT_PROPS } from '../config/modal-config.helper';

@@ -1,5 +1,7 @@
 import { ColorHelper, ThemeColorDefinition } from '@kirbydesign/core';
+import jasmine from 'jasmine-core';
 import { TestHelper } from './test-helper';
+
 import CustomMatcherFactories = jasmine.CustomMatcherFactories;
 import CustomMatcherResult = jasmine.CustomMatcherResult;
 import MatchersUtil = jasmine.MatchersUtil;

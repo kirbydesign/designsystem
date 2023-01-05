@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -9,6 +10,8 @@ import {
 } from '@angular/core';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
   selector: 'kirby-slide-button',
   templateUrl: './slide-button.component.html',
   styleUrls: ['./slide-button.component.scss'],
