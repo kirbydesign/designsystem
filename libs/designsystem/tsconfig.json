@@ -1,9 +1,15 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
+    "baseUrl":".",
+    "rootDir": ".",
+    "paths":{
+      "@kirbydesign/designsystem/*":["*"],
+      "@kirbydesign/designsystem/card":["card/index.ts"],
+      "@kirbydesign/designsystem/testing":["testing/index.ts"]
+    },
     "esModuleInterop": true,
-    "paths": {},
-    "target": "es2020"
+        "target": "es2020"
   },
   "include": [],
   "files": [],

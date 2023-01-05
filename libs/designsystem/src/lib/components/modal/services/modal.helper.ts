@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { WindowRef } from '@kirbydesign/designsystem/types';
 
 import { KirbyAnimation } from '../../../animation/kirby-animation';
-import { WindowRef } from '../../../types/window-ref';
 import { AlertConfig } from '../alert/config/alert-config';
 import { ModalCompactWrapperComponent } from '../modal-wrapper/compact/modal-compact-wrapper.component';
-import { ModalConfig, ModalFlavor, ModalSize } from '../modal-wrapper/config/modal-config';
+import { ModalConfig, ModalSize } from '../modal-wrapper/config/modal-config';
 import { ModalWrapperComponent } from '../modal-wrapper/modal-wrapper.component';
 import { AlertHelper } from './alert.helper';
 

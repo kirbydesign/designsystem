@@ -1,7 +1,5 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { MockComponents } from 'ng-mocks';
-import { TestHelper } from '../../testing/test-helper';
-import { BadgeComponent, IconComponent } from '../index';
+import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { LocalNavigationItem } from './page-local-navigation-item';
 import { PageLocalNavigationComponent } from './page-local-navigation.component';
 
@@ -40,7 +38,6 @@ describe('PageLocalNavigationComponent', () => {
 
   const createHost = createHostFactory({
     component: PageLocalNavigationComponent,
-    declarations: [MockComponents(BadgeComponent, IconComponent)],
     imports: [TestHelper.ionicModuleForTest],
   });
 

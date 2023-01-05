@@ -7,7 +7,6 @@ import {
   PageContentComponent,
   PageContentDirective,
   PageProgressComponent,
-  PageStickyContentDirective,
   PageSubtitleDirective,
   PageTitleComponent,
   PageTitleDirective,

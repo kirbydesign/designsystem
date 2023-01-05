@@ -1,9 +1,6 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
-import { DesignTokenHelper } from '@kirbydesign/core';
-
-import { ButtonComponent } from '../../button/button.component';
-import { EmptyStateComponent } from '../../empty-state/empty-state.component';
+import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { AlertComponent } from './alert.component';
 
@@ -14,7 +11,6 @@ describe('AlertComponent', () => {
 
   const createHost = createHostFactory({
     component: AlertComponent,
-    declarations: [ButtonComponent, EmptyStateComponent],
   });
 
   beforeEach(() => {

@@ -36,7 +36,7 @@ export class LoadingOverlayService {
   }
 
   public async hideLoadingOverlay(): Promise<void> {
-    if (!!this.ionLoading) {
+    if (this.ionLoading) {
       await this.ionLoading.dismiss();
       this.ionLoading = null;
     }

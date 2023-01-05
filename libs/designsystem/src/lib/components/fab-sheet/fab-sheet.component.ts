@@ -1,4 +1,4 @@
-import { DOCUMENT } from '@angular/common';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
@@ -12,11 +12,13 @@ import {
   Renderer2,
   ViewChild,
 } from '@angular/core';
-import { IonFab, IonFabButton } from '@ionic/angular';
+import { IonFab, IonFabButton, IonicModule } from '@ionic/angular';
 
 import { ActionSheetComponent } from '../modal/action-sheet/action-sheet.component';
 
 @Component({
+  standalone: true,
+  imports: [IonicModule, CommonModule],
   selector: 'kirby-fab-sheet',
   templateUrl: './fab-sheet.component.html',
   styleUrls: ['./fab-sheet.component.scss'],

@@ -11,8 +11,7 @@ export { StockChartConfig, BarChartConfig } from './components/charts/chart-conf
  * @see KirbyModule
  */
 @NgModule({
-  imports: [CommonModule, KirbyModule],
+  imports: [CommonModule, KirbyModule, PageLocalNavigationComponent],
   exports: COMPONENT_DECLARATIONS,
-  declarations: COMPONENT_DECLARATIONS,
 })
 export class KirbyExperimentalModule {}

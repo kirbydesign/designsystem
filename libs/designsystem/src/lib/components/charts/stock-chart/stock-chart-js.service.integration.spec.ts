@@ -1,8 +1,8 @@
 import { ElementRef } from '@angular/core';
+import { chartConfigHasType } from '@kirbydesign/designsystem/helpers';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 import { Chart } from 'chart.js';
 
-import { chartConfigHasType } from '../../../helpers';
 import { ChartConfigService } from '../shared';
 
 import { StockChartJSService } from './stock-chart-js.service';

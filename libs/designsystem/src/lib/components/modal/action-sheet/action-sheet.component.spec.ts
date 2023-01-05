@@ -3,12 +3,12 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import * as ionic from '@ionic/angular';
+import { CardComponent, CardModule } from '@kirbydesign/designsystem/card';
+import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { MockComponent } from 'ng-mocks';
 
-import { DesignTokenHelper } from '../../..';
 import { ButtonComponent } from '../../button/button.component';
-import { CardHeaderComponent } from '../../card/card-header/card-header.component';
-import { CardComponent } from '../../card/card.component';
+
 import { InfiniteScrollDirective } from '../../list/directives/infinite-scroll.directive';
 import { ListItemColorDirective } from '../../list/directives/list-item-color.directive';
 import { ListComponent } from '../../list/list.component';
@@ -27,8 +27,6 @@ describe('ActionSheetComponent', () => {
       declarations: [
         ActionSheetComponent,
         ListComponent,
-        CardComponent,
-        CardHeaderComponent,
         SpinnerComponent,
         InfiniteScrollDirective,
         ButtonComponent,
@@ -42,6 +40,7 @@ describe('ActionSheetComponent', () => {
         MockComponent(ionic.IonItemOptions),
         MockComponent(ionic.IonItemSliding),
       ],
+      imports: [CardModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
     TestBed.overrideModule(BrowserDynamicTestingModule, {

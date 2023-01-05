@@ -80,7 +80,7 @@ export class ModalElementsMoverDelegate {
     parentElement?: HTMLElement | ElementRef<HTMLElement>
   ) {
     const child = childElementRef.nativeElement;
-    if (!!child) {
+    if (child) {
       this.renderer.removeChild(parentElement || child.parentElement, child);
     }
   }

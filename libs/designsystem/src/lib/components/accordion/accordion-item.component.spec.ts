@@ -1,9 +1,6 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
-import { DesignTokenHelper } from '@kirbydesign/core';
-
-import { TestHelper } from '../../testing/test-helper';
-import { IconComponent } from '../icon/icon.component';
+import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { AccordionItemComponent } from './accordion-item.component';
 
@@ -15,8 +12,6 @@ describe('AccordionItemComponent', () => {
 
   const createHost = createHostFactory({
     component: AccordionItemComponent,
-    declarations: [IconComponent],
-    imports: [TestHelper.ionicModuleForTest],
   });
 
   beforeEach(() => {

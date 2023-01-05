@@ -1,8 +1,7 @@
 import { IonicModule } from '@ionic/angular';
+import { ScreenSize, TestHelper } from '@kirbydesign/designsystem/testing';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
 import { MockModule } from 'ng-mocks';
-
-import { ScreenSize, TestHelper } from '../../testing/test-helper';
 
 import { TabsComponent } from './tabs.component';
 

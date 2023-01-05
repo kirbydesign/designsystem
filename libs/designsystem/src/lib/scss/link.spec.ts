@@ -1,4 +1,4 @@
-import { DesignTokenHelper } from '@kirbydesign/core';
+import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 const { getColor } = DesignTokenHelper;
 

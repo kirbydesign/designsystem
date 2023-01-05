@@ -11,8 +11,8 @@ import {
 import { IonItemSliding } from '@ionic/angular';
 
 import { ThemeColor } from '@kirbydesign/core';
+import { PlatformService } from '@kirbydesign/designsystem/helpers';
 
-import { PlatformService } from '../../../helpers/platform.service';
 import { ListSwipeAction, ListSwipeDirection, ListSwipeEnd } from '../list-swipe-action.type';
 
 export type BoundaryClass = 'first' | 'last';

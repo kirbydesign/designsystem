@@ -1,10 +1,4 @@
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
-import { MockComponent } from 'ng-mocks';
-
-import { TestHelper } from '../../testing/test-helper';
-import { CardComponent } from '../card';
-import { IconModule } from '../icon/icon.module';
-import { ItemComponent } from '../item';
 
 import { ReorderEvent } from './reorder-event';
 import { ReorderListComponent } from './reorder-list.component';
@@ -26,9 +20,7 @@ describe('ReorderListComponent', () => {
   }
 
   const createHost = createComponentFactory({
-    imports: [TestHelper.ionicModuleForTest, IconModule],
     component: ReorderListComponent,
-    declarations: [MockComponent(CardComponent), MockComponent(ItemComponent)],
   });
 
   beforeEach(() => {
@@ -67,7 +59,7 @@ describe('ReorderListComponent', () => {
     it('should emit event', () => {
       spyOn(spectator.component.itemReorder, 'emit');
 
-      let customEvent = new CustomEvent('itemReorder test', { detail: {} });
+      const customEvent = new CustomEvent('itemReorder test', { detail: {} });
 
       spectator.component.doReorder(customEvent);
 
@@ -80,14 +72,14 @@ describe('ReorderListComponent', () => {
     it('should emit event with parentItem', () => {
       spyOn(spectator.component.subItemReorder, 'emit');
 
-      let customEvent = new CustomEvent('subItemReorder test', { detail: {} });
+      const customEvent = new CustomEvent('subItemReorder test', { detail: {} });
       spectator.component.doSubReorder(customEvent, items[0]);
 
       expect(spectator.component.subItemReorder.emit).toHaveBeenCalledTimes(1);
       expect(spectator.component.subItemReorder.emit).toHaveBeenCalledWith(
         jasmine.any(ReorderEvent)
       );
-      let arg: any = (spectator.component.subItemReorder.emit as any).calls.mostRecent().args[0];
+      const arg: any = (spectator.component.subItemReorder.emit as any).calls.mostRecent().args[0];
       expect(arg.parentItem).toEqual(items[0]);
     });
   });
