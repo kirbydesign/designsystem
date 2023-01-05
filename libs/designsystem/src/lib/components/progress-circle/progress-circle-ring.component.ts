@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'kirby-progress-circle-ring',
   templateUrl: './progress-circle-ring.component.svg',
   styleUrls: ['./progress-circle-ring.component.scss'],

@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { EventEmitter } from '@angular/core';
 import {
   ChangeDetectionStrategy,
@@ -9,7 +10,7 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
-import { IonSlides } from '@ionic/angular';
+import { IonicModule, IonSlides } from '@ionic/angular';
 
 @Directive({
   selector: '[kirbySlide]',
@@ -17,13 +18,15 @@ import { IonSlides } from '@ionic/angular';
 export class SlideDirective {}
 
 @Component({
+  standalone: true,
+  imports: [IonicModule, CommonModule],
   selector: 'kirby-slides',
   template: `
     <ion-slides
       [options]="slidesOptions"
       #ionslides
       (ionSlideDidChange)="onSlideChanged()"
-      (ionSlidesDidLoad)="slideTo(0)"
+      ionSlidesDidLoad="slideTo(0)"
     >
       <ion-slide *ngFor="let slide of slides; let i = index">
         <ng-container

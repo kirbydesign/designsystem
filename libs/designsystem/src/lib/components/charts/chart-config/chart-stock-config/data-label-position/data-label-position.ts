@@ -1,8 +1,7 @@
+import { ColorHelper, DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { ScatterDataPoint } from 'chart.js';
 import { Context } from 'chartjs-plugin-datalabels/types/context';
 import { Align, Options } from 'chartjs-plugin-datalabels/types/options';
-import { DesignTokenHelper } from '../../../../../helpers/design-token-helper';
-import { ColorHelper } from '../../../../../helpers/color-helper';
 
 const { getThemeColorHexString } = ColorHelper;
 const { fontSize } = DesignTokenHelper;

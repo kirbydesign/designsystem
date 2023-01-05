@@ -8,11 +8,11 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
+import { ResizeObserverFactory } from '@kirbydesign/designsystem/shared';
 import { ChartOptions } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
 
 import { ChartDataset, ChartHighlightedElements, ChartLabel, ChartType } from '../';
-import { ResizeObserverFactory } from '../../../shared';
 import { ChartJSService } from '../chart-js-service/';
 
 @Component({

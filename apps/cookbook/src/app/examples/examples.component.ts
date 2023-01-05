@@ -1,7 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 
-import { DesignTokenHelper } from '@kirbydesign/designsystem';
-import { WindowRef } from '@kirbydesign/designsystem/types/window-ref';
+import { WindowRef } from '@kirbydesign/designsystem/types';
+import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 @Component({
   selector: 'cookbook-examples',
