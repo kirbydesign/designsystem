@@ -2,11 +2,11 @@ import { ColorHelper, ThemeColorDefinition } from '@kirbydesign/core';
 import jasmine from 'jasmine-core';
 import { TestHelper } from './test-helper';
 
-import CustomMatcherFactoriess = jasmine.CustomMatcherFactories;
+import CustomMatcherFactories = jasmine.CustomMatcherFactories;
 import CustomMatcherResult = jasmine.CustomMatcherResult;
 import MatchersUtil = jasmine.MatchersUtil;
 
-export const ElementCssCustomMatchers: CustomMatcherFactoriess = {
+export const ElementCssCustomMatchers: CustomMatcherFactories = {
   toHaveComputedStyle: (util: MatchersUtil) => cssPropertyMatcher(util),
 };
 
