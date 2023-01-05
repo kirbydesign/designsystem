@@ -44,24 +44,21 @@ $divider-max-width-breakpoint: utils.$page-content-max-width + (utils.size('s') 
   user-select: none;
 }
 
+// Restrict cascade of styles to all child elements of component - see https://blog.angular-university.io/angular-host-context/
 /* stylelint-disable-next-line selector-pseudo-element-no-unknown */
-:host ::ng-deep .tab-item-inner {
-  span {
-    max-width: $tab-item-text-max-width;
-    overflow: hidden;
-    text-overflow: ellipsis;
+:host ::ng-deep span[text] {
+  max-width: $tab-item-text-max-width;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
-    // The larger line-height ensures no vertical layout shifts when changing the span's text content from bold to normal font-weight.
-    // See lines 75-79
-    line-height: utils.size('m');
-  }
+  // The larger line-height ensures no vertical layout shifts when changing the span's text content from bold to normal font-weight.
+  line-height: utils.size('m');
 
   // Using the before selector to insert a hidden pseudo-element with the same text content in bold,
   // ensures no horizontal layout shifts when changing the visible span's text content from bold to normal font-weight.
-  // See lines 75-79
-  span::before {
+  &::before {
     display: block;
-    content: attr(text);
+    content: attr(data-text);
     font-weight: bold;
     height: 0;
     overflow: hidden;
