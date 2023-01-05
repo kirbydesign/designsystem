@@ -32,8 +32,6 @@ The Kirby Cookbook, containing samples, status of components etc. can be accesse
   - [Migration Guides](#migration-guides)
 - [Folder Structure](#folder-structure)
 - [Scripts](#scripts)
-- [Polyfills](#polyfills)
-- [Chart Components](#chart-components)
 - [Contributing](#contributing)
 
 ## Installation
@@ -184,48 +182,6 @@ Use them in your terminal like: `npm run <script>` :
 | dist:cookbook     | Builds a distribution folder of the Cookbook application                                                                                               |
 | dist:designsystem | Builds a distribution folder of the Designsystem library                                                                                               |
 | transpile:tools   | Transpiles tools, required to produce library distribution (this is done as a `post-install` hook, but may have value if altering tool implementation) |
-
-## Polyfills
-
-Some features of Kirby requires polyfills to ensure compability across all major browsers _(e.g. the `ResizeObserverService` used by the automagic sizing feature of the `Kirby Card` component)_.
-
-To enable the polyfill, you register a _polyfill loader_ that checks whether the polyfill is needed or the feature is already supported by the browser (and can skip requesting the polyfill).  
-To use the sizing feature of Kirby Card across all major browsers, you must copy additional files from the Kirby package to your output folder.  
-Add the following to `build > options > assets` in `angular.json` :
-
-```json
-{
-  ...
-  "build": {
-    "options": {
-      "assets": [
-        ...,
-        {
-          "glob": "**/*",
-          "input": "./node_modules/@kirbydesign/designsystem/polyfills",
-          "output": "./kirby/polyfills"
-        },
-        ...
-      ],
-    }
-  }
-}
-```
-
-Finally, add the following to `index.html` :
-
-```html
-<head>
-  ...
-  <script src="kirby/polyfills/resize-observer-polyfill-loader.min.js"></script>
-</head>
-```
-
-_**Please note:** If you don't want the additional http request for the polyfill loader, you can copy the contents of `node_modules/@kirbydesign/designsystem/polyfills/resize-observer-polyfill-loader.js` into a `script` tag in `index.html` instead_
-
-## Chart Components
-
-The Kirby chart components use Highcharts. Note that this is a licensed product.
 
 ## Contributing
 

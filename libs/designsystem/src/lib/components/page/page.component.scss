@@ -5,12 +5,6 @@ $ion-content-padding-top: utils.size('xs');
 $ion-content-padding-start: var(--page-content-padding-start, #{utils.size('s')});
 $ion-content-padding-end: var(--page-content-padding-end, #{utils.size('s')});
 
-:host {
-  // Ignoring wrapper introduced with #640 remove the need for discarding it
-  // through DOM manipulation on page init.
-  display: contents;
-}
-
 /*
  * Page Header
  */
@@ -94,6 +88,7 @@ ion-toolbar {
   }
 
   ion-title {
+    visibility: hidden;
     opacity: 0;
     transform: translateY(10px);
     transition-property: opacity, transform;
@@ -101,6 +96,7 @@ ion-toolbar {
     transition-timing-function: utils.get-transition-easing('enter-exit');
 
     &.slide-and-fade-in {
+      visibility: visible;
       opacity: 1;
       transform: translateY(0);
     }
@@ -260,6 +256,7 @@ ion-content {
   left: 0;
   right: 0;
   margin-block-end: utils.size('m');
+  z-index: utils.z('sticky-content');
 
   div {
     max-width: var(--page-content-max-width, utils.$page-content-max-width);
@@ -267,6 +264,20 @@ ion-content {
   }
 
   &.content-pinned::before {
+    // Background
+    content: '';
+    position: absolute;
+
+    // Adjust for padding of ion-content to stretch divider to full width.
+    left: calc(-1 * $ion-content-padding-start);
+    right: calc(-1 * $ion-content-padding-end);
+    bottom: 0;
+    top: 0;
+    z-index: 0;
+    background-color: var(--kirby-background-color);
+  }
+
+  &.content-pinned::after {
     // Divider
     content: '';
     position: absolute;

@@ -11,7 +11,6 @@ import { MockCardComponent } from './components/mock.card.component';
 import { MockChartComponent } from './components/mock.chart.component';
 import { MockBaseChartComponent } from './components/mock.base-chart.component';
 import { MockCheckboxComponent } from './components/mock.checkbox.component';
-import { MockChipComponent } from './components/mock.chip.component';
 import { MockDividerComponent } from './components/mock.divider.component';
 import { MockDropdownComponent } from './components/mock.dropdown.component';
 import { MockEmptyStateComponent } from './components/mock.empty-state.component';
@@ -78,7 +77,6 @@ export const MOCK_COMPONENTS = [
   MockChartComponent,
   MockBaseChartComponent,
   MockCheckboxComponent,
-  MockChipComponent,
   MockDividerComponent,
   MockDropdownComponent,
   MockEmptyStateComponent,
