@@ -82,7 +82,6 @@ const exportedDeclarations = [
   InputComponent,
   TextareaComponent,
   DividerComponent,
-  // FlagComponent,
   SlideDirective,
   ElementAsButtonDirective,
   ItemGroupComponent,
