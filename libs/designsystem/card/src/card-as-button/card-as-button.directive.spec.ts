@@ -1,14 +1,13 @@
-import { CardComponent } from '@kirbydesign/designsystem/card';
 import { createDirectiveFactory, SpectatorDirective } from '@ngneat/spectator';
+import { CardComponent } from '../card.component';
+import { CardAsButtonDirective } from './card-as-button.directive';
 
-import { ElementAsButtonDirective } from './element-as-button.directive';
-
-describe('ElementAsButtonDirective', () => {
-  let spectator: SpectatorDirective<ElementAsButtonDirective>;
+describe('CardAsButtonDirective', () => {
+  let spectator: SpectatorDirective<CardAsButtonDirective>;
   let cardElement: HTMLElement;
 
   const createDirective = createDirectiveFactory({
-    directive: ElementAsButtonDirective,
+    directive: CardAsButtonDirective,
     imports: [],
     declarations: [CardComponent],
   });
