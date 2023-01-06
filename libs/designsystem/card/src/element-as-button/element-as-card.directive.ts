@@ -1,11 +1,12 @@
 import { Directive, ElementRef, HostBinding, HostListener, OnInit, Optional } from '@angular/core';
-import { CardComponent } from '@kirbydesign/designsystem/card';
+
+import { CardComponent } from '../card.component';
 
 @Directive({
   // eslint-disable-next-line @angular-eslint/directive-selector
   selector: 'kirby-card[click]',
 })
-export class ElementAsButtonDirective implements OnInit {
+export class ElementAsCardDirective implements OnInit {
   @HostBinding('attr.role') role: string = 'button';
   @HostBinding('attr.tabindex') tabindex: number = 0;
 

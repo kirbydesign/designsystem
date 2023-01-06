@@ -63,7 +63,6 @@ import { ToastHelper } from './components/toast/services/toast.helper';
 import { ToggleButtonModule } from './components/toggle-button/toggle-button.module';
 import { ToggleComponent } from './components/toggle/toggle.component';
 import { customElementsInitializer } from './custom-elements-initializer';
-import { ElementAsButtonDirective } from './directives/element-as-button/element-as-button.directive';
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
 import { ModalRouterLinkDirective } from './directives/modal-router-link/modal-router-link.directive';
 import { ThemeColorDirective } from './directives/theme-color/theme-color.directive';
@@ -84,7 +83,7 @@ const exportedDeclarations = [
   DividerComponent,
   FlagComponent,
   SlideDirective,
-  ElementAsButtonDirective,
+
   ItemGroupComponent,
 ];
 
