@@ -68,8 +68,8 @@ $button-width: (
 }
 
 @mixin button-attentionlevel1 {
-  --kirby-button-background-color: #{utils.get-color('primary')};
-  --kirby-button-color: #{utils.get-color('primary-contrast')};
+  background-color: var(--kirby-button-background-color-att-lvl-1, #{utils.get-color('primary')});
+  color: var(--kirby-button-color-att-lvl-1, #{utils.get-color('primary-contrast')});
 
   // The destructive class is only ever applied by kirby-alert.
   // Standalone destructive buttons are not a supported concept.
@@ -80,18 +80,25 @@ $button-width: (
 }
 
 @mixin button-attentionlevel2 {
-  --kirby-button-background-color: #{utils.get-color('black')};
-  --kirby-button-color: #{utils.get-color('black-contrast')};
+  background-color: var(
+    --kirby-button-background-color-att-lvl-2,
+    #{utils.get-color('black', $getValueOnly: true)}
+  );
+  color: var(
+    --kirby-button-color-att-lvl-2,
+    #{utils.get-color('black-contrast', $getValueOnly: true)}
+  );
 
   @include interaction-state.apply-hover('l', $make-lighter: true);
   @include interaction-state.apply-active('xxxl', $make-lighter: true);
 }
 
 @mixin button-attentionlevel3 {
-  // Expect canvas underneath to be a light color
-  background-color: var(--kirby-button-background-color, transparent);
-  color: var(--kirby-button-color, #{utils.get-color('black', $getValueOnly: true)});
-  border-color: var(--kirby-button-border-color, #{utils.get-color('medium', $getValueOnly: true)});
+  background-color: var(
+    --kirby-button-background-color-att-lvl-3,
+    #{utils.get-color('white', $getValueOnly: true)}
+  );
+  color: var(--kirby-button-color-att-lvl-3, #{utils.get-color('black', $getValueOnly: true)});
 
   @include interaction-state.apply-hover('xxxs');
   @include interaction-state.apply-active('xxs');
@@ -118,7 +125,8 @@ $button-width: (
   }
 
   font-family: var(--kirby-font-family);
-  background-color: var(--kirby-button-background-color, initial);
+
+  // background-color: var(--kirby-button-background-color, initial);
   color: var(--kirby-button-color, inherit);
   border-radius: utils.$border-radius-round;
   box-sizing: border-box; // Ensure border is not added to button height
@@ -206,27 +214,21 @@ $button-width: (
     pointer-events: none;
   }
 
-  :host-context(.kirby-color-brightness-dark) {
-    &.no-decoration {
-      --kirby-button-color: #{utils.get-color('white')};
-    }
+  // :host-context(.kirby-color-brightness-dark) {
+  //   &.no-decoration {
+  //     --kirby-button-color: #{utils.get-color('white')};
+  //   }
 
-    &.attention-level2 {
-      --kirby-button-background-color: #{utils.get-color('white')};
-      --kirby-button-color: #{utils.get-color('white-contrast')};
+  //   &.attention-level2 {
+  //     @include interaction-state.apply-hover;
+  //     @include interaction-state.apply-active('s');
+  //   }
 
-      @include interaction-state.apply-hover;
-      @include interaction-state.apply-active('s');
-    }
-
-    &.attention-level3 {
-      --kirby-button-border-color: #{utils.get-color('white')};
-      --kirby-button-color: #{utils.get-color('white')};
-
-      @include interaction-state.apply-hover('xs', $make-lighter: true);
-      @include interaction-state.apply-active('m', $make-lighter: true);
-    }
-  }
+  //   &.attention-level3 {
+  //     @include interaction-state.apply-hover('xs', $make-lighter: true);
+  //     @include interaction-state.apply-active('m', $make-lighter: true);
+  //   }
+  // }
 
   &.floating {
     $fab-size: 64px;
