@@ -4,8 +4,8 @@ import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
+import { IconComponent } from '../..';
 import {
-  IconComponent,
   InfiniteScrollDirective,
   ItemComponent,
   ListComponent,
