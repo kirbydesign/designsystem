@@ -44,7 +44,9 @@ export {
   MockPageComponent,
   MockPageContentComponent,
   MockPageTitleComponent,
+  MockPageStickyContentDirective,
 } from './mock.page.component';
+export { MockPageLocalNavigationComponent } from './mock.page-local-navigation.component';
 export { MockPopoverComponent } from './mock.popover.component';
 export { MockProgressCircleComponent } from './mock.progress-circle.component';
 export { MockRadioGroupComponent } from './mock.radio-group.component';
@@ -59,6 +61,8 @@ export { MockSlideDirective, MockSlidesComponent } from './mock.slides.component
 export { MockSpinnerComponent } from './mock.spinner.component';
 export { MockTabButtonComponent } from './mock.tab-button.component';
 export { MockTabsComponent } from './mock.tabs.component';
+export { MockTableComponent } from './mock.table.component';
+export { MockTableRowComponent } from './mock.table-row.component';
 export { MockTextareaComponent } from './mock.textarea.component';
 export { MockToggleButtonComponent } from './mock.toggle-button.component';
 export { MockToggleComponent } from './mock.toggle.component';
