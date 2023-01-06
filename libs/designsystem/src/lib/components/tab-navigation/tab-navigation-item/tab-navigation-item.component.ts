@@ -16,9 +16,6 @@ import {
   styleUrls: ['./tab-navigation-item.component.scss'],
 })
 export class TabNavigationItemComponent implements AfterViewInit {
-  @HostBinding('attr.tabindex')
-  tabIndex = 0;
-
   private readonly labelTextElementSelector = 'span[text]';
   private readonly labelTextElementContentAttribute = 'data-text';
 
