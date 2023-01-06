@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'kirby-flag',
   template: ` <ng-content></ng-content> `,
   styleUrls: ['./flag.component.scss'],
