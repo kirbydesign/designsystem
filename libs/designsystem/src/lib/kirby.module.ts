@@ -9,6 +9,7 @@ import {
   ResizeObserverFactory,
   ResizeObserverService,
 } from '@kirbydesign/designsystem/shared';
+import { FlagComponent } from '@kirbydesign/designsystem/flag';
 import { AccordionItemComponent } from './components/accordion/accordion-item.component';
 import { AccordionDirective } from './components/accordion/accordion.directive';
 import { AppModule } from './components/app/app.module';
@@ -20,7 +21,6 @@ import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { DataTableModule } from './components/data-table/data-table.module';
 import { DividerComponent } from './components/divider/divider.component';
 import { FabSheetComponent } from './components/fab-sheet/fab-sheet.component';
-import { FlagComponent } from './components/flag/flag.component';
 import { DateInputDirective } from './components/form-field/directives/date/date-input.directive';
 import { DecimalMaskDirective } from './components/form-field/directives/decimal-mask/decimal-mask.directive';
 import { AffixDirective } from './components/form-field/directives/affix/affix.directive';
@@ -81,7 +81,6 @@ const exportedDeclarations = [
   InputComponent,
   TextareaComponent,
   DividerComponent,
-  FlagComponent,
   SlideDirective,
 
   ItemGroupComponent,
@@ -117,6 +116,7 @@ const standaloneComponents = [
   CalendarComponent,
   ButtonComponent,
   ComponentLoaderDirective,
+  FlagComponent,
 ];
 const exportedModules = [
   AppModule,
