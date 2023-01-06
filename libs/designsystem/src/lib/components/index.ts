@@ -26,7 +26,6 @@ export { FlagComponent } from './flag/flag.component';
 export { GridComponent } from './grid/grid.component';
 export { GridCardConfiguration } from './grid/grid-card-configuration';
 
-export * from './icon';
 export * from './item';
 export { ItemSlidingComponent } from './item-sliding/item-sliding.component';
 export { ItemGroupComponent } from './item-group/item-group.component';

@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 
-import { IconModule } from '../icon/icon.module';
+import { IconModule } from '@kirbydesign/designsystem/icon';
 import { SpinnerModule } from '../spinner/spinner.module';
 
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
