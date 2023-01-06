@@ -11,6 +11,8 @@ import { MockCardComponent } from './components/mock.card.component';
 import { MockChartComponent } from './components/mock.chart.component';
 import { MockBaseChartComponent } from './components/mock.base-chart.component';
 import { MockCheckboxComponent } from './components/mock.checkbox.component';
+import { MockTableComponent } from './components/mock.table.component';
+import { MockTableRowComponent } from './components/mock.table-row.component';
 import { MockDividerComponent } from './components/mock.divider.component';
 import { MockDropdownComponent } from './components/mock.dropdown.component';
 import { MockEmptyStateComponent } from './components/mock.empty-state.component';
@@ -43,11 +45,13 @@ import {
   MockPageContentComponent,
   MockPageContentDirective,
   MockPageProgressComponent,
+  MockPageStickyContentDirective,
   MockPageSubtitleDirective,
   MockPageTitleComponent,
   MockPageTitleDirective,
   MockPageToolbarTitleDirective,
 } from './components/mock.page.component';
+import { MockPageLocalNavigationComponent } from './components/mock.page-local-navigation.component';
 import { MockPopoverComponent } from './components/mock.popover.component';
 import { MockProgressCircleComponent } from './components/mock.progress-circle.component';
 import { MockRadioGroupComponent } from './components/mock.radio-group.component';
@@ -77,6 +81,8 @@ export const MOCK_COMPONENTS = [
   MockChartComponent,
   MockBaseChartComponent,
   MockCheckboxComponent,
+  MockTableComponent,
+  MockTableRowComponent,
   MockDividerComponent,
   MockDropdownComponent,
   MockEmptyStateComponent,
@@ -107,11 +113,13 @@ export const MOCK_COMPONENTS = [
   MockPageToolbarTitleDirective,
   MockPageActionsDirective,
   MockPageContentDirective,
+  MockPageStickyContentDirective,
   MockPageProgressComponent,
   MockPageTitleComponent,
   MockPageContentComponent,
   MockPageActionsComponent,
   MockPageComponent,
+  MockPageLocalNavigationComponent,
   MockPopoverComponent,
   MockProgressCircleComponent,
   MockRadioGroupComponent,
