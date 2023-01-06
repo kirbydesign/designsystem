@@ -19,46 +19,52 @@ const KEY_ENTER = 'Enter';
 })
 export class TabNavigationComponent implements AfterViewInit {
   @ContentChildren(TabNavigationItemComponent, { read: ElementRef })
-  private tabItems: QueryList<ElementRef<HTMLElement>>;
+  private tabs: QueryList<ElementRef<HTMLElement>>;
 
   @ViewChild('tabBar')
   private tabBar: ElementRef<HTMLElement>;
 
+  private readonly tabSelectedClassName = 'selected';
   private tabBarElement: HTMLElement;
-  private tabItemElements = new Array<HTMLElement>();
+  private tabElements = new Array<HTMLElement>();
+
+  private selectedTabIndex = -1;
 
   constructor(private window: WindowRef) {
     /**/
   }
 
   ngAfterViewInit(): void {
-    console.log('--- Tab Items: ' + this.tabItems.length + ' ---');
-    //this.tabItems.forEach((tabItem) => console.log('#', tabItem));
+    console.log('--- Tabs: ' + this.tabs.length + ' ---');
+    //this.tabs.forEach((tab) => console.log('#', tab));
     this.tabBarElement = this.tabBar.nativeElement;
 
-    this.tabItems.forEach((tabItem) => this.tabItemElements.push(tabItem.nativeElement));
+    this.tabs.forEach((tab) => this.tabElements.push(tab.nativeElement));
 
-    this.tabItemElements.forEach((tabItemElement, index) => {
-      fromEvent(tabItemElement, 'click').subscribe(() => this.setSelectedTabItem(index));
-      fromEvent(tabItemElement, 'keydown')
+    this.tabElements.forEach((tabElement, index) => {
+      fromEvent(tabElement, 'click').subscribe(() => this.setSelectedTab(index));
+      /*
+      fromEvent(tabElement, 'keydown')
         .pipe(filter((e: KeyboardEvent) => e.key === KEY_ENTER))
-        .subscribe(() => this.setSelectedTabItem(index));
+        .subscribe(() => this.setSelectedTab(index));
+        */
     });
   }
 
-  private setSelectedTabItem(tabItemIndex: number): void {
-    const tabItemSelectedClassName = 'selected';
-    this.tabItemElements.forEach((tabItemElement, index) => {
-      tabItemElement.classList.remove(tabItemSelectedClassName);
-      if (tabItemIndex === index) {
-        tabItemElement.classList.add(tabItemSelectedClassName);
+  private setSelectedTab(tabIndex: number): void {
+    this.tabElements.forEach((tabElement, index) => {
+      tabElement.classList.remove(this.tabSelectedClassName);
+      if (tabIndex === index) {
+        tabElement.classList.add(this.tabSelectedClassName);
       }
     });
-    this.scrollToTab(tabItemIndex);
+    this.scrollToTab(tabIndex);
+
+    this.selectedTabIndex = tabIndex;
   }
 
-  private scrollToTab(tabItemIndex: number): void {
-    const selectedTabElement = this.tabItemElements[tabItemIndex];
+  private scrollToTab(tabIndex: number): void {
+    const selectedTabElement = this.tabElements[tabIndex];
     const selectedTabElementWidth = selectedTabElement.getBoundingClientRect().width;
     const selectedTabElementOffsetLeft = selectedTabElement.offsetLeft;
     const tabBarElementWidth = this.tabBarElement.getBoundingClientRect().width;
