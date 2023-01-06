@@ -84,7 +84,7 @@ describe('ItemComponent', () => {
   });
 
   describe('when disclosure is set to something valid', () => {
-    it('should Inner-padding-end be 8px', () => {
+    it('should set inner-padding-end to xxs', () => {
       spectator.component.disclosure = 'arrow-more';
       spectator.detectChanges();
 
