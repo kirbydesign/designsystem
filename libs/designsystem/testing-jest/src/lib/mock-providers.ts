@@ -25,6 +25,7 @@ export function chartJSServiceFactory() {
   return {
     renderChart: jest.fn(),
     redrawChart: jest.fn(),
+    destroyChart: jest.fn(),
     updateData: jest.fn(),
     updateLabels: jest.fn(),
     updateType: jest.fn(),
@@ -55,6 +56,7 @@ export function modalControllerFactory() {
     navigateWithinModal: jest.fn(),
     showActionSheet: jest.fn(),
     showAlert: jest.fn(),
+    registerPresentingElement: jest.fn(),
     hideTopmost: jest.fn(),
     scrollToTop: jest.fn(),
     scrollToBottom: jest.fn(),
@@ -65,6 +67,7 @@ export function modalControllerFactory() {
 export function tabsServiceFactory() {
   return {
     setOutlet: jest.fn(),
+    resetOutlet: jest.fn(),
     outlet$: EMPTY,
   };
 }
