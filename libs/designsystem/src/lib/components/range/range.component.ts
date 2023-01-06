@@ -42,7 +42,6 @@ export class RangeComponent implements OnChanges, ControlValueAccessor {
     if (value !== this.currentValue) {
       this.currentValue = value;
       this.propagateChange(this.currentValue);
-      this.change.emit(this.currentValue);
     }
   }
 
@@ -87,6 +86,7 @@ export class RangeComponent implements OnChanges, ControlValueAccessor {
 
   public _onRangeValueChange($event: any): void {
     this.writeValue($event.detail.value);
+    this.change.emit(this.currentValue);
   }
 
   public onTouched = () => {};
