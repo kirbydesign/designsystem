@@ -35,11 +35,30 @@ thead tr {
 }
 
 th {
+  &.kirby-sortable-head {
+    @include interaction-state.apply-hover {
+      background-color: $highlight-color;
+    }
+  }
+
   text-align: left;
   font-weight: utils.font-weight('normal');
   font-size: utils.font-size('xs');
   color: utils.get-text-color('semi-dark');
   padding: utils.size('xxs') utils.size('s');
+
+  button {
+    text-align: inherit;
+    font-weight: inherit;
+    font-size: inherit;
+    color: inherit;
+    padding: 0;
+    background-color: inherit;
+    cursor: inherit;
+    border: none;
+    height: 100%;
+    width: 100%;
+  }
 }
 
 td {
