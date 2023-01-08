@@ -16,5 +16,10 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableRowComponent {
-  @HostBinding('class.kirby-selectable-row') @Input() selectable: boolean = false;
+  /**
+   * Sets whether the given row displays as selectable
+   */
+  @HostBinding('class.kirby-selectable-row')
+  @Input()
+  selectable: boolean = false;
 }
