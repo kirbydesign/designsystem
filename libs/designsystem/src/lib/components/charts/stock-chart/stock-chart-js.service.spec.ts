@@ -3,7 +3,7 @@ import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 import { ChartDataset as ChartJSDataset, ChartType as ChartJSType, ChartOptions } from 'chart.js';
 import { MockProvider } from 'ng-mocks';
 
-import { deepCopy } from '../../../helpers/deep-copy';
+import { deepCopy } from '@kirbydesign/designsystem/helpers';
 import {
   ChartConfigService,
   ChartDataset,

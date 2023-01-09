@@ -8,7 +8,7 @@ describe('SlideButtonComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [SlideButtonComponent],
+      imports: [SlideButtonComponent],
     }).compileComponents();
   }));
 

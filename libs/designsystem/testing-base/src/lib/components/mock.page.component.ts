@@ -78,6 +78,17 @@ export class MockPageContentDirective {
   @Input('kirbyPageContent') config: fixedConfig;
 }
 
+@Directive({
+  selector: '[kirbyPageStickyContent]',
+  providers: [
+    {
+      provide: PageStickyContentDirective,
+      useExisting: forwardRef(() => MockPageStickyContentDirective),
+    },
+  ],
+})
+export class MockPageStickyContentDirective {}
+
 @Component({
   selector: 'kirby-page-progress',
   template: '<ng-content></ng-content>',

@@ -16,6 +16,7 @@ import { DropdownComponent, HorizontalDirection } from '@kirbydesign/designsyste
 export class MockDropdownComponent {
   @Input() items: string[] | any[];
   @Input() selectedIndex: number;
+  @Input() focusedIndex: number;
   @Input() itemTextProperty: string;
   @Input() placeholder: string;
   @Input() popout: HorizontalDirection | `${HorizontalDirection}`;

@@ -1,8 +1,6 @@
-import { IonItemDivider, IonLabel } from '@ionic/angular';
+import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { MockComponent } from 'ng-mocks';
 
-import { DesignTokenHelper } from '../../helpers';
 import { LabelComponent } from '../item/label/label.component';
 
 import { SectionHeaderComponent } from './section-header.component';
@@ -14,12 +12,8 @@ describe('SectionHeaderComponent with Kirby Label', () => {
 
   const createHost = createHostFactory({
     component: SectionHeaderComponent,
-    declarations: [
-      SectionHeaderComponent,
-      LabelComponent,
-      MockComponent(IonItemDivider),
-      MockComponent(IonLabel),
-    ],
+    declarations: [LabelComponent],
+    imports: [SectionHeaderComponent],
   });
 
   beforeEach(() => {

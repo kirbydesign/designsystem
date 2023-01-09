@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { AlertConfig, ModalConfig, ModalController } from '@kirbydesign/designsystem';
-import { WindowRef } from '@kirbydesign/designsystem/types/window-ref';
+import { WindowRef } from '@kirbydesign/designsystem/types';
 
 import { ModalCompactExampleComponent } from './compact-example/modal-compact-example.component';
 import { EmbeddedModalExampleComponent } from './embedded-modal-example/embedded-modal-example.component';

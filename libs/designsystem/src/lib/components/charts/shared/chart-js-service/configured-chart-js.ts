@@ -1,3 +1,4 @@
+import { mergeDeepAll } from '@kirbydesign/designsystem/helpers';
 import {
   BarController,
   BarElement,
@@ -16,7 +17,6 @@ import 'chartjs-adapter-date-fns';
 import annotationPlugin from 'chartjs-plugin-annotation';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 
-import { mergeDeepAll } from '../../../../helpers/merge-deep';
 import { CHART_GLOBAL_DEFAULTS } from '../chart-config-service/configs/global-defaults.config';
 
 import MarkerPlugin from './chartjs-plugin-marker/chartjs-plugin-marker';
