@@ -5,8 +5,14 @@
     "rootDir": ".",
     "paths":{
       "@kirbydesign/designsystem/*":["*"],
-      "@kirbydesign/designsystem/card":["card/index.ts"],
-      "@kirbydesign/designsystem/testing":["testing/index.ts"]
+
+      "@kirbydesign/designsystem/helpers": ["helpers/index.ts"],
+      "@kirbydesign/designsystem/shared": ["shared/index.ts"],
+      "@kirbydesign/designsystem/card": ["card/index.ts"],
+      "@kirbydesign/designsystem/types": ["types/index.ts"],
+      "@kirbydesign/designsystem/testing":["testing/index.ts"],
+      "@kirbydesign/designsystem/flag":["flag/index.ts"],
+      
     },
     "esModuleInterop": true,
         "target": "es2020"

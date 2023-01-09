@@ -21,7 +21,6 @@ export * from './form-field';
 export * from './dropdown';
 export * from './empty-state';
 export { FabSheetComponent } from './fab-sheet/fab-sheet.component';
-export { FlagComponent } from './flag/flag.component';
 
 export { GridComponent } from './grid/grid.component';
 export { GridCardConfiguration } from './grid/grid-card-configuration';

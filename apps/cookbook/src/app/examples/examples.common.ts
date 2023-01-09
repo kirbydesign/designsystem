@@ -48,6 +48,7 @@ import { ToggleExampleComponent } from './toggle-example/toggle-example.componen
 import { PagePullToRefreshExampleComponent } from './page-example/pull-to-refresh/page-pull-to-refresh-example.component';
 import { DropdownExampleComponent } from './dropdown-example/dropdown-example.component';
 import { DataTableExampleComponent } from './data-table-example/data-table-example.component';
+import { LoadingOverlayServiceExampleComponent } from './loading-overlay-example/service/loading-overlay-service-example.component';
 
 export const COMPONENT_DECLARATIONS: any[] = [
   ExamplesComponent,
@@ -72,6 +73,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   ToggleExampleComponent,
   EmptyStateExampleComponent,
   LoadingOverlayExampleComponent,
+  LoadingOverlayServiceExampleComponent,
   FabSheetExampleComponent,
   FormFieldExampleComponent,
   PageSimpleExampleComponent,
