@@ -30,7 +30,10 @@
       "@kirbydesign/designsystem/card": ["libs/designsystem/card/index.ts"],
       "@kirbydesign/designsystem/helpers": ["libs/designsystem/helpers/index.ts"],
       "@kirbydesign/designsystem/shared": ["libs/designsystem/shared/index.ts"],
-      "@kirbydesign/designsystem/types": ["libs/designsystem/types/index.ts"]
+      "@kirbydesign/designsystem/types": ["libs/designsystem/types/index.ts"],
+      "@kirbydesign/designsystem/kirby-ionic-module": [
+        "libs/designsystem/kirby-ionic-module/index.ts"
+      ]
     },
     "target": "es2020"
   },

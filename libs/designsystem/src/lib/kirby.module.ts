@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Inject, InjectionToken, ModuleWithProviders, NgModule, Optional } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
 
 import { CardModule } from '@kirbydesign/designsystem/card';
 import { IconModule } from '@kirbydesign/designsystem/icon';
@@ -164,17 +163,7 @@ export interface KirbyConfig {
 }
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule,
-    IonicModule.forRoot({
-      mode: 'ios',
-      inputShims: true,
-      scrollAssist: true,
-      scrollPadding: false,
-    }),
-    ...importedModules,
-  ],
+  imports: [CommonModule, RouterModule, ...importedModules],
   declarations: [declarations],
   providers: providers,
   exports: [allExports],

@@ -7,7 +7,8 @@
       "@kirbydesign/designsystem/*": ["*"],
       "@kirbydesign/designsystem/card": ["card/index.ts"],
       "@kirbydesign/designsystem/icon": ["icon/index.ts"],
-      "@kirbydesign/designsystem/testing": ["testing/index.ts"]
+      "@kirbydesign/designsystem/testing": ["testing/index.ts"],
+      "@kirbydesign/designsystem/kirby-ionic-module": ["kirby-ionic-module/index.ts"]
     },
     "esModuleInterop": true,
     "target": "es2020"
