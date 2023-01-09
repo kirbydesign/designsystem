@@ -9,6 +9,10 @@ kirby-card {
   width: 237px;
 }
 
+kirby-card:hover {
+  background-color: utils.get-color('background-color');
+}
+
 h3 {
   padding-top: 15px;
 }

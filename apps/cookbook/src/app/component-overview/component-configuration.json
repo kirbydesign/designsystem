@@ -74,7 +74,7 @@
     },
     {
       "title": "Data table",
-      "paragraph": "Data tables allow the us er to show large amount of complex data in tabular form.",
+      "paragraph": "Data tables allow the user to show large amount of complex data in tabular form.",
       "svgPath": "./assets/component-svg/Data-Table-Kirby-Component-Overview.svg",
       "route": "/home/showcase/data-table"
     },
