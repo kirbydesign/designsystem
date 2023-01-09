@@ -9,6 +9,7 @@
 
   // can we set some kind of theme variable here to forward to our interaction-states instead?
 
+  // default context + .kirby-color-brightness-white
   // primary is always the same, so this is just added here temporarily for clarity
   --kirby-button-background-color-att-lvl-1: #{utils.get-color('primary')};
   --kirby-button-color-att-lvl-1: #{utils.get-color('primary-contrast')};
@@ -18,6 +19,7 @@
   --kirby-button-color-att-lvl-3: #{utils.get-color('white-contrast')};
 
   &.kirby-color-brightness-dark {
+    // contents in mixin to be shared
     // primary is always the same, so this is just added here temporarily for clarity
     --kirby-button-background-color-att-lvl-1: #{utils.get-color('primary')};
     --kirby-button-color-att-lvl-1: #{utils.get-color('primary-contrast')};
@@ -28,13 +30,15 @@
   }
 
   &.kirby-color-brightness-light {
+    // contents in mixin to be shared
+
     // primary is always the same, so this is just added here temporarily for clarity
     --kirby-button-background-color-att-lvl-1: #{utils.get-color('primary')};
     --kirby-button-color-att-lvl-1: #{utils.get-color('primary-contrast')};
     --kirby-button-background-color-att-lvl-2: #{utils.get-color('black')};
-    --kirby-button-color-att-lvl-2: #{utils.get-color('white')};
-    --kirby-button-background-color-att-lvl-3: rgb(28 28 28 / 4%);
-    --kirby-button-color-att-lvl-3: #{utils.get-color('black')};
+    --kirby-button-color-att-lvl-2: #{utils.get-color('black-contrast')};
+    --kirby-button-background-color-att-lvl-3: #{utils.get-color('white')};
+    --kirby-button-color-att-lvl-3: #{utils.get-color('white-contrast')};
   }
 
   @include interaction-state.extend-content {
