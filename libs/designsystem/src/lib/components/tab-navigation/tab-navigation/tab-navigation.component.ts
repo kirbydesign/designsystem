@@ -6,11 +6,12 @@ import {
   QueryList,
   ViewChild,
 } from '@angular/core';
-import { filter, fromEvent } from 'rxjs';
+import { fromEvent } from 'rxjs';
 import { WindowRef } from '../../../types';
 import { TabNavigationItemComponent } from '../tab-navigation-item/tab-navigation-item.component';
 
-const KEY_ENTER = 'Enter';
+const ARROW_LEFT = 'ArrowLeft';
+const ARROW_RIGHT = 'ArrowRight';
 
 @Component({
   selector: 'kirby-tab-navigation',
@@ -27,7 +28,6 @@ export class TabNavigationComponent implements AfterViewInit {
   private readonly tabSelectedClassName = 'selected';
   private tabBarElement: HTMLElement;
   private tabElements = new Array<HTMLElement>();
-
   private selectedTabIndex = -1;
 
   constructor(private window: WindowRef) {
@@ -35,7 +35,7 @@ export class TabNavigationComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    console.log('--- Tabs: ' + this.tabs.length + ' ---');
+    //console.log('--- Tabs: ' + this.tabs.length + ' ---');
     //this.tabs.forEach((tab) => console.log('#', tab));
     this.tabBarElement = this.tabBar.nativeElement;
 
@@ -43,12 +43,21 @@ export class TabNavigationComponent implements AfterViewInit {
 
     this.tabElements.forEach((tabElement, index) => {
       fromEvent(tabElement, 'click').subscribe(() => this.setSelectedTab(index));
-      /*
-      fromEvent(tabElement, 'keydown')
-        .pipe(filter((e: KeyboardEvent) => e.key === KEY_ENTER))
-        .subscribe(() => this.setSelectedTab(index));
-        */
+      fromEvent(tabElement, 'keydown').subscribe((e: KeyboardEvent) => {
+        if (e.key === ARROW_LEFT) {
+          this.focusTab((index - 1 + this.tabElements.length) % this.tabElements.length);
+        }
+        if (e.key === ARROW_RIGHT) {
+          this.focusTab((index + 1) % this.tabElements.length);
+        }
+      });
     });
+  }
+
+  private focusTab(index: number): void {
+    if (0 <= index && index < this.tabElements.length) {
+      this.tabElements[index].focus();
+    }
   }
 
   private setSelectedTab(tabIndex: number): void {
