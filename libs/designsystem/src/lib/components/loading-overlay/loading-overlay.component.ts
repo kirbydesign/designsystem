@@ -13,4 +13,5 @@ import { SpinnerModule } from '../spinner';
 export class LoadingOverlayComponent {
   @Input() public isLoading = true;
   @Input() public showBackdrop = true;
+  @Input() public hideContent = false;
 }

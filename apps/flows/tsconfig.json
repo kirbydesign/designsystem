@@ -33,7 +33,8 @@
       "@kirbydesign/designsystem/types": ["libs/designsystem/types/index.ts"],
       "@kirbydesign/designsystem/kirby-ionic-module": [
         "libs/designsystem/kirby-ionic-module/index.ts"
-      ]
+      ],
+      "@kirbydesign/designsystem/flag": ["libs/designsystem/flag/index.ts"]
     },
     "target": "es2020"
   },

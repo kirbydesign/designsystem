@@ -12,6 +12,7 @@ import { Observable, of } from 'rxjs';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
+import { FlagComponent } from '@kirbydesign/designsystem/flag';
 import { ListItemTemplateDirective } from '../../list/list.directive';
 import { RadioComponent } from '../radio.component';
 
@@ -23,7 +24,7 @@ describe('RadioGroupComponent', () => {
   const createHost = createHostFactory({
     component: RadioGroupComponent,
     declarations: [RadioComponent, ListItemTemplateDirective],
-    imports: [TestHelper.ionicModuleForTest, FormsModule, ReactiveFormsModule],
+    imports: [TestHelper.ionicModuleForTest, FormsModule, ReactiveFormsModule, FlagComponent],
   });
 
   describe('with plain binding', () => {
