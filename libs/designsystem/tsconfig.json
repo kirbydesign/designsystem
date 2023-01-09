@@ -1,9 +1,21 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
+    "baseUrl":".",
+    "rootDir": ".",
+    "paths":{
+      "@kirbydesign/designsystem/*":["*"],
+
+      "@kirbydesign/designsystem/helpers": ["helpers/index.ts"],
+      "@kirbydesign/designsystem/shared": ["shared/index.ts"],
+      "@kirbydesign/designsystem/card": ["card/index.ts"],
+      "@kirbydesign/designsystem/types": ["types/index.ts"],
+      "@kirbydesign/designsystem/testing":["testing/index.ts"],
+      "@kirbydesign/designsystem/flag":["flag/index.ts"],
+      
+    },
     "esModuleInterop": true,
-    "paths": {},
-    "target": "es2020"
+        "target": "es2020"
   },
   "include": [],
   "files": [],

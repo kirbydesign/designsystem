@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
-import { ColorHelper } from '@kirbydesign/designsystem';
+import { ColorHelper } from '@kirbydesign/designsystem/helpers';
 
 @Component({
   styleUrls: ['./toggle-button-showcase.component.scss'],

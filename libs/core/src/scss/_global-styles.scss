@@ -171,6 +171,10 @@ ion-loading.kirby-loading-overlay {
   .loading-wrapper {
     --background: transparent;
   }
+
+  &.kirby-loading-hide-content {
+    --backdrop-opacity: 1;
+  }
 }
 
 .kirby-toast {

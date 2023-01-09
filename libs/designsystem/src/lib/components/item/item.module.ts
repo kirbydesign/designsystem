@@ -6,9 +6,10 @@ import { IconModule } from '../icon/icon.module';
 import { ItemComponent } from './item.component';
 import { LabelComponent } from './label/label.component';
 
+const declarations = [ItemComponent, LabelComponent];
 @NgModule({
   imports: [IonicModule, IconModule, CommonModule],
-  declarations: [ItemComponent, LabelComponent],
-  exports: [ItemComponent, LabelComponent],
+  declarations: [...declarations],
+  exports: [...declarations],
 })
 export class ItemModule {}

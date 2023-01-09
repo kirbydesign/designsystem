@@ -1,15 +1,6 @@
 import { Component, forwardRef, Input } from '@angular/core';
 
-import {
-  AnnotationOptions,
-  ChartComponent,
-  ChartDataLabelOptions,
-  ChartDataset,
-  ChartHighlightedElements,
-  ChartLabel,
-  ChartOptions,
-  ChartType,
-} from '@kirbydesign/designsystem';
+import { ChartComponent, ChartType } from '@kirbydesign/designsystem';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({

@@ -1,6 +1,6 @@
 import { Component, forwardRef, Input } from '@angular/core';
 
-import { CardFlagLevel, CardHeaderComponent } from '@kirbydesign/designsystem';
+import { CardFlagLevel, CardHeaderComponent } from '@kirbydesign/designsystem/card';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
