@@ -1,5 +1,6 @@
 @use '@kirbydesign/core/src/scss/interaction-state';
 @use '@kirbydesign/core/src/scss/utils';
+@use '@kirbydesign/core/src/scss/themes';
 
 :host {
   --kirby-card-main-background-color: #{utils.get-color('white')};
@@ -7,38 +8,14 @@
   --kirby-card-footer-background-color: #{utils.get-color('white')};
   --kirby-card-footer-color: #{utils.get-color('white-contrast')};
 
-  // can we set some kind of theme variable here to forward to our interaction-states instead?
-
-  // default context + .kirby-color-brightness-white
-  // primary is always the same, so this is just added here temporarily for clarity
-  --kirby-button-background-color-att-lvl-1: #{utils.get-color('primary')};
-  --kirby-button-color-att-lvl-1: #{utils.get-color('primary-contrast')};
-  --kirby-button-background-color-att-lvl-2: #{utils.get-color('black')};
-  --kirby-button-color-att-lvl-2: #{utils.get-color('black-contrast')};
-  --kirby-button-background-color-att-lvl-3: rgb(28 28 28 / 4%);
-  --kirby-button-color-att-lvl-3: #{utils.get-color('white-contrast')};
-
-  &.kirby-color-brightness-dark {
-    // contents in mixin to be shared
-    // primary is always the same, so this is just added here temporarily for clarity
-    --kirby-button-background-color-att-lvl-1: #{utils.get-color('primary')};
-    --kirby-button-color-att-lvl-1: #{utils.get-color('primary-contrast')};
-    --kirby-button-background-color-att-lvl-2: #{utils.get-color('white')};
-    --kirby-button-color-att-lvl-2: #{utils.get-color('white-contrast')};
-    --kirby-button-background-color-att-lvl-3: rgb(255 255 255 / 15%);
-    --kirby-button-color-att-lvl-3: #{utils.get-color('black-contrast')};
-  }
+  @include themes.apply-white-theme;
 
   &.kirby-color-brightness-light {
-    // contents in mixin to be shared
+    @include themes.apply-light-theme;
+  }
 
-    // primary is always the same, so this is just added here temporarily for clarity
-    --kirby-button-background-color-att-lvl-1: #{utils.get-color('primary')};
-    --kirby-button-color-att-lvl-1: #{utils.get-color('primary-contrast')};
-    --kirby-button-background-color-att-lvl-2: #{utils.get-color('black')};
-    --kirby-button-color-att-lvl-2: #{utils.get-color('black-contrast')};
-    --kirby-button-background-color-att-lvl-3: #{utils.get-color('white')};
-    --kirby-button-color-att-lvl-3: #{utils.get-color('white-contrast')};
+  &.kirby-color-brightness-dark {
+    @include themes.apply-dark-theme;
   }
 
   @include interaction-state.extend-content {
