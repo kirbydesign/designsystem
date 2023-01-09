@@ -10,9 +10,13 @@ import {
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'th[kirby-th]',
   template: `<button>
+    <ion-icon
+      *ngIf="sortable && textAlignment === 'end'"
+      name="{{ sortDirection === 'asc' ? 'arrow-down' : 'arrow-up' }}"
+    ></ion-icon>
     <ng-content></ng-content>
     <ion-icon
-      *ngIf="sortable"
+      *ngIf="sortable && (textAlignment === 'start' || textAlignment === 'center')"
       name="{{ sortDirection === 'asc' ? 'arrow-down' : 'arrow-up' }}"
     ></ion-icon>
   </button>`,
@@ -25,5 +29,10 @@ export class TableHeadComponent {
    */
   @HostBinding('class.kirby-sortable-head') @Input() sortable: boolean = false;
 
-  @HostBinding('class.ascending') @Input() sortDirection: 'asc' | 'desc';
+  @Input() sortDirection: 'asc' | 'desc';
+
+  @HostBinding('class.kirby-text-alignment-head') @Input() textAlignment:
+    | 'start'
+    | 'center'
+    | 'end' = 'start';
 }
