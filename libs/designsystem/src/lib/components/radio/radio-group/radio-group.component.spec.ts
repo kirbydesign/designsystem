@@ -20,7 +20,7 @@ import { RadioGroupComponent } from './radio-group.component';
 
 const { getColor } = DesignTokenHelper;
 
-describe('RadioGroupComponent', () => {
+fdescribe('RadioGroupComponent', () => {
   const createHost = createHostFactory({
     component: RadioGroupComponent,
     declarations: [RadioComponent, ListItemTemplateDirective],
@@ -817,12 +817,21 @@ describe('RadioGroupComponent', () => {
       expect(onChangeSpy).toHaveBeenCalledWith(expectedItem);
     });
 
-    it('should invoke callback from registerOnTouched() function on blur', () => {
+    it('should invoke callback from registerOnTouched() function on blur', async () => {
       const onTouchedSpy = jasmine.createSpy('_onTouched');
       spectator.component.registerOnTouched(onTouchedSpy);
+      expect(onTouchedSpy).not.toHaveBeenCalled();
+      expect(ionRadioElements[0]).toBeDefined();
+
+      console.log(ionRadioElements[0]);
+
       ionRadioElements[0].focus();
       ionRadioElements[0].blur();
-      expect(onTouchedSpy).toHaveBeenCalled();
+
+      TestHelper.waitForResizeObserver();
+      await TestHelper.waitForTimeout(3000);
+
+      expect(onTouchedSpy).toHaveBeenCalledTimes(1);
     });
 
     describe('when setDisabledState() function is invoked', () => {

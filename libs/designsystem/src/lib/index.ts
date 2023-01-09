@@ -6,6 +6,8 @@ export * from '@kirbydesign/designsystem/flag';
 export * from '@kirbydesign/designsystem/helpers';
 export * from '@kirbydesign/designsystem/types';
 export * from '@kirbydesign/designsystem/shared';
+export * from '@kirbydesign/designsystem/spinner';
+
 export * from './scss/scss-helper';
 
 export * from './components/charts/chart-config';
