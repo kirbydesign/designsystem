@@ -6,9 +6,8 @@ import {
   SpectatorHost,
 } from '@ngneat/spectator';
 
-import { TestHelper } from '../../testing/test-helper';
+import { TestHelper } from '@kirbydesign/designsystem/testing';
 
-import { ProgressCircleRingComponent } from './progress-circle-ring.component';
 import { ProgressCircleComponent } from './progress-circle.component';
 
 describe('ProgressCircleComponent', () => {
@@ -19,7 +18,6 @@ describe('ProgressCircleComponent', () => {
 
     const createHost = createComponentFactory({
       component: ProgressCircleComponent,
-      declarations: [ProgressCircleRingComponent],
     });
 
     beforeEach(() => {
@@ -313,7 +311,6 @@ describe('ProgressCircleComponent', () => {
 
     const createHost = createHostFactory({
       component: ProgressCircleComponent,
-      declarations: [ProgressCircleRingComponent],
     });
 
     beforeEach(() => {

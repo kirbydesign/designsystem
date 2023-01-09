@@ -13,17 +13,18 @@ import {
   QueryList,
   Renderer2,
 } from '@angular/core';
-import { DesignTokenHelper } from '../../helpers';
-
-import { PlatformService } from '../../helpers/platform.service';
-import { UniqueIdGenerator } from '../../helpers/unique-id-generator.helper';
-import { WindowRef } from '../../types/window-ref';
-import { RadioGroupComponent } from '../radio/radio-group/radio-group.component';
-import { ResizeObserverService } from '../shared/resize-observer/resize-observer.service';
+import {
+  DesignTokenHelper,
+  PlatformService,
+  UniqueIdGenerator,
+} from '@kirbydesign/designsystem/helpers';
+import { ResizeObserverService } from '@kirbydesign/designsystem/shared';
+import { WindowRef } from '@kirbydesign/designsystem/types';
+import { RadioGroupComponent } from '../radio';
 import { AffixDirective } from './directives/affix/affix.directive';
-
 import { InputCounterComponent } from './input-counter/input-counter.component';
 import { InputComponent } from './input/input.component';
+
 import { TextareaComponent } from './textarea/textarea.component';
 
 @Component({

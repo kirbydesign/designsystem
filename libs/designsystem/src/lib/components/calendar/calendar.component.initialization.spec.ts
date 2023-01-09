@@ -1,32 +1,13 @@
 import { LOCALE_ID } from '@angular/core';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { MockComponent } from 'ng-mocks';
-
-import {
-  ButtonComponent,
-  CalendarComponent,
-  CardComponent,
-  DropdownComponent,
-  IconComponent,
-  RadioComponent,
-} from '..';
-import { WindowRef } from '../../types/window-ref';
-import { ItemComponent } from '../item';
+import { WindowRef } from '@kirbydesign/designsystem/types';
+import { CalendarComponent } from '..';
 
 describe('CalendarComponent', () => {
   let spectator: SpectatorHost<CalendarComponent>;
 
   const createHost = createHostFactory({
     component: CalendarComponent,
-    declarations: [
-      CalendarComponent,
-      MockComponent(IconComponent),
-      DropdownComponent,
-      RadioComponent,
-      CardComponent,
-      ItemComponent,
-      ButtonComponent,
-    ],
     providers: [
       {
         provide: LOCALE_ID,
@@ -38,6 +19,7 @@ describe('CalendarComponent', () => {
         useValue: <WindowRef>{ nativeWindow: window },
       },
     ],
+    imports: [CalendarComponent],
   });
 
   type calendarProps = keyof CalendarComponent;

@@ -1,10 +1,13 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ChangeDetectionStrategy, Component, Input, OnChanges } from '@angular/core';
+import { IconModule } from '../icon';
 
 // Counter for generating unique element ids
 let uniqueId = 0;
 
 @Component({
+  standalone: true,
+  imports: [IconModule],
   selector: 'kirby-accordion-item',
   templateUrl: './accordion-item.component.html',
   styleUrls: ['./accordion-item.component.scss'],

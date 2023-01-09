@@ -2,9 +2,8 @@ import { ElementRef } from '@angular/core';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 import { Chart, FontSpec } from 'chart.js';
 
-import { chartConfigHasType } from '../../../../helpers';
+import { chartConfigHasType, ColorHelper } from '@kirbydesign/designsystem/helpers';
 import { ChartConfigService } from '../';
-import { ColorHelper } from '../../../../helpers';
 
 import { ChartJSService } from './chart-js.service';
 

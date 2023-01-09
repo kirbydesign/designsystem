@@ -1,9 +1,9 @@
 import { registerLocaleData } from '@angular/common';
 import localeDa from '@angular/common/locales/da';
 import { LOCALE_ID } from '@angular/core';
+import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { createDirectiveFactory, SpectatorDirective } from '@ngneat/spectator';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import { TestHelper } from 'libs/designsystem/src/lib/testing/test-helper';
 
 import { InputComponent } from '../../input/input.component';
 

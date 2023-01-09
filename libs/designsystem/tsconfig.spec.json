@@ -4,8 +4,19 @@
     "outDir": "../../dist/out-tsc",
     "types": ["jasmine", "node"],
     "target": "ES2022",
-    "useDefineForClassFields": false
+    "useDefineForClassFields": false,
+    "paths": {
+      "@kirbydesign/designsystem/*": ["libs/designsystem/src/lib/*"],
+
+      "@kirbydesign/designsystem/helpers": ["helpers/index.ts"],
+      "@kirbydesign/designsystem/shared": ["shared/index.ts"],
+      "@kirbydesign/designsystem/card": ["card/index.ts"],
+      "@kirbydesign/designsystem/types": ["types/index.ts"],
+      "@kirbydesign/designsystem/testing": ["testing/index.ts"],
+      "@kirbydesign/designsystem/flag": ["flag/index.ts"]
+    }
   },
   "files": ["src/test.ts"],
-  "include": ["**/*.spec.ts", "**/*.d.ts"]
+  "include": ["**/*.spec.ts", "**/*.d.ts"],
+  "exclude": []
 }

@@ -1,8 +1,8 @@
+import { mergeDeepAll } from '@kirbydesign/designsystem/helpers';
 import { Chart } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
 
 import { ChartConfigService } from '../';
-import { mergeDeepAll } from '../../../../helpers/merge-deep';
 
 export class AnnotationsDelegate {
   constructor(private chartConfigService: ChartConfigService) {}

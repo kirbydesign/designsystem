@@ -1,12 +1,8 @@
-import { IonicModule } from '@ionic/angular';
+import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { MockComponent, MockModule } from 'ng-mocks';
 
-import { DesignTokenHelper } from '../../helpers';
-import { ItemComponent } from '../item/item.component';
-
-import { ItemSlidingComponent, ItemSwipeAction } from './';
 import { ItemSwipeActionType } from './item-sliding.types';
+import { ItemSlidingComponent, ItemSwipeAction } from './';
 
 const { getColor } = DesignTokenHelper;
 
@@ -14,8 +10,6 @@ describe('ItemSlidingComponent', () => {
   let spectator: SpectatorHost<ItemSlidingComponent>;
 
   const createHost = createHostFactory({
-    imports: [MockModule(IonicModule)],
-    declarations: [MockComponent(ItemComponent)],
     component: ItemSlidingComponent,
   });
 
