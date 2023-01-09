@@ -30,7 +30,8 @@
       "@kirbydesign/designsystem/card": ["libs/designsystem/card/index.ts"],
       "@kirbydesign/designsystem/helpers": ["libs/designsystem/helpers/index.ts"],
       "@kirbydesign/designsystem/shared": ["libs/designsystem/shared/index.ts"],
-      "@kirbydesign/designsystem/types": ["libs/designsystem/types/index.ts"]
+      "@kirbydesign/designsystem/types": ["libs/designsystem/types/index.ts"],
+      "@kirbydesign/designsystem/flag": ["libs/designsystem/flag/index.ts"]
     },
     "target": "es2020"
   },
