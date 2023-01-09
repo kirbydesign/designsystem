@@ -41,7 +41,7 @@
               },
               {
                 "glob": "**/*.svg",
-                "input": "libs/designsystem/src/lib/icons/svg",
+                "input": "libs/designsystem/icon/src/icons/svg",
                 "output": "./assets/kirby/icons/svg"
               },
               {
