@@ -1,0 +1,26 @@
+@use '../utils';
+
+@mixin apply-dark-theme {
+  --kirby-button-background-color: #{utils.get-color('white')};
+  --kirby-button-color: #{utils.get-color('white-contrast')};
+
+  // TODO: extract to variable
+  --kirby-interactive-background-color: rgb(255 255 255 / 15%);
+  --kirby-interactive-color: #{utils.get-color('black-contrast')};
+}
+
+@mixin apply-white-theme {
+  --kirby-button-background-color: #{utils.get-color('black')};
+  --kirby-button-color: #{utils.get-color('black-contrast')};
+
+  // TODO: extract to variable
+  --kirby-interactive-background-color: rgb(28 28 28 / 4%);
+  --kirby-interactive-color: #{utils.get-color('white-contrast')};
+}
+
+@mixin apply-light-theme {
+  --kirby-button-background-color: #{utils.get-color('black')};
+  --kirby-button-color: #{utils.get-color('black-contrast')};
+  --kirby-interactive-background-color: #{utils.get-color('white')};
+  --kirby-interactive-color: #{utils.get-color('white-contrast')};
+}

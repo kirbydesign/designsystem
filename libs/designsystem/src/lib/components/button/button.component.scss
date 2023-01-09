@@ -68,8 +68,8 @@ $button-width: (
 }
 
 @mixin button-attentionlevel1 {
-  background-color: var(--kirby-button-background-color-att-lvl-1, #{utils.get-color('primary')});
-  color: var(--kirby-button-color-att-lvl-1, #{utils.get-color('primary-contrast')});
+  background-color: #{utils.get-color('primary')};
+  color: #{utils.get-color('primary-contrast')};
 
   // The destructive class is only ever applied by kirby-alert.
   // Standalone destructive buttons are not a supported concept.
@@ -81,13 +81,10 @@ $button-width: (
 
 @mixin button-attentionlevel2 {
   background-color: var(
-    --kirby-button-background-color-att-lvl-2,
+    --kirby-button-background-color,
     #{utils.get-color('black', $getValueOnly: true)}
   );
-  color: var(
-    --kirby-button-color-att-lvl-2,
-    #{utils.get-color('black-contrast', $getValueOnly: true)}
-  );
+  color: var(--kirby-button-color, #{utils.get-color('black-contrast', $getValueOnly: true)});
 
   @include interaction-state.apply-hover('l', $make-lighter: true);
   @include interaction-state.apply-active('xxxl', $make-lighter: true);
@@ -95,10 +92,10 @@ $button-width: (
 
 @mixin button-attentionlevel3 {
   background-color: var(
-    --kirby-button-background-color-att-lvl-3,
+    --kirby-interactive-background-color,
     #{utils.get-color('white', $getValueOnly: true)}
   );
-  color: var(--kirby-button-color-att-lvl-3, #{utils.get-color('black', $getValueOnly: true)});
+  color: var(--kirby-interactive-color, #{utils.get-color('black', $getValueOnly: true)});
 
   @include interaction-state.apply-hover('xxxs');
   @include interaction-state.apply-active('xxs');
