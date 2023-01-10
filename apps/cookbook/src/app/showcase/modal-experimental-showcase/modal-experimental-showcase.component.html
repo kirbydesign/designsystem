@@ -6,6 +6,13 @@
   to choose from, or when filtering items in a list, as well as many other use cases.
 </p>
 
+<p>
+  If the modal is used on a page with scroll, then it requires that the container responsible for
+  the overflow is another element than the <code>body</code>, fx. <code>kirby-page</code> or a
+  custom container. Otherwise it will jump back to the top of the page, where the modal is rendered,
+  as is evident when the <code>Open modal</code> button on this page is pressed.
+</p>
+
 <p>Modals can be used as components or generated through the modal controller.</p>
 
 <h3><a href="#" (click)="scrollTo(components)">Components</a></h3>
@@ -57,11 +64,6 @@
 <hr />
 
 <h1 #components>Components</h1>
-<p>
-  The modal components must be used within a <code>kirby-page</code> or on a page with no scrolling
-  as the modal will automatically apply a class to the body that prevents scrolling. This is not an
-  issue within a <code>kirby-page</code> as that will handle the overflow.
-</p>
 
 <div class="page-example">
   <div>
@@ -142,6 +144,12 @@
   <code>modalController.showModal</code> method:
 </p>
 
+<p>
+  We recommend wrapping your component in the
+  <code>kirby-modal-wrapper-experimental</code> component to get the default Kirby styling. It
+  accepts the same two slots as described above - <code>header-start</code> & <code>footer</code>.
+</p>
+
 <cookbook-code-viewer [ts]="showModalCodeSnippet"></cookbook-code-viewer>
 
 <button kirby-button (click)="openModal()">Open modal</button>
@@ -169,12 +177,6 @@
 </p>
 
 <cookbook-code-viewer [ts]="observableCodeSnippet"></cookbook-code-viewer>
-
-<p>
-  We recommend wrapping your component in the
-  <code>kirby-modal-wrapper-experimental</code> component to get the default Kirby styling. It
-  accepts the same two slots as described above - <code>header-start</code> & <code>footer</code>.
-</p>
 
 <h2 #modalControllerWrapperProperties>Modal wrapper properties:</h2>
 
