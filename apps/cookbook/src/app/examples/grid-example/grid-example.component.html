@@ -64,8 +64,35 @@
         {{ size.text }}
       </option>
     </select>
+    <legend>Grid Row Spacing</legend>
+    <select (change)="onRowSpacingSizeChange($event.target.value)">
+      <option value="">-</option>
+      <option
+        *ngFor="let size of spacingSizes"
+        value="{{ size.value }}"
+        [attr.selected]="spacingSizes === size.value ? true : null"
+      >
+        {{ size.text }}
+      </option>
+    </select>
+    <legend>Grid Column Spacing</legend>
+    <select (change)="onColumnSpacingSizeChange($event.target.value)">
+      <option value="">-</option>
+      <option
+        *ngFor="let size of spacingSizes"
+        value="{{ size.value }}"
+        [attr.selected]="spacingSizes === size.value ? true : null"
+      >
+        {{ size.text }}
+      </option>
+    </select>
   </fieldset>
-  <div class="kirby-grid" attr.spacing="{{ spacing }}">
+  <div
+    class="kirby-grid"
+    attr.spacing="{{ spacing }}"
+    attr.row-spacing="{{ rowSpacing }}"
+    attr.column-spacing="{{ columnSpacing }}"
+  >
     <div class="kirby-grid-item" xs="8">
       <kirby-card>
         <kirby-card-header title="xs='8'"></kirby-card-header>
