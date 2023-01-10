@@ -674,7 +674,7 @@ describe('DropdownComponent', () => {
 
     describe('when aligned to right side of viewport', () => {
       /**
-       * Temporaly removed
+       * Temporaly removed, see #2736
        */
       xit('should align the dropdown to the right side of button and component container ', (done) => {
         spectator.element.style.cssFloat = 'right';

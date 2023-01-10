@@ -68,7 +68,7 @@ describe('ModalFooterComponent', () => {
     });
 
     /**
-     * Temporaly removed
+     * Temporaly removed, see #2736
      */
     xit('when --kirby-safe-area-bottom is set', () => {
       setSafeAreaBottom();

@@ -818,7 +818,7 @@ describe('RadioGroupComponent', () => {
     });
 
     /**
-     * Temporaly removed
+     * Temporaly removed, see #2736
      */
     xit('should invoke callback from registerOnTouched() function on blur', () => {
       const onTouchedSpy = jasmine.createSpy('_onTouched');
@@ -1047,7 +1047,7 @@ describe('RadioGroupComponent', () => {
             });
 
             /**
-             * Temporaly removed
+             * Temporaly removed, see #2736
              */
             xit('should be in error state', () => {
               ionRadioElements.forEach((ionRadioElement) => {
@@ -1304,7 +1304,7 @@ describe('RadioGroupComponent', () => {
             });
 
             /**
-             * Temporaly removed
+             * Temporaly removed, see #2736
              */
             xit('should be in error state', () => {
               ionRadioElements.forEach((ionRadioElement) => {

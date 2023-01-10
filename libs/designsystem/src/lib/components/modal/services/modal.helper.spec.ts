@@ -294,7 +294,7 @@ describe('ModalHelper', () => {
       });
 
       /**
-       * Temporaly removed
+       * Temporaly removed, see #2736
        */
       xit('should NOT add class `full-height`, if content can fit in viewport', async () => {
         await openModal(ContentWithNoOverflowEmbeddedComponent);
@@ -304,7 +304,7 @@ describe('ModalHelper', () => {
       });
 
       /**
-       * Temporaly removed
+       * Temporaly removed, see #2736
        */
       xit('should have footer visible at the bottom of viewport, when full-height', async () => {
         await openModal(ContentOverflowsWithFooterEmbeddedComponent);
