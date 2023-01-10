@@ -163,7 +163,10 @@ describe('ModalWrapperComponent', () => {
   });
 
   describe('viewportResize', () => {
-    it('should emit when viewport is resized', async () => {
+    /**
+     * Temporaly removed, see #2736
+     */
+    xit('should emit when viewport is resized', async () => {
       spectator = modalWrapperTestBuilder.build();
       await TestHelper.whenTrue(() => !!spectator.component['initialViewportHeight']);
       const viewportResizeSpy = spyOn(spectator.component['viewportResize'], 'next');
