@@ -20,7 +20,7 @@
       [size]="cancelBtn ? null : 'lg'"
       attentionLevel="1"
       class="ok-btn"
-      [isDestructive]="okBtnIsDestructive"
+      [class.destructive]="okBtnIsDestructive"
       (click)="onOk()"
     >
       {{ okBtn }}
