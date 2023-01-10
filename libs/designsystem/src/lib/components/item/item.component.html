@@ -13,4 +13,6 @@
   <ion-reorder slot="end" *ngIf="reorderable">
     <kirby-icon name="reorder"></kirby-icon>
   </ion-reorder>
+
+  <kirby-icon *ngIf="disclosure" class="disclosure" slot="end" name="{{ disclosure }}"></kirby-icon>
 </ion-item>

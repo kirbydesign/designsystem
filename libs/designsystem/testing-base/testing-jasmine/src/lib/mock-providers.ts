@@ -25,6 +25,7 @@ export function chartJSServiceFactory() {
   return jasmine.createSpyObj<ChartJSService>('ChartJSService', [
     'renderChart',
     'redrawChart',
+    'destroyChart',
     'updateData',
     'updateLabels',
     'updateType',
@@ -52,6 +53,7 @@ export function modalControllerFactory() {
     'navigateWithinModal',
     'showActionSheet',
     'showAlert',
+    'registerPresentingElement',
     'hideTopmost',
     'scrollToTop',
     'scrollToBottom',
@@ -60,7 +62,9 @@ export function modalControllerFactory() {
 }
 
 export function tabsServiceFactory() {
-  return jasmine.createSpyObj<TabsService>('TabsService', ['setOutlet'], { outlet$: EMPTY });
+  return jasmine.createSpyObj<TabsService>('TabsService', ['setOutlet', 'resetOutlet'], {
+    outlet$: EMPTY,
+  });
 }
 
 export function toastControllerFactory() {
