@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   HostBinding,
@@ -11,6 +12,7 @@ import {
   selector: 'kirby-tab-navigation-item',
   templateUrl: './tab-navigation-item.component.html',
   styleUrls: ['./tab-navigation-item.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TabNavigationItemComponent implements AfterViewInit {
   @ViewChild('tabButton')
@@ -28,7 +30,7 @@ export class TabNavigationItemComponent implements AfterViewInit {
 
   private readonly labelTextElementSelector = 'span[text]';
   private readonly labelTextElementContentAttribute = 'data-text';
-  private tabButtonElement;
+  private tabButtonElement: HTMLElement;
 
   constructor(private elementRef: ElementRef<HTMLElement>) {
     /* */

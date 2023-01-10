@@ -1,12 +1,16 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   ContentChildren,
   ElementRef,
+  EventEmitter,
+  Input,
+  Output,
   QueryList,
   ViewChild,
 } from '@angular/core';
-import { fromEvent } from 'rxjs';
+import { filter, fromEvent, map } from 'rxjs';
 import { WindowRef } from '../../../types';
 import { TabNavigationItemComponent } from '../tab-navigation-item/tab-navigation-item.component';
 
@@ -17,75 +21,102 @@ const ARROW_RIGHT = 'ArrowRight';
   selector: 'kirby-tab-navigation',
   templateUrl: './tab-navigation.component.html',
   styleUrls: ['./tab-navigation.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TabNavigationComponent implements AfterViewInit {
-  @ContentChildren(TabNavigationItemComponent, { read: ElementRef })
-  private tabs: QueryList<ElementRef<HTMLElement>>;
-
   @ViewChild('tabBar')
   private tabBar: ElementRef<HTMLElement>;
 
+  @ContentChildren(TabNavigationItemComponent, { read: ElementRef })
+  private tabs: QueryList<ElementRef<HTMLElement>>;
+
+  private readonly DEBOUNCE_TIME_MS = 250;
   private readonly tabSelectedClassName = 'selected';
   private tabBarElement: HTMLElement;
   private tabElements = new Array<HTMLElement>();
-  private selectedTabIndex = -1;
+
+  @Input()
+  get selectedIndex(): number {
+    return this._selectedIndex;
+  }
+
+  set selectedIndex(index: number) {
+    if (index !== this._selectedIndex) {
+      this._selectedIndex = index;
+
+      setTimeout(() => {
+        this.selectTab(this.selectedIndex);
+        this.scrollToTab(this.selectedIndex);
+        this.selectedIndexChange.emit(this.selectedIndex);
+      });
+    }
+  }
+  private _selectedIndex = -1;
+
+  @Output()
+  selectedIndexChange = new EventEmitter<number>();
 
   constructor(private window: WindowRef) {
     /**/
   }
 
   ngAfterViewInit(): void {
-    //console.log('--- Tabs: ' + this.tabs.length + ' ---');
-    //this.tabs.forEach((tab) => console.log('#', tab));
     this.tabBarElement = this.tabBar.nativeElement;
-
     this.tabs.forEach((tab) => this.tabElements.push(tab.nativeElement));
 
     this.tabElements.forEach((tabElement, index) => {
-      fromEvent(tabElement, 'click').subscribe(() => this.setSelectedTab(index));
-      fromEvent(tabElement, 'keydown').subscribe((e: KeyboardEvent) => {
-        if (e.key === ARROW_LEFT) {
-          this.focusTab((index - 1 + this.tabElements.length) % this.tabElements.length);
-        }
-        if (e.key === ARROW_RIGHT) {
-          this.focusTab((index + 1) % this.tabElements.length);
-        }
-      });
+      fromEvent(tabElement, 'click').subscribe(() => (this.selectedIndex = index));
+      fromEvent(tabElement, 'keydown')
+        .pipe(
+          filter((e: KeyboardEvent) => e.key === ARROW_LEFT || e.key === ARROW_RIGHT),
+          map((e: KeyboardEvent) =>
+            e.key === ARROW_LEFT
+              ? (index - 1 + this.tabElements.length) % this.tabElements.length
+              : (index + 1) % this.tabElements.length
+          )
+        )
+        .subscribe((focusIndex: number) => {
+          this.focusTab(focusIndex);
+          this.scrollToTab(focusIndex);
+        });
     });
+
+    setTimeout(() => {
+      this.scrollToTab(this.selectedIndex);
+    }, this.DEBOUNCE_TIME_MS);
   }
 
-  private focusTab(index: number): void {
-    if (0 <= index && index < this.tabElements.length) {
-      this.tabElements[index].focus();
+  private focusTab(tabIndex: number): void {
+    if (0 <= tabIndex && tabIndex < this.tabElements.length) {
+      this.tabElements[tabIndex].focus();
     }
   }
 
-  private setSelectedTab(tabIndex: number): void {
+  private selectTab(tabIndex: number): void {
     this.tabElements.forEach((tabElement, index) => {
       tabElement.classList.remove(this.tabSelectedClassName);
       if (tabIndex === index) {
         tabElement.classList.add(this.tabSelectedClassName);
       }
     });
-    this.scrollToTab(tabIndex);
-
-    this.selectedTabIndex = tabIndex;
   }
 
   private scrollToTab(tabIndex: number): void {
-    const selectedTabElement = this.tabElements[tabIndex];
-    const selectedTabElementWidth = selectedTabElement.getBoundingClientRect().width;
-    const selectedTabElementOffsetLeft = selectedTabElement.offsetLeft;
-    const tabBarElementWidth = this.tabBarElement.getBoundingClientRect().width;
+    if (0 <= tabIndex && tabIndex < this.tabElements.length) {
+      const selectedTabElement = this.tabElements[tabIndex];
+      const selectedTabElementWidth = selectedTabElement.getBoundingClientRect().width;
+      const selectedTabElementOffsetLeft = selectedTabElement.offsetLeft;
+      const tabBarElementWidth = this.tabBarElement.getBoundingClientRect().width;
 
-    this.window.nativeWindow.requestAnimationFrame(() => {
-      this.tabBarElement?.scrollTo({
-        behavior: 'smooth',
-        left: Math.max(
-          0,
-          selectedTabElementOffsetLeft - (tabBarElementWidth - selectedTabElementWidth) / 2
-        ),
+      this.window.nativeWindow.requestAnimationFrame(() => {
+        this.tabBarElement?.scrollTo({
+          behavior: 'smooth',
+          left: Math.max(
+            0,
+            selectedTabElementOffsetLeft - (tabBarElementWidth - selectedTabElementWidth) / 2
+          ),
+        });
       });
-    });
+    }
   }
 }
