@@ -3,8 +3,7 @@ import * as ionic from '@ionic/angular';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
 import { MockComponent } from 'ng-mocks';
-
-import { SpinnerComponent } from '../spinner/spinner.component';
+import { SpinnerModule } from 'spinner/src';
 
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 import { ListItemColorDirective } from './directives/list-item-color.directive';
@@ -65,7 +64,6 @@ describe('ListComponent', () => {
     component: ListComponent,
     declarations: [
       ListComponent,
-      SpinnerComponent,
       InfiniteScrollDirective,
       ListItemColorDirective,
       ListItemComponent,
@@ -84,6 +82,7 @@ describe('ListComponent', () => {
         useValue: <WindowRef>{ nativeWindow: window },
       },
     ],
+    imports: [SpinnerModule],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
   });
 

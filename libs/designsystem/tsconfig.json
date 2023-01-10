@@ -12,7 +12,7 @@
       "@kirbydesign/designsystem/types": ["types/index.ts"],
       "@kirbydesign/designsystem/testing":["testing/index.ts"],
       "@kirbydesign/designsystem/flag":["flag/index.ts"],
-      
+      "@kirbydesign/designsystem/spinner":["spinner/index.ts"],
     },
     "esModuleInterop": true,
         "target": "es2020"

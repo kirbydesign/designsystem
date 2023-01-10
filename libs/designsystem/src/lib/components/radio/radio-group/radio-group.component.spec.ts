@@ -820,9 +820,11 @@ describe('RadioGroupComponent', () => {
     it('should invoke callback from registerOnTouched() function on blur', () => {
       const onTouchedSpy = jasmine.createSpy('_onTouched');
       spectator.component.registerOnTouched(onTouchedSpy);
+
       ionRadioElements[0].focus();
       ionRadioElements[0].blur();
-      expect(onTouchedSpy).toHaveBeenCalled();
+
+      expect(onTouchedSpy).toHaveBeenCalledTimes(1);
     });
 
     describe('when setDisabledState() function is invoked', () => {
