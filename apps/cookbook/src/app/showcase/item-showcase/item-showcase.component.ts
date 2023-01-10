@@ -10,12 +10,51 @@ import {
   styleUrls: ['./item-showcase.component.scss'],
 })
 export class ItemShowcaseComponent {
-  columns: ApiDescriptionPropertyColumns = {
+  properties: ApiDescriptionProperty[] = [
+    {
+      name: 'Selectable',
+      description: 'Make item selectable',
+      defaultValue: 'false',
+      type: ['boolean'],
+    },
+    {
+      name: 'selected',
+      description: 'Mark item as selected - making its content appear in bold',
+      defaultValue: 'false',
+      type: ['boolean'],
+    },
+    {
+      name: 'disabled',
+      description: 'Disable item entirely including its contents',
+      defaultValue: 'false',
+      type: ['boolean'],
+    },
+    {
+      name: 'disclosure',
+      description: 'Set disclosure icon',
+      defaultValue: 'null',
+      type: ["'link' | 'arrow-more' | 'arrow-down' | 'arrow-up'"],
+    },
+    {
+      name: 'reorderable',
+      description: 'Make item reorderable in a list - makes reorder icon appear',
+      defaultValue: 'false',
+      type: ['boolean'],
+    },
+    {
+      name: 'size',
+      description: 'Set size for item',
+      defaultValue: 'md',
+      type: ['ItemSize'],
+    },
+  ];
+
+  customCssPropertiesColumns: ApiDescriptionPropertyColumns = {
     name: 'Name',
     description: 'Description',
   };
 
-  properties: ApiDescriptionProperty[] = [
+  customCssProperties: ApiDescriptionProperty[] = [
     {
       name: '--kirby-item-background',
       description: 'Background of the item',

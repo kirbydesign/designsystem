@@ -29,6 +29,7 @@ import { ItemExampleSimpleExtraSmallComponent } from './examples/simple/default-
 import { ItemExampleInputDefaultComponent } from './examples/input/default';
 import { ItemExampleInputNumericComponent } from './examples/input/numeric';
 import { ItemExampleCardComponent } from './examples/card';
+import { ItemExampleDisclosureComponent } from './examples/disclosure';
 
 const COMPONENT_DECLARATIONS = [
   ItemExampleSimpleComponent,
@@ -57,6 +58,7 @@ const COMPONENT_DECLARATIONS = [
   ItemExampleInputDefaultComponent,
   ItemExampleInputNumericComponent,
   ItemExampleCardComponent,
+  ItemExampleDisclosureComponent,
 ];
 
 @NgModule({
