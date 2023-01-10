@@ -5,8 +5,9 @@ import { MockComponents } from 'ng-mocks';
 
 import { DesignTokenHelper } from '@kirbydesign/core';
 
+import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { ThemeColorDirective } from '../../../directives';
-import { TestHelper } from '../../../testing/test-helper';
+// import { TestHelper } from '../../../testing/test-helper';
 import { ModalFooterExperimentalComponent } from './footer.component';
 
 const size = DesignTokenHelper.size;
