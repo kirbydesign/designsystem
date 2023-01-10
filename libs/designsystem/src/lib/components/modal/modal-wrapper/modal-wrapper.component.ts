@@ -17,25 +17,29 @@ import {
   ViewChild,
   ViewChildren,
 } from '@angular/core';
-import { ActivatedRoute, RouterOutlet } from '@angular/router';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular';
-import { merge, Observable, Subject } from 'rxjs';
+import { ActivatedRoute, RouterModule, RouterOutlet } from '@angular/router';
+import { IonContent, IonHeader, IonicModule, IonTitle, IonToolbar } from '@ionic/angular';
+import { firstValueFrom, merge, Observable, Subject } from 'rxjs';
 import { debounceTime, first, takeUntil } from 'rxjs/operators';
 
-import { DesignTokenHelper } from '@kirbydesign/core';
+import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
-import { KirbyAnimation } from '../../../animation/kirby-animation';
-import { PlatformService } from '../../../helpers/platform.service';
-import { WindowRef } from '../../../types/window-ref';
-import { ButtonComponent } from '../../button/button.component';
-import { ResizeObserverService } from '../../shared/resize-observer/resize-observer.service';
+import { ResizeObserverService } from '@kirbydesign/designsystem/shared';
+import { WindowRef } from '@kirbydesign/designsystem/types';
+import { PlatformService } from '@kirbydesign/designsystem/helpers';
+import { CommonModule } from '@angular/common';
 import { Modal, ModalElementsAdvertiser, ModalElementType } from '../services/modal.interfaces';
 
+import { ButtonComponent } from '../../button/button.component';
+import { KirbyAnimation } from '../../../animation/kirby-animation';
+import { IconModule } from '../../icon';
 import { ModalConfig } from './config/modal-config';
 import { COMPONENT_PROPS } from './config/modal-config.helper';
 import { ModalElementsMoverDelegate } from './modal-elements-mover.delegate';
 
 @Component({
+  standalone: true,
+  imports: [IonicModule, RouterModule, ButtonComponent, IconModule, CommonModule],
   selector: 'kirby-modal-wrapper',
   templateUrl: './modal-wrapper.component.html',
   styleUrls: ['./modal-wrapper.component.scss'],
@@ -100,9 +104,9 @@ export class ModalWrapperComponent
   private viewportResized = false;
   private ionModalElement?: HTMLIonModalElement;
   private readonly ionModalDidPresent = new Subject<void>();
-  readonly didPresent = this.ionModalDidPresent.toPromise();
+  readonly didPresent = firstValueFrom(this.ionModalDidPresent);
   private readonly ionModalWillDismiss = new Subject<void>();
-  readonly willClose = this.ionModalWillDismiss.toPromise();
+  readonly willClose = firstValueFrom(this.ionModalWillDismiss);
   private viewportResize = new Subject<void>();
   private viewportResize$ = this.viewportResize
     .asObservable()

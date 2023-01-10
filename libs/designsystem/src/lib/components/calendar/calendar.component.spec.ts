@@ -3,15 +3,11 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { format, Locale, startOfDay, startOfMonth } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { zonedTimeToUtc } from 'date-fns-tz';
-import { MockComponent } from 'ng-mocks';
 
-import { ButtonComponent, CalendarComponent, IconComponent } from '..';
-import { TestHelper } from '../../testing/test-helper';
-import { WindowRef } from '../../types/window-ref';
-import { CardComponent } from '../card';
+import { TestHelper } from '@kirbydesign/designsystem/testing';
+import { WindowRef } from '@kirbydesign/designsystem/types';
+import { CalendarComponent } from '..';
 import { DropdownComponent } from '../dropdown/dropdown.component';
-import { ItemComponent } from '../item';
-import { RadioComponent } from '../radio';
 
 import { CalendarYearNavigatorConfig } from './options/calendar-year-navigator-config';
 
@@ -24,15 +20,6 @@ describe('CalendarComponent', () => {
 
   const createHost = createHostFactory({
     component: CalendarComponent,
-    declarations: [
-      CalendarComponent,
-      MockComponent(IconComponent),
-      DropdownComponent,
-      RadioComponent,
-      CardComponent,
-      ItemComponent,
-      ButtonComponent,
-    ],
     providers: [
       {
         provide: LOCALE_ID,
@@ -44,7 +31,7 @@ describe('CalendarComponent', () => {
         useValue: <WindowRef>{ nativeWindow: window },
       },
     ],
-    imports: [TestHelper.ionicModuleForTest],
+    imports: [TestHelper.ionicModuleForTest, CalendarComponent],
   });
 
   describe('by default', () => {

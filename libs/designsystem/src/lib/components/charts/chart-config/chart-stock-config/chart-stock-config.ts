@@ -1,3 +1,4 @@
+import { ColorHelper, DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import {
   BarController,
   BarElement,
@@ -19,7 +20,6 @@ import {
   TooltipOptions,
 } from 'chart.js';
 import annotationPlugin from 'chartjs-plugin-annotation';
-import { ColorHelper, DesignTokenHelper } from '../../../../helpers';
 import { ChartLocale } from '../../shared';
 import { ChartBaseConfig } from '../chart-base-config';
 

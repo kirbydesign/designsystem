@@ -35,11 +35,6 @@
               "apps/cookbook/src/favicon.ico",
               "apps/cookbook/src/assets",
               {
-                "glob": "**/*.js",
-                "input": "libs/designsystem/src/lib/polyfills",
-                "output": "./kirby/polyfills"
-              },
-              {
                 "glob": "**/*",
                 "input": "src/assets",
                 "output": "assets"
@@ -132,7 +127,7 @@
             "main": "libs/designsystem/src/test.ts",
             "tsConfig": "libs/designsystem/tsconfig.spec.json",
             "karmaConfig": "libs/designsystem/karma.conf.js",
-            "styles": ["libs/designsystem/src/lib/testing/styles.scss"]
+            "styles": ["libs/designsystem/testing/src/styles.scss"]
           },
           "outputs": ["coverage/libs/designsystem"]
         },

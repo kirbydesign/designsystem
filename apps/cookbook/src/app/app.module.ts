@@ -16,6 +16,8 @@ import { FooterComponent } from './page/footer/footer.component';
 import { HeaderComponent } from './page/header/header.component';
 import { SideNavComponent } from './page/side-nav/side-nav.component';
 import { KirbyChristmasComponent } from './kirby-christmas/kirby-christmas.component';
+import { ComponentOverviewComponent } from './component-overview/component-overview.component';
+import { ComponentDisplayComponent } from './component-overview/component-display/component-display.component';
 
 registerLocaleData(localeData);
 
@@ -27,6 +29,8 @@ registerLocaleData(localeData);
     HeaderComponent,
     IntroComponent,
     FooterComponent,
+    ComponentOverviewComponent,
+    ComponentDisplayComponent,
     KirbyChristmasComponent,
   ],
   imports: [

@@ -29,6 +29,10 @@
       );
     }
 
+    &.hide-content {
+      background-color: rgba(utils.get-color('background-color', $getValueOnly: true), 1);
+    }
+
     .spinner {
       width: utils.size(l);
       height: utils.size(l);

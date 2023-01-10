@@ -2,7 +2,7 @@ import { IonicModule } from '@ionic/angular';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockModule } from 'ng-mocks';
 
-import { DesignTokenHelper } from '@kirbydesign/core';
+import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { IconModule } from '../icon/icon.module';
 
@@ -80,6 +80,17 @@ describe('ItemComponent', () => {
     it('should set correct --padding-bottom css custom property', () => {
       spectator.element.style.setProperty('--item-padding-bottom', '8px');
       expect(spectator.query('ion-item')).toHaveComputedStyle({ '--padding-bottom': size('xxs') });
+    });
+  });
+
+  describe('when disclosure is set to something valid', () => {
+    it('should set inner-padding-end to xxs', () => {
+      spectator.component.disclosure = 'arrow-more';
+      spectator.detectChanges();
+
+      expect(spectator.query('ion-item')).toHaveComputedStyle({
+        '--inner-padding-end': size('xxs'),
+      });
     });
   });
 });

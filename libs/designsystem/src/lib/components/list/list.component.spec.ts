@@ -1,9 +1,9 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import * as ionic from '@ionic/angular';
+import { WindowRef } from '@kirbydesign/designsystem/types';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
 import { MockComponent } from 'ng-mocks';
 
-import { WindowRef } from '../../types/window-ref';
 import { SpinnerComponent } from '../spinner/spinner.component';
 
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';

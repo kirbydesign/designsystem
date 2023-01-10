@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, HostBinding, Input, OnInit } from '@angular/core';
 
 import { BrandColor, NotificationColor } from '@kirbydesign/core';
@@ -10,6 +11,8 @@ export enum AvatarSize {
 }
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
   selector: 'kirby-avatar',
   templateUrl: './avatar.component.html',
   styleUrls: ['./avatar.component.scss'],

@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, HostListener, ViewChild } from '@angular/core';
 import { IonList } from '@ionic/angular';
-
-import { elementHasAncestor } from '../../../helpers/element-has-ancestor';
+import { elementHasAncestor } from '@kirbydesign/designsystem/helpers';
 
 @Component({
   selector: 'kirby-list-experimental',

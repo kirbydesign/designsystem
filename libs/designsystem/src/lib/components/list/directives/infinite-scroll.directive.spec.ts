@@ -1,8 +1,7 @@
 import { ElementRef, NgZone } from '@angular/core';
 import { fakeAsync, tick } from '@angular/core/testing';
+import { WindowRef } from '@kirbydesign/designsystem/types';
 import { SpyObject } from '@ngneat/spectator';
-
-import { WindowRef } from '../../../types/window-ref';
 
 import { INFINITE_SCROLL_DEBOUNCE, InfiniteScrollDirective } from './infinite-scroll.directive';
 
