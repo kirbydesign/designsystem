@@ -2,73 +2,79 @@
   <kirby-page-content>
     <main>
       <div class="max-width-container">
-        <div class="grid-container">
-          <div class="grid-item half-at-tablet-up">
-            <article>
-              <kirby-card
-                [hasPadding]="true"
-                mode="highlighted"
-                (click)="navigate('long-list-flow')"
-              >
-                <kirby-avatar
-                  imageSrc="https://picsum.photos/100?random=1"
-                  size="md"
-                  shadow="true"
-                ></kirby-avatar>
-                <h2 class="card-title">Transaction List with many Items</h2>
-                <p>
-                  Showcase of Kirby List with 600 items. This flow can be useful when evaluating the
-                  performance of items and lists in combination.
-                </p>
-              </kirby-card>
-            </article>
+        <kirby-card [themeColor]="'dark'" [hasPadding]="true">
+          <kirby-item style="--kirby-item-background: var(--kirby-dark)">
+            <button kirby-button>Att lvl 1</button>
+            <button kirby-button attentionLevel="3">hey</button>
+          </kirby-item>
+          <div class="grid-container">
+            <div class="grid-item half-at-tablet-up">
+              <article>
+                <kirby-card
+                  [hasPadding]="true"
+                  mode="highlighted"
+                  (click)="navigate('long-list-flow')"
+                >
+                  <kirby-avatar
+                    imageSrc="https://picsum.photos/100?random=1"
+                    size="md"
+                    shadow="true"
+                  ></kirby-avatar>
+                  <h2 class="card-title">Transaction List with many Items</h2>
+                  <p>
+                    Showcase of Kirby List with 600 items. This flow can be useful when evaluating
+                    the performance of items and lists in combination.
+                  </p>
+                </kirby-card>
+              </article>
+            </div>
+            <div class="grid-item half-at-tablet-up">
+              <article>
+                <kirby-card
+                  [hasPadding]="true"
+                  mode="highlighted"
+                  (click)="navigate('transaction-details-flow')"
+                >
+                  <kirby-avatar
+                    imageSrc="https://picsum.photos/100?random=2"
+                    size="md"
+                    shadow="true"
+                  ></kirby-avatar>
+                  <h2 class="card-title">Navigate to List Item detail</h2>
+                  <p>
+                    Showcase of a standard flow for navigating from a landing page to a clickable
+                    list item that shows a detail page.
+                  </p>
+                </kirby-card>
+              </article>
+            </div>
+            <div class="grid-item half-at-tablet-up">
+              <article>
+                <kirby-card
+                  hasPadding="true"
+                  mode="highlighted"
+                  (click)="navigate('transfer-and-pay-flow')"
+                >
+                  <kirby-avatar
+                    imageSrc="https://picsum.photos/100?random=3"
+                    size="md"
+                    shadow="true"
+                  ></kirby-avatar>
+                  <h2 class="card-title">Transfer and pay - Modals in Modal</h2>
+                  <p>
+                    Showcase of a standard flow of transfering money between own accounts or to
+                    others by opening a modal that can open even more modals.
+                  </p>
+                </kirby-card>
+              </article>
+            </div>
+            <div class="grid-item half-at-tablet-up">
+              <article>
+                <kirby-card hasPadding="true" mode="highlighted"> </kirby-card>
+              </article>
+            </div>
           </div>
-          <div class="grid-item half-at-tablet-up">
-            <article>
-              <kirby-card
-                [hasPadding]="true"
-                mode="highlighted"
-                (click)="navigate('transaction-details-flow')"
-              >
-                <kirby-avatar
-                  imageSrc="https://picsum.photos/100?random=2"
-                  size="md"
-                  shadow="true"
-                ></kirby-avatar>
-                <h2 class="card-title">Navigate to List Item detail</h2>
-                <p>
-                  Showcase of a standard flow for navigating from a landing page to a clickable list
-                  item that shows a detail page.
-                </p>
-              </kirby-card>
-            </article>
-          </div>
-          <div class="grid-item half-at-tablet-up">
-            <article>
-              <kirby-card
-                hasPadding="true"
-                mode="highlighted"
-                (click)="navigate('transfer-and-pay-flow')"
-              >
-                <kirby-avatar
-                  imageSrc="https://picsum.photos/100?random=3"
-                  size="md"
-                  shadow="true"
-                ></kirby-avatar>
-                <h2 class="card-title">Transfer and pay - Modals in Modal</h2>
-                <p>
-                  Showcase of a standard flow of transfering money between own accounts or to others
-                  by opening a modal that can open even more modals.
-                </p>
-              </kirby-card>
-            </article>
-          </div>
-          <div class="grid-item half-at-tablet-up">
-            <article>
-              <kirby-card hasPadding="true" mode="highlighted"> </kirby-card>
-            </article>
-          </div>
-        </div>
+        </kirby-card>
       </div>
     </main>
   </kirby-page-content>
