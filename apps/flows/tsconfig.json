@@ -32,7 +32,8 @@
       "@kirbydesign/designsystem/shared": ["libs/designsystem/shared/index.ts"],
       "@kirbydesign/designsystem/types": ["libs/designsystem/types/index.ts"],
       "@kirbydesign/designsystem/flag": ["libs/designsystem/flag/index.ts"],
-      "@kirbydesign/designsystem/spinner":["libs/designsystem/spinner/index.ts"],
+      "@kirbydesign/designsystem/spinner":["libs/designsystem/spinner/index.ts"
+    ],
 
     },
     "target": "es2020"

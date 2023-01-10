@@ -817,19 +817,12 @@ describe('RadioGroupComponent', () => {
       expect(onChangeSpy).toHaveBeenCalledWith(expectedItem);
     });
 
-    it('should invoke callback from registerOnTouched() function on blur', async () => {
+    it('should invoke callback from registerOnTouched() function on blur', () => {
       const onTouchedSpy = jasmine.createSpy('_onTouched');
       spectator.component.registerOnTouched(onTouchedSpy);
-      expect(onTouchedSpy).not.toHaveBeenCalled();
-      expect(ionRadioElements[0]).toBeDefined();
-
-      console.log(ionRadioElements[0]);
 
       ionRadioElements[0].focus();
       ionRadioElements[0].blur();
-
-      TestHelper.waitForResizeObserver();
-      await TestHelper.waitForTimeout(3000);
 
       expect(onTouchedSpy).toHaveBeenCalledTimes(1);
     });
