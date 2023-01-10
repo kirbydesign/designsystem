@@ -20,7 +20,7 @@ import { RadioGroupComponent } from './radio-group.component';
 
 const { getColor } = DesignTokenHelper;
 
-fdescribe('RadioGroupComponent', () => {
+describe('RadioGroupComponent', () => {
   const createHost = createHostFactory({
     component: RadioGroupComponent,
     declarations: [RadioComponent, ListItemTemplateDirective],
