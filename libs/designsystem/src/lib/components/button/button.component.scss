@@ -61,7 +61,6 @@ $button-width: (
 @mixin button-no-decoration {
   --kirby-button-background-color: transparent;
   --kirby-button-color: #{utils.get-color('black')};
-  --kirby-button-border-color: transparent;
 
   @include interaction-state.apply-hover;
   @include interaction-state.apply-active('s');
@@ -122,9 +121,6 @@ $button-width: (
   }
 
   font-family: var(--kirby-font-family);
-
-  // background-color: var(--kirby-button-background-color, initial);
-  color: var(--kirby-button-color, inherit);
   border-radius: utils.$border-radius-round;
   box-sizing: border-box; // Ensure border is not added to button height
   display: inline-flex;
