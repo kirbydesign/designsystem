@@ -4,6 +4,8 @@ import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
+import { SpinnerModule } from '@kirbydesign/designsystem/spinner';
+import { CardModule } from '@kirbydesign/designsystem/card';
 import {
   IconComponent,
   InfiniteScrollDirective,
@@ -11,10 +13,8 @@ import {
   ListComponent,
   ListItemColorDirective,
   ListItemTemplateDirective,
-  SpinnerComponent,
 } from '..';
 
-import { CardModule } from '../..';
 import { ListItemComponent } from './list-item/list-item.component';
 
 const { fontWeight, size } = DesignTokenHelper;
@@ -26,7 +26,7 @@ describe('ListComponent', () => {
   let spectator: SpectatorHost<ListComponent>;
   const createHost = createHostFactory({
     component: ListComponent,
-    imports: [TestHelper.ionicModuleForTest, CardModule],
+    imports: [TestHelper.ionicModuleForTest, CardModule, SpinnerModule],
     providers: [
       {
         provide: WindowRef,
@@ -35,7 +35,6 @@ describe('ListComponent', () => {
     ],
     declarations: [
       ItemComponent,
-      SpinnerComponent,
       IconComponent,
       InfiniteScrollDirective,
       ListItemColorDirective,

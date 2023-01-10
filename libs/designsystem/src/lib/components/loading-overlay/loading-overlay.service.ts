@@ -1,7 +1,6 @@
 import { ComponentFactoryResolver, Injectable, Injector } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
-
-import { SpinnerComponent } from '../spinner/spinner.component';
+import { SpinnerComponent } from '@kirbydesign/designsystem/spinner';
 
 @Injectable({
   providedIn: 'root',
