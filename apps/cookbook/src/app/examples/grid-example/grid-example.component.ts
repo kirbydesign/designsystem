@@ -7,6 +7,8 @@ import { Component } from '@angular/core';
 })
 export class GridExampleComponent {
   spacing = '';
+  rowSpacing = '';
+  columnSpacing = '';
   spacingSizes = [
     {
       text: '0',
@@ -36,5 +38,11 @@ export class GridExampleComponent {
 
   onSpacingSizeChange(value) {
     this.spacing = value;
+  }
+  onRowSpacingSizeChange(value) {
+    this.rowSpacing = value;
+  }
+  onColumnSpacingSizeChange(value) {
+    this.columnSpacing = value;
   }
 }
