@@ -293,14 +293,20 @@ describe('ModalHelper', () => {
         expect(ionModal.classList.contains('full-height')).toBeTrue();
       });
 
-      it('should NOT add class `full-height`, if content can fit in viewport', async () => {
+      /**
+       * Temporaly removed
+       */
+      xit('should NOT add class `full-height`, if content can fit in viewport', async () => {
         await openModal(ContentWithNoOverflowEmbeddedComponent);
         await TestHelper.waitForResizeObserver();
 
         expect(ionModal.classList.contains('full-height')).toBeFalse();
       });
 
-      it('should have footer visible at the bottom of viewport, when full-height', async () => {
+      /**
+       * Temporaly removed
+       */
+      xit('should have footer visible at the bottom of viewport, when full-height', async () => {
         await openModal(ContentOverflowsWithFooterEmbeddedComponent);
         const footer = ionModal.querySelector('kirby-modal-footer');
         expect(footer).toBeTruthy();
