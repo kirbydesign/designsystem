@@ -15,7 +15,7 @@ export class AppModule {}
 `;
 
 export const componentProviderExample = `import { Component, LOCALE_ID } from '@angular/core';
-import { Locale } from '@kirbydesign/designsystem/components/calendar/calendar.component';
+import { Locale } from "@kirbydesign/designsystem";
 
 @Component({
     ...
@@ -37,7 +37,7 @@ export class MyComponent {
 
 export const additionalLocalesExampleHTML = `<kirby-calendar [locales]="additionalLocales"></kirby-calendar>`;
 
-export const customLocaleExampleTS = `import { Locale } from '@kirbydesign/designsystem/components/calendar/calendar.component';
+export const customLocaleExampleTS = `import { Locale } from "@kirbydesign/designsystem";
 
 type CustomLocale = { [key: string]: Locale };
 
