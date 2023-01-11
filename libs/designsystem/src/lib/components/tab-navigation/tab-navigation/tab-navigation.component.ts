@@ -6,11 +6,12 @@ import {
   ElementRef,
   EventEmitter,
   Input,
+  OnDestroy,
   Output,
   QueryList,
   ViewChild,
 } from '@angular/core';
-import { filter, fromEvent, map } from 'rxjs';
+import { filter, fromEvent, map, Subject, takeUntil } from 'rxjs';
 import { WindowRef } from '../../../types';
 import { TabNavigationItemComponent } from '../tab-navigation-item/tab-navigation-item.component';
 
@@ -23,7 +24,7 @@ const ARROW_RIGHT = 'ArrowRight';
   styleUrls: ['./tab-navigation.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TabNavigationComponent implements AfterViewInit {
+export class TabNavigationComponent implements AfterViewInit, OnDestroy {
   @ViewChild('tabBar')
   private tabBar: ElementRef<HTMLElement>;
 
@@ -34,6 +35,7 @@ export class TabNavigationComponent implements AfterViewInit {
   private readonly tabSelectedClassName = 'selected';
   private tabBarElement: HTMLElement;
   private tabElements = new Array<HTMLElement>();
+  private destroyed$ = new Subject<void>();
 
   @Input()
   get selectedIndex(): number {
@@ -64,8 +66,17 @@ export class TabNavigationComponent implements AfterViewInit {
     this.tabBarElement = this.tabBar.nativeElement;
     this.tabs.forEach((tab) => this.tabElements.push(tab.nativeElement));
 
+    this.initTabListeners();
+    setTimeout(() => {
+      this.scrollToTab(this.selectedIndex);
+    }, this.DEBOUNCE_TIME_MS);
+  }
+
+  initTabListeners(): void {
     this.tabElements.forEach((tabElement, index) => {
-      fromEvent(tabElement, 'click').subscribe(() => (this.selectedIndex = index));
+      fromEvent(tabElement, 'click')
+        .pipe(takeUntil(this.destroyed$))
+        .subscribe(() => (this.selectedIndex = index));
       fromEvent(tabElement, 'keydown')
         .pipe(
           filter((e: KeyboardEvent) => e.key === ARROW_LEFT || e.key === ARROW_RIGHT),
@@ -73,17 +84,19 @@ export class TabNavigationComponent implements AfterViewInit {
             e.key === ARROW_LEFT
               ? (index - 1 + this.tabElements.length) % this.tabElements.length
               : (index + 1) % this.tabElements.length
-          )
+          ),
+          takeUntil(this.destroyed$)
         )
         .subscribe((focusIndex: number) => {
           this.focusTab(focusIndex);
           this.scrollToTab(focusIndex);
         });
     });
+  }
 
-    setTimeout(() => {
-      this.scrollToTab(this.selectedIndex);
-    }, this.DEBOUNCE_TIME_MS);
+  ngOnDestroy(): void {
+    this.destroyed$.next();
+    this.destroyed$.complete();
   }
 
   private focusTab(tabIndex: number): void {
