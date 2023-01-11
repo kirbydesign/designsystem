@@ -10,6 +10,7 @@ import {
   ResizeObserverService,
 } from '@kirbydesign/designsystem/shared';
 import { FlagComponent } from '@kirbydesign/designsystem/flag';
+import { SpinnerModule } from '@kirbydesign/designsystem/spinner';
 import { AccordionItemComponent } from './components/accordion/accordion-item.component';
 import { AccordionDirective } from './components/accordion/accordion.directive';
 import { AppModule } from './components/app/app.module';
@@ -55,7 +56,6 @@ import { SectionHeaderComponent } from './components/section-header/section-head
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
 import { SlideButtonComponent } from './components/slide-button/slide-button.component';
 import { SlideDirective, SlidesComponent } from './components/slides/slides.component';
-import { SpinnerModule } from './components/spinner/spinner.module';
 import { TabsModule } from './components/tabs/tabs.module';
 import { ToastController } from './components/toast/services/toast.controller';
 import { ToastHelper } from './components/toast/services/toast.helper';

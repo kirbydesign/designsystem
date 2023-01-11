@@ -12,7 +12,21 @@ export class GridShowcaseComponent {
     {
       name: 'spacing',
       description:
-        "Defines the spacing in between the grid-item's. The value should be a number and the number is multiplied with 8px. The value 2 would result in 16px spacing, 3 would result in 24px, 4 would result in 24px etc.",
+        "Defines the spacing in between the grid-item's. The value should be a number and the number is multiplied with 8px. The value 2 would result in 16px spacing, 3 would result in 24px, 4 would result in 32px etc.",
+      defaultValue: '3',
+      type: ['0 - 5'],
+    },
+    {
+      name: 'row-spacing',
+      description:
+        "Defines the horizontal spacing in between the grid-item's. The value should be a number and the number is multiplied with 8px.",
+      defaultValue: '3',
+      type: ['0 - 5'],
+    },
+    {
+      name: 'column-spacing',
+      description:
+        "Defines the vertical spacing in between the grid-item's. The value should be a number and the number is multiplied with 8px.",
       defaultValue: '3',
       type: ['0 - 5'],
     },

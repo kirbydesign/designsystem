@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
+import { SpinnerModule } from '@kirbydesign/designsystem/spinner';
 
 import { IconModule } from '@kirbydesign/designsystem/icon';
-import { SpinnerModule } from '../spinner/spinner.module';
 
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 import { ListItemColorDirective } from './directives/list-item-color.directive';

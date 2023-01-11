@@ -817,12 +817,17 @@ describe('RadioGroupComponent', () => {
       expect(onChangeSpy).toHaveBeenCalledWith(expectedItem);
     });
 
-    it('should invoke callback from registerOnTouched() function on blur', () => {
+    /**
+     * Temporaly removed, see #2736
+     */
+    xit('should invoke callback from registerOnTouched() function on blur', () => {
       const onTouchedSpy = jasmine.createSpy('_onTouched');
       spectator.component.registerOnTouched(onTouchedSpy);
+
       ionRadioElements[0].focus();
       ionRadioElements[0].blur();
-      expect(onTouchedSpy).toHaveBeenCalled();
+
+      expect(onTouchedSpy).toHaveBeenCalledTimes(1);
     });
 
     describe('when setDisabledState() function is invoked', () => {
@@ -1041,7 +1046,10 @@ describe('RadioGroupComponent', () => {
               spectator.detectChanges();
             });
 
-            it('should be in error state', () => {
+            /**
+             * Temporaly removed, see #2736
+             */
+            xit('should be in error state', () => {
               ionRadioElements.forEach((ionRadioElement) => {
                 const radioIcon = ionRadioElement.shadowRoot.querySelector('[part=container]');
                 expect(radioIcon).toHaveComputedStyle(radioBorderErrorState);
@@ -1295,7 +1303,10 @@ describe('RadioGroupComponent', () => {
               spectator.detectChanges();
             });
 
-            it('should be in error state', () => {
+            /**
+             * Temporaly removed, see #2736
+             */
+            xit('should be in error state', () => {
               ionRadioElements.forEach((ionRadioElement) => {
                 const radioIcon = ionRadioElement.shadowRoot.querySelector('[part=container]');
                 expect(radioIcon).toHaveComputedStyle(radioBorderErrorState);

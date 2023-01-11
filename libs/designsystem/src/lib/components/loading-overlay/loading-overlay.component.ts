@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { SpinnerModule } from '../spinner';
+import { SpinnerModule } from '@kirbydesign/designsystem/spinner';
 
 @Component({
   standalone: true,

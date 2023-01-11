@@ -12,7 +12,8 @@
       "@kirbydesign/designsystem/shared": ["shared/index.ts"],
       "@kirbydesign/designsystem/types": ["types/index.ts"],
       "@kirbydesign/designsystem/flag": ["flag/index.ts"],
-      "@kirbydesign/designsystem/kirby-ionic-module": ["kirby-ionic-module/index.ts"]
+      "@kirbydesign/designsystem/kirby-ionic-module": ["kirby-ionic-module/index.ts"],
+      "@kirbydesign/designsystem/spinner": ["spinner/index.ts"]
     },
     "esModuleInterop": true,
     "target": "es2020"
