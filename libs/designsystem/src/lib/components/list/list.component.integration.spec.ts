@@ -6,8 +6,8 @@ import { WindowRef } from '@kirbydesign/designsystem/types';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { SpinnerModule } from '@kirbydesign/designsystem/spinner';
 import { CardModule } from '@kirbydesign/designsystem/card';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 import {
-  IconComponent,
   InfiniteScrollDirective,
   ItemComponent,
   ListComponent,

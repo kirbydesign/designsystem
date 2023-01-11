@@ -10,8 +10,8 @@ import { IonItem } from '@ionic/angular';
 import { createHostFactory, Spectator } from '@ngneat/spectator';
 import { MockComponents } from 'ng-mocks';
 import { CardComponent } from '@kirbydesign/designsystem/card';
-
-import { ButtonComponent, IconComponent, ItemComponent } from '..';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
+import { ButtonComponent, ItemComponent } from '..';
 import { PopoverComponent } from '../popover/popover.component';
 
 import { DropdownComponent } from './dropdown.component';

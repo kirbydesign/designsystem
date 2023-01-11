@@ -10,7 +10,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { WindowRef } from '@kirbydesign/designsystem/types';
-import { IconModule } from '..';
+import { IconModule } from '@kirbydesign/designsystem/icon';
 import { KirbyBadgeModule } from '../kirby-badge.module';
 import { LocalNavigationItem } from './page-local-navigation-item';
 

@@ -10,7 +10,7 @@ import {
 
 import { NotificationColor } from '@kirbydesign/core';
 
-import { IconComponent } from '../icon/icon.component';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 
 export enum ButtonSize {
   SM = 'sm',

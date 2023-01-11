@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { SpinnerModule } from '@kirbydesign/designsystem/spinner';
 
-import { IconModule } from '../icon/icon.module';
+import { IconModule } from '@kirbydesign/designsystem/icon';
 
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 import { ListItemColorDirective } from './directives/list-item-color.directive';
