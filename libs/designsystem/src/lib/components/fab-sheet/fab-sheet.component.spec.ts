@@ -3,8 +3,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
+import { IconModule } from '@kirbydesign/designsystem/icon';
 import { ButtonComponent } from '../button/button.component';
-import { IconModule } from '../icon';
 import { ActionSheetComponent, ActionSheetItem } from '../modal';
 
 import { FabSheetComponent } from './fab-sheet.component';

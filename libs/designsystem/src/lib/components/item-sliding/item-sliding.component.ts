@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
-import { IconModule } from '../icon';
+import { IconModule } from '@kirbydesign/designsystem/icon';
 
 import { ItemSlidingSide, ItemSwipeAction } from './item-sliding.types';
 
