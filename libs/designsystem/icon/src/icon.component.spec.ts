@@ -7,7 +7,7 @@ import { MockComponent } from 'ng-mocks';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
-import { ThemeColorDirective } from 'src/lib';
+import { ThemeColorDirective } from '../../src/lib';
 
 import { IconRegistryService } from './icon-registry.service';
 import { IconComponent, IconSize } from './icon.component';
