@@ -67,8 +67,8 @@ $button-width: (
 }
 
 @mixin button-attentionlevel1 {
-  background-color: #{utils.get-color('primary')};
-  color: #{utils.get-color('primary-contrast')};
+  --kirby-button-background-color: #{utils.get-color('primary')};
+  --kirby-button-color: #{utils.get-color('primary-contrast')};
 
   // The destructive class is only ever applied by kirby-alert.
   // Standalone destructive buttons are not a supported concept.
@@ -79,22 +79,22 @@ $button-width: (
 }
 
 @mixin button-attentionlevel2 {
-  background-color: var(
-    --kirby-button-background-color,
-    #{utils.get-color('black', $getValueOnly: true)}
-  );
-  color: var(--kirby-button-color, #{utils.get-color('black-contrast', $getValueOnly: true)});
+  --kirby-button-background-color: #{utils.get-color('black', $getValueOnly: true)};
+  --kirby-button-color: #{utils.get-color('black-contrast', $getValueOnly: true)};
 
   @include interaction-state.apply-hover('l', $make-lighter: true);
   @include interaction-state.apply-active('xxxl', $make-lighter: true);
 }
 
 @mixin button-attentionlevel3 {
-  background-color: var(
+  --kirby-button-background-color: var(
     --kirby-interactive-background-color,
     #{utils.get-color('white', $getValueOnly: true)}
   );
-  color: var(--kirby-interactive-color, #{utils.get-color('black', $getValueOnly: true)});
+  --kirby-button-color: var(
+    --kirby-interactive-color,
+    #{utils.get-color('black', $getValueOnly: true)}
+  );
 
   @include interaction-state.apply-hover('xxxs');
   @include interaction-state.apply-active('xxs');
@@ -121,6 +121,8 @@ $button-width: (
   }
 
   font-family: var(--kirby-font-family);
+  background-color: var(--kirby-button-background-color, initial);
+  color: var(--kirby-button-color, inherit);
   border-radius: utils.$border-radius-round;
   box-sizing: border-box; // Ensure border is not added to button height
   display: inline-flex;
@@ -207,22 +209,6 @@ $button-width: (
     pointer-events: none;
   }
 
-  // :host-context(.kirby-color-brightness-dark) {
-  //   &.no-decoration {
-  //     --kirby-button-color: #{utils.get-color('white')};
-  //   }
-
-  //   &.attention-level2 {
-  //     @include interaction-state.apply-hover;
-  //     @include interaction-state.apply-active('s');
-  //   }
-
-  //   &.attention-level3 {
-  //     @include interaction-state.apply-hover('xs', $make-lighter: true);
-  //     @include interaction-state.apply-active('m', $make-lighter: true);
-  //   }
-  // }
-
   &.floating {
     $fab-size: 64px;
 
@@ -233,6 +219,20 @@ $button-width: (
     &:not(:disabled) {
       box-shadow: utils.get-elevation(8);
     }
+  }
+}
+
+:host-context(.kirby-color-brightness-dark) {
+  &.no-decoration {
+    --kirby-button-color: #{utils.get-color('white')};
+  }
+
+  &.attention-level2 {
+    --kirby-button-background-color: #{utils.get-color('white')};
+    --kirby-button-color: #{utils.get-color('white-contrast')};
+
+    @include interaction-state.apply-hover;
+    @include interaction-state.apply-active('s');
   }
 }
 
