@@ -19,12 +19,6 @@ ion-toolbar {
   --background: #{utils.get-color('background-color')};
 
   margin: 0 auto;
-
-  @include utils.media('>=large') {
-    @include utils.not-touch {
-      // max-width: 768px;
-    }
-  }
 }
 
 ion-toolbar {
