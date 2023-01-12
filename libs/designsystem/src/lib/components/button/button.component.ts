@@ -10,7 +10,7 @@ import {
 
 import { NotificationColor } from '@kirbydesign/core';
 
-import { IconComponent } from '../icon/icon.component';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 
 export enum ButtonSize {
   SM = 'sm',
@@ -55,9 +55,6 @@ export class ButtonComponent implements AfterContentInit {
     this.isAttentionLevel3 = false;
   }
 
-  @HostBinding('class.destructive')
-  destructive: boolean = false; // Default
-
   @HostBinding('class.floating')
   public get isButtonFloating(): boolean {
     return this.isFloating;
@@ -81,10 +78,6 @@ export class ButtonComponent implements AfterContentInit {
   @HostBinding('class')
   get _cssClass() {
     return [this.themeColor, this.size].filter((cssClass) => !!cssClass);
-  }
-
-  @Input() set isDestructive(state: boolean) {
-    this.destructive = state;
   }
 
   @Input()

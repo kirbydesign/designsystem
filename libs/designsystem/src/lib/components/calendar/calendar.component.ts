@@ -37,9 +37,9 @@ import { da, enGB, enUS } from 'date-fns/locale';
 import { capitalizeFirstLetter } from '@kirbydesign/core';
 
 import { CommonModule } from '@angular/common';
+import { IconModule } from '@kirbydesign/designsystem/icon';
 import { DropdownModule } from '../dropdown';
 import { ButtonComponent } from '../button/button.component';
-import { IconModule } from '../icon';
 import { CalendarCell } from './helpers/calendar-cell.model';
 import { CalendarOptions } from './helpers/calendar-options.model';
 import { CalendarHelper } from './helpers/calendar.helper';

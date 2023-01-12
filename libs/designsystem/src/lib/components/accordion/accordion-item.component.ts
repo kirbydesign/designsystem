@@ -1,6 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ChangeDetectionStrategy, Component, Input, OnChanges } from '@angular/core';
-import { IconModule } from '../icon';
+import { IconModule } from '@kirbydesign/designsystem/icon';
 
 // Counter for generating unique element ids
 let uniqueId = 0;

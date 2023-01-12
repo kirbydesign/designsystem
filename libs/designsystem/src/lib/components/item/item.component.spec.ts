@@ -4,7 +4,7 @@ import { MockModule } from 'ng-mocks';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
-import { IconModule } from '../icon/icon.module';
+import { IconModule } from '@kirbydesign/designsystem/icon';
 
 import { ItemComponent, ItemSize } from './item.component';
 

@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { KirbyIonicModule } from '@kirbydesign/designsystem/kirby-ionic-module';
 
 import { IconComponent } from './icon.component';
 
 @NgModule({
-  imports: [IonicModule],
+  imports: [KirbyIonicModule],
   declarations: [IconComponent],
   exports: [IconComponent],
 })

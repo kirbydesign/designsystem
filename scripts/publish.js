@@ -30,7 +30,7 @@ const packageAlias = '@kirbydesign';
 
 const libsRootDir = `libs`;
 const designsystemLibDir = `${libsRootDir}/designsystem`;
-const designsystemLibSrcDir = `${designsystemLibDir}/src/lib`;
+const designsystemLibSrcDir = `${designsystemLibDir}/icon/src`;
 const coreLibDir = `${libsRootDir}/core`;
 const coreLibSrcDir = `${coreLibDir}/src`;
 
