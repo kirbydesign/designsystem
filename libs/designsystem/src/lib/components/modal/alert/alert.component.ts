@@ -9,10 +9,10 @@ import {
 } from '@angular/core';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { Observable, of } from 'rxjs';
+import { IconModule } from '@kirbydesign/designsystem/icon';
 import { ThemeColorDirective } from '../../../directives';
 import { ButtonComponent } from '../../button/button.component';
 import { EmptyStateModule } from '../../empty-state/empty-state.module';
-import { IconModule } from '../../icon';
 
 @Component({
   standalone: true,

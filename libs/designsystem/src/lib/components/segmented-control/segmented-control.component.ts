@@ -1,10 +1,8 @@
 import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
+import { IconModule, IconRegistryService } from '@kirbydesign/designsystem/icon';
 import { KirbyBadgeModule } from '../kirby-badge.module';
-import { IconModule } from '../icon';
-
-import { IconRegistryService } from '../icon/icon-registry.service';
 
 import { SegmentItem, SegmentItemInternal } from './segment-item';
 
