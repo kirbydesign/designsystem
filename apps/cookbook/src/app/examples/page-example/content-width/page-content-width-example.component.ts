@@ -35,7 +35,7 @@ export class PageContentWidthExampleComponent extends BasePageExampleComponent {
     .replace(fieldsetHtml, '')
     .replace('<div [innerHTML]="content"></div>', '...');
 
-  maxWidth: string = 'standard';
+  maxWidth: string = '';
 
   maxWidthOptions = [
     {
