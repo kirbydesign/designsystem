@@ -7,13 +7,16 @@
     "useDefineForClassFields": false,
     "paths": {
       "@kirbydesign/designsystem/*": ["libs/designsystem/src/lib/*"],
-
       "@kirbydesign/designsystem/helpers": ["helpers/index.ts"],
       "@kirbydesign/designsystem/shared": ["shared/index.ts"],
       "@kirbydesign/designsystem/card": ["card/index.ts"],
+      "@kirbydesign/designsystem/icon": ["icon/index.ts"],
       "@kirbydesign/designsystem/types": ["types/index.ts"],
       "@kirbydesign/designsystem/testing": ["testing/index.ts"],
-      "@kirbydesign/designsystem/flag": ["flag/index.ts"]
+      "@kirbydesign/designsystem/kirby-ionic-module": ["kirby-ionic-module/index.ts"],
+      "@kirbydesign/designsystem/flag": ["flag/index.ts"],
+      "@kirbydesign/designsystem/spinner": ["spinner/index.ts"],
+      "@kirbydesign/designsystem/toggle": ["toggle/index.ts"]
     }
   },
   "files": ["src/test.ts"],

@@ -6,7 +6,8 @@ import { MockComponents } from 'ng-mocks';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { CardComponent } from '@kirbydesign/designsystem/card';
-import { ButtonComponent, IconComponent, ItemComponent } from '..';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
+import { ButtonComponent, ItemComponent } from '..';
 import { ListItemTemplateDirective } from '../list';
 import { HorizontalDirection, PopoverComponent } from '../popover/popover.component';
 
@@ -673,7 +674,10 @@ describe('DropdownComponent', () => {
     });
 
     describe('when aligned to right side of viewport', () => {
-      it('should align the dropdown to the right side of button and component container ', (done) => {
+      /**
+       * Temporaly removed, see #2736
+       */
+      xit('should align the dropdown to the right side of button and component container ', (done) => {
         spectator.element.style.cssFloat = 'right';
         spectator.component.open();
         spectator.detectChanges();

@@ -10,7 +10,7 @@ import {
   Renderer2,
 } from '@angular/core';
 
-import { IconComponent } from '../../icon/icon.component';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { selectedTabClickEvent } from './tab-button.events';
 
 @Component({

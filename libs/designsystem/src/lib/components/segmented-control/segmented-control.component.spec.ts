@@ -6,8 +6,8 @@ import { MockDirective } from 'ng-mocks';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { ThemeColorDirective } from '../../directives';
-import { IconComponent } from '../icon';
 
 import { SegmentItem } from './segment-item';
 import { SegmentedControlComponent, SegmentedControlMode } from './segmented-control.component';

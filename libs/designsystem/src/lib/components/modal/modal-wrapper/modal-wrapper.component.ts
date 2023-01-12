@@ -28,11 +28,11 @@ import { ResizeObserverService } from '@kirbydesign/designsystem/shared';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { PlatformService } from '@kirbydesign/designsystem/helpers';
 import { CommonModule } from '@angular/common';
+import { IconModule } from '@kirbydesign/designsystem/icon';
 import { Modal, ModalElementsAdvertiser, ModalElementType } from '../services/modal.interfaces';
 
 import { ButtonComponent } from '../../button/button.component';
 import { KirbyAnimation } from '../../../animation/kirby-animation';
-import { IconModule } from '../../icon';
 import { ModalConfig } from './config/modal-config';
 import { COMPONENT_PROPS } from './config/modal-config.helper';
 import { ModalElementsMoverDelegate } from './modal-elements-mover.delegate';

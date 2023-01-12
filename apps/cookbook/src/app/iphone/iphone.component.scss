@@ -5,18 +5,11 @@
   text-align: center;
 }
 
-.pop-out {
-  color: utils.get-text-color('semi-dark');
-  padding-left: 24px;
-  background: no-repeat url('/assets/kirby/icons/svg/link.svg');
-}
-
 .docs-demo-device {
   --device-aspect-ratio: 2.125;
   --device-padding: 2rem;
 
   padding: var(--device-padding);
-  position: sticky;
   top: 0;
 }
 
