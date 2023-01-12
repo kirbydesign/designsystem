@@ -125,17 +125,41 @@
     </cookbook-example-viewer>
   </p>
 
+  <h2>Card with item disclosure in card header</h2>
+  <p>
+    This example uses the <code>--kirby-card-padding-top</code> custom css property to set the
+    padding top in card content area to <code>0px</code>. Thereafter a item with disclosure is
+    placed in the card header. The Card header input property <code>hasPadding</code> is set to
+    <code>false</code> to adjust to the use of item.
+  </p>
+  <p>
+    <em>Note:</em> Card footer support the use item disclosure as well and it is recommended to use
+    the custom css property
+    <code>--kirby-card-padding-bottom</code>
+  </p>
+  <cookbook-example-viewer
+    [html]="CardHeaderDisclosureExample.template"
+    [css]="CardHeaderDisclosureExample.style"
+    ><cookbook-card-with-item-header-example
+      #CardHeaderDisclosureExample
+    ></cookbook-card-with-item-header-example
+  ></cookbook-example-viewer>
+
   <kirby-divider [hasMargin]="true"></kirby-divider>
 
   <h2>API Description</h2>
-  <h3>Properties:</h3>
+  <h3>Card properties:</h3>
   <cookbook-api-description-properties
     [properties]="properties"
   ></cookbook-api-description-properties>
-  <h3>CSS Custom Properties</h3>
+  <h3>Card CSS Custom Properties</h3>
   <cookbook-api-description-properties
     [properties]="customCssProperties"
     [columns]="customCssPropertiesColumns"
   >
   </cookbook-api-description-properties>
+  <h3>Card header and footer properties:</h3>
+  <cookbook-api-description-properties
+    [properties]="propertiesHeaderAndFooter"
+  ></cookbook-api-description-properties>
 </div>
