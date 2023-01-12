@@ -460,6 +460,61 @@ describe('PageComponent', () => {
     });
   });
 
+  describe('with maxWidth is defined', () => {
+    it('should apply the correct content width', async () => {
+      await TestHelper.whenReady(ionContent);
+      const contentInner = ionContent.querySelector('.content-inner');
+      expect(contentInner).toHaveComputedStyle({
+        'max-width': '720px',
+      });
+    });
+
+    describe('and is set to standard', () => {
+      beforeEach(() => {
+        spectator.component.maxWidth = 'standard';
+        spectator.detectChanges();
+      });
+
+      it('should apply correct content width', async () => {
+        await TestHelper.whenReady(ionContent);
+        const contentInner = ionContent.querySelector('.content-inner');
+        expect(contentInner).toHaveComputedStyle({
+          'max-width': '792px',
+        });
+      });
+    });
+
+    describe('and is set to optimized', () => {
+      beforeEach(() => {
+        spectator.component.maxWidth = 'optimized';
+        spectator.detectChanges();
+      });
+
+      it('should apply correct content width', async () => {
+        await TestHelper.whenReady(ionContent);
+        const contentInner = ionContent.querySelector('.content-inner');
+        expect(contentInner).toHaveComputedStyle({
+          'max-width': '1092px',
+        });
+      });
+    });
+
+    describe('and is set to full', () => {
+      beforeEach(() => {
+        spectator.component.maxWidth = 'full';
+        spectator.detectChanges();
+      });
+
+      it('should apply correct content width', async () => {
+        await TestHelper.whenReady(ionContent);
+        const contentInner = ionContent.querySelector('.content-inner');
+        expect(contentInner).toHaveComputedStyle({
+          'max-width': '100%',
+        });
+      });
+    });
+  });
+
   describe('tab navigation', () => {
     it('should scroll to top when tab is clicked', () => {
       const scrollToTopSpy = jasmine.createSpy();

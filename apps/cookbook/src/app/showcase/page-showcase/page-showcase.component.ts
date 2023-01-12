@@ -6,6 +6,7 @@ import { PageFitHeadingExampleComponent } from '~/app/examples/page-example/fit-
 import { PageFixedFooterTabExampleComponent } from '~/app/examples/page-example/fixed-footer-tabs/tab/fixed-footer-tab-example.component';
 import { PageFixedTitleAndActionsExampleComponent } from '~/app/examples/page-example/fixed-title-and-actions/page-fixed-title-and-actions-example.component';
 import { PagePullToRefreshExampleComponent } from '~/app/examples/page-example/pull-to-refresh/page-pull-to-refresh-example.component';
+import { PageContentWidthExampleComponent } from '~/app/examples/page-example/content-width/page-content-width-example.component';
 import { PageSimpleExampleComponent } from '~/app/examples/page-example/simple/page-simple-example.component';
 import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
 import {
@@ -32,6 +33,7 @@ export class PageShowcaseComponent {
   advancedExampleHtml: string = PageAdvancedExampleComponent.template;
   pullToRefreshExampleHtml: string = PagePullToRefreshExampleComponent.template;
   pullToRefreshExampleTs: string = PagePullToRefreshExampleComponent.handler;
+  contentWidthExampleHtml: string = PageContentWidthExampleComponent.template;
   properties: ApiDescriptionProperty[] = [
     {
       name: 'title',
@@ -73,6 +75,12 @@ export class PageShowcaseComponent {
       description: 'Hides the tab bar when placed in the bottom.',
       defaultValue: 'false',
       type: ['true', 'false'],
+    },
+    {
+      name: 'maxWidth',
+      description: 'Sets the max width for the content',
+      defaultValue: 'default',
+      type: ['default', 'standard', 'optimized', 'full'],
     },
   ];
   events: ApiDescriptionEvent[] = [

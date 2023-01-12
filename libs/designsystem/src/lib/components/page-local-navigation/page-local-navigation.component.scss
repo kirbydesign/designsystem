@@ -47,8 +47,8 @@ $divider-max-width-breakpoint: utils.$page-content-max-width + (utils.size('s') 
     width: 100%;
 
     @include utils.media('<=#{$divider-max-width-breakpoint}') {
-      left: -#{utils.size('s')};
-      width: calc(100% + (#{utils.size('s')} * 2));
+      left: calc(-1 * var(--padding-start, #{utils.size('s')}));
+      width: calc(100% + (var(--padding-start, #{utils.size('s')}) * 2));
     }
   }
 }
