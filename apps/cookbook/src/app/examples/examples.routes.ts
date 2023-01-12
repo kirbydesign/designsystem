@@ -87,7 +87,7 @@ export const routes: Routes = [
         children: [
           {
             path: '',
-            redirectTo: 'tab-navigation',
+            redirectTo: 'simple',
             pathMatch: 'full',
           },
           {
