@@ -52,7 +52,6 @@ export * from './slides/slides.component';
 
 export * from './tabs';
 export * from './toast';
-export { ToggleComponent } from './toggle/toggle.component';
 
 export * from './progress-circle';
 export * from './toggle-button';
