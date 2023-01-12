@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { FullscreenModalExperimentalComponent } from '@kirbydesign/designsystem/components/modal-experimental/fullscreen/fullscreen.component';
 import { KirbyAnimation } from '@kirbydesign/designsystem';
 
-export const fullscreenModalExampleTemplate = `<kirby-fullscreen-modal-experimental
+export const fullscreenModalExampleTemplateHTML = `<kirby-fullscreen-modal-experimental
   [open]="open"
   (willDismiss)="close()"
 >  
@@ -20,7 +20,11 @@ export const fullscreenModalExampleTemplate = `<kirby-fullscreen-modal-experimen
     </p>
   </div>
 </kirby-fullscreen-modal-experimental>
+
+<button kirby-button (click)="openModal()">Open Modal</button>
 `;
+
+export const fullscreenModalExampleTemplateTS = `openModal() { this.open = true; }`;
 
 export const headerStartSlotExampleTemplate = `<kirby-page-progress header-start>
   <kirby-progress-circle themeColor="warning" value="25" size="sm" class="kirby-text-xsmall">
@@ -48,8 +52,8 @@ export class FullscreenModalExperimentalExampleComponent {
   canDismiss = true;
   showFooter = true;
   showPageProgress = true;
-  isInlineFooter = true;
-  collapseTitle = true;
+  isInlineFooter = false;
+  collapseTitle = false;
   scrollDisabled = false;
 
   openModal() {

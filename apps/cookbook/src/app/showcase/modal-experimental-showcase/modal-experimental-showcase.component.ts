@@ -11,7 +11,8 @@ import {
 } from '../../examples/modal-experimental-example/controller/modal-controller-experimental-example.component';
 import {
   footerSlotExampleTemplate,
-  fullscreenModalExampleTemplate,
+  fullscreenModalExampleTemplateHTML,
+  fullscreenModalExampleTemplateTS,
   headerStartSlotExampleTemplate,
 } from '../../examples/modal-experimental-example/fullscreen/fullscreen-experimental-example.component';
 import { ApiDescriptionEvent } from '../../shared/api-description/api-description-events/api-description-events.component';
@@ -29,7 +30,8 @@ export class ModalExperimentalShowcaseComponent {
     private actionSheetCtrl: ActionSheetController
   ) {}
 
-  fullscreenModalExampleTemplate: string = fullscreenModalExampleTemplate;
+  fullscreenModalExampleTemplateHTML: string = fullscreenModalExampleTemplateHTML;
+  fullscreenModalExampleTemplateTS: string = fullscreenModalExampleTemplateTS;
   headerStartSlotExampleTemplate: string = headerStartSlotExampleTemplate;
   footerSlotExampleTemplate: string = footerSlotExampleTemplate;
   showModalCodeSnippet: string = showModalCodeSnippet;

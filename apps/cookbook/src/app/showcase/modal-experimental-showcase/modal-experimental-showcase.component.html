@@ -68,7 +68,8 @@
 <div class="page-example">
   <div>
     <h2 #fullscreenModal>Fullscreen modal</h2>
-    <cookbook-code-viewer [html]="fullscreenModalExampleTemplate"></cookbook-code-viewer>
+    <cookbook-code-viewer [html]="fullscreenModalExampleTemplateHTML"></cookbook-code-viewer>
+    <cookbook-code-viewer [ts]="fullscreenModalExampleTemplateTS"></cookbook-code-viewer>
   </div>
 
   <cookbook-iphone
@@ -155,16 +156,9 @@
 <button kirby-button (click)="openModal()">Open modal</button>
 <button kirby-button (click)="openModal(true)">Open modal with canDismiss</button>
 
-<h2 #modalControllerMethods>Controller methods:</h2>
+<br />
 
-<cookbook-api-description-methods [methods]="controllerMethods"></cookbook-api-description-methods>
-
-<h2 #modalControllerConfig>Modal config:</h2>
-<cookbook-api-description-properties
-  [properties]="controllerProperties"
-></cookbook-api-description-properties>
-
-<h2 #modalControllerSubscriptions>
+<h2 #modalControllerSubscriptions class="subscriptions">
   Subscribe to <code>onWillDismiss</code> or <code>onDidDismiss</code>
 </h2>
 
@@ -176,7 +170,16 @@
   <a href="#" (click)="scrollTo(modalControllerMethods)">here</a>.
 </p>
 
-<cookbook-code-viewer [ts]="observableCodeSnippet"></cookbook-code-viewer>
+<cookbook-example-viewer [ts]="observableCodeSnippet"></cookbook-example-viewer>
+
+<h2 #modalControllerMethods>Controller methods:</h2>
+
+<cookbook-api-description-methods [methods]="controllerMethods"></cookbook-api-description-methods>
+
+<h2 #modalControllerConfig>Modal config:</h2>
+<cookbook-api-description-properties
+  [properties]="controllerProperties"
+></cookbook-api-description-properties>
 
 <h2 #modalControllerWrapperProperties>Modal wrapper properties:</h2>
 
