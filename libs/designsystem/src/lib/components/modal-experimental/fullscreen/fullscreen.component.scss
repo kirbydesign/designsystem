@@ -64,6 +64,10 @@ ion-header {
   }
 }
 
+ion-modal {
+  --background: var(--kirby-modal-background, #{utils.get-color('background-color')});
+}
+
 ion-title {
   box-sizing: border-box;
   padding-inline-start: calc(48px + var(--padding-start));

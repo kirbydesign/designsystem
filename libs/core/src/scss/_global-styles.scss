@@ -164,6 +164,10 @@ ion-modal.kirby-overlay {
   }
 }
 
+ion-modal {
+  --background: var(--kirby-modal-background, #{utils.get-color('background-color')});
+}
+
 ion-loading.kirby-loading-overlay {
   --backdrop-opacity: #{utils.$loading-overlay-backdrop-opacity};
   --ion-backdrop-color: #{utils.get-color('background-color')};
