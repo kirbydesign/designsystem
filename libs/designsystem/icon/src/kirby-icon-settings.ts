@@ -77,6 +77,9 @@ export const kirbyIconSettings: IconSettings = {
     { name: 'update', svg: 'assets/kirby/icons/svg/update.svg' },
     { name: 'user-blocked', svg: 'assets/kirby/icons/svg/user-blocked.svg' },
     { name: 'add-bank', svg: 'assets/kirby/icons/svg/add-bank.svg' },
+    { name: 'participants', svg: 'assets/kirby/icons/svg/participants.svg' },
+    { name: 'download', svg: 'assets/kirby/icons/svg/download.svg' },
+    { name: 'globe-transfer', svg: 'assets/kirby/icons/svg/globe-transfer.svg' },
   ],
 };
 
