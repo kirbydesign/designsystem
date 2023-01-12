@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { KirbyIonicModule } from '@kirbydesign/designsystem/kirby-ionic-module';
 
 @Component({
   standalone: true,
-  imports: [IonicModule],
+  imports: [KirbyIonicModule],
   selector: 'kirby-toggle',
   templateUrl: './toggle.component.html',
   styleUrls: ['./toggle.component.scss'],

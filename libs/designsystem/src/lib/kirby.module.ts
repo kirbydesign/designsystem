@@ -12,6 +12,7 @@ import {
 } from '@kirbydesign/designsystem/shared';
 import { FlagComponent } from '@kirbydesign/designsystem/flag';
 import { SpinnerModule } from '@kirbydesign/designsystem/spinner';
+import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
 import { AccordionItemComponent } from './components/accordion/accordion-item.component';
 import { AccordionDirective } from './components/accordion/accordion.directive';
 import { AppModule } from './components/app/app.module';
@@ -61,7 +62,6 @@ import { TabsModule } from './components/tabs/tabs.module';
 import { ToastController } from './components/toast/services/toast.controller';
 import { ToastHelper } from './components/toast/services/toast.helper';
 import { ToggleButtonModule } from './components/toggle-button/toggle-button.module';
-import { ToggleComponent } from './components/toggle/toggle.component';
 import { customElementsInitializer } from './custom-elements-initializer';
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
 import { ModalRouterLinkDirective } from './directives/modal-router-link/modal-router-link.directive';
