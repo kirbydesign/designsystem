@@ -178,6 +178,7 @@ export class PageComponent
   @Input() defaultBackHref: string;
   @Input() hideBackButton: boolean;
   @Input() titleMaxLines: number;
+  @Input() maxWidth: 'default' | 'standard' | 'optimized' | 'full' = 'default';
 
   private _tabBarBottomHidden: boolean;
   public get tabBarBottomHidden(): boolean {
@@ -348,6 +349,16 @@ export class PageComponent
     this.refresh.emit({
       complete: event.target.complete.bind(event.target),
     });
+  }
+
+  getMaxWidthClasses() {
+    if (!this.maxWidth) {
+      return '';
+    }
+    if (this.maxWidth === 'default') {
+      return '';
+    }
+    return `max-width-${this.maxWidth}`;
   }
 
   private removeWrapper() {
