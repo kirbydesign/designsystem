@@ -50,6 +50,11 @@
     </li>
     <li>
       Support for
+      <a href="#" (click)="scrollTo(tabnav)">tab navigation</a>
+      with sticking tabbar.
+    </li>
+    <li>
+      Support for
       <a href="#" (click)="scrollTo(fixedFooter)">fixed page footer</a>
       and hiding tabs.
     </li>
@@ -329,6 +334,42 @@
   </div>
 
   <cookbook-iphone src="/examples/page/fixed" showExternalLink="true"></cookbook-iphone>
+</div>
+
+<div class="page-example">
+  <div>
+    <h2 #tabnav>Tab navigation</h2>
+    <p>
+      The
+      <code>kirby-tab-navigation</code>
+      element can be used to implement tab-based navigation at the page content level. The component
+      is placed before the page content using with the
+      <code>*kirbyPageStickyContent</code>
+      directive. When the tab bar is scrolled beyond the page toolbar it will stick below the area.
+    </p>
+    <h4>Label text</h4>
+    <p>
+      The label text is specified as the first element inside the
+      <code>kirby-tab-navigation-item</code>
+      component using a
+      <code>span</code>
+      element with a
+      <code>text</code>
+      attribute.
+    </p>
+    <h4>Label badge</h4>
+    <p>
+      An optional badge can be appended to the label text by adding a
+      <code>kirby-badge</code>
+      element immediately after the label text element in the
+      <code>kirby-tab-navigation-item</code>
+      component.
+    </p>
+    <cookbook-code-viewer [html]="tabNavigationHtml"></cookbook-code-viewer>
+    <cookbook-code-viewer [ts]="tabNavigationTs"></cookbook-code-viewer>
+  </div>
+
+  <cookbook-iphone src="/examples/page/tab-navigation" showExternalLink="true"></cookbook-iphone>
 </div>
 
 <div class="page-example">
