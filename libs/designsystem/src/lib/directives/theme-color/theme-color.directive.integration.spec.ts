@@ -10,43 +10,43 @@ describe('ThemeColorDirective', () => {
     declarations: [CardComponent],
   });
 
-  it('should define the directive instance when applied to a valid component', () => {
-    spectator = createDirective('<kirby-card themeColor="primary"></kirby-card>');
+  describe('when initialized', () => {
+    beforeEach(() => {
+      spectator = createDirective('<kirby-card themeColor="primary"></kirby-card>');
+    });
 
-    expect(spectator.directive).toBeDefined();
+    it('should define the directive instance when applied to a valid component', () => {
+      expect(spectator.directive).toBeDefined();
+    });
+
+    it('should add CSS Custom Property for theming background-color', () => {
+      expect(
+        getComputedStyle(spectator.element).getPropertyValue('--kirby-interactive-background-color')
+      ).not.toBe('');
+    });
+
+    it('should add CSS Custom Property for theming color', () => {
+      expect(
+        getComputedStyle(spectator.element).getPropertyValue('--kirby-interactive-color')
+      ).not.toBe('');
+    });
   });
 
-  it('should add appropriate color brightness for white', () => {
+  it('should add color brightness class for white', () => {
     spectator = createDirective('<kirby-card themeColor="white"></kirby-card>');
 
     expect(spectator.element).toHaveClass('kirby-color-brightness-white');
   });
 
-  it('should add appropriate color brightness for light', () => {
+  it('should add color brightness class for light', () => {
     spectator = createDirective('<kirby-card themeColor="light"></kirby-card>');
 
     expect(spectator.element).toHaveClass('kirby-color-brightness-light');
   });
 
-  it('should add appropriate color brightness for dark', () => {
+  it('should add color brightness class for dark', () => {
     spectator = createDirective('<kirby-card themeColor="dark"></kirby-card>');
 
     expect(spectator.element).toHaveClass('kirby-color-brightness-dark');
-  });
-
-  it('should add CSS Custom Property for theming background-color', () => {
-    spectator = createDirective('<kirby-card themeColor="white"></kirby-card>');
-
-    expect(
-      getComputedStyle(spectator.element).getPropertyValue('--kirby-interactive-background-color')
-    ).not.toBe('');
-  });
-
-  it('should add CSS Custom Property for theming color', () => {
-    spectator = createDirective('<kirby-card themeColor="white"></kirby-card>');
-
-    expect(
-      getComputedStyle(spectator.element).getPropertyValue('--kirby-interactive-color')
-    ).not.toBe('');
   });
 });
