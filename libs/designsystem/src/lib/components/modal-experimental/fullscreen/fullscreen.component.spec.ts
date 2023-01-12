@@ -9,8 +9,8 @@ import {
   IonToolbar,
 } from '@ionic/angular';
 import { MockComponents } from 'ng-mocks';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { ButtonComponent } from '../../button/button.component';
-import { IconComponent } from '../../icon/icon.component';
 import { FullscreenModalExperimentalComponent } from './fullscreen.component';
 
 describe('FullscreenComponent', () => {
