@@ -1,21 +1,22 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "baseUrl":".",
+    "baseUrl": ".",
     "rootDir": ".",
-    "paths":{
-      "@kirbydesign/designsystem/*":["*"],
-
+    "paths": {
+      "@kirbydesign/designsystem/*": ["*"],
+      "@kirbydesign/designsystem/card": ["card/index.ts"],
+      "@kirbydesign/designsystem/icon": ["icon/index.ts"],
+      "@kirbydesign/designsystem/testing": ["testing/index.ts"],
       "@kirbydesign/designsystem/helpers": ["helpers/index.ts"],
       "@kirbydesign/designsystem/shared": ["shared/index.ts"],
-      "@kirbydesign/designsystem/card": ["card/index.ts"],
       "@kirbydesign/designsystem/types": ["types/index.ts"],
-      "@kirbydesign/designsystem/testing":["testing/index.ts"],
-      "@kirbydesign/designsystem/flag":["flag/index.ts"],
-      
+      "@kirbydesign/designsystem/flag": ["flag/index.ts"],
+      "@kirbydesign/designsystem/kirby-ionic-module": ["kirby-ionic-module/index.ts"],
+      "@kirbydesign/designsystem/spinner": ["spinner/index.ts"]
     },
     "esModuleInterop": true,
-        "target": "es2020"
+    "target": "es2020"
   },
   "include": [],
   "files": [],

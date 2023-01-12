@@ -1,15 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { Inject, InjectionToken, ModuleWithProviders, NgModule, Optional } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
 
 import { CardModule } from '@kirbydesign/designsystem/card';
+import { IconModule } from '@kirbydesign/designsystem/icon';
+import { KirbyIonicModule } from '@kirbydesign/designsystem/kirby-ionic-module';
 import {
   ComponentLoaderDirective,
   ResizeObserverFactory,
   ResizeObserverService,
 } from '@kirbydesign/designsystem/shared';
 import { FlagComponent } from '@kirbydesign/designsystem/flag';
+import { SpinnerModule } from '@kirbydesign/designsystem/spinner';
 import { AccordionItemComponent } from './components/accordion/accordion-item.component';
 import { AccordionDirective } from './components/accordion/accordion.directive';
 import { AppModule } from './components/app/app.module';
@@ -29,7 +31,6 @@ import { InputComponent } from './components/form-field/input/input.component';
 import { TextareaComponent } from './components/form-field/textarea/textarea.component';
 import { BreakpointHelperService } from './components/grid/breakpoint-helper.service';
 import { GridComponent } from './components/grid/grid.component';
-import { IconModule } from './components/icon/icon.module';
 import { ItemGroupComponent } from './components/item-group/item-group.component';
 import { ItemSlidingComponent } from './components/item-sliding/item-sliding.component';
 import { ItemModule } from './components/item/item.module';
@@ -56,7 +57,6 @@ import { SectionHeaderComponent } from './components/section-header/section-head
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
 import { SlideButtonComponent } from './components/slide-button/slide-button.component';
 import { SlideDirective, SlidesComponent } from './components/slides/slides.component';
-import { SpinnerModule } from './components/spinner/spinner.module';
 import { TabsModule } from './components/tabs/tabs.module';
 import { ToastController } from './components/toast/services/toast.controller';
 import { ToastHelper } from './components/toast/services/toast.helper';
@@ -163,17 +163,7 @@ export interface KirbyConfig {
 }
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule,
-    IonicModule.forRoot({
-      mode: 'ios',
-      inputShims: true,
-      scrollAssist: true,
-      scrollPadding: false,
-    }),
-    ...importedModules,
-  ],
+  imports: [CommonModule, RouterModule, KirbyIonicModule, ...importedModules],
   declarations: [declarations],
   providers: providers,
   exports: [allExports],

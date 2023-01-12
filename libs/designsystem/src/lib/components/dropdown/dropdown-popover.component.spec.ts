@@ -12,7 +12,8 @@ import { MockComponents } from 'ng-mocks';
 import { CardComponent } from '@kirbydesign/designsystem/card';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
-import { ButtonComponent, IconComponent, ItemComponent } from '..';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
+import { ButtonComponent, ItemComponent } from '..';
 import { ListItemTemplateDirective } from '../list';
 import { HorizontalDirection, PopoverComponent } from '../popover/popover.component';
 

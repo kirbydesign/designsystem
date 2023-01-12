@@ -2,7 +2,7 @@ import { createComponentFactory, Spectator } from '@ngneat/spectator';
 import { MockComponent, MockModule } from 'ng-mocks';
 import { IonicModule } from '@ionic/angular';
 
-import { IconComponent } from '../../icon/icon.component';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { TabButtonComponent } from './tab-button.component';
 
 describe('TabsComponent', () => {

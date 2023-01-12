@@ -65,16 +65,14 @@ $button-width: (
 
   @include interaction-state.apply-hover;
   @include interaction-state.apply-active('s');
-
-  &.destructive {
-    --kirby-button-color: #{utils.get-color('danger')};
-  }
 }
 
 @mixin button-attentionlevel1 {
   --kirby-button-background-color: #{utils.get-color('primary')};
   --kirby-button-color: #{utils.get-color('primary-contrast')};
 
+  // The destructive class is only ever applied by kirby-alert.
+  // Standalone destructive buttons are not a supported concept.
   &.destructive {
     --kirby-button-background-color: #{utils.get-color('danger')};
     --kirby-button-color: #{utils.get-color('danger-contrast')};
@@ -87,11 +85,6 @@ $button-width: (
 
   @include interaction-state.apply-hover('l', $make-lighter: true);
   @include interaction-state.apply-active('xxxl', $make-lighter: true);
-
-  &.destructive {
-    --kirby-button-background-color: #{utils.get-color('light')};
-    --kirby-button-color: #{utils.get-color('danger')};
-  }
 }
 
 @mixin button-attentionlevel3 {
@@ -102,10 +95,6 @@ $button-width: (
 
   @include interaction-state.apply-hover('xxxs');
   @include interaction-state.apply-active('xxs');
-
-  &.destructive {
-    --kirby-button-color: #{utils.get-color('danger')};
-  }
 }
 
 :host {

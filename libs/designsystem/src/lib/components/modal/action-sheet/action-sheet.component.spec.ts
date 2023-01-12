@@ -5,6 +5,7 @@ import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/t
 import * as ionic from '@ionic/angular';
 import { CardComponent, CardModule } from '@kirbydesign/designsystem/card';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
+import { SpinnerModule } from '@kirbydesign/designsystem/spinner';
 import { MockComponent } from 'ng-mocks';
 
 import { ButtonComponent } from '../../button/button.component';
@@ -12,7 +13,6 @@ import { ButtonComponent } from '../../button/button.component';
 import { InfiniteScrollDirective } from '../../list/directives/infinite-scroll.directive';
 import { ListItemColorDirective } from '../../list/directives/list-item-color.directive';
 import { ListComponent } from '../../list/list.component';
-import { SpinnerComponent } from '../../spinner/spinner.component';
 
 import { ActionSheetComponent } from './action-sheet.component';
 
@@ -27,7 +27,7 @@ describe('ActionSheetComponent', () => {
       declarations: [
         ActionSheetComponent,
         ListComponent,
-        SpinnerComponent,
+
         InfiniteScrollDirective,
         ButtonComponent,
         ListItemColorDirective,
@@ -40,7 +40,7 @@ describe('ActionSheetComponent', () => {
         MockComponent(ionic.IonItemOptions),
         MockComponent(ionic.IonItemSliding),
       ],
-      imports: [CardModule],
+      imports: [CardModule, SpinnerModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
     TestBed.overrideModule(BrowserDynamicTestingModule, {
