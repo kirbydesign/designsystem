@@ -8,10 +8,10 @@ import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { CardComponent } from '@kirbydesign/designsystem/card';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
-import { ButtonComponent } from '..';
 import { ListItemTemplateDirective } from '../list';
 import { HorizontalDirection, PopoverComponent } from '../popover/popover.component';
 
+import { ButtonComponent } from '../button/button.component';
 import { DropdownComponent } from './dropdown.component';
 import { OpenState } from './dropdown.types';
 

@@ -12,9 +12,10 @@ import { MockComponents } from 'ng-mocks';
 import { CardComponent } from '@kirbydesign/designsystem/card';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
-import { ButtonComponent } from '..';
+
 import { PopoverComponent } from '../popover/popover.component';
 
+import { ButtonComponent } from '../button/button.component';
 import { DropdownComponent } from './dropdown.component';
 
 @Component({
