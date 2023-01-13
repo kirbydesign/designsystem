@@ -247,17 +247,8 @@ $button-width: (
 }
 
 :host-context(kirby-dropdown) {
+  // place arrow-icon in dropdown correctly
   justify-content: space-between;
-
-  &.attention-level2 {
-    --kirby-button-background-color: #{utils.get-color('white')};
-    --kirby-button-color: #{utils.get-color('white-contrast')};
-
-    @include interaction-state.apply-hover('xxxs');
-    @include interaction-state.apply-active('xxs');
-
-    box-shadow: utils.get-elevation(2);
-  }
 }
 
 :host-context(kirby-action-sheet) {
