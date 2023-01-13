@@ -16,6 +16,7 @@
       "@kirbydesign/designsystem/spinner": ["spinner/index.ts"],
       "@kirbydesign/designsystem/item": ["item/index.ts"],
       "@kirbydesign/designsystem/section-header": ["section-header/index.ts"],
+      "@kirbydesign/designsystem/slide": ["slides/index.ts"]
     },
     "esModuleInterop": true,
     "target": "es2020"

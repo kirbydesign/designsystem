@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { fakeAsync } from '@angular/core/testing';
 import { IonSlide } from '@ionic/angular';
 import { byTestId, createHostFactory, HostComponent, SpectatorHost } from '@ngneat/spectator';
-
-import { SlideDirective, SlidesComponent } from './slides.component';
+import { SlideDirective } from './slide.directive';
+import { SlidesComponent } from './slides.component';
 
 describe('SlidesComponent', () => {
   let spectator: SpectatorHost<SlidesComponent, HostComponent>;

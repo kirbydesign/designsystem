@@ -1,6 +1,5 @@
 import { Component, Directive, forwardRef, Input } from '@angular/core';
-
-import { SlideDirective, SlidesComponent } from '@kirbydesign/designsystem';
+import { SlideDirective, SlidesComponent } from '@kirbydesign/designsystem/slides';
 
 @Directive({
   selector: '[kirbySlide]',
