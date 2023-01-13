@@ -7,9 +7,9 @@ import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { SpinnerModule } from '@kirbydesign/designsystem/spinner';
 import { CardModule } from '@kirbydesign/designsystem/card';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
 import {
   InfiniteScrollDirective,
-  ItemComponent,
   ListComponent,
   ListItemColorDirective,
   ListItemTemplateDirective,
