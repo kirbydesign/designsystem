@@ -82,8 +82,8 @@ $button-width: (
   --kirby-button-background-color: #{utils.get-color('black')};
   --kirby-button-color: #{utils.get-color('black-contrast')};
 
-  @include interaction-state.apply-hover('l', $make-lighter: true);
-  @include interaction-state.apply-active('xxxl', $make-lighter: true);
+  @include interaction-state.apply-hover('s', $make-lighter: true);
+  @include interaction-state.apply-active('m', $make-lighter: true);
 }
 
 @mixin button-attentionlevel3 {
@@ -93,8 +93,8 @@ $button-width: (
   );
   --kirby-button-color: var(--kirby-interactive-color, #{utils.get-color('black')});
 
-  @include interaction-state.apply-hover('xxxs');
-  @include interaction-state.apply-active('xxs');
+  @include interaction-state.apply-hover('xs');
+  @include interaction-state.apply-active('m');
 }
 
 :host {
@@ -104,8 +104,8 @@ $button-width: (
   @include utils.accessible-target-size;
   @include interaction-state.apply-focus-visible;
   @include interaction-state.initialize-layer;
-  @include interaction-state.apply-hover;
-  @include interaction-state.apply-active('s');
+  @include interaction-state.apply-hover('xxxs');
+  @include interaction-state.apply-active;
   @include interaction-state.extend-content {
     display: inherit;
     width: inherit;
@@ -227,8 +227,8 @@ $button-width: (
     --kirby-button-background-color: #{utils.get-color('white')};
     --kirby-button-color: #{utils.get-color('white-contrast')};
 
-    @include interaction-state.apply-hover;
-    @include interaction-state.apply-active('s');
+    @include interaction-state.apply-hover('s');
+    @include interaction-state.apply-active('m');
   }
 
   &.attention-level3 {
