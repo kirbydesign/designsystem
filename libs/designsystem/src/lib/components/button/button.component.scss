@@ -118,6 +118,7 @@ $button-width: (
   font-family: var(--kirby-font-family);
   background-color: var(--kirby-button-background-color, initial);
   color: var(--kirby-button-color, inherit);
+  box-shadow: var(--kirby-interactive-elevation);
   border-radius: utils.$border-radius-round;
   box-sizing: border-box; // Ensure border is not added to button height
   display: inline-flex;

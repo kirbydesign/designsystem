@@ -13,4 +13,5 @@
 @mixin apply-light-theme {
   --kirby-interactive-background-color: #{utils.get-color('white')};
   --kirby-interactive-color: #{utils.get-color('white-contrast')};
+  --kirby-interactive-elevation: #{utils.get-elevation(2)};
 }
