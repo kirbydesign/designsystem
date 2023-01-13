@@ -251,16 +251,6 @@ $button-width: (
   justify-content: space-between;
 }
 
-:host-context(kirby-action-sheet) {
-  &.attention-level2 {
-    --kirby-button-background-color: #{utils.get-color('white')};
-    --kirby-button-color: #{utils.get-color('white-contrast')};
-
-    @include interaction-state.apply-hover;
-    @include interaction-state.apply-active;
-  }
-}
-
 // Temp fix for https://github.com/angular/angular-cli/issues/13854#issuecomment-470831308
 
 /* clean-css ignore:start */
