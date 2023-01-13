@@ -13,7 +13,8 @@ import { CardComponent } from '@kirbydesign/designsystem/card';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
-import { ButtonComponent, ItemComponent } from '..';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
+import { ButtonComponent } from '..';
 import { ListItemTemplateDirective } from '../list';
 import { HorizontalDirection, PopoverComponent } from '../popover/popover.component';
 

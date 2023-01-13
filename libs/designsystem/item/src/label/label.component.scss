@@ -1,6 +1,5 @@
 @use '@kirbydesign/core/src/scss/utils';
 @use '../item.utils';
-@use '../../section-header/section-header.utils';
 
 :host {
   &.horizontal ion-label {
@@ -20,7 +19,7 @@
 }
 
 :host-context(kirby-section-header) ion-label {
-  @include section-header.typography;
+  @include utils.section-header-typography;
 }
 
 :host([slot='end']) ion-label {
