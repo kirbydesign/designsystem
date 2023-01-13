@@ -14,11 +14,13 @@ $notification-colors: (
 $system-colors: (
   'background-color': #f6f6f6,
   'white': #fff,
+  'white-overlay': rgb(255 255 255 / 15%),
   'light': #f2f2f2,
   'semi-light': #ebebeb,
   'medium': #d1d1d1,
   'semi-dark': #8e8e8e,
   'dark': #353535,
+  'dark-overlay': rgb(28 28 28 / 4%),
   'black': #1c1c1c,
 );
 $text-colors: (
