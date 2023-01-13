@@ -13,6 +13,8 @@ import {
 import { FlagComponent } from '@kirbydesign/designsystem/flag';
 import { SpinnerModule } from '@kirbydesign/designsystem/spinner';
 import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
+import { SectionHeaderComponent } from '@kirbydesign/designsystem/section-header';
+import { ItemModule } from '@kirbydesign/designsystem/item';
 import { AccordionItemComponent } from './components/accordion/accordion-item.component';
 import { AccordionDirective } from './components/accordion/accordion.directive';
 import { AppModule } from './components/app/app.module';
@@ -34,7 +36,6 @@ import { BreakpointHelperService } from './components/grid/breakpoint-helper.ser
 import { GridComponent } from './components/grid/grid.component';
 import { ItemGroupComponent } from './components/item-group/item-group.component';
 import { ItemSlidingComponent } from './components/item-sliding/item-sliding.component';
-import { ItemModule } from './components/item/item.module';
 import { ListModule } from './components/list/list.module';
 import { LoadingOverlayComponent } from './components/loading-overlay/loading-overlay.component';
 import { LoadingOverlayService } from './components/loading-overlay/loading-overlay.service';
@@ -54,7 +55,6 @@ import { ProgressCircleComponent } from './components/progress-circle/progress-c
 import { RangeComponent } from './components/range/range.component';
 import { ReorderListComponent } from './components/reorder-list/reorder-list.component';
 import { RouterOutletModule } from './components/router-outlet/router-outlet.module';
-import { SectionHeaderComponent } from './components/section-header/section-header.component';
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
 import { SlideButtonComponent } from './components/slide-button/slide-button.component';
 import { SlideDirective, SlidesComponent } from './components/slides/slides.component';

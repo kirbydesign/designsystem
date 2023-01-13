@@ -1,7 +1,7 @@
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
-import { LabelComponent } from '../item/label/label.component';
+import { LabelComponent } from '@kirbydesign/designsystem/item';
 
 import { SectionHeaderComponent } from './section-header.component';
 
