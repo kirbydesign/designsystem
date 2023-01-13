@@ -127,7 +127,7 @@ describe('ButtonComponent in Kirby Page', () => {
     it('should render with correct background-color', async () => {
       await TestHelper.whenReady(ionContent);
       expect(actionButtonInPage).toHaveComputedStyle({
-        'background-color': 'transparent',
+        'background-color': getColor('white'),
       });
     });
 
