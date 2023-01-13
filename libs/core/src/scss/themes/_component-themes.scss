@@ -1,13 +1,11 @@
 @use '../utils';
 
 @mixin apply-dark-theme {
-  // TODO: extract to variable
   --kirby-interactive-background-color: #{utils.get-color('white-overlay')};
   --kirby-interactive-color: #{utils.get-color('white')};
 }
 
 @mixin apply-white-theme {
-  // TODO: extract to variable
   --kirby-interactive-background-color: #{utils.get-color('dark-overlay')};
   --kirby-interactive-color: #{utils.get-color('black')};
 }
