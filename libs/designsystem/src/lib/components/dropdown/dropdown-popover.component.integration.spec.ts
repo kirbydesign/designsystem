@@ -11,9 +11,11 @@ import { createHostFactory, Spectator } from '@ngneat/spectator';
 import { MockComponents } from 'ng-mocks';
 import { CardComponent } from '@kirbydesign/designsystem/card';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
-import { ButtonComponent, ItemComponent } from '..';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
+
 import { PopoverComponent } from '../popover/popover.component';
 
+import { ButtonComponent } from '../button/button.component';
 import { DropdownComponent } from './dropdown.component';
 
 @Component({

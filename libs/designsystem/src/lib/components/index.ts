@@ -25,7 +25,6 @@ export { FabSheetComponent } from './fab-sheet/fab-sheet.component';
 export { GridComponent } from './grid/grid.component';
 export { GridCardConfiguration } from './grid/grid-card-configuration';
 
-export * from './item';
 export { ItemSlidingComponent } from './item-sliding/item-sliding.component';
 export { ItemGroupComponent } from './item-group/item-group.component';
 
@@ -43,7 +42,6 @@ export { RangeComponent } from './range/range.component';
 export * from './router-outlet';
 export * from './reorder-list';
 
-export { SectionHeaderComponent } from './section-header/section-header.component';
 /* prettier-ignore */
 export { SegmentedControlComponent, SegmentedControlMode} from './segmented-control/segmented-control.component'; // See issue #1555 for prettier-ignore explanation
 export { SegmentItem } from './segmented-control/segment-item';

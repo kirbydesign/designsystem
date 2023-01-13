@@ -13,10 +13,11 @@ import { CardComponent } from '@kirbydesign/designsystem/card';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
-import { ButtonComponent, ItemComponent } from '..';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { ListItemTemplateDirective } from '../list';
 import { HorizontalDirection, PopoverComponent } from '../popover/popover.component';
 
+import { ButtonComponent } from '../button/button.component';
 import { DropdownComponent } from './dropdown.component';
 import { OpenState } from './dropdown.types';
 

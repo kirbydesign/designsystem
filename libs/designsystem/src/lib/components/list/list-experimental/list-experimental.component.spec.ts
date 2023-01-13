@@ -1,9 +1,8 @@
 import { IonItem, IonList } from '@ionic/angular';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponent } from 'ng-mocks';
-
-import { ItemComponent } from '../../item';
 
 import { ListExperimentalComponent } from './list-experimental.component';
 
