@@ -98,14 +98,12 @@ $button-width: (
 }
 
 :host {
-  $border-width: 1px;
-
   --kirby-button-padding-left: #{utils.size('m')};
   --kirby-button-padding-right: #{utils.size('m')};
 
   @include utils.accessible-target-size;
   @include interaction-state.apply-focus-visible;
-  @include interaction-state.initialize-layer($border-width);
+  @include interaction-state.initialize-layer;
   @include interaction-state.apply-hover;
   @include interaction-state.apply-active('s');
   @include interaction-state.extend-content {
@@ -141,9 +139,7 @@ $button-width: (
   // Outline is applied on button border instead,
   // to keep the rounded shape:
   outline: none;
-  border-width: $border-width;
-  border-style: solid;
-  border-color: var(--kirby-button-border-color, transparent);
+  border: none;
 
   &.no-margin {
     margin: 0;
