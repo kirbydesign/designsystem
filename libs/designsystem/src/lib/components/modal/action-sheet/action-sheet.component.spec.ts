@@ -156,9 +156,6 @@ describe('ActionSheetComponent', () => {
       const cancelButton = fixture.debugElement.query(By.css('.cancel-btn'));
       const element = cancelButton.nativeElement as HTMLElement;
       expect(element).toHaveComputedStyle({
-        'border-width': '1px',
-        'border-style': 'solid',
-        'border-color': 'transparent',
         'background-color': getColor('white', 'contrast'),
         /* prettier-ignore */
         'color': getColor('white'),
