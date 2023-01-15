@@ -18,7 +18,8 @@
       "@kirbydesign/designsystem/spinner": ["spinner/index.ts"],
       "@kirbydesign/designsystem/toggle": ["toggle/index.ts"],
       "@kirbydesign/designsystem/item": ["item/index.ts"],
-      "@kirbydesign/designsystem/section-header": ["section-header/index.ts"]
+      "@kirbydesign/designsystem/section-header": ["section-header/index.ts"],
+      "@kirbydesign/designsystem/slide": ["slide/index.ts"]
     }
   },
   "files": ["test.ts"],

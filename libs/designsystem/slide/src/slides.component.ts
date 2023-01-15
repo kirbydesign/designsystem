@@ -1,25 +1,18 @@
-import { CommonModule } from '@angular/common';
 import { EventEmitter } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
   ContentChild,
-  Directive,
   Input,
   Output,
   TemplateRef,
   ViewChild,
 } from '@angular/core';
-import { IonicModule, IonSlides } from '@ionic/angular';
+import { IonSlides } from '@ionic/angular';
 
-@Directive({
-  selector: '[kirbySlide]',
-})
-export class SlideDirective {}
+import { SlideDirective } from './slide.directive';
 
 @Component({
-  standalone: true,
-  imports: [IonicModule, CommonModule],
   selector: 'kirby-slides',
   template: `
     <ion-slides

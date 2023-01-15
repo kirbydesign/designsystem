@@ -7,6 +7,7 @@ import {
   KirbyExperimentalModule,
   KirbyModule,
 } from '@kirbydesign/designsystem';
+import { SlideModule } from '@kirbydesign/designsystem/slide';
 
 import { CodeViewerModule } from '../shared/code-viewer/code-viewer.module';
 import { AccordionExampleModule } from './accordion-example/accordion-example.module';
@@ -67,6 +68,7 @@ const IMPORTS = [
   VirtualScrollExampleModule,
   ExperimentalExamplesModule,
   DataTableExampleModule,
+  SlideModule,
 ];
 
 @NgModule({
