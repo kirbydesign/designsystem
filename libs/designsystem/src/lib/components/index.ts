@@ -51,7 +51,6 @@ export * from './tabs';
 export * from './toast';
 
 export * from './progress-circle';
-export * from './toggle-button';
 
 export * from './page-local-navigation';
 

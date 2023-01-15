@@ -22,7 +22,8 @@
       "@kirbydesign/designsystem/toggle": ["libs/designsystem/toggle/index.ts"],
       "@kirbydesign/designsystem/item": ["libs/designsystem/item/index.ts"],
       "@kirbydesign/designsystem/section-header": ["libs/designsystem/section-header/index.ts"],
-      "@kirbydesign/designsystem/slide": ["libs/designsystem/slide/index.ts"]
+      "@kirbydesign/designsystem/slide": ["libs/designsystem/slide/index.ts"],
+      "@kirbydesign/designsystem/toggle-button": ["libs/designsystem/toggle-button/index.ts"],
     },
     "target": "es2020"
   },
