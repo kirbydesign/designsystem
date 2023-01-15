@@ -15,6 +15,7 @@ import { SpinnerModule } from '@kirbydesign/designsystem/spinner';
 import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
 import { SectionHeaderComponent } from '@kirbydesign/designsystem/section-header';
 import { ItemModule } from '@kirbydesign/designsystem/item';
+import { SlideModule } from '@kirbydesign/designsystem/slide';
 import { AccordionItemComponent } from './components/accordion/accordion-item.component';
 import { AccordionDirective } from './components/accordion/accordion.directive';
 import { AppModule } from './components/app/app.module';
@@ -57,7 +58,6 @@ import { ReorderListComponent } from './components/reorder-list/reorder-list.com
 import { RouterOutletModule } from './components/router-outlet/router-outlet.module';
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
 import { SlideButtonComponent } from './components/slide-button/slide-button.component';
-import { SlideDirective, SlidesComponent } from './components/slides/slides.component';
 import { TabsModule } from './components/tabs/tabs.module';
 import { ToastController } from './components/toast/services/toast.controller';
 import { ToastHelper } from './components/toast/services/toast.helper';
@@ -81,7 +81,6 @@ const exportedDeclarations = [
   InputComponent,
   TextareaComponent,
   DividerComponent,
-  SlideDirective,
 
   ItemGroupComponent,
 ];
@@ -101,7 +100,6 @@ const standaloneComponents = [
   ItemSlidingComponent,
   AccordionItemComponent,
   AccordionDirective,
-  SlidesComponent,
   ProgressCircleComponent,
   ReorderListComponent,
   LoadingOverlayComponent,
@@ -136,6 +134,7 @@ const exportedModules = [
   DropdownModule,
   KirbyBadgeModule,
   FormFieldModule,
+  SlideModule,
   ...standaloneComponents,
 ];
 
