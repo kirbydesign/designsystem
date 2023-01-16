@@ -131,6 +131,8 @@ Import the component and add it to the `app-component.html`
 
 In `app.module.ts`
 ```Typescript
+import { MyComponent } from '@kirbydesign/designsystem/my-component';
+
 @NgModule({
     imports: [MyModule]
 }) export class AppComponent {}
@@ -149,4 +151,20 @@ In `app.module.ts`, change the import to `KirbyModule`
 ```
 and verify that the component still works.
 
+### 7.c Verify with primary entry import
+To prevent breaking changes, it must still be possible to import the component through the primary entry:
 
+In `app.module.ts`
+```Typescript
+import { MyComponent } from '@kirbydesign/designsystem';
+
+@NgModule({
+    imports: [MyModule]
+}) export class AppComponent {}
+```
+In `app.component.html`
+```html
+<my-component></my-component>
+```
+
+Now do the same, but import `kirbyModule`.
