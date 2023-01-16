@@ -96,7 +96,7 @@ $button-width: (
   --kirby-button-color: var(--kirby-interactive-color, #{utils.get-color('black')});
 
   @include interaction-state.apply-hover('xs');
-  @include interaction-state.apply-active('m');
+  @include interaction-state.apply-active('s');
 }
 
 :host {
@@ -235,8 +235,8 @@ $button-width: (
   }
 
   &.attention-level3 {
-    @include interaction-state.apply-hover('xs', $make-lighter: true);
-    @include interaction-state.apply-active('m', $make-lighter: true);
+    @include interaction-state.apply-hover('xxxs', $make-lighter: true);
+    @include interaction-state.apply-active('xxs', $make-lighter: true);
   }
 }
 
