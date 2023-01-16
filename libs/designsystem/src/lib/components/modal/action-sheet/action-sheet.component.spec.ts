@@ -156,9 +156,9 @@ describe('ActionSheetComponent', () => {
       const cancelButton = fixture.debugElement.query(By.css('.cancel-btn'));
       const element = cancelButton.nativeElement as HTMLElement;
       expect(element).toHaveComputedStyle({
-        'background-color': getColor('white', 'contrast'),
+        'background-color': getColor('white'),
         /* prettier-ignore */
-        'color': getColor('white'),
+        'color': getColor('white', 'contrast'),
       });
     });
   });
