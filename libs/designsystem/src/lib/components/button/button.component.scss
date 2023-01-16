@@ -213,7 +213,7 @@ $button-width: (
     min-width: unset;
 
     &:not(:disabled) {
-      box-shadow: utils.get-elevation(8);
+      box-shadow: utils.get-elevation(4);
     }
   }
 }
