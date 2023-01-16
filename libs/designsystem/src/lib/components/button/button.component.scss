@@ -62,6 +62,8 @@ $button-width: (
   --kirby-button-background-color: transparent;
   --kirby-button-color: #{utils.get-color('black')};
 
+  box-shadow: none;
+
   @include interaction-state.apply-hover;
   @include interaction-state.apply-active('s');
 }
