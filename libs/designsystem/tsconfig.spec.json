@@ -21,6 +21,7 @@
       "@kirbydesign/designsystem/section-header": ["section-header/index.ts"],
       "@kirbydesign/designsystem/slide": ["slide/index.ts"],
       "@kirbydesign/designsystem/toggle-button": ["toggle-button/index.ts"],
+      "@kirbydesign/designsystem/tabs": ["tabs/index.ts"]
     }
   },
   "files": ["test.ts"],

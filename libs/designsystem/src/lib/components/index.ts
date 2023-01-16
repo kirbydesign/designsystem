@@ -47,7 +47,6 @@ export { SegmentedControlComponent, SegmentedControlMode} from './segmented-cont
 export { SegmentItem } from './segmented-control/segment-item';
 export { SlideButtonComponent } from './slide-button/slide-button.component';
 
-export * from './tabs';
 export * from './toast';
 
 export * from './progress-circle';
