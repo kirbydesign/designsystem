@@ -22,7 +22,7 @@ ion-fab-button {
 
   // end NOTE
 
-  --box-shadow: #{utils.get-elevation(8)};
+  --box-shadow: #{utils.get-elevation(4)};
 
   @include interaction-state.apply-focus-visible {
     outline: none;
