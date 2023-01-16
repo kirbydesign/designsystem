@@ -16,6 +16,7 @@ import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
 import { SectionHeaderComponent } from '@kirbydesign/designsystem/section-header';
 import { ItemModule } from '@kirbydesign/designsystem/item';
 import { SlideModule } from '@kirbydesign/designsystem/slide';
+import { ToggleButtonModule } from '@kirbydesign/designsystem/toggle-button';
 import { AccordionItemComponent } from './components/accordion/accordion-item.component';
 import { AccordionDirective } from './components/accordion/accordion.directive';
 import { AppModule } from './components/app/app.module';
@@ -61,7 +62,6 @@ import { SlideButtonComponent } from './components/slide-button/slide-button.com
 import { TabsModule } from './components/tabs/tabs.module';
 import { ToastController } from './components/toast/services/toast.controller';
 import { ToastHelper } from './components/toast/services/toast.helper';
-import { ToggleButtonModule } from './components/toggle-button/toggle-button.module';
 import { customElementsInitializer } from './custom-elements-initializer';
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
 import { ModalRouterLinkDirective } from './directives/modal-router-link/modal-router-link.directive';
