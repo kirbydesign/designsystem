@@ -148,7 +148,7 @@ describe('ButtonComponent', () => {
         spectator.detectChanges();
       });
 
-      it('should render with no background-color', () => {
+      it('should render with correct background-color', () => {
         expect(element).toHaveComputedStyle({ 'background-color': getColor('white') });
       });
 
