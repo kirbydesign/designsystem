@@ -46,10 +46,6 @@
     }
   }
 
-  &.highlighted {
-    box-shadow: utils.get-elevation(4);
-  }
-
   &.flat {
     box-shadow: none;
   }
@@ -59,10 +55,6 @@
     @include interaction-state.apply-hover('xxxs');
     @include interaction-state.apply-active('xxs');
     @include interaction-state.apply-focus-visible($shadow: utils.get-elevation(2));
-
-    &.highlighted {
-      @include interaction-state.apply-focus-visible($shadow: utils.get-elevation(4));
-    }
 
     &.interaction-state-make-lighter-and-louder {
       @include interaction-state.apply-hover('xxs', $make-lighter: true);
@@ -74,7 +66,6 @@
 }
 
 :host-context(.swiper-slide-active) {
-  box-shadow: utils.get-elevation(4);
   transition: all 0.5s;
   transform: translateY(-3px);
 }
