@@ -38,7 +38,6 @@ import { ReorderListExampleComponent } from './reorder-list-example/reorder-list
 import { SectionHeaderExampleComponent } from './section-header-example/section-header-example.component';
 import { SegmentedControlExampleComponent } from './segmented-control-example/segmented-control-example.component';
 import { SlideButtonExampleComponent } from './slide-button-example/slide-button-example.component';
-import { CookbookExampleCardContentComponent } from './slides-example/example-card-content';
 import { SlidesExampleComponent } from './slides-example/slides-example.component';
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
 import { StylingHtmlListsExampleComponent } from './styling-html-lists-example/styling-html-lists-example.component';
@@ -96,7 +95,6 @@ export const COMPONENT_DECLARATIONS: any[] = [
   ProgressCircleExampleComponent,
   FlagExampleComponent,
   SlidesExampleComponent,
-  CookbookExampleCardContentComponent,
   AccordionExampleComponent,
   LinkExampleComponent,
   PagePullToRefreshExampleComponent,

@@ -19,8 +19,6 @@ const config = {
         <div class="card-content">
           {{ slide.cardContent }}
         </div>
-
-      <kirby-card-footer *ngIf="hasFooter">Footer</kirby-card-footer>
     </kirby-card>
 </kirby-slides>
 <br />
