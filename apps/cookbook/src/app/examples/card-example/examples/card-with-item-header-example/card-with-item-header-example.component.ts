@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 
 const config = {
-  template: `<kirby-card hasPadding="true">
+  template: `<kirby-card hasPadding="true" (click)="function()">
   <kirby-card-header *ngIf="true" [title]="title" [subtitle]="subtitle" [hasPadding]="false"
-    ><kirby-item [disclosure]="'arrow-down'" selectable="true">
+    ><kirby-item [disclosure]="'arrow-down'">
       <h3 class="kirby-text-bold">Item disclosure in header</h3>
     </kirby-item></kirby-card-header>
 

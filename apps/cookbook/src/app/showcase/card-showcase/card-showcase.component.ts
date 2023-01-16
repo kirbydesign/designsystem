@@ -107,12 +107,12 @@ export class CardShowcaseComponent {
     {
       name: '--kirby-card-padding-top',
       description: "Sets the 'padding-top' property of the card",
-      defaultValue: 'small',
+      defaultValue: "size('s')",
     },
     {
       name: '--kirby-card-padding-bottom',
       description: "Sets the 'padding-bottom' property of the card",
-      defaultValue: 'small',
+      defaultValue: "size('s')",
     },
   ];
 }
