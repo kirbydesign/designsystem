@@ -4,7 +4,7 @@ import { ColorHelper, DesignTokenHelper, ThemeColorExtended } from '@kirbydesign
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
-import { ThemeColorDirective } from '../../directives';
+import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import { ProgressCircleRingComponent } from '../progress-circle/progress-circle-ring.component';
 import { ProgressCircleComponent } from '../progress-circle/progress-circle.component';
 
