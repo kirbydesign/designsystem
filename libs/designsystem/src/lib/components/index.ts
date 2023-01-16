@@ -49,8 +49,6 @@ export { SlideButtonComponent } from './slide-button/slide-button.component';
 
 export * from './toast';
 
-export * from './progress-circle';
-
 export * from './page-local-navigation';
 
 export * from './kirby-badge.module';

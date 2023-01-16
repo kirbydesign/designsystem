@@ -19,6 +19,8 @@ import { ItemModule } from '@kirbydesign/designsystem/item';
 import { SlideModule } from '@kirbydesign/designsystem/slide';
 import { ToggleButtonModule } from '@kirbydesign/designsystem/toggle-button';
 import { TabsModule } from '@kirbydesign/designsystem/tabs';
+import { ProgressCircleRingComponent } from '@kirbydesign/designsystem/progress-circle';
+import { ProgressCircleComponent } from '@kirbydesign/designsystem/progress-circle';
 import { AccordionItemComponent } from './components/accordion/accordion-item.component';
 import { AccordionDirective } from './components/accordion/accordion.directive';
 import { AppModule } from './components/app/app.module';
@@ -54,8 +56,6 @@ import { ModalController } from './components/modal/services/modal.controller';
 import { ModalHelper } from './components/modal/services/modal.helper';
 import { PageModule } from './components/page/page.module';
 import { PopoverComponent } from './components/popover/popover.component';
-import { ProgressCircleRingComponent } from './components/progress-circle/progress-circle-ring.component';
-import { ProgressCircleComponent } from './components/progress-circle/progress-circle.component';
 import { RangeComponent } from './components/range/range.component';
 import { ReorderListComponent } from './components/reorder-list/reorder-list.component';
 import { RouterOutletModule } from './components/router-outlet/router-outlet.module';
@@ -92,13 +92,13 @@ const standaloneComponents = [
   SegmentedControlComponent,
   AlertComponent,
   PopoverComponent,
-  ProgressCircleRingComponent,
   ModalWrapperComponent,
   SectionHeaderComponent,
   RangeComponent,
   ItemSlidingComponent,
   AccordionItemComponent,
   AccordionDirective,
+  ProgressCircleRingComponent,
   ProgressCircleComponent,
   ReorderListComponent,
   LoadingOverlayComponent,
