@@ -10,6 +10,7 @@ export * from '@kirbydesign/designsystem/shared';
 export * from '@kirbydesign/designsystem/kirby-ionic-module';
 export * from '@kirbydesign/designsystem/spinner';
 export * from '@kirbydesign/designsystem/toggle';
+export * from '@kirbydesign/designsystem/tabs';
 
 export * from './scss/scss-helper';
 
