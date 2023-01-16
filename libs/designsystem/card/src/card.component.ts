@@ -46,13 +46,8 @@ export class CardComponent implements OnInit, OnDestroy {
   }
 
   @HostBinding('class.flat')
+  @Input()
   flat: boolean = false;
-  @HostBinding('class.highlighted')
-  highlighted: boolean = false;
-  @Input() set mode(value: 'flat' | 'highlighted') {
-    this.flat = value === 'flat';
-    this.highlighted = value === 'highlighted';
-  }
 
   @HostBinding('class.interaction-state-make-lighter-and-louder')
   @Input()
