@@ -9,6 +9,6 @@ const declarations = [EmptyStateComponent];
 @NgModule({
   imports: [IconModule, CommonModule, ThemeColorDirective],
   declarations: [...declarations],
-  exports: [...declarations],
+  exports: [...declarations, ThemeColorDirective],
 })
 export class EmptyStateModule {}

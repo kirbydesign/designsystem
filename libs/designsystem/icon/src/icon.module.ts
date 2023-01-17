@@ -7,6 +7,6 @@ import { IconComponent } from './icon.component';
 @NgModule({
   imports: [KirbyIonicModule, ThemeColorDirective],
   declarations: [IconComponent],
-  exports: [IconComponent],
+  exports: [IconComponent, ThemeColorDirective],
 })
 export class IconModule {}

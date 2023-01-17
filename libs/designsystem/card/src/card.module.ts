@@ -16,6 +16,6 @@ const declarations = [
 @NgModule({
   imports: [CommonModule, ThemeColorDirective],
   declarations: [...declarations],
-  exports: [...declarations],
+  exports: [...declarations, ThemeColorDirective],
 })
 export class CardModule {}
