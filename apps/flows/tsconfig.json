@@ -44,7 +44,6 @@
       "@kirbydesign/designsystem/toggle-button": ["libs/designsystem/toggle-button/index.ts"],
       "@kirbydesign/designsystem/tabs": ["libs/designsystem/tabs/index.ts"],
       "@kirbydesign/designsystem/slide-button": ["libs/designsystem/slide-button/index.ts"]
-
     },
     "target": "es2020"
   },

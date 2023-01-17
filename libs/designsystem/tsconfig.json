@@ -20,7 +20,6 @@
       "@kirbydesign/designsystem/toggle-button": ["toggle-button/index.ts"],
       "@kirbydesign/designsystem/tabs": ["tabs/index.ts"],
       "@kirbydesign/designsystem/slide-button": ["slide-button/index.ts"]
-
     },
     "esModuleInterop": true,
     "target": "es2020"
