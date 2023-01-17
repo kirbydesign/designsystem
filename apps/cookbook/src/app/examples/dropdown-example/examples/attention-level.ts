@@ -5,7 +5,7 @@ const config = {
   template: `<kirby-card hasPadding="true" class="attention-levels" [themeColor]="themeColor"> 
   <kirby-dropdown
     [size]="size"
-    placeholder="Dropdown with attention level"
+    placeholder="Dropdown with attention level 1"
     attentionLevel="1"
     expand="block"
     usePopover="true"
@@ -14,7 +14,7 @@ const config = {
 
     <kirby-dropdown
     [size]="size"
-    placeholder="Dropdown with attention level"
+    placeholder="Dropdown with attention level 2"
     attentionLevel="2"
     expand="block"
     usePopover="true"
@@ -23,7 +23,7 @@ const config = {
 
   <kirby-dropdown
     [size]="size"
-    placeholder="Dropdown with attention level"
+    placeholder="Dropdown with attention level 3"
     attentionLevel="3"
     expand="block"
     usePopover="true"
