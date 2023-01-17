@@ -150,7 +150,7 @@ To verify the move is successfull, do the following;
 1. Run `npm run start` -> navigate to the cookbook page for the component and check that the component looks correct. Also check that there is no errors in the console.
 2. Run `npm run start:flows` -> move around in the app and verify there are no errors in the console.
 
-### 7.a Verify in sperate project
+### 7.a Verify in seperate project
 
 Run `npm run publish` -> install the tarball in a freshly installed angular project.
 
