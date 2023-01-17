@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
 
 @Component({
   selector: 'kirby-card-footer',
@@ -6,4 +6,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./card-footer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CardFooterComponent {}
+export class CardFooterComponent {
+  @HostBinding('class.has-padding')
+  @Input()
+  hasPadding: boolean = true;
+}
