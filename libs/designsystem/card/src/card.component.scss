@@ -31,7 +31,9 @@
 
   .content-wrapper {
     &.padding {
-      padding: utils.size('s');
+      padding-top: var(--kirby-card-padding-top, utils.size('s'));
+      padding-bottom: var(--kirby-card-padding-bottom, utils.size('s'));
+      padding-inline: utils.size('s');
     }
   }
 
