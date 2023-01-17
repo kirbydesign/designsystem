@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-
+import { noop } from 'rxjs';
 const config = {
-  template: `<kirby-card hasPadding="true" (click)="function()">
+  template: `<kirby-card hasPadding="true" (click)="noop()">
   <kirby-card-header *ngIf="true" [title]="title" [subtitle]="subtitle" [hasPadding]="false"
     ><kirby-item [disclosure]="'arrow-down'">
       <h3 class="kirby-text-bold">Item disclosure in header</h3>
@@ -40,4 +40,5 @@ const config = {
 export class CardWithItemHeaderExampleComponent {
   style: string = config.style;
   template: string = config.template;
+  noop: () => void = noop;
 }
