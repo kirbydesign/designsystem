@@ -21,7 +21,6 @@
       "@kirbydesign/designsystem/tabs": ["tabs/index.ts"],
       "@kirbydesign/designsystem/slide-button": ["slide-button/index.ts"],
       "@kirbydesign/designsystem/range": ["range/index.ts"]
-
     },
     "esModuleInterop": true,
     "target": "es2020"
