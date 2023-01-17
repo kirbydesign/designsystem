@@ -35,8 +35,6 @@ export * from './modal';
 
 export * from './page';
 
-export { HorizontalDirection, PopoverComponent } from './popover/popover.component';
-
 export * from './radio';
 export * from './router-outlet';
 export * from './reorder-list';
