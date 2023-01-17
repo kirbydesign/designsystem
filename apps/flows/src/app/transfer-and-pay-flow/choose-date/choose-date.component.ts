@@ -8,7 +8,8 @@ import { TextAndDateService } from '../text-and-date.service';
   styleUrls: ['./choose-date.component.scss'],
 })
 export class ChooseDateComponent {
-  private date: string;
+  todayDate: Date = new Date();
+  date: string;
 
   constructor(private textAndDateService: TextAndDateService, private modal: Modal) {}
 

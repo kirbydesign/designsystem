@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
-
 import exampleHtml from '../../examples/loading-overlay-example/loading-overlay-example.component.html?raw';
+import { ApiDescriptionProperty } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
   selector: 'cookbook-loading-overlay-showcase',
@@ -15,13 +14,19 @@ export class LoadingOverlayShowcaseComponent {
       name: 'isLoading',
       description: 'Shows the loading spinner.',
       defaultValue: 'false',
-      type: ['true', 'false'],
+      type: ['boolean'],
     },
     {
       name: 'showBackdrop',
       description: 'Adds a dimmer on the background.',
       defaultValue: 'true',
-      type: ['true', 'false'],
+      type: ['boolean'],
+    },
+    {
+      name: 'hideContent',
+      description: 'Hides the content behind a backdrop with 100% opacity.',
+      defaultValue: 'false',
+      type: ['boolean'],
     },
   ];
 }

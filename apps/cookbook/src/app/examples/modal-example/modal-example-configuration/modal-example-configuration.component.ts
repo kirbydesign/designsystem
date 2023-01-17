@@ -1,6 +1,6 @@
 import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
 
-import { WindowRef } from '@kirbydesign/designsystem/types/window-ref';
+import { WindowRef } from '@kirbydesign/designsystem/types';
 
 @Component({
   selector: 'cookbook-modal-example-configuration',

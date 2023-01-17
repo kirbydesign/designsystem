@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectorRef,
   Component,
@@ -12,12 +13,17 @@ import {
   TemplateRef,
   ViewChildren,
 } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
+import { CardModule } from '@kirbydesign/designsystem/card';
+import { ItemModule } from '@kirbydesign/designsystem/item';
 
 import { ListItemTemplateDirective } from '../list/list.directive';
 
 import { ReorderEvent } from './reorder-event';
 
 @Component({
+  standalone: true,
+  imports: [IonicModule, CardModule, ItemModule, CommonModule],
   selector: 'kirby-reorder-list',
   templateUrl: './reorder-list.component.html',
   styleUrls: ['./reorder-list.component.scss'],

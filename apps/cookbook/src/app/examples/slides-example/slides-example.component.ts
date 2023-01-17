@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 
-import { SlidesComponent } from '@kirbydesign/designsystem';
+import { SlidesComponent } from '@kirbydesign/designsystem/slide';
 
 @Component({
   selector: 'cookbook-slides-example',

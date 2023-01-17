@@ -8,7 +8,23 @@
       "~/app/*": ["apps/cookbook/src/app/*"],
       "~/environments/*": ["apps/cookbook/src/environments/*"],
       "@kirbydesign/designsystem": ["libs/designsystem/src/lib/index.ts"],
-      "@kirbydesign/designsystem/*": ["libs/designsystem/src/lib/*"]
+      "@kirbydesign/designsystem/*": ["libs/designsystem/src/lib/*"],
+      "@kirbydesign/designsystem/card": ["libs/designsystem/card/index.ts"],
+      "@kirbydesign/designsystem/icon": ["libs/designsystem/icon/index.ts"],
+      "@kirbydesign/designsystem/helpers": ["libs/designsystem/helpers/index.ts"],
+      "@kirbydesign/designsystem/shared": ["libs/designsystem/shared/index.ts"],
+      "@kirbydesign/designsystem/types": ["libs/designsystem/types/index.ts"],
+      "@kirbydesign/designsystem/kirby-ionic-module": [
+        "libs/designsystem/kirby-ionic-module/index.ts"
+      ],
+      "@kirbydesign/designsystem/flag": ["libs/designsystem/flag/index.ts"],
+      "@kirbydesign/designsystem/spinner": ["libs/designsystem/spinner/index.ts"],
+      "@kirbydesign/designsystem/toggle": ["libs/designsystem/toggle/index.ts"],
+      "@kirbydesign/designsystem/item": ["libs/designsystem/item/index.ts"],
+      "@kirbydesign/designsystem/section-header": ["libs/designsystem/section-header/index.ts"],
+      "@kirbydesign/designsystem/slide": ["libs/designsystem/slide/index.ts"],
+      "@kirbydesign/designsystem/toggle-button": ["libs/designsystem/toggle-button/index.ts"],
+      "@kirbydesign/designsystem/tabs": ["libs/designsystem/tabs/index.ts"]
     },
     "target": "es2020"
   },

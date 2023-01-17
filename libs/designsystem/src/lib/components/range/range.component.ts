@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -9,8 +10,11 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
+  standalone: true,
+  imports: [IonicModule, CommonModule],
   selector: 'kirby-range',
   templateUrl: './range.component.html',
   styleUrls: ['./range.component.scss'],
@@ -38,7 +42,6 @@ export class RangeComponent implements OnChanges, ControlValueAccessor {
     if (value !== this.currentValue) {
       this.currentValue = value;
       this.propagateChange(this.currentValue);
-      this.change.emit(this.currentValue);
     }
   }
 
@@ -83,6 +86,7 @@ export class RangeComponent implements OnChanges, ControlValueAccessor {
 
   public _onRangeValueChange($event: any): void {
     this.writeValue($event.detail.value);
+    this.change.emit(this.currentValue);
   }
 
   public onTouched = () => {};

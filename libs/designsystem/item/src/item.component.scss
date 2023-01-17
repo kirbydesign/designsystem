@@ -1,0 +1,150 @@
+@use 'sass:map';
+@use '@kirbydesign/core/src/scss/interaction-state';
+@use '@kirbydesign/core/src/scss/utils';
+@use 'item.utils';
+
+:host {
+  display: block;
+  position: relative;
+
+  ion-item {
+    @include interaction-state.apply-focus-visible-background('xxxs');
+    @include interaction-state.apply-hover-ionic('xxxs');
+    @include interaction-state.apply-active-ionic('xxs');
+
+    --padding-top: var(--item-padding-top, 0px);
+    --padding-bottom: var(--item-padding-bottom, 0px);
+    --min-height: #{map.get(utils.$item-heights, 'm')};
+    --padding-start: #{utils.size('s')};
+    --inner-padding-top: #{utils.size('xxs')};
+    --inner-padding-bottom: #{utils.size('xxs')};
+    --inner-padding-end: #{utils.size('s')};
+    --background: var(--kirby-item-background, #{utils.get-color('white')});
+
+    // WORKAROUND: Needed to fix ignored click on scrollend
+    // https://github.com/ionic-team/ionic-framework/issues/21871
+    --background-activated-opacity: 0.99;
+    --background-focused: var(
+      --kirby-item-background-focused,
+      #{utils.get-color('background-color')}
+    );
+    --background-focused-opacity: 1;
+
+    font-size: utils.font-size('n');
+
+    // Prevent additional padding in iOS Safari on devices with "screen notch"
+    // by removing horizontal safe area when rotated to landscape orientation.
+    // See https://github.com/kirbydesign/designsystem/issues/1689
+    @media screen and (orientation: landscape) {
+      --ion-safe-area-left: 0px;
+      --ion-safe-area-right: 0px;
+    }
+
+    @include utils.slotted('[slot="end"]') {
+      margin-inline-start: 0;
+      margin-inline-end: 0;
+      text-align: right;
+    }
+
+    @include utils.slotted('time[slot="end"]') {
+      margin-inline-start: utils.size('xs');
+    }
+
+    @include utils.slotted('data[slot="end"]', '[detail][slot="end"], ion-reorder[slot="end"]') {
+      margin-inline-start: utils.size('s');
+    }
+
+    @include item.item-typography;
+
+    @include utils.slotted(':not([slot])') {
+      width: 100%;
+    }
+
+    @include utils.slotted('input[slot="end"], kirby-form-field[slot="end"] input') {
+      margin-inline-start: utils.size('s');
+      width: auto;
+      text-align: right;
+    }
+
+    --transition: #{interaction-state.transition('background-color')};
+  }
+
+  &.sm ion-item {
+    --min-height: #{map.get(utils.$item-heights, 's')};
+  }
+
+  &.xs ion-item {
+    --min-height: #{map.get(utils.$item-heights, 'xs')};
+    --inner-padding-top: #{utils.size('xxxs')};
+    --inner-padding-bottom: #{utils.size('xxxs')};
+  }
+
+  .outside {
+    left: utils.size('xxxs');
+    margin: 0;
+    position: absolute;
+    width: utils.size('s');
+    z-index: 1;
+  }
+}
+
+.disclosure {
+  padding-left: #{utils.size('xxxs')};
+  color: #{utils.get-color('semi-dark')};
+}
+
+:host-context(kirby-dropdown) ion-item,
+:host-context(kirby-popover) ion-item {
+  --min-height: #{utils.$dropdown-item-height};
+}
+
+// Intented for use with keyboard navigation in <kirby-dropdown>
+:host-context(kirby-dropdown .focused) ion-item {
+  --background: #{interaction-state.get-state-color('white', 'xxxs')};
+}
+
+:host(.selected),
+:host-context(kirby-list .selected) {
+  ion-item {
+    @include utils.slotted(h1, h2, h3, h4, h5, h6, p, data) {
+      font-weight: utils.font-weight('bold');
+    }
+  }
+}
+
+:host(.disclosure) {
+  ion-item {
+    --inner-padding-end: #{utils.size('xxs')};
+  }
+}
+
+// Fixes https://github.com/kirbydesign/designsystem/issues/1711
+:host-context(.shape-rounded .is-single) {
+  ion-item {
+    --border-radius: #{utils.$border-radius};
+  }
+}
+
+// Fixes https://github.com/kirbydesign/designsystem/issues/1711
+:host-context(.has-header .is-single) {
+  ion-item::part(native) {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+}
+
+// Fixes https://github.com/kirbydesign/designsystem/issues/1711
+:host-context(.has-footer .is-single) {
+  ion-item::part(native) {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
+
+// Fixes https://github.com/kirbydesign/designsystem/issues/1711
+:host-context(.shape-rounded.has-sections .list-items kirby-list-item:first-of-type) {
+  ion-item::part(native) {
+    border-top-left-radius: utils.$border-radius;
+    border-top-right-radius: utils.$border-radius;
+  }
+}

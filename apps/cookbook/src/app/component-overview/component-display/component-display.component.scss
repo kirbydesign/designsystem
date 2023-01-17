@@ -1,0 +1,26 @@
+@use '@kirbydesign/core/src/scss/utils';
+
+.component-display {
+  width: 237px;
+}
+
+kirby-card {
+  height: 150px;
+  width: 237px;
+}
+
+kirby-card:hover {
+  background-color: utils.get-color('background-color');
+}
+
+h3 {
+  padding-top: 15px;
+}
+
+p {
+  color: utils.get-color('black');
+}
+
+a {
+  text-decoration: none;
+}

@@ -9,10 +9,9 @@ import {
   OnDestroy,
   Output,
 } from '@angular/core';
+import { WindowRef } from '@kirbydesign/designsystem/types';
 import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
-
-import { WindowRef } from '../../../types/window-ref';
 
 import { Scroll } from './scroll.model';
 

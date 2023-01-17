@@ -10,8 +10,7 @@ import {
   Renderer2,
   ViewChild,
 } from '@angular/core';
-
-import { DesignTokenHelper } from '../../helpers';
+import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 export enum HorizontalDirection {
   right = 'right',
@@ -19,6 +18,7 @@ export enum HorizontalDirection {
 }
 
 @Component({
+  standalone: true,
   selector: 'kirby-popover',
   template: ` <div #wrapper class="wrapper"><ng-content></ng-content></div> `,
   styleUrls: ['./popover.component.scss'],

@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -6,12 +7,24 @@ import {
   Input,
   ViewChild,
 } from '@angular/core';
+import { WindowRef } from '@kirbydesign/designsystem/types';
 import { Observable, of } from 'rxjs';
-
-import { WindowRef } from '../../../types/window-ref';
-import { ThemeColor } from '../../../helpers';
+import { IconModule } from '@kirbydesign/designsystem/icon';
+import { ThemeColor } from '@kirbydesign/designsystem/helpers';
+import { ThemeColorDirective } from '../../../directives';
+import { ButtonComponent } from '../../button/button.component';
+import { EmptyStateModule } from '../../empty-state/empty-state.module';
 
 @Component({
+  standalone: true,
+  imports: [
+    IconModule,
+    EmptyStateModule,
+    ButtonComponent,
+    CommonModule,
+    EmptyStateModule,
+    ThemeColorDirective,
+  ],
   selector: 'kirby-alert',
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.scss'],

@@ -7,7 +7,9 @@ import {
   KirbyExperimentalModule,
   KirbyModule,
 } from '@kirbydesign/designsystem';
+import { SlideModule } from '@kirbydesign/designsystem/slide';
 
+import { CodeViewerModule } from '../shared/code-viewer/code-viewer.module';
 import { AccordionExampleModule } from './accordion-example/accordion-example.module';
 import { AvatarExampleModule } from './avatar-example/avatar-example.module';
 import { BadgeExampleModule } from './badge-example/badge-example.module';
@@ -38,6 +40,7 @@ import { ToggleButtonExampleModule } from './toggle-button-example/toggle-button
 import { VirtualScrollExampleModule } from './virtual-scroll-example/virtual-scroll-example.module';
 
 const IMPORTS = [
+  CodeViewerModule,
   ExamplesSharedModule,
   FormFieldExamplesModule,
   ItemExampleModule,
@@ -65,6 +68,7 @@ const IMPORTS = [
   VirtualScrollExampleModule,
   ExperimentalExamplesModule,
   DataTableExampleModule,
+  SlideModule,
 ];
 
 @NgModule({

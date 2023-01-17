@@ -1,11 +1,11 @@
 import { byText, createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
-import { DesignTokenHelper } from '@kirbydesign/core';
+import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
-import { PlatformService } from '../../helpers';
-import { TestHelper } from '../../testing/test-helper';
-import { WindowRef } from '../../types';
-import { ItemComponent } from '../item/item.component';
+import { PlatformService } from '@kirbydesign/designsystem/helpers';
+import { WindowRef } from '@kirbydesign/designsystem/types';
+import { TestHelper } from '@kirbydesign/designsystem/testing';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { RadioComponent } from '../radio';
 import { RadioGroupComponent } from '../radio/radio-group/radio-group.component';
 

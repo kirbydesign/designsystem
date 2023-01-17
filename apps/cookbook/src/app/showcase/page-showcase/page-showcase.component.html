@@ -44,6 +44,8 @@
     <li>
       Support for <a href="#" (click)="scrollTo(fixedFooter)">fixed page footer</a> and hiding tabs.
     </li>
+    <li>Support for <a href="#" (click)="scrollTo(pullToRefresh)">pull-to-refresh</a>.</li>
+    <li>Support for setting <a href="#" (click)="scrollTo(contentWidth)">content width</a>.</li>
   </ul>
 
   <h2>Page with Kirby Router Outlet</h2>
@@ -56,11 +58,15 @@
   <p>
     The <code>kirby-router-outlet</code> stacks the pages/components when it navigates. This means
     that when one component is stacked on top of another, the component on the bottom won't be
-    destroyed. This means that the <code>ngOnDestroy</code> hook will not run as expected, and any logic for eg. unsubscribing from subscriptions is not taking place. This can result in severe
+    destroyed. This means that the <code>ngOnDestroy</code> hook will not run as expected, and any
+    logic for eg. unsubscribing from subscriptions is not taking place. This can result in severe
     performance issues.
   </p>
 
-  <p>Below is an example on the recommended approach for 'pausing' subscriptions when a kirby-page is animating out of view.</p>
+  <p>
+    Below is an example on the recommended approach for 'pausing' subscriptions when a kirby-page is
+    animating out of view.
+  </p>
 
   <cookbook-code-viewer [html]="pageHtml"></cookbook-code-viewer>
   <p>
@@ -282,6 +288,20 @@
   </div>
 
   <cookbook-iphone src="/examples/page/pull-to-refresh" showExternalLink="true"></cookbook-iphone>
+</div>
+
+<div class="page-example">
+  <div>
+    <h2 #contentWidth>Content Width</h2>
+    <p>
+      The <code>maxWidth</code> property can be used to select a preset that defines the max width
+      of the content. This will only impact the content areas as the top bar will continue to use
+      the available space.
+    </p>
+    <cookbook-code-viewer [html]="contentWidthExampleHtml"></cookbook-code-viewer>
+  </div>
+
+  <cookbook-iphone src="/examples/page/content-width" showExternalLink="true"></cookbook-iphone>
 </div>
 
 <h2>Page Properties:</h2>

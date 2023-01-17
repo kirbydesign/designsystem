@@ -1,13 +1,12 @@
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   ElementRef,
   HostBinding,
   Input,
-  OnDestroy,
   Optional,
 } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
 
 import {
   ModalElementComponent,
@@ -16,6 +15,8 @@ import {
 } from '../services/modal.interfaces';
 
 @Component({
+  standalone: true,
+  imports: [IonicModule],
   selector: 'kirby-modal-footer',
   templateUrl: './modal-footer.component.html',
   styleUrls: ['./modal-footer.component.scss'],

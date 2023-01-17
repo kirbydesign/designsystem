@@ -1,7 +1,6 @@
 import { ComponentFactoryResolver, Injectable, Injector } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
-
-import { SpinnerComponent } from '../spinner/spinner.component';
+import { SpinnerComponent } from '@kirbydesign/designsystem/spinner';
 
 @Injectable({
   providedIn: 'root',
@@ -15,13 +14,22 @@ export class LoadingOverlayService {
     private injector: Injector
   ) {}
 
-  public async showLoadingOverlay(showBackdrop: boolean = true): Promise<void> {
+  public async showLoadingOverlay(
+    showBackdrop: boolean = true,
+    hideContent: boolean = false
+  ): Promise<void> {
     if (!this.ionLoading) {
+      const cssClasses = ['kirby-loading-overlay'];
+
+      if (hideContent) {
+        cssClasses.push('kirby-loading-hide-content');
+      }
+
       this.ionLoading = await this.loadingController.create({
-        cssClass: 'kirby-loading-overlay',
+        cssClass: cssClasses,
         duration: 0,
         message: null,
-        showBackdrop: showBackdrop,
+        showBackdrop: showBackdrop || hideContent,
         spinner: null,
       });
 
@@ -36,7 +44,7 @@ export class LoadingOverlayService {
   }
 
   public async hideLoadingOverlay(): Promise<void> {
-    if (!!this.ionLoading) {
+    if (this.ionLoading) {
       await this.ionLoading.dismiss();
       this.ionLoading = null;
     }

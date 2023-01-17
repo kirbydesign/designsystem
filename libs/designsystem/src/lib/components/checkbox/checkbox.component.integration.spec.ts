@@ -1,11 +1,9 @@
-import { IonCheckbox, IonItem } from '@ionic/angular';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponents } from 'ng-mocks';
 
-import { DesignTokenHelper } from '@kirbydesign/core';
+import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
-import { ItemComponent } from '../item';
-
+import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { CheckboxComponent } from './checkbox.component';
 
 const size = DesignTokenHelper.size;
@@ -16,7 +14,7 @@ describe('CheckboxComponent in Item', () => {
 
   const createHost = createHostFactory({
     component: CheckboxComponent,
-    declarations: MockComponents(ItemComponent, IonItem, IonCheckbox),
+    declarations: MockComponents(ItemComponent),
   });
 
   describe('by default', () => {

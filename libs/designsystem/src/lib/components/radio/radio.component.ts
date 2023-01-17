@@ -7,8 +7,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { IonRadio } from '@ionic/angular';
-
-import { UniqueIdGenerator } from '../../helpers/unique-id-generator.helper';
+import { UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
 
 @Component({
   selector: 'kirby-radio',

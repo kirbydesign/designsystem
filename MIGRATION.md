@@ -2,6 +2,20 @@
 
 This document provides information about breaking changes and their migrations for major versions of Kirby Design System.
 
+## Version 8
+
+- [Version 8](#version-8)
+  - [Components](#components-v8)
+    - [List](#list-v8)
+
+<h3 id="components-v8">Components</h3>
+
+<h4 id="list-v8">List</h4>
+
+It is now required to pass `[selectable]="true"` to `kirby-item` if items in the list should have a hover effect
+
+## Version 6
+
 - [Version 6](#version-6)
   - [Platform Support](#platform-support)
   - [Components](#components)
@@ -14,8 +28,6 @@ This document provides information about breaking changes and their migrations f
     - [Segmented Control](#segmented-control)
     - [Toast](#toast)
   - [Additional Performance notice](#additional-performance-notice)
-
-## Version 6
 
 ### Platform Support
 

@@ -34,13 +34,6 @@ export class ButtonShowcaseComponent {
       type: ['1', '2', '3'],
     },
     {
-      name: 'isDestructive',
-      description:
-        'If isDestructive is set, color of the button will be changed according to attention level.',
-      defaultValue: 'false',
-      type: ['true', 'false'],
-    },
-    {
       name: 'isFloating',
       description:
         '(Optional) Determine if the button is going to be a Floating Action Button (FAB). Please note: FABs have an elevation of z8 by default. FABs have only an icon and no text. FABs always have a size of 64x64.',

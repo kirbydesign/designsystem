@@ -1,9 +1,10 @@
 import { Directive, HostBinding, Input } from '@angular/core';
 
-import { ColorHelper } from '@kirbydesign/core';
+import { ColorHelper } from '@kirbydesign/designsystem/helpers';
 import { ThemeColor } from '@kirbydesign/core';
 
 @Directive({
+  standalone: true,
   // eslint-disable-next-line @angular-eslint/directive-selector
   selector: `kirby-avatar[themeColor],
              kirby-card[themeColor],

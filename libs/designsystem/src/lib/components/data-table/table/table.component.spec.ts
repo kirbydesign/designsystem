@@ -1,5 +1,5 @@
 import { createHostFactory, Spectator } from '@ngneat/spectator';
-import { DesignTokenHelper } from '../../../helpers/design-token-helper';
+import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { TableComponent } from './table.component';
 
 const { fontWeight, fontSize, getTextColor, size, getColor } = DesignTokenHelper;

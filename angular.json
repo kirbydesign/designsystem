@@ -35,18 +35,13 @@
               "apps/cookbook/src/favicon.ico",
               "apps/cookbook/src/assets",
               {
-                "glob": "**/*.js",
-                "input": "libs/designsystem/src/lib/polyfills",
-                "output": "./kirby/polyfills"
-              },
-              {
                 "glob": "**/*",
                 "input": "src/assets",
                 "output": "assets"
               },
               {
                 "glob": "**/*.svg",
-                "input": "libs/designsystem/src/lib/icons/svg",
+                "input": "libs/designsystem/icon/src/icons/svg",
                 "output": "./assets/kirby/icons/svg"
               },
               {
@@ -115,7 +110,7 @@
     "designsystem": {
       "projectType": "library",
       "root": "libs/designsystem",
-      "sourceRoot": "libs/designsystem/src",
+      "sourceRoot": "libs/designsystem",
       "prefix": "kirby",
       "architect": {
         "build": {
@@ -129,10 +124,10 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/designsystem/src/test.ts",
+            "main": "libs/designsystem/test.ts",
             "tsConfig": "libs/designsystem/tsconfig.spec.json",
             "karmaConfig": "libs/designsystem/karma.conf.js",
-            "styles": ["libs/designsystem/src/lib/testing/styles.scss"]
+            "styles": ["libs/designsystem/testing/src/styles.scss"]
           },
           "outputs": ["coverage/libs/designsystem"]
         },
@@ -174,7 +169,7 @@
               },
               {
                 "glob": "**/*.svg",
-                "input": "libs/designsystem/src/lib/icons/svg",
+                "input": "libs/designsystem/icon/src/icons/svg",
                 "output": "./assets/kirby/icons/svg"
               },
               {
