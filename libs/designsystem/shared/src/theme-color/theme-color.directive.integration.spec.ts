@@ -1,6 +1,6 @@
 import { CardComponent } from '@kirbydesign/designsystem/card';
 import { createDirectiveFactory, SpectatorDirective } from '@ngneat/spectator';
-import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
+import { ThemeColorDirective } from './theme-color.directive';
 
 describe('ThemeColorDirective', () => {
   let spectator: SpectatorDirective<ThemeColorDirective>;
