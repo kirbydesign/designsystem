@@ -5,8 +5,10 @@ import { ColorHelper, DesignTokenHelper, ThemeColorExtended } from '@kirbydesign
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
-import { ProgressCircleRingComponent } from '@kirbydesign/designsystem/progress-circle';
-import { ProgressCircleComponent } from '@kirbydesign/designsystem/progress-circle';
+import {
+  ProgressCircleComponent,
+  ProgressCircleRingComponent,
+} from '@kirbydesign/designsystem/progress-circle';
 
 import { AvatarComponent } from './avatar.component';
 
