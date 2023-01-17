@@ -38,7 +38,6 @@ export * from './page';
 export { HorizontalDirection, PopoverComponent } from './popover/popover.component';
 
 export * from './radio';
-export { RangeComponent } from './range/range.component';
 export * from './router-outlet';
 export * from './reorder-list';
 
