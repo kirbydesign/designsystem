@@ -184,8 +184,12 @@ describe('AvatarComponent', () => {
 
   describe(`when rendering Avatar with themeColor`, () => {
     const colors = [
-      ...ColorHelper.mainColors,
+      ...ColorHelper.notificationColors,
+      ...ColorHelper.brandColors,
+      DesignTokenHelper.getColor('medium'),
       DesignTokenHelper.getColor('white'),
+      DesignTokenHelper.getColor('dark'),
+      DesignTokenHelper.getColor('light'),
       DesignTokenHelper.getColor('semi-light'),
     ];
     colors.forEach((color) => {
