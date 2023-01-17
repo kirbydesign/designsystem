@@ -19,8 +19,10 @@ import { ItemModule } from '@kirbydesign/designsystem/item';
 import { SlideModule } from '@kirbydesign/designsystem/slide';
 import { ToggleButtonModule } from '@kirbydesign/designsystem/toggle-button';
 import { TabsModule } from '@kirbydesign/designsystem/tabs';
-import { ProgressCircleRingComponent } from '@kirbydesign/designsystem/progress-circle';
-import { ProgressCircleComponent } from '@kirbydesign/designsystem/progress-circle';
+import {
+  ProgressCircleComponent,
+  ProgressCircleRingComponent,
+} from '@kirbydesign/designsystem/progress-circle';
 import { AccordionItemComponent } from './components/accordion/accordion-item.component';
 import { AccordionDirective } from './components/accordion/accordion.directive';
 import { AppModule } from './components/app/app.module';
