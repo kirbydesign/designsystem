@@ -3,9 +3,9 @@ import { NgModule } from '@angular/core';
 import { CardModule } from '@kirbydesign/designsystem/card';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 import { ItemModule } from '@kirbydesign/designsystem/item';
+import { PopoverComponent } from '@kirbydesign/designsystem/popover';
 import { ButtonComponent } from '../button/button.component';
 import { FormFieldModule } from '../form-field/form-field.module';
-import { PopoverComponent } from '../popover/popover.component';
 import { DropdownComponent } from './dropdown.component';
 import { KeyboardHandlerService } from './keyboard-handler.service';
 

@@ -14,8 +14,8 @@ import { CardComponent } from '@kirbydesign/designsystem/card';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
+import { HorizontalDirection, PopoverComponent } from '@kirbydesign/designsystem/popover';
 import { ListItemTemplateDirective } from '../list';
-import { HorizontalDirection, PopoverComponent } from '../popover/popover.component';
 
 import { ButtonComponent } from '../button/button.component';
 import { DropdownComponent } from './dropdown.component';
