@@ -27,6 +27,7 @@ import {
 import { NavigationEnd, NavigationStart, Router, RouterEvent } from '@angular/router';
 import { IonBackButtonDelegate, IonContent, IonFooter, IonHeader } from '@ionic/angular';
 import { ScrollDetail } from '@ionic/core';
+import { selectedTabClickEvent, TabsComponent } from '@kirbydesign/designsystem/tabs';
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
 
@@ -39,8 +40,6 @@ import {
   ModalElementsAdvertiser,
   ModalElementType,
 } from '../modal/services/modal.interfaces';
-import { selectedTabClickEvent } from '../tabs/tab-button/tab-button.events';
-import { TabsComponent } from '../tabs/tabs.component';
 
 /**
  * Specify scroll event debounce time in ms and scrolled offset from top in pixels
@@ -178,6 +177,7 @@ export class PageComponent
   @Input() defaultBackHref: string;
   @Input() hideBackButton: boolean;
   @Input() titleMaxLines: number;
+  @Input() maxWidth: 'default' | 'standard' | 'optimized' | 'full' = 'default';
 
   private _tabBarBottomHidden: boolean;
   public get tabBarBottomHidden(): boolean {
@@ -348,6 +348,16 @@ export class PageComponent
     this.refresh.emit({
       complete: event.target.complete.bind(event.target),
     });
+  }
+
+  getMaxWidthClasses() {
+    if (!this.maxWidth) {
+      return '';
+    }
+    if (this.maxWidth === 'default') {
+      return '';
+    }
+    return `max-width-${this.maxWidth}`;
   }
 
   private removeWrapper() {

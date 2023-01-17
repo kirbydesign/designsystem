@@ -13,7 +13,14 @@
       "@kirbydesign/designsystem/types": ["types/index.ts"],
       "@kirbydesign/designsystem/flag": ["flag/index.ts"],
       "@kirbydesign/designsystem/kirby-ionic-module": ["kirby-ionic-module/index.ts"],
-      "@kirbydesign/designsystem/spinner": ["spinner/index.ts"]
+      "@kirbydesign/designsystem/spinner": ["spinner/index.ts"],
+      "@kirbydesign/designsystem/item": ["item/index.ts"],
+      "@kirbydesign/designsystem/section-header": ["section-header/index.ts"],
+      "@kirbydesign/designsystem/slide": ["slide/index.ts"],
+      "@kirbydesign/designsystem/toggle-button": ["toggle-button/index.ts"],
+      "@kirbydesign/designsystem/tabs": ["tabs/index.ts"],
+      "@kirbydesign/designsystem/slide-button": ["slide-button/index.ts"],
+      "@kirbydesign/designsystem/range": ["range/index.ts"]
     },
     "esModuleInterop": true,
     "target": "es2020"

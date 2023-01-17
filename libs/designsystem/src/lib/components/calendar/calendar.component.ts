@@ -84,6 +84,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() disablePastDates = false;
   @Input() disableFutureDates = false;
   @Input() alwaysEnableToday = false;
+  @Input() locales: { [key: string]: Locale } = {};
   @Input() customLocales: { [key: string]: Locale } = {};
   /* 
     Experimental: Input property not documented on purpose. 
@@ -114,6 +115,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   private _maxDate: Date;
   private locale: Locale;
   private timeZoneName: string;
+  private injectedLocale: string;
   private includedLocales = { da, enGB, enUS };
 
   get selectedDate(): Date {
@@ -207,7 +209,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   constructor(private calendarHelper: CalendarHelper, @Inject(LOCALE_ID) locale: string) {
-    this.locale = this.mapLocale(locale);
+    this.injectedLocale = locale;
     this.timeZoneName = Intl.DateTimeFormat().resolvedOptions().timeZone;
   }
 
@@ -222,12 +224,12 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
       locale = 'enGB'; // if english locale is provided without region, we default to GB
     }
     locale = locale.replace('-', '');
-    const availableLocales = { ...this.includedLocales, ...this.customLocales };
-
+    const availableLocales = { ...this.includedLocales, ...this.locales, ...this.customLocales };
     return availableLocales[locale] || this.includedLocales.enGB; // Default to enGB if injected locale doesnt exist
   }
 
   ngOnInit() {
+    this.locale = this.mapLocale(this.injectedLocale);
     this._weekDays = this.getWeekDays();
     this.setActiveMonth(this.selectedDate);
   }
@@ -293,7 +295,6 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
 
   private getWeekDays(): string[] {
     const now = new Date();
-
     const week = eachDayOfInterval({
       start: startOfWeek(now, { locale: this.locale }),
       end: endOfWeek(now, { locale: this.locale }),

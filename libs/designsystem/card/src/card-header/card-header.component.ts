@@ -15,4 +15,7 @@ export class CardHeaderComponent {
   @HostBinding('class')
   @Input()
   flagged: CardFlagLevel = null;
+  @HostBinding('class.has-padding')
+  @Input()
+  hasPadding: boolean = true;
 }

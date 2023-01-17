@@ -15,7 +15,7 @@ import {
 } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CardModule } from '@kirbydesign/designsystem/card';
-import { ItemModule } from '../item';
+import { ItemModule } from '@kirbydesign/designsystem/item';
 
 import { ListItemTemplateDirective } from '../list/list.directive';
 
