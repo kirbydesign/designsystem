@@ -1,6 +1,6 @@
 {
   "name": "designsystem",
-  "version": "7.4.1",
+  "version": "7.4.6",
   "description": "Kirby Design Angular Components. This library provides Angular wrappers for the @kirbydesign/core package, for smoother integration into Angular projects.",
   "engines": {
     "node": ">=16.0.0",
@@ -133,7 +133,7 @@
     "@babel/core": "^7.14.6",
     "@capacitor/android": "^4.4.0",
     "@capacitor/cli": "^4.4.0",
-    "@capacitor/core": "^4.4.0", 
+    "@capacitor/core": "^4.4.0",
     "@capacitor/ios": "^4.4.0",
     "@kirbydesign/core": "file:libs/core",
     "@ngneat/spectator": "^13.0.0",
