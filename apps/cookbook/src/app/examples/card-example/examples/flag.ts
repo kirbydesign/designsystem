@@ -8,7 +8,7 @@ const config = {
       [flagged]="flagLevel"
   ></kirby-card-header>
 
-  <strong>A flagged card</strong> <br />
+  <strong>A flagged card</strong> <br>
   <p>This is a card that uses a <em>kirby-card-header</em> with the <code>flagged</code> input set.</p>
   <p>Possible values for the flagged header are: <br> <code>'success' | 'warning' | 'danger' | 'info'</code></p>
   <p>Use the buttons below to see the different options 👇</p>
@@ -20,7 +20,7 @@ const config = {
         [flagged]="flagLevel"
     ></kirby-card-header>
 
-    <strong>A flagged card</strong> <br />
+    <strong>A flagged card</strong> <br>
     <p>This is a card that uses a <em>kirby-card-header</em> with the <code>flagged</code> input set.</p>
     <p>Possible values for the flagged header are: <br> <code>'success' | 'warning' | 'danger' | 'info'</code></p>
     <p>Use the buttons below to see the different options 👇</p>
