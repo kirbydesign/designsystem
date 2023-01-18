@@ -13,6 +13,20 @@ kirby-card {
   max-width: 500px;
 }
 
+.card-option-button-group {
+  display: flex;
+  justify-content: center;
+  gap: utils.size('xxs');
+  padding: utils.size('xxs');
+}
+
+.kirby-color-brightness-dark {
+  code {
+    background-color: utils.get-color('dark');
+    color: utils.get-color('dark-contrast');
+  }
+}
+
 button {
   height: utils.$fat-finger-size;
   width: utils.$fat-finger-size;
@@ -46,7 +60,8 @@ button {
     }
   }
 
-  &.info {
+  &.info,
+  &.medium {
     background-color: utils.get-color('medium');
 
     &:hover {
@@ -54,14 +69,31 @@ button {
     }
   }
 
+  &.secondary {
+    background-color: utils.get-color('secondary');
+
+    &:hover {
+      background-color: var(--kirby-secondary-shade);
+    }
+  }
+
+  &.tertiary {
+    background-color: utils.get-color('tertiary');
+
+    &:hover {
+      background-color: var(--kirby-tertiary-shade);
+    }
+  }
+
+  &.dark {
+    background-color: utils.get-color('dark');
+
+    &:hover {
+      background-color: var(--kirby-dark-shade);
+    }
+  }
+
   &:active {
     transform: scale(0.95);
   }
-}
-
-.card-option-button-group {
-  display: flex;
-  justify-content: center;
-  gap: utils.size('xxs');
-  padding: utils.size('xxs');
 }
