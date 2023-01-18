@@ -1,64 +1,21 @@
 <div class="example">
   <div class="card-grid">
     <cookbook-card-example
-      [showSize]="false"
-      [hasPadding]="false"
-      title="Default Card"
-    ></cookbook-card-example>
-    <cookbook-card-example
-      [showSize]="false"
       title="Card with padding"
       subtitle='HTML: hasPadding="true"'
     ></cookbook-card-example>
     <cookbook-card-example
-      [showSize]="false"
-      [hasPadding]="false"
-      [hasHeaderFooterBgColor]="true"
-      title="Card with header background"
-      subtitle="CSS: kirby-card-header { background-color: #000}"
-    ></cookbook-card-example>
-    <cookbook-card-example
-      [showSize]="false"
-      [hasPadding]="false"
+      [hasPadding]="true"
       [hasFooter]="true"
       [hasHeaderFooterBgColor]="true"
       title="Card with header and footer"
       subtitle=""
     ></cookbook-card-example>
-    <cookbook-card-example
-      [showSize]="false"
-      [hasHeader]="true"
-      [hasPadding]="false"
-      title="Card header flagged success"
-      subtitle=""
-      flagged="success"
-    ></cookbook-card-example>
-    <cookbook-card-example
-      [showSize]="false"
-      [hasHeader]="true"
-      [hasPadding]="false"
-      title="Card header flagged warning"
-      subtitle=""
-      flagged="warning"
-    ></cookbook-card-example>
-    <cookbook-card-example
-      [showSize]="false"
-      [hasHeader]="true"
-      [hasPadding]="false"
-      title="Card header flagged danger"
-      subtitle=""
-      flagged="danger"
-    ></cookbook-card-example>
-    <cookbook-card-example
-      [showSize]="false"
-      [hasHeader]="true"
-      [hasPadding]="false"
-      title="Card header flagged info"
-      subtitle=""
-      flagged="info"
-    ></cookbook-card-example>
   </div>
-  <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
+
+  <h2>Flags</h2>
+  <cookbook-card-flags-example></cookbook-card-flags-example>
+
   <h2>Colors</h2>
   <p>
     <cookbook-card-themecolor-example></cookbook-card-themecolor-example>
