@@ -3,7 +3,7 @@ import { noop } from 'rxjs';
 const config = {
   template: `<kirby-card hasPadding="true" (click)="noop()">
   <kirby-card-header *ngIf="true" [title]="title" [subtitle]="subtitle" [hasPadding]="false"
-    ><kirby-item [disclosure]="'arrow-down'">
+    ><kirby-item [disclosure]="'arrow-more'">
       <h3 class="kirby-text-bold">Item disclosure in header</h3>
     </kirby-item></kirby-card-header>
 
