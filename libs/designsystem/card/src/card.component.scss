@@ -1,11 +1,22 @@
 @use '@kirbydesign/core/src/scss/interaction-state';
 @use '@kirbydesign/core/src/scss/utils';
+@use '@kirbydesign/core/src/scss/themes';
 
 :host {
   --kirby-card-main-background-color: #{utils.get-color('white')};
   --kirby-card-main-color: #{utils.get-color('white-contrast')};
   --kirby-card-footer-background-color: #{utils.get-color('white')};
   --kirby-card-footer-color: #{utils.get-color('white-contrast')};
+
+  @include themes.apply-white-theme;
+
+  &.kirby-color-brightness-light {
+    @include themes.apply-light-theme;
+  }
+
+  &.kirby-color-brightness-dark {
+    @include themes.apply-dark-theme;
+  }
 
   @include interaction-state.extend-content {
     display: inherit;
@@ -31,7 +42,9 @@
 
   .content-wrapper {
     &.padding {
-      padding: utils.size('s');
+      padding-top: var(--kirby-card-padding-top, utils.size('s'));
+      padding-bottom: var(--kirby-card-padding-bottom, utils.size('s'));
+      padding-inline: utils.size('s');
     }
   }
 

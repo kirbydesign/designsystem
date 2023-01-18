@@ -4,7 +4,7 @@ import { ColorHelper, DesignTokenHelper, ThemeColorExtended } from '@kirbydesign
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
-import { ThemeColorDirective } from '../../directives';
+import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import { ProgressCircleRingComponent } from '../progress-circle/progress-circle-ring.component';
 import { ProgressCircleComponent } from '../progress-circle/progress-circle.component';
 
@@ -184,8 +184,12 @@ describe('AvatarComponent', () => {
 
   describe(`when rendering Avatar with themeColor`, () => {
     const colors = [
-      ...ColorHelper.mainColors,
+      ...ColorHelper.notificationColors,
+      ...ColorHelper.brandColors,
+      DesignTokenHelper.getColor('medium'),
       DesignTokenHelper.getColor('white'),
+      DesignTokenHelper.getColor('dark'),
+      DesignTokenHelper.getColor('light'),
       DesignTokenHelper.getColor('semi-light'),
     ];
     colors.forEach((color) => {

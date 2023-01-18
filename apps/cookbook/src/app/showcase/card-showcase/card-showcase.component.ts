@@ -69,6 +69,15 @@ export class CardShowcaseComponent {
     },
   ];
 
+  propertiesHeaderAndFooter: ApiDescriptionProperty[] = [
+    {
+      name: 'hasPadding',
+      description: 'Sets the inner padding for card header and card footer',
+      defaultValue: 'true',
+      type: ['boolean'],
+    },
+  ];
+
   customCssPropertiesColumns: ApiDescriptionPropertyColumns = {
     name: 'Attribute',
     description: 'Description',
@@ -94,6 +103,16 @@ export class CardShowcaseComponent {
       name: '--kirby-card-background-size',
       description: "Sets the 'background-size' property of the card",
       defaultValue: 'cover',
+    },
+    {
+      name: '--kirby-card-padding-top',
+      description: "Sets the 'padding-top' property of the card",
+      defaultValue: "size('s')",
+    },
+    {
+      name: '--kirby-card-padding-bottom',
+      description: "Sets the 'padding-bottom' property of the card",
+      defaultValue: "size('s')",
     },
   ];
 }
