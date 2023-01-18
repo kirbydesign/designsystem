@@ -56,34 +56,18 @@
   click event <code>(click)="function()"</code> on the card will activate its state behavior.
 </p>
 
-<p>Whenever a card is clickable it is a best practice to also add a disclosure indicator.</p>
+<p>
+  Whenever a card is clickable it is a best practice to also add a disclosure indicator, to show
+  that it navigates to a new page, opens a modal or similar.
+</p>
 <p>
   A card with a disclosure indicator is composed of a card-header with a slotted
-  <code>kirby-item</code>, and often uses <code>--kirby-card-padding-top</code> CSS Custom Property
-  to set the padding top in card content area to <code>0px</code>.
+  <code>kirby-item</code>, using the <code>--kirby-card-padding-top</code> CSS Custom Property to
+  set the padding top in card content area to <code>0px</code>.
 </p>
-<cookbook-example-viewer [html]="clickableExample.template">
-  <cookbook-card-example-clickable #clickableExample></cookbook-card-example-clickable>
+<cookbook-example-viewer [html]="disclosureExample.template" [css]="disclosureExample.style">
+  <cookbook-card-example-disclosure #disclosureExample></cookbook-card-example-disclosure>
 </cookbook-example-viewer>
-
-<h2>Card with item disclosure in card header</h2>
-<p>
-  This example uses the Thereafter an item with disclosure is placed in the card header. The card
-  header input property <code>hasPadding</code> is set to <code>false</code> to adjust to the use of
-  item.
-</p>
-<p>
-  <em>Note: </em> Card footer support the use of item disclosure as well and often is used with the
-  custom css property
-  <code>--kirby-card-padding-bottom</code>
-</p>
-<cookbook-example-viewer
-  [html]="CardHeaderDisclosureExample.template"
-  [css]="CardHeaderDisclosureExample.style"
-  ><cookbook-card-with-item-header-example
-    #CardHeaderDisclosureExample
-  ></cookbook-card-with-item-header-example
-></cookbook-example-viewer>
 
 <kirby-divider [hasMargin]="true"></kirby-divider>
 
