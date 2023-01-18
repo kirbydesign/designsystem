@@ -4,7 +4,7 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
-import { ThemeColorDirective } from '../../../directives';
+import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import { ModalFooterComponent } from '../footer/modal-footer.component';
 
 const getColor = DesignTokenHelper.getColor;
