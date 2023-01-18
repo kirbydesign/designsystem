@@ -28,7 +28,6 @@ export { GridCardConfiguration } from './grid/grid-card-configuration';
 export { ItemSlidingComponent } from './item-sliding/item-sliding.component';
 export { ItemGroupComponent } from './item-group/item-group.component';
 
-export * from './loading-overlay';
 export * from './list';
 
 export * from './modal';
