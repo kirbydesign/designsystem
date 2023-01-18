@@ -1,4 +1,3 @@
-export * from './accordion';
 export * from './app';
 
 export { AvatarComponent, AvatarSize } from './avatar/avatar.component';
