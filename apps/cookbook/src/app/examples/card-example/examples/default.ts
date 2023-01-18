@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 const config = {
   selector: 'cookbook-card-example-default',
   template: `<kirby-card hasPadding="true">
-    <strong>A card</strong> <br />
+    <strong>A card</strong> <br>
     <p>This is a default card as it looks right out of the box.</p>
     <p>No header, footer, coloring or background-image is used here, but it does have <code>hasPadding=true</code>.</p>
 </kirby-card>`,
