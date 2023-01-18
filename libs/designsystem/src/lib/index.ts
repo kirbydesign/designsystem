@@ -19,6 +19,7 @@ export * from '@kirbydesign/designsystem/types';
 export * from '@kirbydesign/designsystem/slide-button';
 export * from '@kirbydesign/designsystem/range';
 export * from '@kirbydesign/designsystem/popover';
+export * from '@kirbydesign/designsystem/loading-overlay';
 
 export * from './scss/scss-helper';
 

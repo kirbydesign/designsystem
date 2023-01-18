@@ -22,6 +22,10 @@ import { TabsModule } from '@kirbydesign/designsystem/tabs';
 import { SlideButtonComponent } from '@kirbydesign/designsystem/slide-button';
 import { RangeComponent } from '@kirbydesign/designsystem/range';
 import { PopoverComponent } from '@kirbydesign/designsystem/popover';
+import {
+  LoadingOverlayComponent,
+  LoadingOverlayService,
+} from '@kirbydesign/designsystem/loading-overlay';
 import { AccordionItemComponent } from './components/accordion/accordion-item.component';
 import { AccordionDirective } from './components/accordion/accordion.directive';
 import { AppModule } from './components/app/app.module';
@@ -44,8 +48,6 @@ import { GridComponent } from './components/grid/grid.component';
 import { ItemGroupComponent } from './components/item-group/item-group.component';
 import { ItemSlidingComponent } from './components/item-sliding/item-sliding.component';
 import { ListModule } from './components/list/list.module';
-import { LoadingOverlayComponent } from './components/loading-overlay/loading-overlay.component';
-import { LoadingOverlayService } from './components/loading-overlay/loading-overlay.service';
 import { ActionSheetComponent } from './components/modal/action-sheet/action-sheet.component';
 import { AlertComponent } from './components/modal/alert/alert.component';
 import { ModalFooterComponent } from './components/modal/footer/modal-footer.component';
