@@ -4,16 +4,15 @@ import { noop } from 'rxjs';
 const config = {
   selector: 'cookbook-card-example-disclosure',
   template: `<kirby-card hasPadding="true" (click)="noop()">
-  <kirby-card-header *ngIf="true" [title]="title" [subtitle]="subtitle" [hasPadding]="false"
-    ><kirby-item [disclosure]="'arrow-more'">
+  <kirby-card-header [hasPadding]="false">
+    <kirby-item [disclosure]="'arrow-more'">
       <h3 class="kirby-text-bold">Item disclosure in header</h3>
     </kirby-item>
   </kirby-card-header>
 
   <p class="kirby-text-large">A card with state and disclosure</p>
   <p> 
-    Note how this card can also be focussed with tab keyboard navigation.
-    Pressing enter or space will automatically trigger the registered click function too.
+    Note how this card can be focussed with tab keyboard navigation and enter or space triggers the click function.
   </p>
   <p>
     You are free to slot any content inside. 
