@@ -11,11 +11,7 @@ export * from './charts';
 export * from './calendar';
 export * from './item-sliding';
 
-export { CheckboxComponent } from './checkbox/checkbox.component';
-
 export * from './data-table';
-
-export { DividerComponent } from './divider/divider.component';
 
 export * from './form-field';
 export * from './dropdown';

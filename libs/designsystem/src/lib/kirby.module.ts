@@ -26,6 +26,8 @@ import {
   LoadingOverlayComponent,
   LoadingOverlayService,
 } from '@kirbydesign/designsystem/loading-overlay';
+import { DividerComponent } from '@kirbydesign/designsystem/divider';
+import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 import { AccordionItemComponent } from './components/accordion/accordion-item.component';
 import { AccordionDirective } from './components/accordion/accordion.directive';
 import { AppModule } from './components/app/app.module';
@@ -33,9 +35,7 @@ import { AvatarComponent } from './components/avatar/avatar.component';
 import { ButtonComponent } from './components/button/button.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { ChartsModule } from './components/charts';
-import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { DataTableModule } from './components/data-table/data-table.module';
-import { DividerComponent } from './components/divider/divider.component';
 import { FabSheetComponent } from './components/fab-sheet/fab-sheet.component';
 import { DateInputDirective } from './components/form-field/directives/date/date-input.directive';
 import { DecimalMaskDirective } from './components/form-field/directives/decimal-mask/decimal-mask.directive';
@@ -82,7 +82,6 @@ const exportedDeclarations = [
   AffixDirective,
   InputComponent,
   TextareaComponent,
-  DividerComponent,
 
   ItemGroupComponent,
 ];
@@ -90,6 +89,7 @@ const exportedDeclarations = [
 const declarations = [...exportedDeclarations, KeyHandlerDirective, ModalCompactWrapperComponent];
 
 const standaloneComponents = [
+  DividerComponent,
   ThemeColorDirective,
   SegmentedControlComponent,
   AlertComponent,

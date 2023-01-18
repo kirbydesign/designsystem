@@ -28,7 +28,9 @@
       "@kirbydesign/designsystem/slide-button": ["libs/designsystem/slide-button/index.ts"],
       "@kirbydesign/designsystem/range": ["libs/designsystem/range/index.ts"],
       "@kirbydesign/designsystem/popover": ["libs/designsystem/popover/index.ts"],
-      "@kirbydesign/designsystem/loading-overlay": ["libs/designsystem/loading-overlay/index.ts"]
+      "@kirbydesign/designsystem/loading-overlay": ["libs/designsystem/loading-overlay/index.ts"],
+      "@kirbydesign/designsystem/divider": ["libs/designsystem/divider/index.ts"],
+      "@kirbydesign/designsystem/checkbox": ["libs/designsystem/checkbox/index.ts"]
     },
     "target": "es2020"
   },
