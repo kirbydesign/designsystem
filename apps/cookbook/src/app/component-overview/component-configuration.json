@@ -140,7 +140,7 @@
     },
     {
       "title": "Progress Circle",
-      "paragraph": "The Progress Circle is a circular visualization the progression of an operation and activity.",
+      "paragraph": "The Progress Circle is a circular visualization of the progression of an operation and activity.",
       "svgPath": "./assets/component-svg/Progress-Circle-Kirby-Component-Overview.svg",
       "route": "/home/showcase/progress-circle"
     },
