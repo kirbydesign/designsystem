@@ -5,12 +5,12 @@
   place-content: center;
 }
 
-p:last-child {
-  margin-bottom: 0;
-}
-
 kirby-card {
   max-width: 500px;
+}
+
+kirby-flag {
+  float: inline-end;
 }
 
 .card-option-button-group {
@@ -25,6 +25,10 @@ kirby-card {
     background-color: utils.get-color('dark');
     color: utils.get-color('dark-contrast');
   }
+}
+
+p:last-child {
+  margin-bottom: 0;
 }
 
 button {
