@@ -11,8 +11,6 @@ export * from './charts';
 export * from './calendar';
 export * from './item-sliding';
 
-export { CheckboxComponent } from './checkbox/checkbox.component';
-
 export * from './data-table';
 
 export * from './form-field';
