@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
+import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import { CardComponent } from './card.component';
 import { CardHeaderComponent } from './card-header/card-header.component';
 import { CardFooterComponent } from './card-footer/card-footer.component';
@@ -13,8 +14,8 @@ const declarations = [
   CardAsButtonDirective,
 ];
 @NgModule({
-  imports: [CommonModule],
+  imports: [CommonModule, ThemeColorDirective],
   declarations: [...declarations],
-  exports: [...declarations],
+  exports: [...declarations, ThemeColorDirective],
 })
 export class CardModule {}
