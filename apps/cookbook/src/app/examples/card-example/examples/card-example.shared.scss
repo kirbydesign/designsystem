@@ -1,0 +1,67 @@
+@use '@kirbydesign/core/src/scss/utils';
+
+:host {
+  display: grid;
+  place-content: center;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+kirby-card {
+  max-width: 500px;
+}
+
+button {
+  height: utils.$fat-finger-size;
+  width: utils.$fat-finger-size;
+  border: none;
+  border-radius: 999px;
+  margin: 0;
+  color: #fff;
+  cursor: pointer;
+
+  &.success {
+    background-color: utils.get-color('success');
+
+    &:hover {
+      background-color: var(--kirby-success-shade);
+    }
+  }
+
+  &.warning {
+    background-color: utils.get-color('warning');
+
+    &:hover {
+      background-color: var(--kirby-warning-shade);
+    }
+  }
+
+  &.danger {
+    background-color: utils.get-color('danger');
+
+    &:hover {
+      background-color: var(--kirby-danger-shade);
+    }
+  }
+
+  &.info {
+    background-color: utils.get-color('medium');
+
+    &:hover {
+      background-color: var(--kirby-medium-shade);
+    }
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.card-option-button-group {
+  display: flex;
+  justify-content: center;
+  gap: utils.size('xxs');
+  padding: utils.size('xxs');
+}
