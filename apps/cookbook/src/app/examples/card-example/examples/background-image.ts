@@ -43,6 +43,7 @@ kirby-card {
   styleUrls: ['card-example.shared.scss', './background-image.scss'],
 })
 export class CardExampleBackgroundImageComponent {
+  template: string = config.template;
   style: string = config.style;
   noop: () => void = noop;
 }
