@@ -80,7 +80,7 @@ export class PopoverComponent implements AfterViewInit, OnDestroy {
   private placePopoverAboveClosestModal() {
     const closestIonModal = this.elementRef.nativeElement.closest('ion-modal');
     if (closestIonModal) {
-      this.zIndex = parseInt(closestIonModal.style.zIndex) + 1;
+      this.zIndex = parseInt((closestIonModal as HTMLElement).style.zIndex) + 1;
       this.elementRef.nativeElement.style.zIndex = `${this.zIndex}`;
     } else {
       this.zIndex = parseInt(DesignTokenHelper.zLayer('popover'));

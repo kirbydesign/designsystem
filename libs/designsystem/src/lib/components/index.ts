@@ -35,17 +35,13 @@ export * from './modal';
 
 export * from './page';
 
-export { HorizontalDirection, PopoverComponent } from './popover/popover.component';
-
 export * from './radio';
-export { RangeComponent } from './range/range.component';
 export * from './router-outlet';
 export * from './reorder-list';
 
 /* prettier-ignore */
 export { SegmentedControlComponent, SegmentedControlMode} from './segmented-control/segmented-control.component'; // See issue #1555 for prettier-ignore explanation
 export { SegmentItem } from './segmented-control/segment-item';
-export { SlideButtonComponent } from './slide-button/slide-button.component';
 
 export * from './toast';
 
