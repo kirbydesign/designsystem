@@ -128,7 +128,7 @@
     },
     {
       "title": "Item",
-      "paragraph": "Item is a placeholder that can contain text, icons, avatars, checkbox, buttons etc. It’s a component that structures other components.",
+      "paragraph": "Item is a placeholder that can contain text, icons, avatars, checkboxes, buttons etc. It’s a component that structures other components.",
       "svgPath": "./assets/component-svg/Item-Kirby-Component-Overview.svg",
       "route": "/home/showcase/item"
     },
