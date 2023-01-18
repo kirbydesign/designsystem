@@ -9,6 +9,7 @@ import {
   ComponentLoaderDirective,
   ResizeObserverFactory,
   ResizeObserverService,
+  ThemeColorDirective,
 } from '@kirbydesign/designsystem/shared';
 import { FlagComponent } from '@kirbydesign/designsystem/flag';
 import { SpinnerModule } from '@kirbydesign/designsystem/spinner';
@@ -65,7 +66,6 @@ import { ToastHelper } from './components/toast/services/toast.helper';
 import { customElementsInitializer } from './custom-elements-initializer';
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
 import { ModalRouterLinkDirective } from './directives/modal-router-link/modal-router-link.directive';
-import { ThemeColorDirective } from './directives/theme-color/theme-color.directive';
 import { RadioModule } from './components';
 import { EmptyStateModule } from './components/empty-state/empty-state.module';
 import { DropdownModule } from './components/dropdown';
@@ -91,7 +91,6 @@ const standaloneComponents = [
   ThemeColorDirective,
   SegmentedControlComponent,
   AlertComponent,
-  ThemeColorDirective,
   PopoverComponent,
   ProgressCircleRingComponent,
   ModalWrapperComponent,
