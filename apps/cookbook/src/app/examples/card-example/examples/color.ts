@@ -1,0 +1,42 @@
+import { Component } from '@angular/core';
+
+const config = {
+  selector: 'cookbook-card-example-color',
+  codeSnippet: `<kirby-card hasPadding="true" [themeColor]="color">
+  <strong>A themed card</strong> <br>
+  <p>Cards can have a colored background to stand out even more. 
+  <p>Possible values for the themeColor input are: <br> <code>'secondary' | 'tertiary' | 'medium' | 'dark'</code></p>
+  <p>Use the buttons below to see the different options 👇</p>
+
+</kirby-card>`,
+  template: `<kirby-card hasPadding="true" [themeColor]="color">
+    <strong>A themed card</strong> <br>
+    <p>Cards can have a colored background to stand out even more. 
+    <p>Possible values for the themeColor input are: <br> <code>'secondary' | 'tertiary' | 'medium' | 'dark'</code></p>
+    <p>Use the buttons below to see the different options 👇</p>
+
+</kirby-card>
+
+<div class="card-option-button-group">
+    <button (click)="setThemeColor('secondary')" class="secondary"></button>
+    <button (click)="setThemeColor('tertiary')" class="tertiary"></button>
+    <button (click)="setThemeColor('medium')" class="medium"></button>
+    <button (click)="setThemeColor('dark')" class="dark"></button>
+</div>`,
+};
+
+@Component({
+  selector: config.selector,
+  template: config.template,
+  styleUrls: ['./card-example.shared.scss'],
+})
+export class CardExampleColorComponent {
+  template: string = config.template;
+  codeSnippet: string = config.codeSnippet;
+
+  color: string = 'secondary';
+
+  setThemeColor(color: string) {
+    this.color = color;
+  }
+}
