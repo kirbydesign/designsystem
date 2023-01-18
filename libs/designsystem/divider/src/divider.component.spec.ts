@@ -8,7 +8,7 @@ describe('DividerComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [DividerComponent],
+      imports: [DividerComponent],
     }).compileComponents();
   }));
 
