@@ -1,19 +1,6 @@
 @use '@kirbydesign/core/src/scss/utils';
+@use '../examples.shared';
 
-kirby-card-header {
-  &:not(.bg-color) {
-    padding-bottom: 0;
-  }
-
-  &.bg-color {
-    --kirby-card-header-color: #{utils.get-color('dark-contrast')};
-    --kirby-card-header-background-color: #{utils.get-color('dark')};
-  }
-}
-
-kirby-card-footer {
-  &.bg-color {
-    color: utils.get-color('dark-contrast');
-    background-color: utils.get-color('dark');
-  }
+:host > :not(:last-child) {
+  margin-bottom: utils.size('s');
 }

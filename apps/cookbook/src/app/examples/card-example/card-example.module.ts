@@ -6,19 +6,17 @@ import { KirbyModule } from '@kirbydesign/designsystem';
 import { CardExampleComponent } from './card-example.component';
 import { CardExampleBackgroundImageComponent } from './examples/background-image';
 
-import { CardWithItemHeaderExampleComponent } from './examples/card-with-item-header-example/card-with-item-header-example.component';
-import { CardExampleClickableComponent } from './examples/clickable';
+import { CardExampleDisclosureComponent } from './examples/disclosure';
 import { CardExampleColorComponent } from './examples/color';
 import { CardExampleDefaultComponent } from './examples/default';
 import { CardExampleFlagComponent } from './examples/flag';
 
 const COMPONENT_DECLARATIONS = [
   CardExampleComponent,
-  CardWithItemHeaderExampleComponent,
   CardExampleDefaultComponent,
   CardExampleFlagComponent,
   CardExampleColorComponent,
-  CardExampleClickableComponent,
+  CardExampleDisclosureComponent,
   CardExampleBackgroundImageComponent,
 ];
 
