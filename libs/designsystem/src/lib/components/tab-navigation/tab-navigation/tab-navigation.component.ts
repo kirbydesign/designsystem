@@ -12,7 +12,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { filter, fromEvent, map, Subject, takeUntil } from 'rxjs';
-import { WindowRef } from '../../../types';
+import { WindowRef } from '@kirbydesign/designsystem/types';
 import { TabNavigationItemComponent } from '../tab-navigation-item/tab-navigation-item.component';
 
 const ARROW_LEFT = 'ArrowLeft';

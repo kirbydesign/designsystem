@@ -39,7 +39,6 @@ export { SegmentedControlComponent, SegmentedControlMode} from './segmented-cont
 export { SegmentItem } from './segmented-control/segment-item';
 
 export * from './tab-navigation';
-export * from './tabs';
 export * from './toast';
 
 export * from './progress-circle';
