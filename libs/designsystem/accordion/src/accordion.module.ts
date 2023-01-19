@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 
 import { AccordionItemComponent } from './accordion-item.component';
@@ -9,7 +8,7 @@ const declarations = [AccordionDirective, AccordionItemComponent];
 
 @NgModule({
   declarations: [...declarations],
-  imports: [BrowserAnimationsModule, IconModule],
+  imports: [IconModule],
   exports: [...declarations],
 })
 export class AccordionModule {}
