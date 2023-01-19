@@ -28,8 +28,7 @@ import {
 } from '@kirbydesign/designsystem/loading-overlay';
 import { DividerComponent } from '@kirbydesign/designsystem/divider';
 import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
-import { AccordionItemComponent } from './components/accordion/accordion-item.component';
-import { AccordionDirective } from './components/accordion/accordion.directive';
+import { AccordionModule } from '@kirbydesign/designsystem/accordion';
 import { AppModule } from './components/app/app.module';
 import { AvatarComponent } from './components/avatar/avatar.component';
 import { ButtonComponent } from './components/button/button.component';
@@ -99,8 +98,7 @@ const standaloneComponents = [
   SectionHeaderComponent,
   RangeComponent,
   ItemSlidingComponent,
-  AccordionItemComponent,
-  AccordionDirective,
+
   ProgressCircleComponent,
   ReorderListComponent,
   LoadingOverlayComponent,
@@ -136,6 +134,7 @@ const exportedModules = [
   KirbyBadgeModule,
   FormFieldModule,
   SlideModule,
+  AccordionModule,
   ...standaloneComponents,
 ];
 

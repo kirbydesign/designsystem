@@ -1,6 +1,7 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
+import { IconModule } from '@kirbydesign/designsystem/icon';
 
 import { AccordionItemComponent } from './accordion-item.component';
 
@@ -12,6 +13,7 @@ describe('AccordionItemComponent', () => {
 
   const createHost = createHostFactory({
     component: AccordionItemComponent,
+    imports: [IconModule],
   });
 
   beforeEach(() => {
@@ -58,6 +60,7 @@ describe('AccordionItemComponent', () => {
         visibility: 'hidden',
       });
     });
+
     it('should use disabled-style if disabled', () => {
       spectator.setInput('isDisabled', true);
       spectator.detectChanges();

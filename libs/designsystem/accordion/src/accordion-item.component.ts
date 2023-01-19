@@ -6,8 +6,6 @@ import { IconModule } from '@kirbydesign/designsystem/icon';
 let uniqueId = 0;
 
 @Component({
-  standalone: true,
-  imports: [IconModule],
   selector: 'kirby-accordion-item',
   templateUrl: './accordion-item.component.html',
   styleUrls: ['./accordion-item.component.scss'],
