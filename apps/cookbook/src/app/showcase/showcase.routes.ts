@@ -4,6 +4,9 @@ import { ModalRoutePage1ExampleComponent } from '../examples/modal-example/modal
 import { ModalRoutePage2ExampleComponent } from '../examples/modal-example/modal-route-example/modal-route-page2-example.component';
 import { ItemShowcaseComponent } from '../showcase/item-showcase/item-showcase.component';
 
+import { InlineModalExampleComponent } from '../examples/modal-example/component/inline-modal-example.component';
+import { InlineModalPage1ExampleComponent } from '../examples/modal-example/component/inline-modal-page1-example.component';
+import { InlineModalPage2ExampleComponent } from '../examples/modal-example/component/inline-modal-page2-example.component';
 import { AccordionShowcaseComponent } from './accordion-showcase/accordion-showcase.component';
 import { ActionSheetShowcaseComponent } from './action-sheet-showcase/action-sheet-showcase.component';
 import { AlertShowcaseComponent } from './alert-showcase/alert-showcase.component';
@@ -55,6 +58,8 @@ import { ToolbarShowcaseComponent } from './toolbar-showcase/toolbar-showcase.co
 import { RadioShowcaseComponent } from './radio-showcase/radio-showcase.component';
 import { CookbookChartStockConfigShowcaseComponent } from './chart-config-showcase/stock/chart-config-stock-showcase.component';
 import { CookbookChartBarConfigShowcaseComponent } from './chart-config-showcase/bar/chart-config-bar-showcase.component';
+import { ModalExperimentalShowcaseComponent } from './modal-experimental-showcase/modal-experimental-showcase.component';
+InlineModalPage2ExampleComponent;
 
 export const routes: Routes = [
   {
@@ -183,6 +188,27 @@ export const routes: Routes = [
             path: 'page2',
             outlet: 'modal',
             component: ModalRoutePage2ExampleComponent,
+          },
+        ],
+      },
+      {
+        path: 'modal-experimental',
+        component: ModalExperimentalShowcaseComponent,
+        children: [
+          {
+            path: 'modal',
+            component: InlineModalExampleComponent,
+            outlet: 'myModal',
+            children: [
+              {
+                path: 'page1',
+                component: InlineModalPage1ExampleComponent,
+              },
+              {
+                path: 'page2',
+                component: InlineModalPage2ExampleComponent,
+              },
+            ],
           },
         ],
       },

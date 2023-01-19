@@ -1,12 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
 
 import { KirbyModule } from '@kirbydesign/designsystem';
 
 import { ExamplesSharedModule } from '../examples.shared.module';
 
 import { ModalCompactExampleComponent } from './compact-example/modal-compact-example.component';
+import { InlineModalExampleComponent } from './component/inline-modal-example.component';
+import { InlineModalPage1ExampleComponent } from './component/inline-modal-page1-example.component';
+import { InlineModalPage2ExampleComponent } from './component/inline-modal-page2-example.component';
 import { EmbeddedModalExampleComponent } from './embedded-modal-example/embedded-modal-example.component';
 import { ModalExampleConfigurationComponent } from './modal-example-configuration/modal-example-configuration.component';
 import { ModalExampleDefaultComponent } from './modal-example-default.component';
@@ -24,10 +28,13 @@ const COMPONENT_DECLARATIONS = [
   ModalCompactExampleComponent,
   ModalRoutePage1ExampleComponent,
   ModalRoutePage2ExampleComponent,
+  InlineModalExampleComponent,
+  InlineModalPage1ExampleComponent,
+  InlineModalPage2ExampleComponent,
 ];
 
 @NgModule({
-  imports: [CommonModule, RouterModule, KirbyModule, ExamplesSharedModule],
+  imports: [CommonModule, RouterModule, KirbyModule, ExamplesSharedModule, IonicModule],
   declarations: COMPONENT_DECLARATIONS,
   exports: COMPONENT_DECLARATIONS,
 })
