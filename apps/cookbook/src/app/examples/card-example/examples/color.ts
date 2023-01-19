@@ -3,18 +3,16 @@ import { Component } from '@angular/core';
 const config = {
   selector: 'cookbook-card-example-color',
   codeSnippet: `<kirby-card hasPadding="true" [themeColor]="color">
-  <strong>A themed card</strong> 
-  <p>Cards can have a colored background to stand out even more. 
-  <p>Possible values for the themeColor input are: <br> <code>'secondary' | 'tertiary' | 'medium' | 'dark'</code></p>
+  <strong>A themed card</strong>
+  <p>This cards color is defined by the <code>themeColor</code> input property.</p>
+  <p>Recommended values for themeColor are: <br> <code>'secondary' | 'tertiary' | 'medium' | 'dark'</code></p>
   <p>Use the buttons below to see the different options 👇</p>
-
 </kirby-card>`,
   template: `<kirby-card hasPadding="true" [themeColor]="color">
     <strong>A themed card</strong>
-    <p>Cards can have a colored background to stand out even more. 
-    <p>Possible values for the themeColor input are: <br> <code>'secondary' | 'tertiary' | 'medium' | 'dark'</code></p>
+    <p>This cards color is defined by the <code>themeColor</code> input property.</p>
+    <p>Recommended values for themeColor are: <br> <code>'secondary' | 'tertiary' | 'medium' | 'dark'</code></p>
     <p>Use the buttons below to see the different options 👇</p>
-
 </kirby-card>
 
 <div class="card-option-button-group">
