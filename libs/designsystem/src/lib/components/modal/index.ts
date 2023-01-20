@@ -8,3 +8,4 @@ export { ActionSheetComponent } from './action-sheet/action-sheet.component';
 export { ActionSheetItem } from './action-sheet/config/action-sheet-item';
 export * from './alert';
 export * from './modal-wrapper';
+export * from './modal-router-link/modal-router-link.directive';
