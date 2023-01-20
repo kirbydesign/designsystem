@@ -53,10 +53,6 @@
     }
   }
 
-  &.highlighted {
-    box-shadow: utils.get-elevation(4);
-  }
-
   &.flat {
     box-shadow: none;
   }
