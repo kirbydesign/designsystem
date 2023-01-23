@@ -183,3 +183,36 @@
     top: 50%;
   }
 }
+
+/*
+* This mixin is applied both in the section-header styles, for using 
+* headings and paragraphs directly, and in kirby-label styles, for 
+* wrapping them in a kirby-label within a section-header. 
+*/
+
+@mixin section-header-typography() {
+  --padding-end: #{size('s')};
+  --padding-start: #{size('s')};
+
+  @include slotted('[heading]') {
+    font-weight: font-weight('bold');
+    font-size: font-size('m');
+    line-height: line-height('m');
+    color: var(--kirby-section-header-color);
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  @include slotted('[detail]', '[label]') {
+    font-weight: font-weight('light');
+    font-size: font-size('s');
+    line-height: line-height('s');
+    color: var(--kirby-section-header-color);
+    margin: size('xxxs') 0 size('xxs');
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

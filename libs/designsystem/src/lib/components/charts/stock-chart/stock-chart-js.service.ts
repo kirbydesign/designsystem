@@ -1,9 +1,9 @@
 import { ElementRef, Injectable } from '@angular/core';
+import { mergeDeepAll } from '@kirbydesign/designsystem/helpers';
 import { ChartDataset, ChartOptions, ScatterDataPoint } from 'chart.js';
 import { AnnotationOptions } from 'chartjs-plugin-annotation';
 import { toDate } from 'date-fns';
 
-import { mergeDeepAll } from '../../../helpers/merge-deep';
 import {
   ChartDataLabelOptions,
   ChartHighlightedElements,

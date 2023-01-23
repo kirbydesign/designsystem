@@ -1,14 +1,13 @@
 import { fakeAsync, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { MockComponents, MockDirective } from 'ng-mocks';
+import { MockDirective } from 'ng-mocks';
 
-import { DesignTokenHelper } from '@kirbydesign/core';
+import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
-import { ThemeColorDirective } from '../../directives';
-import { BadgeComponent } from '../../index';
-import { TestHelper } from '../../testing/test-helper';
-import { IconComponent } from '../icon';
+import { TestHelper } from '@kirbydesign/designsystem/testing';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
+import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 
 import { SegmentItem } from './segment-item';
 import { SegmentedControlComponent, SegmentedControlMode } from './segmented-control.component';
@@ -41,7 +40,7 @@ describe('SegmentedControlComponent', () => {
 
   const createHost = createHostFactory({
     component: SegmentedControlComponent,
-    declarations: [MockComponents(BadgeComponent), MockDirective(ThemeColorDirective)],
+    declarations: [MockDirective(ThemeColorDirective)],
     imports: [TestHelper.ionicModuleForTest],
   });
 
@@ -190,7 +189,6 @@ describe('SegmentedControl with Badge', () => {
 
   const createHost = createHostFactory({
     component: SegmentedControlComponent,
-    declarations: [MockComponents(BadgeComponent, IconComponent)],
     imports: [TestHelper.ionicModuleForTest],
   });
 

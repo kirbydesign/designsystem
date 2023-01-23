@@ -1,19 +1,19 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
-import { DesignTokenHelper } from '@kirbydesign/core';
+import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
+import { WindowRef } from '@kirbydesign/designsystem/types';
+import { TestHelper } from '@kirbydesign/designsystem/testing';
+import { SpinnerModule } from '@kirbydesign/designsystem/spinner';
+import { CardModule } from '@kirbydesign/designsystem/card';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
 import {
-  CardComponent,
-  IconComponent,
   InfiniteScrollDirective,
-  ItemComponent,
   ListComponent,
   ListItemColorDirective,
   ListItemTemplateDirective,
-  SpinnerComponent,
 } from '..';
-import { TestHelper } from '../../testing/test-helper';
-import { WindowRef } from '../../types/window-ref';
 
 import { ListItemComponent } from './list-item/list-item.component';
 
@@ -26,7 +26,7 @@ describe('ListComponent', () => {
   let spectator: SpectatorHost<ListComponent>;
   const createHost = createHostFactory({
     component: ListComponent,
-    imports: [TestHelper.ionicModuleForTest],
+    imports: [TestHelper.ionicModuleForTest, CardModule, SpinnerModule],
     providers: [
       {
         provide: WindowRef,
@@ -35,9 +35,7 @@ describe('ListComponent', () => {
     ],
     declarations: [
       ItemComponent,
-      SpinnerComponent,
       IconComponent,
-      CardComponent,
       InfiniteScrollDirective,
       ListItemColorDirective,
       ListItemTemplateDirective,

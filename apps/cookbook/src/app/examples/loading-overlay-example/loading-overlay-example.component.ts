@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 
-import { LoadingOverlayService } from '@kirbydesign/designsystem';
-
 @Component({
   selector: 'cookbook-loading-overlay-example',
   templateUrl: './loading-overlay-example.component.html',
@@ -10,23 +8,15 @@ import { LoadingOverlayService } from '@kirbydesign/designsystem';
 export class LoadingOverlayExampleComponent {
   public isLoading = false;
   public showBackdrop = false;
+  public hideContent = false;
 
-  constructor(private loadingOverlayService: LoadingOverlayService) {}
-
-  public showWrapperLoadingOverlay(showBackdrop: boolean) {
+  public showWrapperLoadingOverlay(showBackdrop: boolean, hideContent?: boolean) {
     this.showBackdrop = showBackdrop;
+    this.hideContent = hideContent;
     this.isLoading = true;
 
     setTimeout(() => {
       this.isLoading = false;
-    }, 5000);
-  }
-
-  public showFullscreenLoadingOverlay(showBackdrop: boolean) {
-    this.loadingOverlayService.showLoadingOverlay(showBackdrop);
-
-    setTimeout(() => {
-      this.loadingOverlayService.hideLoadingOverlay();
     }, 5000);
   }
 }

@@ -1,10 +1,10 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
-import { DesignTokenHelper } from '@kirbydesign/core';
+import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
-import { TestHelper } from '../../../testing/test-helper';
-import { ItemComponent } from '../../item';
+import { TestHelper } from '@kirbydesign/designsystem/testing';
 
+import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { InputComponent } from './input.component';
 
 const size = DesignTokenHelper.size;

@@ -1,6 +1,6 @@
 import { Component, forwardRef, Input } from '@angular/core';
 
-import { LabelComponent } from '@kirbydesign/designsystem';
+import { LabelComponent } from '@kirbydesign/designsystem/item';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({

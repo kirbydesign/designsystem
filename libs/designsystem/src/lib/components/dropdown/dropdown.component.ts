@@ -20,13 +20,13 @@ import {
   ViewChildren,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { DesignTokenHelper } from '../../helpers';
+import { CardComponent } from '@kirbydesign/designsystem/card';
+import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
+import { HorizontalDirection, PopoverComponent } from '@kirbydesign/designsystem/popover';
 
 import { ButtonComponent } from '../button/button.component';
-import { CardComponent } from '../card/card.component';
-import { ItemComponent } from '../item/item.component';
 import { ListItemTemplateDirective } from '../list/list.directive';
-import { HorizontalDirection, PopoverComponent } from '../popover/popover.component';
 
 import { OpenState, VerticalDirection } from './dropdown.types';
 import { KeyboardHandlerService } from './keyboard-handler.service';
@@ -103,7 +103,6 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
 
   @Input()
   attentionLevel: '1' | '2' | '3' = '3';
-  readonly attentionLevelOpen = '2';
 
   @Input()
   expand?: 'block';

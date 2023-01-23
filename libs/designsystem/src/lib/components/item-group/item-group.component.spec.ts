@@ -1,8 +1,6 @@
-import { IonItem } from '@ionic/angular';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponent } from 'ng-mocks';
-
-import { ItemComponent } from '../item';
 
 import { ItemGroupComponent } from './item-group.component';
 

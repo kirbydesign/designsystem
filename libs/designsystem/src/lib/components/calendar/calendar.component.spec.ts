@@ -1,16 +1,13 @@
 import { LOCALE_ID } from '@angular/core';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { format, startOfDay, startOfMonth } from 'date-fns';
+import { format, Locale, startOfDay, startOfMonth } from 'date-fns';
+import { es } from 'date-fns/locale';
 import { zonedTimeToUtc } from 'date-fns-tz';
-import { MockComponent } from 'ng-mocks';
 
-import { ButtonComponent, CalendarComponent, IconComponent } from '..';
-import { TestHelper } from '../../testing/test-helper';
-import { WindowRef } from '../../types/window-ref';
-import { CardComponent } from '../card';
+import { TestHelper } from '@kirbydesign/designsystem/testing';
+import { WindowRef } from '@kirbydesign/designsystem/types';
+import { CalendarComponent } from '..';
 import { DropdownComponent } from '../dropdown/dropdown.component';
-import { ItemComponent } from '../item';
-import { RadioComponent } from '../radio';
 
 import { CalendarYearNavigatorConfig } from './options/calendar-year-navigator-config';
 
@@ -23,15 +20,6 @@ describe('CalendarComponent', () => {
 
   const createHost = createHostFactory({
     component: CalendarComponent,
-    declarations: [
-      CalendarComponent,
-      MockComponent(IconComponent),
-      DropdownComponent,
-      RadioComponent,
-      CardComponent,
-      ItemComponent,
-      ButtonComponent,
-    ],
     providers: [
       {
         provide: LOCALE_ID,
@@ -43,313 +31,419 @@ describe('CalendarComponent', () => {
         useValue: <WindowRef>{ nativeWindow: window },
       },
     ],
-    imports: [TestHelper.ionicModuleForTest],
+    imports: [TestHelper.ionicModuleForTest, CalendarComponent],
   });
 
-  beforeEach(() => {
-    spectator = createHost('<kirby-calendar></kirby-calendar>');
+  describe('by default', () => {
+    beforeEach(() => {
+      spectator = createHost('<kirby-calendar></kirby-calendar>');
+    });
+
+    it('should create', () => {
+      expect(spectator.component).toBeTruthy();
+    });
+
+    it('should initially render the current month if selectedDate is not specified', () => {
+      const currentDay = startOfDay(new Date());
+      const currentMonth = startOfMonth(new Date());
+      verifyMonthAndYear(format(currentMonth, 'MMMM yyyy'));
+      expect(spectator.query('.day.today')).toHaveText(format(currentDay, 'd'));
+    });
+
+    it('should render days from Monday to Sunday', () => {
+      expect(
+        spectator
+          .queryAll('th')
+          .map((_) => _.textContent)
+          .join(' ')
+      ).toEqual('M T W T F S S');
+    });
   });
 
-  it('should create', () => {
-    expect(spectator.component).toBeTruthy();
+  describe('selectedDate', () => {
+    beforeEach(() => {
+      spectator = createHost('<kirby-calendar></kirby-calendar>');
+    });
+
+    it('should initially render the month of selectedDate if specified', () => {
+      spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+
+      const headerTexts = trimmedTexts('th');
+      const dayTexts = trimmedTexts('.day.current-month');
+      verifyMonthAndYear('August 1997');
+      expect(headerTexts).toEqual(['M', 'T', 'W', 'T', 'F', 'S', 'S']);
+      expect(dayTexts.slice(0, 5)).toEqual(['1', '2', '3', '4', '5']);
+      expect(dayTexts.length).toEqual(31);
+    });
   });
 
-  it('should initially render the current month if selectedDate is not specified', () => {
-    const currentDay = startOfDay(new Date());
-    const currentMonth = startOfMonth(new Date());
-    verifyMonthAndYear(format(currentMonth, 'MMMM yyyy'));
-    expect(spectator.query('.day.today')).toHaveText(format(currentDay, 'd'));
+  describe('selectedDate', () => {
+    beforeEach(() => {
+      spectator = createHost('<kirby-calendar></kirby-calendar>');
+    });
+
+    it('should initially render the month of selectedDate if specified', () => {
+      spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+
+      const headerTexts = trimmedTexts('th');
+      const dayTexts = trimmedTexts('.day.current-month');
+      verifyMonthAndYear('August 1997');
+      expect(headerTexts).toEqual(['M', 'T', 'W', 'T', 'F', 'S', 'S']);
+      expect(dayTexts.slice(0, 5)).toEqual(['1', '2', '3', '4', '5']);
+      expect(dayTexts.length).toEqual(31);
+    });
   });
 
-  it('should initially render the month of selectedDate if specified', () => {
-    spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+  describe('todayDate', () => {
+    beforeEach(() => {
+      spectator = createHost('<kirby-calendar></kirby-calendar>');
+    });
 
-    const headerTexts = trimmedTexts('th');
-    const dayTexts = trimmedTexts('.day.current-month');
-    verifyMonthAndYear('August 1997');
-    expect(headerTexts).toEqual(['M', 'T', 'W', 'T', 'F', 'S', 'S']);
-    expect(dayTexts.slice(0, 5)).toEqual(['1', '2', '3', '4', '5']);
-    expect(dayTexts.length).toEqual(31);
+    it('should be possible to specify which day is today by passing todayDate', () => {
+      spectator.setInput('todayDate', localMidnightDate('1997-08-30'));
+      spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+
+      expect(spectator.query('.day.today')).toHaveText('30');
+    });
   });
 
-  it('should be possible to specify which day is today by passing todayDate', () => {
-    spectator.setInput('todayDate', localMidnightDate('1997-08-30'));
-    spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+  describe('months', () => {
+    beforeEach(() => {
+      spectator = createHost('<kirby-calendar></kirby-calendar>');
+    });
 
-    expect(spectator.query('.day.today')).toHaveText('30');
+    it('should make it possible to navigate past and future months', () => {
+      spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+
+      spectator.click(SEL_NAV_BACK);
+
+      verifyMonthAndYear('July 1997');
+
+      spectator.click(SEL_NAV_FORWARD);
+
+      verifyMonthAndYear('August 1997');
+
+      spectator.click(SEL_NAV_FORWARD);
+
+      verifyMonthAndYear('September 1997');
+
+      spectator.click(SEL_NAV_FORWARD);
+      spectator.click(SEL_NAV_FORWARD);
+      spectator.click(SEL_NAV_FORWARD);
+      spectator.click(SEL_NAV_FORWARD);
+
+      verifyMonthAndYear('January 1998');
+    });
+
+    it('should not be possible to navigate to any month preceding minDate, if specified', () => {
+      spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+      spectator.setInput('minDate', localMidnightDate('1997-06-15'));
+
+      spectator.click(SEL_NAV_BACK);
+      spectator.click(SEL_NAV_BACK);
+
+      verifyMonthAndYear('June 1997');
+      expect(spectator.query(SEL_NAV_BACK)).toBeDisabled();
+
+      spectator.click(SEL_NAV_BACK);
+
+      verifyMonthAndYear('June 1997');
+    });
+
+    it('should not be possible to navigate to any month exceeding maxDate, if specified', () => {
+      spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+      spectator.setInput('maxDate', localMidnightDate('1997-10-01'));
+
+      spectator.click(SEL_NAV_FORWARD);
+      spectator.click(SEL_NAV_FORWARD);
+
+      verifyMonthAndYear('October 1997');
+      expect(spectator.query(SEL_NAV_FORWARD)).toBeDisabled();
+
+      spectator.click(SEL_NAV_FORWARD);
+
+      verifyMonthAndYear('October 1997');
+    });
   });
 
-  it('should make it possible to navigate past and future months', () => {
-    spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+  describe('monthChange', () => {
+    it('should emit the previousMonthClicked event, when navigating to a past month', () => {
+      const previousMonthClickedSpy = spyOn(spectator.component.previousMonthClicked, 'emit');
 
-    spectator.click(SEL_NAV_BACK);
+      expect(previousMonthClickedSpy).not.toHaveBeenCalled();
 
-    verifyMonthAndYear('July 1997');
+      spectator.click(SEL_NAV_BACK);
 
-    spectator.click(SEL_NAV_FORWARD);
+      expect(previousMonthClickedSpy).toHaveBeenCalled();
+    });
 
-    verifyMonthAndYear('August 1997');
+    it('should emit the nextMonthClicked event, when navigating to a future month', () => {
+      const nextMonthClickedSpy = spyOn(spectator.component.nextMonthClicked, 'emit');
 
-    spectator.click(SEL_NAV_FORWARD);
+      expect(nextMonthClickedSpy).not.toHaveBeenCalled();
 
-    verifyMonthAndYear('September 1997');
+      spectator.click(SEL_NAV_FORWARD);
 
-    spectator.click(SEL_NAV_FORWARD);
-    spectator.click(SEL_NAV_FORWARD);
-    spectator.click(SEL_NAV_FORWARD);
-    spectator.click(SEL_NAV_FORWARD);
-
-    verifyMonthAndYear('January 1998');
+      expect(nextMonthClickedSpy).toHaveBeenCalled();
+    });
   });
 
-  it('should emit the previousMonthClicked event, when navigating to a past month', () => {
-    const previousMonthClickedSpy = spyOn(spectator.component.previousMonthClicked, 'emit');
+  describe('dateChange', () => {
+    beforeEach(() => {
+      spectator = createHost('<kirby-calendar></kirby-calendar>');
+    });
 
-    expect(previousMonthClickedSpy).not.toHaveBeenCalled();
+    it('should emit a dateChange event when a valid date is clicked', () => {
+      const captured = captureDateChangeEvents();
+      spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
 
-    spectator.click(SEL_NAV_BACK);
+      clickDayOfMonth(14);
 
-    expect(previousMonthClickedSpy).toHaveBeenCalled();
+      expect(captured.event).toEqual(localMidnightDate('1997-08-14'));
+    });
+
+    it('should not emit a dateChange event when selectedDate is changed from the outside', () => {
+      const captured = captureDateChangeEvents();
+
+      spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+
+      expect(captured.event).toBeUndefined();
+    });
+
+    it('should not emit a dateChange event if disableWeekends is true and a weekend date is clicked', () => {
+      const captured = captureDateChangeEvents();
+      spectator.setInput('disableWeekends', true);
+      spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+
+      clickDayOfMonth(24); // August 24th is a Sunday
+
+      expect(captured.event).toBeUndefined();
+    });
+
+    it('should not emit a dateChange event if disablePastDates is true and a date in the past is clicked', () => {
+      const captured = captureDateChangeEvents();
+      spectator.setInput('disablePastDates', true);
+      spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+      spectator.setInput('todayDate', localMidnightDate('1997-08-29'));
+
+      clickDayOfMonth(1); // August 1st is in the past
+
+      expect(captured.event).toBeUndefined();
+    });
+
+    it('should not emit a dateChange event if disableFutureDates is true and a date in the future is clicked', () => {
+      const captured = captureDateChangeEvents();
+      spectator.setInput('disableFutureDates', true);
+      spectator.setInput('todayDate', localMidnightDate('1997-08-29'));
+      spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+
+      clickDayOfMonth(31); // August 31st is in the future
+
+      expect(captured.event).toBeUndefined();
+    });
+
+    it('should not emit a dateChange event if clicking a date that was passed in disabledDates', () => {
+      const captured = captureDateChangeEvents();
+      spectator.setInput('disabledDates', ['1997-08-25', '1997-08-26'].map(localMidnightDate));
+      spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+
+      clickDayOfMonth(26); // August 26st was explicitly disabled
+
+      expect(captured.event).toBeUndefined();
+    });
+
+    it('should not emit a dateChange event if clicking a date that was not passed in enabledDates', () => {
+      const captured = captureDateChangeEvents();
+      spectator.setInput('enabledDates', ['1997-08-25', '1997-08-26'].map(localMidnightDate));
+      spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+
+      clickDayOfMonth(27); // August 27st was implicitly disabled
+
+      expect(captured.event).toBeUndefined();
+    });
+
+    it('should emit a dateChange event if clicking a date that was passed in enabledDates', () => {
+      const captured = captureDateChangeEvents();
+      spectator.setInput('enabledDates', ['1997-08-25', '1997-08-26'].map(localMidnightDate));
+      spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+
+      clickDayOfMonth(26); // August 26st was explicitly enabled
+
+      expect(captured.event).toBeTruthy();
+    });
+
+    it('should not emit a dateChange event if clicking the already selected date', () => {
+      const captured = captureDateChangeEvents();
+      spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+
+      clickDayOfMonth(29);
+
+      expect(captured.event).toBeUndefined();
+    });
+
+    it('should always emit a dateChange event when clicking today if alwaysEnableToday is set to true', () => {
+      const captured = captureDateChangeEvents();
+      const today = localMidnightDate('1997-08-28');
+      spectator.setInput('disabledDates', [today]);
+      spectator.setInput('todayDate', today);
+      spectator.setInput('alwaysEnableToday', true);
+      spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+
+      clickDayOfMonth(28); // August 28th is was disabled but we override
+
+      expect(captured.event).toEqual(today);
+    });
+
+    it('should emit dateChange event as UTC midnights when timezone is set to UTC', () => {
+      const captured = captureDateChangeEvents();
+      spectator.setInput('timezone', 'UTC');
+      spectator.setInput('selectedDate', utcMidnightDate('1997-08-29'));
+
+      clickDayOfMonth(14);
+
+      expect(captured.event).toEqual(utcMidnightDate('1997-08-14'));
+    });
   });
 
-  it('should emit the nextMonthClicked event, when navigating to a future month', () => {
-    const nextMonthClickedSpy = spyOn(spectator.component.nextMonthClicked, 'emit');
+  describe('dateSelect', () => {
+    beforeEach(() => {
+      spectator = createHost('<kirby-calendar></kirby-calendar>');
+    });
 
-    expect(nextMonthClickedSpy).not.toHaveBeenCalled();
+    it('should emit dateSelect event when clicking a date that is not already selected', () => {
+      const captured = captureDateSelectEvents();
+      spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
 
-    spectator.click(SEL_NAV_FORWARD);
+      clickDayOfMonth(14);
 
-    expect(nextMonthClickedSpy).toHaveBeenCalled();
+      expect(captured.event).toEqual(localMidnightDate('1997-08-14'));
+    });
+
+    it('should emit dateSelect event when clicking the already selected date', () => {
+      const captured = captureDateSelectEvents();
+      spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+
+      clickDayOfMonth(29);
+
+      expect(captured.event).toEqual(localMidnightDate('1997-08-29'));
+    });
+
+    it('should emit dateSelect event as UTC midnights when timezone is set to UTC', () => {
+      const captured = captureDateSelectEvents();
+      spectator.setInput('timezone', 'UTC');
+      spectator.setInput('selectedDate', utcMidnightDate('1997-08-29'));
+
+      clickDayOfMonth(14);
+
+      expect(captured.event).toEqual(utcMidnightDate('1997-08-14'));
+    });
   });
 
-  it('should not be possible to navigate to any month preceding minDate, if specified', () => {
-    spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
-    spectator.setInput('minDate', localMidnightDate('1997-06-15'));
+  describe('UTC / local time', () => {
+    beforeEach(() => {
+      spectator = createHost('<kirby-calendar></kirby-calendar>');
+    });
 
-    spectator.click(SEL_NAV_BACK);
-    spectator.click(SEL_NAV_BACK);
+    it('should be tolerant of date input (selectedDate, todayDate, minDate, maxDate, disabledDates and enabledDates) as both UTC midnight and local time midnight', () => {
+      const localDate = localMidnightDate('1997-08-29');
+      const utcDate = utcMidnightDate('1997-08-29');
 
-    verifyMonthAndYear('June 1997');
-    expect(spectator.query(SEL_NAV_BACK)).toBeDisabled();
+      spectator.setInput('selectedDate', localDate);
+      expect(spectator.component.selectedDate).toEqual(localDate);
 
-    spectator.click(SEL_NAV_BACK);
+      spectator.setInput('selectedDate', utcDate);
+      expect(spectator.component.selectedDate).toEqual(localDate);
 
-    verifyMonthAndYear('June 1997');
+      spectator.setInput('todayDate', localDate);
+      expect(spectator.component.todayDate).toEqual(localDate);
+
+      spectator.setInput('todayDate', utcDate);
+      expect(spectator.component.todayDate).toEqual(localDate);
+
+      spectator.setInput('minDate', localDate);
+      expect(spectator.component.minDate).toEqual(localDate);
+
+      spectator.setInput('minDate', utcDate);
+      expect(spectator.component.minDate).toEqual(localDate);
+
+      spectator.setInput('maxDate', localDate);
+      expect(spectator.component.maxDate).toEqual(localDate);
+
+      spectator.setInput('maxDate', utcDate);
+      expect(spectator.component.maxDate).toEqual(localDate);
+
+      const localDates = ['1997-08-29', '1997-08-30'].map(localMidnightDate);
+      const utcDates = ['1997-08-29', '1997-08-30'].map(utcMidnightDate);
+
+      spectator.setInput('disabledDates', localDates);
+      expect(spectator.component.disabledDates).toEqual(localDates);
+
+      spectator.setInput('disabledDates', utcDates);
+      expect(spectator.component.disabledDates).toEqual(localDates);
+
+      spectator.setInput('enabledDates', localDates);
+      expect(spectator.component.enabledDates).toEqual(localDates);
+
+      spectator.setInput('enabledDates', utcDates);
+      expect(spectator.component.enabledDates).toEqual(localDates);
+    });
   });
 
-  it('should not be possible to navigate to any month exceeding maxDate, if specified', () => {
-    spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
-    spectator.setInput('maxDate', localMidnightDate('1997-10-01'));
+  describe('locales', () => {
+    describe('built-in locales', () => {
+      it('should have English as the default locale', () => {
+        spectator = createHostWithLocale();
 
-    spectator.click(SEL_NAV_FORWARD);
-    spectator.click(SEL_NAV_FORWARD);
+        spectator.setInput('selectedDate', localMidnightDate('2022-07-01'));
 
-    verifyMonthAndYear('October 1997');
-    expect(spectator.query(SEL_NAV_FORWARD)).toBeDisabled();
+        expect(
+          spectator
+            .queryAll('th')
+            .map((_) => _.textContent)
+            .join(' ')
+        ).toEqual('M T W T F S S');
+        expect(spectator.component.activeMonthName).toBe('July');
+      });
 
-    spectator.click(SEL_NAV_FORWARD);
+      it('should be possible to change the locale to Danish', () => {
+        spectator = createHostWithLocale('da');
 
-    verifyMonthAndYear('October 1997');
-  });
+        spectator.setInput('selectedDate', localMidnightDate('2022-07-01'));
 
-  it('should emit a dateChange event when a valid date is clicked', () => {
-    const captured = captureDateChangeEvents();
-    spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+        expect(
+          spectator
+            .queryAll('th')
+            .map((_) => _.textContent)
+            .join(' ')
+        ).toEqual('M T O T F L S');
+        expect(spectator.component.activeMonthName).toBe('Juli');
+      });
+    });
 
-    clickDayOfMonth(14);
+    describe('additional locales', () => {
+      it('should be possible to provide a locale that is not build into the calendar by default', () => {
+        spectator = createHostWithLocale('es', es);
 
-    expect(captured.event).toEqual(localMidnightDate('1997-08-14'));
-  });
+        spectator.setInput('selectedDate', localMidnightDate('2022-07-01'));
 
-  it('should not emit a dateChange event when selectedDate is changed from the outside', () => {
-    const captured = captureDateChangeEvents();
-
-    spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
-
-    expect(captured.event).toBeUndefined();
-  });
-
-  it('should not emit a dateChange event if disableWeekends is true and a weekend date is clicked', () => {
-    const captured = captureDateChangeEvents();
-    spectator.setInput('disableWeekends', true);
-    spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
-
-    clickDayOfMonth(24); // August 24th is a Sunday
-
-    expect(captured.event).toBeUndefined();
-  });
-
-  it('should not emit a dateChange event if disablePastDates is true and a date in the past is clicked', () => {
-    const captured = captureDateChangeEvents();
-    spectator.setInput('disablePastDates', true);
-    spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
-    spectator.setInput('todayDate', localMidnightDate('1997-08-29'));
-
-    clickDayOfMonth(1); // August 1st is in the past
-
-    expect(captured.event).toBeUndefined();
-  });
-
-  it('should not emit a dateChange event if disableFutureDates is true and a date in the future is clicked', () => {
-    const captured = captureDateChangeEvents();
-    spectator.setInput('disableFutureDates', true);
-    spectator.setInput('todayDate', localMidnightDate('1997-08-29'));
-    spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
-
-    clickDayOfMonth(31); // August 31st is in the future
-
-    expect(captured.event).toBeUndefined();
-  });
-
-  it('should not emit a dateChange event if clicking a date that was passed in disabledDates', () => {
-    const captured = captureDateChangeEvents();
-    spectator.setInput('disabledDates', ['1997-08-25', '1997-08-26'].map(localMidnightDate));
-    spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
-
-    clickDayOfMonth(26); // August 26st was explicitly disabled
-
-    expect(captured.event).toBeUndefined();
-  });
-
-  it('should not emit a dateChange event if clicking a date that was not passed in enabledDates', () => {
-    const captured = captureDateChangeEvents();
-    spectator.setInput('enabledDates', ['1997-08-25', '1997-08-26'].map(localMidnightDate));
-    spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
-
-    clickDayOfMonth(27); // August 27st was implicitly disabled
-
-    expect(captured.event).toBeUndefined();
-  });
-
-  it('should emit a dateChange event if clicking a date that was passed in enabledDates', () => {
-    const captured = captureDateChangeEvents();
-    spectator.setInput('enabledDates', ['1997-08-25', '1997-08-26'].map(localMidnightDate));
-    spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
-
-    clickDayOfMonth(26); // August 26st was explicitly enabled
-
-    expect(captured.event).toBeTruthy();
-  });
-
-  it('should not emit a dateChange event if clicking the already selected date', () => {
-    const captured = captureDateChangeEvents();
-    spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
-
-    clickDayOfMonth(29);
-
-    expect(captured.event).toBeUndefined();
-  });
-
-  it('should always emit a dateChange event when clicking today if alwaysEnableToday is set to true', () => {
-    const captured = captureDateChangeEvents();
-    const today = localMidnightDate('1997-08-28');
-    spectator.setInput('disabledDates', [today]);
-    spectator.setInput('todayDate', today);
-    spectator.setInput('alwaysEnableToday', true);
-    spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
-
-    clickDayOfMonth(28); // August 28th is was disabled but we override
-
-    expect(captured.event).toEqual(today);
-  });
-
-  it('should emit dateChange event as UTC midnights when timezone is set to UTC', () => {
-    const captured = captureDateChangeEvents();
-    spectator.setInput('timezone', 'UTC');
-    spectator.setInput('selectedDate', utcMidnightDate('1997-08-29'));
-
-    clickDayOfMonth(14);
-
-    expect(captured.event).toEqual(utcMidnightDate('1997-08-14'));
-  });
-
-  it('should emit dateSelect event when clicking a date that is not already selected', () => {
-    const captured = captureDateSelectEvents();
-    spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
-
-    clickDayOfMonth(14);
-
-    expect(captured.event).toEqual(localMidnightDate('1997-08-14'));
-  });
-
-  it('should emit dateSelect event when clicking the already selected date', () => {
-    const captured = captureDateSelectEvents();
-    spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
-
-    clickDayOfMonth(29);
-
-    expect(captured.event).toEqual(localMidnightDate('1997-08-29'));
-  });
-
-  it('should emit dateSelect event as UTC midnights when timezone is set to UTC', () => {
-    const captured = captureDateSelectEvents();
-    spectator.setInput('timezone', 'UTC');
-    spectator.setInput('selectedDate', utcMidnightDate('1997-08-29'));
-
-    clickDayOfMonth(14);
-
-    expect(captured.event).toEqual(utcMidnightDate('1997-08-14'));
-  });
-
-  it('should be tolerant of date input (selectedDate, todayDate, minDate, maxDate, disabledDates and enabledDates) as both UTC midnight and local time midnight', () => {
-    const localDate = localMidnightDate('1997-08-29');
-    const utcDate = utcMidnightDate('1997-08-29');
-
-    spectator.setInput('selectedDate', localDate);
-    expect(spectator.component.selectedDate).toEqual(localDate);
-
-    spectator.setInput('selectedDate', utcDate);
-    expect(spectator.component.selectedDate).toEqual(localDate);
-
-    spectator.setInput('todayDate', localDate);
-    expect(spectator.component.todayDate).toEqual(localDate);
-
-    spectator.setInput('todayDate', utcDate);
-    expect(spectator.component.todayDate).toEqual(localDate);
-
-    spectator.setInput('minDate', localDate);
-    expect(spectator.component.minDate).toEqual(localDate);
-
-    spectator.setInput('minDate', utcDate);
-    expect(spectator.component.minDate).toEqual(localDate);
-
-    spectator.setInput('maxDate', localDate);
-    expect(spectator.component.maxDate).toEqual(localDate);
-
-    spectator.setInput('maxDate', utcDate);
-    expect(spectator.component.maxDate).toEqual(localDate);
-
-    const localDates = ['1997-08-29', '1997-08-30'].map(localMidnightDate);
-    const utcDates = ['1997-08-29', '1997-08-30'].map(utcMidnightDate);
-
-    spectator.setInput('disabledDates', localDates);
-    expect(spectator.component.disabledDates).toEqual(localDates);
-
-    spectator.setInput('disabledDates', utcDates);
-    expect(spectator.component.disabledDates).toEqual(localDates);
-
-    spectator.setInput('enabledDates', localDates);
-    expect(spectator.component.enabledDates).toEqual(localDates);
-
-    spectator.setInput('enabledDates', utcDates);
-    expect(spectator.component.enabledDates).toEqual(localDates);
-  });
-
-  it('should render days from Monday to Sunday', () => {
-    expect(
-      spectator
-        .queryAll('th')
-        .map((_) => _.textContent)
-        .join(' ')
-    ).toEqual('M T W T F S S');
+        expect(
+          spectator
+            .queryAll('th')
+            .map((_) => _.textContent)
+            .join(' ')
+        ).toEqual('l m m j v s d');
+        expect(spectator.component.activeMonthName).toBe('Julio');
+      });
+    });
   });
 
   describe('active month', () => {
     let todayDate: Date;
 
     beforeEach(() => {
-      todayDate = new Date(2021, 0, 1);
+      spectator = createHost('<kirby-calendar></kirby-calendar>');
 
+      todayDate = new Date(2021, 0, 1);
       spectator.setInput('todayDate', todayDate);
       spectator.setInput('selectedDate', todayDate);
     });
@@ -410,6 +504,10 @@ describe('CalendarComponent', () => {
   });
 
   describe('year navigator', () => {
+    beforeEach(() => {
+      spectator = createHost('<kirby-calendar></kirby-calendar>');
+    });
+
     describe('by default', () => {
       it('should not render', () => {
         expect(spectator.element.querySelector('kirby-dropdown')).toBeNull();
@@ -529,5 +627,26 @@ describe('CalendarComponent', () => {
     const captured: { event?: number } = {};
     spectator.output<number>('yearSelect').subscribe((result) => (captured.event = result));
     return captured;
+  }
+
+  function createHostWithLocale(selectedLocale: string = '', additionalLocale?: Locale) {
+    const overrides = {
+      providers: [
+        {
+          provide: LOCALE_ID,
+          useValue: selectedLocale,
+        },
+      ],
+    };
+
+    if (additionalLocale) {
+      overrides['props'] = {
+        locales: {
+          [selectedLocale]: additionalLocale,
+        },
+      };
+    }
+
+    return createHost(`<kirby-calendar></kirby-calendar>`, overrides);
   }
 });

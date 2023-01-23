@@ -1,0 +1,89 @@
+@use '@kirbydesign/core/src/scss/interaction-state';
+@use '@kirbydesign/core/src/scss/utils';
+@use '@kirbydesign/core/src/scss/themes';
+
+:host {
+  --kirby-card-main-background-color: #{utils.get-color('white')};
+  --kirby-card-main-color: #{utils.get-color('white-contrast')};
+  --kirby-card-footer-background-color: #{utils.get-color('white')};
+  --kirby-card-footer-color: #{utils.get-color('white-contrast')};
+
+  @include themes.apply-white-theme;
+
+  &.kirby-color-brightness-light {
+    @include themes.apply-light-theme;
+  }
+
+  &.kirby-color-brightness-dark {
+    @include themes.apply-dark-theme;
+  }
+
+  @include interaction-state.extend-content {
+    display: inherit;
+    flex-direction: inherit;
+    justify-content: inherit;
+  }
+
+  border-radius: utils.$border-radius;
+  box-shadow: utils.get-elevation(2);
+  color: var(--kirby-card-main-color);
+  background-color: var(--kirby-card-main-background-color);
+  background-image: var(--kirby-card-background-image);
+  background-repeat: var(--kirby-card-background-repeat, no-repeat);
+  background-position: var(--kirby-card-background-position, center);
+  background-size: var(--kirby-card-background-size, cover);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  position: relative;
+  z-index: utils.z('default');
+  width: var(--kirby-card-width, auto);
+
+  .content-wrapper {
+    &.padding {
+      padding-top: var(--kirby-card-padding-top, utils.size('s'));
+      padding-bottom: var(--kirby-card-padding-bottom, utils.size('s'));
+      padding-inline: utils.size('s');
+    }
+  }
+
+  &.highlighted {
+    box-shadow: utils.get-elevation(4);
+  }
+
+  &.flat {
+    box-shadow: none;
+  }
+
+  &[role='button'] {
+    @include interaction-state.initialize-layer;
+    @include interaction-state.apply-hover('xxxs');
+    @include interaction-state.apply-active('xxs');
+    @include interaction-state.apply-focus-visible($shadow: utils.get-elevation(2));
+
+    &.highlighted {
+      @include interaction-state.apply-focus-visible($shadow: utils.get-elevation(4));
+    }
+
+    &.interaction-state-make-lighter-and-louder {
+      @include interaction-state.apply-hover('xxs', $make-lighter: true);
+      @include interaction-state.apply-active('s', $make-lighter: true);
+    }
+
+    outline: none;
+  }
+}
+
+:host-context(.swiper-slide-active) {
+  box-shadow: utils.get-elevation(4);
+  transition: all 0.5s;
+  transform: translateY(-3px);
+}
+
+@each $color-name, $color-value in utils.$main-colors {
+  :host(.#{$color-name}) {
+    --kirby-card-main-background-color: #{utils.get-color($color-name)};
+    --kirby-card-main-color: #{utils.get-color($color-name + '-contrast')};
+  }
+}

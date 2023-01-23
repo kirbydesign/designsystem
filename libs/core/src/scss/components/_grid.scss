@@ -60,6 +60,66 @@ $breakpoint-map: (
     --kirby-grid-column-spacing: #{utils.size('xl')};
     --kirby-grid-row-spacing: #{utils.size('xl')};
   }
+
+  &[row-spacing='0'],
+  &[data-row-spacing='0'] {
+    --kirby-grid-row-spacing: 0px;
+  }
+
+  &[row-spacing='1'],
+  &[data-row-spacing='1'] {
+    --kirby-grid-row-spacing: #{utils.size('xxs')};
+  }
+
+  &[row-spacing='2'],
+  &[data-row-spacing='2'] {
+    --kirby-grid-row-spacing: #{utils.size('s')};
+  }
+
+  &[row-spacing='3'],
+  &[data-row-spacing='3'] {
+    --kirby-grid-row-spacing: #{utils.size('m')};
+  }
+
+  &[row-spacing='4'],
+  &[data-row-spacing='4'] {
+    --kirby-grid-row-spacing: #{utils.size('l')};
+  }
+
+  &[row-spacing='5'],
+  &[data-row-spacing='5'] {
+    --kirby-grid-row-spacing: #{utils.size('xl')};
+  }
+
+  &[column-spacing='0'],
+  &[data-column-spacing='0'] {
+    --kirby-grid-column-spacing: 0px;
+  }
+
+  &[column-spacing='1'],
+  &[data-column-spacing='1'] {
+    --kirby-grid-column-spacing: #{utils.size('xxs')};
+  }
+
+  &[column-spacing='2'],
+  &[data-column-spacing='2'] {
+    --kirby-grid-column-spacing: #{utils.size('s')};
+  }
+
+  &[column-spacing='3'],
+  &[data-column-spacing='3'] {
+    --kirby-grid-column-spacing: #{utils.size('m')};
+  }
+
+  &[column-spacing='4'],
+  &[data-column-spacing='4'] {
+    --kirby-grid-column-spacing: #{utils.size('l')};
+  }
+
+  &[column-spacing='5'],
+  &[data-column-spacing='5'] {
+    --kirby-grid-column-spacing: #{utils.size('xl')};
+  }
 }
 
 @mixin column-style($breakpoint, $size) {

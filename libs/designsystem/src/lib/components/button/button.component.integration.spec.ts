@@ -3,24 +3,17 @@ import { IonIcon } from '@ionic/angular';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponent, MockComponents } from 'ng-mocks';
 
-import { DesignTokenHelper } from '@kirbydesign/core';
+import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
+import { TestHelper } from '@kirbydesign/designsystem/testing';
+import { WindowRef } from '@kirbydesign/designsystem/types';
+import { CardComponent } from '@kirbydesign/designsystem/card';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { FitHeadingDirective } from '../../directives/fit-heading/fit-heading.directive';
-import { TestHelper } from '../../testing/test-helper';
-import { WindowRef } from '../../types/window-ref';
-import { CardComponent } from '../card/card.component';
 import { DropdownComponent } from '../dropdown/dropdown.component';
 import { EmptyStateComponent } from '../empty-state/empty-state.component';
-import { IconComponent } from '../icon/icon.component';
-import { ItemComponent } from '../item/item.component';
-import {
-  PageActionsComponent,
-  PageActionsDirective,
-  PageComponent,
-  PageContentComponent,
-  PageTitleDirective,
-  PageToolbarTitleDirective,
-} from '../page/page.component';
+import { PageActionsDirective, PageComponent, PageTitleDirective } from '../page/page.component';
 
 import { ButtonComponent } from './button.component';
 
@@ -32,16 +25,8 @@ describe('ButtonComponent in Kirby Page', () => {
   let spectator: SpectatorHost<PageComponent>;
   const createHost = createHostFactory({
     component: PageComponent,
-    imports: [TestHelper.ionicModuleForTest, RouterTestingModule],
-    declarations: [
-      ButtonComponent,
-      PageContentComponent,
-      PageActionsComponent,
-      PageActionsDirective,
-      PageTitleDirective,
-      PageToolbarTitleDirective,
-      FitHeadingDirective,
-    ],
+    imports: [TestHelper.ionicModuleForTest, RouterTestingModule, ButtonComponent],
+    declarations: [PageActionsDirective, PageTitleDirective, FitHeadingDirective],
     providers: [
       {
         provide: WindowRef,
@@ -112,15 +97,6 @@ describe('ButtonComponent in Kirby Page', () => {
       });
     });
 
-    it('should render with transparent border', async () => {
-      await TestHelper.whenReady(ionToolbar);
-      expect(actionButtonInHeader).toHaveComputedStyle({
-        'border-width': '1px',
-        'border-style': 'solid',
-        'border-color': 'transparent',
-      });
-    });
-
     it('should render with correct size', () => {
       expect(actionButtonInHeader).toHaveComputedStyle({
         width: 'auto',
@@ -151,7 +127,7 @@ describe('ButtonComponent in Kirby Page', () => {
     it('should render with correct background-color', async () => {
       await TestHelper.whenReady(ionContent);
       expect(actionButtonInPage).toHaveComputedStyle({
-        'background-color': 'transparent',
+        'background-color': getColor('white'),
       });
     });
 
@@ -159,15 +135,6 @@ describe('ButtonComponent in Kirby Page', () => {
       await TestHelper.whenReady(ionContent);
       expect(actionButtonInPage).toHaveComputedStyle({
         color: getColor('white', 'contrast'),
-      });
-    });
-
-    it('should render with transparent border', async () => {
-      await TestHelper.whenReady(ionContent);
-      expect(actionButtonInPage).toHaveComputedStyle({
-        'border-width': '1px',
-        'border-style': 'solid',
-        'border-color': getColor('medium'),
       });
     });
   });
@@ -192,15 +159,6 @@ describe('ButtonComponent in Kirby Page', () => {
       });
     });
 
-    it('should render with transparent border', async () => {
-      await TestHelper.whenReady(ionContent);
-      expect(normalButtonInPage).toHaveComputedStyle({
-        'border-width': '1px',
-        'border-style': 'solid',
-        'border-color': 'transparent',
-      });
-    });
-
     it('should render with correct color', async () => {
       await TestHelper.whenReady(ionContent);
       expect(normalButtonInPage).toHaveComputedStyle({
@@ -215,8 +173,8 @@ describe('ButtonComponent in kirby empty state', () => {
   let actionButtonInEmptyState: HTMLButtonElement;
   const createHost = createHostFactory({
     component: EmptyStateComponent,
-    imports: [TestHelper.ionicModuleForTest, RouterTestingModule],
-    declarations: [ButtonComponent, IconComponent],
+    imports: [TestHelper.ionicModuleForTest, RouterTestingModule, ButtonComponent],
+    declarations: [IconComponent],
   });
 
   beforeEach(() => {

@@ -1,0 +1,24 @@
+@use '@kirbydesign/core/src/scss/utils';
+
+:host {
+  display: block;
+  padding: utils.size('s');
+  padding: 0;
+  border-bottom-left-radius: inherit;
+  border-bottom-right-radius: inherit;
+  overflow: hidden;
+
+  // backface-visibility and transform, to fix clipping issue
+  // on Safari see https://stackoverflow.com/a/16681137
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+
+  &.has-padding {
+    padding: utils.size('s');
+  }
+}
+
+footer {
+  display: inherit;
+  flex: inherit;
+}

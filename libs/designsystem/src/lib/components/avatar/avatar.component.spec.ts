@@ -2,9 +2,9 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { ColorHelper, DesignTokenHelper, ThemeColorExtended } from '@kirbydesign/core';
 
-import { ThemeColorDirective } from '../../directives';
-import { TestHelper } from '../../testing/test-helper';
-import { IconComponent } from '../icon/icon.component';
+import { TestHelper } from '@kirbydesign/designsystem/testing';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
+import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import { ProgressCircleRingComponent } from '../progress-circle/progress-circle-ring.component';
 import { ProgressCircleComponent } from '../progress-circle/progress-circle.component';
 
@@ -19,13 +19,13 @@ describe('AvatarComponent', () => {
 
   const createHost = createHostFactory({
     component: AvatarComponent,
-    declarations: [
-      IconComponent,
+    declarations: [IconComponent],
+    imports: [
+      TestHelper.ionicModuleForTest,
       ThemeColorDirective,
       ProgressCircleComponent,
       ProgressCircleRingComponent,
     ],
-    imports: [TestHelper.ionicModuleForTest],
   });
 
   it('should create', () => {
@@ -184,8 +184,12 @@ describe('AvatarComponent', () => {
 
   describe(`when rendering Avatar with themeColor`, () => {
     const colors = [
-      ...ColorHelper.mainColors,
+      ...ColorHelper.notificationColors,
+      ...ColorHelper.brandColors,
+      DesignTokenHelper.getColor('medium'),
       DesignTokenHelper.getColor('white'),
+      DesignTokenHelper.getColor('dark'),
+      DesignTokenHelper.getColor('light'),
       DesignTokenHelper.getColor('semi-light'),
     ];
     colors.forEach((color) => {

@@ -1,9 +1,15 @@
+@use 'sass:map';
 @use '@kirbydesign/core/src/scss/interaction-state';
 @use '@kirbydesign/core/src/scss/utils';
 
 $ion-content-padding-top: utils.size('xs');
-$ion-content-padding-start: var(--page-content-padding-start, #{utils.size('s')});
-$ion-content-padding-end: var(--page-content-padding-end, #{utils.size('s')});
+$breakpoint-map: (
+  'xs': 0,
+  'sm': 632px,
+  'md': 768px,
+  'lg': 992px,
+  'xl': 1200px,
+);
 
 /*
  * Page Header
@@ -13,12 +19,6 @@ ion-toolbar {
   --background: #{utils.get-color('background-color')};
 
   margin: 0 auto;
-
-  @include utils.media('>=large') {
-    @include utils.not-touch {
-      max-width: 768px;
-    }
-  }
 }
 
 ion-toolbar {
@@ -219,10 +219,27 @@ ion-back-button {
  */
 ion-content {
   --padding-top: #{$ion-content-padding-top};
-  --padding-start: #{$ion-content-padding-start};
-  --padding-end: #{$ion-content-padding-end};
+  --padding-start: var(--page-content-padding-start, #{utils.size('s')});
+  --padding-end: var(--page-content-padding-end, #{utils.size('s')});
   --background: #{utils.get-color('background-color')};
   --color: #{utils.get-color('black')};
+
+  @media (min-width: map.get($breakpoint-map, 'sm')) {
+    --padding-start: var(--page-content-padding-start, #{utils.size('xxl')});
+    --padding-end: var(--page-content-padding-end, #{utils.size('xxl')});
+  }
+
+  &.max-width-standard {
+    --page-content-max-width: 792px;
+  }
+
+  &.max-width-optimized {
+    --page-content-max-width: 1092px;
+  }
+
+  &.max-width-full {
+    --page-content-max-width: 100%;
+  }
 
   .content-inner {
     max-width: var(--page-content-max-width, utils.$page-content-max-width);
@@ -264,13 +281,27 @@ ion-content {
   }
 
   &.content-pinned::before {
+    // Background
+    content: '';
+    position: absolute;
+
+    // Adjust for padding of ion-content to stretch divider to full width.
+    left: calc(-1 * var(--padding-start));
+    right: calc(-1 * var(--padding-end));
+    bottom: 0;
+    top: 0;
+    z-index: 0;
+    background-color: var(--kirby-background-color);
+  }
+
+  &.content-pinned::after {
     // Divider
     content: '';
     position: absolute;
 
     // Adjust for padding of ion-content to stretch divider to full width.
-    left: calc(-1 * $ion-content-padding-start);
-    right: calc(-1 * $ion-content-padding-end);
+    left: calc(-1 * var(--padding-start));
+    right: calc(-1 * var(--padding-end));
     bottom: 0;
     height: 1px;
     z-index: 1;

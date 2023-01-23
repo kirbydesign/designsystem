@@ -1,5 +1,5 @@
+import { ColorHelper } from '@kirbydesign/designsystem/helpers';
 import { ChartConfiguration, ChartType } from 'chart.js';
-import { ColorHelper } from '../../../../helpers';
 import { ChartLocale } from '../../shared';
 
 import { ChartBaseConfig } from '../chart-base-config';

@@ -9,12 +9,15 @@ import { IonItem } from '@ionic/angular';
 import { createHostFactory, Spectator, SpectatorHost } from '@ngneat/spectator';
 import { MockComponents } from 'ng-mocks';
 
-import { ButtonComponent, CardComponent, IconComponent, ItemComponent } from '..';
-import { DesignTokenHelper } from '../../helpers';
-import { TestHelper } from '../../testing/test-helper';
-import { ListItemTemplateDirective } from '../list';
-import { HorizontalDirection, PopoverComponent } from '../popover/popover.component';
+import { CardComponent } from '@kirbydesign/designsystem/card';
 
+import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
+import { HorizontalDirection, PopoverComponent } from '@kirbydesign/designsystem/popover';
+import { ListItemTemplateDirective } from '../list';
+
+import { ButtonComponent } from '../button/button.component';
 import { DropdownComponent } from './dropdown.component';
 import { OpenState } from './dropdown.types';
 

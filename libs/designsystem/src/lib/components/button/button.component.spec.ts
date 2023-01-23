@@ -1,8 +1,8 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponent } from 'ng-mocks';
 
-import { DesignTokenHelper } from '../../helpers/design-token-helper';
-import { IconComponent } from '../icon/icon.component';
+import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 
 import { ButtonComponent, ButtonSize } from './button.component';
 
@@ -35,14 +35,6 @@ describe('ButtonComponent', () => {
 
     it('should render with correct color', () => {
       expect(element).toHaveComputedStyle({ color: getColor('primary', 'contrast') });
-    });
-
-    it('should render with transparent border', () => {
-      expect(element).toHaveComputedStyle({
-        'border-width': '1px',
-        'border-style': 'solid',
-        'border-color': 'transparent',
-      });
     });
 
     it('should render without outline', () => {
@@ -93,14 +85,6 @@ describe('ButtonComponent', () => {
           color: getColor('semi-dark', 'shade'),
         });
       });
-
-      it('should render with transparent border', () => {
-        expect(element).toHaveComputedStyle({
-          'border-width': '1px',
-          'border-style': 'solid',
-          'border-color': 'transparent',
-        });
-      });
     });
 
     describe('when configured with attentionlevel 1', () => {
@@ -118,41 +102,6 @@ describe('ButtonComponent', () => {
       it('should render with correct color', () => {
         expect(element).toHaveComputedStyle({
           color: getColor('primary', 'contrast'),
-        });
-      });
-
-      it('should render with transparent border', () => {
-        expect(element).toHaveComputedStyle({
-          'border-width': '1px',
-          'border-style': 'solid',
-          'border-color': 'transparent',
-        });
-      });
-
-      describe('and is destructive', () => {
-        beforeEach(() => {
-          spectator.component.isDestructive = true;
-          spectator.detectChanges();
-        });
-
-        it('should render with correct background-color', () => {
-          expect(element).toHaveComputedStyle({
-            'background-color': getColor('danger'),
-          });
-        });
-
-        it('should render with correct color', () => {
-          expect(element).toHaveComputedStyle({
-            color: getColor('danger', 'contrast'),
-          });
-        });
-
-        it('should render with transparent border', () => {
-          expect(element).toHaveComputedStyle({
-            'border-width': '1px',
-            'border-style': 'solid',
-            'border-color': 'transparent',
-          });
         });
       });
     });
@@ -174,41 +123,6 @@ describe('ButtonComponent', () => {
           color: getColor('black', 'contrast'),
         });
       });
-
-      it('should render with transparent border', () => {
-        expect(element).toHaveComputedStyle({
-          'border-width': '1px',
-          'border-style': 'solid',
-          'border-color': 'transparent',
-        });
-      });
-
-      describe('and is destructive', () => {
-        beforeEach(() => {
-          spectator.component.isDestructive = true;
-          spectator.detectChanges();
-        });
-
-        it('should render with correct background-color', () => {
-          expect(element).toHaveComputedStyle({
-            'background-color': getColor('light'),
-          });
-        });
-
-        it('should render with correct color', () => {
-          expect(element).toHaveComputedStyle({
-            color: getColor('danger'),
-          });
-        });
-
-        it('should render with transparent border', () => {
-          expect(element).toHaveComputedStyle({
-            'border-width': '1px',
-            'border-style': 'solid',
-            'border-color': 'transparent',
-          });
-        });
-      });
     });
 
     describe('when configured with attentionlevel 3', () => {
@@ -217,58 +131,13 @@ describe('ButtonComponent', () => {
         spectator.detectChanges();
       });
 
-      it('should render with no background-color', () => {
-        expect(element).toHaveComputedStyle({ 'background-color': 'transparent' });
-      });
-
-      it('should render with correct border', () => {
-        expect(element).toHaveComputedStyle({
-          'border-color': getColor('medium'),
-          'border-width': '1px',
-          'border-style': 'solid',
-        });
+      it('should render with correct background-color', () => {
+        expect(element).toHaveComputedStyle({ 'background-color': getColor('white') });
       });
 
       it('should render with correct color', () => {
         expect(element).toHaveComputedStyle({
           color: getColor('black'),
-        });
-      });
-
-      describe('and is destructive', () => {
-        beforeEach(() => {
-          spectator.component.isDestructive = true;
-          spectator.detectChanges();
-        });
-
-        it('should render with correct background-color', () => {
-          expect(element).toHaveComputedStyle({ 'background-color': 'transparent' });
-        });
-
-        it('should render with correct border-color', () => {
-          expect(element).toHaveComputedStyle({
-            'border-color': getColor('medium'),
-          });
-        });
-
-        it('should render with correct color', () => {
-          expect(element).toHaveComputedStyle({
-            color: getColor('danger'),
-          });
-        });
-      });
-
-      describe('and is disabled', () => {
-        beforeEach(() => {
-          element.disabled = true;
-        });
-
-        it('should render with transparent border', () => {
-          expect(element).toHaveComputedStyle({
-            'border-width': '1px',
-            'border-style': 'solid',
-            'border-color': 'transparent',
-          });
         });
       });
     });
@@ -279,58 +148,13 @@ describe('ButtonComponent', () => {
         spectator.detectChanges();
       });
 
-      it('should render with no background-color', () => {
-        expect(element).toHaveComputedStyle({ 'background-color': 'transparent' });
-      });
-
-      it('should render with correct border', () => {
-        expect(element).toHaveComputedStyle({
-          'border-color': getColor('medium'),
-          'border-width': '1px',
-          'border-style': 'solid',
-        });
+      it('should render with correct background-color', () => {
+        expect(element).toHaveComputedStyle({ 'background-color': getColor('white') });
       });
 
       it('should render with correct color', () => {
         expect(element).toHaveComputedStyle({
           color: getColor('black'),
-        });
-      });
-
-      describe('and is destructive', () => {
-        beforeEach(() => {
-          spectator.component.isDestructive = true;
-          spectator.detectChanges();
-        });
-
-        it('should render with correct background-color', () => {
-          expect(element).toHaveComputedStyle({ 'background-color': 'transparent' });
-        });
-
-        it('should render with correct border-color', () => {
-          expect(element).toHaveComputedStyle({
-            'border-color': getColor('medium'),
-          });
-        });
-
-        it('should render with correct color', () => {
-          expect(element).toHaveComputedStyle({
-            color: getColor('danger'),
-          });
-        });
-      });
-
-      describe('and is disabled', () => {
-        beforeEach(() => {
-          element.disabled = true;
-        });
-
-        it('should render with transparent border', () => {
-          expect(element).toHaveComputedStyle({
-            'border-width': '1px',
-            'border-style': 'solid',
-            'border-color': 'transparent',
-          });
         });
       });
     });
@@ -345,40 +169,9 @@ describe('ButtonComponent', () => {
         expect(element).toHaveComputedStyle({ 'background-color': 'transparent' });
       });
 
-      it('should render with transparent border', () => {
-        expect(element).toHaveComputedStyle({
-          'border-width': '1px',
-          'border-style': 'solid',
-          'border-color': 'transparent',
-        });
-      });
-
       it('should render with correct color', () => {
         expect(element).toHaveComputedStyle({
           color: getColor('black'),
-        });
-      });
-
-      describe('and is destructive', () => {
-        beforeEach(() => {
-          spectator.component.isDestructive = true;
-          spectator.detectChanges();
-        });
-
-        it('should render with no background-color', () => {
-          expect(element).toHaveComputedStyle({ 'background-color': 'transparent' });
-        });
-
-        it('should render with transparent border', () => {
-          expect(element).toHaveComputedStyle({
-            'border-width': '1px',
-            'border-style': 'solid',
-            'border-color': 'transparent',
-          });
-        });
-
-        it('should render with correct color', () => {
-          expect(element).toHaveComputedStyle({ color: getColor('danger') });
         });
       });
     });

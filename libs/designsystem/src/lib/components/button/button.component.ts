@@ -10,7 +10,7 @@ import {
 
 import { NotificationColor } from '@kirbydesign/core';
 
-import { IconComponent } from '../icon/icon.component';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
 
 export enum ButtonSize {
   SM = 'sm',
@@ -22,6 +22,7 @@ const ATTENTION_LEVEL_4_DEPRECATION_WARNING =
   'Deprecation warning: The "kirby-button" support for using input property "attentionLevel" with the value "4" will be removed in a future release of Kirby designsystem. While deprecated, all attention-level 4 buttons will be rendered as attention-level 3.';
 
 @Component({
+  standalone: true,
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'button[kirby-button],Button[kirby-button]',
   templateUrl: './button.component.html',
@@ -54,9 +55,6 @@ export class ButtonComponent implements AfterContentInit {
     this.isAttentionLevel3 = false;
   }
 
-  @HostBinding('class.destructive')
-  destructive: boolean = false; // Default
-
   @HostBinding('class.floating')
   public get isButtonFloating(): boolean {
     return this.isFloating;
@@ -80,10 +78,6 @@ export class ButtonComponent implements AfterContentInit {
   @HostBinding('class')
   get _cssClass() {
     return [this.themeColor, this.size].filter((cssClass) => !!cssClass);
-  }
-
-  @Input() set isDestructive(state: boolean) {
-    this.destructive = state;
   }
 
   @Input()

@@ -1,0 +1,15 @@
+<div class="overlay-wrapper">
+  <div
+    *ngIf="isLoading"
+    [ngClass]="{
+      backdrop: showBackdrop && !hideContent,
+      'hide-content': hideContent
+    }"
+    class="spinner-wrapper"
+  >
+    <kirby-spinner class="spinner"></kirby-spinner>
+  </div>
+  <div class="content-wrapper">
+    <ng-content></ng-content>
+  </div>
+</div>

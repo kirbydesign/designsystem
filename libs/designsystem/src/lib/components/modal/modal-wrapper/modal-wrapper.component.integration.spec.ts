@@ -1,9 +1,7 @@
 import { RouterTestingModule } from '@angular/router/testing';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
-import { MockComponents } from 'ng-mocks';
 
-import { TestHelper } from '../../../testing/test-helper';
+import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { PageProgressComponent, PageTitleComponent } from '../../page';
 import { ModalFooterComponent } from '../footer/modal-footer.component';
 
@@ -20,9 +18,8 @@ import {
 describe('ModalWrapperComponent + ModalFooterComponent', () => {
   const createComponent = createComponentFactory({
     component: ModalWrapperComponent,
-    imports: [RouterTestingModule],
+    imports: [RouterTestingModule, ModalFooterComponent],
     entryComponents: [StaticFooterEmbeddedComponent, DynamicFooterEmbeddedComponent],
-    declarations: [MockComponents(IonHeader, IonContent), ModalFooterComponent],
   });
 
   let modalWrapperTestBuilder: ModalWrapperTestBuilder;
@@ -225,7 +222,7 @@ describe('ModalWrapperComponent + PageTitleComponent', () => {
     component: ModalWrapperComponent,
     imports: [RouterTestingModule],
     entryComponents: [TitleEmbeddedComponent],
-    declarations: [MockComponents(IonHeader, IonTitle, IonContent), PageTitleComponent],
+    declarations: [PageTitleComponent],
   });
 
   let modalWrapperTestBuilder: ModalWrapperTestBuilder;
@@ -283,7 +280,7 @@ describe('ModalWrapperComponent + PageProgressComponent', () => {
     component: ModalWrapperComponent,
     imports: [RouterTestingModule],
     entryComponents: [StaticPageProgressEmbeddedComponent, DynamicPageProgressEmbeddedComponent],
-    declarations: [MockComponents(IonHeader, IonToolbar, IonContent), PageProgressComponent],
+    declarations: [PageProgressComponent],
   });
 
   let modalWrapperTestBuilder: ModalWrapperTestBuilder;
@@ -344,7 +341,7 @@ describe('ModalWrapperComponent + PageProgressComponent', () => {
       });
 
       it('should remove embedded page progress content from wrapper component when not rendered', async () => {
-        let pageProgress = spectator.element.querySelector('kirby-page-progress');
+        const pageProgress = spectator.element.querySelector('kirby-page-progress');
         expect(pageProgress).toBeNull();
 
         const embeddedComponent = spectator.query(DynamicPageProgressEmbeddedComponent);

@@ -31,13 +31,13 @@ import { PageFitHeadingExampleComponent } from './page-example/fit-heading/fit-h
 import { PageFixedFooterTabsExampleComponent } from './page-example/fixed-footer-tabs/fixed-footer-tabs-example.component';
 import { PageFixedFooterTabExampleComponent } from './page-example/fixed-footer-tabs/tab/fixed-footer-tab-example.component';
 import { PageFixedTitleAndActionsExampleComponent } from './page-example/fixed-title-and-actions/page-fixed-title-and-actions-example.component';
+import { PageContentWidthExampleComponent } from './page-example/content-width/page-content-width-example.component';
 import { PageSimpleExampleComponent } from './page-example/simple/page-simple-example.component';
 import { ProgressCircleExampleComponent } from './progress-circle-example/progress-circle-example.component';
 import { ReorderListExampleComponent } from './reorder-list-example/reorder-list-example.component';
 import { SectionHeaderExampleComponent } from './section-header-example/section-header-example.component';
 import { SegmentedControlExampleComponent } from './segmented-control-example/segmented-control-example.component';
 import { SlideButtonExampleComponent } from './slide-button-example/slide-button-example.component';
-import { CookbookExampleCardContentComponent } from './slides-example/example-card-content';
 import { SlidesExampleComponent } from './slides-example/slides-example.component';
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
 import { StylingHtmlListsExampleComponent } from './styling-html-lists-example/styling-html-lists-example.component';
@@ -48,6 +48,7 @@ import { ToggleExampleComponent } from './toggle-example/toggle-example.componen
 import { PagePullToRefreshExampleComponent } from './page-example/pull-to-refresh/page-pull-to-refresh-example.component';
 import { DropdownExampleComponent } from './dropdown-example/dropdown-example.component';
 import { DataTableExampleComponent } from './data-table-example/data-table-example.component';
+import { LoadingOverlayServiceExampleComponent } from './loading-overlay-example/service/loading-overlay-service-example.component';
 
 export const COMPONENT_DECLARATIONS: any[] = [
   ExamplesComponent,
@@ -72,9 +73,11 @@ export const COMPONENT_DECLARATIONS: any[] = [
   ToggleExampleComponent,
   EmptyStateExampleComponent,
   LoadingOverlayExampleComponent,
+  LoadingOverlayServiceExampleComponent,
   FabSheetExampleComponent,
   FormFieldExampleComponent,
   PageSimpleExampleComponent,
+  PageContentWidthExampleComponent,
   PageAlignmentAndToolbarTitleExampleComponent,
   PageCustomTitleExampleComponent,
   PageAdvancedExampleComponent,
@@ -92,7 +95,6 @@ export const COMPONENT_DECLARATIONS: any[] = [
   ProgressCircleExampleComponent,
   FlagExampleComponent,
   SlidesExampleComponent,
-  CookbookExampleCardContentComponent,
   AccordionExampleComponent,
   LinkExampleComponent,
   PagePullToRefreshExampleComponent,
