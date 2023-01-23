@@ -14,7 +14,7 @@ import {
 import { Component, HostListener, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { ListItemTemplateDirective } from '../../list/list.directive';
+// import { ListItemTemplateDirective } from '../../list/list.directive';
 import { RadioComponent } from '../radio.component';
 
 @Component({

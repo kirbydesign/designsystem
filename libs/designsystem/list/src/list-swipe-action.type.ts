@@ -1,7 +1,11 @@
-import {
-  ItemSwipeAction,
-  ItemSlidingSide as ListSwipeDirection,
-} from '../item-sliding/item-sliding.types';
+// import {
+//   ItemSwipeAction,
+//   ItemSlidingSide as ListSwipeDirection,
+// } from '../item-sliding/item-sliding.types';
+
+import { ItemSwipeAction } from '@kirbydesign/designsystem/item-sliding';
+
+import { ItemSlidingSide as ListSwipeDirection } from '@kirbydesign/designsystem/item-sliding';
 
 // Copy each property in ItemSwipeAction but make it possible to provide them via a function.
 type ListSwipeActionBaseTypes = Pick<ItemSwipeAction, 'title' | 'icon' | 'type' | 'isDisabled'>;
@@ -18,6 +22,6 @@ export type ListSwipeAction = {
 export {
   ItemSwipeActionType as ListSwipeActionType,
   ItemSwipeActionSlots as ListSwipeEnd,
-} from '../item-sliding/item-sliding.types';
+} from '@kirbydesign/designsystem/item-sliding';
 
 export { ListSwipeDirection };
