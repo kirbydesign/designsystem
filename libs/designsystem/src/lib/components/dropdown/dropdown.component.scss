@@ -78,7 +78,7 @@ $min-screen-width: 375px;
     }
 
     > button {
-      box-shadow: utils.get-elevation(8);
+      box-shadow: utils.get-elevation(4);
     }
   }
 
@@ -112,7 +112,7 @@ kirby-card {
   max-height: $dropdown-max-height;
   margin-block: utils.size('xxxs');
   overflow-y: auto;
-  box-shadow: utils.get-elevation(8);
+  box-shadow: utils.get-elevation(4);
   min-width: $min-screen-width-small - $margin-horizontal-total;
   @include utils.media('>=small') {
     min-width: $min-screen-width - $margin-horizontal-total;

@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
+import exampleHtml from '../../examples/badge-example/badge-example.component.html?raw';
 import {
   ApiDescriptionProperty,
   ApiDescriptionPropertyColumns,
 } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
-
-import exampleHtml from '../../examples/badge-example/badge-example.component.html?raw';
 
 @Component({
   selector: 'cookbook-badge-showcase',
@@ -12,7 +11,6 @@ import exampleHtml from '../../examples/badge-example/badge-example.component.ht
 })
 export class BadgeShowcaseComponent {
   exampleHtml = exampleHtml;
-  _cardMode = 'flat';
   _cardHasPadding = true;
 
   _properties: ApiDescriptionProperty[] = [
