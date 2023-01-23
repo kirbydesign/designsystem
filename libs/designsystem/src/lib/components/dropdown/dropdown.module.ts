@@ -8,6 +8,7 @@ import { ItemModule } from '../item';
 import { PopoverComponent } from '../popover/popover.component';
 import { DropdownComponent } from './dropdown.component';
 import { KeyboardHandlerService } from './keyboard-handler.service';
+import { FloatingDirective } from './../../directives/floating/floating.directive';
 
 const declarations = [DropdownComponent];
 
@@ -20,6 +21,7 @@ const declarations = [DropdownComponent];
     PopoverComponent,
     ButtonComponent,
     CommonModule,
+    FloatingDirective,
   ],
   declarations: [...declarations],
   exports: [...declarations],

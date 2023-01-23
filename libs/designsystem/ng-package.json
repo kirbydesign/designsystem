@@ -9,6 +9,7 @@
     "@fontsource/roboto",
     "@ionic/angular",
     "@kirbydesign/core",
+    "@floating-ui/dom",
     "chart.js",
     "chartjs-adapter-date-fns",
     "chartjs-plugin-annotation",
