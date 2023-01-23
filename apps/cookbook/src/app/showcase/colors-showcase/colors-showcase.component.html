@@ -12,15 +12,17 @@
       <div class="{{ selectedColor }}-shade">Shade</div>
     </div>
     <pre class="language-css">
+@use '@kirbydesign/designsystem/scss/utils';
+
 .color-sample-example {{ '{' }}
-  background-color: get-color('{{ selectedColor }}');
-  color: get-color('{{ selectedOnColor }}');
+  background-color: utils.get-color('{{ selectedColor }}');
+  color: utils.get-color('{{ selectedOnColor }}');
 {{ '}' }}
 .color-sample-tint {{ '{' }}
-  background-color: get-color('{{ selectedColor }}-tint');
+  background-color: utils.get-color('{{ selectedColor }}-tint');
 {{ '}' }}
 .color-sample-shade {{ '{' }}
-  background-color: get-color('{{ selectedColor }}-shade');
+  background-color: utils.get-color('{{ selectedColor }}-shade');
 {{ '}' }}</pre
     >
   </div>
