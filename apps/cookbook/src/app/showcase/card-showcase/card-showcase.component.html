@@ -23,6 +23,7 @@
 </cookbook-example-viewer>
 
 <h2>State & Disclosure</h2>
+
 <p>
   Whenever a card can be interacted with it is a best practice to also add a disclosure indicator,
   to show that it navigates to a new page, opens a modal or similar.
@@ -82,6 +83,16 @@
   <cookbook-card-example-background-image
     #backgroundImageExample
   ></cookbook-card-example-background-image>
+</cookbook-example-viewer>
+
+<h2>Flat</h2>
+<p>
+  By default the card has a slightly elevated look with a shadow around its edges. This can be
+  removed by setting the flat input, but be aware that this option should not be used with a card
+  that can be interacted with (clickable, disclosure) as it lacks proper affordance.
+</p>
+<cookbook-example-viewer [html]="flatExample.template">
+  <cookbook-card-example-flat #flatExample></cookbook-card-example-flat>
 </cookbook-example-viewer>
 
 <kirby-divider [hasMargin]="true"></kirby-divider>
