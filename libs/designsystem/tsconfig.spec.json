@@ -30,7 +30,8 @@
       "@kirbydesign/designsystem/checkbox": ["checkbox/index.ts"],
       "@kirbydesign/designsystem/accordion": ["accordion/index.ts"],
       "@kirbydesign/designsystem/radio": ["radio/index.ts"],
-      "@kirbydesign/designsystem/item-sliding": ["item-sliding/index.ts"]
+      "@kirbydesign/designsystem/item-sliding": ["item-sliding/index.ts"],
+      "@kirbydesign/designsystem/list": ["list/index.ts"]
     }
   },
   "files": ["test.ts"],
