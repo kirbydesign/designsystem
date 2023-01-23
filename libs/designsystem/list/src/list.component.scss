@@ -1,6 +1,6 @@
 @use 'sass:map';
 @use '@kirbydesign/core/src/scss/utils';
-@use '../item-sliding/item-sliding.shared.scss';
+@use '@kirbydesign/core/src/scss/themes';
 
 $divider-color: utils.get-color('background-color');
 $shadow: utils.get-elevation(2);

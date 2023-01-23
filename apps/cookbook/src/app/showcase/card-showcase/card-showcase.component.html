@@ -71,11 +71,10 @@
 </p>
 
 <p>
-  <em>Note:</em> this example uses
-  <a target="_blank" href="https://www.npmjs.com/package/include-media">include-media</a> for media
-  queries. This is re-exported from the <code>@kirbydesign/designsystem/scss/utils</code> Sass
-  module.
+  In this example, themeColor is explicitly set to dark to tell the card that the image content is
+  dark. This ensures that the hover and pressed state make the card lighter instead of darker.
 </p>
+
 <cookbook-example-viewer
   [html]="backgroundImageExample.template"
   [css]="backgroundImageExample.style"
@@ -84,6 +83,13 @@
     #backgroundImageExample
   ></cookbook-card-example-background-image>
 </cookbook-example-viewer>
+
+<p>
+  <em>Note:</em> this example uses
+  <a target="_blank" href="https://www.npmjs.com/package/include-media">include-media</a> for media
+  queries. This is re-exported from the <code>@kirbydesign/designsystem/scss/utils</code> Sass
+  module.
+</p>
 
 <h2>Flat</h2>
 <p>
