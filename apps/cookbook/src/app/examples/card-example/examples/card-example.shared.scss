@@ -1,0 +1,103 @@
+@use '@kirbydesign/core/src/scss/utils';
+
+:host {
+  display: grid;
+  place-content: center;
+}
+
+kirby-card {
+  max-width: 500px;
+}
+
+kirby-flag {
+  float: inline-end;
+}
+
+.card-option-button-group {
+  display: flex;
+  justify-content: center;
+  gap: utils.size('xxs');
+  padding: utils.size('xxs');
+}
+
+.kirby-color-brightness-dark {
+  code {
+    background-color: utils.get-color('dark');
+    color: utils.get-color('dark-contrast');
+  }
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+button {
+  height: utils.$fat-finger-size;
+  width: utils.$fat-finger-size;
+  border: none;
+  border-radius: 999px;
+  margin: 0;
+  color: #fff;
+  cursor: pointer;
+
+  &.success {
+    background-color: utils.get-color('success');
+
+    &:hover {
+      background-color: var(--kirby-success-shade);
+    }
+  }
+
+  &.warning {
+    background-color: utils.get-color('warning');
+
+    &:hover {
+      background-color: var(--kirby-warning-shade);
+    }
+  }
+
+  &.danger {
+    background-color: utils.get-color('danger');
+
+    &:hover {
+      background-color: var(--kirby-danger-shade);
+    }
+  }
+
+  &.info,
+  &.medium {
+    background-color: utils.get-color('medium');
+
+    &:hover {
+      background-color: var(--kirby-medium-shade);
+    }
+  }
+
+  &.secondary {
+    background-color: utils.get-color('secondary');
+
+    &:hover {
+      background-color: var(--kirby-secondary-shade);
+    }
+  }
+
+  &.tertiary {
+    background-color: utils.get-color('tertiary');
+
+    &:hover {
+      background-color: var(--kirby-tertiary-shade);
+    }
+  }
+
+  &.dark {
+    background-color: utils.get-color('dark');
+
+    &:hover {
+      background-color: var(--kirby-dark-shade);
+    }
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}

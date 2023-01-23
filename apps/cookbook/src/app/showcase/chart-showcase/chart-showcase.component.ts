@@ -10,7 +10,6 @@ import {
   templateUrl: './chart-showcase.component.html',
 })
 export class ChartShowcaseComponent {
-  _cardMode = 'flat';
   _cardHasPadding = true;
   _apiDescriptionProperties: ApiDescriptionProperty[] = [
     {

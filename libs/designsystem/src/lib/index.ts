@@ -18,6 +18,11 @@ export * from '@kirbydesign/designsystem/toggle-button';
 export * from '@kirbydesign/designsystem/types';
 export * from '@kirbydesign/designsystem/slide-button';
 export * from '@kirbydesign/designsystem/range';
+export * from '@kirbydesign/designsystem/popover';
+export * from '@kirbydesign/designsystem/loading-overlay';
+export * from '@kirbydesign/designsystem/divider';
+export * from '@kirbydesign/designsystem/checkbox';
+export * from '@kirbydesign/designsystem/accordion';
 
 export * from './scss/scss-helper';
 

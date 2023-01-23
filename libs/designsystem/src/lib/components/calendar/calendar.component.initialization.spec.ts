@@ -1,7 +1,7 @@
 import { LOCALE_ID } from '@angular/core';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { WindowRef } from '@kirbydesign/designsystem/types';
-import { CalendarComponent } from '..';
+import { CalendarComponent } from './calendar.component';
 
 describe('CalendarComponent', () => {
   let spectator: SpectatorHost<CalendarComponent>;

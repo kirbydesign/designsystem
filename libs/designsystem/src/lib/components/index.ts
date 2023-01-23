@@ -1,4 +1,3 @@
-export * from './accordion';
 export * from './app';
 
 export { AvatarComponent, AvatarSize } from './avatar/avatar.component';
@@ -11,11 +10,7 @@ export * from './charts';
 export * from './calendar';
 export * from './item-sliding';
 
-export { CheckboxComponent } from './checkbox/checkbox.component';
-
 export * from './data-table';
-
-export { DividerComponent } from './divider/divider.component';
 
 export * from './form-field';
 export * from './dropdown';
@@ -28,15 +23,12 @@ export { GridCardConfiguration } from './grid/grid-card-configuration';
 export { ItemSlidingComponent } from './item-sliding/item-sliding.component';
 export { ItemGroupComponent } from './item-group/item-group.component';
 
-export * from './loading-overlay';
 export * from './list';
 
 export * from './modal';
 export * from './modal-experimental';
 
 export * from './page';
-
-export { HorizontalDirection, PopoverComponent } from './popover/popover.component';
 
 export * from './radio';
 export * from './router-outlet';

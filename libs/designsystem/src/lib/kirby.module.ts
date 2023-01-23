@@ -9,6 +9,7 @@ import {
   ComponentLoaderDirective,
   ResizeObserverFactory,
   ResizeObserverService,
+  ThemeColorDirective,
 } from '@kirbydesign/designsystem/shared';
 import { FlagComponent } from '@kirbydesign/designsystem/flag';
 import { SpinnerModule } from '@kirbydesign/designsystem/spinner';
@@ -20,16 +21,20 @@ import { ToggleButtonModule } from '@kirbydesign/designsystem/toggle-button';
 import { TabsModule } from '@kirbydesign/designsystem/tabs';
 import { SlideButtonComponent } from '@kirbydesign/designsystem/slide-button';
 import { RangeComponent } from '@kirbydesign/designsystem/range';
-import { AccordionItemComponent } from './components/accordion/accordion-item.component';
-import { AccordionDirective } from './components/accordion/accordion.directive';
+import { PopoverComponent } from '@kirbydesign/designsystem/popover';
+import {
+  LoadingOverlayComponent,
+  LoadingOverlayService,
+} from '@kirbydesign/designsystem/loading-overlay';
+import { DividerComponent } from '@kirbydesign/designsystem/divider';
+import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
+import { AccordionModule } from '@kirbydesign/designsystem/accordion';
 import { AppModule } from './components/app/app.module';
 import { AvatarComponent } from './components/avatar/avatar.component';
 import { ButtonComponent } from './components/button/button.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { ChartsModule } from './components/charts';
-import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { DataTableModule } from './components/data-table/data-table.module';
-import { DividerComponent } from './components/divider/divider.component';
 import { FabSheetComponent } from './components/fab-sheet/fab-sheet.component';
 import { DateInputDirective } from './components/form-field/directives/date/date-input.directive';
 import { DecimalMaskDirective } from './components/form-field/directives/decimal-mask/decimal-mask.directive';
@@ -42,8 +47,6 @@ import { GridComponent } from './components/grid/grid.component';
 import { ItemGroupComponent } from './components/item-group/item-group.component';
 import { ItemSlidingComponent } from './components/item-sliding/item-sliding.component';
 import { ListModule } from './components/list/list.module';
-import { LoadingOverlayComponent } from './components/loading-overlay/loading-overlay.component';
-import { LoadingOverlayService } from './components/loading-overlay/loading-overlay.service';
 import { ActionSheetComponent } from './components/modal/action-sheet/action-sheet.component';
 import { AlertComponent } from './components/modal/alert/alert.component';
 import { ModalFooterComponent } from './components/modal/footer/modal-footer.component';
@@ -54,7 +57,6 @@ import { AlertHelper } from './components/modal/services/alert.helper';
 import { ModalController } from './components/modal/services/modal.controller';
 import { ModalHelper } from './components/modal/services/modal.helper';
 import { PageModule } from './components/page/page.module';
-import { PopoverComponent } from './components/popover/popover.component';
 import { ProgressCircleRingComponent } from './components/progress-circle/progress-circle-ring.component';
 import { ProgressCircleComponent } from './components/progress-circle/progress-circle.component';
 import { ReorderListComponent } from './components/reorder-list/reorder-list.component';
@@ -65,7 +67,6 @@ import { ToastHelper } from './components/toast/services/toast.helper';
 import { customElementsInitializer } from './custom-elements-initializer';
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
 import { ModalRouterLinkDirective } from './directives/modal-router-link/modal-router-link.directive';
-import { ThemeColorDirective } from './directives/theme-color/theme-color.directive';
 import { RadioModule } from './components';
 import { EmptyStateModule } from './components/empty-state/empty-state.module';
 import { DropdownModule } from './components/dropdown';
@@ -80,7 +81,6 @@ const exportedDeclarations = [
   AffixDirective,
   InputComponent,
   TextareaComponent,
-  DividerComponent,
 
   ItemGroupComponent,
 ];
@@ -88,18 +88,17 @@ const exportedDeclarations = [
 const declarations = [...exportedDeclarations, KeyHandlerDirective, ModalCompactWrapperComponent];
 
 const standaloneComponents = [
+  DividerComponent,
   ThemeColorDirective,
   SegmentedControlComponent,
   AlertComponent,
-  ThemeColorDirective,
   PopoverComponent,
   ProgressCircleRingComponent,
   ModalWrapperComponent,
   SectionHeaderComponent,
   RangeComponent,
   ItemSlidingComponent,
-  AccordionItemComponent,
-  AccordionDirective,
+
   ProgressCircleComponent,
   ReorderListComponent,
   LoadingOverlayComponent,
@@ -135,6 +134,7 @@ const exportedModules = [
   KirbyBadgeModule,
   FormFieldModule,
   SlideModule,
+  AccordionModule,
   ...standaloneComponents,
 ];
 

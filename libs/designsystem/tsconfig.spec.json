@@ -23,7 +23,12 @@
       "@kirbydesign/designsystem/toggle-button": ["toggle-button/index.ts"],
       "@kirbydesign/designsystem/tabs": ["tabs/index.ts"],
       "@kirbydesign/designsystem/slide-button": ["slide-button/index.ts"],
-      "@kirbydesign/designsystem/range": ["range/index.ts"]
+      "@kirbydesign/designsystem/range": ["range/index.ts"],
+      "@kirbydesign/designsystem/popover": ["popover/index.ts"],
+      "@kirbydesign/designsystem/loading-overlay": ["loading-overlay/index.ts"],
+      "@kirbydesign/designsystem/divider": ["divider/index.ts"],
+      "@kirbydesign/designsystem/checkbox": ["checkbox/index.ts"],
+      "@kirbydesign/designsystem/accordion": ["accordion/index.ts"]
     }
   },
   "files": ["test.ts"],
