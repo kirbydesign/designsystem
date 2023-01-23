@@ -13,7 +13,7 @@ import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { FlagComponent } from '@kirbydesign/designsystem/flag';
-import { ListItemTemplateDirective } from '../../list/list.directive';
+import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { RadioComponent } from '../radio.component';
 
 import { RadioGroupComponent } from './radio-group.component';

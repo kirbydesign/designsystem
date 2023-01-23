@@ -9,7 +9,7 @@ import { CardComponent } from '@kirbydesign/designsystem/card';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { HorizontalDirection, PopoverComponent } from '@kirbydesign/designsystem/popover';
-import { ListItemTemplateDirective } from '../list';
+import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 
 import { ButtonComponent } from '../button/button.component';
 import { DropdownComponent } from './dropdown.component';
