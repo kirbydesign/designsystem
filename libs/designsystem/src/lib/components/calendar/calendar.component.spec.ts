@@ -167,24 +167,32 @@ describe('CalendarComponent', () => {
   });
 
   describe('monthChange', () => {
-    it('should emit the previousMonthClicked event, when navigating to a past month', () => {
+    beforeEach(() => {
+      spectator = createHost('<kirby-calendar></kirby-calendar>');
+    });
+
+    it('should change from August to July when previous month is clicked', () => {
       const previousMonthClickedSpy = spyOn(spectator.component.previousMonthClicked, 'emit');
+      spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
 
       expect(previousMonthClickedSpy).not.toHaveBeenCalled();
 
       spectator.click(SEL_NAV_BACK);
 
-      expect(previousMonthClickedSpy).toHaveBeenCalled();
+      verifyMonthAndYear('July 1997');
+      expect(previousMonthClickedSpy).toHaveBeenCalledTimes(1);
     });
 
-    it('should emit the nextMonthClicked event, when navigating to a future month', () => {
+    it('should change from August to September when next month is clicked', () => {
       const nextMonthClickedSpy = spyOn(spectator.component.nextMonthClicked, 'emit');
+      spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
 
       expect(nextMonthClickedSpy).not.toHaveBeenCalled();
 
       spectator.click(SEL_NAV_FORWARD);
 
-      expect(nextMonthClickedSpy).toHaveBeenCalled();
+      verifyMonthAndYear('September 1997');
+      expect(nextMonthClickedSpy).toHaveBeenCalledTimes(1);
     });
   });
 
