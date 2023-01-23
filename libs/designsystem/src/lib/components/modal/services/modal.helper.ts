@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 
-import { KirbyAnimation } from '../../../animation/kirby-animation';
+import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 import { AlertConfig } from '../alert/config/alert-config';
 import { ModalCompactWrapperComponent } from '../modal-wrapper/compact/modal-compact-wrapper.component';
 import { ModalConfig, ModalSize } from '../modal-wrapper/config/modal-config';
