@@ -3,7 +3,7 @@ import { noop } from 'rxjs';
 
 const config = {
   selector: 'cookbook-card-example-disclosure',
-  template: `<kirby-card hasPadding="true" (click)="noop()">
+  template: `<kirby-card [hasPadding]="true" (click)="noop()">
   <kirby-card-header [hasPadding]="false">
     <kirby-item [disclosure]="'arrow-more'">
       <h3 class="kirby-text-bold">Item disclosure in header</h3>
