@@ -59,13 +59,6 @@ export class CardShowcaseComponent {
         'dark',
       ],
     },
-    {
-      name: 'hasDarkBackgroundColor',
-      description:
-        'Use this to make the hover and active interaction states be lighter instead of darker (which is the default)',
-      defaultValue: 'false',
-      type: ['boolean'],
-    },
   ];
 
   propertiesHeaderAndFooter: ApiDescriptionProperty[] = [
