@@ -4,8 +4,17 @@
 </p>
 <p>
   In its definition cards are containers that need to include other components like list/items,
-  images, buttons avatars etc.
+  images, buttons, avatars etc.
 </p>
+
+<p>The card supports two major use-cases:</p>
+<ul>
+  <li>The default mode is useful when a card is used purely for layout and grouping purposes.</li>
+  <li>
+    Whenever a card is used for navigation, for example to a new page, drawer or modal the
+    disclosure-variant should be used.
+  </li>
+</ul>
 
 <h2>Default</h2>
 
@@ -13,9 +22,29 @@
   <cookbook-card-example-default #defaultExample></cookbook-card-example-default>
 </cookbook-example-viewer>
 
-<h2>Flags</h2>
+<h2>State & Disclosure</h2>
 <p>
-  A card can show a flag in the very top. This is mostly used when a bundle of items in the card can
+  Whenever a card can be interacted with it is a best practice to also add a disclosure indicator,
+  to show that it navigates to a new page, opens a modal or similar.
+</p>
+<p>
+  Registering any click event <code>(click)="function()"</code> on the card will activate its state
+  behavior when hovered or pressed.
+</p>
+
+<p>
+  A card with a disclosure indicator is composed of a card-header with a slotted
+  <code>kirby-item</code>, using the <code>--kirby-card-padding-top</code> CSS Custom Property to
+  set the padding top in card content area to <code>0px</code>. The card header input property
+  <code>hasPadding</code> is set to <code>false</code> to adjust to the use of item.
+</p>
+<cookbook-example-viewer [html]="disclosureExample.template" [css]="disclosureExample.style">
+  <cookbook-card-example-disclosure #disclosureExample></cookbook-card-example-disclosure>
+</cookbook-example-viewer>
+
+<h2>Flagged header</h2>
+<p>
+  A card can show a flag in the header. This is mostly used when a bundle of items in the card can
   express the same “flag”.
 </p>
 
@@ -53,26 +82,6 @@
   <cookbook-card-example-background-image
     #backgroundImageExample
   ></cookbook-card-example-background-image>
-</cookbook-example-viewer>
-
-<h2>State & Disclosure</h2>
-<p>
-  The card expresses its state with its color shade & tint, when hovered or pressed. Registering any
-  click event <code>(click)="function()"</code> on the card will activate its state behavior.
-</p>
-
-<p>
-  Whenever a card is clickable it is a best practice to also add a disclosure indicator, to show
-  that it navigates to a new page, opens a modal or similar.
-</p>
-<p>
-  A card with a disclosure indicator is composed of a card-header with a slotted
-  <code>kirby-item</code>, using the <code>--kirby-card-padding-top</code> CSS Custom Property to
-  set the padding top in card content area to <code>0px</code>. The card header input property
-  <code>hasPadding</code> is set to <code>false</code> to adjust to the use of item.
-</p>
-<cookbook-example-viewer [html]="disclosureExample.template" [css]="disclosureExample.style">
-  <cookbook-card-example-disclosure #disclosureExample></cookbook-card-example-disclosure>
 </cookbook-example-viewer>
 
 <kirby-divider [hasMargin]="true"></kirby-divider>
