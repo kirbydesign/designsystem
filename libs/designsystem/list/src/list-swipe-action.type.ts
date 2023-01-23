@@ -1,8 +1,3 @@
-// import {
-//   ItemSwipeAction,
-//   ItemSlidingSide as ListSwipeDirection,
-// } from '../item-sliding/item-sliding.types';
-
 import { ItemSwipeAction } from '@kirbydesign/designsystem/item-sliding';
 
 import { ItemSlidingSide as ListSwipeDirection } from '@kirbydesign/designsystem/item-sliding';
