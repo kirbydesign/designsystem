@@ -23,6 +23,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CardComponent } from '@kirbydesign/designsystem/card';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
+import { FloatingDirective } from '@kirbydesign/designsystem/src/lib';
 import { ButtonComponent } from '../button/button.component';
 import { ItemComponent } from '../item/item.component';
 import { ListItemTemplateDirective } from '../list/list.directive';
@@ -202,8 +203,8 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   slottedItems: QueryList<ElementRef<HTMLElement>>;
   @ViewChild(CardComponent, { read: ElementRef })
   cardElement: ElementRef<HTMLElement>;
-  @ViewChild(PopoverComponent)
-  popover?: PopoverComponent;
+  @ViewChild(FloatingDirective)
+  popover?: FloatingDirective;
   @ViewChild(ButtonComponent, { static: true, read: ElementRef })
   buttonElement: ElementRef<HTMLElement>;
   @ViewChildren(ItemComponent, { read: ElementRef })

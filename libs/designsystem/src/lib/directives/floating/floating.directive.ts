@@ -78,6 +78,23 @@ export class FloatingDirective implements OnInit, OnDestroy {
     this.tearDownEventHandling();
   }
 
+  /* Should be accessible for programmatically setting display */
+  public show(): void {
+    this.renderer.setStyle(this.elementRef.nativeElement, 'display', 'block');
+    this.isShown = true;
+  }
+
+  /* Should be accessible for programmatically setting display */
+  public hide(): void {
+    this.renderer.setStyle(this.elementRef.nativeElement, 'display', 'none');
+    this.isShown = false;
+  }
+
+  /* Should be accessible for programmatically setting display */
+  public toggleShow(): void {
+    this.isShown ? this.hide() : this.show();
+  }
+
   private addFloatStylingToHostElement(): void {
     this.renderer.setStyle(this.elementRef.nativeElement, 'left', `0px`);
     this.renderer.setStyle(this.elementRef.nativeElement, 'top', `0px`);
@@ -147,19 +164,5 @@ export class FloatingDirective implements OnInit, OnDestroy {
       const eventListener: () => void = this.eventListeners.pop();
       eventListener();
     });
-  }
-
-  private show(): void {
-    this.renderer.setStyle(this.elementRef.nativeElement, 'display', 'block');
-    this.isShown = true;
-  }
-
-  private hide(): void {
-    this.renderer.setStyle(this.elementRef.nativeElement, 'display', 'none');
-    this.isShown = false;
-  }
-
-  private toggleShow(): void {
-    this.isShown ? this.hide() : this.show();
   }
 }
