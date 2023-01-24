@@ -7,10 +7,16 @@ import { MockComponents } from 'ng-mocks';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { CardComponent } from '@kirbydesign/designsystem/card';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
+<<<<<<< HEAD:libs/designsystem/dropdown/src/dropdown.component.spec.ts
 import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { HorizontalDirection } from '@kirbydesign/designsystem/popover';
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
+=======
+import { ButtonComponent, ItemComponent } from '..';
+import { ListItemTemplateDirective } from '../list';
+import { HorizontalDirection, PopoverComponent } from '../popover/popover.component';
+>>>>>>> 47b5a8064 (chore: seperate floatDirective into own PR):libs/designsystem/src/lib/components/dropdown/dropdown.component.spec.ts
 
 import { DropdownComponent } from './dropdown.component';
 import { OpenState } from './dropdown.types';
@@ -36,7 +42,7 @@ describe('DropdownComponent', () => {
       component: DropdownComponent,
       declarations: [
         ItemComponent,
-        MockComponents(ButtonComponent, CardComponent, IconComponent, IonItem),
+        MockComponents(ButtonComponent, CardComponent, IconComponent, IonItem, PopoverComponent),
       ],
     });
 
@@ -78,6 +84,10 @@ describe('DropdownComponent', () => {
 
     it('should have default placeholder text', () => {
       expect(buttonElement).toHaveText(spectator.component.placeholder, true);
+    });
+
+    it('should have default popout set', () => {
+      expect(spectator.component.popout).toEqual(HorizontalDirection.right);
     });
 
     it('should render as inline block', () => {
@@ -813,7 +823,15 @@ describe('DropdownComponent', () => {
 
     const createHost = createHostFactory({
       component: DropdownComponent,
-      declarations: [MockComponents(ButtonComponent, CardComponent, ItemComponent, IconComponent)],
+      declarations: [
+        MockComponents(
+          ButtonComponent,
+          CardComponent,
+          ItemComponent,
+          IconComponent,
+          PopoverComponent
+        ),
+      ],
     });
 
     describe('through template one-time string initialization', () => {
@@ -906,7 +924,15 @@ describe('DropdownComponent', () => {
 
     const createHost = createHostFactory({
       component: DropdownComponent,
-      declarations: [MockComponents(ButtonComponent, CardComponent, ItemComponent, IconComponent)],
+      declarations: [
+        MockComponents(
+          ButtonComponent,
+          CardComponent,
+          ItemComponent,
+          IconComponent,
+          PopoverComponent
+        ),
+      ],
     });
 
     const defaultSelectedIndex = 2;
@@ -1014,7 +1040,15 @@ describe('DropdownComponent', () => {
 
     const createHost = createHostFactory({
       component: DropdownComponent,
-      declarations: [MockComponents(ButtonComponent, CardComponent, ItemComponent, IconComponent)],
+      declarations: [
+        MockComponents(
+          ButtonComponent,
+          CardComponent,
+          ItemComponent,
+          IconComponent,
+          PopoverComponent
+        ),
+      ],
       host: OnPushHostComponent,
     });
 
@@ -1059,7 +1093,7 @@ describe('DropdownComponent', () => {
       declarations: [
         ItemComponent,
         ListItemTemplateDirective,
-        MockComponents(ButtonComponent, CardComponent, IconComponent, IonItem),
+        MockComponents(ButtonComponent, CardComponent, IconComponent, IonItem, PopoverComponent),
       ],
     });
 
