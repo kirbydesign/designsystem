@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 
 @Component({
+  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'textarea[kirby-textarea]',

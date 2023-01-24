@@ -26,6 +26,7 @@ export * from '@kirbydesign/designsystem/accordion';
 export * from '@kirbydesign/designsystem/radio';
 export * from '@kirbydesign/designsystem/list';
 export * from '@kirbydesign/designsystem/item-sliding';
+export * from '@kirbydesign/designsystem/form-field';
 
 export * from './scss/scss-helper';
 
