@@ -3,7 +3,7 @@ import { Animation, AnimationBuilder, createAnimation } from '@ionic/angular';
 import { ModalAnimationOptions } from '@ionic/core';
 import { PlatformService } from '@kirbydesign/designsystem/helpers';
 
-import { KirbyAnimation } from '../../../animation/kirby-animation';
+import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 
 @Injectable({ providedIn: 'root' })
 export class ModalAnimationBuilderService {
