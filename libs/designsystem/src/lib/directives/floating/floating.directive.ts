@@ -70,7 +70,7 @@ export class FloatingDirective implements OnInit, OnDestroy {
     autoUpdate(
       this.reference.nativeElement,
       this.elementRef.nativeElement,
-      this.updateHostElementPosition
+      this.updateHostElementPosition.bind(this)
     );
   }
 

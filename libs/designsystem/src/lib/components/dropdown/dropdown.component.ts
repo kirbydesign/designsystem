@@ -26,8 +26,7 @@ import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { ButtonComponent } from '../button/button.component';
 import { ItemComponent } from '../item/item.component';
 import { ListItemTemplateDirective } from '../list/list.directive';
-import { HorizontalDirection } from '../popover/popover.component';
-import { FloatingDirective } from './../../directives/floating/floating.directive';
+import { HorizontalDirection, PopoverComponent } from '../popover/popover.component';
 
 import { OpenState, VerticalDirection } from './dropdown.types';
 import { KeyboardHandlerService } from './keyboard-handler.service';
@@ -203,8 +202,8 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   slottedItems: QueryList<ElementRef<HTMLElement>>;
   @ViewChild(CardComponent, { read: ElementRef })
   cardElement: ElementRef<HTMLElement>;
-  @ViewChild(FloatingDirective)
-  popover?: FloatingDirective;
+  @ViewChild(PopoverComponent)
+  popover?: PopoverComponent;
   @ViewChild(ButtonComponent, { static: true, read: ElementRef })
   buttonElement: ElementRef<HTMLElement>;
   @ViewChildren(ItemComponent, { read: ElementRef })
