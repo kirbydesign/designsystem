@@ -8,7 +8,6 @@ export { ButtonComponent, ButtonSize } from './button/button.component';
 
 export * from './charts';
 export * from './calendar';
-export * from './item-sliding';
 
 export * from './data-table';
 
@@ -20,16 +19,12 @@ export { FabSheetComponent } from './fab-sheet/fab-sheet.component';
 export { GridComponent } from './grid/grid.component';
 export { GridCardConfiguration } from './grid/grid-card-configuration';
 
-export { ItemSlidingComponent } from './item-sliding/item-sliding.component';
 export { ItemGroupComponent } from './item-group/item-group.component';
-
-export * from './list';
 
 export * from './modal';
 
 export * from './page';
 
-export * from './radio';
 export * from './router-outlet';
 export * from './reorder-list';
 

@@ -49,7 +49,10 @@
       "@kirbydesign/designsystem/loading-overlay": ["libs/designsystem/loading-overlay/index.ts"],
       "@kirbydesign/designsystem/divider": ["libs/designsystem/divider/index.ts"],
       "@kirbydesign/designsystem/checkbox": ["libs/designsystem/checkbox/index.ts"],
-      "@kirbydesign/designsystem/accordion": ["libs/designsystem/accordion/index.ts"]
+      "@kirbydesign/designsystem/accordion": ["libs/designsystem/accordion/index.ts"],
+      "@kirbydesign/designsystem/radio": ["libs/designsystem/radio/index.ts"],
+      "@kirbydesign/designsystem/item-sliding": ["libs/designsystem/item-sliding/index.ts"],
+      "@kirbydesign/designsystem/list": ["libs/designsystem/list/index.ts"],
     },
     "target": "es2020"
   },

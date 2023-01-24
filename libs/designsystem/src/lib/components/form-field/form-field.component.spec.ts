@@ -6,8 +6,7 @@ import { PlatformService } from '@kirbydesign/designsystem/helpers';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
-import { RadioComponent } from '../radio';
-import { RadioGroupComponent } from '../radio/radio-group/radio-group.component';
+import { RadioComponent, RadioGroupComponent } from '@kirbydesign/designsystem/radio';
 
 import { FormFieldMessageComponent } from './form-field-message/form-field-message.component';
 import { FormFieldComponent } from './form-field.component';
