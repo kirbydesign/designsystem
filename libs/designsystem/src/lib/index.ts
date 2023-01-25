@@ -1,4 +1,3 @@
-export * from './animation/kirby-animation';
 export * from './components';
 export * from './directives';
 
@@ -23,6 +22,10 @@ export * from '@kirbydesign/designsystem/loading-overlay';
 export * from '@kirbydesign/designsystem/divider';
 export * from '@kirbydesign/designsystem/checkbox';
 export * from '@kirbydesign/designsystem/accordion';
+export * from '@kirbydesign/designsystem/radio';
+export * from '@kirbydesign/designsystem/list';
+export * from '@kirbydesign/designsystem/item-sliding';
+export * from '@kirbydesign/designsystem/form-field';
 
 export * from './scss/scss-helper';
 

@@ -28,7 +28,11 @@
       "@kirbydesign/designsystem/loading-overlay": ["loading-overlay/index.ts"],
       "@kirbydesign/designsystem/divider": ["divider/index.ts"],
       "@kirbydesign/designsystem/checkbox": ["checkbox/index.ts"],
-      "@kirbydesign/designsystem/accordion": ["accordion/index.ts"]
+      "@kirbydesign/designsystem/accordion": ["accordion/index.ts"],
+      "@kirbydesign/designsystem/radio": ["radio/index.ts"],
+      "@kirbydesign/designsystem/item-sliding": ["item-sliding/index.ts"],
+      "@kirbydesign/designsystem/list": ["list/index.ts"],
+      "@kirbydesign/designsystem/form-field": ["form-field/index.ts"]
     }
   },
   "files": ["test.ts"],

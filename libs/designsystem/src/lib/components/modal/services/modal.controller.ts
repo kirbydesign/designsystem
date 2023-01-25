@@ -3,7 +3,7 @@ import { ActivatedRoute, Params, Routes, ROUTES } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { filter, map, takeUntil } from 'rxjs/operators';
 
-import { KirbyAnimation } from '../../../animation/kirby-animation';
+import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 import { ActionSheetConfig } from '../action-sheet/config/action-sheet-config';
 import { AlertConfig } from '../alert/config/alert-config';
 import { ModalConfig } from '../modal-wrapper/config/modal-config';
