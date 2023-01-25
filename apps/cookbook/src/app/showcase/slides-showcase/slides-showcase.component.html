@@ -6,9 +6,10 @@
       and visa versa</em
     >
   </p>
-  <cookbook-slides-example></cookbook-slides-example>
-  <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
-  <cookbook-code-viewer [ts]="exampleTS"></cookbook-code-viewer>
+  <cookbook-example-viewer [html]="slidesExample.template" [ts]="slidesExample.codeSnippet">
+    <cookbook-slides-example #slidesExample></cookbook-slides-example>
+  </cookbook-example-viewer>
+
   <h4>Slides properties:</h4>
   <cookbook-api-description-properties
     [properties]="properties"

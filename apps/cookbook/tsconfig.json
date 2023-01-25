@@ -24,7 +24,18 @@
       "@kirbydesign/designsystem/section-header": ["libs/designsystem/section-header/index.ts"],
       "@kirbydesign/designsystem/slide": ["libs/designsystem/slide/index.ts"],
       "@kirbydesign/designsystem/toggle-button": ["libs/designsystem/toggle-button/index.ts"],
-      "@kirbydesign/designsystem/tabs": ["libs/designsystem/tabs/index.ts"]
+      "@kirbydesign/designsystem/tabs": ["libs/designsystem/tabs/index.ts"],
+      "@kirbydesign/designsystem/slide-button": ["libs/designsystem/slide-button/index.ts"],
+      "@kirbydesign/designsystem/range": ["libs/designsystem/range/index.ts"],
+      "@kirbydesign/designsystem/popover": ["libs/designsystem/popover/index.ts"],
+      "@kirbydesign/designsystem/loading-overlay": ["libs/designsystem/loading-overlay/index.ts"],
+      "@kirbydesign/designsystem/divider": ["libs/designsystem/divider/index.ts"],
+      "@kirbydesign/designsystem/checkbox": ["libs/designsystem/checkbox/index.ts"],
+      "@kirbydesign/designsystem/accordion": ["libs/designsystem/accordion/index.ts"],
+      "@kirbydesign/designsystem/radio": ["libs/designsystem/radio/index.ts"],
+      "@kirbydesign/designsystem/item-sliding": ["libs/designsystem/item-sliding/index.ts"],
+      "@kirbydesign/designsystem/list": ["libs/designsystem/list/index.ts"],
+      "@kirbydesign/designsystem/form-field": ["libs/designsystem/form-field/index.ts"]
     },
     "target": "es2020"
   },

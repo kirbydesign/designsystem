@@ -16,8 +16,7 @@ import {
 import { IonicModule } from '@ionic/angular';
 import { CardModule } from '@kirbydesign/designsystem/card';
 import { ItemModule } from '@kirbydesign/designsystem/item';
-
-import { ListItemTemplateDirective } from '../list/list.directive';
+import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 
 import { ReorderEvent } from './reorder-event';
 

@@ -6,8 +6,8 @@ import { zonedTimeToUtc } from 'date-fns-tz';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { WindowRef } from '@kirbydesign/designsystem/types';
-import { CalendarComponent } from '..';
 import { DropdownComponent } from '../dropdown/dropdown.component';
+import { CalendarComponent } from './calendar.component';
 
 import { CalendarYearNavigatorConfig } from './options/calendar-year-navigator-config';
 
@@ -163,6 +163,36 @@ describe('CalendarComponent', () => {
       spectator.click(SEL_NAV_FORWARD);
 
       verifyMonthAndYear('October 1997');
+    });
+  });
+
+  describe('monthChange', () => {
+    beforeEach(() => {
+      spectator = createHost('<kirby-calendar></kirby-calendar>');
+    });
+
+    it('should change from August to July when previous month is clicked', () => {
+      const previousMonthClickedSpy = spyOn(spectator.component.previousMonthClicked, 'emit');
+      spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+
+      expect(previousMonthClickedSpy).not.toHaveBeenCalled();
+
+      spectator.click(SEL_NAV_BACK);
+
+      verifyMonthAndYear('July 1997');
+      expect(previousMonthClickedSpy).toHaveBeenCalledTimes(1);
+    });
+
+    it('should change from August to September when next month is clicked', () => {
+      const nextMonthClickedSpy = spyOn(spectator.component.nextMonthClicked, 'emit');
+      spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+
+      expect(nextMonthClickedSpy).not.toHaveBeenCalled();
+
+      spectator.click(SEL_NAV_FORWARD);
+
+      verifyMonthAndYear('September 1997');
+      expect(nextMonthClickedSpy).toHaveBeenCalledTimes(1);
     });
   });
 

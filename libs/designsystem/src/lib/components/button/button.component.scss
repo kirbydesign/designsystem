@@ -61,7 +61,8 @@ $button-width: (
 @mixin button-no-decoration {
   --kirby-button-background-color: transparent;
   --kirby-button-color: #{utils.get-color('black')};
-  --kirby-button-border-color: transparent;
+
+  box-shadow: none;
 
   @include interaction-state.apply-hover;
   @include interaction-state.apply-active('s');
@@ -83,31 +84,30 @@ $button-width: (
   --kirby-button-background-color: #{utils.get-color('black')};
   --kirby-button-color: #{utils.get-color('black-contrast')};
 
-  @include interaction-state.apply-hover('l', $make-lighter: true);
-  @include interaction-state.apply-active('xxxl', $make-lighter: true);
+  @include interaction-state.apply-hover('s', $make-lighter: true);
+  @include interaction-state.apply-active('m', $make-lighter: true);
 }
 
 @mixin button-attentionlevel3 {
-  // Expect canvas underneath to be a light color
-  --kirby-button-background-color: transparent;
-  --kirby-button-color: #{utils.get-color('black')};
-  --kirby-button-border-color: #{utils.get-color('medium')};
+  --kirby-button-background-color: var(
+    --kirby-interactive-element-background-color,
+    #{utils.get-color('white')}
+  );
+  --kirby-button-color: var(--kirby-interactive-element-color, #{utils.get-color('black')});
 
-  @include interaction-state.apply-hover('xxxs');
-  @include interaction-state.apply-active('xxs');
+  @include interaction-state.apply-hover('xs');
+  @include interaction-state.apply-active('s');
 }
 
 :host {
-  $border-width: 1px;
-
   --kirby-button-padding-left: #{utils.size('m')};
   --kirby-button-padding-right: #{utils.size('m')};
 
   @include utils.accessible-target-size;
   @include interaction-state.apply-focus-visible;
-  @include interaction-state.initialize-layer($border-width);
-  @include interaction-state.apply-hover;
-  @include interaction-state.apply-active('s');
+  @include interaction-state.initialize-layer;
+  @include interaction-state.apply-hover('xxxs');
+  @include interaction-state.apply-active;
   @include interaction-state.extend-content {
     display: inherit;
     width: inherit;
@@ -120,6 +120,7 @@ $button-width: (
   font-family: var(--kirby-font-family);
   background-color: var(--kirby-button-background-color, initial);
   color: var(--kirby-button-color, inherit);
+  box-shadow: var(--kirby-interactive-elevation);
   border-radius: utils.$border-radius-round;
   box-sizing: border-box; // Ensure border is not added to button height
   display: inline-flex;
@@ -141,9 +142,7 @@ $button-width: (
   // Outline is applied on button border instead,
   // to keep the rounded shape:
   outline: none;
-  border-width: $border-width;
-  border-style: solid;
-  border-color: var(--kirby-button-border-color, transparent);
+  border: none;
 
   &.no-margin {
     margin: 0;
@@ -206,28 +205,6 @@ $button-width: (
     pointer-events: none;
   }
 
-  :host-context(.kirby-color-brightness-dark) {
-    &.no-decoration {
-      --kirby-button-color: #{utils.get-color('white')};
-    }
-
-    &.attention-level2 {
-      --kirby-button-background-color: #{utils.get-color('white')};
-      --kirby-button-color: #{utils.get-color('white-contrast')};
-
-      @include interaction-state.apply-hover;
-      @include interaction-state.apply-active('s');
-    }
-
-    &.attention-level3 {
-      --kirby-button-border-color: #{utils.get-color('white')};
-      --kirby-button-color: #{utils.get-color('white')};
-
-      @include interaction-state.apply-hover('xs', $make-lighter: true);
-      @include interaction-state.apply-active('m', $make-lighter: true);
-    }
-  }
-
   &.floating {
     $fab-size: 64px;
 
@@ -236,8 +213,30 @@ $button-width: (
     min-width: unset;
 
     &:not(:disabled) {
-      box-shadow: utils.get-elevation(8);
+      box-shadow: utils.get-elevation(4);
     }
+  }
+}
+
+:host-context(.kirby-color-brightness-dark) {
+  &.no-decoration {
+    --kirby-button-color: #{utils.get-color('white')};
+
+    @include interaction-state.apply-hover('xs', $make-lighter: true);
+    @include interaction-state.apply-active('m', $make-lighter: true);
+  }
+
+  &.attention-level2 {
+    --kirby-button-background-color: #{utils.get-color('white')};
+    --kirby-button-color: #{utils.get-color('white-contrast')};
+
+    @include interaction-state.apply-hover;
+    @include interaction-state.apply-active('s');
+  }
+
+  &.attention-level3 {
+    @include interaction-state.apply-hover('xxxs', $make-lighter: true);
+    @include interaction-state.apply-active('xxs', $make-lighter: true);
   }
 }
 
@@ -251,27 +250,8 @@ $button-width: (
 }
 
 :host-context(kirby-dropdown) {
+  // place arrow-icon in dropdown correctly
   justify-content: space-between;
-
-  &.attention-level2 {
-    --kirby-button-background-color: #{utils.get-color('white')};
-    --kirby-button-color: #{utils.get-color('white-contrast')};
-
-    @include interaction-state.apply-hover('xxxs');
-    @include interaction-state.apply-active('xxs');
-
-    box-shadow: utils.get-elevation(2);
-  }
-}
-
-:host-context(kirby-action-sheet) {
-  &.attention-level2 {
-    --kirby-button-background-color: #{utils.get-color('white')};
-    --kirby-button-color: #{utils.get-color('white-contrast')};
-
-    @include interaction-state.apply-hover;
-    @include interaction-state.apply-active;
-  }
 }
 
 // Temp fix for https://github.com/angular/angular-cli/issues/13854#issuecomment-470831308

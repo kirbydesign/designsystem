@@ -17,7 +17,7 @@
   labels, interactions, more complex datasets & custom options.
 </p>
 <p>
-  <kirby-card [mode]="_cardMode" [hasPadding]="_cardHasPadding">
+  <kirby-card [flat]="true" [hasPadding]="_cardHasPadding">
     <cookbook-example-viewer [html]="simpleColumnExample.template">
       <cookbook-chart-example-simple-column
         #simpleColumnExample
@@ -35,7 +35,7 @@
 <p>The column chart visualizes data from different categories as rectangles.</p>
 <p>To render a column chart set <code>type</code> to <code>"column"</code>.</p>
 <p>
-  <kirby-card [mode]="_cardMode" [hasPadding]="_cardHasPadding">
+  <kirby-card [flat]="true" [hasPadding]="_cardHasPadding">
     <cookbook-example-viewer [html]="columnExample.template" [ts]="columnExample.codeSnippet">
       <cookbook-chart-example-column #columnExample></cookbook-chart-example-column>
     </cookbook-example-viewer>
@@ -46,7 +46,7 @@
 <p>The bar chart visualizes data from different categories as rectangles along the x-axis.</p>
 <p>To render a bar chart set <code>type</code> to <code>'bar'</code>.</p>
 <p>
-  <kirby-card [mode]="_cardMode" [hasPadding]="_cardHasPadding">
+  <kirby-card [flat]="true" [hasPadding]="_cardHasPadding">
     <cookbook-example-viewer [html]="barExample.template">
       <cookbook-chart-example-bar #barExample></cookbook-chart-example-bar>
     </cookbook-example-viewer>
@@ -57,7 +57,7 @@
 <p>The line chart visualizes data from different categories as a line along the x-axis.</p>
 <p>To render a line chart set <code>type</code> to <code>'line'</code>.</p>
 <p>
-  <kirby-card [mode]="_cardMode" [hasPadding]="_cardHasPadding">
+  <kirby-card [flat]="true" [hasPadding]="_cardHasPadding">
     <cookbook-example-viewer [html]="lineExample.template">
       <cookbook-chart-example-line #lineExample></cookbook-chart-example-line>
     </cookbook-example-viewer>
@@ -104,7 +104,7 @@
   >.
 </p>
 <p>
-  <kirby-card [mode]="_cardMode" [hasPadding]="_cardHasPadding">
+  <kirby-card [flat]="true" [hasPadding]="_cardHasPadding">
     <cookbook-example-viewer
       [html]="interactionExample.template"
       [ts]="interactionExample.codeSnippet"
@@ -117,7 +117,7 @@
 <h3 id="stacked-bar-and-column-charts">Stacked Bar & column charts</h3>
 <p>Stacked charts can be created using a combination of custom options and datasets.</p>
 <p>
-  <kirby-card [mode]="_cardMode" [hasPadding]="_cardHasPadding">
+  <kirby-card [flat]="true" [hasPadding]="_cardHasPadding">
     <cookbook-example-viewer [html]="stackedExample.template" [ts]="stackedExample.codeSnippet">
       <cookbook-chart-example-column-stacked #stackedExample>
       </cookbook-chart-example-column-stacked>
@@ -153,7 +153,7 @@
   used to draw a line:
 </p>
 <p>
-  <kirby-card [mode]="_cardMode" [hasPadding]="_cardHasPadding">
+  <kirby-card [flat]="true" [hasPadding]="_cardHasPadding">
     <cookbook-example-viewer
       [html]="multipleDatasetsExample.template"
       [ts]="multipleDatasetsExample.codeSnippet"
@@ -220,7 +220,7 @@
 </p>
 
 <p>
-  <kirby-card [mode]="_cardMode" [hasPadding]="_cardHasPadding">
+  <kirby-card [flat]="true" [hasPadding]="_cardHasPadding">
     <cookbook-example-viewer
       [html]="annotationsExample.template"
       [ts]="annotationsExample.codeSnippet"
@@ -240,7 +240,7 @@
   <a href="https://www.chartjs.org/docs/latest/samples/area/line-datasets.html">Area charts</a>
 </p>
 <p>
-  <kirby-card [mode]="_cardMode" [hasPadding]="_cardHasPadding">
+  <kirby-card [flat]="true" [hasPadding]="_cardHasPadding">
     <cookbook-example-viewer [html]="lineAreaExample.template" [ts]="lineAreaExample.codeSnippet">
       <cookbook-chart-example-area-line #lineAreaExample></cookbook-chart-example-area-line>
     </cookbook-example-viewer>
@@ -301,7 +301,7 @@ to <code>false</code>.
 </p>
 
 <p>
-  <kirby-card [mode]="_cardMode" [hasPadding]="_cardHasPadding">
+  <kirby-card [flat]="true" [hasPadding]="_cardHasPadding">
     <cookbook-example-viewer
       [html]="accessibilityExample.template"
       [ts]="accessibilityExample.codeSnippet"

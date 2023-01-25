@@ -31,7 +31,7 @@ import { selectedTabClickEvent, TabsComponent } from '@kirbydesign/designsystem/
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
 
-import { KirbyAnimation } from '../../animation/kirby-animation';
+import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 import { FitHeadingConfig } from '../../directives/fit-heading/fit-heading.directive';
 import { ModalWrapperComponent } from '../modal/modal-wrapper/modal-wrapper.component';
 import { ModalNavigationService } from '../modal/services/modal-navigation.service';

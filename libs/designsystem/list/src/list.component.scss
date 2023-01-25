@@ -1,0 +1,250 @@
+@use 'sass:map';
+@use '@kirbydesign/core/src/scss/utils';
+@use '@kirbydesign/core/src/scss/themes';
+
+$divider-color: utils.get-color('background-color');
+$shadow: utils.get-elevation(2);
+$item-height: utils.size('xxxl');
+
+:host {
+  display: block;
+}
+
+.list {
+  box-shadow: $shadow;
+  background: transparent;
+  contain: inherit;
+  padding: 0;
+}
+
+ion-list-header {
+  background-color: utils.get-color('white');
+  border-bottom: 1px solid $divider-color;
+  padding: 0;
+  text-transform: inherit;
+  letter-spacing: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+  min-height: 0;
+  overflow: inherit;
+}
+
+ion-item {
+  --background: #{utils.get-color('white')};
+  --background-activated: #{utils.get-color('white-shade')};
+  --background-hover: #{utils.get-color('background-color')};
+  --background-focused: #{utils.get-color('background-color')};
+  --inner-border-width: 0;
+  --ion-safe-area-right: 0;
+  --min-height: #{$item-height};
+  --padding-bottom: #{utils.size('xxs')};
+  --padding-end: #{utils.size('s')};
+  --padding-start: #{utils.size('s')};
+  --padding-top: #{utils.size('xxs')};
+
+  display: flex;
+  font-size: utils.font-size('s');
+  min-height: $item-height;
+  overflow: visible;
+  width: 100%;
+}
+
+ion-item-sliding {
+  &.item-sliding-active-slide {
+    // backface-visibility and transform, to fix clipping issue on iOS see https://stackoverflow.com/a/16681137 and https://github.com/kirbydesign/designsystem/issues/863
+    backface-visibility: hidden;
+    transform: translate3d(0, 0, 0);
+  }
+
+  $list-colors: ('light'); // add supported list item theme colors here
+  @each $color-name, $color-value in $list-colors {
+    &.#{$color-name} {
+      --kirby-item-background: #{utils.get-color($color-name)};
+      --kirby-item-background-activated: #{utils.get-color($color-name + '-shade')};
+      --kirby-item-background-focused: #{utils.get-color($color-name + '-shade')};
+      --kirby-item-background-hover: #{utils.get-color($color-name + '-tint')};
+
+      ion-item {
+        --background: #{utils.get-color($color-name)};
+        --color: #{utils.get-color($color-name + '-contrast')};
+        --background-activated: #{utils.get-color($color-name + '-shade')};
+        --background-focused: #{utils.get-color($color-name + '-shade')};
+        --background-hover: #{utils.get-color($color-name + '-tint')};
+      }
+    }
+  }
+}
+
+ion-item-group {
+  margin-bottom: utils.size('m');
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+ion-item-divider {
+  --inner-padding-end: 0;
+  --color: unset;
+
+  background-color: transparent;
+  border-color: transparent;
+  min-height: 0;
+  padding: 0 utils.size('s') utils.size('xxs') utils.size('s');
+  font-weight: inherit;
+}
+
+.footer {
+  background-color: utils.get-color('white');
+  border-top: 1px solid $divider-color;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.no-more-items,
+.loading {
+  width: 100%;
+  padding: utils.size('m') 0;
+  text-align: center;
+}
+
+.swipe-action {
+  display: flex;
+  color: #{utils.get-color('black')};
+  background-color: transparent;
+
+  ion-item-option {
+    height: 100%;
+    display: inline-block;
+    text-align: center;
+  }
+
+  .item-content {
+    display: inline-grid;
+    min-width: 70px;
+    flex-direction: column;
+
+    ion-label {
+      --background: unset;
+      --color: unset;
+    }
+  }
+}
+
+ion-item-options[side='end'] {
+  border-bottom-width: 0;
+}
+
+:host-context(.has-sections),
+:host-context(.has-stand-alone) {
+  .list {
+    box-shadow: none;
+  }
+
+  .list-items {
+    box-shadow: $shadow;
+    border-radius: utils.$border-radius;
+  }
+
+  .footer {
+    background-color: transparent;
+    border-top: none;
+  }
+
+  ion-list-header {
+    background-color: transparent;
+    border-bottom: none;
+  }
+}
+
+:host-context(.shape-rounded) {
+  .list,
+  .list-items {
+    border-radius: utils.$border-radius;
+  }
+
+  ion-item.first,
+  ion-item-sliding.first,
+  ion-list-header {
+    border-top-left-radius: utils.$border-radius;
+    border-top-right-radius: utils.$border-radius;
+    mask-image: radial-gradient(
+      white,
+      black
+    ); // Solves issues with round borders at iOS in certain scenarios
+  }
+
+  ion-item-sliding > ion-item,
+  &:not(.has-sections) .has-header ion-item,
+  &:not(.has-sections) .has-header ion-item-sliding {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  ion-item.last,
+  ion-item-sliding.last,
+  .footer {
+    border-bottom-left-radius: utils.$border-radius;
+    border-bottom-right-radius: utils.$border-radius;
+    mask-image: radial-gradient(
+      white,
+      black
+    ); // Solves issues with round borders at iOS in certain scenarios
+  }
+
+  ion-item-sliding > ion-item,
+  &:not(.has-sections) .has-footer ion-item,
+  &:not(.has-sections) .has-footer ion-item-sliding {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
+
+:host-context(.shape-none) {
+  .list,
+  .list-items {
+    box-shadow: none;
+    border-radius: unset;
+  }
+
+  .list {
+    ion-item,
+    ion-item-sliding {
+      --padding-start: 0;
+      --padding-end: 0;
+      --padding-top: 0;
+      --padding-bottom: 0;
+      --inner-padding-start: 0;
+      --inner-padding-end: 0;
+      --inner-padding-top: 0;
+      --inner-padding-bottom: 0;
+      --background: none;
+      --background-activated: none;
+      --background-hover: none;
+      --background-focused: none;
+
+      overflow: visible;
+    }
+  }
+}
+
+:host-context(.item-spacing) {
+  .list {
+    kirby-list-item {
+      margin-bottom: utils.size('s');
+
+      & > ion-item,
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+@each $sizeName, $size in utils.$sizes {
+  .stand-alone-bottom-margin-#{$sizeName} {
+    margin-bottom: $size;
+  }
+}

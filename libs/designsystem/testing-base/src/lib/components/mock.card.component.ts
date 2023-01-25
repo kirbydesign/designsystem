@@ -20,7 +20,6 @@ export class MockCardComponent {
   @Input() hasPadding: boolean;
   @Input() sizes: { [size: string]: number };
   @Input() mode: 'flat' | 'highlighted';
-  @Input() hasDarkBackgroundColor: boolean;
 }
 
 // #endregion
