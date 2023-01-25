@@ -23,8 +23,7 @@ describe('NumberInputDirective', () => {
   const createDirective = createDirectiveFactory({
     directive: DecimalMaskDirective,
     host: NumericInputHostComponent,
-    imports: [ReactiveFormsModule],
-    declarations: [InputComponent],
+    imports: [ReactiveFormsModule, InputComponent],
     providers: [
       {
         provide: LOCALE_ID,
