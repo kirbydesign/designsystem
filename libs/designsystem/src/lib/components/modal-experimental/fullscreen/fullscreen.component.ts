@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { IonContent, IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
-import { KirbyAnimation } from '../../../animation/kirby-animation';
+import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 
 @Component({
   selector: 'kirby-fullscreen-modal-experimental',
