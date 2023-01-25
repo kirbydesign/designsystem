@@ -23,15 +23,13 @@ describe('FormFieldComponent', () => {
   const createHost = createHostFactory({
     component: FormFieldComponent,
     declarations: [
-      FormFieldMessageComponent,
-      AffixDirective,
-      InputComponent,
-      TextareaComponent,
       RadioGroupComponent,
       RadioComponent,
       InputCounterComponent,
       ItemComponent,
+      FormFieldMessageComponent,
     ],
+    imports: [AffixDirective, InputComponent, TextareaComponent],
     mocks: [PlatformService],
     providers: [
       {

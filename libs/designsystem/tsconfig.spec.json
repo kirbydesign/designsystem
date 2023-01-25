@@ -31,7 +31,8 @@
       "@kirbydesign/designsystem/accordion": ["accordion/index.ts"],
       "@kirbydesign/designsystem/radio": ["radio/index.ts"],
       "@kirbydesign/designsystem/item-sliding": ["item-sliding/index.ts"],
-      "@kirbydesign/designsystem/list": ["list/index.ts"]
+      "@kirbydesign/designsystem/list": ["list/index.ts"],
+      "@kirbydesign/designsystem/form-field": ["form-field/index.ts"]
     }
   },
   "files": ["test.ts"],

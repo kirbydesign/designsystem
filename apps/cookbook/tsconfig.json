@@ -35,6 +35,7 @@
       "@kirbydesign/designsystem/radio": ["libs/designsystem/radio/index.ts"],
       "@kirbydesign/designsystem/item-sliding": ["libs/designsystem/item-sliding/index.ts"],
       "@kirbydesign/designsystem/list": ["libs/designsystem/list/index.ts"],
+      "@kirbydesign/designsystem/form-field": ["libs/designsystem/form-field/index.ts"]
     },
     "target": "es2020"
   },

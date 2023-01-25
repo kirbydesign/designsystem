@@ -17,8 +17,7 @@ describe('DateInputDirective', () => {
 
   const createDirective = createDirectiveFactory({
     directive: DateInputDirective,
-    imports: [],
-    declarations: [InputComponent],
+    imports: [InputComponent],
     providers: [
       {
         provide: LOCALE_ID,

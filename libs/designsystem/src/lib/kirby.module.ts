@@ -32,6 +32,13 @@ import { AccordionModule } from '@kirbydesign/designsystem/accordion';
 import { ItemSlidingComponent } from '@kirbydesign/designsystem/item-sliding';
 import { ListModule } from '@kirbydesign/designsystem/list';
 import { RadioModule } from '@kirbydesign/designsystem/radio';
+import {
+  AffixDirective,
+  DateInputDirective,
+  FormFieldModule,
+  InputComponent,
+  TextareaComponent,
+} from '@kirbydesign/designsystem/form-field';
 import { AppModule } from './components/app/app.module';
 import { AvatarComponent } from './components/avatar/avatar.component';
 import { ButtonComponent } from './components/button/button.component';
@@ -39,12 +46,7 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { ChartsModule } from './components/charts';
 import { DataTableModule } from './components/data-table/data-table.module';
 import { FabSheetComponent } from './components/fab-sheet/fab-sheet.component';
-import { DateInputDirective } from './components/form-field/directives/date/date-input.directive';
-import { DecimalMaskDirective } from './components/form-field/directives/decimal-mask/decimal-mask.directive';
-import { AffixDirective } from './components/form-field/directives/affix/affix.directive';
 
-import { InputComponent } from './components/form-field/input/input.component';
-import { TextareaComponent } from './components/form-field/textarea/textarea.component';
 import { BreakpointHelperService } from './components/grid/breakpoint-helper.service';
 import { GridComponent } from './components/grid/grid.component';
 import { ItemGroupComponent } from './components/item-group/item-group.component';
@@ -72,23 +74,16 @@ import { ModalRouterLinkDirective } from './directives/modal-router-link/modal-r
 import { EmptyStateModule } from './components/empty-state/empty-state.module';
 import { DropdownModule } from './components/dropdown';
 import { KirbyBadgeModule } from './components/kirby-badge.module';
-import { FormFieldModule } from './components/form-field/form-field.module';
 
-const exportedDeclarations = [
-  GridComponent,
-  ModalRouterLinkDirective,
-  DateInputDirective,
-  DecimalMaskDirective,
-  AffixDirective,
-  InputComponent,
-  TextareaComponent,
-
-  ItemGroupComponent,
-];
+const exportedDeclarations = [GridComponent, ModalRouterLinkDirective, ItemGroupComponent];
 
 const declarations = [...exportedDeclarations, KeyHandlerDirective, ModalCompactWrapperComponent];
 
 const standaloneComponents = [
+  TextareaComponent,
+  InputComponent,
+  AffixDirective,
+  DateInputDirective,
   DividerComponent,
   ThemeColorDirective,
   SegmentedControlComponent,

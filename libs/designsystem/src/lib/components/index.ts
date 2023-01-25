@@ -11,7 +11,6 @@ export * from './calendar';
 
 export * from './data-table';
 
-export * from './form-field';
 export * from './dropdown';
 export * from './empty-state';
 export { FabSheetComponent } from './fab-sheet/fab-sheet.component';
