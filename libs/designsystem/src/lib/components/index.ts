@@ -1,5 +1,6 @@
 export * from './accordion';
 export * from './app';
+export { ActionListComponent } from './action-list/action-list.component';
 
 export { AvatarComponent, AvatarSize } from './avatar/avatar.component';
 

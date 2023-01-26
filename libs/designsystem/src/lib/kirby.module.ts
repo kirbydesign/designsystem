@@ -21,6 +21,7 @@ import { ButtonComponent } from './components/button/button.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { ChartsModule } from './components/charts';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
+import { ActionListComponent } from './components/action-list/action-list.component';
 import { DataTableModule } from './components/data-table/data-table.module';
 import { DividerComponent } from './components/divider/divider.component';
 import { FabSheetComponent } from './components/fab-sheet/fab-sheet.component';
@@ -110,6 +111,7 @@ const standaloneComponents = [
   SlideButtonComponent,
   SegmentedControlComponent,
   CheckboxComponent,
+  ActionListComponent,
   ActionSheetComponent,
   ModalFooterComponent,
   AvatarComponent,

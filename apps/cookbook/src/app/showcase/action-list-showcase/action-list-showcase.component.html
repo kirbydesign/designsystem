@@ -1,0 +1,22 @@
+<div class="example">
+  <h2>Action list</h2>
+  <p>An action list is a list of actions that displays in a popup</p>
+  <p>
+    <em>
+      <strong>Note:</strong> For now, Accordion uses Angular animations. As no other components use
+      the package it is not bundled with Kirby for performance reasons. As a result it is necessary
+      to have <code>@angular/platform-browser</code> installed and import
+      <code>BrowserAnimationsModule</code> yourself when using the accordion.
+    </em>
+  </p>
+  <cookbook-example-viewer [html]="actionListDefaultExample.template">
+    <cookbook-action-list-default-example
+      #actionListDefaultExample
+    ></cookbook-action-list-default-example>
+  </cookbook-example-viewer>
+
+  <h2>Properties:</h2>
+  <cookbook-api-description-properties
+    [properties]="properties"
+  ></cookbook-api-description-properties>
+</div>

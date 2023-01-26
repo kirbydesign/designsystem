@@ -37,6 +37,7 @@ import { SectionHeaderExampleModule } from './section-header-example/section-hea
 import { SegmentedControlExampleModule } from './segmented-control-example/segmented-control-example.module';
 import { ToggleButtonExampleModule } from './toggle-button-example/toggle-button-example.module';
 import { VirtualScrollExampleModule } from './virtual-scroll-example/virtual-scroll-example.module';
+import { ActionListExampleModule } from '~/app/examples/action-list-example/action-list-example.module';
 
 const IMPORTS = [
   CodeViewerModule,
@@ -67,6 +68,7 @@ const IMPORTS = [
   VirtualScrollExampleModule,
   ExperimentalExamplesModule,
   DataTableExampleModule,
+  ActionListExampleModule,
 ];
 
 @NgModule({
