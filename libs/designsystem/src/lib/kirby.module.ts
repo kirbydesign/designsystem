@@ -73,6 +73,7 @@ import { ReorderListComponent } from '@kirbydesign/designsystem/reorder-list';
 import { ToastController, ToastHelper } from '@kirbydesign/designsystem/toast';
 import { BreakpointHelperService, GridComponent } from '@kirbydesign/designsystem/grid';
 import { TabNavigationModule } from '@kirbydesign/designsystem/tab-navigation';
+import { MenuComponent } from '@kirbydesign/designsystem/menu';
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
 import { customElementsInitializer } from './custom-elements-initializer';
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
@@ -110,6 +111,7 @@ const standaloneComponents = [
   SlideButtonComponent,
   SegmentedControlComponent,
   CheckboxComponent,
+  MenuComponent,
   ActionSheetComponent,
   ModalFooterComponent,
   AvatarComponent,
