@@ -3,15 +3,21 @@
 @mixin apply-dark-theme {
   --kirby-interactive-element-background-color: #{utils.get-color('white-overlay')};
   --kirby-interactive-element-color: #{utils.get-color('white')};
+  --kirby-interactive-element-indicator-background-color: #{utils.get-color('white')};
+  --kirby-interactive-element-indicator-color: #{utils.get-color('white-contrast')};
 }
 
 @mixin apply-white-theme {
   --kirby-interactive-element-background-color: #{utils.get-color('dark-overlay')};
   --kirby-interactive-element-color: #{utils.get-color('black')};
+  --kirby-interactive-element-indicator-background-color: #{utils.get-color('black')};
+  --kirby-interactive-element-indicator-color: #{utils.get-color('black-contrast')};
 }
 
 @mixin apply-light-theme {
   --kirby-interactive-element-background-color: #{utils.get-color('white')};
   --kirby-interactive-element-color: #{utils.get-color('white-contrast')};
+  --kirby-interactive-element-indicator-background-color: #{utils.get-color('black')};
+  --kirby-interactive-element-indicator-color: #{utils.get-color('black-contrast')};
   --kirby-interactive-elevation: #{utils.get-elevation(2)};
 }
