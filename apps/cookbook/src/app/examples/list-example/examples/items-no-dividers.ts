@@ -14,7 +14,7 @@ export const ListItemsNoDividersExampleTemplate = `<kirby-list [items]="items" [
   selector: 'cookbook-list-items-no-dividers-example',
   template: `
     <kirby-page title="Items with no dividers">
-      <kirby-page-content> ${ListItemsNoDividersExampleTemplate} </kirby-page-content>
+      <kirby-page-content>${ListItemsNoDividersExampleTemplate}</kirby-page-content>
     </kirby-page>
   `,
 })

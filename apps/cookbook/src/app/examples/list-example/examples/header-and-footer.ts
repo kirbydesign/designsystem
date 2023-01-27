@@ -32,7 +32,7 @@ export const ListWithHeaderAndFooterExampleTemplate = `<kirby-list [items]="item
   selector: 'cookbook-list-with-header-and-footer-example',
   template: `
     <kirby-page title="List with header and footer">
-      <kirby-page-content> ${ListWithHeaderAndFooterExampleTemplate} </kirby-page-content>
+      <kirby-page-content>${ListWithHeaderAndFooterExampleTemplate}</kirby-page-content>
     </kirby-page>
   `,
   styles: ['p { margin: 0; }', '.footer { text-align: center; width: 100%; }'],
