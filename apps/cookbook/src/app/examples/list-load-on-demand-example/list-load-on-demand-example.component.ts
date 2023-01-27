@@ -22,7 +22,7 @@ export const ListLoadOnDemandExampleTemplate = `
   selector: 'cookbook-list-load-on-demand-example',
   template: `
     <kirby-page title="Load On Demand">
-      <kirby-page-content> ${ListLoadOnDemandExampleTemplate} </kirby-page-content>
+      <kirby-page-content>${ListLoadOnDemandExampleTemplate}</kirby-page-content>
     </kirby-page>
   `,
 })

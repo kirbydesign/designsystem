@@ -19,6 +19,7 @@ export { GridCardConfiguration } from './grid/grid-card-configuration';
 export { ItemGroupComponent } from './item-group/item-group.component';
 
 export * from './modal';
+export * from './modal-experimental';
 
 export * from './page';
 

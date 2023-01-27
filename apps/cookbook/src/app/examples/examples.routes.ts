@@ -44,6 +44,7 @@ import { ListNoShapeExampleComponent } from './list-no-shape-example/list-no-sha
 import { ListSwipeExampleComponent } from './list-swipe-example/list-swipe-example.component';
 import { LoadingOverlayExampleComponent } from './loading-overlay-example/loading-overlay-example.component';
 import { ModalExampleComponent } from './modal-example/modal-example.component';
+import { FullscreenModalExperimentalExampleComponent } from './modal-experimental-example/fullscreen/fullscreen-experimental-example.component';
 import { ModalRoutePage1ExampleComponent } from './modal-example/modal-route-example/modal-route-page1-example.component';
 import { ModalRoutePage2ExampleComponent } from './modal-example/modal-route-example/modal-route-page2-example.component';
 import { PageAdvancedExampleComponent } from './page-example/advanced/page-advanced-example.component';
@@ -246,6 +247,10 @@ export const routes: Routes = [
             component: ModalRoutePage2ExampleComponent,
           },
         ],
+      },
+      {
+        path: 'modal-experimental-fullscreen',
+        component: FullscreenModalExperimentalExampleComponent,
       },
       {
         path: 'form-field',

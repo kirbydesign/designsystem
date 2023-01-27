@@ -23,7 +23,7 @@ export const ListWithStandAloneExampleTemplate = `<kirby-list
   selector: 'cookbook-list-with-stand-alone-example',
   template: `
     <kirby-page title="List with stand alone">
-      <kirby-page-content> ${ListWithStandAloneExampleTemplate} </kirby-page-content>
+      <kirby-page-content>${ListWithStandAloneExampleTemplate}</kirby-page-content>
     </kirby-page>
   `,
 })
