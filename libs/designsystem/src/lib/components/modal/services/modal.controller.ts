@@ -41,6 +41,7 @@ export class ModalController implements OnDestroy {
     const navigateOnWillClose = () => {
       this.modalNavigationService.navigateOutOfModalOutlet();
     };
+
     const siblingModalRouteActivated$ = modalRouteActivated$.pipe(
       filter((modalRouteActivation) => !modalRouteActivation.isNewModal),
       map((modalRouteActivation) => modalRouteActivation.route)
