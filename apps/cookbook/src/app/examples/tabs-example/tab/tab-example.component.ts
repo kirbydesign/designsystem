@@ -61,8 +61,7 @@ import { ActionSheetItem } from '@kirbydesign/designsystem';
           subheader="Your action sheet subheader"
           [items]="items"
           (itemSelect)="onItemSelect($event)"
-        >
-        </kirby-action-sheet>
+        ></kirby-action-sheet>
       </kirby-fab-sheet>
     </kirby-page>
   `,
