@@ -1,20 +1,30 @@
 <p>
-  <em
-    >Looking for the stock chart? It has been moved to a separate
-    <code>kirby-stock-chart</code> element! <br />See:
-    <a routerLink="/home/showcase/chart-stock">the stock chart showcase</a>.</em
-  >
+  <em>
+    Looking for the stock chart? It has been moved to a separate
+    <code>kirby-stock-chart</code>
+    element!
+    <br />
+    See:
+    <a routerLink="/home/showcase/chart-stock">the stock chart showcase</a>
+    .
+  </em>
 </p>
 <p>
-  The <code>kirby-chart</code> component is used to show data in various chart types. To show the
-  default column chart all that is needed is a <code>number[]</code> which will produce a simple
-  chart using colors from the
-  <a target="_blank" href="/home/showcase/colors">Kirby color palette</a> as can be seen below.
+  The
+  <code>kirby-chart</code>
+  component is used to show data in various chart types. To show the default column chart all that
+  is needed is a
+  <code>number[]</code>
+  which will produce a simple chart using colors from the
+  <a target="_blank" href="/home/showcase/colors">Kirby color palette</a>
+  as can be seen below.
 </p>
 
 <p>
-  It is possible to customize the <code>kirby-chart</code> component with different chart types,
-  labels, interactions, more complex datasets & custom options.
+  It is possible to customize the
+  <code>kirby-chart</code>
+  component with different chart types, labels, interactions, more complex datasets & custom
+  options.
 </p>
 <p>
   <kirby-card [flat]="true" [hasPadding]="_cardHasPadding">
@@ -29,11 +39,23 @@
 <kirby-divider [hasMargin]="true"></kirby-divider>
 
 <h2>Types of Charts</h2>
-<p>The type of a <code>kirby-chart</code> is set through the <code>type</code> input property.</p>
+<p>
+  The type of a
+  <code>kirby-chart</code>
+  is set through the
+  <code>type</code>
+  input property.
+</p>
 
 <h3>Column Chart</h3>
 <p>The column chart visualizes data from different categories as rectangles.</p>
-<p>To render a column chart set <code>type</code> to <code>"column"</code>.</p>
+<p>
+  To render a column chart set
+  <code>type</code>
+  to
+  <code>"column"</code>
+  .
+</p>
 <p>
   <kirby-card [flat]="true" [hasPadding]="_cardHasPadding">
     <cookbook-example-viewer [html]="columnExample.template" [ts]="columnExample.codeSnippet">
@@ -44,7 +66,13 @@
 
 <h3>Bar Chart</h3>
 <p>The bar chart visualizes data from different categories as rectangles along the x-axis.</p>
-<p>To render a bar chart set <code>type</code> to <code>'bar'</code>.</p>
+<p>
+  To render a bar chart set
+  <code>type</code>
+  to
+  <code>'bar'</code>
+  .
+</p>
 <p>
   <kirby-card [flat]="true" [hasPadding]="_cardHasPadding">
     <cookbook-example-viewer [html]="barExample.template">
@@ -55,7 +83,13 @@
 
 <h3>Line Chart</h3>
 <p>The line chart visualizes data from different categories as a line along the x-axis.</p>
-<p>To render a line chart set <code>type</code> to <code>'line'</code>.</p>
+<p>
+  To render a line chart set
+  <code>type</code>
+  to
+  <code>'line'</code>
+  .
+</p>
 <p>
   <kirby-card [flat]="true" [hasPadding]="_cardHasPadding">
     <cookbook-example-viewer [html]="lineExample.template">
@@ -68,20 +102,25 @@
 
 <h2 id="custom-options">Custom Options</h2>
 <p>
-  The <code>kirby-chart</code> component is based on
-  <a target="_blank" href="https://www.chartjs.org/docs/latest/">chart.js</a>. Under the hood all
-  Kirby chart types are a set of pre-configured options for chart.js that has been Kirbyfied.
+  The
+  <code>kirby-chart</code>
+  component is based on
+  <a target="_blank" href="https://www.chartjs.org/docs/latest/">chart.js</a>
+  . Under the hood all Kirby chart types are a set of pre-configured options for chart.js that has
+  been Kirbyfied.
 </p>
 <p>
-  These options can be overwritten via the <code>customOptions</code> input property. Among other
-  things, this can be useful for implementing interactions with your charts and creating stacked bar
-  charts.
+  These options can be overwritten via the
+  <code>customOptions</code>
+  input property. Among other things, this can be useful for implementing interactions with your
+  charts and creating stacked bar charts.
 </p>
 <p>
   While customization can be nice and opens for the possibility of more varied charts; it also allow
   you to create charts that are not very kirby-esque, for example by changing the colors to
   something outside of the
-  <a target="_blank" href="/home/showcase/colors">Kirby color palette</a>.
+  <a target="_blank" href="/home/showcase/colors">Kirby color palette</a>
+  .
 </p>
 <p>
   Therefore if there is a customization you seem to be making again and again do not hesitate to
@@ -89,9 +128,10 @@
 </p>
 <p>
   For documentation on the options object see the
-  <a target="_blank" href="https://www.chartjs.org/docs/latest/general/options.html"
-    >chart.js options documentation</a
-  >.
+  <a target="_blank" href="https://www.chartjs.org/docs/latest/general/options.html">
+    chart.js options documentation
+  </a>
+  .
 </p>
 
 <h3>Interacting with charts</h3>
@@ -99,9 +139,10 @@
   It is possible to implement various interactions using custom options. The following example
   implements a simple click event listener; for a more detailed explanation of possible interactions
   see
-  <a target="_blank" href="https://www.chartjs.org/docs/latest/configuration/interactions.html"
-    >the chart.js interactions documentation</a
-  >.
+  <a target="_blank" href="https://www.chartjs.org/docs/latest/configuration/interactions.html">
+    the chart.js interactions documentation
+  </a>
+  .
 </p>
 <p>
   <kirby-card [flat]="true" [hasPadding]="_cardHasPadding">
@@ -119,8 +160,9 @@
 <p>
   <kirby-card [flat]="true" [hasPadding]="_cardHasPadding">
     <cookbook-example-viewer [html]="stackedExample.template" [ts]="stackedExample.codeSnippet">
-      <cookbook-chart-example-column-stacked #stackedExample>
-      </cookbook-chart-example-column-stacked>
+      <cookbook-chart-example-column-stacked
+        #stackedExample
+      ></cookbook-chart-example-column-stacked>
     </cookbook-example-viewer>
   </kirby-card>
 </p>
@@ -128,8 +170,10 @@
 <h3>Option resolving</h3>
 <p>
   Besides custom options it is also possible to provide options for each dataset as can be seen in
-  the above <i>stacked bar & column charts</i> example where it is used to change the background- &
-  hover background color for one of the datsets.
+  the above
+  <i>stacked bar & column charts</i>
+  example where it is used to change the background- & hover background color for one of the
+  datsets.
 </p>
 
 <p>Options are resolved such that:</p>
@@ -143,9 +187,10 @@
 <h2><a id="datasets">Datasets</a></h2>
 <p>
   It is possible to provide data as an array of
-  <a target="_blank" href="https://www.chartjs.org/docs/next/general/data-structures.html"
-    >chart.js datasets</a
-  >. This allows for example to have several bars for each category in a column chart and mixing
+  <a target="_blank" href="https://www.chartjs.org/docs/next/general/data-structures.html">
+    chart.js datasets
+  </a>
+  . This allows for example to have several bars for each category in a column chart and mixing
   different types of charts. Also each dataset can be customized with custom options.
 </p>
 <p>
@@ -158,8 +203,9 @@
       [html]="multipleDatasetsExample.template"
       [ts]="multipleDatasetsExample.codeSnippet"
     >
-      <cookbook-chart-example-multiple-datasets #multipleDatasetsExample>
-      </cookbook-chart-example-multiple-datasets>
+      <cookbook-chart-example-multiple-datasets
+        #multipleDatasetsExample
+      ></cookbook-chart-example-multiple-datasets>
     </cookbook-example-viewer>
   </kirby-card>
 </p>
@@ -168,19 +214,22 @@
 
 <h2>Annotations</h2>
 <p>
-  <strong>Note:</strong> It is currently not possible to use annotations with type
-  <code>point</code> as these are not rendered. For progress see issue
-  <a target="_blank" href="https://github.com/kirbydesign/designsystem/issues/1674" target="_blank"
-    >#1674</a
-  >
+  <strong>Note:</strong>
+  It is currently not possible to use annotations with type
+  <code>point</code>
+  as these are not rendered. For progress see issue
+  <a target="_blank" href="https://github.com/kirbydesign/designsystem/issues/1674" target="_blank">
+    #1674
+  </a>
   <br />
 </p>
 <p>
   Lines, boxes, ellipses can be drawn to annotate the charts using the
-  <code>annotations</code> input property. Annotations are drawn using the
-  <a target="_blank" href="https://www.chartjs.org/chartjs-plugin-annotation/1.0.2/"
-    >chartjs-plugin-annotation</a
-  >
+  <code>annotations</code>
+  input property. Annotations are drawn using the
+  <a target="_blank" href="https://www.chartjs.org/chartjs-plugin-annotation/1.0.2/">
+    chartjs-plugin-annotation
+  </a>
   plugin for Chart.js
 </p>
 
@@ -195,22 +244,25 @@
     <a
       target="_blank"
       href="https://www.chartjs.org/chartjs-plugin-annotation/1.0.2/guide/types/box.html"
-      >Box annotation documentation</a
     >
+      Box annotation documentation
+    </a>
   </li>
   <li>
     <a
       target="_blank"
       href="https://www.chartjs.org/chartjs-plugin-annotation/1.0.2/guide/types/ellipse.html"
-      >Ellipse annotation documentation</a
     >
+      Ellipse annotation documentation
+    </a>
   </li>
   <li>
     <a
       target="_blank"
       href="https://www.chartjs.org/chartjs-plugin-annotation/1.0.2/guide/types/line.html"
-      >Line annotation documentation</a
     >
+      Line annotation documentation
+    </a>
   </li>
 </ul>
 
@@ -225,7 +277,7 @@
       [html]="annotationsExample.template"
       [ts]="annotationsExample.codeSnippet"
     >
-      <cookbook-chart-example-annotations #annotationsExample> </cookbook-chart-example-annotations>
+      <cookbook-chart-example-annotations #annotationsExample></cookbook-chart-example-annotations>
     </cookbook-example-viewer>
   </kirby-card>
 </p>
@@ -234,7 +286,11 @@
 
 <h2>Line Chart with fill</h2>
 <p>The fill allows for better visual explanation by allowing for different colors between lines.</p>
-<p>To render the fill set the <code>fill</code> inside your dataset.</p>
+<p>
+  To render the fill set the
+  <code>fill</code>
+  inside your dataset.
+</p>
 <p>
   More information can be found here:
   <a href="https://www.chartjs.org/docs/latest/samples/area/line-datasets.html">Area charts</a>
@@ -251,8 +307,11 @@
 <h2>Responsiveness</h2>
 <p>
   The chart component takes 100% width of whatever container it is placed in. The height has to be
-  set manually either via the <code>height</code> input property or the
-  <code>--kirby-chart-height</code> custom css property.
+  set manually either via the
+  <code>height</code>
+  input property or the
+  <code>--kirby-chart-height</code>
+  custom css property.
 </p>
 <h3>Resize delay</h3>
 <p>
@@ -260,24 +319,30 @@
   delay of 10 milliseconds to debounce the drawing and make resizing smoother.
 </p>
 <p>
-  It is possible to change this delay through the <code>customOptions</code> input property by
-  setting
+  It is possible to change this delay through the
+  <code>customOptions</code>
+  input property by setting
   <a
     target="_blank"
     href="https://www.chartjs.org/docs/master/configuration/responsive.html#configuration-options"
-    ><code>resizeDelay</code></a
   >
+    <code>resizeDelay</code>
+  </a>
   to a delay in milliseconds.
 </p>
 <h3>Aspect Ratio</h3>
 The aspect ratio of the chart is not preserved whenever it is resized. This can be changed using
-<code>customOptions</code> by setting
+<code>customOptions</code>
+by setting
 <a
   target="_blank"
   href="https://www.chartjs.org/docs/master/configuration/responsive.html#configuration-options"
-  ><code>maintainAspectRatio</code></a
 >
-to <code>false</code>.
+  <code>maintainAspectRatio</code>
+</a>
+to
+<code>false</code>
+.
 
 <kirby-divider [hasMargin]="true"></kirby-divider>
 <h2>Accessibility</h2>
@@ -285,9 +350,10 @@ to <code>false</code>.
   The charts are unfortunately not accessible out-of-the-box. This is because the charts are drawn
   using a canvas element which renders it as a rasterized image; meaning there is no structured
   content that can be read aloud by a screen reader. This makes it act much like an
-  <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img"
-    >image element</a
-  >.
+  <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img">
+    image element
+  </a>
+  .
 </p>
 <p>
   As a fallback for screen readers structured content can be slotted that a screen reader will read
@@ -295,9 +361,10 @@ to <code>false</code>.
 </p>
 <p>
   For more on accessibility when working with the canvas element have a look at
-  <a target="_blank" href="https://pauljadam.com/demos/canvas.html"
-    >this great article from Paul J. Adam</a
-  >.
+  <a target="_blank" href="https://pauljadam.com/demos/canvas.html">
+    this great article from Paul J. Adam
+  </a>
+  .
 </p>
 
 <p>
@@ -306,8 +373,9 @@ to <code>false</code>.
       [html]="accessibilityExample.template"
       [ts]="accessibilityExample.codeSnippet"
     >
-      <cookbook-chart-example-accessibility #accessibilityExample>
-      </cookbook-chart-example-accessibility>
+      <cookbook-chart-example-accessibility
+        #accessibilityExample
+      ></cookbook-chart-example-accessibility>
     </cookbook-example-viewer>
   </kirby-card>
 </p>

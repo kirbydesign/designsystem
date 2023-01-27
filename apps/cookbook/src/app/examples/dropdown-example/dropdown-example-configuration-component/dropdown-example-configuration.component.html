@@ -1,7 +1,8 @@
 <fieldset>
   <legend>Dropdown size for examples below</legend>
   <p>
-    <strong>Size:</strong><br />
+    <strong>Size:</strong>
+    <br />
     <label>
       <input
         type="radio"
@@ -10,7 +11,9 @@
         [checked]="size === 'sm'"
         (change)="sizeChanged.emit($event.target.value)"
       />
-      Small (<code>sm</code>)
+      Small (
+      <code>sm</code>
+      )
     </label>
     <label>
       <input
@@ -20,7 +23,9 @@
         [checked]="size === 'md'"
         (change)="sizeChanged.emit($event.target.value)"
       />
-      Medium (<code>md</code>) - default
+      Medium (
+      <code>md</code>
+      ) - default
     </label>
   </p>
 </fieldset>

@@ -45,9 +45,9 @@
   <kirby-input-counter [listenTo]="tweet"></kirby-input-counter>
 </kirby-form-field>
 
-<kirby-label> <h3 class="padding-title" heading>Saved receivers</h3></kirby-label>
+<kirby-label><h3 class="padding-title" heading>Saved receivers</h3></kirby-label>
 <kirby-list [items]="Others" [showDivider]="true">
-  <kirby-list-section-header> </kirby-list-section-header>
+  <kirby-list-section-header></kirby-list-section-header>
   <kirby-item *kirbyListItemTemplate="let other" (click)="setSelected(other.id)">
     <data slot="start">
       <kirby-icon name="verify" *ngIf="other.id === selectedId"></kirby-icon>

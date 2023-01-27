@@ -5,7 +5,7 @@
   (click)="preventOutsideClick($event)"
 >
   <ng-container *ngFor="let item of items">
-    <ion-segment-button [value]="item.id">{{ item.text }} </ion-segment-button>
+    <ion-segment-button [value]="item.id">{{ item.text }}</ion-segment-button>
     <div class="badge-container" *ngIf="item.badge">
       <kirby-badge
         role="text"

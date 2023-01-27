@@ -4,24 +4,27 @@
 </p>
 <p>
   A link should be used for simple navigation. That is, situations where the user will be sent to a
-  new resource or destination in the app via a <code>href</code>. Use
-  <a routerLink="/home/showcase/button">buttons</a> instead of links if the user is not redirected
-  to a new destination but instead triggers an action, makes a choice, or in any way manipulate
-  data.
+  new resource or destination in the app via a
+  <code>href</code>
+  . Use
+  <a routerLink="/home/showcase/button">buttons</a>
+  instead of links if the user is not redirected to a new destination but instead triggers an
+  action, makes a choice, or in any way manipulate data.
 </p>
 <p>
   Rather than providing a component for links Kirby simply provides custom styles for the
-  <code>&lt;a&gt;</code> tag that gives a consistent look and feel of links. Links have an underline
-  and inherit the text color of the surrounding elements. The color of visited links does not
-  change.
+  <code>&lt;a&gt;</code>
+  tag that gives a consistent look and feel of links. Links have an underline and inherit the text
+  color of the surrounding elements. The color of visited links does not change.
 </p>
 
 <h2>Sizes</h2>
 <p>
   By default, links inherit the font-size of the context they are used in. For standalone links, any
-  font-class from <a routerLink="/home/showcase/fonts">Kirby Fonts</a> can be applied. For
-  accessibility reasons it is not recommended to use links when the clickable text is smaller than
-  12px (extra small).
+  font-class from
+  <a routerLink="/home/showcase/fonts">Kirby Fonts</a>
+  can be applied. For accessibility reasons it is not recommended to use links when the clickable
+  text is smaller than 12px (extra small).
 </p>
 
 <cookbook-example-viewer [html]="internal.template">
@@ -31,7 +34,8 @@
 <h2>New tab</h2>
 <p>
   If the link is standalone, and will open a new tab, use the
-  <code>kirby-external-icon</code> css-class to show an icon immediately after the link.
+  <code>kirby-external-icon</code>
+  css-class to show an icon immediately after the link.
 </p>
 
 <cookbook-example-viewer [html]="newTab.template">
@@ -42,10 +46,11 @@
   It is not recommended to use this option for inline links. Instead, consider writing out the
   source for inline links so it is clear that clicking the link will take the user to a new context,
   e.g.
-  <a href="https://github.com/kirbydesign/designsystem">www.github.com/kirbydesign/designsystem</a>.
-  Then the user can choose how they want to open the link.
+  <a href="https://github.com/kirbydesign/designsystem">www.github.com/kirbydesign/designsystem</a>
+  . Then the user can choose how they want to open the link.
 </p>
 <p>
-  <b>Note:</b> In a non-web context, i.e. an app, any link will most likely launch the device's
-  browser and effectively open a new tab outside the app context.
+  <b>Note:</b>
+  In a non-web context, i.e. an app, any link will most likely launch the device's browser and
+  effectively open a new tab outside the app context.
 </p>
