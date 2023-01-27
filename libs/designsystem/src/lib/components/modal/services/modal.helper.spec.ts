@@ -49,7 +49,9 @@ class ContentOverflowsWithFooterEmbeddedComponent {
 }
 
 @Component({
-  template: ` <div style="height: 1px;">Content</div> `,
+  template: `
+    <div style="height: 1px;">Content</div>
+  `,
 })
 class ContentWithNoOverflowEmbeddedComponent {}
 
