@@ -29,7 +29,7 @@ describe('InputCounterComponent', () => {
     });
 
     it('should render counter correctly', () => {
-      expect(spectator.element.textContent.replace(/(\r\n|\n|\r)/gm, '')).toEqual('');
+      expect(spectator.element.textContent.trim()).toEqual('');
     });
   });
 
@@ -44,7 +44,7 @@ describe('InputCounterComponent', () => {
     });
 
     it('should render text correctly', () => {
-      expect(spectator.element.textContent.replace(/(\r\n|\n|\r)/gm, '')).toEqual(expectedText);
+      expect(spectator.element.textContent.trim()).toEqual(expectedText);
     });
   });
 
@@ -60,7 +60,7 @@ describe('InputCounterComponent', () => {
     });
 
     it('should render text correctly', () => {
-      expect(spectator.element.textContent.replace(/(\r\n|\n|\r)/gm, '')).toEqual(expectedText);
+      expect(spectator.element.textContent.trim()).toEqual(expectedText);
     });
   });
 
@@ -76,7 +76,7 @@ describe('InputCounterComponent', () => {
     });
 
     it('should render text correctly', () => {
-      expect(spectator.element.textContent.replace(/(\r\n|\n|\r)/gm, '')).toEqual(expectedText);
+      expect(spectator.element.textContent.trim()).toEqual(expectedText);
     });
   });
 
