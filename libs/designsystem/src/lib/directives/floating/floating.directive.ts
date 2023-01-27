@@ -44,6 +44,8 @@ export class FloatingDirective implements OnInit, OnDestroy {
     return this._triggers;
   }
 
+  @Input() private isDisabled: boolean = false;
+
   private _placement: Placement;
   private _triggers: Array<TriggerEvent> | TriggerEvent;
   private _reference: ElementRef;
@@ -80,12 +82,20 @@ export class FloatingDirective implements OnInit, OnDestroy {
 
   /* Should be accessible for programmatically setting display */
   public show(): void {
+    if (this.isDisabled) {
+      return;
+    }
+
     this.renderer.setStyle(this.elementRef.nativeElement, 'display', 'block');
     this.isShown = true;
   }
 
   /* Should be accessible for programmatically setting display */
   public hide(): void {
+    if (this.isDisabled) {
+      return;
+    }
+
     this.renderer.setStyle(this.elementRef.nativeElement, 'display', 'none');
     this.isShown = false;
   }
