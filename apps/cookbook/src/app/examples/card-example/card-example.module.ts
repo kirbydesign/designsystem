@@ -4,19 +4,22 @@ import { NgModule } from '@angular/core';
 import { KirbyModule } from '@kirbydesign/designsystem';
 
 import { CardExampleComponent } from './card-example.component';
-import { CardBackgroundImageExampleComponent } from './examples/card-background-image-example/card-background-image-example.component';
-import { CardClickableExampleComponent } from './examples/card-clickable-example/card-clickable-example.component';
-import { CardCssBackgroundImageExampleComponent } from './examples/card-css-background-image-example/card-css-background-image-example.component';
-import { CardElevationsExampleComponent } from './examples/card-elevations-example/card-elevations-example.component';
-import { CardThemecolorExampleComponent } from './examples/card-themecolor-example/card-themecolor-example.component';
+import { CardExampleBackgroundImageComponent } from './examples/background-image';
+
+import { CardExampleDisclosureComponent } from './examples/disclosure';
+import { CardExampleColorComponent } from './examples/color';
+import { CardExampleDefaultComponent } from './examples/default';
+import { CardExampleFlagComponent } from './examples/flag';
+import { CardExampleFlatComponent } from './examples/flat';
 
 const COMPONENT_DECLARATIONS = [
   CardExampleComponent,
-  CardClickableExampleComponent,
-  CardElevationsExampleComponent,
-  CardThemecolorExampleComponent,
-  CardBackgroundImageExampleComponent,
-  CardCssBackgroundImageExampleComponent,
+  CardExampleDefaultComponent,
+  CardExampleFlagComponent,
+  CardExampleColorComponent,
+  CardExampleDisclosureComponent,
+  CardExampleBackgroundImageComponent,
+  CardExampleFlatComponent,
 ];
 
 @NgModule({

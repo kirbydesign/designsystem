@@ -19,6 +19,7 @@ export class ShowcaseComponent implements OnDestroy {
   showCallToActionLinks = true;
 
   constructor(private router: Router, private elementRef: ElementRef<HTMLElement>) {
+    this.setExampleComponentFromUrl(this.router.url);
     this.onNavigationEnd();
   }
 
@@ -34,13 +35,11 @@ export class ShowcaseComponent implements OnDestroy {
   private onNavigationEnd() {
     this.routerEventsSubscription = this.router.events
       .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
-      .subscribe((event) =>
-        setTimeout(() => this.setExampleComponentFromUrl(event.urlAfterRedirects))
-      );
+      .subscribe((event) => setTimeout(() => this.setExampleComponentFromUrl(this.router.url)));
   }
 
   private setExampleComponentFromUrl(url: string) {
-    let exampleComponentUrlSegment = this.getExampleComponentUrlSegment(url);
+    const exampleComponentUrlSegment = this.getExampleComponentUrlSegment(url);
     this.exampleComponentPopOutUrl = ['/', 'examples', exampleComponentUrlSegment];
     this.exampleComponentGitUrl = this.gitUrl + exampleComponentUrlSegment + '-example';
     this.exampleComponentName = this.replaceHyphens(exampleComponentUrlSegment);

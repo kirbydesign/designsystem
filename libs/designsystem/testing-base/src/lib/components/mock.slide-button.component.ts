@@ -1,6 +1,6 @@
 import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 
-import { SlideButtonComponent } from '@kirbydesign/designsystem';
+import { SlideButtonComponent } from '@kirbydesign/designsystem/slide-button';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({

@@ -110,7 +110,7 @@
     "designsystem": {
       "projectType": "library",
       "root": "libs/designsystem",
-      "sourceRoot": "libs/designsystem/src",
+      "sourceRoot": "libs/designsystem",
       "prefix": "kirby",
       "architect": {
         "build": {
@@ -124,7 +124,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/designsystem/src/test.ts",
+            "main": "libs/designsystem/test.ts",
             "tsConfig": "libs/designsystem/tsconfig.spec.json",
             "karmaConfig": "libs/designsystem/karma.conf.js",
             "styles": ["libs/designsystem/testing/src/styles.scss"]

@@ -1,0 +1,18 @@
+/* 
+  These styles are moved here as they are shared between 
+  the new kirby-item-sliding component and the old template driven 
+  list. This reduces the amount of duplication. 
+
+  When the old template driven list is deprecated however - this should 
+  just be used directly in item-sliding.component.scss.
+ */
+@use '@kirbydesign/core/src/scss/utils';
+
+ion-item-option {
+  @each $color-name, $color-value in utils.$main-colors {
+    &.#{$color-name} {
+      background-color: #{utils.get-color($color-name)};
+      color: #{utils.get-color($color-name + '-contrast')};
+    }
+  }
+}

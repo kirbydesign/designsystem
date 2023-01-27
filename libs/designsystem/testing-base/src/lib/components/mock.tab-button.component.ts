@@ -1,6 +1,6 @@
 import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 
-import { TabButtonComponent } from '@kirbydesign/designsystem';
+import { TabButtonComponent } from '@kirbydesign/designsystem/tabs';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({

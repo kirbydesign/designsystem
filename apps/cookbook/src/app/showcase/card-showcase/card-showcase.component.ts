@@ -32,11 +32,10 @@ export class CardShowcaseComponent {
       type: ['string'],
     },
     {
-      name: 'mode',
-      description:
-        '(Optional) Sets a custom elevation on the card. Default elevation = 2, flat = 0, highlighted = 4.',
+      name: 'flat',
+      description: '(Optional) Remove elevation on the card. Default elevation = 2, flat = 0.',
       defaultValue: '',
-      type: ['flat', 'highlighted'],
+      type: ['boolean'],
     },
     {
       name: 'hasPadding',
@@ -60,11 +59,13 @@ export class CardShowcaseComponent {
         'dark',
       ],
     },
+  ];
+
+  propertiesHeaderAndFooter: ApiDescriptionProperty[] = [
     {
-      name: 'hasDarkBackgroundColor',
-      description:
-        'Use this to make the hover and active interaction states be lighter instead of darker (which is the default)',
-      defaultValue: 'false',
+      name: 'hasPadding',
+      description: 'Sets the inner padding for card header and card footer',
+      defaultValue: 'true',
       type: ['boolean'],
     },
   ];
@@ -94,6 +95,16 @@ export class CardShowcaseComponent {
       name: '--kirby-card-background-size',
       description: "Sets the 'background-size' property of the card",
       defaultValue: 'cover',
+    },
+    {
+      name: '--kirby-card-padding-top',
+      description: "Sets the 'padding-top' property of the card",
+      defaultValue: "size('s')",
+    },
+    {
+      name: '--kirby-card-padding-bottom',
+      description: "Sets the 'padding-bottom' property of the card",
+      defaultValue: "size('s')",
     },
   ];
 }
