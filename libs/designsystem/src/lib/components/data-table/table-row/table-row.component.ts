@@ -9,7 +9,9 @@ import {
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'tr[kirby-tr]',
-  template: ` <ng-content></ng-content> `,
+  template: `
+    <ng-content></ng-content>
+  `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
