@@ -50,6 +50,7 @@ import { PagePullToRefreshExampleComponent } from './page-example/pull-to-refres
 import { DropdownExampleComponent } from './dropdown-example/dropdown-example.component';
 import { DataTableExampleComponent } from './data-table-example/data-table-example.component';
 import { LoadingOverlayServiceExampleComponent } from './loading-overlay-example/service/loading-overlay-service-example.component';
+import { PageTabNavExampleContentComponent } from './page-example/tab-navigation/page-tab-nav-example-content.component';
 
 export const COMPONENT_DECLARATIONS: any[] = [
   ExamplesComponent,
@@ -85,7 +86,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   PageFitHeadingExampleComponent,
   PageFixedTitleAndActionsExampleComponent,
   PageTabNavExampleComponent,
-  TabExampleComponent,
+  PageTabNavExampleContentComponent,
   PageFixedFooterTabsExampleComponent,
   PageFixedFooterTabExampleComponent,
   TabsExampleComponent,

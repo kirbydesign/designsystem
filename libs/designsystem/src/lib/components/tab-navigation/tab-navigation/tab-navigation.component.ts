@@ -13,6 +13,7 @@ import {
 } from '@angular/core';
 import { filter, fromEvent, map, Subject, takeUntil } from 'rxjs';
 import { WindowRef } from '@kirbydesign/designsystem/types';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TabNavigationItemComponent } from '../tab-navigation-item/tab-navigation-item.component';
 
 const ARROW_LEFT = 'ArrowLeft';
@@ -35,6 +36,7 @@ export class TabNavigationComponent implements AfterViewInit, OnDestroy {
   private readonly tabSelectedClassName = 'selected';
   private tabBarElement: HTMLElement;
   private tabElements = new Array<HTMLElement>();
+  private tabLinks = new Array<string>();
   private destroyed$ = new Subject<void>();
 
   @Input()
@@ -44,11 +46,12 @@ export class TabNavigationComponent implements AfterViewInit, OnDestroy {
 
   set selectedIndex(index: number) {
     if (index !== this._selectedIndex) {
-      this._selectedIndex = index;
+      this._selectedIndex = 0 <= index && index < this.tabElements.length ? index : -1;
 
       setTimeout(() => {
         this.selectTab(this.selectedIndex);
         this.scrollToTab(this.selectedIndex);
+        this.navigateToTabLink(this.selectedIndex);
         this.selectedIndexChange.emit(this.selectedIndex);
       });
     }
@@ -58,13 +61,16 @@ export class TabNavigationComponent implements AfterViewInit, OnDestroy {
   @Output()
   selectedIndexChange = new EventEmitter<number>();
 
-  constructor(private window: WindowRef) {
+  constructor(private window: WindowRef, private route: ActivatedRoute, private router: Router) {
     /**/
   }
 
   ngAfterViewInit(): void {
     this.tabBarElement = this.tabBar.nativeElement;
-    this.tabs.forEach((tab) => this.tabElements.push(tab.nativeElement));
+    this.tabs.forEach((tab) => {
+      this.tabElements.push(tab.nativeElement);
+      this.tabLinks.push(tab.nativeElement.getAttribute('tab'));
+    });
 
     this.initTabListeners();
     setTimeout(() => {
@@ -130,6 +136,15 @@ export class TabNavigationComponent implements AfterViewInit, OnDestroy {
           ),
         });
       });
+    }
+  }
+
+  private navigateToTabLink(tabIndex: number): void {
+    if (tabIndex !== -1) {
+      if (this.tabLinks[tabIndex]) {
+        console.log('#Navigate: ' + this.route + ' / ' + this.tabLinks[tabIndex], this.route);
+        this.router.navigate([this.tabLinks[tabIndex]], { relativeTo: this.route });
+      }
     }
   }
 }

@@ -1,0 +1,27 @@
+<kirby-page title="Tab navigation" subtitle="Page with tab navigation">
+  <kirby-tab-navigation *kirbyPageStickyContent [(selectedIndex)]="selectedIndex">
+    <kirby-tab-navigation-item tab="item1">
+      <span text>{{ tabTexts[0] }}</span>
+    </kirby-tab-navigation-item>
+    <kirby-tab-navigation-item tab="item2">
+      <span text>{{ tabTexts[1] }}</span>
+      <kirby-badge themeColor="warning">
+        <kirby-icon name="attach"></kirby-icon>
+      </kirby-badge>
+    </kirby-tab-navigation-item>
+    <kirby-tab-navigation-item tab="item3">
+      <span text>{{ tabTexts[2] }}</span>
+      <kirby-badge themeColor="success">3</kirby-badge>
+    </kirby-tab-navigation-item>
+    <kirby-tab-navigation-item tab="item4">
+      <span text>{{ tabTexts[3] }}</span>
+    </kirby-tab-navigation-item>
+    <kirby-tab-navigation-item tab="item5">
+      <span text>{{ tabTexts[4] }}</span>
+      <kirby-badge>
+        <kirby-icon name="cog"></kirby-icon>
+      </kirby-badge>
+    </kirby-tab-navigation-item>
+  </kirby-tab-navigation>
+  <kirby-page-content><router-outlet></router-outlet></kirby-page-content>
+</kirby-page>

@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { LocalNavigationItem } from '@kirbydesign/designsystem';
 
 import { BasePageExampleComponent } from '../base-page-example.component';
 
 const config = {
   template: `<kirby-page
-  title="Tab navigation"
+  title="NO Tab navigation"
   subtitle="Page with tab navigation"
   defaultBackHref="/">
   <kirby-tab-navigation *kirbyPageStickyContent [(selectedIndex)]="selectedIndex">
@@ -13,7 +12,7 @@ const config = {
       <span text>{{ tabTexts[0] }}</span>
     </kirby-tab-navigation-item>
     <kirby-tab-navigation-item>
-      <span text>I{{ tabTexts[1] }}</span>
+      <span text>{{ tabTexts[1] }}</span>
       <kirby-badge themeColor="warning">
         <kirby-icon name="attach"></kirby-icon>
       </kirby-badge>
@@ -43,8 +42,8 @@ const config = {
 </kirby-page>`,
 };
 @Component({
-  template: config.template,
-  // templateUrl: './page-tab-nav-example.component.html',
+  //template: config.template,
+  templateUrl: './page-tab-nav-example.component.html',
 })
 export class PageTabNavExampleComponent extends BasePageExampleComponent {
   selectedIndex = 0;
