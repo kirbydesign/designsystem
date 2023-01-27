@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="secondary" [ngClass]="{ centered: centered }">
+    <div *ngIf="!!avatarTemplate" class="avatar">
+      <ng-container [ngTemplateOutlet]="avatarTemplate.templateRef"></ng-container>
+    </div>
+    <div *ngIf="!!flagTemplate" class="flag">
+      <ng-container [ngTemplateOutlet]="flagTemplate.templateRef"></ng-container>
+    </div>
+  </div>
+  <div class="main-row">
+    <ng-container *ngIf="isDesktop && !!actionsTemplate && centered">
+      <div class="main-col"></div>
+    </ng-container>
+    <div class="main" [ngClass]="{ centered: centered }">
+      <h1
+        *ngIf="!!titleTemplate"
+        class="title"
+        class="title"
+        [ngClass]="{ 'kirby-text-medium': !!valueTemplate }"
+        [kirbyFitHeading]="fitHeadingConfig"
+      >
+        <ng-container [ngTemplateOutlet]="titleTemplate.templateRef"></ng-container>
+      </h1>
+      <h3 *ngIf="!!valueTemplate" class="value kirby-text-xlarge">
+        <ng-container [ngTemplateOutlet]="valueTemplate.templateRef"></ng-container>
+      </h3>
+    </div>
+    <div *ngIf="isDesktop && !!actionsTemplate" class="main-col">
+      <div class="actions" *ngIf="!!actionsTemplate">
+        <ng-container [ngTemplateOutlet]="actionsTemplate.templateRef"></ng-container>
+      </div>
+    </div>
+  </div>
+  <div class="secondary" [ngClass]="{ centered: centered }">
+    <div *ngIf="!!subtitle1Template" class="subtitle1 kirby-text-small">
+      <ng-container [ngTemplateOutlet]="subtitle1Template.templateRef"></ng-container>
+    </div>
+
+    <div *ngIf="!!subtitle2Template" class="subtitle2 kirby-text-small">
+      <ng-container [ngTemplateOutlet]="subtitle2Template.templateRef"></ng-container>
+    </div>
+
+    <div *ngIf="!!customSectionTemplate" class="custom-section">
+      <ng-container [ngTemplateOutlet]="customSectionTemplate.templateRef"></ng-container>
+    </div>
+  </div>
+  <div *ngIf="!!actionsTemplate && !isDesktop" class="main-col">
+    <div class="actions" [ngClass]="{ centered: centered }">
+      <ng-container [ngTemplateOutlet]="actionsTemplate.templateRef"></ng-container>
+    </div>
+  </div>
+</div>

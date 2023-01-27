@@ -55,6 +55,7 @@ import { DropdownShowcaseComponent } from './dropdown-showcase/dropdown-showcase
 import { DataTableShowcaseComponent } from './data-table-showcase/data-table-showcase.component';
 import { CookbookChartStockConfigShowcaseComponent } from './chart-config-showcase/stock/chart-config-stock-showcase.component';
 import { CookbookChartBarConfigShowcaseComponent } from './chart-config-showcase/bar/chart-config-bar-showcase.component';
+import { HeaderShowcaseComponent } from './header-showcase/header-showcase.component';
 
 export const COMPONENT_IMPORTS: any[] = [ExamplesModule, ShowcaseRoutingModule];
 
@@ -112,6 +113,7 @@ export const COMPONENT_EXPORTS: any[] = [
   ExampleViewerComponent,
   ChartExampleConfigBaseBarComponent,
   CookbookChartBarConfigShowcaseComponent,
+  HeaderShowcaseComponent,
 ];
 
 export const COMPONENT_DECLARATIONS: any[] = [...COMPONENT_EXPORTS, ShowcaseComponent];

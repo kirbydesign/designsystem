@@ -1,0 +1,109 @@
+.container {
+  width: 100%;
+  padding-top: 16px;
+  padding-bottom: 32px;
+  border: 1px dashed #ddd;
+
+  @media screen and (min-width: 768px) {
+    padding-top: 24px;
+  }
+}
+
+.main-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex: 1;
+}
+
+.main-col {
+  flex: 1;
+  flex-shrink: 0;
+  min-width: 0;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-left: 16px;
+  padding-right: 16px;
+
+  @media screen and (min-width: 768px) {
+    width: 50%;
+  }
+
+  &.centered {
+    align-items: center;
+    text-align: center;
+  }
+}
+
+.avatar {
+  margin-bottom: 16px;
+}
+
+.flag {
+  margin-bottom: 2px;
+}
+
+.title {
+  margin-bottom: 2px;
+}
+
+.value {
+  margin-bottom: 4px;
+}
+
+.subtitle1 {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.subtitle2 {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.custom-section {
+  margin-top: 8px;
+  margin-bottom: 24px;
+}
+
+.actions {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  padding-left: 8px;
+  padding-right: 8px;
+
+  @media screen and (min-width: 768px) {
+    justify-content: flex-end;
+  }
+
+  &.centered {
+    justify-content: center;
+  }
+}
+
+.secondary {
+  display: flex;
+  flex-direction: column;
+  padding-left: 16px;
+  padding-right: 16px;
+  max-width: 100%;
+
+  @media screen and (min-width: 768px) {
+    max-width: 50%;
+  }
+
+  &.centered {
+    align-items: center;
+    margin: 0 auto;
+  }
+}

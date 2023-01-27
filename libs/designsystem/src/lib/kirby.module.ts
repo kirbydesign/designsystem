@@ -72,6 +72,7 @@ import { EmptyStateModule } from './components/empty-state/empty-state.module';
 import { DropdownModule } from './components/dropdown';
 import { KirbyBadgeModule } from './components/kirby-badge.module';
 import { FormFieldModule } from './components/form-field/form-field.module';
+import { HeaderModule } from './components/header/header.module';
 
 const exportedDeclarations = [
   GridComponent,
@@ -81,7 +82,6 @@ const exportedDeclarations = [
   AffixDirective,
   InputComponent,
   TextareaComponent,
-
   ItemGroupComponent,
 ];
 
@@ -135,6 +135,7 @@ const exportedModules = [
   FormFieldModule,
   SlideModule,
   AccordionModule,
+  HeaderModule,
   ...standaloneComponents,
 ];
 
