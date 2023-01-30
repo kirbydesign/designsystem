@@ -6,8 +6,7 @@ import {
   Input,
   QueryList,
 } from '@angular/core';
-
-import { ButtonComponent } from '../button/button.component';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
 
 @Component({
   selector: 'kirby-empty-state',

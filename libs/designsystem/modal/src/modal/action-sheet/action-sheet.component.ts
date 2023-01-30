@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { CardModule } from '@kirbydesign/designsystem/card';
-import { ButtonComponent } from '../../button/button.component';
 
 import { ActionSheetItem } from './config/action-sheet-item';
 
