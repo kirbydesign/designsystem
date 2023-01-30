@@ -1,0 +1,8 @@
+<router-outlet name="modal-experimental"></router-outlet>
+
+<a
+  [routerLink]="[{ outlets: { 'modal-experimental': ['modal', 'page1'] } }]"
+  [queryParams]="{ awesomeQueryParam: 'awesome value' }"
+>
+  Open Modal
+</a>
