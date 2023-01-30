@@ -1,7 +1,6 @@
 import { Directive, HostListener, Input } from '@angular/core';
 import { Params } from '@angular/router';
-
-import { ModalNavigationService } from '../../components/modal/services/modal-navigation.service';
+import { ModalNavigationService } from '@kirbydesign/designsystem/modal/internal';
 
 @Directive({
   selector: `[kirbyModalRouterLink]`,

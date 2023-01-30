@@ -18,6 +18,7 @@ export interface FitHeadingConfig {
 }
 
 @Directive({
+  standalone: true,
   selector: `h1[kirbyFitHeading],h2[kirbyFitHeading],h3[kirbyFitHeading]`,
   providers: [LineClampHelper],
 })

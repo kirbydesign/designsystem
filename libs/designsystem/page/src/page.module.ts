@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { SpinnerModule } from '@kirbydesign/designsystem/spinner';
+import { FitHeadingDirective } from './fit-heading';
 
 import { PageFooterComponent } from './page-footer/page-footer.component';
 import {
@@ -33,7 +34,7 @@ import {
     PageToolbarTitleDirective,
     PageStickyContentDirective,
   ],
-  imports: [CommonModule, IonicModule, FitHeadingModule, SpinnerModule],
+  imports: [CommonModule, IonicModule, FitHeadingDirective, SpinnerModule],
   exports: [
     PageComponent,
     PageActionsComponent,
@@ -46,7 +47,7 @@ import {
     PageTitleDirective,
     PageSubtitleDirective,
     PageToolbarTitleDirective,
-    FitHeadingModule,
+    FitHeadingDirective,
     PageStickyContentDirective,
   ],
 })

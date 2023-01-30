@@ -4,3 +4,4 @@ export { ActionSheetConfig } from './action-sheet/config/action-sheet-config';
 export { ActionSheetComponent } from './action-sheet/action-sheet.component';
 export { ActionSheetItem } from './action-sheet/config/action-sheet-item';
 export * from './alert';
+export * from './services';
