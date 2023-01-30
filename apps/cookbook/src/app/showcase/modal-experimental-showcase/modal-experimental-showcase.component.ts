@@ -18,7 +18,11 @@ import {
 import { ApiDescriptionEvent } from '../../shared/api-description/api-description-events/api-description-events.component';
 import { ApiDescriptionProperty } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionMethod } from '../../shared/api-description/api-description-methods/api-description-methods.component';
-import { routerConfigCodeSnippet } from '../../examples/modal-experimental-example/modal-routing/modal-routing-experimental-example.component';
+import {
+  programmaticRoutingCodeSnippet,
+  routerConfigCodeSnippet,
+  routerLinkCodeSnippet,
+} from '../../examples/modal-experimental-example/modal-routing/modal-routing-experimental-example.component';
 
 @Component({
   selector: 'cookbook-modal-experimental-showcase',
@@ -38,6 +42,8 @@ export class ModalExperimentalShowcaseComponent {
   showModalCodeSnippet: string = showModalCodeSnippet;
   observableCodeSnippet: string = observableCodeSnippet;
   routerConfigCodeSnippet: string = routerConfigCodeSnippet;
+  routerLinkCodeSnippet: string = routerLinkCodeSnippet;
+  programmaticRoutingCodeSnippet: string = programmaticRoutingCodeSnippet;
 
   componentProperties: ApiDescriptionProperty[] = [
     {

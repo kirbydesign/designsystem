@@ -270,3 +270,25 @@
 <cookbook-code-viewer [ts]="routerConfigCodeSnippet"></cookbook-code-viewer>
 
 <cookbook-modal-routing-experimental-example></cookbook-modal-routing-experimental-example>
+
+<cookbook-code-viewer [html]="routerLinkCodeSnippet"></cookbook-code-viewer>
+<cookbook-code-viewer [ts]="programmaticRoutingCodeSnippet"></cookbook-code-viewer>
+
+<p>
+  <em>
+    <strong>*Please note:</strong>
+    Because of limitations with Angular Router it is not possible to close the modal from within a
+    named outlet with the
+    <code>routerLink</code>
+    directive, and must be done programmatically like shown above. When closing the modal it must be
+    relative to the parent that contains the named
+    <code>router-outlet</code>
+    . In the case of the modal on page 2 we need to go two levels up to close the modal, when
+    pressing
+    <code>Finish</code>
+    , which is why we provide
+    <code>this.route.parent.parent</code>
+    . All logic to close the modal when clicking the backdrop or the close button in the header is
+    handled by the modal itself.
+  </em>
+</p>

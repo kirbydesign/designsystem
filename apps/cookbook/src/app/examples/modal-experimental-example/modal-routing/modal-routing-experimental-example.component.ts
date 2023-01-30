@@ -22,6 +22,38 @@ export const routerConfigCodeSnippet = `{
   ],
 }`;
 
+export const routerLinkCodeSnippet = `<!-- Open the modal -->
+<button
+  kirby-button
+  [routerLink]="[{ outlets: { 'modal-experimental': ['modal', 'page1'] } }]"
+  [queryParams]="{ awesomeQueryParam: 'awesome value' }"
+>
+  Open modal by route
+</button>
+
+<!-- Navigate between siblings within the modal -->
+<a routerLink="../page1">Go to page 1</a>
+<a routerLink="../page2">Go to page 2</a>
+`;
+
+export const programmaticRoutingCodeSnippet = `import { ActivatedRoute, Router } from '@angular/router';
+constructor(private router: Router, private route: ActivatedRoute) {}
+
+// Open the modal
+this.router.navigate([{ outlets: { 'modal-experimental': ['modal', 'page1'] } }], {
+  relativeTo: this.route,
+});
+
+// Navigate between siblings within the modal
+this.router.navigate(['../page1'], { relativeTo: this.route });
+this.router.navigate(['../page2'], { relativeTo: this.route });
+
+// Close the modal from within the named outlet
+this.router.navigate([{ outlets: { 'modal-experimental': null } }], {
+  relativeTo: this.route.parent.parent,
+});
+`;
+
 @Component({
   selector: 'cookbook-modal-routing-experimental-example',
   templateUrl: './modal-routing-experimental-example.component.html',
