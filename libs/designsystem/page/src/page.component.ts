@@ -32,14 +32,13 @@ import { Observable, Subject } from 'rxjs';
 import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
 
 import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
-import { FitHeadingConfig } from '../../directives/fit-heading/fit-heading.directive';
-import { ModalWrapperComponent } from '../modal/modal-wrapper/modal-wrapper.component';
-import { ModalNavigationService } from '../modal/services/modal-navigation.service';
 import {
   ModalElementComponent,
   ModalElementsAdvertiser,
   ModalElementType,
-} from '../modal/services/modal.interfaces';
+  ModalNavigationService,
+  ModalWrapperComponent,
+} from '@kirbydesign/designsystem/modal';
 
 /**
  * Specify scroll event debounce time in ms and scrolled offset from top in pixels

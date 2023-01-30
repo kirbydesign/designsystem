@@ -38,8 +38,9 @@ import { capitalizeFirstLetter } from '@kirbydesign/core';
 
 import { CommonModule } from '@angular/common';
 import { IconModule } from '@kirbydesign/designsystem/icon';
-import { ButtonComponent } from '@kirbydesign/designsystem/button';
+
 import { DropdownModule } from '@kirbydesign/designsystem/dropdown';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { CalendarCell } from './helpers/calendar-cell.model';
 import { CalendarOptions } from './helpers/calendar-options.model';
 import { CalendarHelper } from './helpers/calendar.helper';
