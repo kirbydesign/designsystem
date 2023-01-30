@@ -22,14 +22,14 @@ describe('ThemeColorDirective', () => {
     it('should add CSS Custom Property for theming background-color', () => {
       expect(
         getComputedStyle(spectator.element).getPropertyValue(
-          '--kirby-interactive-element-background-color'
+          '--kirby-interactable-background-color'
         )
       ).not.toBe('');
     });
 
     it('should add CSS Custom Property for theming color', () => {
       expect(
-        getComputedStyle(spectator.element).getPropertyValue('--kirby-interactive-element-color')
+        getComputedStyle(spectator.element).getPropertyValue('--kirby-interactable-color')
       ).not.toBe('');
     });
   });

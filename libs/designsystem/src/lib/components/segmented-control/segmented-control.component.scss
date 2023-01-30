@@ -28,7 +28,7 @@
 
   &.default-mode {
     ion-segment {
-      --background: var(--kirby-interactive-element-background-color, #{utils.get-color('white')});
+      --background: var(--kirby-interactable-background-color, #{utils.get-color('white')});
 
       box-shadow: var(--kirby-interactive-elevation);
       width: fit-content; // The segmented control itself is block-level, but we don't want it to stretch
@@ -54,7 +54,7 @@
     }
 
     ion-segment-button {
-      --background: var(--kirby-interactive-element-background-color, #{utils.get-color('white')});
+      --background: var(--kirby-interactable-background-color, #{utils.get-color('white')});
       --indicator-transition: none;
 
       flex: initial;
@@ -100,12 +100,12 @@ ion-segment-button {
   --border-radius: #{utils.$border-radius-round};
   --border-style: none;
   --background: none;
-  --color: var(--kirby-interactive-element-color);
+  --color: var(--kirby-interactable-color, #{utils.get-color('black')});
   --indicator-color: var(
-    --kirby-interactive-element-indicator-background-color,
+    --kirby-interactable-indicator-background-color,
     #{utils.get-color('black')}
   );
-  --color-checked: var(--kirby-interactive-element-indicator-color, #{utils.get-color('white')});
+  --color-checked: var(--kirby-interactable-indicator-color, #{utils.get-color('white')});
   --indicator-box-shadow: none;
   --indicator-transform: none;
   --padding-start: #{utils.size('m')};
