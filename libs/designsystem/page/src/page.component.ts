@@ -39,6 +39,7 @@ import {
   ModalNavigationService,
   ModalWrapperComponent,
 } from '@kirbydesign/designsystem/modal';
+import { FitHeadingConfig } from './fit-heading/fit-heading.directive';
 
 /**
  * Specify scroll event debounce time in ms and scrolled offset from top in pixels
