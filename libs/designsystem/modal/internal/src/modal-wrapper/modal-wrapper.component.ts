@@ -31,8 +31,8 @@ import { CommonModule } from '@angular/common';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
-import { Modal, ModalElementsAdvertiser, ModalElementType } from '../services/modal.interfaces';
 
+import { Modal, ModalElementsAdvertiser, ModalElementType } from '../modal.interfaces';
 import { ModalConfig } from './config/modal-config';
 import { COMPONENT_PROPS } from './config/modal-config.helper';
 import { ModalElementsMoverDelegate } from './modal-elements-mover.delegate';

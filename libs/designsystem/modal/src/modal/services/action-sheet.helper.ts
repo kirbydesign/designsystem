@@ -1,12 +1,11 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { Overlay } from '@kirbydesign/designsystem/modal/internal';
 import { Subscription } from 'rxjs';
 
 import { ActionSheetComponent } from '../action-sheet/action-sheet.component';
 import { ActionSheetConfig } from '../action-sheet/config/action-sheet-config';
 import { ActionSheetItem } from '../action-sheet/config/action-sheet-item';
-
-import { Overlay } from './modal.interfaces';
 
 @Injectable()
 export class ActionSheetHelper {

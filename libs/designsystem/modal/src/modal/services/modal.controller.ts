@@ -4,15 +4,18 @@ import { Observable, Subject } from 'rxjs';
 import { filter, map, takeUntil } from 'rxjs/operators';
 
 import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
+import {
+  ModalConfig,
+  ModalNavigationService,
+  ModalRouteActivation,
+  Overlay,
+} from '@kirbydesign/designsystem/modal/internal';
 import { ActionSheetConfig } from '../action-sheet/config/action-sheet-config';
 import { AlertConfig } from '../alert/config/alert-config';
-import { ModalConfig } from '../modal-wrapper/config/modal-config';
 
 import { ActionSheetHelper } from './action-sheet.helper';
 import { AlertHelper } from './alert.helper';
-import { ModalNavigationService } from './modal-navigation.service';
 import { ModalHelper } from './modal.helper';
-import { ModalRouteActivation, Overlay } from './modal.interfaces';
 
 @Injectable()
 export class ModalController implements OnDestroy {

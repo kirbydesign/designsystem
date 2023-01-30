@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { Overlay } from '@kirbydesign/designsystem/modal/internal';
 
 import { AlertComponent } from '../alert/alert.component';
 import { AlertConfig } from '../alert/config/alert-config';
-
-import { Overlay } from './modal.interfaces';
 
 @Injectable()
 export class AlertHelper {
