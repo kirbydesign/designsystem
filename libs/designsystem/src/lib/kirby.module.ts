@@ -44,6 +44,7 @@ import {
   ProgressCircleComponent,
   ProgressCircleRingComponent,
 } from '@kirbydesign/designsystem/progress-circle';
+import { RouterOutletModule } from '@kirbydesign/designsystem/router-outlet';
 import { AppModule } from './components/app/app.module';
 import { ButtonComponent } from './components/button/button.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
@@ -66,7 +67,6 @@ import { ModalController } from './components/modal/services/modal.controller';
 import { ModalHelper } from './components/modal/services/modal.helper';
 import { PageModule } from './components/page/page.module';
 import { ReorderListComponent } from './components/reorder-list/reorder-list.component';
-import { RouterOutletModule } from './components/router-outlet/router-outlet.module';
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
 import { ToastController } from './components/toast/services/toast.controller';
 import { ToastHelper } from './components/toast/services/toast.helper';

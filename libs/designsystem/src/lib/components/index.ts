@@ -23,7 +23,6 @@ export * from './modal-experimental';
 
 export * from './page';
 
-export * from './router-outlet';
 export * from './reorder-list';
 
 /* prettier-ignore */

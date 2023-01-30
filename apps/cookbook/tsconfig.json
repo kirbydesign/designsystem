@@ -37,7 +37,8 @@
       "@kirbydesign/designsystem/list": ["libs/designsystem/list/index.ts"],
       "@kirbydesign/designsystem/form-field": ["libs/designsystem/form-field/index.ts"],
       "@kirbydesign/designsystem/avatar": ["libs/designsystem/avatar/index.ts"],
-      "@kirbydesign/designsystem/progress-circle": ["libs/designsystem/progress-circle/index.ts"]
+      "@kirbydesign/designsystem/progress-circle": ["libs/designsystem/progress-circle/index.ts"],
+      "@kirbydesign/designsystem/router-outlet": ["libs/designsystem/router-outlet/index.ts"]
     },
     "target": "es2020"
   },

@@ -30,7 +30,8 @@
       "@kirbydesign/designsystem/item-sliding": ["item-sliding/index.ts"],
       "@kirbydesign/designsystem/form-field": ["form-field/index.ts"],
       "@kirbydesign/designsystem/avatar": ["avatar/index.ts"],
-      "@kirbydesign/designsystem/progress-circle": ["progress-circle/index.ts"]
+      "@kirbydesign/designsystem/progress-circle": ["progress-circle/index.ts"],
+      "@kirbydesign/designsystem/router-outlet": ["router-outlet/index.ts"]
     },
     "esModuleInterop": true,
     "target": "es2020"
