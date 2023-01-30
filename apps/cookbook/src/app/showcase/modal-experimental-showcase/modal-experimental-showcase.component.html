@@ -236,4 +236,37 @@
   [properties]="wrapperComponentProperties"
 ></cookbook-api-description-properties>
 
+<h1 #routing>Routing</h1>
+
+<p>
+  Instead of providing the modal with a component, you can configure your route to be opened in a
+  modal. This is done by using a secondary outlet named
+  <code>modal-experimental</code>
+  . The url for these kind of routes will look like this
+  <code>/(modal-experimental:some-route)</code>
+  . This means that you can do flows inside of modals just as "normal" pages, and makes it possible
+  to deeplink to specific pages inside of the modal. "Modal" routes will automatically open up a
+  modal, if none is already opened.
+</p>
+
+<p>
+  The code snippet below shows the route configuration for this page. Note that this page also
+  contains a named router outlet called
+  <code>modal-experimental</code>
+  .
+</p>
+
+<p>
+  <em>
+    <strong>*Please note:</strong>
+    The path that has the
+    <code>modal-experimental</code>
+    outlet must use the
+    <code>ModalRoutingExperimentalComponent</code>
+    , which can be imported from Kirby.
+  </em>
+</p>
+
+<cookbook-code-viewer [ts]="routerConfigCodeSnippet"></cookbook-code-viewer>
+
 <cookbook-modal-routing-experimental-example></cookbook-modal-routing-experimental-example>
