@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ng-content select="[header-start]"></ng-content>
+    <ion-title>{{ title }}</ion-title>
+    <ion-buttons slot="end">
+      <button kirby-button [noDecoration]="true" size="md" (click)="close()">
+        <kirby-icon [name]="'close'"></kirby-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [scrollEvents]="true" [scrollY]="!scrollDisabled">
+  <ion-header *ngIf="hasCollapsibleTitle" collapse="condense">
+    <ion-toolbar>
+      <span class="kirby-text-large">{{ title }}</span>
+    </ion-toolbar>
+  </ion-header>
+  <ng-container>
+    <ng-content></ng-content>
+  </ng-container>
+</ion-content>
+<ng-content select="[footer]"></ng-content>
