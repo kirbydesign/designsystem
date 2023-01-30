@@ -5,6 +5,7 @@ import { IonModal } from '@ionic/angular';
 @Component({
   selector: 'kirby-modal-routing-wrapper',
   templateUrl: './modal-routing.component.html',
+  styleUrls: ['./modal-routing.component.scss'],
 })
 export class ModalRoutingExperimentalComponent implements OnDestroy {
   constructor(private router: Router, private route: ActivatedRoute) {}
