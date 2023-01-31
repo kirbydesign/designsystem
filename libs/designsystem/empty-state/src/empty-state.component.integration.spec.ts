@@ -2,7 +2,7 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponent } from 'ng-mocks';
 
 import { IconComponent } from '@kirbydesign/designsystem/icon';
-import { ButtonComponent } from '../button/button.component';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
 
 import { EmptyStateComponent } from './empty-state.component';
 

@@ -10,7 +10,7 @@ import {
 } from '@ionic/angular';
 import { MockComponents } from 'ng-mocks';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
-import { ButtonComponent } from '../../button/button.component';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { FullscreenModalExperimentalComponent } from './fullscreen.component';
 
 describe('FullscreenComponent', () => {

@@ -2,9 +2,9 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
-import { PageProgressComponent, PageTitleComponent } from '../../page';
-import { ModalFooterComponent } from '../footer/modal-footer.component';
 
+import { ModalFooterComponent } from '@kirbydesign/designsystem/modal';
+import { PageProgressComponent, PageTitleComponent } from '@kirbydesign/designsystem/page';
 import { ModalWrapperComponent } from './modal-wrapper.component';
 import {
   DynamicFooterEmbeddedComponent,

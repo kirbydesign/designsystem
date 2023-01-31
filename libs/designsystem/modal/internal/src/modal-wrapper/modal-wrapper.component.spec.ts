@@ -7,8 +7,8 @@ import { MockComponents } from 'ng-mocks';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
-import { ButtonComponent } from '../../button/button.component';
 
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { ModalWrapperComponent } from './modal-wrapper.component';
 import {
   DynamicFooterEmbeddedComponent,

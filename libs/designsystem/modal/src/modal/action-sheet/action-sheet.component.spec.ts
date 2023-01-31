@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import * as ionic from '@ionic/angular';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { CardComponent, CardModule } from '@kirbydesign/designsystem/card';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import {
@@ -12,8 +13,6 @@ import {
 } from '@kirbydesign/designsystem/list';
 import { SpinnerModule } from '@kirbydesign/designsystem/spinner';
 import { MockComponent } from 'ng-mocks';
-
-import { ButtonComponent } from '../../button/button.component';
 
 import { ActionSheetComponent } from './action-sheet.component';
 

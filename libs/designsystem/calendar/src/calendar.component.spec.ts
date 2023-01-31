@@ -6,7 +6,7 @@ import { zonedTimeToUtc } from 'date-fns-tz';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { WindowRef } from '@kirbydesign/designsystem/types';
-import { DropdownComponent } from '../dropdown/dropdown.component';
+import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
 import { CalendarComponent } from './calendar.component';
 
 import { CalendarYearNavigatorConfig } from './options/calendar-year-navigator-config';

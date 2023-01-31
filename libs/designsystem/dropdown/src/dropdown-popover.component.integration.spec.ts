@@ -14,7 +14,7 @@ import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
 
 import { PopoverComponent } from '@kirbydesign/designsystem/popover';
-import { ButtonComponent } from '../button/button.component';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { DropdownComponent } from './dropdown.component';
 
 @Component({

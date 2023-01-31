@@ -7,16 +7,20 @@ import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
-import { PageProgressComponent, PageTitleComponent } from '../../page/page.component';
-import { ModalCompactWrapperComponent } from '../modal-wrapper/compact/modal-compact-wrapper.component';
-import { ModalConfig, ModalSize } from '../modal-wrapper/config/modal-config';
 
+import {
+  Modal,
+  ModalCompactWrapperComponent,
+  ModalConfig,
+  ModalNavigationService,
+  ModalSize,
+  Overlay,
+} from '@kirbydesign/designsystem/modal/internal';
+import { PageProgressComponent, PageTitleComponent } from '@kirbydesign/designsystem/page';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { AlertConfig } from '../alert/config/alert-config';
 import { ModalFooterComponent } from '../footer/modal-footer.component';
-import { ButtonComponent } from '../../button/button.component';
-import { ModalNavigationService } from './modal-navigation.service';
 import { ModalHelper } from './modal.helper';
-import { Modal, Overlay } from './modal.interfaces';
 import { AlertHelper } from './alert.helper';
 
 @Component({
@@ -90,6 +94,7 @@ describe('ModalHelper', () => {
       RouterTestingModule,
       ModalFooterComponent,
       ButtonComponent,
+      ModalCompactWrapperComponent,
     ],
     providers: [
       {
@@ -97,12 +102,7 @@ describe('ModalHelper', () => {
         useValue: <WindowRef>{ nativeWindow: window },
       },
     ],
-    declarations: [
-      ModalCompactWrapperComponent,
-      PageTitleComponent,
-      PageProgressComponent,
-      PageProgressEmbeddedComponent,
-    ],
+    declarations: [PageTitleComponent, PageProgressComponent, PageProgressEmbeddedComponent],
     entryComponents: [
       InputEmbeddedComponent,
       ContentOverflowsWithFooterEmbeddedComponent,

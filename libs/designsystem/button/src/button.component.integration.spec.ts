@@ -10,10 +10,15 @@ import { WindowRef } from '@kirbydesign/designsystem/types';
 import { CardComponent } from '@kirbydesign/designsystem/card';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
-import { FitHeadingDirective } from '../../directives/fit-heading/fit-heading.directive';
-import { DropdownComponent } from '../dropdown/dropdown.component';
-import { EmptyStateComponent } from '../empty-state/empty-state.component';
-import { PageActionsDirective, PageComponent, PageTitleDirective } from '../page/page.component';
+import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
+import { EmptyStateComponent } from '@kirbydesign/designsystem/empty-state';
+
+import {
+  FitHeadingDirective,
+  PageActionsDirective,
+  PageComponent,
+  PageTitleDirective,
+} from '@kirbydesign/designsystem/page';
 
 import { ButtonComponent } from './button.component';
 
@@ -25,8 +30,13 @@ describe('ButtonComponent in Kirby Page', () => {
   let spectator: SpectatorHost<PageComponent>;
   const createHost = createHostFactory({
     component: PageComponent,
-    imports: [TestHelper.ionicModuleForTest, RouterTestingModule, ButtonComponent],
-    declarations: [PageActionsDirective, PageTitleDirective, FitHeadingDirective],
+    imports: [
+      TestHelper.ionicModuleForTest,
+      RouterTestingModule,
+      ButtonComponent,
+      FitHeadingDirective,
+    ],
+    declarations: [PageActionsDirective, PageTitleDirective],
     providers: [
       {
         provide: WindowRef,

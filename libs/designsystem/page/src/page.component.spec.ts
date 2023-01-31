@@ -9,12 +9,11 @@ import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { selectedTabClickEvent, TabsComponent } from '@kirbydesign/designsystem/tabs';
-import { FitHeadingDirective } from '../../directives/fit-heading/fit-heading.directive';
-import { ButtonComponent } from '../button/button.component';
-import { ModalNavigationService } from '../modal/services/modal-navigation.service';
 
 const { size, fontWeight } = DesignTokenHelper;
 
+import { ModalNavigationService } from '@kirbydesign/designsystem/modal/internal';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import {
   PageActionsComponent,
   PageActionsDirective,
@@ -24,6 +23,7 @@ import {
   PageTitleDirective,
   PageToolbarTitleDirective,
 } from './page.component';
+import { FitHeadingDirective } from './fit-heading';
 
 describe('PageComponent', () => {
   const titleText = 'Test Page';
@@ -72,9 +72,9 @@ describe('PageComponent', () => {
       TestHelper.ionicModuleForTest,
       RouterTestingModule.withRoutes(routes),
       ButtonComponent,
+      FitHeadingDirective,
     ],
     declarations: [
-      FitHeadingDirective,
       PageContentComponent,
       PageActionsComponent,
       PageActionsDirective,

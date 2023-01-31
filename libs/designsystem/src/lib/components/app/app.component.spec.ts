@@ -2,8 +2,7 @@ import { Component, ElementRef, forwardRef } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { IonApp } from '@ionic/angular';
-
-import { ModalController } from '../modal';
+import { ModalController } from '@kirbydesign/designsystem/modal';
 
 import { AppComponent } from './app.component';
 
