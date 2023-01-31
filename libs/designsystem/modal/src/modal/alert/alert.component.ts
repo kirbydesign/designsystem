@@ -11,7 +11,7 @@ import { WindowRef } from '@kirbydesign/designsystem/types';
 import { Observable, of } from 'rxjs';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
-import { EmptyStateModule } from '@kirbydesign/designsystem/empthy-state';
+import { EmptyStateModule } from '@kirbydesign/designsystem/empty-state';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 
 @Component({

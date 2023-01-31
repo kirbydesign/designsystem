@@ -1,7 +1,7 @@
 import { Component, forwardRef, Input } from '@angular/core';
-import { BrandColor } from '@kirbydesign/core/dist/types/helpers';
+import { BrandColor, NotificationColor } from '@kirbydesign/core/dist/types/helpers';
 
-import { AvatarComponent, AvatarSize, NotificationColor } from '@kirbydesign/designsystem/avatar';
+import { AvatarComponent, AvatarSize } from '@kirbydesign/designsystem/avatar';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({

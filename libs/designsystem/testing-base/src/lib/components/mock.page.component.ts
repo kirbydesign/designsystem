@@ -13,7 +13,7 @@ import {
   PageTitleDirective,
   PageToolbarTitleDirective,
   PullToRefreshEvent,
-} from '@kirbydesign/designsystem';
+} from '@kirbydesign/designsystem/page';
 
 type stickyConfig = { sticky: boolean };
 type fixedConfig = { fixed: boolean };

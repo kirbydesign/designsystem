@@ -64,7 +64,7 @@ import {
   ModalWrapperComponent,
 } from '@kirbydesign/designsystem/modal/internal';
 import { PageModule } from '@kirbydesign/designsystem/page';
-import { EmptyStateModule } from '@kirbydesign/designsystem/empthy-state';
+import { EmptyStateModule } from '@kirbydesign/designsystem/empty-state';
 import { DropdownModule } from '@kirbydesign/designsystem/dropdown';
 >>>>>>> 246577758 (moved to internal)
 import { AppModule } from './components/app/app.module';

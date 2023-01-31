@@ -39,8 +39,8 @@
       "@kirbydesign/designsystem/dropdown": ["dropdown/index.ts"],
       "@kirbydesign/designsystem/page": ["page/index.ts"],
       "@kirbydesign/designsystem/modal": ["modal/index.ts"],
-      "@kirbydesign/designsystem/modal/internal": ["modal/internal/index.ts"]
-      // "@kirbydesign/designsystem/modal/experimental": ["modal/experimental/index.ts"]
+      "@kirbydesign/designsystem/modal/internal": ["modal/internal/index.ts"],
+      "@kirbydesign/designsystem/modal/experimental": ["modal/experimental/index.ts"]
     },
     "esModuleInterop": true,
     "target": "es2020"
