@@ -39,8 +39,13 @@ import {
   InputComponent,
   TextareaComponent,
 } from '@kirbydesign/designsystem/form-field';
+import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
+import {
+  ProgressCircleComponent,
+  ProgressCircleRingComponent,
+} from '@kirbydesign/designsystem/progress-circle';
+import { RouterOutletModule } from '@kirbydesign/designsystem/router-outlet';
 import { AppModule } from './components/app/app.module';
-import { AvatarComponent } from './components/avatar/avatar.component';
 import { ButtonComponent } from './components/button/button.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { ChartsModule } from './components/charts';
@@ -61,10 +66,7 @@ import { AlertHelper } from './components/modal/services/alert.helper';
 import { ModalController } from './components/modal/services/modal.controller';
 import { ModalHelper } from './components/modal/services/modal.helper';
 import { PageModule } from './components/page/page.module';
-import { ProgressCircleRingComponent } from './components/progress-circle/progress-circle-ring.component';
-import { ProgressCircleComponent } from './components/progress-circle/progress-circle.component';
 import { ReorderListComponent } from './components/reorder-list/reorder-list.component';
-import { RouterOutletModule } from './components/router-outlet/router-outlet.module';
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
 import { ToastController } from './components/toast/services/toast.controller';
 import { ToastHelper } from './components/toast/services/toast.helper';

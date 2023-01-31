@@ -1,7 +1,5 @@
 export * from './app';
 
-export { AvatarComponent, AvatarSize } from './avatar/avatar.component';
-
 export { KirbyBadge as BadgeComponent } from './web-component-proxies.component';
 
 export { ButtonComponent, ButtonSize } from './button/button.component';
@@ -25,7 +23,6 @@ export * from './modal-experimental';
 
 export * from './page';
 
-export * from './router-outlet';
 export * from './reorder-list';
 
 /* prettier-ignore */
@@ -33,8 +30,6 @@ export { SegmentedControlComponent, SegmentedControlMode} from './segmented-cont
 export { SegmentItem } from './segmented-control/segment-item';
 
 export * from './toast';
-
-export * from './progress-circle';
 
 export * from './page-local-navigation';
 
