@@ -33,16 +33,16 @@
   <div class="container-over" *ngIf="receiverChosen">
     <div class="grid" (click)="showModalChooseOwnAccount()">
       <p>From</p>
-      <span *ngFor="let account of selectedAccount"
-        ><b>{{ account.name }}</b></span
-      >
+      <span *ngFor="let account of selectedAccount">
+        <b>{{ account.name }}</b>
+      </span>
     </div>
     <kirby-divider></kirby-divider>
     <div class="grid" (click)="showModalChooseReciever()">
       <p>To</p>
-      <span *ngFor="let other of selectedReceiver"
-        ><b>{{ other.name }}</b></span
-      >
+      <span *ngFor="let other of selectedReceiver">
+        <b>{{ other.name }}</b>
+      </span>
     </div>
     <kirby-divider></kirby-divider>
     <div class="grid" (click)="showModalChooseDate()">

@@ -2,32 +2,40 @@
 <p>
   The Kirby charts are based on a config strategy. The aim of this is to give the implementer full
   control of the chart. Kirby simply provides some configurations which must be passed to a
-  <a href="https://www.chartjs.org/">ChartJS</a> chart.
+  <a href="https://www.chartjs.org/">ChartJS</a>
+  chart.
   <br />
   <br />
   To see more showcases on how to implement charts, please click
-  <a routerLink="../../showcase/chart-stock-config">here</a>.
+  <a routerLink="../../showcase/chart-stock-config">here</a>
+  .
 </p>
 
 <h3>Structure</h3>
 <p>
   Each chart type (line, stock, bar, pie) is served through a Kirby chart config class which is
   inherited from a base class
-  <code
-    ><a
+  <code>
+    <a
       href="https://github.com/kirbydesign/designsystem/blob/develop/libs/designsystem/src/lib/components/charts/chart-config/chart-base-config.ts"
-      >ChartBaseConfig</a
-    ></code
-  >:
+    >
+      ChartBaseConfig
+    </a>
+  </code>
+  :
   <br />
   <code>
     <a
       href="https://github.com/kirbydesign/designsystem/blob/develop/libs/designsystem/src/lib/components/charts/chart-config/chart-stock-config/chart-stock-config.ts"
-      >StockChartConfig</a
-    ></code
-  >
+    >
+      StockChartConfig
+    </a>
+  </code>
   <br />
-  <code><a href="">BarChartConfig</a> // Not yet implemented </code>
+  <code>
+    <a href="">BarChartConfig</a>
+    // Not yet implemented
+  </code>
 </p>
 
 <p>In this guide we'll implement the following chart:</p>
@@ -42,12 +50,18 @@
 <ul>
   <li><a href="https://www.chartjs.org/">ChartJS</a></li>
   <li>
-    A HTML <a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API">canvas</a> element
+    A HTML
+    <a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API">canvas</a>
+    element
   </li>
   <li>Kirby chart config</li>
 </ul>
 
-<p>In your component template, add a canvas to your HTML and give it an <code>id</code>:</p>
+<p>
+  In your component template, add a canvas to your HTML and give it an
+  <code>id</code>
+  :
+</p>
 
 <cookbook-code-viewer
   [html]="guideChartHtml"
@@ -57,18 +71,23 @@
 <p>
   It is up to the implementer to ensure the proper accessibility for the chart. Read more about
   ChartJS accessibility
-  <a href="https://www.chartjs.org/docs/latest/general/accessibility.html">here</a>.
+  <a href="https://www.chartjs.org/docs/latest/general/accessibility.html">here</a>
+  .
 </p>
 <p>
-  The canvas must be wrapped in an element with <code>position: relative</code> in order to be
-  responsive. A thorough explanation can be found
-  <a href="https://www.chartjs.org/docs/latest/configuration/responsive.html#important-note">here</a
-  >.
+  The canvas must be wrapped in an element with
+  <code>position: relative</code>
+  in order to be responsive. A thorough explanation can be found
+  <a href="https://www.chartjs.org/docs/latest/configuration/responsive.html#important-note">
+    here
+  </a>
+  .
 </p>
 
 <p>
-  Add a property of type <code>Chart</code> (from ChartJS). This will be used later to destroy the
-  object.
+  Add a property of type
+  <code>Chart</code>
+  (from ChartJS). This will be used later to destroy the object.
 </p>
 <cookbook-code-viewer
   [inlineLabel]="true"
@@ -76,7 +95,11 @@
   [language]="'ts'"
 ></cookbook-code-viewer>
 <h3>Test data</h3>
-<p>Add some test data of type <code>ScatterPoint[]</code>.</p>
+<p>
+  Add some test data of type
+  <code>ScatterPoint[]</code>
+  .
+</p>
 <cookbook-code-viewer
   [inlineLabel]="true"
   [ts]="demoDataExample"
@@ -86,11 +109,15 @@
 <h3>Configure the chart</h3>
 In a function, perform the following steps
 <ul>
-  <li>Get the base config from the <code>StockChartConfig</code></li>
+  <li>
+    Get the base config from the
+    <code>StockChartConfig</code>
+  </li>
   <li>Set the data</li>
   <li>
-    Create the <code>Chart</code> object with the same id as on your canvas element and pass the
-    config
+    Create the
+    <code>Chart</code>
+    object with the same id as on your canvas element and pass the config
   </li>
 </ul>
 <cookbook-code-viewer
@@ -105,13 +132,17 @@ In a function, perform the following steps
   <code>registerPlugins</code>
 </p>
 <p>
-  The <code>createChart</code> and <code>registerPlugins</code> functions must be called in the
+  The
+  <code>createChart</code>
+  and
+  <code>registerPlugins</code>
+  functions must be called in the
   <code>
     <a href="https://angular.io/api/core/OnInit">ngOnInit</a>
   </code>
   or
   <code>
-    <a href="https://angular.io/api/core/AfterViewInit"> ngAfterViewIinit</a>
+    <a href="https://angular.io/api/core/AfterViewInit">ngAfterViewIinit</a>
   </code>
   hook.
 </p>
