@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ModalConfig, ModalController } from '@kirbydesign/designsystem';
+import { Component } from '@angular/core';
+import { ModalController } from '@kirbydesign/designsystem';
+import { ModalConfig } from '@kirbydesign/designsystem/modal/internal';
 import { TransferAndPayModalComponent } from '../transfer-and-pay-modal/transfer-and-pay-modal.component';
 
 @Component({

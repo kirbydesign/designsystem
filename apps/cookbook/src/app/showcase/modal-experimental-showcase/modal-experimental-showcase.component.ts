@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
-import {
-  ModalExperimentalConfig,
-  ModalExperimentalController,
-} from '@kirbydesign/designsystem/components/modal-experimental/services/modal.controller';
+
 import { ActionSheetController } from '@ionic/angular';
+import { ModalExperimentalConfig, ModalExperimentalController } from '@kirbydesign/designsystem';
 import {
   ModalControllerExperimentalExampleComponent,
   observableCodeSnippet,

@@ -1,5 +1,5 @@
-import { Component, Inject, Input, OnInit, Optional, SkipSelf } from '@angular/core';
-import { COMPONENT_PROPS, Modal } from '@kirbydesign/designsystem';
+import { Component, Inject, Optional, SkipSelf } from '@angular/core';
+import { COMPONENT_PROPS, Modal } from '@kirbydesign/designsystem/modal/internal';
 import { Detail } from '../detail.model';
 import { VerifyService } from '../verify.service';
 

@@ -1,6 +1,7 @@
 import { Component, Optional, SkipSelf } from '@angular/core';
 
-import { Modal, ModalController } from '@kirbydesign/designsystem';
+import { ModalController } from '@kirbydesign/designsystem';
+import { Modal } from '@kirbydesign/designsystem/modal/internal';
 
 @Component({
   selector: 'cookbook-modal-route-page-2-example',
@@ -46,7 +47,7 @@ export class ModalRoutePage2ExampleComponent {
   }
 
   close() {
-    let someTestData: number = Math.PI;
+    const someTestData: number = Math.PI;
     this.modal.close(someTestData);
   }
 }

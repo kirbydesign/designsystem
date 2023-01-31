@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { CalendarComponent, Modal } from '@kirbydesign/designsystem';
+import { Component } from '@angular/core';
+import { Modal } from '@kirbydesign/designsystem/modal/internal';
 import { TextAndDateService } from '../text-and-date.service';
 
 @Component({

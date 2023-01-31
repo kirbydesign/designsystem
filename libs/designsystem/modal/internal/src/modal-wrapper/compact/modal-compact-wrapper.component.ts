@@ -2,6 +2,7 @@ import { Component, ElementRef, HostListener, Injector, Input, OnInit } from '@a
 import { firstValueFrom, Subject } from 'rxjs';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 
+import { CommonModule } from '@angular/common';
 import { ModalConfig } from '../config/modal-config';
 import { COMPONENT_PROPS } from '../config/modal-config.helper';
 import { Modal } from '../../modal.interfaces';
@@ -12,6 +13,7 @@ import { Modal } from '../../modal.interfaces';
   templateUrl: './modal-compact-wrapper.component.html',
   styleUrls: ['./modal-compact-wrapper.component.scss'],
   providers: [{ provide: Modal, useExisting: ModalCompactWrapperComponent }],
+  imports: [CommonModule],
   // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: { '[class.ion-page]': 'false' }, //Ensure ion-page class doesn't get applied by Ionic Modal Controller
 })

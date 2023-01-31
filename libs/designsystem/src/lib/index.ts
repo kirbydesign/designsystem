@@ -29,11 +29,8 @@ export * from '@kirbydesign/designsystem/form-field';
 export * from '@kirbydesign/designsystem/avatar';
 export * from '@kirbydesign/designsystem/progress-circle';
 export * from '@kirbydesign/designsystem/router-outlet';
-<<<<<<< HEAD
 export * from '@kirbydesign/designsystem/item-group';
-=======
 export * from '@kirbydesign/designsystem/modal';
->>>>>>> 5b85dfa7e (fixed tests)
 
 export * from './scss/scss-helper';
 

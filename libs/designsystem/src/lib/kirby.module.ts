@@ -66,7 +66,11 @@ import {
 import { PageModule } from '@kirbydesign/designsystem/page';
 import { EmptyStateModule } from '@kirbydesign/designsystem/empty-state';
 import { DropdownModule } from '@kirbydesign/designsystem/dropdown';
+<<<<<<< HEAD
 >>>>>>> 246577758 (moved to internal)
+=======
+import { KirbyModalModule } from '@kirbydesign/designsystem/modal/experimental';
+>>>>>>> e3cce2e1e ( cookbook and flows fixed)
 import { AppModule } from './components/app/app.module';
 import { ChartsModule } from './components/charts';
 import { DataTableModule } from './components/data-table/data-table.module';
@@ -145,6 +149,7 @@ const exportedModules = [
   FormFieldModule,
   SlideModule,
   AccordionModule,
+  KirbyModalModule,
   ...standaloneComponents,
 ];
 
