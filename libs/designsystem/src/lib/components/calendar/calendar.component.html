@@ -11,8 +11,8 @@
     </button>
 
     <div class="month-and-year">
-      <span class="month">{{ activeMonthName }}</span
-      ><span *ngIf="!_hasYearNavigator" class="year">{{ activeYear }}</span>
+      <span class="month">{{ activeMonthName }}</span>
+      <span *ngIf="!_hasYearNavigator" class="year">{{ activeYear }}</span>
     </div>
 
     <button
@@ -32,8 +32,7 @@
     [items]="navigableYears"
     popout="left"
     (change)="_changeYear($event)"
-  >
-  </kirby-dropdown>
+  ></kirby-dropdown>
 </div>
 
 <table>

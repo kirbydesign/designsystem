@@ -1,9 +1,9 @@
 <kirby-page title="Reorder">
   <kirby-page-content>
     <header class="section-header">
-      <span class="kirby-text-small-light" *ngFor="let headerText of headerTexts">{{
-        headerText
-      }}</span>
+      <span class="kirby-text-small-light" *ngFor="let headerText of headerTexts">
+        {{ headerText }}
+      </span>
     </header>
     <kirby-reorder-list
       (itemReorder)="doReorderItem($event)"

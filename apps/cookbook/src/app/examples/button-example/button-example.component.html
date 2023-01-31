@@ -4,7 +4,10 @@
 <button kirby-button size="lg">Large Button</button>
 
 <fieldset>
-  <legend>Button size for examples below<kirby-icon name="arrow-down"></kirby-icon></legend>
+  <legend>
+    Button size for examples below
+    <kirby-icon name="arrow-down"></kirby-icon>
+  </legend>
   <select (change)="onButtonSizeChange($event.target.value)">
     <option
       *ngFor="let size of buttonSizes"
@@ -30,7 +33,11 @@
   <button kirby-button [size]="buttonSize">
     <kirby-icon name="close"></kirby-icon>
   </button>
-  <label>Attention Level 1<br /><em>(Default)</em></label>
+  <label>
+    Attention Level 1
+    <br />
+    <em>(Default)</em>
+  </label>
 </div>
 <div class="button-example-container">
   <button kirby-button [size]="buttonSize" attentionLevel="2">
@@ -53,7 +60,8 @@
 
 <p class="kirby-text-small">
   <em>
-    <strong>Please note:</strong> The undecorated button is solely intended for use with icon only.
+    <strong>Please note:</strong>
+    The undecorated button is solely intended for use with icon only.
   </em>
 </p>
 
@@ -62,7 +70,11 @@
   <button kirby-button [size]="buttonSize">
     <kirby-icon customName="football"></kirby-icon>
   </button>
-  <label>Attention Level 1<br /><em>(Default)</em></label>
+  <label>
+    Attention Level 1
+    <br />
+    <em>(Default)</em>
+  </label>
 </div>
 <div class="button-example-container">
   <button kirby-button [size]="buttonSize" attentionLevel="2">
@@ -132,7 +144,11 @@
   <button kirby-button [size]="buttonSize" [isFloating]="true" disabled>
     <kirby-icon name="close"></kirby-icon>
   </button>
-  <label>Close<br />Disabled</label>
+  <label>
+    Close
+    <br />
+    Disabled
+  </label>
 </div>
 
 <h2>Button with attention level</h2>

@@ -2,9 +2,13 @@
   <cookbook-action-sheet-example></cookbook-action-sheet-example>
   <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
   <p>
-    To show the action sheet, create an <code>ActionSheetConfig</code> and pass it to
-    <code>modalController.showActionSheet</code>. Each item must to be of type
-    <code>ActionSheetItem</code>.
+    To show the action sheet, create an
+    <code>ActionSheetConfig</code>
+    and pass it to
+    <code>modalController.showActionSheet</code>
+    . Each item must to be of type
+    <code>ActionSheetItem</code>
+    .
     <!-- prettier-ignore -->
     <cookbook-code-viewer language="ts">const config: ActionSheetConfig={{ '{' }}
     header: 'Your action sheet header',
@@ -21,12 +25,15 @@ this.modalController.showActionSheet(config);</cookbook-code-viewer>
     function:
     <!-- prettier-ignore -->
     <cookbook-code-viewer language="ts">this.modalController.showActionSheet(config, onItemSelect);</cookbook-code-viewer>
-    where <code>onItemSelect</code> can be e.g.:
+    where
+    <code>onItemSelect</code>
+    can be e.g.:
     <!-- prettier-ignore -->
     <cookbook-code-viewer language="ts">onItemSelect(item: ActionSheetItem) {{ '{' }}...{{ '}' }}</cookbook-code-viewer>
-    We can use <code>modalController.hideTopmost</code> to hide (and destroy its component) the
-    topmost action sheet. We can pass an optional result parameter to it, which is then going to be
-    available inside the callback
+    We can use
+    <code>modalController.hideTopmost</code>
+    to hide (and destroy its component) the topmost action sheet. We can pass an optional result
+    parameter to it, which is then going to be available inside the callback
   </p>
   <h4>Action sheet properties:</h4>
   <cookbook-api-description-properties
