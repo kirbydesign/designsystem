@@ -25,14 +25,15 @@ const ARROW_RIGHT = 'ArrowRight';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TabNavigationComponent implements AfterViewInit, OnDestroy {
+  public readonly DEBOUNCE_TIME_MS = 250;
+  public readonly TAB_SELECTED_CLASS_NAME = 'selected';
+
   @ViewChild('tabBar')
   private tabBar: ElementRef<HTMLElement>;
 
   @ContentChildren(TabNavigationItemComponent, { read: ElementRef })
   private tabs: QueryList<ElementRef<HTMLElement>>;
 
-  private readonly DEBOUNCE_TIME_MS = 250;
-  private readonly tabSelectedClassName = 'selected';
   private tabBarElement: HTMLElement;
   private tabElements = new Array<HTMLElement>();
   private destroyed$ = new Subject<void>();
@@ -107,9 +108,9 @@ export class TabNavigationComponent implements AfterViewInit, OnDestroy {
 
   private selectTab(tabIndex: number): void {
     this.tabElements.forEach((tabElement, index) => {
-      tabElement.classList.remove(this.tabSelectedClassName);
+      tabElement.classList.remove(this.TAB_SELECTED_CLASS_NAME);
       if (tabIndex === index) {
-        tabElement.classList.add(this.tabSelectedClassName);
+        tabElement.classList.add(this.TAB_SELECTED_CLASS_NAME);
       }
     });
   }
