@@ -6,11 +6,11 @@ $padding-block-size-md: shared.$form-field-input-padding * 0.5;
 
 :host {
   @include interaction-state.apply-hover {
-    background-color: var(--kirby-interactable-background-color-hover);
+    background-color: var(--kirby-inputs-background-color-hover);
     cursor: text;
   }
   @include interaction-state.apply-active {
-    background-color: var(--kirby-interactable-background-color-active);
+    background-color: var(--kirby-inputs-background-color-active);
   }
 
   transition: interaction-state.transition();

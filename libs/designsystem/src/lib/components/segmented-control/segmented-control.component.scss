@@ -28,9 +28,9 @@
 
   &.default-mode {
     ion-segment {
-      --background: var(--kirby-interactable-background-color, #{utils.get-color('white')});
+      --background: var(--kirby-inputs-background-color, #{utils.get-color('white')});
 
-      box-shadow: var(--kirby-interactive-elevation);
+      box-shadow: var(--kirby-inputs-elevation);
       width: fit-content; // The segmented control itself is block-level, but we don't want it to stretch
       overflow: visible; // Ensures the badge is not cut off
       contain: none; // Ensures the badge is not cut off
@@ -54,7 +54,7 @@
     }
 
     ion-segment-button {
-      --background: var(--kirby-interactable-background-color, #{utils.get-color('white')});
+      --background: var(--kirby-inputs-background-color, #{utils.get-color('white')});
       --indicator-transition: none;
 
       flex: initial;
@@ -88,24 +88,16 @@ ion-segment-button {
     outline: none;
     border-radius: utils.$border-radius-round;
   }
-  @include interaction-state.apply-hover-ionic;
-  @include interaction-state.apply-active-ionic('s');
   @include utils.accessible-target-size;
 
-  &.segment-button-checked {
-    @include interaction-state.apply-hover-ionic('l', $make-lighter: true);
-    @include interaction-state.apply-active-ionic('xxxl', $make-lighter: true);
-  }
-
+  --background-hover: var(--kirby-inputs-background-color-hover);
+  --background-hover-opacity: 1;
   --border-radius: #{utils.$border-radius-round};
   --border-style: none;
   --background: none;
-  --color: var(--kirby-interactable-color, #{utils.get-color('black')});
-  --indicator-color: var(
-    --kirby-interactable-indicator-background-color,
-    #{utils.get-color('black')}
-  );
-  --color-checked: var(--kirby-interactable-indicator-color, #{utils.get-color('white')});
+  --color: var(--kirby-inputs-color);
+  --indicator-color: var(--kirby-inputs-indicator-background-color);
+  --color-checked: var(--kirby-inputs-indicator-color);
   --indicator-box-shadow: none;
   --indicator-transform: none;
   --padding-start: #{utils.size('m')};

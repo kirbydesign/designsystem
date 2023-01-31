@@ -3,34 +3,36 @@
 @use '../interaction-state';
 
 @mixin apply-dark-theme {
-  --kirby-interactable-background-color: var(--kirby-white-overlay);
-  --kirby-interactable-background-color-hover: var(--kirby-white-overlay-20);
-  --kirby-interactable-background-color-active: var(--kirby-white-overlay-30);
-  --kirby-interactable-color: var(--kirby-white);
-  --kirby-interactable-indicator-background-color: var(--kirby-white);
-  --kirby-interactable-indicator-color: var(--kirby-black);
-  --kirby-interactable-placeholder-color: var(--kirby-white-overlay-50);
+  --kirby-inputs-background-color: var(--kirby-white-overlay);
+  --kirby-inputs-background-color-hover: var(--kirby-white-overlay-20);
+  --kirby-inputs-background-color-active: var(--kirby-white-overlay-30);
+  --kirby-inputs-color: var(--kirby-white);
+  --kirby-inputs-indicator-background-color: var(--kirby-white);
+  --kirby-inputs-indicator-color: var(--kirby-black);
+  --kirby-inputs-placeholder-color: var(--kirby-white-overlay-50);
 }
 
 @mixin apply-white-theme {
-  --kirby-interactable-background-color: var(--kirby-dark-overlay);
-  --kirby-interactable-background-color-hover: var(--kirby-dark-overlay-10);
-  --kirby-interactable-background-color-active: var(--kirby-dark-overlay-20);
-  --kirby-interactable-color: var(--kirby-black);
-  --kirby-interactable-indicator-background-color: var(--kirby-black);
-  --kirby-interactable-indicator-color: var(--kirby-white);
-  --kirby-interactable-placeholder-color: var(--kirby-semi-dark);
+  --kirby-inputs-background-color: var(--kirby-dark-overlay);
+  --kirby-inputs-background-color-hover: var(--kirby-dark-overlay-10);
+  --kirby-inputs-background-color-active: var(--kirby-dark-overlay-20);
+  --kirby-inputs-color: var(--kirby-black);
+  --kirby-inputs-indicator-background-color: var(--kirby-black);
+  --kirby-inputs-indicator-color: var(--kirby-white);
+  --kirby-inputs-placeholder-color: var(--kirby-semi-dark);
 }
 
 @mixin apply-light-theme {
-  --kirby-interactable-background-color: var(--kirby-white);
-  --kirby-interactable-background-color-hover: var(--kirby-dark-overlay-10);
-  --kirby-interactable-background-color-active: var(--kirby-dark-overlay-20);
-  --kirby-interactable-color: var(--kirby-black);
-  --kirby-interactable-indicator-background-color: var(--kirby-black);
-  --kirby-interactable-indicator-color: var(--kirby-white);
-  --kirby-interactable-placeholder-color: var(--kirby-semi-dark);
-  --kirby-interactive-elevation: #{utils.get-elevation(2)};
+  --kirby-inputs-background-color: var(--kirby-white);
+  --kirby-inputs-background-color-hover: var(--kirby-dark-overlay-10);
+  --kirby-inputs-background-color-active: var(--kirby-dark-overlay-20);
+  --kirby-inputs-color: var(--kirby-black);
+  --kirby-inputs-indicator-background-color: var(--kirby-black);
+  --kirby-inputs-indicator-color: var(--kirby-white);
+  --kirby-inputs-placeholder-color: var(--kirby-semi-dark);
+
+  // Only set elevation on input components for light theme
+  --kirby-inputs-elevation: var(--kirby-elevation-2);
 }
 
 :host,
@@ -51,4 +53,6 @@
   --kirby-white: hsl(0deg 0% 100%);
   --kirby-black: hsl(0deg 0% 11%);
   --kirby-semi-dark: hsl(0deg 0% 56%);
+  --kirby-elevation-2: 0 1px 24px 0 rgb(28 28 28 / 4%);
+  --kirby-elevation-4: 0 20px 30px -15px hsla(0deg 0% 11% 30%), 0 0 5px 0 hsla(0deg 0% 11% 8%);
 }
