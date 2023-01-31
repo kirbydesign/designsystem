@@ -16,7 +16,7 @@ import { ActivatedRoute, Router } from '@angular/router';
       </p>
 
       <kirby-modal-footer-experimental themeColor="white" class="footer" footer>
-        <button kirby-button attentionLevel="3" (click)="test()">
+        <button kirby-button attentionLevel="3" routerLink="../page1">
           <kirby-icon name="arrow-back"></kirby-icon>
         </button>
         <button kirby-button (click)="closeModal()">Finish</button>
@@ -35,9 +35,5 @@ export class ModalRoutingExperimentalExamplePage2Component {
     this.router.navigate([{ outlets: { 'modal-experimental': null } }], {
       relativeTo: this.route.parent.parent,
     });
-  }
-
-  test() {
-    this.router.navigate(['../page1'], { relativeTo: this.route });
   }
 }
