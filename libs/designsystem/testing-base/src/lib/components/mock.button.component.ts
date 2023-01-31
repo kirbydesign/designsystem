@@ -1,6 +1,6 @@
 import { Component, forwardRef, Input } from '@angular/core';
 
-import { ButtonComponent, ButtonSize, NotificationColor } from '@kirbydesign/designsystem';
+import { ButtonComponent, ButtonSize, NotificationColor } from '@kirbydesign/designsystem/button';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({

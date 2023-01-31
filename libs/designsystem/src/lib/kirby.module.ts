@@ -86,10 +86,14 @@ import { KirbyBadgeModule } from './components/kirby-badge.module';
 
 const exportedDeclarations = [GridComponent, ModalRouterLinkDirective];
 
-const declarations = [...exportedDeclarations, KeyHandlerDirective, ModalCompactWrapperComponent];
+const declarations = [...exportedDeclarations, KeyHandlerDirective];
 
 const standaloneComponents = [
+<<<<<<< HEAD
   ItemGroupComponent,
+=======
+  ModalCompactWrapperComponent,
+>>>>>>> 9f279131c ( moved)
   TextareaComponent,
   InputComponent,
   AffixDirective,

@@ -37,5 +37,4 @@ export * from './components/charts/chart-config';
 
 export { KirbyModule } from './kirby.module';
 export { KirbyExperimentalModule } from './kirby-experimental.module';
-export { KirbyModalModule } from './kirby-modal.module';
 export { StockChartConfig, BarChartConfig } from './components/charts/chart-config';

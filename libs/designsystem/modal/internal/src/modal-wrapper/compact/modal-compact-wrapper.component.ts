@@ -7,6 +7,7 @@ import { COMPONENT_PROPS } from '../config/modal-config.helper';
 import { Modal } from '../../modal.interfaces';
 
 @Component({
+  standalone: true,
   selector: 'kirby-modal-compact-wrapper',
   templateUrl: './modal-compact-wrapper.component.html',
   styleUrls: ['./modal-compact-wrapper.component.scss'],

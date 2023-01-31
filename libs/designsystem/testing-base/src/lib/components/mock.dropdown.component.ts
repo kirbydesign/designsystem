@@ -1,6 +1,6 @@
 import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 
-import { DropdownComponent, HorizontalDirection } from '@kirbydesign/designsystem';
+import { DropdownComponent, HorizontalDirection } from '@kirbydesign/designsystem/dropdown';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({

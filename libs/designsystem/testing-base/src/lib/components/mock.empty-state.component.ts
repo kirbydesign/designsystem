@@ -1,6 +1,6 @@
 import { Component, forwardRef, Input } from '@angular/core';
 
-import { EmptyStateComponent } from '@kirbydesign/designsystem';
+import { EmptyStateComponent } from '@kirbydesign/designsystem/empty-state';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({

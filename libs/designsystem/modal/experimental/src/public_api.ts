@@ -2,3 +2,4 @@ export { FullscreenModalExperimentalComponent } from './fullscreen/fullscreen.co
 export { ModalFooterExperimentalComponent } from './footer/footer.component';
 export { ModalWrapperExperimentalComponent } from './wrapper/wrapper.component';
 export { ModalExperimentalController, ModalExperimentalConfig } from './services/modal.controller';
+export * from './kirby-modal.module';
