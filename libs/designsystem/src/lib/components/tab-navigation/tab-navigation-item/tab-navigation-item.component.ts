@@ -15,6 +15,9 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TabNavigationItemComponent implements AfterViewInit {
+  public readonly LABEL_TEXT_ELEMENT_SELECTOR = 'span[text]';
+  public readonly LABEL_TEXT_ELEMENT_CONTENT_ATTRIBUTE = 'data-text';
+
   @ViewChild('tabButton')
   private tabButton: ElementRef<HTMLElement>;
 
@@ -28,8 +31,6 @@ export class TabNavigationItemComponent implements AfterViewInit {
     }
   }
 
-  private readonly labelTextElementSelector = 'span[text]';
-  private readonly labelTextElementContentAttribute = 'data-text';
   private tabButtonElement: HTMLElement;
 
   constructor(private elementRef: ElementRef<HTMLElement>) {
@@ -43,11 +44,11 @@ export class TabNavigationItemComponent implements AfterViewInit {
 
   private initLabelText() {
     const labelTextElement = this.elementRef.nativeElement.querySelector(
-      this.labelTextElementSelector
+      this.LABEL_TEXT_ELEMENT_SELECTOR
     );
     if (labelTextElement) {
       labelTextElement.setAttribute(
-        this.labelTextElementContentAttribute,
+        this.LABEL_TEXT_ELEMENT_CONTENT_ATTRIBUTE,
         labelTextElement.textContent
       );
     }

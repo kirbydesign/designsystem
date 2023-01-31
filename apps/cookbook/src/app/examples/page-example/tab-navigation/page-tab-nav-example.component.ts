@@ -13,7 +13,7 @@ const config = {
       <span text>{{ tabTexts[0] }}</span>
     </kirby-tab-navigation-item>
     <kirby-tab-navigation-item>
-      <span text>I{{ tabTexts[1] }}</span>
+      <span text>{{ tabTexts[1] }}</span>
       <kirby-badge themeColor="warning">
         <kirby-icon name="attach"></kirby-icon>
       </kirby-badge>
