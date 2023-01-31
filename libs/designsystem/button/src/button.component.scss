@@ -90,10 +90,10 @@ $button-width: (
 
 @mixin button-attentionlevel3 {
   --kirby-button-background-color: var(
-    --kirby-interactable-background-color,
+    --kirby-inputs-background-color,
     #{utils.get-color('white')}
   );
-  --kirby-button-color: var(--kirby-interactable-color, #{utils.get-color('black')});
+  --kirby-button-color: var(--kirby-inputs-color, #{utils.get-color('black')});
 
   @include interaction-state.apply-hover('xs');
   @include interaction-state.apply-active('s');
@@ -120,7 +120,7 @@ $button-width: (
   font-family: var(--kirby-font-family);
   background-color: var(--kirby-button-background-color, initial);
   color: var(--kirby-button-color, inherit);
-  box-shadow: var(--kirby-interactive-elevation);
+  box-shadow: var(--kirby-inputs-elevation);
   border-radius: utils.$border-radius-round;
   box-sizing: border-box; // Ensure border is not added to button height
   display: inline-flex;

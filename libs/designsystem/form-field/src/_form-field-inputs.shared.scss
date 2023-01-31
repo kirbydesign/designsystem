@@ -31,8 +31,8 @@ $form-field-label-height: 24px;
 :host {
   @include interaction-state.apply-focus-visible($shadow: utils.get-elevation(2));
 
-  background-color: var(--kirby-interactable-background-color, #{utils.get-color('white')});
-  color: var(--kirby-interactable-color, #{utils.get-color('black')});
+  background-color: var(--kirby-inputs-background-color, #{utils.get-color('white')});
+  color: var(--kirby-inputs-color, #{utils.get-color('black')});
   border: none;
   box-sizing: border-box;
   display: block;
@@ -47,7 +47,7 @@ $form-field-label-height: 24px;
   margin: 0;
   appearance: none;
   border-radius: utils.size('s');
-  box-shadow: var(--kirby-interactive-elevation);
+  box-shadow: var(--kirby-inputs-elevation);
   padding: $form-field-input-padding;
   width: 100%;
 
@@ -66,6 +66,6 @@ $form-field-label-height: 24px;
   }
 
   &::placeholder {
-    color: var(--kirby-interactable-placeholder-color, #{utils.get-text-color('semi-dark')});
+    color: var(--kirby-inputs-placeholder-color, #{utils.get-text-color('semi-dark')});
   }
 }
