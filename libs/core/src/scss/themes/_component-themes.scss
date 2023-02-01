@@ -4,8 +4,8 @@
 
 @mixin apply-dark-theme {
   --kirby-inputs-background-color: var(--kirby-white-overlay);
-  --kirby-inputs-background-color-hover: var(--kirby-white-overlay-20);
-  --kirby-inputs-background-color-active: var(--kirby-white-overlay-30);
+  --kirby-inputs-background-color-hover: var(--kirby-white-overlay-30);
+  --kirby-inputs-background-color-active: var(--kirby-white-overlay-40);
   --kirby-inputs-color: var(--kirby-white);
   --kirby-inputs-indicator-background-color: var(--kirby-white);
   --kirby-inputs-indicator-color: var(--kirby-black);
@@ -49,7 +49,6 @@
   --kirby-dark-overlay-30: hsl(0deg 0% 11% / 30%);
   --kirby-dark-overlay-40: hsl(0deg 0% 11% / 40%);
   --kirby-dark-overlay-50: hsl(0deg 0% 11% / 50%);
-  --kirby-white-overlay-6: hsl(0deg 0% 100% / 6%);
   --kirby-white: hsl(0deg 0% 100%);
   --kirby-black: hsl(0deg 0% 11%);
   --kirby-semi-dark: hsl(0deg 0% 56%);
