@@ -50,7 +50,7 @@ export class AlertComponent implements AfterViewInit {
   }
 
   @Input() iconName: string;
-  @Input() iconThemeColor: ThemeColor;
+  @Input() iconThemeColor: ThemeColor | `${ThemeColor}`;
   @Input() okBtn: string;
   @Input() okBtnIsDestructive: boolean;
   @Input() cancelBtn: string;
