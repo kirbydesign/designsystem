@@ -1,7 +1,7 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { Overlay } from '@kirbydesign/designsystem/modal/internal';
 import { Subscription } from 'rxjs';
+import { Overlay } from '../../modal.interfaces';
 
 import { ActionSheetComponent } from '../action-sheet/action-sheet.component';
 import { ActionSheetConfig } from '../action-sheet/config/action-sheet-config';

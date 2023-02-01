@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Modal } from '@kirbydesign/designsystem/modal/internal';
+import { Modal } from '@kirbydesign/designsystem/modal';
 import { Other } from '../other.model';
 import { OtherService } from '../other.service';
 

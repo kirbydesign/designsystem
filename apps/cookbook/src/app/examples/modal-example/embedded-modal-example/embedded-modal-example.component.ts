@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit, Optional, SkipSelf } from '@angular/core';
 
 import { ActionSheetConfig, AlertConfig, ModalController } from '@kirbydesign/designsystem';
-import { COMPONENT_PROPS, Modal, ModalConfig } from '@kirbydesign/designsystem/modal/internal';
+import { COMPONENT_PROPS, Modal, ModalConfig } from '@kirbydesign/designsystem/modal';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
 import { KirbyAnimation } from '@kirbydesign/designsystem';
 

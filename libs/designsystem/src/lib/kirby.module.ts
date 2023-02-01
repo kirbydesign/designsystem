@@ -60,7 +60,7 @@ import {
 import {
   ModalCompactWrapperComponent,
   ModalWrapperComponent,
-} from '@kirbydesign/designsystem/modal/internal';
+} from '@kirbydesign/designsystem/modal';
 import { PageModule } from '@kirbydesign/designsystem/page';
 import { EmptyStateModule } from '@kirbydesign/designsystem/empty-state';
 import { DropdownModule } from '@kirbydesign/designsystem/dropdown';

@@ -1,6 +1,6 @@
 import { Component, Optional, SkipSelf } from '@angular/core';
 
-import { Modal } from '@kirbydesign/designsystem/modal/internal';
+import { Modal } from '@kirbydesign/designsystem/modal';
 
 @Component({
   templateUrl: './modal-compact-example.component.html',

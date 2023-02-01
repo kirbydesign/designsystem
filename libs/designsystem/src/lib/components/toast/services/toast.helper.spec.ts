@@ -5,7 +5,7 @@ import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 
-import { Overlay } from '@kirbydesign/designsystem/modal/internal';
+import { Overlay } from '@kirbydesign/designsystem/modal';
 import { ToastHelper } from './toast.helper';
 
 const getColor = DesignTokenHelper.getColor;

@@ -4,15 +4,12 @@ import { Observable, Subject } from 'rxjs';
 import { filter, map, takeUntil } from 'rxjs/operators';
 
 import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
-import {
-  ModalConfig,
-  ModalNavigationService,
-  ModalRouteActivation,
-  Overlay,
-} from '@kirbydesign/designsystem/modal/internal';
+import { ModalRouteActivation, Overlay } from '../../modal.interfaces';
 import { ActionSheetConfig } from '../action-sheet/config/action-sheet-config';
 import { AlertConfig } from '../alert/config/alert-config';
 
+import { ModalNavigationService } from '../../modal-navigation.service';
+import { ModalConfig } from '../../modal-wrapper';
 import { ActionSheetHelper } from './action-sheet.helper';
 import { AlertHelper } from './alert.helper';
 import { ModalHelper } from './modal.helper';

@@ -3,8 +3,8 @@ import { createComponentFactory, Spectator } from '@ngneat/spectator';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 
-import { ModalFooterComponent } from '@kirbydesign/designsystem/modal';
 import { PageProgressComponent, PageTitleComponent } from '@kirbydesign/designsystem/page';
+import { ModalFooterComponent } from '../modal/footer/modal-footer.component';
 import { ModalWrapperComponent } from './modal-wrapper.component';
 import {
   DynamicFooterEmbeddedComponent,

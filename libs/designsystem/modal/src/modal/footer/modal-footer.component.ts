@@ -7,12 +7,13 @@ import {
   Optional,
 } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
+
+import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import {
   ModalElementComponent,
   ModalElementsAdvertiser,
   ModalElementType,
-} from '@kirbydesign/designsystem/modal/internal';
-import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
+} from '../../modal.interfaces';
 
 @Component({
   standalone: true,

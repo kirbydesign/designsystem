@@ -4,7 +4,7 @@ import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 
-import { Overlay } from '@kirbydesign/designsystem/modal/internal';
+import { Overlay } from '../../modal.interfaces';
 import { ActionSheetHelper } from './action-sheet.helper';
 
 @Component({

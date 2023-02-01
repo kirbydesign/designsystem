@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { Overlay } from '@kirbydesign/designsystem/modal/internal';
+import { Overlay } from '../../modal.interfaces';
 
 import { AlertComponent } from '../alert/alert.component';
 import { AlertConfig } from '../alert/config/alert-config';

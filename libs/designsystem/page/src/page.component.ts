@@ -38,7 +38,7 @@ import {
   ModalElementType,
   ModalNavigationService,
   ModalWrapperComponent,
-} from '@kirbydesign/designsystem/modal/internal';
+} from '@kirbydesign/designsystem/modal';
 import { FitHeadingConfig } from './fit-heading/fit-heading.directive';
 
 /**

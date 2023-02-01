@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@kirbydesign/designsystem';
-import { ModalConfig } from '@kirbydesign/designsystem/modal/internal';
+import { ModalConfig } from '@kirbydesign/designsystem/modal';
 import { DetailsComponent } from '../details/details.component';
 import { Detail } from '../detail.model';
 

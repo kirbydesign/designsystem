@@ -7,7 +7,7 @@ import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 
-import { Overlay } from '@kirbydesign/designsystem/modal/internal';
+import { Overlay } from '../../modal.interfaces';
 import { AlertHelper } from './alert.helper';
 
 @Component({

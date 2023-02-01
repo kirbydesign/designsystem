@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Modal } from '@kirbydesign/designsystem/modal/internal';
+import { Modal } from '@kirbydesign/designsystem/modal';
 import { OwnAccountService } from '../own-account.service';
 import { OwnAccount } from '../own-account.model';
 import { OtherService } from '../other.service';

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ToastController } from '@ionic/angular';
-import { Overlay } from '@kirbydesign/designsystem/modal/internal';
+import { Overlay } from '@kirbydesign/designsystem/modal';
 
 import { MessageType, ToastConfig } from '../config/toast-config';
 

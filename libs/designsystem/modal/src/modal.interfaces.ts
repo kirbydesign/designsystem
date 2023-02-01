@@ -26,17 +26,26 @@ export abstract class Modal {
   scrollToBottom: (scrollDuration?: KirbyAnimation.Duration) => void;
   scrollDisabled: boolean;
 }
+/**
+ * WARNING: This is for internal use only and should not be used outside of Kirby.
+ */
 export enum ModalElementType {
   PAGE_PROGRESS,
   FOOTER,
   TITLE,
 }
 
+/**
+ * WARNING: This is for internal use only and should not be used outside of Kirby.
+ */
 export abstract class ModalElementsAdvertiser {
   addModalElement: (type: ModalElementType, elementRef: ElementRef<HTMLElement>) => void;
   removeModalElement: (type: ModalElementType, elementRef: ElementRef<HTMLElement>) => void;
 }
 
+/**
+ * WARNING: This is for internal use only and should not be used outside of Kirby.
+ */
 @Component({ template: '' })
 export abstract class ModalElementComponent implements AfterViewInit, OnDestroy {
   private get isContainedInModal() {

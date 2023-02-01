@@ -12,7 +12,7 @@ import { selectedTabClickEvent, TabsComponent } from '@kirbydesign/designsystem/
 
 const { size, fontWeight } = DesignTokenHelper;
 
-import { ModalNavigationService } from '@kirbydesign/designsystem/modal/internal';
+import { ModalNavigationService } from '@kirbydesign/designsystem/modal';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import {
   PageActionsComponent,

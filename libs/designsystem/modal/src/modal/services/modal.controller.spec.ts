@@ -1,11 +1,8 @@
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 import { EMPTY, firstValueFrom, Subject } from 'rxjs';
+import { ModalNavigationService } from '../../modal-navigation.service';
 
-import {
-  ModalNavigationService,
-  Overlay,
-  OverlayEventDetail,
-} from '@kirbydesign/designsystem/modal/internal';
+import { Overlay, OverlayEventDetail } from '../../modal.interfaces';
 import { ActionSheetHelper } from './action-sheet.helper';
 import { AlertHelper } from './alert.helper';
 import { ModalController } from './modal.controller';

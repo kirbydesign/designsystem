@@ -46,7 +46,6 @@
       "@kirbydesign/designsystem/dropdown": ["libs/designsystem/dropdown/index.ts"],
       "@kirbydesign/designsystem/page": ["libs/designsystem/page/index.ts"],
       "@kirbydesign/designsystem/modal": ["libs/designsystem/modal/index.ts"],
-      "@kirbydesign/designsystem/modal/internal": ["libs/designsystem/modal/internal/index.ts"],
       "@kirbydesign/designsystem/modal/experimental": [
         "libs/designsystem/modal/experimental/index.ts"
       ],

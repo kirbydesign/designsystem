@@ -3,15 +3,15 @@ import { ModalController } from '@ionic/angular';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 
 import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
+import { Overlay } from '../../modal.interfaces';
+import { AlertConfig } from '../alert/config/alert-config';
+
 import {
   ModalCompactWrapperComponent,
   ModalConfig,
   ModalSize,
   ModalWrapperComponent,
-  Overlay,
-} from '@kirbydesign/designsystem/modal/internal';
-import { AlertConfig } from '../alert/config/alert-config';
-
+} from '../../modal-wrapper';
 import { AlertHelper } from './alert.helper';
 
 import { ModalAnimationBuilderService } from './modal-animation-builder.service';
