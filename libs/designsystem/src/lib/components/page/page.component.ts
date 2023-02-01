@@ -114,7 +114,9 @@ export class PageStickyContentDirective {}
 
 @Component({
   selector: 'kirby-page-progress',
-  template: ` <ng-content></ng-content> `,
+  template: `
+    <ng-content></ng-content>
+  `,
   styles: [':host {display: flex}'],
 })
 export class PageProgressComponent extends ModalElementComponent implements OnInit {
@@ -138,7 +140,9 @@ export class PageProgressComponent extends ModalElementComponent implements OnIn
 }
 @Component({
   selector: 'kirby-page-title',
-  template: ` <ng-content></ng-content> `,
+  template: `
+    <ng-content></ng-content>
+  `,
 })
 export class PageTitleComponent extends ModalElementComponent {
   constructor(
@@ -151,13 +155,17 @@ export class PageTitleComponent extends ModalElementComponent {
 
 @Component({
   selector: 'kirby-page-content',
-  template: ` <ng-content></ng-content> `,
+  template: `
+    <ng-content></ng-content>
+  `,
 })
 export class PageContentComponent {}
 
 @Component({
   selector: 'kirby-page-actions',
-  template: ` <ng-content select="button[kirby-button]"></ng-content> `,
+  template: `
+    <ng-content select="button[kirby-button]"></ng-content>
+  `,
 })
 export class PageActionsComponent {}
 

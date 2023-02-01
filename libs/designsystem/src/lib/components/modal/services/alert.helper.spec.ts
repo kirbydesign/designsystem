@@ -11,7 +11,9 @@ import { AlertHelper } from './alert.helper';
 import { Overlay } from './modal.interfaces';
 
 @Component({
-  template: ` <h2>Dummy Component</h2> `,
+  template: `
+    <h2>Dummy Component</h2>
+  `,
 })
 class EmbeddedDummyComponent {}
 

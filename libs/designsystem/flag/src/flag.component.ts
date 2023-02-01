@@ -3,7 +3,9 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular
 @Component({
   standalone: true,
   selector: 'kirby-flag',
-  template: ` <ng-content></ng-content> `,
+  template: `
+    <ng-content></ng-content>
+  `,
   styleUrls: ['./flag.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
