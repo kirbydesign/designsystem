@@ -1,5 +1,3 @@
-export * from './app';
-
 export { KirbyBadge as BadgeComponent } from './web-component-proxies.component';
 
 export * from './charts';

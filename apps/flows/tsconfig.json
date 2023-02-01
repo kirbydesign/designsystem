@@ -67,7 +67,8 @@
       "@kirbydesign/designsystem/modal/internal": ["libs/designsystem/modal/internal/index.ts"],
       "@kirbydesign/designsystem/modal/experimental": [
         "libs/designsystem/modal/experimental/index.ts"
-      ]
+      ],
+      "@kirbydesign/designsystem/kirby-app": ["libs/designsystem/kirby-app/index.ts"]
     },
     "target": "es2020"
   },

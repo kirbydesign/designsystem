@@ -45,9 +45,7 @@ import {
   ProgressCircleRingComponent,
 } from '@kirbydesign/designsystem/progress-circle';
 import { RouterOutletModule } from '@kirbydesign/designsystem/router-outlet';
-<<<<<<< HEAD
 import { ItemGroupComponent } from '@kirbydesign/designsystem/item-group';
-=======
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { CalendarComponent } from '@kirbydesign/designsystem/calendar';
 import {
@@ -66,12 +64,11 @@ import {
 import { PageModule } from '@kirbydesign/designsystem/page';
 import { EmptyStateModule } from '@kirbydesign/designsystem/empty-state';
 import { DropdownModule } from '@kirbydesign/designsystem/dropdown';
-<<<<<<< HEAD
->>>>>>> 246577758 (moved to internal)
-=======
+
 import { KirbyModalModule } from '@kirbydesign/designsystem/modal/experimental';
->>>>>>> e3cce2e1e ( cookbook and flows fixed)
-import { AppModule } from './components/app/app.module';
+
+import { AppModule } from '@kirbydesign/designsystem/kirby-app';
+
 import { ChartsModule } from './components/charts';
 import { DataTableModule } from './components/data-table/data-table.module';
 import { FabSheetComponent } from './components/fab-sheet/fab-sheet.component';
@@ -93,11 +90,8 @@ const exportedDeclarations = [GridComponent, ModalRouterLinkDirective];
 const declarations = [...exportedDeclarations, KeyHandlerDirective];
 
 const standaloneComponents = [
-<<<<<<< HEAD
   ItemGroupComponent,
-=======
   ModalCompactWrapperComponent,
->>>>>>> 9f279131c ( moved)
   TextareaComponent,
   InputComponent,
   AffixDirective,
