@@ -14,8 +14,8 @@ const config = {
 </kirby-card>
 
 <div class="card-option-button-group">
-    <button (click)="setThemeColor('light')" class="light"></button>
     <button (click)="setThemeColor('white')" class="white"></button>
+    <button (click)="setThemeColor('light')" class="light"></button>
     <button (click)="setThemeColor('secondary')" class="secondary"></button>
     <button (click)="setThemeColor('dark')" class="dark"></button>
 </div>
@@ -82,11 +82,11 @@ export class SegmentedControlExampleColorComponent implements OnInit {
 
   private defaultItems: SegmentItem[] = [
     {
-      text: 'Item 1',
+      text: 'First Item',
       id: '1',
     },
     {
-      text: 'Item 2',
+      text: 'Second Item',
       id: '2',
     },
   ];

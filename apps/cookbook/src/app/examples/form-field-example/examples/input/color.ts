@@ -4,13 +4,13 @@ const config = {
   selector: 'cookbook-form-field-input-color-example',
   template: `<kirby-card hasPadding="true" [themeColor]="color">
     <kirby-form-field>
-    <input kirby-input placeholder="Default input with placeholder text" />
+    <input kirby-input placeholder="Default input with placeholder text inside card" />
   </kirby-form-field>
 </kirby-card>
 
 <div class="card-option-button-group">
-    <button (click)="setThemeColor('light')" class="light"></button>
     <button (click)="setThemeColor('white')" class="white"></button>
+    <button (click)="setThemeColor('light')" class="light"></button>
     <button (click)="setThemeColor('secondary')" class="secondary"></button>
     <button (click)="setThemeColor('dark')" class="dark"></button>
 </div>
