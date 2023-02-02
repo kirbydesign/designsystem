@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { PageFooterComponent } from '@kirbydesign/designsystem/components/page/page-footer/page-footer.component';
+import { PageFooterComponent } from '@kirbydesign/designsystem';
 
 import { BasePageExampleComponent } from '../../base-page-example.component';
 

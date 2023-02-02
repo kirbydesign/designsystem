@@ -1,27 +1,13 @@
-export * from './app';
-
 export { KirbyBadge as BadgeComponent } from './web-component-proxies.component';
 
-export { ButtonComponent, ButtonSize } from './button/button.component';
-
 export * from './charts';
-export * from './calendar';
 
 export * from './data-table';
 
-export * from './dropdown';
-export * from './empty-state';
 export { FabSheetComponent } from './fab-sheet/fab-sheet.component';
 
 export { GridComponent } from './grid/grid.component';
 export { GridCardConfiguration } from './grid/grid-card-configuration';
-
-export { ItemGroupComponent } from './item-group/item-group.component';
-
-export * from './modal';
-export * from './modal-experimental';
-
-export * from './page';
 
 export * from './reorder-list';
 

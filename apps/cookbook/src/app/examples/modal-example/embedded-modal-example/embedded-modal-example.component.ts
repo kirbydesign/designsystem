@@ -1,13 +1,7 @@
 import { Component, Inject, OnInit, Optional, SkipSelf } from '@angular/core';
 
-import {
-  ActionSheetConfig,
-  AlertConfig,
-  COMPONENT_PROPS,
-  Modal,
-  ModalController,
-} from '@kirbydesign/designsystem';
-import { ModalConfig } from '@kirbydesign/designsystem';
+import { ActionSheetConfig, AlertConfig, ModalController } from '@kirbydesign/designsystem';
+import { COMPONENT_PROPS, Modal, ModalConfig } from '@kirbydesign/designsystem';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
 import { KirbyAnimation } from '@kirbydesign/designsystem';
 
@@ -150,7 +144,7 @@ export class EmbeddedModalExampleComponent implements OnInit {
   }
 
   close() {
-    let someTestData: number = Math.PI;
+    const someTestData: number = Math.PI;
     this.modal.close(someTestData);
   }
 

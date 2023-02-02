@@ -13,8 +13,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { IonFab, IonFabButton, IonicModule } from '@ionic/angular';
-
-import { ActionSheetComponent } from '../modal/action-sheet/action-sheet.component';
+import { ActionSheetComponent } from '@kirbydesign/designsystem/modal';
 
 @Component({
   standalone: true,
