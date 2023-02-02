@@ -27,10 +27,11 @@ import {
 import { NavigationEnd, NavigationStart, Router, RouterEvent } from '@angular/router';
 import { IonBackButtonDelegate, IonContent, IonFooter, IonHeader } from '@ionic/angular';
 import { ScrollDetail } from '@ionic/core';
+import { selectedTabClickEvent, TabsComponent } from '@kirbydesign/designsystem/tabs';
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
 
-import { KirbyAnimation } from '../../animation/kirby-animation';
+import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 import { FitHeadingConfig } from '../../directives/fit-heading/fit-heading.directive';
 import { ModalWrapperComponent } from '../modal/modal-wrapper/modal-wrapper.component';
 import { ModalNavigationService } from '../modal/services/modal-navigation.service';
@@ -39,8 +40,6 @@ import {
   ModalElementsAdvertiser,
   ModalElementType,
 } from '../modal/services/modal.interfaces';
-import { selectedTabClickEvent } from '../tabs/tab-button/tab-button.events';
-import { TabsComponent } from '../tabs/tabs.component';
 
 /**
  * Specify scroll event debounce time in ms and scrolled offset from top in pixels

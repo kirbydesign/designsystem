@@ -2,17 +2,12 @@ import { Component } from '@angular/core';
 import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
-import exampleHtml from '../../examples/slides-example/slides-example.component.html?raw';
-import exampleTS from '../../examples/slides-example/slides-example.component.ts?raw';
 @Component({
   selector: 'cookbook-slide-showcase',
   templateUrl: './slides-showcase.component.html',
   preserveWhitespaces: true,
 })
 export class SlidesShowcaseComponent {
-  exampleHtml = exampleHtml;
-  exampleTS = exampleTS;
-
   properties: ApiDescriptionProperty[] = [
     {
       name: 'slidesOptions',

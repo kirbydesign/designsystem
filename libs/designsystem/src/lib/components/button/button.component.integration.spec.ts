@@ -9,10 +9,10 @@ import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { CardComponent } from '@kirbydesign/designsystem/card';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
+import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { FitHeadingDirective } from '../../directives/fit-heading/fit-heading.directive';
 import { DropdownComponent } from '../dropdown/dropdown.component';
 import { EmptyStateComponent } from '../empty-state/empty-state.component';
-import { ItemComponent } from '../item/item.component';
 import { PageActionsDirective, PageComponent, PageTitleDirective } from '../page/page.component';
 
 import { ButtonComponent } from './button.component';
@@ -97,15 +97,6 @@ describe('ButtonComponent in Kirby Page', () => {
       });
     });
 
-    it('should render with transparent border', async () => {
-      await TestHelper.whenReady(ionToolbar);
-      expect(actionButtonInHeader).toHaveComputedStyle({
-        'border-width': '1px',
-        'border-style': 'solid',
-        'border-color': 'transparent',
-      });
-    });
-
     it('should render with correct size', () => {
       expect(actionButtonInHeader).toHaveComputedStyle({
         width: 'auto',
@@ -136,7 +127,7 @@ describe('ButtonComponent in Kirby Page', () => {
     it('should render with correct background-color', async () => {
       await TestHelper.whenReady(ionContent);
       expect(actionButtonInPage).toHaveComputedStyle({
-        'background-color': 'transparent',
+        'background-color': getColor('white'),
       });
     });
 
@@ -144,15 +135,6 @@ describe('ButtonComponent in Kirby Page', () => {
       await TestHelper.whenReady(ionContent);
       expect(actionButtonInPage).toHaveComputedStyle({
         color: getColor('white', 'contrast'),
-      });
-    });
-
-    it('should render with transparent border', async () => {
-      await TestHelper.whenReady(ionContent);
-      expect(actionButtonInPage).toHaveComputedStyle({
-        'border-width': '1px',
-        'border-style': 'solid',
-        'border-color': getColor('medium'),
       });
     });
   });
@@ -174,15 +156,6 @@ describe('ButtonComponent in Kirby Page', () => {
       await TestHelper.whenReady(ionContent);
       expect(normalButtonInPage).toHaveComputedStyle({
         'background-color': getColor('primary'),
-      });
-    });
-
-    it('should render with transparent border', async () => {
-      await TestHelper.whenReady(ionContent);
-      expect(normalButtonInPage).toHaveComputedStyle({
-        'border-width': '1px',
-        'border-style': 'solid',
-        'border-color': 'transparent',
       });
     });
 

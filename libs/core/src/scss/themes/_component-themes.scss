@@ -1,0 +1,17 @@
+@use '../utils';
+
+@mixin apply-dark-theme {
+  --kirby-interactive-element-background-color: #{utils.get-color('white-overlay')};
+  --kirby-interactive-element-color: #{utils.get-color('white')};
+}
+
+@mixin apply-white-theme {
+  --kirby-interactive-element-background-color: #{utils.get-color('dark-overlay')};
+  --kirby-interactive-element-color: #{utils.get-color('black')};
+}
+
+@mixin apply-light-theme {
+  --kirby-interactive-element-background-color: #{utils.get-color('white')};
+  --kirby-interactive-element-color: #{utils.get-color('white-contrast')};
+  --kirby-interactive-elevation: #{utils.get-elevation(2)};
+}

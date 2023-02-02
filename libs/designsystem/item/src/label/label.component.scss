@@ -1,0 +1,35 @@
+@use '@kirbydesign/core/src/scss/utils';
+@use '../item.utils';
+
+:host {
+  &.horizontal ion-label {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    @include utils.slotted(':not(:first-child)') {
+      margin-left: utils.size('xs');
+    }
+  }
+}
+
+:host-context(kirby-item) ion-label {
+  @include item.item-typography;
+}
+
+:host-context(kirby-section-header) ion-label {
+  @include utils.section-header-typography;
+}
+
+:host([slot='end']) ion-label {
+  @include utils.slotted(data, '[detail]') {
+    margin-inline-start: utils.size('s');
+  }
+}
+
+:host-context(kirby-item.selected) ion-label {
+  @include utils.slotted(h1, h2, h3, h4, h5, h6, 'p:not([detail])', 'data:not([detail])') {
+    font-weight: utils.font-weight('bold');
+  }
+}

@@ -165,5 +165,15 @@ export class CalendarShowcaseComponent {
       description: 'Emitted when yearNavigator changes value.',
       signature: 'EventEmitter<number>',
     },
+    {
+      name: 'previousMonthClicked',
+      description: 'Emitted when clicking the button to navigate to the previous month.',
+      signature: 'EventEmitter<Date>',
+    },
+    {
+      name: 'nextMonthClicked',
+      description: 'Emitted when clicking the button to navigate to the next month.',
+      signature: 'EventEmitter<Date>',
+    },
   ];
 }
