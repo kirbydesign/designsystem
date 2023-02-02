@@ -6,6 +6,15 @@
     <div *ngIf="!!flagTemplate" class="flag">
       <ng-container [ngTemplateOutlet]="flagTemplate.templateRef"></ng-container>
     </div>
+    <h1
+      *ngIf="!!titleTemplate && !!valueTemplate"
+      class="title"
+      class="title"
+      [ngClass]="{ 'kirby-text-medium': !!valueTemplate }"
+      [kirbyFitHeading]="fitHeadingConfig"
+    >
+      <ng-container [ngTemplateOutlet]="titleTemplate.templateRef"></ng-container>
+    </h1>
   </div>
   <div class="main-row">
     <ng-container *ngIf="isDesktop && !!actionsTemplate && centered">
@@ -13,7 +22,7 @@
     </ng-container>
     <div class="main" [ngClass]="{ centered: centered }">
       <h1
-        *ngIf="!!titleTemplate"
+        *ngIf="!!titleTemplate && !valueTemplate"
         class="title"
         class="title"
         [ngClass]="{ 'kirby-text-medium': !!valueTemplate }"

@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import {
+  ApiDescriptionProperty,
+  ApiDescriptionPropertyColumns,
+} from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
   selector: 'cookbook-header-showcase',
@@ -9,33 +12,66 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
 export class HeaderShowcaseComponent {
   properties: ApiDescriptionProperty[] = [
     {
-      name: 'title',
-      description: 'The title of the alert',
-      type: ['string | Observable<string>'],
+      name: 'centered',
+      description: 'A boolean that describe whether the header should be centered.',
+      type: ['boolean'],
+      defaultValue: 'false',
     },
     {
-      name: 'message',
+      name: 'titleMaxLines',
       description:
-        "(Optional) The message shown under the title (or icon if specified). Use '\\n' for newline.",
-      type: ['string | Observable<string>'],
+        'A number that describes that allowed amount of lines in the title before truncating the value.',
+      type: ['number'],
+      defaultValue: '2',
     },
+  ];
+
+  directiveColumns: ApiDescriptionPropertyColumns = {
+    name: 'Name',
+    description: 'Description',
+  };
+
+  directives: ApiDescriptionProperty[] = [
     {
-      name: 'icon',
-      description: '(Optional) Icon to be shown below the title',
-      type: ['{ name: string }', '{ name: string, themeColor: string }'],
-    },
-    {
-      name: 'okBtn',
+      name: '*kirbyHeaderAvatar',
       description:
-        '(Optional) Defines the text that will appear on the OK button and if it should be destructive',
-      defaultValue: 'OK',
-      type: ['string', '{ text: string, isDestructive: boolean }'],
+        'The `*kirbyHeaderAvatar` directive should be applied an kirby-avatar element which will then be shown in the header.',
     },
     {
-      name: 'cancelBtn',
+      name: '*kirbyHeaderFlag',
       description:
-        '(Optional) The text that will appear on the cancel button. If not defined the cancel button will not be shown.',
-      type: ['string'],
+        'The `*kirbyHeaderFlag` directive should be applied an kirby-flag element which will then be shown in the header.',
+    },
+    {
+      name: '*kirbyHeaderTitle',
+      description:
+        'The `*kirbyHeaderTitle` directive should be applied an ng-container element or any host which will then be shown in the header. Your host or element will be rendered within a h1 or h4 element depnding on if the *kirbyHeaderValue directive is used.',
+    },
+    {
+      name: '*kirbyHeaderValue',
+      description:
+        'The `*kirbyHeaderValue` directive should be applied an ng-container element or any host which will then be shown in the header. Your host or element will be rendered within a h1 you below the *kirbyHeaderTitle.',
+    },
+    {
+      name: '*kirbyHeaderSubtitle1',
+      description:
+        'The `*kirbyHeaderSubtitle1` directive should be applied an ng-container element or any host which will then be shown in the header.',
+      type: ['{fixed: boolean}'],
+    },
+    {
+      name: '*kirbyHeaderSubtitle2',
+      description:
+        'The `*kirbyHeaderSubtitle2` directive should be applied an ng-container element or any host which will then be shown in the header.',
+    },
+    {
+      name: '*kirbyHeaderCustomSection',
+      description:
+        'The `*kirbyHeaderCustomSection` directive should be applied an ng-container element or any host which will then be shown in the header.',
+    },
+    {
+      name: '*kirbyHeaderActions',
+      description:
+        'The `*kirbyHeaderActions` directive should be applied an element or any host which will then be shown in the header.',
     },
   ];
 }
