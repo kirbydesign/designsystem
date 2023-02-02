@@ -1,6 +1,10 @@
 @use '@kirbydesign/core/src/scss/utils';
 
-kirby-card {
+:host {
+  display: block;
+}
+
+irby-card {
   margin-bottom: utils.size('s');
 }
 
@@ -13,10 +17,6 @@ kirby-card {
 
 fieldset {
   display: inline-block;
-
-  .disabled {
-    color: utils.get-text-color('semi-dark');
-  }
 }
 
 button {

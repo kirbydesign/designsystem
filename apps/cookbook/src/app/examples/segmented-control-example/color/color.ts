@@ -3,8 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { SegmentedControlMode, SegmentItem } from '@kirbydesign/designsystem';
 
 const config = {
-  template: `
-<kirby-card hasPadding="true" [themeColor]="color">  
+  template: `<kirby-card hasPadding="true" [themeColor]="color">  
   <kirby-segmented-control
   [items]="items"
   [value]="selectedSegment"
@@ -12,7 +11,6 @@ const config = {
   (segmentSelect)="onSegmentSelect($event)"
 ></kirby-segmented-control>
 </kirby-card>
-
 <div class="card-option-button-group">
     <button (click)="setThemeColor('white')" class="white"></button>
     <button (click)="setThemeColor('light')" class="light"></button>
@@ -55,8 +53,7 @@ const config = {
       Compact Chip
     </label>
   </p>
-</fieldset>
-`,
+</fieldset>`,
   codeSnippet: `onSegmentSelect(segment: SegmentItem) {
   this.selectedSegment = segment;
 }`,
@@ -69,7 +66,7 @@ const config = {
 export class SegmentedControlExampleColorComponent implements OnInit {
   get template(): string {
     return config.template
-      .split('<fieldset>')[0] // Remove config part of the template
+      .split('<div class="card-option-button-group">')[0] // Remove config part of the template
       .replace('[mode]="mode"', `mode="${this.mode}"`);
   }
   codeSnippet = config.codeSnippet;

@@ -44,7 +44,11 @@
   </cookbook-example-viewer>
 
   <h3>Color</h3>
-  <cookbook-segmented-control-example-color></cookbook-segmented-control-example-color>
+  <cookbook-example-viewer [html]="colorExample.template" [ts]="colorExample.codeSnippet">
+    <cookbook-segmented-control-example-color
+      #colorExample
+    ></cookbook-segmented-control-example-color>
+  </cookbook-example-viewer>
 
   <h2>Properties:</h2>
   <cookbook-api-description-properties
