@@ -5,10 +5,11 @@ import {
   ChartJSService,
   IconRegistryService,
   LoadingOverlayService,
-  ModalController,
   TabsService,
   ToastController,
 } from '@kirbydesign/designsystem';
+import { ModalController } from '@kirbydesign/designsystem/modal';
+
 import { EMPTY } from 'rxjs';
 
 export function chartConfigServiceFactory() {

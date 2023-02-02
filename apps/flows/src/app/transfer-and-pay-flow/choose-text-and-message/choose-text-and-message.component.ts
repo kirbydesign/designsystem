@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Modal } from '@kirbydesign/designsystem';
 import { TextAndDateService } from '../text-and-date.service';
 

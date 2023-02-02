@@ -2,7 +2,8 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { KirbyModalModule, KirbyModule } from '@kirbydesign/designsystem';
+import { KirbyModule } from '@kirbydesign/designsystem';
+import { KirbyModalModule } from '@kirbydesign/designsystem/modal/experimental';
 
 import { ExamplesSharedModule } from '../examples.shared.module';
 
