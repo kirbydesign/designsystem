@@ -287,7 +287,6 @@ export class PageComponent
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('changes', changes);
     if (changes.titleMaxLines) {
       this.fitHeadingConfig = {
         ...this.fitHeadingConfig,
