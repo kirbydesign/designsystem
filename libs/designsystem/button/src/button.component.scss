@@ -89,11 +89,8 @@ $button-width: (
 }
 
 @mixin button-attentionlevel3 {
-  --kirby-button-background-color: var(
-    --kirby-inputs-background-color,
-    #{utils.get-color('white')}
-  );
-  --kirby-button-color: var(--kirby-inputs-color, #{utils.get-color('black')});
+  --kirby-button-background-color: var(--kirby-inputs-background-color);
+  --kirby-button-color: var(--kirby-inputs-color);
 
   @include interaction-state.apply-hover('xs');
   @include interaction-state.apply-active('s');
