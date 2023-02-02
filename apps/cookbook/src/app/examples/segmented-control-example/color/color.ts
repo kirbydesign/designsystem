@@ -8,7 +8,6 @@ const config = {
   [items]="items"
   [value]="selectedSegment"
   [mode]="mode"
-  (segmentSelect)="onSegmentSelect($event)"
 ></kirby-segmented-control>
 </kirby-card>
 <div class="card-option-button-group">
