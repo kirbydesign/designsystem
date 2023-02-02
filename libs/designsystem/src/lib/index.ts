@@ -32,6 +32,7 @@ export * from '@kirbydesign/designsystem/router-outlet';
 export * from '@kirbydesign/designsystem/item-group';
 export * from '@kirbydesign/designsystem/modal';
 export * from '@kirbydesign/designsystem/page';
+export * from '@kirbydesign/designsystem/header';
 export * from '@kirbydesign/designsystem/kirby-app';
 
 export * from './scss/scss-helper';

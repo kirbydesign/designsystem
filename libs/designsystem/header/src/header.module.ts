@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FitHeadingModule } from '../../directives/fit-heading/fit-heading.module';
+import { FitHeadingDirective } from '../../page/src/fit-heading';
 import {
   HeaderComponent,
   KirbyHeaderActionsDirective,
@@ -27,7 +27,7 @@ const declarations = [
 
 @NgModule({
   declarations: declarations,
-  imports: [CommonModule, FitHeadingModule],
+  imports: [CommonModule, FitHeadingDirective],
   exports: declarations,
 })
 export class HeaderModule {}

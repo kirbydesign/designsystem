@@ -61,6 +61,7 @@ import {
 } from '@kirbydesign/designsystem/modal';
 import {} from '@kirbydesign/designsystem/modal';
 import { PageModule } from '@kirbydesign/designsystem/page';
+import { HeaderModule } from '@kirbydesign/designsystem/header';
 import { EmptyStateModule } from '@kirbydesign/designsystem/empty-state';
 import { DropdownModule } from '@kirbydesign/designsystem/dropdown';
 import { KirbyAppModule } from '@kirbydesign/designsystem/kirby-app';
@@ -79,7 +80,6 @@ import { customElementsInitializer } from './custom-elements-initializer';
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
 import { ModalRouterLinkDirective } from './directives/modal-router-link/modal-router-link.directive';
 import { KirbyBadgeModule } from './components/kirby-badge.module';
-import { HeaderModule } from './components/header/header.module';
 
 const exportedDeclarations = [GridComponent, ModalRouterLinkDirective];
 
@@ -123,6 +123,7 @@ const exportedModules = [
   KirbyAppModule,
   RouterOutletModule,
   PageModule,
+  HeaderModule,
   TabsModule,
   IconModule,
   ItemModule,

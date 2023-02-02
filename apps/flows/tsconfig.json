@@ -63,6 +63,7 @@
       "@kirbydesign/designsystem/empty-state": ["libs/designsystem/empty-state/index.ts"],
       "@kirbydesign/designsystem/dropdown": ["libs/designsystem/dropdown/index.ts"],
       "@kirbydesign/designsystem/page": ["libs/designsystem/page/index.ts"],
+      "@kirbydesign/designsystem/header": ["libs/designsystem/header/index.ts"],
       "@kirbydesign/designsystem/modal": ["libs/designsystem/modal/index.ts"],
       "@kirbydesign/designsystem/modal/experimental": [
         "libs/designsystem/modal/experimental/index.ts"
