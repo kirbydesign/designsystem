@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 import { ActionSheetController } from '@ionic/angular';
 import { ModalExperimentalConfig, ModalExperimentalController } from '@kirbydesign/designsystem';
 import {

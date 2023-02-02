@@ -1,7 +1,6 @@
 import { Component, Optional, SkipSelf } from '@angular/core';
 
-import { ModalController } from '@kirbydesign/designsystem';
-import { Modal } from '@kirbydesign/designsystem/modal';
+import { Modal, ModalController } from '@kirbydesign/designsystem';
 
 @Component({
   selector: 'cookbook-modal-route-page-2-example',

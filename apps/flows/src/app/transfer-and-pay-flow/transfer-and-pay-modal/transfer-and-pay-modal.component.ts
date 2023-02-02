@@ -1,6 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ModalController } from '@kirbydesign/designsystem';
-import { ModalConfig } from '@kirbydesign/designsystem/modal';
+import { ModalConfig, ModalController } from '@kirbydesign/designsystem';
 import { ChooseReceiverComponent } from '../choose-receiver/choose-receiver.component';
 import { ChooseOwnAccountComponent } from '../choose-own-account/choose-own-account.component';
 import { OtherService } from '../other.service';
