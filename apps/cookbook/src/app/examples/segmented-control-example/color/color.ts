@@ -54,9 +54,6 @@ const config = {
     </label>
   </p>
 </fieldset>`,
-  codeSnippet: `onSegmentSelect(segment: SegmentItem) {
-  this.selectedSegment = segment;
-}`,
 };
 @Component({
   selector: 'cookbook-segmented-control-example-color',
@@ -69,7 +66,6 @@ export class SegmentedControlExampleColorComponent implements OnInit {
       .split('<div class="card-option-button-group">')[0] // Remove config part of the template
       .replace('[mode]="mode"', `mode="${this.mode}"`);
   }
-  codeSnippet = config.codeSnippet;
 
   mode: SegmentedControlMode = SegmentedControlMode.default;
 
@@ -106,11 +102,6 @@ export class SegmentedControlExampleColorComponent implements OnInit {
 
   ngOnInit() {
     this.selectedSegment = this.items[0];
-  }
-
-  onSegmentSelect(segment: SegmentItem) {
-    console.log('selectedSegment', segment);
-    this.selectedSegment = segment;
   }
 
   setMode(mode: SegmentedControlMode) {
