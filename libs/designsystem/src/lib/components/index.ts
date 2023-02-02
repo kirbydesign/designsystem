@@ -9,8 +9,6 @@ export { FabSheetComponent } from './fab-sheet/fab-sheet.component';
 export { GridComponent } from './grid/grid.component';
 export { GridCardConfiguration } from './grid/grid-card-configuration';
 
-export { ItemGroupComponent } from './item-group/item-group.component';
-
 export * from './reorder-list';
 
 /* prettier-ignore */
