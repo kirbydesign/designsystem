@@ -29,24 +29,33 @@ import {
 import { DividerComponent } from '@kirbydesign/designsystem/divider';
 import { CheckboxComponent } from '@kirbydesign/designsystem/checkbox';
 import { AccordionModule } from '@kirbydesign/designsystem/accordion';
+import { ItemSlidingComponent } from '@kirbydesign/designsystem/item-sliding';
+import { ListModule } from '@kirbydesign/designsystem/list';
+import { RadioModule } from '@kirbydesign/designsystem/radio';
+import {
+  AffixDirective,
+  DateInputDirective,
+  FormFieldModule,
+  InputComponent,
+  TextareaComponent,
+} from '@kirbydesign/designsystem/form-field';
+import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
+import {
+  ProgressCircleComponent,
+  ProgressCircleRingComponent,
+} from '@kirbydesign/designsystem/progress-circle';
+import { RouterOutletModule } from '@kirbydesign/designsystem/router-outlet';
 import { AppModule } from './components/app/app.module';
-import { AvatarComponent } from './components/avatar/avatar.component';
 import { ButtonComponent } from './components/button/button.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { ChartsModule } from './components/charts';
 import { DataTableModule } from './components/data-table/data-table.module';
 import { FabSheetComponent } from './components/fab-sheet/fab-sheet.component';
-import { DateInputDirective } from './components/form-field/directives/date/date-input.directive';
-import { DecimalMaskDirective } from './components/form-field/directives/decimal-mask/decimal-mask.directive';
-import { AffixDirective } from './components/form-field/directives/affix/affix.directive';
 
-import { InputComponent } from './components/form-field/input/input.component';
-import { TextareaComponent } from './components/form-field/textarea/textarea.component';
 import { BreakpointHelperService } from './components/grid/breakpoint-helper.service';
 import { GridComponent } from './components/grid/grid.component';
 import { ItemGroupComponent } from './components/item-group/item-group.component';
-import { ItemSlidingComponent } from './components/item-sliding/item-sliding.component';
-import { ListModule } from './components/list/list.module';
+
 import { ActionSheetComponent } from './components/modal/action-sheet/action-sheet.component';
 import { AlertComponent } from './components/modal/alert/alert.component';
 import { ModalFooterComponent } from './components/modal/footer/modal-footer.component';
@@ -57,37 +66,26 @@ import { AlertHelper } from './components/modal/services/alert.helper';
 import { ModalController } from './components/modal/services/modal.controller';
 import { ModalHelper } from './components/modal/services/modal.helper';
 import { PageModule } from './components/page/page.module';
-import { ProgressCircleRingComponent } from './components/progress-circle/progress-circle-ring.component';
-import { ProgressCircleComponent } from './components/progress-circle/progress-circle.component';
 import { ReorderListComponent } from './components/reorder-list/reorder-list.component';
-import { RouterOutletModule } from './components/router-outlet/router-outlet.module';
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
 import { ToastController } from './components/toast/services/toast.controller';
 import { ToastHelper } from './components/toast/services/toast.helper';
 import { customElementsInitializer } from './custom-elements-initializer';
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
 import { ModalRouterLinkDirective } from './directives/modal-router-link/modal-router-link.directive';
-import { RadioModule } from './components';
 import { EmptyStateModule } from './components/empty-state/empty-state.module';
 import { DropdownModule } from './components/dropdown';
 import { KirbyBadgeModule } from './components/kirby-badge.module';
-import { FormFieldModule } from './components/form-field/form-field.module';
-import { HeaderModule } from './components/header/header.module';
 
-const exportedDeclarations = [
-  GridComponent,
-  ModalRouterLinkDirective,
-  DateInputDirective,
-  DecimalMaskDirective,
-  AffixDirective,
-  InputComponent,
-  TextareaComponent,
-  ItemGroupComponent,
-];
+const exportedDeclarations = [GridComponent, ModalRouterLinkDirective, ItemGroupComponent];
 
 const declarations = [...exportedDeclarations, KeyHandlerDirective, ModalCompactWrapperComponent];
 
 const standaloneComponents = [
+  TextareaComponent,
+  InputComponent,
+  AffixDirective,
+  DateInputDirective,
   DividerComponent,
   ThemeColorDirective,
   SegmentedControlComponent,
@@ -135,7 +133,6 @@ const exportedModules = [
   FormFieldModule,
   SlideModule,
   AccordionModule,
-  HeaderModule,
   ...standaloneComponents,
 ];
 

@@ -1,19 +1,34 @@
 <p>
-  The <code>kirby-section-header</code> can be used as a header for a standalone grouping of
-  elements.
+  The
+  <code>kirby-section-header</code>
+  can be used as a header for a standalone grouping of elements.
 </p>
 
 <p>
-  The Section Header consists of three possible columns: <em>the default</em>, which spans the
-  entire Section Header, and optionally the <code>'start'</code> and <code>'end'</code> columns (aka
-  <code>'slots'</code>).
+  The Section Header consists of three possible columns:
+  <em>the default</em>
+  , which spans the entire Section Header, and optionally the
+  <code>'start'</code>
+  and
+  <code>'end'</code>
+  columns (aka
+  <code>'slots'</code>
+  ).
 </p>
 
 <p>
-  The <em>default column</em> is the content that isn't slotted into either <code>'start'</code> or
-  <code>'end'</code>.<br />
+  The
+  <em>default column</em>
+  is the content that isn't slotted into either
+  <code>'start'</code>
+  or
+  <code>'end'</code>
+  .
+  <br />
   If there is more than one line of content it can be contained within a
-  <code>kirby-label</code> that by default stacks content vertically (multi lines).<br />
+  <code>kirby-label</code>
+  that by default stacks content vertically (multi lines).
+  <br />
 </p>
 
 <div class="section-header-illustration">
@@ -43,19 +58,32 @@
   </svg>
 </div>
 <p>
-  To place content in the start column specify the <code>slot="start"</code> attribute on your
-  content. If no content is placed into the 'start' slot, the first column will not be shown.
+  To place content in the start column specify the
+  <code>slot="start"</code>
+  attribute on your content. If no content is placed into the 'start' slot, the first column will
+  not be shown.
 </p>
 <p>
-  The <em>end column</em> is usually used for values such as number, currency, date etc. To place
-  content in the end column specify the <code>slot="end"</code> attribute on your content. If
-  multiple lines are needed the values can be wrapped in a <code>kirby-label</code>.
+  The
+  <em>end column</em>
+  is usually used for values such as number, currency, date etc. To place content in the end column
+  specify the
+  <code>slot="end"</code>
+  attribute on your content. If multiple lines are needed the values can be wrapped in a
+  <code>kirby-label</code>
+  .
 </p>
 
 <h2>Heading, label and detail</h2>
 <p>
-  The <em>heading</em>, <em>label</em> and <em>detail</em> attributes can be used on the elements
-  slotted inside the Section Header, to apply the default styling to any heading or paragraph.
+  The
+  <em>heading</em>
+  ,
+  <em>label</em>
+  and
+  <em>detail</em>
+  attributes can be used on the elements slotted inside the Section Header, to apply the default
+  styling to any heading or paragraph.
 </p>
 <p>
   This means that you are free to use the correct heading element for your context, e.g. h1 if it is
@@ -66,29 +94,37 @@
 <cookbook-section-header-heading-with-label
   #sectionHeaderHeadingWithLabel
 ></cookbook-section-header-heading-with-label>
-<cookbook-example-viewer [html]="sectionHeaderHeadingWithLabel.template"> </cookbook-example-viewer>
+<cookbook-example-viewer [html]="sectionHeaderHeadingWithLabel.template"></cookbook-example-viewer>
 
 <cookbook-section-header-label-and-detail
   #sectionHeaderLabelAndDetail
 ></cookbook-section-header-label-and-detail>
-<cookbook-example-viewer [html]="sectionHeaderLabelAndDetail.template"> </cookbook-example-viewer>
+<cookbook-example-viewer [html]="sectionHeaderLabelAndDetail.template"></cookbook-example-viewer>
 
 <h3>Custom section header</h3>
 <p>
-  For use cases where styling via <em>heading</em>, <em>label</em> and <em>detail</em> attributes
-  are not sufficient, it is possible to simply supply any markup or component within the section
-  header tags, to render it in the default slot.
+  For use cases where styling via
+  <em>heading</em>
+  ,
+  <em>label</em>
+  and
+  <em>detail</em>
+  attributes are not sufficient, it is possible to simply supply any markup or component within the
+  section header tags, to render it in the default slot.
 </p>
 
 <p>
-  The section header is ideal as a first element within a <code>kirby-item-group</code>, as a header
-  for that specific group of items, but can also be used for other groups of content such as a
-  <code>kirby-card</code>.
+  The section header is ideal as a first element within a
+  <code>kirby-item-group</code>
+  , as a header for that specific group of items, but can also be used for other groups of content
+  such as a
+  <code>kirby-card</code>
+  .
 </p>
 
 <h2>Section Header with Card</h2>
 <cookbook-section-header-with-card #sectionHeaderWithCard></cookbook-section-header-with-card>
-<cookbook-example-viewer [html]="sectionHeaderWithCard.template"> </cookbook-example-viewer>
+<cookbook-example-viewer [html]="sectionHeaderWithCard.template"></cookbook-example-viewer>
 
 <h3>CSS Custom Properties</h3>
 <cookbook-api-description-properties

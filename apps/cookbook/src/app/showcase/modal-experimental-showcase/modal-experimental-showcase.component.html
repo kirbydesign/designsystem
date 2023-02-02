@@ -1,0 +1,237 @@
+<kirby-flag themeColor="warning">Experimental component - subject to change</kirby-flag>
+
+<p>
+  A Modal is a dialog that appears on top of the app's content, and must be dismissed by the app
+  before interaction can resume. It is useful as a select component when there are a lot of options
+  to choose from, or when filtering items in a list, as well as many other use cases.
+</p>
+
+<p>
+  If the modal is used on a page with scroll, then it requires that the container responsible for
+  the overflow is another element than the
+  <code>body</code>
+  , fx.
+  <code>kirby-page</code>
+  or a custom container. Otherwise it will jump back to the top of the page, where the modal is
+  rendered, as is evident in the showcase for the controller-based modal on this page, when pressing
+  its
+  <code>Open modal</code>
+  button.
+</p>
+
+<p>Modals can be used as components or generated through the modal controller.</p>
+
+<h3><a href="#" (click)="scrollTo(components)">Components</a></h3>
+
+<ul>
+  <li>
+    <a href="#" (click)="scrollTo(fullscreenModal)">Fullscreen modal</a>
+
+    <ul>
+      <li>
+        <a href="#" (click)="scrollTo(fullscreenModalSlots)">Slots</a>
+      </li>
+      <li>
+        <a href="#" (click)="scrollTo(fullscreenModalProperties)">Properties</a>
+      </li>
+      <li>
+        <a href="#" (click)="scrollTo(fullscreenModalEvents)">Events</a>
+      </li>
+      <li>
+        <a href="#" (click)="scrollTo(fullscreenModalMethods)">Methods</a>
+      </li>
+    </ul>
+  </li>
+
+  <li>
+    <a href="#" (click)="scrollTo(modalFooter)">Footer component</a>
+
+    <ul>
+      <li><a href="#" (click)="scrollTo(modalFooterProperties)">Properties</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h3><a href="#" (click)="scrollTo(modalController)">ModalController</a></h3>
+
+<ul>
+  <li><a href="#" (click)="scrollTo(modalControllerMethods)">Methods</a></li>
+  <li><a href="#" (click)="scrollTo(modalControllerConfig)">Config</a></li>
+  <li>
+    <a href="#" (click)="scrollTo(modalControllerSubscriptions)">
+      Subscribe to
+      <code>onWillDismiss</code>
+      or
+      <code>onDidDismiss</code>
+    </a>
+  </li>
+  <li>
+    <a href="#" (click)="scrollTo(modalControllerWrapperProperties)">Modal Wrapper Properties</a>
+  </li>
+</ul>
+
+<hr />
+
+<h1 #components>Components</h1>
+
+<div class="page-example">
+  <div>
+    <h2 #fullscreenModal>Fullscreen modal</h2>
+    <cookbook-code-viewer [html]="fullscreenModalExampleTemplateHTML"></cookbook-code-viewer>
+    <cookbook-code-viewer [ts]="fullscreenModalExampleTemplateTS"></cookbook-code-viewer>
+  </div>
+
+  <cookbook-iphone
+    src="/examples/modal-experimental-fullscreen"
+    showExternalLink="true"
+  ></cookbook-iphone>
+</div>
+
+<h2 #fullscreenModalSlots>Slots</h2>
+<p>
+  The modal component accepts 3 slots:
+  <code>header-start</code>
+  ,
+  <code>default</code>
+  &
+  <code>footer</code>
+  .
+</p>
+
+<h3>header-start</h3>
+
+<p>
+  The
+  <code>header-start</code>
+  slot places content in the upper left corner of the modal header. In the example above a
+  <code>kirby-page-progress</code>
+  component is slotted in like this:
+</p>
+
+<cookbook-code-viewer [html]="headerStartSlotExampleTemplate"></cookbook-code-viewer>
+
+<h3>default</h3>
+
+<p>
+  The
+  <code>default</code>
+  slot places the provided markup or component in the modals' content.
+</p>
+
+<h3>footer</h3>
+
+<p>
+  The
+  <code>footer</code>
+  slot places content in the bottom of the modal underneath the scrollable container, so it will
+  always stick to the bottom. We recommend using the
+  <code>kirby-modal-footer-experimental</code>
+  component, which is documented right
+  <a href="#" (click)="scrollTo(modalFooter)">here</a>
+  . In the example above the
+  <code>kirby-modal-footer-experimental</code>
+  component is slotted in like this:
+</p>
+
+<cookbook-code-viewer [html]="footerSlotExampleTemplate"></cookbook-code-viewer>
+
+<div class="description">
+  <h2 #fullscreenModalProperties>Fullscreen modal properties:</h2>
+  <cookbook-api-description-properties
+    [properties]="componentProperties"
+  ></cookbook-api-description-properties>
+
+  <h2 #fullscreenModalEvents>Events:</h2>
+  <cookbook-api-description-events [events]="events"></cookbook-api-description-events>
+
+  <h2 #fullscreenModalMethods>Methods:</h2>
+  <cookbook-api-description-methods [methods]="methods"></cookbook-api-description-methods>
+</div>
+
+<h2 #modalFooter>Footer component</h2>
+
+<p>
+  The
+  <code>kirby-modal-footer-experimental</code>
+  component only accepts a default slot as shown below:
+</p>
+
+<cookbook-code-viewer [html]="footerSlotExampleTemplate"></cookbook-code-viewer>
+
+<h2 #modalFooterProperties>Modal footer properties:</h2>
+
+<cookbook-api-description-properties
+  [properties]="footerProperties"
+></cookbook-api-description-properties>
+
+<h1 #modalController>Controller</h1>
+
+<p>
+  Modals can also be opened programmatically by using the
+  <code>ModalExperimentalController</code>
+  . To show the modal, create a
+  <code>ModalExperimentalConfig</code>
+  and pass it to the
+  <code>modalController.showModal</code>
+  method:
+</p>
+
+<p>
+  We recommend wrapping your component in the
+  <code>kirby-modal-wrapper-experimental</code>
+  component to get the default Kirby styling. It accepts the same two slots as described above -
+  <code>header-start</code>
+  &
+  <code>footer</code>
+  .
+</p>
+
+<cookbook-code-viewer [ts]="showModalCodeSnippet"></cookbook-code-viewer>
+
+<button kirby-button (click)="openModal()">Open modal</button>
+<button kirby-button (click)="openModal(true)">Open modal with canDismiss</button>
+
+<br />
+
+<h2 #modalControllerSubscriptions class="subscriptions">
+  Subscribe to
+  <code>onWillDismiss</code>
+  or
+  <code>onDidDismiss</code>
+</h2>
+
+<p>
+  The
+  <code>showModal</code>
+  method returns observables for the
+  <code>onWillDismiss</code>
+  and
+  <code>onDidDismiss</code>
+  events, so it's possible to subscribe to either one or both at the same time. The subscriptions
+  both return an object that contains
+  <code>data</code>
+  and
+  <code>role</code>
+  as described in the
+  <code>closeModal</code>
+  method described
+  <a href="#" (click)="scrollTo(modalControllerMethods)">here</a>
+  .
+</p>
+
+<cookbook-example-viewer [ts]="observableCodeSnippet"></cookbook-example-viewer>
+
+<h2 #modalControllerMethods>Controller methods:</h2>
+
+<cookbook-api-description-methods [methods]="controllerMethods"></cookbook-api-description-methods>
+
+<h2 #modalControllerConfig>Modal config:</h2>
+<cookbook-api-description-properties
+  [properties]="controllerProperties"
+></cookbook-api-description-properties>
+
+<h2 #modalControllerWrapperProperties>Modal wrapper properties:</h2>
+
+<cookbook-api-description-properties
+  [properties]="wrapperComponentProperties"
+></cookbook-api-description-properties>

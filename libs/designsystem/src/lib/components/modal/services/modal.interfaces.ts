@@ -1,8 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, Optional } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { KirbyAnimation } from '../../../animation/kirby-animation';
-
+import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 export interface OverlayEventDetail<T = any> {
   data?: T;
   role?: string;

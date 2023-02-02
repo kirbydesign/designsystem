@@ -25,7 +25,13 @@
       "@kirbydesign/designsystem/loading-overlay": ["loading-overlay/index.ts"],
       "@kirbydesign/designsystem/divider": ["divider/index.ts"],
       "@kirbydesign/designsystem/checkbox": ["checkbox/index.ts"],
-      "@kirbydesign/designsystem/accordion": ["accordion/index.ts"]
+      "@kirbydesign/designsystem/accordion": ["accordion/index.ts"],
+      "@kirbydesign/designsystem/radio": ["radio/index.ts"],
+      "@kirbydesign/designsystem/item-sliding": ["item-sliding/index.ts"],
+      "@kirbydesign/designsystem/form-field": ["form-field/index.ts"],
+      "@kirbydesign/designsystem/avatar": ["avatar/index.ts"],
+      "@kirbydesign/designsystem/progress-circle": ["progress-circle/index.ts"],
+      "@kirbydesign/designsystem/router-outlet": ["router-outlet/index.ts"]
     },
     "esModuleInterop": true,
     "target": "es2020"

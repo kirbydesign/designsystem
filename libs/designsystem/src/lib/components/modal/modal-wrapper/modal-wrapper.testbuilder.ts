@@ -133,19 +133,25 @@ export class DynamicFooterEmbeddedComponent {
 export class InputEmbeddedComponent {}
 
 @Component({
-  template: ` <kirby-page-progress> </kirby-page-progress> `,
+  template: `
+    <kirby-page-progress></kirby-page-progress>
+  `,
 })
 export class StaticPageProgressEmbeddedComponent {}
 
 @Component({
-  template: ` <kirby-page-progress *ngIf="showPageProgress"> </kirby-page-progress> `,
+  template: `
+    <kirby-page-progress *ngIf="showPageProgress"></kirby-page-progress>
+  `,
 })
 export class DynamicPageProgressEmbeddedComponent {
   showPageProgress = false;
 }
 
 @Component({
-  template: ` <kirby-page-title>{{ _title }}</kirby-page-title> `,
+  template: `
+    <kirby-page-title>{{ _title }}</kirby-page-title>
+  `,
 })
 export class TitleEmbeddedComponent {
   _title: string;

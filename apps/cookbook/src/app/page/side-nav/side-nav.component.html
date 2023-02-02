@@ -7,7 +7,8 @@
         routerLinkActive="is-selected"
         [routerLinkActiveOptions]="{ exact: false }"
         (click)="onToggleMenu()"
-        >{{ item.text }}
+      >
+        {{ item.text }}
       </a>
       <a *ngIf="item.externalUrl" [href]="item.externalUrl" target="blank">{{ item.text }}</a>
     </ng-container>
@@ -47,7 +48,8 @@
         [class]="{ 'is-selected': link.active }"
         (click)="onComponentLinkClick(link.path)"
         #componentLink
-        >{{ link.name }}
+      >
+        {{ link.name }}
       </a>
       <hr />
     </ng-container>

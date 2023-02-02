@@ -5,14 +5,15 @@ import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/t
 import * as ionic from '@ionic/angular';
 import { CardComponent, CardModule } from '@kirbydesign/designsystem/card';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
+import {
+  InfiniteScrollDirective,
+  ListComponent,
+  ListItemColorDirective,
+} from '@kirbydesign/designsystem/list';
 import { SpinnerModule } from '@kirbydesign/designsystem/spinner';
 import { MockComponent } from 'ng-mocks';
 
 import { ButtonComponent } from '../../button/button.component';
-
-import { InfiniteScrollDirective } from '../../list/directives/infinite-scroll.directive';
-import { ListItemColorDirective } from '../../list/directives/list-item-color.directive';
-import { ListComponent } from '../../list/list.component';
 
 import { ActionSheetComponent } from './action-sheet.component';
 

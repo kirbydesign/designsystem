@@ -1,7 +1,9 @@
 <div class="example">
   <p>
     Page is a layout container for a Kirby page. There should only be one
-    <code>&lt;kirby-page&gt;</code> layout container per page.<br />
+    <code>&lt;kirby-page&gt;</code>
+    layout container per page.
+    <br />
     The page component gives you the following:
   </p>
   <ul>
@@ -20,47 +22,65 @@
         </li>
         <li>
           Also supports
-          <a href="#" (click)="scrollTo(fixedTitleAndActions)">fixed page title and actions</a>.
+          <a href="#" (click)="scrollTo(fixedTitleAndActions)">fixed page title and actions</a>
+          .
         </li>
       </ul>
     </li>
     <li>
       (Optional)
-      <a href="#" (click)="scrollTo(alignment)"
-        >Alignment of page title with subtitle and alternative toolbar title</a
-      >
+      <a href="#" (click)="scrollTo(alignment)">
+        Alignment of page title with subtitle and alternative toolbar title
+      </a>
     </li>
-    <li>(Optional) <a href="#" (click)="scrollTo(autoscale)">Scaling of page title</a></li>
+    <li>
+      (Optional)
+      <a href="#" (click)="scrollTo(autoscale)">Scaling of page title</a>
+    </li>
     <li>
       Support for
-      <a href="#" (click)="scrollTo(advanced)"
-        >advanced page title with subtitle and actions template</a
-      >
+      <a href="#" (click)="scrollTo(advanced)">
+        advanced page title with subtitle and actions template
+      </a>
     </li>
     <li>
-      Support for <a href="#" (click)="scrollTo(advanced)">fixed page content</a> (e.g. a Floating
-      Action Button)
+      Support for
+      <a href="#" (click)="scrollTo(advanced)">fixed page content</a>
+      (e.g. a Floating Action Button)
     </li>
     <li>
-      Support for <a href="#" (click)="scrollTo(fixedFooter)">fixed page footer</a> and hiding tabs.
+      Support for
+      <a href="#" (click)="scrollTo(fixedFooter)">fixed page footer</a>
+      and hiding tabs.
     </li>
-    <li>Support for <a href="#" (click)="scrollTo(pullToRefresh)">pull-to-refresh</a>.</li>
-    <li>Support for setting <a href="#" (click)="scrollTo(contentWidth)">content width</a>.</li>
+    <li>
+      Support for
+      <a href="#" (click)="scrollTo(pullToRefresh)">pull-to-refresh</a>
+      .
+    </li>
+    <li>
+      Support for setting
+      <a href="#" (click)="scrollTo(contentWidth)">content width</a>
+      .
+    </li>
   </ul>
 
   <h2>Page with Kirby Router Outlet</h2>
   <p>
-    Using page with the <code>kirby-router-outlet</code> will cause the views to be stacked instead
-    of replaced.
+    Using page with the
+    <code>kirby-router-outlet</code>
+    will cause the views to be stacked instead of replaced.
   </p>
   <h3>Life-cycle hooks</h3>
 
   <p>
-    The <code>kirby-router-outlet</code> stacks the pages/components when it navigates. This means
-    that when one component is stacked on top of another, the component on the bottom won't be
-    destroyed. This means that the <code>ngOnDestroy</code> hook will not run as expected, and any
-    logic for eg. unsubscribing from subscriptions is not taking place. This can result in severe
-    performance issues.
+    The
+    <code>kirby-router-outlet</code>
+    stacks the pages/components when it navigates. This means that when one component is stacked on
+    top of another, the component on the bottom won't be destroyed. This means that the
+    <code>ngOnDestroy</code>
+    hook will not run as expected, and any logic for eg. unsubscribing from subscriptions is not
+    taking place. This can result in severe performance issues.
   </p>
 
   <p>
@@ -70,36 +90,46 @@
 
   <cookbook-code-viewer [html]="pageHtml"></cookbook-code-viewer>
   <p>
-    <code>kirby-page</code> has an `enter` and `leave` event which triggers whenever the page is
-    entered and left. If your component has subscriptions, it is important to unsubscribe when the
-    component is in the background. Otherwise the subscriptions will keep firing, causing
-    performance issues.
+    <code>kirby-page</code>
+    has an `enter` and `leave` event which triggers whenever the page is entered and left. If your
+    component has subscriptions, it is important to unsubscribe when the component is in the
+    background. Otherwise the subscriptions will keep firing, causing performance issues.
   </p>
   <cookbook-code-viewer [ts]="pageComponent"></cookbook-code-viewer>
 
   <h3>Navigation</h3>
   <p>
-    When using a page with <code>kirby-router-outlet</code> it is possible to navigate to a new page
-    using the Angular router. But in order to navigate the history of the stack; the
-    <code>NavController</code> class is necessary for the animations to work properly.
+    When using a page with
+    <code>kirby-router-outlet</code>
+    it is possible to navigate to a new page using the Angular router. But in order to navigate the
+    history of the stack; the
+    <code>NavController</code>
+    class is necessary for the animations to work properly.
   </p>
 
   <p>
     For example it is possible to navigate one step back when using stacked pages using the
-    <code>back</code> method of the <code>NavController</code> class.
+    <code>back</code>
+    method of the
+    <code>NavController</code>
+    class.
   </p>
 
   <p>
-    The <code>NavController</code> is provided by the
-    <a target="_blank" href="https://www.npmjs.com/package/@ionic/angular" target="_blank"
-      ><code>@ionic/angular</code></a
-    >
+    The
+    <code>NavController</code>
+    is provided by the
+    <a target="_blank" href="https://www.npmjs.com/package/@ionic/angular" target="_blank">
+      <code>@ionic/angular</code>
+    </a>
     package and is being re-exported by Kirby.
   </p>
 
   <p>
-    <code>NavController</code> documentation and usage details can be found
-    <a href="https://ionicframework.com/docs/v3/api/navigation/NavController/">here</a>.
+    <code>NavController</code>
+    documentation and usage details can be found
+    <a href="https://ionicframework.com/docs/v3/api/navigation/NavController/">here</a>
+    .
   </p>
 
   <div class="page-example">
@@ -107,8 +137,12 @@
       <h2 #simple>Simple Page</h2>
       <p>
         For normal pages it's enough to just wrap the page content in a
-        <code>kirby-page-content</code> tag, which is wrapped in a <code>kirby-page</code> tag and
-        supplied with an optional title - <em>which will be sticky by default</em>:
+        <code>kirby-page-content</code>
+        tag, which is wrapped in a
+        <code>kirby-page</code>
+        tag and supplied with an optional title -
+        <em>which will be sticky by default</em>
+        :
       </p>
       <cookbook-code-viewer [html]="simpleExampleHtml"></cookbook-code-viewer>
     </div>
@@ -121,16 +155,24 @@
   <div>
     <h2 #alignment>Title Alignment & Alternative Toolbar Title</h2>
     <p>
-      Titles and subtitles are by default left aligned but can also be centered
-      (<code>titleAlignment="center"</code>) or right aligned (<code>titleAlignment="right"</code>).
+      Titles and subtitles are by default left aligned but can also be centered (
+      <code>titleAlignment="center"</code>
+      ) or right aligned (
+      <code>titleAlignment="right"</code>
+      ).
     </p>
     <p>
-      It is also possible to supply an alternative toolbar title (<code
-        >toolbarTitle="A Different Title"</code
-      >) - <em>that is shown instead of the page title</em> - when the page title is scrolled above
-      the toolbar.
+      It is also possible to supply an alternative toolbar title (
+      <code>toolbarTitle="A Different Title"</code>
+      ) -
+      <em>that is shown instead of the page title</em>
+      - when the page title is scrolled above the toolbar.
     </p>
-    <p>This can also be achieved through the <code>*kirbyPageToolbarTitle</code> directive.</p>
+    <p>
+      This can also be achieved through the
+      <code>*kirbyPageToolbarTitle</code>
+      directive.
+    </p>
     <cookbook-code-viewer [html]="alignmentAndToolbarTitleExampleHtml"></cookbook-code-viewer>
   </div>
 
@@ -145,16 +187,26 @@
 <div class="page-example">
   <div>
     <h2 #autoscale>Scaling of Page Title</h2>
-    <p>Titles are default rendered as <code>h1</code>.</p>
+    <p>
+      Titles are default rendered as
+      <code>h1</code>
+      .
+    </p>
     <p>
       It's possible to enable auto-scaling of the page title. This will scale both font-size &
       line-height between h1 -> h3 depending on amount of text and maximum number of lines
       configured. This can be configured by setting the
-      <code>titleMaxLines="NUMBER OF MAXIMUM LINES"</code> attribute of <code>kirby-page</code>.
+      <code>titleMaxLines="NUMBER OF MAXIMUM LINES"</code>
+      attribute of
+      <code>kirby-page</code>
+      .
     </p>
     <p>
-      This can also be achieved through the <code>*kirbyFitHeading</code> directive for
-      <a href="#" (click)="scrollTo(customTitle)">custom titles</a>.
+      This can also be achieved through the
+      <code>*kirbyFitHeading</code>
+      directive for
+      <a href="#" (click)="scrollTo(customTitle)">custom titles</a>
+      .
     </p>
     <cookbook-code-viewer [html]="fitHeadingExampleHtml"></cookbook-code-viewer>
   </div>
@@ -169,24 +221,34 @@
     <h2 #customTitle>Custom Title</h2>
     <p>
       If you need to supply a custom page title or subtitle element you can do that with the
-      <code>*kirbyPageTitle</code>, <code>*kirbyPageSubtitle</code> and
+      <code>*kirbyPageTitle</code>
+      ,
+      <code>*kirbyPageSubtitle</code>
+      and
       <code>*kirbyPageToolbarTitle</code>
       directives.
     </p>
     <p>
-      <strong>*Please note:</strong> When supplying a custom page title element you must supply both
-      a page title and a toolbar title. You should also ensure the page title is wrapped in a
-      <code>h1</code> tag. Usage of the page subtitle element requires the presence of a page title.
+      <strong>*Please note:</strong>
+      When supplying a custom page title element you must supply both a page title and a toolbar
+      title. You should also ensure the page title is wrapped in a
+      <code>h1</code>
+      tag. Usage of the page subtitle element requires the presence of a page title.
     </p>
     <p>
-      <strong>*Auto-scale page title:</strong> If a custom page title is used you will need to add
-      <code>kirbyFitHeading</code> directive at your heading-tag (h1) to take advantage of the
-      automatic scaling.
+      <strong>*Auto-scale page title:</strong>
+      If a custom page title is used you will need to add
+      <code>kirbyFitHeading</code>
+      directive at your heading-tag (h1) to take advantage of the automatic scaling.
     </p>
     <p>
-      <strong>*Custom page title wrapper:</strong> If you wrap your custom title (e.g. in a
-      flex-container) you have to ensure the title is truncated (setting <code>overflow</code> and
-      <code>text-overflow</code> css properties). See code example below.
+      <strong>*Custom page title wrapper:</strong>
+      If you wrap your custom title (e.g. in a flex-container) you have to ensure the title is
+      truncated (setting
+      <code>overflow</code>
+      and
+      <code>text-overflow</code>
+      css properties). See code example below.
     </p>
     <cookbook-code-viewer [html]="customTitleExampleHtml"></cookbook-code-viewer>
   </div>
@@ -199,17 +261,23 @@
     <h2 #advanced>Advanced Page</h2>
     <p>
       For more advanced scenarios, you can supply a custom page element for title, subtitle, action
-      buttons and fixed content with the <code>*kirbyPage</code>-directives.
+      buttons and fixed content with the
+      <code>*kirbyPage</code>
+      -directives.
     </p>
     <p>
-      <em
-        ><strong>*Please note:</strong> When supplying a custom page title element you must supply
-        both a page title and a toolbar title. You should also ensure the page title is wrapped in a
-        <code>h1</code> tag. See example below on how to reuse a template for both titles. Usage of
-        the page subtitle element requires the presence of a page title.<br />
-        <strong>*Custom page title wrapper:</strong> If you wrap your custom title (e.g. in a
-        flex-container) you have to ensure the title is truncated. See "Custom Title" example.</em
-      >
+      <em>
+        <strong>*Please note:</strong>
+        When supplying a custom page title element you must supply both a page title and a toolbar
+        title. You should also ensure the page title is wrapped in a
+        <code>h1</code>
+        tag. See example below on how to reuse a template for both titles. Usage of the page
+        subtitle element requires the presence of a page title.
+        <br />
+        <strong>*Custom page title wrapper:</strong>
+        If you wrap your custom title (e.g. in a flex-container) you have to ensure the title is
+        truncated. See "Custom Title" example.
+      </em>
     </p>
     <cookbook-code-viewer [html]="advancedExampleHtml"></cookbook-code-viewer>
   </div>
@@ -221,27 +289,41 @@
   <div>
     <h2 #fixedTitleAndActions>Fixed Title & Actions</h2>
     <p>
-      If the <code>toolbarTitle</code> property is specified <em>instead</em> of the
-      <code>title</code> property, the page title and actions will be <em>fixed</em> and shown only
-      in the toolbar and not on the page itself.
+      If the
+      <code>toolbarTitle</code>
+      property is specified
+      <em>instead</em>
+      of the
+      <code>title</code>
+      property, the page title and actions will be
+      <em>fixed</em>
+      and shown only in the toolbar and not on the page itself.
     </p>
     <p>
-      <em
-        ><strong>*Please note:</strong> Always apply the <code>*kirbyPageActions</code> directive to
-        the action buttons host element to ensure the actions are shown in the toolbar. This is
-        especially important when using fixed titles:</em
-      >
+      <em>
+        <strong>*Please note:</strong>
+        Always apply the
+        <code>*kirbyPageActions</code>
+        directive to the action buttons host element to ensure the actions are shown in the toolbar.
+        This is especially important when using fixed titles:
+      </em>
     </p>
     <cookbook-code-viewer [html]="fixedTitleAndActionsExampleHtml"></cookbook-code-viewer>
     <p>
       For more advanced toolbar title scenarios, you can supply a custom toolbar title element
-      through the <code>*kirbyPageToolbarTitle</code> directive:
+      through the
+      <code>*kirbyPageToolbarTitle</code>
+      directive:
     </p>
     <cookbook-code-viewer [html]="fixedCustomTitleExampleHtml"></cookbook-code-viewer>
     <p>
-      You can also have only the action button(s) <em>fixed</em> by configuring the
-      <code>*kirbyPageActions</code> directive with <code>{{ '{' }}fixed: true{{ '}' }}</code
-      >:
+      You can also have only the action button(s)
+      <em>fixed</em>
+      by configuring the
+      <code>*kirbyPageActions</code>
+      directive with
+      <code>{{ '{' }}fixed: true{{ '}' }}</code>
+      :
     </p>
     <cookbook-code-viewer [html]="fixedActionsExampleHtml"></cookbook-code-viewer>
   </div>
@@ -253,13 +335,22 @@
   <div>
     <h2 #fixedFooter>Fixed Footer</h2>
     <p>
-      If the <code>kirby-page-footer</code> component is present <em>outside</em> of the
-      <code>kirby-page-content</code>, the page will show a <em>fixed</em> footer placed right under
-      the content.
+      If the
+      <code>kirby-page-footer</code>
+      component is present
+      <em>outside</em>
+      of the
+      <code>kirby-page-content</code>
+      , the page will show a
+      <em>fixed</em>
+      footer placed right under the content.
     </p>
     <p>
-      Furthermore, you can hide the <code>kirby-tab-bar</code> by specifying the
-      <code>tabBarBottomHidden</code> property.
+      Furthermore, you can hide the
+      <code>kirby-tab-bar</code>
+      by specifying the
+      <code>tabBarBottomHidden</code>
+      property.
     </p>
     <cookbook-code-viewer [html]="fixedFooterTabsExampleHtml"></cookbook-code-viewer>
   </div>
@@ -271,18 +362,29 @@
   <div>
     <h2 #pullToRefresh>Pull-to-Refresh</h2>
     <p>
-      If the <code>kirby-page</code> component has been provided with an event-listener of type
-      <code>refresh</code> a <code>kirby-spinner</code> will be displayed when
-      <em>dragging down</em> from the top of the screen. This can be useful for
-      <em>updating</em> the data in the current view, if new data has arrived or something changed
-      in the meantime. This could for instance be new messages added to the top of a list view. It
-      should not be used as a load-more type of event for simply adding more data to the view.
+      If the
+      <code>kirby-page</code>
+      component has been provided with an event-listener of type
+      <code>refresh</code>
+      a
+      <code>kirby-spinner</code>
+      will be displayed when
+      <em>dragging down</em>
+      from the top of the screen. This can be useful for
+      <em>updating</em>
+      the data in the current view, if new data has arrived or something changed in the meantime.
+      This could for instance be new messages added to the top of a list view. It should not be used
+      as a load-more type of event for simply adding more data to the view.
     </p>
     <cookbook-code-viewer [html]="pullToRefreshExampleHtml"></cookbook-code-viewer>
     <p>
-      The <code>PullToRefreshEvent</code>'s <code>complete()</code>-method can be invoked to
-      indicate that the <code>refresh</code>-event has finished, e.g. when the required data has
-      been loaded:
+      The
+      <code>PullToRefreshEvent</code>
+      's
+      <code>complete()</code>
+      -method can be invoked to indicate that the
+      <code>refresh</code>
+      -event has finished, e.g. when the required data has been loaded:
     </p>
     <cookbook-code-viewer [ts]="pullToRefreshExampleTs"></cookbook-code-viewer>
   </div>
@@ -294,9 +396,10 @@
   <div>
     <h2 #contentWidth>Content Width</h2>
     <p>
-      The <code>maxWidth</code> property can be used to select a preset that defines the max width
-      of the content. This will only impact the content areas as the top bar will continue to use
-      the available space.
+      The
+      <code>maxWidth</code>
+      property can be used to select a preset that defines the max width of the content. This will
+      only impact the content areas as the top bar will continue to use the available space.
     </p>
     <cookbook-code-viewer [html]="contentWidthExampleHtml"></cookbook-code-viewer>
   </div>

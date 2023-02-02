@@ -32,11 +32,10 @@ export class CardShowcaseComponent {
       type: ['string'],
     },
     {
-      name: 'mode',
-      description:
-        '(Optional) Sets a custom elevation on the card. Default elevation = 2, flat = 0, highlighted = 4.',
+      name: 'flat',
+      description: '(Optional) Remove elevation on the card. Default elevation = 2, flat = 0.',
       defaultValue: '',
-      type: ['flat', 'highlighted'],
+      type: ['boolean'],
     },
     {
       name: 'hasPadding',
@@ -59,13 +58,6 @@ export class CardShowcaseComponent {
         'medium',
         'dark',
       ],
-    },
-    {
-      name: 'hasDarkBackgroundColor',
-      description:
-        'Use this to make the hover and active interaction states be lighter instead of darker (which is the default)',
-      defaultValue: 'false',
-      type: ['boolean'],
     },
   ];
 
