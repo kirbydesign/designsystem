@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { LocalNavigationItem } from '@kirbydesign/designsystem';
-
 import { BasePageExampleComponent } from '../base-page-example.component';
 
 const config = {

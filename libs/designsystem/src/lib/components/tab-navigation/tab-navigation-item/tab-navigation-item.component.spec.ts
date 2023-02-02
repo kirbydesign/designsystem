@@ -1,8 +1,8 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponents } from 'ng-mocks';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
+import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { BadgeComponent } from '../..';
-import { TestHelper } from '../../../testing/test-helper';
-import { IconComponent } from '../../icon';
 
 import { TabNavigationItemComponent } from './tab-navigation-item.component';
 

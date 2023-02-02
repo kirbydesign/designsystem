@@ -1,8 +1,9 @@
 import { fakeAsync, tick } from '@angular/core/testing';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponents } from 'ng-mocks';
-import { BadgeComponent, IconComponent } from '../..';
-import { TestHelper } from '../../../testing/test-helper';
+import { IconComponent } from '@kirbydesign/designsystem/icon';
+import { TestHelper } from '@kirbydesign/designsystem/testing';
+import { BadgeComponent } from '../..';
 import { TabNavigationItemComponent } from '../tab-navigation-item/tab-navigation-item.component';
 
 import { TabNavigationComponent } from './tab-navigation.component';
