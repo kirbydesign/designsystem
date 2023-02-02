@@ -9,8 +9,8 @@ import { IonApp } from '@ionic/angular';
 
 @Component({
   selector: 'kirby-app',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  templateUrl: './kirby-app.component.html',
+  styleUrls: ['./kirby-app.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements AfterContentInit {

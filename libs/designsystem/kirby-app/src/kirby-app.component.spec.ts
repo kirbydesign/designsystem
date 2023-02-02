@@ -4,7 +4,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { IonApp } from '@ionic/angular';
 import { ModalController } from '@kirbydesign/designsystem/modal';
 
-import { AppComponent } from './app.component';
+import { AppComponent } from './kirby-app.component';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector

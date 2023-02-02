@@ -1,2 +1,2 @@
-export { AppComponent } from './app.component';
-export { AppModule } from './app.module';
+export { AppComponent } from './kirby-app.component';
+export { KirbyAppModule } from './kirby-app.module';

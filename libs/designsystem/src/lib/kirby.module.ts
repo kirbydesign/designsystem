@@ -64,11 +64,7 @@ import {
 import { PageModule } from '@kirbydesign/designsystem/page';
 import { EmptyStateModule } from '@kirbydesign/designsystem/empty-state';
 import { DropdownModule } from '@kirbydesign/designsystem/dropdown';
-
-import { KirbyModalModule } from '@kirbydesign/designsystem/modal/experimental';
-
-import { AppModule } from '@kirbydesign/designsystem/kirby-app';
-
+import { KirbyAppModule } from '@kirbydesign/designsystem/kirby-app';
 import { ChartsModule } from './components/charts';
 import { DataTableModule } from './components/data-table/data-table.module';
 import { FabSheetComponent } from './components/fab-sheet/fab-sheet.component';
@@ -124,7 +120,7 @@ const standaloneComponents = [
   FlagComponent,
 ];
 const exportedModules = [
-  AppModule,
+  KirbyAppModule,
   RouterOutletModule,
   PageModule,
   TabsModule,
@@ -143,7 +139,6 @@ const exportedModules = [
   FormFieldModule,
   SlideModule,
   AccordionModule,
-  KirbyModalModule,
   ...standaloneComponents,
 ];
 

@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 
-import { AppComponent } from './app.component';
+import { AppComponent as KirbyAppComponent } from './kirby-app.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [KirbyAppComponent],
   imports: [CommonModule, IonicModule],
-  exports: [AppComponent],
+  exports: [KirbyAppComponent],
 })
-export class AppModule {}
+export class KirbyAppModule {}
