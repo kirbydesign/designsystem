@@ -76,6 +76,7 @@ import { ModalRouterLinkDirective } from './directives/modal-router-link/modal-r
 import { EmptyStateModule } from './components/empty-state/empty-state.module';
 import { DropdownModule } from './components/dropdown';
 import { KirbyBadgeModule } from './components/kirby-badge.module';
+import { HeaderModule } from './components/header/header.module';
 
 const exportedDeclarations = [GridComponent, ModalRouterLinkDirective, ItemGroupComponent];
 
@@ -133,6 +134,7 @@ const exportedModules = [
   FormFieldModule,
   SlideModule,
   AccordionModule,
+  HeaderModule,
   ...standaloneComponents,
 ];
 
