@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ModalExperimentalController } from '@kirbydesign/designsystem';
+import { ModalExperimentalController } from '@kirbydesign/designsystem/modal/experimental';
 
 export const showModalCodeSnippet = `constructor(private modalController: ModalExperimentalController) {}
 

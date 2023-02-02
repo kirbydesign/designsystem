@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { FullscreenModalExperimentalComponent } from '@kirbydesign/designsystem';
+import { FullscreenModalExperimentalComponent } from '@kirbydesign/designsystem/modal/experimental';
 import { KirbyAnimation } from '@kirbydesign/designsystem';
 
 export const fullscreenModalExampleTemplateHTML = `<kirby-fullscreen-modal-experimental
