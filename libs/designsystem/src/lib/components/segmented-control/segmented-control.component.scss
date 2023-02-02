@@ -28,7 +28,7 @@
 
   &.default-mode {
     ion-segment {
-      --background: var(--kirby-inputs-background-color, #{utils.get-color('white')});
+      --background: var(--kirby-inputs-background-color);
 
       box-shadow: var(--kirby-inputs-elevation);
       width: fit-content; // The segmented control itself is block-level, but we don't want it to stretch
@@ -54,7 +54,7 @@
     }
 
     ion-segment-button {
-      --background: var(--kirby-inputs-background-color, #{utils.get-color('white')});
+      --background: var(--kirby-inputs-background-color);
       --indicator-transition: none;
 
       flex: initial;
