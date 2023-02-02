@@ -45,6 +45,7 @@ import {
   ProgressCircleRingComponent,
 } from '@kirbydesign/designsystem/progress-circle';
 import { RouterOutletModule } from '@kirbydesign/designsystem/router-outlet';
+import { ItemGroupComponent } from '@kirbydesign/designsystem/item-group';
 import { AppModule } from './components/app/app.module';
 import { ButtonComponent } from './components/button/button.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
@@ -54,7 +55,6 @@ import { FabSheetComponent } from './components/fab-sheet/fab-sheet.component';
 
 import { BreakpointHelperService } from './components/grid/breakpoint-helper.service';
 import { GridComponent } from './components/grid/grid.component';
-import { ItemGroupComponent } from './components/item-group/item-group.component';
 
 import { ActionSheetComponent } from './components/modal/action-sheet/action-sheet.component';
 import { AlertComponent } from './components/modal/alert/alert.component';
@@ -77,11 +77,12 @@ import { EmptyStateModule } from './components/empty-state/empty-state.module';
 import { DropdownModule } from './components/dropdown';
 import { KirbyBadgeModule } from './components/kirby-badge.module';
 
-const exportedDeclarations = [GridComponent, ModalRouterLinkDirective, ItemGroupComponent];
+const exportedDeclarations = [GridComponent, ModalRouterLinkDirective];
 
 const declarations = [...exportedDeclarations, KeyHandlerDirective, ModalCompactWrapperComponent];
 
 const standaloneComponents = [
+  ItemGroupComponent,
   TextareaComponent,
   InputComponent,
   AffixDirective,
