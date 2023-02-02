@@ -287,6 +287,7 @@ export class PageComponent
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    console.log('changes', changes);
     if (changes.titleMaxLines) {
       this.fitHeadingConfig = {
         ...this.fitHeadingConfig,
@@ -424,13 +425,12 @@ export class PageComponent
   }
 
   private initializeTitle() {
-    // Ensures initializeTitle() won't run, if already initialized
-    if (this.hasPageTitle) return;
     this.hasPageTitle = this.title !== undefined || !!this.customTitleTemplate;
     this.toolbarTitleVisible = !this.hasPageTitle;
     this.hasPageSubtitle = this.subtitle !== undefined || !!this.customSubtitleTemplate;
 
     if (this.hasPageTitle) {
+      this.pageTitleIntersectionObserverRef.disconnect();
       setTimeout(() => {
         this.pageTitleIntersectionObserverRef.observe(this.pageTitle.nativeElement);
       });
