@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 
-import { ModalRoutingExperimentalComponent } from '@kirbydesign/designsystem';
+import { ModalRoutingExperimentalComponent } from '@kirbydesign/designsystem/modal/experimental';
 import { ModalRoutePage1ExampleComponent } from '../examples/modal-example/modal-route-example/modal-route-page1-example.component';
 import { ModalRoutePage2ExampleComponent } from '../examples/modal-example/modal-route-example/modal-route-page2-example.component';
 import { ItemShowcaseComponent } from '../showcase/item-showcase/item-showcase.component';
