@@ -4,8 +4,8 @@ import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
-import { Overlay } from '../../modal/services/modal.interfaces';
 
+import { Overlay } from '@kirbydesign/designsystem/modal';
 import { ToastHelper } from './toast.helper';
 
 const getColor = DesignTokenHelper.getColor;

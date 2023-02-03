@@ -3,8 +3,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { KirbyModalModule, KirbyModule } from '@kirbydesign/designsystem';
+import { KirbyModule } from '@kirbydesign/designsystem';
 
+import { KirbyModalModule } from '@kirbydesign/designsystem/modal/experimental';
 import { ExamplesSharedModule } from '../examples.shared.module';
 
 import { FullscreenModalExperimentalExampleComponent } from './fullscreen/fullscreen-experimental-example.component';

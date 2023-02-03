@@ -29,12 +29,14 @@ export * from '@kirbydesign/designsystem/form-field';
 export * from '@kirbydesign/designsystem/avatar';
 export * from '@kirbydesign/designsystem/progress-circle';
 export * from '@kirbydesign/designsystem/router-outlet';
+export * from '@kirbydesign/designsystem/item-group';
+export * from '@kirbydesign/designsystem/modal';
+export * from '@kirbydesign/designsystem/page';
+export * from '@kirbydesign/designsystem/kirby-app';
 
 export * from './scss/scss-helper';
-
 export * from './components/charts/chart-config';
 
 export { KirbyModule } from './kirby.module';
 export { KirbyExperimentalModule } from './kirby-experimental.module';
-export { KirbyModalModule } from './kirby-modal.module';
 export { StockChartConfig, BarChartConfig } from './components/charts/chart-config';

@@ -45,27 +45,32 @@ import {
   ProgressCircleRingComponent,
 } from '@kirbydesign/designsystem/progress-circle';
 import { RouterOutletModule } from '@kirbydesign/designsystem/router-outlet';
-import { AppModule } from './components/app/app.module';
-import { ButtonComponent } from './components/button/button.component';
-import { CalendarComponent } from './components/calendar/calendar.component';
+import { ItemGroupComponent } from '@kirbydesign/designsystem/item-group';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { CalendarComponent } from '@kirbydesign/designsystem/calendar';
+import {
+  ActionSheetComponent,
+  ActionSheetHelper,
+  AlertComponent,
+  AlertHelper,
+  ModalCompactWrapperComponent,
+  ModalController,
+  ModalFooterComponent,
+  ModalHelper,
+  ModalWrapperComponent,
+} from '@kirbydesign/designsystem/modal';
+import {} from '@kirbydesign/designsystem/modal';
+import { PageModule } from '@kirbydesign/designsystem/page';
+import { EmptyStateModule } from '@kirbydesign/designsystem/empty-state';
+import { DropdownModule } from '@kirbydesign/designsystem/dropdown';
+import { KirbyAppModule } from '@kirbydesign/designsystem/kirby-app';
 import { ChartsModule } from './components/charts';
 import { DataTableModule } from './components/data-table/data-table.module';
 import { FabSheetComponent } from './components/fab-sheet/fab-sheet.component';
 
 import { BreakpointHelperService } from './components/grid/breakpoint-helper.service';
 import { GridComponent } from './components/grid/grid.component';
-import { ItemGroupComponent } from './components/item-group/item-group.component';
 
-import { ActionSheetComponent } from './components/modal/action-sheet/action-sheet.component';
-import { AlertComponent } from './components/modal/alert/alert.component';
-import { ModalFooterComponent } from './components/modal/footer/modal-footer.component';
-import { ModalCompactWrapperComponent } from './components/modal/modal-wrapper/compact/modal-compact-wrapper.component';
-import { ModalWrapperComponent } from './components/modal/modal-wrapper/modal-wrapper.component';
-import { ActionSheetHelper } from './components/modal/services/action-sheet.helper';
-import { AlertHelper } from './components/modal/services/alert.helper';
-import { ModalController } from './components/modal/services/modal.controller';
-import { ModalHelper } from './components/modal/services/modal.helper';
-import { PageModule } from './components/page/page.module';
 import { ReorderListComponent } from './components/reorder-list/reorder-list.component';
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
 import { ToastController } from './components/toast/services/toast.controller';
@@ -73,15 +78,15 @@ import { ToastHelper } from './components/toast/services/toast.helper';
 import { customElementsInitializer } from './custom-elements-initializer';
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
 import { ModalRouterLinkDirective } from './directives/modal-router-link/modal-router-link.directive';
-import { EmptyStateModule } from './components/empty-state/empty-state.module';
-import { DropdownModule } from './components/dropdown';
 import { KirbyBadgeModule } from './components/kirby-badge.module';
 
-const exportedDeclarations = [GridComponent, ModalRouterLinkDirective, ItemGroupComponent];
+const exportedDeclarations = [GridComponent, ModalRouterLinkDirective];
 
-const declarations = [...exportedDeclarations, KeyHandlerDirective, ModalCompactWrapperComponent];
+const declarations = [...exportedDeclarations, KeyHandlerDirective];
 
 const standaloneComponents = [
+  ItemGroupComponent,
+  ModalCompactWrapperComponent,
   TextareaComponent,
   InputComponent,
   AffixDirective,
@@ -114,7 +119,7 @@ const standaloneComponents = [
   FlagComponent,
 ];
 const exportedModules = [
-  AppModule,
+  KirbyAppModule,
   RouterOutletModule,
   PageModule,
   TabsModule,
