@@ -8,7 +8,7 @@ import {
   TemplateRef,
 } from '@angular/core';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
-import { FitHeadingConfig } from '../../page/src/fit-heading/fit-heading.directive';
+import type { FitHeadingConfig } from '@kirbydesign/designsystem/page';
 
 @Directive({
   selector: '[kirbyHeaderAvatar]',
