@@ -1,7 +1,5 @@
 export { KirbyBadge as BadgeComponent } from './web-component-proxies.component';
 
-export * from './charts';
-
 export * from './data-table';
 
 export { FabSheetComponent } from './fab-sheet/fab-sheet.component';
