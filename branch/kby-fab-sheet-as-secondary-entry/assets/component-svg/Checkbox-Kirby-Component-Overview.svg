@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Lag_1" data-name="Lag 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 150">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #00e89a;
+      }
+
+      .cls-2 {
+        fill: #d1d1d1;
+      }
+
+      .cls-3 {
+        fill: none;
+        stroke: #fff;
+        stroke-miterlimit: 10;
+      }
+    </style>
+  </defs>
+  <rect class="cls-1" x="62.73" y="45.33" width="9.17" height="9" rx="3" ry="3"/>
+  <path id="Icon_feather-check" data-name="Icon feather-check" class="cls-3" d="M70.15,47.88l-3.9,3.9-1.77-1.77"/>
+  <rect class="cls-2" x="62.73" y="61.9" width="9.17" height="9" rx="3" ry="3"/>
+  <rect class="cls-2" x="62.73" y="78.67" width="9.17" height="9" rx="3" ry="3"/>
+  <rect class="cls-2" x="62.73" y="95.67" width="9.17" height="9" rx="3" ry="3"/>
+  <rect class="cls-2" x="81.09" y="45.33" width="96.18" height="9" rx="3" ry="3"/>
+  <rect class="cls-2" x="81.09" y="61.9" width="96.18" height="9" rx="3" ry="3"/>
+  <rect class="cls-2" x="81.09" y="78.67" width="96.18" height="9" rx="3" ry="3"/>
+  <rect class="cls-2" x="81.09" y="95.67" width="96.18" height="9" rx="3" ry="3"/>
+</svg>
