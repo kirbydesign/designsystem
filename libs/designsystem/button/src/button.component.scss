@@ -94,6 +94,9 @@ $button-width: (
 
   @include interaction-state.apply-hover('xs');
   @include interaction-state.apply-active('s');
+
+  // only apply box shadow for att. lvl. 3 (if set by theme)
+  box-shadow: var(--kirby-inputs-elevation);
 }
 
 :host {
@@ -117,7 +120,6 @@ $button-width: (
   font-family: var(--kirby-font-family);
   background-color: var(--kirby-button-background-color, initial);
   color: var(--kirby-button-color, inherit);
-  box-shadow: var(--kirby-inputs-elevation);
   border-radius: utils.$border-radius-round;
   box-sizing: border-box; // Ensure border is not added to button height
   display: inline-flex;
