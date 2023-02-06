@@ -14,7 +14,7 @@ import {
   fullscreenModalExampleTemplateHTML,
   fullscreenModalExampleTemplateTS,
   headerStartSlotExampleTemplate,
-} from '../../examples/modal-experimental-example/fullscreen/fullscreen-experimental-example.component';
+} from '../../examples/modal-experimental-example/modal/fullscreen/fullscreen-experimental-example.component';
 import { ApiDescriptionEvent } from '../../shared/api-description/api-description-events/api-description-events.component';
 import { ApiDescriptionProperty } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionMethod } from '../../shared/api-description/api-description-methods/api-description-methods.component';
