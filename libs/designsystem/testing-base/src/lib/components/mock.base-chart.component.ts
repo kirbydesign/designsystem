@@ -8,7 +8,7 @@ import {
   ChartLabel,
   ChartOptions,
   ChartType,
-} from '@kirbydesign/designsystem';
+} from '@kirbydesign/designsystem/chart';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({

@@ -1,6 +1,6 @@
 import { AnnotationTypeRegistry } from 'chartjs-plugin-annotation';
 
-import { ChartTypesConfig } from '../../';
+import { ChartTypesConfig } from '../..';
 
 export const TEST_CHART_TYPES_CONFIG: ChartTypesConfig = {
   bar: {

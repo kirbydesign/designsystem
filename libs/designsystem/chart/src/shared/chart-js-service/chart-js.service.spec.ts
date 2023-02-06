@@ -7,7 +7,7 @@ import { MockProvider } from 'ng-mocks';
 import { chartConfigHasType } from '@kirbydesign/designsystem/helpers';
 import { deepCopy } from '@kirbydesign/designsystem/helpers';
 import { ChartConfigService } from '../';
-import { ChartDataset, ChartHighlightedElements, ChartType } from '../../';
+import { ChartDataset, ChartHighlightedElements, ChartType } from '../..';
 import { CHART_GLOBAL_DEFAULTS } from '../chart-config-service/configs/global-defaults.config';
 
 import { ChartJSService } from './chart-js.service';
