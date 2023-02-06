@@ -51,8 +51,6 @@
       ],
       "@kirbydesign/designsystem/kirby-app": ["libs/designsystem/kirby-app/index.ts"],
       "@kirbydesign/designsystem/chart": ["libs/designsystem/chart/index.ts"]
-
-
     },
     "target": "es2020"
   },
