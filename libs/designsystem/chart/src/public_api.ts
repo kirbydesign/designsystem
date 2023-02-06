@@ -1,4 +1,4 @@
-export * from './chartt';
+export * from './chart';
 export * from './stock-chart';
 export * from './shared';
 // export { ChartOptions, ChartEvent, ActiveElement, Chart } from 'chart.js';
