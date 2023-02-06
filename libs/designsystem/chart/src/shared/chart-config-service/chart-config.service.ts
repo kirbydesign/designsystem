@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { deepCopy } from '@kirbydesign/designsystem/helpers';
-import { ActiveElement, Chart, ChartType as ChartJSType, ChartOptions, ChartType } from 'chart.js';
+import { ActiveElement, Chart, ChartType as ChartJSType, ChartOptions } from 'chart.js';
 import { AnnotationType, AnnotationTypeRegistry } from 'chartjs-plugin-annotation';
 import { toDate } from 'date-fns';
-import { ChartDataLabelOptions, ChartLocale, ChartTypeConfig } from '../charts.types';
+import { ChartDataLabelOptions, ChartLocale, ChartType, ChartTypeConfig } from '../charts.types';
 
 import { CHART_ANNOTATIONS_CONFIG } from './configs/annotations.config';
 import { CHART_INTERACTION_FUNCTIONS_EXTENSIONS } from './configs/interaction-functions-extensions.config';
