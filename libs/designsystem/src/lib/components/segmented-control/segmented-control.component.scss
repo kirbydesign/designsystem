@@ -84,10 +84,7 @@ ion-segment {
 }
 
 ion-segment-button {
-  @include interaction-state.apply-focus-visible {
-    outline: none;
-    border-radius: utils.$border-radius-round;
-  }
+  @include interaction-state.apply-focus-part($part: 'native');
   @include utils.accessible-target-size;
 
   --background-hover: var(--kirby-inputs-background-color-hover);
