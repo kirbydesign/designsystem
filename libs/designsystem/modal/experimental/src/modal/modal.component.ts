@@ -17,6 +17,8 @@ export class ModalExperimentalComponent {
   @Input() title = '';
   @Input() hasCollapsibleTitle = false;
   @Input() scrollDisabled = false;
+  @Input() breakpoints: number[];
+  @Input() initialBreakpoint;
 
   @Output() willPresent = new EventEmitter<CustomEvent<OverlayEventDetail>>();
   @Output() didPresent = new EventEmitter<CustomEvent<OverlayEventDetail>>();
