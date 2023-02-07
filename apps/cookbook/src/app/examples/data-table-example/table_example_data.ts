@@ -14,6 +14,7 @@ export interface Heading {
   sortable: boolean;
   sortDirection?: 'asc' | 'desc';
   textAlignment: 'start' | 'center' | 'end';
+  active: boolean;
 }
 
 export const table_example_heading_data: Heading[] = [
@@ -22,48 +23,56 @@ export const table_example_heading_data: Heading[] = [
     sortable: true,
     sortDirection: 'asc',
     textAlignment: 'start',
+    active: false,
   },
   {
     title: 'Eyes',
     sortable: false,
     sortDirection: 'asc',
     textAlignment: 'start',
+    active: false,
   },
   {
     title: 'Gender',
     sortable: false,
     sortDirection: 'asc',
     textAlignment: 'start',
+    active: false,
   },
   {
     title: 'Hair',
     sortable: false,
     sortDirection: 'asc',
     textAlignment: 'start',
+    active: false,
   },
   {
     title: 'Skin',
     sortable: false,
     sortDirection: 'asc',
     textAlignment: 'start',
+    active: false,
   },
   {
     title: 'Birth year',
     sortable: false,
     sortDirection: 'asc',
     textAlignment: 'start',
+    active: false,
   },
   {
     title: 'Height (cm)',
     sortable: true,
     sortDirection: 'asc',
     textAlignment: 'end',
+    active: false,
   },
   {
     title: 'Weight (kg)',
     sortable: true,
     sortDirection: 'desc',
     textAlignment: 'end',
+    active: false,
   },
 ];
 

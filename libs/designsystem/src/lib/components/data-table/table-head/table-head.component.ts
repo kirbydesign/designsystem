@@ -33,7 +33,9 @@ export class TableHeadComponent {
 
   @Input() textAlignment?: 'start' | 'center' | 'end';
 
+  @HostBinding('class.kirby-header-active') @Input() active = false;
+
   @HostBinding('class') get HeadingClass() {
-    return this.textAlignment ? `align-heading-text ${this.textAlignment}` : '';
+    return this.textAlignment ? `kirby-align-heading-text ${this.textAlignment}` : '';
   }
 }
