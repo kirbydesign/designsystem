@@ -20,8 +20,8 @@ import {
       <svg
         *ngIf="sortable"
         xmlns="http://www.w3.org/2000/svg"
-        height="24px"
-        width="24px"
+        height="12px"
+        width="12px"
         viewBox="0 0 24 24"
       >
         <use
