@@ -9,9 +9,11 @@
 
     <h2>Default</h2>
 
-    <div class="header-example">
-      <cookbook-header-example-default></cookbook-header-example-default>
-    </div>
+    <cookbook-example-viewer [html]="defaultExample.template">
+      <div class="header-example">
+        <cookbook-header-example-default #defaultExample></cookbook-header-example-default>
+      </div>
+    </cookbook-example-viewer>
   </div>
 
   <div class="header-example-container">
@@ -23,9 +25,11 @@
       <code>*kirbyHeaderAvatar</code>
       directive to it and that should position the avatar correctly and manage spacing.
     </p>
-    <div class="header-example">
-      <cookbook-header-example-avatar></cookbook-header-example-avatar>
-    </div>
+    <cookbook-example-viewer [html]="avatarExample.template">
+      <div class="header-example">
+        <cookbook-header-example-avatar #avatarExample></cookbook-header-example-avatar>
+      </div>
+    </cookbook-example-viewer>
   </div>
 
   <div class="header-example-container">
@@ -37,9 +41,11 @@
       <code>*kirbyHeaderFlag</code>
       directive to it and that should position the flag correctly and manage spacing.
     </p>
-    <div class="header-example">
-      <cookbook-header-example-flag></cookbook-header-example-flag>
-    </div>
+    <cookbook-example-viewer [html]="flagExample.template">
+      <div class="header-example">
+        <cookbook-header-example-flag #flagExample></cookbook-header-example-flag>
+      </div>
+    </cookbook-example-viewer>
   </div>
 
   <div class="header-example-container">
@@ -52,9 +58,11 @@
       <code>*kirbyHeaderValue</code>
       directive to it and that should resize the title and display the value provided below.
     </p>
-    <div class="header-example">
-      <cookbook-header-example-value></cookbook-header-example-value>
-    </div>
+    <cookbook-example-viewer [html]="valueExample.template">
+      <div class="header-example">
+        <cookbook-header-example-value #valueExample></cookbook-header-example-value>
+      </div>
+    </cookbook-example-viewer>
   </div>
 
   <div class="header-example-container">
@@ -67,9 +75,11 @@
       <code>*kirbyHeaderActions</code>
       directive to it.
     </p>
-    <div class="header-example">
-      <cookbook-header-example-actions></cookbook-header-example-actions>
-    </div>
+    <cookbook-example-viewer [html]="actionsExample.template">
+      <div class="header-example">
+        <cookbook-header-example-actions #actionsExample></cookbook-header-example-actions>
+      </div>
+    </cookbook-example-viewer>
   </div>
 
   <h1>API</h1>
