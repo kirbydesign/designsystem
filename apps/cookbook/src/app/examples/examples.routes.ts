@@ -45,6 +45,7 @@ import { ListSwipeExampleComponent } from './list-swipe-example/list-swipe-examp
 import { LoadingOverlayExampleComponent } from './loading-overlay-example/loading-overlay-example.component';
 import { ModalExampleComponent } from './modal-example/modal-example.component';
 import { FullscreenModalExperimentalExampleComponent } from './modal-experimental-example/modal/fullscreen/fullscreen-experimental-example.component';
+import { DrawerModalExperimentalExampleComponent } from './modal-experimental-example/modal/drawer/drawer-experimental-example.component';
 import { ModalRoutePage1ExampleComponent } from './modal-example/modal-route-example/modal-route-page1-example.component';
 import { ModalRoutePage2ExampleComponent } from './modal-example/modal-route-example/modal-route-page2-example.component';
 import { PageAdvancedExampleComponent } from './page-example/advanced/page-advanced-example.component';
@@ -249,8 +250,17 @@ export const routes: Routes = [
         ],
       },
       {
-        path: 'modal-experimental-fullscreen',
-        component: FullscreenModalExperimentalExampleComponent,
+        path: 'modal-experimental',
+        children: [
+          {
+            path: 'fullscreen',
+            component: FullscreenModalExperimentalExampleComponent,
+          },
+          {
+            path: 'drawer',
+            component: DrawerModalExperimentalExampleComponent,
+          },
+        ],
       },
       {
         path: 'form-field',
