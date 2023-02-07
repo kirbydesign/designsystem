@@ -72,7 +72,9 @@ A new _disclosure indicator_ feature has been added (e.g. an arrow on list items
 > Banner cards with images or illustrations should not have disclosure indicators. The image or illustration or the button is the signifier for affordance.
 
 <br>
+
 <h4 id="list-v8"><strong>List</strong></h4>
+
 It is now required to pass `[selectable]="true"` to `kirby-item` if items in the list should have a hover effect.
 
 <br>
