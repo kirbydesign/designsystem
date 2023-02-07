@@ -61,6 +61,10 @@ th {
     }
   }
 
+  &.kirby-header-active {
+    color: utils.get-text-color('black');
+  }
+
   button {
     text-align: inherit;
     font-weight: inherit;

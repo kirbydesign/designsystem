@@ -10,14 +10,15 @@ import {
 const config = {
   selector: 'cookbook-data-table-card-example',
   template: `<kirby-card>
-  <table kirby-table (sort)="sort($event)">
+  <table kirby-table (sort)="onClickSort($event)">
     <thead>
       <tr>
         <th *ngFor="let heading of headings" 
             kirby-th 
             [sortable]="heading.sortable" 
             [textAlignment]="heading.textAlignment" 
-            [sortDirection]="heading.sortDirection">
+            [sortDirection]="heading.sortDirection"
+            [active]="heading.active">
               {{heading.title}}
         </th>
       </tr>
@@ -57,22 +58,46 @@ export class DataTableCardExampleComponent {
     });
   }
 
-  sort(index: number) {
+  onClickSort(index: number) {
+    this.headings[index].active = this._activeHelper(index);
+
+    this.headings[index].sortDirection =
+      this.headings[index].sortDirection == 'asc' ? 'desc' : 'asc';
+
     this.tableData.sort((personA: Person, personB: Person) => {
       switch (index) {
         case 0:
-          return this._sortHelper(personA.name, personB.name);
+          return this._sortHelper(personA.name, personB.name, this.headings[index].sortDirection);
         case 6:
-          return this._sortHelper(+personA.height, +personB.height);
+          return this._sortHelper(
+            +personA.height,
+            +personB.height,
+            this.headings[index].sortDirection
+          );
         case 7:
-          return this._sortHelper(+personA.mass, +personB.mass);
+          return this._sortHelper(+personA.mass, +personB.mass, this.headings[index].sortDirection);
       }
     });
   }
 
-  private _sortHelper(a, b) {
-    if (a > b) return 1;
-    else if (a < b) return -1;
-    else return 0;
+  private _sortHelper(a, b, direction: 'asc' | 'desc') {
+    if (direction == 'asc') {
+      if (a > b) return 1;
+      else if (a < b) return -1;
+      else return 0;
+    } else {
+      if (a < b) return 1;
+      else if (a > b) return -1;
+      else return 0;
+    }
+  }
+  private _activeHelper(index: number): boolean {
+    if (this.headings[index].active) return true;
+    else {
+      this.headings.forEach((h) => {
+        h.active = false;
+      });
+      return true;
+    }
   }
 }
