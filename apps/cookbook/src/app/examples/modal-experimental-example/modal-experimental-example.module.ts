@@ -9,6 +9,7 @@ import { KirbyModalModule } from '@kirbydesign/designsystem/modal/experimental';
 import { ExamplesSharedModule } from '../examples.shared.module';
 
 import { FullscreenModalExperimentalExampleComponent } from './modal/fullscreen/fullscreen-experimental-example.component';
+import { DrawerModalExperimentalExampleComponent } from './modal/drawer/drawer-experimental-example.component';
 import { ModalControllerExperimentalExampleComponent } from './controller/modal-controller-experimental-example.component';
 import { ModalRoutingExperimentalExampleComponent } from './modal-routing/modal-routing-experimental-example.component';
 import { ModalRoutingExperimentalExamplePage1Component } from './modal-routing/modal-routing-experimental-example-page1.component';
@@ -16,6 +17,7 @@ import { ModalRoutingExperimentalExamplePage2Component } from './modal-routing/m
 
 const COMPONENT_DECLARATIONS = [
   FullscreenModalExperimentalExampleComponent,
+  DrawerModalExperimentalExampleComponent,
   ModalControllerExperimentalExampleComponent,
   ModalRoutingExperimentalExampleComponent,
   ModalRoutingExperimentalExamplePage1Component,
