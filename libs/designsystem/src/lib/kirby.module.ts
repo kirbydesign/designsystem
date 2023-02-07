@@ -59,14 +59,13 @@ import {
   ModalHelper,
   ModalWrapperComponent,
 } from '@kirbydesign/designsystem/modal';
-import {} from '@kirbydesign/designsystem/modal';
 import { PageModule } from '@kirbydesign/designsystem/page';
 import { EmptyStateModule } from '@kirbydesign/designsystem/empty-state';
 import { DropdownModule } from '@kirbydesign/designsystem/dropdown';
 import { KirbyAppModule } from '@kirbydesign/designsystem/kirby-app';
 import { ChartsModule } from '@kirbydesign/designsystem/chart';
+import { FabSheetComponent } from '@kirbydesign/designsystem/fab-sheet';
 import { DataTableModule } from './components/data-table/data-table.module';
-import { FabSheetComponent } from './components/fab-sheet/fab-sheet.component';
 
 import { BreakpointHelperService } from './components/grid/breakpoint-helper.service';
 import { GridComponent } from './components/grid/grid.component';
