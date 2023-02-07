@@ -7,6 +7,7 @@ export * from '@kirbydesign/designsystem/button';
 export * from '@kirbydesign/designsystem/calendar';
 export * from '@kirbydesign/designsystem/card';
 export * from '@kirbydesign/designsystem/checkbox';
+export * from '@kirbydesign/designsystem/data-table';
 export * from '@kirbydesign/designsystem/divider';
 export * from '@kirbydesign/designsystem/dropdown';
 export * from '@kirbydesign/designsystem/empty-state';

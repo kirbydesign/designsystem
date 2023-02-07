@@ -70,7 +70,8 @@
       "@kirbydesign/designsystem/kirby-app": ["libs/designsystem/kirby-app/index.ts"],
       "@kirbydesign/designsystem/chart": ["libs/designsystem/chart/index.ts"],
       "@kirbydesign/designsystem/helpers/scss": ["libs/designsystem/helpers/scss/index.ts"],
-      "@kirbydesign/designsystem/fab-sheet": ["libs/designsystem/fab-sheet/index.ts"]
+      "@kirbydesign/designsystem/fab-sheet": ["libs/designsystem/fab-sheet/index.ts"],
+      "@kirbydesign/designsystem/data-table": ["libs/designsystem/data-table/index.ts"]
     },
     "target": "es2020"
   },
