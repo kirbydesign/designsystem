@@ -38,11 +38,15 @@ th {
   &.kirby-sortable-head {
     @include interaction-state.apply-hover {
       background-color: $highlight-color;
+
+      svg {
+        color: inherit;
+      }
     }
   }
 
-  &svg {
-    color: red;
+  svg {
+    color: transparent;
   }
 
   text-align: left;
@@ -67,6 +71,10 @@ th {
 
   &.kirby-header-active {
     color: utils.get-text-color('black');
+
+    svg {
+      color: inherit;
+    }
   }
 
   button {
