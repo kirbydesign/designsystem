@@ -9,6 +9,64 @@ export interface Person {
   mass: string;
 }
 
+export interface Heading {
+  title: string;
+  sortable: boolean;
+  sortDirection?: 'asc' | 'desc';
+  textAlignment: 'start' | 'center' | 'end';
+}
+
+export const table_example_heading_data: Heading[] = [
+  {
+    title: 'Name',
+    sortable: true,
+    sortDirection: 'asc',
+    textAlignment: 'start',
+  },
+  {
+    title: 'Eyes',
+    sortable: false,
+    sortDirection: 'asc',
+    textAlignment: 'start',
+  },
+  {
+    title: 'Gender',
+    sortable: false,
+    sortDirection: 'asc',
+    textAlignment: 'start',
+  },
+  {
+    title: 'Hair',
+    sortable: false,
+    sortDirection: 'asc',
+    textAlignment: 'start',
+  },
+  {
+    title: 'Skin',
+    sortable: false,
+    sortDirection: 'asc',
+    textAlignment: 'start',
+  },
+  {
+    title: 'Birth year',
+    sortable: false,
+    sortDirection: 'asc',
+    textAlignment: 'start',
+  },
+  {
+    title: 'Height (cm)',
+    sortable: true,
+    sortDirection: 'asc',
+    textAlignment: 'end',
+  },
+  {
+    title: 'Weight (kg)',
+    sortable: true,
+    sortDirection: 'desc',
+    textAlignment: 'end',
+  },
+];
+
 export const table_example_data: Person[] = [
   {
     name: 'Luke Skywalker',
