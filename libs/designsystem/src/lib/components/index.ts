@@ -1,7 +1,5 @@
 export { KirbyBadge as BadgeComponent } from './web-component-proxies.component';
 
-export * from './data-table';
-
 export { GridComponent } from './grid/grid.component';
 export { GridCardConfiguration } from './grid/grid-card-configuration';
 

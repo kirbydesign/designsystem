@@ -7,6 +7,7 @@ export * from '@kirbydesign/designsystem/button';
 export * from '@kirbydesign/designsystem/calendar';
 export * from '@kirbydesign/designsystem/card';
 export * from '@kirbydesign/designsystem/checkbox';
+export * from '@kirbydesign/designsystem/data-table';
 export * from '@kirbydesign/designsystem/divider';
 export * from '@kirbydesign/designsystem/dropdown';
 export * from '@kirbydesign/designsystem/empty-state';
@@ -14,6 +15,7 @@ export * from '@kirbydesign/designsystem/fab-sheet';
 export * from '@kirbydesign/designsystem/flag';
 export * from '@kirbydesign/designsystem/form-field';
 export * from '@kirbydesign/designsystem/helpers';
+export * from '@kirbydesign/designsystem/helpers/scss';
 export * from '@kirbydesign/designsystem/icon';
 export * from '@kirbydesign/designsystem/item';
 export * from '@kirbydesign/designsystem/item-group';
@@ -39,8 +41,6 @@ export * from '@kirbydesign/designsystem/toggle';
 export * from '@kirbydesign/designsystem/toggle-button';
 export * from '@kirbydesign/designsystem/types';
 export * from '@kirbydesign/designsystem/chart';
-
-export * from './scss/scss-helper';
 
 export { KirbyModule } from './kirby.module';
 export { KirbyExperimentalModule } from './kirby-experimental.module';
