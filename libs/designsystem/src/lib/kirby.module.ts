@@ -69,19 +69,19 @@ import { DataTableModule } from '@kirbydesign/designsystem/data-table';
 import { ReorderListComponent } from '@kirbydesign/designsystem/reorder-list';
 
 import { ToastController, ToastHelper } from '@kirbydesign/designsystem/toast';
-import { BreakpointHelperService } from './components/grid/breakpoint-helper.service';
-import { GridComponent } from './components/grid/grid.component';
+import { BreakpointHelperService, GridComponent } from '@kirbydesign/designsystem/grid';
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
 import { customElementsInitializer } from './custom-elements-initializer';
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
 import { ModalRouterLinkDirective } from './directives/modal-router-link/modal-router-link.directive';
 import { KirbyBadgeModule } from './components/kirby-badge.module';
 
-const exportedDeclarations = [GridComponent, ModalRouterLinkDirective];
+const exportedDeclarations = [ModalRouterLinkDirective];
 
 const declarations = [...exportedDeclarations, KeyHandlerDirective];
 
 const standaloneComponents = [
+  GridComponent,
   ItemGroupComponent,
   ModalCompactWrapperComponent,
   TextareaComponent,
