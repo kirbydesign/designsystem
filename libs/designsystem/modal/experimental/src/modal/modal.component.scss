@@ -94,6 +94,10 @@ ion-content {
   --padding-end: #{utils.size('s')};
 }
 
+.modal-sheet {
+  --border-radius: 16px;
+}
+
 // Ensure padding-rules are not merged with other media query,
 // as this rule has to come AFTER the default mobile-first rule in order to override:
 
