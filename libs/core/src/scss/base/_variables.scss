@@ -133,6 +133,19 @@ $modal-heights: (
 $modal-default-height: map.get($modal-heights, 'm');
 $drawer-default-height: map.get($modal-heights, 's');
 
+/* Modal Experimental
+****************************************************************************/
+$experimental-modal-widths: (
+  l: 900px,
+  m: 600px,
+  s: 300px,
+) !default;
+$experimental-modal-heights: (
+  l: math.floor(map.get($experimental-modal-widths, 'l') * 0.75),
+  m: math.floor(map.get($experimental-modal-widths, 'm') * 0.75),
+  s: math.floor(map.get($experimental-modal-widths, 's') * 0.75),
+) !default;
+
 /* Item
 ****************************************************************************/
 $item-heights: (
