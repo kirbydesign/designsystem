@@ -31,6 +31,9 @@ The isDesctructive behavior of button should only be used internally by Kirby in
 
 <h4 id="card-v8">Card</h4>
 
+The `mode` input is replaced with a boolean input 'flat' that can be set to true to remove the shadow around the card. This is not intended for use together with a clickable card or a card with a disclosure indicator. 
+The 'highlighted' look that could previously be set on cards is no longer an option and all cards will now have the same shadow going forward.
+
 The `hasDarkBackgroundColor` input of card is no longer available. To have similar functionality `themeColor="dark"` should be set on cards instead, so interaction states light up instead of getting darker. The option is also useful for background images with darker content, because it ensures a better fallback color if the image loads asynchronosly.
 
 <h4 id="chart-v8">Chart</h4>
