@@ -1,6 +1,8 @@
 <ion-modal
   [isOpen]="open"
   [canDismiss]="canDismiss"
+  [ngClass]="width"
+  [style.--height]="height"
   (willPresent)="_onWillPresent($event)"
   (didPresent)="_onDidPresent($event)"
   (willDismiss)="_onWillDismiss($event)"
