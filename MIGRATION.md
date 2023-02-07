@@ -35,7 +35,17 @@ The `hasDarkBackgroundColor` input of card is no longer available. To have simil
 
 <h4 id="chart-v8">Chart</h4>
 
-Removing the proxy export of some chart.js types, causes a breaking changes, since the implementer now has to change their import to point to chart.js directly.
+Some of the Chart.js types previously re-exported by Kirby should now be imported directly from Chart.js.
+
+Before:
+
+`import { ChartOptions, ChartEvent, ActiveElement, Chart, AnnotationOptions } from '@kirbydesign/designsystem';`
+
+After:
+
+`import { ChartOptions, ChartEvent, ActiveElement, Chart } from 'chart.js';`
+
+`import { AnnotationOptions } from 'chartjs-plugin-annotation';`
 
 <h4 id="chip-v8"><strong>Chip</strong></h4>
 The Kirby Chip component has been removed and is no longer used in any other Kirby components. Kirby Button should be used instead if similar functionality is needed in projects.
