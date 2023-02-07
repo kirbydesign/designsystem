@@ -5,29 +5,99 @@ This document provides information about breaking changes and their migrations f
 ## Version 8
 
 - [Version 8](#version-8)
+  - [Platform Support](#platform-support-v8)
   - [Components](#components-v8)
+    - [Button](#button-v8)
+    - [Card](#card-v8)
+    - [Chart](#chart-v8)
+    - [Chip](#chip-v8)
+    - [Disclosure](#disclosure-v8)
     - [List](#list-v8)
+    - [Range](#range-v8)
+
+<h3 id="platform-support-v8">Platform Support</h3>
+
+- As of version 8, Kirby expects Angular 15.0.0 or later versions.
+- ChartJS, RxJS and date-fns related packages are now peerDependencies, and should be installed by projects.
+- Kirby now relies on features in RxJS 7, and consumers should update the dependency accordingly.
+- ResizeObserver and IntersectionObserver polyfills have been removed.
+  - If they have previously been copied from the Kirby package to your projects output folder compile time via `build > options > assets` in angular.json that configuration should be removed, as Kirby no longer supplies the polyfills.
 
 <h3 id="components-v8">Components</h3>
 
-<h4 id="list-v8">List</h4>
+<h4 id="button-v8">Button</h4>
 
-It is now required to pass `[selectable]="true"` to `kirby-item` if items in the list should have a hover effect
+The isDesctructive behavior of button should only be used internally by Kirby in the alert, as destructive actions are always announced via an alert. Use the default button attention levels and combine with alerts when needed.
+
+<h4 id="card-v8">Card</h4>
+
+The `hasDarkBackgroundColor` input of card is no longer available. To have similar functionality `themeColor="dark"` should be set on cards instead, so interaction states light up instead of getting darker. The option is also useful for background images with darker content, because it ensures a better fallback color if the image loads asynchronosly.
+
+<h4 id="chart-v8">Chart</h4>
+
+Some of the Chart.js types previously re-exported by Kirby should now be imported directly from Chart.js.
+
+Before:
+
+`import { ChartOptions, ChartEvent, ActiveElement, Chart, AnnotationOptions } from '@kirbydesign/designsystem';`
+
+After:
+
+`import { ChartOptions, ChartEvent, ActiveElement, Chart } from 'chart.js';`
+
+`import { AnnotationOptions } from 'chartjs-plugin-annotation';`
+
+<h4 id="chip-v8"><strong>Chip</strong></h4>
+The Kirby Chip component has been removed and is no longer used in any other Kirby components. Kirby Button should be used instead if similar functionality is needed in projects.
+
+<br>
+<h4 id="disclosure-v8"><strong>Disclosure on list, item & card</strong></h4>
+
+A new _disclosure indicator_ feature has been added (e.g. an arrow on list items indicating a navigation option). See the Item and Card documentation on [the cookbook](https://cookbook.kirby.design/#/home/intro) for implementation details. While not a breaking change, it is an important update to the affordance of the list and items. The UI guidelines are as follows:
+
+> #### KIRBY ITEM DISCLOSURE GUIDELINE
+>
+> **Components where disclosure indicators should be added**
+>
+> Disclosure Indicators are shown on all list items and cards that are clickable and navigate to a new page, drawer or modal - both navigation items and actions items.
+>
+> Non-clickable items that only shows details does not have disclosure indicators and should preferably use the XS item with key + title (fx card details).
+>
+> OBS: Generally avoid having both clickable and non-clickable items in the same list. In such case a light or semi dark title can be used to signify that the item is non-clickable.
+>
+> **Related components without indicators**
+>
+> Sidebar menu items only has disclosure icons if the item is expandable with sub-levels.
+>
+> Banner cards with images or illustrations should not have disclosure indicators. The image or illustration or the button is the signifier for affordance.
+
+<br>
+
+<h4 id="list-v8"><strong>List</strong></h4>
+
+It is now required to pass `[selectable]="true"` to `kirby-item` if items in the list should have a hover effect.
+
+<br>
+<h4 id="range-v8"><strong>Range</strong></h4>
+When setting value on Range the value change event is no longer fired. It will only be triggered if the user has interacted with the range slider.
 
 ## Version 6
 
-- [Version 6](#version-6)
-  - [Platform Support](#platform-support)
-  - [Components](#components)
-    - [Alert](#alert)
-    - [Chart](#chart)
-    - [Icons](#icons)
-    - [List](#list)
-    - [Modal](#modal)
-    - [Page](#page)
-    - [Segmented Control](#segmented-control)
-    - [Toast](#toast)
-  - [Additional Performance notice](#additional-performance-notice)
+- [Migrations](#migrations)
+  - [Version 8](#version-8)
+  - [Version 6](#version-6)
+    - [Platform Support](#platform-support)
+    - [Styles](#styles)
+    - [Components](#components)
+      - [Alert](#alert)
+      - [Chart](#chart)
+      - [Icons](#icons)
+      - [List](#list)
+      - [Modal](#modal)
+      - [Page](#page)
+      - [Segmented Control](#segmented-control)
+      - [Toast](#toast)
+    - [Additional Performance notice](#additional-performance-notice)
 
 ### Platform Support
 
