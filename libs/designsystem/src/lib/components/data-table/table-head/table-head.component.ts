@@ -29,8 +29,16 @@ export class TableHeadComponent {
    */
   @HostBinding('class.kirby-sortable-head') @Input() sortable: boolean = false;
 
+  /**
+   * Sets the current direction that is sortet, i.e. what direction the arrow is pointed
+   * @param 'asc' | 'desc'
+   */
   @Input() sortDirection: 'asc' | 'desc';
 
+  /**
+   * Sets alignment of the text within the header.
+   * @param 'start' | 'center' | 'end'
+   */
   @Input() textAlignment?: 'start' | 'center' | 'end';
 
   @HostBinding('class') get HeadingClass() {
