@@ -1,29 +1,4 @@
 <div class="example">
-  <kirby-card>
-    <table kirby-table (sort)="sortFunction($event)" (rowClick)="rowClick($event)">
-      <thead>
-        <tr>
-          <th kirby-th [sortable]="true" [sortDirection]="sortDirection">Sortable header</th>
-          <th kirby-th>Header</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr kirby-tr>
-          <td>Lorem, ipsum dolor.</td>
-          <td>Lorem ipsum dolor sit amet.</td>
-        </tr>
-        <tr kirby-tr [selectable]="true">
-          <td>Lorem, ipsum dolor.</td>
-          <td>Lorem ipsum dolor sit amet.</td>
-        </tr>
-        <tr kirby-tr>
-          <td>Lorem, ipsum dolor.</td>
-          <td>Lorem ipsum dolor sit amet.</td>
-        </tr>
-      </tbody>
-    </table>
-  </kirby-card>
-
   <p>
     Data Tables allow the consumer to show large amounts of complex data in tabular form, with rows
     and columns. Columns can be named through the use of headers.
