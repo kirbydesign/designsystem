@@ -1,7 +1,7 @@
 import { Component, HostBinding, Input, OnDestroy } from '@angular/core';
+import { ScssHelper } from '@kirbydesign/designsystem/helpers/scss';
 import { Subscription } from 'rxjs';
 
-import { ScssHelper } from '../../scss/scss-helper';
 import { BreakpointHelperService } from './breakpoint-helper.service';
 import { GridCardConfiguration } from './grid-card-configuration';
 
