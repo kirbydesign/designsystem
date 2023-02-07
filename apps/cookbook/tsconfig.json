@@ -50,7 +50,8 @@
         "libs/designsystem/modal/experimental/index.ts"
       ],
       "@kirbydesign/designsystem/kirby-app": ["libs/designsystem/kirby-app/index.ts"],
-      "@kirbydesign/designsystem/chart": ["libs/designsystem/chart/index.ts"]
+      "@kirbydesign/designsystem/chart": ["libs/designsystem/chart/index.ts"],
+      "@kirbydesign/designsystem/fab-sheet": ["libs/designsystem/fab-sheet/index.ts"]
     },
     "target": "es2020"
   },

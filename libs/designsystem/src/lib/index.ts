@@ -10,6 +10,7 @@ export * from '@kirbydesign/designsystem/checkbox';
 export * from '@kirbydesign/designsystem/divider';
 export * from '@kirbydesign/designsystem/dropdown';
 export * from '@kirbydesign/designsystem/empty-state';
+export * from '@kirbydesign/designsystem/fab-sheet';
 export * from '@kirbydesign/designsystem/flag';
 export * from '@kirbydesign/designsystem/form-field';
 export * from '@kirbydesign/designsystem/helpers';

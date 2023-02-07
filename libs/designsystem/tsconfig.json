@@ -41,7 +41,8 @@
       "@kirbydesign/designsystem/modal": ["modal/index.ts"],
       "@kirbydesign/designsystem/modal/experimental": ["modal/experimental/index.ts"],
       "@kirbydesign/designsystem/kirby-app": ["kirby-app/index.ts"],
-      "@kirbydesign/designsystem/chart": ["chart/index.ts"]
+      "@kirbydesign/designsystem/chart": ["chart/index.ts"],
+      "@kirbydesign/designsystem/fab-sheet": ["fab-sheet/index.ts"]
     },
     "esModuleInterop": true,
     "target": "es2020"
