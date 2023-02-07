@@ -12,6 +12,7 @@
       "@kirbydesign/designsystem/card": ["libs/designsystem/card/index.ts"],
       "@kirbydesign/designsystem/icon": ["libs/designsystem/icon/index.ts"],
       "@kirbydesign/designsystem/helpers": ["libs/designsystem/helpers/index.ts"],
+      "@kirbydesign/designsystem/helpers/scss": ["libs/designsystem/helpers/scss/index.ts"],
       "@kirbydesign/designsystem/shared": ["libs/designsystem/shared/index.ts"],
       "@kirbydesign/designsystem/types": ["libs/designsystem/types/index.ts"],
       "@kirbydesign/designsystem/kirby-ionic-module": [
@@ -50,7 +51,11 @@
       "@kirbydesign/designsystem/modal/experimental": [
         "libs/designsystem/modal/experimental/index.ts"
       ],
-      "@kirbydesign/designsystem/kirby-app": ["libs/designsystem/kirby-app/index.ts"]
+      "@kirbydesign/designsystem/kirby-app": ["libs/designsystem/kirby-app/index.ts"],
+      "@kirbydesign/designsystem/chart": ["libs/designsystem/chart/index.ts"],
+      "@kirbydesign/designsystem/fab-sheet": ["libs/designsystem/fab-sheet/index.ts"],
+      "@kirbydesign/designsystem/data-table": ["libs/designsystem/data-table/index.ts"],
+      "@kirbydesign/designsystem/reorder-list": ["libs/designsystem/reorder-list/index.ts"]
     },
     "target": "es2020"
   },

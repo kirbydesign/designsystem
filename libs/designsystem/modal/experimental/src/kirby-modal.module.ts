@@ -3,18 +3,22 @@ import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { RouterModule } from '@angular/router';
 import { FullscreenModalExperimentalComponent } from './fullscreen/fullscreen.component';
 import { ModalFooterExperimentalComponent } from './footer/footer.component';
 import { ModalWrapperExperimentalComponent } from './wrapper/wrapper.component';
 import { ModalExperimentalController } from './services/modal.controller';
+import { ModalRoutingExperimentalComponent } from './modal-routing/modal-routing.component';
+
 const COMPONENT_DECLARATIONS = [
   FullscreenModalExperimentalComponent,
   ModalFooterExperimentalComponent,
   ModalWrapperExperimentalComponent,
+  ModalRoutingExperimentalComponent,
 ];
 @NgModule({
   declarations: COMPONENT_DECLARATIONS,
-  imports: [CommonModule, IonicModule, IconModule, ButtonComponent],
+  imports: [CommonModule, IonicModule, IconModule, ButtonComponent, RouterModule],
   exports: COMPONENT_DECLARATIONS,
   providers: [ModalExperimentalController],
 })

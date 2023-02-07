@@ -59,20 +59,18 @@ import {
   ModalHelper,
   ModalWrapperComponent,
 } from '@kirbydesign/designsystem/modal';
-import {} from '@kirbydesign/designsystem/modal';
 import { PageModule } from '@kirbydesign/designsystem/page';
 import { HeaderModule } from '@kirbydesign/designsystem/header';
 import { EmptyStateModule } from '@kirbydesign/designsystem/empty-state';
 import { DropdownModule } from '@kirbydesign/designsystem/dropdown';
 import { KirbyAppModule } from '@kirbydesign/designsystem/kirby-app';
-import { ChartsModule } from './components/charts';
-import { DataTableModule } from './components/data-table/data-table.module';
-import { FabSheetComponent } from './components/fab-sheet/fab-sheet.component';
+import { ChartsModule } from '@kirbydesign/designsystem/chart';
+import { FabSheetComponent } from '@kirbydesign/designsystem/fab-sheet';
+import { DataTableModule } from '@kirbydesign/designsystem/data-table';
+import { ReorderListComponent } from '@kirbydesign/designsystem/reorder-list';
 
 import { BreakpointHelperService } from './components/grid/breakpoint-helper.service';
 import { GridComponent } from './components/grid/grid.component';
-
-import { ReorderListComponent } from './components/reorder-list/reorder-list.component';
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
 import { ToastController } from './components/toast/services/toast.controller';
 import { ToastHelper } from './components/toast/services/toast.helper';

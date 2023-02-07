@@ -9,6 +9,7 @@
       "@kirbydesign/designsystem/icon": ["icon/index.ts"],
       "@kirbydesign/designsystem/testing": ["testing/index.ts"],
       "@kirbydesign/designsystem/helpers": ["helpers/index.ts"],
+      "@kirbydesign/designsystem/helpers/scss": ["helpers/scss/index.ts"],
       "@kirbydesign/designsystem/shared": ["shared/index.ts"],
       "@kirbydesign/designsystem/types": ["types/index.ts"],
       "@kirbydesign/designsystem/flag": ["flag/index.ts"],
@@ -41,7 +42,11 @@
       "@kirbydesign/designsystem/header": ["header/index.ts"],
       "@kirbydesign/designsystem/modal": ["modal/index.ts"],
       "@kirbydesign/designsystem/modal/experimental": ["modal/experimental/index.ts"],
-      "@kirbydesign/designsystem/kirby-app": ["kirby-app/index.ts"]
+      "@kirbydesign/designsystem/kirby-app": ["kirby-app/index.ts"],
+      "@kirbydesign/designsystem/chart": ["chart/index.ts"],
+      "@kirbydesign/designsystem/fab-sheet": ["fab-sheet/index.ts"],
+      "@kirbydesign/designsystem/data-table": ["data-table/index.ts"],
+      "@kirbydesign/designsystem/reorder-list": ["reorder-list/index.ts"]
     },
     "esModuleInterop": true,
     "target": "es2020"
