@@ -41,13 +41,17 @@ th {
     }
   }
 
+  &svg {
+    color: red;
+  }
+
   text-align: left;
   font-weight: utils.font-weight('normal');
   font-size: utils.font-size('xs');
   color: utils.get-text-color('semi-dark');
   padding: utils.size('xxs') utils.size('s');
 
-  &.align-heading-text {
+  &.kirby-align-heading-text {
     &.start {
       justify-content: flex-start;
     }

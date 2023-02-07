@@ -10,15 +10,30 @@ import {
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'th[kirby-th]',
   template: `<button>
-    <ion-icon
-      *ngIf="sortable && textAlignment === 'end'"
-      name="{{ sortDirection === 'asc' ? 'arrow-down' : 'arrow-up' }}"
-    ></ion-icon>
+    <ng-container *ngIf="textAlignment === 'end'; then arrow"></ng-container>
     <ng-content></ng-content>
-    <ion-icon
-      *ngIf="sortable && (textAlignment === 'start' || textAlignment === 'center')"
-      name="{{ sortDirection === 'asc' ? 'arrow-down' : 'arrow-up' }}"
-    ></ion-icon>
+    <ng-container
+      *ngIf="textAlignment === 'start' || textAlignment === 'center'; then arrow"
+    ></ng-container>
+
+    <ng-template #arrow>
+      <svg
+        *ngIf="sortable"
+        xmlns="http://www.w3.org/2000/svg"
+        height="24px"
+        width="24px"
+        viewBox="0 0 24 24"
+      >
+        <use
+          *ngIf="sortDirection === 'asc'"
+          xlink:href="assets/kirby/icons/svg/arrow-up.svg#arrow-up"
+        ></use>
+        <use
+          *ngIf="sortDirection === 'desc'"
+          xlink:href="assets/kirby/icons/svg/arrow-down.svg#arrow-down"
+        ></use>
+      </svg>
+    </ng-template>
   </button>`,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
