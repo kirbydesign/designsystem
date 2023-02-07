@@ -75,6 +75,7 @@ import { VirtualScrollListExampleComponent } from './virtual-scroll-example/virt
 import { PagePullToRefreshExampleComponent } from './page-example/pull-to-refresh/page-pull-to-refresh-example.component';
 import { DropdownExampleComponent } from './dropdown-example/dropdown-example.component';
 import { DataTableExampleComponent } from './data-table-example/data-table-example.component';
+import { HeaderExampleComponent } from './header-example/header-example.component';
 
 VirtualScrollListExampleComponent;
 export const routes: Routes = [
@@ -500,5 +501,9 @@ export const routes: Routes = [
   {
     path: 'data-table',
     component: DataTableExampleComponent,
+  },
+  {
+    path: 'header',
+    component: HeaderExampleComponent,
   },
 ];

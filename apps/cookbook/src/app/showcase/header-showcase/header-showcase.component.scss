@@ -1,8 +1,7 @@
 @use '@kirbydesign/core/src/scss/utils';
 
 .header-example-container {
-  margin: utils.size('l') auto;
-  max-width: 768px;
+  margin-bottom: utils.size('l');
 }
 
 .header-example {

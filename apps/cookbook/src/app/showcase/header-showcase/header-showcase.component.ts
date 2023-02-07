@@ -7,6 +7,7 @@ import {
 @Component({
   selector: 'cookbook-header-showcase',
   templateUrl: './header-showcase.component.html',
+  styleUrls: ['./header-showcase.component.scss'],
   preserveWhitespaces: true,
 })
 export class HeaderShowcaseComponent {

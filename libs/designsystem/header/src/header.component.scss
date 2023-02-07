@@ -2,7 +2,6 @@
   width: 100%;
   padding-top: 16px;
   padding-bottom: 32px;
-  border: 1px dashed #ddd;
 
   @media screen and (min-width: 768px) {
     padding-top: 24px;
@@ -71,7 +70,6 @@
 
 .custom-section {
   margin-top: 8px;
-  margin-bottom: 24px;
 }
 
 .actions {
@@ -79,11 +77,13 @@
   display: flex;
   justify-content: flex-start;
   flex-direction: row;
+  margin-top: 24px;
   padding-left: 8px;
   padding-right: 8px;
 
   @media screen and (min-width: 768px) {
     justify-content: flex-end;
+    margin-top: 0;
   }
 
   &.centered {
