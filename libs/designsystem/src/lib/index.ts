@@ -30,6 +30,7 @@ export * from '@kirbydesign/designsystem/popover';
 export * from '@kirbydesign/designsystem/progress-circle';
 export * from '@kirbydesign/designsystem/radio';
 export * from '@kirbydesign/designsystem/range';
+export * from '@kirbydesign/designsystem/reorder-list';
 export * from '@kirbydesign/designsystem/router-outlet';
 export * from '@kirbydesign/designsystem/section-header';
 export * from '@kirbydesign/designsystem/shared';

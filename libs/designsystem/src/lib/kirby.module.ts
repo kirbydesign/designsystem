@@ -66,11 +66,10 @@ import { KirbyAppModule } from '@kirbydesign/designsystem/kirby-app';
 import { ChartsModule } from '@kirbydesign/designsystem/chart';
 import { FabSheetComponent } from '@kirbydesign/designsystem/fab-sheet';
 import { DataTableModule } from '@kirbydesign/designsystem/data-table';
+import { ReorderListComponent } from '@kirbydesign/designsystem/reorder-list';
 
 import { BreakpointHelperService } from './components/grid/breakpoint-helper.service';
 import { GridComponent } from './components/grid/grid.component';
-
-import { ReorderListComponent } from './components/reorder-list/reorder-list.component';
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
 import { ToastController } from './components/toast/services/toast.controller';
 import { ToastHelper } from './components/toast/services/toast.helper';
