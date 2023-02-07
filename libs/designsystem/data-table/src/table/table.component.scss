@@ -47,6 +47,20 @@ th {
   color: utils.get-text-color('semi-dark');
   padding: utils.size('xxs') utils.size('s');
 
+  &.align-heading-text {
+    &.start {
+      justify-content: flex-start;
+    }
+
+    &.center {
+      justify-content: center;
+    }
+
+    &.end {
+      justify-content: flex-end;
+    }
+  }
+
   button {
     text-align: inherit;
     font-weight: inherit;
@@ -60,10 +74,7 @@ th {
     width: 100%;
     display: flex;
     align-items: center;
-
-    ion-icon {
-      padding-left: 4px;
-    }
+    justify-content: inherit;
   }
 }
 

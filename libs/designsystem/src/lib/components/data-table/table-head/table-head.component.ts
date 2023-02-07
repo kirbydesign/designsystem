@@ -31,8 +31,9 @@ export class TableHeadComponent {
 
   @Input() sortDirection: 'asc' | 'desc';
 
-  @HostBinding('class.kirby-text-alignment-head') @Input() textAlignment:
-    | 'start'
-    | 'center'
-    | 'end' = 'start';
+  @Input() textAlignment?: 'start' | 'center' | 'end';
+
+  @HostBinding('class') get HeadingClass() {
+    return this.textAlignment ? `align-heading-text ${this.textAlignment}` : '';
+  }
 }
