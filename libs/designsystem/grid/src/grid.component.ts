@@ -23,6 +23,7 @@ class GridCard {
 }
 
 @Component({
+  standalone: true,
   selector: 'kirby-grid',
   templateUrl: './grid.component.html',
   styleUrls: ['./grid.component.scss'],
