@@ -7,15 +7,15 @@ const config = {
     <thead>
       <tr>
         <th>Name</th>
-        <th style="text-align:right;">Height (cm)</th>
-        <th style="text-align:right;">Weight (kg)</th>
+        <th kirby-th textAlignment="end">Height (cm)</th>
+        <th kirby-th textAlignment="end">Weight (kg)</th>
       </tr>
     </thead>
     <tbody>
       <tr kirby-tr *ngFor="let rowData of tableData">
           <td>{{rowData.name}}</td>
-          <td style="text-align:right;">{{rowData.height}}</td>
-          <td style="text-align:right;">{{rowData.mass}}</td>
+          <td>{{rowData.height}}</td>
+          <td>{{rowData.mass}}</td>
       </tr>
     </tbody>
   </table>`,

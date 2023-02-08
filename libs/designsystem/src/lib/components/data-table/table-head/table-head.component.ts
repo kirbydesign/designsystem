@@ -9,7 +9,7 @@ import {
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'th[kirby-th]',
-  template: `<button>
+  template: `<button [disabled]="!sortable">
     <ng-container *ngIf="textAlignment === 'end'; then arrow"></ng-container>
     <ng-content></ng-content>
     <ng-container

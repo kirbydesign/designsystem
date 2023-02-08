@@ -31,8 +31,8 @@ const config = {
           <td>{{rowData.hair_color}}</td>
           <td>{{rowData.skin_color}}</td>
           <td>{{rowData.birth_year}}</td>
-          <td style="text-align:right;">{{rowData.height}}</td>
-          <td style="text-align:right;">{{rowData.mass}}</td>
+          <td>{{rowData.height}}</td>
+          <td>{{rowData.mass}}</td>
       </tr>
     </tbody>
   </table>
