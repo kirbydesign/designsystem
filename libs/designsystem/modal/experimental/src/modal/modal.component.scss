@@ -3,21 +3,6 @@
 
 // Global modal styling can be found at scss/base/_ionic.scss
 
-.small {
-  --width: #{map.get(utils.$experimental-modal-widths, 's')};
-  --height: #{map.get(utils.$experimental-modal-heights, 's')};
-}
-
-.medium {
-  --width: #{map.get(utils.$experimental-modal-widths, 'm')};
-  --height: #{map.get(utils.$experimental-modal-heights, 'm')};
-}
-
-.large {
-  --width: #{map.get(utils.$experimental-modal-widths, 'l')};
-  --height: #{map.get(utils.$experimental-modal-heights, 'l')};
-}
-
 @mixin contain-content() {
   padding-top: 0;
   position: relative;

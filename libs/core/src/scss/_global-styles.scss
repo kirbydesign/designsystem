@@ -231,3 +231,28 @@ ion-loading.kirby-loading-overlay {
   // Place icon to the right of text, with icons own width + the actual spacing
   padding-right: calc(#{$icon-scaling-factor} + #{utils.size('xxxs')});
 }
+
+/*
+ * Experimental modal.
+ */
+
+ion-modal.kirby-modal-experimental {
+  &::part(content) {
+    margin: 15px;
+  }
+
+  &.small {
+    --width: #{map.get(utils.$experimental-modal-widths, 's')};
+    --height: #{map.get(utils.$experimental-modal-heights, 's')};
+  }
+
+  &.medium {
+    --width: #{map.get(utils.$experimental-modal-widths, 'm')};
+    --height: #{map.get(utils.$experimental-modal-heights, 'm')};
+  }
+
+  &.large {
+    --width: #{map.get(utils.$experimental-modal-widths, 'l')};
+    --height: #{map.get(utils.$experimental-modal-heights, 'l')};
+  }
+}
