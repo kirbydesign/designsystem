@@ -11,15 +11,15 @@ import {
 import { MockComponents } from 'ng-mocks';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
-import { FullscreenModalExperimentalComponent } from './fullscreen.component';
+import { ModalExperimentalComponent } from './modal.component';
 
 describe('FullscreenComponent', () => {
   const titleText = 'Test Modal';
 
-  let spectator: SpectatorHost<FullscreenModalExperimentalComponent>;
+  let spectator: SpectatorHost<ModalExperimentalComponent>;
 
   const createHost = createHostFactory({
-    component: FullscreenModalExperimentalComponent,
+    component: ModalExperimentalComponent,
     declarations: [
       MockComponents(
         IonModal,
@@ -38,9 +38,9 @@ describe('FullscreenComponent', () => {
   beforeEach(() => {
     spectator = createHost(
       `
-      <kirby-fullscreen-modal-experimental [title]="title" [open]="open">
+      <kirby-modal-experimental [title]="title" [open]="open">
         <p>Test</p>
-      </kirby-fullscreen-modal-experimental>
+      </kirby-modal-experimental>
     `,
       {
         hostProps: {
