@@ -38,6 +38,7 @@ export * from '@kirbydesign/designsystem/slide';
 export * from '@kirbydesign/designsystem/slide-button';
 export * from '@kirbydesign/designsystem/spinner';
 export * from '@kirbydesign/designsystem/tabs';
+export * from '@kirbydesign/designsystem/toast';
 export * from '@kirbydesign/designsystem/toggle';
 export * from '@kirbydesign/designsystem/toggle-button';
 export * from '@kirbydesign/designsystem/types';

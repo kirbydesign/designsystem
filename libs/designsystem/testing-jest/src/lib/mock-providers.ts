@@ -7,8 +7,9 @@ import {
   LoadingOverlayService,
   ModalController,
   TabsService,
-  ToastController,
 } from '@kirbydesign/designsystem';
+
+import { ToastController } from '@kirbydesign/designsystem/toast';
 import { EMPTY } from 'rxjs';
 
 export function chartConfigServiceFactory() {

@@ -6,8 +6,9 @@ import {
   IconRegistryService,
   LoadingOverlayService,
   TabsService,
-  ToastController,
 } from '@kirbydesign/designsystem';
+
+import { ToastController } from '@kirbydesign/designsystem/toast';
 import { ModalController } from '@kirbydesign/designsystem/modal';
 
 import { EMPTY } from 'rxjs';
