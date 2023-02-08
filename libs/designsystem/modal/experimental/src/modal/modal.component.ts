@@ -4,11 +4,11 @@ import { OverlayEventDetail } from '@ionic/core/components';
 import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 
 @Component({
-  selector: 'kirby-fullscreen-modal-experimental',
-  templateUrl: './fullscreen.component.html',
-  styleUrls: ['./fullscreen.component.scss'],
+  selector: 'kirby-modal-experimental',
+  templateUrl: './modal.component.html',
+  styleUrls: ['./modal.component.scss'],
 })
-export class FullscreenModalExperimentalComponent {
+export class ModalExperimentalComponent {
   @ViewChild(IonModal) modal: IonModal;
   @ViewChild(IonContent) ionContent: IonContent;
 
