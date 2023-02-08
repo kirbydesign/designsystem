@@ -14,8 +14,8 @@ const config = {
     <tbody>
       <tr kirby-tr *ngFor="let rowData of tableData">
           <td>{{rowData.name}}</td>
-          <td>{{rowData.height}}</td>
-          <td>{{rowData.mass}}</td>
+          <td style="text-align: end;">{{rowData.height}}</td>
+          <td style="text-align: end;">{{rowData.mass}}</td>
       </tr>
     </tbody>
   </table>`,
