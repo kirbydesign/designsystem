@@ -59,6 +59,7 @@ export class DataTableCardExampleComponent {
   }
 
   onClickSort(index: number) {
+    if (index === undefined) return;
     this.headings[index].active = this._activeHelper(index);
 
     this.headings[index].sortDirection =
@@ -92,7 +93,7 @@ export class DataTableCardExampleComponent {
     }
   }
   private _activeHelper(index: number): boolean {
-    if (this.headings[index].active) return true;
+    if (this.headings[index]?.active) return true;
     else {
       this.headings.forEach((h) => {
         h.active = false;

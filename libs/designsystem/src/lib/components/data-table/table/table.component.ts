@@ -59,21 +59,7 @@ export class TableComponent {
    * the index of the header will be emitted through the sort EventEmitter
    */
   headerClick(clickedElement: Element) {
-    // Define the th element
-    const tableHeadElement: Element = clickedElement.closest('th[kirby-th]');
-
-    // Is the headerElement sortable?
-    if (!tableHeadElement.outerHTML.includes('kirby-sortable-head')) return;
-
-    // Define the thead row as an array of th elements
-    const tableHeadRow: Element[] = Array.prototype.slice.call(
-      tableHeadElement.parentElement.children
-    );
-
-    // Find the the position of the header element in the row
-    const headIndex = tableHeadRow.findIndex((x) => {
-      return x == tableHeadElement;
-    });
+    const headIndex: number = this.findHeadIndex(clickedElement);
 
     // Emit the position
     this.sort.emit(headIndex);
@@ -103,5 +89,32 @@ export class TableComponent {
 
     // Emit the position
     this.selectRow.emit(rowIndex);
+  }
+
+  /**
+   * Helper function to find the index of the header clicked
+   * @param clickedElement The header element that is clicked
+   */
+  private findHeadIndex(clickedElement: Element): number {
+    if (!clickedElement) return;
+
+    // Define the th element
+    const tableHeadElement: Element = clickedElement.closest('th[kirby-th]');
+
+    // Is the headerElement not null and sortable?
+    if (!tableHeadElement) return;
+    if (!tableHeadElement.outerHTML.includes('kirby-sortable-head')) return;
+
+    // Define the thead row as an array of th elements
+    const tableHeadRow: Element[] = Array.prototype.slice.call(
+      tableHeadElement.parentElement.children
+    );
+
+    // Find the the position of the header element in the row
+    const headIndex = tableHeadRow.findIndex((x) => {
+      return x == tableHeadElement;
+    });
+
+    return headIndex;
   }
 }
