@@ -12,6 +12,7 @@ This document provides information about breaking changes and their migrations f
     - [Chart](#chart-v8)
     - [Chip](#chip-v8)
     - [Disclosure](#disclosure-v8)
+    - [Dropdown](#dropdown-v8)
     - [List](#list-v8)
     - [Range](#range-v8)
 
@@ -26,8 +27,10 @@ This document provides information about breaking changes and their migrations f
 <h3 id="components-v8">Components</h3>
 
 <h4 id="button-v8">Button</h4>
-
 The isDesctructive behavior of button should only be used internally by Kirby in the alert, as destructive actions are always announced via an alert. Use the default button attention levels and combine with alerts when needed.
+
+--- 
+> _A note on button colors_: Attention level 3 has changed from an outline button to a white background.  
 
 <h4 id="card-v8">Card</h4>
 
@@ -76,6 +79,11 @@ A new _disclosure indicator_ feature has been added (e.g. an arrow on list items
 
 <br>
 
+<h4 id="dropdown-v8"><strong>Dropdown</strong></h4>
+While not a breaking change, attention levels for dropdowns have changed quite dramatically to match buttons attention level designs.
+This means that attention level 2 buttons are now black, and if a white dropdown is desired, attention level 3 should be used instead.  
+
+<br>
 <h4 id="list-v8"><strong>List</strong></h4>
 
 It is now required to pass `[selectable]="true"` to `kirby-item` if items in the list should have a hover effect.
