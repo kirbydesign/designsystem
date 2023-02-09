@@ -1,0 +1,24 @@
+@use '@kirbydesign/core/src/scss/interaction-state';
+@use '@kirbydesign/core/src/scss/utils';
+
+$dropdown-max-height: 8 * utils.$dropdown-item-height;
+$min-screen-width-small: 280px;
+$max-screen-width-small: 460px;
+$min-screen-width: 375px;
+
+:host {
+  position: relative;
+}
+
+kirby-card {
+  max-height: $dropdown-max-height;
+  margin-block: utils.size('xxxs');
+  overflow-y: auto;
+  box-shadow: utils.get-elevation(8);
+  min-width: $min-screen-width-small;
+  @include utils.media('>=small') {
+    min-width: $min-screen-width;
+  }
+
+  max-width: $max-screen-width-small;
+}

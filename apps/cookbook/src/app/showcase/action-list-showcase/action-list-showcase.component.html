@@ -1,22 +1,55 @@
 <div class="example">
-  <h2>Action list</h2>
-  <p>An action list is a list of actions that displays in a popup</p>
+  <p>
+    An action list is a list of actions that displays in a popup. Action list replaces action-sheet
+    for both mobile and web.
+  </p>
+  <p>
+    It is up to the user of action-list to add individual kirby-items to get the desired outcome,
+    action-list simply provides the shell of handling the list itself. All functionality that is
+    expected from an item in the list, is up to the user to implement. See examples.
+  </p>
   <p>
     <em>
-      <strong>Note:</strong> For now, Accordion uses Angular animations. As no other components use
-      the package it is not bundled with Kirby for performance reasons. As a result it is necessary
-      to have <code>@angular/platform-browser</code> installed and import
-      <code>BrowserAnimationsModule</code> yourself when using the accordion.
+      <strong>Note:</strong> Only <code>kirby-item</code> are allowed as children of an action-list.
+      This is to ensure consistency in design and implementation
     </em>
   </p>
-  <cookbook-example-viewer [html]="actionListDefaultExample.template">
-    <cookbook-action-list-default-example
-      #actionListDefaultExample
-    ></cookbook-action-list-default-example>
-  </cookbook-example-viewer>
-
-  <h2>Properties:</h2>
-  <cookbook-api-description-properties
-    [properties]="properties"
-  ></cookbook-api-description-properties>
 </div>
+<div class="page-example">
+  <div>
+    <h2>Action list: Simple</h2>
+    <cookbook-example-viewer [html]="actionListDefaultExample.template">
+      <cookbook-action-list-default-example
+        #actionListDefaultExample
+      ></cookbook-action-list-default-example>
+    </cookbook-example-viewer>
+  </div>
+</div>
+
+<div class="page-example">
+  <div>
+    <h2>Action list: Selectable items</h2>
+    <cookbook-example-viewer [html]="actionListSelectableExample.template">
+      <cookbook-action-list-selectable-example
+        #actionListSelectableExample
+      ></cookbook-action-list-selectable-example>
+    </cookbook-example-viewer>
+  </div>
+</div>
+
+<div class="page-example">
+  <div>
+    <h2>Action list: Advanced item</h2>
+    <cookbook-example-viewer [html]="actionListAdvancedExample.template">
+      <cookbook-action-list-advanced-example
+        #actionListAdvancedExample
+      ></cookbook-action-list-advanced-example>
+    </cookbook-example-viewer>
+  </div>
+</div>
+
+<h2>Properties:</h2>
+<cookbook-api-description-properties
+  x
+  [properties]="properties"
+></cookbook-api-description-properties>
