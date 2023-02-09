@@ -3,8 +3,6 @@
   [size]="size"
   [attentionLevel]="attentionLevel"
   tabindex="-1"
-  (click)="onToggle($event)"
-  (mousedown)="onButtonMouseEvent($event)"
   [disabled]="disabled"
   type="button"
 >
@@ -12,19 +10,15 @@
   <kirby-icon [name]="isOpen ? 'arrow-up' : 'arrow-down'"></kirby-icon>
 </button>
 
-<ng-container *ngTemplateOutlet="usePopover ? popoverTemplate : itemWrapperTemplate"></ng-container>
-
-<ng-template #popoverTemplate>
-  <kirby-popover
-    [target]="buttonElement"
-    [popout]="popout"
-    (click)="_onPopoverClick($event)"
-    (willHide)="_onPopoverWillHide()"
-  >
-    <ng-container *ngTemplateOutlet="itemWrapperTemplate"></ng-container>
-  </kirby-popover>
-</ng-template>
-
+<div
+  kirbyFloating
+  [reference]="buttonElement"
+  [triggers]="['click']"
+  [strategy]="'fixed'"
+  [flip]="true"
+>
+  <ng-container *ngTemplateOutlet="itemWrapperTemplate"></ng-container>
+</div>
 <ng-template #itemWrapperTemplate>
   <kirby-card>
     <ng-container *ngFor="let item of items; let i = index">

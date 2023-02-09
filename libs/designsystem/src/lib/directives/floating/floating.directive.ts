@@ -1,14 +1,29 @@
 import {
   Directive,
+  DoCheck,
   ElementRef,
   HostListener,
   Input,
+  OnChanges,
   OnDestroy,
   OnInit,
   Renderer2,
 } from '@angular/core';
-import { autoPlacement, autoUpdate, computePosition, offset, shift } from '@floating-ui/dom';
-import { ComputePositionConfig, Middleware, Placement } from '@floating-ui/core/src/types';
+import {
+  autoPlacement,
+  autoUpdate,
+  computePosition,
+  flip,
+  offset,
+  shift,
+  size,
+} from '@floating-ui/dom';
+import {
+  ComputePositionConfig,
+  Middleware,
+  Placement,
+  Strategy,
+} from '@floating-ui/core/src/types';
 import { DesignTokenHelper } from '@kirbydesign/core';
 
 export type TriggerEvent = 'hover' | 'click' | 'focus';
@@ -34,6 +49,7 @@ export class FloatingDirective implements OnInit, OnDestroy {
     this.tearDownEventHandling();
     this._reference = ref;
     this.setupEventHandling();
+    console.log(ref);
   }
 
   private get reference(): ElementRef {
@@ -49,19 +65,21 @@ export class FloatingDirective implements OnInit, OnDestroy {
     return this._placement;
   }
 
-  @Input() private set triggers(eventTriggers: Array<TriggerEvent> | TriggerEvent) {
+  @Input() private set triggers(eventTriggers: Array<TriggerEvent>) {
     this._triggers = eventTriggers;
     this.tearDownEventHandling();
     this.setupEventHandling();
   }
 
-  private get triggers(): Array<TriggerEvent> | TriggerEvent {
+  private get triggers(): Array<TriggerEvent> {
     return this._triggers;
   }
 
   @Input() private isDisabled: boolean = false;
 
-  // Displaces the floating element from its core placement along the specified axes.
+  /*
+   * Displaces the floating element from its core placement along the specified axes.
+   */
   @Input() private offset: FloatingOffset = FloatingOffset.none;
 
   // Moves the floating element along the specified axes in order to keep it in view.
@@ -70,6 +88,10 @@ export class FloatingDirective implements OnInit, OnDestroy {
 
   // Chooses the placement that has the most space available automatically.
   @Input() private autoPlacement: boolean = false;
+
+  @Input() private flip: boolean = false;
+
+  @Input() private strategy: Strategy;
 
   @Input() private closeOnSelect: boolean = true;
   @Input() private closeOnEscapeKey: boolean = true;
@@ -85,10 +107,11 @@ export class FloatingDirective implements OnInit, OnDestroy {
   public onMouseClick(event): void {
     const clickedOnHost: boolean = this.elementRef.nativeElement.contains(event.target);
     clickedOnHost ? this.handleClickInsideHostElement() : this.handleClickOutsideHostElement(event);
+    console.log(event);
   }
 
-  private _placement: Placement;
-  private _triggers: Array<TriggerEvent> | TriggerEvent = 'click';
+  private _placement: Placement = 'bottom-start';
+  private _triggers: Array<TriggerEvent> = ['click'];
   private _reference: ElementRef;
 
   private isShown: boolean = false;
@@ -152,7 +175,7 @@ export class FloatingDirective implements OnInit, OnDestroy {
   private addFloatStylingToHostElement(): void {
     this.renderer.setStyle(this.elementRef.nativeElement, 'left', `0px`);
     this.renderer.setStyle(this.elementRef.nativeElement, 'top', `0px`);
-    this.renderer.setStyle(this.elementRef.nativeElement, 'position', `absolute`);
+    this.renderer.setStyle(this.elementRef.nativeElement, 'position', this.strategy);
     this.renderer.setStyle(
       this.elementRef.nativeElement,
       'z-index',
@@ -164,7 +187,7 @@ export class FloatingDirective implements OnInit, OnDestroy {
     this.config = {
       placement: this.placement ?? 'bottom-start',
       middleware: this.getMiddlewareConfig(),
-      strategy: 'absolute',
+      strategy: this.strategy,
     } as ComputePositionConfig;
 
     computePosition(this.reference.nativeElement, this.elementRef.nativeElement, this.config).then(
@@ -182,6 +205,10 @@ export class FloatingDirective implements OnInit, OnDestroy {
 
     if (this.autoPlacement) {
       middleware.push(autoPlacement());
+    }
+
+    if (this.flip) {
+      middleware.push(flip());
     }
 
     return middleware;
@@ -202,13 +229,9 @@ export class FloatingDirective implements OnInit, OnDestroy {
       return;
     }
 
-    if (Array.isArray(this.triggers)) {
-      (this.triggers as Array<TriggerEvent>).forEach((trigger: TriggerEvent) =>
-        this.attachTriggerEventToReferenceElement(trigger)
-      );
-    } else {
-      this.attachTriggerEventToReferenceElement(this.triggers);
-    }
+    this.triggers.forEach((trigger: TriggerEvent) =>
+      this.attachTriggerEventToReferenceElement(trigger)
+    );
   }
 
   private attachTriggerEventToReferenceElement(trigger: TriggerEvent): void {
