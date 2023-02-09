@@ -13,6 +13,8 @@ export type ModalExperimentalConfig = {
   canDismiss?: boolean | (() => Promise<boolean>);
   backdropDismiss?: boolean;
   showBackdrop?: boolean;
+  width?: 'small' | 'medium' | 'large';
+  height?: string;
 };
 
 type ModalDismissObservables = {
@@ -34,14 +36,23 @@ export class ModalExperimentalController {
     const $onDidDismiss = new Subject<OverlayEventDetail>();
     const onDidDismiss$ = $onDidDismiss.asObservable();
 
+    let customCssClasses: string[] = [];
+    if (config.cssClass) {
+      customCssClasses = Array.isArray(config.cssClass) ? config.cssClass : [config.cssClass];
+    }
+
     const modal$ = from(
       this.ionicModalController.create({
         component: config.component,
         componentProps: config.componentProps,
-        cssClass: config.cssClass,
         canDismiss: config.canDismiss,
         backdropDismiss: config.backdropDismiss,
         showBackdrop: config.showBackdrop,
+        cssClass: [
+          'kirby-modal-experimental',
+          config.width ? config.width : 'medium',
+          ...customCssClasses,
+        ],
       })
     );
 
@@ -49,6 +60,7 @@ export class ModalExperimentalController {
 
     modal$
       .pipe(
+        tap((modal) => modal.style.setProperty('--height', config.height)),
         tap((modal) => from(modal.present())),
         switchMap((modal) => modal.onWillDismiss())
       )
