@@ -90,26 +90,18 @@ export class FloatingDirective implements OnInit, OnDestroy {
     return this._strategy;
   }
 
-<<<<<<< HEAD
   /**
    * Defines when the host should be displayed/hidden, i.e. click will attach a click listener to the reference
    * that makes the host toggle display. Supports multiple triggers, to provide functionality for combinations
    * like click/focus.
    * */
   @Input() public set triggers(eventTriggers: Array<TriggerEvent>) {
-=======
-  @Input() private set triggers(eventTriggers: Array<TriggerEvent>) {
->>>>>>> c5000c7fd (chore: change triggers to only allow for array)
     this._triggers = eventTriggers;
     this.tearDownEventHandling();
     this.setupEventHandling();
   }
 
-<<<<<<< HEAD
   public get triggers(): Array<TriggerEvent> {
-=======
-  private get triggers(): Array<TriggerEvent> {
->>>>>>> c5000c7fd (chore: change triggers to only allow for array)
     return this._triggers;
   }
 
@@ -336,11 +328,7 @@ export class FloatingDirective implements OnInit, OnDestroy {
 
   private handleClickOutsideHostElement(event: Event): void {
     const clickedOnReferenceWithClickTriggerEnabled: boolean =
-<<<<<<< HEAD
       this.reference?.nativeElement.contains(event.target) && this.triggers.includes('click');
-=======
-      this.reference.nativeElement.contains(event.target) && this.triggers.includes('click');
->>>>>>> c5000c7fd (chore: change triggers to only allow for array)
 
     if (this.closeOnBackdrop && !clickedOnReferenceWithClickTriggerEnabled) {
       this.hide();
@@ -348,7 +336,6 @@ export class FloatingDirective implements OnInit, OnDestroy {
   }
 
   private tearDownEventHandling(): void {
-<<<<<<< HEAD
     this.eventListeners.forEach((eventListener) => {
       if (eventListener != null) {
         eventListener();
@@ -361,12 +348,6 @@ export class FloatingDirective implements OnInit, OnDestroy {
     if (this.autoUpdaterRef) {
       this.autoUpdaterRef();
     }
-=======
-    this.eventListeners.forEach(() => {
-      const eventListener: () => void = this.eventListeners.pop();
-      eventListener();
-    });
->>>>>>> c5000c7fd (chore: change triggers to only allow for array)
   }
 
   public ngOnDestroy() {
