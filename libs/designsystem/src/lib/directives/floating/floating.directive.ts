@@ -32,11 +32,21 @@ interface EventMethods {
   method: () => void;
 }
 
+/**
+ * @summary FloatingDirective is a utility that lets you declaratively anchor "popup" containers to another element.
+ *
+ * Uses floating-ui, with this directive wraps the functionality: https://floating-ui.com/docs/getting-started
+ *
+ * @status In development
+ */
 @Directive({
   selector: '[kirbyFloating]',
   standalone: true,
 })
 export class FloatingDirective implements OnInit, OnDestroy {
+  /**
+   * Reference to the element for which the host should anchor to
+   * */
   @Input() private set reference(ref: ElementRef) {
     this.tearDownEventHandling();
     this._reference = ref;
@@ -47,6 +57,9 @@ export class FloatingDirective implements OnInit, OnDestroy {
     return this._reference;
   }
 
+  /**
+   * How the host should be placed relative to the reference. Can be affected by middleware
+   * */
   @Input() private set placement(placement: Placement) {
     this._placement = placement;
     this.updateHostElementPosition();
@@ -56,6 +69,9 @@ export class FloatingDirective implements OnInit, OnDestroy {
     return this._placement;
   }
 
+  /**
+   * The strategy for how the host should be positioned.
+   * */
   @Input() private set strategy(strategy: Strategy) {
     this._strategy = strategy;
     this.updateHostElementPosition();
@@ -65,6 +81,11 @@ export class FloatingDirective implements OnInit, OnDestroy {
     return this._strategy;
   }
 
+  /**
+   * Defines when the host should be displayed/hidden, i.e. click will attach a click listener to the reference
+   * that makes the host toggle display. Supports multiple triggers, to provide functionality for combinations
+   * like click/focus.
+   * */
   @Input() private set triggers(eventTriggers: Array<TriggerEvent>) {
     this._triggers = eventTriggers;
     this.tearDownEventHandling();
@@ -75,18 +96,30 @@ export class FloatingDirective implements OnInit, OnDestroy {
     return this._triggers;
   }
 
+  /**
+   * Prevent host from being toggled if set.
+   * */
   @Input() private isDisabled: boolean = false;
 
-  // Displaces the floating element from its core placement along the specified axes.
+  /**
+   * Displaces the floating element from its core placement along the specified axes.
+   * */
   @Input() private offset: FloatingOffset = FloatingOffset.none;
 
-  // Moves the floating element along the specified axes in order to keep it in view.
-  // This does not always work as expected, so don't "just" set it.
+  /**
+   * Moves the floating element along the specified axes in order to keep it in view.
+   * This does not always work as expected, so don't "just" set it.
+   * */
   @Input() private shift: boolean = false;
 
-  // Chooses the placement that has the most space available automatically.
+  /**
+   * Chooses the placement that has the most space available automatically.
+   * */
   @Input() private autoPlacement: boolean = false;
 
+  /**
+   * Enables hiding the host by events. See variable names.
+   * */
   @Input() private closeOnSelect: boolean = true;
   @Input() private closeOnEscapeKey: boolean = true;
   @Input() private closeOnBackdrop: boolean = true;
