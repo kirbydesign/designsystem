@@ -65,13 +65,13 @@ export class FloatingDirective implements OnInit, OnDestroy {
     return this._strategy;
   }
 
-  @Input() private set triggers(eventTriggers: Array<TriggerEvent> | TriggerEvent) {
+  @Input() private set triggers(eventTriggers: Array<TriggerEvent>) {
     this._triggers = eventTriggers;
     this.tearDownEventHandling();
     this.setupEventHandling();
   }
 
-  private get triggers(): Array<TriggerEvent> | TriggerEvent {
+  private get triggers(): Array<TriggerEvent> {
     return this._triggers;
   }
 
@@ -105,7 +105,7 @@ export class FloatingDirective implements OnInit, OnDestroy {
 
   private _placement: Placement = 'bottom-start';
   private _strategy: Strategy = 'absolute';
-  private _triggers: Array<TriggerEvent> | TriggerEvent = 'click';
+  private _triggers: Array<TriggerEvent> = ['click'];
   private _reference: ElementRef;
 
   private isShown: boolean = false;
@@ -219,13 +219,9 @@ export class FloatingDirective implements OnInit, OnDestroy {
       return;
     }
 
-    if (Array.isArray(this.triggers)) {
-      (this.triggers as Array<TriggerEvent>).forEach((trigger: TriggerEvent) =>
-        this.attachTriggerEventToReferenceElement(trigger)
-      );
-    } else {
-      this.attachTriggerEventToReferenceElement(this.triggers);
-    }
+    this.triggers.forEach((trigger: TriggerEvent) =>
+      this.attachTriggerEventToReferenceElement(trigger)
+    );
   }
 
   private attachTriggerEventToReferenceElement(trigger: TriggerEvent): void {
@@ -253,17 +249,11 @@ export class FloatingDirective implements OnInit, OnDestroy {
 
   private handleClickOutsideHostElement(event: Event): void {
     const clickedOnReferenceWithClickTriggerEnabled: boolean =
-      this.reference.nativeElement.contains(event.target) && this.triggersContains('click');
+      this.reference.nativeElement.contains(event.target) && this.triggers.includes('click');
 
     if (this.closeOnBackdrop && !clickedOnReferenceWithClickTriggerEnabled) {
       this.hide();
     }
-  }
-
-  private triggersContains(triggerEvent: TriggerEvent): boolean {
-    return Array.isArray(this.triggers)
-      ? !!(this.triggers as Array<TriggerEvent>).find((trigger) => trigger === triggerEvent)
-      : this.triggers === triggerEvent;
   }
 
   private tearDownEventHandling(): void {
