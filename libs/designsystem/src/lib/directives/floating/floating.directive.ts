@@ -7,7 +7,14 @@ import {
   OnInit,
   Renderer2,
 } from '@angular/core';
-import { autoPlacement, autoUpdate, computePosition, offset, shift } from '@floating-ui/dom';
+import {
+  autoPlacement,
+  autoUpdate,
+  computePosition,
+  offset,
+  shift,
+  Strategy,
+} from '@floating-ui/dom';
 import { ComputePositionConfig, Middleware, Placement } from '@floating-ui/core/src/types';
 import { DesignTokenHelper } from '@kirbydesign/core';
 
@@ -49,6 +56,15 @@ export class FloatingDirective implements OnInit, OnDestroy {
     return this._placement;
   }
 
+  @Input() private set strategy(strategy: Strategy) {
+    this._strategy = strategy;
+    this.updateHostElementPosition();
+  }
+
+  private get strategy() {
+    return this._strategy;
+  }
+
   @Input() private set triggers(eventTriggers: Array<TriggerEvent> | TriggerEvent) {
     this._triggers = eventTriggers;
     this.tearDownEventHandling();
@@ -88,6 +104,7 @@ export class FloatingDirective implements OnInit, OnDestroy {
   }
 
   private _placement: Placement = 'bottom-start';
+  private _strategy: Strategy = 'absolute';
   private _triggers: Array<TriggerEvent> | TriggerEvent = 'click';
   private _reference: ElementRef;
 
@@ -164,7 +181,7 @@ export class FloatingDirective implements OnInit, OnDestroy {
     this.config = {
       placement: this.placement,
       middleware: this.getMiddlewareConfig(),
-      strategy: 'absolute',
+      strategy: this.strategy,
     } as ComputePositionConfig;
 
     computePosition(this.reference.nativeElement, this.elementRef.nativeElement, this.config).then(
