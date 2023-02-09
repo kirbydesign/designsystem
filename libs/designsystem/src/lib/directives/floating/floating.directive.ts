@@ -87,7 +87,7 @@ export class FloatingDirective implements OnInit, OnDestroy {
     clickedOnHost ? this.handleClickInsideHostElement() : this.handleClickOutsideHostElement(event);
   }
 
-  private _placement: Placement;
+  private _placement: Placement = 'bottom-start';
   private _triggers: Array<TriggerEvent> | TriggerEvent = 'click';
   private _reference: ElementRef;
 
@@ -162,7 +162,7 @@ export class FloatingDirective implements OnInit, OnDestroy {
 
   private updateHostElementPosition(): void {
     this.config = {
-      placement: this.placement ?? 'bottom-start',
+      placement: this.placement,
       middleware: this.getMiddlewareConfig(),
       strategy: 'absolute',
     } as ComputePositionConfig;
