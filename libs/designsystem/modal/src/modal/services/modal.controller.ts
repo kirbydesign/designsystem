@@ -4,14 +4,13 @@ import { Observable, Subject } from 'rxjs';
 import { filter, map, takeUntil } from 'rxjs/operators';
 
 import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
+import { AlertConfig } from '@kirbydesign/designsystem/alert';
 import { ModalRouteActivation, Overlay } from '../../modal.interfaces';
 import { ActionSheetConfig } from '../action-sheet/config/action-sheet-config';
-import { AlertConfig } from '../alert/config/alert-config';
 
 import { ModalNavigationService } from '../../modal-navigation.service';
 import { ModalConfig } from '../../modal-wrapper';
 import { ActionSheetHelper } from './action-sheet.helper';
-import { AlertHelper } from './alert.helper';
 import { ModalHelper } from './modal.helper';
 
 @Injectable()
@@ -23,7 +22,6 @@ export class ModalController implements OnDestroy {
   constructor(
     private modalHelper: ModalHelper,
     private actionSheetHelper: ActionSheetHelper,
-    private alertHelper: AlertHelper,
     private modalNavigationService: ModalNavigationService,
     @Optional() @Inject(ROUTES) private routeConfig: Routes[]
   ) {}
@@ -119,10 +117,6 @@ export class ModalController implements OnDestroy {
       () => this.actionSheetHelper.showActionSheet(config),
       onClose
     );
-  }
-
-  public async showAlert(config: AlertConfig, onClose?: (result: boolean) => void): Promise<void> {
-    await this.showAndRegisterOverlay(() => this.alertHelper.showAlert(config), onClose);
   }
 
   private async showAndRegisterOverlay(
