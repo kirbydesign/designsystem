@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
+import { InputSize } from '@kirbydesign/designsystem';
 import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
 import { ApiDescriptionMethod } from '~/app/shared/api-description/api-description-methods/api-description-methods.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
-
-import { InputSize } from '@kirbydesign/designsystem';
 
 @Component({
   selector: 'cookbook-form-field-showcase',

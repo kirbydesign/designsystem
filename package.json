@@ -44,6 +44,7 @@
     "test:core": "stencil test --config=./libs/core/stencil.config.ts --spec --watchAll",
     "test:core:single": "stencil test --config=./libs/core/stencil.config.ts --spec",
     "lint": "npm run lint:cookbook && npm run lint:designsystem && npm run lint:flows",
+    "lint:fix": "npm run lint:cookbook:ts:fix && npm run lint:cookbook:css:fix && npm run lint:designsystem:ts:fix && npm run lint:designsystem:css:fix && npm run lint:flows:ts:fix && npm run lint:flows:css:fix",
     "lint:cookbook": "npm run lint:cookbook:ts && npm run lint:cookbook:css",
     "lint:cookbook:ts": "eslint './apps/cookbook/src/**/*.ts'",
     "lint:cookbook:ts:fix": "npm run lint:cookbook:ts -- --fix",
