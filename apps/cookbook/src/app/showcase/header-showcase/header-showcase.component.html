@@ -17,22 +17,6 @@
   </div>
 
   <div class="header-example-container">
-    <h2>Avatar</h2>
-    <p>
-      A header can be used together with a Avatar. You simply add a
-      <code>kirby-avatar</code>
-      in the header and add the
-      <code>*kirbyHeaderAvatar</code>
-      directive to it and that should position the avatar correctly and manage spacing.
-    </p>
-    <cookbook-example-viewer [html]="avatarExample.template">
-      <div class="header-example">
-        <cookbook-header-example-avatar #avatarExample></cookbook-header-example-avatar>
-      </div>
-    </cookbook-example-viewer>
-  </div>
-
-  <div class="header-example-container">
     <h2>Flag</h2>
     <p>
       A flag can be used to indicate a status. To use flag you simply add
@@ -49,7 +33,7 @@
   </div>
 
   <div class="header-example-container">
-    <h2>Value</h2>
+    <h2>Key-value</h2>
     <p>
       In some cases a number is the primary information on a page. When that's the case you should
       use value adjust the header accordingly. To use value you simply add
@@ -78,6 +62,22 @@
     <cookbook-example-viewer [html]="actionsExample.template">
       <div class="header-example">
         <cookbook-header-example-actions #actionsExample></cookbook-header-example-actions>
+      </div>
+    </cookbook-example-viewer>
+  </div>
+
+  <div class="header-example-container">
+    <h2>Avatar</h2>
+    <p>
+      A header can be used together with a Avatar. You simply add a
+      <code>kirby-avatar</code>
+      in the header and add the
+      <code>*kirbyHeaderAvatar</code>
+      directive to it and that should position the avatar correctly and manage spacing.
+    </p>
+    <cookbook-example-viewer [html]="avatarExample.template">
+      <div class="header-example">
+        <cookbook-header-example-avatar #avatarExample></cookbook-header-example-avatar>
       </div>
     </cookbook-example-viewer>
   </div>

@@ -8,9 +8,7 @@
     </div>
     <h1
       *ngIf="!!titleTemplate && !!valueTemplate"
-      class="title"
-      class="title"
-      [ngClass]="{ 'kirby-text-medium': !!valueTemplate }"
+      class="key kirby-text-medium"
       [kirbyFitHeading]="fitHeadingConfig"
     >
       <ng-container [ngTemplateOutlet]="titleTemplate.templateRef"></ng-container>
