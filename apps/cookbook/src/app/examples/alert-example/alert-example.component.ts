@@ -13,6 +13,20 @@ const alertConfigWithIcon = {
   icon: { name: 'warning', themeColor: 'warning' },
 };
 
+export const observableCodeSnippet = `showAlert() {
+  const alert = this.alertController.showAlert(config);
+
+  alert?.onWillDismiss.subscribe((response) => {
+    const { role, data } = response;
+    ...
+  });
+
+  alert?.onDidDismiss.subscribe((response) => {
+    const { role, data } = response;
+    ...
+  });
+}`;
+
 @Component({
   selector: 'cookbook-alert-example',
   templateUrl: './alert-example.component.html',
