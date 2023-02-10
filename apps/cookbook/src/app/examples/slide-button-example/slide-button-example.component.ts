@@ -16,8 +16,12 @@ export class SlideButtonExampleComponent {
       okBtn: 'Ok',
       cancelBtn: 'Cancel',
     };
-    // this.modalController.showAlert(config, this.onAlertClosed); Need to do subscription logic here
-    this.alertController.showAlert(config);
+
+    const alert = this.alertController.showAlert(config);
+
+    alert.onDidDismiss.subscribe((result) => {
+      this.onAlertClosed(result.data);
+    });
   }
 
   private onAlertClosed(selection: boolean) {

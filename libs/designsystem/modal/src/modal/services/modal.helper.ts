@@ -4,6 +4,7 @@ import { WindowRef } from '@kirbydesign/designsystem/types';
 
 import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 import { AlertConfig, AlertController } from '@kirbydesign/designsystem/alert';
+import { firstValueFrom } from 'rxjs';
 import { Overlay } from '../../modal.interfaces';
 
 import {
@@ -115,8 +116,8 @@ export class ModalHelper {
   }
 
   public async showAlert(config: AlertConfig): Promise<boolean> {
-    const alert = await this.alertController.showAlert(config);
-    const result = await alert.onWillDismiss;
+    const alert = this.alertController.showAlert(config);
+    const result = await firstValueFrom(alert.onWillDismiss);
     return result.data;
   }
 

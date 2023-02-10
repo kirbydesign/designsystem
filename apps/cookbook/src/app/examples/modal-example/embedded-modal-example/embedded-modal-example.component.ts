@@ -108,8 +108,12 @@ export class EmbeddedModalExampleComponent implements OnInit {
       okBtn: 'I agree',
       cancelBtn: 'Take me back',
     };
-    // this.modalController.showAlert(config, this.onAlertClose); Need to do subscription logic here
-    this.alertController.showAlert(config);
+
+    const alert = this.alertController.showAlert(config);
+
+    alert.onDidDismiss.subscribe((result) => {
+      this.onAlertClose(result.data);
+    });
   }
 
   showNestedActionSheet() {
