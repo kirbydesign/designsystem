@@ -59,13 +59,20 @@ this.alertController.showAlert(config);`;
       okBtn: 'I agree',
       cancelBtn: 'Take me back',
     };
-    // this.alertController.showAlert(config, this.onAlertClosed.bind(this)); Need to do subscription logic here
-    this.alertController.showAlert(config);
+
+    const alert = this.alertController.showAlert(config);
+
+    alert.onDidDismiss.subscribe((result) => {
+      this.onAlertClosed(result.data);
+    });
   }
 
   showAlertWithIcon() {
-    // this.alertController.showAlert(alertConfigWithIcon, this.onAlertClosed.bind(this)); Need to do subscription logic here
-    this.alertController.showAlert(alertConfigWithIcon);
+    const alert = this.alertController.showAlert(alertConfigWithIcon);
+
+    alert.onDidDismiss.subscribe((result) => {
+      this.onAlertClosed(result.data);
+    });
   }
 
   showAlertWithoutCancel() {
@@ -74,8 +81,12 @@ this.alertController.showAlert(config);`;
       message: 'This is an alert that can only be acknowledged (no cancel option)',
       okBtn: 'I understand',
     };
-    // this.alertController.showAlert(config, this.onAlertClosed.bind(this)); Need to do subscription logic here
-    this.alertController.showAlert(config);
+
+    const alert = this.alertController.showAlert(config);
+
+    alert.onDidDismiss.subscribe((result) => {
+      this.onAlertClosed(result.data);
+    });
   }
 
   showDestructiveAlert() {
@@ -86,8 +97,12 @@ this.alertController.showAlert(config);`;
       cancelBtn: 'Get me out of here',
       okBtn: { text: 'Confirm', isDestructive: true },
     };
-    // this.alertController.showAlert(config, this.onAlertDestructiveClosed.bind(this)); Need to do subscription logic here
-    this.alertController.showAlert(config);
+
+    const alert = this.alertController.showAlert(config);
+
+    alert.onDidDismiss.subscribe((result) => {
+      this.onAlertDestructiveClosed(result.data);
+    });
   }
 
   showAlertWithNewline() {
@@ -97,8 +112,12 @@ this.alertController.showAlert(config);`;
       okBtn: 'I agree',
       cancelBtn: 'Take me back',
     };
-    // this.alertController.showAlert(config, this.onAlertClosed.bind(this)); Need to do subscription logic here
-    this.alertController.showAlert(config);
+
+    const alert = this.alertController.showAlert(config);
+
+    alert.onDidDismiss.subscribe((result) => {
+      this.onAlertClosed(result.data);
+    });
   }
 
   showAlertWithDynamicValues() {
@@ -128,8 +147,12 @@ this.alertController.showAlert(config);`;
       okBtn: 'Logout',
       cancelBtn: 'Take me back',
     };
-    // this.alertController.showAlert(config, this.onAlertClosed.bind(this)); Need to do subscription logic here
-    this.alertController.showAlert(config);
+
+    const alert = this.alertController.showAlert(config);
+
+    alert.onDidDismiss.subscribe((result) => {
+      this.onAlertClosed(result.data);
+    });
   }
 
   private onAlertClosed(result?: boolean) {
