@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { of, Subject, timer } from 'rxjs';
 import { map, takeUntil, takeWhile } from 'rxjs/operators';
 
-import { ModalController } from '@kirbydesign/designsystem';
-import { AlertConfig } from '@kirbydesign/designsystem';
+import { AlertConfig, AlertController } from '@kirbydesign/designsystem/alert';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
 
 const alertConfigWithIcon = {
@@ -24,7 +23,7 @@ export class AlertExampleComponent {
     alertConfigWithIcon
   )}
   
-this.modalController.showAlert(config);`;
+this.alertController.showAlert(config);`;
 
   private static stringify(value: any): string {
     return JSON.stringify(value, null, '\t')
@@ -50,8 +49,8 @@ this.modalController.showAlert(config);`;
     cancelBtn: 'Take me back',
   };
   
-  this.modalController.showAlert(config);`;
-  constructor(private modalController: ModalController, private toastController: ToastController) {}
+  this.alertController.showAlert(config);`;
+  constructor(private alertController: AlertController, private toastController: ToastController) {}
 
   showAlert() {
     const config: AlertConfig = {
@@ -60,11 +59,13 @@ this.modalController.showAlert(config);`;
       okBtn: 'I agree',
       cancelBtn: 'Take me back',
     };
-    this.modalController.showAlert(config, this.onAlertClosed.bind(this));
+    // this.alertController.showAlert(config, this.onAlertClosed.bind(this)); Need to do subscription logic here
+    this.alertController.showAlert(config);
   }
 
   showAlertWithIcon() {
-    this.modalController.showAlert(alertConfigWithIcon, this.onAlertClosed.bind(this));
+    // this.alertController.showAlert(alertConfigWithIcon, this.onAlertClosed.bind(this)); Need to do subscription logic here
+    this.alertController.showAlert(alertConfigWithIcon);
   }
 
   showAlertWithoutCancel() {
@@ -73,7 +74,8 @@ this.modalController.showAlert(config);`;
       message: 'This is an alert that can only be acknowledged (no cancel option)',
       okBtn: 'I understand',
     };
-    this.modalController.showAlert(config, this.onAlertClosed.bind(this));
+    // this.alertController.showAlert(config, this.onAlertClosed.bind(this)); Need to do subscription logic here
+    this.alertController.showAlert(config);
   }
 
   showDestructiveAlert() {
@@ -84,7 +86,8 @@ this.modalController.showAlert(config);`;
       cancelBtn: 'Get me out of here',
       okBtn: { text: 'Confirm', isDestructive: true },
     };
-    this.modalController.showAlert(config, this.onAlertDestructiveClosed.bind(this));
+    // this.alertController.showAlert(config, this.onAlertDestructiveClosed.bind(this)); Need to do subscription logic here
+    this.alertController.showAlert(config);
   }
 
   showAlertWithNewline() {
@@ -94,7 +97,8 @@ this.modalController.showAlert(config);`;
       okBtn: 'I agree',
       cancelBtn: 'Take me back',
     };
-    this.modalController.showAlert(config, this.onAlertClosed.bind(this));
+    // this.alertController.showAlert(config, this.onAlertClosed.bind(this)); Need to do subscription logic here
+    this.alertController.showAlert(config);
   }
 
   showAlertWithDynamicValues() {
@@ -124,7 +128,8 @@ this.modalController.showAlert(config);`;
       okBtn: 'Logout',
       cancelBtn: 'Take me back',
     };
-    this.modalController.showAlert(config, this.onAlertClosed.bind(this));
+    // this.alertController.showAlert(config, this.onAlertClosed.bind(this)); Need to do subscription logic here
+    this.alertController.showAlert(config);
   }
 
   private onAlertClosed(result?: boolean) {
