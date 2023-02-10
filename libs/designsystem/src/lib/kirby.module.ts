@@ -48,11 +48,10 @@ import { RouterOutletModule } from '@kirbydesign/designsystem/router-outlet';
 import { ItemGroupComponent } from '@kirbydesign/designsystem/item-group';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { CalendarComponent } from '@kirbydesign/designsystem/calendar';
+import { AlertComponent, AlertController } from '@kirbydesign/designsystem/alert';
 import {
   ActionSheetComponent,
   ActionSheetHelper,
-  AlertComponent,
-  AlertHelper,
   ModalCompactWrapperComponent,
   ModalController,
   ModalFooterComponent,
@@ -146,7 +145,7 @@ const providers = [
   ModalController,
   ActionSheetHelper,
   ModalHelper,
-  AlertHelper,
+  AlertController,
   ToastHelper,
   ToastController,
   BreakpointHelperService,

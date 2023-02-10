@@ -3,8 +3,8 @@ import { ModalController } from '@ionic/angular';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 
 import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
+import { AlertConfig, AlertController } from '@kirbydesign/designsystem/alert';
 import { Overlay } from '../../modal.interfaces';
-import { AlertConfig } from '../alert/config/alert-config';
 
 import {
   ModalCompactWrapperComponent,
@@ -12,7 +12,6 @@ import {
   ModalSize,
   ModalWrapperComponent,
 } from '../../modal-wrapper';
-import { AlertHelper } from './alert.helper';
 
 import { ModalAnimationBuilderService } from './modal-animation-builder.service';
 
@@ -22,7 +21,7 @@ export class ModalHelper {
     private ionicModalController: ModalController,
     private modalAnimationBuilder: ModalAnimationBuilderService,
     private windowRef: WindowRef,
-    private alertHelper: AlertHelper
+    private alertController: AlertController
   ) {}
 
   /* 
@@ -116,7 +115,7 @@ export class ModalHelper {
   }
 
   public async showAlert(config: AlertConfig): Promise<boolean> {
-    const alert = await this.alertHelper.showAlert(config);
+    const alert = await this.alertController.showAlert(config);
     const result = await alert.onWillDismiss;
     return result.data;
   }
