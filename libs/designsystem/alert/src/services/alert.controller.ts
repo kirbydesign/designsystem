@@ -1,27 +1,51 @@
 import { Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-
+import { from, Observable, Subject, switchMap, tap } from 'rxjs';
+import { OverlayEventDetail } from '@ionic/core/components';
 import { AlertComponent } from '../alert.component';
 import { AlertConfig } from '../config/alert-config';
 
+type AlertDismissObservables = {
+  onWillDismiss: Observable<OverlayEventDetail>;
+  onDidDismiss: Observable<OverlayEventDetail>;
+};
 @Injectable()
 export class AlertController {
   constructor(private ionicModalController: ModalController) {}
 
-  public async showAlert(config: AlertConfig) {
-    const ionModal = await this.ionicModalController.create({
-      component: AlertComponent,
-      componentProps: this.getComponentProps(config),
-      cssClass: ['kirby-overlay', 'kirby-alert'],
-      mode: 'ios',
-      backdropDismiss: false,
-    });
+  public showAlert(config: AlertConfig): AlertDismissObservables {
+    const $onWillDismiss = new Subject<OverlayEventDetail>();
+    const onWillDismiss$ = $onWillDismiss.asObservable();
 
-    await ionModal.present();
+    const $onDidDismiss = new Subject<OverlayEventDetail>();
+    const onDidDismiss$ = $onDidDismiss.asObservable();
+
+    const modal$ = from(
+      this.ionicModalController.create({
+        component: AlertComponent,
+        componentProps: this.getComponentProps(config),
+        cssClass: ['kirby-overlay', 'kirby-alert'],
+        mode: 'ios',
+        backdropDismiss: false,
+      })
+    );
+
+    modal$
+      .pipe(
+        tap((modal) => from(modal.present())),
+        switchMap((modal) => modal.onWillDismiss())
+      )
+      .subscribe((res) => {
+        $onWillDismiss.next(res);
+        $onWillDismiss.complete();
+
+        $onDidDismiss.next(res);
+        $onDidDismiss.complete();
+      });
+
     return {
-      dismiss: ionModal.dismiss.bind(ionModal),
-      onWillDismiss: ionModal.onWillDismiss(),
-      onDidDismiss: ionModal.onDidDismiss(),
+      onWillDismiss: onWillDismiss$,
+      onDidDismiss: onDidDismiss$,
     };
   }
 
