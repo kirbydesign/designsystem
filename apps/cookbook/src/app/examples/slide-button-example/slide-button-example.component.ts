@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 
-import { AlertConfig, ModalController } from '@kirbydesign/designsystem';
+import { AlertConfig, AlertController } from '@kirbydesign/designsystem/alert';
 
 @Component({
   selector: 'cookbook-slide-button-example',
   templateUrl: './slide-button-example.component.html',
 })
 export class SlideButtonExampleComponent {
-  constructor(private modalController: ModalController) {}
+  constructor(private alertController: AlertController) {}
 
   showAlert() {
     const config: AlertConfig = {
@@ -16,7 +16,8 @@ export class SlideButtonExampleComponent {
       okBtn: 'Ok',
       cancelBtn: 'Cancel',
     };
-    this.modalController.showAlert(config, this.onAlertClosed);
+    // this.modalController.showAlert(config, this.onAlertClosed); Need to do subscription logic here
+    this.alertController.showAlert(config);
   }
 
   private onAlertClosed(selection: boolean) {

@@ -4,6 +4,7 @@ import { ActionSheetConfig, AlertConfig, ModalController } from '@kirbydesign/de
 import { COMPONENT_PROPS, Modal, ModalConfig } from '@kirbydesign/designsystem';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
 import { KirbyAnimation } from '@kirbydesign/designsystem';
+import { AlertController } from '@kirbydesign/designsystem/alert';
 
 @Component({
   selector: 'cookbook-embedded-modal-example',
@@ -47,6 +48,7 @@ export class EmbeddedModalExampleComponent implements OnInit {
     @Inject(COMPONENT_PROPS) componentProps,
     private modalController: ModalController,
     private toastController: ToastController,
+    private alertController: AlertController,
     @Optional() @SkipSelf() private modal: Modal
   ) {
     Object.assign(this, componentProps);
@@ -106,7 +108,8 @@ export class EmbeddedModalExampleComponent implements OnInit {
       okBtn: 'I agree',
       cancelBtn: 'Take me back',
     };
-    this.modalController.showAlert(config, this.onAlertClose);
+    // this.modalController.showAlert(config, this.onAlertClose); Need to do subscription logic here
+    this.alertController.showAlert(config);
   }
 
   showNestedActionSheet() {
