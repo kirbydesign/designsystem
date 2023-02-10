@@ -1,10 +1,10 @@
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 import { EMPTY, firstValueFrom, Subject } from 'rxjs';
+import { AlertController } from '@kirbydesign/designsystem/alert';
 import { ModalNavigationService } from '../../modal-navigation.service';
 
 import { Overlay, OverlayEventDetail } from '../../modal.interfaces';
 import { ActionSheetHelper } from './action-sheet.helper';
-import { AlertHelper } from './alert.helper';
 import { ModalController } from './modal.controller';
 import { ModalHelper } from './modal.helper';
 describe('ModalController', () => {
@@ -13,12 +13,12 @@ describe('ModalController', () => {
 
   const createService = createServiceFactory({
     service: ModalController,
-    mocks: [ActionSheetHelper, AlertHelper, ModalHelper, ModalNavigationService],
+    mocks: [ActionSheetHelper, AlertController, ModalHelper, ModalNavigationService],
   });
 
   let modalHelperSpy: jasmine.SpyObj<ModalHelper>;
   let actionSheetHelperSpy: jasmine.SpyObj<ActionSheetHelper>;
-  let alertHelperSpy: jasmine.SpyObj<AlertHelper>;
+  let alertControllerSpy: jasmine.SpyObj<AlertController>;
   let modalNavigationServiceSpy: jasmine.SpyObj<ModalNavigationService>;
 
   const expectedError = 'No modal overlays are currently registered';
@@ -29,7 +29,7 @@ describe('ModalController', () => {
     modalController = spectator.service;
     modalHelperSpy = spectator.inject(ModalHelper);
     actionSheetHelperSpy = spectator.inject(ActionSheetHelper);
-    alertHelperSpy = spectator.inject(AlertHelper);
+    alertControllerSpy = spectator.inject(AlertController);
     modalNavigationServiceSpy = spectator.inject(ModalNavigationService);
     modalNavigationServiceSpy.getModalNavigation.and.resolveTo({
       activated$: EMPTY,
@@ -170,40 +170,6 @@ describe('ModalController', () => {
 
     it('should call close() on the returned overlay when closed', async () => {
       await modalController.showActionSheet({ items: [] });
-      await modalController.hideTopmost();
-      expect(overlaySpy.dismiss).toHaveBeenCalled();
-    });
-  });
-
-  describe('showAlert', () => {
-    let overlaySpy: jasmine.SpyObj<Overlay>;
-    beforeEach(() => {
-      overlaySpy = jasmine.createSpyObj('overlay', ['dismiss']);
-      const onDidDismiss$ = new Subject<OverlayEventDetail>();
-      overlaySpy.onDidDismiss = firstValueFrom(onDidDismiss$);
-      overlaySpy.dismiss.and.callFake((data: any) => {
-        onDidDismiss$.next({ data: data });
-        onDidDismiss$.complete();
-        return Promise.resolve(true);
-      });
-      alertHelperSpy.showAlert.and.resolveTo(overlaySpy);
-    });
-
-    it('should invoke the registered callback when closed', async () => {
-      await modalController.showAlert({ title: 'Alert' }, callbackSpy);
-      await modalController.hideTopmost();
-      expect(callbackSpy).toHaveBeenCalled();
-    });
-
-    it('should invoke the registered callback with data when closed', async () => {
-      const expectedValue = 'Returned Data 123';
-      await modalController.showAlert({ title: 'Alert' }, callbackSpy);
-      await modalController.hideTopmost(expectedValue);
-      expect(callbackSpy).toHaveBeenCalledWith(expectedValue);
-    });
-
-    it('should call close() on the returned overlay when closed', async () => {
-      await modalController.showAlert({ title: 'Alert' });
       await modalController.hideTopmost();
       expect(overlaySpy.dismiss).toHaveBeenCalled();
     });
