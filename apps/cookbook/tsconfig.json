@@ -55,7 +55,9 @@
       "@kirbydesign/designsystem/chart": ["libs/designsystem/chart/index.ts"],
       "@kirbydesign/designsystem/fab-sheet": ["libs/designsystem/fab-sheet/index.ts"],
       "@kirbydesign/designsystem/data-table": ["libs/designsystem/data-table/index.ts"],
-      "@kirbydesign/designsystem/reorder-list": ["libs/designsystem/reorder-list/index.ts"]
+      "@kirbydesign/designsystem/reorder-list": ["libs/designsystem/reorder-list/index.ts"],
+      "@kirbydesign/designsystem/toast": ["libs/designsystem/toast/index.ts"],
+      "@kirbydesign/designsystem/grid": ["libs/designsystem/grid/index.ts"], 
     },
     "target": "es2020"
   },

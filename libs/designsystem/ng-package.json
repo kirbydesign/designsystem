@@ -9,13 +9,6 @@
     "@fontsource/roboto",
     "@ionic/angular",
     "@kirbydesign/core",
-    "chart.js",
-    "chartjs-adapter-date-fns",
-    "chartjs-plugin-annotation",
-    "chartjs-plugin-datalabels",
-    "date-fns-tz",
-    "date-fns",
-    "include-media",
     "inputmask"
   ]
 }
