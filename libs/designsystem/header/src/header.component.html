@@ -16,16 +16,14 @@
       <ng-container [ngTemplateOutlet]="titleTemplate.templateRef"></ng-container>
     </h1>
   </div>
-  <div class="main-row">
+  <div class="main">
     <ng-container *ngIf="isDesktop && !!actionsTemplate && centered">
       <div class="main-col"></div>
     </ng-container>
-    <div class="main" [ngClass]="{ centered: centered }">
+    <div class="main-inner" [ngClass]="{ centered: centered }">
       <h1
         *ngIf="!!titleTemplate && !valueTemplate"
         class="title"
-        class="title"
-        [ngClass]="{ 'kirby-text-medium': !!valueTemplate }"
         [kirbyFitHeading]="fitHeadingConfig"
       >
         <ng-container [ngTemplateOutlet]="titleTemplate.templateRef"></ng-container>
@@ -53,9 +51,7 @@
       <ng-container [ngTemplateOutlet]="customSectionTemplate.templateRef"></ng-container>
     </div>
   </div>
-  <div *ngIf="!!actionsTemplate && !isDesktop" class="main-col">
-    <div class="actions" [ngClass]="{ centered: centered }">
-      <ng-container [ngTemplateOutlet]="actionsTemplate.templateRef"></ng-container>
-    </div>
+  <div *ngIf="!!actionsTemplate && !isDesktop" class="actions" [ngClass]="{ centered: centered }">
+    <ng-container [ngTemplateOutlet]="actionsTemplate.templateRef"></ng-container>
   </div>
 </div>
