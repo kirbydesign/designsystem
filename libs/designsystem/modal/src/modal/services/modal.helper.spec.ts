@@ -10,13 +10,13 @@ import { TestHelper } from '@kirbydesign/designsystem/testing';
 
 import { PageProgressComponent, PageTitleComponent } from '@kirbydesign/designsystem/page';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { AlertConfig, AlertController } from '@kirbydesign/designsystem/alert';
 import { Modal, Overlay } from '../../modal.interfaces';
-import { AlertConfig } from '../alert/config/alert-config';
+
 import { ModalFooterComponent } from '../footer/modal-footer.component';
 import { ModalCompactWrapperComponent, ModalConfig, ModalSize } from '../../modal-wrapper';
 import { ModalNavigationService } from '../../modal-navigation.service';
 import { ModalHelper } from './modal.helper';
-import { AlertHelper } from './alert.helper';
 
 @Component({
   template: `
@@ -103,7 +103,7 @@ describe('ModalHelper', () => {
       ContentOverflowsWithFooterEmbeddedComponent,
       ContentWithNoOverflowEmbeddedComponent,
     ],
-    mocks: [ModalNavigationService, AlertHelper],
+    mocks: [ModalNavigationService, AlertController],
   });
 
   beforeAll(() => {
