@@ -2,24 +2,24 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
-import { AlertComponent } from './alert.component';
+import { AlertExperimentalComponent } from './alert.component';
 
 const getColor = DesignTokenHelper.getColor;
 
-describe('AlertComponent', () => {
-  let spectator: SpectatorHost<AlertComponent>;
+describe('AlertExperimentalComponent', () => {
+  let spectator: SpectatorHost<AlertExperimentalComponent>;
 
   const createHost = createHostFactory({
-    component: AlertComponent,
+    component: AlertExperimentalComponent,
   });
 
   beforeEach(() => {
     spectator = createHost(`
-      <kirby-alert 
+      <kirby-alert-experimental 
         okBtn="Test OK Button Text"
         cancelBtn="Test Cancel Button Text"
       >
-      </kirby-alert>
+      </kirby-alert-experimental>
     `);
   });
 

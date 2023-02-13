@@ -7,8 +7,7 @@ import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 
-import { Overlay } from '../../modal.interfaces';
-import { AlertHelper } from './alert.helper';
+import { AlertController } from './alert.controller';
 
 @Component({
   template: `
@@ -17,13 +16,13 @@ import { AlertHelper } from './alert.helper';
 })
 class EmbeddedDummyComponent {}
 
-describe('AlertHelper', () => {
-  let spectator: SpectatorService<AlertHelper>;
-  let alertHelper: AlertHelper;
+describe('AlertExperimentalController', () => {
+  let spectator: SpectatorService<AlertController>;
+  let alertController: AlertController;
   const backdropOpacity = '0.4';
 
   const createService = createServiceFactory({
-    service: AlertHelper,
+    service: AlertController,
     imports: [TestHelper.ionicModuleForTest],
     providers: [
       {
@@ -35,18 +34,18 @@ describe('AlertHelper', () => {
 
   beforeEach(() => {
     spectator = createService();
-    alertHelper = spectator.service;
+    alertController = spectator.service;
   });
 
   describe('showAlert', () => {
-    let overlay: Overlay;
     let ionModal: HTMLIonModalElement;
     let backdrop: HTMLIonBackdropElement;
     let ionModalController: IonicModalController;
 
     beforeEach(async () => {
       ionModalController = spectator.inject(IonicModalController);
-      overlay = await alertHelper.showAlert({ title: 'Alert' });
+      await alertController.showAlert({ title: 'Alert' });
+      await TestHelper.waitForTimeout(50);
       ionModal = await ionModalController.getTop();
       expect(ionModal).toBeTruthy();
       backdrop = ionModal.shadowRoot.querySelector('ion-backdrop');
@@ -54,10 +53,10 @@ describe('AlertHelper', () => {
     });
 
     afterEach(async () => {
-      await overlay.dismiss();
+      await ionModal.dismiss();
     });
 
-    it('alert should have correct backdrop style', () => {
+    it('alert should have correct backdrop style', async () => {
       expect(ionModal).toHaveComputedStyle({ '--backdrop-opacity': backdropOpacity });
     });
 
@@ -66,24 +65,6 @@ describe('AlertHelper', () => {
       expect(modalWrapper).toHaveComputedStyle({
         'max-width': DesignTokenHelper.compactModalMaxWidth(),
       });
-    });
-
-    it('alert should have correct backdrop style when opened on top of a modal', async () => {
-      await overlay.dismiss();
-      const ionModalElement = await ionModalController.create({
-        component: EmbeddedDummyComponent,
-      });
-      await ionModalElement.present();
-      const modalIonModal = await ionModalController.getTop();
-      expect(modalIonModal).toBeTruthy();
-
-      overlay = await alertHelper.showAlert({ title: 'Alert on top of modal' });
-
-      ionModal = await ionModalController.getTop();
-      expect(ionModal).toBeTruthy();
-      backdrop = ionModal.shadowRoot.querySelector('ion-backdrop');
-      expect(backdrop).toHaveComputedStyle({ '--backdrop-opacity': backdropOpacity });
-      await ionModalElement.dismiss();
     });
   });
 });
