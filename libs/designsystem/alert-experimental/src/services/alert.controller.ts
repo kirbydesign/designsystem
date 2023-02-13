@@ -3,7 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { from, Observable, Subject, switchMap, tap } from 'rxjs';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { AlertExperimentalComponent } from '../alert.component';
-import { AlertConfig } from '../config/alert-config';
+import { AlertExperimentalConfig } from '../config/alert-config';
 
 type AlertDismissObservables = {
   onWillDismiss: Observable<OverlayEventDetail>;
@@ -14,7 +14,7 @@ type AlertDismissObservables = {
 export class AlertExperimentalController {
   constructor(private ionicModalController: ModalController) {}
 
-  public showAlert(config: AlertConfig): AlertDismissObservables {
+  public showAlert(config: AlertExperimentalConfig): AlertDismissObservables {
     const $onWillDismiss = new Subject<OverlayEventDetail>();
     const onWillDismiss$ = $onWillDismiss.asObservable();
 
@@ -50,7 +50,7 @@ export class AlertExperimentalController {
     };
   }
 
-  private getComponentProps(config: AlertConfig) {
+  private getComponentProps(config: AlertExperimentalConfig) {
     return {
       ...config,
       okBtn: this.getOkBtn(config),
@@ -61,7 +61,7 @@ export class AlertExperimentalController {
     };
   }
 
-  private getOkBtn(config: AlertConfig) {
+  private getOkBtn(config: AlertExperimentalConfig) {
     let text: string;
 
     if (config.okBtn) {
