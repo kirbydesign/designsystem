@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 
-export interface AlertConfig {
+export interface AlertExperimentalConfig {
   title: string | Observable<string>;
   message?: string | Observable<string>;
   cancelBtn?: string;
