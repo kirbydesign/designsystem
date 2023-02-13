@@ -1,0 +1,29 @@
+<article #alertWrapper>
+  <kirby-empty-state
+    [iconName]="iconName"
+    [themeColor]="iconThemeColor"
+    [title]="title$ | async"
+    [subtitle]="message$ | async"
+  ></kirby-empty-state>
+  <div class="buttongroup">
+    <button
+      kirby-button
+      *ngIf="cancelBtn"
+      attentionLevel="3"
+      class="cancel-btn"
+      (click)="onCancel()"
+    >
+      {{ cancelBtn }}
+    </button>
+    <button
+      kirby-button
+      [size]="cancelBtn ? null : 'lg'"
+      attentionLevel="1"
+      class="ok-btn"
+      [class.destructive]="okBtnIsDestructive"
+      (click)="onOk()"
+    >
+      {{ okBtn }}
+    </button>
+  </div>
+</article>
