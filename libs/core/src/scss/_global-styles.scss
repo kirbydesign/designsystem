@@ -220,22 +220,6 @@ ion-loading.kirby-loading-overlay {
 }
 
 /*
- * Class to add link-icon to the right of e.g. anchor tag.
- */
-.kirby-external-icon {
-  $icon-scaling-factor: 1.5em;
-
-  white-space: nowrap;
-  background-image: url('/assets/kirby/icons/svg/link.svg');
-  background-repeat: no-repeat;
-  background-position: right 50%;
-  background-size: $icon-scaling-factor;
-
-  // Place icon to the right of text, with icons own width + the actual spacing
-  padding-right: calc(#{$icon-scaling-factor} + #{utils.size('xxxs')});
-}
-
-/*
  * Modal V2.
  */
 $modal-max-height-desktop: 928px;
@@ -309,4 +293,11 @@ html.ios ion-modal.kirby-modal-v2 {
   .kirby-grid {
     display: flex;
   }
+}
+
+/* 
+  * Class to add link-icon to the right of e.g. anchor tag.
+  */
+.kirby-external-icon {
+  @include utils.trailing-icon;
 }
