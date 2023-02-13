@@ -206,18 +206,32 @@ ion-loading.kirby-loading-overlay {
   }
 }
 
-/*
- * Class to add link-icon to the right of e.g. anchor tag.
- */
-.kirby-external-icon {
+
+
+@mixin trailing-icon($svg: "link") {
   $icon-scaling-factor: 1.5em;
 
   white-space: nowrap;
-  background-image: url('/assets/kirby/icons/svg/link.svg');
+  background-image: url('/assets/kirby/icons/svg/' + $svg + '.svg');
   background-repeat: no-repeat;
   background-position: right 50%;
   background-size: $icon-scaling-factor;
 
   // Place icon to the right of text, with icons own width + the actual spacing
-  padding-right: calc(#{$icon-scaling-factor} + #{utils.size('xxxs')});
+  padding-right: calc(#{$icon-scaling-factor} + #{size('xxxs')});
 }
+
+/*
+ * Class to add link-icon to the right of e.g. anchor tag.
+ */
+.kirby-external-icon {
+  @include trailing-icon();
+}
+
+/*
+ * Class to add help-decorator-icon to the right of e.g. anchor tag. This is an example class with the purpose of demonstrating the usability.
+ */
+.kirby-help-decorator-icon {
+@include trailing-icon('help-decoration');
+}
+

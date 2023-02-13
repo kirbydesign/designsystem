@@ -49,3 +49,16 @@
   <b>Note:</b> In a non-web context, i.e. an app, any link will most likely launch the device's
   browser and effectively open a new tab outside the app context.
 </p>
+
+<h2>Custom trailing-icon</h2>
+<p>
+  If you want to use a custom icon at the end instead of the link then extend the mixin class trailing-icon with @include and the icon name of your choosing:</p>
+<p>
+  <code>@include trailing-icon(iconName)</code>
+  the class will now look for the icon in assets.
+  The class below is made with the "help-decorator" as input.
+</p>
+
+<cookbook-example-viewer [html]="trailingTab.template">
+  <cookbook-link-example-trailing-icon #trailingTab></cookbook-link-example-trailing-icon>
+</cookbook-example-viewer>
