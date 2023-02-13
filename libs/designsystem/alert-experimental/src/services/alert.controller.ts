@@ -11,7 +11,7 @@ type AlertDismissObservables = {
 };
 
 @Injectable()
-export class AlertController {
+export class AlertExperimentalController {
   constructor(private ionicModalController: ModalController) {}
 
   public showAlert(config: AlertConfig): AlertDismissObservables {

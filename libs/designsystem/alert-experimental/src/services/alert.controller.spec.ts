@@ -7,7 +7,7 @@ import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 
-import { AlertController } from './alert.controller';
+import { AlertExperimentalController } from './alert.controller';
 
 @Component({
   template: `
@@ -17,12 +17,12 @@ import { AlertController } from './alert.controller';
 class EmbeddedDummyComponent {}
 
 describe('AlertExperimentalController', () => {
-  let spectator: SpectatorService<AlertController>;
-  let alertController: AlertController;
+  let spectator: SpectatorService<AlertExperimentalController>;
+  let alertController: AlertExperimentalController;
   const backdropOpacity = '0.4';
 
   const createService = createServiceFactory({
-    service: AlertController,
+    service: AlertExperimentalController,
     imports: [TestHelper.ionicModuleForTest],
     providers: [
       {
