@@ -1,9 +1,12 @@
 @use '@kirbydesign/core/src/scss/utils';
+@use '@kirbydesign/core/src/scss/themes';
 
 $padding-horizontal: utils.size('s');
 $padding-vertical: utils.size('xxs');
 
 ion-footer {
+  @include themes.apply-white-theme;
+
   box-shadow: utils.get-elevation(4);
   display: flex;
   justify-content: var(--kirby-modal-footer-justify-content, center);
