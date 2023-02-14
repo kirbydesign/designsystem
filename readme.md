@@ -12,7 +12,7 @@
 
 ## About
 
-Kirby Design System is a UX Component library implementing the [Kirby Design Philosophy][kirby.design].
+KKKirby Design System is a UX Component library implementing the [Kirby Design Philosophy][kirby.design].
 
 Kirby Components are built on top of [Angular][angular] and can be used in Angular projects.
 
