@@ -237,22 +237,24 @@ ion-loading.kirby-loading-overlay {
  */
 
 ion-modal.kirby-modal-experimental {
-  &::part(content) {
-    margin: 15px;
-  }
+  @include utils.media('>=medium') {
+    &::part(content) {
+      margin: 15px;
+    }
 
-  &.small {
-    --width: #{map.get(utils.$experimental-modal-widths, 's')};
-    --height: #{map.get(utils.$experimental-modal-heights, 's')};
-  }
+    &.small {
+      --width: #{map.get(utils.$experimental-modal-widths, 's')};
+      --height: #{map.get(utils.$experimental-modal-heights, 's')};
+    }
 
-  &.medium {
-    --width: #{map.get(utils.$experimental-modal-widths, 'm')};
-    --height: #{map.get(utils.$experimental-modal-heights, 'm')};
-  }
+    &.medium {
+      --width: #{map.get(utils.$experimental-modal-widths, 'm')};
+      --height: #{map.get(utils.$experimental-modal-heights, 'm')};
+    }
 
-  &.large {
-    --width: #{map.get(utils.$experimental-modal-widths, 'l')};
-    --height: #{map.get(utils.$experimental-modal-heights, 'l')};
+    &.large {
+      --width: #{map.get(utils.$experimental-modal-widths, 'l')};
+      --height: #{map.get(utils.$experimental-modal-heights, 'l')};
+    }
   }
 }
