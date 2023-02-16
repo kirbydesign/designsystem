@@ -43,7 +43,7 @@
 }
 
 .flag {
-  margin-bottom: 2px;
+  margin-bottom: 4px;
 }
 
 .title {
@@ -81,9 +81,15 @@
   display: flex;
   justify-content: flex-start;
   flex-direction: row;
-  margin-top: 24px;
-  padding-left: 8px;
-  padding-right: 8px;
+
+  /* Compentsation for button margin -4px */
+  margin-top: 20px;
+
+  /* Compentsation for button margin -4px */
+  padding-left: 4px;
+
+  /* Compentsation for button margin  -4px */
+  padding-right: 4px;
 
   @media screen and (min-width: 768px) {
     justify-content: flex-end;
