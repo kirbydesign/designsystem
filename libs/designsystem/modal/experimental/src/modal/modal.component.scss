@@ -3,30 +3,11 @@
 
 // Global modal styling can be found at scss/base/_ionic.scss
 
-@mixin contain-content() {
-  padding-top: 0;
-  position: relative;
-  contain: inherit;
-  min-height: min(var(--min-height), calc(var(--vh100) - var(--kirby-modal-padding-top, 0px)));
-
-  ion-content {
-    contain: content;
-    max-height: calc(
-      var(--vh100) - var(--kirby-modal-padding-top, 0px) - var(--header-height) -
-        var(--footer-height)
-    );
-
-    &::part(scroll) {
-      height: '100%';
-      position: relative;
-    }
-  }
-}
-
 $toolbar-padding: utils.size('m');
 
 ion-header {
   box-sizing: border-box;
+  border-bottom: 1px solid utils.get-color('medium');
 
   ion-toolbar {
     --padding-start: #{$toolbar-padding};
@@ -49,14 +30,10 @@ ion-header {
   --footer-height: 0px;
 }
 
-:host-context(ion-modal) {
-  @include utils.media('>=medium') {
-    @include contain-content;
-  }
-}
-
 ion-modal {
   --background: var(--kirby-modal-background, #{utils.get-color('background-color')});
+  --max-height: 928px;
+  --min-height: 594px;
 }
 
 ion-title {
