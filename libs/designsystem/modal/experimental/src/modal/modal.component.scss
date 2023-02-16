@@ -23,24 +23,16 @@
   }
 }
 
-$toolbar-padding-inline: utils.size('s');
-$toolbar-padding-block: utils.size('xs');
-
-@mixin phablet-toolbar-padding() {
-  $toolbar-padding-top: utils.size('xxs');
-  @include utils.media('>=medium') {
-    padding-top: $toolbar-padding-top;
-  }
-}
+$toolbar-padding: utils.size('m');
 
 ion-header {
   box-sizing: border-box;
 
   ion-toolbar {
-    --padding-start: #{$toolbar-padding-inline};
-    --padding-end: #{$toolbar-padding-inline};
-    --padding-bottom: #{$toolbar-padding-block};
-    --padding-top: #{$toolbar-padding-block};
+    --padding-start: #{$toolbar-padding};
+    --padding-end: #{$toolbar-padding};
+    --padding-bottom: #{$toolbar-padding};
+    --padding-top: #{$toolbar-padding};
     --border-width: 0;
     --background: transparent;
     --color: var(--kirby-modal-color, #{utils.get-color('black')});
@@ -48,8 +40,6 @@ ion-header {
     button {
       color: var(--color);
     }
-
-    @include phablet-toolbar-padding;
   }
 }
 
@@ -73,7 +63,7 @@ ion-title {
   box-sizing: border-box;
   padding-inline-start: calc(48px + var(--padding-start));
   padding-inline-end: calc(48px + var(--padding-end));
-  font-size: utils.font-size('l');
+  font-size: utils.font-size('n');
   font-weight: utils.font-weight('bold');
 }
 
@@ -89,22 +79,11 @@ ion-content {
     display: block;
   }
 
-  --padding-top: #{utils.size('m')};
-  --padding-bottom: #{utils.size('m')};
-  --padding-start: #{utils.size('s')};
-  --padding-end: #{utils.size('s')};
+  --padding-start: #{utils.size('xxl')};
+  --padding-end: #{utils.size('xxl')};
 }
-
-// Ensure padding-rules are not merged with other media query,
-// as this rule has to come AFTER the default mobile-first rule in order to override:
 
 /* clean-css ignore:start */
-@include utils.media('>=medium') {
-  ion-content {
-    --padding-start: #{utils.size('xxxl')};
-    --padding-end: #{utils.size('xxxl')};
-  }
-}
 
 :host(.collapsible-title) {
   ion-content {
