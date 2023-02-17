@@ -1,5 +1,6 @@
 @use 'sass:map';
 @use '@kirbydesign/core/src/scss/utils';
+@use '@kirbydesign/core/src/scss/themes';
 
 // Global modal styling can be found at scss/base/_ionic.scss
 
@@ -8,6 +9,8 @@ $toolbar-mobile-padding-block: utils.size('xs');
 $toolbar-desktop-padding: utils.size('m');
 
 ion-header {
+  @include themes.apply-light-theme;
+
   box-sizing: border-box;
 
   ion-toolbar {
@@ -17,10 +20,9 @@ ion-header {
     --padding-top: #{$toolbar-mobile-padding-block};
     --border-width: 0;
     --background: transparent;
-    --color: var(--kirby-modal-color, #{utils.get-color('black')});
 
     button {
-      color: var(--color);
+      background-color: utils.get-color('white');
     }
   }
 
@@ -48,6 +50,10 @@ ion-modal {
   --background: var(--kirby-modal-background, #{utils.get-color('background-color')});
   --max-height: 928px;
   --min-height: 594px;
+
+  @include utils.media('>=medium') {
+    --border-radius: 32px;
+  }
 }
 
 ion-title {
@@ -79,6 +85,8 @@ ion-content {
   }
 
   @include utils.media('>=medium') {
+    --padding-top: #{utils.size('xl')};
+    --padding-bottom: #{utils.size('xl')};
     --padding-start: #{utils.size('xxl')};
     --padding-end: #{utils.size('xxl')};
   }
