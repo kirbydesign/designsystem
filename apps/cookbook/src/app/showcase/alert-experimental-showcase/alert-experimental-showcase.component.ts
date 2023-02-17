@@ -1,15 +1,20 @@
 import { Component } from '@angular/core';
-import { AlertExampleComponent } from '~/app/examples/alert-example/alert-example.component';
-import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
-
+import {
+  AlertExperimentalExampleComponent,
+  observableCodeSnippet,
+} from '../../examples/alert-experimental-example/alert-experimental-example.component';
+import { ApiDescriptionProperty } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 @Component({
   selector: 'cookbook-alert-showcase',
   templateUrl: './alert-experimental-showcase.component.html',
   preserveWhitespaces: true,
 })
 export class AlertExperimentalShowcaseComponent {
-  alertConfigWithIcon: string = AlertExampleComponent.alertConfigWithIcon;
-  alertConfigWithDynamicValues: string = AlertExampleComponent.alertConfigWithDynamicValues;
+  alertConfigWithIcon: string = AlertExperimentalExampleComponent.alertConfigWithIcon;
+  alertConfigWithDynamicValues: string =
+    AlertExperimentalExampleComponent.alertConfigWithDynamicValues;
+  observableCodeSnippet: string = observableCodeSnippet;
+
   properties: ApiDescriptionProperty[] = [
     {
       name: 'title',

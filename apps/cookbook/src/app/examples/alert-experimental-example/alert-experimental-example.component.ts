@@ -34,7 +34,7 @@ export const observableCodeSnippet = `showAlert() {
   styles: [':host { display: block; }'],
 })
 export class AlertExperimentalExampleComponent {
-  static readonly alertConfigWithIcon = `const config: AlertConfig = ${AlertExperimentalExampleComponent.stringify(
+  static readonly alertConfigWithIcon = `const config: AlertExperimentalConfig = ${AlertExperimentalExampleComponent.stringify(
     alertConfigWithIcon
   )}
   
@@ -52,7 +52,7 @@ this.alertController.showAlert(config);`;
   const message$ = remainingSeconds$.pipe(
     map((remainingSeconds) => \`Time remaining: \${remainingSeconds}\`)
   );
-  const config: AlertConfig = {
+  const config: AlertExperimentalConfig = {
     title: title$,
     icon: {
       name: 'clock',
