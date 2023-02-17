@@ -3,23 +3,37 @@
 
 // Global modal styling can be found at scss/base/_ionic.scss
 
-$toolbar-padding: utils.size('m');
+$toolbar-mobile-padding-inline: utils.size('s');
+$toolbar-mobile-padding-block: utils.size('xs');
+$toolbar-desktop-padding: utils.size('m');
 
 ion-header {
   box-sizing: border-box;
-  border-bottom: 1px solid utils.get-color('medium');
 
   ion-toolbar {
-    --padding-start: #{$toolbar-padding};
-    --padding-end: #{$toolbar-padding};
-    --padding-bottom: #{$toolbar-padding};
-    --padding-top: #{$toolbar-padding};
+    --padding-start: #{$toolbar-mobile-padding-inline};
+    --padding-end: #{$toolbar-mobile-padding-inline};
+    --padding-bottom: #{$toolbar-mobile-padding-block};
+    --padding-top: #{$toolbar-mobile-padding-block};
     --border-width: 0;
     --background: transparent;
     --color: var(--kirby-modal-color, #{utils.get-color('black')});
 
     button {
       color: var(--color);
+    }
+  }
+
+  &.modal-header {
+    border-bottom: 1px solid utils.get-color('medium');
+  }
+
+  @include utils.media('>=medium') {
+    ion-toolbar {
+      --padding-start: #{$toolbar-desktop-padding};
+      --padding-end: #{$toolbar-desktop-padding};
+      --padding-bottom: #{$toolbar-desktop-padding};
+      --padding-top: #{$toolbar-desktop-padding};
     }
   }
 }
@@ -40,13 +54,21 @@ ion-title {
   box-sizing: border-box;
   padding-inline-start: calc(48px + var(--padding-start));
   padding-inline-end: calc(48px + var(--padding-end));
-  font-size: utils.font-size('n');
+  font-size: utils.font-size('l');
   font-weight: utils.font-weight('bold');
+
+  @include utils.media('>=medium') {
+    font-size: utils.font-size('n');
+  }
 }
 
 ion-content {
   --background: transparent;
   --color: var(--kirby-modal-color, #{utils.get-color('black')});
+  --padding-top: #{utils.size('m')};
+  --padding-bottom: #{utils.size('m')};
+  --padding-start: #{utils.size('s')};
+  --padding-end: #{utils.size('s')};
 
   display: flex;
   flex-direction: column;
@@ -56,8 +78,10 @@ ion-content {
     display: block;
   }
 
-  --padding-start: #{utils.size('xxl')};
-  --padding-end: #{utils.size('xxl')};
+  @include utils.media('>=medium') {
+    --padding-start: #{utils.size('xxl')};
+    --padding-end: #{utils.size('xxl')};
+  }
 }
 
 /* clean-css ignore:start */
