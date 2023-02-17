@@ -2,27 +2,27 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FitHeadingDirective } from '@kirbydesign/designsystem/page';
 import {
+  HeaderActionsDirective,
+  HeaderAvatarDirective,
   HeaderComponent,
-  KirbyHeaderActionsDirective,
-  KirbyHeaderAvatarDirective,
-  KirbyHeaderCustomSectionDirective,
-  KirbyHeaderFlagDirective,
-  KirbyHeaderSubtitle1Directive,
-  KirbyHeaderSubtitle2Directive,
-  KirbyHeaderTitleDirective,
-  KirbyHeaderValueDirective,
+  HeaderCustomSectionDirective,
+  HeaderFlagDirective,
+  HeaderSubtitle1Directive,
+  HeaderSubtitle2Directive,
+  HeaderTitleDirective,
+  HeaderValueDirective,
 } from './header.component';
 
 const declarations = [
   HeaderComponent,
-  KirbyHeaderAvatarDirective,
-  KirbyHeaderFlagDirective,
-  KirbyHeaderTitleDirective,
-  KirbyHeaderValueDirective,
-  KirbyHeaderSubtitle1Directive,
-  KirbyHeaderSubtitle2Directive,
-  KirbyHeaderCustomSectionDirective,
-  KirbyHeaderActionsDirective,
+  HeaderAvatarDirective,
+  HeaderFlagDirective,
+  HeaderTitleDirective,
+  HeaderValueDirective,
+  HeaderSubtitle1Directive,
+  HeaderSubtitle2Directive,
+  HeaderCustomSectionDirective,
+  HeaderActionsDirective,
 ];
 
 @NgModule({

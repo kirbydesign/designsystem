@@ -13,56 +13,56 @@ import type { FitHeadingConfig } from '@kirbydesign/designsystem/page';
 @Directive({
   selector: '[kirbyHeaderAvatar]',
 })
-export class KirbyHeaderAvatarDirective {
+export class HeaderAvatarDirective {
   constructor(public templateRef: TemplateRef<unknown>) {}
 }
 
 @Directive({
   selector: '[kirbyHeaderFlag]',
 })
-export class KirbyHeaderFlagDirective {
+export class HeaderFlagDirective {
   constructor(public templateRef: TemplateRef<unknown>) {}
 }
 
 @Directive({
   selector: '[kirbyHeaderTitle]',
 })
-export class KirbyHeaderTitleDirective {
+export class HeaderTitleDirective {
   constructor(public templateRef: TemplateRef<unknown>) {}
 }
 
 @Directive({
   selector: '[kirbyHeaderValue]',
 })
-export class KirbyHeaderValueDirective {
+export class HeaderValueDirective {
   constructor(public templateRef: TemplateRef<unknown>) {}
 }
 
 @Directive({
   selector: '[kirbyHeaderSubtitle1]',
 })
-export class KirbyHeaderSubtitle1Directive {
+export class HeaderSubtitle1Directive {
   constructor(public templateRef: TemplateRef<unknown>) {}
 }
 
 @Directive({
   selector: '[kirbyHeaderSubtitle2]',
 })
-export class KirbyHeaderSubtitle2Directive {
+export class HeaderSubtitle2Directive {
   constructor(public templateRef: TemplateRef<unknown>) {}
 }
 
 @Directive({
   selector: '[kirbyHeaderCustomSection]',
 })
-export class KirbyHeaderCustomSectionDirective {
+export class HeaderCustomSectionDirective {
   constructor(public templateRef: TemplateRef<unknown>) {}
 }
 
 @Directive({
   selector: '[kirbyHeaderActions]',
 })
-export class KirbyHeaderActionsDirective {
+export class HeaderActionsDirective {
   constructor(public templateRef: TemplateRef<unknown>) {}
 }
 
@@ -78,22 +78,22 @@ export class HeaderComponent implements OnChanges {
   isDesktop = true;
   fitHeadingConfig: FitHeadingConfig;
 
-  @ContentChild(KirbyHeaderAvatarDirective)
-  avatarTemplate!: KirbyHeaderAvatarDirective;
-  @ContentChild(KirbyHeaderFlagDirective)
-  flagTemplate!: KirbyHeaderFlagDirective;
-  @ContentChild(KirbyHeaderTitleDirective)
-  titleTemplate!: KirbyHeaderTitleDirective;
-  @ContentChild(KirbyHeaderValueDirective)
-  valueTemplate!: KirbyHeaderValueDirective;
-  @ContentChild(KirbyHeaderSubtitle1Directive)
-  subtitle1Template!: KirbyHeaderSubtitle1Directive;
-  @ContentChild(KirbyHeaderSubtitle2Directive)
-  subtitle2Template!: KirbyHeaderSubtitle2Directive;
-  @ContentChild(KirbyHeaderCustomSectionDirective)
-  customSectionTemplate!: KirbyHeaderCustomSectionDirective;
-  @ContentChild(KirbyHeaderActionsDirective)
-  actionsTemplate!: KirbyHeaderActionsDirective;
+  @ContentChild(HeaderAvatarDirective)
+  avatarTemplate!: HeaderAvatarDirective;
+  @ContentChild(HeaderFlagDirective)
+  flagTemplate!: HeaderFlagDirective;
+  @ContentChild(HeaderTitleDirective)
+  titleTemplate!: HeaderTitleDirective;
+  @ContentChild(HeaderValueDirective)
+  valueTemplate!: HeaderValueDirective;
+  @ContentChild(HeaderSubtitle1Directive)
+  subtitle1Template!: HeaderSubtitle1Directive;
+  @ContentChild(HeaderSubtitle2Directive)
+  subtitle2Template!: HeaderSubtitle2Directive;
+  @ContentChild(HeaderCustomSectionDirective)
+  customSectionTemplate!: HeaderCustomSectionDirective;
+  @ContentChild(HeaderActionsDirective)
+  actionsTemplate!: HeaderActionsDirective;
 
   constructor(private breakpointObserver: BreakpointObserver) {
     this.breakpointObserver.observe(['(min-width: 768px)']).subscribe((result: BreakpointState) => {
