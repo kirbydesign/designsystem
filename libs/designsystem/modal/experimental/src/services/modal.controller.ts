@@ -4,6 +4,7 @@ import { from, Observable, Subject, switchMap, tap } from 'rxjs';
 import { OverlayEventDetail } from '@ionic/core/components';
 
 export type ModalFlavor = 'modal';
+type Size = 'xxs' | 'xs' | 'sm' | 'md' | 'lg';
 
 export type ModalExperimentalConfig = {
   flavor?: ModalFlavor;
@@ -13,7 +14,7 @@ export type ModalExperimentalConfig = {
   canDismiss?: boolean | (() => Promise<boolean>);
   backdropDismiss?: boolean;
   showBackdrop?: boolean;
-  width?: 'small' | 'medium' | 'large';
+  size?: Size;
   height?: string;
 };
 
@@ -50,7 +51,7 @@ export class ModalExperimentalController {
         showBackdrop: config.showBackdrop,
         cssClass: [
           'kirby-modal-experimental',
-          config.width ? config.width : 'medium',
+          config.size ? config.size : 'medium',
           ...customCssClasses,
         ],
       })
@@ -60,7 +61,11 @@ export class ModalExperimentalController {
 
     modal$
       .pipe(
-        tap((modal) => modal.style.setProperty('--height', config.height)),
+        tap((modal) => {
+          if (config.height) {
+            modal.style.setProperty('--height', config.height);
+          }
+        }),
         tap((modal) => from(modal.present())),
         switchMap((modal) => modal.onWillDismiss())
       )
