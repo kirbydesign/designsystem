@@ -1,6 +1,9 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "paths": {
+      "kirbydesign/core": ["libs/core/*"],
+    },
     "downlevelIteration": true,
     "module": "esnext",
     "outDir": "./dist/out-tsc",
