@@ -75,7 +75,7 @@
       "@kirbydesign/designsystem/reorder-list": ["libs/designsystem/reorder-list/index.ts"],
       "@kirbydesign/designsystem/toast": ["libs/designsystem/toast/index.ts"],
       "@kirbydesign/designsystem/grid": ["libs/designsystem/grid/index.ts"],
-      "@kirbydesign/designsystem/button-group": ["button-group/index.ts"]
+      "@kirbydesign/designsystem/button-group": ["libs/designsystem/button-group/index.ts"]
     },
     "target": "es2020"
   },

@@ -134,8 +134,6 @@ $button-width: (
   // we default to 'md' size.
   font-size: utils.font-size('s');
   height: utils.size('xl');
-  min-width: button-width('md');
-  padding: 0;
   margin: utils.size('xxxs');
   line-height: utils.line-height('s');
 

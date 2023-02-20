@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
   selector: 'kirby-button-group',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './button-group.component.html',
+  template: '<ng-content></ng-content>',
   styleUrls: ['./button-group.component.scss'],
 })
 export class ButtonGroupComponent {}

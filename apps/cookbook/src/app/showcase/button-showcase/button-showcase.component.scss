@@ -13,3 +13,10 @@ cookbook-code-viewer {
   display: block;
   margin-top: utils.size('xl');
 }
+
+.btn-group-container {
+  border: 1px dotted red;
+  resize: horizontal;
+  overflow-x: auto;
+  width: 20rem;
+}

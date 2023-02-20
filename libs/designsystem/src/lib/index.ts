@@ -4,6 +4,7 @@ export * from './directives';
 export * from '@kirbydesign/designsystem/accordion';
 export * from '@kirbydesign/designsystem/avatar';
 export * from '@kirbydesign/designsystem/button';
+export * from '@kirbydesign/designsystem/button-group';
 export * from '@kirbydesign/designsystem/calendar';
 export * from '@kirbydesign/designsystem/card';
 export * from '@kirbydesign/designsystem/checkbox';
