@@ -2,7 +2,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
-      "kirbydesign/core": ["libs/core/*"],
+      "kirbydesign/core/*": ["libs/core/*"],
     },
     "downlevelIteration": true,
     "module": "esnext",
