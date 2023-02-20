@@ -242,17 +242,27 @@ ion-modal.kirby-modal-experimental {
       margin: 15px;
     }
 
-    &.small {
+    &.xxs {
+      --width: #{map.get(utils.$experimental-modal-widths, 'xxs')};
+      --height: #{map.get(utils.$experimental-modal-heights, 'xxs')};
+    }
+
+    &.xs {
+      --width: #{map.get(utils.$experimental-modal-widths, 'xs')};
+      --height: #{map.get(utils.$experimental-modal-heights, 'xs')};
+    }
+
+    &.sm {
       --width: #{map.get(utils.$experimental-modal-widths, 's')};
       --height: #{map.get(utils.$experimental-modal-heights, 's')};
     }
 
-    &.medium {
+    &.md {
       --width: #{map.get(utils.$experimental-modal-widths, 'm')};
       --height: #{map.get(utils.$experimental-modal-heights, 'm')};
     }
 
-    &.large {
+    &.lg {
       --width: #{map.get(utils.$experimental-modal-widths, 'l')};
       --height: #{map.get(utils.$experimental-modal-heights, 'l')};
     }
