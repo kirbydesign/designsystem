@@ -29,7 +29,7 @@ const getActionsElement = (spectator: Spectator<HeaderComponent>) =>
   spectator.query(actionsSelector);
 
 // eslint-disable-next-line jasmine/no-focused-tests
-fdescribe('HeaderComponent', () => {
+describe('HeaderComponent', () => {
   let createHost;
   createHost = createHostFactory({
     component: HeaderComponent,
