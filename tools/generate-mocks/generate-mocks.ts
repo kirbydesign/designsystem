@@ -3,7 +3,7 @@ import { posix as path, resolve } from 'path';
 import { ESLint } from 'eslint';
 import * as ts from 'typescript';
 
-import { JsonDocs } from '@kirbydesign/core/custom-elements';
+import { JsonDocs } from '../../libs/core/custom-elements';
 
 const { readdir, readFile } = require('fs').promises;
 
