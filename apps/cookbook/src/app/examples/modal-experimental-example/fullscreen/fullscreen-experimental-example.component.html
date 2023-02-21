@@ -12,6 +12,30 @@
       text="Show footer"
     ></kirby-checkbox>
 
+    <kirby-checkbox
+      [checked]="inputEnabled"
+      (checkedChange)="onToggleInput($event)"
+      text="Custom height and width"
+    ></kirby-checkbox>
+    <kirby-form-field>
+      <input
+        kirby-input
+        [size]="'lg'"
+        [disabled]="!inputEnabled"
+        placeholder="Height"
+        [(ngModel)]="height"
+      />
+    </kirby-form-field>
+    <kirby-form-field>
+      <input
+        kirby-input
+        [size]="'lg'"
+        [disabled]="!inputEnabled"
+        placeholder="Width"
+        [(ngModel)]="width"
+      />
+    </kirby-form-field>
+
     <!-- <kirby-checkbox
       [checked]="isInlineFooter"
       (checkedChange)="toggleIsInlineFooter()"
@@ -47,6 +71,8 @@
     [canDismiss]="canDismiss"
     (willDismiss)="closeModal()"
     [size]="selected"
+    [width]="width"
+    [height]="height"
   >
     <!-- HEADER SLOT -->
     <kirby-page-progress *ngIf="showPageProgress" header-start>

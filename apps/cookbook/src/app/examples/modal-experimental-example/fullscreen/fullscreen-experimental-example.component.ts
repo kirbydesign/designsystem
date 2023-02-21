@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ModalExperimentalComponent } from '@kirbydesign/designsystem/modal/experimental';
 import { KirbyAnimation, ReorderEvent } from '@kirbydesign/designsystem';
 
@@ -47,6 +47,8 @@ export const footerSlotExampleTemplate = `<kirby-modal-footer-experimental foote
 })
 export class FullscreenModalExperimentalExampleComponent {
   @ViewChild(ModalExperimentalComponent) modal: ModalExperimentalComponent;
+  @ViewChild(ModalExperimentalComponent, { static: false, read: ElementRef })
+  modalElement: ElementRef<HTMLElement>;
 
   open = false;
   canDismiss = true;
@@ -55,6 +57,18 @@ export class FullscreenModalExperimentalExampleComponent {
   isInlineFooter = false;
   collapseTitle = false;
   scrollDisabled = false;
+  width;
+  height;
+
+  inputEnabled = false;
+
+  onToggleInput(enable) {
+    this.inputEnabled = enable;
+    if (!enable) {
+      this.width = undefined;
+      this.height = undefined;
+    }
+  }
 
   openModal() {
     this.open = true;

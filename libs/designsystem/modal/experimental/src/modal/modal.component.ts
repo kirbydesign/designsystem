@@ -21,6 +21,7 @@ export class ModalExperimentalComponent {
   @Input() scrollDisabled = false;
   @Input() size: Size = 'lg';
   @Input() height: string;
+  @Input() width: string;
 
   @Output() willPresent = new EventEmitter<CustomEvent<OverlayEventDetail>>();
   @Output() didPresent = new EventEmitter<CustomEvent<OverlayEventDetail>>();
