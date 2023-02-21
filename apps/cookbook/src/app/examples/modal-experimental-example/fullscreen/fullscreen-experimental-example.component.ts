@@ -167,4 +167,7 @@ export class FullscreenModalExperimentalExampleComponent {
   getSectionName(item: any) {
     return item.title !== 'Vis med egne depoter' ? 'Sortering' : 'Fuldmagter';
   }
+
+  radioItems = ['xxs', 'xs', 'sm', 'md', 'lg'];
+  selected = 'md';
 }

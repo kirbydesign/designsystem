@@ -4,13 +4,15 @@
   <div class="config">
     <h2>Config</h2>
 
-    <!-- <kirby-checkbox
+    <kirby-radio-group [items]="radioItems" [(value)]="selected"></kirby-radio-group>
+
+    <kirby-checkbox
       [checked]="showFooter"
       (checkedChange)="toggleFooter()"
       text="Show footer"
     ></kirby-checkbox>
 
-    <kirby-checkbox
+    <!-- <kirby-checkbox
       [checked]="isInlineFooter"
       (checkedChange)="toggleIsInlineFooter()"
       text="Inline footer"
@@ -44,6 +46,7 @@
     [scrollDisabled]="scrollDisabled"
     [canDismiss]="canDismiss"
     (willDismiss)="closeModal()"
+    [size]="selected"
   >
     <!-- HEADER SLOT -->
     <kirby-page-progress *ngIf="showPageProgress" header-start>

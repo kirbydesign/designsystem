@@ -48,8 +48,9 @@ ion-header {
 
 ion-modal {
   --background: var(--kirby-modal-background, #{utils.get-color('background-color')});
-  --max-height: 928px;
-  --min-height: 594px;
+
+  // --max-height: 928px;
+  // --min-height: 594px;
 
   @include utils.media('>=medium') {
     --border-radius: 32px;
