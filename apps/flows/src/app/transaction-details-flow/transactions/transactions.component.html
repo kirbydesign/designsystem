@@ -20,9 +20,9 @@
           [themeColor]="'warning'"
         ></kirby-badge>
         <kirby-avatar slot="start">
-          <kirby-badge [themeColor]="'danger'" *ngIf="transaction.amount.amount < -11000"
-            >!</kirby-badge
-          >
+          <kirby-badge [themeColor]="'danger'" *ngIf="transaction.amount.amount < -11000">
+            !
+          </kirby-badge>
           <kirby-icon [name]="transaction.iconName"></kirby-icon>
         </kirby-avatar>
         <kirby-label>

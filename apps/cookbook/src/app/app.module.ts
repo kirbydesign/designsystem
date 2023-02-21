@@ -6,8 +6,9 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { KirbyExperimentalModule, KirbyModalModule, KirbyModule } from '@kirbydesign/designsystem';
+import { KirbyExperimentalModule, KirbyModule } from '@kirbydesign/designsystem';
 
+import { KirbyModalModule } from '@kirbydesign/designsystem/modal/experimental';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';

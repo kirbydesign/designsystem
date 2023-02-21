@@ -1,10 +1,10 @@
 <div class="example">
   <p>
-    <em
-      ><strong>Please note:</strong>The slides do not like beeing switched between chrome-devtools
-      mobileview and standard webview. Please refresh your browser after changing from web to mobile
-      and visa versa</em
-    >
+    <em>
+      <strong>Please note:</strong>
+      The slides do not like beeing switched between chrome-devtools mobileview and standard
+      webview. Please refresh your browser after changing from web to mobile and visa versa
+    </em>
   </p>
   <cookbook-example-viewer [html]="slidesExample.template" [ts]="slidesExample.codeSnippet">
     <cookbook-slides-example #slidesExample></cookbook-slides-example>
@@ -22,11 +22,15 @@
       <strong>Note:</strong>
       Loading lots of data in many cards can result in an unwanted pause while the slides content
       are beeing rendered. (The data is recieved, spinner dissapears but seconds passes before the
-      cards are rendered) The notations:<br />
+      cards are rendered) The notations:
+      <br />
       <code>
-        *kirbySlide="let slide; let i = index"<br />
-        [slideIndex]="i"<br />
-        [activeSlideIndex]="selectedSlideIndex<br />
+        *kirbySlide="let slide; let i = index"
+        <br />
+        [slideIndex]="i"
+        <br />
+        [activeSlideIndex]="selectedSlideIndex
+        <br />
       </code>
       gives you means to pass info to each slide´s content about what index it has and compare that
       to the activeSlideIndex, and thereby a strategy to render only a few cards in advance.

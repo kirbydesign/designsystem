@@ -1,0 +1,28 @@
+<kirby-card>
+  <kirby-card-header
+    *ngIf="header"
+    [title]="header"
+    [isTitleBold]="true"
+    [subtitle]="subheader"
+  ></kirby-card-header>
+  <button
+    kirby-button
+    expand="block"
+    size="lg"
+    [noDecoration]="true"
+    (click)="onItemSelect(item)"
+    *ngFor="let item of items"
+  >
+    {{ item.text }}
+  </button>
+</kirby-card>
+<button
+  *ngIf="!hideCancel"
+  kirby-button
+  class="cancel-btn"
+  size="lg"
+  attentionLevel="3"
+  (click)="onCancel()"
+>
+  {{ cancelButtonText }}
+</button>

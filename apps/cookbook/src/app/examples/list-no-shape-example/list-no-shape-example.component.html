@@ -8,9 +8,9 @@
     <kirby-card-header *ngIf="item.amount < 0" title="Account is overdraft"></kirby-card-header>
     <kirby-item>
       <h4 class="kirby-text-bold">{{ item.title }}</h4>
-      <data [value]="item.amount" class="kirby-text-bold" slot="end">{{
-        item.amount | currency
-      }}</data>
+      <data [value]="item.amount" class="kirby-text-bold" slot="end">
+        {{ item.amount | currency }}
+      </data>
     </kirby-item>
     <kirby-item *ngFor="let shadowAccount of item.shadowAccounts">
       <h4>{{ shadowAccount.title }}</h4>

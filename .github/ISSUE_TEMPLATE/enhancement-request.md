@@ -2,7 +2,7 @@
 name: Enhancement request
 about: Suggest an idea for this project
 title: "[Enhancement]"
-labels: New, NOT Prioritized, NOT Tech refined, NOT UX refined, enhancement
+labels: 👶🏻 New, NOT Prioritized, NOT Tech refined, NOT UX refined, enhancement
 assignees: ''
 
 ---

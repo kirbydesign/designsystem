@@ -1,6 +1,6 @@
 import { Component, forwardRef, Input } from '@angular/core';
 
-import { TableComponent } from '@kirbydesign/designsystem';
+import { TableComponent } from '@kirbydesign/designsystem/data-table';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({

@@ -18,16 +18,16 @@
       <kirby-section-header *kirbyListSectionHeader="let section">
         <h2 heading>{{ section }}</h2>
       </kirby-section-header>
-      <list-item *kirbyListItemTemplate="let transaction" [transaction]="transaction"> </list-item>
+      <list-item *kirbyListItemTemplate="let transaction" [transaction]="transaction"></list-item>
     </kirby-list>
   </kirby-page-content>
 </kirby-page>
 
 <ng-template #experimental>
   <kirby-list-experimental *ngFor="let section of transactionSections | keyvalue">
-    <kirby-section-header outside
-      ><h2 heading>{{ section.key }}</h2></kirby-section-header
-    >
+    <kirby-section-header outside>
+      <h2 heading>{{ section.key }}</h2>
+    </kirby-section-header>
     <kirby-item-sliding
       *ngFor="let transaction of section.value.transactions"
       [swipeActions]="swipeActions"

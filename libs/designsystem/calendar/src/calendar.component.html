@@ -1,0 +1,61 @@
+<div class="header">
+  <div class="month-navigator">
+    <button
+      [disabled]="!_canNavigateBack"
+      (click)="_changeMonth(-1)"
+      kirby-button
+      [noDecoration]="true"
+      class="no-margin"
+    >
+      <kirby-icon name="arrow-back"></kirby-icon>
+    </button>
+
+    <div class="month-and-year">
+      <span class="month">{{ activeMonthName }}</span>
+      <span *ngIf="!_hasYearNavigator" class="year">{{ activeYear }}</span>
+    </div>
+
+    <button
+      [disabled]="!_canNavigateForward"
+      (click)="_changeMonth(1)"
+      kirby-button
+      [noDecoration]="true"
+      class="no-margin"
+    >
+      <kirby-icon name="arrow-more"></kirby-icon>
+    </button>
+  </div>
+  <kirby-dropdown
+    *ngIf="_hasYearNavigator"
+    [usePopover]="usePopover"
+    [selectedIndex]="navigatedYear"
+    [items]="navigableYears"
+    popout="left"
+    (change)="_changeYear($event)"
+  ></kirby-dropdown>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th *ngFor="let weekDay of _weekDays">{{ weekDay }}</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let week of _month">
+      <td *ngFor="let day of week">
+        <div
+          (click)="_onDateSelected(day)"
+          class="{{ day.cssClasses }} contain-state-layer"
+          [class.selected]="day.isSelected"
+        >
+          <span class="state-layer" aria-hidden="true"></span>
+          <span class="content-layer">{{ day.date }}</span>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- <iframe src="kirby/components/calendar/calendar.webview.html" #calendarContainer style="width: 320px; height: 304px; border: 0"> -->
