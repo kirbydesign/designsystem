@@ -30,7 +30,7 @@
     "start:flows:prod": "ng serve flows --configuration production",
     "start:core": "npm run build:core -- --dev --watch --serve",
     "build": "ng build designsystem",
-    "build:core": "stencil build --config=./libs/core/stencil.config.ts",
+    "build:core": "stencil build --config=./libs/core/stencil.config.ts && ls -al libs/core",
     "build:core:watch": "npm run build:core -- --watch",
     "build:flows": "ng build flows",
     "build:flows:prod": "npm run build:flows -- --configuration production",
