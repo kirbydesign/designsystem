@@ -24,17 +24,61 @@ This document provides information about breaking changes and their migrations f
 - ResizeObserver and IntersectionObserver polyfills have been removed.
   - If they have previously been copied from the Kirby package to your projects output folder compile time via `build > options > assets` in angular.json that configuration should be removed, as Kirby no longer supplies the polyfills.
 
+Additionally, multiple components and directives are now standalone components, which means they should be imported rather than declared inside consuming angular components. Expand below to see a list of all related components.
+
+<details>
+  <summary><strong>Expand to see full list of new standalone components</strong></summary>
+
+- AvatarComponent
+- ActionSheetComponent
+- AlertComponent
+- AffixDirective
+- ButtonComponent
+- CalendarComponent
+- CheckboxComponent
+- DividerComponent
+- FabSheetComponent
+- FlagComponent
+- DateInputDirective
+- DecimalMaskDirective
+- InputComponent
+- TextAreaComponent
+- GridComponent
+- ItemGroupComponent
+- ItemSlidingComponent
+- LoadingOverlayComponent
+- ModalFooterComponent
+- ModalWrapperComponent
+- ModalCompactWrapperComponent
+- FitHeadingDirective
+- PopoverComponent
+- ProgressCircleRingComponent
+- ProgressCircleComponent
+- RangeComponent
+- ReorderListComponent
+- SectionHeaderComponent
+- ComponentLoaderDirective
+- ThemeColorDirective
+- SlideButtonComponent
+- PageLocalNavigationComponent
+- SegmentedControlComponent
+- ToggleComponent
+
+</details>
+
+<br>
 <h3 id="components-v8">Components</h3>
 
 <h4 id="button-v8">Button</h4>
-The isDesctructive behavior of button should only be used internally by Kirby in the alert, as destructive actions are always announced via an alert. Use the default button attention levels and combine with alerts when needed.
+The isDestructive behavior of button should only be used internally by Kirby in the alert, as destructive actions are always announced via an alert. Use the default button attention levels and combine with alerts when needed.
 
---- 
-> _A note on button colors_: Attention level 3 has changed from an outline button to a white background.  
+---
+
+> _A note on button colors_: Attention level 3 has changed from an outline button to a white background.
 
 <h4 id="card-v8">Card</h4>
 
-The `mode` input is replaced with a boolean input 'flat' that can be set to true to remove the shadow around the card. This is not intended for use together with a clickable card or a card with a disclosure indicator. 
+The `mode` input is replaced with a boolean input 'flat' that can be set to true to remove the shadow around the card. This is not intended for use together with a clickable card or a card with a disclosure indicator.
 The 'highlighted' look that could previously be set on cards is no longer an option and all cards will now have the same shadow going forward.
 
 The `hasDarkBackgroundColor` input of card is no longer available. To have similar functionality `themeColor="dark"` should be set on cards instead, so interaction states light up instead of getting darker. The option is also useful for background images with darker content, because it ensures a better fallback color if the image loads asynchronosly.
@@ -81,7 +125,7 @@ A new _disclosure indicator_ feature has been added (e.g. an arrow on list items
 
 <h4 id="dropdown-v8"><strong>Dropdown</strong></h4>
 While not a breaking change, attention levels for dropdowns have changed quite dramatically to match buttons attention level designs.
-This means that attention level 2 buttons are now black, and if a white dropdown is desired, attention level 3 should be used instead.  
+This means that attention level 2 buttons are now black, and if a white dropdown is desired, attention level 3 should be used instead.
 
 <br>
 <h4 id="list-v8"><strong>List</strong></h4>
