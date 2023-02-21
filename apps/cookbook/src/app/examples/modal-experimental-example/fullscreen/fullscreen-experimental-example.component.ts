@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { ModalExperimentalComponent } from '@kirbydesign/designsystem/modal/experimental';
-import { KirbyAnimation } from '@kirbydesign/designsystem';
+import { KirbyAnimation, ReorderEvent } from '@kirbydesign/designsystem';
 
 export const fullscreenModalExampleTemplateHTML = `<kirby-modal-experimental
   [open]="open"
@@ -94,5 +94,77 @@ export class FullscreenModalExperimentalExampleComponent {
 
   toggleScrollDisabled() {
     this.scrollDisabled = !this.scrollDisabled;
+  }
+
+  items: any[] = [
+    {
+      title: '1',
+      ownerName: 'xyz',
+      isOwnAccount: false,
+      shadowAccounts: [
+        {
+          title: '1a',
+        },
+        {
+          title: '1b',
+        },
+        {
+          title: '1c',
+        },
+      ],
+    },
+    {
+      title: '2',
+    },
+    {
+      title: '3',
+      ownerName: 'John',
+      isOwnAccount: true,
+      shadowAccounts: [
+        {
+          title: '3a',
+        },
+      ],
+    },
+  ];
+  headerTexts = ['skjul/vis', 'flyt'];
+
+  doReorderItem(ev: ReorderEvent) {
+    ev.complete(this.items);
+  }
+
+  doReorderShadowAccount(ev: ReorderEvent) {
+    ev.complete(ev.parentItem.shadowAccounts);
+  }
+
+  itemsFullList: any[] = [
+    {
+      id: 0,
+      title: 'Depoter',
+      subTitle: '2000 pcs',
+      amount: '5.587.218.309 DKK',
+      detail: 'Alfabetisk',
+      color: 'default',
+    },
+    {
+      id: 1,
+      title: 'Værdipapirer og puljer',
+      subTitle: '1827 pcs',
+      amount: '76.980 DKK',
+      detail: 'Alfabetisk',
+      color: 'light',
+    },
+    {
+      id: 2,
+      title: 'Vis med egne depoter',
+      subTitle: '787 pcs',
+      amount: '83.004 DKK',
+      detail: '0 af 1 valgt',
+      color: 'white',
+    },
+  ];
+
+  getSectionName(item: any) {
+    return item.title !== 'Vis med egne depoter' ? 'Sortering' : 'Fuldmagter';
   }
 }
