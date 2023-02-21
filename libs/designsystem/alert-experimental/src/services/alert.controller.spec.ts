@@ -44,11 +44,13 @@ describe('AlertExperimentalController', () => {
 
     beforeEach(async () => {
       ionModalController = spectator.inject(IonicModalController);
+
       await alertController.showAlert({ title: 'Alert' });
       await TestHelper.waitForTimeout(50);
       ionModal = await ionModalController.getTop();
-      expect(ionModal).toBeTruthy();
       backdrop = ionModal.shadowRoot.querySelector('ion-backdrop');
+
+      expect(ionModal).toBeTruthy();
       expect(backdrop).toBeTruthy();
     });
 

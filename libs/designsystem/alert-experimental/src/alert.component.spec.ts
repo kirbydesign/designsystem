@@ -36,12 +36,12 @@ describe('AlertExperimentalComponent', () => {
     it('should render', () => {
       const expected = 'Test OK Button Text';
 
-      expect(spectator.component.okBtn).toEqual(expected);
+      expect(spectator.component.okButton).toEqual(expected);
       expect(okButton).toHaveText(expected);
     });
 
     it('should support isDestructive', () => {
-      spectator.setInput({ okBtnIsDestructive: true });
+      spectator.setInput({ okButtonIsDestructive: true });
 
       expect(okButton).toBeDefined();
       expect(okButton).toHaveClass('destructive');
@@ -53,7 +53,7 @@ describe('AlertExperimentalComponent', () => {
     });
 
     it('should have large ok button when no cancel button', () => {
-      spectator.setInput({ cancelBtn: null });
+      spectator.setInput({ cancelButton: null });
 
       expect(okButton).toHaveClass('lg');
     });
@@ -79,16 +79,17 @@ describe('AlertExperimentalComponent', () => {
     it('should render', () => {
       const expected = 'Test Cancel Button Text';
 
-      expect(spectator.component.cancelBtn).toEqual(expected);
+      expect(spectator.component.cancelButton).toEqual(expected);
       expect(cancelButton).toHaveText(expected);
     });
 
     it('should not render when cancelBtn not set', () => {
-      spectator.setInput({ cancelBtn: null });
+      spectator.setInput({ cancelButton: null });
 
       expect(spectator.query('.cancel-btn')).toBeNull();
     });
   });
+
   describe('icon', () => {
     it('should render', () => {
       spectator.setInput({ iconName: 'warning' });

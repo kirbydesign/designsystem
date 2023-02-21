@@ -18,11 +18,11 @@ const alertConfigWithIcon: AlertExperimentalConfig = {
 
 export const observableCodeSnippet = `showAlert() {
   const alert = this.alertController.showAlert(config);
-  alert?.onWillDismiss.subscribe((response) => {
+  alert.onWillDismiss.subscribe((response) => {
     const { role, data } = response;
     ...
   });
-  alert?.onDidDismiss.subscribe((response) => {
+  alert.onDidDismiss.subscribe((response) => {
     const { role, data } = response;
     ...
   });
