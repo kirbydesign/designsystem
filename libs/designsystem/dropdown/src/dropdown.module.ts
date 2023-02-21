@@ -7,10 +7,10 @@ import { FormFieldModule } from '@kirbydesign/designsystem/form-field';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 import { ItemModule } from '@kirbydesign/designsystem/item';
 import { PopoverComponent } from '@kirbydesign/designsystem/popover';
-import { FloatingDirective } from '@kirbydesign/designsystem/shared/floating';
 
 import { DropdownComponent } from './dropdown.component';
 import { KeyboardHandlerService } from './keyboard-handler.service';
+
 const declarations = [DropdownComponent];
 
 @NgModule({
@@ -22,7 +22,6 @@ const declarations = [DropdownComponent];
     PopoverComponent,
     ButtonComponent,
     CommonModule,
-    FloatingDirective,
   ],
   declarations: [...declarations],
   exports: [...declarations],

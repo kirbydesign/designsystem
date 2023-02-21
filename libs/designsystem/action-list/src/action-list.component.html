@@ -3,7 +3,7 @@
   [size]="buttonSize"
   [disabled]="isDisabled"
   type="button"
-  [attentionLevel]="attentionLevel"
+  [attentionLevel]="'3'"
 >
   <kirby-icon [name]="'more'" [themeColor]="themeColor" [size]="iconSize"></kirby-icon>
 </button>
@@ -11,7 +11,7 @@
   kirbyFloating
   [reference]="buttonElement"
   [isDisabled]="isDisabled"
-  [triggers]="'click'"
+  [triggers]="['click']"
   [placement]="placement"
   [offset]="FloatingOffset.medium"
   [closeOnBackdrop]="closeOnBackdrop"

@@ -72,13 +72,18 @@ import { ReorderListComponent } from '@kirbydesign/designsystem/reorder-list';
 
 import { ToastController, ToastHelper } from '@kirbydesign/designsystem/toast';
 import { BreakpointHelperService, GridComponent } from '@kirbydesign/designsystem/grid';
+<<<<<<< HEAD
 import { TabNavigationModule } from '@kirbydesign/designsystem/tab-navigation';
 import { MenuComponent } from '@kirbydesign/designsystem/menu';
+=======
+import { ActionListComponent } from '../../action-list/src/action-list.component';
+>>>>>>> cec22b288 (chore: move location of action-list)
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
 import { customElementsInitializer } from './custom-elements-initializer';
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
 import { ModalRouterLinkDirective } from './directives/modal-router-link/modal-router-link.directive';
 import { KirbyBadgeModule } from './components/kirby-badge.module';
+import { FloatingDirective } from './directives/floating/floating.directive';
 
 const exportedDeclarations = [ModalRouterLinkDirective];
 
@@ -118,6 +123,7 @@ const standaloneComponents = [
   CalendarComponent,
   ButtonComponent,
   ComponentLoaderDirective,
+  FloatingDirective,
   FlagComponent,
 ];
 const exportedModules = [
@@ -164,7 +170,7 @@ const providers = [
   customElementsInitializer(),
 ];
 
-const ConfigToken = new InjectionToken<any>('USERCONFIG');
+const ConfigToken = new InjectionToken<unknown>('USERCONFIG');
 export interface KirbyConfig {
   moduleRootRoutePath?: string;
 }
