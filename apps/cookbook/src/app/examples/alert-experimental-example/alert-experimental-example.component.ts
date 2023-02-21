@@ -8,11 +8,11 @@ import {
 } from '@kirbydesign/designsystem/alert-experimental';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
 
-const alertConfigWithIcon = {
+const alertConfigWithIcon: AlertExperimentalConfig = {
   title: 'Alert With Icon',
-  message: 'This message can have more than 1 line.',
-  okBtn: 'I agree',
-  cancelBtn: 'Take me back',
+  message: 'This is an alert with an icon.',
+  okButton: 'I agree',
+  cancelButton: 'Take me back',
   icon: { name: 'warning', themeColor: 'warning' },
 };
 
@@ -73,8 +73,8 @@ this.alertController.showAlert(config);`;
     const config: AlertExperimentalConfig = {
       title: 'Default Alert',
       message: 'The default alert is just a title, a message, an OK and (optional) cancel button',
-      okBtn: 'I agree',
-      cancelBtn: 'Take me back',
+      okButton: 'I agree',
+      cancelButton: 'Take me back',
     };
 
     const alert = this.alertController.showAlert(config);
@@ -96,7 +96,7 @@ this.alertController.showAlert(config);`;
     const config: AlertExperimentalConfig = {
       title: 'Alert Without Cancel',
       message: 'This is an alert that can only be acknowledged (no cancel option)',
-      okBtn: 'I understand',
+      okButton: 'I understand',
     };
 
     const alert = this.alertController.showAlert(config);
@@ -111,8 +111,8 @@ this.alertController.showAlert(config);`;
       title: 'Desctructive Alert',
       message:
         'This is to indicate that something destructive will happen when clicking the OK button',
-      cancelBtn: 'Get me out of here',
-      okBtn: { text: 'Confirm', isDestructive: true },
+      cancelButton: 'Get me out of here',
+      okButton: { text: 'Confirm', isDestructive: true },
     };
 
     const alert = this.alertController.showAlert(config);
@@ -126,8 +126,8 @@ this.alertController.showAlert(config);`;
     const config: AlertExperimentalConfig = {
       title: 'Alert with newline',
       message: 'This is message one.\n\nThis is message two.',
-      okBtn: 'I agree',
-      cancelBtn: 'Take me back',
+      okButton: 'I agree',
+      cancelButton: 'Take me back',
     };
 
     const alert = this.alertController.showAlert(config);
@@ -161,8 +161,8 @@ this.alertController.showAlert(config);`;
         themeColor: 'warning',
       },
       message: message$,
-      okBtn: 'Logout',
-      cancelBtn: 'Take me back',
+      okButton: 'Logout',
+      cancelButton: 'Take me back',
     };
 
     const alert = this.alertController.showAlert(config);
