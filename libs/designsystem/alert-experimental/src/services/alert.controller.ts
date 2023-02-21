@@ -53,28 +53,28 @@ export class AlertExperimentalController {
   private getComponentProps(config: AlertExperimentalConfig) {
     return {
       ...config,
-      okBtn: this.getOkBtn(config),
-      cancelBtn: config.cancelBtn,
-      okBtnIsDestructive: this.getOkBtnIsDestructive(config),
+      okButton: this.getOkButton(config),
+      cancelButton: config.cancelButton,
+      okButtonIsDestructive: this.getOkButtonIsDestructive(config),
       iconName: config.icon && config.icon.name,
       iconThemeColor: config.icon && config.icon.themeColor,
     };
   }
 
-  private getOkBtn(config: AlertExperimentalConfig) {
+  private getOkButton(config: AlertExperimentalConfig) {
     let text: string;
 
-    if (config.okBtn) {
-      if (typeof config.okBtn === 'string') {
-        text = config.okBtn;
+    if (config.okButton) {
+      if (typeof config.okButton === 'string') {
+        text = config.okButton;
       } else {
-        text = config.okBtn.text;
+        text = config.okButton.text;
       }
     }
     return text;
   }
 
-  getOkBtnIsDestructive(config) {
-    return typeof config.okBtn === 'object' ? config.okBtn.isDestructive : undefined;
+  getOkButtonIsDestructive(config) {
+    return typeof config.okButton === 'object' ? config.okButton.isDestructive : undefined;
   }
 }

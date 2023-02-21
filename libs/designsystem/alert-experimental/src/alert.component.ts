@@ -50,9 +50,9 @@ export class AlertExperimentalComponent implements AfterViewInit {
 
   @Input() iconName: string;
   @Input() iconThemeColor: string;
-  @Input() okBtn: string;
-  @Input() okBtnIsDestructive: boolean;
-  @Input() cancelBtn: string;
+  @Input() okButton: string;
+  @Input() okButtonIsDestructive: boolean;
+  @Input() cancelButton: string;
 
   constructor(private elementRef: ElementRef<HTMLElement>, private windowRef: WindowRef) {}
 
@@ -68,12 +68,12 @@ export class AlertExperimentalComponent implements AfterViewInit {
     this.windowRef.nativeWindow.scrollTo({ top: this.scrollY });
   }
 
-  onCancel() {
+  cancelAlert() {
     const ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
     ionModalElement && ionModalElement.dismiss(false);
   }
 
-  onOk() {
+  approveAlert() {
     const ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
     ionModalElement && ionModalElement.dismiss(true);
   }

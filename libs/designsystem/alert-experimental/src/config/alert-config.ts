@@ -3,14 +3,14 @@ import { Observable } from 'rxjs';
 export interface AlertExperimentalConfig {
   title: string | Observable<string>;
   message?: string | Observable<string>;
-  cancelBtn?: string;
+  cancelButton?: string;
 
   icon?: {
     name: string;
     themeColor?: string;
   };
 
-  okBtn?:
+  okButton?:
     | string
     | {
         text: string;
