@@ -3,10 +3,6 @@ import { posix as path, resolve } from 'path';
 import { ESLint } from 'eslint';
 import * as ts from 'typescript';
 
-import { BadgeSize } from '@kirbydesign/core/dist/types/components/badge/badge.types';
-
-export const test: BadgeSize = 'md';
-
 import { JsonDocs } from '@kirbydesign/core/custom-elements';
 
 const { readdir, readFile } = require('fs').promises;
