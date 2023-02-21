@@ -16,8 +16,8 @@ describe('AlertExperimentalComponent', () => {
   beforeEach(() => {
     spectator = createHost(`
       <kirby-alert-experimental 
-        okBtn="Test OK Button Text"
-        cancelBtn="Test Cancel Button Text"
+        okButton="Test OK Button Text"
+        cancelButton="Test Cancel Button Text"
       >
       </kirby-alert-experimental>
     `);
