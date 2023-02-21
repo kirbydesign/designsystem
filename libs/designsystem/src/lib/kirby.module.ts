@@ -70,12 +70,13 @@ import { ReorderListComponent } from '@kirbydesign/designsystem/reorder-list';
 
 import { ToastController, ToastHelper } from '@kirbydesign/designsystem/toast';
 import { BreakpointHelperService, GridComponent } from '@kirbydesign/designsystem/grid';
-import { ActionListComponent } from './components/action-list/action-list.component';
+import { ActionListComponent } from '../../action-list/src/action-list.component';
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
 import { customElementsInitializer } from './custom-elements-initializer';
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
 import { ModalRouterLinkDirective } from './directives/modal-router-link/modal-router-link.directive';
 import { KirbyBadgeModule } from './components/kirby-badge.module';
+import { FloatingDirective } from './directives/floating/floating.directive';
 
 const exportedDeclarations = [ModalRouterLinkDirective];
 
@@ -115,6 +116,7 @@ const standaloneComponents = [
   CalendarComponent,
   ButtonComponent,
   ComponentLoaderDirective,
+  FloatingDirective,
   FlagComponent,
 ];
 const exportedModules = [
@@ -158,7 +160,7 @@ const providers = [
   customElementsInitializer(),
 ];
 
-const ConfigToken = new InjectionToken<any>('USERCONFIG');
+const ConfigToken = new InjectionToken<unknown>('USERCONFIG');
 export interface KirbyConfig {
   moduleRootRoutePath?: string;
 }
