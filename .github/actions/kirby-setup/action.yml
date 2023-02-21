@@ -24,7 +24,7 @@ runs:
       run: rm hash-file1.json && rm hash-file2.json
       shell: bash
     - name: Clean Install NPM Dependencies
-      if: steps.cache.outputs.cache-hit != 'true'
+      # if: steps.cache.outputs.cache-hit != 'true'
       run: npm ci
       shell: bash
     - name: Run Postinstall Script
