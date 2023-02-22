@@ -87,8 +87,6 @@ ion-segment-button {
   @include interaction-state.apply-focus-part($part: 'native');
   @include utils.accessible-target-size;
 
-  --background-hover: var(--kirby-inputs-background-color-hover);
-  --background-hover-opacity: 1;
   --border-radius: #{utils.$border-radius-round};
   --border-style: none;
   --background: none;
@@ -113,10 +111,8 @@ ion-segment-button {
 
   // NOTE: This is a custom implementation of the hover interaction state;
   // identical to FabSheet's ion-fab-button & PageComponent's ion-back-button.
-  opacity: 1; // not strictly required but declared to be consistent
 
   &::part(native) {
-    opacity: 1; // required for interaction states to work
     border-radius: #{utils.$border-radius-round};
     overflow: hidden; // not strictly required but declared to be consistent
   }
