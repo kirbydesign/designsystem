@@ -12,8 +12,6 @@ import {
  * This is designed to be beneficial when there's issues with the stacking context.
  *
  * Extends CdkPortalOutlet to gain functionality for attaching/detaching the host element, and for proper cleanup.
- *
- * @status In development
  */
 @Directive({
   selector: '[kirbyPortal]',
@@ -58,7 +56,7 @@ export class PortalDirective extends CdkPortalOutlet {
   }
 
   /**
-   * Nearly identical to base, yet we want to use provided outlet instead of directive host as new content
+   * Nearly identical to super class, yet we want to use provided outlet instead of directive host as new content
    * parent which is otherwise the default for CdKPortal
    */
   public override attachDomPortal = (portal: DomPortal): void => {
