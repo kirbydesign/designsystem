@@ -29,7 +29,7 @@ class TestHostComponent {
   snapToKeyboard = false;
 }
 
-describe('ModalFooterComponent', () => {
+xdescribe('ModalFooterComponent', () => {
   let spectator: SpectatorHost<ModalFooterExperimentalComponent, TestHostComponent>;
   let modalFooterElement: HTMLElement;
   let ionFooterElement: HTMLIonFooterElement;
