@@ -34,64 +34,64 @@ jobs:
         id: get_node_version
         run: echo ::set-output name=node_version::$(jq -r .engines.node ./package.json)
 
-  # lint_and_unittest:
-  #   name: Lint & unit test
-  #   needs: pre_build
-  #   if: ${{ needs.pre_build.outputs.do_build == 'true' }}
-  #   runs-on: ubuntu-latest
-  #   env:
-  #     NODE_VERSION: ${{ needs.pre_build.outputs.node_version }}
-  #   steps:
-  #     - name: Checkout repo
-  #       uses: actions/checkout@v2
-  #     - name: Kirby setup
-  #       uses: ./.github/actions/kirby-setup
-  #     - name: Run linting
-  #       run: npm run lint
-  #     - name: Run tests
-  #       run: npm run test:ci
-  #     - name: Generate coverage report
-  #       run: npm run coverage-report || true
+  lint_and_unittest:
+    name: Lint & unit test
+    needs: pre_build
+    if: ${{ needs.pre_build.outputs.do_build == 'true' }}
+    runs-on: ubuntu-latest
+    env:
+      NODE_VERSION: ${{ needs.pre_build.outputs.node_version }}
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Kirby setup
+        uses: ./.github/actions/kirby-setup
+      - name: Run linting
+        run: npm run lint
+      - name: Run tests
+        run: npm run test:ci
+      - name: Generate coverage report
+        run: npm run coverage-report || true
 
-  # build_kirby:
-  #   name: Build Kirby lib
-  #   needs: pre_build
-  #   if: ${{ needs.pre_build.outputs.do_build == 'true' }}
-  #   runs-on: ubuntu-latest
-  #   env:
-  #     NODE_VERSION: ${{ needs.pre_build.outputs.node_version }}
-  #   steps:
-  #     - name: Checkout repo
-  #       uses: actions/checkout@v2
-  #     - name: Kirby setup
-  #       uses: ./.github/actions/kirby-setup
-  #     - name: Build Kirby lib
-  #       run: npm run dist:designsystem
+  build_kirby:
+    name: Build Kirby lib
+    needs: pre_build
+    if: ${{ needs.pre_build.outputs.do_build == 'true' }}
+    runs-on: ubuntu-latest
+    env:
+      NODE_VERSION: ${{ needs.pre_build.outputs.node_version }}
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Kirby setup
+        uses: ./.github/actions/kirby-setup
+      - name: Build Kirby lib
+        run: npm run dist:designsystem
 
-  # build_kirby_cookbook:
-  #   name: Build Kirby Cookbook
-  #   needs: pre_build
-  #   if: ${{ needs.pre_build.outputs.do_build == 'true' }}
-  #   runs-on: ubuntu-latest
-  #   env:
-  #     NODE_VERSION: ${{ needs.pre_build.outputs.node_version }}
-  #   steps:
-  #     - name: Checkout repo
-  #       uses: actions/checkout@v2
-  #     - name: Kirby setup
-  #       uses: ./.github/actions/kirby-setup
-  #     - name: Build Kirby Cookbook
-  #       run: npm run dist:cookbook
-  #     - name: Upload Kirby Cookbook dist files
-  #       uses: actions/cache@v2
-  #       with:
-  #         path: |
-  #           dist/
-  #         key: cookbook-dist-${{github.run_id}}
+  build_kirby_cookbook:
+    name: Build Kirby Cookbook
+    needs: pre_build
+    if: ${{ needs.pre_build.outputs.do_build == 'true' }}
+    runs-on: ubuntu-latest
+    env:
+      NODE_VERSION: ${{ needs.pre_build.outputs.node_version }}
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Kirby setup
+        uses: ./.github/actions/kirby-setup
+      - name: Build Kirby Cookbook
+        run: npm run dist:cookbook
+      - name: Upload Kirby Cookbook dist files
+        uses: actions/cache@v2
+        with:
+          path: |
+            dist/
+          key: cookbook-dist-${{github.run_id}}
 
   deploy_to_cookbook:
     name: Deploy cookbook
-    # needs: [lint_and_unittest, build_kirby, build_kirby_cookbook]
+    needs: [lint_and_unittest, build_kirby, build_kirby_cookbook]
     runs-on: ubuntu-latest
     env:
       DOMAIN: 'kirby.design'
