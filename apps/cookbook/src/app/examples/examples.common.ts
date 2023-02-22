@@ -49,7 +49,7 @@ import { PagePullToRefreshExampleComponent } from './page-example/pull-to-refres
 import { DropdownExampleComponent } from './dropdown-example/dropdown-example.component';
 import { DataTableExampleComponent } from './data-table-example/data-table-example.component';
 import { LoadingOverlayServiceExampleComponent } from './loading-overlay-example/service/loading-overlay-service-example.component';
-import { ActionListExampleComponent } from '~/app/examples/action-list-example/action-list-example.component';
+import { MenuExampleComponent } from '~/app/examples/menu-example/menu-example.component';
 
 export const COMPONENT_DECLARATIONS: any[] = [
   ExamplesComponent,
@@ -104,5 +104,5 @@ export const COMPONENT_DECLARATIONS: any[] = [
   SectionHeaderExampleComponent,
   ListExperimentalExampleComponent,
   DataTableExampleComponent,
-  ActionListExampleComponent,
+  MenuExampleComponent,
 ];

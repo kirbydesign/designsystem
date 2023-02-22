@@ -1,4 +1,4 @@
-export { ActionListComponent } from '../../../action-list/src/action-list.component';
+export { MenuComponent } from '../../../menu/src/menu.component';
 
 export { KirbyBadge as BadgeComponent } from './web-component-proxies.component';
 

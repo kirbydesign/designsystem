@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
-  selector: 'cookbook-action-list-showcase',
-  templateUrl: './action-list-showcase.component.html',
-  styleUrls: ['./action-list-showcase.component.scss'],
+  selector: 'cookbook-menu-showcase',
+  templateUrl: './menu-showcase.component.html',
+  styleUrls: ['./menu-showcase.component.scss'],
 })
-export class ActionListShowcaseComponent {
+export class MenuShowcaseComponent {
   properties: ApiDescriptionProperty[] = [
     {
       name: 'title',
