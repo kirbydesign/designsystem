@@ -182,6 +182,25 @@ export class FullscreenModalExperimentalExampleComponent {
     return item.title !== 'Vis med egne depoter' ? 'Sortering' : 'Fuldmagter';
   }
 
-  radioItems = ['xxs', 'xs', 'sm', 'md', 'lg'];
   selected = 'md';
+
+  // Nested modal logic
+  nestedOpen = false;
+  nestedSize = 'md';
+  nestedWidth;
+  nestedHeight;
+
+  closedNestedModal() {
+    this.nestedOpen = false;
+  }
+
+  openNestedModal(size: string) {
+    if (size !== 'custom') {
+      this.nestedHeight = undefined;
+      this.nestedWidth = undefined;
+    }
+
+    this.nestedSize = size;
+    this.nestedOpen = true;
+  }
 }

@@ -4,7 +4,18 @@
   <div class="config">
     <h2>Config</h2>
 
-    <kirby-radio-group [items]="radioItems" [(value)]="selected"></kirby-radio-group>
+    <kirby-radio-group [(value)]="selected">
+      <span>Favorites</span>
+      <kirby-radio value="sm" text="Small (600px)"></kirby-radio>
+      <kirby-radio value="md" text="Medium (800px)"></kirby-radio>
+      <kirby-radio value="lg" text="Large (1000px)"></kirby-radio>
+
+      <span>Others</span>
+      <kirby-radio value="xxs" text="XXS (400px)"></kirby-radio>
+      <kirby-radio value="xl" text="XL (1200px)"></kirby-radio>
+    </kirby-radio-group>
+
+    <!-- <kirby-radio-group [items]="radioItems" [(value)]="selected"></kirby-radio-group> -->
 
     <kirby-checkbox
       [checked]="showFooter"
@@ -82,6 +93,20 @@
     </kirby-page-progress>
 
     <!-- DEFAULT SLOT -->
+    <div class="buttons">
+      <button kirby-button (click)="openNestedModal('sm')">S</button>
+      <button kirby-button (click)="openNestedModal('md')">M</button>
+      <button kirby-button (click)="openNestedModal('lg')">L</button>
+      <button kirby-button (click)="openNestedModal('custom')">Custom</button>
+
+      <kirby-form-field>
+        <input kirby-input [size]="'lg'" placeholder="Height" [(ngModel)]="nestedHeight" />
+      </kirby-form-field>
+      <kirby-form-field>
+        <input kirby-input [size]="'lg'" placeholder="Width" [(ngModel)]="nestedWidth" />
+      </kirby-form-field>
+    </div>
+
     <kirby-reorder-list
       (itemReorder)="doReorderItem($event)"
       (subItemReorder)="doReorderShadowAccount($event)"
@@ -229,5 +254,14 @@
       </button>
       <button kirby-button (click)="closeModal()">Close</button>
     </kirby-modal-footer-experimental>
+
+    <kirby-modal-experimental
+      [open]="nestedOpen"
+      [title]="'Nested modal'"
+      (willDismiss)="closedNestedModal()"
+      [size]="nestedSize"
+      [width]="nestedWidth"
+      [height]="nestedHeight"
+    ></kirby-modal-experimental>
   </kirby-modal-experimental>
 </div>
