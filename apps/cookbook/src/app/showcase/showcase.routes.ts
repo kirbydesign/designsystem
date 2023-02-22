@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 
 import { ModalV2RoutingComponent } from '@kirbydesign/designsystem/modal/v2';
-import { ActionListComponent } from '@kirbydesign/designsystem';
 import { ModalRoutePage1ExampleComponent } from '../examples/modal-example/modal-route-example/modal-route-page1-example.component';
 import { ModalRoutePage2ExampleComponent } from '../examples/modal-example/modal-route-example/modal-route-page2-example.component';
 import { ItemShowcaseComponent } from '../showcase/item-showcase/item-showcase.component';
@@ -63,6 +62,7 @@ import { CookbookChartStockConfigShowcaseComponent } from './chart-config-showca
 import { CookbookChartBarConfigShowcaseComponent } from './chart-config-showcase/bar/chart-config-bar-showcase.component';
 import { HeaderShowcaseComponent } from './header-showcase/header-showcase.component';
 import { ActionListShowcaseComponent } from '~/app/showcase/action-list-showcase/action-list-showcase.component';
+import { MenuShowcaseComponent } from '~/app/showcase/menu-showcase/menu-showcase.component';
 
 export const routes: Routes = [
   {
@@ -304,8 +304,8 @@ export const routes: Routes = [
         component: AccordionShowcaseComponent,
       },
       {
-        path: 'action-list',
-        component: ActionListShowcaseComponent,
+        path: 'menu',
+        component: MenuShowcaseComponent,
       },
       {
         path: 'radio',

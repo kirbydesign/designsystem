@@ -3,16 +3,16 @@ import { MockComponent, MockDirectives } from 'ng-mocks';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { ButtonComponent, ButtonSize } from '../button/button.component';
 import { FloatingDirective } from '../../src/lib/directives';
-import { ActionListComponent } from './action-list.component';
+import { MenuComponent } from './menu.component';
 
 describe('ActionListComponent', () => {
   describe('by default', () => {
     const createHost = createHostFactory({
-      component: ActionListComponent,
+      component: MenuComponent,
       declarations: [MockDirectives(FloatingDirective), MockComponent(ButtonComponent)],
     });
 
-    let spectator: Spectator<ActionListComponent>;
+    let spectator: Spectator<MenuComponent>;
     let buttonElement: HTMLButtonElement;
     let card: Element;
     let buttonIcon: IconComponent;
@@ -20,7 +20,7 @@ describe('ActionListComponent', () => {
     const expectedAttentionLevel = '3';
 
     beforeEach(() => {
-      spectator = createHost<ActionListComponent>(`<kirby-action-list></kirby-action-list>`, {});
+      spectator = createHost<MenuComponent>(`<kirby-menu></kirby-menu>`, {});
       buttonElement = spectator.query('button');
       card = spectator.query('kirby-card');
       buttonIcon = spectator.query(IconComponent);

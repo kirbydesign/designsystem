@@ -2,6 +2,6 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'cookbook-action-list-example',
-  templateUrl: './action-list-example.component.html',
+  templateUrl: './menu-example.component.html',
 })
-export class ActionListExampleComponent {}
+export class MenuExampleComponent {}

@@ -14,7 +14,7 @@ import {
 } from '../../src/lib/directives/floating/floating.directive';
 
 @Component({
-  selector: 'kirby-action-list',
+  selector: 'kirby-menu',
   standalone: true,
   imports: [
     ButtonComponent,
@@ -25,11 +25,11 @@ import {
     CardModule,
     ItemModule,
   ],
-  templateUrl: './action-list.component.html',
-  styleUrls: ['./action-list.component.scss'],
+  templateUrl: './menu.component.html',
+  styleUrls: ['./menu.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ActionListComponent {
+export class MenuComponent {
   @Input() public isDisabled: boolean = false;
 
   @Input() public themeColor: ThemeColor = 'dark';

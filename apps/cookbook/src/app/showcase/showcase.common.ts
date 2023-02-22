@@ -59,6 +59,7 @@ import { CookbookChartStockConfigShowcaseComponent } from './chart-config-showca
 import { CookbookChartBarConfigShowcaseComponent } from './chart-config-showcase/bar/chart-config-bar-showcase.component';
 import { HeaderShowcaseComponent } from './header-showcase/header-showcase.component';
 import { ActionListShowcaseComponent } from '~/app/showcase/action-list-showcase/action-list-showcase.component';
+import { MenuShowcaseComponent } from '~/app/showcase/menu-showcase/menu-showcase.component';
 
 export const COMPONENT_IMPORTS: any[] = [ExamplesModule, ShowcaseRoutingModule];
 
@@ -120,6 +121,7 @@ export const COMPONENT_EXPORTS: any[] = [
   CookbookChartBarConfigShowcaseComponent,
   HeaderShowcaseComponent,
   ActionListShowcaseComponent,
+  MenuShowcaseComponent,
 ];
 
 export const COMPONENT_DECLARATIONS: any[] = [...COMPONENT_EXPORTS, ShowcaseComponent];

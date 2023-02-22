@@ -16,7 +16,7 @@ import { ExampleViewerComponent } from '../shared/example-viewer/example-viewer.
 
 import { DividerShowcaseComponent } from './divider-showcase/divider-showcase.component';
 import { COMPONENT_DECLARATIONS, COMPONENT_EXPORTS, COMPONENT_IMPORTS } from './showcase.common';
-import { ActionListShowcaseComponent } from './action-list-showcase/action-list-showcase.component';
+import { MenuShowcaseComponent } from './menu-showcase/menu-showcase.component';
 
 @NgModule({
   imports: [
