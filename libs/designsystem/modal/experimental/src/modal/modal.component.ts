@@ -4,6 +4,7 @@ import { OverlayEventDetail } from '@ionic/core/components';
 import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 
 type Size = 'xxs' | 'xs' | 'sm' | 'md' | 'lg';
+type SizeTemp = 'md';
 
 @Component({
   selector: 'kirby-modal-experimental',
@@ -19,7 +20,7 @@ export class ModalExperimentalComponent {
   @Input() title = '';
   @Input() hasCollapsibleTitle = false;
   @Input() scrollDisabled = false;
-  @Input() size: Size = 'lg';
+  @Input() size: SizeTemp = 'md';
   @Input() height: string;
 
   @Output() willPresent = new EventEmitter<CustomEvent<OverlayEventDetail>>();

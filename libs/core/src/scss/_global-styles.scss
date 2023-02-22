@@ -239,7 +239,7 @@ ion-loading.kirby-loading-overlay {
  * Experimental modal.
  */
 
-ion-modal.kirby-modal-experimental {
+html.ios ion-modal.kirby-modal-experimental {
   @include utils.media('>=medium') {
     &::part(content) {
       margin: 15px;
@@ -268,6 +268,11 @@ ion-modal.kirby-modal-experimental {
     &.lg {
       --width: #{map.get(utils.$experimental-modal-widths, 'l')};
       --height: #{map.get(utils.$experimental-modal-heights, 'l')};
+    }
+
+    ion-toolbar {
+      padding-right: 0;
+      padding-left: 0;
     }
   }
 }
