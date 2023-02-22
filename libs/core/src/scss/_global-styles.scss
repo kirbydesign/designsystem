@@ -8,9 +8,12 @@
 @use 'base/html-list';
 
 @use 'components/grid';
+@use 'themes/component-themes';
 
 :root,
 :host {
+  @include component-themes.apply-light-theme;
+
   --kirby-font-family: 'Roboto';
 
   font-family: var(--kirby-font-family);
