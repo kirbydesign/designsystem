@@ -4,7 +4,7 @@ import { from, Observable, Subject, switchMap, tap } from 'rxjs';
 import { OverlayEventDetail } from '@ionic/core/components';
 
 export type ModalFlavor = 'modal';
-type Size = 'xxs' | 'xs' | 'sm' | 'md' | 'lg';
+type Size = 'md';
 
 export type ModalExperimentalConfig = {
   flavor?: ModalFlavor;
@@ -51,7 +51,7 @@ export class ModalExperimentalController {
         showBackdrop: config.showBackdrop,
         cssClass: [
           'kirby-modal-experimental',
-          config.size ? config.size : 'medium',
+          config.size ? config.size : 'md',
           ...customCssClasses,
         ],
       })
