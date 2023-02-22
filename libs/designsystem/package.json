@@ -4,7 +4,7 @@
   "dependencies": {
     "@fontsource/roboto": "4.2.1",
     "@ionic/angular": "6.2.1",
-    "@kirbydesign/core": "0.0.39",
+    "@kirbydesign/core": "0.0.40",
     "inputmask": "5.0.5"
   },
   "peerDependencies": {
