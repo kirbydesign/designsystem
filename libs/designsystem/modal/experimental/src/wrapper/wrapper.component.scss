@@ -1,14 +1,42 @@
+@use 'sass:map';
 @use '@kirbydesign/core/src/scss/utils';
+@use '@kirbydesign/core/src/scss/themes';
 
-// // Global modal styling can be found at scss/base/_ionic.scss
+// Global modal styling can be found at scss/base/_ionic.scss
 
-$toolbar-padding-inline: utils.size('s');
-$toolbar-padding-block: utils.size('xs');
+$toolbar-mobile-padding-inline: utils.size('s');
+$toolbar-mobile-padding-block: utils.size('xs');
+$toolbar-desktop-padding: utils.size('m');
 
-@mixin phablet-toolbar-padding() {
-  $toolbar-padding-top: utils.size('xxs');
+ion-header {
+  @include themes.apply-light-theme;
+
+  box-sizing: border-box;
+
+  ion-toolbar {
+    --padding-start: #{$toolbar-mobile-padding-inline};
+    --padding-end: #{$toolbar-mobile-padding-inline};
+    --padding-bottom: #{$toolbar-mobile-padding-block};
+    --padding-top: #{$toolbar-mobile-padding-block};
+    --border-width: 0;
+    --background: transparent;
+
+    button {
+      background-color: utils.get-color('white');
+    }
+  }
+
+  &.modal-header {
+    border-bottom: 1px solid utils.get-color('medium');
+  }
+
   @include utils.media('>=medium') {
-    padding-top: $toolbar-padding-top;
+    ion-toolbar {
+      --padding-start: #{$toolbar-desktop-padding};
+      --padding-end: #{$toolbar-desktop-padding};
+      --padding-bottom: #{$toolbar-desktop-padding};
+      --padding-top: #{$toolbar-desktop-padding};
+    }
   }
 }
 
@@ -16,25 +44,19 @@ $toolbar-padding-block: utils.size('xs');
   height: 100%;
   display: flex;
   flex-direction: column;
+
+  --vh100: var(--vh, 1vh) * 100; /// Fixes an issue with vh units on iOS Safari
+  --header-height: 0px;
+  --footer-height: 0px;
 }
 
-ion-header {
-  box-sizing: border-box;
+ion-modal {
+  --background: var(--kirby-modal-background, #{utils.get-color('background-color')});
+  --max-height: 928px;
+  --min-height: 594px;
 
-  ion-toolbar {
-    --padding-start: #{$toolbar-padding-inline};
-    --padding-end: #{$toolbar-padding-inline};
-    --padding-bottom: #{$toolbar-padding-block};
-    --padding-top: #{$toolbar-padding-block};
-    --border-width: 0;
-    --background: transparent;
-    --color: var(--kirby-modal-color, #{utils.get-color('black')});
-
-    button {
-      color: var(--color);
-    }
-
-    @include phablet-toolbar-padding;
+  @include utils.media('>=medium') {
+    --border-radius: 32px;
   }
 }
 
@@ -44,11 +66,19 @@ ion-title {
   padding-inline-end: calc(48px + var(--padding-end));
   font-size: utils.font-size('l');
   font-weight: utils.font-weight('bold');
+
+  @include utils.media('>=medium') {
+    font-size: utils.font-size('n');
+  }
 }
 
 ion-content {
   --background: transparent;
   --color: var(--kirby-modal-color, #{utils.get-color('black')});
+  --padding-top: #{utils.size('m')};
+  --padding-bottom: #{utils.size('m')};
+  --padding-start: #{utils.size('s')};
+  --padding-end: #{utils.size('s')};
 
   display: flex;
   flex-direction: column;
@@ -58,22 +88,15 @@ ion-content {
     display: block;
   }
 
-  --padding-top: #{utils.size('m')};
-  --padding-bottom: #{utils.size('m')};
-  --padding-start: #{utils.size('s')};
-  --padding-end: #{utils.size('s')};
-}
-
-// Ensure padding-rules are not merged with other media query,
-// as this rule has to come AFTER the default mobile-first rule in order to override:
-
-/* clean-css ignore:start */
-@include utils.media('>=medium') {
-  ion-content {
-    --padding-start: #{utils.size('xxxl')};
-    --padding-end: #{utils.size('xxxl')};
+  @include utils.media('>=medium') {
+    --padding-top: #{utils.size('xl')};
+    --padding-bottom: #{utils.size('xl')};
+    --padding-start: #{utils.size('xxl')};
+    --padding-end: #{utils.size('xxl')};
   }
 }
+
+/* clean-css ignore:start */
 
 :host(.collapsible-title) {
   ion-content {
