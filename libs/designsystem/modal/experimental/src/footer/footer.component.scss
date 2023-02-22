@@ -15,6 +15,7 @@ ion-footer {
   background-color: var(--kirby-modal-footer-background, utils.get-color('white'));
   color: var(--kirby-modal-footer-color, utils.get-color('white-contrast'));
   padding: $padding;
+  padding-bottom: calc(#{$padding} + var(--kirby-modal-footer-safe-area-bottom, 0px));
 
   .default-content {
     display: flex;
