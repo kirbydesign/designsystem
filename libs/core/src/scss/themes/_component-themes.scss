@@ -1,17 +1,57 @@
+@use 'sass:color';
 @use '../utils';
+@use '../interaction-state';
 
 @mixin apply-dark-theme {
-  --kirby-interactive-element-background-color: #{utils.get-color('white-overlay')};
-  --kirby-interactive-element-color: #{utils.get-color('white')};
+  --kirby-inputs-background-color: var(--kirby-white-overlay);
+  --kirby-inputs-background-color-hover: var(--kirby-white-overlay-30);
+  --kirby-inputs-background-color-active: var(--kirby-white-overlay-40);
+  --kirby-inputs-color: var(--kirby-white);
+  --kirby-inputs-indicator-background-color: var(--kirby-white);
+  --kirby-inputs-indicator-color: var(--kirby-black);
+  --kirby-inputs-placeholder-color: var(--kirby-white-overlay-50);
 }
 
 @mixin apply-white-theme {
-  --kirby-interactive-element-background-color: #{utils.get-color('dark-overlay')};
-  --kirby-interactive-element-color: #{utils.get-color('black')};
+  --kirby-inputs-background-color: var(--kirby-dark-overlay);
+  --kirby-inputs-background-color-hover: var(--kirby-dark-overlay-10);
+  --kirby-inputs-background-color-active: var(--kirby-dark-overlay-20);
+  --kirby-inputs-color: var(--kirby-black);
+  --kirby-inputs-indicator-background-color: var(--kirby-black);
+  --kirby-inputs-indicator-color: var(--kirby-white);
+  --kirby-inputs-placeholder-color: var(--kirby-semi-dark);
 }
 
 @mixin apply-light-theme {
-  --kirby-interactive-element-background-color: #{utils.get-color('white')};
-  --kirby-interactive-element-color: #{utils.get-color('white-contrast')};
-  --kirby-interactive-elevation: #{utils.get-elevation(2)};
+  --kirby-inputs-background-color: var(--kirby-white);
+  --kirby-inputs-background-color-hover: var(--kirby-dark-overlay-10);
+  --kirby-inputs-background-color-active: var(--kirby-dark-overlay-20);
+  --kirby-inputs-color: var(--kirby-black);
+  --kirby-inputs-indicator-background-color: var(--kirby-black);
+  --kirby-inputs-indicator-color: var(--kirby-white);
+  --kirby-inputs-placeholder-color: var(--kirby-semi-dark);
+
+  // Only set elevation on input components for light theme
+  --kirby-inputs-elevation: var(--kirby-elevation-2);
+}
+
+:host,
+:root {
+  --kirby-white-overlay: hsl(0deg 0% 100% / 15%);
+  --kirby-white-overlay-10: hsl(0deg 0% 100% / 10%);
+  --kirby-white-overlay-20: hsl(0deg 0% 100% / 20%);
+  --kirby-white-overlay-30: hsl(0deg 0% 100% / 30%);
+  --kirby-white-overlay-40: hsl(0deg 0% 100% / 40%);
+  --kirby-white-overlay-50: hsl(0deg 0% 100% / 50%);
+  --kirby-dark-overlay: hsl(0deg 0% 11% / 6%);
+  --kirby-dark-overlay-10: hsl(0deg 0% 11% / 10%);
+  --kirby-dark-overlay-20: hsl(0deg 0% 11% / 20%);
+  --kirby-dark-overlay-30: hsl(0deg 0% 11% / 30%);
+  --kirby-dark-overlay-40: hsl(0deg 0% 11% / 40%);
+  --kirby-dark-overlay-50: hsl(0deg 0% 11% / 50%);
+  --kirby-white: hsl(0deg 0% 100%);
+  --kirby-black: hsl(0deg 0% 11%);
+  --kirby-semi-dark: hsl(0deg 0% 56%);
+  --kirby-elevation-2: 0 1px 24px 0 rgb(28 28 28 / 4%);
+  --kirby-elevation-4: 0 20px 30px -15px hsla(0deg 0% 11% 30%), 0 0 5px 0 hsla(0deg 0% 11% 8%);
 }
