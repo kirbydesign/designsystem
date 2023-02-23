@@ -1,5 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, Input, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ContentChild,
+  ElementRef,
+  Input,
+  ViewChild,
+} from '@angular/core';
 import { Placement } from '@floating-ui/dom';
 import { ThemeColor } from '@kirbydesign/core';
 
@@ -11,6 +18,7 @@ import { ButtonComponent, ButtonSize } from '@kirbydesign/designsystem/button';
 import {
   FloatingDirective,
   FloatingOffset,
+  TriggerEvent,
 } from '../../src/lib/directives/floating/floating.directive';
 
 @Component({
@@ -40,6 +48,8 @@ export class MenuComponent {
 
   @Input() public placement: Placement = 'bottom-start';
 
+  @Input() public triggers: Array<TriggerEvent> = ['click'];
+
   @Input() public autoPlacement: boolean = false;
 
   @Input() public closeOnSelect: boolean = true;
@@ -50,6 +60,8 @@ export class MenuComponent {
 
   @ViewChild(ButtonComponent, { static: true, read: ElementRef })
   public buttonElement: ElementRef<HTMLElement> | undefined;
+
+  @ContentChild(ButtonComponent) public userProvidedButton: ButtonComponent;
 
   public FloatingOffset: typeof FloatingOffset = FloatingOffset;
 }
