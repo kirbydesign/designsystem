@@ -1,7 +1,9 @@
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
 
 @Component({
   standalone: true,
+  imports: [CommonModule],
   selector: 'kirby-flag',
   template: `
     <ng-content></ng-content>
