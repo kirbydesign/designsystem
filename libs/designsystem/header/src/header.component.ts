@@ -101,12 +101,6 @@ export class HeaderComponent implements OnChanges {
   actionsTemplate!: HeaderActionsDirective;
 
   constructor(private breakpointObserver: BreakpointObserver) {
-    console.log({
-      title: this.title,
-      value: this.value,
-      subtitle1: this.subtitle1,
-      subtitle2: this.subtitle2,
-    });
     this.breakpointObserver.observe(['(min-width: 768px)']).subscribe((result: BreakpointState) => {
       if (result.matches) {
         this.isDesktop = true;
