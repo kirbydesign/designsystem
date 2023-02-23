@@ -7,11 +7,14 @@
       <ng-container [ngTemplateOutlet]="flagTemplate.templateRef"></ng-container>
     </div>
     <h1
-      *ngIf="!!titleTemplate && !!valueTemplate"
+      *ngIf="!!(titleTemplate || title) && !!(valueTemplate || value)"
       class="key kirby-text-medium"
-      [kirbyFitHeading]="fitHeadingConfig"
     >
-      <ng-container [ngTemplateOutlet]="titleTemplate.templateRef"></ng-container>
+      <ng-container
+        *ngIf="!!titleTemplate"
+        [ngTemplateOutlet]="titleTemplate.templateRef"
+      ></ng-container>
+      <ng-container *ngIf="!titleTemplate">{{ title }}</ng-container>
     </h1>
   </div>
   <div class="main">
@@ -20,14 +23,22 @@
     </ng-container>
     <div class="main-inner" [ngClass]="{ centered: centered }">
       <h1
-        *ngIf="!!titleTemplate && !valueTemplate"
+        *ngIf="!!(titleTemplate || title) && !(valueTemplate || value)"
         class="title"
         [kirbyFitHeading]="fitHeadingConfig"
       >
-        <ng-container [ngTemplateOutlet]="titleTemplate.templateRef"></ng-container>
+        <ng-container
+          *ngIf="!!titleTemplate"
+          [ngTemplateOutlet]="titleTemplate.templateRef"
+        ></ng-container>
+        <ng-container *ngIf="!titleTemplate">{{ title }}</ng-container>
       </h1>
-      <h3 *ngIf="!!valueTemplate" class="value kirby-text-display-3">
-        <ng-container [ngTemplateOutlet]="valueTemplate.templateRef"></ng-container>
+      <h3 *ngIf="!!(valueTemplate || value)" class="value kirby-text-display-3">
+        <ng-container
+          *ngIf="valueTemplate"
+          [ngTemplateOutlet]="valueTemplate.templateRef"
+        ></ng-container>
+        <ng-container *ngIf="!valueTemplate">{{ value }}</ng-container>
       </h3>
     </div>
     <div *ngIf="isDesktop && !!actionsTemplate" class="main-col">
@@ -37,12 +48,20 @@
     </div>
   </div>
   <div class="secondary" [ngClass]="{ centered: centered }">
-    <div *ngIf="!!subtitle1Template" class="subtitle1 kirby-text-small">
-      <ng-container [ngTemplateOutlet]="subtitle1Template.templateRef"></ng-container>
+    <div *ngIf="!!(subtitle1Template || subtitle1)" class="subtitle1 kirby-text-small">
+      <ng-container
+        *ngIf="subtitle1Template"
+        [ngTemplateOutlet]="subtitle1Template.templateRef"
+      ></ng-container>
+      <ng-container *ngIf="!subtitle1Template">{{ subtitle1 }}</ng-container>
     </div>
 
-    <div *ngIf="!!subtitle2Template" class="subtitle2 kirby-text-small">
-      <ng-container [ngTemplateOutlet]="subtitle2Template.templateRef"></ng-container>
+    <div *ngIf="!!(subtitle2Template || subtitle2)" class="subtitle2 kirby-text-small">
+      <ng-container
+        *ngIf="subtitle2Template"
+        [ngTemplateOutlet]="subtitle2Template.templateRef"
+      ></ng-container>
+      <ng-container *ngIf="!subtitle2Template">{{ subtitle2 }}</ng-container>
     </div>
 
     <div *ngIf="!!customSectionTemplate" class="custom-section">

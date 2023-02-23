@@ -22,6 +22,6 @@ const config = {
   selector: config.selector,
   template: config.template,
 })
-export class HeaderExampleActionsComponent {
+export class HeaderExampleCustomizabilityComponent {
   template: string = config.template;
 }

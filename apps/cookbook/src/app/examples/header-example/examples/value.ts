@@ -3,11 +3,7 @@ import { Component } from '@angular/core';
 const config = {
   selector: 'cookbook-header-example-value',
   template: `
-  <kirby-header>
-    <ng-container *kirbyHeaderTitle>Title</ng-container>
-    <ng-container *kirbyHeaderValue>12.345,67</ng-container>
-    <ng-container *kirbyHeaderSubtitle1>Subtitle one</ng-container>
-    <ng-container *kirbyHeaderSubtitle2>Subtitle two</ng-container>
+  <kirby-header title="Title" value="12.345,67" subtitle1="Subtitle 1" subtitle2="Subtitle 2">
   </kirby-header>
   `,
 };

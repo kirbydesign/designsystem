@@ -8,7 +8,7 @@ import {
   TemplateRef,
 } from '@angular/core';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
-import type { FitHeadingConfig } from '@kirbydesign/designsystem/page';
+import type { FitHeadingConfig } from '@kirbydesign/designsystem/shared';
 
 @Directive({
   selector: '[kirbyHeaderAvatar]',
@@ -82,12 +82,17 @@ export class HeaderComponent implements OnChanges {
   avatarTemplate!: HeaderAvatarDirective;
   @ContentChild(HeaderFlagDirective)
   flagTemplate!: HeaderFlagDirective;
+  @Input() title = null;
   @ContentChild(HeaderTitleDirective)
   titleTemplate!: HeaderTitleDirective;
+  @Input() value = null;
   @ContentChild(HeaderValueDirective)
   valueTemplate!: HeaderValueDirective;
+
+  @Input() subtitle1 = null;
   @ContentChild(HeaderSubtitle1Directive)
   subtitle1Template!: HeaderSubtitle1Directive;
+  @Input() subtitle2 = null;
   @ContentChild(HeaderSubtitle2Directive)
   subtitle2Template!: HeaderSubtitle2Directive;
   @ContentChild(HeaderCustomSectionDirective)
@@ -96,6 +101,12 @@ export class HeaderComponent implements OnChanges {
   actionsTemplate!: HeaderActionsDirective;
 
   constructor(private breakpointObserver: BreakpointObserver) {
+    console.log({
+      title: this.title,
+      value: this.value,
+      subtitle1: this.subtitle1,
+      subtitle2: this.subtitle2,
+    });
     this.breakpointObserver.observe(['(min-width: 768px)']).subscribe((result: BreakpointState) => {
       if (result.matches) {
         this.isDesktop = true;
