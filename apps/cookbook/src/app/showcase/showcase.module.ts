@@ -4,7 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
-import { KirbyModalModule, KirbyModule } from '@kirbydesign/designsystem';
+import { KirbyModule } from '@kirbydesign/designsystem';
+import { KirbyModalModule } from '@kirbydesign/designsystem/modal/experimental';
 
 import { IphoneModule } from '../iphone/iphone.module';
 import { ApiDescriptionEventsComponent } from '../shared/api-description/api-description-events/api-description-events.component';

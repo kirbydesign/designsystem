@@ -1,8 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
-import { FullscreenModalExperimentalComponent } from '@kirbydesign/designsystem/components/modal-experimental/fullscreen/fullscreen.component';
+import { ModalExperimentalComponent } from '@kirbydesign/designsystem/modal/experimental';
 import { KirbyAnimation } from '@kirbydesign/designsystem';
 
-export const fullscreenModalExampleTemplateHTML = `<kirby-fullscreen-modal-experimental
+export const fullscreenModalExampleTemplateHTML = `<kirby-modal-experimental
   [open]="open"
   (willDismiss)="close()"
 >  
@@ -19,7 +19,7 @@ export const fullscreenModalExampleTemplateHTML = `<kirby-fullscreen-modal-exper
       Lorem ipsum dolor sit amet...
     </p>
   </div>
-</kirby-fullscreen-modal-experimental>
+</kirby-modal-experimental>
 
 <button kirby-button (click)="openModal()">Open Modal</button>
 `;
@@ -46,7 +46,7 @@ export const footerSlotExampleTemplate = `<kirby-modal-footer-experimental foote
   styleUrls: ['./fullscreen-experimental-example.component.scss'],
 })
 export class FullscreenModalExperimentalExampleComponent {
-  @ViewChild(FullscreenModalExperimentalComponent) modal: FullscreenModalExperimentalComponent;
+  @ViewChild(ModalExperimentalComponent) modal: ModalExperimentalComponent;
 
   open = false;
   canDismiss = true;

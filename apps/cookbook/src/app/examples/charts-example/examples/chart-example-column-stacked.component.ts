@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
-import { ChartOptions, ColorHelper } from '@kirbydesign/designsystem';
+import { ColorHelper } from '@kirbydesign/designsystem';
+import { ChartOptions } from 'chart.js';
 
 const config = {
   selector: 'cookbook-chart-example-column-stacked',

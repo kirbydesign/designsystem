@@ -46,7 +46,7 @@ export class ModalRoutePage2ExampleComponent {
   }
 
   close() {
-    let someTestData: number = Math.PI;
+    const someTestData: number = Math.PI;
     this.modal.close(someTestData);
   }
 }

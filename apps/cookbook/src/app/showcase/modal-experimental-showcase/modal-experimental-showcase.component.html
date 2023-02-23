@@ -70,6 +70,8 @@
   </li>
 </ul>
 
+<h3><a href="#" (click)="scrollTo(routing)">Routing</a></h3>
+
 <hr />
 
 <h1 #components>Components</h1>
@@ -115,7 +117,7 @@
 <p>
   The
   <code>default</code>
-  slot places the provided markup or component in the modals' content.
+  slot places the provided markup or component in the modal's content.
 </p>
 
 <h3>footer</h3>
@@ -235,3 +237,60 @@
 <cookbook-api-description-properties
   [properties]="wrapperComponentProperties"
 ></cookbook-api-description-properties>
+
+<h1 #routing>Routing</h1>
+
+<p>
+  Instead of providing the modal with a component, you can configure your route to be opened in a
+  modal. This is done by using a secondary outlet named
+  <code>modal-experimental</code>
+  . The url for these kind of routes will look like this
+  <code>/(modal-experimental:some-route)</code>
+  . This means that you can do flows inside of modals just as "normal" pages, and makes it possible
+  to deeplink to specific pages inside of the modal. "Modal" routes will automatically open up a
+  modal, if none is already opened.
+</p>
+
+<p>
+  The code snippet below shows the route configuration for this page. Note that this page also
+  contains a named router outlet called
+  <code>modal-experimental</code>
+  .
+</p>
+
+<p>
+  <em>
+    <strong>*Please note:</strong>
+    The path that has the
+    <code>modal-experimental</code>
+    outlet must use the
+    <code>ModalRoutingExperimentalComponent</code>
+    , which can be imported from Kirby.
+  </em>
+</p>
+
+<cookbook-code-viewer [ts]="routerConfigCodeSnippet"></cookbook-code-viewer>
+
+<cookbook-modal-routing-experimental-example></cookbook-modal-routing-experimental-example>
+
+<cookbook-code-viewer [html]="routerLinkCodeSnippet"></cookbook-code-viewer>
+<cookbook-code-viewer [ts]="programmaticRoutingCodeSnippet"></cookbook-code-viewer>
+
+<p>
+  <em>
+    <strong>*Please note:</strong>
+    Because of limitations with Angular Router it is not possible to close the modal from within a
+    named outlet with the
+    <code>routerLink</code>
+    directive, and must be done programmatically like shown above. When closing the modal it must be
+    relative to the parent that contains the named
+    <code>router-outlet</code>
+    . In the case of the modal on page 2 we need to go two levels up to close the modal, when
+    pressing
+    <code>Finish</code>
+    , which is why we provide
+    <code>this.route.parent.parent</code>
+    . All logic to close the modal when clicking the backdrop or the close button in the header is
+    handled by the modal itself.
+  </em>
+</p>

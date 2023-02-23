@@ -1,9 +1,12 @@
 import { Routes } from '@angular/router';
 
+import { ModalRoutingExperimentalComponent } from '@kirbydesign/designsystem/modal/experimental';
 import { ModalRoutePage1ExampleComponent } from '../examples/modal-example/modal-route-example/modal-route-page1-example.component';
 import { ModalRoutePage2ExampleComponent } from '../examples/modal-example/modal-route-example/modal-route-page2-example.component';
 import { ItemShowcaseComponent } from '../showcase/item-showcase/item-showcase.component';
 
+import { ModalRoutingExperimentalExamplePage1Component } from '../examples/modal-experimental-example/modal-routing/modal-routing-experimental-example-page1.component';
+import { ModalRoutingExperimentalExamplePage2Component } from '../examples/modal-experimental-example/modal-routing/modal-routing-experimental-example-page2.component';
 import { AccordionShowcaseComponent } from './accordion-showcase/accordion-showcase.component';
 import { ActionSheetShowcaseComponent } from './action-sheet-showcase/action-sheet-showcase.component';
 import { AlertShowcaseComponent } from './alert-showcase/alert-showcase.component';
@@ -190,6 +193,23 @@ export const routes: Routes = [
       {
         path: 'modal-experimental',
         component: ModalExperimentalShowcaseComponent,
+        children: [
+          {
+            path: 'modal',
+            component: ModalRoutingExperimentalComponent,
+            outlet: 'modal-experimental',
+            children: [
+              {
+                path: 'page1',
+                component: ModalRoutingExperimentalExamplePage1Component,
+              },
+              {
+                path: 'page2',
+                component: ModalRoutingExperimentalExamplePage2Component,
+              },
+            ],
+          },
+        ],
       },
       {
         path: 'loading-overlay',

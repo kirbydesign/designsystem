@@ -28,8 +28,9 @@
 
   &.default-mode {
     ion-segment {
-      --background: #{utils.get-color('white')};
+      --background: var(--kirby-inputs-background-color);
 
+      box-shadow: var(--kirby-inputs-elevation);
       width: fit-content; // The segmented control itself is block-level, but we don't want it to stretch
       overflow: visible; // Ensures the badge is not cut off
       contain: none; // Ensures the badge is not cut off
@@ -53,7 +54,7 @@
     }
 
     ion-segment-button {
-      --background: #{utils.get-color('white')};
+      --background: var(--kirby-inputs-background-color);
       --indicator-transition: none;
 
       flex: initial;
@@ -83,26 +84,15 @@ ion-segment {
 }
 
 ion-segment-button {
-  @include interaction-state.apply-focus-visible {
-    outline: none;
-    border-radius: utils.$border-radius-round;
-  }
-  @include interaction-state.apply-hover-ionic;
-  @include interaction-state.apply-active-ionic('s');
+  @include interaction-state.apply-focus-part($part: 'native');
   @include utils.accessible-target-size;
-
-  &.segment-button-checked {
-    @include interaction-state.apply-hover-ionic('l', $make-lighter: true);
-    @include interaction-state.apply-active-ionic('xxxl', $make-lighter: true);
-  }
 
   --border-radius: #{utils.$border-radius-round};
   --border-style: none;
   --background: none;
-  --color: #{utils.get-color('white-contrast')};
-  --indicator-color: #{utils.get-color('black')};
-  --color-checked: #{utils.get-color('black-contrast')};
-  --color-hover: #{utils.get-color('black-tint')};
+  --color: var(--kirby-inputs-color);
+  --indicator-color: var(--kirby-inputs-indicator-background-color);
+  --color-checked: var(--kirby-inputs-indicator-color);
   --indicator-box-shadow: none;
   --indicator-transform: none;
   --padding-start: #{utils.size('m')};
@@ -121,10 +111,8 @@ ion-segment-button {
 
   // NOTE: This is a custom implementation of the hover interaction state;
   // identical to FabSheet's ion-fab-button & PageComponent's ion-back-button.
-  opacity: 1; // not strictly required but declared to be consistent
 
   &::part(native) {
-    opacity: 1; // required for interaction states to work
     border-radius: #{utils.$border-radius-round};
     overflow: hidden; // not strictly required but declared to be consistent
   }

@@ -1,6 +1,6 @@
 import { Component, forwardRef, Input } from '@angular/core';
 
-import { PageFooterComponent } from '@kirbydesign/designsystem';
+import { PageFooterComponent } from '@kirbydesign/designsystem/page';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({

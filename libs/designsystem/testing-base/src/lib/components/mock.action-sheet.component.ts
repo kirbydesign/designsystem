@@ -1,6 +1,6 @@
 import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 
-import { ActionSheetComponent, ActionSheetItem } from '@kirbydesign/designsystem';
+import { ActionSheetComponent, ActionSheetItem } from '@kirbydesign/designsystem/modal';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
