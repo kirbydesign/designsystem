@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { from, Observable, Subject, switchMap, tap } from 'rxjs';
+import { from, map, Observable, Subject, switchMap, tap } from 'rxjs';
 import { OverlayEventDetail } from '@ionic/core/components';
 
 export type ModalFlavor = 'modal';
-type Size = 'md';
+type Size = 'xxs' | 'xs' | 'sm' | 'md' | 'lg';
+type SizeTemp = 'md';
 
 export type ModalExperimentalConfig = {
   flavor?: ModalFlavor;
@@ -14,7 +15,7 @@ export type ModalExperimentalConfig = {
   canDismiss?: boolean | (() => Promise<boolean>);
   backdropDismiss?: boolean;
   showBackdrop?: boolean;
-  size?: Size;
+  size?: SizeTemp;
   height?: string;
 };
 
@@ -61,10 +62,11 @@ export class ModalExperimentalController {
 
     modal$
       .pipe(
-        tap((modal) => {
+        map((modal) => {
           if (config.height) {
             modal.style.setProperty('--height', config.height);
           }
+          return modal;
         }),
         tap((modal) => from(modal.present())),
         switchMap((modal) => modal.onWillDismiss())
