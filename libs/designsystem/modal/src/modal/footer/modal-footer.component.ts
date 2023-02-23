@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -17,7 +18,7 @@ import {
 
 @Component({
   standalone: true,
-  imports: [IonicModule, ThemeColorDirective],
+  imports: [IonicModule, ThemeColorDirective, CommonModule],
   selector: 'kirby-modal-footer',
   templateUrl: './modal-footer.component.html',
   styleUrls: ['./modal-footer.component.scss'],

@@ -60,4 +60,15 @@ export class SegmentedControlShowcaseComponent {
       type: ['boolean'],
     },
   ];
+
+  items = [
+    {
+      text: 'Item 1',
+      id: '1',
+    },
+    {
+      text: 'Item 2',
+      id: '2',
+    },
+  ];
 }
