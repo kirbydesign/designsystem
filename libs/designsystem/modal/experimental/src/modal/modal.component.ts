@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { IonContent, IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
@@ -13,6 +13,8 @@ type SizeTemp = 'md';
 })
 export class ModalExperimentalComponent {
   @ViewChild(IonModal) modal: IonModal;
+  @ViewChild(IonModal, { static: true, read: ElementRef })
+  modalElement: ElementRef<HTMLElement>;
   @ViewChild(IonContent) ionContent: IonContent;
 
   @Input() open = false;
@@ -21,7 +23,9 @@ export class ModalExperimentalComponent {
   @Input() hasCollapsibleTitle = false;
   @Input() scrollDisabled = false;
   @Input() size: SizeTemp = 'md';
-  @Input() height: string;
+  @Input() set height(userDefinedHeight: string) {
+    this.modalElement.nativeElement.style.setProperty('--height', userDefinedHeight);
+  }
 
   @Output() willPresent = new EventEmitter<CustomEvent<OverlayEventDetail>>();
   @Output() didPresent = new EventEmitter<CustomEvent<OverlayEventDetail>>();
