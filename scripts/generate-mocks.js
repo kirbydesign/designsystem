@@ -23,13 +23,14 @@ function hasFlag(flag) {
 
 const inputPaths = {
   angular: './libs/designsystem/src/lib/',
+  designsystem: './libs/designsystem/',
   core: './libs/core/src/',
 };
 
 function hasChanges(inputPaths) {
   return new Promise((resolve, reject) => {
     exec(
-      `git diff --name-only '${inputPaths.angular}' '${inputPaths.core}'`,
+      `git diff --name-only '${inputPaths.designsystem}' '${inputPaths.core}'`,
       (e, stdout, stderr) => {
         if (e) return reject(e);
         if (stderr) return reject(stderr);
@@ -47,7 +48,7 @@ function generateMocks() {
   };
   const subFolder = '/components/';
   // core input path is not needed to generate angular mocks
-  new GenerateMocks().renderMocks(inputPaths.angular, outputPaths, subFolder);
+  new GenerateMocks().renderMocks(inputPaths.designsystem, outputPaths, '');
 }
 
 hasChanges(inputPaths).then((hasChanged) => {

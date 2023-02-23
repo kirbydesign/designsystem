@@ -16,6 +16,7 @@ import { ItemComponent, ItemSize } from '@kirbydesign/designsystem/item';
 export class MockItemComponent {
   @Input() disabled: boolean;
   @Input() selected: boolean;
+  @Input() disclosure: 'link' | 'arrow-more' | 'arrow-down' | 'arrow-up';
   @Input() selectable: boolean;
   @Input() reorderable: boolean;
   @Input() size: ItemSize | `${ItemSize}`;

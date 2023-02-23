@@ -28,6 +28,7 @@ type OutputPaths = {
 
 export class GenerateMocks {
   async renderMocks(rootPath: string, outputPaths: OutputPaths, subPath: string) {
+    console.log('path', rootPath);
     const inputPath = path.join(rootPath, subPath);
     const outputPathNormalized = path.normalize(outputPaths.base);
     const classMap = new Map<string, string[]>();
@@ -164,7 +165,11 @@ ${providers},
     const files = await Promise.all(
       dirents
         .filter((dirent) => {
-          return dirent.isDirectory() || dirent.name.endsWith('index.ts');
+          return (
+            dirent.isDirectory() ||
+            dirent.name.endsWith('index.ts') ||
+            dirent.name.endsWith('public_api.ts')
+          );
         })
         .map((dirent) => {
           const res = resolve(folderpath, dirent.name);

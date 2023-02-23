@@ -1,17 +1,22 @@
 // AUTO-GENERATED - PLEASE DON'T EDIT THIS FILE MANUALLY
 
 import {
+  AlertExperimentalController,
   ChartConfigService,
   ChartJSService,
-  IconRegistryService,
   LoadingOverlayService,
+  ModalController,
+  ModalExperimentalController,
   TabsService,
+  ToastController,
 } from '@kirbydesign/designsystem';
-
-import { ToastController } from '@kirbydesign/designsystem/toast';
-import { ModalController } from '@kirbydesign/designsystem/modal';
-
 import { EMPTY } from 'rxjs';
+
+export function alertExperimentalControllerFactory() {
+  return jasmine.createSpyObj<AlertExperimentalController>('AlertExperimentalController', [
+    'showAlert',
+  ]);
+}
 
 export function chartConfigServiceFactory() {
   return jasmine.createSpyObj<ChartConfigService>('ChartConfigService', [
@@ -37,14 +42,17 @@ export function chartJSServiceFactory() {
   ]);
 }
 
-export function iconRegistryServiceFactory() {
-  return jasmine.createSpyObj<IconRegistryService>('IconRegistryService', ['addIcon', 'addIcons']);
-}
-
 export function loadingOverlayServiceFactory() {
   return jasmine.createSpyObj<LoadingOverlayService>('LoadingOverlayService', [
     'showLoadingOverlay',
     'hideLoadingOverlay',
+  ]);
+}
+
+export function modalExperimentalControllerFactory() {
+  return jasmine.createSpyObj<ModalExperimentalController>('ModalExperimentalController', [
+    'showModal',
+    'closeModal',
   ]);
 }
 
@@ -75,6 +83,10 @@ export function toastControllerFactory() {
 
 export const MOCK_PROVIDERS = [
   {
+    provide: AlertExperimentalController,
+    useFactory: alertExperimentalControllerFactory,
+  },
+  {
     provide: ChartConfigService,
     useFactory: chartConfigServiceFactory,
   },
@@ -83,12 +95,12 @@ export const MOCK_PROVIDERS = [
     useFactory: chartJSServiceFactory,
   },
   {
-    provide: IconRegistryService,
-    useFactory: iconRegistryServiceFactory,
-  },
-  {
     provide: LoadingOverlayService,
     useFactory: loadingOverlayServiceFactory,
+  },
+  {
+    provide: ModalExperimentalController,
+    useFactory: modalExperimentalControllerFactory,
   },
   {
     provide: ModalController,

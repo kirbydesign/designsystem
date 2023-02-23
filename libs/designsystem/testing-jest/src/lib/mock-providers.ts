@@ -1,16 +1,22 @@
 // AUTO-GENERATED - PLEASE DON'T EDIT THIS FILE MANUALLY
 
 import {
+  AlertExperimentalController,
   ChartConfigService,
   ChartJSService,
-  IconRegistryService,
   LoadingOverlayService,
   ModalController,
+  ModalExperimentalController,
   TabsService,
+  ToastController,
 } from '@kirbydesign/designsystem';
-
-import { ToastController } from '@kirbydesign/designsystem/toast';
 import { EMPTY } from 'rxjs';
+
+export function alertExperimentalControllerFactory() {
+  return {
+    showAlert: jest.fn(),
+  };
+}
 
 export function chartConfigServiceFactory() {
   return {
@@ -36,17 +42,17 @@ export function chartJSServiceFactory() {
   };
 }
 
-export function iconRegistryServiceFactory() {
-  return {
-    addIcon: jest.fn(),
-    addIcons: jest.fn(),
-  };
-}
-
 export function loadingOverlayServiceFactory() {
   return {
     showLoadingOverlay: jest.fn(),
     hideLoadingOverlay: jest.fn(),
+  };
+}
+
+export function modalExperimentalControllerFactory() {
+  return {
+    showModal: jest.fn(),
+    closeModal: jest.fn(),
   };
 }
 
@@ -81,6 +87,10 @@ export function toastControllerFactory() {
 
 export const MOCK_PROVIDERS = [
   {
+    provide: AlertExperimentalController,
+    useFactory: alertExperimentalControllerFactory,
+  },
+  {
     provide: ChartConfigService,
     useFactory: chartConfigServiceFactory,
   },
@@ -89,12 +99,12 @@ export const MOCK_PROVIDERS = [
     useFactory: chartJSServiceFactory,
   },
   {
-    provide: IconRegistryService,
-    useFactory: iconRegistryServiceFactory,
-  },
-  {
     provide: LoadingOverlayService,
     useFactory: loadingOverlayServiceFactory,
+  },
+  {
+    provide: ModalExperimentalController,
+    useFactory: modalExperimentalControllerFactory,
   },
   {
     provide: ModalController,

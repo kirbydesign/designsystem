@@ -26,7 +26,7 @@ const ATTENTION_LEVEL_4_DEPRECATION_WARNING =
   standalone: true,
   imports: [CommonModule],
   // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'button[kirby-button],Button[kirby-button]',
+  selector: 'button[kirby-button],Button[kirby-button]ggggg',
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
