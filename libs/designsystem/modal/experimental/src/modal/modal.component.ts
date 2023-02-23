@@ -24,6 +24,8 @@ export class ModalExperimentalComponent {
   @Input() scrollDisabled = false;
   @Input() size: SizeTemp = 'md';
   @Input() set height(userDefinedHeight: string) {
+    // If the user has defined a height, then we override the --height
+    // specified by the 'size' classes in /core/src/scss/_global-styles.scss
     this.modalElement.nativeElement.style.setProperty('--height', userDefinedHeight);
   }
 
