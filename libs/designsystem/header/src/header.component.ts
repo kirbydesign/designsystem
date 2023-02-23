@@ -2,12 +2,13 @@ import {
   Component,
   ContentChild,
   Directive,
+  HostListener,
   Input,
   OnChanges,
   SimpleChanges,
   TemplateRef,
 } from '@angular/core';
-import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
+import { PlatformService } from '@kirbydesign/designsystem/helpers';
 import type { FitHeadingConfig } from '@kirbydesign/designsystem/page';
 
 @Directive({
@@ -100,14 +101,11 @@ export class HeaderComponent implements OnChanges {
   @ContentChild(HeaderActionsDirective)
   actionsTemplate!: HeaderActionsDirective;
 
-  constructor(private breakpointObserver: BreakpointObserver) {
-    this.breakpointObserver.observe(['(min-width: 768px)']).subscribe((result: BreakpointState) => {
-      if (result.matches) {
-        this.isDesktop = true;
-      } else {
-        this.isDesktop = false;
-      }
-    });
+  constructor(private platform: PlatformService) {}
+
+  @HostListener('window:resize')
+  _onWindowResize() {
+    this.isDesktop = this.platform.isPhabletOrBigger();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
