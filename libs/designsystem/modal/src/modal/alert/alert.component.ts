@@ -10,6 +10,7 @@ import {
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { Observable, of } from 'rxjs';
 import { IconModule } from '@kirbydesign/designsystem/icon';
+import { ThemeColor } from '@kirbydesign/designsystem/helpers';
 import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import { EmptyStateModule } from '@kirbydesign/designsystem/empty-state';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
@@ -49,7 +50,7 @@ export class AlertComponent implements AfterViewInit {
   }
 
   @Input() iconName: string;
-  @Input() iconThemeColor: string;
+  @Input() iconThemeColor: ThemeColor | `${ThemeColor}`;
   @Input() okBtn: string;
   @Input() okBtnIsDestructive: boolean;
   @Input() cancelBtn: string;
