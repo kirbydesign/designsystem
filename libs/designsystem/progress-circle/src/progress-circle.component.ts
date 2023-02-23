@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -12,7 +13,7 @@ import { ProgressCircleRingComponent } from './progress-circle-ring.component';
 
 @Component({
   standalone: true,
-  imports: [ProgressCircleRingComponent],
+  imports: [ProgressCircleRingComponent, CommonModule],
   selector: 'kirby-progress-circle',
   templateUrl: './progress-circle.component.html',
   styleUrls: ['./progress-circle.component.scss'],

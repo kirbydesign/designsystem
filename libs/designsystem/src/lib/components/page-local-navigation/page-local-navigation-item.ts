@@ -1,16 +1,11 @@
 import { ThemeColor } from '@kirbydesign/core';
 
-type BadgeIcon = {
-  name: string;
-  isCustom: boolean;
-};
-
-type BadgeText = {
-  text: string;
-};
-
 type ItemBadge = {
-  content: BadgeIcon | BadgeText;
+  content: {
+    name?: string;
+    isCustom?: boolean;
+    text?: string;
+  };
   description?: string;
   themeColor: ThemeColor;
 };
