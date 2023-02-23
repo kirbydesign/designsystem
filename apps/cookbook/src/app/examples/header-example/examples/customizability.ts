@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 const config = {
-  selector: 'cookbook-header-example-actions',
+  selector: 'cookbook-header-example-customizability',
   template: `
   <kirby-header title="Title" subtitle1="Subtitle one" subtitle2="Subtitle two" >
     <ng-container *kirbyHeaderActions>
