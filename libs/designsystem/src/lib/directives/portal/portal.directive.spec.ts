@@ -1,6 +1,23 @@
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
 import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
-import { PortalTestComponent } from './portal-test.component';
+import { Component, ElementRef, TemplateRef, ViewChild } from '@angular/core';
+import { PortalDirective } from './portal.directive';
+
+@Component({
+  template: `
+    <div #outletElement></div>
+    <div #hostElement kirbyPortal [outlet]="outletElement"></div>
+    <ng-template #templateRef></ng-template>
+  `,
+  imports: [PortalDirective],
+  standalone: true,
+})
+class PortalTestComponent {
+  @ViewChild('outletElement') public outletElement: ElementRef;
+  @ViewChild(PortalDirective) public portalDirective: PortalDirective;
+  @ViewChild('hostElement') public hostElement: ElementRef;
+  @ViewChild('templateRef', { read: TemplateRef }) public templateRef: TemplateRef<unknown>;
+}
 
 describe('PortalDirective', () => {
   let spectator: Spectator<PortalTestComponent>;
