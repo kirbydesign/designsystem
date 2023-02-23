@@ -33,27 +33,11 @@
 
   <!-- Page header -->
   <div class="page-header-container" *ngIf="hasPageTitle">
-    <div
-      class="page-header"
-      [ngClass]="{
-        'text-center': titleAlignment === 'center',
-        'text-right': titleAlignment === 'right'
-      }"
-    >
-      <div #pageTitle class="page-title" [class.has-actions]="!!pageActionsTemplate">
-        <ng-container
-          *ngTemplateOutlet="customTitleTemplate || defaultPageTitleTemplate"
-        ></ng-container>
-        <ng-container
-          *ngTemplateOutlet="pageActionsTemplate || defaultPageActionsTemplate"
-        ></ng-container>
-      </div>
-      <div *ngIf="hasPageSubtitle" class="page-subtitle">
-        <ng-container
-          *ngTemplateOutlet="customSubtitleTemplate || defaultPageSubtitleTemplate"
-        ></ng-container>
-      </div>
-    </div>
+    <ng-container
+      *ngTemplateOutlet="
+        customHeaderTemplate || (false ? experimentalPageHeader : legacyPageHeader)
+      "
+    ></ng-container>
   </div>
 
   <!--  Sticky content -->
@@ -106,3 +90,36 @@
 <ng-template #simpleTitleTemplate>{{ title }}</ng-template>
 <ng-template #simpleSubtitleTemplate>{{ subtitle }}</ng-template>
 <ng-template #simpleToolbarTitleTemplate>{{ toolbarTitle }}</ng-template>
+
+<ng-template #legacyPageHeader>
+  <div
+    class="page-header"
+    [ngClass]="{
+      'text-center': titleAlignment === 'center',
+      'text-right': titleAlignment === 'right'
+    }"
+  >
+    <div #pageTitle class="page-title" [class.has-actions]="!!pageActionsTemplate">
+      <ng-container
+        *ngTemplateOutlet="customTitleTemplate || defaultPageTitleTemplate"
+      ></ng-container>
+      <ng-container
+        *ngTemplateOutlet="pageActionsTemplate || defaultPageActionsTemplate"
+      ></ng-container>
+    </div>
+    <div *ngIf="hasPageSubtitle" class="page-subtitle">
+      <ng-container
+        *ngTemplateOutlet="customSubtitleTemplate || defaultPageSubtitleTemplate"
+      ></ng-container>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #experimentalPageHeader>
+  <kirby-header #pageTitle [titleMaxLines]="2" [centered]="titleAlignment === 'center'">
+    <ng-container *kirbyHeaderTitle>{{ title }}</ng-container>
+    <ng-container *kirbyHeaderSubtitle1>
+      <ng-container *ngTemplateOutlet="simpleSubtitleTemplate"></ng-container>
+    </ng-container>
+  </kirby-header>
+</ng-template>

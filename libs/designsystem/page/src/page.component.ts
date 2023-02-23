@@ -61,6 +61,11 @@ export interface PullToRefreshEvent {
 }
 
 @Directive({
+  selector: '[kirbyPageHeader]',
+})
+export class PageHeaderDirective {}
+
+@Directive({
   selector: '[kirbyPageTitle]',
 })
 export class PageTitleDirective {}
@@ -228,6 +233,8 @@ export class PageComponent
   private customToolbarTitleTemplate: TemplateRef<any>;
   @ContentChild(PageTitleDirective, { static: false, read: TemplateRef })
   customTitleTemplate: TemplateRef<any>;
+  @ContentChild(PageHeaderDirective, { static: false, read: TemplateRef })
+  customHeaderTemplate: TemplateRef<any>;
   @ContentChild(PageSubtitleDirective, { static: false, read: TemplateRef })
   customSubtitleTemplate: TemplateRef<any>;
   @ContentChildren(PageActionsDirective)
@@ -381,8 +388,10 @@ export class PageComponent
     this.isActive = true;
 
     this.enter.emit();
-    if (this.pageTitle) {
-      this.pageTitleIntersectionObserverRef.observe(this.pageTitle.nativeElement);
+
+    const titleElement = this.pageTitle;
+    if (titleElement) {
+      this.pageTitleIntersectionObserverRef.observe(titleElement.nativeElement);
     }
   }
 
@@ -391,8 +400,10 @@ export class PageComponent
     this.isActive = false;
 
     this.leave.emit();
-    if (this.pageTitle) {
-      this.pageTitleIntersectionObserverRef.unobserve(this.pageTitle.nativeElement);
+
+    const titleElement = this.pageTitle;
+    if (titleElement) {
+      this.pageTitleIntersectionObserverRef.unobserve(titleElement.nativeElement);
     }
 
     if (this.tabBarBottomHidden && this.tabsComponent) {
@@ -431,7 +442,10 @@ export class PageComponent
     if (this.hasPageTitle) {
       this.pageTitleIntersectionObserverRef.disconnect();
       setTimeout(() => {
-        this.pageTitleIntersectionObserverRef.observe(this.pageTitle.nativeElement);
+        const titleElement = this.pageTitle;
+        if (titleElement) {
+          this.pageTitleIntersectionObserverRef.observe(titleElement.nativeElement);
+        }
       });
     }
 
