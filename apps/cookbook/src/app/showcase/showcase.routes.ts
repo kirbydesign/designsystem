@@ -10,6 +10,7 @@ import { ModalRoutingExperimentalExamplePage2Component } from '../examples/modal
 import { AccordionShowcaseComponent } from './accordion-showcase/accordion-showcase.component';
 import { ActionSheetShowcaseComponent } from './action-sheet-showcase/action-sheet-showcase.component';
 import { AlertShowcaseComponent } from './alert-showcase/alert-showcase.component';
+import { AlertExperimentalShowcaseComponent } from './alert-experimental-showcase/alert-experimental-showcase.component';
 import { AvatarShowcaseComponent } from './avatar-showcase/avatar-showcase.component';
 import { BadgeShowcaseComponent } from './badge-showcase/badge-showcase.component';
 import { ButtonShowcaseComponent } from './button-showcase/button-showcase.component';
@@ -226,6 +227,10 @@ export const routes: Routes = [
       {
         path: 'alert',
         component: AlertShowcaseComponent,
+      },
+      {
+        path: 'alert-experimental',
+        component: AlertExperimentalShowcaseComponent,
       },
       {
         path: 'badge',
