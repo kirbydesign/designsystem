@@ -238,9 +238,18 @@ ion-loading.kirby-loading-overlay {
 /*
  * Experimental modal.
  */
+$modal-max-height: 928px;
+$modal-max-width: 594px;
+$modal-border-radius: 32px;
 
 html.ios ion-modal.kirby-modal-experimental {
+  --background: var(--kirby-modal-background, #{utils.get-color('background-color')});
+  --max-height: #{$modal-max-height};
+  --min-height: #{$modal-max-width};
+
   @include utils.media('>=medium') {
+    --border-radius: #{$modal-border-radius};
+
     &::part(content) {
       margin: 15px;
     }
