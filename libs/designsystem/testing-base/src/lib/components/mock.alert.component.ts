@@ -1,26 +1,26 @@
-import { Component, forwardRef, Input } from '@angular/core';
-import { Observable } from 'rxjs';
-
-import { AlertExperimentalComponent } from '@kirbydesign/designsystem';
-
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
-  selector: 'kirby-alert-experimental',
+  selector: 'kirby-alert',
   template: '<ng-content></ng-content>',
   providers: [
     {
-      provide: AlertExperimentalComponent,
-      useExisting: forwardRef(() => MockAlertExperimentalComponent),
+      provide: AlertComponent,
+      useExisting: forwardRef(() => MockAlertComponent),
     },
   ],
 })
-export class MockAlertExperimentalComponent {
+export class MockAlertComponent {
   @Input() title: string | Observable<string>;
   @Input() message: string & Observable<string>;
   @Input() iconName: string;
   @Input() iconThemeColor: ThemeColor | `${ThemeColor}`;
-  @Input() okButton: string;
-  @Input() okButtonIsDestructive: boolean;
+  @Input() okBtn: string;
+  @Input() okBtnIsDestructive: boolean;
+  @Input() cancelBtn: string;
+}
+
+// #endregion
+oolean;
   @Input() cancelButton: string;
 }
 

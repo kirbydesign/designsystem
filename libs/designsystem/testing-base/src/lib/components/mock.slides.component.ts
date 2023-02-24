@@ -1,17 +1,4 @@
-import { Component, Directive, forwardRef, Input } from '@angular/core';
-import { SlideDirective, SlidesComponent } from '@kirbydesign/designsystem/slide';
-
-@Directive({
-  selector: '[kirbySlide]',
-  providers: [
-    {
-      provide: SlideDirective,
-      useExisting: forwardRef(() => MockSlideDirective),
-    },
-  ],
-})
-export class MockSlideDirective {}
-
+// #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
   selector: 'kirby-slides',
   template: '<ng-content></ng-content>',
@@ -25,4 +12,9 @@ export class MockSlideDirective {}
 export class MockSlidesComponent {
   @Input() slidesOptions: any;
   @Input() slides: any[];
+  @Output() selectedSlide = new EventEmitter<any>();
+
+  slideTo() {}
 }
+
+// #endregion

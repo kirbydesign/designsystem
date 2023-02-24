@@ -1,1 +1,1 @@
-export { ListItemComponent } from './list-item.component';
+export { ListItemComponent, BoundaryClass } from './list-item.component';

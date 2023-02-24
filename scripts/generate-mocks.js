@@ -46,12 +46,13 @@ function generateMocks() {
     jasmine: './libs/designsystem/testing-jasmine/src/lib/',
     jest: './libs/designsystem/testing-jest/src/lib/',
   };
-  const subFolder = '/components/';
+
   // core input path is not needed to generate angular mocks
   new GenerateMocks().renderMocks(inputPaths.designsystem, outputPaths, '');
 }
 
 hasChanges(inputPaths).then((hasChanged) => {
+  console.log('hasChanged', hasChanged, 'inputPaths', inputPaths);
   if (!hasChanged && !hasFlag('force')) return;
   generateMocks();
 });

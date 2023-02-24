@@ -28,7 +28,6 @@ type OutputPaths = {
 
 export class GenerateMocks {
   async renderMocks(rootPath: string, outputPaths: OutputPaths, subPath: string) {
-    console.log('path', rootPath);
     const inputPath = path.join(rootPath, subPath);
     const outputPathNormalized = path.normalize(outputPaths.base);
     const classMap = new Map<string, string[]>();
@@ -187,7 +186,14 @@ ${providers},
     exportedProviders: ComponentMetaData[],
     aliasesMap: Map<string, string>
   ) {
-    const folderContent = readdirSync(folderpath);
+    const folderContent = readdirSync(folderpath)
+      .filter((fileOrFolder) => !fileOrFolder.endsWith('.spec.ts'))
+      .filter(
+        (fileOrFolder) =>
+          !fileOrFolder.includes('testing-base') &&
+          !fileOrFolder.includes('testing-jasmine') &&
+          !fileOrFolder.includes('testing-jest')
+      );
     for (const fileOrFolder of folderContent) {
       const fullPath = path.join(folderpath, fileOrFolder);
       const ent = statSync(fullPath);
