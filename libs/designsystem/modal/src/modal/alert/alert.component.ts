@@ -37,17 +37,17 @@ export class AlertComponent implements AfterViewInit {
   @ViewChild('alertWrapper', { static: true }) private alertWrapper: ElementRef;
   private scrollY: number = Math.abs(this.windowRef.nativeWindow.scrollY);
 
-  title$: Observable<string>;
-  @Input()
-  set title(title: string | Observable<string>) {
-    this.title$ = typeof title === 'string' ? of(title) : title;
-  }
+  // title$: Observable<string>;
+  // @Input()
+  // set title(title: string | Observable<string>) {
+  //   this.title$ = typeof title === 'string' ? of(title) : title;
+  // }
 
-  message$: Observable<string>;
-  @Input()
-  set message(message: string & Observable<string>) {
-    this.message$ = typeof message === 'string' ? of(message) : message;
-  }
+  // message$: Observable<string>;
+  // @Input()
+  // set message(message: string & Observable<string>) {
+  //   this.message$ = typeof message === 'string' ? of(message) : message;
+  // }
 
   @Input() iconName: string;
   @Input() iconThemeColor: ThemeColor | `${ThemeColor}`;

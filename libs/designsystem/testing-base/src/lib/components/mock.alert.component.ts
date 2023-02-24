@@ -10,8 +10,6 @@
   ],
 })
 export class MockAlertComponent {
-  @Input() title: string | Observable<string>;
-  @Input() message: string & Observable<string>;
   @Input() iconName: string;
   @Input() iconThemeColor: ThemeColor | `${ThemeColor}`;
   @Input() okBtn: string;
@@ -20,7 +18,13 @@ export class MockAlertComponent {
 }
 
 // #endregion
-oolean;
+erimentalComponent {
+  @Input() title: string | Observable<string>;
+  @Input() message: string & Observable<string>;
+  @Input() iconName: string;
+  @Input() iconThemeColor: ThemeColor | `${ThemeColor}`;
+  @Input() okButton: string;
+  @Input() okButtonIsDestructive: boolean;
   @Input() cancelButton: string;
 }
 
