@@ -4,23 +4,24 @@ import {
   Component,
   ContentChildren,
   ElementRef,
+  QueryList,
+  Renderer2,
   ViewChild,
+  ViewChildren,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { DropdownComponent, DropdownModule } from '@kirbydesign/designsystem/dropdown';
-
-// // eslint-disable-next-line
-// @Directive({ selector: '[buttonGroupElement]' })
-// export class ButtonGroupElementDirective {}
 
 @Component({
   selector: 'kirby-button-group',
   standalone: true,
   imports: [CommonModule, DropdownModule],
   template: `
-    <div class="button-container" #buttonContainer>
-      <ng-content></ng-content>
+    <div class="collider" #boundingBox>
+      <div class="button-container" #buttonContainer>
+        <ng-content></ng-content>
+      </div>
       <kirby-dropdown
         [items]="['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5']"
         popout="left"
@@ -31,41 +32,44 @@ import { DropdownComponent, DropdownModule } from '@kirbydesign/designsystem/dro
   `,
   styleUrls: ['./button-group.component.scss'],
 })
-export class ButtonGroupComponent implements AfterContentInit, AfterViewInit {
-  @ContentChildren(ButtonComponent, { read: ElementRef }) children!: ElementRef[];
-  @ViewChild('buttonContainer', { read: ElementRef }) buttonContainer!: ElementRef;
+export class ButtonGroupComponent implements AfterViewInit {
+  @ContentChildren(ButtonComponent, { read: ElementRef }) children!: QueryList<
+    ElementRef<HTMLElement>
+  >;
+  @ViewChild('buttonContainer', { read: ElementRef }) buttonContainer!: ElementRef<HTMLElement>;
+  @ViewChild('boundingBox', { read: ElementRef }) boundingBox!: ElementRef<HTMLElement>;
   @ViewChild(DropdownComponent, { read: ElementRef }) dropdown!: ElementRef;
 
   private observerOptions;
 
-  ngAfterContentInit(): void {
-    console.log(this.children);
-  }
+  constructor(private renderer: Renderer2) {}
 
   ngAfterViewInit(): void {
-    console.log(this.buttonContainer);
-
     this.observerOptions = {
-      root: this.buttonContainer.nativeElement,
+      root: this.boundingBox.nativeElement,
       rootMargin: '0px',
       threshold: 1.0,
     };
 
-    const observer = new IntersectionObserver(this.callback, this.observerOptions);
+    const observer = new IntersectionObserver(this.removeLastChild, this.observerOptions);
 
-    this.children.forEach((button) => {
-      observer.observe(button.nativeElement);
-    });
+    observer.observe(this.buttonContainer.nativeElement);
   }
 
-  callback = (entries) => {
+  removeLastChild = (entries) => {
     entries.forEach((entry: IntersectionObserverEntry) => {
       if (entry.intersectionRatio < 1) {
-        (entry.target as HTMLElement).style.visibility = 'hidden';
+        console.log('intersecting');
+
         this.dropdown.nativeElement.style.display = 'block';
-      }
-      if (entry.intersectionRatio === 1) {
-        (entry.target as HTMLElement).style.visibility = 'visible';
+
+        const buttons = this.buttonContainer.nativeElement.querySelectorAll('button');
+
+        if (buttons.length > 0)
+          this.renderer.removeChild(
+            this.buttonContainer.nativeElement,
+            buttons[buttons.length - 1]
+          );
       }
     });
   };

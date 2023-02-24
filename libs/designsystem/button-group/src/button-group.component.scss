@@ -1,6 +1,7 @@
+@use '@kirbydesign/core/src/scss/utils';
+
 .button-container {
   display: flex;
-  overflow: hidden;
   justify-content: flex-end;
 }
 
@@ -10,4 +11,12 @@ kirby-dropdown {
 
 .hide {
   display: none;
+}
+
+.collider {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  overflow: hidden;
+  min-width: utils.$fat-finger-size;
 }
