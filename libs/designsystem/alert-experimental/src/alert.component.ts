@@ -13,6 +13,7 @@ import { IconModule } from '@kirbydesign/designsystem/icon';
 import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import { EmptyStateModule } from '@kirbydesign/designsystem/empty-state';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { ThemeColor } from '@kirbydesign/designsystem/helpers';
 
 @Component({
   standalone: true,
@@ -49,7 +50,7 @@ export class AlertExperimentalComponent implements AfterViewInit {
   }
 
   @Input() iconName: string;
-  @Input() iconThemeColor: string;
+  @Input() iconThemeColor: ThemeColor | `${ThemeColor}`;
   @Input() okButton: string;
   @Input() okButtonIsDestructive: boolean;
   @Input() cancelButton: string;
