@@ -82,6 +82,21 @@
     </cookbook-example-viewer>
   </div>
 
+  <div class="header-example-container">
+    <h2>Customizability</h2>
+    <p>
+      This shows how you can use the directives instead of the properties to customize the header by
+      simply allowing you to provide markup instead of simple strings.
+    </p>
+    <cookbook-example-viewer [html]="customizabilityExample.template">
+      <div class="header-example">
+        <cookbook-header-example-customizability
+          #customizabilityExample
+        ></cookbook-header-example-customizability>
+      </div>
+    </cookbook-example-viewer>
+  </div>
+
   <h1>API</h1>
   <h2>Header Properties:</h2>
   <cookbook-api-description-properties
