@@ -1,2 +1,2 @@
-export * from './alert.component';
-export * from './config/alert-config';
+export { AlertComponent } from './alert.component';
+export { AlertConfig } from './config/alert-config';

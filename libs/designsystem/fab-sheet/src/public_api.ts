@@ -1,1 +1,1 @@
-export * from './fab-sheet.component';
+export { FabSheetComponent } from './fab-sheet.component';

@@ -1,1 +1,1 @@
-export * from './toggle.component';
+export { ToggleComponent } from './toggle.component';

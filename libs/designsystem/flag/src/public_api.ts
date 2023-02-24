@@ -1,1 +1,1 @@
-export * from './flag.component';
+export { FlagComponent } from './flag.component';

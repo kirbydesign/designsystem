@@ -1,1 +1,1 @@
-export * from './item-group.component';
+export { ItemGroupComponent } from './item-group.component';

@@ -1,2 +1,2 @@
-export * from './progress-circle.component';
-export * from './progress-circle-ring.component';
+export { ProgressCircleComponent } from './progress-circle.component';
+export { ProgressCircleRingComponent } from './progress-circle-ring.component';

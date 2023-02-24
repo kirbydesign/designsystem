@@ -1,1 +1,1 @@
-export * from './checkbox.component';
+export { CheckboxComponent } from './checkbox.component';

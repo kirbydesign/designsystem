@@ -1,1 +1,1 @@
-export * from './range.component';
+export { RangeComponent } from './range.component';

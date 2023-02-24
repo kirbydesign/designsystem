@@ -18,6 +18,7 @@ export class MockCardHeaderComponent {
   @Input() subtitle: string;
   @Input() isTitleBold: boolean;
   @Input() flagged: CardFlagLevel;
+  @Input() hasPadding: boolean;
 }
 
 // #endregion

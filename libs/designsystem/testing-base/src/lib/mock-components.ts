@@ -3,16 +3,29 @@
 import { MockAccordionItemComponent } from './components/mock.accordion-item.component';
 import { MockAlertExperimentalComponent } from './components/mock.alert.component';
 import { MockAvatarComponent } from './components/mock.avatar.component';
+import { MockButtonComponent } from './components/mock.button.component';
 import { MockCalendarComponent } from './components/mock.calendar.component';
+import { MockCardFooterComponent } from './components/mock.card-footer.component';
+import { MockCardHeaderComponent } from './components/mock.card-header.component';
+import { MockCardComponent } from './components/mock.card.component';
 import { MockChartComponent } from './components/mock.chart.component';
 import { MockBaseChartComponent } from './components/mock.base-chart.component';
+import { MockStockChartComponent } from './components/mock.stock-chart.component';
+import { MockCheckboxComponent } from './components/mock.checkbox.component';
 import { MockTableComponent } from './components/mock.table.component';
 import { MockTableRowComponent } from './components/mock.table-row.component';
+import { MockDividerComponent } from './components/mock.divider.component';
+import { MockDropdownComponent } from './components/mock.dropdown.component';
+import { MockEmptyStateComponent } from './components/mock.empty-state.component';
+import { MockFabSheetComponent } from './components/mock.fab-sheet.component';
+import { MockFlagComponent } from './components/mock.flag.component';
 import { MockFormFieldMessageComponent } from './components/mock.form-field-message.component';
 import { MockFormFieldComponent } from './components/mock.form-field.component';
 import { MockInputComponent } from './components/mock.input.component';
 import { MockInputCounterComponent } from './components/mock.input-counter.component';
 import { MockTextareaComponent } from './components/mock.textarea.component';
+import { MockGridComponent } from './components/mock.grid.component';
+import { MockIconComponent } from './components/mock.icon.component';
 import { MockItemComponent } from './components/mock.item.component';
 import { MockLabelComponent } from './components/mock.label.component';
 import { MockAppComponent } from './components/mock.kirby-app.component';
@@ -46,55 +59,36 @@ import { MockSegmentedControlComponent } from './components/mock.segmented-contr
 import { MockBadgeComponent } from './components/mock.web-component-proxies.component';
 import { MockTabButtonComponent } from './components/mock.tab-button.component';
 import { MockTabsComponent } from './components/mock.tabs.component';
-import { MockMockActionSheetComponent } from './components/mock.mock.action-sheet.component';
-import { MockMockAppComponent } from './components/mock.mock.app.component';
-import { MockMockBadgeComponent } from './components/mock.mock.badge.component';
-import { MockMockButtonComponent } from './components/mock.mock.button.component';
-import { MockMockCardFooterComponent } from './components/mock.mock.card-footer.component';
-import { MockMockCardHeaderComponent } from './components/mock.mock.card-header.component';
-import { MockMockCardComponent } from './components/mock.mock.card.component';
-import { MockMockCheckboxComponent } from './components/mock.mock.checkbox.component';
-import { MockMockDividerComponent } from './components/mock.mock.divider.component';
-import { MockMockDropdownComponent } from './components/mock.mock.dropdown.component';
-import { MockMockEmptyStateComponent } from './components/mock.mock.empty-state.component';
-import { MockMockFabSheetComponent } from './components/mock.mock.fab-sheet.component';
-import { MockMockFlagComponent } from './components/mock.mock.flag.component';
-import { MockMockGridComponent } from './components/mock.mock.grid.component';
-import { MockMockIconComponent } from './components/mock.mock.icon.component';
-import { MockMockItemGroupComponent } from './components/mock.mock.item-group.component';
-import { MockMockItemSlidingComponent } from './components/mock.mock.item-sliding.component';
-import { MockMockListExperimentalComponent } from './components/mock.mock.list-experimental.component';
-import { MockMockListHeaderComponent } from './components/mock.mock.list-header.component';
-import { MockMockListItemComponent } from './components/mock.mock.list-item.component';
-import { MockMockListSectionHeaderComponent } from './components/mock.mock.list-section-header.component';
-import { MockMockListComponent } from './components/mock.mock.list.component';
-import { MockMockPopoverComponent } from './components/mock.mock.popover.component';
-import { MockMockProgressCircleComponent } from './components/mock.mock.progress-circle.component';
-import { MockMockRangeComponent } from './components/mock.mock.range.component';
-import { MockMockSectionHeaderComponent } from './components/mock.mock.section-header.component';
-import { MockMockSlideButtonComponent } from './components/mock.mock.slide-button.component';
-import {
-  MockMockSlideDirective,
-  MockMockSlidesComponent,
-} from './components/mock.mock.slides.component';
-import { MockMockToggleButtonComponent } from './components/mock.mock.toggle-button.component';
-import { MockMockToggleComponent } from './components/mock.mock.toggle.component';
+
 import { MockToggleButtonComponent } from './components/mock.toggle-button.component';
 
 export const MOCK_COMPONENTS = [
   MockAccordionItemComponent,
   MockAlertExperimentalComponent,
   MockAvatarComponent,
+  MockButtonComponent,
   MockCalendarComponent,
+  MockCardFooterComponent,
+  MockCardHeaderComponent,
+  MockCardComponent,
   MockChartComponent,
   MockBaseChartComponent,
+  MockStockChartComponent,
+  MockCheckboxComponent,
   MockTableComponent,
   MockTableRowComponent,
+  MockDividerComponent,
+  MockDropdownComponent,
+  MockEmptyStateComponent,
+  MockFabSheetComponent,
+  MockFlagComponent,
   MockFormFieldMessageComponent,
   MockFormFieldComponent,
   MockInputComponent,
   MockInputCounterComponent,
   MockTextareaComponent,
+  MockGridComponent,
+  MockIconComponent,
   MockItemComponent,
   MockLabelComponent,
   MockAppComponent,
@@ -126,36 +120,5 @@ export const MOCK_COMPONENTS = [
   MockBadgeComponent,
   MockTabButtonComponent,
   MockTabsComponent,
-  MockMockActionSheetComponent,
-  MockMockAppComponent,
-  MockMockBadgeComponent,
-  MockMockButtonComponent,
-  MockMockCardFooterComponent,
-  MockMockCardHeaderComponent,
-  MockMockCardComponent,
-  MockMockCheckboxComponent,
-  MockMockDividerComponent,
-  MockMockDropdownComponent,
-  MockMockEmptyStateComponent,
-  MockMockFabSheetComponent,
-  MockMockFlagComponent,
-  MockMockGridComponent,
-  MockMockIconComponent,
-  MockMockItemGroupComponent,
-  MockMockItemSlidingComponent,
-  MockMockListExperimentalComponent,
-  MockMockListHeaderComponent,
-  MockMockListItemComponent,
-  MockMockListSectionHeaderComponent,
-  MockMockListComponent,
-  MockMockPopoverComponent,
-  MockMockProgressCircleComponent,
-  MockMockRangeComponent,
-  MockMockSectionHeaderComponent,
-  MockMockSlideButtonComponent,
-  MockMockSlideDirective,
-  MockMockSlidesComponent,
-  MockMockToggleButtonComponent,
-  MockMockToggleComponent,
   MockToggleButtonComponent,
 ];

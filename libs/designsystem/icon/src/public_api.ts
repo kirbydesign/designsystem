@@ -1,5 +1,5 @@
-export * from './icon-registry.service';
-export * from './icon-settings';
-export * from './icon.component';
-export * from './icon.module';
-export * from './kirby-icon-settings';
+export { IconRegistryService } from './icon-registry.service';
+export { Icon, IconSettings } from './icon-settings';
+export { IconSize, IconComponent } from './icon.component';
+export { IconModule } from './icon.module';
+export { kirbyIconSettings, defaultIcons } from './kirby-icon-settings';

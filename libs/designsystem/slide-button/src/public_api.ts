@@ -1,1 +1,1 @@
-export * from './slide-button.component';
+export { SlideButtonComponent } from './slide-button.component';

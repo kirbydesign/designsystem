@@ -1,1 +1,1 @@
-export * from './modal-compact-wrapper.component';
+export { ModalCompactWrapperComponent } from './modal-compact-wrapper.component';

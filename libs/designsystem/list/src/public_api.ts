@@ -7,7 +7,12 @@ export * from './list-section-header';
 
 export * from './list-swipe-action';
 
-export * from './list.component';
-export * from './list.directive';
-export * from './list.event';
-export * from './list.module';
+export { ListShape, StandAloneSpacing, ListComponent } from './list.component';
+export {
+  ListItemTemplateDirective,
+  ListHeaderDirective,
+  ListSectionHeaderDirective,
+  ListFooterDirective,
+} from './list.directive';
+export { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
+export { ListModule } from './list.module';

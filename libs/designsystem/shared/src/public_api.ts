@@ -1,9 +1,8 @@
-export * from './resize-observer/resize-observer.factory';
-export * from './resize-observer/resize-observer.service';
-export * from './theme-color/theme-color.directive';
+export { ResizeObserverFactory } from './resize-observer/resize-observer.factory';
+export { ResizeObserverService } from './resize-observer/resize-observer.service';
+export { ThemeColorDirective } from './theme-color/theme-color.directive';
 
-export * from './component-configuration';
-export * from './component-loader.directive';
-export * from './dynamic-component';
-
-export * from './fit-heading/index';
+export * from './fit-heading';
+export { ComponentConfiguration } from './component-configuration';
+export { ComponentLoaderDirective } from './component-loader.directive';
+export { DynamicComponent } from './dynamic-component';

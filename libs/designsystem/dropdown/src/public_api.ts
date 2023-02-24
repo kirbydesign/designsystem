@@ -1,5 +1,4 @@
-export * from './dropdown.component';
-export * from './dropdown.module';
-export * from './dropdown.types';
-export * from './keyboard-handler.service';
-export * from './dropdown.module';
+export { DropdownComponent } from './dropdown.component';
+export { DropdownModule } from './dropdown.module';
+export { OpenState, VerticalDirection } from './dropdown.types';
+export { KeyboardHandlerService } from './keyboard-handler.service';

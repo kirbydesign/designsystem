@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-namespace */
-import { DesignTokenHelper } from './design-token-helper';
+import { DesignTokenHelper } from './public_api';
 
 export namespace KirbyAnimation {
   export enum Duration {

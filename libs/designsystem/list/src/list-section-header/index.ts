@@ -1,1 +1,1 @@
-export * from './list-section-header.component';
+export { ListSectionHeaderComponent } from './list-section-header.component';

@@ -1,1 +1,1 @@
-export * from './fit-heading.directive';
+export { FitHeadingConfig, FitHeadingDirective } from './fit-heading.directive';

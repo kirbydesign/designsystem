@@ -1,3 +1,3 @@
-export * from './modal-wrapper.component';
-export * from './config/index';
-export * from './compact/index';
+export { ModalWrapperComponent } from './modal-wrapper.component';
+export * from './config';
+export * from './compact';

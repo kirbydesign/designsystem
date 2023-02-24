@@ -1,2 +1,2 @@
-export * from './toast.helper';
-export * from './toast.controller';
+export { ToastHelper } from './toast.helper';
+export { ToastController } from './toast.controller';

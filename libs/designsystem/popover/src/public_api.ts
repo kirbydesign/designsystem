@@ -1,1 +1,1 @@
-export * from './popover.component';
+export { HorizontalDirection, PopoverComponent } from './popover.component';

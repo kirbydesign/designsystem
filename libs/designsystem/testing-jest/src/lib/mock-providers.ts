@@ -4,6 +4,7 @@ import {
   AlertExperimentalController,
   ChartConfigService,
   ChartJSService,
+  IconRegistryService,
   LoadingOverlayService,
   ModalController,
   ModalExperimentalController,
@@ -39,6 +40,13 @@ export function chartJSServiceFactory() {
     updateOptions: jest.fn(),
     updateAnnotations: jest.fn(),
     updateHighlightedElements: jest.fn(),
+  };
+}
+
+export function iconRegistryServiceFactory() {
+  return {
+    addIcon: jest.fn(),
+    addIcons: jest.fn(),
   };
 }
 
@@ -97,6 +105,10 @@ export const MOCK_PROVIDERS = [
   {
     provide: ChartJSService,
     useFactory: chartJSServiceFactory,
+  },
+  {
+    provide: IconRegistryService,
+    useFactory: iconRegistryServiceFactory,
   },
   {
     provide: LoadingOverlayService,

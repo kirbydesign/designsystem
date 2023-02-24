@@ -1,1 +1,1 @@
-export * from './list-helper';
+export { ListHelper } from './list-helper';

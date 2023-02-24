@@ -1,1 +1,1 @@
-export * from './kirby-ionic.module';
+export { KirbyIonicModule } from './kirby-ionic.module';

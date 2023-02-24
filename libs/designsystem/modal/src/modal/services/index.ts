@@ -1,4 +1,4 @@
-export * from './modal.helper';
-export * from './action-sheet.helper';
-export * from './alert.helper';
-export * from './modal.controller';
+export { ModalHelper } from './modal.helper';
+export { ActionSheetHelper } from './action-sheet.helper';
+export { AlertHelper } from './alert.helper';
+export { ModalController } from './modal.controller';

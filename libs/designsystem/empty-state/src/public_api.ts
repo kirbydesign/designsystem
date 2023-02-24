@@ -1,2 +1,2 @@
-export * from './empty-state.component';
-export * from './empty-state.module';
+export { EmptyStateComponent } from './empty-state.component';
+export { EmptyStateModule } from './empty-state.module';

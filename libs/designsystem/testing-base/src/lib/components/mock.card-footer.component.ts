@@ -13,6 +13,8 @@ import { CardFooterComponent } from '@kirbydesign/designsystem/card';
     },
   ],
 })
-export class MockCardFooterComponent {}
+export class MockCardFooterComponent {
+  @Input() hasPadding: boolean;
+}
 
 // #endregion

@@ -1,1 +1,1 @@
-export * from './window-ref';
+export { WindowRef } from './window-ref';

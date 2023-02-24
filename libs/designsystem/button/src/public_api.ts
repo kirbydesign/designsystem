@@ -1,1 +1,1 @@
-export * from './button.component';
+export { ButtonComponent, ButtonSize } from './button.component';

@@ -1,1 +1,1 @@
-export * from './stock-chart.component';
+export { StockChartComponent } from './stock-chart.component';

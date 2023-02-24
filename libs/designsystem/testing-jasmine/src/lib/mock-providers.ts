@@ -4,6 +4,7 @@ import {
   AlertExperimentalController,
   ChartConfigService,
   ChartJSService,
+  IconRegistryService,
   LoadingOverlayService,
   ModalController,
   ModalExperimentalController,
@@ -40,6 +41,10 @@ export function chartJSServiceFactory() {
     'updateAnnotations',
     'updateHighlightedElements',
   ]);
+}
+
+export function iconRegistryServiceFactory() {
+  return jasmine.createSpyObj<IconRegistryService>('IconRegistryService', ['addIcon', 'addIcons']);
 }
 
 export function loadingOverlayServiceFactory() {
@@ -93,6 +98,10 @@ export const MOCK_PROVIDERS = [
   {
     provide: ChartJSService,
     useFactory: chartJSServiceFactory,
+  },
+  {
+    provide: IconRegistryService,
+    useFactory: iconRegistryServiceFactory,
   },
   {
     provide: LoadingOverlayService,

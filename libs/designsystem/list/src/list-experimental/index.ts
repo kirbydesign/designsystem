@@ -1,1 +1,1 @@
-export * from './list-experimental.component';
+export { ListExperimentalComponent } from './list-experimental.component';

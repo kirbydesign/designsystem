@@ -1,3 +1,3 @@
-export * from './breakpoint-helper.service';
-export * from './grid-card-configuration';
-export * from './grid.component';
+export { BreakpointHelperService } from './breakpoint-helper.service';
+export { GridCardConfiguration } from './grid-card-configuration';
+export { GridComponent } from './grid.component';
