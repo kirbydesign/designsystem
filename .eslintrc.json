@@ -65,7 +65,9 @@
     },
     {
       "files": ["*.html"],
-      "rules": {}
+      "rules": {
+        "prettier/prettier": "off"
+      }
     }
   ],
   "rules": {
