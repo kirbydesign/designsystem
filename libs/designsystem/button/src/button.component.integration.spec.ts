@@ -14,11 +14,11 @@ import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
 import { EmptyStateComponent } from '@kirbydesign/designsystem/empty-state';
 
 import {
-  FitHeadingDirective,
   PageActionsDirective,
   PageComponent,
   PageTitleDirective,
 } from '@kirbydesign/designsystem/page';
+import { FitHeadingDirective } from '@kirbydesign/designsystem/shared';
 
 import { ButtonComponent } from './button.component';
 
