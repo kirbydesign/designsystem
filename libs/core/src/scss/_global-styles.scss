@@ -278,11 +278,11 @@ html.ios ion-modal.kirby-modal-experimental {
       --width: #{map.get(utils.$experimental-modal-widths, 'l')};
       --height: #{map.get(utils.$experimental-modal-heights, 'l')};
     }
+  }
 
-    ion-toolbar {
-      padding-right: 0;
-      padding-left: 0;
-    }
+  ion-toolbar {
+    padding-right: 0;
+    padding-left: 0;
   }
 
   .kirby-grid {

@@ -12,7 +12,9 @@
     <ion-header class="modal-header">
       <ion-toolbar>
         <ng-content select="[header-start]"></ng-content>
-        <ion-title>{{ title }}</ion-title>
+        <ion-title class="kirby-text-medium">
+          {{ title }}
+        </ion-title>
         <ion-buttons slot="end">
           <button kirby-button attentionLevel="1" size="md" (click)="_closeModal()">
             <kirby-icon [name]="'close'"></kirby-icon>

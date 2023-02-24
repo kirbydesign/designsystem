@@ -55,12 +55,6 @@ ion-title {
   box-sizing: border-box;
   padding-inline-start: calc(48px + var(--padding-start));
   padding-inline-end: calc(48px + var(--padding-end));
-  font-size: utils.font-size('l');
-  font-weight: utils.font-weight('bold');
-
-  @include utils.media('>=medium') {
-    font-size: utils.font-size('n');
-  }
 }
 
 ion-content {
