@@ -1,4 +1,13 @@
-:host {
+.button-container {
   display: flex;
   overflow: hidden;
+  justify-content: flex-end;
+}
+
+kirby-dropdown {
+  margin: 4px;
+}
+
+.hide {
+  display: none;
 }
