@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { from, map, Observable, Subject, switchMap, tap } from 'rxjs';
+import { from, map, Observable, switchMap, take, tap } from 'rxjs';
 import { OverlayEventDetail } from '@ionic/core/components';
 
 export type ModalFlavor = 'modal';
@@ -32,12 +32,6 @@ export class ModalExperimentalController {
   public showModal(config: ModalExperimentalConfig): ModalDismissObservables {
     if (this.isModalOpening) return;
 
-    const $onWillDismiss = new Subject<OverlayEventDetail>();
-    const onWillDismiss$ = $onWillDismiss.asObservable();
-
-    const $onDidDismiss = new Subject<OverlayEventDetail>();
-    const onDidDismiss$ = $onDidDismiss.asObservable();
-
     let customCssClasses: string[] = [];
     if (config.cssClass) {
       customCssClasses = Array.isArray(config.cssClass) ? config.cssClass : [config.cssClass];
@@ -60,30 +54,23 @@ export class ModalExperimentalController {
 
     this.isModalOpening = true;
 
-    modal$
-      .pipe(
-        map((modal) => {
-          if (config.height) {
-            modal.style.setProperty('--height', config.height);
-          }
-          return modal;
-        }),
-        tap((modal) => from(modal.present())),
-        switchMap((modal) => modal.onWillDismiss())
-      )
-      .subscribe((res) => {
-        this.isModalOpening = false;
+    const onWillDismiss$ = modal$.pipe(
+      map((modal) => {
+        if (config.height) {
+          modal.style.setProperty('--height', config.height);
+        }
+        return modal;
+      }),
+      tap((modal) => from(modal.present())),
+      switchMap((modal) => modal.onWillDismiss()),
+      take(1)
+    );
 
-        $onWillDismiss.next(res);
-        $onWillDismiss.complete();
-
-        $onDidDismiss.next(res);
-        $onDidDismiss.complete();
-      });
+    this.isModalOpening = false;
 
     return {
       onWillDismiss: onWillDismiss$,
-      onDidDismiss: onDidDismiss$,
+      onDidDismiss: onWillDismiss$,
     };
   }
 
