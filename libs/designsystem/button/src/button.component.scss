@@ -5,6 +5,7 @@
 @use '@kirbydesign/core/src/scss/utils';
 
 $button-width: (
+  xs: 44px,
   sm: 44px,
   md: 88px,
   lg: 220px,
@@ -12,6 +13,39 @@ $button-width: (
 
 @function button-width($key) {
   @return map.get($button-width, $key);
+}
+
+@mixin button-xs {
+  font-size: utils.font-size('xs');
+  height: utils.size('m');
+  min-width: button-width('xs');
+
+  &:not(.icon-only) {
+    --kirby-button-padding-left: #{utils.size('s')};
+    --kirby-button-padding-right: #{utils.size('s')};
+  }
+
+  &.icon-only {
+    --kirby-icon-font-size: #{utils.size('s')};
+
+    width: utils.size('m');
+    min-width: unset;
+  }
+
+  &.icon-left {
+    --kirby-button-padding-left: #{utils.size('xs')};
+  }
+
+  &.icon-right {
+    --kirby-button-padding-right: #{utils.size('xs')};
+  }
+
+  &.icon-left,
+  &.icon-right {
+    --kirby-icon-font-size: #{utils.size('s')};
+
+    min-width: button-width('xs');
+  }
 }
 
 @mixin button-sm {
@@ -166,6 +200,10 @@ $button-width: (
     width: utils.size('xl');
     padding: 0;
     min-width: unset;
+  }
+
+  &.xs {
+    @include button-xs;
   }
 
   &.sm {
