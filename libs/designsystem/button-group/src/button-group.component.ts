@@ -1,13 +1,12 @@
 import {
-  AfterContentInit,
   AfterViewInit,
   Component,
   ContentChildren,
   ElementRef,
+  OnDestroy,
   QueryList,
   Renderer2,
   ViewChild,
-  ViewChildren,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
@@ -32,7 +31,7 @@ import { DropdownComponent, DropdownModule } from '@kirbydesign/designsystem/dro
   `,
   styleUrls: ['./button-group.component.scss'],
 })
-export class ButtonGroupComponent implements AfterViewInit {
+export class ButtonGroupComponent implements AfterViewInit, OnDestroy {
   @ContentChildren(ButtonComponent, { read: ElementRef }) children!: QueryList<
     ElementRef<HTMLElement>
   >;
@@ -40,9 +39,14 @@ export class ButtonGroupComponent implements AfterViewInit {
   @ViewChild('boundingBox', { read: ElementRef }) boundingBox!: ElementRef<HTMLElement>;
   @ViewChild(DropdownComponent, { read: ElementRef }) dropdown!: ElementRef;
 
+  private observer;
   private observerOptions;
 
   constructor(private renderer: Renderer2) {}
+
+  ngOnDestroy(): void {
+    this.observer.disconnect();
+  }
 
   ngAfterViewInit(): void {
     this.observerOptions = {
