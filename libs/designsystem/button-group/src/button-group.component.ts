@@ -4,7 +4,6 @@ import {
   ContentChildren,
   ElementRef,
   OnDestroy,
-  QueryList,
   Renderer2,
   ViewChild,
 } from '@angular/core';
@@ -16,29 +15,16 @@ import { DropdownComponent, DropdownModule } from '@kirbydesign/designsystem/dro
   selector: 'kirby-button-group',
   standalone: true,
   imports: [CommonModule, DropdownModule],
-  template: `
-    <div class="bounding-box" #boundingBox>
-      <div class="hidden-buttons" #hiddenButtons><ng-content></ng-content></div>
-      <div class="visible-buttons" #visibleButtons></div>
-      <kirby-dropdown
-        [items]="['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5']"
-        popout="left"
-        [usePopover]="true"
-      ></kirby-dropdown>
-    </div>
-  `,
+  templateUrl: './button-group.component.html',
   styleUrls: ['./button-group.component.scss'],
 })
 export class ButtonGroupComponent implements AfterViewInit, OnDestroy {
-  @ContentChildren(ButtonComponent, { read: ElementRef }) children!: QueryList<
-    ElementRef<HTMLElement>
-  >;
   @ViewChild('visibleButtons', { read: ElementRef }) visibleButtons!: ElementRef<HTMLElement>;
   @ViewChild('hiddenButtons', { read: ElementRef }) hiddenButtons!: ElementRef<HTMLElement>;
   @ViewChild('boundingBox', { read: ElementRef }) boundingBox!: ElementRef<HTMLElement>;
   @ViewChild(DropdownComponent, { read: ElementRef }) dropdown!: ElementRef;
 
-  @ContentChildren(ButtonComponent, { read: ElementRef }) buttons!: ElementRef[];
+  @ContentChildren(ButtonComponent, { read: ElementRef }) buttons: ElementRef[];
 
   private visibleButtonsObserver: IntersectionObserver;
   private hiddenButtonsObserver: IntersectionObserver;
@@ -49,9 +35,14 @@ export class ButtonGroupComponent implements AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.visibleButtonsObserver.disconnect();
+    this.hiddenButtonsObserver.disconnect();
   }
 
   ngAfterViewInit(): void {
+    console.log(this.buttons);
+
+    this.buttons.reverse;
+
     this.visibleButtonsObserverOptions = {
       root: this.boundingBox.nativeElement,
       rootMargin: '0px',
@@ -87,13 +78,13 @@ export class ButtonGroupComponent implements AfterViewInit, OnDestroy {
       if (entry.intersectionRatio < 1) {
         console.log('hiding child');
 
-        //this.dropdown.nativeElement.style.display = 'block';
         const buttons = this.visibleButtons.nativeElement.querySelectorAll('button');
 
         if (buttons.length > 0) {
           const buttonElement = buttons[buttons.length - 1];
           this.renderer.appendChild(this.hiddenButtons.nativeElement, buttonElement);
           this.hiddenButtonsObserver.observe(buttonElement);
+          this.dropdown.nativeElement.style.display = 'block';
         }
       }
     });
@@ -112,6 +103,14 @@ export class ButtonGroupComponent implements AfterViewInit, OnDestroy {
 
         if (buttons.length > 0) {
           this.renderer.appendChild(this.visibleButtons.nativeElement, entry.target);
+        }
+
+        const buttonsTwo = this.hiddenButtons.nativeElement.querySelectorAll('button');
+
+        if (buttonsTwo.length === 0) {
+          console.log();
+
+          this.dropdown.nativeElement.style.display = 'none';
         }
       }
     });
