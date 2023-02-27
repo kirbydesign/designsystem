@@ -22,7 +22,6 @@ function hasFlag(flag) {
 }
 
 const inputPaths = {
-  angular: './libs/designsystem/src/lib/',
   designsystem: './libs/designsystem/',
   core: './libs/core/src/',
 };
