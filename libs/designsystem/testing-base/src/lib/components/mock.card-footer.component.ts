@@ -1,4 +1,4 @@
-import { Component, forwardRef } from '@angular/core';
+import { Component, forwardRef, Input } from '@angular/core';
 
 import { CardFooterComponent } from '@kirbydesign/designsystem/card';
 

@@ -1,6 +1,6 @@
 import { Component, forwardRef } from '@angular/core';
 
-import { ModalRoutingExperimentalComponent } from '@kirbydesign/designsystem';
+import { ModalRoutingExperimentalComponent } from '@kirbydesign/designsystem/modal/experimental';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({

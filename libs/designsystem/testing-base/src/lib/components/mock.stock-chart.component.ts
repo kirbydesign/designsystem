@@ -1,6 +1,7 @@
 import { Component, forwardRef, Input } from '@angular/core';
 
 import { StockChartComponent } from '@kirbydesign/designsystem';
+import { ChartDataLabelOptions } from '@kirbydesign/designsystem/chart';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({

@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { from, Observable, Subject, switchMap, tap } from 'rxjs';
 import { OverlayEventDetail } from '@ionic/core/components';
-import { AlertExperimentalComponent } from '../alert.component';
 import { AlertExperimentalConfig } from '../config/alert-config';
+import { AlertExperimentalComponent } from '../alert-experimental.component';
 
 type AlertDismissObservables = {
   onWillDismiss: Observable<OverlayEventDetail>;

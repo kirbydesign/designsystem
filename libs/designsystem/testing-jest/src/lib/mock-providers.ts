@@ -7,10 +7,11 @@ import {
   IconRegistryService,
   LoadingOverlayService,
   ModalController,
-  ModalExperimentalController,
   TabsService,
   ToastController,
 } from '@kirbydesign/designsystem';
+
+import { ModalExperimentalController } from '@kirbydesign/designsystem/modal/experimental';
 import { EMPTY } from 'rxjs';
 
 export function alertExperimentalControllerFactory() {

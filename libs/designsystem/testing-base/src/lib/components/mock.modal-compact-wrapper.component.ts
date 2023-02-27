@@ -1,6 +1,7 @@
 import { Component, forwardRef, Input } from '@angular/core';
 
 import { ModalCompactWrapperComponent } from '@kirbydesign/designsystem';
+import { ModalConfig } from '@kirbydesign/designsystem/modal';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({

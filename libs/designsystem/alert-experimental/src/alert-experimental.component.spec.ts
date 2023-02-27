@@ -2,7 +2,7 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
-import { AlertExperimentalComponent } from './alert.component';
+import { AlertExperimentalComponent } from './alert-experimental.component';
 
 const getColor = DesignTokenHelper.getColor;
 

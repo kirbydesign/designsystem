@@ -1,7 +1,7 @@
 import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 
-import { ModalExperimentalComponent } from '@kirbydesign/designsystem';
-
+import { ModalExperimentalComponent } from '@kirbydesign/designsystem/modal/experimental';
+import { OverlayEventDetail } from '@kirbydesign/designsystem/modal';
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
   selector: 'kirby-modal-experimental',

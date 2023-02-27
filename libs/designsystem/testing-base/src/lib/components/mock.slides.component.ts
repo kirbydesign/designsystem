@@ -1,3 +1,6 @@
+import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import { SlidesComponent } from '@kirbydesign/designsystem/slide';
+
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
   selector: 'kirby-slides',

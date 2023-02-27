@@ -1,7 +1,7 @@
 // AUTO-GENERATED - PLEASE DON'T EDIT THIS FILE MANUALLY
 
 import { MockAccordionItemComponent } from './components/mock.accordion-item.component';
-import { MockAlertComponent } from './components/mock.alert.component';
+import { MockAlertExperimentalComponent } from './components/mock.alert-experimental.component';
 import { MockAvatarComponent } from './components/mock.avatar.component';
 import { MockButtonComponent } from './components/mock.button.component';
 import { MockCalendarComponent } from './components/mock.calendar.component';
@@ -42,6 +42,7 @@ import { MockModalExperimentalComponent } from './components/mock.modal.componen
 import { MockModalRoutingExperimentalComponent } from './components/mock.modal-routing.component';
 import { MockModalWrapperExperimentalComponent } from './components/mock.wrapper.component';
 import { MockActionSheetComponent } from './components/mock.action-sheet.component';
+import { MockAlertComponent } from './components/mock.alert.component';
 import { MockModalFooterComponent } from './components/mock.modal-footer.component';
 import { MockModalCompactWrapperComponent } from './components/mock.modal-compact-wrapper.component';
 import { MockModalWrapperComponent } from './components/mock.modal-wrapper.component';
@@ -81,7 +82,7 @@ import { MockToggleButtonComponent } from './components/mock.toggle-button.compo
 
 export const MOCK_COMPONENTS = [
   MockAccordionItemComponent,
-  MockAlertComponent,
+  MockAlertExperimentalComponent,
   MockAvatarComponent,
   MockButtonComponent,
   MockCalendarComponent,
@@ -122,6 +123,7 @@ export const MOCK_COMPONENTS = [
   MockModalRoutingExperimentalComponent,
   MockModalWrapperExperimentalComponent,
   MockActionSheetComponent,
+  MockAlertComponent,
   MockModalFooterComponent,
   MockModalCompactWrapperComponent,
   MockModalWrapperComponent,

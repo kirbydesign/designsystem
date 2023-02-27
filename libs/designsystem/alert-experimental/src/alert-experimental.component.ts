@@ -26,8 +26,8 @@ import { ThemeColor } from '@kirbydesign/designsystem/helpers';
     ThemeColorDirective,
   ],
   selector: 'kirby-alert-experimental',
-  templateUrl: './alert.component.html',
-  styleUrls: ['./alert.component.scss'],
+  templateUrl: './alert-experimental.component.html',
+  styleUrls: ['./alert-experimental.component.scss'],
   // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: { '[class.ion-page]': 'false' }, //Ensure ion-page class doesn't get applied by Ionic Modal Controller
   changeDetection: ChangeDetectionStrategy.OnPush,

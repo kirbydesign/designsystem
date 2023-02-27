@@ -1,6 +1,8 @@
 export { MockAccordionItemComponent } from './mock.accordion-item.component';
 export { MockActionSheetComponent } from './mock.action-sheet.component';
 export { MockAppComponent } from './mock.app.component';
+export { MockAppComponent as MockKirbyApp } from './mock.kirby-app.component';
+
 export { MockAvatarComponent } from './mock.avatar.component';
 export { MockButtonComponent } from './mock.button.component';
 export { MockCalendarComponent } from './mock.calendar.component';
@@ -46,9 +48,19 @@ export {
   MockPageTitleComponent,
   MockPageStickyContentDirective,
 } from './mock.page.component';
+export { MockAlertExperimentalComponent } from './mock.alert-experimental.component';
+export { MockStockChartComponent } from './mock.stock-chart.component';
+export { MockModalFooterExperimentalComponent } from './mock.footer.component';
+export { MockModalExperimentalComponent } from './mock.modal.component';
+export { MockModalRoutingExperimentalComponent } from './mock.modal-routing.component';
+export { MockModalWrapperExperimentalComponent } from './mock.wrapper.component';
 export { MockPageLocalNavigationComponent } from './mock.page-local-navigation.component';
+export { MockAlertComponent } from './mock.alert.component';
 export { MockPopoverComponent } from './mock.popover.component';
+export { MockModalCompactWrapperComponent } from './mock.modal-compact-wrapper.component';
+export { MockModalWrapperComponent } from './mock.modal-wrapper.component';
 export { MockProgressCircleComponent } from './mock.progress-circle.component';
+export { MockProgressCircleRingComponent } from './mock.progress-circle-ring.component';
 export { MockRadioGroupComponent } from './mock.radio-group.component';
 export { MockRadioComponent } from './mock.radio.component';
 export { MockRangeComponent } from './mock.range.component';
@@ -57,7 +69,7 @@ export { MockRouterOutletComponent } from './mock.router-outlet.component';
 export { MockSectionHeaderComponent } from './mock.section-header.component';
 export { MockSegmentedControlComponent } from './mock.segmented-control.component';
 export { MockSlideButtonComponent } from './mock.slide-button.component';
-export { MockSlideDirective, MockSlidesComponent } from './mock.slides.component';
+export { MockSlidesComponent } from './mock.slides.component';
 export { MockSpinnerComponent } from './mock.spinner.component';
 export { MockTabButtonComponent } from './mock.tab-button.component';
 export { MockTabsComponent } from './mock.tabs.component';
