@@ -5,7 +5,7 @@
     "@floating-ui/dom": "^1.1.0",
     "@fontsource/roboto": "4.2.1",
     "@ionic/angular": "6.2.1",
-    "@kirbydesign/core": "0.0.38",
+    "@kirbydesign/core": "0.0.42",
     "inputmask": "5.0.5"
   },
   "peerDependencies": {

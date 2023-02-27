@@ -2,22 +2,34 @@
   <cookbook-alert-example></cookbook-alert-example>
   <p>&nbsp;</p>
   <p>
-    To show an alert, inject the Kirby <code>modalController</code> in your constructor, create an
-    <code>AlertConfig</code> and pass it to <code>modalController.showAlert</code>.
+    To show an alert, inject the Kirby
+    <code>modalController</code>
+    in your constructor, create an
+    <code>AlertConfig</code>
+    and pass it to
+    <code>modalController.showAlert</code>
+    .
     <cookbook-code-viewer [ts]="alertConfigWithIcon"></cookbook-code-viewer>
   </p>
   <p>
-    <code>title</code> and <code>message</code> properties in <code>AlertConfig</code> also accept
-    an Observable for dynamic values:<br />
-    <em
-      >(see "Example on github" for implementation details of the
-      <code>remainingSeconds$</code> timer)</em
-    >:
+    <code>title</code>
+    and
+    <code>message</code>
+    properties in
+    <code>AlertConfig</code>
+    also accept an Observable for dynamic values:
+    <br />
+    <em>
+      (see "Example on github" for implementation details of the
+      <code>remainingSeconds$</code>
+      timer)
+    </em>
+    :
     <cookbook-code-viewer [ts]="alertConfigWithDynamicValues"></cookbook-code-viewer>
   </p>
   <p>
-    <em>[Optional]</em> If you need to obtain data back from the alert, you can pass a callback
-    function:
+    <em>[Optional]</em>
+    If you need to obtain data back from the alert, you can pass a callback function:
     <!-- prettier-ignore -->
     <cookbook-code-viewer language="ts">this.modalController.showAlert(config, onAlertClose);
 

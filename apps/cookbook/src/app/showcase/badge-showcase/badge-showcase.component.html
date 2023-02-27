@@ -13,15 +13,18 @@
   also done for the examples below where all the badges are displayed on a white background.
 </p>
 <p>
-  The <code>--kirby-badge-elevation</code> property can be useful for this. You can see how it is
-  applied to the examples below by inspecting the shared styling for the badge examples:
+  The
+  <code>--kirby-badge-elevation</code>
+  property can be useful for this. You can see how it is applied to the examples below by inspecting
+  the shared styling for the badge examples:
   <br />
   <a
     href="https://github.com/kirbydesign/designsystem/blob/main/apps/cookbook/src/app/examples/badge-example/examples/badge-example-shared.scss"
     target="_blank"
     class="kirby-external-icon"
-    >badge-example-shared.scss on Github</a
   >
+    badge-example-shared.scss on Github
+  </a>
 </p>
 
 <kirby-divider [hasMargin]="true"></kirby-divider>
@@ -32,7 +35,7 @@
 <p>
   <kirby-card [flat]="true" [hasPadding]="_cardHasPadding">
     <cookbook-badge-example-number #badgeExampleNumber></cookbook-badge-example-number>
-    <cookbook-example-viewer [html]="badgeExampleNumber.template"> </cookbook-example-viewer>
+    <cookbook-example-viewer [html]="badgeExampleNumber.template"></cookbook-example-viewer>
   </kirby-card>
 </p>
 
@@ -43,7 +46,7 @@
 <p>
   <kirby-card [flat]="true" [hasPadding]="_cardHasPadding">
     <cookbook-badge-example-text #badgeExampleText></cookbook-badge-example-text>
-    <cookbook-example-viewer [html]="badgeExampleText.template"> </cookbook-example-viewer>
+    <cookbook-example-viewer [html]="badgeExampleText.template"></cookbook-example-viewer>
   </kirby-card>
 </p>
 
@@ -54,20 +57,25 @@
 </p>
 <p>
   <kirby-card [flat]="true" [hasPadding]="_cardHasPadding">
-    <cookbook-badge-example-icon #badgeExampleIcon></cookbook-badge-example-icon><br />
-    <cookbook-example-viewer [html]="badgeExampleIcon.template"> </cookbook-example-viewer>
+    <cookbook-badge-example-icon #badgeExampleIcon></cookbook-badge-example-icon>
+    <br />
+    <cookbook-example-viewer [html]="badgeExampleIcon.template"></cookbook-example-viewer>
   </kirby-card>
 </p>
 
 <h3>Small Badges</h3>
 <p>
-  Setting the input property <code>size</code> to <code>'sm'</code> will display a small badge
-  without any content. This can be useful to indicate status on an element.
+  Setting the input property
+  <code>size</code>
+  to
+  <code>'sm'</code>
+  will display a small badge without any content. This can be useful to indicate status on an
+  element.
 </p>
 <p>
   <kirby-card [flat]="true" [hasPadding]="_cardHasPadding">
     <cookbook-badge-example-small #badgeExampleSmall></cookbook-badge-example-small>
-    <cookbook-example-viewer [html]="badgeExampleSmall.template"> </cookbook-example-viewer>
+    <cookbook-example-viewer [html]="badgeExampleSmall.template"></cookbook-example-viewer>
   </kirby-card>
 </p>
 

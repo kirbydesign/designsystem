@@ -1,0 +1,311 @@
+@use 'sass:map';
+@use 'sass:meta';
+
+@use '@kirbydesign/core/src/scss/interaction-state';
+@use '@kirbydesign/core/src/scss/utils';
+
+$button-width: (
+  sm: 44px,
+  md: 88px,
+  lg: 220px,
+) !default;
+
+@function button-width($key) {
+  @return map.get($button-width, $key);
+}
+
+@mixin button-sm {
+  font-size: utils.font-size('xs');
+  height: utils.size('l');
+  min-width: button-width('sm');
+
+  &:not(.icon-only) {
+    --kirby-button-padding-left: #{utils.size('s')};
+    --kirby-button-padding-right: #{utils.size('s')};
+  }
+
+  &.icon-only {
+    --kirby-icon-font-size: #{utils.size('s')};
+
+    width: utils.size('l');
+    min-width: unset;
+  }
+
+  &.icon-left {
+    --kirby-button-padding-left: #{utils.size('xs')};
+  }
+
+  &.icon-right {
+    --kirby-button-padding-right: #{utils.size('xs')};
+  }
+
+  &.icon-left,
+  &.icon-right {
+    --kirby-icon-font-size: #{utils.size('s')};
+
+    min-width: button-width('md');
+  }
+}
+
+@mixin button-lg {
+  font-size: utils.font-size('n');
+  height: utils.size('xxl');
+  min-width: button-width('lg');
+
+  &.icon-only {
+    width: utils.size('xxl');
+    min-width: unset;
+  }
+}
+
+@mixin button-no-decoration {
+  --kirby-button-background-color: transparent;
+  --kirby-button-color: #{utils.get-color('black')};
+
+  @include interaction-state.apply-hover;
+  @include interaction-state.apply-active('s');
+}
+
+@mixin button-attentionlevel1 {
+  --kirby-button-background-color: #{utils.get-color('primary')};
+  --kirby-button-color: #{utils.get-color('primary-contrast')};
+
+  // The destructive class is only ever applied by kirby-alert.
+  // Standalone destructive buttons are not a supported concept.
+  &.destructive {
+    --kirby-button-background-color: #{utils.get-color('danger')};
+    --kirby-button-color: #{utils.get-color('danger-contrast')};
+  }
+}
+
+@mixin button-attentionlevel2 {
+  --kirby-button-background-color: #{utils.get-color('black')};
+  --kirby-button-color: #{utils.get-color('black-contrast')};
+
+  @include interaction-state.apply-hover('s', $make-lighter: true);
+  @include interaction-state.apply-active('m', $make-lighter: true);
+}
+
+@mixin button-attentionlevel3 {
+  --kirby-button-background-color: var(--kirby-inputs-background-color);
+  --kirby-button-color: var(--kirby-inputs-color);
+
+  @include interaction-state.apply-hover('xs');
+  @include interaction-state.apply-active('s');
+}
+
+:host {
+  --kirby-button-padding-left: #{utils.size('m')};
+  --kirby-button-padding-right: #{utils.size('m')};
+
+  @include utils.accessible-target-size;
+  @include interaction-state.apply-focus-visible;
+  @include interaction-state.initialize-layer;
+  @include interaction-state.apply-hover('xxxs');
+  @include interaction-state.apply-active;
+  @include interaction-state.extend-content {
+    display: inherit;
+    width: inherit;
+    flex-direction: inherit;
+    align-items: inherit;
+    justify-content: inherit;
+    padding-inline: var(--kirby-button-padding-left) var(--kirby-button-padding-right);
+
+    &.attention-level3 {
+      box-shadow: var(--kirby-inputs-elevation);
+    }
+  }
+
+  font-family: var(--kirby-font-family);
+  background-color: var(--kirby-button-background-color, initial);
+  color: var(--kirby-button-color, inherit);
+  border-radius: utils.$border-radius-round;
+  box-sizing: border-box; // Ensure border is not added to button height
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+
+  // we default to 'md' size.
+  font-size: utils.font-size('s');
+  height: utils.size('xl');
+  min-width: button-width('md');
+  padding: 0;
+  margin: utils.size('xxxs');
+  line-height: utils.line-height('s');
+
+  // Outline is applied on button border instead,
+  // to keep the rounded shape:
+  outline: none;
+  border: none;
+
+  &.no-margin {
+    margin: 0;
+  }
+
+  &.icon-left {
+    --kirby-icon-margin-right: #{utils.size('xxs')};
+    --kirby-button-padding-left: #{utils.size('xs')};
+    --kirby-button-padding-right: #{utils.size('s')};
+
+    padding: 0;
+  }
+
+  &.icon-right {
+    --kirby-icon-margin-left: #{utils.size('xxs')};
+    --kirby-button-padding-left: #{utils.size('s')};
+    --kirby-button-padding-right: #{utils.size('xs')};
+
+    padding: 0;
+  }
+
+  &.icon-only {
+    width: utils.size('xl');
+    padding: 0;
+    min-width: unset;
+  }
+
+  &.sm {
+    @include button-sm;
+  }
+
+  &.lg {
+    @include button-lg;
+  }
+
+  &.no-decoration {
+    @include button-no-decoration;
+  }
+
+  &.attention-level1 {
+    @include button-attentionlevel1;
+  }
+
+  &.attention-level2 {
+    @include button-attentionlevel2;
+  }
+
+  &.attention-level3 {
+    @include button-attentionlevel3;
+  }
+
+  &[expand='block'] {
+    width: 100%;
+  }
+
+  &:disabled {
+    background-color: utils.get-color('semi-light');
+    color: utils.get-color('semi-dark-shade');
+    border-color: transparent;
+    pointer-events: none;
+  }
+
+  &.floating {
+    $fab-size: 64px;
+
+    width: $fab-size !important;
+    height: $fab-size !important;
+    min-width: unset;
+
+    &:not(:disabled) {
+      box-shadow: utils.get-elevation(4);
+    }
+  }
+}
+
+:host-context(.kirby-color-brightness-dark) {
+  &.no-decoration {
+    --kirby-button-color: #{utils.get-color('white')};
+
+    @include interaction-state.apply-hover('xs', $make-lighter: true);
+    @include interaction-state.apply-active('m', $make-lighter: true);
+  }
+
+  &.attention-level2 {
+    --kirby-button-background-color: #{utils.get-color('white')};
+    --kirby-button-color: #{utils.get-color('white-contrast')};
+
+    @include interaction-state.apply-hover;
+    @include interaction-state.apply-active('s');
+  }
+
+  &.attention-level3 {
+    @include interaction-state.apply-hover('xxxs', $make-lighter: true);
+    @include interaction-state.apply-active('xxs', $make-lighter: true);
+  }
+}
+
+:host-context(kirby-item)[slot='end'] {
+  margin-inline-start: utils.size('s');
+}
+
+:host-context(kirby-alert).ok-btn,
+:host-context(kirby-alert-experimental).ok-btn {
+  --kirby-button-background-color: #{utils.get-color('success')};
+  --kirby-button-color: #{utils.get-color('success-contrast')};
+}
+
+:host-context(kirby-dropdown) {
+  // place arrow-icon in dropdown correctly
+  justify-content: space-between;
+}
+
+// Temp fix for https://github.com/angular/angular-cli/issues/13854#issuecomment-470831308
+
+/* clean-css ignore:start */
+:host-context(ion-toolbar ion-buttons) {
+  font-size: utils.font-size('s');
+  margin: 0;
+  height: utils.size('xl');
+
+  &.icon-only {
+    width: utils.size('xl');
+
+    &.no-decoration,
+    &.attention-level1,
+    &.attention-level2,
+    &.attention-level3 {
+      @include button-no-decoration;
+    }
+  }
+}
+
+/* clean-css ignore:end */
+
+// Temp fix for https://github.com/angular/angular-cli/issues/13854#issuecomment-470831308
+
+/* clean-css ignore:start */
+:host-context(.page-title kirby-page-actions) {
+  &.no-decoration,
+  &.attention-level1,
+  &.attention-level2,
+  &.attention-level3 {
+    @include button-attentionlevel3;
+  }
+}
+
+/* clean-css ignore:end */
+
+// Temp fix for https://github.com/angular/angular-cli/issues/13854#issuecomment-470831308
+
+/* clean-css ignore:start */
+:host-context(kirby-empty-state .content) {
+  @include button-lg;
+}
+
+/* clean-css ignore:end */
+
+:host-context(kirby-toggle-button) {
+  @each $color-name, $color-value in utils.$notification-colors {
+    &.#{$color-name} {
+      --kirby-button-background-color: #{utils.get-color($color-name)};
+      --kirby-button-color: #{utils.get-color($color-name + '-contrast')};
+
+      @include interaction-state.apply-hover;
+      @include interaction-state.apply-active('s');
+    }
+  }
+}

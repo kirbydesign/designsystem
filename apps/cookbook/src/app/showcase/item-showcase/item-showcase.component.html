@@ -1,14 +1,33 @@
 <p>
-  The <code>kirby-item</code> component consists of three possible columns: <em>the default</em>,
-  which spans the entire item, and optionally the <code>'start'</code> and
-  <code>'end'</code> columns (aka <code>'slots'</code>)<br />
-  In addition to this there is a special slot for flags named <code>'outside'</code>.
+  The
+  <code>kirby-item</code>
+  component consists of three possible columns:
+  <em>the default</em>
+  , which spans the entire item, and optionally the
+  <code>'start'</code>
+  and
+  <code>'end'</code>
+  columns (aka
+  <code>'slots'</code>
+  )
+  <br />
+  In addition to this there is a special slot for flags named
+  <code>'outside'</code>
+  .
 </p>
 <p>
-  The <em>default column</em> is the content that isn't slotted into either <code>'start'</code> or
-  <code>'end'</code>.<br />
+  The
+  <em>default column</em>
+  is the content that isn't slotted into either
+  <code>'start'</code>
+  or
+  <code>'end'</code>
+  .
+  <br />
   If there are more than one line of content it can be contained within a
-  <code>kirby-label</code> that by default stacks content vertically (multi lines).<br />
+  <code>kirby-label</code>
+  that by default stacks content vertically (multi lines).
+  <br />
   Optionally it can be configured to stack horizontally:
   <code>&lt;kirby-label direction="horizontal"&gt;...&lt;/kirby-label&gt;</code>
 </p>
@@ -46,26 +65,47 @@
 </div>
 
 <p class="comment">
-  <strong>Please note</strong>, if you need a label to span a title and a value, you can wrap the
-  title and value in another <code>kirby-label</code> as in
+  <strong>Please note</strong>
+  , if you need a label to span a title and a value, you can wrap the title and value in another
+  <code>kirby-label</code>
+  as in
   <a href="#" (click)="scrollTo(message)">this example</a>
 </p>
 <p>
-  The <em>start column</em> is usually only used with avatars, icons and such. To place content in
-  the start column specify the <code>slot="start"</code> attribute on your content. If no content is
-  placed into the 'start' slot, the first column will not be shown.
+  The
+  <em>start column</em>
+  is usually only used with avatars, icons and such. To place content in the start column specify
+  the
+  <code>slot="start"</code>
+  attribute on your content. If no content is placed into the 'start' slot, the first column will
+  not be shown.
 </p>
 <p>
-  The <em>end column</em> is usually used for values such as number, currency, date etc. To place
-  content in the end column specify the <code>slot="end"</code> attribute on your content. If
-  multiple lines are needed the values can be wrapped in a <code>kirby-label</code> as in
-  <a href="#" (click)="scrollTo(twoValueLines)">this example</a>.<br />
-  Values can optionally be contained in a <code>time</code> or <code>data</code> tag as in
-  <a href="#" (click)="scrollTo(avatarWithDate)">this example</a>.
+  The
+  <em>end column</em>
+  is usually used for values such as number, currency, date etc. To place content in the end column
+  specify the
+  <code>slot="end"</code>
+  attribute on your content. If multiple lines are needed the values can be wrapped in a
+  <code>kirby-label</code>
+  as in
+  <a href="#" (click)="scrollTo(twoValueLines)">this example</a>
+  .
+  <br />
+  Values can optionally be contained in a
+  <code>time</code>
+  or
+  <code>data</code>
+  tag as in
+  <a href="#" (click)="scrollTo(avatarWithDate)">this example</a>
+  .
 </p>
 <p>
-  The <em>outside</em> slot can be used for flags as in
-  <a href="#" (click)="scrollTo(flagged)">this example</a>.
+  The
+  <em>outside</em>
+  slot can be used for flags as in
+  <a href="#" (click)="scrollTo(flagged)">this example</a>
+  .
 </p>
 
 <section class="sizes">
@@ -77,7 +117,10 @@
     <cookbook-item-example-simple-sm #simpleExampleSmall></cookbook-item-example-simple-sm>
   </cookbook-example-viewer>
   <p class="comment">
-    <strong>Please note</strong>, extra small should <strong>NOT</strong> be used if clickable
+    <strong>Please note</strong>
+    , extra small should
+    <strong>NOT</strong>
+    be used if clickable
   </p>
   <cookbook-example-viewer [html]="simpleExampleExtraSmall.template">
     <cookbook-item-example-simple-xs #simpleExampleExtraSmall></cookbook-item-example-simple-xs>
@@ -158,10 +201,14 @@
   ></cookbook-item-example-settings-disabled>
 </cookbook-example-viewer>
 <p class="comment small">
-  <em
-    ><strong>Please note</strong>, setting the <code>disabled</code> attribute on
-    <code>kirby-item</code> will disable the entire item including buttons, toggles etc.</em
-  >
+  <em>
+    <strong>Please note</strong>
+    , setting the
+    <code>disabled</code>
+    attribute on
+    <code>kirby-item</code>
+    will disable the entire item including buttons, toggles etc.
+  </em>
 </p>
 
 <h2 #flagged>Flagged</h2>
@@ -216,9 +263,10 @@
   <cookbook-item-example-disclosure #disclosureExample></cookbook-item-example-disclosure>
 </cookbook-example-viewer>
 <p class="comment small">
-  <em
-    ><strong>Please note</strong>, the disclosure input is limited to a set of predefined icons:
-    <code> 'link' | 'arrow-more' | 'arrow-down' | 'arrow-up'</code>
+  <em>
+    <strong>Please note</strong>
+    , the disclosure input is limited to a set of predefined icons:
+    <code>'link' | 'arrow-more' | 'arrow-down' | 'arrow-up'</code>
   </em>
 </p>
 

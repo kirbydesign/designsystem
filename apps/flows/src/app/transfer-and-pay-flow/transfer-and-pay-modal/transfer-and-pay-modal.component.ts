@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { COMPONENT_PROPS, ModalConfig, ModalController } from '@kirbydesign/designsystem';
+import { ModalConfig, ModalController } from '@kirbydesign/designsystem';
 import { ChooseReceiverComponent } from '../choose-receiver/choose-receiver.component';
 import { ChooseOwnAccountComponent } from '../choose-own-account/choose-own-account.component';
 import { OtherService } from '../other.service';
@@ -9,11 +9,9 @@ import { Account } from '../account.model';
 import { ChooseDateComponent } from '../choose-date/choose-date.component';
 import { ChooseTextAndMessageComponent } from '../choose-text-and-message/choose-text-and-message.component';
 import { TextAndDateService } from '../text-and-date.service';
-import { TransferRegisteredComponent } from '../transfer-registered/transfer-registered.component';
 import { DetailsComponent } from '../details/details.component';
 import { VerifyService } from '../verify.service';
 import { Detail } from '../detail.model';
-import { Transfer } from '../transfer.model';
 
 @Component({
   selector: 'flows-transfer-and-pay-modal',

@@ -29,15 +29,23 @@
   to show that it navigates to a new page, opens a modal or similar.
 </p>
 <p>
-  Registering any click event <code>(click)="function()"</code> on the card will activate its state
-  behavior when hovered or pressed.
+  Registering any click event
+  <code>(click)="function()"</code>
+  on the card will activate its state behavior when hovered or pressed.
 </p>
 
 <p>
   A card with a disclosure indicator is composed of a card-header with a slotted
-  <code>kirby-item</code>, using the <code>--kirby-card-padding-top</code> CSS Custom Property to
-  set the padding top in card content area to <code>0px</code>. The card header input property
-  <code>hasPadding</code> is set to <code>false</code> to adjust to the use of item.
+  <code>kirby-item</code>
+  , using the
+  <code>--kirby-card-padding-top</code>
+  CSS Custom Property to set the padding top in card content area to
+  <code>0px</code>
+  . The card header input property
+  <code>hasPadding</code>
+  is set to
+  <code>false</code>
+  to adjust to the use of item.
 </p>
 <cookbook-example-viewer [html]="disclosureExample.template" [css]="disclosureExample.style">
   <cookbook-card-example-disclosure #disclosureExample></cookbook-card-example-disclosure>
@@ -62,12 +70,14 @@
 <h2>Background image</h2>
 <p>
   The recommended approach for setting a background image on the card is with the
-  <code>--kirby-card-background-image</code> CSS Custom Property.
+  <code>--kirby-card-background-image</code>
+  CSS Custom Property.
 </p>
 
 <p>
-  Alternatively, it can be set programatically via the <code>backgroundImageUrl</code> input
-  property.
+  Alternatively, it can be set programatically via the
+  <code>backgroundImageUrl</code>
+  input property.
 </p>
 
 <p>
@@ -85,10 +95,12 @@
 </cookbook-example-viewer>
 
 <p>
-  <em>Note:</em> this example uses
-  <a target="_blank" href="https://www.npmjs.com/package/include-media">include-media</a> for media
-  queries. This is re-exported from the <code>@kirbydesign/designsystem/scss/utils</code> Sass
-  module.
+  <em>Note:</em>
+  this example uses
+  <a target="_blank" href="https://www.npmjs.com/package/include-media">include-media</a>
+  for media queries. This is re-exported from the
+  <code>@kirbydesign/designsystem/scss/utils</code>
+  Sass module.
 </p>
 
 <h2>Flat</h2>
@@ -112,8 +124,7 @@
 <cookbook-api-description-properties
   [properties]="customCssProperties"
   [columns]="customCssPropertiesColumns"
->
-</cookbook-api-description-properties>
+></cookbook-api-description-properties>
 <h3>Card header and footer properties:</h3>
 <cookbook-api-description-properties
   [properties]="propertiesHeaderAndFooter"

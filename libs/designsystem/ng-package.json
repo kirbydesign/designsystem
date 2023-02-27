@@ -10,13 +10,6 @@
     "@ionic/angular",
     "@kirbydesign/core",
     "@floating-ui/dom",
-    "chart.js",
-    "chartjs-adapter-date-fns",
-    "chartjs-plugin-annotation",
-    "chartjs-plugin-datalabels",
-    "date-fns-tz",
-    "date-fns",
-    "include-media",
     "inputmask"
   ]
 }

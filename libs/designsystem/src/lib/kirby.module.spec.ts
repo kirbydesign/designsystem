@@ -1,4 +1,4 @@
-import { ModalController } from './components/modal/services/modal.controller';
+import { ModalController } from '@kirbydesign/designsystem/modal';
 import { KirbyModule } from './kirby.module';
 
 describe('KirbyModule', () => {

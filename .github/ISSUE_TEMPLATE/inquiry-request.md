@@ -2,7 +2,7 @@
 name: Inquiry
 about: Create an inquiry to seek answers. The inquiry will be adressed during open office hours on Tuesday and Thursday 9.15-10.15
 title: "[Inquiry]"
-labels: New, inquiry
+labels: 👶🏻 New, inquiry
 assignees: 'alxzak'
 
 ---

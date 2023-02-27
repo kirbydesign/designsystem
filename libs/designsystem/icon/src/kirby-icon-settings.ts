@@ -80,6 +80,10 @@ export const kirbyIconSettings: IconSettings = {
     { name: 'participants', svg: 'assets/kirby/icons/svg/participants.svg' },
     { name: 'download', svg: 'assets/kirby/icons/svg/download.svg' },
     { name: 'globe-transfer', svg: 'assets/kirby/icons/svg/globe-transfer.svg' },
+    { name: 'banknotes', svg: 'assets/kirby/icons/svg/banknotes.svg' },
+    { name: 'air-balloon', svg: 'assets/kirby/icons/svg/air-balloon.svg' },
+    { name: 'piggybank', svg: 'assets/kirby/icons/svg/piggybank.svg' },
+    { name: 'business', svg: 'assets/kirby/icons/svg/business.svg' },
   ],
 };
 

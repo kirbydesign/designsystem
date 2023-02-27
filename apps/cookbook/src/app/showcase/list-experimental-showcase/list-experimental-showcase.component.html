@@ -5,41 +5,57 @@
 <p>
   The list itself is essentially a container with styling for rounded corners and shadow around the
   list content. Anything can be placed into the list, but it comes with a bit of extra functionality
-  when used together with <code>kirby-section-header</code> and <code>kirby-item</code>.
+  when used together with
+  <code>kirby-section-header</code>
+  and
+  <code>kirby-item</code>
+  .
 </p>
 <p>
-  When using <code>kirby-item</code>, either on its own or wrapped in custom markup, the list
-  expects its children to represent single item (e.g. not another container or wrapper element).
-  This way, the first and last item will correctly have top and bottom spacing applied, to provide
-  the correct appearance of the list.
+  When using
+  <code>kirby-item</code>
+  , either on its own or wrapped in custom markup, the list expects its children to represent single
+  item (e.g. not another container or wrapper element). This way, the first and last item will
+  correctly have top and bottom spacing applied, to provide the correct appearance of the list.
 </p>
 
 <div class="examples">
   <div>
     <h2>List with items</h2>
     <p>
-      The <a routerLink="/home/showcase/section-header">Section Header</a> can be used on a list to
-      create a set of grouped content, making use of the lists <code>slots</code>.
+      The
+      <a routerLink="/home/showcase/section-header">Section Header</a>
+      can be used on a list to create a set of grouped content, making use of the lists
+      <code>slots</code>
+      .
     </p>
     <p>
-      The list has two <code>slots</code>, the default and the named <code>outside</code> slot. The
-      default slot is reserved for the list items, and receives the list-specific styling. The
-      <code>outside</code> slot is placed outside the styled part of the list, and is meant to be
-      used with the <code>kirby-section-header</code> or similar.
+      The list has two
+      <code>slots</code>
+      , the default and the named
+      <code>outside</code>
+      slot. The default slot is reserved for the list items, and receives the list-specific styling.
+      The
+      <code>outside</code>
+      slot is placed outside the styled part of the list, and is meant to be used with the
+      <code>kirby-section-header</code>
+      or similar.
     </p>
-    <cookbook-code-viewer [html]="items.template"> </cookbook-code-viewer>
+    <cookbook-code-viewer [html]="items.template"></cookbook-code-viewer>
   </div>
   <cookbook-list-experimental-items-example #items></cookbook-list-experimental-items-example>
   <div>
     <h2>Sliding items in list</h2>
     <p>
       Lists work out of the box with the interactive
-      <a routerLink="/home/showcase/item-sliding">Item Sliding</a>, allowing to swipe an item left
-      or right to reveal options. Try dragging right on one of the items, to see swipe actions
-      revealed to the left of the item content. See the page linked above for more details on
-      <code>kirby-item-sliding</code>.
+      <a routerLink="/home/showcase/item-sliding">Item Sliding</a>
+      , allowing to swipe an item left or right to reveal options. Try dragging right on one of the
+      items, to see swipe actions revealed to the left of the item content. See the page linked
+      above for more details on
+      <code>kirby-item-sliding</code>
+      .
     </p>
-    <cookbook-code-viewer [html]="slidingItems.template"> </cookbook-code-viewer>
+    <cookbook-code-viewer [html]="slidingItems.template"></cookbook-code-viewer>
   </div>
   <cookbook-list-experimental-sliding-items-example
     #slidingItems
@@ -55,4 +71,4 @@
 <p>
   Instead, multiple lists should just be added one after another in a flat structure, as seen below.
 </p>
-<cookbook-code-viewer [html]="multipleListsExample"> </cookbook-code-viewer>
+<cookbook-code-viewer [html]="multipleListsExample"></cookbook-code-viewer>
