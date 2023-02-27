@@ -87,7 +87,13 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() disablePastDates = false;
   @Input() disableFutureDates = false;
   @Input() alwaysEnableToday = false;
-  @Input() locales: { [key: string]: Locale } = {};
+
+  @Input() set locales(locales: { [key: string]: Locale }) {
+    console.warn(
+      `Supplying additional locales to the Kirby Calendar Component via an input property is deprecated and should not be used. 
+        A future update will allow injecting additional locales via a provider instead.`
+    );
+  }
   @Input() customLocales: { [key: string]: Locale } = {};
   /* 
     Experimental: Input property not documented on purpose. 
@@ -118,7 +124,6 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   private _maxDate: Date;
   private locale: Locale;
   private timeZoneName: string;
-  private injectedLocale: string;
   private includedLocales = { da, enGB, enUS };
 
   get selectedDate(): Date {
@@ -212,7 +217,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   constructor(private calendarHelper: CalendarHelper, @Inject(LOCALE_ID) locale: string) {
-    this.injectedLocale = locale;
+    this.locale = this.mapLocale(locale);
     this.timeZoneName = Intl.DateTimeFormat().resolvedOptions().timeZone;
   }
 
@@ -232,7 +237,6 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   ngOnInit() {
-    this.locale = this.mapLocale(this.injectedLocale);
     this._weekDays = this.getWeekDays();
     this.setActiveMonth(this.selectedDate);
   }
