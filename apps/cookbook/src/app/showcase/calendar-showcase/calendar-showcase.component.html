@@ -49,7 +49,19 @@
 
   <p>
     The locale of the calendar (i.e. day and month names) can be set by providing a
-    <code>LOCALE_ID</code>. Usually the locale should be configured for the entire app, typically in
+    <code>LOCALE_ID</code>
+    . The calendar currently supports LOCALE_IDs
+    <code>da</code>
+    ,
+    <code>en-GB</code>
+    and
+    <code>en-US</code>
+    and it defaults to
+    <code>en-GB</code>
+    if none is provided.
+  </p>
+  <p>
+    Usually the locale should be configured for the entire app, typically in
     <code>AppModule</code>
     like this:
   </p>
