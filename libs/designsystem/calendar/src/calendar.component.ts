@@ -90,8 +90,8 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
 
   @Input() set locales(locales: { [key: string]: Locale }) {
     console.warn(
-      `Supplying additional locales to the Kirby CalenderComponent via an input property is deprecated and should not be used. 
-        A future update will allow injecting the locale via a provider instead.`
+      `Supplying additional locales to the Kirby Calendar Component via an input property is deprecated and should not be used. 
+        A future update will allow injecting additional locales via a provider instead.`
     );
   }
   @Input() customLocales: { [key: string]: Locale } = {};
