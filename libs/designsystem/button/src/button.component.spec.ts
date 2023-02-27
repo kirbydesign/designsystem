@@ -262,6 +262,8 @@ describe('ButtonComponent', () => {
   });
 
   const iconTestExpectations = {
+    leftXS: { paddingInline: '4px 12px' },
+    rightXS: { paddingInline: '12px 4px' },
     left: { paddingInline: '12px 16px' },
     right: { paddingInline: '16px 12px' },
   };
@@ -274,12 +276,12 @@ describe('ButtonComponent', () => {
     {
       size: ButtonSize.XS,
       iconPosition: 'left',
-      expected: iconTestExpectations.left,
+      expected: iconTestExpectations.leftXS,
     },
     {
       size: ButtonSize.XS,
       iconPosition: 'right',
-      expected: iconTestExpectations.right,
+      expected: iconTestExpectations.rightXS,
     },
     {
       size: ButtonSize.SM,

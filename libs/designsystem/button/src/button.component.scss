@@ -21,8 +21,8 @@ $button-width: (
   min-width: button-width('xs');
 
   &:not(.icon-only) {
-    --kirby-button-padding-left: #{utils.size('s')};
-    --kirby-button-padding-right: #{utils.size('s')};
+    --kirby-button-padding-left: #{utils.size('xs')};
+    --kirby-button-padding-right: #{utils.size('xs')};
   }
 
   &.icon-only {
@@ -33,11 +33,11 @@ $button-width: (
   }
 
   &.icon-left {
-    --kirby-button-padding-left: #{utils.size('xs')};
+    --kirby-button-padding-left: #{utils.size('xxxs')};
   }
 
   &.icon-right {
-    --kirby-button-padding-right: #{utils.size('xs')};
+    --kirby-button-padding-right: #{utils.size('xxxs')};
   }
 
   &.icon-left,
