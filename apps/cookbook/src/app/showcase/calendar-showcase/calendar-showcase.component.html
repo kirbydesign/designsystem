@@ -48,57 +48,12 @@
   <h4>Locales</h4>
 
   <p>
-    As mentioned in the
-    <code>properties</code>
-    table it's possible to provide additional existing locales or custom ones. But before we take a
-    look at how to provide them, let's take a look at how locales are specified. The selected locale
-    should be injected into the
-    <code>kirby-calendar</code>
-    component. It can be done in the
+    Kirby Calendars built in locales can be configured by providing a
+    <code>LOCALE_ID</code>
+    in for example
     <code>AppModule</code>
     like this:
   </p>
 
   <cookbook-code-viewer [ts]="moduleProviderExample"></cookbook-code-viewer>
-
-  <p>
-    It can also be provided (or overridden if needed) in the component that uses
-    <code>kirby-calendar</code>
-    like this:
-  </p>
-
-  <cookbook-code-viewer [ts]="componentProviderExample"></cookbook-code-viewer>
-
-  <h4>Adding additional existing locales</h4>
-
-  <p>
-    To provide additional locales other than the already built-in (Danish & English), simply import
-    them from
-    <code>date-fns/locale</code>
-    and pass it to
-    <code>kirby-calendar</code>
-    in an object.
-  </p>
-
-  <cookbook-code-viewer [ts]="additionalLocalesExampleTS"></cookbook-code-viewer>
-  <cookbook-code-viewer [html]="additionalLocalesExampleHTML"></cookbook-code-viewer>
-
-  <h4>Adding custom locales</h4>
-
-  In the example below the format of a custom locale is shown, but in order to gain an understanding
-  of how the required methods work we recommend to check out the
-  <a href="https://date-fns.org/v2.29.3/docs/Locale" target="_blank">date-fns documentation</a>
-  on locales and the
-  <a
-    href="https://github.com/date-fns/date-fns/blob/main/src/locale/en-US/index.ts"
-    target="_blank"
-  >
-    implementation details
-  </a>
-  of the
-  <code>enUS</code>
-  locale, where the implementation of all the methods are available.
-
-  <cookbook-code-viewer [ts]="customLocaleExampleTS"></cookbook-code-viewer>
-  <cookbook-code-viewer [html]="customLocaleExampleHTML"></cookbook-code-viewer>
 </div>
