@@ -280,7 +280,8 @@ $button-width: (
   margin-inline-start: utils.size('s');
 }
 
-:host-context(kirby-alert).ok-btn {
+:host-context(kirby-alert).ok-btn,
+:host-context(kirby-alert-experimental).ok-btn {
   --kirby-button-background-color: #{utils.get-color('success')};
   --kirby-button-color: #{utils.get-color('success-contrast')};
 }

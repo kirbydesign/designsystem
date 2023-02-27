@@ -10,10 +10,10 @@ import {
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { Observable, of } from 'rxjs';
 import { IconModule } from '@kirbydesign/designsystem/icon';
-import { ThemeColor } from '@kirbydesign/designsystem/helpers';
 import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import { EmptyStateModule } from '@kirbydesign/designsystem/empty-state';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { ThemeColor } from '@kirbydesign/designsystem/helpers';
 
 @Component({
   standalone: true,
@@ -25,14 +25,14 @@ import { ButtonComponent } from '@kirbydesign/designsystem/button';
     EmptyStateModule,
     ThemeColorDirective,
   ],
-  selector: 'kirby-alert',
+  selector: 'kirby-alert-experimental',
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.scss'],
   // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: { '[class.ion-page]': 'false' }, //Ensure ion-page class doesn't get applied by Ionic Modal Controller
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AlertComponent implements AfterViewInit {
+export class AlertExperimentalComponent implements AfterViewInit {
   readonly BLUR_WRAPPER_DELAY_IN_MS = 50;
   @ViewChild('alertWrapper', { static: true }) private alertWrapper: ElementRef;
   private scrollY: number = Math.abs(this.windowRef.nativeWindow.scrollY);
@@ -51,9 +51,9 @@ export class AlertComponent implements AfterViewInit {
 
   @Input() iconName: string;
   @Input() iconThemeColor: ThemeColor | `${ThemeColor}`;
-  @Input() okBtn: string;
-  @Input() okBtnIsDestructive: boolean;
-  @Input() cancelBtn: string;
+  @Input() okButton: string;
+  @Input() okButtonIsDestructive: boolean;
+  @Input() cancelButton: string;
 
   constructor(private elementRef: ElementRef<HTMLElement>, private windowRef: WindowRef) {}
 
@@ -69,12 +69,12 @@ export class AlertComponent implements AfterViewInit {
     this.windowRef.nativeWindow.scrollTo({ top: this.scrollY });
   }
 
-  onCancel() {
+  cancelAlert() {
     const ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
     ionModalElement && ionModalElement.dismiss(false);
   }
 
-  onOk() {
+  approveAlert() {
     const ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
     ionModalElement && ionModalElement.dismiss(true);
   }

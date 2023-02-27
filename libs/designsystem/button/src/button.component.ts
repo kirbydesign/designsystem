@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
@@ -24,6 +25,7 @@ const ATTENTION_LEVEL_4_DEPRECATION_WARNING =
 
 @Component({
   standalone: true,
+  imports: [CommonModule],
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'button[kirby-button],Button[kirby-button]',
   templateUrl: './button.component.html',
