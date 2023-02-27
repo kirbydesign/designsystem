@@ -87,7 +87,13 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() disablePastDates = false;
   @Input() disableFutureDates = false;
   @Input() alwaysEnableToday = false;
-  @Input() locales: { [key: string]: Locale } = {};
+
+  @Input() set locales(locales: { [key: string]: Locale }) {
+    console.warn(
+      `Supplying additional locales to the Kirby CalenderComponent via an input property is deprecated and should not be used. 
+        A future update will allow injecting the locale via a provider instead.`
+    );
+  }
   @Input() customLocales: { [key: string]: Locale } = {};
   /* 
     Experimental: Input property not documented on purpose. 
