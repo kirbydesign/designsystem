@@ -1,6 +1,6 @@
 import { Directive, forwardRef, Input } from '@angular/core';
 
-import { FitHeadingConfig, FitHeadingDirective } from '@kirbydesign/designsystem/page';
+import { FitHeadingConfig, FitHeadingDirective } from '@kirbydesign/designsystem/shared';
 
 @Directive({
   selector: `h1[kirbyFitHeading],
