@@ -3,7 +3,7 @@ import { IonContent, IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 
-type Platform = 'mobile' | 'desktop';
+type Flavor = 'modal' | 'drawer';
 @Component({
   selector: 'kirby-modal-experimental',
   templateUrl: './modal.component.html',
@@ -20,13 +20,7 @@ export class ModalExperimentalComponent {
   @Input() scrollDisabled = false;
   @Input() breakpoints: number[];
   @Input() initialBreakpoint;
-  @Input() set platform(value: Platform) {
-    // Resetting breakpoints & initialBreakpoint will prevent the modal from being a sheet modal on desktop
-    if (value === 'desktop') {
-      this.breakpoints = undefined;
-      this.initialBreakpoint = undefined;
-    }
-  }
+  @Input() flavor: Flavor = 'modal';
 
   @Output() willPresent = new EventEmitter<CustomEvent<OverlayEventDetail>>();
   @Output() didPresent = new EventEmitter<CustomEvent<OverlayEventDetail>>();

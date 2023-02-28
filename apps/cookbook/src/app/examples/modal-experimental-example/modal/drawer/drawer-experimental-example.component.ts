@@ -8,7 +8,7 @@ import { PlatformService } from '@kirbydesign/designsystem';
 export class DrawerModalExperimentalExampleComponent {
   constructor(private platformService: PlatformService) {}
 
-  platform = this.platformService.isPhabletOrBigger() ? 'desktop' : 'mobile';
+  flavor = this.platformService.isPhabletOrBigger() ? 'modal' : 'drawer';
   open = false;
 
   openModal() {
