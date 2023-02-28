@@ -3,7 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { from, Observable, Subject, switchMap, tap } from 'rxjs';
 import { OverlayEventDetail } from '@ionic/core/components';
 
-export type ModalFlavor = 'modal';
+export type ModalFlavor = 'modal' | 'drawer';
 
 export type ModalExperimentalConfig = {
   flavor?: ModalFlavor;
@@ -13,6 +13,8 @@ export type ModalExperimentalConfig = {
   canDismiss?: boolean | (() => Promise<boolean>);
   backdropDismiss?: boolean;
   showBackdrop?: boolean;
+  breakpoints?: number[];
+  initialBreakpoint?: number;
 };
 
 type ModalDismissObservables = {
@@ -42,6 +44,9 @@ export class ModalExperimentalController {
         canDismiss: config.canDismiss,
         backdropDismiss: config.backdropDismiss,
         showBackdrop: config.showBackdrop,
+        breakpoints: config.flavor === 'drawer' ? config.breakpoints : undefined,
+        initialBreakpoint: config.flavor === 'drawer' ? config.initialBreakpoint : undefined,
+        handle: false,
       })
     );
 
