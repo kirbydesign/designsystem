@@ -2,6 +2,8 @@ import { createHostFactory, Spectator } from '@ngneat/spectator';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 
+import { FlagComponent } from 'flag/src';
+import { AvatarComponent } from 'avatar/src';
 import { HeaderModule } from './header.module';
 import { HeaderComponent } from './header.component';
 
@@ -32,7 +34,7 @@ describe('HeaderComponent', () => {
   let createHost;
   createHost = createHostFactory({
     component: HeaderComponent,
-    imports: [TestHelper.ionicModuleForTest, HeaderModule],
+    imports: [TestHelper.ionicModuleForTest, HeaderModule, FlagComponent, AvatarComponent],
     detectChanges: true,
   });
 
@@ -42,10 +44,7 @@ describe('HeaderComponent', () => {
     const subtitle2 = 'Subtitle two';
 
     const defaultTemplate = `
-    <kirby-header>
-      <ng-container *kirbyHeaderTitle>${title}</ng-container>
-      <ng-container *kirbyHeaderSubtitle1>${subtitle1}</ng-container>
-      <ng-container *kirbyHeaderSubtitle2>${subtitle2}</ng-container>
+    <kirby-header title="${title}" subtitle1="${subtitle1}" subtitle2="${subtitle2}">
     </kirby-header>
     `;
 
@@ -87,9 +86,7 @@ describe('HeaderComponent', () => {
     const value = '12.345,67';
 
     const defaultTemplate = `
-    <kirby-header>
-      <ng-container *kirbyHeaderTitle>${title}</ng-container>
-      <ng-container *kirbyHeaderValue>${value}</ng-container>
+    <kirby-header title="${title}" value="${value}">
     </kirby-header>
     `;
 
@@ -122,11 +119,8 @@ describe('HeaderComponent', () => {
     const subtitle2 = 'Subtitle two';
 
     const defaultTemplate = `
-    <kirby-header>
-      <kirby-avatar *kirbyHeaderAvatar avatar size="lg" text="A" title="lg"></kirby-avatar>
-      <ng-container *kirbyHeaderTitle>${title}</ng-container>
-      <ng-container *kirbyHeaderSubtitle1>${subtitle1}</ng-container>
-      <ng-container *kirbyHeaderSubtitle2>${subtitle2}</ng-container>
+    <kirby-header title="${title}" subtitle1="${subtitle1}" subtitle2="${subtitle2}">
+      <kirby-avatar size="lg" text="A" title="lg"></kirby-avatar>
     </kirby-header>
     `;
 
@@ -148,11 +142,8 @@ describe('HeaderComponent', () => {
     const subtitle2 = 'Subtitle two';
 
     const defaultTemplate = `
-    <kirby-header [titleMaxLines]="2">
-      <kirby-flag *kirbyHeaderFlag themeColor="warning">Warning</kirby-flag>
-      <ng-container *kirbyHeaderTitle>${title}</ng-container>
-      <ng-container *kirbyHeaderSubtitle1>${subtitle1}</ng-container>
-      <ng-container *kirbyHeaderSubtitle2>${subtitle2}</ng-container>
+    <kirby-header title="${title}" subtitle1="${subtitle1}" subtitle2="${subtitle2}">
+      <kirby-flag themeColor="warning">Warning</kirby-flag>
     </kirby-header>
     `;
 
@@ -180,11 +171,8 @@ describe('HeaderComponent', () => {
     `;
 
     const defaultTemplate = `
-    <kirby-header>
-      <ng-container *kirbyHeaderTitle>${title}</ng-container>
-      <ng-container *kirbyHeaderSubtitle1>${subtitle1}</ng-container>
-      <ng-container *kirbyHeaderSubtitle2>${subtitle2}</ng-container>
-      <ng-container *kirbyHeaderActions>
+    <kirby-header title="${title}" subtitle1="${subtitle1}" subtitle2="${subtitle2}">
+      <ng-container kirbyHeaderActions>
        ${actions}
       </ng-container>
     </kirby-header>
@@ -226,11 +214,8 @@ describe('HeaderComponent', () => {
     const customSection = 'Custom section';
 
     const defaultTemplate = `
-    <kirby-header>
-      <ng-container *kirbyHeaderTitle>${title}</ng-container>
-      <ng-container *kirbyHeaderSubtitle1>${subtitle1}</ng-container>
-      <ng-container *kirbyHeaderSubtitle2>${subtitle2}</ng-container>
-      <ng-container *kirbyHeaderCustomSection>
+    <kirby-header title="${title}" subtitle1="${subtitle1}" subtitle2="${subtitle2}">
+      <ng-container kirbyHeaderCustomSection>
        ${customSection}
       </ng-container>
     </kirby-header>
