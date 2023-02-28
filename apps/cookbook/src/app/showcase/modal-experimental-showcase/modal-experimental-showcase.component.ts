@@ -161,11 +161,9 @@ export class ModalExperimentalShowcaseComponent {
   controllerProperties: ApiDescriptionProperty[] = [
     {
       name: 'flavor',
-      description: `(Optional) The flavor of the modal. 
-      
-      Modals with \`modal\` flavor have a close button placed in the top right corner and are full-screen on small screens.`,
+      description: `Determines whether to show a modal or a drawer.`,
       defaultValue: 'modal',
-      type: ['modal'],
+      type: ['modal | drawer'],
     },
     {
       name: 'component',
@@ -206,9 +204,29 @@ export class ModalExperimentalShowcaseComponent {
       defaultValue: 'true',
       type: ['boolean'],
     },
+    {
+      name: 'breakpoints',
+      description:
+        'The breakpoints to use when creating a drawer. Each value in the array must be a decimal between 0 and 1, where 0 indicates the drawer is fully closed and 1 indicates the drawer is fully open. One of the values in this array myst be the value of the initialBreakpoint property. Fx: [0, .25, .5, 1].',
+      type: ['number[] | undefined'],
+      defaultValue: 'undefined',
+    },
+    {
+      name: 'initialBreakpoint',
+      description:
+        'A decimal value between 0 and 1 that indicates the initial point the drawer will open at when creating a drawer. This value must also be listed in the breakpoints array.',
+      type: ['number | undefined'],
+      defaultValue: 'undefined',
+    },
   ];
 
   wrapperComponentProperties: ApiDescriptionProperty[] = [
+    {
+      name: 'flavor',
+      description: `Determines whether to show a modal or a drawer.`,
+      defaultValue: 'modal',
+      type: ['modal | drawer'],
+    },
     {
       name: 'title',
       description: `The title of the modal`,
