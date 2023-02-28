@@ -3,6 +3,7 @@
 .visible-buttons {
   display: flex;
   justify-content: flex-end;
+  background-color: goldenrod;
 }
 
 kirby-dropdown {
@@ -18,7 +19,13 @@ kirby-dropdown {
 }
 
 .hidden-buttons {
-  visibility: hidden;
+  // visibility: hidden;
+  opacity: 0.5;
+  background-color: crimson;
   display: flex;
   justify-content: flex-end;
+  flex-direction: row-reverse;
+
+  // position: relative;
+  // right: -48px;
 }

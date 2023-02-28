@@ -10,6 +10,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { DropdownComponent, DropdownModule } from '@kirbydesign/designsystem/dropdown';
+import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 @Component({
   selector: 'kirby-button-group',
@@ -19,100 +20,101 @@ import { DropdownComponent, DropdownModule } from '@kirbydesign/designsystem/dro
   styleUrls: ['./button-group.component.scss'],
 })
 export class ButtonGroupComponent implements AfterViewInit, OnDestroy {
-  @ViewChild('visibleButtons', { read: ElementRef }) visibleButtons!: ElementRef<HTMLElement>;
-  @ViewChild('hiddenButtons', { read: ElementRef }) hiddenButtons!: ElementRef<HTMLElement>;
+  @ViewChild('buttonContainer', { read: ElementRef }) buttonContainer!: ElementRef<HTMLElement>;
+  @ViewChild('hiddenButtonContainer', { read: ElementRef })
+  hiddenButtonContainer!: ElementRef<HTMLElement>;
   @ViewChild('boundingBox', { read: ElementRef }) boundingBox!: ElementRef<HTMLElement>;
   @ViewChild(DropdownComponent, { read: ElementRef }) dropdown!: ElementRef;
 
   @ContentChildren(ButtonComponent, { read: ElementRef }) buttons: ElementRef[];
 
-  private visibleButtonsObserver: IntersectionObserver;
+  private buttonContainerObserver: IntersectionObserver;
   private hiddenButtonsObserver: IntersectionObserver;
-  private visibleButtonsObserverOptions;
+  private visibleContainerObserverOptions;
   private hiddenButtonsObserverOptions;
 
   constructor(private renderer: Renderer2) {}
 
-  ngOnDestroy(): void {
-    this.visibleButtonsObserver.disconnect();
-    this.hiddenButtonsObserver.disconnect();
-  }
-
   ngAfterViewInit(): void {
-    console.log(this.buttons);
-
-    this.buttons.reverse;
-
-    this.visibleButtonsObserverOptions = {
+    this.visibleContainerObserverOptions = {
       root: this.boundingBox.nativeElement,
-      rootMargin: '0px',
+      /*
+       * rootMargin acts like a buffer to avoid buttons being added and removed again infinitely
+       * if a buttons edge aligns perfectly with the bounding box. The value is specifically
+       * chosen to matches button margin, meaning a button is moved when it aligns perfectly
+       * with the edge.
+       */
+      rootMargin: DesignTokenHelper.size('xxxs'),
       threshold: 1.0,
     };
 
-    this.visibleButtonsObserver = new IntersectionObserver(
-      this.hideLastVisibleChild,
-      this.visibleButtonsObserverOptions
+    this.buttonContainerObserver = new IntersectionObserver(
+      this.handleVisibleContainerIntersection,
+      this.visibleContainerObserverOptions
     );
 
     this.hiddenButtonsObserverOptions = {
       root: this.boundingBox.nativeElement,
-      rootMargin: '0px',
       threshold: 1.0,
     };
 
     this.hiddenButtonsObserver = new IntersectionObserver(
-      this.showFirstHiddenChild,
+      this.handleHiddenButtonIntersection,
       this.hiddenButtonsObserverOptions
     );
 
-    this.visibleButtonsObserver.observe(this.visibleButtons.nativeElement);
+    this.buttonContainerObserver.observe(this.buttonContainer.nativeElement);
 
     this.buttons.forEach((button) => {
       this.hiddenButtonsObserver.observe(button.nativeElement);
     });
   }
 
-  hideLastVisibleChild = (entries) => {
+  ngOnDestroy(): void {
+    this.buttonContainerObserver.disconnect();
+    this.hiddenButtonsObserver.disconnect();
+  }
+
+  private handleVisibleContainerIntersection = (entries) => {
     entries.forEach((entry: IntersectionObserverEntry) => {
-      console.log('hideLastVisibleChild called');
-      if (entry.intersectionRatio < 1) {
-        console.log('hiding child');
+      if (entry.intersectionRatio >= 1.0) {
+        return;
+      }
 
-        const buttons = this.visibleButtons.nativeElement.querySelectorAll('button');
+      const buttons = this.buttonContainer.nativeElement.querySelectorAll('button');
 
-        if (buttons.length > 0) {
-          const buttonElement = buttons[buttons.length - 1];
-          this.renderer.appendChild(this.hiddenButtons.nativeElement, buttonElement);
-          this.hiddenButtonsObserver.observe(buttonElement);
-          this.dropdown.nativeElement.style.display = 'block';
-        }
+      if (buttons.length > 0) {
+        this.hideLastVisibleButton(buttons);
       }
     });
   };
 
-  showFirstHiddenChild = (entries) => {
+  private handleHiddenButtonIntersection = (entries) => {
     entries.forEach((entry: IntersectionObserverEntry) => {
-      console.log('showFirstHiddenChild called', entry);
+      if (entry.intersectionRatio !== 1) return;
 
-      if (entry.intersectionRatio === 1) {
-        console.log('showing child');
+      const buttons = this.hiddenButtonContainer.nativeElement.querySelectorAll('button');
+      if (buttons.length < 1) return;
 
-        const buttons = this.hiddenButtons.nativeElement.querySelectorAll('button');
-
-        this.hiddenButtonsObserver.unobserve(entry.target);
-
-        if (buttons.length > 0) {
-          this.renderer.appendChild(this.visibleButtons.nativeElement, entry.target);
-        }
-
-        const buttonsTwo = this.hiddenButtons.nativeElement.querySelectorAll('button');
-
-        if (buttonsTwo.length === 0) {
-          console.log();
-
-          this.dropdown.nativeElement.style.display = 'none';
-        }
+      // we are about to show the last hidden button, hide dropdown
+      if (buttons.length === 1) {
+        this.dropdown.nativeElement.style.display = 'none';
       }
+
+      this.showButton(entry.target);
     });
   };
+
+  private hideLastVisibleButton(buttons: NodeListOf<HTMLButtonElement>) {
+    const lastVisibleButton = buttons[buttons.length - 1];
+    // TODO: determine if we want renderer2 here instead (and make our own small prepend implementation?)
+    this.hiddenButtonContainer.nativeElement.prepend(lastVisibleButton);
+    this.hiddenButtonsObserver.observe(lastVisibleButton);
+    this.dropdown.nativeElement.style.display = 'block';
+  }
+
+  private showButton(button: Element) {
+    this.hiddenButtonsObserver.unobserve(button);
+    this.renderer.appendChild(this.buttonContainer.nativeElement, button);
+  }
 }
