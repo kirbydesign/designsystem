@@ -67,6 +67,18 @@ describe('FullscreenComponent', () => {
     it('should enable scroll', () => {
       expect(spectator.component.scrollDisabled).toBeFalse();
     });
+
+    it('should have no breakpoints', () => {
+      expect(spectator.component.breakpoints).toBeUndefined();
+    });
+
+    it('should have no initialBreakpoint', () => {
+      expect(spectator.component.initialBreakpoint).toBeUndefined();
+    });
+
+    it('should have a flavor of "modal"', () => {
+      expect(spectator.component.flavor).toBe('modal');
+    });
   });
 
   describe('events', () => {
