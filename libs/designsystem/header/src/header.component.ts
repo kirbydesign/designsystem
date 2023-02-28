@@ -10,7 +10,7 @@ import {
 import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
 import { FlagComponent } from '@kirbydesign/designsystem/flag';
 import { PlatformService } from '@kirbydesign/designsystem/helpers';
-import type { FitHeadingConfig } from '@kirbydesign/designsystem/page';
+import type { FitHeadingConfig } from '@kirbydesign/designsystem/shared';
 
 @Directive({
   selector: '[kirbyHeaderCustomTitle]',

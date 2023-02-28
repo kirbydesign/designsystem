@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FitHeadingDirective } from '@kirbydesign/designsystem/page';
+import { FitHeadingDirective } from '@kirbydesign/designsystem/shared';
 import {
   HeaderActionsDirective,
   HeaderComponent,
