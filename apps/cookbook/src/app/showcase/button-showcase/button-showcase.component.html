@@ -1,12 +1,16 @@
 <div class="example">
-  <div class="btn-group-container">
-    <kirby-button-group>
-      <button kirby-button>f</button>
-      <button kirby-button>Second Button</button>
-      <button kirby-button>Third Button</button>
-      <button kirby-button>Fourth Button</button>
-    </kirby-button-group>
-  </div>
+  <kirby-button-group>
+    <button kirby-button>
+      <kirby-icon name="kirby"></kirby-icon>
+      Action 1
+    </button>
+    <button kirby-button>
+      <kirby-icon name="kirby"></kirby-icon>
+    </button>
+    <button kirby-button [attentionLevel]="'3'">Action 2</button>
+    <button kirby-button [attentionLevel]="'3'">Action 3</button>
+    <button kirby-button [attentionLevel]="'3'" class="button-to-remove">Action 4</button>
+  </kirby-button-group>
   <cookbook-button-example [themeColor]="themeColor"></cookbook-button-example>
   <div>
     <select (change)="onChange($event.target.value)">
