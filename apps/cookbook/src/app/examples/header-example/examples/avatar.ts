@@ -4,7 +4,7 @@ const config = {
   selector: 'cookbook-header-example-avatar',
   template: `
   <kirby-header title="Title" subtitle1="Subtitle one" subtitle2="Subtitle two" [centered]="true">
-    <kirby-avatar *kirbyHeaderAvatar avatar size="lg" text="A" title="lg"></kirby-avatar>
+    <kirby-avatar size="lg" text="A" title="lg"></kirby-avatar>
   </kirby-header>
   `,
 };

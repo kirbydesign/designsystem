@@ -6,66 +6,31 @@ import {
   Input,
   OnChanges,
   SimpleChanges,
-  TemplateRef,
 } from '@angular/core';
+import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
+import { FlagComponent } from '@kirbydesign/designsystem/flag';
 import { PlatformService } from '@kirbydesign/designsystem/helpers';
 import type { FitHeadingConfig } from '@kirbydesign/designsystem/page';
 
 @Directive({
-  selector: '[kirbyHeaderAvatar]',
+  selector: '[kirbyHeaderCustomTitle]',
 })
-export class HeaderAvatarDirective {
-  constructor(public templateRef: TemplateRef<unknown>) {}
-}
+export class HeaderCustomTitleDirective {}
 
 @Directive({
-  selector: '[kirbyHeaderFlag]',
+  selector: '[kirbyHeaderCustomValue]',
 })
-export class HeaderFlagDirective {
-  constructor(public templateRef: TemplateRef<unknown>) {}
-}
-
-@Directive({
-  selector: '[kirbyHeaderTitle]',
-})
-export class HeaderTitleDirective {
-  constructor(public templateRef: TemplateRef<unknown>) {}
-}
-
-@Directive({
-  selector: '[kirbyHeaderValue]',
-})
-export class HeaderValueDirective {
-  constructor(public templateRef: TemplateRef<unknown>) {}
-}
-
-@Directive({
-  selector: '[kirbyHeaderSubtitle1]',
-})
-export class HeaderSubtitle1Directive {
-  constructor(public templateRef: TemplateRef<unknown>) {}
-}
-
-@Directive({
-  selector: '[kirbyHeaderSubtitle2]',
-})
-export class HeaderSubtitle2Directive {
-  constructor(public templateRef: TemplateRef<unknown>) {}
-}
+export class HeaderCustomValueDirective {}
 
 @Directive({
   selector: '[kirbyHeaderCustomSection]',
 })
-export class HeaderCustomSectionDirective {
-  constructor(public templateRef: TemplateRef<unknown>) {}
-}
+export class HeaderCustomSectionDirective {}
 
 @Directive({
   selector: '[kirbyHeaderActions]',
 })
-export class HeaderActionsDirective {
-  constructor(public templateRef: TemplateRef<unknown>) {}
-}
+export class HeaderActionsDirective {}
 
 @Component({
   selector: 'kirby-header',
@@ -76,30 +41,31 @@ export class HeaderComponent implements OnChanges {
   @Input() centered = false;
   @Input() titleMaxLines: number;
 
-  isDesktop = true;
+  isDesktop = this.platform.isPhabletOrBigger();
   fitHeadingConfig: FitHeadingConfig;
 
-  @ContentChild(HeaderAvatarDirective)
-  avatarTemplate!: HeaderAvatarDirective;
-  @ContentChild(HeaderFlagDirective)
-  flagTemplate!: HeaderFlagDirective;
+  @ContentChild(AvatarComponent)
+  avatar: AvatarComponent;
+
+  @ContentChild(FlagComponent)
+  flag: FlagComponent;
+
+  @ContentChild(HeaderCustomSectionDirective)
+  customSection: HeaderCustomSectionDirective;
+
+  @ContentChild(HeaderActionsDirective)
+  actions: HeaderActionsDirective;
+
   @Input() title = null;
-  @ContentChild(HeaderTitleDirective)
-  titleTemplate!: HeaderTitleDirective;
+  @ContentChild(HeaderCustomTitleDirective)
+  customTitle: HeaderCustomTitleDirective;
+
   @Input() value = null;
-  @ContentChild(HeaderValueDirective)
-  valueTemplate!: HeaderValueDirective;
+  @ContentChild(HeaderCustomValueDirective)
+  customValue!: HeaderCustomValueDirective;
 
   @Input() subtitle1 = null;
-  @ContentChild(HeaderSubtitle1Directive)
-  subtitle1Template!: HeaderSubtitle1Directive;
   @Input() subtitle2 = null;
-  @ContentChild(HeaderSubtitle2Directive)
-  subtitle2Template!: HeaderSubtitle2Directive;
-  @ContentChild(HeaderCustomSectionDirective)
-  customSectionTemplate!: HeaderCustomSectionDirective;
-  @ContentChild(HeaderActionsDirective)
-  actionsTemplate!: HeaderActionsDirective;
 
   constructor(private platform: PlatformService) {}
 

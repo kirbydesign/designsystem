@@ -3,24 +3,16 @@ import { NgModule } from '@angular/core';
 import { FitHeadingDirective } from '@kirbydesign/designsystem/page';
 import {
   HeaderActionsDirective,
-  HeaderAvatarDirective,
   HeaderComponent,
   HeaderCustomSectionDirective,
-  HeaderFlagDirective,
-  HeaderSubtitle1Directive,
-  HeaderSubtitle2Directive,
-  HeaderTitleDirective,
-  HeaderValueDirective,
+  HeaderCustomTitleDirective,
+  HeaderCustomValueDirective,
 } from './header.component';
 
 const declarations = [
   HeaderComponent,
-  HeaderAvatarDirective,
-  HeaderFlagDirective,
-  HeaderTitleDirective,
-  HeaderValueDirective,
-  HeaderSubtitle1Directive,
-  HeaderSubtitle2Directive,
+  HeaderCustomTitleDirective,
+  HeaderCustomValueDirective,
   HeaderCustomSectionDirective,
   HeaderActionsDirective,
 ];

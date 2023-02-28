@@ -3,8 +3,8 @@ import { Component } from '@angular/core';
 const config = {
   selector: 'cookbook-header-example-actions',
   template: `
-  <kirby-header title="Title" subtitle1="Subtitle one" subtitle2="Subtitle two" >
-    <ng-container *kirbyHeaderActions>
+  <kirby-header title="Title" subtitle1="Subtitle one" subtitle2="Subtitle two">
+    <ng-container kirbyHeaderActions>
       <button kirby-button>
         <kirby-icon name="edit"></kirby-icon>
         Action 1

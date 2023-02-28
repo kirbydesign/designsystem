@@ -58,45 +58,24 @@ export class HeaderShowcaseComponent {
 
   directives: ApiDescriptionProperty[] = [
     {
-      name: '*kirbyHeaderAvatar',
+      name: 'kirbyHeaderCustomTitle',
       description:
-        'The `*kirbyHeaderAvatar` directive should be applied an kirby-avatar element which will then be shown in the header.',
+        'The `kirbyHeaderCustomTitle` directive can be applied to an element as an alternative to passing the title property. Using this method you will gain more control over the content.',
     },
     {
-      name: '*kirbyHeaderFlag',
+      name: 'kirbyHeaderCustomValue',
       description:
-        'The `*kirbyHeaderFlag` directive should be applied an kirby-flag element which will then be shown in the header.',
+        'The `kirbyHeaderCustomValue` directive can be applied to an element as an alternative to passing the value property. Using this method you will gain more control over the content.',
     },
     {
-      name: '*kirbyHeaderTitle',
+      name: 'kirbyHeaderCustomSection',
       description:
-        'The `*kirbyHeaderTitle` directive can be applied an ng-container element or any host as an alternative to passing the title property that provides more flexibility.',
+        'The `kirbyHeaderCustomSection` directive can be used to add a custom section to the header. This can be used display custom ui below the header.',
     },
     {
-      name: '*kirbyHeaderValue',
+      name: 'kirbyHeaderActions',
       description:
-        'The `*kirbyHeaderValue` directive can be applied an ng-container element or any host as an alternative to passing the value property that provides more flexibility.',
-    },
-    {
-      name: '*kirbyHeaderSubtitle1',
-      description:
-        'The `*kirbyHeaderSubtitle1` directive can be applied an ng-container element or any host as an alternative to passing the subtitle1 property that provides more flexibility.',
-      type: ['{fixed: boolean}'],
-    },
-    {
-      name: '*kirbyHeaderSubtitle2',
-      description:
-        'The `*kirbyHeaderSubtitle2` directive can be applied an ng-container element or any host as an alternative to passing the subtitle2 property that provides more flexibility.',
-    },
-    {
-      name: '*kirbyHeaderCustomSection',
-      description:
-        'The `*kirbyHeaderCustomSection` directive should be applied an ng-container element or any host which will then be shown in the header.',
-    },
-    {
-      name: '*kirbyHeaderActions',
-      description:
-        'The `*kirbyHeaderActions` directive should be applied an element or any host which will then be shown in the header.',
+        'The `kirbyHeaderActions` directive can be used to render actions. The placement of the actions is resposnive and will have different layouts depending on the viewport size.',
     },
   ];
 }
