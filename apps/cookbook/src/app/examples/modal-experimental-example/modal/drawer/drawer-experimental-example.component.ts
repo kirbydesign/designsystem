@@ -1,5 +1,23 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { PlatformService } from '@kirbydesign/designsystem';
+
+export const drawerExampleTemplateHTML = `<kirby-modal-experimental
+  [flavor]="'drawer'"
+  [open]="open"
+  [title]="'Drawer'"
+  [breakpoints]="[0, 0.5, 1]"
+  [initialBreakpoint]="0.5"
+  (willDismiss)="closeDrawer()"
+>  
+    <p>
+      Lorem ipsum dolor sit amet...
+    </p>
+</kirby-modal-experimental>
+
+<button kirby-button (click)="openDrawer()">Open Drawer</button>
+`;
+
+export const drawerExampleTemplateTS = `openDrawer() { this.open = true; }`;
 
 @Component({
   templateUrl: './drawer-experimental-example.component.html',
@@ -11,11 +29,11 @@ export class DrawerModalExperimentalExampleComponent {
   flavor = this.platformService.isPhabletOrBigger() ? 'modal' : 'drawer';
   open = false;
 
-  openModal() {
+  openDrawer() {
     this.open = true;
   }
 
-  closeModal() {
+  closeDrawer() {
     this.open = false;
   }
 }

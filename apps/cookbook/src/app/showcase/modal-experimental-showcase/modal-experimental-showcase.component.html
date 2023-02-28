@@ -24,8 +24,9 @@
 <h3><a href="#" (click)="scrollTo(components)">Components</a></h3>
 
 <ul>
+  <li><a href="#" (click)="scrollTo(fullscreenModal)">Modal</a></li>
   <li>
-    <a href="#" (click)="scrollTo(fullscreenModal)">Fullscreen modal</a>
+    <a href="#" (click)="scrollTo(drawer)">Drawer</a>
 
     <ul>
       <li>
@@ -78,7 +79,7 @@
 
 <div class="page-example">
   <div>
-    <h2 #fullscreenModal>Fullscreen modal</h2>
+    <h2 #fullscreenModal>Modal (default)</h2>
     <cookbook-code-viewer [html]="fullscreenModalExampleTemplateHTML"></cookbook-code-viewer>
     <cookbook-code-viewer [ts]="fullscreenModalExampleTemplateTS"></cookbook-code-viewer>
   </div>
@@ -87,6 +88,15 @@
     src="/examples/modal-experimental/fullscreen"
     showExternalLink="true"
   ></cookbook-iphone>
+</div>
+
+<div class="page-example">
+  <div>
+    <h2 #drawer>Drawer</h2>
+    <cookbook-code-viewer [html]="drawerExampleTemplateHTML"></cookbook-code-viewer>
+    <cookbook-code-viewer [ts]="drawerExampleTemplateTS"></cookbook-code-viewer>
+  </div>
+
   <cookbook-iphone
     src="/examples/modal-experimental/drawer"
     showExternalLink="true"
@@ -95,16 +105,18 @@
 
 <h2 #fullscreenModalSlots>Slots</h2>
 <p>
-  The modal component accepts 3 slots:
+  The modal component accepts 4 slots:
   <code>header-start</code>
   ,
   <code>default</code>
+  ,
+  <code>drawer-supplementary-action</code>
   &
   <code>footer</code>
   .
 </p>
 
-<h3>header-start</h3>
+<h3>header-start (only for Modal)</h3>
 
 <p>
   The
@@ -122,6 +134,14 @@
   The
   <code>default</code>
   slot places the provided markup or component in the modal's content.
+</p>
+
+<h3>drawer-supplementary-action (only for Drawer)</h3>
+
+<p>
+  The
+  <code>drawer-supplementary-action</code>
+  slot places content in the upper right corner of the drawer header.
 </p>
 
 <h3>footer</h3>
@@ -142,7 +162,7 @@
 <cookbook-code-viewer [html]="footerSlotExampleTemplate"></cookbook-code-viewer>
 
 <div class="description">
-  <h2 #fullscreenModalProperties>Fullscreen modal properties:</h2>
+  <h2 #fullscreenModalProperties>Modal & Drawer properties:</h2>
   <cookbook-api-description-properties
     [properties]="componentProperties"
   ></cookbook-api-description-properties>
