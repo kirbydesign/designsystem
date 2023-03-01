@@ -1,14 +1,7 @@
 import { Component } from '@angular/core';
 import exampleWithCardHtml from '../../examples/calendar-example/calendar-card-example.component.html?raw';
 import exampleHtml from '../../examples/calendar-example/calendar-example.component.html?raw';
-import {
-  additionalLocalesExampleHTML,
-  additionalLocalesExampleTS,
-  componentProviderExample,
-  customLocaleExampleHTML,
-  customLocaleExampleTS,
-  moduleProviderExample,
-} from '../../examples/calendar-example/calendar-locales-examples';
+import { moduleProviderExample } from '../../examples/calendar-example/calendar-locales-examples';
 import { ApiDescriptionEvent } from '../../shared/api-description/api-description-events/api-description-events.component';
 import { ApiDescriptionProperty } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 
@@ -48,11 +41,6 @@ export class CalendarShowcaseComponent {
   exampleWithCardHtml = exampleWithCardHtml;
 
   moduleProviderExample = moduleProviderExample;
-  componentProviderExample = componentProviderExample;
-  additionalLocalesExampleTS = additionalLocalesExampleTS;
-  additionalLocalesExampleHTML = additionalLocalesExampleHTML;
-  customLocaleExampleTS = customLocaleExampleTS;
-  customLocaleExampleHTML = customLocaleExampleHTML;
 
   properties: ApiDescriptionProperty[] = [
     {
