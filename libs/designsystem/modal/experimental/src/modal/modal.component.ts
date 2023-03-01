@@ -1,9 +1,12 @@
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { IonContent, IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 
 type Flavor = 'modal' | 'drawer';
+type Size = 'xxs' | 'xs' | 'sm' | 'md' | 'lg';
+type SizeTemp = 'md';
+
 @Component({
   selector: 'kirby-modal-experimental',
   templateUrl: './modal.component.html',
@@ -11,8 +14,11 @@ type Flavor = 'modal' | 'drawer';
 })
 export class ModalExperimentalComponent {
   @ViewChild(IonModal) modal: IonModal;
+  @ViewChild(IonModal, { static: true, read: ElementRef })
+  modalElement: ElementRef<HTMLElement>;
   @ViewChild(IonContent) ionContent: IonContent;
 
+  @Input() flavor: Flavor = 'modal';
   @Input() open = false;
   @Input() canDismiss: boolean | (() => Promise<boolean>) = true;
   @Input() title = '';
@@ -20,7 +26,12 @@ export class ModalExperimentalComponent {
   @Input() scrollDisabled = false;
   @Input() breakpoints: number[];
   @Input() initialBreakpoint;
-  @Input() flavor: Flavor = 'modal';
+  @Input() size: SizeTemp = 'md';
+  @Input() set height(userDefinedHeight: string) {
+    // If the user has defined a height, then we override the --height
+    // specified by the 'size' classes in /core/src/scss/_global-styles.scss
+    this.modalElement.nativeElement.style.setProperty('--height', userDefinedHeight);
+  }
 
   @Output() willPresent = new EventEmitter<CustomEvent<OverlayEventDetail>>();
   @Output() didPresent = new EventEmitter<CustomEvent<OverlayEventDetail>>();

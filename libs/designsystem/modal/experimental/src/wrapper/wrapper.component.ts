@@ -1,5 +1,4 @@
 import { Component, ElementRef, Input, OnInit } from '@angular/core';
-import { IonModal } from '@ionic/angular';
 
 type Flavor = 'modal' | 'drawer';
 @Component({
