@@ -11,7 +11,7 @@
     <ng-container *ngIf="!showStaticDummyContent">
       <p>{{ subtitle }}</p>
       <kirby-form-field>
-        <input kirby-input placeholder="Focus me on device to see keyboard" />
+        <textarea kirby-textarea placeholder="Default textarea with placeholder text"></textarea>
       </kirby-form-field>
       <ng-container *ngIf="showDummyContent">
         <div class="example-properties" *ngIf="exampleProperties">
