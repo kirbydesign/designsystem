@@ -33,7 +33,7 @@ export class ItemShowcaseComponent {
       name: 'disclosure',
       description: 'Set disclosure icon',
       defaultValue: 'null',
-      type: ["'link' | 'arrow-more' | 'arrow-down' | 'arrow-up'"],
+      type: ["'link' | 'arrow-more' | 'arrow-down' | 'arrow-up' | 'null'"],
     },
     {
       name: 'reorderable',
