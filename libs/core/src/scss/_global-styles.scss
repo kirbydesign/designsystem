@@ -249,6 +249,18 @@ html.ios ion-modal.kirby-modal-experimental {
 
   &.modal-sheet {
     --border-radius: #{$modal-border-radius};
+
+    ion-header {
+      &.modal-header {
+        border-bottom: none;
+      }
+    }
+
+    ion-toolbar {
+      button {
+        background-color: transparent;
+      }
+    }
   }
 
   @include utils.media('>=medium') {
