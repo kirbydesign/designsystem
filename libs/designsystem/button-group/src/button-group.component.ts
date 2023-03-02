@@ -83,9 +83,7 @@ export class ButtonGroupComponent implements AfterViewInit, OnDestroy, AfterView
 
   private hideLastVisibleButton(buttons: NodeListOf<HTMLButtonElement>) {
     const lastVisibleButton = buttons[buttons.length - 1];
-
-    // TODO: determine if we want renderer2 here instead (and make our own small prepend implementation?)
-    this.hiddenButtonContainer.nativeElement.prepend(lastVisibleButton);
+    this.hiddenButtonContainer.nativeElement.appendChild(lastVisibleButton);
     this.hiddenButtonsObserver.observe(lastVisibleButton);
   }
 
