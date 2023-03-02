@@ -30,11 +30,11 @@ export class HeaderComponent implements OnChanges {
   @ContentChild(FlagComponent)
   flag: FlagComponent;
 
-  @Input() title = null;
-  @Input() value = null;
-  @Input() valueUnit = null;
-  @Input() subtitle1 = null;
-  @Input() subtitle2 = null;
+  @Input() title: string = null;
+  @Input() value: string = null;
+  @Input() valueUnit: string = null;
+  @Input() subtitle1: string = null;
+  @Input() subtitle2: string = null;
 
   constructor(private platform: PlatformService) {}
 
