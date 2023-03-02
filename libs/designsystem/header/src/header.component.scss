@@ -2,12 +2,12 @@
 
 .container {
   width: 100%;
-  padding: 16px 16px 32px;
+  padding: utils.size('s') utils.size('s') utils.size('l');
   display: flex;
   flex-direction: column;
 
   @media screen and (min-width: 768px) {
-    padding-top: 24px;
+    padding-top: utils.size('m');
   }
 
   &.centered {
@@ -16,23 +16,23 @@
 }
 
 .avatar {
-  margin-bottom: 16px;
+  margin-bottom: utils.size('s');
 }
 
 .flag {
-  margin-bottom: 4px;
+  margin-bottom: utils.size('xxxs');
 }
 
 .title {
-  margin-bottom: 2px;
+  margin-bottom: utils.size('xxxxs');
 }
 
 .key {
-  margin-bottom: 2px;
+  margin-bottom: utils.size('xxxxs');
 }
 
 .value {
-  margin-bottom: 4px;
+  margin-bottom: utils.size('xxxs');
 }
 
 .value-unit {
