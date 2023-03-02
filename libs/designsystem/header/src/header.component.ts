@@ -1,7 +1,6 @@
 import {
   Component,
   ContentChild,
-  Directive,
   HostListener,
   Input,
   OnChanges,
