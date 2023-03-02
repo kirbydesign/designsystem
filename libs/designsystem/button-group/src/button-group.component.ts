@@ -1,8 +1,11 @@
 import {
+  AfterContentChecked,
+  AfterViewChecked,
   AfterViewInit,
   Component,
   ContentChildren,
   ElementRef,
+  Input,
   OnDestroy,
   Renderer2,
   ViewChild,
@@ -19,7 +22,9 @@ import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
   templateUrl: './button-group.component.html',
   styleUrls: ['./button-group.component.scss'],
 })
-export class ButtonGroupComponent implements AfterViewInit, OnDestroy {
+export class ButtonGroupComponent implements AfterViewInit, OnDestroy, AfterViewChecked {
+  @Input() buttonsShown: number | 'dynamic';
+
   @ViewChild('buttonContainer', { read: ElementRef }) buttonContainer!: ElementRef<HTMLElement>;
   @ViewChild('hiddenButtonContainer', { read: ElementRef })
   hiddenButtonContainer!: ElementRef<HTMLElement>;
@@ -35,7 +40,61 @@ export class ButtonGroupComponent implements AfterViewInit, OnDestroy {
 
   constructor(private renderer: Renderer2) {}
 
+  ngAfterViewChecked(): void {
+    if (this.buttonsShown === 'dynamic' && this.hiddenButtonContainer) {
+      if (this.hiddenButtonContainer.nativeElement.childElementCount > 0) {
+        this.dropdown.nativeElement.style.display = 'block';
+      } else {
+        this.dropdown.nativeElement.style.display = 'none';
+      }
+    }
+  }
+
   ngAfterViewInit(): void {
+    if (this.buttonsShown === 'dynamic') this.initializeDynamicResizing();
+  }
+
+  ngOnDestroy(): void {
+    this.buttonContainerObserver.disconnect();
+    this.hiddenButtonsObserver.disconnect();
+  }
+
+  private handleVisibleContainerIntersection = (entries) => {
+    entries.forEach((entry: IntersectionObserverEntry) => {
+      if (entry.intersectionRatio >= 1.0) {
+        return;
+      }
+
+      const buttons = this.buttonContainer.nativeElement.querySelectorAll('button');
+
+      if (buttons.length > 0) {
+        this.hideLastVisibleButton(buttons);
+      }
+    });
+  };
+
+  private handleHiddenButtonIntersection = (entries) => {
+    entries.forEach((entry: IntersectionObserverEntry) => {
+      if (entry.intersectionRatio !== 1) return;
+
+      this.showButton(entry.target);
+    });
+  };
+
+  private hideLastVisibleButton(buttons: NodeListOf<HTMLButtonElement>) {
+    const lastVisibleButton = buttons[buttons.length - 1];
+
+    // TODO: determine if we want renderer2 here instead (and make our own small prepend implementation?)
+    this.hiddenButtonContainer.nativeElement.prepend(lastVisibleButton);
+    this.hiddenButtonsObserver.observe(lastVisibleButton);
+  }
+
+  private showButton(button: Element) {
+    this.hiddenButtonsObserver.unobserve(button);
+    this.renderer.appendChild(this.buttonContainer.nativeElement, button);
+  }
+
+  initializeDynamicResizing() {
     this.visibleContainerObserverOptions = {
       root: this.boundingBox.nativeElement,
       /*
@@ -63,58 +122,10 @@ export class ButtonGroupComponent implements AfterViewInit, OnDestroy {
       this.hiddenButtonsObserverOptions
     );
 
-    this.buttonContainerObserver.observe(this.buttonContainer.nativeElement);
-
     this.buttons.forEach((button) => {
       this.hiddenButtonsObserver.observe(button.nativeElement);
     });
-  }
 
-  ngOnDestroy(): void {
-    this.buttonContainerObserver.disconnect();
-    this.hiddenButtonsObserver.disconnect();
-  }
-
-  private handleVisibleContainerIntersection = (entries) => {
-    entries.forEach((entry: IntersectionObserverEntry) => {
-      if (entry.intersectionRatio >= 1.0) {
-        return;
-      }
-
-      const buttons = this.buttonContainer.nativeElement.querySelectorAll('button');
-
-      if (buttons.length > 0) {
-        this.hideLastVisibleButton(buttons);
-      }
-    });
-  };
-
-  private handleHiddenButtonIntersection = (entries) => {
-    entries.forEach((entry: IntersectionObserverEntry) => {
-      if (entry.intersectionRatio !== 1) return;
-
-      const buttons = this.hiddenButtonContainer.nativeElement.querySelectorAll('button');
-      if (buttons.length < 1) return;
-
-      // we are about to show the last hidden button, hide dropdown
-      if (buttons.length === 1) {
-        this.dropdown.nativeElement.style.display = 'none';
-      }
-
-      this.showButton(entry.target);
-    });
-  };
-
-  private hideLastVisibleButton(buttons: NodeListOf<HTMLButtonElement>) {
-    const lastVisibleButton = buttons[buttons.length - 1];
-    // TODO: determine if we want renderer2 here instead (and make our own small prepend implementation?)
-    this.hiddenButtonContainer.nativeElement.prepend(lastVisibleButton);
-    this.hiddenButtonsObserver.observe(lastVisibleButton);
-    this.dropdown.nativeElement.style.display = 'block';
-  }
-
-  private showButton(button: Element) {
-    this.hiddenButtonsObserver.unobserve(button);
-    this.renderer.appendChild(this.buttonContainer.nativeElement, button);
+    this.buttonContainerObserver.observe(this.buttonContainer.nativeElement);
   }
 }
