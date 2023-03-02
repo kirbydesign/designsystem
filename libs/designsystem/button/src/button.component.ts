@@ -7,6 +7,7 @@ import {
   ElementRef,
   HostBinding,
   Input,
+  Renderer2,
 } from '@angular/core';
 
 import { NotificationColor } from '@kirbydesign/core';
@@ -64,7 +65,7 @@ export class ButtonComponent implements AfterContentInit {
 
   @HostBinding('class.icon-only')
   public get isIconOnly(): boolean {
-    return !!this.icon && !this.hasText;
+    return !!this.iconElementRef && this.showIconOnly;
   }
   private _isIconLeft = false;
   @HostBinding('class.icon-left')
@@ -88,17 +89,54 @@ export class ButtonComponent implements AfterContentInit {
   @Input() isFloating: boolean = false;
   @Input()
   size: ButtonSize | `${ButtonSize}` = ButtonSize.MD;
+  @Input() showIconOnly: boolean = false;
 
-  @ContentChild(IconComponent) icon: IconComponent;
   @ContentChild(IconComponent, { read: ElementRef })
-  iconElementRef: ElementRef<HTMLElement>;
-  private hasText = false;
+  iconElementRef?: ElementRef<HTMLElement>;
 
-  constructor(private elementRef: ElementRef<HTMLElement>) {}
+  constructor(private elementRef: ElementRef<HTMLElement>, private renderer: Renderer2) {}
+
+  private wrapTextNode() {
+    const ifTextNode = (node?: ChildNode): ChildNode | undefined => {
+      return node?.nodeType === Node.TEXT_NODE ? node : undefined;
+    };
+
+    const iconElement = this.iconElementRef?.nativeElement;
+    const textNode =
+      ifTextNode(iconElement?.previousSibling) || ifTextNode(iconElement?.nextSibling);
+    if (textNode) {
+      const placement = textNode === iconElement?.previousSibling ? 'before' : 'after';
+      const textWrapper = this.renderer.createElement('span');
+      const parent = textNode.parentNode;
+      this.renderer.removeChild(textNode.parentNode, textNode);
+      this.renderer.appendChild(textWrapper, textNode);
+      if (placement === 'before') {
+        this.renderer.insertBefore(parent, textWrapper, this.iconElementRef?.nativeElement);
+      } else if (placement === 'after') {
+        this.renderer.appendChild(parent, textWrapper);
+      }
+    }
+  }
 
   ngAfterContentInit(): void {
-    this.hasText = !!this.elementRef.nativeElement.textContent;
-    if (this.iconElementRef !== undefined && this.hasText) {
+    if (this.iconElementRef === undefined) {
+      // Nothing to do here when there's no icon:
+      return;
+    }
+
+    if (this.showIconOnly) {
+      // If the button text is supplied as plain text (i.e. as a text node not within an element tag),
+      // we need to wrap it in an element to be able to target and hide it with css:
+      this.wrapTextNode();
+    }
+
+    const hasText = !!this.elementRef.nativeElement.textContent;
+    if (!hasText) {
+      // Button doesn't contain any text, make it round:
+      this.showIconOnly = true;
+    }
+
+    if (hasText && !this.showIconOnly) {
       this._isIconLeft =
         this.elementRef.nativeElement.querySelector('.content-layer').firstChild ===
         this.iconElementRef.nativeElement;
