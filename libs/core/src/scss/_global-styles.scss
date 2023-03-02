@@ -247,6 +247,10 @@ html.ios ion-modal.kirby-modal-experimental {
   --max-height: #{$modal-max-height};
   --min-height: #{$modal-max-width};
 
+  &.modal-sheet {
+    --border-radius: #{$modal-border-radius};
+  }
+
   @include utils.media('>=medium') {
     --border-radius: #{$modal-border-radius};
 
