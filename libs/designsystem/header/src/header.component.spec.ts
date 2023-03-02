@@ -17,18 +17,15 @@ const keySelector = 'h1.key';
 const getKeyElement = (spectator: Spectator<HeaderComponent>) => spectator.query(keySelector);
 const valueSelector = 'h3.value';
 const getValueElement = (spectator: Spectator<HeaderComponent>) => spectator.query(valueSelector);
+const valueUnitSelector = '.value-unit';
+const getValueUnitElement = (spectator: Spectator<HeaderComponent>) =>
+  spectator.query(valueUnitSelector);
 const subtitle1Selector = '.subtitle1';
 const getSubtitle1Element = (spectator: Spectator<HeaderComponent>) =>
   spectator.query(subtitle1Selector);
 const subtitle2Selector = '.subtitle2';
 const getSubtitle2Element = (spectator: Spectator<HeaderComponent>) =>
   spectator.query(subtitle2Selector);
-const customSectionSelector = '.custom-section';
-const getCustomSectionElement = (spectator: Spectator<HeaderComponent>) =>
-  spectator.query(customSectionSelector);
-const actionsSelector = '.actions';
-const getActionsElement = (spectator: Spectator<HeaderComponent>) =>
-  spectator.query(actionsSelector);
 
 describe('HeaderComponent', () => {
   let createHost;
@@ -84,9 +81,10 @@ describe('HeaderComponent', () => {
   describe('Value', () => {
     const title = 'title';
     const value = '12.345,67';
+    const valueUnit = 'USD';
 
     const defaultTemplate = `
-    <kirby-header title="${title}" value="${value}">
+    <kirby-header title="${title}" value="${value}" valueUnit="${valueUnit}">
     </kirby-header>
     `;
 
@@ -109,6 +107,15 @@ describe('HeaderComponent', () => {
       expect(valueElement).toContainText(value);
       expect(valueElement).toHaveComputedStyle({
         'font-size': '40px',
+      });
+    });
+
+    it(`should have correct valueUnit`, () => {
+      const valueUnitElement = getValueUnitElement(spectator);
+
+      expect(valueUnitElement).toContainText(valueUnit);
+      expect(valueUnitElement).toHaveComputedStyle({
+        'font-size': '16px',
       });
     });
   });
@@ -156,79 +163,6 @@ describe('HeaderComponent', () => {
       const avatarElement = getFlagElement(spectator);
 
       expect(avatarElement).toBeTruthy();
-    });
-  });
-
-  describe('Actions', () => {
-    const title = 'title';
-    const subtitle1 = 'Subtitle one';
-    const subtitle2 = 'Subtitle two';
-    const actions = `
-      <button kirby-button>
-        <kirby-icon name="edit"></kirby-icon>
-        Action 1
-      </button>
-    `;
-
-    const defaultTemplate = `
-    <kirby-header title="${title}" subtitle1="${subtitle1}" subtitle2="${subtitle2}">
-      <ng-container kirbyHeaderActions>
-       ${actions}
-      </ng-container>
-    </kirby-header>
-    `;
-
-    let spectator: Spectator<HeaderComponent>;
-    beforeEach(() => {
-      spectator = createHost(defaultTemplate);
-    });
-
-    it(`should have actions`, () => {
-      const actionsElement = getActionsElement(spectator);
-      const actionsButtonElement = actionsElement.querySelector('button[kirby-button]');
-      expect(actionsButtonElement).toBeTruthy();
-    });
-
-    it(`should have actions in main on desktop`, () => {
-      spectator.component.isDesktop = true;
-      spectator.detectChanges();
-
-      const actionsElementInRoot = spectator.query('.main .actions');
-
-      expect(actionsElementInRoot).toBeTruthy();
-    });
-
-    it(`should have actions in root on mobile`, () => {
-      spectator.component.isDesktop = false;
-      spectator.detectChanges();
-
-      const actionsElementInRoot = spectator.query('.container > .actions');
-      expect(actionsElementInRoot).toBeTruthy();
-    });
-  });
-
-  describe('Custom-section', () => {
-    const title = 'title';
-    const subtitle1 = 'Subtitle one';
-    const subtitle2 = 'Subtitle two';
-    const customSection = 'Custom section';
-
-    const defaultTemplate = `
-    <kirby-header title="${title}" subtitle1="${subtitle1}" subtitle2="${subtitle2}">
-      <ng-container kirbyHeaderCustomSection>
-       ${customSection}
-      </ng-container>
-    </kirby-header>
-    `;
-
-    let spectator: Spectator<HeaderComponent>;
-    beforeEach(() => {
-      spectator = createHost(defaultTemplate);
-    });
-
-    it(`should have custom-sections`, () => {
-      const customSectionElement = getCustomSectionElement(spectator);
-      expect(customSectionElement).toContainText(customSection);
     });
   });
 });

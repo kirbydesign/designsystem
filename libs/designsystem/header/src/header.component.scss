@@ -1,40 +1,17 @@
+@use '@kirbydesign/core/src/scss/utils';
+
 .container {
   width: 100%;
-  padding-top: 16px;
-  padding-bottom: 32px;
+  padding: 16px 16px 32px;
+  display: flex;
+  flex-direction: column;
 
   @media screen and (min-width: 768px) {
     padding-top: 24px;
   }
-}
-
-.main {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  flex: 1;
-}
-
-.main-col {
-  flex: 1;
-  flex-shrink: 0;
-  min-width: 0;
-}
-
-.main-inner {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  padding-left: 16px;
-  padding-right: 16px;
-
-  @media screen and (min-width: 768px) {
-    width: 50%;
-  }
 
   &.centered {
     align-items: center;
-    text-align: center;
   }
 }
 
@@ -58,62 +35,14 @@
   margin-bottom: 4px;
 }
 
-.subtitle1 {
+.value-unit {
+  font-weight: initial;
+  color: utils.get-text-color('semi-dark');
+}
+
+.truncate {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
   max-width: 100%;
-}
-
-.subtitle2 {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  max-width: 100%;
-}
-
-.custom-section {
-  margin-top: 8px;
-}
-
-.actions {
-  flex: 1;
-  display: flex;
-  justify-content: flex-start;
-  flex-direction: row;
-
-  /* Compentsation for button margin -4px */
-  margin-top: 20px;
-
-  /* Compentsation for button margin -4px */
-  padding-left: 4px;
-
-  /* Compentsation for button margin  -4px */
-  padding-right: 4px;
-
-  @media screen and (min-width: 768px) {
-    justify-content: flex-end;
-    margin-top: 0;
-  }
-
-  &.centered {
-    justify-content: center;
-  }
-}
-
-.secondary {
-  display: flex;
-  flex-direction: column;
-  padding-left: 16px;
-  padding-right: 16px;
-  max-width: 100%;
-
-  @media screen and (min-width: 768px) {
-    max-width: 50%;
-  }
-
-  &.centered {
-    align-items: center;
-    margin: 0 auto;
-  }
 }

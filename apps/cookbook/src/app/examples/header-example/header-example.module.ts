@@ -9,7 +9,6 @@ import { HeaderExampleDefaultComponent } from './examples/default';
 import { HeaderExampleAvatarComponent } from './examples/avatar';
 import { HeaderExampleFlagComponent } from './examples/flag';
 import { HeaderExampleValueComponent } from './examples/value';
-import { HeaderExampleActionsComponent } from './examples/actions';
 
 const COMPONENT_DECLARATIONS = [
   HeaderExampleComponent,
@@ -17,7 +16,6 @@ const COMPONENT_DECLARATIONS = [
   HeaderExampleAvatarComponent,
   HeaderExampleFlagComponent,
   HeaderExampleValueComponent,
-  HeaderExampleActionsComponent,
 ];
 
 @NgModule({

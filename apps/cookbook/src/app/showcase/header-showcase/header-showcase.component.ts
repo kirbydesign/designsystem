@@ -25,6 +25,12 @@ export class HeaderShowcaseComponent {
       defaultValue: '',
     },
     {
+      name: 'valueUnit',
+      description: 'A string that is used to describe the units of the value.',
+      type: ['string'],
+      defaultValue: '',
+    },
+    {
       name: 'subtitle1',
       description: 'A string that is used as the first subtitle.',
       type: ['string'],
@@ -55,27 +61,4 @@ export class HeaderShowcaseComponent {
     name: 'Name',
     description: 'Description',
   };
-
-  directives: ApiDescriptionProperty[] = [
-    {
-      name: 'kirbyHeaderCustomTitle',
-      description:
-        'The `kirbyHeaderCustomTitle` directive can be applied to an element as an alternative to passing the title property. Using this method you will gain more control over the content.',
-    },
-    {
-      name: 'kirbyHeaderCustomValue',
-      description:
-        'The `kirbyHeaderCustomValue` directive can be applied to an element as an alternative to passing the value property. Using this method you will gain more control over the content.',
-    },
-    {
-      name: 'kirbyHeaderCustomSection',
-      description:
-        'The `kirbyHeaderCustomSection` directive can be used to add a custom section to the header. This can be used display custom ui below the header.',
-    },
-    {
-      name: 'kirbyHeaderActions',
-      description:
-        'The `kirbyHeaderActions` directive can be used to render actions. The placement of the actions is resposnive and will have different layouts depending on the viewport size.',
-    },
-  ];
 }

@@ -1,100 +1,22 @@
 <div class="header-example-container">
   <h1>Edgecases</h1>
-  <h3>Truncation Demo</h3>
+  <h3>Truncation - Default</h3>
   <div class="header-example">
-    <kirby-header titleMaxLines="2">
+    <kirby-header
+      titleMaxLines="2"
+      title=" This is very very very very very loooooooooooooooong title that is supposed to truncate"
+      subtitle1="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sit amet dui ante. Donec aliquam
+      interdum ipsum sit amet egestas. In hac habitasse platea dictumst. Nullam sed libero eros.
+      Ut ut tortor bibendum, convallis neque in, dignissim nibh. Quisque posuere lacinia congue.
+      Cras at lorem aliquet, fermentum ante in, aliquet nisl."
+      subtitle2="
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sit amet dui ante. Donec aliquam
+      interdum ipsum sit amet egestas. In hac habitasse platea dictumst. Nullam sed libero eros.
+      Ut ut tortor bibendum, convallis neque in, dignissim nibh. Quisque posuere lacinia congue.
+      Cras at lorem aliquet, fermentum ante in, aliquet nisl."
+    >
       <kirby-avatar *kirbyHeaderAvatar avatar size="lg" text="A" title="lg"></kirby-avatar>
       <kirby-flag *kirbyHeaderFlag themeColor="warning">Warning</kirby-flag>
-      <ng-container *kirbyHeaderTitle>
-        This is very very very very very loooooooooooooooong title that is supposed to truncate
-      </ng-container>
-      <ng-container *kirbyHeaderSubtitle1>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sit amet dui ante. Donec aliquam
-        interdum ipsum sit amet egestas. In hac habitasse platea dictumst. Nullam sed libero eros.
-        Ut ut tortor bibendum, convallis neque in, dignissim nibh. Quisque posuere lacinia congue.
-        Cras at lorem aliquet, fermentum ante in, aliquet nisl.
-      </ng-container>
-      <ng-container *kirbyHeaderSubtitle2>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sit amet dui ante. Donec aliquam
-        interdum ipsum sit amet egestas. In hac habitasse platea dictumst. Nullam sed libero eros.
-        Ut ut tortor bibendum, convallis neque in, dignissim nibh. Quisque posuere lacinia congue.
-        Cras at lorem aliquet, fermentum ante in, aliquet nisl.
-      </ng-container>
-      <ng-container *kirbyHeaderCustomSection>Custom Section</ng-container>
-      <ng-container *kirbyHeaderActions>
-        <button kirby-button>
-          <kirby-icon name="edit"></kirby-icon>
-          Action 1
-        </button>
-        <button kirby-button attentionLevel="3">Action 2</button>
-        <button kirby-button attentionLevel="3">
-          <kirby-icon name="more"></kirby-icon>
-        </button>
-      </ng-container>
-      <div>Tester lige her</div>
-    </kirby-header>
-  </div>
-</div>
-
-<div class="header-example-container">
-  <h3>Truncation Demo - Centered</h3>
-  <div class="header-example">
-    <kirby-header centered="true" titleMaxLines="2">
-      <kirby-avatar *kirbyHeaderAvatar avatar size="lg" text="A" title="lg"></kirby-avatar>
-      <kirby-flag *kirbyHeaderFlag themeColor="warning">Warning</kirby-flag>
-      <ng-container *kirbyHeaderTitle>
-        This is very very very very very loooooooooooooooong title
-      </ng-container>
-      <ng-container *kirbyHeaderSubtitle1>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sit amet dui ante. Donec aliquam
-        interdum ipsum sit amet egestas. In hac habitasse platea dictumst. Nullam sed libero eros.
-        Ut ut tortor bibendum, convallis neque in, dignissim nibh. Quisque posuere lacinia congue.
-        Cras at lorem aliquet, fermentum ante in, aliquet nisl.
-      </ng-container>
-      <ng-container *kirbyHeaderSubtitle2>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sit amet dui ante. Donec aliquam
-        interdum ipsum sit amet egestas. In hac habitasse platea dictumst. Nullam sed libero eros.
-        Ut ut tortor bibendum, convallis neque in, dignissim nibh. Quisque posuere lacinia congue.
-        Cras at lorem aliquet, fermentum ante in, aliquet nisl.
-      </ng-container>
-      <ng-container *kirbyHeaderCustomSection>Custom Section</ng-container>
-      <ng-container *kirbyHeaderActions>
-        <button kirby-button>
-          <kirby-icon name="edit"></kirby-icon>
-          Action 1
-        </button>
-        <button kirby-button attentionLevel="3">Action 2</button>
-        <button kirby-button attentionLevel="3">
-          <kirby-icon name="more"></kirby-icon>
-        </button>
-      </ng-container>
-      <div>Tester lige her</div>
-    </kirby-header>
-  </div>
-</div>
-
-<div class="header-example-container">
-  <h3>Kitchen sink</h3>
-  <div class="header-example">
-    <kirby-header>
-      <kirby-avatar *kirbyHeaderAvatar avatar size="lg" text="A" title="lg"></kirby-avatar>
-      <kirby-flag *kirbyHeaderFlag themeColor="warning">Warning</kirby-flag>
-      <ng-container *kirbyHeaderTitle>Title</ng-container>
-      <ng-container *kirbyHeaderValue>12.345,67</ng-container>
-      <ng-container *kirbyHeaderSubtitle1>Subtitle one</ng-container>
-      <ng-container *kirbyHeaderSubtitle2>Subtitle two</ng-container>
-      <ng-container *kirbyHeaderCustomSection>Custom Section</ng-container>
-      <ng-container *kirbyHeaderActions>
-        <button kirby-button>
-          <kirby-icon name="edit"></kirby-icon>
-          Action 1
-        </button>
-        <button kirby-button attentionLevel="3">Action 2</button>
-        <button kirby-button attentionLevel="3">
-          <kirby-icon name="more"></kirby-icon>
-        </button>
-      </ng-container>
-      <div>Tester lige her</div>
     </kirby-header>
   </div>
 </div>

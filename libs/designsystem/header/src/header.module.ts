@@ -1,21 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FitHeadingDirective } from '@kirbydesign/designsystem/shared';
-import {
-  HeaderActionsDirective,
-  HeaderComponent,
-  HeaderCustomSectionDirective,
-  HeaderCustomTitleDirective,
-  HeaderCustomValueDirective,
-} from './header.component';
+import { HeaderComponent } from './header.component';
 
-const declarations = [
-  HeaderComponent,
-  HeaderCustomTitleDirective,
-  HeaderCustomValueDirective,
-  HeaderCustomSectionDirective,
-  HeaderActionsDirective,
-];
+const declarations = [HeaderComponent];
 
 @NgModule({
   declarations: declarations,

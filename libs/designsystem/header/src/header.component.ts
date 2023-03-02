@@ -12,26 +12,6 @@ import { FlagComponent } from '@kirbydesign/designsystem/flag';
 import { PlatformService } from '@kirbydesign/designsystem/helpers';
 import type { FitHeadingConfig } from '@kirbydesign/designsystem/shared';
 
-@Directive({
-  selector: '[kirbyHeaderCustomTitle]',
-})
-export class HeaderCustomTitleDirective {}
-
-@Directive({
-  selector: '[kirbyHeaderCustomValue]',
-})
-export class HeaderCustomValueDirective {}
-
-@Directive({
-  selector: '[kirbyHeaderCustomSection]',
-})
-export class HeaderCustomSectionDirective {}
-
-@Directive({
-  selector: '[kirbyHeaderActions]',
-})
-export class HeaderActionsDirective {}
-
 @Component({
   selector: 'kirby-header',
   templateUrl: './header.component.html',
@@ -50,20 +30,9 @@ export class HeaderComponent implements OnChanges {
   @ContentChild(FlagComponent)
   flag: FlagComponent;
 
-  @ContentChild(HeaderCustomSectionDirective)
-  customSection: HeaderCustomSectionDirective;
-
-  @ContentChild(HeaderActionsDirective)
-  actions: HeaderActionsDirective;
-
   @Input() title = null;
-  @ContentChild(HeaderCustomTitleDirective)
-  customTitle: HeaderCustomTitleDirective;
-
   @Input() value = null;
-  @ContentChild(HeaderCustomValueDirective)
-  customValue!: HeaderCustomValueDirective;
-
+  @Input() valueUnit = null;
   @Input() subtitle1 = null;
   @Input() subtitle2 = null;
 

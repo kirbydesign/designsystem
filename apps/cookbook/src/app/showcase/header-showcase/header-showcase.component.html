@@ -1,10 +1,9 @@
 <div class="example">
   <div class="header-example-container">
     <p>
-      Header is a component that lays out the header section of kirby-page. It is responsive and
-      will change the layout according to the device size. The header allows for a wide range of
-      customizability but you should follow the UX guidelines for header to provide the best
-      expereience.
+      Header is a component that manages the layout of the header section of kirby-page. It is
+      responsive and will change the layout according to the device size. It allows for a wide range
+      of use cases including support for avatar, flags etc.
     </p>
 
     <h2>Default</h2>
@@ -21,9 +20,7 @@
     <p>
       A flag can be used to indicate a status. To use flag you simply add
       <code>kirby-flag</code>
-      in the header and add the
-      <code>*kirbyHeaderFlag</code>
-      directive to it and that should position the flag correctly and manage spacing.
+      in the header and that should position the flag correctly and manage spacing.
     </p>
     <cookbook-example-viewer [html]="flagExample.template">
       <div class="header-example">
@@ -33,14 +30,13 @@
   </div>
 
   <div class="header-example-container">
-    <h2>Key-value</h2>
+    <h2>Key value</h2>
     <p>
       In some cases a number is the primary information on a page. When that's the case you should
-      use value adjust the header accordingly. To use value you simply add
-      <code>ng-container</code>
-      or another element with the value you want to display in the header and add the
-      <code>*kirbyHeaderValue</code>
-      directive to it and that should resize the title and display the value provided below.
+      use the `value` prop
+      <em>in addition to</em>
+      the `title` prop. This will highlight the value as a emphasized number on the page and make
+      the title secondary as shown in the example below:
     </p>
     <cookbook-example-viewer [html]="valueExample.template">
       <div class="header-example">
@@ -50,30 +46,11 @@
   </div>
 
   <div class="header-example-container">
-    <h2>Actions</h2>
-    <p>
-      As an alternative to toolbar actions the header also allows you to insert actions in the
-      header itself. To insert actions simply add a
-      <code>ng-container</code>
-      or another element with the actions you want to display and add the
-      <code>*kirbyHeaderActions</code>
-      directive to it.
-    </p>
-    <cookbook-example-viewer [html]="actionsExample.template">
-      <div class="header-example">
-        <cookbook-header-example-actions #actionsExample></cookbook-header-example-actions>
-      </div>
-    </cookbook-example-viewer>
-  </div>
-
-  <div class="header-example-container">
     <h2>Avatar</h2>
     <p>
-      A header can be used together with a Avatar. You simply add a
+      A header can be used together with a Avatar. You simply add
       <code>kirby-avatar</code>
-      in the header and add the
-      <code>*kirbyHeaderAvatar</code>
-      directive to it and that should position the avatar correctly and manage spacing.
+      in the header and that should position the avatar correctly and manage spacing.
     </p>
     <cookbook-example-viewer [html]="avatarExample.template">
       <div class="header-example">
@@ -86,11 +63,5 @@
   <h2>Header Properties:</h2>
   <cookbook-api-description-properties
     [properties]="properties"
-  ></cookbook-api-description-properties>
-
-  <h2>Header Directives:</h2>
-  <cookbook-api-description-properties
-    [columns]="directiveColumns"
-    [properties]="directives"
   ></cookbook-api-description-properties>
 </div>

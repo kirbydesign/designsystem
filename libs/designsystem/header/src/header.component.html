@@ -1,62 +1,22 @@
-<div class="container">
-  <div class="secondary" [ngClass]="{ centered: centered }">
-    <div *ngIf="!!avatar" class="avatar">
-      <ng-content select="kirby-avatar"></ng-content>
-    </div>
-    <div *ngIf="!!flag" class="flag">
-      <ng-content select="kirby-flag"></ng-content>
-    </div>
-    <h1 *ngIf="!!(customTitle || title) && !!(customValue || value)" class="key kirby-text-medium">
-      <ng-container *ngTemplateOutlet="customTitleOutlet"></ng-container>
-      <ng-container *ngIf="!customTitle">{{ title }}</ng-container>
-    </h1>
-  </div>
-  <div class="main">
-    <ng-container *ngIf="isDesktop && !!actions && centered">
-      <div class="main-col"></div>
-    </ng-container>
-    <div class="main-inner" [ngClass]="{ centered: centered }">
-      <h1
-        *ngIf="!!(customTitle || title) && !(customValue || value)"
-        class="title"
-        [kirbyFitHeading]="fitHeadingConfig"
-      >
-        <ng-container *ngTemplateOutlet="customTitleOutlet"></ng-container>
-        <ng-container *ngIf="!customTitle">{{ title }}</ng-container>
-      </h1>
-      <h3 *ngIf="!!(customValue || value)" class="value kirby-text-display-3">
-        <ng-content *ngIf="!!customValue" select="[kirbyHeaderCustomValue]"></ng-content>
-        <ng-container *ngIf="!customValue">{{ value }}</ng-container>
-      </h3>
-    </div>
-    <div *ngIf="!!actions && isDesktop" class="main-col">
-      <div class="actions">
-        <ng-container *ngTemplateOutlet="actionsOutlet"></ng-container>
-      </div>
-    </div>
-  </div>
-  <div class="secondary" [ngClass]="{ centered: centered }">
-    <div *ngIf="!!subtitle1" class="subtitle1 kirby-text-small">
-      {{ subtitle1 }}
-    </div>
 
-    <div *ngIf="!!subtitle2" class="subtitle2 kirby-text-small">
-      {{ subtitle2 }}
-    </div>
-
-    <div *ngIf="!!customSection" class="custom-section">
-      <ng-content select="[kirbyHeaderCustomSection]"></ng-content>
-    </div>
+<div class="container" [ngClass]="{ centered: centered }">
+  <div *ngIf="!!avatar" class="avatar">
+    <ng-content select="kirby-avatar"></ng-content>
   </div>
-  <div *ngIf="!!actions && !isDesktop" class="actions" [ngClass]="{ centered: centered }">
-    <ng-container *ngTemplateOutlet="actionsOutlet"></ng-container>
+  <div *ngIf="!!flag" class="flag">
+    <ng-content select="kirby-flag"></ng-content>
+  </div>
+  <h1 *ngIf="!!title && !!value" class="key kirby-text-medium">
+    {{ title }}
+  </h1>
+  <h1 *ngIf="!!title && !value" class="title" [kirbyFitHeading]="fitHeadingConfig">
+    {{ title }}
+  </h1>
+  <h3 *ngIf="!!value" class="value kirby-text-display-3">{{ value }}<span class="value-unit kirby-text-normal semi-dark-text" *ngIf="!!valueUnit">{{ valueUnit }}</span></h3>
+  <div *ngIf="!!subtitle1" class="subtitle1 truncate kirby-text-small">
+    {{ subtitle1 }}
+  </div>
+  <div *ngIf="!!subtitle2" class="subtitle2 truncate kirby-text-small">
+    {{ subtitle2 }}
   </div>
 </div>
-
-<ng-template #customTitleOutlet>
-  <ng-content *ngIf="!!customTitle" select="[kirbyHeaderCustomTitle]"></ng-content>
-</ng-template>
-
-<ng-template #actionsOutlet>
-  <ng-content select="[kirbyHeaderActions]"></ng-content>
-</ng-template>
