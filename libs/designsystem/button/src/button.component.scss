@@ -33,11 +33,13 @@ $button-width: (
   }
 
   &.icon-left {
-    --kirby-button-padding-left: #{utils.size('xxxs')};
+    --kirby-button-padding-left: #{utils.size('xxs')};
+    --kirby-icon-margin-right: #{utils.size('xxxs')};
   }
 
   &.icon-right {
-    --kirby-button-padding-right: #{utils.size('xxxs')};
+    --kirby-button-padding-right: #{utils.size('xxs')};
+    --kirby-icon-margin-left: #{utils.size('xxxs')};
   }
 
   &.icon-left,

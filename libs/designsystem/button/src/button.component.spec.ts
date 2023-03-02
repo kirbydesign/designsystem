@@ -262,8 +262,8 @@ describe('ButtonComponent', () => {
   });
 
   const iconTestExpectations = {
-    leftXS: { paddingInline: '4px 12px' },
-    rightXS: { paddingInline: '12px 4px' },
+    leftXS: { paddingInline: '8px 12px' },
+    rightXS: { paddingInline: '12px 8px' },
     left: { paddingInline: '12px 16px' },
     right: { paddingInline: '16px 12px' },
   };
