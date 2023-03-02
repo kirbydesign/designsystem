@@ -26,6 +26,7 @@ import {
 import {
   drawerExampleTemplateHTML,
   drawerExampleTemplateTS,
+  drawerToModalExampleTemplateHTML,
 } from '../../examples/modal-experimental-example/modal/drawer/drawer-experimental-example.component';
 
 @Component({
@@ -43,6 +44,7 @@ export class ModalExperimentalShowcaseComponent {
   fullscreenModalExampleTemplateTS: string = fullscreenModalExampleTemplateTS;
   drawerExampleTemplateHTML: string = drawerExampleTemplateHTML;
   drawerExampleTemplateTS: string = drawerExampleTemplateTS;
+  drawerToModalExampleTemplateHTML: string = drawerToModalExampleTemplateHTML;
   headerStartSlotExampleTemplate: string = headerStartSlotExampleTemplate;
   footerSlotExampleTemplate: string = footerSlotExampleTemplate;
   showModalCodeSnippet: string = showModalCodeSnippet;
@@ -97,7 +99,7 @@ export class ModalExperimentalShowcaseComponent {
     {
       name: 'breakpoints',
       description:
-        'The breakpoints to use when creating a drawer. Each value in the array must be a decimal between 0 and 1, where 0 indicates the drawer is fully closed and 1 indicates the drawer is fully open. One of the values in this array myst be the value of the initialBreakpoint property. Fx: [0, .25, .5, 1].',
+        'The breakpoints to use when creating a drawer. Each value in the array must be a decimal between 0 and 1, where 0 indicates the drawer is fully closed and 1 indicates the drawer is fully open. One of the values in this array must be the value of the initialBreakpoint property. Fx: [0, .25, .5, 1].',
       type: ['number[] | undefined'],
       defaultValue: 'undefined',
     },
@@ -207,7 +209,7 @@ export class ModalExperimentalShowcaseComponent {
     {
       name: 'breakpoints',
       description:
-        'The breakpoints to use when creating a drawer. Each value in the array must be a decimal between 0 and 1, where 0 indicates the drawer is fully closed and 1 indicates the drawer is fully open. One of the values in this array myst be the value of the initialBreakpoint property. Fx: [0, .25, .5, 1].',
+        'The breakpoints to use when creating a drawer. Each value in the array must be a decimal between 0 and 1, where 0 indicates the drawer is fully closed and 1 indicates the drawer is fully open. One of the values in this array must be the value of the initialBreakpoint property. Fx: [0, .25, .5, 1].',
       type: ['number[] | undefined'],
       defaultValue: 'undefined',
     },

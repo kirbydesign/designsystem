@@ -19,6 +19,20 @@ export const drawerExampleTemplateHTML = `<kirby-modal-experimental
 
 export const drawerExampleTemplateTS = `openDrawer() { this.open = true; }`;
 
+export const drawerToModalExampleTemplateHTML = `<kirby-modal-experimental
+  [flavor]="isMobile ? 'drawer' : 'modal'"
+  [open]="open"
+  [title]="'Drawer'"
+  [breakpoints]="[0, 0.5, 1]"
+  [initialBreakpoint]="0.5"
+  (willDismiss)="closeDrawer()"
+>  
+    <p>
+      Lorem ipsum dolor sit amet...
+    </p>
+</kirby-modal-experimental>
+`;
+
 @Component({
   templateUrl: './drawer-experimental-example.component.html',
   styleUrls: ['./drawer-experimental-example.component.scss'],

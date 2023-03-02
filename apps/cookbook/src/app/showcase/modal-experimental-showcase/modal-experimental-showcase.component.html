@@ -19,9 +19,9 @@
   button.
 </p>
 
-<p>Modals can be used as components or generated through the modal controller.</p>
+<p>Modals can be made by using a component or generated through the modal controller.</p>
 
-<h3><a href="#" (click)="scrollTo(components)">Components</a></h3>
+<h3><a href="#" (click)="scrollTo(component)">Component</a></h3>
 
 <ul>
   <li><a href="#" (click)="scrollTo(fullscreenModal)">Modal</a></li>
@@ -75,11 +75,27 @@
 
 <hr />
 
-<h1 #components>Components</h1>
+<h1 #component></h1>
 
 <div class="page-example">
   <div>
-    <h2 #fullscreenModal>Modal (default)</h2>
+    <h2 #fullscreenModal>Modal</h2>
+
+    <p>
+      The default
+      <code>flavor</code>
+      of the modal component. With the
+      <code>modal</code>
+      flavor, the dialog opens with a slide-up animation, the title is centered and the close button
+      is placed in the top right corner. The modal can't be closed by swiping. If nested modals are
+      opened, they will simply slide up and appear on top of the modal(s) underneath.
+    </p>
+
+    <p>
+      On mobile the modal will take up the whole screen and on desktop it will appear centered on
+      screen.
+    </p>
+
     <cookbook-code-viewer [html]="fullscreenModalExampleTemplateHTML"></cookbook-code-viewer>
     <cookbook-code-viewer [ts]="fullscreenModalExampleTemplateTS"></cookbook-code-viewer>
   </div>
@@ -93,8 +109,50 @@
 <div class="page-example">
   <div>
     <h2 #drawer>Drawer</h2>
+
+    <p>
+      When the
+      <code>drawer</code>
+      flavor is used, the dialog opens with a slide-up animation, the title is centered and the
+      close button is placed in the top left corner. Additionally, with the drawer flavor, users can
+      use the
+      <code>drawer-supplementary-action</code>
+      slot, which adds an additional button in the top right corner.
+    </p>
+
+    <p>
+      To create a drawer it's required to pass
+      <code>flavor</code>
+      ,
+      <code>breakpoints</code>
+      ,
+      <code>initialBreakpoint</code>
+      .
+      <code>breakpoints</code>
+      is a list of allowed breakpoints that the drawer can snap to when swiping. Each number
+      describes a percentage of the screen, fx.
+      <br />
+      <code>[0, 0.5, 1]</code>
+      allows the drawer to take up 0%, 50% and 100% of the screen.
+      <code>initialBreakpoint</code>
+      is the breakpoint the drawer opens at, and must match one of the values from
+      <code>breakpoints</code>
+      .
+    </p>
+
     <cookbook-code-viewer [html]="drawerExampleTemplateHTML"></cookbook-code-viewer>
     <cookbook-code-viewer [ts]="drawerExampleTemplateTS"></cookbook-code-viewer>
+
+    <h3>Convert drawer to modal</h3>
+
+    <p>
+      The drawer is not recommend to use on desktop, but there is a simple way to convert the drawer
+      to a modal, using the
+      <code>flavor</code>
+      input like this:
+    </p>
+
+    <cookbook-code-viewer [html]="drawerToModalExampleTemplateHTML"></cookbook-code-viewer>
   </div>
 
   <cookbook-iphone
