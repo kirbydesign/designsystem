@@ -10,8 +10,6 @@ import {
   TabsService,
   ToastController,
 } from '@kirbydesign/designsystem';
-
-import { ModalExperimentalController } from '@kirbydesign/designsystem/modal/experimental';
 import { EMPTY } from 'rxjs';
 
 export function alertExperimentalControllerFactory() {
@@ -55,13 +53,6 @@ export function loadingOverlayServiceFactory() {
   return {
     showLoadingOverlay: jest.fn(),
     hideLoadingOverlay: jest.fn(),
-  };
-}
-
-export function modalExperimentalControllerFactory() {
-  return {
-    showModal: jest.fn(),
-    closeModal: jest.fn(),
   };
 }
 
@@ -114,10 +105,6 @@ export const MOCK_PROVIDERS = [
   {
     provide: LoadingOverlayService,
     useFactory: loadingOverlayServiceFactory,
-  },
-  {
-    provide: ModalExperimentalController,
-    useFactory: modalExperimentalControllerFactory,
   },
   {
     provide: ModalController,

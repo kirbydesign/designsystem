@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { from, map, Observable, switchMap, take, tap } from 'rxjs';
 import { OverlayEventDetail } from '@ionic/core/components';
+import { SizeTemp } from '../public_api';
 
 export type ModalFlavor = 'modal';
 type Size = 'xxs' | 'xs' | 'sm' | 'md' | 'lg';
-type SizeTemp = 'md';
 
 export type ModalExperimentalConfig = {
   flavor?: ModalFlavor;

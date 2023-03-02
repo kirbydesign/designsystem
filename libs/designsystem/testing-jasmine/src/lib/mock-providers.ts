@@ -10,8 +10,6 @@ import {
   TabsService,
   ToastController,
 } from '@kirbydesign/designsystem';
-
-import { ModalExperimentalController } from '@kirbydesign/designsystem/modal/experimental';
 import { EMPTY } from 'rxjs';
 
 export function alertExperimentalControllerFactory() {
@@ -52,13 +50,6 @@ export function loadingOverlayServiceFactory() {
   return jasmine.createSpyObj<LoadingOverlayService>('LoadingOverlayService', [
     'showLoadingOverlay',
     'hideLoadingOverlay',
-  ]);
-}
-
-export function modalExperimentalControllerFactory() {
-  return jasmine.createSpyObj<ModalExperimentalController>('ModalExperimentalController', [
-    'showModal',
-    'closeModal',
   ]);
 }
 
@@ -107,10 +98,6 @@ export const MOCK_PROVIDERS = [
   {
     provide: LoadingOverlayService,
     useFactory: loadingOverlayServiceFactory,
-  },
-  {
-    provide: ModalExperimentalController,
-    useFactory: modalExperimentalControllerFactory,
   },
   {
     provide: ModalController,

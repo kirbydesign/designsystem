@@ -2,14 +2,12 @@
 // of 'designsystem' library
 export { elementHasAncestor } from './element-has-ancestor';
 export { ColorHelper, Color, BrandColor, KirbyColor, NotificationColor } from '@kirbydesign/core';
+
 export {
   DesignTokenHelper,
   ThemeColorDefinition,
   ThemeColorExtended,
   ThemeColorVariant,
-} from '@kirbydesign/core';
-
-export {
   kebabToCamelCase,
   kebabToTitleCase,
   camelToKebabCase,

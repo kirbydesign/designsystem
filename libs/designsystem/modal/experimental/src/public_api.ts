@@ -9,3 +9,9 @@ export {
 } from './services/modal.controller';
 
 export { KirbyModalModule } from './kirby-modal.module';
+
+/**
+ * This export is temporary and will be removed when the sizes for the modal are defined.
+ * See comment section on issue #2825 for more information.
+ */
+export type SizeTemp = 'md';

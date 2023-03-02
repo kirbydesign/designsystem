@@ -1,7 +1,7 @@
 import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 
-import { ModalExperimentalComponent } from '@kirbydesign/designsystem/modal/experimental';
-import { OverlayEventDetail } from '@kirbydesign/designsystem/modal';
+import { ModalExperimentalComponent, SizeTemp } from '@kirbydesign/designsystem/modal/experimental';
+import { OverlayEventDetail } from '@ionic/core/components';
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
   selector: 'kirby-modal-experimental',
@@ -19,6 +19,8 @@ export class MockModalExperimentalComponent {
   @Input() title: string;
   @Input() hasCollapsibleTitle: boolean;
   @Input() scrollDisabled: boolean;
+  @Input() size: SizeTemp;
+  @Input() height: string;
   @Output() willPresent = new EventEmitter<CustomEvent<OverlayEventDetail>>();
   @Output() didPresent = new EventEmitter<CustomEvent<OverlayEventDetail>>();
   @Output() didDismiss = new EventEmitter<CustomEvent<OverlayEventDetail>>();

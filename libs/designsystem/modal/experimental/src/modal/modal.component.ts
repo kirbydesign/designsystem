@@ -2,9 +2,9 @@ import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@
 import { IonContent, IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
+import { SizeTemp } from '../public_api';
 
 type Size = 'xxs' | 'xs' | 'sm' | 'md' | 'lg';
-type SizeTemp = 'md';
 
 @Component({
   selector: 'kirby-modal-experimental',
