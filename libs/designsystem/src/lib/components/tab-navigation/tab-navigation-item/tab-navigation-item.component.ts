@@ -5,6 +5,7 @@ import {
   ElementRef,
   HostBinding,
   HostListener,
+  Input,
   ViewChild,
 } from '@angular/core';
 
@@ -15,9 +16,6 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TabNavigationItemComponent implements AfterViewInit {
-  public readonly LABEL_TEXT_ELEMENT_SELECTOR = 'span[text]';
-  public readonly LABEL_TEXT_ELEMENT_CONTENT_ATTRIBUTE = 'data-text';
-
   @ViewChild('tabButton')
   private tabButton: ElementRef<HTMLElement>;
 
@@ -31,6 +29,9 @@ export class TabNavigationItemComponent implements AfterViewInit {
     }
   }
 
+  @Input()
+  label = '';
+
   private tabButtonElement: HTMLElement;
 
   constructor(private elementRef: ElementRef<HTMLElement>) {
@@ -39,18 +40,5 @@ export class TabNavigationItemComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.tabButtonElement = this.tabButton.nativeElement;
-    this.initLabelText();
-  }
-
-  private initLabelText() {
-    const labelTextElement = this.elementRef.nativeElement.querySelector(
-      this.LABEL_TEXT_ELEMENT_SELECTOR
-    );
-    if (labelTextElement) {
-      labelTextElement.setAttribute(
-        this.LABEL_TEXT_ELEMENT_CONTENT_ATTRIBUTE,
-        labelTextElement.textContent
-      );
-    }
   }
 }

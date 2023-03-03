@@ -58,9 +58,7 @@ $divider-max-width-breakpoint: utils.$page-content-max-width + (utils.size('s') 
   }
 }
 
-// Restrict cascade of styles to all child elements of component - see https://blog.angular-university.io/angular-host-context/
-/* stylelint-disable-next-line selector-pseudo-element-no-unknown */
-:host ::ng-deep span[text] {
+span[text] {
   max-width: $tab-item-text-max-width;
   overflow: hidden;
   text-overflow: ellipsis;
