@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ng-content select="[header-start]"></ng-content>
-    <ion-title>{{ title }}</ion-title>
+    <ion-title class="kirby-text-medium">{{ title }}</ion-title>
     <ion-buttons slot="end">
       <button kirby-button [noDecoration]="true" size="md" (click)="close()">
         <kirby-icon [name]="'close'"></kirby-icon>
