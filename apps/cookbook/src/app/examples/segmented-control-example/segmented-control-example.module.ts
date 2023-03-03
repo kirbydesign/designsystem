@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { KirbyModule } from '@kirbydesign/designsystem';
+import { SegmentedControlExampleColorComponent } from './color/color';
 
 import { SegmentedControlExampleDefaultComponent } from './default/default';
 import { SegmentedControlExampleGroupedComponent } from './grouped/grouped';
@@ -11,6 +12,7 @@ const COMPONENT_DECLARATIONS = [
   SegmentedControlExampleDefaultComponent,
   SegmentedControlExampleGroupedComponent,
   SegmentedControlExampleWithBadgeComponent,
+  SegmentedControlExampleColorComponent,
 ];
 
 @NgModule({

@@ -70,7 +70,7 @@ Additionally, multiple components and directives are now standalone components, 
 <h3 id="components-v8">Components</h3>
 
 <h4 id="button-v8">Button</h4>
-The isDesctructive behavior of button should only be used internally by Kirby in the alert, as destructive actions are always announced via an alert. Use the default button attention levels and combine with alerts when needed.
+The isDestructive behavior of button should only be used internally by Kirby in the alert, as destructive actions are always announced via an alert. Use the default button attention levels and combine with alerts when needed.
 
 ---
 

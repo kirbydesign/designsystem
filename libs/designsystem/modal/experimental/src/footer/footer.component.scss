@@ -1,17 +1,33 @@
 @use '@kirbydesign/core/src/scss/utils';
+@use '@kirbydesign/core/src/scss/themes';
 
-$padding-horizontal: utils.size('s');
-$padding-vertical: utils.size('xxs');
+$padding: utils.size('m');
 
 ion-footer {
+  @include themes.apply-white-theme;
+
   box-shadow: utils.get-elevation(8);
-  display: flex;
+  display: grid;
+  grid-template-rows: utils.size('xl');
+  grid-template-columns: utils.size('xl') 1fr utils.size('xl');
   justify-content: var(--kirby-modal-footer-justify-content, center);
   align-items: center;
   background-color: var(--kirby-modal-footer-background, utils.get-color('white'));
   color: var(--kirby-modal-footer-color, utils.get-color('white-contrast'));
-  padding: $padding-vertical $padding-horizontal;
-  padding-bottom: calc(#{$padding-vertical} + var(--kirby-modal-footer-safe-area-bottom, 0px));
+  padding: $padding;
+  padding-bottom: calc(#{$padding} + var(--kirby-modal-footer-safe-area-bottom, 0px));
+
+  .default-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 @include utils.media('<medium') {

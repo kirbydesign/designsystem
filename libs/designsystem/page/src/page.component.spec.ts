@@ -14,6 +14,7 @@ const { size, fontWeight } = DesignTokenHelper;
 
 import { ModalNavigationService } from '@kirbydesign/designsystem/modal';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { FitHeadingDirective } from '@kirbydesign/designsystem/shared';
 import {
   PageActionsComponent,
   PageActionsDirective,
@@ -23,7 +24,6 @@ import {
   PageTitleDirective,
   PageToolbarTitleDirective,
 } from './page.component';
-import { FitHeadingDirective } from './fit-heading';
 
 describe('PageComponent', () => {
   const titleText = 'Test Page';
