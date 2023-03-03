@@ -28,6 +28,10 @@ import {
   drawerExampleTemplateTS,
   drawerToModalExampleTemplateHTML,
 } from '../../examples/modal-experimental-example/modal/drawer/drawer-experimental-example.component';
+import {
+  nestedModalsExampleTemplateHTML,
+  nestedModalsExampleTemplateTS,
+} from '../../examples/modal-experimental-example/nested-modals/nested-modals-experimental-example.component';
 
 @Component({
   selector: 'cookbook-modal-experimental-showcase',
@@ -45,6 +49,8 @@ export class ModalExperimentalShowcaseComponent {
   drawerExampleTemplateHTML: string = drawerExampleTemplateHTML;
   drawerExampleTemplateTS: string = drawerExampleTemplateTS;
   drawerToModalExampleTemplateHTML: string = drawerToModalExampleTemplateHTML;
+  nestedModalsExampleTemplateHTML: string = nestedModalsExampleTemplateHTML;
+  nestedModalsExampleTemplateTS: string = nestedModalsExampleTemplateTS;
   headerStartSlotExampleTemplate: string = headerStartSlotExampleTemplate;
   footerSlotExampleTemplate: string = footerSlotExampleTemplate;
   showModalCodeSnippet: string = showModalCodeSnippet;

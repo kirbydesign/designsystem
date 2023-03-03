@@ -76,6 +76,7 @@ import { VirtualScrollListExampleComponent } from './virtual-scroll-example/virt
 import { PagePullToRefreshExampleComponent } from './page-example/pull-to-refresh/page-pull-to-refresh-example.component';
 import { DropdownExampleComponent } from './dropdown-example/dropdown-example.component';
 import { DataTableExampleComponent } from './data-table-example/data-table-example.component';
+import { NestedModalsExperimentalExampleComponent } from './modal-experimental-example/nested-modals/nested-modals-experimental-example.component';
 
 VirtualScrollListExampleComponent;
 export const routes: Routes = [
@@ -259,6 +260,10 @@ export const routes: Routes = [
           {
             path: 'drawer',
             component: DrawerModalExperimentalExampleComponent,
+          },
+          {
+            path: 'nested',
+            component: NestedModalsExperimentalExampleComponent,
           },
         ],
       },

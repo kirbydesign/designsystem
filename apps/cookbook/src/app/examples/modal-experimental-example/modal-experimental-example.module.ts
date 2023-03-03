@@ -14,6 +14,7 @@ import { ModalControllerExperimentalExampleComponent } from './controller/modal-
 import { ModalRoutingExperimentalExampleComponent } from './modal-routing/modal-routing-experimental-example.component';
 import { ModalRoutingExperimentalExamplePage1Component } from './modal-routing/modal-routing-experimental-example-page1.component';
 import { ModalRoutingExperimentalExamplePage2Component } from './modal-routing/modal-routing-experimental-example-page2.component';
+import { NestedModalsExperimentalExampleComponent } from './nested-modals/nested-modals-experimental-example.component';
 
 const COMPONENT_DECLARATIONS = [
   FullscreenModalExperimentalExampleComponent,
@@ -22,6 +23,7 @@ const COMPONENT_DECLARATIONS = [
   ModalRoutingExperimentalExampleComponent,
   ModalRoutingExperimentalExamplePage1Component,
   ModalRoutingExperimentalExamplePage2Component,
+  NestedModalsExperimentalExampleComponent,
 ];
 
 @NgModule({
