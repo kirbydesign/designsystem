@@ -1,12 +1,13 @@
+@use 'sass:map';
 @use '@kirbydesign/core/src/scss/utils';
 
 .header-example-container {
   margin: utils.size('l') auto;
-  max-width: 768px;
+  max-width: map.get(utils.$breakpoints, medium);
 }
 
 .header-example {
   margin-bottom: utils.size('l');
-  border: 1px solid #ddd;
-  border-radius: 12px;
+  border: 1px solid utils.get-color('medium');
+  border-radius: utils.size('xs');
 }

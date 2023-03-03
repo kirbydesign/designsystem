@@ -1,14 +1,13 @@
 import {
   Component,
   ContentChild,
-  HostListener,
+  HostBinding,
   Input,
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
 import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
 import { FlagComponent } from '@kirbydesign/designsystem/flag';
-import { PlatformService } from '@kirbydesign/designsystem/helpers';
 import type { FitHeadingConfig } from '@kirbydesign/designsystem/shared';
 
 @Component({
@@ -17,10 +16,12 @@ import type { FitHeadingConfig } from '@kirbydesign/designsystem/shared';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnChanges {
-  @Input() centered = false;
+  @HostBinding('class.centered')
+  @Input()
+  centered = false;
+
   @Input() titleMaxLines: number;
 
-  isDesktop = this.platform.isPhabletOrBigger();
   fitHeadingConfig: FitHeadingConfig;
 
   @ContentChild(AvatarComponent)
@@ -34,13 +35,6 @@ export class HeaderComponent implements OnChanges {
   @Input() valueUnit: string = null;
   @Input() subtitle1: string = null;
   @Input() subtitle2: string = null;
-
-  constructor(private platform: PlatformService) {}
-
-  @HostListener('window:resize')
-  _onWindowResize() {
-    this.isDesktop = this.platform.isPhabletOrBigger();
-  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.titleMaxLines) {

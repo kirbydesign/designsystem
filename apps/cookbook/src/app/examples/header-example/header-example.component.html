@@ -1,22 +1,20 @@
 <div class="header-example-container">
-  <h1>Edgecases</h1>
-  <h3>Truncation - Default</h3>
+  <h2>Default</h2>
   <div class="header-example">
-    <kirby-header
-      titleMaxLines="2"
-      title=" This is very very very very very loooooooooooooooong title that is supposed to truncate"
-      subtitle1="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sit amet dui ante. Donec aliquam
-      interdum ipsum sit amet egestas. In hac habitasse platea dictumst. Nullam sed libero eros.
-      Ut ut tortor bibendum, convallis neque in, dignissim nibh. Quisque posuere lacinia congue.
-      Cras at lorem aliquet, fermentum ante in, aliquet nisl."
-      subtitle2="
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sit amet dui ante. Donec aliquam
-      interdum ipsum sit amet egestas. In hac habitasse platea dictumst. Nullam sed libero eros.
-      Ut ut tortor bibendum, convallis neque in, dignissim nibh. Quisque posuere lacinia congue.
-      Cras at lorem aliquet, fermentum ante in, aliquet nisl."
-    >
-      <kirby-avatar *kirbyHeaderAvatar avatar size="lg" text="A" title="lg"></kirby-avatar>
-      <kirby-flag *kirbyHeaderFlag themeColor="warning">Warning</kirby-flag>
-    </kirby-header>
+    <cookbook-header-example-default #defaultExample></cookbook-header-example-default>
+  </div>
+</div>
+
+<div class="header-example-container">
+  <h2>Flag</h2>
+  <div class="header-example">
+    <cookbook-header-example-flag #flagExample></cookbook-header-example-flag>
+  </div>
+</div>
+
+<div class="header-example-container">
+  <h2>Key value</h2>
+  <div class="header-example">
+    <cookbook-header-example-value #valueExample></cookbook-header-example-value>
   </div>
 </div>

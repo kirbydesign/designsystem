@@ -1,13 +1,13 @@
 @use 'sass:map';
 @use '@kirbydesign/core/src/scss/utils';
 
-.container {
+:host {
   width: 100%;
   padding: utils.size('s') utils.size('s') utils.size('l');
   display: flex;
   flex-direction: column;
 
-  @media screen and (min-width: map.get(utils.$breakpoints, 'medium')) {
+  @include utils.media('>=medium') {
     padding-top: utils.size('m');
   }
 
@@ -28,10 +28,6 @@
   margin-bottom: utils.size('xxxxs');
 }
 
-.key {
-  margin-bottom: utils.size('xxxxs');
-}
-
 .value {
   margin-bottom: utils.size('xxxs');
 }
@@ -41,7 +37,8 @@
   color: utils.get-text-color('semi-dark');
 }
 
-.truncate {
+.subtitle1,
+.subtitle2 {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
