@@ -1,5 +1,4 @@
 import {
-  AfterContentChecked,
   AfterViewChecked,
   AfterViewInit,
   Component,
@@ -22,16 +21,14 @@ import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
   templateUrl: './button-group.component.html',
   styleUrls: ['./button-group.component.scss'],
 })
-export class ButtonGroupComponent implements AfterViewInit, OnDestroy, AfterViewChecked {
-  @Input() buttonsShown: number | 'dynamic';
-
+export class ButtonGroupComponent implements OnDestroy, AfterViewInit, AfterViewChecked {
   @ViewChild('buttonContainer', { read: ElementRef }) buttonContainer!: ElementRef<HTMLElement>;
   @ViewChild('hiddenButtonContainer', { read: ElementRef })
   hiddenButtonContainer!: ElementRef<HTMLElement>;
   @ViewChild('boundingBox', { read: ElementRef }) boundingBox!: ElementRef<HTMLElement>;
   @ViewChild(DropdownComponent, { read: ElementRef }) dropdown!: ElementRef;
 
-  @ContentChildren(ButtonComponent, { read: ElementRef }) buttons: ElementRef[];
+  @ContentChildren(ButtonComponent, { read: ElementRef }) buttons: ElementRef<HTMLButtonElement>[];
 
   private buttonContainerObserver: IntersectionObserver;
   private hiddenButtonsObserver: IntersectionObserver;
@@ -41,22 +38,27 @@ export class ButtonGroupComponent implements AfterViewInit, OnDestroy, AfterView
   constructor(private renderer: Renderer2) {}
 
   ngAfterViewChecked(): void {
-    if (this.buttonsShown === 'dynamic' && this.hiddenButtonContainer) {
-      if (this.hiddenButtonContainer.nativeElement.childElementCount > 0) {
-        this.dropdown.nativeElement.style.display = 'block';
-      } else {
-        this.dropdown.nativeElement.style.display = 'none';
-      }
-    }
+    this.toggleDropdown();
   }
 
   ngAfterViewInit(): void {
-    if (this.buttonsShown === 'dynamic') this.initializeDynamicResizing();
+    this.initializeDynamicResizing();
   }
 
   ngOnDestroy(): void {
     this.buttonContainerObserver.disconnect();
     this.hiddenButtonsObserver.disconnect();
+  }
+
+  toggleDropdown() {
+    if (!this.hiddenButtonContainer) return;
+    if (this.hiddenButtonContainer) {
+      if (this.hiddenButtonContainer.nativeElement.childElementCount === 0) {
+        this.renderer.setStyle(this.dropdown.nativeElement, 'display', 'none');
+      } else {
+        this.renderer.setStyle(this.dropdown.nativeElement, 'display', 'block');
+      }
+    }
   }
 
   private handleVisibleContainerIntersection = (entries) => {
