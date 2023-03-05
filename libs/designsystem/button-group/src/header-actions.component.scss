@@ -1,0 +1,38 @@
+@use '@kirbydesign/core/src/scss/utils';
+
+.visible-buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+kirby-dropdown {
+  margin: 4px;
+  display: none;
+}
+
+.bounding-box {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  overflow: hidden;
+  min-width: utils.$fat-finger-size;
+}
+
+.hidden-buttons {
+  visibility: hidden;
+  display: flex;
+  justify-content: flex-end;
+}
+
+// DEBUGGING RULES
+
+/* stylelint-disable no-duplicate-selectors */
+.hidden-buttons {
+  visibility: visible;
+  opacity: 0.5;
+  background-color: crimson;
+}
+
+.visible-buttons {
+  background-color: goldenrod;
+}
