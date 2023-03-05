@@ -1,0 +1,9 @@
+<div class="bounding-box" #boundingBox>
+  <div class="hidden-buttons" #hiddenButtonContainer></div>
+  <div class="visible-buttons" #buttonContainer><ng-content></ng-content></div>
+  <kirby-dropdown
+    [items]="['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5']"
+    popout="left"
+    [usePopover]="true"
+  ></kirby-dropdown>
+</div>
