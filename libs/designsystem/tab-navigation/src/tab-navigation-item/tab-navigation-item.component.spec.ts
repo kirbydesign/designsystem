@@ -2,8 +2,8 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponents } from 'ng-mocks';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
-import { BadgeComponent } from '../..';
 
+import { KirbyBadge } from 'src/lib/components/web-component-proxies.component';
 import { TabNavigationItemComponent } from './tab-navigation-item.component';
 
 describe('TabNavigationItemComponent', () => {
@@ -12,15 +12,14 @@ describe('TabNavigationItemComponent', () => {
 
   const createHost = createHostFactory({
     component: TabNavigationItemComponent,
-    declarations: [TabNavigationItemComponent, MockComponents(BadgeComponent, IconComponent)],
+    declarations: [TabNavigationItemComponent, MockComponents(KirbyBadge, IconComponent)],
     imports: [TestHelper.ionicModuleForTest],
   });
 
   beforeEach(() => {
     spectator = createHost(
       `
-      <kirby-tab-navigation-item>
-        <span text>Tab1</span>
+      <kirby-tab-navigation-item label="Tab1">
         <kirby-badge themeColor="warning">
           <kirby-icon name="attach"></kirby-icon>
         </kirby-badge>
@@ -35,22 +34,21 @@ describe('TabNavigationItemComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should render the correct text', () => {
+    const textElement = spectator.query('span[text]');
+
+    expect(textElement).toHaveExactText('Tab1');
+  });
+
+  it('should set the data attribute with the correct text', () => {
+    const textElement = spectator.query('span[text]');
+
+    expect(textElement).toHaveAttribute('data-text', 'Tab1');
+  });
+
   it('should render correct number of badges', () => {
     const badges = spectator.queryAll('kirby-badge');
 
     expect(badges.length).toBe(1);
-  });
-
-  it('should render the correct text', () => {
-    const textElement = spectator.query(component.LABEL_TEXT_ELEMENT_SELECTOR);
-
-    expect(textElement).toHaveExactText('Tab1');
-    expect(textElement).toHaveAttribute(component.LABEL_TEXT_ELEMENT_CONTENT_ATTRIBUTE, 'Tab1');
-  });
-
-  it('should set the data attribute with the correct text', () => {
-    const textElement = spectator.query(component.LABEL_TEXT_ELEMENT_SELECTOR);
-
-    expect(textElement).toHaveAttribute(component.LABEL_TEXT_ELEMENT_CONTENT_ATTRIBUTE, 'Tab1');
   });
 });
