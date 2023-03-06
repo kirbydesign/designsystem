@@ -140,6 +140,8 @@ import { MyComponent } from './my-component.ts';
 import { MyComponent } from '@kirbydesign/designsystem/my-component';
 ```
 
+Entry point @kirbydesign/designsystem/shared/floating which is required by @kirbydesign/designsystem doesn't exist.
+
 Once you have changed all the imports, run the `npm run build` command again.
 The library should now compile.
 
