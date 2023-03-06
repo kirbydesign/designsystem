@@ -65,6 +65,36 @@
   </em>
 </p>
 
+<h3>
+  Button with hidden text (
+  <code>showIconOnly="true"</code>
+  )
+</h3>
+
+<div class="button-example-container">
+  <button kirby-button [size]="buttonSize" showIconOnly="true">
+    Hidden text left
+    <kirby-icon name="close"></kirby-icon>
+  </button>
+  <label>
+    Hide text
+    <br />
+    <em>(Left)</em>
+  </label>
+</div>
+
+<div class="button-example-container">
+  <button kirby-button [size]="buttonSize" showIconOnly="true">
+    <kirby-icon name="close"></kirby-icon>
+    Hidden text right
+  </button>
+  <label>
+    Hide text
+    <br />
+    <em>(Right)</em>
+  </label>
+</div>
+
 <h3>Custom Icon</h3>
 <div class="button-example-container">
   <button kirby-button [size]="buttonSize">
