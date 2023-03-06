@@ -1,18 +1,22 @@
 <ion-modal
+  class="kirby-modal-experimental"
   [isOpen]="open"
   [canDismiss]="canDismiss"
+  [ngClass]="size"
   (willPresent)="_onWillPresent($event)"
   (didPresent)="_onDidPresent($event)"
   (willDismiss)="_onWillDismiss($event)"
   (didDismiss)="_onDidDismiss($event)"
 >
   <ng-template>
-    <ion-header>
+    <ion-header class="modal-header">
       <ion-toolbar>
         <ng-content select="[header-start]"></ng-content>
-        <ion-title>{{ title }}</ion-title>
+        <ion-title class="kirby-text-medium">
+          {{ title }}
+        </ion-title>
         <ion-buttons slot="end">
-          <button kirby-button [noDecoration]="true" size="md" (click)="_closeModal()">
+          <button kirby-button attentionLevel="1" size="md" (click)="_closeModal()">
             <kirby-icon [name]="'close'"></kirby-icon>
           </button>
         </ion-buttons>
