@@ -6,15 +6,6 @@
   }
 }
 
-.visible-layer {
-  display: inline-block;
-}
-
-kirby-dropdown {
-  margin: 4px;
-  display: none;
-}
-
 .bounding-box {
   display: flex;
   width: 100%;
@@ -22,6 +13,15 @@ kirby-dropdown {
   min-width: utils.$fat-finger-size;
 }
 
+.visible-layer {
+  display: inline-block;
+}
+
 .hidden-layer {
   visibility: hidden;
+}
+
+kirby-dropdown {
+  margin: 4px;
+  display: none;
 }

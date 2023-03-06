@@ -24,8 +24,8 @@ import { DropdownComponent, DropdownModule } from '@kirbydesign/designsystem/dro
 export class HeaderActionsComponent implements AfterViewInit {
   /*
    * When the consumer sets the visibleActions input, we run all our initialization logic.
-   * The guard for this.buttons exist because when the component is instantiated the first
-   * time, the ContentChild query has not yet run, and all the below functions assume that
+   * The guard for this.buttons exist because when the component is instantiated,
+   * the ContentChild query has not yet run, and all the below functions assume that
    * the buttons array is defined. When undefined, we defer the initialization to ngAfterViewInit().
    */
   @Input() set visibleActions(value: number) {
