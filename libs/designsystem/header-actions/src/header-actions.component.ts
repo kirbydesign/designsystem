@@ -66,13 +66,13 @@ export class HeaderActionsComponent implements AfterViewInit {
   onDropdownItemSelect(item) {
     const selectedAction = this.buttonToDropdownMap.get(item);
     if (selectedAction) {
-      const evt = new MouseEvent('click', {
+      const event = new PointerEvent('click', {
         bubbles: true,
         cancelable: true,
         view: window,
       });
 
-      selectedAction.nativeElement.dispatchEvent(evt);
+      selectedAction.nativeElement.dispatchEvent(event);
     }
   }
 
