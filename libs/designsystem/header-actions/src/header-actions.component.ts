@@ -3,6 +3,7 @@ import {
   Component,
   ContentChildren,
   ElementRef,
+  HostBinding,
   Input,
   Renderer2,
   ViewChild,
@@ -19,49 +20,83 @@ import { DropdownComponent, DropdownModule } from '@kirbydesign/designsystem/dro
   styleUrls: ['./header-actions.component.scss'],
 })
 export class HeaderActionsComponent implements AfterViewInit {
-  @Input() visibleActions: number;
+  /*
+   * When the consumer sets the visibleActions input, we run all our initialization logic.
+   * The guard for this.buttons exist because when the component is instantiated the first
+   * time, the ContentChild query has not yet run, and all the below functions assume that
+   * the buttons array is defined. When undefined, we defer the initialization to ngAfterViewInit().
+   */
+  @Input() set visibleActions(value: number) {
+    this._visibleActions = value;
+
+    if (!this.buttons) return;
+    this.initializeCollapsing();
+  }
 
   @ViewChild(DropdownComponent, { read: ElementRef }) dropdown!: ElementRef;
   @ContentChildren(ButtonComponent, { read: ElementRef }) buttons!: ElementRef<HTMLButtonElement>[];
   @ViewChild('hiddenLayer', { read: ElementRef }) hiddenLayer!: ElementRef<HTMLElement>;
+  @ViewChild('visibleLayer', { read: ElementRef }) visibleLayer!: ElementRef<HTMLElement>;
 
-  hiddenButtons: ElementRef<HTMLButtonElement>[];
-  collapsedActions: string[] = [];
-  dropdownTextToButtonMap = new Map<string, ElementRef<HTMLButtonElement>>();
+  _collapsedActions: string[] = [];
+  _visibleActions: number = 1;
+
+  private dropdownTextToButtonMap;
 
   constructor(private renderer: Renderer2) {}
 
   ngAfterViewInit(): void {
-    if (this.buttons.length > this.visibleActions) {
-      this.hideButtons();
-      this.populateDropdown();
-      this.toggleDropdown();
-    }
+    this.initializeCollapsing();
+  }
+
+  initializeCollapsing() {
+    this.moveButtons();
+    this.populateDropdown();
+    this.toggleDropdown();
+  }
+
+  moveButtons() {
+    this.buttons.forEach((button, index) => {
+      if (index > this._visibleActions - 1) {
+        this.hiddenLayer.nativeElement.appendChild(button.nativeElement);
+      } else {
+        this.visibleLayer.nativeElement.appendChild(button.nativeElement);
+      }
+    });
   }
 
   toggleDropdown() {
-    if (!this.hiddenLayer) return;
     if (this.hiddenLayer.nativeElement.childElementCount === 0) {
       this.renderer.setStyle(this.dropdown.nativeElement, 'display', 'none');
     } else {
-      this.renderer.setStyle(this.dropdown.nativeElement, 'display', 'block');
+      this.renderer.setStyle(this.dropdown.nativeElement, 'display', 'inline-block');
     }
   }
 
-  hideButtons() {
-    this.hiddenButtons = this.buttons.filter((button, index) => {
-      if (index > this.visibleActions - 1) {
-        return button;
-      }
-    });
+  populateDropdown() {
+    /*
+     * This function maps extracts the button text of all hidden buttons
+     * and updates the array used to populate the dropdown with items.
+     * It also maps the extracted text to the actual button element, for use when
+     * firing the matching buttons click-event in onDropdownActionSelect
+     */
 
-    this.hiddenButtons.forEach((button) => {
-      this.hiddenLayer.nativeElement.appendChild(button.nativeElement);
+    this.dropdownTextToButtonMap = new Map<string, HTMLButtonElement>();
+    this._collapsedActions = [];
+
+    const hiddenButtons = Array.from(
+      this.hiddenLayer.nativeElement.children
+    ) as HTMLButtonElement[];
+
+    hiddenButtons.forEach((button) => {
+      const buttonText = button.textContent.trim();
+      this._collapsedActions.push(buttonText);
+      this.dropdownTextToButtonMap.set(buttonText, button);
     });
   }
 
-  onDropdownActionSelect(item) {
-    const selectedAction = this.dropdownTextToButtonMap.get(item);
+  onDropdownActionSelect(action) {
+    const selectedAction = this.dropdownTextToButtonMap.get(action);
     if (selectedAction) {
       const event = new PointerEvent('click', {
         bubbles: true,
@@ -69,15 +104,7 @@ export class HeaderActionsComponent implements AfterViewInit {
         view: window,
       });
 
-      selectedAction.nativeElement.dispatchEvent(event);
+      selectedAction.dispatchEvent(event);
     }
-  }
-
-  populateDropdown() {
-    this.hiddenButtons.forEach((button) => {
-      const buttonText = button.nativeElement.textContent.trim();
-      this.dropdownTextToButtonMap.set(buttonText, button);
-      this.collapsedActions.push(buttonText);
-    });
   }
 }
