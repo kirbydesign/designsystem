@@ -19,23 +19,20 @@ import { DropdownComponent, DropdownModule } from '@kirbydesign/designsystem/dro
   styleUrls: ['./header-actions.component.scss'],
 })
 export class HeaderActionsComponent implements AfterViewInit {
-  @Input() visibleButtons: number;
+  @Input() visibleActions: number;
 
   @ViewChild(DropdownComponent, { read: ElementRef }) dropdown!: ElementRef;
   @ContentChildren(ButtonComponent, { read: ElementRef }) buttons!: ElementRef<HTMLButtonElement>[];
-  @ViewChild('hiddenButtonContainer', { read: ElementRef })
-  hiddenButtonContainer!: ElementRef<HTMLElement>;
+  @ViewChild('hiddenLayer', { read: ElementRef }) hiddenLayer!: ElementRef<HTMLElement>;
 
   hiddenButtons: ElementRef<HTMLButtonElement>[];
-
-  dropdownItems = [];
-
-  buttonToDropdownMap = new Map<string, ElementRef<HTMLButtonElement>>();
+  collapsedActions: string[] = [];
+  dropdownTextToButtonMap = new Map<string, ElementRef<HTMLButtonElement>>();
 
   constructor(private renderer: Renderer2) {}
 
   ngAfterViewInit(): void {
-    if (this.buttons.length > this.visibleButtons) {
+    if (this.buttons.length > this.visibleActions) {
       this.hideButtons();
       this.populateDropdown();
       this.toggleDropdown();
@@ -43,8 +40,8 @@ export class HeaderActionsComponent implements AfterViewInit {
   }
 
   toggleDropdown() {
-    if (!this.hiddenButtonContainer) return;
-    if (this.hiddenButtonContainer.nativeElement.childElementCount === 0) {
+    if (!this.hiddenLayer) return;
+    if (this.hiddenLayer.nativeElement.childElementCount === 0) {
       this.renderer.setStyle(this.dropdown.nativeElement, 'display', 'none');
     } else {
       this.renderer.setStyle(this.dropdown.nativeElement, 'display', 'block');
@@ -53,18 +50,18 @@ export class HeaderActionsComponent implements AfterViewInit {
 
   hideButtons() {
     this.hiddenButtons = this.buttons.filter((button, index) => {
-      if (index > this.visibleButtons - 1) {
+      if (index > this.visibleActions - 1) {
         return button;
       }
     });
 
     this.hiddenButtons.forEach((button) => {
-      this.hiddenButtonContainer.nativeElement.appendChild(button.nativeElement);
+      this.hiddenLayer.nativeElement.appendChild(button.nativeElement);
     });
   }
 
-  onDropdownItemSelect(item) {
-    const selectedAction = this.buttonToDropdownMap.get(item);
+  onDropdownActionSelect(item) {
+    const selectedAction = this.dropdownTextToButtonMap.get(item);
     if (selectedAction) {
       const event = new PointerEvent('click', {
         bubbles: true,
@@ -79,8 +76,8 @@ export class HeaderActionsComponent implements AfterViewInit {
   populateDropdown() {
     this.hiddenButtons.forEach((button) => {
       const buttonText = button.nativeElement.textContent.trim();
-      this.buttonToDropdownMap.set(buttonText, button);
-      this.dropdownItems.push(buttonText);
+      this.dropdownTextToButtonMap.set(buttonText, button);
+      this.collapsedActions.push(buttonText);
     });
   }
 }
