@@ -244,6 +244,15 @@ export class FloatingDirective implements OnInit, OnDestroy {
       'z-index',
       DesignTokenHelper.zLayer('popover')
     );
+    this.setDisplayStyling();
+  }
+
+  private setDisplayStyling(): void {
+    this.renderer.setStyle(
+      this.elementRef.nativeElement,
+      'display',
+      this.isShown ? `block` : `none`
+    );
   }
 
   private updateHostElementPosition(): void {
@@ -294,11 +303,7 @@ export class FloatingDirective implements OnInit, OnDestroy {
   private setPositionStylingOnHostElement(xPosition: number, yPosition: number): void {
     this.renderer.setStyle(this.elementRef.nativeElement, 'left', `${xPosition}px`);
     this.renderer.setStyle(this.elementRef.nativeElement, 'top', `${yPosition}px`);
-    this.renderer.setStyle(
-      this.elementRef.nativeElement,
-      'display',
-      this.isShown ? `block` : `none`
-    );
+    this.setDisplayStyling();
   }
 
   private setupEventHandling(): void {
