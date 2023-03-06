@@ -1,8 +1,7 @@
 @use '@kirbydesign/core/src/scss/utils';
 
 .visible-layer {
-  display: flex;
-  justify-content: flex-end;
+  display: inline-block;
 }
 
 kirby-dropdown {
@@ -12,7 +11,6 @@ kirby-dropdown {
 
 .bounding-box {
   display: flex;
-  justify-content: flex-end;
   width: 100%;
   overflow: hidden;
   min-width: utils.$fat-finger-size;
@@ -20,19 +18,4 @@ kirby-dropdown {
 
 .hidden-layer {
   visibility: hidden;
-  display: flex;
-  justify-content: flex-end;
-}
-
-// DEBUGGING RULES
-
-/* stylelint-disable no-duplicate-selectors */
-.hidden-layer {
-  visibility: visible;
-  opacity: 0.5;
-  background-color: crimson;
-}
-
-.visible-layer {
-  background-color: goldenrod;
 }
