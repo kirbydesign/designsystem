@@ -166,6 +166,12 @@ $button-width: (
     width: utils.size('xl');
     padding: 0;
     min-width: unset;
+
+    .content-layer {
+      @include utils.slotted(':not(kirby-icon)') {
+        display: none;
+      }
+    }
   }
 
   &.sm {
