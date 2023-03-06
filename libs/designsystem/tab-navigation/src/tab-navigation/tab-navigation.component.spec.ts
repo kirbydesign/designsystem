@@ -3,7 +3,7 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponents } from 'ng-mocks';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
-import { BadgeComponent } from '../..';
+import { KirbyBadge } from 'src/lib/components/web-component-proxies.component';
 import { TabNavigationItemComponent } from '../tab-navigation-item/tab-navigation-item.component';
 
 import { TabNavigationComponent } from './tab-navigation.component';
@@ -15,7 +15,7 @@ describe('TabNavigationComponent', () => {
 
   const createHost = createHostFactory({
     component: TabNavigationComponent,
-    declarations: [TabNavigationItemComponent, MockComponents(BadgeComponent, IconComponent)],
+    declarations: [TabNavigationItemComponent, MockComponents(KirbyBadge, IconComponent)],
     imports: [TestHelper.ionicModuleForTest],
   });
 
