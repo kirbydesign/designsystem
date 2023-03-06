@@ -301,6 +301,11 @@ html.ios ion-modal.kirby-modal-experimental {
     padding-left: 0;
   }
 
+  ion-title {
+    font-size: utils.font-size('n');
+    font-weight: utils.font-weight('bold');
+  }
+
   .kirby-grid {
     display: flex;
   }
