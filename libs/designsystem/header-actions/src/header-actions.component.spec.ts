@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HeaderActionsComponent } from './header-actions.component';
 
-describe('ButtonGroupComponent', () => {
+describe('HeaderActionsComponent', () => {
   let component: HeaderActionsComponent;
   let fixture: ComponentFixture<HeaderActionsComponent>;
 

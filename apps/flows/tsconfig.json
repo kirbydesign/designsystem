@@ -77,7 +77,8 @@
       "@kirbydesign/designsystem/grid": ["libs/designsystem/grid/index.ts"],
       "@kirbydesign/designsystem/alert-experimental": [
         "libs/designsystem/alert-experimental/index.ts"
-      ]
+      ],
+      "@kirbydesign/designsystem/header-actions": ["libs/designsystem/header-actions/index.ts"]
     },
     "target": "es2020"
   },
