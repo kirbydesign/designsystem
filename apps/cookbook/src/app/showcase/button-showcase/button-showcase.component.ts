@@ -45,4 +45,8 @@ export class ButtonShowcaseComponent {
   onChange(value) {
     this.themeColor = value;
   }
+
+  clicked(value) {
+    console.log('Emulated click:  ', value);
+  }
 }

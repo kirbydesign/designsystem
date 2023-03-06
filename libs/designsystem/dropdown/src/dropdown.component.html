@@ -8,8 +8,7 @@
   [disabled]="disabled"
   type="button"
 >
-  <span class="text">{{ selectedText || placeholder }}</span>
-  <kirby-icon [name]="isOpen ? 'arrow-up' : 'arrow-down'"></kirby-icon>
+  <kirby-icon [name]="'more'"></kirby-icon>
 </button>
 
 <ng-container *ngTemplateOutlet="usePopover ? popoverTemplate : itemWrapperTemplate"></ng-container>
