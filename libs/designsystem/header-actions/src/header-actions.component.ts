@@ -26,11 +26,18 @@ export class HeaderActionsComponent implements AfterViewInit {
   @ViewChild('hiddenButtonContainer', { read: ElementRef })
   hiddenButtonContainer!: ElementRef<HTMLElement>;
 
+  hiddenButtons: ElementRef<HTMLButtonElement>;
+
+  dropdownItems = ['Item 1'];
+
+  buttonToDropdownMap = new Map<ElementRef<HTMLButtonElement>, string>();
+
   constructor(private renderer: Renderer2) {}
 
   ngAfterViewInit(): void {
     if (this.buttons.length > this.maxButtons) {
       this.hideButtons();
+      this.populateDropdown();
       this.toggleDropdown();
     }
   }
@@ -49,6 +56,16 @@ export class HeaderActionsComponent implements AfterViewInit {
       if (index > this.maxButtons - 1) {
         this.hiddenButtonContainer.nativeElement.appendChild(button.nativeElement);
       }
+    });
+  }
+
+  onDropdownItemSelect(item) {
+    console.log(item);
+  }
+
+  populateDropdown() {
+    this.buttons.forEach((button) => {
+      console.log(button);
     });
   }
 }

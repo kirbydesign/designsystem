@@ -15,6 +15,7 @@ export * from '@kirbydesign/designsystem/fab-sheet';
 export * from '@kirbydesign/designsystem/flag';
 export * from '@kirbydesign/designsystem/form-field';
 export * from '@kirbydesign/designsystem/grid';
+export * from '@kirbydesign/designsystem/header-actions';
 export * from '@kirbydesign/designsystem/helpers';
 export * from '@kirbydesign/designsystem/helpers/scss';
 export * from '@kirbydesign/designsystem/icon';
