@@ -48,11 +48,16 @@ export class HeaderActionsComponent implements AfterViewInit {
   _visibleActions: number;
 
   private dropdownTextToButtonMap: Map<string, HTMLButtonElement>;
+  private visibleLayerObserver: IntersectionObserver;
+  private visibleLayerObserverOptions;
+  private observedElement: ElementRef<HTMLElement>;
 
-  constructor(private renderer: Renderer2) {}
+  constructor(private renderer: Renderer2, private elementRef: ElementRef) {}
 
   ngAfterViewInit(): void {
     this.initializeCollapsing();
+    this.observedElement = this.visibleLayer;
+    this.initializeDynamicResizing();
   }
 
   initializeCollapsing() {
@@ -113,5 +118,46 @@ export class HeaderActionsComponent implements AfterViewInit {
 
       selectedAction.dispatchEvent(event);
     }
+  }
+
+  initializeDynamicResizing() {
+    this.visibleLayerObserverOptions = {
+      root: this.elementRef.nativeElement,
+      threshold: 1.0,
+    };
+
+    this.visibleLayerObserver = new IntersectionObserver(
+      this.handleVisibleLayerIntersection,
+      this.visibleLayerObserverOptions
+    );
+
+    this.visibleLayerObserver.observe(this.observedElement.nativeElement);
+  }
+
+  private handleVisibleLayerIntersection = (entries) => {
+    entries.forEach((entry: IntersectionObserverEntry) => {
+      console.log(entry);
+
+      if (entry.isIntersecting) {
+        return;
+      }
+      const buttons = this.visibleLayer.nativeElement.querySelectorAll('button');
+
+      if (buttons.length > 0) {
+        this.hideNextButton(buttons);
+      }
+    });
+  };
+
+  private hideNextButton(buttons: NodeListOf<HTMLButtonElement>) {
+    const nextVisibleButton = buttons[buttons.length - 1];
+    this.hiddenLayer.nativeElement.appendChild(nextVisibleButton);
+    this.toggleDropdown();
+    if (this.dropdown) {
+      this.observedElement = this.placement === 'left' ? this.dropdown : this.visibleLayer;
+    }
+
+    this.visibleLayerObserver.unobserve(this.observedElement.nativeElement);
+    this.visibleLayerObserver.observe(this.observedElement.nativeElement);
   }
 }

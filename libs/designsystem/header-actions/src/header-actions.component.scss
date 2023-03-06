@@ -1,24 +1,25 @@
 @use '@kirbydesign/core/src/scss/utils';
 
-:host(.right) {
-  .bounding-box {
+:host {
+  display: flex;
+  width: 100%;
+
+  &.right {
     flex-direction: row-reverse;
   }
 }
 
-.bounding-box {
+.dropdown-and-buttons {
   display: flex;
-  width: 100%;
-  overflow: hidden;
-  min-width: utils.$fat-finger-size;
 }
 
 .visible-layer {
-  display: inline-block;
+  display: flex;
 }
 
 .hidden-layer {
   visibility: hidden;
+  display: flex;
 }
 
 kirby-dropdown {

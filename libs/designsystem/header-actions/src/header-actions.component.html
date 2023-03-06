@@ -1,15 +1,14 @@
-<div class="bounding-box" #boundingBox>
-  <div>
-    <div class="visible-layer" #visibleLayer>
-      <ng-content></ng-content>
-    </div>
-
-    <kirby-dropdown
-      [items]="_collapsedActions"
-      [popout]="'left'"
-      [usePopover]="true"
-      (change)="onDropdownActionSelect($event)"
-    ></kirby-dropdown>
+<div class="dropdown-and-buttons">
+  <div class="visible-layer" #visibleLayer>
+    <ng-content></ng-content>
   </div>
-  <div class="hidden-layer" #hiddenLayer></div>
+
+  <kirby-dropdown
+    [items]="_collapsedActions"
+    [popout]="'right'"
+    [usePopover]="true"
+    (change)="onDropdownActionSelect($event)"
+  ></kirby-dropdown>
 </div>
+
+<div class="hidden-layer" #hiddenLayer></div>
