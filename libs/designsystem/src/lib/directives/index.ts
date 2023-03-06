@@ -1,4 +1,4 @@
-export { FloatingDirective } from './floating/floating.directive';
+export { FloatingDirective } from '../../../shared/src/floating/src/floating.directive';
 
 export { KeyHandlerDirective } from './key-handler/key-handler.directive';
 

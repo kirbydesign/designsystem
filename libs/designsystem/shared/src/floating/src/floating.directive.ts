@@ -19,8 +19,8 @@ import {
 } from '@floating-ui/dom';
 import { ComputePositionConfig, Middleware, Placement } from '@floating-ui/core/src/types';
 import { DesignTokenHelper } from '@kirbydesign/core';
-import { PortalDirective } from '@kirbydesign/designsystem/shared';
 import { from } from 'rxjs';
+import { PortalDirective } from './../../portal/src/portal.directive';
 
 export type TriggerEvent = 'hover' | 'click' | 'focus';
 
@@ -39,16 +39,19 @@ interface EventMethods {
 type EventListener = () => void;
 
 /**
- * @summary FloatingDirective is a utility that lets you declaratively anchor "popup" containers to another element.
+ * @summary FloatingDirective is a utility that lets you declarative anchor "popup" containers to another element.
  *
  * Uses floating-ui, with this directive wraps the functionality: https://floating-ui.com/docs/getting-started
+ *
+ * Uses PortalDirective to enable functionality for portaling the floated content. This should be used when needed
+ * and not as the default option.
  *
  * @status In development
  */
 @Directive({
   selector: '[kirbyFloating]',
-  hostDirectives: [PortalDirective],
   providers: [PortalDirective],
+  hostDirectives: [PortalDirective],
   standalone: true,
 })
 export class FloatingDirective implements OnInit, OnDestroy {
@@ -104,6 +107,11 @@ export class FloatingDirective implements OnInit, OnDestroy {
     return this._triggers;
   }
 
+  /**
+   * The HTMLElement for which the content should portal into.
+   * Providing an outlet enables the portal, if nothing is provided, the provided strategy is used.
+   * This should be used when there's issues with the stacking context, and not as a default option.
+   * */
   @Input() public set DOMPortalOutlet(outlet: HTMLElement | undefined) {
     this.portalDirective.outlet = outlet;
   }
@@ -136,6 +144,9 @@ export class FloatingDirective implements OnInit, OnDestroy {
   @Input() public closeOnEscapeKey: boolean = true;
   @Input() public closeOnBackdrop: boolean = true;
 
+  /**
+   * Enables the option to be notified when the host changes display. The new display value is provided.
+   * */
   @Output() public displayChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   @HostListener('document:keydown.escape', ['$event'])
@@ -164,7 +175,6 @@ export class FloatingDirective implements OnInit, OnDestroy {
   private _reference: ElementRef | undefined;
 
   private isShown: boolean = false;
-  private config: ComputePositionConfig;
   private eventListeners: EventListener[] = [];
   private triggerEventMap: Map<TriggerEvent, EventMethods[]> = new Map([
     ['click', [{ event: 'click', method: this.toggleShow.bind(this) }]],
@@ -193,11 +203,7 @@ export class FloatingDirective implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.addFloatStylingToHostElement();
     this.updateHostElementPosition();
-    autoUpdate(
-      this.reference?.nativeElement,
-      this.elementRef.nativeElement,
-      this.updateHostElementPosition.bind(this)
-    );
+    this.autoUpdatePosition();
   }
 
   /* Should be accessible for programmatically setting display */
@@ -273,6 +279,14 @@ export class FloatingDirective implements OnInit, OnDestroy {
     return middleware;
   }
 
+  private autoUpdatePosition(): void {
+    autoUpdate(
+      this.reference?.nativeElement,
+      this.elementRef.nativeElement,
+      this.updateHostElementPosition.bind(this)
+    );
+  }
+
   private setPositionStylingOnHostElement(xPosition: number, yPosition: number): void {
     this.renderer.setStyle(this.elementRef.nativeElement, 'left', `${xPosition}px`);
     this.renderer.setStyle(this.elementRef.nativeElement, 'top', `${yPosition}px`);
@@ -326,13 +340,12 @@ export class FloatingDirective implements OnInit, OnDestroy {
   }
 
   private tearDownEventHandling(): void {
-    this.eventListeners.forEach(() => {
-      const eventListener: EventListener | undefined = this.eventListeners.pop();
-
+    this.eventListeners.forEach((eventListener) => {
       if (eventListener != null) {
         eventListener();
       }
     });
+    this.eventListeners = [];
   }
 
   public ngOnDestroy() {
