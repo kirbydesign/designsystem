@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   ContentChildren,
   ElementRef,
@@ -15,6 +16,7 @@ import { DropdownComponent, DropdownModule } from '@kirbydesign/designsystem/dro
 @Component({
   selector: 'kirby-header-actions',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, DropdownModule],
   templateUrl: './header-actions.component.html',
   styleUrls: ['./header-actions.component.scss'],
@@ -42,10 +44,10 @@ export class HeaderActionsComponent implements AfterViewInit {
   @ViewChild('hiddenLayer', { read: ElementRef }) hiddenLayer!: ElementRef<HTMLElement>;
   @ViewChild('visibleLayer', { read: ElementRef }) visibleLayer!: ElementRef<HTMLElement>;
 
-  _collapsedActions: string[];
-  _visibleActions: number = 1;
+  _collapsedActions: string[] = [];
+  _visibleActions: number;
 
-  private dropdownTextToButtonMap;
+  private dropdownTextToButtonMap: Map<string, HTMLButtonElement>;
 
   constructor(private renderer: Renderer2) {}
 
@@ -54,6 +56,7 @@ export class HeaderActionsComponent implements AfterViewInit {
   }
 
   initializeCollapsing() {
+    if (this.buttons.length <= 2) return;
     this.moveButtons();
     this.populateDropdown();
     this.toggleDropdown();
