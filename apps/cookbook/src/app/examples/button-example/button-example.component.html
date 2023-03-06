@@ -58,12 +58,29 @@
   <label>Disabled</label>
 </div>
 
+<p class="kirby-text-small">
+  <em>
+    <strong>Please note:</strong>
+    The undecorated button is solely intended for use with icon only.
+  </em>
+</p>
+
+<h3>
+  Button with hidden text (
+  <code>showIconOnly="true"</code>
+  )
+</h3>
+
 <div class="button-example-container">
   <button kirby-button [size]="buttonSize" showIconOnly="true">
     Hidden text left
     <kirby-icon name="close"></kirby-icon>
   </button>
-  <label>Hide text</label>
+  <label>
+    Hide text
+    <br />
+    <em>(Left)</em>
+  </label>
 </div>
 
 <div class="button-example-container">
@@ -71,15 +88,12 @@
     <kirby-icon name="close"></kirby-icon>
     Hidden text right
   </button>
-  <label>Hide text</label>
+  <label>
+    Hide text
+    <br />
+    <em>(Right)</em>
+  </label>
 </div>
-
-<p class="kirby-text-small">
-  <em>
-    <strong>Please note:</strong>
-    The undecorated button is solely intended for use with icon only.
-  </em>
-</p>
 
 <h3>Custom Icon</h3>
 <div class="button-example-container">
