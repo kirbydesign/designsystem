@@ -20,6 +20,7 @@ import {
 import { ComputePositionConfig, Middleware, Placement } from '@floating-ui/core/src/types';
 import { DesignTokenHelper } from '@kirbydesign/core';
 import { from } from 'rxjs';
+import { PortalDirective } from '@kirbydesign/designsystem/shared/portal';
 
 export type TriggerEvent = 'hover' | 'click' | 'focus';
 
@@ -49,6 +50,8 @@ type EventListener = () => void;
  */
 @Directive({
   selector: '[kirbyFloating]',
+  providers: [PortalDirective],
+  hostDirectives: [PortalDirective],
   standalone: true,
 })
 export class FloatingDirective implements OnInit, OnDestroy {
@@ -103,6 +106,15 @@ export class FloatingDirective implements OnInit, OnDestroy {
 
   public get triggers(): Array<TriggerEvent> {
     return this._triggers;
+  }
+
+  /**
+   * The HTMLElement for which the content should portal into.
+   * Providing an outlet enables the portal, if nothing is provided, the provided strategy is used.
+   * This should be used when there's issues with the stacking context, and not as a default option.
+   * */
+  @Input() public set DOMPortalOutlet(outlet: HTMLElement | undefined) {
+    this.portalDirective.outlet = outlet;
   }
 
   /**
@@ -184,11 +196,16 @@ export class FloatingDirective implements OnInit, OnDestroy {
     ],
   ]);
 
-  public constructor(private elementRef: ElementRef, private renderer: Renderer2) {}
+  public constructor(
+    private elementRef: ElementRef,
+    private renderer: Renderer2,
+    private portalDirective: PortalDirective
+  ) {}
 
   public ngOnInit(): void {
     this.addFloatStylingToHostElement();
     this.updateHostElementPosition();
+    this.autoUpdatePosition();
   }
 
   /* Should be accessible for programmatically setting display */

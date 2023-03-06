@@ -7,3 +7,4 @@ export * from './component-loader.directive';
 export * from './dynamic-component';
 
 export * from './fit-heading/index';
+export * from './floating/index';
