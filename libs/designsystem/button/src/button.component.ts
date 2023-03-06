@@ -96,22 +96,24 @@ export class ButtonComponent implements AfterContentInit {
 
   constructor(private elementRef: ElementRef<HTMLElement>, private renderer: Renderer2) {}
 
-  private wrapTextNode() {
+  private wrapTextNode(iconElement?: HTMLElement) {
+    if (!iconElement) {
+      return;
+    }
+
     const ifTextNode = (node?: ChildNode): ChildNode | undefined => {
       return node?.nodeType === Node.TEXT_NODE ? node : undefined;
     };
 
-    const iconElement = this.iconElementRef?.nativeElement;
-    const textNode =
-      ifTextNode(iconElement?.previousSibling) || ifTextNode(iconElement?.nextSibling);
+    const textNode = ifTextNode(iconElement.previousSibling) || ifTextNode(iconElement.nextSibling);
     if (textNode) {
-      const placement = textNode === iconElement?.previousSibling ? 'before' : 'after';
+      const placement = textNode === iconElement.previousSibling ? 'before' : 'after';
       const textWrapper = this.renderer.createElement('span');
       const parent = textNode.parentNode;
       this.renderer.removeChild(textNode.parentNode, textNode);
       this.renderer.appendChild(textWrapper, textNode);
       if (placement === 'before') {
-        this.renderer.insertBefore(parent, textWrapper, this.iconElementRef?.nativeElement);
+        this.renderer.insertBefore(parent, textWrapper, iconElement);
       } else if (placement === 'after') {
         this.renderer.appendChild(parent, textWrapper);
       }
@@ -119,7 +121,9 @@ export class ButtonComponent implements AfterContentInit {
   }
 
   ngAfterContentInit(): void {
-    if (this.iconElementRef === undefined) {
+    const iconElement = this.iconElementRef?.nativeElement;
+
+    if (iconElement === undefined) {
       // Nothing to do here when there's no icon:
       return;
     }
@@ -127,7 +131,7 @@ export class ButtonComponent implements AfterContentInit {
     if (this.showIconOnly) {
       // If the button text is supplied as plain text (i.e. as a text node not within an element tag),
       // we need to wrap it in an element to be able to target and hide it with css:
-      this.wrapTextNode();
+      this.wrapTextNode(iconElement);
     }
 
     const hasText = !!this.elementRef.nativeElement.textContent;
@@ -138,8 +142,7 @@ export class ButtonComponent implements AfterContentInit {
 
     if (hasText && !this.showIconOnly) {
       this._isIconLeft =
-        this.elementRef.nativeElement.querySelector('.content-layer').firstChild ===
-        this.iconElementRef.nativeElement;
+        this.elementRef.nativeElement.querySelector('.content-layer').firstChild === iconElement;
       this._isIconRight = !this._isIconLeft;
     }
   }
