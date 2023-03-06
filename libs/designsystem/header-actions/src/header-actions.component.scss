@@ -1,6 +1,6 @@
 @use '@kirbydesign/core/src/scss/utils';
 
-.visible-buttons {
+.visible-layer {
   display: flex;
   justify-content: flex-end;
 }
@@ -18,7 +18,7 @@ kirby-dropdown {
   min-width: utils.$fat-finger-size;
 }
 
-.hidden-buttons {
+.hidden-layer {
   visibility: hidden;
   display: flex;
   justify-content: flex-end;
@@ -27,12 +27,12 @@ kirby-dropdown {
 // DEBUGGING RULES
 
 /* stylelint-disable no-duplicate-selectors */
-.hidden-buttons {
+.hidden-layer {
   visibility: visible;
   opacity: 0.5;
   background-color: crimson;
 }
 
-.visible-buttons {
+.visible-layer {
   background-color: goldenrod;
 }

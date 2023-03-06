@@ -1,10 +1,10 @@
 <div class="bounding-box" #boundingBox>
-  <div class="hidden-buttons" #hiddenButtonContainer></div>
-  <div class="visible-buttons" #buttonContainer><ng-content></ng-content></div>
+  <div class="hidden-layer" #hiddenLayer></div>
+  <div class="visible-layer"><ng-content></ng-content></div>
   <kirby-dropdown
-    [items]="dropdownItems"
+    [items]="collapsedActions"
     popout="left"
     [usePopover]="true"
-    (change)="onDropdownItemSelect($event)"
+    (change)="onDropdownActionSelect($event)"
   ></kirby-dropdown>
 </div>
