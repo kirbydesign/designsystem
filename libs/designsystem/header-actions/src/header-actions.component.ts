@@ -19,23 +19,23 @@ import { DropdownComponent, DropdownModule } from '@kirbydesign/designsystem/dro
   styleUrls: ['./header-actions.component.scss'],
 })
 export class HeaderActionsComponent implements AfterViewInit {
-  @Input() maxButtons: number;
+  @Input() visibleButtons: number;
 
   @ViewChild(DropdownComponent, { read: ElementRef }) dropdown!: ElementRef;
   @ContentChildren(ButtonComponent, { read: ElementRef }) buttons!: ElementRef<HTMLButtonElement>[];
   @ViewChild('hiddenButtonContainer', { read: ElementRef })
   hiddenButtonContainer!: ElementRef<HTMLElement>;
 
-  hiddenButtons: ElementRef<HTMLButtonElement>;
+  hiddenButtons: ElementRef<HTMLButtonElement>[];
 
-  dropdownItems = ['Item 1'];
+  dropdownItems = [];
 
-  buttonToDropdownMap = new Map<ElementRef<HTMLButtonElement>, string>();
+  buttonToDropdownMap = new Map<string, ElementRef<HTMLButtonElement>>();
 
   constructor(private renderer: Renderer2) {}
 
   ngAfterViewInit(): void {
-    if (this.buttons.length > this.maxButtons) {
+    if (this.buttons.length > this.visibleButtons) {
       this.hideButtons();
       this.populateDropdown();
       this.toggleDropdown();
@@ -52,20 +52,35 @@ export class HeaderActionsComponent implements AfterViewInit {
   }
 
   hideButtons() {
-    this.buttons.forEach((button, index) => {
-      if (index > this.maxButtons - 1) {
-        this.hiddenButtonContainer.nativeElement.appendChild(button.nativeElement);
+    this.hiddenButtons = this.buttons.filter((button, index) => {
+      if (index > this.visibleButtons - 1) {
+        return button;
       }
+    });
+
+    this.hiddenButtons.forEach((button) => {
+      this.hiddenButtonContainer.nativeElement.appendChild(button.nativeElement);
     });
   }
 
   onDropdownItemSelect(item) {
-    console.log(item);
+    const selectedAction = this.buttonToDropdownMap.get(item);
+    if (selectedAction) {
+      const evt = new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+        view: window,
+      });
+
+      selectedAction.nativeElement.dispatchEvent(evt);
+    }
   }
 
   populateDropdown() {
-    this.buttons.forEach((button) => {
-      console.log(button);
+    this.hiddenButtons.forEach((button) => {
+      const buttonText = button.nativeElement.textContent.trim();
+      this.buttonToDropdownMap.set(buttonText, button);
+      this.dropdownItems.push(buttonText);
     });
   }
 }
