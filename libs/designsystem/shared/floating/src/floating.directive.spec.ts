@@ -1,6 +1,7 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { createComponentFactory, mockProvider, Spectator } from '@ngneat/spectator';
-import { PortalDirective, TriggerEvent } from '@kirbydesign/designsystem/shared';
+import { PortalDirective } from '@kirbydesign/designsystem/shared/portal';
+import { TriggerEvent } from '@kirbydesign/designsystem/shared/floating';
 import { FloatingDirective } from './floating.directive';
 
 import * as floatingUi from '@floating-ui/dom';
