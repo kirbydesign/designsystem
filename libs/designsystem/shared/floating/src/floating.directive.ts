@@ -62,6 +62,7 @@ export class FloatingDirective implements OnInit, OnDestroy {
     this.tearDownEventHandling();
     this._reference = ref;
     this.setupEventHandling();
+    this.autoUpdatePosition();
   }
 
   public get reference(): ElementRef | undefined {
@@ -174,6 +175,7 @@ export class FloatingDirective implements OnInit, OnDestroy {
 
   private _reference: ElementRef | undefined;
 
+  private autoUpdaterRef: () => void;
   private isShown: boolean = false;
   private eventListeners: EventListener[] = [];
   private triggerEventMap: Map<TriggerEvent, EventMethods[]> = new Map([
@@ -203,7 +205,6 @@ export class FloatingDirective implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.addFloatStylingToHostElement();
     this.updateHostElementPosition();
-    this.autoUpdatePosition();
   }
 
   /* Should be accessible for programmatically setting display */
@@ -280,7 +281,13 @@ export class FloatingDirective implements OnInit, OnDestroy {
   }
 
   private autoUpdatePosition(): void {
-    autoUpdate(
+    this.removeAutoUpdaterRef();
+
+    if (!this.reference) {
+      return;
+    }
+
+    this.autoUpdaterRef = autoUpdate(
       this.reference?.nativeElement,
       this.elementRef.nativeElement,
       this.updateHostElementPosition.bind(this)
@@ -348,7 +355,14 @@ export class FloatingDirective implements OnInit, OnDestroy {
     this.eventListeners = [];
   }
 
+  private removeAutoUpdaterRef(): void {
+    if (this.autoUpdaterRef) {
+      this.autoUpdaterRef();
+    }
+  }
+
   public ngOnDestroy() {
     this.tearDownEventHandling();
+    this.removeAutoUpdaterRef();
   }
 }
