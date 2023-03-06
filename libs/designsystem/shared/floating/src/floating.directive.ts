@@ -363,6 +363,12 @@ export class FloatingDirective implements OnInit, OnDestroy {
     }
   }
 
+  private removeAutoUpdaterRef(): void {
+    if (this.autoUpdaterRef) {
+      this.autoUpdaterRef();
+    }
+  }
+
   public ngOnDestroy() {
     this.tearDownEventHandling();
     this.removeAutoUpdaterRef();
