@@ -33,6 +33,10 @@ export class HeaderActionsComponent implements AfterViewInit {
     this.initializeCollapsing();
   }
 
+  @HostBinding('class')
+  @Input()
+  placement: 'left' | 'right' = 'left';
+
   @ViewChild(DropdownComponent, { read: ElementRef }) dropdown!: ElementRef;
   @ContentChildren(ButtonComponent, { read: ElementRef }) buttons!: ElementRef<HTMLButtonElement>[];
   @ViewChild('hiddenLayer', { read: ElementRef }) hiddenLayer!: ElementRef<HTMLElement>;
