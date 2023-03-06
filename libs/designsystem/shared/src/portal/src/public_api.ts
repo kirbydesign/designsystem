@@ -1,1 +1,1 @@
-export * from './portal.directive';
+export { PortalDirective } from './portal.directive';

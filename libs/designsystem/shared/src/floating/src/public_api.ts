@@ -1,1 +1,1 @@
-export * from './floating.directive';
+export { FloatingDirective } from './floating.directive';

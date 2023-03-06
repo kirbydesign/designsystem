@@ -20,7 +20,7 @@ import {
 import { ComputePositionConfig, Middleware, Placement } from '@floating-ui/core/src/types';
 import { DesignTokenHelper } from '@kirbydesign/core';
 import { from } from 'rxjs';
-import { PortalDirective } from './../../portal/src/portal.directive';
+import { PortalDirective } from '@kirbydesign/designsystem/shared/portal';
 
 export type TriggerEvent = 'hover' | 'click' | 'focus';
 
