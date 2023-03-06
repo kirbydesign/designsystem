@@ -42,7 +42,7 @@ export class HeaderActionsComponent implements AfterViewInit {
   @ViewChild('hiddenLayer', { read: ElementRef }) hiddenLayer!: ElementRef<HTMLElement>;
   @ViewChild('visibleLayer', { read: ElementRef }) visibleLayer!: ElementRef<HTMLElement>;
 
-  _collapsedActions: string[] = [];
+  _collapsedActions: string[];
   _visibleActions: number = 1;
 
   private dropdownTextToButtonMap;
@@ -62,9 +62,9 @@ export class HeaderActionsComponent implements AfterViewInit {
   moveButtons() {
     this.buttons.forEach((button, index) => {
       if (index > this._visibleActions - 1) {
-        this.hiddenLayer.nativeElement.appendChild(button.nativeElement);
+        this.renderer.appendChild(this.hiddenLayer.nativeElement, button.nativeElement);
       } else {
-        this.visibleLayer.nativeElement.appendChild(button.nativeElement);
+        this.renderer.appendChild(this.visibleLayer.nativeElement, button.nativeElement);
       }
     });
   }
