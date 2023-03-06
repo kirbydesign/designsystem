@@ -1,5 +1,11 @@
 @use '@kirbydesign/core/src/scss/utils';
 
+:host(.right) {
+  .bounding-box {
+    flex-direction: row-reverse;
+  }
+}
+
 .visible-layer {
   display: inline-block;
 }
