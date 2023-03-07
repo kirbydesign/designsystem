@@ -251,7 +251,7 @@ export const routes: Routes = [
         ],
       },
       {
-        path: 'modal-experimental',
+        path: 'modal-v2',
         children: [
           {
             path: 'fullscreen',

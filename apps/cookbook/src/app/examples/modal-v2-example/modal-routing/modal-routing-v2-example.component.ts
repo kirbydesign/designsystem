@@ -1,21 +1,21 @@
 import { Component } from '@angular/core';
 
 export const routerConfigCodeSnippet = `{
-  path: 'modal-experimental',
-  component: ModalExperimentalShowcaseComponent,
+  path: 'modal-v2',
+  component: ModalV2ShowcaseComponent,
   children: [
     {
       path: 'modal',
-      component: ModalRoutingExperimentalComponent,
-      outlet: 'modal-experimental',
+      component: ModalRoutingV2Component,
+      outlet: 'modal-v2',
       children: [
         {
           path: 'page1',
-          component: ModalRoutingExperimentalExamplePage1Component,
+          component: ModalRoutingV2ExamplePage1Component,
         },
         {
           path: 'page2',
-          component: ModalRoutingExperimentalExamplePage2Component,
+          component: ModalRoutingV2ExamplePage2Component,
         },
       ],
     },
@@ -25,7 +25,7 @@ export const routerConfigCodeSnippet = `{
 export const routerLinkCodeSnippet = `<!-- Open the modal -->
 <button
   kirby-button
-  [routerLink]="[{ outlets: { 'modal-experimental': ['modal', 'page1'] } }]"
+  [routerLink]="[{ outlets: { 'modal-v2': ['modal', 'page1'] } }]"
   [queryParams]="{ awesomeQueryParam: 'awesome value' }"
 >
   Open modal by route
@@ -40,7 +40,7 @@ export const programmaticRoutingCodeSnippet = `import { ActivatedRoute, Router }
 constructor(private router: Router, private route: ActivatedRoute) {}
 
 // Open the modal
-this.router.navigate([{ outlets: { 'modal-experimental': ['modal', 'page1'] } }], {
+this.router.navigate([{ outlets: { 'modal-v2': ['modal', 'page1'] } }], {
   relativeTo: this.route,
 });
 
@@ -49,7 +49,7 @@ this.router.navigate(['../page1'], { relativeTo: this.route });
 this.router.navigate(['../page2'], { relativeTo: this.route });
 
 // Close the modal from within the named outlet
-this.router.navigate([{ outlets: { 'modal-experimental': null } }], {
+this.router.navigate([{ outlets: { 'modal-v2': null } }], {
   relativeTo: this.route.parent.parent,
 });
 `;

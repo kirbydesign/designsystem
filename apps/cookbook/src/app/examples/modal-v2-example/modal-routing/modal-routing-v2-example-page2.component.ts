@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   template: `
-    <kirby-modal-wrapper-experimental [title]="'Modal Page 2/2'" [hasCollapsibleTitle]="false">
+    <kirby-modal-v2-wrapper [title]="'Modal Page 2/2'" [hasCollapsibleTitle]="false">
       <h4>Section 1.10.32 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC</h4>
       <p>
         "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
@@ -15,16 +15,16 @@ import { ActivatedRoute, Router } from '@angular/router';
         dolore magnam aliquam quaerat voluptatem."
       </p>
 
-      <kirby-modal-footer-experimental themeColor="white" class="footer" footer>
+      <kirby-modal-v2-footer themeColor="white" class="footer" footer>
         <button kirby-button attentionLevel="3" routerLink="../page1">
           <kirby-icon name="arrow-back"></kirby-icon>
         </button>
         <button kirby-button (click)="closeModal()">Finish</button>
-      </kirby-modal-footer-experimental>
-    </kirby-modal-wrapper-experimental>
+      </kirby-modal-v2-footer>
+    </kirby-modal-v2-wrapper>
   `,
   styles: [
-    'kirby-modal-footer-experimental { --kirby-modal-footer-justify-content: space-between; }',
+    'kirby-modal-v2-footer { --kirby-modal-footer-justify-content: space-between; }',
     'h4 { margin-top: 24px; } ',
   ],
 })

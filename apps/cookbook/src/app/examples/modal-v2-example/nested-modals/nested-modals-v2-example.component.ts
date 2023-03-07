@@ -3,7 +3,7 @@ import { ModalV2Component } from '@kirbydesign/designsystem/modal/v2';
 import { KirbyAnimation } from '@kirbydesign/designsystem';
 import { PlatformService } from '@kirbydesign/designsystem';
 
-export const nestedModalsExampleTemplateHTML = `<kirby-modal-experimental
+export const nestedModalsExampleTemplateHTML = `<kirby-modal-v2
   [open]="open"
   (willDismiss)="close()"
 >  
@@ -14,7 +14,7 @@ export const nestedModalsExampleTemplateHTML = `<kirby-modal-experimental
       Lorem ipsum dolor sit amet...
     </p>
 
-    <kirby-modal-experimental
+    <kirby-modal-v2
       [open]="openNestedModal"
       [title]="'Nested Modal'"
       (willDismiss)="openNestedModal = false"
@@ -22,9 +22,9 @@ export const nestedModalsExampleTemplateHTML = `<kirby-modal-experimental
       <p>
         Lorem ipsum...
       </p>
-    </kirby-modal-experimental>
+    </kirby-modal-v2>
 
-    <kirby-modal-experimental
+    <kirby-modal-v2
     [flavor]="nestedDrawerFlavor"
     [open]="openNestedDrawer"
     [title]="'Nested Drawer'"
@@ -35,8 +35,8 @@ export const nestedModalsExampleTemplateHTML = `<kirby-modal-experimental
     <p>
       Lorem ipsum...
     </p>
-  </kirby-modal-experimental>
-</kirby-modal-experimental>
+  </kirby-modal-v2>
+</kirby-modal-v2>
 
 <button kirby-button (click)="openModal()">Open Modal</button>
 `;

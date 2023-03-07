@@ -1,20 +1,20 @@
 import { Component, Input } from '@angular/core';
 import { ModalV2Controller } from '@kirbydesign/designsystem/modal/v2';
 
-export const showModalCodeSnippet = `constructor(private modalController: ModalExperimentalController) {}
+export const showModalCodeSnippet = `constructor(private modalController: ModalV2Controller) {}
 
 showModal() {
-  const config: ModalExperimentalConfig = {
+  const config: ModalV2Config = {
     flavor: 'modal',
     component: YourEmbeddedModalComponent,
   };
   this.modalController.showModal(config);
 }`;
 
-export const observableCodeSnippet = `constructor(private modalController: ModalExperimentalController) {}
+export const observableCodeSnippet = `constructor(private modalController: ModalV2Controller) {}
 
 showModal() {
-  const config: ModalExperimentalConfig = {
+  const config: ModalV2Config = {
     flavor: 'modal',
     component: YourEmbeddedModalComponent,
   };
@@ -44,7 +44,7 @@ showModal() {
 
   // Inside the embedded component
   
-  constructor(private modalController: ModalExperimentalController) {}
+  constructor(private modalController: ModalV2Controller) {}
 
   close() {
     this.modalController.closeModal({

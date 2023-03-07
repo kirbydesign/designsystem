@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { PlatformService } from '@kirbydesign/designsystem';
 
-export const drawerExampleTemplateHTML = `<kirby-modal-experimental
+export const drawerExampleTemplateHTML = `<kirby-modal-v2
   [flavor]="'drawer'"
   [open]="open"
   [title]="'Drawer'"
@@ -12,14 +12,14 @@ export const drawerExampleTemplateHTML = `<kirby-modal-experimental
     <p>
       Lorem ipsum dolor sit amet...
     </p>
-</kirby-modal-experimental>
+</kirby-modal-v2>
 
 <button kirby-button (click)="openDrawer()">Open Drawer</button>
 `;
 
 export const drawerExampleTemplateTS = `openDrawer() { this.open = true; }`;
 
-export const drawerToModalExampleTemplateHTML = `<kirby-modal-experimental
+export const drawerToModalExampleTemplateHTML = `<kirby-modal-v2
   [flavor]="isMobile ? 'drawer' : 'modal'"
   [open]="open"
   [title]="'Drawer'"
@@ -30,7 +30,7 @@ export const drawerToModalExampleTemplateHTML = `<kirby-modal-experimental
     <p>
       Lorem ipsum dolor sit amet...
     </p>
-</kirby-modal-experimental>
+</kirby-modal-v2>
 `;
 
 @Component({

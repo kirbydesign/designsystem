@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { ModalV2Component } from '@kirbydesign/designsystem/modal/v2';
 import { KirbyAnimation } from '@kirbydesign/designsystem';
 
-export const fullscreenModalExampleTemplateHTML = `<kirby-modal-experimental
+export const fullscreenModalExampleTemplateHTML = `<kirby-modal-v2
   [open]="open"
   (willDismiss)="close()"
 >  
@@ -19,7 +19,7 @@ export const fullscreenModalExampleTemplateHTML = `<kirby-modal-experimental
       Lorem ipsum dolor sit amet...
     </p>
   </div>
-</kirby-modal-experimental>
+</kirby-modal-v2>
 
 <button kirby-button (click)="openModal()">Open Modal</button>
 `;
@@ -33,13 +33,13 @@ export const headerStartSlotExampleTemplate = `<kirby-page-progress header-start
 </kirby-page-progress>
 `;
 
-export const footerSlotExampleTemplate = `<kirby-modal-footer-experimental footer>
+export const footerSlotExampleTemplate = `<kirby-modal-v2-footer footer>
   <button kirby-button attentionLevel="3">
     To top
     <kirby-icon name="arrow-up"></kirby-icon>
   </button>
   <button kirby-button>Close</button>
-</kirby-modal-footer-experimental>
+</kirby-modal-v2-footer>
 `;
 @Component({
   templateUrl: './fullscreen-v2-example.component.html',

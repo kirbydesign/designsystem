@@ -37,7 +37,7 @@
 
   <button kirby-button (click)="openModal()">Open Modal</button>
 
-  <kirby-modal-experimental
+  <kirby-modal-v2
     [open]="open"
     [title]="'Modal title'"
     [hasCollapsibleTitle]="collapseTitle"
@@ -89,7 +89,7 @@
       </p>
     </div>
 
-    <kirby-modal-experimental
+    <kirby-modal-v2
       [open]="openNestedModal"
       [title]="'Nested Modal'"
       (willDismiss)="openNestedModal = false"
@@ -101,9 +101,9 @@
         elit. Totam fugit blanditiis voluptate voluptas error? Culpa magni eaque atque quaerat
         quidem quibusdam ratione suscipit. Quam, modi. Error magnam velit doloremque aspernatur.
       </p>
-    </kirby-modal-experimental>
+    </kirby-modal-v2>
 
-    <kirby-modal-experimental
+    <kirby-modal-v2
       [flavor]="nestedDrawerFlavor"
       [open]="openNestedDrawer"
       [title]="'Nested Drawer'"
@@ -117,10 +117,10 @@
         laborum, nihil a necessitatibus hic. Lorem ipsum dolor sit amet consectetur adipisicing
         elit.
       </p>
-    </kirby-modal-experimental>
+    </kirby-modal-v2>
 
     <!-- FOOTER SLOT -->
-    <kirby-modal-footer-experimental
+    <kirby-modal-v2-footer
       *ngIf="showFooter"
       [type]="isInlineFooter ? 'inline' : 'fixed'"
       themeColor="white"
@@ -131,6 +131,6 @@
         <kirby-icon name="arrow-up"></kirby-icon>
       </button>
       <button kirby-button (click)="closeModal()">Close</button>
-    </kirby-modal-footer-experimental>
-  </kirby-modal-experimental>
+    </kirby-modal-v2-footer>
+  </kirby-modal-v2>
 </div>

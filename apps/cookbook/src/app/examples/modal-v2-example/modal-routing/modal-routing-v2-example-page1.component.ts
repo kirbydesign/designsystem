@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
   template: `
-    <kirby-modal-wrapper-experimental [title]="'Modal Page 1/2'" [hasCollapsibleTitle]="false">
+    <kirby-modal-v2-wrapper [title]="'Modal Page 1/2'" [hasCollapsibleTitle]="false">
       <h4>The standard Lorem Ipsum passage, used since the 1500s</h4>
       <span>
         QueryParams:
@@ -17,16 +17,16 @@ import { ActivatedRoute } from '@angular/router';
         cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
       </p>
 
-      <kirby-modal-footer-experimental themeColor="white" class="footer" footer>
+      <kirby-modal-v2-footer themeColor="white" class="footer" footer>
         <button kirby-button class="nav" routerLink="../page2">
           Next
           <kirby-icon name="arrow-more"></kirby-icon>
         </button>
-      </kirby-modal-footer-experimental>
-    </kirby-modal-wrapper-experimental>
+      </kirby-modal-v2-footer>
+    </kirby-modal-v2-wrapper>
   `,
   styles: [
-    'kirby-modal-footer-experimental { --kirby-modal-footer-justify-content: flex-end; }',
+    'kirby-modal-v2-footer { --kirby-modal-footer-justify-content: flex-end; }',
     'h4 { margin-top: 24px; } ',
   ],
 })
