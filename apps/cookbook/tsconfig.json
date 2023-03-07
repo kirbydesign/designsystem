@@ -14,6 +14,8 @@
       "@kirbydesign/designsystem/helpers": ["libs/designsystem/helpers/index.ts"],
       "@kirbydesign/designsystem/helpers/scss": ["libs/designsystem/helpers/scss/index.ts"],
       "@kirbydesign/designsystem/shared": ["libs/designsystem/shared/index.ts"],
+      "@kirbydesign/designsystem/shared/floating": ["libs/designsystem/shared/floating/index.ts"],
+      "@kirbydesign/designsystem/shared/portal": ["libs/designsystem/shared/portal/index.ts"],
       "@kirbydesign/designsystem/types": ["libs/designsystem/types/index.ts"],
       "@kirbydesign/designsystem/kirby-ionic-module": [
         "libs/designsystem/kirby-ionic-module/index.ts"

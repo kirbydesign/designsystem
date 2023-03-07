@@ -12,6 +12,9 @@ import {
  * This is designed to be beneficial when there's issues with the stacking context.
  *
  * Extends CdkPortalOutlet to gain functionality for attaching/detaching the host element, and for proper cleanup.
+ *
+ * Using portal directive to reposition HTML elements, might break angular functionality and/or styling, so use
+ * with care.
  */
 @Directive({
   selector: '[kirbyPortal]',
