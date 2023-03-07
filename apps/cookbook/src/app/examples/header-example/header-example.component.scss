@@ -1,5 +1,6 @@
 @use 'sass:map';
 @use '@kirbydesign/core/src/scss/utils';
+@use '../examples.shared';
 
 .header-example-container {
   margin: utils.size('l') auto;
