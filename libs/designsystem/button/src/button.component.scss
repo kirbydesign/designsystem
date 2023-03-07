@@ -62,8 +62,6 @@ $button-width: (
   --kirby-button-background-color: transparent;
   --kirby-button-color: #{utils.get-color('black')};
 
-  box-shadow: none;
-
   @include interaction-state.apply-hover;
   @include interaction-state.apply-active('s');
 }
@@ -89,11 +87,8 @@ $button-width: (
 }
 
 @mixin button-attentionlevel3 {
-  --kirby-button-background-color: var(
-    --kirby-interactive-element-background-color,
-    #{utils.get-color('white')}
-  );
-  --kirby-button-color: var(--kirby-interactive-element-color, #{utils.get-color('black')});
+  --kirby-button-background-color: var(--kirby-inputs-background-color);
+  --kirby-button-color: var(--kirby-inputs-color);
 
   @include interaction-state.apply-hover('xs');
   @include interaction-state.apply-active('s');
@@ -115,12 +110,15 @@ $button-width: (
     align-items: inherit;
     justify-content: inherit;
     padding-inline: var(--kirby-button-padding-left) var(--kirby-button-padding-right);
+
+    &.attention-level3 {
+      box-shadow: var(--kirby-inputs-elevation);
+    }
   }
 
   font-family: var(--kirby-font-family);
   background-color: var(--kirby-button-background-color, initial);
   color: var(--kirby-button-color, inherit);
-  box-shadow: var(--kirby-interactive-elevation);
   border-radius: utils.$border-radius-round;
   box-sizing: border-box; // Ensure border is not added to button height
   display: inline-flex;
@@ -168,6 +166,12 @@ $button-width: (
     width: utils.size('xl');
     padding: 0;
     min-width: unset;
+
+    .content-layer {
+      @include utils.slotted(':not(kirby-icon)') {
+        display: none;
+      }
+    }
   }
 
   &.sm {
@@ -244,7 +248,8 @@ $button-width: (
   margin-inline-start: utils.size('s');
 }
 
-:host-context(kirby-alert).ok-btn {
+:host-context(kirby-alert).ok-btn,
+:host-context(kirby-alert-experimental).ok-btn {
   --kirby-button-background-color: #{utils.get-color('success')};
   --kirby-button-color: #{utils.get-color('success-contrast')};
 }

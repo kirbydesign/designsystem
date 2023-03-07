@@ -75,7 +75,10 @@
       "@kirbydesign/designsystem/reorder-list": ["libs/designsystem/reorder-list/index.ts"],
       "@kirbydesign/designsystem/toast": ["libs/designsystem/toast/index.ts"],
       "@kirbydesign/designsystem/grid": ["libs/designsystem/grid/index.ts"],
-      "@kirbydesign/designsystem/header-actions": ["libs/designsystem/header-actions/index.ts"]
+      "@kirbydesign/designsystem/header-actions": ["libs/designsystem/header-actions/index.ts"],
+      "@kirbydesign/designsystem/alert-experimental": [
+        "libs/designsystem/alert-experimental/index.ts"
+      ]
     },
     "target": "es2020"
   },

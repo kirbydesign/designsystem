@@ -1,6 +1,7 @@
 import { CommonModule, DOCUMENT } from '@angular/common';
 import {
   AfterContentInit,
+  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -23,7 +24,7 @@ import { ActionSheetComponent } from '@kirbydesign/designsystem/modal';
   styleUrls: ['./fab-sheet.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FabSheetComponent implements AfterContentInit {
+export class FabSheetComponent implements AfterContentInit, AfterViewInit {
   @Input() disabled: boolean = false;
   @Input() horizontalAlignment: 'left' | 'center' | 'right' = 'right';
 
@@ -51,6 +52,10 @@ export class FabSheetComponent implements AfterContentInit {
     if (this.actionSheet) {
       this.actionSheet.hideCancel = true;
     }
+  }
+
+  ngAfterViewInit(): void {
+    this.renderer.removeClass(this.document.body, 'backdrop-no-scroll');
   }
 
   hideActions() {

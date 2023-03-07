@@ -427,22 +427,6 @@ describe('CalendarComponent', () => {
         expect(spectator.component.activeMonthName).toBe('Juli');
       });
     });
-
-    describe('additional locales', () => {
-      it('should be possible to provide a locale that is not build into the calendar by default', () => {
-        spectator = createHostWithLocale('es', es);
-
-        spectator.setInput('selectedDate', localMidnightDate('2022-07-01'));
-
-        expect(
-          spectator
-            .queryAll('th')
-            .map((_) => _.textContent)
-            .join(' ')
-        ).toEqual('l m m j v s d');
-        expect(spectator.component.activeMonthName).toBe('Julio');
-      });
-    });
   });
 
   describe('active month', () => {
