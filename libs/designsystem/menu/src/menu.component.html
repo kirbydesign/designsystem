@@ -1,18 +1,21 @@
-<ng-content select="button[kirby-button]"></ng-content>
-<ng-container *ngIf="!userProvidedButton">
-  <button
-    kirby-button
-    [size]="buttonSize"
-    [disabled]="isDisabled"
-    type="button"
-    [attentionLevel]="'3'"
-  >
-    <kirby-icon [name]="'more'" [themeColor]="themeColor" [size]="iconSize"></kirby-icon>
-  </button>
-</ng-container>
+<div class="button-container" #buttonContainer>
+  <ng-content select="button[kirby-button]"></ng-content>
+  <ng-container *ngIf="!userProvidedButton">
+    <button
+      kirby-button
+      [size]="buttonSize"
+      [disabled]="isDisabled"
+      type="button"
+      [attentionLevel]="'3'"
+      #defaultButton
+    >
+      <kirby-icon [name]="'more'" [themeColor]="themeColor" [size]="iconSize"></kirby-icon>
+    </button>
+  </ng-container>
+</div>
 <kirby-card
   kirbyFloating
-  [reference]="buttonElement"
+  [reference]="buttonContainerElement"
   [isDisabled]="isDisabled"
   [triggers]="triggers"
   [placement]="placement"
