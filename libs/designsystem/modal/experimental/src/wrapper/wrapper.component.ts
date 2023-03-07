@@ -1,5 +1,6 @@
 import { Component, ElementRef, Input, OnInit } from '@angular/core';
 
+type Flavor = 'modal' | 'drawer';
 @Component({
   selector: 'kirby-modal-wrapper-experimental',
   templateUrl: './wrapper.component.html',
@@ -10,6 +11,7 @@ export class ModalWrapperExperimentalComponent implements OnInit {
 
   private ionModalElement?: HTMLIonModalElement;
 
+  @Input() flavor: Flavor = 'modal';
   @Input() title = '';
   @Input() hasCollapsibleTitle = true;
   @Input() scrollDisabled = false;
