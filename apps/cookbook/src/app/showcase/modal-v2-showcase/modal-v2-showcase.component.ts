@@ -257,7 +257,7 @@ export class ModalV2ShowcaseComponent {
     {
       name: 'showModal',
       description:
-        'Generates and presents a modal. It takes a required argument of "ModalExperimentalConfig".',
+        'Generates and presents a modal. It takes a required argument of "ModalV2Config".',
       signature: `{
         onWillDismiss: Observable<OverlayEventDetail>;
         onDidDismiss: Observable<OverlayEventDetail>;

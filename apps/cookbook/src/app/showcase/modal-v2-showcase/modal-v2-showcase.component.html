@@ -1,5 +1,3 @@
-<kirby-flag themeColor="warning">Experimental component - subject to change</kirby-flag>
-
 <p>
   A Modal is a dialog that appears on top of the app's content, and must be dismissed by the app
   before interaction can resume. It is useful as a select component when there are a lot of options
@@ -225,11 +223,11 @@
   <code>footer</code>
   slot places content in the bottom of the modal underneath the scrollable container, so it will
   always stick to the bottom. We recommend using the
-  <code>kirby-modal-footer-experimental</code>
+  <code>kirby-modal-v2-footer</code>
   component, which is documented right
   <a href="#" (click)="scrollTo(modalFooter)">here</a>
   . In the example above the
-  <code>kirby-modal-footer-experimental</code>
+  <code>kirby-modal-v2-footer</code>
   component is slotted in like this:
 </p>
 
@@ -252,7 +250,7 @@
 
 <p>
   The
-  <code>kirby-modal-footer-experimental</code>
+  <code>kirby-modal-v2-footer</code>
   component only accepts a default slot as shown below:
 </p>
 
@@ -268,9 +266,9 @@
 
 <p>
   Modals and Drawers can also be opened programmatically by using the
-  <code>ModalExperimentalController</code>
+  <code>ModalV2Controller</code>
   . To show the modal, create a
-  <code>ModalExperimentalConfig</code>
+  <code>ModalV2Config</code>
   and pass it to the
   <code>modalController.showModal</code>
   method:
@@ -278,7 +276,7 @@
 
 <p>
   We recommend wrapping your component in the
-  <code>kirby-modal-wrapper-experimental</code>
+  <code>kirby-modal-v2-wrapper</code>
   component to get the default Kirby styling. It accepts the same 4 slots as described above -
   <code>header-start</code>
   ,
@@ -345,9 +343,9 @@
 <p>
   Instead of providing the modal with a component, you can configure your route to be opened in a
   modal. This is done by using a secondary outlet named
-  <code>modal-experimental</code>
+  <code>modal-v2</code>
   . The url for these kind of routes will look like this
-  <code>/(modal-experimental:some-route)</code>
+  <code>/(modal-v2:some-route)</code>
   . This means that you can do flows inside of modals just as "normal" pages, and makes it possible
   to deeplink to specific pages inside of the modal. "Modal" routes will automatically open up a
   modal, if none is already opened.
@@ -356,7 +354,7 @@
 <p>
   The code snippet below shows the route configuration for this page. Note that this page also
   contains a named router outlet called
-  <code>modal-experimental</code>
+  <code>modal-v2</code>
   .
 </p>
 
@@ -364,9 +362,9 @@
   <em>
     <strong>*Please note:</strong>
     The path that has the
-    <code>modal-experimental</code>
+    <code>modal-v2</code>
     outlet must use the
-    <code>ModalRoutingExperimentalComponent</code>
+    <code>ModalV2RoutingComponent</code>
     , which can be imported from Kirby.
   </em>
 </p>
