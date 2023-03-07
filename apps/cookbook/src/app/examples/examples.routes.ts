@@ -78,6 +78,7 @@ import { DropdownExampleComponent } from './dropdown-example/dropdown-example.co
 import { DataTableExampleComponent } from './data-table-example/data-table-example.component';
 import { HeaderExampleComponent } from './header-example/header-example.component';
 import { NestedModalsV2ExampleComponent } from './modal-v2-example/nested-modals/nested-modals-v2-example.component';
+import { PageWithHeaderExampleComponent } from './page-example/page-with-header-example.component';
 
 VirtualScrollListExampleComponent;
 export const routes: Routes = [
@@ -168,6 +169,10 @@ export const routes: Routes = [
           {
             path: 'content-width',
             component: PageContentWidthExampleComponent,
+          },
+          {
+            path: 'header',
+            component: PageWithHeaderExampleComponent,
           },
         ],
       },
