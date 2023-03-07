@@ -64,9 +64,7 @@
       "@kirbydesign/designsystem/dropdown": ["libs/designsystem/dropdown/index.ts"],
       "@kirbydesign/designsystem/page": ["libs/designsystem/page/index.ts"],
       "@kirbydesign/designsystem/modal": ["libs/designsystem/modal/index.ts"],
-      "@kirbydesign/designsystem/modal/experimental": [
-        "libs/designsystem/modal/experimental/index.ts"
-      ],
+      "@kirbydesign/designsystem/modal/v2": ["libs/designsystem/modal/v2/index.ts"],
       "@kirbydesign/designsystem/kirby-app": ["libs/designsystem/kirby-app/index.ts"],
       "@kirbydesign/designsystem/chart": ["libs/designsystem/chart/index.ts"],
       "@kirbydesign/designsystem/helpers/scss": ["libs/designsystem/helpers/scss/index.ts"],
@@ -74,7 +72,10 @@
       "@kirbydesign/designsystem/data-table": ["libs/designsystem/data-table/index.ts"],
       "@kirbydesign/designsystem/reorder-list": ["libs/designsystem/reorder-list/index.ts"],
       "@kirbydesign/designsystem/toast": ["libs/designsystem/toast/index.ts"],
-      "@kirbydesign/designsystem/grid": ["libs/designsystem/grid/index.ts"], 
+      "@kirbydesign/designsystem/grid": ["libs/designsystem/grid/index.ts"],
+      "@kirbydesign/designsystem/alert-experimental": [
+        "libs/designsystem/alert-experimental/index.ts"
+      ]
     },
     "target": "es2020"
   },

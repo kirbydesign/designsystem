@@ -166,6 +166,12 @@ $button-width: (
     width: utils.size('xl');
     padding: 0;
     min-width: unset;
+
+    .content-layer {
+      @include utils.slotted(':not(kirby-icon)') {
+        display: none;
+      }
+    }
   }
 
   &.sm {
@@ -242,7 +248,8 @@ $button-width: (
   margin-inline-start: utils.size('s');
 }
 
-:host-context(kirby-alert).ok-btn {
+:host-context(kirby-alert).ok-btn,
+:host-context(kirby-alert-experimental).ok-btn {
   --kirby-button-background-color: #{utils.get-color('success')};
   --kirby-button-color: #{utils.get-color('success-contrast')};
 }
