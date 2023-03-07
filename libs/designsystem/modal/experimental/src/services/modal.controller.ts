@@ -3,7 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { from, map, Observable, switchMap, take, tap } from 'rxjs';
 import { OverlayEventDetail } from '@ionic/core/components';
 
-export type ModalFlavor = 'modal';
+export type ModalFlavor = 'modal' | 'drawer';
 type Size = 'xxs' | 'xs' | 'sm' | 'md' | 'lg';
 type SizeTemp = 'md';
 
@@ -15,6 +15,8 @@ export type ModalExperimentalConfig = {
   canDismiss?: boolean | (() => Promise<boolean>);
   backdropDismiss?: boolean;
   showBackdrop?: boolean;
+  breakpoints?: number[];
+  initialBreakpoint?: number;
   size?: SizeTemp;
   height?: string;
 };
@@ -44,6 +46,9 @@ export class ModalExperimentalController {
         canDismiss: config.canDismiss,
         backdropDismiss: config.backdropDismiss,
         showBackdrop: config.showBackdrop,
+        breakpoints: config.flavor === 'drawer' ? config.breakpoints : undefined,
+        initialBreakpoint: config.flavor === 'drawer' ? config.initialBreakpoint : undefined,
+        handle: false,
         cssClass: [
           'kirby-modal-experimental',
           config.size ? config.size : 'md',

@@ -14,7 +14,7 @@ import {
   fullscreenModalExampleTemplateHTML,
   fullscreenModalExampleTemplateTS,
   headerStartSlotExampleTemplate,
-} from '../../examples/modal-experimental-example/fullscreen/fullscreen-experimental-example.component';
+} from '../../examples/modal-experimental-example/modal/fullscreen/fullscreen-experimental-example.component';
 import { ApiDescriptionEvent } from '../../shared/api-description/api-description-events/api-description-events.component';
 import { ApiDescriptionProperty } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionMethod } from '../../shared/api-description/api-description-methods/api-description-methods.component';
@@ -23,6 +23,15 @@ import {
   routerConfigCodeSnippet,
   routerLinkCodeSnippet,
 } from '../../examples/modal-experimental-example/modal-routing/modal-routing-experimental-example.component';
+import {
+  drawerExampleTemplateHTML,
+  drawerExampleTemplateTS,
+  drawerToModalExampleTemplateHTML,
+} from '../../examples/modal-experimental-example/modal/drawer/drawer-experimental-example.component';
+import {
+  nestedModalsExampleTemplateHTML,
+  nestedModalsExampleTemplateTS,
+} from '../../examples/modal-experimental-example/nested-modals/nested-modals-experimental-example.component';
 
 @Component({
   selector: 'cookbook-modal-experimental-showcase',
@@ -37,6 +46,11 @@ export class ModalExperimentalShowcaseComponent {
 
   fullscreenModalExampleTemplateHTML: string = fullscreenModalExampleTemplateHTML;
   fullscreenModalExampleTemplateTS: string = fullscreenModalExampleTemplateTS;
+  drawerExampleTemplateHTML: string = drawerExampleTemplateHTML;
+  drawerExampleTemplateTS: string = drawerExampleTemplateTS;
+  drawerToModalExampleTemplateHTML: string = drawerToModalExampleTemplateHTML;
+  nestedModalsExampleTemplateHTML: string = nestedModalsExampleTemplateHTML;
+  nestedModalsExampleTemplateTS: string = nestedModalsExampleTemplateTS;
   headerStartSlotExampleTemplate: string = headerStartSlotExampleTemplate;
   footerSlotExampleTemplate: string = footerSlotExampleTemplate;
   showModalCodeSnippet: string = showModalCodeSnippet;
@@ -46,6 +60,12 @@ export class ModalExperimentalShowcaseComponent {
   programmaticRoutingCodeSnippet: string = programmaticRoutingCodeSnippet;
 
   componentProperties: ApiDescriptionProperty[] = [
+    {
+      name: 'flavor',
+      description: `Determines whether to show a modal or a drawer.`,
+      defaultValue: 'modal',
+      type: ['modal | drawer'],
+    },
     {
       name: 'open',
       description: `Determines if the modal should be shown or not.`,
@@ -81,6 +101,20 @@ export class ModalExperimentalShowcaseComponent {
       description: 'Disable scrolling in the modal.',
       type: ['boolean'],
       defaultValue: 'false',
+    },
+    {
+      name: 'breakpoints',
+      description:
+        'The breakpoints to use when creating a drawer. Each value in the array must be a decimal between 0 and 1, where 0 indicates the drawer is fully closed and 1 indicates the drawer is fully open. One of the values in this array must be the value of the initialBreakpoint property. Fx: [0, .25, .5, 1].',
+      type: ['number[] | undefined'],
+      defaultValue: 'undefined',
+    },
+    {
+      name: 'initialBreakpoint',
+      description:
+        'A decimal value between 0 and 1 that indicates the initial point the drawer will open at when creating a drawer. This value must also be listed in the breakpoints array.',
+      type: ['number | undefined'],
+      defaultValue: 'undefined',
     },
   ];
 
@@ -135,11 +169,9 @@ export class ModalExperimentalShowcaseComponent {
   controllerProperties: ApiDescriptionProperty[] = [
     {
       name: 'flavor',
-      description: `(Optional) The flavor of the modal. 
-      
-      Modals with \`modal\` flavor have a close button placed in the top right corner and are full-screen on small screens.`,
+      description: `Determines whether to show a modal or a drawer.`,
       defaultValue: 'modal',
-      type: ['modal'],
+      type: ['modal | drawer'],
     },
     {
       name: 'component',
@@ -180,9 +212,29 @@ export class ModalExperimentalShowcaseComponent {
       defaultValue: 'true',
       type: ['boolean'],
     },
+    {
+      name: 'breakpoints',
+      description:
+        'The breakpoints to use when creating a drawer. Each value in the array must be a decimal between 0 and 1, where 0 indicates the drawer is fully closed and 1 indicates the drawer is fully open. One of the values in this array must be the value of the initialBreakpoint property. Fx: [0, .25, .5, 1].',
+      type: ['number[] | undefined'],
+      defaultValue: 'undefined',
+    },
+    {
+      name: 'initialBreakpoint',
+      description:
+        'A decimal value between 0 and 1 that indicates the initial point the drawer will open at when creating a drawer. This value must also be listed in the breakpoints array.',
+      type: ['number | undefined'],
+      defaultValue: 'undefined',
+    },
   ];
 
   wrapperComponentProperties: ApiDescriptionProperty[] = [
+    {
+      name: 'flavor',
+      description: `Determines whether to show a modal or a drawer.`,
+      defaultValue: 'modal',
+      type: ['modal | drawer'],
+    },
     {
       name: 'title',
       description: `The title of the modal`,
