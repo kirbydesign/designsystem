@@ -26,17 +26,14 @@ export type TriggerEvent = 'hover' | 'click' | 'focus';
 
 export enum FloatingOffset {
   none = 0,
-  small = 5,
-  medium = 10,
-  large = 15,
+  small = 4,
+  medium = 8,
 }
 
 interface EventMethods {
   event: string;
   method: () => void;
 }
-
-type EventListener = () => void;
 
 /**
  * @summary FloatingDirective is a utility that lets you declarative anchor "popup" containers to another element.
@@ -45,8 +42,6 @@ type EventListener = () => void;
  *
  * Uses PortalDirective to enable functionality for portaling the floated content. This should be used when needed
  * and not as the default option.
- *
- * @status In development
  */
 @Directive({
   selector: '[kirbyFloating]',
@@ -347,9 +342,9 @@ export class FloatingDirective implements OnInit, OnDestroy {
   }
 
   private tearDownEventHandling(): void {
-    this.eventListeners.forEach((eventListener) => {
+    this.eventListeners.forEach((eventListener: EventListener) => {
       if (eventListener != null) {
-        eventListener();
+        eventListener(null);
       }
     });
     this.eventListeners = [];
