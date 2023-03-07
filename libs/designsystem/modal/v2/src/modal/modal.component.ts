@@ -8,11 +8,11 @@ type Size = 'xxs' | 'xs' | 'sm' | 'md' | 'lg';
 type SizeTemp = 'md';
 
 @Component({
-  selector: 'kirby-modal-experimental',
+  selector: 'kirby-modal-v2',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss'],
 })
-export class ModalExperimentalComponent {
+export class ModalV2Component {
   @ViewChild(IonModal) modal: IonModal;
   @ViewChild(IonModal, { static: true, read: ElementRef })
   modalElement: ElementRef<HTMLElement>;

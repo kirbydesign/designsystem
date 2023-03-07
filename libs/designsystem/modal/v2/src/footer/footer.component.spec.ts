@@ -8,7 +8,7 @@ import { DesignTokenHelper } from '@kirbydesign/core';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 
 import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
-import { ModalFooterExperimentalComponent } from './footer.component';
+import { ModalV2FooterComponent } from './footer.component';
 
 const size = DesignTokenHelper.size;
 
@@ -22,27 +22,26 @@ const SAFE_AREA_BOTTOM_PX = `${SAFE_AREA_BOTTOM}px`;
 const TRANSFORM_PUSHED_BY_KEYBOARD = `matrix(1, 0, 0, 1, 0, -${KEYBOARD_HEIGHT})`;
 
 @Component({
-  template:
-    '<kirby-modal-footer-experimental [snapToKeyboard]="snapToKeyboard"></kirby-modal-footer-experimental>',
+  template: '<kirby-modal-v2-footer [snapToKeyboard]="snapToKeyboard"></kirby-modal-v2-footer>',
 })
 class TestHostComponent {
   snapToKeyboard = false;
 }
 
 describe('ModalFooterComponent', () => {
-  let spectator: SpectatorHost<ModalFooterExperimentalComponent, TestHostComponent>;
+  let spectator: SpectatorHost<ModalV2FooterComponent, TestHostComponent>;
   let modalFooterElement: HTMLElement;
   let ionFooterElement: HTMLIonFooterElement;
 
   const createHost = createHostFactory({
-    component: ModalFooterExperimentalComponent,
+    component: ModalV2FooterComponent,
     host: TestHostComponent,
     declarations: [MockComponents(IonFooter), ThemeColorDirective],
   });
 
   describe('by default', () => {
     beforeEach(() => {
-      spectator = createHost(`<kirby-modal-footer-experimental></kirby-modal-footer-experimental>`);
+      spectator = createHost(`<kirby-modal-v2-footer></kirby-modal-v2-footer>`);
     });
 
     it('should create', () => {
@@ -63,7 +62,7 @@ describe('ModalFooterComponent', () => {
 
   describe('Set bottom padding', () => {
     beforeEach(() => {
-      spectator = createHost(`<kirby-modal-footer-experimental></kirby-modal-footer-experimental>`);
+      spectator = createHost(`<kirby-modal-v2-footer></kirby-modal-v2-footer>`);
       modalFooterElement = spectator.element;
       ionFooterElement = spectator.query('ion-footer');
     });
@@ -106,7 +105,7 @@ describe('ModalFooterComponent', () => {
   describe('Snap to keyboard', () => {
     beforeEach(() => {
       spectator = createHost(
-        `<kirby-modal-footer-experimental [snapToKeyboard]="snapToKeyboard"></kirby-modal-footer-experimental>`
+        `<kirby-modal-v2-footer [snapToKeyboard]="snapToKeyboard"></kirby-modal-v2-footer>`
       );
       modalFooterElement = spectator.element;
       ionFooterElement = spectator.query('ion-footer');
@@ -147,9 +146,7 @@ describe('ModalFooterComponent', () => {
 
   describe('when inline type is set', () => {
     beforeEach(() => {
-      spectator = createHost(
-        `<kirby-modal-footer-experimental type="inline"></kirby-modal-footer-experimental>`
-      );
+      spectator = createHost(`<kirby-modal-v2-footer type="inline"></kirby-modal-v2-footer>`);
     });
 
     it('should have a transparent background color', () => {

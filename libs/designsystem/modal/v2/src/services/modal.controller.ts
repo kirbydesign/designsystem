@@ -7,7 +7,7 @@ export type ModalFlavor = 'modal' | 'drawer';
 type Size = 'xxs' | 'xs' | 'sm' | 'md' | 'lg';
 type SizeTemp = 'md';
 
-export type ModalExperimentalConfig = {
+export type ModalV2Config = {
   flavor?: ModalFlavor;
   component: any;
   componentProps?: { [key: string]: any };
@@ -26,12 +26,12 @@ type ModalDismissObservables = {
   onDidDismiss: Observable<OverlayEventDetail>;
 };
 @Injectable()
-export class ModalExperimentalController {
+export class ModalV2Controller {
   private isModalOpening = false;
 
   constructor(private ionicModalController: ModalController) {}
 
-  public showModal(config: ModalExperimentalConfig): ModalDismissObservables {
+  public showModal(config: ModalV2Config): ModalDismissObservables {
     if (this.isModalOpening) return;
 
     let customCssClasses: string[] = [];
@@ -49,11 +49,7 @@ export class ModalExperimentalController {
         breakpoints: config.flavor === 'drawer' ? config.breakpoints : undefined,
         initialBreakpoint: config.flavor === 'drawer' ? config.initialBreakpoint : undefined,
         handle: false,
-        cssClass: [
-          'kirby-modal-experimental',
-          config.size ? config.size : 'md',
-          ...customCssClasses,
-        ],
+        cssClass: ['kirby-modal-v2', config.size ? config.size : 'md', ...customCssClasses],
       })
     );
 

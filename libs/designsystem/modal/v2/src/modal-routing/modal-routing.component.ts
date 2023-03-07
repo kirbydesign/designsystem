@@ -3,11 +3,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IonModal } from '@ionic/angular';
 
 @Component({
-  selector: 'kirby-modal-routing-wrapper',
+  selector: 'kirby-modal-v2-routing-wrapper',
   templateUrl: './modal-routing.component.html',
   styleUrls: ['./modal-routing.component.scss'],
 })
-export class ModalRoutingExperimentalComponent implements OnDestroy {
+export class ModalV2RoutingComponent implements OnDestroy {
   constructor(private router: Router, private route: ActivatedRoute) {}
 
   @ViewChild(IonModal) modal: IonModal;
@@ -16,7 +16,7 @@ export class ModalRoutingExperimentalComponent implements OnDestroy {
 
   closeModal() {
     this.isOpen = false;
-    this.router.navigate([{ outlets: { 'modal-experimental': null } }], {
+    this.router.navigate([{ outlets: { 'modal-v2': null } }], {
       relativeTo: this.route.parent,
     });
   }

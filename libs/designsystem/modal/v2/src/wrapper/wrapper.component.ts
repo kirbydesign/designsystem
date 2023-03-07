@@ -2,11 +2,11 @@ import { Component, ElementRef, Input, OnInit } from '@angular/core';
 
 type Flavor = 'modal' | 'drawer';
 @Component({
-  selector: 'kirby-modal-wrapper-experimental',
+  selector: 'kirby-modal-v2-wrapper',
   templateUrl: './wrapper.component.html',
   styleUrls: ['./wrapper.component.scss'],
 })
-export class ModalWrapperExperimentalComponent implements OnInit {
+export class ModalV2WrapperComponent implements OnInit {
   constructor(private elementRef: ElementRef<HTMLElement>) {}
 
   private ionModalElement?: HTMLIonModalElement;

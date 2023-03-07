@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ModalWrapperExperimentalComponent } from './wrapper.component';
+import { ModalV2WrapperComponent } from './wrapper.component';
 
 describe('WrapperComponent', () => {
-  let component: ModalWrapperExperimentalComponent;
-  let fixture: ComponentFixture<ModalWrapperExperimentalComponent>;
+  let component: ModalV2WrapperComponent;
+  let fixture: ComponentFixture<ModalV2WrapperComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ModalWrapperExperimentalComponent],
+      declarations: [ModalV2WrapperComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ModalWrapperExperimentalComponent);
+    fixture = TestBed.createComponent(ModalV2WrapperComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
