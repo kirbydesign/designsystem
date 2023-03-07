@@ -1,5 +1,5 @@
-<div class="fullscreen-example">
-  <h1>Fullscreen modal</h1>
+<div class="nested-example">
+  <h1>Nested Modals</h1>
 
   <div class="config">
     <h2>Config</h2>
@@ -42,26 +42,12 @@
     [title]="'Modal title'"
     [hasCollapsibleTitle]="collapseTitle"
     [scrollDisabled]="scrollDisabled"
-    [canDismiss]="canDismiss"
     (willDismiss)="closeModal()"
   >
-    <!-- HEADER SLOT -->
-    <kirby-page-progress *ngIf="showPageProgress" header-start>
-      <kirby-progress-circle themeColor="warning" value="25" size="sm" class="kirby-text-xsmall">
-        1/4
-      </kirby-progress-circle>
-    </kirby-page-progress>
-
-    <!-- DEFAULT SLOT -->
     <div>
-      <button kirby-button attentionLevel="3" (click)="scrollToBottom()">
-        Scroll to bottom
-        <kirby-icon name="arrow-down"></kirby-icon>
-      </button>
+      <button kirby-button (click)="openNestedModal = true">Open nested modal</button>
+      <button kirby-button (click)="openNestedDrawer = true">Open nested drawer</button>
 
-      <button kirby-button attentionLevel="3" (click)="toggleCanDismiss()">
-        Can dismiss: {{ canDismiss }}
-      </button>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nunc eros, fermentum sed
         ligula ac, placerat porta est. Cras luctus mi et aliquam semper. Sed urna leo, gravida
@@ -102,6 +88,36 @@
         Suspendisse malesuada justo quis ante sollicitudin blandit elementum sit amet dolor.
       </p>
     </div>
+
+    <kirby-modal-experimental
+      [open]="openNestedModal"
+      [title]="'Nested Modal'"
+      (willDismiss)="openNestedModal = false"
+    >
+      <p>
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatum, explicabo perferendis
+        illo iusto exercitationem aut totam quo praesentium ducimus natus ex odit ab sed repellendus
+        laborum, nihil a necessitatibus hic. Lorem ipsum dolor sit amet consectetur adipisicing
+        elit. Totam fugit blanditiis voluptate voluptas error? Culpa magni eaque atque quaerat
+        quidem quibusdam ratione suscipit. Quam, modi. Error magnam velit doloremque aspernatur.
+      </p>
+    </kirby-modal-experimental>
+
+    <kirby-modal-experimental
+      [flavor]="nestedDrawerFlavor"
+      [open]="openNestedDrawer"
+      [title]="'Nested Drawer'"
+      [breakpoints]="nestedDrawerBreakpoints"
+      [initialBreakpoint]="nestedDrawerInitialBreakpoint"
+      (willDismiss)="openNestedDrawer = false"
+    >
+      <p>
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatum, explicabo perferendis
+        illo iusto exercitationem aut totam quo praesentium ducimus natus ex odit ab sed repellendus
+        laborum, nihil a necessitatibus hic. Lorem ipsum dolor sit amet consectetur adipisicing
+        elit.
+      </p>
+    </kirby-modal-experimental>
 
     <!-- FOOTER SLOT -->
     <kirby-modal-footer-experimental
