@@ -262,9 +262,8 @@ $button-width: (
 // Temp fix for https://github.com/angular/angular-cli/issues/13854#issuecomment-470831308
 
 /* clean-css ignore:start */
-:host-context(ion-toolbar ion-buttons) {
+:host-context(ion-toolbar ion-buttons.legacy-actions) {
   font-size: utils.font-size('s');
-  margin: 0;
   height: utils.size('xl');
 
   &.icon-only {
@@ -274,7 +273,7 @@ $button-width: (
     &.attention-level1,
     &.attention-level2,
     &.attention-level3 {
-      @include button-no-decoration;
+      @include button-attentionlevel3;
     }
   }
 }
