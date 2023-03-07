@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { KirbyModule } from '@kirbydesign/designsystem';
-import { KirbyModalModule } from '@kirbydesign/designsystem/modal/experimental';
+import { KirbyModalModule } from '@kirbydesign/designsystem/modal/v2';
 
 import { ExamplesSharedModule } from '../examples.shared.module';
 

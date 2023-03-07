@@ -236,13 +236,13 @@ ion-loading.kirby-loading-overlay {
 }
 
 /*
- * Experimental modal.
+ * Modal V2.
  */
 $modal-max-height-desktop: 928px;
 $modal-max-width-desktop: 594px;
 $modal-border-radius: 32px;
 
-html.ios ion-modal.kirby-modal-experimental {
+html.ios ion-modal.kirby-modal-v2 {
   --background: var(--kirby-modal-background, #{utils.get-color('background-color')});
 
   &.modal-sheet {
@@ -271,28 +271,28 @@ html.ios ion-modal.kirby-modal-experimental {
     }
 
     &.xxs {
-      --width: #{map.get(utils.$experimental-modal-widths, 'xxs')};
-      --height: #{map.get(utils.$experimental-modal-heights, 'xxs')};
+      --width: #{map.get(utils.$modal-v2-widths, 'xxs')};
+      --height: #{map.get(utils.$modal-v2-heights, 'xxs')};
     }
 
     &.xs {
-      --width: #{map.get(utils.$experimental-modal-widths, 'xs')};
-      --height: #{map.get(utils.$experimental-modal-heights, 'xs')};
+      --width: #{map.get(utils.$modal-v2-widths, 'xs')};
+      --height: #{map.get(utils.$modal-v2-heights, 'xs')};
     }
 
     &.sm {
-      --width: #{map.get(utils.$experimental-modal-widths, 's')};
-      --height: #{map.get(utils.$experimental-modal-heights, 's')};
+      --width: #{map.get(utils.$modal-v2-widths, 's')};
+      --height: #{map.get(utils.$modal-v2-heights, 's')};
     }
 
     &.md {
-      --width: #{map.get(utils.$experimental-modal-widths, 'm')};
-      --height: #{map.get(utils.$experimental-modal-heights, 'm')};
+      --width: #{map.get(utils.$modal-v2-widths, 'm')};
+      --height: #{map.get(utils.$modal-v2-heights, 'm')};
     }
 
     &.lg {
-      --width: #{map.get(utils.$experimental-modal-widths, 'l')};
-      --height: #{map.get(utils.$experimental-modal-heights, 'l')};
+      --width: #{map.get(utils.$modal-v2-widths, 'l')};
+      --height: #{map.get(utils.$modal-v2-heights, 'l')};
     }
   }
 
