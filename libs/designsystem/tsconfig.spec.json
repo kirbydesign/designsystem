@@ -46,7 +46,7 @@
       "@kirbydesign/designsystem/dropdown": ["dropdown/index.ts"],
       "@kirbydesign/designsystem/page": ["page/index.ts"],
       "@kirbydesign/designsystem/modal": ["modal/index.ts"],
-      "@kirbydesign/designsystem/modal/experimental": ["modal/experimental/index.ts"],
+      "@kirbydesign/designsystem/modal/v2": ["modal/v2/index.ts"],
       "@kirbydesign/designsystem/kirby-app": ["kirby-app/index.ts"],
       "@kirbydesign/designsystem/chart": ["chart/index.ts"],
       "@kirbydesign/designsystem/helpers/scss": ["helpers/scss/index.ts"],

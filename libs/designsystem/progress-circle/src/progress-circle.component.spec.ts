@@ -7,6 +7,7 @@ import {
 } from '@ngneat/spectator';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
+import { DesignTokenHelper, ThemeColor } from '@kirbydesign/core';
 
 import { ProgressCircleComponent } from './progress-circle.component';
 
@@ -331,6 +332,59 @@ describe('ProgressCircleComponent', () => {
 
       await TestHelper.whenTrue(() => spectator.component['hasElementBeenVisible'] === true); // Await IntersectionObserver to fire
       expect(spectator.component['hasElementBeenVisible']).toBeTrue();
+    });
+  });
+
+  describe('with themeColor', () => {
+    const getColor = DesignTokenHelper.getColor;
+    let spectator: Spectator<ProgressCircleComponent>;
+
+    const createHost = createComponentFactory({
+      component: ProgressCircleComponent,
+    });
+
+    beforeEach(() => {
+      spectator = createHost({
+        props: { value: 50 },
+      });
+    });
+
+    it('should render progress stroke with themeColor `success`, when themeColor is not set', () => {
+      const themeColor: ThemeColor = 'success';
+
+      expect(spectator.query('circle.progress')).toHaveComputedStyle({
+        stroke: getColor(themeColor),
+      });
+    });
+
+    it('should render progress stroke with themeColor when themeColor is set to `success`', () => {
+      const themeColor: ThemeColor = 'success';
+      spectator.setInput('themeColor', themeColor);
+      spectator.detectChanges();
+
+      expect(spectator.query('circle.progress')).toHaveComputedStyle({
+        stroke: getColor(themeColor),
+      });
+    });
+
+    it('should render progress stroke with themeColor when themeColor is set to `warning`', () => {
+      const themeColor: ThemeColor = 'warning';
+      spectator.setInput('themeColor', themeColor);
+      spectator.detectChanges();
+
+      expect(spectator.query('circle.progress')).toHaveComputedStyle({
+        stroke: getColor(themeColor),
+      });
+    });
+
+    it('should render progress stroke with themeColor when themeColor is set to `danger`', () => {
+      const themeColor: ThemeColor = 'danger';
+      spectator.setInput('themeColor', themeColor);
+      spectator.detectChanges();
+
+      expect(spectator.query('circle.progress')).toHaveComputedStyle({
+        stroke: getColor(themeColor),
+      });
     });
   });
 });
