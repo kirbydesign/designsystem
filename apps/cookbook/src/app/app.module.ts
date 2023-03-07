@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { KirbyExperimentalModule, KirbyModule } from '@kirbydesign/designsystem';
 
-import { KirbyModalModule } from '@kirbydesign/designsystem/modal/experimental';
+import { KirbyModalModule } from '@kirbydesign/designsystem/modal/v2';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';

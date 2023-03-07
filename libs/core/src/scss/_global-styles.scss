@@ -236,53 +236,74 @@ ion-loading.kirby-loading-overlay {
 }
 
 /*
- * Experimental modal.
+ * Modal V2.
  */
-$modal-max-height: 928px;
-$modal-max-width: 594px;
+$modal-max-height-desktop: 928px;
+$modal-max-width-desktop: 594px;
 $modal-border-radius: 32px;
 
-html.ios ion-modal.kirby-modal-experimental {
+html.ios ion-modal.kirby-modal-v2 {
   --background: var(--kirby-modal-background, #{utils.get-color('background-color')});
-  --max-height: #{$modal-max-height};
-  --min-height: #{$modal-max-width};
+
+  &.modal-sheet {
+    --border-radius: #{$modal-border-radius};
+
+    ion-header {
+      &.modal-header {
+        border-bottom: none;
+      }
+    }
+
+    ion-toolbar {
+      button {
+        background-color: transparent;
+      }
+    }
+  }
 
   @include utils.media('>=medium') {
     --border-radius: #{$modal-border-radius};
+    --max-height: #{$modal-max-height-desktop};
+    --min-height: #{$modal-max-width-desktop};
 
     &::part(content) {
       margin: 15px;
     }
 
     &.xxs {
-      --width: #{map.get(utils.$experimental-modal-widths, 'xxs')};
-      --height: #{map.get(utils.$experimental-modal-heights, 'xxs')};
+      --width: #{map.get(utils.$modal-v2-widths, 'xxs')};
+      --height: #{map.get(utils.$modal-v2-heights, 'xxs')};
     }
 
     &.xs {
-      --width: #{map.get(utils.$experimental-modal-widths, 'xs')};
-      --height: #{map.get(utils.$experimental-modal-heights, 'xs')};
+      --width: #{map.get(utils.$modal-v2-widths, 'xs')};
+      --height: #{map.get(utils.$modal-v2-heights, 'xs')};
     }
 
     &.sm {
-      --width: #{map.get(utils.$experimental-modal-widths, 's')};
-      --height: #{map.get(utils.$experimental-modal-heights, 's')};
+      --width: #{map.get(utils.$modal-v2-widths, 's')};
+      --height: #{map.get(utils.$modal-v2-heights, 's')};
     }
 
     &.md {
-      --width: #{map.get(utils.$experimental-modal-widths, 'm')};
-      --height: #{map.get(utils.$experimental-modal-heights, 'm')};
+      --width: #{map.get(utils.$modal-v2-widths, 'm')};
+      --height: #{map.get(utils.$modal-v2-heights, 'm')};
     }
 
     &.lg {
-      --width: #{map.get(utils.$experimental-modal-widths, 'l')};
-      --height: #{map.get(utils.$experimental-modal-heights, 'l')};
+      --width: #{map.get(utils.$modal-v2-widths, 'l')};
+      --height: #{map.get(utils.$modal-v2-heights, 'l')};
     }
   }
 
   ion-toolbar {
     padding-right: 0;
     padding-left: 0;
+  }
+
+  ion-title {
+    font-size: utils.font-size('n');
+    font-weight: utils.font-weight('bold');
   }
 
   .kirby-grid {
