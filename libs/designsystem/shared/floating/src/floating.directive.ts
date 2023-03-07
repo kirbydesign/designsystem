@@ -172,7 +172,7 @@ export class FloatingDirective implements OnInit, OnDestroy {
 
   private autoUpdaterRef: () => void;
   private isShown: boolean = false;
-  private eventListeners: EventListener[] = [];
+  private eventListenerDisposeFunctions: EventListener[] = [];
   private triggerEventMap: Map<TriggerEvent, EventMethods[]> = new Map([
     ['click', [{ event: 'click', method: this.toggleShow.bind(this) }]],
     [
@@ -322,7 +322,7 @@ export class FloatingDirective implements OnInit, OnDestroy {
         event.event,
         event.method
       );
-      this.eventListeners.push(eventListener);
+      this.eventListenerDisposeFunctions.push(eventListener);
     });
   }
 
@@ -342,12 +342,12 @@ export class FloatingDirective implements OnInit, OnDestroy {
   }
 
   private tearDownEventHandling(): void {
-    this.eventListeners.forEach((eventListener: EventListener) => {
-      if (eventListener != null) {
-        eventListener(null);
+    this.eventListenerDisposeFunctions.forEach((eventListenerDisposeFunction: EventListener) => {
+      if (eventListenerDisposeFunction != null) {
+        eventListenerDisposeFunction(null);
       }
     });
-    this.eventListeners = [];
+    this.eventListenerDisposeFunctions = [];
   }
 
   private removeAutoUpdaterRef(): void {
