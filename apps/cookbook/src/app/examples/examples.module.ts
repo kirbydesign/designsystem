@@ -25,6 +25,7 @@ import { ExperimentalExamplesModule } from './experimental-examples/experimental
 import { FlagExampleModule } from './flag-example/flag-example.module';
 import { FormFieldExamplesModule } from './form-field-example/form-field-example.module';
 import { GridLayoutExamplesModule } from './grid-layout-example/grid-layout-example.module';
+import { HeaderExampleModule } from './header-example/header-example.module';
 import { ItemExampleModule } from './item-example/item-example.module';
 import { ItemGroupExampleModule } from './item-group-example/item-group-example.module';
 import { ItemSlidingExampleModule } from './item-sliding-example/item-sliding-example.module';
@@ -72,6 +73,7 @@ const IMPORTS = [
   ExperimentalExamplesModule,
   DataTableExampleModule,
   SlideModule,
+  HeaderExampleModule,
   AlertExperimentalModule,
 ];
 

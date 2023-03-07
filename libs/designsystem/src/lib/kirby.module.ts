@@ -60,6 +60,7 @@ import {
   ModalWrapperComponent,
 } from '@kirbydesign/designsystem/modal';
 import { PageModule } from '@kirbydesign/designsystem/page';
+import { HeaderModule } from '@kirbydesign/designsystem/header';
 import { EmptyStateModule } from '@kirbydesign/designsystem/empty-state';
 import { DropdownModule } from '@kirbydesign/designsystem/dropdown';
 import { KirbyAppModule } from '@kirbydesign/designsystem/kirby-app';
@@ -119,6 +120,7 @@ const exportedModules = [
   KirbyAppModule,
   RouterOutletModule,
   PageModule,
+  HeaderModule,
   TabsModule,
   IconModule,
   ItemModule,
@@ -135,6 +137,7 @@ const exportedModules = [
   FormFieldModule,
   SlideModule,
   AccordionModule,
+  HeaderModule,
   ...standaloneComponents,
 ];
 
