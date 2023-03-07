@@ -35,6 +35,8 @@ interface EventMethods {
   method: () => void;
 }
 
+type EventListenerDisposeFn = () => void;
+
 /**
  * @summary FloatingDirective is a utility that lets you declarative anchor "popup" containers to another element.
  *
@@ -172,7 +174,7 @@ export class FloatingDirective implements OnInit, OnDestroy {
 
   private autoUpdaterRef: () => void;
   private isShown: boolean = false;
-  private eventListenerDisposeFunctions: EventListener[] = [];
+  private eventListenerDisposeFns: EventListenerDisposeFn[] = [];
   private triggerEventMap: Map<TriggerEvent, EventMethods[]> = new Map([
     ['click', [{ event: 'click', method: this.toggleShow.bind(this) }]],
     [
@@ -317,12 +319,12 @@ export class FloatingDirective implements OnInit, OnDestroy {
     }
 
     events.forEach((event: EventMethods) => {
-      const eventListener: () => void = this.renderer.listen(
+      const eventListenerDisposeFn: EventListenerDisposeFn = this.renderer.listen(
         this.reference?.nativeElement,
         event.event,
         event.method
       );
-      this.eventListenerDisposeFunctions.push(eventListener);
+      this.eventListenerDisposeFns.push(eventListenerDisposeFn);
     });
   }
 
@@ -342,12 +344,12 @@ export class FloatingDirective implements OnInit, OnDestroy {
   }
 
   private tearDownEventHandling(): void {
-    this.eventListenerDisposeFunctions.forEach((eventListenerDisposeFunction: EventListener) => {
+    this.eventListenerDisposeFns.forEach((eventListenerDisposeFunction: EventListenerDisposeFn) => {
       if (eventListenerDisposeFunction != null) {
-        eventListenerDisposeFunction(null);
+        eventListenerDisposeFunction();
       }
     });
-    this.eventListenerDisposeFunctions = [];
+    this.eventListenerDisposeFns = [];
   }
 
   private removeAutoUpdaterRef(): void {
