@@ -31,6 +31,8 @@
       "@kirbydesign/designsystem/icon": ["libs/designsystem/icon/index.ts"],
       "@kirbydesign/designsystem/helpers": ["libs/designsystem/helpers/index.ts"],
       "@kirbydesign/designsystem/shared": ["libs/designsystem/shared/index.ts"],
+      "@kirbydesign/designsystem/shared/floating": ["libs/designsystem/shared/floating/index.ts"],
+      "@kirbydesign/designsystem/shared/portal": ["libs/designsystem/shared/portal/index.ts"],
       "@kirbydesign/designsystem/types": ["libs/designsystem/types/index.ts"],
       "@kirbydesign/designsystem/kirby-ionic-module": [
         "libs/designsystem/kirby-ionic-module/index.ts"
@@ -65,9 +67,7 @@
       "@kirbydesign/designsystem/page": ["libs/designsystem/page/index.ts"],
       "@kirbydesign/designsystem/header": ["libs/designsystem/header/index.ts"],
       "@kirbydesign/designsystem/modal": ["libs/designsystem/modal/index.ts"],
-      "@kirbydesign/designsystem/modal/experimental": [
-        "libs/designsystem/modal/experimental/index.ts"
-      ],
+      "@kirbydesign/designsystem/modal/v2": ["libs/designsystem/modal/v2/index.ts"],
       "@kirbydesign/designsystem/kirby-app": ["libs/designsystem/kirby-app/index.ts"],
       "@kirbydesign/designsystem/chart": ["libs/designsystem/chart/index.ts"],
       "@kirbydesign/designsystem/helpers/scss": ["libs/designsystem/helpers/scss/index.ts"],

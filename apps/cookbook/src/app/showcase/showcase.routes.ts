@@ -1,12 +1,12 @@
 import { Routes } from '@angular/router';
 
-import { ModalRoutingExperimentalComponent } from '@kirbydesign/designsystem/modal/experimental';
+import { ModalV2RoutingComponent } from '@kirbydesign/designsystem/modal/v2';
 import { ModalRoutePage1ExampleComponent } from '../examples/modal-example/modal-route-example/modal-route-page1-example.component';
 import { ModalRoutePage2ExampleComponent } from '../examples/modal-example/modal-route-example/modal-route-page2-example.component';
 import { ItemShowcaseComponent } from '../showcase/item-showcase/item-showcase.component';
 
-import { ModalRoutingExperimentalExamplePage1Component } from '../examples/modal-experimental-example/modal-routing/modal-routing-experimental-example-page1.component';
-import { ModalRoutingExperimentalExamplePage2Component } from '../examples/modal-experimental-example/modal-routing/modal-routing-experimental-example-page2.component';
+import { ModalRoutingV2ExamplePage1Component } from '../examples/modal-v2-example/modal-routing/modal-routing-v2-example-page1.component';
+import { ModalRoutingV2ExamplePage2Component } from '../examples/modal-v2-example/modal-routing/modal-routing-v2-example-page2.component';
 import { AccordionShowcaseComponent } from './accordion-showcase/accordion-showcase.component';
 import { ActionSheetShowcaseComponent } from './action-sheet-showcase/action-sheet-showcase.component';
 import { AlertShowcaseComponent } from './alert-showcase/alert-showcase.component';
@@ -38,7 +38,7 @@ import { ListNoShapeShowcaseComponent } from './list-no-shape-showcase/list-no-s
 import { ListShowcaseComponent } from './list-showcase/list-showcase.component';
 import { ListSwipeShowcaseComponent } from './list-swipe-showcase/list-swipe-showcase.component';
 import { LoadingOverlayShowcaseComponent } from './loading-overlay-showcase/loading-overlay-showcase.component';
-import { ModalExperimentalShowcaseComponent } from './modal-experimental-showcase/modal-experimental-showcase.component';
+import { ModalV2ShowcaseComponent } from './modal-v2-showcase/modal-v2-showcase.component';
 import { ModalShowcaseComponent } from './modal-showcase/modal-showcase.component';
 import { PageShowcaseComponent } from './page-showcase/page-showcase.component';
 import { ProgressCircleShowcaseComponent } from './progress-circle-showcase/progress-circle-showcase.component';
@@ -193,21 +193,21 @@ export const routes: Routes = [
         ],
       },
       {
-        path: 'modal-experimental',
-        component: ModalExperimentalShowcaseComponent,
+        path: 'modal-v2',
+        component: ModalV2ShowcaseComponent,
         children: [
           {
             path: 'modal',
-            component: ModalRoutingExperimentalComponent,
-            outlet: 'modal-experimental',
+            component: ModalV2RoutingComponent,
+            outlet: 'modal-v2',
             children: [
               {
                 path: 'page1',
-                component: ModalRoutingExperimentalExamplePage1Component,
+                component: ModalRoutingV2ExamplePage1Component,
               },
               {
                 path: 'page2',
-                component: ModalRoutingExperimentalExamplePage2Component,
+                component: ModalRoutingV2ExamplePage2Component,
               },
             ],
           },

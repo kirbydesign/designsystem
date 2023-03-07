@@ -33,7 +33,7 @@ import { LinkExampleModule } from './link-example/link-example.module';
 import { ListExamplesModule } from './list-example/list-example.module';
 import { ListExperimentalExampleModule } from './list-experimental-example/list-experimental-example.module';
 import { ModalExampleModule } from './modal-example/modal-example.module';
-import { ModalExperimentalExampleModule } from './modal-experimental-example/modal-experimental-example.module';
+import { ModalV2ExampleModule } from './modal-v2-example/modal-v2-example.module';
 import { ProgressCircleExampleModule } from './progress-circle-example/progress-circle-example.module';
 import { RadioExampleModule } from './radio-example/radio-example.module';
 import { RangeExampleModule } from './range-example/range-example.module';
@@ -64,7 +64,7 @@ const IMPORTS = [
   RangeExampleModule,
   LinkExampleModule,
   ModalExampleModule,
-  ModalExperimentalExampleModule,
+  ModalV2ExampleModule,
   GridLayoutExamplesModule,
   SectionHeaderExampleModule,
   ItemGroupExampleModule,
