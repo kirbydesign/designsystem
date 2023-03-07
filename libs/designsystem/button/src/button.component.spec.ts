@@ -611,5 +611,35 @@ describe('ButtonComponent', () => {
         });
       });
     });
+
+    describe(`when showIconOnly=true is set after initial rendering`, () => {
+      describe(`and plain text to the left of icon`, () => {
+        it('should NOT apply `icon-right` class', () => {
+          spectator = createHost(
+            `<button kirby-button>
+              Hidden Text Left
+              <kirby-icon name="edit"></kirby-icon>
+            </button>`
+          );
+          spectator.setInput('showIconOnly', true);
+          element = spectator.element as HTMLButtonElement;
+          expect(element).not.toHaveClass('icon-right');
+        });
+      });
+
+      describe(`and plain text to the right of icon`, () => {
+        it('should NOT apply `icon-left` class', () => {
+          spectator = createHost(
+            `<button kirby-button>
+              <kirby-icon name="edit"></kirby-icon>
+              Hidden Text Right
+            </button>`
+          );
+          spectator.setInput('showIconOnly', true);
+          element = spectator.element as HTMLButtonElement;
+          expect(element).not.toHaveClass('icon-left');
+        });
+      });
+    });
   });
 });

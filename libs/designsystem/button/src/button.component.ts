@@ -70,12 +70,12 @@ export class ButtonComponent implements AfterContentInit {
   private _isIconLeft = false;
   @HostBinding('class.icon-left')
   public get isIconLeft() {
-    return this._isIconLeft;
+    return this._isIconLeft && !this.showIconOnly;
   }
   private _isIconRight = false;
   @HostBinding('class.icon-right')
   public get isIconRight() {
-    return this._isIconRight;
+    return this._isIconRight && !this.showIconOnly;
   }
 
   @HostBinding('class')
