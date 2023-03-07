@@ -1,7 +1,7 @@
 import { createHostFactory, Spectator } from '@ngneat/spectator';
 import { MockComponent, MockDirectives } from 'ng-mocks';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
-import { ButtonComponent, ButtonSize } from '../button/button.component';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { FloatingDirective } from '../../src/lib/directives';
 import { MenuComponent } from './menu.component';
 
@@ -16,8 +16,6 @@ describe('ActionListComponent', () => {
     let buttonElement: HTMLButtonElement;
     let card: Element;
     let buttonIcon: IconComponent;
-
-    const expectedAttentionLevel = '3';
 
     beforeEach(() => {
       spectator = createHost<MenuComponent>(`<kirby-menu></kirby-menu>`, {});
@@ -41,10 +39,6 @@ describe('ActionListComponent', () => {
 
       it('should have small buttonIcon size by default', () => {
         expect(spectator.component.iconSize).toEqual('sm');
-      });
-
-      it('should have attention level 3 as default', () => {
-        expect(spectator.component.attentionLevel).toEqual(expectedAttentionLevel);
       });
 
       it('should have size button size md by default', () => {
@@ -104,7 +98,7 @@ describe('ActionListComponent', () => {
       });
     });
 
-    describe('list', () => {
+    describe('content', () => {
       it('should exist', () => {
         expect(card).toBeTruthy();
       });
@@ -115,24 +109,6 @@ describe('ActionListComponent', () => {
     });
 
     describe('when', () => {
-      describe('component configured with attentionLevel', () => {
-        it('should render button with correct attentionLevel', () => {
-          spectator.setInput('attentionLevel', '1');
-          spectator.detectChanges();
-          const button: ButtonComponent = spectator.query(ButtonComponent);
-          expect(button.attentionLevel).toEqual('1');
-        });
-      });
-
-      describe('component configured with buttonSize', () => {
-        it('should render button with correct buttonSize', () => {
-          spectator.setInput('buttonSize', ButtonSize.LG);
-          spectator.detectChanges();
-          const button = spectator.query(ButtonComponent);
-          expect(button.size).toEqual(ButtonSize.LG);
-        });
-      });
-
       describe('component configured with isDisabled set to true', () => {
         beforeEach(() => {
           spectator.setInput('isDisabled', true);

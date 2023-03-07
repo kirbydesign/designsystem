@@ -10,6 +10,10 @@ $min-screen-width: 375px;
   position: relative;
 }
 
+.button-container {
+  display: inline-block;
+}
+
 kirby-card {
   max-height: $dropdown-max-height;
   margin-block: utils.size('xxxs');

@@ -58,10 +58,15 @@ export class MenuComponent {
 
   @Input() public closeOnBackdrop: boolean = true;
 
-  @ViewChild(ButtonComponent, { static: true, read: ElementRef })
-  public buttonElement: ElementRef<HTMLElement> | undefined;
+  @ViewChild('buttonContainer', { read: ElementRef })
+  public buttonContainerElement: ElementRef<HTMLElement> | undefined;
 
-  @ContentChild(ButtonComponent) public userProvidedButton: ButtonComponent;
+  @ViewChild('defaultButton', { read: ElementRef })
+  public defaultButtonElement: ElementRef<HTMLElement> | undefined;
+
+  @ContentChild(ButtonComponent, { read: ElementRef }) public userProvidedButton:
+    | ElementRef<HTMLElement>
+    | undefined;
 
   public FloatingOffset: typeof FloatingOffset = FloatingOffset;
 }
