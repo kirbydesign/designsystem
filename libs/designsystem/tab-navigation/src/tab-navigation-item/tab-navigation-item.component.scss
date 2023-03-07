@@ -12,8 +12,8 @@ $divider-max-width-breakpoint: utils.$page-content-max-width + (utils.size('s') 
 
   button {
     font-family: var(--kirby-font-family);
-    background-color: var(--kirby-button-background-color, initial);
-    color: var(--kirby-button-color, inherit);
+    background-color: utils.get-color('background-color');
+    color: utils.get-color('black');
     padding: utils.size('s');
     margin: 0;
     font-size: utils.font-size('n');
