@@ -9,11 +9,12 @@ import {
   Input,
   OnDestroy,
 } from '@angular/core';
+import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import { ProgressCircleRingComponent } from './progress-circle-ring.component';
 
 @Component({
   standalone: true,
-  imports: [ProgressCircleRingComponent, CommonModule],
+  imports: [ProgressCircleRingComponent, CommonModule, ThemeColorDirective],
   selector: 'kirby-progress-circle',
   templateUrl: './progress-circle.component.html',
   styleUrls: ['./progress-circle.component.scss'],
