@@ -1,7 +1,5 @@
 <div class="dropdown-and-buttons">
-  <div class="visible-layer" #visibleLayer>
-    <ng-content></ng-content>
-  </div>
+  <div class="visible-layer" #visibleLayer></div>
 
   <kirby-dropdown
     [items]="_collapsedActions"
@@ -11,4 +9,6 @@
   ></kirby-dropdown>
 </div>
 
-<div class="hidden-layer" #hiddenLayer></div>
+<div class="hidden-layer" #hiddenLayer>
+  <ng-content></ng-content>
+</div>

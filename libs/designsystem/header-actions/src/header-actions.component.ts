@@ -32,7 +32,7 @@ export class HeaderActionsComponent implements AfterViewInit {
     this._visibleActions = value;
 
     if (!this.buttons) return;
-    this.initializeCollapsing();
+    this.showVisibleActions();
   }
 
   @HostBinding('class')
@@ -44,24 +44,28 @@ export class HeaderActionsComponent implements AfterViewInit {
   @ViewChild('hiddenLayer', { read: ElementRef }) hiddenLayer!: ElementRef<HTMLElement>;
   @ViewChild('visibleLayer', { read: ElementRef }) visibleLayer!: ElementRef<HTMLElement>;
 
+  @HostBinding('class.is-collapsed')
+  _isCollapsed: boolean = true;
   _collapsedActions: string[] = [];
   _visibleActions: number;
 
   private dropdownTextToButtonMap: Map<string, HTMLButtonElement>;
-  private visibleLayerObserver: IntersectionObserver;
-  private visibleLayerObserverOptions;
-  private observedElement: ElementRef<HTMLElement>;
+  private hiddenButtonsIntersectionObserver: IntersectionObserver;
+  private intersectionObserverOptions;
 
   constructor(private renderer: Renderer2, private elementRef: ElementRef) {}
 
   ngAfterViewInit(): void {
-    this.initializeCollapsing();
-    this.observedElement = this.visibleLayer;
-    this.initializeDynamicResizing();
+    if (this._visibleActions) {
+      this.showVisibleActions();
+    } else {
+      setTimeout(() => {
+        this.initializeDynamicResizing();
+      }, 100);
+    }
   }
 
-  initializeCollapsing() {
-    if (this.buttons.length <= 2) return;
+  showVisibleActions() {
     this.moveButtons();
     this.populateDropdown();
     this.toggleDropdown();
@@ -79,9 +83,9 @@ export class HeaderActionsComponent implements AfterViewInit {
 
   toggleDropdown() {
     if (this.hiddenLayer.nativeElement.childElementCount === 0) {
-      this.renderer.setStyle(this.dropdown.nativeElement, 'display', 'none');
+      this._isCollapsed = false;
     } else {
-      this.renderer.setStyle(this.dropdown.nativeElement, 'display', 'inline-block');
+      this._isCollapsed = true;
     }
   }
 
@@ -121,43 +125,33 @@ export class HeaderActionsComponent implements AfterViewInit {
   }
 
   initializeDynamicResizing() {
-    this.visibleLayerObserverOptions = {
+    this.intersectionObserverOptions = {
       root: this.elementRef.nativeElement,
       threshold: 1.0,
     };
 
-    this.visibleLayerObserver = new IntersectionObserver(
-      this.handleVisibleLayerIntersection,
-      this.visibleLayerObserverOptions
+    this.hiddenButtonsIntersectionObserver = new IntersectionObserver(
+      this.handleHiddenButtonIntersection,
+      this.intersectionObserverOptions
     );
 
-    this.visibleLayerObserver.observe(this.observedElement.nativeElement);
+    this.buttons.forEach((button) => {
+      this.hiddenButtonsIntersectionObserver.observe(button.nativeElement);
+    });
   }
 
-  private handleVisibleLayerIntersection = (entries) => {
+  private handleHiddenButtonIntersection = (entries) => {
     entries.forEach((entry: IntersectionObserverEntry) => {
-      console.log(entry);
-
       if (entry.isIntersecting) {
-        return;
-      }
-      const buttons = this.visibleLayer.nativeElement.querySelectorAll('button');
-
-      if (buttons.length > 0) {
-        this.hideNextButton(buttons);
+        this.showButton(entry.target);
+        this.populateDropdown();
+        this.toggleDropdown();
       }
     });
   };
 
-  private hideNextButton(buttons: NodeListOf<HTMLButtonElement>) {
-    const nextVisibleButton = buttons[buttons.length - 1];
-    this.hiddenLayer.nativeElement.appendChild(nextVisibleButton);
-    this.toggleDropdown();
-    if (this.dropdown) {
-      this.observedElement = this.placement === 'left' ? this.dropdown : this.visibleLayer;
-    }
-
-    this.visibleLayerObserver.unobserve(this.observedElement.nativeElement);
-    this.visibleLayerObserver.observe(this.observedElement.nativeElement);
+  private showButton(button: Element) {
+    this.hiddenButtonsIntersectionObserver.unobserve(button);
+    this.renderer.appendChild(this.visibleLayer.nativeElement, button);
   }
 }

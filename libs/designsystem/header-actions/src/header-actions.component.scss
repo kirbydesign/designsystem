@@ -3,9 +3,20 @@
 :host {
   display: flex;
   width: 100%;
+  overflow: hidden;
 
   &.right {
     flex-direction: row-reverse;
+
+    .hidden-layer {
+      flex-direction: row-reverse;
+    }
+  }
+}
+
+:host(.is-collapsed) {
+  kirby-dropdown {
+    display: inline-block;
   }
 }
 
@@ -25,4 +36,15 @@
 kirby-dropdown {
   margin: 4px;
   display: none;
+}
+
+/* stylelint-disable no-duplicate-selectors */
+.hidden-layer {
+  visibility: visible;
+  opacity: 0.5;
+  background-color: crimson;
+}
+
+.visible-layer {
+  background-color: goldenrod;
 }
