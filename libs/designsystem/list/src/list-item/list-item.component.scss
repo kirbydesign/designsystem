@@ -11,3 +11,18 @@ $divider-color: utils.get-color('background-color');
     border-bottom: 1px solid $divider-color;
   }
 }
+
+.item_container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  // width: 100%;
+  // height: 100%;
+  // padding: size('xxxs') size('s');
+}
+
+.iitem-width {
+ width: 80%
+}

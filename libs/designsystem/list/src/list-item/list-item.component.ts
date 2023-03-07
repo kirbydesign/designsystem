@@ -23,6 +23,7 @@ export type BoundaryClass = 'first' | 'last';
   styleUrls: ['../list.component.scss', './list-item.component.scss'],
 })
 export class ListItemComponent implements OnInit, AfterViewInit {
+  public isMobile = false;
   _isSwipingEnabled = false;
 
   constructor(private platform: PlatformService) {
