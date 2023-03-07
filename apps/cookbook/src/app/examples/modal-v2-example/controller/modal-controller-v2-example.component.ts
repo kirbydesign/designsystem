@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ModalExperimentalController } from '@kirbydesign/designsystem/modal/experimental';
+import { ModalV2Controller } from '@kirbydesign/designsystem/modal/v2';
 
 export const showModalCodeSnippet = `constructor(private modalController: ModalExperimentalController) {}
 
@@ -54,10 +54,10 @@ showModal() {
   }
 }`;
 @Component({
-  templateUrl: './modal-controller-experimental-example.component.html',
+  templateUrl: './modal-controller-v2-example.component.html',
 })
-export class ModalControllerExperimentalExampleComponent {
-  constructor(private modalController: ModalExperimentalController) {}
+export class ModalControllerV2ExampleComponent {
+  constructor(private modalController: ModalV2Controller) {}
 
   @Input() title = '';
 

@@ -1,20 +1,17 @@
 import { Component } from '@angular/core';
 import { ActionSheetController } from '@ionic/angular';
+import { ModalV2Config, ModalV2Controller } from '@kirbydesign/designsystem/modal/v2';
 import {
-  ModalExperimentalConfig,
-  ModalExperimentalController,
-} from '@kirbydesign/designsystem/modal/experimental';
-import {
-  ModalControllerExperimentalExampleComponent,
+  ModalControllerV2ExampleComponent,
   observableCodeSnippet,
   showModalCodeSnippet,
-} from '../../examples/modal-experimental-example/controller/modal-controller-experimental-example.component';
+} from '../../examples/modal-v2-example/controller/modal-controller-v2-example.component';
 import {
   footerSlotExampleTemplate,
   fullscreenModalExampleTemplateHTML,
   fullscreenModalExampleTemplateTS,
   headerStartSlotExampleTemplate,
-} from '../../examples/modal-experimental-example/modal/fullscreen/fullscreen-experimental-example.component';
+} from '../../examples/modal-v2-example/modal/fullscreen/fullscreen-v2-example.component';
 import { ApiDescriptionEvent } from '../../shared/api-description/api-description-events/api-description-events.component';
 import { ApiDescriptionProperty } from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionMethod } from '../../shared/api-description/api-description-methods/api-description-methods.component';
@@ -22,25 +19,25 @@ import {
   programmaticRoutingCodeSnippet,
   routerConfigCodeSnippet,
   routerLinkCodeSnippet,
-} from '../../examples/modal-experimental-example/modal-routing/modal-routing-experimental-example.component';
+} from '../../examples/modal-v2-example/modal-routing/modal-routing-v2-example.component';
 import {
   drawerExampleTemplateHTML,
   drawerExampleTemplateTS,
   drawerToModalExampleTemplateHTML,
-} from '../../examples/modal-experimental-example/modal/drawer/drawer-experimental-example.component';
+} from '../../examples/modal-v2-example/modal/drawer/drawer-v2-example.component';
 import {
   nestedModalsExampleTemplateHTML,
   nestedModalsExampleTemplateTS,
-} from '../../examples/modal-experimental-example/nested-modals/nested-modals-experimental-example.component';
+} from '../../examples/modal-v2-example/nested-modals/nested-modals-v2-example.component';
 
 @Component({
-  selector: 'cookbook-modal-experimental-showcase',
-  templateUrl: './modal-experimental-showcase.component.html',
-  styleUrls: ['./modal-experimental-showcase.component.scss'],
+  selector: 'cookbook-modal-v2-showcase',
+  templateUrl: './modal-v2-showcase.component.html',
+  styleUrls: ['./modal-v2-showcase.component.scss'],
 })
-export class ModalExperimentalShowcaseComponent {
+export class ModalV2ShowcaseComponent {
   constructor(
-    private modalController: ModalExperimentalController,
+    private modalController: ModalV2Controller,
     private actionSheetCtrl: ActionSheetController
   ) {}
 
@@ -306,9 +303,9 @@ export class ModalExperimentalShowcaseComponent {
   };
 
   openModal(enableCanDismiss?: boolean) {
-    const config: ModalExperimentalConfig = {
+    const config: ModalV2Config = {
       flavor: 'modal',
-      component: ModalControllerExperimentalExampleComponent,
+      component: ModalControllerV2ExampleComponent,
       componentProps: {
         title: 'Modal title',
       },

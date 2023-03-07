@@ -55,7 +55,7 @@ this.router.navigate([{ outlets: { 'modal-experimental': null } }], {
 `;
 
 @Component({
-  selector: 'cookbook-modal-routing-experimental-example',
-  templateUrl: './modal-routing-experimental-example.component.html',
+  selector: 'cookbook-modal-routing-v2-example',
+  templateUrl: './modal-routing-v2-example.component.html',
 })
-export class ModalRoutingExperimentalExampleComponent {}
+export class ModalRoutingV2ExampleComponent {}

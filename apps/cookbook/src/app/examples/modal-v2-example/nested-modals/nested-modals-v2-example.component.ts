@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { ModalExperimentalComponent } from '@kirbydesign/designsystem/modal/experimental';
+import { ModalV2Component } from '@kirbydesign/designsystem/modal/v2';
 import { KirbyAnimation } from '@kirbydesign/designsystem';
 import { PlatformService } from '@kirbydesign/designsystem';
 
@@ -53,13 +53,13 @@ export const nestedModalsExampleTemplateTS = `import { PlatformService } from '@
 `;
 
 @Component({
-  templateUrl: './nested-modals-experimental-example.component.html',
-  styleUrls: ['./nested-modals-experimental-example.component.scss'],
+  templateUrl: './nested-modals-v2-example.component.html',
+  styleUrls: ['./nested-modals-v2-example.component.scss'],
 })
-export class NestedModalsExperimentalExampleComponent {
+export class NestedModalsV2ExampleComponent {
   constructor(private platformService: PlatformService) {}
 
-  @ViewChild(ModalExperimentalComponent) modal: ModalExperimentalComponent;
+  @ViewChild(ModalV2Component) modal: ModalV2Component;
 
   open = false;
   showFooter = true;

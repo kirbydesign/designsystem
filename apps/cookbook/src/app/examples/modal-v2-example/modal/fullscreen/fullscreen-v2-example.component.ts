@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { ModalExperimentalComponent } from '@kirbydesign/designsystem/modal/experimental';
+import { ModalV2Component } from '@kirbydesign/designsystem/modal/v2';
 import { KirbyAnimation } from '@kirbydesign/designsystem';
 
 export const fullscreenModalExampleTemplateHTML = `<kirby-modal-experimental
@@ -42,11 +42,11 @@ export const footerSlotExampleTemplate = `<kirby-modal-footer-experimental foote
 </kirby-modal-footer-experimental>
 `;
 @Component({
-  templateUrl: './fullscreen-experimental-example.component.html',
-  styleUrls: ['./fullscreen-experimental-example.component.scss'],
+  templateUrl: './fullscreen-v2-example.component.html',
+  styleUrls: ['./fullscreen-v2-example.component.scss'],
 })
-export class FullscreenModalExperimentalExampleComponent {
-  @ViewChild(ModalExperimentalComponent) modal: ModalExperimentalComponent;
+export class FullscreenModalV2ExampleComponent {
+  @ViewChild(ModalV2Component) modal: ModalV2Component;
 
   open = false;
   canDismiss = true;

@@ -34,10 +34,10 @@ export const drawerToModalExampleTemplateHTML = `<kirby-modal-experimental
 `;
 
 @Component({
-  templateUrl: './drawer-experimental-example.component.html',
-  styleUrls: ['./drawer-experimental-example.component.scss'],
+  templateUrl: './drawer-v2-example.component.html',
+  styleUrls: ['./drawer-v2-example.component.scss'],
 })
-export class DrawerModalExperimentalExampleComponent {
+export class DrawerModalV2ExampleComponent {
   constructor(private platformService: PlatformService) {}
 
   flavor = this.platformService.isPhabletOrBigger() ? 'modal' : 'drawer';

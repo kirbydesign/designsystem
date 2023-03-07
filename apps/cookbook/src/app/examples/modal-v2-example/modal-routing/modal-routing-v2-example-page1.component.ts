@@ -30,7 +30,7 @@ import { ActivatedRoute } from '@angular/router';
     'h4 { margin-top: 24px; } ',
   ],
 })
-export class ModalRoutingExperimentalExamplePage1Component {
+export class ModalRoutingV2ExamplePage1Component {
   constructor(private route: ActivatedRoute) {}
   queryParams$ = this.route.queryParams;
 }

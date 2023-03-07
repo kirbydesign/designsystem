@@ -28,11 +28,11 @@ import { ActivatedRoute, Router } from '@angular/router';
     'h4 { margin-top: 24px; } ',
   ],
 })
-export class ModalRoutingExperimentalExamplePage2Component {
+export class ModalRoutingV2ExamplePage2Component {
   constructor(private router: Router, private route: ActivatedRoute) {}
 
   closeModal() {
-    this.router.navigate([{ outlets: { 'modal-experimental': null } }], {
+    this.router.navigate([{ outlets: { 'modal-v2': null } }], {
       relativeTo: this.route.parent.parent,
     });
   }
