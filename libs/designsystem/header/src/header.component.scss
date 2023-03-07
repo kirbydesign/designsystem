@@ -2,18 +2,35 @@
 @use '@kirbydesign/core/src/scss/utils';
 
 :host {
-  width: 100%;
-  padding: utils.size('s') utils.size('s') utils.size('l');
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  row-gap: utils.size('m');
+  margin-top: utils.size('s');
+  margin-bottom: utils.size('l');
 
   @include utils.media('>=medium') {
-    padding-top: utils.size('m');
+    margin-top: utils.size('m');
+    grid-template-columns: 1fr 1fr;
+    column-gap: utils.size('s');
+
+    .actions {
+      justify-self: flex-end;
+    }
   }
 
   &.centered {
-    align-items: center;
+    grid-template-columns: 1fr 2fr 1fr;
+
+    .container {
+      align-items: center;
+      grid-column-start: 2;
+    }
   }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 0 utils.size('s');
 }
 
 .avatar {
