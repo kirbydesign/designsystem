@@ -93,4 +93,22 @@ describe('ItemComponent', () => {
       });
     });
   });
+
+  describe('when disclosure is reset to null', () => {
+    it('should reset inner-padding-end to s', () => {
+      spectator.component.disclosure = 'arrow-more';
+      spectator.detectChanges();
+
+      expect(spectator.query('ion-item')).toHaveComputedStyle({
+        '--inner-padding-end': size('xxs'),
+      });
+
+      spectator.component.disclosure = null;
+      spectator.detectChanges();
+
+      expect(spectator.query('ion-item')).toHaveComputedStyle({
+        '--inner-padding-end': size('s'),
+      });
+    });
+  });
 });
