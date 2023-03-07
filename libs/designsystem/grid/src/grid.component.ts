@@ -1,5 +1,7 @@
+import { CommonModule } from '@angular/common';
 import { Component, HostBinding, Input, OnDestroy } from '@angular/core';
 import { ScssHelper } from '@kirbydesign/designsystem/helpers/scss';
+import { ComponentLoaderDirective } from '@kirbydesign/designsystem/shared';
 import { Subscription } from 'rxjs';
 
 import { BreakpointHelperService } from './breakpoint-helper.service';
@@ -24,6 +26,7 @@ class GridCard {
 
 @Component({
   standalone: true,
+  imports: [CommonModule, ComponentLoaderDirective],
   selector: 'kirby-grid',
   templateUrl: './grid.component.html',
   styleUrls: ['./grid.component.scss'],

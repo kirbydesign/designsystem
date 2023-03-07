@@ -8,9 +8,12 @@
 @use 'base/html-list';
 
 @use 'components/grid';
+@use 'themes/component-themes';
 
 :root,
 :host {
+  @include component-themes.apply-light-theme;
+
   --kirby-font-family: 'Roboto';
 
   font-family: var(--kirby-font-family);
@@ -230,4 +233,80 @@ ion-loading.kirby-loading-overlay {
 
   // Place icon to the right of text, with icons own width + the actual spacing
   padding-right: calc(#{$icon-scaling-factor} + #{utils.size('xxxs')});
+}
+
+/*
+ * Experimental modal.
+ */
+$modal-max-height-desktop: 928px;
+$modal-max-width-desktop: 594px;
+$modal-border-radius: 32px;
+
+html.ios ion-modal.kirby-modal-experimental {
+  --background: var(--kirby-modal-background, #{utils.get-color('background-color')});
+
+  &.modal-sheet {
+    --border-radius: #{$modal-border-radius};
+
+    ion-header {
+      &.modal-header {
+        border-bottom: none;
+      }
+    }
+
+    ion-toolbar {
+      button {
+        background-color: transparent;
+      }
+    }
+  }
+
+  @include utils.media('>=medium') {
+    --border-radius: #{$modal-border-radius};
+    --max-height: #{$modal-max-height-desktop};
+    --min-height: #{$modal-max-width-desktop};
+
+    &::part(content) {
+      margin: 15px;
+    }
+
+    &.xxs {
+      --width: #{map.get(utils.$experimental-modal-widths, 'xxs')};
+      --height: #{map.get(utils.$experimental-modal-heights, 'xxs')};
+    }
+
+    &.xs {
+      --width: #{map.get(utils.$experimental-modal-widths, 'xs')};
+      --height: #{map.get(utils.$experimental-modal-heights, 'xs')};
+    }
+
+    &.sm {
+      --width: #{map.get(utils.$experimental-modal-widths, 's')};
+      --height: #{map.get(utils.$experimental-modal-heights, 's')};
+    }
+
+    &.md {
+      --width: #{map.get(utils.$experimental-modal-widths, 'm')};
+      --height: #{map.get(utils.$experimental-modal-heights, 'm')};
+    }
+
+    &.lg {
+      --width: #{map.get(utils.$experimental-modal-widths, 'l')};
+      --height: #{map.get(utils.$experimental-modal-heights, 'l')};
+    }
+  }
+
+  ion-toolbar {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  ion-title {
+    font-size: utils.font-size('n');
+    font-weight: utils.font-weight('bold');
+  }
+
+  .kirby-grid {
+    display: flex;
+  }
 }

@@ -13,9 +13,9 @@ import { ModalFooterExperimentalComponent } from './footer.component';
 const size = DesignTokenHelper.size;
 
 const KEYBOARD_HEIGHT = 216; // sample value, depends upon device
-const BASE_PADDING_VERTICAL_PX = size('xxs');
+const BASE_PADDING_VERTICAL_PX = size('m');
 const BASE_PADDING_VERTICAL = parseInt(BASE_PADDING_VERTICAL_PX);
-const BASE_PADDING_HORIZONTAL_PX = size('s');
+const BASE_PADDING_HORIZONTAL_PX = size('m');
 const SAFE_AREA_BOTTOM = 22;
 const SAFE_AREA_BOTTOM_PX = `${SAFE_AREA_BOTTOM}px`;
 

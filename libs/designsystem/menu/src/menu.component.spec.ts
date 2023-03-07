@@ -2,7 +2,7 @@ import { createHostFactory, Spectator } from '@ngneat/spectator';
 import { MockComponent, MockDirectives } from 'ng-mocks';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
-import { FloatingDirective } from '../../src/lib/directives';
+import { FloatingDirective } from '@kirbydesign/designsystem/shared/floating';
 import { MenuComponent } from './menu.component';
 
 describe('ActionListComponent', () => {

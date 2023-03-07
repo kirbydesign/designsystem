@@ -9,6 +9,7 @@ import {
 } from '@kirbydesign/designsystem';
 import { SlideModule } from '@kirbydesign/designsystem/slide';
 
+import { AlertExperimentalModule } from '@kirbydesign/designsystem/alert-experimental';
 import { CodeViewerModule } from '../shared/code-viewer/code-viewer.module';
 import { AccordionExampleModule } from './accordion-example/accordion-example.module';
 import { AvatarExampleModule } from './avatar-example/avatar-example.module';
@@ -73,6 +74,7 @@ const IMPORTS = [
   DataTableExampleModule,
   MenuExampleModule,
   SlideModule,
+  AlertExperimentalModule,
 ];
 
 @NgModule({

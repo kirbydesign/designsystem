@@ -2,7 +2,7 @@ import { Directive, ElementRef, Input, OnDestroy, OnInit, Renderer2 } from '@ang
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { LineClampHelper } from '@kirbydesign/designsystem/helpers';
-import { ResizeObserverService } from '@kirbydesign/designsystem/shared';
+import { ResizeObserverService } from '../resize-observer/resize-observer.service';
 
 const fontSize = DesignTokenHelper.fontSize;
 const lineHeight = DesignTokenHelper.lineHeight;

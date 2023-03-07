@@ -14,6 +14,8 @@
       "@kirbydesign/designsystem/helpers": ["libs/designsystem/helpers/index.ts"],
       "@kirbydesign/designsystem/helpers/scss": ["libs/designsystem/helpers/scss/index.ts"],
       "@kirbydesign/designsystem/shared": ["libs/designsystem/shared/index.ts"],
+      "@kirbydesign/designsystem/shared/floating": ["libs/designsystem/shared/floating/index.ts"],
+      "@kirbydesign/designsystem/shared/portal": ["libs/designsystem/shared/portal/index.ts"],
       "@kirbydesign/designsystem/types": ["libs/designsystem/types/index.ts"],
       "@kirbydesign/designsystem/kirby-ionic-module": [
         "libs/designsystem/kirby-ionic-module/index.ts"
@@ -56,7 +58,10 @@
       "@kirbydesign/designsystem/data-table": ["libs/designsystem/data-table/index.ts"],
       "@kirbydesign/designsystem/reorder-list": ["libs/designsystem/reorder-list/index.ts"],
       "@kirbydesign/designsystem/toast": ["libs/designsystem/toast/index.ts"],
-      "@kirbydesign/designsystem/grid": ["libs/designsystem/grid/index.ts"]
+      "@kirbydesign/designsystem/grid": ["libs/designsystem/grid/index.ts"],
+      "@kirbydesign/designsystem/alert-experimental": [
+        "libs/designsystem/alert-experimental/index.ts"
+      ]
     },
     "target": "es2020"
   },
