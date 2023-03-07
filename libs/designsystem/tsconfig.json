@@ -11,6 +11,8 @@
       "@kirbydesign/designsystem/helpers": ["helpers/index.ts"],
       "@kirbydesign/designsystem/helpers/scss": ["helpers/scss/index.ts"],
       "@kirbydesign/designsystem/shared": ["shared/index.ts"],
+      "@kirbydesign/designsystem/shared/floating": ["shared/floating/index.ts"],
+      "@kirbydesign/designsystem/shared/portal": ["shared/portal/index.ts"],
       "@kirbydesign/designsystem/types": ["types/index.ts"],
       "@kirbydesign/designsystem/flag": ["flag/index.ts"],
       "@kirbydesign/designsystem/form-field": ["form-field/index.ts"],

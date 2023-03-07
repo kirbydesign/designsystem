@@ -9,6 +9,8 @@
       "@kirbydesign/designsystem/*": ["libs/designsystem/src/lib/*"],
       "@kirbydesign/designsystem/helpers": ["helpers/index.ts"],
       "@kirbydesign/designsystem/shared": ["shared/index.ts"],
+      "@kirbydesign/designsystem/shared/floating": ["shared/floating/index.ts"],
+      "@kirbydesign/designsystem/shared/portal": ["shared/portal/index.ts"],
       "@kirbydesign/designsystem/card": ["card/index.ts"],
       "@kirbydesign/designsystem/icon": ["icon/index.ts"],
       "@kirbydesign/designsystem/types": ["types/index.ts"],
