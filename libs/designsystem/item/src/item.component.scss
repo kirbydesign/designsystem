@@ -103,6 +103,11 @@
   --background: #{interaction-state.get-state-color('white', 'xxxs')};
 }
 
+// Prevents the item from being clicked when disabled
+:host(.disabled, [disabled]) {
+  pointer-events: none;
+}
+
 :host(.selected),
 :host-context(kirby-list .selected) {
   ion-item {

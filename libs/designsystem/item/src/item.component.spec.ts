@@ -93,4 +93,38 @@ describe('ItemComponent', () => {
       });
     });
   });
+
+  describe('disabled', () => {
+    it('should not have computed style "pointer:none" by default', () => {
+      expect(spectator.query('ion-item')).not.toHaveComputedStyle({ 'pointer-events': 'none' });
+    });
+
+    it(`should have computed style 'pointer:none' when having '[disabled]="true"'`, () => {
+      spectator.component.disabled = true;
+      spectator.detectChanges();
+
+      expect(spectator.query('ion-item')).toHaveComputedStyle({ 'pointer-events': 'none' });
+    });
+
+    it(`should not have computed style "pointer:none" when having '[disabled]="false"`, () => {
+      spectator.component.disabled = false;
+      spectator.detectChanges();
+
+      expect(spectator.query('ion-item')).not.toHaveComputedStyle({ 'pointer-events': 'none' });
+    });
+
+    it('should not have computed style "pointer:none" when not having "[disabled]" input defined', () => {
+      spectator.component.disabled = undefined;
+      spectator.detectChanges();
+
+      expect(spectator.query('ion-item')).not.toHaveComputedStyle({ 'pointer-events': 'none' });
+    });
+
+    it('should have computed style "pointer:none" when having disabled attribute', () => {
+      spectator.element.setAttribute('disabled', '');
+      spectator.detectChanges();
+
+      expect(spectator.query('ion-item')).toHaveComputedStyle({ 'pointer-events': 'none' });
+    });
+  });
 });
