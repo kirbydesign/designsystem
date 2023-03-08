@@ -76,6 +76,7 @@ import { VirtualScrollListExampleComponent } from './virtual-scroll-example/virt
 import { PagePullToRefreshExampleComponent } from './page-example/pull-to-refresh/page-pull-to-refresh-example.component';
 import { DropdownExampleComponent } from './dropdown-example/dropdown-example.component';
 import { DataTableExampleComponent } from './data-table-example/data-table-example.component';
+import { HeaderExampleComponent } from './header-example/header-example.component';
 import { NestedModalsV2ExampleComponent } from './modal-v2-example/nested-modals/nested-modals-v2-example.component';
 import { MenuExampleComponent } from '~/app/examples/menu-example/menu-example.component';
 
@@ -520,5 +521,9 @@ export const routes: Routes = [
   {
     path: 'menu',
     component: MenuExampleComponent,
+  },
+  {
+    path: 'header',
+    component: HeaderExampleComponent,
   },
 ];

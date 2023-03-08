@@ -60,6 +60,7 @@ import { ToolbarShowcaseComponent } from './toolbar-showcase/toolbar-showcase.co
 import { RadioShowcaseComponent } from './radio-showcase/radio-showcase.component';
 import { CookbookChartStockConfigShowcaseComponent } from './chart-config-showcase/stock/chart-config-stock-showcase.component';
 import { CookbookChartBarConfigShowcaseComponent } from './chart-config-showcase/bar/chart-config-bar-showcase.component';
+import { HeaderShowcaseComponent } from './header-showcase/header-showcase.component';
 import { MenuShowcaseComponent } from '~/app/showcase/menu-showcase/menu-showcase.component';
 
 export const routes: Routes = [
@@ -328,6 +329,10 @@ export const routes: Routes = [
       {
         path: 'data-table',
         component: DataTableShowcaseComponent,
+      },
+      {
+        path: 'header',
+        component: HeaderShowcaseComponent,
       },
     ],
   },

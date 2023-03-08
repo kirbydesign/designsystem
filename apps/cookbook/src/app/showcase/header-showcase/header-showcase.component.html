@@ -1,0 +1,73 @@
+<div class="example">
+  <div class="header-example-container">
+    <p>
+      Header is a component that manages the layout of the header section of
+      <code>kirby-page</code>
+      . It is responsive and will change the layout according to the device size. It allows for a
+      wide range of use cases including support for avatar, flags etc.
+    </p>
+
+    <h2>Default</h2>
+
+    <cookbook-example-viewer [html]="defaultExample.template">
+      <div class="header-example">
+        <cookbook-header-example-default #defaultExample></cookbook-header-example-default>
+      </div>
+    </cookbook-example-viewer>
+  </div>
+
+  <div class="header-example-container">
+    <h2>Flag</h2>
+    <p>
+      A flag can be used to indicate a status. To use a flag you simply add a
+      <code>&lt;kirby-flag&gt;</code>
+      in the header which will position the flag correctly and manage spacing.
+    </p>
+    <cookbook-example-viewer [html]="flagExample.template">
+      <div class="header-example">
+        <cookbook-header-example-flag #flagExample></cookbook-header-example-flag>
+      </div>
+    </cookbook-example-viewer>
+  </div>
+
+  <div class="header-example-container">
+    <h2>Key value</h2>
+    <p>
+      In some cases a number is the primary information on a page. When that's the case you should
+      use the
+      <code>value</code>
+      prop
+      <em>in addition to</em>
+      the
+      <code>title</code>
+      prop. This will highlight the value on the page and make the title secondary as shown in the
+      example below:
+    </p>
+    <cookbook-example-viewer [html]="valueExample.template">
+      <div class="header-example">
+        <cookbook-header-example-value #valueExample></cookbook-header-example-value>
+      </div>
+    </cookbook-example-viewer>
+  </div>
+
+  <div class="header-example-container">
+    <h2>Avatar</h2>
+    <p>
+      You can use an avatar within the header, e.g. to show a category for the content. You simply
+      add a
+      <code>kirby-avatar</code>
+      in the header which will position the avatar correctly and manage spacing.
+    </p>
+    <cookbook-example-viewer [html]="avatarExample.template">
+      <div class="header-example">
+        <cookbook-header-example-avatar #avatarExample></cookbook-header-example-avatar>
+      </div>
+    </cookbook-example-viewer>
+  </div>
+
+  <h1>API</h1>
+  <h2>Header Properties:</h2>
+  <cookbook-api-description-properties
+    [properties]="properties"
+  ></cookbook-api-description-properties>
+</div>

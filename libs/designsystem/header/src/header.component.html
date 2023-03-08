@@ -1,0 +1,26 @@
+<div *ngIf="!!avatar" class="avatar">
+  <ng-content select="kirby-avatar"></ng-content>
+</div>
+
+<div *ngIf="!!flag" class="flag">
+  <ng-content select="kirby-flag"></ng-content>
+</div>
+
+<!-- Only title, no value: -->
+<h1 *ngIf="!!title && !value" class="title" [kirbyFitHeading]="fitHeadingConfig">
+  {{ title }}
+</h1>
+
+<!-- Title and value: -->
+<h1 *ngIf="!!title && !!value" class="title kirby-text-medium">
+  {{ title }}
+</h1>
+<h3 *ngIf="!!value" class="value kirby-text-display-3">{{ value }}<span class="value-unit kirby-text-normal semi-dark-text" *ngIf="!!valueUnit">{{ valueUnit }}</span></h3>
+
+<!-- Subtitles: -->
+<div *ngIf="!!subtitle1" class="subtitle1 kirby-text-small">
+  {{ subtitle1 }}
+</div>
+<div *ngIf="!!subtitle2" class="subtitle2 kirby-text-small">
+  {{ subtitle2 }}
+</div>

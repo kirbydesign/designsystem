@@ -26,9 +26,8 @@ export type TriggerEvent = 'hover' | 'click' | 'focus';
 
 export enum FloatingOffset {
   none = 0,
-  small = 5,
-  medium = 10,
-  large = 15,
+  small = 4,
+  medium = 8,
 }
 
 interface EventMethods {
@@ -36,7 +35,7 @@ interface EventMethods {
   method: () => void;
 }
 
-type EventListener = () => void;
+type EventListenerDisposeFn = () => void;
 
 /**
  * @summary FloatingDirective is a utility that lets you declarative anchor "popup" containers to another element.
@@ -45,8 +44,6 @@ type EventListener = () => void;
  *
  * Uses PortalDirective to enable functionality for portaling the floated content. This should be used when needed
  * and not as the default option.
- *
- * @status In development
  */
 @Directive({
   selector: '[kirbyFloating]',
@@ -177,7 +174,7 @@ export class FloatingDirective implements OnInit, OnDestroy {
 
   private autoUpdaterRef: () => void;
   private isShown: boolean = false;
-  private eventListeners: EventListener[] = [];
+  private eventListenerDisposeFns: EventListenerDisposeFn[] = [];
   private triggerEventMap: Map<TriggerEvent, EventMethods[]> = new Map([
     ['click', [{ event: 'click', method: this.toggleShow.bind(this) }]],
     [
@@ -322,12 +319,12 @@ export class FloatingDirective implements OnInit, OnDestroy {
     }
 
     events.forEach((event: EventMethods) => {
-      const eventListener: () => void = this.renderer.listen(
+      const eventListenerDisposeFn: EventListenerDisposeFn = this.renderer.listen(
         this.reference?.nativeElement,
         event.event,
         event.method
       );
-      this.eventListeners.push(eventListener);
+      this.eventListenerDisposeFns.push(eventListenerDisposeFn);
     });
   }
 
@@ -347,12 +344,12 @@ export class FloatingDirective implements OnInit, OnDestroy {
   }
 
   private tearDownEventHandling(): void {
-    this.eventListeners.forEach((eventListener) => {
-      if (eventListener != null) {
-        eventListener();
+    this.eventListenerDisposeFns.forEach((eventListenerDisposeFunction: EventListenerDisposeFn) => {
+      if (eventListenerDisposeFunction != null) {
+        eventListenerDisposeFunction();
       }
     });
-    this.eventListeners = [];
+    this.eventListenerDisposeFns = [];
   }
 
   private removeAutoUpdaterRef(): void {

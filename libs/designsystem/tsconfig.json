@@ -42,6 +42,7 @@
       "@kirbydesign/designsystem/empty-state": ["empty-state/index.ts"],
       "@kirbydesign/designsystem/dropdown": ["dropdown/index.ts"],
       "@kirbydesign/designsystem/page": ["page/index.ts"],
+      "@kirbydesign/designsystem/header": ["header/index.ts"],
       "@kirbydesign/designsystem/modal": ["modal/index.ts"],
       "@kirbydesign/designsystem/modal/v2": ["modal/v2/index.ts"],
       "@kirbydesign/designsystem/kirby-app": ["kirby-app/index.ts"],

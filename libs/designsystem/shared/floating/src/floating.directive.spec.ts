@@ -105,25 +105,25 @@ describe('FloatingDirective', () => {
       it('should not add event listeners when only triggers is set without reference', () => {
         directive.reference = null;
         directive.triggers = ['hover'];
-        expect(directive['eventListeners']).toHaveLength(0);
+        expect(directive['eventListenerDisposeFns']).toHaveLength(0);
       });
 
       it('should add event listeners for click event when reference and triggers is set', () => {
         directive.triggers = ['click'];
         directive.reference = component.floatingElementRef;
-        expect(directive['eventListeners']).toHaveLength(1);
+        expect(directive['eventListenerDisposeFns']).toHaveLength(1);
       });
 
       it('should add event listeners for hover event when reference and triggers is set', () => {
         directive.triggers = ['hover'];
         directive.reference = component.floatingElementRef;
-        expect(directive['eventListeners']).toHaveLength(2);
+        expect(directive['eventListenerDisposeFns']).toHaveLength(2);
       });
 
       it('should add event listeners for click event when reference and triggers is set', () => {
         directive.triggers = ['focus'];
         directive.reference = component.floatingElementRef;
-        expect(directive['eventListeners']).toHaveLength(2);
+        expect(directive['eventListenerDisposeFns']).toHaveLength(2);
       });
     });
   });
@@ -143,42 +143,41 @@ describe('FloatingDirective', () => {
         spyOnProperty(floatingUi, 'computePosition', 'get').and.returnValue(computePositionFuncSpy);
       });
 
-      describe('add styling', () => {
-        it('should add style left to host element', () => {
-          directive.ngOnInit();
-          expect(component.hostElementRef.nativeElement).toHaveComputedStyle({ left: '0px' });
-        });
+      it('should add style left to host element', () => {
+        directive.ngOnInit();
+        expect(component.hostElementRef.nativeElement).toHaveComputedStyle({ left: '0px' });
+      });
 
-        it('should add style top to host element', () => {
-          directive.ngOnInit();
-          expect(component.hostElementRef.nativeElement).toHaveComputedStyle({ top: '0px' });
-        });
+      it('should add style top to host element', () => {
+        directive.ngOnInit();
+        expect(component.hostElementRef.nativeElement).toHaveComputedStyle({ top: '0px' });
+      });
 
-        it('should add style position from strategy input to host element - strategy absolute', () => {
-          const strategy: Strategy = 'absolute';
-          spectator.setInput('strategy', strategy);
-          directive.ngOnInit();
-          expect(component.hostElementRef.nativeElement).toHaveComputedStyle({
-            position: strategy,
-          });
-        });
-
-        it('should add style position from strategy input to host element - strategy fixed', () => {
-          const strategy: Strategy = 'fixed';
-          spectator.setInput('strategy', strategy);
-          directive.ngOnInit();
-          expect(component.hostElementRef.nativeElement).toHaveComputedStyle({
-            position: strategy,
-          });
-        });
-
-        it('should add style top to host element', () => {
-          directive.ngOnInit();
-          expect(component.hostElementRef.nativeElement).toHaveComputedStyle({
-            'z-index': DesignTokenHelper.zLayer('popover'),
-          });
+      it('should add style position from strategy input to host element - strategy absolute', () => {
+        const strategy: Strategy = 'absolute';
+        spectator.setInput('strategy', strategy);
+        directive.ngOnInit();
+        expect(component.hostElementRef.nativeElement).toHaveComputedStyle({
+          position: strategy,
         });
       });
+
+      it('should add style position from strategy input to host element - strategy fixed', () => {
+        const strategy: Strategy = 'fixed';
+        spectator.setInput('strategy', strategy);
+        directive.ngOnInit();
+        expect(component.hostElementRef.nativeElement).toHaveComputedStyle({
+          position: strategy,
+        });
+      });
+
+      it('should add style top to host element', () => {
+        directive.ngOnInit();
+        expect(component.hostElementRef.nativeElement).toHaveComputedStyle({
+          'z-index': DesignTokenHelper.zLayer('popover'),
+        });
+      });
+
       describe('autoUpdatePosition', () => {
         it('should call floating-ui autoUpdate', () => {
           spectator.detectChanges();
