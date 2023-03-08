@@ -1,1 +1,1 @@
-export { FloatingDirective, TriggerEvent } from './floating.directive';
+export { FloatingDirective, TriggerEvent, FloatingOffset } from './floating.directive';
