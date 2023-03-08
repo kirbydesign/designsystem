@@ -82,7 +82,6 @@ import { NestedModalsV2ExampleComponent } from './modal-v2-example/nested-modals
 import { ActionListExampleComponent } from '~/app/examples/action-list-example/action-list-example.component';
 import { MenuExampleComponent } from '~/app/examples/menu-example/menu-example.component';
 
-VirtualScrollListExampleComponent;
 export const routes: Routes = [
   {
     path: '',
