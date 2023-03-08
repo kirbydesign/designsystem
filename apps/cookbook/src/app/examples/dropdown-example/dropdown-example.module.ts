@@ -14,7 +14,6 @@ import { DropdownExampleNgFormsComponent } from './examples/ng-forms';
 import { DropdownExamplePreSelectedComponent } from './examples/pre-selected';
 import { DropdownExampleRightAlignedComponent } from './examples/right-aligned';
 import { DropdownExampleScrollComponent } from './examples/scroll';
-import { DropdownExamplePopoverComponent } from '~/app/examples/dropdown-example/examples/popover';
 
 const COMPONENT_DECLARATIONS = [
   DropdownExampleConfigurationComponent,
@@ -27,7 +26,6 @@ const COMPONENT_DECLARATIONS = [
   DropdownExampleItemSelectComponent,
   DropdownExampleCustomItemTemplateComponent,
   DropdownExampleNgFormsComponent,
-  DropdownExamplePopoverComponent,
 ];
 
 @NgModule({

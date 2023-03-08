@@ -19,7 +19,7 @@ import {
   FloatingDirective,
   FloatingOffset,
   TriggerEvent,
-} from '../../src/lib/directives/floating/floating.directive';
+} from '@kirbydesign/designsystem/shared/floating';
 
 @Component({
   selector: 'kirby-menu',
