@@ -143,9 +143,11 @@ export class HeaderActionsComponent implements AfterViewInit {
   private handleHiddenButtonIntersection = (entries) => {
     entries.forEach((entry: IntersectionObserverEntry) => {
       if (entry.isIntersecting) {
-        this.showButton(entry.target);
-        this.populateDropdown();
-        this.toggleDropdown();
+        if (entry.intersectionRatio === 1) {
+          this.showButton(entry.target);
+          this.populateDropdown();
+          this.toggleDropdown();
+        }
       }
     });
   };
