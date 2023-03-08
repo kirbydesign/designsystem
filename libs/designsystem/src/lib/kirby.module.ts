@@ -72,16 +72,8 @@ import { ReorderListComponent } from '@kirbydesign/designsystem/reorder-list';
 
 import { ToastController, ToastHelper } from '@kirbydesign/designsystem/toast';
 import { BreakpointHelperService, GridComponent } from '@kirbydesign/designsystem/grid';
-<<<<<<< HEAD
-<<<<<<< HEAD
-import { TabNavigationModule } from '@kirbydesign/designsystem/tab-navigation';
+
 import { MenuComponent } from '@kirbydesign/designsystem/menu';
-=======
-import { ActionListComponent } from '../../action-list/src/action-list.component';
->>>>>>> cec22b288 (chore: move location of action-list)
-=======
-import { MenuComponent } from '../../menu/src/menu.component';
->>>>>>> 147430b08 (chore: rename action-list to menu)
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
 import { customElementsInitializer } from './custom-elements-initializer';
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
