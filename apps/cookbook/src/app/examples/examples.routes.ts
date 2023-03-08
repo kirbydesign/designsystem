@@ -80,7 +80,6 @@ import { HeaderExampleComponent } from './header-example/header-example.componen
 import { NestedModalsV2ExampleComponent } from './modal-v2-example/nested-modals/nested-modals-v2-example.component';
 import { MenuExampleComponent } from '~/app/examples/menu-example/menu-example.component';
 
-VirtualScrollListExampleComponent;
 export const routes: Routes = [
   {
     path: '',
