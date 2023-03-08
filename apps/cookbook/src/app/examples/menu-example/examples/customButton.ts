@@ -9,7 +9,7 @@ const config = {
     type="button"
     [attentionLevel]="'3'"
   >
-    <kirby-icon [name]="'menu-outline'" [themeColor]="themeColor" [size]="iconSize"></kirby-icon>
+    <kirby-icon [name]="'menu-outline'" [themeColor]="dark" [size]="md"></kirby-icon>
   </button>
   <kirby-item (click)="actionClicked()">
     <kirby-icon name="notification" slot="start"></kirby-icon>
