@@ -77,7 +77,6 @@ import { customElementsInitializer } from './custom-elements-initializer';
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
 import { ModalRouterLinkDirective } from './directives/modal-router-link/modal-router-link.directive';
 import { KirbyBadgeModule } from './components/kirby-badge.module';
-import { FloatingDirective } from './directives/floating/floating.directive';
 
 const exportedDeclarations = [ModalRouterLinkDirective];
 
@@ -117,7 +116,6 @@ const standaloneComponents = [
   CalendarComponent,
   ButtonComponent,
   ComponentLoaderDirective,
-  FloatingDirective,
   FlagComponent,
 ];
 const exportedModules = [
