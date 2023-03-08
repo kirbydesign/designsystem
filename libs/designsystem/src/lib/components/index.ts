@@ -1,5 +1,3 @@
-export { MenuComponent } from '../../../menu/src/menu.component';
-
 export { KirbyBadge as BadgeComponent } from './web-component-proxies.component';
 
 /* prettier-ignore */
