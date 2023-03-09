@@ -54,7 +54,7 @@ export class HeaderActionsComponent implements AfterViewInit {
    */
   @ViewChild(DropdownComponent) dropdownComp!: DropdownComponent;
 
-  private dropdownTextToButtonMap: Map<string, HTMLButtonElement>;
+  private hiddenButtons: HTMLButtonElement[];
 
   constructor(private renderer: Renderer2, private cdr: ChangeDetectorRef) {}
 
@@ -95,24 +95,22 @@ export class HeaderActionsComponent implements AfterViewInit {
      * firing the matching buttons click-event in onDropdownActionSelect
      */
 
-    this.dropdownTextToButtonMap = new Map<string, HTMLButtonElement>();
     this._collapsedActions = [];
+    this.hiddenButtons = Array.from(this.hiddenLayer.nativeElement.children) as HTMLButtonElement[];
 
-    const hiddenButtons = Array.from(
-      this.hiddenLayer.nativeElement.children
-    ) as HTMLButtonElement[];
-
-    hiddenButtons.forEach((button) => {
+    this.hiddenButtons.forEach((button) => {
       const buttonText = button.textContent.trim();
       this._collapsedActions.push(buttonText);
-      this.dropdownTextToButtonMap.set(buttonText, button);
     });
   }
 
-  onDropdownActionSelect(action) {
+  onDropdownActionSelect() {
+    const selectedIndex = this.dropdownComp.selectedIndex;
+    const selectedAction = this.hiddenButtons[selectedIndex];
+
+    // Dropdown should not persist selected item, we want it to be re-selectable
     this.dropdownComp.selectedIndex = -1;
 
-    const selectedAction = this.dropdownTextToButtonMap.get(action);
     if (selectedAction) {
       const event = new PointerEvent('click', {
         bubbles: true,
