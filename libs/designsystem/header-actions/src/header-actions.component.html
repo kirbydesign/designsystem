@@ -6,10 +6,10 @@
 
     <kirby-dropdown
       [items]="_collapsedActions"
-      [popout]="'left'"
       [usePopover]="true"
       [_isMoreMenu]="true"
-      (change)="onDropdownActionSelect($event)"
+      popout="left"
+      (change)="onDropdownActionSelect()"
     ></kirby-dropdown>
   </div>
   <div class="hidden-layer" #hiddenLayer></div>
