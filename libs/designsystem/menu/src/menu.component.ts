@@ -52,6 +52,8 @@ export class MenuComponent implements AfterViewInit {
 
   @Input() public triggers: Array<TriggerEvent> = ['click'];
 
+  @Input() public DOMPortalOutlet: HTMLElement | undefined;
+
   @Input() public autoPlacement: boolean = false;
 
   @Input() public closeOnSelect: boolean = true;
