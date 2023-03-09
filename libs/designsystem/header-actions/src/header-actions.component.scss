@@ -1,24 +1,43 @@
 @use '@kirbydesign/core/src/scss/utils';
 
+:host {
+  display: flex;
+  position: relative;
+}
+
 :host(.right) {
-  .bounding-box {
+  justify-content: flex-end;
+
+  .hidden-layer {
     flex-direction: row-reverse;
+    justify-content: flex-end;
   }
 }
 
-.bounding-box {
-  display: flex;
-  width: 100%;
-  overflow: hidden;
-  min-width: utils.$fat-finger-size;
+:host(.is-collapsed) {
+  kirby-dropdown {
+    display: inline-block;
+  }
 }
 
 .visible-layer {
-  display: inline-block;
+  display: flex;
+  overflow: hidden;
+}
+
+.button-elements {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .hidden-layer {
   visibility: hidden;
+  display: flex;
+  justify-content: flex-end;
+  position: absolute;
+  inset: 0;
 }
 
 kirby-dropdown {
