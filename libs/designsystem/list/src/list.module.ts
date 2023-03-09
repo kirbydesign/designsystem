@@ -8,6 +8,8 @@ import { IconModule } from '@kirbydesign/designsystem/icon';
 import { ItemModule } from '@kirbydesign/designsystem/item';
 import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { MenuComponent } from '@kirbydesign/designsystem/menu';
+import { PageComponent, PageModule } from '@kirbydesign/designsystem/page';
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 import { ListItemColorDirective } from './directives/list-item-color.directive';
 import { ListExperimentalComponent } from './list-experimental/list-experimental.component';
@@ -51,6 +53,7 @@ const declarations = [
     ItemModule,
     AvatarComponent,
     ButtonComponent,
+    MenuComponent,
   ],
   exports: exportedDeclarations,
   providers: [],

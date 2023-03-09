@@ -25,6 +25,7 @@
   [closeOnEscapeKey]="closeOnEscapeKey"
   [closeOnSelect]="closeOnSelect"
   [autoPlacement]="autoPlacement"
+  (displayChanged)="test($event)"
 >
   <ng-content select="kirby-item"></ng-content>
 </kirby-card>

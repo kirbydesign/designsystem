@@ -50,9 +50,16 @@
     </kirby-item>
     <ng-container [ngSwitch]="_getSwipeActions(item).length > 1">
       <ng-container *ngSwitchCase="true">
-        <button slot="end" kirby-button [size]="'sm'" attentionLevel="3">
-          <kirby-icon [name]="'more'"></kirby-icon>
-        </button>
+        <!-- menu start -->
+        <kirby-menu slot="end">
+          <kirby-item [selectable]="true">
+            <h3>Action 1</h3>
+          </kirby-item>
+          <kirby-item [selectable]="true">
+            <h3>Action 2</h3>
+          </kirby-item>
+        </kirby-menu>
+        <!-- menu end -->
       </ng-container>
       <ng-container *ngSwitchCase="false">
         <ng-container *ngFor="let action of _getSwipeActions(item)">
