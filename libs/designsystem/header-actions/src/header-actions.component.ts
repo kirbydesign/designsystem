@@ -31,7 +31,7 @@ export class HeaderActionsComponent implements AfterViewInit, OnDestroy {
    */
   @Input() set visibleActions(value: number) {
     this._visibleActions = value;
-    this.hiddenButtonsIntersectionObserver?.disconnect();
+    this.visibleButtonItersectionObserver?.disconnect();
 
     if (!this.buttons) return;
     this.initializeCollapsing();
@@ -41,13 +41,14 @@ export class HeaderActionsComponent implements AfterViewInit, OnDestroy {
   @Input()
   placement: 'left' | 'right' = 'left';
 
-  @ViewChild(DropdownComponent, { read: ElementRef }) dropdown!: ElementRef;
+  @ViewChild(DropdownComponent, { read: ElementRef }) dropdown!: ElementRef<HTMLElement>;
   @ContentChildren(ButtonComponent, { read: ElementRef }) buttons!: ElementRef<HTMLButtonElement>[];
   @ViewChild('hiddenLayer', { read: ElementRef }) hiddenLayer!: ElementRef<HTMLElement>;
   @ViewChild('visibleLayer', { read: ElementRef }) visibleLayer!: ElementRef<HTMLElement>;
+  private dropdownButton!: HTMLButtonElement;
 
   @HostBinding('class.is-collapsed')
-  _isCollapsed: boolean = true;
+  _isCollapsed: boolean;
   _collapsedActions: string[] = [];
   _visibleActions: number;
 
@@ -58,10 +59,9 @@ export class HeaderActionsComponent implements AfterViewInit, OnDestroy {
   @ViewChild(DropdownComponent) dropdownComp!: DropdownComponent;
 
   private hiddenButtons: HTMLButtonElement[];
-  private hiddenButtonsIntersectionObserver: IntersectionObserver;
-  private intersectionObserverOptions;
+  private visibleButtonItersectionObserver: IntersectionObserver;
 
-  constructor(private renderer: Renderer2) {}
+  constructor(private renderer: Renderer2, private elementRef: ElementRef<HTMLElement>) {}
 
   ngAfterViewInit(): void {
     if (this._visibleActions) {
@@ -69,10 +69,11 @@ export class HeaderActionsComponent implements AfterViewInit, OnDestroy {
     } else {
       this.initializeDynamicResizing();
     }
+    console.log(this.buttons);
   }
 
   ngOnDestroy(): void {
-    this.hiddenButtonsIntersectionObserver?.disconnect();
+    this.visibleButtonItersectionObserver?.disconnect();
   }
 
   onDropdownActionSelect() {
@@ -131,57 +132,93 @@ export class HeaderActionsComponent implements AfterViewInit, OnDestroy {
 
     this.hiddenButtons.forEach((button) => {
       const buttonText = button.textContent.trim();
-      this._collapsedActions.push(buttonText);
+      this._collapsedActions.unshift(buttonText);
     });
   }
 
   private initializeDynamicResizing() {
-    this.intersectionObserverOptions = {
-      root: this.visibleLayer.nativeElement,
+    const intersectionObserverOptions = {
+      root: this.elementRef.nativeElement,
       threshold: 1.0,
     };
 
-    this.hiddenButtonsIntersectionObserver = new IntersectionObserver(
-      this.handleHiddenButtonIntersection,
-      this.intersectionObserverOptions
+    this.visibleButtonItersectionObserver = new IntersectionObserver(
+      this.handleVisibleButtonIntersection,
+      intersectionObserverOptions
     );
 
     this.buttons.forEach((button) => {
-      this.hiddenButtonsIntersectionObserver.observe(button.nativeElement);
+      this.visibleButtonItersectionObserver.observe(button.nativeElement);
     });
+
+    this.dropdownButton = this.dropdown.nativeElement.querySelector('button[kirby-button]');
+    this.visibleButtonItersectionObserver.observe(this.dropdownButton);
   }
 
-  private handleHiddenButtonIntersection = (entries) => {
-    const buttonsToHide: Element[] = [];
+  private handleVisibleButtonIntersection = (entries) => {
     entries.forEach((entry: IntersectionObserverEntry) => {
-      if (entry.intersectionRatio < 1) {
-        buttonsToHide.push(entry.target);
+      // console.log('visibleButtonIntersection - ', entry);
+      if (entry.intersectionRatio < 1 && !entry.target.closest('.hidden-layer')) {
+        console.log('visibleButtonIntersection - partly out of bounds', entry.target.textContent);
+        if (entry.target !== this.dropdownButton) {
+          if (this.placement === 'right') {
+            const visibleButtons = this.elementRef.nativeElement.querySelectorAll(
+              ':scope > button[kirby-button]'
+            );
+            // console.log('visibleButtons:', visibleButtons);
+            // const lastVisibleButton = this.elementRef.nativeElement.querySelector(
+            //   ':scope > button[kirby-button]:first-child'
+            // );
+            // console.log('lastVisibleButton:', lastVisibleButton);
+            const lastVisibleButton = visibleButtons[visibleButtons.length - 1];
+            // this.visibleButtonItersectionObserver.unobserve(entry.target);
+            console.log(`Move [${lastVisibleButton.textContent}] to hidden layer...`);
+
+            this.visibleButtonItersectionObserver.unobserve(lastVisibleButton);
+            this.renderer.appendChild(this.hiddenLayer.nativeElement, lastVisibleButton);
+            setTimeout(() => {
+              console.log(`Startt observing [${lastVisibleButton.textContent}]...`);
+
+              // this.visibleButtonItersectionObserver.observe(entry.target);
+              this.visibleButtonItersectionObserver.observe(lastVisibleButton);
+            });
+            this.toggleDropdown();
+            this.populateDropdown();
+          } else {
+            // PLACEMENT LEFT:
+
+            this.renderer.appendChild(this.hiddenLayer.nativeElement, entry.target);
+            this.toggleDropdown();
+            this.populateDropdown();
+          }
+        } else {
+          if (entry.intersectionRatio !== 0) {
+            console.log('dropdownButton partly outside - move button before');
+
+            const buttonBefore = this.dropdown.nativeElement.previousElementSibling;
+            this.renderer.appendChild(this.hiddenLayer.nativeElement, buttonBefore);
+            this.toggleDropdown();
+            this.populateDropdown();
+          }
+        }
       }
-
-      // if (entry.isIntersecting) {
-      //   if (entry.intersectionRatio === 1) {
-      //     if (entry.target.parentElement === this.hiddenLayer.nativeElement) {
-      //       console.log('Intersecting btn: ', entry.target);
-      //     }
-      //   }
-      // }
+      if (entry.intersectionRatio === 1 && entry.target.closest('.hidden-layer')) {
+        console.log(
+          `visibleButtonIntersection - entry ${entry.target.textContent} is in hidden layer => move out... `
+        );
+        // this.renderer.appendChild(this.elementRef.nativeElement, entry.target);
+        this.visibleButtonItersectionObserver.unobserve(entry.target);
+        this.renderer.insertBefore(
+          this.elementRef.nativeElement,
+          entry.target,
+          this.dropdown.nativeElement
+        );
+        setTimeout(() => {
+          this.visibleButtonItersectionObserver.observe(entry.target);
+        });
+        this.toggleDropdown();
+        this.populateDropdown();
+      }
     });
-
-    //console.log(buttonsToHide);
-
-    this.hideButtons(buttonsToHide);
-    this.populateDropdown();
   };
-
-  private hideButtons(buttons: Element[]) {
-    buttons.forEach((button) => {
-      this.renderer.appendChild(this.hiddenLayer.nativeElement, button);
-    });
-
-    this.toggleDropdown();
-  }
-
-  private showButton(button: Element) {
-    this.renderer.appendChild(this.visibleLayer.nativeElement, button);
-  }
 }

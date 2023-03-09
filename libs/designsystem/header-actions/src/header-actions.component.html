@@ -1,5 +1,5 @@
-<div class="visible-layer" #visibleLayer><ng-content></ng-content></div>
-<div class="hidden-layer" #hiddenLayer></div>
+<div *ngIf="placement === 'right'" class="hidden-layer" #hiddenLayer></div>
+<ng-content></ng-content>
 
 <kirby-dropdown
   [items]="_collapsedActions"
@@ -8,3 +8,4 @@
   popout="left"
   (change)="onDropdownActionSelect()"
 ></kirby-dropdown>
+<div *ngIf="placement !== 'right'" class="hidden-layer" #hiddenLayer></div>

@@ -3,15 +3,31 @@
 :host {
   display: flex;
   position: relative;
+  border: 1px dotted red;
 }
 
 :host(.right) {
   justify-content: flex-end;
 
   .hidden-layer {
-    flex-direction: row-reverse;
-    justify-content: flex-end;
+    justify-content: flex-start;
+    justify-self: flex-start;
+    flex-direction: row;
+
+    @include utils.slotted(button) {
+      &:first-child {
+        // margin-inline-start: -44px;
+        left: 40px;
+      }
+    }
   }
+
+  // justify-content: flex-end;
+
+  // .hidden-layer {
+  //   flex-direction: row-reverse;
+  //   justify-content: flex-end;
+  // }
 }
 
 :host(.is-collapsed) {
@@ -20,27 +36,47 @@
   }
 }
 
-.visible-layer {
-  display: flex;
-  overflow: hidden;
-}
-
-.button-elements {
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  overflow: hidden;
+:host(.left) {
+  .hidden-layer {
+    @include utils.slotted(button) {
+      &:first-child {
+        right: 48px;
+      }
+    }
+  }
 }
 
 .hidden-layer {
-  visibility: hidden;
+  border: 2px solid chartreuse;
+
+  // visibility: hidden;
+  opacity: 0.4;
   display: flex;
   justify-content: flex-end;
-  position: absolute;
+  flex-direction: row-reverse;
   inset: 0;
+
+  // transform: translateY(-100%);
 }
+
+// .visible-layer {
+//   display: flex;
+//   justify-content: flex-start;
+//   overflow: hidden;
+//   width: 100%;
+// }
+
+// .hidden-layer {
+//   //visibility: hidden;
+//   opacity: 0.5;
+//   display: flex;
+//   justify-content: flex-end;
+//   position: absolute;
+//   inset: 0;
+// }
 
 kirby-dropdown {
   margin: 4px;
   display: none;
+  z-index: 1;
 }
