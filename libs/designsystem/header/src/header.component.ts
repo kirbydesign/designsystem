@@ -1,4 +1,6 @@
 import {
+  AfterContentInit,
+  ChangeDetectionStrategy,
   Component,
   ContentChild,
   ContentChildren,
@@ -26,25 +28,45 @@ import type { FitHeadingConfig } from '@kirbydesign/designsystem/shared';
       <kirby-icon name="more"></kirby-icon>
     </button>
   `,
-  /* HACK: temporary styling to hide buttons on toolbar, remove when header-actions can collapse... */
+  /* HACK: temporary styling to hide buttons when visibleActions > 0, remove when header-actions can collapse... */
   styles: [
     `
-      :host-context(ion-toolbar) ::ng-deep button[kirby-button]:not(:first-child):not(:last-child) {
+      :host(.visible-actions) ::ng-deep button[kirby-button]:not(:first-child):not(:last-child) {
         display: none;
       }
     `,
   ],
 })
-export class HeaderActionsComponent {
+export class HeaderActionsComponent implements AfterContentInit {
   @ContentChildren(ButtonComponent) private buttons: QueryList<ButtonComponent>;
 
   constructor(public elementRef: ElementRef<HTMLElement>) {}
+
+  ngAfterContentInit(): void {
+    const isInToolbar = this.elementRef.nativeElement.closest('ion-toolbar');
+    if (isInToolbar) {
+      this.isCondensed = true;
+      this.visibleActions = 2;
+    } else {
+      const emphasizeActions = !!this.elementRef.nativeElement.closest('.actions.emphasize');
+      if (this.visibleActions === undefined && !emphasizeActions) {
+        // Setting default visible actions to 2:
+        this.visibleActions = 2;
+      }
+    }
+  }
 
   public set isCondensed(value: boolean) {
     this.buttons.forEach((button) => (button.showIconOnly = value));
   }
 
-  @Input() visibleActions: number;
+  @Input() visibleActions?: number;
+  @Input() emphasizeActions?: boolean;
+
+  @HostBinding('class.visible-actions')
+  public get _hasMaxVisibleActions() {
+    return this.visibleActions > 0;
+  }
 }
 
 @Directive({
@@ -56,6 +78,7 @@ export class HeaderActionsDirective {}
   selector: 'kirby-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent implements OnChanges {
   @HostBinding('class.centered')
@@ -63,6 +86,7 @@ export class HeaderComponent implements OnChanges {
   centered = false;
 
   @Input() titleMaxLines: number;
+  @Input() emphasizeActions = false;
 
   fitHeadingConfig: FitHeadingConfig;
 

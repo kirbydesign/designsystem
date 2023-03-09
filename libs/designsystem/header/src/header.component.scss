@@ -3,6 +3,7 @@
 
 :host {
   display: grid;
+  align-items: start;
   row-gap: utils.size('m');
   margin-top: utils.size('s');
   margin-bottom: utils.size('l');
@@ -24,6 +25,12 @@
       align-items: center;
       grid-column-start: 2;
     }
+  }
+}
+
+@include utils.media('<medium') {
+  .actions:not(.emphasize) {
+    display: none;
   }
 }
 

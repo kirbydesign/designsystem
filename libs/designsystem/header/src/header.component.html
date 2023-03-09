@@ -32,7 +32,7 @@
     *ngIf="!!actionsTemplate"
     #actionsElement
     class="actions"
-    [ngClass]="{ centered: centered }"
+    [class.emphasize]="emphasizeActions"
   >
     <ng-container [ngTemplateOutlet]="actionsTemplate"></ng-container>
   </div>
