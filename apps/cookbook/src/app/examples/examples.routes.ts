@@ -78,7 +78,7 @@ import { DropdownExampleComponent } from './dropdown-example/dropdown-example.co
 import { DataTableExampleComponent } from './data-table-example/data-table-example.component';
 import { HeaderExampleComponent } from './header-example/header-example.component';
 import { NestedModalsV2ExampleComponent } from './modal-v2-example/nested-modals/nested-modals-v2-example.component';
-import { MenuExampleComponent } from '~/app/examples/menu-example/menu-example.component';
+import { MenuExampleComponent } from './menu-example/menu-example.component';
 
 export const routes: Routes = [
   {

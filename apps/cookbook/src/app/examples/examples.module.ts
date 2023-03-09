@@ -41,7 +41,7 @@ import { SectionHeaderExampleModule } from './section-header-example/section-hea
 import { SegmentedControlExampleModule } from './segmented-control-example/segmented-control-example.module';
 import { ToggleButtonExampleModule } from './toggle-button-example/toggle-button-example.module';
 import { VirtualScrollExampleModule } from './virtual-scroll-example/virtual-scroll-example.module';
-import { MenuExampleModule } from '~/app/examples/menu-example/menu-example.module';
+import { MenuExampleModule } from './menu-example/menu-example.module';
 
 const IMPORTS = [
   CodeViewerModule,

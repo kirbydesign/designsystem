@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionProperty } from './../../shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
   selector: 'cookbook-menu-showcase',
@@ -29,7 +29,7 @@ export class MenuShowcaseComponent {
     },
     {
       name: 'buttonSize',
-      description: 'size of the default button',
+      description: 'Size of the default button',
       defaultValue: 'md',
       type: ['ButtonSize'],
     },
@@ -48,13 +48,13 @@ export class MenuShowcaseComponent {
     {
       name: 'autoPlacement',
       description:
-        'If the menu should attempt to position the content where there is best room for it. Might disregard value of input placement',
+        'If content should be auto placed where it best fits on the screen. Will override value of input placement',
       defaultValue: 'false',
       type: ['boolean'],
     },
     {
       name: 'closeOnSelect',
-      description: 'If the menu should hide content after selecting (clicking) on the content',
+      description: '"Toggle whether the menu should hide the content after selecting the content"',
       defaultValue: 'true',
       type: ['boolean'],
     },

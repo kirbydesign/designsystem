@@ -1,5 +1,5 @@
-@use '../../../../node_modules/@kirbydesign/core/src/scss/interaction-state/index';
-@use '../../../../node_modules/@kirbydesign/core/src/scss/utils';
+@use '@kirbydesign/core/src/scss/utils';
+@use '@kirbydesign/core/src/scss/interaction-state/index';
 
 $dropdown-max-height: 8 * utils.$dropdown-item-height;
 $min-screen-width-small: 280px;
