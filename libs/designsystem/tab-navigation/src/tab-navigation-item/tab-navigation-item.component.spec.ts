@@ -35,13 +35,13 @@ describe('TabNavigationItemComponent', () => {
   });
 
   it('should render the correct text', () => {
-    const textElement = spectator.query('span[text]');
+    const textElement = spectator.query('span[data-text]');
 
     expect(textElement).toHaveExactText('Tab1');
   });
 
   it('should set the data attribute with the correct text', () => {
-    const textElement = spectator.query('span[text]');
+    const textElement = spectator.query('span[data-text]');
 
     expect(textElement).toHaveAttribute('data-text', 'Tab1');
   });

@@ -10,8 +10,8 @@ $divider-max-width-breakpoint: utils.$page-content-max-width + (utils.size('s') 
   position: relative;
   padding-bottom: $bottom-border-height * 2;
 
-  button {
-    font-family: var(--kirby-font-family);
+  button[role='tab'] {
+    font-family: inherit;
     background-color: utils.get-color('background-color');
     color: utils.get-color('black');
     padding: utils.size('s');
@@ -37,28 +37,26 @@ $divider-max-width-breakpoint: utils.$page-content-max-width + (utils.size('s') 
     &:hover {
       font-weight: utils.font-weight('bold');
     }
-  }
 
-  &.selected {
-    // Selected divider
-    &::before {
-      content: '';
-      width: 100%;
-      background-color: $border-color-selected;
-      position: absolute;
-      border-radius: 1px;
-      height: $bottom-border-height * 2;
-      bottom: 0;
-      z-index: 2;
-    }
-
-    button {
+    &[aria-selected='true'] {
       font-weight: utils.font-weight('bold');
+
+      // Selected divider
+      &::before {
+        content: '';
+        width: 100%;
+        background-color: $border-color-selected;
+        position: absolute;
+        border-radius: 1px;
+        height: $bottom-border-height * 2;
+        bottom: 0;
+        z-index: 2;
+      }
     }
   }
 }
 
-span[text] {
+span[data-text] {
   max-width: $tab-item-text-max-width;
   overflow: hidden;
   text-overflow: ellipsis;
