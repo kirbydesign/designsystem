@@ -179,6 +179,10 @@ describe('ButtonComponent', () => {
 
   const sizeTestScenarios: { size: ButtonSize; expected: any }[] = [
     {
+      size: ButtonSize.XS,
+      expected: { fontSize: fontSize('xs'), height: size('m'), minWidth: '44px' },
+    },
+    {
       size: ButtonSize.SM,
       expected: { fontSize: fontSize('xs'), height: size('l'), minWidth: '44px' },
     },
@@ -258,6 +262,8 @@ describe('ButtonComponent', () => {
   });
 
   const iconTestExpectations = {
+    leftXS: { paddingInline: '8px 12px' },
+    rightXS: { paddingInline: '12px 8px' },
     left: { paddingInline: '12px 16px' },
     right: { paddingInline: '16px 12px' },
     iconOnly: { paddingInline: '24px' },
@@ -269,6 +275,16 @@ describe('ButtonComponent', () => {
     showIconOnly?: boolean;
     expected: { paddingInline: string };
   }[] = [
+    {
+      size: ButtonSize.XS,
+      iconPosition: 'left',
+      expected: iconTestExpectations.leftXS,
+    },
+    {
+      size: ButtonSize.XS,
+      iconPosition: 'right',
+      expected: iconTestExpectations.rightXS,
+    },
     {
       size: ButtonSize.SM,
       iconPosition: 'left',

@@ -24,7 +24,7 @@ export class ButtonShowcaseComponent {
       description:
         'Sets the size of the button. The touch area will always be a minimum of 44px by 44px. If buttons are smaller than this, the surrounding area will still be clickable, to preserve accessibility.',
       defaultValue: 'md',
-      type: ['sm', 'md', 'lg'],
+      type: ['xs', 'sm', 'md', 'lg'],
     },
     {
       name: 'attentionLevel',
