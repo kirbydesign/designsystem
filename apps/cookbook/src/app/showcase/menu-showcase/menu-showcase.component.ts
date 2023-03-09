@@ -53,6 +53,13 @@ export class MenuShowcaseComponent {
       type: ['boolean'],
     },
     {
+      name: 'DOMPortalOutlet',
+      description:
+        'HTMLElement for which the menu content should be placed under as a child. If no element is provided, the content will appear at its normal place in the DOM',
+      defaultValue: 'null',
+      type: ['HTMLElement'],
+    },
+    {
       name: 'closeOnSelect',
       description: '"Toggle whether the menu should hide the content after selecting the content"',
       defaultValue: 'true',
