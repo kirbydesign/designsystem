@@ -20,6 +20,28 @@
       are allowed as children of a menu. This is to ensure consistency in design and implementation
     </em>
   </p>
+  <h3>Portal</h3>
+  <p>
+    There might be issues with the stacking context, that is your menu is being overlapped by other
+    content on the page, which requires the use of portal to fix. The use of portal enables us to
+    move an element in the DOM from one parent node into another node in DOM, effectively changing
+    the moved elements stacking context.
+  </p>
+  <p>
+    Menu has an input
+    <code>DOMPortalOutlet</code>
+    which takes in a
+    <code>HTMLElement</code>
+    . It is your task to provide a reference to the DOM element for which you want to portal the
+    menu content into. This can example be achieved by using:
+    <code>document.getElementsByTagName(outletTag)[0] as HTMLElement</code>
+  </p>
+  <strong>
+    <em>
+      The use of portal should only be used when necessary. It might break styling and/or angular
+      functionality, so use with care.
+    </em>
+  </strong>
 </div>
 <div class="page-example">
   <div>
@@ -55,6 +77,15 @@
       <cookbook-menu-custom-button-example
         #menuCustomButtonExample
       ></cookbook-menu-custom-button-example>
+    </cookbook-example-viewer>
+  </div>
+</div>
+
+<div class="page-example">
+  <div>
+    <h2>Menu: Portal</h2>
+    <cookbook-example-viewer [html]="menuPortalExample.template">
+      <cookbook-menu-portal-example #menuPortalExample></cookbook-menu-portal-example>
     </cookbook-example-viewer>
   </div>
 </div>
