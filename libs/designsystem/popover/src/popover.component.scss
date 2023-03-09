@@ -24,3 +24,14 @@
   margin-top: utils.size('xxxs');
   margin-bottom: utils.size('xxxs');
 }
+
+/*
+* TEMPORARY MORE-MENU
+* Card should have smaller width as per design and to not 
+* collide with viewport on the left
+*/
+:host(.more-menu .wrapper) {
+  @include utils.slotted(kirby-card) {
+    min-width: 240px;
+  }
+}

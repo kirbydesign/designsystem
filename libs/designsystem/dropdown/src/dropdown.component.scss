@@ -104,6 +104,16 @@ $min-screen-width: 375px;
   }
 }
 
+/*
+* TEMPORARY MORE-MENU
+* Button should be round when more menu, as it is icon only
+*/
+:host(.more-menu) {
+  > button {
+    width: utils.size('xl');
+  }
+}
+
 kirby-popover {
   --max-height: #{$dropdown-max-height};
 }

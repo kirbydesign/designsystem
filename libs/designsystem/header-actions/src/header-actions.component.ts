@@ -1,6 +1,7 @@
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ContentChildren,
   ElementRef,
@@ -47,9 +48,15 @@ export class HeaderActionsComponent implements AfterViewInit {
   _collapsedActions: string[] = [];
   _visibleActions: number;
 
+  /*
+   * TEMPORARY MORE-MENU
+   * dropdownComp ViewChild is only used for temporary more-menu
+   */
+  @ViewChild(DropdownComponent) dropdownComp!: DropdownComponent;
+
   private dropdownTextToButtonMap: Map<string, HTMLButtonElement>;
 
-  constructor(private renderer: Renderer2) {}
+  constructor(private renderer: Renderer2, private cdr: ChangeDetectorRef) {}
 
   ngAfterViewInit(): void {
     this.initializeCollapsing();
@@ -103,6 +110,8 @@ export class HeaderActionsComponent implements AfterViewInit {
   }
 
   onDropdownActionSelect(action) {
+    this.dropdownComp.selectedIndex = -1;
+
     const selectedAction = this.dropdownTextToButtonMap.get(action);
     if (selectedAction) {
       const event = new PointerEvent('click', {

@@ -8,7 +8,12 @@
   [disabled]="disabled"
   type="button"
 >
-  <kirby-icon [name]="'more'"></kirby-icon>
+  <kirby-icon name="more" *ngIf="_isMoreMenu; else defaultButtonContent"></kirby-icon>
+
+  <ng-template #defaultButtonContent>
+    <span class="text">{{ selectedText || placeholder }}</span>
+    <kirby-icon [name]="isOpen ? 'arrow-up' : 'arrow-down'"></kirby-icon>
+  </ng-template>
 </button>
 
 <ng-container *ngTemplateOutlet="usePopover ? popoverTemplate : itemWrapperTemplate"></ng-container>
@@ -19,6 +24,7 @@
     [popout]="popout"
     (click)="_onPopoverClick($event)"
     (willHide)="_onPopoverWillHide()"
+    [ngClass]="{ 'more-menu': _isMoreMenu }"
   >
     <ng-container *ngTemplateOutlet="itemWrapperTemplate"></ng-container>
   </kirby-popover>
