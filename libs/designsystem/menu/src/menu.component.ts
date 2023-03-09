@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ContentChild,
   ElementRef,
@@ -37,7 +39,7 @@ import {
   styleUrls: ['./menu.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MenuComponent {
+export class MenuComponent implements AfterViewInit {
   @Input() public isDisabled: boolean = false;
 
   @Input() public themeColor: ThemeColor = 'dark';
@@ -69,4 +71,10 @@ export class MenuComponent {
     | undefined;
 
   public FloatingOffset: typeof FloatingOffset = FloatingOffset;
+
+  constructor(private cdf: ChangeDetectorRef) {}
+
+  public ngAfterViewInit(): void {
+    this.cdf.detectChanges(); // Sets the updated reference for kirby-floating
+  }
 }
