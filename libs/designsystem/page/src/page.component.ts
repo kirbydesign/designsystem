@@ -39,8 +39,8 @@ import {
   ModalNavigationService,
   ModalWrapperComponent,
 } from '@kirbydesign/designsystem/modal';
-import { FitHeadingConfig } from '@kirbydesign/designsystem/shared';
-import { HeaderActionsComponent, HeaderComponent } from '@kirbydesign/designsystem/header';
+import { FitHeadingConfig, ResizeObserverService } from '@kirbydesign/designsystem/shared';
+import { HeaderComponent } from '@kirbydesign/designsystem/header';
 
 /**
  * Specify scroll event debounce time in ms and scrolled offset from top in pixels
@@ -239,8 +239,6 @@ export class PageComponent
   private stickyContentRef: TemplateRef<any>;
   @ContentChild(HeaderComponent)
   header?: HeaderComponent;
-  @ContentChildren(HeaderActionsComponent, { descendants: true })
-  private actions: QueryList<HeaderActionsComponent>;
 
   hasPageTitle: boolean;
   hasPageSubtitle: boolean;
@@ -285,8 +283,24 @@ export class PageComponent
     private router: Router,
     private changeDetectorRef: ChangeDetectorRef,
     private modalNavigationService: ModalNavigationService,
+    private resizeObserverService: ResizeObserverService,
     @Optional() @SkipSelf() private tabsComponent: TabsComponent
   ) {}
+
+  private contentReadyPromise: Promise<void>;
+  private whenContentReady() {
+    if (!this.contentReadyPromise) {
+      this.contentReadyPromise = new Promise((resolve) => {
+        this.resizeObserverService.observe(this.ionContentElement, (entry) => {
+          if (entry.contentRect.height > 0) {
+            this.resizeObserverService.unobserve(this.ionContentElement);
+            resolve();
+          }
+        });
+      });
+    }
+    return this.contentReadyPromise;
+  }
 
   ngOnInit(): void {
     this.removeWrapper();
@@ -388,13 +402,9 @@ export class PageComponent
     this.isActive = true;
 
     this.enter.emit();
-    const titleElementRef = this.pageTitle || this.header?.titleElement;
-    if (titleElementRef) {
-      this.titleIntersectionObserver?.observe(titleElementRef.nativeElement);
-    }
-    if (this.header?.actionsElement) {
-      this.stickyActionsIntersectionObserver?.observe(this.header.actionsElement.nativeElement);
-    }
+
+    this.observeTitle();
+    this.observeActions();
   }
 
   private onLeave() {
@@ -443,23 +453,15 @@ export class PageComponent
     // Ensures initializeTitle() won't run, if already initialized
     if (this.hasPageTitle) return;
 
-    this.hasPageTitle = this.title !== undefined || !!this.customTitleTemplate || !!this.header;
+    this.hasPageTitle =
+      this.title !== undefined || !!this.customTitleTemplate || !!this.header?.title;
     this.toolbarTitleVisible = !this.hasPageTitle;
     this.hasPageSubtitle = this.subtitle !== undefined || !!this.customSubtitleTemplate;
-    if (this.header?.title) {
+    if (this.header?.title && !this.toolbarTitle) {
       this.toolbarTitle = this.header.title;
     }
-    if (this.hasPageTitle) {
-      if (!this.titleIntersectionObserver) {
-        this.titleIntersectionObserver = this.createTitleIntersectionObserver();
-      }
-      setTimeout(() => {
-        const titleElementRef = this.pageTitle || this.header?.titleElement;
-        if (titleElementRef) {
-          this.titleIntersectionObserver.observe(titleElementRef.nativeElement);
-        }
-      });
-    }
+
+    this.observeTitle();
 
     const defaultTitleTemplate = this.customTitleTemplate || this.simpleTitleTemplate;
     /* eslint-disable */
@@ -471,21 +473,28 @@ export class PageComponent
         : defaultTitleTemplate;
   }
 
-  private initializeActions() {
-    if (this.header?.actionsElement) {
-      if (!this.stickyActionsIntersectionObserver) {
-        this.stickyActionsIntersectionObserver = this.createStickyActionsIntersectionObserver();
-      }
-      setTimeout(() => {
-        this.stickyActionsIntersectionObserver.observe(this.header.actionsElement.nativeElement);
-      });
+  private observeTitle() {
+    if (!this.titleIntersectionObserver) {
+      this.titleIntersectionObserver = new IntersectionObserver(
+        (entries) => {
+          this.toolbarTitleVisible = !entries[0].isIntersecting;
+          this.changeDetectorRef.detectChanges();
+        },
+        { root: this.ionContentElement.nativeElement }
+      );
     }
-    this.actions.forEach((action) => {
-      if (action.elementRef.nativeElement.closest('ion-toolbar')) {
-        action.isCondensed = true;
-        action.visibleActions = 2;
+
+    this.whenContentReady().then(() => {
+      const titleElementRef = this.pageTitle || this.header?.titleElement;
+      if (titleElementRef) {
+        this.titleIntersectionObserver.observe(titleElementRef.nativeElement);
       }
     });
+  }
+
+  private initializeActions() {
+    this.observeActions();
+
     this.customActions.forEach((pageAction) => {
       if (pageAction.isFixed) {
         this.fixedActionsTemplate = pageAction.template;
@@ -494,6 +503,27 @@ export class PageComponent
       } else {
         this.pageActionsTemplate = pageAction.template;
       }
+    });
+  }
+
+  private observeActions() {
+    if (!this.header?.actionsElement) {
+      // Nothing to observe
+      return;
+    }
+
+    if (!this.stickyActionsIntersectionObserver) {
+      this.stickyActionsIntersectionObserver = new IntersectionObserver(
+        (entries) => {
+          this.toolbarActionsVisible = !entries[0].isIntersecting;
+          this.changeDetectorRef.detectChanges();
+        },
+        { root: this.ionContentElement.nativeElement }
+      );
+    }
+
+    this.whenContentReady().then(() => {
+      this.stickyActionsIntersectionObserver.observe(this.header.actionsElement.nativeElement);
     });
   }
 
@@ -509,41 +539,6 @@ export class PageComponent
 
   private initializeStickyContent() {
     this.stickyContentTemplate = this.stickyContentRef;
-  }
-
-  private createTitleIntersectionObserver() {
-    const options: IntersectionObserverInit = {
-      root: this.ionContentElement.nativeElement,
-      rootMargin: '0px',
-    };
-
-    let initialized = false;
-    const callback: IntersectionObserverCallback = (entries) => {
-      if (initialized) {
-        this.toolbarTitleVisible = !entries[0].isIntersecting;
-        this.changeDetectorRef.detectChanges();
-      } else {
-        initialized = true;
-      }
-    };
-    return new IntersectionObserver(callback, options);
-  }
-
-  private createStickyActionsIntersectionObserver() {
-    const options: IntersectionObserverInit = {
-      root: this.ionContentElement.nativeElement,
-      rootMargin: '0px',
-    };
-
-    let initialized = false;
-    const callback: IntersectionObserverCallback = (entries) => {
-      if (initialized) {
-        this.toolbarActionsVisible = !entries[0].isIntersecting;
-      } else {
-        initialized = true;
-      }
-    };
-    return new IntersectionObserver(callback, options);
   }
 
   private createStickyContentIntersectionObserver() {
