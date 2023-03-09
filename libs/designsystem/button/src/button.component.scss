@@ -254,6 +254,11 @@ $button-width: (
   --kirby-button-color: #{utils.get-color('success-contrast')};
 }
 
+:host-context(kirby-dropdown) {
+  // place arrow-icon in dropdown correctly
+  justify-content: space-between;
+}
+
 // Temp fix for https://github.com/angular/angular-cli/issues/13854#issuecomment-470831308
 
 /* clean-css ignore:start */
