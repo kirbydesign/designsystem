@@ -39,16 +39,34 @@
   </ng-template>
 </ng-container>
 
-<ng-container *ngIf="!isMobile" class="item_container">
-  <kirby-item class="item-width">
-    <kirby-avatar overlay="true" slot="start">
-      <kirby-icon name="moneybag"></kirby-icon>
-    </kirby-avatar>
-    <h3>{{ item.title }}</h3>
-    <data slot="end" value="item.amount">{{ item.amount }}</data>
+<ng-container *ngIf="!isMobile">
+  <kirby-item slot="start">
+    <kirby-item class="item-width">
+      <kirby-avatar overlay="true" slot="start">
+        <kirby-icon name="moneybag"></kirby-icon>
+      </kirby-avatar>
+      <h3>{{ item.title }}</h3>
+      <data slot="end" value="item.amount">{{ item.amount }}</data>
+    </kirby-item>
+    <ng-container [ngSwitch]="_getSwipeActions(item).length > 1">
+      <ng-container *ngSwitchCase="true">
+        <button slot="end" kirby-button [size]="'sm'" attentionLevel="3">
+          <kirby-icon [name]="'more'"></kirby-icon>
+        </button>
+      </ng-container>
+      <ng-container *ngSwitchCase="false">
+        <ng-container *ngFor="let action of _getSwipeActions(item)">
+          <button
+            slot="end"
+            kirby-button
+            [size]="'sm'"
+            attentionLevel="3"
+            style="margin: 0 5px 0 5px"
+          >
+            <kirby-icon [name]="_getSwipeActionIcon(action, item)"></kirby-icon>
+          </button>
+        </ng-container>
+      </ng-container>
+    </ng-container>
   </kirby-item>
-  <button class="item-button" kirby-button [size]="'sm'" attentionLevel="2">
-    <kirby-icon name="close"></kirby-icon>
-  </button>
 </ng-container>
-<!-- {{ item | json }} -->
