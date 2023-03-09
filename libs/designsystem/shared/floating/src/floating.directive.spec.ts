@@ -75,7 +75,7 @@ describe('FloatingDirective', () => {
       it('should not add event listeners when only reference is set without triggers', () => {
         directive.triggers = null;
         directive.reference = component.floatingElementRef;
-        expect(directive['eventListeners']).toHaveLength(0);
+        expect(directive['referenceEventListenerDisposeFns']).toHaveLength(0);
       });
     });
 
@@ -105,25 +105,25 @@ describe('FloatingDirective', () => {
       it('should not add event listeners when only triggers is set without reference', () => {
         directive.reference = null;
         directive.triggers = ['hover'];
-        expect(directive['eventListenerDisposeFns']).toHaveLength(0);
+        expect(directive['referenceEventListenerDisposeFns']).toHaveLength(0);
       });
 
       it('should add event listeners for click event when reference and triggers is set', () => {
         directive.triggers = ['click'];
         directive.reference = component.floatingElementRef;
-        expect(directive['eventListenerDisposeFns']).toHaveLength(1);
+        expect(directive['referenceEventListenerDisposeFns']).toHaveLength(1);
       });
 
       it('should add event listeners for hover event when reference and triggers is set', () => {
         directive.triggers = ['hover'];
         directive.reference = component.floatingElementRef;
-        expect(directive['eventListenerDisposeFns']).toHaveLength(2);
+        expect(directive['referenceEventListenerDisposeFns']).toHaveLength(2);
       });
 
       it('should add event listeners for click event when reference and triggers is set', () => {
         directive.triggers = ['focus'];
         directive.reference = component.floatingElementRef;
-        expect(directive['eventListenerDisposeFns']).toHaveLength(2);
+        expect(directive['referenceEventListenerDisposeFns']).toHaveLength(2);
       });
     });
   });
@@ -270,7 +270,7 @@ describe('FloatingDirective', () => {
           const isShown: boolean = true;
           directive['isShown'] = isShown;
           spectator.setInput('closeOnSelect', true);
-          directive.onMouseClick(event);
+          directive['onDocumentClickWhileHostShown'](event);
           expect(directive['isShown']).toBeFalse();
         });
 
@@ -278,7 +278,7 @@ describe('FloatingDirective', () => {
           const isShown: boolean = false;
           directive['isShown'] = isShown;
           spectator.setInput('closeOnSelect', false);
-          directive.onMouseClick(event);
+          directive['onDocumentClickWhileHostShown'](event);
           expect(directive['isShown']).toEqual(isShown);
         });
 
@@ -286,7 +286,7 @@ describe('FloatingDirective', () => {
           const isShown: boolean = true;
           directive['isShown'] = isShown;
           spectator.setInput('closeOnSelect', false);
-          directive.onMouseClick(event);
+          directive['onDocumentClickWhileHostShown'](event);
           expect(directive['isShown']).toEqual(isShown);
         });
       });
@@ -302,7 +302,7 @@ describe('FloatingDirective', () => {
           const isShown: boolean = true;
           directive['isShown'] = isShown;
           spectator.setInput('closeOnBackdrop', true);
-          directive.onMouseClick(event);
+          directive['onDocumentClickWhileHostShown'](event);
           expect(directive['isShown']).toBeFalse();
         });
 
@@ -310,7 +310,7 @@ describe('FloatingDirective', () => {
           const isShown: boolean = false;
           directive['isShown'] = isShown;
           spectator.setInput('closeOnBackdrop', false);
-          directive.onMouseClick(event);
+          directive['onDocumentClickWhileHostShown'](event);
           expect(directive['isShown']).toEqual(isShown);
         });
 
@@ -318,7 +318,7 @@ describe('FloatingDirective', () => {
           const isShown: boolean = true;
           directive['isShown'] = isShown;
           spectator.setInput('closeOnBackdrop', false);
-          directive.onMouseClick(event);
+          directive['onDocumentClickWhileHostShown'](event);
           expect(directive['isShown']).toEqual(isShown);
         });
       });
