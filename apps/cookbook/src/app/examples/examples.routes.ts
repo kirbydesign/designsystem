@@ -44,7 +44,8 @@ import { ListNoShapeExampleComponent } from './list-no-shape-example/list-no-sha
 import { ListSwipeExampleComponent } from './list-swipe-example/list-swipe-example.component';
 import { LoadingOverlayExampleComponent } from './loading-overlay-example/loading-overlay-example.component';
 import { ModalExampleComponent } from './modal-example/modal-example.component';
-import { FullscreenModalExperimentalExampleComponent } from './modal-experimental-example/fullscreen/fullscreen-experimental-example.component';
+import { FullscreenModalV2ExampleComponent } from './modal-v2-example/modal/fullscreen/fullscreen-v2-example.component';
+import { DrawerModalV2ExampleComponent } from './modal-v2-example/modal/drawer/drawer-v2-example.component';
 import { ModalRoutePage1ExampleComponent } from './modal-example/modal-route-example/modal-route-page1-example.component';
 import { ModalRoutePage2ExampleComponent } from './modal-example/modal-route-example/modal-route-page2-example.component';
 import { PageAdvancedExampleComponent } from './page-example/advanced/page-advanced-example.component';
@@ -75,6 +76,8 @@ import { VirtualScrollListExampleComponent } from './virtual-scroll-example/virt
 import { PagePullToRefreshExampleComponent } from './page-example/pull-to-refresh/page-pull-to-refresh-example.component';
 import { DropdownExampleComponent } from './dropdown-example/dropdown-example.component';
 import { DataTableExampleComponent } from './data-table-example/data-table-example.component';
+import { HeaderExampleComponent } from './header-example/header-example.component';
+import { NestedModalsV2ExampleComponent } from './modal-v2-example/nested-modals/nested-modals-v2-example.component';
 
 VirtualScrollListExampleComponent;
 export const routes: Routes = [
@@ -249,8 +252,21 @@ export const routes: Routes = [
         ],
       },
       {
-        path: 'modal-experimental-fullscreen',
-        component: FullscreenModalExperimentalExampleComponent,
+        path: 'modal-v2',
+        children: [
+          {
+            path: 'fullscreen',
+            component: FullscreenModalV2ExampleComponent,
+          },
+          {
+            path: 'drawer',
+            component: DrawerModalV2ExampleComponent,
+          },
+          {
+            path: 'nested',
+            component: NestedModalsV2ExampleComponent,
+          },
+        ],
       },
       {
         path: 'form-field',
@@ -500,5 +516,9 @@ export const routes: Routes = [
   {
     path: 'data-table',
     component: DataTableExampleComponent,
+  },
+  {
+    path: 'header',
+    component: HeaderExampleComponent,
   },
 ];

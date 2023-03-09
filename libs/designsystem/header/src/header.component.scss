@@ -1,0 +1,46 @@
+@use 'sass:map';
+@use '@kirbydesign/core/src/scss/utils';
+
+:host {
+  width: 100%;
+  padding: utils.size('s') utils.size('s') utils.size('l');
+  display: flex;
+  flex-direction: column;
+
+  @include utils.media('>=medium') {
+    padding-top: utils.size('m');
+  }
+
+  &.centered {
+    align-items: center;
+  }
+}
+
+.avatar {
+  margin-bottom: utils.size('s');
+}
+
+.flag {
+  margin-bottom: utils.size('xxxs');
+}
+
+.title {
+  margin-bottom: utils.size('xxxxs');
+}
+
+.value {
+  margin-bottom: utils.size('xxxs');
+}
+
+.value-unit {
+  font-weight: initial;
+  color: utils.get-text-color('semi-dark');
+}
+
+.subtitle1,
+.subtitle2 {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 100%;
+}
