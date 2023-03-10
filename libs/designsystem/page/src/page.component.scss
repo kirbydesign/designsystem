@@ -3,13 +3,6 @@
 @use '@kirbydesign/core/src/scss/utils';
 
 $ion-content-padding-top: utils.size('xs');
-$breakpoint-map: (
-  'xs': 0,
-  'sm': 632px,
-  'md': 768px,
-  'lg': 992px,
-  'xl': 1200px,
-);
 
 /*
  * Page Header
@@ -224,7 +217,7 @@ ion-content {
   --background: #{utils.get-color('background-color')};
   --color: #{utils.get-color('black')};
 
-  @media (min-width: map.get($breakpoint-map, 'sm')) {
+  @media (min-width: map.get(utils.$breakpoint-map, 'sm')) {
     --padding-start: var(--page-content-padding-start, #{utils.size('xxl')});
     --padding-end: var(--page-content-padding-end, #{utils.size('xxl')});
   }
