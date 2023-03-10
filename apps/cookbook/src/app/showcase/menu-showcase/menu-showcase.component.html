@@ -35,6 +35,11 @@
     . It is your task to provide a reference to the DOM element for which you want to portal the
     menu content into. This can example be achieved by using:
     <code>document.getElementsByTagName(outletTag)[0] as HTMLElement</code>
+    . Here outlet tag references a known tag in the DOM, for which there should only exists one.
+    This could for example be one of the top elements in the DOM. This is not generalized, since
+    each project may have different tags for which they want the content to be placed under. This
+    approach is also to prevent the need for adjusting the DOM with an extra base element, when the
+    need for portal arises.
   </p>
   <strong>
     <em>
@@ -66,6 +71,28 @@
     <h2>Menu: Advanced item</h2>
     <cookbook-example-viewer [html]="menuAdvancedExample.template">
       <cookbook-menu-advanced-example #menuAdvancedExample></cookbook-menu-advanced-example>
+    </cookbook-example-viewer>
+  </div>
+</div>
+
+<div class="page-example">
+  <div>
+    <h2>Menu: Placement</h2>
+    <cookbook-example-viewer [html]="menuPlacementExample.template">
+      <cookbook-menu-custom-placement-example
+        #menuPlacementExample
+      ></cookbook-menu-custom-placement-example>
+    </cookbook-example-viewer>
+  </div>
+</div>
+
+<div class="page-example">
+  <div>
+    <h2>Menu: Hover trigger</h2>
+    <cookbook-example-viewer [html]="menuHoverTriggerExample.template">
+      <cookbook-menu-hover-trigger-example
+        #menuHoverTriggerExample
+      ></cookbook-menu-hover-trigger-example>
     </cookbook-example-viewer>
   </div>
 </div>
