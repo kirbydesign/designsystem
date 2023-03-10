@@ -2,13 +2,6 @@
 @use '../utils';
 
 /* stylelint-disable custom-property-pattern */
-$breakpoint-map: (
-  'xs': 0,
-  'sm': 632px,
-  'md': 768px,
-  'lg': 992px,
-  'xl': 1200px,
-);
 
 .kirby-grid {
   --kirby-grid-columns: 12;
@@ -132,7 +125,7 @@ $breakpoint-map: (
 }
 
 @mixin breakpoint-style($breakpoint) {
-  @media (min-width: map.get($breakpoint-map, $breakpoint)) {
+  @media (min-width: map.get(utils.$breakpoint-map, $breakpoint)) {
     @include column-style($breakpoint, 1);
     @include column-style($breakpoint, 2);
     @include column-style($breakpoint, 3);
