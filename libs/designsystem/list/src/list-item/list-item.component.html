@@ -40,7 +40,8 @@
 </ng-container>
 
 <ng-container *ngIf="!isMobile">
-  <kirby-item slot="start">
+  <kirby-item slot="start" [disabled]="!_hasSwipeActions(item)">
+    <!-- The logic deciding the 'disable' prop is based on an assumption  -->
     <kirby-item class="item-width">
       <kirby-avatar overlay="true" slot="start">
         <kirby-icon name="moneybag"></kirby-icon>

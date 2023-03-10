@@ -100,7 +100,7 @@ export class ListItemComponent implements OnInit, AfterViewInit {
     });
   }
 
-  private isSwipeActionDisabled(swipeAction: ListSwipeAction, item: any): boolean {
+  public isSwipeActionDisabled(swipeAction: ListSwipeAction, item: any): boolean {
     if (swipeAction.isDisabled instanceof Function && swipeAction.isDisabled(item)) {
       return true;
     }
