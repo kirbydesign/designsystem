@@ -1,0 +1,11 @@
+<div *ngIf="placement === 'right'" class="hidden-layer" #hiddenLayer></div>
+<ng-content select="button[kirby-button]"></ng-content>
+
+<kirby-dropdown
+  [items]="_collapsedActions"
+  [usePopover]="true"
+  [_isMoreMenu]="true"
+  popout="left"
+  (change)="onDropdownActionSelect()"
+></kirby-dropdown>
+<div *ngIf="placement !== 'right'" class="hidden-layer" #hiddenLayer></div>
