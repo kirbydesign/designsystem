@@ -11,7 +11,7 @@ import {
   QueryList,
   ViewChild,
 } from '@angular/core';
-import { filter, fromEvent, map, Subject, takeUntil } from 'rxjs';
+import { filter, fromEvent, map, Subject, takeUntil, tap } from 'rxjs';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { TabNavigationItemComponent } from '../tab-navigation-item/tab-navigation-item.component';
 
@@ -26,7 +26,6 @@ const ARROW_RIGHT = 'ArrowRight';
 })
 export class TabNavigationComponent implements AfterViewInit, OnDestroy {
   public readonly DEBOUNCE_TIME_MS = 250;
-  public readonly TAB_SELECTED_CLASS_NAME = 'selected';
 
   @ViewChild('tabBar')
   private tabBar: ElementRef<HTMLElement>;
@@ -36,6 +35,7 @@ export class TabNavigationComponent implements AfterViewInit, OnDestroy {
 
   private tabBarElement: HTMLElement;
   private tabElements = new Array<HTMLElement>();
+  private tabButtonElements = new Array<HTMLElement>();
   private destroyed$ = new Subject<void>();
 
   @Input()
@@ -48,8 +48,9 @@ export class TabNavigationComponent implements AfterViewInit, OnDestroy {
       this._selectedIndex = index;
 
       setTimeout(() => {
-        this.selectTab(this.selectedIndex);
         this.scrollToTab(this.selectedIndex);
+        this.focusTab(this.selectedIndex);
+        this.selectTab(this.selectedIndex);
         this.selectedIndexChange.emit(this.selectedIndex);
       });
     }
@@ -66,31 +67,43 @@ export class TabNavigationComponent implements AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     this.tabBarElement = this.tabBar.nativeElement;
     this.tabs.forEach((tab) => this.tabElements.push(tab.nativeElement));
-
+    this.tabElements.forEach((tabElement) =>
+      this.tabButtonElements.push(tabElement.querySelector('[role="tab"]'))
+    );
     this.initTabListeners();
     setTimeout(() => {
+      this.selectTab(this.selectedIndex);
       this.scrollToTab(this.selectedIndex);
+      this.focusTab(this.selectedIndex);
     }, this.DEBOUNCE_TIME_MS);
   }
 
   initTabListeners(): void {
-    this.tabElements.forEach((tabElement, index) => {
-      fromEvent(tabElement, 'click')
+    this.tabButtonElements.forEach((tabButtonElement, index) => {
+      fromEvent(tabButtonElement, 'click')
         .pipe(takeUntil(this.destroyed$))
         .subscribe(() => (this.selectedIndex = index));
-      fromEvent(tabElement, 'keydown')
+
+      fromEvent(tabButtonElement, 'keydown')
         .pipe(
           filter((e: KeyboardEvent) => e.key === ARROW_LEFT || e.key === ARROW_RIGHT),
-          map((e: KeyboardEvent) =>
-            e.key === ARROW_LEFT
-              ? (index - 1 + this.tabElements.length) % this.tabElements.length
-              : (index + 1) % this.tabElements.length
+          tap((e: KeyboardEvent) => e.preventDefault()),
+          map((e: KeyboardEvent) => {
+            switch (e.key) {
+              case ARROW_LEFT:
+                return index === 0 ? this.tabButtonElements.length - 1 : index - 1;
+              case ARROW_RIGHT:
+                return index === this.tabButtonElements.length - 1 ? 0 : index + 1;
+            }
+          }),
+          filter(
+            (focusIndex: number) => 0 <= focusIndex && focusIndex < this.tabButtonElements.length
           ),
           takeUntil(this.destroyed$)
         )
         .subscribe((focusIndex: number) => {
-          this.focusTab(focusIndex);
           this.scrollToTab(focusIndex);
+          this.focusTab(focusIndex);
         });
     });
   }
@@ -100,19 +113,20 @@ export class TabNavigationComponent implements AfterViewInit, OnDestroy {
     this.destroyed$.complete();
   }
 
-  private focusTab(tabIndex: number): void {
-    if (0 <= tabIndex && tabIndex < this.tabElements.length) {
-      this.tabElements[tabIndex].focus();
-    }
+  private selectTab(tabIndex: number): void {
+    this.tabButtonElements.forEach((tabButtonElement, index) => {
+      tabButtonElement.setAttribute('aria-selected', index === tabIndex ? 'true' : 'false');
+    });
   }
 
-  private selectTab(tabIndex: number): void {
-    this.tabElements.forEach((tabElement, index) => {
-      tabElement.classList.remove(this.TAB_SELECTED_CLASS_NAME);
-      if (tabIndex === index) {
-        tabElement.classList.add(this.TAB_SELECTED_CLASS_NAME);
-      }
+  private focusTab(tabIndex: number): void {
+    const focusIndex = 0 <= tabIndex && tabIndex < this.tabButtonElements.length ? tabIndex : 0;
+
+    this.tabButtonElements.forEach((tabButtonElement, index) => {
+      tabButtonElement.setAttribute('tabindex', index === focusIndex ? '0' : '-1');
     });
+
+    this.tabButtonElements[focusIndex].focus();
   }
 
   private scrollToTab(tabIndex: number): void {
