@@ -2,6 +2,7 @@ import {
   AfterViewInit,
   Component,
   EventEmitter,
+  HostListener,
   Input,
   OnInit,
   Output,
@@ -54,6 +55,12 @@ export class ListItemComponent implements OnInit, AfterViewInit {
   }
 
   @Output() swipeActionSelect = new EventEmitter<any>();
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.isMobile = window.innerWidth < 768;
+    console.log('onResize', window.innerWidth, 'isMobile', this.isMobile);
+  }
 
   _onSwipeActionSelect(swipeAction, item, event) {
     this.swipeActionSelect.emit({
