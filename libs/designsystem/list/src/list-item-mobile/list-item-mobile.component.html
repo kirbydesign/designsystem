@@ -1,0 +1,38 @@
+<ion-item-sliding
+  [class.selected]="isSelected"
+  [kirbyListItemColor]="getItemColor"
+  [item]="item"
+  [disabled]="_isSwipingEnabled ? null : true"
+  keyHandler
+  [ngClass]="boundaryClass"
+  (click)="_onItemSelect(item)"
+>
+  <ng-container
+    *ngTemplateOutlet="swipeActionsTemplate; context: { $implicit: item }"
+  ></ng-container>
+  <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: item }"></ng-container>
+</ion-item-sliding>
+
+<ng-template #swipeActionsTemplate let-item>
+  <ion-item-options *ngIf="_hasSwipeActions(item)" [side]="_getSwipeActionEnd(item)">
+    <div class="swipe-action">
+      <ng-container *ngFor="let swipeAction of _getSwipeActions(item)">
+        <ion-item-option
+          [ngClass]="_getSwipeActionType(swipeAction, item)"
+          (click)="_onSwipeActionSelect(swipeAction, item, $event)"
+        >
+          <div class="item-content">
+            <kirby-icon
+              *ngIf="_getSwipeActionIcon(swipeAction, item)"
+              size="sm"
+              [name]="_getSwipeActionIcon(swipeAction, item)"
+            ></kirby-icon>
+            <ion-label>
+              {{ _getSwipeActionTitle(swipeAction, item) }}
+            </ion-label>
+          </div>
+        </ion-item-option>
+      </ng-container>
+    </div>
+  </ion-item-options>
+</ng-template>

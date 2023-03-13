@@ -16,7 +16,8 @@ import { ThemeColor } from '@kirbydesign/core';
 
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 import { ListHelper } from './helpers/list-helper';
-import { BoundaryClass } from './list-item/list-item.component';
+import { BoundaryClass } from './list-item-mobile/list-item-mobile.component';
+
 import { ListSwipeAction } from './list-swipe-action.type';
 import {
   ListFooterDirective,

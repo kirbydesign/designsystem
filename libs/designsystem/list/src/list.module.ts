@@ -21,6 +21,9 @@ import {
   ListItemTemplateDirective,
   ListSectionHeaderDirective,
 } from './list.directive';
+import { ListItemMobileComponent } from './list-item-mobile/list-item-mobile.component';
+import { ListItemDesktopComponent } from './list-item-desktop/list-item-desktop.component';
+import { HasActionsPipe } from './list-item/pipes/has-actions/has-actions.pipe';
 
 const exportedDeclarations = [
   ListComponent,
@@ -39,6 +42,9 @@ const declarations = [
   ListItemColorDirective,
   InfiniteScrollDirective,
   ListItemComponent,
+  ListItemMobileComponent,
+  ListItemDesktopComponent,
+  HasActionsPipe,
 ];
 
 @NgModule({

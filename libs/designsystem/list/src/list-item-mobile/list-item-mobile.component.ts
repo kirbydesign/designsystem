@@ -19,11 +19,11 @@ import { ListSwipeAction, ListSwipeDirection, ListSwipeEnd } from '../list-swipe
 export type BoundaryClass = 'first' | 'last';
 
 @Component({
-  selector: 'kirby-list-item',
-  templateUrl: './list-item.component.html',
-  styleUrls: ['../list.component.scss', './list-item.component.scss'],
+  selector: 'kirby-list-item-mobile',
+  templateUrl: './list-item-mobile.component.html',
+  styleUrls: ['../list.component.scss', './list-item-mobile.component.scss'],
 })
-export class ListItemComponent implements OnInit, AfterViewInit {
+export class ListItemMobileComponent implements OnInit, AfterViewInit {
   public isMobile = false;
   _isSwipingEnabled = false;
 
@@ -55,12 +55,6 @@ export class ListItemComponent implements OnInit, AfterViewInit {
   }
 
   @Output() swipeActionSelect = new EventEmitter<any>();
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event) {
-    this.isMobile = window.innerWidth < 768;
-    console.log('onResize', window.innerWidth, 'isMobile', this.isMobile);
-  }
 
   _onSwipeActionSelect(swipeAction, item, event) {
     this.swipeActionSelect.emit({
