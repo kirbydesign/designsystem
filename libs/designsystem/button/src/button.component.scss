@@ -98,6 +98,8 @@ $button-width: (
   --kirby-button-padding-left: #{utils.size('m')};
   --kirby-button-padding-right: #{utils.size('m')};
 
+  flex-shrink: 0;
+
   @include utils.accessible-target-size;
   @include interaction-state.apply-focus-visible;
   @include interaction-state.initialize-layer;
