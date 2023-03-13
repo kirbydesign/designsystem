@@ -3,6 +3,11 @@
 :host {
   display: flex;
   position: relative;
+  overflow: hidden;
+}
+
+:host(.right) {
+  justify-content: flex-end;
 }
 
 :host(.is-collapsed) {
@@ -14,8 +19,8 @@
 .hidden-layer {
   visibility: hidden;
   display: flex;
+  flex-direction: row;
   justify-content: flex-end;
-  inset: 0;
 }
 
 kirby-dropdown {

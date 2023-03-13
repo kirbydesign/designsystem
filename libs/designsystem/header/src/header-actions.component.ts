@@ -27,7 +27,7 @@ export class HeaderActionsComponent implements AfterContentInit, AfterViewInit {
 
   @HostBinding('class')
   @Input()
-  placement: 'left' | 'right' = 'left';
+  placement: 'left' | 'right' = 'right';
 
   @ContentChildren(ButtonComponent, { read: ElementRef }) private buttonElements!: QueryList<
     ElementRef<HTMLButtonElement>
@@ -59,6 +59,7 @@ export class HeaderActionsComponent implements AfterContentInit, AfterViewInit {
     }
     if (isInToolbar) {
       this.isCondensed = true;
+      this.placement = 'right';
     }
   }
 

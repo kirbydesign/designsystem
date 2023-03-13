@@ -10,16 +10,12 @@
 
   @include utils.media('>=medium') {
     margin-top: utils.size('m');
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     column-gap: utils.size('s');
-
-    .actions {
-      justify-self: flex-end;
-    }
   }
 
   &.centered {
-    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr);
 
     .container {
       align-items: center;
