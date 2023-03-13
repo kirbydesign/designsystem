@@ -6,6 +6,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { KirbyModule } from '@kirbydesign/designsystem';
 import { KirbyModalModule } from '@kirbydesign/designsystem/modal/v2';
+import { CarouselModule } from '@kirbydesign/designsystem/carousel';
 
 import { IphoneModule } from '../iphone/iphone.module';
 import { ApiDescriptionEventsComponent } from '../shared/api-description/api-description-events/api-description-events.component';
@@ -28,6 +29,7 @@ import { COMPONENT_DECLARATIONS, COMPONENT_EXPORTS, COMPONENT_IMPORTS } from './
     IphoneModule,
     RouterModule,
     CodeViewerModule,
+    CarouselModule,
   ],
   declarations: [
     ...COMPONENT_DECLARATIONS,
