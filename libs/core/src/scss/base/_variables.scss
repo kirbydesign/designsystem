@@ -93,6 +93,13 @@ $breakpoints: (
   xlarge: 60em,
   xxlarge: 80em,
 ) !default;
+$breakpoint-map: (
+  'xs': 0,
+  'sm': 632px,
+  'md': 768px,
+  'lg': 992px,
+  'xl': 1200px,
+);
 
 /* Elevation
 ****************************************************************************/
