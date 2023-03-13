@@ -316,3 +316,12 @@ $button-width: (
     }
   }
 }
+
+/*
+* TEMPORARY MORE-MENU
+* Button content should not be space-between when only an icon is slotted 
+* inside the dropdown
+*/
+:host-context(kirby-dropdown.more-menu) {
+  justify-content: center;
+}

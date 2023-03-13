@@ -137,3 +137,13 @@ kirby-card {
     }
   }
 }
+
+/*
+* TEMPORARY MORE-MENU
+* Button should be round when more menu, as it is icon only
+*/
+:host(.more-menu) {
+  > button {
+    width: utils.size('xl');
+  }
+}
