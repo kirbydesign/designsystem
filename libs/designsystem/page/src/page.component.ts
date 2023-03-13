@@ -12,6 +12,7 @@ import {
   HostBinding,
   HostListener,
   Input,
+  NgZone,
   OnChanges,
   OnDestroy,
   OnInit,
@@ -278,6 +279,7 @@ export class PageComponent
     private renderer: Renderer2,
     private router: Router,
     private changeDetectorRef: ChangeDetectorRef,
+    private zone: NgZone,
     private modalNavigationService: ModalNavigationService,
     @Optional() @SkipSelf() private tabsComponent: TabsComponent
   ) {}
@@ -300,15 +302,19 @@ export class PageComponent
   }
 
   ngAfterViewInit(): void {
-    this.contentScrolled$ = this.content.ionScroll.pipe(
-      debounceTime(contentScrollDebounceTimeInMS),
-      map((event) => event.detail),
-      takeUntil(this.ngOnDestroy$)
-    );
+    this.zone.runOutsideAngular(() => {
+      this.contentScrolled$ = this.content.ionScroll.pipe(
+        debounceTime(contentScrollDebounceTimeInMS),
+        map((event) => event.detail),
+        takeUntil(this.ngOnDestroy$)
+      );
 
-    this.contentScrolled$.subscribe((scrollInfo: ScrollDetail) => {
-      this.isContentScrolled = scrollInfo.scrollTop > contentScrolledOffsetInPixels;
-      this.changeDetectorRef.detectChanges();
+      this.contentScrolled$.subscribe((scrollInfo: ScrollDetail) => {
+        if (scrollInfo.scrollTop > contentScrolledOffsetInPixels !== this.isContentScrolled) {
+          this.isContentScrolled = !this.isContentScrolled;
+          this.changeDetectorRef.detectChanges();
+        }
+      });
     });
 
     // This instance has observed a page enter so register the correct url for this instance
