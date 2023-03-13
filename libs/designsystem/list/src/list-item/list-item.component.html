@@ -1,0 +1,26 @@
+{{ device }}
+<ng-container *ngIf="device === 'mobile'">
+  <kirby-list-item-mobile
+    [item]="item"
+    [swipeActions]="swipeActions"
+    [itemTemplate]="itemTemplate"
+    [isSelected]="isSelected"
+    [isSelectable]="isSelectable"
+    [getItemColor]="getItemColor"
+    (itemSelect)="itemSelect.next($event)"
+    (swipeActionSelect)="swipeActionSelect.next($event)"
+  ></kirby-list-item-mobile>
+</ng-container>
+<ng-container *ngIf="device === 'desktop'">
+  <kirby-list-item-desktop
+    [item]="item"
+    [boundaryClass]="boundaryClass"
+    [swipeActions]="swipeActions"
+    [itemTemplate]="itemTemplate"
+    [isSelected]="isSelected"
+    [isSelectable]="isSelectable"
+    [getItemColor]="getItemColor"
+    (itemSelect)="itemSelect.next($event)"
+    (swipeActionSelect)="swipeActionSelect.next($event)"
+  ></kirby-list-item-desktop>
+</ng-container>
