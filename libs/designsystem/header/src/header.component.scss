@@ -34,6 +34,7 @@
   display: flex;
   flex-direction: column;
   padding: 0 utils.size('s');
+  overflow: hidden;
 }
 
 .avatar {
@@ -46,6 +47,7 @@
 
 .title {
   margin-bottom: utils.size('xxxxs');
+  word-break: break-all;
 }
 
 .value {
