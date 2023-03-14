@@ -65,6 +65,50 @@
     </cookbook-example-viewer>
   </div>
 
+  <div class="header-example-container">
+    <h2>Action Group</h2>
+    <p>
+      An action group can be included in the header area and will by default always be shown in the
+      toolbar on mobile. The actions place themselves in the toolbar to the right. It is designed to
+      optimize the screen real estate for the content area on mobile phones.
+    </p>
+
+    <p>
+      On larger screen sizes the action group starts out in the header area, before moving to the
+      toolbar when the page is scrolled past the action group.
+    </p>
+
+    <p>
+      Actions are supplied to the Action Group via slotted buttons. Only two actions are shown in
+      the toolbar, and if more that two actions are supplied, one action and a more menu button will
+      be shown, while the remaining actions are collapsed into the more menu.
+    </p>
+    <p>
+      All button interactions are expected to happen via a click-listener of type
+      <code>(click)="someFunction()"</code>
+      so the Action Group can make sure to fire the corresponding function for collapsed actions
+      inside the more menu.
+    </p>
+
+    <cookbook-iphone
+      showViewToggleWithDefault="full-size"
+      src="/examples/page/header"
+      showExternalLink="true"
+    ></cookbook-iphone>
+
+    <cookbook-example-viewer [html]="actionGroupTemplate"></cookbook-example-viewer>
+  </div>
+
+  <div class="header-example-container">
+    <h2>Header Action Group</h2>
+    <p>
+      <strong>Please note:</strong>
+      A follow-up release will soon allow the action group to be placed in the header area on mobile
+      and expand beyond two options when space permits for all screen sizes. This additional feature
+      can simply be enabled on examples such as the one above once it lands.
+    </p>
+  </div>
+
   <h1>API</h1>
   <h2>Header Properties:</h2>
   <cookbook-api-description-properties

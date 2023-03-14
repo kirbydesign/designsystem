@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PageWithHeaderExampleComponent } from '~/app/examples/page-example/page-with-header-example.component';
 import {
   ApiDescriptionProperty,
   ApiDescriptionPropertyColumns,
@@ -11,6 +12,8 @@ import {
   preserveWhitespaces: true,
 })
 export class HeaderShowcaseComponent {
+  actionGroupTemplate: string = PageWithHeaderExampleComponent.template;
+
   properties: ApiDescriptionProperty[] = [
     {
       name: 'title',
