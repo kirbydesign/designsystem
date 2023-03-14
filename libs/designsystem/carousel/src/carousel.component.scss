@@ -1,2 +1,28 @@
+@use '@kirbydesign/core/src/scss/utils';
 @import "swiper/scss";
 @import "swiper/scss/pagination";
+
+.kirby-carousel {
+    position: relative;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: utils.size('xxs');
+}
+
+.nav-prev, .nav-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.nav-next {
+    right: 0;
+    z-index: 2;
+}
+
+.nav-prev {
+    z-index: 2;
+}

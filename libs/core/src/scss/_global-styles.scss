@@ -310,3 +310,16 @@ html.ios ion-modal.kirby-modal-v2 {
     display: flex;
   }
 }
+
+.swiper-pagination-bullet {
+  background-color: utils.get-color('medium');
+  opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+    background-color: utils.get-color('success');
+}
+
+.swiper-button-disabled {
+  opacity: 0;
+}

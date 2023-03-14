@@ -17,8 +17,14 @@ export class CarouselComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     const swiperParams: SwiperOptions = {
-      pagination: this.pagination,
-      navigation: this.navigation,
+      pagination: {
+        el: '.pagination',
+        type: 'bullets',
+      },
+      navigation: {
+        nextEl: '.nav-next',
+        prevEl: '.nav-prev',
+      },
       slidesPerView: 1.1,
       centeredSlides: true,
       spaceBetween: 8,
