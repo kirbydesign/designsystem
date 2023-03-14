@@ -5,3 +5,12 @@
   margin-top: utils.size('xl');
   margin-bottom: utils.size('xl');
 }
+
+.header-alert {
+  display: flex;
+  gap: 1rem;
+
+  kirby-flag {
+    height: fit-content;
+  }
+}
