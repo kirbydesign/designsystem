@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { BasePageExampleComponent } from './base-page-example.component';
+import { BasePageExampleComponent } from '../../page-example/base-page-example.component';
 
 const config = {
   template: `<kirby-page defaultBackHref="/">
@@ -28,7 +28,7 @@ const config = {
   template: config.template,
   styles: ['.custom-page-title { display: inline-flex; }'],
 })
-export class PageWithHeaderExampleComponent extends BasePageExampleComponent {
+export class HeaderWithActionGroupExampleComponent extends BasePageExampleComponent {
   static readonly template = config.template
     .replace(' defaultBackHref="/"', '')
     .replace(' [innerHTML]="content">', '>...');
