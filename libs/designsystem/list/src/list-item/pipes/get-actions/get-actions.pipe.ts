@@ -7,16 +7,16 @@ import { ListItemAction } from '../has-actions/has-actions.pipe';
   name: 'getActions',
 })
 export class GetActionsPipe implements PipeTransform {
-  transform(item: ListItem, args): unknown {
-    const swipeActions: ListItemAction[] = args[0];
+  transform(item: ListItem, args): ListItemAction[] {
+    const actions: ListItemAction[] = args[0];
     const device: DeviceType = args[1];
     const direction: ItemSlidingSide = args[2];
 
-    if (!Array.isArray(swipeActions)) {
+    if (!Array.isArray(actions)) {
       return [];
     }
-    return swipeActions.filter((swipeAction) => {
-      if (isSwipeActionDisabled(swipeAction, item)) {
+    return actions.filter((swipeAction) => {
+      if (isActionDisabled(swipeAction, item)) {
         return false;
       }
       if (device === 'desktop') {
@@ -27,9 +27,9 @@ export class GetActionsPipe implements PipeTransform {
   }
 }
 
-const isSwipeActionDisabled = (swipeAction: ListItemAction, item: any): boolean => {
-  if (swipeAction.isDisabled instanceof Function && swipeAction.isDisabled(item)) {
+const isActionDisabled = (action: ListItemAction, item: ListItem): boolean => {
+  if (action.isDisabled instanceof Function && action.isDisabled(item)) {
     return true;
   }
-  return swipeAction.isDisabled === true;
+  return action.isDisabled === true;
 };

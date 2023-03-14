@@ -10,7 +10,6 @@ describe('HasActionsPipe', () => {
     subTitle: '2000 pcs',
     amount: '5.587.218.309 DKK',
     detail: 225,
-    archived: true,
     flagged: false,
     color: 'default',
   };

@@ -10,9 +10,8 @@ export interface ListItem {
   subTitle: string;
   amount: string;
   detail: number;
-  archived: boolean;
   flagged: boolean;
-  color: 'default' | 'primary' | 'success' | 'warning' | 'danger';
+  color: 'default' | 'primary' | 'success' | 'warning' | 'danger' | 'light';
 }
 
 @Component({

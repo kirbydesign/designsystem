@@ -3,7 +3,7 @@ import { ItemSlidingSide } from '@kirbydesign/designsystem/item-sliding';
 import { DeviceType, ListItem } from '../../list-item.component';
 
 export type ListItemAction = {
-  isDisabled: ((item: ListItem) => boolean) | boolean;
+  isDisabled?: ((item: ListItem) => boolean) | boolean;
   position: ItemSlidingSide;
 };
 
@@ -14,6 +14,7 @@ export class HasActionsPipe implements PipeTransform {
   transform(item: ListItem, args): unknown {
     const swipeActions: ListItemAction[] = args[0];
     const device: DeviceType = args[1];
+    const direction: ItemSlidingSide = args[2];
 
     if (!Array.isArray(swipeActions)) {
       return false;
@@ -25,9 +26,11 @@ export class HasActionsPipe implements PipeTransform {
       if (swipeAction.isDisabled === true) {
         return false;
       }
-      return device === 'desktop'
-        ? true
-        : swipeAction.position === 'left' || swipeAction.position === 'right';
+      if (device === 'desktop') {
+        return true;
+      }
+
+      return direction ? swipeAction.position === direction : true;
     });
   }
 }
