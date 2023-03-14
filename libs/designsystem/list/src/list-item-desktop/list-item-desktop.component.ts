@@ -32,19 +32,4 @@ export class ListItemDesktopComponent {
   }
 
   @Output() swipeActionSelect = new EventEmitter<any>();
-
-  _hasSwipeActions(item: any): boolean {
-    if (!Array.isArray(this.swipeActions)) {
-      return false;
-    }
-    return this.swipeActions.some((swipeAction) => {
-      if (swipeAction.isDisabled instanceof Function && swipeAction.isDisabled(item)) {
-        return false;
-      }
-      if (swipeAction.isDisabled === true) {
-        return false;
-      }
-      return swipeAction.position === 'left' || swipeAction.position === 'right';
-    });
-  }
 }

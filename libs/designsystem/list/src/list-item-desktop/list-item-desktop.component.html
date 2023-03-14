@@ -7,14 +7,15 @@
     <h3>{{ item.title }}</h3>
     <data slot="end" value="item.amount">{{ item.amount }}</data>
   </kirby-item>
-  <ng-container [ngSwitch]="_getSwipeActions(item).length > 1">
+  <!-- <ng-container [ngSwitch]="_getSwipeActions(item).length > 1"> -->
+  <ng-container [ngSwitch]="(item | getActions: [swipeActions, 'desktop', null]).length > 1">
     <ng-container *ngSwitchCase="true">
       <button slot="end" kirby-button [size]="'sm'" attentionLevel="3">
         <kirby-icon [name]="'more'"></kirby-icon>
       </button>
     </ng-container>
     <ng-container *ngSwitchCase="false">
-      <ng-container *ngFor="let action of _getSwipeActions(item)">
+      <ng-container *ngFor="let action of item | getActions: [swipeActions, 'desktop', null]">
         <button
           slot="end"
           kirby-button
@@ -28,3 +29,4 @@
     </ng-container>
   </ng-container>
 </kirby-item>
+<kirby-icon [name]="_getSwipeActionIcon(action, item)"></kirby-icon>

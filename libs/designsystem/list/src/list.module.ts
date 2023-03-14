@@ -24,6 +24,7 @@ import {
 import { ListItemMobileComponent } from './list-item-mobile/list-item-mobile.component';
 import { ListItemDesktopComponent } from './list-item-desktop/list-item-desktop.component';
 import { HasActionsPipe } from './list-item/pipes/has-actions/has-actions.pipe';
+import { GetActionsPipe } from './list-item/pipes/get-actions/get-actions.pipe';
 
 const exportedDeclarations = [
   ListComponent,
@@ -45,6 +46,7 @@ const declarations = [
   ListItemMobileComponent,
   ListItemDesktopComponent,
   HasActionsPipe,
+  GetActionsPipe,
 ];
 
 @NgModule({
