@@ -1,4 +1,13 @@
 <div class="container">
+  <div class="full-size-toggle" *ngIf="_mode">
+    Toggle full-size
+    <kirby-toggle
+      class="right-aligned"
+      (checkedChange)="onIframeOnlyToggleChange($event)"
+      [checked]="_mode === 'full-size'"
+    ></kirby-toggle>
+  </div>
+
   <div class="docs-demo-device ios">
     <figure>
       <svg class="docs-demo-device-md-bar" viewBox="0 0 1384.3 40.3">
