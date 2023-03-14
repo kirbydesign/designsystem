@@ -45,6 +45,7 @@ export * from '@kirbydesign/designsystem/toggle-button';
 export * from '@kirbydesign/designsystem/types';
 export * from '@kirbydesign/designsystem/chart';
 export * from '@kirbydesign/designsystem/alert-experimental';
+export * from '@kirbydesign/designsystem/action-group';
 
 export { KirbyModule } from './kirby.module';
 export { KirbyExperimentalModule } from './kirby-experimental.module';

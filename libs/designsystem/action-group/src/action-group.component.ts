@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   AfterContentInit,
   AfterViewInit,
@@ -12,15 +13,17 @@ import {
   ViewChild,
 } from '@angular/core';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
-import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
+import { DropdownComponent, DropdownModule } from '@kirbydesign/designsystem/dropdown';
 
 @Component({
-  selector: 'kirby-header-actions',
+  selector: 'kirby-action-group',
+  standalone: true,
+  imports: [CommonModule, ButtonComponent, DropdownModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './header-actions.component.html',
-  styleUrls: ['./header-actions.component.scss'],
+  templateUrl: './action-group.component.html',
+  styleUrls: ['./action-group.component.scss'],
 })
-export class HeaderActionsComponent implements AfterContentInit, AfterViewInit {
+export class ActionGroupComponent implements AfterContentInit, AfterViewInit {
   @Input() visibleActions: number;
 
   @Input() emphasizeActions?: boolean;
