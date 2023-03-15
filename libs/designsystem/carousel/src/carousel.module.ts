@@ -4,8 +4,9 @@ import { CardModule } from '@kirbydesign/designsystem/card'; // Remove in final 
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 import { CarouselComponent } from './carousel.component';
+import { CarouselSlideComponent } from './carousel-slide/carousel-slide.component';
 
-const declarations = [CarouselComponent];
+const declarations = [CarouselComponent, CarouselSlideComponent];
 
 @NgModule({
   imports: [CommonModule, CardModule, ButtonComponent, IconModule],
