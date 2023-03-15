@@ -8,8 +8,6 @@ $divider-max-width-breakpoint: utils.$page-content-max-width + (utils.size('s') 
 
 div[role='tablist'] {
   position: relative;
-  background-color: utils.get-color('background-color');
-  max-width: var(--page-content-max-width, utils.$page-content-max-width);
   margin: 0 auto;
   display: flex;
   gap: utils.size('xs');
@@ -18,6 +16,10 @@ div[role='tablist'] {
   flex-wrap: nowrap;
   overflow-y: hidden;
   overflow-x: scroll;
+
+  @include utils.media('<medium') {
+    padding-inline: var(--padding-start) var(--padding-end);
+  }
 
   // Ensures that the .container divider pseudo-element does not overlap the .selected divider pseudo-element.
   // There seems be a weird bug with the iOS browser where z-index of scrollable elements are not respected with momentum scrolling active - so we disable it for now.
@@ -29,6 +31,16 @@ div[role='tablist'] {
   // Hide scrollbar for Chrome, Edge, Safari and Opera
   &::-webkit-scrollbar {
     display: none;
+  }
+}
+
+.container {
+  position: relative;
+  background-color: utils.get-color('background-color');
+  max-width: var(--page-content-max-width, utils.$page-content-max-width);
+
+  @include utils.media('<medium') {
+    margin-inline: calc(-1 * var(--padding-start)) calc(-1 * var(--padding-end));
   }
 
   // Divider
@@ -43,8 +55,8 @@ div[role='tablist'] {
     width: 100%;
 
     @include utils.media('<=#{$divider-max-width-breakpoint}') {
-      left: -#{utils.size('s')};
-      width: calc(100% + (#{utils.size('s')} * 2));
+      left: calc(-1 * var(--padding-start, #{utils.size('s')}));
+      width: calc(100% + (var(--padding-start, #{utils.size('s')}) * 2));
     }
   }
 }
