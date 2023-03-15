@@ -23,10 +23,9 @@
           attentionLevel="3"
           style="margin: 0 5px 0 5px"
         >
-          <kirby-icon [name]="_getSwipeActionIcon(action, item)"></kirby-icon>
+          <kirby-icon [name]="action | getActionIcon: [item]"></kirby-icon>
         </button>
       </ng-container>
     </ng-container>
   </ng-container>
 </kirby-item>
-<kirby-icon [name]="_getSwipeActionIcon(action, item)"></kirby-icon>

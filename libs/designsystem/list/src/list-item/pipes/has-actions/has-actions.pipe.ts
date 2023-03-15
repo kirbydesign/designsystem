@@ -5,6 +5,7 @@ import { DeviceType, ListItem } from '../../list-item.component';
 export type ListItemAction = {
   isDisabled?: ((item: ListItem) => boolean) | boolean;
   position: ItemSlidingSide;
+  icon?: ((item: ListItem) => string) | string;
 };
 
 @Pipe({
