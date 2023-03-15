@@ -62,6 +62,7 @@ import { CookbookChartStockConfigShowcaseComponent } from './chart-config-showca
 import { CookbookChartBarConfigShowcaseComponent } from './chart-config-showcase/bar/chart-config-bar-showcase.component';
 import { HeaderShowcaseComponent } from './header-showcase/header-showcase.component';
 import { MenuShowcaseComponent } from './menu-showcase/menu-showcase.component';
+import { CarouselShowcaseComponent } from './carousel-showcase/carousel-showcase.component';
 
 export const routes: Routes = [
   {
@@ -333,6 +334,10 @@ export const routes: Routes = [
       {
         path: 'header',
         component: HeaderShowcaseComponent,
+      },
+      {
+        path: 'carousel',
+        component: CarouselShowcaseComponent,
       },
     ],
   },

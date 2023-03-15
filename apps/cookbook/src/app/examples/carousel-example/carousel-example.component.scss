@@ -1,0 +1,6 @@
+@use '@kirbydesign/core/src/scss/utils';
+
+.example {
+  margin-top: utils.size('xl');
+  margin-bottom: utils.size('xl');
+}
