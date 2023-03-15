@@ -34,6 +34,12 @@ const config = {
         <kirby-icon name="cog"></kirby-icon>
       </kirby-badge>
     </kirby-tab-navigation-item>
+    <kirby-tab-navigation-item 
+      label="{{labels[5]}}">
+      <kirby-badge>
+        <kirby-icon name="cog"></kirby-icon>
+      </kirby-badge>
+    </kirby-tab-navigation-item>
   </kirby-tab-navigation>
 
   <kirby-page-content>
@@ -50,12 +56,12 @@ const config = {
 })
 export class PageTabNavExampleComponent extends BasePageExampleComponent {
   selectedIndex = 0;
-  labels = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];
+  labels = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item6 longer'];
 
   static readonly template = config.template
     .replace(' defaultBackHref="/"', '')
     .replace('<div [innerHTML]="content"></div>', '...');
   static readonly codeSnippet = `selectedIndex = 0;
-labels = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];
+labels = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item6 longer']];
 `;
 }
