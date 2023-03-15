@@ -2,7 +2,6 @@ import {
   AfterViewInit,
   Component,
   EventEmitter,
-  HostListener,
   Input,
   OnInit,
   Output,
@@ -19,11 +18,11 @@ import { ListSwipeAction, ListSwipeDirection, ListSwipeEnd } from '../list-swipe
 export type BoundaryClass = 'first' | 'last';
 
 @Component({
-  selector: 'kirby-list-item-mobile',
-  templateUrl: './list-item-mobile.component.html',
-  styleUrls: ['../list.component.scss', './list-item-mobile.component.scss'],
+  selector: 'kirby-list-item-swipe',
+  templateUrl: './list-item-swipe.component.html',
+  styleUrls: ['../list.component.scss', './list-item-swipe.component.scss'],
 })
-export class ListItemMobileComponent implements OnInit, AfterViewInit {
+export class ListItemSwipeComponent implements OnInit, AfterViewInit {
   public isMobile = false;
   _isSwipingEnabled = false;
 

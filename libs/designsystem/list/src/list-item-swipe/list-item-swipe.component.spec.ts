@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ListItemMobileComponent } from './list-item-mobile.component';
+import { ListItemSwipeComponent } from './list-item-swipe.component';
 
 describe('ListItemMobileComponent', () => {
-  let component: ListItemMobileComponent;
-  let fixture: ComponentFixture<ListItemMobileComponent>;
+  let component: ListItemSwipeComponent;
+  let fixture: ComponentFixture<ListItemSwipeComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ ListItemMobileComponent ]
-    })
-    .compileComponents();
+      imports: [ListItemSwipeComponent],
+    }).compileComponents();
 
-    fixture = TestBed.createComponent(ListItemMobileComponent);
+    fixture = TestBed.createComponent(ListItemSwipeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

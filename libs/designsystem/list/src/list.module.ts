@@ -21,8 +21,8 @@ import {
   ListItemTemplateDirective,
   ListSectionHeaderDirective,
 } from './list.directive';
-import { ListItemMobileComponent } from './list-item-mobile/list-item-mobile.component';
-import { ListItemDesktopComponent } from './list-item-desktop/list-item-desktop.component';
+import { ListItemSwipeComponent } from './list-item-swipe/list-item-swipe.component';
+import { ListItemMenuComponent } from './list-item-menu/list-item-menu.component';
 import { HasActionsPipe } from './list-item/pipes/has-actions/has-actions.pipe';
 import { GetActionsPipe } from './list-item/pipes/get-actions/get-actions.pipe';
 import { GetActionIconPipe } from './list-item/pipes/get-action-icon/get-action-icon.pipe';
@@ -44,8 +44,8 @@ const declarations = [
   ListItemColorDirective,
   InfiniteScrollDirective,
   ListItemComponent,
-  ListItemMobileComponent,
-  ListItemDesktopComponent,
+  ListItemSwipeComponent,
+  ListItemMenuComponent,
   HasActionsPipe,
   GetActionsPipe,
   GetActionIconPipe,

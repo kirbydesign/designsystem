@@ -1,15 +1,14 @@
 import { Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ThemeColor } from '@kirbydesign/designsystem/helpers';
-import { BoundaryClass } from '../list-item-mobile/list-item-mobile.component';
+import { BoundaryClass } from '../list-item-swipe/list-item-swipe.component';
 import { ListSwipeAction } from '../list-swipe-action.type';
 
 @Component({
-  selector: 'kirby-list-item-desktop',
-  templateUrl: './list-item-desktop.component.html',
-  styleUrls: ['./list-item-desktop.component.css'],
+  selector: 'kirby-list-item-menu',
+  templateUrl: './list-item-menu.component.html',
+  styleUrls: ['./list-item-menu.component.css'],
 })
-export class ListItemDesktopComponent {
+export class ListItemMenuComponent {
   @Input() item: any;
 
   @Input() boundaryClass: BoundaryClass | BoundaryClass[];
