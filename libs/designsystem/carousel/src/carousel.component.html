@@ -3,13 +3,23 @@
     <ng-content></ng-content>
   </swiper-container>
 
-  <div class="pagination"></div>
+  <div class="pagination" [class]="paginationClass"></div>
 
-  <button kirby-button attentionLevel="3" class="nav-prev">
+  <button
+    kirby-button
+    attentionLevel="3"
+    class="nav-prev swiper-button-prev"
+    [class]="prevButtonClass"
+  >
     <kirby-icon name="arrow-back"></kirby-icon>
   </button>
 
-  <button kirby-button attentionLevel="3" class="nav-next">
+  <button
+    kirby-button
+    attentionLevel="3"
+    class="nav-next swiper-button-next"
+    [class]="nextButtonClass"
+  >
     <kirby-icon name="arrow-more"></kirby-icon>
   </button>
 </div>

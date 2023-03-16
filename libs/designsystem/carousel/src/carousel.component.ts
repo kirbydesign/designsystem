@@ -4,6 +4,7 @@ import { register } from 'swiper/element/bundle';
 
 register();
 
+export type CarouselConfig = SwiperOptions;
 @Component({
   selector: 'kirby-carousel',
   templateUrl: './carousel.component.html',
@@ -12,25 +13,29 @@ register();
 export class CarouselComponent implements AfterViewInit {
   @ViewChild('swiperContainer') swiperContainer;
 
-  @Input() pagination: boolean;
-  @Input() navigation: boolean;
+  @Input() config: CarouselConfig;
+  @Input() prevButtonClass: string;
+  @Input() nextButtonClass: string;
+  @Input() paginationClass: string;
 
   ngAfterViewInit() {
-    const swiperParams: SwiperOptions = {
-      pagination: {
-        el: '.pagination',
-        type: 'bullets',
-      },
-      navigation: {
-        nextEl: '.nav-next',
-        prevEl: '.nav-prev',
-      },
-      slidesPerView: 1.1,
-      centeredSlides: true,
-      spaceBetween: 8,
+    const defaultConfig: SwiperOptions = {
+      // pagination: {
+      //   el: '.pagination',
+      //   type: 'bullets',
+      // },
+      // navigation: {
+      //   nextEl: '.nav-next',
+      //   prevEl: '.nav-prev',
+      // },
+      // slidesPerView: 1.1,
+      // centeredSlides: true,
+      // spaceBetween: 8,
     };
 
-    Object.assign(this.swiperContainer.nativeElement, swiperParams);
+    const config = Object.assign(defaultConfig, this.config);
+
+    Object.assign(this.swiperContainer.nativeElement, config);
 
     this.swiperContainer.nativeElement.initialize();
   }

@@ -16,6 +16,7 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+    display: none;
 }
 
 .nav-next {
@@ -25,4 +26,10 @@
 
 .nav-prev {
     z-index: 2;
+}
+
+@include utils.media('>=medium') {
+    .nav-prev, .nav-next {
+        display: flex;
+    }
 }
