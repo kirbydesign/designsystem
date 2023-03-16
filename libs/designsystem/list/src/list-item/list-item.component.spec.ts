@@ -6,7 +6,7 @@ import { ListItemMenuComponent } from '../list-item-menu/list-item-menu.componen
 import { ListItemSwipeComponent } from '../list-item-swipe/list-item-swipe.component';
 import { ListItem, ListItemComponent } from './list-item.component';
 
-fdescribe('ListItemComponent', () => {
+describe('ListItemComponent', () => {
   const mockPaltformServiceIsTouceFalse = {
     isTouch: () => false,
     isTablet: () => false,

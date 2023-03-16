@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { ListItem } from '../../list-item.component';
+import { ListItem } from '../../list-item';
 import { ListItemAction } from '../has-actions/has-actions.pipe';
 
 @Pipe({

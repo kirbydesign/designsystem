@@ -1,6 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { ItemSlidingSide } from '@kirbydesign/designsystem/item-sliding';
-import { DeviceType, ListItem } from '../../list-item.component';
+import { DeviceType } from '../../devicetype';
+import { ListItem } from '../../list-item';
 import { ListItemAction } from '../has-actions/has-actions.pipe';
 
 @Pipe({
