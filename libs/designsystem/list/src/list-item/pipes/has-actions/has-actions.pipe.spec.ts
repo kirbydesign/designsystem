@@ -1,4 +1,4 @@
-import { ListItem } from '../../list-item.component';
+import { ListItem } from '../../list-item';
 import { HasActionsPipe } from './has-actions.pipe';
 
 describe('HasActionsPipe', () => {

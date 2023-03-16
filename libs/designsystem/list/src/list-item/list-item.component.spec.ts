@@ -4,7 +4,8 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponent } from 'ng-mocks';
 import { ListItemMenuComponent } from '../list-item-menu/list-item-menu.component';
 import { ListItemSwipeComponent } from '../list-item-swipe/list-item-swipe.component';
-import { ListItem, ListItemComponent } from './list-item.component';
+import { ListItem } from './list-item';
+import { ListItemComponent } from './list-item.component';
 
 describe('ListItemComponent', () => {
   const mockPaltformServiceIsTouceFalse = {

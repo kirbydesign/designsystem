@@ -1,4 +1,4 @@
-import { ListItem } from '../../list-item.component';
+import { ListItem } from '../../list-item';
 import { GetActionsPipe } from './get-actions.pipe';
 
 describe('GetActionsPipe', () => {

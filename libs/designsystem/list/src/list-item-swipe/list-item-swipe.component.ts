@@ -12,6 +12,7 @@ import { IonItemSliding } from '@ionic/angular';
 
 import { ThemeColor } from '@kirbydesign/core';
 import { PlatformService } from '@kirbydesign/designsystem/helpers';
+import { ListItem } from '../list-item/list-item';
 
 import { ListSwipeAction, ListSwipeDirection, ListSwipeEnd } from '../list-swipe-action.type';
 
@@ -32,7 +33,7 @@ export class ListItemSwipeComponent implements OnInit, AfterViewInit {
 
   @ViewChild(IonItemSliding) ionItemSliding: IonItemSliding;
 
-  @Input() item: any;
+  @Input() item: ListItem;
 
   @Input() boundaryClass: BoundaryClass | BoundaryClass[];
 
@@ -138,8 +139,6 @@ export class ListItemSwipeComponent implements OnInit, AfterViewInit {
   }
 
   private initializeSwipeActions(): void {
-    if (this.swipeActions && this.swipeActions.length) {
-      this._isSwipingEnabled = this.platform.isTouch();
-    }
+    this._isSwipingEnabled = this.swipeActions && this.swipeActions.length > 0;
   }
 }

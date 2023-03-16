@@ -86,7 +86,7 @@ export class ListSwipeExampleComponent {
       title: 'Archive',
       type: 'warning',
       onSelected: (item) => this.onArchiveItem(item),
-      isDisabled: (item) => item.archived || item.id === 3,
+      isDisabled: (item) => true,
     },
     {
       position: 'left',
