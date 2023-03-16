@@ -1,11 +1,13 @@
 import { IonicModule } from '@ionic/angular';
 import { PlatformService } from '@kirbydesign/designsystem/helpers';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
+import { MockComponent } from 'ng-mocks';
+import { ListItemMenuComponent } from '../list-item-menu/list-item-menu.component';
 import { ListItemSwipeComponent } from '../list-item-swipe/list-item-swipe.component';
 import { ListItem, ListItemComponent } from './list-item.component';
 
-describe('ListItemComponent', () => {
-  const mockPaltformServiceIsDesktop = {
+fdescribe('ListItemComponent', () => {
+  const mockPaltformServiceIsTouceFalse = {
     isTouch: () => false,
     isTablet: () => false,
   };
@@ -14,23 +16,11 @@ describe('ListItemComponent', () => {
     component: ListItemComponent,
     declarations: [
       ListItemComponent,
-      {
-        provide: ListItemSwipeComponent,
-        useValue: {
-          boundaryClass: 'boundary-class',
-          swipeActions: [],
-          item: {},
-          itemTemplate: null,
-          isSelected: false,
-          isSelectable: false,
-          getItemColor: () => 'default',
-          itemSelect: () => {},
-          swipeActionSelect: () => {},
-        },
-      },
+      MockComponent(ListItemSwipeComponent),
+      MockComponent(ListItemMenuComponent),
     ],
     imports: [IonicModule.forRoot()],
-    providers: [{ provide: PlatformService, useValue: mockPaltformServiceIsDesktop }],
+    providers: [{ provide: PlatformService, useValue: mockPaltformServiceIsTouceFalse }],
   });
 
   const item: ListItem = {
@@ -56,8 +46,9 @@ describe('ListItemComponent', () => {
     });
 
     it(`should set device to desktop & instantiate 'kirby-list-item-menu'`, () => {
-      expect(spectatorDesktop.component.device).toEqual('desktop');
       spectatorDesktop.detectChanges();
+
+      expect(spectatorDesktop.component.device).toEqual('desktop');
       expect(spectatorDesktop.query('kirby-list-item-menu')).toBeTruthy();
     });
   });
@@ -66,19 +57,20 @@ describe('ListItemComponent', () => {
     let spectatorMobile: SpectatorHost<ListItemComponent>;
 
     beforeEach(async () => {
-      const mockPaltformServiceIsTouch = {
+      const mockPaltformServiceIsTouchTrue = {
         isTouch: () => true,
         isTablet: () => false,
       };
       spectatorMobile = createHost(`<kirby-list-item></kirby-list-item>`, {
         props: { item },
-        providers: [{ provide: PlatformService, useValue: mockPaltformServiceIsTouch }],
+        providers: [{ provide: PlatformService, useValue: mockPaltformServiceIsTouchTrue }],
       });
     });
 
     it(`should set device to mobile & instantiate 'kirby-list-item-swipe'`, () => {
-      expect(spectatorMobile.component.device).toEqual('mobile');
       spectatorMobile.detectChanges();
+
+      expect(spectatorMobile.component.device).toEqual('mobile');
       expect(spectatorMobile.query('kirby-list-item-swipe')).toBeTruthy();
     });
   });
