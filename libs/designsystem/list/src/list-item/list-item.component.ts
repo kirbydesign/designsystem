@@ -21,7 +21,7 @@ export interface ListItem {
 })
 export class ListItemComponent {
   public device: DeviceType;
-  @Input() item: any;
+  @Input() item: ListItem;
 
   @Input() boundaryClass: BoundaryClass | BoundaryClass[];
 
