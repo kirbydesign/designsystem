@@ -5,11 +5,12 @@ import { ListSwipeAction } from '../list-swipe-action.type';
 
 import { ListItemSwipeComponent } from './list-item-swipe.component';
 
-fdescribe('ListItemMobileComponent', () => {
+fdescribe('ListItemSwipeComponent', () => {
   let spectator: SpectatorHost<ListItemSwipeComponent>;
 
   const createHost = createHostFactory({
     component: ListItemSwipeComponent,
+    declarations: [kirbyListItemColor],
     imports: [IonicModule.forRoot()],
   });
 
@@ -23,18 +24,19 @@ fdescribe('ListItemMobileComponent', () => {
     color: 'default',
   };
 
+  const defaultSwipeAction: ListSwipeAction = {
+    position: 'left',
+    title: 'Archive',
+    type: 'warning',
+    onSelected: (item) => null,
+    isDisabled: (_item: ListItem) => false,
+  };
+
   describe('has 1 swipe action', () => {
     let swipeActions: ListSwipeAction[];
+
     beforeEach(async () => {
-      swipeActions = [
-        {
-          position: 'left',
-          title: 'Archive',
-          type: 'warning',
-          onSelected: (item) => null,
-          isDisabled: (item: ListItem) => true,
-        },
-      ];
+      swipeActions = [{ ...defaultSwipeAction }];
       spectator = createHost(`<kirby-list-item-swipe></kirby-list-item-swipe>`, {
         props: { item, swipeActions },
       });
@@ -67,11 +69,56 @@ fdescribe('ListItemMobileComponent', () => {
 
       expect(spectator.query('ion-item-option')).toHaveClass(`${swipeActionType}`);
     });
+  });
 
-    fit('should have the configured action disabled', () => {
+  describe('has 2 swipe actions', () => {
+    let swipeActions: ListSwipeAction[];
+    beforeEach(async () => {
+      swipeActions = [{ ...defaultSwipeAction }, { ...defaultSwipeAction }];
+      spectator = createHost(`<kirby-list-item-swipe></kirby-list-item-swipe>`, {
+        props: { item, swipeActions },
+      });
+    });
+
+    it('should have two swipe actions', () => {
       spectator.detectChanges();
 
-      expect(spectator.query('ion-item-sliding')).toHaveAttribute('disabled');
+      expect(spectator.queryAll('ion-item-option')).toHaveLength(2);
+    });
+  });
+
+  describe(`Swipe action 'isDisabled' is true`, () => {
+    let swipeActions: ListSwipeAction[];
+    beforeEach(async () => {
+      swipeActions = [{ ...defaultSwipeAction, isDisabled: (_item: ListItem) => true }];
+      spectator = createHost(`<kirby-list-item-swipe></kirby-list-item-swipe>`, {
+        props: { item, swipeActions },
+      });
+    });
+
+    it('should not have any swipe actions', () => {
+      spectator.detectChanges();
+
+      expect(spectator.queryAll('ion-item-option')).toHaveLength(0);
+    });
+  });
+
+  describe(`Swipe action 'isDisabled' is true for action 2 `, () => {
+    let swipeActions: ListSwipeAction[];
+    beforeEach(async () => {
+      swipeActions = [
+        { ...defaultSwipeAction },
+        { ...defaultSwipeAction, isDisabled: (_item: ListItem) => true },
+      ];
+      spectator = createHost(`<kirby-list-item-swipe></kirby-list-item-swipe>`, {
+        props: { item, swipeActions },
+      });
+    });
+
+    it('should have 1 swipe action', () => {
+      spectator.detectChanges();
+
+      expect(spectator.queryAll('ion-item-option')).toHaveLength(1);
     });
   });
 });
