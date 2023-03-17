@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import {
   AfterContentInit,
-  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   ContentChildren,
@@ -23,8 +22,8 @@ import { DropdownComponent, DropdownModule } from '@kirbydesign/designsystem/dro
   templateUrl: './action-group.component.html',
   styleUrls: ['./action-group.component.scss'],
 })
-export class ActionGroupComponent implements AfterContentInit, AfterViewInit {
-  @Input() visibleActions: number;
+export class ActionGroupComponent implements AfterContentInit {
+  @Input() visibleActions?: number;
 
   @Input() emphasizeActions?: boolean;
 
@@ -36,7 +35,8 @@ export class ActionGroupComponent implements AfterContentInit, AfterViewInit {
     ElementRef<HTMLButtonElement>
   >;
   @ContentChildren(ButtonComponent) private buttons: QueryList<ButtonComponent>;
-  @ViewChild('hiddenLayer', { read: ElementRef }) private hiddenLayer!: ElementRef<HTMLElement>;
+  @ViewChild('hiddenLayer', { read: ElementRef, static: true })
+  private hiddenLayer!: ElementRef<HTMLElement>;
   /*
    * TEMPORARY MORE-MENU
    * dropdown ViewChild is only used for temporary more-menu
@@ -64,16 +64,14 @@ export class ActionGroupComponent implements AfterContentInit, AfterViewInit {
       this.isCondensed = true;
       this.placement = 'right';
     }
+
+    if (this.visibleActions) {
+      this.initializeCollapsing();
+    }
   }
 
   public set isCondensed(value: boolean) {
     this.buttons.forEach((button) => (button.showIconOnly = value));
-  }
-
-  ngAfterViewInit(): void {
-    if (this.visibleActions) {
-      this.initializeCollapsing();
-    }
   }
 
   onDropdownActionSelect() {

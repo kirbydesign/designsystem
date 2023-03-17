@@ -8,6 +8,10 @@
 
 :host(.right) {
   justify-content: flex-end;
+
+  .hidden-layer {
+    order: -1; // Move hidden layer to left of buttons and more menu
+  }
 }
 
 :host(.is-collapsed) {

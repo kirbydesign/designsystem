@@ -1,4 +1,3 @@
-<div *ngIf="placement === 'right'" class="hidden-layer" #hiddenLayer></div>
 <ng-content select="button[kirby-button]"></ng-content>
 
 <kirby-dropdown
@@ -8,4 +7,4 @@
   popout="left"
   (change)="onDropdownActionSelect()"
 ></kirby-dropdown>
-<div *ngIf="placement === 'left'" class="hidden-layer" #hiddenLayer></div>
+<div class="hidden-layer" #hiddenLayer></div>
