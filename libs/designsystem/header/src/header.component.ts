@@ -28,6 +28,11 @@ export const HEADER_CONFIG = new InjectionToken<HeaderConfig>('header.config');
 })
 export class HeaderActionsDirective {}
 
+@Directive({
+  selector: '[kirbyHeaderCustomSection]',
+})
+export class HeaderCustomSectionDirective {}
+
 @Component({
   selector: 'kirby-header',
   templateUrl: './header.component.html',
@@ -58,6 +63,9 @@ export class HeaderComponent implements AfterContentInit, OnChanges, OnInit {
 
   @ContentChild(HeaderActionsDirective, { read: TemplateRef<HeaderActionsDirective> })
   actionsTemplate?: TemplateRef<HeaderActionsDirective>;
+
+  @ContentChild(HeaderCustomSectionDirective, { read: TemplateRef<HeaderCustomSectionDirective> })
+  customSectionTemplate?: TemplateRef<HeaderCustomSectionDirective>;
 
   @Input() title: string = null;
   @Input() value: string = null;

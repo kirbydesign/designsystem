@@ -115,6 +115,27 @@
   </div>
 
   <div class="header-example-container">
+    <h2>Custom Section</h2>
+    <p>
+      An optional custom section can be added to the header, e.g. to add more subtitles, trends or
+      status in relation to the key value or title.
+    </p>
+    <p>
+      Decorate your custom section with the
+      <code>*kirbyHeaderCustomSection</code>
+      directive, which will position the custom section correctly and manage spacing as shown in the
+      example below:
+    </p>
+    <cookbook-example-viewer [html]="customSectionExample.template">
+      <div class="header-example">
+        <cookbook-header-example-custom-section
+          #customSectionExample
+        ></cookbook-header-example-custom-section>
+      </div>
+    </cookbook-example-viewer>
+  </div>
+
+  <div class="header-example-container">
     <h2>Combined</h2>
     <p>This example shows all the above options combined:</p>
     <cookbook-example-viewer [html]="combinedExample.template">

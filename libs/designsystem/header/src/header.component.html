@@ -26,6 +26,14 @@
     <div *ngIf="!!subtitle2" class="subtitle2 kirby-text-small">
       {{ subtitle2 }}
     </div>
+
+    <!-- Custom section -->
+    <div
+      *ngIf="!!customSectionTemplate"
+      class="custom-section"
+    >
+      <ng-container *ngTemplateOutlet="customSectionTemplate"></ng-container>
+    </div>
   </div>
   
   <!-- Actions: -->

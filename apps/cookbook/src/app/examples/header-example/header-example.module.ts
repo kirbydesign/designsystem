@@ -10,6 +10,7 @@ import { HeaderExampleAvatarComponent } from './examples/avatar';
 import { HeaderExampleFlagComponent } from './examples/flag';
 import { HeaderExampleValueComponent } from './examples/value';
 import { HeaderExampleCombinedComponent } from './examples/combined';
+import { HeaderExampleCustomSectionComponent } from './examples/custom-section';
 
 const COMPONENT_DECLARATIONS = [
   HeaderExampleComponent,
@@ -18,6 +19,7 @@ const COMPONENT_DECLARATIONS = [
   HeaderExampleFlagComponent,
   HeaderExampleValueComponent,
   HeaderExampleCombinedComponent,
+  HeaderExampleCustomSectionComponent,
 ];
 
 @NgModule({
