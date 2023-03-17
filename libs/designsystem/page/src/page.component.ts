@@ -11,6 +11,7 @@ import {
   EventEmitter,
   HostBinding,
   HostListener,
+  Inject,
   Input,
   NgZone,
   OnChanges,
@@ -41,7 +42,8 @@ import {
   ModalWrapperComponent,
 } from '@kirbydesign/designsystem/modal';
 import { FitHeadingConfig, ResizeObserverService } from '@kirbydesign/designsystem/shared';
-import { HeaderComponent } from '@kirbydesign/designsystem/header';
+import { HEADER_CONFIG, HeaderComponent, HeaderConfig } from '@kirbydesign/designsystem/header';
+import { ACTIONGROUP_CONFIG } from '@kirbydesign/designsystem/action-group';
 
 /**
  * Specify scroll event debounce time in ms and scrolled offset from top in pixels
@@ -176,6 +178,12 @@ export class PageActionsComponent {}
   templateUrl: './page.component.html',
   styleUrls: ['./page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    {
+      provide: HEADER_CONFIG,
+      useFactory: (): HeaderConfig => ({}),
+    },
+  ],
 })
 export class PageComponent
   implements OnInit, OnDestroy, AfterViewInit, AfterContentChecked, OnChanges
@@ -286,6 +294,7 @@ export class PageComponent
     private zone: NgZone,
     private modalNavigationService: ModalNavigationService,
     private resizeObserverService: ResizeObserverService,
+    @Inject(HEADER_CONFIG) private headerConfig: HeaderConfig,
     @Optional() @SkipSelf() private tabsComponent: TabsComponent
   ) {}
 
@@ -310,8 +319,9 @@ export class PageComponent
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.titleMaxLines) {
+      this.headerConfig.titleMaxLines = changes.titleMaxLines.currentValue;
+
       this.fitHeadingConfig = {
-        ...this.fitHeadingConfig,
         maxLines: changes.titleMaxLines.currentValue,
       };
     }

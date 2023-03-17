@@ -6,8 +6,12 @@ import {
   Directive,
   ElementRef,
   HostBinding,
+  Inject,
+  InjectionToken,
   Input,
   OnChanges,
+  OnInit,
+  Optional,
   SimpleChanges,
   TemplateRef,
   ViewChild,
@@ -15,6 +19,9 @@ import {
 import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
 import { FlagComponent } from '@kirbydesign/designsystem/flag';
 import type { FitHeadingConfig } from '@kirbydesign/designsystem/shared';
+
+export type HeaderConfig = { titleMaxLines?: number };
+export const HEADER_CONFIG = new InjectionToken<HeaderConfig>('header.config');
 
 @Directive({
   selector: '[kirbyHeaderActions]',
@@ -27,7 +34,7 @@ export class HeaderActionsDirective {}
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeaderComponent implements AfterContentInit, OnChanges {
+export class HeaderComponent implements AfterContentInit, OnChanges, OnInit {
   @HostBinding('class.centered')
   @Input()
   centered: boolean;
@@ -58,6 +65,16 @@ export class HeaderComponent implements AfterContentInit, OnChanges {
   @Input() subtitle1: string = null;
   @Input() subtitle2: string = null;
 
+  constructor(@Optional() @Inject(HEADER_CONFIG) private config?: HeaderConfig) {}
+
+  ngOnInit(): void {
+    if (this.config) {
+      this.fitHeadingConfig = {
+        maxLines: this.config.titleMaxLines,
+      };
+    }
+  }
+
   ngAfterContentInit(): void {
     // If an avatar is present we default to centered layout - unless configured otherwise:
     if (this.avatar && this.centered === undefined) {
@@ -68,7 +85,6 @@ export class HeaderComponent implements AfterContentInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.titleMaxLines) {
       this.fitHeadingConfig = {
-        ...this.fitHeadingConfig,
         maxLines: changes.titleMaxLines.currentValue,
       };
     }
