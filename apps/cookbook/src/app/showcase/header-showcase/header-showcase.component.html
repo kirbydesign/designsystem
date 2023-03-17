@@ -114,6 +114,16 @@
     </p>
   </div>
 
+  <div class="header-example-container">
+    <h2>Combined</h2>
+    <p>This example shows all the above options combined:</p>
+    <cookbook-example-viewer [html]="combinedExample.template">
+      <div class="header-example">
+        <cookbook-header-example-combined #combinedExample></cookbook-header-example-combined>
+      </div>
+    </cookbook-example-viewer>
+  </div>
+
   <h1>API</h1>
   <h2>Header Properties:</h2>
   <cookbook-api-description-properties
