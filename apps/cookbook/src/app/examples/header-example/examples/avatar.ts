@@ -3,8 +3,10 @@ import { Component } from '@angular/core';
 const config = {
   selector: 'cookbook-header-example-avatar',
   template: `
-  <kirby-header title="Title" subtitle1="Subtitle one" subtitle2="Subtitle two" [centered]="true">
-    <kirby-avatar size="lg" text="A" title="lg"></kirby-avatar>
+  <kirby-header title="Title" subtitle1="Subtitle one" subtitle2="Subtitle two">
+    <kirby-avatar size="lg">
+      <kirby-icon name="kirby"></kirby-icon>
+    </kirby-avatar>
   </kirby-header>
   `,
 };
