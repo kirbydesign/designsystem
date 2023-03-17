@@ -5,12 +5,11 @@ import { ListSwipeAction } from '../list-swipe-action.type';
 
 import { ListItemSwipeComponent } from './list-item-swipe.component';
 
-fdescribe('ListItemSwipeComponent', () => {
+describe('ListItemSwipeComponent', () => {
   let spectator: SpectatorHost<ListItemSwipeComponent>;
 
   const createHost = createHostFactory({
     component: ListItemSwipeComponent,
-    declarations: [kirbyListItemColor],
     imports: [IonicModule.forRoot()],
   });
 

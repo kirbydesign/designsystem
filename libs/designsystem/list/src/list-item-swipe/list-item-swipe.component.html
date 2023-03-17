@@ -1,9 +1,6 @@
 <ion-item-sliding
   [class.selected]="isSelected"
-  [kirbyListItemColor]="getItemColor"
-  [item]="item"
   [disabled]="_isSwipingEnabled ? null : true"
-  keyHandler
   [ngClass]="boundaryClass"
   (click)="_onItemSelect(item)"
 >
