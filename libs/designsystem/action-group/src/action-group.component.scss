@@ -21,11 +21,17 @@
 }
 
 .hidden-layer {
-  position: absolute;
+  display: none;
   visibility: hidden;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
+}
+
+/* Hidden layer should only take up space when the action group is resizable */
+:host(.is-resizeable) {
+  .hidden-layer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
 }
 
 kirby-dropdown {

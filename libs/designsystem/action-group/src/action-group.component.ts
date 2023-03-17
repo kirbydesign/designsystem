@@ -47,6 +47,9 @@ export class ActionGroupComponent implements AfterContentInit {
   _isCollapsed: boolean;
   _collapsedActions: string[] = [];
 
+  @HostBinding('class.is-resizeable')
+  _isResizeable = false;
+
   private _nonCollapsibleVisibleActions: number = 2;
 
   private hiddenButtons: HTMLButtonElement[];
