@@ -1,38 +1,44 @@
-<div class="container">
-  <div *ngIf="!!avatar" class="avatar">
-    <ng-content select="kirby-avatar"></ng-content>
-  </div>
-
-  <div *ngIf="!!flag" class="flag">
-    <ng-content select="kirby-flag"></ng-content>
-  </div>
-
-  <!-- Only title, no value: -->
-  <h1 *ngIf="!!title && !value" #titleElement class="title" [kirbyFitHeading]="fitHeadingConfig">
-    {{ title }}
-  </h1>
-
-  <!-- Title and value: -->
-  <h1 *ngIf="!!title && !!value" #titleElement class="title kirby-text-medium">
-    {{ title }}
-  </h1>
-  <h3 *ngIf="!!value" class="value kirby-text-display-3">{{ value }}<span class="value-unit kirby-text-normal semi-dark-text" *ngIf="!!valueUnit">{{ valueUnit }}</span></h3>
-
-  <!-- Subtitles: -->
-  <div *ngIf="!!subtitle1" class="subtitle1 kirby-text-small">
-    {{ subtitle1 }}
-  </div>
-  <div *ngIf="!!subtitle2" class="subtitle2 kirby-text-small">
-    {{ subtitle2 }}
-  </div>
+<div *ngIf="!!avatar" class="avatar">
+  <ng-content select="kirby-avatar"></ng-content>
 </div>
 
-<!-- Actions: -->
-<div
-    *ngIf="!!actionsTemplate"
-    #actionsElement
-    class="actions"
-    [class.emphasize]="emphasizeActions"
-  >
-    <ng-container [ngTemplateOutlet]="actionsTemplate"></ng-container>
+<div *ngIf="!!flag" class="flag">
+  <ng-content select="kirby-flag"></ng-content>
+</div>
+
+<div class="container">
+  <div class="title-container">
+    <!-- Only title, no value: -->
+    <h1 *ngIf="!!title && !value" #titleElement class="title" [kirbyFitHeading]="fitHeadingConfig">
+      {{ title }}
+    </h1>
+  
+    <!-- Title and value: -->
+    <h1 *ngIf="!!title && !!value" #titleElement class="title kirby-text-medium">
+      {{ title }}
+    </h1>
+    <h3 *ngIf="!!value" class="value kirby-text-display-3">{{ value }}<span class="value-unit kirby-text-normal semi-dark-text" *ngIf="!!valueUnit">{{ valueUnit }}</span></h3>
+  
+    <!-- Subtitles: -->
+    <div *ngIf="!!subtitle1" class="subtitle1 kirby-text-small">
+      {{ subtitle1 }}
+    </div>
+    <div *ngIf="!!subtitle2" class="subtitle2 kirby-text-small">
+      {{ subtitle2 }}
+    </div>
   </div>
+  
+  <!-- Actions: -->
+  <div
+      *ngIf="!!actionsTemplate"
+      #actionsElement
+      class="actions"
+      [class.emphasize]="emphasizeActions"
+    >
+    <!-- HACK: Render hidden title so actions get pushed down to align with value heading: -->  
+      <h1 *ngIf="!!title && !!value" class="title hidden kirby-text-medium" aria-hidden="true">
+        {{ title }}
+      </h1>
+      <ng-container [ngTemplateOutlet]="actionsTemplate"></ng-container>
+    </div>
+</div>

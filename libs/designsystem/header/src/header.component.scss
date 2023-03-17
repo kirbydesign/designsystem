@@ -2,39 +2,70 @@
 @use '@kirbydesign/core/src/scss/utils';
 
 :host {
-  display: grid;
-  align-items: start;
-  row-gap: utils.size('m');
+  display: flex;
+  flex-direction: column;
   margin-top: utils.size('s');
   margin-bottom: utils.size('l');
 
   @include utils.media('>=medium') {
     margin-top: utils.size('m');
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    column-gap: utils.size('s');
-  }
-
-  &.centered {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr);
-
-    .container {
-      align-items: center;
-      grid-column-start: 2;
-    }
-  }
-}
-
-@include utils.media('<medium') {
-  .actions:not(.emphasize) {
-    display: none;
   }
 }
 
 .container {
   display: flex;
   flex-direction: column;
+
+  @include utils.media('>=medium') {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: utils.size('s');
+  }
+}
+
+:host(.centered) {
+  align-items: center;
+
+  .title-container {
+    align-items: center;
+    text-align: center;
+  }
+
+  @include utils.media('>=medium') {
+    .container {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr);
+      align-self: stretch;
+    }
+
+    .title-container {
+      grid-column-start: 2;
+    }
+  }
+}
+
+.actions {
+  // kirby-button already has 4px horizontal margin, so add additional 4px to get 8px in total:
+  margin: 0 utils.size('xxxs');
+
+  @include utils.media('<medium') {
+    margin-top: utils.size('m');
+
+    // Hide actions on small screens when not emphasized:
+    &:not(.emphasize) {
+      display: none;
+    }
+  }
+}
+
+.avatar,
+.flag,
+.title-container {
   padding: 0 utils.size('s');
-  overflow: hidden;
+}
+
+.title-container {
+  display: flex;
+  flex-direction: column;
 }
 
 .avatar {
@@ -48,6 +79,14 @@
 .title {
   margin-bottom: utils.size('xxxxs');
   word-break: break-all;
+
+  &.hidden {
+    visibility: hidden;
+
+    @include utils.media('<medium') {
+      display: none;
+    }
+  }
 }
 
 .value {
