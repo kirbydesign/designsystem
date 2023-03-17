@@ -264,6 +264,12 @@ $button-width: (
   }
 }
 
+:host-context(.kirby-color-brightness-white) {
+  &.attention-level3 {
+    box-shadow: none;
+  }
+}
+
 :host-context(.kirby-color-brightness-dark) {
   &.no-decoration {
     --kirby-button-color: #{utils.get-color('white')};
@@ -283,6 +289,8 @@ $button-width: (
   &.attention-level3 {
     @include interaction-state.apply-hover('xxxs', $make-lighter: true);
     @include interaction-state.apply-active('xxs', $make-lighter: true);
+
+    box-shadow: none;
   }
 }
 
