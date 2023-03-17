@@ -1,4 +1,5 @@
 import {
+  AfterContentInit,
   ChangeDetectionStrategy,
   Component,
   ContentChild,
@@ -26,10 +27,10 @@ export class HeaderActionsDirective {}
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeaderComponent implements OnChanges {
+export class HeaderComponent implements AfterContentInit, OnChanges {
   @HostBinding('class.centered')
   @Input()
-  centered = false;
+  centered: boolean;
 
   @Input() titleMaxLines: number;
   @Input() emphasizeActions = false;
@@ -56,6 +57,13 @@ export class HeaderComponent implements OnChanges {
   @Input() valueUnit: string = null;
   @Input() subtitle1: string = null;
   @Input() subtitle2: string = null;
+
+  ngAfterContentInit(): void {
+    // If an avatar is present we default to centered layout - unless configured otherwise:
+    if (this.avatar && this.centered === undefined) {
+      this.centered = true;
+    }
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.titleMaxLines) {
