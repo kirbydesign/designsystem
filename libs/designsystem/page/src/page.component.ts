@@ -43,7 +43,6 @@ import {
 } from '@kirbydesign/designsystem/modal';
 import { FitHeadingConfig, ResizeObserverService } from '@kirbydesign/designsystem/shared';
 import { HEADER_CONFIG, HeaderComponent, HeaderConfig } from '@kirbydesign/designsystem/header';
-import { ACTIONGROUP_CONFIG } from '@kirbydesign/designsystem/action-group';
 
 /**
  * Specify scroll event debounce time in ms and scrolled offset from top in pixels
