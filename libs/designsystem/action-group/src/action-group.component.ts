@@ -107,11 +107,8 @@ export class ActionGroupComponent implements AfterContentInit {
   }
 
   private toggleDropdown() {
-    if (this.hiddenLayer.nativeElement.childElementCount === 0) {
-      this._isCollapsed = false;
-    } else {
-      this._isCollapsed = true;
-    }
+    const hasHiddenButtons = this.hiddenLayer.nativeElement.childElementCount > 0;
+    this._isCollapsed = hasHiddenButtons;
   }
 
   private populateDropdown() {
