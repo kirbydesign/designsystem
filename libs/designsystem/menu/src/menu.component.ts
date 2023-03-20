@@ -16,7 +16,7 @@ import { ItemModule } from '@kirbydesign/designsystem/item';
 import { CardModule } from '@kirbydesign/designsystem/card';
 import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import { IconModule, IconSize } from '@kirbydesign/designsystem/icon';
-import { ButtonComponent, ButtonSize } from '@kirbydesign/designsystem/button';
+import { AttentionLevel, ButtonComponent, ButtonSize } from '@kirbydesign/designsystem/button';
 import {
   FloatingDirective,
   FloatingOffset,
@@ -49,6 +49,8 @@ export class MenuComponent implements AfterViewInit {
   @Input() public buttonSize: ButtonSize = ButtonSize.MD;
 
   @Input() public placement: Placement = 'bottom-start';
+
+  @Input() public attentionLevel: AttentionLevel = '3';
 
   @Input() public triggers: Array<TriggerEvent> = ['click'];
 
