@@ -5,6 +5,7 @@ import {
   ContentChildren,
   ElementRef,
   EventEmitter,
+  HostListener,
   Input,
   OnDestroy,
   Output,
@@ -13,6 +14,7 @@ import {
 } from '@angular/core';
 import { filter, fromEvent, map, Subject, takeUntil, tap } from 'rxjs';
 import { WindowRef } from '@kirbydesign/designsystem/types';
+import { KeyboardHandlerService } from '@kirbydesign/designsystem/dropdown';
 import { TabNavigationItemComponent } from '../tab-navigation-item/tab-navigation-item.component';
 
 const ARROW_LEFT = 'ArrowLeft';
@@ -56,11 +58,12 @@ export class TabNavigationComponent implements AfterViewInit, OnDestroy {
     }
   }
   private _selectedIndex = -1;
+  private _focusIndex = -1;
 
   @Output()
   selectedIndexChange = new EventEmitter<number>();
 
-  constructor(private window: WindowRef) {
+  constructor(private window: WindowRef, private keyboardHandlerService: KeyboardHandlerService) {
     /**/
   }
 
@@ -70,7 +73,7 @@ export class TabNavigationComponent implements AfterViewInit, OnDestroy {
     this.tabElements.forEach((tabElement) =>
       this.tabButtonElements.push(tabElement.querySelector('[role="tab"]'))
     );
-    this.initTabListeners();
+
     setTimeout(() => {
       this.selectTab(this.selectedIndex);
       this.scrollToTab(this.selectedIndex);
@@ -78,34 +81,27 @@ export class TabNavigationComponent implements AfterViewInit, OnDestroy {
     }, this.DEBOUNCE_TIME_MS);
   }
 
-  initTabListeners(): void {
-    this.tabButtonElements.forEach((tabButtonElement, index) => {
-      fromEvent(tabButtonElement, 'click')
-        .pipe(takeUntil(this.destroyed$))
-        .subscribe(() => (this.selectedIndex = index));
+  @HostListener('click', ['$event'])
+  @HostListener('keydown.enter', ['$event'])
+  onItemSelect(event: PointerEvent) {
+    const targetTabNavItem: HTMLElement = (event.target as HTMLElement).closest('button');
+    this.selectedIndex = this.tabButtonElements.indexOf(targetTabNavItem);
+  }
 
-      fromEvent(tabButtonElement, 'keydown')
-        .pipe(
-          filter((e: KeyboardEvent) => e.key === ARROW_LEFT || e.key === ARROW_RIGHT),
-          tap((e: KeyboardEvent) => e.preventDefault()),
-          map((e: KeyboardEvent) => {
-            switch (e.key) {
-              case ARROW_LEFT:
-                return index === 0 ? this.tabButtonElements.length - 1 : index - 1;
-              case ARROW_RIGHT:
-                return index === this.tabButtonElements.length - 1 ? 0 : index + 1;
-            }
-          }),
-          filter(
-            (focusIndex: number) => 0 <= focusIndex && focusIndex < this.tabButtonElements.length
-          ),
-          takeUntil(this.destroyed$)
-        )
-        .subscribe((focusIndex: number) => {
-          this.scrollToTab(focusIndex);
-          this.focusTab(focusIndex);
-        });
-    });
+  @HostListener('keydown.home', ['$event'])
+  @HostListener('keydown.end', ['$event'])
+  @HostListener('keydown.arrowright', ['$event'])
+  @HostListener('keydown.arrowleft', ['$event'])
+  onKeydown(event: KeyboardEvent) {
+    event.preventDefault();
+    const newFocusIndex = this.keyboardHandlerService.handle(
+      event,
+      this.tabElements,
+      this._focusIndex,
+      true
+    );
+
+    this.focusTab(newFocusIndex);
   }
 
   ngOnDestroy(): void {
@@ -119,8 +115,8 @@ export class TabNavigationComponent implements AfterViewInit, OnDestroy {
     });
   }
 
-  private focusTab(tabIndex: number): void {
-    const focusIndex = 0 <= tabIndex && tabIndex < this.tabButtonElements.length ? tabIndex : 0;
+  private focusTab(focusIndex: number): void {
+    this._focusIndex = focusIndex;
 
     this.tabButtonElements.forEach((tabButtonElement, index) => {
       tabButtonElement.setAttribute('tabindex', index === focusIndex ? '0' : '-1');
