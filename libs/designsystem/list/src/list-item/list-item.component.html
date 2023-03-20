@@ -1,6 +1,7 @@
 <ng-container *ngIf="device === 'mobile'">
   <kirby-list-item-swipe
     [item]="item"
+    [boundaryClass]="boundaryClass"
     [swipeActions]="swipeActions"
     [itemTemplate]="itemTemplate"
     [isSelected]="isSelected"

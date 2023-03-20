@@ -17,6 +17,7 @@ import { ThemeColor } from '@kirbydesign/core';
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 import { ListHelper } from './helpers/list-helper';
 import { BoundaryClass } from './list-item-swipe/list-item-swipe.component';
+import { ListItem } from './list-item/list-item';
 
 import { ListSwipeAction } from './list-swipe-action.type';
 import {
@@ -54,7 +55,7 @@ export class ListComponent implements OnInit, OnChanges {
    * Provide items for the list to render. Items must be provided in the order you expect them to be rendered.
    */
   @Input()
-  items: any[] = [];
+  items: ListItem[] = [];
 
   @Input() getItemColor: (item: any) => ThemeColor;
 

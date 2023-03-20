@@ -8,20 +8,22 @@ import { SpinnerModule } from 'spinner/src';
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 import { ListItemColorDirective } from './directives/list-item-color.directive';
 import { ListHelper } from './helpers/list-helper';
+import { ListItem } from './list-item/list-item';
 import { ListItemComponent } from './list-item/list-item.component';
 import { ListComponent } from './list.component';
 import { LoadOnDemandEvent } from './list.event';
 
-type Transaction = {
-  id: number;
-  title: string;
-  subTitle: string;
-  amount: string;
-  detail: number;
-  color: string;
+const testItem: ListItem = {
+  id: 0,
+  title: 'Vestas Wind Systems',
+  subTitle: '2000 pcs',
+  amount: '5.587.218.309 DKK',
+  detail: 225,
+  flagged: false,
+  color: 'default',
 };
 
-const transactions: Transaction[] = [
+const transactions: ListItem[] = [
   {
     id: 0,
     title: 'Vestas Wind Systems has a very long name',
@@ -162,13 +164,12 @@ describe('ListComponent', () => {
   describe('function: onItemSelect', () => {
     it('should emit the selected item and mark it as selected', () => {
       spyOn(component.itemSelect, 'emit');
-      const itemToBeSelected = { value: 'this is a dummy item' };
-      component.items = [itemToBeSelected];
+      component.items = [testItem];
 
-      component.onItemSelect(itemToBeSelected);
+      component.onItemSelect(testItem);
 
       expect(component.itemSelect.emit).toHaveBeenCalledTimes(1);
-      expect(component.itemSelect.emit).toHaveBeenCalledWith(itemToBeSelected);
+      expect(component.itemSelect.emit).toHaveBeenCalledWith(testItem);
     });
   });
 

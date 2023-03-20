@@ -4,6 +4,6 @@ export interface ListItem {
   subTitle: string;
   amount: string;
   detail: number;
-  flagged: boolean;
-  color: 'default' | 'primary' | 'success' | 'warning' | 'danger' | 'light';
+  flagged?: boolean; // why do we need this? I can see it in the cookbook, but I'm not sure what it is needed for.
+  color: 'default' | 'primary' | 'success' | 'warning' | 'danger' | 'light' | 'white'; // What colors are actually allowed?
 }
