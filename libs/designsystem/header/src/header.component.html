@@ -17,7 +17,7 @@
     <h1 *ngIf="!!title && !!value" #titleElement class="title kirby-text-medium">
       {{ title }}
     </h1>
-    <h3 *ngIf="!!value" class="value kirby-text-display-3">{{ value }}<span class="value-unit kirby-text-normal semi-dark-text" *ngIf="!!valueUnit">{{ valueUnit }}</span></h3>
+    <h3 *ngIf="!!value" class="value kirby-text-display-3" [kirbyFitHeading]="fitHeadingConfig">{{ value }}<span class="value-unit semi-dark-text" *ngIf="!!valueUnit">{{ valueUnit }}</span></h3>
   
     <!-- Subtitles: -->
     <div *ngIf="!!subtitle1" class="subtitle1 kirby-text-small">
@@ -47,6 +47,6 @@
       <h1 *ngIf="!!title && !!value" class="title hidden kirby-text-medium" aria-hidden="true">
         {{ title }}
       </h1>
-      <ng-container [ngTemplateOutlet]="actionsTemplate"></ng-container>
+      <ng-container *ngTemplateOutlet="actionsTemplate; injector: _actionGroupInjector"></ng-container>
     </div>
 </div>

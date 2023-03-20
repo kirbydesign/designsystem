@@ -15,6 +15,8 @@
 .container {
   display: flex;
   flex-direction: column;
+  max-width: 100%;
+  overflow: hidden;
 
   @include utils.media('>=medium') {
     display: grid;
@@ -66,6 +68,7 @@
 .title-container {
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .avatar {
@@ -89,6 +92,7 @@
 }
 
 .value {
+  max-width: 100%;
   margin-bottom: utils.size('xxxs');
 }
 
@@ -96,6 +100,8 @@
   font-weight: initial;
   color: utils.get-text-color('semi-dark');
   margin-left: utils.size('xxxs');
+  font-size: 50%;
+  line-height: 1;
 }
 
 .subtitle1,
