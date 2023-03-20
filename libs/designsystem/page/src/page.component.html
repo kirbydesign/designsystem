@@ -19,7 +19,9 @@
       slot="primary"
       [class.fade-in]="toolbarActionsVisible"
     >
-      <ng-container *ngTemplateOutlet="header?.actionsTemplate"></ng-container>
+      <ng-container
+        *ngTemplateOutlet="header?.actionsTemplate; injector: toolbarActionGroupInjector"
+      ></ng-container>
     </ion-buttons>
     <ion-buttons *ngIf="!!stickyActionsTemplate" class="legacy-actions" slot="primary">
       <ng-container *ngTemplateOutlet="stickyActionsTemplate"></ng-container>

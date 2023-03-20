@@ -8,6 +8,7 @@ import {
   HostBinding,
   Inject,
   InjectionToken,
+  Injector,
   Input,
   OnChanges,
   OnInit,
@@ -16,6 +17,7 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
+import { ACTIONGROUP_CONFIG, ActionGroupConfig } from '@kirbydesign/designsystem/action-group';
 import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
 import { FlagComponent } from '@kirbydesign/designsystem/flag';
 import type { FitHeadingConfig } from '@kirbydesign/designsystem/shared';
@@ -73,7 +75,14 @@ export class HeaderComponent implements AfterContentInit, OnChanges, OnInit {
   @Input() subtitle1: string = null;
   @Input() subtitle2: string = null;
 
-  constructor(@Optional() @Inject(HEADER_CONFIG) private config?: HeaderConfig) {}
+  _actionGroupInjector: Injector;
+
+  private actionGroupConfig: ActionGroupConfig;
+
+  constructor(
+    private injector: Injector,
+    @Optional() @Inject(HEADER_CONFIG) private config?: HeaderConfig
+  ) {}
 
   ngOnInit(): void {
     if (this.config) {
@@ -81,12 +90,31 @@ export class HeaderComponent implements AfterContentInit, OnChanges, OnInit {
         maxLines: this.config.titleMaxLines,
       };
     }
+
+    this.actionGroupConfig = {
+      isResizable: this.emphasizeActions,
+      visibleActions: this.emphasizeActions ? undefined : 1,
+    };
+
+    this._actionGroupInjector = Injector.create({
+      providers: [
+        {
+          provide: ACTIONGROUP_CONFIG,
+          useValue: this.actionGroupConfig,
+        },
+      ],
+      parent: this.injector,
+    });
   }
 
   ngAfterContentInit(): void {
     // If an avatar is present we default to centered layout - unless configured otherwise:
     if (this.avatar && this.centered === undefined) {
       this.centered = true;
+    }
+
+    if (this.centered) {
+      this.actionGroupConfig.isCondensed = true;
     }
   }
 

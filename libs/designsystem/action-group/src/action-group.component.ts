@@ -6,13 +6,23 @@ import {
   ContentChildren,
   ElementRef,
   HostBinding,
+  Inject,
+  InjectionToken,
   Input,
+  Optional,
   QueryList,
   Renderer2,
   ViewChild,
 } from '@angular/core';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { DropdownComponent, DropdownModule } from '@kirbydesign/designsystem/dropdown';
+
+export type ActionGroupConfig = {
+  isResizable?: boolean;
+  isCondensed?: boolean;
+  visibleActions?: number;
+};
+export const ACTIONGROUP_CONFIG = new InjectionToken<ActionGroupConfig>('action-group.config');
 
 @Component({
   selector: 'kirby-action-group',
@@ -31,10 +41,10 @@ export class ActionGroupComponent implements AfterContentInit {
   @Input()
   placement: 'left' | 'right' = 'right';
 
-  @ContentChildren(ButtonComponent, { read: ElementRef }) private buttonElements!: QueryList<
+  @ContentChildren(ButtonComponent, { read: ElementRef }) private buttonElements?: QueryList<
     ElementRef<HTMLButtonElement>
   >;
-  @ContentChildren(ButtonComponent) private buttons: QueryList<ButtonComponent>;
+  @ContentChildren(ButtonComponent) private buttons?: QueryList<ButtonComponent>;
   @ViewChild('hiddenLayer', { read: ElementRef, static: true })
   private hiddenLayer!: ElementRef<HTMLElement>;
   /*
@@ -54,27 +64,23 @@ export class ActionGroupComponent implements AfterContentInit {
 
   private hiddenButtons: HTMLButtonElement[];
 
-  constructor(private renderer: Renderer2, private elementRef: ElementRef<HTMLElement>) {}
+  constructor(
+    private renderer: Renderer2,
+    @Optional() @Inject(ACTIONGROUP_CONFIG) private config: ActionGroupConfig
+  ) {}
 
   ngAfterContentInit(): void {
-    const isInToolbar = this.elementRef.nativeElement.closest('ion-toolbar');
-    const emphasizeActions = !!this.elementRef.nativeElement.closest('.actions.emphasize');
-    if (isInToolbar || emphasizeActions === false) {
-      // Setting default visible actions to 1:
-      this.visibleActions = 1;
-    }
-    if (isInToolbar) {
-      this.isCondensed = true;
-      this.placement = 'right';
+    if (this.config) {
+      this._isResizeable = this.config.isResizable;
+      this.visibleActions = this.config.visibleActions;
+      if (this.config.isCondensed) {
+        this.buttons?.forEach((button) => (button.showIconOnly = true));
+      }
     }
 
     if (this.visibleActions) {
       this.initializeCollapsing();
     }
-  }
-
-  public set isCondensed(value: boolean) {
-    this.buttons.forEach((button) => (button.showIconOnly = value));
   }
 
   onDropdownActionSelect() {
