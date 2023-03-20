@@ -1,14 +1,16 @@
 import { IonicModule } from '@ionic/angular';
-import { PlatformService } from '@kirbydesign/designsystem/helpers';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponent } from 'ng-mocks';
+
+import { PlatformService } from '@kirbydesign/designsystem/helpers';
+
 import { ListItemMenuComponent } from '../list-item-menu/list-item-menu.component';
 import { ListItemSwipeComponent } from '../list-item-swipe/list-item-swipe.component';
 import { ListItem } from './list-item';
 import { ListItemComponent } from './list-item.component';
 
 describe('ListItemComponent', () => {
-  const mockPaltformServiceIsTouceFalse = {
+  const mockPlatformServiceIsTouchFalse = {
     isTouch: () => false,
     isTablet: () => false,
   };
@@ -21,7 +23,7 @@ describe('ListItemComponent', () => {
       MockComponent(ListItemMenuComponent),
     ],
     imports: [IonicModule.forRoot()],
-    providers: [{ provide: PlatformService, useValue: mockPaltformServiceIsTouceFalse }],
+    providers: [{ provide: PlatformService, useValue: mockPlatformServiceIsTouchFalse }],
   });
 
   const item: ListItem = {
@@ -36,9 +38,11 @@ describe('ListItemComponent', () => {
 
   describe(`device is 'desktop'`, () => {
     let spectatorDesktop: SpectatorHost<ListItemComponent>;
+
     beforeEach(async () => {
       spectatorDesktop = createHost(`<kirby-list-item></kirby-list-item>`, {
         props: { item },
+        providers: [{ provide: PlatformService, useValue: mockPlatformServiceIsTouchFalse }],
       });
     });
 
@@ -47,10 +51,9 @@ describe('ListItemComponent', () => {
     });
 
     it(`should set device to desktop & instantiate 'kirby-list-item-menu'`, () => {
-      spectatorDesktop.detectChanges();
-
       expect(spectatorDesktop.component.device).toEqual('desktop');
       expect(spectatorDesktop.query('kirby-list-item-menu')).toBeTruthy();
+      expect(spectatorDesktop.query('kirby-list-item-swipe')).toBeFalsy();
     });
   });
 
@@ -62,6 +65,7 @@ describe('ListItemComponent', () => {
         isTouch: () => true,
         isTablet: () => false,
       };
+
       spectatorMobile = createHost(`<kirby-list-item></kirby-list-item>`, {
         props: { item },
         providers: [{ provide: PlatformService, useValue: mockPaltformServiceIsTouchTrue }],
@@ -69,10 +73,9 @@ describe('ListItemComponent', () => {
     });
 
     it(`should set device to mobile & instantiate 'kirby-list-item-swipe'`, () => {
-      spectatorMobile.detectChanges();
-
       expect(spectatorMobile.component.device).toEqual('mobile');
       expect(spectatorMobile.query('kirby-list-item-swipe')).toBeTruthy();
+      expect(spectatorMobile.query('kirby-list-item-menu')).toBeFalsy();
     });
   });
 });
