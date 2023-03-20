@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
+
 import { ThemeColor } from '@kirbydesign/designsystem/helpers';
 
 import { BoundaryClass } from '../list-item-swipe/list-item-swipe.component';

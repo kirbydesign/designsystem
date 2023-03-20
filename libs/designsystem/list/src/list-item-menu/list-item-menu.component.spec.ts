@@ -1,10 +1,5 @@
 import { IonicModule } from '@ionic/angular';
-import {
-  createHostFactory,
-  HostComponent,
-  SpectatorHost,
-  SpectatorHostFactory,
-} from '@ngneat/spectator';
+import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponent } from 'ng-mocks';
 
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
@@ -20,9 +15,6 @@ import { ListItemMenuComponent } from './list-item-menu.component';
 import { ListItemMenuAction } from './list-item-menu-action';
 
 describe('ListItemMenuComponent', () => {
-  let spectator: SpectatorHost<ListItemMenuComponent>;
-  let createHost: SpectatorHostFactory<ListItemMenuComponent, HostComponent>;
-
   const item: ListItem = {
     id: 0,
     title: 'Vestas Wind Systems',
@@ -40,13 +32,15 @@ describe('ListItemMenuComponent', () => {
     onSelected: (_item: ListItem) => null,
   };
 
-  createHost = createHostFactory({
+  const createHost = createHostFactory({
     component: ListItemMenuComponent,
     declarations: [HasActionsPipe, GetActionsPipe, GetActionIconPipe, MockComponent(IconComponent)],
     imports: [IonicModule.forRoot(), ButtonComponent, AvatarComponent, ItemModule],
   });
 
   describe('component is created', () => {
+    let spectator: SpectatorHost<ListItemMenuComponent>;
+
     beforeEach(async () => {
       spectator = createHost(`<kirby-list-item-menu></kirby-list-item-menu>`, {
         props: { item },

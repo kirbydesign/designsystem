@@ -1,8 +1,8 @@
 import { IonicModule } from '@ionic/angular';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
+
 import { ListItem } from '../list-item/list-item';
 import { ListSwipeAction } from '../list-swipe-action.type';
-
 import { ListItemSwipeComponent } from './list-item-swipe.component';
 
 describe('ListItemSwipeComponent', () => {
