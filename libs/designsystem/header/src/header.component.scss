@@ -84,6 +84,9 @@
 
   &.hidden {
     visibility: hidden;
+    white-space: nowrap;
+    max-width: 100%;
+    overflow: hidden;
 
     @include utils.media('<medium') {
       display: none;
