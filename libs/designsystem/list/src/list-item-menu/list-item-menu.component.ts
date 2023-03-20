@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output, TemplateRef } from '@angular/co
 import { ThemeColor } from '@kirbydesign/designsystem/helpers';
 import { BoundaryClass } from '../list-item-swipe/list-item-swipe.component';
 import { ListItem } from '../list-item/list-item';
-import { ListSwipeAction } from '../list-swipe-action.type';
+import { ListItemMenuAction } from './list-item-menu-action';
 
 @Component({
   selector: 'kirby-list-item-menu',
@@ -14,7 +14,7 @@ export class ListItemMenuComponent {
 
   @Input() boundaryClass: BoundaryClass | BoundaryClass[];
 
-  @Input() swipeActions: ListSwipeAction[] = [];
+  @Input() actions: ListItemMenuAction[] = [];
 
   @Input() itemTemplate: TemplateRef<any>;
 

@@ -1,4 +1,4 @@
-<kirby-item slot="start" [disabled]="!(item | hasActions: [swipeActions, 'desktop'])">
+<kirby-item slot="start" [disabled]="!(item | hasActions: [actions, 'desktop'])">
   <!-- The logic deciding the 'disable' prop is based on an assumption  -->
   <kirby-item class="item-width">
     <kirby-avatar overlay="true" slot="start">
@@ -8,14 +8,14 @@
     <data slot="end" value="item.amount">{{ item.amount }}</data>
   </kirby-item>
   <!-- <ng-container [ngSwitch]="_getSwipeActions(item).length > 1"> -->
-  <ng-container [ngSwitch]="(item | getActions: [swipeActions, 'desktop', null]).length > 1">
+  <ng-container [ngSwitch]="(item | getActions: [actions, 'desktop', null]).length > 1">
     <ng-container *ngSwitchCase="true">
       <button slot="end" kirby-button [size]="'sm'" attentionLevel="3">
         <kirby-icon [name]="'more'"></kirby-icon>
       </button>
     </ng-container>
     <ng-container *ngSwitchCase="false">
-      <ng-container *ngFor="let action of item | getActions: [swipeActions, 'desktop', null]">
+      <ng-container *ngFor="let action of item | getActions: [actions, 'desktop', null]">
         <button
           slot="end"
           kirby-button
