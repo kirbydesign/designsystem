@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { config as customSectionConfig } from './custom-section';
+
 const config = {
   selector: 'cookbook-header-example-combined',
   template: `
@@ -7,6 +9,7 @@ const config = {
     <kirby-action-group *kirbyHeaderActions>
       <button kirby-button attentionLevel="3">
         <kirby-icon name="kirby"></kirby-icon>
+        Action 1
       </button>
       <button kirby-button attentionLevel="3">
         Action 2
@@ -21,14 +24,22 @@ const config = {
     </kirby-avatar>
 
     <kirby-flag themeColor="warning">Warning</kirby-flag>
+
+    <div class="custom-section" *kirbyHeaderCustomSection>
+      <div class="flag success"></div> Custom section
+    </div>
   </kirby-header>
   `,
+  styles: customSectionConfig.styles,
 };
 
 @Component({
   selector: config.selector,
   template: config.template,
+  styles: config.styles,
 })
 export class HeaderExampleCombinedComponent {
   template: string = config.template;
+  styles: string = config.styles.join(`
+  `);
 }

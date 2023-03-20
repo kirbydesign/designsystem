@@ -126,7 +126,10 @@
       directive, which will position the custom section correctly and manage spacing as shown in the
       example below:
     </p>
-    <cookbook-example-viewer [html]="customSectionExample.template">
+    <cookbook-example-viewer
+      [html]="customSectionExample.template"
+      [css]="customSectionExample.styles"
+    >
       <div class="header-example">
         <cookbook-header-example-custom-section
           #customSectionExample
@@ -138,7 +141,7 @@
   <div class="header-example-container">
     <h2>Combined</h2>
     <p>This example shows all the above options combined:</p>
-    <cookbook-example-viewer [html]="combinedExample.template">
+    <cookbook-example-viewer [html]="combinedExample.template" [css]="combinedExample.styles">
       <div class="header-example">
         <cookbook-header-example-combined #combinedExample></cookbook-header-example-combined>
       </div>
