@@ -90,7 +90,19 @@ export class ButtonComponent implements AfterContentInit {
   @Input() isFloating: boolean = false;
   @Input()
   size: ButtonSize | `${ButtonSize}` = ButtonSize.MD;
-  @Input() showIconOnly: boolean = false;
+
+  private _showIconOnly: boolean = false;
+  get showIconOnly() {
+    return this._showIconOnly;
+  }
+  @Input() set showIconOnly(value: boolean) {
+    if (value) {
+      // If the button text is supplied as plain text (i.e. as a text node not within an element tag),
+      // we need to wrap it in an element to be able to target and hide it with css:
+      this.wrapTextNode(this.iconElementRef?.nativeElement);
+    }
+    this._showIconOnly = value;
+  }
 
   @ContentChild(IconComponent, { read: ElementRef })
   iconElementRef?: ElementRef<HTMLElement>;
@@ -129,16 +141,10 @@ export class ButtonComponent implements AfterContentInit {
       return;
     }
 
-    if (this.showIconOnly) {
-      // If the button text is supplied as plain text (i.e. as a text node not within an element tag),
-      // we need to wrap it in an element to be able to target and hide it with css:
-      this.wrapTextNode(iconElement);
-    }
-
     const hasText = !!this.elementRef.nativeElement.textContent;
     if (!hasText) {
       // Button doesn't contain any text, make it round:
-      this.showIconOnly = true;
+      this._showIconOnly = true;
     }
 
     if (hasText && !this.showIconOnly) {
