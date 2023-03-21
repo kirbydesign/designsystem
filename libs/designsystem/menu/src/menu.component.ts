@@ -61,7 +61,7 @@ export class MenuComponent implements AfterViewInit {
 
   @Input() public autoPlacement: boolean = false;
 
-  @Input() public closeOnSelect: boolean = true;
+  @Input() public closeOnSelect: boolean = false;
 
   @Input() public closeOnEscapeKey: boolean = true;
 
