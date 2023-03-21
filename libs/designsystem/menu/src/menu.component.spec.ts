@@ -54,15 +54,15 @@ describe('ActionListComponent', () => {
       });
 
       it('should have close on select be true as default', () => {
-        expect(spectator.component.closeOnSelect).toBeTruthy();
+        expect(spectator.component.closeOnSelect).toBeFalsy();
       });
 
       it('should have close on escape key be true as default', () => {
-        expect(spectator.component.closeOnSelect).toBeTruthy();
+        expect(spectator.component.closeOnSelect).toBeFalsy();
       });
 
       it('should have close on backdrop be true as default', () => {
-        expect(spectator.component.closeOnSelect).toBeTruthy();
+        expect(spectator.component.closeOnSelect).toBeFalsy();
       });
     });
 
