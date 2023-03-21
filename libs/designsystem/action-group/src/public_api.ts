@@ -1,1 +1,5 @@
-export { ActionGroupComponent } from './action-group.component';
+export {
+  ActionGroupComponent,
+  ActionGroupConfig,
+  ACTIONGROUP_CONFIG,
+} from './action-group.component';
