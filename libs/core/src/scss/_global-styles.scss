@@ -31,6 +31,7 @@
   --kirby-safe-area-bottom: var(--ion-safe-area-bottom);
   --kirby-safe-area-left: var(--ion-safe-area-left);
   --kirby-tab-bar-height: 50px;
+  --swiper-pagination-bottom: -19px;
 
   // Prevent iOS tap highlight:
   -webkit-tap-highlight-color: transparent;
@@ -311,16 +312,16 @@ html.ios ion-modal.kirby-modal-v2 {
   }
 }
 
-.swiper-pagination-bullet {
-  background-color: utils.get-color('medium');
-  opacity: 1;
-}
+// .swiper-pagination-bullet {
+//   background-color: utils.get-color('medium');
+//   opacity: 1;
+// }
 
-.swiper-pagination-bullet-active {
-    background-color: utils.get-color('success');
-}
+// .swiper-pagination-bullet-active {
+//     background-color: utils.get-color('success');
+// }
 
-.swiper-button-prev.swiper-button-disabled,
-.swiper-button-next.swiper-button-disabled {
-  opacity: 0;
-}
+// .swiper-button-prev.swiper-button-disabled,
+// .swiper-button-next.swiper-button-disabled {
+//   opacity: 0;
+// }

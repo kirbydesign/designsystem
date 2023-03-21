@@ -12,24 +12,26 @@ export class CarouselExampleComponent {
     centeredSlides: true,
     centeredSlidesBounds: false,
     spaceBetween: 8,
-    pagination: {
-      el: '.example1-pagination',
-      type: 'bullets',
-      enabled: false,
-    },
-    navigation: {
-      nextEl: '.example1-next',
-      prevEl: '.example1-prev',
-      enabled: true,
-    },
+    pagination: true,
+    navigation: true,
+    // pagination: {
+    //   el: '.example1-pagination',
+    //   type: 'bullets',
+    //   enabled: false,
+    // },
+    // navigation: {
+    //   nextEl: '.example1-next',
+    //   prevEl: '.example1-prev',
+    //   enabled: true,
+    // },
     breakpoints: {
       1025: {
         centeredSlides: false,
         slidesPerView: 3.2,
         spaceBetween: 16,
-        pagination: {
-          enabled: true,
-        },
+        // pagination: {
+        //   enabled: true,
+        // },
       },
     },
   };
