@@ -7,18 +7,13 @@ import {
   EventEmitter,
   HostListener,
   Input,
-  OnDestroy,
   Output,
   QueryList,
   ViewChild,
 } from '@angular/core';
-import { filter, fromEvent, map, Subject, takeUntil, tap } from 'rxjs';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { KeyboardHandlerService } from '@kirbydesign/designsystem/dropdown';
 import { TabNavigationItemComponent } from '../tab-navigation-item/tab-navigation-item.component';
-
-const ARROW_LEFT = 'ArrowLeft';
-const ARROW_RIGHT = 'ArrowRight';
 
 @Component({
   selector: 'kirby-tab-navigation',
@@ -26,7 +21,7 @@ const ARROW_RIGHT = 'ArrowRight';
   styleUrls: ['./tab-navigation.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TabNavigationComponent implements AfterViewInit, OnDestroy {
+export class TabNavigationComponent implements AfterViewInit {
   public readonly DEBOUNCE_TIME_MS = 250;
 
   @ViewChild('tabBar')
@@ -38,7 +33,6 @@ export class TabNavigationComponent implements AfterViewInit, OnDestroy {
   private tabBarElement: HTMLElement;
   private tabElements = new Array<HTMLElement>();
   private tabButtonElements = new Array<HTMLElement>();
-  private destroyed$ = new Subject<void>();
 
   @Input()
   get selectedIndex(): number {
@@ -96,17 +90,12 @@ export class TabNavigationComponent implements AfterViewInit, OnDestroy {
     event.preventDefault();
     const newFocusIndex = this.keyboardHandlerService.handle(
       event,
-      this.tabElements,
       this._focusIndex,
+      this.tabElements.length - 1,
       true
     );
 
     this.focusTab(newFocusIndex);
-  }
-
-  ngOnDestroy(): void {
-    this.destroyed$.next();
-    this.destroyed$.complete();
   }
 
   private selectTab(tabIndex: number): void {

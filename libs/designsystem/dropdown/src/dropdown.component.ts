@@ -588,8 +588,8 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
 
     const newFocusedIndex = this.keyboardHandlerService.handle(
       event,
-      this.items,
-      this.focusedIndex
+      this.focusedIndex,
+      this.items.length - 1
     );
 
     if (newFocusedIndex > -1) {
@@ -607,8 +607,8 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
 
     const newFocusedIndex = this.keyboardHandlerService.handle(
       event,
-      this.items,
-      this.focusedIndex
+      this.focusedIndex,
+      this.items.length - 1
     );
     if (newFocusedIndex > -1) {
       this.focusedIndex = newFocusedIndex;
