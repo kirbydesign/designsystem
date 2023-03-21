@@ -30,6 +30,18 @@ export enum FloatingOffset {
   medium = 8,
 }
 
+export enum OutletSelector {
+  tag = 'tag',
+  id = 'id',
+  class = 'class',
+  name = 'name',
+}
+
+export interface PortalOutletConfig {
+  selector: OutletSelector;
+  value: string;
+}
+
 interface EventMethods {
   event: string;
   method: () => void;
@@ -111,7 +123,29 @@ export class FloatingDirective implements OnInit, OnDestroy {
    * This should be used when there's issues with the stacking context, and not as a default option.
    * */
   @Input() public set DOMPortalOutlet(outlet: HTMLElement | undefined) {
-    this.portalDirective.outlet = outlet;
+    this._providedPortalOutlet = outlet;
+    this.portalDirective.outlet =
+      this.DOMPortalOutlet ?? this.getOutletElement(this.portalOutletConfig);
+  }
+
+  public get DOMPortalOutlet(): HTMLElement | undefined {
+    return this._providedPortalOutlet;
+  }
+
+  /**
+   * Defines how to automatically find and assign DOMPortalOutlet if none is provided in DOMPortalOutlet.
+   * If nothing is provided here and in DOMPortalOutlet, the provided strategy is used
+   * */
+  @Input() public set portalOutletConfig(config: PortalOutletConfig | undefined) {
+    this._portalOutletConfig = config;
+
+    if (!this.DOMPortalOutlet) {
+      this.portalDirective.outlet = this.getOutletElement(config);
+    }
+  }
+
+  public get portalOutletConfig(): PortalOutletConfig | undefined {
+    return this._portalOutletConfig;
   }
 
   /**
@@ -158,6 +192,10 @@ export class FloatingDirective implements OnInit, OnDestroy {
 
   private _strategy: Strategy = 'absolute';
 
+  private _providedPortalOutlet: HTMLElement | undefined;
+
+  private _portalOutletConfig: PortalOutletConfig | undefined;
+
   private _triggers: Array<TriggerEvent> = ['click'];
 
   private _reference: ElementRef | undefined;
@@ -183,6 +221,16 @@ export class FloatingDirective implements OnInit, OnDestroy {
       ],
     ],
   ]);
+
+  private HTMLElements: {
+    [key in OutletSelector | 'default']: (value?: string) => Array<Element> | null;
+  } = {
+    id: (value) => Array.of(document.getElementById(value)),
+    class: (value) => Array.from(document.getElementsByClassName(value)),
+    name: (value) => Array.from(document.getElementsByName(value)),
+    tag: (value) => Array.from(document.getElementsByTagName(value)),
+    default: () => null,
+  };
 
   public constructor(
     private elementRef: ElementRef,
@@ -360,6 +408,33 @@ export class FloatingDirective implements OnInit, OnDestroy {
     if (this.closeOnBackdrop && !clickedOnReferenceWithClickTriggerEnabled) {
       this.hide();
     }
+  }
+
+  private getOutletElement(config: PortalOutletConfig | undefined): HTMLElement | null {
+    if (!config || !config.selector || !config.value) {
+      return null;
+    }
+
+    const elements: Array<Element> | null = this.getHTMLElements(config);
+
+    if (!elements || elements.length === 0) {
+      throw Error(`Could not locate HTMLElement for ${config.selector}. Did you misspell it?`);
+    }
+
+    if (elements.length > 1) {
+      throw Error(
+        `Multiple HTMLElements found for ${config.selector}.
+         This can lead to unintended behaviours. Provide an unique outlet`
+      );
+    }
+
+    return elements[0] as HTMLElement;
+  }
+
+  private getHTMLElements(config: PortalOutletConfig | undefined): Array<Element> | null {
+    return (
+      this.HTMLElements[config.selector](config.value) || this.HTMLElements['default'](config.value)
+    );
   }
 
   private tearDownReferenceElementEventHandling(): void {

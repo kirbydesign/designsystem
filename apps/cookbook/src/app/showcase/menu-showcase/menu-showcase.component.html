@@ -99,9 +99,20 @@
 
 <div class="page-example">
   <div>
-    <h2>Menu: Portal</h2>
+    <h2>Menu: Portal with Outlet</h2>
     <cookbook-example-viewer [html]="menuPortalExample.template">
       <cookbook-menu-portal-example #menuPortalExample></cookbook-menu-portal-example>
+    </cookbook-example-viewer>
+  </div>
+</div>
+
+<div class="page-example">
+  <div>
+    <h2>Menu: Portal with Outlet config</h2>
+    <cookbook-example-viewer [html]="menuPortalConfigExample.template">
+      <cookbook-menu-portal-config-example
+        #menuPortalConfigExample
+      ></cookbook-menu-portal-config-example>
     </cookbook-example-viewer>
   </div>
 </div>

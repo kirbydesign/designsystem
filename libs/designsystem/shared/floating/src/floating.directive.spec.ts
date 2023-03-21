@@ -1,14 +1,14 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { createComponentFactory, mockProvider, Spectator } from '@ngneat/spectator';
 import { PortalDirective } from '@kirbydesign/designsystem/shared/portal';
-import { TriggerEvent } from '@kirbydesign/designsystem/shared/floating';
-import { FloatingDirective } from './floating.directive';
+import { PortalOutletConfig, TriggerEvent } from '@kirbydesign/designsystem/shared/floating';
 
 import * as floatingUi from '@floating-ui/dom';
-import { Placement } from '@floating-ui/core/src/types';
 import { Strategy } from '@floating-ui/dom';
-import any = jasmine.any;
+import { Placement } from '@floating-ui/core/src/types';
 import { DesignTokenHelper } from '@kirbydesign/core';
+import { FloatingDirective, OutletSelector } from './floating.directive';
+import any = jasmine.any;
 
 @Component({
   template: `
@@ -25,6 +25,10 @@ import { DesignTokenHelper } from '@kirbydesign/core';
       [placement]="placement"
     ></div>
     <div #clickTarget></div>
+    <div #idTarget id="idTarget"></div>
+    <div #classTarget class="classTarget"></div>
+    <div #nameTarget name="nameTarget"></div>
+    <pre #tagTarget></pre>
   `,
   imports: [FloatingDirective],
   standalone: true,
@@ -33,6 +37,10 @@ class FloatingTestComponent {
   @ViewChild('floatingElement', { static: true }) public floatingElementRef: ElementRef;
   @ViewChild('hostElement', { static: true }) public hostElementRef: ElementRef;
   @ViewChild('clickTarget', { static: true }) public clickTargetRef: ElementRef;
+  @ViewChild('idTarget', { static: true }) public idTargetRef: ElementRef;
+  @ViewChild('classTarget', { static: true }) public classTargetRef: ElementRef;
+  @ViewChild('nameTarget', { static: true }) public nameTargetRef: ElementRef;
+  @ViewChild('tagTarget', { static: true }) public tagTargetRef: ElementRef;
   @ViewChild(FloatingDirective, { static: true }) public floatingDirective: FloatingDirective;
 
   /** Start values set to match directive */
@@ -124,6 +132,60 @@ describe('FloatingDirective', () => {
         directive.triggers = ['focus'];
         directive.reference = component.floatingElementRef;
         expect(directive['referenceEventListenerDisposeFns']).toHaveLength(2);
+      });
+    });
+
+    describe('portalOutletConfig', () => {
+      it('should not change outlet, if outlet is set by providedPortalOutlet', () => {
+        const config: PortalOutletConfig = {
+          selector: OutletSelector.tag,
+          value: 'tagTarget',
+        };
+
+        const expectedPortalOutlet: HTMLElement = component.classTargetRef.nativeElement;
+        directive['_providedPortalOutlet'] = expectedPortalOutlet;
+        directive.portalOutletConfig = config;
+        expect(directive.DOMPortalOutlet).toEqual(expectedPortalOutlet);
+      });
+
+      it('should set outlet to tagTarget', () => {
+        const config: PortalOutletConfig = {
+          selector: OutletSelector.tag,
+          value: 'pre',
+        };
+        const expectedPortalOutlet: HTMLElement = component.tagTargetRef.nativeElement;
+        directive.portalOutletConfig = config;
+        expect(directive['portalDirective'].outlet).toEqual(expectedPortalOutlet);
+      });
+
+      it('should set outlet to classTarget', () => {
+        const config: PortalOutletConfig = {
+          selector: OutletSelector.class,
+          value: 'classTarget',
+        };
+        const expectedPortalOutlet: HTMLElement = component.classTargetRef.nativeElement;
+        directive.portalOutletConfig = config;
+        expect(directive['portalDirective'].outlet).toEqual(expectedPortalOutlet);
+      });
+
+      it('should set outlet to idTarget', () => {
+        const config: PortalOutletConfig = {
+          selector: OutletSelector.id,
+          value: 'idTarget',
+        };
+        const expectedPortalOutlet: HTMLElement = component.idTargetRef.nativeElement;
+        directive.portalOutletConfig = config;
+        expect(directive['portalDirective'].outlet).toEqual(expectedPortalOutlet);
+      });
+
+      it('should set outlet to nameTarget', () => {
+        const config: PortalOutletConfig = {
+          selector: OutletSelector.name,
+          value: 'nameTarget',
+        };
+        const expectedPortalOutlet: HTMLElement = component.nameTargetRef.nativeElement;
+        directive.portalOutletConfig = config;
+        expect(directive['portalDirective'].outlet).toEqual(expectedPortalOutlet);
       });
     });
   });

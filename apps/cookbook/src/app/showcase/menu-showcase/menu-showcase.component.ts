@@ -60,6 +60,13 @@ export class MenuShowcaseComponent {
       type: ['HTMLElement'],
     },
     {
+      name: 'portalOutletConfig',
+      description:
+        'Defines how to automatically find and assign DOMPortalOutlet if none is provided in DOMPortalOutlet. If nothing is provided here and in DOMPortalOutlet, the provided strategy is used',
+      defaultValue: 'null',
+      type: ['PortalOutletConfig'],
+    },
+    {
       name: 'closeOnSelect',
       description: '"Toggle whether the menu should hide the content after selecting the content"',
       defaultValue: 'true',

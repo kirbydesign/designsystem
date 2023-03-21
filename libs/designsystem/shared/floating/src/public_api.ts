@@ -1,1 +1,7 @@
-export { FloatingDirective, TriggerEvent, FloatingOffset } from './floating.directive';
+export {
+  FloatingDirective,
+  TriggerEvent,
+  FloatingOffset,
+  PortalOutletConfig,
+  OutletSelector,
+} from './floating.directive';

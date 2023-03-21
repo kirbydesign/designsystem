@@ -8,6 +8,7 @@ import { MenuSelectableExampleComponent } from './examples/selectable';
 import { MenuCustomButtonExampleComponent } from '~/app/examples/menu-example/examples/customButton';
 import { MenuPortalExampleComponent } from '~/app/examples/menu-example/examples/portal';
 import { MenuCustomPlacementExampleComponent } from '~/app/examples/menu-example/examples/customPlacement';
+import { MenuPortalConfigExampleComponent } from '~/app/examples/menu-example/examples/portalConfig';
 
 const COMPONENT_DECLARATIONS = [
   MenuDefaultExampleComponent,
@@ -15,6 +16,7 @@ const COMPONENT_DECLARATIONS = [
   MenuSelectableExampleComponent,
   MenuCustomButtonExampleComponent,
   MenuPortalExampleComponent,
+  MenuPortalConfigExampleComponent,
   MenuCustomPlacementExampleComponent,
 ];
 
