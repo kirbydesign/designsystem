@@ -10,7 +10,7 @@ export class TabNavigationItemComponent {
   @Input()
   label = '';
 
-  constructor(private elementRef: ElementRef<HTMLElement>) {
+  constructor() {
     /* */
   }
 }
