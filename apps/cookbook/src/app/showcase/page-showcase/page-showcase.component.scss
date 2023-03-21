@@ -1,16 +1,8 @@
 @use '@kirbydesign/core/src/scss/utils';
+@use '../showcase.shared';
 
 .page-example {
   display: flex;
   margin-top: utils.size('xl');
   margin-bottom: utils.size('xl');
-}
-
-.header-alert {
-  display: flex;
-  gap: 1rem;
-
-  kirby-flag {
-    height: fit-content;
-  }
 }
