@@ -8,27 +8,21 @@ export const config = {
   </div>
 </kirby-header>`,
   styles: [
-    `
-    .custom-section {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 12px;
-      color: var(--kirby-text-color-semi-dark);
-    }
-  `,
-    `
-    .flag {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-    }
-  `,
-    `
-    .flag.success {
-      background: var(--kirby-success);
-    }
-  `,
+    `.custom-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--kirby-text-color-semi-dark);
+}`,
+    `.flag {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}`,
+    `.flag.success {
+  background: var(--kirby-success);
+}`,
   ],
 };
 @Component({
@@ -38,6 +32,5 @@ export const config = {
 })
 export class HeaderExampleCustomSectionComponent {
   template = config.template;
-  styles: string = config.styles.join(`
-`);
+  styles: string = config.styles.join('\n\n');
 }
