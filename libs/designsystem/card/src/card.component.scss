@@ -67,10 +67,8 @@
   }
 }
 
-:host-context(.swiper-slide-active) {
-  box-shadow: utils.get-elevation(4);
-  transition: all 0.5s;
-  transform: translateY(-3px);
+:host-context(swiper-slide) {
+  box-shadow: none;
 }
 
 @each $color-name, $color-value in utils.$main-colors {
