@@ -63,14 +63,14 @@ export class MenuShowcaseComponent {
       name: 'DOMPortalOutlet',
       description:
         'HTMLElement for which the menu content should be placed under as a child. If no element is provided, the content will appear at its normal place in the DOM',
-      defaultValue: 'null',
+      defaultValue: 'N/A',
       type: ['HTMLElement'],
     },
     {
       name: 'portalOutletConfig',
       description:
         'Defines how to automatically find and assign DOMPortalOutlet if none is provided in DOMPortalOutlet. If nothing is provided here and in DOMPortalOutlet, the provided strategy is used',
-      defaultValue: 'null',
+      defaultValue: 'N/A',
       type: ['PortalOutletConfig'],
     },
     {
