@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ApiDescriptionProperty } from './../../shared/api-description/api-description-properties/api-description-properties.component';
+import { AttentionLevel } from '@kirbydesign/designsystem/button';
 
 @Component({
   selector: 'cookbook-menu-showcase',
@@ -51,6 +52,12 @@ export class MenuShowcaseComponent {
         'If content should be auto placed where it best fits on the screen. Will override value of input placement',
       defaultValue: 'false',
       type: ['boolean'],
+    },
+    {
+      name: 'attentionLevel',
+      description: 'AttentionLevel for the menu button',
+      defaultValue: '3',
+      type: ['AttentionLevel'],
     },
     {
       name: 'DOMPortalOutlet',
