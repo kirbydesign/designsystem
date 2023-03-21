@@ -20,6 +20,7 @@ import { AttentionLevel, ButtonComponent, ButtonSize } from '@kirbydesign/design
 import {
   FloatingDirective,
   FloatingOffset,
+  PortalOutletConfig,
   TriggerEvent,
 } from '@kirbydesign/designsystem/shared/floating';
 
@@ -55,6 +56,8 @@ export class MenuComponent implements AfterViewInit {
   @Input() public triggers: Array<TriggerEvent> = ['click'];
 
   @Input() public DOMPortalOutlet: HTMLElement | undefined;
+
+  @Input() public portalOutletConfig: PortalOutletConfig | undefined;
 
   @Input() public autoPlacement: boolean = false;
 
