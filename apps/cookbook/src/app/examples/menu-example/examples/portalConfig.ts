@@ -11,6 +11,10 @@ const config = {
     <h3>Action 2</h3>
   </kirby-item>
 </kirby-menu>`,
+  codeSnippet: `public outletConfig: PortalOutletConfig = {
+    selector: OutletSelector.tag,
+    value: 'cookbook-root',
+  };`,
 };
 
 @Component({
