@@ -43,15 +43,25 @@ export class TabNavigationComponent implements AfterViewInit {
     if (index !== this._selectedIndex) {
       this._selectedIndex = index;
 
-      setTimeout(() => {
-        this.scrollToTab(this.selectedIndex);
-        this.focusTab(this.selectedIndex);
-        this.selectTab(this.selectedIndex);
-        this.selectedIndexChange.emit(this.selectedIndex);
-      });
+      this.focusIndex = index;
+      this.selectTab(this.selectedIndex);
+      this.selectedIndexChange.emit(this.selectedIndex);
     }
   }
   private _selectedIndex = -1;
+
+  get focusIndex(): number {
+    return this._focusIndex;
+  }
+
+  set focusIndex(index: number) {
+    if (index !== this._focusIndex) {
+      this._focusIndex = index;
+
+      this.scrollToTab(this.focusIndex);
+      this.focusTab(this.focusIndex);
+    }
+  }
   private _focusIndex = -1;
 
   @Output()
@@ -70,8 +80,8 @@ export class TabNavigationComponent implements AfterViewInit {
 
     setTimeout(() => {
       this.selectTab(this.selectedIndex);
-      this.scrollToTab(this.selectedIndex);
-      this.focusTab(this.selectedIndex);
+      this.scrollToTab(this.focusIndex);
+      this.focusTab(this.focusIndex);
     }, this.DEBOUNCE_TIME_MS);
   }
 
@@ -88,14 +98,12 @@ export class TabNavigationComponent implements AfterViewInit {
   @HostListener('keydown.arrowleft', ['$event'])
   onKeydown(event: KeyboardEvent) {
     event.preventDefault();
-    const newFocusIndex = this.keyboardHandlerService.handle(
+    this.focusIndex = this.keyboardHandlerService.handle(
       event,
-      this._focusIndex,
+      this.focusIndex,
       this.tabElements.length - 1,
       true
     );
-
-    this.focusTab(newFocusIndex);
   }
 
   private selectTab(tabIndex: number): void {
@@ -105,13 +113,13 @@ export class TabNavigationComponent implements AfterViewInit {
   }
 
   private focusTab(focusIndex: number): void {
-    this._focusIndex = focusIndex;
-
     this.tabButtonElements.forEach((tabButtonElement, index) => {
       tabButtonElement.setAttribute('tabindex', index === focusIndex ? '0' : '-1');
     });
 
-    this.tabButtonElements[focusIndex].focus();
+    if (0 <= focusIndex && focusIndex < this.tabButtonElements.length) {
+      this.tabButtonElements[focusIndex].focus();
+    }
   }
 
   private scrollToTab(tabIndex: number): void {

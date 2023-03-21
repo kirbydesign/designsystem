@@ -14,7 +14,6 @@ div[role='tablist'] {
   align-items: center;
   justify-content: left;
   flex-wrap: nowrap;
-  overflow-y: hidden;
   overflow-x: scroll;
 
   @include utils.media('<medium') {
