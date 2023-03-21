@@ -9,7 +9,7 @@ import { ListItemMenuAction } from './list-item-menu-action';
 @Component({
   selector: 'kirby-list-item-menu',
   templateUrl: './list-item-menu.component.html',
-  styleUrls: ['./list-item-menu.component.css'],
+  styleUrls: ['./list-item-menu.component.scss'],
 })
 export class ListItemMenuComponent {
   @Input() item: ListItem;

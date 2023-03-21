@@ -1,4 +1,8 @@
-<kirby-item slot="start" [disabled]="!(item | hasActions: [actions, 'desktop'])">
+<kirby-item
+  [ngClass]="boundaryClass"
+  slot="start"
+  [disabled]="!(item | hasActions: [actions, 'desktop'])"
+>
   <!-- The logic deciding the 'disable' prop is based on an assumption  -->
   <kirby-item class="item-width">
     <kirby-avatar overlay="true" slot="start">

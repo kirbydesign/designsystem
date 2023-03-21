@@ -21,6 +21,7 @@ import { HasActionsPipe } from './list-item/pipes/has-actions/has-actions.pipe';
 import { GetActionIconPipe } from './list-item/pipes/get-action-icon/get-action-icon.pipe';
 import { GetActionsPipe } from './list-item/pipes/get-actions/get-actions.pipe';
 import { ListItemSwipeComponent } from './list-item-swipe/list-item-swipe.component';
+import { ListItem } from './list-item/list-item';
 
 const { fontWeight, size } = DesignTokenHelper;
 
@@ -278,6 +279,47 @@ describe('ListComponent', () => {
       //Last element
       expect(list[2].classList).toContain('last');
       expect(list[2].classList).not.toContain('first');
+    });
+  });
+
+  fdescribe(`when a list has 1 element and device is 'desktop'`, () => {
+    const mockPlatformServiceIsTouchFalse = {
+      isTouch: () => false,
+      isTablet: () => false,
+    };
+
+    const item: ListItem = {
+      id: 0,
+      title: 'Vestas Wind Systems',
+      subTitle: '2000 pcs',
+      amount: '5.587.218.309 DKK',
+      detail: 225,
+      flagged: false,
+      color: 'default',
+    };
+    beforeEach(async () => {
+      spectator = createHost<ListComponent>(
+        `
+          <kirby-list>
+            <kirby-item *kirbyListItemTemplate="let item"><h3>{{ item.name }}</h3></kirby-item>
+          </kirby-list>
+          `,
+        {
+          props: { items: [item] },
+          providers: [{ provide: PlatformService, useValue: mockPlatformServiceIsTouchFalse }],
+        }
+      );
+    });
+
+    it(`should apply the CSS class 'first' and 'last' on the first and only element in the list`, () => {
+      spectator.detectChanges();
+      const list = spectator.queryAll('kirby-item');
+
+      expect(list.length).toBe(2);
+      const [listItem] = list;
+
+      expect(listItem.classList).toContain('first');
+      expect(listItem.classList).toContain('last');
     });
   });
 });
