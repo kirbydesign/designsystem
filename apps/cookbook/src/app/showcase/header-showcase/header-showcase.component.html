@@ -71,6 +71,37 @@
   </div>
 
   <div class="header-example-container">
+    <h2>Scaling of title</h2>
+    <p>
+      Titles are default rendered as
+      <code>h1</code>
+      .
+    </p>
+    <p>
+      It's possible to enable auto-scaling of the header title. This will scale both font-size &
+      line-height between h1 -> h3 depending on amount of text and maximum number of lines
+      configured. If the text cannot fit within the configured number of lines it will be truncated
+      using an ellipsis (
+      <code>&mldr;</code>
+      ).
+    </p>
+    <p>
+      This can be configured by setting the
+      <code>titleMaxLines="NUMBER OF MAXIMUM LINES"</code>
+      attribute of
+      <code>kirby-header</code>
+      .
+    </p>
+    <cookbook-example-viewer [html]="titleScalingExample.template">
+      <div class="header-example">
+        <cookbook-header-example-title-scaling
+          #titleScalingExample
+        ></cookbook-header-example-title-scaling>
+      </div>
+    </cookbook-example-viewer>
+  </div>
+
+  <div class="header-example-container">
     <h2>Action Group</h2>
     <p>
       An action group can be included in the header area and will by default always be shown in the

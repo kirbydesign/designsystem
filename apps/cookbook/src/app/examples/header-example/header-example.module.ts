@@ -11,6 +11,7 @@ import { HeaderExampleFlagComponent } from './examples/flag';
 import { HeaderExampleValueComponent } from './examples/value';
 import { HeaderExampleCombinedComponent } from './examples/combined';
 import { HeaderExampleCustomSectionComponent } from './examples/custom-section';
+import { HeaderExampleTitleScalingComponent } from './examples/title-scaling';
 
 const COMPONENT_DECLARATIONS = [
   HeaderExampleComponent,
@@ -20,6 +21,7 @@ const COMPONENT_DECLARATIONS = [
   HeaderExampleValueComponent,
   HeaderExampleCombinedComponent,
   HeaderExampleCustomSectionComponent,
+  HeaderExampleTitleScalingComponent,
 ];
 
 @NgModule({
