@@ -148,8 +148,55 @@
 </p>
 <div class="page-example">
   <div>
+    <h3>How it looks</h3>
+    <p>
+      One of the cases where it might be necessary to use portal, is when the menu is placed inside
+      a
+      <code>kirby-list</code>
+      . This is to show what is looks like when the menu isn't placed correctly in the stack.
+    </p>
+
+    <!-- This is only here to make sure the example has the same width as the other example -->
+    <cookbook-example-viewer>
+      <cookbook-menu-portal-in-list-wrapper-example>
+        <p header>
+          A menu in a
+          <code>kirby-list</code>
+          &nbsp;a&nbsp;
+          <b>without</b>
+          a
+          <code>DOMPortalOutlet</code>
+        </p>
+        <div body>
+          <cookbook-menu-portal-example [isOutletElementSet]="false"></cookbook-menu-portal-example>
+          <-- Nothing happens when you click the menu
+        </div>
+      </cookbook-menu-portal-in-list-wrapper-example>
+    </cookbook-example-viewer>
+    <br />
     <cookbook-example-viewer [html]="menuPortalExample.template">
-      <cookbook-menu-portal-example #menuPortalExample></cookbook-menu-portal-example>
+      <cookbook-menu-portal-in-list-wrapper-example>
+        <p header>
+          A menu in a
+          <code>kirby-list</code>
+          &nbsp;
+          <b>with</b>
+          a
+          <code>DOMPortalOutlet</code>
+        </p>
+        <p>
+          The
+          <code>outletElement</code>
+          is {{ isOutletElementSet }}
+        </p>
+        <div body>
+          <cookbook-menu-portal-example
+            #menuPortalExample
+            [isOutletElementSet]="true"
+          ></cookbook-menu-portal-example>
+          <-- The Menu opens when you click it
+        </div>
+      </cookbook-menu-portal-in-list-wrapper-example>
     </cookbook-example-viewer>
   </div>
 </div>

@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { ApiDescriptionProperty } from './../../shared/api-description/api-description-properties/api-description-properties.component';
-import { AttentionLevel } from '@kirbydesign/designsystem/button';
 
 @Component({
   selector: 'cookbook-menu-showcase',
@@ -92,4 +91,10 @@ export class MenuShowcaseComponent {
       type: ['boolean'],
     },
   ];
+
+  public isOutletElementSet: boolean = true;
+
+  public onCheckedChange(checked: boolean) {
+    this.isOutletElementSet = checked;
+  }
 }
