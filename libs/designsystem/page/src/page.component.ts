@@ -12,6 +12,7 @@ import {
   HostBinding,
   HostListener,
   Inject,
+  InjectionToken,
   Injector,
   Input,
   NgZone,
@@ -54,6 +55,12 @@ const contentScrolledOffsetInPixels = 4;
 
 type stickyConfig = { sticky: boolean };
 type fixedConfig = { fixed: boolean };
+
+export const PAGE_BACK_BUTTON_CONFIG = new InjectionToken<PageBackButtonConfig>('');
+
+export interface PageBackButtonConfig {
+  navigateBack: () => void;
+}
 
 /**
  * Event emitted when "pull-to-refresh" begins.
@@ -294,7 +301,10 @@ export class PageComponent
     private zone: NgZone,
     private modalNavigationService: ModalNavigationService,
     private resizeObserverService: ResizeObserverService,
-    @Optional() @SkipSelf() private tabsComponent: TabsComponent
+    @Optional() @SkipSelf() private tabsComponent: TabsComponent,
+    @Optional()
+    @Inject(PAGE_BACK_BUTTON_CONFIG)
+    private backButtonConfig: PageBackButtonConfig
   ) {}
 
   private contentReadyPromise: Promise<void>;
@@ -445,6 +455,14 @@ export class PageComponent
   }
 
   private interceptBackButtonClicksSetup() {
+    if (this.backButtonConfig) {
+      this.backButtonDelegate.onClick = (event: Event) => {
+        // TODO: prevent default relevant here?
+        event.preventDefault();
+        this.backButtonConfig.navigateBack();
+      };
+    }
+
     // Intercept back-button click events, defaulting to the built-in click-handler.
     if (this.backButtonClick.observers.length === 0) {
       this.backButtonClick
