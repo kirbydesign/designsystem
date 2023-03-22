@@ -270,6 +270,8 @@ export class PageComponent
   private titleIntersectionObserver?: IntersectionObserver;
   private stickyActionsIntersectionObserver?: IntersectionObserver;
   private stickyContentIntersectionObserver?: IntersectionObserver;
+  private isObservingTitle = false;
+  private isObservingActions = false;
 
   private url: string;
   private isActive: boolean;
@@ -442,13 +444,9 @@ export class PageComponent
     this.isActive = false;
 
     this.leave.emit();
-    const titleElementRef = this.pageTitle || this.header?.titleElement;
-    if (titleElementRef) {
-      this.titleIntersectionObserver?.unobserve(titleElementRef.nativeElement);
-    }
-    if (this.header?.actionsElement) {
-      this.stickyActionsIntersectionObserver?.unobserve(this.header.actionsElement.nativeElement);
-    }
+
+    this.unobserveTitle();
+    this.unobserveActions();
 
     if (this.tabBarBottomHidden && this.tabsComponent) {
       this.tabsComponent.tabBarBottomHidden = false;
@@ -504,6 +502,20 @@ export class PageComponent
   }
 
   private observeTitle() {
+    if (!this.hasPageTitle) {
+      // Nothing to observe
+      return;
+    }
+    if (this.isObservingTitle) {
+      // Already observing
+      return;
+    }
+
+    // We are not actually observing the title until after the `whenContentReady` promise has resolved,
+    // but since we've already checked that the page has a title in the guard above,
+    // we'll - eagerly - set this flag now to prevent unnecessary re-runs of the rest of this method:
+    this.isObservingTitle = true;
+
     if (!this.titleIntersectionObserver) {
       this.titleIntersectionObserver = new IntersectionObserver(
         (entries) => {
@@ -514,12 +526,24 @@ export class PageComponent
       );
     }
 
-    this.whenContentReady().then(() => {
-      const titleElementRef = this.pageTitle || this.header?.titleElement;
-      if (titleElementRef) {
-        this.titleIntersectionObserver.observe(titleElementRef.nativeElement);
-      }
+    // Run outside Angular to prevent unnecessary triggering change detection
+    // and - under certain conditions - an infinete loop when called within ngAfterContentChecked:
+    this.zone.runOutsideAngular(() => {
+      this.whenContentReady().then(() => {
+        const titleElementRef = this.pageTitle || this.header?.titleElement;
+        if (titleElementRef?.nativeElement) {
+          this.titleIntersectionObserver.observe(titleElementRef.nativeElement);
+        }
+      });
     });
+  }
+
+  private unobserveTitle() {
+    const titleElementRef = this.pageTitle || this.header?.titleElement;
+    if (titleElementRef) {
+      this.titleIntersectionObserver?.unobserve(titleElementRef.nativeElement);
+    }
+    this.isObservingTitle = false;
   }
 
   private initializeActions() {
@@ -542,6 +566,16 @@ export class PageComponent
       return;
     }
 
+    if (this.isObservingActions) {
+      // Already observing
+      return;
+    }
+
+    // We are not actually observing actions until after the `whenContentReady` promise has resolved,
+    // but since we've already checked that there's an actions element present in the guard above,
+    // we'll - eagerly - set this flag now to prevent unnecessary re-runs of the rest of this method:
+    this.isObservingActions = true;
+
     if (!this.stickyActionsIntersectionObserver) {
       this.stickyActionsIntersectionObserver = new IntersectionObserver(
         (entries) => {
@@ -552,9 +586,22 @@ export class PageComponent
       );
     }
 
-    this.whenContentReady().then(() => {
-      this.stickyActionsIntersectionObserver.observe(this.header.actionsElement.nativeElement);
+    // Run outside Angular to prevent unnecessary triggering change detection
+    // and - under certain conditions - an infinete loop when called within ngAfterContentChecked:
+    this.zone.runOutsideAngular(() => {
+      this.whenContentReady().then(() => {
+        if (this.header?.actionsElement?.nativeElement) {
+          this.stickyActionsIntersectionObserver.observe(this.header.actionsElement.nativeElement);
+        }
+      });
     });
+  }
+
+  private unobserveActions() {
+    if (this.header?.actionsElement) {
+      this.stickyActionsIntersectionObserver?.unobserve(this.header.actionsElement.nativeElement);
+    }
+    this.isObservingActions = false;
   }
 
   private initializeContent() {
@@ -578,7 +625,7 @@ export class PageComponent
       threshold: 1,
     };
 
-    const callback = (entries) => {
+    const callback: IntersectionObserverCallback = (entries) => {
       // The sticky content is pinned when it doesn't fully intersect the viewport
       this.isStickyContentPinned = !entries[0].isIntersecting;
     };
