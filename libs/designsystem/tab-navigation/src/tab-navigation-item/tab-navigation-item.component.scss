@@ -6,32 +6,40 @@ $border-color-standard: utils.get-color('medium');
 $border-color-selected: utils.get-color('dark');
 $divider-max-width-breakpoint: utils.$page-content-max-width + (utils.size('s') * 2);
 
+@mixin button-reset {
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  user-select: none;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  border: none;
+  outline: none;
+}
+
 :host {
   position: relative;
   padding-bottom: $bottom-border-height * 2;
 
   button[role='tab'] {
-    font-family: inherit;
+    @include button-reset;
+
     background-color: utils.get-color('background-color');
     color: utils.get-color('black');
-    padding: utils.size('s');
-    margin: 0;
-    font-size: utils.font-size('n');
-    font-weight: inherit;
-    line-height: utils.line-height('m');
-    cursor: pointer;
     box-sizing: border-box; // Ensure border is not added to button height
-    display: inline-flex;
+    padding: utils.size('s');
+    font-size: utils.font-size('n');
+    line-height: utils.line-height('m');
     gap: utils.size('xxxs');
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    vertical-align: middle;
-    white-space: nowrap;
-    user-select: none;
-    text-decoration: none;
-    border: none;
-    outline: none;
 
     &:focus,
     &:hover {
