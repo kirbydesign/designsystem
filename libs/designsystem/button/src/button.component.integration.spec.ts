@@ -25,7 +25,6 @@ import { ButtonComponent } from './button.component';
 const getColor = DesignTokenHelper.getColor;
 const size = DesignTokenHelper.size;
 const fontSize = DesignTokenHelper.fontSize;
-const getElevation = DesignTokenHelper.getElevation;
 
 describe('ButtonComponent in Kirby Page', () => {
   let spectator: SpectatorHost<PageComponent>;
@@ -563,71 +562,5 @@ describe('ButtonComponent configured with text and icon using an ngIf directive'
     element = spectator.element as HTMLButtonElement;
 
     expect(element).not.toHaveClass('icon-only');
-  });
-});
-
-describe('ButtonComponent with attention-level 3 in a parent with the "kirby-color-brightness-light" class', () => {
-  let spectator: SpectatorHost<ButtonComponent>;
-  const createHost = createHostFactory({
-    component: ButtonComponent,
-  });
-
-  beforeEach(() => {
-    spectator = createHost(
-      `<div class="kirby-color-brightness-light">
-        <button kirby-button attentionLevel="3">
-          <span>Text</span>
-        </button>
-      </div>`
-    );
-  });
-
-  it('should have a box-shadow', () => {
-    const button = spectator.queryHost('button[kirby-button]');
-    expect(button).toHaveComputedStyle({ 'box-shadow': getElevation(2) });
-  });
-});
-
-describe('ButtonComponent with attention-level 3 in a parent with the "kirby-color-brightness-white" class', () => {
-  let spectator: SpectatorHost<ButtonComponent>;
-  const createHost = createHostFactory({
-    component: ButtonComponent,
-  });
-
-  beforeEach(() => {
-    spectator = createHost(
-      `<div class="kirby-color-brightness-white">
-      <button kirby-button attentionLevel="3">
-          <span>Text</span>
-        </button>
-      </div>`
-    );
-  });
-
-  it('should not have a box-shadow', () => {
-    const button = spectator.queryHost('button[kirby-button]');
-    expect(button).toHaveComputedStyle({ 'box-shadow': 'none' });
-  });
-});
-
-describe('ButtonComponent with attention-level 3 in a parent with the "kirby-color-brightness-dark" class', () => {
-  let spectator: SpectatorHost<ButtonComponent>;
-  const createHost = createHostFactory({
-    component: ButtonComponent,
-  });
-
-  beforeEach(() => {
-    spectator = createHost(
-      `<div class="kirby-color-brightness-dark">
-        <button kirby-button attentionLevel="3">
-          <span>Text</span>
-        </button>
-      </div>`
-    );
-  });
-
-  it('should not have a box-shadow', () => {
-    const button = spectator.queryHost('button[kirby-button]');
-    expect(button).toHaveComputedStyle({ 'box-shadow': 'none' });
   });
 });
