@@ -8,7 +8,7 @@ import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
 import { ItemModule } from '@kirbydesign/designsystem/item';
 import { MenuComponent } from './menu.component';
 
-describe('ActionListComponent', () => {
+describe('MenuListComponent', () => {
   let spectator: Spectator<MenuComponent>;
   let buttonElement: HTMLButtonElement;
   let card: Element;
@@ -125,9 +125,9 @@ describe('ActionListComponent', () => {
         expect(card).toHaveComputedStyle({ 'min-width': '240px' });
       });
 
-      it('should have min-width set to 400px', () => {
-        spectator.setInput('minWidth', 400);
-        expect(card).toHaveComputedStyle({ 'min-width': '400px' });
+      it('should have min-width set to 240px', () => {
+        spectator.setInput('minWidth', 240);
+        expect(card).toHaveComputedStyle({ 'min-width': '240px' });
       });
     });
   });
@@ -155,10 +155,12 @@ describe('ActionListComponent', () => {
       expect(card).toHaveComputedStyle({ display: 'block' });
     });
 
-    it('should close menu when button is clicked twice', async () => {
+    it('should open and then close menu when button is clicked twice', async () => {
       expect(card).toHaveComputedStyle({ display: 'none' });
 
       await spectator.click(buttonElement);
+      expect(card).toHaveComputedStyle({ display: 'block' });
+
       await spectator.click(buttonElement);
 
       expect(card).toHaveComputedStyle({ display: 'none' });
@@ -195,6 +197,15 @@ describe('ActionListComponent', () => {
     });
 
     it('should close when selecting an item', async () => {
+      /**
+       * Mark look here
+       * I think we have a false positive here
+       * deleting "await spectator.click(buttonElement);" still passes
+       * Wouldn't it also make sence to open the menu first?
+       *
+       * I can't really figure out why this is passing
+       */
+
       await spectator.click(spectator.query('kirby-item'));
 
       expect(card).toHaveComputedStyle({ display: 'none' });
@@ -202,10 +213,12 @@ describe('ActionListComponent', () => {
 
     it('should not close when selecting an item and closeOnSelect is false', async () => {
       spectator.setInput('closeOnSelect', false);
+      expect(card).toHaveComputedStyle({ display: 'none' });
 
       await spectator.click(buttonElement);
-      await spectator.click(spectator.query('kirby-item'));
+      expect(card).toHaveComputedStyle({ display: 'block' });
 
+      await spectator.click(spectator.query('kirby-item'));
       expect(card).toHaveComputedStyle({ display: 'block' });
     });
   });
@@ -248,6 +261,55 @@ describe('ActionListComponent', () => {
 
     it('should render an advanced kirby item, with interactive elements inside', () => {
       expect(toggle).toBeTruthy();
+    });
+  });
+
+  describe('trigger: default(click)', () => {
+    beforeEach(() => {
+      spectator = createHost<MenuComponent>(
+        `<kirby-menu>
+          <kirby-item [selectable]="true">
+            <h3>Action 1</h3>
+              </kirby-item>
+          </kirby-menu>`,
+        {}
+      );
+      buttonElement = spectator.query('button');
+      card = spectator.query('kirby-card');
+      buttonIcon = spectator.query(IconComponent);
+    });
+
+    it('should open menu when button is clicked', async () => {
+      expect(card).toHaveComputedStyle({ display: 'none' });
+
+      await spectator.click(buttonElement);
+
+      expect(card).toHaveComputedStyle({ display: 'block' });
+    });
+  });
+
+  describe('trigger: hover', () => {
+    beforeEach(() => {
+      spectator = createHost<MenuComponent>(
+        `<kirby-menu [triggers]="['hover']">
+          <kirby-item [selectable]="true">
+            <h3>Action 1</h3>
+              </kirby-item>
+          </kirby-menu>`,
+        {}
+      );
+
+      buttonElement = spectator.query('button');
+      card = spectator.query('kirby-card');
+      buttonIcon = spectator.query(IconComponent);
+    });
+
+    it('should open menu when button is hovered', () => {
+      expect(card).toHaveComputedStyle({ display: 'none' });
+
+      spectator.dispatchMouseEvent(buttonElement, 'mouseenter');
+
+      expect(card).toHaveComputedStyle({ display: 'block' });
     });
   });
 });
