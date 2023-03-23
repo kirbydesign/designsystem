@@ -131,54 +131,83 @@ describe('ActionListComponent', () => {
         });
       });
     });
+  });
 
-    describe('interaction', () => {
-      it('should open menu when button is clicked', async () => {
-        expect(card).toHaveComputedStyle({ display: 'none' });
+  describe('interaction', () => {
+    beforeEach(() => {
+      spectator = createHost<MenuComponent>(
+        `<kirby-menu>
+          <kirby-item [selectable]="true">
+            <h3>Action 1</h3>
+              </kirby-item>
+          </kirby-menu>`,
+        {}
+      );
+      buttonElement = spectator.query('button');
+      card = spectator.query('kirby-card');
+      buttonIcon = spectator.query(IconComponent);
+    });
 
-        await spectator.click(buttonElement);
+    it('should open menu when button is clicked', async () => {
+      expect(card).toHaveComputedStyle({ display: 'none' });
 
-        expect(card).toHaveComputedStyle({ display: 'block' });
-      });
+      await spectator.click(buttonElement);
 
-      it('should close menu when button is clicked twice', async () => {
-        expect(card).toHaveComputedStyle({ display: 'none' });
+      expect(card).toHaveComputedStyle({ display: 'block' });
+    });
 
-        await spectator.click(buttonElement);
-        await spectator.click(buttonElement);
+    it('should close menu when button is clicked twice', async () => {
+      expect(card).toHaveComputedStyle({ display: 'none' });
 
-        expect(card).toHaveComputedStyle({ display: 'none' });
-      });
+      await spectator.click(buttonElement);
+      await spectator.click(buttonElement);
 
-      it('should not open when the menu is disabled', async () => {
-        spectator.setInput('isDisabled', true);
+      expect(card).toHaveComputedStyle({ display: 'none' });
+    });
 
-        await spectator.click(buttonElement);
+    it('should not open when the menu is disabled', async () => {
+      spectator.setInput('isDisabled', true);
 
-        expect(card).toHaveComputedStyle({ display: 'none' });
-      });
+      await spectator.click(buttonElement);
 
-      it('should close the menu when pressing escape', async () => {
-        await spectator.click(buttonElement);
+      expect(card).toHaveComputedStyle({ display: 'none' });
+    });
 
-        expect(card).toHaveComputedStyle({ display: 'block' });
+    it('should close the menu when pressing escape', async () => {
+      await spectator.click(buttonElement);
 
-        spectator.dispatchKeyboardEvent(buttonElement, 'keydown', 'Escape');
+      expect(card).toHaveComputedStyle({ display: 'block' });
 
-        expect(card).toHaveComputedStyle({ display: 'none' });
-      });
+      spectator.dispatchKeyboardEvent(buttonElement, 'keydown', 'Escape');
 
-      it('should not close the menu when pressing escape and closeOnEscapeKey is false', async () => {
-        spectator.setInput('closeOnEscapeKey', false);
+      expect(card).toHaveComputedStyle({ display: 'none' });
+    });
 
-        await spectator.click(buttonElement);
+    it('should not close the menu when pressing escape and closeOnEscapeKey is false', async () => {
+      spectator.setInput('closeOnEscapeKey', false);
 
-        expect(card).toHaveComputedStyle({ display: 'block' });
+      await spectator.click(buttonElement);
 
-        spectator.dispatchKeyboardEvent(buttonElement, 'keydown', 'Escape');
+      expect(card).toHaveComputedStyle({ display: 'block' });
 
-        expect(card).toHaveComputedStyle({ display: 'block' });
-      });
+      spectator.dispatchKeyboardEvent(buttonElement, 'keydown', 'Escape');
+
+      expect(card).toHaveComputedStyle({ display: 'block' });
+    });
+
+    it('should close when selecting an item', async () => {
+      await spectator.click(spectator.query('kirby-item'));
+
+      expect(card).toHaveComputedStyle({ display: 'none' });
+    });
+
+    it('should not close when selecting an item and closeOnSelect is false', async () => {
+      spectator.setInput('closeOnSelect', false);
+
+      await spectator.click(buttonElement);
+      await spectator.click(spectator.query('kirby-item'));
+
+      expect(card).toHaveComputedStyle({ display: 'block' });
     });
   });
 
@@ -186,10 +215,11 @@ describe('ActionListComponent', () => {
     beforeEach(() => {
       spectator = createHost<MenuComponent>(
         `<kirby-menu>
-        <button kirby-button [size]="'md'" type="button" [attentionLevel]="'3'">
-          <kirby-icon [name]="'menu-outline'"></kirby-icon>
-        </button>
-      </kirby-menu>`,
+          <button kirby-button [size]="'md'" type="button" [attentionLevel]="'3'">
+            <kirby-icon [name]="'menu-outline'"></kirby-icon>
+          </button>
+        </kirby-menu>
+        `,
         {}
       );
       buttonIcon = spectator.query(IconComponent);
@@ -200,7 +230,7 @@ describe('ActionListComponent', () => {
     });
   });
 
-  xdescribe('advanced items', () => {
+  describe('advanced items', () => {
     let toggle: ToggleComponent;
     beforeEach(() => {
       spectator = createHost<MenuComponent>(
@@ -219,22 +249,6 @@ describe('ActionListComponent', () => {
 
     it('should render an advanced kirby item, with interactive elements inside', () => {
       expect(toggle).toBeTruthy();
-    });
-
-    it('should allow tab navigation to interactive elements inside', async () => {
-      // const container = spectator.query('.button-container');
-
-      // await spectator.click(buttonElement);
-      await spectator.dispatchKeyboardEvent(spectator.fixture.nativeElement, 'keydown', 'Tab');
-      // console.log(container);
-      console.log(toggle);
-      console.log(spectator.fixture.nativeElement);
-      expect(toggle).toBeFocused();
-    });
-
-    xit('should not close menu when item is clicked', async () => {
-      await spectator.click('kirby-item');
-      expect(spectator.query('kirby-card')).toBeTruthy();
     });
   });
 });
