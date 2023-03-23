@@ -8,6 +8,7 @@ import { PageFixedTitleAndActionsExampleComponent } from '~/app/examples/page-ex
 import { PagePullToRefreshExampleComponent } from '~/app/examples/page-example/pull-to-refresh/page-pull-to-refresh-example.component';
 import { PageContentWidthExampleComponent } from '~/app/examples/page-example/content-width/page-content-width-example.component';
 import { PageSimpleExampleComponent } from '~/app/examples/page-example/simple/page-simple-example.component';
+import { PageTabNavExampleComponent } from '~/app/examples/page-example/tab-navigation/page-tab-nav-example.component';
 import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
 import {
   ApiDescriptionProperty,
@@ -31,6 +32,8 @@ export class PageShowcaseComponent {
   fixedActionsExampleHtml: string = PageFixedTitleAndActionsExampleComponent.fixedActionsTemplate;
   customTitleExampleHtml: string = PageCustomTitleExampleComponent.template;
   advancedExampleHtml: string = PageAdvancedExampleComponent.template;
+  tabNavigationHtml = PageTabNavExampleComponent.template;
+  tabNavigationTs = PageTabNavExampleComponent.codeSnippet;
   pullToRefreshExampleHtml: string = PagePullToRefreshExampleComponent.template;
   pullToRefreshExampleTs: string = PagePullToRefreshExampleComponent.handler;
   contentWidthExampleHtml: string = PageContentWidthExampleComponent.template;
@@ -154,6 +157,11 @@ export class PageShowcaseComponent {
         'The `*kirbyPageActions` directive can be applied to any host or container element which will then be shown at the top of the page. The default configuration `{sticky: true}` makes the host element stick in the toolbar when the page is scrolled below the title. To avoid this it can be configured with `{sticky: false}` instead. When configured with `{fixed: true}` the element will be fixed and only shown in the toolbar.',
       type: ['{sticky: boolean}', '{fixed: boolean}'],
       defaultValue: '{sticky: true}',
+    },
+    {
+      name: '*kirbyPageStickyContent',
+      description:
+        'The `kirbyPageStickyContent` directive can be applied to any host or container element which will then be rendered just above the content of the page. The host element will stick below the toolbar when the page is scrolled beyond that point.',
     },
     {
       name: '*kirbyPageContent',
