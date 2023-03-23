@@ -67,6 +67,11 @@ export class MenuComponent implements AfterViewInit {
 
   @Input() public closeOnBackdrop: boolean = true;
 
+  /**
+   * The minimum width of the menu. If not set, the default width is 240px
+   */
+  @Input() public minWidth: number;
+
   @ViewChild('buttonContainer', { read: ElementRef })
   public buttonContainerElement: ElementRef<HTMLElement> | undefined;
 

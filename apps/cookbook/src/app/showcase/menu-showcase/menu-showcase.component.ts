@@ -90,6 +90,12 @@ export class MenuShowcaseComponent {
       defaultValue: 'true',
       type: ['boolean'],
     },
+    {
+      name: 'minWidth',
+      description: 'The minimum width of the menu. If not set, the default width is 240px',
+      defaultValue: 'N/A',
+      type: ['number'],
+    },
   ];
 
   public isOutletElementSet: boolean = true;
