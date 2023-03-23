@@ -1,22 +1,30 @@
 import { createHostFactory, Spectator } from '@ngneat/spectator';
-import { MockComponent, MockDirectives } from 'ng-mocks';
-import { IconComponent } from '@kirbydesign/designsystem/icon';
+import { MockComponent } from 'ng-mocks';
+import { IconComponent, IconModule } from '@kirbydesign/designsystem/icon';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
-import { FloatingDirective } from '../../src/lib/directives';
+import { FloatingDirective } from '@kirbydesign/designsystem/shared/floating';
+import { CardModule } from '@kirbydesign/designsystem/card';
+import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
+import { ItemModule } from '@kirbydesign/designsystem/item';
 import { MenuComponent } from './menu.component';
 
 describe('ActionListComponent', () => {
+  let spectator: Spectator<MenuComponent>;
+  let buttonElement: HTMLButtonElement;
+  let card: Element;
+  let buttonIcon: IconComponent;
+
+  const createHost = createHostFactory({
+    component: MenuComponent,
+    imports: [IconModule, CardModule, ItemModule],
+    declarations: [
+      FloatingDirective,
+      MockComponent(ButtonComponent),
+      MockComponent(ToggleComponent),
+    ],
+  });
+
   describe('by default', () => {
-    const createHost = createHostFactory({
-      component: MenuComponent,
-      declarations: [MockDirectives(FloatingDirective), MockComponent(ButtonComponent)],
-    });
-
-    let spectator: Spectator<MenuComponent>;
-    let buttonElement: HTMLButtonElement;
-    let card: Element;
-    let buttonIcon: IconComponent;
-
     beforeEach(() => {
       spectator = createHost<MenuComponent>(`<kirby-menu></kirby-menu>`, {});
       buttonElement = spectator.query('button');
@@ -122,6 +130,111 @@ describe('ActionListComponent', () => {
           expect(buttonElement.attributes['disabled']).toBeDefined();
         });
       });
+    });
+
+    describe('interaction', () => {
+      it('should open menu when button is clicked', async () => {
+        expect(card).toHaveComputedStyle({ display: 'none' });
+
+        await spectator.click(buttonElement);
+
+        expect(card).toHaveComputedStyle({ display: 'block' });
+      });
+
+      it('should close menu when button is clicked twice', async () => {
+        expect(card).toHaveComputedStyle({ display: 'none' });
+
+        await spectator.click(buttonElement);
+        await spectator.click(buttonElement);
+
+        expect(card).toHaveComputedStyle({ display: 'none' });
+      });
+
+      it('should not open when the menu is disabled', async () => {
+        spectator.setInput('isDisabled', true);
+
+        await spectator.click(buttonElement);
+
+        expect(card).toHaveComputedStyle({ display: 'none' });
+      });
+
+      it('should close the menu when pressing escape', async () => {
+        await spectator.click(buttonElement);
+
+        expect(card).toHaveComputedStyle({ display: 'block' });
+
+        spectator.dispatchKeyboardEvent(buttonElement, 'keydown', 'Escape');
+
+        expect(card).toHaveComputedStyle({ display: 'none' });
+      });
+
+      it('should not close the menu when pressing escape and closeOnEscapeKey is false', async () => {
+        spectator.setInput('closeOnEscapeKey', false);
+
+        await spectator.click(buttonElement);
+
+        expect(card).toHaveComputedStyle({ display: 'block' });
+
+        spectator.dispatchKeyboardEvent(buttonElement, 'keydown', 'Escape');
+
+        expect(card).toHaveComputedStyle({ display: 'block' });
+      });
+    });
+  });
+
+  describe('custom button', () => {
+    beforeEach(() => {
+      spectator = createHost<MenuComponent>(
+        `<kirby-menu>
+        <button kirby-button [size]="'md'" type="button" [attentionLevel]="'3'">
+          <kirby-icon [name]="'menu-outline'"></kirby-icon>
+        </button>
+      </kirby-menu>`,
+        {}
+      );
+      buttonIcon = spectator.query(IconComponent);
+    });
+
+    it('should render a custom button if provided', () => {
+      expect(buttonIcon).toHaveAttribute('name', 'menu-outline');
+    });
+  });
+
+  xdescribe('advanced items', () => {
+    let toggle: ToggleComponent;
+    beforeEach(() => {
+      spectator = createHost<MenuComponent>(
+        `<kirby-menu [closeOnSelect]="false">
+        <kirby-item>
+          <kirby-icon name="notification" slot="start"></kirby-icon>
+          <h3>Title</h3>
+          <kirby-toggle slot="end" checked="true" (checkedChange)="toggled()"></kirby-toggle>
+        </kirby-item>
+      </kirby-menu>`,
+        {}
+      );
+      buttonElement = spectator.query('button');
+      toggle = spectator.query(ToggleComponent);
+    });
+
+    it('should render an advanced kirby item, with interactive elements inside', () => {
+      expect(toggle).toBeTruthy();
+    });
+
+    it('should allow tab navigation to interactive elements inside', async () => {
+      // const container = spectator.query('.button-container');
+
+      // await spectator.click(buttonElement);
+      await spectator.dispatchKeyboardEvent(spectator.fixture.nativeElement, 'keydown', 'Tab');
+      // console.log(container);
+      console.log(toggle);
+      console.log(spectator.fixture.nativeElement);
+      expect(toggle).toBeFocused();
+    });
+
+    xit('should not close menu when item is clicked', async () => {
+      await spectator.click('kirby-item');
+      expect(spectator.query('kirby-card')).toBeTruthy();
     });
   });
 });
