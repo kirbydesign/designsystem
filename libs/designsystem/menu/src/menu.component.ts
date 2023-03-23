@@ -15,7 +15,7 @@ import { ThemeColor } from '@kirbydesign/core';
 import { ItemModule } from '@kirbydesign/designsystem/item';
 import { CardModule } from '@kirbydesign/designsystem/card';
 import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
-import { IconModule, IconSize } from '@kirbydesign/designsystem/icon';
+import { IconModule } from '@kirbydesign/designsystem/icon';
 import { AttentionLevel, ButtonComponent, ButtonSize } from '@kirbydesign/designsystem/button';
 import {
   FloatingDirective,
@@ -44,8 +44,6 @@ export class MenuComponent implements AfterViewInit {
   @Input() public isDisabled: boolean = false;
 
   @Input() public themeColor: ThemeColor = 'dark';
-
-  @Input() public iconSize: IconSize = IconSize.SM;
 
   @Input() public buttonSize: ButtonSize = ButtonSize.MD;
 

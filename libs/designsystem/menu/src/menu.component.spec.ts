@@ -45,10 +45,6 @@ describe('ActionListComponent', () => {
         expect(spectator.component.themeColor).toEqual('dark');
       });
 
-      it('should have small buttonIcon size by default', () => {
-        expect(spectator.component.iconSize).toEqual('sm');
-      });
-
       it('should have size button size md by default', () => {
         expect(spectator.component.buttonSize).toEqual('md');
       });
@@ -99,10 +95,6 @@ describe('ActionListComponent', () => {
 
       it('should have icon more', () => {
         expect(buttonIcon).toHaveAttribute('name', 'more');
-      });
-
-      it('should have size from component', () => {
-        expect(buttonIcon).toHaveAttribute('size', spectator.component.iconSize);
       });
     });
 
