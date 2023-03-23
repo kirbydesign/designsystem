@@ -1,15 +1,18 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, Input } from '@angular/core';
 
 const config = {
   selector: 'cookbook-menu-portal-example',
-  template: `<kirby-menu [DOMPortalOutlet]="outletElement">
+  template: `<kirby-menu 
+  [DOMPortalOutlet]="_outlet"
+  >
   <kirby-item [selectable]="true">
     <h3>Action 1</h3>
   </kirby-item>
   <kirby-item [selectable]="true">
     <h3>Action 2</h3>
   </kirby-item>
-</kirby-menu>`,
+</kirby-menu>
+`,
 };
 
 @Component({
@@ -18,7 +21,16 @@ const config = {
 })
 export class MenuPortalExampleComponent {
   template: string = config.template;
+  private _outlet: HTMLElement;
 
+  /**
+   *
+   */
+  constructor(private cd: ChangeDetectorRef) {}
+
+  @Input() set isOutletElementSet(isSet: boolean) {
+    this._outlet = isSet ? this.outletElement : null;
+  }
   private outletTag: string = 'cookbook-root';
 
   public outletElement: HTMLElement = this.getOutletElement();
