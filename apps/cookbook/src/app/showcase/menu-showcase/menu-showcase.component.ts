@@ -16,18 +16,6 @@ export class MenuShowcaseComponent {
       type: ['boolean'],
     },
     {
-      name: 'themeColor',
-      description: 'Color of the default button',
-      defaultValue: 'dark',
-      type: ['ThemeColor'],
-    },
-    {
-      name: 'iconSize',
-      description: 'Size of the default button',
-      defaultValue: 'sm',
-      type: ['IconSize'],
-    },
-    {
       name: 'buttonSize',
       description: 'Size of the default button',
       defaultValue: 'md',

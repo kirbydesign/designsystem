@@ -10,11 +10,9 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Placement } from '@floating-ui/dom';
-import { ThemeColor } from '@kirbydesign/core';
 
 import { ItemModule } from '@kirbydesign/designsystem/item';
 import { CardModule } from '@kirbydesign/designsystem/card';
-import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 import { AttentionLevel, ButtonComponent, ButtonSize } from '@kirbydesign/designsystem/button';
 import {
@@ -27,23 +25,13 @@ import {
 @Component({
   selector: 'kirby-menu',
   standalone: true,
-  imports: [
-    ButtonComponent,
-    CommonModule,
-    FloatingDirective,
-    IconModule,
-    ThemeColorDirective,
-    CardModule,
-    ItemModule,
-  ],
+  imports: [ButtonComponent, CommonModule, FloatingDirective, IconModule, CardModule, ItemModule],
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MenuComponent implements AfterViewInit {
   @Input() public isDisabled: boolean = false;
-
-  @Input() public themeColor: ThemeColor = 'dark';
 
   @Input() public buttonSize: ButtonSize = ButtonSize.MD;
 
