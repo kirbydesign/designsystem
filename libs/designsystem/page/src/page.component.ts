@@ -66,7 +66,11 @@ type fixedConfig = { fixed: boolean };
 export const PAGE_BACK_BUTTON_CONFIG = new InjectionToken<PageBackButtonConfig>('');
 
 export interface PageBackButtonConfig {
-  navigateBack: (routerOutlet: IonRouterOutlet, navCtrl: NavController) => void;
+  navigateBack: (
+    routerOutlet: IonRouterOutlet,
+    navCtrl: NavController,
+    defaultBackHref: string
+  ) => void;
 }
 
 /**
@@ -468,7 +472,7 @@ export class PageComponent
       this.backButtonDelegate.onClick = (event: Event) => {
         // TODO: prevent default relevant here?
         event.preventDefault();
-        this.backButtonConfig.navigateBack(this.routerOutlet, this.navCtrl);
+        this.backButtonConfig.navigateBack(this.routerOutlet, this.navCtrl, this.defaultBackHref);
       };
     }
 
