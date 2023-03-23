@@ -131,6 +131,17 @@ describe('ActionListComponent', () => {
         });
       });
     });
+
+    describe('min-width', () => {
+      it('should have default min-width', () => {
+        expect(card).toHaveComputedStyle({ 'min-width': '240px' });
+      });
+
+      it('should have min-width set to 400px', () => {
+        spectator.setInput('minWidth', 400);
+        expect(card).toHaveComputedStyle({ 'min-width': '400px' });
+      });
+    });
   });
 
   describe('interaction', () => {
