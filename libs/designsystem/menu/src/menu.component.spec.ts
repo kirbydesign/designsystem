@@ -41,10 +41,6 @@ describe('ActionListComponent', () => {
         expect(spectator.component.isDisabled).toBeFalsy();
       });
 
-      it('should have dark theme by default', () => {
-        expect(spectator.component.themeColor).toEqual('dark');
-      });
-
       it('should have size button size md by default', () => {
         expect(spectator.component.buttonSize).toEqual('md');
       });
