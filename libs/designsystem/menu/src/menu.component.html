@@ -14,14 +14,12 @@
   </ng-container>
 </div>
 <kirby-card
-  [style.min-width.px]="minWidth ? minWidth : null"
   kirbyFloating
   [strategy]="'fixed'"
   [reference]="buttonContainerElement"
   [isDisabled]="isDisabled"
   [triggers]="triggers"
   [placement]="placement"
-  [offset]="FloatingOffset.small"
   [DOMPortalOutlet]="DOMPortalOutlet"
   [portalOutletConfig]="portalOutletConfig"
   [closeOnBackdrop]="closeOnBackdrop"
