@@ -29,7 +29,14 @@ import {
   ViewChild,
 } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router, RouterEvent } from '@angular/router';
-import { IonBackButtonDelegate, IonContent, IonFooter, IonHeader } from '@ionic/angular';
+import {
+  IonBackButtonDelegate,
+  IonContent,
+  IonFooter,
+  IonHeader,
+  IonRouterOutlet,
+  NavController,
+} from '@ionic/angular';
 import { ScrollDetail } from '@ionic/core';
 import { selectedTabClickEvent, TabsComponent } from '@kirbydesign/designsystem/tabs';
 import { Observable, Subject } from 'rxjs';
@@ -59,7 +66,7 @@ type fixedConfig = { fixed: boolean };
 export const PAGE_BACK_BUTTON_CONFIG = new InjectionToken<PageBackButtonConfig>('');
 
 export interface PageBackButtonConfig {
-  navigateBack: () => void;
+  navigateBack: (routerOutlet: IonRouterOutlet, navCtrl: NavController) => void;
 }
 
 /**
@@ -304,7 +311,9 @@ export class PageComponent
     @Optional() @SkipSelf() private tabsComponent: TabsComponent,
     @Optional()
     @Inject(PAGE_BACK_BUTTON_CONFIG)
-    private backButtonConfig: PageBackButtonConfig
+    private backButtonConfig: PageBackButtonConfig,
+    private routerOutlet: IonRouterOutlet,
+    private navCtrl: NavController
   ) {}
 
   private contentReadyPromise: Promise<void>;
@@ -459,7 +468,7 @@ export class PageComponent
       this.backButtonDelegate.onClick = (event: Event) => {
         // TODO: prevent default relevant here?
         event.preventDefault();
-        this.backButtonConfig.navigateBack();
+        this.backButtonConfig.navigateBack(this.routerOutlet, this.navCtrl);
       };
     }
 
