@@ -34,6 +34,7 @@ import { PageFixedFooterTabExampleComponent } from './page-example/fixed-footer-
 import { PageFixedTitleAndActionsExampleComponent } from './page-example/fixed-title-and-actions/page-fixed-title-and-actions-example.component';
 import { PageContentWidthExampleComponent } from './page-example/content-width/page-content-width-example.component';
 import { PageSimpleExampleComponent } from './page-example/simple/page-simple-example.component';
+import { PageTabNavExampleComponent } from './page-example/tab-navigation/page-tab-nav-example.component';
 import { ProgressCircleExampleComponent } from './progress-circle-example/progress-circle-example.component';
 import { ReorderListExampleComponent } from './reorder-list-example/reorder-list-example.component';
 import { SectionHeaderExampleComponent } from './section-header-example/section-header-example.component';
@@ -85,6 +86,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   PageAdvancedExampleComponent,
   PageFitHeadingExampleComponent,
   PageFixedTitleAndActionsExampleComponent,
+  PageTabNavExampleComponent,
   TabExampleComponent,
   PageFixedFooterTabsExampleComponent,
   PageFixedFooterTabExampleComponent,

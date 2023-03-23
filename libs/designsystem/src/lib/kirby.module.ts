@@ -45,6 +45,7 @@ import {
   ProgressCircleRingComponent,
 } from '@kirbydesign/designsystem/progress-circle';
 import { RouterOutletModule } from '@kirbydesign/designsystem/router-outlet';
+
 import { ItemGroupComponent } from '@kirbydesign/designsystem/item-group';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { CalendarComponent } from '@kirbydesign/designsystem/calendar';
@@ -71,6 +72,7 @@ import { ReorderListComponent } from '@kirbydesign/designsystem/reorder-list';
 
 import { ToastController, ToastHelper } from '@kirbydesign/designsystem/toast';
 import { BreakpointHelperService, GridComponent } from '@kirbydesign/designsystem/grid';
+import { TabNavigationModule } from '@kirbydesign/designsystem/tab-navigation';
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
 import { customElementsInitializer } from './custom-elements-initializer';
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
@@ -121,6 +123,7 @@ const exportedModules = [
   RouterOutletModule,
   PageModule,
   HeaderModule,
+  TabNavigationModule,
   TabsModule,
   IconModule,
   ItemModule,
