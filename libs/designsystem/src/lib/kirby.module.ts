@@ -74,6 +74,7 @@ import { ToastController, ToastHelper } from '@kirbydesign/designsystem/toast';
 import { BreakpointHelperService, GridComponent } from '@kirbydesign/designsystem/grid';
 
 import { MenuComponent } from '@kirbydesign/designsystem/menu';
+import { TabNavigationModule } from '@kirbydesign/designsystem/tab-navigation';
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
 import { customElementsInitializer } from './custom-elements-initializer';
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';

@@ -24,7 +24,7 @@ import { CardComponent } from '@kirbydesign/designsystem/card';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
-import { HorizontalDirection } from '@kirbydesign/designsystem/popover';
+import { HorizontalDirection, PopoverComponent } from '@kirbydesign/designsystem/popover';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 
 import { OpenState, VerticalDirection } from './dropdown.types';

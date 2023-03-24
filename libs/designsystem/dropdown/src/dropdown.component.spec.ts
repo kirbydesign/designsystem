@@ -7,16 +7,10 @@ import { MockComponents } from 'ng-mocks';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { CardComponent } from '@kirbydesign/designsystem/card';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
-<<<<<<< HEAD:libs/designsystem/dropdown/src/dropdown.component.spec.ts
 import { ItemComponent } from '@kirbydesign/designsystem/item';
-import { HorizontalDirection } from '@kirbydesign/designsystem/popover';
+import { HorizontalDirection, PopoverComponent } from '@kirbydesign/designsystem/popover';
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
-=======
-import { ButtonComponent, ItemComponent } from '..';
-import { ListItemTemplateDirective } from '../list';
-import { HorizontalDirection, PopoverComponent } from '../popover/popover.component';
->>>>>>> 47b5a8064 (chore: seperate floatDirective into own PR):libs/designsystem/src/lib/components/dropdown/dropdown.component.spec.ts
 
 import { DropdownComponent } from './dropdown.component';
 import { OpenState } from './dropdown.types';
