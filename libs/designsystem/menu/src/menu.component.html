@@ -26,6 +26,9 @@
   [closeOnEscapeKey]="closeOnEscapeKey"
   [closeOnSelect]="closeOnSelect"
   [autoPlacement]="autoPlacement"
+  [ngStyle]="{
+    minWidth: minWidth ? minWidth + 'px' : null
+  }"
 >
   <ng-content select="kirby-item"></ng-content>
 </kirby-card>
