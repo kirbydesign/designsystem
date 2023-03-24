@@ -63,7 +63,7 @@ export class MenuShowcaseComponent {
     {
       name: 'closeOnSelect',
       description: '"Toggle whether the menu should hide the content after selecting the content"',
-      defaultValue: 'true',
+      defaultValue: 'false',
       type: ['boolean'],
     },
     {
