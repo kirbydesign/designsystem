@@ -125,9 +125,9 @@ describe('MenuListComponent', () => {
         expect(card).toHaveComputedStyle({ 'min-width': '240px' });
       });
 
-      it('should have min-width set to 240px', () => {
-        spectator.setInput('minWidth', 240);
-        expect(card).toHaveComputedStyle({ 'min-width': '240px' });
+      it('should have min-width set to 300px', () => {
+        spectator.setInput('minWidth', 300);
+        expect(card).toHaveComputedStyle({ 'min-width': '300px' });
       });
     });
   });
@@ -194,21 +194,6 @@ describe('MenuListComponent', () => {
       spectator.dispatchKeyboardEvent(buttonElement, 'keydown', 'Escape');
 
       expect(card).toHaveComputedStyle({ display: 'block' });
-    });
-
-    it('should close when selecting an item', async () => {
-      /**
-       * Mark look here
-       * I think we have a false positive here
-       * deleting "await spectator.click(buttonElement);" still passes
-       * Wouldn't it also make sence to open the menu first?
-       *
-       * I can't really figure out why this is passing
-       */
-
-      await spectator.click(spectator.query('kirby-item'));
-
-      expect(card).toHaveComputedStyle({ display: 'none' });
     });
 
     it('should not close when selecting an item and closeOnSelect is false', async () => {
