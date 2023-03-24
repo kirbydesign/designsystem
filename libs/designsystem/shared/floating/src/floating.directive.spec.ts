@@ -205,41 +205,42 @@ describe('FloatingDirective', () => {
         spyOnProperty(floatingUi, 'computePosition', 'get').and.returnValue(computePositionFuncSpy);
       });
 
-      it('should add style left to host element', () => {
-        directive.ngOnInit();
-        expect(component.hostElementRef.nativeElement).toHaveComputedStyle({ left: '0px' });
-      });
+      describe('add styling', () => {
+        it('should add style left to host element', () => {
+          directive.ngOnInit();
+          expect(component.hostElementRef.nativeElement).toHaveComputedStyle({ left: '0px' });
+        });
 
-      it('should add style top to host element', () => {
-        directive.ngOnInit();
-        expect(component.hostElementRef.nativeElement).toHaveComputedStyle({ top: '0px' });
-      });
+        it('should add style top to host element', () => {
+          directive.ngOnInit();
+          expect(component.hostElementRef.nativeElement).toHaveComputedStyle({ top: '0px' });
+        });
 
-      it('should add style position from strategy input to host element - strategy absolute', () => {
-        const strategy: Strategy = 'absolute';
-        spectator.setInput('strategy', strategy);
-        directive.ngOnInit();
-        expect(component.hostElementRef.nativeElement).toHaveComputedStyle({
-          position: strategy,
+        it('should add style position from strategy input to host element - strategy absolute', () => {
+          const strategy: Strategy = 'absolute';
+          spectator.setInput('strategy', strategy);
+          directive.ngOnInit();
+          expect(component.hostElementRef.nativeElement).toHaveComputedStyle({
+            position: strategy,
+          });
+        });
+
+        it('should add style position from strategy input to host element - strategy fixed', () => {
+          const strategy: Strategy = 'fixed';
+          spectator.setInput('strategy', strategy);
+          directive.ngOnInit();
+          expect(component.hostElementRef.nativeElement).toHaveComputedStyle({
+            position: strategy,
+          });
+        });
+
+        it('should add style top to host element', () => {
+          directive.ngOnInit();
+          expect(component.hostElementRef.nativeElement).toHaveComputedStyle({
+            'z-index': DesignTokenHelper.zLayer('popover'),
+          });
         });
       });
-
-      it('should add style position from strategy input to host element - strategy fixed', () => {
-        const strategy: Strategy = 'fixed';
-        spectator.setInput('strategy', strategy);
-        directive.ngOnInit();
-        expect(component.hostElementRef.nativeElement).toHaveComputedStyle({
-          position: strategy,
-        });
-      });
-
-      it('should add style top to host element', () => {
-        directive.ngOnInit();
-        expect(component.hostElementRef.nativeElement).toHaveComputedStyle({
-          'z-index': DesignTokenHelper.zLayer('popover'),
-        });
-      });
-
       describe('autoUpdatePosition', () => {
         it('should call floating-ui autoUpdate', () => {
           spectator.detectChanges();

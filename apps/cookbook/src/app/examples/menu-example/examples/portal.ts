@@ -21,7 +21,7 @@ const config = {
 })
 export class MenuPortalExampleComponent {
   template: string = config.template;
-  private _outlet: HTMLElement;
+  public _outlet: HTMLElement;
 
   /**
    *

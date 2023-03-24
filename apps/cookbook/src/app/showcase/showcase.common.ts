@@ -120,6 +120,7 @@ export const COMPONENT_EXPORTS: any[] = [
   CookbookChartBarConfigShowcaseComponent,
   MenuShowcaseComponent,
   HeaderShowcaseComponent,
+  MenuShowcaseComponent,
 ];
 
 export const COMPONENT_DECLARATIONS: any[] = [...COMPONENT_EXPORTS, ShowcaseComponent];
