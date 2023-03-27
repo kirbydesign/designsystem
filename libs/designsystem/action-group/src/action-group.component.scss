@@ -14,12 +14,6 @@
   }
 }
 
-:host(.is-collapsed) {
-  kirby-dropdown {
-    display: inline-block;
-  }
-}
-
 .hidden-layer {
   display: none;
   visibility: hidden;
@@ -38,4 +32,10 @@ kirby-dropdown {
   margin: 4px;
   display: none;
   z-index: 1;
+}
+
+:host(.is-collapsed) {
+  kirby-dropdown {
+    display: inline-block;
+  }
 }
