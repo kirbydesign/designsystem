@@ -25,7 +25,7 @@ const config = {
   <kirby-flag themeColor="warning">Warning</kirby-flag>
 
   <div class="custom-section" *kirbyHeaderCustomSection>
-    <div class="flag success"></div> Custom section
+    <kirby-badge size="sm" themeColor="success"></kirby-badge> Custom section
   </div>
 </kirby-header>`,
   styles: customSectionConfig.styles,

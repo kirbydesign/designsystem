@@ -4,7 +4,7 @@ export const config = {
   selector: 'cookbook-header-example-custom-section',
   template: `<kirby-header [title]="'Title'" subtitle1="Subtitle one" subtitle2="Subtitle two">
   <div class="custom-section" *kirbyHeaderCustomSection>
-    <div class="flag success"></div> Custom section
+    <kirby-badge size="sm" themeColor="success"></kirby-badge> Custom section
   </div>
 </kirby-header>`,
   styles: [
@@ -14,14 +14,6 @@ export const config = {
   gap: 8px;
   font-size: 12px;
   color: var(--kirby-text-color-semi-dark);
-}`,
-    `.flag {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-}`,
-    `.flag.success {
-  background: var(--kirby-success);
 }`,
   ],
 };
