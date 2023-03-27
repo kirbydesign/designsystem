@@ -27,7 +27,6 @@ const config = {
 };
 @Component({
   template: config.template,
-  styles: ['.custom-page-title { display: inline-flex; }'],
 })
 export class HeaderWithActionGroupExampleComponent extends BasePageExampleComponent {
   static readonly template = config.template
