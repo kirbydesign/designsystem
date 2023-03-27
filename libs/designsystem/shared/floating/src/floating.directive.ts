@@ -30,6 +30,18 @@ export enum FloatingOffset {
   medium = 8,
 }
 
+export enum OutletSelector {
+  tag = 'tag',
+  id = 'id',
+  class = 'class',
+  name = 'name',
+}
+
+export interface PortalOutletConfig {
+  selector: OutletSelector;
+  value: string;
+}
+
 interface EventMethods {
   event: string;
   method: () => void;
@@ -56,7 +68,7 @@ export class FloatingDirective implements OnInit, OnDestroy {
    * Reference to the element for which the host should anchor to
    * */
   @Input() public set reference(ref: ElementRef) {
-    this.tearDownEventHandling();
+    this.tearDownReferenceElementEventHandling();
     this._reference = ref;
     this.setupEventHandling();
     this.autoUpdatePosition();
@@ -97,7 +109,7 @@ export class FloatingDirective implements OnInit, OnDestroy {
    * */
   @Input() public set triggers(eventTriggers: Array<TriggerEvent>) {
     this._triggers = eventTriggers;
-    this.tearDownEventHandling();
+    this.tearDownReferenceElementEventHandling();
     this.setupEventHandling();
   }
 
@@ -111,7 +123,29 @@ export class FloatingDirective implements OnInit, OnDestroy {
    * This should be used when there's issues with the stacking context, and not as a default option.
    * */
   @Input() public set DOMPortalOutlet(outlet: HTMLElement | undefined) {
-    this.portalDirective.outlet = outlet;
+    this._providedPortalOutlet = outlet;
+    this.portalDirective.outlet =
+      this.DOMPortalOutlet ?? this.getOutletElement(this.portalOutletConfig);
+  }
+
+  public get DOMPortalOutlet(): HTMLElement | undefined {
+    return this._providedPortalOutlet;
+  }
+
+  /**
+   * Defines how to automatically find and assign DOMPortalOutlet if none is provided in DOMPortalOutlet.
+   * If nothing is provided here and in DOMPortalOutlet, the provided strategy is used
+   * */
+  @Input() public set portalOutletConfig(config: PortalOutletConfig | undefined) {
+    this._portalOutletConfig = config;
+
+    if (!this.DOMPortalOutlet) {
+      this.portalDirective.outlet = this.getOutletElement(config);
+    }
+  }
+
+  public get portalOutletConfig(): PortalOutletConfig | undefined {
+    return this._portalOutletConfig;
   }
 
   /**
@@ -154,19 +188,13 @@ export class FloatingDirective implements OnInit, OnDestroy {
     }
   }
 
-  @HostListener('document:mousedown', ['$event'])
-  public onMouseClick(event: Event): void {
-    const clickedOnHost: boolean = this.elementRef.nativeElement.contains(event.target);
-    if (clickedOnHost) {
-      this.handleClickInsideHostElement();
-    } else {
-      this.handleClickOutsideHostElement(event);
-    }
-  }
-
   private _placement: Placement = 'bottom-start';
 
   private _strategy: Strategy = 'absolute';
+
+  private _providedPortalOutlet: HTMLElement | undefined;
+
+  private _portalOutletConfig: PortalOutletConfig | undefined;
 
   private _triggers: Array<TriggerEvent> = ['click'];
 
@@ -174,7 +202,8 @@ export class FloatingDirective implements OnInit, OnDestroy {
 
   private autoUpdaterRef: () => void;
   private isShown: boolean = false;
-  private eventListenerDisposeFns: EventListenerDisposeFn[] = [];
+  private referenceEventListenerDisposeFns: EventListenerDisposeFn[] = [];
+  private documentClickEventListenerDisposeFn: EventListenerDisposeFn;
   private triggerEventMap: Map<TriggerEvent, EventMethods[]> = new Map([
     ['click', [{ event: 'click', method: this.toggleShow.bind(this) }]],
     [
@@ -193,6 +222,16 @@ export class FloatingDirective implements OnInit, OnDestroy {
     ],
   ]);
 
+  private HTMLElements: {
+    [key in OutletSelector | 'default']: (value?: string) => Array<Element> | null;
+  } = {
+    id: (value) => Array.of(document.getElementById(value)),
+    class: (value) => Array.from(document.getElementsByClassName(value)),
+    name: (value) => Array.from(document.getElementsByName(value)),
+    tag: (value) => Array.from(document.getElementsByTagName(value)),
+    default: () => null,
+  };
+
   public constructor(
     private elementRef: ElementRef,
     private renderer: Renderer2,
@@ -210,6 +249,7 @@ export class FloatingDirective implements OnInit, OnDestroy {
       return;
     }
 
+    this.attachDocumentClickEvent();
     this.renderer.setStyle(this.elementRef.nativeElement, 'display', 'block');
     this.isShown = true;
     this.displayChanged.emit(this.isShown);
@@ -221,6 +261,7 @@ export class FloatingDirective implements OnInit, OnDestroy {
       return;
     }
 
+    this.tearDownDocumentClickEventHandling();
     this.renderer.setStyle(this.elementRef.nativeElement, 'display', 'none');
     this.isShown = false;
     this.displayChanged.emit(this.isShown);
@@ -235,6 +276,15 @@ export class FloatingDirective implements OnInit, OnDestroy {
     }
   }
 
+  private onDocumentClickWhileHostShown(event: Event): void {
+    const clickedOnHost: boolean = this.elementRef.nativeElement.contains(event.target);
+    if (clickedOnHost) {
+      this.handleClickInsideHostElement();
+    } else {
+      this.handleClickOutsideHostElement(event);
+    }
+  }
+
   private addFloatStylingToHostElement(): void {
     this.renderer.setStyle(this.elementRef.nativeElement, 'left', `0px`);
     this.renderer.setStyle(this.elementRef.nativeElement, 'top', `0px`);
@@ -243,6 +293,15 @@ export class FloatingDirective implements OnInit, OnDestroy {
       this.elementRef.nativeElement,
       'z-index',
       DesignTokenHelper.zLayer('popover')
+    );
+    this.setDisplayStyling();
+  }
+
+  private setDisplayStyling(): void {
+    this.renderer.setStyle(
+      this.elementRef.nativeElement,
+      'display',
+      this.isShown ? `block` : `none`
     );
   }
 
@@ -294,11 +353,7 @@ export class FloatingDirective implements OnInit, OnDestroy {
   private setPositionStylingOnHostElement(xPosition: number, yPosition: number): void {
     this.renderer.setStyle(this.elementRef.nativeElement, 'left', `${xPosition}px`);
     this.renderer.setStyle(this.elementRef.nativeElement, 'top', `${yPosition}px`);
-    this.renderer.setStyle(
-      this.elementRef.nativeElement,
-      'display',
-      this.isShown ? `block` : `none`
-    );
+    this.setDisplayStyling();
   }
 
   private setupEventHandling(): void {
@@ -308,6 +363,18 @@ export class FloatingDirective implements OnInit, OnDestroy {
 
     this.triggers.forEach((trigger: TriggerEvent) =>
       this.attachTriggerEventToReferenceElement(trigger)
+    );
+  }
+
+  private attachDocumentClickEvent(): void {
+    if (this.documentClickEventListenerDisposeFn) {
+      return;
+    }
+
+    this.documentClickEventListenerDisposeFn = this.renderer.listen(
+      'document',
+      'mousedown',
+      (event) => this.onDocumentClickWhileHostShown(event)
     );
   }
 
@@ -324,7 +391,7 @@ export class FloatingDirective implements OnInit, OnDestroy {
         event.event,
         event.method
       );
-      this.eventListenerDisposeFns.push(eventListenerDisposeFn);
+      this.referenceEventListenerDisposeFns.push(eventListenerDisposeFn);
     });
   }
 
@@ -343,13 +410,49 @@ export class FloatingDirective implements OnInit, OnDestroy {
     }
   }
 
-  private tearDownEventHandling(): void {
-    this.eventListenerDisposeFns.forEach((eventListenerDisposeFunction: EventListenerDisposeFn) => {
-      if (eventListenerDisposeFunction != null) {
-        eventListenerDisposeFunction();
+  private getOutletElement(config: PortalOutletConfig | undefined): HTMLElement | null {
+    if (!config || !config.selector || !config.value) {
+      return null;
+    }
+
+    const elements: Array<Element> | null = this.getHTMLElements(config);
+
+    if (!elements || elements.length === 0) {
+      throw Error(`Could not locate HTMLElement for ${config.selector}. Did you misspell it?`);
+    }
+
+    if (elements.length > 1) {
+      throw Error(
+        `Multiple HTMLElements found for ${config.selector}.
+         This can lead to unintended behaviours. Provide an unique outlet`
+      );
+    }
+
+    return elements[0] as HTMLElement;
+  }
+
+  private getHTMLElements(config: PortalOutletConfig | undefined): Array<Element> | null {
+    return (
+      this.HTMLElements[config.selector](config.value) || this.HTMLElements['default'](config.value)
+    );
+  }
+
+  private tearDownReferenceElementEventHandling(): void {
+    this.referenceEventListenerDisposeFns.forEach(
+      (eventListenerDisposeFunction: EventListenerDisposeFn) => {
+        if (eventListenerDisposeFunction != null) {
+          eventListenerDisposeFunction();
+        }
       }
-    });
-    this.eventListenerDisposeFns = [];
+    );
+    this.referenceEventListenerDisposeFns = [];
+  }
+
+  private tearDownDocumentClickEventHandling(): void {
+    if (this.documentClickEventListenerDisposeFn) {
+      this.documentClickEventListenerDisposeFn();
+      this.documentClickEventListenerDisposeFn = null;
+    }
   }
 
   private removeAutoUpdaterRef(): void {
@@ -359,7 +462,8 @@ export class FloatingDirective implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy() {
-    this.tearDownEventHandling();
+    this.tearDownDocumentClickEventHandling();
+    this.tearDownReferenceElementEventHandling();
     this.removeAutoUpdaterRef();
   }
 }

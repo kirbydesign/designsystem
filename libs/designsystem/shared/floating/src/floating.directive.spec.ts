@@ -1,14 +1,14 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { createComponentFactory, mockProvider, Spectator } from '@ngneat/spectator';
 import { PortalDirective } from '@kirbydesign/designsystem/shared/portal';
-import { TriggerEvent } from '@kirbydesign/designsystem/shared/floating';
-import { FloatingDirective } from './floating.directive';
+import { PortalOutletConfig, TriggerEvent } from '@kirbydesign/designsystem/shared/floating';
 
 import * as floatingUi from '@floating-ui/dom';
-import { Placement } from '@floating-ui/core/src/types';
 import { Strategy } from '@floating-ui/dom';
-import any = jasmine.any;
+import { Placement } from '@floating-ui/core/src/types';
 import { DesignTokenHelper } from '@kirbydesign/core';
+import { FloatingDirective, OutletSelector } from './floating.directive';
+import any = jasmine.any;
 
 @Component({
   template: `
@@ -25,6 +25,10 @@ import { DesignTokenHelper } from '@kirbydesign/core';
       [placement]="placement"
     ></div>
     <div #clickTarget></div>
+    <div #idTarget id="idTarget"></div>
+    <div #classTarget class="classTarget"></div>
+    <div #nameTarget name="nameTarget"></div>
+    <pre #tagTarget></pre>
   `,
   imports: [FloatingDirective],
   standalone: true,
@@ -33,6 +37,10 @@ class FloatingTestComponent {
   @ViewChild('floatingElement', { static: true }) public floatingElementRef: ElementRef;
   @ViewChild('hostElement', { static: true }) public hostElementRef: ElementRef;
   @ViewChild('clickTarget', { static: true }) public clickTargetRef: ElementRef;
+  @ViewChild('idTarget', { static: true }) public idTargetRef: ElementRef;
+  @ViewChild('classTarget', { static: true }) public classTargetRef: ElementRef;
+  @ViewChild('nameTarget', { static: true }) public nameTargetRef: ElementRef;
+  @ViewChild('tagTarget', { static: true }) public tagTargetRef: ElementRef;
   @ViewChild(FloatingDirective, { static: true }) public floatingDirective: FloatingDirective;
 
   /** Start values set to match directive */
@@ -75,7 +83,7 @@ describe('FloatingDirective', () => {
       it('should not add event listeners when only reference is set without triggers', () => {
         directive.triggers = null;
         directive.reference = component.floatingElementRef;
-        expect(directive['eventListeners']).toHaveLength(0);
+        expect(directive['referenceEventListenerDisposeFns']).toHaveLength(0);
       });
     });
 
@@ -105,25 +113,79 @@ describe('FloatingDirective', () => {
       it('should not add event listeners when only triggers is set without reference', () => {
         directive.reference = null;
         directive.triggers = ['hover'];
-        expect(directive['eventListenerDisposeFns']).toHaveLength(0);
+        expect(directive['referenceEventListenerDisposeFns']).toHaveLength(0);
       });
 
       it('should add event listeners for click event when reference and triggers is set', () => {
         directive.triggers = ['click'];
         directive.reference = component.floatingElementRef;
-        expect(directive['eventListenerDisposeFns']).toHaveLength(1);
+        expect(directive['referenceEventListenerDisposeFns']).toHaveLength(1);
       });
 
       it('should add event listeners for hover event when reference and triggers is set', () => {
         directive.triggers = ['hover'];
         directive.reference = component.floatingElementRef;
-        expect(directive['eventListenerDisposeFns']).toHaveLength(2);
+        expect(directive['referenceEventListenerDisposeFns']).toHaveLength(2);
       });
 
       it('should add event listeners for click event when reference and triggers is set', () => {
         directive.triggers = ['focus'];
         directive.reference = component.floatingElementRef;
-        expect(directive['eventListenerDisposeFns']).toHaveLength(2);
+        expect(directive['referenceEventListenerDisposeFns']).toHaveLength(2);
+      });
+    });
+
+    describe('portalOutletConfig', () => {
+      it('should not change outlet, if outlet is set by providedPortalOutlet', () => {
+        const config: PortalOutletConfig = {
+          selector: OutletSelector.tag,
+          value: 'tagTarget',
+        };
+
+        const expectedPortalOutlet: HTMLElement = component.classTargetRef.nativeElement;
+        directive['_providedPortalOutlet'] = expectedPortalOutlet;
+        directive.portalOutletConfig = config;
+        expect(directive.DOMPortalOutlet).toEqual(expectedPortalOutlet);
+      });
+
+      it('should set outlet to tagTarget', () => {
+        const config: PortalOutletConfig = {
+          selector: OutletSelector.tag,
+          value: 'pre',
+        };
+        const expectedPortalOutlet: HTMLElement = component.tagTargetRef.nativeElement;
+        directive.portalOutletConfig = config;
+        expect(directive['portalDirective'].outlet).toEqual(expectedPortalOutlet);
+      });
+
+      it('should set outlet to classTarget', () => {
+        const config: PortalOutletConfig = {
+          selector: OutletSelector.class,
+          value: 'classTarget',
+        };
+        const expectedPortalOutlet: HTMLElement = component.classTargetRef.nativeElement;
+        directive.portalOutletConfig = config;
+        expect(directive['portalDirective'].outlet).toEqual(expectedPortalOutlet);
+      });
+
+      it('should set outlet to idTarget', () => {
+        const config: PortalOutletConfig = {
+          selector: OutletSelector.id,
+          value: 'idTarget',
+        };
+        const expectedPortalOutlet: HTMLElement = component.idTargetRef.nativeElement;
+        directive.portalOutletConfig = config;
+        expect(directive['portalDirective'].outlet).toEqual(expectedPortalOutlet);
+      });
+
+      it('should set outlet to nameTarget', () => {
+        const config: PortalOutletConfig = {
+          selector: OutletSelector.name,
+          value: 'nameTarget',
+        };
+        const expectedPortalOutlet: HTMLElement = component.nameTargetRef.nativeElement;
+        directive.portalOutletConfig = config;
+        expect(directive['portalDirective'].outlet).toEqual(expectedPortalOutlet);
       });
     });
   });
@@ -143,41 +205,42 @@ describe('FloatingDirective', () => {
         spyOnProperty(floatingUi, 'computePosition', 'get').and.returnValue(computePositionFuncSpy);
       });
 
-      it('should add style left to host element', () => {
-        directive.ngOnInit();
-        expect(component.hostElementRef.nativeElement).toHaveComputedStyle({ left: '0px' });
-      });
+      describe('add styling', () => {
+        it('should add style left to host element', () => {
+          directive.ngOnInit();
+          expect(component.hostElementRef.nativeElement).toHaveComputedStyle({ left: '0px' });
+        });
 
-      it('should add style top to host element', () => {
-        directive.ngOnInit();
-        expect(component.hostElementRef.nativeElement).toHaveComputedStyle({ top: '0px' });
-      });
+        it('should add style top to host element', () => {
+          directive.ngOnInit();
+          expect(component.hostElementRef.nativeElement).toHaveComputedStyle({ top: '0px' });
+        });
 
-      it('should add style position from strategy input to host element - strategy absolute', () => {
-        const strategy: Strategy = 'absolute';
-        spectator.setInput('strategy', strategy);
-        directive.ngOnInit();
-        expect(component.hostElementRef.nativeElement).toHaveComputedStyle({
-          position: strategy,
+        it('should add style position from strategy input to host element - strategy absolute', () => {
+          const strategy: Strategy = 'absolute';
+          spectator.setInput('strategy', strategy);
+          directive.ngOnInit();
+          expect(component.hostElementRef.nativeElement).toHaveComputedStyle({
+            position: strategy,
+          });
+        });
+
+        it('should add style position from strategy input to host element - strategy fixed', () => {
+          const strategy: Strategy = 'fixed';
+          spectator.setInput('strategy', strategy);
+          directive.ngOnInit();
+          expect(component.hostElementRef.nativeElement).toHaveComputedStyle({
+            position: strategy,
+          });
+        });
+
+        it('should add style top to host element', () => {
+          directive.ngOnInit();
+          expect(component.hostElementRef.nativeElement).toHaveComputedStyle({
+            'z-index': DesignTokenHelper.zLayer('popover'),
+          });
         });
       });
-
-      it('should add style position from strategy input to host element - strategy fixed', () => {
-        const strategy: Strategy = 'fixed';
-        spectator.setInput('strategy', strategy);
-        directive.ngOnInit();
-        expect(component.hostElementRef.nativeElement).toHaveComputedStyle({
-          position: strategy,
-        });
-      });
-
-      it('should add style top to host element', () => {
-        directive.ngOnInit();
-        expect(component.hostElementRef.nativeElement).toHaveComputedStyle({
-          'z-index': DesignTokenHelper.zLayer('popover'),
-        });
-      });
-
       describe('autoUpdatePosition', () => {
         it('should call floating-ui autoUpdate', () => {
           spectator.detectChanges();
@@ -269,7 +332,7 @@ describe('FloatingDirective', () => {
           const isShown: boolean = true;
           directive['isShown'] = isShown;
           spectator.setInput('closeOnSelect', true);
-          directive.onMouseClick(event);
+          directive['onDocumentClickWhileHostShown'](event);
           expect(directive['isShown']).toBeFalse();
         });
 
@@ -277,7 +340,7 @@ describe('FloatingDirective', () => {
           const isShown: boolean = false;
           directive['isShown'] = isShown;
           spectator.setInput('closeOnSelect', false);
-          directive.onMouseClick(event);
+          directive['onDocumentClickWhileHostShown'](event);
           expect(directive['isShown']).toEqual(isShown);
         });
 
@@ -285,7 +348,7 @@ describe('FloatingDirective', () => {
           const isShown: boolean = true;
           directive['isShown'] = isShown;
           spectator.setInput('closeOnSelect', false);
-          directive.onMouseClick(event);
+          directive['onDocumentClickWhileHostShown'](event);
           expect(directive['isShown']).toEqual(isShown);
         });
       });
@@ -301,7 +364,7 @@ describe('FloatingDirective', () => {
           const isShown: boolean = true;
           directive['isShown'] = isShown;
           spectator.setInput('closeOnBackdrop', true);
-          directive.onMouseClick(event);
+          directive['onDocumentClickWhileHostShown'](event);
           expect(directive['isShown']).toBeFalse();
         });
 
@@ -309,7 +372,7 @@ describe('FloatingDirective', () => {
           const isShown: boolean = false;
           directive['isShown'] = isShown;
           spectator.setInput('closeOnBackdrop', false);
-          directive.onMouseClick(event);
+          directive['onDocumentClickWhileHostShown'](event);
           expect(directive['isShown']).toEqual(isShown);
         });
 
@@ -317,7 +380,7 @@ describe('FloatingDirective', () => {
           const isShown: boolean = true;
           directive['isShown'] = isShown;
           spectator.setInput('closeOnBackdrop', false);
-          directive.onMouseClick(event);
+          directive['onDocumentClickWhileHostShown'](event);
           expect(directive['isShown']).toEqual(isShown);
         });
       });
