@@ -6,14 +6,9 @@ import {
   Directive,
   ElementRef,
   HostBinding,
-  Inject,
-  InjectionToken,
   Injector,
   Input,
-  OnChanges,
   OnInit,
-  Optional,
-  SimpleChanges,
   TemplateRef,
   ViewChild,
 } from '@angular/core';
@@ -21,9 +16,6 @@ import { ACTIONGROUP_CONFIG, ActionGroupConfig } from '@kirbydesign/designsystem
 import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
 import { FlagComponent } from '@kirbydesign/designsystem/flag';
 import type { FitHeadingConfig } from '@kirbydesign/designsystem/shared';
-
-export type HeaderConfig = { titleMaxLines?: number };
-export const HEADER_CONFIG = new InjectionToken<HeaderConfig>('header.config');
 
 @Directive({
   selector: '[kirbyHeaderActions]',
@@ -41,7 +33,7 @@ export class HeaderCustomSectionDirective {}
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeaderComponent implements AfterContentInit, OnChanges, OnInit {
+export class HeaderComponent implements AfterContentInit, OnInit {
   @HostBinding('class.centered')
   @Input()
   centered: boolean;
@@ -79,18 +71,9 @@ export class HeaderComponent implements AfterContentInit, OnChanges, OnInit {
 
   private actionGroupConfig: ActionGroupConfig;
 
-  constructor(
-    private injector: Injector,
-    @Optional() @Inject(HEADER_CONFIG) private config?: HeaderConfig
-  ) {}
+  constructor(private injector: Injector) {}
 
   ngOnInit(): void {
-    if (this.config) {
-      this.fitHeadingConfig = {
-        maxLines: this.config.titleMaxLines,
-      };
-    }
-
     this.actionGroupConfig = {
       isResizable: this.emphasizeActions,
       visibleActions: this.emphasizeActions ? undefined : 1,
@@ -105,6 +88,12 @@ export class HeaderComponent implements AfterContentInit, OnChanges, OnInit {
       ],
       parent: this.injector,
     });
+
+    if (this.titleMaxLines > 0) {
+      this.fitHeadingConfig = {
+        maxLines: this.titleMaxLines,
+      };
+    }
   }
 
   ngAfterContentInit(): void {
@@ -115,14 +104,6 @@ export class HeaderComponent implements AfterContentInit, OnChanges, OnInit {
 
     if (this.centered) {
       this.actionGroupConfig.isCondensed = true;
-    }
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.titleMaxLines) {
-      this.fitHeadingConfig = {
-        maxLines: changes.titleMaxLines.currentValue,
-      };
     }
   }
 }
