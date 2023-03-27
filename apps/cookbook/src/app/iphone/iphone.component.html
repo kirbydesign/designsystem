@@ -1,9 +1,9 @@
 <div class="container">
-  <div class="full-size-toggle" *ngIf="_mode">
+  <div class="toggle-wrapper" *ngIf="showViewModeToggle">
     Toggle full-size
     <kirby-toggle
-      (checkedChange)="onIframeOnlyToggleChange($event)"
-      [checked]="_mode === 'full-size'"
+      (checkedChange)="onViewModeToggleChange($event)"
+      [checked]="viewMode === 'full-size'"
     ></kirby-toggle>
   </div>
 

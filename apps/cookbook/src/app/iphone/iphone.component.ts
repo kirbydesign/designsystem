@@ -20,15 +20,14 @@ export class IphoneComponent implements OnChanges, AfterViewInit {
   @Input() src: string;
   @Input() showExternalLink: boolean;
 
-  @Input()
-  set showViewToggleWithDefault(value: 'phone' | 'full-size') {
-    this._mode = value;
-  }
-
-  @ViewChild('iframe', { read: ElementRef }) iframe: ElementRef<HTMLIFrameElement>;
-
   @HostBinding('class')
-  _mode: string;
+  @Input()
+  viewMode: 'phone' | 'full-size';
+
+  @Input() showViewModeToggle: boolean = false;
+
+  @ViewChild('iframe', { read: ElementRef })
+  iframe: ElementRef<HTMLIFrameElement>;
 
   trustedSrc: SafeResourceUrl;
 
@@ -46,7 +45,7 @@ export class IphoneComponent implements OnChanges, AfterViewInit {
 
   onIframeLoaded() {
     const document = this.iframe.nativeElement.contentWindow.document.documentElement;
-    if (this._mode === 'full-size') {
+    if (this.viewMode === 'full-size') {
       document.style.setProperty('--ion-safe-area-top', '0px');
       document.style.setProperty('--ion-safe-area-bottom', '0px');
     } else {
@@ -61,8 +60,8 @@ export class IphoneComponent implements OnChanges, AfterViewInit {
     return this.sanitizer.bypassSecurityTrustResourceUrl(src);
   }
 
-  onIframeOnlyToggleChange(shouldShowFullsize: boolean) {
-    this._mode = shouldShowFullsize ? 'full-size' : 'phone';
+  onViewModeToggleChange(fullSize: boolean) {
+    this.viewMode = fullSize ? 'full-size' : 'phone';
     this.onIframeLoaded();
   }
 }
