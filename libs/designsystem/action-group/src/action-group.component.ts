@@ -83,7 +83,7 @@ export class ActionGroupComponent implements AfterContentInit {
     }
   }
 
-  onDropdownActionSelect() {
+  onActionSelect() {
     const selectedIndex = this.dropdown.selectedIndex;
     const selectedAction = this.hiddenButtons[selectedIndex];
 
