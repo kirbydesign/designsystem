@@ -64,8 +64,6 @@ export class ActionGroupComponent implements AfterContentInit {
     return 'align-' + this.align;
   }
 
-  private _nonCollapsibleVisibleActions: number = 2;
-
   private hiddenButtons: HTMLButtonElement[];
 
   constructor(
@@ -106,7 +104,9 @@ export class ActionGroupComponent implements AfterContentInit {
   }
 
   private initializeCollapsing() {
-    if (this.buttonElements.length <= this._nonCollapsibleVisibleActions) return;
+    const collapseThreshold = 2;
+    if (this.buttonElements.length <= collapseThreshold) return;
+
     this.moveButtons();
     this.populateDropdown();
     this.toggleDropdown();
