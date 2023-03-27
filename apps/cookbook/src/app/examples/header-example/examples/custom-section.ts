@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 export const config = {
   selector: 'cookbook-header-example-custom-section',
-  template: `<kirby-header title="Title" subtitle1="Subtitle one" subtitle2="Subtitle two">
+  template: `<kirby-header [title]="'Title'" subtitle1="Subtitle one" subtitle2="Subtitle two">
   <div class="custom-section" *kirbyHeaderCustomSection>
     <div class="flag success"></div> Custom section
   </div>

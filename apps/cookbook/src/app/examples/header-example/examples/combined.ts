@@ -4,7 +4,7 @@ import { config as customSectionConfig } from './custom-section';
 
 const config = {
   selector: 'cookbook-header-example-combined',
-  template: `<kirby-header title="Title" value="12.345,67" valueUnit="USD" subtitle1="Subtitle one" subtitle2="Subtitle two">
+  template: `<kirby-header [title]="'Title'" value="12.345,67" valueUnit="USD" subtitle1="Subtitle one" subtitle2="Subtitle two">
   <kirby-action-group *kirbyHeaderActions>
     <button kirby-button attentionLevel="3">
       <kirby-icon name="kirby"></kirby-icon>
