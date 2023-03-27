@@ -24,6 +24,8 @@ export type ActionGroupConfig = {
 };
 export const ACTIONGROUP_CONFIG = new InjectionToken<ActionGroupConfig>('action-group.config');
 
+type CollapsedAction = { button: HTMLButtonElement; text: string };
+
 @Component({
   selector: 'kirby-action-group',
   standalone: true,
@@ -54,7 +56,7 @@ export class ActionGroupComponent implements AfterContentInit {
 
   @HostBinding('class.is-collapsed')
   _isCollapsed: boolean;
-  _collapsedActions: string[] = [];
+  _collapsedActions: CollapsedAction[] = [];
 
   @HostBinding('class.is-resizeable')
   _isResizeable = false;
@@ -63,8 +65,6 @@ export class ActionGroupComponent implements AfterContentInit {
   get _align() {
     return 'align-' + this.align;
   }
-
-  private hiddenButtons: HTMLButtonElement[];
 
   constructor(
     private renderer: Renderer2,
@@ -85,22 +85,17 @@ export class ActionGroupComponent implements AfterContentInit {
     }
   }
 
-  onActionSelect() {
-    const selectedIndex = this.dropdown.selectedIndex;
-    const selectedAction = this.hiddenButtons[selectedIndex];
-
+  onActionSelect(action: CollapsedAction) {
     // Dropdown should not persist selected item, we want it to be re-selectable
     this.dropdown.selectedIndex = -1;
 
-    if (selectedAction) {
-      const event = new PointerEvent('click', {
-        bubbles: true,
-        cancelable: true,
-        view: window,
-      });
+    const event = new PointerEvent('click', {
+      bubbles: true,
+      cancelable: true,
+      view: window,
+    });
 
-      selectedAction.dispatchEvent(event);
-    }
+    action.button.dispatchEvent(event);
   }
 
   private initializeCollapsing() {
@@ -125,14 +120,13 @@ export class ActionGroupComponent implements AfterContentInit {
   }
 
   private populateDropdown() {
-    /*
-     * This function extracts the button text of all hidden buttons
-     * and updates the array used to populate the dropdown with items.
-     * It also maps the extracted text to the actual button element, for use when
-     * firing the matching buttons click-event in onDropdownActionSelect
-     */
+    const hiddenButtons = Array.from(
+      this.hiddenLayer.nativeElement.children
+    ) as HTMLButtonElement[];
 
-    this.hiddenButtons = Array.from(this.hiddenLayer.nativeElement.children) as HTMLButtonElement[];
-    this._collapsedActions = this.hiddenButtons.map((button) => button.textContent.trim());
+    this._collapsedActions = hiddenButtons.map((button) => ({
+      button,
+      text: button.textContent.trim(),
+    }));
   }
 }
