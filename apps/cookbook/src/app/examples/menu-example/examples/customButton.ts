@@ -2,19 +2,16 @@ import { Component } from '@angular/core';
 
 const config = {
   selector: 'cookbook-menu-custom-button-example',
-  template: `<kirby-menu [closeOnSelect]="false">
-<button
+  template: `<kirby-menu>
+  <button
     kirby-button
-    [size]="'md'"
     type="button"
     [attentionLevel]="'3'"
   >
     <kirby-icon [name]="'menu-outline'"></kirby-icon>
   </button>
-  <kirby-item (click)="actionClicked()">
-    <kirby-icon name="notification" slot="start"></kirby-icon>
-    <h3>Title</h3>
-    <kirby-toggle slot="end" checked="true" (checkedChange)="toggled()"></kirby-toggle>
+  <kirby-item>
+    <h3>Action 1</h3>
   </kirby-item>
 </kirby-menu>`,
 };

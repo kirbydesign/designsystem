@@ -1,42 +1,29 @@
+<!-- https://material.angular.io/cdk/portal/overview -->
+
 <div class="example">
   <p>
     A menu is a list of actions that displays in a popup. Menu replaces action-sheet both on mobile
     and web.
   </p>
+
   <p>
-    It is up to the user of menu to add individual
-    <a routerLink="/home/showcase/item">kirby-items</a>
-    to get the desired outcome. Menu simply provides the shell of handling the popup and related
-    button. All functionality that is expected from an item in the list, is up to the user to
-    implement. See examples.
-  </p>
-  <p>
-    By default a simple button with the icon 'more' is used. A custom
+    The menu's default slot accepts one or multiple
+    <code><a routerLink="/home/showcase/item">kirby-item</a></code>
+    . Additionally, the menu renders a default button that opens the menu. This button can be
+    replaced by a custom button by providing a
     <code>kirby-button</code>
-    can be provided as content-child to menu, which will override the default button.
+    as a content child of the menu as shown
+    <a href="#" (click)="scrollTo(customButton)">here</a>
+    .
   </p>
+
   <p>
-    <em>
-      <strong>Note:</strong>
-      Only
-      <code>kirby-item</code>
-      are allowed as children of a menu. This is to ensure consistency in design and implementation
-    </em>
+    The menu supports the use of portals, which enables the user to render the menu in a different
+    part of the DOM. This can be useful in case of issues with the stacking context. This is further
+    described in the
+    <a href="#" (click)="scrollTo(portal)">Portal</a>
+    section.
   </p>
-  <h3>Portal</h3>
-  <p>
-    There might be issues with the stacking context, that is your menu is being overlapped by other
-    content on the page, which requires the use of portal to fix. The use of portal enables us to
-    move an element in the DOM from one parent node into another node in DOM, effectively changing
-    the moved elements stacking context.
-  </p>
-  <p>See the portal examples.</p>
-  <strong>
-    <em>
-      The use of portal should only be used when necessary. It might break styling and/or angular
-      functionality, so use with care.
-    </em>
-  </strong>
 </div>
 <h2>Examples</h2>
 <h3>Basic</h3>
@@ -49,10 +36,7 @@
 </div>
 
 <h3>Selectable items</h3>
-<p>
-  This example demonstrates that functionality on the specific items, needs to be handled by the
-  individual items.
-</p>
+<p>This example demonstrates how to set custom actions on the elements in the menu.</p>
 <div class="page-example">
   <div>
     <cookbook-example-viewer [html]="menuSelectableExample.template">
@@ -63,8 +47,8 @@
 
 <h3>Advanced items</h3>
 <p>
-  Kirby-items can be more that just a clickable item. By modifying the menu to not close on select,
-  we can interact with the items toggle without the menu closing
+  Since the Menu accepts Items, it is possible to customize these. The example below demonstrates
+  how to add a toggle to an Item in the list.
 </p>
 <div class="page-example">
   <div>
@@ -76,10 +60,12 @@
 
 <h3>Menu placement</h3>
 <p>
-  By default the menu will open, having the content shown to the right. This might not be optimal
-  for a menu placed far right on the screen. To ensure enough place on the screen for the content
-  and consistency in placement, we can modify the placement attribute on the menu.
+  By default the menu will open underneath the button and towards the right side of the screen. The
+  placement of the menu can be configured through the
+  <code>placement</code>
+  input as shown below.
 </p>
+
 <div class="page-example">
   <div>
     <cookbook-example-viewer [html]="menuPlacementExample.template">
@@ -90,12 +76,19 @@
   </div>
 </div>
 
-<h3>Custom button</h3>
+<h3 #customButton>Custom button</h3>
 <p>
   By default a button is displayed and its functionality handled by the menu component. Should you
   need to modify the button, for example adding a directive or an attribute to it, you can provide
   your own button as shown in the example code.
 </p>
+
+<p>
+  <strong>
+    <em>The custom button won't receive the default values provided by the menu component.</em>
+  </strong>
+</p>
+
 <div class="page-example">
   <div>
     <cookbook-example-viewer [html]="menuCustomButtonExample.template">
@@ -106,35 +99,61 @@
   </div>
 </div>
 
-<h2>Portal</h2>
+<h2 #portal>Portal</h2>
 <p>
-  Menu is build to support the use of portal to place the menu's content in another
-  <code>HTMLElement</code>
-  in the DOM. This requires a reference to the mentioned
-  <code>HTMLElement</code>
-  , which can either be provided by you through the menu components input
-  <code>DOMPortalOutlet</code>
-  which takes the before mentioned
-  <code>HTMLElement</code>
-  as input, or you can use the
+  The menu supports the use of portals to place its content in another part of the DOM. This can be
+  done by providing the menu with a
   <code>PortalOutletConfig</code>
+  , or a reference to a
+  <code>HTMLElement</code>
+  that is passed to the
+  <code>DOMPortalOutlet</code>
   input.
 </p>
+
 <p>
   Most use cases should be easily handled by using the
   <code>PortalOutletConfig</code>
   input.
 </p>
+
+<p>
+  <strong>
+    <em>
+      The use of portal should only be used when necessary. It might break styling and/or angular
+      functionality, so use with care.
+    </em>
+  </strong>
+</p>
+
 <h3>
   <code>DOMPortalOutlet</code>
   - Portal with outlet
 </h3>
-<p>
+<!-- <p>
   This example will describe and show how to use
   <code>DOMPortalOutlet</code>
   input.
-</p>
+</p> -->
+
 <p>
+  The
+  <code>DOMPortalOutlet</code>
+  input must be a reference to a unique DOM element, such as the
+  <code>body</code>
+  .
+</p>
+
+<!-- <p>
+  By providing a reference to an
+  <code>HTMLElement</code>
+  to the
+  <code>DOMPortalOutlet</code>
+  input, you can place the menu content in a different part of the DOM. Please note that the
+  referenced DOM element should be unique.
+</p> -->
+
+<!-- <p>
   Providing the
   <code>HTMLElement</code>
   for
@@ -146,7 +165,7 @@
   project may have different tags for which they want the content to be placed under. This approach
   is also to prevent the need for adjusting the DOM with an extra base element, when the need for
   portal arises.
-</p>
+</p> -->
 <div class="page-example">
   <div>
     <h3>How it looks</h3>
@@ -154,7 +173,8 @@
       One of the cases where it might be necessary to use portal, is when the menu is placed inside
       a
       <code>kirby-list</code>
-      . This is to show what is looks like when the menu isn't placed correctly in the stack.
+      . The example below exemplifies how it looks when the menu is not placed correctly in the
+      stack.
     </p>
 
     <!-- This is only here to make sure the example has the same width as the other example -->
@@ -163,14 +183,14 @@
         <p header>
           A menu in a
           <code>kirby-list</code>
-          &nbsp;a&nbsp;
+          &nbsp;
           <b>without</b>
-          a
+          &nbsp;
           <code>DOMPortalOutlet</code>
         </p>
         <div body>
           <cookbook-menu-portal-example [isOutletElementSet]="false"></cookbook-menu-portal-example>
-          <-- Nothing happens when you click the menu
+          <-- The menu is cut off by the list.
         </div>
       </cookbook-menu-portal-in-list-wrapper-example>
     </cookbook-example-viewer>
@@ -195,7 +215,7 @@
             #menuPortalExample
             [isOutletElementSet]="true"
           ></cookbook-menu-portal-example>
-          <-- The Menu opens when you click it
+          <-- The menu renders outside the menu.
         </div>
       </cookbook-menu-portal-in-list-wrapper-example>
     </cookbook-example-viewer>
@@ -206,6 +226,9 @@
   <code>PortalOutletConfig</code>
   - Automatically get portal outlet
 </h3>
+
+<p></p>
+
 <p>
   This example will describe and show how to use
   <code>PortalOutletConfig</code>
@@ -227,11 +250,10 @@
   the selector
 </p>
 <p>Example:</p>
-<p>
-  <code>`my-component id='targetId'`</code>
-</p>
-<p>Selector: id</p>
-<p>Value: targetId</p>
+
+<cookbook-code-viewer [html]="portalOutletConfigExampleHTML"></cookbook-code-viewer>
+<cookbook-code-viewer [ts]="portalOutletConfigExampleTS"></cookbook-code-viewer>
+
 <div class="page-example">
   <div>
     <cookbook-example-viewer

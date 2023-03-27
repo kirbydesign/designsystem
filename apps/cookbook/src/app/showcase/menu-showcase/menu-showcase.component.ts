@@ -1,4 +1,8 @@
 import { Component, Input } from '@angular/core';
+import {
+  portalOutletConfigExampleHTML,
+  portalOutletConfigExampleTS,
+} from '../../examples/menu-example/examples/portalOutletConfig';
 import { ApiDescriptionProperty } from './../../shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
@@ -88,7 +92,15 @@ export class MenuShowcaseComponent {
 
   public isOutletElementSet: boolean = true;
 
+  portalOutletConfigExampleHTML: string = portalOutletConfigExampleHTML;
+  portalOutletConfigExampleTS: string = portalOutletConfigExampleTS;
+
   public onCheckedChange(checked: boolean) {
     this.isOutletElementSet = checked;
+  }
+
+  scrollTo(target: Element) {
+    target.scrollIntoView({ behavior: 'smooth' });
+    return false;
   }
 }
