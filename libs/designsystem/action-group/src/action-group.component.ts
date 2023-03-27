@@ -37,9 +37,8 @@ export class ActionGroupComponent implements AfterContentInit {
 
   @Input() emphasizeActions?: boolean;
 
-  @HostBinding('class')
   @Input()
-  placement: 'left' | 'right' = 'right';
+  align: 'start' | 'end' = 'end';
 
   @ContentChildren(ButtonComponent, { read: ElementRef }) private buttonElements?: QueryList<
     ElementRef<HTMLButtonElement>
@@ -59,6 +58,11 @@ export class ActionGroupComponent implements AfterContentInit {
 
   @HostBinding('class.is-resizeable')
   _isResizeable = false;
+
+  @HostBinding('class')
+  get _align() {
+    return 'align-' + this.align;
+  }
 
   private _nonCollapsibleVisibleActions: number = 2;
 
