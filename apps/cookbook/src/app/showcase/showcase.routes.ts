@@ -61,6 +61,7 @@ import { RadioShowcaseComponent } from './radio-showcase/radio-showcase.componen
 import { CookbookChartStockConfigShowcaseComponent } from './chart-config-showcase/stock/chart-config-stock-showcase.component';
 import { CookbookChartBarConfigShowcaseComponent } from './chart-config-showcase/bar/chart-config-bar-showcase.component';
 import { HeaderShowcaseComponent } from './header-showcase/header-showcase.component';
+import { MenuShowcaseComponent } from './menu-showcase/menu-showcase.component';
 
 export const routes: Routes = [
   {
@@ -300,6 +301,10 @@ export const routes: Routes = [
       {
         path: 'accordion',
         component: AccordionShowcaseComponent,
+      },
+      {
+        path: 'menu',
+        component: MenuShowcaseComponent,
       },
       {
         path: 'radio',
