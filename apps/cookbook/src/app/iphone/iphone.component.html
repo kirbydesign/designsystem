@@ -2,7 +2,6 @@
   <div class="full-size-toggle" *ngIf="_mode">
     Toggle full-size
     <kirby-toggle
-      class="right-aligned"
       (checkedChange)="onIframeOnlyToggleChange($event)"
       [checked]="_mode === 'full-size'"
     ></kirby-toggle>
