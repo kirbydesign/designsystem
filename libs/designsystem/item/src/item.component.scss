@@ -69,8 +69,12 @@
     --transition: #{interaction-state.transition('background-color')};
   }
 
-  &.sm ion-item {
-    --min-height: #{map.get(utils.$item-heights, 's')};
+  &.sm,
+  :host-context(kirby-menu) :host-context(kirby-item):not([size]) 
+   {
+    ion-item {
+      --min-height: #{map.get(utils.$item-heights, 's')};
+    }
   }
 
   &.xs ion-item {
