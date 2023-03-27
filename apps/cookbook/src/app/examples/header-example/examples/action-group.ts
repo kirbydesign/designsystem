@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
 
 import { BasePageExampleComponent } from '../../page-example/base-page-example.component';
 
@@ -6,7 +7,7 @@ const config = {
   template: `<kirby-page defaultBackHref="/">
   <kirby-header title="Title" subtitle1="Subtitle one" subtitle2="Subtitle two">
     <kirby-action-group *kirbyHeaderActions>
-      <button kirby-button (click)="actionClicked('Action 1')">
+      <button kirby-button attentionLevel="3" (click)="actionClicked('Action 1')">
         <kirby-icon name="edit"></kirby-icon>
         <span class="text">Action 1</span>
       </button>
@@ -33,11 +34,16 @@ export class HeaderWithActionGroupExampleComponent extends BasePageExampleCompon
     .replace(' defaultBackHref="/"', '')
     .replace(' [innerHTML]="content">', '>...');
 
-  constructor() {
+  constructor(private toastController: ToastController) {
     super();
   }
 
   actionClicked(action: string) {
-    console.log(action);
+    const config: ToastConfig = {
+      message: `${action} was selected.`,
+      messageType: 'success',
+      durationInMs: 1500,
+    };
+    this.toastController.showToast(config);
   }
 }
