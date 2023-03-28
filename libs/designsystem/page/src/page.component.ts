@@ -63,17 +63,15 @@ const contentScrolledOffsetInPixels = 4;
 type stickyConfig = { sticky: boolean };
 type fixedConfig = { fixed: boolean };
 
-export const PAGE_BACK_BUTTON_CONFIG = new InjectionToken<PageBackButtonConfig>(
-  'page-back-button.config'
+export const PAGE_BACK_BUTTON_OVERRIDE = new InjectionToken<PageBackButtonOverride>(
+  'page-back-button-override'
 );
 
-export interface PageBackButtonConfig {
-  navigateBack: (
-    routerOutlet: IonRouterOutlet,
-    navCtrl: NavController,
-    defaultBackHref: string
-  ) => void;
-}
+export type PageBackButtonOverride = (
+  routerOutlet: IonRouterOutlet,
+  navCtrl: NavController,
+  defaultBackHref: string
+) => void;
 
 /**
  * Event emitted when "pull-to-refresh" begins.
@@ -316,8 +314,8 @@ export class PageComponent
     private resizeObserverService: ResizeObserverService,
     @Optional() @SkipSelf() private tabsComponent: TabsComponent,
     @Optional()
-    @Inject(PAGE_BACK_BUTTON_CONFIG)
-    private backButtonConfig: PageBackButtonConfig,
+    @Inject(PAGE_BACK_BUTTON_OVERRIDE)
+    private backButtonOverride: PageBackButtonOverride,
     @Optional()
     private routerOutlet: IonRouterOutlet,
     @Optional()
@@ -472,10 +470,10 @@ export class PageComponent
   }
 
   private interceptBackButtonClicksSetup() {
-    if (this.backButtonConfig) {
+    if (this.backButtonOverride) {
       this.backButtonDelegate.onClick = (event: Event) => {
         event.preventDefault();
-        this.backButtonConfig.navigateBack(this.routerOutlet, this.navCtrl, this.defaultBackHref);
+        this.backButtonOverride(this.routerOutlet, this.navCtrl, this.defaultBackHref);
       };
     }
 
