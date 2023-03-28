@@ -13,6 +13,7 @@ import {
 } from '@angular/core';
 
 import { ThemeColor } from '@kirbydesign/core';
+import { PlatformService } from '@kirbydesign/designsystem/helpers';
 
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 import { ListHelper } from './helpers/list-helper';
@@ -39,6 +40,9 @@ export type StandAloneSpacing =
   | 'xl'
   | 'xxl'
   | 'xxxl';
+
+type Device = 'touch' | 'desktop';
+
 @Component({
   selector: 'kirby-list',
   templateUrl: './list.component.html',
@@ -164,7 +168,11 @@ export class ListComponent implements OnInit, OnChanges {
   _groupedItems: any[];
   _selectedItem: any;
 
-  constructor(private listHelper: ListHelper) {}
+  public device: Device;
+
+  constructor(private listHelper: ListHelper, platformService: PlatformService) {
+    this.device = platformService.isTouch() ? 'touch' : 'desktop';
+  }
 
   ngOnInit() {
     this._isSelectable = this.itemSelect.observers.length > 0;
