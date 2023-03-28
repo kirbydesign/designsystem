@@ -10,6 +10,7 @@
   --kirby-inputs-indicator-background-color: var(--kirby-white);
   --kirby-inputs-indicator-color: var(--kirby-black);
   --kirby-inputs-placeholder-color: var(--kirby-white-overlay-50);
+  --kirby-inputs-elevation: none;
 }
 
 @mixin apply-white-theme {
@@ -20,6 +21,7 @@
   --kirby-inputs-indicator-background-color: var(--kirby-black);
   --kirby-inputs-indicator-color: var(--kirby-white);
   --kirby-inputs-placeholder-color: var(--kirby-semi-dark);
+  --kirby-inputs-elevation: none;
 }
 
 @mixin apply-light-theme {
