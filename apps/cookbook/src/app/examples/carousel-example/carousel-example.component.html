@@ -2,7 +2,7 @@
   <kirby-page-content>
     <fieldset>
       <legend>Max Width</legend>
-      <select (change)="onMaxWidthChange($event.target.value)">
+      <select [(ngModel)]="maxWidth">
         <option
           *ngFor="let option of maxWidthOptions"
           value="{{ option.value }}"
@@ -159,6 +159,7 @@
         [prevButtonClass]="'example2-prev'"
         [nextButtonClass]="'example2-next'"
         [paginationClass]="'example2-pagination'"
+        [noPadding]="ignorePagePadding"
       >
         <kirby-carousel-slide>
           <kirby-card [hasPadding]="true">
@@ -239,6 +240,7 @@
         [prevButtonClass]="'example3-prev'"
         [nextButtonClass]="'example3-next'"
         [paginationClass]="'example3-pagination'"
+        [noPadding]="ignorePagePadding"
       >
         <kirby-carousel-slide>
           <kirby-card [hasPadding]="true">

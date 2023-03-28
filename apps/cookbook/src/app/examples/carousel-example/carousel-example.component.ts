@@ -28,10 +28,6 @@ export class CarouselExampleComponent {
     },
   ];
 
-  onMaxWidthChange(value) {
-    this.maxWidth = value;
-  }
-
   ignorePagePadding: boolean = false;
 
   onCheckedChange($event) {

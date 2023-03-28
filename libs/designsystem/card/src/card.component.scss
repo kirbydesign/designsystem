@@ -67,10 +67,6 @@
   }
 }
 
-:host-context(swiper-slide) {
-  box-shadow: none;
-}
-
 @each $color-name, $color-value in utils.$main-colors {
   :host(.#{$color-name}) {
     --kirby-card-main-background-color: #{utils.get-color($color-name)};
