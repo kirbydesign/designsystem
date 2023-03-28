@@ -194,8 +194,6 @@ When setting value on Range the value change event is no longer fired. It will o
 ## Version 6
 
 - [Migrations](#migrations)
-  - [Version 8.3.0](#version-830)
-  - [Version 8](#version-8)
   - [Version 6](#version-6)
     - [Platform Support](#platform-support)
     - [Styles](#styles)
