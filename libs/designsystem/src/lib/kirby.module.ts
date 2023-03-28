@@ -73,7 +73,7 @@ import { ReorderListComponent } from '@kirbydesign/designsystem/reorder-list';
 
 import { ToastController, ToastHelper } from '@kirbydesign/designsystem/toast';
 import { BreakpointHelperService, GridComponent } from '@kirbydesign/designsystem/grid';
-
+import { ActionGroupComponent } from '@kirbydesign/designsystem/action-group';
 import { MenuComponent } from '@kirbydesign/designsystem/menu';
 import { TabNavigationModule } from '@kirbydesign/designsystem/tab-navigation';
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
@@ -87,6 +87,7 @@ const exportedDeclarations = [ModalRouterLinkDirective];
 const declarations = [...exportedDeclarations, KeyHandlerDirective];
 
 const standaloneComponents = [
+  ActionGroupComponent,
   GridComponent,
   ItemGroupComponent,
   ModalCompactWrapperComponent,

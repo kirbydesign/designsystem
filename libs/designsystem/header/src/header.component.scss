@@ -2,18 +2,74 @@
 @use '@kirbydesign/core/src/scss/utils';
 
 :host {
-  width: 100%;
-  padding: utils.size('s') utils.size('s') utils.size('l');
   display: flex;
   flex-direction: column;
+  margin-top: utils.size('s');
+  margin-bottom: utils.size('l');
 
   @include utils.media('>=medium') {
-    padding-top: utils.size('m');
+    margin-top: utils.size('m');
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 100%;
+  overflow: hidden;
+
+  @include utils.media('>=medium') {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: utils.size('s');
+  }
+}
+
+:host(.centered) {
+  align-items: center;
+
+  .title-container {
+    align-items: center;
+    text-align: center;
   }
 
-  &.centered {
-    align-items: center;
+  @include utils.media('>=medium') {
+    .container {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr);
+      align-self: stretch;
+    }
+
+    .title-container {
+      grid-column-start: 2;
+    }
   }
+}
+
+.actions {
+  // kirby-button already has 4px horizontal margin, so add additional 4px to get 8px in total:
+  margin: 0 utils.size('xxxs');
+
+  @include utils.media('<medium') {
+    margin-top: utils.size('m');
+
+    // Hide actions on small screens when not emphasized:
+    &:not(.emphasize) {
+      display: none;
+    }
+  }
+}
+
+.avatar,
+.flag,
+.title-container {
+  padding: 0 utils.size('s');
+}
+
+.title-container {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .avatar {
@@ -26,15 +82,29 @@
 
 .title {
   margin-bottom: utils.size('xxxxs');
+
+  &.hidden {
+    visibility: hidden;
+    white-space: nowrap;
+    max-width: 100%;
+    overflow: hidden;
+
+    @include utils.media('<medium') {
+      display: none;
+    }
+  }
 }
 
 .value {
+  max-width: 100%;
   margin-bottom: utils.size('xxxs');
 }
 
 .value-unit {
   font-weight: initial;
   color: utils.get-text-color('semi-dark');
+  margin-left: utils.size('xxxs');
+  font-size: 50%;
 }
 
 .subtitle1,
@@ -43,4 +113,8 @@
   white-space: nowrap;
   overflow: hidden;
   max-width: 100%;
+}
+
+.custom-section {
+  margin-top: utils.size('xxs');
 }

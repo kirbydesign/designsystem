@@ -1,5 +1,37 @@
 @use '@kirbydesign/core/src/scss/utils';
 
+:host(.full-size) {
+  iframe {
+    border-radius: utils.size('xs');
+  }
+
+  .docs-demo-device {
+    display: flex;
+    position: relative;
+    min-height: 500px;
+    border: 1px solid #ddd;
+    border-radius: utils.size('xs');
+    margin-bottom: utils.size('xs');
+  }
+
+  .docs-demo-device.ios .docs-demo-device-ios-notch,
+  .docs-demo-device.ios figure::after {
+    display: none;
+  }
+
+  figure {
+    display: contents;
+  }
+}
+
+.toggle-wrapper {
+  display: flex;
+  align-items: center;
+  gap: utils.size('xs');
+  justify-content: flex-end;
+  padding-bottom: utils.size('xs');
+}
+
 /* stylelint-disable custom-property-pattern */
 .container {
   text-align: center;
@@ -17,7 +49,7 @@
   border-radius: 32px;
   box-shadow: 0 0 0 14px #090a0d, 0 0 0 17px #9fa3a8, 0 0 34px 17px rgb(0 0 0 / 20%);
   height: 0;
-  margin: 0;
+  margin: 0 auto;
   max-width: 320px;
   min-width: 320px;
   overflow: hidden;

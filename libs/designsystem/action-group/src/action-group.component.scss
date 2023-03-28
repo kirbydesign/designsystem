@@ -1,0 +1,41 @@
+@use '@kirbydesign/core/src/scss/utils';
+
+:host {
+  display: flex;
+  position: relative;
+  overflow: hidden;
+}
+
+:host(.align-end) {
+  justify-content: flex-end;
+
+  .hidden-layer {
+    order: -1; // Move hidden layer to left of buttons and more menu
+  }
+}
+
+.hidden-layer {
+  display: none;
+  visibility: hidden;
+}
+
+/* Hidden layer should only take up space when the action group is resizable */
+:host(.is-resizeable) {
+  .hidden-layer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+}
+
+kirby-dropdown {
+  margin: 4px;
+  display: none;
+  z-index: 1;
+}
+
+:host(.is-collapsed) {
+  kirby-dropdown {
+    display: inline-block;
+  }
+}

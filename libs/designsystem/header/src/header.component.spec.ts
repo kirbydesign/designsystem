@@ -1,11 +1,14 @@
 import { createHostFactory, Spectator } from '@ngneat/spectator';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
+import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { FlagComponent } from 'flag/src';
 import { AvatarComponent } from 'avatar/src';
 import { HeaderModule } from './header.module';
 import { HeaderComponent } from './header.component';
+
+const { fontSize } = DesignTokenHelper;
 
 describe('HeaderComponent', () => {
   let createHost;
@@ -33,7 +36,7 @@ describe('HeaderComponent', () => {
 
       expect(titleElement).toContainText(title);
       expect(titleElement).toHaveComputedStyle({
-        'font-size': '32px',
+        'font-size': fontSize('xl'),
       });
     });
 
@@ -42,7 +45,7 @@ describe('HeaderComponent', () => {
 
       expect(subtitle1Element).toContainText(subtitle1);
       expect(subtitle1Element).toHaveComputedStyle({
-        'font-size': '14px',
+        'font-size': fontSize('s'),
       });
     });
 
@@ -51,7 +54,7 @@ describe('HeaderComponent', () => {
 
       expect(subtitle2Element).toContainText(subtitle2);
       expect(subtitle2Element).toHaveComputedStyle({
-        'font-size': '14px',
+        'font-size': fontSize('s'),
       });
     });
   });
@@ -74,7 +77,7 @@ describe('HeaderComponent', () => {
 
       expect(keyElement).toContainText(title);
       expect(keyElement).toHaveComputedStyle({
-        'font-size': '18px',
+        'font-size': fontSize('m'),
       });
     });
     it(`should have correct value`, () => {
@@ -82,7 +85,7 @@ describe('HeaderComponent', () => {
 
       expect(valueElement).toContainText(value);
       expect(valueElement).toHaveComputedStyle({
-        'font-size': '40px',
+        'font-size': fontSize('xxl'),
       });
     });
 
@@ -90,8 +93,10 @@ describe('HeaderComponent', () => {
       const valueUnitElement = spectator.query('.value-unit');
 
       expect(valueUnitElement).toContainText(valueUnit);
+      const valueFontSize = parseInt(fontSize('xxl'));
+      const valueUnitFontSize = valueFontSize * 0.5;
       expect(valueUnitElement).toHaveComputedStyle({
-        'font-size': '16px',
+        'font-size': `${valueUnitFontSize}px`,
       });
     });
   });

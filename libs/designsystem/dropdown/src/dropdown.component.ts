@@ -128,6 +128,15 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   @Input()
   usePopover = false;
 
+  /*
+   * TEMPORARY MORE-MENU
+   * This is an internal and temporary input that allows the dropdown to use the 'more menu'
+   * icon
+   */
+  @HostBinding('class.more-menu')
+  @Input()
+  _isMoreMenu = false;
+
   @HostBinding('attr.tabindex')
   get _tabindex() {
     return this.disabled ? -1 : this.tabindex;

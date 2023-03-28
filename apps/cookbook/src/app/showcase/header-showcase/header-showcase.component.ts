@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HeaderWithActionGroupExampleComponent } from '~/app/examples/header-example/examples/action-group';
 import {
   ApiDescriptionProperty,
   ApiDescriptionPropertyColumns,
@@ -11,6 +12,8 @@ import {
   preserveWhitespaces: true,
 })
 export class HeaderShowcaseComponent {
+  actionGroupTemplate: string = HeaderWithActionGroupExampleComponent.template;
+
   properties: ApiDescriptionProperty[] = [
     {
       name: 'title',
@@ -51,9 +54,9 @@ export class HeaderShowcaseComponent {
     {
       name: 'titleMaxLines',
       description:
-        'A number that describes that allowed amount of lines in the title before truncating the value.',
+        'The allowed number of lines in the title. The text will be scaled from h1 -> h3 to fit and otherwise truncated.',
       type: ['number'],
-      defaultValue: '2',
+      defaultValue: '',
     },
   ];
 

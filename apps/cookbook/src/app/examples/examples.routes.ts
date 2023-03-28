@@ -79,6 +79,7 @@ import { DropdownExampleComponent } from './dropdown-example/dropdown-example.co
 import { DataTableExampleComponent } from './data-table-example/data-table-example.component';
 import { HeaderExampleComponent } from './header-example/header-example.component';
 import { NestedModalsV2ExampleComponent } from './modal-v2-example/nested-modals/nested-modals-v2-example.component';
+import { HeaderWithActionGroupExampleComponent } from './header-example/examples/action-group';
 import { MenuExampleComponent } from './menu-example/menu-example.component';
 
 export const routes: Routes = [
@@ -173,6 +174,10 @@ export const routes: Routes = [
           {
             path: 'content-width',
             component: PageContentWidthExampleComponent,
+          },
+          {
+            path: 'header-and-action-group',
+            component: HeaderWithActionGroupExampleComponent,
           },
         ],
       },
