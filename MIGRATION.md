@@ -13,14 +13,14 @@ This document provides information about breaking changes and their migrations f
 As of Kirby version 8.3.0 a number of enhancements have been introduced, improving the look and feel of components like Page and Modal
 while also providing a better user experience on larger screen sizes (e.g. desktop).
 
-As these features are direct replacements of existing functionality, they will be marked as deprecated from v9, and finally removed in v10.
+As these features are direct replacements of existing functionality, the existing functionality will be marked as deprecated from v9, and finally removed in v10.
 To gain the benefit of the improvements we strongly encourage consumers to migrate to the new features as soon as possible.
 
 <br>
 <h3 id="components-v8-3">Components</h3>
 
 <h4 id="menu-v8-3">Menu</h4>
-Menu replaces Action Sheet to provide a better experience across platforms and screen sizes. Menu is a new component that renders a button, that acts as a trigger for showing / hiding a popover menu. The menu is used declaratively in markup, to simplify usage, and is no longer instantiated through the modalController like the old Action Sheet.
+Menu replaces Action Sheet to provide a better experience across platforms and screen sizes. Menu is a new component that renders a button that acts as a trigger for showing / hiding a popover menu. The menu is used declaratively in markup to simplify usage and is no longer instantiated through the modalController like the Action Sheet.
 
 <br>
 
