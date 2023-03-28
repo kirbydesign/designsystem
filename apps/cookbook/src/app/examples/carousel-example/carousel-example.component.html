@@ -12,21 +12,15 @@
         </option>
       </select>
 
-  <!-------------------- EXAMPLE 1 ---------------------->
+      <kirby-checkbox
+        (checkedChange)="onCheckedChange($event)"
+        text="Ignore kirby page padding"
+        [checked]="ignorePagePadding"
+      ></kirby-checkbox>
+    </fieldset>
 
-  <h2>Example 1 (5 items)</h2>
-  <kirby-carousel
-    [config]="configExample1"
-    [prevButtonClass]="'example1-prev'"
-    [nextButtonClass]="'example1-next'"
-    [paginationClass]="'example1-pagination'"
-  >
-    <kirby-carousel-slide>
-      <kirby-card [hasPadding]="true">
-        <kirby-card-header
-          [title]="'Flagged card header'"
-          [flagged]="'success'"
-        ></kirby-card-header>
+    <div class="example">
+      <h1>Carousel demo</h1>
 
     <div class="example">
       <h1>Carousel demo</h1>
