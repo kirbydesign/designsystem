@@ -134,6 +134,8 @@ $button-width: (
   --kirby-button-padding-left: #{utils.size('m')};
   --kirby-button-padding-right: #{utils.size('m')};
 
+  flex-shrink: 0;
+
   @include utils.accessible-target-size;
   @include interaction-state.apply-focus-visible;
   @include interaction-state.initialize-layer;
@@ -302,9 +304,8 @@ $button-width: (
 // Temp fix for https://github.com/angular/angular-cli/issues/13854#issuecomment-470831308
 
 /* clean-css ignore:start */
-:host-context(ion-toolbar ion-buttons) {
+:host-context(ion-toolbar ion-buttons.legacy-actions) {
   font-size: utils.font-size('s');
-  margin: 0;
   height: utils.size('xl');
 
   &.icon-only {
@@ -314,7 +315,7 @@ $button-width: (
     &.attention-level1,
     &.attention-level2,
     &.attention-level3 {
-      @include button-no-decoration;
+      @include button-attentionlevel3;
     }
   }
 }
@@ -354,4 +355,13 @@ $button-width: (
       @include interaction-state.apply-active('s');
     }
   }
+}
+
+/*
+* TEMPORARY MORE-MENU
+* Button content should not be space-between when only an icon is slotted 
+* inside the dropdown
+*/
+:host-context(kirby-dropdown.more-menu) {
+  justify-content: center;
 }

@@ -133,6 +133,7 @@ ion-back-button {
   @include interaction-state.apply-active-ionic('s');
 
   --color: #{utils.get-color('black')};
+  --background: #{utils.get-color('white')};
   --icon-font-size: 24px;
 
   $button-size: utils.size('xl');

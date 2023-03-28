@@ -13,10 +13,20 @@
         <ng-container *ngTemplateOutlet="toolbarTitleTemplate"></ng-container>
       </div>
     </ion-title>
-    <ion-buttons class="hide" slot="primary" [class.fade-in]="!!stickyActionsTemplate">
+    <ion-buttons
+      *ngIf="!!header?.actionsTemplate"
+      class="hide"
+      slot="primary"
+      [class.fade-in]="toolbarActionsVisible"
+    >
+      <ng-container
+        *ngTemplateOutlet="header?.actionsTemplate; injector: toolbarActionGroupInjector"
+      ></ng-container>
+    </ion-buttons>
+    <ion-buttons *ngIf="!!stickyActionsTemplate" class="legacy-actions" slot="primary">
       <ng-container *ngTemplateOutlet="stickyActionsTemplate"></ng-container>
     </ion-buttons>
-    <ion-buttons class="hide" slot="secondary" [class.fade-in]="!!fixedActionsTemplate">
+    <ion-buttons *ngIf="!!fixedActionsTemplate" class="legacy-actions" slot="secondary">
       <ng-container *ngTemplateOutlet="fixedActionsTemplate"></ng-container>
     </ion-buttons>
   </ion-toolbar>
@@ -32,7 +42,7 @@
   </ion-refresher>
 
   <!-- Page header -->
-  <div class="page-header-container" *ngIf="hasPageTitle">
+  <div class="page-header-container" *ngIf="hasPageTitle && !header">
     <div
       class="page-header"
       [ngClass]="{
@@ -54,6 +64,11 @@
         ></ng-container>
       </div>
     </div>
+  </div>
+
+  <!-- Header -->
+  <div class="page-header-container" *ngIf="header">
+    <ng-content select="kirby-header"></ng-content>
   </div>
 
   <!--  Sticky content -->

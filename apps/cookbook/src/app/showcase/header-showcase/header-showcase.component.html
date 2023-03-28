@@ -57,10 +57,128 @@
       add a
       <code>kirby-avatar</code>
       in the header which will position the avatar correctly and manage spacing.
+      <br />
+      <em>
+        <strong>Please note:</strong>
+        This will change the layout to centered.
+      </em>
     </p>
     <cookbook-example-viewer [html]="avatarExample.template">
       <div class="header-example">
         <cookbook-header-example-avatar #avatarExample></cookbook-header-example-avatar>
+      </div>
+    </cookbook-example-viewer>
+  </div>
+
+  <div class="header-example-container">
+    <h2>Scaling of title</h2>
+    <p>
+      Titles are default rendered as
+      <code>h1</code>
+      .
+    </p>
+    <p>
+      It's possible to enable auto-scaling of the header title. This will scale both font-size &
+      line-height between h1 -> h3 depending on amount of text and maximum number of lines
+      configured. If the text cannot fit within the configured number of lines it will be truncated
+      using an ellipsis (
+      <code>&mldr;</code>
+      ).
+    </p>
+    <p>
+      This can be configured by setting the
+      <code>titleMaxLines="NUMBER OF MAXIMUM LINES"</code>
+      attribute of
+      <code>kirby-header</code>
+      .
+    </p>
+    <cookbook-example-viewer [html]="titleScalingExample.template">
+      <div class="header-example">
+        <cookbook-header-example-title-scaling
+          #titleScalingExample
+        ></cookbook-header-example-title-scaling>
+      </div>
+    </cookbook-example-viewer>
+  </div>
+
+  <div class="header-example-container">
+    <h2>Action Group</h2>
+    <p>
+      An action group can be included in the header area and will by default always be shown in the
+      toolbar on small screens. The actions place themselves in the toolbar to the right. It is
+      designed to optimize the screen real estate for the content area on mobile phones.
+    </p>
+
+    <p>
+      On larger screen sizes the action group starts out in the header area, before moving to the
+      toolbar when the page is scrolled past the action group.
+    </p>
+
+    <p>
+      Actions are supplied to the Action Group via slotted buttons. Only two actions are shown in
+      the toolbar, and if more that two actions are supplied, one action and a more menu button will
+      be shown, while the remaining actions are collapsed into the more menu.
+    </p>
+    <p>
+      All button interactions are expected to happen via a click-listener of type
+      <code>(click)="someFunction()"</code>
+      so the Action Group can make sure to fire the corresponding function for collapsed actions
+      inside the more menu.
+    </p>
+
+    <cookbook-iphone
+      viewMode="full-size"
+      [showViewModeToggle]="true"
+      src="/examples/page/header-and-action-group"
+      showExternalLink="true"
+    ></cookbook-iphone>
+
+    <cookbook-example-viewer [html]="actionGroupTemplate"></cookbook-example-viewer>
+  </div>
+
+  <div class="header-example-container">
+    <h2>Header Action Group</h2>
+
+    <p>
+      <em>
+        <strong>Please note:</strong>
+        A follow-up release will soon allow the action group to be placed in the header area on
+        small screens and expand beyond two options when space permits for all screen sizes. This
+        additional feature can simply be enabled on examples such as the one above once it lands.
+      </em>
+    </p>
+  </div>
+
+  <div class="header-example-container">
+    <h2>Custom Section</h2>
+    <p>
+      An optional custom section can be added to the header, e.g. to add more subtitles, trends or
+      status in relation to the key value or title.
+    </p>
+    <p>
+      Decorate your custom section with the
+      <code>*kirbyHeaderCustomSection</code>
+      directive, which will position the custom section correctly and manage spacing as shown in the
+      example below:
+    </p>
+    <cookbook-example-viewer
+      [html]="customSectionExample.template"
+      [css]="customSectionExample.styles"
+    >
+      <div class="header-example">
+        <cookbook-header-example-custom-section
+          #customSectionExample
+        ></cookbook-header-example-custom-section>
+      </div>
+    </cookbook-example-viewer>
+  </div>
+
+  <div class="header-example-container">
+    <h2>Combined</h2>
+    <p>This example shows all the above options combined:</p>
+    <cookbook-example-viewer [html]="combinedExample.template" [css]="combinedExample.styles">
+      <div class="header-example">
+        <cookbook-header-example-combined #combinedExample></cookbook-header-example-combined>
       </div>
     </cookbook-example-viewer>
   </div>
