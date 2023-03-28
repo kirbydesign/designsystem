@@ -63,7 +63,9 @@ const contentScrolledOffsetInPixels = 4;
 type stickyConfig = { sticky: boolean };
 type fixedConfig = { fixed: boolean };
 
-export const PAGE_BACK_BUTTON_CONFIG = new InjectionToken<PageBackButtonConfig>('');
+export const PAGE_BACK_BUTTON_CONFIG = new InjectionToken<PageBackButtonConfig>(
+  'page-back-button.config'
+);
 
 export interface PageBackButtonConfig {
   navigateBack: (

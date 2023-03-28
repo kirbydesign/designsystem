@@ -187,6 +187,24 @@ export class PageShowcaseComponent {
     },
   ];
 
+  public injectionTokenExample = `export const MY_BACK_BUTTON_CONFIG: PageBackButtonConfig = {
+  navigateBack(routerOutlet: IonRouterOutlet, navCtrl: NavController, defaultHref: string): void {
+    if (routerOutlet?.canGoBack()) {
+      // custom logic could go here
+      routerOutlet.pop()
+    }
+    else {
+      // or here
+      navCtrl.navigateBack(defaultHref);
+    }
+  }
+}
+
+// then supplied like this in providers array 
+
+{ provide: PAGE_BACK_BUTTON_CONFIG, useValue: MY_BACK_BUTTON_CONFIG },
+`;
+
   public pageHtml = `<kirby-page\n (enter)="startSubscription()"\n (leave)="stopSubscription()"\n></kirby-page>`;
   public pageComponent = `@Component({
  selector: 'app-a-page',
