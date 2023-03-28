@@ -146,10 +146,6 @@ $button-width: (
     align-items: inherit;
     justify-content: inherit;
     padding-inline: var(--kirby-button-padding-left) var(--kirby-button-padding-right);
-
-    &.attention-level3 {
-      box-shadow: var(--kirby-inputs-elevation);
-    }
   }
 
   font-family: var(--kirby-font-family);
@@ -236,6 +232,10 @@ $button-width: (
 
   &.attention-level3 {
     @include button-attentionlevel3;
+
+    .state-layer {
+      box-shadow: var(--kirby-inputs-elevation);
+    }
   }
 
   &[expand='block'] {
