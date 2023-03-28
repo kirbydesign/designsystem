@@ -36,7 +36,7 @@ describe('HeaderComponent', () => {
 
       expect(titleElement).toContainText(title);
       expect(titleElement).toHaveComputedStyle({
-        'font-size': '32px',
+        'font-size': fontSize('xl'),
       });
     });
 
@@ -45,7 +45,7 @@ describe('HeaderComponent', () => {
 
       expect(subtitle1Element).toContainText(subtitle1);
       expect(subtitle1Element).toHaveComputedStyle({
-        'font-size': '14px',
+        'font-size': fontSize('s'),
       });
     });
 
@@ -54,7 +54,7 @@ describe('HeaderComponent', () => {
 
       expect(subtitle2Element).toContainText(subtitle2);
       expect(subtitle2Element).toHaveComputedStyle({
-        'font-size': '14px',
+        'font-size': fontSize('s'),
       });
     });
   });
@@ -77,7 +77,7 @@ describe('HeaderComponent', () => {
 
       expect(keyElement).toContainText(title);
       expect(keyElement).toHaveComputedStyle({
-        'font-size': '18px',
+        'font-size': fontSize('m'),
       });
     });
     it(`should have correct value`, () => {
@@ -85,7 +85,7 @@ describe('HeaderComponent', () => {
 
       expect(valueElement).toContainText(value);
       expect(valueElement).toHaveComputedStyle({
-        'font-size': '40px',
+        'font-size': fontSize('xxl'),
       });
     });
 
