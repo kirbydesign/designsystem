@@ -36,7 +36,7 @@ export class HeaderCustomSectionDirective {}
 export class HeaderComponent implements AfterContentInit, OnInit {
   @HostBinding('class.centered')
   @Input()
-  centered: boolean;
+  centered?: boolean;
 
   @Input() titleMaxLines: number;
   @Input() emphasizeActions = false;
