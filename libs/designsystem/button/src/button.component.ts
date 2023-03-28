@@ -21,6 +21,8 @@ export enum ButtonSize {
   LG = 'lg',
 }
 
+export type AttentionLevel = '1' | '2' | '3' | '4';
+
 const ATTENTION_LEVEL_4_DEPRECATION_WARNING =
   'Deprecation warning: The "kirby-button" support for using input property "attentionLevel" with the value "4" will be removed in a future release of Kirby designsystem. While deprecated, all attention-level 4 buttons will be rendered as attention-level 3.';
 
@@ -40,7 +42,7 @@ export class ButtonComponent implements AfterContentInit {
   isAttentionLevel2: boolean;
   @HostBinding('class.attention-level3')
   isAttentionLevel3: boolean;
-  @Input() set attentionLevel(level: '1' | '2' | '3' | '4') {
+  @Input() set attentionLevel(level: AttentionLevel) {
     this.isAttentionLevel1 = level === '1';
     this.isAttentionLevel2 = level === '2';
     this.isAttentionLevel3 = level === '3' || level === '4';

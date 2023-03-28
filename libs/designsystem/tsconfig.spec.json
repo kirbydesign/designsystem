@@ -26,6 +26,7 @@
       "@kirbydesign/designsystem/slide": ["slide/index.ts"],
       "@kirbydesign/designsystem/toggle-button": ["toggle-button/index.ts"],
       "@kirbydesign/designsystem/tabs": ["tabs/index.ts"],
+      "@kirbydesign/designsystem/tab-navigation": ["tab-navigation/index.ts"],
       "@kirbydesign/designsystem/slide-button": ["slide-button/index.ts"],
       "@kirbydesign/designsystem/range": ["range/index.ts"],
       "@kirbydesign/designsystem/popover": ["popover/index.ts"],
@@ -56,7 +57,8 @@
       "@kirbydesign/designsystem/reorder-list": ["reorder-list/index.ts"],
       "@kirbydesign/designsystem/toast": ["toast/index.ts"],
       "@kirbydesign/designsystem/alert-experimental": ["alert-experimental/index.ts"],
-      "@kirbydesign/designsystem/action-group": ["action-group/index.ts"]
+      "@kirbydesign/designsystem/action-group": ["action-group/index.ts"],
+      "@kirbydesign/designsystem/menu": ["menu/index.ts"]
     }
   },
   "files": ["test.ts"],

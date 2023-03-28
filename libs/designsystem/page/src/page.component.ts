@@ -249,7 +249,7 @@ export class PageComponent
   toolbarTitleVisible: boolean;
   toolbarActionsVisible: boolean;
   isContentScrolled: boolean;
-  isStickyContentPinned: boolean;
+  isStickyContentPinned = false;
 
   fitHeadingConfig: FitHeadingConfig;
 
@@ -617,8 +617,10 @@ export class PageComponent
     };
 
     const callback: IntersectionObserverCallback = (entries) => {
-      // The sticky content is pinned when it doesn't fully intersect the viewport
-      this.isStickyContentPinned = !entries[0].isIntersecting;
+      if (this.isStickyContentPinned !== !entries[0].isIntersecting) {
+        this.isStickyContentPinned = !this.isStickyContentPinned;
+        this.changeDetectorRef.detectChanges();
+      }
     };
     return new IntersectionObserver(callback, options);
   }

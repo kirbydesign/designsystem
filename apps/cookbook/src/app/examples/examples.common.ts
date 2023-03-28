@@ -34,6 +34,7 @@ import { PageFixedFooterTabExampleComponent } from './page-example/fixed-footer-
 import { PageFixedTitleAndActionsExampleComponent } from './page-example/fixed-title-and-actions/page-fixed-title-and-actions-example.component';
 import { PageContentWidthExampleComponent } from './page-example/content-width/page-content-width-example.component';
 import { PageSimpleExampleComponent } from './page-example/simple/page-simple-example.component';
+import { PageTabNavExampleComponent } from './page-example/tab-navigation/page-tab-nav-example.component';
 import { ProgressCircleExampleComponent } from './progress-circle-example/progress-circle-example.component';
 import { ReorderListExampleComponent } from './reorder-list-example/reorder-list-example.component';
 import { SectionHeaderExampleComponent } from './section-header-example/section-header-example.component';
@@ -51,6 +52,7 @@ import { DropdownExampleComponent } from './dropdown-example/dropdown-example.co
 import { DataTableExampleComponent } from './data-table-example/data-table-example.component';
 import { LoadingOverlayServiceExampleComponent } from './loading-overlay-example/service/loading-overlay-service-example.component';
 import { HeaderWithActionGroupExampleComponent } from './header-example/examples/action-group';
+import { MenuExampleComponent } from './menu-example/menu-example.component';
 
 export const COMPONENT_DECLARATIONS: any[] = [
   ExamplesComponent,
@@ -87,6 +89,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   PageFitHeadingExampleComponent,
   PageFixedTitleAndActionsExampleComponent,
   HeaderWithActionGroupExampleComponent,
+  PageTabNavExampleComponent,
   TabExampleComponent,
   PageFixedFooterTabsExampleComponent,
   PageFixedFooterTabExampleComponent,
@@ -107,4 +110,5 @@ export const COMPONENT_DECLARATIONS: any[] = [
   SectionHeaderExampleComponent,
   ListExperimentalExampleComponent,
   DataTableExampleComponent,
+  MenuExampleComponent,
 ];

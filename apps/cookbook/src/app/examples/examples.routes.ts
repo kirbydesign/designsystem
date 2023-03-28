@@ -57,6 +57,7 @@ import { PageFixedFooterTabExampleComponent } from './page-example/fixed-footer-
 import { PageFixedTitleAndActionsExampleComponent } from './page-example/fixed-title-and-actions/page-fixed-title-and-actions-example.component';
 import { PageContentWidthExampleComponent } from './page-example/content-width/page-content-width-example.component';
 import { PageSimpleExampleComponent } from './page-example/simple/page-simple-example.component';
+import { PageTabNavExampleComponent } from './page-example/tab-navigation/page-tab-nav-example.component';
 import { ProgressCircleExampleComponent } from './progress-circle-example/progress-circle-example.component';
 import { RadioExampleComponent } from './radio-example/radio-example.component';
 import { RangeExampleComponent } from './range-example/range-example.component';
@@ -79,8 +80,8 @@ import { DataTableExampleComponent } from './data-table-example/data-table-examp
 import { HeaderExampleComponent } from './header-example/header-example.component';
 import { NestedModalsV2ExampleComponent } from './modal-v2-example/nested-modals/nested-modals-v2-example.component';
 import { HeaderWithActionGroupExampleComponent } from './header-example/examples/action-group';
+import { MenuExampleComponent } from './menu-example/menu-example.component';
 
-VirtualScrollListExampleComponent;
 export const routes: Routes = [
   {
     path: '',
@@ -161,6 +162,10 @@ export const routes: Routes = [
           {
             path: 'advanced',
             component: PageAdvancedExampleComponent,
+          },
+          {
+            path: 'tab-navigation',
+            component: PageTabNavExampleComponent,
           },
           {
             path: 'pull-to-refresh',
@@ -523,7 +528,15 @@ export const routes: Routes = [
     component: DataTableExampleComponent,
   },
   {
+    path: 'menu',
+    component: MenuExampleComponent,
+  },
+  {
     path: 'header',
     component: HeaderExampleComponent,
+  },
+  {
+    path: 'menu',
+    component: MenuExampleComponent,
   },
 ];
