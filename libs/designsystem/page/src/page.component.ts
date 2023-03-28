@@ -12,6 +12,7 @@ import {
   HostBinding,
   HostListener,
   Inject,
+  InjectionToken,
   Injector,
   Input,
   NgZone,
@@ -28,7 +29,15 @@ import {
   ViewChild,
 } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router, RouterEvent } from '@angular/router';
-import { IonBackButtonDelegate, IonContent, IonFooter, IonHeader } from '@ionic/angular';
+
+import {
+  IonBackButtonDelegate,
+  IonContent,
+  IonFooter,
+  IonHeader,
+  IonRouterOutlet,
+  NavController,
+} from '@ionic/angular';
 import { ScrollDetail } from '@ionic/core';
 import { selectedTabClickEvent, TabsComponent } from '@kirbydesign/designsystem/tabs';
 import { Observable, Subject } from 'rxjs';
@@ -54,6 +63,16 @@ const contentScrolledOffsetInPixels = 4;
 
 type stickyConfig = { sticky: boolean };
 type fixedConfig = { fixed: boolean };
+
+export const PAGE_BACK_BUTTON_OVERRIDE = new InjectionToken<PageBackButtonOverride>(
+  'page-back-button-override'
+);
+
+export type PageBackButtonOverride = (
+  routerOutlet: IonRouterOutlet,
+  navCtrl: NavController,
+  defaultBackHref: string
+) => void;
 
 /**
  * Event emitted when "pull-to-refresh" begins.
@@ -294,7 +313,16 @@ export class PageComponent
     private zone: NgZone,
     private modalNavigationService: ModalNavigationService,
     private resizeObserverService: ResizeObserverService,
-    @Optional() @SkipSelf() private tabsComponent: TabsComponent
+
+    @Optional() @SkipSelf() private tabsComponent: TabsComponent,
+    @Optional()
+    @Inject(PAGE_BACK_BUTTON_OVERRIDE)
+    private backButtonOverride: PageBackButtonOverride,
+    @Optional()
+    private routerOutlet: IonRouterOutlet,
+    @Optional()
+    private navCtrl: NavController
+    
   ) {}
 
   private contentReadyPromise: Promise<void>;
@@ -445,6 +473,14 @@ export class PageComponent
   }
 
   private interceptBackButtonClicksSetup() {
+
+    if (this.backButtonOverride) {
+      this.backButtonDelegate.onClick = (event: Event) => {
+        event.preventDefault();
+        this.backButtonOverride(this.routerOutlet, this.navCtrl, this.defaultBackHref);
+      };
+    }
+    
     // Intercept back-button click events, defaulting to the built-in click-handler.
     if (this.backButtonClick.observers.length === 0) {
       this.backButtonClick

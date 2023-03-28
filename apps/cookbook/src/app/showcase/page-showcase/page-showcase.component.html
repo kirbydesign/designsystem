@@ -151,6 +151,26 @@
     .
   </p>
 
+  <h4>Custom back button navigation</h4>
+
+  <p>
+    In rare use cases where it might be necessary to take complete control over the back button
+    behavior Kirby Page exposes an injection token for just this.
+  </p>
+  <p>
+    When the token is provided the supplied
+    <code>PageBackButtonOverride</code>
+    callback is executed whenever the back button is pressed. Within the method, you will have
+    access to the specific
+    <code>NavController</code>
+    and
+    <code>IonRouterOutlet</code>
+    instances that would otherwise have been called by Kirby Page which can be used for navigation
+    together with any custom logic.
+  </p>
+
+  <cookbook-example-viewer [ts]="injectionTokenExample"></cookbook-example-viewer>
+
   <div class="page-example">
     <div>
       <h2 #simple>Simple Page</h2>

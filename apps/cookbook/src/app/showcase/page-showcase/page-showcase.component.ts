@@ -187,6 +187,22 @@ export class PageShowcaseComponent {
     },
   ];
 
+  public injectionTokenExample = `export const MY_BACK_BUTTON_OVERRIDE: PageBackButtonOverride = (routerOutlet, navCtrl, defaultHref) => {
+    if (routerOutlet?.canGoBack()) {
+      // custom logic could go here
+      routerOutlet.pop()
+    }
+    else {
+      // or here
+      navCtrl.navigateBack(defaultHref);
+  }
+}
+
+// then supplied like this in providers array 
+
+{ provide: PAGE_BACK_BUTTON_OVERRIDE, useValue: MY_BACK_BUTTON_OVERRIDE },
+`;
+
   public pageHtml = `<kirby-page\n (enter)="startSubscription()"\n (leave)="stopSubscription()"\n></kirby-page>`;
   public pageComponent = `@Component({
  selector: 'app-a-page',
