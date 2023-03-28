@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { SpinnerModule } from '@kirbydesign/designsystem/spinner';
 
@@ -18,6 +18,7 @@ import {
   ListItemTemplateDirective,
   ListSectionHeaderDirective,
 } from './list.directive';
+import { ListItemMenuComponent } from './list-item/list-item-menu/list-item-menu.component';
 
 const exportedDeclarations = [
   ListComponent,
@@ -38,9 +39,11 @@ const declarations = [
   ListItemComponent,
 ];
 
+const standaloneComponents = [ListItemMenuComponent];
+
 @NgModule({
   declarations: declarations,
-  imports: [CommonModule, IconModule, IonicModule, SpinnerModule],
+  imports: [CommonModule, IconModule, IonicModule, SpinnerModule, ...standaloneComponents],
   exports: exportedDeclarations,
   providers: [],
 })
