@@ -4,12 +4,11 @@ This document provides information about breaking changes and their migrations f
 
 ## Version 8.3.0
 
-- [Version 8.3.0](#version-8.3.0)
-  - [Components](#components-v8-3)
-    - [Menu](#menu-v8-3)
-    - [Modal](#modal-v8-3)
-    - [Page](#page-v8-3)
-    - [Tab Navigation](#tab-nav-v8-3)
+- [Components](#components-v8-3)
+  - [Menu](#menu-v8-3)
+  - [Modal](#modal-v8-3)
+  - [Page](#page-v8-3)
+  - [Tab Navigation](#tab-nav-v8-3)
 
 As of Kirby version 8.3.0 a number of enhancements have been introduced, improving the look and feel of components like Page and Modal
 while also providing a better user experience on larger screen sizes (e.g. desktop).
