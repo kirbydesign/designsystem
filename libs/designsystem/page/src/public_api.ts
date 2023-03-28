@@ -14,4 +14,3 @@ export { PullToRefreshEvent } from './page.component';
 export { PageStickyContentDirective } from './page.component';
 export { PAGE_BACK_BUTTON_CONFIG } from './page.component';
 export { PageBackButtonConfig } from './page.component';
-export * from './fit-heading/index';
