@@ -1,11 +1,14 @@
 import { createHostFactory, Spectator } from '@ngneat/spectator';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
+import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { FlagComponent } from 'flag/src';
 import { AvatarComponent } from 'avatar/src';
 import { HeaderModule } from './header.module';
 import { HeaderComponent } from './header.component';
+
+const { fontSize } = DesignTokenHelper;
 
 describe('HeaderComponent', () => {
   let createHost;
@@ -90,8 +93,10 @@ describe('HeaderComponent', () => {
       const valueUnitElement = spectator.query('.value-unit');
 
       expect(valueUnitElement).toContainText(valueUnit);
+      const valueFontSize = parseInt(fontSize('xxl'));
+      const valueUnitFontSize = valueFontSize * 0.5;
       expect(valueUnitElement).toHaveComputedStyle({
-        'font-size': '16px',
+        'font-size': `${valueUnitFontSize}px`,
       });
     });
   });
