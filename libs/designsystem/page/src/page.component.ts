@@ -518,7 +518,7 @@ export class PageComponent
     }
 
     // Run outside Angular to prevent unnecessary triggering change detection
-    // and - under certain conditions - an infinete loop when called within ngAfterContentChecked:
+    // and - under certain conditions - an infinite loop when called within ngAfterContentChecked:
     this.zone.runOutsideAngular(() => {
       this.whenContentReady().then(() => {
         const titleElementRef = this.pageTitle || this.header?.titleElement;
@@ -578,7 +578,7 @@ export class PageComponent
     }
 
     // Run outside Angular to prevent unnecessary triggering change detection
-    // and - under certain conditions - an infinete loop when called within ngAfterContentChecked:
+    // and - under certain conditions - an infinite loop when called within ngAfterContentChecked:
     this.zone.runOutsideAngular(() => {
       this.whenContentReady().then(() => {
         if (this.header?.actionsElement?.nativeElement) {
