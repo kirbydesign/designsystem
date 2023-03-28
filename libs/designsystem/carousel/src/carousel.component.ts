@@ -17,6 +17,7 @@ export class CarouselComponent implements AfterViewInit {
   @Input() prevButtonClass: string;
   @Input() nextButtonClass: string;
   @Input() paginationClass: string;
+  @Input() noPadding: boolean;
 
   ngAfterViewInit() {
     const defaultConfig: SwiperOptions = {

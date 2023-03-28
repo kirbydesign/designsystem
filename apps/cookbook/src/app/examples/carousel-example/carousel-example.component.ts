@@ -7,6 +7,37 @@ import { CarouselConfig } from '@kirbydesign/designsystem/carousel';
   styleUrls: ['./carousel-example.component.scss'],
 })
 export class CarouselExampleComponent {
+  maxWidth: string = 'full';
+
+  maxWidthOptions = [
+    {
+      text: 'default',
+      value: 'default',
+    },
+    {
+      text: 'standard',
+      value: 'standard',
+    },
+    {
+      text: 'optimized',
+      value: 'optimized',
+    },
+    {
+      text: 'full',
+      value: 'full',
+    },
+  ];
+
+  onMaxWidthChange(value) {
+    this.maxWidth = value;
+  }
+
+  ignorePagePadding: boolean = false;
+
+  onCheckedChange($event) {
+    this.ignorePagePadding = $event;
+  }
+
   configExample1: CarouselConfig = {
     slidesPerView: 1.2,
     centeredSlides: true,

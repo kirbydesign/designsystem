@@ -41,3 +41,7 @@
 swiper-container {
   position: static;
 }
+
+.no-padding {
+  margin-inline: calc(-1 * var(--padding-start)) calc(-1 * var(--padding-end));
+}

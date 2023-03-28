@@ -1,4 +1,4 @@
-<div class="kirby-carousel">
+<div class="kirby-carousel" [ngClass]="noPadding ? 'no-padding' : ''">
   <swiper-container init="false" #swiperContainer>
     <ng-content></ng-content>
   </swiper-container>

@@ -1,354 +1,387 @@
-<div class="example">
-  <h1>Carousel demo</h1>
+<kirby-page [maxWidth]="maxWidth">
+  <kirby-page-content>
+    <fieldset>
+      <legend>Max Width</legend>
+      <select (change)="onMaxWidthChange($event.target.value)">
+        <option
+          *ngFor="let option of maxWidthOptions"
+          value="{{ option.value }}"
+          [attr.selected]="maxWidthOptions === option.value ? true : null"
+        >
+          {{ option.text }}
+        </option>
+      </select>
 
-  <!-------------------- EXAMPLE 1 ---------------------->
+      <kirby-checkbox
+        (checkedChange)="onCheckedChange($event)"
+        text="Ignore kirby page padding"
+        [checked]="ignorePagePadding"
+      ></kirby-checkbox>
+    </fieldset>
 
-  <h2>Example 1 (5 items)</h2>
-  <kirby-carousel
-    [config]="configExample1"
-    [prevButtonClass]="'example1-prev'"
-    [nextButtonClass]="'example1-next'"
-    [paginationClass]="'example1-pagination'"
-  >
-    <kirby-carousel-slide>
-      <kirby-card [hasPadding]="true">
-        <kirby-card-header
-          [title]="'Flagged card header'"
-          [flagged]="'success'"
-        ></kirby-card-header>
+    <div class="example">
+      <h1>Carousel demo</h1>
 
-        <strong>A flagged card</strong>
-        <p>
-          This is a card that uses a
-          <em>kirby-card-header</em>
-          with the
-          <code>flagged</code>
-          input set.
-        </p>
-        <p>
-          Possible values for the flagged header are:
-          <br />
-          <code>'success' | 'warning' | 'danger' | 'info'</code>
-        </p>
-        <p>Use the buttons below to see the different options 👇</p>
-      </kirby-card>
-    </kirby-carousel-slide>
-    <kirby-carousel-slide>
-      <kirby-card [hasPadding]="true">
-        <kirby-card-header
-          [title]="'Flagged card header'"
-          [flagged]="'warning'"
-        ></kirby-card-header>
+      <!-------------------- EXAMPLE 1 ---------------------->
 
-        <strong>A flagged card</strong>
-        <p>
-          This is a card that uses a
-          <em>kirby-card-header</em>
-          with the
-          <code>flagged</code>
-          input set.
-        </p>
-        <p>
-          Possible values for the flagged header are:
-          <br />
-          <code>'success' | 'warning' | 'danger' | 'info'</code>
-        </p>
-        <p>Use the buttons below to see the different options 👇</p>
-      </kirby-card>
-    </kirby-carousel-slide>
-    <kirby-carousel-slide>
-      <kirby-card [hasPadding]="true">
-        <kirby-card-header [title]="'Flagged card header'" [flagged]="'danger'"></kirby-card-header>
+      <h2>Example 1 (5 items)</h2>
+      <kirby-carousel
+        [config]="configExample1"
+        [prevButtonClass]="'example1-prev'"
+        [nextButtonClass]="'example1-next'"
+        [paginationClass]="'example1-pagination'"
+        [noPadding]="ignorePagePadding"
+      >
+        <kirby-carousel-slide>
+          <kirby-card [hasPadding]="true">
+            <kirby-card-header
+              [title]="'Flagged card header'"
+              [flagged]="'success'"
+            ></kirby-card-header>
 
-        <strong>A flagged card</strong>
-        <p>
-          This is a card that uses a
-          <em>kirby-card-header</em>
-          with the
-          <code>flagged</code>
-          input set.
-        </p>
-        <p>
-          Possible values for the flagged header are:
-          <br />
-          <code>'success' | 'warning' | 'danger' | 'info'</code>
-        </p>
-        <p>Use the buttons below to see the different options 👇</p>
-      </kirby-card>
-    </kirby-carousel-slide>
+            <strong>A flagged card</strong>
+            <p>
+              This is a card that uses a
+              <em>kirby-card-header</em>
+              with the
+              <code>flagged</code>
+              input set.
+            </p>
+            <p>
+              Possible values for the flagged header are:
+              <br />
+              <code>'success' | 'warning' | 'danger' | 'info'</code>
+            </p>
+            <p>Use the buttons below to see the different options 👇</p>
+          </kirby-card>
+        </kirby-carousel-slide>
+        <kirby-carousel-slide>
+          <kirby-card [hasPadding]="true">
+            <kirby-card-header
+              [title]="'Flagged card header'"
+              [flagged]="'warning'"
+            ></kirby-card-header>
 
-    <kirby-carousel-slide>
-      <kirby-card [hasPadding]="true">
-        <kirby-card-header
-          [title]="'Flagged card header'"
-          [flagged]="'warning'"
-        ></kirby-card-header>
+            <strong>A flagged card</strong>
+            <p>
+              This is a card that uses a
+              <em>kirby-card-header</em>
+              with the
+              <code>flagged</code>
+              input set.
+            </p>
+            <p>
+              Possible values for the flagged header are:
+              <br />
+              <code>'success' | 'warning' | 'danger' | 'info'</code>
+            </p>
+            <p>Use the buttons below to see the different options 👇</p>
+          </kirby-card>
+        </kirby-carousel-slide>
+        <kirby-carousel-slide>
+          <kirby-card [hasPadding]="true">
+            <kirby-card-header
+              [title]="'Flagged card header'"
+              [flagged]="'danger'"
+            ></kirby-card-header>
 
-        <strong>A flagged card</strong>
-        <p>
-          This is a card that uses a
-          <em>kirby-card-header</em>
-          with the
-          <code>flagged</code>
-          input set.
-        </p>
-        <p>
-          Possible values for the flagged header are:
-          <br />
-          <code>'success' | 'warning' | 'danger' | 'info'</code>
-        </p>
-        <p>Use the buttons below to see the different options 👇</p>
-      </kirby-card>
-    </kirby-carousel-slide>
+            <strong>A flagged card</strong>
+            <p>
+              This is a card that uses a
+              <em>kirby-card-header</em>
+              with the
+              <code>flagged</code>
+              input set.
+            </p>
+            <p>
+              Possible values for the flagged header are:
+              <br />
+              <code>'success' | 'warning' | 'danger' | 'info'</code>
+            </p>
+            <p>Use the buttons below to see the different options 👇</p>
+          </kirby-card>
+        </kirby-carousel-slide>
 
-    <kirby-carousel-slide>
-      <kirby-card [hasPadding]="true">
-        <kirby-card-header
-          [title]="'Flagged card header'"
-          [flagged]="'success'"
-        ></kirby-card-header>
+        <kirby-carousel-slide>
+          <kirby-card [hasPadding]="true">
+            <kirby-card-header
+              [title]="'Flagged card header'"
+              [flagged]="'warning'"
+            ></kirby-card-header>
 
-        <strong>A flagged card</strong>
-        <p>
-          This is a card that uses a
-          <em>kirby-card-header</em>
-          with the
-          <code>flagged</code>
-          input set.
-        </p>
-        <p>
-          Possible values for the flagged header are:
-          <br />
-          <code>'success' | 'warning' | 'danger' | 'info'</code>
-        </p>
-        <p>Use the buttons below to see the different options 👇</p>
-      </kirby-card>
-    </kirby-carousel-slide>
-  </kirby-carousel>
+            <strong>A flagged card</strong>
+            <p>
+              This is a card that uses a
+              <em>kirby-card-header</em>
+              with the
+              <code>flagged</code>
+              input set.
+            </p>
+            <p>
+              Possible values for the flagged header are:
+              <br />
+              <code>'success' | 'warning' | 'danger' | 'info'</code>
+            </p>
+            <p>Use the buttons below to see the different options 👇</p>
+          </kirby-card>
+        </kirby-carousel-slide>
 
-  <!-------------------- EXAMPLE 2 ---------------------->
+        <kirby-carousel-slide>
+          <kirby-card [hasPadding]="true">
+            <kirby-card-header
+              [title]="'Flagged card header'"
+              [flagged]="'success'"
+            ></kirby-card-header>
 
-  <h2>Example 2 (3 items)</h2>
-  <kirby-carousel
-    [config]="configExample2"
-    [prevButtonClass]="'example2-prev'"
-    [nextButtonClass]="'example2-next'"
-    [paginationClass]="'example2-pagination'"
-  >
-    <kirby-carousel-slide>
-      <kirby-card [hasPadding]="true">
-        <kirby-card-header
-          [title]="'Flagged card header'"
-          [flagged]="'success'"
-        ></kirby-card-header>
+            <strong>A flagged card</strong>
+            <p>
+              This is a card that uses a
+              <em>kirby-card-header</em>
+              with the
+              <code>flagged</code>
+              input set.
+            </p>
+            <p>
+              Possible values for the flagged header are:
+              <br />
+              <code>'success' | 'warning' | 'danger' | 'info'</code>
+            </p>
+            <p>Use the buttons below to see the different options 👇</p>
+          </kirby-card>
+        </kirby-carousel-slide>
+      </kirby-carousel>
 
-        <strong>A flagged card</strong>
-        <p>
-          This is a card that uses a
-          <em>kirby-card-header</em>
-          with the
-          <code>flagged</code>
-          input set.
-        </p>
-        <p>
-          Possible values for the flagged header are:
-          <br />
-          <code>'success' | 'warning' | 'danger' | 'info'</code>
-        </p>
-        <p>Use the buttons below to see the different options 👇</p>
-      </kirby-card>
-    </kirby-carousel-slide>
-    <kirby-carousel-slide>
-      <kirby-card [hasPadding]="true">
-        <kirby-card-header
-          [title]="'Flagged card header'"
-          [flagged]="'warning'"
-        ></kirby-card-header>
+      <!-------------------- EXAMPLE 2 ---------------------->
 
-        <strong>A flagged card</strong>
-        <p>
-          This is a card that uses a
-          <em>kirby-card-header</em>
-          with the
-          <code>flagged</code>
-          input set.
-        </p>
-        <p>
-          Possible values for the flagged header are:
-          <br />
-          <code>'success' | 'warning' | 'danger' | 'info'</code>
-        </p>
-        <p>Use the buttons below to see the different options 👇</p>
-      </kirby-card>
-    </kirby-carousel-slide>
-    <kirby-carousel-slide>
-      <kirby-card [hasPadding]="true">
-        <kirby-card-header [title]="'Flagged card header'" [flagged]="'danger'"></kirby-card-header>
+      <h2>Example 2 (3 items)</h2>
+      <kirby-carousel
+        [config]="configExample2"
+        [prevButtonClass]="'example2-prev'"
+        [nextButtonClass]="'example2-next'"
+        [paginationClass]="'example2-pagination'"
+      >
+        <kirby-carousel-slide>
+          <kirby-card [hasPadding]="true">
+            <kirby-card-header
+              [title]="'Flagged card header'"
+              [flagged]="'success'"
+            ></kirby-card-header>
 
-        <strong>A flagged card</strong>
-        <p>
-          This is a card that uses a
-          <em>kirby-card-header</em>
-          with the
-          <code>flagged</code>
-          input set.
-        </p>
-        <p>
-          Possible values for the flagged header are:
-          <br />
-          <code>'success' | 'warning' | 'danger' | 'info'</code>
-        </p>
-        <p>Use the buttons below to see the different options 👇</p>
-      </kirby-card>
-    </kirby-carousel-slide>
-  </kirby-carousel>
+            <strong>A flagged card</strong>
+            <p>
+              This is a card that uses a
+              <em>kirby-card-header</em>
+              with the
+              <code>flagged</code>
+              input set.
+            </p>
+            <p>
+              Possible values for the flagged header are:
+              <br />
+              <code>'success' | 'warning' | 'danger' | 'info'</code>
+            </p>
+            <p>Use the buttons below to see the different options 👇</p>
+          </kirby-card>
+        </kirby-carousel-slide>
+        <kirby-carousel-slide>
+          <kirby-card [hasPadding]="true">
+            <kirby-card-header
+              [title]="'Flagged card header'"
+              [flagged]="'warning'"
+            ></kirby-card-header>
 
-  <!-------------------- EXAMPLE 3 ---------------------->
+            <strong>A flagged card</strong>
+            <p>
+              This is a card that uses a
+              <em>kirby-card-header</em>
+              with the
+              <code>flagged</code>
+              input set.
+            </p>
+            <p>
+              Possible values for the flagged header are:
+              <br />
+              <code>'success' | 'warning' | 'danger' | 'info'</code>
+            </p>
+            <p>Use the buttons below to see the different options 👇</p>
+          </kirby-card>
+        </kirby-carousel-slide>
+        <kirby-carousel-slide>
+          <kirby-card [hasPadding]="true">
+            <kirby-card-header
+              [title]="'Flagged card header'"
+              [flagged]="'danger'"
+            ></kirby-card-header>
 
-  <h2>Example 3 (6 items & centered items)</h2>
-  <kirby-carousel
-    [config]="configExample3"
-    [prevButtonClass]="'example3-prev'"
-    [nextButtonClass]="'example3-next'"
-    [paginationClass]="'example3-pagination'"
-  >
-    <kirby-carousel-slide>
-      <kirby-card [hasPadding]="true">
-        <kirby-card-header
-          [title]="'Flagged card header'"
-          [flagged]="'success'"
-        ></kirby-card-header>
+            <strong>A flagged card</strong>
+            <p>
+              This is a card that uses a
+              <em>kirby-card-header</em>
+              with the
+              <code>flagged</code>
+              input set.
+            </p>
+            <p>
+              Possible values for the flagged header are:
+              <br />
+              <code>'success' | 'warning' | 'danger' | 'info'</code>
+            </p>
+            <p>Use the buttons below to see the different options 👇</p>
+          </kirby-card>
+        </kirby-carousel-slide>
+      </kirby-carousel>
 
-        <strong>A flagged card</strong>
-        <p>
-          This is a card that uses a
-          <em>kirby-card-header</em>
-          with the
-          <code>flagged</code>
-          input set.
-        </p>
-        <p>
-          Possible values for the flagged header are:
-          <br />
-          <code>'success' | 'warning' | 'danger' | 'info'</code>
-        </p>
-        <p>Use the buttons below to see the different options 👇</p>
-      </kirby-card>
-    </kirby-carousel-slide>
-    <kirby-carousel-slide>
-      <kirby-card [hasPadding]="true">
-        <kirby-card-header
-          [title]="'Flagged card header'"
-          [flagged]="'warning'"
-        ></kirby-card-header>
+      <!-------------------- EXAMPLE 3 ---------------------->
 
-        <strong>A flagged card</strong>
-        <p>
-          This is a card that uses a
-          <em>kirby-card-header</em>
-          with the
-          <code>flagged</code>
-          input set.
-        </p>
-        <p>
-          Possible values for the flagged header are:
-          <br />
-          <code>'success' | 'warning' | 'danger' | 'info'</code>
-        </p>
-        <p>Use the buttons below to see the different options 👇</p>
-      </kirby-card>
-    </kirby-carousel-slide>
-    <kirby-carousel-slide>
-      <kirby-card [hasPadding]="true">
-        <kirby-card-header [title]="'Flagged card header'" [flagged]="'danger'"></kirby-card-header>
+      <h2>Example 3 (6 items & centered items)</h2>
+      <kirby-carousel
+        [config]="configExample3"
+        [prevButtonClass]="'example3-prev'"
+        [nextButtonClass]="'example3-next'"
+        [paginationClass]="'example3-pagination'"
+      >
+        <kirby-carousel-slide>
+          <kirby-card [hasPadding]="true">
+            <kirby-card-header
+              [title]="'Flagged card header'"
+              [flagged]="'success'"
+            ></kirby-card-header>
 
-        <strong>A flagged card</strong>
-        <p>
-          This is a card that uses a
-          <em>kirby-card-header</em>
-          with the
-          <code>flagged</code>
-          input set.
-        </p>
-        <p>
-          Possible values for the flagged header are:
-          <br />
-          <code>'success' | 'warning' | 'danger' | 'info'</code>
-        </p>
-        <p>Use the buttons below to see the different options 👇</p>
-      </kirby-card>
-    </kirby-carousel-slide>
+            <strong>A flagged card</strong>
+            <p>
+              This is a card that uses a
+              <em>kirby-card-header</em>
+              with the
+              <code>flagged</code>
+              input set.
+            </p>
+            <p>
+              Possible values for the flagged header are:
+              <br />
+              <code>'success' | 'warning' | 'danger' | 'info'</code>
+            </p>
+            <p>Use the buttons below to see the different options 👇</p>
+          </kirby-card>
+        </kirby-carousel-slide>
+        <kirby-carousel-slide>
+          <kirby-card [hasPadding]="true">
+            <kirby-card-header
+              [title]="'Flagged card header'"
+              [flagged]="'warning'"
+            ></kirby-card-header>
 
-    <kirby-carousel-slide>
-      <kirby-card [hasPadding]="true">
-        <kirby-card-header
-          [title]="'Flagged card header'"
-          [flagged]="'warning'"
-        ></kirby-card-header>
+            <strong>A flagged card</strong>
+            <p>
+              This is a card that uses a
+              <em>kirby-card-header</em>
+              with the
+              <code>flagged</code>
+              input set.
+            </p>
+            <p>
+              Possible values for the flagged header are:
+              <br />
+              <code>'success' | 'warning' | 'danger' | 'info'</code>
+            </p>
+            <p>Use the buttons below to see the different options 👇</p>
+          </kirby-card>
+        </kirby-carousel-slide>
+        <kirby-carousel-slide>
+          <kirby-card [hasPadding]="true">
+            <kirby-card-header
+              [title]="'Flagged card header'"
+              [flagged]="'danger'"
+            ></kirby-card-header>
 
-        <strong>A flagged card</strong>
-        <p>
-          This is a card that uses a
-          <em>kirby-card-header</em>
-          with the
-          <code>flagged</code>
-          input set.
-        </p>
-        <p>
-          Possible values for the flagged header are:
-          <br />
-          <code>'success' | 'warning' | 'danger' | 'info'</code>
-        </p>
-        <p>Use the buttons below to see the different options 👇</p>
-      </kirby-card>
-    </kirby-carousel-slide>
+            <strong>A flagged card</strong>
+            <p>
+              This is a card that uses a
+              <em>kirby-card-header</em>
+              with the
+              <code>flagged</code>
+              input set.
+            </p>
+            <p>
+              Possible values for the flagged header are:
+              <br />
+              <code>'success' | 'warning' | 'danger' | 'info'</code>
+            </p>
+            <p>Use the buttons below to see the different options 👇</p>
+          </kirby-card>
+        </kirby-carousel-slide>
 
-    <kirby-carousel-slide>
-      <kirby-card [hasPadding]="true">
-        <kirby-card-header
-          [title]="'Flagged card header'"
-          [flagged]="'success'"
-        ></kirby-card-header>
+        <kirby-carousel-slide>
+          <kirby-card [hasPadding]="true">
+            <kirby-card-header
+              [title]="'Flagged card header'"
+              [flagged]="'warning'"
+            ></kirby-card-header>
 
-        <strong>A flagged card</strong>
-        <p>
-          This is a card that uses a
-          <em>kirby-card-header</em>
-          with the
-          <code>flagged</code>
-          input set.
-        </p>
-        <p>
-          Possible values for the flagged header are:
-          <br />
-          <code>'success' | 'warning' | 'danger' | 'info'</code>
-        </p>
-        <p>Use the buttons below to see the different options 👇</p>
-      </kirby-card>
-    </kirby-carousel-slide>
+            <strong>A flagged card</strong>
+            <p>
+              This is a card that uses a
+              <em>kirby-card-header</em>
+              with the
+              <code>flagged</code>
+              input set.
+            </p>
+            <p>
+              Possible values for the flagged header are:
+              <br />
+              <code>'success' | 'warning' | 'danger' | 'info'</code>
+            </p>
+            <p>Use the buttons below to see the different options 👇</p>
+          </kirby-card>
+        </kirby-carousel-slide>
 
-    <kirby-carousel-slide>
-      <kirby-card [hasPadding]="true">
-        <kirby-card-header
-          [title]="'Flagged card header'"
-          [flagged]="'warning'"
-        ></kirby-card-header>
+        <kirby-carousel-slide>
+          <kirby-card [hasPadding]="true">
+            <kirby-card-header
+              [title]="'Flagged card header'"
+              [flagged]="'success'"
+            ></kirby-card-header>
 
-        <strong>A flagged card</strong>
-        <p>
-          This is a card that uses a
-          <em>kirby-card-header</em>
-          with the
-          <code>flagged</code>
-          input set.
-        </p>
-        <p>
-          Possible values for the flagged header are:
-          <br />
-          <code>'success' | 'warning' | 'danger' | 'info'</code>
-        </p>
-        <p>Use the buttons below to see the different options 👇</p>
-      </kirby-card>
-    </kirby-carousel-slide>
-  </kirby-carousel>
-</div>
+            <strong>A flagged card</strong>
+            <p>
+              This is a card that uses a
+              <em>kirby-card-header</em>
+              with the
+              <code>flagged</code>
+              input set.
+            </p>
+            <p>
+              Possible values for the flagged header are:
+              <br />
+              <code>'success' | 'warning' | 'danger' | 'info'</code>
+            </p>
+            <p>Use the buttons below to see the different options 👇</p>
+          </kirby-card>
+        </kirby-carousel-slide>
+
+        <kirby-carousel-slide>
+          <kirby-card [hasPadding]="true">
+            <kirby-card-header
+              [title]="'Flagged card header'"
+              [flagged]="'warning'"
+            ></kirby-card-header>
+
+            <strong>A flagged card</strong>
+            <p>
+              This is a card that uses a
+              <em>kirby-card-header</em>
+              with the
+              <code>flagged</code>
+              input set.
+            </p>
+            <p>
+              Possible values for the flagged header are:
+              <br />
+              <code>'success' | 'warning' | 'danger' | 'info'</code>
+            </p>
+            <p>Use the buttons below to see the different options 👇</p>
+          </kirby-card>
+        </kirby-carousel-slide>
+      </kirby-carousel>
+    </div>
+  </kirby-page-content>
+</kirby-page>
