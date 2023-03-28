@@ -316,7 +316,9 @@ export class PageComponent
     @Optional()
     @Inject(PAGE_BACK_BUTTON_CONFIG)
     private backButtonConfig: PageBackButtonConfig,
+    @Optional()
     private routerOutlet: IonRouterOutlet,
+    @Optional()
     private navCtrl: NavController
   ) {}
 
