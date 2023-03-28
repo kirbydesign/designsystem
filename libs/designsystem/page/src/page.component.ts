@@ -474,7 +474,6 @@ export class PageComponent
   private interceptBackButtonClicksSetup() {
     if (this.backButtonConfig) {
       this.backButtonDelegate.onClick = (event: Event) => {
-        // TODO: prevent default relevant here?
         event.preventDefault();
         this.backButtonConfig.navigateBack(this.routerOutlet, this.navCtrl, this.defaultBackHref);
       };
