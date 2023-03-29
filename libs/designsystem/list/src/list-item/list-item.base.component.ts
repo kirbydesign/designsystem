@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Input, Output, TemplateRef, ViewChild } from '@angular/core';
+import { EventEmitter, Input, Output, TemplateRef, ViewChild } from '@angular/core';
 import { IonItemSliding } from '@ionic/angular';
 import { PlatformService, ThemeColor } from '@kirbydesign/designsystem/helpers';
 import { ListSwipeAction, ListSwipeDirection, ListSwipeEnd } from '../list-swipe-action.type';
-import { BoundaryClass } from './list-item.component';
+import { BoundaryClass } from './list-item.types';
 
 export default abstract class ListItemBaseComponent {
   _isSwipingEnabled = false;

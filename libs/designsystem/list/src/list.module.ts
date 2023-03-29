@@ -19,6 +19,7 @@ import {
   ListSectionHeaderDirective,
 } from './list.directive';
 import { ListItemMenuComponent } from './list-item/list-item-menu/list-item-menu.component';
+import { ListItemSwipeComponent } from './list-item/list-item-swipe/list-item-swipe.component';
 
 const exportedDeclarations = [
   ListComponent,
@@ -37,13 +38,13 @@ const declarations = [
   ListItemColorDirective,
   InfiniteScrollDirective,
   ListItemComponent,
+  ListItemMenuComponent,
+  ListItemSwipeComponent,
 ];
-
-const standaloneComponents = [ListItemMenuComponent];
 
 @NgModule({
   declarations: declarations,
-  imports: [CommonModule, IconModule, IonicModule, SpinnerModule, ...standaloneComponents],
+  imports: [CommonModule, IconModule, IonicModule, SpinnerModule],
   exports: exportedDeclarations,
   providers: [],
 })

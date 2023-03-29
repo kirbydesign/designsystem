@@ -17,7 +17,7 @@ import { PlatformService } from '@kirbydesign/designsystem/helpers';
 
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 import { ListHelper } from './helpers/list-helper';
-import { BoundaryClass } from './list-item/list-item.component';
+import { BoundaryClass, Device } from './list-item/list-item.types';
 import { ListSwipeAction } from './list-swipe-action.type';
 import {
   ListFooterDirective,
@@ -40,8 +40,6 @@ export type StandAloneSpacing =
   | 'xl'
   | 'xxl'
   | 'xxxl';
-
-type Device = 'touch' | 'desktop';
 
 @Component({
   selector: 'kirby-list',
