@@ -12,7 +12,7 @@ import { ListComponent, ListModule } from '..';
 
 const { fontWeight, size } = DesignTokenHelper;
 
-fdescribe('ListComponent', () => {
+describe('ListComponent', () => {
   let ionList: HTMLElement;
   let itemsInList: HTMLElement[];
 
@@ -68,7 +68,7 @@ fdescribe('ListComponent', () => {
       });
     });
 
-    fit('should highlight selected item in bold text', async () => {
+    it('should highlight selected item in bold text', async () => {
       await spectator.click(itemsInList[1]);
 
       console.log(itemTexts[1]);

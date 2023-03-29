@@ -1,0 +1,14 @@
+kirby-label {
+  margin: 0;
+  padding: 0;
+}
+
+label {
+  text-align: center;
+}
+
+.item-content {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}

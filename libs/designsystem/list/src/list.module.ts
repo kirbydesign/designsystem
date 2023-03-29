@@ -1,10 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { SpinnerModule } from '@kirbydesign/designsystem/spinner';
 
 import { IconModule } from '@kirbydesign/designsystem/icon';
 
+import { MenuComponent } from '@kirbydesign/designsystem/menu';
+import { ItemModule } from '@kirbydesign/designsystem/item';
+import { DividerComponent } from '@kirbydesign/designsystem/divider';
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 import { ListItemColorDirective } from './directives/list-item-color.directive';
 import { ListExperimentalComponent } from './list-experimental/list-experimental.component';
@@ -44,7 +47,15 @@ const declarations = [
 
 @NgModule({
   declarations: declarations,
-  imports: [CommonModule, IconModule, IonicModule, SpinnerModule],
+  imports: [
+    CommonModule,
+    IconModule,
+    IonicModule,
+    SpinnerModule,
+    MenuComponent,
+    ItemModule,
+    DividerComponent,
+  ],
   exports: exportedDeclarations,
   providers: [],
 })

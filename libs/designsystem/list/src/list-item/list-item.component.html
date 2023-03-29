@@ -7,15 +7,16 @@
     [getItemColor]="getItemColor"
     [isSelectable]="isSelectable"
     [isSelected]="isSelected"
+    [swipeActions]="swipeActions"
     (itemSelect)="_onItemSelect($event)"
-    (swipeActionSelect)="swipeActionSelect($event)"
+    (swipeActionSelect)="swipeActionSelect.next($event)"
   ></kirby-list-item-swipe>
 </ng-container>
 <ng-container *ngIf="device === 'desktop'">
   <kirby-list-item-menu
     [item]="item"
     [boundaryClass]="boundaryClass"
-    [actions]="swipeActions"
+    [swipeActions]="swipeActions"
     [itemTemplate]="itemTemplate"
     [isSelected]="isSelected"
     [isSelectable]="isSelectable"
