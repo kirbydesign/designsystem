@@ -41,6 +41,7 @@ export class CarouselExampleComponent {
     spaceBetween: 8,
     pagination: true,
     navigation: true,
+    slidesPerGroup: 1,
     // pagination: {
     //   el: '.example1-pagination',
     //   type: 'bullets',
@@ -56,6 +57,7 @@ export class CarouselExampleComponent {
         centeredSlides: false,
         slidesPerView: 3.2,
         spaceBetween: 16,
+        slidesPerGroup: 3,
         // pagination: {
         //   enabled: true,
         // },
@@ -67,6 +69,8 @@ export class CarouselExampleComponent {
     slidesPerView: 1.2,
     centeredSlides: true,
     spaceBetween: 8,
+    slidesPerGroup: 3,
+    slidesPerGroupSkip: 3,
     pagination: {
       el: '.example2-pagination',
       type: 'bullets',
@@ -81,6 +85,7 @@ export class CarouselExampleComponent {
       1025: {
         centeredSlides: false,
         slidesPerView: 3,
+
         pagination: {
           enabled: true,
         },
