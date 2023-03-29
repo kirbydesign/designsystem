@@ -64,6 +64,7 @@
   <kirby-list-item
     *ngFor="let item of items; let i = index; trackBy: trackBy || defaultTrackBy"
     [item]="item"
+    [device]="device"
     [itemTemplate]="itemTemplate"
     [swipeActions]="swipeActions"
     [boundaryClass]="_getBoundaryClass(i, items)"

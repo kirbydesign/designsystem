@@ -1,6 +1,6 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
-import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
+import { DesignTokenHelper, PlatformService } from '@kirbydesign/designsystem/helpers';
 
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
@@ -8,39 +8,30 @@ import { SpinnerModule } from '@kirbydesign/designsystem/spinner';
 import { CardModule } from '@kirbydesign/designsystem/card';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
-import {
-  InfiniteScrollDirective,
-  ListComponent,
-  ListItemColorDirective,
-  ListItemTemplateDirective,
-} from '..';
-
-import { ListItemComponent } from './list-item/list-item.component';
+import { ListComponent, ListModule } from '..';
 
 const { fontWeight, size } = DesignTokenHelper;
 
-describe('ListComponent', () => {
+fdescribe('ListComponent', () => {
   let ionList: HTMLElement;
   let itemsInList: HTMLElement[];
 
   let spectator: SpectatorHost<ListComponent>;
+  const mockPlatformServiceIsTouchTrue = {
+    isTouch: () => true,
+    isTablet: () => false,
+  };
+
   const createHost = createHostFactory({
     component: ListComponent,
-    imports: [TestHelper.ionicModuleForTest, CardModule, SpinnerModule],
+    imports: [TestHelper.ionicModuleForTest, CardModule, SpinnerModule, ListModule],
     providers: [
       {
         provide: WindowRef,
         useValue: <WindowRef>{ nativeWindow: window },
       },
     ],
-    declarations: [
-      ItemComponent,
-      IconComponent,
-      InfiniteScrollDirective,
-      ListItemColorDirective,
-      ListItemTemplateDirective,
-      ListItemComponent,
-    ],
+    declarations: [ItemComponent, IconComponent],
   });
 
   describe('with kirby-item', () => {
@@ -49,10 +40,16 @@ describe('ListComponent', () => {
     beforeEach(async () => {
       spectator = createHost<ListComponent>(
         `
-        <kirby-list [items]="[{ name: 'Item1' }, { name: 'Item2' }, { name: 'Item3' }]" (itemSelect)="($event)">
+        <kirby-list (itemSelect)="($event)">
           <kirby-item *kirbyListItemTemplate="let item"><h3>{{ item.name }}</h3></kirby-item>
         </kirby-list>
-        `
+        `,
+        {
+          props: {
+            items: [{ name: 'Item1' }, { name: 'Item2' }, { name: 'Item3' }],
+          },
+          providers: [{ provide: PlatformService, useValue: mockPlatformServiceIsTouchTrue }],
+        }
       );
       ionList = spectator.queryHost('ion-list');
       await TestHelper.whenReady(ionList);
@@ -71,14 +68,13 @@ describe('ListComponent', () => {
       });
     });
 
-    it('should highlight selected item in bold text', () => {
-      const selectItem = itemsInList[1];
-      spectator.click(selectItem);
+    fit('should highlight selected item in bold text', async () => {
+      await spectator.click(itemsInList[1]);
 
-      for (let i = 0; i < itemTexts.length; i++) {
-        const fontWeightExpected = itemsInList[i] === selectItem ? 'bold' : 'normal';
-        expect(itemTexts[i]).toHaveComputedStyle({ 'font-weight': fontWeight(fontWeightExpected) });
-      }
+      console.log(itemTexts[1]);
+      expect(itemTexts[0]).toHaveComputedStyle({ 'font-weight': fontWeight('normal') });
+      expect(itemTexts[1]).toHaveComputedStyle({ 'font-weight': fontWeight('bold') });
+      expect(itemTexts[2]).toHaveComputedStyle({ 'font-weight': fontWeight('normal') });
     });
 
     it('should not highlight selected item in bold text on disableSelectionHighlight', () => {
@@ -97,9 +93,11 @@ describe('ListComponent', () => {
       it('should apply spacing to all but the last item', () => {
         spectator.setInput('hasItemSpacing', true);
         spectator.detectChanges();
+
         const kirbyItemsInList = spectator.queryAll('kirby-list-item:not(:last-child)');
 
-        expect(kirbyItemsInList).not.toBeEmpty();
+        expect(kirbyItemsInList).toHaveLength(2);
+
         kirbyItemsInList.forEach((item) => {
           expect(item).toHaveComputedStyle({ 'margin-bottom': size('s') });
         });
@@ -110,7 +108,7 @@ describe('ListComponent', () => {
         spectator.detectChanges();
         const kirbyItemsInList = spectator.queryAll('kirby-list-item:last-child');
 
-        expect(kirbyItemsInList).not.toBeEmpty();
+        expect(kirbyItemsInList).toHaveLength(1);
         kirbyItemsInList.forEach((item) => {
           expect(item).toHaveComputedStyle({ 'margin-bottom': '0px' });
         });
@@ -123,7 +121,7 @@ describe('ListComponent', () => {
         spectator.detectChanges();
         const kirbyItemsInList = spectator.queryAll('kirby-list-item');
 
-        expect(kirbyItemsInList).not.toBeEmpty();
+        expect(kirbyItemsInList).toHaveLength(3);
         kirbyItemsInList.forEach((item) => {
           expect(item).toHaveComputedStyle({ 'margin-bottom': '0px' });
         });
@@ -135,16 +133,24 @@ describe('ListComponent', () => {
     beforeEach(async () => {
       spectator = createHost<ListComponent>(
         `
-        <kirby-list [items]="[{ name: 'Item1' }, { name: 'Item2' }, { name: 'Item3' }]">
+        <kirby-list>
           <kirby-card *kirbyListItemTemplate="let item">
             <kirby-item>{{ item.name }}</kirby-item>
           </kirby-card>
         </kirby-list>
-        `
+        `,
+        {
+          props: {
+            items: [{ name: 'Item1' }, { name: 'Item2' }, { name: 'Item3' }],
+          },
+          providers: [{ provide: PlatformService, useValue: mockPlatformServiceIsTouchTrue }],
+        }
       );
       ionList = spectator.queryHost('ion-list');
       await TestHelper.whenReady(ionList);
       itemsInList = spectator.queryAll('ion-list ion-item');
+
+      await TestHelper.whenReady(itemsInList);
     });
 
     it('should create list wrapper', () => {
@@ -161,23 +167,29 @@ describe('ListComponent', () => {
     it('should render first and last item without padding top/bottom', async () => {
       const firstItem = itemsInList[0].shadowRoot.querySelector('.item-native');
       const lastItem = itemsInList[itemsInList.length - 1].shadowRoot.querySelector('.item-native');
+
       expect(firstItem).toHaveComputedStyle({ 'padding-top': '0px' });
       expect(lastItem).toHaveComputedStyle({ 'padding-bottom': '0px' });
     });
   });
 
-  describe('when a list have 1 element', () => {
+  describe('when a list has 1 element', () => {
     beforeEach(async () => {
       spectator = createHost<ListComponent>(
         `
-        <kirby-list [items]="[{ name: 'Item1' }]" (itemSelect)="($event)">
+        <kirby-list  (itemSelect)="($event)">
           <kirby-item *kirbyListItemTemplate="let item"><h3>{{ item.name }}</h3></kirby-item>
         </kirby-list>
-        `
+        `,
+        {
+          props: { items: [{ name: 'Item1' }] },
+          providers: [{ provide: PlatformService, useValue: mockPlatformServiceIsTouchTrue }],
+        }
       );
     });
-    it(`should apply the CSS class 'first' and 'last' on the first and only element in the list`, () => {
-      const list = spectator.queryAll('ion-item-sliding');
+
+    it(`should apply the CSS class 'first' and 'last' on the first and only element in the list`, async () => {
+      const list = await spectator.queryAll('ion-item-sliding');
 
       expect(list.length).toBe(1);
 
@@ -186,14 +198,18 @@ describe('ListComponent', () => {
     });
   });
 
-  describe('when a list have 2 elements', () => {
+  describe('when a list has 2 elements', () => {
     beforeEach(async () => {
       spectator = createHost<ListComponent>(
         `
-          <kirby-list [items]="[{ name: 'Item1' }, { name: 'Item2' }]" (itemSelect)="($event)">
+          <kirby-list (itemSelect)="($event)">
             <kirby-item *kirbyListItemTemplate="let item"><h3>{{ item.name }}</h3></kirby-item>
           </kirby-list>
-          `
+          `,
+        {
+          props: { items: [{ name: 'Item1' }, { name: 'Item2' }] },
+          providers: [{ provide: PlatformService, useValue: mockPlatformServiceIsTouchTrue }],
+        }
       );
     });
     it(`should apply the CSS class 'first' on the first element`, () => {
@@ -221,10 +237,14 @@ describe('ListComponent', () => {
     beforeEach(async () => {
       spectator = createHost<ListComponent>(
         `
-          <kirby-list [items]="[{ name: 'Item1' }, { name: 'Item2' }, { name: 'Item3' }]" (itemSelect)="($event)">
+          <kirby-list (itemSelect)="($event)">
             <kirby-item *kirbyListItemTemplate="let item"><h3>{{ item.name }}</h3></kirby-item>
           </kirby-list>
-          `
+          `,
+        {
+          props: { items: [{ name: 'Item1' }, { name: 'Item2' }, { name: 'Item3' }] },
+          providers: [{ provide: PlatformService, useValue: mockPlatformServiceIsTouchTrue }],
+        }
       );
     });
     it(`should apply the CSS class 'first' on the first element`, () => {
