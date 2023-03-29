@@ -155,11 +155,11 @@
 
   <p>
     In rare use cases where it might be necessary to take complete control over the back button
-    behavior Kirby Page exposes an injection token for just this.
+    behavior Kirby Page exposes an injection token for exactly this.
   </p>
   <p>
     When the token is provided the supplied
-    <code>PageBackButtonOverride</code>
+    <code>PageBackButtonOverride.navigateBack()</code>
     callback is executed whenever the back button is pressed. Within the method, you will have
     access to the specific
     <code>NavController</code>

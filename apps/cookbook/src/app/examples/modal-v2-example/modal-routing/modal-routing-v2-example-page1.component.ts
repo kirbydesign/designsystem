@@ -18,8 +18,7 @@ import { ActivatedRoute } from '@angular/router';
       </p>
 
       <kirby-modal-v2-footer themeColor="white" class="footer" footer>
-        <button kirby-button class="nav" routerLink="../page2">
-          Next
+        <button kirby-button class="nav" routerLink="../page2" nav-next>
           <kirby-icon name="arrow-more"></kirby-icon>
         </button>
       </kirby-modal-v2-footer>

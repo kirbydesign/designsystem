@@ -67,11 +67,13 @@ export const PAGE_BACK_BUTTON_OVERRIDE = new InjectionToken<PageBackButtonOverri
   'page-back-button-override'
 );
 
-export type PageBackButtonOverride = (
-  routerOutlet: IonRouterOutlet,
-  navCtrl: NavController,
-  defaultBackHref: string
-) => void;
+export interface PageBackButtonOverride {
+  navigateBack: (
+    routerOutlet: IonRouterOutlet,
+    navCtrl: NavController,
+    defaultBackHref: string
+  ) => void;
+}
 
 /**
  * Event emitted when "pull-to-refresh" begins.
@@ -473,7 +475,7 @@ export class PageComponent
     if (this.backButtonOverride) {
       this.backButtonDelegate.onClick = (event: Event) => {
         event.preventDefault();
-        this.backButtonOverride(this.routerOutlet, this.navCtrl, this.defaultBackHref);
+        this.backButtonOverride.navigateBack(this.routerOutlet, this.navCtrl, this.defaultBackHref);
       };
     }
 

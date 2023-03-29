@@ -16,7 +16,7 @@ import { ActivatedRoute, Router } from '@angular/router';
       </p>
 
       <kirby-modal-v2-footer themeColor="white" class="footer" footer>
-        <button kirby-button attentionLevel="3" routerLink="../page1">
+        <button kirby-button attentionLevel="3" routerLink="../page1" nav-prev>
           <kirby-icon name="arrow-back"></kirby-icon>
         </button>
         <button kirby-button (click)="closeModal()">Finish</button>
