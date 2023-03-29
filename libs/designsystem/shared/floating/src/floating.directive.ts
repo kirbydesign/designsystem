@@ -402,12 +402,13 @@ export class FloatingDirective implements OnInit, OnDestroy {
   }
 
   private handleClickOutsideHostElement(event: Event): void {
-    if (!(event.target instanceof HTMLElement)) return;
-    const clickedOnReferenceWithClickTriggerEnabled: boolean =
-      this.reference?.nativeElement.contains(event.target) && this.triggers.includes('click');
+    if (event.target instanceof Node) {
+      const clickedOnReferenceWithClickTriggerEnabled: boolean =
+        this.reference?.nativeElement.contains(event.target) && this.triggers.includes('click');
 
-    if (this.closeOnBackdrop && !clickedOnReferenceWithClickTriggerEnabled) {
-      this.hide();
+      if (this.closeOnBackdrop && !clickedOnReferenceWithClickTriggerEnabled) {
+        this.hide();
+      }
     }
   }
 
