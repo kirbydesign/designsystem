@@ -67,14 +67,14 @@ export class FloatingDirective implements OnInit, OnDestroy {
   /**
    * Reference to the element for which the host should anchor to
    * */
-  @Input() public set reference(ref: ElementRef) {
+  @Input() public set reference(ref: ElementRef<HTMLElement> | undefined) {
     this.tearDownReferenceElementEventHandling();
     this._reference = ref;
     this.setupEventHandling();
     this.autoUpdatePosition();
   }
 
-  public get reference(): ElementRef | undefined {
+  public get reference(): ElementRef<HTMLElement> | undefined {
     return this._reference;
   }
 
@@ -198,7 +198,7 @@ export class FloatingDirective implements OnInit, OnDestroy {
 
   private _triggers: Array<TriggerEvent> = ['click'];
 
-  private _reference: ElementRef | undefined;
+  private _reference: ElementRef<HTMLElement> | undefined;
 
   private autoUpdaterRef: () => void;
   private isShown: boolean = false;
@@ -402,6 +402,7 @@ export class FloatingDirective implements OnInit, OnDestroy {
   }
 
   private handleClickOutsideHostElement(event: Event): void {
+    if (!(event.target instanceof HTMLElement)) return;
     const clickedOnReferenceWithClickTriggerEnabled: boolean =
       this.reference?.nativeElement.contains(event.target) && this.triggers.includes('click');
 
