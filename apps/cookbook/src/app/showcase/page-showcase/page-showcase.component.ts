@@ -187,7 +187,7 @@ export class PageShowcaseComponent {
     },
   ];
 
-  public injectionTokenExample = `import { PAGE_BACK_BUTTON_OVERRIDE, PageBackButtonOverride } from '@kirbydesign/designsystem';
+  public injectionTokenExample = `import { PAGE_BACK_BUTTON_OVERRIDE, PageBackButtonOverride } from '@kirbydesign/designsystem/page';
   
 @Injectable({
   providedIn: 'root',
