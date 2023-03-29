@@ -187,20 +187,31 @@ export class PageShowcaseComponent {
     },
   ];
 
-  public injectionTokenExample = `export const MY_BACK_BUTTON_OVERRIDE: PageBackButtonOverride = (routerOutlet, navCtrl, defaultHref) => {
+  public injectionTokenExample = `@Injectable({
+  providedIn: 'root',
+})
+export class MyBackButtonOverrideService implements PageBackButtonOverride {
+  constructor(private someDependency: SomeDependency) {}
+
+  navigateBack(routerOutlet: IonRouterOutlet, navCtrl: NavController, defaultBackHref: string) {
     if (routerOutlet?.canGoBack()) {
-      // custom logic could go here
-      routerOutlet.pop()
+      // custom use of some dependency could go here:
+      this.someDependency.doSomething();
+
+      // and we might still want to use the provided router outlet for something:
+      routerOutlet.pop();
+    } else {
+      // custom use of some dependency could also go here:
+      this.someDependency.doSomethingElse();
+
+      // and we might still want to use the provided nav controller for something:
+      navCtrl.navigateBack(defaultBackHref);
     }
-    else {
-      // or here
-      navCtrl.navigateBack(defaultHref);
   }
 }
 
-// then supplied like this in providers array 
-
-{ provide: PAGE_BACK_BUTTON_OVERRIDE, useValue: MY_BACK_BUTTON_OVERRIDE },
+// then provided like this in the providers array (e.g. in app.module.ts)
+{ provide: PAGE_BACK_BUTTON_OVERRIDE, useClass: MyBackButtonOverrideService },
 `;
 
   public pageHtml = `<kirby-page\n (enter)="startSubscription()"\n (leave)="stopSubscription()"\n></kirby-page>`;
