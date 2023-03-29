@@ -85,6 +85,7 @@ export class CarouselExampleComponent {
       1025: {
         centeredSlides: false,
         slidesPerView: 3,
+
         pagination: {
           enabled: true,
         },
