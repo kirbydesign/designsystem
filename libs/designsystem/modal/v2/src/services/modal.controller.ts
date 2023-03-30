@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { from, Observable, Subject, switchMap, tap } from 'rxjs';
+import { from, map, Observable, Subject, switchMap, tap } from 'rxjs';
 import { OverlayEventDetail } from '@ionic/core/components';
 
 export type ModalFlavor = 'modal' | 'drawer';
@@ -63,6 +63,12 @@ export class ModalV2Controller {
 
     modal$
       .pipe(
+        map((modal) => {
+          if (config.height) {
+            modal.style.setProperty('--height', config.height);
+          }
+          return modal;
+        }),
         tap((modal) => from(modal.present())),
         switchMap((modal) => modal.onWillDismiss())
       )
