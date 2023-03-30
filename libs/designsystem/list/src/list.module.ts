@@ -23,6 +23,7 @@ import {
 } from './list.directive';
 import { ListItemMenuComponent } from './list-item/list-item-menu/list-item-menu.component';
 import { ListItemSwipeComponent } from './list-item/list-item-swipe/list-item-swipe.component';
+import { GetActionTitlePipe } from './list-item/pipes/action/get-title.pipe';
 
 const exportedDeclarations = [
   ListComponent,
@@ -43,6 +44,7 @@ const declarations = [
   ListItemComponent,
   ListItemMenuComponent,
   ListItemSwipeComponent,
+  GetActionTitlePipe,
 ];
 
 @NgModule({

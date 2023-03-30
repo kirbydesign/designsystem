@@ -6,8 +6,7 @@
   <kirby-menu [portalOutletConfig]="portalOutletConfig" [placement]="'bottom-end'" slot="end">
     <kirby-item [selectable]="true" *ngFor="let action of swipeActions; let i = index">
       <div class="item-content">
-        <!--This isn't working  -->
-        <label>{{ action.title }}</label>
+        <label>{{ action | getActionTitle: [item] }}</label>
         <kirby-divider *ngIf="i !== swipeActions.length - 1" [hasMargin]="true"></kirby-divider>
       </div>
     </kirby-item>
