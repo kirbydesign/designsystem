@@ -1,6 +1,7 @@
 // AUTO-GENERATED - PLEASE DON'T EDIT THIS FILE MANUALLY
 
 import { MockAccordionItemComponent } from './components/mock.accordion-item.component';
+import { MockActionGroupComponent } from './components/mock.action-group.component';
 import { MockAppComponent } from './components/mock.app.component';
 import { MockAvatarComponent } from './components/mock.avatar.component';
 import { MockButtonComponent } from './components/mock.button.component';
@@ -68,9 +69,15 @@ import { MockTabsComponent } from './components/mock.tabs.component';
 import { MockToggleComponent } from './components/mock.toggle.component';
 import { MockToggleButtonComponent } from './components/mock.toggle-button.component';
 import { MockBadgeComponent } from './components/mock.web-component-proxies.component';
+import {
+  MockHeaderActionsDirective,
+  MockHeaderComponent,
+  MockHeaderCustomSectionDirective,
+} from './components/mock.header.component';
 
 export const MOCK_COMPONENTS = [
   MockAccordionItemComponent,
+  MockActionGroupComponent,
   MockAppComponent,
   MockAvatarComponent,
   MockButtonComponent,
@@ -90,6 +97,9 @@ export const MOCK_COMPONENTS = [
   MockFlagComponent,
   MockFormFieldMessageComponent,
   MockFormFieldComponent,
+  MockHeaderActionsDirective,
+  MockHeaderCustomSectionDirective,
+  MockHeaderComponent,
   MockInputComponent,
   MockInputCounterComponent,
   MockTextareaComponent,
