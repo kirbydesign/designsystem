@@ -1,4 +1,4 @@
-<kirby-item>
+<kirby-item [ngClass]="boundaryClass">
   <ng-container
     slot="start"
     *ngTemplateOutlet="itemTemplate; context: { $implicit: item }"

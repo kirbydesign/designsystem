@@ -6,7 +6,7 @@ import ListItemBaseComponent from '../list-item.base.component';
 @Component({
   selector: 'kirby-list-item-menu',
   templateUrl: './list-item-menu.component.html',
-  styleUrls: ['./list-item-menu.component.scss'],
+  styleUrls: ['../../list.component.scss', './list-item-menu.component.scss'],
 })
 export class ListItemMenuComponent extends ListItemBaseComponent {
   public portalOutletConfig: PortalOutletConfig;
@@ -18,10 +18,5 @@ export class ListItemMenuComponent extends ListItemBaseComponent {
       selector: OutletSelector.id,
       value: 'kirbyListPortalOutletHook',
     };
-
-    // this.portalOutletConfig = {
-    //   selector: OutletSelector.tag,
-    //   value: 'body',
-    // };
   }
 }

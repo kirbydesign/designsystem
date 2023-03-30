@@ -177,6 +177,7 @@ ion-item-options[side='end'] {
       white,
       black
     ); // Solves issues with round borders at iOS in certain scenarios
+    background-color: red;
   }
 
   ion-item-sliding > ion-item,
