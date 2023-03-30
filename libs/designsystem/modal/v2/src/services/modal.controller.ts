@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { from, map, Observable, switchMap, take, tap } from 'rxjs';
+import { from, Observable, Subject, switchMap, tap } from 'rxjs';
 import { OverlayEventDetail } from '@ionic/core/components';
 
 export type ModalFlavor = 'modal' | 'drawer';
@@ -34,6 +34,12 @@ export class ModalV2Controller {
   public showModal(config: ModalV2Config): ModalDismissObservables {
     if (this.isModalOpening) return;
 
+    const $onWillDismiss = new Subject<OverlayEventDetail>();
+    const onWillDismiss$ = $onWillDismiss.asObservable();
+
+    const $onDidDismiss = new Subject<OverlayEventDetail>();
+    const onDidDismiss$ = $onDidDismiss.asObservable();
+
     let customCssClasses: string[] = [];
     if (config.cssClass) {
       customCssClasses = Array.isArray(config.cssClass) ? config.cssClass : [config.cssClass];
@@ -55,23 +61,24 @@ export class ModalV2Controller {
 
     this.isModalOpening = true;
 
-    const onWillDismiss$ = modal$.pipe(
-      map((modal) => {
-        if (config.height) {
-          modal.style.setProperty('--height', config.height);
-        }
-        return modal;
-      }),
-      tap((modal) => from(modal.present())),
-      switchMap((modal) => modal.onWillDismiss()),
-      take(1)
-    );
+    modal$
+      .pipe(
+        tap((modal) => from(modal.present())),
+        switchMap((modal) => modal.onWillDismiss())
+      )
+      .subscribe((res) => {
+        this.isModalOpening = false;
 
-    this.isModalOpening = false;
+        $onWillDismiss.next(res);
+        $onWillDismiss.complete();
+
+        $onDidDismiss.next(res);
+        $onDidDismiss.complete();
+      });
 
     return {
       onWillDismiss: onWillDismiss$,
-      onDidDismiss: onWillDismiss$,
+      onDidDismiss: onDidDismiss$,
     };
   }
 
