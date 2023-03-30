@@ -75,10 +75,15 @@ ion-content {
   }
 
   @include utils.media('>=medium') {
-    --padding-top: #{utils.size('xl')};
-    --padding-bottom: #{utils.size('xl')};
     --padding-start: #{utils.size('xxl')};
     --padding-end: #{utils.size('xxl')};
+  }
+
+  ion-toolbar {
+    --padding-start: #{utils.size('s')};
+    --padding-end: #{utils.size('s')};
+    --padding-top: #{utils.size('m')};
+    --padding-bottom: #{utils.size('m')};
   }
 }
 
