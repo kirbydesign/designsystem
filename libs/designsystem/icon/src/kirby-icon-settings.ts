@@ -84,6 +84,9 @@ export const kirbyIconSettings: IconSettings = {
     { name: 'air-balloon', svg: 'assets/kirby/icons/svg/air-balloon.svg' },
     { name: 'piggybank', svg: 'assets/kirby/icons/svg/piggybank.svg' },
     { name: 'business', svg: 'assets/kirby/icons/svg/business.svg' },
+    { name: 'navigation', svg: 'assets/kirby/icons/svg/navigation.svg' },
+    { name: 'phone-device', svg: 'assets/kirby/icons/svg/phone-device.svg' },
+    { name: 'upload', svg: 'assets/kirby/icons/svg/upload.svg' },
   ],
 };
 
