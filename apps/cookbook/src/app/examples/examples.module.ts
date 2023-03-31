@@ -41,6 +41,7 @@ import { SectionHeaderExampleModule } from './section-header-example/section-hea
 import { SegmentedControlExampleModule } from './segmented-control-example/segmented-control-example.module';
 import { ToggleButtonExampleModule } from './toggle-button-example/toggle-button-example.module';
 import { VirtualScrollExampleModule } from './virtual-scroll-example/virtual-scroll-example.module';
+import { PopoverExampleModule } from './popover-example/popover-example.module';
 
 const IMPORTS = [
   CodeViewerModule,
@@ -75,6 +76,7 @@ const IMPORTS = [
   SlideModule,
   HeaderExampleModule,
   AlertExperimentalModule,
+  PopoverExampleModule,
 ];
 
 @NgModule({

@@ -1,9 +1,11 @@
 <ion-modal
   class="kirby-modal-v2"
+  [attr.data-popover]="popover"
   [isOpen]="open"
   [breakpoints]="flavor === 'drawer' ? breakpoints : undefined"
   [initialBreakpoint]="flavor === 'drawer' ? initialBreakpoint : undefined"
   [handle]="false"
+  [animated]="false"
   [canDismiss]="canDismiss"
   [ngClass]="size"
   (willPresent)="_onWillPresent($event)"

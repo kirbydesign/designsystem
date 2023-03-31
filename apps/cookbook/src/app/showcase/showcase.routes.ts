@@ -61,6 +61,7 @@ import { RadioShowcaseComponent } from './radio-showcase/radio-showcase.componen
 import { CookbookChartStockConfigShowcaseComponent } from './chart-config-showcase/stock/chart-config-stock-showcase.component';
 import { CookbookChartBarConfigShowcaseComponent } from './chart-config-showcase/bar/chart-config-bar-showcase.component';
 import { HeaderShowcaseComponent } from './header-showcase/header-showcase.component';
+import { PopoverShowcaseComponent } from './popover-showcase/popover-showcase.component';
 
 export const routes: Routes = [
   {
@@ -328,6 +329,10 @@ export const routes: Routes = [
       {
         path: 'header',
         component: HeaderShowcaseComponent,
+      },
+      {
+        path: 'popover',
+        component: PopoverShowcaseComponent,
       },
     ],
   },

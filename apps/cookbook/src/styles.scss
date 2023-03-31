@@ -53,3 +53,17 @@ code:not([class*='language-']) {
     color: utils.get-color('dark-contrast');
   }
 }
+
+[data-popover='Popover'] {
+  --ion-backdrop-color: transparent;
+  --max-width: 320px;
+  --max-height: 700px !important;
+  --min-height: 700px !important;
+  --height: 7000px !important;
+}
+
+[data-popover='Popover']::part(content) {
+  position: absolute;
+  left: var(--kirby-popover-trans-x, 0);
+  box-shadow: 0 0 24px #000;
+}

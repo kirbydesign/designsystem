@@ -1,0 +1,20 @@
+<button (click)="open()">Open</button>
+<kirby-modal-v2 [open]="isOpen" (willDismiss)="close()">
+  <button (click)="openNested()" style="display: inline-block" #trigger>Open</button>
+  <!-- Popover start -->
+  <kirby-modal-v2
+    #modal
+    [popover]="'Popover'"
+    [open]="isNestedOpen"
+    (willDismiss)="closeNested()"
+    (didPresent)="didPresent()"
+  >
+    Here is the popover content
+    <div
+      #arrow
+      style="width: 16px; height: 16px; background-color: red; position: absolute; left: 0; top: 0"
+    ></div>
+  </kirby-modal-v2>
+
+  <!-- Popover End -->
+</kirby-modal-v2>

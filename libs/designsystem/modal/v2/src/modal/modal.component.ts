@@ -19,6 +19,7 @@ export class ModalV2Component {
   @ViewChild(IonContent) ionContent: IonContent;
 
   @Input() flavor: Flavor = 'modal';
+  @Input() popover: string = '';
   @Input() open = false;
   @Input() canDismiss: boolean | (() => Promise<boolean>) = true;
   @Input() title = '';
