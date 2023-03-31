@@ -43,10 +43,6 @@ export class PageContentWidthExampleComponent extends BasePageExampleComponent {
       value: 'default',
     },
     {
-      text: 'standard',
-      value: 'standard',
-    },
-    {
       text: 'optimized',
       value: 'optimized',
     },
