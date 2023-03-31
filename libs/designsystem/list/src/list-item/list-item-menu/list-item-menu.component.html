@@ -3,12 +3,37 @@
     slot="start"
     *ngTemplateOutlet="itemTemplate; context: { $implicit: item }"
   ></ng-container>
+  <ng-container [ngSwitch]="swipeActions.length > 1">
+    <ng-container *ngSwitchCase="true">
+      <ng-container
+        slot="end"
+        *ngTemplateOutlet="menuTemplate; context: { $implicit: item }"
+      ></ng-container>
+    </ng-container>
+    <ng-container *ngSwitchCase="false">
+      <ng-container
+        slot="end"
+        *ngTemplateOutlet="singleActionTemplate; context: { $implicit: swipeActions[0] }"
+      ></ng-container>
+    </ng-container>
+  </ng-container>
+</kirby-item>
+
+<ng-template #menuTemplate let-item>
   <kirby-menu [portalOutletConfig]="portalOutletConfig" [placement]="'bottom-end'" slot="end">
-    <kirby-item [selectable]="true" *ngFor="let action of swipeActions; let i = index">
+    <kirby-item
+      [selectable]="true"
+      *ngFor="let action of swipeActions; let i = index"
+      (click)="_onSwipeActionSelect(action, item, $event)"
+    >
       <div class="item-content">
         <label>{{ action | getActionTitle: [item] }}</label>
         <kirby-divider *ngIf="i !== swipeActions.length - 1" [hasMargin]="true"></kirby-divider>
       </div>
     </kirby-item>
   </kirby-menu>
-</kirby-item>
+</ng-template>
+
+<ng-template #singleActionTemplate let-action>
+  <kirby-icon name="{{ action.icon }}"></kirby-icon>
+</ng-template>
