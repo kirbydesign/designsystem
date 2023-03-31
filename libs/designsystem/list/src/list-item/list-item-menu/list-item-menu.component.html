@@ -28,12 +28,13 @@
     >
       <div class="item-content">
         <label>{{ action | getActionTitle: [item] }}</label>
-        <kirby-divider *ngIf="i !== swipeActions.length - 1" [hasMargin]="true"></kirby-divider>
+
+        <!-- <kirby-divider *ngIf="i !== swipeActions.length - 1" [hasMargin]="true"></kirby-divider> -->
       </div>
     </kirby-item>
   </kirby-menu>
 </ng-template>
 
 <ng-template #singleActionTemplate let-action>
-  <kirby-icon name="{{ action.icon }}"></kirby-icon>
+  <!-- <kirby-icon name="{{ action.icon }}"></kirby-icon> -->
 </ng-template>
