@@ -6,7 +6,7 @@ import { Device } from './list-item.types';
 @Component({
   selector: 'kirby-list-item',
   templateUrl: './list-item.component.html',
-  styleUrls: ['./list-item.component.scss'],
+  styleUrls: ['../list.component.scss', './list-item.component.scss'],
 })
 export class ListItemComponent extends ListItemBaseComponent {
   @Input() device: Device;

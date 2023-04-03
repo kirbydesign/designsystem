@@ -1,26 +1,37 @@
-<ng-container *ngIf="device === 'touch'">
-  <kirby-list-item-swipe
-    [item]="item"
-    [itemTemplate]="itemTemplate"
-    [swipeActions]="swipeActions"
-    [boundaryClass]="boundaryClass"
-    [getItemColor]="getItemColor"
-    [isSelectable]="isSelectable"
-    [isSelected]="isSelected"
-    (itemSelect)="_onItemSelect($event)"
-    (swipeActionSelect)="swipeActionSelect.next($event)"
-  ></kirby-list-item-swipe>
-</ng-container>
-<ng-container *ngIf="device === 'desktop'">
-  <kirby-list-item-menu
-    [item]="item"
-    [itemTemplate]="itemTemplate"
-    [swipeActions]="swipeActions"
-    [boundaryClass]="boundaryClass"
-    [isSelectable]="isSelectable"
-    [isSelected]="isSelected"
-    [getItemColor]="getItemColor"
-    (itemSelect)="itemSelect.next($event)"
-    (swipeActionSelect)="swipeActionSelect.next($event)"
-  ></kirby-list-item-menu>
+<ng-container [ngSwitch]="swipeActions.length > 0">
+  <ng-container *ngSwitchCase="false">
+    <ng-container
+      [ngClass]="boundaryClass"
+      *ngTemplateOutlet="itemTemplate; context: { $implicit: item }"
+    ></ng-container>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="true">
+    <ng-container *ngIf="device === 'touch'">
+      <kirby-list-item-swipe
+        [item]="item"
+        [itemTemplate]="itemTemplate"
+        [swipeActions]="swipeActions"
+        [boundaryClass]="boundaryClass"
+        [getItemColor]="getItemColor"
+        [isSelectable]="isSelectable"
+        [isSelected]="isSelected"
+        (itemSelect)="_onItemSelect($event)"
+        (swipeActionSelect)="swipeActionSelect.next($event)"
+      ></kirby-list-item-swipe>
+    </ng-container>
+    <ng-container *ngIf="device === 'desktop'">
+      <kirby-list-item-menu
+        [item]="item"
+        [itemTemplate]="itemTemplate"
+        [swipeActions]="swipeActions"
+        [boundaryClass]="boundaryClass"
+        [isSelectable]="isSelectable"
+        [isSelected]="isSelected"
+        [getItemColor]="getItemColor"
+        (itemSelect)="itemSelect.next($event)"
+        (swipeActionSelect)="swipeActionSelect.next($event)"
+      ></kirby-list-item-menu>
+    </ng-container>
+  </ng-container>
 </ng-container>

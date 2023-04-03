@@ -12,3 +12,13 @@ label {
   flex-direction: column;
   flex-wrap: nowrap;
 }
+
+.menu-item {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: white;
+}

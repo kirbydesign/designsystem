@@ -1,0 +1,13 @@
+@use '@kirbydesign/core/src/scss/utils';
+
+$divider-color: utils.get-color('background-color');
+
+:host {
+  overflow: hidden;
+}
+
+:host-context(.has-divider) {
+kirby-item ion-item:not(.last) {
+    border-bottom: 1px solid $divider-color;
+  }
+}
