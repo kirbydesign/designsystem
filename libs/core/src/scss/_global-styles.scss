@@ -10,6 +10,13 @@
 @use 'components/grid';
 @use 'themes/component-themes';
 
+/*
+ * Desktop Modal.
+ */
+$modal-max-height-desktop: 928px;
+$modal-max-width-desktop: 594px;
+$modal-border-radius: 32px;
+
 :root,
 :host {
   @include component-themes.apply-light-theme;
@@ -73,16 +80,18 @@ ion-modal.kirby-overlay {
     }
 
     &.kirby-drawer {
-      --min-height: #{utils.$drawer-default-height};
-      --kirby-modal-padding-top: calc(var(--kirby-safe-area-top, 0px) + #{utils.size('m')});
-      --border-radius: #{utils.$border-radius} #{utils.$border-radius} 0px 0px;
+      @include utils.media('<medium') {
+        --min-height: #{utils.$drawer-default-height};
+        --kirby-modal-padding-top: calc(var(--kirby-safe-area-top, 0px) + #{utils.size('m')});
+        --border-radius: #{utils.$border-radius} #{utils.$border-radius} 0px 0px;
 
-      padding-top: var(--kirby-modal-padding-top);
-      align-items: flex-end;
+        padding-top: var(--kirby-modal-padding-top);
+        align-items: flex-end;
 
-      &.interact-with-background {
-        &.kirby-modal.kirby-drawer {
-          --kirby-modal-padding-top: 0;
+        &.interact-with-background {
+          &.kirby-modal.kirby-drawer {
+            --kirby-modal-padding-top: 0;
+          }
         }
       }
     }
@@ -107,42 +116,32 @@ ion-modal.kirby-overlay {
       --width: #{utils.$modal-max-width};
       --border-radius: #{utils.$border-radius};
 
-      &:not(.kirby-modal-compact) {
-        --max-height: 100%;
-        --kirby-modal-padding-top-base: #{utils.size('xl')};
-        --kirby-modal-padding-top: var(--kirby-modal-padding-top-base);
-
-        padding-top: var(--kirby-modal-padding-top);
-
-        &:not(.kirby-drawer) {
-          --min-height: #{utils.$modal-default-height};
-
-          align-items: flex-start;
-
-          &.kirby-modal-small {
-            --min-height: #{map.get(utils.$modal-heights, 's')};
-          }
-
-          &.kirby-modal-medium {
-            --min-height: #{map.get(utils.$modal-heights, 'm')};
-          }
-
-          &.kirby-modal-large {
-            --min-height: #{map.get(utils.$modal-heights, 'l')};
-          }
-
-          &.kirby-modal-full-height::part(content),
-          &.full-height::part(content) {
-            border-bottom-left-radius: 0;
-            border-bottom-right-radius: 0;
-          }
-        }
+      &::part(content) {
+        margin: 15px;
       }
 
-      &.kirby-drawer {
-        --kirby-modal-padding-top: calc(
-          var(--kirby-modal-padding-top-base) + #{get-drawer-additional-padding-top()}
-        );
+      &:not(.kirby-modal-compact) {
+        --width: #{map.get(utils.$modal-v2-widths, 'm')};
+        --height: #{map.get(utils.$modal-v2-heights, 'm')};
+        --max-height: #{$modal-max-height-desktop};
+        --min-height: #{$modal-max-width-desktop};
+        --border-radius: #{$modal-border-radius};
+
+        &.kirby-large-screen-sm {
+          --width: #{map.get(utils.$modal-v2-widths, 's')};
+          --height: #{map.get(utils.$modal-v2-heights, 's')};
+        }
+
+        &.kirby-large-screen-lg {
+          --width: #{map.get(utils.$modal-v2-widths, 'l')};
+          --height: #{map.get(utils.$modal-v2-heights, 'l')};
+        }
+
+        &.kirby-modal-full-height::part(content),
+        &.full-height::part(content) {
+          border-bottom-left-radius: 0;
+          border-bottom-right-radius: 0;
+        }
       }
     }
   }
@@ -238,9 +237,6 @@ ion-loading.kirby-loading-overlay {
 /*
  * Modal V2.
  */
-$modal-max-height-desktop: 928px;
-$modal-max-width-desktop: 594px;
-$modal-border-radius: 32px;
 
 html.ios ion-modal.kirby-modal-v2 {
   --background: var(--kirby-modal-background, #{utils.get-color('background-color')});
