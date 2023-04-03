@@ -37,15 +37,20 @@
 $toolbar-padding-inline: utils.size('s');
 $toolbar-padding-block: utils.size('xs');
 
-@mixin phablet-toolbar-padding() {
-  $toolbar-padding-top: utils.size('xxs');
+@mixin phablet-toolbar() {
   @include utils.media('>=medium') {
-    padding-top: $toolbar-padding-top;
+    --padding-start: #{#{utils.size('m')}};
+    --padding-end: #{utils.size('m')};
+    --padding-bottom: #{utils.size('m')};
+    --padding-top: #{utils.size('m')};
+
+    padding-inline: 0;
   }
 }
 
 ion-header {
   box-sizing: border-box;
+  border-bottom: 1px solid utils.get-color('medium');
 
   ion-toolbar {
     --padding-start: #{$toolbar-padding-inline};
@@ -60,7 +65,7 @@ ion-header {
       color: var(--color);
     }
 
-    @include phablet-toolbar-padding;
+    @include phablet-toolbar;
   }
 }
 
@@ -95,7 +100,7 @@ ion-header {
   ion-header ion-toolbar:first-of-type {
     padding-top: var(--kirby-safe-area-top, 0);
 
-    @include phablet-toolbar-padding;
+    @include phablet-toolbar;
   }
 }
 

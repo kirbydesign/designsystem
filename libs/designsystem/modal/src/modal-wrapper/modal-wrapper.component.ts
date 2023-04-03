@@ -85,6 +85,8 @@ export class ModalWrapperComponent
   @ViewChild('contentTitle', { read: ElementRef })
   private _contentTitleElement: ElementRef<HTMLElement>;
 
+  _isLargeScreen: boolean;
+
   get contentTitleElement(): ElementRef<HTMLElement> {
     /* 
         contentTitleElement has ngIf directive dependent on _hasCollapsibleTitle; trigger CD to make sure element has been queried. 
@@ -302,6 +304,7 @@ export class ModalWrapperComponent
     this.resizeObserverService.observe(this.ionHeaderElement.nativeElement, (entry) => {
       const [property, pixelValue] = ['--header-height', `${entry.contentRect.height}px`];
       this.setCssVar(this.elementRef.nativeElement, property, pixelValue);
+      this._isLargeScreen = this.platform.isPhabletOrBigger();
     });
   }
 

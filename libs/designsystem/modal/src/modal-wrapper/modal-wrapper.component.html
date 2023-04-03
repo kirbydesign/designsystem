@@ -1,13 +1,18 @@
 <ion-header (touchstart)="onHeaderTouchStart($event)">
   <ion-toolbar>
     <ion-title></ion-title>
-    <ion-buttons slot="start" *ngIf="config.flavor === 'drawer'">
-      <ng-container *ngTemplateOutlet="closeButton; context: { icon: 'arrow-down' }"></ng-container>
+    <ion-buttons slot="{{ _isLargeScreen || config.flavor === 'modal' ? 'end' : 'start' }}">
+      <ng-container
+        *ngTemplateOutlet="
+          closeButton;
+          context: { icon: _isLargeScreen || config.flavor === 'modal' ? 'close' : 'arrow-down' }
+        "
+      ></ng-container>
     </ion-buttons>
-    <ion-buttons slot="end" *ngIf="config.flavor === 'modal'">
-      <ng-container *ngTemplateOutlet="closeButton; context: { icon: 'close' }"></ng-container>
-    </ion-buttons>
-    <ion-buttons slot="end" *ngIf="config.flavor === 'drawer' && config.drawerSupplementaryAction">
+    <ion-buttons
+      slot="{{ _isLargeScreen ? 'start' : 'end' }}"
+      *ngIf="config.flavor === 'drawer' && config.drawerSupplementaryAction"
+    >
       <ng-container
         *ngTemplateOutlet="supplementaryButton; context: { btn: config.drawerSupplementaryAction }"
       ></ng-container>
@@ -31,13 +36,13 @@
 </ion-content>
 
 <ng-template #closeButton let-icon="icon">
-  <button kirby-button [noDecoration]="true" size="md" (click)="close()">
+  <button kirby-button attentionLevel="3" size="md" (click)="close()">
     <kirby-icon [name]="icon"></kirby-icon>
   </button>
 </ng-template>
 
 <ng-template #supplementaryButton let-btn="btn">
-  <button kirby-button [noDecoration]="true" size="md" (click)="btn.action($event)">
+  <button kirby-button attentionLevel="3" size="md" (click)="btn.action($event)">
     <kirby-icon [name]="btn.iconName"></kirby-icon>
   </button>
 </ng-template>
