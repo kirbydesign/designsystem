@@ -7,7 +7,7 @@ $divider-color: utils.get-color('background-color');
 }
 
 :host-context(.has-divider) {
-kirby-item ion-item:not(.last) {
+ :host:not(.last) {
     border-bottom: 1px solid $divider-color;
   }
 }

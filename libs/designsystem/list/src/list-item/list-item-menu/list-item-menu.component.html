@@ -17,7 +17,15 @@
 </div>
 
 <ng-template #menuTemplate let-item>
-  <kirby-menu [portalOutletConfig]="portalOutletConfig" [placement]="'bottom-end'" slot="end">
+  <kirby-menu
+    class="menu-action"
+    [portalOutletConfig]="portalOutletConfig"
+    [placement]="'bottom-end'"
+    slot="end"
+  >
+    <button kirby-button type="button" [noDecoration]="true">
+      <kirby-icon [name]="'more'"></kirby-icon>
+    </button>
     <kirby-item
       [selectable]="true"
       *ngFor="let action of swipeActions; let i = index"

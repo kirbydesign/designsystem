@@ -1,3 +1,5 @@
+@use '@kirbydesign/core/src/scss/utils';
+
 kirby-label {
   margin: 0;
   padding: 0;
@@ -15,10 +17,10 @@ label {
 
 .menu-item {
   display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-between;
+  background-color: utils.get-color('white');
   align-items: center;
+}
 
-  background-color: white;
+.menu-action {
+  padding-right: utils.size('s');
 }

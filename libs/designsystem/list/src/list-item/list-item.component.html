@@ -1,9 +1,8 @@
-<ng-container [ngSwitch]="swipeActions.length > 0">
+<ng-container [ngSwitch]="!!swipeActions && swipeActions?.length > 0">
   <ng-container *ngSwitchCase="false">
-    <ng-container
-      [ngClass]="boundaryClass"
-      *ngTemplateOutlet="itemTemplate; context: { $implicit: item }"
-    ></ng-container>
+    <div class="list-item--no-action" [ngClass]="boundaryClass">
+      <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: item }"></ng-container>
+    </div>
   </ng-container>
 
   <ng-container *ngSwitchCase="true">

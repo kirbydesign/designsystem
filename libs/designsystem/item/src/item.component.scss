@@ -157,3 +157,13 @@
     border-top-right-radius: utils.$border-radius;
   }
 }
+
+:host-context(.menu-item) {
+  :host {
+    flex-grow: 1;
+
+    ion-item {
+      --inner-padding-end: #{utils.size('xxxs')};
+    }
+  }
+}
