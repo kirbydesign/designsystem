@@ -39,5 +39,7 @@
 </ng-template>
 
 <ng-template #singleActionTemplate let-action>
-  <!-- <kirby-icon name="{{ action.icon }}"></kirby-icon> -->
+  <button kirby-button type="button" [noDecoration]="true">
+    <kirby-icon name="{{ action?.icon }}"></kirby-icon>
+  </button>
 </ng-template>

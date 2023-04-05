@@ -20,3 +20,9 @@ kirby-card {
   min-width: $min-screen-width;
   max-width: $max-screen-width-small;
 }
+
+:host-context( kirby-list-item-menu ) {
+  :host {
+    padding-right: 4px;
+  }
+}
