@@ -1,4 +1,6 @@
 @use '@kirbydesign/core/src/scss/utils';
+$divider-color: utils.get-color('background-color');
+
 
 kirby-label {
   margin: 0;
@@ -23,4 +25,8 @@ label {
 
 .menu-action {
   padding-right: utils.size('xxxs');
+}
+
+.menu-divider {
+  border-bottom: 1px solid $divider-color;
 }
