@@ -1,9 +1,10 @@
-import { EventEmitter, Input, Output, TemplateRef, ViewChild } from '@angular/core';
+import { Directive, EventEmitter, Input, Output, TemplateRef, ViewChild } from '@angular/core';
 import { IonItemSliding } from '@ionic/angular';
 import { PlatformService, ThemeColor } from '@kirbydesign/designsystem/helpers';
 import { ListSwipeAction, ListSwipeDirection, ListSwipeEnd } from '../list-swipe-action.type';
 import { BoundaryClass } from './list-item.types';
 
+@Directive()
 export default abstract class ListItemBaseComponent {
   _isSwipingEnabled = false;
 
@@ -113,4 +114,7 @@ export default abstract class ListItemBaseComponent {
       this._isSwipingEnabled = this.platform.isTouch();
     }
   }
+}
+function Decorator(arg0: {}) {
+  throw new Error('Function not implemented.');
 }

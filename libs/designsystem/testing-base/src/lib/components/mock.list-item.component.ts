@@ -1,11 +1,7 @@
 import { Component, EventEmitter, forwardRef, Input, Output, TemplateRef } from '@angular/core';
 
-import {
-  BoundaryClass,
-  ListItemComponent,
-  ListSwipeAction,
-  ThemeColor,
-} from '@kirbydesign/designsystem';
+import { ListItemComponent, ListSwipeAction, ThemeColor } from '@kirbydesign/designsystem';
+import { BoundaryClass } from '@kirbydesign/designsystem/list';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
