@@ -1,6 +1,11 @@
 <ng-container [ngSwitch]="!!swipeActions && swipeActions?.length > 0">
   <ng-container *ngSwitchCase="false">
-    <div class="list-item--no-action" [ngClass]="boundaryClass">
+    <div
+      class="list-item--no-action"
+      (click)="_onItemSelect(item)"
+      [ngClass]="boundaryClass"
+      [class.selected]="isSelected"
+    >
       <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: item }"></ng-container>
     </div>
   </ng-container>

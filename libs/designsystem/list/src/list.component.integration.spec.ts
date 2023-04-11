@@ -8,7 +8,7 @@ import { SpinnerModule } from '@kirbydesign/designsystem/spinner';
 import { CardModule } from '@kirbydesign/designsystem/card';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
-import { ListComponent, ListModule } from '..';
+import { ListComponent, ListModule, ListSwipeAction } from '..';
 
 const { fontWeight, size } = DesignTokenHelper;
 
@@ -54,7 +54,7 @@ describe('ListComponent', () => {
       ionList = spectator.queryHost('ion-list');
       await TestHelper.whenReady(ionList);
       itemsInList = spectator.queryAll('ion-list ion-item');
-      itemTexts = spectator.queryAll('ion-list ion-item h3');
+      itemTexts = spectator.queryAll('ion-list kirby-item ion-item h3');
     });
 
     it('should create list wrapper', () => {
@@ -174,6 +174,12 @@ describe('ListComponent', () => {
   });
 
   describe('when a list has 1 element', () => {
+    const action: ListSwipeAction = {
+      position: 'left',
+      title: 'Action',
+      onSelected: () => {},
+    };
+
     beforeEach(async () => {
       spectator = createHost<ListComponent>(
         `
@@ -182,7 +188,7 @@ describe('ListComponent', () => {
         </kirby-list>
         `,
         {
-          props: { items: [{ name: 'Item1' }] },
+          props: { items: [{ name: 'Item1' }], swipeActions: [action] },
           providers: [{ provide: PlatformService, useValue: mockPlatformServiceIsTouchTrue }],
         }
       );
@@ -199,6 +205,14 @@ describe('ListComponent', () => {
   });
 
   describe('when a list has 2 elements', () => {
+    const action: ListSwipeAction = {
+      position: 'left',
+      title: 'Archive',
+      type: 'warning',
+      onSelected: (item) => null,
+      isDisabled: (_item: any) => false,
+      icon: 'more',
+    };
     beforeEach(async () => {
       spectator = createHost<ListComponent>(
         `
@@ -207,7 +221,7 @@ describe('ListComponent', () => {
           </kirby-list>
           `,
         {
-          props: { items: [{ name: 'Item1' }, { name: 'Item2' }] },
+          props: { items: [{ name: 'Item1' }, { name: 'Item2' }], swipeActions: [action] },
           providers: [{ provide: PlatformService, useValue: mockPlatformServiceIsTouchTrue }],
         }
       );
@@ -234,6 +248,15 @@ describe('ListComponent', () => {
   });
 
   describe('when a list have 3 elements', () => {
+    const action: ListSwipeAction = {
+      position: 'left',
+      title: 'Archive',
+      type: 'warning',
+      onSelected: (item) => null,
+      isDisabled: (_item: any) => false,
+      icon: 'more',
+    };
+
     beforeEach(async () => {
       spectator = createHost<ListComponent>(
         `
@@ -242,11 +265,15 @@ describe('ListComponent', () => {
           </kirby-list>
           `,
         {
-          props: { items: [{ name: 'Item1' }, { name: 'Item2' }, { name: 'Item3' }] },
+          props: {
+            items: [{ name: 'Item1' }, { name: 'Item2' }, { name: 'Item3' }],
+            swipeActions: [action],
+          },
           providers: [{ provide: PlatformService, useValue: mockPlatformServiceIsTouchTrue }],
         }
       );
     });
+
     it(`should apply the CSS class 'first' on the first element`, () => {
       const list = spectator.queryAll('ion-item-sliding');
 
@@ -256,6 +283,7 @@ describe('ListComponent', () => {
       expect(list[0].classList).toContain('first');
       expect(list[0].classList).not.toContain('last');
     });
+
     it(`should neither apply 'first' or 'last' on the element(s) between first and last`, () => {
       const list = spectator.queryAll('ion-item-sliding');
 

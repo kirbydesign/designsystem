@@ -1,4 +1,4 @@
-<div [ngClass]="boundaryClass" class="menu-item">
+<div [ngClass]="boundaryClass" class="menu-item" [class.selected]="isSelected">
   <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: item }"></ng-container>
   <ng-container [ngSwitch]="swipeActions.length > 1">
     <ng-container *ngSwitchCase="true">
