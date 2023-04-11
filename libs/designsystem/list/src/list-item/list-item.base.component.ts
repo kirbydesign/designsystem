@@ -115,6 +115,6 @@ export default abstract class ListItemBaseComponent {
     }
   }
 }
-function Decorator(arg0: {}) {
+function Decorator(arg0: unknown) {
   throw new Error('Function not implemented.');
 }
