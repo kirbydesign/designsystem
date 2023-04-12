@@ -81,6 +81,7 @@ import { HeaderExampleComponent } from './header-example/header-example.componen
 import { NestedModalsV2ExampleComponent } from './modal-v2-example/nested-modals/nested-modals-v2-example.component';
 import { HeaderWithActionGroupExampleComponent } from './header-example/examples/action-group';
 import { MenuExampleComponent } from './menu-example/menu-example.component';
+import { ListActionMobileWrapperModule } from './list-action/list-action-mobile-wrapper.module';
 
 export const routes: Routes = [
   {
@@ -376,6 +377,15 @@ export const routes: Routes = [
       {
         path: 'with-sections-and-stand-alone',
         component: ListWithSectionsAndStandAloneExampleComponent,
+      },
+      {
+        path: 'actions',
+        children: [
+          {
+            path: '',
+            loadChildren: () => ListActionMobileWrapperModule,
+          },
+        ],
       },
     ],
   },

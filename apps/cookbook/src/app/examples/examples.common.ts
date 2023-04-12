@@ -112,5 +112,4 @@ export const COMPONENT_DECLARATIONS: any[] = [
   ListExperimentalExampleComponent,
   DataTableExampleComponent,
   MenuExampleComponent,
-  ListActionOneActionExampleComponent,
 ];

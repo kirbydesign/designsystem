@@ -42,6 +42,8 @@ import { SegmentedControlExampleModule } from './segmented-control-example/segme
 import { ToggleButtonExampleModule } from './toggle-button-example/toggle-button-example.module';
 import { VirtualScrollExampleModule } from './virtual-scroll-example/virtual-scroll-example.module';
 import { MenuExampleModule } from './menu-example/menu-example.module';
+import { ListActionOneActionExampleComponent } from './list-action/list-action-one-action-example.component';
+import { ListActionMultipleActionsExampleComponent } from './list-action/list-action-multiple-actions-example.component';
 
 const IMPORTS = [
   CodeViewerModule,
@@ -77,6 +79,8 @@ const IMPORTS = [
   SlideModule,
   HeaderExampleModule,
   AlertExperimentalModule,
+  ListActionOneActionExampleComponent,
+  ListActionMultipleActionsExampleComponent,
 ];
 
 @NgModule({

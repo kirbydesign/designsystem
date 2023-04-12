@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { KirbyModule, ListSwipeAction } from '@kirbydesign/designsystem';
+import { KirbyModule } from '@kirbydesign/designsystem';
+import { ListSwipeAction } from '@kirbydesign/designsystem/list';
 import { stringifyProp, templateUrl } from './list-action-example';
+
 const config = {
-  selector: 'cookbook-list-action-one-action-example',
+  selector: 'cookbook-list-action-multiple-actions-example',
   template: templateUrl,
 };
 
@@ -13,16 +15,15 @@ const config = {
   template: config.template,
   styleUrls: ['./list-action-example.component.scss'],
 })
-export class ListActionOneActionExampleComponent {
+export class ListActionMultipleActionsExampleComponent {
   template: string = config.template;
+
   public items = [
     {
-      title: 'A single action item',
+      title: 'A multiple action item',
       amount: '5.587.218.309 DKK',
     },
   ];
-
-  public itemsExample = `items = ${stringifyProp(this.items)}`;
 
   public actions: Partial<ListSwipeAction>[] = [
     {
@@ -30,13 +31,16 @@ export class ListActionOneActionExampleComponent {
       title: 'Archive',
       type: 'warning',
       onSelected: (item) => alert('Archive selected'),
+      icon: 'attach',
+    },
+    {
+      position: 'left',
+      title: 'Add',
+      type: 'success',
+      onSelected: (item) => alert('Add selected'),
       icon: 'add',
     },
   ];
 
   public actionsExample = `actions = ${stringifyProp(this.actions)}`;
-
-  public actionsAndItemsExample = `
-  ${this.itemsExample}
-  ${this.actionsExample}`;
 }
