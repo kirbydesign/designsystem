@@ -40,7 +40,12 @@
 </ng-template>
 
 <ng-template #singleActionTemplate let-action>
-  <button kirby-button type="button" [noDecoration]="true">
+  <button
+    kirby-button
+    type="button"
+    [noDecoration]="true"
+    (click)="_onSwipeActionSelect(action, item, $event)"
+  >
     <kirby-icon name="{{ action?.icon }}"></kirby-icon>
   </button>
 </ng-template>

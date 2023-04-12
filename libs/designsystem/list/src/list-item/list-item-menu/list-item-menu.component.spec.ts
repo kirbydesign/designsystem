@@ -221,4 +221,80 @@ describe('ListItemMenuComponent', () => {
       expect(itemThree).not.toHaveComputedStyle(dividerComputedStyle);
     });
   });
+
+  describe('when an action is clicked', () => {
+    describe('and there is one action', () => {
+      const defaultSwipeActions: ListSwipeAction[] = [
+        {
+          position: 'right',
+          title: 'Delete',
+          type: 'warning',
+          onSelected: (item) => null,
+          isDisabled: (_item: any) => false,
+          icon: 'more',
+        },
+      ];
+
+      let singleAction;
+
+      beforeEach(() => {
+        sutComponent.swipeActions = defaultSwipeActions;
+        spectator.detectChanges();
+        singleAction = spectator.query('[kirby-button] kirby-icon');
+      });
+
+      it('should call the onSelected function of the clicked action', () => {
+        const selectedSpy = spyOn(spectator.component, 'onItemSelected');
+
+        expect(singleAction).toBeTruthy();
+        expect(selectedSpy).not.toHaveBeenCalled();
+
+        singleAction.click();
+
+        expect(selectedSpy).toHaveBeenCalledOnceWith(
+          jasmine.objectContaining({ swipeAction: defaultSwipeActions[0] })
+        );
+      });
+    });
+
+    describe('and there are two actions', () => {
+      const defaultSwipeActions: ListSwipeAction[] = [
+        {
+          position: 'left',
+          title: 'Archive',
+          type: 'warning',
+          onSelected: (item) => null,
+          isDisabled: (_item: any) => false,
+          icon: 'more',
+        },
+        {
+          position: 'right',
+          title: 'Delete',
+          type: 'warning',
+          onSelected: (item) => null,
+          isDisabled: (_item: any) => false,
+          icon: 'more',
+        },
+      ];
+      let menu;
+
+      beforeEach(() => {
+        sutComponent.swipeActions = defaultSwipeActions;
+        spectator.detectChanges();
+        menu = spectator.query('kirby-menu');
+      });
+
+      it('should call the onSelected function of the clicked action', () => {
+        const selectedSpy = spyOn(spectator.component, 'onItemSelected');
+
+        const menuItems = menu.querySelectorAll('kirby-item');
+        expect(selectedSpy).toHaveBeenCalledTimes(0);
+        menuItems[0].click();
+
+        expect(selectedSpy).toHaveBeenCalledOnceWith(
+          jasmine.objectContaining({ swipeAction: defaultSwipeActions[0] })
+        );
+      });
+    });
+  });
 });
