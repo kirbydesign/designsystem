@@ -62,6 +62,7 @@ import { CookbookChartStockConfigShowcaseComponent } from './chart-config-showca
 import { CookbookChartBarConfigShowcaseComponent } from './chart-config-showcase/bar/chart-config-bar-showcase.component';
 import { HeaderShowcaseComponent } from './header-showcase/header-showcase.component';
 import { MenuShowcaseComponent } from './menu-showcase/menu-showcase.component';
+import { ListActionShowcaseComponent } from './list-action/list-action-showcase.component';
 
 export const routes: Routes = [
   {
@@ -126,6 +127,10 @@ export const routes: Routes = [
       {
         path: 'list-swipe',
         component: ListSwipeShowcaseComponent,
+      },
+      {
+        path: 'list-action',
+        component: ListActionShowcaseComponent,
       },
       {
         path: 'list-no-shape',
