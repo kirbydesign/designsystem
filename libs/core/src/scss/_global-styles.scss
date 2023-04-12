@@ -117,24 +117,38 @@ ion-modal.kirby-overlay {
       --border-radius: #{utils.$border-radius};
 
       &::part(content) {
-        margin: 15px;
+        margin: utils.size('xxl');
       }
 
       &:not(.kirby-modal-compact) {
-        --width: #{map.get(utils.$modal-v2-widths, 'm')};
-        --height: #{map.get(utils.$modal-v2-heights, 'm')};
-        --max-height: #{$modal-max-height-desktop};
-        --min-height: #{$modal-max-width-desktop};
+        /* height & width variables are kept local here until we have determined the exact values  
+         * and can migrate the values into heights/widths in _variables.scss, as a breaking change 
+         * to either the existing modal heights or the modal-v2 maps.
+         */
+
+        $modal-widths: (
+          s: 356px,
+          m: 636px,
+          l: 888px,
+        );
+        $modal-heights: (
+          s: 484px,
+          m: 565px,
+          l: 754px,
+        );
+
+        --width: #{map.get($modal-widths, 'm')};
+        --height: #{map.get($modal-heights, 'm')};
         --border-radius: #{$modal-border-radius};
 
-        &.kirby-large-screen-sm {
-          --width: #{map.get(utils.$modal-v2-widths, 's')};
-          --height: #{map.get(utils.$modal-v2-heights, 's')};
+        &.kirby-modal-small {
+          --width: #{map.get($modal-widths, 's')};
+          --height: #{map.get($modal-heights, 's')};
         }
 
-        &.kirby-large-screen-lg {
-          --width: #{map.get(utils.$modal-v2-widths, 'l')};
-          --height: #{map.get(utils.$modal-v2-heights, 'l')};
+        &.kirby-modal-large {
+          --width: #{map.get($modal-widths, 'l')};
+          --height: #{map.get($modal-heights, 'l')};
         }
 
         &.kirby-modal-full-height::part(content),

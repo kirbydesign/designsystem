@@ -50,7 +50,6 @@ export class ModalHelper {
 
     const defaultModalSize: ModalSize = config.flavor === 'modal' ? 'medium' : null;
     const modalSize = config.size || defaultModalSize;
-    const modalSizeLargeScreen = config.largeScreenSize || 'md';
 
     const allow_scroll_class = 'allow-background-scroll';
 
@@ -87,7 +86,6 @@ export class ModalHelper {
         config.flavor === 'drawer' ? 'kirby-drawer' : null,
         config.flavor === 'compact' ? 'kirby-modal-compact' : null,
         modalSize ? 'kirby-modal-' + modalSize : null,
-        modalSizeLargeScreen ? 'kirby-large-screen-' + modalSizeLargeScreen : null,
         config.interactWithBackground ? 'interact-with-background' : null,
         ...customCssClasses,
       ],
