@@ -5,7 +5,7 @@ import { BasePageExampleComponent } from '../../page-example/base-page-example.c
 
 const config = {
   template: `<kirby-page defaultBackHref="/">
-  <kirby-header [title]="'Title'" subtitle1="Subtitle one" subtitle2="Subtitle two">
+  <kirby-header [title]="'Action Group'" subtitle1="Subtitle one" subtitle2="Subtitle two">
     <kirby-action-group *kirbyHeaderActions>
       <button kirby-button attentionLevel="3" (click)="actionClicked('Action 1')">
         <kirby-icon name="edit"></kirby-icon>

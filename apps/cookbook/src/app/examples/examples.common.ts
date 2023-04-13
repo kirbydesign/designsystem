@@ -52,6 +52,7 @@ import { DropdownExampleComponent } from './dropdown-example/dropdown-example.co
 import { DataTableExampleComponent } from './data-table-example/data-table-example.component';
 import { LoadingOverlayServiceExampleComponent } from './loading-overlay-example/service/loading-overlay-service-example.component';
 import { HeaderWithActionGroupExampleComponent } from './header-example/examples/action-group';
+import { HeaderWithCustomActionsExampleComponent } from './header-example/examples/custom-actions';
 import { MenuExampleComponent } from './menu-example/menu-example.component';
 
 export const COMPONENT_DECLARATIONS: any[] = [
@@ -89,6 +90,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   PageFitHeadingExampleComponent,
   PageFixedTitleAndActionsExampleComponent,
   HeaderWithActionGroupExampleComponent,
+  HeaderWithCustomActionsExampleComponent,
   PageTabNavExampleComponent,
   TabExampleComponent,
   PageFixedFooterTabsExampleComponent,
