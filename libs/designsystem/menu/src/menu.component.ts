@@ -6,6 +6,7 @@ import {
   Component,
   ContentChild,
   ElementRef,
+  HostListener,
   Input,
   ViewChild,
 } from '@angular/core';
@@ -70,11 +71,17 @@ export class MenuComponent implements AfterViewInit {
     | ElementRef<HTMLElement>
     | undefined;
 
-  public FloatingOffset: typeof FloatingOffset = FloatingOffset;
+  @ViewChild(FloatingDirective)
+  private floatingDirective: FloatingDirective;
 
-  constructor(private cdf: ChangeDetectorRef) {}
+  public FloatingOffset: typeof FloatingOffset = FloatingOffset;
 
   public ngAfterViewInit(): void {
     this.cdf.detectChanges(); // Sets the updated reference for kirby-floating
+  }
+
+  @HostListener('document:ionScroll')
+  _onIonScroll() {
+    this.floatingDirective.hide();
   }
 }

@@ -257,7 +257,7 @@ export class FloatingDirective implements OnInit, OnDestroy {
 
   /* Should be accessible for programmatically setting display */
   public hide(): void {
-    if (this.isDisabled) {
+    if (this.isDisabled || !this.isShown) {
       return;
     }
 
