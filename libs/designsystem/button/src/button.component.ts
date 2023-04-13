@@ -143,6 +143,11 @@ export class ButtonComponent implements AfterContentInit {
       return;
     }
 
+    // Ensure buttons inside the toolbar is always shown as icon only:
+    if (this.elementRef.nativeElement.closest('ion-toolbar')) {
+      this._showIconOnly = true;
+    }
+
     if (this.showIconOnly) {
       // If the button text is supplied as plain text (i.e. as a text node not within an element tag),
       // we need to wrap it in an element to be able to target and hide it with css:
