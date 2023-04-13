@@ -23,6 +23,12 @@
 <cookbook-code-viewer [ts]="singleAction.actionsAndItemsExample"></cookbook-code-viewer>
 
 <h1>Multiple actions</h1>
+<p>
+  The most noticable difference between the single and multiple action is seen in the desktop view.
+  Here we go from having a the single action displayed in the item, to having a
+  <a routerLink="../menu">menu</a>
+  with our actions inside.
+</p>
 <cookbook-list-action-multiple-actions-example
   #multipleActions
 ></cookbook-list-action-multiple-actions-example>
@@ -31,10 +37,4 @@
   src="/examples/list/actions/multiple-actions"
   showExternalLink="true"
 ></cookbook-iphone>
-
-<p>
-  By adding another action, we get a different layout. In this case, instead of a button with the
-  action icon, we get a
-  <a routerLink="../menu">menu</a>
-</p>
 <cookbook-code-viewer [ts]="multipleActions.actionsExample"></cookbook-code-viewer>
