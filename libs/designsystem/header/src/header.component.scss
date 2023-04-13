@@ -49,6 +49,8 @@
 .actions {
   // kirby-button already has 4px horizontal margin, so add additional 4px to get 8px in total:
   margin: 0 utils.size('xxxs');
+  display: flex;
+  justify-content: flex-end;
 
   @include utils.media('<medium') {
     margin-top: utils.size('m');
