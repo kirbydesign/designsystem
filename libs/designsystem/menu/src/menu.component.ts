@@ -31,6 +31,8 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MenuComponent implements AfterViewInit {
+  constructor(private cdf: ChangeDetectorRef, private elementRef: ElementRef<HTMLElement>) {}
+
   @Input() public isDisabled: boolean = false;
 
   @Input() public buttonSize: ButtonSize = ButtonSize.MD;
@@ -41,7 +43,7 @@ export class MenuComponent implements AfterViewInit {
 
   @Input() public triggers: Array<TriggerEvent> = ['click'];
 
-  @Input() public DOMPortalOutlet: HTMLElement | undefined;
+  @Input() public DOMPortalOutlet: HTMLElement = this.elementRef.nativeElement.ownerDocument.body;
 
   @Input() public portalOutletConfig: PortalOutletConfig | undefined;
 
