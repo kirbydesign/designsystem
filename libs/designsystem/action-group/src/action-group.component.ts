@@ -74,7 +74,9 @@ export class ActionGroupComponent implements AfterContentInit {
   ngAfterContentInit(): void {
     if (this.config) {
       this._isResizeable = this.config.isResizable;
-      this.visibleActions = this.config.visibleActions;
+      if (this.config.visibleActions !== undefined) {
+        this.visibleActions = this.config.visibleActions;
+      }
       if (this.config.isCondensed) {
         this.buttons?.forEach((button) => (button.showIconOnly = true));
       }
