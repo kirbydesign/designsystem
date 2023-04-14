@@ -1,6 +1,19 @@
 @use '@kirbydesign/core/src/scss/utils';
+// @use 'sass:map';
+@use '@kirbydesign/core/src/scss/interaction-state';
 $divider-color: utils.get-color('background-color');
+$highlight-color: utils.get-color('light');
 
+@mixin list-item-hover() {
+  @include interaction-state.initialize-layer;
+  @include interaction-state.apply-hover('l', $make-lighter: true) {
+    background-color: $highlight-color;
+
+    @include interaction-state.apply-focus-visible-background('xxxs');
+    @include interaction-state.apply-hover-ionic('xxxs');
+    @include interaction-state.apply-active-ionic('xxxs');
+  }
+}
 
 kirby-label {
   margin: 0;
@@ -29,4 +42,8 @@ label {
 
 .menu-divider {
   border-bottom: 1px solid $divider-color;
+}
+
+:host {
+  @include list-item-hover();
 }

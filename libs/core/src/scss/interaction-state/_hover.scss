@@ -23,3 +23,10 @@
     @content;
   }
 }
+
+@mixin remove-hover-ionic() {
+  @include utils.hover {
+    --background-hover: none;
+    --background-hover-opacity: 0;
+  }
+}

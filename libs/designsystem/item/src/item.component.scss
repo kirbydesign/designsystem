@@ -164,6 +164,8 @@
 
     ion-item {
       --inner-padding-end: #{utils.size('xxxs')};
+
+      @include interaction-state.remove-hover-ionic();
     }
   }
 }

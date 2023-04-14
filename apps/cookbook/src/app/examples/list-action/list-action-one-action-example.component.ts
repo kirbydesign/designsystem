@@ -20,6 +20,10 @@ export class ListActionOneActionExampleComponent {
       title: 'A single action item',
       amount: '5.587.218.309 DKK',
     },
+    {
+      title: 'Money',
+      amount: '5.387.218.309 DKK',
+    },
   ];
 
   public itemsExample = `items = ${stringifyProp(this.items)}`;

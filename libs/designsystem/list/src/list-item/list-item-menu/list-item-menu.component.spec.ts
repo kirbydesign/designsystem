@@ -296,5 +296,54 @@ describe('ListItemMenuComponent', () => {
         );
       });
     });
+
+    describe('from 1 to 2 actions', () => {
+      const defaultSwipeActions: ListSwipeAction[] = [
+        {
+          position: 'left',
+          title: 'Archive',
+          type: 'warning',
+          onSelected: (item) => null,
+          isDisabled: (_item: any) => false,
+          icon: 'more',
+        },
+        {
+          position: 'right',
+          title: 'Delete',
+          type: 'warning',
+          onSelected: (item) => null,
+          isDisabled: (_item: any) => false,
+          icon: 'more',
+        },
+      ];
+      let menu;
+
+      beforeEach(() => {
+        sutComponent.swipeActions = [defaultSwipeActions[0]];
+        spectator.detectChanges();
+        menu = spectator.query('kirby-menu');
+      });
+
+      it('should have 1 action as button and then have a menu with 2 items', () => {
+        let singleActions = spectator.queryAll('[kirby-button]  kirby-icon');
+        let singleAction = singleActions[0];
+
+        expect(singleActions).toHaveLength(1);
+        expect(singleAction.closest('kirby-menu')).toBeFalsy(); // verifies that the action is not inside a menu
+        expect(menu).toBeFalsy();
+
+        sutComponent.swipeActions = [...defaultSwipeActions];
+        spectator.detectChanges();
+        menu = spectator.query('kirby-menu');
+
+        expect(menu).toBeTruthy();
+
+        singleActions = spectator.queryAll('[kirby-button]  kirby-icon');
+        singleAction = singleActions[0];
+
+        expect(singleActions).toHaveLength(1);
+        expect(singleAction.closest('kirby-menu')).toBeTruthy();
+      });
+    });
   });
 });
