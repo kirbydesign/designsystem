@@ -1,6 +1,7 @@
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
 import { SwiperOptions } from 'swiper';
 import { register } from 'swiper/element/bundle';
+import { UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
 
 register();
 
@@ -15,20 +16,20 @@ export class CarouselComponent implements AfterViewInit {
 
   @Input() config: CarouselConfig;
   @Input() noPadding: boolean;
+  _paginationId = UniqueIdGenerator.scopedTo('pagination').next();
+  _prevButtonId = UniqueIdGenerator.scopedTo('swiper-button-prev').next();
+  _nextButtonId = UniqueIdGenerator.scopedTo('swiper-button-next').next();
 
   ngAfterViewInit() {
     const defaultConfig: SwiperOptions = {
-      // pagination: {
-      //   el: '.pagination',
-      //   type: 'bullets',
-      // },
-      // navigation: {
-      //   nextEl: '.nav-next',
-      //   prevEl: '.nav-prev',
-      // },
-      // slidesPerView: 1.1,
-      // centeredSlides: true,
-      // spaceBetween: 8,
+      pagination: {
+        el: `.${this._paginationId}`,
+        type: 'bullets',
+      },
+      navigation: {
+        nextEl: `.${this._nextButtonId}`,
+        prevEl: `.${this._prevButtonId}`,
+      },
     };
 
     const config = Object.assign(defaultConfig, this.config);

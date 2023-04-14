@@ -1,13 +1,25 @@
 <div class="kirby-carousel" [ngClass]="noPadding ? 'no-padding' : ''">
   <div class="navigation">
-    <div class="pagination"></div>
+    <div class="pagination" [ngClass]="_paginationId"></div>
 
     <div class="buttons">
-      <button kirby-button attentionLevel="3" class="nav-prev swiper-button-prev" size="sm">
+      <button
+        kirby-button
+        attentionLevel="3"
+        class="nav-prev swiper-button-prev"
+        [ngClass]="_prevButtonId"
+        size="sm"
+      >
         <kirby-icon name="arrow-back"></kirby-icon>
       </button>
 
-      <button kirby-button attentionLevel="3" class="nav-next swiper-button-next" size="sm">
+      <button
+        kirby-button
+        attentionLevel="3"
+        class="nav-next swiper-button-next"
+        [ngClass]="_nextButtonId"
+        size="sm"
+      >
         <kirby-icon name="arrow-more"></kirby-icon>
       </button>
     </div>
