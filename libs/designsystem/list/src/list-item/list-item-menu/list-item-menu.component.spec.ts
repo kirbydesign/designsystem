@@ -159,67 +159,6 @@ describe('ListItemMenuComponent', () => {
       expect(selectedSpy).toHaveBeenCalled();
       expect(selectedSpy).toHaveBeenCalledTimes(1);
     });
-
-    it('should have 1 divider', () => {
-      expect(menu).toBeTruthy();
-      menu.click();
-      const menuDividers = menu.querySelectorAll('.menu-divider');
-      expect(menuDividers).toHaveLength(1);
-    });
-  });
-
-  describe('with three swipe actions', () => {
-    const defaultSwipeActions: ListSwipeAction[] = [
-      {
-        position: 'left',
-        title: 'Archive',
-        type: 'warning',
-        onSelected: (item) => null,
-        isDisabled: (_item: any) => false,
-        icon: 'more',
-      },
-      {
-        position: 'right',
-        title: 'Delete',
-        type: 'warning',
-        onSelected: (item) => null,
-        isDisabled: (_item: any) => false,
-        icon: 'more',
-      },
-      {
-        position: 'left',
-        title: 'Delete2',
-        type: 'warning',
-        onSelected: (item) => null,
-        isDisabled: (_item: any) => false,
-        icon: 'more',
-      },
-    ];
-    let menu;
-
-    beforeEach(() => {
-      sutComponent.swipeActions = defaultSwipeActions;
-      spectator.detectChanges();
-      menu = spectator.query('kirby-menu');
-    });
-
-    it('should have 2 dividers on the top two items', () => {
-      const menuDividers = spectator.queryAll('.menu-divider');
-      expect(menuDividers).toHaveLength(2);
-
-      const menuItems = menu.querySelectorAll('kirby-item');
-      expect(menuItems).toHaveLength(3);
-
-      const [itemOne, itemTwo, itemThree] = menuItems;
-
-      const dividerComputedStyle = {
-        'border-bottom': `1px solid ${getColor('background-color').value}`,
-      };
-
-      expect(itemOne).toHaveComputedStyle(dividerComputedStyle);
-      expect(itemTwo).toHaveComputedStyle(dividerComputedStyle);
-      expect(itemThree).not.toHaveComputedStyle(dividerComputedStyle);
-    });
   });
 
   describe('when an action is clicked', () => {

@@ -40,10 +40,6 @@ label {
   padding-right: utils.size('xxxs');
 }
 
-.menu-divider {
-  border-bottom: 1px solid $divider-color;
-}
-
 :host {
   @include list-item-hover();
 }

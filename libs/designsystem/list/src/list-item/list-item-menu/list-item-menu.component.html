@@ -29,7 +29,6 @@
     </button>
     <kirby-item
       *ngFor="let action of swipeActions; let i = index"
-      [class.menu-divider]="swipeActions.length - 1 !== i"
       [selectable]="true"
       (click)="_onSwipeActionSelect(action, item, $event)"
     >
