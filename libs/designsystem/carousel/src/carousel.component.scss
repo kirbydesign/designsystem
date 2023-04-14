@@ -1,47 +1,42 @@
 @use '@kirbydesign/core/src/scss/utils';
 
-// @import "swiper/scss";
-// @import "swiper/scss/pagination";
-// @import "swiper/modules/pagination/pagination";
+$bullet-width: 10px;
+$bullet-height: 6px;
+$bullet-inactive-opacity: 0.2;
 
-.kirby-carousel {
-  position: relative;
-}
+:host {
+  --swiper-navigation-sides-offset: 0;
+  --swiper-pagination-bullet-width: #{$bullet-width};
+  --swiper-pagination-bullet-height: #{$bullet-height};
+  --swiper-pagination-bullet-horizontal-gap: #{utils.size('xxxs')};
+  --swiper-pagination-color: #{utils.get-color('black')};
+  --swiper-pagination-bullet-inactive-color: #{utils.get-color('black')};
+  --swiper-pagination-bullet-inactive-opacity: #{$bullet-inactive-opacity};
 
-.pagination {
-  display: flex;
-  justify-content: center;
-  margin-top: utils.size('xxs');
-}
-
-.nav-prev,
-.nav-next {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  display: none;
-}
-
-.nav-next {
-  right: 0;
-  z-index: 2;
-}
-
-.nav-prev {
-  z-index: 2;
-}
-
-@include utils.media('>=medium') {
-  .nav-prev,
-  .nav-next {
+  .navigation {
     display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-block: utils.size('s');
   }
-}
 
-swiper-container {
-  position: static;
-}
+  .pagination {
+    width: auto;
+    margin-inline-end: utils.size('s');
+  }
 
-.no-padding {
-  margin-inline: calc(-1 * var(--padding-start)) calc(-1 * var(--padding-end));
+  .buttons {
+    display: none;
+  }
+
+  .no-padding {
+    margin-inline: calc(-1 * var(--padding-start)) calc(-1 * var(--padding-end));
+  }
+
+  @include utils.media('>=medium') {
+    .buttons {
+      display: block;
+      margin-inline-end: utils.size('s');
+    }
+  }
 }
