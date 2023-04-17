@@ -1,18 +1,18 @@
 import { Component, forwardRef } from '@angular/core';
 
-import { ModalRoutingExperimentalComponent } from '@kirbydesign/designsystem/modal/experimental';
+import { ModalV2RoutingComponent } from '@kirbydesign/designsystem/modal/v2';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
-  selector: 'kirby-modal-routing-wrapper',
+  selector: 'kirby-modal-v2-routing-wrapper',
   template: '<ng-content></ng-content>',
   providers: [
     {
-      provide: ModalRoutingExperimentalComponent,
-      useExisting: forwardRef(() => MockModalRoutingExperimentalComponent),
+      provide: ModalV2RoutingComponent,
+      useExisting: forwardRef(() => MockModalV2RoutingComponent),
     },
   ],
 })
-export class MockModalRoutingExperimentalComponent {}
+export class MockModalV2RoutingComponent {}
 
 // #endregion

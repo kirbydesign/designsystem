@@ -33,6 +33,7 @@ export { MockListItemComponent } from './mock.list-item.component';
 export { MockListSectionHeaderComponent } from './mock.list-section-header.component';
 export { MockListComponent } from './mock.list.component';
 export { MockLoadingOverlayComponent } from './mock.loading-overlay.component';
+export { MockMenuComponent } from './mock.menu.component';
 export { MockModalFooterComponent } from './mock.modal-footer.component';
 export { MockPageFooterComponent } from './mock.page-footer.component';
 export {
@@ -50,15 +51,15 @@ export {
 } from './mock.page.component';
 export { MockAlertExperimentalComponent } from './mock.alert-experimental.component';
 export { MockStockChartComponent } from './mock.stock-chart.component';
-export { MockModalFooterExperimentalComponent } from './mock.footer.component';
-export { MockModalExperimentalComponent } from './mock.modal.component';
-export { MockModalRoutingExperimentalComponent } from './mock.modal-routing.component';
-export { MockModalWrapperExperimentalComponent } from './mock.wrapper.component';
 export { MockPageLocalNavigationComponent } from './mock.page-local-navigation.component';
 export { MockAlertComponent } from './mock.alert.component';
 export { MockPopoverComponent } from './mock.popover.component';
 export { MockModalCompactWrapperComponent } from './mock.modal-compact-wrapper.component';
 export { MockModalWrapperComponent } from './mock.modal-wrapper.component';
+export { MockModalV2FooterComponent } from './mock.footer.component';
+export { MockModalV2Component } from './mock.modal.component';
+export { MockModalV2RoutingComponent } from './mock.modal-routing.component';
+export { MockModalV2WrapperComponent } from './mock.wrapper.component';
 export { MockProgressCircleComponent } from './mock.progress-circle.component';
 export { MockProgressCircleRingComponent } from './mock.progress-circle-ring.component';
 export { MockRadioGroupComponent } from './mock.radio-group.component';
@@ -79,6 +80,8 @@ export { MockTextareaComponent } from './mock.textarea.component';
 export { MockToggleButtonComponent } from './mock.toggle-button.component';
 export { MockToggleComponent } from './mock.toggle.component';
 export { MockBadgeComponent } from './mock.web-component-proxies.component';
+export { MockTabNavigationComponent } from './mock.tab-navigation.component';
+export { MockTabNavigationItemComponent } from './mock.tab-navigation-item.component';
 export {
   MockHeaderActionsDirective,
   MockHeaderComponent,

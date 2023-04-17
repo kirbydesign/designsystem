@@ -1,3 +1,4 @@
+// eslint-disable-next-line prettier/prettier
 export {
   ActionGroupComponent,
   ActionGroupConfig,

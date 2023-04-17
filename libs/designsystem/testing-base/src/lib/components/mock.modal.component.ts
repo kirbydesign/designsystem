@@ -1,24 +1,27 @@
 import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 
-import { ModalExperimentalComponent, SizeTemp } from '@kirbydesign/designsystem/modal/experimental';
+import { Flavor, ModalV2Component, SizeTemp } from '@kirbydesign/designsystem/modal/v2';
 import { OverlayEventDetail } from '@ionic/core/components';
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
-  selector: 'kirby-modal-experimental',
+  selector: 'kirby-modal-v2',
   template: '<ng-content></ng-content>',
   providers: [
     {
-      provide: ModalExperimentalComponent,
-      useExisting: forwardRef(() => MockModalExperimentalComponent),
+      provide: ModalV2Component,
+      useExisting: forwardRef(() => MockModalV2Component),
     },
   ],
 })
-export class MockModalExperimentalComponent {
+export class MockModalV2Component {
+  @Input() flavor: Flavor;
   @Input() open: boolean;
   @Input() canDismiss: boolean | (() => Promise<boolean>);
   @Input() title: string;
   @Input() hasCollapsibleTitle: boolean;
   @Input() scrollDisabled: boolean;
+  @Input() breakpoints: number[];
+  @Input() initialBreakpoint;
   @Input() size: SizeTemp;
   @Input() height: string;
   @Output() willPresent = new EventEmitter<CustomEvent<OverlayEventDetail>>();

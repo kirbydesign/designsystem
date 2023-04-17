@@ -1,19 +1,20 @@
 import { Component, forwardRef, Input } from '@angular/core';
 
-import { ModalWrapperExperimentalComponent } from '@kirbydesign/designsystem/modal/experimental';
+import { Flavor, ModalV2WrapperComponent } from '@kirbydesign/designsystem/modal/v2';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
-  selector: 'kirby-modal-wrapper-experimental',
+  selector: 'kirby-modal-v2-wrapper',
   template: '<ng-content></ng-content>',
   providers: [
     {
-      provide: ModalWrapperExperimentalComponent,
-      useExisting: forwardRef(() => MockModalWrapperExperimentalComponent),
+      provide: ModalV2WrapperComponent,
+      useExisting: forwardRef(() => MockModalV2WrapperComponent),
     },
   ],
 })
-export class MockModalWrapperExperimentalComponent {
+export class MockModalV2WrapperComponent {
+  @Input() flavor: Flavor;
   @Input() title: string;
   @Input() hasCollapsibleTitle: boolean;
   @Input() scrollDisabled: boolean;

@@ -7,6 +7,7 @@ import {
   IconRegistryService,
   LoadingOverlayService,
   ModalController,
+  ModalV2Controller,
   TabsService,
   ToastController,
 } from '@kirbydesign/designsystem';
@@ -68,6 +69,10 @@ export function modalControllerFactory() {
   ]);
 }
 
+export function modalV2ControllerFactory() {
+  return jasmine.createSpyObj<ModalV2Controller>('ModalV2Controller', ['showModal', 'closeModal']);
+}
+
 export function tabsServiceFactory() {
   return jasmine.createSpyObj<TabsService>('TabsService', ['setOutlet', 'resetOutlet'], {
     outlet$: EMPTY,
@@ -102,6 +107,10 @@ export const MOCK_PROVIDERS = [
   {
     provide: ModalController,
     useFactory: modalControllerFactory,
+  },
+  {
+    provide: ModalV2Controller,
+    useFactory: modalV2ControllerFactory,
   },
   {
     provide: TabsService,

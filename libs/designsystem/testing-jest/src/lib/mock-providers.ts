@@ -7,6 +7,7 @@ import {
   IconRegistryService,
   LoadingOverlayService,
   ModalController,
+  ModalV2Controller,
   TabsService,
   ToastController,
 } from '@kirbydesign/designsystem';
@@ -71,6 +72,13 @@ export function modalControllerFactory() {
   };
 }
 
+export function modalV2ControllerFactory() {
+  return {
+    showModal: jest.fn(),
+    closeModal: jest.fn(),
+  };
+}
+
 export function tabsServiceFactory() {
   return {
     setOutlet: jest.fn(),
@@ -109,6 +117,10 @@ export const MOCK_PROVIDERS = [
   {
     provide: ModalController,
     useFactory: modalControllerFactory,
+  },
+  {
+    provide: ModalV2Controller,
+    useFactory: modalV2ControllerFactory,
   },
   {
     provide: TabsService,
