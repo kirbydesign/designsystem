@@ -1,20 +1,22 @@
 <ion-header (touchstart)="onHeaderTouchStart($event)">
   <ion-toolbar>
     <ion-title></ion-title>
-    <ion-buttons slot="{{ _isLargeScreen || config.flavor === 'modal' ? 'end' : 'start' }}">
-      <ng-container
-        *ngTemplateOutlet="
-          closeButton;
-          context: { icon: _isLargeScreen || config.flavor === 'modal' ? 'close' : 'arrow-down' }
-        "
-      ></ng-container>
-    </ion-buttons>
     <ion-buttons
-      slot="{{ _isLargeScreen ? 'start' : 'end' }}"
+      slot="start"
       *ngIf="config.flavor === 'drawer' && config.drawerSupplementaryAction"
     >
       <ng-container
         *ngTemplateOutlet="supplementaryButton; context: { btn: config.drawerSupplementaryAction }"
+      ></ng-container>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ng-container
+        *ngTemplateOutlet="
+          closeButton;
+          context: {
+            icon: _isMobileDrawer ? 'arrow-down' : 'close'
+          }
+        "
       ></ng-container>
     </ion-buttons>
   </ion-toolbar>
@@ -23,7 +25,7 @@
 <ion-content [scrollEvents]="true">
   <ion-header *ngIf="_hasCollapsibleTitle" collapse="condense">
     <ion-toolbar>
-      <span class="kirby-text-large" #contentTitle></span>
+      <span class="kirby-text-xlarge" #contentTitle></span>
     </ion-toolbar>
   </ion-header>
   <ng-container

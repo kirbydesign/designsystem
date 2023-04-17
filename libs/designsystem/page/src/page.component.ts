@@ -144,23 +144,14 @@ export class PageStickyContentDirective {}
   `,
   styles: [':host {display: flex}'],
 })
-export class PageProgressComponent extends ModalElementComponent implements OnInit {
+export class PageProgressComponent extends ModalElementComponent {
   // TODO: Find alternative implementation, which aligns with future page configuration / consumption
   // This implementation was chosen over expanding `moveChild` method in component wrapper with yet another scenario
-  @HostBinding('attr.slot') slot = 'start';
-
   constructor(
-    @Optional() @SkipSelf() private modalWrapper: ModalWrapperComponent,
     @Optional() modalElementsAdvertiser: ModalElementsAdvertiser,
     elementRef: ElementRef<HTMLElement>
   ) {
     super(ModalElementType.PAGE_PROGRESS, elementRef, modalElementsAdvertiser);
-  }
-
-  ngOnInit(): void {
-    if (this.modalWrapper && this.modalWrapper.config.flavor === 'drawer') {
-      this.slot = 'end';
-    }
   }
 }
 @Component({

@@ -85,7 +85,7 @@ export class ModalWrapperComponent
   @ViewChild('contentTitle', { read: ElementRef })
   private _contentTitleElement: ElementRef<HTMLElement>;
 
-  _isLargeScreen: boolean;
+  _isMobileDrawer: boolean;
 
   get contentTitleElement(): ElementRef<HTMLElement> {
     /* 
@@ -304,7 +304,6 @@ export class ModalWrapperComponent
     this.resizeObserverService.observe(this.ionHeaderElement.nativeElement, (entry) => {
       const [property, pixelValue] = ['--header-height', `${entry.contentRect.height}px`];
       this.setCssVar(this.elementRef.nativeElement, property, pixelValue);
-      this._isLargeScreen = this.platform.isPhabletOrBigger();
     });
   }
 
@@ -476,6 +475,8 @@ export class ModalWrapperComponent
   }
 
   private onViewportResize(entry: ResizeObserverEntry) {
+    this._isMobileDrawer = !this.platform.isPhabletOrBigger() && this.config.flavor === 'drawer';
+
     if (!this.initialViewportHeight) {
       // Initial observe callback, register initial height:
       this.initialViewportHeight = entry.contentRect.height;
