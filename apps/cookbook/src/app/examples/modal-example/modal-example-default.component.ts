@@ -227,7 +227,7 @@ export class ModalExampleDefaultComponent {
     'kirby-cookbook-show-dummy-keyboard'
   );
   showPageProgress = false;
-  showFooter = true;
+  showFooter = false;
   displayFooterAsInline = false;
   collapseTitle = false;
   alertBeforeClose = false;
