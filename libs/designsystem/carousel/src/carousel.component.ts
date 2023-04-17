@@ -39,4 +39,8 @@ export class CarouselComponent implements AfterViewInit {
 
     this.swiperContainer.nativeElement.initialize();
   }
+
+  public slideTo(index: number) {
+    this.swiperContainer.nativeElement.swiper.slideTo(index);
+  }
 }
