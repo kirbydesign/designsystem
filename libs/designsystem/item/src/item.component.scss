@@ -158,7 +158,7 @@
   }
 }
 
-:host-context(.menu-item) {
+:host-context(.menu-item ) {
   :host {
     flex-grow: 1;
 
@@ -167,5 +167,23 @@
 
       @include interaction-state.remove-hover-ionic();
     }
+
+    kirby-item {
+      --kirby-item-background: red;
+      background-color: red;
+    }
   }
 }
+
+// :host-context(.list-item--no-action) {
+//   :host-context(.itemColorWhite){
+//     :host {
+//       --kirby-item-background: white;
+//     }
+//   }
+//   :host-context(.itemColorlight){
+//     :host {
+//       --kirby-item-background: light;
+//     }
+//   }
+// }

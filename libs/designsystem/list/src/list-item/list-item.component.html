@@ -1,10 +1,13 @@
-<ng-container [ngSwitch]="!!swipeActions && swipeActions?.length > 0">
+<ng-container class="test" [ngSwitch]="!!swipeActions && swipeActions?.length > 0">
   <ng-container *ngSwitchCase="false">
     <div
       class="list-item--no-action"
+      [class.itemColorWhite]="!!getItemColor && getItemColor(item) === 'white'"
+      [class.itemColorlight]="!!getItemColor && getItemColor(item) === 'light'"
       (click)="_onItemSelect(item)"
       [ngClass]="boundaryClass"
       [class.selected]="isSelected"
+      [kirbyListItemColor]="getItemColor"
     >
       <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: item }"></ng-container>
     </div>
