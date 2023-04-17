@@ -34,12 +34,9 @@
   }
 }
 
-$toolbar-padding-inline: utils.size('s');
-$toolbar-padding-block: utils.size('xs');
-
-@mixin phablet-toolbar() {
+@mixin toolbar-phablet-or-bigger() {
   @include utils.media('>=medium') {
-    --padding-start: #{#{utils.size('m')}};
+    --padding-start: #{utils.size('m')};
     --padding-end: #{utils.size('m')};
     --padding-bottom: #{utils.size('m')};
     --padding-top: #{utils.size('m')};
@@ -53,10 +50,10 @@ ion-header {
   border-bottom: 1px solid utils.get-color('medium');
 
   ion-toolbar {
-    --padding-start: #{$toolbar-padding-inline};
-    --padding-end: #{$toolbar-padding-inline};
-    --padding-bottom: #{$toolbar-padding-block};
-    --padding-top: #{$toolbar-padding-block};
+    --padding-start: #{utils.size('s')};
+    --padding-end: #{utils.size('s')};
+    --padding-bottom: #{utils.size('s')};
+    --padding-top: #{utils.size('s')};
     --border-width: 0;
     --background: transparent;
     --color: var(--kirby-modal-color, #{utils.get-color('black')});
@@ -65,7 +62,7 @@ ion-header {
       color: var(--color);
     }
 
-    @include phablet-toolbar;
+    @include toolbar-phablet-or-bigger;
   }
 }
 
@@ -85,11 +82,7 @@ ion-header {
 }
 
 :host-context(ion-modal:not(.kirby-modal-full-height)) {
-  @include utils.media('>=medium') {
-    @include contain-content;
-  }
-
-  &.drawer {
+  @include utils.media('<medium') {
     @include contain-content;
   }
 }
@@ -100,7 +93,7 @@ ion-header {
   ion-header ion-toolbar:first-of-type {
     padding-top: var(--kirby-safe-area-top, 0);
 
-    @include phablet-toolbar;
+    @include toolbar-phablet-or-bigger;
   }
 }
 
@@ -108,12 +101,8 @@ ion-title {
   box-sizing: border-box;
   padding-inline-start: calc(48px + var(--padding-start));
   padding-inline-end: calc(48px + var(--padding-end));
-  font-size: utils.font-size('l');
+  font-size: utils.font-size('n');
   font-weight: utils.font-weight('bold');
-}
-
-:host(.drawer) ion-title {
-  font-size: utils.font-size('m');
 }
 
 ion-content {
@@ -134,6 +123,11 @@ ion-content {
   --padding-end: #{utils.size('s')};
 }
 
+ion-buttons {
+  // Ensure ion-buttons in toolbar is same height as the buttons it wraps
+  max-height: utils.size('xl');
+}
+
 // Ensure padding-rules are not merged with other media query,
 // as this rule has to come AFTER the default mobile-first rule in order to override:
 
@@ -147,21 +141,15 @@ ion-content {
 
 :host(.collapsible-title) {
   ion-content {
-    --padding-top: 0px;
+    ion-header {
+      // no border for header element when collapsible title is in the content area
+      border: none;
 
-    ion-header ion-toolbar:first-of-type {
-      padding-top: 0;
-
-      --padding-top: 0px;
-      --padding-bottom: 0px;
-      --padding-start: 0px;
-      --padding-end: 0px;
+      ion-toolbar:first-of-type {
+        --padding-start: 8px;
+        --padding-end: 8px;
+      }
     }
-  }
-
-  ion-title {
-    font-size: utils.font-size('n');
-    font-weight: utils.font-weight('bold');
   }
 }
 

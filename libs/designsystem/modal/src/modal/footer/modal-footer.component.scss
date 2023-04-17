@@ -15,6 +15,10 @@ ion-footer {
   color: var(--kirby-modal-footer-color, utils.get-color('white-contrast'));
   padding: $padding-vertical $padding-horizontal;
   padding-bottom: calc(#{$padding-vertical} + var(--kirby-modal-footer-safe-area-bottom, 0px));
+
+  @include utils.media('>=medium') {
+    padding: 20px utils.size('m');
+  }
 }
 
 @include utils.media('<medium') {
