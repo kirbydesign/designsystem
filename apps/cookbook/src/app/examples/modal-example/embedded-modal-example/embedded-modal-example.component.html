@@ -36,9 +36,12 @@
           [(showDummyKeyboard)]="showDummyKeyboard"
           [(showPageProgress)]="showPageProgress"
           [(showFooter)]="showFooter"
+          [(snapFooterToKeyboard)]="snapFooterToKeyboard"
           [(showDummyContent)]="showDummyContent"
           [disableScroll]="disableScroll"
           (disableScrollChange)="toggleDisableScroll($event)"
+          (selectedModalSize)="setSelectedModalSize($event)"
+          [modalSizes]="modalSizes"
         ></cookbook-modal-example-configuration>
       </cookbook-example-configuration-wrapper>
       <kirby-card
@@ -62,6 +65,8 @@
             [(delayLoadDummyContent)]="delayLoadDummyContent"
             [(loadAdditionalContent)]="loadAdditionalContent"
             [(openFullHeight)]="openFullHeight"
+            (selectedModalSize)="setSelectedModalSize($event)"
+            [modalSizes]="modalSizes"
           ></cookbook-modal-example-configuration>
         </cookbook-example-configuration-wrapper>
       </kirby-card>
@@ -160,17 +165,10 @@
   [snapToKeyboard]="snapFooterToKeyboard"
 >
   <div>
-    <div>
-      <button kirby-button attentionLevel="3" (click)="scrollToTop()">
-        To top
-        <kirby-icon name="arrow-up"></kirby-icon>
-      </button>
-      <button kirby-button (click)="close()">Close</button>
-    </div>
-    <kirby-checkbox
-      size="xs"
-      [(checked)]="snapFooterToKeyboard"
-      text="Snap footer to keyboard"
-    ></kirby-checkbox>
+    <button kirby-button attentionLevel="3" (click)="scrollToTop()">
+      To top
+      <kirby-icon name="arrow-up"></kirby-icon>
+    </button>
+    <button kirby-button (click)="close()">Close</button>
   </div>
 </kirby-modal-footer>

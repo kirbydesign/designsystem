@@ -93,9 +93,9 @@
 <p>
   With the
   <strong><code>modal</code></strong>
-  flavor, the dialog opens with a slide-up animation, it's title is aligned to the left and it's
-  close button is placed in the top right corner. The modal can't be closed by swiping. If nested
-  modals are opened, they will simply slide up and appear on top of the modal(s) underneath.
+  flavor, the dialog opens with a slide-up animation and its close button is placed in the top right
+  corner. The modal can't be closed by swiping. If nested modals are opened, they will simply slide
+  up and appear on top of the modal(s) underneath.
 </p>
 
 <h3 #modalFlavorsModalWithOutlet>Modal (default) - with outlet</h3>
@@ -194,14 +194,15 @@
 
 <h3 #modalFlavorsDrawer>Drawer</h3>
 <p>
-  When a
-  <strong><code>drawer</code></strong>
-  flavor is used, the dialog opens with a slide-up animation, it's title is centered and it's close
-  button is placed in the top left corner. Additionally, with the
+  When the
+  <code>drawer</code>
+  flavor is used on mobile size screen widths, the dialog acts as a card stacked on top of the page
+  content. On larger screens, the drawer flavor is identical to the modal flavor. The drawer, like
+  the modal, appears with a slide-up animation. Additionally, with the
   <code>drawer</code>
   flavor, users can specify a
   <code>drawerSupplementaryAction</code>
-  , which is an additional button rendered in the top right corner (see the example below). The
+  , which is an additional button rendered in the top left corner (see the example below). The
   <code>drawerSupplementaryAction</code>
   option takes an
   <code>iconName: string</code>

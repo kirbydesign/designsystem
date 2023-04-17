@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostBinding, HostListener } from '@angular/core';
 
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
@@ -12,7 +12,10 @@ export class ExamplesComponent {
   showDummyKeyboard = !!this.windowRef.nativeWindow.sessionStorage.getItem(
     'kirby-cookbook-show-dummy-keyboard'
   );
-  keyboardIsShowing = false;
+
+  @HostBinding('class.keyboard-showing')
+  keyboardIsShowing = true;
+
   keyboardHeight: number;
   keyCount = 40;
 

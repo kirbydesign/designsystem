@@ -1,4 +1,5 @@
 import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import { ModalSize } from '@kirbydesign/designsystem';
 
 import { WindowRef } from '@kirbydesign/designsystem/types';
 
@@ -51,6 +52,12 @@ export class ModalExampleConfigurationComponent {
 
   @Input() customCssClass: boolean;
   @Output() customCssClassChange = new EventEmitter<boolean>();
+
+  @Input() snapFooterToKeyboard: boolean;
+  @Output() snapFooterToKeyboardChange = new EventEmitter<boolean>();
+
+  @Input() modalSizes: [];
+  @Output() selectedModalSize = new EventEmitter<ModalSize>();
 
   // Setting ion-checkbox.checked programatically triggers change event
   // Use this flag in checkbox change event handlers to prevent ExpressionChangedAfterItHasBeenCheckedError
@@ -152,5 +159,15 @@ export class ModalExampleConfigurationComponent {
   toggleCustomCssClass(show: boolean) {
     this.customCssClass = show;
     this.customCssClassChange.emit(show);
+  }
+
+  toggleSnapFooterToKeyboard(show: boolean) {
+    this.snapFooterToKeyboard = show;
+    this.snapFooterToKeyboardChange.emit(show);
+  }
+
+  changeSize(size: ModalSize) {
+    if (this.preventChangeEvent) return;
+    this.selectedModalSize.emit(size);
   }
 }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { AlertConfig, ModalConfig, ModalController } from '@kirbydesign/designsystem';
+import { AlertConfig, ModalConfig, ModalController, ModalSize } from '@kirbydesign/designsystem';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 
 import { ModalCompactExampleComponent } from './compact-example/modal-compact-example.component';
@@ -24,6 +24,8 @@ const config = {
       [(openFullHeight)]="openFullHeight"
       [(interactWithBackground)]="interactWithBackground"
       [(customCssClass)]="customCssClass"
+      (selectedModalSize)="setSelectedModalSize($event)"
+      [modalSizes]="modalSizes"
       >
       </cookbook-modal-example-configuration>
   </cookbook-example-configuration-wrapper>
@@ -225,7 +227,7 @@ export class ModalExampleDefaultComponent {
     'kirby-cookbook-show-dummy-keyboard'
   );
   showPageProgress = false;
-  showFooter = false;
+  showFooter = true;
   displayFooterAsInline = false;
   collapseTitle = false;
   alertBeforeClose = false;
@@ -237,6 +239,15 @@ export class ModalExampleDefaultComponent {
   customCssClass = false;
   dummyBackgroundTexts = new Array(100).map(() => '');
   preventInteraction = false;
+  modalSizes = [
+    { text: 'small', value: 'small' },
+    { text: 'medium (default)', value: 'medium' },
+    { text: 'large', value: 'large' },
+    { text: 'fit-content', value: 'fit-content' },
+    { text: 'full-height', value: 'full-height' },
+  ];
+
+  selectedModalSize: ModalSize;
 
   constructor(private modalController: ModalController, private windowRef: WindowRef) {}
 
@@ -251,8 +262,8 @@ export class ModalExampleDefaultComponent {
       collapseTitle: this.collapseTitle,
       component: EmbeddedModalExampleComponent,
       interactWithBackground: this.interactWithBackground,
+      size: this.selectedModalSize,
       cssClass: this.customCssClass ? ['my-custom-modal-class'] : [],
-      size: this.openFullHeight ? 'full-height' : null,
       componentProps: {
         title,
         displayFooterAsInline: this.displayFooterAsInline,
@@ -272,6 +283,7 @@ export class ModalExampleDefaultComponent {
         loadAdditionalContent: this.loadAdditionalContent,
         disableScroll: false,
         openFullHeight: this.openFullHeight,
+        modalSizes: this.modalSizes,
       },
     };
 
@@ -304,6 +316,11 @@ export class ModalExampleDefaultComponent {
 
   async showDrawer() {
     await this.showOverlay('drawer');
+  }
+
+  setSelectedModalSize(size: ModalSize) {
+    this.selectedModalSize = size;
+    console.log('setting size', size);
   }
 
   private onOverlayClose(data: any): void {

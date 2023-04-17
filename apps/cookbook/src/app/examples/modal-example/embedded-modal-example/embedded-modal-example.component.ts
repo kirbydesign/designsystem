@@ -1,6 +1,11 @@
 import { Component, Inject, OnInit, Optional, SkipSelf } from '@angular/core';
 
-import { ActionSheetConfig, AlertConfig, ModalController } from '@kirbydesign/designsystem';
+import {
+  ActionSheetConfig,
+  AlertConfig,
+  ModalController,
+  ModalSize,
+} from '@kirbydesign/designsystem';
 import { COMPONENT_PROPS, Modal, ModalConfig } from '@kirbydesign/designsystem';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
 import { KirbyAnimation } from '@kirbydesign/designsystem';
@@ -39,6 +44,16 @@ export class EmbeddedModalExampleComponent implements OnInit {
   isLoadingAdditionalContent = false;
   snapFooterToKeyboard = false;
 
+  modalSizes = [
+    { text: 'small', value: 'small' },
+    { text: 'medium (default)', value: 'medium' },
+    { text: 'large', value: 'large' },
+    { text: 'fit-content', value: 'fit-content' },
+    { text: 'full-height', value: 'full-height' },
+  ];
+
+  selectedModalSize: ModalSize;
+
   get _footerType(): 'inline' | 'fixed' {
     return this.displayFooterAsInline ? 'inline' : 'fixed';
   }
@@ -74,7 +89,7 @@ export class EmbeddedModalExampleComponent implements OnInit {
         action: this.onSupplementaryActionSelect.bind(this),
       },
       component: EmbeddedModalExampleComponent,
-      size: this.openFullHeight ? 'full-height' : null,
+      size: this.selectedModalSize,
       componentProps: {
         title,
         subtitle: 'Hello from second embedded example component!',
@@ -84,6 +99,7 @@ export class EmbeddedModalExampleComponent implements OnInit {
         showDummyContent: this.showNestedDummyContent,
         delayLoadDummyContent: this.delayLoadDummyContent,
         loadAdditionalContent: this.loadAdditionalContent,
+        modalSizes: this.modalSizes,
       },
     };
 
@@ -163,5 +179,9 @@ export class EmbeddedModalExampleComponent implements OnInit {
 
   onAlertClose(result?: boolean): void {
     console.log(`Alert closed: ${result}`);
+  }
+
+  setSelectedModalSize(size: ModalSize) {
+    this.selectedModalSize = size;
   }
 }
