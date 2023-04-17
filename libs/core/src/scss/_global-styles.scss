@@ -17,6 +17,23 @@ $modal-max-height-desktop: 928px;
 $modal-max-width-desktop: 594px;
 $modal-border-radius: 32px;
 
+/* 
+ * height & width variables are kept local here until we have determined the exact values  
+ * and can migrate them to heights/widths in _variables.scss, as a breaking change 
+ * to either the existing modal heights or the modal-v2 maps.
+ */
+
+$modal-widths: (
+  s: 356px,
+  m: 636px,
+  l: 888px,
+);
+$modal-heights: (
+  s: 484px,
+  m: 565px,
+  l: 754px,
+);
+
 :root,
 :host {
   @include component-themes.apply-light-theme;
@@ -102,59 +119,43 @@ ion-modal.kirby-overlay {
       }
     }
 
-    &:not(.kirby-modal-compact).kirby-modal-full-height {
-      --height: 100%;
-    }
-
     &.modal-card:not(.kirby-drawer) {
       @include utils.media('<medium') {
         --height: 100%;
       }
     }
 
-    @include utils.media('>=medium') {
-      --width: #{utils.$modal-max-width};
-      --border-radius: #{utils.$border-radius};
-
-      &::part(content) {
-        margin: utils.size('xxl');
+    &:not(.kirby-modal-compact) {
+      &.kirby-modal-full-height {
+        --width: #{map.get($modal-widths, 'm')};
+        --height: 100%;
       }
 
-      &:not(.kirby-modal-compact) {
-        /* height & width variables are kept local here until we have determined the exact values  
-         * and can migrate the values into heights/widths in _variables.scss, as a breaking change 
-         * to either the existing modal heights or the modal-v2 maps.
-         */
+      @include utils.media('>=medium') {
+        @include utils.slotted('.modal-shadow') {
+          margin: utils.size('xxl');
+        }
 
-        $modal-widths: (
-          s: 356px,
-          m: 636px,
-          l: 888px,
-        );
-        $modal-heights: (
-          s: 484px,
-          m: 565px,
-          l: 754px,
-        );
+        $modal-gutter: #{utils.size('xxl')};
 
-        --width: #{map.get($modal-widths, 'm')};
-        --height: #{map.get($modal-heights, 'm')};
-        --border-radius: #{$modal-border-radius};
+        --border-radius: #{utils.$border-radius};
+        --max-height: calc(100vh - #{$modal-gutter} * 2);
+        --max-width: calc(100vw - #{$modal-gutter} * 2);
+        --min-height: 264px;
 
         &.kirby-modal-small {
           --width: #{map.get($modal-widths, 's')};
           --height: #{map.get($modal-heights, 's')};
         }
 
+        &.kirby-modal-medium {
+          --width: #{map.get($modal-widths, 'm')};
+          --height: #{map.get($modal-heights, 'm')};
+        }
+
         &.kirby-modal-large {
           --width: #{map.get($modal-widths, 'l')};
           --height: #{map.get($modal-heights, 'l')};
-        }
-
-        &.kirby-modal-full-height::part(content),
-        &.full-height::part(content) {
-          border-bottom-left-radius: 0;
-          border-bottom-right-radius: 0;
         }
       }
     }
