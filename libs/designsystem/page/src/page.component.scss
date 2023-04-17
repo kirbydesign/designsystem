@@ -3,13 +3,6 @@
 @use '@kirbydesign/core/src/scss/utils';
 
 $ion-content-padding-top: utils.size('xs');
-$breakpoint-map: (
-  'xs': 0,
-  'sm': 632px,
-  'md': 768px,
-  'lg': 992px,
-  'xl': 1200px,
-);
 
 /*
  * Page Header
@@ -140,6 +133,7 @@ ion-back-button {
   @include interaction-state.apply-active-ionic('s');
 
   --color: #{utils.get-color('black')};
+  --background: #{utils.get-color('white')};
   --icon-font-size: 24px;
 
   $button-size: utils.size('xl');
@@ -224,7 +218,7 @@ ion-content {
   --background: #{utils.get-color('background-color')};
   --color: #{utils.get-color('black')};
 
-  @media (min-width: map.get($breakpoint-map, 'sm')) {
+  @media (min-width: map.get(utils.$breakpoint-map, 'sm')) {
     --padding-start: var(--page-content-padding-start, #{utils.size('xxl')});
     --padding-end: var(--page-content-padding-end, #{utils.size('xxl')});
   }
@@ -272,6 +266,7 @@ ion-content {
   top: calc(-1 * $ion-content-padding-top - 1px);
   left: 0;
   right: 0;
+  padding-top: 1px;
   margin-block-end: utils.size('m');
   z-index: utils.z('sticky-content');
 

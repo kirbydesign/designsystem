@@ -9,6 +9,8 @@
     "@fontsource/roboto",
     "@ionic/angular",
     "@kirbydesign/core",
+    "@floating-ui/dom",
+    "@angular/cdk",
     "inputmask"
   ]
 }

@@ -2,6 +2,8 @@
 
 import { MockAccordionItemComponent } from './components/mock.accordion-item.component';
 import { MockAlertExperimentalComponent } from './components/mock.alert-experimental.component';
+import { MockActionGroupComponent } from './components/mock.action-group.component';
+import { MockAppComponent } from './components/mock.app.component';
 import { MockAvatarComponent } from './components/mock.avatar.component';
 import { MockButtonComponent } from './components/mock.button.component';
 import { MockCalendarComponent } from './components/mock.calendar.component';
@@ -30,7 +32,6 @@ import { MockItemComponent } from './components/mock.item.component';
 import { MockLabelComponent } from './components/mock.label.component';
 import { MockItemGroupComponent } from './components/mock.item-group.component';
 import { MockItemSlidingComponent } from './components/mock.item-sliding.component';
-import { MockAppComponent } from './components/mock.kirby-app.component';
 import { MockListExperimentalComponent } from './components/mock.list-experimental.component';
 import { MockListHeaderComponent } from './components/mock.list-header.component';
 import { MockListItemComponent } from './components/mock.list-item.component';
@@ -79,10 +80,17 @@ import { MockTabButtonComponent } from './components/mock.tab-button.component';
 import { MockTabsComponent } from './components/mock.tabs.component';
 import { MockToggleComponent } from './components/mock.toggle.component';
 import { MockToggleButtonComponent } from './components/mock.toggle-button.component';
+import {
+  MockHeaderActionsDirective,
+  MockHeaderComponent,
+  MockHeaderCustomSectionDirective,
+} from './components/mock.header.component';
 
 export const MOCK_COMPONENTS = [
   MockAccordionItemComponent,
   MockAlertExperimentalComponent,
+  MockActionGroupComponent,
+  MockAppComponent,
   MockAvatarComponent,
   MockButtonComponent,
   MockCalendarComponent,
@@ -102,6 +110,9 @@ export const MOCK_COMPONENTS = [
   MockFlagComponent,
   MockFormFieldMessageComponent,
   MockFormFieldComponent,
+  MockHeaderActionsDirective,
+  MockHeaderCustomSectionDirective,
+  MockHeaderComponent,
   MockInputComponent,
   MockInputCounterComponent,
   MockTextareaComponent,

@@ -69,8 +69,11 @@
     --transition: #{interaction-state.transition('background-color')};
   }
 
-  &.sm ion-item {
-    --min-height: #{map.get(utils.$item-heights, 's')};
+  &.sm,
+  :host-context(kirby-menu) :host-context(kirby-item):not([size]) {
+    ion-item {
+      --min-height: #{map.get(utils.$item-heights, 's')};
+    }
   }
 
   &.xs ion-item {
@@ -101,6 +104,12 @@
 // Intented for use with keyboard navigation in <kirby-dropdown>
 :host-context(kirby-dropdown .focused) ion-item {
   --background: #{interaction-state.get-state-color('white', 'xxxs')};
+}
+
+// Prevents the item from being clicked when disabled
+:host(.disabled),
+:host([disabled]) {
+  pointer-events: none;
 }
 
 :host(.selected),

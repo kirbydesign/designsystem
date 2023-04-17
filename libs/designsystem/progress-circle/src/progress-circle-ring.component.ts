@@ -4,7 +4,7 @@ import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 
 @Component({
   standalone: true,
-  imports: [ThemeColorDirective, CommonModule],
+  imports: [CommonModule],
   selector: 'kirby-progress-circle-ring',
   templateUrl: './progress-circle-ring.component.svg',
   styleUrls: ['./progress-circle-ring.component.scss'],

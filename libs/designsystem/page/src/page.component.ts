@@ -11,7 +11,11 @@ import {
   EventEmitter,
   HostBinding,
   HostListener,
+  Inject,
+  InjectionToken,
+  Injector,
   Input,
+  NgZone,
   OnChanges,
   OnDestroy,
   OnInit,
@@ -25,7 +29,14 @@ import {
   ViewChild,
 } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router, RouterEvent } from '@angular/router';
-import { IonBackButtonDelegate, IonContent, IonFooter, IonHeader } from '@ionic/angular';
+import {
+  IonBackButtonDelegate,
+  IonContent,
+  IonFooter,
+  IonHeader,
+  IonRouterOutlet,
+  NavController,
+} from '@ionic/angular';
 import { ScrollDetail } from '@ionic/core';
 import { selectedTabClickEvent, TabsComponent } from '@kirbydesign/designsystem/tabs';
 import { Observable, Subject } from 'rxjs';
@@ -39,7 +50,9 @@ import {
   ModalNavigationService,
   ModalWrapperComponent,
 } from '@kirbydesign/designsystem/modal';
-import { FitHeadingConfig } from '@kirbydesign/designsystem/shared';
+import { FitHeadingConfig, ResizeObserverService } from '@kirbydesign/designsystem/shared';
+import { HeaderComponent } from '@kirbydesign/designsystem/header';
+import { ACTIONGROUP_CONFIG } from '@kirbydesign/designsystem/action-group';
 
 /**
  * Specify scroll event debounce time in ms and scrolled offset from top in pixels
@@ -49,6 +62,18 @@ const contentScrolledOffsetInPixels = 4;
 
 type stickyConfig = { sticky: boolean };
 type fixedConfig = { fixed: boolean };
+
+export const PAGE_BACK_BUTTON_OVERRIDE = new InjectionToken<PageBackButtonOverride>(
+  'page-back-button-override'
+);
+
+export interface PageBackButtonOverride {
+  navigateBack: (
+    routerOutlet: IonRouterOutlet,
+    navCtrl: NavController,
+    defaultBackHref: string
+  ) => void;
+}
 
 /**
  * Event emitted when "pull-to-refresh" begins.
@@ -236,12 +261,15 @@ export class PageComponent
   private customContent: QueryList<PageContentDirective>;
   @ContentChild(PageStickyContentDirective, { static: false, read: TemplateRef })
   private stickyContentRef: TemplateRef<any>;
+  @ContentChild(HeaderComponent)
+  header?: HeaderComponent;
 
   hasPageTitle: boolean;
   hasPageSubtitle: boolean;
   toolbarTitleVisible: boolean;
+  toolbarActionsVisible: boolean;
   isContentScrolled: boolean;
-  isStickyContentPinned: boolean;
+  isStickyContentPinned = false;
 
   fitHeadingConfig: FitHeadingConfig;
 
@@ -253,9 +281,11 @@ export class PageComponent
   fixedActionsTemplate: TemplateRef<any>;
   stickyContentTemplate: TemplateRef<PageStickyContentDirective>;
 
-  private pageTitleIntersectionObserverRef: IntersectionObserver =
-    this.pageTitleIntersectionObserver();
-  private stickyContentIntersectionObserverRef = this.stickyContentIntersectionObserver();
+  private titleIntersectionObserver?: IntersectionObserver;
+  private stickyActionsIntersectionObserver?: IntersectionObserver;
+  private stickyContentIntersectionObserver?: IntersectionObserver;
+  private isObservingTitle = false;
+  private isObservingActions = false;
 
   private url: string;
   private isActive: boolean;
@@ -273,23 +303,59 @@ export class PageComponent
     takeUntil(this.ngOnDestroy$)
   );
 
+  toolbarActionGroupInjector: Injector;
+
   constructor(
     private elementRef: ElementRef,
+    private injector: Injector,
     private renderer: Renderer2,
     private router: Router,
     private changeDetectorRef: ChangeDetectorRef,
+    private zone: NgZone,
     private modalNavigationService: ModalNavigationService,
-    @Optional() @SkipSelf() private tabsComponent: TabsComponent
+    private resizeObserverService: ResizeObserverService,
+    @Optional() @SkipSelf() private tabsComponent: TabsComponent,
+    @Optional()
+    @Inject(PAGE_BACK_BUTTON_OVERRIDE)
+    private backButtonOverride: PageBackButtonOverride,
+    @Optional()
+    private routerOutlet: IonRouterOutlet,
+    @Optional()
+    private navCtrl: NavController
   ) {}
+
+  private contentReadyPromise: Promise<void>;
+  private whenContentReady() {
+    if (!this.contentReadyPromise) {
+      this.contentReadyPromise = new Promise((resolve) => {
+        this.resizeObserverService.observe(this.ionContentElement, (entry) => {
+          if (entry.contentRect.height > 0) {
+            this.resizeObserverService.unobserve(this.ionContentElement);
+            resolve();
+          }
+        });
+      });
+    }
+    return this.contentReadyPromise;
+  }
 
   ngOnInit(): void {
     this.removeWrapper();
+
+    this.toolbarActionGroupInjector = Injector.create({
+      providers: [
+        {
+          provide: ACTIONGROUP_CONFIG,
+          useValue: { isResizable: false, isCondensed: true, visibleActions: 1 },
+        },
+      ],
+      parent: this.injector,
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.titleMaxLines) {
       this.fitHeadingConfig = {
-        ...this.fitHeadingConfig,
         maxLines: changes.titleMaxLines.currentValue,
       };
     }
@@ -300,15 +366,19 @@ export class PageComponent
   }
 
   ngAfterViewInit(): void {
-    this.contentScrolled$ = this.content.ionScroll.pipe(
-      debounceTime(contentScrollDebounceTimeInMS),
-      map((event) => event.detail),
-      takeUntil(this.ngOnDestroy$)
-    );
+    this.zone.runOutsideAngular(() => {
+      this.contentScrolled$ = this.content.ionScroll.pipe(
+        debounceTime(contentScrollDebounceTimeInMS),
+        map((event) => event.detail),
+        takeUntil(this.ngOnDestroy$)
+      );
 
-    this.contentScrolled$.subscribe((scrollInfo: ScrollDetail) => {
-      this.isContentScrolled = scrollInfo.scrollTop > contentScrolledOffsetInPixels;
-      this.changeDetectorRef.detectChanges();
+      this.contentScrolled$.subscribe((scrollInfo: ScrollDetail) => {
+        if (scrollInfo.scrollTop > contentScrolledOffsetInPixels !== this.isContentScrolled) {
+          this.isContentScrolled = !this.isContentScrolled;
+          this.changeDetectorRef.detectChanges();
+        }
+      });
     });
 
     // This instance has observed a page enter so register the correct url for this instance
@@ -348,8 +418,9 @@ export class PageComponent
     this.ngOnDestroy$.next();
     this.ngOnDestroy$.complete();
 
-    this.pageTitleIntersectionObserverRef.disconnect();
-    this.stickyContentIntersectionObserverRef.disconnect();
+    this.titleIntersectionObserver?.disconnect();
+    this.stickyActionsIntersectionObserver?.disconnect();
+    this.stickyContentIntersectionObserver?.disconnect();
   }
 
   delegateRefreshEvent(event: any): void {
@@ -381,9 +452,9 @@ export class PageComponent
     this.isActive = true;
 
     this.enter.emit();
-    if (this.pageTitle) {
-      this.pageTitleIntersectionObserverRef.observe(this.pageTitle.nativeElement);
-    }
+
+    this.observeTitle();
+    this.observeActions();
   }
 
   private onLeave() {
@@ -391,9 +462,9 @@ export class PageComponent
     this.isActive = false;
 
     this.leave.emit();
-    if (this.pageTitle) {
-      this.pageTitleIntersectionObserverRef.unobserve(this.pageTitle.nativeElement);
-    }
+
+    this.unobserveTitle();
+    this.unobserveActions();
 
     if (this.tabBarBottomHidden && this.tabsComponent) {
       this.tabsComponent.tabBarBottomHidden = false;
@@ -401,6 +472,13 @@ export class PageComponent
   }
 
   private interceptBackButtonClicksSetup() {
+    if (this.backButtonOverride) {
+      this.backButtonDelegate.onClick = (event: Event) => {
+        event.preventDefault();
+        this.backButtonOverride.navigateBack(this.routerOutlet, this.navCtrl, this.defaultBackHref);
+      };
+    }
+
     // Intercept back-button click events, defaulting to the built-in click-handler.
     if (this.backButtonClick.observers.length === 0) {
       this.backButtonClick
@@ -415,25 +493,28 @@ export class PageComponent
   private initializeStickyIntersectionObserver() {
     if (this.stickyContentTemplate) {
       // Sticky content present - start observing for stickiness
+      if (!this.stickyContentIntersectionObserver) {
+        this.stickyContentIntersectionObserver = this.createStickyContentIntersectionObserver();
+      }
       setTimeout(() => {
-        this.stickyContentIntersectionObserverRef.observe(
-          this.stickyContentContainer.nativeElement
-        );
+        this.stickyContentIntersectionObserver.observe(this.stickyContentContainer.nativeElement);
       });
     }
   }
 
   private initializeTitle() {
-    this.hasPageTitle = this.title !== undefined || !!this.customTitleTemplate;
+    // Ensures initializeTitle() won't run, if already initialized
+    if (this.hasPageTitle) return;
+
+    this.hasPageTitle =
+      this.title !== undefined || !!this.customTitleTemplate || !!this.header?.title;
     this.toolbarTitleVisible = !this.hasPageTitle;
     this.hasPageSubtitle = this.subtitle !== undefined || !!this.customSubtitleTemplate;
-
-    if (this.hasPageTitle) {
-      this.pageTitleIntersectionObserverRef.disconnect();
-      setTimeout(() => {
-        this.pageTitleIntersectionObserverRef.observe(this.pageTitle.nativeElement);
-      });
+    if (this.header?.title && !this.toolbarTitle) {
+      this.toolbarTitle = this.header.title;
     }
+
+    this.observeTitle();
 
     const defaultTitleTemplate = this.customTitleTemplate || this.simpleTitleTemplate;
     /* eslint-disable */
@@ -445,7 +526,54 @@ export class PageComponent
         : defaultTitleTemplate;
   }
 
+  private observeTitle() {
+    if (!this.hasPageTitle) {
+      // Nothing to observe
+      return;
+    }
+    if (this.isObservingTitle) {
+      // Already observing
+      return;
+    }
+
+    // We are not actually observing the title until after the `whenContentReady` promise has resolved,
+    // but since we've already checked that the page has a title in the guard above,
+    // we'll - eagerly - set this flag now to prevent unnecessary re-runs of the rest of this method:
+    this.isObservingTitle = true;
+
+    if (!this.titleIntersectionObserver) {
+      this.titleIntersectionObserver = new IntersectionObserver(
+        (entries) => {
+          this.toolbarTitleVisible = !entries[0].isIntersecting;
+          this.changeDetectorRef.detectChanges();
+        },
+        { root: this.ionContentElement.nativeElement }
+      );
+    }
+
+    // Run outside Angular to prevent unnecessary triggering change detection
+    // and - under certain conditions - an infinite loop when called within ngAfterContentChecked:
+    this.zone.runOutsideAngular(() => {
+      this.whenContentReady().then(() => {
+        const titleElementRef = this.pageTitle || this.header?.titleElement;
+        if (titleElementRef?.nativeElement) {
+          this.titleIntersectionObserver.observe(titleElementRef.nativeElement);
+        }
+      });
+    });
+  }
+
+  private unobserveTitle() {
+    const titleElementRef = this.pageTitle || this.header?.titleElement;
+    if (titleElementRef) {
+      this.titleIntersectionObserver?.unobserve(titleElementRef.nativeElement);
+    }
+    this.isObservingTitle = false;
+  }
+
   private initializeActions() {
+    this.observeActions();
+
     this.customActions.forEach((pageAction) => {
       if (pageAction.isFixed) {
         this.fixedActionsTemplate = pageAction.template;
@@ -455,6 +583,50 @@ export class PageComponent
         this.pageActionsTemplate = pageAction.template;
       }
     });
+  }
+
+  private observeActions() {
+    if (!this.header?.actionsElement) {
+      // Nothing to observe
+      return;
+    }
+
+    if (this.isObservingActions) {
+      // Already observing
+      return;
+    }
+
+    // We are not actually observing actions until after the `whenContentReady` promise has resolved,
+    // but since we've already checked that there's an actions element present in the guard above,
+    // we'll - eagerly - set this flag now to prevent unnecessary re-runs of the rest of this method:
+    this.isObservingActions = true;
+
+    if (!this.stickyActionsIntersectionObserver) {
+      this.stickyActionsIntersectionObserver = new IntersectionObserver(
+        (entries) => {
+          this.toolbarActionsVisible = !entries[0].isIntersecting;
+          this.changeDetectorRef.detectChanges();
+        },
+        { root: this.ionContentElement.nativeElement }
+      );
+    }
+
+    // Run outside Angular to prevent unnecessary triggering change detection
+    // and - under certain conditions - an infinite loop when called within ngAfterContentChecked:
+    this.zone.runOutsideAngular(() => {
+      this.whenContentReady().then(() => {
+        if (this.header?.actionsElement?.nativeElement) {
+          this.stickyActionsIntersectionObserver.observe(this.header.actionsElement.nativeElement);
+        }
+      });
+    });
+  }
+
+  private unobserveActions() {
+    if (this.header?.actionsElement) {
+      this.stickyActionsIntersectionObserver?.unobserve(this.header.actionsElement.nativeElement);
+    }
+    this.isObservingActions = false;
   }
 
   private initializeContent() {
@@ -471,31 +643,18 @@ export class PageComponent
     this.stickyContentTemplate = this.stickyContentRef;
   }
 
-  private pageTitleIntersectionObserver() {
-    const options = {
-      rootMargin: '0px',
-    };
-
-    let initialized = false;
-    const callback = (entries) => {
-      if (initialized) {
-        this.toolbarTitleVisible = !entries[0].isIntersecting;
-        this.changeDetectorRef.detectChanges();
-      } else {
-        initialized = true;
-      }
-    };
-    return new IntersectionObserver(callback, options);
-  }
-
-  private stickyContentIntersectionObserver() {
+  private createStickyContentIntersectionObserver() {
     const options: IntersectionObserverInit = {
+      // TODO: Should sticky content also use ion-content as root?
+      // root: this.ionContentElement.nativeElement,
       threshold: 1,
     };
 
-    const callback = (entries) => {
-      // The sticky content is pinned when it doesn't fully intersect the viewport
-      this.isStickyContentPinned = !entries[0].isIntersecting;
+    const callback: IntersectionObserverCallback = (entries) => {
+      if (this.isStickyContentPinned !== !entries[0].isIntersecting) {
+        this.isStickyContentPinned = !this.isStickyContentPinned;
+        this.changeDetectorRef.detectChanges();
+      }
     };
     return new IntersectionObserver(callback, options);
   }

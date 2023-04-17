@@ -33,7 +33,7 @@ import { ListNoShapeShowcaseComponent } from './list-no-shape-showcase/list-no-s
 import { ListShowcaseComponent } from './list-showcase/list-showcase.component';
 import { ListSwipeShowcaseComponent } from './list-swipe-showcase/list-swipe-showcase.component';
 import { LoadingOverlayShowcaseComponent } from './loading-overlay-showcase/loading-overlay-showcase.component';
-import { ModalExperimentalShowcaseComponent } from './modal-experimental-showcase/modal-experimental-showcase.component';
+import { ModalV2ShowcaseComponent } from './modal-v2-showcase/modal-v2-showcase.component';
 import { ModalShowcaseComponent } from './modal-showcase/modal-showcase.component';
 import { PageShowcaseComponent } from './page-showcase/page-showcase.component';
 import { ProgressCircleShowcaseComponent } from './progress-circle-showcase/progress-circle-showcase.component';
@@ -57,6 +57,8 @@ import { DropdownShowcaseComponent } from './dropdown-showcase/dropdown-showcase
 import { DataTableShowcaseComponent } from './data-table-showcase/data-table-showcase.component';
 import { CookbookChartStockConfigShowcaseComponent } from './chart-config-showcase/stock/chart-config-stock-showcase.component';
 import { CookbookChartBarConfigShowcaseComponent } from './chart-config-showcase/bar/chart-config-bar-showcase.component';
+import { HeaderShowcaseComponent } from './header-showcase/header-showcase.component';
+import { MenuShowcaseComponent } from './menu-showcase/menu-showcase.component';
 
 export const COMPONENT_IMPORTS: any[] = [ExamplesModule, ShowcaseRoutingModule];
 
@@ -75,7 +77,7 @@ export const COMPONENT_EXPORTS: any[] = [
   StockChartShowcaseComponent,
   FontsShowcaseComponent,
   SpinnerShowcaseComponent,
-  ModalExperimentalShowcaseComponent,
+  ModalV2ShowcaseComponent,
   ModalShowcaseComponent,
   SegmentedControlShowcaseComponent,
   BadgeShowcaseComponent,
@@ -116,6 +118,9 @@ export const COMPONENT_EXPORTS: any[] = [
   ExampleViewerComponent,
   ChartExampleConfigBaseBarComponent,
   CookbookChartBarConfigShowcaseComponent,
+  MenuShowcaseComponent,
+  HeaderShowcaseComponent,
+  MenuShowcaseComponent,
 ];
 
 export const COMPONENT_DECLARATIONS: any[] = [...COMPONENT_EXPORTS, ShowcaseComponent];

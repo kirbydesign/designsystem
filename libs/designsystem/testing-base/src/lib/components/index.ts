@@ -1,4 +1,5 @@
 export { MockAccordionItemComponent } from './mock.accordion-item.component';
+export { MockActionGroupComponent } from './mock.action-group.component';
 export { MockActionSheetComponent } from './mock.action-sheet.component';
 export { MockAppComponent } from './mock.app.component';
 export { MockAppComponent as MockKirbyApp } from './mock.kirby-app.component';
@@ -78,3 +79,8 @@ export { MockTextareaComponent } from './mock.textarea.component';
 export { MockToggleButtonComponent } from './mock.toggle-button.component';
 export { MockToggleComponent } from './mock.toggle.component';
 export { MockBadgeComponent } from './mock.web-component-proxies.component';
+export {
+  MockHeaderActionsDirective,
+  MockHeaderComponent,
+  MockHeaderCustomSectionDirective,
+} from './mock.header.component';

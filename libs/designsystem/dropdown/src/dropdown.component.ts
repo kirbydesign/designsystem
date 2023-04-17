@@ -20,13 +20,12 @@ import {
   ViewChildren,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { CardComponent } from '@kirbydesign/designsystem/card';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
-import { IconModule } from '@kirbydesign/designsystem/icon';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { HorizontalDirection, PopoverComponent } from '@kirbydesign/designsystem/popover';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
 
 import { OpenState, VerticalDirection } from './dropdown.types';
 import { KeyboardHandlerService } from './keyboard-handler.service';
@@ -128,6 +127,15 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   @HostBinding('class.with-popover')
   @Input()
   usePopover = false;
+
+  /*
+   * TEMPORARY MORE-MENU
+   * This is an internal and temporary input that allows the dropdown to use the 'more menu'
+   * icon
+   */
+  @HostBinding('class.more-menu')
+  @Input()
+  _isMoreMenu = false;
 
   @HostBinding('attr.tabindex')
   get _tabindex() {
@@ -588,8 +596,8 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
 
     const newFocusedIndex = this.keyboardHandlerService.handle(
       event,
-      this.items,
-      this.focusedIndex
+      this.focusedIndex,
+      this.items.length - 1
     );
 
     if (newFocusedIndex > -1) {
@@ -607,8 +615,8 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
 
     const newFocusedIndex = this.keyboardHandlerService.handle(
       event,
-      this.items,
-      this.focusedIndex
+      this.focusedIndex,
+      this.items.length - 1
     );
     if (newFocusedIndex > -1) {
       this.focusedIndex = newFocusedIndex;

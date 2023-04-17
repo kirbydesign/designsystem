@@ -5,6 +5,7 @@
 @use '@kirbydesign/core/src/scss/utils';
 
 $button-width: (
+  xs: 44px,
   sm: 44px,
   md: 88px,
   lg: 220px,
@@ -12,6 +13,41 @@ $button-width: (
 
 @function button-width($key) {
   @return map.get($button-width, $key);
+}
+
+@mixin button-xs {
+  font-size: utils.font-size('xs');
+  height: utils.size('m');
+  min-width: button-width('xs');
+
+  &:not(.icon-only) {
+    --kirby-button-padding-left: #{utils.size('xs')};
+    --kirby-button-padding-right: #{utils.size('xs')};
+  }
+
+  &.icon-only {
+    --kirby-icon-font-size: #{utils.size('s')};
+
+    width: utils.size('m');
+    min-width: unset;
+  }
+
+  &.icon-left {
+    --kirby-button-padding-left: #{utils.size('xxs')};
+    --kirby-icon-margin-right: #{utils.size('xxxs')};
+  }
+
+  &.icon-right {
+    --kirby-button-padding-right: #{utils.size('xxs')};
+    --kirby-icon-margin-left: #{utils.size('xxxs')};
+  }
+
+  &.icon-left,
+  &.icon-right {
+    --kirby-icon-font-size: #{utils.size('s')};
+
+    min-width: button-width('xs');
+  }
 }
 
 @mixin button-sm {
@@ -98,6 +134,8 @@ $button-width: (
   --kirby-button-padding-left: #{utils.size('m')};
   --kirby-button-padding-right: #{utils.size('m')};
 
+  flex-shrink: 0;
+
   @include utils.accessible-target-size;
   @include interaction-state.apply-focus-visible;
   @include interaction-state.initialize-layer;
@@ -110,10 +148,6 @@ $button-width: (
     align-items: inherit;
     justify-content: inherit;
     padding-inline: var(--kirby-button-padding-left) var(--kirby-button-padding-right);
-
-    &.attention-level3 {
-      box-shadow: var(--kirby-inputs-elevation);
-    }
   }
 
   font-family: var(--kirby-font-family);
@@ -166,6 +200,16 @@ $button-width: (
     width: utils.size('xl');
     padding: 0;
     min-width: unset;
+
+    .content-layer {
+      @include utils.slotted(':not(kirby-icon)') {
+        display: none;
+      }
+    }
+  }
+
+  &.xs {
+    @include button-xs;
   }
 
   &.sm {
@@ -190,6 +234,10 @@ $button-width: (
 
   &.attention-level3 {
     @include button-attentionlevel3;
+
+    .state-layer {
+      box-shadow: var(--kirby-inputs-elevation);
+    }
   }
 
   &[expand='block'] {
@@ -256,9 +304,8 @@ $button-width: (
 // Temp fix for https://github.com/angular/angular-cli/issues/13854#issuecomment-470831308
 
 /* clean-css ignore:start */
-:host-context(ion-toolbar ion-buttons) {
+:host-context(ion-toolbar ion-buttons.legacy-actions) {
   font-size: utils.font-size('s');
-  margin: 0;
   height: utils.size('xl');
 
   &.icon-only {
@@ -268,7 +315,7 @@ $button-width: (
     &.attention-level1,
     &.attention-level2,
     &.attention-level3 {
-      @include button-no-decoration;
+      @include button-attentionlevel3;
     }
   }
 }
@@ -308,4 +355,13 @@ $button-width: (
       @include interaction-state.apply-active('s');
     }
   }
+}
+
+/*
+* TEMPORARY MORE-MENU
+* Button content should not be space-between when only an icon is slotted 
+* inside the dropdown
+*/
+:host-context(kirby-dropdown.more-menu) {
+  justify-content: center;
 }
