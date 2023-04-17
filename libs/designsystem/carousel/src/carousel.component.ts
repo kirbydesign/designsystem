@@ -16,6 +16,7 @@ export class CarouselComponent implements AfterViewInit {
 
   @Input() config: CarouselConfig;
   @Input() noPadding: boolean;
+  @Input() title: string;
   _paginationId = UniqueIdGenerator.scopedTo('pagination').next();
   _prevButtonId = UniqueIdGenerator.scopedTo('swiper-button-prev').next();
   _nextButtonId = UniqueIdGenerator.scopedTo('swiper-button-next').next();

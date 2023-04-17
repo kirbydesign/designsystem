@@ -15,9 +15,14 @@ $bullet-inactive-opacity: 0.2;
 
   .navigation {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     margin-block: utils.size('s');
+
+    &-inner {
+      display: flex;
+      align-items: center;
+    }
   }
 
   .pagination {
