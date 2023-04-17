@@ -15,7 +15,29 @@
   </ion-item-sliding>
 </ng-container>
 
-<ng-container *ngIf="device === 'desktop'">web</ng-container>
+<ng-container *ngIf="device === 'desktop'">
+  <div class="list-item-menu">
+    <kirby-item>
+      <p slot="start">start</p>
+      <p slot="end">end</p>
+      <kirby-menu
+        slot="action"
+        [portalOutletConfig]="portalOutletConfig"
+        [placement]="'bottom-end'"
+      >
+        <kirby-item
+          *ngFor="let action of swipeActions; let i = index"
+          [selectable]="true"
+          (click)="_onSwipeActionSelect(action, item, $event)"
+        >
+          <div class="item-content">
+            <label>{{ action | getActionTitle: [item] }}</label>
+          </div>
+        </kirby-item>
+      </kirby-menu>
+    </kirby-item>
+  </div>
+</ng-container>
 
 <ng-template #swipeActionsTemplate let-item>
   <ion-item-options *ngIf="_hasSwipeActions(item)" [side]="_getSwipeActionEnd(item)">

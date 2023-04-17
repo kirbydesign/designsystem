@@ -157,3 +157,11 @@
     border-top-right-radius: utils.$border-radius;
   }
 }
+
+:host-context(.list-item-menu) {
+  :host {
+    ion-item {
+      --inner-padding-end: #{utils.size('xxxs')};
+    }
+  }
+}

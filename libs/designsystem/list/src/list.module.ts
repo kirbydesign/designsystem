@@ -6,6 +6,7 @@ import { SpinnerModule } from '@kirbydesign/designsystem/spinner';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 
 import { MenuComponent } from '@kirbydesign/designsystem/menu';
+import { ItemModule } from '@kirbydesign/designsystem/item';
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 import { ListItemColorDirective } from './directives/list-item-color.directive';
 import { ListExperimentalComponent } from './list-experimental/list-experimental.component';
@@ -19,6 +20,7 @@ import {
   ListItemTemplateDirective,
   ListSectionHeaderDirective,
 } from './list.directive';
+import { GetActionTitlePipe } from './pipes/action/get-title.pipe';
 
 const exportedDeclarations = [
   ListComponent,
@@ -37,11 +39,12 @@ const declarations = [
   ListItemColorDirective,
   InfiniteScrollDirective,
   ListItemComponent,
+  GetActionTitlePipe,
 ];
 
 @NgModule({
   declarations: declarations,
-  imports: [CommonModule, IconModule, IonicModule, SpinnerModule, MenuComponent],
+  imports: [CommonModule, IconModule, IonicModule, SpinnerModule, MenuComponent, ItemModule],
   exports: exportedDeclarations,
   providers: [],
 })
