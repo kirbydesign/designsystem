@@ -31,7 +31,7 @@ import { MockItemComponent } from './components/mock.item.component';
 import { MockLabelComponent } from './components/mock.label.component';
 import { MockItemGroupComponent } from './components/mock.item-group.component';
 import { MockItemSlidingComponent } from './components/mock.item-sliding.component';
-import { MockAppComponent } from './components/mock.kirby-app.component';
+import { MockAppComponent } from './components/mock.app.component';
 import { MockListExperimentalComponent } from './components/mock.list-experimental.component';
 import { MockListHeaderComponent } from './components/mock.list-header.component';
 import { MockListItemComponent } from './components/mock.list-item.component';

@@ -2,7 +2,6 @@ export { MockAccordionItemComponent } from './mock.accordion-item.component';
 export { MockActionGroupComponent } from './mock.action-group.component';
 export { MockActionSheetComponent } from './mock.action-sheet.component';
 export { MockAppComponent } from './mock.app.component';
-export { MockAppComponent as MockKirbyApp } from './mock.kirby-app.component';
 export { MockAvatarComponent } from './mock.avatar.component';
 export { MockButtonComponent } from './mock.button.component';
 export { MockCalendarComponent } from './mock.calendar.component';
