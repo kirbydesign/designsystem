@@ -13,9 +13,12 @@ import { IonItemSliding } from '@ionic/angular';
 import { ThemeColor } from '@kirbydesign/core';
 import { PlatformService } from '@kirbydesign/designsystem/helpers';
 
+import { OutletSelector } from '@kirbydesign/designsystem/shared/floating';
 import { ListSwipeAction, ListSwipeDirection, ListSwipeEnd } from '../list-swipe-action.type';
 
 export type BoundaryClass = 'first' | 'last';
+
+export type deviceType = 'touch' | 'desktop';
 
 @Component({
   selector: 'kirby-list-item',
@@ -24,9 +27,15 @@ export type BoundaryClass = 'first' | 'last';
 })
 export class ListItemComponent implements OnInit, AfterViewInit {
   _isSwipingEnabled = false;
+  portalOutletConfig: { selector: any; value: string };
 
   constructor(private platform: PlatformService) {
     this.initializeSwipeActions();
+
+    this.portalOutletConfig = {
+      selector: OutletSelector.id,
+      value: 'kirbyListPortalOutletHook',
+    };
   }
 
   @ViewChild(IonItemSliding) ionItemSliding: IonItemSliding;
@@ -44,6 +53,8 @@ export class ListItemComponent implements OnInit, AfterViewInit {
   @Input() isSelectable: boolean;
 
   @Input() getItemColor: (item: any) => ThemeColor;
+
+  @Input() device: deviceType;
 
   @Output() itemSelect = new EventEmitter<any>();
 

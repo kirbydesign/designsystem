@@ -14,9 +14,10 @@ import {
 
 import { ThemeColor } from '@kirbydesign/core';
 
+import { PlatformService } from '@kirbydesign/designsystem/helpers';
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 import { ListHelper } from './helpers/list-helper';
-import { BoundaryClass } from './list-item/list-item.component';
+import { BoundaryClass, deviceType } from './list-item/list-item.component';
 import { ListSwipeAction } from './list-swipe-action.type';
 import {
   ListFooterDirective,
@@ -164,7 +165,11 @@ export class ListComponent implements OnInit, OnChanges {
   _groupedItems: any[];
   _selectedItem: any;
 
-  constructor(private listHelper: ListHelper) {}
+  public device: deviceType;
+
+  constructor(private listHelper: ListHelper, private platformService: PlatformService) {
+    this.device = platformService.isTouch() ? 'touch' : 'desktop';
+  }
 
   ngOnInit() {
     this._isSelectable = this.itemSelect.observers.length > 0;

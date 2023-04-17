@@ -1,17 +1,21 @@
-<ion-item-sliding
-  [class.selected]="isSelected"
-  [kirbyListItemColor]="getItemColor"
-  [item]="item"
-  [disabled]="_isSwipingEnabled ? null : true"
-  keyHandler
-  [ngClass]="boundaryClass"
-  (click)="_onItemSelect(item)"
->
-  <ng-container
-    *ngTemplateOutlet="swipeActionsTemplate; context: { $implicit: item }"
-  ></ng-container>
-  <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: item }"></ng-container>
-</ion-item-sliding>
+<ng-container *ngIf="device === 'touch' || swipeActions?.length === 0">
+  <ion-item-sliding
+    [class.selected]="isSelected"
+    [kirbyListItemColor]="getItemColor"
+    [item]="item"
+    [disabled]="_isSwipingEnabled ? null : true"
+    keyHandler
+    [ngClass]="boundaryClass"
+    (click)="_onItemSelect(item)"
+  >
+    <ng-container
+      *ngTemplateOutlet="swipeActionsTemplate; context: { $implicit: item }"
+    ></ng-container>
+    <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: item }"></ng-container>
+  </ion-item-sliding>
+</ng-container>
+
+<ng-container *ngIf="device === 'desktop'">web</ng-container>
 
 <ng-template #swipeActionsTemplate let-item>
   <ion-item-options *ngIf="_hasSwipeActions(item)" [side]="_getSwipeActionEnd(item)">
@@ -36,3 +40,36 @@
     </div>
   </ion-item-options>
 </ng-template>
+
+<!-- <ng-template #menuTemplate let-item>
+  <kirby-menu
+    class="menu-action"
+    [portalOutletConfig]="portalOutletConfig"
+    [placement]="'bottom-end'"
+    slot="end"
+  >
+    <button kirby-button type="button" [noDecoration]="true">
+      <kirby-icon [name]="'more'"></kirby-icon>
+    </button>
+    <kirby-item
+      *ngFor="let action of swipeActions; let i = index"
+      [selectable]="true"
+      (click)="_onSwipeActionSelect(action, item, $event)"
+    >
+      <div class="item-content">
+        <label>{{ action | getActionTitle: [item] }}</label>
+      </div>
+    </kirby-item>
+  </kirby-menu>
+</ng-template>
+
+<ng-template #singleActionTemplate let-action>
+  <button
+    kirby-button
+    type="button"
+    [noDecoration]="true"
+    (click)="_onSwipeActionSelect(action, item, $event)"
+  >
+    <kirby-icon name="{{ action?.icon }}"></kirby-icon>
+  </button>
+</ng-template> -->
