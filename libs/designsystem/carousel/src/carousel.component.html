@@ -30,6 +30,10 @@
   </div>
 
   <swiper-container init="false" #swiperContainer>
-    <ng-content></ng-content>
+    <swiper-slide *ngFor="let slide of slides; let i = index">
+      <ng-container
+        *ngTemplateOutlet="slideTemplate; context: { $implicit: slide, index: i }"
+      ></ng-container>
+    </swiper-slide>
   </swiper-container>
 </div>
