@@ -415,7 +415,7 @@ describe('FloatingDirective', () => {
         expect(component.hostElementRef.nativeElement).toHaveComputedStyle({ display: 'block' });
       });
 
-      it('Should emit displayChanged', () => {
+      it('should emit displayChanged', () => {
         spyOn(directive.displayChanged, 'emit');
         directive.show();
         expect(directive.displayChanged.emit).toHaveBeenCalledWith(true);
@@ -452,14 +452,14 @@ describe('FloatingDirective', () => {
         expect(component.hostElementRef.nativeElement).toHaveComputedStyle({ display: 'none' });
       });
 
-      it('Should emit displayChanged when shown', () => {
+      it('should emit displayChanged when shown', () => {
         directive['isShown'] = true;
         spyOn(directive.displayChanged, 'emit');
         directive.hide();
         expect(directive.displayChanged.emit).toHaveBeenCalledWith(false);
       });
 
-      it('Should NOT emit displayChanged when not shown', () => {
+      it('should NOT emit displayChanged when not shown', () => {
         directive['isShown'] = false;
         spyOn(directive.displayChanged, 'emit');
         directive.hide();
