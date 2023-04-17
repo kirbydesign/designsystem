@@ -85,8 +85,6 @@ export class ModalWrapperComponent
   @ViewChild('contentTitle', { read: ElementRef })
   private _contentTitleElement: ElementRef<HTMLElement>;
 
-  _isMobileDrawer: boolean;
-
   get contentTitleElement(): ElementRef<HTMLElement> {
     /* 
         contentTitleElement has ngIf directive dependent on _hasCollapsibleTitle; trigger CD to make sure element has been queried. 
@@ -475,8 +473,6 @@ export class ModalWrapperComponent
   }
 
   private onViewportResize(entry: ResizeObserverEntry) {
-    this._isMobileDrawer = !this.platform.isPhabletOrBigger() && this.config.flavor === 'drawer';
-
     if (!this.initialViewportHeight) {
       // Initial observe callback, register initial height:
       this.initialViewportHeight = entry.contentRect.height;

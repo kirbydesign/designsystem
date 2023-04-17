@@ -82,16 +82,16 @@ ion-modal.kirby-overlay {
   position: fixed;
 
   &.kirby-modal {
-    box-sizing: border-box;
-
-    --background: var(--kirby-modal-background, #{utils.get-color('background-color')});
     --border-radius: 0;
+    --background: var(--kirby-modal-background, #{utils.get-color('background-color')});
     --height: auto;
     --box-shadow: #{utils.get-elevation(4)};
 
+    box-sizing: border-box;
+
     &.kirby-modal-compact {
-      --border-radius: #{utils.$border-radius};
       --max-width: #{utils.$compact-modal-max-width};
+      --border-radius: #{$modal-border-radius};
 
       text-align: center;
     }
@@ -100,7 +100,7 @@ ion-modal.kirby-overlay {
       @include utils.media('<medium') {
         --min-height: #{utils.$drawer-default-height};
         --kirby-modal-padding-top: calc(var(--kirby-safe-area-top, 0px) + #{utils.size('m')});
-        --border-radius: #{utils.$border-radius} #{utils.$border-radius} 0px 0px;
+        --border-radius: #{$modal-border-radius} #{$modal-border-radius} 0px 0px;
 
         padding-top: var(--kirby-modal-padding-top);
         align-items: flex-end;
@@ -138,7 +138,7 @@ ion-modal.kirby-overlay {
 
         $modal-gutter: #{utils.size('xxl')};
 
-        --border-radius: #{utils.$border-radius};
+        --border-radius: #{$modal-border-radius};
         --max-height: calc(100vh - #{$modal-gutter} * 2);
         --max-width: calc(100vw - #{$modal-gutter} * 2);
         --min-height: 264px;

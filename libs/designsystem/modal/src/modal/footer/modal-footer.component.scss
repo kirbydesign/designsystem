@@ -1,9 +1,6 @@
 @use '@kirbydesign/core/src/scss/utils';
 @use '@kirbydesign/core/src/scss/themes';
 
-$padding-horizontal: utils.size('s');
-$padding-vertical: utils.size('xxs');
-
 ion-footer {
   @include themes.apply-white-theme;
 
@@ -13,11 +10,11 @@ ion-footer {
   align-items: center;
   background-color: var(--kirby-modal-footer-background, utils.get-color('white'));
   color: var(--kirby-modal-footer-color, utils.get-color('white-contrast'));
-  padding: $padding-vertical $padding-horizontal;
-  padding-bottom: calc(#{$padding-vertical} + var(--kirby-modal-footer-safe-area-bottom, 0px));
+  padding: utils.size('xs');
+  padding-bottom: calc(#{utils.size('xs')} + var(--kirby-modal-footer-safe-area-bottom, 0px));
 
   @include utils.media('>=medium') {
-    padding: 20px utils.size('m');
+    padding: 20px;
   }
 }
 

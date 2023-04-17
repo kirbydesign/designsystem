@@ -36,10 +36,12 @@
 
 @mixin toolbar-phablet-or-bigger() {
   @include utils.media('>=medium') {
-    --padding-start: #{utils.size('m')};
-    --padding-end: #{utils.size('m')};
-    --padding-bottom: #{utils.size('m')};
-    --padding-top: #{utils.size('m')};
+    $toolbar-padding: 20px;
+
+    --padding-start: #{$toolbar-padding};
+    --padding-end: #{$toolbar-padding};
+    --padding-bottom: #{$toolbar-padding};
+    --padding-top: #{$toolbar-padding};
 
     padding-inline: 0;
   }
@@ -50,10 +52,10 @@ ion-header {
   border-bottom: 1px solid utils.get-color('medium');
 
   ion-toolbar {
-    --padding-start: #{utils.size('s')};
-    --padding-end: #{utils.size('s')};
-    --padding-bottom: #{utils.size('s')};
-    --padding-top: #{utils.size('s')};
+    --padding-start: #{utils.size('xxxs')};
+    --padding-end: #{utils.size('xxxs')};
+    --padding-bottom: #{utils.size('xxxs')};
+    --padding-top: #{utils.size('xxxs')};
     --border-width: 0;
     --background: transparent;
     --color: var(--kirby-modal-color, #{utils.get-color('black')});
@@ -71,12 +73,9 @@ ion-header {
   --header-height: 0px;
   --footer-height: 0px;
 
-  &.drawer {
-    // Prevent iOS safe-area padding-top on drawer flavor
-    // as this is already applied on the top-level modal itself
-    // in /scss/_global-styles.scss:
-    ion-header ion-toolbar:first-of-type {
-      padding-top: 0;
+  &.drawer ion-header ion-toolbar {
+    @include utils.media('<medium') {
+      --padding-top: #{utils.size('xs')};
     }
   }
 }
@@ -123,31 +122,37 @@ ion-content {
   --padding-end: #{utils.size('s')};
 }
 
-ion-buttons {
-  // Ensure ion-buttons in toolbar is same height as the buttons it wraps
-  max-height: utils.size('xl');
-}
-
 // Ensure padding-rules are not merged with other media query,
 // as this rule has to come AFTER the default mobile-first rule in order to override:
 
 /* clean-css ignore:start */
 @include utils.media('>=medium') {
   ion-content {
-    --padding-start: #{utils.size('xxxl')};
-    --padding-end: #{utils.size('xxxl')};
+    --padding-start: #{utils.size('xxl')};
+    --padding-end: #{utils.size('xxl')};
   }
 }
 
 :host(.collapsible-title) {
   ion-content {
     ion-header {
+      --padding-top: 0px;
+
       // no border for header element when collapsible title is in the content area
       border: none;
 
       ion-toolbar:first-of-type {
-        --padding-start: 8px;
-        --padding-end: 8px;
+        @include utils.media('>=medium') {
+          --padding-start: #{utils.size('s')};
+          --padding-end: #{utils.size('s')};
+        }
+
+        --padding-top: 0px;
+        --padding-bottom: #{utils.size('l')};
+        --padding-start: #{utils.size('xxs')};
+        --padding-end: #{utils.size('xxs')};
+
+        padding-top: 0;
       }
     }
   }
