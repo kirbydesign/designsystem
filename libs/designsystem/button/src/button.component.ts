@@ -143,7 +143,7 @@ export class ButtonComponent implements AfterContentInit {
       return;
     }
 
-    // Ensure buttons inside the toolbar is always shown as icon only:
+    // Ensure buttons with icon is always shown as icon only inside the toolbar:
     if (this.elementRef.nativeElement.closest('ion-toolbar')) {
       this._showIconOnly = true;
     }
