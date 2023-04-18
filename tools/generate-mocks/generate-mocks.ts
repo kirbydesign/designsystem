@@ -165,6 +165,10 @@ ${providers},
     return [exportedTypes, aliasesMap];
   }
 
+  private isTestFolder(folderName: string) {
+    return ['testing', 'testing-base', 'testing-jasmine', 'testing-jest'].includes(folderName);
+  }
+
   private async getBarrelFiles(folderpath: string) {
     const dirents = await readdir(folderpath, { withFileTypes: true });
     const files = await Promise.all(
@@ -194,12 +198,7 @@ ${providers},
   ) {
     const folderContent = readdirSync(folderpath)
       .filter((fileOrFolder) => !fileOrFolder.endsWith('.spec.ts'))
-      .filter(
-        (fileOrFolder) =>
-          !fileOrFolder.includes('testing-base') &&
-          !fileOrFolder.includes('testing-jasmine') &&
-          !fileOrFolder.includes('testing-jest')
-      );
+      .filter((fileOrFolder) => !this.isTestFolder(fileOrFolder));
     for (const fileOrFolder of folderContent) {
       const fullPath = path.join(folderpath, fileOrFolder);
       const ent = statSync(fullPath);
