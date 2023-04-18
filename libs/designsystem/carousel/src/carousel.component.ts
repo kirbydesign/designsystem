@@ -2,7 +2,9 @@ import {
   AfterViewInit,
   Component,
   ContentChild,
+  EventEmitter,
   Input,
+  Output,
   TemplateRef,
   ViewChild,
 } from '@angular/core';
@@ -12,6 +14,11 @@ import { UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
 import { CarouselSlideDirective } from './carousel-slide.directive';
 
 register();
+
+export type SelectedSlide = {
+  slide: any;
+  index: number;
+};
 
 export type CarouselConfig = SwiperOptions;
 @Component({
@@ -29,6 +36,8 @@ export class CarouselComponent implements AfterViewInit {
   @Input() title: string;
   @Input() slides: any[];
 
+  @Output() selectedSlide = new EventEmitter<SelectedSlide>();
+
   _paginationId = UniqueIdGenerator.scopedTo('pagination').next();
   _prevButtonId = UniqueIdGenerator.scopedTo('swiper-button-prev').next();
   _nextButtonId = UniqueIdGenerator.scopedTo('swiper-button-next').next();
@@ -42,6 +51,14 @@ export class CarouselComponent implements AfterViewInit {
       navigation: {
         nextEl: `.${this._nextButtonId}`,
         prevEl: `.${this._prevButtonId}`,
+      },
+      on: {
+        slideChange: (swiper) => {
+          this.selectedSlide.emit({
+            slide: this.slides[swiper.activeIndex],
+            index: swiper.activeIndex,
+          });
+        },
       },
     };
 
