@@ -1,7 +1,7 @@
 import { Component, forwardRef, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { AlertExperimentalComponent } from '@kirbydesign/designsystem';
+import { AlertExperimentalComponent } from '@kirbydesign/designsystem/alert-experimental';
 import { ThemeColor } from '@kirbydesign/core';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
