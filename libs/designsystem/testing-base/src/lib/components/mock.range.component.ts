@@ -26,10 +26,18 @@ export class MockRangeComponent {
   @Input() value: number;
   @Output() change = new EventEmitter<number>();
 
-  setDisabledState() {}
-  writeValue() {}
-  registerOnTouched() {}
-  registerOnChange() {}
+  setDisabledState() {
+    // NOOP
+  }
+  writeValue() {
+    // NOOP
+  }
+  registerOnTouched() {
+    // NOOP
+  }
+  registerOnChange() {
+    // NOOP
+  }
 }
 
 // #endregion

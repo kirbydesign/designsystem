@@ -17,7 +17,7 @@ export class MockCheckboxComponent {
   @Input() checked: boolean;
   @Input() attentionLevel: '1' | '2';
   @Input() text: string;
-  @Input() size: 'xs' | 'sm' | 'md';
+  @Input() size?: 'xs' | 'sm' | 'md';
   @Input() hasError: boolean;
   @Input() disabled: boolean;
   @Output() checkedChange = new EventEmitter<boolean>();

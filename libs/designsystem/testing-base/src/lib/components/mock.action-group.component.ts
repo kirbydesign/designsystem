@@ -14,8 +14,8 @@ import { ActionGroupComponent } from '@kirbydesign/designsystem/action-group';
   ],
 })
 export class MockActionGroupComponent {
-  @Input() visibleActions: number;
-  @Input() emphasizeActions: boolean;
+  @Input() visibleActions?: number;
+  @Input() emphasizeActions?: boolean;
   @Input() align: 'start' | 'end';
 }
 
