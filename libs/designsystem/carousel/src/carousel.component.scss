@@ -18,6 +18,7 @@ $bullet-inactive-opacity: 0.2;
     justify-content: space-between;
     align-items: center;
     margin-block: utils.size('s');
+    margin-inline: utils.size('s');
 
     &-inner {
       display: flex;
@@ -41,7 +42,6 @@ $bullet-inactive-opacity: 0.2;
   @include utils.media('>=medium') {
     .buttons {
       display: block;
-      margin-inline-end: utils.size('s');
     }
   }
 }
