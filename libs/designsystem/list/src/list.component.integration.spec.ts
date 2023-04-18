@@ -1,6 +1,6 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
-import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
+import { DesignTokenHelper, PlatformService } from '@kirbydesign/designsystem/helpers';
 
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
@@ -52,7 +52,10 @@ describe('ListComponent', () => {
         <kirby-list [items]="[{ name: 'Item1' }, { name: 'Item2' }, { name: 'Item3' }]" (itemSelect)="($event)">
           <kirby-item *kirbyListItemTemplate="let item"><h3>{{ item.name }}</h3></kirby-item>
         </kirby-list>
-        `
+        `,
+        {
+          providers: [{ provide: PlatformService, useValue: { isTouch: () => true } }],
+        }
       );
       ionList = spectator.queryHost('ion-list');
       await TestHelper.whenReady(ionList);
@@ -71,14 +74,12 @@ describe('ListComponent', () => {
       });
     });
 
-    it('should highlight selected item in bold text', () => {
-      const selectItem = itemsInList[1];
-      spectator.click(selectItem);
+    it('should highlight selected item in bold text', async () => {
+      await spectator.click(itemsInList[1]);
 
-      for (let i = 0; i < itemTexts.length; i++) {
-        const fontWeightExpected = itemsInList[i] === selectItem ? 'bold' : 'normal';
-        expect(itemTexts[i]).toHaveComputedStyle({ 'font-weight': fontWeight(fontWeightExpected) });
-      }
+      expect(itemTexts[0]).toHaveComputedStyle({ 'font-weight': fontWeight('normal') });
+      expect(itemTexts[1]).toHaveComputedStyle({ 'font-weight': fontWeight('bold') });
+      expect(itemTexts[2]).toHaveComputedStyle({ 'font-weight': fontWeight('normal') });
     });
 
     it('should not highlight selected item in bold text on disableSelectionHighlight', () => {
