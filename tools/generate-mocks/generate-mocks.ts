@@ -413,7 +413,7 @@ export class ${mockClassName} {${propertiesString}${methodsString}}
     let renderedProps = properties.map((prop) => {
       switch (prop.direction) {
         case 'Input':
-          const typeDeclaration = prop.type ? `: ${prop.type}` : '';
+          const typeDeclaration = prop.type ? `${prop.optional ? '?' : ''}: ${prop.type}` : '';
           const bindingProperty = prop.bindingProperty || '';
           return `@Input(${bindingProperty}) ${prop.name}${typeDeclaration};`;
         case 'Output':
@@ -555,6 +555,7 @@ export class ${mockClassName} {${propertiesString}${methodsString}}
       initializer,
       direction: inputOutputDecorator.type,
       bindingProperty: inputOutputDecorator.bindingProperty,
+      optional: !!propertyDeclaration.questionToken,
     };
 
     componentMetaData.properties.push(prop);
