@@ -1,6 +1,6 @@
 import { Component, ElementRef, Input, OnInit } from '@angular/core';
 
-type Flavor = 'modal' | 'drawer';
+export type Flavor = 'modal' | 'drawer';
 @Component({
   selector: 'kirby-modal-v2-wrapper',
   templateUrl: './wrapper.component.html',
