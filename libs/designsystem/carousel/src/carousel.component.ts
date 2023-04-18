@@ -20,7 +20,7 @@ export type SelectedSlide = {
   index: number;
 };
 
-export type CarouselConfig = SwiperOptions;
+export type SlidesOptions = SwiperOptions;
 @Component({
   selector: 'kirby-carousel',
   templateUrl: './carousel.component.html',
@@ -31,7 +31,7 @@ export class CarouselComponent implements AfterViewInit {
   @ContentChild(CarouselSlideDirective, { static: true, read: TemplateRef })
   public slideTemplate: TemplateRef<any>;
 
-  @Input() config: CarouselConfig;
+  @Input() slidesOptions: SlidesOptions;
   @Input() noPadding: boolean;
   @Input() title: string;
   @Input() slides: any[];
@@ -62,7 +62,7 @@ export class CarouselComponent implements AfterViewInit {
       },
     };
 
-    const config = Object.assign(defaultConfig, this.config);
+    const config = Object.assign(defaultConfig, this.slidesOptions);
 
     Object.assign(this.swiperContainer.nativeElement, config);
 
