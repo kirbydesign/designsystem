@@ -2,6 +2,7 @@ import {
   AfterViewInit,
   Component,
   EventEmitter,
+  HostBinding,
   Input,
   OnInit,
   Output,
@@ -36,6 +37,16 @@ export class ListItemComponent implements OnInit, AfterViewInit {
       selector: OutletSelector.id,
       value: 'kirbyListPortalOutletHook',
     };
+  }
+
+  @HostBinding('class.first')
+  get isFirst() {
+    return this.boundaryClass === 'first';
+  }
+
+  @HostBinding('class.last')
+  get isLast() {
+    return this.boundaryClass === 'last';
   }
 
   @ViewChild(IonItemSliding) ionItemSliding: IonItemSliding;
