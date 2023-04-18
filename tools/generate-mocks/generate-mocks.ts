@@ -175,7 +175,7 @@ ${providers},
       dirents
         .filter((dirent) => {
           return (
-            dirent.isDirectory() ||
+            (dirent.isDirectory() && !this.isTestFolder(dirent.name)) ||
             dirent.name.endsWith('index.ts') ||
             dirent.name.endsWith('public_api.ts')
           );
