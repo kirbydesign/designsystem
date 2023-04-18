@@ -26,6 +26,10 @@ export class ItemComponent {
 
   @Input()
   reorderable: boolean;
+
+  @Input()
+  action: boolean;
+
   @HostBinding('class')
   @Input()
   size: ItemSize | `${ItemSize}` = ItemSize.MD;

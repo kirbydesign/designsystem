@@ -1,42 +1,44 @@
-<ng-container *ngIf="device === 'touch' || swipeActions?.length === 0">
-  <ion-item-sliding
-    [class.selected]="isSelected"
-    [kirbyListItemColor]="getItemColor"
-    [item]="item"
-    [disabled]="_isSwipingEnabled ? null : true"
-    keyHandler
-    [ngClass]="boundaryClass"
-    (click)="_onItemSelect(item)"
-  >
-    <ng-container
-      *ngTemplateOutlet="swipeActionsTemplate; context: { $implicit: item }"
-    ></ng-container>
-    <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: item }"></ng-container>
-  </ion-item-sliding>
-</ng-container>
+<ng-container [ngSwitch]="device === 'touch' || swipeActions?.length === 0">
+  <ng-container *ngSwitchCase="true">
+    <ion-item-sliding
+      [class.selected]="isSelected"
+      [kirbyListItemColor]="getItemColor"
+      [item]="item"
+      [disabled]="_isSwipingEnabled ? null : true"
+      keyHandler
+      [ngClass]="boundaryClass"
+      (click)="_onItemSelect(item)"
+    >
+      <ng-container
+        *ngTemplateOutlet="swipeActionsTemplate; context: { $implicit: item }"
+      ></ng-container>
+      <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: item }"></ng-container>
+    </ion-item-sliding>
+  </ng-container>
 
-<ng-container *ngIf="device === 'desktop'">
-  <div class="list-item-menu">
-    <kirby-item>
-      <p slot="start">start</p>
-      <p slot="end">end</p>
-      <kirby-menu
-        slot="action"
-        [portalOutletConfig]="portalOutletConfig"
-        [placement]="'bottom-end'"
-      >
-        <kirby-item
-          *ngFor="let action of swipeActions; let i = index"
-          [selectable]="true"
-          (click)="_onSwipeActionSelect(action, item, $event)"
+  <ng-container *ngSwitch="false">
+    <div class="list-item-menu">
+      <kirby-item>
+        <p slot="start">start</p>
+        <p slot="end">end</p>
+        <kirby-menu
+          slot="action"
+          [portalOutletConfig]="portalOutletConfig"
+          [placement]="'bottom-end'"
         >
-          <div class="item-content">
-            <label>{{ action | getActionTitle: [item] }}</label>
-          </div>
-        </kirby-item>
-      </kirby-menu>
-    </kirby-item>
-  </div>
+          <kirby-item
+            *ngFor="let action of swipeActions; let i = index"
+            [selectable]="true"
+            (click)="_onSwipeActionSelect(action, item, $event)"
+          >
+            <div class="item-content">
+              <label>{{ action | getActionTitle: [item] }}</label>
+            </div>
+          </kirby-item>
+        </kirby-menu>
+      </kirby-item>
+    </div>
+  </ng-container>
 </ng-container>
 
 <ng-template #swipeActionsTemplate let-item>
