@@ -16,9 +16,9 @@
     </ion-item-sliding>
   </ng-container>
 
-  <ng-container *ngSwitch="false">
+  <ng-container *ngSwitchCase="false">
     <div class="list-item-menu">
-      <kirby-item>
+      <kirby-item [action]="true">
         <p slot="start">start</p>
         <p slot="end">end</p>
         <kirby-menu
