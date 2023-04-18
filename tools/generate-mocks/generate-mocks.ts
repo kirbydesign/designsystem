@@ -127,14 +127,19 @@ ${providers},
 
   private getTypesInFile(fileContent: any): any[] {
     const typesInFile = [];
-    const exportRegEx = /^export \{ *(.*) *\} from '\.\//;
+    const exportRegEx = /^export \{ *([^}]*) *\} from '\.\//;
     const exportRegExGlobal = new RegExp(exportRegEx, 'gm');
     // "|| []" prevents having to check for undefined:
     (fileContent.match(exportRegExGlobal) || []).forEach((matchedLine) => {
       // "slice(1)" skips the full match:
       (matchedLine.match(exportRegEx) || []).slice(1).forEach((exported) => {
         // Split multiple entries, trim away whitespace and add:
-        typesInFile.push(...exported.split(',').map((entry) => entry.trim()));
+        typesInFile.push(
+          ...exported
+            .split(',')
+            .map((entry) => entry.trim()) // remove surrounding whitespace from element
+            .filter(Boolean) // remove empty elements
+        );
       });
     });
     return typesInFile;
