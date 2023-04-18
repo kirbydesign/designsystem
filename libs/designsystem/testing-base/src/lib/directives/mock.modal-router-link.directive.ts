@@ -18,7 +18,7 @@ export class MockModalRouterLinkDirective {
   // eslint-disable-next-line @angular-eslint/no-input-rename
   @Input('kirbyModalRouterLink') path: string | string[];
   // eslint-disable-next-line @angular-eslint/no-input-rename
-  @Input('kirbyModalQueryParams') queryParams: Params;
+  @Input('kirbyModalQueryParams') queryParams?: Params;
 }
 
 // #endregion
