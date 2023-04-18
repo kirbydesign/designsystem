@@ -429,7 +429,9 @@ export class ${mockClassName} {${propertiesString}${methodsString}}
 
   private renderMethods(methods: any[]) {
     let renderedMethods = methods.map((method) => {
-      return `${method.name}() {};`;
+      return `${method.name}() {
+    // NOOP
+  };`;
     });
     const separator = `${newLine}  `;
     return renderedMethods.length ? separator + renderedMethods.join(separator) + newLine : '';
