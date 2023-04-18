@@ -40,7 +40,7 @@ export class MockHeaderCustomSectionDirective {}
   ],
 })
 export class MockHeaderComponent {
-  @Input() centered: boolean;
+  @Input() centered?: boolean;
   @Input() titleMaxLines: number;
   @Input() emphasizeActions: boolean;
   @Input() title: string;

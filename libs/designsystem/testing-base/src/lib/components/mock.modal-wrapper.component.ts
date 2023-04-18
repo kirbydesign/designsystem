@@ -16,8 +16,12 @@ import { ModalConfig, ModalWrapperComponent } from '@kirbydesign/designsystem/mo
 export class MockModalWrapperComponent {
   @Input() config: ModalConfig;
 
-  addModalElement() {}
-  removeModalElement() {}
+  addModalElement() {
+    // NOOP
+  }
+  removeModalElement() {
+    // NOOP
+  }
 }
 
 // #endregion

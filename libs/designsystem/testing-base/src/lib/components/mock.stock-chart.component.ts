@@ -15,7 +15,7 @@ import { ChartDataLabelOptions } from '@kirbydesign/designsystem/chart';
   ],
 })
 export class MockStockChartComponent {
-  @Input() dataLabelOptions: ChartDataLabelOptions;
+  @Input() dataLabelOptions?: ChartDataLabelOptions;
 }
 
 // #endregion

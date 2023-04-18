@@ -29,8 +29,12 @@ export class MockModalV2Component {
   @Output() didDismiss = new EventEmitter<CustomEvent<OverlayEventDetail>>();
   @Output() willDismiss = new EventEmitter<CustomEvent<OverlayEventDetail>>();
 
-  scrollToTop() {}
-  scrollToBottom() {}
+  scrollToTop() {
+    // NOOP
+  }
+  scrollToBottom() {
+    // NOOP
+  }
 }
 
 // #endregion
