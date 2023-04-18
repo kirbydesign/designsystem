@@ -415,7 +415,10 @@ export class ${mockClassName} {${propertiesString}${methodsString}}
         case 'Input':
           const typeDeclaration = prop.type ? `${prop.optional ? '?' : ''}: ${prop.type}` : '';
           const bindingProperty = prop.bindingProperty || '';
-          return `@Input(${bindingProperty}) ${prop.name}${typeDeclaration};`;
+          const esLintDisableNoInputRename = prop.bindingProperty
+            ? `  // eslint-disable-next-line @angular-eslint/no-input-rename${newLine}`
+            : '';
+          return `${esLintDisableNoInputRename}@Input(${bindingProperty}) ${prop.name}${typeDeclaration};`;
         case 'Output':
           return `@Output() ${prop.name} = ${prop.initializer};`;
       }
