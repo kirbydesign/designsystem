@@ -16,6 +16,7 @@ type ComponentMetaData = {
   className: string;
   decorator: string;
   selector: string;
+  exportAs: string;
   properties: any[];
   methods: any[];
 };
@@ -335,6 +336,9 @@ ${endRegion}
     const selector = componentMetaData.selector
       ? `${esLintDisableSelector}${newLine}  selector: ${componentMetaData.selector},`
       : '';
+    const exportAs = componentMetaData.exportAs
+      ? `${newLine}  exportAs: ${componentMetaData.exportAs},`
+      : '';
     const template =
       componentMetaData.decorator === 'Component'
         ? `${newLine}  template: '<ng-content></ng-content>',`
@@ -348,7 +352,7 @@ providers: [
   ],
 `;
 
-    const config = `{${selector}${template}${providers}}`;
+    const config = `{${selector}${exportAs}${template}${providers}}`;
     const content = `@${componentMetaData.decorator}(${config})
 export class ${mockClassName} {${propertiesString}${methodsString}}
 `;
@@ -438,6 +442,7 @@ export class ${mockClassName} {${propertiesString}${methodsString}}
           className: '',
           decorator: '',
           selector: '',
+          exportAs: '',
           properties: [],
           methods: [],
         };
@@ -498,6 +503,13 @@ export class ${mockClassName} {${propertiesString}${methodsString}}
                 if (selectorProp && ts.isPropertyAssignment(selectorProp)) {
                   const selector = selectorProp.initializer.getText();
                   componentMetaData.selector = selector;
+                }
+                const exportAsProp = decoratorArg.properties.find(
+                  (prop) => prop.name.getText() === 'exportAs'
+                );
+                if (exportAsProp && ts.isPropertyAssignment(exportAsProp)) {
+                  const exportAs = exportAsProp.initializer.getText();
+                  componentMetaData.exportAs = exportAs;
                 }
               }
             }
