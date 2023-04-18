@@ -26,6 +26,11 @@ import { MockInputComponent } from './components/mock.input.component';
 import { MockInputCounterComponent } from './components/mock.input-counter.component';
 import { MockTextareaComponent } from './components/mock.textarea.component';
 import { MockGridComponent } from './components/mock.grid.component';
+import {
+  MockHeaderActionsDirective,
+  MockHeaderComponent,
+  MockHeaderCustomSectionDirective,
+} from './components/mock.header.component';
 import { MockIconComponent } from './components/mock.icon.component';
 import { MockItemComponent } from './components/mock.item.component';
 import { MockLabelComponent } from './components/mock.label.component';
@@ -49,6 +54,19 @@ import { MockModalV2Component } from './components/mock.modal.component';
 import { MockModalV2RoutingComponent } from './components/mock.modal-routing.component';
 import { MockModalV2WrapperComponent } from './components/mock.wrapper.component';
 import { MockPageFooterComponent } from './components/mock.page-footer.component';
+import {
+  MockPageActionsComponent,
+  MockPageActionsDirective,
+  MockPageComponent,
+  MockPageContentComponent,
+  MockPageContentDirective,
+  MockPageProgressComponent,
+  MockPageStickyContentDirective,
+  MockPageSubtitleDirective,
+  MockPageTitleComponent,
+  MockPageTitleDirective,
+  MockPageToolbarTitleDirective,
+} from './components/mock.page.component';
 import { MockPopoverComponent } from './components/mock.popover.component';
 import { MockProgressCircleRingComponent } from './components/mock.progress-circle-ring.component';
 import { MockProgressCircleComponent } from './components/mock.progress-circle.component';
@@ -98,6 +116,9 @@ export const MOCK_COMPONENTS = [
   MockInputCounterComponent,
   MockTextareaComponent,
   MockGridComponent,
+  MockHeaderActionsDirective,
+  MockHeaderCustomSectionDirective,
+  MockHeaderComponent,
   MockIconComponent,
   MockItemComponent,
   MockLabelComponent,
@@ -121,6 +142,17 @@ export const MOCK_COMPONENTS = [
   MockModalV2RoutingComponent,
   MockModalV2WrapperComponent,
   MockPageFooterComponent,
+  MockPageTitleDirective,
+  MockPageSubtitleDirective,
+  MockPageToolbarTitleDirective,
+  MockPageActionsDirective,
+  MockPageContentDirective,
+  MockPageStickyContentDirective,
+  MockPageProgressComponent,
+  MockPageTitleComponent,
+  MockPageContentComponent,
+  MockPageActionsComponent,
+  MockPageComponent,
   MockPopoverComponent,
   MockProgressCircleRingComponent,
   MockProgressCircleComponent,
