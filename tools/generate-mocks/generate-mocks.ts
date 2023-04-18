@@ -125,7 +125,7 @@ ${providers},
     return Array.prototype.concat(...exportedTypesAndAliases);
   }
 
-  private getTypesInFile(fileContent: any): any[] {
+  private getTypesInFile(fileContent: string): string[] {
     const typesInFile = [];
     const exportRegEx = /^export \{ *([^}]*) *\} from '\.\//;
     const exportRegExGlobal = new RegExp(exportRegEx, 'gm');
