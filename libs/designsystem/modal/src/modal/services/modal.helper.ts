@@ -63,8 +63,12 @@ export class ModalHelper {
 
     let canDismiss: boolean | (() => Promise<boolean>) = true;
     if (alertConfig) {
+      let canBeDismissed = false;
       canDismiss = async () => {
-        const canBeDismissed = await this.showAlert(alertConfig);
+        if (!canBeDismissed) {
+          canBeDismissed = await this.showAlert(alertConfig);
+        }
+
         return canBeDismissed;
       };
     }
