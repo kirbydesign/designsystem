@@ -14,13 +14,13 @@
       </div>
     </ion-title>
     <ion-buttons
-      *ngIf="!!header?.actionsTemplate"
+      *ngIf="!!headerActionsTemplate"
       class="hide"
       slot="primary"
       [class.fade-in]="toolbarActionsVisible"
     >
       <ng-container
-        *ngTemplateOutlet="header?.actionsTemplate; injector: toolbarActionGroupInjector"
+        *ngTemplateOutlet="headerActionsTemplate; injector: toolbarActionGroupInjector"
       ></ng-container>
     </ion-buttons>
     <ion-buttons *ngIf="!!stickyActionsTemplate" class="legacy-actions" slot="primary">
@@ -42,7 +42,7 @@
   </ion-refresher>
 
   <!-- Page header -->
-  <div class="page-header-container" *ngIf="hasPageTitle && !header">
+  <div class="page-header-container" *ngIf="hasPageTitle && !hasHeader">
     <div
       class="page-header"
       [ngClass]="{
@@ -67,7 +67,7 @@
   </div>
 
   <!-- Header -->
-  <div class="page-header-container" *ngIf="header">
+  <div class="page-header-container" *ngIf="hasHeader">
     <ng-content select="kirby-header"></ng-content>
   </div>
 

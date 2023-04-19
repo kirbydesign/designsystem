@@ -51,7 +51,7 @@ import {
   ModalWrapperComponent,
 } from '@kirbydesign/designsystem/modal';
 import { FitHeadingConfig, ResizeObserverService } from '@kirbydesign/designsystem/shared';
-import { HeaderComponent } from '@kirbydesign/designsystem/header';
+import { HeaderActionsDirective, HeaderComponent } from '@kirbydesign/designsystem/header';
 import { ACTIONGROUP_CONFIG } from '@kirbydesign/designsystem/action-group';
 
 /**
@@ -264,6 +264,7 @@ export class PageComponent
   @ContentChild(HeaderComponent)
   header?: HeaderComponent;
 
+  hasHeader: boolean;
   hasPageTitle: boolean;
   hasPageSubtitle: boolean;
   toolbarTitleVisible: boolean;
@@ -280,6 +281,7 @@ export class PageComponent
   stickyActionsTemplate: TemplateRef<any>;
   fixedActionsTemplate: TemplateRef<any>;
   stickyContentTemplate: TemplateRef<PageStickyContentDirective>;
+  headerActionsTemplate: TemplateRef<HeaderActionsDirective>;
 
   private titleIntersectionObserver?: IntersectionObserver;
   private stickyActionsIntersectionObserver?: IntersectionObserver;
@@ -407,6 +409,7 @@ export class PageComponent
   }
 
   ngAfterContentChecked(): void {
+    this.initializeHeader();
     this.initializeTitle();
     this.initializeActions();
     this.initializeContent();
@@ -502,9 +505,28 @@ export class PageComponent
     }
   }
 
+  private initializeHeader() {
+    if (this.hasHeader === undefined && !!this.header) {
+      this.hasHeader = true;
+    }
+  }
+
   private initializeTitle() {
-    // Ensures initializeTitle() won't run, if already initialized
-    if (this.hasPageTitle) return;
+    if (this.hasHeader && this.isObservingTitle && !this.header?.titleElement) {
+      // If we're already observing the header's title element, but it's no longer present,
+      // it means it has been removed from DOM (e.g. in virtual scrolling scenarios).
+      // Flip observing flag:
+      this.isObservingTitle = false;
+    }
+    if (this.hasPageTitle) {
+      if (!this.isObservingTitle && !!this.header?.titleElement) {
+        // Header and title element re-attached to DOM - observe title:
+        this.observeTitle();
+      }
+
+      // Ensures rest of initializeTitle() won't run, if already initialized
+      return;
+    }
 
     this.hasPageTitle =
       this.title !== undefined || !!this.customTitleTemplate || !!this.header?.title;
@@ -544,8 +566,16 @@ export class PageComponent
     if (!this.titleIntersectionObserver) {
       this.titleIntersectionObserver = new IntersectionObserver(
         (entries) => {
-          this.toolbarTitleVisible = !entries[0].isIntersecting;
-          this.changeDetectorRef.detectChanges();
+          // In rare scenarios we get more than 1 entry - use the last one:
+          const lastEntry = entries[entries.length - 1];
+          if (lastEntry) {
+            const showToolbarTitle = !lastEntry.isIntersecting;
+            // Only flip the flag and run Change Detection when changed:
+            if (showToolbarTitle !== this.toolbarTitleVisible) {
+              this.toolbarTitleVisible = showToolbarTitle;
+              this.changeDetectorRef.detectChanges();
+            }
+          }
         },
         { root: this.ionContentElement.nativeElement }
       );
@@ -572,6 +602,16 @@ export class PageComponent
   }
 
   private initializeActions() {
+    if (this.headerActionsTemplate === undefined && !!this.header) {
+      this.headerActionsTemplate = this.header.actionsTemplate;
+    }
+    if (this.hasHeader && this.isObservingActions && !this.header?.actionsElement) {
+      // If we're already observing the header's actions element, but it's no longer present,
+      // it means it has been removed from DOM (e.g. in virtual scrolling scenarios).
+      // Flip observing flag:
+      this.isObservingActions = false;
+    }
+
     this.observeActions();
 
     this.customActions.forEach((pageAction) => {
@@ -604,8 +644,16 @@ export class PageComponent
     if (!this.stickyActionsIntersectionObserver) {
       this.stickyActionsIntersectionObserver = new IntersectionObserver(
         (entries) => {
-          this.toolbarActionsVisible = !entries[0].isIntersecting;
-          this.changeDetectorRef.detectChanges();
+          // In rare scenarios we get more than 1 entry - use the last one:
+          const lastEntry = entries[entries.length - 1];
+          if (lastEntry) {
+            const showToolbarActions = !lastEntry.isIntersecting;
+            // Only flip the flag and run Change Detection when changed:
+            if (showToolbarActions !== this.toolbarActionsVisible) {
+              this.toolbarActionsVisible = showToolbarActions;
+              this.changeDetectorRef.detectChanges();
+            }
+          }
         },
         { root: this.ionContentElement.nativeElement }
       );
