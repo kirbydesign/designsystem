@@ -332,7 +332,7 @@ describe('FloatingDirective', () => {
           const isShown: boolean = true;
           directive['isShown'] = isShown;
           spectator.setInput('closeOnSelect', true);
-          directive['onDocumentClickWhileHostShown'](event);
+          directive['handleClickInsideHostElement']();
           expect(directive['isShown']).toBeFalse();
         });
 
@@ -340,7 +340,7 @@ describe('FloatingDirective', () => {
           const isShown: boolean = false;
           directive['isShown'] = isShown;
           spectator.setInput('closeOnSelect', false);
-          directive['onDocumentClickWhileHostShown'](event);
+          directive['handleClickInsideHostElement']();
           expect(directive['isShown']).toEqual(isShown);
         });
 
@@ -348,7 +348,7 @@ describe('FloatingDirective', () => {
           const isShown: boolean = true;
           directive['isShown'] = isShown;
           spectator.setInput('closeOnSelect', false);
-          directive['onDocumentClickWhileHostShown'](event);
+          directive['handleClickInsideHostElement']();
           expect(directive['isShown']).toEqual(isShown);
         });
       });
@@ -364,7 +364,7 @@ describe('FloatingDirective', () => {
           const isShown: boolean = true;
           directive['isShown'] = isShown;
           spectator.setInput('closeOnBackdrop', true);
-          directive['onDocumentClickWhileHostShown'](event);
+          directive['handleClickOutsideHostElement'](event);
           expect(directive['isShown']).toBeFalse();
         });
 
@@ -372,7 +372,7 @@ describe('FloatingDirective', () => {
           const isShown: boolean = false;
           directive['isShown'] = isShown;
           spectator.setInput('closeOnBackdrop', false);
-          directive['onDocumentClickWhileHostShown'](event);
+          directive['handleClickOutsideHostElement'](event);
           expect(directive['isShown']).toEqual(isShown);
         });
 
@@ -380,7 +380,7 @@ describe('FloatingDirective', () => {
           const isShown: boolean = true;
           directive['isShown'] = isShown;
           spectator.setInput('closeOnBackdrop', false);
-          directive['onDocumentClickWhileHostShown'](event);
+          directive['handleClickOutsideHostElement'](event);
           expect(directive['isShown']).toEqual(isShown);
         });
       });
