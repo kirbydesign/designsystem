@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   ContentChild,
   EventEmitter,
@@ -25,6 +26,7 @@ export type SlidesOptions = SwiperOptions;
   selector: 'kirby-carousel',
   templateUrl: './carousel.component.html',
   styleUrls: ['./carousel.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CarouselComponent implements AfterViewInit {
   @ViewChild('swiperContainer') swiperContainer;
@@ -44,6 +46,7 @@ export class CarouselComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     const defaultConfig: SwiperOptions = {
+      spaceBetween: 16,
       pagination: {
         el: `.${this._paginationId}`,
         type: 'bullets',
