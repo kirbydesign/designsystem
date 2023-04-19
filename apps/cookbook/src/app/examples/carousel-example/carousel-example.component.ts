@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CarouselConfig } from '@kirbydesign/designsystem/carousel';
+import { SlidesOptions } from '@kirbydesign/designsystem/carousel';
 
 @Component({
   selector: 'cookbook-carousel-example',
@@ -34,53 +34,26 @@ export class CarouselExampleComponent {
     this.ignorePagePadding = $event;
   }
 
-  configExample1: CarouselConfig = {
+  configExample1: SlidesOptions = {
     slidesPerView: 1.2,
     centeredSlides: true,
     centeredSlidesBounds: false,
-    spaceBetween: 8,
-    pagination: true,
-    navigation: true,
     slidesPerGroup: 1,
-    // pagination: {
-    //   el: '.example1-pagination',
-    //   type: 'bullets',
-    //   enabled: false,
-    // },
-    // navigation: {
-    //   nextEl: '.example1-next',
-    //   prevEl: '.example1-prev',
-    //   enabled: true,
-    // },
     breakpoints: {
       1025: {
         centeredSlides: false,
         slidesPerView: 3.2,
-        spaceBetween: 16,
         slidesPerGroup: 3,
-        // pagination: {
-        //   enabled: true,
-        // },
       },
     },
   };
 
-  configExample2: CarouselConfig = {
+  configExample2: SlidesOptions = {
     slidesPerView: 1.2,
     centeredSlides: true,
     spaceBetween: 8,
     slidesPerGroup: 3,
     slidesPerGroupSkip: 3,
-    pagination: {
-      el: '.example2-pagination',
-      type: 'bullets',
-      enabled: false,
-    },
-    navigation: {
-      nextEl: '.example2-next',
-      prevEl: '.example2-prev',
-      enabled: true,
-    },
     breakpoints: {
       1025: {
         centeredSlides: false,
@@ -93,29 +66,77 @@ export class CarouselExampleComponent {
     },
   };
 
-  configExample3: CarouselConfig = {
+  configExample3: SlidesOptions = {
     slidesPerView: 1.2,
     centeredSlides: true,
     centeredSlidesBounds: false,
     spaceBetween: 8,
-    pagination: {
-      el: '.example3-pagination',
-      type: 'bullets',
-      enabled: false,
-    },
-    navigation: {
-      nextEl: '.example3-next',
-      prevEl: '.example3-prev',
-      enabled: true,
-    },
     breakpoints: {
       1025: {
         slidesPerView: 3.2,
         spaceBetween: 16,
-        pagination: {
-          enabled: true,
-        },
       },
     },
   };
+
+  slides = [
+    {
+      title: 'Slide 1',
+      subtitle: 'Subtitle 1',
+      cardContent:
+        '  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia facere molestias recusandae necessitatibus ab veniam repellendus doloremque culpa quam libero, est quo  accusamus cumque, in quia itaque cupiditate ratione repellat! ',
+    },
+    {
+      title: 'Slide 2',
+      subtitle: 'Subtitle 2',
+      cardContent:
+        '  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia facere molestias recusandae necessitatibus ab veniam repellendus doloremque culpa quam libero, est quo  accusamus cumque, in quia itaque cupiditate ratione repellat! ',
+    },
+    {
+      title: 'Slide 3',
+      subtitle: 'Subtitle 3',
+      cardContent:
+        '  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia facere molestias recusandae necessitatibus ab veniam repellendus doloremque culpa quam libero, est quo  accusamus cumque, in quia itaque cupiditate ratione repellat! ',
+    },
+    {
+      title: 'Slide 4',
+      subtitle: 'Subtitle 4',
+      cardContent:
+        '  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia facere molestias recusandae necessitatibus ab veniam repellendus doloremque culpa quam libero, est quo  accusamus cumque, in quia itaque cupiditate ratione repellat! ',
+    },
+    {
+      title: 'Slide 5',
+      subtitle: 'Subtitle 5',
+      cardContent:
+        '  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia facere molestias recusandae necessitatibus ab veniam repellendus doloremque culpa quam libero, est quo  accusamus cumque, in quia itaque cupiditate ratione repellat! ',
+    },
+    {
+      title: 'Slide 6',
+      subtitle: 'Subtitle 5',
+      cardContent:
+        '  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia facere molestias recusandae necessitatibus ab veniam repellendus doloremque culpa quam libero, est quo  accusamus cumque, in quia itaque cupiditate ratione repellat! ',
+    },
+    {
+      title: 'Slide 7',
+      subtitle: 'Subtitle 5',
+      cardContent:
+        '  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia facere molestias recusandae necessitatibus ab veniam repellendus doloremque culpa quam libero, est quo  accusamus cumque, in quia itaque cupiditate ratione repellat! ',
+    },
+    {
+      title: 'Slide 8',
+      subtitle: 'Subtitle 5',
+      cardContent:
+        '  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia facere molestias recusandae necessitatibus ab veniam repellendus doloremque culpa quam libero, est quo  accusamus cumque, in quia itaque cupiditate ratione repellat! ',
+    },
+    {
+      title: 'Slide 9',
+      subtitle: 'Subtitle 5',
+      cardContent:
+        '  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia facere molestias recusandae necessitatibus ab veniam repellendus doloremque culpa quam libero, est quo  accusamus cumque, in quia itaque cupiditate ratione repellat! ',
+    },
+  ];
+
+  getDataFromActiveSlide($event) {
+    console.log($event);
+  }
 }

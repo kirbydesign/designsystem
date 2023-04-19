@@ -1,106 +1,52 @@
-<!-- <kirby-carousel [config]="config">
-  <kirby-carousel-slide>
-    <kirby-card [hasPadding]="true">
-      <kirby-card-header [title]="'Flagged card header'" [flagged]="'success'"></kirby-card-header>
+<p>
+  Carousels are a collection of cards you can navigate horizontally in, either swipe or click.
+  Carousels are great to contain content without using a lot of space, but the content has to be
+  closely related.
+</p>
 
-      <strong>A flagged card</strong>
-      <p>
-        This is a card that uses a
-        <em>kirby-card-header</em>
-        with the
-        <code>flagged</code>
-        input set.
-      </p>
-      <p>
-        Possible values for the flagged header are:
-        <br />
-        <code>'success' | 'warning' | 'danger' | 'info'</code>
-      </p>
-      <p>Use the buttons below to see the different options 👇</p>
-    </kirby-card>
-  </kirby-carousel-slide>
-  <kirby-carousel-slide>
-    <kirby-card [hasPadding]="true">
-      <kirby-card-header [title]="'Flagged card header'" [flagged]="'warning'"></kirby-card-header>
+<div class="page-example">
+  <div>
+    <h2>Example:</h2>
 
-      <strong>A flagged card</strong>
-      <p>
-        This is a card that uses a
-        <em>kirby-card-header</em>
-        with the
-        <code>flagged</code>
-        input set.
-      </p>
-      <p>
-        Possible values for the flagged header are:
-        <br />
-        <code>'success' | 'warning' | 'danger' | 'info'</code>
-      </p>
-      <p>Use the buttons below to see the different options 👇</p>
-    </kirby-card>
-  </kirby-carousel-slide>
-  <kirby-carousel-slide>
-    <kirby-card [hasPadding]="true">
-      <kirby-card-header [title]="'Flagged card header'" [flagged]="'danger'"></kirby-card-header>
+    <cookbook-code-viewer [html]="exampleComponentHTML"></cookbook-code-viewer>
 
-      <strong>A flagged card</strong>
-      <p>
-        This is a card that uses a
-        <em>kirby-card-header</em>
-        with the
-        <code>flagged</code>
-        input set.
-      </p>
-      <p>
-        Possible values for the flagged header are:
-        <br />
-        <code>'success' | 'warning' | 'danger' | 'info'</code>
-      </p>
-      <p>Use the buttons below to see the different options 👇</p>
-    </kirby-card>
-  </kirby-carousel-slide>
+    <!-- <p>The <code>kirby-carousel</code> comes with a default config that</p> -->
+    <!-- <cookbook-code-viewer [html]="items"></cookbook-code-viewer> -->
+  </div>
 
-  <kirby-carousel-slide>
-    <kirby-card [hasPadding]="true">
-      <kirby-card-header [title]="'Flagged card header'" [flagged]="'warning'"></kirby-card-header>
+  <div>
+    <cookbook-iphone src="/examples/carousel/" showExternalLink="true"></cookbook-iphone>
+  </div>
+</div>
 
-      <strong>A flagged card</strong>
-      <p>
-        This is a card that uses a
-        <em>kirby-card-header</em>
-        with the
-        <code>flagged</code>
-        input set.
-      </p>
-      <p>
-        Possible values for the flagged header are:
-        <br />
-        <code>'success' | 'warning' | 'danger' | 'info'</code>
-      </p>
-      <p>Use the buttons below to see the different options 👇</p>
-    </kirby-card>
-  </kirby-carousel-slide>
+<p>
+  The
+  <code>kirby-carousel</code>
+  uses
+  <code>swiper.js</code>
+  under the hood and accepts the same
+  <a href="https://swiperjs.com/swiper-api#parameters" target="_blank">configuration</a>
+  as
+  <code>swiper.js</code>
+  . The component comes with this default config:
+</p>
 
-  <kirby-carousel-slide>
-    <kirby-card [hasPadding]="true">
-      <kirby-card-header [title]="'Flagged card header'" [flagged]="'success'"></kirby-card-header>
+<cookbook-code-viewer [ts]="carouselDefaultConfig"></cookbook-code-viewer>
 
-      <strong>A flagged card</strong>
-      <p>
-        This is a card that uses a
-        <em>kirby-card-header</em>
-        with the
-        <code>flagged</code>
-        input set.
-      </p>
-      <p>
-        Possible values for the flagged header are:
-        <br />
-        <code>'success' | 'warning' | 'danger' | 'info'</code>
-      </p>
-      <p>Use the buttons below to see the different options 👇</p>
-    </kirby-card>
-  </kirby-carousel-slide>
-</kirby-carousel> -->
-
-<cookbook-iphone src="/examples/carousel/" showExternalLink="true"></cookbook-iphone>
+<p>
+  This config can be extended be passing in
+  <code>slidesOptions</code>
+  as shown in the example above.
+</p>
+<p>
+  <em>
+    <strong>Please note:</strong>
+    When providing your own config it is important that you don't specify
+    <code>pagination</code>
+    ,
+    <code>navigation</code>
+    &
+    <code>slideChange</code>
+    , as this would overwrite these properties in the default config.
+  </em>
+</p>
