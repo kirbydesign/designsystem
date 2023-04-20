@@ -1,20 +1,31 @@
 import { Component } from '@angular/core';
 import { Params } from '@angular/router';
 
-import { ModalController } from '@kirbydesign/designsystem';
+import { AlertConfig, ModalController } from '@kirbydesign/designsystem';
 
 const config = {
   selector: 'cookbook-modal-example-outlet',
   template: `<button kirby-button (click)="navigateToModalRoute('page1', {awesomeQueryParam: 'awesome value'})">Open modal by route</button>
+<button kirby-button (click)="navigateToModalRoute('page1', {awesomeQueryParam: 'awesome value'}, alertConfig)">Open modal by route with alert</button>
 <button kirby-button kirbyModalRouterLink="page1" [kirbyModalQueryParams]="{awesomeQueryParam: 'awesome value'}">Open modal by router link</button>
 <button kirby-button class="deeplink" (click)="navigateToModalRoute(['/examples', 'modal', 'page1'], {awesomeQueryParam: 'awesome value'})">Deep link to modal route</button>
 <button kirby-button class="deeplink" [kirbyModalRouterLink]="['/examples', 'modal', 'page1']" [kirbyModalQueryParams]="{awesomeQueryParam: 'awesome value'}">Deep link to modal by router link</button>
 <button kirby-button class="deeplink" [kirbyModalRouterLink]="['/examples', 'modal-route-with-url-param', '1978', 'page1']">Deep link to modal with url param</button>`,
-  defaultCodeSnippet: `constructor(private modalController: ModalController) {}
+  defaultCodeSnippet: `
+  readonly alertConfig: AlertConfig = {
+    title: 'Do you want to close the modal?',
+    okBtn: {
+      text: 'Yes',
+      isDestructive: true,
+    },
+    cancelBtn: 'No',
+  };
+  
+  constructor(private modalController: ModalController) {}
 
-navigateToModalRoute(path: string | string[]) {
-  this.modalController.navigateToModal(path);
-}`,
+  navigateToModalRoute(path: string | string[], queryParams?: Params, alertConfig?: AlertConfig) {
+    this.modalController.navigateToModal(path,  queryParams, alertConfig);
+  }`,
   modalRouteCodeSnippet: `{
     path: 'main-route-presented-behind-the-modal',
     component: SomeComponent,
@@ -61,6 +72,9 @@ modalController.navigateToModal(['/home', 'main-route-presented-behind-the-modal
 
 // Passing query parameters (OPTIONAL): 
 modalController.navigateToModal('child-route-presented-in-modal', {awesomeQueryParam: 'awesome value'});
+
+// Show alert on close (OPTIONAL): 
+modalController.navigateToModal('child-route-presented-in-modal', null, { title: 'Do you want to close the modal?', okBtn: { text: 'Yes', isDestructive: true }, cancelBtn: 'No'});
 `,
 
   routerLinkWithinModalOutletCodeSnippet: `<!-- Relative path to sibling modal route: -->
@@ -103,6 +117,15 @@ navigate() {
   ],
 })
 export class ModalExampleOutletComponent {
+  readonly alertConfig: AlertConfig = {
+    title: 'Do you want to close the modal?',
+    okBtn: {
+      text: 'Yes',
+      isDestructive: true,
+    },
+    cancelBtn: 'No',
+  };
+
   template = config.template;
   defaultCodeSnippet = config.defaultCodeSnippet;
   modalRouteCodeSnippet = config.modalRouteCodeSnippet;
@@ -113,7 +136,7 @@ export class ModalExampleOutletComponent {
 
   constructor(private modalController: ModalController) {}
 
-  navigateToModalRoute(path: string | string[], queryParams?: Params) {
-    this.modalController.navigateToModal(path, queryParams);
+  navigateToModalRoute(path: string | string[], queryParams?: Params, alertConfig?: AlertConfig) {
+    this.modalController.navigateToModal(path, queryParams, alertConfig);
   }
 }
