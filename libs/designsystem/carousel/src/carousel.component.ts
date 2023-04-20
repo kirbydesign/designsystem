@@ -65,7 +65,7 @@ export class CarouselComponent implements AfterViewInit {
       },
     };
 
-    const config = Object.assign(defaultConfig, this.slidesOptions);
+    const config = Object.assign(this.slidesOptions, defaultConfig);
 
     Object.assign(this.swiperContainer.nativeElement, config);
 
