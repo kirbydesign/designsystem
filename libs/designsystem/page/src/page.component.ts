@@ -52,7 +52,7 @@ import {
 } from '@kirbydesign/designsystem/modal';
 import { FitHeadingConfig, ResizeObserverService } from '@kirbydesign/designsystem/shared';
 import { HeaderActionsDirective, HeaderComponent } from '@kirbydesign/designsystem/header';
-import { ACTIONGROUP_CONFIG } from '@kirbydesign/designsystem/action-group';
+import { ACTIONGROUP_CONFIG, ActionGroupConfig } from '@kirbydesign/designsystem/action-group';
 
 /**
  * Specify scroll event debounce time in ms and scrolled offset from top in pixels
@@ -344,11 +344,16 @@ export class PageComponent
   ngOnInit(): void {
     this.removeWrapper();
 
+    const actionGroupConfig: ActionGroupConfig = {
+      isResizable: false,
+      isCondensed: true,
+      maxVisibleActions: 1,
+    };
     this.toolbarActionGroupInjector = Injector.create({
       providers: [
         {
           provide: ACTIONGROUP_CONFIG,
-          useValue: { isResizable: false, isCondensed: true, visibleActions: 1 },
+          useValue: actionGroupConfig,
         },
       ],
       parent: this.injector,
