@@ -88,19 +88,12 @@ $border-radius-round: 999px !default;
 /* Breakpoints
 ****************************************************************************/
 $breakpoints: (
-  small: 321px,
+  xsmall: 0,
+  small: 632px,
   medium: 768px,
-  large: 1025px,
-  xlarge: 60em,
-  xxlarge: 80em,
+  large: 992px,
+  xlarge: 1440px,
 ) !default;
-$breakpoint-map: (
-  'xs': 0,
-  'sm': 632px,
-  'md': 768px,
-  'lg': 992px,
-  'xl': 1200px,
-);
 
 /* Elevation
 ****************************************************************************/

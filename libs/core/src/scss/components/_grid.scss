@@ -3,6 +3,14 @@
 
 /* stylelint-disable custom-property-pattern */
 
+$grid-sizes-to-breakpoint-map: (
+  'xs': xsmall,
+  'sm': small,
+  'md': medium,
+  'lg': large,
+  'xl': xlarge,
+);
+
 .kirby-grid {
   --kirby-grid-columns: 12;
   --kirby-grid-column-spacing: #{utils.size('m')};
@@ -125,7 +133,7 @@
 }
 
 @mixin breakpoint-style($breakpoint) {
-  @media (min-width: map.get(utils.$breakpoint-map, $breakpoint)) {
+  @media (min-width: map.get(utils.$breakpoints, map.get($grid-sizes-to-breakpoint-map, $breakpoint))) {
     @include column-style($breakpoint, 1);
     @include column-style($breakpoint, 2);
     @include column-style($breakpoint, 3);
