@@ -9,9 +9,6 @@
     <h2>Example:</h2>
 
     <cookbook-code-viewer [html]="exampleComponentHTML"></cookbook-code-viewer>
-
-    <!-- <p>The <code>kirby-carousel</code> comes with a default config that</p> -->
-    <!-- <cookbook-code-viewer [html]="items"></cookbook-code-viewer> -->
   </div>
 
   <div>
@@ -31,13 +28,18 @@
   . The component comes with this default config:
 </p>
 
-<cookbook-code-viewer [ts]="carouselDefaultConfig"></cookbook-code-viewer>
+<cookbook-example-viewer [ts]="carouselDefaultConfig"></cookbook-example-viewer>
+
+<br />
 
 <p>
   This config can be extended be passing in
   <code>slidesOptions</code>
-  as shown in the example above.
+  as shown in the example above, which uses this config:
 </p>
+
+<cookbook-code-viewer [ts]="customConfigExample"></cookbook-code-viewer>
+
 <p>
   <em>
     <strong>Please note:</strong>
@@ -47,6 +49,18 @@
     <code>navigation</code>
     &
     <code>slideChange</code>
-    , as this would overwrite these properties in the default config.
+    , as these properties will be overriden by the default config to ensure the component works as
+    expected.
   </em>
 </p>
+
+<h2 #fullscreenModalMethods>Properties:</h2>
+<cookbook-api-description-properties
+  [properties]="properties"
+></cookbook-api-description-properties>
+
+<h2 #fullscreenModalMethods>Events:</h2>
+<cookbook-api-description-events [events]="events"></cookbook-api-description-events>
+
+<h2 #fullscreenModalMethods>Methods:</h2>
+<cookbook-api-description-methods [methods]="methods"></cookbook-api-description-methods>

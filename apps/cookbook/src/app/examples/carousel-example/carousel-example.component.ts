@@ -37,10 +37,9 @@ export class CarouselExampleComponent {
   configExample1: SlidesOptions = {
     slidesPerView: 1.2,
     centeredSlides: true,
-    centeredSlidesBounds: false,
     slidesPerGroup: 1,
     breakpoints: {
-      1025: {
+      992: {
         centeredSlides: false,
         slidesPerView: 3.2,
         slidesPerGroup: 3,
