@@ -145,4 +145,8 @@ describe('ItemComponent', () => {
       expect(spectator.element).toHaveComputedStyle({ 'pointer-events': 'none' });
     });
   });
+
+  xdescribe('when device is desktop', () => {
+    it('should have a menu button', () => {});
+  });
 });

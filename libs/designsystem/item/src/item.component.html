@@ -15,7 +15,7 @@
   </ion-reorder>
 
   <kirby-icon *ngIf="disclosure" class="disclosure" slot="end" name="{{ disclosure }}"></kirby-icon>
-  <div slot="end" *ngIf="action">
+  <div slot="end">
     <ng-content select="[slot='action']"></ng-content>
   </div>
 </ion-item>

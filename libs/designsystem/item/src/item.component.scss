@@ -162,6 +162,11 @@
   :host {
     ion-item {
       --inner-padding-end: #{utils.size('xxxs')};
+
+      &::part(native) {
+        padding-right: 48px;
+        --ion-safe-area-right: #{utils.size('xxxs')};
+      }
     }
   }
 }
