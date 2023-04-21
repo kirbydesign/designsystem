@@ -46,4 +46,15 @@ $bullet-inactive-opacity: 0.2;
       display: block;
     }
   }
+
+  /* stylelint-disable selector-pseudo-element-no-unknown */
+  ::ng-deep {
+    div.pagination span.swiper-pagination-bullet {
+      border-radius: 2px;
+
+      --swiper-pagination-color: #{utils.get-color('black')};
+      --swiper-pagination-bullet-width: #{$bullet-width};
+      --swiper-pagination-bullet-height: #{$bullet-height};
+    }
+  }
 }
