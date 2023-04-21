@@ -24,8 +24,9 @@ const config = {
       [(openFullHeight)]="openFullHeight"
       [(interactWithBackground)]="interactWithBackground"
       [(customCssClass)]="customCssClass"
-      (selectedModalSize)="setSelectedModalSize($event)"
-      [modalSizes]="modalSizes"
+      [modalSizeOptions]="modalSizeOptions"
+      (selectedModalSizeOption)="setSelectedModalSize($event)"
+      
       >
       </cookbook-modal-example-configuration>
   </cookbook-example-configuration-wrapper>
@@ -239,12 +240,11 @@ export class ModalExampleDefaultComponent {
   customCssClass = false;
   dummyBackgroundTexts = new Array(100).map(() => '');
   preventInteraction = false;
-  modalSizes = [
-    { text: 'small', value: 'small' },
-    { text: 'medium (default)', value: 'medium' },
-    { text: 'large', value: 'large' },
-    { text: 'fit-content', value: 'fit-content' },
-    { text: 'full-height', value: 'full-height' },
+  modalSizeOptions = [
+    { text: 'Small', value: 'small' },
+    { text: 'Medium (default)', value: 'medium' },
+    { text: 'Large', value: 'large' },
+    { text: 'Full height (medium width only)', value: 'full-height' },
   ];
 
   selectedModalSize: ModalSize;
@@ -283,7 +283,7 @@ export class ModalExampleDefaultComponent {
         loadAdditionalContent: this.loadAdditionalContent,
         disableScroll: false,
         openFullHeight: this.openFullHeight,
-        modalSizes: this.modalSizes,
+        modalSizeOptions: this.modalSizeOptions,
       },
     };
 
@@ -318,9 +318,10 @@ export class ModalExampleDefaultComponent {
     await this.showOverlay('drawer');
   }
 
-  setSelectedModalSize(size: ModalSize) {
-    this.selectedModalSize = size;
-    console.log('setting size', size);
+  setSelectedModalSize(size) {
+    console.log('setting', size.value);
+
+    this.selectedModalSize = size.value;
   }
 
   private onOverlayClose(data: any): void {

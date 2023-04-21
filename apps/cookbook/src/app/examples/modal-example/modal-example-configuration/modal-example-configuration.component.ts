@@ -56,8 +56,8 @@ export class ModalExampleConfigurationComponent {
   @Input() snapFooterToKeyboard: boolean;
   @Output() snapFooterToKeyboardChange = new EventEmitter<boolean>();
 
-  @Input() modalSizes: [];
-  @Output() selectedModalSize = new EventEmitter<ModalSize>();
+  @Input() modalSizeOptions: [{ text: string; value: ModalSize }];
+  @Output() selectedModalSizeOption = new EventEmitter<ModalSize>();
 
   // Setting ion-checkbox.checked programatically triggers change event
   // Use this flag in checkbox change event handlers to prevent ExpressionChangedAfterItHasBeenCheckedError
@@ -168,6 +168,8 @@ export class ModalExampleConfigurationComponent {
 
   changeSize(size: ModalSize) {
     if (this.preventChangeEvent) return;
-    this.selectedModalSize.emit(size);
+    console.log(size);
+
+    this.selectedModalSizeOption.emit(size);
   }
 }

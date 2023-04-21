@@ -41,7 +41,7 @@
           [disableScroll]="disableScroll"
           (disableScrollChange)="toggleDisableScroll($event)"
           (selectedModalSize)="setSelectedModalSize($event)"
-          [modalSizes]="modalSizes"
+          [modalSizeOptions]="modalSizeOptions"
         ></cookbook-modal-example-configuration>
       </cookbook-example-configuration-wrapper>
       <kirby-card
@@ -65,8 +65,8 @@
             [(delayLoadDummyContent)]="delayLoadDummyContent"
             [(loadAdditionalContent)]="loadAdditionalContent"
             [(openFullHeight)]="openFullHeight"
-            (selectedModalSize)="setSelectedModalSize($event)"
-            [modalSizes]="modalSizes"
+            [modalSizeOptions]="modalSizeOptions"
+            (selectedModalSizeOption)="setSelectedModalSize($event)"
           ></cookbook-modal-example-configuration>
         </cookbook-example-configuration-wrapper>
       </kirby-card>

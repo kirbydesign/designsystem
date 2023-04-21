@@ -44,11 +44,10 @@ export class EmbeddedModalExampleComponent implements OnInit {
   isLoadingAdditionalContent = false;
   snapFooterToKeyboard = false;
 
-  modalSizes = [
+  modalSizeOptions = [
     { text: 'small', value: 'small' },
     { text: 'medium (default)', value: 'medium' },
     { text: 'large', value: 'large' },
-    { text: 'fit-content', value: 'fit-content' },
     { text: 'full-height', value: 'full-height' },
   ];
 
@@ -99,7 +98,7 @@ export class EmbeddedModalExampleComponent implements OnInit {
         showDummyContent: this.showNestedDummyContent,
         delayLoadDummyContent: this.delayLoadDummyContent,
         loadAdditionalContent: this.loadAdditionalContent,
-        modalSizes: this.modalSizes,
+        modalSizeOptions: this.modalSizeOptions,
       },
     };
 
@@ -181,7 +180,7 @@ export class EmbeddedModalExampleComponent implements OnInit {
     console.log(`Alert closed: ${result}`);
   }
 
-  setSelectedModalSize(size: ModalSize) {
-    this.selectedModalSize = size;
+  setSelectedModalSize(size) {
+    this.selectedModalSize = size.value;
   }
 }

@@ -82,13 +82,6 @@
   text="Open in full height"
 ></kirby-checkbox>
 
-<select (change)="changeSize($event.target.value)">
-  <option value="">-</option>
-  <option *ngFor="let size of modalSizes" value="{{ size.value }}">
-    {{ size.text }}
-  </option>
-</select>
-
 <kirby-checkbox
   [checked]="collapseTitle"
   (checkedChange)="toggleCollapseTitle($event)"
@@ -108,6 +101,15 @@
   [disabled]="disabled"
   text="Alert before closing"
 ></kirby-checkbox>
+
+<kirby-divider [hasMargin]="true"></kirby-divider>
+<p>Modal and drawer size on screens larger than 768px:</p>
+
+<kirby-dropdown
+  [items]="modalSizeOptions"
+  (change)="changeSize($event)"
+  [usePopover]="true"
+></kirby-dropdown>
 
 <ng-container *ngIf="interactWithBackground !== undefined || customCssClass !== undefined">
   <kirby-divider [hasMargin]="true"></kirby-divider>
