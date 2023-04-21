@@ -85,8 +85,11 @@ export class ActionGroupComponent implements AfterContentInit {
       if (this.visibleActions === undefined && this.config.defaultVisibleActions !== undefined) {
         this.visibleActions = this.config.defaultVisibleActions;
       }
-      if (this.config.maxVisibleActions < this.visibleActions) {
-        this.visibleActions = this.config.maxVisibleActions;
+      if (this.config.maxVisibleActions !== undefined) {
+        // Don't overwrite visibleActions value if configured lower than maxVisibleActions:
+        if (!(this.visibleActions < this.config.maxVisibleActions)) {
+          this.visibleActions = this.config.maxVisibleActions;
+        }
       }
       if (this.config.isCondensed) {
         this.buttons?.forEach((button) => (button.showIconOnly = true));
