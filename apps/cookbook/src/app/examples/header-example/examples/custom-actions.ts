@@ -7,7 +7,7 @@ const config = {
   template: `<kirby-page defaultBackHref="/">
   <kirby-header [title]="'Custom actions'" subtitle1="Subtitle one" subtitle2="Subtitle two">
     <ng-container *kirbyHeaderActions>
-      <kirby-menu placement="bottom-end">
+      <kirby-menu>
         <button kirby-button>
           <kirby-icon name="kirby"></kirby-icon>
           <span>Action</span>
@@ -20,7 +20,7 @@ const config = {
         </kirby-item>
       </kirby-menu>
 
-      <kirby-menu placement="bottom-end">
+      <kirby-menu>
         <kirby-item [selectable]="true" (click)="actionClicked('Secondary Action 1')">
           Secondary Action 1
         </kirby-item>
