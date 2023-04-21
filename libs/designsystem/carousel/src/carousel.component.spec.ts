@@ -4,6 +4,7 @@ import { ButtonComponent } from 'button/src';
 import { IconModule } from 'icon/src';
 import { CardModule } from 'card/src';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
+import { fakeAsync, tick } from '@angular/core/testing';
 import { CarouselComponent, SlidesOptions } from './carousel.component';
 import { CarouselSlideDirective } from './carousel-slide.directive';
 
@@ -26,7 +27,7 @@ describe('CarouselComponent', () => {
     declarations: [CarouselSlideDirective],
   });
 
-  beforeEach(() => {
+  beforeEach(async () => {
     spectator = createHost(
       `<kirby-carousel  [slides]="slides" [slidesOptions]="slidesOptions">
       <kirby-card *kirbyCarouselSlide="let slide">
@@ -40,6 +41,8 @@ describe('CarouselComponent', () => {
         },
       }
     );
+
+    await spectator.fixture.whenStable();
   });
 
   it('should create', () => {
@@ -84,16 +87,16 @@ describe('CarouselComponent', () => {
     expect(nextButton.classList).toContain('swiper-button-disabled');
   });
 
-  it('should have pagination dots with custom styling', () => {
+  it('should have pagination dots with custom styling', fakeAsync(() => {
     const paginationDot = spectator.queryAll('.swiper-pagination-bullet')[0];
-
+    tick(50);
     expect(paginationDot).toHaveComputedStyle({
       'border-radius': '2px',
       'background-color': getColor('black'),
       height: '6px',
       width: '10px',
     });
-  });
+  }));
 
   it('should extend the default slides options with the provided slides options', () => {
     expect(spectator.component.swiperContainer.nativeElement.swiper.passedParams).toEqual(
