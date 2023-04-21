@@ -1,11 +1,39 @@
-import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
+import { createComponentFactory, createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 
+import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ListItemComponent, ListModule, ListSwipeAction } from 'list/src';
+import { tick } from '@angular/core/testing';
 import { ItemComponent } from './item.component';
-import { LabelComponent } from '.';
+import { ItemModule, LabelComponent } from '.';
+
+@Component({
+  selector: 'kirby-mock-item',
+  template: `
+    <ng-template #MockKirbyItem>
+      <kirby-item>
+        {{ item.text }}
+      </kirby-item>
+    </ng-template>
+
+    <kirby-list-item
+      #sutComponentRef
+      [item]="item"
+      [itemTemplate]="MockKirbyItem"
+      [boundaryClass]="'first'"
+      (swipeActionSelect)="onItemSelected($event)"
+    ></kirby-list-item>
+  `,
+})
+class MockKirbyItemComponent {
+  @ViewChild('sutComponentRef') public sutComponentRef: ListItemComponent;
+  public item = { text: 'I am an item' };
+
+  public onItemSelected(item: any) {}
+}
 
 const { fontWeight } = DesignTokenHelper;
 
@@ -58,6 +86,64 @@ describe('ItemComponent with LabelComponent', () => {
         .forEach((e) => {
           expect(e).toHaveComputedStyle({ 'font-weight': fontWeight('normal') });
         });
+    });
+  });
+});
+
+describe(`when in a list-item-menu`, () => {
+  let spectator: SpectatorHost<MockKirbyItemComponent>;
+  let sutComponent: ListItemComponent;
+  let ionItem: HTMLElement;
+  const createHost = createHostFactory({
+    component: MockKirbyItemComponent,
+    declarations: [MockKirbyItemComponent],
+    imports: [ItemModule, ListModule],
+    shallow: false,
+  });
+
+  beforeEach(async () => {
+    spectator = createHost(`<kirby-mock-item></kirby-mock-item>`);
+    await spectator.fixture.whenStable();
+    sutComponent = spectator.component.sutComponentRef;
+
+    sutComponent.swipeActions = [{ title: 'Action 1' }, { title: 'Action 2' }] as ListSwipeAction[];
+
+    spectator.detectChanges();
+
+    ionItem = spectator.query('ion-item');
+    await TestHelper.whenReady(ionItem);
+    expect(ionItem.shadowRoot).toBeTruthy();
+  });
+
+  it('should render the item', () => {
+    expect(spectator.query('kirby-item')).toBeTruthy();
+    expect(spectator.query('kirby-item')).toHaveText('I am an item');
+  });
+
+  it(`should render 'ion-item' with correct '--inner-padding-end'`, () => {
+    const computedStyle = { '--inner-padding-end': '4px' };
+    expect(spectator.query('ion-item')).toHaveComputedStyle(computedStyle);
+  });
+
+  it(`should render 'ion-item' with correct '--inner-padding-end'`, async () => {
+    const itemInnerElement = ionItem.shadowRoot.querySelector('.item-inner');
+    expect(itemInnerElement).toBeTruthy();
+
+    const ionSafeAreaRightComputedStyle = { '--inner-padding-end': '4px' };
+    const paddingRightComputedStyle = { 'padding-right': '8px' };
+
+    expect(itemInnerElement).toHaveComputedStyle({
+      ...ionSafeAreaRightComputedStyle,
+      ...paddingRightComputedStyle,
+    });
+  });
+
+  it(`should render 'ion-item' with 'part=native'`, () => {
+    const partNative = ionItem.shadowRoot.querySelector('[part=native]');
+    expect(partNative).toBeTruthy();
+
+    expect(partNative).toHaveComputedStyle({
+      'padding-right': '48px',
     });
   });
 });
