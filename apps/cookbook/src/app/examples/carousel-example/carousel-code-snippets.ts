@@ -21,7 +21,7 @@ export const carouselDefaultConfig = `defaultConfig: SwiperOptions = {
 
 export const exampleComponentHTML = `<kirby-carousel
 	[slidesOptions]="customConfig"
-	[noPadding]="ignorePagePadding"
+	[ignorePagePadding]="ignorePagePadding"
 	[slides]="slides"
 	(selectedSlide)="getDataFromActiveSlide($event)"
 >

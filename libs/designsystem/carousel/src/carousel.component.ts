@@ -34,7 +34,7 @@ export class CarouselComponent implements AfterViewInit {
   public slideTemplate: TemplateRef<any>;
 
   @Input() slidesOptions: SlidesOptions;
-  @Input() noPadding: boolean;
+  @Input() ignorePagePadding: boolean;
   @Input() title: string;
   @Input() slides: any[];
 
