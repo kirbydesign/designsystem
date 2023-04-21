@@ -6,10 +6,12 @@ $bullet-inactive-opacity: 0.2;
 
 :host {
   --swiper-navigation-sides-offset: 0;
-  --swiper-pagination-bullet-width: #{$bullet-width};
-  --swiper-pagination-bullet-height: #{$bullet-height};
+
+  // --swiper-pagination-bullet-width: #{$bullet-width};
+  // --swiper-pagination-bullet-height: #{$bullet-height};
   --swiper-pagination-bullet-horizontal-gap: #{utils.size('xxxs')};
-  --swiper-pagination-color: #{utils.get-color('black')};
+
+  // --swiper-pagination-color: #{utils.get-color('black')};
   --swiper-pagination-bullet-inactive-color: #{utils.get-color('black')};
   --swiper-pagination-bullet-inactive-opacity: #{$bullet-inactive-opacity};
 

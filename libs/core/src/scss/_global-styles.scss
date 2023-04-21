@@ -312,6 +312,14 @@ html.ios ion-modal.kirby-modal-v2 {
   }
 }
 
+$bullet-width: 10px;
+$bullet-height: 6px;
+$bullet-inactive-opacity: 0.2;
+
 .swiper-pagination-bullet {
   border-radius: 2px;
+
+  --swiper-pagination-color: #{utils.get-color('black')};
+  --swiper-pagination-bullet-width: #{$bullet-width};
+  --swiper-pagination-bullet-height: #{$bullet-height};
 }
