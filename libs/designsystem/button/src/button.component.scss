@@ -360,6 +360,10 @@ $button-width: (
   }
 }
 
+:host-context(ion-modal.kirby-drawer.interact-with-background) {
+  @include button-no-decoration;
+}
+
 /*
 * TEMPORARY MORE-MENU
 * Button content should not be space-between when only an icon is slotted 
