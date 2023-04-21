@@ -13,6 +13,7 @@ import {
   autoPlacement,
   autoUpdate,
   computePosition,
+  flip,
   offset,
   shift,
   Strategy,
@@ -317,6 +318,7 @@ export class FloatingDirective implements OnInit, OnDestroy {
   private getMiddlewareConfig(): Array<Middleware | null | undefined | false> {
     const middleware: Array<Middleware | null | undefined | false> = [];
     middleware.push(offset(this.offset));
+    middleware.push(flip());
 
     if (this.shift) {
       middleware.push(shift());
