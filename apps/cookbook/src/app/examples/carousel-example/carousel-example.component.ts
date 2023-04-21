@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { SlidesOptions } from '@kirbydesign/designsystem/carousel';
+import { CarouselComponent } from '@kirbydesign/designsystem/carousel';
 
 @Component({
   selector: 'cookbook-carousel-example',
@@ -7,6 +8,8 @@ import { SlidesOptions } from '@kirbydesign/designsystem/carousel';
   styleUrls: ['./carousel-example.component.scss'],
 })
 export class CarouselExampleComponent {
+  @ViewChild(CarouselComponent) carouselComponent: CarouselComponent;
+
   maxWidth: string = 'full';
 
   maxWidthOptions = [
@@ -111,25 +114,25 @@ export class CarouselExampleComponent {
     },
     {
       title: 'Slide 6',
-      subtitle: 'Subtitle 5',
+      subtitle: 'Subtitle 6',
       cardContent:
         '  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia facere molestias recusandae necessitatibus ab veniam repellendus doloremque culpa quam libero, est quo  accusamus cumque, in quia itaque cupiditate ratione repellat! ',
     },
     {
       title: 'Slide 7',
-      subtitle: 'Subtitle 5',
+      subtitle: 'Subtitle 7',
       cardContent:
         '  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia facere molestias recusandae necessitatibus ab veniam repellendus doloremque culpa quam libero, est quo  accusamus cumque, in quia itaque cupiditate ratione repellat! ',
     },
     {
       title: 'Slide 8',
-      subtitle: 'Subtitle 5',
+      subtitle: 'Subtitle 8',
       cardContent:
         '  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia facere molestias recusandae necessitatibus ab veniam repellendus doloremque culpa quam libero, est quo  accusamus cumque, in quia itaque cupiditate ratione repellat! ',
     },
     {
       title: 'Slide 9',
-      subtitle: 'Subtitle 5',
+      subtitle: 'Subtitle 9',
       cardContent:
         '  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia facere molestias recusandae necessitatibus ab veniam repellendus doloremque culpa quam libero, est quo  accusamus cumque, in quia itaque cupiditate ratione repellat! ',
     },
@@ -137,5 +140,9 @@ export class CarouselExampleComponent {
 
   getDataFromActiveSlide($event) {
     console.log($event);
+  }
+
+  changeSlide() {
+    this.carouselComponent.slideTo(3);
   }
 }

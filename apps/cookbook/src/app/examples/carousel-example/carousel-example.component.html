@@ -1,7 +1,7 @@
 <kirby-page [maxWidth]="maxWidth">
   <kirby-page-content>
     <fieldset>
-      <legend>Max Width</legend>
+      <legend>Kirby page width</legend>
       <select [(ngModel)]="maxWidth">
         <option
           *ngFor="let option of maxWidthOptions"
@@ -20,11 +20,6 @@
     </fieldset>
 
     <div class="example">
-      <h1>Carousel demo</h1>
-
-      <!-------------------- EXAMPLE 1 ---------------------->
-
-      <h2>Example 1 (5 items)</h2>
       <kirby-carousel
         [slidesOptions]="configExample1"
         [ignorePagePadding]="ignorePagePadding"
@@ -41,6 +36,10 @@
 
         <!-- <button kirby-button size="xs" attentionLevel="3">Vis alle</button> -->
       </kirby-carousel>
+    </div>
+
+    <div class="button-container">
+      <button kirby-button (click)="changeSlide()">Activate slide no. 4</button>
     </div>
   </kirby-page-content>
 </kirby-page>
