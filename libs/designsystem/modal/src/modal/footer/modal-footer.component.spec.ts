@@ -8,12 +8,11 @@ import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import { ModalFooterComponent } from '../footer/modal-footer.component';
 
 const getColor = DesignTokenHelper.getColor;
-const size = DesignTokenHelper.size;
 
 const KEYBOARD_HEIGHT = 216; // sample value, depends upon device
-const BASE_PADDING_VERTICAL_PX = size('xxs');
-const BASE_PADDING_VERTICAL = parseInt(BASE_PADDING_VERTICAL_PX);
-const BASE_PADDING_HORIZONTAL_PX = size('s');
+const BASE_PADDING_PX = '20px';
+const BASE_PADDING_SMALL_SCREEN = 12;
+const BASE_PADDING_SMALL_SCREEN_PX = `${BASE_PADDING_SMALL_SCREEN}px`;
 const SAFE_AREA_BOTTOM = 22;
 const SAFE_AREA_BOTTOM_PX = `${SAFE_AREA_BOTTOM}px`;
 
@@ -49,10 +48,10 @@ describe('ModalFooterComponent', () => {
     expect(spectator.component).toBeTruthy();
     ionFooterElement = spectator.query('ion-footer');
     expect(ionFooterElement).toHaveComputedStyle({
-      'padding-left': BASE_PADDING_HORIZONTAL_PX,
-      'padding-right': BASE_PADDING_HORIZONTAL_PX,
-      'padding-top': BASE_PADDING_VERTICAL_PX,
-      'padding-bottom': BASE_PADDING_VERTICAL_PX,
+      'padding-left': BASE_PADDING_PX,
+      'padding-right': BASE_PADDING_PX,
+      'padding-top': BASE_PADDING_PX,
+      'padding-bottom': BASE_PADDING_PX,
     });
   });
 
@@ -64,7 +63,7 @@ describe('ModalFooterComponent', () => {
     });
 
     it('when --kirby-safe-area-bottom is not set', () => {
-      expect(ionFooterElement).toHaveComputedStyle({ 'padding-bottom': BASE_PADDING_VERTICAL_PX });
+      expect(ionFooterElement).toHaveComputedStyle({ 'padding-bottom': '20px' });
     });
 
     /**
@@ -72,7 +71,7 @@ describe('ModalFooterComponent', () => {
      */
     xit('when --kirby-safe-area-bottom is set', () => {
       setSafeAreaBottom();
-      expect(ionFooterElement).toHaveComputedStyle({ 'padding-bottom': BASE_PADDING_VERTICAL_PX });
+      expect(ionFooterElement).toHaveComputedStyle({ 'padding-bottom': '20px' });
     });
 
     describe('on small screens', () => {
@@ -86,13 +85,13 @@ describe('ModalFooterComponent', () => {
 
       it('when --kirby-safe-area-bottom is not set', () => {
         expect(ionFooterElement).toHaveComputedStyle({
-          'padding-bottom': BASE_PADDING_VERTICAL_PX,
+          'padding-bottom': BASE_PADDING_SMALL_SCREEN_PX,
         });
       });
 
       it('when --kirby-safe-area-bottom is set', () => {
         setSafeAreaBottom();
-        const expected = BASE_PADDING_VERTICAL + SAFE_AREA_BOTTOM + 'px';
+        const expected = BASE_PADDING_SMALL_SCREEN + SAFE_AREA_BOTTOM + 'px';
         expect(ionFooterElement).toHaveComputedStyle({ 'padding-bottom': expected });
       });
     });

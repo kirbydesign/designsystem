@@ -78,9 +78,6 @@ describe('ModalHelper', () => {
   let dummyPresentingElement: HTMLElement;
 
   const size = DesignTokenHelper.size;
-  const modalPaddingTopPx = size('xl');
-  const modalPaddingTop = parseInt(modalPaddingTopPx);
-  const modalHeaderHeight = 46;
 
   const createService = createServiceFactory({
     service: ModalHelper,
@@ -227,11 +224,12 @@ describe('ModalHelper', () => {
         await openModal();
 
         expect(ionModal).toHaveComputedStyle({
-          '--min-height': DesignTokenHelper.modalDefaultHeight,
+          '--min-height': '264px',
         });
       });
 
-      it('drawer should have min-height', async () => {
+      it('drawer should have min-height on phone', async () => {
+        await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
         await openDrawer();
 
         expect(ionModal).toHaveComputedStyle({
@@ -277,8 +275,8 @@ describe('ModalHelper', () => {
         expect(ionModal).toHaveComputedStyle({ '--height': '100%' });
       });
 
-      it('should not set default size class if flavor is `drawer`', async () => {
-        await openDrawer();
+      it('should not set default size class if configured with interactWithBackground', async () => {
+        await openDrawer(undefined, undefined, true);
 
         expectSize(undefined);
       });
@@ -315,19 +313,28 @@ describe('ModalHelper', () => {
       });
     });
 
-    describe(`padding top`, () => {
-      it('should have correct value for modal flavor (default)', async () => {
-        await openModal();
-
-        expect(ionModal).toHaveComputedStyle({ 'padding-top': modalPaddingTopPx });
-      });
-
-      it('should have correct value for drawer flavor', async () => {
+    describe('padding top', () => {
+      it('should have correct value for drawer flavor on mobile', async () => {
+        await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
         await openDrawer();
 
         expect(ionModal).toHaveComputedStyle({
-          'padding-top': `${modalPaddingTop + modalHeaderHeight / 2}px`,
+          'padding-top': size('m'),
         });
+      });
+
+      it('should have correct value for drawer flavor on desktop', async () => {
+        await openDrawer();
+
+        expect(ionModal).toHaveComputedStyle({
+          'padding-top': '0px',
+        });
+      });
+
+      it('should have correct value for modal flavor (default)', async () => {
+        await openModal();
+
+        expect(ionModal).toHaveComputedStyle({ 'padding-top': '0px' });
       });
 
       it('should have correct value for compact flavor', async () => {
@@ -368,12 +375,11 @@ describe('ModalHelper', () => {
 
       it('should have correct padding on tablet/desktop', () => {
         const toolbarContainer = ionToolbarElement.shadowRoot.querySelector('.toolbar-container');
-        const expectedInlinePadding = size('s');
-        const expectedBlockPadding = size('xs');
         const expectedAdditionalTopPadding = size('xxs');
+        const toolbarPadding = '20px';
 
         expect(toolbarContainer).toHaveComputedStyle({
-          padding: `${expectedBlockPadding} ${expectedInlinePadding}`,
+          padding: toolbarPadding,
         });
         expect(ionToolbarElement).toHaveComputedStyle({
           'padding-top': `${expectedAdditionalTopPadding}`,
@@ -383,11 +389,9 @@ describe('ModalHelper', () => {
       it('should have correct padding on phone', async () => {
         await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
         const toolbarContainer = ionToolbarElement.shadowRoot.querySelector('.toolbar-container');
-        const expectedInlinePadding = size('s');
-        const expectedBlockPadding = size('xs');
 
         expect(toolbarContainer).toHaveComputedStyle({
-          padding: `${expectedBlockPadding} ${expectedInlinePadding}`,
+          padding: size('xxxs'),
         });
         expect(ionToolbarElement).toHaveComputedStyle({
           'padding-top': '0px',
