@@ -360,7 +360,7 @@ $button-width: (
   }
 }
 
-:host-context(ion-modal.kirby-drawer.interact-with-background) {
+:host-context(.kirby-drawer.interact-with-background ion-header) {
   @include button-no-decoration;
 }
 

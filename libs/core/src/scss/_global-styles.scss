@@ -11,7 +11,7 @@
 @use 'themes/component-themes';
 
 /*
- * Desktop Modal.
+ * Modal utilities.
  */
 $modal-max-height-desktop: 928px;
 $modal-max-width-desktop: 594px;
@@ -33,6 +33,13 @@ $modal-heights: (
   m: 565px,
   l: 754px,
 );
+
+@mixin bottom-drawer() {
+  --border-radius: #{$modal-border-radius} #{$modal-border-radius} 0px 0px;
+  --min-height: #{utils.$drawer-default-height};
+
+  align-items: flex-end;
+}
 
 :root,
 :host {
@@ -98,19 +105,20 @@ ion-modal.kirby-overlay {
 
     &.kirby-drawer {
       @include utils.media('<medium') {
-        --min-height: #{utils.$drawer-default-height};
+        @include bottom-drawer;
+
         --kirby-modal-padding-top: calc(var(--kirby-safe-area-top, 0px) + #{utils.size('m')});
-        --border-radius: #{$modal-border-radius} #{$modal-border-radius} 0px 0px;
+      }
 
-        padding-top: var(--kirby-modal-padding-top);
-        align-items: flex-end;
+      &.interact-with-background {
+        &.kirby-modal.kirby-drawer {
+          @include bottom-drawer;
 
-        &.interact-with-background {
-          &.kirby-modal.kirby-drawer {
-            --kirby-modal-padding-top: 0;
-          }
+          --kirby-modal-padding-top: 0;
         }
       }
+
+      padding-top: var(--kirby-modal-padding-top);
     }
 
     @include utils.media('<medium') {

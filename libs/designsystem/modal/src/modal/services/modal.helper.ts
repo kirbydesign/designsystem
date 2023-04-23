@@ -48,7 +48,8 @@ export class ModalHelper {
     const enterAnimation = this.modalAnimationBuilder.enterAnimation(currentBackdrop);
     const leaveAnimation = this.modalAnimationBuilder.leaveAnimation(currentBackdrop);
 
-    const modalSize = config.size ? config.size : 'medium';
+    const defaultModalSize: ModalSize = config.interactWithBackground ? null : 'medium';
+    const modalSize = config.size || defaultModalSize;
 
     const allow_scroll_class = 'allow-background-scroll';
 
@@ -82,7 +83,7 @@ export class ModalHelper {
       cssClass: [
         'kirby-overlay',
         'kirby-modal',
-        'kirby-modal-' + modalSize,
+        modalSize ? 'kirby-modal-' + modalSize : null,
         config.flavor === 'drawer' ? 'kirby-drawer' : null,
         config.flavor === 'compact' ? 'kirby-modal-compact' : null,
         config.interactWithBackground ? 'interact-with-background' : null,

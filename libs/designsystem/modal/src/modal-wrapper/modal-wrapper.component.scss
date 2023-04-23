@@ -49,9 +49,11 @@
 
 ion-header {
   box-sizing: border-box;
-  border-bottom: 1px solid utils.get-color('medium');
+  border-bottom: 1px solid var(--kirby-modal-background, utils.get-color('medium'));
 
   ion-toolbar {
+    @include toolbar-phablet-or-bigger;
+
     --padding-start: #{utils.size('xxxs')};
     --padding-end: #{utils.size('xxxs')};
     --padding-bottom: #{utils.size('xxxs')};
@@ -63,8 +65,6 @@ ion-header {
     button {
       color: var(--color);
     }
-
-    @include toolbar-phablet-or-bigger;
   }
 }
 
@@ -76,6 +76,8 @@ ion-header {
   &.drawer ion-header ion-toolbar {
     @include utils.media('<medium') {
       --padding-top: #{utils.size('xs')};
+
+      padding-top: 0;
     }
   }
 }
@@ -84,6 +86,10 @@ ion-header {
   @include utils.media('<medium') {
     @include contain-content;
   }
+}
+
+:host-context(ion-modal.kirby-drawer.interact-with-background) {
+  @include contain-content;
 }
 
 // Ensure iOS safe-area padding-top on default/modal flavor
@@ -151,8 +157,6 @@ ion-content {
         --padding-bottom: #{utils.size('l')};
         --padding-start: #{utils.size('xxs')};
         --padding-end: #{utils.size('xxs')};
-
-        padding-top: 0;
       }
     }
   }
