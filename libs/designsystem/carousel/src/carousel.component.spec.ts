@@ -104,15 +104,15 @@ describe('CarouselComponent', () => {
       });
 
       expect(paginationDot).toHaveComputedStyle({
+        'background-color': getColor('black'),
+      });
+
+      expect(paginationDot).toHaveComputedStyle({
         height: '6px',
       });
 
       expect(paginationDot).toHaveComputedStyle({
         width: '10px',
-      });
-
-      expect(paginationDot).toHaveComputedStyle({
-        'background-color': getColor('black'),
       });
     });
 
