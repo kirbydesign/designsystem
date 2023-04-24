@@ -102,31 +102,43 @@ describe('CarouselComponent', () => {
       expect(paginationDot).toHaveComputedStyle({
         'border-radius': '2px',
       });
-    });
-
-    it('should have pagination dots with a custom height', () => {
-      const paginationDot = spectator.queryAll('.swiper-pagination-bullet')[0];
 
       expect(paginationDot).toHaveComputedStyle({
         height: '6px',
       });
-    });
-
-    it('should have pagination dots with a custom width', () => {
-      const paginationDot = spectator.queryAll('.swiper-pagination-bullet')[0];
 
       expect(paginationDot).toHaveComputedStyle({
         width: '10px',
       });
-    });
-
-    it('should have pagination dots with a custom background color', () => {
-      const paginationDot = spectator.queryAll('.swiper-pagination-bullet')[0];
 
       expect(paginationDot).toHaveComputedStyle({
         'background-color': getColor('black'),
       });
     });
+
+    // it('should have pagination dots with a custom height', () => {
+    //   const paginationDot = spectator.queryAll('.swiper-pagination-bullet')[0];
+
+    //   expect(paginationDot).toHaveComputedStyle({
+    //     height: '6px',
+    //   });
+    // });
+
+    // it('should have pagination dots with a custom width', () => {
+    //   const paginationDot = spectator.queryAll('.swiper-pagination-bullet')[0];
+
+    //   expect(paginationDot).toHaveComputedStyle({
+    //     width: '10px',
+    //   });
+    // });
+
+    // it('should have pagination dots with a custom background color', () => {
+    //   const paginationDot = spectator.queryAll('.swiper-pagination-bullet')[0];
+
+    //   expect(paginationDot).toHaveComputedStyle({
+    //     'background-color': getColor('black'),
+    //   });
+    // });
   });
 
   // it('should have pagination dots with custom styling', async () => {
