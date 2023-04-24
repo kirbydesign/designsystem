@@ -100,6 +100,36 @@ describe('CarouselComponent', () => {
     });
   });
 
+  it('should have pagination dots with height', async () => {
+    const paginationContainer = spectator.query('.pagination');
+    const paginationDot = paginationContainer.querySelectorAll('.swiper-pagination-bullet')[0];
+    await spectator.fixture.whenStable();
+
+    expect(paginationDot).toHaveComputedStyle({
+      height: '6px',
+    });
+  });
+
+  it('should have pagination dots with width', async () => {
+    const paginationContainer = spectator.query('.pagination');
+    const paginationDot = paginationContainer.querySelectorAll('.swiper-pagination-bullet')[0];
+    await spectator.fixture.whenStable();
+
+    expect(paginationDot).toHaveComputedStyle({
+      width: '10px',
+    });
+  });
+
+  it('should have pagination dots with background color', async () => {
+    const paginationContainer = spectator.query('.pagination');
+    const paginationDot = paginationContainer.querySelectorAll('.swiper-pagination-bullet')[0];
+    await spectator.fixture.whenStable();
+
+    expect(paginationDot).toHaveComputedStyle({
+      'background-color': getColor('black'),
+    });
+  });
+
   it('should have pagination dots with custom styling222', fakeAsync(() => {
     const paginationContainer = spectator.query('.pagination');
     const paginationDot = paginationContainer.querySelectorAll('.swiper-pagination-bullet')[0];
