@@ -29,12 +29,24 @@ $bullet-inactive-opacity: 0.2;
   }
 
   .pagination {
+    display: flex;
+    align-items: center;
     width: auto;
     margin-inline-end: utils.size('s');
   }
 
   .buttons {
     display: none;
+
+    .swiper-button-prev {
+      margin-block: 0;
+      margin-inline-start: 0;
+    }
+
+    .swiper-button-next {
+      margin-block: 0;
+      margin-inline-end: 0;
+    }
   }
 
   .no-padding {
@@ -55,6 +67,10 @@ $bullet-inactive-opacity: 0.2;
       --swiper-pagination-color: #{utils.get-color('black')};
       --swiper-pagination-bullet-width: #{$bullet-width};
       --swiper-pagination-bullet-height: #{$bullet-height};
+    }
+
+    div.pagination span.swiper-pagination-bullet:last-of-type {
+      margin-inline-end: 0;
     }
   }
 }

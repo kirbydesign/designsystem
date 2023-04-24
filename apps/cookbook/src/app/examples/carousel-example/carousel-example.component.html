@@ -21,9 +21,10 @@
 
     <div class="example">
       <kirby-carousel
-        [slidesOptions]="configExample1"
+        [slidesOptions]="config"
         [ignorePagePadding]="ignorePagePadding"
         [slides]="slides"
+        [title]="'Title'"
         (selectedSlide)="getDataFromActiveSlide($event)"
       >
         <kirby-card *kirbyCarouselSlide="let slide; let i = index" [hasPadding]="true">

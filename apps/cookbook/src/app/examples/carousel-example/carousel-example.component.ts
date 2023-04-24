@@ -37,46 +37,15 @@ export class CarouselExampleComponent {
     this.ignorePagePadding = $event;
   }
 
-  configExample1: SlidesOptions = {
+  config: SlidesOptions = {
     slidesPerView: 1.2,
     centeredSlides: true,
     slidesPerGroup: 1,
     breakpoints: {
       992: {
         centeredSlides: false,
-        slidesPerView: 3.2,
-        slidesPerGroup: 3,
-      },
-    },
-  };
-
-  configExample2: SlidesOptions = {
-    slidesPerView: 1.2,
-    centeredSlides: true,
-    spaceBetween: 8,
-    slidesPerGroup: 3,
-    slidesPerGroupSkip: 3,
-    breakpoints: {
-      1025: {
-        centeredSlides: false,
         slidesPerView: 3,
-
-        pagination: {
-          enabled: true,
-        },
-      },
-    },
-  };
-
-  configExample3: SlidesOptions = {
-    slidesPerView: 1.2,
-    centeredSlides: true,
-    centeredSlidesBounds: false,
-    spaceBetween: 8,
-    breakpoints: {
-      1025: {
-        slidesPerView: 3.2,
-        spaceBetween: 16,
+        slidesPerGroup: 3,
       },
     },
   };
