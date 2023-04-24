@@ -87,9 +87,25 @@ describe('CarouselComponent', () => {
     expect(nextButton.classList).toContain('swiper-button-disabled');
   });
 
-  it('should have pagination dots with custom styling', fakeAsync(() => {
-    const paginationDot = spectator.queryAll('.swiper-pagination-bullet')[0];
-    tick(50);
+  it('should have pagination dots with custom styling', async () => {
+    const paginationContainer = spectator.query('.pagination');
+    const paginationDot = paginationContainer.querySelectorAll('.swiper-pagination-bullet')[0];
+    await spectator.fixture.whenStable();
+
+    expect(paginationDot).toHaveComputedStyle({
+      'border-radius': '2px',
+      'background-color': getColor('black'),
+      height: '6px',
+      width: '10px',
+    });
+  });
+
+  it('should have pagination dots with custom styling222', fakeAsync(() => {
+    const paginationContainer = spectator.query('.pagination');
+    const paginationDot = paginationContainer.querySelectorAll('.swiper-pagination-bullet')[0];
+
+    tick(1000);
+
     expect(paginationDot).toHaveComputedStyle({
       'border-radius': '2px',
       'background-color': getColor('black'),
