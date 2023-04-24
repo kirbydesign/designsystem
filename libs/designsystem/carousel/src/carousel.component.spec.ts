@@ -87,62 +87,104 @@ describe('CarouselComponent', () => {
     expect(nextButton.classList).toContain('swiper-button-disabled');
   });
 
-  it('should have pagination dots with custom styling', async () => {
-    const paginationContainer = spectator.query('.pagination');
-    const paginationDot = paginationContainer.querySelectorAll('.swiper-pagination-bullet')[0];
-    await spectator.fixture.whenStable();
+  describe('pagination', () => {
+    // it('should have pagination dots', async () => {
+    //   const paginationContainer = spectator.query('.pagination');
+    //   const paginationDot = paginationContainer.querySelectorAll('.swiper-pagination-bullet')[0];
+    //   await spectator.fixture.whenStable();
 
-    expect(paginationDot).toHaveComputedStyle({
-      'border-radius': '2px',
-      'background-color': getColor('black'),
-      height: '6px',
-      width: '10px',
+    //   expect(paginationDot).toBeTruthy();
+    // });
+
+    it('should have pagination dots with a custom border-radius', () => {
+      const paginationDot = spectator.queryAll('.swiper-pagination-bullet')[0];
+
+      expect(paginationDot).toHaveComputedStyle({
+        'border-radius': '2px',
+      });
+    });
+
+    it('should have pagination dots with a custom height', () => {
+      const paginationDot = spectator.queryAll('.swiper-pagination-bullet')[0];
+
+      expect(paginationDot).toHaveComputedStyle({
+        height: '6px',
+      });
+    });
+
+    it('should have pagination dots with a custom width', () => {
+      const paginationDot = spectator.queryAll('.swiper-pagination-bullet')[0];
+
+      expect(paginationDot).toHaveComputedStyle({
+        width: '10px',
+      });
+    });
+
+    it('should have pagination dots with a custom background color', () => {
+      const paginationDot = spectator.queryAll('.swiper-pagination-bullet')[0];
+
+      expect(paginationDot).toHaveComputedStyle({
+        'background-color': getColor('black'),
+      });
     });
   });
 
-  it('should have pagination dots with height', async () => {
-    const paginationContainer = spectator.query('.pagination');
-    const paginationDot = paginationContainer.querySelectorAll('.swiper-pagination-bullet')[0];
-    await spectator.fixture.whenStable();
+  // it('should have pagination dots with custom styling', async () => {
+  //   const paginationContainer = spectator.query('.pagination');
+  //   const paginationDot = paginationContainer.querySelectorAll('.swiper-pagination-bullet')[0];
+  //   await spectator.fixture.whenStable();
 
-    expect(paginationDot).toHaveComputedStyle({
-      height: '6px',
-    });
-  });
+  //   expect(paginationDot).toHaveComputedStyle({
+  //     'border-radius': '2px',
+  //     'background-color': getColor('black'),
+  //     height: '6px',
+  //     width: '10px',
+  //   });
+  // });
 
-  it('should have pagination dots with width', async () => {
-    const paginationContainer = spectator.query('.pagination');
-    const paginationDot = paginationContainer.querySelectorAll('.swiper-pagination-bullet')[0];
-    await spectator.fixture.whenStable();
+  // it('should have pagination dots with height', async () => {
+  //   const paginationContainer = spectator.query('.pagination');
+  //   const paginationDot = paginationContainer.querySelectorAll('.swiper-pagination-bullet')[0];
+  //   await spectator.fixture.whenStable();
 
-    expect(paginationDot).toHaveComputedStyle({
-      width: '10px',
-    });
-  });
+  //   expect(paginationDot).toHaveComputedStyle({
+  //     height: '6px',
+  //   });
+  // });
 
-  it('should have pagination dots with background color', async () => {
-    const paginationContainer = spectator.query('.pagination');
-    const paginationDot = paginationContainer.querySelectorAll('.swiper-pagination-bullet')[0];
-    await spectator.fixture.whenStable();
+  // it('should have pagination dots with width', async () => {
+  //   const paginationContainer = spectator.query('.pagination');
+  //   const paginationDot = paginationContainer.querySelectorAll('.swiper-pagination-bullet')[0];
+  //   await spectator.fixture.whenStable();
 
-    expect(paginationDot).toHaveComputedStyle({
-      'background-color': getColor('black'),
-    });
-  });
+  //   expect(paginationDot).toHaveComputedStyle({
+  //     width: '10px',
+  //   });
+  // });
 
-  it('should have pagination dots with custom styling222', fakeAsync(() => {
-    const paginationContainer = spectator.query('.pagination');
-    const paginationDot = paginationContainer.querySelectorAll('.swiper-pagination-bullet')[0];
+  // it('should have pagination dots with background color', async () => {
+  //   const paginationContainer = spectator.query('.pagination');
+  //   const paginationDot = paginationContainer.querySelectorAll('.swiper-pagination-bullet')[0];
+  //   await spectator.fixture.whenStable();
 
-    tick(1000);
+  //   expect(paginationDot).toHaveComputedStyle({
+  //     'background-color': getColor('black'),
+  //   });
+  // });
 
-    expect(paginationDot).toHaveComputedStyle({
-      'border-radius': '2px',
-      'background-color': getColor('black'),
-      height: '6px',
-      width: '10px',
-    });
-  }));
+  // it('should have pagination dots with custom styling222', fakeAsync(() => {
+  //   const paginationContainer = spectator.query('.pagination');
+  //   const paginationDot = paginationContainer.querySelectorAll('.swiper-pagination-bullet')[0];
+
+  //   tick(1000);
+
+  //   expect(paginationDot).toHaveComputedStyle({
+  //     'border-radius': '2px',
+  //     'background-color': getColor('black'),
+  //     height: '6px',
+  //     width: '10px',
+  //   });
+  // }));
 
   it('should extend the default slides options with the provided slides options', () => {
     expect(spectator.component.swiperContainer.nativeElement.swiper.passedParams).toEqual(
