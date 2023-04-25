@@ -21,6 +21,7 @@
       <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: item }"></ng-container>
       <ng-container [ngSwitch]="swipeActions.length > 1">
         <kirby-menu
+          [isDisabled]="true"
           *ngSwitchCase="true"
           class="menu"
           [portalOutletConfig]="portalOutletConfig"
