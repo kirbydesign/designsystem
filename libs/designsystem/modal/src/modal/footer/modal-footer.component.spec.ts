@@ -7,10 +7,10 @@ import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import { ModalFooterComponent } from '../footer/modal-footer.component';
 
-const getColor = DesignTokenHelper.getColor;
+const { getColor, size } = DesignTokenHelper;
 
 const KEYBOARD_HEIGHT = 216; // sample value, depends upon device
-const BASE_PADDING_PX = '20px';
+const BASE_PADDING_PX = size('m');
 const BASE_PADDING_SMALL_SCREEN = 12;
 const BASE_PADDING_SMALL_SCREEN_PX = `${BASE_PADDING_SMALL_SCREEN}px`;
 const SAFE_AREA_BOTTOM = 22;
@@ -63,7 +63,7 @@ describe('ModalFooterComponent', () => {
     });
 
     it('when --kirby-safe-area-bottom is not set', () => {
-      expect(ionFooterElement).toHaveComputedStyle({ 'padding-bottom': '20px' });
+      expect(ionFooterElement).toHaveComputedStyle({ 'padding-bottom': size('m') });
     });
 
     /**
@@ -71,7 +71,7 @@ describe('ModalFooterComponent', () => {
      */
     xit('when --kirby-safe-area-bottom is set', () => {
       setSafeAreaBottom();
-      expect(ionFooterElement).toHaveComputedStyle({ 'padding-bottom': '20px' });
+      expect(ionFooterElement).toHaveComputedStyle({ 'padding-bottom': size('m') });
     });
 
     describe('on small screens', () => {

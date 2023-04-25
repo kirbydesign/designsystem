@@ -362,11 +362,14 @@ describe('ModalHelper', () => {
       it('should have correct padding on tablet/desktop', () => {
         const toolbarContainer = ionToolbarElement.shadowRoot.querySelector('.toolbar-container');
 
-        // visually toolbar is 24px padding, but 4px comes from toolbar button margins
-        const toolbarPadding = '20px';
+        //subtract border thickness from expected bottom padding
+        const expectedToolbarContainerPaddingBottom = parseInt(size('m')) - 1 + 'px';
 
         expect(toolbarContainer).toHaveComputedStyle({
-          padding: toolbarPadding,
+          'padding-top': size('m'),
+          'padding-right': size('m'),
+          'padding-bottom': expectedToolbarContainerPaddingBottom,
+          'padding-left': size('m'),
         });
         expect(ionToolbarElement).toHaveComputedStyle({
           'padding-top': '0px',
@@ -377,8 +380,14 @@ describe('ModalHelper', () => {
         await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
         const toolbarContainer = ionToolbarElement.shadowRoot.querySelector('.toolbar-container');
 
+        //subtract border thickness from expected bottom padding
+        const expectedToolbarContainerPaddingBottom = parseInt(size('xxs')) - 1 + 'px';
+
         expect(toolbarContainer).toHaveComputedStyle({
-          padding: size('xxxs'),
+          'padding-top': size('xxs'),
+          'padding-right': size('xxs'),
+          'padding-bottom': expectedToolbarContainerPaddingBottom,
+          'padding-left': size('xxs'),
         });
         expect(ionToolbarElement).toHaveComputedStyle({
           'padding-top': '0px',

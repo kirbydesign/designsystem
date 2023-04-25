@@ -364,6 +364,23 @@ $button-width: (
   @include button-no-decoration;
 }
 
+:host-context(.kirby-modal ion-header ion-toolbar ion-buttons) {
+  margin: 0;
+}
+
+:host-context(kirby-modal-footer) {
+  margin-top: 0;
+  margin-bottom: 0;
+
+  &:first-child {
+    margin-left: 0;
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
 /*
 * TEMPORARY MORE-MENU
 * Button content should not be space-between when only an icon is slotted 

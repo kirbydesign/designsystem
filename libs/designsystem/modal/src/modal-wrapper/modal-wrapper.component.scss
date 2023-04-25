@@ -2,6 +2,8 @@
 
 // Global modal styling can be found at scss/base/_ionic.scss
 
+$toolbar-bottom-border-width: 1px;
+
 @mixin contain-content() {
   padding-top: 0;
   position: relative;
@@ -36,12 +38,10 @@
 
 @mixin toolbar-phablet-or-bigger() {
   @include utils.media('>=medium') {
-    $toolbar-padding: 20px;
-
-    --padding-start: #{$toolbar-padding};
-    --padding-end: #{$toolbar-padding};
-    --padding-bottom: #{$toolbar-padding};
-    --padding-top: #{$toolbar-padding};
+    --padding-start: #{utils.size('m')};
+    --padding-end: #{utils.size('m')};
+    --padding-bottom: calc(#{utils.size('m')} - #{$toolbar-bottom-border-width});
+    --padding-top: #{utils.size('m')};
 
     padding-inline: 0;
   }
@@ -49,16 +49,14 @@
 
 ion-header {
   box-sizing: border-box;
-  border-bottom: 1px solid var(--kirby-modal-background, utils.get-color('medium'));
-  transition: border-color 100ms linear;
 
   ion-toolbar {
     @include toolbar-phablet-or-bigger;
 
-    --padding-start: #{utils.size('xxxs')};
-    --padding-end: #{utils.size('xxxs')};
-    --padding-bottom: #{utils.size('xxxs')};
-    --padding-top: #{utils.size('xxxs')};
+    --padding-start: #{utils.size('xxs')};
+    --padding-end: #{utils.size('xxs')};
+    --padding-bottom: calc(#{utils.size('xxs')} - #{$toolbar-bottom-border-width});
+    --padding-top: #{utils.size('xxs')};
     --border-width: 0;
     --background: transparent;
     --color: var(--kirby-modal-color, #{utils.get-color('black')});
@@ -66,6 +64,10 @@ ion-header {
     button {
       color: var(--color);
     }
+
+    border-bottom: $toolbar-bottom-border-width solid
+      var(--kirby-modal-background, utils.get-color('medium'));
+    transition: border-color 100ms linear;
   }
 }
 
@@ -85,8 +87,9 @@ ion-header {
 
 :host(:not(.content-scrolled)) {
   @include utils.media('<medium') {
-    ion-header {
-      border-bottom: 1px solid var(--kirby-modal-background, utils.get-color('background-color'));
+    ion-header ion-toolbar {
+      border-bottom: $toolbar-bottom-border-width solid
+        var(--kirby-modal-background, utils.get-color('background-color'));
       transition: border-color 100ms linear;
     }
   }
@@ -154,9 +157,6 @@ ion-content {
     ion-header {
       --padding-top: 0px;
 
-      // no border for header element when collapsible title is in the content area
-      border: none;
-
       ion-toolbar:first-of-type {
         @include utils.media('>=medium') {
           --padding-start: #{utils.size('s')};
@@ -167,6 +167,9 @@ ion-content {
         --padding-bottom: #{utils.size('l')};
         --padding-start: #{utils.size('xxs')};
         --padding-end: #{utils.size('xxs')};
+
+        // no border for header element when collapsible title is in the content area
+        border: none;
       }
     }
   }

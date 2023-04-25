@@ -10,11 +10,11 @@ ion-footer {
   align-items: center;
   background-color: var(--kirby-modal-footer-background, utils.get-color('white'));
   color: var(--kirby-modal-footer-color, utils.get-color('white-contrast'));
-  padding: utils.size('xs');
+  padding: utils.size('s');
   padding-bottom: calc(#{utils.size('xs')} + var(--kirby-modal-footer-safe-area-bottom, 0px));
 
   @include utils.media('>=medium') {
-    padding: 20px;
+    padding: utils.size('m');
   }
 }
 
