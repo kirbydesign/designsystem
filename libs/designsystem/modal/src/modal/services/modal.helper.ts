@@ -63,6 +63,8 @@ export class ModalHelper {
 
     let canDismiss: boolean | (() => Promise<boolean>) = true;
     if (alertConfig) {
+      // Remembers the modal dismissal response from user to prevent multiple alerts on
+      // approval since the callback is invoked more than once when closing.
       let canBeDismissed = false;
       canDismiss = async () => {
         if (!canBeDismissed) {
