@@ -10,7 +10,6 @@ import { ApiDescriptionMethod } from '../../shared/api-description/api-descripti
 @Component({
   selector: 'cookbook-carousel-showcase',
   templateUrl: './carousel-showcase.component.html',
-  styleUrls: ['./carousel-showcase.component.scss'],
 })
 export class CarouselShowcaseComponent {
   carouselDefaultConfig: string = carouselDefaultConfig;
