@@ -50,6 +50,7 @@
 ion-header {
   box-sizing: border-box;
   border-bottom: 1px solid var(--kirby-modal-background, utils.get-color('medium'));
+  transition: border-color 100ms linear;
 
   ion-toolbar {
     @include toolbar-phablet-or-bigger;
@@ -78,6 +79,15 @@ ion-header {
       --padding-top: #{utils.size('xs')};
 
       padding-top: 0;
+    }
+  }
+}
+
+:host(:not(.content-scrolled)) {
+  @include utils.media('<medium') {
+    ion-header {
+      border-bottom: 1px solid var(--kirby-modal-background, utils.get-color('background-color'));
+      transition: border-color 100ms linear;
     }
   }
 }

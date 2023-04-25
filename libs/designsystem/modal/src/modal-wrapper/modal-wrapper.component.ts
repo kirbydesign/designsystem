@@ -65,6 +65,9 @@ export class ModalWrapperComponent
     this.ionContent.scrollY = !disabled;
   }
 
+  @HostBinding('class.content-scrolled')
+  contentScrolled: boolean = false;
+
   @Input() config: ModalConfig;
   componentPropsInjector: Injector;
 
@@ -523,6 +526,20 @@ export class ModalWrapperComponent
     };
 
     return new IntersectionObserver(callback, options);
+  }
+
+  contentScrollEnd() {
+    this.ionContent.getScrollElement().then((scrollElement) => {
+      if (scrollElement.scrollTop === 0) {
+        this.contentScrolled = false;
+      }
+    });
+  }
+
+  contentScrollStart() {
+    if (!this.contentScrolled) {
+      this.contentScrolled = true;
+    }
   }
 
   ngOnDestroy() {
