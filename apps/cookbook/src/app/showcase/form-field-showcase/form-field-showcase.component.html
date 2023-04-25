@@ -1,3 +1,26 @@
+<h2>NB!</h2>
+<p>
+  If you are importing
+  <code>FormFieldModule</code>
+  rather than
+  <code>KirbyModule</code>
+  , you'll also need to import
+  <code>DateInputDirective</code>
+  .
+</p>
+<p>
+  In your module:
+  <code>imports: [ FormFieldModule, DateInputDirective ]</code>
+</p>
+
+<p>
+  This is due to a bug in the
+  <code>FormFieldModule</code>
+  &nbsp;
+  <a href="https://github.com/kirbydesign/designsystem/issues/3007">(See issue here)</a>
+  . A fix will be released in the next major verision of Kirby.
+</p>
+<kirby-divider></kirby-divider>
 <h2>Input</h2>
 <cookbook-form-field-example-configuration
   [(size)]="size"
