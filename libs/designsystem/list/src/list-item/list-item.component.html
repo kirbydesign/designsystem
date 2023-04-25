@@ -19,17 +19,30 @@
   <ng-container *ngSwitchCase="false">
     <div #container class="list-item-menu">
       <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: item }"></ng-container>
-      <kirby-menu class="menu" [portalOutletConfig]="portalOutletConfig" [placement]="'bottom-end'">
-        <kirby-item
-          *ngFor="let action of swipeActions; let i = index"
-          [selectable]="true"
-          (click)="_onSwipeActionSelect(action, item, $event)"
+      <ng-container [ngSwitch]="swipeActions.length > 1">
+        <kirby-menu
+          *ngSwitchCase="true"
+          class="menu"
+          [portalOutletConfig]="portalOutletConfig"
+          [placement]="'bottom-end'"
         >
-          <div class="item-content">
-            <label>{{ action | getActionTitle: [item] }}</label>
-          </div>
-        </kirby-item>
-      </kirby-menu>
+          <kirby-item
+            *ngFor="let action of swipeActions; let i = index"
+            [selectable]="true"
+            (click)="_onSwipeActionSelect(action, item, $event)"
+          >
+            <div class="item-content">
+              <label>{{ action | getActionTitle: [item] }}</label>
+            </div>
+          </kirby-item>
+        </kirby-menu>
+
+        <ng-container *ngSwitchCase="false">
+          <ng-container
+            *ngTemplateOutlet="singleActionTemplate; context: { $implicit: swipeActions[0] }"
+          ></ng-container>
+        </ng-container>
+      </ng-container>
     </div>
   </ng-container>
 </ng-container>
@@ -56,4 +69,16 @@
       </ng-container>
     </div>
   </ion-item-options>
+</ng-template>
+
+<ng-template #singleActionTemplate let-action>
+  <button
+    class="menu"
+    kirby-button
+    type="button"
+    [noDecoration]="true"
+    (click)="_onSwipeActionSelect(action, item, $event)"
+  >
+    <kirby-icon name="{{ action | getActionIcon: [item] }}"></kirby-icon>
+  </button>
 </ng-template>

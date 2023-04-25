@@ -168,7 +168,6 @@ ion-item-options[side='end'] {
   }
 
   ion-item.first,
-  ion-item-sliding.first,
   kirby-list-item.first,
   ion-list-header {
     border-top-left-radius: utils.$border-radius;
@@ -187,7 +186,6 @@ ion-item-options[side='end'] {
   }
 
   ion-item.last,
-  ion-item-sliding.last,
   kirby-list-item.last,
   .footer {
     border-bottom-left-radius: utils.$border-radius;

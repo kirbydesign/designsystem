@@ -220,5 +220,34 @@ describe('ListComponent', () => {
         expect(component.isLoadOnDemandEnabled).toBeFalse();
       });
     });
+
+    describe('when having boundary elements', () => {
+      it(`should apply the CSS class 'first' and 'last' on the first and only element in the list`, async () => {
+        spectator.component.items = [{ id: 1 }];
+
+        spectator.detectChanges();
+
+        const list = await spectator.queryAll('ion-item-sliding');
+
+        expect(list.length).toBe(1);
+
+        expect(list[0].classList).toContain('first');
+        expect(list[0].classList).toContain('last');
+      });
+
+      it(`should apply the CSS class 'first' on the first element in the list`, async () => {
+        spectator.component.items = [{ id: 1 }, { id: 2 }];
+        spectator.detectChanges();
+
+        const list = await spectator.queryAll('ion-item-sliding');
+        expect(list.length).toBe(2);
+
+        expect(list[0].classList).toContain('first');
+        expect(list[0].classList).not.toContain('last');
+
+        expect(list[1].classList).not.toContain('first');
+        expect(list[1].classList).toContain('last');
+      });
+    });
   });
 });
