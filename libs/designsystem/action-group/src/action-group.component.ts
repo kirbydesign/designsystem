@@ -20,7 +20,8 @@ import { DropdownComponent, DropdownModule } from '@kirbydesign/designsystem/dro
 export type ActionGroupConfig = {
   isResizable?: boolean;
   isCondensed?: boolean;
-  visibleActions?: number;
+  defaultVisibleActions?: number;
+  maxVisibleActions?: number;
 };
 export const ACTIONGROUP_CONFIG = new InjectionToken<ActionGroupConfig>('action-group.config');
 
@@ -66,21 +67,23 @@ export class ActionGroupComponent implements AfterContentInit {
     return 'align-' + this.align;
   }
 
+  private collapseThreshold = 2;
+
   constructor(
     private renderer: Renderer2,
     @Optional() @Inject(ACTIONGROUP_CONFIG) private config: ActionGroupConfig
   ) {}
 
   ngAfterContentInit(): void {
-    if (this.config) {
-      this._isResizeable = this.config.isResizable;
-      this.visibleActions = this.config.visibleActions;
-      if (this.config.isCondensed) {
-        this.buttons?.forEach((button) => (button.showIconOnly = true));
-      }
+    // Ensure we collapse according to visibleActions if lower than our default threshold (2).
+    // I.e. if there are 2 buttons and visibleActions = 1 we'll collapse the 2nd button into the menu:
+    if (this.visibleActions < this.collapseThreshold) {
+      this.collapseThreshold = this.visibleActions;
     }
 
-    if (this.visibleActions) {
+    this.initializeFromConfig();
+
+    if (this.visibleActions !== undefined) {
       this.initializeCollapsing();
     }
   }
@@ -98,9 +101,29 @@ export class ActionGroupComponent implements AfterContentInit {
     action.button.dispatchEvent(event);
   }
 
+  private initializeFromConfig() {
+    if (!this.config) return;
+
+    this._isResizeable = this.config.isResizable;
+
+    if (this.visibleActions === undefined && this.config.defaultVisibleActions !== undefined) {
+      this.visibleActions = this.config.defaultVisibleActions;
+    }
+
+    if (this.config.maxVisibleActions !== undefined) {
+      // Don't overwrite visibleActions value if configured lower than maxVisibleActions:
+      if (!(this.visibleActions < this.config.maxVisibleActions)) {
+        this.visibleActions = this.config.maxVisibleActions;
+      }
+    }
+
+    if (this.config.isCondensed) {
+      this.buttons?.forEach((button) => (button.showIconOnly = true));
+    }
+  }
+
   private initializeCollapsing() {
-    const collapseThreshold = 2;
-    if (this.buttonElements.length <= collapseThreshold) return;
+    if (this.buttonElements.length <= this.collapseThreshold) return;
 
     this.moveButtons();
     this.populateDropdown();

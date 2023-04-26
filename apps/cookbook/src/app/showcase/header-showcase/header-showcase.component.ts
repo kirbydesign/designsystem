@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HeaderWithActionGroupExampleComponent } from '~/app/examples/header-example/examples/action-group';
+import { HeaderWithCustomActionsExampleComponent } from '~/app/examples/header-example/examples/custom-actions';
 import {
   ApiDescriptionProperty,
   ApiDescriptionPropertyColumns,
@@ -13,6 +14,7 @@ import {
 })
 export class HeaderShowcaseComponent {
   actionGroupTemplate: string = HeaderWithActionGroupExampleComponent.template;
+  customActionsTemplate: string = HeaderWithCustomActionsExampleComponent.template;
 
   properties: ApiDescriptionProperty[] = [
     {
@@ -64,4 +66,9 @@ export class HeaderShowcaseComponent {
     name: 'Name',
     description: 'Description',
   };
+
+  scrollTo(target: Element) {
+    target.scrollIntoView({ behavior: 'smooth' });
+    return false;
+  }
 }

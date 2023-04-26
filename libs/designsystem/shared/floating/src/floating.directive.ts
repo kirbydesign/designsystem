@@ -13,6 +13,7 @@ import {
   autoPlacement,
   autoUpdate,
   computePosition,
+  flip,
   offset,
   shift,
   Strategy,
@@ -204,6 +205,7 @@ export class FloatingDirective implements OnInit, OnDestroy {
   private isShown: boolean = false;
   private referenceEventListenerDisposeFns: EventListenerDisposeFn[] = [];
   private documentClickEventListenerDisposeFn: EventListenerDisposeFn;
+  private hostClickEventListenerDisposeFn: EventListenerDisposeFn;
   private triggerEventMap: Map<TriggerEvent, EventMethods[]> = new Map([
     ['click', [{ event: 'click', method: this.toggleShow.bind(this) }]],
     [
@@ -233,7 +235,7 @@ export class FloatingDirective implements OnInit, OnDestroy {
   };
 
   public constructor(
-    private elementRef: ElementRef,
+    private elementRef: ElementRef<HTMLElement>,
     private renderer: Renderer2,
     private portalDirective: PortalDirective
   ) {}
@@ -249,7 +251,8 @@ export class FloatingDirective implements OnInit, OnDestroy {
       return;
     }
 
-    this.attachDocumentClickEvent();
+    this.attachDocumentClickEventHandler();
+    this.attachHostClickEventHandler();
     this.renderer.setStyle(this.elementRef.nativeElement, 'display', 'block');
     this.isShown = true;
     this.displayChanged.emit(this.isShown);
@@ -257,7 +260,7 @@ export class FloatingDirective implements OnInit, OnDestroy {
 
   /* Should be accessible for programmatically setting display */
   public hide(): void {
-    if (this.isDisabled) {
+    if (this.isDisabled || !this.isShown) {
       return;
     }
 
@@ -273,15 +276,6 @@ export class FloatingDirective implements OnInit, OnDestroy {
       this.hide();
     } else {
       this.show();
-    }
-  }
-
-  private onDocumentClickWhileHostShown(event: Event): void {
-    const clickedOnHost: boolean = this.elementRef.nativeElement.contains(event.target);
-    if (clickedOnHost) {
-      this.handleClickInsideHostElement();
-    } else {
-      this.handleClickOutsideHostElement(event);
     }
   }
 
@@ -324,6 +318,7 @@ export class FloatingDirective implements OnInit, OnDestroy {
   private getMiddlewareConfig(): Array<Middleware | null | undefined | false> {
     const middleware: Array<Middleware | null | undefined | false> = [];
     middleware.push(offset(this.offset));
+    middleware.push(flip());
 
     if (this.shift) {
       middleware.push(shift());
@@ -366,7 +361,7 @@ export class FloatingDirective implements OnInit, OnDestroy {
     );
   }
 
-  private attachDocumentClickEvent(): void {
+  private attachDocumentClickEventHandler(): void {
     if (this.documentClickEventListenerDisposeFn) {
       return;
     }
@@ -374,7 +369,19 @@ export class FloatingDirective implements OnInit, OnDestroy {
     this.documentClickEventListenerDisposeFn = this.renderer.listen(
       'document',
       'mousedown',
-      (event) => this.onDocumentClickWhileHostShown(event)
+      (event) => this.handleClickOutsideHostElement(event)
+    );
+  }
+
+  private attachHostClickEventHandler(): void {
+    if (this.hostClickEventListenerDisposeFn || !this.closeOnSelect) {
+      return;
+    }
+
+    this.hostClickEventListenerDisposeFn = this.renderer.listen(
+      this.elementRef.nativeElement,
+      'click',
+      () => this.handleClickInsideHostElement()
     );
   }
 
@@ -403,6 +410,9 @@ export class FloatingDirective implements OnInit, OnDestroy {
 
   private handleClickOutsideHostElement(event: Event): void {
     if (event.target instanceof Node) {
+      const clickedOnHost: boolean = this.elementRef.nativeElement.contains(event.target);
+      if (clickedOnHost) return;
+
       const clickedOnReferenceWithClickTriggerEnabled: boolean =
         this.reference?.nativeElement.contains(event.target) && this.triggers.includes('click');
 
@@ -454,6 +464,11 @@ export class FloatingDirective implements OnInit, OnDestroy {
     if (this.documentClickEventListenerDisposeFn) {
       this.documentClickEventListenerDisposeFn();
       this.documentClickEventListenerDisposeFn = null;
+    }
+
+    if (this.hostClickEventListenerDisposeFn) {
+      this.hostClickEventListenerDisposeFn();
+      this.hostClickEventListenerDisposeFn = null;
     }
   }
 

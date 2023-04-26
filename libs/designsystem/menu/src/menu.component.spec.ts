@@ -8,7 +8,7 @@ import { ToggleComponent } from '@kirbydesign/designsystem/toggle';
 import { ItemModule } from '@kirbydesign/designsystem/item';
 import { MenuComponent } from './menu.component';
 
-describe('MenuListComponent', () => {
+describe('MenuComponent', () => {
   let spectator: Spectator<MenuComponent>;
   let buttonElement: HTMLButtonElement;
   let card: Element;
@@ -54,15 +54,15 @@ describe('MenuListComponent', () => {
       });
 
       it('should have close on select be true as default', () => {
-        expect(spectator.component.closeOnSelect).toBeFalsy();
+        expect(spectator.component.closeOnSelect).toBeTrue();
       });
 
       it('should have close on escape key be true as default', () => {
-        expect(spectator.component.closeOnSelect).toBeFalsy();
+        expect(spectator.component.closeOnEscapeKey).toBeTrue();
       });
 
       it('should have close on backdrop be true as default', () => {
-        expect(spectator.component.closeOnSelect).toBeFalsy();
+        expect(spectator.component.closeOnBackdrop).toBeTrue();
       });
     });
 

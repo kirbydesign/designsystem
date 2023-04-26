@@ -6,6 +6,7 @@ import {
   Component,
   ContentChild,
   ElementRef,
+  HostListener,
   Input,
   ViewChild,
 } from '@angular/core';
@@ -31,6 +32,8 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MenuComponent implements AfterViewInit {
+  constructor(private cdf: ChangeDetectorRef, private elementRef: ElementRef<HTMLElement>) {}
+
   @Input() public isDisabled: boolean = false;
 
   @Input() public buttonSize: ButtonSize = ButtonSize.MD;
@@ -41,13 +44,13 @@ export class MenuComponent implements AfterViewInit {
 
   @Input() public triggers: Array<TriggerEvent> = ['click'];
 
-  @Input() public DOMPortalOutlet: HTMLElement | undefined;
+  @Input() public DOMPortalOutlet: HTMLElement = this.elementRef.nativeElement.ownerDocument.body;
 
   @Input() public portalOutletConfig: PortalOutletConfig | undefined;
 
   @Input() public autoPlacement: boolean = false;
 
-  @Input() public closeOnSelect: boolean = false;
+  @Input() public closeOnSelect: boolean = true;
 
   @Input() public closeOnEscapeKey: boolean = true;
 
@@ -68,11 +71,17 @@ export class MenuComponent implements AfterViewInit {
     | ElementRef<HTMLElement>
     | undefined;
 
-  public FloatingOffset: typeof FloatingOffset = FloatingOffset;
+  @ViewChild(FloatingDirective)
+  private floatingDirective: FloatingDirective;
 
-  constructor(private cdf: ChangeDetectorRef) {}
+  public FloatingOffset: typeof FloatingOffset = FloatingOffset;
 
   public ngAfterViewInit(): void {
     this.cdf.detectChanges(); // Sets the updated reference for kirby-floating
+  }
+
+  @HostListener('document:ionScroll')
+  _onIonScroll() {
+    this.floatingDirective.hide();
   }
 }
