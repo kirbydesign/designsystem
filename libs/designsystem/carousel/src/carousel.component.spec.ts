@@ -53,6 +53,8 @@ describe('CarouselComponent', () => {
   });
 
   it('should update the active slide index, when calling slideTo ', () => {
+    expect(spectator.component.swiperContainer.nativeElement.swiper.activeIndex).toBe(0);
+
     spectator.component.slideTo(2);
 
     expect(spectator.component.swiperContainer.nativeElement.swiper.activeIndex).toBe(2);
@@ -60,6 +62,8 @@ describe('CarouselComponent', () => {
 
   it('should emit selectedSlide when the active slide is changed', () => {
     const selectedSlideSpy = spyOn(spectator.component.selectedSlide, 'emit');
+
+    expect(selectedSlideSpy).not.toHaveBeenCalled();
 
     spectator.component.slideTo(3);
 
