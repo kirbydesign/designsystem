@@ -21,7 +21,7 @@ export class CarouselShowcaseComponent {
       name: 'slidesOptions',
       description: `Configuration object for swiper-container. View documentation at: [https://swiperjs.com/swiper-api#parameters] for available parameters`,
       defaultValue: 'null',
-      type: ['SlidesOptions'],
+      type: ['KirbySwiperOptions'],
     },
     {
       name: 'slides',
