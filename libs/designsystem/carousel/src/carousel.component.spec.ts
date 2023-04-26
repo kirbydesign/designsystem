@@ -4,7 +4,7 @@ import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 import { CardModule } from '@kirbydesign/designsystem/card';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
-import { CarouselComponent, SlidesOptions } from './carousel.component';
+import { CarouselComponent, KirbySwiperOptions } from './carousel.component';
 import { CarouselSlideDirective } from './carousel-slide.directive';
 
 const { getColor } = DesignTokenHelper;
@@ -12,7 +12,7 @@ const { getColor } = DesignTokenHelper;
 describe('CarouselComponent', () => {
   let spectator: SpectatorHost<CarouselComponent>;
 
-  const customOptions: SlidesOptions = {
+  const customOptions: KirbySwiperOptions = {
     slidesPerView: 1.2,
     centeredSlides: true,
     centeredSlidesBounds: false,
