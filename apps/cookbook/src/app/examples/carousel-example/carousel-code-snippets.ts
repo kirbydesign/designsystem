@@ -1,4 +1,4 @@
-export const carouselDefaultConfig = `defaultConfig: SwiperOptions = {
+export const carouselDefaultConfig = `defaultConfig: KirbySwiperOptions = {
 	spaceBetween: 16,
 	pagination: {
 			el: '.pagination',
@@ -35,14 +35,14 @@ export const exampleComponentHTML = `<kirby-carousel
 </kirby-carousel>
 `;
 
-export const customConfigExample = `customConfig: SlidesOptions = {
+export const customConfigExample = `customConfig: KirbySwiperOptions = {
 	slidesPerView: 1.2,
 	centeredSlides: true,
 	slidesPerGroup: 1,
 	breakpoints: {
 		992: {
 		centeredSlides: false,
-		slidesPerView: 3.2,
+		slidesPerView: 3,
 		slidesPerGroup: 3,
 		},
 	},

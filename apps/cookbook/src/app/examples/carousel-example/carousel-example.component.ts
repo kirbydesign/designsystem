@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { SlidesOptions } from '@kirbydesign/designsystem/carousel';
+import { KirbySwiperOptions } from '@kirbydesign/designsystem/carousel';
 import { CarouselComponent } from '@kirbydesign/designsystem/carousel';
 
 @Component({
@@ -37,7 +37,7 @@ export class CarouselExampleComponent {
     this.ignorePagePadding = $event;
   }
 
-  config: SlidesOptions = {
+  config: KirbySwiperOptions = {
     slidesPerView: 1.2,
     centeredSlides: true,
     slidesPerGroup: 1,

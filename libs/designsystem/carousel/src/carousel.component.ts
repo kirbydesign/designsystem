@@ -1,6 +1,5 @@
 import {
   AfterViewInit,
-  ChangeDetectionStrategy,
   Component,
   ContentChild,
   EventEmitter,
@@ -14,6 +13,9 @@ import { register } from 'swiper/element/bundle';
 import { UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
 import { CarouselSlideDirective } from './carousel-slide.directive';
 
+// Swiper is not an Angular library,
+// so we need to use their web components and register them manually.
+// https://swiperjs.com/element
 register();
 
 export type SelectedSlide = {
@@ -21,19 +23,18 @@ export type SelectedSlide = {
   index: number;
 };
 
-export type SlidesOptions = SwiperOptions;
+export type KirbySwiperOptions = SwiperOptions;
 @Component({
   selector: 'kirby-carousel',
   templateUrl: './carousel.component.html',
   styleUrls: ['./carousel.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CarouselComponent implements AfterViewInit {
   @ViewChild('swiperContainer') swiperContainer;
   @ContentChild(CarouselSlideDirective, { static: true, read: TemplateRef })
   public slideTemplate: TemplateRef<any>;
 
-  @Input() slidesOptions: SlidesOptions;
+  @Input() slidesOptions: KirbySwiperOptions;
   @Input() ignorePagePadding: boolean;
   @Input() title: string;
   @Input() slides: any[];
@@ -45,7 +46,21 @@ export class CarouselComponent implements AfterViewInit {
   _nextButtonId = UniqueIdGenerator.scopedTo('swiper-button-next').next();
 
   ngAfterViewInit() {
-    const defaultConfig: SwiperOptions = {
+    const defaultConfig = this.getDefaultConfig();
+
+    const config = Object.assign(this.slidesOptions, defaultConfig);
+
+    Object.assign(this.swiperContainer.nativeElement, config);
+
+    this.swiperContainer.nativeElement.initialize();
+  }
+
+  public slideTo(index: number) {
+    this.swiperContainer.nativeElement.swiper.slideTo(index);
+  }
+
+  private getDefaultConfig(): KirbySwiperOptions {
+    return {
       spaceBetween: 16,
       pagination: {
         el: `.${this._paginationId}`,
@@ -64,15 +79,5 @@ export class CarouselComponent implements AfterViewInit {
         },
       },
     };
-
-    const config = Object.assign(this.slidesOptions, defaultConfig);
-
-    Object.assign(this.swiperContainer.nativeElement, config);
-
-    this.swiperContainer.nativeElement.initialize();
-  }
-
-  public slideTo(index: number) {
-    this.swiperContainer.nativeElement.swiper.slideTo(index);
   }
 }
