@@ -53,8 +53,8 @@ export class MenuShowcaseComponent {
     {
       name: 'DOMPortalOutlet',
       description:
-        'HTMLElement for which the menu content should be placed under as a child. If no element is provided, the content will appear at its normal place in the DOM',
-      defaultValue: 'N/A',
+        "HTMLElement for which the menu content should be placed under as a child. By default the menu content is appended to `document.body`. If set to `null`, the content will appear at it's normal place in the DOM",
+      defaultValue: 'document.body',
       type: ['HTMLElement'],
     },
     {
