@@ -83,7 +83,7 @@ export class ActionGroupComponent implements AfterContentInit {
 
     this.initializeFromConfig();
 
-    if (this.visibleActions) {
+    if (this.visibleActions !== undefined) {
       this.initializeCollapsing();
     }
   }
