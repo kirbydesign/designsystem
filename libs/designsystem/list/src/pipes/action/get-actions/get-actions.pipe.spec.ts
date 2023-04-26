@@ -1,7 +1,7 @@
 import { ListSwipeAction } from '@kirbydesign/designsystem/list';
 import { GetActionsPipe } from './get-actions.pipe';
 
-fdescribe('GetActionsPipe', () => {
+describe('GetActionsPipe', () => {
   let pipe: GetActionsPipe;
   let swipeActions: ListSwipeAction[];
 
@@ -28,7 +28,6 @@ fdescribe('GetActionsPipe', () => {
           title: 'Archive',
           type: 'warning',
           onSelected: (item) => {},
-          //   isDisabled: (item) => false,
         },
       ];
     });
@@ -139,6 +138,4 @@ fdescribe('GetActionsPipe', () => {
       expect(result).toEqual([swipeActions[1]]);
     });
   });
-
-  //   describe('multiple swipe actions', () => {});
 });

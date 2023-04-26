@@ -17,4 +17,6 @@ $divider-color: utils.get-color('background-color');
   position: absolute;
   top: 4px;
   right: 4px;
+
+  z-index: 1; // if not set, the menu will be missing its disabled state color
 }

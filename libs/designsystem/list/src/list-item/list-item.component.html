@@ -17,12 +17,16 @@
   </ng-container>
 
   <ng-container *ngSwitchCase="false">
-    <div #container class="list-item-menu">
+    <div
+      #container
+      [class.menu-item-disabled]="(item | getActions: swipeActions).length <= 0"
+      class="list-item-menu"
+    >
       <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: item }"></ng-container>
       <ng-container [ngSwitch]="swipeActions.length > 1">
         <kirby-menu
-          [isDisabled]="true"
           *ngSwitchCase="true"
+          [isDisabled]="(item | getActions: swipeActions).length <= 0"
           class="menu"
           [portalOutletConfig]="portalOutletConfig"
           [placement]="'bottom-end'"

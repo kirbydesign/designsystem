@@ -170,3 +170,8 @@
     }
   }
 }
+:host-context(.menu-item-disabled){
+  ion-item{
+    background-color: red;
+  }
+}

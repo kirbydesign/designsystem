@@ -23,6 +23,7 @@ import {
 } from './list.directive';
 import { GetActionTitlePipe } from './pipes/action/get-title.pipe';
 import { GetActionIconPipe } from './pipes/action/get-icon/get-action-icon.pipe';
+import { GetActionsPipe } from './pipes/action/get-actions/get-actions.pipe';
 
 const exportedDeclarations = [
   ListComponent,
@@ -43,6 +44,7 @@ const declarations = [
   ListItemComponent,
   GetActionTitlePipe,
   GetActionIconPipe,
+  GetActionsPipe,
 ];
 
 @NgModule({

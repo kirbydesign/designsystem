@@ -3,6 +3,7 @@ import { ChangeDetectorRef, Component, Input } from '@angular/core';
 const config = {
   selector: 'cookbook-menu-portal-example',
   template: `<kirby-menu 
+  [isDisabled]="true"
   [DOMPortalOutlet]="_outlet"
   >
   <kirby-item [selectable]="true">
