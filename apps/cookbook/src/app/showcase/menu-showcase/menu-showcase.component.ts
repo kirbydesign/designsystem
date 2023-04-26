@@ -33,7 +33,8 @@ export class MenuShowcaseComponent {
     },
     {
       name: 'triggers',
-      description: `Defines how the button should interact with the content. A value of 'click' will make the content appear/hide on click of the button`,
+      description:
+        'Defines how the button should interact with the content. A value of `click` will make the content appear/hide on click of the button',
       defaultValue: 'click',
       type: ['Array<TriggerEvent>'],
     },
@@ -66,7 +67,7 @@ export class MenuShowcaseComponent {
     },
     {
       name: 'closeOnSelect',
-      description: '"Toggle whether the menu should hide the content after selecting the content"',
+      description: 'Toggle whether the menu should hide the content after selecting the content',
       defaultValue: 'true',
       type: ['boolean'],
     },
