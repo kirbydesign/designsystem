@@ -12,9 +12,7 @@ export class ExamplesComponent {
   showDummyKeyboard = !!this.windowRef.nativeWindow.sessionStorage.getItem(
     'kirby-cookbook-show-dummy-keyboard'
   );
-
   keyboardIsShowing = false;
-
   keyboardHeight: number;
   keyCount = 40;
 
