@@ -11,13 +11,8 @@
 @use 'themes/component-themes';
 
 /*
- * Modal utilities.
- */
-$modal-max-height-desktop: 928px;
-$modal-max-width-desktop: 594px;
-$modal-border-radius: 32px;
-
-/* 
+ * Modal variables
+ *
  * height & width variables are kept local here until we have determined the exact values  
  * and can migrate them to heights/widths in _variables.scss, as a breaking change 
  * to either the existing modal heights or the modal-v2 maps.
@@ -33,6 +28,7 @@ $modal-heights: (
   m: 565px,
   l: 754px,
 );
+$modal-border-radius: utils.size('l');
 
 @mixin bottom-drawer() {
   --border-radius: #{$modal-border-radius} #{$modal-border-radius} 0px 0px;
@@ -260,6 +256,8 @@ ion-loading.kirby-loading-overlay {
 /*
  * Modal V2.
  */
+$modal-max-height-desktop: 928px;
+$modal-max-width-desktop: 594px;
 
 html.ios ion-modal.kirby-modal-v2 {
   --background: var(--kirby-modal-background, #{utils.get-color('background-color')});
