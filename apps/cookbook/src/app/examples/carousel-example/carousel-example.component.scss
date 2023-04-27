@@ -8,3 +8,9 @@
 h2 {
   margin-top: 50px;
 }
+
+@include utils.media('<medium') {
+  fieldset {
+    display: none;
+  }
+}

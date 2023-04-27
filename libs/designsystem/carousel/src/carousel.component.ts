@@ -70,6 +70,7 @@ export class CarouselComponent implements OnInit, AfterViewInit {
   private getDefaultConfig(): KirbySwiperOptions {
     return {
       spaceBetween: 16,
+      centeredSlidesBounds: true,
       pagination: {
         el: `.${this._paginationId}`,
         type: 'bullets',

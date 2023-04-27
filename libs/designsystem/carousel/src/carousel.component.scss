@@ -51,6 +51,13 @@ $bullet-inactive-opacity: 0.2;
     margin-inline: calc(-1 * var(--padding-start)) calc(-1 * var(--padding-end));
   }
 
+  @include utils.media('<medium') {
+    swiper-container {
+      padding-inline: 16px;
+      margin-inline: calc(-1 * var(--padding-start)) calc(-1 * var(--padding-end));
+    }
+  }
+
   @include utils.media('>=medium') {
     .buttons {
       display: block;
