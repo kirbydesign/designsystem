@@ -17,7 +17,9 @@ export class MockFormFieldComponent {
   @Input() label: string;
   @Input() message: string;
 
-  focus() {}
+  focus() {
+    // NOOP
+  }
 }
 
 // #endregion

@@ -2,7 +2,7 @@
 
 import { MockAccordionItemComponent } from './components/mock.accordion-item.component';
 import { MockActionGroupComponent } from './components/mock.action-group.component';
-import { MockAppComponent } from './components/mock.app.component';
+import { MockAlertExperimentalComponent } from './components/mock.alert-experimental.component';
 import { MockAvatarComponent } from './components/mock.avatar.component';
 import { MockButtonComponent } from './components/mock.button.component';
 import { MockCalendarComponent } from './components/mock.calendar.component';
@@ -11,6 +11,7 @@ import { MockCardHeaderComponent } from './components/mock.card-header.component
 import { MockCardComponent } from './components/mock.card.component';
 import { MockChartComponent } from './components/mock.chart.component';
 import { MockBaseChartComponent } from './components/mock.base-chart.component';
+import { MockStockChartComponent } from './components/mock.stock-chart.component';
 import { MockCheckboxComponent } from './components/mock.checkbox.component';
 import { MockTableComponent } from './components/mock.table.component';
 import { MockTableRowComponent } from './components/mock.table-row.component';
@@ -25,19 +26,33 @@ import { MockInputComponent } from './components/mock.input.component';
 import { MockInputCounterComponent } from './components/mock.input-counter.component';
 import { MockTextareaComponent } from './components/mock.textarea.component';
 import { MockGridComponent } from './components/mock.grid.component';
+import {
+  MockHeaderActionsDirective,
+  MockHeaderComponent,
+  MockHeaderCustomSectionDirective,
+} from './components/mock.header.component';
 import { MockIconComponent } from './components/mock.icon.component';
 import { MockItemComponent } from './components/mock.item.component';
 import { MockLabelComponent } from './components/mock.label.component';
 import { MockItemGroupComponent } from './components/mock.item-group.component';
 import { MockItemSlidingComponent } from './components/mock.item-sliding.component';
+import { MockAppComponent } from './components/mock.kirby-app.component';
 import { MockListExperimentalComponent } from './components/mock.list-experimental.component';
 import { MockListHeaderComponent } from './components/mock.list-header.component';
 import { MockListItemComponent } from './components/mock.list-item.component';
 import { MockListSectionHeaderComponent } from './components/mock.list-section-header.component';
 import { MockListComponent } from './components/mock.list.component';
 import { MockLoadingOverlayComponent } from './components/mock.loading-overlay.component';
+import { MockMenuComponent } from './components/mock.menu.component';
 import { MockActionSheetComponent } from './components/mock.action-sheet.component';
+import { MockAlertComponent } from './components/mock.alert.component';
 import { MockModalFooterComponent } from './components/mock.modal-footer.component';
+import { MockModalCompactWrapperComponent } from './components/mock.modal-compact-wrapper.component';
+import { MockModalWrapperComponent } from './components/mock.modal-wrapper.component';
+import { MockModalV2FooterComponent } from './components/mock.footer.component';
+import { MockModalV2Component } from './components/mock.modal.component';
+import { MockModalV2RoutingComponent } from './components/mock.modal-routing.component';
+import { MockModalV2WrapperComponent } from './components/mock.wrapper.component';
 import { MockPageFooterComponent } from './components/mock.page-footer.component';
 import {
   MockPageActionsComponent,
@@ -52,8 +67,8 @@ import {
   MockPageTitleDirective,
   MockPageToolbarTitleDirective,
 } from './components/mock.page.component';
-import { MockPageLocalNavigationComponent } from './components/mock.page-local-navigation.component';
 import { MockPopoverComponent } from './components/mock.popover.component';
+import { MockProgressCircleRingComponent } from './components/mock.progress-circle-ring.component';
 import { MockProgressCircleComponent } from './components/mock.progress-circle.component';
 import { MockRadioGroupComponent } from './components/mock.radio-group.component';
 import { MockRadioComponent } from './components/mock.radio.component';
@@ -61,24 +76,23 @@ import { MockRangeComponent } from './components/mock.range.component';
 import { MockReorderListComponent } from './components/mock.reorder-list.component';
 import { MockRouterOutletComponent } from './components/mock.router-outlet.component';
 import { MockSectionHeaderComponent } from './components/mock.section-header.component';
-import { MockSegmentedControlComponent } from './components/mock.segmented-control.component';
+import { MockSlidesComponent } from './components/mock.slides.component';
 import { MockSlideButtonComponent } from './components/mock.slide-button.component';
 import { MockSpinnerComponent } from './components/mock.spinner.component';
+import { MockPageLocalNavigationComponent } from './components/mock.page-local-navigation.component';
+import { MockSegmentedControlComponent } from './components/mock.segmented-control.component';
+import { MockBadgeComponent } from './components/mock.web-component-proxies.component';
+import { MockTabNavigationComponent } from './components/mock.tab-navigation.component';
+import { MockTabNavigationItemComponent } from './components/mock.tab-navigation-item.component';
 import { MockTabButtonComponent } from './components/mock.tab-button.component';
 import { MockTabsComponent } from './components/mock.tabs.component';
 import { MockToggleComponent } from './components/mock.toggle.component';
 import { MockToggleButtonComponent } from './components/mock.toggle-button.component';
-import { MockBadgeComponent } from './components/mock.web-component-proxies.component';
-import {
-  MockHeaderActionsDirective,
-  MockHeaderComponent,
-  MockHeaderCustomSectionDirective,
-} from './components/mock.header.component';
 
 export const MOCK_COMPONENTS = [
   MockAccordionItemComponent,
   MockActionGroupComponent,
-  MockAppComponent,
+  MockAlertExperimentalComponent,
   MockAvatarComponent,
   MockButtonComponent,
   MockCalendarComponent,
@@ -87,6 +101,7 @@ export const MOCK_COMPONENTS = [
   MockCardComponent,
   MockChartComponent,
   MockBaseChartComponent,
+  MockStockChartComponent,
   MockCheckboxComponent,
   MockTableComponent,
   MockTableRowComponent,
@@ -97,26 +112,35 @@ export const MOCK_COMPONENTS = [
   MockFlagComponent,
   MockFormFieldMessageComponent,
   MockFormFieldComponent,
-  MockHeaderActionsDirective,
-  MockHeaderCustomSectionDirective,
-  MockHeaderComponent,
   MockInputComponent,
   MockInputCounterComponent,
   MockTextareaComponent,
   MockGridComponent,
+  MockHeaderActionsDirective,
+  MockHeaderCustomSectionDirective,
+  MockHeaderComponent,
   MockIconComponent,
   MockItemComponent,
   MockLabelComponent,
   MockItemGroupComponent,
   MockItemSlidingComponent,
+  MockAppComponent,
   MockListExperimentalComponent,
   MockListHeaderComponent,
   MockListItemComponent,
   MockListSectionHeaderComponent,
   MockListComponent,
   MockLoadingOverlayComponent,
+  MockMenuComponent,
   MockActionSheetComponent,
+  MockAlertComponent,
   MockModalFooterComponent,
+  MockModalCompactWrapperComponent,
+  MockModalWrapperComponent,
+  MockModalV2FooterComponent,
+  MockModalV2Component,
+  MockModalV2RoutingComponent,
+  MockModalV2WrapperComponent,
   MockPageFooterComponent,
   MockPageTitleDirective,
   MockPageSubtitleDirective,
@@ -129,8 +153,8 @@ export const MOCK_COMPONENTS = [
   MockPageContentComponent,
   MockPageActionsComponent,
   MockPageComponent,
-  MockPageLocalNavigationComponent,
   MockPopoverComponent,
+  MockProgressCircleRingComponent,
   MockProgressCircleComponent,
   MockRadioGroupComponent,
   MockRadioComponent,
@@ -138,12 +162,16 @@ export const MOCK_COMPONENTS = [
   MockReorderListComponent,
   MockRouterOutletComponent,
   MockSectionHeaderComponent,
-  MockSegmentedControlComponent,
+  MockSlidesComponent,
   MockSlideButtonComponent,
   MockSpinnerComponent,
+  MockPageLocalNavigationComponent,
+  MockSegmentedControlComponent,
+  MockBadgeComponent,
+  MockTabNavigationComponent,
+  MockTabNavigationItemComponent,
   MockTabButtonComponent,
   MockTabsComponent,
   MockToggleComponent,
   MockToggleButtonComponent,
-  MockBadgeComponent,
 ];

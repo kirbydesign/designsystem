@@ -1,7 +1,7 @@
 import { Component, forwardRef, Input } from '@angular/core';
 import { NotificationColor } from '@kirbydesign/core/dist/types/helpers';
 
-import { ButtonComponent, ButtonSize } from '@kirbydesign/designsystem/button';
+import { AttentionLevel, ButtonComponent, ButtonSize } from '@kirbydesign/designsystem/button';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
@@ -16,12 +16,13 @@ import { ButtonComponent, ButtonSize } from '@kirbydesign/designsystem/button';
   ],
 })
 export class MockButtonComponent {
-  @Input() attentionLevel: '1' | '2' | '3' | '4';
+  @Input() attentionLevel: AttentionLevel;
   @Input() noDecoration: boolean;
   @Input() themeColor: NotificationColor;
   @Input() expand: 'full' | 'block';
   @Input() isFloating: boolean;
   @Input() size: ButtonSize | `${ButtonSize}`;
+  @Input() showIconOnly: boolean;
 }
 
 // #endregion
