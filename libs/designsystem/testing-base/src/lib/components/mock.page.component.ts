@@ -62,6 +62,7 @@ export class MockPageToolbarTitleDirective {}
   ],
 })
 export class MockPageActionsDirective {
+  // eslint-disable-next-line @angular-eslint/no-input-rename
   @Input('kirbyPageActions') config: stickyConfig | fixedConfig;
 }
 
@@ -75,6 +76,7 @@ export class MockPageActionsDirective {
   ],
 })
 export class MockPageContentDirective {
+  // eslint-disable-next-line @angular-eslint/no-input-rename
   @Input('kirbyPageContent') config: fixedConfig;
 }
 
