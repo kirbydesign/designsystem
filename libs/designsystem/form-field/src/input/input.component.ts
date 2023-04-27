@@ -9,6 +9,7 @@ import {
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
+import { DateInputDirective } from '../directives/date/date-input.directive';
 
 export enum InputSize {
   medium = 'md',
@@ -18,6 +19,7 @@ export enum InputSize {
 @Component({
   standalone: true,
   imports: [CommonModule],
+  hostDirectives: [DateInputDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'input[kirby-input]',

@@ -1,3 +1,4 @@
+import { log } from 'console';
 import { FormatWidth, getLocaleDateFormat } from '@angular/common';
 import {
   AfterViewInit,
@@ -18,21 +19,34 @@ import Inputmask from 'inputmask/lib/inputmask';
 export class DateInputDirective implements AfterViewInit {
   @HostListener('input')
   onInput() {
-    this.updateMask(this.elementRef.nativeElement.value);
+    if (this.isDate) {
+      this.updateMask(this.elementRef.nativeElement.value);
+    }
   }
 
   private maskingElement: HTMLElement;
+
+  /**
+   * This is here to avoid calling updateMask() when the directive is not used on a date-input.
+   * The reason for this being nessesary is an issue with the standalone component 'InputComponent', which forced us to use a host-directive. which applies the directive to all inputs.
+   * This check prevents it from happening on non-date inputs.
+   */
+  private isDate = false;
 
   constructor(
     private elementRef: ElementRef,
     private renderer: Renderer2,
     @Inject(LOCALE_ID) private locale: string
-  ) {
-    // Remove type to avoid user-agent specific behaviour for [type="date"]
-    this.elementRef.nativeElement.removeAttribute('type');
-  }
+  ) {}
 
   ngAfterViewInit(): void {
+    if (this.elementRef.nativeElement.type !== 'date') {
+      return;
+    }
+
+    this.isDate = true;
+    // Remove type to avoid user-agent specific behaviour for [type="date"]
+    this.elementRef.nativeElement.removeAttribute('type');
     this.initMask();
   }
 
