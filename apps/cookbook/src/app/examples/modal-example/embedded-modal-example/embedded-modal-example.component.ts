@@ -1,12 +1,4 @@
-import {
-  Component,
-  Inject,
-  OnChanges,
-  OnInit,
-  Optional,
-  SimpleChanges,
-  SkipSelf,
-} from '@angular/core';
+import { Component, Inject, OnInit, Optional, SkipSelf } from '@angular/core';
 
 import {
   ActionSheetConfig,
