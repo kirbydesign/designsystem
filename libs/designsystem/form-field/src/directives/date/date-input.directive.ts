@@ -1,4 +1,3 @@
-import { log } from 'console';
 import { FormatWidth, getLocaleDateFormat } from '@angular/common';
 import {
   AfterViewInit,
