@@ -1,4 +1,4 @@
-<div class="kirby-carousel" [ngClass]="ignorePagePadding ? 'no-padding' : ''">
+<div class="kirby-carousel">
   <div class="navigation">
     <span class="kirby-text-medium">{{ title }}</span>
 
@@ -31,7 +31,7 @@
     </div>
   </div>
 
-  <swiper-container init="false" #swiperContainer>
+  <swiper-container init="false" #swiperContainer [ngClass]="ignorePagePadding ? 'no-padding' : ''">
     <swiper-slide *ngFor="let slide of slides; let i = index">
       <ng-container
         *ngTemplateOutlet="slideTemplate; context: { $implicit: slide, index: i }"
