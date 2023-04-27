@@ -34,9 +34,8 @@
 <kirby-checkbox
   [checked]="snapFooterToKeyboard"
   (checkedChange)="toggleSnapFooterToKeyboard($event)"
-  [disabled]="disabled"
-  text="Snap footer to keyboard"
   [disabled]="disabled || !showFooter"
+  text="Snap footer to keyboard"
   class="indent"
 ></kirby-checkbox>
 

@@ -168,7 +168,6 @@ export class ModalExampleConfigurationComponent {
 
   changeSize(size: ModalSize) {
     if (this.preventChangeEvent) return;
-    console.log(size);
 
     this.selectedModalSizeOption.emit(size);
   }

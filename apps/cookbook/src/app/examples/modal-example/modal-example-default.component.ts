@@ -15,6 +15,7 @@ const config = {
       <cookbook-modal-example-configuration [disabled]="preventInteraction" [(showDummyKeyboard)]="showDummyKeyboard"
       [(showPageProgress)]="showPageProgress"
       [(showFooter)]="showFooter"
+      [(snapFooterToKeyboard)]="snapFooterToKeyboard"
       [(displayFooterAsInline)]="displayFooterAsInline"
       [(collapseTitle)]="collapseTitle"
       [(alertBeforeClose)]="alertBeforeClose"
@@ -229,6 +230,7 @@ export class ModalExampleDefaultComponent {
   );
   showPageProgress = false;
   showFooter = false;
+  snapFooterToKeyboard = false;
   displayFooterAsInline = false;
   collapseTitle = false;
   alertBeforeClose = false;
@@ -277,6 +279,7 @@ export class ModalExampleDefaultComponent {
         showDummyKeyboard: this.showDummyKeyboard,
         showPageProgress: this.showPageProgress,
         showFooter: this.showFooter,
+        snapFooterToKeyboard: this.snapFooterToKeyboard,
         showDummyContent: this.showDummyContent && !this.interactWithBackground,
         showStaticDummyContent: this.interactWithBackground,
         delayLoadDummyContent: this.delayLoadDummyContent,

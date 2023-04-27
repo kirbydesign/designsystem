@@ -1,4 +1,12 @@
-import { Component, Inject, OnInit, Optional, SkipSelf } from '@angular/core';
+import {
+  Component,
+  Inject,
+  OnChanges,
+  OnInit,
+  Optional,
+  SimpleChanges,
+  SkipSelf,
+} from '@angular/core';
 
 import {
   ActionSheetConfig,
@@ -29,10 +37,12 @@ export class EmbeddedModalExampleComponent implements OnInit {
   showDummyKeyboard: boolean;
   showPageProgress: boolean;
   showFooter: boolean;
+  snapFooterToKeyboard: boolean;
   showDummyContent: boolean;
   showStaticDummyContent: boolean;
   showNestedPageProgress: boolean = false;
   showNestedFooter: boolean = false;
+  snapNestedFooterToKeyboard: boolean = false;
   showNestedDummyContent: boolean = true;
   delayLoadDummyContent: boolean;
   loadAdditionalContent: boolean;
@@ -42,7 +52,6 @@ export class EmbeddedModalExampleComponent implements OnInit {
 
   isLoading = false;
   isLoadingAdditionalContent = false;
-  snapFooterToKeyboard = false;
 
   modalSizeOptions = [
     { text: 'small', value: 'small' },
@@ -95,6 +104,7 @@ export class EmbeddedModalExampleComponent implements OnInit {
         showDummyKeyboard: this.showDummyKeyboard,
         showPageProgress: this.showNestedPageProgress,
         showFooter: this.showNestedFooter,
+        snapFooterToKeyboard: this.snapFooterToKeyboard,
         showDummyContent: this.showNestedDummyContent,
         delayLoadDummyContent: this.delayLoadDummyContent,
         loadAdditionalContent: this.loadAdditionalContent,
