@@ -76,7 +76,7 @@ export class HeaderComponent implements AfterContentInit, OnInit {
   ngOnInit(): void {
     this.actionGroupConfig = {
       isResizable: this.emphasizeActions,
-      visibleActions: this.emphasizeActions ? undefined : 1,
+      defaultVisibleActions: this.emphasizeActions ? undefined : 1,
     };
 
     this._actionGroupInjector = Injector.create({

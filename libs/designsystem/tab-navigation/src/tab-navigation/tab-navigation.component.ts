@@ -88,8 +88,10 @@ export class TabNavigationComponent implements AfterViewInit {
   @HostListener('click', ['$event'])
   @HostListener('keydown.enter', ['$event'])
   onItemSelect(event: PointerEvent) {
-    const targetTabNavItem: HTMLElement = (event.target as HTMLElement).closest('button');
-    this.selectedIndex = this.tabButtonElements.indexOf(targetTabNavItem);
+    if (event.target !== this.tabBarElement) {
+      const targetTabNavItem = (event.target as HTMLElement).closest('button');
+      this.selectedIndex = this.tabButtonElements.indexOf(targetTabNavItem);
+    }
   }
 
   @HostListener('keydown.home', ['$event'])
