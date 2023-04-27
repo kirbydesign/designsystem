@@ -29,6 +29,11 @@ section {
   padding: 0 $menu-padding-mobile;
   box-shadow: utils.get-elevation(4);
 
+  @include utils.media('<large') {
+    height: 100vh;
+    overflow: auto;
+  }
+
   @include utils.media('>=large') {
     box-shadow: none;
     display: block;
