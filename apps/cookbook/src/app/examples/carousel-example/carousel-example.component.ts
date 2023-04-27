@@ -110,8 +110,4 @@ export class CarouselExampleComponent {
   getDataFromActiveSlide($event) {
     console.log($event);
   }
-
-  changeSlide() {
-    this.carouselComponent.slideTo(3);
-  }
 }
