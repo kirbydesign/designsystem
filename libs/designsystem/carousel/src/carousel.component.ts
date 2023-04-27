@@ -4,13 +4,14 @@ import {
   ContentChild,
   EventEmitter,
   Input,
+  OnInit,
   Output,
   TemplateRef,
   ViewChild,
 } from '@angular/core';
 import { SwiperOptions } from 'swiper';
 import { register } from 'swiper/element/bundle';
-import { UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
+import { PlatformService, UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
 import { CarouselSlideDirective } from './carousel-slide.directive';
 
 // Swiper is not an Angular library,
@@ -29,7 +30,9 @@ export type KirbySwiperOptions = SwiperOptions;
   templateUrl: './carousel.component.html',
   styleUrls: ['./carousel.component.scss'],
 })
-export class CarouselComponent implements AfterViewInit {
+export class CarouselComponent implements OnInit, AfterViewInit {
+  constructor(private platform: PlatformService) {}
+
   @ViewChild('swiperContainer') swiperContainer;
   @ContentChild(CarouselSlideDirective, { static: true, read: TemplateRef })
   public slideTemplate: TemplateRef<any>;
@@ -44,6 +47,11 @@ export class CarouselComponent implements AfterViewInit {
   _paginationId = UniqueIdGenerator.scopedTo('pagination').next();
   _prevButtonId = UniqueIdGenerator.scopedTo('swiper-button-prev').next();
   _nextButtonId = UniqueIdGenerator.scopedTo('swiper-button-next').next();
+  _isTouch: boolean;
+
+  ngOnInit() {
+    this._isTouch = this.platform.isTouch();
+  }
 
   ngAfterViewInit() {
     const defaultConfig = this.getDefaultConfig();
