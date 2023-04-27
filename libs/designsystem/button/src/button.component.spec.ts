@@ -85,6 +85,15 @@ describe('ButtonComponent', () => {
           color: getColor('semi-dark', 'shade'),
         });
       });
+
+      it('should not have a background-color when disabled', () => {
+        expect(element).toHaveComputedStyle({ 'background-color': getColor('semi-light') });
+
+        spectator.component.noDecoration = true;
+        spectator.detectChanges();
+
+        expect(element).toHaveComputedStyle({ 'background-color': 'transparent' });
+      });
     });
 
     describe('when configured with attentionlevel 1', () => {

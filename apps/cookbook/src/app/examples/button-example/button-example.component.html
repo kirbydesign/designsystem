@@ -31,6 +31,12 @@
   <label>Undecorated</label>
 </div>
 <div class="button-example-container">
+  <button kirby-button [size]="buttonSize" disabled [noDecoration]="true">
+    <kirby-icon name="close"></kirby-icon>
+  </button>
+  <label>Undecorated & disabled</label>
+</div>
+<div class="button-example-container">
   <button kirby-button [size]="buttonSize">
     <kirby-icon name="close"></kirby-icon>
   </button>

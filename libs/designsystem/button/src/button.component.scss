@@ -245,7 +245,10 @@ $button-width: (
   }
 
   &:disabled {
-    background-color: utils.get-color('semi-light');
+    &:not(.no-decoration){
+      background-color: utils.get-color('semi-light');
+    }
+
     color: utils.get-color('semi-dark-shade');
     border-color: transparent;
     pointer-events: none;
