@@ -78,7 +78,7 @@ ion-header {
 
   &.drawer ion-header ion-toolbar {
     @include utils.media('<medium') {
-      --padding-top: #{utils.size('xs')};
+      --padding-top: #{utils.size('s')};
 
       padding-top: 0;
     }

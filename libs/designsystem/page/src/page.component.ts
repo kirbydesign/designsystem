@@ -142,7 +142,7 @@ export class PageStickyContentDirective {}
   template: `
     <ng-content></ng-content>
   `,
-  styles: [':host {display: flex}', ':host-context(kirby-modal-wrapper){margin: 4px}'],
+  styles: [':host {display: flex}'],
 })
 export class PageProgressComponent extends ModalElementComponent {
   // TODO: Find alternative implementation, which aligns with future page configuration / consumption
