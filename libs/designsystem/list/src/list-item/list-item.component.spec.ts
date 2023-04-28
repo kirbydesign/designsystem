@@ -103,6 +103,18 @@ describe('ListItemComponent', () => {
           expect(noDecorationAttribute).toEqual('true');
         });
       });
+
+      xdescribe('when swipeAction is disabled', () => {
+        const disabledSwipeAction = { ...testSwipeActions[0], disabled: true };
+        it('should have a disabled button', () => {
+          sutComponent.swipeActions = [disabledSwipeAction];
+          spectator.detectChanges();
+          const button = spectator.query('[kirby-button]');
+          const disabledAttribute = button.getAttribute('ng-reflect-disabled');
+
+          expect(disabledAttribute).toEqual('true');
+        });
+      });
     });
 
     describe('without actions', () => {

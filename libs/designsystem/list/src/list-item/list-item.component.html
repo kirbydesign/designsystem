@@ -31,6 +31,14 @@
           [portalOutletConfig]="portalOutletConfig"
           [placement]="'bottom-end'"
         >
+          <button
+            kirby-button
+            type="button"
+            [noDecoration]="true"
+            [disabled]="(item | getActions: swipeActions).length <= 0"
+          >
+            <kirby-icon [name]="'more'"></kirby-icon>
+          </button>
           <kirby-item
             *ngFor="let action of swipeActions; let i = index"
             [selectable]="true"
@@ -83,6 +91,7 @@
     type="button"
     [noDecoration]="true"
     (click)="_onSwipeActionSelect(action, item, $event)"
+    [disabled]="(item | getActions: [action]).length <= 0"
   >
     <kirby-icon name="{{ action | getActionIcon: [item] }}"></kirby-icon>
   </button>
