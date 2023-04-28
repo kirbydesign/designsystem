@@ -136,10 +136,6 @@ ion-modal.kirby-overlay {
       }
 
       @include utils.media('>=medium') {
-        @include utils.slotted('.modal-shadow') {
-          margin: utils.size('xxl');
-        }
-
         $modal-gutter: #{utils.size('xxl')};
 
         --border-radius: #{$modal-border-radius};
