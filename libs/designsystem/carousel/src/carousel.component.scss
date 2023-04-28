@@ -53,8 +53,13 @@ $bullet-inactive-opacity: 0.2;
 
   @include utils.media('<medium') {
     swiper-container {
-      padding-inline: 16px;
+      padding-inline: utils.size('s');
       margin-inline: calc(-1 * var(--padding-start)) calc(-1 * var(--padding-end));
+    }
+
+    .navigation,
+    .pagination {
+      margin-inline-end: 0;
     }
   }
 
