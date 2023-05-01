@@ -102,20 +102,41 @@ describe('HeaderComponent', () => {
   });
 
   describe('with avatar', () => {
-    const title = 'title';
-    const subtitle1 = 'Subtitle one';
-    const subtitle2 = 'Subtitle two';
-
     let spectator: Spectator<HeaderComponent>;
     beforeEach(() => {
       spectator = createHost(`
-      <kirby-header title="${title}" subtitle1="${subtitle1}" subtitle2="${subtitle2}">
+      <kirby-header title="title" subtitle1="subtitle one" subtitle2="subtitle two">
         <kirby-avatar size="lg" text="A" title="lg"></kirby-avatar>
       </kirby-header>
       `);
     });
 
-    it(`should have correct avatar`, () => {
+    it(`should render the avatar`, () => {
+      const avatarElement = spectator.query('kirby-avatar');
+
+      expect(avatarElement).toBeTruthy();
+    });
+  });
+
+  describe('with progress circle', () => {
+    let spectator: Spectator<HeaderComponent>;
+    beforeEach(() => {
+      spectator = createHost(`
+      <kirby-header title="title" subtitle1="subtitle one" subtitle2="subtitle two">
+        <kirby-progress-circle value="75" themeColor="success" size="lg">  
+          <kirby-avatar size="lg" text="A" title="lg"></kirby-avatar>
+        </kirby-progress-circle>
+      </kirby-header>
+      `);
+    });
+
+    it(`should render the progress circle`, () => {
+      const progressCircleElement = spectator.query('kirby-progress-circle');
+
+      expect(progressCircleElement).toBeTruthy();
+    });
+
+    it(`should render the avatar`, () => {
       const avatarElement = spectator.query('kirby-avatar');
 
       expect(avatarElement).toBeTruthy();
@@ -123,20 +144,16 @@ describe('HeaderComponent', () => {
   });
 
   describe('with flag', () => {
-    const title = 'title';
-    const subtitle1 = 'Subtitle one';
-    const subtitle2 = 'Subtitle two';
-
     let spectator: Spectator<HeaderComponent>;
     beforeEach(() => {
       spectator = createHost(`
-      <kirby-header title="${title}" subtitle1="${subtitle1}" subtitle2="${subtitle2}">
+      <kirby-header title="title" subtitle1="subtitle one" subtitle2="subtitle two">
         <kirby-flag themeColor="warning">Warning</kirby-flag>
       </kirby-header>
       `);
     });
 
-    it(`should have correct flag`, () => {
+    it(`should render the flag`, () => {
       const avatarElement = spectator.query('kirby-flag');
 
       expect(avatarElement).toBeTruthy();

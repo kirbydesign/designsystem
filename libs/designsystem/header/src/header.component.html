@@ -1,5 +1,5 @@
-<div *ngIf="!!avatar" class="avatar">
-  <ng-content select="kirby-avatar"></ng-content>
+<div *ngIf="!!avatar || !!progressCircle" class="avatar">
+  <ng-content select="kirby-avatar,kirby-progress-circle"></ng-content>
 </div>
 
 <div *ngIf="!!flag" class="flag">

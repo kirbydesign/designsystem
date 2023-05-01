@@ -12,9 +12,11 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
+
 import { ACTIONGROUP_CONFIG, ActionGroupConfig } from '@kirbydesign/designsystem/action-group';
 import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
 import { FlagComponent } from '@kirbydesign/designsystem/flag';
+import { ProgressCircleComponent } from '@kirbydesign/designsystem/progress-circle';
 import type { FitHeadingConfig } from '@kirbydesign/designsystem/shared';
 
 @Directive({
@@ -45,6 +47,9 @@ export class HeaderComponent implements AfterContentInit, OnInit {
 
   @ContentChild(AvatarComponent)
   avatar: AvatarComponent;
+
+  @ContentChild(ProgressCircleComponent)
+  progressCircle: ProgressCircleComponent;
 
   @ContentChild(FlagComponent)
   flag: FlagComponent;
