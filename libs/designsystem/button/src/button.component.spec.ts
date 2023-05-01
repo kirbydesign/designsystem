@@ -183,6 +183,20 @@ describe('ButtonComponent', () => {
           color: getColor('black'),
         });
       });
+
+      describe('and attentionLevel', () => {
+        it('should render with no background-color', () => {
+          spectator.component.attentionLevel = '1';
+          spectator.detectChanges();
+          expect(element).toHaveComputedStyle({ 'background-color': 'transparent' });
+        });
+
+        it('should not reset attentionLevel', () => {
+          spectator.component.attentionLevel = '3';
+          spectator.component.noDecoration = false;
+          expect(spectator.component.attentionLevel).toEqual('3');
+        });
+      });
     });
   });
 

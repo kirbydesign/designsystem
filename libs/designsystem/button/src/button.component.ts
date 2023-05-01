@@ -36,30 +36,22 @@ const ATTENTION_LEVEL_4_DEPRECATION_WARNING =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonComponent implements AfterContentInit {
-  @HostBinding('class.attention-level1')
-  isAttentionLevel1: boolean = true; // Default
-  @HostBinding('class.attention-level2')
-  isAttentionLevel2: boolean;
-  @HostBinding('class.attention-level3')
-  isAttentionLevel3: boolean;
+  private _attentionLevel?: AttentionLevel;
+  get attentionLevel(): AttentionLevel | undefined {
+    return this._attentionLevel;
+  }
+
   @Input() set attentionLevel(level: AttentionLevel) {
-    this.isAttentionLevel1 = level === '1';
-    this.isAttentionLevel2 = level === '2';
-    this.isAttentionLevel3 = level === '3' || level === '4';
+    this._attentionLevel = level;
     if (level === '4') {
+      this._attentionLevel = '3';
       console.warn(ATTENTION_LEVEL_4_DEPRECATION_WARNING);
     }
   }
 
   @HostBinding('class.no-decoration')
-  hasNoDecoration = false;
   @Input()
-  set noDecoration(enable: boolean) {
-    this.hasNoDecoration = enable;
-    this.isAttentionLevel1 = !enable;
-    this.isAttentionLevel2 = false;
-    this.isAttentionLevel3 = false;
-  }
+  noDecoration = false;
 
   @HostBinding('class.floating')
   public get isButtonFloating(): boolean {
@@ -83,7 +75,14 @@ export class ButtonComponent implements AfterContentInit {
 
   @HostBinding('class')
   get _cssClass() {
-    return [this.themeColor, this.size].filter((cssClass) => !!cssClass);
+    const attentionLevel = this.getAttentionLevelCssClass();
+    return [this.themeColor, this.size, attentionLevel].filter((cssClass) => !!cssClass);
+  }
+
+  private getAttentionLevelCssClass() {
+    if (this.noDecoration) return;
+    const attentionLevelDefault: AttentionLevel = '1';
+    return `attention-level${this._attentionLevel || attentionLevelDefault}`;
   }
 
   @Input()
