@@ -29,6 +29,12 @@ $modal-heights: (
   l: 754px,
 );
 $modal-border-radius: utils.size('l');
+$modal-gutter: #{utils.size('xxl')};
+$modal-header-height: 88px;
+$modal-expected-footer-height: 88px;
+$modal-min-content-height: 88px;
+$modal-large-screen-min-height: $modal-header-height + $modal-expected-footer-height +
+  $modal-min-content-height;
 
 @mixin bottom-drawer() {
   --border-radius: #{$modal-border-radius} #{$modal-border-radius} 0px 0px;
@@ -136,12 +142,10 @@ ion-modal.kirby-overlay {
       }
 
       @include utils.media('>=medium') {
-        $modal-gutter: #{utils.size('xxl')};
-
         --border-radius: #{$modal-border-radius};
+        --min-height: #{$modal-large-screen-min-height};
         --max-height: calc(100vh - #{$modal-gutter} * 2);
         --max-width: calc(100vw - #{$modal-gutter} * 2);
-        --min-height: 264px;
 
         &.kirby-modal-small {
           --width: #{map.get($modal-widths, 's')};
