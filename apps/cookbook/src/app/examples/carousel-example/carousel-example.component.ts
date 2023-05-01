@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { KirbySwiperOptions } from '@kirbydesign/designsystem/carousel';
 import { CarouselComponent } from '@kirbydesign/designsystem/carousel';
+import { noop } from 'rxjs';
 
 @Component({
   selector: 'cookbook-carousel-example',
@@ -41,6 +42,48 @@ export class CarouselExampleComponent {
     slidesPerView: 1.2,
     centeredSlides: true,
     slidesPerGroup: 1,
+    breakpoints: {
+      992: {
+        centeredSlides: false,
+        slidesPerView: 3,
+        slidesPerGroup: 3,
+      },
+    },
+  };
+
+  config1: KirbySwiperOptions = {
+    slidesPerView: 1.2,
+    centeredSlides: true,
+    slidesPerGroup: 1,
+    speed: 400,
+    breakpoints: {
+      992: {
+        centeredSlides: false,
+        slidesPerView: 3,
+        slidesPerGroup: 3,
+      },
+    },
+  };
+
+  config2: KirbySwiperOptions = {
+    slidesPerView: 1.2,
+    centeredSlides: true,
+    slidesPerGroup: 1,
+    speed: 500,
+    breakpoints: {
+      992: {
+        centeredSlides: false,
+        slidesPerView: 3,
+        slidesPerGroup: 3,
+      },
+    },
+  };
+
+  config3: KirbySwiperOptions = {
+    slidesPerView: 1.2,
+    centeredSlides: true,
+    slidesPerGroup: 1,
+    speed: 600,
     breakpoints: {
       992: {
         centeredSlides: false,
