@@ -68,4 +68,9 @@ $bullet-inactive-opacity: 0.2;
       display: block;
     }
   }
+
+  .swiper-button-next.swiper-button-disabled,
+  .swiper-button-prev.swiper-button-disabled {
+    opacity: 1;
+  }
 }
