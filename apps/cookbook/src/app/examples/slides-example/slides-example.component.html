@@ -21,94 +21,79 @@
 
     <div class="example">
       <h2>Default speed (300ms)</h2>
-      <kirby-carousel
+
+      <kirby-slides
         [slidesOptions]="config"
         [ignorePagePadding]="ignorePagePadding"
         [slides]="slides"
         [title]="'Title'"
         (selectedSlide)="getDataFromActiveSlide($event)"
       >
-        <kirby-card
-          *kirbyCarouselSlide="let slide; let i = index"
-          [hasPadding]="true"
-          (click)="noop()"
-        >
+        <kirby-card *kirbySlide="let slide; let i = index" [hasPadding]="true" (click)="noop()">
           <kirby-card-header [title]="slide.title" [subtitle]="slide.subtitle"></kirby-card-header>
 
           <div class="card-content">
             {{ slide.cardContent }}
           </div>
         </kirby-card>
-      </kirby-carousel>
+      </kirby-slides>
     </div>
 
     <div class="example">
       <h2>Speed: 400ms</h2>
-      <kirby-carousel
+      <kirby-slides
         [slidesOptions]="config1"
         [ignorePagePadding]="ignorePagePadding"
         [slides]="slides"
         [title]="'Title'"
         (selectedSlide)="getDataFromActiveSlide($event)"
       >
-        <kirby-card
-          *kirbyCarouselSlide="let slide; let i = index"
-          [hasPadding]="true"
-          (click)="noop()"
-        >
+        <kirby-card *kirbySlide="let slide; let i = index" [hasPadding]="true" (click)="noop()">
           <kirby-card-header [title]="slide.title" [subtitle]="slide.subtitle"></kirby-card-header>
 
           <div class="card-content">
             {{ slide.cardContent }}
           </div>
         </kirby-card>
-      </kirby-carousel>
+      </kirby-slides>
     </div>
 
     <div class="example">
       <h2>Speed: 500ms</h2>
-      <kirby-carousel
+      <kirby-slides
         [slidesOptions]="config2"
         [ignorePagePadding]="ignorePagePadding"
         [slides]="slides"
         [title]="'Title'"
         (selectedSlide)="getDataFromActiveSlide($event)"
       >
-        <kirby-card
-          *kirbyCarouselSlide="let slide; let i = index"
-          [hasPadding]="true"
-          (click)="noop()"
-        >
+        <kirby-card *kirbySlide="let slide; let i = index" [hasPadding]="true" (click)="noop()">
           <kirby-card-header [title]="slide.title" [subtitle]="slide.subtitle"></kirby-card-header>
 
           <div class="card-content">
             {{ slide.cardContent }}
           </div>
         </kirby-card>
-      </kirby-carousel>
+      </kirby-slides>
     </div>
 
     <div class="example">
       <h2>Speed: 600ms</h2>
-      <kirby-carousel
+      <kirby-slides
         [slidesOptions]="config3"
         [ignorePagePadding]="ignorePagePadding"
         [slides]="slides"
         [title]="'Title'"
         (selectedSlide)="getDataFromActiveSlide($event)"
       >
-        <kirby-card
-          *kirbyCarouselSlide="let slide; let i = index"
-          [hasPadding]="true"
-          (click)="noop()"
-        >
+        <kirby-card *kirbySlide="let slide; let i = index" [hasPadding]="true" (click)="noop()">
           <kirby-card-header [title]="slide.title" [subtitle]="slide.subtitle"></kirby-card-header>
 
           <div class="card-content">
             {{ slide.cardContent }}
           </div>
         </kirby-card>
-      </kirby-carousel>
+      </kirby-slides>
     </div>
   </kirby-page-content>
 </kirby-page>

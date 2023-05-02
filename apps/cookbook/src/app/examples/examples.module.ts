@@ -9,7 +9,6 @@ import {
   KirbyModule,
 } from '@kirbydesign/designsystem';
 import { SlideModule } from '@kirbydesign/designsystem/slide';
-import { CarouselModule } from '@kirbydesign/designsystem/carousel';
 
 import { AlertExperimentalModule } from '@kirbydesign/designsystem/alert-experimental';
 import { CodeViewerModule } from '../shared/code-viewer/code-viewer.module';
@@ -79,7 +78,6 @@ const IMPORTS = [
   SlideModule,
   HeaderExampleModule,
   AlertExperimentalModule,
-  CarouselModule,
   FormsModule,
 ];
 

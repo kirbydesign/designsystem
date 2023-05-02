@@ -84,7 +84,6 @@ import { HeaderWithEmphasizedActionGroupExampleComponent } from './header-exampl
 import { HeaderWithCustomActionsExampleComponent } from './header-example/examples/custom-actions';
 import { HeaderWithInteractiveTitleExampleComponent } from './header-example/examples/interactive-title';
 import { MenuExampleComponent } from './menu-example/menu-example.component';
-import { CarouselExampleComponent } from './carousel-example/carousel-example.component';
 
 export const routes: Routes = [
   {
@@ -554,9 +553,5 @@ export const routes: Routes = [
   {
     path: 'menu',
     component: MenuExampleComponent,
-  },
-  {
-    path: 'carousel',
-    component: CarouselExampleComponent,
   },
 ];

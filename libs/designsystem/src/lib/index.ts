@@ -49,7 +49,6 @@ export * from '@kirbydesign/designsystem/chart';
 export * from '@kirbydesign/designsystem/alert-experimental';
 export * from '@kirbydesign/designsystem/action-group';
 export * from '@kirbydesign/designsystem/header';
-export * from '@kirbydesign/designsystem/carousel';
 
 export { KirbyModule } from './kirby.module';
 export { KirbyExperimentalModule } from './kirby-experimental.module';

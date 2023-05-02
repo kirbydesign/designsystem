@@ -1,4 +1,4 @@
-export const carouselDefaultConfig = `defaultConfig: KirbySwiperOptions = {
+export const slidesDefaultConfig = `defaultConfig: KirbySwiperOptions = {
 	spaceBetween: 16,
 	pagination: {
 			el: '.pagination',
@@ -19,7 +19,7 @@ export const carouselDefaultConfig = `defaultConfig: KirbySwiperOptions = {
 }
 `;
 
-export const exampleComponentHTML = `<kirby-carousel
+export const exampleComponentHTML = `<kirby-slides
 	[slidesOptions]="customConfig"
 	[ignorePagePadding]="ignorePagePadding"
 	[slides]="slides"
@@ -32,7 +32,7 @@ export const exampleComponentHTML = `<kirby-carousel
 					{{ slide.cardContent }}
 			</div>
 	</kirby-card>
-</kirby-carousel>
+</kirby-slides>
 `;
 
 export const customConfigExample = `customConfig: KirbySwiperOptions = {

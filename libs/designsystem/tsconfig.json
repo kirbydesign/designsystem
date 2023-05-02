@@ -54,8 +54,7 @@
       "@kirbydesign/designsystem/toast": ["toast/index.ts"],
       "@kirbydesign/designsystem/alert-experimental": ["alert-experimental/index.ts"],
       "@kirbydesign/designsystem/action-group": ["action-group/index.ts"],
-      "@kirbydesign/designsystem/menu": ["menu/index.ts"],
-      "@kirbydesign/designsystem/carousel": ["carousel/index.ts"]
+      "@kirbydesign/designsystem/menu": ["menu/index.ts"]
     },
     "esModuleInterop": true,
     "target": "es2020"

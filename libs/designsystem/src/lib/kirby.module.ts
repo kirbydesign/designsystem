@@ -76,7 +76,6 @@ import { BreakpointHelperService, GridComponent } from '@kirbydesign/designsyste
 import { ActionGroupComponent } from '@kirbydesign/designsystem/action-group';
 import { MenuComponent } from '@kirbydesign/designsystem/menu';
 import { TabNavigationModule } from '@kirbydesign/designsystem/tab-navigation';
-import { CarouselModule } from '@kirbydesign/designsystem/carousel';
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
 import { customElementsInitializer } from './custom-elements-initializer';
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
@@ -148,7 +147,6 @@ const exportedModules = [
   AccordionModule,
   HeaderModule,
   KirbyModalModule,
-  CarouselModule,
   ...standaloneComponents,
 ];
 
