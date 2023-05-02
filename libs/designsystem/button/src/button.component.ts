@@ -41,7 +41,7 @@ export class ButtonComponent implements AfterContentInit {
     return this._attentionLevel;
   }
 
-  @Input() set attentionLevel(level: AttentionLevel) {
+  @Input() set attentionLevel(level: AttentionLevel | undefined) {
     this._attentionLevel = level;
     if (level === '4') {
       this._attentionLevel = '3';
