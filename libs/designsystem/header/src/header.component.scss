@@ -23,6 +23,10 @@
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     column-gap: utils.size('s');
+
+    .title-container {
+      grid-column-start: 1;
+    }
   }
 }
 
@@ -64,7 +68,8 @@
 
 .avatar,
 .flag,
-.title-container {
+.title-container,
+.container > h1.title {
   padding: 0 utils.size('s');
 }
 
@@ -84,17 +89,6 @@
 
 .title {
   margin-bottom: utils.size('xxxxs');
-
-  &.hidden {
-    visibility: hidden;
-    white-space: nowrap;
-    max-width: 100%;
-    overflow: hidden;
-
-    @include utils.media('<medium') {
-      display: none;
-    }
-  }
 }
 
 .value {
