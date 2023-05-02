@@ -102,7 +102,7 @@ describe('CarouselComponent', () => {
     it('should have pagination dots with a custom border-radius', () => {
       paginationDots.forEach((paginationDot) => {
         expect(paginationDot).toHaveComputedStyle({
-          'border-radius': '2px',
+          'border-radius': '3px',
         });
       });
     });
