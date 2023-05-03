@@ -48,48 +48,6 @@ export class SlidesExampleComponent {
     },
   };
 
-  config1: KirbySwiperOptions = {
-    slidesPerView: 1.2,
-    centeredSlides: true,
-    slidesPerGroup: 1,
-    speed: 400,
-    breakpoints: {
-      992: {
-        centeredSlides: false,
-        slidesPerView: 3,
-        slidesPerGroup: 3,
-      },
-    },
-  };
-
-  config2: KirbySwiperOptions = {
-    slidesPerView: 1.2,
-    centeredSlides: true,
-    slidesPerGroup: 1,
-    speed: 500,
-    breakpoints: {
-      992: {
-        centeredSlides: false,
-        slidesPerView: 3,
-        slidesPerGroup: 3,
-      },
-    },
-  };
-
-  config3: KirbySwiperOptions = {
-    slidesPerView: 1.2,
-    centeredSlides: true,
-    slidesPerGroup: 1,
-    speed: 600,
-    breakpoints: {
-      992: {
-        centeredSlides: false,
-        slidesPerView: 3,
-        slidesPerGroup: 3,
-      },
-    },
-  };
-
   slides = [
     {
       title: 'Slide 1',

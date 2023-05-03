@@ -42,6 +42,9 @@ export class SlidesComponent implements OnInit, AfterViewInit {
   @Input() title: string;
   @Input() slides: any[];
 
+  // simpleSlider is a temporary solution to make the slides component backwards compatible with the old design.
+  @Input() simpleSlider = false;
+
   @Output() selectedSlide = new EventEmitter<SelectedSlide>();
 
   _paginationId = UniqueIdGenerator.scopedTo('pagination').next();
@@ -54,7 +57,7 @@ export class SlidesComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    const defaultConfig = this.getDefaultConfig();
+    const defaultConfig = this.simpleSlider ? this.getSimpleConfig() : this.getDefaultConfig();
 
     const config = Object.assign(this.slidesOptions, defaultConfig);
 
@@ -71,6 +74,7 @@ export class SlidesComponent implements OnInit, AfterViewInit {
     return {
       spaceBetween: 16,
       centeredSlidesBounds: true,
+      speed: 600,
       pagination: {
         el: `.${this._paginationId}`,
         type: 'bullets',
@@ -79,6 +83,21 @@ export class SlidesComponent implements OnInit, AfterViewInit {
         nextEl: `.${this._nextButtonId}`,
         prevEl: `.${this._prevButtonId}`,
       },
+      on: {
+        slideChange: (swiper) => {
+          this.selectedSlide.emit({
+            slide: this.slides[swiper.activeIndex],
+            index: swiper.activeIndex,
+          });
+        },
+      },
+    };
+  }
+
+  private getSimpleConfig(): KirbySwiperOptions {
+    return {
+      pagination: false,
+      navigation: false,
       on: {
         slideChange: (swiper) => {
           this.selectedSlide.emit({
