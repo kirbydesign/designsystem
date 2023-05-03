@@ -3,7 +3,7 @@ import { OutletSelector, PortalOutletConfig } from '@kirbydesign/designsystem/sh
 
 const config = {
   selector: 'cookbook-menu-portal-config-example',
-  template: `<kirby-menu [portalOutletConfig]="outletConfig" [isDisabled]="true">
+  template: `<kirby-menu [portalOutletConfig]="outletConfig">
   <kirby-item [selectable]="true">
     <h3>Action 1</h3>
   </kirby-item>
