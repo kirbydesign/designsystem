@@ -45,7 +45,8 @@ export class HeaderExampleCombinedComponent {
 
   constructor(private toastController: ToastController) {}
 
-  onTitleClick() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  onTitleClick($event: PointerEvent) {
     const config: ToastConfig = {
       message: `Title clicked...`,
       messageType: 'success',
