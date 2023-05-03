@@ -86,7 +86,7 @@ export class HeaderShowcaseComponent {
     {
       name: '*kirbyHeaderTitleActionIcon',
       description:
-        'For an interactive title (i.e. handling the `titleClick` event) the `*kirbyHeaderTitleActionIcon` directive can be applied to a `kirby-icon` element which will then be shown next to the title element for affordance.',
+        'For an interactive title (i.e. handling the `titleClick` event) the `*kirbyHeaderTitleActionIcon` directive can be applied to a `kirby-icon` element which will then be shown next to the title element for affordance.\n\n**Please note: this only applies in key value scenarios.',
     },
   ];
 
@@ -94,7 +94,7 @@ export class HeaderShowcaseComponent {
     {
       name: 'titleClick',
       description:
-        'Emitted when the title element is clicked (in either the header or the toolbar).',
+        'Emitted when the title element is clicked (in either the header or the toolbar).\n\n**Please note: this only applies in key value scenarios.',
       signature: 'EventEmitter<PointerEvent>',
     },
   ];
