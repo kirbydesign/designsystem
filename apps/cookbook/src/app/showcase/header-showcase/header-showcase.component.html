@@ -48,6 +48,12 @@
         <cookbook-header-example-value #valueExample></cookbook-header-example-value>
       </div>
     </cookbook-example-viewer>
+    <p>
+      <em>
+        See also:
+        <a href="#" (click)="scrollTo(interactiveTitle)">Interactive Title</a>
+      </em>
+    </p>
   </div>
 
   <div class="header-example-container">
@@ -249,6 +255,37 @@
   </div>
 
   <div class="header-example-container">
+    <h2 #interactiveTitle>Interactive Title</h2>
+    <p>
+      If you need the user to interact with the title you can register a handler for the header's
+      <code>titleClick</code>
+      event. Within your event handler you can access the DOM event object with the
+      <code>event</code>
+      argument passed to the output event handler - e.g. to access the event's
+      <code>currentTarget</code>
+      as shown in the example below.
+    </p>
+    <p>
+      You should also add affordance to your interactive title by slotting a
+      <code>kirby-icon</code>
+      into the header and decorate it with the
+      <code>*kirbyHeaderTitleActionIcon</code>
+      directive as shown in the example below:
+    </p>
+    <cookbook-iphone
+      viewMode="full-size"
+      [showViewModeToggle]="true"
+      src="/examples/page/header-and-interactive-title"
+      showExternalLink="true"
+    ></cookbook-iphone>
+
+    <cookbook-example-viewer
+      [html]="interactiveTitleTemplate"
+      [ts]="interactiveTitleSnippet"
+    ></cookbook-example-viewer>
+  </div>
+
+  <div class="header-example-container">
     <h2>Combined</h2>
     <p>This example shows all the above options combined:</p>
     <cookbook-example-viewer [html]="combinedExample.template" [css]="combinedExample.styles">
@@ -258,9 +295,18 @@
     </cookbook-example-viewer>
   </div>
 
-  <h1>API</h1>
-  <h2>Header Properties:</h2>
+  <h2>API</h2>
+  <h3>Properties</h3>
   <cookbook-api-description-properties
     [properties]="properties"
   ></cookbook-api-description-properties>
+
+  <h2>Directives:</h2>
+  <cookbook-api-description-properties
+    [columns]="directiveColumns"
+    [properties]="directives"
+  ></cookbook-api-description-properties>
+
+  <h3>Events</h3>
+  <cookbook-api-description-events [events]="events"></cookbook-api-description-events>
 </div>

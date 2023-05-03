@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
+
 import { HeaderWithActionGroupExampleComponent } from '~/app/examples/header-example/examples/action-group';
 import { HeaderWithCustomActionsExampleComponent } from '~/app/examples/header-example/examples/custom-actions';
+import { HeaderWithInteractiveTitleExampleComponent } from '~/app/examples/header-example/examples/interactive-title';
+import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
 import {
   ApiDescriptionProperty,
   ApiDescriptionPropertyColumns,
@@ -15,6 +18,8 @@ import {
 export class HeaderShowcaseComponent {
   actionGroupTemplate: string = HeaderWithActionGroupExampleComponent.template;
   customActionsTemplate: string = HeaderWithCustomActionsExampleComponent.template;
+  interactiveTitleTemplate: string = HeaderWithInteractiveTitleExampleComponent.template;
+  interactiveTitleSnippet: string = HeaderWithInteractiveTitleExampleComponent.codeSnippet;
 
   properties: ApiDescriptionProperty[] = [
     {
@@ -66,6 +71,33 @@ export class HeaderShowcaseComponent {
     name: 'Name',
     description: 'Description',
   };
+
+  directives: ApiDescriptionProperty[] = [
+    {
+      name: '*kirbyHeaderActions',
+      description:
+        'The `*kirbyHeaderActions` directive should be applied to the host or container element (e.g. `kirby-action-group` or an `ng-container`) for the page and header components to render the actions in both locations',
+    },
+    {
+      name: '*kirbyHeaderCustomSection',
+      description:
+        'The `*kirbyHeaderCustomSection` directive can be applied to any host or container element which will then be shown just below the title (and any subtitles) at the top of the page.',
+    },
+    {
+      name: '*kirbyHeaderTitleActionIcon',
+      description:
+        'For an interactive title (i.e. handling the `titleClick` event) the `*kirbyHeaderTitleActionIcon` directive can be applied to a `kirby-icon` element which will then be shown next to the title element for affordance.',
+    },
+  ];
+
+  events: ApiDescriptionEvent[] = [
+    {
+      name: 'titleClick',
+      description:
+        'Emitted when the title element is clicked (in either the header or the toolbar).',
+      signature: 'EventEmitter<PointerEvent>',
+    },
+  ];
 
   scrollTo(target: Element) {
     target.scrollIntoView({ behavior: 'smooth' });
