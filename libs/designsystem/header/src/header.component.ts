@@ -5,10 +5,12 @@ import {
   ContentChild,
   Directive,
   ElementRef,
+  EventEmitter,
   HostBinding,
   Injector,
   Input,
   OnInit,
+  Output,
   TemplateRef,
   ViewChild,
 } from '@angular/core';
@@ -28,6 +30,11 @@ export class HeaderActionsDirective {}
   selector: '[kirbyHeaderCustomSection]',
 })
 export class HeaderCustomSectionDirective {}
+
+@Directive({
+  selector: '[kirbyHeaderTitleActionIcon]',
+})
+export class HeaderTitleActionIconDirective {}
 
 @Component({
   selector: 'kirby-header',
@@ -66,11 +73,20 @@ export class HeaderComponent implements AfterContentInit, OnInit {
   @ContentChild(HeaderCustomSectionDirective, { read: TemplateRef<HeaderCustomSectionDirective> })
   customSectionTemplate?: TemplateRef<HeaderCustomSectionDirective>;
 
+  @ContentChild(HeaderTitleActionIconDirective, { read: TemplateRef })
+  titleActionIconTemplate: TemplateRef<HeaderTitleActionIconDirective>;
+
   @Input() title: string = null;
   @Input() value: string = null;
   @Input() valueUnit: string = null;
   @Input() subtitle1: string = null;
   @Input() subtitle2: string = null;
+
+  @Output() titleClick = new EventEmitter<PointerEvent>();
+
+  onTitleClick(event: PointerEvent) {
+    this.titleClick.emit(event);
+  }
 
   _actionGroupInjector: Injector;
 

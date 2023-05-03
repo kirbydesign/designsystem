@@ -8,8 +8,9 @@
 
 <div class="container">
     <!-- Title and value - title: -->
-  <h1 *ngIf="!!title && !!value" #titleElement class="title kirby-text-medium">
+  <h1 *ngIf="!!title && !!value" #titleElement class="title kirby-text-medium" [class.clickable]="titleClick.observed" [class.has-icon]="!!titleIconTemplate" (click)="onTitleClick($event)">
     {{ title }}
+    <ng-container *ngTemplateOutlet="titleIconTemplate"></ng-container>
   </h1>
   <div class="title-container">
     <!-- Only title, no value: -->
