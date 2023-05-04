@@ -6,9 +6,15 @@ import {
   HeaderActionsDirective,
   HeaderComponent,
   HeaderCustomSectionDirective,
+  HeaderTitleActionIconDirective,
 } from './header.component';
 
-const declarations = [HeaderComponent, HeaderActionsDirective, HeaderCustomSectionDirective];
+const declarations = [
+  HeaderComponent,
+  HeaderActionsDirective,
+  HeaderCustomSectionDirective,
+  HeaderTitleActionIconDirective,
+];
 
 @NgModule({
   declarations: declarations,
