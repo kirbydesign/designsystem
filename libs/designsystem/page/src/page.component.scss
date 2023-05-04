@@ -101,6 +101,17 @@ ion-toolbar {
       overflow: hidden;
       font-weight: utils.font-weight('bold');
 
+      span.clickable {
+        cursor: pointer;
+      }
+
+      span.has-icon {
+        display: inline-flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+      }
+
       @include utils.slotted('*') {
         text-overflow: ellipsis;
         white-space: nowrap;

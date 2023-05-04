@@ -89,6 +89,16 @@
 
 .title {
   margin-bottom: utils.size('xxxxs');
+
+  &.clickable {
+    cursor: pointer;
+  }
+
+  &.has-icon {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
 }
 
 .value {

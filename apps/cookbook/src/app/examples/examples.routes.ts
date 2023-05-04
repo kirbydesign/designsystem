@@ -81,6 +81,7 @@ import { HeaderExampleComponent } from './header-example/header-example.componen
 import { NestedModalsV2ExampleComponent } from './modal-v2-example/nested-modals/nested-modals-v2-example.component';
 import { HeaderWithActionGroupExampleComponent } from './header-example/examples/action-group';
 import { HeaderWithCustomActionsExampleComponent } from './header-example/examples/custom-actions';
+import { HeaderWithInteractiveTitleExampleComponent } from './header-example/examples/interactive-title';
 import { MenuExampleComponent } from './menu-example/menu-example.component';
 
 export const routes: Routes = [
@@ -183,6 +184,10 @@ export const routes: Routes = [
           {
             path: 'header-and-custom-actions',
             component: HeaderWithCustomActionsExampleComponent,
+          },
+          {
+            path: 'header-and-interactive-title',
+            component: HeaderWithInteractiveTitleExampleComponent,
           },
         ],
       },
