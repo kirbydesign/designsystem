@@ -122,6 +122,13 @@ export class ModalWrapperComponent
     .asObservable()
     .pipe(debounceTime(this.VIEWPORT_RESIZE_DEBOUNCE_TIME));
   private _mutationObserver: MutationObserver;
+  private _intersectionObserver: IntersectionObserver;
+  private get intersectionObserver(): IntersectionObserver {
+    if (!this._intersectionObserver) {
+      this._intersectionObserver = this.createModalWrapperIntersectionObserver();
+    }
+    return this._intersectionObserver;
+  }
 
   @HostBinding('class.content-scrolled')
   isContentScrolled: boolean;
@@ -255,8 +262,10 @@ export class ModalWrapperComponent
   }
 
   private initializeSizing() {
+    if (this.config.size === 'full-height') return;
     this.patchScrollElementSize();
     this.observeHeaderResize();
+    this.observeModalFullHeight();
   }
 
   private setCustomHeight() {
@@ -299,6 +308,21 @@ export class ModalWrapperComponent
         );
       }
     });
+  }
+
+  private observeModalFullHeight() {
+    const ionModalWrapper = this.getIonModalWrapperElement();
+
+    if (!ionModalWrapper) return;
+    // Start observing when modal has finished animating:
+    this.didPresent.then(() => {
+      this.intersectionObserver.observe(ionModalWrapper);
+    });
+  }
+
+  // Extracted into function for ease of testing
+  private getIonModalWrapperElement(): HTMLElement {
+    return this.ionModalElement.shadowRoot.querySelector('.modal-wrapper');
   }
 
   private observeHeaderResize() {
@@ -404,11 +428,28 @@ export class ModalWrapperComponent
     this.setKeyboardVisibility(0);
   }
 
+  private toggleContentMaxHeight(freeze: boolean) {
+    const shouldToggleMaxHeight =
+      this.config.flavor === 'modal' && this.platform.isPhabletOrBigger();
+    if (!shouldToggleMaxHeight) return;
+    const style = 'max-height';
+    const contentElement = this.ionContentElement.nativeElement;
+    this.zone.run(() => {
+      if (freeze) {
+        const contentHeight = contentElement.offsetHeight;
+        this.renderer.setStyle(contentElement, style, `${contentHeight}px`);
+      } else {
+        this.renderer.removeStyle(contentElement, style);
+      }
+    });
+  }
+
   private setKeyboardVisibility(keyboardHeight: number) {
     const keyboardAlreadyVisible = keyboardHeight > 0 && this.keyboardVisible;
     const keyboardAlreadyHidden = keyboardHeight === 0 && !this.keyboardVisible;
     if (keyboardAlreadyVisible || keyboardAlreadyHidden) return;
     this.keyboardVisible = keyboardHeight > 0;
+    this.toggleContentMaxHeight(this.keyboardVisible);
     this.setKeyboardOverlap(keyboardHeight);
   }
 
@@ -509,6 +550,29 @@ export class ModalWrapperComponent
       }
     }
   }
+  private createModalWrapperIntersectionObserver(): IntersectionObserver {
+    const callback: IntersectionObserverCallback = (entries) => {
+      const entry = entries[0];
+      const isTouchingViewport = entry.intersectionRatio < 1;
+      if (isTouchingViewport) {
+        this.ionModalElement.classList.add('full-height');
+      } else {
+        this.ionModalElement.classList.remove('full-height');
+      }
+    };
+
+    // Set explicit viewport root if within iframe:
+    const root = this.windowRef.nativeWindow.frameElement
+      ? (this.windowRef.nativeWindow.document as any) // Cast to `any` as Typescript lib.d.ts doesnt support Document type yet
+      : undefined;
+    const options: IntersectionObserverInit = {
+      rootMargin: '0px 0px -1px 0px', // `bottom: -1px` allows checking when the modal bottom is touching the viewport
+      root,
+      threshold: [0.99, 1],
+    };
+
+    return new IntersectionObserver(callback, options);
+  }
 
   ngOnDestroy() {
     if (this.routerOutlet.isActivated) {
@@ -516,6 +580,8 @@ export class ModalWrapperComponent
     }
     //clean up the observer
     delete this._mutationObserver;
+    this.intersectionObserver.disconnect();
+    delete this._intersectionObserver;
     if (this.resizeObserverService) {
       this.resizeObserverService.unobserve(this.windowRef.nativeWindow.document.body);
       this.resizeObserverService.unobserve(this.ionHeaderElement.nativeElement);
