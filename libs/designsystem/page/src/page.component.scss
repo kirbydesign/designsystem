@@ -7,6 +7,21 @@ $ion-content-padding-top: utils.size('xs');
 /*
  * Page Header
  */
+
+@mixin toolbar-divider {
+  // Don't show divider when sticky content is present:
+  &:not(.has-sticky-content)::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    z-index: 1;
+    background-color: utils.get-color('medium');
+  }
+}
+
 ion-header,
 ion-toolbar {
   --background: #{utils.get-color('background-color')};
@@ -30,16 +45,14 @@ ion-toolbar {
   box-sizing: border-box;
   padding-inline: utils.size('xxxs');
 
-  &.content-scrolled::before {
-    // Divider
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 1px;
-    z-index: 1;
-    background-color: utils.get-color('medium');
+  // Only show divider on small screens when content is scrolled:
+  &.content-scrolled {
+    @include toolbar-divider;
+  }
+
+  // Always show divider on large screens:
+  @include utils.media('>=medium') {
+    @include toolbar-divider;
   }
 
   /*
