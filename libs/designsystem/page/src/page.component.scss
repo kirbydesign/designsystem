@@ -280,6 +280,11 @@ ion-content {
     margin: 0 auto;
   }
 
+  &.content-pinned {
+    // Shaded bg when pinned:
+    --kirby-background-color: #{$toolbar-shaded-background};
+  }
+
   &.content-pinned::before {
     // Background
     content: '';
