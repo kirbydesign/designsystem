@@ -59,9 +59,9 @@ ion-toolbar {
 
   // Always show divider + shaded bg on large screens:
   @include utils.media('>=medium') {
-    @include toolbar-divider;
-
     --background: #{$toolbar-shaded-background};
+
+    @include toolbar-divider;
   }
 
   /*
