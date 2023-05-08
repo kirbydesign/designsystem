@@ -124,7 +124,7 @@ describe('PageComponent', () => {
       ionToolbar.style.setProperty('--kirby-safe-area-top', '33px');
       await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
 
-      expect(ionToolbar).toHaveComputedStyle({ height: size('xxl') });
+      expect(ionToolbar).toHaveComputedStyle({ height: size('xxxl') });
     });
     it('should be correct height on non-ios-phone', async () => {
       await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
@@ -134,12 +134,12 @@ describe('PageComponent', () => {
     it('should be correct height on tablet', async () => {
       await TestHelper.resizeTestWindow(TestHelper.screensize.tablet);
 
-      expect(ionToolbar).toHaveComputedStyle({ height: size('xxxxl') });
+      expect(ionToolbar).toHaveComputedStyle({ height: size('xxxxxl') });
     });
     it('should be correct height on desktop', async () => {
       await TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
 
-      expect(ionToolbar).toHaveComputedStyle({ height: size('xxxxl') });
+      expect(ionToolbar).toHaveComputedStyle({ height: size('xxxxxl') });
     });
   });
 
