@@ -168,6 +168,14 @@ export class ModalWrapperComponent
     });
   }
 
+  ngAfterViewInit(): void {
+    if (this.toolbarButtonsQuery) {
+      this.toolbarButtons = this.toolbarButtonsQuery.map((buttonRef) => buttonRef.nativeElement);
+    }
+
+    this.initializeContentScrollListening();
+  }
+
   private _currentFooter: HTMLElement | null = null;
 
   private set currentFooter(footer: HTMLElement | null) {
@@ -248,7 +256,6 @@ export class ModalWrapperComponent
   private initializeSizing() {
     this.patchScrollElementSize();
     this.observeHeaderResize();
-    this.setCustomHeight();
   }
 
   private initializeModalRoute() {
@@ -285,35 +292,6 @@ export class ModalWrapperComponent
     });
   }
 
-  ngAfterViewInit(): void {
-    if (this.toolbarButtonsQuery) {
-      this.toolbarButtons = this.toolbarButtonsQuery.map((buttonRef) => buttonRef.nativeElement);
-    }
-
-    this.toggleContentScrollled;
-  }
-
-  private toggleContentScrollled() {
-    // Runs outside zone to avoid extensive amount of CD cycles.
-    // Still updates the property inside zone so it is picked up
-    // by change detection and properly synced to the template
-    this.zone.runOutsideAngular(() => {
-      this.contentScrolled$ = this.ionContent.ionScroll.pipe(
-        debounceTime(contentScrollDebounceTimeInMS),
-        map((event) => event.detail),
-        takeUntil(this.destroy$)
-      );
-
-      this.contentScrolled$.subscribe((scrollInfo: ScrollDetail) => {
-        if (scrollInfo.scrollTop > contentScrolledOffsetInPixels !== this.isContentScrolled) {
-          this.zone.run(() => {
-            this.isContentScrolled = !this.isContentScrolled;
-          });
-        }
-      });
-    });
-  }
-
   private observeHeaderResize() {
     this.resizeObserverService.observe(this.ionHeaderElement.nativeElement, (entry) => {
       const [property, pixelValue] = ['--header-height', `${entry.contentRect.height}px`];
@@ -337,6 +315,29 @@ export class ModalWrapperComponent
         this.ionModalWillDismiss.complete();
       });
     }
+  }
+
+  /*
+   * Runs scroll subscription outside zone to avoid extensive amount of CD cycles.
+   * Still updates the property inside zone so it is picked up by change detection
+   * and properly synced to the template.
+   */
+  private initializeContentScrollListening() {
+    this.zone.runOutsideAngular(() => {
+      this.contentScrolled$ = this.ionContent.ionScroll.pipe(
+        debounceTime(contentScrollDebounceTimeInMS),
+        map((event) => event.detail),
+        takeUntil(this.destroy$)
+      );
+
+      this.contentScrolled$.subscribe((scrollInfo: ScrollDetail) => {
+        if (scrollInfo.scrollTop > contentScrolledOffsetInPixels !== this.isContentScrolled) {
+          this.zone.run(() => {
+            this.isContentScrolled = !this.isContentScrolled;
+          });
+        }
+      });
+    });
   }
 
   scrollToTop(scrollDuration?: KirbyAnimation.Duration) {
@@ -394,28 +395,11 @@ export class ModalWrapperComponent
     this.setKeyboardVisibility(0);
   }
 
-  private toggleContentMaxHeight(freeze: boolean) {
-    const shouldToggleMaxHeight =
-      this.config.flavor === 'modal' && this.platform.isPhabletOrBigger();
-    if (!shouldToggleMaxHeight) return;
-    const style = 'max-height';
-    const contentElement = this.ionContentElement.nativeElement;
-    this.zone.run(() => {
-      if (freeze) {
-        const contentHeight = contentElement.offsetHeight;
-        this.renderer.setStyle(contentElement, style, `${contentHeight}px`);
-      } else {
-        this.renderer.removeStyle(contentElement, style);
-      }
-    });
-  }
-
   private setKeyboardVisibility(keyboardHeight: number) {
     const keyboardAlreadyVisible = keyboardHeight > 0 && this.keyboardVisible;
     const keyboardAlreadyHidden = keyboardHeight === 0 && !this.keyboardVisible;
     if (keyboardAlreadyVisible || keyboardAlreadyHidden) return;
     this.keyboardVisible = keyboardHeight > 0;
-    this.toggleContentMaxHeight(this.keyboardVisible);
     this.setKeyboardOverlap(keyboardHeight);
   }
 
