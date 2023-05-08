@@ -149,17 +149,17 @@ ion-modal.kirby-overlay {
 
         &.kirby-modal-small {
           --width: #{map.get($modal-widths, 's')};
-          --height: #{map.get($modal-heights, 's')};
+          --height: var(--kirby-modal-height, #{map.get($modal-heights, 's')});
         }
 
         &.kirby-modal-medium {
           --width: #{map.get($modal-widths, 'm')};
-          --height: #{map.get($modal-heights, 'm')};
+          --height: var(--kirby-modal-height, #{map.get($modal-heights, 'm')});
         }
 
         &.kirby-modal-large {
           --width: #{map.get($modal-widths, 'l')};
-          --height: #{map.get($modal-heights, 'l')};
+          --height: var(--kirby-modal-height, #{map.get($modal-heights, 'l')});
         }
       }
     }
