@@ -52,8 +52,10 @@ ion-toolbar {
   box-sizing: border-box;
   padding-inline: utils.size('xxxs');
 
-  // Only show divider on small screens when content is scrolled:
+  // Only show divider + shaded bg on small screens when content is scrolled:
   &.content-scrolled {
+    --background: #{$toolbar-shaded-background};
+
     @include toolbar-divider;
   }
 
