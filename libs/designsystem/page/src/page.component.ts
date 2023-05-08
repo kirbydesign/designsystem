@@ -9,7 +9,6 @@ import {
   Directive,
   ElementRef,
   EventEmitter,
-  HostBinding,
   HostListener,
   Inject,
   InjectionToken,
@@ -48,7 +47,6 @@ import {
   ModalElementsAdvertiser,
   ModalElementType,
   ModalNavigationService,
-  ModalWrapperComponent,
 } from '@kirbydesign/designsystem/modal';
 import { FitHeadingConfig, ResizeObserverService } from '@kirbydesign/designsystem/shared';
 import { HeaderActionsDirective, HeaderComponent } from '@kirbydesign/designsystem/header';

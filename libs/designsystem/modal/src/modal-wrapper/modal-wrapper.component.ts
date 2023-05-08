@@ -18,9 +18,16 @@ import {
   ViewChildren,
 } from '@angular/core';
 import { ActivatedRoute, RouterModule, RouterOutlet } from '@angular/router';
-import { IonContent, IonHeader, IonicModule, IonTitle, IonToolbar } from '@ionic/angular';
+import {
+  IonContent,
+  IonHeader,
+  IonicModule,
+  IonTitle,
+  IonToolbar,
+  ScrollDetail,
+} from '@ionic/angular';
 import { firstValueFrom, merge, Observable, Subject } from 'rxjs';
-import { debounceTime, first, takeUntil } from 'rxjs/operators';
+import { debounceTime, first, map, takeUntil } from 'rxjs/operators';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
@@ -36,6 +43,9 @@ import { Modal, ModalElementsAdvertiser, ModalElementType } from '../modal.inter
 import { ModalConfig } from './config/modal-config';
 import { COMPONENT_PROPS } from './config/modal-config.helper';
 import { ModalElementsMoverDelegate } from './modal-elements-mover.delegate';
+
+const contentScrollDebounceTimeInMS = 10;
+const contentScrolledOffsetInPixels = 4;
 
 @Component({
   standalone: true,
@@ -64,9 +74,6 @@ export class ModalWrapperComponent
   set scrollDisabled(disabled: boolean) {
     this.ionContent.scrollY = !disabled;
   }
-
-  @HostBinding('class.content-scrolled')
-  contentScrolled: boolean = false;
 
   @Input() config: ModalConfig;
   componentPropsInjector: Injector;
@@ -115,13 +122,12 @@ export class ModalWrapperComponent
     .asObservable()
     .pipe(debounceTime(this.VIEWPORT_RESIZE_DEBOUNCE_TIME));
   private _mutationObserver: MutationObserver;
-  private _intersectionObserver: IntersectionObserver;
-  private get intersectionObserver(): IntersectionObserver {
-    if (!this._intersectionObserver) {
-      this._intersectionObserver = this.createModalWrapperIntersectionObserver();
-    }
-    return this._intersectionObserver;
-  }
+
+  @HostBinding('class.content-scrolled')
+  isContentScrolled: boolean;
+
+  private contentScrolled$: Observable<ScrollDetail>;
+
   private destroy$: Subject<void> = new Subject<void>();
 
   @HostBinding('class.drawer')
@@ -240,10 +246,9 @@ export class ModalWrapperComponent
   }
 
   private initializeSizing() {
-    if (this.config.size === 'full-height') return;
     this.patchScrollElementSize();
     this.observeHeaderResize();
-    this.observeModalFullHeight();
+    this.setCustomHeight();
   }
 
   private initializeModalRoute() {
@@ -280,25 +285,33 @@ export class ModalWrapperComponent
     });
   }
 
-  private observeModalFullHeight() {
-    const ionModalWrapper = this.getIonModalWrapperElement();
-
-    if (!ionModalWrapper) return;
-    // Start observing when modal has finished animating:
-    this.didPresent.then(() => {
-      this.intersectionObserver.observe(ionModalWrapper);
-    });
-  }
-
-  // Extracted into function for ease of testing
-  private getIonModalWrapperElement(): HTMLElement {
-    return this.ionModalElement.shadowRoot.querySelector('.modal-wrapper');
-  }
-
   ngAfterViewInit(): void {
     if (this.toolbarButtonsQuery) {
       this.toolbarButtons = this.toolbarButtonsQuery.map((buttonRef) => buttonRef.nativeElement);
     }
+
+    this.toggleContentScrollled;
+  }
+
+  private toggleContentScrollled() {
+    // Runs outside zone to avoid extensive amount of CD cycles.
+    // Still updates the property inside zone so it is picked up
+    // by change detection and properly synced to the template
+    this.zone.runOutsideAngular(() => {
+      this.contentScrolled$ = this.ionContent.ionScroll.pipe(
+        debounceTime(contentScrollDebounceTimeInMS),
+        map((event) => event.detail),
+        takeUntil(this.destroy$)
+      );
+
+      this.contentScrolled$.subscribe((scrollInfo: ScrollDetail) => {
+        if (scrollInfo.scrollTop > contentScrolledOffsetInPixels !== this.isContentScrolled) {
+          this.zone.run(() => {
+            this.isContentScrolled = !this.isContentScrolled;
+          });
+        }
+      });
+    });
   }
 
   private observeHeaderResize() {
@@ -504,52 +517,12 @@ export class ModalWrapperComponent
     }
   }
 
-  private createModalWrapperIntersectionObserver(): IntersectionObserver {
-    const callback: IntersectionObserverCallback = (entries) => {
-      const entry = entries[0];
-      const isTouchingViewport = entry.intersectionRatio < 1;
-      if (isTouchingViewport) {
-        this.ionModalElement.classList.add('full-height');
-      } else {
-        this.ionModalElement.classList.remove('full-height');
-      }
-    };
-
-    // Set explicit viewport root if within iframe:
-    const root = this.windowRef.nativeWindow.frameElement
-      ? (this.windowRef.nativeWindow.document as any) // Cast to `any` as Typescript lib.d.ts doesnt support Document type yet
-      : undefined;
-    const options: IntersectionObserverInit = {
-      rootMargin: '0px 0px -1px 0px', // `bottom: -1px` allows checking when the modal bottom is touching the viewport
-      root,
-      threshold: [0.99, 1],
-    };
-
-    return new IntersectionObserver(callback, options);
-  }
-
-  contentScrollEnd() {
-    this.ionContent.getScrollElement().then((scrollElement) => {
-      if (scrollElement.scrollTop === 0) {
-        this.contentScrolled = false;
-      }
-    });
-  }
-
-  contentScrollStart() {
-    if (!this.contentScrolled) {
-      this.contentScrolled = true;
-    }
-  }
-
   ngOnDestroy() {
     if (this.routerOutlet.isActivated) {
       this.routerOutlet.deactivate();
     }
     //clean up the observer
     delete this._mutationObserver;
-    this.intersectionObserver.disconnect();
-    delete this._intersectionObserver;
     if (this.resizeObserverService) {
       this.resizeObserverService.unobserve(this.windowRef.nativeWindow.document.body);
       this.resizeObserverService.unobserve(this.ionHeaderElement.nativeElement);
