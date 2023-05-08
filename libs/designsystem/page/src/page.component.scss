@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use 'sass:map';
 @use '@kirbydesign/core/src/scss/interaction-state';
 @use '@kirbydesign/core/src/scss/utils';
@@ -22,6 +23,12 @@ $ion-content-padding-top: utils.size('xs');
   }
 }
 
+$toolbar-shaded-background: color.mix(
+  #000,
+  utils.get-color('background-color', $getValueOnly: true),
+  1.1%
+);
+
 ion-header,
 ion-toolbar {
   --background: #{utils.get-color('background-color')};
@@ -40,7 +47,6 @@ ion-toolbar {
 
   @include utils.media('>=medium') {
     --min-height: #{utils.size('xxxxxl')};
-    --background: #f3f3f3;
   }
 
   box-sizing: border-box;
@@ -51,9 +57,11 @@ ion-toolbar {
     @include toolbar-divider;
   }
 
-  // Always show divider on large screens:
+  // Always show divider + shaded bg on large screens:
   @include utils.media('>=medium') {
     @include toolbar-divider;
+
+    --background: #{$toolbar-shaded-background};
   }
 
   /*
