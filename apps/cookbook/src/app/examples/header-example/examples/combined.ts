@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
+import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
 
 import { config as customSectionConfig } from './custom-section';
 
 const config = {
   selector: 'cookbook-header-example-combined',
-  template: `<kirby-header [title]="'Title'" value="12.345,67" valueUnit="USD" subtitle1="Subtitle one" subtitle2="Subtitle two">
+  template: `<kirby-header [title]="'Title'" value="12.345,67" valueUnit="USD" subtitle1="Subtitle one" subtitle2="Subtitle two" (titleClick)="onTitleClick($event)">
+  <kirby-icon name="arrow-down" *kirbyHeaderTitleActionIcon></kirby-icon>
+  
   <kirby-action-group *kirbyHeaderActions>
     <button kirby-button attentionLevel="3">
       <kirby-icon name="kirby"></kirby-icon>
@@ -39,4 +42,16 @@ const config = {
 export class HeaderExampleCombinedComponent {
   template: string = config.template;
   styles: string = config.styles.join('\n\n');
+
+  constructor(private toastController: ToastController) {}
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  onTitleClick($event: PointerEvent) {
+    const config: ToastConfig = {
+      message: `Title clicked...`,
+      messageType: 'success',
+      durationInMs: 1500,
+    };
+    this.toastController.showToast(config);
+  }
 }
