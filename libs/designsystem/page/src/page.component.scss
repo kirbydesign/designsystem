@@ -40,6 +40,7 @@ ion-toolbar {
 
   @include utils.media('>=medium') {
     --min-height: #{utils.size('xxxxxl')};
+    --background: #f3f3f3;
   }
 
   box-sizing: border-box;
