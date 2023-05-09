@@ -68,6 +68,11 @@ export class ModalHelper {
       let canBeDismissed = false;
       canDismiss = async () => {
         if (!canBeDismissed) {
+          const modalState = {
+            modal: true,
+            description: 'fake state for our modal',
+          };
+          history.pushState(modalState, null);
           canBeDismissed = await this.showAlert(alertConfig);
         }
 

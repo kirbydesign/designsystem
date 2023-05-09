@@ -17,10 +17,16 @@ import {
   ViewChild,
   ViewChildren,
 } from '@angular/core';
-import { ActivatedRoute, RouterModule, RouterOutlet } from '@angular/router';
+import {
+  ActivatedRoute,
+  NavigationStart,
+  Router,
+  RouterModule,
+  RouterOutlet,
+} from '@angular/router';
 import { IonContent, IonHeader, IonicModule, IonTitle, IonToolbar } from '@ionic/angular';
 import { firstValueFrom, merge, Observable, Subject } from 'rxjs';
-import { debounceTime, first, takeUntil } from 'rxjs/operators';
+import { debounceTime, filter, first, takeUntil } from 'rxjs/operators';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
@@ -54,6 +60,25 @@ export class ModalWrapperComponent
   @HostBinding('class.collapsible-title')
   get _hasCollapsibleTitle() {
     return !!this.config?.collapseTitle;
+  }
+
+  private initialRoute = null;
+  private isInitialRoute = true;
+  private navigationIds = new Set<number>();
+
+  @HostListener('window:popstate', ['$event'])
+  dismissModal(event) {
+    // console.log(this.navigationIds, event.state?.navigationId);
+    console.log('Hello from poipsatet');
+    if (this.navigationIds.has(event.state?.navigationId)) return;
+
+    if (!this.config.modalRoute) {
+      console.log('Hello from first if');
+      this.close();
+    } else if (this.isInitialRoute && this.ionModalElement.canDismiss !== true) {
+      console.log('Hello from second if');
+      this.close();
+    }
   }
 
   static readonly KEYBOARD_HIDE_DELAY_IN_MS = 100;
@@ -139,11 +164,27 @@ export class ModalWrapperComponent
     private resizeObserverService: ResizeObserverService,
     private componentFactoryResolver: ComponentFactoryResolver,
     private windowRef: WindowRef,
-    private platform: PlatformService
+    private platform: PlatformService,
+    private router: Router
   ) {
     this.setViewportHeight();
     this.observeViewportResize();
     this.modalElementsMoverDelegate = new ModalElementsMoverDelegate(renderer, elementRef);
+
+    // Remember to unsubscribe from all subscriptions in ngOnDestroy
+    router.events
+      .pipe(
+        // The "events" stream contains all the navigation events. For this demo,
+        // though, we only care about the NavigationStart event as it contains
+        // information about what initiated the navigation sequence.
+        filter((event) => {
+          return event instanceof NavigationStart;
+        })
+      )
+      .subscribe((event: NavigationStart) => {
+        this.navigationIds.add(event.id);
+        this.isInitialRoute = event.url.includes(this.initialRoute);
+      });
   }
 
   ngOnInit(): void {
@@ -156,6 +197,19 @@ export class ModalWrapperComponent
     this.componentPropsInjector = Injector.create({
       providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
       parent: this.injector,
+    });
+
+    if (this.ionModalElement.canDismiss !== true) {
+      const modalState = {
+        modal: true,
+        description: 'fake state for our modal',
+      };
+      history.pushState(modalState, null);
+    }
+
+    this.config?.modalRoute?.url.subscribe((url) => {
+      console.log('This is initial route', url);
+      this.initialRoute = url[0].path;
     });
   }
 
@@ -540,5 +594,11 @@ export class ModalWrapperComponent
     }
     this.destroy$.next();
     this.destroy$.complete();
+
+    // This if statement cleans up the fake modal state when a
+    // normal modal is closed with an alert, ie. not a routing based modal.
+    if (!this.config.modalRoute && this.ionModalElement.canDismiss !== true) {
+      history.go(-2);
+    }
   }
 }
