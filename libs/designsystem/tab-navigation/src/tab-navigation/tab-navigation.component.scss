@@ -1,9 +1,7 @@
 @use '@kirbydesign/core/src/scss/utils';
 
-$tab-item-text-max-width: 100px;
 $bottom-border-height: 1px;
 $border-color-standard: utils.get-color('medium');
-$border-color-selected: utils.get-color('dark');
 $divider-max-width-breakpoint: utils.$page-content-max-width + (utils.size('s') * 2);
 
 div[role='tablist'] {
