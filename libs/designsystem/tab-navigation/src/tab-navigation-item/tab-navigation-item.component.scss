@@ -33,7 +33,6 @@ $divider-max-width-breakpoint: utils.$page-content-max-width + (utils.size('s') 
   button[role='tab'] {
     @include button-reset;
 
-    background-color: utils.get-color('background-color');
     color: utils.get-color('black');
     box-sizing: border-box; // Ensure border is not added to button height
     padding: utils.size('s') utils.size('m');

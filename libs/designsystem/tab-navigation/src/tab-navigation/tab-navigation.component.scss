@@ -34,8 +34,6 @@ div[role='tablist'] {
 
 .container {
   position: relative;
-  background-color: utils.get-color('background-color');
-  max-width: var(--page-content-max-width, utils.$page-content-max-width);
 
   @include utils.media('<medium') {
     margin-inline: calc(-1 * var(--padding-start)) calc(-1 * var(--padding-end));
