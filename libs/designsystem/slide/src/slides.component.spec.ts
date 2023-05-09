@@ -92,6 +92,20 @@ describe('SlidesComponent', () => {
     expect(spectator.component.swiperContainer.nativeElement.swiper.activeIndex).toBe(4);
   });
 
+  it('should hide the navigation buttons, if the Slider doesn´t contain enough slides for sliding', () => {
+    spectator.setInput('slides', [0]);
+
+    // It is necessary to update the Slides container, because it does not updated automatically when the "slides" input changes
+    spectator.component.swiperContainer.nativeElement.swiper.update();
+
+    expect(spectator.query('.swiper-button-prev')).toHaveComputedStyle({
+      display: 'none',
+    });
+    expect(spectator.query('.swiper-button-next')).toHaveComputedStyle({
+      display: 'none',
+    });
+  });
+
   describe('pagination', () => {
     let paginationDots;
 

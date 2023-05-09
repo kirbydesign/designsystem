@@ -51,6 +51,12 @@ $bullet-inactive-opacity: 0.2;
     margin-inline: calc(-1 * var(--padding-start)) calc(-1 * var(--padding-end));
   }
 
+  // Hides the navigation buttons if the Slider
+  // doesn't contain enough slides for swiping.
+  .swiper-button-lock {
+    display: none;
+  }
+
   @include utils.media('<medium') {
     swiper-container {
       padding-inline: utils.size('s');
