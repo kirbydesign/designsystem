@@ -12,6 +12,7 @@ import {
   ModalSize,
   ModalWrapperComponent,
 } from '../../modal-wrapper';
+import { ModalNavigationService } from '../../modal-navigation.service';
 import { AlertHelper } from './alert.helper';
 
 import { ModalAnimationBuilderService } from './modal-animation-builder.service';
@@ -22,7 +23,8 @@ export class ModalHelper {
     private ionicModalController: ModalController,
     private modalAnimationBuilder: ModalAnimationBuilderService,
     private windowRef: WindowRef,
-    private alertHelper: AlertHelper
+    private alertHelper: AlertHelper,
+    private navigationService: ModalNavigationService
   ) {}
 
   /* 
@@ -110,6 +112,8 @@ export class ModalHelper {
     }
 
     await ionModal.present();
+
+    this.navigationService.handleBackButtonScenario(ionModal, config.modalRoute);
 
     this.isModalOpening = false;
 

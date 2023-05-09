@@ -1,6 +1,14 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Params, Route, Router, Routes } from '@angular/router';
-import { EMPTY, firstValueFrom, Observable } from 'rxjs';
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  NavigationStart,
+  Params,
+  Route,
+  Router,
+  Routes,
+} from '@angular/router';
+import { EMPTY, firstValueFrom, fromEvent, Observable } from 'rxjs';
 import { filter, map, pairwise, startWith } from 'rxjs/operators';
 
 import { Location } from '@angular/common';
@@ -339,5 +347,53 @@ export class ModalNavigationService {
       parentRoute = parentRoute.parent;
     }
     return parentRoute;
+  }
+
+  handleBackButtonScenario(modal: HTMLIonModalElement, modalRoute: ActivatedRoute) {
+    let initialRoute = null;
+    let isInitialRoute = true;
+    const navigationIds = new Set<number>();
+
+    const popStateEvent$ = fromEvent(window, 'popstate');
+    popStateEvent$.subscribe((event: any) => {
+      if (navigationIds.has(event.state?.navigationId)) return;
+
+      if (!modalRoute) {
+        modal.dismiss();
+      } else if (isInitialRoute && modal.canDismiss !== true) {
+        modal.dismiss();
+      }
+    });
+
+    this.router.events
+      .pipe(
+        filter((event) => {
+          return event instanceof NavigationStart;
+        })
+      )
+      .subscribe((event: NavigationStart) => {
+        navigationIds.add(event.id);
+        isInitialRoute = event.url.includes(initialRoute);
+      });
+
+    if (modal.canDismiss !== true) {
+      const modalState = {
+        modal: true,
+        description: 'fake state for our modal',
+      };
+      history.pushState(modalState, null);
+    }
+
+    modalRoute?.url.subscribe((url) => {
+      initialRoute = url[0].path;
+    });
+
+    modal.onDidDismiss().then(() => {
+      // This if statement cleans up the fake modal state when a
+      // normal modal is closed with an alert, ie. not a routing based modal.
+      if (!modalRoute && modal.canDismiss !== true) {
+        history.go(-2);
+      }
+    });
   }
 }
