@@ -35,6 +35,7 @@ import {
   IonFooter,
   IonHeader,
   IonRouterOutlet,
+  IonToolbar,
   NavController,
 } from '@ionic/angular';
 import { ScrollDetail } from '@ionic/core';
@@ -241,6 +242,8 @@ export class PageComponent
   ionHeaderElement: ElementRef<HTMLIonHeaderElement>;
   @ViewChild(IonFooter, { static: true, read: ElementRef })
   private ionFooterElement: ElementRef<HTMLIonFooterElement>;
+  @ViewChild(IonToolbar, { static: true, read: ElementRef })
+  private ionToolbarElement: ElementRef<HTMLIonToolbarElement>;
 
   @ViewChild(IonBackButtonDelegate, { static: false })
   private backButtonDelegate: IonBackButtonDelegate;
@@ -350,6 +353,7 @@ export class PageComponent
 
   ngOnInit(): void {
     this.removeWrapper();
+    this.setToolbarBackgroundPart();
 
     const actionGroupConfig: ActionGroupConfig = {
       isResizable: false,
@@ -464,6 +468,15 @@ export class PageComponent
     this.renderer.appendChild(parent, this.ionHeaderElement.nativeElement);
     this.renderer.appendChild(parent, this.ionContentElement.nativeElement);
     this.renderer.appendChild(parent, this.ionFooterElement.nativeElement);
+  }
+
+  private setToolbarBackgroundPart() {
+    this.ionToolbarElement?.nativeElement.componentOnReady().then((toolbar) => {
+      const toolbarBackground = toolbar.shadowRoot.querySelector('.toolbar-background');
+      if (toolbarBackground) {
+        this.renderer.setAttribute(toolbarBackground, 'part', 'background');
+      }
+    });
   }
 
   private onEnter() {

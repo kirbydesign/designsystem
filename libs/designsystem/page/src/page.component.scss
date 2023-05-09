@@ -9,20 +9,9 @@ $ion-content-padding-top: utils.size('xs');
  * Page Header
  */
 
-@mixin toolbar-divider {
-  // Don't show divider when sticky content is present:
-  &:not(.has-sticky-content)::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 1px;
-    z-index: 1;
-    background-color: utils.get-color('medium');
-  }
-}
-
+$toolbar-transition-duration-in: utils.get-transition-duration('quick');
+$toolbar-transition-duration-out: 50ms;
+$toolbar-transition: background-color $toolbar-transition-duration-out linear;
 $toolbar-shaded-background: color.mix(
   #000,
   utils.get-color('background-color', $getValueOnly: true),
@@ -52,18 +41,48 @@ ion-toolbar {
   box-sizing: border-box;
   padding-inline: utils.size('xxxs');
 
+  /*
+  * Toolbar Divider & Shaded background
+  */
+
+  // Divider:
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+  }
+
+  &::before,
+  &::part(background) {
+    transition: $toolbar-transition;
+  }
+
   // Only show divider + shaded bg on small screens when content is scrolled:
   &.content-scrolled {
     --background: #{$toolbar-shaded-background};
 
-    @include toolbar-divider;
+    &::before,
+    &::part(background) {
+      transition-duration: $toolbar-transition-duration-in;
+    }
+
+    &:not(.content-pinned)::before {
+      background-color: utils.get-color('medium');
+    }
   }
 
   // Always show divider + shaded bg on large screens:
   @include utils.media('>=medium') {
     --background: #{$toolbar-shaded-background};
 
-    @include toolbar-divider;
+    // Divider:
+    &:not(.content-pinned)::before {
+      background-color: utils.get-color('medium');
+      transition-duration: $toolbar-transition-duration-out;
+    }
   }
 
   /*
@@ -280,36 +299,47 @@ ion-content {
     margin: 0 auto;
   }
 
-  &.content-pinned {
-    // Shaded bg when pinned:
-    --kirby-background-color: #{$toolbar-shaded-background};
-  }
-
-  &.content-pinned::before {
-    // Background
+  &::before,
+  &::after {
+    /* Background + Divider */
     content: '';
     position: absolute;
 
-    // Adjust for padding of ion-content to stretch divider to full width.
+    // Adjust for padding of ion-content to stretch divider to full width:
     left: calc(-1 * var(--padding-start));
     right: calc(-1 * var(--padding-end));
     bottom: 0;
+    transition: $toolbar-transition;
+  }
+
+  &::before {
+    /* Background */
     top: 0;
-    z-index: 0;
-    background-color: var(--kirby-background-color);
+
+    // Same bg color as ion-content to prevent see-through
+    // when scrolling the page behind the sticky content:
+    background-color: var(--background);
   }
 
-  &.content-pinned::after {
-    // Divider
-    content: '';
-    position: absolute;
-
-    // Adjust for padding of ion-content to stretch divider to full width.
-    left: calc(-1 * var(--padding-start));
-    right: calc(-1 * var(--padding-end));
-    bottom: 0;
+  &::after {
+    /* Divider */
     height: 1px;
-    z-index: 1;
-    background-color: utils.get-color('medium');
+  }
+
+  &.content-pinned {
+    &::before,
+    &::after {
+      transition-duration: $toolbar-transition-duration-in;
+    }
+
+    &::before {
+      /* Background - pinned */
+      background-color: $toolbar-shaded-background;
+    }
+
+    &::after {
+      /* Divider - pinned */
+      background-color: utils.get-color('medium');
+    }
   }
 }
