@@ -303,15 +303,6 @@ describe('ModalWrapperComponent', () => {
     });
 
     it('should render as a close icon by default', () => {
-      spectator.component.config.flavor = 'modal';
-      spectator.detectChanges();
-      const el = spectator.query(IconComponent);
-      expect(el.name).toBe('close');
-    });
-
-    it("should render as a close icon when flavor is set to 'drawer'", () => {
-      spectator.component.config.flavor = 'drawer';
-      spectator.detectChanges();
       const el = spectator.query(IconComponent);
       expect(el.name).toBe('close');
     });
