@@ -350,13 +350,13 @@ export class ModalNavigationService {
   }
 
   handleBackButtonScenario(modal: HTMLIonModalElement, modalRoute: ActivatedRoute) {
-    let initialRoute = null;
+    const initialRoute = this.router.url;
     let isInitialRoute = true;
     const navigationIds = new Set<number>();
 
     const popStateEvent$ = fromEvent(window, 'popstate');
-    popStateEvent$.subscribe((event: any) => {
-      if (navigationIds.has(event.state?.navigationId)) return;
+    const popStateSubscription = popStateEvent$.subscribe((event: PopStateEvent) => {
+      if (navigationIds.has(event.state.navigationId)) return;
 
       if (!modalRoute) {
         modal.dismiss();
@@ -365,7 +365,7 @@ export class ModalNavigationService {
       }
     });
 
-    this.router.events
+    const routerEventSubscription = this.router.events
       .pipe(
         filter((event) => {
           return event instanceof NavigationStart;
@@ -376,6 +376,11 @@ export class ModalNavigationService {
         isInitialRoute = event.url.includes(initialRoute);
       });
 
+    // Adds a fake modal state to the history stack
+    // when a modal is opened with an alert.
+    // This is to prevent that the page behind the modal navigates back
+    // when the alert is displayed
+
     if (modal.canDismiss !== true) {
       const modalState = {
         modal: true,
@@ -384,16 +389,15 @@ export class ModalNavigationService {
       history.pushState(modalState, null);
     }
 
-    modalRoute?.url.subscribe((url) => {
-      initialRoute = url[0].path;
-    });
-
     modal.onDidDismiss().then(() => {
       // This if statement cleans up the fake modal state when a
       // normal modal is closed with an alert, ie. not a routing based modal.
       if (!modalRoute && modal.canDismiss !== true) {
         history.go(-2);
       }
+
+      popStateSubscription.unsubscribe();
+      routerEventSubscription.unsubscribe();
     });
   }
 }
