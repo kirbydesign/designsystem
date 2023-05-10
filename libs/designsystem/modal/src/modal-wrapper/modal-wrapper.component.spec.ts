@@ -346,7 +346,7 @@ describe('ModalWrapperComponent', () => {
       spyOn(spectator.component.config.drawerSupplementaryAction, 'action');
 
       spectator.detectChanges();
-      spectator.dispatchMouseEvent('ion-buttons[slot="start"] button[kirby-button]', 'click');
+      spectator.dispatchMouseEvent('ion-buttons[slot="secondary"] button[kirby-button]', 'click');
       expect(spectator.component.config.drawerSupplementaryAction.action).toHaveBeenCalled();
     });
   });

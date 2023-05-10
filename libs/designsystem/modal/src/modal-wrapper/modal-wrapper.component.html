@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-title></ion-title>
     <ion-buttons
-      slot="start"
+      slot="secondary"
       *ngIf="config.flavor === 'drawer' && config.drawerSupplementaryAction"
     >
       <button
@@ -14,7 +14,7 @@
         <kirby-icon [name]="config.drawerSupplementaryAction.iconName"></kirby-icon>
       </button>
     </ion-buttons>
-    <ion-buttons slot="end">
+    <ion-buttons slot="primary">
       <button
         kirby-button
         attentionLevel="3"
