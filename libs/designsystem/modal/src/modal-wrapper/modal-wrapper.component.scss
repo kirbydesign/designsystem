@@ -40,7 +40,7 @@ $toolbar-bottom-border-width: 1px;
   @include utils.media('>=medium') {
     --padding-start: #{utils.size('m')};
     --padding-end: #{utils.size('m')};
-    --padding-bottom: calc(#{utils.size('m')} - #{$toolbar-bottom-border-width});
+    --padding-bottom: #{utils.size('m') - $toolbar-bottom-border-width};
     --padding-top: #{utils.size('m')};
 
     padding-inline: 0;
@@ -55,7 +55,7 @@ ion-header {
 
     --padding-start: #{utils.size('xxs')};
     --padding-end: #{utils.size('xxs')};
-    --padding-bottom: calc(#{utils.size('xxs')} - #{$toolbar-bottom-border-width});
+    --padding-bottom: #{utils.size('xxs') - $toolbar-bottom-border-width};
     --padding-top: #{utils.size('xxs')};
     --border-width: 0;
     --background: transparent;
@@ -65,9 +65,8 @@ ion-header {
       color: var(--color);
     }
 
-    border-bottom: $toolbar-bottom-border-width solid
-      var(--kirby-modal-background, utils.get-color('medium'));
-    transition: border-color 100ms linear;
+    border-bottom: $toolbar-bottom-border-width solid transparent;
+    transition: border-color utils.get-transition-duration('quick') linear;
   }
 }
 
@@ -80,18 +79,23 @@ ion-header {
     @include utils.media('<medium') {
       --padding-top: #{utils.size('s')};
 
+      // Prevent iOS safe-area padding-top on drawer flavor
+      // as this is already applied on the top-level modal itself
+      // in /scss/_global-styles.scss:
       padding-top: 0;
     }
   }
 }
 
-:host(:not(.content-scrolled)) {
-  @include utils.media('<medium') {
-    ion-header ion-toolbar {
-      border-bottom: $toolbar-bottom-border-width solid
-        var(--kirby-modal-background, utils.get-color('background-color'));
-      transition: border-color 100ms linear;
-    }
+@include utils.media('>=medium') {
+  ion-header ion-toolbar {
+    border-bottom-color: utils.get-color('medium');
+  }
+}
+
+:host(.content-scrolled) {
+  ion-header ion-toolbar {
+    border-bottom-color: utils.get-color('medium');
   }
 }
 
@@ -103,6 +107,10 @@ ion-header {
 
 :host-context(ion-modal.kirby-drawer.interact-with-background) {
   @include contain-content;
+
+  ion-header ion-toolbar {
+    border-bottom-color: transparent;
+  }
 }
 
 // Ensure iOS safe-area padding-top on default/modal flavor
