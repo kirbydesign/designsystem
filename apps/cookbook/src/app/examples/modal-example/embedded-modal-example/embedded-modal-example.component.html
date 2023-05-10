@@ -31,19 +31,6 @@
         </button>
       </ng-container>
       <button kirby-button (click)="close()">Hide me</button>
-      <cookbook-example-configuration-wrapper [snapToViewport]="true">
-        <cookbook-modal-example-configuration
-          [(showDummyKeyboard)]="showDummyKeyboard"
-          [(showPageProgress)]="showPageProgress"
-          [(showFooter)]="showFooter"
-          [(snapFooterToKeyboard)]="snapFooterToKeyboard"
-          [(showDummyContent)]="showDummyContent"
-          [disableScroll]="disableScroll"
-          (disableScrollChange)="toggleDisableScroll($event)"
-          (selectedModalSize)="setSelectedModalSize($event)"
-          [modalSizeOptions]="modalSizeOptions"
-        ></cookbook-modal-example-configuration>
-      </cookbook-example-configuration-wrapper>
       <kirby-card
         *ngIf="showNestedOptions"
         hasPadding="true"

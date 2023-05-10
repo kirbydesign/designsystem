@@ -9,9 +9,9 @@ import { EmbeddedModalExampleComponent } from './embedded-modal-example/embedded
 const config = {
   selector: 'cookbook-modal-example-default',
   template: `<button kirby-button (click)="showModal()" [disabled]="interactWithBackground || preventInteraction">Show modal</button>
-  <button kirby-button (click)="showDrawer()" [disabled]="preventInteraction">Show drawer</button>
-  <button kirby-button (click)="showCompact()" [disabled]="interactWithBackground || preventInteraction">Show compact</button>
-  <cookbook-example-configuration-wrapper>
+    <button kirby-button (click)="showDrawer()" [disabled]="preventInteraction">Show drawer</button>
+    <button kirby-button (click)="showCompact()" [disabled]="interactWithBackground || preventInteraction">Show compact</button>
+  <cookbook-example-configuration-wrapper displayMode="toggle">
       <cookbook-modal-example-configuration [disabled]="preventInteraction" [(showDummyKeyboard)]="showDummyKeyboard"
       [(showPageProgress)]="showPageProgress"
       [(showFooter)]="showFooter"
@@ -204,26 +204,26 @@ export class EmbeddedComponent() {
   styleUrls: ['./modal-example-default.component.scss'],
 })
 export class ModalExampleDefaultComponent {
-  template = config.template.split('<cookbook-example-configuration-wrapper>')[0]; // Remove config part of the template
-  titleTemplate = config.titleTemplate;
-  pageProgressTemplate = config.pageProgressTemplate;
-  footerTemplate = config.footerTemplate;
-  defaultCodeSnippet = [
+  static readonly template = config.template.split('<cookbook-example-configuration-wrapper>')[0]; // Remove config part of the template
+  static readonly titleTemplate = config.titleTemplate;
+  static readonly pageProgressTemplate = config.pageProgressTemplate;
+  static readonly footerTemplate = config.footerTemplate;
+  static readonly defaultCodeSnippet = [
     config.showModalCodeSnippet,
     config.drawerCodeSnippet,
     config.showCompactCodeSnippet,
   ].join('\n\n');
-  showModalCodeSnippet = config.showModalCodeSnippet;
-  drawerCodeSnippet = config.drawerCodeSnippet;
-  callbackCodeSnippet = config.callbackCodeSnippet;
-  callbackWithDataCodeSnippet = config.callbackWithDataCodeSnippet;
-  alertBeforeCloseCodeSnippet = config.alertBeforeCloseCodeSnippet;
-  didPresentCodeSnippet = config.didPresentCodeSnippet;
-  willCloseCodeSnippet = config.willCloseCodeSnippet;
-  scrollingCodeSnippet = config.scrollingCodeSnippet;
-  disableScrollingCodeSnippet = config.disableScrollingCodeSnippet;
-  embeddedCodeSnippet = config.embeddedCodeSnippet;
-  closeModalCodeSnippet = config.closeModalCodeSnippet;
+  static readonly showModalCodeSnippet = config.showModalCodeSnippet;
+  static readonly drawerCodeSnippet = config.drawerCodeSnippet;
+  static readonly callbackCodeSnippet = config.callbackCodeSnippet;
+  static readonly callbackWithDataCodeSnippet = config.callbackWithDataCodeSnippet;
+  static readonly alertBeforeCloseCodeSnippet = config.alertBeforeCloseCodeSnippet;
+  static readonly didPresentCodeSnippet = config.didPresentCodeSnippet;
+  static readonly willCloseCodeSnippet = config.willCloseCodeSnippet;
+  static readonly scrollingCodeSnippet = config.scrollingCodeSnippet;
+  static readonly disableScrollingCodeSnippet = config.disableScrollingCodeSnippet;
+  static readonly embeddedCodeSnippet = config.embeddedCodeSnippet;
+  static readonly closeModalCodeSnippet = config.closeModalCodeSnippet;
 
   showDummyKeyboard = !!this.windowRef.nativeWindow.sessionStorage.getItem(
     'kirby-cookbook-show-dummy-keyboard'
@@ -322,8 +322,6 @@ export class ModalExampleDefaultComponent {
   }
 
   setSelectedModalSize(size) {
-    console.log('setting', size.value);
-
     this.selectedModalSize = size.value;
   }
 

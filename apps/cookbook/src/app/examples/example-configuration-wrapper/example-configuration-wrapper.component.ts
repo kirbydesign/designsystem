@@ -6,7 +6,14 @@ import { Component, HostBinding, Input } from '@angular/core';
   styleUrls: ['./example-configuration-wrapper.component.scss'],
 })
 export class ExampleConfigurationWrapperComponent {
-  @HostBinding('class.snap-to-viewport')
+  @HostBinding('class')
   @Input()
-  snapToViewport = false;
+  displayMode: 'none' | 'snap' | 'toggle' = 'none';
+
+  @HostBinding('class.show-config')
+  showConfig: boolean = false;
+
+  toggleConfiguration() {
+    this.showConfig = !this.showConfig;
+  }
 }

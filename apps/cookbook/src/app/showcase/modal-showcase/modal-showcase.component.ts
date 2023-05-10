@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ModalController } from '@kirbydesign/designsystem';
+import { ModalExampleDefaultComponent } from '~/app/examples/modal-example/modal-example-default.component';
 import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
 import {
   ApiDescriptionProperty,
@@ -13,6 +14,8 @@ import {
   preserveWhitespaces: true,
 })
 export class ModalShowcaseComponent {
+  defaultExample = ModalExampleDefaultComponent;
+
   constructor(private modalController: ModalController) {}
 
   scrollTo(target: Element) {

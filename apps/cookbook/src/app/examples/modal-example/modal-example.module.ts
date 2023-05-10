@@ -11,6 +11,7 @@ import { ModalCompactExampleComponent } from './compact-example/modal-compact-ex
 import { EmbeddedModalExampleComponent } from './embedded-modal-example/embedded-modal-example.component';
 import { ModalExampleConfigurationComponent } from './modal-example-configuration/modal-example-configuration.component';
 import { ModalExampleDefaultComponent } from './modal-example-default.component';
+import { ModalExampleSizesComponent } from './modal-example-sizes.component';
 import { ModalExampleOutletComponent } from './modal-example-outlet.component';
 import { ModalExampleComponent } from './modal-example.component';
 import { ModalRoutePage1ExampleComponent } from './modal-route-example/modal-route-page1-example.component';
@@ -19,6 +20,7 @@ import { ModalRoutePage2ExampleComponent } from './modal-route-example/modal-rou
 const COMPONENT_DECLARATIONS = [
   ModalExampleComponent,
   ModalExampleDefaultComponent,
+  ModalExampleSizesComponent,
   ModalExampleConfigurationComponent,
   ModalExampleOutletComponent,
   EmbeddedModalExampleComponent,

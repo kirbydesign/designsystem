@@ -82,6 +82,9 @@ import { NestedModalsV2ExampleComponent } from './modal-v2-example/nested-modals
 import { HeaderWithActionGroupExampleComponent } from './header-example/examples/action-group';
 import { HeaderWithCustomActionsExampleComponent } from './header-example/examples/custom-actions';
 import { MenuExampleComponent } from './menu-example/menu-example.component';
+import { ModalExampleSizesComponent } from './modal-example/modal-example-sizes.component';
+import { ModalExampleDefaultComponent } from './modal-example/modal-example-default.component';
+import { ModalExampleOutletComponent } from './modal-example/modal-example-outlet.component';
 
 export const routes: Routes = [
   {
@@ -249,6 +252,18 @@ export const routes: Routes = [
             component: ModalRoutePage2ExampleComponent,
           },
         ],
+      },
+      {
+        path: 'modal-default',
+        component: ModalExampleDefaultComponent,
+      },
+      {
+        path: 'modal-sizes',
+        component: ModalExampleSizesComponent,
+      },
+      {
+        path: 'modal-route',
+        component: ModalExampleOutletComponent,
       },
       {
         path: 'modal-route-with-url-param/:id',

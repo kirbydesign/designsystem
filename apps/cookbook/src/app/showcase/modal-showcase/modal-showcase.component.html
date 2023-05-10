@@ -1,71 +1,85 @@
-<cookbook-iphone src="/examples/modal" showExternalLink="true"></cookbook-iphone>
+<section>
+  <p>
+    A Modal is a dialog that appears on top of the app's content, and must be dismissed by the app
+    before interaction can resume. It is useful as a select component when there are a lot of
+    options to choose from, or when filtering items in a list, as well as many other use cases.
+  </p>
+  <ul>
+    <li>
+      A modal can be opened through
+      <a href="#" (click)="scrollTo(modalController)"><code>ModalController</code></a>
+    </li>
+    <li>
+      The modal comes in 3 different
+      <a href="#" (click)="scrollTo(modalFlavors)">flavors</a>
+      :
+      <ul>
+        <li>
+          <a href="#" (click)="scrollTo(modalFlavorsModal)">Modal (default) - with component</a>
+        </li>
+        <li>
+          <a href="#" (click)="scrollTo(modalFlavorsModalWithOutlet)">
+            Modal (default) - with outlet
+          </a>
+        </li>
+        <li><a href="#" (click)="scrollTo(modalFlavorsCompact)">Compact</a></li>
+        <li><a href="#" (click)="scrollTo(modalFlavorsDrawer)">Drawer</a></li>
+      </ul>
+    </li>
+    <li>
+      Support for handling the
+      <a href="#" (click)="scrollTo(didPresentEvent)">didPresent event</a>
+    </li>
+    <li>
+      Support for handling the
+      <a href="#" (click)="scrollTo(closeEvent)">close event</a>
+    </li>
+    <li>
+      Support for
+      <a href="#" (click)="scrollTo(returnData)">returning data</a>
+      from the modal to the parent/caller component
+    </li>
+    <li>
+      Support for
+      <a href="#" (click)="scrollTo(alertBeforeClose)">showing an alert before closing</a>
+    </li>
+    <li>
+      Support for
+      <a href="#" (click)="scrollTo(scrolling)">scrolling</a>
+    </li>
+    <li>
+      Support for
+      <a href="#" (click)="scrollTo(disableScrolling)">disabling of scrolling</a>
+    </li>
+    <li>
+      (Optional)
+      <a href="#" (click)="scrollTo(footer)">Fixed footer</a>
+    </li>
+  </ul>
+</section>
+
+<h2>Modal playground</h2>
 <p>
-  A Modal is a dialog that appears on top of the app's content, and must be dismissed by the app
-  before interaction can resume. It is useful as a select component when there are a lot of options
-  to choose from, or when filtering items in a list, as well as many other use cases.
+  This example acts as a playground where any combination of options and the interplay between
+  multiple types and sizes of nested modals can be explored.
 </p>
-<ul>
-  <li>
-    A modal can be opened through
-    <a href="#" (click)="scrollTo(modalController)"><code>ModalController</code></a>
-  </li>
-  <li>
-    The modal comes in 3 different
-    <a href="#" (click)="scrollTo(modalFlavors)">flavors</a>
-    :
-    <ul>
-      <li>
-        <a href="#" (click)="scrollTo(modalFlavorsModal)">Modal (default) - with component</a>
-      </li>
-      <li>
-        <a href="#" (click)="scrollTo(modalFlavorsModalWithOutlet)">
-          Modal (default) - with outlet
-        </a>
-      </li>
-      <li><a href="#" (click)="scrollTo(modalFlavorsCompact)">Compact</a></li>
-      <li><a href="#" (click)="scrollTo(modalFlavorsDrawer)">Drawer</a></li>
-    </ul>
-  </li>
-  <li>
-    Support for handling the
-    <a href="#" (click)="scrollTo(didPresentEvent)">didPresent event</a>
-  </li>
-  <li>
-    Support for handling the
-    <a href="#" (click)="scrollTo(closeEvent)">close event</a>
-  </li>
-  <li>
-    Support for
-    <a href="#" (click)="scrollTo(returnData)">returning data</a>
-    from the modal to the parent/caller component
-  </li>
-  <li>
-    Support for
-    <a href="#" (click)="scrollTo(alertBeforeClose)">showing an alert before closing</a>
-  </li>
-  <li>
-    Support for
-    <a href="#" (click)="scrollTo(scrolling)">scrolling</a>
-  </li>
-  <li>
-    Support for
-    <a href="#" (click)="scrollTo(disableScrolling)">disabling of scrolling</a>
-  </li>
-  <li>
-    (Optional)
-    <a href="#" (click)="scrollTo(footer)">Fixed footer</a>
-  </li>
-</ul>
-<h2>
-  <span class="desktop">Desktop:</span>
-  <span class="mobile">Mobile:</span>
-</h2>
-<h3>With component (default)</h3>
-<cookbook-example-viewer [html]="defaultExample.template" [ts]="defaultExample.defaultCodeSnippet">
-  <div>
-    <cookbook-modal-example-default #defaultExample></cookbook-modal-example-default>
-  </div>
-</cookbook-example-viewer>
+<p>
+  In both the example below and within the opened modals, the configuration sheet can be used to
+  explore the different configuration options the modal has to offer.
+</p>
+
+<cookbook-iphone
+  class="large-example"
+  src="/examples/modal-default"
+  viewMode="full-size"
+  [showViewModeToggle]="true"
+  showExternalLink="true"
+></cookbook-iphone>
+
+<cookbook-example-viewer
+  [html]="defaultExample.template"
+  [ts]="defaultExample.defaultCodeSnippet"
+></cookbook-example-viewer>
 <h3>With modal outlet:</h3>
 <cookbook-example-viewer [html]="outletExample.template" [ts]="outletExample.defaultCodeSnippet">
   <div>

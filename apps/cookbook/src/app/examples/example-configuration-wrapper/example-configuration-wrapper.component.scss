@@ -2,6 +2,48 @@
 
 :host {
   display: inline-block;
+
+  &.toggle {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    position: absolute;
+    right: utils.size('s');
+    top: utils.size('s');
+
+    &.show-config {
+      kirby-card {
+        display: initial;
+      }
+    }
+
+    kirby-card {
+      display: none;
+    }
+  }
+
+  &.snap {
+    kirby-card {
+      position: fixed;
+      margin-top: utils.$border-radius;
+      opacity: 0.5;
+      transition-property: transform, border-radius;
+      transition-duration: utils.get-transition-duration('short');
+      transition-timing-function: utils.get-transition-easing('enter-exit');
+      transform: rotate(-90deg) translateY(-#{utils.$border-radius + utils.size('xs')});
+      transform-origin: top right;
+
+      &:hover,
+      &:active {
+        opacity: unset;
+        transform: none;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+
+        --kirby-border-color: initial;
+      }
+    }
+  }
 }
 
 :host-context(.ion-page) {
@@ -26,39 +68,9 @@ fieldset {
 }
 
 kirby-card {
-  position: fixed;
   z-index: utils.z('default') + 1;
+  font-size: utils.font-size('xs');
+  padding: utils.size('xxs');
   top: 0;
   right: 0;
-  margin-top: utils.$border-radius;
-  font-size: utils.font-size('xs');
-  opacity: 0.5;
-  transition-property: transform, border-radius;
-  transition-duration: utils.get-transition-duration('short');
-  transition-timing-function: utils.get-transition-easing('enter-exit');
-  transform: rotate(-90deg) translateY(-#{utils.$border-radius + utils.size('xs')});
-  transform-origin: top right;
-  padding: utils.size('xxs');
-
-  --kirby-border-color: transparent;
-  --text-align: center;
-
-  @include utils.media('>=medium') {
-    top: 0;
-    transform: translateX(40%);
-    padding: utils.size('s');
-
-    --text-align: initial;
-    --kirby-border-color: initial;
-  }
-
-  &:hover,
-  &:active {
-    opacity: unset;
-    transform: none;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-
-    --kirby-border-color: initial;
-  }
 }
