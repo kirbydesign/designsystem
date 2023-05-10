@@ -105,6 +105,10 @@ export class ModalHelper {
       });
     }
 
+    if (config.height) {
+      ionModal.style.setProperty('--kirby-modal-height', config.height);
+    }
+
     await ionModal.present();
 
     this.isModalOpening = false;

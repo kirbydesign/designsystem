@@ -169,7 +169,6 @@ export class ModalWrapperComponent
     this.listenForIonModalDidPresent();
     this.listenForIonModalWillDismiss();
     this.initializeResizeModalToModalWrapper();
-    this.setCustomHeight();
     this.componentPropsInjector = Injector.create({
       providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
       parent: this.injector,
@@ -268,14 +267,6 @@ export class ModalWrapperComponent
     this.observeModalFullHeight();
   }
 
-  private setCustomHeight() {
-    if (!this.config.height || !this.ionModalElement) {
-      return;
-    }
-
-    this.setCssVar(this.ionModalElement, '--kirby-modal-height', this.config.height);
-  }
-
   private initializeModalRoute() {
     if (this.config.modalRoute) {
       this.onSiblingModalRouteActivated(this.config.siblingModalRouteActivated$);
@@ -367,6 +358,7 @@ export class ModalWrapperComponent
         if (scrollInfo.scrollTop > contentScrolledOffsetInPixels !== this.isContentScrolled) {
           this.zone.run(() => {
             this.isContentScrolled = !this.isContentScrolled;
+            console.log(this.isContentScrolled);
           });
         }
       });
