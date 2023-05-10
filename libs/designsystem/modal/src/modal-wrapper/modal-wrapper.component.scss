@@ -93,10 +93,8 @@ ion-header {
   }
 }
 
-:host(.content-scrolled) {
-  ion-header ion-toolbar {
-    border-bottom-color: utils.get-color('medium');
-  }
+ion-header.content-scrolled ion-toolbar {
+  border-bottom-color: utils.get-color('medium');
 }
 
 :host-context(ion-modal.kirby-drawer:not(.kirby-modal-full-height)) {

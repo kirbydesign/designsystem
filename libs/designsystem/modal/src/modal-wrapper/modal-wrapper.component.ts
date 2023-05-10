@@ -130,9 +130,7 @@ export class ModalWrapperComponent
     return this._intersectionObserver;
   }
 
-  @HostBinding('class.content-scrolled')
   isContentScrolled: boolean;
-
   private contentScrolled$: Observable<ScrollDetail>;
 
   private destroy$: Subject<void> = new Subject<void>();
@@ -342,11 +340,13 @@ export class ModalWrapperComponent
   }
 
   /*
-   * Runs scroll subscription outside zone to avoid extensive amount of CD cycles.
-   * Still updates the property inside zone so it is picked up by change detection
-   * and properly synced to the template.
+   * Runs scroll subscription outside zone to avoid extensive amount of CD cycles
+   * when ionScroll emits.
    */
   private initializeContentScrollListening() {
+    // TODO: make issue for optimization, listen for media query and turn subscription on/off
+    // if (this.platform.isPhabletOrBigger()) return;
+
     this.zone.runOutsideAngular(() => {
       this.contentScrolled$ = this.ionContent.ionScroll.pipe(
         debounceTime(contentScrollDebounceTimeInMS),
@@ -356,10 +356,8 @@ export class ModalWrapperComponent
 
       this.contentScrolled$.subscribe((scrollInfo: ScrollDetail) => {
         if (scrollInfo.scrollTop > contentScrolledOffsetInPixels !== this.isContentScrolled) {
-          this.zone.run(() => {
-            this.isContentScrolled = !this.isContentScrolled;
-            console.log(this.isContentScrolled);
-          });
+          this.isContentScrolled = !this.isContentScrolled;
+          this.changeDetector.detectChanges();
         }
       });
     });
