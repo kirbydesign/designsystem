@@ -95,7 +95,7 @@ ion-header {
   }
 }
 
-:host-context(ion-modal:not(.kirby-modal-full-height)) {
+:host-context(ion-modal.kirby-drawer:not(.kirby-modal-full-height)) {
   @include utils.media('<medium') {
     @include contain-content;
   }
