@@ -9,6 +9,7 @@ import {
   Directive,
   ElementRef,
   EventEmitter,
+  HostBinding,
   HostListener,
   Inject,
   InjectionToken,
@@ -140,11 +141,13 @@ export class PageStickyContentDirective {}
   template: `
     <ng-content></ng-content>
   `,
-  styles: [':host {display: flex}'],
+  styles: [':host {display: flex; margin-inline-end: 4px; }'],
 })
 export class PageProgressComponent extends ModalElementComponent {
   // TODO: Find alternative implementation, which aligns with future page configuration / consumption
   // This implementation was chosen over expanding `moveChild` method in component wrapper with yet another scenario
+  @HostBinding('attr.slot') slot = 'start';
+
   constructor(
     @Optional() modalElementsAdvertiser: ModalElementsAdvertiser,
     elementRef: ElementRef<HTMLElement>
