@@ -89,6 +89,12 @@ export const kirbyIconSettings: IconSettings = {
     { name: 'upload', svg: 'assets/kirby/icons/svg/upload.svg' },
     { name: 'document', svg: 'assets/kirby/icons/svg/document.svg' },
     { name: 'chat', svg: 'assets/kirby/icons/svg/chat.svg' },
+    { name: 'feedback', svg: 'assets/kirby/icons/svg/feedback.svg' },
+    { name: 'keyboard', svg: 'assets/kirby/icons/svg/keyboard.svg' },
+    { name: 'lock', svg: 'assets/kirby/icons/svg/lock.svg' },
+    { name: 'see', svg: 'assets/kirby/icons/svg/see.svg' },
+    { name: 'overview', svg: 'assets/kirby/icons/svg/overview.svg' },
+    { name: 'overview-outline', svg: 'assets/kirby/icons/svg/overview-outline.svg' },
   ],
 };
 
