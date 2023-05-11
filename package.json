@@ -72,7 +72,7 @@
     "transpile:generate-mocks": "tsc -b tools/generate-mocks",
     "coverage-report": "cat ./coverage/lcov.info | coveralls",
     "extract-scss-variables": "node ./scripts/sass-extract-to-ts.js",
-    "generate-mocks": "npm run build:core && node ./scripts/generate-mocks.js",
+    "generate-mocks": "node ./scripts/generate-mocks.js",
     "affected:apps": "nx affected:apps",
     "affected:libs": "nx affected:libs",
     "affected:build": "nx affected:build",
