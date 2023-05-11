@@ -471,11 +471,14 @@ export class PageComponent
   }
 
   private setToolbarBackgroundPart() {
-    this.ionToolbarElement?.nativeElement.componentOnReady().then((toolbar) => {
-      const toolbarBackground = toolbar.shadowRoot.querySelector('.toolbar-background');
-      if (toolbarBackground) {
-        this.renderer.setAttribute(toolbarBackground, 'part', 'background');
-      }
+    // Ensure ion-toolbar custom element has been defined (primarily when testing, but doesn't hurt):
+    customElements.whenDefined(this.ionToolbarElement.nativeElement.localName).then(() => {
+      this.ionToolbarElement.nativeElement.componentOnReady().then((toolbar) => {
+        const toolbarBackground = toolbar.shadowRoot.querySelector('.toolbar-background');
+        if (toolbarBackground) {
+          this.renderer.setAttribute(toolbarBackground, 'part', 'background');
+        }
+      });
     });
   }
 
@@ -729,8 +732,7 @@ export class PageComponent
 
   private createStickyContentIntersectionObserver() {
     const options: IntersectionObserverInit = {
-      // TODO: Should sticky content also use ion-content as root?
-      // root: this.ionContentElement.nativeElement,
+      root: this.ionContentElement.nativeElement,
       threshold: 1,
     };
 
