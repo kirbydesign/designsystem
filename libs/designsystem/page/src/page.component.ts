@@ -50,7 +50,11 @@ import {
   ModalNavigationService,
 } from '@kirbydesign/designsystem/modal';
 import { FitHeadingConfig, ResizeObserverService } from '@kirbydesign/designsystem/shared';
-import { HeaderActionsDirective, HeaderComponent } from '@kirbydesign/designsystem/header';
+import {
+  HeaderActionsDirective,
+  HeaderComponent,
+  HeaderTitleActionIconDirective,
+} from '@kirbydesign/designsystem/header';
 import { ACTIONGROUP_CONFIG, ActionGroupConfig } from '@kirbydesign/designsystem/action-group';
 
 /**
@@ -274,6 +278,9 @@ export class PageComponent
   fixedActionsTemplate: TemplateRef<any>;
   stickyContentTemplate: TemplateRef<PageStickyContentDirective>;
   headerActionsTemplate: TemplateRef<HeaderActionsDirective>;
+  titleActionIconTemplate: TemplateRef<HeaderTitleActionIconDirective>;
+  headerTitleClick?: EventEmitter<PointerEvent>;
+  hasInteractiveTitle = false;
 
   private titleIntersectionObserver?: IntersectionObserver;
   private stickyActionsIntersectionObserver?: IntersectionObserver;
@@ -439,6 +446,10 @@ export class PageComponent
     return `max-width-${this.maxWidth}`;
   }
 
+  onTitleClick(event: PointerEvent) {
+    this.headerTitleClick?.emit(event);
+  }
+
   private removeWrapper() {
     const parent = this.elementRef.nativeElement.parentNode;
     this.renderer.removeChild(parent, this.elementRef.nativeElement);
@@ -505,6 +516,13 @@ export class PageComponent
   private initializeHeader() {
     if (this.hasHeader === undefined && !!this.header) {
       this.hasHeader = true;
+      // Header could later be removed from DOM (e.g. in virtual scrolling scenarios),
+      // so store a reference to `header.titleActionIconTemplate` and `header.titleClick`:
+      this.titleActionIconTemplate = this.header.titleActionIconTemplate;
+      if (this.header.titleClick.observed) {
+        this.hasInteractiveTitle = true;
+        this.headerTitleClick = this.header.titleClick;
+      }
     }
   }
 

@@ -33,6 +33,18 @@
 :host(.centered) {
   align-items: center;
 
+  .container {
+    align-items: center;
+
+    & > h1.title {
+      text-align: center;
+
+      &.has-icon {
+        justify-content: center;
+      }
+    }
+  }
+
   .title-container {
     align-items: center;
     text-align: center;
@@ -44,6 +56,11 @@
       align-self: stretch;
     }
 
+    .actions {
+      align-self: flex-start;
+    }
+
+    .container > h1.title,
     .title-container {
       grid-column-start: 2;
     }
@@ -89,6 +106,16 @@
 
 .title {
   margin-bottom: utils.size('xxxxs');
+
+  &.clickable {
+    cursor: pointer;
+  }
+
+  &.has-icon {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
 }
 
 .value {
