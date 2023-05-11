@@ -10,7 +10,7 @@ export interface ModalConfig {
   collapseTitle?: boolean;
   component: any;
   size?: ModalSize;
-  height?: string;
+  customHeight?: string;
   modalRoute?: ActivatedRoute;
   siblingModalRouteActivated$?: Observable<ActivatedRoute>;
   flavor?: ModalFlavor;
