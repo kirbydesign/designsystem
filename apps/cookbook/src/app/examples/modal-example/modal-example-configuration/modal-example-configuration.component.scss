@@ -22,3 +22,7 @@
     margin-block: utils.size('xxs');
   }
 }
+
+kirby-divider:first-child {
+  display: none;
+}

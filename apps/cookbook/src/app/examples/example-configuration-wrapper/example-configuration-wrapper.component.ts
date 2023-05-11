@@ -8,7 +8,7 @@ import { Component, HostBinding, Input } from '@angular/core';
 export class ExampleConfigurationWrapperComponent {
   @HostBinding('class')
   @Input()
-  displayMode: 'none' | 'snap' | 'toggle' = 'none';
+  configAppearance: 'block' | 'snap-to-viewport' | 'toggle' = 'block';
 
   @HostBinding('class.show-config')
   showConfig: boolean = false;

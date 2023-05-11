@@ -7,23 +7,20 @@ import { EmbeddedModalExampleComponent } from './embedded-modal-example/embedded
 const config = {
   selector: 'cookbook-modal-example-sizes',
   template: `<button kirby-button (click)="showExampleModal('small')">Show small modal</button>
-  <button kirby-button (click)="showExampleModal('medium')">Show medium modal</button>
-  <button kirby-button (click)="showExampleModal('large')">Show large modal</button>
-  <button kirby-button (click)="showExampleModal('large', '400px')">Show custom height modal</button>
+<button kirby-button (click)="showExampleModal('medium')">Show medium modal</button>
+<button kirby-button (click)="showExampleModal('large')">Show large modal</button>
+<button kirby-button (click)="showExampleModal('large', '400px')">Show custom height modal</button>
   `,
   showModalCodeSnippet: `constructor(private modalController: ModalController) {}
 
-  showExampleModal(size: ModalSize, customHeight?: string) {
+showExampleModal(size?: ModalSize, customHeight?: string) {
   const config: ModalConfig = {
     flavor: 'modal',
     component: YourEmbeddedModalComponent,
     size,
     customHeight,
-    componentProps: {
-      prop1: 'value1',
-      prop2: 'value2'
-    }
   };
+
   this.modalController.showModal(config);
 }`,
 };
@@ -54,7 +51,7 @@ export class ModalExampleSizesComponent {
       size,
       customHeight,
       componentProps: {
-        title: `Modal - ${size}`,
+        title: `Modal - ${customHeight ? 'customHeight: ' + customHeight : size}`,
         subtitle: 'Hello from the first embedded example component!',
         showNestedOptions: true,
         modalSizeOptions: this.modalSizeOptions,

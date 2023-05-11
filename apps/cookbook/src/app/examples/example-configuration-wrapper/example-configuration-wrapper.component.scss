@@ -22,7 +22,7 @@
     }
   }
 
-  &.snap {
+  &.snap-to-viewport {
     kirby-card {
       position: fixed;
       margin-top: utils.$border-radius;

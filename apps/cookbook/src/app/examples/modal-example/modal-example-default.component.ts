@@ -11,7 +11,7 @@ const config = {
   template: `<button kirby-button (click)="showModal()" [disabled]="interactWithBackground || preventInteraction">Show modal</button>
   <button kirby-button (click)="showDrawer()" [disabled]="preventInteraction">Show drawer</button>
   <button kirby-button (click)="showCompact()" [disabled]="interactWithBackground || preventInteraction">Show compact</button>
-  <cookbook-example-configuration-wrapper displayMode="toggle">
+  <cookbook-example-configuration-wrapper configAppearance="toggle">
       <cookbook-modal-example-configuration [disabled]="preventInteraction" [(showDummyKeyboard)]="showDummyKeyboard"
         [(showPageProgress)]="showPageProgress"
         [(showFooter)]="showFooter"

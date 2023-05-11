@@ -45,7 +45,7 @@ export class ModalShowcaseComponent {
     },
     {
       name: 'size',
-      description: `(Optional) Defines the modal width and height on larger screens, where the modal is not full-screen.`,
+      description: `(Optional) Defines the modal width and height on larger screens. On smaller screens`,
       defaultValue: 'medium',
       type: ['undefined', 'small', 'medium', 'large', 'full-height'],
     },
