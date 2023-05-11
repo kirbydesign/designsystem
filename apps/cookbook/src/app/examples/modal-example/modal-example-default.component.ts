@@ -9,33 +9,34 @@ import { EmbeddedModalExampleComponent } from './embedded-modal-example/embedded
 const config = {
   selector: 'cookbook-modal-example-default',
   template: `<button kirby-button (click)="showModal()" [disabled]="interactWithBackground || preventInteraction">Show modal</button>
-    <button kirby-button (click)="showDrawer()" [disabled]="preventInteraction">Show drawer</button>
-    <button kirby-button (click)="showCompact()" [disabled]="interactWithBackground || preventInteraction">Show compact</button>
+  <button kirby-button (click)="showDrawer()" [disabled]="preventInteraction">Show drawer</button>
+  <button kirby-button (click)="showCompact()" [disabled]="interactWithBackground || preventInteraction">Show compact</button>
   <cookbook-example-configuration-wrapper displayMode="toggle">
       <cookbook-modal-example-configuration [disabled]="preventInteraction" [(showDummyKeyboard)]="showDummyKeyboard"
-      [(showPageProgress)]="showPageProgress"
-      [(showFooter)]="showFooter"
-      [(snapFooterToKeyboard)]="snapFooterToKeyboard"
-      [(displayFooterAsInline)]="displayFooterAsInline"
-      [(collapseTitle)]="collapseTitle"
-      [(alertBeforeClose)]="alertBeforeClose"
-      [(showDummyContent)]="showDummyContent"
-      [(delayLoadDummyContent)]="delayLoadDummyContent"
-      [(loadAdditionalContent)]="loadAdditionalContent"
-      [(openFullHeight)]="openFullHeight"
-      [(interactWithBackground)]="interactWithBackground"
-      [(customCssClass)]="customCssClass"
-      [modalSizeOptions]="modalSizeOptions"
-      (selectedModalSizeOption)="setSelectedModalSize($event)"
+        [(showPageProgress)]="showPageProgress"
+        [(showFooter)]="showFooter"
+        [(snapFooterToKeyboard)]="snapFooterToKeyboard"
+        [(displayFooterAsInline)]="displayFooterAsInline"
+        [(collapseTitle)]="collapseTitle"
+        [(alertBeforeClose)]="alertBeforeClose"
+        [(showDummyContent)]="showDummyContent"
+        [(delayLoadDummyContent)]="delayLoadDummyContent"
+        [(loadAdditionalContent)]="loadAdditionalContent"
+        [(interactWithBackground)]="interactWithBackground"
+        [(customCssClass)]="customCssClass"
+        [modalSizeOptions]="modalSizeOptions"
+        (selectedModalSizeOption)="setSelectedModalSize($event)"
       
       >
       </cookbook-modal-example-configuration>
   </cookbook-example-configuration-wrapper>
   
   <ng-container *ngIf="interactWithBackground">
-    <p *ngFor="let dummyText of dummyBackgroundTexts">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non neque vitae felis ultricies imperdiet in ut orci. Aenean sodales, augue ac consectetur sodales, neque velit condimentum nulla, at ultrices dolor tortor a nunc. Proin tellus nibh, venenatis eget quam ut, blandit cursus ante. Pellentesque convallis pretium orci vitae porta.
-    </p>
+    <section class="dummy-text-section">
+      <p *ngFor="let dummyText of dummyBackgroundTexts">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non neque vitae felis ultricies imperdiet in ut orci. Aenean sodales, augue ac consectetur sodales, neque velit condimentum nulla, at ultrices dolor tortor a nunc. Proin tellus nibh, venenatis eget quam ut, blandit cursus ante. Pellentesque convallis pretium orci vitae porta.
+      </p>
+    </section>
   </ng-container>
   `,
   titleTemplate: `<kirby-page-title>My Modal Title</kirby-page-title>
@@ -235,13 +236,14 @@ export class ModalExampleDefaultComponent {
   collapseTitle = false;
   alertBeforeClose = false;
   showDummyContent = true;
+  showNestedDummyContent = true;
   delayLoadDummyContent = true;
   loadAdditionalContent = false;
-  openFullHeight = false;
   interactWithBackground = false;
   customCssClass = false;
   dummyBackgroundTexts = new Array(100).map(() => '');
   preventInteraction = false;
+
   modalSizeOptions = [
     { text: 'Small', value: 'small' },
     { text: 'Medium (default)', value: 'medium' },
@@ -284,8 +286,8 @@ export class ModalExampleDefaultComponent {
         showStaticDummyContent: this.interactWithBackground,
         delayLoadDummyContent: this.delayLoadDummyContent,
         loadAdditionalContent: this.loadAdditionalContent,
+        showNestedDummyContent: this.showNestedDummyContent,
         disableScroll: false,
-        openFullHeight: this.openFullHeight,
         modalSizeOptions: this.modalSizeOptions,
       },
     };

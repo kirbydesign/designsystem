@@ -29,7 +29,7 @@ export class ModalExampleConfigurationComponent {
   @Input() showFooter: boolean;
   @Output() showFooterChange = new EventEmitter<boolean>();
 
-  @Input() displayFooterAsInline: boolean = false;
+  @Input() displayFooterAsInline: boolean;
   @Output() displayFooterAsInlineChange = new EventEmitter<boolean>();
 
   @Input() showDummyContent: boolean;
@@ -43,9 +43,6 @@ export class ModalExampleConfigurationComponent {
 
   @Input() disableScroll: boolean;
   @Output() disableScrollChange = new EventEmitter<boolean>();
-
-  @Input() openFullHeight: boolean;
-  @Output() openFullHeightChange = new EventEmitter<boolean>();
 
   @Input() interactWithBackground: boolean;
   @Output() interactWithBackgroundChange = new EventEmitter<boolean>();
@@ -137,12 +134,6 @@ export class ModalExampleConfigurationComponent {
     if (this.preventChangeEvent) return;
     this.disableScroll = show;
     this.disableScrollChange.emit(this.disableScroll);
-  }
-
-  toggleOpenFullHeight(show: boolean) {
-    if (this.preventChangeEvent) return;
-    this.openFullHeight = show;
-    this.openFullHeightChange.emit(this.openFullHeight);
   }
 
   toggleInteractWithBackground(show: boolean) {

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { ModalController } from '@kirbydesign/designsystem';
 import { ModalExampleDefaultComponent } from '~/app/examples/modal-example/modal-example-default.component';
+import { ModalExampleSizesComponent } from '~/app/examples/modal-example/modal-example-sizes.component';
 import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
 import {
   ApiDescriptionProperty,
@@ -15,8 +15,7 @@ import {
 })
 export class ModalShowcaseComponent {
   defaultExample = ModalExampleDefaultComponent;
-
-  constructor(private modalController: ModalController) {}
+  sizesExample = ModalExampleSizesComponent;
 
   scrollTo(target: Element) {
     target.scrollIntoView({ behavior: 'smooth' });
@@ -46,10 +45,15 @@ export class ModalShowcaseComponent {
     },
     {
       name: 'size',
-      description: `(Optional) The initial size of the modal before content is loaded.
-        The \`full-height\` option will take up as much vertical space as possible and not resize with content or native keyboard.`,
-      defaultValue: 'medium (modal) | small (drawer)',
+      description: `(Optional) Defines the modal width and height on larger screens, where the modal is not full-screen.`,
+      defaultValue: 'medium',
       type: ['undefined', 'small', 'medium', 'large', 'full-height'],
+    },
+    {
+      name: 'customHeight',
+      description: ``,
+      defaultValue: 'undefined',
+      type: ['undefined | string'],
     },
     {
       name: 'component',

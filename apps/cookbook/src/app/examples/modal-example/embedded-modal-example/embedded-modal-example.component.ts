@@ -32,25 +32,17 @@ export class EmbeddedModalExampleComponent implements OnInit {
   snapFooterToKeyboard: boolean;
   showDummyContent: boolean;
   showStaticDummyContent: boolean;
-  showNestedPageProgress: boolean = false;
-  showNestedFooter: boolean = false;
-  snapNestedFooterToKeyboard: boolean = false;
-  showNestedDummyContent: boolean = true;
+  showNestedPageProgress: boolean;
+  showNestedFooter: boolean;
+  snapNestedFooterToKeyboard: boolean;
+  showNestedDummyContent: boolean;
   delayLoadDummyContent: boolean;
   loadAdditionalContent: boolean;
-  disableScroll: boolean = false;
-  displayFooterAsInline: boolean = false;
-  openFullHeight: boolean;
+  disableScroll: boolean;
+  displayFooterAsInline: boolean;
 
   isLoading = false;
   isLoadingAdditionalContent = false;
-
-  modalSizeOptions = [
-    { text: 'small', value: 'small' },
-    { text: 'medium (default)', value: 'medium' },
-    { text: 'large', value: 'large' },
-    { text: 'full-height', value: 'full-height' },
-  ];
 
   selectedModalSize: ModalSize;
 
@@ -100,7 +92,6 @@ export class EmbeddedModalExampleComponent implements OnInit {
         showDummyContent: this.showNestedDummyContent,
         delayLoadDummyContent: this.delayLoadDummyContent,
         loadAdditionalContent: this.loadAdditionalContent,
-        modalSizeOptions: this.modalSizeOptions,
       },
     };
 

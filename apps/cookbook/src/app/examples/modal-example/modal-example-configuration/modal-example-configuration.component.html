@@ -32,6 +32,7 @@
 ></kirby-checkbox>
 
 <kirby-checkbox
+  *ngIf="snapFooterToKeyboard !== undefined"
   [checked]="snapFooterToKeyboard"
   (checkedChange)="toggleSnapFooterToKeyboard($event)"
   [disabled]="disabled || !showFooter"
@@ -74,27 +75,21 @@
 ></kirby-checkbox>
 
 <kirby-checkbox
-  *ngIf="openFullHeight !== undefined"
-  [checked]="openFullHeight && !interactWithBackground"
-  (checkedChange)="toggleOpenFullHeight($event)"
-  [disabled]="interactWithBackground || disabled"
-  text="Open in full height"
-></kirby-checkbox>
-
-<kirby-checkbox
+  *ngIf="collapseTitle !== undefined"
   [checked]="collapseTitle"
   (checkedChange)="toggleCollapseTitle($event)"
   [disabled]="disabled"
   text="Collapse title"
 ></kirby-checkbox>
 
-<small>
+<small *ngIf="collapseTitle !== undefined">
   (Collapse title is unavailable for routed modals. See
   <a href="https://github.com/kirbydesign/designsystem/issues/2192" target="_blank">issue #2192</a>
   .)
 </small>
 
 <kirby-checkbox
+  *ngIf="alertBeforeClose !== undefined"
   [checked]="alertBeforeClose"
   (checkedChange)="toggleAlertBeforeClose($event)"
   [disabled]="disabled"
@@ -105,6 +100,7 @@
 <p>Modal and drawer size on screens larger than 768px:</p>
 
 <kirby-dropdown
+  *ngIf="modalSizeOptions !== undefined"
   [items]="modalSizeOptions"
   (change)="changeSize($event)"
   [usePopover]="true"

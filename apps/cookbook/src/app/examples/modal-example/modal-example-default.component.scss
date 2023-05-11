@@ -1,19 +1,16 @@
 @use '@kirbydesign/core/src/scss/utils';
 @use '../examples.shared';
+@use 'modal-playground.shared';
 
 :host {
   height: initial; // reset height from _examples.shared.scss to position buttons in middle
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
 kirby-card {
   --kirby-card-width: fit-content;
 }
 
-button {
-  min-width: 15rem;
+.dummy-text-section {
+  position: absolute;
+  top: 90vh;
 }

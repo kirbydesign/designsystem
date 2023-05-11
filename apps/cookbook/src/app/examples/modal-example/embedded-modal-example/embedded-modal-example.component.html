@@ -9,11 +9,11 @@
 <kirby-loading-overlay [isLoading]="isLoading">
   <div *ngIf="!isLoading">
     <ng-container *ngIf="!showStaticDummyContent">
-      <p>{{ subtitle }}</p>
-      <kirby-form-field>
-        <input kirby-input placeholder="Focus me on device to see keyboard" />
-      </kirby-form-field>
       <ng-container *ngIf="showDummyContent">
+        <p>{{ subtitle }}</p>
+        <kirby-form-field>
+          <input kirby-input placeholder="Focus me on device to see keyboard" />
+        </kirby-form-field>
         <div class="example-properties" *ngIf="exampleProperties">
           <h4>Component properties (injected from parent component):</h4>
           <dl>
@@ -29,8 +29,8 @@
           Scroll to bottom
           <kirby-icon name="arrow-down"></kirby-icon>
         </button>
+        <button kirby-button (click)="close()">Hide me</button>
       </ng-container>
-      <button kirby-button (click)="close()">Hide me</button>
       <kirby-card
         *ngIf="showNestedOptions"
         hasPadding="true"
@@ -52,15 +52,11 @@
             [(showDummyContent)]="showNestedDummyContent"
             [(delayLoadDummyContent)]="delayLoadDummyContent"
             [(loadAdditionalContent)]="loadAdditionalContent"
-            [(openFullHeight)]="openFullHeight"
             [modalSizeOptions]="modalSizeOptions"
             (selectedModalSizeOption)="setSelectedModalSize($event)"
           ></cookbook-modal-example-configuration>
         </cookbook-example-configuration-wrapper>
       </kirby-card>
-    </ng-container>
-
-    <div *ngIf="showStaticDummyContent">
       <h4>The standard Lorem Ipsum passage, used since the 1500s</h4>
       <p>
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
@@ -68,8 +64,13 @@
         laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
         voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
         cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+        ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
       </p>
-    </div>
+    </ng-container>
 
     <div *ngIf="showDummyContent">
       <kirby-form-field>

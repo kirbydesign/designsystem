@@ -9,7 +9,7 @@
     align-items: end;
     position: absolute;
     right: utils.size('s');
-    top: utils.size('s');
+    top: calc(utils.size('s') + var(--ion-safe-area-top));
 
     &.show-config {
       kirby-card {
