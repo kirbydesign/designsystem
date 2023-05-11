@@ -95,7 +95,7 @@ describe('PageComponent', () => {
     ],
   });
 
-  beforeAll(async () => {
+  beforeAll(() => {
     //Ensure css transitions run immediately:
     const testStyles = window.document.createElement('style');
     testStyles.innerHTML =
@@ -154,7 +154,7 @@ describe('PageComponent', () => {
 
         describe('divider and shaded background', () => {
           describe('before scroll', () => {
-            it('should not render toolbar divider', async () => {
+            it('should not render toolbar divider', () => {
               expect(ionToolbar).toHaveComputedStyle(
                 {
                   'background-color': 'rgba(0, 0, 0, 0)',
@@ -163,7 +163,7 @@ describe('PageComponent', () => {
               );
             });
 
-            it('should not render shaded toolbar background', async () => {
+            it('should not render shaded toolbar background', () => {
               const toolbarBackground = ionToolbar.shadowRoot.querySelector('.toolbar-background');
               expect(toolbarBackground).toHaveComputedStyle({
                 'background-color': getColor('background-color'),
@@ -183,7 +183,7 @@ describe('PageComponent', () => {
               await TestHelper.whenTrue(() => spectator.component.isContentScrolled);
             });
 
-            it('should render toolbar divider', async () => {
+            it('should render toolbar divider', () => {
               expect(ionToolbar).toHaveComputedStyle(
                 {
                   'background-color': getColor('medium'),
@@ -192,7 +192,7 @@ describe('PageComponent', () => {
               );
             });
 
-            it('should render shaded toolbar background', async () => {
+            it('should render shaded toolbar background', () => {
               const toolbarBackground = ionToolbar.shadowRoot.querySelector('.toolbar-background');
               expect(toolbarBackground).toHaveComputedStyle({
                 'background-color': shadedBackgroundColor,
@@ -214,7 +214,7 @@ describe('PageComponent', () => {
 
       describe('toolbar', () => {
         describe('height', () => {
-          it('should be correct on tablet', async () => {
+          it('should be correct on tablet', () => {
             expect(ionToolbar).toHaveComputedStyle({ height: size('xxxxxl') });
           });
         });
@@ -237,7 +237,7 @@ describe('PageComponent', () => {
           });
         });
 
-        it('should render toolbar divider by default', async () => {
+        it('should render toolbar divider by default', () => {
           expect(ionToolbar).toHaveComputedStyle(
             {
               'background-color': getColor('medium'),
@@ -246,7 +246,7 @@ describe('PageComponent', () => {
           );
         });
 
-        it('should render shaded toolbar background by default', async () => {
+        it('should render shaded toolbar background by default', () => {
           const toolbarBackground = ionToolbar.shadowRoot.querySelector('.toolbar-background');
           expect(toolbarBackground).toHaveComputedStyle({
             'background-color': shadedBackgroundColor,
@@ -679,7 +679,7 @@ describe('PageComponent', () => {
         expect(stickyContentContainer).toBeDefined();
       });
 
-      it('should render sticky content with correct background color', async () => {
+      it('should render sticky content with correct background color', () => {
         expect(stickyContentContainer).toHaveComputedStyle(
           {
             'background-color': getColor('background-color'),
@@ -688,7 +688,7 @@ describe('PageComponent', () => {
         );
       });
 
-      it('should not render sticky content divider', async () => {
+      it('should not render sticky content divider', () => {
         expect(stickyContentContainer).toHaveComputedStyle(
           {
             'background-color': 'rgba(0, 0, 0, 0)',
@@ -708,7 +708,7 @@ describe('PageComponent', () => {
       });
 
       describe('before scroll', () => {
-        it('should not render toolbar divider', async () => {
+        it('should not render toolbar divider', () => {
           expect(ionToolbar).toHaveComputedStyle(
             {
               'background-color': 'rgba(0, 0, 0, 0)',
@@ -717,7 +717,7 @@ describe('PageComponent', () => {
           );
         });
 
-        it('should not render shaded toolbar background', async () => {
+        it('should not render shaded toolbar background', () => {
           const toolbarBackground = ionToolbar.shadowRoot.querySelector('.toolbar-background');
           expect(toolbarBackground).toHaveComputedStyle({
             'background-color': getColor('background-color'),
@@ -736,7 +736,7 @@ describe('PageComponent', () => {
           await TestHelper.whenTrue(() => spectator.component.isContentScrolled);
         });
 
-        it('should render toolbar divider', async () => {
+        it('should render toolbar divider', () => {
           expect(ionToolbar).toHaveComputedStyle(
             {
               'background-color': getColor('medium'),
@@ -745,7 +745,7 @@ describe('PageComponent', () => {
           );
         });
 
-        it('should render shaded toolbar background', async () => {
+        it('should render shaded toolbar background', () => {
           const toolbarBackground = ionToolbar.shadowRoot.querySelector('.toolbar-background');
           expect(toolbarBackground).toHaveComputedStyle({
             'background-color': shadedBackgroundColor,
@@ -763,7 +763,7 @@ describe('PageComponent', () => {
           await TestHelper.whenTrue(() => spectator.component.isStickyContentPinned);
         });
 
-        it('should render sticky content with correct background color', async () => {
+        it('should render sticky content with correct background color', () => {
           expect(stickyContentContainer).toHaveComputedStyle(
             {
               'background-color': shadedBackgroundColor,
@@ -772,7 +772,7 @@ describe('PageComponent', () => {
           );
         });
 
-        it('should render sticky content divider', async () => {
+        it('should render sticky content divider', () => {
           expect(stickyContentContainer).toHaveComputedStyle(
             {
               'background-color': getColor('medium'),
@@ -784,7 +784,7 @@ describe('PageComponent', () => {
           );
         });
 
-        it('should not render toolbar divider', async () => {
+        it('should not render toolbar divider', () => {
           expect(ionToolbar).toHaveComputedStyle(
             {
               'background-color': 'rgba(0, 0, 0, 0)',
@@ -793,7 +793,7 @@ describe('PageComponent', () => {
           );
         });
 
-        it('should render shaded toolbar background', async () => {
+        it('should render shaded toolbar background', () => {
           const toolbarBackground = ionToolbar.shadowRoot.querySelector('.toolbar-background');
           expect(toolbarBackground).toHaveComputedStyle({
             'background-color': shadedBackgroundColor,
@@ -812,7 +812,7 @@ describe('PageComponent', () => {
       });
 
       describe('before scroll', () => {
-        it('should render toolbar divider by default', async () => {
+        it('should render toolbar divider by default', () => {
           expect(ionToolbar).toHaveComputedStyle(
             {
               'background-color': getColor('medium'),
@@ -824,7 +824,7 @@ describe('PageComponent', () => {
           );
         });
 
-        it('should render shaded toolbar background by default', async () => {
+        it('should render shaded toolbar background by default', () => {
           const toolbarBackground = ionToolbar.shadowRoot.querySelector('.toolbar-background');
           expect(toolbarBackground).toHaveComputedStyle({
             'background-color': shadedBackgroundColor,
@@ -842,7 +842,7 @@ describe('PageComponent', () => {
           await TestHelper.whenTrue(() => spectator.component.isStickyContentPinned);
         });
 
-        it('should render sticky content with correct background color', async () => {
+        it('should render sticky content with correct background color', () => {
           expect(stickyContentContainer).toHaveComputedStyle(
             {
               'background-color': shadedBackgroundColor,
@@ -851,7 +851,7 @@ describe('PageComponent', () => {
           );
         });
 
-        it('should render sticky content divider', async () => {
+        it('should render sticky content divider', () => {
           expect(stickyContentContainer).toHaveComputedStyle(
             {
               'background-color': getColor('medium'),
@@ -863,7 +863,7 @@ describe('PageComponent', () => {
           );
         });
 
-        it('should not render toolbar divider', async () => {
+        it('should not render toolbar divider', () => {
           expect(ionToolbar).toHaveComputedStyle(
             {
               'background-color': 'rgba(0, 0, 0, 0)',
@@ -872,7 +872,7 @@ describe('PageComponent', () => {
           );
         });
 
-        it('should render shaded toolbar background', async () => {
+        it('should render shaded toolbar background', () => {
           const toolbarBackground = ionToolbar.shadowRoot.querySelector('.toolbar-background');
           expect(toolbarBackground).toHaveComputedStyle({
             'background-color': shadedBackgroundColor,
