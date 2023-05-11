@@ -349,7 +349,7 @@ export class ModalNavigationService {
     return parentRoute;
   }
 
-  handleBackButtonScenario(modal: HTMLIonModalElement, modalRoute: ActivatedRoute) {
+  handleBackButton(modal: HTMLIonModalElement, isRouterModal: boolean) {
     const initialRoute = this.router.url;
     let isInitialRoute = true;
     const navigationIds = new Set<number>();
@@ -358,7 +358,7 @@ export class ModalNavigationService {
     const popStateSubscription = popStateEvent$.subscribe((event: PopStateEvent) => {
       if (navigationIds.has(event.state.navigationId)) return;
 
-      if (!modalRoute) {
+      if (!isRouterModal) {
         modal.dismiss();
       } else if (isInitialRoute && modal.canDismiss !== true) {
         modal.dismiss();
@@ -392,7 +392,7 @@ export class ModalNavigationService {
     modal.onDidDismiss().then(() => {
       // This if statement cleans up the fake modal state when a
       // normal modal is closed with an alert, ie. not a routing based modal.
-      if (!modalRoute && modal.canDismiss !== true) {
+      if (!isRouterModal && modal.canDismiss !== true) {
         history.go(-2);
       }
 

@@ -113,7 +113,7 @@ export class ModalHelper {
 
     await ionModal.present();
 
-    this.navigationService.handleBackButtonScenario(ionModal, config.modalRoute);
+    this.navigationService.handleBackButton(ionModal, !!config.modalRoute);
 
     this.isModalOpening = false;
 
