@@ -643,6 +643,7 @@ describe('PageComponent', () => {
   });
 
   describe('with sticky content', () => {
+    let ionScrollElement: HTMLElement;
     let stickyContentContainer: HTMLElement;
 
     beforeEach(async () => {
@@ -662,6 +663,7 @@ describe('PageComponent', () => {
       ionContent = spectator.queryHost('ion-content');
       await TestHelper.whenReady(ionToolbar);
       await TestHelper.whenReady(ionContent);
+      ionScrollElement = await ionContent.getScrollElement();
       stickyContentContainer = ionContent.querySelector('.sticky-content-container');
 
       // Ensure content has height:
@@ -776,7 +778,7 @@ describe('PageComponent', () => {
               'background-color': getColor('medium'),
               content: '""',
               height: '1px',
-              width: `${ionToolbar.offsetWidth}px`,
+              width: `${ionScrollElement.offsetWidth}px`,
             },
             ':after'
           );
@@ -855,7 +857,7 @@ describe('PageComponent', () => {
               'background-color': getColor('medium'),
               content: '""',
               height: '1px',
-              width: `${ionToolbar.offsetWidth}px`,
+              width: `${ionScrollElement.offsetWidth}px`,
             },
             ':after'
           );
