@@ -340,13 +340,10 @@ export class ModalWrapperComponent
   }
 
   /*
-   * Runs scroll subscription outside zone to avoid extensive amount of CD cycles
+   * Runs scroll subscription outside zone to avoid excessive amount of CD cycles
    * when ionScroll emits.
    */
   private initializeContentScrollListening() {
-    // TODO: make issue for optimization, listen for media query and turn subscription on/off
-    // if (this.platform.isPhabletOrBigger()) return;
-
     this.zone.runOutsideAngular(() => {
       this.contentScrolled$ = this.ionContent.ionScroll.pipe(
         debounceTime(contentScrollDebounceTimeInMS),
