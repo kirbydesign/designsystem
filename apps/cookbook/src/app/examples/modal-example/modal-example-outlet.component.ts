@@ -11,8 +11,7 @@ const config = {
 <button kirby-button kirbyModalRouterLink="page1" [kirbyModalQueryParams]="{awesomeQueryParam: 'awesome value'}" [kirbyAlertConfig]="alertConfig">Open modal by router link with alert</button>
 <button kirby-button class="deeplink" (click)="navigateToModalRoute(['/examples', 'modal', 'page1'], {awesomeQueryParam: 'awesome value'})">Deep link to modal route</button>
 <button kirby-button class="deeplink" [kirbyModalRouterLink]="['/examples', 'modal', 'page1']" [kirbyModalQueryParams]="{awesomeQueryParam: 'awesome value'}">Deep link to modal by router link</button>
-<button kirby-button class="deeplink" [kirbyModalRouterLink]="['/examples', 'modal-route-with-url-param', '1978', 'page1']">Deep link to modal with url param</button>
-<button kirby-button class="deeplink" [kirbyModalRouterLink]="['/examples', 'modal-route-with-url-param', '1978', 'page1']" [kirbyAlertConfig]="alertConfig">Deep link to modal with alert</button>`,
+<button kirby-button class="deeplink" [kirbyModalRouterLink]="['/examples', 'modal-route-with-url-param', '1978', 'page1']">Deep link to modal with url param</button>`,
   defaultCodeSnippet: `
   readonly alertConfig: AlertConfig = {
     title: 'Do you want to close the modal?',

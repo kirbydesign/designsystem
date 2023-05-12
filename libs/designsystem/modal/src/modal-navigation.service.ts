@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Params, Route, Router, Routes } from '@angular/router';
-import { EMPTY, firstValueFrom, fromEvent, Observable } from 'rxjs';
+import { EMPTY, firstValueFrom, Observable } from 'rxjs';
 import { filter, map, pairwise, startWith } from 'rxjs/operators';
 
 import { Location } from '@angular/common';
@@ -339,16 +339,5 @@ export class ModalNavigationService {
       parentRoute = parentRoute.parent;
     }
     return parentRoute;
-  }
-
-  handleBackButton(modal: HTMLIonModalElement) {
-    const popStateEvent$ = fromEvent(window, 'popstate');
-    const popStateSubscription = popStateEvent$.subscribe(() => {
-      modal.dismiss();
-    });
-
-    modal.onDidDismiss().then(() => {
-      popStateSubscription.unsubscribe();
-    });
   }
 }
