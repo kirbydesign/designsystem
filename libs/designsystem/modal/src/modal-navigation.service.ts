@@ -1,13 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  ActivatedRoute,
-  NavigationEnd,
-  NavigationStart,
-  Params,
-  Route,
-  Router,
-  Routes,
-} from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Params, Route, Router, Routes } from '@angular/router';
 import { EMPTY, firstValueFrom, fromEvent, Observable } from 'rxjs';
 import { filter, map, pairwise, startWith } from 'rxjs/operators';
 
@@ -349,55 +341,14 @@ export class ModalNavigationService {
     return parentRoute;
   }
 
-  handleBackButton(modal: HTMLIonModalElement, isRouterModal: boolean) {
-    const initialRoute = this.router.url;
-    let isInitialRoute = true;
-    const navigationIds = new Set<number>();
-
+  handleBackButton(modal: HTMLIonModalElement) {
     const popStateEvent$ = fromEvent(window, 'popstate');
-    const popStateSubscription = popStateEvent$.subscribe((event: PopStateEvent) => {
-      if (navigationIds.has(event.state.navigationId)) return;
-
-      if (!isRouterModal) {
-        modal.dismiss();
-      } else if (isInitialRoute && modal.canDismiss !== true) {
-        modal.dismiss();
-      }
+    const popStateSubscription = popStateEvent$.subscribe(() => {
+      modal.dismiss();
     });
 
-    const routerEventSubscription = this.router.events
-      .pipe(
-        filter((event) => {
-          return event instanceof NavigationStart;
-        })
-      )
-      .subscribe((event: NavigationStart) => {
-        navigationIds.add(event.id);
-        isInitialRoute = event.url.includes(initialRoute);
-      });
-
-    // Adds a fake modal state to the history stack
-    // when a modal is opened with an alert.
-    // This is to prevent that the page behind the modal navigates back
-    // when the alert is displayed
-
-    if (modal.canDismiss !== true) {
-      const modalState = {
-        modal: true,
-        description: 'fake state for our modal',
-      };
-      history.pushState(modalState, null);
-    }
-
     modal.onDidDismiss().then(() => {
-      // This if statement cleans up the fake modal state when a
-      // normal modal is closed with an alert, ie. not a routing based modal.
-      if (!isRouterModal && modal.canDismiss !== true) {
-        history.go(-2);
-      }
-
       popStateSubscription.unsubscribe();
-      routerEventSubscription.unsubscribe();
     });
   }
 }

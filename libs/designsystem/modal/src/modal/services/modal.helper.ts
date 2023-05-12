@@ -70,11 +70,6 @@ export class ModalHelper {
       let canBeDismissed = false;
       canDismiss = async () => {
         if (!canBeDismissed) {
-          const modalState = {
-            modal: true,
-            description: 'fake state for our modal',
-          };
-          history.pushState(modalState, null);
           canBeDismissed = await this.showAlert(alertConfig);
         }
 
@@ -113,7 +108,11 @@ export class ModalHelper {
 
     await ionModal.present();
 
-    this.navigationService.handleBackButton(ionModal, !!config.modalRoute);
+    // Back button should only be handled manually
+    // if the modal is not instantiated through a route.
+    if (!config.modalRoute && !alertConfig) {
+      this.navigationService.handleBackButton(ionModal);
+    }
 
     this.isModalOpening = false;
 
