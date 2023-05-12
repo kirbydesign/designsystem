@@ -29,7 +29,8 @@ export class ModalShowcaseComponent {
       
       Modals with \`modal\` flavor have a close button placed in the top right corner and are full-screen on small screens.
       
-      Modals with a \`drawer\` flavor slide-up/down and have a arrow-down button placed in the top left corner.
+      Modals with a \`drawer\` flavor appears as a sheet on top of page content on small screens, and adapts its height to fit its content. On
+      larger screens the drawer is identical to the modal.
       
       Modals with a \`compact\` flavor simply render the specified component, similar to alerts.
       Please note: As there is no toolbar or close button, you should handle closing the modal yourself.`,
@@ -45,13 +46,13 @@ export class ModalShowcaseComponent {
     },
     {
       name: 'size',
-      description: `(Optional) Defines the modal width and height on larger screens. On smaller screens`,
+      description: `(Optional) Defines the modal width and height on larger screens. On small screens the modal is always full-screen.`,
       defaultValue: 'medium',
       type: ['undefined', 'small', 'medium', 'large', 'full-height'],
     },
     {
       name: 'customHeight',
-      description: ``,
+      description: `(Optional) Setting a customHeight overrides the fixed height on larger screens. Can be used with any string that is a valid value for the CSS height property. \n\n See: https://developer.mozilla.org/en-US/docs/Web/CSS/height `,
       defaultValue: 'undefined',
       type: ['undefined | string'],
     },

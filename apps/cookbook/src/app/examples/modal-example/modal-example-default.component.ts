@@ -53,7 +53,6 @@ const config = {
 <kirby-modal-footer>
   <button kirby-button (click)="scrollToBottom()">Scroll to bottom</button>
 </kirby-modal-footer>
-...
 `,
   showModalCodeSnippet: `constructor(private modalController: ModalController) {}
 
@@ -203,7 +202,7 @@ export class EmbeddedComponent() {
 })
 export class ModalExampleDefaultComponent {
   static readonly template = config.template.split('<cookbook-example-configuration-wrapper')[0]; // Remove config part of the template
-  static readonly titleTemplate = config.componentTemplate;
+  static readonly componentTemplate = config.componentTemplate;
   static readonly defaultCodeSnippet = [
     config.showModalCodeSnippet,
     config.drawerCodeSnippet,
