@@ -725,7 +725,7 @@ describe('PageComponent', () => {
         });
       });
 
-      describe('after scrolling page title content top', () => {
+      describe('after scrolling page title above content top', () => {
         beforeEach(async () => {
           // Scroll page title above content top:
           const pageTitle: HTMLElement = ionContent.querySelector('.page-title');
