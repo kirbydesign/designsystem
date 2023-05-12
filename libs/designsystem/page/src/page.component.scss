@@ -272,6 +272,7 @@ ion-content {
     width: 100%;
     position: absolute;
     bottom: 0;
+    transform: initial;
 
     .content-inner {
       position: relative;
