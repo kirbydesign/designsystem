@@ -778,7 +778,7 @@ describe('PageComponent', () => {
               'background-color': getColor('medium'),
               content: '""',
               height: '1px',
-              width: `${ionScrollElement.offsetWidth}px`,
+              width: `${ionScrollElement.clientWidth}px`,
             },
             ':after'
           );
@@ -857,7 +857,7 @@ describe('PageComponent', () => {
               'background-color': getColor('medium'),
               content: '""',
               height: '1px',
-              width: `${ionScrollElement.offsetWidth}px`,
+              width: `${ionScrollElement.clientWidth}px`,
             },
             ':after'
           );
