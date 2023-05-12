@@ -4,13 +4,3 @@
 :host {
   overflow-y: auto;
 }
-
-h1 {
-  text-align: center;
-}
-
-@include utils.media('>medium') {
-  .mobile {
-    display: none;
-  }
-}

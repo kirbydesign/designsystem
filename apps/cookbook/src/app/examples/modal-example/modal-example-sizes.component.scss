@@ -1,2 +1,11 @@
+@use '@kirbydesign/core/src/scss/utils';
 @use '../examples.shared';
 @use 'modal-playground.shared';
+
+kirby-card {
+  margin-top: utils.size('l');
+}
+
+kirby-item:last-child {
+  margin-bottom: utils.size('m');
+}

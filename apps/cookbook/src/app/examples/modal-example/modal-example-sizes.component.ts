@@ -1,29 +1,43 @@
 import { Component } from '@angular/core';
 
-import { ModalConfig, ModalController, ModalSize } from '@kirbydesign/designsystem';
+import { ModalConfig, ModalController, ModalFlavor, ModalSize } from '@kirbydesign/designsystem';
 
 import { EmbeddedModalExampleComponent } from './embedded-modal-example/embedded-modal-example.component';
+import { ModalCompactExampleComponent } from './compact-example/modal-compact-example.component';
 
 const config = {
   selector: 'cookbook-modal-example-sizes',
-  template: `<button kirby-button (click)="showExampleModal('small')">Show small modal</button>
-<button kirby-button (click)="showExampleModal('medium')">Show medium modal</button>
-<button kirby-button (click)="showExampleModal('large')">Show large modal</button>
-<button kirby-button (click)="showExampleModal('large', '400px')">Show custom height modal</button>
+  template: `<button kirby-button size="lg" (click)="showModal('modal', size)">Show modal</button>
+<button kirby-button size="lg"(click)="showModal('drawer', size)">Show drawer</button>
+<button kirby-button size="lg" (click)="showModal('compact')">Show compact</button>
+
+<kirby-card>
+  <kirby-card-header
+    [title]="'Size of modal/drawer:'"
+  ></kirby-card-header>
+  <kirby-radio-group [value]="size" (valueChange)="sizeChange($event)">
+    <kirby-item size="xs" *ngFor="let item of modalSizeOptions">
+      <kirby-radio [value]="item" slot="start"></kirby-radio>
+      <kirby-label>{{item.text}}</kirby-label>
+    </kirby-item> 
+  </kirby-radio-group>
+</kirby-card>
+
+
   `,
   showModalCodeSnippet: `constructor(private modalController: ModalController) {}
 
-showExampleModal(size?: ModalSize, customHeight?: string) {
+showModal(flavor: ModalFlavor, size?: ModalSize) {
   const config: ModalConfig = {
-    flavor: 'modal',
     component: YourEmbeddedModalComponent,
+    flavor,
     size,
-    customHeight,
   };
 
   this.modalController.showModal(config);
 }`,
 };
+type ModalSizeOption = { text: string; value: ModalSize };
 
 @Component({
   selector: config.selector,
@@ -31,33 +45,47 @@ showExampleModal(size?: ModalSize, customHeight?: string) {
   styleUrls: ['modal-example-sizes.component.scss'],
 })
 export class ModalExampleSizesComponent {
-  static readonly template = config.template.split('<cookbook-example-configuration-wrapper>')[0]; // Remove config part of the template
+  static readonly template = config.template.split('<kirby-card')[0]; // Remove config part of the template
   static readonly defaultCodeSnippet = [config.showModalCodeSnippet].join('\n\n');
   static readonly showModalCodeSnippet = config.showModalCodeSnippet;
 
-  modalSizeOptions = [
+  modalSizeOptions: ModalSizeOption[] = [
     { text: 'Small', value: 'small' },
     { text: 'Medium (default)', value: 'medium' },
     { text: 'Large', value: 'large' },
     { text: 'Full height (medium width only)', value: 'full-height' },
   ];
 
+  size: ModalSizeOption = this.modalSizeOptions[1];
+
   constructor(private modalController: ModalController) {}
 
-  async showExampleModal(size?: ModalSize, customHeight?: string) {
-    const config: ModalConfig = {
-      flavor: 'modal',
-      component: EmbeddedModalExampleComponent,
-      size,
-      customHeight,
-      componentProps: {
-        title: `Modal - ${customHeight ? 'customHeight: ' + customHeight : size}`,
-        subtitle: 'Hello from the first embedded example component!',
-        showNestedOptions: true,
-        modalSizeOptions: this.modalSizeOptions,
-      },
-    };
+  async showModal(flavor: ModalFlavor, size?: ModalSizeOption) {
+    let config: ModalConfig;
+
+    if (flavor === 'compact') {
+      config = {
+        component: ModalCompactExampleComponent,
+        flavor,
+      };
+    } else {
+      config = {
+        component: EmbeddedModalExampleComponent,
+        flavor,
+        size: size.value,
+        componentProps: {
+          title: `Modal - ${size.text}`,
+          subtitle: 'Hello from the first embedded example component!',
+          showNestedOptions: true,
+          modalSizeOptions: this.modalSizeOptions,
+        },
+      };
+    }
 
     await this.modalController.showModal(config);
+  }
+
+  sizeChange(size: ModalSizeOption) {
+    this.size = size;
   }
 }

@@ -2,10 +2,6 @@
 @use '../examples.shared';
 @use 'modal-playground.shared';
 
-:host {
-  height: initial; // reset height from _examples.shared.scss to position buttons in middle
-}
-
 kirby-card {
   --kirby-card-width: fit-content;
 }

@@ -8,43 +8,37 @@ import { EmbeddedModalExampleComponent } from './embedded-modal-example/embedded
 
 const config = {
   selector: 'cookbook-modal-example-default',
-  template: `<button kirby-button (click)="showModal()" [disabled]="interactWithBackground || preventInteraction">Show modal</button>
-  <button kirby-button (click)="showDrawer()" [disabled]="preventInteraction">Show drawer</button>
-  <button kirby-button (click)="showCompact()" [disabled]="interactWithBackground || preventInteraction">Show compact</button>
-  <cookbook-example-configuration-wrapper configAppearance="toggle">
-      <cookbook-modal-example-configuration [disabled]="preventInteraction" [(showDummyKeyboard)]="showDummyKeyboard"
-        [(showPageProgress)]="showPageProgress"
-        [(showFooter)]="showFooter"
-        [(snapFooterToKeyboard)]="snapFooterToKeyboard"
-        [(displayFooterAsInline)]="displayFooterAsInline"
-        [(collapseTitle)]="collapseTitle"
-        [(alertBeforeClose)]="alertBeforeClose"
-        [(showDummyContent)]="showDummyContent"
-        [(delayLoadDummyContent)]="delayLoadDummyContent"
-        [(loadAdditionalContent)]="loadAdditionalContent"
-        [(interactWithBackground)]="interactWithBackground"
-        [(customCssClass)]="customCssClass"
-        [modalSizeOptions]="modalSizeOptions"
-        (selectedModalSizeOption)="setSelectedModalSize($event)"
-      
-      >
-      </cookbook-modal-example-configuration>
-  </cookbook-example-configuration-wrapper>
+  template: `<button kirby-button size="lg" (click)="showModal()" [disabled]="interactWithBackground || preventInteraction">Show modal</button>
+<button kirby-button size="lg" (click)="showDrawer()" [disabled]="preventInteraction">Show drawer</button>
+<button kirby-button size="lg" (click)="showCompact()" [disabled]="interactWithBackground || preventInteraction">Show compact</button>
+<cookbook-example-configuration-wrapper configAppearance="toggle">
+  <cookbook-modal-example-configuration [disabled]="preventInteraction" [(showDummyKeyboard)]="showDummyKeyboard"
+    [(showPageProgress)]="showPageProgress"
+    [(showFooter)]="showFooter"
+    [(snapFooterToKeyboard)]="snapFooterToKeyboard"
+    [(displayFooterAsInline)]="displayFooterAsInline"
+    [(collapseTitle)]="collapseTitle"
+    [(alertBeforeClose)]="alertBeforeClose"
+    [(showDummyContent)]="showDummyContent"
+    [(delayLoadDummyContent)]="delayLoadDummyContent"
+    [(loadAdditionalContent)]="loadAdditionalContent"
+    [(interactWithBackground)]="interactWithBackground"
+    [(customCssClass)]="customCssClass"
+    [modalSizeOptions]="modalSizeOptions"
+    (selectedModalSizeOption)="setSelectedModalSize($event)"
   
-  <ng-container *ngIf="interactWithBackground">
-    <section class="dummy-text-section">
-      <p *ngFor="let dummyText of dummyBackgroundTexts">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non neque vitae felis ultricies imperdiet in ut orci. Aenean sodales, augue ac consectetur sodales, neque velit condimentum nulla, at ultrices dolor tortor a nunc. Proin tellus nibh, venenatis eget quam ut, blandit cursus ante. Pellentesque convallis pretium orci vitae porta.
-      </p>
-    </section>
-  </ng-container>
-  `,
-  titleTemplate: `<kirby-page-title>My Modal Title</kirby-page-title>
- 
-<p>Some content of the embedded component</p>
-...
-`,
-  pageProgressTemplate: `<kirby-page-progress>
+  >
+  </cookbook-modal-example-configuration>
+</cookbook-example-configuration-wrapper>
+  
+<ng-container *ngIf="interactWithBackground">
+  <section class="dummy-text-section">
+    <p *ngFor="let dummyText of dummyBackgroundTexts">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non neque vitae felis ultricies imperdiet in ut orci. Aenean sodales, augue ac consectetur sodales, neque velit condimentum nulla, at ultrices dolor tortor a nunc. Proin tellus nibh, venenatis eget quam ut, blandit cursus ante. Pellentesque convallis pretium orci vitae porta.
+    </p>
+  </section>
+</ng-container>`,
+  componentTemplate: `<kirby-page-progress>
   <kirby-progress-circle themeColor="warning" value="50" size="sm" class="kirby-text-xsmall">
   2/4
   </kirby-progress-circle>
@@ -55,13 +49,12 @@ const config = {
 </kirby-page-title>
  
 <p>Some content of the embedded component</p>
-...
-`,
-  footerTemplate: `<p>Some content of the embedded component</p>
-...
+
 <kirby-modal-footer>
   <button kirby-button (click)="scrollToBottom()">Scroll to bottom</button>
-</kirby-modal-footer>`,
+</kirby-modal-footer>
+...
+`,
   showModalCodeSnippet: `constructor(private modalController: ModalController) {}
 
 showModal() {
@@ -97,17 +90,21 @@ private onSupplementaryActionSelect() {
   };
   this.modalController.showModal(config);
 }`,
-  callbackCodeSnippet: `this.modalController.showModal(config, onClose);
+  callbackCodeSnippet: `async showModal() {
+  await this.modalController.showModal(config, this.onModalClose.bind(this));
+}
 
-onClose() {
+onModalClose() {
   ...
 }`,
   callbackWithDataCodeSnippet: `// Inside the parent (caller) component:
 @Component()
 export class ParentComponent() {
-  this.modalController.showModal(config, onClose);
+  async showModal() {
+    await this.modalController.showModal(config, this.onModalClose.bind(this));
+  }
 
-  onClose(dataReturnedByModal: CustomDataType) {
+  onModalClose(dataReturnedByModal: CustomDataType) {
     ...
   }
 }
@@ -162,9 +159,9 @@ ngOnInit() {
 }`,
   willCloseCodeSnippet: `constructor(@Optional() @SkipSelf() private modal: Modal) {}
 
-  ngOnInit() {
-    this.modal?.willClose.then(() => console.log('this modal is about to close'));
-  }`,
+ngOnInit() {
+  this.modal?.willClose.then(() => console.log('this modal is about to close'));
+}`,
   embeddedCodeSnippet: `import { Component, Inject } from '@angular/core';
 import { COMPONENT_PROPS } from '@kirbydesign/designsystem';
 
@@ -205,10 +202,8 @@ export class EmbeddedComponent() {
   styleUrls: ['./modal-example-default.component.scss'],
 })
 export class ModalExampleDefaultComponent {
-  static readonly template = config.template.split('<cookbook-example-configuration-wrapper>')[0]; // Remove config part of the template
-  static readonly titleTemplate = config.titleTemplate;
-  static readonly pageProgressTemplate = config.pageProgressTemplate;
-  static readonly footerTemplate = config.footerTemplate;
+  static readonly template = config.template.split('<cookbook-example-configuration-wrapper')[0]; // Remove config part of the template
+  static readonly titleTemplate = config.componentTemplate;
   static readonly defaultCodeSnippet = [
     config.showModalCodeSnippet,
     config.drawerCodeSnippet,
