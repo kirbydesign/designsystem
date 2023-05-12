@@ -767,6 +767,8 @@ describe('PageComponent', () => {
           expect(stickyContentContainer).toHaveComputedStyle(
             {
               'background-color': shadedBackgroundColor,
+              height: `${stickyContentContainer.offsetHeight}px`,
+              width: `${ionScrollElement.clientWidth}px`,
             },
             ':before'
           );
@@ -846,6 +848,8 @@ describe('PageComponent', () => {
           expect(stickyContentContainer).toHaveComputedStyle(
             {
               'background-color': shadedBackgroundColor,
+              height: `${stickyContentContainer.offsetHeight}px`,
+              width: `${ionScrollElement.clientWidth}px`,
             },
             ':before'
           );
