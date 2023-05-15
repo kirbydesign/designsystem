@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 
 import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
+import { first, fromEvent, takeUntil } from 'rxjs';
 import { Overlay } from '../../modal.interfaces';
 import { AlertConfig } from '../alert/config/alert-config';
 
@@ -106,6 +107,12 @@ export class ModalHelper {
 
     await ionModal.present();
 
+    // Back button should only be handled manually
+    // if the modal is not instantiated through a route.
+    if (!config.modalRoute && !alertConfig) {
+      this.handleBrowserBackButton(ionModal);
+    }
+
     this.isModalOpening = false;
 
     return {
@@ -147,5 +154,14 @@ export class ModalHelper {
       throw new Error(noModalRegisteredErrorMessage);
     }
     modal.component.scrollToBottom(duration);
+  }
+
+  private handleBrowserBackButton(modal: HTMLIonModalElement) {
+    const popStateEvent$ = fromEvent(this.windowRef.nativeWindow, 'popstate').pipe(first());
+    const modalClose$ = fromEvent(modal, 'ionModalDidDismiss');
+
+    popStateEvent$.pipe(takeUntil(modalClose$)).subscribe(() => {
+      modal.dismiss();
+    });
   }
 }
