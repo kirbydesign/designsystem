@@ -44,7 +44,7 @@
     </li>
     <li>
       Support for
-      <a href="#" (click)="scrollTo(footer)">fixed footer</a>
+      <a href="#" (click)="scrollTo(modalContent)">fixed footer</a>
     </li>
   </ul>
 </section>
@@ -135,7 +135,7 @@
   in a module.
 </p>
 
-<h3>Modal content</h3>
+<h3 #modalContent>Modal content</h3>
 <p>
   Inside the embedded component markup you should include a
   <code>kirby-page-title</code>
