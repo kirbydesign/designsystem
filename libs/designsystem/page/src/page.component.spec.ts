@@ -332,7 +332,7 @@ describe('PageComponent', () => {
         expect(pageSubtitle).toHaveText(subtitleText, true);
       });
 
-      it('should render subitle with correct margin and padding', () => {
+      it('should render subtitle with correct margin and padding', () => {
         const pageSubtitle = ionContent.querySelector('.page-subtitle');
 
         expect(pageSubtitle).toHaveComputedStyle({
