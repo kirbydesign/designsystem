@@ -1,5 +1,8 @@
 <ion-header>
-  <ion-toolbar [class.content-scrolled]="!stickyContentTemplate && isContentScrolled">
+  <ion-toolbar
+    [class.content-scrolled]="isContentScrolled"
+    [class.content-pinned]="isStickyContentPinned"
+  >
     <ion-buttons slot="start">
       <ion-back-button
         text=""
