@@ -97,6 +97,12 @@ ion-header.content-scrolled ion-toolbar {
   border-bottom-color: utils.get-color('medium');
 }
 
+:host-context(ion-modal.no-header-area-border) {
+  ion-header ion-toolbar {
+    border-bottom-color: transparent;
+  }
+}
+
 :host-context(ion-modal.kirby-drawer:not(.kirby-modal-full-height)) {
   @include utils.media('<medium') {
     @include contain-content;
