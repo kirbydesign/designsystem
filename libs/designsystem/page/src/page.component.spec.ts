@@ -392,7 +392,7 @@ describe('PageComponent', () => {
         expect(pageSubtitle).toHaveText(subtitleText, true);
       });
 
-      it('should render subitle with correct margin and padding', async () => {
+      it('should render subtitle with correct margin and padding', async () => {
         await TestHelper.whenReady(ionContent);
         const pageSubtitle = ionContent.querySelector('.page-subtitle');
 
