@@ -18,7 +18,6 @@ import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { DropdownComponent, DropdownModule } from '@kirbydesign/designsystem/dropdown';
 
 export type ActionGroupConfig = {
-  isResizable?: boolean;
   isCondensed?: boolean;
   defaultVisibleActions?: number;
   maxVisibleActions?: number;
@@ -38,8 +37,6 @@ type CollapsedAction = { button: HTMLButtonElement; text: string };
 export class ActionGroupComponent implements AfterContentInit {
   @Input() visibleActions?: number;
 
-  @Input() emphasizeActions?: boolean;
-
   @Input()
   align: 'start' | 'end' = 'end';
 
@@ -58,9 +55,6 @@ export class ActionGroupComponent implements AfterContentInit {
   @HostBinding('class.is-collapsed')
   _isCollapsed: boolean;
   _collapsedActions: CollapsedAction[] = [];
-
-  @HostBinding('class.is-resizeable')
-  _isResizeable = false;
 
   @HostBinding('class')
   get _align() {
@@ -103,8 +97,6 @@ export class ActionGroupComponent implements AfterContentInit {
 
   private initializeFromConfig() {
     if (!this.config) return;
-
-    this._isResizeable = this.config.isResizable;
 
     if (this.visibleActions === undefined && this.config.defaultVisibleActions !== undefined) {
       this.visibleActions = this.config.defaultVisibleActions;

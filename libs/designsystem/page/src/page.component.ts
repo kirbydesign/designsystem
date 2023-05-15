@@ -352,7 +352,6 @@ export class PageComponent
     this.removeWrapper();
 
     const actionGroupConfig: ActionGroupConfig = {
-      isResizable: false,
       isCondensed: true,
       maxVisibleActions: 1,
     };
