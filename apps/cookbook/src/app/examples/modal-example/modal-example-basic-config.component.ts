@@ -40,9 +40,9 @@ type ModalSizeOption = { text: string; value: ModalSize };
 @Component({
   selector: config.selector,
   template: config.template,
-  styleUrls: ['modal-example-sizes.component.scss'],
+  styleUrls: ['modal-example-basic-config.component.scss'],
 })
-export class ModalExampleSizesComponent {
+export class ModalExampleBasicConfigComponent {
   static readonly template = config.template.split('<kirby-card')[0]; // Remove config part of the template
   static readonly defaultCodeSnippet = [config.showModalCodeSnippet].join('\n\n');
   static readonly showModalCodeSnippet = config.showModalCodeSnippet;

@@ -72,8 +72,8 @@
 ></cookbook-iphone>
 
 <cookbook-example-viewer
-  [html]="sizesExample.template"
-  [ts]="sizesExample.defaultCodeSnippet"
+  [html]="basicConfigExample.template"
+  [ts]="basicConfigExample.defaultCodeSnippet"
 ></cookbook-example-viewer>
 
 <h3 #modalFlavors>Modal flavors</h3>
@@ -154,7 +154,7 @@
   inside the embedded component.
 </p>
 
-<cookbook-example-viewer [html]="defaultExample.componentTemplate"></cookbook-example-viewer>
+<cookbook-example-viewer [html]="advancedConfigExample.componentTemplate"></cookbook-example-viewer>
 
 <h2>Advanced use cases</h2>
 <p>
@@ -176,8 +176,8 @@
 ></cookbook-iphone>
 
 <cookbook-example-viewer
-  [html]="defaultExample.template"
-  [ts]="defaultExample.defaultCodeSnippet"
+  [html]="advancedConfigExample.template"
+  [ts]="advancedConfigExample.defaultCodeSnippet"
 ></cookbook-example-viewer>
 
 <h3>Passing data into components</h3>
@@ -186,13 +186,13 @@
   <code>COMPONENT_PROPS</code>
   inside the embedded component's constructor:
 </p>
-<cookbook-code-viewer [ts]="defaultExample.embeddedCodeSnippet"></cookbook-code-viewer>
+<cookbook-code-viewer [ts]="advancedConfigExample.embeddedCodeSnippet"></cookbook-code-viewer>
 
 <h3>Programmatically closing the modal</h3>
 <p>
   In order to hide a modal from within your embedded component (and destroy its component), you can
   inject the modal window that your component is displayed within:
-  <cookbook-code-viewer [ts]="defaultExample.closeModalCodeSnippet"></cookbook-code-viewer>
+  <cookbook-code-viewer [ts]="advancedConfigExample.closeModalCodeSnippet"></cookbook-code-viewer>
 </p>
 
 <p>
@@ -218,7 +218,7 @@
   <code>action</code>
   function which is invoked when the supplementary button is selected.
 </p>
-<cookbook-example-viewer [ts]="defaultExample.drawerCodeSnippet"></cookbook-example-viewer>
+<cookbook-example-viewer [ts]="advancedConfigExample.drawerCodeSnippet"></cookbook-example-viewer>
 <h2 #routeBasedBasic>Route based modals</h2>
 
 <p>
@@ -321,7 +321,7 @@
 <p>
   If you need the user to confirm that the modal should be closed, you can pass an AlertConfig as an
   optional third argument
-  <cookbook-code-viewer [ts]="defaultExample.alertBeforeCloseCodeSnippet"></cookbook-code-viewer>
+  <cookbook-code-viewer [ts]="advancedConfigExample.alertBeforeCloseCodeSnippet"></cookbook-code-viewer>
 </p> -->
 
 <h2 #modalEvents>Modal events</h2>
@@ -334,7 +334,7 @@
   event, when the modal is ready and the enter animation has finished. This is a good place to hook
   up any visual initialization of the embedded component, e.g. setting focus in an input field:
 </p>
-<cookbook-code-viewer [ts]="defaultExample.didPresentCodeSnippet"></cookbook-code-viewer>
+<cookbook-code-viewer [ts]="advancedConfigExample.didPresentCodeSnippet"></cookbook-code-viewer>
 
 <h3>Modal closing</h3>
 <p>
@@ -346,7 +346,7 @@
   slot to execute your exceptional code just when the modal starts closing but before its actually
   done:
 </p>
-<cookbook-code-viewer [ts]="defaultExample.willCloseCodeSnippet"></cookbook-code-viewer>
+<cookbook-code-viewer [ts]="advancedConfigExample.willCloseCodeSnippet"></cookbook-code-viewer>
 
 <h3>Modal closed</h3>
 <p>
@@ -358,7 +358,7 @@
     <code>.bind(this)</code>
     .
   </em>
-  <cookbook-code-viewer [ts]="defaultExample.callbackCodeSnippet"></cookbook-code-viewer>
+  <cookbook-code-viewer [ts]="advancedConfigExample.callbackCodeSnippet"></cookbook-code-viewer>
 </p>
 
 <h4 #returnData>
@@ -375,7 +375,9 @@
     <code>.bind(this)</code>
     .
   </em>
-  <cookbook-code-viewer [ts]="defaultExample.callbackWithDataCodeSnippet"></cookbook-code-viewer>
+  <cookbook-code-viewer
+    [ts]="advancedConfigExample.callbackWithDataCodeSnippet"
+  ></cookbook-code-viewer>
 </p>
 
 <h2 #scrolling>Scrolling</h2>
@@ -390,7 +392,7 @@
   <code>KirbyAnimation.Duration</code>
   as optional param. If not provided the scrolling will happen instantaneously.
 </p>
-<cookbook-code-viewer [ts]="defaultExample.scrollingCodeSnippet"></cookbook-code-viewer>
+<cookbook-code-viewer [ts]="advancedConfigExample.scrollingCodeSnippet"></cookbook-code-viewer>
 
 <h3>Disable scrolling</h3>
 <p>
@@ -399,7 +401,9 @@
   supports disabling of scrolling by setting the property
   <code>scrollDisabled = true</code>
 </p>
-<cookbook-code-viewer [ts]="defaultExample.disableScrollingCodeSnippet"></cookbook-code-viewer>
+<cookbook-code-viewer
+  [ts]="advancedConfigExample.disableScrollingCodeSnippet"
+></cookbook-code-viewer>
 
 <p>
   If the
