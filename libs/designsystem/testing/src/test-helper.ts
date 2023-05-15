@@ -78,8 +78,8 @@ export class TestHelper {
     });
   }
 
-  public static getCssProperty(element: Element, propertyName: string) {
-    return window.getComputedStyle(element).getPropertyValue(propertyName).trim();
+  public static getCssProperty(element: Element, propertyName: string, pseudoElt?: string) {
+    return window.getComputedStyle(element, pseudoElt).getPropertyValue(propertyName).trim();
   }
 
   public static screensize = {
