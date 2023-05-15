@@ -80,6 +80,7 @@ import { DataTableExampleComponent } from './data-table-example/data-table-examp
 import { HeaderExampleComponent } from './header-example/header-example.component';
 import { NestedModalsV2ExampleComponent } from './modal-v2-example/nested-modals/nested-modals-v2-example.component';
 import { HeaderWithActionGroupExampleComponent } from './header-example/examples/action-group';
+import { HeaderWithEmphasizedActionGroupExampleComponent } from './header-example/examples/emphasize-actions';
 import { HeaderWithCustomActionsExampleComponent } from './header-example/examples/custom-actions';
 import { HeaderWithInteractiveTitleExampleComponent } from './header-example/examples/interactive-title';
 import { MenuExampleComponent } from './menu-example/menu-example.component';
@@ -180,6 +181,10 @@ export const routes: Routes = [
           {
             path: 'header-and-action-group',
             component: HeaderWithActionGroupExampleComponent,
+          },
+          {
+            path: 'header-and-emphasized-action-group',
+            component: HeaderWithEmphasizedActionGroupExampleComponent,
           },
           {
             path: 'header-and-custom-actions',
