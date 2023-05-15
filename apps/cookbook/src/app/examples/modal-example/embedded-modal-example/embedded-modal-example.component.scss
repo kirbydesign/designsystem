@@ -31,13 +31,6 @@ kirby-card.nested-modal-configuration {
   }
 }
 
-kirby-modal-footer {
-  button {
-    flex-grow: 1;
-  }
-
-  kirby-checkbox {
-    font-size: utils.font-size('xs');
-    text-align: center;
-  }
+kirby-form-field {
+  margin-top: utils.size('m');
 }

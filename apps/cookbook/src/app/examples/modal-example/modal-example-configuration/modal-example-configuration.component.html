@@ -96,15 +96,17 @@
   text="Alert before closing"
 ></kirby-checkbox>
 
-<kirby-divider *ngIf="modalSizeOptions !== undefined" [hasMargin]="true"></kirby-divider>
-<p>Modal and drawer size on screens larger than 768px:</p>
+<ng-container *ngIf="modalSizeOptions !== undefined">
+  <kirby-divider [hasMargin]="true"></kirby-divider>
+  <p>Modal and drawer size on screens larger than 768px:</p>
 
-<kirby-dropdown
-  *ngIf="modalSizeOptions !== undefined"
-  [items]="modalSizeOptions"
-  (change)="changeSize($event)"
-  [usePopover]="true"
-></kirby-dropdown>
+  <kirby-dropdown
+    *ngIf="modalSizeOptions !== undefined"
+    [items]="modalSizeOptions"
+    (change)="changeSize($event)"
+    [usePopover]="true"
+  ></kirby-dropdown>
+</ng-container>
 
 <ng-container *ngIf="interactWithBackground !== undefined || customCssClass !== undefined">
   <kirby-divider [hasMargin]="true"></kirby-divider>

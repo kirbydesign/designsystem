@@ -22,8 +22,6 @@ const config = {
     </kirby-item> 
   </kirby-radio-group>
 </kirby-card>
-
-
   `,
   showModalCodeSnippet: `constructor(private modalController: ModalController) {}
 
@@ -77,6 +75,7 @@ export class ModalExampleSizesComponent {
           title: `Modal - ${size.text}`,
           subtitle: 'Hello from the first embedded example component!',
           showNestedOptions: true,
+          showDummyContent: false,
           modalSizeOptions: this.modalSizeOptions,
         },
       };

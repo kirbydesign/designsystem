@@ -25,21 +25,26 @@ export class EmbeddedModalExampleComponent implements OnInit {
     booleanProperty: boolean;
   };
 
-  showNestedOptions: boolean;
   showDummyKeyboard: boolean;
-  showPageProgress: boolean;
-  showFooter: boolean;
-  snapFooterToKeyboard: boolean;
   showDummyContent: boolean;
   showStaticDummyContent: boolean;
+  delayLoadDummyContent: boolean;
+  loadAdditionalContent: boolean;
+  disableScroll: boolean;
+
+  // We always want to allow config of footer and page progress, so initialize to false
+  showPageProgress: boolean = false;
+  showFooter: boolean = false;
+  snapFooterToKeyboard: boolean = false;
+  displayFooterAsInline: boolean = false;
+
+  showNestedOptions: boolean;
   showNestedPageProgress: boolean;
   showNestedFooter: boolean;
   snapNestedFooterToKeyboard: boolean;
   showNestedDummyContent: boolean;
-  delayLoadDummyContent: boolean;
-  loadAdditionalContent: boolean;
-  disableScroll: boolean;
-  displayFooterAsInline: boolean;
+  displayNestedFooterAsInline: boolean;
+  showNestedCollapseTitle: boolean;
 
   isLoading = false;
   isLoadingAdditionalContent = false;
@@ -82,16 +87,17 @@ export class EmbeddedModalExampleComponent implements OnInit {
       },
       component: EmbeddedModalExampleComponent,
       size: this.selectedModalSize,
+      collapseTitle: this.showNestedCollapseTitle,
       componentProps: {
         title,
         subtitle: 'Hello from second embedded example component!',
-        showDummyKeyboard: this.showDummyKeyboard,
-        showPageProgress: this.showNestedPageProgress,
-        showFooter: this.showNestedFooter,
-        snapFooterToKeyboard: this.snapFooterToKeyboard,
-        showDummyContent: this.showNestedDummyContent,
         delayLoadDummyContent: this.delayLoadDummyContent,
         loadAdditionalContent: this.loadAdditionalContent,
+        showPageProgress: this.showNestedPageProgress,
+        showFooter: this.showNestedFooter,
+        snapFooterToKeyboard: this.snapNestedFooterToKeyboard,
+        displayFooterAsInline: this.displayNestedFooterAsInline,
+        showDummyContent: this.showNestedDummyContent,
       },
     };
 

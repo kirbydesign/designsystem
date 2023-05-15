@@ -1,8 +1,6 @@
 @use '@kirbydesign/core/src/scss/utils';
 
 :host {
-  display: inline-block;
-
   &.toggle {
     display: flex;
     flex-direction: column;
@@ -55,6 +53,10 @@
 :host-context(.ion-page.drawer) {
   kirby-card {
     top: 0;
+
+    @include utils.media('>=medium') {
+      top: var(--header-height, 0);
+    }
   }
 }
 

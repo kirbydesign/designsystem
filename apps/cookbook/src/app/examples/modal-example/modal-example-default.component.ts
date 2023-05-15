@@ -26,7 +26,6 @@ const config = {
     [(customCssClass)]="customCssClass"
     [modalSizeOptions]="modalSizeOptions"
     (selectedModalSizeOption)="setSelectedModalSize($event)"
-  
   >
   </cookbook-modal-example-configuration>
 </cookbook-example-configuration-wrapper>
@@ -230,13 +229,20 @@ export class ModalExampleDefaultComponent {
   collapseTitle = false;
   alertBeforeClose = false;
   showDummyContent = true;
-  showNestedDummyContent = true;
   delayLoadDummyContent = true;
   loadAdditionalContent = false;
   interactWithBackground = false;
   customCssClass = false;
   dummyBackgroundTexts = new Array(100).map(() => '');
   preventInteraction = false;
+
+  disableScroll = false;
+  showNestedDummyContent = true;
+  showNestedPageProgress = false;
+  showNestedCollapseTitle = false;
+  showNestedFooter = false;
+  snapNestedFooterToKeyboard = false;
+  displayNestedFooterAsInline = false;
 
   modalSizeOptions = [
     { text: 'Small', value: 'small' },
@@ -264,7 +270,6 @@ export class ModalExampleDefaultComponent {
       cssClass: this.customCssClass ? ['my-custom-modal-class'] : [],
       componentProps: {
         title,
-        displayFooterAsInline: this.displayFooterAsInline,
         subtitle: 'Hello from the first embedded example component!',
         exampleProperties: {
           stringProperty: 'Value injected from parent component',
@@ -280,9 +285,15 @@ export class ModalExampleDefaultComponent {
         showStaticDummyContent: this.interactWithBackground,
         delayLoadDummyContent: this.delayLoadDummyContent,
         loadAdditionalContent: this.loadAdditionalContent,
-        showNestedDummyContent: this.showNestedDummyContent,
-        disableScroll: false,
+        displayFooterAsInline: this.displayFooterAsInline,
         modalSizeOptions: this.modalSizeOptions,
+        disableScroll: this.disableScroll,
+        showNestedDummyContent: this.showNestedDummyContent,
+        showNestedPageProgress: this.showNestedPageProgress,
+        showNestedCollapseTitle: this.showNestedCollapseTitle,
+        showNestedFooter: this.showNestedFooter,
+        snapNestedFooterToKeyboard: this.snapNestedFooterToKeyboard,
+        displayNestedFooterAsInline: this.displayNestedFooterAsInline,
       },
     };
 
