@@ -2,7 +2,7 @@ import { AfterViewInit, Component, ElementRef, OnDestroy, Optional } from '@angu
 import { ActivatedRoute } from '@angular/router';
 
 import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
-import { AlertConfig } from './public_api';
+import { AlertConfig, CanDismissConfig } from './public_api';
 export interface OverlayEventDetail<T = any> {
   data?: T;
   role?: string;
@@ -35,6 +35,7 @@ export abstract class Modal {
   scrollToTop: (scrollDuration?: KirbyAnimation.Duration) => void;
   scrollToBottom: (scrollDuration?: KirbyAnimation.Duration) => void;
   scrollDisabled: boolean;
+  setCanDismissConfig: (canDismissConfig: CanDismissConfig) => void;
 }
 /**
  * WARNING: This is for internal use only and should not be used outside of Kirby.

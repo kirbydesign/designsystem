@@ -40,7 +40,8 @@ import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 
 import { Modal, ModalElementsAdvertiser, ModalElementType } from '../modal.interfaces';
-import { ModalConfig } from './config/modal-config';
+import { CanDismissHelper } from '../modal/services/can-dismiss.helper';
+import { CanDismissConfig, ModalConfig } from './config/modal-config';
 import { COMPONENT_PROPS } from './config/modal-config.helper';
 import { ModalElementsMoverDelegate } from './modal-elements-mover.delegate';
 
@@ -153,7 +154,8 @@ export class ModalWrapperComponent
     private resizeObserverService: ResizeObserverService,
     private componentFactoryResolver: ComponentFactoryResolver,
     private windowRef: WindowRef,
-    private platform: PlatformService
+    private platform: PlatformService,
+    private canDismissHelper: CanDismissHelper
   ) {
     this.setViewportHeight();
     this.observeViewportResize();
@@ -238,6 +240,10 @@ export class ModalWrapperComponent
     }[type];
 
     removeModalElementFn();
+  }
+
+  public setCanDismissConfig(canDismissConfig: CanDismissConfig) {
+    this.ionModalElement.canDismiss = this.canDismissHelper.getCanDismissCallback(canDismissConfig);
   }
 
   private initializeResizeModalToModalWrapper() {
