@@ -28,10 +28,10 @@
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       column-gap: utils.size('s');
+    }
 
-      .title-container {
-        grid-column-start: 1;
-      }
+    .title-container {
+      grid-column-start: 1;
     }
   }
 }
@@ -57,18 +57,20 @@
   }
 
   @include utils.media('>=medium') {
-    .container {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr);
-      align-self: stretch;
-    }
+    &:not(.single-column) {
+      .container {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr);
+        align-self: stretch;
+      }
 
-    .actions {
-      align-self: flex-start;
-    }
+      .actions {
+        align-self: flex-start;
+      }
 
-    .container > h1.title,
-    .title-container {
-      grid-column-start: 2;
+      .container > h1.title,
+      .title-container {
+        grid-column-start: 2;
+      }
     }
   }
 }
