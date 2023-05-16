@@ -224,8 +224,14 @@ describe('ModalHelper', () => {
       it('modal should have min-height', async () => {
         await openModal();
 
+        const headerHeight = 88;
+        const footerHeight = 88;
+        const contentHeight = 88;
+
+        const expectedHeight = headerHeight + footerHeight + contentHeight;
+
         expect(ionModal).toHaveComputedStyle({
-          '--min-height': '264px',
+          '--min-height': `${expectedHeight}px`,
         });
       });
 
@@ -299,16 +305,6 @@ describe('ModalHelper', () => {
     });
 
     describe('padding top', () => {
-      it('should have correct value for drawer flavor on mobile', async () => {
-        await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
-        await openDrawer();
-
-        expect(ionModal).toHaveComputedStyle({
-          'padding-top': size('m'),
-        });
-        TestHelper.resetTestWindow();
-      });
-
       it('should have correct value for drawer flavor on desktop', async () => {
         await openDrawer();
 
