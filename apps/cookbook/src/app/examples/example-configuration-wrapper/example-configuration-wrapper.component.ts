@@ -13,7 +13,7 @@ export class ExampleConfigurationWrapperComponent {
   @HostBinding('class.show-config')
   showConfig: boolean = false;
 
-  toggleConfiguration() {
+  toggleConfig() {
     this.showConfig = !this.showConfig;
   }
 }
