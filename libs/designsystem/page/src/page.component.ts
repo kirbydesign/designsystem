@@ -146,7 +146,14 @@ export class PageStickyContentDirective {}
   template: `
     <ng-content></ng-content>
   `,
-  styles: [':host {display: flex; margin-inline-end: 4px; }'],
+  styles: [
+    `
+      :host {
+        display: flex;
+        margin-inline-end: 4px; /* Add spacing to potential supplementary action button */
+      }
+    `,
+  ],
 })
 export class PageProgressComponent extends ModalElementComponent {
   // TODO: Find alternative implementation, which aligns with future page configuration / consumption
