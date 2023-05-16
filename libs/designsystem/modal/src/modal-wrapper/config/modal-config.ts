@@ -7,7 +7,7 @@ import { DrawerSupplementaryAction } from './drawer-supplementary-action';
 export type ModalFlavor = 'modal' | 'drawer' | 'compact';
 export type ModalSize = 'small' | 'medium' | 'large' | 'full-height';
 export type CanDismissConfig = {
-  canDismiss: (() => Promise<boolean>) | (() => boolean) | true;
+  canDismiss: (() => Promise<boolean>) | (() => boolean);
   alertConfig: AlertConfig;
 };
 
