@@ -13,7 +13,12 @@ import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { Modal, Overlay } from '../../modal.interfaces';
 import { AlertConfig } from '../alert/config/alert-config';
 import { ModalFooterComponent } from '../footer/modal-footer.component';
-import { ModalCompactWrapperComponent, ModalConfig, ModalSize } from '../../modal-wrapper';
+import {
+  CanDismissConfig,
+  ModalCompactWrapperComponent,
+  ModalConfig,
+  ModalSize,
+} from '../../modal-wrapper';
 import { ModalNavigationService } from '../../modal-navigation.service';
 import { ModalHelper } from './modal.helper';
 import { AlertHelper } from './alert.helper';
@@ -129,15 +134,19 @@ describe('ModalHelper', () => {
     await overlay.dismiss();
   });
 
-  const openOverlay = async (config: ModalConfig, alertConfig?: AlertConfig) => {
-    overlay = await modalHelper.showModalWindow(config, alertConfig);
+  const openOverlay = async (config: ModalConfig) => {
+    overlay = await modalHelper.showModalWindow(config);
     ionModal = await ionModalController.getTop();
 
     expect(ionModal).toBeTruthy();
   };
 
-  const openModal = async (component?: any, size?: ModalSize, alertConfig?: AlertConfig) => {
-    await openOverlay({ flavor: 'modal', component, size }, alertConfig);
+  const openModal = async (
+    component?: any,
+    size?: ModalSize,
+    canDismissConfig?: CanDismissConfig
+  ) => {
+    await openOverlay({ flavor: 'modal', component, size, canDismissConfig });
   };
 
   const openDrawer = async (
@@ -162,23 +171,29 @@ describe('ModalHelper', () => {
     });
 
     describe('canDismiss', () => {
-      it('should pass "true" to "canDismiss", if no alertConfig is provided', async () => {
+      it('should pass "true" to "canDismiss", if no canDismissConfig is provided', async () => {
         await openModal();
 
         expect(ionModal.canDismiss).toEqual(true);
       });
 
-      it('should pass a function to "canDismiss", if an alertConfig is provided', async () => {
+      it('should pass a function to "canDismiss", if a canDismissConfig is provided', async () => {
         const alertConfig: AlertConfig = {
           title: 'Do you want to close the modal?',
           okBtn: 'Yes',
           cancelBtn: 'No',
         };
+
+        const canDismissConfig: CanDismissConfig = {
+          canDismiss: () => true,
+          alertConfig: alertConfig,
+        };
+
         // Mock 'showAlert' to prevent the test from timing out
         // due to nested async that is not resolved
         spectator.service.showAlert = async () => true;
 
-        await openModal(null, null, alertConfig);
+        await openModal(null, null, canDismissConfig);
 
         expect(typeof ionModal?.canDismiss).toEqual('function');
       });
