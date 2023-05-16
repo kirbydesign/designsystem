@@ -56,6 +56,18 @@ describe('BadgeComponent', () => {
         color: getColor('white', 'contrast'),
       });
     });
+
+    describe('when custom css properties are set', () => {
+      it('should set correct color', () => {
+        spectator.element.style.setProperty('--kirby-badge-background-color', 'pink');
+        spectator.element.style.setProperty('--kirby-badge-color', 'chartreuse');
+
+        expect(ionBadge).toHaveComputedStyle({
+          'background-color': 'pink',
+          color: 'chartreuse',
+        });
+      });
+    });
   });
 
   describe('when one character is slotted', () => {
@@ -106,6 +118,7 @@ describe('BadgeComponent', () => {
         `);
 
         await TestHelper.whenReady(spectator.element);
+        spectator.element.style;
 
         ionBadge = spectator.element.shadowRoot.querySelector('ion-badge');
         await TestHelper.whenReady(ionBadge);
