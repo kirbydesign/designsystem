@@ -39,12 +39,12 @@ export class EmbeddedModalExampleComponent implements OnInit {
   displayFooterAsInline: boolean = false;
 
   showNestedOptions: boolean;
-  showNestedPageProgress: boolean;
-  showNestedFooter: boolean;
-  snapNestedFooterToKeyboard: boolean;
-  showNestedDummyContent: boolean;
-  displayNestedFooterAsInline: boolean;
   showNestedCollapseTitle: boolean;
+  showNestedPageProgress: boolean = false;
+  showNestedFooter: boolean = false;
+  snapNestedFooterToKeyboard: boolean = false;
+  showNestedDummyContent: boolean = false;
+  displayNestedFooterAsInline: boolean = false;
 
   isLoading = false;
   isLoadingAdditionalContent = false;

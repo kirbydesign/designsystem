@@ -288,12 +288,7 @@ export class ModalExampleAdvancedConfigComponent {
         displayFooterAsInline: this.displayFooterAsInline,
         modalSizeOptions: this.modalSizeOptions,
         disableScroll: this.disableScroll,
-        showNestedDummyContent: this.showNestedDummyContent,
-        showNestedPageProgress: this.showNestedPageProgress,
         showNestedCollapseTitle: this.showNestedCollapseTitle,
-        showNestedFooter: this.showNestedFooter,
-        snapNestedFooterToKeyboard: this.snapNestedFooterToKeyboard,
-        displayNestedFooterAsInline: this.displayNestedFooterAsInline,
       },
     };
 
