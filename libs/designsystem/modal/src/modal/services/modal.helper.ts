@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { WindowRef } from '@kirbydesign/designsystem/types';
-
 import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 import { first, fromEvent, takeUntil } from 'rxjs';
 import { Overlay } from '../../modal.interfaces';
-import { AlertConfig } from '../alert/config/alert-config';
 
 import {
   ModalCompactWrapperComponent,
@@ -13,9 +11,9 @@ import {
   ModalSize,
   ModalWrapperComponent,
 } from '../../modal-wrapper';
-import { AlertHelper } from './alert.helper';
 
 import { ModalAnimationBuilderService } from './modal-animation-builder.service';
+import { CanDismissHelper } from './can-dismiss.helper';
 
 @Injectable()
 export class ModalHelper {
@@ -23,7 +21,7 @@ export class ModalHelper {
     private ionicModalController: ModalController,
     private modalAnimationBuilder: ModalAnimationBuilderService,
     private windowRef: WindowRef,
-    private alertHelper: AlertHelper
+    private canDismissHelper: CanDismissHelper
   ) {}
 
   /* 
@@ -66,19 +64,7 @@ export class ModalHelper {
     let canDismiss: boolean | (() => Promise<boolean>) = true;
 
     if (config.canDismissConfig) {
-      const { canDismiss: candDismissModal, alertConfig } = config.canDismissConfig;
-
-      canDismiss = async () => {
-        if (this.isBoolean(candDismissModal)) return true;
-
-        const conditionIsMet = await candDismissModal();
-
-        if (!conditionIsMet) {
-          return await this.showAlert(alertConfig);
-        }
-
-        return true;
-      };
+      canDismiss = this.canDismissHelper.getCanDismissCallback(config.canDismissConfig);
     }
 
     this.isModalOpening = true;
@@ -137,12 +123,6 @@ export class ModalHelper {
     );
   }
 
-  public async showAlert(config: AlertConfig): Promise<boolean> {
-    const alert = await this.alertHelper.showAlert(config);
-    const result = await alert.onWillDismiss;
-    return result.data;
-  }
-
   public async scrollToTop(
     noModalRegisteredErrorMessage: string,
     duration?: KirbyAnimation.Duration
@@ -172,9 +152,5 @@ export class ModalHelper {
     popStateEvent$.pipe(takeUntil(modalClose$)).subscribe(() => {
       modal.dismiss();
     });
-  }
-
-  private isBoolean(boolOrFunction): boolOrFunction is boolean {
-    return typeof boolOrFunction === 'boolean';
   }
 }
