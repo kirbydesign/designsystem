@@ -82,7 +82,9 @@ ion-header {
       // Prevent iOS safe-area padding-top on drawer flavor
       // as this is already applied on the top-level modal itself
       // in /scss/_global-styles.scss:
-      padding-top: 0;
+      &:first-of-type {
+        padding-top: 0;
+      }
     }
   }
 }
