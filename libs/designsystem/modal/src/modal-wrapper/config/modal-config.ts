@@ -1,10 +1,15 @@
 import { ActivatedRoute, Data, Route } from '@angular/router';
 import { Observable } from 'rxjs';
 
+import { AlertConfig } from '../../public_api';
 import { DrawerSupplementaryAction } from './drawer-supplementary-action';
 
 export type ModalFlavor = 'modal' | 'drawer' | 'compact';
 export type ModalSize = 'small' | 'medium' | 'large' | 'full-height';
+export type CanDismissConfig = {
+  canDismiss: (() => Promise<boolean>) | (() => boolean) | true;
+  alertConfig: AlertConfig;
+};
 
 export interface ModalConfig {
   collapseTitle?: boolean;
@@ -20,6 +25,7 @@ export interface ModalConfig {
   // drawer properties
   interactWithBackground?: boolean;
   cssClass?: string | string[];
+  canDismissConfig?: CanDismissConfig;
 }
 
 /**

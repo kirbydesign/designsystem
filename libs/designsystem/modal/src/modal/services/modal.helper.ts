@@ -34,7 +34,7 @@ export class ModalHelper {
   */
   private isModalOpening = false;
 
-  public async showModalWindow(config: ModalConfig, alertConfig?: AlertConfig): Promise<Overlay> {
+  public async showModalWindow(config: ModalConfig): Promise<Overlay> {
     if (this.isModalOpening) return;
 
     config.flavor = config.flavor || 'modal';
@@ -64,16 +64,20 @@ export class ModalHelper {
     }
 
     let canDismiss: boolean | (() => Promise<boolean>) = true;
-    if (alertConfig) {
-      // Remembers the modal dismissal response from user to prevent multiple alerts on
-      // approval since the callback is invoked more than once when closing.
-      let canBeDismissed = false;
+
+    if (config.canDismissConfig) {
+      const { canDismiss: candDismissModal, alertConfig } = config.canDismissConfig;
+
       canDismiss = async () => {
-        if (!canBeDismissed) {
-          canBeDismissed = await this.showAlert(alertConfig);
+        if (this.isBoolean(candDismissModal)) return true;
+
+        const conditionIsMet = await candDismissModal();
+
+        if (!conditionIsMet) {
+          return await this.showAlert(alertConfig);
         }
 
-        return canBeDismissed;
+        return true;
       };
     }
 
@@ -114,7 +118,7 @@ export class ModalHelper {
 
     // Back button should only be handled manually
     // if the modal is not instantiated through a route.
-    if (!config.modalRoute && !alertConfig) {
+    if (!config.modalRoute && !config.canDismissConfig) {
       this.handleBrowserBackButton(ionModal);
     }
 
@@ -168,5 +172,9 @@ export class ModalHelper {
     popStateEvent$.pipe(takeUntil(modalClose$)).subscribe(() => {
       modal.dismiss();
     });
+  }
+
+  private isBoolean(boolOrFunction): boolOrFunction is boolean {
+    return typeof boolOrFunction === 'boolean';
   }
 }

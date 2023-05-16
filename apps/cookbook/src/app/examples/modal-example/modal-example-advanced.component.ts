@@ -250,12 +250,26 @@ export class ModalExampleAdvancedComponent {
       title = flavor === 'modal' ? 'Modal with Custom CSS' : 'Drawer with Custom CSS';
     }
     this.preventInteraction = this.interactWithBackground;
+    const alertConfig: AlertConfig = {
+      title: 'Do you want to close the modal?',
+      okBtn: {
+        text: 'Yes',
+        isDestructive: true,
+      },
+      cancelBtn: 'No',
+    };
+
     const config: ModalConfig = {
       flavor,
       collapseTitle: this.collapseTitle,
       component: EmbeddedModalExampleComponent,
       interactWithBackground: this.interactWithBackground,
       cssClass: this.customCssClass ? ['my-custom-modal-class'] : [],
+      size: this.openFullHeight ? 'full-height' : null,
+      canDismissConfig: {
+        canDismiss: () => !this.alertBeforeClose,
+        alertConfig: alertConfig,
+      },
       componentProps: {
         title,
         subtitle: 'Hello from the first embedded example component!',
@@ -280,19 +294,7 @@ export class ModalExampleAdvancedComponent {
       },
     };
 
-    let alertConfig: AlertConfig = null;
-    if (this.alertBeforeClose) {
-      alertConfig = {
-        title: 'Do you want to close the modal?',
-        okBtn: {
-          text: 'Yes',
-          isDestructive: true,
-        },
-        cancelBtn: 'No',
-      };
-    }
-
-    await this.modalController.showModal(config, this.onOverlayClose.bind(this), alertConfig);
+    await this.modalController.showModal(config, this.onOverlayClose.bind(this));
   }
 
   async showModal() {
