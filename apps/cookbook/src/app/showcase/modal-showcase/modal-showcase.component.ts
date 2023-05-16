@@ -27,13 +27,13 @@ export class ModalShowcaseComponent {
       name: 'flavor',
       description: `(Optional) The flavor of the modal.
       
-      Modals with \`modal\` flavor have a close button placed in the top right corner and are full-screen on small screens.
-      
+      With the \`modal\` flavor the dialog is presented directly on top of content, either as a full screen modal on small screens or centered on the page on larger screens.
+
       Modals with a \`drawer\` flavor appears as a sheet on top of page content on small screens, and adapts its height to fit its content. On
       larger screens the drawer is identical to the modal.
       
       Modals with a \`compact\` flavor simply render the specified component, similar to alerts.
-      Please note: As there is no toolbar or close button, you should handle closing the modal yourself.`,
+      **Please note: As there is no toolbar or close button, you should handle closing the modal yourself.`,
       defaultValue: 'modal',
       type: ['undefined', 'modal', 'drawer', 'compact'],
     },
@@ -46,13 +46,13 @@ export class ModalShowcaseComponent {
     },
     {
       name: 'size',
-      description: `(Optional) Defines the modal width and height on larger screens. On small screens the modal is always full-screen.`,
+      description: `(Optional) Defines the dialog width and height on larger screens. On small screens the dialog is always full-screen.`,
       defaultValue: 'medium',
       type: ['undefined', 'small', 'medium', 'large', 'full-height'],
     },
     {
       name: 'customHeight',
-      description: `(Optional) Setting a customHeight overrides the fixed height on larger screens. Can be used with any string that is a valid value for the CSS height property. \n\n See: https://developer.mozilla.org/en-US/docs/Web/CSS/height `,
+      description: `(Optional) Setting a customHeight overrides the height set by the size property on larger screens. Can be used with any string that is a valid value for the CSS height property. \n\n See: https://developer.mozilla.org/en-US/docs/Web/CSS/height `,
       defaultValue: 'undefined',
       type: ['undefined | string'],
     },
