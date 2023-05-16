@@ -1,6 +1,8 @@
 @use '@kirbydesign/core/src/scss/utils';
 
 :host {
+  display: block;
+
   &.toggle {
     display: flex;
     flex-direction: column;
@@ -30,6 +32,15 @@
       transition-timing-function: utils.get-transition-easing('enter-exit');
       transform: rotate(-90deg) translateY(-#{utils.$border-radius + utils.size('xs')});
       transform-origin: top right;
+
+      @include utils.media('>=medium') {
+        top: 0;
+        transform: translateX(50%);
+        padding: utils.size('s');
+
+        --text-align: initial;
+        --kirby-border-color: initial;
+      }
 
       &:hover,
       &:active {
