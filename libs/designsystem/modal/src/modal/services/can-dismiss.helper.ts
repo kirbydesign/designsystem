@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanDismissConfig } from '../../modal-wrapper/config';
+import { ShowAlertCallback } from '../../modal-wrapper/config';
 import { AlertConfig } from '../alert';
 import { AlertHelper } from './alert.helper';
 
@@ -7,17 +7,13 @@ import { AlertHelper } from './alert.helper';
 export class CanDismissHelper {
   constructor(private alertHelper: AlertHelper) {}
 
-  public getCanDismissCallback(
-    canDismissConfig: CanDismissConfig
-  ): boolean | (() => Promise<boolean>) {
-    const { canDismiss, alertConfig } = canDismissConfig;
-
+  public getCanDismissCallback(callback: ShowAlertCallback) {
     return async () => {
-      const conditionIsMet = await canDismiss();
+      const result = await callback();
 
-      if (!conditionIsMet) {
-        const result = await this.showAlert(alertConfig);
-        return result;
+      if (typeof result !== 'boolean') {
+        const canCloseModal = await this.showAlert(result);
+        return canCloseModal;
       }
 
       return true;

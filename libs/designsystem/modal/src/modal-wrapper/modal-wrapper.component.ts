@@ -41,7 +41,7 @@ import { ButtonComponent } from '@kirbydesign/designsystem/button';
 
 import { Modal, ModalElementsAdvertiser, ModalElementType } from '../modal.interfaces';
 import { CanDismissHelper } from '../modal/services/can-dismiss.helper';
-import { CanDismissConfig, ModalConfig } from './config/modal-config';
+import { ModalConfig, ShowAlertCallback } from './config/modal-config';
 import { COMPONENT_PROPS } from './config/modal-config.helper';
 import { ModalElementsMoverDelegate } from './modal-elements-mover.delegate';
 
@@ -74,6 +74,10 @@ export class ModalWrapperComponent
 
   set scrollDisabled(disabled: boolean) {
     this.ionContent.scrollY = !disabled;
+  }
+
+  set canDismiss(callback: ShowAlertCallback) {
+    this.ionModalElement.canDismiss = this.canDismissHelper.getCanDismissCallback(callback);
   }
 
   @Input() config: ModalConfig;
@@ -240,10 +244,6 @@ export class ModalWrapperComponent
     }[type];
 
     removeModalElementFn();
-  }
-
-  public setCanDismissConfig(canDismissConfig: CanDismissConfig) {
-    this.ionModalElement.canDismiss = this.canDismissHelper.getCanDismissCallback(canDismissConfig);
   }
 
   private initializeResizeModalToModalWrapper() {

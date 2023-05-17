@@ -63,8 +63,8 @@ export class ModalHelper {
 
     let canDismiss: boolean | (() => Promise<boolean>) = true;
 
-    if (config.canDismissConfig) {
-      canDismiss = this.canDismissHelper.getCanDismissCallback(config.canDismissConfig);
+    if (config.showAlert) {
+      canDismiss = this.canDismissHelper.getCanDismissCallback(config.showAlert);
     }
 
     this.isModalOpening = true;
@@ -104,7 +104,7 @@ export class ModalHelper {
 
     // Back button should only be handled manually
     // if the modal is not instantiated through a route.
-    if (!config.modalRoute && !config.canDismissConfig) {
+    if (!config.modalRoute && !config.showAlert) {
       this.handleBrowserBackButton(ionModal);
     }
 

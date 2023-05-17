@@ -3,7 +3,7 @@ import { firstValueFrom, Subject } from 'rxjs';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 
 import { CommonModule } from '@angular/common';
-import { CanDismissConfig, ModalConfig } from '../config/modal-config';
+import { ModalConfig, ShowAlertCallback } from '../config/modal-config';
 import { COMPONENT_PROPS } from '../config/modal-config.helper';
 import { Modal } from '../../modal.interfaces';
 import { CanDismissHelper } from '../../modal/services/can-dismiss.helper';
@@ -72,8 +72,8 @@ export class ModalCompactWrapperComponent implements Modal, OnInit {
     }
   }
 
-  public setCanDismissConfig(canDismissConfig: CanDismissConfig) {
-    this.ionModalElement.canDismiss = this.canDismissHelper.getCanDismissCallback(canDismissConfig);
+  set canDismiss(callback: ShowAlertCallback) {
+    this.ionModalElement.canDismiss = this.canDismissHelper.getCanDismissCallback(callback);
   }
 
   scrollToTop: (_?: any) => void;

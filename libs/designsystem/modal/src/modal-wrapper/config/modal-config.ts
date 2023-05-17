@@ -6,10 +6,10 @@ import { DrawerSupplementaryAction } from './drawer-supplementary-action';
 
 export type ModalFlavor = 'modal' | 'drawer' | 'compact';
 export type ModalSize = 'small' | 'medium' | 'large' | 'full-height';
-export type CanDismissConfig = {
-  canDismiss: (() => Promise<boolean>) | (() => boolean);
-  alertConfig: AlertConfig;
-};
+
+export type ShowAlertCallback =
+  | (() => Promise<boolean | AlertConfig>)
+  | (() => boolean | AlertConfig);
 
 export interface ModalConfig {
   collapseTitle?: boolean;
@@ -20,12 +20,13 @@ export interface ModalConfig {
   siblingModalRouteActivated$?: Observable<ActivatedRoute>;
   flavor?: ModalFlavor;
   componentProps?: { [key: string]: any };
+  showAlert?: ShowAlertCallback;
   // the supplementary action is only available in the drawer
   drawerSupplementaryAction?: DrawerSupplementaryAction;
   // drawer properties
   interactWithBackground?: boolean;
   cssClass?: string | string[];
-  canDismissConfig?: CanDismissConfig;
+  // canDismissConfig?: CanDismissConfig;
 }
 
 /**
