@@ -6,7 +6,7 @@
     "@angular/cdk": "^15.0.3",
     "@fontsource/roboto": "4.2.1",
     "@ionic/angular": "6.2.1",
-    "@kirbydesign/core": "0.0.48",
+    "@kirbydesign/core": "0.0.49",
     "inputmask": "5.0.5"
   },
   "peerDependencies": {
