@@ -7,7 +7,7 @@ import { ModalCompactExampleComponent } from './compact-example/modal-compact-ex
 import { EmbeddedModalExampleComponent } from './embedded-modal-example/embedded-modal-example.component';
 
 const config = {
-  selector: 'cookbook-modal-example-advanced-config',
+  selector: 'cookbook-modal-example-advanced',
   template: `<button kirby-button size="lg" (click)="showModal()" [disabled]="interactWithBackground || preventInteraction">Show modal</button>
 <button kirby-button size="lg" (click)="showDrawer()" [disabled]="preventInteraction">Show drawer</button>
 <button kirby-button size="lg" (click)="showCompact()" [disabled]="interactWithBackground || preventInteraction">Show compact</button>
@@ -197,9 +197,9 @@ export class EmbeddedComponent() {
 @Component({
   selector: config.selector,
   template: config.template,
-  styleUrls: ['./modal-example-advanced-config.component.scss'],
+  styleUrls: ['./modal-example-advanced.component.scss'],
 })
-export class ModalExampleAdvancedConfigComponent {
+export class ModalExampleAdvancedComponent {
   static readonly template = config.template.split('<cookbook-example-configuration-wrapper')[0]; // Remove config part of the template
   static readonly componentTemplate = config.componentTemplate;
   static readonly defaultCodeSnippet = [

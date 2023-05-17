@@ -6,7 +6,7 @@ import { EmbeddedModalExampleComponent } from './embedded-modal-example/embedded
 import { ModalCompactExampleComponent } from './compact-example/modal-compact-example.component';
 
 const config = {
-  selector: 'cookbook-modal-example-sizes',
+  selector: 'cookbook-modal-example-simple',
   template: `<button kirby-button size="lg" (click)="showModal('modal', size)">Show modal</button>
 <button kirby-button size="lg"(click)="showModal('drawer', size)">Show drawer</button>
 <button kirby-button size="lg" (click)="showModal('compact')">Show compact</button>
@@ -40,9 +40,9 @@ type ModalSizeOption = { text: string; value: ModalSize };
 @Component({
   selector: config.selector,
   template: config.template,
-  styleUrls: ['modal-example-basic-config.component.scss'],
+  styleUrls: ['modal-example-simple.component.scss'],
 })
-export class ModalExampleBasicConfigComponent {
+export class ModalExampleSimpleComponent {
   static readonly template = config.template.split('<kirby-card')[0]; // Remove config part of the template
   static readonly defaultCodeSnippet = [config.showModalCodeSnippet].join('\n\n');
   static readonly showModalCodeSnippet = config.showModalCodeSnippet;

@@ -84,8 +84,8 @@ import { HeaderWithEmphasizedActionGroupExampleComponent } from './header-exampl
 import { HeaderWithCustomActionsExampleComponent } from './header-example/examples/custom-actions';
 import { HeaderWithInteractiveTitleExampleComponent } from './header-example/examples/interactive-title';
 import { MenuExampleComponent } from './menu-example/menu-example.component';
-import { ModalExampleBasicConfigComponent } from './modal-example/modal-example-basic-config.component';
-import { ModalExampleAdvancedConfigComponent } from './modal-example/modal-example-advanced-config.component';
+import { ModalExampleSimpleComponent } from './modal-example/modal-example-simple.component';
+import { ModalExampleAdvancedComponent } from './modal-example/modal-example-advanced.component';
 import { ModalExampleOutletComponent } from './modal-example/modal-example-outlet.component';
 
 export const routes: Routes = [
@@ -264,12 +264,12 @@ export const routes: Routes = [
         ],
       },
       {
-        path: 'modal-default',
-        component: ModalExampleAdvancedConfigComponent,
+        path: 'modal-advanced',
+        component: ModalExampleAdvancedComponent,
       },
       {
-        path: 'modal-sizes',
-        component: ModalExampleBasicConfigComponent,
+        path: 'modal-simple',
+        component: ModalExampleSimpleComponent,
       },
       {
         path: 'modal-route',

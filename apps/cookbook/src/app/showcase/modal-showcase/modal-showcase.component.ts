@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { ModalExampleAdvancedConfigComponent } from '~/app/examples/modal-example/modal-example-advanced-config.component';
-import { ModalExampleBasicConfigComponent } from '~/app/examples/modal-example/modal-example-basic-config.component';
+import { ModalExampleAdvancedComponent } from '~/app/examples/modal-example/modal-example-advanced.component';
+import { ModalExampleSimpleComponent } from '~/app/examples/modal-example/modal-example-simple.component';
 import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
 import {
   ApiDescriptionProperty,
@@ -14,8 +14,8 @@ import {
   preserveWhitespaces: true,
 })
 export class ModalShowcaseComponent {
-  advancedConfigExample = ModalExampleAdvancedConfigComponent;
-  basicConfigExample = ModalExampleBasicConfigComponent;
+  advancedConfigExample = ModalExampleAdvancedComponent;
+  basicConfigExample = ModalExampleSimpleComponent;
 
   scrollTo(target: Element) {
     target.scrollIntoView({ behavior: 'smooth' });
