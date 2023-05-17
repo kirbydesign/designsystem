@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { HeaderWithActionGroupExampleComponent } from '~/app/examples/header-example/examples/action-group';
+import { HeaderWithEmphasizedActionGroupExampleComponent } from '~/app/examples/header-example/examples/emphasize-actions';
 import { HeaderWithCustomActionsExampleComponent } from '~/app/examples/header-example/examples/custom-actions';
 import { HeaderWithInteractiveTitleExampleComponent } from '~/app/examples/header-example/examples/interactive-title';
 import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
@@ -17,6 +18,7 @@ import {
 })
 export class HeaderShowcaseComponent {
   actionGroupTemplate: string = HeaderWithActionGroupExampleComponent.template;
+  emphasizedActionGroupTemplate: string = HeaderWithEmphasizedActionGroupExampleComponent.template;
   customActionsTemplate: string = HeaderWithCustomActionsExampleComponent.template;
   interactiveTitleTemplate: string = HeaderWithInteractiveTitleExampleComponent.template;
   interactiveTitleSnippet: string = HeaderWithInteractiveTitleExampleComponent.codeSnippet;
@@ -65,6 +67,13 @@ export class HeaderShowcaseComponent {
       type: ['number'],
       defaultValue: '',
     },
+    {
+      name: 'emphasizeActions',
+      description:
+        'A boolean that describe whether to emphasize the action buttons—i.e. all buttons will be shown and not automatically collapse into a "more" menu. The buttons will also be visible under the title area on small screens. Keep in mind that this setting use more screen real estate than the default option.\n\n**Please note** With this setting enabled you should ensure the action buttons can fit on the screen—or collapse secondary actions into a "more" menu using the `visibleActions` property of kirby-action-group.',
+      type: ['boolean'],
+      defaultValue: 'false',
+    },
   ];
 
   directiveColumns: ApiDescriptionPropertyColumns = {
@@ -96,6 +105,16 @@ export class HeaderShowcaseComponent {
       description:
         'Emitted when the title element is clicked (in either the header or the toolbar).\n\n**Please note: this only applies in key value scenarios.',
       signature: 'EventEmitter<PointerEvent>',
+    },
+  ];
+
+  actionGroupProperties: ApiDescriptionProperty[] = [
+    {
+      name: 'visibleActions',
+      description:
+        'A number that controls how many action buttons are shown. Any additional buttons will be collapsed into a "more" menu.',
+      type: ['number'],
+      defaultValue: '',
     },
   ];
 
