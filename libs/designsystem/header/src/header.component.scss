@@ -56,6 +56,8 @@
     text-align: center;
   }
 
+  // In rare scenarios consumers need to enforce a 1-column layout on larger screens.
+  // Please note: We are NOT promoting this in our cookbook:
   @include utils.media('>=medium') {
     &:not(.single-column) {
       .container {
