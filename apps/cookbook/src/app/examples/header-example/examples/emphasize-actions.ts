@@ -12,7 +12,8 @@ const config = {
         <span class="text">Action 1</span>
       </button>
       <button kirby-button attentionLevel="3" (click)="actionClicked('Action 2')">
-        Action 2
+        <kirby-icon name="kirby"></kirby-icon>
+        <span class="text">Action 2</span>
       </button>
     </kirby-action-group>
   </kirby-header>
