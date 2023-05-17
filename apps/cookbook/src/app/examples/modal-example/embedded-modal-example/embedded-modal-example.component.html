@@ -8,7 +8,10 @@
 <p>{{ subtitle }}</p>
 
 <!-- configuration of currently opened modal -->
-<cookbook-example-configuration-wrapper configAppearance="snap-to-viewport">
+<cookbook-example-configuration-wrapper
+  [title]="'Current modal configuration'"
+  configAppearance="snap-to-viewport"
+>
   <cookbook-modal-example-configuration
     [(showDummyContent)]="showDummyContent"
     [(showPageProgress)]="showPageProgress"

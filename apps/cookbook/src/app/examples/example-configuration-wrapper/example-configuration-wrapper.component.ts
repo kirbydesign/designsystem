@@ -10,6 +10,8 @@ export class ExampleConfigurationWrapperComponent {
   @Input()
   configAppearance: 'block' | 'snap-to-viewport' | 'toggle' = 'block';
 
+  @Input() title: string = 'Configuration';
+
   @HostBinding('class.show-config')
   showConfig: boolean = false;
 
