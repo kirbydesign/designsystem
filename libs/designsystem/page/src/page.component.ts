@@ -356,7 +356,6 @@ export class PageComponent
     this.setToolbarBackgroundPart();
 
     const actionGroupConfig: ActionGroupConfig = {
-      isResizable: false,
       isCondensed: true,
       maxVisibleActions: 1,
     };
