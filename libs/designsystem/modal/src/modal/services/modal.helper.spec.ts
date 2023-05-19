@@ -11,17 +11,16 @@ import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { PageProgressComponent, PageTitleComponent } from '@kirbydesign/designsystem/page';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { Modal, Overlay } from '../../modal.interfaces';
-import { AlertConfig } from '../alert/config/alert-config';
 import { ModalFooterComponent } from '../footer/modal-footer.component';
 import {
-  CanDismissConfig,
   ModalCompactWrapperComponent,
   ModalConfig,
   ModalSize,
+  ShowAlertCallback,
 } from '../../modal-wrapper';
 import { ModalNavigationService } from '../../modal-navigation.service';
 import { ModalHelper } from './modal.helper';
-import { AlertHelper } from './alert.helper';
+import { CanDismissHelper } from './can-dismiss.helper';
 
 @Component({
   template: `
@@ -105,7 +104,7 @@ describe('ModalHelper', () => {
       ContentOverflowsWithFooterEmbeddedComponent,
       ContentWithNoOverflowEmbeddedComponent,
     ],
-    mocks: [ModalNavigationService, AlertHelper],
+    mocks: [ModalNavigationService, CanDismissHelper],
   });
 
   beforeAll(() => {
@@ -141,12 +140,8 @@ describe('ModalHelper', () => {
     expect(ionModal).toBeTruthy();
   };
 
-  const openModal = async (
-    component?: any,
-    size?: ModalSize,
-    canDismissConfig?: CanDismissConfig
-  ) => {
-    await openOverlay({ flavor: 'modal', component, size, canDismissConfig });
+  const openModal = async (component?: any, size?: ModalSize, showAlert?: ShowAlertCallback) => {
+    await openOverlay({ flavor: 'modal', component, size, showAlert });
   };
 
   const openDrawer = async (
@@ -171,31 +166,20 @@ describe('ModalHelper', () => {
     });
 
     describe('canDismiss', () => {
-      it('should pass "true" to "canDismiss", if no canDismissConfig is provided', async () => {
+      it('should pass "true" to "canDismiss", if no showAlert callback is provided', async () => {
         await openModal();
 
         expect(ionModal.canDismiss).toEqual(true);
       });
 
-      it('should pass a function to "canDismiss", if a canDismissConfig is provided', async () => {
-        const alertConfig: AlertConfig = {
-          title: 'Do you want to close the modal?',
-          okBtn: 'Yes',
-          cancelBtn: 'No',
-        };
+      it('should call the getCanDismissCallback method, if a showAlert callback is provided', async () => {
+        const canDismissHelper = spectator.inject(CanDismissHelper);
+        const showAlertCallback = () => true;
 
-        const canDismissConfig: CanDismissConfig = {
-          canDismiss: () => true,
-          alertConfig: alertConfig,
-        };
+        await openModal(null, null, showAlertCallback);
 
-        // Mock 'showAlert' to prevent the test from timing out
-        // due to nested async that is not resolved
-        spectator.service.showAlert = async () => true;
-
-        await openModal(null, null, canDismissConfig);
-
-        expect(typeof ionModal?.canDismiss).toEqual('function');
+        expect(canDismissHelper.getCanDismissCallback).toHaveBeenCalledTimes(1);
+        expect(canDismissHelper.getCanDismissCallback).toHaveBeenCalledWith(showAlertCallback);
       });
     });
 
