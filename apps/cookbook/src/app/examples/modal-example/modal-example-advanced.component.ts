@@ -266,10 +266,10 @@ export class ModalExampleAdvancedComponent {
       interactWithBackground: this.interactWithBackground,
       cssClass: this.customCssClass ? ['my-custom-modal-class'] : [],
       size: this.openFullHeight ? 'full-height' : null,
-      canDismissConfig: {
-        canDismiss: () => !this.alertBeforeClose,
-        alertConfig: alertConfig,
-      },
+      // canDismissConfig: {
+      //   canDismiss: () => !this.alertBeforeClose,
+      //   alertConfig: alertConfig,
+      // },
       componentProps: {
         title,
         subtitle: 'Hello from the first embedded example component!',
