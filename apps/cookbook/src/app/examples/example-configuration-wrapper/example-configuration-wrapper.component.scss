@@ -1,24 +1,48 @@
 @use '@kirbydesign/core/src/scss/utils';
 
+$card-z-index: utils.z('default') + 1;
+$button-z-index: $card-z-index + 1;
+
 :host {
   display: block;
 
   &.toggle {
     display: flex;
     flex-direction: column;
-    align-items: end;
+    align-items: flex-start;
     position: absolute;
     right: utils.size('s');
     top: calc(utils.size('s') + var(--ion-safe-area-top));
 
-    &.show-config {
+    &.align-end {
+      align-items: flex-end;
+
       kirby-card {
-        display: initial;
+        rotate: -45deg;
+        transform-origin: top right;
       }
     }
 
+    button {
+      z-index: $button-z-index;
+    }
+
     kirby-card {
-      display: none;
+      opacity: 0;
+      visibility: hidden;
+      rotate: 45deg;
+      transition-property: opacity, rotate;
+      transition-duration: utils.get-transition-duration('quick');
+      transition-timing-function: utils.get-transition-easing('enter-exit');
+      transform-origin: top left;
+    }
+
+    &.show-config {
+      kirby-card {
+        opacity: 1;
+        visibility: visible;
+        rotate: 0deg;
+      }
     }
   }
 
@@ -32,14 +56,13 @@
       transition-timing-function: utils.get-transition-easing('enter-exit');
       transform: rotate(-90deg) translateY(-#{utils.$border-radius + utils.size('xs')});
       transform-origin: top right;
+      overflow: initial;
 
-      @include utils.media('>=medium') {
-        top: 0;
-        transform: translateX(50%);
-        padding: utils.size('s');
-
-        --text-align: initial;
-        --kirby-border-color: initial;
+      // expand hit-area:
+      &::before {
+        content: '';
+        position: absolute;
+        inset: -20px;
       }
 
       &:hover,
@@ -73,15 +96,17 @@
 
 fieldset {
   border: 1px solid var(--kirby-border-color, utils.get-color('medium'));
+  padding: utils.size('xs');
 
   legend {
     color: utils.get-text-color('semi-dark');
     text-align: var(--text-align, initial);
+    font-size: utils.font-size('s');
   }
 }
 
 kirby-card {
-  z-index: utils.z('default') + 1;
+  z-index: $card-z-index;
   font-size: utils.font-size('xs');
   padding: utils.size('xxs');
   top: 0;
