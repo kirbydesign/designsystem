@@ -9,6 +9,7 @@ import {
 import { COMPONENT_PROPS, Modal, ModalConfig } from '@kirbydesign/designsystem';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
 import { KirbyAnimation } from '@kirbydesign/designsystem';
+import { ModalSizeOption } from '../modal-example-configuration/modal-example-size-selector.component';
 
 @Component({
   selector: 'cookbook-embedded-modal-example',
@@ -49,6 +50,7 @@ export class EmbeddedModalExampleComponent implements OnInit {
   isLoading = false;
   isLoadingAdditionalContent = false;
 
+  showModalSizeSelector: boolean;
   selectedModalSize: ModalSize;
 
   get _footerType(): 'inline' | 'fixed' {
@@ -179,7 +181,7 @@ export class EmbeddedModalExampleComponent implements OnInit {
     console.log(`Alert closed: ${result}`);
   }
 
-  setSelectedModalSize(size) {
+  setSelectedModalSize(size: ModalSizeOption) {
     this.selectedModalSize = size.value;
   }
 }

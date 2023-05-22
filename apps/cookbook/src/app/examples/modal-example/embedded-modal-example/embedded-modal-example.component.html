@@ -32,7 +32,9 @@
       <button kirby-button attentionLevel="2" (click)="showNestedActionSheet()">
         Action sheet
       </button>
-      <cookbook-example-configuration-wrapper>
+      <details>
+        <summary>Configuration for nested modal</summary>
+        <!-- <cookbook-example-configuration-wrapper [title]="'Configuration for nested modal'"> -->
         <cookbook-modal-example-configuration
           [(showPageProgress)]="showNestedPageProgress"
           [(showFooter)]="showNestedFooter"
@@ -42,10 +44,19 @@
           [(collapseTitle)]="showNestedCollapseTitle"
           [(delayLoadDummyContent)]="delayLoadDummyContent"
           [(loadAdditionalContent)]="loadAdditionalContent"
-          [modalSizeOptions]="modalSizeOptions"
-          (selectedModalSizeOption)="setSelectedModalSize($event)"
         ></cookbook-modal-example-configuration>
-      </cookbook-example-configuration-wrapper>
+        <ng-container *ngIf="showModalSizeSelector !== undefined">
+          <kirby-divider [hasMargin]="true"></kirby-divider>
+          <p class="size-selector-heading">
+            Size of nested modal/drawer
+            <br />
+            <em>(on screens larger than 768px)</em>
+          </p>
+          <cookbook-modal-example-size-selector
+            (sizeChange)="setSelectedModalSize($event)"
+          ></cookbook-modal-example-size-selector>
+        </ng-container>
+      </details>
     </kirby-card>
 
     <div *ngIf="showStaticDummyContent">

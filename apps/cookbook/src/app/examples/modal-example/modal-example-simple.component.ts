@@ -1,28 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
-import { ModalConfig, ModalController, ModalFlavor, ModalSize } from '@kirbydesign/designsystem';
+import { ModalConfig, ModalController, ModalFlavor } from '@kirbydesign/designsystem';
 
 import { EmbeddedModalExampleComponent } from './embedded-modal-example/embedded-modal-example.component';
 import { ModalCompactExampleComponent } from './compact-example/modal-compact-example.component';
+import {
+  ModalExampleSizeSelectorComponent,
+  ModalSizeOption,
+} from './modal-example-configuration/modal-example-size-selector.component';
 
 const config = {
   selector: 'cookbook-modal-example-simple',
   template: `<button kirby-button size="lg" (click)="showModal('modal', size)">Show modal</button>
 <button kirby-button size="lg"(click)="showModal('drawer', size)">Show drawer</button>
 <button kirby-button size="lg" (click)="showModal('compact')">Show compact</button>
-
 <kirby-card>
-  <kirby-card-header
-    [title]="'Size of modal/drawer:'"
-  ></kirby-card-header>
-  <kirby-radio-group [value]="size" (valueChange)="sizeChange($event)">
-    <kirby-item size="xs" *ngFor="let item of modalSizeOptions">
-      <kirby-radio [value]="item" slot="start"></kirby-radio>
-      <kirby-label>{{item.text}}</kirby-label>
-    </kirby-item> 
-  </kirby-radio-group>
-</kirby-card>
-  `,
+  <kirby-card-header>
+    <strong>Size of modal/drawer</strong><br />
+    <em>(on screens larger than 768px)</em>
+  </kirby-card-header>
+  <cookbook-modal-example-size-selector (sizeChange)="sizeChange($event)"></cookbook-modal-example-size-selector>
+</kirby-card>`,
   showModalCodeSnippet: `constructor(private modalController: ModalController) {}
 
 showModal(flavor: ModalFlavor, size?: ModalSize) {
@@ -35,28 +33,27 @@ showModal(flavor: ModalFlavor, size?: ModalSize) {
   this.modalController.showModal(config);
 }`,
 };
-type ModalSizeOption = { text: string; value: ModalSize };
 
 @Component({
   selector: config.selector,
   template: config.template,
-  styleUrls: ['modal-example-simple.component.scss'],
+  styleUrls: ['./modal-example-simple.component.scss'],
 })
-export class ModalExampleSimpleComponent {
+export class ModalExampleSimpleComponent implements OnInit {
   static readonly template = config.template.split('<kirby-card')[0]; // Remove config part of the template
   static readonly defaultCodeSnippet = [config.showModalCodeSnippet].join('\n\n');
   static readonly showModalCodeSnippet = config.showModalCodeSnippet;
 
-  modalSizeOptions: ModalSizeOption[] = [
-    { text: 'Small', value: 'small' },
-    { text: 'Medium (default)', value: 'medium' },
-    { text: 'Large', value: 'large' },
-    { text: 'Full height (medium width only)', value: 'full-height' },
-  ];
+  @ViewChild(ModalExampleSizeSelectorComponent, { static: true })
+  private sizeSelector?: ModalExampleSizeSelectorComponent;
 
-  size: ModalSizeOption = this.modalSizeOptions[1];
+  size: ModalSizeOption;
 
   constructor(private modalController: ModalController) {}
+
+  ngOnInit(): void {
+    this.size = this.sizeSelector.size;
+  }
 
   async showModal(flavor: ModalFlavor, size?: ModalSizeOption) {
     let config: ModalConfig;
@@ -72,11 +69,11 @@ export class ModalExampleSimpleComponent {
         flavor,
         size: size.value,
         componentProps: {
-          title: `Modal - ${size.text}`,
+          title: `${flavor === 'modal' ? 'Modal' : 'Drawer'} - ${size.text}`,
           subtitle: 'Hello from the first embedded example component!',
           showNestedOptions: true,
           showDummyContent: false,
-          modalSizeOptions: this.modalSizeOptions,
+          showModalSizeSelector: true,
         },
       };
     }

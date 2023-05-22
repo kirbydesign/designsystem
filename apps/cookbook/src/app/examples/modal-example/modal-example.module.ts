@@ -10,6 +10,7 @@ import { ExamplesSharedModule } from '../examples.shared.module';
 import { ModalCompactExampleComponent } from './compact-example/modal-compact-example.component';
 import { EmbeddedModalExampleComponent } from './embedded-modal-example/embedded-modal-example.component';
 import { ModalExampleConfigurationComponent } from './modal-example-configuration/modal-example-configuration.component';
+import { ModalExampleSizeSelectorComponent } from './modal-example-configuration/modal-example-size-selector.component';
 import { ModalExampleAdvancedComponent } from './modal-example-advanced.component';
 import { ModalExampleSimpleComponent } from './modal-example-simple.component';
 import { ModalExampleOutletComponent } from './modal-example-outlet.component';
@@ -22,6 +23,7 @@ const COMPONENT_DECLARATIONS = [
   ModalExampleAdvancedComponent,
   ModalExampleSimpleComponent,
   ModalExampleConfigurationComponent,
+  ModalExampleSizeSelectorComponent,
   ModalExampleOutletComponent,
   EmbeddedModalExampleComponent,
   ModalCompactExampleComponent,
