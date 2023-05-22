@@ -9,20 +9,16 @@
     &.indent {
       margin-left: utils.size('l');
       margin-top: utils.size('xxxs');
-      font-size: utils.font-size('s');
     }
   }
 
   p {
     margin: 0;
+    font-size: utils.font-size('s');
+  }
+
+  .issue-hint {
+    margin-left: utils.size('xxxl');
     font-style: italic;
   }
-
-  kirby-dropdown {
-    margin-block: utils.size('xxs');
-  }
-}
-
-kirby-divider:first-child {
-  display: none;
 }

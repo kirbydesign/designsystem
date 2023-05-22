@@ -82,7 +82,7 @@
   text="Collapse title"
 ></kirby-checkbox>
 
-<small *ngIf="collapseTitle !== undefined">
+<small *ngIf="collapseTitle !== undefined" class="issue-hint">
   (Collapse title is unavailable for routed modals. See
   <a href="https://github.com/kirbydesign/designsystem/issues/2192" target="_blank">issue #2192</a>
   .)
@@ -95,18 +95,6 @@
   [disabled]="disabled"
   text="Alert before closing"
 ></kirby-checkbox>
-
-<ng-container *ngIf="modalSizeOptions !== undefined">
-  <kirby-divider [hasMargin]="true"></kirby-divider>
-  <p>Modal and drawer size on screens larger than 768px:</p>
-
-  <kirby-dropdown
-    *ngIf="modalSizeOptions !== undefined"
-    [items]="modalSizeOptions"
-    (change)="changeSize($event)"
-    [usePopover]="true"
-  ></kirby-dropdown>
-</ng-container>
 
 <ng-container *ngIf="interactWithBackground !== undefined || customCssClass !== undefined">
   <kirby-divider [hasMargin]="true"></kirby-divider>

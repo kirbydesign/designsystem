@@ -53,9 +53,6 @@ export class ModalExampleConfigurationComponent {
   @Input() snapFooterToKeyboard: boolean;
   @Output() snapFooterToKeyboardChange = new EventEmitter<boolean>();
 
-  @Input() modalSizeOptions: [{ text: string; value: ModalSize }];
-  @Output() selectedModalSizeOption = new EventEmitter<ModalSize>();
-
   // Setting ion-checkbox.checked programatically triggers change event
   // Use this flag in checkbox change event handlers to prevent ExpressionChangedAfterItHasBeenCheckedError
   private preventChangeEvent = false;
@@ -155,11 +152,5 @@ export class ModalExampleConfigurationComponent {
   toggleSnapFooterToKeyboard(show: boolean) {
     this.snapFooterToKeyboard = show;
     this.snapFooterToKeyboardChange.emit(show);
-  }
-
-  changeSize(size: ModalSize) {
-    if (this.preventChangeEvent) return;
-
-    this.selectedModalSizeOption.emit(size);
   }
 }

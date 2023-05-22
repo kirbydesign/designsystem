@@ -24,8 +24,6 @@ const config = {
     [(loadAdditionalContent)]="loadAdditionalContent"
     [(interactWithBackground)]="interactWithBackground"
     [(customCssClass)]="customCssClass"
-    [modalSizeOptions]="modalSizeOptions"
-    (selectedModalSizeOption)="setSelectedModalSize($event)"
   >
   </cookbook-modal-example-configuration>
 </cookbook-example-configuration-wrapper>
@@ -244,15 +242,6 @@ export class ModalExampleAdvancedComponent {
   snapNestedFooterToKeyboard = false;
   displayNestedFooterAsInline = false;
 
-  modalSizeOptions = [
-    { text: 'Small', value: 'small' },
-    { text: 'Medium (default)', value: 'medium' },
-    { text: 'Large', value: 'large' },
-    { text: 'Full height (medium width only)', value: 'full-height' },
-  ];
-
-  selectedModalSize: ModalSize;
-
   constructor(private modalController: ModalController, private windowRef: WindowRef) {}
 
   private async showOverlay(flavor: 'modal' | 'drawer') {
@@ -266,7 +255,6 @@ export class ModalExampleAdvancedComponent {
       collapseTitle: this.collapseTitle,
       component: EmbeddedModalExampleComponent,
       interactWithBackground: this.interactWithBackground,
-      size: this.selectedModalSize,
       cssClass: this.customCssClass ? ['my-custom-modal-class'] : [],
       componentProps: {
         title,
@@ -286,7 +274,7 @@ export class ModalExampleAdvancedComponent {
         delayLoadDummyContent: this.delayLoadDummyContent,
         loadAdditionalContent: this.loadAdditionalContent,
         displayFooterAsInline: this.displayFooterAsInline,
-        modalSizeOptions: this.modalSizeOptions,
+        showModalSizeSelector: true,
         disableScroll: this.disableScroll,
         showNestedCollapseTitle: this.showNestedCollapseTitle,
       },
@@ -321,10 +309,6 @@ export class ModalExampleAdvancedComponent {
 
   async showDrawer() {
     await this.showOverlay('drawer');
-  }
-
-  setSelectedModalSize(size) {
-    this.selectedModalSize = size.value;
   }
 
   private onOverlayClose(data: any): void {
