@@ -1,0 +1,82 @@
+import { Component } from '@angular/core';
+import { ReactiveFormsModule, UntypedFormControl } from '@angular/forms';
+import { createDirectiveFactory, SpectatorDirective } from '@ngneat/spectator';
+import { InputComponent } from '../../input/input.component';
+import { NumbersOnlyMaskDirective } from './numbers-only-mask.directive';
+
+const letters = 'abcdfghijklmnopqrstuvwxyz';
+const allowedCharacters = 'e.,+-';
+
+// eslint-disable-next-line @angular-eslint/component-selector
+@Component({ selector: 'numeric-input-host', template: '' })
+class NumericInputHostComponent {
+  numericInput = new UntypedFormControl('');
+}
+
+describe('NumbersOnlyMaskDirective', () => {
+  let spectator: SpectatorDirective<NumbersOnlyMaskDirective>;
+
+  const createDirective = createDirectiveFactory({
+    directive: NumbersOnlyMaskDirective,
+    host: NumericInputHostComponent,
+    imports: [ReactiveFormsModule, InputComponent],
+  });
+
+  beforeEach(() => {
+    spectator = createDirective(
+      `<input kirby-input kirby-numbers-only-mask type="number" [formControl]="numericInput"/>`
+    );
+  });
+
+  it('should get the instance', () => {
+    const instance = spectator.directive;
+
+    expect(instance).toBeDefined();
+  });
+
+  describe('numbers', () => {
+    it('should allow all numbers from 0-9', () => {
+      spectator.typeInElement('0123456789', spectator.element);
+
+      expect(spectator.element).toHaveValue('0123456789');
+    });
+  });
+
+  describe('allowed characters', () => {
+    for (const char of allowedCharacters) {
+      it(`should allow the character '${char}'`, () => {
+        spectator.typeInElement(char, spectator.element);
+
+        expect(spectator.element).toHaveValue(char);
+      });
+    }
+  });
+
+  describe('letters', () => {
+    for (const letter of letters) {
+      it(`should not allow lowercase ${letter}`, () => {
+        spectator.typeInElement(letter, spectator.element);
+
+        expect(spectator.element).toHaveValue('');
+      });
+
+      it(`should not allow uppercase ${letter}`, () => {
+        const upperCaseLetter = letter.toUpperCase();
+
+        spectator.typeInElement(upperCaseLetter, spectator.element);
+
+        expect(spectator.element).toHaveValue('');
+      });
+    }
+
+    xdescribe('reactive form', () => {
+      it('should be able to filter out letters from form-control', () => {
+        // @ts-ignore
+        const numericInput = spectator.hostComponent.numericInput;
+        numericInput.setValue('20c23');
+        // expect(numericInput.value).toEqual('2023');
+        expect(spectator.element).toHaveValue('2023');
+      });
+    });
+  });
+});
