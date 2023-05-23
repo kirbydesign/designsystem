@@ -86,6 +86,45 @@
   ></cookbook-form-field-input-numeric-example>
 </cookbook-example-viewer>
 
+<h4>Numbers only mask</h4>
+<p>
+  Chrome, Firefox and Safari handles inputs with
+  <code>type="number"</code>
+  differently. Chrome prevents the user from typing anything other than numbers, while Firefox and
+  Safari allows letters as well. Add the
+  <code>kirby-numbers-only-mask</code>
+  to the number input to ensure the same behaviour across these browsers.
+</p>
+
+<p>
+  <em>
+    <strong>*Please note:</strong>
+    <code>kirby-numbers-only-mask</code>
+    and
+    <code>kirby-decimal-mask</code>
+    should not be used together. Furthermore,
+    <code>kirby-numbers-only-mask</code>
+    also allow the following characters:
+    <code>e</code>
+    ,
+    <code>+</code>
+    ,
+    <code>-</code>
+    ,
+    <code>.</code>
+    ,
+    <code>,</code>
+    .
+  </em>
+</p>
+
+<cookbook-example-viewer [html]="inputNumbersOnlyMaskExample.template">
+  <cookbook-form-field-input-numbers-only-mask-example
+    [size]="size"
+    #inputNumbersOnlyMaskExample
+  ></cookbook-form-field-input-numbers-only-mask-example>
+</cookbook-example-viewer>
+
 <h4>Decimal mask</h4>
 <p>
   Restricts the input to numbers only. It ensures correct keyboard, adds grouping separators based
