@@ -12,8 +12,10 @@ import {
   ModalWrapperComponent,
 } from '../../modal-wrapper';
 
+import { AlertConfig } from '../alert/config/alert-config';
 import { ModalAnimationBuilderService } from './modal-animation-builder.service';
 import { CanDismissHelper } from './can-dismiss.helper';
+import { AlertHelper } from './alert.helper';
 
 @Injectable()
 export class ModalHelper {
@@ -21,7 +23,8 @@ export class ModalHelper {
     private ionicModalController: ModalController,
     private modalAnimationBuilder: ModalAnimationBuilderService,
     private windowRef: WindowRef,
-    private canDismissHelper: CanDismissHelper
+    private canDismissHelper: CanDismissHelper,
+    private alertHelper: AlertHelper
   ) {}
 
   /* 
@@ -32,7 +35,7 @@ export class ModalHelper {
   */
   private isModalOpening = false;
 
-  public async showModalWindow(config: ModalConfig): Promise<Overlay> {
+  public async showModalWindow(config: ModalConfig, alertConfig?: AlertConfig): Promise<Overlay> {
     if (this.isModalOpening) return;
 
     config.flavor = config.flavor || 'modal';
@@ -65,6 +68,25 @@ export class ModalHelper {
 
     if (config.showAlert) {
       canDismiss = this.canDismissHelper.getCanDismissCallback(config.showAlert);
+    }
+
+    // This functionality is kept to prevent breaking changes, but should be depracated in the next major.
+    // It will be replaced by the new 'showAlert' callback.
+    if (alertConfig) {
+      console.warn(
+        "This way of passing an alertConfig to the modal will be deprecated. We recommend using the 'showAlert' callback instead."
+      );
+
+      // Remembers the modal dismissal response from user to prevent multiple alerts on
+      // approval since the callback is invoked more than once when closing.
+      let canBeDismissed = false;
+      canDismiss = async () => {
+        if (!canBeDismissed) {
+          canBeDismissed = await this.showAlert(alertConfig);
+        }
+
+        return canBeDismissed;
+      };
     }
 
     this.isModalOpening = true;
@@ -104,7 +126,7 @@ export class ModalHelper {
 
     // Back button should only be handled manually
     // if the modal is not instantiated through a route.
-    if (!config.modalRoute && !config.showAlert) {
+    if (!config.modalRoute && !config.showAlert && !alertConfig) {
       this.handleBrowserBackButton(ionModal);
     }
 
@@ -152,5 +174,11 @@ export class ModalHelper {
     popStateEvent$.pipe(takeUntil(modalClose$)).subscribe(() => {
       modal.dismiss();
     });
+  }
+
+  public async showAlert(config: AlertConfig): Promise<boolean> {
+    const alert = await this.alertHelper.showAlert(config);
+    const result = await alert.onWillDismiss;
+    return result.data;
   }
 }
