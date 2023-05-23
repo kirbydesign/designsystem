@@ -4,9 +4,6 @@ import { createDirectiveFactory, SpectatorDirective } from '@ngneat/spectator';
 import { InputComponent } from '../../input/input.component';
 import { NumbersOnlyMaskDirective } from './numbers-only-mask.directive';
 
-const letters = 'abcdfghijklmnopqrstuvwxyz';
-const allowedCharacters = 'e.,+-';
-
 // eslint-disable-next-line @angular-eslint/component-selector
 @Component({ selector: 'numeric-input-host', template: '' })
 class NumericInputHostComponent {
@@ -24,7 +21,7 @@ describe('NumbersOnlyMaskDirective', () => {
 
   beforeEach(() => {
     spectator = createDirective(
-      `<input kirby-input kirby-numbers-only-mask type="number" [formControl]="numericInput"/>`
+      `<input type="number" kirby-input kirby-numbers-only-mask type="number" [formControl]="numericInput"/>`
     );
   });
 
@@ -42,6 +39,8 @@ describe('NumbersOnlyMaskDirective', () => {
     });
   });
 
+  const allowedCharacters = 'e.,+-';
+
   describe('allowed characters', () => {
     for (const char of allowedCharacters) {
       it(`should allow the character '${char}'`, () => {
@@ -51,6 +50,8 @@ describe('NumbersOnlyMaskDirective', () => {
       });
     }
   });
+
+  const letters = 'abcdfghijklmnopqrstuvwxyz';
 
   describe('letters', () => {
     for (const letter of letters) {
