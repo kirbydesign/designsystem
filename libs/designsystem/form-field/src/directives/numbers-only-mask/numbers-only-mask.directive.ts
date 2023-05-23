@@ -1,5 +1,4 @@
-import { getLocaleNumberSymbol, NumberSymbol } from '@angular/common';
-import { Directive, ElementRef, Inject, Input, LOCALE_ID, OnInit } from '@angular/core';
+import { Directive, ElementRef, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import 'inputmask/lib/extensions/inputmask.numeric.extensions';
 import Inputmask from 'inputmask/lib/inputmask';
@@ -29,7 +28,7 @@ export class NumbersOnlyMaskDirective implements ControlValueAccessor, OnInit {
   constructor(private elementRef: ElementRef) {}
 
   ngOnInit(): void {
-    // Set type="text", because functionality like 'setSelectionRange' are not supported on type="number"
+    // Set type="text", because functionality like 'regex' are not supported on type="number"
     this.elementRef.nativeElement.setAttribute('type', 'text');
 
     this.initMask();
@@ -51,7 +50,12 @@ export class NumbersOnlyMaskDirective implements ControlValueAccessor, OnInit {
     new Inputmask({
       placeholder: '',
       regex: '^[-+e\\d.,]+$',
-      allowMinus: false,
+      allowMinus: false, // this is handled by the regex
+      onBeforeWrite: () => {
+        if (!this.inputmask) return;
+        const unmaskedValue = this.inputmask.unmaskedvalue();
+        this.onChange(unmaskedValue.replace(/^[-+e\\d.,]+$/g, ''));
+      },
     }).mask(this.elementRef.nativeElement);
     this.inputmask = this.elementRef.nativeElement.inputmask;
   }

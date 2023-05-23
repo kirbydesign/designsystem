@@ -54,13 +54,13 @@ describe('NumbersOnlyMaskDirective', () => {
 
   describe('letters', () => {
     for (const letter of letters) {
-      it(`should not allow lowercase ${letter}`, () => {
+      it(`should not allow lowercase '${letter}'`, () => {
         spectator.typeInElement(letter, spectator.element);
 
         expect(spectator.element).toHaveValue('');
       });
 
-      it(`should not allow uppercase ${letter}`, () => {
+      it(`should not allow uppercase '${letter}'`, () => {
         const upperCaseLetter = letter.toUpperCase();
 
         spectator.typeInElement(upperCaseLetter, spectator.element);
@@ -69,13 +69,27 @@ describe('NumbersOnlyMaskDirective', () => {
       });
     }
 
-    xdescribe('reactive form', () => {
+    describe('reactive form', () => {
+      it('should be able to receive value as number from form-control', () => {
+        // @ts-ignore
+        const numericInput = spectator.hostComponent.numericInput;
+        numericInput.setValue('123');
+        expect(numericInput.value).toEqual('123');
+      });
+
       it('should be able to filter out letters from form-control', () => {
         // @ts-ignore
         const numericInput = spectator.hostComponent.numericInput;
-        numericInput.setValue('20c23');
-        // expect(numericInput.value).toEqual('2023');
-        expect(spectator.element).toHaveValue('2023');
+        numericInput.setValue('20c23n');
+        expect(numericInput.value).toEqual('2023');
+      });
+
+      it('should update form value, on change', () => {
+        spectator.typeInElement('456', spectator.element);
+
+        // @ts-ignore
+        const numericInput = spectator.hostComponent.numericInput;
+        expect(numericInput.value).toEqual('456');
       });
     });
   });
