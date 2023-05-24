@@ -1,0 +1,35 @@
+<div class="button-container" #buttonContainer>
+  <ng-content select="button[kirby-button]"></ng-content>
+  <ng-container *ngIf="!userProvidedButton">
+    <button
+      kirby-button
+      [size]="buttonSize"
+      [disabled]="isDisabled"
+      type="button"
+      [attentionLevel]="attentionLevel"
+      #defaultButton
+    >
+      <kirby-icon [name]="'more'"></kirby-icon>
+    </button>
+  </ng-container>
+</div>
+<kirby-card
+  kirbyFloating
+  [strategy]="'fixed'"
+  [reference]="buttonContainerElement"
+  [isDisabled]="isDisabled"
+  [triggers]="triggers"
+  [placement]="placement"
+  [DOMPortalOutlet]="DOMPortalOutlet"
+  [portalOutletConfig]="portalOutletConfig"
+  [closeOnBackdrop]="closeOnBackdrop"
+  [closeOnEscapeKey]="closeOnEscapeKey"
+  [closeOnSelect]="closeOnSelect"
+  [autoPlacement]="autoPlacement"
+  [ngStyle]="{
+    minWidth: minWidth ? minWidth + 'px' : null
+  }"
+  class="menu-popover"
+>
+  <ng-content select="kirby-item"></ng-content>
+</kirby-card>

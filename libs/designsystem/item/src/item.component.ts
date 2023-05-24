@@ -13,13 +13,15 @@ export enum ItemSize {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ItemComponent {
-  @Input() disabled: boolean;
+  @HostBinding('class.disabled')
+  @Input()
+  disabled: boolean;
   @HostBinding('class.selected')
   @Input()
   selected: boolean;
   @HostBinding('class.disclosure')
   @Input()
-  disclosure: 'link' | 'arrow-more' | 'arrow-down' | 'arrow-up';
+  disclosure: 'link' | 'arrow-more' | 'arrow-down' | 'arrow-up' | null;
   @Input() selectable: boolean;
 
   @Input()

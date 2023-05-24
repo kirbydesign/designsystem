@@ -1,4 +1,12 @@
 <div class="container">
+  <div class="toggle-wrapper" *ngIf="showViewModeToggle">
+    Toggle full-size
+    <kirby-toggle
+      (checkedChange)="onViewModeToggleChange($event)"
+      [checked]="viewMode === 'full-size'"
+    ></kirby-toggle>
+  </div>
+
   <div class="docs-demo-device ios">
     <figure>
       <svg class="docs-demo-device-md-bar" viewBox="0 0 1384.3 40.3">
@@ -21,5 +29,5 @@
       <iframe loading="lazy" importance="low" [src]="trustedSrc" #iframe></iframe>
     </figure>
   </div>
-  <a *ngIf="showExternalLink" class="kirby-external-icon" [href]="trustedSrc"> Pop out </a>
+  <a *ngIf="showExternalLink" class="kirby-external-icon" [href]="trustedSrc">Pop out</a>
 </div>

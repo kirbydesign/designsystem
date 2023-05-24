@@ -1,3 +1,26 @@
+<h2>NB!</h2>
+<p>
+  If you are importing
+  <code>FormFieldModule</code>
+  rather than
+  <code>KirbyModule</code>
+  , you'll also need to import
+  <code>DateInputDirective</code>
+  .
+</p>
+<p>
+  In your module:
+  <code>imports: [ FormFieldModule, DateInputDirective ]</code>
+</p>
+
+<p>
+  This is due to a bug in the
+  <code>FormFieldModule</code>
+  &nbsp;
+  <a href="https://github.com/kirbydesign/designsystem/issues/3007">(See issue here)</a>
+  . A fix will be released in the next major version of Kirby.
+</p>
+<kirby-divider></kirby-divider>
 <h2>Input</h2>
 <cookbook-form-field-example-configuration
   [(size)]="size"
@@ -8,6 +31,13 @@
     [size]="size"
     #inputDefaultExample
   ></cookbook-form-field-input-example>
+</cookbook-example-viewer>
+
+<h3>Color</h3>
+<cookbook-example-viewer [html]="inputColorExample.template">
+  <cookbook-form-field-input-color-example
+    #inputColorExample
+  ></cookbook-form-field-input-color-example>
 </cookbook-example-viewer>
 
 <h3>Label</h3>
@@ -28,8 +58,10 @@
 
 <h3>Affix</h3>
 <p>
-  <strong>Please note:</strong> Affix functionality is <em>only</em> intended for use with
-  kirby-input. Date mask input currently does not support prefixed content.
+  <strong>Please note:</strong>
+  Affix functionality is
+  <em>only</em>
+  intended for use with kirby-input. Date mask input currently does not support prefixed content.
 </p>
 <cookbook-example-viewer [html]="affixExample.template">
   <cookbook-form-field-input-affix-example
@@ -58,18 +90,26 @@
 <p>
   Restricts the input to numbers only. It ensures correct keyboard, adds grouping separators based
   on locale, and will default to allow two fractional digits. These can be configured by setting
-  <code>[precision]="amount of digits"</code>.
+  <code>[precision]="amount of digits"</code>
+  .
 </p>
 <p>
-  Input can be restricted to a specified range with <code>[min]</code> and
+  Input can be restricted to a specified range with
+  <code>[min]</code>
+  and
   <code>[max]</code>
 </p>
 <p>
   As default, negative numbers are disallowed, however, they can be allowed by setting either
-  <code>[allowMinus]="true"</code> or entering a negative number to [min]
+  <code>[allowMinus]="true"</code>
+  or entering a negative number to [min]
   <code>[min]="negative number"</code>
 </p>
-<p>Group separators can be disabled with <code>[disableGroupSeperator]</code>.</p>
+<p>
+  Group separators can be disabled with
+  <code>[disableGroupSeperator]</code>
+  .
+</p>
 <cookbook-example-viewer [html]="inputDecimalMaskExample.template">
   <cookbook-form-field-input-decimal-mask-example
     [size]="size"
@@ -77,10 +117,12 @@
   ></cookbook-form-field-input-decimal-mask-example>
 </cookbook-example-viewer>
 <p>
-  <em
-    ><strong>*Please note:</strong> using <code>maxlength</code> will disallow fractional
-    digits.</em
-  >
+  <em>
+    <strong>*Please note:</strong>
+    using
+    <code>maxlength</code>
+    will disallow fractional digits.
+  </em>
 </p>
 
 <h3>Date</h3>
@@ -91,10 +133,15 @@
   ></cookbook-form-field-input-date-example>
 </cookbook-example-viewer>
 <p>
-  <em
-    ><strong>*Please note:</strong> Date-mask is based on <code>LOCALE_ID</code>. When
-    <code>DA</code> the date-mask will be <code>dd.mm.åååå</code></em
-  >
+  <em>
+    <strong>*Please note:</strong>
+    Date-mask is based on
+    <code>LOCALE_ID</code>
+    . When
+    <code>DA</code>
+    the date-mask will be
+    <code>dd.mm.åååå</code>
+  </em>
 </p>
 
 <h3>Disabled</h3>

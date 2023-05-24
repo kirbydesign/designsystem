@@ -1,14 +1,14 @@
 import { Component, forwardRef, Input } from '@angular/core';
 
 import {
-  AnnotationOptions,
   BaseChartComponent,
   ChartDataset,
   ChartHighlightedElements,
   ChartLabel,
-  ChartOptions,
   ChartType,
-} from '@kirbydesign/designsystem';
+} from '@kirbydesign/designsystem/chart';
+import { ChartOptions } from 'chart.js';
+import { AnnotationOptions } from 'chartjs-plugin-annotation';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
@@ -25,9 +25,9 @@ export class MockBaseChartComponent {
   @Input() type: ChartType;
   @Input() data: ChartDataset[] | number[];
   @Input() labels: ChartLabel[];
-  @Input() customOptions: ChartOptions;
-  @Input() annotations: AnnotationOptions[];
-  @Input() highlightedElements: ChartHighlightedElements;
+  @Input() customOptions?: ChartOptions;
+  @Input() annotations?: AnnotationOptions[];
+  @Input() highlightedElements?: ChartHighlightedElements;
   @Input() height: string | number;
 }
 

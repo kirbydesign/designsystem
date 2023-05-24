@@ -1,11 +1,16 @@
 import { Directive, forwardRef, Input } from '@angular/core';
 
-import { ThemeColor, ThemeColorDirective } from '@kirbydesign/designsystem';
+import { ThemeColor } from '@kirbydesign/designsystem/helpers';
+import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 
+// #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Directive({
   // eslint-disable-next-line @angular-eslint/directive-selector
-  selector: `kirby-card[themeColor],
+  selector: `kirby-avatar[themeColor],
+             kirby-card[themeColor],
              kirby-icon[themeColor],
+             kirby-progress-circle-ring[themeColor],
+             kirby-modal-footer[themeColor],
              kirby-empty-state[themeColor]`,
   providers: [
     {
@@ -17,3 +22,5 @@ import { ThemeColor, ThemeColorDirective } from '@kirbydesign/designsystem';
 export class MockThemeColorDirective {
   @Input() themeColor: ThemeColor;
 }
+
+// #endregion

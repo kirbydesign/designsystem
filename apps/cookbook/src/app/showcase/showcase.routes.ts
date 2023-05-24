@@ -1,12 +1,16 @@
 import { Routes } from '@angular/router';
 
+import { ModalV2RoutingComponent } from '@kirbydesign/designsystem/modal/v2';
 import { ModalRoutePage1ExampleComponent } from '../examples/modal-example/modal-route-example/modal-route-page1-example.component';
 import { ModalRoutePage2ExampleComponent } from '../examples/modal-example/modal-route-example/modal-route-page2-example.component';
 import { ItemShowcaseComponent } from '../showcase/item-showcase/item-showcase.component';
 
+import { ModalRoutingV2ExamplePage1Component } from '../examples/modal-v2-example/modal-routing/modal-routing-v2-example-page1.component';
+import { ModalRoutingV2ExamplePage2Component } from '../examples/modal-v2-example/modal-routing/modal-routing-v2-example-page2.component';
 import { AccordionShowcaseComponent } from './accordion-showcase/accordion-showcase.component';
 import { ActionSheetShowcaseComponent } from './action-sheet-showcase/action-sheet-showcase.component';
 import { AlertShowcaseComponent } from './alert-showcase/alert-showcase.component';
+import { AlertExperimentalShowcaseComponent } from './alert-experimental-showcase/alert-experimental-showcase.component';
 import { AvatarShowcaseComponent } from './avatar-showcase/avatar-showcase.component';
 import { BadgeShowcaseComponent } from './badge-showcase/badge-showcase.component';
 import { ButtonShowcaseComponent } from './button-showcase/button-showcase.component';
@@ -34,6 +38,7 @@ import { ListNoShapeShowcaseComponent } from './list-no-shape-showcase/list-no-s
 import { ListShowcaseComponent } from './list-showcase/list-showcase.component';
 import { ListSwipeShowcaseComponent } from './list-swipe-showcase/list-swipe-showcase.component';
 import { LoadingOverlayShowcaseComponent } from './loading-overlay-showcase/loading-overlay-showcase.component';
+import { ModalV2ShowcaseComponent } from './modal-v2-showcase/modal-v2-showcase.component';
 import { ModalShowcaseComponent } from './modal-showcase/modal-showcase.component';
 import { PageShowcaseComponent } from './page-showcase/page-showcase.component';
 import { ProgressCircleShowcaseComponent } from './progress-circle-showcase/progress-circle-showcase.component';
@@ -55,6 +60,8 @@ import { ToolbarShowcaseComponent } from './toolbar-showcase/toolbar-showcase.co
 import { RadioShowcaseComponent } from './radio-showcase/radio-showcase.component';
 import { CookbookChartStockConfigShowcaseComponent } from './chart-config-showcase/stock/chart-config-stock-showcase.component';
 import { CookbookChartBarConfigShowcaseComponent } from './chart-config-showcase/bar/chart-config-bar-showcase.component';
+import { HeaderShowcaseComponent } from './header-showcase/header-showcase.component';
+import { MenuShowcaseComponent } from './menu-showcase/menu-showcase.component';
 
 export const routes: Routes = [
   {
@@ -187,6 +194,27 @@ export const routes: Routes = [
         ],
       },
       {
+        path: 'modal-v2',
+        component: ModalV2ShowcaseComponent,
+        children: [
+          {
+            path: 'modal',
+            component: ModalV2RoutingComponent,
+            outlet: 'modal-v2',
+            children: [
+              {
+                path: 'page1',
+                component: ModalRoutingV2ExamplePage1Component,
+              },
+              {
+                path: 'page2',
+                component: ModalRoutingV2ExamplePage2Component,
+              },
+            ],
+          },
+        ],
+      },
+      {
         path: 'loading-overlay',
         component: LoadingOverlayShowcaseComponent,
       },
@@ -201,6 +229,10 @@ export const routes: Routes = [
       {
         path: 'alert',
         component: AlertShowcaseComponent,
+      },
+      {
+        path: 'alert-experimental',
+        component: AlertExperimentalShowcaseComponent,
       },
       {
         path: 'badge',
@@ -271,6 +303,10 @@ export const routes: Routes = [
         component: AccordionShowcaseComponent,
       },
       {
+        path: 'menu',
+        component: MenuShowcaseComponent,
+      },
+      {
         path: 'radio',
         component: RadioShowcaseComponent,
       },
@@ -293,6 +329,10 @@ export const routes: Routes = [
       {
         path: 'data-table',
         component: DataTableShowcaseComponent,
+      },
+      {
+        path: 'header',
+        component: HeaderShowcaseComponent,
       },
     ],
   },

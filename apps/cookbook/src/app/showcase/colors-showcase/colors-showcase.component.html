@@ -1,7 +1,8 @@
 <p>
   Below is the Kirby color palette. You can try out the different color combinations there and see
   how it can be used in the CSS in the code example box. All the colors are fetched from the
-  <code>scss/themes/_colors.scss</code> file.
+  <code>scss/themes/_colors.scss</code>
+  file.
 </p>
 <div class="color-sample-wrapper">
   <div class="h2">Example use (Click on a color below to change it):</div>
@@ -12,15 +13,17 @@
       <div class="{{ selectedColor }}-shade">Shade</div>
     </div>
     <pre class="language-css">
+@use '@kirbydesign/designsystem/scss/utils';
+
 .color-sample-example {{ '{' }}
-  background-color: get-color('{{ selectedColor }}');
-  color: get-color('{{ selectedOnColor }}');
+  background-color: utils.get-color('{{ selectedColor }}');
+  color: utils.get-color('{{ selectedOnColor }}');
 {{ '}' }}
 .color-sample-tint {{ '{' }}
-  background-color: get-color('{{ selectedColor }}-tint');
+  background-color: utils.get-color('{{ selectedColor }}-tint');
 {{ '}' }}
 .color-sample-shade {{ '{' }}
-  background-color: get-color('{{ selectedColor }}-shade');
+  background-color: utils.get-color('{{ selectedColor }}-shade');
 {{ '}' }}</pre
     >
   </div>

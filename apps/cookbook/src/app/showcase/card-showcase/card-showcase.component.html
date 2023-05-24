@@ -1,165 +1,131 @@
-<div class="example">
-  <div class="card-grid">
-    <cookbook-card-example
-      [showSize]="false"
-      [hasPadding]="false"
-      title="Default Card"
-    ></cookbook-card-example>
-    <cookbook-card-example
-      [showSize]="false"
-      title="Card with padding"
-      subtitle='HTML: hasPadding="true"'
-    ></cookbook-card-example>
-    <cookbook-card-example
-      [showSize]="false"
-      [hasPadding]="false"
-      [hasHeaderFooterBgColor]="true"
-      title="Card with header background"
-      subtitle="CSS: kirby-card-header { background-color: #000}"
-    ></cookbook-card-example>
-    <cookbook-card-example
-      [showSize]="false"
-      [hasPadding]="false"
-      [hasFooter]="true"
-      [hasHeaderFooterBgColor]="true"
-      title="Card with header and footer"
-      subtitle=""
-    ></cookbook-card-example>
-    <cookbook-card-example
-      [showSize]="false"
-      [hasHeader]="true"
-      [hasPadding]="false"
-      title="Card header flagged success"
-      subtitle=""
-      flagged="success"
-    ></cookbook-card-example>
-    <cookbook-card-example
-      [showSize]="false"
-      [hasHeader]="true"
-      [hasPadding]="false"
-      title="Card header flagged warning"
-      subtitle=""
-      flagged="warning"
-    ></cookbook-card-example>
-    <cookbook-card-example
-      [showSize]="false"
-      [hasHeader]="true"
-      [hasPadding]="false"
-      title="Card header flagged danger"
-      subtitle=""
-      flagged="danger"
-    ></cookbook-card-example>
-    <cookbook-card-example
-      [showSize]="false"
-      [hasHeader]="true"
-      [hasPadding]="false"
-      title="Card header flagged info"
-      subtitle=""
-      flagged="info"
-    ></cookbook-card-example>
-  </div>
-  <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
-  <h2>Colors</h2>
-  <p>
-    <cookbook-card-themecolor-example></cookbook-card-themecolor-example>
-  </p>
+<p>
+  Cards are containers that display content about a single subject. They are also useful for
+  grouping a list of related information.
+</p>
+<p>
+  In its definition cards are containers that need to include other components like list/items,
+  images, buttons, avatars etc.
+</p>
 
-  <h2>Elevation</h2>
-  <p>
-    <cookbook-card-elevations-example></cookbook-card-elevations-example>
-  </p>
+<p>The card supports two major use-cases:</p>
+<ul>
+  <li>The default mode is useful when a card is used purely for layout and grouping purposes.</li>
+  <li>
+    Whenever a card is used for navigation, for example to a new page, drawer or modal the
+    disclosure-variant should be used.
+  </li>
+</ul>
 
-  <h2>Clickable</h2>
-  <p>
-    <cookbook-card-clickable-example></cookbook-card-clickable-example>
-  </p>
+<h2>Default</h2>
 
-  <h2>Background image</h2>
-  <p>
-    The card can use an image as a background by either using the
-    <code>backgroundImageUrl</code> input property or the
-    <code>--kirby-card-background-image</code> custom css property.
-  </p>
-  <h3>Setting background image from Javascript</h3>
-  <p>
-    In this example the <code>backgroundImageUrl</code> input property is used for setting the
-    background image. Notice the poor readability as the contrast between the text and background
-    image is too low. This could be improved by applying a linear gradient; using the
-    <code>backgroundImageUrl</code> this would have to be done by editing the image itself.
-  </p>
-  <p>
-    Furthermore using <code>backgroundImageUrl</code> requires a Javascript mechanism in order to
-    change based on viewport width. In contrast the
-    <code>--kirby-card-background-image</code> custom css property allows for media queries to be
-    used.
-  </p>
-  <p>
-    <cookbook-example-viewer
-      [html]="backgroundImageExample.template"
-      [css]="backgroundImageExample.style"
-    >
-      <cookbook-card-background-image-example #backgroundImageExample>
-      </cookbook-card-background-image-example>
-    </cookbook-example-viewer>
-  </p>
-  <h3>Setting background image from CSS with media queries & linear gradient</h3>
-  <p>
-    This example uses the <code>--kirby-card-background-image</code> custom css property to set the
-    background image. Furthermore a linear gradient is applied to improve the readability of the
-    text and a media query is used to change the image based on viewport width.
-  </p>
-  <p>
-    <em>Note:</em> this example uses
-    <a target="_blank" href="https://www.npmjs.com/package/include-media">include-media</a> for
-    media queries. This is re-exported from the <code>'@kirbydesign/core/src/scss/utils'</code> Sass
-    module.
-  </p>
-  <p>
-    <cookbook-example-viewer
-      [html]="cssBackgroundImageExample.template"
-      [css]="cssBackgroundImageExample.style"
-    >
-      <cookbook-card-css-background-image-example
-        #cssBackgroundImageExample
-      ></cookbook-card-css-background-image-example>
-    </cookbook-example-viewer>
-  </p>
+<cookbook-example-viewer [html]="defaultExample.template">
+  <cookbook-card-example-default #defaultExample></cookbook-card-example-default>
+</cookbook-example-viewer>
 
-  <h2>Card with item disclosure in card header</h2>
-  <p>
-    This example uses the <code>--kirby-card-padding-top</code> custom css property to set the
-    padding top in card content area to <code>0px</code>. Thereafter an item with disclosure is
-    placed in the card header. The card header input property <code>hasPadding</code> is set to
-    <code>false</code> to adjust to the use of item.
-  </p>
-  <p>
-    <em>Note: </em> Card footer support the use of item disclosure as well and often is used with
-    the custom css property
-    <code>--kirby-card-padding-bottom</code>
-  </p>
-  <cookbook-example-viewer
-    [html]="CardHeaderDisclosureExample.template"
-    [css]="CardHeaderDisclosureExample.style"
-    ><cookbook-card-with-item-header-example
-      #CardHeaderDisclosureExample
-    ></cookbook-card-with-item-header-example
-  ></cookbook-example-viewer>
+<h2>State & Disclosure</h2>
 
-  <kirby-divider [hasMargin]="true"></kirby-divider>
+<p>
+  Whenever a card can be interacted with it is a best practice to also add a disclosure indicator,
+  to show that it navigates to a new page, opens a modal or similar.
+</p>
+<p>
+  Registering any click event
+  <code>(click)="function()"</code>
+  on the card will activate its state behavior when hovered or pressed.
+</p>
 
-  <h2>API Description</h2>
-  <h3>Card properties:</h3>
-  <cookbook-api-description-properties
-    [properties]="properties"
-  ></cookbook-api-description-properties>
-  <h3>Card CSS Custom Properties</h3>
-  <cookbook-api-description-properties
-    [properties]="customCssProperties"
-    [columns]="customCssPropertiesColumns"
-  >
-  </cookbook-api-description-properties>
-  <h3>Card header and footer properties:</h3>
-  <cookbook-api-description-properties
-    [properties]="propertiesHeaderAndFooter"
-  ></cookbook-api-description-properties>
-</div>
+<p>
+  A card with a disclosure indicator is composed of a card-header with a slotted
+  <code>kirby-item</code>
+  , using the
+  <code>--kirby-card-padding-top</code>
+  CSS Custom Property to set the padding top in card content area to
+  <code>0px</code>
+  . The card header input property
+  <code>hasPadding</code>
+  is set to
+  <code>false</code>
+  to adjust to the use of item.
+</p>
+<cookbook-example-viewer [html]="disclosureExample.template" [css]="disclosureExample.style">
+  <cookbook-card-example-disclosure #disclosureExample></cookbook-card-example-disclosure>
+</cookbook-example-viewer>
+
+<h2>Flagged header</h2>
+<p>
+  A card can show a flag in the header. This is mostly used when a bundle of items in the card can
+  express the same “flag”.
+</p>
+
+<cookbook-example-viewer [html]="flagExample.codeSnippet">
+  <cookbook-card-example-flag #flagExample></cookbook-card-example-flag>
+</cookbook-example-viewer>
+
+<h2>Colors</h2>
+<p>Cards can have a colored background to stand out even more.</p>
+<cookbook-example-viewer [html]="themeColorExample.codeSnippet">
+  <cookbook-card-example-color #themeColorExample></cookbook-card-example-color>
+</cookbook-example-viewer>
+
+<h2>Background image</h2>
+<p>
+  The recommended approach for setting a background image on the card is with the
+  <code>--kirby-card-background-image</code>
+  CSS Custom Property.
+</p>
+
+<p>
+  Alternatively, it can be set programatically via the
+  <code>backgroundImageUrl</code>
+  input property.
+</p>
+
+<p>
+  In this example, themeColor is explicitly set to dark to tell the card that the image content is
+  dark. This ensures that the hover and pressed state make the card lighter instead of darker.
+</p>
+
+<cookbook-example-viewer
+  [html]="backgroundImageExample.template"
+  [css]="backgroundImageExample.style"
+>
+  <cookbook-card-example-background-image
+    #backgroundImageExample
+  ></cookbook-card-example-background-image>
+</cookbook-example-viewer>
+
+<p>
+  <em>Note:</em>
+  this example uses
+  <a target="_blank" href="https://www.npmjs.com/package/include-media">include-media</a>
+  for media queries. This is re-exported from the
+  <code>@kirbydesign/designsystem/scss/utils</code>
+  Sass module.
+</p>
+
+<h2>Flat</h2>
+<p>
+  By default the card has a slightly elevated look with a shadow around its edges. This can be
+  removed by setting the flat input, but be aware that this option should not be used with a card
+  that can be interacted with (clickable, disclosure) as it lacks proper affordance.
+</p>
+<cookbook-example-viewer [html]="flatExample.template">
+  <cookbook-card-example-flat #flatExample></cookbook-card-example-flat>
+</cookbook-example-viewer>
+
+<kirby-divider [hasMargin]="true"></kirby-divider>
+
+<h2>API Description</h2>
+<h3>Card properties:</h3>
+<cookbook-api-description-properties
+  [properties]="properties"
+></cookbook-api-description-properties>
+<h3>Card CSS Custom Properties</h3>
+<cookbook-api-description-properties
+  [properties]="customCssProperties"
+  [columns]="customCssPropertiesColumns"
+></cookbook-api-description-properties>
+<h3>Card header and footer properties:</h3>
+<cookbook-api-description-properties
+  [properties]="propertiesHeaderAndFooter"
+></cookbook-api-description-properties>

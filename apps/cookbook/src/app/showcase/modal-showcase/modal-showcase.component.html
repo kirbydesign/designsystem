@@ -10,15 +10,17 @@
     <a href="#" (click)="scrollTo(modalController)"><code>ModalController</code></a>
   </li>
   <li>
-    The modal comes in 3 different <a href="#" (click)="scrollTo(modalFlavors)">flavors</a>:
+    The modal comes in 3 different
+    <a href="#" (click)="scrollTo(modalFlavors)">flavors</a>
+    :
     <ul>
       <li>
         <a href="#" (click)="scrollTo(modalFlavorsModal)">Modal (default) - with component</a>
       </li>
       <li>
-        <a href="#" (click)="scrollTo(modalFlavorsModalWithOutlet)"
-          >Modal (default) - with outlet</a
-        >
+        <a href="#" (click)="scrollTo(modalFlavorsModalWithOutlet)">
+          Modal (default) - with outlet
+        </a>
       </li>
       <li><a href="#" (click)="scrollTo(modalFlavorsCompact)">Compact</a></li>
       <li><a href="#" (click)="scrollTo(modalFlavorsDrawer)">Drawer</a></li>
@@ -28,19 +30,36 @@
     Support for handling the
     <a href="#" (click)="scrollTo(didPresentEvent)">didPresent event</a>
   </li>
-  <li>Support for handling the <a href="#" (click)="scrollTo(closeEvent)">close event</a></li>
   <li>
-    Support for <a href="#" (click)="scrollTo(returnData)">returning data</a> from the modal to the
-    parent/caller component
+    Support for handling the
+    <a href="#" (click)="scrollTo(closeEvent)">close event</a>
   </li>
   <li>
-    Support for <a href="#" (click)="scrollTo(alertBeforeClose)">showing an alert before closing</a>
+    Support for
+    <a href="#" (click)="scrollTo(returnData)">returning data</a>
+    from the modal to the parent/caller component
   </li>
-  <li>Support for <a href="#" (click)="scrollTo(scrolling)">scrolling</a></li>
-  <li>Support for <a href="#" (click)="scrollTo(disableScrolling)">disabling of scrolling</a></li>
-  <li>(Optional) <a href="#" (click)="scrollTo(footer)">Fixed footer</a></li>
+  <li>
+    Support for
+    <a href="#" (click)="scrollTo(alertBeforeClose)">showing an alert before closing</a>
+  </li>
+  <li>
+    Support for
+    <a href="#" (click)="scrollTo(scrolling)">scrolling</a>
+  </li>
+  <li>
+    Support for
+    <a href="#" (click)="scrollTo(disableScrolling)">disabling of scrolling</a>
+  </li>
+  <li>
+    (Optional)
+    <a href="#" (click)="scrollTo(footer)">Fixed footer</a>
+  </li>
 </ul>
-<h2><span class="desktop">Desktop:</span><span class="mobile">Mobile:</span></h2>
+<h2>
+  <span class="desktop">Desktop:</span>
+  <span class="mobile">Mobile:</span>
+</h2>
 <h3>With component (default)</h3>
 <cookbook-example-viewer [html]="defaultExample.template" [ts]="defaultExample.defaultCodeSnippet">
   <div>
@@ -56,8 +75,11 @@
 
 <h2 #modalController>Inside the parent (caller) component:</h2>
 <p>
-  To show the modal, create a <code>ModalConfig</code> and pass it to the
-  <code>ModalController.showModal</code> method:
+  To show the modal, create a
+  <code>ModalConfig</code>
+  and pass it to the
+  <code>ModalController.showModal</code>
+  method:
   <cookbook-code-viewer [ts]="defaultExample.showModalCodeSnippet"></cookbook-code-viewer>
 </p>
 
@@ -69,74 +91,91 @@
 
 <h3 #modalFlavorsModal>Modal (default) - with component</h3>
 <p>
-  With the <strong><code>modal</code></strong> flavor, the dialog opens with a slide-up animation,
-  it's title is aligned to the left and it's close button is placed in the top right corner. The
-  modal can't be closed by swiping. If nested modals are opened, they will simply slide up and
-  appear on top of the modal(s) underneath.
+  With the
+  <strong><code>modal</code></strong>
+  flavor, the dialog opens with a slide-up animation, it's title is aligned to the left and it's
+  close button is placed in the top right corner. The modal can't be closed by swiping. If nested
+  modals are opened, they will simply slide up and appear on top of the modal(s) underneath.
 </p>
 
 <h3 #modalFlavorsModalWithOutlet>Modal (default) - with outlet</h3>
 <p>
   Instead of providing the modal with a component, you can configure your route to be opened in a
-  modal. This is done by a secondary outlet named <strong><code>modal</code></strong
-  >. The URL for these kind of routes will look like this:
-  <strong><code>/(modal:some-route)</code></strong
-  >. This means that you can do flows inside of modals just as "normal" pages, and makes it possible
+  modal. This is done by a secondary outlet named
+  <strong><code>modal</code></strong>
+  . The URL for these kind of routes will look like this:
+  <strong><code>/(modal:some-route)</code></strong>
+  . This means that you can do flows inside of modals just as "normal" pages, and makes it possible
   to deeplink to specific pages inside of the modal. "Modal" routes will automatically open up a
   modal, if none is already opened.
   <cookbook-code-viewer [ts]="outletExample.modalRouteCodeSnippet"></cookbook-code-viewer>
-  <em
-    ><strong>*Please note:</strong> The main route is the route with the component being presented
-    behind the modal</em
-  >
+  <em>
+    <strong>*Please note:</strong>
+    The main route is the route with the component being presented behind the modal
+  </em>
 </p>
 <p>
-  These kind of routes can be navigated to by using a <code>kirbyModalRouterLink</code>, and query
-  parameters can be passed by using <code>[kirbyModalQueryParams]</code> <br /><br />
-  <em
-    ><strong>*Please note:</strong> Always use Angular's "box" syntax for binding to the
-    <code>[kirbyModalQueryParams]</code> otherwise it will be treated as a string and not an object
-    literal</em
-  >
+  These kind of routes can be navigated to by using a
+  <code>kirbyModalRouterLink</code>
+  , and query parameters can be passed by using
+  <code>[kirbyModalQueryParams]</code>
+  <br />
+  <br />
+  <em>
+    <strong>*Please note:</strong>
+    Always use Angular's "box" syntax for binding to the
+    <code>[kirbyModalQueryParams]</code>
+    otherwise it will be treated as a string and not an object literal
+  </em>
   <cookbook-code-viewer
     [html]="outletExample.routerLinkForModalOutletCodeSnippet"
   ></cookbook-code-viewer>
-  Or by injecting <code>ModalController</code> and calling <code>navigateToModal</code> method,
-  where query params can be passed as the second argument:
+  Or by injecting
+  <code>ModalController</code>
+  and calling
+  <code>navigateToModal</code>
+  method, where query params can be passed as the second argument and AlertConfig for the
+  alert-on-close can be passed as the third argument:
   <cookbook-code-viewer
     [ts]="outletExample.modalControllerForModalOutletCodeSnippet"
   ></cookbook-code-viewer>
 </p>
 <p>
-  <strong>Within the child component</strong> presented in the modal a regular Angular
-  <code>[routerLink]</code> can be used with a relative path to the sibling modal route, and query
-  params can be passed as normal using <code>[queryParams]</code>:
+  <strong>Within the child component</strong>
+  presented in the modal a regular Angular
+  <code>[routerLink]</code>
+  can be used with a relative path to the sibling modal route, and query params can be passed as
+  normal using
+  <code>[queryParams]</code>
+  :
   <cookbook-code-viewer
     [html]="outletExample.routerLinkWithinModalOutletCodeSnippet"
   ></cookbook-code-viewer>
 </p>
 <p>
-  If you need to navigate from code <strong>within the child component</strong> you can either
-  inject <code>ModalController</code> and call its <code>navigateWithinModal</code> method for
-  convenience, which also support passing query params, or you can inject and navigate through the
-  regular Angular
-  <code><a href="https://angular.io/api/router/Router" target="_blank">Router</a></code
-  >. The latter is useful if you need to pass
-  <code
-    ><a href="https://angular.io/api/router/NavigationExtras" target="_blank"
-      >NavigationExtras</a
-    ></code
-  >
+  If you need to navigate from code
+  <strong>within the child component</strong>
+  you can either inject
+  <code>ModalController</code>
+  and call its
+  <code>navigateWithinModal</code>
+  method for convenience, which also support passing query params, or you can inject and navigate
+  through the regular Angular
+  <code><a href="https://angular.io/api/router/Router" target="_blank">Router</a></code>
+  . The latter is useful if you need to pass
+  <code>
+    <a href="https://angular.io/api/router/NavigationExtras" target="_blank">NavigationExtras</a>
+  </code>
   other than query params. Notice that when using the Angular Router you need to provide the current
-  <code
-    ><a href="https://angular.io/api/router/ActivatedRoute" target="_blank">ActivatedRoute</a></code
-  >
+  <code>
+    <a href="https://angular.io/api/router/ActivatedRoute" target="_blank">ActivatedRoute</a>
+  </code>
   as the root URI using the
-  <code
-    ><a href="https://angular.io/api/router/UrlCreationOptions#relativeTo" target="_blank"
-      >relativeTo</a
-    ></code
-  >
+  <code>
+    <a href="https://angular.io/api/router/UrlCreationOptions#relativeTo" target="_blank">
+      relativeTo
+    </a>
+  </code>
   param:
   <cookbook-code-viewer
     [ts]="outletExample.modalControllerWithinModalOutletCodeSnippet"
@@ -145,34 +184,56 @@
 
 <h3 #modalFlavorsCompact>Compact</h3>
 <p>
-  The <strong><code>compact</code></strong> flavor renders a stripped-down version with no heading,
-  toolbar or close button and no content scrolling. Can be used for <em>out-of-order</em> style
-  modals.
+  The
+  <strong><code>compact</code></strong>
+  flavor renders a stripped-down version with no heading, toolbar or close button and no content
+  scrolling. Can be used for
+  <em>out-of-order</em>
+  style modals.
 </p>
 
 <h3 #modalFlavorsDrawer>Drawer</h3>
 <p>
-  When a <strong><code>drawer</code></strong> flavor is used, the dialog opens with a slide-up
-  animation, it's title is centered and it's close button is placed in the top left corner.
-  Additionally, with the <code>drawer</code> flavor, users can specify a
-  <code>drawerSupplementaryAction</code>, which is an additional button rendered in the top right
-  corner (see the example below). The <code>drawerSupplementaryAction</code> option takes an
-  <code>iconName: string</code> which corresponds to the name of a kirby icon, and
-  <code>action: Function</code>, which is invoked when the supplementary button is selected.
+  When a
+  <strong><code>drawer</code></strong>
+  flavor is used, the dialog opens with a slide-up animation, it's title is centered and it's close
+  button is placed in the top left corner. Additionally, with the
+  <code>drawer</code>
+  flavor, users can specify a
+  <code>drawerSupplementaryAction</code>
+  , which is an additional button rendered in the top right corner (see the example below). The
+  <code>drawerSupplementaryAction</code>
+  option takes an
+  <code>iconName: string</code>
+  which corresponds to the name of a kirby icon, and
+  <code>action: Function</code>
+  , which is invoked when the supplementary button is selected.
   <cookbook-code-viewer [ts]="defaultExample.drawerCodeSnippet"></cookbook-code-viewer>
 </p>
-<h2 #closeEvent>Close event handler <em>(optional)</em>:</h2>
+<h2 #closeEvent>
+  Close event handler
+  <em>(optional)</em>
+  :
+</h2>
 <p>
   If you want to be notified when the modal closes, you can pass a callback function:
   <cookbook-code-viewer [ts]="defaultExample.callbackCodeSnippet"></cookbook-code-viewer>
 </p>
-<h2 #returnData>Return data from the modal <em>(optional)</em>:</h2>
+<h2 #returnData>
+  Return data from the modal
+  <em>(optional)</em>
+  :
+</h2>
 <p>
   If you need to obtain data back from the modal, you can pass a callback function:
   <cookbook-code-viewer [ts]="defaultExample.callbackWithDataCodeSnippet"></cookbook-code-viewer>
 </p>
 
-<h2 #alertBeforeClose>Show an alert before dismissing the modal <em>(optional)</em>:</h2>
+<h2 #alertBeforeClose>
+  Show an alert before dismissing the modal
+  <em>(optional)</em>
+  :
+</h2>
 <p>
   If you need the user to confirm that the modal should be closed, you can pass an AlertConfig as an
   optional third argument
@@ -184,37 +245,49 @@
 <ol>
   <li>
     the embedded component must be declared (module file, or inside your
-    <code>@Component</code> decorator)
+    <code>@Component</code>
+    decorator)
   </li>
-  <li>the embedded component must be listed in your <code>entryComponents</code> (module file)</li>
+  <li>
+    the embedded component must be listed in your
+    <code>entryComponents</code>
+    (module file)
+  </li>
 </ol>
 <h3>Modal Title</h3>
 <p>
-  Inside the embedded component markup you should include a <code>kirby-page-title</code> element
-  with the title of your modal window:
+  Inside the embedded component markup you should include a
+  <code>kirby-page-title</code>
+  element with the title of your modal window:
 </p>
 <cookbook-code-viewer [html]="defaultExample.titleTemplate"></cookbook-code-viewer>
 <h3>Page Progress</h3>
 <p>
-  If you have a multi-step dialog you can display a progress status in the modal header.<br />
-  Inside the embedded component markup you can include a <code>kirby-page-progress</code> element
-  with the content of your progress tracker:
+  If you have a multi-step dialog you can display a progress status in the modal header.
+  <br />
+  Inside the embedded component markup you can include a
+  <code>kirby-page-progress</code>
+  element with the content of your progress tracker:
 </p>
 <cookbook-code-viewer [html]="defaultExample.pageProgressTemplate"></cookbook-code-viewer>
 
 <h3 #footer>Footer</h3>
 <p>
   To render a fixed footer at the bottom of the modal include a
-  <code>kirby-modal-footer</code> inside the embedded component:
+  <code>kirby-modal-footer</code>
+  inside the embedded component:
 </p>
 <cookbook-code-viewer [html]="defaultExample.footerTemplate"></cookbook-code-viewer>
 
-<em>(Optional)</em><br />
+<em>(Optional)</em>
+<br />
 <p>
   To access data passed into the embedded component, inject the
-  <code>COMPONENT_PROPS</code> inside the embedded component's constructor:
+  <code>COMPONENT_PROPS</code>
+  inside the embedded component's constructor:
 </p>
-<cookbook-code-viewer [ts]="defaultExample.embeddedCodeSnippet"></cookbook-code-viewer><br />
+<cookbook-code-viewer [ts]="defaultExample.embeddedCodeSnippet"></cookbook-code-viewer>
+<br />
 <p>
   In order to hide a modal from within your embedded component (and destroy it's component), you can
   inject the modal window that your component is displayed within:
@@ -225,40 +298,56 @@
 
 <h2 #didPresentEvent>Modal presented</h2>
 <p>
-  The <code>Modal</code> fires the <code>didPresent</code> event, when the modal is ready and the
-  enter animation has finished. This is a good place to hook up any visual initialization of the
-  embedded component, e.g. setting focus in an input field:
+  The
+  <code>Modal</code>
+  fires the
+  <code>didPresent</code>
+  event, when the modal is ready and the enter animation has finished. This is a good place to hook
+  up any visual initialization of the embedded component, e.g. setting focus in an input field:
 </p>
 <cookbook-code-viewer [ts]="defaultExample.didPresentCodeSnippet"></cookbook-code-viewer>
 
 <h2 #willCloseEvent>Modal Closing</h2>
 <p>
-  The <code>Modal</code> fires the <code>willClose</code> event, when the modal is starting to
-  dismiss/close before any animations occurs. This gives you a slot to execute your exceptional code
-  just when the modal starts closing but before its actually done:
+  The
+  <code>Modal</code>
+  fires the
+  <code>willClose</code>
+  event, when the modal is starting to dismiss/close before any animations occurs. This gives you a
+  slot to execute your exceptional code just when the modal starts closing but before its actually
+  done:
 </p>
 <cookbook-code-viewer [ts]="defaultExample.willCloseCodeSnippet"></cookbook-code-viewer>
 
 <h2 #scrolling>Scrolling</h2>
 <p>
-  The <code>Modal</code> supports scrolling to the top and bottom of the modal using the methods
-  <code>scrollToTop</code> and <code>scrollToBottom</code>. They accept
-  <code>KirbyAnimation.Duration</code> as optional param. If not provided the scrolling will happen
-  instantaneously.
+  The
+  <code>Modal</code>
+  supports scrolling to the top and bottom of the modal using the methods
+  <code>scrollToTop</code>
+  and
+  <code>scrollToBottom</code>
+  . They accept
+  <code>KirbyAnimation.Duration</code>
+  as optional param. If not provided the scrolling will happen instantaneously.
 </p>
 <cookbook-code-viewer [ts]="defaultExample.scrollingCodeSnippet"></cookbook-code-viewer>
 
 <h3 #disableScrolling>Disable scrolling</h3>
 <p>
-  The <code>Modal</code> supports disabling of scrolling by setting the property
+  The
+  <code>Modal</code>
+  supports disabling of scrolling by setting the property
   <code>scrollDisabled = true</code>
 </p>
 <cookbook-code-viewer [ts]="defaultExample.disableScrollingCodeSnippet"></cookbook-code-viewer>
 
 <p>
-  If the <code>snapToKeyboard</code> attribute is set to true, the modal footer will slide upwards
-  with the soft keyboard on mobile devices to make it stay visible. If omitted, or if explicitly set
-  to false, the modal footer will stay at the bottom and the keyboard will slide in on top of it.
+  If the
+  <code>snapToKeyboard</code>
+  attribute is set to true, the modal footer will slide upwards with the soft keyboard on mobile
+  devices to make it stay visible. If omitted, or if explicitly set to false, the modal footer will
+  stay at the bottom and the keyboard will slide in on top of it.
 </p>
 
 <h2>Modal config:</h2>

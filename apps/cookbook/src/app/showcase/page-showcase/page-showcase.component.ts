@@ -8,6 +8,7 @@ import { PageFixedTitleAndActionsExampleComponent } from '~/app/examples/page-ex
 import { PagePullToRefreshExampleComponent } from '~/app/examples/page-example/pull-to-refresh/page-pull-to-refresh-example.component';
 import { PageContentWidthExampleComponent } from '~/app/examples/page-example/content-width/page-content-width-example.component';
 import { PageSimpleExampleComponent } from '~/app/examples/page-example/simple/page-simple-example.component';
+import { PageTabNavExampleComponent } from '~/app/examples/page-example/tab-navigation/page-tab-nav-example.component';
 import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
 import {
   ApiDescriptionProperty,
@@ -31,6 +32,8 @@ export class PageShowcaseComponent {
   fixedActionsExampleHtml: string = PageFixedTitleAndActionsExampleComponent.fixedActionsTemplate;
   customTitleExampleHtml: string = PageCustomTitleExampleComponent.template;
   advancedExampleHtml: string = PageAdvancedExampleComponent.template;
+  tabNavigationHtml = PageTabNavExampleComponent.template;
+  tabNavigationTs = PageTabNavExampleComponent.codeSnippet;
   pullToRefreshExampleHtml: string = PagePullToRefreshExampleComponent.template;
   pullToRefreshExampleTs: string = PagePullToRefreshExampleComponent.handler;
   contentWidthExampleHtml: string = PageContentWidthExampleComponent.template;
@@ -156,6 +159,11 @@ export class PageShowcaseComponent {
       defaultValue: '{sticky: true}',
     },
     {
+      name: '*kirbyPageStickyContent',
+      description:
+        'The `kirbyPageStickyContent` directive can be applied to any host or container element which will then be rendered just above the content of the page. The host element will stick below the toolbar when the page is scrolled beyond that point.',
+    },
+    {
       name: '*kirbyPageContent',
       description:
         'The `kirbyPageContent` directive can be applied to any host or container element which will then be rendered as the content of the page. When configured with `{fixed: true}` the element will be fixed when scrolling the page. An example use case for this could be a Floating Action Button.',
@@ -178,6 +186,35 @@ export class PageShowcaseComponent {
       type: ['unit'],
     },
   ];
+
+  public injectionTokenExample = `import { PAGE_BACK_BUTTON_OVERRIDE, PageBackButtonOverride } from '@kirbydesign/designsystem/page';
+  
+@Injectable({
+  providedIn: 'root',
+})
+export class MyBackButtonOverrideService implements PageBackButtonOverride {
+  constructor(private someDependency: SomeDependency) {}
+
+  navigateBack(routerOutlet: IonRouterOutlet, navCtrl: NavController, defaultBackHref: string) {
+    if (routerOutlet?.canGoBack()) {
+      // custom use of some dependency could go here:
+      this.someDependency.doSomething();
+
+      // and we might still want to use the provided router outlet for something:
+      routerOutlet.pop();
+    } else {
+      // custom use of some dependency could also go here:
+      this.someDependency.doSomethingElse();
+
+      // and we might still want to use the provided nav controller for something:
+      navCtrl.navigateBack(defaultBackHref);
+    }
+  }
+}
+
+// then provided like this in the providers array (e.g. in app.module.ts)
+{ provide: PAGE_BACK_BUTTON_OVERRIDE, useClass: MyBackButtonOverrideService },
+`;
 
   public pageHtml = `<kirby-page\n (enter)="startSubscription()"\n (leave)="stopSubscription()"\n></kirby-page>`;
   public pageComponent = `@Component({

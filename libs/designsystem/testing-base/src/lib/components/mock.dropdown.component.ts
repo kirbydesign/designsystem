@@ -1,6 +1,7 @@
 import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 
-import { DropdownComponent, HorizontalDirection } from '@kirbydesign/designsystem';
+import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
+import { HorizontalDirection } from '@kirbydesign/designsystem/popover';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
@@ -21,12 +22,13 @@ export class MockDropdownComponent {
   @Input() placeholder: string;
   @Input() popout: HorizontalDirection | `${HorizontalDirection}`;
   @Input() attentionLevel: '1' | '2' | '3';
-  @Input() expand: 'block';
+  @Input() expand?: 'block';
   @Input() disabled: boolean;
   @Input() hasError: boolean;
   @Input() size: 'sm' | 'md';
   @Input() tabindex: number;
   @Input() usePopover: boolean;
+  @Input() _isMoreMenu: boolean;
   @Output() change = new EventEmitter<string | any>();
 }
 

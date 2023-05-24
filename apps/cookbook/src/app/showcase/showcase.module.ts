@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { KirbyModule } from '@kirbydesign/designsystem';
+import { KirbyModalModule } from '@kirbydesign/designsystem/modal/v2';
 
 import { IphoneModule } from '../iphone/iphone.module';
 import { ApiDescriptionEventsComponent } from '../shared/api-description/api-description-events/api-description-events.component';
@@ -23,6 +24,7 @@ import { COMPONENT_DECLARATIONS, COMPONENT_EXPORTS, COMPONENT_IMPORTS } from './
     FormsModule,
     IonicModule,
     KirbyModule.forChild({ moduleRootRoutePath: '/home/showcase' }),
+    KirbyModalModule,
     IphoneModule,
     RouterModule,
     CodeViewerModule,

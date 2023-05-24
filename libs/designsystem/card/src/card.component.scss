@@ -16,6 +16,11 @@
 
   &.kirby-color-brightness-dark {
     @include themes.apply-dark-theme;
+
+    &[role='button'] {
+      @include interaction-state.apply-hover('xxs', $make-lighter: true);
+      @include interaction-state.apply-active('s', $make-lighter: true);
+    }
   }
 
   @include interaction-state.extend-content {
@@ -48,10 +53,6 @@
     }
   }
 
-  &.highlighted {
-    box-shadow: utils.get-elevation(4);
-  }
-
   &.flat {
     box-shadow: none;
   }
@@ -61,15 +62,6 @@
     @include interaction-state.apply-hover('xxxs');
     @include interaction-state.apply-active('xxs');
     @include interaction-state.apply-focus-visible($shadow: utils.get-elevation(2));
-
-    &.highlighted {
-      @include interaction-state.apply-focus-visible($shadow: utils.get-elevation(4));
-    }
-
-    &.interaction-state-make-lighter-and-louder {
-      @include interaction-state.apply-hover('xxs', $make-lighter: true);
-      @include interaction-state.apply-active('s', $make-lighter: true);
-    }
 
     outline: none;
   }

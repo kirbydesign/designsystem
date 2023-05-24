@@ -44,6 +44,8 @@ import { ListNoShapeExampleComponent } from './list-no-shape-example/list-no-sha
 import { ListSwipeExampleComponent } from './list-swipe-example/list-swipe-example.component';
 import { LoadingOverlayExampleComponent } from './loading-overlay-example/loading-overlay-example.component';
 import { ModalExampleComponent } from './modal-example/modal-example.component';
+import { FullscreenModalV2ExampleComponent } from './modal-v2-example/modal/fullscreen/fullscreen-v2-example.component';
+import { DrawerModalV2ExampleComponent } from './modal-v2-example/modal/drawer/drawer-v2-example.component';
 import { ModalRoutePage1ExampleComponent } from './modal-example/modal-route-example/modal-route-page1-example.component';
 import { ModalRoutePage2ExampleComponent } from './modal-example/modal-route-example/modal-route-page2-example.component';
 import { PageAdvancedExampleComponent } from './page-example/advanced/page-advanced-example.component';
@@ -55,6 +57,7 @@ import { PageFixedFooterTabExampleComponent } from './page-example/fixed-footer-
 import { PageFixedTitleAndActionsExampleComponent } from './page-example/fixed-title-and-actions/page-fixed-title-and-actions-example.component';
 import { PageContentWidthExampleComponent } from './page-example/content-width/page-content-width-example.component';
 import { PageSimpleExampleComponent } from './page-example/simple/page-simple-example.component';
+import { PageTabNavExampleComponent } from './page-example/tab-navigation/page-tab-nav-example.component';
 import { ProgressCircleExampleComponent } from './progress-circle-example/progress-circle-example.component';
 import { RadioExampleComponent } from './radio-example/radio-example.component';
 import { RangeExampleComponent } from './range-example/range-example.component';
@@ -74,8 +77,14 @@ import { VirtualScrollListExampleComponent } from './virtual-scroll-example/virt
 import { PagePullToRefreshExampleComponent } from './page-example/pull-to-refresh/page-pull-to-refresh-example.component';
 import { DropdownExampleComponent } from './dropdown-example/dropdown-example.component';
 import { DataTableExampleComponent } from './data-table-example/data-table-example.component';
+import { HeaderExampleComponent } from './header-example/header-example.component';
+import { NestedModalsV2ExampleComponent } from './modal-v2-example/nested-modals/nested-modals-v2-example.component';
+import { HeaderWithActionGroupExampleComponent } from './header-example/examples/action-group';
+import { HeaderWithEmphasizedActionGroupExampleComponent } from './header-example/examples/emphasize-actions';
+import { HeaderWithCustomActionsExampleComponent } from './header-example/examples/custom-actions';
+import { HeaderWithInteractiveTitleExampleComponent } from './header-example/examples/interactive-title';
+import { MenuExampleComponent } from './menu-example/menu-example.component';
 
-VirtualScrollListExampleComponent;
 export const routes: Routes = [
   {
     path: '',
@@ -158,12 +167,32 @@ export const routes: Routes = [
             component: PageAdvancedExampleComponent,
           },
           {
+            path: 'tab-navigation',
+            component: PageTabNavExampleComponent,
+          },
+          {
             path: 'pull-to-refresh',
             component: PagePullToRefreshExampleComponent,
           },
           {
             path: 'content-width',
             component: PageContentWidthExampleComponent,
+          },
+          {
+            path: 'header-and-action-group',
+            component: HeaderWithActionGroupExampleComponent,
+          },
+          {
+            path: 'header-and-emphasized-action-group',
+            component: HeaderWithEmphasizedActionGroupExampleComponent,
+          },
+          {
+            path: 'header-and-custom-actions',
+            component: HeaderWithCustomActionsExampleComponent,
+          },
+          {
+            path: 'header-and-interactive-title',
+            component: HeaderWithInteractiveTitleExampleComponent,
           },
         ],
       },
@@ -244,6 +273,23 @@ export const routes: Routes = [
             path: 'page2',
             outlet: 'modal',
             component: ModalRoutePage2ExampleComponent,
+          },
+        ],
+      },
+      {
+        path: 'modal-v2',
+        children: [
+          {
+            path: 'fullscreen',
+            component: FullscreenModalV2ExampleComponent,
+          },
+          {
+            path: 'drawer',
+            component: DrawerModalV2ExampleComponent,
+          },
+          {
+            path: 'nested',
+            component: NestedModalsV2ExampleComponent,
           },
         ],
       },
@@ -495,5 +541,17 @@ export const routes: Routes = [
   {
     path: 'data-table',
     component: DataTableExampleComponent,
+  },
+  {
+    path: 'menu',
+    component: MenuExampleComponent,
+  },
+  {
+    path: 'header',
+    component: HeaderExampleComponent,
+  },
+  {
+    path: 'menu',
+    component: MenuExampleComponent,
   },
 ];

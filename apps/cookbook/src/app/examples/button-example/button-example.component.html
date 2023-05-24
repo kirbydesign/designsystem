@@ -1,10 +1,14 @@
 <h2>Sizes</h2>
+<button kirby-button size="xs">Extra Small Button</button>
 <button kirby-button size="sm">Small Button</button>
 <button kirby-button>Medium Button (default)</button>
 <button kirby-button size="lg">Large Button</button>
 
 <fieldset>
-  <legend>Button size for examples below<kirby-icon name="arrow-down"></kirby-icon></legend>
+  <legend>
+    Button size for examples below
+    <kirby-icon name="arrow-down"></kirby-icon>
+  </legend>
   <select (change)="onButtonSizeChange($event.target.value)">
     <option
       *ngFor="let size of buttonSizes"
@@ -27,10 +31,20 @@
   <label>Undecorated</label>
 </div>
 <div class="button-example-container">
+  <button kirby-button [size]="buttonSize" disabled [noDecoration]="true">
+    <kirby-icon name="close"></kirby-icon>
+  </button>
+  <label>Undecorated & disabled</label>
+</div>
+<div class="button-example-container">
   <button kirby-button [size]="buttonSize">
     <kirby-icon name="close"></kirby-icon>
   </button>
-  <label>Attention Level 1<br /><em>(Default)</em></label>
+  <label>
+    Attention Level 1
+    <br />
+    <em>(Default)</em>
+  </label>
 </div>
 <div class="button-example-container">
   <button kirby-button [size]="buttonSize" attentionLevel="2">
@@ -53,16 +67,51 @@
 
 <p class="kirby-text-small">
   <em>
-    <strong>Please note:</strong> The undecorated button is solely intended for use with icon only.
+    <strong>Please note:</strong>
+    The undecorated button is solely intended for use with icon only.
   </em>
 </p>
+
+<h3>
+  Button with hidden text (
+  <code>showIconOnly="true"</code>
+  )
+</h3>
+
+<div class="button-example-container">
+  <button kirby-button [size]="buttonSize" showIconOnly="true">
+    Hidden text left
+    <kirby-icon name="close"></kirby-icon>
+  </button>
+  <label>
+    Hide text
+    <br />
+    <em>(Left)</em>
+  </label>
+</div>
+
+<div class="button-example-container">
+  <button kirby-button [size]="buttonSize" showIconOnly="true">
+    <kirby-icon name="close"></kirby-icon>
+    Hidden text right
+  </button>
+  <label>
+    Hide text
+    <br />
+    <em>(Right)</em>
+  </label>
+</div>
 
 <h3>Custom Icon</h3>
 <div class="button-example-container">
   <button kirby-button [size]="buttonSize">
     <kirby-icon customName="football"></kirby-icon>
   </button>
-  <label>Attention Level 1<br /><em>(Default)</em></label>
+  <label>
+    Attention Level 1
+    <br />
+    <em>(Default)</em>
+  </label>
 </div>
 <div class="button-example-container">
   <button kirby-button [size]="buttonSize" attentionLevel="2">
@@ -132,7 +181,11 @@
   <button kirby-button [size]="buttonSize" [isFloating]="true" disabled>
     <kirby-icon name="close"></kirby-icon>
   </button>
-  <label>Close<br />Disabled</label>
+  <label>
+    Close
+    <br />
+    Disabled
+  </label>
 </div>
 
 <h2>Button with attention level</h2>

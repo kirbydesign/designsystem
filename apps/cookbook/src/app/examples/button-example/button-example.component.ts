@@ -12,6 +12,10 @@ export class ButtonExampleComponent {
   buttonSize = 'md';
   buttonSizes = [
     {
+      text: 'Extra Small',
+      value: 'xs',
+    },
+    {
       text: 'Small',
       value: 'sm',
     },

@@ -14,7 +14,7 @@ export const ListItemsExampleTemplate = `<kirby-list [items]="items">
   selector: 'cookbook-list-items-example',
   template: `
     <kirby-page title="Items">
-      <kirby-page-content> ${ListItemsExampleTemplate} </kirby-page-content>
+      <kirby-page-content>${ListItemsExampleTemplate}</kirby-page-content>
     </kirby-page>
   `,
 })

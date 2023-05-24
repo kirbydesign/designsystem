@@ -1,0 +1,161 @@
+@use 'sass:map';
+@use '@kirbydesign/core/src/scss/utils';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  margin-top: utils.size('s');
+  margin-bottom: utils.size('l');
+
+  @include utils.media('>=medium') {
+    margin-top: utils.size('m');
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+// In rare scenarios consumers need to enforce a 1-column layout on larger screens.
+// Please note: We are NOT promoting this in our cookbook:
+@include utils.media('>=medium') {
+  :host(:not(.single-column)) {
+    .container {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      column-gap: utils.size('s');
+    }
+
+    .title-container {
+      grid-column-start: 1;
+    }
+  }
+}
+
+:host(.centered) {
+  align-items: center;
+
+  .container {
+    align-items: center;
+
+    & > h1.title {
+      text-align: center;
+
+      &.has-icon {
+        justify-content: center;
+      }
+    }
+  }
+
+  .title-container {
+    align-items: center;
+    text-align: center;
+  }
+
+  // In rare scenarios consumers need to enforce a 1-column layout on larger screens.
+  // Please note: We are NOT promoting this in our cookbook:
+  @include utils.media('>=medium') {
+    &:not(.single-column) {
+      .container {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr);
+        align-self: stretch;
+      }
+
+      .actions {
+        align-self: flex-start;
+      }
+
+      .container > h1.title,
+      .title-container {
+        grid-column-start: 2;
+      }
+    }
+  }
+}
+
+.actions {
+  margin-top: utils.size('m');
+
+  @include utils.media('<medium') {
+    // Hide actions on small screens when not emphasized:
+    &:not(.emphasize) {
+      display: none;
+    }
+  }
+}
+
+// In rare scenarios consumers need to enforce a 1-column layout on larger screens.
+// Please note: We are NOT promoting this in our cookbook:
+@include utils.media('>=medium') {
+  :host(:not(.single-column)) {
+    .actions {
+      // kirby-button already has 4px horizontal margin, so add additional 4px to get 8px in total:
+      margin: 0 utils.size('xxxs');
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+}
+
+.avatar,
+.flag,
+.title-container,
+.container > h1.title {
+  padding: 0 utils.size('s');
+}
+
+.title-container {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.avatar {
+  margin-bottom: utils.size('s');
+}
+
+.flag {
+  margin-bottom: utils.size('xxxs');
+}
+
+.title {
+  margin-bottom: utils.size('xxxxs');
+
+  &.clickable {
+    cursor: pointer;
+  }
+
+  &.has-icon {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.value {
+  max-width: 100%;
+  margin-bottom: utils.size('xxxs');
+}
+
+.value-unit {
+  font-weight: initial;
+  color: utils.get-text-color('semi-dark');
+  margin-left: utils.size('xxxs');
+  font-size: 50%;
+}
+
+.subtitle1,
+.subtitle2 {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.custom-section {
+  margin-top: utils.size('xxs');
+}

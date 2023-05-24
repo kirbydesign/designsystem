@@ -6,7 +6,6 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   templateUrl: './item-sliding-showcase.component.html',
 })
 export class ItemSlidingShowcaseComponent {
-  _cardMode = 'flat';
   _cardHasPadding = true;
 
   _inputPropertiesApiDescription: ApiDescriptionProperty[] = [

@@ -5,6 +5,7 @@
   SPACINGS
 ****************************************************************************/
 $sizes: (
+  xxxxxl: 72px,
   xxxxl: 64px,
   xxxl: 56px,
   xxl: 48px,
@@ -93,6 +94,13 @@ $breakpoints: (
   xlarge: 60em,
   xxlarge: 80em,
 ) !default;
+$breakpoint-map: (
+  'xs': 0,
+  'sm': 632px,
+  'md': 768px,
+  'lg': 992px,
+  'xl': 1200px,
+);
 
 /* Elevation
 ****************************************************************************/
@@ -101,10 +109,6 @@ $elevations: (
     0 1px 24px 0 rgb(28 28 28 / 4%),
   ),
   4: (
-    0 10px 15px -10px rgb(28 28 28 / 30%),
-    0 0 5px 0 rgb(28 28 28 / 8%),
-  ),
-  8: (
     0 20px 30px -15px rgb(28 28 28 / 30%),
     0 0 5px 0 rgb(28 28 28 / 8%),
   ),
@@ -136,6 +140,23 @@ $modal-heights: (
 ) !default;
 $modal-default-height: map.get($modal-heights, 'm');
 $drawer-default-height: map.get($modal-heights, 's');
+
+/* Modal V2
+****************************************************************************/
+$modal-v2-widths: (
+  l: 960px,
+  m: 800px,
+  s: 720px,
+  xs: 600px,
+  xxs: 343px,
+) !default;
+$modal-v2-heights: (
+  l: math.floor(map.get($modal-v2-widths, 'l') * 0.75),
+  m: math.floor(map.get($modal-v2-widths, 'm') * 0.75),
+  s: math.floor(map.get($modal-v2-widths, 's') * 0.75),
+  xs: math.floor(map.get($modal-v2-widths, 'xs') * 0.75),
+  xxs: math.floor(map.get($modal-v2-widths, 'xxs') * 0.75),
+) !default;
 
 /* Item
 ****************************************************************************/
