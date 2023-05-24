@@ -62,7 +62,7 @@
     },
     {
       "title": "Checkbox",
-      "paragraph": "A Checkbox is a control that permits the user to select options. This can be a binary choice, i.e. a choice between one of two possible mutually exclusive options.",
+      "paragraph": "A Checkbox is a control that permits the user to select options. Checkboxes are used for multiple choices, not for mutually exclusive choices.",
       "svgPath": "./assets/component-svg/Checkbox-Kirby-Component-Overview.svg",
       "route": "/home/showcase/checkbox"
     },
@@ -80,7 +80,7 @@
     },
     {
       "title": "Divider",
-      "paragraph": "The divider is a thin line which is there to visually separate to elements or text.",
+      "paragraph": "The divider is a thin line which is used to visually separate elements or text.",
       "svgPath": "./assets/component-svg/Divider-Kirby-Component-Overview.svg",
       "route": "/home/showcase/divider"
     },
@@ -98,7 +98,7 @@
     },
     {
       "title": "FAB",
-      "paragraph": "Floating Actions button is used for the most important action on a page.",
+      "paragraph": "Floating Actions button is used for the most important action on a page. The FAB is placed in a fixed position (lower right corner of a page).",
       "svgPath": "./assets/component-svg/FAB-Kirby-Component-Overview.svg",
       "route": "/home/showcase/fab-sheet"
     },
@@ -116,7 +116,7 @@
     },
     {
       "title": "Form Field",
-      "paragraph": "Form field is a component which is used as an input field for text and data.",
+      "paragraph": "Form fields allows users to enter and edit information, such as 'text', 'email', 'numeric', 'number' and 'date'.",
       "svgPath": "./assets/component-svg/Form-Field-Kirby-Component-Overview.svg",
       "route": "/home/showcase/form-field"
     },
@@ -134,7 +134,7 @@
     },
     {
       "title": "Page",
-      "paragraph": "Page is a layout container for a Kirby Page.",
+      "paragraph": "Page is a layout container for a Kirby application and provides a header & footer section. It is responsive and will change the layout according to the device size.",
       "svgPath": "./assets/component-svg/Page-Kirby-Component-Overview.svg",
       "route": "/home/showcase/page"
     },
@@ -152,7 +152,7 @@
     },
     {
       "title": "Range Slider",
-      "paragraph": "The range slider makes it easy for users to select from a range of values by moving the slider knob. Min and max values are placed below the slider.",
+      "paragraph": "The range slider makes it easy for users to select from a range of values by moving the slider knob.",
       "svgPath": "./assets/component-svg/Range-Slider-Kirby-Component-Overview.svg",
       "route": "/home/showcase/range"
     },
@@ -170,13 +170,13 @@
     },
     {
       "title": "Slides",
-      "paragraph": "Slides make it possible to slide cards or other components horizontally.",
+      "paragraph": "Slides are a collection of cards you can navigate horizontally in, swipe on touch devices and click navigation on desktop.",
       "svgPath": "./assets/component-svg/Slides-Kirby-Component-Overview.svg",
       "route": "/home/showcase/slides"
     },
     {
       "title": "Spinner",
-      "paragraph": "A Spinner is a visual indicator that the for loading content or performing another process that the user needs to wait on.",
+      "paragraph": "A Spinner is a visual indicator for loading content or performing another process that the user needs to wait on",
       "svgPath": "./assets/component-svg/Spinner-Kirby-Component-Overview.svg",
       "route": "/home/showcase/spinner"
     },
