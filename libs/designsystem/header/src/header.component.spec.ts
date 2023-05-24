@@ -79,6 +79,7 @@ describe('HeaderComponent', () => {
         'font-size': fontSize('m'),
       });
     });
+
     it(`should have correct value`, () => {
       const valueElement = spectator.query('h3.value');
 
