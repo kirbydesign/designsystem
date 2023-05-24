@@ -33,7 +33,7 @@ describe('HeaderComponent', () => {
     it(`should have correct title`, () => {
       const titleElement = spectator.query('h1.title');
 
-      expect(titleElement).toContainText(title);
+      expect(titleElement).toHaveExactTrimmedText(title);
       expect(titleElement).toHaveComputedStyle({
         'font-size': fontSize('xl'),
       });
@@ -42,7 +42,7 @@ describe('HeaderComponent', () => {
     it(`should have correct subtitle1`, () => {
       const subtitle1Element = spectator.query('.subtitle1');
 
-      expect(subtitle1Element).toContainText(subtitle1);
+      expect(subtitle1Element).toHaveExactTrimmedText(subtitle1);
       expect(subtitle1Element).toHaveComputedStyle({
         'font-size': fontSize('s'),
       });
@@ -51,7 +51,7 @@ describe('HeaderComponent', () => {
     it(`should have subtitle2`, () => {
       const subtitle2Element = spectator.query('.subtitle2');
 
-      expect(subtitle2Element).toContainText(subtitle2);
+      expect(subtitle2Element).toHaveExactTrimmedText(subtitle2);
       expect(subtitle2Element).toHaveComputedStyle({
         'font-size': fontSize('s'),
       });
@@ -74,7 +74,7 @@ describe('HeaderComponent', () => {
     it(`should have correct title`, () => {
       const keyElement = spectator.query('h1.title');
 
-      expect(keyElement).toContainText(title);
+      expect(keyElement).toHaveExactTrimmedText(title);
       expect(keyElement).toHaveComputedStyle({
         'font-size': fontSize('m'),
       });
@@ -83,7 +83,7 @@ describe('HeaderComponent', () => {
     it(`should have correct value`, () => {
       const valueElement = spectator.query('h3.value');
 
-      expect(valueElement).toContainText(value);
+      expect(valueElement).toHaveExactText(`${value}${valueUnit}`);
       expect(valueElement).toHaveComputedStyle({
         'font-size': fontSize('xxl'),
       });
@@ -92,7 +92,7 @@ describe('HeaderComponent', () => {
     it(`should have correct valueUnit`, () => {
       const valueUnitElement = spectator.query('.value-unit');
 
-      expect(valueUnitElement).toContainText(valueUnit);
+      expect(valueUnitElement).toHaveExactTrimmedText(valueUnit);
       const valueFontSize = parseInt(fontSize('xxl'));
       const valueUnitFontSize = valueFontSize * 0.5;
       expect(valueUnitElement).toHaveComputedStyle({
