@@ -9,7 +9,6 @@ import { FormFieldInputColorExampleComponent } from './examples/input/color';
 import { FormFieldInputCounterExampleComponent } from './examples/input/counter';
 import { FormFieldInputDateExampleComponent } from './examples/input/date';
 import { FormFieldInputDecimalMaskExampleComponent } from './examples/input/decimal-mask';
-import { FormFieldInputNumbersOnlyMaskExampleComponent } from './examples/input/numbers-only-mask';
 import { FormFieldInputDefaultExampleComponent } from './examples/input/default';
 import { FormFieldInputDisabledExampleComponent } from './examples/input/disabled';
 import { FormFieldInputErrorExampleComponent } from './examples/input/error';
@@ -40,7 +39,6 @@ const COMPONENT_DECLARATIONS = [
   FormFieldTextareaDefaultExampleComponent,
   FormFieldTextareaLabelExampleComponent,
   FormFieldTextareaCounterExampleComponent,
-  FormFieldInputNumbersOnlyMaskExampleComponent,
 ];
 
 @NgModule({
