@@ -11,8 +11,7 @@ import { HeaderComponent } from './header.component';
 const { fontSize } = DesignTokenHelper;
 
 describe('HeaderComponent', () => {
-  let createHost;
-  createHost = createHostFactory({
+  const createHost = createHostFactory({
     component: HeaderComponent,
     imports: [TestHelper.ionicModuleForTest, HeaderModule, FlagComponent, AvatarComponent],
     detectChanges: true,
