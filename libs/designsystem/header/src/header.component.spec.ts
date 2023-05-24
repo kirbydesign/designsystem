@@ -159,4 +159,70 @@ describe('HeaderComponent', () => {
       expect(avatarElement).toBeTruthy();
     });
   });
+
+  describe('with custom section', () => {
+    let spectator: Spectator<HeaderComponent>;
+    const customSectionContent = 'Custom section content';
+    beforeEach(() => {
+      spectator = createHost(`
+      <kirby-header title="title" subtitle1="subtitle one" subtitle2="subtitle two">
+        <div class="custom-section" *kirbyHeaderCustomSection>
+          ${customSectionContent}
+        </div>
+      </kirby-header>
+      `);
+    });
+
+    it(`should render the custom section`, () => {
+      const customSectionElement = spectator.query('div.custom-section');
+      expect(customSectionElement).toBeTruthy();
+      expect(customSectionElement).toHaveExactTrimmedText(customSectionContent);
+    });
+  });
+
+  describe('with interactive title', () => {
+    let spectator: Spectator<HeaderComponent>;
+    beforeEach(() => {
+      spectator = createHost(`
+      <kirby-header title="title" subtitle1="subtitle one" subtitle2="subtitle two">
+        <kirby-icon name="arrow-down" *kirbyHeaderTitleActionIcon></kirby-icon>
+      </kirby-header>
+      `);
+    });
+
+    describe('and no value', () => {
+      it('should NOT render the title action icon', () => {
+        const iconElement = spectator.query('kirby-icon');
+        expect(iconElement).toBeNull();
+      });
+
+      it('should NOT emit `titleClick` when title is clicked', () => {
+        const titleClickSpy = spyOn(spectator.component.titleClick, 'emit');
+
+        spectator.click('h1.title');
+
+        expect(titleClickSpy).not.toHaveBeenCalled();
+      });
+    });
+
+    describe('and value', () => {
+      beforeEach(() => {
+        spectator.component.value = '123';
+        spectator.detectComponentChanges();
+      });
+
+      it(`should render the title action icon`, () => {
+        const iconElement = spectator.query('kirby-icon');
+        expect(iconElement).toBeTruthy();
+      });
+
+      it('should emit `titleClick` when title is clicked', () => {
+        const titleClickSpy = spyOn(spectator.component.titleClick, 'emit');
+
+        spectator.click('h1.title');
+
+        expect(titleClickSpy).toHaveBeenCalledTimes(1);
+      });
+    });
+  });
 });
