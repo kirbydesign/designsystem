@@ -27,7 +27,7 @@ export enum InputSize {
   template: '',
 })
 export class InputComponent implements OnChanges, OnInit {
-  constructor(private _element: ElementRef<HTMLInputElement>) {}
+  constructor(private elementRef: ElementRef<HTMLInputElement>) {}
 
   ngOnInit(): void {
     // The native input value is emitted here to make sure that
@@ -35,7 +35,7 @@ export class InputComponent implements OnChanges, OnInit {
     // when [(ngModel)] is used on kirby-input.
 
     setTimeout(() => {
-      const inputValue = this._element.nativeElement.value;
+      const inputValue = this.elementRef.nativeElement.value;
 
       if (inputValue) {
         this.kirbyChange.emit(inputValue);
