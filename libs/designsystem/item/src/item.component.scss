@@ -101,8 +101,9 @@
   --min-height: #{utils.$dropdown-item-height};
 }
 
-// Intented for use with keyboard navigation in <kirby-dropdown>
-:host-context(kirby-dropdown .focused) ion-item {
+// Intented for use with keyboard navigation in <kirby-dropdown> & <kirby-popover>
+:host-context(kirby-dropdown .focused) ion-item,
+:host-context(kirby-popover .focused) ion-item {
   --background: #{interaction-state.get-state-color('white', 'xxxs')};
 }
 
