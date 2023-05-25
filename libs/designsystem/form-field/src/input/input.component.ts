@@ -2,11 +2,13 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   EventEmitter,
   HostBinding,
   HostListener,
   Input,
   OnChanges,
+  OnInit,
   SimpleChanges,
 } from '@angular/core';
 
@@ -24,7 +26,23 @@ export enum InputSize {
   styleUrls: ['./input.component.scss'],
   template: '',
 })
-export class InputComponent implements OnChanges {
+export class InputComponent implements OnChanges, OnInit {
+  constructor(private _element: ElementRef<HTMLInputElement>) {}
+
+  ngOnInit(): void {
+    // The native input value is emitted here to make sure that
+    // the input counter component receives the value onInit,
+    // when [(ngModel)] is used on kirby-input.
+
+    setTimeout(() => {
+      const inputValue = this._element.nativeElement.value;
+
+      if (inputValue) {
+        this.kirbyChange.emit(inputValue);
+      }
+    });
+  }
+
   private static typeToInputmodeMap = {
     number: 'decimal',
     search: 'search',
