@@ -157,3 +157,28 @@ describe('when configured with size medium', () => {
     });
   });
 });
+
+describe('ngOnInit', () => {
+  const createHost = createHostFactory({
+    component: InputComponent,
+  });
+
+  it('should emit "kirbyChange" if the native input has a value', fakeAsync(() => {
+    const spectator = createHost(`<input kirby-input size="md" value="test value"/>`);
+    const onChangeSpy = spyOn(spectator.component.kirbyChange, 'emit');
+
+    tick();
+
+    expect(onChangeSpy).toHaveBeenCalledTimes(1);
+    expect(onChangeSpy).toHaveBeenCalledWith('test value');
+  }));
+
+  it('should not emit "kirbyChange" if the native input does not have a value', fakeAsync(() => {
+    const spectator = createHost(`<input kirby-input size="md"/>`);
+    const onChangeSpy = spyOn(spectator.component.kirbyChange, 'emit');
+
+    tick();
+
+    expect(onChangeSpy).toHaveBeenCalledTimes(0);
+  }));
+});
