@@ -1,14 +1,14 @@
 import { MockComponent } from 'ng-mocks';
 import { createHostFactory, Spectator } from '@ngneat/spectator';
 import { TableComponent } from '../table/table.component';
-import { TableHeadComponent } from './table-head.component';
+import { TableSortableComponent } from './sortable.component';
 
-describe('TableRowComponent', () => {
-  let spectator: Spectator<TableHeadComponent>;
+describe('TableSortableComponent', () => {
+  let spectator: Spectator<TableSortableComponent>;
   let element: HTMLElement;
 
   const createHost = createHostFactory({
-    component: TableHeadComponent,
+    component: TableSortableComponent,
     declarations: [MockComponent(TableComponent)],
   });
 

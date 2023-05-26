@@ -14,7 +14,7 @@ const config = {
     <thead>
       <tr>
         <th *ngFor="let heading of headings" 
-            kirby-th 
+            sortable 
             [sortable]="heading.sortable" 
             [textAlignment]="heading.textAlignment" 
             [sortDirection]="heading.sortDirection"

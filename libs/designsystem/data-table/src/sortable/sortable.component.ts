@@ -8,22 +8,16 @@ import {
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'th[kirby-th]',
-  template: `<button>
-    <ion-icon
-      *ngIf="sortable && textAlignment === 'end'"
-      name="{{ sortDirection === 'asc' ? 'arrow-down' : 'arrow-up' }}"
-    ></ion-icon>
-    <ng-content></ng-content>
-    <ion-icon
-      *ngIf="sortable && (textAlignment === 'start' || textAlignment === 'center')"
-      name="{{ sortDirection === 'asc' ? 'arrow-down' : 'arrow-up' }}"
-    ></ion-icon>
-  </button>`,
+  selector: 'th[sortable]',
+  template: `
+    <button>
+      <ng-content></ng-content>
+    </button>
+  `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TableHeadComponent {
+export class TableSortableComponent {
   /**
    * Sets the header to sortable
    */
