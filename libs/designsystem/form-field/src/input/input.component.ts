@@ -31,7 +31,7 @@ export class InputComponent implements OnChanges, OnInit {
 
   ngOnInit(): void {
     // The native input value is emitted here to make sure that
-    // the input counter component receives the value onInit,
+    // the InputCounterComponent receives the value onInit,
     // when [(ngModel)] is used on kirby-input.
 
     setTimeout(() => {

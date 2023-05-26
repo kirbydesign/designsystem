@@ -179,6 +179,6 @@ describe('ngOnInit', () => {
 
     tick();
 
-    expect(onChangeSpy).toHaveBeenCalledTimes(0);
+    expect(onChangeSpy).not.toHaveBeenCalled();
   }));
 });
