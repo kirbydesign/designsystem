@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
+import { InputSize } from '@kirbydesign/designsystem';
 import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
 import { ApiDescriptionMethod } from '~/app/shared/api-description/api-description-methods/api-description-methods.component';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
-
-import { InputSize } from '@kirbydesign/designsystem';
 
 @Component({
   selector: 'cookbook-form-field-showcase',
@@ -153,6 +152,15 @@ On native devices this method also ensures the form field is scrolled into the v
       defaultValue: 'false',
       description: 'Disable group seperation',
       type: ['true', 'false'],
+    },
+  ];
+
+  dateMaskProperties: ApiDescriptionProperty[] = [
+    {
+      name: 'prefillYear',
+      defaultValue: 'false',
+      description: 'Enable/disable prefilling of the year.',
+      type: ['boolean'],
     },
   ];
 
