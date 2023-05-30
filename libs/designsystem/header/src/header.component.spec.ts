@@ -154,9 +154,8 @@ describe('HeaderComponent', () => {
     });
 
     it(`should render the flag`, () => {
-      const avatarElement = spectator.query('kirby-flag');
-
-      expect(avatarElement).toBeTruthy();
+      const flagElement = spectator.query('kirby-flag');
+      expect(flagElement).toBeTruthy();
     });
   });
 
