@@ -74,6 +74,12 @@ ion-toolbar {
     }
   }
 
+  &.content-pinned {
+    &::before {
+      transition: none;
+    }
+  }
+
   /*
   * This overrides Ionic's default ios styling for the position of secondary action buttons which are to the left of content: https://ionicframework.com/docs/api/toolbar#buttons
   * We would like the seconday actions to be to the far right after primary actions (usually as a falafel):
@@ -299,7 +305,6 @@ ion-content {
     left: calc(-1 * var(--padding-start));
     right: calc(-1 * var(--padding-end));
     bottom: 0;
-    transition: $toolbar-transition;
   }
 
   &::before {
@@ -317,11 +322,6 @@ ion-content {
   }
 
   &.content-pinned {
-    &::before,
-    &::after {
-      transition-duration: $toolbar-transition-duration-in;
-    }
-
     &::before {
       /* Background - pinned */
       background-color: $toolbar-shaded-background;
