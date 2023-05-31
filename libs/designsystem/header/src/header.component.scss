@@ -7,6 +7,18 @@
   margin-top: utils.size('s');
   margin-bottom: utils.size('l');
 
+  @include utils.media('<medium') {
+    /*
+      Angular's view encapsulation wrongly appends an `_ngcontent-xxx` selector after the `:has()` pseudo class.
+      Using ::ng-deep in this context fixes this and ensures the selector is applied inside the pseudo class,
+      i.e. to `.avatar`.
+    */
+    /* stylelint-disable selector-pseudo-element-no-unknown */
+    &:has(> .avatar::ng-deep) {
+      margin-top: utils.size('xxs');
+    }
+  }
+
   @include utils.media('>=medium') {
     margin-top: utils.size('m');
   }

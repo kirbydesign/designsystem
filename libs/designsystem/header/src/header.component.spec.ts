@@ -8,7 +8,7 @@ import { AvatarComponent } from 'avatar/src';
 import { HeaderModule } from './header.module';
 import { HeaderComponent } from './header.component';
 
-const { fontSize } = DesignTokenHelper;
+const { fontSize, size } = DesignTokenHelper;
 
 describe('HeaderComponent', () => {
   const createHost = createHostFactory({
@@ -54,6 +54,31 @@ describe('HeaderComponent', () => {
       expect(subtitle2Element).toHaveExactTrimmedText(subtitle2);
       expect(subtitle2Element).toHaveComputedStyle({
         'font-size': fontSize('s'),
+      });
+    });
+
+    describe('spacing', () => {
+      it(`should have correct margins`, () => {
+        expect(spectator.element).toHaveComputedStyle({
+          'margin-top': size('m'),
+          'margin-bottom': size('l'),
+        });
+      });
+
+      describe('on small screens', () => {
+        beforeAll(async () => {
+          await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
+        });
+
+        afterAll(() => {
+          TestHelper.resetTestWindow();
+        });
+
+        it(`should have correct margin-top`, () => {
+          expect(spectator.element).toHaveComputedStyle({
+            'margin-top': size('s'),
+          });
+        });
       });
     });
   });
@@ -116,6 +141,22 @@ describe('HeaderComponent', () => {
 
       expect(avatarElement).toBeTruthy();
     });
+
+    describe('on small screens', () => {
+      beforeAll(async () => {
+        await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
+      });
+
+      afterAll(() => {
+        TestHelper.resetTestWindow();
+      });
+
+      it(`should have correct margin-top`, () => {
+        expect(spectator.element).toHaveComputedStyle({
+          'margin-top': size('xxs'),
+        });
+      });
+    });
   });
 
   describe('with progress circle', () => {
@@ -140,6 +181,22 @@ describe('HeaderComponent', () => {
       const avatarElement = spectator.query('kirby-avatar');
 
       expect(avatarElement).toBeTruthy();
+    });
+
+    describe('on small screens', () => {
+      beforeAll(async () => {
+        await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
+      });
+
+      afterAll(() => {
+        TestHelper.resetTestWindow();
+      });
+
+      it(`should have correct margin-top`, () => {
+        expect(spectator.element).toHaveComputedStyle({
+          'margin-top': size('xxs'),
+        });
+      });
     });
   });
 
