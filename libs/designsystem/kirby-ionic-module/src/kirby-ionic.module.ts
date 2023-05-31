@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { IonicModule, isPlatform } from '@ionic/angular';
+import { AnimationController, IonicModule, isPlatform } from '@ionic/angular';
 
 const getIonicConfig = () => {
   let config: any = {
@@ -12,7 +12,7 @@ const getIonicConfig = () => {
   if (!isPlatform('hybrid')) {
     config = {
       ...config,
-      navAnimation: () => null,
+      navAnimation: () => new AnimationController().create(),
     };
   }
 
