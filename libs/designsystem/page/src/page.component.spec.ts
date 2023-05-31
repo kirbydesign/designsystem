@@ -37,6 +37,7 @@ describe('PageComponent', () => {
   let spectator: SpectatorHost<PageComponent>;
   let ionToolbar: HTMLElement;
   let ionContent: HTMLIonContentElement;
+  let ionScrollElement: HTMLElement;
   let tabBar: SpyObject<TabsComponent>;
   let router: SpyObject<Router>;
   let modalNavigationService: SpyObject<ModalNavigationService>;
@@ -120,10 +121,10 @@ describe('PageComponent', () => {
       router = spectator.inject(Router);
       tabBar = spectator.inject(TabsComponent);
       ionToolbar = spectator.queryHost('ion-toolbar');
-
       ionContent = spectator.queryHost('ion-content');
       await TestHelper.whenReady(ionToolbar);
       await TestHelper.whenReady(ionContent);
+      ionScrollElement = await ionContent.getScrollElement();
     });
 
     describe('on phone', () => {
@@ -201,6 +202,16 @@ describe('PageComponent', () => {
           });
         });
       });
+
+      describe('content', () => {
+        it('should have correct padding', () => {
+          expect(ionScrollElement).toHaveComputedStyle({
+            'padding-left': size('s'),
+            'padding-right': size('s'),
+            'padding-top': size('xs'),
+          });
+        });
+      });
     });
 
     describe('on tablet', () => {
@@ -216,6 +227,16 @@ describe('PageComponent', () => {
         describe('height', () => {
           it('should be correct on tablet', () => {
             expect(ionToolbar).toHaveComputedStyle({ height: size('xxxxxl') });
+          });
+        });
+      });
+
+      describe('content', () => {
+        it('should have correct padding', () => {
+          expect(ionScrollElement).toHaveComputedStyle({
+            'padding-left': size('xxl'),
+            'padding-right': size('xxl'),
+            'padding-top': size('xs'),
           });
         });
       });
@@ -250,6 +271,16 @@ describe('PageComponent', () => {
           const toolbarBackground = ionToolbar.shadowRoot.querySelector('.toolbar-background');
           expect(toolbarBackground).toHaveComputedStyle({
             'background-color': shadedBackgroundColor,
+          });
+        });
+      });
+
+      describe('content', () => {
+        it('should have correct padding', () => {
+          expect(ionScrollElement).toHaveComputedStyle({
+            'padding-left': size('xxl'),
+            'padding-right': size('xxl'),
+            'padding-top': size('xs'),
           });
         });
       });
