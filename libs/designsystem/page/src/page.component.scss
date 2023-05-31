@@ -247,6 +247,10 @@ ion-content {
     --padding-end: var(--page-content-padding-end, #{utils.size('xxl')});
   }
 
+  &.has-header {
+    --padding-top: 0;
+  }
+
   &.max-width-standard {
     --page-content-max-width: 792px;
   }

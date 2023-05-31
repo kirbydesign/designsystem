@@ -14,6 +14,7 @@ const { size, fontWeight, getColor } = DesignTokenHelper;
 
 import { ModalNavigationService } from '@kirbydesign/designsystem/modal';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { HeaderComponent } from '@kirbydesign/designsystem/header';
 import { FitHeadingDirective } from '@kirbydesign/designsystem/shared';
 import {
   PageActionsComponent,
@@ -85,6 +86,7 @@ describe('PageComponent', () => {
       PageTitleDirective,
       PageToolbarTitleDirective,
       PageStickyContentDirective,
+      HeaderComponent,
     ],
     providers: [
       {
@@ -674,7 +676,6 @@ describe('PageComponent', () => {
   });
 
   describe('with sticky content', () => {
-    let ionScrollElement: HTMLElement;
     let stickyContentContainer: HTMLElement;
 
     beforeEach(async () => {
@@ -913,6 +914,29 @@ describe('PageComponent', () => {
             'background-color': shadedBackgroundColor,
           });
         });
+      });
+    });
+  });
+
+  describe('with kirby-header', () => {
+    beforeEach(async () => {
+      spectator = createHost(
+        `<kirby-page>
+           <kirby-header title="${titleText}" subtitle1="${subtitleText}">
+           </kirby-header>
+           <kirby-page-content>
+            ${dummyContent}
+           </kirby-page-content>
+         </kirby-page>`
+      );
+      ionContent = spectator.queryHost('ion-content');
+      await TestHelper.whenReady(ionContent);
+      ionScrollElement = await ionContent.getScrollElement();
+    });
+
+    it('should have correct padding', () => {
+      expect(ionScrollElement).toHaveComputedStyle({
+        'padding-top': '0px',
       });
     });
   });
