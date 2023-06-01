@@ -2,7 +2,9 @@ import { NgModule } from '@angular/core';
 import { AnimationController, IonicModule, isPlatform } from '@ionic/angular';
 import { IonicConfig } from '@ionic/core';
 
-const navAnimationConfig: IonicConfig = !isPlatform('hybrid') && {
+const shouldHaveNoopAnimation = !isPlatform('hybrid');
+
+const navAnimationConfig: IonicConfig = shouldHaveNoopAnimation && {
   navAnimation: () => new AnimationController().create(),
 };
 
