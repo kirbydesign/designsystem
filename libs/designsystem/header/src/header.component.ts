@@ -5,16 +5,20 @@ import {
   ContentChild,
   Directive,
   ElementRef,
+  EventEmitter,
   HostBinding,
   Injector,
   Input,
   OnInit,
+  Output,
   TemplateRef,
   ViewChild,
 } from '@angular/core';
+
 import { ACTIONGROUP_CONFIG, ActionGroupConfig } from '@kirbydesign/designsystem/action-group';
 import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
 import { FlagComponent } from '@kirbydesign/designsystem/flag';
+import { ProgressCircleComponent } from '@kirbydesign/designsystem/progress-circle';
 import type { FitHeadingConfig } from '@kirbydesign/designsystem/shared';
 
 @Directive({
@@ -26,6 +30,11 @@ export class HeaderActionsDirective {}
   selector: '[kirbyHeaderCustomSection]',
 })
 export class HeaderCustomSectionDirective {}
+
+@Directive({
+  selector: '[kirbyHeaderTitleActionIcon]',
+})
+export class HeaderTitleActionIconDirective {}
 
 @Component({
   selector: 'kirby-header',
@@ -46,6 +55,9 @@ export class HeaderComponent implements AfterContentInit, OnInit {
   @ContentChild(AvatarComponent)
   avatar: AvatarComponent;
 
+  @ContentChild(ProgressCircleComponent)
+  progressCircle: ProgressCircleComponent;
+
   @ContentChild(FlagComponent)
   flag: FlagComponent;
 
@@ -61,11 +73,20 @@ export class HeaderComponent implements AfterContentInit, OnInit {
   @ContentChild(HeaderCustomSectionDirective, { read: TemplateRef<HeaderCustomSectionDirective> })
   customSectionTemplate?: TemplateRef<HeaderCustomSectionDirective>;
 
+  @ContentChild(HeaderTitleActionIconDirective, { read: TemplateRef })
+  titleActionIconTemplate: TemplateRef<HeaderTitleActionIconDirective>;
+
   @Input() title: string = null;
   @Input() value: string = null;
   @Input() valueUnit: string = null;
   @Input() subtitle1: string = null;
   @Input() subtitle2: string = null;
+
+  @Output() titleClick = new EventEmitter<PointerEvent>();
+
+  onTitleClick(event: PointerEvent) {
+    this.titleClick.emit(event);
+  }
 
   _actionGroupInjector: Injector;
 
@@ -75,7 +96,6 @@ export class HeaderComponent implements AfterContentInit, OnInit {
 
   ngOnInit(): void {
     this.actionGroupConfig = {
-      isResizable: this.emphasizeActions,
       defaultVisibleActions: this.emphasizeActions ? undefined : 1,
     };
 

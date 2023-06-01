@@ -10,10 +10,8 @@
   line-height: 1;
 
   ion-badge {
-    --background: #{utils.get-color('white')};
-    --color: #{utils.get-color('white-contrast')};
-    --ion-color-base: var(--kirby-badge-background-color);
-    --ion-color-contrast: var(--kirby-badge-color);
+    --background: var(--kirby-badge-background-color, #{utils.get-color('white')});
+    --color: var(--kirby-badge-color, #{utils.get-color('white-contrast')});
 
     box-sizing: border-box; // Fixes https://github.com/kirbydesign/designsystem/issues/537
     border-radius: utils.size('xxs');

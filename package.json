@@ -1,6 +1,6 @@
 {
   "name": "designsystem",
-  "version": "8.3.1",
+  "version": "8.5.2",
   "description": "Kirby Design Angular Components. This library provides Angular wrappers for the @kirbydesign/core package, for smoother integration into Angular projects.",
   "engines": {
     "node": ">=16.0.0 <=18.13.0",
@@ -133,7 +133,7 @@
     "@angular/compiler-cli": "15.0.4",
     "@babel/core": "^7.14.6",
     "@capacitor/android": "^4.4.0",
-    "@capacitor/cli": "^4.4.0",
+    "@capacitor/cli": "^4.8.0",
     "@capacitor/core": "^4.4.0",
     "@capacitor/ios": "^4.4.0",
     "@kirbydesign/core": "file:libs/core",
@@ -205,7 +205,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run sync-node-version && npm run generate-mocks && lint-staged",
+      "pre-commit": "npm run sync-node-version && lint-staged",
       "pre-push": "npm run test:libs",
       "post-merge": "post-npm-install"
     }

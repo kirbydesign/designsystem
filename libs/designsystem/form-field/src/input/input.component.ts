@@ -2,11 +2,13 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   EventEmitter,
   HostBinding,
   HostListener,
   Input,
   OnChanges,
+  OnInit,
   SimpleChanges,
 } from '@angular/core';
 import { DateInputDirective } from '../directives/date/date-input.directive';
@@ -26,7 +28,23 @@ export enum InputSize {
   styleUrls: ['./input.component.scss'],
   template: '',
 })
-export class InputComponent implements OnChanges {
+export class InputComponent implements OnChanges, OnInit {
+  constructor(private elementRef: ElementRef<HTMLInputElement>) {}
+
+  ngOnInit(): void {
+    // The native input value is emitted here to make sure that
+    // the InputCounterComponent receives the value onInit,
+    // when [(ngModel)] is used on kirby-input.
+
+    setTimeout(() => {
+      const inputValue = this.elementRef.nativeElement.value;
+
+      if (inputValue) {
+        this.kirbyChange.emit(inputValue);
+      }
+    });
+  }
+
   private static typeToInputmodeMap = {
     number: 'decimal',
     search: 'search',

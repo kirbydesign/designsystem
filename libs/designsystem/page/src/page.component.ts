@@ -35,6 +35,7 @@ import {
   IonFooter,
   IonHeader,
   IonRouterOutlet,
+  IonToolbar,
   NavController,
 } from '@ionic/angular';
 import { ScrollDetail } from '@ionic/core';
@@ -51,7 +52,11 @@ import {
   ModalWrapperComponent,
 } from '@kirbydesign/designsystem/modal';
 import { FitHeadingConfig, ResizeObserverService } from '@kirbydesign/designsystem/shared';
-import { HeaderActionsDirective, HeaderComponent } from '@kirbydesign/designsystem/header';
+import {
+  HeaderActionsDirective,
+  HeaderComponent,
+  HeaderTitleActionIconDirective,
+} from '@kirbydesign/designsystem/header';
 import { ACTIONGROUP_CONFIG, ActionGroupConfig } from '@kirbydesign/designsystem/action-group';
 
 /**
@@ -237,6 +242,8 @@ export class PageComponent
   ionHeaderElement: ElementRef<HTMLIonHeaderElement>;
   @ViewChild(IonFooter, { static: true, read: ElementRef })
   private ionFooterElement: ElementRef<HTMLIonFooterElement>;
+  @ViewChild(IonToolbar, { static: true, read: ElementRef })
+  private ionToolbarElement: ElementRef<HTMLIonToolbarElement>;
 
   @ViewChild(IonBackButtonDelegate, { static: false })
   private backButtonDelegate: IonBackButtonDelegate;
@@ -282,6 +289,9 @@ export class PageComponent
   fixedActionsTemplate: TemplateRef<any>;
   stickyContentTemplate: TemplateRef<PageStickyContentDirective>;
   headerActionsTemplate: TemplateRef<HeaderActionsDirective>;
+  titleActionIconTemplate: TemplateRef<HeaderTitleActionIconDirective>;
+  headerTitleClick?: EventEmitter<PointerEvent>;
+  hasInteractiveTitle = false;
 
   private titleIntersectionObserver?: IntersectionObserver;
   private stickyActionsIntersectionObserver?: IntersectionObserver;
@@ -343,9 +353,9 @@ export class PageComponent
 
   ngOnInit(): void {
     this.removeWrapper();
+    this.setToolbarBackgroundPart();
 
     const actionGroupConfig: ActionGroupConfig = {
-      isResizable: false,
       isCondensed: true,
       maxVisibleActions: 1,
     };
@@ -447,12 +457,28 @@ export class PageComponent
     return `max-width-${this.maxWidth}`;
   }
 
+  onTitleClick(event: PointerEvent) {
+    this.headerTitleClick?.emit(event);
+  }
+
   private removeWrapper() {
     const parent = this.elementRef.nativeElement.parentNode;
     this.renderer.removeChild(parent, this.elementRef.nativeElement);
     this.renderer.appendChild(parent, this.ionHeaderElement.nativeElement);
     this.renderer.appendChild(parent, this.ionContentElement.nativeElement);
     this.renderer.appendChild(parent, this.ionFooterElement.nativeElement);
+  }
+
+  private setToolbarBackgroundPart() {
+    // Ensure ion-toolbar custom element has been defined (primarily when testing, but doesn't hurt):
+    customElements.whenDefined(this.ionToolbarElement.nativeElement.localName).then(() => {
+      this.ionToolbarElement.nativeElement.componentOnReady().then((toolbar) => {
+        const toolbarBackground = toolbar.shadowRoot.querySelector('.toolbar-background');
+        if (toolbarBackground) {
+          this.renderer.setAttribute(toolbarBackground, 'part', 'background');
+        }
+      });
+    });
   }
 
   private onEnter() {
@@ -513,6 +539,13 @@ export class PageComponent
   private initializeHeader() {
     if (this.hasHeader === undefined && !!this.header) {
       this.hasHeader = true;
+      // Header could later be removed from DOM (e.g. in virtual scrolling scenarios),
+      // so store a reference to `header.titleActionIconTemplate` and `header.titleClick`:
+      this.titleActionIconTemplate = this.header.titleActionIconTemplate;
+      if (this.header.titleClick.observed) {
+        this.hasInteractiveTitle = true;
+        this.headerTitleClick = this.header.titleClick;
+      }
     }
   }
 
@@ -698,8 +731,7 @@ export class PageComponent
 
   private createStickyContentIntersectionObserver() {
     const options: IntersectionObserverInit = {
-      // TODO: Should sticky content also use ion-content as root?
-      // root: this.ionContentElement.nativeElement,
+      root: this.ionContentElement.nativeElement,
       threshold: 1,
     };
 
