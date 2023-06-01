@@ -18,34 +18,39 @@ import Inputmask from 'inputmask/lib/inputmask';
 export class DateInputDirective implements AfterViewInit {
   @HostListener('input')
   onInput() {
-    if (this.isDate) {
-      this.updateMask(this.elementRef.nativeElement.value);
-    }
+    if (!this.isDateInput) return;
+
+    this.updateMask(this.elementRef.nativeElement.value);
   }
 
   private maskingElement: HTMLElement;
 
   /**
-   * This is here to avoid calling updateMask() when the directive is not used on a date-input.
-   * The reason for this being nessesary is an issue with the standalone component 'InputComponent', which forced us to use a host-directive. which applies the directive to all inputs.
-   * This check prevents it from happening on non-date inputs.
+   * `isDateInput` is used to avoid removing the type attribute on the input element and calling updateMask()
+   * when the directive is not used on a date input.
+   * This is needed for the standalone component 'InputComponent', which includes the directive
+   * using the `hostDirectives` component decorator prop. Angular ignores the selector of directives
+   * applied in the `hostDirectives` property which effectively applies the directive to all kirby-inputs, not only date inputs.
+   * This check prevents the directive from executing it's masking on non-date inputs.
+   * See: https://angular.io/guide/directive-composition-api
    */
-  private isDate = false;
+  private isDateInput = false;
 
   constructor(
     private elementRef: ElementRef,
     private renderer: Renderer2,
     @Inject(LOCALE_ID) private locale: string
-  ) {}
+  ) {
+    this.isDateInput = this.elementRef.nativeElement.type === 'date';
+    if (this.isDateInput) {
+      // Remove type to avoid user-agent specific behaviour for [type="date"]
+      this.elementRef.nativeElement.removeAttribute('type');
+    }
+  }
 
   ngAfterViewInit(): void {
-    if (this.elementRef.nativeElement.type !== 'date') {
-      return;
-    }
+    if (!this.isDateInput) return;
 
-    this.isDate = true;
-    // Remove type to avoid user-agent specific behaviour for [type="date"]
-    this.elementRef.nativeElement.removeAttribute('type');
     this.initMask();
   }
 
