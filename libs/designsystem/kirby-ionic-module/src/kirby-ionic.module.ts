@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { AnimationController, IonicModule, isPlatform } from '@ionic/angular';
 import { IonicConfig } from '@ionic/core';
 
-const navAnimation: IonicConfig = !isPlatform('hybrid') && {
+const navAnimationConfig: IonicConfig = !isPlatform('hybrid') && {
   navAnimation: () => new AnimationController().create(),
 };
 
@@ -11,7 +11,7 @@ const config: IonicConfig = {
   inputShims: true,
   scrollAssist: true,
   scrollPadding: false,
-  ...navAnimation,
+  ...navAnimationConfig,
 };
 
 @NgModule({
