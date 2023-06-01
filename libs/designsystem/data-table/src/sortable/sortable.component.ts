@@ -16,6 +16,7 @@ import {
 export class TableSortableComponent {
   @Input() sortDirection: 'asc' | 'desc';
   @Input() sortable: boolean;
+  @Input() iconAlignment: 'start' | 'end' = 'end';
 
   @HostBinding('class.kirby-header-active') @Input() active = false;
 }

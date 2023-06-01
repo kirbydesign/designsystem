@@ -6,7 +6,6 @@ import { TableSortableComponent } from './sortable.component';
 
 describe('TableSortableComponent', () => {
   let spectator: Spectator<TableSortableComponent>;
-  let element: HTMLElement;
 
   const createHost = createHostFactory({
     component: TableSortableComponent,
@@ -16,7 +15,6 @@ describe('TableSortableComponent', () => {
   describe('by default', () => {
     beforeEach(() => {
       spectator = createHost(`<th [sortable]="true">Data1</th>`);
-      element = spectator.element as HTMLElement;
     });
 
     it('should create', () => {
