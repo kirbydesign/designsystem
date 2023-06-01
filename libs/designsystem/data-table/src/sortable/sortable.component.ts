@@ -14,9 +14,17 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableSortableComponent {
-  @Input() sortDirection: 'asc' | 'desc';
-  @Input() sortable: boolean;
-  @Input() iconAlignment: 'start' | 'end' = 'end';
+  @HostBinding('class.sortable-head')
+  @Input()
+  sortable: boolean;
 
-  @HostBinding('class.kirby-header-active') @Input() active = false;
+  @Input() sortDirection: 'asc' | 'desc';
+  @Input() iconAlignment: 'start' | 'end' = 'end';
+  @Input() textAlignment: 'start' | 'center' | 'end' = 'start';
+
+  @HostBinding('class.header-active') @Input() active = false;
+
+  _getButtonClass() {
+    return `button-content-${this.textAlignment}`;
+  }
 }

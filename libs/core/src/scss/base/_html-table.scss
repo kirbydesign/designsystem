@@ -34,10 +34,15 @@ table.kirby-table {
   }
 
   th {
-    &.kirby-sortable-head {
+    &.sortable-head {
       @include interaction-state.apply-hover {
         background-color: $highlight-color;
       }
+    }
+
+    &.header-active {
+      color: utils.get-text-color('black');
+      font-weight: utils.font-weight('medium');
     }
 
     text-align: left;
@@ -46,38 +51,27 @@ table.kirby-table {
     color: utils.get-text-color('semi-dark');
     padding: utils.size('xxs') utils.size('s');
 
-    &.align-heading-text {
-      &.start {
-        justify-content: flex-start;
-      }
-
-      &.center {
-        justify-content: center;
-      }
-
-      &.end {
-        justify-content: flex-end;
-      }
-    }
-
-    &.kirby-header-active {
-      color: utils.get-text-color('black');
-    }
-
     button {
-      text-align: inherit;
-      font-weight: inherit;
-      font-size: inherit;
-      color: inherit;
       padding: 0;
-      background-color: inherit;
-      cursor: inherit;
       border: none;
       height: 100%;
       width: 100%;
       display: flex;
       align-items: center;
-      justify-content: inherit;
+
+      &.button-content {
+        &-start {
+          justify-content: flex-start;
+        }
+
+        &-center {
+          justify-content: center;
+        }
+
+        &-end {
+          justify-content: flex-end;
+        }
+      }
     }
   }
 
