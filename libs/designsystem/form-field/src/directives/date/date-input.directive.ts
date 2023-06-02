@@ -5,6 +5,7 @@ import {
   ElementRef,
   HostListener,
   Inject,
+  Input,
   LOCALE_ID,
   Renderer2,
 } from '@angular/core';
@@ -20,6 +21,8 @@ export class DateInputDirective implements AfterViewInit {
   onInput() {
     this.updateMask(this.elementRef.nativeElement.value);
   }
+
+  @Input() prefillYear = false;
 
   private maskingElement: HTMLElement;
 
@@ -47,6 +50,7 @@ export class DateInputDirective implements AfterViewInit {
     new Inputmask('datetime', {
       inputFormat,
       placeholder,
+      prefillYear: this.prefillYear,
     }).mask(this.elementRef.nativeElement);
 
     // Append input overlay, so it's possible to style typed date differntly than the date-mask
