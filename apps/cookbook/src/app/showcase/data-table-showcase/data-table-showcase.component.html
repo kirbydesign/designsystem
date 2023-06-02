@@ -18,18 +18,38 @@
     <li>Built in simple sort</li>
   </ul>
 
-  <h2>Minimalistic data table</h2>
+  <h2>Data table with minimal data</h2>
   <cookbook-example-viewer [html]="dataTableDefaultExample.template">
     <cookbook-data-table-default-example
       #dataTableDefaultExample
     ></cookbook-data-table-default-example>
   </cookbook-example-viewer>
 
-  <h2>Complex data table</h2>
-  <p>Data table wrapped with card, with selectable rows, and sorting on header press.</p>
+  <h2>Data table wrapped with Kirby Card</h2>
+  <p>Data table wrapped with card, with selectable rows.</p>
   <cookbook-example-viewer [html]="dataTableCardExample.template">
     <cookbook-data-table-card-example #dataTableCardExample></cookbook-data-table-card-example>
   </cookbook-example-viewer>
+
+  <h2>Sortable table</h2>
+  <p>Data table wrapped with card, and sorting on header press.</p>
+  <cookbook-example-viewer [html]="dataTableSortableExample.template">
+    <cookbook-data-table-sortable-example
+      #dataTableSortableExample
+    ></cookbook-data-table-sortable-example>
+  </cookbook-example-viewer>
+
+  <p>
+    By adding
+    <code>[sortable]="true"</code>
+    to a
+    <code>th</code>
+    element, it will automatically render the sorting icon (up/down arrow). Please note that the
+    Kirby data table does not do any sorting, but renders the UI associated with sorting. The
+    sorting logic must be implemented manually and can be triggered by adding the Angular
+    <code>(click)</code>
+    event listener as shown in the code example above.
+  </p>
 </div>
 
 <h2>API Description</h2>

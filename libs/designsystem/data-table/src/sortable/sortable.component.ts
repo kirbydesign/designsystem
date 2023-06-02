@@ -16,7 +16,7 @@ import {
 export class TableSortableComponent {
   @HostBinding('class.sortable-head')
   @Input()
-  sortable: boolean;
+  sortable = false;
 
   @Input() sortDirection: 'asc' | 'desc';
   @Input() iconAlignment: 'start' | 'end' = 'end';
