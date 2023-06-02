@@ -47,7 +47,7 @@ describe('TableSortableComponent', () => {
 
       const icon = spectator.query('kirby-icon');
 
-      expect(icon.attributes['name'].value).toBe('arrow-up');
+      expect(icon.attributes['name'].value).toBe('arrow-up-fill');
     });
 
     it('should render an "arrow-down" icon, when sortDirection is "desc"', () => {
@@ -55,7 +55,7 @@ describe('TableSortableComponent', () => {
 
       const icon = spectator.query('kirby-icon');
 
-      expect(icon.attributes['name'].value).toBe('arrow-down');
+      expect(icon.attributes['name'].value).toBe('arrow-down-fill');
     });
   });
 
