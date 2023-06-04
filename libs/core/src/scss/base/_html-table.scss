@@ -40,9 +40,17 @@ table.kirby-table {
       }
     }
 
+    kirby-icon {
+      visibility: hidden;
+    }
+
+    &.icon-visible kirby-icon {
+      visibility: visible;
+    }
+
     &.header-active {
       color: utils.get-text-color('black');
-      font-weight: utils.font-weight('medium');
+      font-weight: utils.font-weight('bold');
     }
 
     text-align: left;

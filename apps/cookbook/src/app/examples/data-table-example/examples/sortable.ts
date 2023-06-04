@@ -15,7 +15,7 @@ const config = {
         <th *ngFor="let heading of headings; let i = index" 
           [sortable]="heading.sortable"  
           [sortDirection]="heading.sortDirection"
-          [iconAlignment]="'end'"
+          [iconAlignment]="heading.iconAlignment"
           [textAlignment]="heading.textAlignment"
           [active]="heading.active"
           (click)="onClickSort(i)"

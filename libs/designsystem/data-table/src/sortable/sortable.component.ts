@@ -18,11 +18,18 @@ export class TableSortableComponent {
   @Input()
   sortable = false;
 
+  @HostBinding('class.icon-visible')
+  @Input()
+  active = false;
+
   @Input() sortDirection: 'asc' | 'desc';
   @Input() iconAlignment: 'start' | 'end' = 'end';
   @Input() textAlignment: 'start' | 'center' | 'end' = 'start';
 
-  @HostBinding('class.header-active') @Input() active = false;
+  @HostBinding('class.header-active')
+  get isActive() {
+    return this.active && this.sortable;
+  }
 
   _getButtonClass() {
     return `button-content-${this.textAlignment}`;

@@ -14,6 +14,7 @@ export interface Heading {
   sortable: boolean;
   sortDirection?: 'asc' | 'desc';
   textAlignment: 'start' | 'center' | 'end';
+  iconAlignment: 'start' | 'end';
   active: boolean;
 }
 
@@ -23,6 +24,7 @@ export const table_example_heading_data: Heading[] = [
     sortable: true,
     sortDirection: 'asc',
     textAlignment: 'start',
+    iconAlignment: 'end',
     active: false,
   },
   {
@@ -30,6 +32,7 @@ export const table_example_heading_data: Heading[] = [
     sortable: false,
     sortDirection: 'asc',
     textAlignment: 'start',
+    iconAlignment: 'end',
     active: false,
   },
   {
@@ -37,6 +40,7 @@ export const table_example_heading_data: Heading[] = [
     sortable: false,
     sortDirection: 'asc',
     textAlignment: 'start',
+    iconAlignment: 'end',
     active: false,
   },
   {
@@ -44,6 +48,7 @@ export const table_example_heading_data: Heading[] = [
     sortable: false,
     sortDirection: 'asc',
     textAlignment: 'start',
+    iconAlignment: 'end',
     active: false,
   },
   {
@@ -51,6 +56,7 @@ export const table_example_heading_data: Heading[] = [
     sortable: false,
     sortDirection: 'asc',
     textAlignment: 'start',
+    iconAlignment: 'end',
     active: false,
   },
   {
@@ -58,6 +64,7 @@ export const table_example_heading_data: Heading[] = [
     sortable: false,
     sortDirection: 'asc',
     textAlignment: 'start',
+    iconAlignment: 'end',
     active: false,
   },
   {
@@ -65,6 +72,7 @@ export const table_example_heading_data: Heading[] = [
     sortable: true,
     sortDirection: 'asc',
     textAlignment: 'end',
+    iconAlignment: 'start',
     active: false,
   },
   {
@@ -72,6 +80,7 @@ export const table_example_heading_data: Heading[] = [
     sortable: true,
     sortDirection: 'desc',
     textAlignment: 'end',
+    iconAlignment: 'start',
     active: false,
   },
 ];
