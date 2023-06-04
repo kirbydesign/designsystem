@@ -1,5 +1,5 @@
-@use '@kirbydesign/core/src/scss/utils';
-@use '@kirbydesign/core/src/scss/interaction-state';
+@use '../interaction-state';
+@use '../utils';
 
 // Height variables
 $cell-height: 44px;
