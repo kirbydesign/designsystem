@@ -52,7 +52,9 @@ import { DropdownExampleComponent } from './dropdown-example/dropdown-example.co
 import { DataTableExampleComponent } from './data-table-example/data-table-example.component';
 import { LoadingOverlayServiceExampleComponent } from './loading-overlay-example/service/loading-overlay-service-example.component';
 import { HeaderWithActionGroupExampleComponent } from './header-example/examples/action-group';
+import { HeaderWithEmphasizedActionGroupExampleComponent } from './header-example/examples/emphasize-actions';
 import { HeaderWithCustomActionsExampleComponent } from './header-example/examples/custom-actions';
+import { HeaderWithInteractiveTitleExampleComponent } from './header-example/examples/interactive-title';
 import { MenuExampleComponent } from './menu-example/menu-example.component';
 
 export const COMPONENT_DECLARATIONS: any[] = [
@@ -90,7 +92,9 @@ export const COMPONENT_DECLARATIONS: any[] = [
   PageFitHeadingExampleComponent,
   PageFixedTitleAndActionsExampleComponent,
   HeaderWithActionGroupExampleComponent,
+  HeaderWithEmphasizedActionGroupExampleComponent,
   HeaderWithCustomActionsExampleComponent,
+  HeaderWithInteractiveTitleExampleComponent,
   PageTabNavExampleComponent,
   TabExampleComponent,
   PageFixedFooterTabsExampleComponent,

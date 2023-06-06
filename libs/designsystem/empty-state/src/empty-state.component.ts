@@ -39,9 +39,11 @@ export class EmptyStateComponent implements AfterContentInit {
    */
   private enforceAttentionLevelRules() {
     this.slottedButtons.forEach((button, index) => {
-      if (index === 0 && button.isAttentionLevel1) return;
+      if (index === 0 && (button.attentionLevel === undefined || button.attentionLevel === '1')) {
+        return;
+      }
 
-      if (!button.isAttentionLevel3) {
+      if (button.attentionLevel !== '3') {
         button.attentionLevel = '3';
       }
     });

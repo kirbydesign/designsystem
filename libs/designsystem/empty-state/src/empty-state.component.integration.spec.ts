@@ -32,12 +32,13 @@ describe('EmptyStateComponent with slotted buttons', () => {
   });
 
   it('should not change the attention level of the first button', () => {
-    expect(buttons[0].isAttentionLevel1).toBeTrue();
+    expect(buttons[0].attentionLevel).toBeUndefined();
+    expect(buttons[0]._cssClass).toContain('attention-level1');
   });
 
   it('should set the attention level of all buttons to 3 except the first one', () => {
     const allButtonsButTheFirst = buttons.splice(1, buttons.length);
-    expect(allButtonsButTheFirst.every((button) => button.isAttentionLevel3)).toBeTrue();
+    expect(allButtonsButTheFirst.every((button) => button.attentionLevel === '3')).toBeTrue();
   });
 });
 
@@ -67,7 +68,7 @@ describe('EmptyStateComponent with slotted buttons configured with attention lev
   });
 
   it('should set the attention level of all buttons to 3', () => {
-    expect(buttons.every((button) => button.isAttentionLevel3)).toBeTrue();
+    expect(buttons.every((button) => button.attentionLevel === '3')).toBeTrue();
   });
 });
 
@@ -97,11 +98,11 @@ describe('EmptyStateComponent with slotted buttons configured with attention lev
   });
 
   it('should not change the attention level of the first button', () => {
-    expect(buttons[0].isAttentionLevel1).toBeTrue();
+    expect(buttons[0].attentionLevel).toEqual('1');
   });
 
   it('should set the attention level of all buttons to 3 except the first one', () => {
     const allButtonsButTheFirst = buttons.splice(1, buttons.length);
-    expect(allButtonsButTheFirst.every((button) => button.isAttentionLevel3)).toBeTrue();
+    expect(allButtonsButTheFirst.every((button) => button.attentionLevel === '3')).toBeTrue();
   });
 });

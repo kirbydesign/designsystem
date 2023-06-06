@@ -48,6 +48,14 @@
         <cookbook-header-example-value #valueExample></cookbook-header-example-value>
       </div>
     </cookbook-example-viewer>
+    <p>
+      <em>
+        See also:
+        <a href="#" (click)="scrollTo(interactiveTitle)">
+          Interactive Title (in key value scenarios)
+        </a>
+      </em>
+    </p>
   </div>
 
   <div class="header-example-container">
@@ -66,6 +74,21 @@
     <cookbook-example-viewer [html]="avatarExample.template">
       <div class="header-example">
         <cookbook-header-example-avatar #avatarExample></cookbook-header-example-avatar>
+      </div>
+    </cookbook-example-viewer>
+  </div>
+  <div class="header-example-container">
+    <h3>Progress Circle with Avatar</h3>
+    <p>
+      The avatar can also be nested within a
+      <code>kirby-progress-circle</code>
+      to show progress:
+    </p>
+    <cookbook-example-viewer [html]="progressCircleExample.template">
+      <div class="header-example">
+        <cookbook-header-example-progress-circle-with-avatar
+          #progressCircleExample
+        ></cookbook-header-example-progress-circle-with-avatar>
       </div>
     </cookbook-example-viewer>
   </div>
@@ -168,16 +191,40 @@
   </div>
 
   <div class="header-example-container">
-    <h4>Header Action Group</h4>
+    <h3 #emphasizeActions>Emphasize Actions</h3>
+    <p>
+      When actions are closely related to the content of the page you can configure the header with
+      <code>[emphasizeActions]="true"</code>
+      .
+    </p>
+    <p>
+      With this setting enabled all buttons will be shown and not automatically collapse into a
+      "more" menu. The buttons will also be visible under the title area on small screens. Use this
+      option to further emphasize the action buttons, but keep in mind that it uses more screen real
+      estate than the default option.
+    </p>
     <p>
       <em>
         <strong>Please note:</strong>
-        A follow-up release will soon allow the action group to be placed in the header area on
-        small screens and expand beyond two options when space permits for all screen sizes. This
-        additional feature can simply be enabled on examples such as the one above once it lands.
+        With this setting enabled you should ensure the action buttons can fit on the screen—or
+        collapse secondary actions into a "more" menu using the
+        <code>visibleActions</code>
+        property of
+        <code>kirby-action-group</code>
+        .
       </em>
     </p>
+
+    <cookbook-iphone
+      viewMode="phone"
+      [showViewModeToggle]="true"
+      src="/examples/page/header-and-emphasized-action-group"
+      showExternalLink="true"
+    ></cookbook-iphone>
+
+    <cookbook-example-viewer [html]="emphasizedActionGroupTemplate"></cookbook-example-viewer>
   </div>
+
   <div class="header-example-container">
     <h3 #customActions>Custom Actions</h3>
     <p>
@@ -234,6 +281,47 @@
   </div>
 
   <div class="header-example-container">
+    <h2 #interactiveTitle>Interactive Title (in key value scenarios)</h2>
+    <p>
+      If you need the user to interact with the title (when having a
+      <code>value</code>
+      prop
+      <em>in addition to</em>
+      the
+      <code>title</code>
+      prop) you can register a handler for the header's
+      <code>titleClick</code>
+      event.
+    </p>
+    <p>
+      Within your event handler you can access the DOM event object with the
+      <code>event</code>
+      argument passed to the output event handler - e.g. to access the event's
+      <code>currentTarget</code>
+      as shown in the example below.
+    </p>
+    <p>
+      You should also add affordance to your interactive title (in key value scenarios) by slotting
+      a
+      <code>kirby-icon</code>
+      into the header and decorate it with the
+      <code>*kirbyHeaderTitleActionIcon</code>
+      directive as shown in the example below:
+    </p>
+    <cookbook-iphone
+      viewMode="full-size"
+      [showViewModeToggle]="true"
+      src="/examples/page/header-and-interactive-title"
+      showExternalLink="true"
+    ></cookbook-iphone>
+
+    <cookbook-example-viewer
+      [html]="interactiveTitleTemplate"
+      [ts]="interactiveTitleSnippet"
+    ></cookbook-example-viewer>
+  </div>
+
+  <div class="header-example-container">
     <h2>Combined</h2>
     <p>This example shows all the above options combined:</p>
     <cookbook-example-viewer [html]="combinedExample.template" [css]="combinedExample.styles">
@@ -243,9 +331,24 @@
     </cookbook-example-viewer>
   </div>
 
-  <h1>API</h1>
-  <h2>Header Properties:</h2>
+  <h2>API</h2>
+  <h3>Header Properties</h3>
   <cookbook-api-description-properties
     [properties]="properties"
+  ></cookbook-api-description-properties>
+
+  <h3>Header Directives:</h3>
+  <cookbook-api-description-properties
+    [columns]="directiveColumns"
+    [properties]="directives"
+  ></cookbook-api-description-properties>
+
+  <h3>Header Events</h3>
+  <cookbook-api-description-events [events]="events"></cookbook-api-description-events>
+
+  <h3>Action Group Properties</h3>
+  <cookbook-api-description-properties
+    #actionGroupAPI
+    [properties]="actionGroupProperties"
   ></cookbook-api-description-properties>
 </div>

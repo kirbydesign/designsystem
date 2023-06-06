@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use 'sass:map';
 @use '@kirbydesign/core/src/scss/interaction-state';
 @use '@kirbydesign/core/src/scss/utils';
@@ -7,6 +8,16 @@ $ion-content-padding-top: utils.size('xs');
 /*
  * Page Header
  */
+
+$toolbar-transition-duration-in: utils.get-transition-duration('quick');
+$toolbar-transition-duration-out: 50ms;
+$toolbar-transition: background-color $toolbar-transition-duration-out linear;
+$toolbar-shaded-background: color.mix(
+  #000,
+  utils.get-color('background-color', $getValueOnly: true),
+  1.1%
+);
+
 ion-header,
 ion-toolbar {
   --background: #{utils.get-color('background-color')};
@@ -21,55 +32,52 @@ ion-toolbar {
   --padding-top: 0;
   --padding-bottom: 0;
   --ion-toolbar-color: #{utils.get-color('black')};
-
-  // The toolbar height for iPhone's with a notched display.
-  $toolbar-height-notch: utils.size('xxl');
-
-  // The toolbar height for other displays.
-  $toolbar-height-default: utils.size('xxxl');
-
-  // An iPhone with a ios-safe-area-top exceeding 32px is considered to have notched display.
-  $notch-safe-area-top-trigger: 32px;
-
-  // Notch indicator:
-  // 0px represents FALSE
-  // 1px represents TRUE
-  // IF `--kirby-safe-area-top` is defined _and_ has a value strictly larger than `$notch-safe-area-top-trigger`
-  // THEN `--notch-present` = 1px (a notch _is_ present)
-  // ELSE `--notch-present` = 0px (no notch)
-  --notch-present: clamp(
-    0px,
-    var(--kirby-safe-area-top, 0px) - #{$notch-safe-area-top-trigger},
-    1px
-  );
-
-  // Equivalent to:
-  // IF --notch-present == 1px (i.e. the display _does_ have a notch)
-  // THEN --min-height = $toolbar-height-notch
-  // ELSE --min-height = $toolbar-height-default
-  --min-height: clamp(
-    #{$toolbar-height-notch},
-    (1px - var(--notch-present)) * #{utils.strip-unit($toolbar-height-default)},
-    #{$toolbar-height-default}
-  );
+  --min-height: #{utils.size('xxxl')};
 
   @include utils.media('>=medium') {
-    --min-height: #{utils.size('xxxxl')};
+    --min-height: #{utils.size('xxxxxl')};
   }
 
   box-sizing: border-box;
   padding-inline: utils.size('xxxs');
 
-  &.content-scrolled::before {
-    // Divider
+  /*
+  * Toolbar Divider & Shaded background
+  */
+
+  // Divider:
+  &::before {
     content: '';
     position: absolute;
     left: 0;
     right: 0;
     bottom: 0;
     height: 1px;
-    z-index: 1;
-    background-color: utils.get-color('medium');
+  }
+
+  &::before,
+  &::part(background) {
+    transition: $toolbar-transition;
+  }
+
+  // Only show toolbar divider + shaded bg when content is scrolled:
+  &.content-scrolled {
+    --background: #{$toolbar-shaded-background};
+
+    &::before,
+    &::part(background) {
+      transition-duration: $toolbar-transition-duration-in;
+    }
+
+    &:not(.content-pinned)::before {
+      background-color: utils.get-color('medium');
+    }
+  }
+
+  &.content-pinned {
+    &::before {
+      transition: none;
+    }
   }
 
   /*
@@ -100,6 +108,17 @@ ion-toolbar {
       pointer-events: auto;
       overflow: hidden;
       font-weight: utils.font-weight('bold');
+
+      span.clickable {
+        cursor: pointer;
+      }
+
+      span.has-icon {
+        display: inline-flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+      }
 
       @include utils.slotted('*') {
         text-overflow: ellipsis;
@@ -248,6 +267,7 @@ ion-content {
     width: 100%;
     position: absolute;
     bottom: 0;
+    transform: initial;
 
     .content-inner {
       position: relative;
@@ -275,31 +295,41 @@ ion-content {
     margin: 0 auto;
   }
 
-  &.content-pinned::before {
-    // Background
+  &::before,
+  &::after {
+    /* Background + Divider */
     content: '';
     position: absolute;
 
-    // Adjust for padding of ion-content to stretch divider to full width.
+    // Adjust for padding of ion-content to stretch divider to full width:
     left: calc(-1 * var(--padding-start));
     right: calc(-1 * var(--padding-end));
     bottom: 0;
-    top: 0;
-    z-index: 0;
-    background-color: var(--kirby-background-color);
   }
 
-  &.content-pinned::after {
-    // Divider
-    content: '';
-    position: absolute;
+  &::before {
+    /* Background */
+    top: 0;
 
-    // Adjust for padding of ion-content to stretch divider to full width.
-    left: calc(-1 * var(--padding-start));
-    right: calc(-1 * var(--padding-end));
-    bottom: 0;
+    // Same bg color as ion-content to prevent see-through
+    // when scrolling the page behind the sticky content:
+    background-color: var(--background);
+  }
+
+  &::after {
+    /* Divider */
     height: 1px;
-    z-index: 1;
-    background-color: utils.get-color('medium');
+  }
+
+  &.content-pinned {
+    &::before {
+      /* Background - pinned */
+      background-color: $toolbar-shaded-background;
+    }
+
+    &::after {
+      /* Divider - pinned */
+      background-color: utils.get-color('medium');
+    }
   }
 }
