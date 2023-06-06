@@ -196,6 +196,9 @@ export const routes: Routes = [
       {
         path: 'modal-v2',
         component: ModalV2ShowcaseComponent,
+        data: {
+          hide: true,
+        },
         children: [
           {
             path: 'modal',
