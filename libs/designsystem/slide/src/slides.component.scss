@@ -2,12 +2,14 @@
 
 $bullet-width: 10px;
 $bullet-height: 6px;
+$bullet-border-radius: 3px;
 $bullet-inactive-opacity: 0.2;
 
 :host {
   --swiper-navigation-sides-offset: 0;
   --swiper-pagination-bullet-width: #{$bullet-width};
   --swiper-pagination-bullet-height: #{$bullet-height};
+  --swiper-pagination-bullet-border-radius: #{$bullet-border-radius};
   --swiper-pagination-bullet-horizontal-gap: #{utils.size('xxxs')};
   --swiper-pagination-color: #{utils.get-color('black')};
   --swiper-pagination-bullet-inactive-color: #{utils.get-color('black')};
@@ -31,6 +33,12 @@ $bullet-inactive-opacity: 0.2;
     align-items: center;
     width: auto;
     margin-inline-end: utils.size('s');
+
+    // we need to use ::ng-deep as the pagination bullet spans are added to the dom by swiperjs:
+    /* stylelint-disable selector-pseudo-element-no-unknown */
+    ::ng-deep .swiper-pagination-bullet:last-of-type {
+      margin-inline-end: 0;
+    }
   }
 
   .buttons {
