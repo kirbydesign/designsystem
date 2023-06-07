@@ -2,6 +2,7 @@ import {
   AfterViewInit,
   Component,
   ContentChild,
+  ElementRef,
   EventEmitter,
   Input,
   OnInit,
@@ -9,7 +10,7 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
-import { SwiperOptions } from 'swiper';
+import { Swiper, SwiperOptions } from 'swiper';
 import { register } from 'swiper/element/bundle';
 import { PlatformService, UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
 import { SlideDirective } from './slide.directive';
@@ -20,11 +21,13 @@ import { SlideDirective } from './slide.directive';
 register();
 
 export type SelectedSlide = {
-  slide: any;
+  slide: unknown;
   index: number;
 };
 
 export type KirbySwiperOptions = SwiperOptions;
+type SwiperContainer = HTMLElement & { initialize: () => void; swiper: Swiper };
+
 @Component({
   selector: 'kirby-slides',
   templateUrl: './slides.component.html',
@@ -33,14 +36,14 @@ export type KirbySwiperOptions = SwiperOptions;
 export class SlidesComponent implements OnInit, AfterViewInit {
   constructor(private platform: PlatformService) {}
 
-  @ViewChild('swiperContainer') swiperContainer;
+  @ViewChild('swiperContainer') swiperContainer: ElementRef<SwiperContainer>;
   @ContentChild(SlideDirective, { static: true, read: TemplateRef })
-  public slideTemplate: TemplateRef<any>;
+  public slideTemplate: TemplateRef<SlideDirective>;
 
   @Input() slidesOptions: KirbySwiperOptions;
   @Input() ignorePagePadding: boolean;
   @Input() title: string;
-  @Input() slides: any[];
+  @Input() slides: unknown[];
 
   // simpleSlider is a temporary solution to make the slides component backwards compatible with the old design.
   @Input() simpleSlider = false;
