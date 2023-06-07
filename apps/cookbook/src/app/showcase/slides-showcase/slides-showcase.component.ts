@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import {
+  advancedExampleComponentHTML,
   customConfigExample,
-  exampleComponentHTML,
+  defaultExampleComponentHTML,
   slidesDefaultConfig,
 } from '../../examples/slides-example/slides-code-snippets';
 import { ApiDescriptionProperty } from '../../shared/api-description/api-description-properties/api-description-properties.component';
@@ -10,10 +11,12 @@ import { ApiDescriptionMethod } from '../../shared/api-description/api-descripti
 @Component({
   selector: 'cookbook-carousel-showcase',
   templateUrl: './slides-showcase.component.html',
+  styleUrls: ['../_showcase.shared.scss'],
 })
 export class SlidesShowcaseComponent {
   slidesDefaultConfig: string = slidesDefaultConfig;
-  exampleComponentHTML: string = exampleComponentHTML;
+  defaultExampleComponentHTML: string = defaultExampleComponentHTML;
+  advancedExampleComponentHTML: string = advancedExampleComponentHTML;
   customConfigExample: string = customConfigExample;
 
   properties: ApiDescriptionProperty[] = [

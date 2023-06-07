@@ -16,16 +16,29 @@
   </em>
 </p>
 
-<h2>Example:</h2>
+<h2>Basic usage</h2>
 
 <cookbook-iphone
   viewMode="full-size"
   [showViewModeToggle]="true"
-  src="/examples/slides/"
+  src="/examples/slides-simple/"
   showExternalLink="true"
 ></cookbook-iphone>
 
-<cookbook-code-viewer [html]="exampleComponentHTML"></cookbook-code-viewer>
+<cookbook-code-viewer [html]="defaultExampleComponentHTML"></cookbook-code-viewer>
+
+<h2>Advanced usage</h2>
+
+<cookbook-iphone
+  viewMode="full-size"
+  [showViewModeToggle]="true"
+  src="/examples/slides-advanced/"
+  showExternalLink="true"
+></cookbook-iphone>
+
+<cookbook-example-viewer [html]="advancedExampleComponentHTML"></cookbook-example-viewer>
+
+<h3>Custom configuration</h3>
 
 <p>
   The
@@ -33,13 +46,15 @@
   uses
   <code>swiper.js</code>
   under the hood and accepts the same
-  <a href="https://swiperjs.com/swiper-api#parameters" target="_blank">configuration</a>
+  <a href="https://swiperjs.com/swiper-api#parameters" class="kirby-external-icon" target="_blank">
+    configuration
+  </a>
   as
   <code>swiper.js</code>
   . The component comes with this default config:
 </p>
 
-<cookbook-example-viewer [ts]="slidesDefaultConfig"></cookbook-example-viewer>
+<cookbook-code-viewer [ts]="slidesDefaultConfig"></cookbook-code-viewer>
 
 <br />
 

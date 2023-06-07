@@ -1,0 +1,17 @@
+<kirby-page>
+  <kirby-page-content>
+    <kirby-slides
+      [slidesOptions]="config"
+      [slides]="slides"
+      [title]="'Title'"
+      (selectedSlide)="getDataFromActiveSlide($event)"
+    >
+      <kirby-card *kirbySlide="let slide; let i = index" [hasPadding]="true">
+        <kirby-card-header [title]="slide.title" [subtitle]="slide.subtitle"></kirby-card-header>
+        <div class="card-content">
+          {{ slide.cardContent }}
+        </div>
+      </kirby-card>
+    </kirby-slides>
+  </kirby-page-content>
+</kirby-page>
