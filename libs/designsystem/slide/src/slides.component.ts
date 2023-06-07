@@ -21,7 +21,7 @@ import { SlideDirective } from './slide.directive';
 register();
 
 export type SelectedSlide = {
-  slide: unknown;
+  slide: any;
   index: number;
 };
 
