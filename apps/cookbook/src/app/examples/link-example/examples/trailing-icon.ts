@@ -3,7 +3,8 @@ import { Component } from '@angular/core';
 const config = {
   selector: 'cookbook-link-example-trailing-icon',
   template: `<a class="trailing-icon-example" target="_blank" href="https://github.com/kirbydesign/designsystem">Trailing icon</a>`,
-  style: `.trailing-icon-example
+  style: `@use '@kirbydesign/core/src/scss/utils';
+.trailing-icon-example
 {
 @include utils.trailing-icon("navigation")
 /* 
