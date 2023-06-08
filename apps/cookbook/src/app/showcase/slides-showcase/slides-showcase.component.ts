@@ -22,7 +22,7 @@ export class SlidesShowcaseComponent {
   properties: ApiDescriptionProperty[] = [
     {
       name: 'slidesOptions',
-      description: `Configuration object for swiper-container. View documentation at: [https://swiperjs.com/swiper-api#parameters] for available parameters`,
+      description: `Configuration object for Swiper.\n\nView documentation at: https://swiperjs.com/swiper-api#parameters for available parameters`,
       defaultValue: 'null',
       type: ['KirbySwiperOptions'],
     },
@@ -30,7 +30,7 @@ export class SlidesShowcaseComponent {
       name: 'slides',
       description: `Array of items to be displayed as slides.`,
       defaultValue: 'null',
-      type: ['any[]'],
+      type: ['unknown[]'],
     },
     {
       name: 'title',
