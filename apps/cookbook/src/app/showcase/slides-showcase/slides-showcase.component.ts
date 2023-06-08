@@ -38,12 +38,6 @@ export class SlidesShowcaseComponent {
       defaultValue: 'null',
       type: ['string'],
     },
-    {
-      name: 'ignorePagePadding',
-      description: `Makes the slides ignore the kirby-page padding and expand to the edges of the page.`,
-      defaultValue: 'null',
-      type: ['boolean'],
-    },
   ];
 
   events: ApiDescriptionEvent[] = [

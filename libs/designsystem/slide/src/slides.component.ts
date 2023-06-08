@@ -41,7 +41,6 @@ export class SlidesComponent implements OnInit, AfterViewInit {
   public slideTemplate: TemplateRef<SlideDirective>;
 
   @Input() slidesOptions: KirbySwiperOptions;
-  @Input() ignorePagePadding: boolean;
   @Input() title: string;
   @Input() slides: unknown[];
 
