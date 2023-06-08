@@ -5,7 +5,10 @@ import {
   defaultExampleComponentHTML,
   slidesDefaultConfig,
 } from '../../examples/slides-example/slides-code-snippets';
-import { ApiDescriptionProperty } from '../../shared/api-description/api-description-properties/api-description-properties.component';
+import {
+  ApiDescriptionProperty,
+  ApiDescriptionPropertyColumns,
+} from '../../shared/api-description/api-description-properties/api-description-properties.component';
 import { ApiDescriptionEvent } from '../../shared/api-description/api-description-events/api-description-events.component';
 import { ApiDescriptionMethod } from '../../shared/api-description/api-description-methods/api-description-methods.component';
 @Component({
@@ -59,6 +62,21 @@ export class SlidesShowcaseComponent {
       name: 'slideTo',
       description: 'Slides to the specified slide index.',
       signature: '(index: number) => void',
+    },
+  ];
+
+  directiveColumns: ApiDescriptionPropertyColumns = {
+    name: 'Name',
+    description: 'Description',
+    type: '(Optional) Configuration',
+    default: 'Default',
+  };
+
+  directives: ApiDescriptionProperty[] = [
+    {
+      name: '*kirbySlide',
+      description:
+        'The `*kirbySlide` directive should be applied to a `kirby-card` which will then be used as the template for each slide.',
     },
   ];
 }
