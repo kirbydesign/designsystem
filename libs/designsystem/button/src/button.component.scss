@@ -245,7 +245,7 @@ $button-width: (
   }
 
   &:disabled {
-    &:not(.no-decoration){
+    &:not(.no-decoration) {
       background-color: utils.get-color('semi-light');
     }
 
@@ -357,6 +357,23 @@ $button-width: (
       @include interaction-state.apply-hover;
       @include interaction-state.apply-active('s');
     }
+  }
+}
+
+:host-context(.kirby-modal ion-header ion-toolbar ion-buttons) {
+  margin: 0;
+}
+
+:host-context(kirby-modal-footer) {
+  margin-top: 0;
+  margin-bottom: 0;
+
+  &:first-child {
+    margin-left: 0;
+  }
+
+  &:last-child {
+    margin-right: 0;
   }
 }
 

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import { ModalSize } from '@kirbydesign/designsystem';
 
 import { WindowRef } from '@kirbydesign/designsystem/types';
 
@@ -28,7 +29,7 @@ export class ModalExampleConfigurationComponent {
   @Input() showFooter: boolean;
   @Output() showFooterChange = new EventEmitter<boolean>();
 
-  @Input() displayFooterAsInline: boolean = false;
+  @Input() displayFooterAsInline: boolean;
   @Output() displayFooterAsInlineChange = new EventEmitter<boolean>();
 
   @Input() showDummyContent: boolean;
@@ -43,14 +44,14 @@ export class ModalExampleConfigurationComponent {
   @Input() disableScroll: boolean;
   @Output() disableScrollChange = new EventEmitter<boolean>();
 
-  @Input() openFullHeight: boolean;
-  @Output() openFullHeightChange = new EventEmitter<boolean>();
-
   @Input() interactWithBackground: boolean;
   @Output() interactWithBackgroundChange = new EventEmitter<boolean>();
 
   @Input() customCssClass: boolean;
   @Output() customCssClassChange = new EventEmitter<boolean>();
+
+  @Input() snapFooterToKeyboard: boolean;
+  @Output() snapFooterToKeyboardChange = new EventEmitter<boolean>();
 
   // Setting ion-checkbox.checked programatically triggers change event
   // Use this flag in checkbox change event handlers to prevent ExpressionChangedAfterItHasBeenCheckedError
@@ -132,12 +133,6 @@ export class ModalExampleConfigurationComponent {
     this.disableScrollChange.emit(this.disableScroll);
   }
 
-  toggleOpenFullHeight(show: boolean) {
-    if (this.preventChangeEvent) return;
-    this.openFullHeight = show;
-    this.openFullHeightChange.emit(this.openFullHeight);
-  }
-
   toggleInteractWithBackground(show: boolean) {
     this.preventChangeEvent = true;
     this.interactWithBackground = show;
@@ -152,5 +147,10 @@ export class ModalExampleConfigurationComponent {
   toggleCustomCssClass(show: boolean) {
     this.customCssClass = show;
     this.customCssClassChange.emit(show);
+  }
+
+  toggleSnapFooterToKeyboard(show: boolean) {
+    this.snapFooterToKeyboard = show;
+    this.snapFooterToKeyboardChange.emit(show);
   }
 }

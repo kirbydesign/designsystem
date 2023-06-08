@@ -26,18 +26,39 @@ kirby-card.nested-modal-configuration {
   margin-top: utils.size('l');
   margin-bottom: utils.size('l');
 
-  cookbook-example-configuration-wrapper {
+  details {
     margin-top: utils.size('m');
+    border: 1px solid utils.get-color('medium');
+    border-radius: utils.size('xxxs');
+    padding: utils.size('xxs') utils.size('xxs') 0;
+
+    summary {
+      cursor: pointer;
+      margin: -#{utils.size('xxs')} -#{utils.size('xxs')} 0;
+      padding: utils.size('xxs');
+    }
+
+    &[open] {
+      padding: utils.size('xxs');
+      border-bottom-left-radius: utils.size('s');
+      border-bottom-right-radius: utils.size('s');
+
+      summary {
+        border-bottom: 1px dashed utils.get-color('medium');
+        margin-bottom: utils.size('xs');
+      }
+    }
   }
 }
 
-kirby-modal-footer {
-  button {
-    flex-grow: 1;
-  }
+kirby-form-field {
+  margin-top: utils.size('m');
+}
 
-  kirby-checkbox {
-    font-size: utils.font-size('xs');
-    text-align: center;
+.size-selector-heading {
+  margin-bottom: 0;
+
+  em {
+    font-size: smaller;
   }
 }
