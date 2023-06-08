@@ -19,7 +19,7 @@ export const slidesDefaultConfig = `defaultConfig: KirbySwiperOptions = {
 }`;
 
 export const defaultExampleComponentHTML = `<kirby-slides [slides]="slides">
-  <kirby-card *kirbyCarouselSlide="let slide; let i = index" [hasPadding]="true">
+  <kirby-card *kirbySlide="let slide; let i = index" [hasPadding]="true">
     <kirby-card-header [title]="slide.title" [subtitle]="slide.subtitle"></kirby-card-header>
     <div>{{ slide.cardContent }}</div>
   </kirby-card>
@@ -30,9 +30,8 @@ export const advancedExampleComponentHTML = `<kirby-slides
   (selectedSlide)="getDataFromActiveSlide($event)"
   [slidesOptions]="customConfig"
   [title]="'Title'"
-  [ignorePagePadding]="ignorePagePadding"
 >
-  <kirby-card *kirbyCarouselSlide="let slide; let i = index" [hasPadding]="true">
+  <kirby-card *kirbySlide="let slide; let i = index" [hasPadding]="true">
     <kirby-card-header [title]="slide.title" [subtitle]="slide.subtitle"></kirby-card-header>
     <div>{{ slide.cardContent }}</div>
   </kirby-card>

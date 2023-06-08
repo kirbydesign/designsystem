@@ -28,11 +28,11 @@ describe('SlidesComponent', () => {
 
   beforeEach(() => {
     spectator = createHost(
-      `<kirby-slides  [slides]="slides" [slidesOptions]="slidesOptions">
-      <kirby-card *kirbyCarouselSlide="let slide">
-          {{ slide }}
-      </kirby-card>
-    </kirby-slides>`,
+      `<kirby-slides [slides]="slides" [slidesOptions]="slidesOptions">
+         <kirby-card *kirbySlide="let slide">
+           {{ slide }}
+         </kirby-card>
+       </kirby-slides>`,
       {
         hostProps: {
           slides: [0, 1, 2, 3, 4],

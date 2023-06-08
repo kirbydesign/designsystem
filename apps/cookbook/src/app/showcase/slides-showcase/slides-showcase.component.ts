@@ -9,7 +9,7 @@ import { ApiDescriptionProperty } from '../../shared/api-description/api-descrip
 import { ApiDescriptionEvent } from '../../shared/api-description/api-description-events/api-description-events.component';
 import { ApiDescriptionMethod } from '../../shared/api-description/api-description-methods/api-description-methods.component';
 @Component({
-  selector: 'cookbook-carousel-showcase',
+  selector: 'cookbook-slides-showcase',
   templateUrl: './slides-showcase.component.html',
   styleUrls: ['../_showcase.shared.scss'],
 })
