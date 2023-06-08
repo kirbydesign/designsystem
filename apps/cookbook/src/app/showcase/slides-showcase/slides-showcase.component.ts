@@ -40,7 +40,7 @@ export class SlidesShowcaseComponent {
     },
     {
       name: 'ignorePagePadding',
-      description: `Makes the carousel ignore the kirby-page padding and expand to the edge of the page.`,
+      description: `Makes the slides ignore the kirby-page padding and expand to the edges of the page.`,
       defaultValue: 'null',
       type: ['boolean'],
     },
