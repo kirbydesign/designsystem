@@ -18,7 +18,7 @@ export const slidesDefaultConfig = `defaultConfig: KirbySwiperOptions = {
   },
 }`;
 
-export const defaultExampleComponentHTML = `<kirby-slides [slides]="slides">
+export const defaultExampleComponentHTML = `<kirby-slides [slides]="slides" [title]="'Title'">
   <kirby-card *kirbySlide="let slide; let i = index" [hasPadding]="true">
     <kirby-card-header [title]="slide.title" [subtitle]="slide.subtitle"></kirby-card-header>
     <div>{{ slide.cardContent }}</div>

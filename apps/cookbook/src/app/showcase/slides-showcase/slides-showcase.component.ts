@@ -37,7 +37,7 @@ export class SlidesShowcaseComponent {
     },
     {
       name: 'title',
-      description: `An optional title that will be displayed above the slides in the top left corner.`,
+      description: `Text that describes the slides content (mandatory). Will be displayed above the slides in the top left corner.`,
       defaultValue: 'null',
       type: ['string'],
     },

@@ -1,6 +1,6 @@
 <kirby-page>
   <kirby-page-content>
-    <kirby-slides [slidesOptions]="config" [slides]="slides">
+    <kirby-slides [slidesOptions]="config" [slides]="slides" [title]="'Title'">
       <kirby-card *kirbySlide="let slide; let i = index" [hasPadding]="true">
         <kirby-card-header [title]="slide.title" [subtitle]="slide.subtitle"></kirby-card-header>
         <div class="card-content">
