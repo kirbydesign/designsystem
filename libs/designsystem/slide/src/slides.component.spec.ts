@@ -147,7 +147,7 @@ describe('SlidesComponent', () => {
   });
 
   it('should extend the default slides options with the provided slides options', () => {
-    expect(spectator.component.swiperContainer.nativeElement.swiper.passedParams).toEqual(
+    expect((spectator.component.swiperContainer.nativeElement.swiper as any).passedParams).toEqual(
       jasmine.objectContaining(customOptions)
     );
   });
