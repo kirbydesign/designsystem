@@ -60,7 +60,7 @@ export class SlidesComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    const defaultConfig = this.simpleSlider ? this.getSimpleConfig() : this.getDefaultConfig();
+    const defaultConfig = this.simpleSlider ? this.getLegacyConfig() : this.getDefaultConfig();
 
     const config = Object.assign(this.slidesOptions, defaultConfig);
 
@@ -97,7 +97,7 @@ export class SlidesComponent implements OnInit, AfterViewInit {
     };
   }
 
-  private getSimpleConfig(): KirbySwiperOptions {
+  private getLegacyConfig(): KirbySwiperOptions {
     return {
       pagination: false,
       navigation: false,
