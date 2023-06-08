@@ -4,7 +4,7 @@
       [slidesOptions]="config"
       [slides]="slides"
       [title]="'Title'"
-      (selectedSlide)="getDataFromActiveSlide($event)"
+      (slideChange)="getDataFromActiveSlide($event)"
     >
       <kirby-card *kirbySlide="let slide; let i = index" [hasPadding]="true">
         <kirby-card-header [title]="slide.title" [subtitle]="slide.subtitle"></kirby-card-header>

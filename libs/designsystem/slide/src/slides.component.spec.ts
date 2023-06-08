@@ -68,6 +68,16 @@ describe('SlidesComponent', () => {
     expect(selectedSlideSpy).toHaveBeenCalledWith({ slide: 3, index: 3 });
   });
 
+  it('should emit slideChange when the active slide is changed', () => {
+    const slideChangeSpy = spyOn(spectator.component.slideChange, 'emit');
+
+    expect(slideChangeSpy).not.toHaveBeenCalled();
+
+    spectator.component.slideTo(3);
+
+    expect(slideChangeSpy).toHaveBeenCalledWith({ slide: 3, index: 3 });
+  });
+
   it('should disable the previous button, when the active slide is the first slide', () => {
     const previousButton = spectator.query('.swiper-button-prev');
 

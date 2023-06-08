@@ -47,7 +47,11 @@ export class SlidesComponent implements OnInit, AfterViewInit {
   // simpleSlider is a temporary solution to make the slides component backwards compatible with the old design.
   @Input() simpleSlider = false;
 
+  /**
+   * @deprecated Will be removed in next major version. Use `slideChange` instead.
+   */
   @Output() selectedSlide = new EventEmitter<SelectedSlide>();
+  @Output() slideChange = new EventEmitter<SelectedSlide>();
 
   _paginationId = UniqueIdGenerator.scopedTo('pagination').next();
   _prevButtonId = UniqueIdGenerator.scopedTo('swiper-button-prev').next();
@@ -56,6 +60,11 @@ export class SlidesComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this._isTouch = this.platform.isTouch();
+    if (this.selectedSlide.observed) {
+      console.warn(
+        'Deprecation warning: `selectedSlide` will be removed in next major version. Use `slideChange` instead.'
+      );
+    }
   }
 
   ngAfterViewInit() {
@@ -88,6 +97,10 @@ export class SlidesComponent implements OnInit, AfterViewInit {
       on: {
         slideChange: (swiper) => {
           this.selectedSlide.emit({
+            slide: this.slides[swiper.activeIndex],
+            index: swiper.activeIndex,
+          });
+          this.slideChange.emit({
             slide: this.slides[swiper.activeIndex],
             index: swiper.activeIndex,
           });
