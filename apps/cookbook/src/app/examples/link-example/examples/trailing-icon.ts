@@ -8,7 +8,6 @@ const config = {
 @include utils.trailing-icon("navigation")
 /* 
 @include utils.trailing-icon("https://cdn.jsdelivr.net/npm/open-iconic@1.1.1/svg/heart.svg")
-@include utils.trailing-icon()
 */
 }`,
 };
