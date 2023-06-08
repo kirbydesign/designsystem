@@ -28,13 +28,13 @@ export class SlidesShowcaseComponent {
     },
     {
       name: 'slides',
-      description: `Array of items to be displayed in the carousel.`,
+      description: `Array of items to be displayed as slides.`,
       defaultValue: 'null',
       type: ['any[]'],
     },
     {
       name: 'title',
-      description: `A title that will be displayed above the carousel in the top left corner.`,
+      description: `An optional title that will be displayed above the slides in the top left corner.`,
       defaultValue: 'null',
       type: ['string'],
     },
