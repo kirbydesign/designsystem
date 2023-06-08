@@ -28,7 +28,7 @@ export class SlidesShowcaseComponent {
     },
     {
       name: 'slides',
-      description: `Array of items to be displayed in the carousel.`,
+      description: `Array of items to be displayed as slides.`,
       defaultValue: 'null',
       type: ['any[]'],
     },
