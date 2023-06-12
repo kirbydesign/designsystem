@@ -44,8 +44,7 @@ export class SlidesComponent implements OnInit, AfterViewInit {
   @Input() title: string;
   @Input() slides: unknown[];
 
-  // simpleSlider is a temporary solution to make the slides component backwards compatible with the old design.
-  @Input() simpleSlider = false;
+  @Input() showNavigation?: boolean;
 
   /**
    * @deprecated Will be removed in next major version. Use `slideChange` instead.
@@ -65,10 +64,17 @@ export class SlidesComponent implements OnInit, AfterViewInit {
         'Deprecation warning: `selectedSlide` will be removed in next major version. Use `slideChange` instead.'
       );
     }
+    if (this.showNavigation === undefined) {
+      console.warn(
+        'Warning: kirby-slides.showNavigation will default to `true` in next major version and show navigation and pagination controls out of the box. Please set this property to `false` now if you want to opt-out of this future default.'
+      );
+    }
   }
 
   ngAfterViewInit() {
-    const defaultConfig = this.simpleSlider ? this.getLegacyConfig() : this.getDefaultConfig();
+    const defaultConfig = this.showNavigation
+      ? this.getDefaultConfig()
+      : this.getControlLessConfig();
 
     const config = { ...defaultConfig, ...this.slidesOptions };
 
@@ -109,18 +115,7 @@ export class SlidesComponent implements OnInit, AfterViewInit {
     };
   }
 
-  private getLegacyConfig(): KirbySwiperOptions {
-    return {
-      pagination: false,
-      navigation: false,
-      on: {
-        slideChange: (swiper) => {
-          this.selectedSlide.emit({
-            slide: this.slides[swiper.activeIndex],
-            index: swiper.activeIndex,
-          });
-        },
-      },
-    };
+  private getControlLessConfig(): KirbySwiperOptions {
+    return { ...this.getDefaultConfig(), spaceBetween: 16, pagination: false, navigation: false };
   }
 }

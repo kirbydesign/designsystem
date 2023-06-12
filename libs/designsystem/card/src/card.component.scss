@@ -73,9 +73,3 @@
     --kirby-card-main-color: #{utils.get-color($color-name + '-contrast')};
   }
 }
-
-:host-context(.swiper-slide-active.simple-slider) {
-  box-shadow: utils.get-elevation(4);
-  transition: all 0.5s;
-  transform: translateY(-3px);
-}
