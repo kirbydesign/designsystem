@@ -5,15 +5,20 @@
     class="navigation-inner"
     *ngIf="
       showNavigation &&
-      (slidesOptions?.navigation === undefined || slidesOptions?.pagination === undefined)
+      (!slidesOptions ||
+        slidesOptions?.navigation === undefined ||
+        slidesOptions?.pagination === undefined)
     "
   >
     <div
       class="pagination"
       [ngClass]="_paginationId"
-      *ngIf="!_isTouch && slidesOptions?.pagination === undefined"
+      *ngIf="!_isTouch && (!slidesOptions || slidesOptions?.pagination === undefined)"
     ></div>
-    <div class="buttons" *ngIf="!_isTouch && slidesOptions?.navigation === undefined">
+    <div
+      class="buttons"
+      *ngIf="!_isTouch && (!slidesOptions || slidesOptions?.navigation === undefined)"
+    >
       <button
         kirby-button
         attentionLevel="3"
