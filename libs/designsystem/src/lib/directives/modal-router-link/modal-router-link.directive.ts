@@ -1,4 +1,4 @@
-import { Directive, HostListener, Input } from '@angular/core';
+import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 import { Params } from '@angular/router';
 import { AlertConfig, ModalNavigationService } from '@kirbydesign/designsystem/modal';
 
@@ -6,7 +6,12 @@ import { AlertConfig, ModalNavigationService } from '@kirbydesign/designsystem/m
   selector: `[kirbyModalRouterLink]`,
 })
 export class ModalRouterLinkDirective {
-  constructor(private modalNavigationService: ModalNavigationService) {}
+  constructor(
+    private modalNavigationService: ModalNavigationService,
+    private elementRef: ElementRef
+  ) {
+    this.elementRef.nativeElement.setAttribute('modal-router-link', '');
+  }
 
   @Input('kirbyModalRouterLink') path: string | string[];
   // eslint-disable-next-line @angular-eslint/no-input-rename

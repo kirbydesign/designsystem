@@ -250,18 +250,6 @@ export const routes: Routes = [
       {
         path: 'modal',
         component: ModalExampleComponent,
-        children: [
-          {
-            path: 'page1',
-            outlet: 'modal',
-            component: ModalRoutePage1ExampleComponent,
-          },
-          {
-            path: 'page2',
-            outlet: 'modal',
-            component: ModalRoutePage2ExampleComponent,
-          },
-        ],
       },
       {
         path: 'modal-advanced',
@@ -274,10 +262,27 @@ export const routes: Routes = [
       {
         path: 'modal-route',
         component: ModalExampleOutletComponent,
+        children: [
+          {
+            path: 'page1',
+            outlet: 'modal',
+            component: ModalRoutePage1ExampleComponent,
+            data: {
+              modalConfig: {
+                size: 'large',
+              },
+            },
+          },
+          {
+            path: 'page2',
+            outlet: 'modal',
+            component: ModalRoutePage2ExampleComponent,
+          },
+        ],
       },
       {
         path: 'modal-route-with-url-param/:id',
-        component: ModalExampleComponent,
+        component: ModalExampleOutletComponent,
         children: [
           {
             path: 'page1',

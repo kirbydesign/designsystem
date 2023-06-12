@@ -5,10 +5,11 @@ $_focus-ring-gap: 3px;
 $_focus-ring-border-radius: utils.size('xxxxs');
 
 /*
- * Link-styles (anchor tag with href)
+ * Link-styles (anchor tag with href or kirbyModalRouterLink directive)
  */
 :link,
-:visited {
+:visited,
+a[modal-router-link] {
   @include interaction-state.apply-focus-visible($gap: $_focus-ring-gap) {
     outline: none;
     border-radius: $_focus-ring-border-radius;

@@ -21,3 +21,5 @@ export interface ModalConfig {
   interactWithBackground?: boolean;
   cssClass?: string | string[];
 }
+
+export type RouteModalConfig = Omit<ModalConfig, 'component'>;
