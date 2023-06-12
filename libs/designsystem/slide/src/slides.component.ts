@@ -12,7 +12,11 @@ import {
 } from '@angular/core';
 import { Swiper, SwiperOptions } from 'swiper';
 import { register } from 'swiper/element/bundle';
-import { PlatformService, UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
+import {
+  DesignTokenHelper,
+  PlatformService,
+  UniqueIdGenerator,
+} from '@kirbydesign/designsystem/helpers';
 import { SlideDirective } from './slide.directive';
 
 // Swiper is not an Angular library,
@@ -40,7 +44,7 @@ export class SlidesComponent implements OnInit, AfterViewInit {
   @ContentChild(SlideDirective, { static: true, read: TemplateRef })
   public slideTemplate: TemplateRef<SlideDirective>;
 
-  @Input() slidesOptions: KirbySwiperOptions;
+  @Input() slidesOptions?: KirbySwiperOptions;
   @Input() title: string;
   @Input() slides: unknown[];
 
@@ -88,9 +92,20 @@ export class SlidesComponent implements OnInit, AfterViewInit {
   }
 
   private getDefaultConfig(): KirbySwiperOptions {
+    const desktopBreakpoint = parseInt(DesignTokenHelper.breakpoints.medium) - 1;
     return {
+      centeredSlides: true,
+      slidesPerView: 1.2,
+      slidesPerGroup: 1,
       spaceBetween: 16,
-      centeredSlidesBounds: true,
+      breakpoints: {
+        [desktopBreakpoint]: {
+          centeredSlides: false,
+          centeredSlidesBounds: true,
+          slidesPerView: 3,
+          slidesPerGroup: 3,
+        },
+      },
       speed: 600,
       pagination: {
         el: `.${this._paginationId}`,
