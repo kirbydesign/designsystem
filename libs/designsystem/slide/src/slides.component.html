@@ -1,10 +1,17 @@
-<div class="navigation" *ngIf="!simpleSlider">
+<div
+  class="navigation"
+  *ngIf="
+    !simpleSlider &&
+    (title !== undefined ||
+      slidesOptions.navigation === undefined ||
+      slidesOptions.pagination === undefined)
+  "
+>
   <span class="kirby-text-medium">{{ title }}</span>
 
   <div class="navigation-inner">
     <div class="pagination" [ngClass]="_paginationId"></div>
-
-    <div class="buttons" *ngIf="!_isTouch">
+    <div class="buttons" *ngIf="!_isTouch && slidesOptions.navigation === undefined">
       <button
         kirby-button
         attentionLevel="3"

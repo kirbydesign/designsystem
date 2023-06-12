@@ -70,7 +70,7 @@ export class SlidesComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     const defaultConfig = this.simpleSlider ? this.getLegacyConfig() : this.getDefaultConfig();
 
-    const config = Object.assign(this.slidesOptions, defaultConfig);
+    const config = { ...defaultConfig, ...this.slidesOptions };
 
     Object.assign(this.swiperContainer.nativeElement, config);
 
