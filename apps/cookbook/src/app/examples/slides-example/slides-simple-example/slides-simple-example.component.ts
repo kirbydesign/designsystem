@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { KirbySwiperOptions, SelectedSlide } from '@kirbydesign/designsystem/slide';
+import { SelectedSlide } from '@kirbydesign/designsystem/slide';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem/toast';
 
 @Component({
@@ -8,19 +8,6 @@ import { ToastConfig, ToastController } from '@kirbydesign/designsystem/toast';
 })
 export class SlidesSimpleExampleComponent {
   constructor(private toastController: ToastController) {}
-
-  config: KirbySwiperOptions = {
-    slidesPerView: 1.2,
-    centeredSlides: true,
-    slidesPerGroup: 1,
-    breakpoints: {
-      768: {
-        centeredSlides: false,
-        slidesPerView: 3,
-        slidesPerGroup: 3,
-      },
-    },
-  };
 
   slides = [...Array(9).keys()].map((number) => ({
     title: `Slide ${number + 1}`,
