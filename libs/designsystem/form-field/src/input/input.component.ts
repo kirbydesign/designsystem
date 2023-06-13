@@ -11,6 +11,7 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
+import { DateInputDirective } from '../directives/date/date-input.directive';
 
 export enum InputSize {
   medium = 'md',
@@ -20,6 +21,13 @@ export enum InputSize {
 @Component({
   standalone: true,
   imports: [CommonModule],
+  hostDirectives: [
+    {
+      directive: DateInputDirective,
+      // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+      inputs: ['prefillYear'],
+    },
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'input[kirby-input]',
