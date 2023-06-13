@@ -51,6 +51,10 @@ describe('SlidesComponent', () => {
     expect(spectator.component).toBeTruthy();
   });
 
+  it('should have correct title', () => {
+    expect(spectator.query('.kirby-text-medium')).toHaveExactTrimmedText('Title');
+  });
+
   it('should contain 5 slides', () => {
     expect(spectator.queryAll('swiper-slide')).toHaveLength(5);
   });
@@ -113,12 +117,8 @@ describe('SlidesComponent', () => {
     // It is necessary to update the Slides container, because it does not updated automatically when the "slides" input changes
     spectator.component.swiperContainer.nativeElement.swiper.update();
 
-    expect(spectator.query('.swiper-button-prev')).toHaveComputedStyle({
-      display: 'none',
-    });
-    expect(spectator.query('.swiper-button-next')).toHaveComputedStyle({
-      display: 'none',
-    });
+    expect(spectator.query('.swiper-button-prev')).toBeHidden();
+    expect(spectator.query('.swiper-button-next')).toBeHidden();
   });
 
   describe('pagination', () => {
@@ -165,5 +165,40 @@ describe('SlidesComponent', () => {
     expect((spectator.component.swiperContainer.nativeElement.swiper as any).passedParams).toEqual(
       jasmine.objectContaining(customOptions)
     );
+  });
+
+  describe('when showNavigation=false', () => {
+    beforeEach(() => {
+      spectator.component.showNavigation = false;
+      spectator.detectComponentChanges();
+    });
+
+    it('should not render the navigation controls', () => {
+      expect(spectator.query('.navigation-inner')).toBeNull();
+    });
+
+    it('should not render the navigation buttons', () => {
+      expect(spectator.query('.swiper-button-prev')).toBeNull();
+      expect(spectator.query('.swiper-button-next')).toBeNull();
+    });
+
+    it('should not render the pagination buttons', () => {
+      expect(spectator.query('.pagination')).toBeNull();
+    });
+  });
+
+  describe('on phone', () => {
+    beforeAll(async () => {
+      await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
+    });
+
+    afterAll(() => {
+      TestHelper.resetTestWindow();
+    });
+
+    it('should hide the navigation buttons', () => {
+      expect(spectator.query('.swiper-button-prev')).toBeHidden();
+      expect(spectator.query('.swiper-button-next')).toBeHidden();
+    });
   });
 });
