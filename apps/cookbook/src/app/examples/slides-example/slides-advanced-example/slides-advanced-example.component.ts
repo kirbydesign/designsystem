@@ -38,7 +38,7 @@ export class SlidesAdvancedExampleComponent {
 
   showAll() {
     const config: ToastConfig = {
-      message: `See all... (demo, not implemented)`,
+      message: `See all... (your handler here)`,
       messageType: 'success',
       durationInMs: 2000,
     };
