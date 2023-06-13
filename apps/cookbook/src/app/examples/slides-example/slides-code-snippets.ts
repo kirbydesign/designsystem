@@ -57,7 +57,11 @@ export const advancedExampleComponentHTML = `<kirby-slides
 
   <button kirby-button attentionLevel="3" size="xs" (click)="showAll()">See all</button>
 
-</kirby-slides>`;
+</kirby-slides>
+
+<button kirby-button (click)="changeSlide(3)" style="display: block; margin: 24px auto 0">
+  Activate slide no. 4
+</button>`;
 
 export const customConfigExample = `customConfig: KirbySwiperOptions = {
   slidesPerView: 1,
