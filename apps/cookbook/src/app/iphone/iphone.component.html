@@ -1,9 +1,9 @@
 <div class="container">
   <div class="toggle-wrapper" *ngIf="showViewModeToggle">
-    Toggle full-size
+    Device view
     <kirby-toggle
       (checkedChange)="onViewModeToggleChange($event)"
-      [checked]="viewMode === 'full-size'"
+      [checked]="viewMode === 'device'"
     ></kirby-toggle>
   </div>
 

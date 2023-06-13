@@ -18,9 +18,16 @@ import {
   ViewChildren,
 } from '@angular/core';
 import { ActivatedRoute, RouterModule, RouterOutlet } from '@angular/router';
-import { IonContent, IonHeader, IonicModule, IonTitle, IonToolbar } from '@ionic/angular';
+import {
+  IonContent,
+  IonHeader,
+  IonicModule,
+  IonTitle,
+  IonToolbar,
+  ScrollDetail,
+} from '@ionic/angular';
 import { firstValueFrom, merge, Observable, Subject } from 'rxjs';
-import { debounceTime, first, takeUntil } from 'rxjs/operators';
+import { debounceTime, first, map, takeUntil } from 'rxjs/operators';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
@@ -36,6 +43,9 @@ import { Modal, ModalElementsAdvertiser, ModalElementType } from '../modal.inter
 import { ModalConfig } from './config/modal-config';
 import { COMPONENT_PROPS } from './config/modal-config.helper';
 import { ModalElementsMoverDelegate } from './modal-elements-mover.delegate';
+
+const contentScrollDebounceTimeInMS = 10;
+const contentScrolledOffsetInPixels = 4;
 
 @Component({
   standalone: true,
@@ -119,6 +129,10 @@ export class ModalWrapperComponent
     }
     return this._intersectionObserver;
   }
+
+  isContentScrolled: boolean;
+  private contentScrolled$: Observable<ScrollDetail>;
+
   private destroy$: Subject<void> = new Subject<void>();
 
   @HostBinding('class.drawer')
@@ -157,6 +171,14 @@ export class ModalWrapperComponent
       providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
       parent: this.injector,
     });
+  }
+
+  ngAfterViewInit(): void {
+    if (this.toolbarButtonsQuery) {
+      this.toolbarButtons = this.toolbarButtonsQuery.map((buttonRef) => buttonRef.nativeElement);
+    }
+
+    this.initializeContentScrollListening();
   }
 
   private _currentFooter: HTMLElement | null = null;
@@ -292,12 +314,6 @@ export class ModalWrapperComponent
     return this.ionModalElement.shadowRoot.querySelector('.modal-wrapper');
   }
 
-  ngAfterViewInit(): void {
-    if (this.toolbarButtonsQuery) {
-      this.toolbarButtons = this.toolbarButtonsQuery.map((buttonRef) => buttonRef.nativeElement);
-    }
-  }
-
   private observeHeaderResize() {
     this.resizeObserverService.observe(this.ionHeaderElement.nativeElement, (entry) => {
       const [property, pixelValue] = ['--header-height', `${entry.contentRect.height}px`];
@@ -321,6 +337,27 @@ export class ModalWrapperComponent
         this.ionModalWillDismiss.complete();
       });
     }
+  }
+
+  /*
+   * Runs scroll subscription outside zone to avoid excessive amount of CD cycles
+   * when ionScroll emits.
+   */
+  private initializeContentScrollListening() {
+    this.zone.runOutsideAngular(() => {
+      this.contentScrolled$ = this.ionContent.ionScroll.pipe(
+        debounceTime(contentScrollDebounceTimeInMS),
+        map((event) => event.detail),
+        takeUntil(this.destroy$)
+      );
+
+      this.contentScrolled$.subscribe((scrollInfo: ScrollDetail) => {
+        if (scrollInfo.scrollTop > contentScrolledOffsetInPixels !== this.isContentScrolled) {
+          this.isContentScrolled = !this.isContentScrolled;
+          this.changeDetector.detectChanges();
+        }
+      });
+    });
   }
 
   scrollToTop(scrollDuration?: KirbyAnimation.Duration) {
@@ -500,7 +537,6 @@ export class ModalWrapperComponent
       }
     }
   }
-
   private createModalWrapperIntersectionObserver(): IntersectionObserver {
     const callback: IntersectionObserverCallback = (entries) => {
       const entry = entries[0];
