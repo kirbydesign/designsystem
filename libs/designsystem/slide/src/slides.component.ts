@@ -93,20 +93,22 @@ export class SlidesComponent implements OnInit, AfterViewInit {
 
   private getDefaultConfig(): KirbySwiperOptions {
     const desktopBreakpoint = parseInt(DesignTokenHelper.breakpoints.medium) - 1;
+    const spaceBetween = parseInt(DesignTokenHelper.size('s'));
+    const transitionDuration = parseInt(DesignTokenHelper.transitionDuration('long'));
     return {
       centeredSlides: true,
+      centeredSlidesBounds: true,
       slidesPerView: 1.2,
       slidesPerGroup: 1,
-      spaceBetween: 16,
       breakpoints: {
         [desktopBreakpoint]: {
           centeredSlides: false,
-          centeredSlidesBounds: true,
           slidesPerView: 3,
           slidesPerGroup: 3,
         },
       },
-      speed: 600,
+      spaceBetween: spaceBetween,
+      speed: transitionDuration,
       pagination: {
         el: `.${this._paginationId}`,
         type: 'bullets',
