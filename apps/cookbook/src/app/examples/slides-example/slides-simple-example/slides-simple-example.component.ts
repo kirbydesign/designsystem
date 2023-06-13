@@ -3,7 +3,7 @@ import { SelectedSlide } from '@kirbydesign/designsystem/slide';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem/toast';
 
 @Component({
-  selector: 'cookbook-slides-example',
+  styleUrls: ['../../_examples.shared.scss'],
   templateUrl: './slides-simple-example.component.html',
 })
 export class SlidesSimpleExampleComponent {
