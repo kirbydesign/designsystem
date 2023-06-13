@@ -78,7 +78,7 @@ export class SlidesComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     const defaultConfig = this.showNavigation
       ? this.getDefaultConfig()
-      : this.getControlLessConfig();
+      : this.getNoControlsConfig();
 
     const config = { ...defaultConfig, ...this.slidesOptions };
 
@@ -132,7 +132,7 @@ export class SlidesComponent implements OnInit, AfterViewInit {
     };
   }
 
-  private getControlLessConfig(): KirbySwiperOptions {
-    return { ...this.getDefaultConfig(), spaceBetween: 16, pagination: false, navigation: false };
+  private getNoControlsConfig(): KirbySwiperOptions {
+    return { ...this.getDefaultConfig(), pagination: false, navigation: false };
   }
 }
