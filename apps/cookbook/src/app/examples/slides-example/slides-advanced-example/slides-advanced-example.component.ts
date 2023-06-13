@@ -9,14 +9,14 @@ export class SlidesAdvancedExampleComponent {
   constructor(private toastController: ToastController) {}
 
   config: KirbySwiperOptions = {
-    slidesPerView: 1.2,
     centeredSlides: true,
+    slidesPerView: 1,
     slidesPerGroup: 1,
     breakpoints: {
       768: {
         centeredSlides: false,
-        slidesPerView: 3,
-        slidesPerGroup: 3,
+        slidesPerView: 2,
+        slidesPerGroup: 1,
       },
     },
   };
