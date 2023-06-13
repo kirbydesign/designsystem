@@ -9,10 +9,9 @@
     >
       <kirby-card *kirbySlide="let slide; let i = index" [hasPadding]="true">
         <kirby-card-header [title]="slide.title" [subtitle]="slide.subtitle"></kirby-card-header>
-        <div class="card-content">
-          {{ slide.cardContent }}
-        </div>
+        <div>{{ slide.cardContent }}</div>
       </kirby-card>
+      <button kirby-button attentionLevel="3" size="xs" (click)="showAll()">See all</button>
     </kirby-slides>
   </kirby-page-content>
 </kirby-page>

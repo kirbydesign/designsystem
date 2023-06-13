@@ -35,4 +35,13 @@ export class SlidesAdvancedExampleComponent {
     };
     this.toastController.showToast(config);
   }
+
+  showAll() {
+    const config: ToastConfig = {
+      message: `See all... (demo, not implemented)`,
+      messageType: 'success',
+      durationInMs: 2000,
+    };
+    this.toastController.showToast(config);
+  }
 }
