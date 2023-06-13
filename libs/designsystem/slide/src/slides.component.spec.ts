@@ -14,10 +14,15 @@ describe('SlidesComponent', () => {
 
   const customOptions: KirbySwiperOptions = {
     slidesPerView: 1.2,
-    centeredSlides: true,
-    centeredSlidesBounds: false,
-    spaceBetween: 8,
     slidesPerGroup: 1,
+    spaceBetween: 8,
+    breakpoints: {
+      0: {
+        centeredSlides: true,
+        slidesPerView: 1.2,
+        slidesPerGroup: 1,
+      },
+    },
   };
 
   const createHost = createHostFactory({
@@ -28,7 +33,7 @@ describe('SlidesComponent', () => {
 
   beforeEach(() => {
     spectator = createHost(
-      `<kirby-slides [slides]="slides" [slidesOptions]="slidesOptions">
+      `<kirby-slides [slides]="slides" [slidesOptions]="slidesOptions" [title]="'Title'" [showNavigation]="true">
          <kirby-card *kirbySlide="let slide">
            {{ slide }}
          </kirby-card>
