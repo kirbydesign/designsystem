@@ -44,6 +44,10 @@ $bullet-inactive-opacity: 0.2;
   .buttons {
     display: none;
 
+    @include utils.media('>=medium') {
+      display: block;
+    }
+
     .swiper-button-prev {
       margin-block: 0;
       margin-inline-start: 0;
@@ -70,12 +74,6 @@ $bullet-inactive-opacity: 0.2;
     .navigation,
     .pagination {
       margin-inline-end: 0;
-    }
-  }
-
-  @include utils.media('>=medium') {
-    .buttons {
-      display: block;
     }
   }
 
