@@ -1,9 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
-import {
-  KirbySwiperOptions,
-  SelectedSlide,
-  SlidesComponent,
-} from '@kirbydesign/designsystem/slide';
+import { Component } from '@angular/core';
+import { KirbySwiperOptions, SelectedSlide } from '@kirbydesign/designsystem/slide';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem/toast';
 
 @Component({
@@ -46,11 +42,5 @@ export class SlidesAdvancedExampleComponent {
       durationInMs: 2000,
     };
     this.toastController.showToast(config);
-  }
-
-  @ViewChild(SlidesComponent) private slidesComponent: SlidesComponent;
-
-  changeSlide(index: number) {
-    this.slidesComponent.slideTo(index);
   }
 }

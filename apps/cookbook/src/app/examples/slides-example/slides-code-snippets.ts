@@ -45,10 +45,11 @@ export const defaultExampleComponentHTML = `<kirby-slides [slides]="slides" [tit
 
 export const advancedExampleComponentHTML = `<kirby-slides
   [slides]="slides"
-  (selectedSlide)="getDataFromActiveSlide($event)"
+  (slideChange)="getDataFromActiveSlide($event)"
   [slidesOptions]="customConfig"
   [showNavigation]="true"
-  [title]="'Title'">
+  [title]="'Title'"
+  #slidesInstance>
 
   <kirby-card *kirbySlide="let slide; let i = index" [hasPadding]="true">
     <kirby-card-header [title]="slide.title" [subtitle]="slide.subtitle"></kirby-card-header>
@@ -59,7 +60,7 @@ export const advancedExampleComponentHTML = `<kirby-slides
 
 </kirby-slides>
 
-<button kirby-button (click)="changeSlide(3)" style="display: block; margin: 24px auto 0">
+<button kirby-button (click)="slidesInstance.slideTo(3)" style="display: block; margin: 24px auto 0">
   Activate slide no. 4
 </button>`;
 

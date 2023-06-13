@@ -4,6 +4,7 @@
   [showNavigation]="true"
   [title]="'Title'"
   (slideChange)="getDataFromActiveSlide($event)"
+  #slidesInstance
 >
   <kirby-card *kirbySlide="let slide; let i = index" [hasPadding]="true">
     <kirby-card-header [title]="slide.title" [subtitle]="slide.subtitle"></kirby-card-header>
@@ -12,6 +13,10 @@
   <button kirby-button attentionLevel="3" size="xs" (click)="showAll()">See all</button>
 </kirby-slides>
 
-<button kirby-button (click)="changeSlide(3)" style="display: block; margin: 24px auto 0">
+<button
+  kirby-button
+  (click)="slidesInstance.slideTo(3)"
+  style="display: block; margin: 24px auto 0"
+>
   Activate slide no. 4
 </button>
