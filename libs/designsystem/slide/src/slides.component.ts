@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   ContentChild,
   ElementRef,
@@ -36,6 +37,7 @@ type SwiperContainer = HTMLElement & { initialize: () => void; swiper: Swiper };
   selector: 'kirby-slides',
   templateUrl: './slides.component.html',
   styleUrls: ['./slides.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SlidesComponent implements OnInit, AfterViewInit {
   constructor(private platform: PlatformService) {}
