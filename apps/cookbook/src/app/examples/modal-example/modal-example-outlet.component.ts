@@ -1,26 +1,17 @@
 import { Component } from '@angular/core';
 import { Params } from '@angular/router';
 
-import { AlertConfig, ModalController } from '@kirbydesign/designsystem';
+import { ModalController } from '@kirbydesign/designsystem';
 
 const config = {
   selector: 'cookbook-modal-example-outlet',
   template: `<button kirby-button (click)="navigateToModalRoute('page1', {awesomeQueryParam: 'awesome value'})">Open modal by route</button>
 <button kirby-button kirbyModalRouterLink="page1" [kirbyModalQueryParams]="{awesomeQueryParam: 'awesome value'}">Open modal by router link</button>`,
   defaultCodeSnippet: `
-  readonly alertConfig: AlertConfig = {
-    title: 'Do you want to close the modal?',
-    okBtn: {
-      text: 'Yes',
-      isDestructive: true,
-    },
-    cancelBtn: 'No',
-  };
-  
   constructor(private modalController: ModalController) {}
 
-  navigateToModalRoute(path: string | string[], queryParams?: Params, alertConfig?: AlertConfig) {
-    this.modalController.navigateToModal(path,  queryParams, alertConfig);
+  navigateToModalRoute(path: string | string[], queryParams?: Params) {
+    this.modalController.navigateToModal(path,  queryParams);
   }`,
   modalRouteCodeSnippet: `{
     path: 'main-route-presented-behind-the-modal',
@@ -76,9 +67,6 @@ modalController.navigateToModal(['/home', 'main-route-presented-behind-the-modal
 
 // Passing query parameters (OPTIONAL): 
 modalController.navigateToModal('child-route-presented-in-modal', {awesomeQueryParam: 'awesome value'});
-
-// Show alert on close (OPTIONAL): 
-modalController.navigateToModal('child-route-presented-in-modal', null, { title: 'Do you want to close the modal?', okBtn: { text: 'Yes', isDestructive: true }, cancelBtn: 'No'});
 `,
 
   routerLinkWithinModalOutletCodeSnippet: `<!-- Relative path to sibling modal route: -->
@@ -131,7 +119,7 @@ export class ModalExampleOutletComponent {
 
   constructor(private modalController: ModalController) {}
 
-  navigateToModalRoute(path: string | string[], queryParams?: Params, alertConfig?: AlertConfig) {
-    this.modalController.navigateToModal(path, queryParams, alertConfig);
+  navigateToModalRoute(path: string | string[], queryParams?: Params) {
+    this.modalController.navigateToModal(path, queryParams);
   }
 }
