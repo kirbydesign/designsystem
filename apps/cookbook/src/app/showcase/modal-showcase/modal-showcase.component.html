@@ -224,10 +224,10 @@
   <h2 #routeBasedBasic>Route-based modals</h2>
 
   <p>
-    Routed modals makes it easy to create wizard-type flows where the same modal is reused for
+    Routed modals are useful for creating wizard-type flows where the same modal is reused for
     showing multiple individual components one at a time. Modal routes will automatically open up a
-    modal if none is already opened which also means they are ideal for deep-linking to specific
-    pages inside a modal.
+    modal if none is already opened which also means they are ideal for deep-linking directly to
+    routes of components that should be presented in a modal.
   </p>
 
   <cookbook-iphone
@@ -244,7 +244,7 @@
   ></cookbook-example-viewer>
 
   <p>
-    Showing a component on an associated route inside a modal is achieved by configuring the route
+    Showing a component on its associated route inside a modal is achieved by configuring the route
     with a secondary outlet named
     <strong><code>modal</code></strong>
     .
@@ -263,60 +263,47 @@
   <cookbook-code-viewer [ts]="outletExample.modalRouteCodeSnippet"></cookbook-code-viewer>
   <p>
     The URL for these kind of routes will look like this:
-    <strong><code>/(modal:some-route)</code></strong>
-    .
+    <strong><code>parent-component-route/(modal:some-child-route)</code></strong>
+    , where the parent component will be presented behind the modal.
   </p>
 
   <p>
-    This is a
+    This means that with deeplinked modals
     <a
-      class="kirby-external-icon"
       [kirbyModalRouterLink]="['/examples', 'modal-route-with-url-param', '1978', 'page1']"
-    >
-      deeplinked modal with url parameter
-    </a>
-    and this is a
-    <a
-      class="kirby-external-icon"
-      [kirbyModalRouterLink]="['/examples', 'modal-route', 'page1']"
       [kirbyModalQueryParams]="{ awesomeQueryParam: 'awesome value' }"
     >
-      deeplinked modal with query params
+      like this one
     </a>
+    we can send the user to a whole new context before showing the modal on top.
   </p>
 
+  <h3>Navigation</h3>
+
   <p>
-    <em>
-      <strong>*Please note:</strong>
-      The main route is the route with the component being presented behind the modal
-    </em>
-  </p>
-  <p>
-    These kind of routes can be navigated to by using a
+    Modal routes can be navigated to by adding
     <code>kirbyModalRouterLink</code>
-    , and query parameters can be passed by using
+    to the element's template and optionally pass query parameters with
     <code>[kirbyModalQueryParams]</code>
-    <br />
-    <br />
-    <em>
-      <strong>*Please note:</strong>
-      Always use Angular's "box" syntax for binding to the
-      <code>[kirbyModalQueryParams]</code>
-      otherwise it will be treated as a string and not an object literal
-    </em>
-    <cookbook-code-viewer
-      [html]="outletExample.routerLinkForModalOutletCodeSnippet"
-    ></cookbook-code-viewer>
-    Or by injecting
+    . Alternatively, to navigate from code you can inject
     <code>ModalController</code>
-    and calling
+    and call its
     <code>navigateToModal</code>
-    method, where query params can be passed as the second argument and AlertConfig for the
-    alert-on-close can be passed as the third argument:
-    <cookbook-code-viewer
-      [ts]="outletExample.modalControllerForModalOutletCodeSnippet"
-    ></cookbook-code-viewer>
+    method, where query params can be passed as the second argument.
   </p>
+
+  <p class="comment">
+    <strong>Please note:</strong>
+    Always use Angular's "box" syntax for binding to
+    <code>[kirbyModalQueryParams]</code>
+    otherwise it will be treated as a string and not an object literal
+  </p>
+
+  <cookbook-example-viewer
+    [html]="outletExample.routerLinkForModalOutletCodeSnippet"
+    [ts]="outletExample.modalControllerForModalOutletCodeSnippet"
+  ></cookbook-example-viewer>
+
   <p>
     <strong>Within the child component</strong>
     presented in the modal a regular Angular
@@ -324,11 +311,8 @@
     can be used with a relative path to the sibling modal route, and query params can be passed as
     normal using
     <code>[queryParams]</code>
-    :
+    .
   </p>
-  <cookbook-code-viewer
-    [html]="outletExample.routerLinkWithinModalOutletCodeSnippet"
-  ></cookbook-code-viewer>
 
   <p>
     If you need to navigate from code
@@ -355,11 +339,12 @@
         relativeTo
       </a>
     </code>
-    param:
-    <cookbook-code-viewer
-      [ts]="outletExample.modalControllerWithinModalOutletCodeSnippet"
-    ></cookbook-code-viewer>
+    param.
   </p>
+  <cookbook-example-viewer
+    [html]="outletExample.routerLinkWithinModalOutletCodeSnippet"
+    [ts]="outletExample.modalControllerWithinModalOutletCodeSnippet"
+  ></cookbook-example-viewer>
 
   <!-- Add back when alert before close is a callback and we want people to use it
   <h2 #alertBeforeClose>

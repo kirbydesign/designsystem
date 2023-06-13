@@ -31,10 +31,11 @@ const config = {
         outlet: 'modal',
         component: FirstChildComponent,
         
-        //optional modalConfig passed via developer-defined route data
+        // optional modalConfig passed via the Angular-router's built in data object
         data: {
           modalConfig: {
             size: 'large',
+            flavor: 'drawer',
           },
         },  
       },
@@ -117,15 +118,6 @@ navigate() {
   styleUrls: ['./modal-example-outlet.component.scss'],
 })
 export class ModalExampleOutletComponent {
-  readonly alertConfig: AlertConfig = {
-    title: 'Do you want to close the modal?',
-    okBtn: {
-      text: 'Yes',
-      isDestructive: true,
-    },
-    cancelBtn: 'No',
-  };
-
   static readonly template = config.template;
   static readonly defaultCodeSnippet = config.defaultCodeSnippet;
   static readonly modalRouteCodeSnippet = config.modalRouteCodeSnippet;

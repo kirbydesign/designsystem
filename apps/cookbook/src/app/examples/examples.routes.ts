@@ -270,6 +270,7 @@ export const routes: Routes = [
             data: {
               modalConfig: {
                 size: 'large',
+                flavor: 'drawer',
               },
             },
           },
