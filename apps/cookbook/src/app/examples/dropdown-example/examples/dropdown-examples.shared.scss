@@ -16,12 +16,3 @@ kirby-card {
 p {
   margin-top: utils.size('s');
 }
-
-.comment {
-  font-style: italic;
-  color: utils.get-text-color('semi-dark');
-
-  &.small {
-    font-size: smaller;
-  }
-}
