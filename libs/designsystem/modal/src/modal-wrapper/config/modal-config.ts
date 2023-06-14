@@ -1,4 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Data, Route } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { DrawerSupplementaryAction } from './drawer-supplementary-action';
@@ -22,4 +22,21 @@ export interface ModalConfig {
   cssClass?: string | string[];
 }
 
-export type RouteModalConfig = Omit<ModalConfig, 'component'>;
+/**
+ * Here we extend Data and Route from Angular to create a covariant type ModalEnabledRoutes.
+ * This can be used in place of the Routes type when configuring route-based modals in the array
+ * of routes passed to RouterModule in applications.
+ */
+
+export type RoutedModalConfig = Omit<ModalConfig, 'component'>;
+
+interface ModalConfigRouteData extends Data {
+  modalConfig?: RoutedModalConfig;
+}
+
+interface ModalEnabledRoute extends Route {
+  data?: ModalConfigRouteData;
+  children?: ModalEnabledRoutes;
+}
+
+export type ModalEnabledRoutes = ModalEnabledRoute[];
