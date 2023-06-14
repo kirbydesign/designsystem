@@ -92,6 +92,10 @@ table.kirby-table {
         display: inline-flex;
         flex-direction: column;
 
+        // Using the before selector to insert a hidden pseudo-element with the same text content in bold,
+        // ensures no horizontal layout shifts when changing the visible span's text content from bold to normal font-weight.
+        // See lines 53-56
+
         &::before {
           display: block;
           content: attr(data-text);
