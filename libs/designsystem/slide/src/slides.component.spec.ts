@@ -201,4 +201,21 @@ describe('SlidesComponent', () => {
       expect(spectator.query('.swiper-button-next')).toBeHidden();
     });
   });
+
+  describe('on touch device', () => {
+    beforeEach(() => {
+      spectator.component._isTouch = true;
+      spectator.detectComponentChanges();
+    });
+
+    it('should not render the navigation buttons', () => {
+      expect(spectator.query('.swiper-button-prev')).toBeNull();
+      expect(spectator.query('.swiper-button-next')).toBeNull();
+    });
+
+    it('should render the pagination buttons', () => {
+      expect(spectator.query('.pagination')).toBeTruthy();
+      expect(spectator.query('.pagination')).toBeVisible();
+    });
+  });
 });

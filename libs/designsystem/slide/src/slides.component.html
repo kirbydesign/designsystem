@@ -13,7 +13,7 @@
     <div
       class="pagination"
       [ngClass]="_paginationId"
-      *ngIf="!_isTouch && (!slidesOptions || slidesOptions?.pagination === undefined)"
+      *ngIf="!slidesOptions || slidesOptions?.pagination === undefined"
     ></div>
     <div
       class="buttons"
