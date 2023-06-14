@@ -61,7 +61,7 @@ ion-backdrop {
   border-bottom: 20px transparent solid;
 }
 
-ion-reorder-group > div {
+:host > ion-reorder-group > div {
   border-bottom: 20px transparent solid;
   
   &:last-child {
