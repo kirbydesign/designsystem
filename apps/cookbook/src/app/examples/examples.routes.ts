@@ -1,5 +1,4 @@
-import { Routes } from '@angular/router';
-
+import { ModalEnabledRoutes } from '@kirbydesign/designsystem';
 import { AccordionExampleComponent } from './accordion-example/accordion-example.component';
 import { ActionSheetExampleComponent } from './action-sheet-example/action-sheet-example.component';
 import { AlertExampleComponent } from './alert-example/alert-example.component';
@@ -88,7 +87,7 @@ import { ModalExampleSimpleComponent } from './modal-example/modal-example-simpl
 import { ModalExampleAdvancedComponent } from './modal-example/modal-example-advanced.component';
 import { ModalExampleOutletComponent } from './modal-example/modal-example-outlet.component';
 
-export const routes: Routes = [
+export const routes: ModalEnabledRoutes = [
   {
     path: '',
     component: ExamplesComponent,

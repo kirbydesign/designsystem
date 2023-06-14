@@ -13,7 +13,8 @@ const config = {
   navigateToModalRoute(path: string | string[], queryParams?: Params) {
     this.modalController.navigateToModal(path,  queryParams);
   }`,
-  modalRouteCodeSnippet: `{
+  modalRouteCodeSnippet: `export const routes: ModalEnabledRoutes = [
+  {
     path: 'main-route-presented-behind-the-modal',
     component: SomeComponent,
     children: [
@@ -36,7 +37,15 @@ const config = {
         component: SecondChildComponent,
       },
     ],
-  }`,
+  }
+]`,
+
+  deeplinkedRouterLinkWithUrlParamCodeSnippet: `<a
+  [kirbyModalRouterLink]="['/home', 'main-route-presented-behind-the-modal', 'urlParam', 'page1']"
+  [kirbyModalQueryParams]="{ awesomeQueryParam: 'awesome value' }"
+>
+  Link text for your deeplinked modal
+</a>`,
   routerLinkForModalOutletCodeSnippet: `<!-- Relative path when opened from parent route: -->
 <a kirbyModalRouterLink="child-route-presented-in-modal">Open Modal</a>
 
@@ -109,6 +118,8 @@ export class ModalExampleOutletComponent {
   static readonly template = config.template;
   static readonly defaultCodeSnippet = config.defaultCodeSnippet;
   static readonly modalRouteCodeSnippet = config.modalRouteCodeSnippet;
+  static readonly deeplinkedRouterLinkWithUrlParamCodeSnippet =
+    config.deeplinkedRouterLinkWithUrlParamCodeSnippet;
   static readonly routerLinkForModalOutletCodeSnippet = config.routerLinkForModalOutletCodeSnippet;
   static readonly modalControllerForModalOutletCodeSnippet =
     config.modalControllerForModalOutletCodeSnippet;
