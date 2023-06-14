@@ -207,6 +207,9 @@ $button-margin: utils.size('xxxs');
   }
 
   &.icon-only {
+    --kirby-button-padding-left: 0;
+    --kirby-button-padding-right: 0;
+
     width: utils.size('xl');
     padding: 0;
     min-width: unset;
