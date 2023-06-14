@@ -1,0 +1,7 @@
+@use '@kirbydesign/core/src/scss/utils';
+@use '../examples.shared';
+
+:host {
+  --padding-start: #{utils.size('s')};
+  --padding-end: #{utils.size('s')};
+}

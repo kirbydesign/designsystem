@@ -3,7 +3,7 @@ import { KirbySwiperOptions, SelectedSlide } from '@kirbydesign/designsystem/sli
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem/toast';
 
 @Component({
-  styleUrls: ['../../_examples.shared.scss'],
+  styleUrls: ['../slides-example.shared.scss'],
   templateUrl: './slides-advanced-example.component.html',
 })
 export class SlidesAdvancedExampleComponent {
