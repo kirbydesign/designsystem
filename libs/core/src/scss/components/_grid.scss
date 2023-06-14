@@ -4,10 +4,10 @@
 /* stylelint-disable custom-property-pattern */
 
 $grid-sizes-to-breakpoint-map: (
-  'sm': medium,
-  'md': large,
-  'lg': xlarge,
-  'xl': xxlarge,
+  'sm': small,
+  'md': medium,
+  'lg': large,
+  'xl': xlarge,
 );
 
 .kirby-grid {
