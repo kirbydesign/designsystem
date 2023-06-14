@@ -1,8 +1,12 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   HostBinding,
   Input,
+  Renderer2,
+  ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
 
@@ -13,7 +17,9 @@ import {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TableSortableComponent {
+export class TableSortableComponent implements AfterViewInit {
+  constructor(private renderer: Renderer2) {}
+
   @HostBinding('class.sortable-head')
   @Input()
   sortable = false;
@@ -33,5 +39,17 @@ export class TableSortableComponent {
 
   _getButtonClass() {
     return `button-content-${this.textAlignment}`;
+  }
+
+  @ViewChild('span') spanElement: ElementRef;
+
+  ngAfterViewInit(): void {
+    if (this.spanElement) {
+      this.renderer.setAttribute(
+        this.spanElement.nativeElement,
+        'data-text',
+        this.spanElement.nativeElement.textContent
+      );
+    }
   }
 }

@@ -85,6 +85,20 @@ table.kirby-table {
           justify-content: flex-end;
         }
       }
+
+      span {
+        display: inline-flex;
+        flex-direction: column;
+
+        &::before {
+          display: block;
+          content: attr(data-text);
+          font-weight: utils.font-weight('bold');
+          height: 0;
+          overflow: hidden;
+          visibility: visible;
+        }
+      }
     }
   }
 
