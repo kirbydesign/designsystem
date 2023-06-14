@@ -50,6 +50,14 @@ describe('AccordionItemComponent', () => {
         visibility: 'visible',
       });
     });
+    it('should emit the toggle event when expanded', () => {
+      spyOn(spectator.component.toggle, 'emit');
+      spectator.component.isDisabled = false;
+      spectator.component.isExpanded = false;
+      spectator.component._onToggleExpanded(new KeyboardEvent('keydown'));
+      expect(spectator.component.toggle.emit).toHaveBeenCalledTimes(1);
+      expect(spectator.component.toggle.emit).toHaveBeenCalledWith(true);
+    });
   });
 
   describe('Disabled', () => {
@@ -71,5 +79,13 @@ describe('AccordionItemComponent', () => {
         color: getColor('semi-dark'),
       });
     });
+  });
+  it('should emit the toggle event when collapsed', () => {
+    spyOn(spectator.component.toggle, 'emit');
+    spectator.component.isDisabled = false;
+    spectator.component.isExpanded = true;
+    spectator.component._onToggleExpanded(new KeyboardEvent('keydown'));
+    expect(spectator.component.toggle.emit).toHaveBeenCalledTimes(1);
+    expect(spectator.component.toggle.emit).toHaveBeenCalledWith(false);
   });
 });
