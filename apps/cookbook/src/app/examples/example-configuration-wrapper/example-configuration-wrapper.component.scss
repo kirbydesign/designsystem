@@ -28,8 +28,6 @@ $button-z-index: $card-z-index + 1;
     }
 
     kirby-card {
-      height: 500px;
-      overflow-y: auto;
       opacity: 0;
       visibility: hidden;
       rotate: 45deg;
