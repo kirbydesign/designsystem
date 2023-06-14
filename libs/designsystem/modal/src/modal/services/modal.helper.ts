@@ -49,8 +49,9 @@ export class ModalHelper {
     const enterAnimation = this.modalAnimationBuilder.enterAnimation(currentBackdrop);
     const leaveAnimation = this.modalAnimationBuilder.leaveAnimation(currentBackdrop);
 
-    const defaultModalSize: ModalSize = config.flavor === 'modal' ? 'medium' : null;
+    const defaultModalSize: ModalSize = config.interactWithBackground ? null : 'medium';
     const modalSize = config.size || defaultModalSize;
+
     const allow_scroll_class = 'allow-background-scroll';
 
     let customCssClasses = [];
@@ -83,9 +84,9 @@ export class ModalHelper {
       cssClass: [
         'kirby-overlay',
         'kirby-modal',
+        modalSize ? `kirby-modal-${modalSize}` : null,
         config.flavor === 'drawer' ? 'kirby-drawer' : null,
         config.flavor === 'compact' ? 'kirby-modal-compact' : null,
-        modalSize ? 'kirby-modal-' + modalSize : null,
         config.interactWithBackground ? 'interact-with-background' : null,
         ...customCssClasses,
       ],
@@ -103,6 +104,10 @@ export class ModalHelper {
       ionModal.onDidDismiss().then(() => {
         this.windowRef.nativeWindow.document.body.classList.remove(allow_scroll_class);
       });
+    }
+
+    if (config.customHeight) {
+      ionModal.style.setProperty('--kirby-modal-height', config.customHeight);
     }
 
     await ionModal.present();

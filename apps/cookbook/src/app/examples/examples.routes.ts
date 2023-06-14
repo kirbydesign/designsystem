@@ -84,6 +84,9 @@ import { HeaderWithEmphasizedActionGroupExampleComponent } from './header-exampl
 import { HeaderWithCustomActionsExampleComponent } from './header-example/examples/custom-actions';
 import { HeaderWithInteractiveTitleExampleComponent } from './header-example/examples/interactive-title';
 import { MenuExampleComponent } from './menu-example/menu-example.component';
+import { ModalExampleSimpleComponent } from './modal-example/modal-example-simple.component';
+import { ModalExampleAdvancedComponent } from './modal-example/modal-example-advanced.component';
+import { ModalExampleOutletComponent } from './modal-example/modal-example-outlet.component';
 
 export const routes: Routes = [
   {
@@ -259,6 +262,18 @@ export const routes: Routes = [
             component: ModalRoutePage2ExampleComponent,
           },
         ],
+      },
+      {
+        path: 'modal-advanced',
+        component: ModalExampleAdvancedComponent,
+      },
+      {
+        path: 'modal-simple',
+        component: ModalExampleSimpleComponent,
+      },
+      {
+        path: 'modal-route',
+        component: ModalExampleOutletComponent,
       },
       {
         path: 'modal-route-with-url-param/:id',
