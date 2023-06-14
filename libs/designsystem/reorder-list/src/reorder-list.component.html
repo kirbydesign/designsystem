@@ -7,8 +7,6 @@
 <ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false">
   <div
     *ngFor="let reorderItem of items; let last = last"
-    [class.outer-group]="!last"
-    [class.outer-group-last]="last"
   >
     <kirby-card>
       <ng-container
