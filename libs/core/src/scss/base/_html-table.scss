@@ -6,8 +6,10 @@ $cell-height: 44px;
 
 // Color variables
 $divider-color: utils.get-color('medium');
-$highlight-color: utils.get-color('light');
 $border-bottom: 1px solid $divider-color;
+$divider-color-kirby-card: utils.get-color('background-color');
+$border-bottom-kirby-card: 1px solid $divider-color-kirby-card;
+$highlight-color: utils.get-color('light');
 
 table.kirby-table {
   width: 100%;
@@ -109,5 +111,17 @@ table.kirby-table {
     font-size: utils.font-size('s');
     color: utils.get-text-color('black');
     vertical-align: middle;
+  }
+}
+
+kirby-card table.kirby-table {
+  thead tr {
+    border-bottom: $border-bottom-kirby-card;
+  }
+
+  tr {
+    &:not(:last-child) {
+      border-bottom: $border-bottom-kirby-card;
+    }
   }
 }
