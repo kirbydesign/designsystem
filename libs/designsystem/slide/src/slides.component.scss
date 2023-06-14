@@ -57,6 +57,10 @@ $bullet-inactive-opacity: 0.2;
       margin-block: 0;
       margin-inline-end: 0;
     }
+
+    @include utils.slotted('button[kirby-button]') {
+      margin-inline: utils.size('xxs') 0;
+    }
   }
 
   // Hides the navigation buttons if the Slider
