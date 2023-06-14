@@ -38,7 +38,7 @@ export class AccordionShowcaseComponent {
   events: ApiDescriptionEvent[] = [
     {
       name: 'toggle',
-      description: 'Emitted when the state of accordion item is changed',
+      description: 'Emitted when the state of accordion item has changed',
       signature: 'Promise<Boolean>',
     },
   ];
