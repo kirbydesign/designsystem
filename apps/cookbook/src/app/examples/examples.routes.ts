@@ -531,7 +531,7 @@ export const routes: Routes = [
     component: ToggleButtonExampleComponent,
   },
   {
-    path: 'slides-simple',
+    path: 'slides',
     component: SlidesSimpleExampleComponent,
   },
   {
