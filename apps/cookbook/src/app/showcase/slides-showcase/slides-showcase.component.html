@@ -69,7 +69,7 @@
 
 <p>
   <em>
-    <strong>Please note:</strong>
+    <strong>*Please note:</strong>
     If you specify any
     <code>swiper.js</code>
     events through the
@@ -77,6 +77,17 @@
     config parameter , the component's
     <code>slideChange</code>
     output event will not emit.
+  </em>
+</p>
+
+<p>
+  <em>
+    <strong>**Please note:</strong>
+    If you overwrite
+    <code>slidesPerView</code>
+    on small screens please ensure visual affordance by including a fraction of the next slide, e.g.
+    <code>1.1</code>
+    , as the navigation controls are hidden on small screens.
   </em>
 </p>
 

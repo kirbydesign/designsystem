@@ -10,7 +10,7 @@ export class SlidesAdvancedExampleComponent {
   constructor(private toastController: ToastController) {}
 
   config: KirbySwiperOptions = {
-    slidesPerView: 1,
+    slidesPerView: 1.1,
     breakpoints: {
       768: {
         centeredSlides: false,

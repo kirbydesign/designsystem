@@ -65,7 +65,7 @@ export const advancedExampleComponentHTML = `<kirby-slides
 </button>`;
 
 export const customConfigExample = `customConfig: KirbySwiperOptions = {
-  slidesPerView: 1,
+  slidesPerView: 1.1,
   breakpoints: {
     768: {
       centeredSlides: false,
