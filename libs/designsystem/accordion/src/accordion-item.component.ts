@@ -50,7 +50,6 @@ export class AccordionItemComponent implements OnChanges {
     event.preventDefault();
     this.isExpanded = !this.isExpanded && !this.isDisabled;
     this.toggle.emit(this.isExpanded);
-    console.log('Accordion state changed:', this.isExpanded);
   }
 
   // IDs used for a11y labelling
