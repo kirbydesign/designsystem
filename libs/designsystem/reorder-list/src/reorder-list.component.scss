@@ -65,7 +65,7 @@ ion-backdrop {
   border-bottom: 20px transparent solid;
   
   &:last-child {
-    border-bottom: transparent solid;
+    border-bottom-width: 0;
   }
 }
 
