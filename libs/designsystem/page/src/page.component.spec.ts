@@ -190,6 +190,9 @@ describe('PageComponent', () => {
               expect(ionToolbar).toHaveComputedStyle(
                 {
                   'background-color': getColor('medium'),
+                  content: '""',
+                  height: '1px',
+                  width: `${ionToolbar.offsetWidth}px`,
                 },
                 ':before'
               );
@@ -260,19 +263,52 @@ describe('PageComponent', () => {
           });
         });
 
-        it('should render toolbar divider by default', () => {
-          expect(ionToolbar).toHaveComputedStyle(
-            {
-              'background-color': getColor('medium'),
-            },
-            ':before'
-          );
-        });
+        describe('divider and shaded background', () => {
+          describe('before scroll', () => {
+            it('should not render toolbar divider', () => {
+              expect(ionToolbar).toHaveComputedStyle(
+                {
+                  'background-color': 'rgba(0, 0, 0, 0)',
+                },
+                ':before'
+              );
+            });
 
-        it('should render shaded toolbar background by default', () => {
-          const toolbarBackground = ionToolbar.shadowRoot.querySelector('.toolbar-background');
-          expect(toolbarBackground).toHaveComputedStyle({
-            'background-color': shadedBackgroundColor,
+            it('should not render shaded toolbar background', () => {
+              const toolbarBackground = ionToolbar.shadowRoot.querySelector('.toolbar-background');
+              expect(toolbarBackground).toHaveComputedStyle({
+                'background-color': getColor('background-color'),
+              });
+            });
+          });
+
+          describe('after scrolling page title above content top', () => {
+            beforeEach(async () => {
+              // Scroll page title above content top:
+              const pageTitle: HTMLElement = ionContent.querySelector('.page-title');
+              const andThenSome = 10;
+              const verticalScrollAmount =
+                pageTitle.offsetTop + pageTitle.offsetHeight + andThenSome;
+
+              await ionContent.scrollToPoint(0, verticalScrollAmount, 0);
+              await TestHelper.whenTrue(() => spectator.component.isContentScrolled);
+            });
+
+            it('should render toolbar divider', () => {
+              expect(ionToolbar).toHaveComputedStyle(
+                {
+                  'background-color': getColor('medium'),
+                },
+                ':before'
+              );
+            });
+
+            it('should render shaded toolbar background', () => {
+              const toolbarBackground = ionToolbar.shadowRoot.querySelector('.toolbar-background');
+              expect(toolbarBackground).toHaveComputedStyle({
+                'background-color': shadedBackgroundColor,
+              });
+            });
           });
         });
       });
@@ -846,7 +882,35 @@ describe('PageComponent', () => {
       });
 
       describe('before scroll', () => {
-        it('should render toolbar divider by default', () => {
+        it('should not render toolbar divider', () => {
+          expect(ionToolbar).toHaveComputedStyle(
+            {
+              'background-color': 'rgba(0, 0, 0, 0)',
+            },
+            ':before'
+          );
+        });
+
+        it('should not render shaded toolbar background', () => {
+          const toolbarBackground = ionToolbar.shadowRoot.querySelector('.toolbar-background');
+          expect(toolbarBackground).toHaveComputedStyle({
+            'background-color': getColor('background-color'),
+          });
+        });
+      });
+
+      describe('after scrolling page title above content top', () => {
+        beforeEach(async () => {
+          // Scroll page title above content top:
+          const pageTitle: HTMLElement = ionContent.querySelector('.page-title');
+          const andThenSome = 10;
+          const verticalScrollAmount = pageTitle.offsetTop + pageTitle.offsetHeight + andThenSome;
+
+          await ionContent.scrollToPoint(0, verticalScrollAmount, 0);
+          await TestHelper.whenTrue(() => spectator.component.isContentScrolled);
+        });
+
+        it('should render toolbar divider', () => {
           expect(ionToolbar).toHaveComputedStyle(
             {
               'background-color': getColor('medium'),
@@ -858,7 +922,7 @@ describe('PageComponent', () => {
           );
         });
 
-        it('should render shaded toolbar background by default', () => {
+        it('should render shaded toolbar background', () => {
           const toolbarBackground = ionToolbar.shadowRoot.querySelector('.toolbar-background');
           expect(toolbarBackground).toHaveComputedStyle({
             'background-color': shadedBackgroundColor,

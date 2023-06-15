@@ -1,5 +1,4 @@
-import { Routes } from '@angular/router';
-
+import { ModalEnabledRoutes } from '@kirbydesign/designsystem';
 import { AccordionExampleComponent } from './accordion-example/accordion-example.component';
 import { ActionSheetExampleComponent } from './action-sheet-example/action-sheet-example.component';
 import { AlertExampleComponent } from './alert-example/alert-example.component';
@@ -65,7 +64,8 @@ import { ReorderListExampleComponent } from './reorder-list-example/reorder-list
 import { SectionHeaderExampleComponent } from './section-header-example/section-header-example.component';
 import { SegmentedControlExampleComponent } from './segmented-control-example/segmented-control-example.component';
 import { SlideButtonExampleComponent } from './slide-button-example/slide-button-example.component';
-import { SlidesExampleComponent } from './slides-example/slides-example.component';
+import { SlidesSimpleExampleComponent } from './slides-example/slides-simple-example/slides-simple-example.component';
+import { SlidesAdvancedExampleComponent } from './slides-example/slides-advanced-example/slides-advanced-example.component';
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
 import { StylingHtmlListsExampleComponent } from './styling-html-lists-example/styling-html-lists-example.component';
 import { TabExampleComponent } from './tabs-example/tab/tab-example.component';
@@ -84,8 +84,11 @@ import { HeaderWithEmphasizedActionGroupExampleComponent } from './header-exampl
 import { HeaderWithCustomActionsExampleComponent } from './header-example/examples/custom-actions';
 import { HeaderWithInteractiveTitleExampleComponent } from './header-example/examples/interactive-title';
 import { MenuExampleComponent } from './menu-example/menu-example.component';
+import { ModalExampleSimpleComponent } from './modal-example/modal-example-simple.component';
+import { ModalExampleAdvancedComponent } from './modal-example/modal-example-advanced.component';
+import { ModalExampleOutletComponent } from './modal-example/modal-example-outlet.component';
 
-export const routes: Routes = [
+export const routes: ModalEnabledRoutes = [
   {
     path: '',
     component: ExamplesComponent,
@@ -247,11 +250,29 @@ export const routes: Routes = [
       {
         path: 'modal',
         component: ModalExampleComponent,
+      },
+      {
+        path: 'modal-advanced',
+        component: ModalExampleAdvancedComponent,
+      },
+      {
+        path: 'modal-simple',
+        component: ModalExampleSimpleComponent,
+      },
+      {
+        path: 'modal-route',
+        component: ModalExampleOutletComponent,
         children: [
           {
             path: 'page1',
             outlet: 'modal',
             component: ModalRoutePage1ExampleComponent,
+            data: {
+              modalConfig: {
+                size: 'large',
+                flavor: 'drawer',
+              },
+            },
           },
           {
             path: 'page2',
@@ -262,7 +283,7 @@ export const routes: Routes = [
       },
       {
         path: 'modal-route-with-url-param/:id',
-        component: ModalExampleComponent,
+        component: ModalExampleOutletComponent,
         children: [
           {
             path: 'page1',
@@ -516,7 +537,11 @@ export const routes: Routes = [
   },
   {
     path: 'slides',
-    component: SlidesExampleComponent,
+    component: SlidesSimpleExampleComponent,
+  },
+  {
+    path: 'slides-advanced',
+    component: SlidesAdvancedExampleComponent,
   },
   {
     path: 'accordion',
