@@ -27,14 +27,16 @@ ion-toolbar {
 
 ion-toolbar {
   --border-width: 0 !important;
-  --padding-start: #{utils.size('xxxs')};
-  --padding-end: #{utils.size('xxxs')};
+  --padding-start: #{utils.size('s')};
+  --padding-end: #{utils.size('s')};
   --padding-top: 0;
   --padding-bottom: 0;
   --ion-toolbar-color: #{utils.get-color('black')};
   --min-height: #{utils.size('xxxl')};
 
   @include utils.media('>=medium') {
+    --padding-start: #{utils.size('m')};
+    --padding-end: #{utils.size('m')};
     --min-height: #{utils.size('xxxxxl')};
   }
 

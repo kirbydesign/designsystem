@@ -155,6 +155,18 @@ describe('PageComponent', () => {
           });
         });
 
+        it('should render with correct padding', async () => {
+          await TestHelper.whenReady(ionToolbar);
+          const toolbarContainer = ionToolbar.shadowRoot.querySelector('.toolbar-container');
+          expect(toolbarContainer).toBeTruthy();
+          expect(toolbarContainer).toHaveComputedStyle({
+            'padding-left': size('s'),
+            'padding-right': size('s'),
+            'padding-top': '0px',
+            'padding-bottom': '0px',
+          });
+        });
+
         describe('divider and shaded background', () => {
           describe('before scroll', () => {
             it('should not render toolbar divider', () => {
@@ -260,6 +272,18 @@ describe('PageComponent', () => {
         describe('height', () => {
           it('should be correct on desktop', () => {
             expect(ionToolbar).toHaveComputedStyle({ height: size('xxxxxl') });
+          });
+        });
+
+        it('should render with correct padding', async () => {
+          await TestHelper.whenReady(ionToolbar);
+          const toolbarContainer = ionToolbar.shadowRoot.querySelector('.toolbar-container');
+          expect(toolbarContainer).toBeTruthy();
+          expect(toolbarContainer).toHaveComputedStyle({
+            'padding-left': size('m'),
+            'padding-right': size('m'),
+            'padding-top': '0px',
+            'padding-bottom': '0px',
           });
         });
 
@@ -475,18 +499,6 @@ describe('PageComponent', () => {
           'padding-top': '0px',
           'padding-bottom': '0px',
         });
-      });
-    });
-
-    it('should render toolbar with correct padding', async () => {
-      await TestHelper.whenReady(ionToolbar);
-      const toolbarContainer = ionToolbar.shadowRoot.querySelector('.toolbar-container');
-      expect(toolbarContainer).toBeTruthy();
-      expect(toolbarContainer).toHaveComputedStyle({
-        'padding-left': size('xxxs'),
-        'padding-right': size('xxxs'),
-        'padding-top': '0px',
-        'padding-bottom': '0px',
       });
     });
 
