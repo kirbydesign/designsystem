@@ -23,7 +23,7 @@ const config = {
         outlet: 'modal',
         component: FirstChildComponent,
         
-        // optional modalConfig passed via the Angular-router's built in data object
+        // optional ModalConfig passed via the Angular-router's built in data object
         data: {
           modalConfig: {
             size: 'large',
