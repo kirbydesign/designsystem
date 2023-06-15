@@ -64,7 +64,8 @@ import { ReorderListExampleComponent } from './reorder-list-example/reorder-list
 import { SectionHeaderExampleComponent } from './section-header-example/section-header-example.component';
 import { SegmentedControlExampleComponent } from './segmented-control-example/segmented-control-example.component';
 import { SlideButtonExampleComponent } from './slide-button-example/slide-button-example.component';
-import { SlidesExampleComponent } from './slides-example/slides-example.component';
+import { SlidesSimpleExampleComponent } from './slides-example/slides-simple-example/slides-simple-example.component';
+import { SlidesAdvancedExampleComponent } from './slides-example/slides-advanced-example/slides-advanced-example.component';
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
 import { StylingHtmlListsExampleComponent } from './styling-html-lists-example/styling-html-lists-example.component';
 import { TabExampleComponent } from './tabs-example/tab/tab-example.component';
@@ -536,7 +537,11 @@ export const routes: ModalEnabledRoutes = [
   },
   {
     path: 'slides',
-    component: SlidesExampleComponent,
+    component: SlidesSimpleExampleComponent,
+  },
+  {
+    path: 'slides-advanced',
+    component: SlidesAdvancedExampleComponent,
   },
   {
     path: 'accordion',

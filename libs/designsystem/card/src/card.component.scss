@@ -67,12 +67,6 @@
   }
 }
 
-:host-context(.swiper-slide-active) {
-  box-shadow: utils.get-elevation(4);
-  transition: all 0.5s;
-  transform: translateY(-3px);
-}
-
 @each $color-name, $color-value in utils.$main-colors {
   :host(.#{$color-name}) {
     --kirby-card-main-background-color: #{utils.get-color($color-name)};
