@@ -89,10 +89,11 @@ export class ActionGroupComponent implements AfterContentInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.visibleActions && !changes.visibleActions.firstChange) {
-      if (
-        this.config.maxVisibleActions === undefined ||
-        changes.visibleActions.currentValue < this.config.maxVisibleActions
-      ) {
+      const satifiesMaxVisibleActions =
+        this.config?.maxVisibleActions === undefined ||
+        this.config?.maxVisibleActions === null ||
+        changes.visibleActions.currentValue <= this.config?.maxVisibleActions;
+      if (satifiesMaxVisibleActions) {
         this.initializeCollapsing();
       }
     }
