@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ModalExampleAdvancedComponent } from '~/app/examples/modal-example/modal-example-advanced.component';
+import { ModalExampleOutletComponent } from '~/app/examples/modal-example/modal-example-outlet.component';
 import { ModalExampleSimpleComponent } from '~/app/examples/modal-example/modal-example-simple.component';
 import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
 import {
@@ -16,6 +17,7 @@ import {
 export class ModalShowcaseComponent {
   advancedConfigExample = ModalExampleAdvancedComponent;
   basicConfigExample = ModalExampleSimpleComponent;
+  outletExample = ModalExampleOutletComponent;
 
   scrollTo(target: Element) {
     target.scrollIntoView({ behavior: 'smooth' });

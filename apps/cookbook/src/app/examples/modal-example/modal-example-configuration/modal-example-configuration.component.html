@@ -82,12 +82,6 @@
   text="Collapse title"
 ></kirby-checkbox>
 
-<small *ngIf="collapseTitle !== undefined" class="issue-hint">
-  (Collapse title is unavailable for routed modals. See
-  <a href="https://github.com/kirbydesign/designsystem/issues/2192" target="_blank">issue #2192</a>
-  .)
-</small>
-
 <kirby-checkbox
   *ngIf="alertBeforeClose !== undefined"
   [checked]="alertBeforeClose"

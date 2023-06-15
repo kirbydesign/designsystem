@@ -28,12 +28,3 @@
 .sizes cookbook-example-viewer {
   margin-top: utils.size('xs');
 }
-
-.comment {
-  font-style: italic;
-  color: utils.get-text-color('semi-dark');
-
-  &.small {
-    font-size: smaller;
-  }
-}

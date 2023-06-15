@@ -219,56 +219,110 @@
   function which is invoked when the supplementary button is selected.
 </p>
 <cookbook-example-viewer [ts]="advancedConfigExample.drawerCodeSnippet"></cookbook-example-viewer>
-<h2 #routeBasedBasic>Route based modals</h2>
+
+<h2 #routeBasedBasic>Route-based modals</h2>
 
 <p>
-  Instead of providing the modal with a component, you can configure a route to be opened in a
-  modal. This is done by a secondary outlet named
+  Routed modals are useful for creating wizard-type flows where the same modal is reused for showing
+  multiple individual components one at a time. Modal routes will automatically open up a modal if
+  none is already opened which also means they are ideal for deep-linking directly to routes of
+  components that should be presented in a modal.
+</p>
+
+<cookbook-iphone
+  class="large-example"
+  src="/examples/modal-route"
+  viewMode="full-size"
+  [showViewModeToggle]="true"
+  showExternalLink="true"
+></cookbook-iphone>
+
+<cookbook-example-viewer
+  [html]="outletExample.template"
+  [ts]="outletExample.defaultCodeSnippet"
+></cookbook-example-viewer>
+
+<p>
+  Showing a component on its associated route inside a modal is achieved by configuring the route
+  with a
+  <a href="https://angular.io/api/router/Route#outlet" target="_blank">secondary outlet</a>
+  named
   <strong><code>modal</code></strong>
-  . The URL for these kind of routes will look like this:
-  <strong><code>/(modal:some-route)</code></strong>
-  . This means that you can do flows inside of modals just as "normal" pages, and makes it possible
-  to deeplink to specific pages inside of the modal. "Modal" routes will automatically open up a
-  modal, if none is already opened.
-
-  <cookbook-example-viewer [html]="outletExample.template" [ts]="outletExample.defaultCodeSnippet">
-    <div>
-      <cookbook-modal-example-outlet #outletExample></cookbook-modal-example-outlet>
-    </div>
-  </cookbook-example-viewer>
-
-  <cookbook-code-viewer [ts]="outletExample.modalRouteCodeSnippet"></cookbook-code-viewer>
-  <em>
-    <strong>*Please note:</strong>
-    The main route is the route with the component being presented behind the modal
-  </em>
+  .
 </p>
 <p>
-  These kind of routes can be navigated to by using a
-  <code>kirbyModalRouterLink</code>
-  , and query parameters can be passed by using
-  <code>[kirbyModalQueryParams]</code>
-  <br />
-  <br />
-  <em>
-    <strong>*Please note:</strong>
-    Always use Angular's "box" syntax for binding to the
-    <code>[kirbyModalQueryParams]</code>
-    otherwise it will be treated as a string and not an object literal
-  </em>
-  <cookbook-code-viewer
-    [html]="outletExample.routerLinkForModalOutletCodeSnippet"
-  ></cookbook-code-viewer>
-  Or by injecting
-  <code>ModalController</code>
-  and calling
-  <code>navigateToModal</code>
-  method, where query params can be passed as the second argument and AlertConfig for the
-  alert-on-close can be passed as the third argument:
-  <cookbook-code-viewer
-    [ts]="outletExample.modalControllerForModalOutletCodeSnippet"
-  ></cookbook-code-viewer>
+  Instead of calling the
+  <code>ModalController.showModal()</code>
+  method and passing a
+  <code>ModalConfig</code>
+  , the modal will now be opened simply by navigating to the route. The modal still accepts a
+  <code>ModalConfig</code>
+  , but this is instead provided via a
+  <code>modalConfig</code>
+  object passed as additional route data.
 </p>
+
+<p>
+  You can use the
+  <code>ModalEnabledRoutes</code>
+  type to enable strong typing for the
+  <code>ModalConfig</code>
+  inside the array of routes passed to Angular's
+  <code>RouterModule</code>
+  . This type directly extends the relevant Angular types, so it can be used in place of
+  <code>Routes</code>
+  or
+  <code>Route[]</code>
+  in your applications route configuration.
+</p>
+<cookbook-code-viewer [ts]="outletExample.modalRouteCodeSnippet"></cookbook-code-viewer>
+<p>
+  The URL for these kind of routes will look like this:
+  <strong><code>parent-component-route/(modal:some-child-route)</code></strong>
+  , where the parent component will be presented behind the modal.
+</p>
+
+<p>
+  This means that with deeplinked modals
+  <a
+    [kirbyModalRouterLink]="['/examples', 'modal-route-with-url-param', '1978', 'page1']"
+    [kirbyModalQueryParams]="{ awesomeQueryParam: 'awesome value' }"
+  >
+    like this one
+  </a>
+  we can send the user to a whole new context before showing the modal on top.
+</p>
+
+<cookbook-example-viewer
+  [html]="outletExample.deeplinkedRouterLinkWithUrlParamCodeSnippet"
+></cookbook-example-viewer>
+
+<h3>Navigation</h3>
+
+<p>
+  Modal routes can be navigated to by adding
+  <code>kirbyModalRouterLink</code>
+  to the component's template and optionally pass query parameters with
+  <code>[kirbyModalQueryParams]</code>
+  . Alternatively, to navigate from code you can inject
+  <code>ModalController</code>
+  and call its
+  <code>navigateToModal</code>
+  method, where query params can be passed as the second argument.
+</p>
+
+<p class="comment">
+  <strong>Please note:</strong>
+  Always use Angular's "box" syntax for binding to
+  <code>[kirbyModalQueryParams]</code>
+  otherwise it will be treated as a string and not an object literal.
+</p>
+
+<cookbook-example-viewer
+  [html]="outletExample.routerLinkForModalOutletCodeSnippet"
+  [ts]="outletExample.modalControllerForModalOutletCodeSnippet"
+></cookbook-example-viewer>
+
 <p>
   <strong>Within the child component</strong>
   presented in the modal a regular Angular
@@ -276,10 +330,7 @@
   can be used with a relative path to the sibling modal route, and query params can be passed as
   normal using
   <code>[queryParams]</code>
-  :
-  <cookbook-code-viewer
-    [html]="outletExample.routerLinkWithinModalOutletCodeSnippet"
-  ></cookbook-code-viewer>
+  .
 </p>
 
 <p>
@@ -306,11 +357,12 @@
       relativeTo
     </a>
   </code>
-  param:
-  <cookbook-code-viewer
-    [ts]="outletExample.modalControllerWithinModalOutletCodeSnippet"
-  ></cookbook-code-viewer>
+  param.
 </p>
+<cookbook-example-viewer
+  [html]="outletExample.routerLinkWithinModalOutletCodeSnippet"
+  [ts]="outletExample.modalControllerWithinModalOutletCodeSnippet"
+></cookbook-example-viewer>
 
 <!-- Add back when alert before close is a callback and we want people to use it
   <h2 #alertBeforeClose>
@@ -349,36 +401,33 @@
 <cookbook-code-viewer [ts]="advancedConfigExample.willCloseCodeSnippet"></cookbook-code-viewer>
 
 <h3>Modal closed</h3>
-<p>
-  If you want to be notified when the modal closes, you can pass a callback function.
-  <br />
-  <em>
-    <strong>Please note:</strong>
-    Remember to bind the callback function to the context of the component instance ie.
-    <code>.bind(this)</code>
-    .
-  </em>
-  <cookbook-code-viewer [ts]="advancedConfigExample.callbackCodeSnippet"></cookbook-code-viewer>
+<p>If you want to be notified when the modal closes, you can pass a callback function.</p>
+<p class="comment">
+  <strong>Please note:</strong>
+  Remember to bind the callback function to the context of the component instance ie.
+  <code>.bind(this)</code>
+  .
 </p>
+
+<cookbook-code-viewer [ts]="advancedConfigExample.callbackCodeSnippet"></cookbook-code-viewer>
 
 <h4 #returnData>
   Return data from the modal
   <em>(optional)</em>
   :
 </h4>
-<p>
-  If you need to obtain data back from the modal, you can pass a callback function.
-  <br />
-  <em>
-    <strong>Please note:</strong>
-    Remember to bind the callback function to the context of the component instance ie.
-    <code>.bind(this)</code>
-    .
-  </em>
-  <cookbook-code-viewer
-    [ts]="advancedConfigExample.callbackWithDataCodeSnippet"
-  ></cookbook-code-viewer>
+<p>If you need to obtain data back from the modal, you can pass a callback function.</p>
+
+<p class="comment">
+  <strong>Please note:</strong>
+  Remember to bind the callback function to the context of the component instance ie.
+  <code>.bind(this)</code>
+  .
 </p>
+
+<cookbook-code-viewer
+  [ts]="advancedConfigExample.callbackWithDataCodeSnippet"
+></cookbook-code-viewer>
 
 <h2 #scrolling>Scrolling</h2>
 <p>
