@@ -12,7 +12,7 @@ const getColor = DesignTokenHelper.getColor;
 const getTextColor = DesignTokenHelper.getTextColor;
 const fatFingerSize = DesignTokenHelper.fatFingerSize();
 const checkboxIconSize = size('m');
-const checkboxSizeXs = size('l');
+const checkboxSizeXs = size('m');
 const checkboxSizeSm = fatFingerSize;
 const checkboxSizeMd = size('xxxl');
 
