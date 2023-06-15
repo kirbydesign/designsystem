@@ -3,6 +3,11 @@
 :host {
   display: flex;
   position: relative;
+  gap: utils.size('xxs');
+
+  @include utils.slotted('button[kirby-button]') {
+    margin: 0;
+  }
 }
 
 :host(.align-end) {
@@ -19,7 +24,6 @@
 }
 
 kirby-dropdown {
-  margin: 4px;
   display: none;
   z-index: 1;
 }
