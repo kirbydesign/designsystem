@@ -123,6 +123,18 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
 
           padding-top: $vertical-padding;
           padding-bottom: $vertical-padding;
+
+          @if $size == 'xs' {
+            // Differentiate XS checkbox padding and styling
+            align-items: center;
+            padding-top: 0;
+            padding-bottom: 0;
+            font-size: 14px;
+
+            ion-checkbox {
+              --size: 16px;
+            }
+          }
         }
       }
     }
