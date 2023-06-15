@@ -124,6 +124,14 @@ describe('HeaderComponent', () => {
         'font-size': `${valueUnitFontSize}px`,
       });
     });
+
+    it(`should have correct title margin`, () => {
+      const keyElement = spectator.query('h1.title');
+
+      expect(keyElement).toHaveComputedStyle({
+        'margin-bottom': '0px',
+      });
+    });
   });
 
   describe('with avatar', () => {
