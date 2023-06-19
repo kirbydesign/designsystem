@@ -116,6 +116,18 @@ table.kirby-table {
     color: utils.get-text-color('black');
     vertical-align: middle;
   }
+
+  & .text-align-left {
+    text-align: left;
+  }
+
+  & .text-align-center {
+    text-align: center;
+  }
+
+  & .text-align-right {
+    text-align: right;
+  }
 }
 
 kirby-card table.kirby-table {
