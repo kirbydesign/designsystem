@@ -233,6 +233,7 @@ export class PageComponent
   @Output() leave = new EventEmitter<void>();
   @Output() refresh = new EventEmitter<PullToRefreshEvent>();
   @Output() backButtonClick = new EventEmitter<Event>();
+  @Output() toolbarTitleClick = new EventEmitter<PointerEvent>();
 
   @ViewChild(IonContent, { static: true }) private content?: IonContent;
   @ViewChild(IonContent, { static: true, read: ElementRef })
@@ -289,7 +290,6 @@ export class PageComponent
   stickyContentTemplate: TemplateRef<PageStickyContentDirective>;
   headerActionsTemplate: TemplateRef<HeaderActionsDirective>;
   titleActionIconTemplate: TemplateRef<HeaderTitleActionIconDirective>;
-  headerTitleClick?: EventEmitter<PointerEvent>;
   hasInteractiveTitle = false;
 
   private titleIntersectionObserver?: IntersectionObserver;
@@ -457,7 +457,11 @@ export class PageComponent
   }
 
   onTitleClick(event: PointerEvent) {
-    this.headerTitleClick?.emit(event);
+    if (this.toolbarTitleClick.observed) {
+      this.toolbarTitleClick.emit(event);
+    } else {
+      this.header?.titleClick.emit(event);
+    }
   }
 
   private removeWrapper() {
@@ -543,7 +547,6 @@ export class PageComponent
       this.titleActionIconTemplate = this.header.titleActionIconTemplate;
       if (this.header.titleClick.observed) {
         this.hasInteractiveTitle = true;
-        this.headerTitleClick = this.header.titleClick;
       }
     }
   }
@@ -583,6 +586,10 @@ export class PageComponent
       : typeof this.toolbarTitle === 'string'
         ? this.simpleToolbarTitleTemplate
         : defaultTitleTemplate;
+
+    if (this.toolbarTitleClick.observed) {
+      this.hasInteractiveTitle = true;
+    }
   }
 
   private observeTitle() {
