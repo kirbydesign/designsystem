@@ -3,20 +3,6 @@
     Data Tables allow the consumer to show large amounts of complex data in tabular form, with rows
     and columns. Columns can be named through the use of headers.
   </p>
-  <p>
-    <i>
-      <strong>Please note:</strong>
-      Kirby data table is very modular. This means that it lacks a number of features and all uses
-      should be thoroughly aligned with a designer before use (use the corresponding design
-      guidelines).
-    </i>
-  </p>
-  Prominent features that are missing include:
-  <ul>
-    <li>Built in responsivity (i.e., no scroll/collapsible columns/etc.)</li>
-    <li>Draggable rown</li>
-    <li>Built in simple sort</li>
-  </ul>
 
   <h2>Data table with minimal data</h2>
   <cookbook-example-viewer [html]="dataTableDefaultExample.template">
@@ -32,7 +18,17 @@
   </cookbook-example-viewer>
 
   <h2>Sortable table</h2>
-  <p>Data table wrapped with card, and sorting on header press.</p>
+  <p>
+    Data table wrapped with card, and sorting on header press. We recommend to visit the
+    <a
+      href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#sorting_array_of_objects"
+      class="kirby-external-icon"
+      target="_blank"
+    >
+      MDN docs
+    </a>
+    on sorting, if you're performing client side sorting.
+  </p>
   <cookbook-example-viewer [html]="dataTableSortableExample.template">
     <cookbook-data-table-sortable-example
       #dataTableSortableExample
@@ -40,15 +36,14 @@
   </cookbook-example-viewer>
 
   <p>
-    By adding
+    Please note that the Kirby data table does not do any sorting. The sorting logic must be
+    implemented manually and can be triggered by adding the Angular
+    <code>(click)</code>
+    event listener as shown in the code example above. By adding
     <code>[sortable]="true"</code>
     to a
     <code>th</code>
-    element, it will automatically render the sorting icon (up/down arrow). Please note that the
-    Kirby data table does not do any sorting, but renders the UI associated with sorting. The
-    sorting logic must be implemented manually and can be triggered by adding the Angular
-    <code>(click)</code>
-    event listener as shown in the code example above.
+    element, it will render the sorting icon (up/down arrow) when the element is clicked.
   </p>
 </div>
 
