@@ -11,14 +11,14 @@ export interface Person {
 
 export interface Heading {
   title: string;
-  sortable: boolean;
+  sortable?: boolean;
   sortDirection?: 'asc' | 'desc';
-  textAlignment: 'start' | 'center' | 'end';
-  iconAlignment: 'start' | 'end';
-  active: boolean;
+  textAlignment?: 'start' | 'center' | 'end';
+  iconAlignment?: 'start' | 'end';
+  active?: boolean;
 }
 
-export const table_example_heading_data: Heading[] = [
+export const tableExampleHeadingData: Heading[] = [
   {
     title: 'Name',
     sortable: true,
@@ -29,43 +29,18 @@ export const table_example_heading_data: Heading[] = [
   },
   {
     title: 'Eyes',
-    sortable: false,
-    sortDirection: 'asc',
-    textAlignment: 'start',
-    iconAlignment: 'end',
-    active: false,
   },
   {
     title: 'Gender',
-    sortable: false,
-    sortDirection: 'asc',
-    textAlignment: 'start',
-    iconAlignment: 'end',
-    active: false,
   },
   {
     title: 'Hair',
-    sortable: false,
-    sortDirection: 'asc',
-    textAlignment: 'start',
-    iconAlignment: 'end',
-    active: false,
   },
   {
     title: 'Skin',
-    sortable: false,
-    sortDirection: 'asc',
-    textAlignment: 'start',
-    iconAlignment: 'end',
-    active: false,
   },
   {
     title: 'Birth year',
-    sortable: false,
-    sortDirection: 'asc',
-    textAlignment: 'start',
-    iconAlignment: 'end',
-    active: false,
   },
   {
     title: 'Height (cm)',
@@ -85,7 +60,7 @@ export const table_example_heading_data: Heading[] = [
   },
 ];
 
-export const table_example_data: Person[] = [
+export const tableExampleData: Person[] = [
   {
     name: 'Luke Skywalker',
     height: '172',

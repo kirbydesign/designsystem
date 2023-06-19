@@ -1,10 +1,5 @@
 import { Component } from '@angular/core';
-import {
-  Heading,
-  Person,
-  table_example_data,
-  table_example_heading_data,
-} from '../table_example_data';
+import { Heading, Person, tableExampleData, tableExampleHeadingData } from '../table_example_data';
 
 const config = {
   selector: 'cookbook-data-table-sortable-example',
@@ -46,8 +41,8 @@ const config = {
   template: config.template,
 })
 export class DataTableSortableExampleComponent {
-  tableData: Person[] = table_example_data;
-  headings: Heading[] = table_example_heading_data;
+  tableData: Person[] = tableExampleData;
+  headings: Heading[] = tableExampleHeadingData;
   template: string = config.template;
 
   onClickSort(index: number) {

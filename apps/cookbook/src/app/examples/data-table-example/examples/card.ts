@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ToastController } from '@kirbydesign/designsystem';
-import { Person, table_example_data } from '../table_example_data';
+import { Person, tableExampleData } from '../table_example_data';
 
 const config = {
   selector: 'cookbook-data-table-card-example',
@@ -39,7 +39,7 @@ const config = {
   template: config.template,
 })
 export class DataTableCardExampleComponent {
-  tableData: Person[] = [...table_example_data];
+  tableData: Person[] = [...tableExampleData];
   template: string = config.template;
 
   constructor(private toastController: ToastController) {}

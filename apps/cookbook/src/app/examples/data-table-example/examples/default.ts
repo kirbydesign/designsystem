@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Person, table_example_data } from '../table_example_data';
+import { Person, tableExampleData } from '../table_example_data';
 
 const config = {
   selector: 'cookbook-data-table-default-example',
@@ -27,5 +27,5 @@ const config = {
 })
 export class DataTableDefaultExampleComponent {
   template: string = config.template;
-  tableData: Person[] = table_example_data.slice(0, 3);
+  tableData: Person[] = tableExampleData.slice(0, 3);
 }
