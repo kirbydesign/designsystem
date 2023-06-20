@@ -46,7 +46,7 @@ describe('TableSortableComponent', () => {
     it('should render a text, when sortable is false', () => {
       spectator.setInput('sortable', false);
 
-      expect(spectator.element.firstChild.nodeName).toBe('#text');
+      expect(spectator.element.firstChild.nodeType).toBe(Node.TEXT_NODE);
     });
   });
 
@@ -85,7 +85,7 @@ describe('TableSortableComponent', () => {
   });
 
   describe('align', () => {
-    it('should apply the "align-start" class if align is set to "start"', () => {
+    it('should apply "justify-content: flex-start" if align is set to "start"', () => {
       spectator.setInput('alignment', 'start');
 
       const button = spectator.query('button');
@@ -95,7 +95,7 @@ describe('TableSortableComponent', () => {
       });
     });
 
-    it('should apply the "align-center" class if align is set to "center"', () => {
+    it('should apply "justify-content: center" if align is set to "start"', () => {
       spectator.setInput('alignment', 'center');
 
       const button = spectator.query('button');
@@ -105,7 +105,7 @@ describe('TableSortableComponent', () => {
       });
     });
 
-    it('should apply the "align-end" class if align is set to "end"', () => {
+    it('should apply "justify-content: flex-end" if align is set to "start"', () => {
       spectator.setInput('alignment', 'end');
 
       const button = spectator.query('button');
