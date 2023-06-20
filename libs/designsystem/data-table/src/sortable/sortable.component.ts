@@ -26,17 +26,17 @@ export class TableSortableComponent implements AfterViewInit {
 
   @Input() active = false;
 
-  @Input() sortDirection: 'asc' | 'desc';
+  @Input() sortDirection: 'asc' | 'desc' = 'asc';
   @Input() iconAlignment: 'start' | 'end' = 'end';
-  @Input() textAlignment: 'start' | 'center' | 'end' = 'start';
+  @Input() alignment: 'start' | 'center' | 'end' = 'start';
 
   @HostBinding('class.active')
   get isActive() {
-    return this.active && this.sortable;
+    return this.sortable && this.active;
   }
 
-  _getButtonClass() {
-    return `align-${this.textAlignment}`;
+  _getAlignmentClass() {
+    return `align-${this.alignment}`;
   }
 
   @ViewChild('span') spanElement: ElementRef;
