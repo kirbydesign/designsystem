@@ -9,6 +9,7 @@ import {
   Input,
   NgZone,
   OnDestroy,
+  Renderer2,
   ViewChild,
 } from '@angular/core';
 import { Placement } from '@floating-ui/dom';
@@ -23,6 +24,7 @@ import {
   PortalOutletConfig,
   TriggerEvent,
 } from '@kirbydesign/designsystem/shared/floating';
+import { EventListenerDisposeFn } from '@kirbydesign/designsystem/types';
 
 @Component({
   selector: 'kirby-menu',
@@ -36,7 +38,8 @@ export class MenuComponent implements AfterViewInit, OnDestroy {
   constructor(
     private cdf: ChangeDetectorRef,
     private elementRef: ElementRef<HTMLElement>,
-    private zone: NgZone
+    private zone: NgZone,
+    private renderer: Renderer2
   ) {}
 
   @Input() public isDisabled: boolean = false;
@@ -83,22 +86,23 @@ export class MenuComponent implements AfterViewInit, OnDestroy {
 
   public FloatingOffset: typeof FloatingOffset = FloatingOffset;
 
+  private scrollListenerDisposeFn: EventListenerDisposeFn;
+
   public ngAfterViewInit(): void {
     this.cdf.detectChanges(); // Sets the updated reference for kirby-floating
 
     this.zone.runOutsideAngular(() => {
-      document.addEventListener('ionScroll', this.hideMenuOnScroll);
+      /*
+       * Listen for ionScroll outside of Angular's change detection to
+       * avoid a change detection cycle for every scroll-event fired
+       */
+      this.scrollListenerDisposeFn = this.renderer.listen(document, 'ionScroll', () => {
+        this.floatingDirective.hide();
+      });
     });
   }
 
   ngOnDestroy(): void {
-    console.log('Destroying menu');
-
-    document.removeEventListener('ionScroll', this.hideMenuOnScroll);
-  }
-
-  // document.removeEventListener needs the exact same event handler & options reference:
-  private hideMenuOnScroll() {
-    this.floatingDirective.hide();
+    this.scrollListenerDisposeFn();
   }
 }
