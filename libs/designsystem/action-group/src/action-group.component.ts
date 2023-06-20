@@ -17,7 +17,9 @@ import {
   ViewChild,
 } from '@angular/core';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
-import { DropdownComponent, DropdownModule } from '@kirbydesign/designsystem/dropdown';
+import { DropdownModule } from '@kirbydesign/designsystem/dropdown';
+import { ItemModule } from '@kirbydesign/designsystem/item';
+import { MenuComponent } from '@kirbydesign/designsystem/menu';
 
 export type ActionGroupConfig = {
   isCondensed?: boolean;
@@ -31,7 +33,7 @@ type CollapsedAction = { button: HTMLButtonElement; text: string };
 @Component({
   selector: 'kirby-action-group',
   standalone: true,
-  imports: [CommonModule, ButtonComponent, DropdownModule],
+  imports: [CommonModule, ButtonComponent, ItemModule, MenuComponent, DropdownModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './action-group.component.html',
   styleUrls: ['./action-group.component.scss'],
@@ -48,13 +50,9 @@ export class ActionGroupComponent implements AfterContentInit, OnChanges {
   @ContentChildren(ButtonComponent) private buttons?: QueryList<ButtonComponent>;
   @ViewChild('hiddenLayer', { read: ElementRef, static: true })
   private hiddenLayer!: ElementRef<HTMLElement>;
-  /*
-   * TEMPORARY MORE-MENU
-   * dropdown ViewChild is only used for temporary more-menu
-   */
-  @ViewChild(DropdownComponent) private dropdown!: DropdownComponent;
-  @ViewChild(DropdownComponent, { read: ElementRef, static: true })
-  private dropdownElement!: ElementRef<HTMLElement>;
+
+  @ViewChild(MenuComponent, { read: ElementRef, static: true })
+  private menuElement!: ElementRef<HTMLElement>;
 
   @HostBinding('class.is-collapsed')
   _isCollapsed: boolean;
@@ -100,9 +98,6 @@ export class ActionGroupComponent implements AfterContentInit, OnChanges {
   }
 
   onActionSelect(action: CollapsedAction) {
-    // Dropdown should not persist selected item, we want it to be re-selectable
-    this.dropdown.selectedIndex = -1;
-
     const event = new PointerEvent('click', {
       bubbles: true,
       cancelable: true,
@@ -147,7 +142,7 @@ export class ActionGroupComponent implements AfterContentInit, OnChanges {
       this.renderer.insertBefore(
         this.elementRef.nativeElement,
         button.nativeElement,
-        this.dropdownElement.nativeElement
+        this.menuElement.nativeElement
       );
     });
 
