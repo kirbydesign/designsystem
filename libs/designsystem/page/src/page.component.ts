@@ -195,6 +195,13 @@ export class PageContentComponent {}
   template: `
     <ng-content select="button[kirby-button]"></ng-content>
   `,
+  styles: [
+    `
+      :host ::ng-deep > button[kirby-button] {
+        margin: 0;
+      }
+    `,
+  ],
 })
 export class PageActionsComponent {}
 

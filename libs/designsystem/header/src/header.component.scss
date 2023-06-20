@@ -94,6 +94,8 @@
 
 .actions {
   margin-top: utils.size('m');
+  margin-left: utils.size('xxs');
+  margin-right: utils.size('xxs');
 
   @include utils.media('<medium') {
     // Hide actions on small screens when not emphasized:
@@ -108,10 +110,9 @@
 @include utils.media('>=medium') {
   :host(:not(.single-column)) {
     .actions {
-      // kirby-button already has 4px horizontal margin, so add additional 4px to get 8px in total:
-      margin: 0 utils.size('xxxs');
       display: flex;
       justify-content: flex-end;
+      margin-top: 0;
     }
   }
 }
