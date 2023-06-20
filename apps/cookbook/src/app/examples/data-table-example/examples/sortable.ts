@@ -11,7 +11,7 @@ const config = {
           [sortable]="heading.sortable"  
           [sortDirection]="heading.sortDirection"
           [iconAlignment]="heading.iconAlignment"
-          [textAlignment]="heading.textAlignment"
+          [alignment]="heading.textAlignment"
           [active]="heading.active"
           (click)="onClickSort(i)"
         >
