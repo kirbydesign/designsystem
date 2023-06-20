@@ -13,7 +13,7 @@ const config = {
           [iconAlignment]="heading.iconAlignment"
           [alignment]="heading.textAlignment"
           [active]="heading.active"
-          (click)="onClickSort(i)"
+          (click)="sortData(i, heading.title)"
         >
          {{heading.title}}
         </th>
@@ -45,24 +45,24 @@ export class DataTableSortableExampleComponent {
   headings: Heading[] = tableExampleHeadingData;
   template: string = config.template;
 
-  onClickSort(index: number) {
+  sortData(index: number, headingTitle: string) {
     this.headings[index].active = this._activeHelper(index);
 
     this.headings[index].sortDirection =
       this.headings[index].sortDirection == 'asc' ? 'desc' : 'asc';
 
     this.tableData.sort((personA: Person, personB: Person) => {
-      switch (index) {
-        case 0:
+      switch (headingTitle) {
+        case 'Name':
           return this._sortHelper(personA.name, personB.name, this.headings[index].sortDirection);
-        case 6:
+        case 'Height (cm)':
           return this._sortHelper(
-            +personA.height,
-            +personB.height,
+            personA.height,
+            personB.height,
             this.headings[index].sortDirection
           );
-        case 7:
-          return this._sortHelper(+personA.mass, +personB.mass, this.headings[index].sortDirection);
+        case 'Weight (kg)':
+          return this._sortHelper(personA.mass, personB.mass, this.headings[index].sortDirection);
       }
     });
   }

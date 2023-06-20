@@ -5,8 +5,8 @@ export interface Person {
   hair_color: string;
   skin_color: string;
   birth_year: string;
-  height: string;
-  mass: string;
+  height: number;
+  mass: number;
 }
 
 export interface Heading {
@@ -63,8 +63,8 @@ export const tableExampleHeadingData: Heading[] = [
 export const tableExampleData: Person[] = [
   {
     name: 'Luke Skywalker',
-    height: '172',
-    mass: '77',
+    height: 172,
+    mass: 77,
     hair_color: 'blond',
     skin_color: 'fair',
     eye_color: 'blue',
@@ -73,8 +73,8 @@ export const tableExampleData: Person[] = [
   },
   {
     name: 'C-3PO',
-    height: '167',
-    mass: '75',
+    height: 167,
+    mass: 75,
     hair_color: 'n/a',
     skin_color: 'gold',
     eye_color: 'yellow',
@@ -83,8 +83,8 @@ export const tableExampleData: Person[] = [
   },
   {
     name: 'R2-D2',
-    height: '96',
-    mass: '32',
+    height: 96,
+    mass: 32,
     hair_color: 'n/a',
     skin_color: 'white, blue',
     eye_color: 'red',
@@ -93,8 +93,8 @@ export const tableExampleData: Person[] = [
   },
   {
     name: 'Darth Vader',
-    height: '202',
-    mass: '136',
+    height: 202,
+    mass: 136,
     hair_color: 'none',
     skin_color: 'white',
     eye_color: 'yellow',
@@ -103,8 +103,8 @@ export const tableExampleData: Person[] = [
   },
   {
     name: 'Leia Organa',
-    height: '150',
-    mass: '49',
+    height: 150,
+    mass: 49,
     hair_color: 'brown',
     skin_color: 'light',
     eye_color: 'brown',
@@ -113,8 +113,8 @@ export const tableExampleData: Person[] = [
   },
   {
     name: 'Obi-Wan Kenobi',
-    height: '182',
-    mass: '77',
+    height: 182,
+    mass: 77,
     hair_color: 'auburn, white',
     skin_color: 'fair',
     eye_color: 'blue-gray',
