@@ -2,7 +2,6 @@ import { MockComponent } from 'ng-mocks';
 import { createHostFactory, Spectator } from '@ngneat/spectator';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
-import { TableComponent } from '../table/table.component';
 import { TableSortableComponent } from './sortable.component';
 
 const getFontWeight = DesignTokenHelper.fontWeight;
@@ -12,16 +11,28 @@ describe('TableSortableComponent', () => {
 
   const createHost = createHostFactory({
     component: TableSortableComponent,
-    declarations: [MockComponent(TableComponent), MockComponent(IconComponent)],
+    declarations: [MockComponent(IconComponent)],
   });
 
   beforeEach(() => {
-    spectator = createHost(`<th [sortable]="true">Data1</th>`);
+    spectator = createHost(`
+    <table class="kirby-table">
+      <th [sortable]="true">Data1</th>
+    </table>
+    `);
   });
 
   describe('by default', () => {
     it('should create', () => {
       expect(spectator.component).toBeTruthy();
+    });
+
+    it('should hide the sorting icon', () => {
+      const icon = spectator.query('kirby-icon');
+
+      expect(icon).toHaveComputedStyle({
+        visibility: 'hidden',
+      });
     });
   });
 
@@ -32,12 +43,10 @@ describe('TableSortableComponent', () => {
       expect(button).toBeTruthy();
     });
 
-    it('should render a span, when sortable is false', () => {
+    it('should render a text, when sortable is false', () => {
       spectator.setInput('sortable', false);
 
-      const span = spectator.query('span');
-
-      expect(span).toBeTruthy();
+      expect(spectator.element.firstChild.nodeName).toBe('#text');
     });
   });
 
@@ -47,7 +56,7 @@ describe('TableSortableComponent', () => {
 
       const icon = spectator.query('kirby-icon');
 
-      expect(icon.attributes['name'].value).toBe('arrow-up-fill');
+      expect(icon.attributes.getNamedItem('ng-reflect-name').value).toBe('arrow-up-fill');
     });
 
     it('should render an "arrow-down" icon, when sortDirection is "desc"', () => {
@@ -55,15 +64,15 @@ describe('TableSortableComponent', () => {
 
       const icon = spectator.query('kirby-icon');
 
-      expect(icon.attributes['name'].value).toBe('arrow-down-fill');
+      expect(icon.attributes.getNamedItem('ng-reflect-name').value).toBe('arrow-down-fill');
     });
   });
 
   describe('when active', () => {
-    it('should get the "header-active" class when active is set to true', () => {
+    it('should get the "active" class when the active input is set to true', () => {
       spectator.setInput('active', true);
 
-      expect(spectator.element).toHaveClass('header-active');
+      expect(spectator.element).toHaveClass('active');
     });
 
     it('should make the text bold', () => {
@@ -75,29 +84,35 @@ describe('TableSortableComponent', () => {
     });
   });
 
-  describe('textAlign', () => {
-    it('should apply the "button-content-start" class if textAlignment is set to "start"', () => {
-      spectator.setInput('textAlignment', 'start');
+  describe('align', () => {
+    it('should apply the "align-start" class if align is set to "start"', () => {
+      spectator.setInput('alignment', 'start');
 
       const button = spectator.query('button');
 
-      expect(button).toHaveClass('button-content-start');
+      expect(button).toHaveComputedStyle({
+        'justify-content': 'flex-start',
+      });
     });
 
-    it('should apply the "button-content-center" class if textAlignment is set to "center"', () => {
-      spectator.setInput('textAlignment', 'center');
+    it('should apply the "align-center" class if align is set to "center"', () => {
+      spectator.setInput('alignment', 'center');
 
       const button = spectator.query('button');
 
-      expect(button).toHaveClass('button-content-center');
+      expect(button).toHaveComputedStyle({
+        'justify-content': 'center',
+      });
     });
 
-    it('should apply the "button-content-end" class if textAlignment is set to "end"', () => {
-      spectator.setInput('textAlignment', 'end');
+    it('should apply the "align-end" class if align is set to "end"', () => {
+      spectator.setInput('alignment', 'end');
 
       const button = spectator.query('button');
 
-      expect(button).toHaveClass('button-content-end');
+      expect(button).toHaveComputedStyle({
+        'justify-content': 'flex-end',
+      });
     });
   });
 });
