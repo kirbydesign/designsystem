@@ -35,8 +35,16 @@ export class TableSortableComponent implements AfterViewInit {
     return this.sortable && this.active;
   }
 
-  _getAlignmentClass() {
-    return `align-${this.alignment}`;
+  _getAlignmentClasses() {
+    const alignmentClasses: string[] = [];
+
+    if (this.iconAlignment === 'start') {
+      alignmentClasses.push('row-reverse');
+    }
+
+    alignmentClasses.push(`align-${this.alignment}`);
+
+    return alignmentClasses;
   }
 
   @ViewChild('span') spanElement: ElementRef;

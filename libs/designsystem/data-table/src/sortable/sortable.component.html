@@ -1,20 +1,14 @@
-<span *ngIf="!sortable; else sortableTemplate">
+<ng-container *ngIf="!sortable; else sortableTemplate">
   <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
-</span>
+</ng-container>
 
 <ng-template #sortableTemplate>
-  <button [ngClass]="_getButtonClass()">
-    <ng-container *ngIf="iconAlignment === 'start'; then iconTemplate"></ng-container>
+  <button [ngClass]="_getAlignmentClasses()">
     <span #span><ng-container *ngTemplateOutlet="contentTemplate"></ng-container></span>
-    <ng-container *ngIf="iconAlignment === 'end'; then iconTemplate"></ng-container>
+    <kirby-icon [name]="sortDirection === 'asc' ? 'arrow-up-fill' : 'arrow-down-fill'"></kirby-icon>
   </button>
 </ng-template>
 
 <ng-template #contentTemplate>
   <ng-content></ng-content>
-</ng-template>
-
-<ng-template #iconTemplate>
-  <kirby-icon name="arrow-down-fill" *ngIf="sortDirection === 'desc'"></kirby-icon>
-  <kirby-icon name="arrow-up-fill" *ngIf="sortDirection === 'asc'"></kirby-icon>
 </ng-template>
