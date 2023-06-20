@@ -289,4 +289,72 @@ describe('HeaderComponent', () => {
       });
     });
   });
+
+  describe('with actions', () => {
+    let spectator: Spectator<HeaderComponent>;
+    beforeEach(() => {
+      spectator = createHost(`
+      <kirby-header title="title" subtitle1="subtitle one" subtitle2="subtitle two">
+        <kirby-action-group *kirbyHeaderActions>
+          <button kirby-button>Action 1</button>
+          <button kirby-button>Action 2</button>
+        </kirby-action-group>
+      </kirby-header>
+      `);
+    });
+
+    it('should render and show the action group', () => {
+      const actionGroup: HTMLElement = spectator.query('.actions kirby-action-group');
+      expect(actionGroup).toBeTruthy();
+      expect(actionGroup).toBeVisible();
+    });
+
+    it(`should have correct margins`, () => {
+      const actionsWrapper: HTMLElement = spectator.query('.actions');
+
+      expect(actionsWrapper).toHaveComputedStyle({
+        'margin-bottom': '0px',
+        'margin-top': '0px',
+        'margin-left': size('xxs'),
+        'margin-right': size('xxs'),
+      });
+    });
+
+    describe('on small screens', () => {
+      beforeAll(async () => {
+        await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
+      });
+
+      afterAll(() => {
+        TestHelper.resetTestWindow();
+      });
+
+      it('should hide the action group', () => {
+        const actionGroup: HTMLElement = spectator.query('.actions kirby-action-group');
+        expect(actionGroup).toBeHidden();
+      });
+
+      describe('with emphasizeActions=true', () => {
+        beforeEach(() => {
+          spectator.component.emphasizeActions = true;
+          spectator.detectComponentChanges();
+        });
+
+        it('should show the action group', () => {
+          const actionGroup: HTMLElement = spectator.query('.actions kirby-action-group');
+          expect(actionGroup).toBeVisible();
+        });
+
+        it(`should have correct margins`, () => {
+          const actionsWrapper: HTMLElement = spectator.query('.actions');
+          expect(actionsWrapper).toHaveComputedStyle({
+            'margin-bottom': '0px',
+            'margin-top': size('m'),
+            'margin-left': size('xxs'),
+            'margin-right': size('xxs'),
+          });
+        });
+      });
+    });
+  });
 });
