@@ -7,10 +7,10 @@ import {
 } from '@angular/core';
 
 const KIRBY_TABLE_DEPRECATION_WARNING =
-  'Deprecation warning: The support for "kirby-table" as a directive will be removed in a future release of Kirby designsystem. We recommend to use the CSS class "kirby-table".';
+  'Deprecation warning: The support for "kirby-table" as a directive will be removed in the next major version. We recommend to use the global CSS class "kirby-table".';
 
 const KIRBY_TABLE_LAYOUT_FIXED_DEPRECATION_WARNING =
-  'Deprecation warning: The "kirby-table" support for using the input property "fixedLayout" will be removed in a future release of Kirby designsystem. We recommend to use the CSS class "layout-fixed" in combination with the "kirby-table" class';
+  'Deprecation warning: The "kirby-table" support for using the input property "fixedLayout" will be removed in the next major version. We recommend to use the global CSS class "layout-fixed" in combination with the "kirby-table" class';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector

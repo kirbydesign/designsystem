@@ -7,10 +7,10 @@ import {
 } from '@angular/core';
 
 const KIRBY_TABLE_ROW_DEPRECATION_WARNING =
-  'Deprecation warning: The support for "kirby-tr" as a directive will be removed in a future release of Kirby designsystem. We recommend to use the CSS class "kirby-table", that will automatically style table rows.';
+  'Deprecation warning: The support for "kirby-tr" as a directive will be removed in the next major version. We recommend to use the global CSS class "kirby-table" on your HTML table tag, which will automatically style table rows.';
 
 const KIRBY_TABLE_ROW_SELECTABLE_DEPRECATION_WARNING =
-  'Deprecation warning: The "kirby-tr" support for using the input property "selectable" will be removed in a future release of Kirby designsystem. We recommend to use the CSS class "kirby-selectable-row".';
+  'Deprecation warning: The "kirby-tr" support for using the input property "selectable" will be removed in the next major release. We recommend to use the global CSS class "kirby-selectable-row".';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
