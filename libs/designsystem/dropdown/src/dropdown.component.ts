@@ -237,7 +237,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     return this._kirbyItemsSlotted;
   }
 
-  private itemClickUnlisten: (() => void)[] = [];
+  private itemClickUnlisten: EventListenerDisposeFn[] = [];
   private intersectionObserverRef: IntersectionObserver;
   private showDropdownTimeoutId: ReturnType<typeof setTimeout>;
 
