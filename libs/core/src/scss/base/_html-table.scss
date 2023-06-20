@@ -2,7 +2,7 @@
 @use '../utils';
 
 // Height variables
-$cell-height: 44px;
+$row-height: 44px;
 
 // Color variables
 $divider-color: utils.get-color('medium');
@@ -36,7 +36,7 @@ table.kirby-table {
   }
 
   th {
-    &.sortable-head {
+    &.sortable {
       @include interaction-state.apply-hover {
         background-color: $highlight-color;
       }
@@ -46,13 +46,13 @@ table.kirby-table {
       visibility: hidden;
     }
 
-    &.icon-visible kirby-icon {
-      visibility: visible;
-    }
-
-    &.header-active {
+    &.active {
       color: utils.get-text-color('black');
       font-weight: utils.font-weight('bold');
+
+      & kirby-icon {
+        visibility: visible;
+      }
     }
 
     text-align: left;
@@ -74,7 +74,7 @@ table.kirby-table {
       color: inherit;
       cursor: inherit;
 
-      &.button-content {
+      &.align {
         &-start {
           justify-content: flex-start;
         }
@@ -109,7 +109,7 @@ table.kirby-table {
   }
 
   td {
-    height: $cell-height;
+    height: $row-height;
     padding: utils.size('xxxs') utils.size('s');
     font-weight: utils.font-weight('normal');
     font-size: utils.font-size('s');

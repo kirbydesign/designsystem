@@ -20,25 +20,23 @@ import {
 export class TableSortableComponent implements AfterViewInit {
   constructor(private renderer: Renderer2) {}
 
-  @HostBinding('class.sortable-head')
+  @HostBinding('class.sortable')
   @Input()
   sortable = false;
 
-  @HostBinding('class.icon-visible')
-  @Input()
-  active = false;
+  @Input() active = false;
 
   @Input() sortDirection: 'asc' | 'desc';
   @Input() iconAlignment: 'start' | 'end' = 'end';
   @Input() textAlignment: 'start' | 'center' | 'end' = 'start';
 
-  @HostBinding('class.header-active')
+  @HostBinding('class.active')
   get isActive() {
     return this.active && this.sortable;
   }
 
   _getButtonClass() {
-    return `button-content-${this.textAlignment}`;
+    return `align-${this.textAlignment}`;
   }
 
   @ViewChild('span') spanElement: ElementRef;
