@@ -118,17 +118,17 @@ table.kirby-table {
     font-size: utils.font-size('s');
     color: utils.get-text-color('black');
     vertical-align: middle;
-  }
 
-  & .text-align-left {
-    text-align: left;
-  }
+    &.text-align-left {
+      text-align: left;
+    }
 
-  & .text-align-center {
-    text-align: center;
-  }
+    &.text-align-center {
+      text-align: center;
+    }
 
-  & .text-align-right {
-    text-align: right;
+    &.text-align-right {
+      text-align: right;
+    }
   }
 }
