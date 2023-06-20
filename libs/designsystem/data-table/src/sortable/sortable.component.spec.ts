@@ -85,7 +85,7 @@ describe('TableSortableComponent', () => {
   });
 
   describe('align', () => {
-    it('should apply "justify-content: flex-start" if align is set to "start"', () => {
+    it('should left-align content when align is set to "start"', () => {
       spectator.setInput('alignment', 'start');
 
       const button = spectator.query('button');
@@ -95,7 +95,7 @@ describe('TableSortableComponent', () => {
       });
     });
 
-    it('should apply "justify-content: center" if align is set to "start"', () => {
+    it('should center-align content when align is set to "center"', () => {
       spectator.setInput('alignment', 'center');
 
       const button = spectator.query('button');
@@ -105,7 +105,7 @@ describe('TableSortableComponent', () => {
       });
     });
 
-    it('should apply "justify-content: flex-end" if align is set to "start"', () => {
+    it('should right-align content when align is set to "end"', () => {
       spectator.setInput('alignment', 'end');
 
       const button = spectator.query('button');
