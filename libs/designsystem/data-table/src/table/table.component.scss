@@ -21,12 +21,6 @@ table[kirby-table] {
     &:not(:last-child) {
       border-bottom: $border-bottom;
     }
-
-    &.kirby-selectable-row {
-      @include interaction-state.apply-hover {
-        background-color: $highlight-color;
-      }
-    }
   }
 
   thead tr {
@@ -34,51 +28,11 @@ table[kirby-table] {
   }
 
   th {
-    &.kirby-sortable-head {
-      @include interaction-state.apply-hover {
-        background-color: $highlight-color;
-      }
-    }
-
     text-align: left;
     font-weight: utils.font-weight('normal');
     font-size: utils.font-size('xs');
     color: utils.get-text-color('semi-dark');
     padding: utils.size('xxs') utils.size('s');
-
-    &.align-heading-text {
-      &.start {
-        justify-content: flex-start;
-      }
-
-      &.center {
-        justify-content: center;
-      }
-
-      &.end {
-        justify-content: flex-end;
-      }
-    }
-
-    &.kirby-header-active {
-      color: utils.get-text-color('black');
-    }
-
-    button {
-      text-align: inherit;
-      font-weight: inherit;
-      font-size: inherit;
-      color: inherit;
-      padding: 0;
-      background-color: inherit;
-      cursor: inherit;
-      border: none;
-      height: 100%;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: inherit;
-    }
   }
 
   td {
