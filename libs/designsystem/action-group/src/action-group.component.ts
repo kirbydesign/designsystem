@@ -17,7 +17,6 @@ import {
   ViewChild,
 } from '@angular/core';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
-import { DropdownModule } from '@kirbydesign/designsystem/dropdown';
 import { ItemModule } from '@kirbydesign/designsystem/item';
 import { MenuComponent } from '@kirbydesign/designsystem/menu';
 
@@ -33,7 +32,7 @@ type CollapsedAction = { button: HTMLButtonElement; text: string };
 @Component({
   selector: 'kirby-action-group',
   standalone: true,
-  imports: [CommonModule, ButtonComponent, ItemModule, MenuComponent, DropdownModule],
+  imports: [CommonModule, ButtonComponent, ItemModule, MenuComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './action-group.component.html',
   styleUrls: ['./action-group.component.scss'],
@@ -130,8 +129,8 @@ export class ActionGroupComponent implements AfterContentInit, OnChanges {
     if (this.buttonElements.length <= this.collapseThreshold) return;
 
     this.moveButtons();
-    this.populateDropdown();
-    this.toggleDropdown();
+    this.populateMenu();
+    this.toggleMenu();
   }
 
   private moveButtons() {
@@ -152,12 +151,12 @@ export class ActionGroupComponent implements AfterContentInit, OnChanges {
     });
   }
 
-  private toggleDropdown() {
+  private toggleMenu() {
     const hasHiddenButtons = this.hiddenLayer.nativeElement.childElementCount > 0;
     this._isCollapsed = hasHiddenButtons;
   }
 
-  private populateDropdown() {
+  private populateMenu() {
     const hiddenButtons = Array.from(
       this.hiddenLayer.nativeElement.children
     ) as HTMLButtonElement[];
