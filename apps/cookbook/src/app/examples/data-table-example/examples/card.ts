@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ToastController } from '@kirbydesign/designsystem';
-import { Person, tableExampleData } from '../table_example_data';
+import { Person, tableExampleData } from '../example-data';
 
 const config = {
   selector: 'cookbook-data-table-card-example',

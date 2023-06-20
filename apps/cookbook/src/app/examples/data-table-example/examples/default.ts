@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Person, tableExampleData } from '../table_example_data';
+import { Person, tableExampleData } from '../example-data';
 
 const config = {
   selector: 'cookbook-data-table-default-example',

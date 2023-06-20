@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Heading, Person, tableExampleData, tableExampleHeadingData } from '../table_example_data';
+import { Heading, Person, tableExampleData, tableExampleHeadingData } from '../example-data';
 
 const config = {
   selector: 'cookbook-data-table-sortable-example',
