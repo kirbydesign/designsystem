@@ -6,7 +6,7 @@
     "@angular/cdk": "^15.0.3",
     "@fontsource/roboto": "4.2.1",
     "@ionic/angular": "6.2.1",
-    "@kirbydesign/core": "0.0.50",
+    "@kirbydesign/core": "0.0.51",
     "inputmask": "5.0.5"
   },
   "peerDependencies": {
@@ -21,6 +21,7 @@
     "date-fns": ">=2.21.1",
     "date-fns-tz": ">=1.1.4",
     "rxjs": ">=7.0.0",
+    "swiper": ">=9.2.0",
     "zone.js": ">=0.10.2"
   },
   "exports": {
