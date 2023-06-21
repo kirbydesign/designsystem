@@ -36,7 +36,7 @@ describe('ActionGroupComponent', () => {
     });
 
     it(`should render hidden "more" menu`, () => {
-      const moreMenu = spectator.query('kirby-dropdown');
+      const moreMenu = spectator.query('kirby-menu');
 
       expect(moreMenu).toBeTruthy();
       expect(moreMenu).toBeHidden();
@@ -44,7 +44,7 @@ describe('ActionGroupComponent', () => {
 
     it(`should have correct spacing on buttons`, () => {
       const buttons = spectator.element.querySelectorAll(':scope > button[kirby-button]');
-      const moreMenu = spectator.query('kirby-dropdown');
+      const moreMenu = spectator.query('kirby-menu');
 
       buttons.forEach((btn) =>
         expect(btn).toHaveComputedStyle({
