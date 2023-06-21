@@ -103,8 +103,6 @@ export class MenuComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.scrollListenerDisposeFn() != null) {
-      this.scrollListenerDisposeFn();
-    }
+    this.scrollListenerDisposeFn?.();
   }
 }
