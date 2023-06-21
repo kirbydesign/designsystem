@@ -18,14 +18,13 @@
   visibility: hidden;
 }
 
-kirby-dropdown {
-  margin: 4px;
+kirby-menu {
   display: none;
   z-index: 1;
 }
 
 :host(.is-collapsed) {
-  kirby-dropdown {
+  kirby-menu {
     display: inline-block;
   }
 }
