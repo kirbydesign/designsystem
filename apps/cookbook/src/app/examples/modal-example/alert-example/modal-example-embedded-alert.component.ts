@@ -6,15 +6,27 @@ const config = {
   template: `
     <kirby-page-title>Modal with alert</kirby-page-title>
     <p>
-      This modal will ask the user if they are sure they want to close the modal if they have
-      entered data in any of the form fields.
+      <em>
+        This modal will ask the user if they are sure they want to close the modal if they have
+        entered data in any of the form fields.
+      </em>
     </p>
+
+    <h4>The standard Lorem Ipsum passage, used since the 1500s</h4>
+      <p>
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+        ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+      </p>
+      
     <kirby-form-field>
-      <input kirby-input placeholder="First name" (input)="updateFirstName($event.target.value)" />
+      <input kirby-input placeholder="First name" (input)="firstName =$event.target.value" />
     </kirby-form-field>
 
     <kirby-form-field>
-      <input kirby-input placeholder="Last name" (input)="updateLastName($event.target.value)" />
+      <input kirby-input placeholder="Last name" (input)="lastName = $event.target.value" />
     </kirby-form-field>
   `,
   canDismissCodeSnippet: `// Inside the embedded component
@@ -60,14 +72,6 @@ export class ModalEmbeddedAlertExampleComponent implements OnInit {
 
   ngOnInit() {
     this.modal.canDismiss = () => this.validate();
-  }
-
-  updateFirstName(firstName: string) {
-    this.firstName = firstName;
-  }
-
-  updateLastName(lastName: string) {
-    this.lastName = lastName;
   }
 
   validate() {
