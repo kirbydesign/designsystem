@@ -49,15 +49,16 @@ export class SlidesAdvancedExampleComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const slides = JSON.parse(JSON.stringify(this.slides));
     this.data$ = this.dataSubject$.asObservable();
-    this.dataSubject$.next({
-      slides: JSON.parse(JSON.stringify(this.slides)),
-    });
+    this.dataSubject$.next({ slides });
   }
 
   updateSlides() {
-    this.dataSubject$.next({
-      slides: JSON.parse(JSON.stringify(this.slides)),
-    });
+    const slides = JSON.parse(JSON.stringify(this.slides)).map((slide) => ({
+      ...slide,
+      cardContent: new Date(),
+    }));
+    this.dataSubject$.next({ slides });
   }
 }
