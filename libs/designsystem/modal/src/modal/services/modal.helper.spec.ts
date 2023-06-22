@@ -21,6 +21,7 @@ import {
 import { ModalNavigationService } from '../../modal-navigation.service';
 import { ModalHelper } from './modal.helper';
 import { CanDismissHelper } from './can-dismiss.helper';
+import { AlertHelper } from './alert.helper';
 
 @Component({
   template: `
@@ -104,7 +105,7 @@ describe('ModalHelper', () => {
       ContentOverflowsWithFooterEmbeddedComponent,
       ContentWithNoOverflowEmbeddedComponent,
     ],
-    mocks: [ModalNavigationService, CanDismissHelper],
+    mocks: [ModalNavigationService, CanDismissHelper, AlertHelper],
   });
 
   beforeAll(() => {
