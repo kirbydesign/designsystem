@@ -97,7 +97,7 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes?.slides.firstChange === false) {
+    if (changes.slides?.firstChange === false) {
       this.cdr.detectChanges();
       this.swiperContainer.nativeElement.swiper.updateSlides();
     }
