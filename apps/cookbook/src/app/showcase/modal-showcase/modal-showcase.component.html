@@ -379,7 +379,7 @@
   is being returned, an alert will appear, when the user tries to dismiss the modal. This callback
   can be set on the parent modal from your own embedded component, or be provided to the
   <code>ModalConfig</code>
-  . The callback can be both synchronous and asynchronous. .
+  . The callback can be both synchronous and asynchronous.
 </p>
 
 <cookbook-iphone
@@ -395,9 +395,11 @@
   Inside the embedded component you can set the
   <code>canDismiss</code>
   property on the parent modal. This makes it possible to validate if the modal can be dismissed
-  based on data inside your component.
+  based on the data inside your component.
 </p>
-<cookbook-example-viewer [ts]="alertExample.canDismissCodeSnippet"></cookbook-example-viewer>
+<cookbook-example-viewer
+  [ts]="alertEmbeddedExample.canDismissCodeSnippet"
+></cookbook-example-viewer>
 
 <h4>Modal config</h4>
 <p>

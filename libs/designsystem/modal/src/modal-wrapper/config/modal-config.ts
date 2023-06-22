@@ -26,7 +26,6 @@ export interface ModalConfig {
   // drawer properties
   interactWithBackground?: boolean;
   cssClass?: string | string[];
-  // canDismissConfig?: CanDismissConfig;
 }
 
 /**

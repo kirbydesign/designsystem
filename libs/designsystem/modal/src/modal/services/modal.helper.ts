@@ -74,7 +74,7 @@ export class ModalHelper {
     // It will be replaced by the new 'showAlert' callback.
     if (alertConfig) {
       console.warn(
-        "This way of passing an alertConfig to the modal will be deprecated. We recommend using the 'showAlert' callback instead."
+        "This way of passing an alertConfig to the modal will be deprecated in the next major. We recommend using the 'showAlert' callback instead."
       );
 
       // Remembers the modal dismissal response from user to prevent multiple alerts on

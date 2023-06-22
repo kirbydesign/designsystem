@@ -20,7 +20,7 @@ export class ModalShowcaseComponent {
   advancedConfigExample = ModalExampleAdvancedComponent;
   basicConfigExample = ModalExampleSimpleComponent;
   outletExample = ModalExampleOutletComponent;
-  alertExample = ModalEmbeddedAlertExampleComponent;
+  alertEmbeddedExample = ModalEmbeddedAlertExampleComponent;
   alertModalConfigExample = ModalExampleAlertComponent;
 
   scrollTo(target: Element) {

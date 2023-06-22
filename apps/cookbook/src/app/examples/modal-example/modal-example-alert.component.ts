@@ -11,7 +11,7 @@ const config = {
   codeSnippet: `constructor(private myService: MyService) {}
 
 validate() {
-    if(this.myService.dataIsValid()) return true;
+    if(this.myService.isDataValid()) return true;
 
     const config: AlertConfig = {
         title: 'Data is invalid',
