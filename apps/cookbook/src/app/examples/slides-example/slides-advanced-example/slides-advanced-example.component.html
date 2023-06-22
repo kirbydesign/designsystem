@@ -1,17 +1,19 @@
-<kirby-slides
-  [slidesOptions]="config"
-  [slides]="slides"
-  [showNavigation]="true"
-  [title]="'Title'"
-  (slideChange)="getDataFromActiveSlide($event)"
-  #slidesInstance
->
-  <kirby-card *kirbySlide="let slide; let i = index" [hasPadding]="true">
-    <kirby-card-header [title]="slide.title" [subtitle]="slide.subtitle"></kirby-card-header>
-    <div>{{ slide.cardContent }}</div>
-  </kirby-card>
-  <button kirby-button attentionLevel="3" size="xs" (click)="showAll()">See all</button>
-</kirby-slides>
+<ng-container *ngIf="data$ | async as data">
+  <kirby-slides
+    [slidesOptions]="config"
+    [slides]="data.slides"
+    [showNavigation]="true"
+    [title]="'Title'"
+    (slideChange)="getDataFromActiveSlide($event)"
+    #slidesInstance
+  >
+    <kirby-card *kirbySlide="let slide; let i = index" [hasPadding]="true">
+      <kirby-card-header [title]="slide.title" [subtitle]="slide.subtitle"></kirby-card-header>
+      <div>{{ slide.cardContent }}</div>
+    </kirby-card>
+    <button kirby-button attentionLevel="3" size="xs" (click)="showAll()">See all</button>
+  </kirby-slides>
+</ng-container>
 
 <button
   kirby-button
@@ -19,4 +21,8 @@
   style="display: block; margin: 24px auto 0"
 >
   Activate slide no. 4
+</button>
+
+<button kirby-button (click)="updateSlides()" style="display: block; margin: 24px auto 0">
+  Update slides
 </button>

@@ -1,13 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { KirbySwiperOptions, SelectedSlide } from '@kirbydesign/designsystem/slide';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem/toast';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Component({
   styleUrls: ['../slides-example.shared.scss'],
   templateUrl: './slides-advanced-example.component.html',
 })
-export class SlidesAdvancedExampleComponent {
+export class SlidesAdvancedExampleComponent implements OnInit {
   constructor(private toastController: ToastController) {}
+
+  data$: Observable<any>;
+  dataSubject$: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
   config: KirbySwiperOptions = {
     slidesPerView: 1.1,
@@ -42,5 +46,18 @@ export class SlidesAdvancedExampleComponent {
       durationInMs: 2000,
     };
     this.toastController.showToast(config);
+  }
+
+  ngOnInit(): void {
+    this.data$ = this.dataSubject$.asObservable();
+    this.dataSubject$.next({
+      slides: JSON.parse(JSON.stringify(this.slides)),
+    });
+  }
+
+  updateSlides() {
+    this.dataSubject$.next({
+      slides: JSON.parse(JSON.stringify(this.slides)),
+    });
   }
 }

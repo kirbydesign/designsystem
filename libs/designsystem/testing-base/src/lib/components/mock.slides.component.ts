@@ -17,7 +17,7 @@ export class MockSlidesComponent {
   @Input() slides: any[];
   @Output() selectedSlide = new EventEmitter<any>();
 
-  slideTo() {
+  slideTo(number: number) {
     // NOOP
   }
 }
