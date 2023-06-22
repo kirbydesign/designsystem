@@ -1,13 +1,16 @@
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ContentChild,
   ElementRef,
   EventEmitter,
   Input,
+  OnChanges,
   OnInit,
   Output,
+  SimpleChanges,
   TemplateRef,
   ViewChild,
 } from '@angular/core';
@@ -39,8 +42,8 @@ type SwiperContainer = HTMLElement & { initialize: () => void; swiper: Swiper };
   styleUrls: ['./slides.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SlidesComponent implements OnInit, AfterViewInit {
-  constructor(private platform: PlatformService) {}
+export class SlidesComponent implements OnInit, AfterViewInit, OnChanges {
+  constructor(private platform: PlatformService, private cdr: ChangeDetectorRef) {}
 
   @ViewChild('swiperContainer') swiperContainer: ElementRef<SwiperContainer>;
   @ContentChild(SlideDirective, { static: true, read: TemplateRef })
@@ -91,6 +94,13 @@ export class SlidesComponent implements OnInit, AfterViewInit {
 
   public slideTo(index: number) {
     this.swiperContainer.nativeElement.swiper.slideTo(index);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.slides?.firstChange === false) {
+      this.cdr.detectChanges();
+      this.swiperContainer.nativeElement.swiper.updateSlides();
+    }
   }
 
   private getDefaultConfig(): KirbySwiperOptions {
