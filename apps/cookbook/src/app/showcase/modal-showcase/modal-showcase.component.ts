@@ -2,11 +2,13 @@ import { Component } from '@angular/core';
 import { ModalExampleAdvancedComponent } from '~/app/examples/modal-example/modal-example-advanced.component';
 import { ModalExampleOutletComponent } from '~/app/examples/modal-example/modal-example-outlet.component';
 import { ModalExampleSimpleComponent } from '~/app/examples/modal-example/modal-example-simple.component';
+import { ModalExampleAlertComponent } from '~/app/examples/modal-example/modal-example-alert.component';
 import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
 import {
   ApiDescriptionProperty,
   ApiDescriptionPropertyColumns,
 } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ModalEmbeddedAlertExampleComponent } from '~/app/examples/modal-example/alert-example/modal-example-embedded-alert.component';
 
 @Component({
   selector: 'cookbook-modal-showcase',
@@ -18,6 +20,8 @@ export class ModalShowcaseComponent {
   advancedConfigExample = ModalExampleAdvancedComponent;
   basicConfigExample = ModalExampleSimpleComponent;
   outletExample = ModalExampleOutletComponent;
+  alertExample = ModalEmbeddedAlertExampleComponent;
+  alertModalConfigExample = ModalExampleAlertComponent;
 
   scrollTo(target: Element) {
     target.scrollIntoView({ behavior: 'smooth' });
