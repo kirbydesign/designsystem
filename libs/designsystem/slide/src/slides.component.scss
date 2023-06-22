@@ -43,6 +43,7 @@ $bullet-inactive-opacity: 0.2;
 
   .buttons {
     display: none;
+    z-index: utils.z('default');
 
     @include utils.media('>=medium') {
       display: block;
