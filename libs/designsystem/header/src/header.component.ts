@@ -81,6 +81,7 @@ export class HeaderComponent implements AfterContentInit, OnInit {
   @Input() valueUnit: string = null;
   @Input() subtitle1: string = null;
   @Input() subtitle2: string = null;
+  @Input() hasInteractiveTitle?: boolean;
 
   @Output() titleClick = new EventEmitter<PointerEvent>();
 

@@ -215,6 +215,7 @@ export class PageComponent
   @Input() hideBackButton: boolean;
   @Input() titleMaxLines: number;
   @Input() maxWidth: 'default' | 'standard' | 'optimized' | 'full' = 'default';
+  @Input() hasInteractiveTitle: boolean;
 
   private _tabBarBottomHidden: boolean;
   public get tabBarBottomHidden(): boolean {
@@ -233,6 +234,7 @@ export class PageComponent
   @Output() leave = new EventEmitter<void>();
   @Output() refresh = new EventEmitter<PullToRefreshEvent>();
   @Output() backButtonClick = new EventEmitter<Event>();
+  @Output() toolbarTitleClick = new EventEmitter<PointerEvent>();
 
   @ViewChild(IonContent, { static: true }) private content?: IonContent;
   @ViewChild(IonContent, { static: true, read: ElementRef })
@@ -289,8 +291,6 @@ export class PageComponent
   stickyContentTemplate: TemplateRef<PageStickyContentDirective>;
   headerActionsTemplate: TemplateRef<HeaderActionsDirective>;
   titleActionIconTemplate: TemplateRef<HeaderTitleActionIconDirective>;
-  headerTitleClick?: EventEmitter<PointerEvent>;
-  hasInteractiveTitle = false;
 
   private titleIntersectionObserver?: IntersectionObserver;
   private stickyActionsIntersectionObserver?: IntersectionObserver;
@@ -457,7 +457,11 @@ export class PageComponent
   }
 
   onTitleClick(event: PointerEvent) {
-    this.headerTitleClick?.emit(event);
+    if (this.toolbarTitleClick.observed) {
+      this.toolbarTitleClick.emit(event);
+    } else {
+      this.header?.titleClick.emit(event);
+    }
   }
 
   private removeWrapper() {
@@ -541,9 +545,8 @@ export class PageComponent
       // Header could later be removed from DOM (e.g. in virtual scrolling scenarios),
       // so store a reference to `header.titleActionIconTemplate` and `header.titleClick`:
       this.titleActionIconTemplate = this.header.titleActionIconTemplate;
-      if (this.header.titleClick.observed) {
+      if (this.header.titleClick.observed && this.hasInteractiveTitle === undefined) {
         this.hasInteractiveTitle = true;
-        this.headerTitleClick = this.header.titleClick;
       }
     }
   }
@@ -583,6 +586,10 @@ export class PageComponent
       : typeof this.toolbarTitle === 'string'
         ? this.simpleToolbarTitleTemplate
         : defaultTitleTemplate;
+
+    if (this.toolbarTitleClick.observed && this.hasInteractiveTitle === undefined) {
+      this.hasInteractiveTitle = true;
+    }
   }
 
   private observeTitle() {
