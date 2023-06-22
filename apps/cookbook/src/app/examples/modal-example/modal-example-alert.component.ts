@@ -6,7 +6,7 @@ import { ModalEmbeddedAlertExampleComponent } from './alert-example/modal-exampl
 
 const config = {
   selector: 'cookbook-modal-example-alert',
-  template: `<button kirby-button size="lg" (click)="showModal('modal', size)">Show modal</button>
+  template: `<button kirby-button size="lg" (click)="showModal('modal')">Show modal</button>
 <button kirby-button size="lg"(click)="showModal('drawer')">Show drawer</button>`,
   codeSnippet: `constructor(private myService: MyService) {}
 
