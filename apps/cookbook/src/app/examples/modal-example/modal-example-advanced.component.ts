@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { AlertConfig, ModalConfig, ModalController } from '@kirbydesign/designsystem';
+import { ModalConfig, ModalController } from '@kirbydesign/designsystem';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 
 import { ModalCompactExampleComponent } from './compact-example/modal-compact-example.component';
@@ -114,21 +114,6 @@ export class EmbeddedComponent() {
   const returnData: CustomDataType = {...};
   this.modal?.close(returnData);
 }`,
-  alertBeforeCloseCodeSnippet: `// Inside the parent (caller) component:
-@Component()
-export class ParentComponent() {
-  const alertConfig: AlertConfig = {
-    title: 'Do you want to close the modal?',
-    okBtn: {
-      text: 'Yes',
-      isDestructive: true,
-    },
-    cancelBtn: 'No',
-  };
-
-  this.modalController.showModal(config, null, alertConfig)
-}
-`,
   scrollingCodeSnippet: `import { KirbyAnimation, Modal } from '@kirbydesign/designsystem';
 ...
 constructor(@Optional() @SkipSelf() private modal: Modal) {}
@@ -209,7 +194,6 @@ export class ModalExampleAdvancedComponent {
   static readonly drawerCodeSnippet = config.drawerCodeSnippet;
   static readonly callbackCodeSnippet = config.callbackCodeSnippet;
   static readonly callbackWithDataCodeSnippet = config.callbackWithDataCodeSnippet;
-  static readonly alertBeforeCloseCodeSnippet = config.alertBeforeCloseCodeSnippet;
   static readonly didPresentCodeSnippet = config.didPresentCodeSnippet;
   static readonly willCloseCodeSnippet = config.willCloseCodeSnippet;
   static readonly scrollingCodeSnippet = config.scrollingCodeSnippet;
@@ -277,6 +261,7 @@ export class ModalExampleAdvancedComponent {
         showModalSizeSelector: true,
         disableScroll: this.disableScroll,
         showNestedCollapseTitle: this.showNestedCollapseTitle,
+        alertBeforeClose: this.alertBeforeClose,
       },
     };
 

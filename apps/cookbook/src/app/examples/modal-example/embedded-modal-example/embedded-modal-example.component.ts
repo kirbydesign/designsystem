@@ -52,6 +52,8 @@ export class EmbeddedModalExampleComponent implements OnInit {
 
   showModalSizeSelector: boolean;
   selectedModalSize: ModalSize;
+  alertBeforeClose: boolean;
+  disableAlertBeforeClose: boolean = false;
 
   get _footerType(): 'inline' | 'fixed' {
     return this.displayFooterAsInline ? 'inline' : 'fixed';
@@ -77,6 +79,26 @@ export class EmbeddedModalExampleComponent implements OnInit {
         setTimeout(() => (this.isLoadingAdditionalContent = false), 2000);
       }
     }
+
+    if (this.alertBeforeClose) {
+      this.modal.canDismiss = () => this.validate();
+    }
+  }
+
+  private validate() {
+    if (this.disableAlertBeforeClose) return true;
+
+    const config: AlertConfig = {
+      title: 'Are you sure you want to close?',
+      okBtn: 'Yes',
+      cancelBtn: 'Take me back',
+      icon: {
+        name: 'warning',
+        themeColor: 'warning',
+      },
+    };
+
+    return config;
   }
 
   private showNestedOverlay(flavor: 'modal' | 'drawer') {
