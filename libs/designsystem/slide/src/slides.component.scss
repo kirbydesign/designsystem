@@ -43,6 +43,7 @@ $bullet-inactive-opacity: 0.2;
 
   .buttons {
     display: none;
+    z-index: utils.z('default');
 
     @include utils.media('>=medium') {
       display: block;
@@ -51,13 +52,11 @@ $bullet-inactive-opacity: 0.2;
     .swiper-button-prev {
       margin-block: 0;
       margin-inline-start: 0;
-      z-index: utils.z('default');
     }
 
     .swiper-button-next {
       margin-block: 0;
       margin-inline-end: 0;
-      z-index: utils.z('default');
     }
 
     @include utils.slotted('button[kirby-button]') {
