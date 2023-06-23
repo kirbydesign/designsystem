@@ -7,9 +7,7 @@ import { DrawerSupplementaryAction } from './drawer-supplementary-action';
 export type ModalFlavor = 'modal' | 'drawer' | 'compact';
 export type ModalSize = 'small' | 'medium' | 'large' | 'full-height';
 
-export type ShowAlertCallback =
-  | (() => Promise<boolean | AlertConfig>)
-  | (() => boolean | AlertConfig);
+export type ShowAlertCallback = () => boolean | AlertConfig | Promise<boolean | AlertConfig>;
 
 export interface ModalConfig {
   collapseTitle?: boolean;
@@ -20,7 +18,7 @@ export interface ModalConfig {
   siblingModalRouteActivated$?: Observable<ActivatedRoute>;
   flavor?: ModalFlavor;
   componentProps?: { [key: string]: any };
-  showAlert?: ShowAlertCallback;
+  canDismiss?: ShowAlertCallback;
   // the supplementary action is only available in the drawer
   drawerSupplementaryAction?: DrawerSupplementaryAction;
   // drawer properties

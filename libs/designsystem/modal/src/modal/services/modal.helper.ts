@@ -66,15 +66,15 @@ export class ModalHelper {
 
     let canDismiss: boolean | (() => Promise<boolean>) = true;
 
-    if (config.showAlert) {
-      canDismiss = this.canDismissHelper.getCanDismissCallback(config.showAlert);
+    if (config.canDismiss) {
+      canDismiss = this.canDismissHelper.getCanDismissCallback(config.canDismiss);
     }
 
     // This functionality is kept to prevent breaking changes, but should be depracated in the next major.
     // It will be replaced by the new 'showAlert' callback.
     if (alertConfig) {
       console.warn(
-        "This way of passing an alertConfig to the modal will be deprecated in the next major. We recommend using the 'showAlert' callback instead."
+        "This way of passing an alertConfig to the modal will be deprecated in the next major version. We recommend using the 'showAlert' callback instead."
       );
 
       // Remembers the modal dismissal response from user to prevent multiple alerts on
@@ -126,7 +126,7 @@ export class ModalHelper {
 
     // Back button should only be handled manually
     // if the modal is not instantiated through a route.
-    if (!config.modalRoute && !config.showAlert && !alertConfig) {
+    if (!config.modalRoute && !config.canDismiss && !alertConfig) {
       this.handleBrowserBackButton(ionModal);
     }
 
