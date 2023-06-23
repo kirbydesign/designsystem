@@ -53,7 +53,6 @@ export class EmbeddedModalExampleComponent implements OnInit {
   showModalSizeSelector: boolean;
   selectedModalSize: ModalSize;
   alertBeforeClose: boolean;
-  disableAlertBeforeClose: boolean = false;
 
   get _footerType(): 'inline' | 'fixed' {
     return this.displayFooterAsInline ? 'inline' : 'fixed';
@@ -81,12 +80,12 @@ export class EmbeddedModalExampleComponent implements OnInit {
     }
 
     if (this.alertBeforeClose) {
-      this.modal.canDismiss = () => this.validate();
+      this.modal.canDismiss = () => this.canDismiss();
     }
   }
 
-  private validate() {
-    if (this.disableAlertBeforeClose) return true;
+  private canDismiss() {
+    if (!this.alertBeforeClose) return true;
 
     const config: AlertConfig = {
       title: 'Are you sure you want to close?',
@@ -99,6 +98,14 @@ export class EmbeddedModalExampleComponent implements OnInit {
     };
 
     return config;
+  }
+
+  _toggleAlertBeforeClose(checked) {
+    this.alertBeforeClose = checked;
+
+    if (checked && !this.modal.canDismiss) {
+      this.modal.canDismiss = () => this.canDismiss();
+    }
   }
 
   private showNestedOverlay(flavor: 'modal' | 'drawer') {
