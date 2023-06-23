@@ -22,7 +22,12 @@ const KIRBY_TABLE_ROW_SELECTABLE_DEPRECATION_WARNING =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableRowComponent {
+  static hasWarnedAboutTableRowDeprecation: boolean = false;
+  static hasWarnedAboutSelectableDeprecation: boolean = false;
+
   constructor() {
+    if (TableRowComponent.hasWarnedAboutTableRowDeprecation) return;
+    TableRowComponent.hasWarnedAboutTableRowDeprecation = true;
     console.warn(KIRBY_TABLE_ROW_DEPRECATION_WARNING);
   }
 
@@ -35,6 +40,9 @@ export class TableRowComponent {
 
   @Input() set selectable(selectable: boolean) {
     this._selectable = selectable;
+
+    if (TableRowComponent.hasWarnedAboutSelectableDeprecation) return;
+    TableRowComponent.hasWarnedAboutSelectableDeprecation = true;
     console.warn(KIRBY_TABLE_ROW_SELECTABLE_DEPRECATION_WARNING);
   }
 }
