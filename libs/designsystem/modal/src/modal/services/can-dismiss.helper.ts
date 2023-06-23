@@ -11,18 +11,16 @@ export class CanDismissHelper {
     return async () => {
       const result = await callback();
 
-      if (typeof result !== 'boolean') {
-        const canCloseModal = await this.showAlert(result);
-        return canCloseModal;
-      }
+      if (typeof result === 'boolean') return result;
 
-      return true;
+      const canCloseModal = await this.showAlert(result);
+      return canCloseModal;
     };
   }
 
   private async showAlert(config: AlertConfig): Promise<boolean> {
     const alert = await this.alertHelper.showAlert(config);
-    const result = await alert.onWillDismiss;
+    const result = await alert.onDidDismiss;
     return result.data;
   }
 }
