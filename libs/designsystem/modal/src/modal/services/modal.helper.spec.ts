@@ -105,7 +105,7 @@ describe('ModalHelper', () => {
       ContentOverflowsWithFooterEmbeddedComponent,
       ContentWithNoOverflowEmbeddedComponent,
     ],
-    mocks: [ModalNavigationService, CanDismissHelper, AlertHelper],
+    mocks: [ModalNavigationService, AlertHelper, CanDismissHelper],
   });
 
   beforeAll(() => {
