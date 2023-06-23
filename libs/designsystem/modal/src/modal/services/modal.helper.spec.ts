@@ -141,8 +141,8 @@ describe('ModalHelper', () => {
     expect(ionModal).toBeTruthy();
   };
 
-  const openModal = async (component?: any, size?: ModalSize, showAlert?: ShowAlertCallback) => {
-    await openOverlay({ flavor: 'modal', component, size, showAlert });
+  const openModal = async (component?: any, size?: ModalSize, canDismiss?: ShowAlertCallback) => {
+    await openOverlay({ flavor: 'modal', component, size, canDismiss });
   };
 
   const openDrawer = async (
