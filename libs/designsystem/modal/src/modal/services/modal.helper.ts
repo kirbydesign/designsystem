@@ -176,6 +176,8 @@ export class ModalHelper {
     });
   }
 
+  // This functionality is kept to prevent breaking changes, but should be depracated in the next major.
+  // It is needed to support the old way of passing an alertConfig to the modal.
   public async showAlert(config: AlertConfig): Promise<boolean> {
     const alert = await this.alertHelper.showAlert(config);
     const result = await alert.onWillDismiss;
