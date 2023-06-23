@@ -4,10 +4,6 @@
   display: flex;
   position: relative;
   gap: utils.size('xxs');
-
-  @include utils.slotted('button[kirby-button]') {
-    margin: 0;
-  }
 }
 
 :host(.align-end) {
