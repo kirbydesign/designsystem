@@ -37,7 +37,8 @@ describe('PageComponent', () => {
   const firstOtherUrlWithQueryParams = 'firstOther?query=params';
   const shadedBackgroundColor = '#f3f3f3';
   let spectator: SpectatorHost<PageComponent>;
-  let ionToolbar: HTMLElement;
+  let ionToolbar: HTMLIonToolbarElement;
+  let ionTitle: HTMLIonTitleElement;
   let ionContent: HTMLIonContentElement;
   let ionScrollElement: HTMLElement;
   let tabBar: SpyObject<TabsComponent>;
@@ -129,8 +130,10 @@ describe('PageComponent', () => {
       router = spectator.inject(Router);
       tabBar = spectator.inject(TabsComponent);
       ionToolbar = spectator.queryHost('ion-toolbar');
+      ionTitle = spectator.queryHost('ion-title');
       ionContent = spectator.queryHost('ion-content');
       await TestHelper.whenReady(ionToolbar);
+      await TestHelper.whenReady(ionTitle);
       await TestHelper.whenReady(ionContent);
       ionScrollElement = await ionContent.getScrollElement();
     });
@@ -354,87 +357,145 @@ describe('PageComponent', () => {
       });
     });
 
-    describe('having sticky page action', () => {
-      it('should show the action in the toolbar when content not scrolled', () => {
-        const stickyActionButton = ionToolbar.querySelector(
-          'ion-buttons[slot="primary"] button[kirby-button]'
-        );
-        expect(stickyActionButton).toBeTruthy();
-        expect(stickyActionButton).toBeVisible();
-      });
-
-      it('should show the action in the toolbar when content scrolled', async () => {
-        const verticalScrollAmount = 10;
-        await ionContent.scrollToPoint(0, verticalScrollAmount, 0);
-        await TestHelper.whenTrue(() => spectator.component.isContentScrolled);
-
-        const stickyActionButton = ionToolbar.querySelector(
-          'ion-buttons[slot="primary"] button[kirby-button]'
-        );
-        expect(stickyActionButton).toBeTruthy();
-        expect(stickyActionButton).toBeVisible();
-      });
-
-      it('should have correct margins', () => {
-        const actionsWrapper = ionToolbar.querySelector('ion-buttons[slot="primary"]');
-        expect(actionsWrapper).toHaveComputedStyle({
-          'margin-left': size('xxs'),
+    describe('having page actions', () => {
+      describe('on phone', () => {
+        beforeAll(async () => {
+          await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
         });
-      });
 
-      it('should remove margins on slotted buttons', () => {
-        const actionButtons = ionToolbar.querySelectorAll(
-          'ion-buttons[slot="primary"] button[kirby-button]'
-        );
-        actionButtons.forEach((btn) => {
-          expect(btn).toHaveComputedStyle({
-            'margin-bottom': '0px',
-            'margin-top': '0px',
-            'margin-left': '0px',
-            'margin-right': '0px',
+        afterAll(() => {
+          TestHelper.resetTestWindow();
+        });
+
+        it('should set correct padding on title', () => {
+          const actionButtons = ionToolbar.querySelectorAll<HTMLButtonElement>(
+            'ion-buttons:not([slot="start"])'
+          );
+          let actionButtonsWidth = 0;
+          actionButtons.forEach((btn) => {
+            actionButtonsWidth +=
+              btn.offsetWidth +
+              parseInt(window.getComputedStyle(btn).marginLeft) +
+              parseInt(window.getComputedStyle(btn).marginRight);
+          });
+          const toolbarPadding = parseInt(size('s'));
+          const expectedPadding = toolbarPadding + actionButtonsWidth;
+          expect(ionTitle).toHaveComputedStyle({
+            'padding-left': `${expectedPadding}px`,
           });
         });
       });
-    });
 
-    describe('having fixed page action', () => {
-      it('should show the action in the toolbar when content not scrolled', () => {
-        const fixedActionButton = ionToolbar.querySelector(
-          'ion-buttons[slot="secondary"] button[kirby-button]'
-        );
-        expect(fixedActionButton).toBeTruthy();
-        expect(fixedActionButton).toBeVisible();
-      });
+      describe('on desktop', () => {
+        beforeAll(async () => {
+          await TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
+        });
 
-      it('should show the action in the toolbar when content scrolled', async () => {
-        const verticalScrollAmount = 10;
-        await ionContent.scrollToPoint(0, verticalScrollAmount, 0);
-        await TestHelper.whenTrue(() => spectator.component.isContentScrolled);
+        afterAll(() => {
+          TestHelper.resetTestWindow();
+        });
 
-        const fixedActionButton = ionToolbar.querySelector(
-          'ion-buttons[slot="secondary"] button[kirby-button]'
-        );
-        expect(fixedActionButton).toBeTruthy();
-        expect(fixedActionButton).toBeVisible();
-      });
-
-      it('should have correct margins', () => {
-        const actionsWrapper = ionToolbar.querySelector('ion-buttons[slot="secondary"]');
-        expect(actionsWrapper).toHaveComputedStyle({
-          'margin-left': size('xxs'),
+        it('should set correct padding on title', () => {
+          const actionButtons = ionToolbar.querySelectorAll<HTMLButtonElement>(
+            'ion-buttons:not([slot="start"])'
+          );
+          let actionButtonsWidth = 0;
+          actionButtons.forEach((btn) => {
+            actionButtonsWidth +=
+              btn.offsetWidth +
+              parseInt(window.getComputedStyle(btn).marginLeft) +
+              parseInt(window.getComputedStyle(btn).marginRight);
+          });
+          const toolbarPadding = parseInt(size('m'));
+          const expectedPadding = toolbarPadding + actionButtonsWidth;
+          expect(ionTitle).toHaveComputedStyle({
+            'padding-left': `${expectedPadding}px`,
+          });
         });
       });
 
-      it('should remove margins on slotted buttons', () => {
-        const actionButtons = ionToolbar.querySelectorAll(
-          'ion-buttons[slot="secondary"] button[kirby-button]'
-        );
-        actionButtons.forEach((btn) => {
-          expect(btn).toHaveComputedStyle({
-            'margin-bottom': '0px',
-            'margin-top': '0px',
-            'margin-left': '0px',
-            'margin-right': '0px',
+      describe('having sticky page action', () => {
+        it('should show the action in the toolbar when content not scrolled', () => {
+          const stickyActionButton = ionToolbar.querySelector(
+            'ion-buttons[slot="primary"] button[kirby-button]'
+          );
+          expect(stickyActionButton).toBeTruthy();
+          expect(stickyActionButton).toBeVisible();
+        });
+
+        it('should show the action in the toolbar when content scrolled', async () => {
+          const verticalScrollAmount = 10;
+          await ionContent.scrollToPoint(0, verticalScrollAmount, 0);
+          await TestHelper.whenTrue(() => spectator.component.isContentScrolled);
+
+          const stickyActionButton = ionToolbar.querySelector(
+            'ion-buttons[slot="primary"] button[kirby-button]'
+          );
+          expect(stickyActionButton).toBeTruthy();
+          expect(stickyActionButton).toBeVisible();
+        });
+
+        it('should have correct margins', () => {
+          const actionsWrapper = ionToolbar.querySelector('ion-buttons[slot="primary"]');
+          expect(actionsWrapper).toHaveComputedStyle({
+            'margin-left': size('xxs'),
+          });
+        });
+
+        it('should remove margins on slotted buttons', () => {
+          const actionButtons = ionToolbar.querySelectorAll(
+            'ion-buttons[slot="primary"] button[kirby-button]'
+          );
+          actionButtons.forEach((btn) => {
+            expect(btn).toHaveComputedStyle({
+              'margin-bottom': '0px',
+              'margin-top': '0px',
+              'margin-left': '0px',
+              'margin-right': '0px',
+            });
+          });
+        });
+      });
+
+      describe('having fixed page action', () => {
+        it('should show the action in the toolbar when content not scrolled', () => {
+          const fixedActionButton = ionToolbar.querySelector(
+            'ion-buttons[slot="secondary"] button[kirby-button]'
+          );
+          expect(fixedActionButton).toBeTruthy();
+          expect(fixedActionButton).toBeVisible();
+        });
+
+        it('should show the action in the toolbar when content scrolled', async () => {
+          const verticalScrollAmount = 10;
+          await ionContent.scrollToPoint(0, verticalScrollAmount, 0);
+          await TestHelper.whenTrue(() => spectator.component.isContentScrolled);
+
+          const fixedActionButton = ionToolbar.querySelector(
+            'ion-buttons[slot="secondary"] button[kirby-button]'
+          );
+          expect(fixedActionButton).toBeTruthy();
+          expect(fixedActionButton).toBeVisible();
+        });
+
+        it('should have correct margins', () => {
+          const actionsWrapper = ionToolbar.querySelector('ion-buttons[slot="secondary"]');
+          expect(actionsWrapper).toHaveComputedStyle({
+            'margin-left': size('xxs'),
+          });
+        });
+
+        it('should remove margins on slotted buttons', () => {
+          const actionButtons = ionToolbar.querySelectorAll(
+            'ion-buttons[slot="secondary"] button[kirby-button]'
+          );
+          actionButtons.forEach((btn) => {
+            expect(btn).toHaveComputedStyle({
+              'margin-bottom': '0px',
+              'margin-top': '0px',
+              'margin-left': '0px',
+              'margin-right': '0px',
+            });
           });
         });
       });

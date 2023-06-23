@@ -17,6 +17,8 @@ $toolbar-shaded-background: color.mix(
   utils.get-color('background-color', $getValueOnly: true),
   1.1%
 );
+$toolbar-button-size: utils.size('xl');
+$toolbar-button-spacing: utils.size('xxs');
 
 ion-header,
 ion-toolbar {
@@ -82,13 +84,13 @@ ion-toolbar {
   ion-buttons {
     // Back button:
     &[slot='start'] {
-      margin-right: 8px;
+      margin-right: $toolbar-button-spacing;
     }
 
     // Action buttons:
     &[slot='primary'],
     &[slot='secondary'] {
-      margin-left: 8px;
+      margin-left: $toolbar-button-spacing;
     }
 
     /*
@@ -107,6 +109,10 @@ ion-toolbar {
     transition-property: opacity, transform;
     transition-duration: 150ms;
     transition-timing-function: utils.get-transition-easing('enter-exit');
+    padding-inline: calc(
+      var(--action-buttons-width, $toolbar-button-size + $toolbar-button-spacing) +
+        var(--padding-start)
+    );
 
     &.slide-and-fade-in {
       visibility: visible;
@@ -167,10 +173,8 @@ ion-back-button {
   --background: #{utils.get-color('white')};
   --icon-font-size: 24px;
 
-  $button-size: utils.size('xl');
-
-  height: $button-size;
-  width: $button-size;
+  height: $toolbar-button-size;
+  width: $toolbar-button-size;
 
   // Properly center back-icon
   &::part(icon) {
