@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 const config = {
   selector: 'cookbook-item-example-disclosure',
-  template: `<kirby-item selectable="true" [disclosure]="'arrow-more'">
+  template: `<kirby-item selectable="true" [disclosure]="'arrow-down'" [rotateIcon]="rotateIcon" (click)="rotateIcon = !rotateIcon">
     <kirby-avatar overlay="true" slot="start">
         <kirby-icon name="moneybag"></kirby-icon>
     </kirby-avatar>
@@ -19,4 +19,6 @@ const config = {
 })
 export class ItemExampleDisclosureComponent {
   template: string = config.template;
+
+  rotateIcon = false;
 }
