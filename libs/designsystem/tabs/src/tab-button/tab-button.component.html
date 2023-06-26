@@ -2,7 +2,7 @@
   <div class="icon-container" *ngIf="icons.length">
     <ng-content
       *ngIf="icons.length === 1 || !ionTabButton.selected"
-      select="kirby-icon[:not([selected-tab])]"
+      select="kirby-icon:not([selected-tab])"
     ></ng-content>
     <ng-content *ngIf="ionTabButton.selected" select="kirby-icon[selected-tab]"></ng-content>
   </div>
