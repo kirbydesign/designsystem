@@ -82,7 +82,7 @@ export class ModalHelper {
       let canBeDismissed = false;
       canDismiss = async () => {
         if (!canBeDismissed) {
-          canBeDismissed = await this.showAlert(alertConfig);
+          canBeDismissed = await this.canDismissHelper.showAlert(alertConfig);
         }
 
         return canBeDismissed;
@@ -174,13 +174,5 @@ export class ModalHelper {
     popStateEvent$.pipe(takeUntil(modalClose$)).subscribe(() => {
       modal.dismiss();
     });
-  }
-
-  // This functionality is kept to prevent breaking changes, but should be depracated in the next major.
-  // It is needed to support the old way of passing an alertConfig to the modal.
-  public async showAlert(config: AlertConfig): Promise<boolean> {
-    const alert = await this.alertHelper.showAlert(config);
-    const result = await alert.onWillDismiss;
-    return result.data;
   }
 }
