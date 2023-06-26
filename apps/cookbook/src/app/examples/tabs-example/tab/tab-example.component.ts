@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 
@@ -75,11 +75,16 @@ export class TabExampleComponent implements OnInit {
     { id: '3', text: 'Option 3' },
   ];
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     setTimeout(() => {
       this.title = of(this.route.snapshot.data.title);
+      this.cdr.detectChanges();
     }, 300);
   }
 
