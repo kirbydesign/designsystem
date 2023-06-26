@@ -71,7 +71,7 @@ export class ModalHelper {
     }
 
     // This functionality is kept to prevent breaking changes, but should be depracated in the next major.
-    // It will be replaced by the new 'showAlert' callback.
+    // It will be replaced by the new 'config.canDismiss' callback
     if (alertConfig) {
       console.warn(
         "This way of passing an alertConfig to the modal will be deprecated in the next major version. We recommend using the 'showAlert' callback instead."
