@@ -92,6 +92,52 @@ describe('ItemComponent', () => {
         '--inner-padding-end': size('xxs'),
       });
     });
+
+    describe('when rotateIcon is set to true', () => {
+      beforeEach(() => {
+        spectator.setInput('rotateIcon', true);
+      });
+
+      it('should rotate the icon 180deg if the disclosure icon is "arrow-down', () => {
+        spectator.setInput('disclosure', 'arrow-down');
+
+        const icon = spectator.query('kirby-icon');
+
+        expect(icon).toHaveComputedStyle({
+          transform: 'matrix(-1, 0, 0, -1, 0, 0)',
+        });
+      });
+
+      it('should rotate the icon 180deg if the disclosure icon is "arrow-up', () => {
+        spectator.setInput('disclosure', 'arrow-up');
+
+        const icon = spectator.query('kirby-icon');
+
+        expect(icon).toHaveComputedStyle({
+          transform: 'matrix(-1, 0, 0, -1, 0, 0)',
+        });
+      });
+
+      it('should NOT rotate the icon 180deg if the disclosure icon is "arrow-more', () => {
+        spectator.setInput('disclosure', 'arrow-more');
+
+        const icon = spectator.query('kirby-icon');
+
+        expect(icon).toHaveComputedStyle({
+          transform: 'none',
+        });
+      });
+
+      it('should NOT rotate the icon 180deg if the disclosure icon is "link', () => {
+        spectator.setInput('disclosure', 'link');
+
+        const icon = spectator.query('kirby-icon');
+
+        expect(icon).toHaveComputedStyle({
+          transform: 'none',
+        });
+      });
+    });
   });
 
   describe('when disclosure is reset to null', () => {
