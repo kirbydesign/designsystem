@@ -18,6 +18,7 @@
     [(showFooter)]="showFooter"
     [(snapFooterToKeyboard)]="snapFooterToKeyboard"
     [(displayFooterAsInline)]="displayFooterAsInline"
+    [(alertBeforeClose)]="alertBeforeClose"
   ></cookbook-modal-example-configuration>
 </cookbook-example-configuration-wrapper>
 
@@ -57,13 +58,6 @@
         </ng-container>
       </details>
     </kirby-card>
-
-    <kirby-checkbox
-      attentionLevel="1"
-      [checked]="alertBeforeClose"
-      text="Alert before closing modal"
-      (checkedChange)="_toggleAlertBeforeClose($event)"
-    ></kirby-checkbox>
 
     <div *ngIf="showStaticDummyContent">
       <h4>The standard Lorem Ipsum passage, used since the 1500s</h4>

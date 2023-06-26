@@ -79,9 +79,7 @@ export class EmbeddedModalExampleComponent implements OnInit {
       }
     }
 
-    if (this.alertBeforeClose) {
-      this.modal.canDismiss = () => this.canDismiss();
-    }
+    this.modal.canDismiss = () => this.canDismiss();
   }
 
   private canDismiss() {
@@ -102,10 +100,7 @@ export class EmbeddedModalExampleComponent implements OnInit {
 
   _toggleAlertBeforeClose(checked) {
     this.alertBeforeClose = checked;
-
-    if (checked && !this.modal.canDismiss) {
-      this.modal.canDismiss = () => this.canDismiss();
-    }
+    this.modal.canDismiss = () => this.canDismiss();
   }
 
   private showNestedOverlay(flavor: 'modal' | 'drawer') {
