@@ -51,7 +51,7 @@ import { ActionSheetItem } from '@kirbydesign/designsystem';
           officia officiis quo tempora ut velit voluptate. Aliquid ea, earum facilis hic in libero
           obcaecati odit quia soluta!
         </p>
-        <button kirby-button (click)="navigateToAccountSub()">Go to account sub</button>
+        <button kirby-button (click)="navigateToTransferSub()">Go to transfer sub</button>
       </kirby-page-content>
 
       <kirby-fab-sheet *kirbyPageContent="{ fixed: true }" horizontalAlignment="right">
@@ -87,7 +87,7 @@ export class TabExampleComponent implements OnInit {
     alert('item selected');
   }
 
-  navigateToAccountSub() {
+  navigateToTransferSub() {
     this.router.navigate(['sub'], { relativeTo: this.route });
   }
 

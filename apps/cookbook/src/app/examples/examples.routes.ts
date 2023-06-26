@@ -123,31 +123,31 @@ export const routes: ModalEnabledRoutes = [
             children: [
               {
                 path: '',
-                redirectTo: 'dashboard',
+                redirectTo: 'overview',
                 pathMatch: 'full',
               },
               {
-                path: 'dashboard',
+                path: 'overview',
                 component: PageFixedFooterTabExampleComponent,
                 data: {
-                  title: 'Dashboard',
+                  title: 'Overview',
                 },
               },
               {
-                path: 'account',
+                path: 'transfer',
                 children: [
                   {
                     path: '',
                     component: TabExampleComponent,
                     data: {
-                      title: 'Account',
+                      title: 'Transfer',
                     },
                   },
                   {
                     path: 'sub',
                     component: TabExampleComponent,
                     data: {
-                      title: 'Account Sub',
+                      title: 'Transfer Sub',
                     },
                   },
                 ],
@@ -205,31 +205,31 @@ export const routes: ModalEnabledRoutes = [
         children: [
           {
             path: '',
-            redirectTo: 'dashboard',
+            redirectTo: 'overview',
             pathMatch: 'full',
           },
           {
-            path: 'dashboard',
+            path: 'overview',
             component: TabExampleComponent,
             data: {
-              title: 'Dashboard',
+              title: 'Overview',
             },
           },
           {
-            path: 'account',
+            path: 'transfer',
             children: [
               {
                 path: '',
                 component: TabExampleComponent,
                 data: {
-                  title: 'Account',
+                  title: 'Transfer',
                 },
               },
               {
                 path: 'sub',
                 component: TabExampleComponent,
                 data: {
-                  title: 'Account Sub',
+                  title: 'Transfer Sub',
                 },
               },
             ],
