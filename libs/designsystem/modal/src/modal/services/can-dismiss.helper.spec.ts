@@ -26,7 +26,6 @@ describe('CanDismissHelper', () => {
     });
 
     it('should call the showAlert method, if the provided callback return an AlertConfig', async () => {
-      //@ts-ignore
       const showAlertSpy = spyOn(spectator.service, 'showAlert');
       const alertConfig: AlertConfig = { title: 'Test alert' };
       const callback = () => alertConfig;
