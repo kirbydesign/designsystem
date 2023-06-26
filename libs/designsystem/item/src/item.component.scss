@@ -94,6 +94,15 @@
 .disclosure {
   padding-left: #{utils.size('xxxs')};
   color: #{utils.get-color('semi-dark')};
+  display: inline-flex;
+
+  & kirby-icon {
+    transition: transform utils.get-transition-duration('quick');
+
+    &.rotate {
+      transform: rotate(180deg);
+    }
+  }
 }
 
 :host-context(kirby-dropdown) ion-item,
