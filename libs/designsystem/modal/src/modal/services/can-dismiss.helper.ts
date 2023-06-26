@@ -20,7 +20,7 @@ export class CanDismissHelper {
 
   public async showAlert(config: AlertConfig): Promise<boolean> {
     const alert = await this.alertHelper.showAlert(config);
-    const result = await alert.onDidDismiss;
+    const result = await alert.onWillDismiss;
     return result.data;
   }
 }
