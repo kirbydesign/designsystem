@@ -6,6 +6,8 @@ const config = {
   template: `
     <kirby-page-title>Modal with alert</kirby-page-title>
     <p>
+    <strong>Please note:</strong>
+
       <em>
         This modal will ask the user if they are sure they want to close the modal if they have
         entered data in any of the form fields.

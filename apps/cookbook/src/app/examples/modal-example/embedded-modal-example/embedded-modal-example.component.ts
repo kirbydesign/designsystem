@@ -98,11 +98,6 @@ export class EmbeddedModalExampleComponent implements OnInit {
     return config;
   }
 
-  _toggleAlertBeforeClose(checked) {
-    this.alertBeforeClose = checked;
-    this.modal.canDismiss = () => this.canDismiss();
-  }
-
   private showNestedOverlay(flavor: 'modal' | 'drawer') {
     const title = flavor === 'modal' ? 'Nested Modal Title' : 'Nested Drawer Title';
     const config: ModalConfig = {
