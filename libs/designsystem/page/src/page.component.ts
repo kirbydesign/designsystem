@@ -23,14 +23,17 @@ import {
   Output,
   QueryList,
   Renderer2,
+  RendererStyleFlags2,
   SimpleChanges,
   SkipSelf,
   TemplateRef,
   ViewChild,
+  ViewChildren,
 } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router, RouterEvent } from '@angular/router';
 import {
   IonBackButtonDelegate,
+  IonButtons,
   IonContent,
   IonFooter,
   IonHeader,
@@ -245,7 +248,8 @@ export class PageComponent
   private ionFooterElement: ElementRef<HTMLIonFooterElement>;
   @ViewChild(IonToolbar, { static: true, read: ElementRef })
   private ionToolbarElement: ElementRef<HTMLIonToolbarElement>;
-
+  @ViewChildren(IonButtons, { read: ElementRef })
+  private ionToolbarButtonsElement: QueryList<ElementRef<HTMLIonButtonsElement>>;
   @ViewChild(IonBackButtonDelegate, { static: false })
   private backButtonDelegate: IonBackButtonDelegate;
   @ViewChild('pageTitle', { static: false, read: ElementRef })
@@ -420,6 +424,7 @@ export class PageComponent
 
     this.interceptBackButtonClicksSetup();
     this.initializeStickyIntersectionObserver();
+    this.setActionButtonsWidth();
   }
 
   ngAfterContentChecked(): void {
@@ -719,6 +724,39 @@ export class PageComponent
       this.stickyActionsIntersectionObserver?.unobserve(this.header.actionsElement.nativeElement);
     }
     this.isObservingActions = false;
+  }
+
+  private setActionButtonsWidth() {
+    if (!this.ionToolbarButtonsElement) return;
+
+    // Ensure ion-toolbar custom element has been defined (primarily when testing, but doesn't hurt):
+    customElements.whenDefined(this.ionToolbarElement.nativeElement.localName).then(() => {
+      // Ensure toolbar and buttons have been rendered and has dimensions:
+      this.ionToolbarElement.nativeElement.componentOnReady().then((toolbar) => {
+        let startButtonsWidth = 0;
+        let endButtonsWidth = 0;
+
+        this.ionToolbarButtonsElement
+          .map((ionButtonsElementRef) => ionButtonsElementRef.nativeElement)
+          .forEach((ionButtonsElement) => {
+            const style = getComputedStyle(ionButtonsElement);
+            const margin = parseInt(style.marginLeft) + parseInt(style.marginRight);
+            if (ionButtonsElement.getAttribute('slot') === 'start') {
+              startButtonsWidth += ionButtonsElement.offsetWidth + margin;
+            } else {
+              endButtonsWidth += ionButtonsElement.offsetWidth + margin;
+            }
+          });
+
+        const actionButtonsMaxWidth = Math.max(startButtonsWidth, endButtonsWidth);
+        this.renderer.setStyle(
+          toolbar,
+          '--action-buttons-width',
+          `${actionButtonsMaxWidth}px`,
+          RendererStyleFlags2.DashCase
+        );
+      });
+    });
   }
 
   private initializeContent() {

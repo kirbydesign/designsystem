@@ -3,6 +3,7 @@
 :host {
   display: flex;
   position: relative;
+  gap: utils.size('xxs');
 }
 
 :host(.align-end) {

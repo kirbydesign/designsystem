@@ -42,7 +42,12 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content scrollEvents="true" forceOverscroll="false" [class]="getMaxWidthClasses()">
+<ion-content
+  scrollEvents="true"
+  forceOverscroll="false"
+  [class]="getMaxWidthClasses()"
+  [class.has-header]="hasHeader"
+>
   <ion-refresher
     *ngIf="refresh.observers.length > 0"
     (ionRefresh)="delegateRefreshEvent($event)"
