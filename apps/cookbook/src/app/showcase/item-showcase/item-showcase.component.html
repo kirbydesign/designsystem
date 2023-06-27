@@ -6,19 +6,10 @@
   <code>arrow-up</code>
   should animate on click
 </p>
-<cookbook-example-viewer [html]="disclosureExample.template">
-  <cookbook-item-example-disclosure
-    #disclosureExample
-    [icon]="'arrow-down'"
-  ></cookbook-item-example-disclosure>
-</cookbook-example-viewer>
 
-<cookbook-example-viewer [html]="disclosureExample.template">
-  <cookbook-item-example-disclosure
-    #disclosureExample
-    [icon]="'arrow-up'"
-  ></cookbook-item-example-disclosure>
-</cookbook-example-viewer>
+<cookbook-item-example-disclosure [icon]="'arrow-down'"></cookbook-item-example-disclosure>
+<br />
+<cookbook-item-example-disclosure [icon]="'arrow-up'"></cookbook-item-example-disclosure>
 
 <p>
   <code>arrow-more</code>
@@ -26,19 +17,10 @@
   <code>link</code>
   should NOT animate on click
 </p>
-<cookbook-example-viewer [html]="disclosureExample.template">
-  <cookbook-item-example-disclosure
-    #disclosureExample
-    [icon]="'arrow-more'"
-  ></cookbook-item-example-disclosure>
-</cookbook-example-viewer>
 
-<cookbook-example-viewer [html]="disclosureExample.template">
-  <cookbook-item-example-disclosure
-    #disclosureExample
-    [icon]="'link'"
-  ></cookbook-item-example-disclosure>
-</cookbook-example-viewer>
+<cookbook-item-example-disclosure [icon]="'arrow-more'"></cookbook-item-example-disclosure>
+<br />
+<cookbook-item-example-disclosure [icon]="'link'"></cookbook-item-example-disclosure>
 
 <h2>DISCLOSURE ANIMATION DEMO END</h2>
 
