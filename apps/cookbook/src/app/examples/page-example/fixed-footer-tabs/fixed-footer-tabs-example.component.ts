@@ -24,8 +24,8 @@ const template = `<!-- This container is only needed due to layout of larger scr
       <kirby-badge themeColor="danger">1</kirby-badge>
     </kirby-tab-button>
 
-    <kirby-tab-button (click)="openMenu()">
-    <kirby-icon name="menu-no-decoration"></kirby-icon>
+    <kirby-tab-button routerLink="menu">
+      <kirby-icon name="menu-no-decoration"></kirby-icon>
       Menu
     </kirby-tab-button>
   </kirby-tab-bar>
@@ -38,8 +38,4 @@ const template = `<!-- This container is only needed due to layout of larger scr
 })
 export class PageFixedFooterTabsExampleComponent {
   static template = template;
-
-  openMenu() {
-    alert('Open menu');
-  }
 }
