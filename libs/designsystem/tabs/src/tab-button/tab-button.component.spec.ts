@@ -124,6 +124,12 @@ describe('TabsComponent', () => {
       innerButton = ionTabButton.shadowRoot.querySelector('[part=native]');
     });
 
+    it('should render the icon', () => {
+      const icon = ionTabButton.querySelector('kirby-icon');
+      expect(icon).toBeTruthy();
+      expect(icon).toBeVisible();
+    });
+
     describe('responsiveness', () => {
       afterAll(() => {
         TestHelper.resetTestWindow();
@@ -171,6 +177,51 @@ describe('TabsComponent', () => {
             'padding-block': '0px',
           });
         });
+      });
+    });
+  });
+
+  describe('when configured with two icons', () => {
+    beforeEach(async () => {
+      spectator = createHost(`<kirby-tab-button>
+                                <kirby-icon></kirby-icon>
+                                <kirby-icon selected-tab></kirby-icon>
+                                Title
+                              </kirby-tab-button>`);
+      ionTabButton = spectator.query('ion-tab-button');
+      await TestHelper.whenReady(ionTabButton);
+    });
+
+    describe('by default', () => {
+      it('should render unselected tab icon', () => {
+        const defaultIcon = ionTabButton.querySelector('kirby-icon:not([selected-tab])');
+        expect(defaultIcon).toBeTruthy();
+        expect(defaultIcon).toBeVisible();
+      });
+
+      it('should not render selected tab icon', () => {
+        const selectedTabIcon = ionTabButton.querySelector('kirby-icon[selected-tab]');
+        expect(selectedTabIcon).toBeFalsy();
+        expect(selectedTabIcon).toBeHidden();
+      });
+    });
+
+    describe('when tab-button is selected', () => {
+      beforeEach(() => {
+        ionTabButton.selected = true;
+        spectator.detectComponentChanges();
+      });
+
+      it('should render selected tab icon', () => {
+        const selectedTabIcon = ionTabButton.querySelector('kirby-icon[selected-tab]');
+        expect(selectedTabIcon).toBeTruthy();
+        expect(selectedTabIcon).toBeVisible();
+      });
+
+      it('should not render unselected tab icon', () => {
+        const selectedTabIcon = ionTabButton.querySelector('kirby-icon:not([selected-tab])');
+        expect(selectedTabIcon).toBeFalsy();
+        expect(selectedTabIcon).toBeHidden();
       });
     });
   });
