@@ -23,9 +23,12 @@ ion-tab-button {
   height: 100%;
   flex: 1 1 0%;
   max-width: 168px;
-  font-size: utils.font-size('xxs');
+  font-weight: utils.font-weight('medium');
+  font-size: utils.font-size('xs');
+  line-height: utils.line-height('xs');
 
-  --color-selected: utils.get-color('black');
+  --color: #{utils.get-text-color('semi-dark')};
+  --color-selected: #{utils.get-color('black')};
   --padding-start: 0;
   --padding-end: 0;
 
@@ -51,13 +54,11 @@ ion-tab-button {
   @include utils.media('>=medium') {
     flex: none;
     flex-direction: row;
+    font-size: utils.font-size('s');
+    line-height: utils.line-height('s');
 
     --padding-start: #{utils.size('m')};
     --padding-end: #{utils.size('m')};
-
-    font-size: utils.font-size('s');
-
-    --color-selected: #{utils.get-color('black')};
 
     // Magic values here as we have no tokens that gives
     // badge the correct position in relation to the tab icon
