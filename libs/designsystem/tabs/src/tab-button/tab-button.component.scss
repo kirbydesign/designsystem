@@ -76,8 +76,8 @@ ion-tab-button {
       margin-right: 0;
     }
 
-    .icon-container {
-      margin-right: utils.size('xxs');
+    @include utils.slotted(kirby-icon) {
+      --kirby-icon-margin-right: #{utils.size('xxs')};
     }
   }
 
