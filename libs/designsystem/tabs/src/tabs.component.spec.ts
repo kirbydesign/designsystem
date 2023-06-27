@@ -1,9 +1,12 @@
 import { IonicModule } from '@ionic/angular';
-import { ScreenSize, TestHelper } from '@kirbydesign/designsystem/testing';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
 import { MockModule } from 'ng-mocks';
 
+import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
+import { ScreenSize, TestHelper } from '@kirbydesign/designsystem/testing';
 import { TabsComponent } from './tabs.component';
+
+const { size } = DesignTokenHelper;
 
 describe('TabsComponent', () => {
   let spectator: Spectator<TabsComponent>;
@@ -117,6 +120,29 @@ describe('TabsComponent', () => {
         const ionTabBarElm = spectator.query('ion-tab-bar');
         expect(ionTabBarElm).toHaveComputedStyle({
           height: expectedHeight,
+        });
+      });
+    });
+  });
+
+  describe('tab-bar spacing', () => {
+    afterAll(() => {
+      TestHelper.resetTestWindow();
+    });
+
+    const scenarios: { [key in ScreenSize]?: string } = {
+      phone: 'normal',
+      tablet: size('m'),
+      desktop: 'normal',
+    };
+
+    Object.entries(scenarios).forEach(([screenSize, expectedGap]) => {
+      it(`should have correct spacing on screensize ${screenSize}`, async () => {
+        await TestHelper.resizeTestWindow(TestHelper.screensize[screenSize]);
+
+        const ionTabBarElm = spectator.query('ion-tab-bar');
+        expect(ionTabBarElm).toHaveComputedStyle({
+          'column-gap': expectedGap,
         });
       });
     });
