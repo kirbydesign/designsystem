@@ -1,5 +1,4 @@
 import { createHostFactory, Spectator } from '@ngneat/spectator';
-import { MockComponent } from 'ng-mocks';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
