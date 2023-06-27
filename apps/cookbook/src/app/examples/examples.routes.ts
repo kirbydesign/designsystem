@@ -87,6 +87,7 @@ import { MenuExampleComponent } from './menu-example/menu-example.component';
 import { ModalExampleSimpleComponent } from './modal-example/modal-example-simple.component';
 import { ModalExampleAdvancedComponent } from './modal-example/modal-example-advanced.component';
 import { ModalExampleOutletComponent } from './modal-example/modal-example-outlet.component';
+import { ModalExampleAlertComponent } from './modal-example/modal-example-alert.component';
 
 export const routes: ModalEnabledRoutes = [
   {
@@ -258,6 +259,10 @@ export const routes: ModalEnabledRoutes = [
       {
         path: 'modal-simple',
         component: ModalExampleSimpleComponent,
+      },
+      {
+        path: 'modal-alert',
+        component: ModalExampleAlertComponent,
       },
       {
         path: 'modal-route',

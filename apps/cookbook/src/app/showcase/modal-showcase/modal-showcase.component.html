@@ -32,11 +32,10 @@
       <a href="#" (click)="scrollTo(returnData)">returning data</a>
       from the modal to the parent/caller component
     </li>
-    <!-- Add back when alert before close is a callback and we want people to use it
-      <li>
+    <li>
       Support for
       <a href="#" (click)="scrollTo(alertBeforeClose)">showing an alert before closing</a>
-    </li> -->
+    </li>
     <li>
       Support for programmatically
       <a href="#" (click)="scrollTo(scrolling)">scrolling</a>
@@ -364,17 +363,56 @@
   [ts]="outletExample.modalControllerWithinModalOutletCodeSnippet"
 ></cookbook-example-viewer>
 
-<!-- Add back when alert before close is a callback and we want people to use it
-  <h2 #alertBeforeClose>
+<h2 #alertBeforeClose>
   Show an alert before dismissing the modal
   <em>(optional)</em>
   :
 </h2>
+
 <p>
-  If you need the user to confirm that the modal should be closed, you can pass an AlertConfig as an
-  optional third argument
-  <cookbook-code-viewer [ts]="advancedConfigExample.alertBeforeCloseCodeSnippet"></cookbook-code-viewer>
-</p> -->
+  It is possible to provide a
+  <code>canDismiss</code>
+  callback to the modal that returns either
+  <code>true</code>
+  or an
+  <code>AlertConfig</code>
+  . If an
+  <code>AlertConfig</code>
+  is being returned, an alert will appear, when the user tries to dismiss the modal. This callback
+  can be set on the parent modal from your own embedded component, or be provided to the
+  <code>ModalConfig</code>
+  . The callback can be both synchronous and asynchronous.
+</p>
+
+<cookbook-iphone
+  class="large-example"
+  src="/examples/modal-alert"
+  viewMode="full-size"
+  [showViewModeToggle]="true"
+  showExternalLink="true"
+></cookbook-iphone>
+
+<h4>Embedded component</h4>
+<p>
+  Inside the embedded component you can set the
+  <code>canDismiss</code>
+  property on the parent modal. This makes it possible to validate if the modal can be dismissed
+  based on the data inside your component.
+</p>
+<cookbook-example-viewer
+  [ts]="alertEmbeddedExample.canDismissCodeSnippet"
+></cookbook-example-viewer>
+
+<h4>Modal config</h4>
+<p>
+  It is also possible to provide the callback in the
+  <code>ModalConfig</code>
+  that is passed to the modal controller. The callback is passed to the config as
+  <code>canDismiss</code>
+  .
+</p>
+
+<cookbook-example-viewer [ts]="alertModalConfigExample.codeSnippet"></cookbook-example-viewer>
 
 <h2 #modalEvents>Modal events</h2>
 <h3>Modal presented</h3>

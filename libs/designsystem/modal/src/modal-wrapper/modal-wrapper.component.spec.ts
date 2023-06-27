@@ -9,6 +9,7 @@ import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { DesignTokenHelper, KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { CanDismissHelper } from '../modal/services/can-dismiss.helper';
 import { ModalWrapperComponent } from './modal-wrapper.component';
 import {
   DynamicFooterEmbeddedComponent,
@@ -38,6 +39,7 @@ describe('ModalWrapperComponent', () => {
       },
     ],
     declarations: [MockComponents(ButtonComponent)],
+    mocks: [CanDismissHelper],
   });
 
   let modalWrapperTestBuilder: ModalWrapperTestBuilder;
