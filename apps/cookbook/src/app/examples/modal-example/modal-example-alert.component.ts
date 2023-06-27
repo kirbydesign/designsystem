@@ -30,7 +30,7 @@ validate() {
   openModal() {
     const config: ModalConfig = {
         component: EmbeddedComponent,
-        showAlert: () => this.validate(),
+        canDismiss: () => this.validate(),
     }
 
     this.modalController.showModal(config);

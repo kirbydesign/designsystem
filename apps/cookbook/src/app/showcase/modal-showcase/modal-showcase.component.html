@@ -370,7 +370,9 @@
 </h2>
 
 <p>
-  It is possible to provide a callback to the modal that returns either
+  It is possible to provide a
+  <code>canDismiss</code>
+  callback to the modal that returns either
   <code>true</code>
   or an
   <code>AlertConfig</code>
@@ -406,7 +408,7 @@
   It is also possible to provide the callback in the
   <code>ModalConfig</code>
   that is passed to the modal controller. The callback is passed to the config as
-  <code>showAlert</code>
+  <code>canDismiss</code>
   .
 </p>
 

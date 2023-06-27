@@ -167,13 +167,13 @@ describe('ModalHelper', () => {
     });
 
     describe('canDismiss', () => {
-      it('should pass "true" to "canDismiss", if no showAlert callback is provided', async () => {
+      it('should pass "true" to "canDismiss", if no config.canDismiss callback is provided', async () => {
         await openModal();
 
         expect(ionModal.canDismiss).toEqual(true);
       });
 
-      it('should call the getCanDismissCallback method, if a showAlert callback is provided', async () => {
+      it('should call the getCanDismissCallback method, if a config.canDismiss callback is provided', async () => {
         const canDismissHelper = spectator.inject(CanDismissHelper);
         const showAlertCallback = () => true;
 
