@@ -9,7 +9,7 @@ const template = `<!-- This container is only needed due to layout of larger scr
 
   <kirby-tab-bar>
     <kirby-tab-button routerLink="overview">
-      <kirby-icon name="kirby"></kirby-icon>
+      <kirby-icon name="overview-outline"></kirby-icon>
       Overview
     </kirby-tab-button>
 
