@@ -17,7 +17,7 @@ describe('TabsComponent', () => {
   const createHost = createHostFactory({
     component: TabButtonComponent,
     imports: [TestHelper.ionicModuleForTest],
-    declarations: [MockComponent(IconComponent)],
+    declarations: [IconComponent],
     template: `<kirby-tab-button>Title</kirby-tab-button>`,
   });
 
@@ -40,19 +40,12 @@ describe('TabsComponent', () => {
       });
     });
 
-    it('should set correct color on selected tab', () => {
+    it('should set correct color on selected tab', async () => {
       ionTabButton.selected = true;
+      await TestHelper.whenTrue(() => ionTabButton.classList.contains('tab-selected'));
 
       expect(ionTabButton).toHaveComputedStyle({
-        color: DesignTokenHelper.getTextColor('semi-dark'),
-      });
-    });
-
-    it('should set correct color on selected tab', () => {
-      ionTabButton.selected = true;
-
-      expect(ionTabButton).toHaveComputedStyle({
-        color: DesignTokenHelper.getTextColor('semi-dark'),
+        color: getTextColor('black'),
       });
     });
 
