@@ -45,7 +45,7 @@ ion-tabs {
       ion-tab-bar {
         margin: 0 auto;
         justify-content: flex-end;
-        column-gap: 0;
+        column-gap: initial;
 
         // Ensure tabs are not hidden when displayed at top of screen
         &.bottom-hidden {
