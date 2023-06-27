@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { WindowRef } from '@kirbydesign/designsystem/types';
-
 import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 import { first, fromEvent, takeUntil } from 'rxjs';
 import { Overlay } from '../../modal.interfaces';
-import { AlertConfig } from '../alert/config/alert-config';
 
 import {
   ModalCompactWrapperComponent,
@@ -13,9 +11,11 @@ import {
   ModalSize,
   ModalWrapperComponent,
 } from '../../modal-wrapper';
-import { AlertHelper } from './alert.helper';
 
+import { AlertConfig } from '../alert/config/alert-config';
 import { ModalAnimationBuilderService } from './modal-animation-builder.service';
+import { CanDismissHelper } from './can-dismiss.helper';
+import { AlertHelper } from './alert.helper';
 
 @Injectable()
 export class ModalHelper {
@@ -23,6 +23,7 @@ export class ModalHelper {
     private ionicModalController: ModalController,
     private modalAnimationBuilder: ModalAnimationBuilderService,
     private windowRef: WindowRef,
+    private canDismissHelper: CanDismissHelper,
     private alertHelper: AlertHelper
   ) {}
 
@@ -64,13 +65,24 @@ export class ModalHelper {
     }
 
     let canDismiss: boolean | (() => Promise<boolean>) = true;
+
+    if (config.canDismiss) {
+      canDismiss = this.canDismissHelper.getCanDismissCallback(config.canDismiss);
+    }
+
+    // This functionality is kept to prevent breaking changes, but should be depracated in the next major.
+    // It will be replaced by the new 'config.canDismiss' callback
     if (alertConfig) {
+      console.warn(
+        "This way of passing an alertConfig to the modal will be deprecated in the next major version. We recommend using the 'config.canDismiss' callback instead."
+      );
+
       // Remembers the modal dismissal response from user to prevent multiple alerts on
       // approval since the callback is invoked more than once when closing.
       let canBeDismissed = false;
       canDismiss = async () => {
         if (!canBeDismissed) {
-          canBeDismissed = await this.showAlert(alertConfig);
+          canBeDismissed = await this.canDismissHelper.showAlert(alertConfig);
         }
 
         return canBeDismissed;
@@ -114,7 +126,7 @@ export class ModalHelper {
 
     // Back button should only be handled manually
     // if the modal is not instantiated through a route.
-    if (!config.modalRoute && !alertConfig) {
+    if (!config.modalRoute && !config.canDismiss && !alertConfig) {
       this.handleBrowserBackButton(ionModal);
     }
 
@@ -131,12 +143,6 @@ export class ModalHelper {
     console.log(
       'registerPresentingElement has been deprecated. It is no longer needed to register a presenting element.'
     );
-  }
-
-  public async showAlert(config: AlertConfig): Promise<boolean> {
-    const alert = await this.alertHelper.showAlert(config);
-    const result = await alert.onWillDismiss;
-    return result.data;
   }
 
   public async scrollToTop(
