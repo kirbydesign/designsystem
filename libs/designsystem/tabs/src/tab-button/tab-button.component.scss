@@ -1,5 +1,3 @@
-@use 'sass:math';
-
 @use '@kirbydesign/core/src/scss/interaction-state';
 @use '@kirbydesign/core/src/scss/utils';
 
@@ -73,7 +71,7 @@ ion-tab-button {
         --kirby-badge-left: 0;
 
         margin-left: utils.size('xxxxs');
-        margin-bottom: math.div(utils.size('xxxxs'), 2);
+        margin-bottom: utils.size('xxxxs') / 2;
       }
     }
 
