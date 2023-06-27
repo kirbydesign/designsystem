@@ -1,14 +1,46 @@
-<h2>Disclosure test</h2>
-<cookbook-example-viewer [html]="disclosureExample.template">
-  <cookbook-item-example-disclosure #disclosureExample></cookbook-item-example-disclosure>
-</cookbook-example-viewer>
-<p class="comment small">
-  <em>
-    <strong>Please note</strong>
-    , the disclosure input is limited to a set of predefined icons:
-    <code>'link' | 'arrow-more' | 'arrow-down' | 'arrow-up'</code>
-  </em>
+<h2>DISCLOSURE ANIMATION DEMO START</h2>
+
+<p>
+  <code>arrow-down</code>
+  &
+  <code>arrow-up</code>
+  should animate on click
 </p>
+<cookbook-example-viewer [html]="disclosureExample.template">
+  <cookbook-item-example-disclosure
+    #disclosureExample
+    [icon]="'arrow-down'"
+  ></cookbook-item-example-disclosure>
+</cookbook-example-viewer>
+
+<cookbook-example-viewer [html]="disclosureExample.template">
+  <cookbook-item-example-disclosure
+    #disclosureExample
+    [icon]="'arrow-up'"
+  ></cookbook-item-example-disclosure>
+</cookbook-example-viewer>
+
+<p>
+  <code>arrow-more</code>
+  &
+  <code>link</code>
+  should NOT animate on click
+</p>
+<cookbook-example-viewer [html]="disclosureExample.template">
+  <cookbook-item-example-disclosure
+    #disclosureExample
+    [icon]="'arrow-more'"
+  ></cookbook-item-example-disclosure>
+</cookbook-example-viewer>
+
+<cookbook-example-viewer [html]="disclosureExample.template">
+  <cookbook-item-example-disclosure
+    #disclosureExample
+    [icon]="'link'"
+  ></cookbook-item-example-disclosure>
+</cookbook-example-viewer>
+
+<h2>DISCLOSURE ANIMATION DEMO END</h2>
 
 <p>
   The
