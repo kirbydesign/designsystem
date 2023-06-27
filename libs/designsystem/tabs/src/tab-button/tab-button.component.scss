@@ -45,10 +45,6 @@ ion-tab-button {
     }
   }
 
-  .icon-container {
-    position: relative;
-  }
-
   @include utils.media('>=medium') {
     flex: none;
     flex-direction: row;
