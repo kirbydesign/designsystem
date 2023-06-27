@@ -26,6 +26,8 @@ ion-tab-button {
   font-size: utils.font-size('xxs');
 
   --color-selected: utils.get-color('black');
+  --padding-start: 0;
+  --padding-end: 0;
 
   // Magic values here as we have no tokens that gives
   // badge the correct position in relation to the tab icon
@@ -49,8 +51,10 @@ ion-tab-button {
   @include utils.media('>=medium') {
     flex: none;
     flex-direction: row;
-    padding: 0 utils.size('m');
-    margin-right: utils.size('m');
+
+    --padding-start: #{utils.size('m')};
+    --padding-end: #{utils.size('m')};
+
     font-size: utils.font-size('s');
 
     --color-selected: #{utils.get-color('black')};
@@ -72,10 +76,6 @@ ion-tab-button {
       }
     }
 
-    &:last-child {
-      margin-right: 0;
-    }
-
     @include utils.slotted(kirby-icon) {
       --kirby-icon-margin-right: #{utils.size('xxs')};
     }
@@ -83,8 +83,8 @@ ion-tab-button {
 
   @include utils.media('>=large') {
     @include utils.not-touch {
-      padding: 0 utils.size('xs');
-      margin-right: 0;
+      --padding-start: #{utils.size('xs')};
+      --padding-end: #{utils.size('xs')};
     }
   }
 }
