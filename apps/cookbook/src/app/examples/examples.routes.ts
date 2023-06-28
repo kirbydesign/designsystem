@@ -69,6 +69,7 @@ import { SlidesAdvancedExampleComponent } from './slides-example/slides-advanced
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
 import { StylingHtmlListsExampleComponent } from './styling-html-lists-example/styling-html-lists-example.component';
 import { TabExampleComponent } from './tabs-example/tab/tab-example.component';
+import { TabExampleMenuComponent } from './tabs-example/tab/tab-example-menu.component';
 import { TabsExampleComponent } from './tabs-example/tabs-example.component';
 import { ToastExampleComponent } from './toast-example/toast-example.component';
 import { ToggleButtonExampleComponent } from './toggle-button-example/toggle-button-example.component';
@@ -124,31 +125,31 @@ export const routes: ModalEnabledRoutes = [
             children: [
               {
                 path: '',
-                redirectTo: 'dashboard',
+                redirectTo: 'overview',
                 pathMatch: 'full',
               },
               {
-                path: 'dashboard',
+                path: 'overview',
                 component: PageFixedFooterTabExampleComponent,
                 data: {
-                  title: 'Dashboard',
+                  title: 'Overview',
                 },
               },
               {
-                path: 'account',
+                path: 'transfer',
                 children: [
                   {
                     path: '',
                     component: TabExampleComponent,
                     data: {
-                      title: 'Account',
+                      title: 'Transfer',
                     },
                   },
                   {
                     path: 'sub',
                     component: TabExampleComponent,
                     data: {
-                      title: 'Account Sub',
+                      title: 'Transfer Sub',
                     },
                   },
                 ],
@@ -159,6 +160,10 @@ export const routes: ModalEnabledRoutes = [
                 data: {
                   title: 'Inbox',
                 },
+              },
+              {
+                path: 'menu',
+                component: TabExampleMenuComponent,
               },
             ],
           },
@@ -206,31 +211,31 @@ export const routes: ModalEnabledRoutes = [
         children: [
           {
             path: '',
-            redirectTo: 'dashboard',
+            redirectTo: 'overview',
             pathMatch: 'full',
           },
           {
-            path: 'dashboard',
+            path: 'overview',
             component: TabExampleComponent,
             data: {
-              title: 'Dashboard',
+              title: 'Overview',
             },
           },
           {
-            path: 'account',
+            path: 'transfer',
             children: [
               {
                 path: '',
                 component: TabExampleComponent,
                 data: {
-                  title: 'Account',
+                  title: 'Transfer',
                 },
               },
               {
                 path: 'sub',
                 component: TabExampleComponent,
                 data: {
-                  title: 'Account Sub',
+                  title: 'Transfer Sub',
                 },
               },
             ],
@@ -241,6 +246,10 @@ export const routes: ModalEnabledRoutes = [
             data: {
               title: 'Inbox',
             },
+          },
+          {
+            path: 'menu',
+            component: TabExampleMenuComponent,
           },
         ],
       },
