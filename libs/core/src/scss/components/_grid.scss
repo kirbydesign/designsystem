@@ -123,12 +123,14 @@ $grid-sizes-to-breakpoint-map: (
   }
 }
 
-@mixin column-style($breakpoint, $size) {
-  &[#{$breakpoint}='#{$size}'],
-  &[data-#{$breakpoint}='#{$size}'] {
-    width: calc(100% * #{$size} / var(--kirby-grid-columns));
-    flex-grow: 0;
-    flex-basis: auto;
+@mixin column-style($breakpoint) {
+  @for $size from 1 through 12 {
+    &[#{$breakpoint}='#{$size}'],
+    &[data-#{$breakpoint}='#{$size}'] {
+      width: calc(100% * #{$size} / var(--kirby-grid-columns));
+      flex-grow: 0;
+      flex-basis: auto;
+    }
   }
 }
 
@@ -140,14 +142,10 @@ $grid-sizes-to-breakpoint-map: (
 
 @mixin breakpoint-style($breakpoint) {
   @if $breakpoint == 'xs' {
-    @for $i from 1 through 12 {
-      @include column-style($breakpoint, $i);
-    }
+    @include column-style($breakpoint);
   } @else {
     @media (min-width: get-breakpoint($breakpoint)) {
-      @for $i from 1 through 12 {
-        @include column-style($breakpoint, $i);
-      }
+      @include column-style($breakpoint);
     }
   }
 }
