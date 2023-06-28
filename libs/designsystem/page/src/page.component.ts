@@ -198,6 +198,14 @@ export class PageContentComponent {}
   template: `
     <ng-content select="button[kirby-button]"></ng-content>
   `,
+  styles: [
+    `
+      :host {
+        display: inline-flex;
+        column-gap: 8px;
+      }
+    `,
+  ],
 })
 export class PageActionsComponent {}
 

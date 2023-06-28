@@ -1196,3 +1196,60 @@ describe('PageComponent', () => {
     });
   });
 });
+
+describe('PageActionsComponent', () => {
+  let spectator: SpectatorHost<PageActionsComponent>;
+
+  const createHost = createHostFactory({
+    component: PageActionsComponent,
+  });
+
+  beforeEach(() => {
+    spectator = createHost(`<kirby-page-actions>
+                              <button kirby-button>
+                                Action 1
+                              </button>
+                              <button kirby-button>
+                                Action 2
+                              </button>
+                            </kirby-page-actions>`);
+  });
+
+  it('should create', () => {
+    expect(spectator.component).toBeTruthy();
+  });
+
+  it('should render slotted buttons', () => {
+    const buttons = spectator.element.querySelectorAll(':scope > button[kirby-button]');
+    expect(buttons).toHaveLength(2);
+  });
+
+  it('should have no margin on buttons', () => {
+    const buttons = spectator.element.querySelectorAll<HTMLButtonElement>(
+      ':scope > button[kirby-button]'
+    );
+
+    buttons.forEach((btn) =>
+      expect(btn).toHaveComputedStyle({
+        margin: '0px',
+      })
+    );
+    const { left: containerLeft, right: containerRight } =
+      spectator.element.getBoundingClientRect();
+    const firstButtonLeft = buttons[0].getBoundingClientRect().left;
+    const lastButtonRight = buttons[1].getBoundingClientRect().right;
+    expect(firstButtonLeft).toEqual(containerLeft);
+    expect(lastButtonRight).toEqual(containerRight);
+  });
+
+  it('should have correct spacing between buttons', () => {
+    const buttons = spectator.element.querySelectorAll<HTMLButtonElement>(
+      ':scope > button[kirby-button]'
+    );
+
+    const firstButtonRight = buttons[0].getBoundingClientRect().right;
+    const lastButtonLeft = buttons[1].getBoundingClientRect().left;
+    const spaceBetween = lastButtonLeft - firstButtonRight;
+    expect(spaceBetween).toEqual(parseInt(size('xxs')));
+  });
+});
