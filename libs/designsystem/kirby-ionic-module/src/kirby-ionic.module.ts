@@ -10,9 +10,6 @@ const navAnimationConfig: IonicConfig = shouldHaveNoopAnimation && {
 
 const config: IonicConfig = {
   mode: 'ios',
-  inputShims: true,
-  scrollAssist: true,
-  scrollPadding: false,
   ...navAnimationConfig,
 };
 
