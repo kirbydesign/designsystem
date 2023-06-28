@@ -43,6 +43,7 @@ export const kirbyIconSettings: IconSettings = {
     { name: 'log-out', svg: 'assets/kirby/icons/svg/log-out.svg' },
     { name: 'menu-outline', svg: 'assets/kirby/icons/svg/menu-outline.svg' },
     { name: 'menu', svg: 'assets/kirby/icons/svg/menu.svg' },
+    { name: 'menu-no-decoration', svg: 'assets/kirby/icons/svg/menu-no-decoration.svg' },
     { name: 'misc', svg: 'assets/kirby/icons/svg/misc.svg' },
     { name: 'more', svg: 'assets/kirby/icons/svg/more.svg' },
     { name: 'move', svg: 'assets/kirby/icons/svg/move.svg' },

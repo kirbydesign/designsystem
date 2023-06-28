@@ -45,6 +45,7 @@ import { SlidesAdvancedExampleComponent } from './slides-example/slides-advanced
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
 import { StylingHtmlListsExampleComponent } from './styling-html-lists-example/styling-html-lists-example.component';
 import { TabExampleComponent } from './tabs-example/tab/tab-example.component';
+import { TabExampleMenuComponent } from './tabs-example/tab/tab-example-menu.component';
 import { TabsExampleComponent } from './tabs-example/tabs-example.component';
 import { ToastExampleComponent } from './toast-example/toast-example.component';
 import { ToggleExampleComponent } from './toggle-example/toggle-example.component';
@@ -97,11 +98,11 @@ export const COMPONENT_DECLARATIONS: any[] = [
   HeaderWithCustomActionsExampleComponent,
   HeaderWithInteractiveTitleExampleComponent,
   PageTabNavExampleComponent,
-  TabExampleComponent,
   PageFixedFooterTabsExampleComponent,
   PageFixedFooterTabExampleComponent,
   TabsExampleComponent,
   TabExampleComponent,
+  TabExampleMenuComponent,
   ItemExampleComponent,
   DividerExampleComponent,
   ReorderListExampleComponent,

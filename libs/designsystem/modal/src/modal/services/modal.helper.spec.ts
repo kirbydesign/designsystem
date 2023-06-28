@@ -131,6 +131,7 @@ describe('ModalHelper', () => {
   });
 
   afterEach(async () => {
+    ionModal.canDismiss = true;
     await overlay.dismiss();
   });
 

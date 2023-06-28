@@ -236,7 +236,10 @@ export class PageComponent
   public set tabBarBottomHidden(value: boolean) {
     if (this.tabsComponent) {
       // as we are setting a class on tabs, we need this to happen in a separate cd cycle
-      setTimeout(() => (this.tabsComponent.tabBarBottomHidden = value));
+      setTimeout(() => {
+        this.tabsComponent.tabBarBottomHidden = value;
+        this.changeDetectorRef.markForCheck();
+      });
     }
     this._tabBarBottomHidden = value;
   }
