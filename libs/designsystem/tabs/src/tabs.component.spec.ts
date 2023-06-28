@@ -139,7 +139,7 @@ describe('TabsComponent', () => {
 
     Object.entries(scenarios).forEach(([screenSize, expectedGap]) => {
       // Only run desktop test on non-touch devices
-      if (screenSize === 'desktop' && isNonTouchDevice) return;
+      if (screenSize === 'desktop' && !isNonTouchDevice) return;
 
       it(`should have correct spacing on screensize ${screenSize}`, async () => {
         await TestHelper.resizeTestWindow(TestHelper.screensize[screenSize]);
