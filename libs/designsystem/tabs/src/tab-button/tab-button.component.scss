@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 @use '@kirbydesign/core/src/scss/interaction-state';
 @use '@kirbydesign/core/src/scss/utils';
 
@@ -67,7 +69,11 @@ ion-tab-button {
         --kirby-badge-left: 0;
 
         margin-left: utils.size('xxxxs');
-        margin-bottom: utils.size('xxxxs') / 2;
+
+        // Using / for division outside of calc() is deprecated
+        // and will be removed in Dart Sass 2.0.0. Use math.div() instead.
+        // See: https://sass-lang.com/documentation/breaking-changes/slash-div/
+        margin-bottom: math.div(utils.size('xxxxs'), 2);
       }
     }
 
