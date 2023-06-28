@@ -12,6 +12,7 @@ describe('TabsComponent', () => {
   let spectator: Spectator<TabButtonComponent>;
   let ionTabButton: HTMLIonTabButtonElement;
   let innerButton: HTMLAnchorElement;
+  const isNonTouchDevice = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
   const createHost = createHostFactory({
     component: TabButtonComponent,
@@ -165,18 +166,21 @@ describe('TabsComponent', () => {
         });
       });
 
-      describe('on screensize desktop', () => {
-        beforeAll(async () => {
-          await TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
-        });
+      // Only run test on non-touch devices
+      if (isNonTouchDevice) {
+        describe('on screensize desktop', () => {
+          beforeAll(async () => {
+            await TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
+          });
 
-        it('should have correct padding', () => {
-          expect(innerButton).toHaveComputedStyle({
-            'padding-inline': size('xs'),
-            'padding-block': '0px',
+          it('should have correct padding', () => {
+            expect(innerButton).toHaveComputedStyle({
+              'padding-inline': size('xs'),
+              'padding-block': '0px',
+            });
           });
         });
-      });
+      }
     });
   });
 

@@ -10,6 +10,7 @@ const { size } = DesignTokenHelper;
 
 describe('TabsComponent', () => {
   let spectator: Spectator<TabsComponent>;
+  const isNonTouchDevice = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
   const createHost = createComponentFactory({
     imports: [MockModule(IonicModule)],
@@ -71,7 +72,7 @@ describe('TabsComponent', () => {
     });
 
     // Only run test on non-touch devices
-    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    if (isNonTouchDevice) {
       describe('on screensize large', () => {
         beforeEach(async () => {
           await TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
@@ -137,6 +138,9 @@ describe('TabsComponent', () => {
     };
 
     Object.entries(scenarios).forEach(([screenSize, expectedGap]) => {
+      // Only run desktop test on non-touch devices
+      if (screenSize === 'desktop' && isNonTouchDevice) return;
+
       it(`should have correct spacing on screensize ${screenSize}`, async () => {
         await TestHelper.resizeTestWindow(TestHelper.screensize[screenSize]);
 
