@@ -31,10 +31,11 @@ $button-z-index: $card-z-index + 1;
       opacity: 0;
       visibility: hidden;
       rotate: 45deg;
-      transition-property: opacity, rotate;
+      transition-property: opacity, rotate, scale;
       transition-duration: utils.get-transition-duration('quick');
       transition-timing-function: utils.get-transition-easing('enter-exit');
       transform-origin: top left;
+      scale: 0.5;
     }
 
     &.show-config {
@@ -42,6 +43,7 @@ $button-z-index: $card-z-index + 1;
         opacity: 1;
         visibility: visible;
         rotate: 0deg;
+        scale: 1;
       }
     }
   }

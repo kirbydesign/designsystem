@@ -24,7 +24,7 @@ const config = {
     Custom subtitles with very long names that span multiple lines will wrap.
   </div>
 
-  <div *kirbyPageToolbarTitle style="display: flex; gap: 0.5rem;">
+  <div *kirbyPageToolbarTitle style="display: flex; justify-content: center; align-items: center; gap: 0.5rem;">
     <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
       Custom Titles with very long names that span multiple lines will be truncated
     </div>
@@ -52,7 +52,6 @@ const config = {
 };
 @Component({
   template: config.template,
-  styles: ['.custom-page-title { display: inline-flex; }'],
 })
 export class PageCustomTitleExampleComponent extends BasePageExampleComponent {
   static readonly template = config.template

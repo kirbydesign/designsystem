@@ -43,6 +43,7 @@ export const kirbyIconSettings: IconSettings = {
     { name: 'log-out', svg: 'assets/kirby/icons/svg/log-out.svg' },
     { name: 'menu-outline', svg: 'assets/kirby/icons/svg/menu-outline.svg' },
     { name: 'menu', svg: 'assets/kirby/icons/svg/menu.svg' },
+    { name: 'menu-no-decoration', svg: 'assets/kirby/icons/svg/menu-no-decoration.svg' },
     { name: 'misc', svg: 'assets/kirby/icons/svg/misc.svg' },
     { name: 'more', svg: 'assets/kirby/icons/svg/more.svg' },
     { name: 'move', svg: 'assets/kirby/icons/svg/move.svg' },
@@ -95,6 +96,9 @@ export const kirbyIconSettings: IconSettings = {
     { name: 'see', svg: 'assets/kirby/icons/svg/see.svg' },
     { name: 'overview', svg: 'assets/kirby/icons/svg/overview.svg' },
     { name: 'overview-outline', svg: 'assets/kirby/icons/svg/overview-outline.svg' },
+    { name: 'arrow-down-fill', svg: 'assets/kirby/icons/svg/arrow-down-fill.svg' },
+    { name: 'arrow-up-fill', svg: 'assets/kirby/icons/svg/arrow-up-fill.svg' },
+    { name: 'calculator', svg: 'assets/kirby/icons/svg/calculator.svg' },
   ],
 };
 
