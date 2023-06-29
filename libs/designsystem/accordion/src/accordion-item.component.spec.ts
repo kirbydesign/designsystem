@@ -53,8 +53,6 @@ describe('AccordionItemComponent', () => {
 
     it('should emit the "toggle" event when expanded', () => {
       spyOn(spectator.component.toggle, 'emit');
-      spectator.component.isDisabled = false;
-      spectator.component.isExpanded = false;
 
       spectator.click('.header');
 
