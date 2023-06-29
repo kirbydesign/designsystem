@@ -23,7 +23,7 @@ export class AccordionEventsExampleComponent {
 
   onToggleChange(toggle: boolean) {
     const config: ToastConfig = {
-      message: `toggle changed - checked: ${toggle}`,
+      message: `Accordion item toggled - is open: ${toggle}`,
       messageType: toggle ? 'success' : 'warning',
       durationInMs: 1500,
     };
