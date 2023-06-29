@@ -79,6 +79,7 @@ describe('AccordionItemComponent', () => {
       });
     });
   });
+
   it('should emit the toggle event when collapsed', () => {
     spyOn(spectator.component.toggle, 'emit');
     spectator.component.isDisabled = false;
