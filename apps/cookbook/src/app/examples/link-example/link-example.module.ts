@@ -6,8 +6,13 @@ import { KirbyModule } from '@kirbydesign/designsystem';
 
 import { LinkExampleDefaultComponent } from './examples/default';
 import { LinkExampleNewTabComponent } from './examples/new-tab';
+import { LinkExampleTrailingIconComponent } from '~/app/examples/link-example/examples/trailing-icon';
 
-const COMPONENT_DECLARATIONS = [LinkExampleNewTabComponent, LinkExampleDefaultComponent];
+const COMPONENT_DECLARATIONS = [
+  LinkExampleNewTabComponent,
+  LinkExampleDefaultComponent,
+  LinkExampleTrailingIconComponent,
+];
 
 @NgModule({
   imports: [CommonModule, KirbyModule, RouterModule],

@@ -27,6 +27,7 @@ import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { HorizontalDirection, PopoverComponent } from '@kirbydesign/designsystem/popover';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 
+import { EventListenerDisposeFn } from '@kirbydesign/designsystem/types';
 import { OpenState, VerticalDirection } from './dropdown.types';
 import { KeyboardHandlerService } from './keyboard-handler.service';
 
@@ -128,15 +129,6 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   @Input()
   usePopover = false;
 
-  /*
-   * TEMPORARY MORE-MENU
-   * This is an internal and temporary input that allows the dropdown to use the 'more menu'
-   * icon
-   */
-  @HostBinding('class.more-menu')
-  @Input()
-  _isMoreMenu = false;
-
   @HostBinding('attr.tabindex')
   get _tabindex() {
     return this.disabled ? -1 : this.tabindex;
@@ -227,9 +219,13 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     // Setup a click listener for each new slotted items
     kirbyItems.forEach((kirbyItem, index) => {
       this.renderer.setAttribute(kirbyItem.nativeElement, 'role', 'option');
-      const unlisten = this.renderer.listen(kirbyItem.nativeElement, 'click', () => {
-        this.onItemSelect(index);
-      });
+      const unlisten: EventListenerDisposeFn = this.renderer.listen(
+        kirbyItem.nativeElement,
+        'click',
+        () => {
+          this.onItemSelect(index);
+        }
+      );
 
       this.itemClickUnlisten.push(unlisten);
     });
@@ -241,7 +237,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     return this._kirbyItemsSlotted;
   }
 
-  private itemClickUnlisten: (() => void)[] = [];
+  private itemClickUnlisten: EventListenerDisposeFn[] = [];
   private intersectionObserverRef: IntersectionObserver;
   private showDropdownTimeoutId: ReturnType<typeof setTimeout>;
 

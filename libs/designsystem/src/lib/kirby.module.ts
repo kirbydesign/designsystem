@@ -54,6 +54,7 @@ import {
   ActionSheetHelper,
   AlertComponent,
   AlertHelper,
+  CanDismissHelper,
   ModalCompactWrapperComponent,
   ModalController,
   ModalFooterComponent,
@@ -165,6 +166,7 @@ const providers = [
   LoadingOverlayService,
   ResizeObserverFactory,
   ResizeObserverService,
+  CanDismissHelper,
   customElementsInitializer(),
 ];
 

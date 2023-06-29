@@ -6,6 +6,12 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 
+const KIRBY_TABLE_DEPRECATION_WARNING =
+  'Deprecation warning: The support for "kirby-table" as a directive will be removed in the next major version. We recommend to use the global CSS class "kirby-table".';
+
+const KIRBY_TABLE_LAYOUT_FIXED_DEPRECATION_WARNING =
+  'Deprecation warning: The "kirby-table" support for using the input property "fixedLayout" will be removed in the next major version. We recommend to use the global CSS class "layout-fixed" in combination with the "kirby-table" class';
+
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'table[kirby-table]',
@@ -17,5 +23,19 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableComponent {
-  @HostBinding('class.kirby-table-layout-fixed') @Input() fixedLayout: boolean = false;
+  constructor() {
+    console.warn(KIRBY_TABLE_DEPRECATION_WARNING);
+  }
+
+  private _fixedLayout?: boolean;
+
+  @HostBinding('class.kirby-table-layout-fixed')
+  get hasFixedLayout(): boolean {
+    return this._fixedLayout;
+  }
+
+  @Input() set fixedLayout(fixed: boolean) {
+    this._fixedLayout = fixed;
+    console.warn(KIRBY_TABLE_LAYOUT_FIXED_DEPRECATION_WARNING);
+  }
 }
