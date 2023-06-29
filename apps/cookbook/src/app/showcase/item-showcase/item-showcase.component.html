@@ -1,29 +1,3 @@
-<h2>DISCLOSURE ANIMATION DEMO START</h2>
-
-<p>
-  <code>arrow-down</code>
-  &
-  <code>arrow-up</code>
-  should animate on click
-</p>
-
-<cookbook-item-example-disclosure [icon]="'arrow-down'"></cookbook-item-example-disclosure>
-<br />
-<cookbook-item-example-disclosure [icon]="'arrow-up'"></cookbook-item-example-disclosure>
-
-<p>
-  <code>arrow-more</code>
-  &
-  <code>link</code>
-  should NOT animate on click
-</p>
-
-<cookbook-item-example-disclosure [icon]="'arrow-more'"></cookbook-item-example-disclosure>
-<br />
-<cookbook-item-example-disclosure [icon]="'link'"></cookbook-item-example-disclosure>
-
-<h2>DISCLOSURE ANIMATION DEMO END</h2>
-
 <p>
   The
   <code>kirby-item</code>
@@ -293,6 +267,29 @@
     <strong>Please note</strong>
     , the disclosure input is limited to a set of predefined icons:
     <code>'link' | 'arrow-more' | 'arrow-down' | 'arrow-up'</code>
+  </em>
+</p>
+
+<h4>Rotation animation</h4>
+
+<p>
+  It is possible to enable an animation that rotates the discloure icon 180 degrees. Pass a boolean
+  to
+  <code>[rotateIcon]</code>
+  to trigger the animation.
+</p>
+
+<cookbook-example-viewer [html]="disclosureAnimationExample.template">
+  <cookbook-item-example-disclosure-animation
+    #disclosureAnimationExample
+  ></cookbook-item-example-disclosure-animation>
+</cookbook-example-viewer>
+
+<p class="comment small">
+  <em>
+    <strong>Please note</strong>
+    , the animation of the disclosure icon is only available for :
+    <code>'arrow-down' | 'arrow-up'</code>
   </em>
 </p>
 
