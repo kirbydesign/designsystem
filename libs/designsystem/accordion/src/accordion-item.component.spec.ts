@@ -84,7 +84,7 @@ describe('AccordionItemComponent', () => {
     spyOn(spectator.component.toggle, 'emit');
     spectator.component.isDisabled = false;
     spectator.component.isExpanded = true;
-    spectator.component._onToggleExpanded(new KeyboardEvent('keydown'));
+    spectator.click('.header');
     expect(spectator.component.toggle.emit).toHaveBeenCalledTimes(1);
     expect(spectator.component.toggle.emit).toHaveBeenCalledWith(false);
   });
