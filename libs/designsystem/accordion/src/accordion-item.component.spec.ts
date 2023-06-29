@@ -29,51 +29,61 @@ describe('AccordionItemComponent', () => {
   it('should have the configured title', () => {
     const expectedText = 'Title';
     expect(spectator.component.title).toEqual(expectedText);
-    expect(spectator.query('.title')).toHaveText(expectedText, true);
+    expect(spectator.query('.title')).toHaveExactTrimmedText(expectedText);
   });
 
   it('should not be expanded', () => {
-    expect(spectator.component.isExpanded).toBeFalsy();
+    expect(spectator.component.isExpanded).toBeFalse();
+  });
+
+  it('should not be disabled', () => {
+    expect(spectator.component.isDisabled).toBeFalse();
   });
 
   it('should not show the content', () => {
-    expect(spectator.query('.content')).toHaveComputedStyle({
-      visibility: 'hidden',
-    });
+    expect(spectator.query('.content')).toBeHidden();
+  });
+
+  it('should emit the "toggle" event when expanded', () => {
+    spyOn(spectator.component.toggle, 'emit');
+    spectator.component.isDisabled = false;
+    spectator.component.isExpanded = false;
+
+    spectator.click('.header');
+
+    expect(spectator.component.toggle.emit).toHaveBeenCalledOnceWith(true);
   });
 
   describe('when expanded', () => {
-    it('should show the content', () => {
+    beforeEach(() => {
       spectator.setInput('isExpanded', true);
       spectator.detectChanges();
-      expect(spectator.query('.content')).toHaveComputedStyle({
-        visibility: 'visible',
-      });
     });
 
-    it('should emit the toggle event when expanded', () => {
+    it('should show the content', () => {
+      expect(spectator.query('.content')).toBeVisible();
+    });
+
+    it('should emit the "toggle" event when collapsed', () => {
       spyOn(spectator.component.toggle, 'emit');
-      spectator.component.isDisabled = false;
-      spectator.component.isExpanded = false;
 
       spectator.click('.header');
 
-      expect(spectator.component.toggle.emit).toHaveBeenCalledOnceWith(true);
+      expect(spectator.component.toggle.emit).toHaveBeenCalledOnceWith(false);
     });
   });
 
   describe('Disabled', () => {
-    it('should not show content if disabled', () => {
+    beforeEach(() => {
       spectator.setInput('isDisabled', true);
       spectator.detectChanges();
-      expect(spectator.query('.content')).toHaveComputedStyle({
-        visibility: 'hidden',
-      });
+    });
+
+    it('should not show content if disabled', () => {
+      expect(spectator.query('.content')).toBeHidden();
     });
 
     it('should use disabled-style if disabled', () => {
-      spectator.setInput('isDisabled', true);
-      spectator.detectChanges();
       expect(spectator.query('.title')).toHaveComputedStyle({
         color: getTextColor('semi-dark'),
       });
@@ -81,15 +91,5 @@ describe('AccordionItemComponent', () => {
         color: getColor('semi-dark'),
       });
     });
-  });
-
-  it('should emit the toggle event when collapsed', () => {
-    spyOn(spectator.component.toggle, 'emit');
-    spectator.component.isDisabled = false;
-    spectator.component.isExpanded = true;
-
-    spectator.click('.header');
-
-    expect(spectator.component.toggle.emit).toHaveBeenCalledOnceWith(false);
   });
 });
