@@ -19,6 +19,4 @@ const config = {
 })
 export class ItemExampleDisclosureComponent {
   template: string = config.template;
-
-  rotateIcon = false;
 }
