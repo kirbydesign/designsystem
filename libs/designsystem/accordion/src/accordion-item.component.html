@@ -8,6 +8,7 @@
     [class.disabled]="isDisabled"
     [tabindex]="isDisabled ? -1 : 0"
     [class.expanded]="isExpanded"
+    [attr.aria-disabled]="isDisabled ? true : undefined"
     [attr.aria-expanded]="isExpanded"
     [attr.aria-controls]="_contentId"
     [id]="_titleId"
