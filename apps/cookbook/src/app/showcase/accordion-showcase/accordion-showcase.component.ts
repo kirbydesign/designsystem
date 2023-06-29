@@ -39,7 +39,7 @@ export class AccordionShowcaseComponent {
     {
       name: 'toggle',
       description: 'Emitted when the state of the accordion item has changed',
-      signature: 'Promise<Boolean>',
+      signature: 'EventEmitter<boolean>',
     },
   ];
 }
