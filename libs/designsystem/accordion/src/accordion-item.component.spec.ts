@@ -55,8 +55,7 @@ describe('AccordionItemComponent', () => {
       spectator.component.isDisabled = false;
       spectator.component.isExpanded = false;
       spectator.click('.header');
-      expect(spectator.component.toggle.emit).toHaveBeenCalledTimes(1);
-      expect(spectator.component.toggle.emit).toHaveBeenCalledWith(true);
+      expect(spectator.component.toggle.emit).toHaveBeenCalledOnceWith(true);
     });
   });
 
