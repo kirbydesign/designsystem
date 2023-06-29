@@ -50,6 +50,7 @@ describe('AccordionItemComponent', () => {
         visibility: 'visible',
       });
     });
+
     it('should emit the toggle event when expanded', () => {
       spyOn(spectator.component.toggle, 'emit');
       spectator.component.isDisabled = false;
