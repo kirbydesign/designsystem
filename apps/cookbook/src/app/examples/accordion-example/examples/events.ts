@@ -10,7 +10,7 @@ const config = {
   <kirby-accordion-item title="Title for accordion item 2" (toggle)="onToggleChange($event, 'item 2')">
     Click item to see "toggle" event in action
   </kirby-accordion-item>
-<kirby-accordion>`,
+</kirby-accordion>`,
   codeSnippet: `onToggleChange(isOpen: boolean, item: string) {
   ...
 }`,
