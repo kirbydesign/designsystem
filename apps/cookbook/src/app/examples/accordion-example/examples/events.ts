@@ -4,7 +4,7 @@ import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
 const config = {
   selector: 'cookbook-accordion-events-example',
   template: `<kirby-accordion>
-      <kirby-accordion-item title="Title for accordion item 1" isExpanded={true}  (toggle)="onToggleChange($event)">
+      <kirby-accordion-item title="Title for accordion item 1" isExpanded={true} (toggle)="onToggleChange($event)">
         Toggle to see "toggle" event in action
       </kirby-accordion-item>`,
   codeSnippet: `onToggleChange(toggle: boolean) {
