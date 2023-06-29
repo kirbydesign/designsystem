@@ -55,7 +55,9 @@ describe('AccordionItemComponent', () => {
       spyOn(spectator.component.toggle, 'emit');
       spectator.component.isDisabled = false;
       spectator.component.isExpanded = false;
+
       spectator.click('.header');
+
       expect(spectator.component.toggle.emit).toHaveBeenCalledOnceWith(true);
     });
   });
@@ -85,7 +87,9 @@ describe('AccordionItemComponent', () => {
     spyOn(spectator.component.toggle, 'emit');
     spectator.component.isDisabled = false;
     spectator.component.isExpanded = true;
+
     spectator.click('.header');
+
     expect(spectator.component.toggle.emit).toHaveBeenCalledOnceWith(false);
   });
 });
