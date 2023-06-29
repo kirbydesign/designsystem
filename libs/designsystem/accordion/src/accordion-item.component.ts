@@ -1,5 +1,12 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { ChangeDetectionStrategy, Component, Input, OnChanges } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+} from '@angular/core';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 
 // Counter for generating unique element ids
@@ -23,6 +30,7 @@ export class AccordionItemComponent implements OnChanges {
   @Input() isExpanded: boolean = false;
   @Input() isDisabled: boolean = false;
   @Input() disabledTitle: string;
+  @Output() toggle: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   ngOnChanges(): void {
     if (this.isDisabled) {
@@ -38,9 +46,12 @@ export class AccordionItemComponent implements OnChanges {
     }
   }
 
-  _onToggleExpanded(event: KeyboardEvent) {
+  _onToggleExpanded(event: UIEvent) {
     event.preventDefault();
+    if (this.isDisabled) return;
+
     this.isExpanded = !this.isExpanded && !this.isDisabled;
+    this.toggle.emit(this.isExpanded);
   }
 
   // IDs used for a11y labelling
