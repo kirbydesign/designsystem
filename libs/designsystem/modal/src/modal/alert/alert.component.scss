@@ -4,7 +4,7 @@ article {
   overflow: hidden;
   padding: utils.size('s');
   padding-top: utils.size('m');
-  @include utils.media('<small') {
+  @include utils.media('<xsmall') {
     padding: utils.size('xxs');
   }
 }
