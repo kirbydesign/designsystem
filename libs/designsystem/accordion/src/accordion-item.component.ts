@@ -46,7 +46,7 @@ export class AccordionItemComponent implements OnChanges {
     }
   }
 
-  _onToggleExpanded(event: KeyboardEvent) {
+  _onToggleExpanded(event: UIEvent) {
     event.preventDefault();
     this.isExpanded = !this.isExpanded && !this.isDisabled;
     this.toggle.emit(this.isExpanded);
