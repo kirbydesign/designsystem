@@ -19,7 +19,7 @@ ion-tab-button {
     --background: #{interaction-state.get-state-color('white', 'xxs')};
   }
 
-  transition: interaction-state.transition();
+  transition: interaction-state.transition(background-color);
   height: 100%;
   flex: 1 1 0%;
   max-width: 168px;

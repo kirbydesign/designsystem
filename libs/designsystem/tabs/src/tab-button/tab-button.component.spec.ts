@@ -26,7 +26,6 @@ describe('TabsComponent', () => {
       spectator = createHost();
       ionTabButton = spectator.query('ion-tab-button');
       await TestHelper.whenReady(ionTabButton);
-      ionTabButton.style.transition = 'none';
       innerButton = ionTabButton.shadowRoot.querySelector('[part=native]');
     });
 
@@ -46,6 +45,12 @@ describe('TabsComponent', () => {
 
       expect(ionTabButton).toHaveComputedStyle({
         color: getTextColor('black'),
+      });
+    });
+
+    it('should only apply css transition to background-color', () => {
+      expect(ionTabButton).toHaveComputedStyle({
+        'transition-property': 'background-color',
       });
     });
 
