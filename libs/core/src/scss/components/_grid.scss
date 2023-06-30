@@ -134,18 +134,18 @@ $grid-sizes-to-breakpoint-map: (
   }
 }
 
-@function get-breakpoint($breakpoint) {
-  $breakpoint-map-size: map.get($grid-sizes-to-breakpoint-map, $breakpoint);
+@function get-breakpoint($grid-size) {
+  $breakpoint-map-size: map.get($grid-sizes-to-breakpoint-map, $grid-size);
 
   @return map.get(utils.$breakpoints, $breakpoint-map-size);
 }
 
-@mixin breakpoint-style($breakpoint) {
-  @if $breakpoint == 'xs' {
-    @include column-style($breakpoint);
+@mixin breakpoint-style($grid-size) {
+  @if $grid-size == 'xs' {
+    @include column-style($grid-size);
   } @else {
-    @media (min-width: get-breakpoint($breakpoint)) {
-      @include column-style($breakpoint);
+    @media (min-width: get-breakpoint($grid-size)) {
+      @include column-style($grid-size);
     }
   }
 }
@@ -163,7 +163,7 @@ $grid-sizes-to-breakpoint-map: (
   box-sizing: border-box !important;
   padding: calc(var(--kirby-grid-row-spacing) / 2) calc(var(--kirby-grid-column-spacing) / 2);
 
-  @each $breakpoint, $_ in $grid-sizes-to-breakpoint-map {
-    @include breakpoint-style($breakpoint);
+  @each $grid-size, $_ in $grid-sizes-to-breakpoint-map {
+    @include breakpoint-style($grid-size);
   }
 }
