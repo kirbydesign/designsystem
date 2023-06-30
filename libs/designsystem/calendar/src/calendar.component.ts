@@ -339,7 +339,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
     if (!this.activeMonth) return;
 
     const monthStart = startOfMonth(this.activeMonth);
-    const monthEnd = endOfMonth(this.activeMonth);
+    const monthEnd = add(startOfMonth(this.activeMonth), { weeks: 5 });
     const startOfFirstWeek = startOfWeek(monthStart, { locale: this.locale });
     const endOfLastWeek = endOfWeek(monthEnd, { locale: this.locale });
     const totalDayCount = differenceInDays(endOfLastWeek, startOfFirstWeek) + 1;
