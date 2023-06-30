@@ -148,6 +148,18 @@ describe('CalendarComponent', () => {
     });
   });
 
+  describe('weeks', () => {
+    beforeEach(() => {
+      spectator = createHost('<kirby-calendar></kirby-calendar>');
+    });
+
+    it('should render 6 weeks', () => {
+      const weeks = spectator.queryAll('tbody > tr');
+
+      expect(weeks.length).toBe(6);
+    });
+  });
+
   describe('monthChange', () => {
     beforeEach(() => {
       spectator = createHost('<kirby-calendar></kirby-calendar>');
