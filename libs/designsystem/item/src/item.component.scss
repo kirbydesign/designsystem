@@ -94,7 +94,14 @@
 .disclosure {
   padding-left: #{utils.size('xxxs')};
   color: #{utils.get-color('semi-dark')};
-  line-height: 0;
+
+  /* 
+    display: inline-flex; is used to make sure the span.disclosure element
+    is the same height as the child (kirby-icon)
+  */
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
 
   & kirby-icon {
     transition: transform utils.get-transition-duration('quick');
