@@ -96,6 +96,16 @@ describe('ItemComponent', () => {
       });
     });
 
+    it('should make the disclosure wrapper element get the same height as its child (kirby-icon)', async () => {
+      spectator.setInput('disclosure', 'arrow-down');
+      spectator.detectChanges();
+
+      const disclosureWrapper = spectator.query<HTMLElement>('.disclosure');
+      const icon = spectator.query<HTMLElement>('kirby-icon');
+
+      expect(getComputedStyle(disclosureWrapper).height).toBe(getComputedStyle(icon).height);
+    });
+
     describe('when rotateIcon is set to true', () => {
       beforeEach(() => {
         spectator.setInput('rotateIcon', true);
