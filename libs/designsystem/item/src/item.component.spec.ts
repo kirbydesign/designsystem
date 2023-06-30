@@ -103,7 +103,9 @@ describe('ItemComponent', () => {
       const disclosureWrapper = spectator.query<HTMLElement>('.disclosure');
       const icon = spectator.query<HTMLElement>('kirby-icon');
 
-      expect(getComputedStyle(disclosureWrapper).height).toBe(getComputedStyle(icon).height);
+      expect(disclosureWrapper).toHaveComputedStyle({
+        height: getComputedStyle(icon).height,
+      });
     });
 
     describe('when rotateIcon is set to true', () => {
