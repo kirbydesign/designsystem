@@ -273,16 +273,22 @@
 <h4>Rotation animation</h4>
 
 <p>
-  It is possible to enable an animation that rotates the discloure icon 180 degrees. Pass a boolean
+  It is possible to trigger an animation that rotates the disclosure icon by passing a boolean flag
   to
   <code>[rotateIcon]</code>
-  to trigger the animation.
+  .
 </p>
 
 <cookbook-example-viewer [html]="disclosureAnimationExample.template">
   <cookbook-item-example-disclosure-animation
     #disclosureAnimationExample
   ></cookbook-item-example-disclosure-animation>
+</cookbook-example-viewer>
+
+<cookbook-example-viewer [html]="disclosureAnimationExpandExample.template">
+  <cookbook-item-example-disclosure-animation-expand
+    #disclosureAnimationExpandExample
+  ></cookbook-item-example-disclosure-animation-expand>
 </cookbook-example-viewer>
 
 <p class="comment small">
