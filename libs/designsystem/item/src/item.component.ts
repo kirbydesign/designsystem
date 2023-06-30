@@ -30,6 +30,8 @@ export class ItemComponent {
   @Input()
   size: ItemSize | `${ItemSize}` = ItemSize.MD;
 
+  @Input() rotateIcon: boolean = false;
+
   // Prevent default when inside kirby-dropdown to avoid blurring dropdown:
   onMouseDown(event: MouseEvent) {
     if (
