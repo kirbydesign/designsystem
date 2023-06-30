@@ -94,7 +94,7 @@
 .disclosure {
   padding-left: #{utils.size('xxxs')};
   color: #{utils.get-color('semi-dark')};
-  height: utils.size('m');
+  line-height: 0;
 
   & kirby-icon {
     transition: transform utils.get-transition-duration('quick');
