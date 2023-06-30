@@ -8,8 +8,12 @@ $spacing-to-edge: map.get(utils.$checkbox-radio-spacing, 'to-edge');
 $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
 $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
 
-@function get-vertical-padding($target-height) {
-  @return ($target-height - $checkbox-icon-size) * 0.5;
+@function get-vertical-padding($target-height, $size: '') {
+  @if $size == 'xs' {
+    @return 0;
+  } @else {
+    @return ($target-height - $checkbox-icon-size) * 0.5;
+  }
 }
 
 :host {
@@ -109,32 +113,31 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
     .wrapper {
       position: relative;
       display: inline-flex;
-      align-items: flex-start;
+      align-items: center;
       vertical-align: top;
       padding: get-vertical-padding($default-checkbox-radio-size) 0;
       padding-right: $spacing-to-label; // Ensure same padding on right side of label
     }
 
-    @each $size, $height in utils.$checkbox-radio-sizes {
+    @each $size, $height in utils.$checkbox-sizes {
       :host-context(.checkbox-#{$size}),
       &.#{$size} {
         .wrapper {
-          $vertical-padding: get-vertical-padding($height);
+          $vertical-padding: get-vertical-padding($height, $size);
 
           padding-top: $vertical-padding;
           padding-bottom: $vertical-padding;
+        }
+      }
+    }
 
-          @if $size == 'xs' {
-            // Differentiate XS checkbox padding and styling
-            align-items: center;
-            padding-top: 0;
-            padding-bottom: 0;
-            font-size: 14px;
+    :host-context(.checkbox-xs),
+    &.xs {
+      .wrapper {
+        font-size: #{utils.font-size('s')};
 
-            ion-checkbox {
-              --size: 16px;
-            }
-          }
+        ion-checkbox {
+          --size: #{utils.size('s')};
         }
       }
     }
