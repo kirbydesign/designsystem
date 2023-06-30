@@ -6,7 +6,7 @@ import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { IconModule } from '@kirbydesign/designsystem/icon';
 
-import { TestHelper } from 'testing/src';
+import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { ItemComponent, ItemSize } from './item.component';
 
 const { itemHeight, size } = DesignTokenHelper;
@@ -123,20 +123,22 @@ describe('ItemComponent', () => {
         });
       });
 
-      it('should NOT rotate the icon 180deg if the disclosure icon is "arrow-more', () => {
+      it('should NOT rotate the icon 180deg if the disclosure icon is "arrow-more', async () => {
         spectator.setInput('disclosure', 'arrow-more');
 
         const icon = spectator.query('kirby-icon');
+        await TestHelper.waitForTimeout(); // Wait a tick
 
         expect(icon).toHaveComputedStyle({
           transform: 'none',
         });
       });
 
-      it('should NOT rotate the icon 180deg if the disclosure icon is "link', () => {
+      it('should NOT rotate the icon 180deg if the disclosure icon is "link', async () => {
         spectator.setInput('disclosure', 'link');
 
         const icon = spectator.query('kirby-icon');
+        await TestHelper.waitForTimeout(); // Wait a tick
 
         expect(icon).toHaveComputedStyle({
           transform: 'none',
