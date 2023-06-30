@@ -6,15 +6,13 @@ const config = {
   template: `<kirby-card [hasPadding]="true" (click)="isExpanded = !isExpanded">
   <kirby-card-header [hasPadding]="false">
     <kirby-item disclosure="arrow-down" [rotateIcon]="isExpanded">
-      <p class="kirby-text-bold">Disclosure animation example</p>
+      <h3 class="kirby-text-bold">Disclosure animation example</h3>
     </kirby-item>
   </kirby-card-header>
 
   <div [@isExpanded]="isExpanded">
-    <p class="kirby-text-large">A card with animated disclosure icon</p>
-    <p> 
-      lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    </p>
+    <p class="kirby-text-bold">A card with animated disclosure icon</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
   </div>
 </kirby-card>`,
   animationCodeSnippetTS: `import { animate, state, style, transition, trigger } from '@angular/animations';
