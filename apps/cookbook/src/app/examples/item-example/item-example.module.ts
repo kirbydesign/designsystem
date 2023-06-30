@@ -31,6 +31,7 @@ import { ItemExampleInputNumericComponent } from './examples/input/numeric';
 import { ItemExampleCardComponent } from './examples/card';
 import { ItemExampleDisclosureComponent } from './examples/disclosure';
 import { ItemExampleDisclosureAnimationComponent } from './examples/disclosure-animation';
+import { ItemExampleDisclosureAnimationExpandComponent } from './examples/disclosure-animation-expand';
 
 const COMPONENT_DECLARATIONS = [
   ItemExampleSimpleComponent,
@@ -61,6 +62,7 @@ const COMPONENT_DECLARATIONS = [
   ItemExampleCardComponent,
   ItemExampleDisclosureComponent,
   ItemExampleDisclosureAnimationComponent,
+  ItemExampleDisclosureAnimationExpandComponent,
 ];
 
 @NgModule({
