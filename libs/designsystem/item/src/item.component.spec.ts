@@ -115,6 +115,7 @@ describe('ItemComponent', () => {
 
       it('should rotate the icon 180deg if the disclosure icon is "arrow-down', async () => {
         spectator.setInput('disclosure', 'arrow-down');
+        spectator.detectChanges();
 
         const icon = spectator.query<HTMLElement>('kirby-icon');
         await TestHelper.waitForTimeout(); // Wait a tick
@@ -126,6 +127,7 @@ describe('ItemComponent', () => {
 
       it('should rotate the icon 180deg if the disclosure icon is "arrow-up', async () => {
         spectator.setInput('disclosure', 'arrow-up');
+        spectator.detectChanges();
 
         const icon = spectator.query<HTMLElement>('kirby-icon');
         await TestHelper.waitForTimeout(); // Wait a tick
@@ -137,6 +139,7 @@ describe('ItemComponent', () => {
 
       it('should NOT rotate the icon 180deg if the disclosure icon is "arrow-more', async () => {
         spectator.setInput('disclosure', 'arrow-more');
+        spectator.detectChanges();
 
         const icon = spectator.query('kirby-icon');
         await TestHelper.waitForTimeout(); // Wait a tick
@@ -148,6 +151,7 @@ describe('ItemComponent', () => {
 
       it('should NOT rotate the icon 180deg if the disclosure icon is "link', async () => {
         spectator.setInput('disclosure', 'link');
+        spectator.detectChanges();
 
         const icon = spectator.query('kirby-icon');
         await TestHelper.waitForTimeout(); // Wait a tick
