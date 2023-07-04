@@ -7,7 +7,8 @@ $row-height: 44px;
 // Color variables
 $default-divider-color: utils.get-color('medium');
 $border-bottom: 1px solid var(--kirby-divider-color, #{$default-divider-color});
-$highlight-color: utils.get-color('light');
+$hover-color: utils.get-color('light');
+$active-color: utils.get-color('semi-light');
 
 table.kirby-table {
   width: 100%;
@@ -24,7 +25,11 @@ table.kirby-table {
 
     &.kirby-selectable-row {
       @include interaction-state.apply-hover {
-        background-color: $highlight-color;
+        background-color: $hover-color;
+      }
+
+      &:active {
+        background-color: $active-color;
       }
     }
   }
@@ -36,7 +41,7 @@ table.kirby-table {
   th {
     &.sortable {
       @include interaction-state.apply-hover {
-        background-color: $highlight-color;
+        background-color: $hover-color;
       }
     }
 
