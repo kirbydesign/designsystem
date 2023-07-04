@@ -155,6 +155,7 @@ describe('ItemComponent', () => {
 
         const icon = spectator.query('kirby-icon');
         await TestHelper.waitForTimeout(); // Wait a tick
+        // Comment to trigger test
 
         expect(icon).toHaveComputedStyle({
           transform: 'none',
