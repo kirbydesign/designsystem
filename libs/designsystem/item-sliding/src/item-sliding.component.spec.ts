@@ -140,6 +140,13 @@ describe('ItemSlidingComponent', () => {
         ionItemOptionElements[idx].click();
         expect(onSelectedSpy).toHaveBeenCalled();
       });
+
+      it('should call close', () => {
+        const idx = 0;
+        const onSelectedSpy = spyOn(spectator.component.itemSliding, 'close');
+        ionItemOptionElements[idx].click();
+        expect(onSelectedSpy).toHaveBeenCalled();
+      });
     });
 
     describe('when a swipeAction has an icon', () => {
