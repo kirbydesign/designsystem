@@ -210,6 +210,7 @@ describe('CheckboxComponent', () => {
     });
 
     it('should call the registered onChange function when onChecked is called', () => {
+      //@ts-ignore
       const onChangeSpy = spyOn(spectator.component as any, 'onChange');
       const newValue = true;
       spectator.component.onChecked(newValue);
@@ -217,6 +218,7 @@ describe('CheckboxComponent', () => {
     });
 
     it('should call the registered onTouched function when onChecked is called', () => {
+      //@ts-ignore
       const onTouchedSpy = spyOn(spectator.component as any, 'onTouched');
       spectator.component.onChecked(true);
       expect(onTouchedSpy).toHaveBeenCalled();
