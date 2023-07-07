@@ -210,16 +210,16 @@ describe('CheckboxComponent', () => {
     });
 
     it('should call the registered onChange function when onChecked is called', () => {
-      //@ts-ignore
-      const onChangeSpy = spyOn(spectator.component as any, 'onChange');
+      const onChangeSpy = jasmine.createSpy('onChange');
       const newValue = true;
+      spectator.component.registerOnChange(onChangeSpy);
       spectator.component.onChecked(newValue);
       expect(onChangeSpy).toHaveBeenCalledWith(newValue);
     });
 
     it('should call the registered onTouched function when onChecked is called', () => {
-      //@ts-ignore
-      const onTouchedSpy = spyOn(spectator.component as any, 'onTouched');
+      const onTouchedSpy = jasmine.createSpy('onTouched');
+      spectator.component.registerOnTouched(onTouchedSpy);
       spectator.component.onChecked(true);
       expect(onTouchedSpy).toHaveBeenCalled();
     });
