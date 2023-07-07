@@ -356,13 +356,15 @@ export class ModalWrapperComponent
         map((event) => event.detail),
         takeUntil(this.destroy$)
       );
-
-      this.contentScrolled$.subscribe((scrollInfo: ScrollDetail) => {
-        if (scrollInfo.scrollTop > contentScrolledOffsetInPixels !== this.isContentScrolled) {
-          this.isContentScrolled = !this.isContentScrolled;
-          this.changeDetector.detectChanges();
-        }
-      });
+      //disable listening on desktop
+      if (!this.platform.isPhabletOrBigger()) {
+        this.contentScrolled$.subscribe((scrollInfo: ScrollDetail) => {
+          if (scrollInfo.scrollTop > contentScrolledOffsetInPixels !== this.isContentScrolled) {
+            this.isContentScrolled = !this.isContentScrolled;
+            this.changeDetector.detectChanges();
+          }
+        });
+      }
     });
   }
 
