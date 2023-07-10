@@ -1,8 +1,8 @@
-import { fakeAsync, tick } from '@angular/core/testing';
-import { IonContent } from '@ionic/angular';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { IonContent, Platform } from '@ionic/angular';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
-import { MockComponents } from 'ng-mocks';
+import { MockComponent, MockComponents } from 'ng-mocks';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
@@ -645,6 +645,24 @@ describe('ModalWrapperComponent', () => {
           expect(spectator.component['ionModalElement'].dismiss).toHaveBeenCalledWith('test data');
         }));
       });
+    });
+  });
+  describe('IonScrolled', () => {
+    it('When screensize is desktop should not subscribe to IonScroll', async () => {
+      await TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
+      //@ts-ignore
+      const contentScrolledSpy = spyOn(spectator.component.contentScrolled$, 'subscribe');
+      expect(contentScrolledSpy).not.toHaveBeenCalled();
+    });
+
+    it('When screensize is phone should subscribe to IonScroll', async () => {
+      await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
+      //@ts-ignore
+      const contentScrolledSpy = spyOn(spectator.component.contentScrolled$, 'subscribe');
+      console.log(contentScrolledSpy);
+      console.log('Here test');
+
+      expect(contentScrolledSpy).toHaveBeenCalled();
     });
   });
 });
