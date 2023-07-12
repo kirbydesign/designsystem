@@ -69,7 +69,7 @@ export class CheckboxComponent implements ControlValueAccessor {
   _labelId = UniqueIdGenerator.scopedTo('kirby-checkbox-label').next();
 
   //ControleValueAcessor
-  private onChange: (value: boolean) => void = () => {};
+  private _onChange: (value: boolean) => void = () => {};
   private _onTouched = () => {};
 
   /**
