@@ -70,7 +70,7 @@ export class CheckboxComponent implements ControlValueAccessor {
 
   //ControleValueAcessor
   private onChange: (value: boolean) => void = () => {};
-  private onTouched: () => void = () => {};
+  private _onTouched = () => {};
 
   /**
    * Writes a new value to the form control associated with the custom checkbox control.
