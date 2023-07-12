@@ -221,7 +221,8 @@ describe('CheckboxComponent', () => {
       const onTouchedSpy = jasmine.createSpy('onTouched');
       spectator.component.registerOnTouched(onTouchedSpy);
       spectator.component.onChecked(true);
-      expect(onTouchedSpy).toHaveBeenCalled();
+      expect(onTouchedSpy).toHaveBeenCalled(); 
+      expect(onTouchedSpy).toHaveBeenCalledTimes(1);
     });
 
     it('should update the disabled state when setDisabledState is called', () => {
