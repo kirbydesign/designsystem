@@ -202,7 +202,7 @@ describe('CheckboxComponent', () => {
       expect(spectator.component.checkedChange.emit).toHaveBeenCalledWith(false);
     });
   });
-  describe('ControlValueAccessor implementation', () => {
+  describe('implementing ControlValueAccessor interface', () => {
     it('should update the value when writeValue is called', () => {
       const newValue = true;
       spectator.component.writeValue(newValue);
