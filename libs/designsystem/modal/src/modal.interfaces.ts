@@ -14,17 +14,8 @@ export interface Overlay {
   onDidDismiss: Promise<OverlayEventDetail>;
 }
 
-export interface ModalData {
-  alertConfig: AlertConfig;
-}
-
-export interface NavigationData {
-  navigationData: ModalData;
-}
-
 export interface ModalRouteActivation {
   route: ActivatedRoute;
-  modalData: ModalData;
   isNewModal: boolean;
 }
 

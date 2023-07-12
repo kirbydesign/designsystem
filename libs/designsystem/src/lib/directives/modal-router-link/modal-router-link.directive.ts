@@ -25,8 +25,7 @@ export class ModalRouterLinkDirective implements OnInit {
   onClick(): boolean {
     this.modalNavigationService.navigateToModal(
       this.path,
-      typeof this.queryParams !== 'string' ? this.queryParams : null,
-      this.alertConfig || null
+      typeof this.queryParams !== 'string' ? this.queryParams : null
     );
     return false;
   }

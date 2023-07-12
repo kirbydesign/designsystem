@@ -4,7 +4,7 @@ import { EMPTY, firstValueFrom, Observable } from 'rxjs';
 import { filter, map, pairwise, startWith } from 'rxjs/operators';
 
 import { Location } from '@angular/common';
-import { ModalRouteActivation, NavigationData } from './modal.interfaces';
+import { ModalRouteActivation } from './modal.interfaces';
 import { AlertConfig } from './public_api';
 
 @Injectable({ providedIn: 'root' })
@@ -217,10 +217,8 @@ export class ModalNavigationService {
         this.modalRouteSetContainsPath(modalRouteSet, navigationEnd, modalRoutesContainsUrlParams)
       ),
       map((navigationEnd) => {
-        const locationState = this.location.getState() as NavigationData;
         return {
           route: this.getCurrentActivatedRoute(),
-          modalData: locationState.navigationData,
           isNewModal: this.isNewModalWindow(navigationEnd),
         };
       })
@@ -298,18 +296,12 @@ export class ModalNavigationService {
     return { activated$: EMPTY, deactivated$: EMPTY };
   }
 
-  async navigateToModal(
-    path: string | string[],
-    queryParams?: Params,
-    alertConfig?: AlertConfig
-  ): Promise<boolean> {
+  async navigateToModal(path: string | string[], queryParams?: Params): Promise<boolean> {
     const commands = Array.isArray(path) ? path : path.split('/');
     const childPath = commands.pop();
-    const navigationData: NavigationData = { navigationData: { alertConfig } };
     const result = await this.router.navigate([...commands, { outlets: { modal: [childPath] } }], {
       queryParams,
       relativeTo: this.getCurrentActivatedRoute(),
-      state: navigationData,
     });
     return result;
   }
