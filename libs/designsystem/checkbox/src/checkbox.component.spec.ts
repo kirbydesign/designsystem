@@ -214,7 +214,7 @@ describe('CheckboxComponent', () => {
       const newValue = true;
       spectator.component.registerOnChange(onChangeSpy);
       spectator.component.onChecked(newValue);
-      expect(onChangeSpy).toHaveBeenCalledWith(newValue);
+      expect(onChangeSpy).toHaveBeenCalledOnceWith(newValue);
     });
 
     it('should call the registered onTouched function when onChecked is called', () => {
