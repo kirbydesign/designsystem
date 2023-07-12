@@ -350,21 +350,21 @@ export class ModalWrapperComponent
    * when ionScroll emits.
    */
   private initializeContentScrollListening() {
+    if (this.platform.isPhabletOrBigger()) return;
+
     this.zone.runOutsideAngular(() => {
       this.contentScrolled$ = this.ionContent.ionScroll.pipe(
         debounceTime(contentScrollDebounceTimeInMS),
         map((event) => event.detail),
         takeUntil(this.destroy$)
       );
-      //disable listening on desktop
-      if (!this.platform.isPhabletOrBigger()) {
-        this.contentScrolled$.subscribe((scrollInfo: ScrollDetail) => {
-          if (scrollInfo.scrollTop > contentScrolledOffsetInPixels !== this.isContentScrolled) {
-            this.isContentScrolled = !this.isContentScrolled;
-            this.changeDetector.detectChanges();
-          }
-        });
-      }
+
+      this.contentScrolled$.subscribe((scrollInfo: ScrollDetail) => {
+        if (scrollInfo.scrollTop > contentScrolledOffsetInPixels !== this.isContentScrolled) {
+          this.isContentScrolled = !this.isContentScrolled;
+          this.changeDetector.detectChanges();
+        }
+      });
     });
   }
 
