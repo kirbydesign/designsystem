@@ -143,9 +143,10 @@ describe('ItemSlidingComponent', () => {
 
       it('should call close', () => {
         const idx = 0;
-        const onSelectedSpy = spyOn(spectator.component.itemSliding, 'close');
+        const closeSpy = spyOn(spectator.component.itemSliding, 'close');
         ionItemOptionElements[idx].click();
-        expect(onSelectedSpy).toHaveBeenCalled();
+     expect(closeSpy).toHaveBeenCalled(); 
+     expect(closeSpy).toHaveBeenCalledTimes(1);
       });
     });
 
