@@ -60,9 +60,9 @@ export class CheckboxComponent implements ControlValueAccessor {
 
   onChecked(checked: boolean): void {
     this.checked = checked;
-    this.onChange(this.checked);
+    this._onChange(this.checked);
     this.checkedChange.emit(this.checked);
-    this.onTouched();
+    this._onTouched();
   }
 
   // IDs used for a11y labelling
@@ -85,7 +85,7 @@ export class CheckboxComponent implements ControlValueAccessor {
    * Part of the ControlValueAccessor interface.
    */
   registerOnChange(fn: (value: boolean) => void): void {
-    this.onChange = fn;
+    this._onChange = fn;
   }
 
   /**
@@ -93,7 +93,7 @@ export class CheckboxComponent implements ControlValueAccessor {
    * Part of the ControlValueAccessor interface.
    */
   registerOnTouched(fn: () => void): void {
-    this.onTouched = fn;
+    this._onTouched = fn;
   }
 
   /**
