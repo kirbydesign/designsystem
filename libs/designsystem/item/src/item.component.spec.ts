@@ -118,7 +118,7 @@ describe('ItemComponent', () => {
         spectator.detectChanges();
 
         const icon = spectator.query<HTMLElement>('kirby-icon');
-        await TestHelper.waitForTimeout(); // Wait a tick
+        await TestHelper.waitForTimeout(50); // Wait a tick
 
         expect(icon).toHaveComputedStyle({
           transform: rotationMatrix,
@@ -130,7 +130,7 @@ describe('ItemComponent', () => {
         spectator.detectChanges();
 
         const icon = spectator.query<HTMLElement>('kirby-icon');
-        await TestHelper.waitForTimeout(); // Wait a tick
+        await TestHelper.waitForTimeout(50); // Wait a tick
 
         expect(icon).toHaveComputedStyle({
           transform: rotationMatrix,
@@ -142,7 +142,7 @@ describe('ItemComponent', () => {
         spectator.detectChanges();
 
         const icon = spectator.query('kirby-icon');
-        await TestHelper.waitForTimeout(); // Wait a tick
+        await TestHelper.waitForTimeout(50); // Wait a tick
 
         expect(icon).toHaveComputedStyle({
           transform: 'none',
@@ -154,7 +154,7 @@ describe('ItemComponent', () => {
         spectator.detectChanges();
 
         const icon = spectator.query('kirby-icon');
-        await TestHelper.waitForTimeout(); // Wait a tick
+        await TestHelper.waitForTimeout(50); // Wait a tick
 
         expect(icon).toHaveComputedStyle({
           transform: 'none',
