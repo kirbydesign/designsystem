@@ -2,7 +2,6 @@
 
 import { MockAccordionItemComponent } from './components/mock.accordion-item.component';
 import { MockActionGroupComponent } from './components/mock.action-group.component';
-import { MockAlertExperimentalComponent } from './components/mock.alert-experimental.component';
 import { MockAvatarComponent } from './components/mock.avatar.component';
 import { MockButtonComponent } from './components/mock.button.component';
 import { MockCalendarComponent } from './components/mock.calendar.component';
@@ -92,7 +91,6 @@ import { MockToggleButtonComponent } from './components/mock.toggle-button.compo
 export const MOCK_COMPONENTS = [
   MockAccordionItemComponent,
   MockActionGroupComponent,
-  MockAlertExperimentalComponent,
   MockAvatarComponent,
   MockButtonComponent,
   MockCalendarComponent,

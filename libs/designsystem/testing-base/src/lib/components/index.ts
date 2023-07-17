@@ -2,7 +2,6 @@
 
 export { MockAccordionItemComponent } from './mock.accordion-item.component';
 export { MockActionGroupComponent } from './mock.action-group.component';
-export { MockAlertExperimentalComponent } from './mock.alert-experimental.component';
 export { MockAvatarComponent } from './mock.avatar.component';
 export { MockButtonComponent } from './mock.button.component';
 export { MockCalendarComponent } from './mock.calendar.component';
