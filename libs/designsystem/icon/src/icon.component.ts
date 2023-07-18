@@ -9,7 +9,6 @@ import {
 
 import { IconRegistryService } from './icon-registry.service';
 import { Icon } from './icon-settings';
-import { kirbyIconSettings } from './kirby-icon-settings';
 
 export enum IconSize {
   XS = 'xs',
@@ -17,6 +16,8 @@ export enum IconSize {
   MD = 'md',
   LG = 'lg',
 }
+
+const CUSTOME_NAME_DEPRECATION_WARNING = 'customName input property depcrecation warning';
 
 @Component({
   selector: 'kirby-icon',
@@ -27,14 +28,18 @@ export enum IconSize {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IconComponent implements OnChanges {
-  defaultIcon: Icon = this.findIcon(kirbyIconSettings.icons, 'cog');
+  defaultIcon: Icon = this.iconRegistryService.getIcon('cog');
   private _icon = (this.icon = this.defaultIcon);
   @HostBinding('class')
   @Input()
   size: IconSize | `${IconSize}`;
 
   @Input() name: string;
-  @Input() customName: string;
+
+  @Input() set customName(customName: string) {
+    console.warn(CUSTOME_NAME_DEPRECATION_WARNING);
+    this.icon = this.iconRegistryService.getIcon(customName);
+  }
 
   get icon(): Icon {
     return this._icon;
@@ -77,13 +82,7 @@ export class IconComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.name && changes.name.currentValue) {
-      this.icon = this.findIcon(kirbyIconSettings.icons, changes.name.currentValue);
-    } else if (changes.customName && changes.customName.currentValue) {
-      this.icon = this.iconRegistryService.getIcon(changes.customName.currentValue);
+      this.icon = this.iconRegistryService.getIcon(changes.name.currentValue);
     }
-  }
-
-  private findIcon(icons, name: string): Icon {
-    return icons.find((icon) => icon.name === name);
   }
 }

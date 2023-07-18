@@ -8,6 +8,9 @@ import { Icon } from './icon-settings';
 export class IconRegistryService {
   private iconRegistry = new Map<string, string>();
 
+  constructor() {
+    this.addDefaultIcons();
+  }
   public addIcon(iconName: string, svgPath: string): void {
     if (!this.iconRegistry.has(iconName)) {
       this.iconRegistry.set(iconName, svgPath);
@@ -25,7 +28,11 @@ export class IconRegistryService {
       this.addIcon(icon.name, icon.svg);
     });
   }
-
+  public addDefaultIcons(): void {
+    import('./kirby-icon-settings').then(({ kirbyIconSettings }) => {
+      this.addIcons(kirbyIconSettings.icons);
+    });
+  }
   getIcons(): Icon[] {
     return [...this.iconRegistry].map(
       (keyValPair) => ({ name: keyValPair[0], svg: keyValPair[1] } as Icon)
