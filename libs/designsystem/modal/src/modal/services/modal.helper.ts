@@ -139,12 +139,6 @@ export class ModalHelper {
     };
   }
 
-  public registerPresentingElement() {
-    console.log(
-      'registerPresentingElement has been deprecated. It is no longer needed to register a presenting element.'
-    );
-  }
-
   public async scrollToTop(
     noModalRegisteredErrorMessage: string,
     duration?: KirbyAnimation.Duration
