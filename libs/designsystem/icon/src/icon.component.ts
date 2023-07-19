@@ -36,9 +36,8 @@ export class IconComponent implements OnChanges {
 
   @Input() name: string;
 
-  @Input() set customName(customName: string) {
+  @Input() set customName(_: string) {
     console.warn(CUSTOME_NAME_DEPRECATION_WARNING);
-    this.icon = this.iconRegistryService.getIcon(customName);
   }
 
   get icon(): Icon {
@@ -83,6 +82,8 @@ export class IconComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.name && changes.name.currentValue) {
       this.icon = this.iconRegistryService.getIcon(changes.name.currentValue);
+    } else if (changes.customName && changes.customName.currentValue) {
+      this.icon = this.iconRegistryService.getIcon(changes.customName.currentValue);
     }
   }
 }
