@@ -30,16 +30,20 @@ const CUSTOME_NAME_DEPRECATION_WARNING = 'customName input property depcrecation
 export class IconComponent implements OnChanges {
   defaultIcon: Icon = this.iconRegistryService.getIcon('cog');
   private _icon = (this.icon = this.defaultIcon);
+  private _customName;
   @HostBinding('class')
   @Input()
   size: IconSize | `${IconSize}`;
 
   @Input() name: string;
 
-  @Input() set customName(_: string) {
-    console.warn(CUSTOME_NAME_DEPRECATION_WARNING);
+  @Input() set customName(customName: string) {
+    // console.warn(CUSTOME_NAME_DEPRECATION_WARNING);
+    this._customName = customName;
   }
-
+  get customName(): string {
+    return this._customName;
+  }
   get icon(): Icon {
     return this._icon;
   }
