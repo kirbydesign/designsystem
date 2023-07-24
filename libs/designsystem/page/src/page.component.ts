@@ -225,7 +225,7 @@ export class PageComponent
   @Input() defaultBackHref: string;
   @Input() hideBackButton: boolean;
   @Input() titleMaxLines: number;
-  @Input() maxWidth: 'default' | 'standard' | 'optimized' | 'full' = 'default';
+  @Input() maxWidth: 'default' | 'optimized' | 'full' = 'default';
   @Input() hasInteractiveTitle: boolean;
 
   private _tabBarBottomHidden: boolean;
