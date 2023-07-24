@@ -20,14 +20,14 @@ import {
   ViewChildren,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { CardComponent } from '@kirbydesign/designsystem/card';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
-import { IconModule } from '@kirbydesign/designsystem/icon';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { HorizontalDirection, PopoverComponent } from '@kirbydesign/designsystem/popover';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
 
+import { EventListenerDisposeFn } from '@kirbydesign/designsystem/types';
 import { OpenState, VerticalDirection } from './dropdown.types';
 import { KeyboardHandlerService } from './keyboard-handler.service';
 
@@ -219,9 +219,13 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     // Setup a click listener for each new slotted items
     kirbyItems.forEach((kirbyItem, index) => {
       this.renderer.setAttribute(kirbyItem.nativeElement, 'role', 'option');
-      const unlisten = this.renderer.listen(kirbyItem.nativeElement, 'click', () => {
-        this.onItemSelect(index);
-      });
+      const unlisten: EventListenerDisposeFn = this.renderer.listen(
+        kirbyItem.nativeElement,
+        'click',
+        () => {
+          this.onItemSelect(index);
+        }
+      );
 
       this.itemClickUnlisten.push(unlisten);
     });
@@ -233,7 +237,7 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
     return this._kirbyItemsSlotted;
   }
 
-  private itemClickUnlisten: (() => void)[] = [];
+  private itemClickUnlisten: EventListenerDisposeFn[] = [];
   private intersectionObserverRef: IntersectionObserver;
   private showDropdownTimeoutId: ReturnType<typeof setTimeout>;
 
@@ -588,8 +592,8 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
 
     const newFocusedIndex = this.keyboardHandlerService.handle(
       event,
-      this.items,
-      this.focusedIndex
+      this.focusedIndex,
+      this.items.length - 1
     );
 
     if (newFocusedIndex > -1) {
@@ -607,8 +611,8 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
 
     const newFocusedIndex = this.keyboardHandlerService.handle(
       event,
-      this.items,
-      this.focusedIndex
+      this.focusedIndex,
+      this.items.length - 1
     );
     if (newFocusedIndex > -1) {
       this.focusedIndex = newFocusedIndex;

@@ -22,7 +22,7 @@ export class MockDropdownComponent {
   @Input() placeholder: string;
   @Input() popout: HorizontalDirection | `${HorizontalDirection}`;
   @Input() attentionLevel: '1' | '2' | '3';
-  @Input() expand: 'block';
+  @Input() expand?: 'block';
   @Input() disabled: boolean;
   @Input() hasError: boolean;
   @Input() size: 'sm' | 'md';

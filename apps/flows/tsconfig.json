@@ -31,6 +31,8 @@
       "@kirbydesign/designsystem/icon": ["libs/designsystem/icon/index.ts"],
       "@kirbydesign/designsystem/helpers": ["libs/designsystem/helpers/index.ts"],
       "@kirbydesign/designsystem/shared": ["libs/designsystem/shared/index.ts"],
+      "@kirbydesign/designsystem/shared/floating": ["libs/designsystem/shared/floating/index.ts"],
+      "@kirbydesign/designsystem/shared/portal": ["libs/designsystem/shared/portal/index.ts"],
       "@kirbydesign/designsystem/types": ["libs/designsystem/types/index.ts"],
       "@kirbydesign/designsystem/kirby-ionic-module": [
         "libs/designsystem/kirby-ionic-module/index.ts"
@@ -43,6 +45,7 @@
       "@kirbydesign/designsystem/slide": ["libs/designsystem/slide/index.ts"],
       "@kirbydesign/designsystem/toggle-button": ["libs/designsystem/toggle-button/index.ts"],
       "@kirbydesign/designsystem/tabs": ["libs/designsystem/tabs/index.ts"],
+      "@kirbydesign/designsystem/tab-navigation": ["libs/designsystem/tab-navigation/index.ts"],
       "@kirbydesign/designsystem/slide-button": ["libs/designsystem/slide-button/index.ts"],
       "@kirbydesign/designsystem/range": ["libs/designsystem/range/index.ts"],
       "@kirbydesign/designsystem/popover": ["libs/designsystem/popover/index.ts"],
@@ -63,10 +66,9 @@
       "@kirbydesign/designsystem/empty-state": ["libs/designsystem/empty-state/index.ts"],
       "@kirbydesign/designsystem/dropdown": ["libs/designsystem/dropdown/index.ts"],
       "@kirbydesign/designsystem/page": ["libs/designsystem/page/index.ts"],
+      "@kirbydesign/designsystem/header": ["libs/designsystem/header/index.ts"],
       "@kirbydesign/designsystem/modal": ["libs/designsystem/modal/index.ts"],
-      "@kirbydesign/designsystem/modal/experimental": [
-        "libs/designsystem/modal/experimental/index.ts"
-      ],
+      "@kirbydesign/designsystem/modal/v2": ["libs/designsystem/modal/v2/index.ts"],
       "@kirbydesign/designsystem/kirby-app": ["libs/designsystem/kirby-app/index.ts"],
       "@kirbydesign/designsystem/chart": ["libs/designsystem/chart/index.ts"],
       "@kirbydesign/designsystem/helpers/scss": ["libs/designsystem/helpers/scss/index.ts"],
@@ -74,7 +76,12 @@
       "@kirbydesign/designsystem/data-table": ["libs/designsystem/data-table/index.ts"],
       "@kirbydesign/designsystem/reorder-list": ["libs/designsystem/reorder-list/index.ts"],
       "@kirbydesign/designsystem/toast": ["libs/designsystem/toast/index.ts"],
-      "@kirbydesign/designsystem/grid": ["libs/designsystem/grid/index.ts"], 
+      "@kirbydesign/designsystem/grid": ["libs/designsystem/grid/index.ts"],
+      "@kirbydesign/designsystem/alert-experimental": [
+        "libs/designsystem/alert-experimental/index.ts"
+      ],
+      "@kirbydesign/designsystem/action-group": ["libs/designsystem/action-group/index.ts"],
+      "@kirbydesign/designsystem/menu": ["libs/designsystem/menu/index.ts"]
     },
     "target": "es2020"
   },

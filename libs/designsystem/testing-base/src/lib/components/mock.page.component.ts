@@ -62,6 +62,7 @@ export class MockPageToolbarTitleDirective {}
   ],
 })
 export class MockPageActionsDirective {
+  // eslint-disable-next-line @angular-eslint/no-input-rename
   @Input('kirbyPageActions') config: stickyConfig | fixedConfig;
 }
 
@@ -75,6 +76,7 @@ export class MockPageActionsDirective {
   ],
 })
 export class MockPageContentDirective {
+  // eslint-disable-next-line @angular-eslint/no-input-rename
   @Input('kirbyPageContent') config: fixedConfig;
 }
 
@@ -155,6 +157,7 @@ export class MockPageComponent {
   @Input() defaultBackHref: string;
   @Input() hideBackButton: boolean;
   @Input() titleMaxLines: number;
+  @Input() maxWidth: 'default' | 'standard' | 'optimized' | 'full';
   @Input() tabBarBottomHidden: boolean;
   @Output() enter = new EventEmitter<void>();
   @Output() leave = new EventEmitter<void>();

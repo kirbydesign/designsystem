@@ -1,5 +1,4 @@
-import { Routes } from '@angular/router';
-
+import { ModalEnabledRoutes } from '@kirbydesign/designsystem';
 import { AccordionExampleComponent } from './accordion-example/accordion-example.component';
 import { ActionSheetExampleComponent } from './action-sheet-example/action-sheet-example.component';
 import { AlertExampleComponent } from './alert-example/alert-example.component';
@@ -44,7 +43,8 @@ import { ListNoShapeExampleComponent } from './list-no-shape-example/list-no-sha
 import { ListSwipeExampleComponent } from './list-swipe-example/list-swipe-example.component';
 import { LoadingOverlayExampleComponent } from './loading-overlay-example/loading-overlay-example.component';
 import { ModalExampleComponent } from './modal-example/modal-example.component';
-import { FullscreenModalExperimentalExampleComponent } from './modal-experimental-example/fullscreen/fullscreen-experimental-example.component';
+import { FullscreenModalV2ExampleComponent } from './modal-v2-example/modal/fullscreen/fullscreen-v2-example.component';
+import { DrawerModalV2ExampleComponent } from './modal-v2-example/modal/drawer/drawer-v2-example.component';
 import { ModalRoutePage1ExampleComponent } from './modal-example/modal-route-example/modal-route-page1-example.component';
 import { ModalRoutePage2ExampleComponent } from './modal-example/modal-route-example/modal-route-page2-example.component';
 import { PageAdvancedExampleComponent } from './page-example/advanced/page-advanced-example.component';
@@ -56,6 +56,7 @@ import { PageFixedFooterTabExampleComponent } from './page-example/fixed-footer-
 import { PageFixedTitleAndActionsExampleComponent } from './page-example/fixed-title-and-actions/page-fixed-title-and-actions-example.component';
 import { PageContentWidthExampleComponent } from './page-example/content-width/page-content-width-example.component';
 import { PageSimpleExampleComponent } from './page-example/simple/page-simple-example.component';
+import { PageTabNavExampleComponent } from './page-example/tab-navigation/page-tab-nav-example.component';
 import { ProgressCircleExampleComponent } from './progress-circle-example/progress-circle-example.component';
 import { RadioExampleComponent } from './radio-example/radio-example.component';
 import { RangeExampleComponent } from './range-example/range-example.component';
@@ -63,10 +64,12 @@ import { ReorderListExampleComponent } from './reorder-list-example/reorder-list
 import { SectionHeaderExampleComponent } from './section-header-example/section-header-example.component';
 import { SegmentedControlExampleComponent } from './segmented-control-example/segmented-control-example.component';
 import { SlideButtonExampleComponent } from './slide-button-example/slide-button-example.component';
-import { SlidesExampleComponent } from './slides-example/slides-example.component';
+import { SlidesSimpleExampleComponent } from './slides-example/slides-simple-example/slides-simple-example.component';
+import { SlidesAdvancedExampleComponent } from './slides-example/slides-advanced-example/slides-advanced-example.component';
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
 import { StylingHtmlListsExampleComponent } from './styling-html-lists-example/styling-html-lists-example.component';
 import { TabExampleComponent } from './tabs-example/tab/tab-example.component';
+import { TabExampleMenuComponent } from './tabs-example/tab/tab-example-menu.component';
 import { TabsExampleComponent } from './tabs-example/tabs-example.component';
 import { ToastExampleComponent } from './toast-example/toast-example.component';
 import { ToggleButtonExampleComponent } from './toggle-button-example/toggle-button-example.component';
@@ -75,9 +78,19 @@ import { VirtualScrollListExampleComponent } from './virtual-scroll-example/virt
 import { PagePullToRefreshExampleComponent } from './page-example/pull-to-refresh/page-pull-to-refresh-example.component';
 import { DropdownExampleComponent } from './dropdown-example/dropdown-example.component';
 import { DataTableExampleComponent } from './data-table-example/data-table-example.component';
+import { HeaderExampleComponent } from './header-example/header-example.component';
+import { NestedModalsV2ExampleComponent } from './modal-v2-example/nested-modals/nested-modals-v2-example.component';
+import { HeaderWithActionGroupExampleComponent } from './header-example/examples/action-group';
+import { HeaderWithEmphasizedActionGroupExampleComponent } from './header-example/examples/emphasize-actions';
+import { HeaderWithCustomActionsExampleComponent } from './header-example/examples/custom-actions';
+import { HeaderWithInteractiveTitleExampleComponent } from './header-example/examples/interactive-title';
+import { MenuExampleComponent } from './menu-example/menu-example.component';
+import { ModalExampleSimpleComponent } from './modal-example/modal-example-simple.component';
+import { ModalExampleAdvancedComponent } from './modal-example/modal-example-advanced.component';
+import { ModalExampleOutletComponent } from './modal-example/modal-example-outlet.component';
+import { ModalExampleAlertComponent } from './modal-example/modal-example-alert.component';
 
-VirtualScrollListExampleComponent;
-export const routes: Routes = [
+export const routes: ModalEnabledRoutes = [
   {
     path: '',
     component: ExamplesComponent,
@@ -112,31 +125,31 @@ export const routes: Routes = [
             children: [
               {
                 path: '',
-                redirectTo: 'dashboard',
+                redirectTo: 'overview',
                 pathMatch: 'full',
               },
               {
-                path: 'dashboard',
+                path: 'overview',
                 component: PageFixedFooterTabExampleComponent,
                 data: {
-                  title: 'Dashboard',
+                  title: 'Overview',
                 },
               },
               {
-                path: 'account',
+                path: 'transfer',
                 children: [
                   {
                     path: '',
                     component: TabExampleComponent,
                     data: {
-                      title: 'Account',
+                      title: 'Transfer',
                     },
                   },
                   {
                     path: 'sub',
                     component: TabExampleComponent,
                     data: {
-                      title: 'Account Sub',
+                      title: 'Transfer Sub',
                     },
                   },
                 ],
@@ -147,6 +160,10 @@ export const routes: Routes = [
                 data: {
                   title: 'Inbox',
                 },
+              },
+              {
+                path: 'menu',
+                component: TabExampleMenuComponent,
               },
             ],
           },
@@ -159,12 +176,32 @@ export const routes: Routes = [
             component: PageAdvancedExampleComponent,
           },
           {
+            path: 'tab-navigation',
+            component: PageTabNavExampleComponent,
+          },
+          {
             path: 'pull-to-refresh',
             component: PagePullToRefreshExampleComponent,
           },
           {
             path: 'content-width',
             component: PageContentWidthExampleComponent,
+          },
+          {
+            path: 'header-and-action-group',
+            component: HeaderWithActionGroupExampleComponent,
+          },
+          {
+            path: 'header-and-emphasized-action-group',
+            component: HeaderWithEmphasizedActionGroupExampleComponent,
+          },
+          {
+            path: 'header-and-custom-actions',
+            component: HeaderWithCustomActionsExampleComponent,
+          },
+          {
+            path: 'header-and-interactive-title',
+            component: HeaderWithInteractiveTitleExampleComponent,
           },
         ],
       },
@@ -174,31 +211,31 @@ export const routes: Routes = [
         children: [
           {
             path: '',
-            redirectTo: 'dashboard',
+            redirectTo: 'overview',
             pathMatch: 'full',
           },
           {
-            path: 'dashboard',
+            path: 'overview',
             component: TabExampleComponent,
             data: {
-              title: 'Dashboard',
+              title: 'Overview',
             },
           },
           {
-            path: 'account',
+            path: 'transfer',
             children: [
               {
                 path: '',
                 component: TabExampleComponent,
                 data: {
-                  title: 'Account',
+                  title: 'Transfer',
                 },
               },
               {
                 path: 'sub',
                 component: TabExampleComponent,
                 data: {
-                  title: 'Account Sub',
+                  title: 'Transfer Sub',
                 },
               },
             ],
@@ -210,6 +247,10 @@ export const routes: Routes = [
               title: 'Inbox',
             },
           },
+          {
+            path: 'menu',
+            component: TabExampleMenuComponent,
+          },
         ],
       },
       {
@@ -219,11 +260,33 @@ export const routes: Routes = [
       {
         path: 'modal',
         component: ModalExampleComponent,
+      },
+      {
+        path: 'modal-advanced',
+        component: ModalExampleAdvancedComponent,
+      },
+      {
+        path: 'modal-simple',
+        component: ModalExampleSimpleComponent,
+      },
+      {
+        path: 'modal-alert',
+        component: ModalExampleAlertComponent,
+      },
+      {
+        path: 'modal-route',
+        component: ModalExampleOutletComponent,
         children: [
           {
             path: 'page1',
             outlet: 'modal',
             component: ModalRoutePage1ExampleComponent,
+            data: {
+              modalConfig: {
+                size: 'large',
+                flavor: 'drawer',
+              },
+            },
           },
           {
             path: 'page2',
@@ -234,7 +297,7 @@ export const routes: Routes = [
       },
       {
         path: 'modal-route-with-url-param/:id',
-        component: ModalExampleComponent,
+        component: ModalExampleOutletComponent,
         children: [
           {
             path: 'page1',
@@ -249,8 +312,21 @@ export const routes: Routes = [
         ],
       },
       {
-        path: 'modal-experimental-fullscreen',
-        component: FullscreenModalExperimentalExampleComponent,
+        path: 'modal-v2',
+        children: [
+          {
+            path: 'fullscreen',
+            component: FullscreenModalV2ExampleComponent,
+          },
+          {
+            path: 'drawer',
+            component: DrawerModalV2ExampleComponent,
+          },
+          {
+            path: 'nested',
+            component: NestedModalsV2ExampleComponent,
+          },
+        ],
       },
       {
         path: 'form-field',
@@ -475,7 +551,11 @@ export const routes: Routes = [
   },
   {
     path: 'slides',
-    component: SlidesExampleComponent,
+    component: SlidesSimpleExampleComponent,
+  },
+  {
+    path: 'slides-advanced',
+    component: SlidesAdvancedExampleComponent,
   },
   {
     path: 'accordion',
@@ -500,5 +580,17 @@ export const routes: Routes = [
   {
     path: 'data-table',
     component: DataTableExampleComponent,
+  },
+  {
+    path: 'menu',
+    component: MenuExampleComponent,
+  },
+  {
+    path: 'header',
+    component: HeaderExampleComponent,
+  },
+  {
+    path: 'menu',
+    component: MenuExampleComponent,
   },
 ];

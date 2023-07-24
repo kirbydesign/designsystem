@@ -5,6 +5,7 @@
   SPACINGS
 ****************************************************************************/
 $sizes: (
+  xxxxxl: 72px,
   xxxxl: 64px,
   xxxl: 56px,
   xxl: 48px,
@@ -74,7 +75,7 @@ $z-layers: (
   default: 1,
   segment-badge: 2,
   avatar-badge: 2,
-  sticky-content: 2,
+  sticky-content: 10,
   dropdown: 800,
   popover: 850,
   modal-overlay: 900,
@@ -88,11 +89,18 @@ $border-radius-round: 999px !default;
 ****************************************************************************/
 $breakpoints: (
   small: 321px,
-  medium: 721px,
+  medium: 768px,
   large: 1025px,
   xlarge: 60em,
   xxlarge: 80em,
 ) !default;
+$breakpoint-map: (
+  'xs': 0,
+  'sm': 632px,
+  'md': 768px,
+  'lg': 992px,
+  'xl': 1200px,
+);
 
 /* Elevation
 ****************************************************************************/
@@ -132,6 +140,23 @@ $modal-heights: (
 ) !default;
 $modal-default-height: map.get($modal-heights, 'm');
 $drawer-default-height: map.get($modal-heights, 's');
+
+/* Modal V2
+****************************************************************************/
+$modal-v2-widths: (
+  l: 960px,
+  m: 800px,
+  s: 720px,
+  xs: 600px,
+  xxs: 343px,
+) !default;
+$modal-v2-heights: (
+  l: math.floor(map.get($modal-v2-widths, 'l') * 0.75),
+  m: math.floor(map.get($modal-v2-widths, 'm') * 0.75),
+  s: math.floor(map.get($modal-v2-widths, 's') * 0.75),
+  xs: math.floor(map.get($modal-v2-widths, 'xs') * 0.75),
+  xxs: math.floor(map.get($modal-v2-widths, 'xxs') * 0.75),
+) !default;
 
 /* Item
 ****************************************************************************/

@@ -1,0 +1,31 @@
+@use '@kirbydesign/core/src/scss/utils';
+
+:host {
+  display: flex;
+  position: relative;
+  gap: utils.size('xxs');
+}
+
+:host(.align-end) {
+  justify-content: flex-end;
+
+  .hidden-layer {
+    order: -1; // Move hidden layer to left of buttons and more menu
+  }
+}
+
+.hidden-layer {
+  display: none;
+  visibility: hidden;
+}
+
+kirby-menu {
+  display: none;
+  z-index: 1;
+}
+
+:host(.is-collapsed) {
+  kirby-menu {
+    display: inline-block;
+  }
+}

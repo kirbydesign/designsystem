@@ -1,4 +1,4 @@
-import { Component, forwardRef } from '@angular/core';
+import { Component, forwardRef, Input } from '@angular/core';
 
 import { CardFooterComponent } from '@kirbydesign/designsystem/card';
 
@@ -13,6 +13,8 @@ import { CardFooterComponent } from '@kirbydesign/designsystem/card';
     },
   ],
 })
-export class MockCardFooterComponent {}
+export class MockCardFooterComponent {
+  @Input() hasPadding: boolean;
+}
 
 // #endregion

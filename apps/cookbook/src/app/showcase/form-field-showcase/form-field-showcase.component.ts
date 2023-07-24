@@ -155,6 +155,15 @@ On native devices this method also ensures the form field is scrolled into the v
     },
   ];
 
+  dateMaskProperties: ApiDescriptionProperty[] = [
+    {
+      name: 'prefillYear',
+      defaultValue: 'false',
+      description: 'Enable/disable prefilling of the year.',
+      type: ['boolean'],
+    },
+  ];
+
   sharedEvents: ApiDescriptionEvent[] = [
     {
       name: 'blur',

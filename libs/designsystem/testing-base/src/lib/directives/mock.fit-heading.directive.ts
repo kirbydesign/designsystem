@@ -1,11 +1,11 @@
 import { Directive, forwardRef, Input } from '@angular/core';
 
-import { FitHeadingConfig, FitHeadingDirective } from '@kirbydesign/designsystem/page';
+import { FitHeadingConfig, FitHeadingDirective } from '@kirbydesign/designsystem/shared';
 
+// #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Directive({
-  selector: `h1[kirbyFitHeading],
-             h2[kirbyFitHeading],
-             h3[kirbyFitHeading]`,
+  // eslint-disable-next-line @angular-eslint/directive-selector
+  selector: `h1[kirbyFitHeading],h2[kirbyFitHeading],h3[kirbyFitHeading]`,
   providers: [
     {
       provide: FitHeadingDirective,
@@ -17,3 +17,5 @@ export class MockFitHeadingDirective {
   // eslint-disable-next-line @angular-eslint/no-input-rename
   @Input('kirbyFitHeading') config?: FitHeadingConfig;
 }
+
+// #endregion

@@ -69,8 +69,11 @@
     --transition: #{interaction-state.transition('background-color')};
   }
 
-  &.sm ion-item {
-    --min-height: #{map.get(utils.$item-heights, 's')};
+  &.sm,
+  :host-context(kirby-card.menu-popover) &:not([size]) {
+    ion-item {
+      --min-height: #{map.get(utils.$item-heights, 's')};
+    }
   }
 
   &.xs ion-item {
@@ -91,6 +94,22 @@
 .disclosure {
   padding-left: #{utils.size('xxxs')};
   color: #{utils.get-color('semi-dark')};
+
+  /* 
+    display: inline-flex; is used to make sure the span.disclosure element
+    is the same height as the child (kirby-icon)
+  */
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  & kirby-icon {
+    transition: transform utils.get-transition-duration('quick');
+
+    &.rotate {
+      transform: rotate(180deg);
+    }
+  }
 }
 
 :host-context(kirby-dropdown) ion-item,
@@ -98,9 +117,16 @@
   --min-height: #{utils.$dropdown-item-height};
 }
 
-// Intented for use with keyboard navigation in <kirby-dropdown>
-:host-context(kirby-dropdown .focused) ion-item {
+// Intented for use with keyboard navigation in <kirby-dropdown> & <kirby-popover>
+:host-context(kirby-dropdown .focused) ion-item,
+:host-context(kirby-popover .focused) ion-item {
   --background: #{interaction-state.get-state-color('white', 'xxxs')};
+}
+
+// Prevents the item from being clicked when disabled
+:host(.disabled),
+:host([disabled]) {
+  pointer-events: none;
 }
 
 :host(.selected),

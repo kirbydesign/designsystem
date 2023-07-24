@@ -5,6 +5,7 @@
     ></cookbook-form-field-example-configuration>
     <h2>Input</h2>
     <cookbook-form-field-input-example [size]="size"></cookbook-form-field-input-example>
+    <cookbook-form-field-input-color-example></cookbook-form-field-input-color-example>
     <cookbook-form-field-input-label-example
       [size]="size"
     ></cookbook-form-field-input-label-example>
@@ -37,7 +38,7 @@
     <cookbook-form-field-textarea-label-example></cookbook-form-field-textarea-label-example>
     <cookbook-form-field-textarea-counter-example></cookbook-form-field-textarea-counter-example>
 
-    <cookbook-example-configuration-wrapper [snapToViewport]="true" style="--header-height: 44px">
+    <cookbook-example-configuration-wrapper configAppearance="toggle">
       <kirby-checkbox
         [checked]="showDummyKeyboard"
         (checkedChange)="toggleDummyKeyboard($event)"

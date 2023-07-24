@@ -10,8 +10,8 @@ import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { HorizontalDirection, PopoverComponent } from '@kirbydesign/designsystem/popover';
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
-
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
+
 import { DropdownComponent } from './dropdown.component';
 import { OpenState } from './dropdown.types';
 

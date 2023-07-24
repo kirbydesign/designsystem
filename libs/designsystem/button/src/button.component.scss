@@ -5,13 +5,59 @@
 @use '@kirbydesign/core/src/scss/utils';
 
 $button-width: (
+  xs: 44px,
   sm: 44px,
   md: 88px,
   lg: 220px,
 ) !default;
+$button-margin: utils.size('xxxs');
 
 @function button-width($key) {
   @return map.get($button-width, $key);
+}
+
+@mixin button-xs {
+  /*
+  * Extra small button needs a smaller click area to e.g. not overlap with other 
+  * interactive elements. The maximum target size we can safely do is the button's 
+  * minimum width plus its margin on each side
+  */
+  $button-xs-icon-only-size: utils.size('m');
+  $button-xs-click-area-size: $button-xs-icon-only-size + $button-margin * 2;
+  @include utils.accessible-target-size($width: $button-xs-click-area-size);
+
+  font-size: utils.font-size('xs');
+  height: $button-xs-icon-only-size;
+  min-width: button-width('xs');
+
+  &:not(.icon-only) {
+    --kirby-button-padding-left: #{utils.size('xs')};
+    --kirby-button-padding-right: #{utils.size('xs')};
+  }
+
+  &.icon-only {
+    --kirby-icon-font-size: #{utils.size('s')};
+
+    width: $button-xs-icon-only-size;
+    min-width: unset;
+  }
+
+  &.icon-left {
+    --kirby-button-padding-left: #{utils.size('xxs')};
+    --kirby-icon-margin-right: #{utils.size('xxxs')};
+  }
+
+  &.icon-right {
+    --kirby-button-padding-right: #{utils.size('xxs')};
+    --kirby-icon-margin-left: #{utils.size('xxxs')};
+  }
+
+  &.icon-left,
+  &.icon-right {
+    --kirby-icon-font-size: #{utils.size('s')};
+
+    min-width: button-width('xs');
+  }
 }
 
 @mixin button-sm {
@@ -62,8 +108,6 @@ $button-width: (
   --kirby-button-background-color: transparent;
   --kirby-button-color: #{utils.get-color('black')};
 
-  box-shadow: none;
-
   @include interaction-state.apply-hover;
   @include interaction-state.apply-active('s');
 }
@@ -89,11 +133,8 @@ $button-width: (
 }
 
 @mixin button-attentionlevel3 {
-  --kirby-button-background-color: var(
-    --kirby-interactive-element-background-color,
-    #{utils.get-color('white')}
-  );
-  --kirby-button-color: var(--kirby-interactive-element-color, #{utils.get-color('black')});
+  --kirby-button-background-color: var(--kirby-inputs-background-color);
+  --kirby-button-color: var(--kirby-inputs-color);
 
   @include interaction-state.apply-hover('xs');
   @include interaction-state.apply-active('s');
@@ -102,6 +143,8 @@ $button-width: (
 :host {
   --kirby-button-padding-left: #{utils.size('m')};
   --kirby-button-padding-right: #{utils.size('m')};
+
+  flex-shrink: 0;
 
   @include utils.accessible-target-size;
   @include interaction-state.apply-focus-visible;
@@ -120,7 +163,6 @@ $button-width: (
   font-family: var(--kirby-font-family);
   background-color: var(--kirby-button-background-color, initial);
   color: var(--kirby-button-color, inherit);
-  box-shadow: var(--kirby-interactive-elevation);
   border-radius: utils.$border-radius-round;
   box-sizing: border-box; // Ensure border is not added to button height
   display: inline-flex;
@@ -136,7 +178,7 @@ $button-width: (
   height: utils.size('xl');
   min-width: button-width('md');
   padding: 0;
-  margin: utils.size('xxxs');
+  margin: $button-margin;
   line-height: utils.line-height('s');
 
   // Outline is applied on button border instead,
@@ -165,9 +207,22 @@ $button-width: (
   }
 
   &.icon-only {
+    --kirby-button-padding-left: 0;
+    --kirby-button-padding-right: 0;
+
     width: utils.size('xl');
     padding: 0;
     min-width: unset;
+
+    .content-layer {
+      @include utils.slotted(':not(kirby-icon)') {
+        display: none;
+      }
+    }
+  }
+
+  &.xs {
+    @include button-xs;
   }
 
   &.sm {
@@ -192,6 +247,10 @@ $button-width: (
 
   &.attention-level3 {
     @include button-attentionlevel3;
+
+    .state-layer {
+      box-shadow: var(--kirby-inputs-elevation);
+    }
   }
 
   &[expand='block'] {
@@ -199,7 +258,10 @@ $button-width: (
   }
 
   &:disabled {
-    background-color: utils.get-color('semi-light');
+    &:not(.no-decoration) {
+      background-color: utils.get-color('semi-light');
+    }
+
     color: utils.get-color('semi-dark-shade');
     border-color: transparent;
     pointer-events: none;
@@ -244,7 +306,8 @@ $button-width: (
   margin-inline-start: utils.size('s');
 }
 
-:host-context(kirby-alert).ok-btn {
+:host-context(kirby-alert).ok-btn,
+:host-context(kirby-alert-experimental).ok-btn {
   --kirby-button-background-color: #{utils.get-color('success')};
   --kirby-button-color: #{utils.get-color('success-contrast')};
 }
@@ -257,9 +320,8 @@ $button-width: (
 // Temp fix for https://github.com/angular/angular-cli/issues/13854#issuecomment-470831308
 
 /* clean-css ignore:start */
-:host-context(ion-toolbar ion-buttons) {
+:host-context(ion-toolbar ion-buttons.legacy-actions) {
   font-size: utils.font-size('s');
-  margin: 0;
   height: utils.size('xl');
 
   &.icon-only {
@@ -269,7 +331,7 @@ $button-width: (
     &.attention-level1,
     &.attention-level2,
     &.attention-level3 {
-      @include button-no-decoration;
+      @include button-attentionlevel3;
     }
   }
 }
@@ -308,5 +370,24 @@ $button-width: (
       @include interaction-state.apply-hover;
       @include interaction-state.apply-active('s');
     }
+  }
+}
+
+:host-context(kirby-page-actions),
+:host-context(kirby-action-group),
+:host-context(.kirby-modal ion-header ion-toolbar ion-buttons) {
+  margin: 0;
+}
+
+:host-context(kirby-modal-footer) {
+  margin-top: 0;
+  margin-bottom: 0;
+
+  &:first-child {
+    margin-left: 0;
+  }
+
+  &:last-child {
+    margin-right: 0;
   }
 }

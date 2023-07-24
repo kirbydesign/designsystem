@@ -16,37 +16,31 @@ table[kirby-table] {
   &.kirby-table-layout-fixed {
     table-layout: fixed;
   }
-}
 
-tr {
-  &:not(:last-child) {
+  tr {
+    &:not(:last-child) {
+      border-bottom: $border-bottom;
+    }
+  }
+
+  thead tr {
     border-bottom: $border-bottom;
   }
 
-  &.kirby-selectable-row {
-    @include interaction-state.apply-hover {
-      background-color: $highlight-color;
-    }
+  th {
+    text-align: left;
+    font-weight: utils.font-weight('normal');
+    font-size: utils.font-size('xs');
+    color: utils.get-text-color('semi-dark');
+    padding: utils.size('xxs') utils.size('s');
   }
-}
 
-thead tr {
-  border-bottom: $border-bottom;
-}
-
-th {
-  text-align: left;
-  font-weight: utils.font-weight('normal');
-  font-size: utils.font-size('xs');
-  color: utils.get-text-color('semi-dark');
-  padding: utils.size('xxs') utils.size('s');
-}
-
-td {
-  height: $cell-height;
-  padding: utils.size('xxxs') utils.size('s');
-  font-weight: utils.font-weight('normal');
-  font-size: utils.font-size('s');
-  color: utils.get-text-color('black');
-  vertical-align: middle;
+  td {
+    height: $cell-height;
+    padding: utils.size('xxxs') utils.size('s');
+    font-weight: utils.font-weight('normal');
+    font-size: utils.font-size('s');
+    color: utils.get-text-color('black');
+    vertical-align: middle;
+  }
 }

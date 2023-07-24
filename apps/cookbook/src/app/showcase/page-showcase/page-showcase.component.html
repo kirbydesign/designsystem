@@ -50,6 +50,11 @@
     </li>
     <li>
       Support for
+      <a href="#" (click)="scrollTo(tabnav)">tab navigation</a>
+      with sticking tabbar.
+    </li>
+    <li>
+      Support for
       <a href="#" (click)="scrollTo(fixedFooter)">fixed page footer</a>
       and hiding tabs.
     </li>
@@ -64,6 +69,20 @@
       .
     </li>
   </ul>
+
+  <h2>Page Header</h2>
+  <kirby-flag themeColor="warning">Important notice</kirby-flag>
+
+  <p>
+    <em>
+      All of the examples below use the legacy inputs/directives for title, subtitle and page
+      actions in the header area of the page. Please refer to the
+      <a routerLink="../header">Kirby Header documentation</a>
+      for more info on how to migrate to the new
+      <code>kirby-header</code>
+      component.
+    </em>
+  </p>
 
   <h2>Page with Kirby Router Outlet</h2>
   <p>
@@ -131,6 +150,26 @@
     <a href="https://ionicframework.com/docs/v3/api/navigation/NavController/">here</a>
     .
   </p>
+
+  <h4>Custom back button navigation</h4>
+
+  <p>
+    In rare use cases where it might be necessary to take complete control over the back button
+    behavior Kirby Page exposes an injection token for exactly this.
+  </p>
+  <p>
+    When the token is provided the supplied
+    <code>PageBackButtonOverride.navigateBack()</code>
+    callback is executed whenever the back button is pressed. Within the method, you will have
+    access to the specific
+    <code>NavController</code>
+    and
+    <code>IonRouterOutlet</code>
+    instances that would otherwise have been called by Kirby Page which can be used for navigation
+    together with any custom logic.
+  </p>
+
+  <cookbook-example-viewer [ts]="injectionTokenExample"></cookbook-example-viewer>
 
   <div class="page-example">
     <div>
@@ -329,6 +368,40 @@
   </div>
 
   <cookbook-iphone src="/examples/page/fixed" showExternalLink="true"></cookbook-iphone>
+</div>
+
+<div class="page-example">
+  <div>
+    <h2 #tabnav>Tab navigation</h2>
+    <p>
+      The
+      <code>kirby-tab-navigation</code>
+      element can be used to implement tab-based navigation at the page content level. The component
+      is placed before the page content using the
+      <code>*kirbyPageStickyContent</code>
+      directive. When the tab bar is scrolled beyond the page toolbar it will stick below the area.
+    </p>
+    <h4>Label text</h4>
+    <p>
+      The label text is specified using the
+      <code>label</code>
+      attribute of
+      <code>kirby-tab-navigation-item</code>
+      component.
+    </p>
+    <h4>Label badge</h4>
+    <p>
+      An optional badge can be appended to the label text by adding a
+      <code>kirby-badge</code>
+      element inside the
+      <code>kirby-tab-navigation-item</code>
+      component.
+    </p>
+    <cookbook-code-viewer [html]="tabNavigationHtml"></cookbook-code-viewer>
+    <cookbook-code-viewer [ts]="tabNavigationTs"></cookbook-code-viewer>
+  </div>
+
+  <cookbook-iphone src="/examples/page/tab-navigation" showExternalLink="true"></cookbook-iphone>
 </div>
 
 <div class="page-example">

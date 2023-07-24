@@ -1,4 +1,12 @@
 <div class="container">
+  <div class="toggle-wrapper" *ngIf="showViewModeToggle">
+    Device view
+    <kirby-toggle
+      (checkedChange)="onViewModeToggleChange($event)"
+      [checked]="viewMode === 'device'"
+    ></kirby-toggle>
+  </div>
+
   <div class="docs-demo-device ios">
     <figure>
       <svg class="docs-demo-device-md-bar" viewBox="0 0 1384.3 40.3">

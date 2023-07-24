@@ -14,11 +14,11 @@ import { DropdownComponent } from '@kirbydesign/designsystem/dropdown';
 import { EmptyStateComponent } from '@kirbydesign/designsystem/empty-state';
 
 import {
-  FitHeadingDirective,
   PageActionsDirective,
   PageComponent,
   PageTitleDirective,
 } from '@kirbydesign/designsystem/page';
+import { FitHeadingDirective } from '@kirbydesign/designsystem/shared';
 
 import { ButtonComponent } from './button.component';
 
@@ -96,7 +96,7 @@ describe('ButtonComponent in Kirby Page', () => {
       await TestHelper.whenReady(ionToolbar);
       expect(actionButtonInHeader).toHaveComputedStyle({ 'background-color': getColor('primary') });
       expect(actionButtonInHeaderIconOnly).toHaveComputedStyle({
-        'background-color': 'transparent',
+        'background-color': getColor('white'),
       });
     });
 

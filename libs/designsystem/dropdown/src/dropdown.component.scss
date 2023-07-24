@@ -42,6 +42,7 @@ $min-screen-width: 375px;
     margin: 0;
     outline: none;
     width: 100%;
+    min-width: 0;
 
     // Temporary fix for button-width as attention level 3 has border,
     // and attention level 2 does not:

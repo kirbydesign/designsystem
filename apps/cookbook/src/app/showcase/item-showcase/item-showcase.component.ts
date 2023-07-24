@@ -33,7 +33,14 @@ export class ItemShowcaseComponent {
       name: 'disclosure',
       description: 'Set disclosure icon',
       defaultValue: 'null',
-      type: ["'link' | 'arrow-more' | 'arrow-down' | 'arrow-up'"],
+      type: ["'link' | 'arrow-more' | 'arrow-down' | 'arrow-up' | null"],
+    },
+    {
+      name: 'rotateIcon',
+      description:
+        'Rotates the disclosure icon 180 degrees. This only applies to the arrow-up & arrow-down icons',
+      defaultValue: 'false',
+      type: ['boolean'],
     },
     {
       name: 'reorderable',

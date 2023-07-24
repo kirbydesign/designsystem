@@ -49,7 +49,7 @@ export class SegmentedControlComponent {
   }
 
   private _items: SegmentItemInternal[] = [];
-  get items(): SegmentItem[] {
+  get items(): SegmentItemInternal[] {
     return this._items;
   }
 

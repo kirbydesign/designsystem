@@ -16,6 +16,7 @@ import { LoadingOverlayComponent } from '@kirbydesign/designsystem';
 export class MockLoadingOverlayComponent {
   @Input() isLoading: boolean;
   @Input() showBackdrop: boolean;
+  @Input() hideContent: boolean;
 }
 
 // #endregion

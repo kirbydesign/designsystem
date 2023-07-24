@@ -45,6 +45,7 @@ import {
   ProgressCircleRingComponent,
 } from '@kirbydesign/designsystem/progress-circle';
 import { RouterOutletModule } from '@kirbydesign/designsystem/router-outlet';
+
 import { ItemGroupComponent } from '@kirbydesign/designsystem/item-group';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { CalendarComponent } from '@kirbydesign/designsystem/calendar';
@@ -53,13 +54,16 @@ import {
   ActionSheetHelper,
   AlertComponent,
   AlertHelper,
+  CanDismissHelper,
   ModalCompactWrapperComponent,
   ModalController,
   ModalFooterComponent,
   ModalHelper,
   ModalWrapperComponent,
 } from '@kirbydesign/designsystem/modal';
+import { KirbyModalModule } from '@kirbydesign/designsystem/modal/v2';
 import { PageModule } from '@kirbydesign/designsystem/page';
+import { HeaderModule } from '@kirbydesign/designsystem/header';
 import { EmptyStateModule } from '@kirbydesign/designsystem/empty-state';
 import { DropdownModule } from '@kirbydesign/designsystem/dropdown';
 import { KirbyAppModule } from '@kirbydesign/designsystem/kirby-app';
@@ -70,6 +74,9 @@ import { ReorderListComponent } from '@kirbydesign/designsystem/reorder-list';
 
 import { ToastController, ToastHelper } from '@kirbydesign/designsystem/toast';
 import { BreakpointHelperService, GridComponent } from '@kirbydesign/designsystem/grid';
+import { ActionGroupComponent } from '@kirbydesign/designsystem/action-group';
+import { MenuComponent } from '@kirbydesign/designsystem/menu';
+import { TabNavigationModule } from '@kirbydesign/designsystem/tab-navigation';
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
 import { customElementsInitializer } from './custom-elements-initializer';
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
@@ -81,6 +88,7 @@ const exportedDeclarations = [ModalRouterLinkDirective];
 const declarations = [...exportedDeclarations, KeyHandlerDirective];
 
 const standaloneComponents = [
+  ActionGroupComponent,
   GridComponent,
   ItemGroupComponent,
   ModalCompactWrapperComponent,
@@ -107,6 +115,7 @@ const standaloneComponents = [
   SlideButtonComponent,
   SegmentedControlComponent,
   CheckboxComponent,
+  MenuComponent,
   ActionSheetComponent,
   ModalFooterComponent,
   AvatarComponent,
@@ -119,6 +128,8 @@ const exportedModules = [
   KirbyAppModule,
   RouterOutletModule,
   PageModule,
+  HeaderModule,
+  TabNavigationModule,
   TabsModule,
   IconModule,
   ItemModule,
@@ -135,6 +146,8 @@ const exportedModules = [
   FormFieldModule,
   SlideModule,
   AccordionModule,
+  HeaderModule,
+  KirbyModalModule,
   ...standaloneComponents,
 ];
 
@@ -153,10 +166,11 @@ const providers = [
   LoadingOverlayService,
   ResizeObserverFactory,
   ResizeObserverService,
+  CanDismissHelper,
   customElementsInitializer(),
 ];
 
-const ConfigToken = new InjectionToken<any>('USERCONFIG');
+const ConfigToken = new InjectionToken<unknown>('USERCONFIG');
 export interface KirbyConfig {
   moduleRootRoutePath?: string;
 }

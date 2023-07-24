@@ -95,6 +95,8 @@ ion-item-divider {
 }
 
 .footer {
+  @include themes.apply-white-theme;
+
   background-color: utils.get-color('white');
   border-top: 1px solid $divider-color;
   display: flex;

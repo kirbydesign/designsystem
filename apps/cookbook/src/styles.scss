@@ -53,3 +53,17 @@ code:not([class*='language-']) {
     color: utils.get-color('dark-contrast');
   }
 }
+
+.kirby-app-content {
+  height: 100%;
+  overflow: auto;
+}
+
+.comment {
+  font-style: italic;
+  color: utils.get-text-color('semi-dark');
+
+  &.small {
+    font-size: smaller;
+  }
+}

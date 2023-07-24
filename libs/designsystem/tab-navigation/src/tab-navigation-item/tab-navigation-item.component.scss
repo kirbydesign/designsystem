@@ -1,0 +1,79 @@
+@use '@kirbydesign/core/src/scss/utils';
+
+$tab-item-text-max-width: 100px;
+$bottom-border-height: 1px;
+$border-color-selected: utils.get-color('dark');
+
+@mixin button-reset {
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  user-select: none;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  border: none;
+  outline: none;
+}
+
+:host {
+  position: relative;
+  padding-bottom: $bottom-border-height * 2;
+
+  button[role='tab'] {
+    @include button-reset;
+
+    color: utils.get-color('black');
+    box-sizing: border-box; // Ensure border is not added to button height
+    padding: utils.size('s') utils.size('m');
+    font-size: utils.font-size('n');
+    line-height: utils.line-height('m');
+    gap: utils.size('xxxs');
+
+    &:focus,
+    &:hover {
+      font-weight: utils.font-weight('bold');
+    }
+
+    &[aria-selected='true'] {
+      font-weight: utils.font-weight('bold');
+
+      // Selected divider
+      &::before {
+        content: '';
+        width: 100%;
+        background-color: $border-color-selected;
+        position: absolute;
+        border-radius: 1px;
+        height: $bottom-border-height * 2;
+        bottom: 0;
+        z-index: 2;
+      }
+    }
+  }
+}
+
+span[data-text] {
+  max-width: $tab-item-text-max-width;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  // Using the before selector to insert a hidden pseudo-element with the same text content in bold,
+  // ensures no horizontal layout shifts when changing the visible span's text content from bold to normal font-weight.
+  &::before {
+    display: block;
+    content: attr(data-text);
+    font-weight: utils.font-weight('bold');
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+  }
+}
