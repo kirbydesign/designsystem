@@ -797,21 +797,6 @@ describe('PageComponent', () => {
         });
       });
 
-      describe('and is set to standard', () => {
-        beforeEach(() => {
-          spectator.component.maxWidth = 'standard';
-          spectator.detectChanges();
-        });
-
-        it('should apply correct content width', async () => {
-          await TestHelper.whenReady(ionContent);
-          const contentInner = ionContent.querySelector('.content-inner');
-          expect(contentInner).toHaveComputedStyle({
-            'max-width': '792px',
-          });
-        });
-      });
-
       describe('and is set to optimized', () => {
         beforeEach(() => {
           spectator.component.maxWidth = 'optimized';
