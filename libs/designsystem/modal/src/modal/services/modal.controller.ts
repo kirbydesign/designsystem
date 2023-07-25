@@ -105,10 +105,10 @@ export class ModalController implements OnDestroy {
     onWillClose: (data?: any) => void
   ): Promise<void> {
     const config: ModalConfig = {
+      ...modalRoute.snapshot.data.modalConfig,
       component: null,
       modalRoute: modalRoute,
       siblingModalRouteActivated$: siblingModalRouteActivated$,
-      flavor: 'modal', // Todo: Should it be possible to specify flavor as data in RouteConfig?
     };
     await this.showAndRegisterOverlay(
       () => this.modalHelper.showModalWindow(config, modalData?.alertConfig),
