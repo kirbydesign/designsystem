@@ -1,9 +1,15 @@
 import { Component, Inject, OnInit, Optional, SkipSelf } from '@angular/core';
 
-import { ActionSheetConfig, AlertConfig, ModalController } from '@kirbydesign/designsystem';
+import {
+  ActionSheetConfig,
+  AlertConfig,
+  ModalController,
+  ModalSize,
+} from '@kirbydesign/designsystem';
 import { COMPONENT_PROPS, Modal, ModalConfig } from '@kirbydesign/designsystem';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
 import { KirbyAnimation } from '@kirbydesign/designsystem';
+import { ModalSizeOption } from '../modal-example-configuration/modal-example-size-selector.component';
 
 @Component({
   selector: 'cookbook-embedded-modal-example',
@@ -20,24 +26,33 @@ export class EmbeddedModalExampleComponent implements OnInit {
     booleanProperty: boolean;
   };
 
-  showNestedOptions: boolean;
   showDummyKeyboard: boolean;
-  showPageProgress: boolean;
-  showFooter: boolean;
   showDummyContent: boolean;
   showStaticDummyContent: boolean;
-  showNestedPageProgress: boolean = false;
-  showNestedFooter: boolean = false;
-  showNestedDummyContent: boolean = true;
   delayLoadDummyContent: boolean;
   loadAdditionalContent: boolean;
-  disableScroll: boolean = false;
+  disableScroll: boolean;
+
+  // We always want to allow config of footer and page progress, so initialize to false
+  showPageProgress: boolean = false;
+  showFooter: boolean = false;
+  snapFooterToKeyboard: boolean = false;
   displayFooterAsInline: boolean = false;
-  openFullHeight: boolean;
+
+  showNestedOptions: boolean;
+  showNestedCollapseTitle: boolean;
+  showNestedPageProgress: boolean = false;
+  showNestedFooter: boolean = false;
+  snapNestedFooterToKeyboard: boolean = false;
+  showNestedDummyContent: boolean = false;
+  displayNestedFooterAsInline: boolean = false;
 
   isLoading = false;
   isLoadingAdditionalContent = false;
-  snapFooterToKeyboard = false;
+
+  showModalSizeSelector: boolean;
+  selectedModalSize: ModalSize;
+  alertBeforeClose: boolean;
 
   get _footerType(): 'inline' | 'fixed' {
     return this.displayFooterAsInline ? 'inline' : 'fixed';
@@ -63,6 +78,24 @@ export class EmbeddedModalExampleComponent implements OnInit {
         setTimeout(() => (this.isLoadingAdditionalContent = false), 2000);
       }
     }
+
+    this.modal.canDismiss = () => this.canDismiss();
+  }
+
+  private canDismiss() {
+    if (!this.alertBeforeClose) return true;
+
+    const config: AlertConfig = {
+      title: 'Are you sure you want to close?',
+      okBtn: 'Yes',
+      cancelBtn: 'Take me back',
+      icon: {
+        name: 'warning',
+        themeColor: 'warning',
+      },
+    };
+
+    return config;
   }
 
   private showNestedOverlay(flavor: 'modal' | 'drawer') {
@@ -74,16 +107,18 @@ export class EmbeddedModalExampleComponent implements OnInit {
         action: this.onSupplementaryActionSelect.bind(this),
       },
       component: EmbeddedModalExampleComponent,
-      size: this.openFullHeight ? 'full-height' : null,
+      size: this.selectedModalSize,
+      collapseTitle: this.showNestedCollapseTitle,
       componentProps: {
         title,
         subtitle: 'Hello from second embedded example component!',
-        showDummyKeyboard: this.showDummyKeyboard,
-        showPageProgress: this.showNestedPageProgress,
-        showFooter: this.showNestedFooter,
-        showDummyContent: this.showNestedDummyContent,
         delayLoadDummyContent: this.delayLoadDummyContent,
         loadAdditionalContent: this.loadAdditionalContent,
+        showPageProgress: this.showNestedPageProgress,
+        showFooter: this.showNestedFooter,
+        snapFooterToKeyboard: this.snapNestedFooterToKeyboard,
+        displayFooterAsInline: this.displayNestedFooterAsInline,
+        showDummyContent: this.showNestedDummyContent,
       },
     };
 
@@ -163,5 +198,9 @@ export class EmbeddedModalExampleComponent implements OnInit {
 
   onAlertClose(result?: boolean): void {
     console.log(`Alert closed: ${result}`);
+  }
+
+  setSelectedModalSize(size: ModalSizeOption) {
+    this.selectedModalSize = size.value;
   }
 }

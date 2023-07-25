@@ -1,8 +1,6 @@
 import { Routes } from '@angular/router';
 
 import { ModalV2RoutingComponent } from '@kirbydesign/designsystem/modal/v2';
-import { ModalRoutePage1ExampleComponent } from '../examples/modal-example/modal-route-example/modal-route-page1-example.component';
-import { ModalRoutePage2ExampleComponent } from '../examples/modal-example/modal-route-example/modal-route-page2-example.component';
 import { ItemShowcaseComponent } from '../showcase/item-showcase/item-showcase.component';
 
 import { ModalRoutingV2ExamplePage1Component } from '../examples/modal-v2-example/modal-routing/modal-routing-v2-example-page1.component';
@@ -180,22 +178,13 @@ export const routes: Routes = [
       {
         path: 'modal',
         component: ModalShowcaseComponent,
-        children: [
-          {
-            path: 'page1',
-            outlet: 'modal',
-            component: ModalRoutePage1ExampleComponent,
-          },
-          {
-            path: 'page2',
-            outlet: 'modal',
-            component: ModalRoutePage2ExampleComponent,
-          },
-        ],
       },
       {
         path: 'modal-v2',
         component: ModalV2ShowcaseComponent,
+        data: {
+          hide: true,
+        },
         children: [
           {
             path: 'modal',

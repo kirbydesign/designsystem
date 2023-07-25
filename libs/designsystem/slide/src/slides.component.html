@@ -1,0 +1,55 @@
+<div class="navigation" *ngIf="showNavigation || title !== undefined">
+  <span class="kirby-text-medium">{{ title }}</span>
+
+  <div
+    class="navigation-inner"
+    *ngIf="
+      showNavigation &&
+      (!slidesOptions ||
+        slidesOptions?.navigation === undefined ||
+        slidesOptions?.pagination === undefined)
+    "
+  >
+    <div
+      class="pagination"
+      [ngClass]="_paginationId"
+      *ngIf="!slidesOptions || slidesOptions?.pagination === undefined"
+    ></div>
+    <div
+      class="buttons"
+      *ngIf="!_isTouch && (!slidesOptions || slidesOptions?.navigation === undefined)"
+    >
+      <button
+        kirby-button
+        attentionLevel="3"
+        class="nav-prev swiper-button-prev"
+        [ngClass]="_prevButtonId"
+        size="xs"
+      >
+        <kirby-icon name="arrow-back"></kirby-icon>
+      </button>
+
+      <button
+        kirby-button
+        attentionLevel="3"
+        class="nav-next swiper-button-next"
+        [ngClass]="_nextButtonId"
+        size="xs"
+      >
+        <kirby-icon name="arrow-more"></kirby-icon>
+      </button>
+
+      <ng-content select="button[kirby-button]"></ng-content>
+    </div>
+  </div>
+</div>
+
+<!-- We need to prevent Swiper from initialization by setting init="false" until we pass all required parameters
+     https://swiperjs.com/element#parameters-as-props -->
+<swiper-container init="false" #swiperContainer>
+  <swiper-slide *ngFor="let slide of slides; let i = index">
+    <ng-container
+      *ngTemplateOutlet="slideTemplate; context: { $implicit: slide, index: i }"
+    ></ng-container>
+  </swiper-slide>
+</swiper-container>

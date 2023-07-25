@@ -1,15 +1,20 @@
 import { NgModule } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { AnimationController, IonicModule, isPlatform } from '@ionic/angular';
+import { IonicConfig } from '@ionic/core';
+
+const shouldHaveNoopAnimation = !isPlatform('hybrid');
+
+const navAnimationConfig: IonicConfig = shouldHaveNoopAnimation && {
+  navAnimation: () => new AnimationController().create(),
+};
+
+const config: IonicConfig = {
+  mode: 'ios',
+  ...navAnimationConfig,
+};
 
 @NgModule({
-  imports: [
-    IonicModule.forRoot({
-      mode: 'ios',
-      inputShims: true,
-      scrollAssist: true,
-      scrollPadding: false,
-    }),
-  ],
+  imports: [IonicModule.forRoot(config)],
   exports: [IonicModule],
 })
 export class KirbyIonicModule {}
