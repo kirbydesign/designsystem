@@ -1,3 +1,3 @@
-export * from './slides.component';
-export * from './slide.directive';
-export * from './slide.module';
+export { SlidesComponent, KirbySwiperOptions, SelectedSlide } from './slides.component';
+export { SlideDirective } from './slide.directive';
+export { SlideModule } from './slide.module';

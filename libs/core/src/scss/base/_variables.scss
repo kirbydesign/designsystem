@@ -75,7 +75,7 @@ $z-layers: (
   default: 1,
   segment-badge: 2,
   avatar-badge: 2,
-  sticky-content: 2,
+  sticky-content: 10,
   dropdown: 800,
   popover: 850,
   modal-overlay: 900,
@@ -89,7 +89,7 @@ $border-radius-round: 999px !default;
 ****************************************************************************/
 $breakpoints: (
   small: 321px,
-  medium: 721px,
+  medium: 768px,
   large: 1025px,
   xlarge: 60em,
   xxlarge: 80em,

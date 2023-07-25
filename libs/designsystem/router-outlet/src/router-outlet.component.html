@@ -1,6 +1,6 @@
 <ng-container *ngIf="main">
-  <ion-router-outlet main></ion-router-outlet>
+  <ion-router-outlet main [animated]="_animated"></ion-router-outlet>
 </ng-container>
 <ng-container *ngIf="!main">
-  <ion-router-outlet></ion-router-outlet>
+  <ion-router-outlet [animated]="_animated"></ion-router-outlet>
 </ng-container>

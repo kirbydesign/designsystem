@@ -5,6 +5,7 @@ import { TestHelper } from '@kirbydesign/designsystem/testing';
 
 import { PageProgressComponent, PageTitleComponent } from '@kirbydesign/designsystem/page';
 import { ModalFooterComponent } from '../modal/footer/modal-footer.component';
+import { CanDismissHelper } from '../modal/services/can-dismiss.helper';
 import { ModalWrapperComponent } from './modal-wrapper.component';
 import {
   DynamicFooterEmbeddedComponent,
@@ -20,6 +21,7 @@ describe('ModalWrapperComponent + ModalFooterComponent', () => {
     component: ModalWrapperComponent,
     imports: [RouterTestingModule, ModalFooterComponent],
     entryComponents: [StaticFooterEmbeddedComponent, DynamicFooterEmbeddedComponent],
+    mocks: [CanDismissHelper],
   });
 
   let modalWrapperTestBuilder: ModalWrapperTestBuilder;
@@ -223,6 +225,7 @@ describe('ModalWrapperComponent + PageTitleComponent', () => {
     imports: [RouterTestingModule],
     entryComponents: [TitleEmbeddedComponent],
     declarations: [PageTitleComponent],
+    mocks: [CanDismissHelper],
   });
 
   let modalWrapperTestBuilder: ModalWrapperTestBuilder;
@@ -281,6 +284,7 @@ describe('ModalWrapperComponent + PageProgressComponent', () => {
     imports: [RouterTestingModule],
     entryComponents: [StaticPageProgressEmbeddedComponent, DynamicPageProgressEmbeddedComponent],
     declarations: [PageProgressComponent],
+    mocks: [CanDismissHelper],
   });
 
   let modalWrapperTestBuilder: ModalWrapperTestBuilder;

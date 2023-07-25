@@ -5,6 +5,7 @@ import {
   ElementRef,
   HostListener,
   Inject,
+  Input,
   LOCALE_ID,
   Renderer2,
 } from '@angular/core';
@@ -18,21 +19,41 @@ import Inputmask from 'inputmask/lib/inputmask';
 export class DateInputDirective implements AfterViewInit {
   @HostListener('input')
   onInput() {
+    if (!this.isDateInput) return;
+
     this.updateMask(this.elementRef.nativeElement.value);
   }
 
+  @Input() prefillYear = false;
+
   private maskingElement: HTMLElement;
+
+  /**
+   * `isDateInput` is used to avoid removing the type attribute on the input element and calling updateMask()
+   * when the directive is not used on a date input.
+   * This is needed for the standalone component 'InputComponent', which includes the directive
+   * using the `hostDirectives` component decorator prop. Angular ignores the selector of directives
+   * applied in the `hostDirectives` property which effectively applies the directive to all kirby-inputs, not only date inputs.
+   * This check prevents the directive from executing it's masking on non-date inputs.
+   * See: https://angular.io/guide/directive-composition-api
+   */
+  private isDateInput = false;
 
   constructor(
     private elementRef: ElementRef,
     private renderer: Renderer2,
     @Inject(LOCALE_ID) private locale: string
   ) {
-    // Remove type to avoid user-agent specific behaviour for [type="date"]
-    this.elementRef.nativeElement.removeAttribute('type');
+    this.isDateInput = this.elementRef.nativeElement.type === 'date';
+    if (this.isDateInput) {
+      // Remove type to avoid user-agent specific behaviour for [type="date"]
+      this.elementRef.nativeElement.removeAttribute('type');
+    }
   }
 
   ngAfterViewInit(): void {
+    if (!this.isDateInput) return;
+
     this.initMask();
   }
 
@@ -47,6 +68,7 @@ export class DateInputDirective implements AfterViewInit {
     new Inputmask('datetime', {
       inputFormat,
       placeholder,
+      prefillYear: this.prefillYear,
     }).mask(this.elementRef.nativeElement);
 
     // Append input overlay, so it's possible to style typed date differntly than the date-mask

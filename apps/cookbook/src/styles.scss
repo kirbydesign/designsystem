@@ -58,3 +58,12 @@ code:not([class*='language-']) {
   height: 100%;
   overflow: auto;
 }
+
+.comment {
+  font-style: italic;
+  color: utils.get-text-color('semi-dark');
+
+  &.small {
+    font-size: smaller;
+  }
+}
