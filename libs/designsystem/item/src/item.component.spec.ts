@@ -17,7 +17,7 @@ describe('ItemComponent', () => {
   let spectator: SpectatorHost<ItemComponent>;
 
   const createHost = createHostFactory({
-    imports: [MockModule(IonicModule), MockModule(IconModule)],
+    imports: [MockModule(IonicModule), IconModule],
     component: ItemComponent,
   });
 
@@ -113,49 +113,52 @@ describe('ItemComponent', () => {
         spectator.setInput('rotateIcon', true);
       });
 
-      it('should rotate the icon 180deg if the disclosure icon is "arrow-down', async () => {
+      it('should rotate the icon 180deg if the disclosure icon is "arrow-down"', async () => {
         spectator.setInput('disclosure', 'arrow-down');
         spectator.detectChanges();
 
         const icon = spectator.query<HTMLElement>('kirby-icon');
-        await TestHelper.waitForTimeout(50); // Wait a tick
+        const ionIcon = spectator.query<HTMLElement>('ion-icon');
+        await TestHelper.ionComponentOnReady(ionIcon);
 
         expect(icon).toHaveComputedStyle({
           transform: rotationMatrix,
         });
       });
 
-      it('should rotate the icon 180deg if the disclosure icon is "arrow-up', async () => {
+      it('should rotate the icon 180deg if the disclosure icon is "arrow-up"', async () => {
         spectator.setInput('disclosure', 'arrow-up');
         spectator.detectChanges();
 
         const icon = spectator.query<HTMLElement>('kirby-icon');
-        await TestHelper.waitForTimeout(50); // Wait a tick
+        const ionIcon = spectator.query<HTMLElement>('ion-icon');
+        await TestHelper.ionComponentOnReady(ionIcon);
 
         expect(icon).toHaveComputedStyle({
           transform: rotationMatrix,
         });
       });
 
-      it('should NOT rotate the icon 180deg if the disclosure icon is "arrow-more', async () => {
+      it('should NOT rotate the icon 180deg if the disclosure icon is "arrow-more"', async () => {
         spectator.setInput('disclosure', 'arrow-more');
         spectator.detectChanges();
 
         const icon = spectator.query('kirby-icon');
-        await TestHelper.waitForTimeout(50); // Wait a tick
+        const ionIcon = spectator.query<HTMLElement>('ion-icon');
+        await TestHelper.ionComponentOnReady(ionIcon);
 
         expect(icon).toHaveComputedStyle({
           transform: 'none',
         });
       });
 
-      it('should NOT rotate the icon 180deg if the disclosure icon is "link', async () => {
+      it('should NOT rotate the icon 180deg if the disclosure icon is "link"', async () => {
         spectator.setInput('disclosure', 'link');
         spectator.detectChanges();
 
         const icon = spectator.query('kirby-icon');
-        await TestHelper.waitForTimeout(50); // Wait a tick
-        // Comment to trigger test
+        const ionIcon = spectator.query<HTMLElement>('ion-icon');
+        await TestHelper.ionComponentOnReady(ionIcon);
 
         expect(icon).toHaveComputedStyle({
           transform: 'none',
