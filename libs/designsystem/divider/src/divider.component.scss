@@ -1,14 +1,5 @@
 @use '@kirbydesign/core/src/scss/utils';
 
-:host-context(kirby-card),
-:host-context(.kirby-color-brightness-white) {
-  --kirby-divider-color: #{utils.get-color('background-color')};
-}
-
-:host-context(.kirby-color-brightness-light) {
-  --kirby-divider-color: #{utils.get-color('medium')};
-}
-
 hr {
   margin-top: utils.size('xxs');
   margin-bottom: utils.size('xxs');
