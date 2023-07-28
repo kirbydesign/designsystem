@@ -153,7 +153,7 @@ describe('CalendarComponent', () => {
       spectator = createHost('<kirby-calendar></kirby-calendar>');
     });
 
-    it('should render 6 weeks', () => {
+    it('should always render 6 weeks no matter the amount of days in month', () => {
       const weeks = spectator.queryAll('tbody > tr');
 
       expect(weeks.length).toBe(6);
