@@ -25,7 +25,6 @@ import { MockFormFieldComponent } from './components/mock.form-field.component';
 import { MockInputComponent } from './components/mock.input.component';
 import { MockInputCounterComponent } from './components/mock.input-counter.component';
 import { MockTextareaComponent } from './components/mock.textarea.component';
-import { MockGridComponent } from './components/mock.grid.component';
 import {
   MockHeaderActionsDirective,
   MockHeaderComponent,
@@ -115,7 +114,6 @@ export const MOCK_COMPONENTS = [
   MockInputComponent,
   MockInputCounterComponent,
   MockTextareaComponent,
-  MockGridComponent,
   MockHeaderActionsDirective,
   MockHeaderCustomSectionDirective,
   MockHeaderComponent,
