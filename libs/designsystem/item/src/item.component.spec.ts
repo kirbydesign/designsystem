@@ -6,9 +6,12 @@ import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { IconModule } from '@kirbydesign/designsystem/icon';
 
+import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { ItemComponent, ItemSize } from './item.component';
 
 const { itemHeight, size } = DesignTokenHelper;
+
+const rotationMatrix = 'matrix(-1, 0, 0, -1, 0, 0)';
 
 describe('ItemComponent', () => {
   let spectator: SpectatorHost<ItemComponent>;
@@ -90,6 +93,68 @@ describe('ItemComponent', () => {
 
       expect(spectator.query('ion-item')).toHaveComputedStyle({
         '--inner-padding-end': size('xxs'),
+      });
+    });
+
+    it('should make the disclosure wrapper element get the same height as its child (kirby-icon)', async () => {
+      spectator.setInput('disclosure', 'arrow-down');
+      spectator.detectChanges();
+
+      const disclosureWrapper = spectator.query<HTMLElement>('.disclosure');
+      const icon = spectator.query<HTMLElement>('kirby-icon');
+
+      expect(disclosureWrapper).toHaveComputedStyle({
+        height: getComputedStyle(icon).height,
+      });
+    });
+
+    describe('when rotateIcon is set to true', () => {
+      beforeEach(() => {
+        spectator.setInput('rotateIcon', true);
+      });
+
+      it('should rotate the icon 180deg if the disclosure icon is "arrow-down', async () => {
+        spectator.setInput('disclosure', 'arrow-down');
+
+        const icon = spectator.query<HTMLElement>('kirby-icon');
+        await TestHelper.waitForTimeout(); // Wait a tick
+
+        expect(icon).toHaveComputedStyle({
+          transform: rotationMatrix,
+        });
+      });
+
+      it('should rotate the icon 180deg if the disclosure icon is "arrow-up', async () => {
+        spectator.setInput('disclosure', 'arrow-up');
+
+        const icon = spectator.query<HTMLElement>('kirby-icon');
+        await TestHelper.waitForTimeout(); // Wait a tick
+
+        expect(icon).toHaveComputedStyle({
+          transform: rotationMatrix,
+        });
+      });
+
+      it('should NOT rotate the icon 180deg if the disclosure icon is "arrow-more', async () => {
+        spectator.setInput('disclosure', 'arrow-more');
+
+        const icon = spectator.query('kirby-icon');
+        await TestHelper.waitForTimeout(); // Wait a tick
+
+        expect(icon).toHaveComputedStyle({
+          transform: 'none',
+        });
+      });
+
+      it('should NOT rotate the icon 180deg if the disclosure icon is "link', async () => {
+        spectator.setInput('disclosure', 'link');
+
+        const icon = spectator.query('kirby-icon');
+        await TestHelper.waitForTimeout(); // Wait a tick
+
+        expect(icon).toHaveComputedStyle({
+          transform: 'none',
+        });
       });
     });
   });

@@ -13,6 +13,10 @@
     margin-top: utils.size('xs');
     margin-bottom: utils.size('xxxs');
   }
+
+  > h4 {
+    margin-top: utils.size('m');
+  }
 }
 
 .item-illustration {
