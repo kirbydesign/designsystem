@@ -118,6 +118,9 @@ describe('ItemComponent', () => {
         spectator.detectChanges();
 
         const icon = spectator.query<HTMLElement>('kirby-icon');
+
+        // By awaiting the ion-icon component to be ready, we ensure that the parent (kirby-icon) has been rendered.
+        // Otherwise, the computed style will sporadically be evaluated as "transform: none".
         const ionIcon = spectator.query<HTMLElement>('ion-icon');
         await TestHelper.ionComponentOnReady(ionIcon);
 
@@ -131,6 +134,9 @@ describe('ItemComponent', () => {
         spectator.detectChanges();
 
         const icon = spectator.query<HTMLElement>('kirby-icon');
+
+        // By awaiting the ion-icon component to be ready, we ensure that the parent (kirby-icon) has been rendered.
+        // Otherwise, the computed style will sporadically be evaluated as "transform: none".
         const ionIcon = spectator.query<HTMLElement>('ion-icon');
         await TestHelper.ionComponentOnReady(ionIcon);
 
@@ -144,6 +150,9 @@ describe('ItemComponent', () => {
         spectator.detectChanges();
 
         const icon = spectator.query('kirby-icon');
+
+        // By awaiting the ion-icon component to be ready, we ensure that the parent (kirby-icon) has been rendered.
+        // Otherwise, the computed style will sporadically be evaluated as "transform: none".
         const ionIcon = spectator.query<HTMLElement>('ion-icon');
         await TestHelper.ionComponentOnReady(ionIcon);
 
@@ -157,6 +166,9 @@ describe('ItemComponent', () => {
         spectator.detectChanges();
 
         const icon = spectator.query('kirby-icon');
+
+        // By awaiting the ion-icon component to be ready, we ensure that the parent (kirby-icon) has been rendered.
+        // Otherwise, the computed style will sporadically be evaluated as "transform: none".
         const ionIcon = spectator.query<HTMLElement>('ion-icon');
         await TestHelper.ionComponentOnReady(ionIcon);
 
