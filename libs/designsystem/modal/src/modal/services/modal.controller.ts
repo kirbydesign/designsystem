@@ -127,8 +127,16 @@ export class ModalController implements OnDestroy {
     );
   }
 
-  public async showAlert(config: AlertConfig, onClose?: (result: boolean) => void): Promise<void> {
-    await this.showAndRegisterOverlay(() => this.alertHelper.showAlert(config), onClose);
+  public async showAlert(
+    config: AlertConfig,
+    onClose?: (result: boolean) => void,
+    onWillClose?: (result: boolean) => void
+  ): Promise<void> {
+    await this.showAndRegisterOverlay(
+      () => this.alertHelper.showAlert(config),
+      onClose,
+      onWillClose
+    );
   }
 
   private async showAndRegisterOverlay(
