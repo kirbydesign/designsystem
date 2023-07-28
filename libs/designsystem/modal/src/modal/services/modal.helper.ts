@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { WindowRef } from '@kirbydesign/designsystem/types';
-import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 import { first, fromEvent, takeUntil } from 'rxjs';
 import { Overlay } from '../../modal.interfaces';
 
@@ -143,28 +142,6 @@ export class ModalHelper {
     console.log(
       'registerPresentingElement has been deprecated. It is no longer needed to register a presenting element.'
     );
-  }
-
-  public async scrollToTop(
-    noModalRegisteredErrorMessage: string,
-    duration?: KirbyAnimation.Duration
-  ) {
-    const modal = await this.ionicModalController.getTop();
-    if (!modal || !(modal.component instanceof ModalWrapperComponent)) {
-      throw new Error(noModalRegisteredErrorMessage);
-    }
-    modal.component.scrollToTop(duration);
-  }
-
-  public async scrollToBottom(
-    noModalRegisteredErrorMessage: string,
-    duration?: KirbyAnimation.Duration
-  ) {
-    const modal = await this.ionicModalController.getTop();
-    if (!modal || !(modal.component instanceof ModalWrapperComponent)) {
-      throw new Error(noModalRegisteredErrorMessage);
-    }
-    modal.component.scrollToBottom(duration);
   }
 
   private handleBrowserBackButton(modal: HTMLIonModalElement) {
