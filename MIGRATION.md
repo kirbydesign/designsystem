@@ -2,6 +2,24 @@
 
 This document provides information about breaking changes and their migrations for major versions of Kirby Design System.
 
+## Version 9.0.0
+
+- [Components](#components-v9)
+  - [Modal](#modal-v9)
+  - [Experimental Alert](#experimental-alert-v9)
+
+<h3 id="components-v9">Components</h3>
+
+<h4 id="modal-v9">Modal</h4>
+
+It is no longer possible to pass ann `AlertConfig` as an optional third argument to `modalController.showModal` or as an optional third argument to `modalController.navigateToModal`. Instead a callback that returns either a boolean or an `AlertConfig` can passed to the `ModalConfig` as `canDismiss` as described in the documentation.
+
+Additionally, the `registerPresentingElement` method has been removed from the `modalController` and all uses of this method should be removed.
+
+<h4 id="experimental-alert-v9">Experimental Alert</h4>
+
+The Experimental Alert has been fully removed and we recommend to use the normal alert instead.
+
 ## Version 8.3.0
 
 - [Components](#components-v8-3)
