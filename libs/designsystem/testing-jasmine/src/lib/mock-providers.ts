@@ -57,8 +57,6 @@ export function modalControllerFactory() {
     'showAlert',
     'registerPresentingElement',
     'hideTopmost',
-    'scrollToTop',
-    'scrollToBottom',
     'hideAll',
   ]);
 }
