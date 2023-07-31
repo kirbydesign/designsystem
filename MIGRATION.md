@@ -13,9 +13,7 @@ This document provides information about breaking changes and their migrations f
 
 <h4 id="modal-v9">Modal</h4>
 
-It is no longer possible to pass ann `AlertConfig` as an optional third argument to `modalController.showModal` or as an optional third argument to `modalController.navigateToModal`. Instead a callback that returns either a boolean or an `AlertConfig` can passed to the `ModalConfig` as `canDismiss` as described in the documentation.
-
-Additionally, the following methods have been removed from the `modalController` and all uses of these method should be removed: `registerPresentingElement`, `scrollToTop`, `scrollToBottom`.
+The following methods have been removed from the `modalController` and all uses of these method should be removed: `registerPresentingElement`, `scrollToTop`, `scrollToBottom`.
 
 <h4 id="experimental-alert-v9">Experimental Alert</h4>
 
