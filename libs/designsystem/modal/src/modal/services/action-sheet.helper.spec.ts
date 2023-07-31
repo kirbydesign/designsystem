@@ -25,6 +25,7 @@ describe('ActionSheetHelper', () => {
   });
 
   beforeEach(() => {
+    TestHelper.disableAnimationsInTest();
     spectator = createService();
     actionSheetHelper = spectator.service;
   });
