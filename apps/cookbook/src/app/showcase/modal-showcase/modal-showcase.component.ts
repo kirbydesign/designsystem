@@ -96,9 +96,11 @@ export class ModalShowcaseComponent {
     },
     {
       name: 'canDismiss',
-      description: `(Optional) A callback that returns either a boolean or an AlertConfig. If an AlertConfig is being returned, an alert will appear, when the user tries to dismiss the modal.`,
+      description: `(Optional) Determines whether or not a modal can be dismissed.
+ 
+      The canDismiss option takes a callback function that returns either a boolean or an AlertConfig. If an AlertConfig is returned an alert will appear when the user tries to dismiss the modal. If false is returned the modal cannot be dismissed by user-interaction or with ModalController.hideTopMost(). `,
       defaultValue: 'undefined',
-      type: ['boolean | AlertConfig'],
+      type: ['boolean | AlertConfig | Promise<boolean | AlertConfig>'],
     },
   ];
 
