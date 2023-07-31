@@ -74,6 +74,7 @@ export class ModalExampleSimpleComponent implements OnInit {
           showNestedOptions: true,
           showDummyContent: false,
           showModalSizeSelector: true,
+          backdropDismiss: false,
         },
       };
     }

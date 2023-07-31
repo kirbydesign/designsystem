@@ -393,6 +393,66 @@ describe('ModalHelper', () => {
         TestHelper.resetTestWindow();
       });
     });
+
+    describe('backdropDismiss', () => {
+      it('should be true if backdropDismiss is enabled in config', async () => {
+        await openOverlay({
+          component: undefined,
+          backdropDismiss: true,
+        });
+        expect(ionModal?.backdropDismiss).toBeTrue();
+      });
+      it('should be false if backdropDismiss is disabled in config', async () => {
+        await openOverlay({
+          component: undefined,
+          backdropDismiss: false,
+        });
+        expect(ionModal?.backdropDismiss).toBeFalse();
+      });
+      it('should be true if backdropDismiss is undefined in config', async () => {
+        await openOverlay({
+          component: undefined,
+          backdropDismiss: undefined,
+        });
+        expect(ionModal?.backdropDismiss).toBeTrue();
+      });
+      describe('with flavor', () => {
+        it('should be false if flavor is compact', async () => {
+          await openOverlay({
+            component: undefined,
+            backdropDismiss: undefined,
+            flavor: 'compact',
+          });
+          expect(ionModal?.backdropDismiss).toBeFalse();
+        });
+        it('should be true if flavor is not compact', async () => {
+          await openOverlay({
+            component: undefined,
+            backdropDismiss: undefined,
+            flavor: 'drawer',
+          });
+          expect(ionModal?.backdropDismiss).toBeTrue();
+        });
+      });
+      describe('with interactWithBackground', () => {
+        it('should be true if interactWithBackground is true', async () => {
+          await openOverlay({
+            component: undefined,
+            backdropDismiss: undefined,
+            interactWithBackground: true,
+          });
+          expect(ionModal?.backdropDismiss).toBeFalse();
+        });
+        it('should be true if interactWithBackground is false', async () => {
+          await openOverlay({
+            component: undefined,
+            backdropDismiss: undefined,
+            interactWithBackground: false,
+          });
+          expect(ionModal?.backdropDismiss).toBeTrue();
+        });
+      });
+    });
   });
 
   describe('on phone', () => {

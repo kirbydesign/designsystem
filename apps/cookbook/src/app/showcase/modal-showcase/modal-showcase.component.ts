@@ -94,6 +94,12 @@ export class ModalShowcaseComponent {
       defaultValue: '',
       type: ['string | string[]'],
     },
+    {
+      name: 'backdropDismiss',
+      description: `(Optional) Modal will close on backdrop click`,
+      defaultValue: 'undefined',
+      type: ['boolean'],
+    },
   ];
 
   properties: ApiDescriptionProperty[] = [
