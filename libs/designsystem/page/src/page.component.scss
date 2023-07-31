@@ -17,6 +17,8 @@ $toolbar-shaded-background: color.mix(
   utils.get-color('background-color', $getValueOnly: true),
   1.1%
 );
+$toolbar-button-size: utils.size('xl');
+$toolbar-button-spacing: utils.size('xxs');
 
 ion-header,
 ion-toolbar {
@@ -27,19 +29,18 @@ ion-toolbar {
 
 ion-toolbar {
   --border-width: 0 !important;
-  --padding-start: #{utils.size('xxxs')};
-  --padding-end: #{utils.size('xxxs')};
+  --padding-start: #{utils.size('s')};
+  --padding-end: #{utils.size('s')};
   --padding-top: 0;
   --padding-bottom: 0;
   --ion-toolbar-color: #{utils.get-color('black')};
   --min-height: #{utils.size('xxxl')};
 
   @include utils.media('>=medium') {
+    --padding-start: #{utils.size('m')};
+    --padding-end: #{utils.size('m')};
     --min-height: #{utils.size('xxxxxl')};
   }
-
-  box-sizing: border-box;
-  padding-inline: utils.size('xxxs');
 
   /*
   * Toolbar Divider & Shaded background
@@ -60,7 +61,7 @@ ion-toolbar {
     transition: $toolbar-transition;
   }
 
-  // Only show divider + shaded bg on small screens when content is scrolled:
+  // Only show toolbar divider + shaded bg when content is scrolled:
   &.content-scrolled {
     --background: #{$toolbar-shaded-background};
 
@@ -74,23 +75,31 @@ ion-toolbar {
     }
   }
 
-  // Always show divider + shaded bg on large screens:
-  @include utils.media('>=medium') {
-    --background: #{$toolbar-shaded-background};
-
-    // Divider:
-    &:not(.content-pinned)::before {
-      background-color: utils.get-color('medium');
-      transition-duration: $toolbar-transition-duration-out;
+  &.content-pinned {
+    &::before {
+      transition: none;
     }
   }
 
-  /*
-  * This overrides Ionic's default ios styling for the position of secondary action buttons which are to the left of content: https://ionicframework.com/docs/api/toolbar#buttons
-  * We would like the seconday actions to be to the far right after primary actions (usually as a falafel):
-  */
-  ion-buttons[slot='secondary'] {
-    order: 6;
+  ion-buttons {
+    // Back button:
+    &[slot='start'] {
+      margin-right: $toolbar-button-spacing;
+    }
+
+    // Action buttons:
+    &[slot='primary'],
+    &[slot='secondary'] {
+      margin-left: $toolbar-button-spacing;
+    }
+
+    /*
+    * This overrides Ionic's default ios styling for the position of secondary action buttons which are to the left of content: https://ionicframework.com/docs/api/toolbar#buttons
+    * We would like the seconday actions to be to the far right after primary actions (usually as a falafel):
+    */
+    &[slot='secondary'] {
+      order: 6;
+    }
   }
 
   ion-title {
@@ -100,6 +109,10 @@ ion-toolbar {
     transition-property: opacity, transform;
     transition-duration: 150ms;
     transition-timing-function: utils.get-transition-easing('enter-exit');
+    padding-inline: calc(
+      var(--action-buttons-width, $toolbar-button-size + $toolbar-button-spacing) +
+        var(--padding-start)
+    );
 
     &.slide-and-fade-in {
       visibility: visible;
@@ -107,11 +120,15 @@ ion-toolbar {
       transform: translateY(0);
     }
 
-    .toolbar-title {
+    .toolbar-title,
+    .toolbar-title > span.has-icon > span {
       text-overflow: ellipsis;
       white-space: nowrap;
       pointer-events: auto;
       overflow: hidden;
+    }
+
+    .toolbar-title {
       font-weight: utils.font-weight('bold');
 
       span.clickable {
@@ -123,6 +140,7 @@ ion-toolbar {
         flex-direction: row;
         align-items: center;
         justify-content: center;
+        max-width: 100%;
       }
 
       @include utils.slotted('*') {
@@ -160,10 +178,8 @@ ion-back-button {
   --background: #{utils.get-color('white')};
   --icon-font-size: 24px;
 
-  $button-size: utils.size('xl');
-
-  height: $button-size;
-  width: $button-size;
+  height: $toolbar-button-size;
+  width: $toolbar-button-size;
 
   // Properly center back-icon
   &::part(icon) {
@@ -247,6 +263,10 @@ ion-content {
     --padding-end: var(--page-content-padding-end, #{utils.size('xxl')});
   }
 
+  &.has-header {
+    --padding-top: 0;
+  }
+
   &.max-width-standard {
     --page-content-max-width: 792px;
   }
@@ -310,7 +330,6 @@ ion-content {
     left: calc(-1 * var(--padding-start));
     right: calc(-1 * var(--padding-end));
     bottom: 0;
-    transition: $toolbar-transition;
   }
 
   &::before {
@@ -328,11 +347,6 @@ ion-content {
   }
 
   &.content-pinned {
-    &::before,
-    &::after {
-      transition-duration: $toolbar-transition-duration-in;
-    }
-
     &::before {
       /* Background - pinned */
       background-color: $toolbar-shaded-background;

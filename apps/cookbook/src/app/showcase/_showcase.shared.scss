@@ -8,6 +8,7 @@ h3 {
   border-bottom: 1px dotted utils.get-color('medium');
 }
 
-cookbook-example-viewer {
+cookbook-example-viewer,
+cookbook-code-viewer {
   margin-bottom: utils.size('l');
 }

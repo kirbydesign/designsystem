@@ -205,3 +205,25 @@
     text-overflow: ellipsis;
   }
 }
+
+@mixin trailing-icon($svg: 'link') {
+  $icon-scaling-factor: 1.5em;
+
+  @if str-index($svg, 'http') {
+    // External icon
+    background-image: url('#{$svg}');
+  } @else {
+    // Icon from library
+    $icon-url: '/assets/kirby/icons/svg/#{$svg}.svg';
+
+    background-image: url('#{$icon-url}');
+  }
+
+  white-space: nowrap;
+  background-repeat: no-repeat;
+  background-position: right 50%;
+  background-size: $icon-scaling-factor;
+
+  // Place icon to the right of text, with icons own width + the actual spacing
+  padding-right: calc(#{$icon-scaling-factor} + #{size('xxxs')});
+}

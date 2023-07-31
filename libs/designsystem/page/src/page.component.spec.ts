@@ -13,7 +13,9 @@ import { selectedTabClickEvent, TabsComponent } from '@kirbydesign/designsystem/
 const { size, fontWeight, getColor } = DesignTokenHelper;
 
 import { ModalNavigationService } from '@kirbydesign/designsystem/modal';
+import { ActionGroupComponent } from '@kirbydesign/designsystem/action-group';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { HeaderActionsDirective, HeaderComponent } from '@kirbydesign/designsystem/header';
 import { FitHeadingDirective } from '@kirbydesign/designsystem/shared';
 import {
   PageActionsComponent,
@@ -35,8 +37,10 @@ describe('PageComponent', () => {
   const firstOtherUrlWithQueryParams = 'firstOther?query=params';
   const shadedBackgroundColor = '#f3f3f3';
   let spectator: SpectatorHost<PageComponent>;
-  let ionToolbar: HTMLElement;
+  let ionToolbar: HTMLIonToolbarElement;
+  let ionTitle: HTMLIonTitleElement;
   let ionContent: HTMLIonContentElement;
+  let ionScrollElement: HTMLElement;
   let tabBar: SpyObject<TabsComponent>;
   let router: SpyObject<Router>;
   let modalNavigationService: SpyObject<ModalNavigationService>;
@@ -73,6 +77,7 @@ describe('PageComponent', () => {
     imports: [
       TestHelper.ionicModuleForTest,
       RouterTestingModule.withRoutes(routes),
+      ActionGroupComponent,
       ButtonComponent,
       FitHeadingDirective,
     ],
@@ -84,6 +89,8 @@ describe('PageComponent', () => {
       PageTitleDirective,
       PageToolbarTitleDirective,
       PageStickyContentDirective,
+      HeaderComponent,
+      HeaderActionsDirective,
     ],
     providers: [
       {
@@ -107,23 +114,28 @@ describe('PageComponent', () => {
     beforeEach(async () => {
       spectator = createHost(
         `<kirby-page title="${titleText}" subtitle="${subtitleText}">
-         <kirby-page-actions *kirbyPageActions>
-           <button kirby-button>Static</button>
-         </kirby-page-actions>
-         <kirby-page-content>
-          ${dummyContent}
-         </kirby-page-content>
-       </kirby-page>`
+           <kirby-page-actions *kirbyPageActions="{sticky: true}">>
+             <button kirby-button>Sticky</button>
+           </kirby-page-actions>
+           <kirby-page-actions *kirbyPageActions="{fixed: true}">>
+             <button kirby-button>Fixed</button>
+           </kirby-page-actions>
+           <kirby-page-content>
+            ${dummyContent}
+           </kirby-page-content>
+         </kirby-page>`
       );
       modalNavigationService = spectator.inject(ModalNavigationService);
       modalNavigationService.isModalRoute.and.returnValue(false);
       router = spectator.inject(Router);
       tabBar = spectator.inject(TabsComponent);
       ionToolbar = spectator.queryHost('ion-toolbar');
-
+      ionTitle = spectator.queryHost('ion-title');
       ionContent = spectator.queryHost('ion-content');
       await TestHelper.whenReady(ionToolbar);
+      await TestHelper.whenReady(ionTitle);
       await TestHelper.whenReady(ionContent);
+      ionScrollElement = await ionContent.getScrollElement();
     });
 
     describe('on phone', () => {
@@ -149,6 +161,138 @@ describe('PageComponent', () => {
           });
           it('should be correct on non-ios-phone', () => {
             expect(ionToolbar).toHaveComputedStyle({ height: size('xxxl') });
+          });
+        });
+
+        it('should render with correct padding', async () => {
+          await TestHelper.whenReady(ionToolbar);
+          const toolbarContainer = ionToolbar.shadowRoot.querySelector('.toolbar-container');
+          expect(toolbarContainer).toBeTruthy();
+          expect(toolbarContainer).toHaveComputedStyle({
+            'padding-left': size('s'),
+            'padding-right': size('s'),
+            'padding-top': '0px',
+            'padding-bottom': '0px',
+          });
+        });
+
+        describe('divider and shaded background', () => {
+          describe('before scroll', () => {
+            it('should not render toolbar divider', () => {
+              expect(ionToolbar).toHaveComputedStyle(
+                {
+                  'background-color': 'rgba(0, 0, 0, 0)',
+                },
+                ':before'
+              );
+            });
+
+            it('should not render shaded toolbar background', () => {
+              const toolbarBackground = ionToolbar.shadowRoot.querySelector('.toolbar-background');
+              expect(toolbarBackground).toHaveComputedStyle({
+                'background-color': getColor('background-color'),
+              });
+            });
+          });
+
+          describe('after scrolling page title above content top', () => {
+            beforeEach(async () => {
+              // Scroll page title above content top:
+              const pageTitle: HTMLElement = ionContent.querySelector('.page-title');
+              const andThenSome = 10;
+              const verticalScrollAmount =
+                pageTitle.offsetTop + pageTitle.offsetHeight + andThenSome;
+
+              await ionContent.scrollToPoint(0, verticalScrollAmount, 0);
+              await TestHelper.whenTrue(() => spectator.component.isContentScrolled);
+            });
+
+            it('should render toolbar divider', () => {
+              expect(ionToolbar).toHaveComputedStyle(
+                {
+                  'background-color': getColor('medium'),
+                  content: '""',
+                  height: '1px',
+                  width: `${ionToolbar.offsetWidth}px`,
+                },
+                ':before'
+              );
+            });
+
+            it('should render shaded toolbar background', () => {
+              const toolbarBackground = ionToolbar.shadowRoot.querySelector('.toolbar-background');
+              expect(toolbarBackground).toHaveComputedStyle({
+                'background-color': shadedBackgroundColor,
+              });
+            });
+          });
+        });
+      });
+
+      describe('content', () => {
+        it('should have correct padding', () => {
+          expect(ionScrollElement).toHaveComputedStyle({
+            'padding-left': size('s'),
+            'padding-right': size('s'),
+            'padding-top': size('xs'),
+          });
+        });
+      });
+    });
+
+    describe('on tablet', () => {
+      beforeAll(async () => {
+        await TestHelper.resizeTestWindow(TestHelper.screensize.tablet);
+      });
+
+      afterAll(() => {
+        TestHelper.resetTestWindow();
+      });
+
+      describe('toolbar', () => {
+        describe('height', () => {
+          it('should be correct on tablet', () => {
+            expect(ionToolbar).toHaveComputedStyle({ height: size('xxxxxl') });
+          });
+        });
+      });
+
+      describe('content', () => {
+        it('should have correct padding', () => {
+          expect(ionScrollElement).toHaveComputedStyle({
+            'padding-left': size('xxl'),
+            'padding-right': size('xxl'),
+            'padding-top': size('xs'),
+          });
+        });
+      });
+    });
+
+    describe('on desktop', () => {
+      beforeAll(async () => {
+        await TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
+      });
+
+      afterAll(() => {
+        TestHelper.resetTestWindow();
+      });
+
+      describe('toolbar', () => {
+        describe('height', () => {
+          it('should be correct on desktop', () => {
+            expect(ionToolbar).toHaveComputedStyle({ height: size('xxxxxl') });
+          });
+        });
+
+        it('should render with correct padding', async () => {
+          await TestHelper.whenReady(ionToolbar);
+          const toolbarContainer = ionToolbar.shadowRoot.querySelector('.toolbar-container');
+          expect(toolbarContainer).toBeTruthy();
+          expect(toolbarContainer).toHaveComputedStyle({
+            'padding-left': size('m'),
+            'padding-right': size('m'),
+            'padding-top': '0px',
+            'padding-bottom': '0px',
           });
         });
 
@@ -201,79 +345,159 @@ describe('PageComponent', () => {
           });
         });
       });
-    });
 
-    describe('on tablet', () => {
-      beforeAll(async () => {
-        await TestHelper.resizeTestWindow(TestHelper.screensize.tablet);
-      });
-
-      afterAll(() => {
-        TestHelper.resetTestWindow();
-      });
-
-      describe('toolbar', () => {
-        describe('height', () => {
-          it('should be correct on tablet', () => {
-            expect(ionToolbar).toHaveComputedStyle({ height: size('xxxxxl') });
+      describe('content', () => {
+        it('should have correct padding', () => {
+          expect(ionScrollElement).toHaveComputedStyle({
+            'padding-left': size('xxl'),
+            'padding-right': size('xxl'),
+            'padding-top': size('xs'),
           });
         });
       });
     });
 
-    describe('on desktop', () => {
-      beforeAll(async () => {
-        await TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
-      });
-
-      afterAll(() => {
-        TestHelper.resetTestWindow();
-      });
-
-      describe('toolbar', () => {
-        describe('height', () => {
-          it('should be correct on desktop', () => {
-            expect(ionToolbar).toHaveComputedStyle({ height: size('xxxxxl') });
-          });
+    describe('having page actions', () => {
+      describe('on phone', () => {
+        beforeAll(async () => {
+          await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
         });
 
-        it('should render toolbar divider by default', () => {
-          expect(ionToolbar).toHaveComputedStyle(
-            {
-              'background-color': getColor('medium'),
-            },
-            ':before'
+        afterAll(() => {
+          TestHelper.resetTestWindow();
+        });
+
+        it('should set correct padding on title', () => {
+          const actionButtons = ionToolbar.querySelectorAll<HTMLButtonElement>(
+            'ion-buttons:not([slot="start"])'
           );
-        });
-
-        it('should render shaded toolbar background by default', () => {
-          const toolbarBackground = ionToolbar.shadowRoot.querySelector('.toolbar-background');
-          expect(toolbarBackground).toHaveComputedStyle({
-            'background-color': shadedBackgroundColor,
+          let actionButtonsWidth = 0;
+          actionButtons.forEach((btn) => {
+            actionButtonsWidth +=
+              btn.offsetWidth +
+              parseInt(window.getComputedStyle(btn).marginLeft) +
+              parseInt(window.getComputedStyle(btn).marginRight);
+          });
+          const toolbarPadding = parseInt(size('s'));
+          const expectedPadding = toolbarPadding + actionButtonsWidth;
+          expect(ionTitle).toHaveComputedStyle({
+            'padding-left': `${expectedPadding}px`,
           });
         });
       });
-    });
 
-    describe('having static page action', () => {
-      it('should show the action in the toolbar when content not scrolled', () => {
-        const staticPageActionButton = ionToolbar.querySelector(
-          'ion-buttons[slot="primary"] button[kirby-button]'
-        );
+      describe('on desktop', () => {
+        beforeAll(async () => {
+          await TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
+        });
 
-        expect(staticPageActionButton).toBeTruthy();
+        afterAll(() => {
+          TestHelper.resetTestWindow();
+        });
+
+        it('should set correct padding on title', () => {
+          const actionButtons = ionToolbar.querySelectorAll<HTMLButtonElement>(
+            'ion-buttons:not([slot="start"])'
+          );
+          let actionButtonsWidth = 0;
+          actionButtons.forEach((btn) => {
+            actionButtonsWidth +=
+              btn.offsetWidth +
+              parseInt(window.getComputedStyle(btn).marginLeft) +
+              parseInt(window.getComputedStyle(btn).marginRight);
+          });
+          const toolbarPadding = parseInt(size('m'));
+          const expectedPadding = toolbarPadding + actionButtonsWidth;
+          expect(ionTitle).toHaveComputedStyle({
+            'padding-left': `${expectedPadding}px`,
+          });
+        });
       });
 
-      it('should show the action in the toolbar when content scrolled', async () => {
-        const verticalScrollAmount = 10;
-        await ionContent.scrollToPoint(0, verticalScrollAmount, 0);
-        await TestHelper.whenTrue(() => spectator.component.isContentScrolled);
+      describe('having sticky page action', () => {
+        it('should show the action in the toolbar when content not scrolled', () => {
+          const stickyActionButton = ionToolbar.querySelector(
+            'ion-buttons[slot="primary"] button[kirby-button]'
+          );
+          expect(stickyActionButton).toBeTruthy();
+          expect(stickyActionButton).toBeVisible();
+        });
 
-        const staticPageActionButton = ionToolbar.querySelector(
-          'ion-buttons[slot="primary"] button[kirby-button]'
-        );
+        it('should show the action in the toolbar when content scrolled', async () => {
+          const verticalScrollAmount = 10;
+          await ionContent.scrollToPoint(0, verticalScrollAmount, 0);
+          await TestHelper.whenTrue(() => spectator.component.isContentScrolled);
 
-        expect(staticPageActionButton).toBeTruthy();
+          const stickyActionButton = ionToolbar.querySelector(
+            'ion-buttons[slot="primary"] button[kirby-button]'
+          );
+          expect(stickyActionButton).toBeTruthy();
+          expect(stickyActionButton).toBeVisible();
+        });
+
+        it('should have correct margins', () => {
+          const actionsWrapper = ionToolbar.querySelector('ion-buttons[slot="primary"]');
+          expect(actionsWrapper).toHaveComputedStyle({
+            'margin-left': size('xxs'),
+          });
+        });
+
+        it('should remove margins on slotted buttons', () => {
+          const actionButtons = ionToolbar.querySelectorAll(
+            'ion-buttons[slot="primary"] button[kirby-button]'
+          );
+          actionButtons.forEach((btn) => {
+            expect(btn).toHaveComputedStyle({
+              'margin-bottom': '0px',
+              'margin-top': '0px',
+              'margin-left': '0px',
+              'margin-right': '0px',
+            });
+          });
+        });
+      });
+
+      describe('having fixed page action', () => {
+        it('should show the action in the toolbar when content not scrolled', () => {
+          const fixedActionButton = ionToolbar.querySelector(
+            'ion-buttons[slot="secondary"] button[kirby-button]'
+          );
+          expect(fixedActionButton).toBeTruthy();
+          expect(fixedActionButton).toBeVisible();
+        });
+
+        it('should show the action in the toolbar when content scrolled', async () => {
+          const verticalScrollAmount = 10;
+          await ionContent.scrollToPoint(0, verticalScrollAmount, 0);
+          await TestHelper.whenTrue(() => spectator.component.isContentScrolled);
+
+          const fixedActionButton = ionToolbar.querySelector(
+            'ion-buttons[slot="secondary"] button[kirby-button]'
+          );
+          expect(fixedActionButton).toBeTruthy();
+          expect(fixedActionButton).toBeVisible();
+        });
+
+        it('should have correct margins', () => {
+          const actionsWrapper = ionToolbar.querySelector('ion-buttons[slot="secondary"]');
+          expect(actionsWrapper).toHaveComputedStyle({
+            'margin-left': size('xxs'),
+          });
+        });
+
+        it('should remove margins on slotted buttons', () => {
+          const actionButtons = ionToolbar.querySelectorAll(
+            'ion-buttons[slot="secondary"] button[kirby-button]'
+          );
+          actionButtons.forEach((btn) => {
+            expect(btn).toHaveComputedStyle({
+              'margin-bottom': '0px',
+              'margin-top': '0px',
+              'margin-left': '0px',
+              'margin-right': '0px',
+            });
+          });
+        });
       });
     });
 
@@ -409,24 +633,20 @@ describe('PageComponent', () => {
       });
     });
 
-    it('should render toolbar with correct padding', async () => {
-      await TestHelper.whenReady(ionToolbar);
-      const toolbarContainer = ionToolbar.shadowRoot.querySelector('.toolbar-container');
-      expect(toolbarContainer).toBeTruthy();
-      expect(toolbarContainer).toHaveComputedStyle({
-        'padding-left': size('xxxs'),
-        'padding-right': size('xxxs'),
-        'padding-top': '0px',
-        'padding-bottom': '0px',
-      });
-    });
-
     it('should render back button with correct size', async () => {
       await TestHelper.whenReady(ionToolbar);
       const ionBackButton = spectator.queryHost('ion-toolbar ion-buttons ion-back-button');
       expect(ionBackButton).toHaveComputedStyle({
         width: size('xl'),
         height: size('xl'),
+      });
+    });
+
+    it('should render back button with correct margin', async () => {
+      await TestHelper.whenReady(ionToolbar);
+      const ionBackButtonWrapper = spectator.queryHost('ion-toolbar ion-buttons[slot=start]');
+      expect(ionBackButtonWrapper).toHaveComputedStyle({
+        'margin-right': size('xxs'),
       });
     });
 
@@ -643,7 +863,6 @@ describe('PageComponent', () => {
   });
 
   describe('with sticky content', () => {
-    let ionScrollElement: HTMLElement;
     let stickyContentContainer: HTMLElement;
 
     beforeEach(async () => {
@@ -814,7 +1033,35 @@ describe('PageComponent', () => {
       });
 
       describe('before scroll', () => {
-        it('should render toolbar divider by default', () => {
+        it('should not render toolbar divider', () => {
+          expect(ionToolbar).toHaveComputedStyle(
+            {
+              'background-color': 'rgba(0, 0, 0, 0)',
+            },
+            ':before'
+          );
+        });
+
+        it('should not render shaded toolbar background', () => {
+          const toolbarBackground = ionToolbar.shadowRoot.querySelector('.toolbar-background');
+          expect(toolbarBackground).toHaveComputedStyle({
+            'background-color': getColor('background-color'),
+          });
+        });
+      });
+
+      describe('after scrolling page title above content top', () => {
+        beforeEach(async () => {
+          // Scroll page title above content top:
+          const pageTitle: HTMLElement = ionContent.querySelector('.page-title');
+          const andThenSome = 10;
+          const verticalScrollAmount = pageTitle.offsetTop + pageTitle.offsetHeight + andThenSome;
+
+          await ionContent.scrollToPoint(0, verticalScrollAmount, 0);
+          await TestHelper.whenTrue(() => spectator.component.isContentScrolled);
+        });
+
+        it('should render toolbar divider', () => {
           expect(ionToolbar).toHaveComputedStyle(
             {
               'background-color': getColor('medium'),
@@ -826,7 +1073,7 @@ describe('PageComponent', () => {
           );
         });
 
-        it('should render shaded toolbar background by default', () => {
+        it('should render shaded toolbar background', () => {
           const toolbarBackground = ionToolbar.shadowRoot.querySelector('.toolbar-background');
           expect(toolbarBackground).toHaveComputedStyle({
             'background-color': shadedBackgroundColor,
@@ -884,5 +1131,125 @@ describe('PageComponent', () => {
         });
       });
     });
+  });
+
+  describe('with kirby-header', () => {
+    beforeEach(async () => {
+      spectator = createHost(
+        `<kirby-page>
+           <kirby-header title="${titleText}" subtitle1="${subtitleText}">
+             <kirby-action-group *kirbyHeaderActions>
+               <button kirby-button>Action 1</button>
+               <button kirby-button>Action 2</button>
+             </kirby-action-group>
+           </kirby-header>
+           <kirby-page-content>
+            ${dummyContent}
+           </kirby-page-content>
+         </kirby-page>`
+      );
+      ionToolbar = spectator.queryHost('ion-toolbar');
+      ionContent = spectator.queryHost('ion-content');
+      await TestHelper.whenReady(ionContent);
+
+      // Ensure content has height:
+      ionContent.style.height = '200px';
+
+      ionScrollElement = await ionContent.getScrollElement();
+    });
+
+    it('should have correct padding', () => {
+      expect(ionScrollElement).toHaveComputedStyle({
+        'padding-top': '0px',
+      });
+    });
+
+    describe('action buttons', () => {
+      describe('after scrolling page title above content top', () => {
+        beforeEach(async () => {
+          // Scroll page title above content top:
+          const pageTitle: HTMLElement = ionContent.querySelector('kirby-header h1.title');
+          const andThenSome = 10;
+          const verticalScrollAmount = pageTitle.offsetTop + pageTitle.offsetHeight + andThenSome;
+
+          await ionContent.scrollToPoint(0, verticalScrollAmount, 0);
+          await TestHelper.whenTrue(() => spectator.component.isContentScrolled);
+        });
+
+        it('should render and show action group', () => {
+          const actionGroup = ionToolbar.querySelector(
+            'ion-buttons[slot="primary"] kirby-action-group'
+          );
+
+          expect(actionGroup).toBeTruthy();
+          expect(actionGroup).toBeVisible();
+        });
+
+        it(`should have correct margins`, () => {
+          const actionsWrapper = ionToolbar.querySelector('ion-buttons[slot="primary"]');
+          expect(actionsWrapper).toHaveComputedStyle({
+            'margin-left': size('xxs'),
+            'margin-right': '0px',
+          });
+        });
+      });
+    });
+  });
+});
+
+describe('PageActionsComponent', () => {
+  let spectator: SpectatorHost<PageActionsComponent>;
+
+  const createHost = createHostFactory({
+    component: PageActionsComponent,
+  });
+
+  beforeEach(() => {
+    spectator = createHost(`<kirby-page-actions>
+                              <button kirby-button>
+                                Action 1
+                              </button>
+                              <button kirby-button>
+                                Action 2
+                              </button>
+                            </kirby-page-actions>`);
+  });
+
+  it('should create', () => {
+    expect(spectator.component).toBeTruthy();
+  });
+
+  it('should render slotted buttons', () => {
+    const buttons = spectator.element.querySelectorAll(':scope > button[kirby-button]');
+    expect(buttons).toHaveLength(2);
+  });
+
+  it('should have no margin on buttons', () => {
+    const buttons = spectator.element.querySelectorAll<HTMLButtonElement>(
+      ':scope > button[kirby-button]'
+    );
+
+    buttons.forEach((btn) =>
+      expect(btn).toHaveComputedStyle({
+        margin: '0px',
+      })
+    );
+    const { left: containerLeft, right: containerRight } =
+      spectator.element.getBoundingClientRect();
+    const firstButtonLeft = buttons[0].getBoundingClientRect().left;
+    const lastButtonRight = buttons[1].getBoundingClientRect().right;
+    expect(firstButtonLeft).toEqual(containerLeft);
+    expect(lastButtonRight).toEqual(containerRight);
+  });
+
+  it('should have correct spacing between buttons', () => {
+    const buttons = spectator.element.querySelectorAll<HTMLButtonElement>(
+      ':scope > button[kirby-button]'
+    );
+
+    const firstButtonRight = buttons[0].getBoundingClientRect().right;
+    const lastButtonLeft = buttons[1].getBoundingClientRect().left;
+    const spaceBetween = lastButtonLeft - firstButtonRight;
+    expect(spaceBetween).toEqual(parseInt(size('xxs')));
   });
 });

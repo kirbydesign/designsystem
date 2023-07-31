@@ -321,7 +321,7 @@ export class FloatingDirective implements OnInit, OnDestroy {
     middleware.push(flip());
 
     if (this.shift) {
-      middleware.push(shift());
+      middleware.push(shift({ padding: parseInt(DesignTokenHelper.size('s')) }));
     }
 
     if (this.autoPlacement) {
