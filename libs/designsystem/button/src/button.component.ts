@@ -33,14 +33,7 @@ export type AttentionLevel = '1' | '2' | '3';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonComponent implements AfterContentInit {
-  private _attentionLevel?: AttentionLevel;
-  get attentionLevel(): AttentionLevel | undefined {
-    return this._attentionLevel;
-  }
-
-  @Input() set attentionLevel(level: AttentionLevel | undefined) {
-    this._attentionLevel = level;
-  }
+  @Input() attentionLevel: AttentionLevel;
 
   @HostBinding('class.no-decoration')
   @Input()
@@ -75,7 +68,7 @@ export class ButtonComponent implements AfterContentInit {
   private getAttentionLevelCssClass() {
     if (this.noDecoration) return;
     const attentionLevelDefault: AttentionLevel = '1';
-    return `attention-level${this._attentionLevel || attentionLevelDefault}`;
+    return `attention-level${this.attentionLevel || attentionLevelDefault}`;
   }
 
   @Input()
