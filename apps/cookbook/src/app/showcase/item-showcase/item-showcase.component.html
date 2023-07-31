@@ -264,9 +264,39 @@
 </cookbook-example-viewer>
 <p class="comment small">
   <em>
-    <strong>Please note</strong>
-    , the disclosure input is limited to a set of predefined icons:
+    <strong>Please note:</strong>
+    the disclosure input is limited to a set of predefined icons:
     <code>'link' | 'arrow-more' | 'arrow-down' | 'arrow-up'</code>
+  </em>
+</p>
+
+<h4>Rotation animation</h4>
+
+<p>
+  It is possible to trigger an animation that rotates the disclosure icon by passing a boolean flag
+  to
+  <code>[rotateIcon]</code>
+  . When set to
+  <code>true</code>
+  it will rotate the icon 180 degrees and when set to
+  <code>false</code>
+  it will rotate the icon back to it's original position.
+</p>
+
+<cookbook-example-viewer
+  [html]="disclosureAnimationExample.template"
+  [ts]="disclosureAnimationExample.animationCodeSnippetTS"
+>
+  <cookbook-item-example-disclosure-animation
+    #disclosureAnimationExample
+  ></cookbook-item-example-disclosure-animation>
+</cookbook-example-viewer>
+
+<p class="comment small">
+  <em>
+    <strong>Please note:</strong>
+    the animation of the disclosure icon is only available for:
+    <code>'arrow-down' | 'arrow-up'</code>
   </em>
 </p>
 

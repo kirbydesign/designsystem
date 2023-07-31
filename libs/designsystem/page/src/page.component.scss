@@ -120,11 +120,15 @@ ion-toolbar {
       transform: translateY(0);
     }
 
-    .toolbar-title {
+    .toolbar-title,
+    .toolbar-title > span.has-icon > span {
       text-overflow: ellipsis;
       white-space: nowrap;
       pointer-events: auto;
       overflow: hidden;
+    }
+
+    .toolbar-title {
       font-weight: utils.font-weight('bold');
 
       span.clickable {
@@ -136,6 +140,7 @@ ion-toolbar {
         flex-direction: row;
         align-items: center;
         justify-content: center;
+        max-width: 100%;
       }
 
       @include utils.slotted('*') {

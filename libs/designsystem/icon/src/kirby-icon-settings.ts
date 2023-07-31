@@ -99,6 +99,9 @@ export const kirbyIconSettings: IconSettings = {
     { name: 'arrow-down-fill', svg: 'assets/kirby/icons/svg/arrow-down-fill.svg' },
     { name: 'arrow-up-fill', svg: 'assets/kirby/icons/svg/arrow-up-fill.svg' },
     { name: 'calculator', svg: 'assets/kirby/icons/svg/calculator.svg' },
+    { name: 'grid', svg: 'assets/kirby/icons/svg/grid.svg' },
+    { name: 'list', svg: 'assets/kirby/icons/svg/list.svg' },
+    { name: 'adjust', svg: 'assets/kirby/icons/svg/adjust.svg' },
   ],
 };
 

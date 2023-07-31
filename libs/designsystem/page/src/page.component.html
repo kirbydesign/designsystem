@@ -13,12 +13,18 @@
     </ion-buttons>
     <ion-title [class.slide-and-fade-in]="toolbarTitleVisible">
       <div class="toolbar-title">
+        <ng-container *ngIf="!titleActionIconTemplate && !hasInteractiveTitle">
+          <ng-container *ngTemplateOutlet="toolbarTitleTemplate"></ng-container>
+        </ng-container>
         <span
+          *ngIf="!!titleActionIconTemplate || hasInteractiveTitle"
           [class.clickable]="hasInteractiveTitle"
           [class.has-icon]="!!titleActionIconTemplate"
           (click)="onTitleClick($event)"
         >
-          <ng-container *ngTemplateOutlet="toolbarTitleTemplate"></ng-container>
+          <span>
+            <ng-container *ngTemplateOutlet="toolbarTitleTemplate"></ng-container>
+          </span>
           <ng-container *ngTemplateOutlet="titleActionIconTemplate"></ng-container>
         </span>
       </div>
