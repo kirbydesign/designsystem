@@ -7,6 +7,7 @@ This document provides information about breaking changes and their migrations f
 - [Components](#components-v9)
   - [Modal](#modal-v9)
   - [Experimental Alert](#experimental-alert-v9)
+- [Styles](#styles-v9)
 
 <h3 id="components-v9">Components</h3>
 
@@ -19,6 +20,10 @@ Additionally, the following methods have been removed from the `modalController`
 <h4 id="experimental-alert-v9">Experimental Alert</h4>
 
 The Experimental Alert has been fully removed and we recommend to use the normal alert instead.
+
+<h3 id="styles-v9">Styles</h3>
+
+A new `xsmall` breakpoint (`320px`) has been introduced in the `$breakpoints` map exposed by Kirby. The `xsmall` breakpoint replaces the old `small` breakpoint, which is now `632px`.
 
 ## Version 8.3.0
 
