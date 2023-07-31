@@ -94,6 +94,12 @@ export class ModalShowcaseComponent {
       defaultValue: '',
       type: ['string | string[]'],
     },
+    {
+      name: 'canDismiss',
+      description: `(Optional) A callback that returns either a boolean or an AlertConfig. If an AlertConfig is being returned, an alert will appear, when the user tries to dismiss the modal.`,
+      defaultValue: 'undefined',
+      type: ['boolean | AlertConfig'],
+    },
   ];
 
   properties: ApiDescriptionProperty[] = [
