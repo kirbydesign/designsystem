@@ -102,7 +102,7 @@ export class ModalHelper {
         config.interactWithBackground ? 'interact-with-background' : null,
         ...customCssClasses,
       ],
-      backdropDismiss: this.getBackdropDismiss(config),
+      backdropDismiss: this.handleBackdropDismiss(config),
       showBackdrop: !config.interactWithBackground,
       componentProps: { config: config },
       swipeToClose: config.flavor === 'drawer',
@@ -176,7 +176,7 @@ export class ModalHelper {
     });
   }
 
-  private getBackdropDismiss(config: ModalConfig) {
+  private handleBackdropDismiss(config: ModalConfig) {
     if (config.backdropDismiss !== undefined) {
       return config.backdropDismiss;
     }
