@@ -21,6 +21,7 @@ describe('ToastHelper', () => {
   });
 
   beforeEach(() => {
+    TestHelper.disableAnimationsInTest();
     spectator = createService();
   });
 
