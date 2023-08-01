@@ -40,7 +40,7 @@ export class TabNavigationComponent implements AfterViewInit {
   }
 
   set selectedIndex(index: number) {
-    if (index !== this._selectedIndex) {
+    if (index !== this._selectedIndex && index !== -1) {
       this._selectedIndex = index;
 
       this.focusIndex = index;
