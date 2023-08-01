@@ -57,7 +57,6 @@ export function modalControllerFactory() {
     navigateWithinModal: jest.fn(),
     showActionSheet: jest.fn(),
     showAlert: jest.fn(),
-    registerPresentingElement: jest.fn(),
     hideTopmost: jest.fn(),
     hideAll: jest.fn(),
   };

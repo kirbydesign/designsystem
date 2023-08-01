@@ -138,12 +138,6 @@ export class ModalHelper {
     };
   }
 
-  public registerPresentingElement() {
-    console.log(
-      'registerPresentingElement has been deprecated. It is no longer needed to register a presenting element.'
-    );
-  }
-
   private handleBrowserBackButton(modal: HTMLIonModalElement) {
     const popStateEvent$ = fromEvent(this.windowRef.nativeWindow, 'popstate').pipe(first());
     const modalClose$ = fromEvent(modal, 'ionModalDidDismiss');

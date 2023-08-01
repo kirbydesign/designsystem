@@ -152,12 +152,6 @@ export class ModalController implements OnDestroy {
     });
   }
 
-  public registerPresentingElement() {
-    console.log(
-      'registerPresentingElement has been deprecated. It is no longer needed to register a presenting element.'
-    );
-  }
-
   public async hideTopmost(data?: any): Promise<boolean> {
     const overlay = this.overlays[this.overlays.length - 1];
     if (!overlay) {

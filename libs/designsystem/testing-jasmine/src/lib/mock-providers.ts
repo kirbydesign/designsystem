@@ -55,7 +55,6 @@ export function modalControllerFactory() {
     'navigateWithinModal',
     'showActionSheet',
     'showAlert',
-    'registerPresentingElement',
     'hideTopmost',
     'hideAll',
   ]);
