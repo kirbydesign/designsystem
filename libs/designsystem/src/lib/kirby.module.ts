@@ -73,7 +73,6 @@ import { DataTableModule } from '@kirbydesign/designsystem/data-table';
 import { ReorderListComponent } from '@kirbydesign/designsystem/reorder-list';
 
 import { ToastController, ToastHelper } from '@kirbydesign/designsystem/toast';
-import { BreakpointHelperService, GridComponent } from '@kirbydesign/designsystem/grid';
 import { ActionGroupComponent } from '@kirbydesign/designsystem/action-group';
 import { MenuComponent } from '@kirbydesign/designsystem/menu';
 import { TabNavigationModule } from '@kirbydesign/designsystem/tab-navigation';
@@ -89,7 +88,6 @@ const declarations = [...exportedDeclarations, KeyHandlerDirective];
 
 const standaloneComponents = [
   ActionGroupComponent,
-  GridComponent,
   ItemGroupComponent,
   ModalCompactWrapperComponent,
   TextareaComponent,
@@ -162,7 +160,6 @@ const providers = [
   AlertHelper,
   ToastHelper,
   ToastController,
-  BreakpointHelperService,
   LoadingOverlayService,
   ResizeObserverFactory,
   ResizeObserverService,

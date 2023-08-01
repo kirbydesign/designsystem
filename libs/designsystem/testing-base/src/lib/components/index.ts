@@ -24,7 +24,6 @@ export { MockFormFieldComponent } from './mock.form-field.component';
 export { MockInputComponent } from './mock.input.component';
 export { MockInputCounterComponent } from './mock.input-counter.component';
 export { MockTextareaComponent } from './mock.textarea.component';
-export { MockGridComponent } from './mock.grid.component';
 export {
   MockHeaderActionsDirective,
   MockHeaderCustomSectionDirective,

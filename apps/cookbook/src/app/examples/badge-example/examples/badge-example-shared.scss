@@ -2,7 +2,7 @@
 
 :host {
   kirby-badge:first-child {
-    --kirby-badge-elevation: #{utils.get-elevation(2)};
+    --kirby-badge-elevation: #{utils.get-elevation(4)};
   }
 
   kirby-badge + kirby-badge {
