@@ -941,7 +941,7 @@ describe('DropdownComponent (popover version)', () => {
 
     beforeEach(() => {
       spectator = createHost(
-        `<kirby-dropdown>
+        `<kirby-dropdown [usePopover]="true">
            <kirby-item
              *kirbyListItemTemplate="let item; let selected = selected"
              selectable="true"
