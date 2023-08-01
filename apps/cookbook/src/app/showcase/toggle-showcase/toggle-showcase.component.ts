@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
-
 import exampleHtml from '../../examples/toggle-example/toggle-example.component.html?raw';
+import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
   selector: 'cookbook-toggle-showcase',

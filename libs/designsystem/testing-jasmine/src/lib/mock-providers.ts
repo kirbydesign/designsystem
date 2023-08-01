@@ -56,8 +56,6 @@ export function modalControllerFactory() {
     'showActionSheet',
     'showAlert',
     'hideTopmost',
-    'scrollToTop',
-    'scrollToBottom',
     'hideAll',
   ]);
 }

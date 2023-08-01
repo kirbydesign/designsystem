@@ -3,7 +3,6 @@ import { ActivatedRoute, Params, Routes, ROUTES } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { filter, map, takeUntil } from 'rxjs/operators';
 
-import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 import { ModalData, ModalRouteActivation, Overlay } from '../../modal.interfaces';
 import { ActionSheetConfig } from '../action-sheet/config/action-sheet-config';
 import { AlertConfig } from '../alert/config/alert-config';
@@ -159,34 +158,6 @@ export class ModalController implements OnDestroy {
       throw new Error(this.noOverlayRegisteredErrorMessage);
     }
     return overlay.dismiss(data);
-  }
-
-  /**
-   * @deprecated Will be removed in next major version. Inject Modal in embedded component and use Modal.scrollToTop instead.
-   */
-  public scrollToTop(duration?: KirbyAnimation.Duration) {
-    console.warn(
-      'ModalController.scrollToTop is deprecated - please inject Modal in embedded component and use Modal.scrollToTop instead.'
-    );
-    const overlay = this.overlays[this.overlays.length - 1];
-    if (!overlay) {
-      throw new Error(this.noOverlayRegisteredErrorMessage);
-    }
-    this.modalHelper.scrollToTop(this.noOverlayRegisteredErrorMessage, duration);
-  }
-
-  /**
-   * @deprecated Will be removed in next major version. Inject Modal in embedded component and use Modal.scrollToBottom instead.
-   */
-  public scrollToBottom(duration?: KirbyAnimation.Duration) {
-    console.warn(
-      'ModalController.scrollToBottom is deprecated - please inject Modal in embedded component and use Modal.scrollToBottom instead.'
-    );
-    const overlay = this.overlays[this.overlays.length - 1];
-    if (!overlay) {
-      throw new Error(this.noOverlayRegisteredErrorMessage);
-    }
-    this.modalHelper.scrollToBottom(this.noOverlayRegisteredErrorMessage, duration);
   }
 
   public async hideAll(): Promise<void> {

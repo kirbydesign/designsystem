@@ -58,8 +58,6 @@ export function modalControllerFactory() {
     showActionSheet: jest.fn(),
     showAlert: jest.fn(),
     hideTopmost: jest.fn(),
-    scrollToTop: jest.fn(),
-    scrollToBottom: jest.fn(),
     hideAll: jest.fn(),
   };
 }
