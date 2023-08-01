@@ -13,11 +13,12 @@ import { CardComponent } from '@kirbydesign/designsystem/card';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
-import { ItemComponent } from '@kirbydesign/designsystem/item';
+import { ItemComponent, ItemModule } from '@kirbydesign/designsystem/item';
 import { HorizontalDirection, PopoverComponent } from '@kirbydesign/designsystem/popover';
 
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { TestHelper } from 'testing/src';
 import { DropdownComponent } from './dropdown.component';
 import { OpenState } from './dropdown.types';
 
@@ -34,6 +35,7 @@ describe('DropdownComponent (popover version)', () => {
   describe('by default', () => {
     const createHost = createHostFactory({
       component: DropdownComponent,
+      imports: [TestHelper.ionicModuleForTest, ItemModule],
       declarations: [
         ItemComponent,
         MockComponents(ButtonComponent, IconComponent, IonItem, PopoverComponent, CardComponent),
@@ -943,7 +945,6 @@ describe('DropdownComponent (popover version)', () => {
            <kirby-item
              *kirbyListItemTemplate="let item; let selected = selected"
              selectable="true"
-             [usePopover]="true"
              [selected]="selected">
              <kirby-icon *ngIf="selected" name="checkmark-selected" slot="start"></kirby-icon>
              <h3>{{ item.title }}</h3>

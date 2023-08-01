@@ -4,6 +4,7 @@ import { createComponentFactory, Spectator } from '@ngneat/spectator';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 
 import { PageProgressComponent, PageTitleComponent } from '@kirbydesign/designsystem/page';
+import { IconModule } from 'icon/src';
 import { ModalFooterComponent } from '../modal/footer/modal-footer.component';
 import { CanDismissHelper } from '../modal/services/can-dismiss.helper';
 import { ModalWrapperComponent } from './modal-wrapper.component';
@@ -19,7 +20,7 @@ import {
 describe('ModalWrapperComponent + ModalFooterComponent', () => {
   const createComponent = createComponentFactory({
     component: ModalWrapperComponent,
-    imports: [RouterTestingModule, ModalFooterComponent],
+    imports: [RouterTestingModule, ModalFooterComponent, IconModule],
     entryComponents: [StaticFooterEmbeddedComponent, DynamicFooterEmbeddedComponent],
     mocks: [CanDismissHelper],
   });

@@ -9,6 +9,7 @@ import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { DesignTokenHelper, KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { PageModule } from 'page/src';
 import { CanDismissHelper } from '../modal/services/can-dismiss.helper';
 import { ModalWrapperComponent } from './modal-wrapper.component';
 import {
@@ -24,6 +25,7 @@ import {
 describe('ModalWrapperComponent', () => {
   const createComponent = createComponentFactory({
     component: ModalWrapperComponent,
+    imports: [PageModule],
     entryComponents: [
       TitleEmbeddedComponent,
       StaticFooterEmbeddedComponent,

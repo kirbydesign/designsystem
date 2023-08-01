@@ -4,6 +4,7 @@ import { MockComponents } from 'ng-mocks';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { ItemComponent } from '@kirbydesign/designsystem/item';
+import { IconModule } from 'icon/src';
 import { CheckboxComponent } from './checkbox.component';
 
 const size = DesignTokenHelper.size;
@@ -14,6 +15,7 @@ describe('CheckboxComponent in Item', () => {
 
   const createHost = createHostFactory({
     component: CheckboxComponent,
+    imports: [IconModule],
     declarations: MockComponents(ItemComponent),
   });
 

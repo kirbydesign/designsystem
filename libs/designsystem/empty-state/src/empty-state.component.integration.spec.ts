@@ -4,6 +4,7 @@ import { MockComponent } from 'ng-mocks';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 
+import { PageComponent } from 'page/src';
 import { EmptyStateComponent } from './empty-state.component';
 
 describe('EmptyStateComponent with slotted buttons', () => {
@@ -12,6 +13,7 @@ describe('EmptyStateComponent with slotted buttons', () => {
 
   const createHost = createHostFactory({
     component: EmptyStateComponent,
+    imports: [PageComponent],
     declarations: [MockComponent(IconComponent), ButtonComponent],
   });
 

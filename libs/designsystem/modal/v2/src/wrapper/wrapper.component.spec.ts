@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { IconModule } from 'icon/src';
 import { ModalV2WrapperComponent } from './wrapper.component';
 
 describe('WrapperComponent', () => {
@@ -8,6 +9,7 @@ describe('WrapperComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [IconModule],
       declarations: [ModalV2WrapperComponent],
     }).compileComponents();
 
