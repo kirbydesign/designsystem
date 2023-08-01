@@ -258,7 +258,7 @@ ion-content {
   --background: #{utils.get-color('background-color')};
   --color: #{utils.get-color('black')};
 
-  @media (min-width: map.get(utils.$breakpoint-map, 'sm')) {
+  @include utils.media('>=medium') {
     --padding-start: var(--page-content-padding-start, #{utils.size('xxl')});
     --padding-end: var(--page-content-padding-end, #{utils.size('xxl')});
   }
