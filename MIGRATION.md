@@ -5,7 +5,7 @@ This document provides information about breaking changes and their migrations f
 ## Version 9.0.0
 
 - [Components](#components-v9)
-  - [Avatar] (#avatar-v9)
+  - [Avatar](#avatar-v9)
   - [Modal](#modal-v9)
   - [Experimental Alert](#experimental-alert-v9)
 - [Styles](#styles-v9)
