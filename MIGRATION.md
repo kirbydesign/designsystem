@@ -14,7 +14,7 @@ This document provides information about breaking changes and their migrations f
 
 <h4 id="avatar-v9">Avatar</h4>
 
-The shadow input binding have been removed from `avatar` and all uses of this input binding should now use the input binding `stroke` instead.
+The `shadow` input binding have been removed from `avatar` and all uses of this input binding should now use the newer input binding `stroke` instead.
 
 <h4 id="modal-v9">Modal</h4>
 
