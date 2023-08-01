@@ -7,9 +7,8 @@ describe('CardAsButtonDirective', () => {
   let spectator: SpectatorDirective<CardAsButtonDirective>;
   let cardElement: HTMLElement;
 
-  @Component({ selector: 'kirby-custom-host', template: '' })
-  class CustomHostComponent {
-    title = 'Custom HostComponent';
+  @Component({ selector: 'kirby-card-click-host', template: '' })
+  class KirbyCardClickHostComponent {
     someMethod() {
       //noop
     }
@@ -18,7 +17,7 @@ describe('CardAsButtonDirective', () => {
     directive: CardAsButtonDirective,
     imports: [],
     declarations: [CardComponent],
-    host: CustomHostComponent,
+    host: KirbyCardClickHostComponent,
   });
   beforeEach(() => {
     spectator = createDirective(`<kirby-card (click)="someMethod()"> </kirby-card>`);
