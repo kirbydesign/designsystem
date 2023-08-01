@@ -5,11 +5,16 @@ This document provides information about breaking changes and their migrations f
 ## Version 9.0.0
 
 - [Components](#components-v9)
+  - [Avatar] (#avatar-v9)
   - [Modal](#modal-v9)
   - [Experimental Alert](#experimental-alert-v9)
 - [Styles](#styles-v9)
 
 <h3 id="components-v9">Components</h3>
+
+<h4 id="avatar-v9">Avatar</h4>
+
+The shadow input binding have been removed from `avatar` and all uses of this input binding should now use the input binding `stroke` instead.
 
 <h4 id="modal-v9">Modal</h4>
 
