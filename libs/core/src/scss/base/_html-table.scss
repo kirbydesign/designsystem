@@ -22,16 +22,6 @@ table.kirby-table {
     &:not(:last-child) {
       border-bottom: $border-bottom;
     }
-
-    &.kirby-selectable-row {
-      @include interaction-state.apply-hover {
-        background-color: $hover-color;
-      }
-
-      &:active {
-        background-color: $active-color;
-      }
-    }
   }
 
   thead tr {
@@ -39,12 +29,6 @@ table.kirby-table {
   }
 
   th {
-    &.sortable {
-      @include interaction-state.apply-hover {
-        background-color: $hover-color;
-      }
-    }
-
     kirby-icon {
       visibility: hidden;
     }
@@ -113,6 +97,17 @@ table.kirby-table {
           visibility: hidden;
         }
       }
+    }
+  }
+
+  th.sortable,
+  tr.kirby-selectable-row {
+    @include interaction-state.apply-hover {
+      background-color: interaction-state.get-state-color('white', 'xxxs');
+    }
+
+    @include interaction-state.apply-active {
+      background-color: interaction-state.get-state-color('white', 'xxs');
     }
   }
 
