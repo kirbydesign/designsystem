@@ -141,63 +141,6 @@ describe('ButtonComponent', () => {
         });
       });
     });
-
-    describe('when configured with attentionlevel 4', () => {
-      beforeEach(() => {
-        spectator.component.attentionLevel = '4';
-        spectator.detectChanges();
-      });
-
-      it('should render with correct background-color', () => {
-        expect(element).toHaveComputedStyle({ 'background-color': getColor('white') });
-      });
-
-      it('should render with correct color', () => {
-        expect(element).toHaveComputedStyle({
-          color: getColor('black'),
-        });
-      });
-    });
-
-    describe('when configured with no decoration', () => {
-      beforeEach(() => {
-        spectator.component.noDecoration = true;
-        spectator.detectChanges();
-      });
-
-      it('should render with no background-color', () => {
-        expect(element).toHaveComputedStyle({ 'background-color': 'transparent' });
-      });
-
-      it('should render with correct color', () => {
-        expect(element).toHaveComputedStyle({
-          color: getColor('black'),
-        });
-      });
-
-      describe('and is disabled', () => {
-        it('should not have a background-color', () => {
-          spectator.component.noDecoration = true;
-          spectator.detectChanges();
-
-          expect(element).toHaveComputedStyle({ 'background-color': 'transparent' });
-        });
-      });
-
-      describe('and attentionLevel', () => {
-        it('should render with no background-color', () => {
-          spectator.component.attentionLevel = '1';
-          spectator.detectChanges();
-          expect(element).toHaveComputedStyle({ 'background-color': 'transparent' });
-        });
-
-        it('should not reset attentionLevel', () => {
-          spectator.component.attentionLevel = '3';
-          spectator.component.noDecoration = false;
-          expect(spectator.component.attentionLevel).toEqual('3');
-        });
-      });
-    });
   });
 
   const sizeTestScenarios: { size: ButtonSize; expected: any }[] = [

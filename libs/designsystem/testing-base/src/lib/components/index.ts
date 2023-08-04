@@ -2,7 +2,6 @@
 
 export { MockAccordionItemComponent } from './mock.accordion-item.component';
 export { MockActionGroupComponent } from './mock.action-group.component';
-export { MockAlertExperimentalComponent } from './mock.alert-experimental.component';
 export { MockAvatarComponent } from './mock.avatar.component';
 export { MockButtonComponent } from './mock.button.component';
 export { MockCalendarComponent } from './mock.calendar.component';
@@ -25,7 +24,6 @@ export { MockFormFieldComponent } from './mock.form-field.component';
 export { MockInputComponent } from './mock.input.component';
 export { MockInputCounterComponent } from './mock.input-counter.component';
 export { MockTextareaComponent } from './mock.textarea.component';
-export { MockGridComponent } from './mock.grid.component';
 export {
   MockHeaderActionsDirective,
   MockHeaderCustomSectionDirective,
