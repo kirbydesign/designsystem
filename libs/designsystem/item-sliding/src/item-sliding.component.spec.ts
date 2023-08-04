@@ -2,8 +2,11 @@ import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { ItemModule } from 'item/src';
-import { ItemSwipeActionType } from './item-sliding.types';
-import { ItemSlidingComponent, ItemSwipeAction } from './';
+import {
+  ItemSlidingComponent,
+  ItemSwipeAction,
+  ItemSwipeActionType,
+} from '@kirbydesign/designsystem/item-sliding';
 
 const { getColor } = DesignTokenHelper;
 

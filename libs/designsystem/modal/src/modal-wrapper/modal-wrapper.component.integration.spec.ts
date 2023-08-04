@@ -4,10 +4,13 @@ import { createComponentFactory, Spectator } from '@ngneat/spectator';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 
 import { PageProgressComponent, PageTitleComponent } from '@kirbydesign/designsystem/page';
-import { IconModule } from 'icon/src';
-import { ModalFooterComponent } from '../modal/footer/modal-footer.component';
-import { CanDismissHelper } from '../modal/services/can-dismiss.helper';
-import { ModalWrapperComponent } from './modal-wrapper.component';
+import { IconModule } from '@kirbydesign/designsystem/icon';
+import {
+  CanDismissHelper,
+  ModalFooterComponent,
+  ModalWrapperComponent,
+} from '@kirbydesign/designsystem/modal';
+
 import {
   DynamicFooterEmbeddedComponent,
   DynamicPageProgressEmbeddedComponent,

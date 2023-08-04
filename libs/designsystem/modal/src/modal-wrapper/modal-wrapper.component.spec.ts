@@ -9,9 +9,8 @@ import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { DesignTokenHelper, KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
-import { PageModule } from 'page/src';
-import { CanDismissHelper } from '../modal/services/can-dismiss.helper';
-import { ModalWrapperComponent } from './modal-wrapper.component';
+import { PageModule } from '@kirbydesign/designsystem/page';
+import { CanDismissHelper, ModalWrapperComponent } from '@kirbydesign/designsystem/modal';
 import {
   DynamicFooterEmbeddedComponent,
   DynamicPageProgressEmbeddedComponent,
