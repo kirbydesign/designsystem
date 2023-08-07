@@ -4,6 +4,15 @@ import { IonicConfig } from '@ionic/core';
 export class TestHelper {
   public static readonly _init = TestHelper.muteIonicReInitializeWarning();
 
+  public static disableAnimationsInTest() {
+    //@ts-ignore
+    window.Ionic = {
+      config: {
+        _testing: true,
+      },
+    };
+  }
+
   public static muteIonicReInitializeWarning() {
     const originalWarn = console.warn;
     const patchedWarn = (warning: any, ...optionalParams: any[]) => {

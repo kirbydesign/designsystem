@@ -91,6 +91,14 @@ describe('TabNavigationComponent', () => {
     expect(component.selectedIndexChange.emit).toHaveBeenCalledWith(selectIndex);
   }));
 
+  it('should not emit selectedIndexChange if index is -1', () => {
+    spyOn(component.selectedIndexChange, 'emit');
+
+    component.selectedIndex = -1;
+
+    expect(component.selectedIndexChange.emit).not.toHaveBeenCalled();
+  });
+
   it('should set tabindex correctly on pressing arrow-right', fakeAsync(() => {
     const selectIndex = 1;
     const selectElement = tabButtons[selectIndex];

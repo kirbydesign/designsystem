@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
+import exampleHtml from '../../examples/action-sheet-example/action-sheet-example.component.html?raw';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
-import exampleHtml from '../../examples/action-sheet-example/action-sheet-example.component.html?raw';
 @Component({
   selector: 'cookbook-action-sheet-showcase',
   templateUrl: './action-sheet-showcase.component.html',

@@ -101,6 +101,7 @@ export const kirbyIconSettings: IconSettings = {
     { name: 'calculator', svg: 'assets/kirby/icons/svg/calculator.svg' },
     { name: 'grid', svg: 'assets/kirby/icons/svg/grid.svg' },
     { name: 'list', svg: 'assets/kirby/icons/svg/list.svg' },
+    { name: 'adjust', svg: 'assets/kirby/icons/svg/adjust.svg' },
   ],
 };
 

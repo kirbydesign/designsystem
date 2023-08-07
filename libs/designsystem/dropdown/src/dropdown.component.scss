@@ -115,7 +115,7 @@ kirby-card {
   overflow-y: auto;
   box-shadow: utils.get-elevation(4);
   min-width: $min-screen-width-small - $margin-horizontal-total;
-  @include utils.media('>=small') {
+  @include utils.media('>xsmall') {
     min-width: $min-screen-width - $margin-horizontal-total;
   }
 
