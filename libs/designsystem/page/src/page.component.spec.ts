@@ -793,7 +793,7 @@ describe('PageComponent', () => {
         await TestHelper.whenReady(ionContent);
         const contentInner = ionContent.querySelector('.content-inner');
         expect(contentInner).toHaveComputedStyle({
-          'max-width': '720px',
+          'max-width': '792px',
         });
       });
 
