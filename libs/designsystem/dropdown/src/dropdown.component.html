@@ -2,9 +2,6 @@
   kirby-button
   [size]="size"
   [attentionLevel]="attentionLevel"
-  tabindex="-1"
-  (click)="onToggle($event)"
-  (mousedown)="onButtonMouseEvent($event)"
   [disabled]="disabled"
   type="button"
 >
@@ -12,36 +9,27 @@
   <kirby-icon [name]="isOpen ? 'arrow-up' : 'arrow-down'"></kirby-icon>
 </button>
 
-<ng-container *ngTemplateOutlet="usePopover ? popoverTemplate : itemWrapperTemplate"></ng-container>
-
-<ng-template #popoverTemplate>
-  <kirby-popover
-    [target]="buttonElement"
-    [popout]="popout"
-    (click)="_onPopoverClick($event)"
-    (willHide)="_onPopoverWillHide()"
-  >
-    <ng-container *ngTemplateOutlet="itemWrapperTemplate"></ng-container>
-  </kirby-popover>
-</ng-template>
-
-<ng-template #itemWrapperTemplate>
-  <kirby-card>
-    <ng-container *ngFor="let item of items; let i = index">
-      <ng-container
-        *ngTemplateOutlet="
-          itemTemplate || defaultItemTemplate;
-          context: {
-            $implicit: item,
-            selected: i === selectedIndex,
-            focused: i === focusedIndex,
-            index: i
-          }
-        "
-      ></ng-container>
-    </ng-container>
-  </kirby-card>
-</ng-template>
+<kirby-card
+  kirbyFloating
+  [strategy]="'fixed'"
+  [reference]="buttonElement"
+  [DOMPortalOutlet]="DOMPortalOutlet"
+  class="dropdown-popover"
+>
+  <ng-container *ngFor="let item of items; let i = index">
+    <ng-container
+      *ngTemplateOutlet="
+        itemTemplate || defaultItemTemplate;
+        context: {
+          $implicit: item,
+          selected: i === selectedIndex,
+          focused: i === focusedIndex,
+          index: i
+        }
+      "
+    ></ng-container>
+  </ng-container>
+</kirby-card>
 
 <ng-template
   #defaultItemTemplate

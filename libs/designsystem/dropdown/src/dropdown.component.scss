@@ -7,11 +7,6 @@ $min-screen-width-small: 320px;
 $min-screen-width: 375px;
 
 :host {
-  @include interaction-state.apply-focus-visible {
-    outline: none;
-    border-radius: utils.$border-radius-round;
-  }
-
   display: inline-block;
   position: relative;
   max-width: calc(100vw - #{$margin-horizontal-total});
@@ -55,58 +50,6 @@ $min-screen-width: 375px;
       text-overflow: ellipsis;
     }
   }
-
-  kirby-card {
-    display: none;
-
-    // Opacity is used to prevent visible flicker,
-    // if a dropdown has to change horizontal or vertical direction
-    opacity: 0;
-    position: absolute;
-    z-index: utils.z('dropdown');
-  }
-
-  &.is-opening {
-    kirby-card {
-      display: block;
-    }
-  }
-
-  &.is-open {
-    kirby-card {
-      display: block;
-      opacity: 1;
-    }
-
-    > button {
-      box-shadow: utils.get-elevation(4);
-    }
-  }
-
-  &.popout-left {
-    kirby-card {
-      right: 0;
-    }
-  }
-
-  &.popout-up {
-    kirby-card {
-      top: 0;
-      margin-top: -#{utils.size('xxxs')};
-      transform: translateY(-100%);
-    }
-
-    &.is-open {
-      > button {
-        // Move button on top of card's shadow:
-        z-index: utils.z('dropdown') + 1;
-      }
-    }
-  }
-}
-
-kirby-popover {
-  --max-height: #{$dropdown-max-height};
 }
 
 kirby-card {

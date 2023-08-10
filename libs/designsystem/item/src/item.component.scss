@@ -112,14 +112,12 @@
   }
 }
 
-:host-context(kirby-dropdown) ion-item,
-:host-context(kirby-popover) ion-item {
+:host-context(.dropdown-popover) ion-item {
   --min-height: #{utils.$dropdown-item-height};
 }
 
 // Intented for use with keyboard navigation in <kirby-dropdown> & <kirby-popover>
-:host-context(kirby-dropdown .focused) ion-item,
-:host-context(kirby-popover .focused) ion-item {
+:host-context(.dropdown-popover .focused) ion-item {
   --background: #{interaction-state.get-state-color('white', 'xxxs')};
 }
 
