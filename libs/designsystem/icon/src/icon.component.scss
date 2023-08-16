@@ -8,6 +8,8 @@
   margin-left: var(--kirby-icon-margin-left, unset);
   margin-right: var(--kirby-icon-margin-right, unset);
 
+  // pointer-events: none;
+
   svg path {
     fill: currentcolor;
     stroke: currentcolor;
