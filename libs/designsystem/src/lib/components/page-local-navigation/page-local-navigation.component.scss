@@ -4,7 +4,7 @@ $tab-item-text-max-width: 100px;
 $bottom-border-height: 1px;
 $border-color-standard: utils.get-color('medium');
 $border-color-selected: utils.get-color('dark');
-$divider-max-width-breakpoint: utils.$page-content-max-width + (utils.size('s') * 2);
+$divider-max-width-breakpoint: utils.$page-content-default-max-width + (utils.size('s') * 2);
 
 .tab-bar {
   position: relative;
@@ -33,7 +33,7 @@ $divider-max-width-breakpoint: utils.$page-content-max-width + (utils.size('s') 
 .container {
   position: relative;
   background-color: utils.get-color('background-color');
-  max-width: var(--page-content-max-width, utils.$page-content-max-width);
+  max-width: var(--page-content-max-width, utils.$page-content-default-max-width);
 
   // Divider
   &::before {

@@ -208,7 +208,7 @@ ion-back-button {
  * Page Header
  */
 .page-header-container {
-  max-width: var(--page-content-max-width, utils.$page-content-max-width);
+  max-width: var(--page-content-max-width, utils.$page-content-default-max-width);
   margin: 0 auto;
 }
 
@@ -276,7 +276,7 @@ ion-content {
   }
 
   .content-inner {
-    max-width: var(--page-content-max-width, utils.$page-content-max-width);
+    max-width: var(--page-content-max-width, utils.$page-content-default-max-width);
     margin: 0 auto;
     padding-bottom: utils.size('xl');
   }
@@ -312,7 +312,7 @@ ion-content {
   z-index: utils.z('sticky-content');
 
   div {
-    max-width: var(--page-content-max-width, utils.$page-content-max-width);
+    max-width: var(--page-content-max-width, utils.$page-content-default-max-width);
     margin: 0 auto;
   }
 

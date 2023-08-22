@@ -2,7 +2,7 @@
 
 $bottom-border-height: 1px;
 $border-color-standard: utils.get-color('medium');
-$divider-max-width-breakpoint: utils.$page-content-max-width + (utils.size('s') * 2);
+$divider-max-width-breakpoint: utils.$page-content-default-max-width + (utils.size('s') * 2);
 
 :host {
   display: block;
