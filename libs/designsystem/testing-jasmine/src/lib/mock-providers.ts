@@ -55,10 +55,7 @@ export function modalControllerFactory() {
     'navigateWithinModal',
     'showActionSheet',
     'showAlert',
-    'registerPresentingElement',
     'hideTopmost',
-    'scrollToTop',
-    'scrollToBottom',
     'hideAll',
   ]);
 }

@@ -34,6 +34,7 @@ describe('AlertHelper', () => {
   });
 
   beforeEach(() => {
+    TestHelper.disableAnimationsInTest();
     spectator = createService();
     alertHelper = spectator.service;
   });

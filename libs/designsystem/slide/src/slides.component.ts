@@ -104,7 +104,7 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   private getDefaultConfig(): KirbySwiperOptions {
-    const desktopBreakpoint = parseInt(DesignTokenHelper.breakpoints.medium); // TODO RK: Subtract 1 when breakpoint medium is fixed to 769px...
+    const desktopBreakpoint = parseInt(DesignTokenHelper.breakpoints.medium);
     const spaceBetween = parseInt(DesignTokenHelper.size('s'));
     const transitionDuration = parseInt(DesignTokenHelper.transitionDuration('long'));
     return {

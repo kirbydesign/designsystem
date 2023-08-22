@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, HostBinding, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
 
 import { BrandColor, NotificationColor } from '@kirbydesign/core';
 import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
@@ -19,10 +19,9 @@ export enum AvatarSize {
   styleUrls: ['./avatar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AvatarComponent implements OnInit {
+export class AvatarComponent {
   @Input() imageSrc: string;
   @Input() altText: string;
-  @Input() shadow: boolean;
   @Input() stroke: boolean;
   @Input() text: string;
   @Input() overlay: boolean;
@@ -33,16 +32,5 @@ export class AvatarComponent implements OnInit {
   @HostBinding('class')
   get _cssClass() {
     return [this.themeColor, this.size].filter((cssClass) => !!cssClass);
-  }
-
-  ngOnInit(): void {
-    if (!this.shadow) {
-      return;
-    }
-
-    this.stroke = true;
-    console.warn(
-      'Shadow input binding on avatar will be deprecated next major. Use stroke instead'
-    );
   }
 }
