@@ -115,7 +115,11 @@ export class PageActionsDirective {
   private readonly stickyDefault = true;
   private readonly fixedDefault = false;
 
-  constructor(public template: TemplateRef<any>) {}
+  constructor(public template: TemplateRef<any>) {
+    console.warn(
+      'Defining Page Actions via *kirbyPageActions is deprecated and will be removed in Kirby v10. A Kirby Header with Actions should be used instead, as it has an improved API with better support for responsive layouts.'
+    );
+  }
 
   get isSticky(): boolean {
     return this.config ? (this.config as stickyConfig).sticky : this.stickyDefault;
