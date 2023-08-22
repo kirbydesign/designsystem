@@ -119,7 +119,12 @@ $avatar-badge-size: 16px;
 
 /* Page
 ****************************************************************************/
-$page-content-default-max-width: 792px;
+$page-content-max-widths: (
+  default: 792px,
+  optimized: 1092px,
+  full: 100%,
+);
+$page-content-max-width: map.get($page-content-max-widths, 'default');
 
 /* Modal
 ****************************************************************************/

@@ -1,3 +1,4 @@
+@use 'sass:map';
 @use '@kirbydesign/core/src/scss/utils';
 @use '@kirbydesign/core/src/scss/themes';
 
@@ -11,7 +12,7 @@ $padding-vertical: utils.size('xxs');
 
   .wrapper {
     position: relative;
-    max-width: var(--page-content-max-width, utils.$page-content-default-max-width);
+    max-width: var(--page-content-max-width, #{map.get(utils.$page-content-max-widths, 'default')});
     margin: 0 auto;
     padding-bottom: var(--kirby-page-footer-safe-area-bottom, var(--kirby-safe-area-bottom));
 

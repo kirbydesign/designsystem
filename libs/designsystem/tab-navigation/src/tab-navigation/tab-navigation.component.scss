@@ -1,8 +1,10 @@
+@use 'sass:map';
 @use '@kirbydesign/core/src/scss/utils';
 
 $bottom-border-height: 1px;
 $border-color-standard: utils.get-color('medium');
-$divider-max-width-breakpoint: utils.$page-content-default-max-width + (utils.size('s') * 2);
+$divider-max-width-breakpoint: map.get(utils.$page-content-max-widths, 'default') +
+  (utils.size('s') * 2);
 
 :host {
   display: block;
