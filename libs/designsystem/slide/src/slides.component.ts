@@ -55,10 +55,6 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnChanges {
 
   @Input() showNavigation?: boolean;
 
-  /**
-   * @deprecated Will be removed in next major version. Use `slideChange` instead.
-   */
-  @Output() selectedSlide = new EventEmitter<SelectedSlide>();
   @Output() slideChange = new EventEmitter<SelectedSlide>();
 
   _paginationId = UniqueIdGenerator.scopedTo('pagination').next();
@@ -68,11 +64,6 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnChanges {
 
   ngOnInit() {
     this._isTouch = this.platform.isTouch();
-    if (this.selectedSlide.observed) {
-      console.warn(
-        'Deprecation warning: `selectedSlide` will be removed in next major version. Use `slideChange` instead.'
-      );
-    }
     if (this.showNavigation === undefined) {
       console.warn(
         'Warning: kirby-slides.showNavigation will default to `true` in next major version and show navigation and pagination controls out of the box. Please set this property to `false` now if you want to opt-out of this future default.'
@@ -131,10 +122,6 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnChanges {
       },
       on: {
         slideChange: (swiper) => {
-          this.selectedSlide.emit({
-            slide: this.slides[swiper.activeIndex],
-            index: swiper.activeIndex,
-          });
           this.slideChange.emit({
             slide: this.slides[swiper.activeIndex],
             index: swiper.activeIndex,

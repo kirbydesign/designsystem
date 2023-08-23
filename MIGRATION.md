@@ -2,11 +2,41 @@
 
 This document provides information about breaking changes and their migrations for major versions of Kirby Design System.
 
+## Version 9.0.0
+
+- [Components](#components-v9)
+  - [Avatar](#avatar-v9)
+  - [Modal](#modal-v9)
+  - [Experimental Alert](#experimental-alert-v9)
+  - [Slides](#slides-v9)
+- [Styles](#styles-v9)
+
+<h3 id="components-v9">Components</h3>
+
+<h4 id="avatar-v9">Avatar</h4>
+
+The `shadow` input binding has been removed and `stroke` should be used instead for a similar effect.
+
+<h4 id="modal-v9">Modal</h4>
+
+The following methods have been removed from the `modalController` and all uses of these method should be removed: `registerPresentingElement`, `scrollToTop`, `scrollToBottom`.
+
+<h4 id="experimental-alert-v9">Experimental Alert</h4>
+
+The Experimental Alert has been fully removed and we recommend to use the normal alert instead.
+
+<h4 id="slides-v9">Slides</h4>
+
+The `selectedSlide` event emitter has been removed and `slideChange` should be used as a direct replacement.
+
+<h3 id="styles-v9">Styles</h3>
+
+A new `xsmall` breakpoint (`320px`) has been introduced in the `$breakpoints` map exposed by Kirby. The `xsmall` breakpoint replaces the old `small` breakpoint, which is now `632px`.
+
 ## Version 8.3.0
 
 - [Components](#components-v8-3)
   - [Menu](#menu-v8-3)
-  - [Modal](#modal-v8-3)
   - [Page](#page-v8-3)
   - [Tab Navigation](#tab-nav-v8-3)
 
@@ -21,18 +51,6 @@ To gain the benefit of the improvements we strongly encourage consumers to migra
 
 <h4 id="menu-v8-3">Menu</h4>
 Menu replaces Action Sheet to provide a better experience across platforms and screen sizes. Menu is a new component that renders a button that acts as a trigger for showing / hiding a popover menu. The menu is used declaratively in markup to simplify usage and is no longer instantiated through the modalController like the Action Sheet.
-
-<br>
-
-<h4 id="modal-v8-3">Modal</h4>
-A new modal component, ModalV2, is added with enhanced look and feel on larger screen sizes. It also makes it much easier to add modals for simpler use-cases, by providing a way to instantiate modals declaratively in markup, without having to wire up a modal controller. It is still possible to create modals with the Modal V2 controller. The modal supports 2 flavors: modal & drawer.
-
-<br>
-
-The routing functionality for modals has been revamped and requires a slightly different setup. This is described in the “Routing” section of the [Modal V2 docs](https://cookbook.kirby.design/#/home/showcase/modal-v2).
-
-<br>
-<em>Please note:</em> We are still working on support for the feature hint flavor of modals, and we recommend to still use the old modal for this specific use case until an alternative is provided through Kirby.
 
 <br>
 
