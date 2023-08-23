@@ -53,14 +53,6 @@ describe('FormFieldComponent', () => {
     });
   });
 
-  describe('without label', () => {
-    it('should not render the label', () => {
-      spectator = createHost(`<kirby-form-field></kirby-form-field>`);
-      const labelElement = spectator.queryHost('label');
-      expect(labelElement).toBeNull();
-    });
-  });
-
   describe('when disabled', () => {
     it('should not have elevation', () => {
       spectator = createHost(`<kirby-form-field>
@@ -71,12 +63,61 @@ describe('FormFieldComponent', () => {
     });
   });
 
-  describe('with label', () => {
+  describe('without label', () => {
+    it('should not render the label', () => {
+      spectator = createHost(`<kirby-form-field></kirby-form-field>`);
+      const labelElement = spectator.queryHost('label');
+      expect(labelElement).toBeNull();
+    });
+  });
+
+  describe('with label set to a string', () => {
     let labelElement: HTMLLabelElement;
     let labelTextElement: HTMLElement;
     beforeEach(() => {
       spectator = createHost(
         `<kirby-form-field label="Form field with label">
+          <input kirby-input />
+         </kirby-form-field>`
+      );
+      labelElement = spectator.queryHost('label');
+      labelTextElement = spectator.queryHost('label .text');
+    });
+
+    it('should render the label', () => {
+      expect(labelElement).toBeTruthy();
+    });
+
+    it('should render the label with correct typography', () => {
+      expect(labelTextElement).toHaveComputedStyle({
+        'font-size': fontSize('s'),
+        'font-weight': fontWeight('light'),
+        'line-height': lineHeight('s'),
+      });
+    });
+
+    it('should render the label with correct padding', () => {
+      expect(labelTextElement).toHaveComputedStyle({
+        'padding-top': '0px',
+        'padding-left': size('s'),
+        'padding-right': size('s'),
+        'padding-bottom': '0px',
+      });
+    });
+
+    it('should render the label with correct margin', () => {
+      expect(labelTextElement).toHaveComputedStyle({
+        'margin-bottom': size('xxxs'),
+      });
+    });
+  });
+
+  describe('with label set to null', () => {
+    let labelElement: HTMLLabelElement;
+    let labelTextElement: HTMLElement;
+    beforeEach(() => {
+      spectator = createHost(
+        `<kirby-form-field [label]="null">
           <input kirby-input />
          </kirby-form-field>`
       );

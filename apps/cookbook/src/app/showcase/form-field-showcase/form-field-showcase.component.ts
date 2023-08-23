@@ -14,17 +14,17 @@ export class FormFieldShowcaseComponent {
   formFieldProperties: ApiDescriptionProperty[] = [
     {
       name: 'label',
-      defaultValue: undefined,
-      description:
-        '(Optional) The label shown above the input. Clicking the label sets focus to the input/textarea.',
-      type: ['string'],
+      defaultValue: 'undefined',
+      description: `(Optional) The label shown above the input. Clicking the label sets focus to the input/textarea. 
+        \n If set to null space will be reserved for the label but nothing will be rendered inside. This is useful for rendering labelled and non-labelled form fields side by side.`,
+      type: ['string | null'],
     },
     {
       name: 'message',
-      defaultValue: undefined,
-      description:
-        '(Optional) Message shown below the input. Can be used for hints, error and/or validation messages.',
-      type: ['string'],
+      defaultValue: 'undefined',
+      description: `(Optional) Message shown below the input. Can be used for hints, error and/or validation messages.
+        \n If set to null space will be reserved for the message but nothing will be rendered inside. This is useful for rendering message and non-message form fields side by side.`,
+      type: ['string | null'],
     },
   ];
 
@@ -79,13 +79,13 @@ On native devices this method also ensures the form field is scrolled into the v
     },
     {
       name: 'name',
-      defaultValue: undefined,
+      defaultValue: 'undefined',
       description: 'The name of the control, which is submitted with the form data.',
       type: ['string'],
     },
     {
       name: 'placeholder',
-      defaultValue: undefined,
+      defaultValue: 'undefined',
       description: 'Instructional text that shows before the input has a value.',
       type: ['string'],
     },
@@ -100,7 +100,7 @@ On native devices this method also ensures the form field is scrolled into the v
     },
     {
       name: 'value',
-      defaultValue: undefined,
+      defaultValue: 'undefined',
       description:
         'The value of the input. The type of the value is set through the `type` attribute.',
       type: ['string', 'number', 'email', 'telephone', 'date'],
@@ -123,19 +123,19 @@ On native devices this method also ensures the form field is scrolled into the v
     },
     {
       name: 'min',
-      defaultValue: undefined,
+      defaultValue: 'undefined',
       description: 'Minimum value',
       type: ['number'],
     },
     {
       name: 'max',
-      defaultValue: undefined,
+      defaultValue: 'undefined',
       description: 'Maximum value',
       type: ['number'],
     },
     {
       name: 'maxlength',
-      defaultValue: undefined,
+      defaultValue: 'undefined',
       description:
         'Maximum length of value, please note setting maxlength will disable fractional digits',
       type: ['number'],
@@ -186,13 +186,13 @@ On native devices this method also ensures the form field is scrolled into the v
   textareaProperties: ApiDescriptionProperty[] = [
     {
       name: 'rows',
-      defaultValue: undefined,
+      defaultValue: 'undefined',
       description: 'The number of visible text lines for the control.',
       type: ['number'],
     },
     {
       name: 'value',
-      defaultValue: undefined,
+      defaultValue: 'undefined',
       description: 'The value of the textarea.',
       type: ['string'],
     },
@@ -201,7 +201,7 @@ On native devices this method also ensures the form field is scrolled into the v
   counterProperties: ApiDescriptionProperty[] = [
     {
       name: 'listenTo',
-      defaultValue: undefined,
+      defaultValue: 'undefined',
       description:
         'Reference to the kirby-input component the counter should observe. Can be specified through a template reference variable, e.g.: #cityName. The current value and (optional) maxlength of the input will be displayed.',
       type: ['string'],
