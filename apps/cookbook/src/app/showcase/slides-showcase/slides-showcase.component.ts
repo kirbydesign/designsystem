@@ -43,8 +43,7 @@ export class SlidesShowcaseComponent {
     },
     {
       name: 'showNavigation',
-      description:
-        'Whether to show navigation and pagination controls for the slider.\n\n**Please note: Will default to `true` in next major version and show navigation and pagination controls out of the box. Please set this property to `false` now if you want to opt-out of this future default.',
+      description: 'Whether to show navigation and pagination controls for the slider.',
       defaultValue: 'false',
       type: ['boolean'],
     },
