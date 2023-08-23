@@ -42,7 +42,7 @@ export class FormFieldComponent
   private isTouch: boolean;
   _labelId = UniqueIdGenerator.scopedTo('kirby-form-field-label').next();
 
-  @Input() label: string | null;
+  @Input() label: string;
   @Input() message: string | null;
 
   @ContentChildren(AffixDirective) affixElements: QueryList<AffixDirective>;
@@ -65,7 +65,7 @@ export class FormFieldComponent
   }
 
   get _wrapContentInLabel(): boolean {
-    return this.label !== undefined && (!!this.input || !!this.textarea);
+    return !!this.label && (!!this.input || !!this.textarea);
   }
 
   private dispatchLoadEvent() {

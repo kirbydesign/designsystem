@@ -35,13 +35,13 @@
 </ng-template>
 
 <ng-template #labelTextTemplate>
-  <ng-container *ngIf="label !== undefined">
+  <ng-container *ngIf="label">
     <span class="text">{{ label }}</span>
   </ng-container>
 </ng-template>
 
 <ng-template #labelTemplate>
-  <ng-container *ngIf="label !== undefined">
+  <ng-container *ngIf="label">
     <label class="text" [id]="_labelId" (click)="onLabelClick()">{{ label }}</label>
   </ng-container>
 </ng-template>
