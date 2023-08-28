@@ -1,11 +1,13 @@
 import { CommonModule } from '@angular/common';
 import {
+  AfterContentInit,
   AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ContentChild,
   ElementRef,
+  HostBinding,
   Input,
   NgZone,
   OnDestroy,
@@ -34,7 +36,7 @@ import { EventListenerDisposeFn } from '@kirbydesign/designsystem/types';
   styleUrls: ['./menu.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MenuComponent implements AfterViewInit, OnDestroy {
+export class MenuComponent implements AfterViewInit, OnDestroy, AfterContentInit {
   constructor(
     private cdf: ChangeDetectorRef,
     private elementRef: ElementRef<HTMLElement>,
@@ -66,10 +68,16 @@ export class MenuComponent implements AfterViewInit, OnDestroy {
 
   @Input() public shift: boolean = true;
 
+  @Input() public title: string;
+
+  @Input() public subtitle: string;
+
   /**
    * The minimum width of the menu. If not set, the default width is 240px
    */
   @Input() public minWidth: number;
+
+  @HostBinding('class.floating-action-button') private isFloatingActionButton;
 
   @ViewChild('buttonContainer', { read: ElementRef })
   public buttonContainerElement: ElementRef<HTMLElement> | undefined;
@@ -77,14 +85,14 @@ export class MenuComponent implements AfterViewInit, OnDestroy {
   @ViewChild('defaultButton', { read: ElementRef })
   public defaultButtonElement: ElementRef<HTMLElement> | undefined;
 
-  @ContentChild(ButtonComponent, { read: ElementRef }) public userProvidedButton:
-    | ElementRef<HTMLElement>
-    | undefined;
+  @ContentChild(ButtonComponent) public userProvidedButton: ButtonComponent | undefined;
 
   @ViewChild(FloatingDirective)
   private floatingDirective: FloatingDirective;
 
   public FloatingOffset: typeof FloatingOffset = FloatingOffset;
+
+  public _offset = FloatingOffset.small;
 
   private scrollListenerDisposeFn: EventListenerDisposeFn;
 
@@ -100,6 +108,10 @@ export class MenuComponent implements AfterViewInit, OnDestroy {
         this.floatingDirective.hide();
       });
     });
+  }
+
+  public ngAfterContentInit(): void {
+    this.isFloatingActionButton = this.userProvidedButton?.isFloating;
   }
 
   ngOnDestroy(): void {

@@ -7,6 +7,12 @@ $max-screen-width-small: 460px;
 
 :host {
   position: relative;
+
+  &.floating-action-button {
+    position: fixed;
+    bottom: utils.size('s');
+    right: utils.size('s');
+  }
 }
 
 .button-container {

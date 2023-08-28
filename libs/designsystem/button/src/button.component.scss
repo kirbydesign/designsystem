@@ -374,6 +374,7 @@ $button-margin: utils.size('xxxs');
 
 :host-context(kirby-page-actions),
 :host-context(kirby-action-group),
+:host-context(kirby-menu),
 :host-context(.kirby-modal ion-header ion-toolbar ion-buttons) {
   margin: 0;
 }
