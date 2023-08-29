@@ -32,7 +32,6 @@ export class SlidesSimpleExampleComponent {
   }
 
   options: KirbySwiperOptions = {
-    speed: 0,
     allowTouchMove: false,
     slidesPerView: 1,
     breakpoints: {
