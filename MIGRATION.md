@@ -28,8 +28,8 @@ The Experimental Alert has been fully removed and we recommend to use the normal
 
 A new `xsmall` breakpoint (`320px`) has been introduced in the `$breakpoints` map exposed by Kirby. The `xsmall` breakpoint replaces the old `small` breakpoint, which is now `632px`.
 
-A `$page-content-max-widths` map has been introduced to support `default`, `optimized` and `full`-width content on Kirby Page, which means the standalone variable `$page-content-max-width` in now obsolete.
-For backwards compatability `$page-content-max-width` scss variable returns the `default` value of the new map, but from the next major (v10) it will be removed and should be retreived directly from the map:
+A `$page-content-max-widths` map has been introduced to support `default`, `optimized` and `full`-width content on Kirby Page, which means the standalone variable `$page-content-max-width` is now obsolete.
+For backwards compatability the `$page-content-max-width` scss variable returns the `default` value of the new map, but from the next major (v10) it will be removed and should be retreived directly from the map:
 
 ```
 @use 'sass:map';
