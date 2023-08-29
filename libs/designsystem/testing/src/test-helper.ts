@@ -4,6 +4,15 @@ import { IonicConfig } from '@ionic/core';
 export class TestHelper {
   public static readonly _init = TestHelper.muteIonicReInitializeWarning();
 
+  public static disableAnimationsInTest() {
+    //@ts-ignore
+    window.Ionic = {
+      config: {
+        _testing: true,
+      },
+    };
+  }
+
   public static muteIonicReInitializeWarning() {
     const originalWarn = console.warn;
     const patchedWarn = (warning: any, ...optionalParams: any[]) => {
@@ -78,8 +87,8 @@ export class TestHelper {
     });
   }
 
-  public static getCssProperty(element: Element, propertyName: string) {
-    return window.getComputedStyle(element).getPropertyValue(propertyName).trim();
+  public static getCssProperty(element: Element, propertyName: string, pseudoElt?: string) {
+    return window.getComputedStyle(element, pseudoElt).getPropertyValue(propertyName).trim();
   }
 
   public static screensize = {

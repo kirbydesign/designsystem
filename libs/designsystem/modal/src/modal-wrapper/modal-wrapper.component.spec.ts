@@ -6,9 +6,10 @@ import { MockComponents } from 'ng-mocks';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
-import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
+import { DesignTokenHelper, KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { CanDismissHelper } from '../modal/services/can-dismiss.helper';
 import { ModalWrapperComponent } from './modal-wrapper.component';
 import {
   DynamicFooterEmbeddedComponent,
@@ -38,6 +39,7 @@ describe('ModalWrapperComponent', () => {
       },
     ],
     declarations: [MockComponents(ButtonComponent)],
+    mocks: [CanDismissHelper],
   });
 
   let modalWrapperTestBuilder: ModalWrapperTestBuilder;
@@ -84,7 +86,7 @@ describe('ModalWrapperComponent', () => {
       spectator.fixture.destroy();
     });
 
-    it('should not have any padding between content & toolbar', () => {
+    it('should have correct padding between content & toolbar', () => {
       const ionContentToolbarElement: HTMLIonToolbarElement =
         ionContentElement.querySelector('ion-toolbar');
       expect(ionContentToolbarElement).not.toBeUndefined();
@@ -92,11 +94,13 @@ describe('ModalWrapperComponent', () => {
       expect(ionContentToolbarElement).toHaveComputedStyle({
         'padding-top': '0px',
         '--padding-top': '0px',
-        '--padding-bottom': '0px',
-        '--padding-start': '0px',
-        '--padding-end': '0px',
+        '--padding-bottom': DesignTokenHelper.size('l'),
+        '--padding-start': DesignTokenHelper.size('s'),
+        '--padding-end': DesignTokenHelper.size('s'),
       });
-      expect(ionContentElement).toHaveComputedStyle({ '--padding-top': '0px' });
+      expect(ionContentElement).toHaveComputedStyle({
+        '--padding-top': DesignTokenHelper.size('m'),
+      });
     });
   });
 
@@ -121,12 +125,12 @@ describe('ModalWrapperComponent', () => {
       expect(rootElement.classList).toContain('drawer');
     });
 
-    it('should have font size "m" when drawer flavor is used', () => {
+    it('should have correct font size when drawer flavor is used', () => {
       spectator.component.config.flavor = 'drawer';
       spectator.detectChanges();
       const rootElement: HTMLElement = spectator.element;
       const title = rootElement.querySelector('ion-title');
-      expect(window.getComputedStyle(title).fontSize).toEqual('18px');
+      expect(window.getComputedStyle(title).fontSize).toEqual(DesignTokenHelper.fontSize('n'));
     });
   });
 
@@ -301,17 +305,8 @@ describe('ModalWrapperComponent', () => {
     });
 
     it('should render as a close icon by default', () => {
-      spectator.component.config.flavor = 'modal';
-      spectator.detectChanges();
       const el = spectator.query(IconComponent);
       expect(el.name).toBe('close');
-    });
-
-    it("should render arrow-down when flavor is set to 'drawer'", () => {
-      spectator.component.config.flavor = 'drawer';
-      spectator.detectChanges();
-      const el = spectator.query(IconComponent);
-      expect(el.name).toBe('arrow-down');
     });
   });
 
@@ -340,8 +335,8 @@ describe('ModalWrapperComponent', () => {
       spectator.detectChanges();
       const elements = spectator.queryAll(IconComponent);
       expect(elements.length).toBe(2);
-      expect(elements[0].name).toBe('arrow-down');
-      expect(elements[1].name).toBe('qr');
+      expect(elements[0].name).toBe('qr');
+      expect(elements[1].name).toBe('close');
     });
 
     it('should invoke the provided callback on select', () => {
@@ -353,7 +348,7 @@ describe('ModalWrapperComponent', () => {
       spyOn(spectator.component.config.drawerSupplementaryAction, 'action');
 
       spectator.detectChanges();
-      spectator.dispatchMouseEvent('ion-buttons[slot="end"] button[kirby-button]', 'click');
+      spectator.dispatchMouseEvent('ion-buttons[slot="secondary"] button[kirby-button]', 'click');
       expect(spectator.component.config.drawerSupplementaryAction.action).toHaveBeenCalled();
     });
   });

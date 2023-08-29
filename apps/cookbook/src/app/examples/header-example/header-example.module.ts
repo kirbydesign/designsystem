@@ -7,6 +7,7 @@ import { HeaderExampleComponent } from './header-example.component';
 
 import { HeaderExampleDefaultComponent } from './examples/default';
 import { HeaderExampleAvatarComponent } from './examples/avatar';
+import { HeaderExampleProgressCircleWithAvatarComponent } from './examples/progress-circle-with-avatar';
 import { HeaderExampleFlagComponent } from './examples/flag';
 import { HeaderExampleValueComponent } from './examples/value';
 import { HeaderExampleCombinedComponent } from './examples/combined';
@@ -17,6 +18,7 @@ const COMPONENT_DECLARATIONS = [
   HeaderExampleComponent,
   HeaderExampleDefaultComponent,
   HeaderExampleAvatarComponent,
+  HeaderExampleProgressCircleWithAvatarComponent,
   HeaderExampleFlagComponent,
   HeaderExampleValueComponent,
   HeaderExampleCombinedComponent,

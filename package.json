@@ -1,6 +1,6 @@
 {
   "name": "designsystem",
-  "version": "8.3.1",
+  "version": "8.11.0",
   "description": "Kirby Design Angular Components. This library provides Angular wrappers for the @kirbydesign/core package, for smoother integration into Angular projects.",
   "engines": {
     "node": ">=16.0.0 <=18.13.0",
@@ -44,6 +44,7 @@
     "test:core": "stencil test --config=./libs/core/stencil.config.ts --spec --watchAll",
     "test:core:single": "stencil test --config=./libs/core/stencil.config.ts --spec",
     "lint": "npm run lint:cookbook && npm run lint:designsystem && npm run lint:flows",
+    "lint:fix": "npm run lint:cookbook:ts:fix && npm run lint:cookbook:css:fix && npm run lint:designsystem:ts:fix && npm run lint:designsystem:css:fix && npm run lint:flows:ts:fix && npm run lint:flows:css:fix",
     "lint:cookbook": "npm run lint:cookbook:ts && npm run lint:cookbook:css",
     "lint:cookbook:ts": "eslint './apps/cookbook/src/**/*.ts'",
     "lint:cookbook:ts:fix": "npm run lint:cookbook:ts -- --fix",
@@ -120,6 +121,7 @@
     "inputmask": "^5.0.5",
     "prismjs": "1.27.0",
     "rxjs": "~7.5.0",
+    "swiper": "^9.3.2",
     "tslib": "^2.0.3",
     "zone.js": "0.11.5"
   },
@@ -133,7 +135,7 @@
     "@angular/compiler-cli": "15.0.4",
     "@babel/core": "^7.14.6",
     "@capacitor/android": "^4.4.0",
-    "@capacitor/cli": "^4.4.0",
+    "@capacitor/cli": "^4.8.0",
     "@capacitor/core": "^4.4.0",
     "@capacitor/ios": "^4.4.0",
     "@kirbydesign/core": "file:libs/core",
@@ -205,7 +207,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run sync-node-version && npm run generate-mocks && lint-staged",
+      "pre-commit": "npm run sync-node-version && lint-staged",
       "pre-push": "npm run test:libs",
       "post-merge": "post-npm-install"
     }

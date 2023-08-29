@@ -6,8 +6,10 @@ import {
   Component,
   ContentChild,
   ElementRef,
-  HostListener,
   Input,
+  NgZone,
+  OnDestroy,
+  Renderer2,
   ViewChild,
 } from '@angular/core';
 import { Placement } from '@floating-ui/dom';
@@ -22,6 +24,7 @@ import {
   PortalOutletConfig,
   TriggerEvent,
 } from '@kirbydesign/designsystem/shared/floating';
+import { EventListenerDisposeFn } from '@kirbydesign/designsystem/types';
 
 @Component({
   selector: 'kirby-menu',
@@ -31,8 +34,13 @@ import {
   styleUrls: ['./menu.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MenuComponent implements AfterViewInit {
-  constructor(private cdf: ChangeDetectorRef, private elementRef: ElementRef<HTMLElement>) {}
+export class MenuComponent implements AfterViewInit, OnDestroy {
+  constructor(
+    private cdf: ChangeDetectorRef,
+    private elementRef: ElementRef<HTMLElement>,
+    private zone: NgZone,
+    private renderer: Renderer2
+  ) {}
 
   @Input() public isDisabled: boolean = false;
 
@@ -56,6 +64,8 @@ export class MenuComponent implements AfterViewInit {
 
   @Input() public closeOnBackdrop: boolean = true;
 
+  @Input() public shift: boolean = true;
+
   /**
    * The minimum width of the menu. If not set, the default width is 240px
    */
@@ -76,12 +86,23 @@ export class MenuComponent implements AfterViewInit {
 
   public FloatingOffset: typeof FloatingOffset = FloatingOffset;
 
+  private scrollListenerDisposeFn: EventListenerDisposeFn;
+
   public ngAfterViewInit(): void {
     this.cdf.detectChanges(); // Sets the updated reference for kirby-floating
+
+    this.zone.runOutsideAngular(() => {
+      /*
+       * Listen for ionScroll outside of Angular's change detection to
+       * avoid a change detection cycle for every scroll-event fired
+       */
+      this.scrollListenerDisposeFn = this.renderer.listen(document, 'ionScroll', () => {
+        this.floatingDirective.hide();
+      });
+    });
   }
 
-  @HostListener('document:ionScroll')
-  _onIonScroll() {
-    this.floatingDirective.hide();
+  ngOnDestroy(): void {
+    this.scrollListenerDisposeFn?.();
   }
 }

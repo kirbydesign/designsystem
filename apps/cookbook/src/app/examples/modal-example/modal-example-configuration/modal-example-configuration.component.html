@@ -32,6 +32,15 @@
 ></kirby-checkbox>
 
 <kirby-checkbox
+  *ngIf="snapFooterToKeyboard !== undefined"
+  [checked]="snapFooterToKeyboard"
+  (checkedChange)="toggleSnapFooterToKeyboard($event)"
+  [disabled]="disabled || !showFooter"
+  text="Snap footer to keyboard"
+  class="indent"
+></kirby-checkbox>
+
+<kirby-checkbox
   *ngIf="disableScroll !== undefined"
   [checked]="disableScroll"
   (checkedChange)="toggleDisableScroll($event)"
@@ -66,14 +75,7 @@
 ></kirby-checkbox>
 
 <kirby-checkbox
-  *ngIf="openFullHeight !== undefined"
-  [checked]="openFullHeight && !interactWithBackground"
-  (checkedChange)="toggleOpenFullHeight($event)"
-  [disabled]="interactWithBackground || disabled"
-  text="Open in full height"
-></kirby-checkbox>
-
-<kirby-checkbox
+  *ngIf="collapseTitle !== undefined"
   [checked]="collapseTitle"
   (checkedChange)="toggleCollapseTitle($event)"
   [disabled]="disabled"
@@ -81,16 +83,12 @@
 ></kirby-checkbox>
 
 <kirby-checkbox
+  *ngIf="alertBeforeClose !== undefined"
   [checked]="alertBeforeClose"
   (checkedChange)="toggleAlertBeforeClose($event)"
   [disabled]="disabled"
   text="Alert before closing"
 ></kirby-checkbox>
-<small>
-  (Collapse title is unavailable for routed modals. See
-  <a href="https://github.com/kirbydesign/designsystem/issues/2192" target="_blank">issue #2192</a>
-  .)
-</small>
 
 <ng-container *ngIf="interactWithBackground !== undefined || customCssClass !== undefined">
   <kirby-divider [hasMargin]="true"></kirby-divider>

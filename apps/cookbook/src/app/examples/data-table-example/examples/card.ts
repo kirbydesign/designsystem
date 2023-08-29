@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { ToastController } from '@kirbydesign/designsystem';
-import { Person, table_example_data } from '../table_example_data';
+import { Person, tableExampleData } from '../example-data';
 
 const config = {
   selector: 'cookbook-data-table-card-example',
   template: `<kirby-card>
-  <table kirby-table>
+  <table class="kirby-table">
     <thead>
       <tr>
         <th>Name</th>
@@ -19,7 +19,7 @@ const config = {
       </tr>
     </thead>
     <tbody>
-      <tr kirby-tr *ngFor="let rowData of tableData; let i = index" [selectable]="true" (click)="onClickRow(i)">
+      <tr *ngFor="let rowData of tableData; let i = index" class="kirby-selectable-row" (click)="onClickRow(i)">
           <td>{{rowData.name}}</td>
           <td>{{rowData.eye_color}}</td>
           <td>{{rowData.gender}}</td>
@@ -39,7 +39,7 @@ const config = {
   template: config.template,
 })
 export class DataTableCardExampleComponent {
-  tableData: Person[] = table_example_data;
+  tableData: Person[] = [...tableExampleData];
   template: string = config.template;
 
   constructor(private toastController: ToastController) {}
