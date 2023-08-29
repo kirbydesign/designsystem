@@ -32,7 +32,7 @@ A `$page-content-max-widths` map has been introduced to support `default`, `opti
 For backwards compatability both variables return the `default` value until v10 where `$page-content-max-width` is removed entirely in favor of `$page-content-max-width-default`.
 <br>
 
-Values from the new content-width map can be retrieved with the `get-page-content-max-width()` convenience function, like `get-page-content-max-width('full')`.
+Values from the new content-width map can be retrieved with the `get-page-content-max-width()` convenience function, e.g. `get-page-content-max-width('full')`.
 
 ## Version 8.3.0
 
