@@ -12,7 +12,7 @@ $padding-vertical: utils.size('xxs');
 
   .wrapper {
     position: relative;
-    max-width: var(--page-content-max-width, #{map.get(utils.$page-content-max-widths, 'default')});
+    max-width: var(--page-content-max-width, utils.$page-content-max-width-default);
     margin: 0 auto;
     padding-bottom: var(--kirby-page-footer-safe-area-bottom, var(--kirby-safe-area-bottom));
 

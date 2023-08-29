@@ -208,7 +208,7 @@ ion-back-button {
  * Page Header
  */
 .page-header-container {
-  max-width: var(--page-content-max-width, #{map.get(utils.$page-content-max-widths, 'default')});
+  max-width: var(--page-content-max-width, utils.$page-content-max-width-default);
   margin: 0 auto;
 }
 
@@ -268,15 +268,15 @@ ion-content {
   }
 
   &.max-width-optimized {
-    --page-content-max-width: #{map.get(utils.$page-content-max-widths, 'optimized')};
+    --page-content-max-width: #{utils.get-page-content-max-width('optimized')};
   }
 
   &.max-width-full {
-    --page-content-max-width: #{map.get(utils.$page-content-max-widths, 'full')};
+    --page-content-max-width: #{utils.get-page-content-max-width('full')};
   }
 
   .content-inner {
-    max-width: var(--page-content-max-width, #{map.get(utils.$page-content-max-widths, 'default')});
+    max-width: var(--page-content-max-width, utils.$page-content-max-width-default);
     margin: 0 auto;
     padding-bottom: utils.size('xl');
   }
@@ -312,7 +312,7 @@ ion-content {
   z-index: utils.z('sticky-content');
 
   div {
-    max-width: var(--page-content-max-width, #{map.get(utils.$page-content-max-widths, 'default')});
+    max-width: var(--page-content-max-width, utils.$page-content-max-width-default);
     margin: 0 auto;
   }
 
