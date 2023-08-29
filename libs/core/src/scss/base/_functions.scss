@@ -88,6 +88,10 @@
   @return $shadow-size;
 }
 
+@function get-page-content-max-width($value) {
+  @return map.get(variables.$page-content-max-widths, $value);
+}
+
 @function _get-shadow-value($shadow, $valuekey) {
   $shadow-value-map: (
     'offset-x': 1,
