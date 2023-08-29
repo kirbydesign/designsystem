@@ -8,3 +8,44 @@
   --padding-start: #{utils.size('s')};
   --padding-end: #{utils.size('s')};
 }
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+@include utils.media('>small') {
+  .card-content {
+    justify-content: space-between;
+    flex-direction: row;
+  }
+}
+
+sl-rating {
+  margin: 0 auto;
+}
+
+.star-rating-wrapper {
+  display: flex;
+  position: relative;
+  max-width: 300px;
+  align-self: center;
+}
+
+.texts {
+  display: flex;
+  justify-content: space-between;
+
+  p {
+    font-size: small;
+  }
+}
+
+.layer {
+  background-color: white;
+  opacity: 0.1;
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+}

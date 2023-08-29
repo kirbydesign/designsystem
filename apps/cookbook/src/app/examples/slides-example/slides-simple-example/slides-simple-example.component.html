@@ -1,8 +1,30 @@
-<kirby-slides [slides]="slides" [title]="'Title'" [showNavigation]="true">
-  <kirby-card *kirbySlide="let slide; let i = index" [hasPadding]="true">
-    <kirby-card-header [title]="slide.title" [subtitle]="slide.subtitle"></kirby-card-header>
+<kirby-slides
+  [slides]="slides"
+  [slidesOptions]="options"
+  [title]="'Din mening er vigtig for os'"
+  [showNavigation]="true"
+  (slideChange)="setCurrentIndex($event)"
+>
+  <kirby-card *kirbySlide="let slide; let i = index" [hasPadding]="true" themeColor="dark">
+    <kirby-card-header [title]="slide.title"></kirby-card-header>
     <div class="card-content">
       {{ slide.cardContent }}
+      <br />
+      <br />
+
+      <div class="rating">
+        <div class="star-rating-wrapper">
+          <div class="layer"></div>
+          <sl-rating label="Rating" style="--symbol-spacing: 0.8rem"></sl-rating>
+        </div>
+        <div class="texts">
+          <p>Meget svært</p>
+          <p>Meget nemt</p>
+        </div>
+      </div>
     </div>
   </kirby-card>
+  <button kirby-button attentionLevel="3" size="xs" (click)="remove()">
+    <kirby-icon name="close"></kirby-icon>
+  </button>
 </kirby-slides>

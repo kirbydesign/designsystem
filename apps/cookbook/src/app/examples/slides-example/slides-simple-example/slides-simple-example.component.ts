@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
-import { SelectedSlide } from '@kirbydesign/designsystem/slide';
+import { Component, ElementRef, HostListener, Renderer2, ViewChild } from '@angular/core';
+import {
+  KirbySwiperOptions,
+  SelectedSlide,
+  SlidesComponent,
+} from '@kirbydesign/designsystem/slide';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem/toast';
 
 @Component({
@@ -7,12 +11,40 @@ import { ToastConfig, ToastController } from '@kirbydesign/designsystem/toast';
   templateUrl: './slides-simple-example.component.html',
 })
 export class SlidesSimpleExampleComponent {
-  constructor(private toastController: ToastController) {}
+  constructor(
+    private toastController: ToastController,
+    private renderer: Renderer2,
+    private hostElement: ElementRef
+  ) {}
 
-  slides = [...Array(9).keys()].map((number) => ({
-    title: `Slide ${number + 1}`,
-    subtitle: `Subtitle ${number + 1}`,
-    cardContent: `Lorem ipsum dolor sit amet consectetur adipisicing elit.`,
+  currentSlideIndex = 0;
+
+  setCurrentIndex(event) {
+    this.currentSlideIndex = event.index;
+  }
+
+  @ViewChild(SlidesComponent, { read: ElementRef }) slidesElement: ElementRef<SlidesComponent>;
+  @ViewChild(SlidesComponent) slidesComp: SlidesComponent;
+
+  @HostListener('sl-change')
+  onRatingChange() {
+    this.slidesComp.slideTo(this.currentSlideIndex + 1);
+  }
+
+  options: KirbySwiperOptions = {
+    speed: 0,
+    allowTouchMove: false,
+    slidesPerView: 1,
+    breakpoints: {
+      768: {
+        slidesPerView: 1,
+      },
+    },
+  };
+
+  slides = [...Array(4).keys()].map((number) => ({
+    title: `Spørgsmål ${number + 1}`,
+    cardContent: `Hvor nemt var det at finde det, du skulle bruge i netbanken?`,
   }));
 
   getDataFromActiveSlide(selectedSlide: SelectedSlide) {
@@ -22,5 +54,9 @@ export class SlidesSimpleExampleComponent {
       durationInMs: 1000,
     };
     this.toastController.showToast(config);
+  }
+
+  remove() {
+    this.renderer.removeChild(this.hostElement, this.slidesElement.nativeElement);
   }
 }
