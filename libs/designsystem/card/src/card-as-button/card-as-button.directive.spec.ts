@@ -3,16 +3,17 @@ import { Component } from '@angular/core';
 import { CardComponent } from '../card.component';
 import { CardAsButtonDirective } from './card-as-button.directive';
 
+@Component({ selector: 'kirby-card-click-host', template: '' })
+class KirbyCardClickHostComponent {
+  someMethod() {
+    //noop
+  }
+}
+
 describe('CardAsButtonDirective', () => {
   let spectator: SpectatorDirective<CardAsButtonDirective>;
   let cardElement: HTMLElement;
 
-  @Component({ selector: 'kirby-card-click-host', template: '' })
-  class KirbyCardClickHostComponent {
-    someMethod() {
-      //noop
-    }
-  }
   const createDirective = createDirectiveFactory({
     directive: CardAsButtonDirective,
     imports: [],

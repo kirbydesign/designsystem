@@ -4,7 +4,7 @@ import { MockComponents } from 'ng-mocks';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { ItemComponent } from '@kirbydesign/designsystem/item';
-import { IconModule } from 'icon/src';
+import { IconModule } from '@kirbydesign/designsystem/icon';
 import { CheckboxComponent } from './checkbox.component';
 
 const size = DesignTokenHelper.size;

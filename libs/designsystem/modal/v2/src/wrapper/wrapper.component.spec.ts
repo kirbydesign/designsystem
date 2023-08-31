@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { IconModule } from 'icon/src';
+import { IconModule } from '@kirbydesign/designsystem/icon';
+
 import { ModalV2WrapperComponent } from './wrapper.component';
 
 describe('WrapperComponent', () => {
