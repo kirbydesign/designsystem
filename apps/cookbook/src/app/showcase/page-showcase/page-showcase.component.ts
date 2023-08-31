@@ -83,7 +83,7 @@ export class PageShowcaseComponent {
       name: 'maxWidth',
       description: 'Sets the max width for the content',
       defaultValue: 'default',
-      type: ['default', 'standard', 'optimized', 'full'],
+      type: ['default', 'optimized', 'full'],
     },
   ];
   events: ApiDescriptionEvent[] = [

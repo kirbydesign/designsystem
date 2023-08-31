@@ -2,7 +2,6 @@
 
 import { MockAccordionItemComponent } from './components/mock.accordion-item.component';
 import { MockActionGroupComponent } from './components/mock.action-group.component';
-import { MockAlertExperimentalComponent } from './components/mock.alert-experimental.component';
 import { MockAvatarComponent } from './components/mock.avatar.component';
 import { MockButtonComponent } from './components/mock.button.component';
 import { MockCalendarComponent } from './components/mock.calendar.component';
@@ -25,7 +24,6 @@ import { MockFormFieldComponent } from './components/mock.form-field.component';
 import { MockInputComponent } from './components/mock.input.component';
 import { MockInputCounterComponent } from './components/mock.input-counter.component';
 import { MockTextareaComponent } from './components/mock.textarea.component';
-import { MockGridComponent } from './components/mock.grid.component';
 import {
   MockHeaderActionsDirective,
   MockHeaderComponent,
@@ -92,7 +90,6 @@ import { MockToggleButtonComponent } from './components/mock.toggle-button.compo
 export const MOCK_COMPONENTS = [
   MockAccordionItemComponent,
   MockActionGroupComponent,
-  MockAlertExperimentalComponent,
   MockAvatarComponent,
   MockButtonComponent,
   MockCalendarComponent,
@@ -115,7 +112,6 @@ export const MOCK_COMPONENTS = [
   MockInputComponent,
   MockInputCounterComponent,
   MockTextareaComponent,
-  MockGridComponent,
   MockHeaderActionsDirective,
   MockHeaderCustomSectionDirective,
   MockHeaderComponent,

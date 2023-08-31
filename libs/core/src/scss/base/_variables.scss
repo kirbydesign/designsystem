@@ -88,19 +88,12 @@ $border-radius-round: 999px !default;
 /* Breakpoints
 ****************************************************************************/
 $breakpoints: (
-  small: 321px,
+  xsmall: 320px,
+  small: 632px,
   medium: 768px,
-  large: 1025px,
-  xlarge: 60em,
-  xxlarge: 80em,
+  large: 992px,
+  xlarge: 1440px,
 ) !default;
-$breakpoint-map: (
-  'xs': 0,
-  'sm': 632px,
-  'md': 768px,
-  'lg': 992px,
-  'xl': 1200px,
-);
 
 /* Elevation
 ****************************************************************************/
@@ -126,7 +119,13 @@ $avatar-badge-size: 16px;
 
 /* Page
 ****************************************************************************/
-$page-content-max-width: 720px;
+$page-content-max-widths: (
+  default: 792px,
+  optimized: 1092px,
+  full: 100%,
+);
+$page-content-max-width-default: map.get($page-content-max-widths, 'default');
+$page-content-max-width: $page-content-max-width-default;
 
 /* Modal
 ****************************************************************************/

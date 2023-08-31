@@ -125,6 +125,7 @@ describe('ModalHelper', () => {
   });
 
   beforeEach(() => {
+    TestHelper.disableAnimationsInTest();
     spectator = createService();
     modalHelper = spectator.service;
     ionModalController = spectator.inject(IonicModalController);
