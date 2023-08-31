@@ -17,7 +17,6 @@ import {
 
 import { ACTIONGROUP_CONFIG, ActionGroupConfig } from '@kirbydesign/designsystem/action-group';
 import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
-import { FlagComponent } from '@kirbydesign/designsystem/flag';
 import { ProgressCircleComponent } from '@kirbydesign/designsystem/progress-circle';
 import type { FitHeadingConfig } from '@kirbydesign/designsystem/shared';
 
@@ -57,9 +56,6 @@ export class HeaderComponent implements AfterContentInit, OnInit {
 
   @ContentChild(ProgressCircleComponent)
   progressCircle: ProgressCircleComponent;
-
-  @ContentChild(FlagComponent)
-  flag: FlagComponent;
 
   @ViewChild('titleElement', { read: ElementRef })
   titleElement?: ElementRef<HTMLHeadingElement>;

@@ -136,6 +136,10 @@
 
 .flag {
   margin-bottom: utils.size('xxxs');
+
+  &:empty {
+    display: none;
+  }
 }
 
 .title {
