@@ -14,7 +14,7 @@
       i.e. to `.avatar`.
     */
     /* stylelint-disable selector-pseudo-element-no-unknown */
-    &:has(> .avatar::ng-deep) {
+    &:has(> .avatar::ng-deep:not(:empty)) {
       margin-top: utils.size('xxs');
     }
   }
