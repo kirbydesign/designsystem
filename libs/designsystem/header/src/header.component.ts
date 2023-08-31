@@ -1,6 +1,9 @@
 import {
+  AfterContentChecked,
   AfterContentInit,
+  AfterViewInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ContentChild,
   Directive,
@@ -16,8 +19,6 @@ import {
 } from '@angular/core';
 
 import { ACTIONGROUP_CONFIG, ActionGroupConfig } from '@kirbydesign/designsystem/action-group';
-import { AvatarComponent } from '@kirbydesign/designsystem/avatar';
-import { ProgressCircleComponent } from '@kirbydesign/designsystem/progress-circle';
 import type { FitHeadingConfig } from '@kirbydesign/designsystem/shared';
 
 @Directive({
@@ -41,7 +42,7 @@ export class HeaderTitleActionIconDirective {}
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeaderComponent implements AfterContentInit, OnInit {
+export class HeaderComponent implements AfterContentChecked, OnInit {
   @HostBinding('class.centered')
   @Input()
   centered?: boolean;
@@ -51,11 +52,8 @@ export class HeaderComponent implements AfterContentInit, OnInit {
 
   fitHeadingConfig: FitHeadingConfig;
 
-  @ContentChild(AvatarComponent)
-  avatar: AvatarComponent;
-
-  @ContentChild(ProgressCircleComponent)
-  progressCircle: ProgressCircleComponent;
+  @ViewChild('avatarContainerElement', { read: ElementRef })
+  avatarContainerElement: ElementRef<HTMLDivElement>;
 
   @ViewChild('titleElement', { read: ElementRef })
   titleElement?: ElementRef<HTMLHeadingElement>;
@@ -81,17 +79,33 @@ export class HeaderComponent implements AfterContentInit, OnInit {
 
   @Output() titleClick = new EventEmitter<PointerEvent>();
 
-  onTitleClick(event: PointerEvent) {
+  public onTitleClick(event: PointerEvent) {
     this.titleClick.emit(event);
   }
 
-  _actionGroupInjector: Injector;
+  public avatarReadyToRenderAfterContentProjection: boolean = false;
+
+  public _actionGroupInjector: Injector;
 
   private actionGroupConfig: ActionGroupConfig;
 
   constructor(private injector: Injector) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
+    this.initActionGroupInjector();
+
+    if (this.titleMaxLines > 0) {
+      this.fitHeadingConfig = {
+        maxLines: this.titleMaxLines,
+      };
+    }
+  }
+
+  public ngAfterContentChecked(): void {
+    this.onPotentialAvatarRendered();
+  }
+
+  private initActionGroupInjector(): void {
     this.actionGroupConfig = {
       defaultVisibleActions: this.emphasizeActions ? undefined : 1,
     };
@@ -105,22 +119,19 @@ export class HeaderComponent implements AfterContentInit, OnInit {
       ],
       parent: this.injector,
     });
-
-    if (this.titleMaxLines > 0) {
-      this.fitHeadingConfig = {
-        maxLines: this.titleMaxLines,
-      };
-    }
   }
 
-  ngAfterContentInit(): void {
+  private onPotentialAvatarRendered(): void {
     // If an avatar is present we default to centered layout - unless configured otherwise:
-    if (this.avatar && this.centered === undefined) {
+    const avatarPresent: boolean = this.avatarContainerElement?.nativeElement.children.length > 0;
+    if (avatarPresent && this.centered === undefined) {
       this.centered = true;
     }
 
     if (this.centered) {
       this.actionGroupConfig.isCondensed = true;
     }
+
+    this.avatarReadyToRenderAfterContentProjection = true;
   }
 }

@@ -1,4 +1,4 @@
-<div *ngIf="!!avatar || !!progressCircle" class="avatar">
+<div *ngIf="avatarReadyToRenderAfterContentProjection" #avatarContainerElement class="avatar">
   <ng-content select="kirby-avatar,kirby-progress-circle"></ng-content>
 </div>
 

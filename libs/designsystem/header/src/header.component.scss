@@ -132,6 +132,10 @@
 
 .avatar {
   margin-bottom: utils.size('s');
+
+  &:empty {
+    display: none;
+  }
 }
 
 .flag {
