@@ -1,9 +1,6 @@
 import {
   AfterContentChecked,
-  AfterContentInit,
-  AfterViewInit,
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   ContentChild,
   Directive,
