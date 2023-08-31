@@ -647,62 +647,33 @@ describe('ModalWrapperComponent', () => {
       });
     });
   });
-});
+  describe('initializeContentScrollListening', () => {
+    it('it should not assign a value to contentScrolled$ when opened on desktop', async () => {
+      await TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
 
-describe('initializeContentScrollListening', () => {
-  const createComponent = createComponentFactory({
-    component: ModalWrapperComponent,
-    entryComponents: [
-      TitleEmbeddedComponent,
-      StaticFooterEmbeddedComponent,
-      DynamicFooterEmbeddedComponent,
-      InputEmbeddedComponent,
-      StaticPageProgressEmbeddedComponent,
-      DynamicPageProgressEmbeddedComponent,
-    ],
-    providers: [
-      {
-        provide: WindowRef,
-        useValue: <WindowRef>{ nativeWindow: window },
-      },
-    ],
-    declarations: [MockComponents(ButtonComponent)],
-    mocks: [CanDismissHelper],
-  });
+      modalWrapperTestBuilder = new ModalWrapperTestBuilder(createComponent);
+      spectator = modalWrapperTestBuilder
+        .flavor('modal')
+        .title('test')
+        .component(TitleEmbeddedComponent)
+        .build();
 
-  let modalWrapperTestBuilder: ModalWrapperTestBuilder;
-  let spectator: Spectator<ModalWrapperComponent>;
+      //@ts-ignore
+      expect(spectator.component.contentScrolled$).toBeFalsy();
+    });
 
-  afterEach(() => {
-    spectator.fixture.destroy();
-    TestHelper.resetTestWindow();
-  });
+    it('it should assign a value to contentScrolled$ when opened on a phone', async () => {
+      await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
 
-  it('it should not assign a value to contentScrolled$ when opened on desktop', async () => {
-    await TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
+      modalWrapperTestBuilder = new ModalWrapperTestBuilder(createComponent);
+      spectator = modalWrapperTestBuilder
+        .flavor('modal')
+        .title('test')
+        .component(TitleEmbeddedComponent)
+        .build();
 
-    modalWrapperTestBuilder = new ModalWrapperTestBuilder(createComponent);
-    spectator = modalWrapperTestBuilder
-      .flavor('modal')
-      .title('test')
-      .component(TitleEmbeddedComponent)
-      .build();
-
-    //@ts-ignore
-    expect(spectator.component.contentScrolled$).toBeFalsy();
-  });
-
-  it('it should assign a value to contentScrolled$ when opened on a phone', async () => {
-    await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
-
-    modalWrapperTestBuilder = new ModalWrapperTestBuilder(createComponent);
-    spectator = modalWrapperTestBuilder
-      .flavor('modal')
-      .title('test')
-      .component(TitleEmbeddedComponent)
-      .build();
-
-    //@ts-ignore
-    expect(spectator.component.contentScrolled$).toBeTruthy();
+      //@ts-ignore
+      expect(spectator.component.contentScrolled$).toBeTruthy();
+    });
   });
 });
