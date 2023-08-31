@@ -3,6 +3,7 @@
 @use '@kirbydesign/core/src/scss/utils';
 
 :host {
+  position: relative;
   @include interaction-state.apply-hover {
     background-color: interaction-state.get-state-color('white', 'xxxs');
     cursor: text;
