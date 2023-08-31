@@ -57,7 +57,7 @@ To make sure the bug is not intended behaviour; it should be verified by a membe
 ### Implementation 
 The contributor who wants to implement this issue should: 
 
-- [ ] Make sure you have read: "[Before you get coding](https://github.com/kirbydesign/designsystem/blob/main/.github/CONTRIBUTING.md/#before-you-get-coding)".
+- [ ] Make sure you have read: "[Before you get coding](../CONTRIBUTING.md/#before-you-get-coding)".
 - [ ] Signal to others you are working on the issue by assigning yourself.
 - [ ] Create a branch from the [develop branch](https://github.com/kirbydesign/designsystem/tree/develop) following our [branch naming convention](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Branch). 
 - [ ] Create a test that reproduces the bug following guidelines in: "[The good: Test](https://github.com/kirbydesign/designsystem/wiki/The-Good%3A-Test)". 
