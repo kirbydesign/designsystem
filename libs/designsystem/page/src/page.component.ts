@@ -69,6 +69,10 @@ const contentScrolledOffsetInPixels = 4;
 
 type stickyConfig = { sticky: boolean };
 type fixedConfig = { fixed: boolean };
+type MaxWidth = 'default' | 'standard' | 'optimized' | 'full';
+
+const PAGE_WIDTH_STANDARD_DEPRECATION_WARNING =
+  'Deprecation warning: The support for "standard" as a maxWidth option will be removed in Kirby version 10. After that the "standard" width will be the default width and does not need to be specified.';
 
 export const PAGE_BACK_BUTTON_OVERRIDE = new InjectionToken<PageBackButtonOverride>(
   'page-back-button-override'
@@ -229,8 +233,21 @@ export class PageComponent
   @Input() defaultBackHref: string;
   @Input() hideBackButton: boolean;
   @Input() titleMaxLines: number;
-  @Input() maxWidth: 'default' | 'standard' | 'optimized' | 'full' = 'default';
   @Input() hasInteractiveTitle: boolean;
+
+  @Input() set maxWidth(width: MaxWidth) {
+    if (width === 'standard') {
+      console.warn(PAGE_WIDTH_STANDARD_DEPRECATION_WARNING);
+    }
+
+    this._maxWidth = width;
+  }
+
+  get maxWidth(): MaxWidth {
+    return this._maxWidth;
+  }
+
+  private _maxWidth: MaxWidth = 'default';
 
   private _tabBarBottomHidden: boolean;
   public get tabBarBottomHidden(): boolean {
