@@ -22,12 +22,6 @@ export class ActionSheetComponent {
   @Output() cancel = new EventEmitter();
   @Output() itemSelect: EventEmitter<ActionSheetItem> = new EventEmitter<ActionSheetItem>();
 
-  constructor() {
-    console.warn(
-      'Kirby Action Sheet is deprecated, and will be removed in Kirby v10. Kirby Menu can be used for solving similar use-cases.'
-    );
-  }
-
   onItemSelect(selection: ActionSheetItem) {
     this.itemSelect.emit(selection);
   }
