@@ -27,7 +27,21 @@ const config = {
   </section>
 </fieldset>`,
   codeSnippet: `
+  const form = new FormGroup({
+    isChecked: new FormControl({ disabled: !this.canSelectFavorite }),
+  });
+
+const isCheckedControl = this.form.controls.get('isChecked'); 
+    
+toggleCanSelectFavorite() {
+    this.canSelectFavorite = !this.canSelectFavorite;
+
+    if (this.canSelectFavorite) {
+      this.form.get('isChecked')?.enable();
+    } else {
+      this.form.get('isChecked')?.disable();
     }
+  }
     `,
 };
 
