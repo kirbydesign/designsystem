@@ -55,10 +55,6 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnChanges {
 
   @Input() showNavigation: boolean = true;
 
-  /**
-   * @deprecated Will be removed in next major version. Use `slideChange` instead.
-   */
-  @Output() selectedSlide = new EventEmitter<SelectedSlide>();
   @Output() slideChange = new EventEmitter<SelectedSlide>();
 
   _paginationId = UniqueIdGenerator.scopedTo('pagination').next();
@@ -68,11 +64,6 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnChanges {
 
   ngOnInit() {
     this._isTouch = this.platform.isTouch();
-    if (this.selectedSlide.observed) {
-      console.warn(
-        'Deprecation warning: `selectedSlide` will be removed in next major version. Use `slideChange` instead.'
-      );
-    }
   }
 
   ngAfterViewInit() {
@@ -126,10 +117,6 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnChanges {
       },
       on: {
         slideChange: (swiper) => {
-          this.selectedSlide.emit({
-            slide: this.slides[swiper.activeIndex],
-            index: swiper.activeIndex,
-          });
           this.slideChange.emit({
             slide: this.slides[swiper.activeIndex],
             index: swiper.activeIndex,

@@ -29,9 +29,18 @@ The Experimental Alert has been fully removed and we recommend to use the normal
 
 Navigation arrows (desktop only) and selected slide indicators are now shown by default. It is possible to opt-out of this by setting `showNavigation` to `false`.
 
+The `selectedSlide` event emitter has been removed and `slideChange` should be used as a direct replacement.
+
+
 <h3 id="styles-v9">Styles</h3>
 
 A new `xsmall` breakpoint (`320px`) has been introduced in the `$breakpoints` map exposed by Kirby. The `xsmall` breakpoint replaces the old `small` breakpoint, which is now `632px`.
+
+A `$page-content-max-widths` map has been introduced to support `default`, `optimized` and `full`-width content on Kirby Page. This means that the standalone variable `$page-content-max-width` is deprecated in v9 and `$page-content-max-width-default` should be used in its place.
+For backwards compatability both variables return the `default` value until v10 where `$page-content-max-width` is removed entirely in favor of `$page-content-max-width-default`.
+<br>
+
+Values from the new content-width map can be retrieved with the `get-page-content-max-width()` convenience function, e.g. `get-page-content-max-width('full')`.
 
 ## Version 8.3.0
 
