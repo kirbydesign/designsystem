@@ -31,7 +31,6 @@ Navigation arrows (desktop only) and selected slide indicators are now shown by 
 
 The `selectedSlide` event emitter has been removed and `slideChange` should be used as a direct replacement.
 
-
 <h3 id="styles-v9">Styles</h3>
 
 A new `xsmall` breakpoint (`320px`) has been introduced in the `$breakpoints` map exposed by Kirby. The `xsmall` breakpoint replaces the old `small` breakpoint, which is now `632px`.
