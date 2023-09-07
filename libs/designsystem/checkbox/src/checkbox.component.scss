@@ -10,7 +10,7 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
 
 @function get-vertical-padding($target-height, $size: '') {
   @if $size == 'xs' {
-    @return 0;
+    @return ($target-height - 16px) * 0.5;
   } @else {
     @return ($target-height - $checkbox-icon-size) * 0.5;
   }
@@ -113,7 +113,7 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
     .wrapper {
       position: relative;
       display: inline-flex;
-      align-items: center;
+      align-items: flex-start;
       vertical-align: top;
       padding: get-vertical-padding($default-checkbox-radio-size) 0;
       padding-right: $spacing-to-label; // Ensure same padding on right side of label
@@ -133,6 +133,8 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
 
     :host-context(.checkbox-xs),
     &.xs {
+      line-height: utils.line-height('xs');
+
       .wrapper {
         font-size: #{utils.font-size('s')};
 
