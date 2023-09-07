@@ -34,10 +34,6 @@ $padding-block-size-md: shared.$form-field-input-padding * 0.5;
   padding-block: $padding-block-size-md;
 }
 
-:host(.md.error) {
-  padding-block: calc(#{$padding-block-size-md} - 1px);
-}
-
 /* clean-css ignore:start */
 :host-context(kirby-item kirby-form-field[slot='end']) {
   &[type='number'] {
