@@ -8,6 +8,7 @@ This document provides information about breaking changes and their migrations f
   - [Avatar](#avatar-v9)
   - [Modal](#modal-v9)
   - [Experimental Alert](#experimental-alert-v9)
+  - [Slides](#slides-v9)
 - [Styles](#styles-v9)
 
 <h3 id="components-v9">Components</h3>
@@ -23,6 +24,10 @@ The following methods have been removed from the `modalController` and all uses 
 <h4 id="experimental-alert-v9">Experimental Alert</h4>
 
 The Experimental Alert has been fully removed and we recommend to use the normal alert instead.
+
+<h4 id="slides-v9">Slides</h4>
+
+The `selectedSlide` event emitter has been removed and `slideChange` should be used as a direct replacement.
 
 <h3 id="styles-v9">Styles</h3>
 

@@ -56,12 +56,6 @@ export class SlidesShowcaseComponent {
       description: 'Emits the active slide´s data and index',
       signature: '{slide: any, index: number}',
     },
-    {
-      name: 'selectedSlide',
-      description:
-        '**Deprecated: Will be removed in next major version. Use `slideChange` instead.',
-      signature: '',
-    },
   ];
 
   methods: ApiDescriptionMethod[] = [
