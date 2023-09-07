@@ -53,7 +53,7 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() title: string;
   @Input() slides: unknown[];
 
-  @Input() showNavigation?: boolean;
+  @Input() showNavigation: boolean = true;
 
   @Output() slideChange = new EventEmitter<SelectedSlide>();
 
@@ -64,11 +64,6 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnChanges {
 
   ngOnInit() {
     this._isTouch = this.platform.isTouch();
-    if (this.showNavigation === undefined) {
-      console.warn(
-        'Warning: kirby-slides.showNavigation will default to `true` in next major version and show navigation and pagination controls out of the box. Please set this property to `false` now if you want to opt-out of this future default.'
-      );
-    }
   }
 
   ngAfterViewInit() {

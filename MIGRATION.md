@@ -27,6 +27,8 @@ The Experimental Alert has been fully removed and we recommend to use the normal
 
 <h4 id="slides-v9">Slides</h4>
 
+Navigation arrows (desktop only) and selected slide indicators are now shown by default. It is possible to opt-out of this by setting `showNavigation` to `false`.
+
 The `selectedSlide` event emitter has been removed and `slideChange` should be used as a direct replacement.
 
 <h3 id="styles-v9">Styles</h3>
