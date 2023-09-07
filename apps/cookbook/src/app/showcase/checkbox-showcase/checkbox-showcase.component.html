@@ -70,6 +70,59 @@
   >
     <cookbook-checkbox-events-example #checkboxEventsExample></cookbook-checkbox-events-example>
   </cookbook-example-viewer>
+  <h2>ngForms</h2>
+  <p>
+    <code>kirby-checkbox</code>
+    implements the
+    <a href="https://angular.io/api/forms/ControlValueAccessor" target="_blank">
+      control value accessor interface
+    </a>
+    , which means it is ngForms-enabled. This allows you to use it directly in
+    <a href="https://angular.io/guide/forms" target="_blank">template driven</a>
+    and
+    <a href="https://angular.io/guide/reactive-forms" target="_blank">reactive forms</a>
+    .
+  </p>
+  <h3>Reactive Forms</h3>
+  <p>
+    To use checkbox in a reactive form, bind your form control to
+    <code>&lt;kirby-checkbox&gt;</code>
+    with simple data binding:
+  </p>
+  <!-- prettier-ignore -->
+  <cookbook-code-viewer language="html" [inlineLabel]="true">&lt;kirby-checkbox [formControl]="yourFormControl"&gt;
+  // or simply:
+  &lt;kirby-checkbox formControlName="yourFormControlName"&gt;
+  </cookbook-code-viewer>
+
+  <cookbook-example-viewer
+    [html]="reactiveFormExample.template"
+    [ts]="reactiveFormExample.codeSnippet"
+  >
+    <cookbook-checkbox-reactive-forms-example
+      #reactiveFormExample
+    ></cookbook-checkbox-reactive-forms-example>
+  </cookbook-example-viewer>
+  <h3>Template Driven Forms</h3>
+  <p>
+    To use checkbox in a template driven form, simply two-way bind your selected value to
+    <code>&lt;kirby-radio-group&gt;</code>
+    with
+    <code>ngModel</code>
+    :
+  </p>
+  <!-- prettier-ignore -->
+  <cookbook-code-viewer language="html" [inlineLabel]="true">&lt;kirby-checkbox [(ngModel)]="value"&gt;
+</cookbook-code-viewer>
+
+  <cookbook-example-viewer
+    [html]="templateDrivenFormExample.template"
+    [ts]="templateDrivenFormExample.codeSnippet"
+  >
+    <cookbook-checkbox-template-driven-forms-example
+      #templateDrivenFormExample
+    ></cookbook-checkbox-template-driven-forms-example>
+  </cookbook-example-viewer>
 
   <h2>Properties</h2>
   <cookbook-api-description-properties

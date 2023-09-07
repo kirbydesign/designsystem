@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { KirbyModule } from '@kirbydesign/designsystem';
 
@@ -10,7 +11,8 @@ import { CheckboxListExampleComponent } from './examples/list';
 import { CheckboxMultilineExampleComponent } from './examples/multiline';
 import { CheckboxSizesExampleComponent } from './examples/sizes';
 import { CheckboxStatesExampleComponent } from './examples/states';
-
+import { CheckboxTemplateDrivenFormsExampleComponent } from './examples/template-driven-forms';
+import { CheckboxReativeFormsExampleComponent } from './examples/reactive-forms';
 const COMPONENT_DECLARATIONS = [
   CheckboxDefaultExampleComponent,
   CheckboxListExampleComponent,
@@ -19,10 +21,12 @@ const COMPONENT_DECLARATIONS = [
   CheckboxSizesExampleComponent,
   CheckboxEventsExampleComponent,
   CheckboxMultilineExampleComponent,
+  CheckboxTemplateDrivenFormsExampleComponent,
+  CheckboxReativeFormsExampleComponent,
 ];
 
 @NgModule({
-  imports: [CommonModule, KirbyModule],
+  imports: [CommonModule, KirbyModule, FormsModule, ReactiveFormsModule],
   declarations: COMPONENT_DECLARATIONS,
   exports: COMPONENT_DECLARATIONS,
 })
