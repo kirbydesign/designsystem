@@ -44,7 +44,7 @@ export class SlidesShowcaseComponent {
     {
       name: 'showNavigation',
       description: 'Whether to show navigation and pagination controls for the slider.',
-      defaultValue: 'false',
+      defaultValue: 'true',
       type: ['boolean'],
     },
   ];
