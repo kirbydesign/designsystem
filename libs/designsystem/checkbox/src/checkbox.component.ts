@@ -75,34 +75,44 @@ export class CheckboxComponent implements ControlValueAccessor {
   private _onTouched = () => {};
 
   /**
-   * Writes a new value to the form control associated with the custom checkbox control.
-   * Part of the ControlValueAccessor interface.
+   * Sets the select's value. Part of the ControlValueAccessor interface
+   * required to integrate with Angular's core forms API.
+   *
+   * @param value New value to be written to the model.
    */
   writeValue(value: boolean): void {
     this.checked = value;
   }
 
   /**
-   * Registers a callback function that should be called when the value of the checkbox changes.
-   * Part of the ControlValueAccessor interface.
+   * Saves a callback function to be invoked when the select's value
+   * changes from user input. Part of the ControlValueAccessor interface
+   * required to integrate with Angular's core forms API.
+   *
+   * @param fn Callback to be triggered when the value changes.
    */
-  registerOnChange(fn: (value: boolean) => void): void {
+  registerOnChange(fn: any): void {
     this._onChange = fn;
   }
 
   /**
-   * Registers a callback function that should be called when the checkbox is touched.
-   * Part of the ControlValueAccessor interface.
+   * Saves a callback function to be invoked when the select is blurred
+   * by the user. Part of the ControlValueAccessor interface required
+   * to integrate with Angular's core forms API.
+   *
+   * @param fn Callback to be triggered when the component has been touched.
    */
-  registerOnTouched(fn: () => void): void {
+  registerOnTouched(fn: any): void {
     this._onTouched = fn;
   }
 
   /**
-   * Sets the disabled state of the checkbox.
-   * Part of the ControlValueAccessor interface.
+   * Disables the select. Part of the ControlValueAccessor interface required
+   * to integrate with Angular's core forms API.
+   *
+   * @param isDisabled Sets whether the component is disabled.
    */
-  setDisabledState(isDisabled: boolean): void {
+  setDisabledState?(isDisabled: boolean): void {
     this.disabled = isDisabled;
   }
 }
