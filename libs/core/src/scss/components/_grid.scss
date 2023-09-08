@@ -3,6 +3,14 @@
 
 /* stylelint-disable custom-property-pattern */
 
+$grid-sizes-to-breakpoint-map: (
+  'xs': xsmall,
+  'sm': small,
+  'md': medium,
+  'lg': large,
+  'xl': xlarge,
+);
+
 .kirby-grid {
   --kirby-grid-columns: 12;
   --kirby-grid-column-spacing: #{utils.size('m')};
@@ -115,29 +123,30 @@
   }
 }
 
-@mixin column-style($breakpoint, $size) {
-  &[#{$breakpoint}='#{$size}'],
-  &[data-#{$breakpoint}='#{$size}'] {
-    width: calc(100% * #{$size} / var(--kirby-grid-columns));
-    flex-grow: 0;
-    flex-basis: auto;
+@mixin column-style($breakpoint) {
+  @for $size from 1 through 12 {
+    &[#{$breakpoint}='#{$size}'],
+    &[data-#{$breakpoint}='#{$size}'] {
+      width: calc(100% * #{$size} / var(--kirby-grid-columns));
+      flex-grow: 0;
+      flex-basis: auto;
+    }
   }
 }
 
-@mixin breakpoint-style($breakpoint) {
-  @media (min-width: map.get(utils.$breakpoint-map, $breakpoint)) {
-    @include column-style($breakpoint, 1);
-    @include column-style($breakpoint, 2);
-    @include column-style($breakpoint, 3);
-    @include column-style($breakpoint, 4);
-    @include column-style($breakpoint, 5);
-    @include column-style($breakpoint, 6);
-    @include column-style($breakpoint, 7);
-    @include column-style($breakpoint, 8);
-    @include column-style($breakpoint, 9);
-    @include column-style($breakpoint, 10);
-    @include column-style($breakpoint, 11);
-    @include column-style($breakpoint, 12);
+@function get-breakpoint($grid-size) {
+  $breakpoint-map-size: map.get($grid-sizes-to-breakpoint-map, $grid-size);
+
+  @return map.get(utils.$breakpoints, $breakpoint-map-size);
+}
+
+@mixin breakpoint-style($grid-size) {
+  @if $grid-size == 'xs' {
+    @include column-style($grid-size);
+  } @else {
+    @media (min-width: get-breakpoint($grid-size)) {
+      @include column-style($grid-size);
+    }
   }
 }
 
@@ -154,13 +163,7 @@
   box-sizing: border-box !important;
   padding: calc(var(--kirby-grid-row-spacing) / 2) calc(var(--kirby-grid-column-spacing) / 2);
 
-  @include breakpoint-style('xs');
-
-  @include breakpoint-style('sm');
-
-  @include breakpoint-style('md');
-
-  @include breakpoint-style('lg');
-
-  @include breakpoint-style('xl');
+  @each $grid-size, $_ in $grid-sizes-to-breakpoint-map {
+    @include breakpoint-style($grid-size);
+  }
 }

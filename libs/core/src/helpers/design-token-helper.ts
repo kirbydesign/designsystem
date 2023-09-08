@@ -109,6 +109,10 @@ export class DesignTokenHelper {
   public static zLayer(key: keyof typeof styles.zLayers): string {
     return styles.zLayers[key];
   }
+
+  public static pageContentMaxWidth(key: keyof typeof styles.pageContentMaxWidths): string {
+    return styles.pageContentMaxWidths[key];
+  }
 }
 
 export type ThemeColorExtended =

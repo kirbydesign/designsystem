@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { Component, Input, ViewChild } from '@angular/core';
+import { IonicModule, IonItemSliding } from '@ionic/angular';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 
 import { ItemSlidingSide, ItemSwipeAction } from './item-sliding.types';
@@ -13,6 +13,7 @@ import { ItemSlidingSide, ItemSwipeAction } from './item-sliding.types';
   styleUrls: ['./item-sliding.component.scss'],
 })
 export class ItemSlidingComponent {
+  @ViewChild(IonItemSliding, { static: true }) itemSliding: IonItemSliding;
   @Input() swipeActions: ItemSwipeAction[];
 
   _side: 'start' | 'end' = 'start';
@@ -24,5 +25,10 @@ export class ItemSlidingComponent {
     // Using '>' instead of '!==';
     // will only return true when swipeActions is an array
     return this.swipeActions?.length > 0;
+  }
+
+  onSwipeActionClick(swipeAction: ItemSwipeAction): void {
+    swipeAction.onSelected();
+    this.itemSliding.close();
   }
 }
