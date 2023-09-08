@@ -12,6 +12,7 @@ export class IconRegistryService {
   constructor() {
     this.addDefaultIcons();
   }
+
   public addIcon(iconName: string, svgPath: string): void {
     if (!this.iconRegistry.has(iconName)) {
       this.iconRegistry.set(iconName, svgPath);

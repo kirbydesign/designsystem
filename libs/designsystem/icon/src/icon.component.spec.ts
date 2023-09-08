@@ -114,7 +114,7 @@ describe('IconComponent', () => {
 
     it('should use custom icon from IconRegistryService', () => {
       const fixture = createTestComponent(
-        `<kirby-icon name="customIconNameFromIconRegistry"></kirby-icon>`
+        `<kirby-icon customName="customIconNameFromIconRegistry"></kirby-icon>`
       );
 
       const iconRegistryService = TestBed.get(IconRegistryService);

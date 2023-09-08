@@ -3,7 +3,10 @@ import { kirbyIconSettings } from './kirby-icon-settings';
 
 describe('KirbyIconRegistryService', () => {
   let service: IconRegistryService;
-
+  const defaultIcons = kirbyIconSettings.icons;
+  const icon1 = { name: 'name1', svg: 'svg1' };
+  const icon2 = { name: 'name1', svg: 'svg2' };
+  const icon3 = { name: 'name3', svg: 'svg3' };
   beforeEach(() => {
     service = new IconRegistryService();
   });
@@ -39,20 +42,18 @@ describe('KirbyIconRegistryService', () => {
 
   describe('getIcons', () => {
     it('should return defaultIcons by default', () => {
-      const expectedIcons = kirbyIconSettings.icons;
-      expect(service.getIcons()).toEqual(expectedIcons);
+      expect(service.getIcons()).toEqual(defaultIcons);
     });
 
     it('should return registed icons', () => {
-      const defaultIcons = kirbyIconSettings.icons;
       const customIcons = [
         { name: 'name1', svg: 'svg1' },
         { name: 'name2', svg: 'svg2' },
       ];
-      const combinedIcons = defaultIcons.concat(customIcons);
+      const expectedIcons = [...defaultIcons, ...customIcons];
       service.addIcons(customIcons);
 
-      expect(service.getIcons()).toEqual(combinedIcons);
+      expect(service.getIcons()).toEqual(expectedIcons);
     });
   });
 
@@ -63,7 +64,7 @@ describe('KirbyIconRegistryService', () => {
       consoleWarnSpy = spyOn(console, 'warn');
     });
 
-    it('should add the icon to the registry', () => {
+    it('should return icon added to the registry', () => {
       service.addIcon('name1', 'svg1');
       const expectedIcon = { name: 'name1', svg: 'svg1' };
 
@@ -71,8 +72,6 @@ describe('KirbyIconRegistryService', () => {
     });
 
     it('should only add distinct icon names', () => {
-      const defaultIcons = kirbyIconSettings.icons;
-
       service.addIcon('name1', 'svg1');
       service.addIcon('name1', 'svg2');
       const expectedIcons = [...defaultIcons, { name: 'name1', svg: 'svg1' }];
@@ -88,11 +87,7 @@ describe('KirbyIconRegistryService', () => {
 
   describe('addIcons', () => {
     let consoleWarnSpy: jasmine.Spy;
-    const defaultIcons = kirbyIconSettings.icons;
 
-    const icon1 = { name: 'name1', svg: 'svg1' };
-    const icon2 = { name: 'name1', svg: 'svg2' };
-    const icon3 = { name: 'name3', svg: 'svg3' };
     const expectedIcons = [...defaultIcons, icon1, icon3];
 
     beforeAll(() => {

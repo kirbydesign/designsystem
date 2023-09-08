@@ -17,7 +17,8 @@ export enum IconSize {
   LG = 'lg',
 }
 
-const CUSTOME_NAME_DEPRECATION_WARNING = 'customName input property depcrecation warning';
+const CUSTOM_NAME_DEPRECATION_WARNING =
+  'Deprecation warning: The customName input property for "kirby-icon" is getting deprecated and will be removed in v10. We therefore highly recommend you to use the name input property for custom icons instead';
 
 @Component({
   selector: 'kirby-icon',
@@ -38,7 +39,7 @@ export class IconComponent implements OnChanges {
   @Input() name: string;
 
   @Input() set customName(customName: string) {
-    // console.warn(CUSTOME_NAME_DEPRECATION_WARNING);
+    console.warn(CUSTOM_NAME_DEPRECATION_WARNING);
     this._customName = customName;
   }
   get customName(): string {
