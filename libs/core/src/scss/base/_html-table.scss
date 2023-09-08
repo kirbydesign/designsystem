@@ -7,8 +7,6 @@ $row-height: 44px;
 // Color variables
 $default-divider-color: utils.get-color('medium');
 $border-bottom: 1px solid var(--kirby-divider-color, #{$default-divider-color});
-$hover-color: utils.get-color('light');
-$active-color: utils.get-color('semi-light');
 
 table.kirby-table {
   width: 100%;
