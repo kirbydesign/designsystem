@@ -16,6 +16,7 @@ import { EmptyStateComponent } from '@kirbydesign/designsystem/empty-state';
 import {
   PageActionsDirective,
   PageComponent,
+  PageModule,
   PageTitleDirective,
 } from '@kirbydesign/designsystem/page';
 import { FitHeadingDirective } from '@kirbydesign/designsystem/shared';
@@ -35,6 +36,7 @@ describe('ButtonComponent in Kirby Page', () => {
       RouterTestingModule,
       ButtonComponent,
       FitHeadingDirective,
+      PageModule,
     ],
     declarations: [PageActionsDirective, PageTitleDirective],
     providers: [
