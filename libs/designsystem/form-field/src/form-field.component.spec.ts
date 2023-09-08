@@ -136,6 +136,23 @@ describe('FormFieldComponent', () => {
       });
     });
 
+    describe('with message set to null', () => {
+      it('should render the message wrapper with the correct padding', () => {
+        spectator = createHost(
+          `<kirby-form-field [message]="null">
+             <input kirby-input />
+           </kirby-form-field>`
+        );
+        const messageWrapperElement = spectator.queryHost('.texts');
+        expect(messageWrapperElement).toHaveComputedStyle({
+          'padding-top': '2px',
+          'padding-left': size('s'),
+          'padding-right': size('s'),
+          'padding-bottom': '0px',
+        });
+      });
+    });
+
     const getAvailableTextWidth = () => {
       const componentWidth = spectator.element.getBoundingClientRect().width;
       const textWrapperElement = spectator.queryHost('.texts');
