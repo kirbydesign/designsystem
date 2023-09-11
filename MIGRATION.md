@@ -33,7 +33,7 @@ The grid **component** has been removed in favor of using the much more flexible
 
 <h4 id="modal-v9">Modal</h4>
 
-The following methods have been removed from the `modalController` and all uses of these method should be removed: `registerPresentingElement`, `scrollToTop`, `scrollToBottom`.
+The following methods have been removed from the `modalController` and all usages of these methods should be removed: `registerPresentingElement`, `scrollToTop`, `scrollToBottom`.
 
 <h4 id="slides-v9">Slides</h4>
 
