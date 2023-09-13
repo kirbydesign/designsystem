@@ -8,14 +8,13 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   templateUrl: './grid-showcase.component.html',
 })
 export class GridShowcaseComponent {
-  breakpoints = DesignTokenHelper.breakpoints;
-  breakpointKeyToShorthand = new Map<string, string>([
-    ['xsmall', 'xs'],
-    ['small', 'sm'],
-    ['medium', 'md'],
-    ['large', 'lg'],
-    ['xlarge', 'xl'],
-  ]);
+  shorthandToBreakpointMapping = {
+    xs: DesignTokenHelper.breakpoints.xsmall,
+    sm: DesignTokenHelper.breakpoints.small,
+    md: DesignTokenHelper.breakpoints.medium,
+    lg: DesignTokenHelper.breakpoints.large,
+    xl: DesignTokenHelper.breakpoints.xlarge,
+  };
 
   originalOrder() {
     // Force keyvalue pipe to sort items in original order instead of sorting by key

@@ -7,8 +7,8 @@
   <h3>Breakpoints</h3>
   <p>Each breakpoint is named using t-shirt sizes and maps to a defined screen size or bigger:</p>
   <ul>
-    <li *ngFor="let breakpoint of breakpoints | keyvalue: originalOrder">
-      {{ breakpointKeyToShorthand.get(breakpoint.key) }}: {{ breakpoint.value }}
+    <li *ngFor="let breakpoint of breakpointKeyToShorthandMapping | keyvalue: originalOrder">
+      {{ breakpoint.key }}: {{ breakpoint.value }}
     </li>
   </ul>
   <h3>HTML validity</h3>
