@@ -105,7 +105,6 @@ export class ModalHelper {
       backdropDismiss: config.flavor === 'compact' || config.interactWithBackground ? false : true,
       showBackdrop: !config.interactWithBackground,
       componentProps: { config: config },
-      swipeToClose: config.flavor === 'drawer',
       keyboardClose: false,
       canDismiss,
       enterAnimation,
