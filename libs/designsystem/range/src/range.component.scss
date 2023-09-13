@@ -79,6 +79,7 @@ ion-range {
     border-radius: 50%;
     width: $tick-width;
     height: $tick-height;
+    margin-top: 1px; // compensate for different height of ionic tick (8px)
     z-index: 1;
     margin-inline-start: -$tick-width * 0.5;
   }
