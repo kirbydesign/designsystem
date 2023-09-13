@@ -76,11 +76,11 @@ export class HeaderComponent implements AfterContentInit, OnInit {
   @ContentChild(HeaderTitleActionIconDirective, { read: TemplateRef })
   titleActionIconTemplate: TemplateRef<HeaderTitleActionIconDirective>;
 
-  @Input() title: string = null;
-  @Input() value: string = null;
-  @Input() valueUnit: string = null;
-  @Input() subtitle1: string = null;
-  @Input() subtitle2: string = null;
+  @Input() title?: string | null;
+  @Input() value?: string | null;
+  @Input() valueUnit?: string | null;
+  @Input() subtitle1?: string | null;
+  @Input() subtitle2?: string | null;
   @Input() hasInteractiveTitle?: boolean;
 
   @Output() titleClick = new EventEmitter<PointerEvent>();
