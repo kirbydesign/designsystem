@@ -69,8 +69,6 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
 ion-radio {
   @include interaction-state.apply-focus-part($part: 'container');
 
-  min-height: $radio-icon-size;
-  min-width: $radio-icon-size;
   padding: $radio-icon-padding;
   box-sizing: border-box; // Ensure padding is not added to radio width/height
 
