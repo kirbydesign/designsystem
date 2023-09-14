@@ -4,17 +4,19 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 const config = {
   selector: 'cookbook-checkbox-reactive-forms-example',
   template: `<form [formGroup]="form">
-  <kirby-checkbox formControlName="isChecked" text="Reactive Forms" [disabled]="!canSelectFavorite"></kirby-checkbox>
+  <kirby-checkbox 
+  formControlName="isChecked" 
+  text="Reactive Forms" 
+  [disabled]="!canSelectFavorite">
+  </kirby-checkbox>
 </form>
-
-<fieldset class="checkbox-xs">
+<fieldset>
   <legend>Configuration</legend>
   <kirby-checkbox
     [checked]="canSelectFavorite"
     (click)="toggleCanSelectFavorite()"
     text="Form field enabled"
   ></kirby-checkbox>
-
   <section class="form-state">
     <h4>Form state:</h4>
     <p>
@@ -26,13 +28,10 @@ const config = {
     </p>
   </section>
 </fieldset>`,
-  codeSnippet: `
-  const form = new FormGroup({
-    isChecked: new FormControl({ disabled: !this.canSelectFavorite }),
-  });
+  codeSnippet: `const form = new FormGroup({ isChecked: new FormControl({ disabled: !this.canSelectFavorite }), });
 
 const isCheckedControl = this.form.controls.get('isChecked'); 
-    
+
 toggleCanSelectFavorite() {
     this.canSelectFavorite = !this.canSelectFavorite;
 

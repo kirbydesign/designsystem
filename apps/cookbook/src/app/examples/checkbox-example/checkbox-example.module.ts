@@ -11,7 +11,6 @@ import { CheckboxListExampleComponent } from './examples/list';
 import { CheckboxMultilineExampleComponent } from './examples/multiline';
 import { CheckboxSizesExampleComponent } from './examples/sizes';
 import { CheckboxStatesExampleComponent } from './examples/states';
-import { CheckboxTemplateDrivenFormsExampleComponent } from './examples/template-driven-forms';
 import { CheckboxReativeFormsExampleComponent } from './examples/reactive-forms';
 const COMPONENT_DECLARATIONS = [
   CheckboxDefaultExampleComponent,
@@ -21,7 +20,6 @@ const COMPONENT_DECLARATIONS = [
   CheckboxSizesExampleComponent,
   CheckboxEventsExampleComponent,
   CheckboxMultilineExampleComponent,
-  CheckboxTemplateDrivenFormsExampleComponent,
   CheckboxReativeFormsExampleComponent,
 ];
 
