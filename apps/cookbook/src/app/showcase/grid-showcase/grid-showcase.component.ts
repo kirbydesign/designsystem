@@ -3,17 +3,19 @@ import { DesignTokenHelper } from '@kirbydesign/designsystem';
 import exampleHtml from '../../examples/grid-example/grid-example.component.html?raw';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
+const { breakpoints } = DesignTokenHelper;
+
 @Component({
   selector: 'cookbook-grid-showcase',
   templateUrl: './grid-showcase.component.html',
 })
 export class GridShowcaseComponent {
   shorthandToBreakpointMap = {
-    xs: DesignTokenHelper.breakpoints.xsmall,
-    sm: DesignTokenHelper.breakpoints.small,
-    md: DesignTokenHelper.breakpoints.medium,
-    lg: DesignTokenHelper.breakpoints.large,
-    xl: DesignTokenHelper.breakpoints.xlarge,
+    xs: breakpoints.xsmall,
+    sm: breakpoints.small,
+    md: breakpoints.medium,
+    lg: breakpoints.large,
+    xl: breakpoints.xlarge,
   };
 
   originalOrder() {
