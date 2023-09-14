@@ -11,6 +11,7 @@ import {
   HostListener,
   Input,
   OnDestroy,
+  OnInit,
   Output,
   QueryList,
   Renderer2,
@@ -43,7 +44,7 @@ import { KeyboardHandlerService } from './keyboard-handler.service';
     },
   ],
 })
-export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValueAccessor {
+export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValueAccessor, OnInit {
   static readonly OPEN_DELAY_IN_MS = 100;
   private state = OpenState.closed;
   private horizontalDirection: HorizontalDirection | `${HorizontalDirection}` =
@@ -58,6 +59,12 @@ export class DropdownComponent implements AfterViewInit, OnDestroy, ControlValue
   @Input() set items(value: string[] | any[]) {
     this._items = value;
     this._value = this.items[this.selectedIndex] || null;
+  }
+
+  ngOnInit() {
+    if (!this.placeholder || this.placeholder == '') {
+      this.placeholder = ' ';
+    }
   }
 
   private _selectedIndex: number = -1;
