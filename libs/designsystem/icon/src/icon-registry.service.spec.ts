@@ -1,14 +1,17 @@
 import { IconRegistryService } from './icon-registry.service';
+import { Icon } from './icon-settings';
 import { kirbyIconSettings } from './kirby-icon-settings';
 
 describe('KirbyIconRegistryService', () => {
   let service: IconRegistryService;
-  const defaultIcons = kirbyIconSettings.icons;
   const icon1 = { name: 'name1', svg: 'svg1' };
   const icon2 = { name: 'name1', svg: 'svg2' };
   const icon3 = { name: 'name3', svg: 'svg3' };
+
+  let defaultIcons: Icon[];
   beforeEach(() => {
     service = new IconRegistryService();
+    defaultIcons = kirbyIconSettings.icons;
   });
 
   it('should create service', () => {
@@ -87,7 +90,7 @@ describe('KirbyIconRegistryService', () => {
 
   describe('addIcons', () => {
     let consoleWarnSpy: jasmine.Spy;
-
+    defaultIcons = kirbyIconSettings.icons;
     const expectedIcons = [...defaultIcons, icon1, icon3];
 
     beforeAll(() => {
