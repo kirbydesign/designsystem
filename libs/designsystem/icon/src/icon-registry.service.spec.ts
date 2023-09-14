@@ -7,11 +7,11 @@ describe('KirbyIconRegistryService', () => {
   const icon1 = { name: 'name1', svg: 'svg1' };
   const icon2 = { name: 'name1', svg: 'svg2' };
   const icon3 = { name: 'name3', svg: 'svg3' };
+  const icon4 = { name: 'name2', svg: 'svg2' };
 
-  let defaultIcons: Icon[];
+  const defaultIcons: Icon[] = kirbyIconSettings.icons;
   beforeEach(() => {
     service = new IconRegistryService();
-    defaultIcons = kirbyIconSettings.icons;
   });
 
   it('should create service', () => {
@@ -24,19 +24,13 @@ describe('KirbyIconRegistryService', () => {
     });
 
     it('should return undefined if no icon match name', () => {
-      const icons = [
-        { name: 'name1', svg: 'svg1' },
-        { name: 'name2', svg: 'svg2' },
-      ];
+      const icons = [icon1, icon2];
       service.addIcons(icons);
       expect(service.getIcon('test')).toBeUndefined();
     });
 
     it('should return icon if name matches registered icon', () => {
-      const icons = [
-        { name: 'name1', svg: 'svg1' },
-        { name: 'name2', svg: 'svg2' },
-      ];
+      const icons = [icon1, icon4];
       service.addIcons(icons);
       expect(service.getIcon('name1')).toEqual(icons[0]);
       expect(service.getIcon('name2')).toEqual(icons[1]);
@@ -49,10 +43,7 @@ describe('KirbyIconRegistryService', () => {
     });
 
     it('should return registed icons', () => {
-      const customIcons = [
-        { name: 'name1', svg: 'svg1' },
-        { name: 'name2', svg: 'svg2' },
-      ];
+      const customIcons = [icon1, icon4];
       const expectedIcons = [...defaultIcons, ...customIcons];
       service.addIcons(customIcons);
 
@@ -69,7 +60,7 @@ describe('KirbyIconRegistryService', () => {
 
     it('should return icon added to the registry', () => {
       service.addIcon('name1', 'svg1');
-      const expectedIcon = { name: 'name1', svg: 'svg1' };
+      const expectedIcon = icon1;
 
       expect(service.getIcon('name1')).toEqual(expectedIcon);
     });
@@ -77,7 +68,7 @@ describe('KirbyIconRegistryService', () => {
     it('should only add distinct icon names', () => {
       service.addIcon('name1', 'svg1');
       service.addIcon('name1', 'svg2');
-      const expectedIcons = [...defaultIcons, { name: 'name1', svg: 'svg1' }];
+      const expectedIcons = [...defaultIcons, icon1];
       expect(service.getIcons()).toEqual(expectedIcons);
     });
 
@@ -90,9 +81,8 @@ describe('KirbyIconRegistryService', () => {
 
   describe('addIcons', () => {
     let consoleWarnSpy: jasmine.Spy;
-    defaultIcons = kirbyIconSettings.icons;
-    const expectedIcons = [...defaultIcons, icon1, icon3];
 
+    const expectedIcons = [...defaultIcons, icon1, icon3];
     beforeAll(() => {
       consoleWarnSpy = spyOn(console, 'warn');
     });
