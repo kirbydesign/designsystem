@@ -1,12 +1,29 @@
 import { Component } from '@angular/core';
+import { DesignTokenHelper } from '@kirbydesign/designsystem';
 import exampleHtml from '../../examples/grid-example/grid-example.component.html?raw';
 import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+
+const { breakpoints } = DesignTokenHelper;
 
 @Component({
   selector: 'cookbook-grid-showcase',
   templateUrl: './grid-showcase.component.html',
 })
 export class GridShowcaseComponent {
+  shorthandToBreakpointMap = {
+    xs: breakpoints.xsmall,
+    sm: breakpoints.small,
+    md: breakpoints.medium,
+    lg: breakpoints.large,
+    xl: breakpoints.xlarge,
+  };
+
+  originalOrder() {
+    // Force keyvalue pipe to sort items in original order instead of sorting by key
+    // https://github.com/angular/angular/issues/42490
+    return 0;
+  }
+
   exampleHtml = exampleHtml;
   gridProperties: ApiDescriptionProperty[] = [
     {
