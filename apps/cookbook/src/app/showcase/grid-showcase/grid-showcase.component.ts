@@ -8,7 +8,7 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
   templateUrl: './grid-showcase.component.html',
 })
 export class GridShowcaseComponent {
-  shorthandToBreakpointMapping = {
+  shorthandToBreakpointMap = {
     xs: DesignTokenHelper.breakpoints.xsmall,
     sm: DesignTokenHelper.breakpoints.small,
     md: DesignTokenHelper.breakpoints.medium,
