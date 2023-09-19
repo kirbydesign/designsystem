@@ -8,7 +8,7 @@
   --kirby-badge-elevation: #{utils.get-elevation(2)};
   --kirby-badge-position: absolute;
   --kirby-badge-top: -#{utils.size('xxs')};
-  --kirby-badge-right: #{utils.size('xxs')};
+  --kirby-badge-right: -#{utils.size('xxs')};
   --kirby-badge-z-index: #{utils.z('segment-badge')};
 
   &.sm {
@@ -95,8 +95,8 @@ ion-segment-button {
   --color-checked: var(--kirby-inputs-indicator-color);
   --indicator-box-shadow: none;
   --indicator-transform: none;
-  --padding-start: #{utils.size('m')};
-  --padding-end: #{utils.size('m')};
+  --padding-start: #{utils.size('s')};
+  --padding-end: #{utils.size('s')};
   --margin-bottom: 0;
   --margin-end: 0;
   --margin-start: 0;
@@ -114,7 +114,8 @@ ion-segment-button {
 
   &::part(native) {
     border-radius: #{utils.$border-radius-round};
-    overflow: hidden; // not strictly required but declared to be consistent
+    contain: none;
+    overflow: visible;
   }
 
   &::part(native)::after {
@@ -126,8 +127,4 @@ ion-segment-button {
   &::part(indicator) {
     padding-inline: 0;
   }
-}
-
-.badge-container {
-  position: relative;
 }
