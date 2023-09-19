@@ -71,7 +71,7 @@ ion-radio {
 
   min-height: $radio-icon-size;
   min-width: $radio-icon-size;
-  padding: 0 $radio-icon-padding;
+  padding: $radio-icon-padding;
   box-sizing: border-box; // Ensure padding is not added to radio width/height
 
   --border-width: 1px;
