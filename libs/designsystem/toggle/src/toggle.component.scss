@@ -47,3 +47,12 @@ ion-toggle {
   --handle-transition: #{utils.get-transition-duration('quick')};
   --handle-box-shadow: #{utils.get-elevation(2)};
 }
+
+/*
+* For now, Kirby defaults to the legacy ion-toggle to not force users into 
+* providing a label for each toggle. The legacy toggle has additional padding  
+* in Ionic v7 when inside an item that needs to be reset.
+*/
+ion-toggle.in-item.legacy-toggle {
+  padding: 0;
+}
