@@ -4,6 +4,7 @@
     [disabled]="disabled"
     mode="md"
     [attr.aria-labelledby]="text ? _labelId : null"
+    [legacy]="true"
   ></ion-radio>
   <span [id]="_labelId" *ngIf="text">{{ text }}</span>
 </div>
