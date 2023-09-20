@@ -1,9 +1,7 @@
 const { SassToTypescriptEngine } = require('../tools/sass-to-ts/dist/sass-to-ts.engine');
 
 const {
-  projects: {
-    cookbook: {
-      architect: {
+  targets: {
         build: {
           options: {
             customWebpackConfig: {
@@ -12,9 +10,7 @@ const {
           },
         },
       },
-    },
-  },
-} = require('../angular.json');
+} = require('../apps/cookbook/project.json');
 
 console.log('Transforming SCSS files to `*.styles.ts`:');
 console.log(filesToTransform);
