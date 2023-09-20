@@ -47,7 +47,7 @@ describe('CheckboxComponent', () => {
       expect(ionCheckbox).toHaveComputedStyle({
         '--size': checkboxIconSize,
         '--checkmark-color': getColor('white'),
-        '--background-checked': getColor('black'),
+        '--checkbox-background-checked': getColor('black'),
         '--border-color-checked': getColor('black'),
       });
     });
@@ -93,7 +93,7 @@ describe('CheckboxComponent', () => {
       spectator.detectChanges();
       expect(ionCheckbox).toHaveComputedStyle({
         '--checkmark-color': getColor('black'),
-        '--background-checked': getColor('success'),
+        '--checkbox-background-checked': getColor('success'),
         '--border-color-checked': getColor('success'),
       });
     });
@@ -163,8 +163,8 @@ describe('CheckboxComponent', () => {
         spectator.detectChanges();
         expect(ionCheckbox).toHaveComputedStyle({
           '--checkmark-color': getColor('semi-dark'),
-          '--background': getColor('semi-light'),
-          '--background-checked': getColor('semi-light'),
+          '--checkbox-background': getColor('semi-light'),
+          '--checkbox-background-checked': getColor('semi-light'),
           '--border-color': getColor('medium'),
           '--border-color-checked': getColor('semi-light'),
         });
