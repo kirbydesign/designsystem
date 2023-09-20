@@ -14,22 +14,25 @@
     "defaultBase": "stable"
   },
   "cli": {
-    "defaultCollection": "@nrwl/angular",
+    "defaultCollection": "@nx/angular",
     "analytics": false
   },
   "defaultProject": "designsystem",
   "generators": {
-    "@nrwl/angular:application": {
-      "style": "scss",
-      "unitTestRunner": "karma"
+    "@nx/angular:application": {
+      "style": "scss"
     },
-    "@nrwl/angular:library": {
-      "linter": "eslint",
-      "unitTestRunner": "karma"
+    "@nx/angular:library": {
+      "linter": "eslint"
     },
-    "@nrwl/angular:component": {
+    "@nx/angular:component": {
       "style": "scss"
     }
   },
-  "name": "."
+  "name": ".",
+  "targetDefaults": {
+    "lint": {
+      "inputs": ["default", "{workspaceRoot}/.eslintrc.json"]
+    }
+  }
 }
