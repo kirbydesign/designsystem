@@ -156,7 +156,6 @@ export class ModalWrapperComponent
     private renderer: Renderer2,
     private zone: NgZone,
     private resizeObserverService: ResizeObserverService,
-    private componentFactoryResolver: ComponentFactoryResolver,
     private windowRef: WindowRef,
     private platform: PlatformService,
     private canDismissHelper: CanDismissHelper
@@ -275,7 +274,7 @@ export class ModalWrapperComponent
     if (this.config.modalRoute) {
       this.onSiblingModalRouteActivated(this.config.siblingModalRouteActivated$);
       // Load component from modal-route inside router-outlet:
-      this.routerOutlet.activateWith(this.config.modalRoute, this.componentFactoryResolver);
+      this.routerOutlet.activateWith(this.config.modalRoute);
     }
   }
 
@@ -285,7 +284,7 @@ export class ModalWrapperComponent
       if (this.routerOutlet.isActivated) {
         this.routerOutlet.deactivate();
       }
-      this.routerOutlet.activateWith(route, this.componentFactoryResolver);
+      this.routerOutlet.activateWith(route);
     });
   }
 

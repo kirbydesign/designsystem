@@ -30,7 +30,7 @@ import {
   ViewChild,
   ViewChildren,
 } from '@angular/core';
-import { NavigationEnd, NavigationStart, Router, RouterEvent } from '@angular/router';
+import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 import {
   IonBackButtonDelegate,
   IonButtons,
@@ -319,13 +319,13 @@ export class PageComponent
   private ngOnDestroy$: Subject<void> = new Subject<void>();
   private contentScrolled$: Observable<ScrollDetail>;
 
-  private navigationStart$: Observable<RouterEvent> = this.router.events.pipe(
-    filter((event: RouterEvent) => event instanceof NavigationStart),
+  private navigationStart$: Observable<NavigationStart> = this.router.events.pipe(
+    filter((event): event is NavigationStart => event instanceof NavigationStart),
     takeUntil(this.ngOnDestroy$)
   );
 
-  private navigationEnd$: Observable<RouterEvent> = this.router.events.pipe(
-    filter((event: RouterEvent) => event instanceof NavigationEnd),
+  private navigationEnd$: Observable<NavigationEnd> = this.router.events.pipe(
+    filter((event): event is NavigationEnd => event instanceof NavigationEnd),
     takeUntil(this.ngOnDestroy$)
   );
 
