@@ -40,4 +40,8 @@ cookbook-example-configuration-wrapper {
     background-color: utils.get-color('success');
     color: utils.get-color('success-contrast');
   }
+
+  strong {
+    display: block;
+  }
 }

@@ -24,15 +24,15 @@ const config = {
     <p>
       <strong>Value:</strong> {{ formValue| json }}
       <br />
-      <strong>{{checkboxes[0].id}}:</strong><br>
+      <strong>{{checkboxes[0].id}}:</strong>
       <span [class.state-true]="form.get(checkboxes[0].id).valid">valid: {{ form.get(checkboxes[0].id).valid }}</span>
       <span [class.state-true]="form.get(checkboxes[0].id).enabled">enabled: {{ form.get(checkboxes[0].id).enabled }}</span>
       <span [class.state-true]="form.get(checkboxes[0].id).touched">touched: {{ form.get(checkboxes[0].id).touched }}</span>
-     <br><strong>{{checkboxes[1].id}}:</strong><br>
+     <strong>{{checkboxes[1].id}}:</strong>
      <span [class.state-true]="form.get(checkboxes[1].id).valid">valid: {{ form.get(checkboxes[1].id).valid }}</span>
       <span [class.state-true]="form.get(checkboxes[1].id).enabled">enabled: {{ form.get(checkboxes[1].id).enabled }}</span>
       <span [class.state-true]="form.get(checkboxes[1].id).touched">touched: {{ form.get(checkboxes[1].id).touched }}</span>
-      <br><strong>{{checkboxes[2].id}}:</strong><br>
+      <strong>{{checkboxes[2].id}}:</strong>
       <span [class.state-true]="form.get(checkboxes[2].id).valid">valid: {{ form.get(checkboxes[2].id).valid }}</span>
       <span [class.state-true]="form.get(checkboxes[2].id).enabled">enabled: {{ form.get(checkboxes[2].id).enabled }}</span>
       <span [class.state-true]="form.get(checkboxes[2].id).touched">touched: {{ form.get(checkboxes[2].id).touched }}</span>
