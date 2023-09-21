@@ -124,7 +124,7 @@
       "title": "Header",
       "paragraph": "Header is positioned at the top of a page, offering essential page context in a straightforward and topic-relevant manner.",
       "svgPath": "./assets/component-svg/Header-Kirby-Component-Overview.svg",
-      "route": "/home/showcase/form-field"
+      "route": "/home/showcase/header"
     },
     {
       "title": "Icons",
@@ -142,7 +142,7 @@
       "title": "Menu",
       "paragraph": "Menu appears on button interaction, offering relevant choices without permanent UI occupation.",
       "svgPath": "./assets/component-svg/Menu-Kirby-Component-Overview.svg",
-      "route": "/home/showcase/item"
+      "route": "/home/showcase/menu"
     },
     {
       "title": "Page",
