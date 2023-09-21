@@ -21,7 +21,7 @@ const COMPONENT_DECLARATIONS = [
   CheckboxSizesExampleComponent,
   CheckboxEventsExampleComponent,
   CheckboxMultilineExampleComponent,
-  CheckboxReativeFormsExampleComponent,
+  CheckboxReactiveFormsExampleComponent,
 ];
 
 @NgModule({
