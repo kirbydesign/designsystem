@@ -97,7 +97,7 @@ export class CheckboxComponent implements ControlValueAccessor {
   }
 
   /**
-   * Saves a callback function to be invoked when the select is blurred
+   * Saves a callback function to be invoked when the checkbox is blurred
    * by the user. Part of the ControlValueAccessor interface required
    * to integrate with Angular's core forms API.
    *
