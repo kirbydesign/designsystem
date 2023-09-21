@@ -1,8 +1,12 @@
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
-import { ItemSwipeActionType } from './item-sliding.types';
-import { ItemSlidingComponent, ItemSwipeAction } from './';
+import { ItemModule } from 'item/src';
+import {
+  ItemSlidingComponent,
+  ItemSwipeAction,
+  ItemSwipeActionType,
+} from '@kirbydesign/designsystem/item-sliding';
 
 const { getColor } = DesignTokenHelper;
 
@@ -11,6 +15,7 @@ describe('ItemSlidingComponent', () => {
 
   const createHost = createHostFactory({
     component: ItemSlidingComponent,
+    imports: [ItemModule],
   });
 
   let ionItemOptionsElement: HTMLIonItemOptionsElement;

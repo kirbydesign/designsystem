@@ -6,7 +6,6 @@ export const config: Config = {
   namespace: 'kirby',
   srcDir: './src/',
   plugins: [sass()],
-  globalStyle: './src/scss/_global-styles.scss',
   outputTargets: [
     angularOutputTarget({
       componentCorePackage: '@kirbydesign/core',
