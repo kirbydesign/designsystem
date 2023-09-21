@@ -5,6 +5,7 @@
     [disabled]="disabled"
     (ionChange)="onChecked($event.detail.checked)"
     [attr.aria-labelledby]="text ? _labelId : null"
+    (ionBlur)="onBlur()"
   ></ion-checkbox>
   <span [id]="_labelId" *ngIf="text">{{ text }}</span>
 </div>

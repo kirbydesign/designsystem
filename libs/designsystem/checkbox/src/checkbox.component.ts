@@ -63,9 +63,11 @@ export class CheckboxComponent implements ControlValueAccessor {
     this.checked = checked;
     this._onChange(this.checked);
     this.checkedChange.emit(this.checked);
-    this._onTouched();
   }
 
+  onBlur() {
+    this._onTouched();
+  }
   // IDs used for a11y labelling
   _labelId = UniqueIdGenerator.scopedTo('kirby-checkbox-label').next();
 

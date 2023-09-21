@@ -217,10 +217,10 @@ describe('CheckboxComponent', () => {
       expect(onChangeSpy).toHaveBeenCalledOnceWith(newValue);
     });
 
-    it('should call the registered onTouched function when onChecked is called', () => {
+    it('should call the registered onTouched function when onBlur is called', () => {
       const onTouchedSpy = jasmine.createSpy('onTouched');
       spectator.component.registerOnTouched(onTouchedSpy);
-      spectator.component.onChecked(true);
+      spectator.component.onBlur();
       expect(onTouchedSpy).toHaveBeenCalledTimes(1);
     });
 
