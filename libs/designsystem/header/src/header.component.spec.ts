@@ -51,7 +51,7 @@ describe('HeaderComponent', () => {
     });
 
     it(`should have correct subtitle1`, () => {
-      const subtitle1Element = spectator.query('.subtitle1');
+      const subtitle1Element = spectator.queryAll('.subtitle')[0];
 
       expect(subtitle1Element).toHaveExactTrimmedText(subtitle1);
       expect(subtitle1Element).toHaveComputedStyle({
@@ -60,7 +60,7 @@ describe('HeaderComponent', () => {
     });
 
     it(`should have subtitle2`, () => {
-      const subtitle2Element = spectator.query('.subtitle2');
+      const subtitle2Element = spectator.queryAll('.subtitle')[1];
 
       expect(subtitle2Element).toHaveExactTrimmedText(subtitle2);
       expect(subtitle2Element).toHaveComputedStyle({
