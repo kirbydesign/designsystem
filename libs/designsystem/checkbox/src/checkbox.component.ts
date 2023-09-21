@@ -69,7 +69,7 @@ export class CheckboxComponent implements ControlValueAccessor {
   // IDs used for a11y labelling
   _labelId = UniqueIdGenerator.scopedTo('kirby-checkbox-label').next();
 
-  // Initialize empty ControlValueAccessor callback functions
+  // Initialize default ControlValueAccessor callback functions (noop)
   // eslint-disable-next-line no-empty-function
   private _onChange: (value: boolean) => void = () => {};
   // eslint-disable-next-line no-empty-function
