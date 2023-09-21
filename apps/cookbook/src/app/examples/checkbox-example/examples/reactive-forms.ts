@@ -33,15 +33,15 @@ const config = {
 const isCheckedControl = this.form.controls.get('isChecked'); 
 
 toggleCanSelectFavorite() {
-    this.canSelectFavorite = !this.canSelectFavorite;
+  this.canSelectFavorite = !this.canSelectFavorite;
 
-    if (this.canSelectFavorite) {
-      this.form.get('isChecked')?.enable();
-    } else {
-      this.form.get('isChecked')?.disable();
-    }
+  if (this.canSelectFavorite) {
+    this.form.get('isChecked')?.enable();
+  } else {
+    this.form.get('isChecked')?.disable();
   }
-    `,
+}
+`,
 };
 
 @Component({
