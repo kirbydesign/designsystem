@@ -86,7 +86,7 @@
     },
     {
       "title": "Dropdown",
-      "paragraph": "Dropdowns display mul0ple choices for user selec0on and appear upon interac0on with an element.",
+      "paragraph": "Dropdowns display multiple choices for user selection and appear upon interaction with an element.",
       "svgPath": "./assets/component-svg/Dropdown-Kirby-Component-Overview.svg",
       "route": "/home/showcase/dropdown"
     },
@@ -116,8 +116,14 @@
     },
     {
       "title": "Form Field",
-      "paragraph": "Form Fields are interactive input elements that enable users to enter and edit information, offering diverse formats to accommodate various data input needs.",
+      "paragraph": "Form Fields are interactive input elements that enable users to enter and edit information.",
       "svgPath": "./assets/component-svg/Form-Field-Kirby-Component-Overview.svg",
+      "route": "/home/showcase/form-field"
+    },
+    {
+      "title": "Header",
+      "paragraph": "Header is positioned at the top of a page, offering essential page context in a straightforward and topic-relevant manner.",
+      "svgPath": "./assets/component-svg/Header-Kirby-Component-Overview.svg",
       "route": "/home/showcase/form-field"
     },
     {
@@ -130,6 +136,12 @@
       "title": "Item",
       "paragraph": "Item is a versatile placeholder that can contain various content elements, used for structuring other components.",
       "svgPath": "./assets/component-svg/Item-Kirby-Component-Overview.svg",
+      "route": "/home/showcase/item"
+    },
+    {
+      "title": "Menu",
+      "paragraph": "Menu appears on button interaction, offering relevant choices without permanent UI occupation.",
+      "svgPath": "./assets/component-svg/Menu-Kirby-Component-Overview.svg",
       "route": "/home/showcase/item"
     },
     {
