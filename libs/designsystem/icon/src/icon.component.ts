@@ -18,7 +18,7 @@ export enum IconSize {
 }
 
 const CUSTOM_NAME_DEPRECATION_WARNING =
-  'Deprecation warning: The customName input property for "kirby-icon" is getting deprecated and will be removed in v10. We therefore highly recommend you to use the name input property for custom icons instead';
+  'Deprecation warning: The customName input property for "kirby-icon" is deprecated and will be removed in v10. The name input property already supports icons registered via the iconRegistryService, and should be used instead of customName.';
 
 @Component({
   selector: 'kirby-icon',
