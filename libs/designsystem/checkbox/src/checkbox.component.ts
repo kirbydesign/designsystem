@@ -108,7 +108,7 @@ export class CheckboxComponent implements ControlValueAccessor {
   }
 
   /**
-   * Disables the select. Part of the ControlValueAccessor interface required
+   * Disables the checkbox. Part of the ControlValueAccessor interface required
    * to integrate with Angular's core forms API.
    *
    * @param isDisabled Sets whether the component is disabled.
