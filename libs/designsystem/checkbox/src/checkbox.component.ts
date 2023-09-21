@@ -86,7 +86,7 @@ export class CheckboxComponent implements ControlValueAccessor {
   }
 
   /**
-   * Saves a callback function to be invoked when the select's value
+   * Saves a callback function to be invoked when the checkbox's value
    * changes from user input. Part of the ControlValueAccessor interface
    * required to integrate with Angular's core forms API.
    *
