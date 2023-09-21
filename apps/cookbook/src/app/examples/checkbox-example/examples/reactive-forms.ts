@@ -1,46 +1,82 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 const config = {
   selector: 'cookbook-checkbox-reactive-forms-example',
   template: `<form [formGroup]="form">
-  <kirby-checkbox 
-  formControlName="isChecked" 
-  text="Reactive Forms" 
-  [disabled]="!canSelectFavorite">
-  </kirby-checkbox>
+  <ng-container *ngFor="let checkbox of checkboxes">
+  <kirby-checkbox
+      formControlName="{{ checkbox.id }}"
+      [text]="checkbox.label"
+      [disabled]="!canSelectFavorite"
+    ></kirby-checkbox>
+  </ng-container>
 </form>
-<fieldset>
-  <legend>Configuration</legend>
+<cookbook-example-configuration-wrapper>
   <kirby-checkbox
     [checked]="canSelectFavorite"
     (click)="toggleCanSelectFavorite()"
     text="Form field enabled"
   ></kirby-checkbox>
+  
   <section class="form-state">
     <h4>Form state:</h4>
     <p>
-      <strong>Value:</strong> {{ form.get('isChecked').value | json }}
+      <strong>Value:</strong> {{ formValue| json }}
       <br />
-      <span [class.state-true]="form.get('isChecked').valid">valid: {{ form.get('isChecked').valid }}</span>
-      <span [class.state-true]="form.get('isChecked').enabled">enabled: {{ form.get('isChecked').enabled }}</span>
-      <span [class.state-true]="form.get('isChecked').touched">touched: {{ form.get('isChecked').touched }}</span>
+      <strong>{{checkboxes[0].id}}:</strong><br>
+      <span [class.state-true]="form.get(checkboxes[0].id).valid">valid: {{ form.get(checkboxes[0].id).valid }}</span>
+      <span [class.state-true]="form.get(checkboxes[0].id).enabled">enabled: {{ form.get(checkboxes[0].id).enabled }}</span>
+      <span [class.state-true]="form.get(checkboxes[0].id).touched">touched: {{ form.get(checkboxes[0].id).touched }}</span>
+     <br><strong>{{checkboxes[1].id}}:</strong><br>
+     <span [class.state-true]="form.get(checkboxes[1].id).valid">valid: {{ form.get(checkboxes[1].id).valid }}</span>
+      <span [class.state-true]="form.get(checkboxes[1].id).enabled">enabled: {{ form.get(checkboxes[1].id).enabled }}</span>
+      <span [class.state-true]="form.get(checkboxes[1].id).touched">touched: {{ form.get(checkboxes[1].id).touched }}</span>
+      <br><strong>{{checkboxes[2].id}}:</strong><br>
+      <span [class.state-true]="form.get(checkboxes[2].id).valid">valid: {{ form.get(checkboxes[2].id).valid }}</span>
+      <span [class.state-true]="form.get(checkboxes[2].id).enabled">enabled: {{ form.get(checkboxes[2].id).enabled }}</span>
+      <span [class.state-true]="form.get(checkboxes[2].id).touched">touched: {{ form.get(checkboxes[2].id).touched }}</span>
+
     </p>
   </section>
-</fieldset>`,
-  codeSnippet: `const form = new FormGroup({ isChecked: new FormControl({ disabled: !this.canSelectFavorite }), });
+  </cookbook-example-configuration-wrapper>`,
+  codeSnippet: `checkboxes: { id: string; label: string }[] = [
+    { id: 'Bacon', label: 'Bacon' },
+    { id: 'Salami', label: 'Salami' },
+    { id: 'Tenderloin', label: 'Tenderloin' },
+  ];
+  
+  form: FormGroup;
+  canSelectFavorite = true;
+  formValue: any;
 
-const isCheckedControl = this.form.controls.get('isChecked'); 
 
-toggleCanSelectFavorite() {
-  this.canSelectFavorite = !this.canSelectFavorite;
+  constructor(private formBuilder: FormBuilder) {}
 
-  if (this.canSelectFavorite) {
-    this.form.get('isChecked')?.enable();
-  } else {
-    this.form.get('isChecked')?.disable();
+  ngOnInit(): void {
+    const checkboxControls = {};
+
+    this.checkboxes.forEach((checkbox) => {
+      checkboxControls[checkbox.id] = [false];
+    });
+
+    this.form = this.formBuilder.group(checkboxControls);
+
+    this.form.valueChanges.subscribe((value) => {
+      this.formValue = value;
+    });
   }
-}
+
+  toggleCanSelectFavorite() {
+    this.canSelectFavorite = !this.canSelectFavorite;
+
+    Object.keys(this.form.controls).forEach((controlName) => {
+      const control = this.form.get(controlName);
+      if (control) {
+        control.enabled ? control.disable() : control.enable();
+      }
+    });
+  }
 `,
 };
 
@@ -49,31 +85,44 @@ toggleCanSelectFavorite() {
   template: config.template,
   styleUrls: ['./ng-forms.shared.scss'],
 })
-export class CheckboxReativeFormsExampleComponent implements OnInit {
-  template: string = config.template.split('<fieldset>')[0];
+export class CheckboxReactiveFormsExampleComponent implements OnInit {
+  template: string = config.template.split('<cookbook-example-configuration-wrapper>')[0];
   codeSnippet: string = config.codeSnippet;
   form: FormGroup;
   canSelectFavorite = true;
-  favoriteRequired = true;
+
+  formValue: any;
+
+  checkboxes: { id: string; label: string }[] = [
+    { id: 'Bacon', label: 'Bacon' },
+    { id: 'Salami', label: 'Salami' },
+    { id: 'Tenderloin', label: 'Tenderloin' },
+  ];
 
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
-    this.form = this.formBuilder.group({
-      isChecked: [
-        { value: false, disabled: !this.canSelectFavorite },
-        this.favoriteRequired ? Validators.required : null,
-      ],
+    const checkboxControls = {};
+
+    this.checkboxes.forEach((checkbox) => {
+      checkboxControls[checkbox.id] = [false];
+    });
+
+    this.form = this.formBuilder.group(checkboxControls);
+
+    this.form.valueChanges.subscribe((value) => {
+      this.formValue = value;
     });
   }
 
   toggleCanSelectFavorite() {
     this.canSelectFavorite = !this.canSelectFavorite;
 
-    if (this.canSelectFavorite) {
-      this.form.get('isChecked')?.enable();
-    } else {
-      this.form.get('isChecked')?.disable();
-    }
+    Object.keys(this.form.controls).forEach((controlName) => {
+      const control = this.form.get(controlName);
+      if (control) {
+        control.enabled ? control.disable() : control.enable();
+      }
+    });
   }
 }

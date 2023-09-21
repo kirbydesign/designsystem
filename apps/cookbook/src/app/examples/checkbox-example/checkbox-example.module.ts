@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { KirbyModule } from '@kirbydesign/designsystem';
 
+import { ExamplesSharedModule } from '../examples.shared.module';
 import { CheckboxConfirmExampleComponent } from './examples/confirm';
 import { CheckboxDefaultExampleComponent } from './examples/default';
 import { CheckboxEventsExampleComponent } from './examples/events';
@@ -25,7 +26,7 @@ const COMPONENT_DECLARATIONS = [
 ];
 
 @NgModule({
-  imports: [CommonModule, KirbyModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, KirbyModule, FormsModule, ExamplesSharedModule, ReactiveFormsModule],
   declarations: COMPONENT_DECLARATIONS,
   exports: COMPONENT_DECLARATIONS,
 })
