@@ -142,18 +142,22 @@ describe('InputComponent', () => {
       });
     });
   });
-});
 
-describe('when configured with size medium', () => {
-  const createHost = createHostFactory({
-    component: InputComponent,
-  });
-  it('should render with correct height', () => {
-    const spectator = createHost(`
-    <input kirby-input size="md"/>
-    `);
-    expect(spectator.element).toHaveComputedStyle({
-      height: size('xl'),
+  describe('when configured with size medium', () => {
+    beforeEach(() => {
+      spectator.setInput('size', 'md');
+    });
+
+    it('should render with correct height', () => {
+      expect(spectator.element).toHaveComputedStyle({
+        height: size('xl'),
+      });
+    });
+
+    it('should render with correct height when hasError is true', () => {
+      spectator.setInput('hasError', true);
+
+      expect(spectator.element).toHaveComputedStyle({ height: size('xl') });
     });
   });
 });
