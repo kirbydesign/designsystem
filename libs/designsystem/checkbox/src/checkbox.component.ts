@@ -9,8 +9,9 @@ import {
   Output,
 } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
-import { UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+
+import { UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
 
 @Component({
   standalone: true,
