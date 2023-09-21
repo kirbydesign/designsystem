@@ -60,9 +60,7 @@ describe('KirbyIconRegistryService', () => {
 
     it('should return icon added to the registry', () => {
       service.addIcon('name1', 'svg1');
-      const expectedIcon = icon1;
-
-      expect(service.getIcon('name1')).toEqual(expectedIcon);
+      expect(service.getIcon('name1')).toEqual(icon1);
     });
 
     it('should only add distinct icon names', () => {
