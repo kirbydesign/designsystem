@@ -76,7 +76,7 @@ export class CheckboxComponent implements ControlValueAccessor {
   private _onTouched = () => {};
 
   /**
-   * Sets the select's value. Part of the ControlValueAccessor interface
+   * Sets the checkbox's value. Part of the ControlValueAccessor interface
    * required to integrate with Angular's core forms API.
    *
    * @param value New value to be written to the model.
