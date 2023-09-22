@@ -8,7 +8,7 @@
     },
     {
       "title": "Action Sheet",
-      "paragraph": "Action sheets are used as overflow menus that present choices related to the current context. They appear on top of the content and require manual dismissal before further interaction.",
+      "paragraph": "Action sheets are context menus that overlay content, need manual dismissal, and offer related choices to the current context",
       "svgPath": "./assets/component-svg/Action-Sheet-Kirby-Component-Overview.svg",
       "route": "/home/showcase/action-sheet"
     },
@@ -32,7 +32,7 @@
     },
     {
       "title": "Button",
-      "paragraph": "Buttons allow users to perform actions and make choices with a single tap. They are used throughout the interface for various purposes, such as submitting forms and triggering actions.",
+      "paragraph": "Buttons allow users to perform actions and make choices with a single tap, such as submitting forms and triggering actions.",
       "svgPath": "./assets/component-svg/Button-Kirby-Component-Overview.svg",
       "route": "/home/showcase/button"
     },
@@ -68,7 +68,7 @@
     },
     {
       "title": "Colors",
-      "paragraph": "Colors serves as a repository for Kirby's brand colors, guaranteeing uniform and harmonious color usage throughout design and content creation.",
+      "paragraph": "Colors serves as a repository for Kirby's brand colors, guaranteeing uniform and harmonious color usage.",
       "svgPath": "./assets/component-svg/Colors-Kirby-Component-Overview.svg",
       "route": "/home/showcase/colors"
     },
