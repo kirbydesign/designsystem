@@ -103,6 +103,14 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
     &::part(container) {
       padding: utils.size('xxxs'); // Spacing between checkmark and container box
     }
+
+    &::part(checkbox-wrapper) {
+      align-items: start;
+    }
+
+    span {
+      white-space: pre-line;
+    }
   }
 
   &.has-label {
@@ -148,5 +156,11 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
 
   &[slot='start'] {
     margin-inline-end: $spacing-to-label;
+  }
+}
+
+ion-checkbox.multiline {
+  &::part(container) {
+    margin-top: utils.size('xxxxs');
   }
 }
