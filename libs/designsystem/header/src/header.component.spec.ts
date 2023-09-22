@@ -120,6 +120,52 @@ describe('HeaderComponent', () => {
     });
   });
 
+  describe('with subtitle list', () => {
+    const subtitles = [
+      'Subtitle one first line with a very long text that wont fit on a small screen',
+      '&',
+      'Subtitle 2 second line',
+    ];
+    const subtitlesAsString = `['${subtitles.join("','")}']`;
+
+    let spectator: Spectator<HeaderComponent>;
+    beforeEach(() => {
+      spectator = createHost(`
+      <kirby-header title="title" [subtitle1]="${subtitlesAsString}">
+      </kirby-header>
+      `);
+    });
+
+    it(`should have correct subtitle1`, () => {
+      const subtitle1Element = spectator.queryAll<HTMLDivElement>('.subtitle')[0];
+      const firstSubtitle = subtitle1Element.firstElementChild;
+      const secondSubtitle = firstSubtitle.nextElementSibling;
+      const thirdSubtitle = secondSubtitle.nextElementSibling;
+
+      expect(firstSubtitle).toHaveExactTrimmedText(subtitles[0]);
+      expect(secondSubtitle).toHaveExactTrimmedText(subtitles[1]);
+      expect(thirdSubtitle).toHaveExactTrimmedText(subtitles[2]);
+    });
+
+    it(`should render all strings in subtitle list`, () => {
+      const subtitle1Element = spectator.queryAll<HTMLDivElement>('.subtitle')[0];
+      expect(subtitle1Element.children).toHaveLength(subtitles.length);
+    });
+
+    it(`should have correct wrapping of subtitles`, () => {
+      const subtitle1Element = spectator.queryAll<HTMLDivElement>('.subtitle')[0];
+      subtitle1Element.style.width = '200px';
+      const firstSubtitle = subtitle1Element.firstElementChild as HTMLElement;
+      const secondSubtitle = firstSubtitle.nextElementSibling as HTMLElement;
+      const thirdSubtitle = secondSubtitle.nextElementSibling as HTMLElement;
+      const firstLineOffsetBottom = firstSubtitle.offsetTop + firstSubtitle.offsetHeight;
+
+      expect(secondSubtitle.offsetTop).toBe(firstLineOffsetBottom);
+      expect(thirdSubtitle.offsetTop).toBe(firstLineOffsetBottom);
+      expect(secondSubtitle.offsetTop).toBe(thirdSubtitle.offsetTop);
+    });
+  });
+
   describe('with value', () => {
     const title = 'title';
     const value = '12.345,67';
