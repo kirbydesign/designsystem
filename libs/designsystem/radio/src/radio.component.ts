@@ -4,10 +4,12 @@ import {
   ElementRef,
   HostBinding,
   Input,
+  OnInit,
+  Renderer2,
   ViewChild,
 } from '@angular/core';
 import { IonRadio } from '@ionic/angular';
-import { UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
+import { DesignTokenHelper } from '@kirbydesign/core';
 
 @Component({
   selector: 'kirby-radio',
@@ -15,7 +17,10 @@ import { UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
   styleUrls: ['./radio.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RadioComponent {
+export class RadioComponent implements OnInit {
+  @ViewChild(IonRadio, { read: ElementRef, static: true })
+  private ionRadioElement?: ElementRef<HTMLIonRadioElement>;
+
   @Input()
   value: any;
 
@@ -38,12 +43,32 @@ export class RadioComponent {
     return this.ionRadioElement ? this.ionRadioElement.nativeElement.tabIndex : -1;
   }
 
+  /**
+   *
+   */
+  constructor(private renderer: Renderer2) {}
+
+  ngOnInit(): void {
+    this.setRadioWrapperPart();
+  }
+
   focus() {
     this.ionRadioElement && this.ionRadioElement.nativeElement.focus();
   }
 
-  _labelId = UniqueIdGenerator.scopedTo('kirby-radio-label').next();
-
-  @ViewChild(IonRadio, { read: ElementRef, static: true })
-  private ionRadioElement?: ElementRef<HTMLIonRadioElement>;
+  private setRadioWrapperPart() {
+    // Ensure ion-radio custom element has been defined (primarily when testing, but doesn't hurt):
+    customElements.whenDefined(this.ionRadioElement.nativeElement.localName).then(() => {
+      this.ionRadioElement.nativeElement.componentOnReady().then((radio) => {
+        const radioWrapper: HTMLElement = radio.shadowRoot.querySelector('.radio-wrapper');
+        if (
+          radioWrapper &&
+          radioWrapper.offsetHeight > parseInt(DesignTokenHelper.lineHeight('n'))
+        ) {
+          this.renderer.addClass(radio, 'multiline');
+          this.renderer.setAttribute(radioWrapper, 'part', 'radio-wrapper');
+        }
+      });
+    });
+  }
 }

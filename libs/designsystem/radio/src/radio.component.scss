@@ -20,7 +20,6 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
   &.has-label {
     display: block;
     line-height: utils.line-height('n');
-    white-space: pre-line;
 
     div.wrapper {
       position: relative;
@@ -46,7 +45,6 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
     ion-radio {
       position: static;
       margin-left: $spacing-to-edge;
-      margin-right: $spacing-to-label;
     }
   }
 
@@ -71,7 +69,6 @@ ion-radio {
 
   min-height: $radio-icon-size;
   min-width: $radio-icon-size;
-  padding: $radio-icon-padding;
   box-sizing: border-box; // Ensure padding is not added to radio width/height
 
   --border-width: 1px;
@@ -103,6 +100,10 @@ ion-radio {
     height: $radio-icon-mark-size;
   }
 
+  &::part(radio-wrapper) {
+    align-items: start;
+  }
+
   :host-context(kirby-radio-group.error),
   :host-context(kirby-radio-group.ng-touched.ng-invalid) {
     ion-radio,
@@ -120,6 +121,10 @@ ion-radio {
       }
     }
   }
+
+  span {
+    white-space: pre-line;
+  }
 }
 
 :host-context(kirby-item) {
@@ -131,5 +136,11 @@ ion-radio {
 
   &[slot='start'] {
     margin-inline-end: $spacing-to-label;
+  }
+}
+
+ion-radio.multiline {
+  &::part(container) {
+    margin-top: utils.size('xxxxs');
   }
 }
