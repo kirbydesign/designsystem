@@ -168,10 +168,6 @@ $margin-inline: utils.size('s');
 }
 
 .subtitle {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  max-width: 100%;
   display: flex;
   flex-flow: row wrap;
   column-gap: 0.25em; // width of space character in a font, mimics spaces between spans
