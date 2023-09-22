@@ -52,19 +52,45 @@ describe('HeaderComponent', () => {
 
     it(`should have correct subtitle1`, () => {
       const subtitle1Element = spectator.queryAll('.subtitle')[0];
+      const subtitle1SpanElement = subtitle1Element.firstElementChild;
+      const expectedFontSize = fontSize('s');
+      const spaceCharacterWidthInEm = 0.25;
+      const spaceCharacterWidthInPx = `${parseInt(expectedFontSize) * spaceCharacterWidthInEm}px`;
 
       expect(subtitle1Element).toHaveExactTrimmedText(subtitle1);
       expect(subtitle1Element).toHaveComputedStyle({
-        'font-size': fontSize('s'),
+        'font-size': expectedFontSize,
+        display: 'flex',
+        'flex-flow': 'row wrap',
+        'column-gap': spaceCharacterWidthInPx,
+      });
+
+      expect(subtitle1SpanElement).toHaveComputedStyle({
+        'text-overflow': 'ellipsis',
+        'white-space': 'nowrap',
+        overflow: 'hidden',
       });
     });
 
-    it(`should have subtitle2`, () => {
+    it(`should have correct subtitle2`, () => {
       const subtitle2Element = spectator.queryAll('.subtitle')[1];
+      const subtitle2SpanElement = subtitle2Element.firstElementChild;
+      const expectedFontSize = fontSize('s');
+      const spaceCharacterWidthInEm = 0.25;
+      const spaceCharacterWidthInPx = `${parseInt(expectedFontSize) * spaceCharacterWidthInEm}px`;
 
       expect(subtitle2Element).toHaveExactTrimmedText(subtitle2);
       expect(subtitle2Element).toHaveComputedStyle({
-        'font-size': fontSize('s'),
+        'font-size': expectedFontSize,
+        display: 'flex',
+        'flex-flow': 'row wrap',
+        'column-gap': spaceCharacterWidthInPx,
+      });
+
+      expect(subtitle2SpanElement).toHaveComputedStyle({
+        'text-overflow': 'ellipsis',
+        'white-space': 'nowrap',
+        overflow: 'hidden',
       });
     });
 
