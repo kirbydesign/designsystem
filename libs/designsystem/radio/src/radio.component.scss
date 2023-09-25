@@ -100,7 +100,7 @@ ion-radio {
     height: $radio-icon-mark-size;
   }
 
-  &::part(radio-wrapper) {
+  &::part(label) {
     align-items: start;
   }
 
