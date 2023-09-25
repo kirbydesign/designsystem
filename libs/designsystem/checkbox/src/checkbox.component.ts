@@ -8,15 +8,15 @@ import {
   Input,
   OnInit,
   Output,
-  Renderer2,
   ViewChild,
 } from '@angular/core';
 import { IonCheckbox, IonicModule } from '@ionic/angular';
-import { DesignTokenHelper } from '@kirbydesign/core';
+import { IonicElementPartService } from '@kirbydesign/designsystem/helpers';
 
 @Component({
   standalone: true,
   imports: [IonicModule, CommonModule],
+  providers: [IonicElementPartService],
   selector: 'kirby-checkbox',
   templateUrl: './checkbox.component.html',
   styleUrls: ['./checkbox.component.scss'],
@@ -56,29 +56,14 @@ export class CheckboxComponent implements OnInit {
 
   @Output() checkedChange = new EventEmitter<boolean>();
 
-  constructor(private renderer: Renderer2) {}
+  constructor(private ionicElementPartService: IonicElementPartService) {}
 
   ngOnInit(): void {
-    this.setCheckboxWrapperPart();
+    this.ionicElementPartService.setPart(this.ionCheckboxElement, '.checkbox-wrapper', 'label');
   }
 
   onChecked(checked: boolean): void {
     this.checked = checked;
     this.checkedChange.emit(this.checked);
-  }
-  private setCheckboxWrapperPart() {
-    // Ensure ion-checkbox custom element has been defined (primarily when testing, but doesn't hurt):
-    customElements.whenDefined(this.ionCheckboxElement.nativeElement.localName).then(() => {
-      this.ionCheckboxElement.nativeElement.componentOnReady().then((checkbox) => {
-        const checkboxWrapper: HTMLElement = checkbox.shadowRoot.querySelector('.checkbox-wrapper');
-        if (
-          checkboxWrapper &&
-          checkboxWrapper.offsetHeight > parseInt(DesignTokenHelper.lineHeight('n'))
-        ) {
-          this.renderer.addClass(checkbox, 'multiline');
-          this.renderer.setAttribute(checkboxWrapper, 'part', 'checkbox-wrapper');
-        }
-      });
-    });
   }
 }

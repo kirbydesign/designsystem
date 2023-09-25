@@ -104,7 +104,7 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
       padding: utils.size('xxxs'); // Spacing between checkmark and container box
     }
 
-    &::part(checkbox-wrapper) {
+    &::part(label) {
       align-items: start;
     }
 
