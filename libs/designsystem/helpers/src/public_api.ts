@@ -12,3 +12,4 @@ export * from './merge-deep';
 export * from './unique-id-generator.helper';
 export * from './line-clamp-helper';
 export * from './kirby-animation';
+export * from './set-element-part';
