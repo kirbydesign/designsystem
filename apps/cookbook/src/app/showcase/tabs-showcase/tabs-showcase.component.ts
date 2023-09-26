@@ -59,7 +59,13 @@ const routes: Routes = [
   properties: ApiDescriptionProperty[] = [
     {
       name: 'routerLink',
-      description: `Should be a reference to the route path hosting the contents of the tab. Path needs to be a child of your "tabs" path otherwise use manually navigation by handling the \`click\` event.`,
+      description: `Deprecated: use 'tab' instead. Should be a reference to the route path hosting the contents of the tab. Path needs to be a child of your "tabs" path, otherwise navigate manually by handling the \`click\` event.`,
+      defaultValue: '',
+      type: ['string'],
+    },
+    {
+      name: 'tab',
+      description: `Should be a reference to the route path hosting the contents of the tab. Path needs to be a child of your "tabs" path, otherwise navigate manually by handling the \`click\` event.`,
       defaultValue: '',
       type: ['string'],
     },

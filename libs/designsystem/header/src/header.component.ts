@@ -76,14 +76,22 @@ export class HeaderComponent implements AfterContentInit, OnInit {
   @ContentChild(HeaderTitleActionIconDirective, { read: TemplateRef })
   titleActionIconTemplate: TemplateRef<HeaderTitleActionIconDirective>;
 
-  @Input() title: string = null;
-  @Input() value: string = null;
-  @Input() valueUnit: string = null;
-  @Input() subtitle1: string = null;
-  @Input() subtitle2: string = null;
+  @Input() title?: string | null;
+  @Input() value?: string | null;
+  @Input() valueUnit?: string | null;
+  @Input() subtitle1?: string | string[] | null;
+  @Input() subtitle2?: string | string[] | null;
   @Input() hasInteractiveTitle?: boolean;
 
   @Output() titleClick = new EventEmitter<PointerEvent>();
+
+  get _subtitles1() {
+    return Array.isArray(this.subtitle1) ? this.subtitle1 : [this.subtitle1];
+  }
+
+  get _subtitles2() {
+    return Array.isArray(this.subtitle2) ? this.subtitle2 : [this.subtitle2];
+  }
 
   onTitleClick(event: PointerEvent) {
     this.titleClick.emit(event);
