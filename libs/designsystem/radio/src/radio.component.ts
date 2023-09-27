@@ -46,14 +46,14 @@ export class RadioComponent implements OnInit {
   constructor(private ionicElementPartService: IonicElementPartService) {}
 
   ngOnInit(): void {
-    this.setPartIfMultilineLabel();
+    this.setPartOnMultilineLabel();
   }
 
   focus() {
     this.ionRadioElement && this.ionRadioElement.nativeElement.focus();
   }
 
-  setPartIfMultilineLabel() {
+  setPartOnMultilineLabel() {
     this.ionicElementPartService.setPart(
       this.ionRadioElement,
       '.radio-wrapper',
