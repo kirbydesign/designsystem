@@ -59,11 +59,28 @@ export class CheckboxComponent implements OnInit {
   constructor(private ionicElementPartService: IonicElementPartService) {}
 
   ngOnInit(): void {
-    this.ionicElementPartService.setPart(this.ionCheckboxElement, '.checkbox-wrapper', 'label');
+    this.setPartOnMultilineLabel();
   }
 
   onChecked(checked: boolean): void {
     this.checked = checked;
     this.checkedChange.emit(this.checked);
+  }
+
+  setPartOnMultilineLabel() {
+    this.ionicElementPartService.setPart(
+      this.ionCheckboxElement,
+      '.checkbox-wrapper',
+      'label',
+      (part) => {
+        const labelHeight = part.clientHeight;
+        const labelLineHeight = parseInt(
+          window.getComputedStyle(part).getPropertyValue('line-height')
+        );
+        const multiLineLabel = labelHeight > labelLineHeight;
+
+        return multiLineLabel;
+      }
+    );
   }
 }

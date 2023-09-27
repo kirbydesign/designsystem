@@ -158,9 +158,3 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
     margin-inline-end: $spacing-to-label;
   }
 }
-
-ion-checkbox.multiline {
-  &::part(container) {
-    margin-top: utils.size('xxxxs');
-  }
-}
