@@ -46,10 +46,31 @@ export class RadioComponent implements OnInit {
   constructor(private ionicElementPartService: IonicElementPartService) {}
 
   ngOnInit(): void {
-    this.ionicElementPartService.setPart(this.ionRadioElement, '.radio-wrapper', 'label');
+    this.setPartIfMultilineLabel();
   }
 
   focus() {
     this.ionRadioElement && this.ionRadioElement.nativeElement.focus();
+  }
+
+  setPartIfMultilineLabel() {
+    this.ionicElementPartService.setPart(
+      this.ionRadioElement,
+      '.radio-wrapper',
+      'label',
+      (part) => {
+        const labelHeight = part.clientHeight;
+        const labelLineHeight = parseInt(
+          window.getComputedStyle(part).getPropertyValue('line-height')
+        );
+        const multiLineLabel = labelHeight > labelLineHeight;
+
+        if (multiLineLabel) {
+          this.ionRadioElement.nativeElement.classList.add('multiline');
+        }
+
+        return multiLineLabel;
+      }
+    );
   }
 }
