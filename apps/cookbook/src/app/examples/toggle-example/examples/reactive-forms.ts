@@ -31,17 +31,18 @@ const config = {
   codeSnippet: `constructor(private fb: FormBuilder) {}
 
 ngOnInit() {
-    this.form = this.fb.group({ myToggle: [false] });
+  this.form = this.fb.group({ myToggle: [false] });
 }
 
 toggleEnabled(checked: boolean) {
-    this.canSelectToggle = checked;
+  this.canSelectToggle = checked;
 
-    if (this.canSelectToggle) {
-      this.form.get('myToggle')?.enable();
-    } else {
-      this.form.get('myToggle')?.disable();
-    }
+  if (this.canSelectToggle) {
+    this.form.get('myToggle')?.enable();
+  } 
+  else {
+    this.form.get('myToggle')?.disable();
+  }
 }`,
 };
 
