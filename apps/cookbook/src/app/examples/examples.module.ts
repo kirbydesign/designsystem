@@ -39,6 +39,7 @@ import { RangeExampleModule } from './range-example/range-example.module';
 import { SectionHeaderExampleModule } from './section-header-example/section-header-example.module';
 import { SegmentedControlExampleModule } from './segmented-control-example/segmented-control-example.module';
 import { ToggleButtonExampleModule } from './toggle-button-example/toggle-button-example.module';
+import { ToggleExampleModule } from './toggle-example/toggle-example.module';
 import { VirtualScrollExampleModule } from './virtual-scroll-example/virtual-scroll-example.module';
 import { MenuExampleModule } from './menu-example/menu-example.module';
 
@@ -58,6 +59,7 @@ const IMPORTS = [
   AvatarExampleModule,
   FlagExampleModule,
   ToggleButtonExampleModule,
+  ToggleExampleModule,
   AccordionExampleModule,
   RadioExampleModule,
   CheckboxExampleModule,
