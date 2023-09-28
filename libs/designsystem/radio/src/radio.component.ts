@@ -30,7 +30,7 @@ export class RadioComponent implements OnInit {
 
   @HostBinding('class')
   @Input()
-  size?: 'xs' | 'sm' | 'md';
+  size?: 'xs' | 'sm' | 'md' = 'md';
 
   @Input()
   disabled: boolean;
@@ -46,31 +46,10 @@ export class RadioComponent implements OnInit {
   constructor(private ionicElementPartService: IonicElementPartService) {}
 
   ngOnInit(): void {
-    this.setPartOnMultilineLabel();
+    this.ionicElementPartService.setPart('label', this.ionRadioElement, '.radio-wrapper');
   }
 
   focus() {
     this.ionRadioElement && this.ionRadioElement.nativeElement.focus();
-  }
-
-  setPartOnMultilineLabel() {
-    this.ionicElementPartService.setPart(
-      this.ionRadioElement,
-      '.radio-wrapper',
-      'label',
-      (part) => {
-        const labelHeight = part.clientHeight;
-        const labelLineHeight = parseInt(
-          window.getComputedStyle(part).getPropertyValue('line-height')
-        );
-        const multiLineLabel = labelHeight > labelLineHeight;
-
-        if (multiLineLabel) {
-          this.ionRadioElement.nativeElement.classList.add('multiline');
-        }
-
-        return multiLineLabel;
-      }
-    );
   }
 }

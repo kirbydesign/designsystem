@@ -19,32 +19,17 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
 
   &.has-label {
     display: block;
-    line-height: utils.line-height('n');
-
-    div.wrapper {
-      position: relative;
-      display: inline-flex;
-      align-items: flex-start;
-      vertical-align: top;
-      padding: get-vertical-padding($default-checkbox-radio-size) 0;
-      padding-right: $spacing-to-label; // Ensure same padding on right side of label
-    }
 
     @each $size, $height in utils.$checkbox-radio-sizes {
       :host-context(.radio-#{$size}),
       &.#{$size} {
-        .wrapper {
+        ion-radio::part(label) {
           $vertical-padding: get-vertical-padding($height);
 
           padding-top: $vertical-padding;
           padding-bottom: $vertical-padding;
         }
       }
-    }
-
-    ion-radio {
-      position: static;
-      margin-left: $spacing-to-edge;
     }
   }
 
@@ -67,19 +52,11 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
 ion-radio {
   @include interaction-state.apply-focus-part($part: 'container');
 
-  min-height: $radio-icon-size;
-  min-width: $radio-icon-size;
   box-sizing: border-box; // Ensure padding is not added to radio width/height
 
   --border-width: 1px;
   --color: #{utils.get-color('semi-dark')};
   --color-checked: #{utils.get-color('success')};
-
-  &::part(container) {
-    transition: interaction-state.transition();
-    transition-property: background-color;
-    background-color: utils.get-color('white');
-  }
 
   @include interaction-state.apply-hover {
     &::part(container) {
@@ -95,6 +72,13 @@ ion-radio {
     }
   }
 
+  &::part(container) {
+    transition: interaction-state.transition();
+    transition-property: background-color;
+    background-color: utils.get-color('white');
+    margin-top: utils.size('xxxxs');
+  }
+
   &::part(mark) {
     width: $radio-icon-mark-size;
     height: $radio-icon-mark-size;
@@ -102,6 +86,9 @@ ion-radio {
 
   &::part(label) {
     align-items: start;
+    padding-left: $spacing-to-edge;
+    padding-right: $spacing-to-label;
+    line-height: utils.line-height('n');
   }
 
   :host-context(kirby-radio-group.error),
@@ -136,11 +123,5 @@ ion-radio {
 
   &[slot='start'] {
     margin-inline-end: $spacing-to-label;
-  }
-}
-
-ion-radio.multiline {
-  &::part(container) {
-    margin-top: utils.size('xxxxs');
   }
 }
