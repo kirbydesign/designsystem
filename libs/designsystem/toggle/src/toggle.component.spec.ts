@@ -59,4 +59,32 @@ describe('ToggleComponent', () => {
       expect(ionToggle.componentInstance.disabled).toBeTrue();
     });
   });
+
+  describe('implementing ControlValueAccessor interface', () => {
+    it('should update the value when writeValue is called', () => {
+      const newValue = true;
+      spectator.component.writeValue(newValue);
+      expect(spectator.component.checked).toBe(newValue);
+    });
+
+    it('should call the registered onChange function when onCheckedChange is called', () => {
+      const onChangeSpy = jasmine.createSpy('onChange');
+      const newValue = true;
+      spectator.component.registerOnChange(onChangeSpy);
+      spectator.component.onCheckedChange(newValue);
+      expect(onChangeSpy).toHaveBeenCalledOnceWith(newValue);
+    });
+
+    it('should call the registered onTouched function when onCheckedChange is called', () => {
+      const onTouchedSpy = jasmine.createSpy('onTouched');
+      spectator.component.registerOnTouched(onTouchedSpy);
+      spectator.component._onInactive();
+      expect(onTouchedSpy).toHaveBeenCalledTimes(1);
+    });
+    it('should update the disabled state when setDisabledState is called', () => {
+      const isDisabled = true;
+      spectator.component.setDisabledState(isDisabled);
+      expect(spectator.component.disabled).toBe(isDisabled);
+    });
+  });
 });
