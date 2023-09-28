@@ -78,7 +78,7 @@ toggleRequired(required: boolean) {
 @Component({
   selector: config.selector,
   template: config.template,
-  styleUrls: ['./ng-forms.shared.scss'],
+  styleUrls: ['../../ng-forms.shared.scss'],
   // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: { '[class.checkbox-xs]': 'true' }, // Extra small checkboxes
 })

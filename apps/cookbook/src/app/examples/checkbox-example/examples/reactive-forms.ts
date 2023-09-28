@@ -83,7 +83,14 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  styleUrls: ['./ng-forms.shared.scss'],
+  styleUrls: ['../../ng-forms.shared.scss'],
+  styles: [
+    `
+      strong {
+        display: block;
+      }
+    `,
+  ],
 })
 export class CheckboxReactiveFormsExampleComponent implements OnInit {
   template: string = config.template.split('<cookbook-example-configuration-wrapper>')[0];
