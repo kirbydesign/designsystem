@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   ElementRef,
@@ -17,7 +18,7 @@ import { IonicElementPartService } from '@kirbydesign/designsystem/helpers';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [IonicElementPartService],
 })
-export class RadioComponent implements OnInit {
+export class RadioComponent implements AfterViewInit {
   @ViewChild(IonRadio, { read: ElementRef, static: true })
   private ionRadioElement?: ElementRef<HTMLIonRadioElement>;
 
@@ -45,7 +46,7 @@ export class RadioComponent implements OnInit {
 
   constructor(private ionicElementPartService: IonicElementPartService) {}
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.ionicElementPartService.setPart('label', this.ionRadioElement, '.radio-wrapper');
   }
 
