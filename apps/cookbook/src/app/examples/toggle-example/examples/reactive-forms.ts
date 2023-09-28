@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 const config = {
   selector: 'cookbook-toggle-reactive-forms-example',
   template: `<form [formGroup]="form">
-<kirby-toggle formControlName="myToggle" (checkedChange)="onCheckedChange($event)" (blur)="onBlur($event)" [disabled]="!canSelectToggle"></kirby-toggle>
+<kirby-toggle formControlName="myToggle" (checkedChange)="onCheckedChange($event)" [disabled]="!canSelectToggle"></kirby-toggle>
 </form>
 <cookbook-example-configuration-wrapper>
 
@@ -53,6 +53,14 @@ toggleEnabled(checked: boolean) {
   selector: config.selector,
   styleUrls: ['../toggle-example.component.scss', './ng-forms.shared.scss'],
   template: config.template,
+  styles: [
+    `
+      :host {
+        display: flex;
+        align-items: center;
+      }
+    `,
+  ],
 })
 export class ToggleReactiveFormsExampleComponent implements OnInit {
   template = config.template.split('<cookbook-example-configuration-wrapper>')[0];
@@ -70,8 +78,6 @@ export class ToggleReactiveFormsExampleComponent implements OnInit {
     console.log(`Value:`, this.form.get('myToggle')?.value);
     // this.form.get('myToggle')?.markAsTouched();
   }
-
-  onBlur() {}
 
   toggleEnabled(checked: boolean) {
     this.canSelectToggle = checked;

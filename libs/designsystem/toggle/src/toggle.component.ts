@@ -4,6 +4,7 @@ import {
   Component,
   EventEmitter,
   forwardRef,
+  HostListener,
   Input,
   Output,
 } from '@angular/core';
@@ -31,6 +32,11 @@ export class ToggleComponent implements ControlValueAccessor {
 
   @Output() checkedChange = new EventEmitter<boolean>();
 
+  @HostListener('ionBlur')
+  _onBlur() {
+    this._onTouched();
+  }
+
   _pressed = false;
 
   onCheckedChange(checked: boolean): void {
@@ -45,7 +51,6 @@ export class ToggleComponent implements ControlValueAccessor {
 
   _onInactive() {
     this._pressed = false;
-    this._onTouched();
   }
 
   // Initialize default ControlValueAccessor callback functions (noop)

@@ -78,7 +78,7 @@ describe('ToggleComponent', () => {
     it('should call the registered onTouched function when onCheckedChange is called', () => {
       const onTouchedSpy = jasmine.createSpy('onTouched');
       spectator.component.registerOnTouched(onTouchedSpy);
-      spectator.component._onInactive();
+      spectator.component._onBlur();
       expect(onTouchedSpy).toHaveBeenCalledTimes(1);
     });
     it('should update the disabled state when setDisabledState is called', () => {
