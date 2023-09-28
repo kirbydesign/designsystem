@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   ElementRef,
@@ -22,7 +23,7 @@ import { IonicElementPartService } from '@kirbydesign/designsystem/helpers';
   styleUrls: ['./checkbox.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CheckboxComponent implements OnInit {
+export class CheckboxComponent implements AfterViewInit {
   @ViewChild(IonCheckbox, { read: ElementRef, static: true })
   private ionCheckboxElement?: ElementRef<HTMLIonCheckboxElement>;
 
@@ -58,7 +59,7 @@ export class CheckboxComponent implements OnInit {
 
   constructor(private ionicElementPartService: IonicElementPartService) {}
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.ionicElementPartService.setPart('label', this.ionCheckboxElement, '.checkbox-wrapper');
   }
 
