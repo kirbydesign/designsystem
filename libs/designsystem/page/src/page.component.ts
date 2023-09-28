@@ -391,9 +391,9 @@ export class PageComponent
   ngOnInit(): void {
     this.removeWrapper();
     this.ionicElementPartService.setPart(
+      'background',
       this.ionToolbarElement,
-      '.toolbar-background',
-      'background'
+      '.toolbar-background'
     );
 
     const actionGroupConfig: ActionGroupConfig = {

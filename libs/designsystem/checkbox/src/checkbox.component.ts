@@ -59,7 +59,7 @@ export class CheckboxComponent implements OnInit {
   constructor(private ionicElementPartService: IonicElementPartService) {}
 
   ngOnInit(): void {
-    this.ionicElementPartService.setPart(this.ionCheckboxElement, '.checkbox-wrapper', 'label');
+    this.ionicElementPartService.setPart('label', this.ionCheckboxElement, '.checkbox-wrapper');
   }
 
   onChecked(checked: boolean): void {
