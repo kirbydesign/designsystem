@@ -1,11 +1,9 @@
-<div class="wrapper">
-  <ion-checkbox
-    mode="md"
-    [checked]="checked"
-    [disabled]="disabled"
-    (ionChange)="onChecked($event.detail.checked)"
-    labelPlacement="end"
-  >
-    <span *ngIf="text">{{ text }}</span>
-  </ion-checkbox>
-</div>
+<ion-checkbox
+  mode="md"
+  [checked]="checked"
+  [disabled]="disabled"
+  (ionChange)="onChecked($event.detail.checked)"
+  labelPlacement="end"
+>
+  <span *ngIf="text">{{ text }}</span>
+</ion-checkbox>

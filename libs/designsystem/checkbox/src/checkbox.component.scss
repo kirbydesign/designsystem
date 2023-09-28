@@ -6,7 +6,6 @@ $border-radius: 6px;
 $checkbox-icon-size: utils.size('m');
 $spacing-to-edge: map.get(utils.$checkbox-radio-spacing, 'to-edge');
 $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
-$default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
 
 @function get-vertical-padding($target-height) {
   @return ($target-height - $checkbox-icon-size) * 0.5;
@@ -97,15 +96,15 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
     --border-color: #{utils.get-color('semi-dark')};
     --border-radius: #{$border-radius};
 
-    margin-left: $spacing-to-edge;
-    margin-right: $spacing-to-label;
-
     &::part(container) {
       padding: utils.size('xxxs'); // Spacing between checkmark and container box
     }
 
     &::part(label) {
       align-items: start;
+      padding-left: $spacing-to-edge;
+      padding-right: $spacing-to-label;
+      line-height: utils.line-height('n');
     }
 
     span {
@@ -115,34 +114,17 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
 
   &.has-label {
     display: block;
-    line-height: utils.line-height('n');
-    white-space: pre-line;
-
-    .wrapper {
-      position: relative;
-      display: inline-flex;
-      align-items: flex-start;
-      vertical-align: top;
-      padding: get-vertical-padding($default-checkbox-radio-size) 0;
-      padding-right: $spacing-to-label; // Ensure same padding on right side of label
-    }
 
     @each $size, $height in utils.$checkbox-radio-sizes {
       :host-context(.checkbox-#{$size}),
       &.#{$size} {
-        .wrapper {
+        ion-checkbox::part(label) {
           $vertical-padding: get-vertical-padding($height);
 
           padding-top: $vertical-padding;
           padding-bottom: $vertical-padding;
         }
       }
-    }
-
-    ion-checkbox {
-      position: static;
-      flex-shrink: 0;
-      flex-grow: 0;
     }
   }
 }

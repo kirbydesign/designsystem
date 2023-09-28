@@ -24,13 +24,13 @@ describe('CheckboxComponent', () => {
 
   let spectator: Spectator<CheckboxComponent>;
   let ionCheckbox: HTMLIonCheckboxElement;
-  let label: HTMLSpanElement;
+  let label: HTMLLabelElement;
 
   beforeEach(async () => {
     spectator = createComponent({ props: { text: 'test' } });
     ionCheckbox = spectator.query('ion-checkbox');
     await TestHelper.whenReady(ionCheckbox);
-    label = spectator.query('span');
+    label = ionCheckbox.shadowRoot.querySelector('label');
   });
 
   it('should create', () => {
@@ -53,9 +53,9 @@ describe('CheckboxComponent', () => {
     });
 
     it('should have correct vertical spacing', () => {
-      expect(ionCheckbox).toHaveComputedStyle({
-        'margin-left': size('s'),
-        'margin-right': size('xs'),
+      expect(label).toHaveComputedStyle({
+        'padding-left': size('s'),
+        'padding-right': size('xs'),
       });
     });
 

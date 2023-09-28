@@ -35,7 +35,7 @@ export class CheckboxComponent implements OnInit {
 
   @HostBinding('class')
   @Input()
-  size?: 'xs' | 'sm' | 'md';
+  size?: 'xs' | 'sm' | 'md' = 'md';
 
   @HostBinding('class.error')
   @Input()
@@ -59,28 +59,11 @@ export class CheckboxComponent implements OnInit {
   constructor(private ionicElementPartService: IonicElementPartService) {}
 
   ngOnInit(): void {
-    this.setPartOnMultilineLabel();
+    this.ionicElementPartService.setPart(this.ionCheckboxElement, '.checkbox-wrapper', 'label');
   }
 
   onChecked(checked: boolean): void {
     this.checked = checked;
     this.checkedChange.emit(this.checked);
-  }
-
-  setPartOnMultilineLabel() {
-    this.ionicElementPartService.setPart(
-      this.ionCheckboxElement,
-      '.checkbox-wrapper',
-      'label',
-      (part) => {
-        const labelHeight = part.clientHeight;
-        const labelLineHeight = parseInt(
-          window.getComputedStyle(part).getPropertyValue('line-height')
-        );
-        const multiLineLabel = labelHeight > labelLineHeight;
-
-        return multiLineLabel;
-      }
-    );
   }
 }
