@@ -7,7 +7,6 @@ import {
   EventEmitter,
   HostBinding,
   Input,
-  OnInit,
   Output,
   ViewChild,
 } from '@angular/core';

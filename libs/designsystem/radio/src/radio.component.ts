@@ -5,7 +5,6 @@ import {
   ElementRef,
   HostBinding,
   Input,
-  OnInit,
   ViewChild,
 } from '@angular/core';
 import { IonRadio } from '@ionic/angular';
