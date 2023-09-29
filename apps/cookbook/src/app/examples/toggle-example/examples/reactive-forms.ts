@@ -34,6 +34,10 @@ ngOnInit() {
   this.form = this.fb.group({ myToggle: [false] });
 }
 
+onCheckedChange() {
+    this.form.get('myToggle')?.markAsTouched();
+}
+
 toggleEnabled(checked: boolean) {
   this.canSelectToggle = checked;
 
@@ -73,6 +77,7 @@ export class ToggleReactiveFormsExampleComponent implements OnInit {
 
   onCheckedChange() {
     console.log(`Value:`, this.form.get('myToggle')?.value);
+    // this.form.get('myToggle')?.markAsTouched();
   }
 
   toggleEnabled(checked: boolean) {
