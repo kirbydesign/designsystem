@@ -76,11 +76,11 @@ import { ToastController, ToastHelper } from '@kirbydesign/designsystem/toast';
 import { ActionGroupComponent } from '@kirbydesign/designsystem/action-group';
 import { MenuComponent } from '@kirbydesign/designsystem/menu';
 import { TabNavigationModule } from '@kirbydesign/designsystem/tab-navigation';
+import { BadgeComponent } from '@kirbydesign/designsystem/badge';
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
 import { customElementsInitializer } from './custom-elements-initializer';
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
 import { ModalRouterLinkDirective } from './directives/modal-router-link/modal-router-link.directive';
-import { KirbyBadgeModule } from './components/kirby-badge.module';
 
 const exportedDeclarations = [ModalRouterLinkDirective];
 
@@ -104,7 +104,6 @@ const standaloneComponents = [
   SectionHeaderComponent,
   RangeComponent,
   ItemSlidingComponent,
-
   ProgressCircleComponent,
   ReorderListComponent,
   LoadingOverlayComponent,
@@ -121,6 +120,7 @@ const standaloneComponents = [
   ButtonComponent,
   ComponentLoaderDirective,
   FlagComponent,
+  BadgeComponent,
 ];
 const exportedModules = [
   KirbyAppModule,
@@ -140,7 +140,6 @@ const exportedModules = [
   RadioModule,
   EmptyStateModule,
   DropdownModule,
-  KirbyBadgeModule,
   FormFieldModule,
   SlideModule,
   AccordionModule,
