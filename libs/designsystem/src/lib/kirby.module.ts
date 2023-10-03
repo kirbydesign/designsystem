@@ -78,7 +78,6 @@ import { MenuComponent } from '@kirbydesign/designsystem/menu';
 import { TabNavigationModule } from '@kirbydesign/designsystem/tab-navigation';
 import { BadgeComponent } from '@kirbydesign/designsystem/badge';
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
-import { customElementsInitializer } from './custom-elements-initializer';
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
 import { ModalRouterLinkDirective } from './directives/modal-router-link/modal-router-link.directive';
 
@@ -163,7 +162,6 @@ const providers = [
   ResizeObserverFactory,
   ResizeObserverService,
   CanDismissHelper,
-  customElementsInitializer(),
 ];
 
 const ConfigToken = new InjectionToken<unknown>('USERCONFIG');
