@@ -10,6 +10,8 @@ kirby-page-content > * + *:not(cookbook-example-configuration-wrapper) {
 
 kirby-card {
   --kirby-card-width: min(500px, 100%);
+
+  margin: 1rem auto;
 }
 
 .card-option-button-group {
