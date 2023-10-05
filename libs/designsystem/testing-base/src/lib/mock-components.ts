@@ -4,6 +4,7 @@ import { MockAccordionItemComponent } from './components/mock.accordion-item.com
 import { MockActionGroupComponent } from './components/mock.action-group.component';
 import { MockAvatarComponent } from './components/mock.avatar.component';
 import { MockButtonComponent } from './components/mock.button.component';
+import { MockBadgeComponent } from './components/mock.badge.component';
 import { MockCalendarComponent } from './components/mock.calendar.component';
 import { MockCardFooterComponent } from './components/mock.card-footer.component';
 import { MockCardHeaderComponent } from './components/mock.card-header.component';
@@ -79,7 +80,6 @@ import { MockSlideButtonComponent } from './components/mock.slide-button.compone
 import { MockSpinnerComponent } from './components/mock.spinner.component';
 import { MockPageLocalNavigationComponent } from './components/mock.page-local-navigation.component';
 import { MockSegmentedControlComponent } from './components/mock.segmented-control.component';
-import { MockBadgeComponent } from './components/mock.web-component-proxies.component';
 import { MockTabNavigationComponent } from './components/mock.tab-navigation.component';
 import { MockTabNavigationItemComponent } from './components/mock.tab-navigation-item.component';
 import { MockTabButtonComponent } from './components/mock.tab-button.component';
