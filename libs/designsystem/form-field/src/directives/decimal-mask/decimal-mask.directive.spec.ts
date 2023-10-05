@@ -227,4 +227,28 @@ describe('NumberInputDirective', () => {
       expect(spectator.element).toHaveValue('9,999');
     });
   });
+
+  describe('implementing ControlValueAccessor interface', () => {
+    describe('when setDisabledState() function is invoked', () => {
+      it('should set disabled = false when invoked with false', () => {
+        spectator = createDirective(
+          `<input kirby-input kirby-decimal-mask type="number" disabled />`
+        );
+
+        spectator.directive.setDisabledState(false);
+
+        expect(spectator.element).not.toHaveAttribute('disabled');
+        expect((spectator.element as HTMLInputElement).disabled).toBeFalse();
+      });
+
+      it('should set disabled = true when invoked with true', () => {
+        spectator = createDirective(`<input kirby-input kirby-decimal-mask type="number" />`);
+
+        spectator.directive.setDisabledState(true);
+
+        expect(spectator.element).toHaveAttribute('disabled');
+        expect((spectator.element as HTMLInputElement).disabled).toBeTrue();
+      });
+    });
+  });
 });
