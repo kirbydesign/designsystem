@@ -11,12 +11,12 @@ import {
   ViewChild,
 } from '@angular/core';
 import { IonCheckbox, IonicModule } from '@ionic/angular';
-import { IonicElementPartService } from '@kirbydesign/designsystem/helpers';
+import { IonicElementPartHelper } from '@kirbydesign/designsystem/helpers';
 
 @Component({
   standalone: true,
   imports: [IonicModule, CommonModule],
-  providers: [IonicElementPartService],
+  providers: [IonicElementPartHelper],
   selector: 'kirby-checkbox',
   templateUrl: './checkbox.component.html',
   styleUrls: ['./checkbox.component.scss'],
@@ -56,11 +56,11 @@ export class CheckboxComponent implements AfterViewInit {
 
   @Output() checkedChange = new EventEmitter<boolean>();
 
-  constructor(private ionicElementPartService: IonicElementPartService) {}
+  constructor(private ionicElementPartHelper: IonicElementPartHelper) {}
 
   ngAfterViewInit(): void {
-    this.ionicElementPartService.setPart('label', this.ionCheckboxElement, '.checkbox-wrapper');
-    this.ionicElementPartService.setPart(
+    this.ionicElementPartHelper.setPart('label', this.ionCheckboxElement, '.checkbox-wrapper');
+    this.ionicElementPartHelper.setPart(
       'label-text-wrapper',
       this.ionCheckboxElement,
       '.label-text-wrapper'

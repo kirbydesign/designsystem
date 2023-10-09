@@ -52,7 +52,7 @@ import {
   HeaderComponent,
   HeaderTitleActionIconDirective,
 } from '@kirbydesign/designsystem/header';
-import { IonicElementPartService, KirbyAnimation } from '@kirbydesign/designsystem/helpers';
+import { IonicElementPartHelper, KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 import {
   ModalElementComponent,
   ModalElementsAdvertiser,
@@ -222,7 +222,7 @@ export class PageActionsComponent {}
   templateUrl: './page.component.html',
   styleUrls: ['./page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [IonicElementPartService],
+  providers: [IonicElementPartHelper],
 })
 export class PageComponent
   implements OnInit, OnDestroy, AfterViewInit, AfterContentChecked, OnChanges
@@ -370,7 +370,7 @@ export class PageComponent
     private routerOutlet: IonRouterOutlet,
     @Optional()
     private navCtrl: NavController,
-    private ionicElementPartService: IonicElementPartService
+    private ionicElementPartHelper: IonicElementPartHelper
   ) {}
 
   private contentReadyPromise: Promise<void>;
@@ -390,7 +390,7 @@ export class PageComponent
 
   ngOnInit(): void {
     this.removeWrapper();
-    this.ionicElementPartService.setPart(
+    this.ionicElementPartHelper.setPart(
       'background',
       this.ionToolbarElement,
       '.toolbar-background'

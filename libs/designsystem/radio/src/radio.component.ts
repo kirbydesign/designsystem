@@ -8,14 +8,14 @@ import {
   ViewChild,
 } from '@angular/core';
 import { IonRadio } from '@ionic/angular';
-import { IonicElementPartService } from '@kirbydesign/designsystem/helpers';
+import { IonicElementPartHelper } from '@kirbydesign/designsystem/helpers';
 
 @Component({
   selector: 'kirby-radio',
   templateUrl: './radio.component.html',
   styleUrls: ['./radio.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [IonicElementPartService],
+  providers: [IonicElementPartHelper],
 })
 export class RadioComponent implements AfterViewInit {
   @ViewChild(IonRadio, { read: ElementRef, static: true })
@@ -43,11 +43,11 @@ export class RadioComponent implements AfterViewInit {
     return this.ionRadioElement ? this.ionRadioElement.nativeElement.tabIndex : -1;
   }
 
-  constructor(private ionicElementPartService: IonicElementPartService) {}
+  constructor(private ionicElementPartHelper: IonicElementPartHelper) {}
 
   ngAfterViewInit(): void {
-    this.ionicElementPartService.setPart('label', this.ionRadioElement, '.radio-wrapper');
-    this.ionicElementPartService.setPart(
+    this.ionicElementPartHelper.setPart('label', this.ionRadioElement, '.radio-wrapper');
+    this.ionicElementPartHelper.setPart(
       'label-text-wrapper',
       this.ionRadioElement,
       '.label-text-wrapper'

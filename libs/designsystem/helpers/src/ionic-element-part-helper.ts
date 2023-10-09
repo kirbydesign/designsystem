@@ -1,7 +1,7 @@
 import { ElementRef, Injectable, Renderer2 } from '@angular/core';
 
 @Injectable()
-export class IonicElementPartService {
+export class IonicElementPartHelper {
   constructor(private renderer: Renderer2) {}
 
   public async setPart(partName: string, ionicElementRef: ElementRef, selector: string) {
