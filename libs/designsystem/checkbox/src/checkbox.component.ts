@@ -35,7 +35,7 @@ export class CheckboxComponent implements AfterViewInit {
 
   @HostBinding('class')
   @Input()
-  size?: 'xs' | 'sm' | 'md' = 'md';
+  size: 'xs' | 'sm' | 'md' = 'md';
 
   @HostBinding('class.error')
   @Input()
