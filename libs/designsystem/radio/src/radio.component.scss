@@ -37,13 +37,19 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
     color: #{utils.get-text-color('semi-dark')};
 
     ion-radio {
-      opacity: 1; // Reset Ionic disabled style
-
       --color: #{utils.get-color('medium')};
       --color-checked: #{utils.get-color('medium')};
 
       &::part(container) {
         background-color: utils.get-color('semi-light');
+      }
+
+      &::part(label-text-wrapper) {
+        opacity: 1; // Reset Ionic disabled style
+      }
+
+      &::part(native-wrapper) {
+        opacity: 1; // Reset Ionic disabled style
       }
     }
   }
