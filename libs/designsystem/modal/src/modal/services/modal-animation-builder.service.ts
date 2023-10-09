@@ -140,7 +140,11 @@ export class ModalAnimationBuilderService {
   }
 
   public leaveAnimation(currentBackdrop?: HTMLIonBackdropElement): AnimationBuilder {
-    return (baseEl: HTMLElement, opts: { presentingEl?: HTMLElement }, duration = this.duration): Animation => {
+    return (
+      baseEl: HTMLElement,
+      opts: { presentingEl?: HTMLElement },
+      duration = this.duration
+    ): Animation => {
       const { presentingEl } = opts;
       const root = this.getElementRoot(baseEl);
       const { wrapperAnimation, backdropAnimation } = this.createLeaveAnimation();
