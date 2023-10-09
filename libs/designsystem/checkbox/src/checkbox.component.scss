@@ -69,13 +69,19 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
     color: #{utils.get-text-color('semi-dark')};
 
     ion-checkbox {
-      opacity: 1;
-
       --checkmark-color: #{utils.get-color('semi-dark')};
       --checkbox-background: #{utils.get-color('semi-light')};
       --checkbox-background-checked: #{utils.get-color('semi-light')};
       --border-color: #{utils.get-color('medium')};
       --border-color-checked: #{utils.get-color('semi-light')};
+
+      &::part(label-text-wrapper) {
+        opacity: 1; // Reset Ionic disabled style
+      }
+
+      &::part(native-wrapper) {
+        opacity: 1; // Reset Ionic disabled style
+      }
     }
   }
 
