@@ -23,9 +23,7 @@ describe('BadgeComponent', () => {
   describe('by default', () => {
     beforeEach(async () => {
       spectator = createHost('<kirby-badge></kirby-badge>');
-      await TestHelper.whenReady(spectator.element);
-
-      ionBadge = spectator.element.shadowRoot.querySelector('ion-badge');
+      ionBadge = spectator.element.querySelector('ion-badge');
       await TestHelper.whenReady(ionBadge);
     });
 
@@ -75,9 +73,7 @@ describe('BadgeComponent', () => {
   describe('when one character is slotted', () => {
     beforeEach(async () => {
       spectator = createHost('<kirby-badge></kirby-badge>', { props: { text: 'x' } });
-      await TestHelper.whenReady(spectator.element);
-
-      ionBadge = spectator.element.shadowRoot.querySelector('ion-badge');
+      ionBadge = spectator.element.querySelector('ion-badge');
       await TestHelper.whenReady(ionBadge);
     });
 
@@ -92,9 +88,7 @@ describe('BadgeComponent', () => {
   describe("when size is 'sm'", () => {
     beforeEach(async () => {
       spectator = createHost(`<kirby-badge [size]="'sm'">Slotted Text</kirby-badge>`);
-      await TestHelper.whenReady(spectator.element);
-
-      ionBadge = spectator.element.shadowRoot.querySelector('ion-badge');
+      ionBadge = spectator.element.querySelector('ion-badge');
       await TestHelper.whenReady(ionBadge);
     });
 
@@ -118,11 +112,8 @@ describe('BadgeComponent', () => {
         <kirby-badge themeColor="${color.name}">
         </kirby-badge>
         `);
-
-        await TestHelper.whenReady(spectator.element);
         spectator.element.style;
-
-        ionBadge = spectator.element.shadowRoot.querySelector('ion-badge');
+        ionBadge = spectator.element.querySelector('ion-badge');
         await TestHelper.whenReady(ionBadge);
 
         const expectedTextColor =
