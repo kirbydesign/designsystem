@@ -47,6 +47,11 @@ export class RadioComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.ionicElementPartService.setPart('label', this.ionRadioElement, '.radio-wrapper');
+    this.ionicElementPartService.setPart(
+      'label-text-wrapper',
+      this.ionRadioElement,
+      '.label-text-wrapper'
+    );
   }
 
   focus() {

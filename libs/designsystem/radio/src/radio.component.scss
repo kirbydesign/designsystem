@@ -76,7 +76,7 @@ ion-radio {
     transition: interaction-state.transition();
     transition-property: background-color;
     background-color: utils.get-color('white');
-    margin-top: utils.size('xxxxs');
+    margin: utils.size('xxxxs');
   }
 
   &::part(mark) {
@@ -89,6 +89,10 @@ ion-radio {
     padding-left: $spacing-to-edge;
     padding-right: $spacing-to-label;
     line-height: utils.line-height('n');
+  }
+
+  &::part(label-text-wrapper) {
+    margin-inline: $spacing-to-label 0;
   }
 
   :host-context(kirby-radio-group.error),
