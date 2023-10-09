@@ -1,0 +1,10 @@
+{
+  "name": "@kirbydesign/core",
+  "version": "0.0.52",
+  "description": "Core web-components for the Kirby Design System.",
+  "module": "dist/index.js",
+  "main": "dist/index.cjs.js",
+  "types": "dist/types/index.d.ts",
+  "collection": "dist/collection/collection-manifest.json",
+  "license": "MIT"
+}
