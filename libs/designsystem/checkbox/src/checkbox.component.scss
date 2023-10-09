@@ -107,6 +107,10 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
       line-height: utils.line-height('n');
     }
 
+    &::part(label-text-wrapper) {
+      margin-inline: $spacing-to-label 0;
+    }
+
     span {
       white-space: pre-line;
     }

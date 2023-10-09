@@ -60,6 +60,11 @@ export class CheckboxComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.ionicElementPartService.setPart('label', this.ionCheckboxElement, '.checkbox-wrapper');
+    this.ionicElementPartService.setPart(
+      'label-text-wrapper',
+      this.ionCheckboxElement,
+      '.label-text-wrapper'
+    );
   }
 
   onChecked(checked: boolean): void {
