@@ -1,4 +1,4 @@
-@use '../../scss/utils';
+@use '@kirbydesign/core/src/scss/utils';
 
 :host {
   position: var(--kirby-badge-position, relative);
@@ -20,7 +20,8 @@
     box-shadow: var(--kirby-badge-elevation, none);
   }
 
-  ::slotted(kirby-icon) {
+  /* stylelint-disable selector-pseudo-element-no-unknown */
+  ::ng-deep kirby-icon {
     --kirby-icon-font-size: #{utils.font-size('n')};
 
     position: absolute;
