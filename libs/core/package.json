@@ -1,7 +1,7 @@
 {
   "name": "@kirbydesign/core",
   "version": "0.0.52",
-  "description": "Core web-components for the Kirby Design System.",
+  "description": "Core styles and helpers for the Kirby Design System.",
   "module": "dist/index.js",
   "types": "dist/types/index.d.ts",
   "license": "MIT"
