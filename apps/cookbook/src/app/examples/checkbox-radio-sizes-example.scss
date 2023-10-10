@@ -55,8 +55,8 @@ kirby-radio::after {
 }
 
 /* stylelint-disable selector-pseudo-element-no-unknown */
-kirby-checkbox ::ng-deep .wrapper,
-kirby-radio ::ng-deep .wrapper {
+kirby-checkbox ::ng-deep ion-checkbox,
+kirby-radio ::ng-deep ion-radio {
   background-color: #f7e0f0;
   margin-right: $height-measure-width; // Allow room for height measure info
 }

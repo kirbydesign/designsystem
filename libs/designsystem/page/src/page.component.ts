@@ -46,7 +46,13 @@ import { selectedTabClickEvent, TabsComponent } from '@kirbydesign/designsystem/
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
 
-import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
+import { ACTIONGROUP_CONFIG, ActionGroupConfig } from '@kirbydesign/designsystem/action-group';
+import {
+  HeaderActionsDirective,
+  HeaderComponent,
+  HeaderTitleActionIconDirective,
+} from '@kirbydesign/designsystem/header';
+import { IonicElementPartHelper, KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 import {
   ModalElementComponent,
   ModalElementsAdvertiser,
@@ -54,12 +60,6 @@ import {
   ModalNavigationService,
 } from '@kirbydesign/designsystem/modal';
 import { FitHeadingConfig, ResizeObserverService } from '@kirbydesign/designsystem/shared';
-import {
-  HeaderActionsDirective,
-  HeaderComponent,
-  HeaderTitleActionIconDirective,
-} from '@kirbydesign/designsystem/header';
-import { ACTIONGROUP_CONFIG, ActionGroupConfig } from '@kirbydesign/designsystem/action-group';
 
 /**
  * Specify scroll event debounce time in ms and scrolled offset from top in pixels
@@ -222,6 +222,7 @@ export class PageActionsComponent {}
   templateUrl: './page.component.html',
   styleUrls: ['./page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [IonicElementPartHelper],
 })
 export class PageComponent
   implements OnInit, OnDestroy, AfterViewInit, AfterContentChecked, OnChanges
@@ -368,7 +369,8 @@ export class PageComponent
     @Optional()
     private routerOutlet: IonRouterOutlet,
     @Optional()
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private ionicElementPartHelper: IonicElementPartHelper
   ) {}
 
   private contentReadyPromise: Promise<void>;
@@ -388,7 +390,11 @@ export class PageComponent
 
   ngOnInit(): void {
     this.removeWrapper();
-    this.setToolbarBackgroundPart();
+    this.ionicElementPartHelper.setPart(
+      'background',
+      this.ionToolbarElement,
+      '.toolbar-background'
+    );
 
     const actionGroupConfig: ActionGroupConfig = {
       isCondensed: true,
@@ -507,18 +513,6 @@ export class PageComponent
     this.renderer.appendChild(parent, this.ionHeaderElement.nativeElement);
     this.renderer.appendChild(parent, this.ionContentElement.nativeElement);
     this.renderer.appendChild(parent, this.ionFooterElement.nativeElement);
-  }
-
-  private setToolbarBackgroundPart() {
-    // Ensure ion-toolbar custom element has been defined (primarily when testing, but doesn't hurt):
-    customElements.whenDefined(this.ionToolbarElement.nativeElement.localName).then(() => {
-      this.ionToolbarElement.nativeElement.componentOnReady().then((toolbar) => {
-        const toolbarBackground = toolbar.shadowRoot.querySelector('.toolbar-background');
-        if (toolbarBackground) {
-          this.renderer.setAttribute(toolbarBackground, 'part', 'background');
-        }
-      });
-    });
   }
 
   private onEnter() {

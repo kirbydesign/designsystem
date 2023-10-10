@@ -5,7 +5,7 @@
     "@floating-ui/dom": "^1.1.0",
     "@angular/cdk": "^15.0.3",
     "@fontsource/roboto": "4.2.1",
-    "@ionic/angular": "6.2.1",
+    "@ionic/angular": "7.3.3",
     "@kirbydesign/core": "0.0.52",
     "inputmask": "5.0.5"
   },
