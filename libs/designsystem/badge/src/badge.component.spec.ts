@@ -113,7 +113,6 @@ describe('BadgeComponent', () => {
         <kirby-badge themeColor="${color.name}">
         </kirby-badge>
         `);
-        spectator.element.style;
         ionBadge = spectator.element.querySelector('ion-badge');
         await TestHelper.whenReady(ionBadge);
 
