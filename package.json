@@ -58,6 +58,7 @@
     "prettier": "prettier --check \"./{libs,apps}/**/*.{ts,json,md,scss,html}\"",
     "prettier:fix": "prettier --write \"./{libs,apps}/**/*.{ts,json,md,scss,html}\"",
     "dist": "npm run dist:cookbook",
+    "dist:core": "tsc --project libs/core",
     "dist:cookbook": "ng build cookbook --configuration production",
     "dist:designsystem": "ng build designsystem",
     "predist:designsystem": "npm run extract-scss-variables",
