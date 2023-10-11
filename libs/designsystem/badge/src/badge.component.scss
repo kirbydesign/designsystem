@@ -18,15 +18,14 @@
     font-size: inherit;
     position: relative;
     box-shadow: var(--kirby-badge-elevation, none);
-  }
 
-  /* stylelint-disable selector-pseudo-element-no-unknown */
-  ::ng-deep kirby-icon {
-    --kirby-icon-font-size: #{utils.font-size('n')};
+    @include utils.slotted(kirby-icon) {
+      --kirby-icon-font-size: #{utils.font-size('n')};
 
-    position: absolute;
-    top: 0;
-    left: 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
   }
 }
 
