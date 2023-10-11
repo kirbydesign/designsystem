@@ -1,7 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { IonContent, IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
+import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
+import { IconModule } from '@kirbydesign/designsystem/icon';
+import { KirbyIonicModule } from '@kirbydesign/designsystem/kirby-ionic-module';
 
 type Flavor = 'modal' | 'drawer';
 type Size = 'xxs' | 'xs' | 'sm' | 'md' | 'lg';
@@ -11,6 +15,8 @@ type SizeTemp = 'md';
   selector: 'kirby-modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss'],
+  standalone: true,
+  imports: [CommonModule, KirbyIonicModule, IconModule, ButtonComponent],
 })
 export class ModalComponent {
   @ViewChild(IonModal) modal: IonModal;
