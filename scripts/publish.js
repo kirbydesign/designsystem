@@ -159,9 +159,8 @@ function copyCoreDistributionFiles(coreLibDir, distTarget) {
   console.log('Copying core distribution files...');
 
   const copyDistFiles = () => fs.copy(`${coreLibDir}/dist`, `${distTarget}/dist`);
-  const copyLoaderFiles = () => fs.copy(`${coreLibDir}/loader`, `${distTarget}/loader`);
 
-  return copyDistFiles().then(copyLoaderFiles);
+  return copyDistFiles();
 }
 
 function copyScssFiles(libSrcDir, distTarget) {
