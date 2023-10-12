@@ -134,7 +134,7 @@ export class ModalWrapperComponent
     }
     return this._intersectionObserver;
   }
-  isScrollEventsEnabled: boolean;
+  scrollEventsEnabled: boolean;
   isContentScrolled: boolean;
   private contentScrolled$: Observable<ScrollDetail>;
 
@@ -182,7 +182,7 @@ export class ModalWrapperComponent
 
     const handleMediaChange = (ev) => {
       const isDesktop = ev.matches;
-      this.isScrollEventsEnabled = !isDesktop;
+      this.scrollEventsEnabled = !isDesktop;
       if (!isDesktop) {
         this.initializeContentScrollListening();
       }
