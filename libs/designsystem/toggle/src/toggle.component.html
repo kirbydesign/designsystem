@@ -2,11 +2,8 @@
   [checked]="checked"
   [disabled]="disabled"
   [class.interaction-state-active]="_pressed"
-  [attr.aria-label]="ariaLabel"
   (keydown.space)="_onActive()"
   (keyup.space)="_onInactive()"
   (blur)="_onInactive()"
   (ionChange)="onCheckedChange($event.detail.checked)"
->
-  <ng-content></ng-content>
-</ion-toggle>
+></ion-toggle>

@@ -13,7 +13,6 @@ import { KirbyIonicModule } from '@kirbydesign/designsystem/kirby-ionic-module';
 export class ToggleComponent {
   @Input() checked: boolean = false;
   @Input() disabled: boolean = false;
-  @Input() ariaLabel: string;
 
   @Output() checkedChange = new EventEmitter<boolean>();
 
