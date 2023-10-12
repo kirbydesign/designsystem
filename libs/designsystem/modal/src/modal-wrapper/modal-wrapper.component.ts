@@ -134,12 +134,11 @@ export class ModalWrapperComponent
     }
     return this._intersectionObserver;
   }
-
+  isScrollEventsEnabled: boolean;
   isContentScrolled: boolean;
   private contentScrolled$: Observable<ScrollDetail>;
 
   private destroy$: Subject<void> = new Subject<void>();
-  private destroyContentScrolled$: Subject<void> = new Subject<void>();
   @HostBinding('class.drawer')
   get _isDrawer() {
     return this.config.flavor === 'drawer';
@@ -181,30 +180,22 @@ export class ModalWrapperComponent
     const query = `(min-width: ${DesignTokenHelper.breakpoints.medium})`;
     const mediaQuery = this.windowRef.nativeWindow.matchMedia(query);
 
-    mediaQuery.onchange = (ev) => {
-      if (ev.matches) {
-        //Remove contentScrolled when dynamically resized to desktop
-        this.destroyContentScrolled$.next();
-        this.destroyContentScrolled$.complete();
-      } else {
+    const handleMediaChange = (ev) => {
+      const isDesktop = ev.matches;
+      this.isScrollEventsEnabled = !isDesktop;
+      if (!isDesktop) {
         this.initializeContentScrollListening();
-        console.log(this.contentScrolled$);
       }
     };
 
-    if (mediaQuery.matches) {
-      //desktop
-    } else {
-      this.initializeContentScrollListening();
-    }
-  }
+    handleMediaChange(mediaQuery); // Trigger initial check
 
+    mediaQuery.onchange = handleMediaChange;
+  }
   ngAfterViewInit(): void {
     if (this.toolbarButtonsQuery) {
       this.toolbarButtons = this.toolbarButtonsQuery.map((buttonRef) => buttonRef.nativeElement);
     }
-
-    //this.initializeContentScrollListening();
   }
 
   private _currentFooter: HTMLElement | null = null;
@@ -370,12 +361,11 @@ export class ModalWrapperComponent
    * when ionScroll emits.
    */
   private initializeContentScrollListening() {
-    console.log('initializecontent');
     this.zone.runOutsideAngular(() => {
       this.contentScrolled$ = this.ionContent.ionScroll.pipe(
         debounceTime(contentScrollDebounceTimeInMS),
         map((event) => event.detail),
-        takeUntil(this.destroyContentScrolled$)
+        takeUntil(this.destroy$)
       );
 
       this.contentScrolled$.subscribe((scrollInfo: ScrollDetail) => {
@@ -603,8 +593,5 @@ export class ModalWrapperComponent
     }
     this.destroy$.next();
     this.destroy$.complete();
-
-    this.destroyContentScrolled$.next();
-    this.destroyContentScrolled$.complete();
   }
 }
