@@ -21,34 +21,11 @@ const config = {
   [disabled]="!canSelectFavorite"
 ></kirby-checkbox>
 </form>
-<cookbook-example-configuration-wrapper>
-  <kirby-checkbox
-    [checked]="canSelectFavorite"
-    (click)="toggleCanSelectFavorite()"
-    text="Form field enabled"
-  ></kirby-checkbox>
-  
-  <section class="form-state">
-    <h4>Form state:</h4>
-    <p>
-      <strong>Value:</strong> {{ form.value | json }}
-      <br />
-      <strong>Bacon:</strong>
-      <span [class.state-true]="form.get('Bacon').valid">valid: {{ form.get('Bacon').valid }}</span>
-      <span [class.state-true]="form.get('Bacon').enabled">enabled: {{ form.get('Bacon').enabled }}</span>
-      <span [class.state-true]="form.get('Bacon').touched">touched: {{ form.get('Bacon').touched }}</span>
-     <strong>Salami:</strong>
-     <span [class.state-true]="form.get('Salami').valid">valid: {{ form.get('Salami').valid }}</span>
-      <span [class.state-true]="form.get('Salami').enabled">enabled: {{ form.get('Salami').enabled }}</span>
-      <span [class.state-true]="form.get('Salami').touched">touched: {{ form.get('Salami').touched }}</span>
-      <strong>Tenderloin:</strong>
-      <span [class.state-true]="form.get('Tenderloin').valid">valid: {{ form.get('Tenderloin').valid }}</span>
-      <span [class.state-true]="form.get('Tenderloin').enabled">enabled: {{ form.get('Tenderloin').enabled }}</span>
-      <span [class.state-true]="form.get('Tenderloin').touched">touched: {{ form.get('Tenderloin').touched }}</span>
-
-    </p>
-  </section>
-  </cookbook-example-configuration-wrapper>`,
+<cookbook-example-configuration-wrapper-reative-forms [form]="form"><kirby-checkbox
+[checked]="favoriteRequired"
+(checkedChange)="toggleCanSelectFavorite($event)"
+text="Form field enabled"></kirby-checkbox></cookbook-example-configuration-wrapper-reative-forms>
+`,
   codeSnippet: `form: FormGroup = this.formBuilder.group({
   Bacon: new FormControl(false),
   Salami: new FormControl(false),
@@ -72,11 +49,21 @@ toggleCanSelectFavorite() {
 @Component({
   selector: config.selector,
   template: config.template,
-  styleUrls: ['../../ng-forms.shared.scss'],
   styles: [
     `
       strong {
         display: block;
+      }
+      :host {
+        display: flex;
+      }
+
+      cookbook-example-configuration-wrapper-reative-forms {
+        margin-left: utils.size('xxs');
+
+        @include utils.media('>=medium') {
+          margin-left: utils.size('xl');
+        }
       }
     `,
   ],
@@ -93,6 +80,7 @@ export class CheckboxReactiveFormsExampleComponent {
     Salami: new FormControl(false),
     Tenderloin: new FormControl(false),
   });
+
   canSelectFavorite = true;
 
   constructor(private formBuilder: FormBuilder) {}
