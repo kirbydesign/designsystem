@@ -180,15 +180,18 @@ export class ModalWrapperComponent
     const query = `(min-width: ${DesignTokenHelper.breakpoints.medium})`;
     const mediaQuery = this.windowRef.nativeWindow.matchMedia(query);
 
+    let hasInitializedContentScrollListening = false;
+
     const handleMediaChange = (ev) => {
       const isDesktop = ev.matches;
       this.scrollEventsEnabled = !isDesktop;
-      if (!isDesktop) {
+      if (!isDesktop && !hasInitializedContentScrollListening) {
         this.initializeContentScrollListening();
+        hasInitializedContentScrollListening = true;
       }
     };
 
-    handleMediaChange(mediaQuery); // Trigger initial check
+    handleMediaChange(mediaQuery);
 
     mediaQuery.onchange = handleMediaChange;
   }
