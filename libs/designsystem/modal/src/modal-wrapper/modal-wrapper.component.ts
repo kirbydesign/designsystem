@@ -136,7 +136,6 @@ export class ModalWrapperComponent
   }
   scrollEventsEnabled: boolean;
   isContentScrolled: boolean;
-  private contentScrolled$: Observable<ScrollDetail>;
 
   private destroy$: Subject<void> = new Subject<void>();
   @HostBinding('class.drawer')
@@ -171,30 +170,14 @@ export class ModalWrapperComponent
     this.initializeModalRoute();
     this.listenForIonModalDidPresent();
     this.listenForIonModalWillDismiss();
+    this.listenForScroll();
     this.initializeResizeModalToModalWrapper();
     this.componentPropsInjector = Injector.create({
       providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
       parent: this.injector,
     });
-
-    const query = `(min-width: ${DesignTokenHelper.breakpoints.medium})`;
-    const mediaQuery = this.windowRef.nativeWindow.matchMedia(query);
-
-    let hasInitializedContentScrollListening = false;
-
-    const handleMediaChange = (ev) => {
-      const isDesktop = ev.matches;
-      this.scrollEventsEnabled = !isDesktop;
-      if (!isDesktop && !hasInitializedContentScrollListening) {
-        this.initializeContentScrollListening();
-        hasInitializedContentScrollListening = true;
-      }
-    };
-
-    handleMediaChange(mediaQuery);
-
-    mediaQuery.onchange = handleMediaChange;
   }
+
   ngAfterViewInit(): void {
     if (this.toolbarButtonsQuery) {
       this.toolbarButtons = this.toolbarButtonsQuery.map((buttonRef) => buttonRef.nativeElement);
@@ -359,24 +342,35 @@ export class ModalWrapperComponent
     }
   }
 
-  /*
-   * Runs scroll subscription outside zone to avoid excessive amount of CD cycles
-   * when ionScroll emits.
-   */
-  private initializeContentScrollListening() {
-    this.zone.runOutsideAngular(() => {
-      this.contentScrolled$ = this.ionContent.ionScroll.pipe(
-        debounceTime(contentScrollDebounceTimeInMS),
-        map((event) => event.detail),
-        takeUntil(this.destroy$)
-      );
+  private listenForScroll() {
+    const query = `(min-width: ${DesignTokenHelper.breakpoints.medium})`;
+    const mediaQuery = this.windowRef.nativeWindow.matchMedia(query);
+    const enableScrollEvents = (listOrEvent: MediaQueryList | MediaQueryListEvent) => {
+      const isDesktop = listOrEvent.matches;
+      this.scrollEventsEnabled = !isDesktop;
+    };
 
-      this.contentScrolled$.subscribe((scrollInfo: ScrollDetail) => {
-        if (scrollInfo.scrollTop > contentScrolledOffsetInPixels !== this.isContentScrolled) {
-          this.isContentScrolled = !this.isContentScrolled;
-          this.changeDetector.detectChanges();
-        }
-      });
+    enableScrollEvents(mediaQuery);
+    mediaQuery.onchange = enableScrollEvents;
+
+    // Runs scroll subscription outside zone to avoid excessive amount of CD cycles
+    // when ionScroll emits.
+    this.zone.runOutsideAngular(() => {
+      // Always subscribe as ionScroll only emits when scrollEventsEnabled is true
+      this.ionContent.ionScroll
+        .pipe(
+          debounceTime(contentScrollDebounceTimeInMS),
+          map((event) => event.detail),
+          takeUntil(this.destroy$)
+        )
+        .subscribe((scrollInfo: ScrollDetail) => {
+          const contentScrolledPastOffset = scrollInfo.scrollTop > contentScrolledOffsetInPixels;
+
+          if (contentScrolledPastOffset !== this.isContentScrolled) {
+            this.isContentScrolled = contentScrolledPastOffset;
+            this.changeDetector.detectChanges();
+          }
+        });
     });
   }
 
