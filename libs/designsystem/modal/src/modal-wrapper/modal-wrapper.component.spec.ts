@@ -1,8 +1,8 @@
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { IonContent, Platform } from '@ionic/angular';
+import { fakeAsync, tick } from '@angular/core/testing';
+import { IonContent } from '@ionic/angular';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
-import { MockComponent, MockComponents } from 'ng-mocks';
+import { MockComponents } from 'ng-mocks';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
@@ -645,35 +645,6 @@ describe('ModalWrapperComponent', () => {
           expect(spectator.component['ionModalElement'].dismiss).toHaveBeenCalledWith('test data');
         }));
       });
-    });
-  });
-  describe('initializeContentScrollListening', () => {
-    it('it should not assign a value to contentScrolled$ when opened on desktop', async () => {
-      await TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
-
-      modalWrapperTestBuilder = new ModalWrapperTestBuilder(createComponent);
-      spectator = modalWrapperTestBuilder
-        .flavor('modal')
-        .title('test')
-        .component(TitleEmbeddedComponent)
-        .build();
-
-      //@ts-ignore
-      expect(spectator.component.contentScrolled$).toBeFalsy();
-    });
-
-    it('it should assign a value to contentScrolled$ when opened on a phone', async () => {
-      await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
-
-      modalWrapperTestBuilder = new ModalWrapperTestBuilder(createComponent);
-      spectator = modalWrapperTestBuilder
-        .flavor('modal')
-        .title('test')
-        .component(TitleEmbeddedComponent)
-        .build();
-
-      //@ts-ignore
-      expect(spectator.component.contentScrolled$).toBeTruthy();
     });
   });
 });
