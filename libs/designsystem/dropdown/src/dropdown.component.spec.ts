@@ -7,7 +7,7 @@ import { MockComponents } from 'ng-mocks';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 import { CardComponent } from '@kirbydesign/designsystem/card';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
-import { ItemComponent } from '@kirbydesign/designsystem/item';
+import { ItemComponent, ItemModule } from '@kirbydesign/designsystem/item';
 import { HorizontalDirection, PopoverComponent } from '@kirbydesign/designsystem/popover';
 import { ListItemTemplateDirective } from '@kirbydesign/designsystem/list';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
@@ -34,6 +34,7 @@ describe('DropdownComponent', () => {
   describe('by default', () => {
     const createHost = createHostFactory({
       component: DropdownComponent,
+      imports: [ItemModule],
       declarations: [
         ItemComponent,
         MockComponents(ButtonComponent, CardComponent, IconComponent, IonItem, PopoverComponent),

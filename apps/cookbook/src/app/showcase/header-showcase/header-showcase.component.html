@@ -17,6 +17,24 @@
   </div>
 
   <div class="header-example-container">
+    <h2>Subtitle list</h2>
+
+    <p>
+      If you have a list of subtitles—e.g. full names as in the example below—where each string
+      shouldn't wrap in itself, but the string as a whole can wrap to a new line, you can specify
+      them as a string array.
+    </p>
+    <p>Try rezising the header below and watch how the subtitles wrap and truncate:</p>
+    <cookbook-example-viewer [html]="subtitleListExample.template">
+      <div class="header-example">
+        <cookbook-header-example-subtitle-list
+          #subtitleListExample
+        ></cookbook-header-example-subtitle-list>
+      </div>
+    </cookbook-example-viewer>
+  </div>
+
+  <div class="header-example-container">
     <h2>Flag</h2>
     <p>
       A flag can be used to indicate a status. To use a flag you simply add a
