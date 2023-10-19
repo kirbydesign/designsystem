@@ -8,9 +8,9 @@
   <ng-container *ngTemplateOutlet="slottedInputTemplate"></ng-container>
 </ng-container>
 
-<div *ngIf="message || counter" class="texts">
+<div *ngIf="message !== undefined || counter" class="texts">
   <kirby-form-field-message
-    *ngIf="message"
+    *ngIf="message !== undefined"
     class="message"
     [text]="message"
   ></kirby-form-field-message>

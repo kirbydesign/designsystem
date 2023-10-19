@@ -5,15 +5,11 @@
     adapt the layout to different screen sizes.
   </p>
   <h3>Breakpoints</h3>
-  <p>
-    Each breakpoint is named using t-shirt sizes and relates to a defined screen size or bigger:
-  </p>
+  <p>Each breakpoint is named using t-shirt sizes and maps to a defined screen size or bigger:</p>
   <ul>
-    <li>xs, extra-small: 0px</li>
-    <li>sm, small: 632px</li>
-    <li>md, medium: 768px</li>
-    <li>lg, large: 992px</li>
-    <li>xl, extra-large: 1200px</li>
+    <li *ngFor="let breakpoint of shorthandToBreakpointMap | keyvalue: originalOrder">
+      {{ breakpoint.key }}: {{ breakpoint.value }}
+    </li>
   </ul>
   <h3>HTML validity</h3>
   <p>

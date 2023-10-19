@@ -43,7 +43,7 @@ export class FormFieldComponent
   _labelId = UniqueIdGenerator.scopedTo('kirby-form-field-label').next();
 
   @Input() label: string;
-  @Input() message: string;
+  @Input() message: string | null;
 
   @ContentChildren(AffixDirective) affixElements: QueryList<AffixDirective>;
   @ContentChild(InputCounterComponent, { static: false }) counter: InputCounterComponent;

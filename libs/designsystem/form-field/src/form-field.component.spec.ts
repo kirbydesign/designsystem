@@ -29,7 +29,7 @@ describe('FormFieldComponent', () => {
       ItemComponent,
       FormFieldMessageComponent,
     ],
-    imports: [AffixDirective, InputComponent, TextareaComponent],
+    imports: [TestHelper.ionicModuleForTest, AffixDirective, InputComponent, TextareaComponent],
     mocks: [PlatformService],
     providers: [
       {
@@ -133,6 +133,23 @@ describe('FormFieldComponent', () => {
         'padding-left': size('s'),
         'padding-right': size('s'),
         'padding-bottom': '0px',
+      });
+    });
+
+    describe('with message set to null', () => {
+      it('should render the message wrapper with the correct padding', () => {
+        spectator = createHost(
+          `<kirby-form-field [message]="null">
+             <input kirby-input />
+           </kirby-form-field>`
+        );
+        const messageWrapperElement = spectator.queryHost('.texts');
+        expect(messageWrapperElement).toHaveComputedStyle({
+          'padding-top': '2px',
+          'padding-left': size('s'),
+          'padding-right': size('s'),
+          'padding-bottom': '0px',
+        });
       });
     });
 
