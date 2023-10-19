@@ -21,10 +21,14 @@ const config = {
   [disabled]="!canSelectFavorite"
 ></kirby-checkbox>
 </form>
-<cookbook-example-configuration-wrapper-reative-forms [form]="form"><kirby-checkbox
+<cookbook-example-configuration-wrapper>
+<kirby-checkbox
 [checked]="favoriteRequired"
 (checkedChange)="toggleCanSelectFavorite($event)"
-text="Form field enabled"></kirby-checkbox></cookbook-example-configuration-wrapper-reative-forms>
+text="Form field enabled"></kirby-checkbox>
+<cookbook-example-configuration-wrapper-reative-forms [form]="form"></cookbook-example-configuration-wrapper-reative-forms>
+</cookbook-example-configuration-wrapper>
+
 `,
   codeSnippet: `form: FormGroup = this.formBuilder.group({
   Bacon: new FormControl(false),

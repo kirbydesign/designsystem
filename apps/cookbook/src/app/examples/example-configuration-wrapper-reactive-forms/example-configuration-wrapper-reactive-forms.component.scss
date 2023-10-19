@@ -4,14 +4,6 @@
   display: flex;
 }
 
-cookbook-example-configuration-wrapper {
-  margin-left: utils.size('xxs');
-
-  @include utils.media('>=medium') {
-    margin-left: utils.size('xl');
-  }
-}
-
 .form-state {
   margin-top: utils.size('xs');
   border-top: 1px solid utils.get-color('medium');
