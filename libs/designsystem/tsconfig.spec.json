@@ -56,7 +56,8 @@
       "@kirbydesign/designsystem/reorder-list": ["reorder-list/index.ts"],
       "@kirbydesign/designsystem/toast": ["toast/index.ts"],
       "@kirbydesign/designsystem/action-group": ["action-group/index.ts"],
-      "@kirbydesign/designsystem/menu": ["menu/index.ts"]
+      "@kirbydesign/designsystem/menu": ["menu/index.ts"],
+      "@kirbydesign/designsystem/badge": ["badge/index.ts"]
     }
   },
   "files": ["test.ts"],

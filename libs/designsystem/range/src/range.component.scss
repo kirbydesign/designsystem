@@ -31,10 +31,10 @@ ion-range {
   --bar-height: #{utils.size('xxxxs')};
 
   &.range-disabled {
-    --knob-background: #{utils.get-color('semi-light')};
+    --knob-background: #{utils.get-color('medium')};
     --knob-box-shadow: none;
     --bar-background: #{utils.get-color('semi-light')};
-    --bar-background-active: #{utils.get-color('semi-light')};
+    --bar-background-active: #{utils.get-color('medium')};
 
     &::part(tick) {
       background: utils.get-color('semi-light');
@@ -79,6 +79,7 @@ ion-range {
     border-radius: 50%;
     width: $tick-width;
     height: $tick-height;
+    margin-top: 1px; // compensate for different height of ionic tick (8px)
     z-index: 1;
     margin-inline-start: -$tick-width * 0.5;
   }

@@ -1,4 +1,4 @@
-@use '../../scss/utils';
+@use '@kirbydesign/core/src/scss/utils';
 
 :host {
   position: var(--kirby-badge-position, relative);
@@ -18,14 +18,14 @@
     font-size: inherit;
     position: relative;
     box-shadow: var(--kirby-badge-elevation, none);
-  }
 
-  ::slotted(kirby-icon) {
-    --kirby-icon-font-size: #{utils.font-size('n')};
+    @include utils.slotted(kirby-icon) {
+      --kirby-icon-font-size: #{utils.font-size('n')};
 
-    position: absolute;
-    top: 0;
-    left: 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
   }
 }
 

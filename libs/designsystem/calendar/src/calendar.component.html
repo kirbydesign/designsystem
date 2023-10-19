@@ -1,6 +1,7 @@
 <div class="header">
   <div class="month-navigator">
     <button
+      type="button"
       [disabled]="!_canNavigateBack"
       (click)="_changeMonth(-1)"
       kirby-button
@@ -16,6 +17,7 @@
     </div>
 
     <button
+      type="button"
       [disabled]="!_canNavigateForward"
       (click)="_changeMonth(1)"
       kirby-button

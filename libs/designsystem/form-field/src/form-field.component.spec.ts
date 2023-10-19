@@ -29,7 +29,7 @@ describe('FormFieldComponent', () => {
       ItemComponent,
       FormFieldMessageComponent,
     ],
-    imports: [AffixDirective, InputComponent, TextareaComponent],
+    imports: [TestHelper.ionicModuleForTest, AffixDirective, InputComponent, TextareaComponent],
     mocks: [PlatformService],
     providers: [
       {
