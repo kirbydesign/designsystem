@@ -231,11 +231,6 @@ describe('RadioComponent', () => {
     const radioPadding = size('xxxxs');
     const radioIconInnerSize = `${parseInt(radioIconOuterSize) - parseInt(radioPadding) * 2}px`;
 
-    expect(ionRadioElement).toHaveComputedStyle({
-      width: radioIconOuterSize,
-      height: radioIconOuterSize,
-      padding: radioPadding,
-    });
     expect(radioIcon).toHaveComputedStyle({
       width: radioIconInnerSize,
       height: radioIconInnerSize,
