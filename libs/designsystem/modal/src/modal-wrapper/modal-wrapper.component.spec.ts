@@ -647,4 +647,32 @@ describe('ModalWrapperComponent', () => {
       });
     });
   });
+
+  describe('listenForScroll', () => {
+    it('it should set scrollEventsEnabled to be false when opened on desktop', async () => {
+      await TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
+
+      modalWrapperTestBuilder = new ModalWrapperTestBuilder(createComponent);
+      spectator = modalWrapperTestBuilder
+        .flavor('modal')
+        .title('test')
+        .component(TitleEmbeddedComponent)
+        .build();
+
+      expect(spectator.component.scrollEventsEnabled).toBeFalsy();
+    });
+
+    it('it should set scrollEventsEnabled to be true when opened on a phone', async () => {
+      await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
+
+      modalWrapperTestBuilder = new ModalWrapperTestBuilder(createComponent);
+      spectator = modalWrapperTestBuilder
+        .flavor('modal')
+        .title('test')
+        .component(TitleEmbeddedComponent)
+        .build();
+
+      expect(spectator.component.scrollEventsEnabled).toBeTruthy();
+    });
+  });
 });
