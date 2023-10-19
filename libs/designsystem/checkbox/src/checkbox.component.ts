@@ -20,12 +20,12 @@ import { IonicElementPartHelper } from '@kirbydesign/designsystem/helpers';
 @Component({
   standalone: true,
   imports: [IonicModule, CommonModule],
-  providers: [IonicElementPartHelper],
   selector: 'kirby-checkbox',
   templateUrl: './checkbox.component.html',
   styleUrls: ['./checkbox.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
+    IonicElementPartHelper,
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => CheckboxComponent),
