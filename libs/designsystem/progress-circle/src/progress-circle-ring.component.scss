@@ -1,7 +1,7 @@
 @use '@kirbydesign/core/src/scss/utils';
 
 svg {
-  transform: rotate(-90deg);
+  rotate: -90deg;
 }
 
 .circle {
