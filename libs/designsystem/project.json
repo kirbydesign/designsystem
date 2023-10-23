@@ -1,0 +1,37 @@
+{
+  "name": "designsystem",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/designsystem",
+  "prefix": "kirby",
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:package",
+      "options": {
+        "tsConfig": "libs/designsystem/tsconfig.lib.json",
+        "project": "libs/designsystem/ng-package.json",
+        "updateBuildableProjectDepsInPackageJson": false
+      }
+    },
+    "test": {
+      "executor": "@angular-devkit/build-angular:karma",
+      "options": {
+        "main": "libs/designsystem/test.ts",
+        "tsConfig": "libs/designsystem/tsconfig.spec.json",
+        "karmaConfig": "libs/designsystem/karma.conf.js",
+        "styles": ["libs/designsystem/testing/src/styles.scss"]
+      },
+      "outputs": ["{workspaceRoot}/coverage/libs/designsystem"]
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/designsystem/**/*.ts", "libs/designsystem/**/*.html"]
+      }
+    }
+  },
+  "generators": {
+    "@nx/angular:component": {}
+  },
+  "tags": []
+}

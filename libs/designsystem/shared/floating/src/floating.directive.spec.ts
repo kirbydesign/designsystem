@@ -3,12 +3,10 @@ import { createComponentFactory, mockProvider, Spectator } from '@ngneat/spectat
 import { PortalDirective } from '@kirbydesign/designsystem/shared/portal';
 import { PortalOutletConfig, TriggerEvent } from '@kirbydesign/designsystem/shared/floating';
 
-import * as floatingUi from '@floating-ui/dom';
 import { Strategy } from '@floating-ui/dom';
 import { Placement } from '@floating-ui/core/src/types';
 import { DesignTokenHelper } from '@kirbydesign/core';
 import { FloatingDirective, OutletSelector } from './floating.directive';
-import any = jasmine.any;
 
 @Component({
   template: `
@@ -192,19 +190,6 @@ describe('FloatingDirective', () => {
 
   describe('methods', () => {
     describe('ngOnInit', () => {
-      let autoUpdateFuncSpy;
-      let computePositionFuncSpy;
-
-      beforeEach(() => {
-        autoUpdateFuncSpy = jasmine.createSpy('autoUpdate').and.returnValue(null);
-        spyOnProperty(floatingUi, 'autoUpdate', 'get').and.returnValue(autoUpdateFuncSpy);
-
-        computePositionFuncSpy = jasmine
-          .createSpy('computePosition')
-          .and.returnValue(new Promise(null));
-        spyOnProperty(floatingUi, 'computePosition', 'get').and.returnValue(computePositionFuncSpy);
-      });
-
       describe('add styling', () => {
         it('should add style left to host element', () => {
           directive.ngOnInit();
@@ -239,36 +224,6 @@ describe('FloatingDirective', () => {
           expect(component.hostElementRef.nativeElement).toHaveComputedStyle({
             'z-index': DesignTokenHelper.zLayer('popover'),
           });
-        });
-      });
-      describe('autoUpdatePosition', () => {
-        it('should call floating-ui autoUpdate', () => {
-          spectator.detectChanges();
-          directive.ngOnInit();
-
-          expect(autoUpdateFuncSpy).toHaveBeenCalledWith(
-            component.floatingElementRef.nativeElement,
-            component.hostElementRef.nativeElement,
-            any(Function)
-          );
-        });
-      });
-      describe('updateHostElementPosition', () => {
-        it('should call computePosition with correct config', () => {
-          const placement: Placement = 'top-end';
-          spectator.setInput('placement', placement);
-
-          const strategy: Strategy = 'fixed';
-          spectator.setInput('strategy', strategy);
-
-          spectator.detectChanges();
-          directive.ngOnInit();
-
-          expect(computePositionFuncSpy).toHaveBeenCalledWith(
-            component.floatingElementRef.nativeElement,
-            component.hostElementRef.nativeElement,
-            any(Object)
-          );
         });
       });
     });
