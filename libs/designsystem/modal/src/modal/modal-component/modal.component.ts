@@ -6,10 +6,9 @@ import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 import { KirbyIonicModule } from '@kirbydesign/designsystem/kirby-ionic-module';
+import { ModalSize } from '@kirbydesign/designsystem/modal';
 
 type Flavor = 'modal' | 'drawer';
-type Size = 'xxs' | 'xs' | 'sm' | 'md' | 'lg';
-type SizeTemp = 'md';
 
 @Component({
   selector: 'kirby-modal',
@@ -32,8 +31,8 @@ export class ModalComponent {
   @Input() scrollDisabled = false;
   @Input() breakpoints: number[];
   @Input() initialBreakpoint;
-  @Input() size: SizeTemp = 'md';
-  @Input() set height(userDefinedHeight: string) {
+  @Input() size: ModalSize = 'medium';
+  @Input() set customHeight(userDefinedHeight: string) {
     // If the user has defined a height, then we override the --height
     // specified by the 'size' classes in /core/src/scss/_global-styles.scss
     this.modalElement.nativeElement.style.setProperty('--height', userDefinedHeight);
@@ -65,10 +64,10 @@ export class ModalComponent {
   }
 
   public scrollToTop(scrollDuration?: KirbyAnimation.Duration) {
-    this.ionContent.scrollToTop(scrollDuration || 0);
+    this.ionContent.scrollToTop(scrollDuration);
   }
 
   public scrollToBottom(scrollDuration?: KirbyAnimation.Duration) {
-    this.ionContent.scrollToBottom(scrollDuration || 0);
+    this.ionContent.scrollToBottom(scrollDuration);
   }
 }

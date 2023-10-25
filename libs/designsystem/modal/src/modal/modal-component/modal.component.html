@@ -1,11 +1,11 @@
 <ion-modal
-  class="kirby-modal"
+  class="kirby-modal kirby-overlay"
   [isOpen]="open"
   [breakpoints]="flavor === 'drawer' ? breakpoints : undefined"
   [initialBreakpoint]="flavor === 'drawer' ? initialBreakpoint : undefined"
   [handle]="false"
   [canDismiss]="canDismiss"
-  [ngClass]="size"
+  [ngClass]="'kirby-modal-' + size"
   (willPresent)="_onWillPresent($event)"
   (didPresent)="_onDidPresent($event)"
   (willDismiss)="_onWillDismiss($event)"
