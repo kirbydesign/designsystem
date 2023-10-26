@@ -6,8 +6,11 @@ This document provides information about breaking changes and their migrations f
 
 - [Components](#components-v9)
   - [Avatar](#avatar-v9)
-  - [Modal](#modal-v9)
+  - [Button](#button-v9)
   - [Experimental Alert](#experimental-alert-v9)
+  - [Grid](#grid-v9)
+  - [Modal](#modal-v9)
+  - [Slides](#slides-v9)
 - [Styles](#styles-v9)
 
 <h3 id="components-v9">Components</h3>
@@ -16,13 +19,27 @@ This document provides information about breaking changes and their migrations f
 
 The `shadow` input binding has been removed and `stroke` should be used instead for a similar effect.
 
-<h4 id="modal-v9">Modal</h4>
+<h4 id="button-v9">Button</h4>
 
-The following methods have been removed from the `modalController` and all uses of these method should be removed: `registerPresentingElement`, `scrollToTop`, `scrollToBottom`.
+The deprecated attention level 4 has been removed. This has no visual significance as level 4 was mapped to level 3 internally in the button, but any references to attention level 4 should be removed from code.
 
 <h4 id="experimental-alert-v9">Experimental Alert</h4>
 
 The Experimental Alert has been fully removed and we recommend to use the normal alert instead.
+
+<h4 id="grid-v9">Grid</h4>
+
+The grid **component** has been removed in favor of using the much more flexible [Grid HTML classes](https://cookbook.kirby.design/#/home/showcase/grid).
+
+<h4 id="modal-v9">Modal</h4>
+
+The following methods have been removed from the `modalController` and all usages of these methods should be removed: `registerPresentingElement`, `scrollToTop`, `scrollToBottom`.
+
+<h4 id="slides-v9">Slides</h4>
+
+Navigation arrows (desktop only) and selected slide indicators are now shown by default. It is possible to opt-out of this by setting `showNavigation` to `false`.
+
+The `selectedSlide` event emitter has been removed and `slideChange` should be used as a direct replacement.
 
 <h3 id="styles-v9">Styles</h3>
 

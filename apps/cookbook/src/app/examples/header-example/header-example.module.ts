@@ -6,6 +6,7 @@ import { KirbyModule } from '@kirbydesign/designsystem';
 import { HeaderExampleComponent } from './header-example.component';
 
 import { HeaderExampleDefaultComponent } from './examples/default';
+import { HeaderExampleSubtitleListComponent } from './examples/subtitles';
 import { HeaderExampleAvatarComponent } from './examples/avatar';
 import { HeaderExampleProgressCircleWithAvatarComponent } from './examples/progress-circle-with-avatar';
 import { HeaderExampleFlagComponent } from './examples/flag';
@@ -17,6 +18,7 @@ import { HeaderExampleTitleScalingComponent } from './examples/title-scaling';
 const COMPONENT_DECLARATIONS = [
   HeaderExampleComponent,
   HeaderExampleDefaultComponent,
+  HeaderExampleSubtitleListComponent,
   HeaderExampleAvatarComponent,
   HeaderExampleProgressCircleWithAvatarComponent,
   HeaderExampleFlagComponent,

@@ -67,16 +67,6 @@ describe('SlidesComponent', () => {
     expect(spectator.component.swiperContainer.nativeElement.swiper.activeIndex).toBe(2);
   });
 
-  it('should emit selectedSlide when the active slide is changed', () => {
-    const selectedSlideSpy = spyOn(spectator.component.selectedSlide, 'emit');
-
-    expect(selectedSlideSpy).not.toHaveBeenCalled();
-
-    spectator.component.slideTo(3);
-
-    expect(selectedSlideSpy).toHaveBeenCalledWith({ slide: 3, index: 3 });
-  });
-
   it('should emit slideChange when the active slide is changed', () => {
     const slideChangeSpy = spyOn(spectator.component.slideChange, 'emit');
 

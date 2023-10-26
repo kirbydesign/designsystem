@@ -24,13 +24,13 @@ describe('CheckboxComponent', () => {
 
   let spectator: Spectator<CheckboxComponent>;
   let ionCheckbox: HTMLIonCheckboxElement;
-  let label: HTMLSpanElement;
+  let label: HTMLLabelElement;
 
   beforeEach(async () => {
     spectator = createComponent({ props: { text: 'test' } });
     ionCheckbox = spectator.query('ion-checkbox');
     await TestHelper.whenReady(ionCheckbox);
-    label = spectator.query('span');
+    label = ionCheckbox.shadowRoot.querySelector('label');
   });
 
   it('should create', () => {
@@ -47,15 +47,15 @@ describe('CheckboxComponent', () => {
       expect(ionCheckbox).toHaveComputedStyle({
         '--size': checkboxIconSize,
         '--checkmark-color': getColor('white'),
-        '--background-checked': getColor('black'),
+        '--checkbox-background-checked': getColor('black'),
         '--border-color-checked': getColor('black'),
       });
     });
 
     it('should have correct vertical spacing', () => {
-      expect(ionCheckbox).toHaveComputedStyle({
-        'margin-left': size('s'),
-        'margin-right': size('xs'),
+      expect(label).toHaveComputedStyle({
+        'padding-left': size('s'),
+        'padding-right': size('xs'),
       });
     });
 
@@ -93,7 +93,7 @@ describe('CheckboxComponent', () => {
       spectator.detectChanges();
       expect(ionCheckbox).toHaveComputedStyle({
         '--checkmark-color': getColor('black'),
-        '--background-checked': getColor('success'),
+        '--checkbox-background-checked': getColor('success'),
         '--border-color-checked': getColor('success'),
       });
     });
@@ -163,8 +163,8 @@ describe('CheckboxComponent', () => {
         spectator.detectChanges();
         expect(ionCheckbox).toHaveComputedStyle({
           '--checkmark-color': getColor('semi-dark'),
-          '--background': getColor('semi-light'),
-          '--background-checked': getColor('semi-light'),
+          '--checkbox-background': getColor('semi-light'),
+          '--checkbox-background-checked': getColor('semi-light'),
           '--border-color': getColor('medium'),
           '--border-color-checked': getColor('semi-light'),
         });

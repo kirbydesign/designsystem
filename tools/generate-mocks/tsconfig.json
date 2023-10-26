@@ -2,6 +2,7 @@
   "compilerOptions": {
     "outDir": "./dist",
     "types": ["node"],
-    "lib": ["es2017"]
+    "lib": ["es2017"],
+    "skipLibCheck": true
   }
 }

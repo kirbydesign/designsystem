@@ -1,6 +1,14 @@
 import { createDirectiveFactory, SpectatorDirective } from '@ngneat/spectator';
+import { Component } from '@angular/core';
 import { CardComponent } from '../card.component';
 import { CardAsButtonDirective } from './card-as-button.directive';
+
+@Component({ selector: 'kirby-card-click-host', template: '' })
+class KirbyCardClickHostComponent {
+  someMethod() {
+    //noop
+  }
+}
 
 describe('CardAsButtonDirective', () => {
   let spectator: SpectatorDirective<CardAsButtonDirective>;
@@ -10,6 +18,7 @@ describe('CardAsButtonDirective', () => {
     directive: CardAsButtonDirective,
     imports: [],
     declarations: [CardComponent],
+    host: KirbyCardClickHostComponent,
   });
   beforeEach(() => {
     spectator = createDirective(`<kirby-card (click)="someMethod()"> </kirby-card>`);

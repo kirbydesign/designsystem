@@ -5,6 +5,9 @@ import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { FlagComponent } from 'flag/src';
 import { AvatarComponent } from 'avatar/src';
+import { IconModule } from 'icon/src';
+import { ProgressCircleComponent } from 'progress-circle/src';
+import { ActionGroupComponent } from 'action-group/src';
 import { HeaderModule } from './header.module';
 import { HeaderComponent } from './header.component';
 
@@ -13,7 +16,15 @@ const { fontSize, size } = DesignTokenHelper;
 describe('HeaderComponent', () => {
   const createHost = createHostFactory({
     component: HeaderComponent,
-    imports: [TestHelper.ionicModuleForTest, HeaderModule, FlagComponent, AvatarComponent],
+    imports: [
+      TestHelper.ionicModuleForTest,
+      HeaderModule,
+      FlagComponent,
+      AvatarComponent,
+      IconModule,
+      ProgressCircleComponent,
+      ActionGroupComponent,
+    ],
     detectChanges: true,
   });
 
@@ -40,20 +51,46 @@ describe('HeaderComponent', () => {
     });
 
     it(`should have correct subtitle1`, () => {
-      const subtitle1Element = spectator.query('.subtitle1');
+      const subtitle1Element = spectator.queryAll('.subtitle')[0];
+      const subtitle1SpanElement = subtitle1Element.firstElementChild;
+      const expectedFontSize = fontSize('s');
+      const spaceCharacterWidthInEm = 0.25;
+      const spaceCharacterWidthInPx = `${parseInt(expectedFontSize) * spaceCharacterWidthInEm}px`;
 
       expect(subtitle1Element).toHaveExactTrimmedText(subtitle1);
       expect(subtitle1Element).toHaveComputedStyle({
-        'font-size': fontSize('s'),
+        'font-size': expectedFontSize,
+        display: 'flex',
+        'flex-flow': 'row wrap',
+        'column-gap': spaceCharacterWidthInPx,
+      });
+
+      expect(subtitle1SpanElement).toHaveComputedStyle({
+        'text-overflow': 'ellipsis',
+        'white-space': 'nowrap',
+        overflow: 'hidden',
       });
     });
 
-    it(`should have subtitle2`, () => {
-      const subtitle2Element = spectator.query('.subtitle2');
+    it(`should have correct subtitle2`, () => {
+      const subtitle2Element = spectator.queryAll('.subtitle')[1];
+      const subtitle2SpanElement = subtitle2Element.firstElementChild;
+      const expectedFontSize = fontSize('s');
+      const spaceCharacterWidthInEm = 0.25;
+      const spaceCharacterWidthInPx = `${parseInt(expectedFontSize) * spaceCharacterWidthInEm}px`;
 
       expect(subtitle2Element).toHaveExactTrimmedText(subtitle2);
       expect(subtitle2Element).toHaveComputedStyle({
-        'font-size': fontSize('s'),
+        'font-size': expectedFontSize,
+        display: 'flex',
+        'flex-flow': 'row wrap',
+        'column-gap': spaceCharacterWidthInPx,
+      });
+
+      expect(subtitle2SpanElement).toHaveComputedStyle({
+        'text-overflow': 'ellipsis',
+        'white-space': 'nowrap',
+        overflow: 'hidden',
       });
     });
 
@@ -80,6 +117,52 @@ describe('HeaderComponent', () => {
           });
         });
       });
+    });
+  });
+
+  describe('with subtitle list', () => {
+    const subtitles = [
+      'Subtitle one first line with a very long text that wont fit on a small screen',
+      '&',
+      'Subtitle 2 second line',
+    ];
+    const subtitlesAsString = `['${subtitles.join("','")}']`;
+
+    let spectator: Spectator<HeaderComponent>;
+    beforeEach(() => {
+      spectator = createHost(`
+      <kirby-header title="title" [subtitle1]="${subtitlesAsString}">
+      </kirby-header>
+      `);
+    });
+
+    it(`should have correct subtitle1`, () => {
+      const subtitle1Element = spectator.queryAll<HTMLDivElement>('.subtitle')[0];
+      const firstSubtitle = subtitle1Element.firstElementChild;
+      const secondSubtitle = firstSubtitle.nextElementSibling;
+      const thirdSubtitle = secondSubtitle.nextElementSibling;
+
+      expect(firstSubtitle).toHaveExactTrimmedText(subtitles[0]);
+      expect(secondSubtitle).toHaveExactTrimmedText(subtitles[1]);
+      expect(thirdSubtitle).toHaveExactTrimmedText(subtitles[2]);
+    });
+
+    it(`should render all strings in subtitle list`, () => {
+      const subtitle1Element = spectator.queryAll<HTMLDivElement>('.subtitle')[0];
+      expect(subtitle1Element.children).toHaveLength(subtitles.length);
+    });
+
+    it(`should have correct wrapping of subtitles`, () => {
+      const subtitle1Element = spectator.queryAll<HTMLDivElement>('.subtitle')[0];
+      subtitle1Element.style.width = '200px';
+      const firstSubtitle = subtitle1Element.firstElementChild as HTMLElement;
+      const secondSubtitle = firstSubtitle.nextElementSibling as HTMLElement;
+      const thirdSubtitle = secondSubtitle.nextElementSibling as HTMLElement;
+      const firstLineOffsetBottom = firstSubtitle.offsetTop + firstSubtitle.offsetHeight;
+
+      expect(secondSubtitle.offsetTop).toBe(firstLineOffsetBottom);
+      expect(thirdSubtitle.offsetTop).toBe(firstLineOffsetBottom);
+      expect(secondSubtitle.offsetTop).toBe(thirdSubtitle.offsetTop);
     });
   });
 
