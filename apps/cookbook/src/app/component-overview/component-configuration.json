@@ -8,31 +8,31 @@
     },
     {
       "title": "Action Sheet",
-      "paragraph": "Action sheets are context menus that overlay content, need manual dismissal, and offer related choices to the current context",
+      "paragraph": "Action Sheet is a context menu that overlay content, need manual dismissal, and offer related choices to the current context",
       "svgPath": "./assets/component-svg/Action-Sheet-Kirby-Component-Overview.svg",
       "route": "/home/showcase/action-sheet"
     },
     {
       "title": "Alert",
-      "paragraph": "Alerts are the most urgent notifications, demanding immediate attention and persisting until dismissed by the user. They convey important information and warnings.",
+      "paragraph": "Alert is the most urgent notification, demanding immediate attention and persisting until dismissed by the user. It conveys important information and warnings.",
       "svgPath": "./assets/component-svg/Alert-Kirby-Component-Overview.svg",
       "route": "/home/showcase/alert"
     },
     {
       "title": "Avatar",
-      "paragraph": "Avatars are circular components that visually represent users or objects, utilizing images, icons, or text/initials for clear identification.",
+      "paragraph": "Avatar is a circular component that visually represents a user or object, utilizing images, icons, or text/initials for clear identification.",
       "svgPath": "./assets/component-svg/Avatar-Kirby-Component-Overview.svg",
       "route": "/home/showcase/avatar"
     },
     {
       "title": "Badge",
-      "paragraph": "Badges are small, helpful elements used to display numeric values or icons, providing additional information or visual hints to complement other components.",
+      "paragraph": "Badge is a small, helpful element used to display numeric values or icons, providing additional information or visual hint to complement other components.",
       "svgPath": "./assets/component-svg/Badge-Kirby-Component-Overview.svg",
       "route": "/home/showcase/badge"
     },
     {
       "title": "Button",
-      "paragraph": "Buttons allow users to perform actions and make choices with a single tap, such as submitting forms and triggering actions.",
+      "paragraph": "Button allow users to perform actions and make choices with a single tap, such as submitting forms and triggering actions.",
       "svgPath": "./assets/component-svg/Button-Kirby-Component-Overview.svg",
       "route": "/home/showcase/button"
     },
@@ -44,25 +44,25 @@
     },
     {
       "title": "Card",
-      "paragraph": "Cards are containers for displaying content related to a subject or group, offering structured layouts for various elements.",
+      "paragraph": "Card is a container for displaying content related to a subject or group, offering structured layouts for various elements.",
       "svgPath": "./assets/component-svg/Card-Kirby-Component-Overview.svg",
       "route": "/home/showcase/card"
     },
     {
       "title": "Chart",
-      "paragraph": "Charts visually represent data using diverse chart types, providing valuable insights into trends and patterns for enhanced data comprehension.",
+      "paragraph": "Chart visually represents data using diverse chart types, providing valuable insights into trends and patterns for enhanced data comprehension.",
       "svgPath": "./assets/component-svg/Chart-Kirby-Component-Overview.svg",
       "route": "/home/showcase/chart"
     },
     {
       "title": "Chart Stock",
-      "paragraph": "Chart stock visually illustrates historical security prices over time, utilizing a time-based x- axis and a price-based y-axis.",
+      "paragraph": "Chart Stock visually illustrates historical security prices over time, utilizing a time-based x- axis and a price-based y-axis.",
       "svgPath": "./assets/component-svg/Chart-Stock-Kirby-Component-Overview.svg",
       "route": "/home/showcase/chart-stock"
     },
     {
       "title": "Checkbox",
-      "paragraph": "Checkboxes enable users to independently select multiple options from a set, offering flexible control for choosing preferences.",
+      "paragraph": "Checkbox enable users to independently select multiple options from a set, offering flexible control for choosing preferences.",
       "svgPath": "./assets/component-svg/Checkbox-Kirby-Component-Overview.svg",
       "route": "/home/showcase/checkbox"
     },
@@ -73,7 +73,7 @@
       "route": "/home/showcase/colors"
     },
     {
-      "title": "Data table",
+      "title": "Data Table",
       "paragraph": "Data Table displays extensive volumes of intricate data in a well-organized, tabular format for comprehensive information presentation.",
       "svgPath": "./assets/component-svg/Data-Table-Kirby-Component-Overview.svg",
       "route": "/home/showcase/data-table"
@@ -86,7 +86,7 @@
     },
     {
       "title": "Dropdown",
-      "paragraph": "Dropdowns display multiple choices for user selection and appear upon interaction with an element.",
+      "paragraph": "Dropdown displays multiple choices for user selection and appear upon interaction with an element.",
       "svgPath": "./assets/component-svg/Dropdown-Kirby-Component-Overview.svg",
       "route": "/home/showcase/dropdown"
     },
@@ -104,7 +104,7 @@
     },
     {
       "title": "Flag",
-      "paragraph": "Flags are color-coded elements used to emphasize or aid interpretation of information.",
+      "paragraph": "Flag is a color-coded element used to emphasize or aid interpretation of information.",
       "svgPath": "./assets/component-svg/Flag-Kirby-Component-Overview.svg",
       "route": "/home/showcase/flag"
     },
@@ -116,7 +116,7 @@
     },
     {
       "title": "Form Field",
-      "paragraph": "Form Fields are interactive input elements that enable users to enter and edit information.",
+      "paragraph": "Form Field is an interactive input element that enable users to enter and edit information.",
       "svgPath": "./assets/component-svg/Form-Field-Kirby-Component-Overview.svg",
       "route": "/home/showcase/form-field"
     },
@@ -157,8 +157,8 @@
       "route": "/home/showcase/progress-circle"
     },
     {
-      "title": "Radio Buttons",
-      "paragraph": "Radio buttons allows users to make a single selection from a set of options, with the selection of one option automatically deselecting the others.",
+      "title": "Radio Button",
+      "paragraph": "Radio button allows users to make a single selection from a set of options, with the selection of one option automatically deselecting the others.",
       "svgPath": "./assets/component-svg/Radio-Buttons-Kirby-Component-Overview.svg",
       "route": "/home/showcase/radio"
     },
@@ -182,7 +182,7 @@
     },
     {
       "title": "Slides",
-      "paragraph": "Slides are a collection of cards or content that users can navigate horizontally by swiping or clicking.",
+      "paragraph": "Slides is a collection of cards or content that users can navigate horizontally by swiping or clicking.",
       "svgPath": "./assets/component-svg/Slides-Kirby-Component-Overview.svg",
       "route": "/home/showcase/slides"
     },
@@ -194,13 +194,13 @@
     },
     {
       "title": "Toast",
-      "paragraph": "Toasts are subtle notifications that give immediate feedback to users after taking an action.",
+      "paragraph": "Toast is a subtle notification that give immediate feedback to users after taking an action.",
       "svgPath": "./assets/component-svg/Toast-Kirby-Component-Overview.svg",
       "route": "/home/showcase/toast"
     },
     {
       "title": "Toggle",
-      "paragraph": "Toggles are input controls for binary options, commonly used for managing choices and switches.",
+      "paragraph": "Toggle is an input control for binary options, commonly used for managing choices and switches.",
       "svgPath": "./assets/component-svg/Toggle-Kirby-Component-Overview.svg",
       "route": "/home/showcase/toggle"
     }
