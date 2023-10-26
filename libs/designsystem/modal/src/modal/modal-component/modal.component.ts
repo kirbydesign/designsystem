@@ -1,12 +1,20 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { IonContent, IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 import { KirbyIonicModule } from '@kirbydesign/designsystem/kirby-ionic-module';
-import { ModalSize } from '@kirbydesign/designsystem/modal';
+import { DrawerSupplementaryAction, ModalSize } from '@kirbydesign/designsystem/modal';
 
 type Flavor = 'modal' | 'drawer';
 
@@ -17,31 +25,35 @@ type Flavor = 'modal' | 'drawer';
   standalone: true,
   imports: [CommonModule, KirbyIonicModule, IconModule, ButtonComponent],
 })
-export class ModalComponent {
+export class ModalComponent implements AfterViewInit {
   @ViewChild(IonModal) modal: IonModal;
   @ViewChild(IonModal, { static: true, read: ElementRef })
   modalElement: ElementRef<HTMLElement>;
   @ViewChild(IonContent) ionContent: IonContent;
 
-  @Input() flavor: Flavor = 'modal';
-  @Input() open = false;
-  @Input() canDismiss: boolean | (() => Promise<boolean>) = true;
-  @Input() title = '';
-  @Input() hasCollapsibleTitle = false;
-  @Input() scrollDisabled = false;
-  @Input() breakpoints: number[];
-  @Input() initialBreakpoint;
+  _customHeight?: string;
+
+  @Input() collapsibleTitle = false;
   @Input() size: ModalSize = 'medium';
-  @Input() set customHeight(userDefinedHeight: string) {
-    // If the user has defined a height, then we override the --height
-    // specified by the 'size' classes in /core/src/scss/_global-styles.scss
-    this.modalElement.nativeElement.style.setProperty('--height', userDefinedHeight);
+  @Input() set customHeight(customHeight: string) {
+    this._customHeight = customHeight;
   }
+  @Input() flavor: Flavor = 'modal';
+  @Input() canDismiss: boolean | (() => Promise<boolean>) = true;
+  @Input() drawerSupplementaryAction?: DrawerSupplementaryAction;
+  @Input() open = false;
+  @Input() title = '';
 
   @Output() willPresent = new EventEmitter<CustomEvent<OverlayEventDetail>>();
   @Output() didPresent = new EventEmitter<CustomEvent<OverlayEventDetail>>();
   @Output() didDismiss = new EventEmitter<CustomEvent<OverlayEventDetail>>();
   @Output() willDismiss = new EventEmitter<CustomEvent<OverlayEventDetail>>();
+
+  ngAfterViewInit(): void {
+    if (this._customHeight) {
+      this.modalElement.nativeElement.style.setProperty('--kirby-modal-height', this._customHeight);
+    }
+  }
 
   _closeModal() {
     this.modal.dismiss(null, 'cancel');
