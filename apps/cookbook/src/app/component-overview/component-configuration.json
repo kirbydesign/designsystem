@@ -158,7 +158,7 @@
     },
     {
       "title": "Radio Button",
-      "paragraph": "Radio button allows users to make a single selection from a set of options, with the selection of one option automatically deselecting the others.",
+      "paragraph": "Radio Button allows users to make a single selection from a set of options, with the selection of one option automatically deselecting the others.",
       "svgPath": "./assets/component-svg/Radio-Buttons-Kirby-Component-Overview.svg",
       "route": "/home/showcase/radio"
     },
