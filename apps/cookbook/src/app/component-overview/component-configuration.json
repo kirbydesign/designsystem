@@ -8,7 +8,7 @@
     },
     {
       "title": "Action Sheet",
-      "paragraph": "Action Sheet is a context menu that overlay content, requires manual dismissal, and offer related choices to the current context",
+      "paragraph": "Action Sheet is a context menu that overlays content, requires manual dismissal, and offer related choices to the current context",
       "svgPath": "./assets/component-svg/Action-Sheet-Kirby-Component-Overview.svg",
       "route": "/home/showcase/action-sheet"
     },
