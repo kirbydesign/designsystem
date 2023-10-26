@@ -8,7 +8,7 @@
     },
     {
       "title": "Action Sheet",
-      "paragraph": "Action Sheet is a context menu that overlay content, need manual dismissal, and offer related choices to the current context",
+      "paragraph": "Action Sheet is a context menu that overlay content, requires manual dismissal, and offer related choices to the current context",
       "svgPath": "./assets/component-svg/Action-Sheet-Kirby-Component-Overview.svg",
       "route": "/home/showcase/action-sheet"
     },
@@ -32,7 +32,7 @@
     },
     {
       "title": "Button",
-      "paragraph": "Button allow users to perform actions and make choices with a single tap, such as submitting forms and triggering actions.",
+      "paragraph": "Button allows users to perform actions and make choices with a single tap, such as submitting forms and triggering actions.",
       "svgPath": "./assets/component-svg/Button-Kirby-Component-Overview.svg",
       "route": "/home/showcase/button"
     },
@@ -62,13 +62,13 @@
     },
     {
       "title": "Checkbox",
-      "paragraph": "Checkbox enable users to independently select multiple options from a set, offering flexible control for choosing preferences.",
+      "paragraph": "Checkbox enables users to independently select multiple options from a set, offering flexible control for choosing preferences.",
       "svgPath": "./assets/component-svg/Checkbox-Kirby-Component-Overview.svg",
       "route": "/home/showcase/checkbox"
     },
     {
       "title": "Colors",
-      "paragraph": "Colors serves as a repository for Kirby's brand colors, guaranteeing uniform and harmonious color usage.",
+      "paragraph": "Colors serve as a repository for Kirby's brand colors, guaranteeing uniform and harmonious color usage.",
       "svgPath": "./assets/component-svg/Colors-Kirby-Component-Overview.svg",
       "route": "/home/showcase/colors"
     },
@@ -86,7 +86,7 @@
     },
     {
       "title": "Dropdown",
-      "paragraph": "Dropdown displays multiple choices for user selection and appear upon interaction with an element.",
+      "paragraph": "Dropdown displays multiple choices for user selection and appears upon interaction with an element.",
       "svgPath": "./assets/component-svg/Dropdown-Kirby-Component-Overview.svg",
       "route": "/home/showcase/dropdown"
     },
@@ -116,7 +116,7 @@
     },
     {
       "title": "Form Field",
-      "paragraph": "Form Field is an interactive input element that enable users to enter and edit information.",
+      "paragraph": "Form Field is an interactive input element that enables users to enter and edit information.",
       "svgPath": "./assets/component-svg/Form-Field-Kirby-Component-Overview.svg",
       "route": "/home/showcase/form-field"
     },
@@ -194,7 +194,7 @@
     },
     {
       "title": "Toast",
-      "paragraph": "Toast is a subtle notification that give immediate feedback to users after taking an action.",
+      "paragraph": "Toast is a subtle notification that gives immediate feedback to users after taking an action.",
       "svgPath": "./assets/component-svg/Toast-Kirby-Component-Overview.svg",
       "route": "/home/showcase/toast"
     },
