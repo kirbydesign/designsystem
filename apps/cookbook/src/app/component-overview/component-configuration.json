@@ -110,7 +110,7 @@
     },
     {
       "title": "Fonts",
-      "paragraph": "Fonts provides a showcase of the Kirby font set, demonstrating typography styles to maintain consistency and establish a visual identity.",
+      "paragraph": "Fonts provide a showcase of the Kirby font set, demonstrating typography styles to maintain consistency and establish a visual identity.",
       "svgPath": "./assets/component-svg/Fonts-Kirby-Component-Overview.svg",
       "route": "/home/showcase/fonts"
     },
