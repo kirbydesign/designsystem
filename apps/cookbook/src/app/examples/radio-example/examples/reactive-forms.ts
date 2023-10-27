@@ -15,6 +15,7 @@ const config = {
     [checked]="canSelectFavorite"
     (checkedChange)="toggleEnabled($event)"
     text="Form field enabled"
+    size="xs"
   >
   </kirby-checkbox>
 
@@ -22,6 +23,7 @@ const config = {
     [checked]="favoriteRequired"
     (checkedChange)="toggleRequired($event)"
     text="Form field required"
+    size="xs"
   >
   </kirby-checkbox>
 
@@ -80,7 +82,6 @@ toggleRequired(required: boolean) {
   template: config.template,
   styleUrls: ['../../ng-forms.shared.scss'],
   // eslint-disable-next-line @angular-eslint/no-host-metadata-property
-  host: { '[class.checkbox-xs]': 'true' }, // Extra small checkboxes
 })
 export class RadioReactiveFormsExampleComponent implements OnInit {
   template: string = config.template.split('<cookbook-example-configuration-wrapper>')[0];
