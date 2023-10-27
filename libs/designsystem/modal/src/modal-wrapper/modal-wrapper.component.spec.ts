@@ -654,7 +654,7 @@ describe('ModalWrapperComponent', () => {
       console.log('Here we reset');
       TestHelper.resetTestWindow();
     });
-    it('it should set scrollEventsEnabled to be false when opened on desktop', async () => {
+    it('should set scrollEventsEnabled to be false when opened on desktop', async () => {
       await TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
 
       modalWrapperTestBuilder = new ModalWrapperTestBuilder(createComponent);
@@ -667,7 +667,7 @@ describe('ModalWrapperComponent', () => {
       expect(spectator.component.scrollEventsEnabled).toBeFalsy();
     });
 
-    it('it should set scrollEventsEnabled to be true when opened on a phone', async () => {
+    it('should set scrollEventsEnabled to be true when opened on a phone', async () => {
       await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
 
       modalWrapperTestBuilder = new ModalWrapperTestBuilder(createComponent);
@@ -692,6 +692,22 @@ describe('ModalWrapperComponent', () => {
 
       await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
       await TestHelper.whenTrue(() => spectator.component.scrollEventsEnabled);
+
+      expect(spectator.component.scrollEventsEnabled).toBeTrue();
+    });
+
+    it('should styling on toolbar when scrolling past offset on phone', async () => {
+      const animationDuration = KirbyAnimation.Duration.LONG;
+      const ionContent: IonContent = spectator.query(IonContent);
+      await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
+      modalWrapperTestBuilder = new ModalWrapperTestBuilder(createComponent);
+      spectator = modalWrapperTestBuilder
+        .flavor('modal')
+        .title('test')
+        .component(TitleEmbeddedComponent)
+        .build();
+
+      spectator.component.scrollToBottom(animationDuration);
 
       expect(spectator.component.scrollEventsEnabled).toBeTrue();
     });
