@@ -26,7 +26,7 @@ const config = {
 [checked]="favoriteRequired"
 (checkedChange)="toggleCanSelectFavorite($event)"
 text="Form field enabled"></kirby-checkbox>
-<cookbook-example-configuration-wrapper-reative-forms [form]="form"></cookbook-example-configuration-wrapper-reative-forms>
+<cookbook-reactive-form-state [form]="form"></cookbook-reactive-form-state>
 </cookbook-example-configuration-wrapper>
 
 `,
@@ -62,7 +62,7 @@ toggleCanSelectFavorite() {
         display: flex;
       }
 
-      cookbook-example-configuration-wrapper-reative-forms {
+      cookbook-reactive-form-state {
         margin-left: utils.size('xxs');
 
         @include utils.media('>=medium') {

@@ -2,11 +2,11 @@ import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'cookbook-example-configuration-wrapper-reative-forms',
-  templateUrl: './example-configuration-wrapper-reactive-forms.component.html',
-  styleUrls: ['./example-configuration-wrapper-reactive-forms.component.scss'],
+  selector: 'cookbook-reactive-form-state',
+  templateUrl: './reactive-form-state.component.html',
+  styleUrls: ['./reactive-form-state.component.scss'],
 })
-export class ExampleConfigurationWrapperReactiveFormsComponent {
+export class ReactiveFormStateComponent {
   @Input() form: FormGroup;
 
   isRequired(controlId: string): boolean {

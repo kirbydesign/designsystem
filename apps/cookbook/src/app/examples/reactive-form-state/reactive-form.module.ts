@@ -4,13 +4,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { KirbyModule } from '@kirbydesign/designsystem';
 
-import { ExampleConfigurationWrapperReactiveFormsComponent } from './example-configuration-wrapper-reactive-forms.component';
+import { ReactiveFormStateComponent } from './reactive-form-state.component';
 
-const COMPONENT_DECLARATIONS = [ExampleConfigurationWrapperReactiveFormsComponent];
+const COMPONENT_DECLARATIONS = [ReactiveFormStateComponent];
 
 @NgModule({
   imports: [CommonModule, KirbyModule, FormsModule, ReactiveFormsModule],
   declarations: COMPONENT_DECLARATIONS,
   exports: COMPONENT_DECLARATIONS,
 })
-export class ExampleConfigurationWrapperReactiveFormsExampleModule {}
+export class ReactiveFormStateExampleModule {}
