@@ -650,6 +650,10 @@ describe('ModalWrapperComponent', () => {
   });
 
   describe('listenForScroll', () => {
+    afterEach(() => {
+      console.log('Here we reset');
+      TestHelper.resetTestWindow();
+    });
     it('it should set scrollEventsEnabled to be false when opened on desktop', async () => {
       await TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
 
@@ -674,6 +678,22 @@ describe('ModalWrapperComponent', () => {
         .build();
 
       expect(spectator.component.scrollEventsEnabled).toBeTruthy();
+    });
+
+    it('should set scrollEventsEnabled to be true when resizing from desktop to phone', async () => {
+      await TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
+      modalWrapperTestBuilder = new ModalWrapperTestBuilder(createComponent);
+      spectator = modalWrapperTestBuilder
+        .flavor('modal')
+        .title('test')
+        .component(TitleEmbeddedComponent)
+        .build();
+      expect(spectator.component.scrollEventsEnabled).toBeFalse();
+
+      await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
+      await TestHelper.whenTrue(() => spectator.component.scrollEventsEnabled);
+
+      expect(spectator.component.scrollEventsEnabled).toBeTrue();
     });
   });
 });
