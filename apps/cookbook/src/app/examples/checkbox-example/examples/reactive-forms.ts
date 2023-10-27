@@ -9,7 +9,6 @@ const config = {
       text="Bacon"
       [disabled]="!canSelectFavorite">
 </kirby-checkbox>
-    <div></div>
     <kirby-checkbox
     formControlName="Salami"
     text="Salami"
