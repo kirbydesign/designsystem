@@ -793,7 +793,7 @@ describe('PageComponent', () => {
         await TestHelper.whenReady(ionContent);
         const contentInner = ionContent.querySelector('.content-inner');
         expect(contentInner).toHaveComputedStyle({
-          'max-width': '720px',
+          'max-width': DesignTokenHelper.pageContentMaxWidth('default'),
         });
       });
 
@@ -807,7 +807,7 @@ describe('PageComponent', () => {
           await TestHelper.whenReady(ionContent);
           const contentInner = ionContent.querySelector('.content-inner');
           expect(contentInner).toHaveComputedStyle({
-            'max-width': '792px',
+            'max-width': DesignTokenHelper.pageContentMaxWidth('default'),
           });
         });
       });
@@ -822,7 +822,7 @@ describe('PageComponent', () => {
           await TestHelper.whenReady(ionContent);
           const contentInner = ionContent.querySelector('.content-inner');
           expect(contentInner).toHaveComputedStyle({
-            'max-width': '1092px',
+            'max-width': DesignTokenHelper.pageContentMaxWidth('optimized'),
           });
         });
       });
@@ -837,7 +837,7 @@ describe('PageComponent', () => {
           await TestHelper.whenReady(ionContent);
           const contentInner = ionContent.querySelector('.content-inner');
           expect(contentInner).toHaveComputedStyle({
-            'max-width': '100%',
+            'max-width': DesignTokenHelper.pageContentMaxWidth('full'),
           });
         });
       });

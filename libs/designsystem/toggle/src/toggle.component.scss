@@ -19,31 +19,40 @@ ion-toggle {
 
   @include interaction-state.apply-hover {
     // Not checked
-    --background: #{interaction-state.get-state-color($background, 's')};
+    --track-background: #{interaction-state.get-state-color($background, 's')};
     --handle-background: #{interaction-state.get-state-color($handle-background, 'xxxs')};
 
     // Checked
-    --background-checked: #{interaction-state.get-state-color($background-checked, 's')};
+    --track-background-checked: #{interaction-state.get-state-color($background-checked, 's')};
     --handle-background-checked: #{interaction-state.get-state-color($handle-background, 'xxxs')};
   }
 
   @include interaction-state.apply-active {
     // Not checked
-    --background: #{interaction-state.get-state-color($background, 'l')};
+    --track-background: #{interaction-state.get-state-color($background, 'l')};
     --handle-background: #{interaction-state.get-state-color($handle-background, 'xxs')};
 
     // Checked
-    --background-checked: #{interaction-state.get-state-color($background-checked, 'l')};
+    --track-background-checked: #{interaction-state.get-state-color($background-checked, 'l')};
     --handle-background-checked: #{interaction-state.get-state-color($handle-background, 'xxs')};
   }
 
   // Not checked
-  --background: #{utils.get-color($background)};
+  --track-background: #{utils.get-color($background)};
   --handle-background: #{utils.get-color($handle-background)};
 
   // Checked
-  --background-checked: #{utils.get-color($background-checked)};
+  --track-background-checked: #{utils.get-color($background-checked)};
   --handle-background-checked: #{utils.get-color($handle-background)};
   --handle-transition: #{utils.get-transition-duration('quick')};
   --handle-box-shadow: #{utils.get-elevation(2)};
+}
+
+/*
+* For now, Kirby defaults to the legacy ion-toggle to not force users into 
+* providing a label for each toggle. The legacy toggle has additional padding  
+* in Ionic v7 when inside an item that needs to be reset.
+*/
+ion-toggle.in-item.legacy-toggle {
+  padding: 0;
 }

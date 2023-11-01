@@ -30,7 +30,7 @@ import {
   ViewChild,
   ViewChildren,
 } from '@angular/core';
-import { NavigationEnd, NavigationStart, Router, RouterEvent } from '@angular/router';
+import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 import {
   IonBackButtonDelegate,
   IonButtons,
@@ -46,7 +46,13 @@ import { selectedTabClickEvent, TabsComponent } from '@kirbydesign/designsystem/
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
 
-import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
+import { ACTIONGROUP_CONFIG, ActionGroupConfig } from '@kirbydesign/designsystem/action-group';
+import {
+  HeaderActionsDirective,
+  HeaderComponent,
+  HeaderTitleActionIconDirective,
+} from '@kirbydesign/designsystem/header';
+import { IonicElementPartHelper, KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 import {
   ModalElementComponent,
   ModalElementsAdvertiser,
@@ -54,12 +60,6 @@ import {
   ModalNavigationService,
 } from '@kirbydesign/designsystem/modal';
 import { FitHeadingConfig, ResizeObserverService } from '@kirbydesign/designsystem/shared';
-import {
-  HeaderActionsDirective,
-  HeaderComponent,
-  HeaderTitleActionIconDirective,
-} from '@kirbydesign/designsystem/header';
-import { ACTIONGROUP_CONFIG, ActionGroupConfig } from '@kirbydesign/designsystem/action-group';
 
 /**
  * Specify scroll event debounce time in ms and scrolled offset from top in pixels
@@ -69,6 +69,10 @@ const contentScrolledOffsetInPixels = 4;
 
 type stickyConfig = { sticky: boolean };
 type fixedConfig = { fixed: boolean };
+type MaxWidth = 'default' | 'standard' | 'optimized' | 'full';
+
+const PAGE_WIDTH_STANDARD_DEPRECATION_WARNING =
+  'Deprecation warning: The support for "standard" as a maxWidth option will be removed in Kirby version 10. After that the "standard" width will be the default width and does not need to be specified.';
 
 export const PAGE_BACK_BUTTON_OVERRIDE = new InjectionToken<PageBackButtonOverride>(
   'page-back-button-override'
@@ -115,7 +119,11 @@ export class PageActionsDirective {
   private readonly stickyDefault = true;
   private readonly fixedDefault = false;
 
-  constructor(public template: TemplateRef<any>) {}
+  constructor(public template: TemplateRef<any>) {
+    console.warn(
+      'Defining Page Actions via *kirbyPageActions is deprecated and will be removed in Kirby v10. A Kirby Header with Actions should be used instead, as it has an improved API with better support for responsive layouts.'
+    );
+  }
 
   get isSticky(): boolean {
     return this.config ? (this.config as stickyConfig).sticky : this.stickyDefault;
@@ -214,6 +222,7 @@ export class PageActionsComponent {}
   templateUrl: './page.component.html',
   styleUrls: ['./page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [IonicElementPartHelper],
 })
 export class PageComponent
   implements OnInit, OnDestroy, AfterViewInit, AfterContentChecked, OnChanges
@@ -225,8 +234,21 @@ export class PageComponent
   @Input() defaultBackHref: string;
   @Input() hideBackButton: boolean;
   @Input() titleMaxLines: number;
-  @Input() maxWidth: 'default' | 'standard' | 'optimized' | 'full' = 'default';
   @Input() hasInteractiveTitle: boolean;
+
+  @Input() set maxWidth(width: MaxWidth) {
+    if (width === 'standard') {
+      console.warn(PAGE_WIDTH_STANDARD_DEPRECATION_WARNING);
+    }
+
+    this._maxWidth = width;
+  }
+
+  get maxWidth(): MaxWidth {
+    return this._maxWidth;
+  }
+
+  private _maxWidth: MaxWidth = 'default';
 
   private _tabBarBottomHidden: boolean;
   public get tabBarBottomHidden(): boolean {
@@ -319,13 +341,13 @@ export class PageComponent
   private ngOnDestroy$: Subject<void> = new Subject<void>();
   private contentScrolled$: Observable<ScrollDetail>;
 
-  private navigationStart$: Observable<RouterEvent> = this.router.events.pipe(
-    filter((event: RouterEvent) => event instanceof NavigationStart),
+  private navigationStart$: Observable<NavigationStart> = this.router.events.pipe(
+    filter((event): event is NavigationStart => event instanceof NavigationStart),
     takeUntil(this.ngOnDestroy$)
   );
 
-  private navigationEnd$: Observable<RouterEvent> = this.router.events.pipe(
-    filter((event: RouterEvent) => event instanceof NavigationEnd),
+  private navigationEnd$: Observable<NavigationEnd> = this.router.events.pipe(
+    filter((event): event is NavigationEnd => event instanceof NavigationEnd),
     takeUntil(this.ngOnDestroy$)
   );
 
@@ -347,7 +369,8 @@ export class PageComponent
     @Optional()
     private routerOutlet: IonRouterOutlet,
     @Optional()
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private ionicElementPartHelper: IonicElementPartHelper
   ) {}
 
   private contentReadyPromise: Promise<void>;
@@ -367,7 +390,11 @@ export class PageComponent
 
   ngOnInit(): void {
     this.removeWrapper();
-    this.setToolbarBackgroundPart();
+    this.ionicElementPartHelper.setPart(
+      'background',
+      this.ionToolbarElement,
+      '.toolbar-background'
+    );
 
     const actionGroupConfig: ActionGroupConfig = {
       isCondensed: true,
@@ -486,18 +513,6 @@ export class PageComponent
     this.renderer.appendChild(parent, this.ionHeaderElement.nativeElement);
     this.renderer.appendChild(parent, this.ionContentElement.nativeElement);
     this.renderer.appendChild(parent, this.ionFooterElement.nativeElement);
-  }
-
-  private setToolbarBackgroundPart() {
-    // Ensure ion-toolbar custom element has been defined (primarily when testing, but doesn't hurt):
-    customElements.whenDefined(this.ionToolbarElement.nativeElement.localName).then(() => {
-      this.ionToolbarElement.nativeElement.componentOnReady().then((toolbar) => {
-        const toolbarBackground = toolbar.shadowRoot.querySelector('.toolbar-background');
-        if (toolbarBackground) {
-          this.renderer.setAttribute(toolbarBackground, 'part', 'background');
-        }
-      });
-    });
   }
 
   private onEnter() {
