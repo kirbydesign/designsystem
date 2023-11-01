@@ -88,8 +88,6 @@ export class HeaderComponent implements AfterContentChecked, OnInit {
     this.titleClick.emit(event);
   }
 
-  public avatarReadyToRenderAfterContentProjection: boolean = false;
-
   public _actionGroupInjector: Injector;
 
   private actionGroupConfig: ActionGroupConfig;
@@ -136,7 +134,5 @@ export class HeaderComponent implements AfterContentChecked, OnInit {
     if (this.centered) {
       this.actionGroupConfig.isCondensed = true;
     }
-
-    this.avatarReadyToRenderAfterContentProjection = true;
   }
 }
