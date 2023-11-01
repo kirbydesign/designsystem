@@ -77,6 +77,10 @@ export class DecimalMaskDirective implements ControlValueAccessor, OnInit {
 
   registerOnTouched(_: any): void {}
 
+  setDisabledState?(isDisabled: boolean): void {
+    this.elementRef.nativeElement.disabled = isDisabled;
+  }
+
   private initMask(): void {
     new Inputmask('decimal', {
       groupSeparator: this._groupSeperatorDisabled ? '' : this.groupSeparator,

@@ -22,12 +22,12 @@
     <h3 *ngIf="!!value" class="value kirby-text-display-3" [kirbyFitHeading]="fitHeadingConfig">{{ value }}<span class="value-unit semi-dark-text" *ngIf="!!valueUnit">{{ valueUnit }}</span></h3>
   
     <!-- Subtitles: -->
-    <div *ngIf="!!subtitle1" class="subtitle1 kirby-text-small">
-      {{ subtitle1 }}
-    </div>
-    <div *ngIf="!!subtitle2" class="subtitle2 kirby-text-small">
-      {{ subtitle2 }}
-    </div>
+    <ng-container
+        *ngTemplateOutlet="subTitleTemplate; context: { $implicit: _subtitles1 }"
+      ></ng-container>
+    <ng-container
+      *ngTemplateOutlet="subTitleTemplate; context: { $implicit: _subtitles2 }"
+    ></ng-container>
 
     <!-- Custom section -->
     <div
@@ -48,3 +48,9 @@
       <ng-container *ngTemplateOutlet="actionsTemplate; injector: _actionGroupInjector"></ng-container>
     </div>
 </div>
+
+<ng-template #subTitleTemplate let-subtitles>
+  <div *ngIf="!!subtitles" class="subtitle kirby-text-small">
+    <span *ngFor="let subtitle of subtitles">{{subtitle}}</span>
+  </div>
+</ng-template>

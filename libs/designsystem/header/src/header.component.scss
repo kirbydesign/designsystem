@@ -117,17 +117,20 @@
   }
 }
 
+$margin-inline: utils.size('s');
+
 .avatar,
 .flag,
 .title-container,
 .container > h1.title {
-  margin: 0 utils.size('s');
+  margin-inline: $margin-inline;
 }
 
 .title-container {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  max-width: calc(100% - 2 * $margin-inline);
 }
 
 .avatar {
@@ -172,12 +175,16 @@
   font-size: 50%;
 }
 
-.subtitle1,
-.subtitle2 {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  max-width: 100%;
+.subtitle {
+  display: flex;
+  flex-flow: row wrap;
+  column-gap: 0.25em; // width of space character in a font, mimics spaces between spans
+
+  span {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
 }
 
 .custom-section {

@@ -1,24 +1,31 @@
 import { CommonModule } from '@angular/common';
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   EventEmitter,
   HostBinding,
   Input,
   Output,
+  ViewChild,
 } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
-import { UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
+import { IonCheckbox, IonicModule } from '@ionic/angular';
+import { IonicElementPartHelper } from '@kirbydesign/designsystem/helpers';
 
 @Component({
   standalone: true,
   imports: [IonicModule, CommonModule],
+  providers: [IonicElementPartHelper],
   selector: 'kirby-checkbox',
   templateUrl: './checkbox.component.html',
   styleUrls: ['./checkbox.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CheckboxComponent {
+export class CheckboxComponent implements AfterViewInit {
+  @ViewChild(IonCheckbox, { read: ElementRef, static: true })
+  private ionCheckboxElement?: ElementRef<HTMLIonCheckboxElement>;
+
   @Input() checked: boolean = false;
   @Input() attentionLevel: '1' | '2' = '2';
 
@@ -28,7 +35,7 @@ export class CheckboxComponent {
 
   @HostBinding('class')
   @Input()
-  size?: 'xs' | 'sm' | 'md';
+  size: 'xs' | 'sm' | 'md' = 'md';
 
   @HostBinding('class.error')
   @Input()
@@ -49,11 +56,24 @@ export class CheckboxComponent {
 
   @Output() checkedChange = new EventEmitter<boolean>();
 
+  constructor(private ionicElementPartHelper: IonicElementPartHelper) {}
+
+  ngAfterViewInit(): void {
+    this.ionicElementPartHelper.setPart('label', this.ionCheckboxElement, '.checkbox-wrapper');
+    this.ionicElementPartHelper.setPart(
+      'label-text-wrapper',
+      this.ionCheckboxElement,
+      '.label-text-wrapper'
+    );
+    this.ionicElementPartHelper.setPart(
+      'native-wrapper',
+      this.ionCheckboxElement,
+      '.native-wrapper'
+    );
+  }
+
   onChecked(checked: boolean): void {
     this.checked = checked;
     this.checkedChange.emit(this.checked);
   }
-
-  // IDs used for a11y labelling
-  _labelId = UniqueIdGenerator.scopedTo('kirby-checkbox-label').next();
 }
