@@ -70,6 +70,11 @@ $bullet-inactive-opacity: 0.2;
     display: none;
   }
 
+  swiper-container {
+    padding: utils.size('s');
+    margin: calc(-1 * utils.size('s'));
+  }
+
   @include utils.media('<medium') {
     swiper-container {
       padding-inline: utils.size('s');
