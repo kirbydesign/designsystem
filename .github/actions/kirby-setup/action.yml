@@ -25,7 +25,8 @@ runs:
       shell: bash
     - name: Clean Install NPM Dependencies
       if: steps.cache.outputs.cache-hit != 'true'
-      run: npm ci
+      # Alternative way to clean install due to this bug https://github.com/npm/cli/issues/4828
+      run: rm package-lock.json && npm i
       shell: bash
     - name: Run Postinstall Script
       if: steps.cache.outputs.cache-hit == 'true'

@@ -126,7 +126,6 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
     display: block;
 
     @each $size, $height in utils.$checkbox-radio-sizes {
-      :host-context(.checkbox-#{$size}),
       &.#{$size} {
         ion-checkbox::part(label) {
           $vertical-padding: get-vertical-padding($height);
