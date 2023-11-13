@@ -15,7 +15,7 @@ export class ShowcaseComponent implements OnDestroy {
   propertiesTable: Element;
   private routerEventsSubscription: Subscription;
   private gitUrl =
-    'https://github.com/kirbydesign/designsystem/tree/main/apps/cookbook/src/app/examples/';
+    'https://github.com/kirbydesign/designsystem/tree/develop/apps/cookbook/src/app/examples/';
   showCallToActionLinks = true;
 
   constructor(private router: Router, private elementRef: ElementRef<HTMLElement>) {
