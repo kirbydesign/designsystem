@@ -27,7 +27,6 @@ describe('ActionSheetComponent', () => {
       declarations: [
         ActionSheetComponent,
         ListComponent,
-
         InfiniteScrollDirective,
         ButtonComponent,
         ListItemColorDirective,
@@ -43,11 +42,6 @@ describe('ActionSheetComponent', () => {
       imports: [CardModule, SpinnerModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
-    TestBed.overrideModule(BrowserDynamicTestingModule, {
-      set: {
-        entryComponents: [ActionSheetComponent],
-      },
-    });
   }));
 
   beforeEach(() => {

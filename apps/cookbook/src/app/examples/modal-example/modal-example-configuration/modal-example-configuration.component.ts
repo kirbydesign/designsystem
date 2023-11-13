@@ -1,5 +1,4 @@
 import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
-import { ModalSize } from '@kirbydesign/designsystem';
 
 import { WindowRef } from '@kirbydesign/designsystem/types';
 
@@ -7,9 +6,6 @@ import { WindowRef } from '@kirbydesign/designsystem/types';
   selector: 'cookbook-modal-example-configuration',
   templateUrl: './modal-example-configuration.component.html',
   styleUrls: ['./modal-example-configuration.component.scss'],
-
-  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
-  host: { '[class.checkbox-xs]': 'true' }, // Extra small checkboxes
 })
 export class ModalExampleConfigurationComponent {
   @Input() disabled: boolean;
