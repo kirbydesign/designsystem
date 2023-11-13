@@ -78,9 +78,11 @@ $form-field-label-height: 24px;
 
 // Firefox, Safari, Mobile Safari
 @supports not (selector(::-webkit-date-and-time-value)) {
-  // WTF? 😄
+  // WTF? 😄 - Mobile Safari *does* apply this ⬇️ despite @supports not ... ⬆️
   :host([type='date']::-webkit-date-and-time-value) {
-    // Enforce consistent height in Mobile Safari
+    // Mobile Safari has less intrinsic height initially (when no date has been
+    // selected yet) and when the date has been reset.
+    // Declaring this min-height ensures consistent height in Mobile Safari
     min-height: #{$form-field-input-line-height + em};
   }
 }
