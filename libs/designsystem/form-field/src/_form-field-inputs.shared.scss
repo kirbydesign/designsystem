@@ -35,7 +35,13 @@ $form-field-label-height: 24px;
   color: var(--kirby-inputs-color);
   border: none;
   box-sizing: border-box;
-  display: block;
+
+  // Do not use `display: block`.
+  // In Safari the input's height will be too large and the date text is not
+  // properly vertically aligned.
+  // The initial value is `display: inline-block` which seems to look fine, so
+  // it's not necessary to declare the display property.
+
   font-family: $form-field-input-font-family;
 
   // `font-size` should be declared in `em` units but to simplify the solution
@@ -67,5 +73,16 @@ $form-field-label-height: 24px;
 
   &::placeholder {
     color: var(--kirby-inputs-placeholder-color);
+  }
+}
+
+// Firefox, Safari, Mobile Safari
+@supports not (selector(::-webkit-date-and-time-value)) {
+  // WTF? 😄 - Mobile Safari *does* apply this ⬇️ despite @supports not ... ⬆️
+  :host([type='date']::-webkit-date-and-time-value) {
+    // Mobile Safari has less intrinsic height initially (when no date has been
+    // selected yet) and when the date has been reset.
+    // Declaring this min-height ensures consistent height in Mobile Safari
+    min-height: #{$form-field-input-line-height + em};
   }
 }
