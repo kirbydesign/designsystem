@@ -19,8 +19,7 @@ $bullet-inactive-opacity: 0.2;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-block: utils.size('s');
-    margin-block-start: 0;
+    margin-block: 0 utils.size('s');
     margin-inline: utils.size('s');
 
     &-inner {
