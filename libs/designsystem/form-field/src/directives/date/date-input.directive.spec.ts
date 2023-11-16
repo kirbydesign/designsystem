@@ -144,4 +144,37 @@ describe('DateInputDirective', () => {
       expect(spectator.element).toHaveValue(`10/04/${currentYear}`);
     });
   });
+
+  describe('when configured with [useNativeDatePicker]="true"', () => {
+    beforeEach(() => {
+      spectator = createDirective(`<input kirby-input type="date" [useNativeDatePicker]="true" />`);
+    });
+
+    it('should leave type="date" untouched', () => {
+      expect((spectator.element as HTMLInputElement).type).toBe('date');
+    });
+
+    it('should not have date-mask element', () => {
+      const datemask = spectator.element.parentNode.querySelector('.date-mask');
+      expect(datemask).toBeNull();
+    });
+  });
+
+  describe('when configured with [useNativeDatePicker]="false"', () => {
+    // Should produce same results as the default scenario
+    beforeEach(() => {
+      spectator = createDirective(
+        `<input kirby-input type="date" [useNativeDatePicker]="false" />`
+      );
+    });
+
+    it('should have a date-mask element', () => {
+      const datemask = spectator.element.parentNode.querySelector('.date-mask');
+      expect(datemask).toBeDefined();
+    });
+
+    it('should replace type="date" with type="text"', () => {
+      expect((spectator.element as HTMLInputElement).type).toBe('text');
+    });
+  });
 });
