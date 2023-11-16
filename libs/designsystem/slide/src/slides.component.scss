@@ -43,7 +43,6 @@ $bullet-inactive-opacity: 0.2;
 
   .buttons {
     display: none;
-
     // Adding one to default to make buttons clickable through box shadow.
     z-index: utils.z('default') + 1;
 
