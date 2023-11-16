@@ -74,7 +74,7 @@ $bullet-inactive-opacity: 0.2;
 
   swiper-container {
     padding: utils.size('m') utils.size('s');
-    margin: calc(-1 * utils.size('m')) calc(-1 * utils.size('s'));
+    margin: -utils.size('m') -utils.size('s');
   }
 
   @include utils.media('<medium') {
