@@ -25,7 +25,7 @@ export enum InputSize {
     {
       directive: DateInputDirective,
       // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-      inputs: ['prefillYear'],
+      inputs: ['prefillYear', 'useNativeDatePicker'],
     },
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
