@@ -43,7 +43,9 @@ $bullet-inactive-opacity: 0.2;
 
   .buttons {
     display: none;
-    z-index: utils.z('default');
+
+    // Adding one to default to make buttons clickable through box shadow.
+    z-index: utils.z('default') + 1;
 
     @include utils.media('>=medium') {
       display: block;
@@ -68,6 +70,11 @@ $bullet-inactive-opacity: 0.2;
   // doesn't contain enough slides for swiping.
   .swiper-button-lock {
     display: none;
+  }
+
+  swiper-container {
+    padding-block: utils.size('m');
+    margin-block: -(utils.size('m'));
   }
 
   @include utils.media('<medium') {
