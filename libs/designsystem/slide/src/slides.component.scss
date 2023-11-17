@@ -43,6 +43,7 @@ $bullet-inactive-opacity: 0.2;
 
   .buttons {
     display: none;
+
     // Adding one to default to make buttons clickable through box shadow.
     z-index: utils.z('default') + 1;
 
@@ -72,8 +73,8 @@ $bullet-inactive-opacity: 0.2;
   }
 
   swiper-container {
-    padding: utils.size('m') utils.size('s');
-    margin: -utils.size('m') -utils.size('s');
+    padding-block: utils.size('m');
+    margin-block: -(utils.size('m'));
   }
 
   @include utils.media('<medium') {
