@@ -164,3 +164,41 @@
   overflow-x: auto;
   margin-bottom: utils.size('s');
 }
+
+@each $color, $color-ramp in utils.$decoration-colors {
+  @each $shade, $color-value in $color-ramp {
+    .#{$color}-#{$shade} {
+      background-color: var(--kirby-decoration-color-#{$color}-#{$shade});
+    }
+  }
+}
+
+.color-palette-ramps {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: utils.size('m');
+  margin-bottom: utils.size('xl');
+
+  .color-box {
+    padding: utils.size('s');
+    grid-column-start: 1;
+  }
+
+  dl {
+    display: grid;
+    justify-items: center;
+
+    dd {
+      grid-row: 1;
+      text-wrap: nowrap;
+      margin-inline-start: 0;
+      font-size: utils.font-size('xs');
+    }
+
+    dt {
+      min-height: 2.5rem;
+      min-width: 2.5rem;
+      border-radius: utils.size('xxxs');
+    }
+  }
+}
