@@ -62,6 +62,11 @@
   @return string.unquote('var(--kirby-text-color-' + $variant + ')');
 }
 
+@function get-decoration-color($variant, $shade) {
+  $value: map.get(colors.$decoration-colors, $variant, $shade);
+  @return string.unquote('var(--kirby-decoration-color-' + $variant + '-' + $shade + ')');
+}
+
 @function get-elevation($value) {
   @return map.get(variables.$elevations, $value);
 }

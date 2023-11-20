@@ -2,10 +2,12 @@ import { styles } from './color-helper.styles';
 import { camelToKebabCase, kebabToCamelCase } from './string-helper';
 
 type KirbyColorGroup = { [key: string]: string };
+type KirbyColorRamp = { [key: string]: { [key: number]: string } };
 
 export class ColorHelper {
   static readonly brandColors = ColorHelper.mapToKirbyColorArray(styles.brandColors);
   static readonly notificationColors = ColorHelper.mapToKirbyColorArray(styles.notificationColors);
+  static readonly decorationColors = ColorHelper.mapToKirbyColorRampArray(styles.decorationColors);
   static readonly systemColors = ColorHelper.mapToKirbyColorArray(styles.systemColors);
   static readonly textColors = ColorHelper.mapToKirbyColorArray(
     styles.textColors,
@@ -43,6 +45,19 @@ export class ColorHelper {
         value: fullColorMap[name + CONTRAST],
         name: camelToKebabCase(name + CONTRAST),
       },
+    }));
+    // Do not remove the `colorArray` const, since it'll break the ngpackagr build, for more info see:
+    // https://github.com/ng-packagr/ng-packagr/issues/696
+    return colorArray;
+  }
+
+  private static mapToKirbyColorRampArray(colors: KirbyColorRamp): any[] {
+    const colorArray = Object.entries(colors).map(([name, value]) => ({
+      name: camelToKebabCase(name),
+      ramp: Object.entries(value).map(([step, rampValue]) => ({
+        step,
+        value: rampValue,
+      })),
     }));
     // Do not remove the `colorArray` const, since it'll break the ngpackagr build, for more info see:
     // https://github.com/ng-packagr/ng-packagr/issues/696
