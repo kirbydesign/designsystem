@@ -88,6 +88,10 @@ ion-modal::part(backdrop) {
   --backdrop-opacity: 0.4;
 }
 
+// kirby-modal-wrapper {
+//   height: calc(100% - 88px * 2);
+// }
+
 ion-modal.kirby-overlay {
   position: fixed;
 

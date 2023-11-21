@@ -23,25 +23,53 @@ const config = {
   <cookbook-modal-example-size-selector (sizeChange)="sizeChange($event)"></cookbook-modal-example-size-selector>
 </kirby-card>
 <kirby-modal
-  [open]="open"
   (willDismiss)="close()"
-  [size]="size.value"
-  [flavor]="'drawer'"
-  [drawerSupplementaryAction]="drawerSupplementaryAction"
-  
+  [open]="open"
+  [config]="config"
 >
-<kirby-page-progress *ngIf="showPageProgress">
-<kirby-progress-circle themeColor="warning" value="50" size="sm" class="kirby-text-xsmall">
+
+<ng-template>
+  <kirby-modal-footer>
+    <button kirby-button attentionLevel="3">
+      <kirby-icon name="arrow-back"></kirby-icon>
+    </button>
+
+    <button kirby-button>Finish</button>
+  </kirby-modal-footer>
+  <p>hey</p>
+  <p>hey</p>
+  <p>hey</p>
+  <p>hey</p>
+  <p>hey</p>
+  <p>hey</p>
+  <p>hey</p>
+  <p>hey</p>
+  <p>hey</p>
+  <p>hey</p>
+  <p>hey</p>
+  <p>hey</p>
+  <p>hey</p>
+  <p>hey</p>
+  <p>hey</p>
+  <p>hey</p>
+  <p>hey</p>
+  <p>hey</p>
+  <p>hey</p>
+  <p>hey</p>
+  <p>hey</p>
+  <p>hey</p>
+  <p>hey</p>
+  <p>hey</p>
+  
+  <kirby-page-progress>
+  <kirby-progress-circle themeColor="warning" value="50" size="sm" class="kirby-text-xsmall">
   2/4
-</kirby-progress-circle>
+  </kirby-progress-circle>
 </kirby-page-progress>
 
-<kirby-page-title>Inline Modal</kirby-page-title>
+  <kirby-page-title>Hello there</kirby-page-title>
+</ng-template>
 
-<p>
-  Lorem ipsum dolor sit amet...
-</p>
-  
 </kirby-modal>`,
   showModalCodeSnippet: `constructor(private modalController: ModalController) {}
 
@@ -55,7 +83,6 @@ showModal(flavor: ModalFlavor, size?: ModalSize) {
   this.modalController.showModal(config);
 }`,
 };
-
 @Component({
   selector: config.selector,
   template: config.template,
@@ -73,10 +100,19 @@ export class ModalExampleSimpleComponent implements OnInit {
 
   open: boolean = false;
 
+  config: ModalConfig;
+
   constructor(private modalController: ModalController) {}
 
   ngOnInit(): void {
     this.size = this.sizeSelector.size;
+
+    this.config = {
+      component: null,
+      size: this.size?.value,
+      flavor: 'modal',
+      collapseTitle: true,
+    };
   }
 
   async showModal(flavor: ModalFlavor, size?: ModalSizeOption) {
