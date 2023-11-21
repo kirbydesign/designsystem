@@ -79,6 +79,13 @@ export class ColorHelper {
       : `rgb(${rgbValue})`;
   }
 
+  public static getThemeDecorationColorRgbString(name: string, step: number, opacity?: number) {
+    const rgb = ColorHelper.hexToRGB(ColorHelper.getDecorationColor(name, step));
+    return opacity
+      ? rgb.replace('rgb', 'rgba').replace(')', `, ${ColorHelper.opacityThreshold(opacity)})`)
+      : rgb;
+  }
+
   public static getThemeTextColorRgbString(name: string) {
     const rgbValue = ColorHelper.getTextColor(name + '-rgb');
     return `rgb(${rgbValue})`;
@@ -86,6 +93,10 @@ export class ColorHelper {
 
   public static getThemeColorHexString(name: string) {
     return ColorHelper.getColor(name);
+  }
+
+  public static getThemeDecorationColorHexString(name: string, step: number) {
+    return ColorHelper.getDecorationColor(name, step);
   }
 
   public static getThemeTextColorHexString(name: string) {
@@ -139,6 +150,12 @@ export class ColorHelper {
   private static getColor(name: string): string {
     const camelCaseKey = kebabToCamelCase(name);
     const found = styles.kirbyColors[camelCaseKey];
+    return found || null;
+  }
+
+  private static getDecorationColor(name: string, step: number): string {
+    const camelCaseKey = kebabToCamelCase(name);
+    const found = styles.decorationColors[camelCaseKey][step];
     return found || null;
   }
 

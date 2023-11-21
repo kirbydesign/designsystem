@@ -4,6 +4,7 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { FlagComponent } from './flag.component';
 
 const getColor = DesignTokenHelper.getColor;
+const getDecorationColor = DesignTokenHelper.getDecorationColor;
 const size = DesignTokenHelper.size;
 const fontSize = DesignTokenHelper.fontSize;
 const fontWeight = DesignTokenHelper.fontWeight;
@@ -113,26 +114,32 @@ describe('FlagComponent', () => {
   });
 
   describe(`when configured with themeColor`, () => {
-    const allowedThemeColors = ['success', 'warning', 'semi-light'] as const;
+    const allowedThemeColors = ['success', 'warning', 'danger', 'semi-light'] as const;
     type FlagThemeColor = typeof allowedThemeColors[number];
-    const themeColors = allowedThemeColors.map((color) => getColor(color));
+
+    type ColorStep = [string, number];
+    type FlagColors = { [themeColor: string]: ColorStep | string };
+    const flagColors: FlagColors = {
+      success: ['green', 30],
+      warning: ['yellow', 30],
+      danger: ['red', 30],
+      'semi-light': 'semi-light',
+    };
+    const themeColors = Object.entries(flagColors).map(([themeColor, value]) =>
+      Array.isArray(value)
+        ? { ...getDecorationColor(...value), name: themeColor }
+        : getColor(value as ThemeColorExtended)
+    );
     themeColors.forEach((color) => {
       it(`should render with correct colors when themeColor = '${color.name}'`, async () => {
         spectator.component.themeColor = color.name as FlagThemeColor;
         spectator.detectChanges();
 
         expect(element).toHaveComputedStyle({
-          'background-color': color,
+          'background-color': color.value,
           color: getColor(color.name as ThemeColorExtended, 'contrast'),
         });
       });
-    });
-
-    it(`should render with correct colors when themeColor = 'danger'`, async () => {
-      spectator.component.themeColor = 'danger';
-      spectator.detectChanges();
-
-      expect(element).toHaveComputedStyle({ 'background-color': '#ff878a' });
     });
 
     it(`should render with correct colors when themeColor = 'transparent'`, async () => {
