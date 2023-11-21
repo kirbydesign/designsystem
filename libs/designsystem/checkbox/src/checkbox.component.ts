@@ -14,7 +14,6 @@ import {
 import { IonCheckbox, IonicModule } from '@ionic/angular';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { UniqueIdGenerator } from '@kirbydesign/designsystem/helpers';
 import { IonicElementPartHelper } from '@kirbydesign/designsystem/helpers';
 
 @Component({
@@ -92,8 +91,6 @@ export class CheckboxComponent implements AfterViewInit, ControlValueAccessor {
   onBlur() {
     this._onTouched();
   }
-  // IDs used for a11y labelling
-  _labelId = UniqueIdGenerator.scopedTo('kirby-checkbox-label').next();
 
   // Initialize default ControlValueAccessor callback functions (noop)
   // eslint-disable-next-line no-empty-function
