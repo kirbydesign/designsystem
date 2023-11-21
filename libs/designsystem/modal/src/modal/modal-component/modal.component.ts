@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import {
-  AfterViewInit,
   Component,
+  ContentChild,
   ElementRef,
   EventEmitter,
   Input,
   Output,
+  TemplateRef,
   ViewChild,
 } from '@angular/core';
 import { IonContent, IonModal } from '@ionic/angular';
@@ -14,18 +15,22 @@ import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 import { IconModule } from '@kirbydesign/designsystem/icon';
 import { KirbyIonicModule } from '@kirbydesign/designsystem/kirby-ionic-module';
-import { DrawerSupplementaryAction, ModalSize } from '@kirbydesign/designsystem/modal';
+import {
+  DrawerSupplementaryAction,
+  ModalConfig,
+  ModalSize,
+  ModalWrapperComponent,
+} from '../../modal-wrapper';
 
 type Flavor = 'modal' | 'drawer';
 
 @Component({
+  standalone: true,
   selector: 'kirby-modal',
   templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.scss'],
-  standalone: true,
-  imports: [CommonModule, KirbyIonicModule, IconModule, ButtonComponent],
+  imports: [CommonModule, KirbyIonicModule, IconModule, ButtonComponent, ModalWrapperComponent],
 })
-export class ModalComponent implements AfterViewInit {
+export class ModalComponent {
   @ViewChild(IonModal) modal: IonModal;
   @ViewChild(IonModal, { static: true, read: ElementRef })
   modalElement: ElementRef<HTMLElement>;
@@ -33,11 +38,11 @@ export class ModalComponent implements AfterViewInit {
 
   _customHeight?: string;
 
-  @Input() collapsibleTitle = false;
+  @ContentChild(TemplateRef, { static: true }) template: TemplateRef<any>;
+
+  @Input() config: ModalConfig;
+  @Input() collapseTitle = false;
   @Input() size: ModalSize = 'medium';
-  @Input() set customHeight(customHeight: string) {
-    this._customHeight = customHeight;
-  }
   @Input() flavor: Flavor = 'modal';
   @Input() canDismiss: boolean | (() => Promise<boolean>) = true;
   @Input() drawerSupplementaryAction?: DrawerSupplementaryAction;
@@ -48,12 +53,6 @@ export class ModalComponent implements AfterViewInit {
   @Output() didPresent = new EventEmitter<CustomEvent<OverlayEventDetail>>();
   @Output() didDismiss = new EventEmitter<CustomEvent<OverlayEventDetail>>();
   @Output() willDismiss = new EventEmitter<CustomEvent<OverlayEventDetail>>();
-
-  ngAfterViewInit(): void {
-    if (this._customHeight) {
-      this.modalElement.nativeElement.style.setProperty('--kirby-modal-height', this._customHeight);
-    }
-  }
 
   _closeModal() {
     this.modal.dismiss(null, 'cancel');

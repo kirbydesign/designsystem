@@ -1,7 +1,9 @@
 import {
+  AfterContentInit,
   AfterViewInit,
   ChangeDetectorRef,
   Component,
+  ContentChild,
   ElementRef,
   HostBinding,
   HostListener,
@@ -13,6 +15,7 @@ import {
   QueryList,
   Renderer2,
   RendererStyleFlags2,
+  TemplateRef,
   ViewChild,
   ViewChildren,
 } from '@angular/core';
@@ -80,7 +83,12 @@ export class ModalWrapperComponent
   }
 
   @Input() config: ModalConfig;
+  @Input() content: TemplateRef<any>;
+
   componentPropsInjector: Injector;
+  modalWrapperInjector: Injector;
+
+  @ContentChild(TemplateRef) templateRef: TemplateRef<any>;
 
   @ViewChildren(ButtonComponent, { read: ElementRef }) private toolbarButtonsQuery: QueryList<
     ElementRef<HTMLButtonElement>
@@ -173,6 +181,11 @@ export class ModalWrapperComponent
     this.initializeResizeModalToModalWrapper();
     this.componentPropsInjector = Injector.create({
       providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
+      parent: this.injector,
+    });
+
+    this.modalWrapperInjector = Injector.create({
+      providers: [{ provide: ModalElementsAdvertiser, useExisting: ModalWrapperComponent }],
       parent: this.injector,
     });
   }

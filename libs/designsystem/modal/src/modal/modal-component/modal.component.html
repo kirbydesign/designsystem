@@ -2,7 +2,7 @@
   class="kirby-modal kirby-overlay"
   [isOpen]="open"
   [handle]="false"
-  [canDismiss]="canDismiss"
+  [canDismiss]="canDismiss ? canDismiss : config.canDismiss"
   [ngClass]="'kirby-modal-' + size"
   (willPresent)="_onWillPresent($event)"
   (didPresent)="_onDidPresent($event)"
@@ -10,36 +10,6 @@
   (didDismiss)="_onDidDismiss($event)"
 >
   <ng-template>
-    <ion-header class="modal-header">
-      <ion-toolbar>
-        <ng-content select="[header-start]"></ng-content>
-        <ion-title>
-          <ng-content select="kirby-page-title"></ng-content>
-          {{ title }}
-        </ion-title>
-        <ion-buttons slot="secondary" *ngIf="flavor === 'drawer' && drawerSupplementaryAction">
-          <button kirby-button attentionLevel="3" size="md">
-            <kirby-icon [name]="drawerSupplementaryAction.iconName"></kirby-icon>
-          </button>
-        </ion-buttons>
-        <ion-buttons slot="primary">
-          <button kirby-button attentionLevel="3" size="md" (click)="_closeModal()">
-            <kirby-icon name="close"></kirby-icon>
-          </button>
-        </ion-buttons>
-      </ion-toolbar>
-    </ion-header>
-
-    <ion-content [scrollEvents]="true">
-      <!-- <ion-header *ngIf="hasCollapsibleTitle" collapse="condense">
-        <ion-toolbar>
-          <span class="kirby-text-large">{{ title }}</span>
-        </ion-toolbar>
-      </ion-header> -->
-      <ng-container>
-        <ng-content></ng-content>
-      </ng-container>
-    </ion-content>
-    <ng-content select="[footer]"></ng-content>
+    <kirby-modal-wrapper [config]="config" [content]="template"></kirby-modal-wrapper>
   </ng-template>
 </ion-modal>
