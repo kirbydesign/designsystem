@@ -74,7 +74,7 @@ export class ModalWrapperComponent
   scrollY: number = Math.abs(this.windowRef.nativeWindow.scrollY);
   private readonly VIEWPORT_RESIZE_DEBOUNCE_TIME = 100;
 
-  set scrollDisabled(disabled: boolean) {
+  @Input() set scrollDisabled(disabled: boolean) {
     this.ionContent.scrollY = !disabled;
   }
 

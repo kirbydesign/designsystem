@@ -48,6 +48,7 @@ export class ModalComponent {
   @Input() drawerSupplementaryAction?: DrawerSupplementaryAction;
   @Input() open = false;
   @Input() title = '';
+  @Input() scrollDisabled = false;
 
   @Output() willPresent = new EventEmitter<CustomEvent<OverlayEventDetail>>();
   @Output() didPresent = new EventEmitter<CustomEvent<OverlayEventDetail>>();
