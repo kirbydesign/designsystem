@@ -8,23 +8,24 @@ const config = {
       formControlName="Bacon"
       text="Bacon"
       [disabled]="!canSelectFavorite">
-</kirby-checkbox>
+  </kirby-checkbox>
     <kirby-checkbox
     formControlName="Salami"
     text="Salami"
     [disabled]="!canSelectFavorite"
   ></kirby-checkbox>
   <kirby-checkbox
-  formControlName="Tenderloin"
-  text="Tenderloin"
-  [disabled]="!canSelectFavorite"
-></kirby-checkbox>
+    formControlName="Tenderloin"
+    text="Tenderloin"
+    [disabled]="!canSelectFavorite"
+  ></kirby-checkbox>
 </form>
 <cookbook-example-configuration-wrapper>
-<kirby-checkbox
-(checkedChange)="toggleCanSelectFavorite()"
-text="Form field enabled"></kirby-checkbox>
-<cookbook-reactive-form-state [form]="form"></cookbook-reactive-form-state>
+  <kirby-checkbox
+    (checkedChange)="toggleCanSelectFavorite()"
+    text="Form field enabled">
+  </kirby-checkbox>
+  <cookbook-reactive-form-state [form]="form"></cookbook-reactive-form-state>
 </cookbook-example-configuration-wrapper>
 
 `,
@@ -71,10 +72,7 @@ toggleCanSelectFavorite() {
   ],
 })
 export class CheckboxReactiveFormsExampleComponent {
-  template: string = `<form [formGroup]="form">
-  <kirby-checkbox formControlName="Bacon" text="Bacon" [disabled]="!canSelectFavorite">
-  </kirby-checkbox>
-</form>`;
+  template: string = config.template.split('<cookbook-example-configuration-wrapper>')[0]; // Remove config part of the template;
   codeSnippet: string = config.codeSnippet;
 
   form: FormGroup = this.formBuilder.group({
