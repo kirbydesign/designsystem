@@ -12,6 +12,7 @@ This document provides information about breaking changes and their migrations f
   - [Modal](#modal-v9)
   - [Slides](#slides-v9)
 - [Styles](#styles-v9)
+- [Dependencies](#dependencies-v9)
 
 <h3 id="components-v9">Components</h3>
 
@@ -50,6 +51,10 @@ For backwards compatability both variables return the `default` value until v10 
 <br>
 
 Values from the new content-width map can be retrieved with the `get-page-content-max-width()` convenience function, e.g. `get-page-content-max-width('full')`.
+
+<h3 id="dependencies-v9">Dependencies</h3>
+
+The `@kirbydesign/core` package that contain helpers for the designsystem package is now an ES Module, and no longer exports a CommonJS javascript bundle. If e.g. your Jest tests are otherwise configured to use CommonJS you might need to ignore transformation of the `@kirbydesign/core` files.
 
 ## Version 8.3.0
 
