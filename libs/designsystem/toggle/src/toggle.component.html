@@ -4,6 +4,6 @@
   [class.interaction-state-active]="_pressed"
   (keydown.space)="_onActive()"
   (keyup.space)="_onInactive()"
-  (ionBlur)="_onInactive()"
+  (blur)="_onInactive()"
   (ionChange)="onCheckedChange($event.detail.checked)"
 ></ion-toggle>
