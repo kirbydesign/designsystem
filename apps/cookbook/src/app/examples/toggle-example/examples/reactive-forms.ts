@@ -44,6 +44,7 @@ toggleEnabled(checked: boolean) {
       :host {
         display: flex;
         align-items: center;
+        gap: 40px;
       }
     `,
   ],
