@@ -6,7 +6,7 @@ const config = {
   template: `<form [formGroup]="form">
   <kirby-toggle
     formControlName="myToggle"
-    (checkedChange)="onCheckedChange($event)"
+    (checkedChange)="onCheckedChange()"
     [disabled]="!canSelectToggle"
   ></kirby-toggle>
 </form>
