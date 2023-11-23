@@ -19,7 +19,7 @@ $bullet-inactive-opacity: 0.2;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-block: utils.size('s');
+    margin-block: 0 utils.size('s');
     margin-inline: utils.size('s');
 
     &-inner {
@@ -43,7 +43,9 @@ $bullet-inactive-opacity: 0.2;
 
   .buttons {
     display: none;
-    z-index: utils.z('default');
+
+    // Adding one to default to make buttons clickable through box shadow.
+    z-index: utils.z('default') + 1;
 
     @include utils.media('>=medium') {
       display: block;
@@ -68,6 +70,11 @@ $bullet-inactive-opacity: 0.2;
   // doesn't contain enough slides for swiping.
   .swiper-button-lock {
     display: none;
+  }
+
+  swiper-container {
+    padding-block: utils.size('m');
+    margin-block: -(utils.size('m'));
   }
 
   @include utils.media('<medium') {
