@@ -7,10 +7,10 @@
 <div class="color-sample-wrapper">
   <div class="h2">Example use (Click on a color below to change it):</div>
   <div class="color-sample-flex">
-    <div class="color-sample-example {{ selectedColor }}">
+    <div class="color-sample-example color-sample {{ selectedColor }}">
       <div class="color-sample-on-text">Contrast Text</div>
-      <div class="{{ selectedColor }}-tint">Tint</div>
-      <div class="{{ selectedColor }}-shade">Shade</div>
+      <div class="color-sample {{ selectedColor }}-tint">Tint</div>
+      <div class="color-sample {{ selectedColor }}-shade">Shade</div>
     </div>
     <pre class="language-css">
 @use '@kirbydesign/designsystem/scss/utils';

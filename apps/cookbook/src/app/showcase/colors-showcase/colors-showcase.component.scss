@@ -54,32 +54,32 @@
   margin-right: utils.size('xl');
   margin-bottom: utils.size('xl');
   flex: 1 0 auto;
-}
 
-.color-sample {
-  box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%);
-  height: 100%;
-  width: 100%;
-  margin-top: auto;
-  border-radius: 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 3;
+  .color-sample {
+    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%);
+    height: 100%;
+    width: 100%;
+    margin-top: auto;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
 
-  &:nth-child(2) {
-    top: utils.size('xxs');
-    left: utils.size('xxs');
-    z-index: 2;
-  }
+    &:nth-child(2) {
+      top: utils.size('xxs');
+      left: utils.size('xxs');
+      z-index: 2;
+    }
 
-  &:nth-child(3) {
-    top: utils.size('s');
-    left: utils.size('s');
-    z-index: 1;
+    &:nth-child(3) {
+      top: utils.size('s');
+      left: utils.size('s');
+      z-index: 1;
+    }
   }
 }
 
