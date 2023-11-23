@@ -4,18 +4,19 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 const config = {
   selector: 'cookbook-toggle-reactive-forms-example',
   template: `<form [formGroup]="form">
-<kirby-toggle formControlName="myToggle" (checkedChange)="onCheckedChange($event)" [disabled]="!canSelectToggle"></kirby-toggle>
+  <kirby-toggle
+    formControlName="myToggle"
+    (checkedChange)="onCheckedChange($event)"
+    [disabled]="!canSelectToggle"
+  ></kirby-toggle>
 </form>
 <cookbook-example-configuration-wrapper>
-
   <kirby-checkbox
     [checked]="canSelectToggle"
     (checkedChange)="toggleEnabled($event)"
     text="Form field enabled"
-  >
-  </kirby-checkbox>
-
-  <cookbook-reactive-form-state [form]="form"></cookbook-reactive-form-state>
+  ></kirby-checkbox>
+ <cookbook-reactive-form-state [form]="form"/>
 </cookbook-example-configuration-wrapper>`,
   codeSnippet: `constructor(private fb: FormBuilder) {}
 
@@ -27,12 +28,12 @@ toggleEnabled(checked: boolean) {
   this.canSelectToggle = checked;
 
   if (this.canSelectToggle) {
-    this.form.get('myToggle')?.enable();
-  } 
-  else {
+     this.form.get('myToggle')?.enable();
+  } else {
     this.form.get('myToggle')?.disable();
   }
-}`,
+}
+`,
 };
 
 @Component({
