@@ -21,7 +21,6 @@ $default-checkbox-radio-size: map.get(utils.$checkbox-radio-sizes, 'md');
     display: block;
 
     @each $size, $height in utils.$checkbox-radio-sizes {
-      :host-context(.radio-#{$size}),
       &.#{$size} {
         ion-radio::part(label) {
           $vertical-padding: get-vertical-padding($height);
