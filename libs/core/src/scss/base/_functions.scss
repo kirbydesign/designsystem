@@ -57,9 +57,13 @@
   }
 }
 
-@function get-text-color($variant) {
-  $value: _get-map-prop(colors.$text-colors, $variant);
-  @return string.unquote('var(--kirby-text-color-' + $variant + ')');
+@function get-text-color($variant, $getValueOnly: false, $map: colors.$text-colors) {
+  $value: _get-map-prop($map, $variant);
+  @if $getValueOnly == true {
+    @return $value;
+  } @else {
+    @return string.unquote('var(--kirby-text-color-' + $variant + ')');
+  }
 }
 
 @function get-decoration-color($variant, $shade) {
