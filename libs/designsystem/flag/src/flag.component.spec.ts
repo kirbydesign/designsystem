@@ -116,28 +116,26 @@ describe('FlagComponent', () => {
   describe(`when configured with themeColor`, () => {
     const allowedThemeColors = ['success', 'warning', 'danger', 'semi-light'] as const;
     type FlagThemeColor = typeof allowedThemeColors[number];
-
     type ColorStep = [string, number];
-    type FlagColors = { [themeColor: string]: ColorStep | string };
-    const flagColors: FlagColors = {
-      success: ['green', 30],
-      warning: ['yellow', 30],
-      danger: ['red', 30],
-      'semi-light': 'semi-light',
-    };
-    const themeColors = Object.entries(flagColors).map(([themeColor, value]) =>
-      Array.isArray(value)
-        ? { ...getDecorationColor(...value), name: themeColor }
-        : getColor(value as ThemeColorExtended)
-    );
-    themeColors.forEach((color) => {
-      it(`should render with correct colors when themeColor = '${color.name}'`, async () => {
-        spectator.component.themeColor = color.name as FlagThemeColor;
+
+    const themeColorMap = new Map<FlagThemeColor, ColorStep | 'semi-light'>([
+      ['success', ['green', 30]],
+      ['warning', ['yellow', 30]],
+      ['danger', ['red', 30]],
+      ['semi-light', 'semi-light'],
+    ]);
+
+    themeColorMap.forEach((color, themeColor) => {
+      it(`should render with correct colors when themeColor = '${themeColor}'`, () => {
+        spectator.component.themeColor = themeColor;
         spectator.detectChanges();
 
+        const expectedBgColor = Array.isArray(color)
+          ? getDecorationColor(...color)
+          : getColor(color);
         expect(element).toHaveComputedStyle({
-          'background-color': color.value,
-          color: getColor(color.name as ThemeColorExtended, 'contrast'),
+          'background-color': expectedBgColor.value,
+          color: getColor(themeColor, 'contrast'),
         });
       });
     });
