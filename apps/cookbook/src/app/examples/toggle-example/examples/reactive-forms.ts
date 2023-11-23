@@ -15,18 +15,7 @@ const config = {
   >
   </kirby-checkbox>
 
-  <section class="form-state">
-    <h4>Form state:</h4>
-    <p>
-      <strong>form.value:</strong> {{ form.value | json }}
-    </p>
-    <p>
-      <strong>form.value: </strong>
-      <span [class.state-true]="form.get('myToggle').valid">valid: {{ form.get('myToggle').valid }}</span>
-      <span [class.state-true]="form.get('myToggle').enabled">enabled: {{ form.get('myToggle').enabled }}</span>
-      <span [class.state-true]="form.get('myToggle').touched">touched: {{ form.get('myToggle').touched }}</span>
-    </p>
-  </section>
+  <cookbook-reactive-form-state [form]="form"></cookbook-reactive-form-state>
 </cookbook-example-configuration-wrapper>`,
   codeSnippet: `constructor(private fb: FormBuilder) {}
 
@@ -48,7 +37,7 @@ toggleEnabled(checked: boolean) {
 
 @Component({
   selector: config.selector,
-  styleUrls: ['../toggle-example.component.scss', './ng-forms.shared.scss'],
+  styleUrls: ['../toggle-example.component.scss'],
   template: config.template,
   styles: [
     `
