@@ -85,6 +85,8 @@ $text-colors: (
   'semi-dark': #707070,
   'black': #1c1c1c,
   'danger': #ee0d0d,
+  'positive': map.get($decoration-colors, 'green', 80),
+  'negative': map.get($decoration-colors, 'red', 70),
 );
 $focus-ring-color: rgb(77 144 254);
 
