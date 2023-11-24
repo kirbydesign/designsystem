@@ -12,6 +12,7 @@ import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { PageModule } from '@kirbydesign/designsystem/page';
 import { CanDismissHelper, ModalWrapperComponent } from '@kirbydesign/designsystem/modal';
 import {
+  DummyContentEmbeddedComponent,
   DynamicFooterEmbeddedComponent,
   DynamicPageProgressEmbeddedComponent,
   InputEmbeddedComponent,
@@ -20,6 +21,8 @@ import {
   StaticPageProgressEmbeddedComponent,
   TitleEmbeddedComponent,
 } from './modal-wrapper.testbuilder';
+
+const { getColor } = DesignTokenHelper;
 
 describe('ModalWrapperComponent', () => {
   const createComponent = createComponentFactory({
@@ -651,7 +654,6 @@ describe('ModalWrapperComponent', () => {
 
   describe('listenForScroll', () => {
     afterEach(() => {
-      console.log('Here we reset');
       TestHelper.resetTestWindow();
     });
     it('should set scrollEventsEnabled to be false when opened on desktop', async () => {
@@ -696,20 +698,39 @@ describe('ModalWrapperComponent', () => {
       expect(spectator.component.scrollEventsEnabled).toBeTrue();
     });
 
-    it('should styling on toolbar when scrolling past offset on phone', async () => {
-      const animationDuration = KirbyAnimation.Duration.LONG;
-      const ionContent: IonContent = spectator.query(IonContent);
+    it('should set border-bottom-color on ion-toolbar when scrolling on phone to the bottom or past offset', async () => {
       await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
       modalWrapperTestBuilder = new ModalWrapperTestBuilder(createComponent);
       spectator = modalWrapperTestBuilder
         .flavor('modal')
-        .title('test')
-        .component(TitleEmbeddedComponent)
+        .component(DummyContentEmbeddedComponent)
         .build();
+      await spectator.fixture.whenStable();
+      const ionContentElement = spectator.query('ion-content') as HTMLElement;
+      if (!ionContentElement) {
+        console.error('ion-content element not found');
+        return;
+      }
+      ionContentElement.style.minHeight = '500px';
+      spectator.detectChanges();
 
-      spectator.component.scrollToBottom(animationDuration);
+      spectator.component.scrollToBottom();
+      await spectator.fixture.whenStable();
+      spectator.detectChanges();
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      const ionToolbarInScrolled = document.querySelector(
+        'ion-header.content-scrolled ion-toolbar'
+      ) as HTMLElement;
+      if (!ionToolbarInScrolled) {
+        console.error('ion-toolbar element not found');
+        return;
+      }
+      await spectator.fixture.whenStable();
+      const computedStyle = getComputedStyle(ionToolbarInScrolled);
+      const actualBorderColor = computedStyle.getPropertyValue('border-bottom-color');
+      const expectedColor = 'rgb(209, 209, 209)';
 
-      expect(spectator.component.scrollEventsEnabled).toBeTrue();
+      expect(actualBorderColor).toEqual(expectedColor);
     });
   });
 });
