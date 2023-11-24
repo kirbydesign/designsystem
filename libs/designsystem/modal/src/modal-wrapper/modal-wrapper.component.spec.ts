@@ -707,10 +707,6 @@ describe('ModalWrapperComponent', () => {
         .build();
       await spectator.fixture.whenStable();
       const ionContentElement = spectator.query('ion-content') as HTMLElement;
-      if (!ionContentElement) {
-        console.error('ion-content element not found');
-        return;
-      }
       ionContentElement.style.minHeight = '500px';
       spectator.detectChanges();
 
@@ -721,15 +717,10 @@ describe('ModalWrapperComponent', () => {
       const ionToolbarInScrolled = document.querySelector(
         'ion-header.content-scrolled ion-toolbar'
       ) as HTMLElement;
-      if (!ionToolbarInScrolled) {
-        console.error('ion-toolbar element not found');
-        return;
-      }
-      const computedStyle = getComputedStyle(ionToolbarInScrolled);
-      const actualBorderColor = computedStyle.getPropertyValue('border-bottom-color');
-      const expectedColor = 'rgb(209, 209, 209)';
 
-      expect(actualBorderColor).toEqual(expectedColor);
+      expect(ionToolbarInScrolled).toHaveComputedStyle({
+        'border-bottom-color': getColor('medium'),
+      });
     });
   });
 });
