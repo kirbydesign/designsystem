@@ -725,7 +725,6 @@ describe('ModalWrapperComponent', () => {
         console.error('ion-toolbar element not found');
         return;
       }
-      await spectator.fixture.whenStable();
       const computedStyle = getComputedStyle(ionToolbarInScrolled);
       const actualBorderColor = computedStyle.getPropertyValue('border-bottom-color');
       const expectedColor = 'rgb(209, 209, 209)';
