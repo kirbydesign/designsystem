@@ -8,7 +8,7 @@ import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { Overlay } from '@kirbydesign/designsystem/modal';
 import { ToastHelper } from './toast.helper';
 
-const getColor = DesignTokenHelper.getColor;
+const getDecorationColor = DesignTokenHelper.getDecorationColor;
 
 describe('ToastHelper', () => {
   let spectator: SpectatorService<ToastHelper>;
@@ -63,11 +63,11 @@ describe('ToastHelper', () => {
 
     describe('when configured with messageType', () => {
       type MessageType = 'success' | 'warning';
-      type NotificationColor = 'success' | 'warning';
+      type ColorStep = [string, number];
 
-      const messageTypeColorMap = new Map<MessageType, NotificationColor>([
-        ['success', 'success'],
-        ['warning', 'warning'],
+      const messageTypeColorMap = new Map<MessageType, ColorStep>([
+        ['success', ['green', 40]],
+        ['warning', ['yellow', 40]],
       ]);
 
       messageTypeColorMap.forEach((notificationColor, messageType) => {
@@ -81,7 +81,7 @@ describe('ToastHelper', () => {
           const toastWrapper = ionToast.shadowRoot.querySelector('.toast-wrapper');
 
           expect(toastWrapper).toHaveComputedStyle({
-            'background-color': getColor(notificationColor),
+            'background-color': getDecorationColor(...notificationColor).value,
           });
         });
       });
