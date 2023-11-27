@@ -1,54 +1,33 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import {
-  IonButtons,
-  IonContent,
-  IonHeader,
-  IonIcon,
-  IonModal,
-  IonTitle,
-  IonToolbar,
-} from '@ionic/angular';
-import { MockComponents } from 'ng-mocks';
-import { IconComponent } from '@kirbydesign/designsystem/icon';
-import { ButtonComponent } from '@kirbydesign/designsystem/button';
+import { IonModal } from '@ionic/angular';
+import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { ModalComponent } from './modal.component';
 
-describe('FullscreenComponent', () => {
+describe('Modal Component', () => {
   const titleText = 'Test Modal';
 
   let spectator: SpectatorHost<ModalComponent>;
 
   const createHost = createHostFactory({
     component: ModalComponent,
-    declarations: [
-      MockComponents(
-        IonModal,
-        IonHeader,
-        IonToolbar,
-        IonTitle,
-        IonContent,
-        IonButtons,
-        IonIcon,
-        ButtonComponent,
-        IconComponent
-      ),
-    ],
+    imports: [TestHelper.ionicModuleForTest],
   });
 
   beforeEach(() => {
     spectator = createHost(
       `
-      <kirby-modal-v2 [title]="title" [open]="open">
+      <kirby-modal>
         <p>Test</p>
-      </kirby-modal-v2>
-    `,
-      {
-        hostProps: {
-          title: titleText,
-          open: true,
-        },
-      }
+      </kirby-modal>
+    `
     );
+
+    TestHelper.disableAnimationsInTest();
+  });
+
+  afterEach(() => {
+    spectator.component.open = false;
+    spectator.detectChanges();
   });
 
   describe('by default', () => {
@@ -61,7 +40,7 @@ describe('FullscreenComponent', () => {
     });
 
     it('should have a collapsable title', () => {
-      expect(spectator.component.canDismiss).toBeTrue();
+      expect(spectator.component.collapseTitle).toBeTrue();
     });
 
     it('should enable scroll', () => {

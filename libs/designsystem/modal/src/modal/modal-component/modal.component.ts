@@ -17,7 +17,7 @@ import { IconModule } from '@kirbydesign/designsystem/icon';
 import { KirbyIonicModule } from '@kirbydesign/designsystem/kirby-ionic-module';
 import {
   DrawerSupplementaryAction,
-  ModalConfig,
+  ModalComponentConfig,
   ModalSize,
   ModalWrapperComponent,
 } from '../../modal-wrapper';
@@ -40,8 +40,8 @@ export class ModalComponent {
 
   @ContentChild(TemplateRef, { static: true }) template: TemplateRef<any>;
 
-  @Input() config: ModalConfig;
-  @Input() collapseTitle = false;
+  @Input() config: ModalComponentConfig = {};
+  @Input() collapseTitle = true;
   @Input() size: ModalSize = 'medium';
   @Input() flavor: Flavor = 'modal';
   @Input() canDismiss: boolean | (() => Promise<boolean>) = true;
@@ -54,10 +54,6 @@ export class ModalComponent {
   @Output() didPresent = new EventEmitter<CustomEvent<OverlayEventDetail>>();
   @Output() didDismiss = new EventEmitter<CustomEvent<OverlayEventDetail>>();
   @Output() willDismiss = new EventEmitter<CustomEvent<OverlayEventDetail>>();
-
-  _closeModal() {
-    this.modal.dismiss(null, 'cancel');
-  }
 
   _onWillPresent(event: CustomEvent<OverlayEventDetail>) {
     this.willPresent.emit(event);
@@ -72,6 +68,7 @@ export class ModalComponent {
   }
 
   _onDidDismiss(event: CustomEvent<OverlayEventDetail>) {
+    this.open = false;
     this.didDismiss.emit(event);
   }
 
