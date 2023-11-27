@@ -26,6 +26,7 @@ ion-footer {
 
 :host {
   box-sizing: border-box;
+  display: block;
 }
 
 :host(.snap-to-keyboard) {

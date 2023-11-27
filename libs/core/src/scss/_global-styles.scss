@@ -88,10 +88,6 @@ ion-modal::part(backdrop) {
   --backdrop-opacity: 0.4;
 }
 
-// kirby-modal-wrapper {
-//   height: calc(100% - 88px * 2);
-// }
-
 ion-modal.kirby-overlay {
   position: fixed;
 
@@ -132,20 +128,20 @@ ion-modal.kirby-overlay {
 
     @include utils.media('<medium') {
       &:not(.kirby-drawer):not(.kirby-modal-compact) {
-        --height: 100%;
+        --height: 100vh;
       }
     }
 
     &.modal-card:not(.kirby-drawer) {
       @include utils.media('<medium') {
-        --height: 100%;
+        --height: 100vh;
       }
     }
 
     &:not(.kirby-modal-compact) {
       &.kirby-modal-full-height {
         --width: #{map.get($modal-widths, 'm')};
-        --height: 100%;
+        --height: 100vh;
       }
 
       @include utils.media('>=medium') {
