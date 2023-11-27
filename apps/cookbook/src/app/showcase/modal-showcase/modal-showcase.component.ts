@@ -63,18 +63,6 @@ export class ModalShowcaseComponent {
       type: ['undefined | string'],
     },
     {
-      name: 'component',
-      description: 'The component which will be rendered inside the modal.',
-      defaultValue: '',
-      type: ['Component'],
-    },
-    {
-      name: 'componentProps',
-      description: '(Optional) The data to pass to the modal component.',
-      defaultValue: '',
-      type: ['undefined | { [key: string]: any; }'],
-    },
-    {
       name: 'drawerSupplementaryAction',
       description: `(Optional) Allows placing a supplementary button in the top right corner of drawers.
       Please note: Only available on modals with a \`drawer\` flavor.`,
@@ -101,6 +89,21 @@ export class ModalShowcaseComponent {
       The canDismiss option takes a callback function that returns either a boolean or an AlertConfig. If an AlertConfig is returned an alert will appear when the user tries to dismiss the modal. If false is returned the modal cannot be dismissed by user-interaction or with ModalController.hideTopMost(). `,
       defaultValue: 'true',
       type: ['boolean | AlertConfig | Promise<boolean | AlertConfig>'],
+    },
+  ];
+
+  modalControllerConfigProperties: ApiDescriptionProperty[] = [
+    {
+      name: 'component',
+      description: '(Required) The component which will be rendered inside the modal.',
+      defaultValue: '',
+      type: ['Component'],
+    },
+    {
+      name: 'componentProps',
+      description: '(Optional) The data to pass to the modal component.',
+      defaultValue: '',
+      type: ['undefined | { [key: string]: any; }'],
     },
   ];
 
