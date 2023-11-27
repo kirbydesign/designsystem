@@ -128,20 +128,20 @@ ion-modal.kirby-overlay {
 
     @include utils.media('<medium') {
       &:not(.kirby-drawer):not(.kirby-modal-compact) {
-        --height: 100vh;
+        --height: 100%;
       }
     }
 
     &.modal-card:not(.kirby-drawer) {
       @include utils.media('<medium') {
-        --height: 100vh;
+        --height: 100%;
       }
     }
 
     &:not(.kirby-modal-compact) {
       &.kirby-modal-full-height {
         --width: #{map.get($modal-widths, 'm')};
-        --height: 100vh;
+        --height: 100%;
       }
 
       @include utils.media('>=medium') {
