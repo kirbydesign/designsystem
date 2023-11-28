@@ -17,7 +17,7 @@ import { IconModule } from '@kirbydesign/designsystem/icon';
 import { KirbyIonicModule } from '@kirbydesign/designsystem/kirby-ionic-module';
 import {
   DrawerSupplementaryAction,
-  ModalComponentConfig,
+  ModalConfig,
   ModalSize,
   ModalWrapperComponent,
 } from '../../modal-wrapper';
@@ -40,7 +40,7 @@ export class ModalComponent {
 
   @ContentChild(TemplateRef, { static: true }) template: TemplateRef<any>;
 
-  @Input() config: ModalComponentConfig = {};
+  @Input() config: ModalConfig = {};
   @Input() collapseTitle = true;
   @Input() size: ModalSize = 'medium';
   @Input() flavor: Flavor = 'modal';

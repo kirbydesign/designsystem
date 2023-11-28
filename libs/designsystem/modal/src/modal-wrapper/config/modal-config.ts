@@ -11,7 +11,7 @@ export type ShowAlertCallback = () => boolean | AlertConfig | Promise<boolean | 
 
 export interface ModalConfig {
   collapseTitle?: boolean;
-  component: any;
+  component?: any;
   size?: ModalSize;
   customHeight?: string;
   modalRoute?: ActivatedRoute;
@@ -26,15 +26,16 @@ export interface ModalConfig {
   cssClass?: string | string[];
 }
 
-export type ModalComponentConfig = Omit<ModalConfig, 'component'>;
-
+export type ModalControllerConfig = ModalConfig & {
+  component: any;
+};
 /**
  * Here we extend Data and Route from Angular to create a covariant type ModalEnabledRoutes.
  * This can be used in place of the Routes type when configuring route-based modals in the array
  * of routes passed to RouterModule in applications.
  */
 
-export type RoutedModalConfig = Omit<ModalConfig, 'component'>;
+export type RoutedModalConfig = ModalConfig;
 
 interface ModalConfigRouteData extends Data {
   modalConfig?: RoutedModalConfig;
