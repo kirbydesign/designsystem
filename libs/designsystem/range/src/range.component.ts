@@ -37,6 +37,7 @@ export class RangeComponent implements OnChanges, ControlValueAccessor {
   @Input() step = 1;
   @Input() ticks: boolean;
   @Input() disabled = false;
+  @Input() pinFormatter: (value: number) => string | number;
   @Input()
   set value(value: number) {
     if (value !== this.currentValue) {
