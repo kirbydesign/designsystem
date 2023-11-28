@@ -74,5 +74,11 @@ export class RangeShowcaseComponent {
         'Emitted when the user modifies the value by releasing the knob or moving the knob with the keyboard',
       signature: '() => EventEmitter<number>',
     },
+    {
+      name: 'move',
+      description:
+        'Emitted for each distinct change whenever the knob is moved by the user. Unlike the change event it fires continuously while the user is dragging the knob.',
+      signature: '() => EventEmitter<number>',
+    },
   ];
 }
