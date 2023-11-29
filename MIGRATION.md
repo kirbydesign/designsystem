@@ -10,6 +10,7 @@ This document provides information about breaking changes and their migrations f
   - [Experimental Alert](#experimental-alert-v9)
   - [Grid](#grid-v9)
   - [Modal](#modal-v9)
+  - [Range](#range-v9)
   - [Slides](#slides-v9)
 - [Styles](#styles-v9)
 - [Dependencies](#dependencies-v9)
@@ -35,6 +36,13 @@ The grid **component** has been removed in favor of using the much more flexible
 <h4 id="modal-v9">Modal</h4>
 
 The following methods have been removed from the `modalController` and all usages of these methods should be removed: `registerPresentingElement`, `scrollToTop`, `scrollToBottom`.
+
+<h4 id="range-v9">Range</h4>
+
+The `change` event no longer emits for each value change, but instead only when the user releases the knob after dragging or when the user moves the knob with keyboard arrows.
+This prevents excessively emitting _a lot_ of events especially for large ranges, and removes the need for debouncing measures in applications.
+
+If the previous functionality of reacting to each value change is needed consider binding to the `move` event instead.
 
 <h4 id="slides-v9">Slides</h4>
 
