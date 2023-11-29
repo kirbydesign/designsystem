@@ -8,8 +8,8 @@ const config = {
 const pinFormatterExample = {
   template: `<kirby-range pin="true" [pinFormatter]="pinFormatter" minLabel="Min value" maxLabel="Max value" max="15" min="1"></kirby-range>`,
   function: `pinFormatter(value: number) {
-    return \`\${value}%\`;
-  }`,
+  return \`\${value}%\`;
+}`,
 };
 
 @Component({
