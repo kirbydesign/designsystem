@@ -3,7 +3,7 @@
   [isOpen]="open"
   [handle]="false"
   [canDismiss]="canDismiss ? canDismiss : config.canDismiss"
-  [ngClass]="'kirby-modal-' + size"
+  [ngClass]="'kirby-modal-' + config.size"
   (willPresent)="_onWillPresent($event)"
   (didPresent)="_onDidPresent($event)"
   (willDismiss)="_onWillDismiss($event)"
