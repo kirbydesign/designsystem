@@ -108,8 +108,7 @@ export class ModalExampleSimpleComponent implements OnInit {
     this.size = this.sizeSelector.size;
 
     this.config = {
-      component: null,
-      size: this.size?.value,
+      size: 'full-height',
       flavor: 'modal',
       collapseTitle: true,
     };
