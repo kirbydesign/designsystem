@@ -64,6 +64,19 @@
 
 <cookbook-iphone
   class="large-example"
+  src="/examples/modal-component"
+  viewMode="full-size"
+  [showViewModeToggle]="true"
+  showExternalLink="true"
+></cookbook-iphone>
+
+<cookbook-example-viewer
+  [html]="componentConfigExample.template"
+  [ts]="componentConfigExample.showModalCodeSnippet"
+></cookbook-example-viewer>
+
+<cookbook-iphone
+  class="large-example"
   src="/examples/modal-simple"
   viewMode="full-size"
   [showViewModeToggle]="true"

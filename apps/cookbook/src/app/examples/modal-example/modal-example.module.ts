@@ -19,11 +19,13 @@ import { ModalRoutePage1ExampleComponent } from './modal-route-example/modal-rou
 import { ModalRoutePage2ExampleComponent } from './modal-route-example/modal-route-page2-example.component';
 import { ModalExampleAlertComponent } from './modal-example-alert.component';
 import { ModalEmbeddedAlertExampleComponent } from './alert-example/modal-example-embedded-alert.component';
+import { ModalComponentExampleComponent } from './modal-component-example.component';
 
 const COMPONENT_DECLARATIONS = [
   ModalExampleComponent,
   ModalExampleAdvancedComponent,
   ModalExampleSimpleComponent,
+  ModalComponentExampleComponent,
   ModalExampleConfigurationComponent,
   ModalExampleSizeSelectorComponent,
   ModalExampleOutletComponent,

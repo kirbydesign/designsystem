@@ -9,6 +9,7 @@ import {
   ApiDescriptionPropertyColumns,
 } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 import { ModalEmbeddedAlertExampleComponent } from '~/app/examples/modal-example/alert-example/modal-example-embedded-alert.component';
+import { ModalComponentExampleComponent } from '~/app/examples/modal-example/modal-component-example.component';
 
 @Component({
   selector: 'cookbook-modal-showcase',
@@ -19,6 +20,7 @@ import { ModalEmbeddedAlertExampleComponent } from '~/app/examples/modal-example
 export class ModalShowcaseComponent {
   advancedConfigExample = ModalExampleAdvancedComponent;
   basicConfigExample = ModalExampleSimpleComponent;
+  componentConfigExample = ModalComponentExampleComponent;
   outletExample = ModalExampleOutletComponent;
   alertEmbeddedExample = ModalEmbeddedAlertExampleComponent;
   alertModalConfigExample = ModalExampleAlertComponent;
@@ -104,6 +106,15 @@ export class ModalShowcaseComponent {
       description: '(Optional) The data to pass to the modal component.',
       defaultValue: '',
       type: ['undefined | { [key: string]: any; }'],
+    },
+  ];
+
+  modalComponentConfigProperties: ApiDescriptionProperty[] = [
+    {
+      name: 'open',
+      description: 'Text goes here',
+      defaultValue: 'false',
+      type: ['boolean'],
     },
   ];
 
