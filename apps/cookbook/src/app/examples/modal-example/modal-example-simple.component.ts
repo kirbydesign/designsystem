@@ -14,63 +14,13 @@ const config = {
   template: `<button kirby-button size="lg" (click)="showModal('modal', size)">Show modal</button>
 <button kirby-button size="lg"(click)="showModal('drawer', size)">Show drawer</button>
 <button kirby-button size="lg" (click)="showModal('compact')">Show compact</button>
-<button kirby-button size="lg" (click)="openModal()">Show inline modal</button>
 <kirby-card>
   <kirby-card-header>
     <strong>Size of modal/drawer</strong><br />
     <em>(on screens larger than 768px)</em>
   </kirby-card-header>
   <cookbook-modal-example-size-selector (sizeChange)="sizeChange($event)"></cookbook-modal-example-size-selector>
-</kirby-card>
-<kirby-modal
-  (willDismiss)="close()"
-  [open]="open"
-  [config]="config"
->
-
-<ng-template>
-  <kirby-modal-footer>
-    <button kirby-button attentionLevel="3">
-      <kirby-icon name="arrow-back"></kirby-icon>
-    </button>
-
-    <button kirby-button>Finish</button>
-  </kirby-modal-footer>
-  <p>hey</p>
-  <p>hey</p>
-  <p>hey</p>
-  <p>hey</p>
-  <p>hey</p>
-  <p>hey</p>
-  <p>hey</p>
-  <p>hey</p>
-  <p>hey</p>
-  <p>hey</p>
-  <p>hey</p>
-  <p>hey</p>
-  <p>hey</p>
-  <p>hey</p>
-  <p>hey</p>
-  <p>hey</p>
-  <p>hey</p>
-  <p>hey</p>
-  <p>hey</p>
-  <p>hey</p>
-  <p>hey</p>
-  <p>hey</p>
-  <p>hey</p>
-  <p>hey</p>
-  
-  <kirby-page-progress>
-  <kirby-progress-circle themeColor="warning" value="50" size="sm" class="kirby-text-xsmall">
-  2/4
-  </kirby-progress-circle>
-</kirby-page-progress>
-
-  <kirby-page-title>Hello there</kirby-page-title>
-</ng-template>
-
-</kirby-modal>`,
+</kirby-card>`,
   showModalCodeSnippet: `constructor(private modalController: ModalController) {}
 
 showModal(flavor: ModalFlavor, size?: ModalSize) {
@@ -83,6 +33,7 @@ showModal(flavor: ModalFlavor, size?: ModalSize) {
   this.modalController.showModal(config);
 }`,
 };
+
 @Component({
   selector: config.selector,
   template: config.template,
@@ -98,20 +49,10 @@ export class ModalExampleSimpleComponent implements OnInit {
 
   size: ModalSizeOption;
 
-  open: boolean = false;
-
-  config: ModalConfig;
-
   constructor(private modalController: ModalController) {}
 
   ngOnInit(): void {
     this.size = this.sizeSelector.size;
-
-    this.config = {
-      size: 'full-height',
-      flavor: 'modal',
-      collapseTitle: true,
-    };
   }
 
   async showModal(flavor: ModalFlavor, size?: ModalSizeOption) {
@@ -143,16 +84,4 @@ export class ModalExampleSimpleComponent implements OnInit {
   sizeChange(size: ModalSizeOption) {
     this.size = size;
   }
-
-  openModal() {
-    this.open = true;
-  }
-
-  close() {
-    this.open = false;
-  }
-
-  drawerSupplementaryAction: {
-    iconName: 'qr';
-  };
 }
