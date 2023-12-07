@@ -213,7 +213,13 @@
     line-height: line-height('s');
     color: var(--kirby-section-header-color);
     margin: size('xxxs') 0 size('xxs');
-    white-space: nowrap;
+
+    @if not parent('.multiline') {
+      white-space: nowrap;
+    } @else {
+      white-space: normal;
+    }
+
     overflow: hidden;
     text-overflow: ellipsis;
   }
