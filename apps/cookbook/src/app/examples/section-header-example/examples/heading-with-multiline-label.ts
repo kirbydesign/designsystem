@@ -13,10 +13,6 @@ const config = {
     <h3>Title</h3>
     <data slot="end">Value</data>
   </kirby-item>
-  <kirby-item>
-    <h3>Title</h3>
-    <data slot="end">Value</data>
-  </kirby-item>
 </kirby-card>`,
 };
 
