@@ -80,7 +80,7 @@
 
 ion-segment {
   border-radius: utils.$border-radius-round;
-  grid-auto-columns: initial;
+  grid-auto-columns: max-content;
   box-sizing: border-box;
 }
 
