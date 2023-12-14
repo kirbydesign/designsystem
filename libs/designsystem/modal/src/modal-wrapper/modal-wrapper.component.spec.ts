@@ -706,8 +706,9 @@ describe('ModalWrapperComponent', () => {
         .component(DummyContentEmbeddedComponent)
         .build();
       await spectator.fixture.whenStable();
+      const MinimumScrollableContentHeight = '500px';
       const ionContentElement = spectator.query('ion-content') as HTMLElement;
-      ionContentElement.style.minHeight = '500px';
+      ionContentElement.style.minHeight = MinimumScrollableContentHeight;
       spectator.detectChanges();
 
       spectator.component.scrollToBottom();
