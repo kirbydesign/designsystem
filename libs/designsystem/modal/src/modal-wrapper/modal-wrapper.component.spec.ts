@@ -713,7 +713,7 @@ describe('ModalWrapperComponent', () => {
       spectator.component.scrollToBottom();
       await spectator.fixture.whenStable();
       spectator.detectChanges();
-      await new Promise((resolve) => setTimeout(resolve, 500));
+      await TestHelper.whenTrue(() => spectator.component.isContentScrolled);
       const ionToolbarInScrolled = document.querySelector(
         'ion-header.content-scrolled ion-toolbar'
       ) as HTMLElement;
