@@ -7,9 +7,11 @@ This document provides information about breaking changes and their migrations f
 - [Components](#components-v9)
   - [Avatar](#avatar-v9)
   - [Button](#button-v9)
+  - [Badge](#badge-v9)
   - [Experimental Alert](#experimental-alert-v9)
   - [Grid](#grid-v9)
   - [Modal](#modal-v9)
+  - [Range](#range-v9)
   - [Slides](#slides-v9)
 - [Styles](#styles-v9)
 - [Dependencies](#dependencies-v9)
@@ -24,6 +26,10 @@ The `shadow` input binding has been removed and `stroke` should be used instead 
 
 The deprecated attention level 4 has been removed. This has no visual significance as level 4 was mapped to level 3 internally in the button, but any references to attention level 4 should be removed from code.
 
+<h4 id="badge-v9">Badge</h4>
+
+`KirbyBadgeModule` has been removed. `BadgeComponent` is now standalone and can be imported directly.
+
 <h4 id="experimental-alert-v9">Experimental Alert</h4>
 
 The Experimental Alert has been fully removed and we recommend to use the normal alert instead.
@@ -35,6 +41,13 @@ The grid **component** has been removed in favor of using the much more flexible
 <h4 id="modal-v9">Modal</h4>
 
 The following methods have been removed from the `modalController` and all usages of these methods should be removed: `registerPresentingElement`, `scrollToTop`, `scrollToBottom`.
+
+<h4 id="range-v9">Range</h4>
+
+The `change` event no longer emits for each value change, but instead only when the user releases the knob after dragging or when the user moves the knob with keyboard arrows.
+This prevents excessively emitting _a lot_ of events especially for large ranges, and removes the need for debouncing measures in applications.
+
+If the previous functionality of reacting to each value change is needed consider binding to the `move` event instead.
 
 <h4 id="slides-v9">Slides</h4>
 
