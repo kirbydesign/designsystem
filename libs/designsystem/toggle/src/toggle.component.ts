@@ -1,19 +1,20 @@
 import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   forwardRef,
-  HostListener,
+  HostBinding,
   Input,
   Output,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { KirbyIonicModule } from '@kirbydesign/designsystem/kirby-ionic-module';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
   standalone: true,
-  imports: [KirbyIonicModule, CommonModule],
+  imports: [IonicModule, CommonModule],
   selector: 'kirby-toggle',
   templateUrl: './toggle.component.html',
   styleUrls: ['./toggle.component.scss'],
@@ -27,8 +28,14 @@ import { KirbyIonicModule } from '@kirbydesign/designsystem/kirby-ionic-module';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToggleComponent implements ControlValueAccessor {
+  constructor(private cdr: ChangeDetectorRef) {}
+
   @Input() checked: boolean = false;
   @Input() disabled: boolean = false;
+  @HostBinding('attr.disabled')
+  get _isDisabled() {
+    return this.disabled ? 'disabled' : null;
+  }
 
   @Output() checkedChange = new EventEmitter<boolean>();
 
@@ -92,5 +99,6 @@ export class ToggleComponent implements ControlValueAccessor {
    */
   setDisabledState?(isDisabled: boolean): void {
     this.disabled = isDisabled;
+    this.cdr.detectChanges();
   }
 }
