@@ -718,6 +718,7 @@ describe('ModalWrapperComponent', () => {
       const ionToolbarInScrolled = document.querySelector(
         'ion-header.content-scrolled ion-toolbar'
       ) as HTMLElement;
+      ionToolbarInScrolled.style.transition = 'none';
 
       expect(ionToolbarInScrolled).toHaveComputedStyle({
         'border-bottom-color': getColor('medium'),
