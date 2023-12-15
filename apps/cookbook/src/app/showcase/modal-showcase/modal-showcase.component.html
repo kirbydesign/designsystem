@@ -19,9 +19,9 @@
     </li>
     <li>
       Modals can be either
-      <a href="#" (click)="scrollTo(componentBasedBasic)">component based</a>
+      <a href="#" (click)="scrollTo(componentBasic)">component based</a>
       or
-      <a href="#" (click)="scrollTo(routeBasedBasic)">route based</a>
+      <a href="#" (click)="scrollTo(routeBasic)">route based</a>
     </li>
     <li>
       Support for handling
@@ -48,19 +48,7 @@
   </ul>
 </section>
 
-<h2 #componentBasedBasic>Basic usage</h2>
-<p>
-  The
-  <code>ModalController</code>
-  can be used to present a component in a modal dialog by passing a
-  <code><a href="#" (click)="scrollTo(modalConfig)">ModalConfig</a></code>
-  to the
-  <code>ModalController.showModal()</code>
-  method. The configuration controls the content of the modal as well as size, flavor etc. as seen
-  in the interactive example and the
-  <a href="#" (click)="scrollTo(modalFlavors)">explanation below</a>
-  .
-</p>
+<h2 #componentBasic>Basic usage</h2>
 
 <cookbook-iphone
   class="large-example"
@@ -74,6 +62,21 @@
   [html]="componentConfigExample.template"
   [ts]="componentConfigExample.showModalCodeSnippet"
 ></cookbook-example-viewer>
+
+<h2 #controllerBasic>Using the ModalController</h2>
+
+<p>
+  The
+  <code>ModalController</code>
+  can be used to present a component in a modal dialog by passing a
+  <code><a href="#" (click)="scrollTo(modalConfig)">ModalConfig</a></code>
+  to the
+  <code>ModalController.showModal()</code>
+  method. The configuration controls the content of the modal as well as size, flavor etc. as seen
+  in the interactive example and the
+  <a href="#" (click)="scrollTo(modalFlavors)">explanation below</a>
+  .
+</p>
 
 <cookbook-iphone
   class="large-example"
@@ -232,7 +235,7 @@
 </p>
 <cookbook-example-viewer [ts]="advancedConfigExample.drawerCodeSnippet"></cookbook-example-viewer>
 
-<h2 #routeBasedBasic>Route-based modals</h2>
+<h2 #routeBasic>Route-based modals</h2>
 
 <p>
   Routed modals are useful for creating wizard-type flows where the same modal is reused for showing
