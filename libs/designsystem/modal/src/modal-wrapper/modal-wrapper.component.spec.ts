@@ -666,7 +666,7 @@ describe('ModalWrapperComponent', () => {
         .component(TitleEmbeddedComponent)
         .build();
 
-      expect(spectator.component.scrollEventsEnabled).toBeFalsy();
+      expect(spectator.component.scrollEventsEnabled).toBeFalse();
     });
 
     it('should set scrollEventsEnabled to be true when opened on a phone', async () => {
@@ -679,7 +679,7 @@ describe('ModalWrapperComponent', () => {
         .component(TitleEmbeddedComponent)
         .build();
 
-      expect(spectator.component.scrollEventsEnabled).toBeTruthy();
+      expect(spectator.component.scrollEventsEnabled).toBeTrue();
     });
 
     it('should set scrollEventsEnabled to be true when resizing from desktop to phone', async () => {
