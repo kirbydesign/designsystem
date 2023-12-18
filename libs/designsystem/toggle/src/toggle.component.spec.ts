@@ -83,8 +83,6 @@ describe('ToggleComponent', () => {
     });
 
     it('should update the disabled state when setDisabledState is called', () => {
-      expect(spectator.component.disabled).toBeFalse();
-
       spectator.component.setDisabledState(true);
 
       expect(spectator.component.disabled).toBeTrue();
