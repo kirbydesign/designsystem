@@ -5,8 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './toggle-example.component.html',
   styleUrls: ['./toggle-example.component.scss'],
 })
-export class ToggleExampleComponent {
-  onCheckedChange(checked: boolean) {
-    console.log(`Toggle onCheckedChange: ${checked}`);
-  }
-}
+export class ToggleExampleComponent {}
