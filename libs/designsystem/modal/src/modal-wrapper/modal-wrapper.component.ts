@@ -133,12 +133,10 @@ export class ModalWrapperComponent
     }
     return this._intersectionObserver;
   }
-
+  scrollEventsEnabled: boolean;
   isContentScrolled: boolean;
-  private contentScrolled$: Observable<ScrollDetail>;
 
   private destroy$: Subject<void> = new Subject<void>();
-
   @HostBinding('class.drawer')
   get _isDrawer() {
     return this.config.flavor === 'drawer';
@@ -170,6 +168,7 @@ export class ModalWrapperComponent
     this.initializeModalRoute();
     this.listenForIonModalDidPresent();
     this.listenForIonModalWillDismiss();
+    this.listenForScroll();
     this.initializeResizeModalToModalWrapper();
     this.componentPropsInjector = Injector.create({
       providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
@@ -181,8 +180,6 @@ export class ModalWrapperComponent
     if (this.toolbarButtonsQuery) {
       this.toolbarButtons = this.toolbarButtonsQuery.map((buttonRef) => buttonRef.nativeElement);
     }
-
-    this.initializeContentScrollListening();
   }
 
   private _currentFooter: HTMLElement | null = null;
@@ -343,24 +340,35 @@ export class ModalWrapperComponent
     }
   }
 
-  /*
-   * Runs scroll subscription outside zone to avoid excessive amount of CD cycles
-   * when ionScroll emits.
-   */
-  private initializeContentScrollListening() {
-    this.zone.runOutsideAngular(() => {
-      this.contentScrolled$ = this.ionContent.ionScroll.pipe(
-        debounceTime(contentScrollDebounceTimeInMS),
-        map((event) => event.detail),
-        takeUntil(this.destroy$)
-      );
+  private listenForScroll() {
+    const query = `(min-width: ${DesignTokenHelper.breakpoints.medium})`;
+    const mediaQuery = this.windowRef.nativeWindow.matchMedia(query);
+    const enableScrollEvents = (listOrEvent: MediaQueryList | MediaQueryListEvent) => {
+      const isDesktop = listOrEvent.matches;
+      this.scrollEventsEnabled = !isDesktop;
+    };
 
-      this.contentScrolled$.subscribe((scrollInfo: ScrollDetail) => {
-        if (scrollInfo.scrollTop > contentScrolledOffsetInPixels !== this.isContentScrolled) {
-          this.isContentScrolled = !this.isContentScrolled;
-          this.changeDetector.detectChanges();
-        }
-      });
+    enableScrollEvents(mediaQuery);
+    mediaQuery.onchange = enableScrollEvents;
+
+    // Runs scroll subscription outside zone to avoid excessive amount of CD cycles
+    // when ionScroll emits.
+    this.zone.runOutsideAngular(() => {
+      // Always subscribe as ionScroll only emits when scrollEventsEnabled is true
+      this.ionContent.ionScroll
+        .pipe(
+          debounceTime(contentScrollDebounceTimeInMS),
+          map((event) => event.detail),
+          takeUntil(this.destroy$)
+        )
+        .subscribe((scrollInfo: ScrollDetail) => {
+          const contentScrolledPastOffset = scrollInfo.scrollTop > contentScrolledOffsetInPixels;
+
+          if (contentScrolledPastOffset !== this.isContentScrolled) {
+            this.isContentScrolled = contentScrolledPastOffset;
+            this.changeDetector.detectChanges();
+          }
+        });
     });
   }
 
