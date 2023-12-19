@@ -7,6 +7,7 @@ This document provides information about breaking changes and their migrations f
 - [Components](#components-v9)
   - [Avatar](#avatar-v9)
   - [Button](#button-v9)
+  - [Badge](#badge-v9)
   - [Experimental Alert](#experimental-alert-v9)
   - [Grid](#grid-v9)
   - [Modal](#modal-v9)
@@ -24,6 +25,10 @@ The `shadow` input binding has been removed and `stroke` should be used instead 
 <h4 id="button-v9">Button</h4>
 
 The deprecated attention level 4 has been removed. This has no visual significance as level 4 was mapped to level 3 internally in the button, but any references to attention level 4 should be removed from code.
+
+<h4 id="badge-v9">Badge</h4>
+
+`KirbyBadgeModule` has been removed. `BadgeComponent` is now standalone and can be imported directly.
 
 <h4 id="experimental-alert-v9">Experimental Alert</h4>
 

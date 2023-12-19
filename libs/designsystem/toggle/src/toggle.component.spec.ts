@@ -1,5 +1,3 @@
-import { By } from '@angular/platform-browser';
-import * as ionic from '@ionic/angular';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
@@ -8,6 +6,7 @@ import { ToggleComponent } from './toggle.component';
 
 describe('ToggleComponent', () => {
   let spectator: Spectator<ToggleComponent>;
+  let ionToggle: HTMLIonToggleElement;
 
   const createComponent = createComponentFactory({
     component: ToggleComponent,
@@ -16,6 +15,7 @@ describe('ToggleComponent', () => {
 
   beforeEach(() => {
     spectator = createComponent();
+    ionToggle = spectator.query('ion-toggle');
   });
 
   it('should create', () => {
@@ -28,16 +28,13 @@ describe('ToggleComponent', () => {
     });
 
     it('should not be rendered as checked by default', () => {
-      const ionToggle = spectator.debugElement.query(By.directive(ionic.IonToggle));
-
-      expect(ionToggle.componentInstance.checked).toBeFalse();
+      expect(ionToggle.checked).toBeFalse();
     });
 
     it('should be rendered as checked when checked is set to true', () => {
       spectator.setInput({ checked: true });
-      const ionToggle = spectator.debugElement.query(By.directive(ionic.IonToggle));
 
-      expect(ionToggle.componentInstance.checked).toBeTrue();
+      expect(ionToggle.checked).toBeTrue();
     });
   });
 
@@ -46,17 +43,49 @@ describe('ToggleComponent', () => {
       expect(spectator.component.disabled).toBeFalse();
     });
 
-    it('should not be rendered as disabled by default', () => {
-      const ionToggle = spectator.debugElement.query(By.directive(ionic.IonToggle));
-
-      expect(ionToggle.componentInstance.disabled).toBeFalse();
+    it('ion-toggle should not be rendered as disabled by default', () => {
+      expect(ionToggle.disabled).toBeFalse();
     });
 
     it('should be rendered as disabled when disabled is set to true', () => {
       spectator.setInput({ disabled: true });
-      const ionToggle = spectator.debugElement.query(By.directive(ionic.IonToggle));
 
-      expect(ionToggle.componentInstance.disabled).toBeTrue();
+      expect(ionToggle.disabled).toBeTrue();
+    });
+  });
+
+  describe('implementing ControlValueAccessor interface', () => {
+    it('should update the value when writeValue is called', () => {
+      spectator.component.writeValue(true);
+
+      expect(spectator.component.checked).toBeTrue();
+    });
+
+    it('should call the registered onChange function when toggle is clicked', async () => {
+      const onChangeSpy = jasmine.createSpy('onChange');
+      const newValue = true;
+      spectator.component.registerOnChange(onChangeSpy);
+      await TestHelper.whenReady(ionToggle);
+
+      spectator.click('ion-toggle');
+
+      expect(onChangeSpy).toHaveBeenCalledOnceWith(newValue);
+    });
+
+    it('should call the registered onTouched function when blurred', () => {
+      const onTouchedSpy = jasmine.createSpy('onTouched');
+      spectator.component.registerOnTouched(onTouchedSpy);
+      spectator.focus('ion-toggle');
+
+      spectator.blur('ion-toggle');
+
+      expect(onTouchedSpy).toHaveBeenCalledTimes(1);
+    });
+
+    it('should update the disabled state when setDisabledState is called', () => {
+      spectator.component.setDisabledState(true);
+
+      expect(spectator.component.disabled).toBeTrue();
     });
   });
 });

@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { KirbyModule } from '@kirbydesign/designsystem';
 
 import { ExamplesSharedModule } from '../examples.shared.module';
+import { ReactiveFormStateExampleModule } from '../reactive-form-state/reactive-form.module';
 
 import { RadioExampleBindingComponent } from './examples/binding';
 import { RadioCustomContentExampleComponent } from './examples/custom';
@@ -33,7 +34,14 @@ const COMPONENT_DECLARATIONS = [
 ];
 
 @NgModule({
-  imports: [CommonModule, KirbyModule, ExamplesSharedModule, FormsModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    KirbyModule,
+    ExamplesSharedModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ReactiveFormStateExampleModule,
+  ],
   declarations: COMPONENT_DECLARATIONS,
   exports: COMPONENT_DECLARATIONS,
 })
