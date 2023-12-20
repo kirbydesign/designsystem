@@ -104,3 +104,7 @@ p,
 .kirby-text-bold {
   font-weight: functions.font-weight('bold');
 }
+
+.kirby-multiline {
+  white-space: normal !important;
+}

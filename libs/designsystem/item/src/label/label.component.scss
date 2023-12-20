@@ -1,7 +1,7 @@
 @use '@kirbydesign/core/src/scss/utils';
 @use '../item.utils';
 
-:host:not(.multiline) {
+:host {
   &.horizontal ion-label {
     display: flex;
     flex-direction: row;
@@ -12,10 +12,6 @@
       margin-left: utils.size('xs');
     }
   }
-}
-
-:host.multiline ion-label {
-  white-space: normal;
 }
 
 :host-context(kirby-item) ion-label {

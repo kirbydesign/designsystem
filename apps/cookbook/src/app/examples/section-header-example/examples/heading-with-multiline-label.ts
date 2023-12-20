@@ -3,9 +3,9 @@ import { Component } from '@angular/core';
 const config = {
   selector: 'cookbook-section-header-heading-with-multiline-label',
   template: `<kirby-section-header>
-  <kirby-label [multiline]="true">
+  <kirby-label>
     <h3 heading> Section Header with multiline label</h3>
-    <p label>This label is quite lengthy, typically prone to truncation within a section header. However, with multiline enabled, behold the magic of multiline functionality! Don't take my word for it; witness it yourself. It truly works. Can you believe that?</p>
+    <p class="kirby-multiline" label>This label is quite lengthy, typically prone to truncation within a section header. However, with multiline enabled, behold the magic of multiline functionality! Don't take my word for it; witness it yourself. It truly works. Can you believe that?</p>
   </kirby-label>
 </kirby-section-header>
 <kirby-card [hasPadding]="true">
