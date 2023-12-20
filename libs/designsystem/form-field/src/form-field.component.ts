@@ -91,16 +91,22 @@ export class FormFieldComponent
   public focus() {
     if (!this.inputElement) return;
 
-    if (this.isTouch) {
-      // Trigger Ionic's input shims to ensure input is scrolled into view.
-      // See: https://github.com/ionic-team/ionic-framework/blob/master/core/src/utils/input-shims/hacks/scroll-assist.ts
-      const touchStart = new TouchEvent('touchstart');
-      const touchEnd = new TouchEvent('touchend');
-      this.inputElement.dispatchEvent(touchStart);
-      this.inputElement.dispatchEvent(touchEnd);
-    } else {
-      this.inputElement.focus();
-    }
+    /*
+     * This timeout ensures that any previous manipulation of inputElement
+     * (e.g. setting disabled state) has been synced to the DOM before trying to focus.
+     */
+    setTimeout(() => {
+      if (this.isTouch) {
+        // Trigger Ionic's input shims to ensure input is scrolled into view.
+        // See: https://github.com/ionic-team/ionic-framework/blob/master/core/src/utils/input-shims/hacks/scroll-assist.ts
+        const touchStart = new TouchEvent('touchstart');
+        const touchEnd = new TouchEvent('touchend');
+        this.inputElement.dispatchEvent(touchStart);
+        this.inputElement.dispatchEvent(touchEnd);
+      } else {
+        this.inputElement.focus();
+      }
+    });
   }
 
   ngOnInit() {

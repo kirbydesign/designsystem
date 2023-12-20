@@ -78,7 +78,6 @@ export const COMPONENT_DECLARATIONS: any[] = [
   CheckboxExampleComponent,
   AlertExampleComponent,
   ToastExampleComponent,
-  ToggleExampleComponent,
   EmptyStateExampleComponent,
   LoadingOverlayExampleComponent,
   LoadingOverlayServiceExampleComponent,

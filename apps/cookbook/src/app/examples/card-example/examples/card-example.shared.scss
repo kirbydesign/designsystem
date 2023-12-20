@@ -31,69 +31,47 @@ p:last-child {
   margin-bottom: 0;
 }
 
+$_card-header-notification-colors-map: (
+  'success': 'green',
+  'warning': 'yellow',
+  'danger': 'red',
+);
+$_card-colors: 'medium', 'secondary', 'tertiary', 'dark';
+
 button {
   height: utils.$fat-finger-size;
   width: utils.$fat-finger-size;
   border: none;
   border-radius: 999px;
   margin: 0;
-  color: #fff;
+  color: utils.get-color('black');
   cursor: pointer;
 
-  &.success {
-    background-color: utils.get-color('success');
+  @each $name, $variant in $_card-header-notification-colors-map {
+    &.#{$name} {
+      background-color: utils.get-decoration-color($variant, 30);
 
-    &:hover {
-      background-color: var(--kirby-success-shade);
+      &:hover {
+        background-color: utils.get-decoration-color($variant, 50);
+      }
     }
   }
 
-  &.warning {
-    background-color: utils.get-color('warning');
+  &.info {
+    background-color: utils.get-color('semi-light');
 
     &:hover {
-      background-color: var(--kirby-warning-shade);
+      background-color: var(--kirby-semi-light-shade);
     }
   }
 
-  &.danger {
-    background-color: utils.get-color('danger');
+  @each $color in $_card-colors {
+    &.#{$color} {
+      background-color: utils.get-color($color);
 
-    &:hover {
-      background-color: var(--kirby-danger-shade);
-    }
-  }
-
-  &.info,
-  &.medium {
-    background-color: utils.get-color('medium');
-
-    &:hover {
-      background-color: var(--kirby-medium-shade);
-    }
-  }
-
-  &.secondary {
-    background-color: utils.get-color('secondary');
-
-    &:hover {
-      background-color: var(--kirby-secondary-shade);
-    }
-  }
-
-  &.tertiary {
-    background-color: utils.get-color('tertiary');
-
-    &:hover {
-      background-color: var(--kirby-tertiary-shade);
-    }
-  }
-
-  &.dark {
-    background-color: utils.get-color('dark');
-
-    &:hover {
-      background-color: var(--kirby-dark-shade);
+      &:hover {
+        background-color: var(--kirby-#{$color}-shade);
+      }
     }
   }
 

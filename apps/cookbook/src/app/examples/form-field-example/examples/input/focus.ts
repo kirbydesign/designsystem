@@ -52,6 +52,6 @@ export class FormFieldFocusExampleComponent {
   onToggleInput(enable: boolean) {
     this.inputEnabled = enable;
     if (!enable) return;
-    setTimeout(() => this.formfield.focus());
+    this.formfield.focus();
   }
 }
