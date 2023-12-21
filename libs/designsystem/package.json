@@ -18,8 +18,8 @@
     "chartjs-adapter-date-fns": ">=2.0.0",
     "chartjs-plugin-annotation": ">=1.0.2",
     "chartjs-plugin-datalabels": ">=2.0.0",
-    "date-fns": ">=2.21.1",
-    "date-fns-tz": ">=1.1.4",
+    "date-fns": "^2.30.0",
+    "date-fns-tz": "^1.3.8",
     "rxjs": ">=7.0.0",
     "swiper": "^9.2.0",
     "zone.js": ">=0.10.2"
