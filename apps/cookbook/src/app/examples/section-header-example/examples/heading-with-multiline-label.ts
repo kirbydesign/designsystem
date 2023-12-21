@@ -5,7 +5,7 @@ const config = {
   template: `<kirby-section-header>
   <kirby-label>
     <h3 heading> Section Header with multiline label</h3>
-    <p class="kirby-multiline" label>This label is quite lengthy, typically prone to truncation within a section header. However, with multiline enabled, behold the magic of multiline functionality! Don't take my word for it; witness it yourself. It truly works. Can you believe that?</p>
+    <p label wrap>This label is quite lengthy, typically prone to truncation within a section header. However, with multiline enabled, behold the magic of multiline functionality! Don't take my word for it; witness it yourself. It truly works. Can you believe that?</p>
   </kirby-label>
 </kirby-section-header>
 <kirby-card [hasPadding]="true">
