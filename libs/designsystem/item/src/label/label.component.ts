@@ -9,16 +9,8 @@ export class LabelComponent {
   @Input()
   direction: 'vertical' | 'horizontal' = 'vertical';
 
-  @Input()
-  multiline: boolean = false;
-
   @HostBinding('class.horizontal')
   get _direction() {
     return this.direction === 'horizontal';
-  }
-
-  @HostBinding('class.multiline')
-  get _multiline() {
-    return this.multiline;
   }
 }
