@@ -74,7 +74,7 @@
   .
 </p>
 
-<h2>Heading, label and detail</h2>
+<h2>Heading, label, detail and wrap</h2>
 <p>
   The
   <em>heading</em>
@@ -91,6 +91,13 @@
   headings are nested within a h1 and h2.
 </p>
 
+<p>
+  The
+  <em>wrap</em>
+  attribute can be used on the same elements to enable multiline formatting and can be combined with
+  the other attributes.
+</p>
+
 <cookbook-section-header-heading-with-label
   #sectionHeaderHeadingWithLabel
 ></cookbook-section-header-heading-with-label>
@@ -100,6 +107,13 @@
   #sectionHeaderLabelAndDetail
 ></cookbook-section-header-label-and-detail>
 <cookbook-example-viewer [html]="sectionHeaderLabelAndDetail.template"></cookbook-example-viewer>
+
+<cookbook-section-header-heading-with-multiline-label
+  #sectionHeaderHeadingWithMultilineLabel
+></cookbook-section-header-heading-with-multiline-label>
+<cookbook-example-viewer
+  [html]="sectionHeaderHeadingWithMultilineLabel.template"
+></cookbook-example-viewer>
 
 <h3>Custom section header</h3>
 <p>
