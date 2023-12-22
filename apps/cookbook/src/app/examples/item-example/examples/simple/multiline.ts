@@ -8,7 +8,7 @@ const config = {
     <p wrap subtitle> With the 'wrap' attribute - text no longer faces the risk of abrupt truncation. With <code>'wrap'</code> in the mix, the content gracefully extends to the next line, seamlessly continuing its narrative. Take a glance, and you'll see how seamlessly it moves to the next line, maintaining readability and preserving the flow of information.</p>
     <p detail>Detail</p>
   </kirby-label>
-  <data slot="end" class="kirby-text-bold" value="value">Value</data>
+  <data slot="end" value="value">Value</data>
 </kirby-item>`,
 };
 
