@@ -219,7 +219,7 @@
   }
 
   @include slotted('[wrap]') {
-    white-space: normal !important;
+    white-space: normal;
   }
 }
 
