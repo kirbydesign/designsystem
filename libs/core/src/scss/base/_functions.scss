@@ -217,6 +217,10 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
+
+  @include slotted('[wrap]') {
+    white-space: normal;
+  }
 }
 
 @mixin trailing-icon($svg: 'link') {
