@@ -1,16 +1,17 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { IonModal } from '@ionic/angular';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
+import { CanDismissHelper } from '../services/can-dismiss.helper';
+import { AlertHelper } from '../services/alert.helper';
 import { ModalComponent } from './modal.component';
 
 describe('Modal Component', () => {
-  const titleText = 'Test Modal';
-
   let spectator: SpectatorHost<ModalComponent>;
 
   const createHost = createHostFactory({
     component: ModalComponent,
     imports: [TestHelper.ionicModuleForTest],
+    providers: [CanDismissHelper, AlertHelper],
   });
 
   beforeEach(() => {
@@ -21,13 +22,10 @@ describe('Modal Component', () => {
       </kirby-modal>
     `
     );
-
-    TestHelper.disableAnimationsInTest();
   });
 
   afterEach(() => {
-    spectator.component.open = false;
-    spectator.detectChanges();
+    TestHelper.disableAnimationsInTest();
   });
 
   describe('by default', () => {
@@ -36,10 +34,10 @@ describe('Modal Component', () => {
     });
 
     it('should be dismissable', () => {
-      expect(spectator.component.canDismiss).toBeTrue();
+      expect(spectator.component.canDismiss()).toBeTrue();
     });
 
-    it('should have a collapsable title', () => {
+    it('should have a collapsible title', () => {
       expect(spectator.component.collapseTitle).toBeTrue();
     });
 

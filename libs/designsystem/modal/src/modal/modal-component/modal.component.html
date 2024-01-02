@@ -1,9 +1,10 @@
 <ion-modal
   class="kirby-modal kirby-overlay"
   [isOpen]="open"
+  [trigger]="trigger"
   [handle]="false"
-  [canDismiss]="canDismiss ? canDismiss : config.canDismiss"
-  [ngClass]="'kirby-modal-' + config.size"
+  [canDismiss]="canDismiss"
+  [ngClass]="'kirby-modal-' + size"
   (willPresent)="_onWillPresent($event)"
   (didPresent)="_onDidPresent($event)"
   (willDismiss)="_onWillDismiss($event)"
@@ -11,7 +12,7 @@
 >
   <ng-template>
     <kirby-modal-wrapper
-      [config]="config"
+      [config]="_config"
       [content]="template"
       [scrollDisabled]="scrollDisabled"
     ></kirby-modal-wrapper>
