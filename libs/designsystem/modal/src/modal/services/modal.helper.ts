@@ -122,6 +122,15 @@ export class ModalHelper {
 
     await ionModal.present();
 
+    /**
+     * Due to somewhat unexpected behavior of the ion-modal not being focussed when keyboardClose
+     * is set to false we manually focus it, but only if focus is not already inside the modal
+     * See here: https://github.com/ionic-team/ionic-framework/issues/28775#issuecomment-1875475739
+     */
+    if (!ionModal.contains(document.activeElement)) {
+      ionModal.focus();
+    }
+
     // Back button should only be handled manually
     // if the modal is not instantiated through a route.
     if (!config.modalRoute && !config.canDismiss && !alertConfig) {
