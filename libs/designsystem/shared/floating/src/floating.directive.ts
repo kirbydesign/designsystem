@@ -18,7 +18,7 @@ import {
   shift,
   Strategy,
 } from '@floating-ui/dom';
-import { ComputePositionConfig, Middleware, Placement } from '@floating-ui/core/src/types';
+import { ComputePositionConfig, Middleware, Placement } from '@floating-ui/dom';
 import { DesignTokenHelper } from '@kirbydesign/core';
 import { from } from 'rxjs';
 import { PortalDirective } from '@kirbydesign/designsystem/shared/portal';

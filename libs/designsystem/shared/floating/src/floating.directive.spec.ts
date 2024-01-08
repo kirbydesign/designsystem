@@ -3,8 +3,7 @@ import { createComponentFactory, mockProvider, Spectator } from '@ngneat/spectat
 import { PortalDirective } from '@kirbydesign/designsystem/shared/portal';
 import { PortalOutletConfig, TriggerEvent } from '@kirbydesign/designsystem/shared/floating';
 
-import { Strategy } from '@floating-ui/dom';
-import { Placement } from '@floating-ui/core/src/types';
+import { Placement, Strategy } from '@floating-ui/dom';
 import { DesignTokenHelper } from '@kirbydesign/core';
 import { FloatingDirective, OutletSelector } from './floating.directive';
 
