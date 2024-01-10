@@ -16,8 +16,6 @@ export type BadgeSize = 'sm' | 'md';
 export class BadgeComponent {
   @Input() text: string;
 
-  @Input() themeColor: 'success' | 'warning' | 'danger' = 'success';
-
   @HostBinding('class')
   @Input()
   size: BadgeSize = 'md';
