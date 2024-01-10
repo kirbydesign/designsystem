@@ -6,7 +6,6 @@ import {
   ThemeColorExtended,
 } from '@kirbydesign/designsystem/helpers';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
-import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 
 import { BadgeComponent } from './badge.component';
 
@@ -18,7 +17,7 @@ describe('BadgeComponent', () => {
 
   const createHost = createHostFactory({
     component: BadgeComponent,
-    imports: [TestHelper.ionicModuleForTest, ThemeColorDirective],
+    imports: [TestHelper.ionicModuleForTest],
   });
 
   describe('by default', () => {
