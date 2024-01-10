@@ -76,13 +76,41 @@ $form-field-label-height: 24px;
   }
 }
 
-// Firefox, Safari, Mobile Safari
+// -----------------------------------------------------------------------------
+// WARNING: Use proprietary non-standard solutions such as '::-webkit-' prefixed
+// pseudo-elements with care.
+// - They can stop working with any browser update
+// - They are not supported by every browser - even not the major ones
+// - Most of them are not on the standards track and will most likely not be
+//   part of the spec any time soon if ever.
+
+// E.g. Firefox used to support `::-webkit-calendar-picker-indicator`
+// but support was removed in v109(?)
+
+// Use `::-webkit-calendar-picker-indicator` to control the icon
+
+// Does work in:
+//  - Chrome
+//  - Edge
+//  - Probably other browsers as well
+
+// Does *not* work in:
+//  - Firefox >=v118 (maybe earlier versions too?)
+//  - Safari >=v17 (maybe earlier versions too?)
+//  - Probably other browsers as well
+
+// See e.g. https://thenewcode.com/923/Using-The-HTML5-Date-Input
+// for more examples (look for "Restrictions On Styling")
+// -----------------------------------------------------------------------------
+
+// Safari on iOS only (apparently)
+// ::-webkit-date-and-time-value seems to apply with or without feature query
 @supports not (selector(::-webkit-date-and-time-value)) {
-  // WTF? 😄 - Mobile Safari *does* apply this ⬇️ despite @supports not ... ⬆️
-  :host([type='date']::-webkit-date-and-time-value) {
-    // Mobile Safari has less intrinsic height initially (when no date has been
+  // WTF? 😄 - Safari on iOS *does* apply this ⬇️ despite @supports not ... ⬆️
+  :host(input[type='date']::-webkit-date-and-time-value) {
+    // Safari on iOS has less intrinsic height initially (when no date has been
     // selected yet) and when the date has been reset.
-    // Declaring this min-height ensures consistent height in Mobile Safari
+    // Declaring this min-height ensures consistent height in Safari on iOS
     min-height: #{$form-field-input-line-height + em};
 
     // Left align date input text in Safari on iOS
