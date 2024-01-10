@@ -19,7 +19,6 @@ $badge-diameter: utils.$avatar-badge-size;
 }
 
 :host {
-  --kirby-badge-elevation: #{utils.get-elevation(2)};
   --kirby-badge-position: absolute;
   --kirby-badge-right: #{get-badge-position($diameter-small)};
   --kirby-badge-top: #{get-badge-position($diameter-small)};

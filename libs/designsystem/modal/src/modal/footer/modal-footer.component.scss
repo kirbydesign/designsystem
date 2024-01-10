@@ -4,7 +4,7 @@
 ion-footer {
   @include themes.apply-white-theme;
 
-  box-shadow: utils.get-elevation(4);
+  box-shadow: utils.get-elevation(8);
   display: flex;
   justify-content: var(--kirby-modal-footer-justify-content, center);
   align-items: center;
