@@ -129,7 +129,8 @@ export class FormFieldComponent
       this.affixElements.forEach((affix) => {
         this.resizeObserverService.observe(affix.el, (entry) => {
           const padding = affix.type === 'prefix' ? 'padding-left' : 'padding-right';
-          const affixWidth = entry.contentRect.width;
+          const affixWidth = this.input.nativeElement.type === 'date' ? 0 : entry.contentRect.width;
+          // TODO: Solve without using hardcoded size for token
           const existingPadding = parseInt(DesignTokenHelper.size('s'));
 
           this.renderer.setStyle(

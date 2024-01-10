@@ -16,6 +16,16 @@ $padding-block-size-md: shared.$form-field-input-padding * 0.5;
   transition: interaction-state.transition();
   transition-property: background-color;
 
+  // TODO: Should this be applied applied at all?
+  // Firefox < v121 (2023-12-19) does not support :has()
+  // Make sure *everything* related to custom icon for date inputs only gets applied when there is support for :has
+  // See https://www.bram.us/2023/01/04/css-has-feature-detection-with-supportsselector-you-want-has-not-has/
+  @supports selector(:has(+ *)) {
+    &[type='date'] {
+      background-color: var(--date-input-background-color, var(--kirby-inputs-background-color));
+    }
+  }
+
   &[type='number'] {
     // fallback
     appearance: textfield;

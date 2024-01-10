@@ -1,3 +1,4 @@
+@use '@kirbydesign/core/src/scss/interaction-state';
 @use '@kirbydesign/core/src/scss/utils';
 
 :host {
@@ -67,3 +68,62 @@ label {
     }
   }
 }
+
+// Solution for custom icon for date inputs requires support for :has()
+// See https://www.bram.us/2023/01/04/css-has-feature-detection-with-supportsselector-you-want-has-not-has/
+@supports selector(:has(+ *)) {
+  .affix-container {
+    // Only use custom property for background color when <input type="date">
+
+    // TODO: Must be fully opaque color to cover browser's icon! Multiple levels of transparency will accumulate
+    // TODO: Handle different colors (themes?)
+    &:has(input[type='date']) {
+      --date-input-background-color: var(--kirby-inputs-background-color);
+
+      @include utils.hover {
+        --date-input-background-color: #e0e0e0;
+      }
+    }
+
+    &:has(input[type='date']:active) {
+      --date-input-background-color: #cbcbcb;
+    }
+
+    &:has(input[type='date']) .suffix:not(:empty) {
+      // Only apply when type="date" AND there is something inside `.suffix`
+      top: utils.size('xxs');
+      bottom: utils.size('xxs');
+
+      // Padding helps covering native icon (not completely bulletproof)
+      // Padding also provides space between icon and text
+      padding-inline-start: utils.size('xs');
+
+      // Clicks etc. must hit the native button/icon
+      pointer-events: none;
+
+      // Only use custom property for background color when <input type="date">
+      background-color: var(--date-input-background-color);
+      transition: interaction-state.transition();
+      transition-property: background-color;
+    }
+  }
+}
+
+// E.g. Firefox < v121 (2023-12-19) does not support :has()
+@supports not (selector(:has(+ *))) {
+  .affix-container {
+    // Hide kirby-icon
+    // FIXME: Try to make this work without using utils.slotted() (::ng-deep)
+    .suffix .kirby-icon {
+      display: none !important;
+    }
+
+    .suffix {
+      @include utils.slotted(kirby-icon) {
+        display: none;
+      }
+    }
+  }
+}
+
+// TODO: Make sure solution works with [useNativeDatePicker]="false" (show or don't show custom icon?)

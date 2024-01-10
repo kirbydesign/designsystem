@@ -8,8 +8,9 @@ const config = {
   <input kirby-input type="date" [size]="size" />
 </kirby-form-field>
 
-<kirby-form-field label="Date input using the platform (native date picker)">
+<kirby-form-field label="Standard HTML date input (native date picker)">
   <input kirby-input type="date" [size]="size" [useNativeDatePicker]="true" />
+  <kirby-icon kirby-affix="suffix" name="calendar"></kirby-icon>
 </kirby-form-field>`,
 };
 
