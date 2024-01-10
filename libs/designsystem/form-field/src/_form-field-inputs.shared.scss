@@ -84,5 +84,8 @@ $form-field-label-height: 24px;
     // selected yet) and when the date has been reset.
     // Declaring this min-height ensures consistent height in Mobile Safari
     min-height: #{$form-field-input-line-height + em};
+
+    // Left align date input text in Safari on iOS
+    text-align: start;
   }
 }
