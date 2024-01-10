@@ -149,7 +149,7 @@ describe('RadioComponent', () => {
           expect(radioIcon).toHaveComputedStyle({
             'background-color': getColor('white'),
             'border-width': '0px',
-            'box-shadow': getElevation(2),
+            'box-shadow': getElevation(4),
           });
         });
 
