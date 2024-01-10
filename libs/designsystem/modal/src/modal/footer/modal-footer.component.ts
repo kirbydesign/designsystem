@@ -28,13 +28,16 @@ export class ModalFooterComponent extends ModalElementComponent {
   @Input()
   snapToKeyboard = false;
 
-  @HostBinding('class')
   @Input()
   type: 'inline' | 'fixed' = 'fixed';
 
-  @HostBinding('class.themeColor')
   @Input()
   themeColor: 'white' | 'light' = 'white';
+
+  @HostBinding('class')
+  get _cssClass() {
+    return [this.themeColor, this.type].filter((cssClass) => !!cssClass);
+  }
 
   constructor(
     elementRef: ElementRef<HTMLElement>,
