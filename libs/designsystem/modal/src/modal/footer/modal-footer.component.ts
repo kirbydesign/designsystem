@@ -9,7 +9,6 @@ import {
 } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 
-import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import {
   ModalElementComponent,
   ModalElementsAdvertiser,
@@ -18,7 +17,7 @@ import {
 
 @Component({
   standalone: true,
-  imports: [IonicModule, ThemeColorDirective, CommonModule],
+  imports: [IonicModule, CommonModule],
   selector: 'kirby-modal-footer',
   templateUrl: './modal-footer.component.html',
   styleUrls: ['./modal-footer.component.scss'],
@@ -32,6 +31,10 @@ export class ModalFooterComponent extends ModalElementComponent {
   @HostBinding('class')
   @Input()
   type: 'inline' | 'fixed' = 'fixed';
+
+  @HostBinding('class.themeColor')
+  @Input()
+  themeColor: 'white' | 'light' = 'white';
 
   constructor(
     elementRef: ElementRef<HTMLElement>,

@@ -4,7 +4,6 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
-import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 import { ModalFooterComponent } from '../footer/modal-footer.component';
 
 const { getColor, size } = DesignTokenHelper;
@@ -33,7 +32,6 @@ describe('ModalFooterComponent', () => {
   const createHost = createHostFactory({
     component: ModalFooterComponent,
     host: TestHostComponent,
-    imports: [ThemeColorDirective],
   });
 
   beforeEach(() => {});
