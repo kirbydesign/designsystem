@@ -127,7 +127,8 @@ export class ModalHelper {
      * is set to false we manually focus it, but only if focus is not already inside the modal
      * See here: https://github.com/ionic-team/ionic-framework/issues/28775#issuecomment-1875475739
      */
-    if (!ionModal.contains(document.activeElement)) {
+    const focussedElementWithinModal = ionModal.contains(document.activeElement);
+    if (!focussedElementWithinModal) {
       ionModal.focus();
     }
 
