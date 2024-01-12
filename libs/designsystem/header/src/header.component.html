@@ -2,8 +2,13 @@
   <ng-content select="kirby-avatar,kirby-progress-circle"></ng-content>
 </div>
 
-<div *ngIf="!!flag" class="flag">
-  <ng-content select="kirby-flag"></ng-content>
+<div *ngIf="flag || customFlagSectionTemplate" class="flag">
+  <ng-container *ngIf="!!flag">
+    <ng-content select="kirby-flag"></ng-content>
+  </ng-container>
+  <ng-container *ngIf="!!customFlagSectionTemplate">
+    <ng-container *ngTemplateOutlet="customFlagSectionTemplate"></ng-container>
+  </ng-container>
 </div>
 
 <div class="container">

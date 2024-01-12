@@ -49,6 +49,23 @@
   </div>
 
   <div class="header-example-container">
+    <h2>Flag with custom content</h2>
+    <p>
+      Flag can also be used with custom content. To use custom content you simply apply the
+      directive
+      <code>*KirbyHeaderCustomFlagSection</code>
+      .
+    </p>
+    <cookbook-example-viewer [html]="customContentFlagExample.template">
+      <div class="header-example">
+        <cookbook-header-example-custom-content-flag
+          #customContentFlagExample
+        ></cookbook-header-example-custom-content-flag>
+      </div>
+    </cookbook-example-viewer>
+  </div>
+
+  <div class="header-example-container">
     <h2>Key value</h2>
     <p>
       In some cases a number is the primary information on a page. When that's the case you should
