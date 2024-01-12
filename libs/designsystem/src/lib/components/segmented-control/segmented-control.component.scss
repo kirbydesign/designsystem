@@ -5,7 +5,6 @@
   display: block;
   user-select: none;
 
-  --kirby-badge-elevation: #{utils.get-elevation(2)};
   --kirby-badge-position: absolute;
   --kirby-badge-top: -#{utils.size('xxs')};
   --kirby-badge-right: -#{utils.size('s')};
