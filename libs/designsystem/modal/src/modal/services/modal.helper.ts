@@ -123,7 +123,7 @@ export class ModalHelper {
     await ionModal.present();
 
     /**
-     * Due to somewhat unexpected behavior of the ion-modal not being focussed when keyboardClose
+     * Due to somewhat unexpected behavior of the ion-modal not being focused when keyboardClose
      * is set to false we manually focus it, but only if focus is not already inside the modal
      * See here: https://github.com/ionic-team/ionic-framework/issues/28775#issuecomment-1875475739
      */
