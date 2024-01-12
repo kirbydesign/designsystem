@@ -9,6 +9,7 @@ $divider-max-width-breakpoint: utils.$page-content-max-width-default + (utils.si
   position: relative;
 
   @include utils.media('<medium') {
+    width: 100%;
     margin-inline: calc(-1 * var(--padding-start)) calc(-1 * var(--padding-end));
   }
 
