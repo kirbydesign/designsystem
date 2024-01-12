@@ -113,7 +113,7 @@ ion-radio {
 
     &:not(:focus):not(.radio-disabled) {
       &::part(container) {
-        box-shadow: utils.get-elevation(2);
+        box-shadow: utils.get-elevation(4);
       }
     }
   }

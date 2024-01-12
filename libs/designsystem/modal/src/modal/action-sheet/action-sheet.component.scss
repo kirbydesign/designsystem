@@ -31,7 +31,7 @@ $max-width: 375px;
 kirby-card {
   align-self: stretch;
   pointer-events: auto;
-  box-shadow: utils.get-elevation(4);
+  box-shadow: utils.get-elevation(8);
 
   button[kirby-button] {
     margin: 0;
@@ -44,7 +44,7 @@ kirby-card {
 }
 
 .cancel-btn {
-  @include interaction-state.apply-focus-visible($shadow: utils.get-elevation(2));
+  @include interaction-state.apply-focus-visible($shadow: utils.get-elevation(8));
 
   font-weight: utils.font-weight('bold');
   margin-top: utils.size('s');
