@@ -185,12 +185,24 @@ $checkbox-radio-spacing: (
   'to-label': map.get($sizes, 'xs'),
 );
 
-/* Checkbox 
+/* Checkbox - size
 ****************************************************************************/
 $checkbox-sizes: (
-  'xs': map.get($sizes, 'm'),
-  'sm': map.get($checkbox-radio-sizes, 'sm'),
-  'md': map.get($checkbox-radio-sizes, 'md'),
+  'xs': (
+    icon-size: map.get($sizes, 's'),
+    height: map.get($sizes, 'm'),
+    hit-area: 4px,
+  ),
+  'sm': (
+    icon-size: map.get($sizes, 'm'),
+    height: map.get($checkbox-radio-sizes, 'sm'),
+    hit-area: 10px,
+  ),
+  'md': (
+    icon-size: map.get($sizes, 'm'),
+    height: map.get($checkbox-radio-sizes, 'md'),
+    hit-area: 16px,
+  ),
 );
 
 /* Transitions
