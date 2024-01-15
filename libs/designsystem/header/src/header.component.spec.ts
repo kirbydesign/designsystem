@@ -307,6 +307,26 @@ describe('HeaderComponent', () => {
     });
   });
 
+  describe('with custom content in flag section', () => {
+    let spectator: Spectator<HeaderComponent>;
+    const customSectionFlagContent = 'Custom flag section content';
+    beforeEach(() => {
+      spectator = createHost(`
+      <kirby-header title="title" subtitle1="subtitle one" subtitle2="subtitle two">
+      <div class="custom-flag-section" *kirbyHeaderCustomFlagSection>
+      ${customSectionFlagContent}
+    </div>
+      </kirby-header>
+      `);
+    });
+
+    it(`should render the custom content in flag section`, () => {
+      const CustomflagElement = spectator.query('div.custom-flag-section');
+      expect(CustomflagElement).toBeTruthy();
+      expect(CustomflagElement).toHaveExactTrimmedText(customSectionFlagContent);
+    });
+  });
+
   describe('with custom section', () => {
     let spectator: Spectator<HeaderComponent>;
     const customSectionContent = 'Custom section content';
