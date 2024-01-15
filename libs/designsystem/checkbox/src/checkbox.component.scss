@@ -3,7 +3,8 @@
 @use '@kirbydesign/core/src/scss/utils';
 
 $border-radius: 6px;
-$checkbox-icon-size: utils.size('m');
+$checkbox-icon-size-xs: map.get(utils.$checkbox-sizes, 'xs', 'icon-size');
+$checkbox-icon-size: map.get(utils.$checkbox-sizes, 'sm', 'icon-size');
 $spacing-to-edge: map.get(utils.$checkbox-radio-spacing, 'to-edge');
 $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
 
@@ -141,7 +142,7 @@ $spacing-to-label: map.get(utils.$checkbox-radio-spacing, 'to-label');
       }
 
       ion-checkbox {
-        --size: #{utils.size('s')};
+        --size: #{$checkbox-icon-size-xs};
         --border-radius: 4px;
 
         &::part(container) {
