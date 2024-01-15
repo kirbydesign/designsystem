@@ -6,6 +6,8 @@
   <ng-container *ngIf="!!flag">
     <ng-content select="kirby-flag"></ng-content>
   </ng-container>
+
+   <!-- Custom Content in Flag section: -->
   <ng-container *ngIf="!!customFlagSectionTemplate">
     <ng-container *ngTemplateOutlet="customFlagSectionTemplate"></ng-container>
   </ng-container>
