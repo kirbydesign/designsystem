@@ -190,18 +190,18 @@ $checkbox-radio-spacing: (
 $checkbox-sizes: (
   'xs': (
     icon-size: map.get($sizes, 's'),
-    height: map.get($sizes, 'm'),
-    hit-area: 4px,
+    line-height: map.get($sizes, 'm'),
+    vertical-padding: 4px,
   ),
   'sm': (
     icon-size: map.get($sizes, 'm'),
-    height: map.get($checkbox-radio-sizes, 'sm'),
-    hit-area: 10px,
+    line-height: map.get($checkbox-radio-sizes, 'sm'),
+    vertical-padding: 10px,
   ),
   'md': (
     icon-size: map.get($sizes, 'm'),
-    height: map.get($checkbox-radio-sizes, 'md'),
-    hit-area: 16px,
+    line-height: map.get($checkbox-radio-sizes, 'md'),
+    vertical-padding: 16px,
   ),
 );
 
