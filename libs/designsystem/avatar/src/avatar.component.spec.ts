@@ -4,7 +4,6 @@ import { ColorHelper, DesignTokenHelper, ThemeColorExtended } from '@kirbydesign
 
 import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
-import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 
 import {
   ProgressCircleComponent,
@@ -22,12 +21,7 @@ describe('AvatarComponent', () => {
   const createHost = createHostFactory({
     component: AvatarComponent,
     declarations: [IconComponent],
-    imports: [
-      TestHelper.ionicModuleForTest,
-      ThemeColorDirective,
-      ProgressCircleComponent,
-      ProgressCircleRingComponent,
-    ],
+    imports: [TestHelper.ionicModuleForTest, ProgressCircleComponent, ProgressCircleRingComponent],
   });
 
   it('should create', () => {

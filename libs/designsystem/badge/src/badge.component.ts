@@ -10,7 +10,8 @@ export type BadgeSize = 'sm' | 'md';
   templateUrl: './badge.component.html',
   styleUrls: ['./badge.component.scss'],
   standalone: true,
-  imports: [CommonModule, KirbyIonicModule, ThemeColorDirective],
+  imports: [CommonModule, KirbyIonicModule],
+  hostDirectives: [{ directive: ThemeColorDirective, inputs: ['themeColor'] }],
 })
 export class BadgeComponent {
   @Input() text: string;

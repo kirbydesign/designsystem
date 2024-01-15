@@ -26,6 +26,7 @@ import { ItemExampleButtonComponent } from './examples/button';
 import { ItemExampleSimpleMediumComponent } from './examples/simple/default-md';
 import { ItemExampleSimpleSmallComponent } from './examples/simple/default-sm';
 import { ItemExampleSimpleExtraSmallComponent } from './examples/simple/default-xs';
+import { ItemExampleSimpleMultilineComponent } from './examples/simple/multiline';
 import { ItemExampleInputDefaultComponent } from './examples/input/default';
 import { ItemExampleInputNumericComponent } from './examples/input/numeric';
 import { ItemExampleCardComponent } from './examples/card';
@@ -41,6 +42,7 @@ const COMPONENT_DECLARATIONS = [
   ItemExampleSimpleTwoLinesComponent,
   ItemExampleSimpleThreeLinesComponent,
   ItemExampleSimpleTwoValueLinesComponent,
+  ItemExampleSimpleMultilineComponent,
   ItemExamplePickerDefaultComponent,
   ItemExamplePickerDefaultSelectedComponent,
   ItemExamplePickerAvatarSelectedComponent,

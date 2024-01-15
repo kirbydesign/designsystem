@@ -33,4 +33,8 @@
   @include utils.slotted('[detail]') {
     color: utils.get-text-color('semi-dark');
   }
+
+  @include utils.slotted('[wrap]') {
+    white-space: normal;
+  }
 }

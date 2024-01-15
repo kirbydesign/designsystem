@@ -6,11 +6,12 @@ import {
   ThemeColorExtended,
 } from '@kirbydesign/designsystem/helpers';
 import { TestHelper } from '@kirbydesign/designsystem/testing';
-import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 
 import { BadgeComponent } from './badge.component';
 
 const { getColor, fontSize, size } = DesignTokenHelper;
+const customElevation =
+  'rgba(28, 28, 28, 0.3) 0px 20px 30px -15px, rgba(28, 28, 28, 0.12) 0px 0px 5px 0px';
 
 describe('BadgeComponent', () => {
   let spectator: SpectatorHost<BadgeComponent>;
@@ -18,7 +19,7 @@ describe('BadgeComponent', () => {
 
   const createHost = createHostFactory({
     component: BadgeComponent,
-    imports: [TestHelper.ionicModuleForTest, ThemeColorDirective],
+    imports: [TestHelper.ionicModuleForTest],
   });
 
   describe('by default', () => {
@@ -55,6 +56,12 @@ describe('BadgeComponent', () => {
       expect(ionBadge).toHaveComputedStyle({
         'background-color': getColor('white'),
         color: getColor('white', 'contrast'),
+      });
+    });
+
+    it('should have custom elevation', () => {
+      expect(ionBadge).toHaveComputedStyle({
+        'box-shadow': customElevation,
       });
     });
 
@@ -106,7 +113,10 @@ describe('BadgeComponent', () => {
   });
 
   describe(`when rendering Badge with themeColor`, () => {
-    const colors = ColorHelper.notificationColors;
+    const colors = [
+      ...ColorHelper.notificationColors,
+      ColorHelper.systemColors.find((color) => color.name === 'white'),
+    ];
     colors.forEach((color) => {
       it(`should render with correct colors when themeColor = '${color.name}'`, async () => {
         spectator = createHost(`
@@ -124,6 +134,19 @@ describe('BadgeComponent', () => {
           'background-color': getColor(color.name as ThemeColorExtended),
           color: expectedTextColor,
         });
+      });
+    });
+
+    it(`should have custom elevation when themeColor = 'white'`, async () => {
+      spectator = createHost(`
+      <kirby-badge themeColor="white">
+      </kirby-badge>
+      `);
+      ionBadge = spectator.element.querySelector('ion-badge');
+      await TestHelper.whenReady(ionBadge);
+
+      expect(ionBadge).toHaveComputedStyle({
+        'box-shadow': customElevation,
       });
     });
   });

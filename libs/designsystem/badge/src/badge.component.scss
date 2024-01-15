@@ -63,3 +63,11 @@
     }
   }
 }
+
+// Apply custom elevation to badge when white (explicitly set or default white)
+:host(.default),
+:host(.white) {
+  ion-badge {
+    --kirby-badge-elevation: 0 20px 30px -15px rgb(28 28 28 / 30%), 0 0 5px 0 rgb(28 28 28 / 12%);
+  }
+}

@@ -1,10 +1,6 @@
 @use '@kirbydesign/core/src/scss/utils';
 
 :host {
-  kirby-badge:first-child {
-    --kirby-badge-elevation: #{utils.get-elevation(4)};
-  }
-
   kirby-badge + kirby-badge {
     margin-left: utils.size('s');
   }
