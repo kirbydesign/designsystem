@@ -34,6 +34,7 @@ code {
   &-header-1,
   &-header-2,
   &-header-3,
+  &-header-4,
   &-body,
   &-body-small,
   &-body-small-light,
@@ -58,6 +59,12 @@ code {
   &-header-3 {
     &::after {
       content: '(#{utils.font-size('m')})';
+    }
+  }
+
+  &-header-4 {
+    &::after {
+      content: '(#{utils.font-size('n')})';
     }
   }
 
