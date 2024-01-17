@@ -102,7 +102,7 @@
     "@capacitor/status-bar": "^4.1.1",
     "@floating-ui/dom": "^1.1.0",
     "@fontsource/roboto": "4.2.1",
-    "@ionic/angular": "7.3.3",
+    "@ionic/angular": "7.6.4",
     "@nrwl/angular": "15.3.0",
     "@nx/angular": "16.8.1",
     "@types/prismjs": "1.9.0",
