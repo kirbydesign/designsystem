@@ -109,12 +109,24 @@
     #inputDateExample
   ></cookbook-form-field-input-date-example>
 </cookbook-example-viewer>
+
+<p>
+  By default (or when
+  <code>[useNativeDatePicker]="false"</code>
+  is set explicitly) the value supplied to the input should be formatted according to the current
+  locale. When opting into the native datepicker, the value should be in the
+  <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Date_and_time_formats#date_strings">
+    Date strings format
+  </a>
+  .
+</p>
+
 <p>
   <em>
     <strong>*Please note:</strong>
-    Date-mask is based on
+    The placeholder is based on
     <code>LOCALE_ID</code>
-    . When
+    . E.g. when
     <code>DA</code>
     the date-mask will be
     <code>dd.mm.åååå</code>
