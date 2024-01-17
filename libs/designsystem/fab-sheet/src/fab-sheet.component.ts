@@ -13,12 +13,12 @@ import {
   Renderer2,
   ViewChild,
 } from '@angular/core';
-import { IonFab, IonFabButton, IonicModule } from '@ionic/angular';
 import { ActionSheetComponent } from '@kirbydesign/designsystem/modal';
+import { IonBackdrop, IonFab, IonFabButton, IonFabList } from '@ionic/angular/standalone';
 
 @Component({
   standalone: true,
-  imports: [IonicModule, CommonModule],
+  imports: [CommonModule, IonBackdrop, IonFab, IonFabButton, IonFabList],
   selector: 'kirby-fab-sheet',
   templateUrl: './fab-sheet.component.html',
   styleUrls: ['./fab-sheet.component.scss'],

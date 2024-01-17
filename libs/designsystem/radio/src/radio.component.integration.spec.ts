@@ -1,4 +1,4 @@
-import { IonItem, IonRadio } from '@ionic/angular';
+import { IonItem, IonRadio } from '@ionic/angular/standalone';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponents } from 'ng-mocks';
 

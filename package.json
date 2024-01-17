@@ -3,7 +3,7 @@
   "version": "8.11.2",
   "description": "The Kirby Design Angular Components.",
   "engines": {
-    "node": ">=16.0.0 <=18.13.0",
+    "node": ">=16.0.0 <19.0.0",
     "npm": ">=8.5.0"
   },
   "repository": {
@@ -103,9 +103,11 @@
     "@floating-ui/dom": "^1.1.0",
     "@fontsource/roboto": "4.2.1",
     "@ionic/angular": "7.6.4",
+    "@ionic/angular-standalone-codemods": "^0.1.0",
     "@nrwl/angular": "15.3.0",
     "@nx/angular": "16.8.1",
     "@types/prismjs": "1.9.0",
+    "@types/shelljs": "^0.8.15",
     "chart.js": "^3.9.1",
     "chartjs-adapter-date-fns": "^2.0.0",
     "chartjs-plugin-annotation": "^1.0.2",
@@ -115,6 +117,7 @@
     "inputmask": "^5.0.5",
     "prismjs": "1.27.0",
     "rxjs": "7.8.1",
+    "shelljs": "^0.8.5",
     "swiper": "^9.3.2",
     "tslib": "^2.0.3",
     "zone.js": "0.13.3"

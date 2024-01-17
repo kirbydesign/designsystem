@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 
 import { CardModule } from '@kirbydesign/designsystem/card';
 import { IconModule } from '@kirbydesign/designsystem/icon';
-import { KirbyIonicModule } from '@kirbydesign/designsystem/kirby-ionic-module';
+import { IONIC_CONFIG } from '@kirbydesign/designsystem/kirby-ionic-module';
 import {
   ComponentLoaderDirective,
   ResizeObserverFactory,
@@ -170,7 +170,7 @@ export interface KirbyConfig {
 }
 
 @NgModule({
-  imports: [CommonModule, RouterModule, KirbyIonicModule, ...importedModules],
+  imports: [CommonModule, RouterModule, IonicModule.forRoot(IONIC_CONFIG), ...importedModules],
   declarations: [declarations],
   providers: providers,
   exports: [allExports],

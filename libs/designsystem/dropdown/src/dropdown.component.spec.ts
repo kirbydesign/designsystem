@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { fakeAsync, tick } from '@angular/core/testing';
-import { IonItem } from '@ionic/angular';
+import { IonItem } from '@ionic/angular/standalone';
 import { createHostFactory, Spectator, SpectatorHost } from '@ngneat/spectator';
 import { MockComponents } from 'ng-mocks';
 

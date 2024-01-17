@@ -6,7 +6,7 @@
 */
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { fakeAsync, tick } from '@angular/core/testing';
-import { IonItem } from '@ionic/angular';
+import { IonItem } from '@ionic/angular/standalone';
 import { createHostFactory, Spectator } from '@ngneat/spectator';
 import { MockComponents } from 'ng-mocks';
 import { CardComponent } from '@kirbydesign/designsystem/card';

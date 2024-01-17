@@ -1,7 +1,7 @@
 import { fakeAsync, tick } from '@angular/core/testing';
 import { Router, Routes } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { IonRefresher } from '@ionic/angular';
+import { IonRefresher } from '@ionic/angular/standalone';
 import { createHostFactory, mockProvider, SpectatorHost, SpyObject } from '@ngneat/spectator';
 
 import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';

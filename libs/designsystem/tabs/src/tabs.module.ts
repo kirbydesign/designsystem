@@ -1,15 +1,22 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { IconModule } from '@kirbydesign/designsystem/icon';
-import { KirbyIonicModule } from '@kirbydesign/designsystem/kirby-ionic-module';
-
-import { TabsComponent } from './tabs.component';
+import { IONIC_CONFIG } from '@kirbydesign/designsystem/kirby-ionic-module';
+import { NgModule } from '@angular/core';
+import { IonTabBar, IonTabButton, IonTabs } from '@ionic/angular/standalone';
 import { TabButtonComponent } from './tab-button/tab-button.component';
 import { TabsService } from './tabs.service';
+import { TabsComponent } from './tabs.component';
 
 @NgModule({
-  imports: [KirbyIonicModule, IconModule, CommonModule],
+  imports: [
+    IonicModule.forRoot(IONIC_CONFIG),
+    IconModule,
+    CommonModule,
+    IonTabs,
+    IonTabBar,
+    IonTabButton,
+  ],
   providers: [TabsService],
   declarations: [TabsComponent, TabButtonComponent],
   exports: [TabsComponent, TabButtonComponent],

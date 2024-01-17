@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, HostBinding, Input } from '@angular/core';
-import { KirbyIonicModule } from '@kirbydesign/designsystem/kirby-ionic-module';
+import { IONIC_CONFIG } from '@kirbydesign/designsystem/kirby-ionic-module';
 import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
+import { IonBadge } from '@ionic/angular/standalone';
 
 export type BadgeSize = 'sm' | 'md';
 
@@ -10,7 +11,7 @@ export type BadgeSize = 'sm' | 'md';
   templateUrl: './badge.component.html',
   styleUrls: ['./badge.component.scss'],
   standalone: true,
-  imports: [CommonModule, KirbyIonicModule],
+  imports: [CommonModule, IonicModule.forRoot(IONIC_CONFIG), IonBadge],
   hostDirectives: [{ directive: ThemeColorDirective, inputs: ['themeColor'] }],
 })
 export class BadgeComponent {

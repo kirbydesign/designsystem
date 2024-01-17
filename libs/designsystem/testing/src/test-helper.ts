@@ -1,4 +1,3 @@
-import { IonicModule } from '@ionic/angular';
 import { IonicConfig } from '@ionic/core';
 
 export class TestHelper {

@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
 import { SpinnerModule } from '@kirbydesign/designsystem/spinner';
 
 import { IconModule } from '@kirbydesign/designsystem/icon';
@@ -40,7 +39,7 @@ const declarations = [
 
 @NgModule({
   declarations: declarations,
-  imports: [CommonModule, IconModule, IonicModule, SpinnerModule],
+  imports: [CommonModule, IconModule, SpinnerModule],
   exports: exportedDeclarations,
   providers: [],
 })

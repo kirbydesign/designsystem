@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular/standalone';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { first, fromEvent, takeUntil } from 'rxjs';
 import { Overlay } from '../../modal.interfaces';
@@ -27,11 +27,11 @@ export class ModalHelper {
   ) {}
 
   /* 
-    isModalOpening is used to prevent additional instantiations
-    of modals, while a modal is already being instatiated, but not completed.
-    This is the recommended approach by one of the maintainers of Ionic:
-    https://github.com/ionic-team/ionic-framework/issues/23327#issuecomment-847028058
-  */
+      isModalOpening is used to prevent additional instantiations
+      of modals, while a modal is already being instatiated, but not completed.
+      This is the recommended approach by one of the maintainers of Ionic:
+      https://github.com/ionic-team/ionic-framework/issues/23327#issuecomment-847028058
+    */
   private isModalOpening = false;
 
   public async showModalWindow(config: ModalConfig, alertConfig?: AlertConfig): Promise<Overlay> {

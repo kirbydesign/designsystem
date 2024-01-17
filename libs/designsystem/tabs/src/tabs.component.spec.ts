@@ -1,4 +1,3 @@
-import { IonicModule } from '@ionic/angular';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
 import { MockModule } from 'ng-mocks';
 

@@ -11,14 +11,14 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { IonCheckbox, IonicModule } from '@ionic/angular';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { IonicElementPartHelper } from '@kirbydesign/designsystem/helpers';
+import { IonCheckbox } from '@ionic/angular/standalone';
 
 @Component({
   standalone: true,
-  imports: [IonicModule, CommonModule],
+  imports: [CommonModule, IonCheckbox],
   selector: 'kirby-checkbox',
   templateUrl: './checkbox.component.html',
   styleUrls: ['./checkbox.component.scss'],

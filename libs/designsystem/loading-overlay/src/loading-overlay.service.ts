@@ -1,5 +1,5 @@
 import { ComponentFactoryResolver, Injectable, Injector } from '@angular/core';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController } from '@ionic/angular/standalone';
 import { SpinnerComponent } from '@kirbydesign/designsystem/spinner';
 
 @Injectable({

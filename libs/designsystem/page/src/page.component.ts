@@ -40,7 +40,7 @@ import {
   IonRouterOutlet,
   IonToolbar,
   NavController,
-} from '@ionic/angular';
+} from '@ionic/angular/standalone';
 import { ScrollDetail } from '@ionic/core';
 import { selectedTabClickEvent, TabsComponent } from '@kirbydesign/designsystem/tabs';
 import { Observable, Subject } from 'rxjs';
@@ -613,10 +613,10 @@ export class PageComponent
     /* eslint-disable */
     // prettier-ignore
     this.toolbarTitleTemplate = this.customToolbarTitleTemplate
-      ? this.customToolbarTitleTemplate
-      : typeof this.toolbarTitle === 'string'
-        ? this.simpleToolbarTitleTemplate
-        : defaultTitleTemplate;
+            ? this.customToolbarTitleTemplate
+            : typeof this.toolbarTitle === 'string'
+                ? this.simpleToolbarTitleTemplate
+                : defaultTitleTemplate;
 
     if (this.toolbarTitleClick.observed && this.hasInteractiveTitle === undefined) {
       this.hasInteractiveTitle = true;
