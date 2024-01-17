@@ -8,6 +8,7 @@ import { TestHelper } from '@kirbydesign/designsystem/testing';
 import { ItemComponent } from '@kirbydesign/designsystem/item';
 import { RadioComponent, RadioGroupComponent } from '@kirbydesign/designsystem/radio';
 
+import { fakeAsync, tick } from '@angular/core/testing';
 import { FormFieldMessageComponent } from './form-field-message/form-field-message.component';
 import { FormFieldComponent } from './form-field.component';
 import { InputCounterComponent } from './input-counter/input-counter.component';
@@ -502,7 +503,7 @@ describe('FormFieldComponent', () => {
       platformServiceSpy = spectator.inject(PlatformService);
     });
 
-    it('should focus input element if not touch', () => {
+    it('should focus input element if not touch', fakeAsync(() => {
       platformServiceSpy.isTouch.and.returnValue(false);
       // Call detectChanges() twice - see: https://angular.io/guide/testing-components-scenarios#detectchanges
       spectator.detectChanges(); //ngOnInit() + 1st ngAfterContentChecked()
@@ -511,11 +512,12 @@ describe('FormFieldComponent', () => {
       const focusSpy = spyOn(formFieldElement, 'focus');
 
       spectator.component.focus();
+      tick();
 
       expect(focusSpy).toHaveBeenCalled();
-    });
+    }));
 
-    it('should dispatch touch events if touch', () => {
+    it('should dispatch touch events if touch', fakeAsync(() => {
       platformServiceSpy.isTouch.and.returnValue(true);
       // Call detectChanges() twice - see: https://angular.io/guide/testing-components-scenarios#detectchanges
       spectator.detectChanges(); //ngOnInit() + 1st ngAfterContentChecked()
@@ -524,6 +526,7 @@ describe('FormFieldComponent', () => {
       const dispatchEventSpy = spyOn(inputElement, 'dispatchEvent');
 
       spectator.component.focus();
+      tick();
 
       expect(dispatchEventSpy).toHaveBeenCalledTimes(2);
       const firstEvent: Event = dispatchEventSpy.calls.argsFor(0)[0];
@@ -532,7 +535,7 @@ describe('FormFieldComponent', () => {
       const secondEvent: Event = dispatchEventSpy.calls.argsFor(1)[0];
       expect(secondEvent).toBeInstanceOf(TouchEvent);
       expect(secondEvent.type).toBe('touchend');
-    });
+    }));
   });
 
   describe('affix', () => {

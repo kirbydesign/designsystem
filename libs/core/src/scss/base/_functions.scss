@@ -57,9 +57,18 @@
   }
 }
 
-@function get-text-color($variant) {
-  $value: _get-map-prop(colors.$text-colors, $variant);
-  @return string.unquote('var(--kirby-text-color-' + $variant + ')');
+@function get-text-color($variant, $getValueOnly: false, $map: colors.$text-colors) {
+  $value: _get-map-prop($map, $variant);
+  @if $getValueOnly == true {
+    @return $value;
+  } @else {
+    @return string.unquote('var(--kirby-text-color-' + $variant + ')');
+  }
+}
+
+@function get-decoration-color($variant, $shade) {
+  $value: map.get(colors.$decoration-colors, $variant, $shade);
+  @return string.unquote('var(--kirby-decoration-color-' + $variant + '-' + $shade + ')');
 }
 
 @function get-elevation($value) {
@@ -207,6 +216,10 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+
+  @include slotted('[wrap]') {
+    white-space: normal;
   }
 }
 

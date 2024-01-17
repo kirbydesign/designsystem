@@ -1,0 +1,12 @@
+@use '../showcase.shared';
+@use '@kirbydesign/core/src/scss/utils';
+
+cookbook-toggle-default-example {
+  padding: 0;
+  margin-bottom: utils.size('s');
+}
+
+cookbook-reative-forms-example {
+  padding: 0;
+  margin-bottom: utils.size('s');
+}

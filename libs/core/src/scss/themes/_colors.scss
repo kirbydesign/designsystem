@@ -6,10 +6,67 @@ $brand-colors: (
   'secondary': #005c3c,
   'tertiary': #01352c,
 ) !default;
+$decoration-colors: (
+  'blue': (
+    10: #abe3f2,
+    20: #88d7ec,
+    30: #66cbe7,
+    40: #43c0e1,
+    50: #21b4dc,
+    60: #1c98ba,
+    70: #177c98,
+    80: #126076,
+    90: #0d4454,
+  ),
+  'green': (
+    10: #b9efd2,
+    20: #9de8c0,
+    30: #80e1ae,
+    40: #64db9b,
+    50: #47d489,
+    60: #3cb374,
+    70: #31925f,
+    80: #267149,
+    90: #1b5134,
+  ),
+  'purple': (
+    10: #e4d4e7,
+    20: #d9c3de,
+    30: #ceb1d4,
+    40: #c3a0cb,
+    50: #b88ec1,
+    60: #9b78a3,
+    70: #7f6285,
+    80: #624c67,
+    90: #463649,
+  ),
+  'red': (
+    10: #f7bec0,
+    20: #f3a4a6,
+    30: #f0898c,
+    40: #ec6f72,
+    50: #e95458,
+    60: #c5474a,
+    70: #a13a3d,
+    80: #7d2d2f,
+    90: #592021,
+  ),
+  'yellow': (
+    10: #fde8ae,
+    20: #fddf8d,
+    30: #fcd66c,
+    40: #fccc4b,
+    50: #fbc32a,
+    60: #d4a523,
+    70: #ad871d,
+    80: #866816,
+    90: #5f4a10,
+  ),
+);
 $notification-colors: (
-  'success': #2cf287,
-  'warning': #ffca3a,
-  'danger': #ff595e,
+  'success': map.get($decoration-colors, 'green', 50),
+  'warning': map.get($decoration-colors, 'yellow', 50),
+  'danger': map.get($decoration-colors, 'red', 50),
 );
 $system-colors: (
   'background-color': #f6f6f6,
@@ -28,16 +85,10 @@ $text-colors: (
   'semi-dark': #707070,
   'black': #1c1c1c,
   'danger': #ee0d0d,
+  'positive': map.get($decoration-colors, 'green', 80),
+  'negative': map.get($decoration-colors, 'red', 70),
 );
 $focus-ring-color: rgb(77 144 254);
-$red-30: #ff878a;
-$danger-background-weak: $red-30;
-
-// Assigning the return value of function call
-// _get-color-contrast($danger-background-weak) does not work.
-// Could't find a solution. Decided to assign color directly
-// (we know $danger-background-weak's contrast color should be kirby-black).
-$danger-background-weak-contrast: map.get($system-colors, 'black');
 
 @function get-all-colors() {
   @return map.merge(map.merge($brand-colors, $notification-colors), $system-colors);

@@ -202,4 +202,32 @@ describe('CheckboxComponent', () => {
       expect(spectator.component.checkedChange.emit).toHaveBeenCalledWith(false);
     });
   });
+  describe('implementing ControlValueAccessor interface', () => {
+    it('should update the value when writeValue is called', () => {
+      const newValue = true;
+      spectator.component.writeValue(newValue);
+      expect(spectator.component.checked).toBe(newValue);
+    });
+
+    it('should call the registered onChange function when onChecked is called', () => {
+      const onChangeSpy = jasmine.createSpy('onChange');
+      const newValue = true;
+      spectator.component.registerOnChange(onChangeSpy);
+      spectator.component.onChecked(newValue);
+      expect(onChangeSpy).toHaveBeenCalledOnceWith(newValue);
+    });
+
+    it('should call the registered onTouched function when onBlur is called', () => {
+      const onTouchedSpy = jasmine.createSpy('onTouched');
+      spectator.component.registerOnTouched(onTouchedSpy);
+      spectator.component.onBlur();
+      expect(onTouchedSpy).toHaveBeenCalledTimes(1);
+    });
+
+    it('should update the disabled state when setDisabledState is called', () => {
+      const isDisabled = true;
+      spectator.component.setDisabledState(isDisabled);
+      expect(spectator.component.disabled).toBe(isDisabled);
+    });
+  });
 });

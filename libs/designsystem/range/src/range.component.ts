@@ -6,11 +6,13 @@ import {
   forwardRef,
   Input,
   OnChanges,
+  OnInit,
   Output,
   SimpleChanges,
+  ViewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, IonRange } from '@ionic/angular';
 
 @Component({
   standalone: true,
@@ -27,7 +29,7 @@ import { IonicModule } from '@ionic/angular';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RangeComponent implements OnChanges, ControlValueAccessor {
+export class RangeComponent implements OnChanges, OnInit, ControlValueAccessor {
   @Input() minLabel: string;
   @Input() maxLabel: string;
   @Input() debounce: number;
@@ -37,6 +39,7 @@ export class RangeComponent implements OnChanges, ControlValueAccessor {
   @Input() step = 1;
   @Input() ticks: boolean;
   @Input() disabled = false;
+  @Input() pinFormatter: (value: number) => string | number;
   @Input()
   set value(value: number) {
     if (value !== this.currentValue) {
@@ -50,8 +53,15 @@ export class RangeComponent implements OnChanges, ControlValueAccessor {
   }
 
   @Output() change: EventEmitter<number> = new EventEmitter<number>();
+  @Output() move: EventEmitter<number> = new EventEmitter<number>();
+
+  @ViewChild(IonRange, { static: true }) private ionRange: IonRange;
 
   private currentValue: number;
+
+  ngOnInit() {
+    this.initializeMoveEventEmitter();
+  }
 
   ngOnChanges(_: SimpleChanges) {
     if (!this.ticks) return;
@@ -80,6 +90,16 @@ export class RangeComponent implements OnChanges, ControlValueAccessor {
     return ticks;
   }
 
+  private initializeMoveEventEmitter() {
+    // We subscribe to ionRange's ionInput imperatively instead of in markup
+    // to avoid doing work when no-one is listening to the move event.
+    if (this.move.observed) {
+      this.ionRange.ionInput.subscribe((rangeEvent) => {
+        this._onRangeKnobMove(rangeEvent);
+      });
+    }
+  }
+
   public setDisabledState?(isDisabled: boolean): void {
     this.disabled = isDisabled;
   }
@@ -87,6 +107,11 @@ export class RangeComponent implements OnChanges, ControlValueAccessor {
   public _onRangeValueChange($event: any): void {
     this.writeValue($event.detail.value);
     this.change.emit(this.currentValue);
+  }
+
+  public _onRangeKnobMove($event: any): void {
+    this.writeValue($event.detail.value);
+    this.move.emit(this.currentValue);
   }
 
   public onTouched = () => {};

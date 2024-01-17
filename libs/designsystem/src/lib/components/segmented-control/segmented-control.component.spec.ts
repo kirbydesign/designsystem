@@ -68,6 +68,15 @@ describe('SegmentedControlComponent', () => {
     expect(component.value).toBe(items[1]);
   });
 
+  describe('in chip mode', () => {
+    it('should have ion-segment with same width as segmented control', () => {
+      spectator.setInput('mode', SegmentedControlMode.chip);
+      const ionSegment = spectator.queryHost('ion-segment') as HTMLElement;
+
+      expect(spectator.element.offsetWidth).toEqual(ionSegment.offsetWidth);
+    });
+  });
+
   const testModes = [
     SegmentedControlMode.default,
     SegmentedControlMode.chip,

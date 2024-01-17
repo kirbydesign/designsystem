@@ -1,81 +1,103 @@
-<div class="example">
-  <p>
-    A Checkbox is a control that permits the user to select options. This can be a binary choice,
-    i.e. a choice between one of two possible mutually exclusive options. For example, the user may
-    have to answer 'yes' (checked) or 'no' (not checked) on a simple yes/no question. Multiple check
-    boxes in a group may be used to either select multipe items.
-  </p>
+<p>
+  A Checkbox is a control that permits the user to select options. This can be a binary choice, i.e.
+  a choice between one of two possible mutually exclusive options. For example, the user may have to
+  answer 'yes' (checked) or 'no' (not checked) on a simple yes/no question. Multiple check boxes in
+  a group may be used to either select multipe items.
+</p>
 
-  <h2>Types</h2>
-  <p>There are two types of Checkboxes:</p>
-  <ol>
-    <li>Attention Level 1: Use as a binary choice for a standalone check box</li>
-    <li>Attention Level 2: Use in a list of check boxes, where multiple choices can be selected</li>
-  </ol>
+<h2>Types</h2>
+<p>There are two types of Checkboxes:</p>
+<ol>
+  <li>Attention Level 1: Use as a binary choice for a standalone check box</li>
+  <li>Attention Level 2: Use in a list of check boxes, where multiple choices can be selected</li>
+</ol>
 
-  <h3>Attention Level 1</h3>
-  <cookbook-example-viewer [html]="checkboxConfirmExample.template">
-    <cookbook-checkbox-confirm-example #checkboxConfirmExample></cookbook-checkbox-confirm-example>
-  </cookbook-example-viewer>
+<h3>Attention Level 1</h3>
+<cookbook-example-viewer [html]="checkboxConfirmExample.template">
+  <cookbook-checkbox-confirm-example #checkboxConfirmExample></cookbook-checkbox-confirm-example>
+</cookbook-example-viewer>
 
-  <h3>Attention Level 2</h3>
-  <cookbook-example-viewer [html]="checkboxDefaultExample.template">
-    <cookbook-checkbox-default-example #checkboxDefaultExample></cookbook-checkbox-default-example>
-  </cookbook-example-viewer>
+<h3>Attention Level 2</h3>
+<cookbook-example-viewer [html]="checkboxDefaultExample.template">
+  <cookbook-checkbox-default-example #checkboxDefaultExample></cookbook-checkbox-default-example>
+</cookbook-example-viewer>
 
-  <h2>Used in a list</h2>
-  <p>
-    For more on using checkbox in an item, see
-    <a routerLink="/home/showcase/item">item documentation</a>
-  </p>
-  <cookbook-example-viewer
-    [html]="checkboxListExample.template"
-    [ts]="checkboxListExample.codeSnippet"
-  >
-    <cookbook-checkbox-list-example #checkboxListExample></cookbook-checkbox-list-example>
-  </cookbook-example-viewer>
+<h2>Used in a list</h2>
+<p>
+  For more on using checkbox in an item, see
+  <a routerLink="/home/showcase/item">item documentation</a>
+</p>
+<cookbook-example-viewer
+  [html]="checkboxListExample.template"
+  [ts]="checkboxListExample.codeSnippet"
+>
+  <cookbook-checkbox-list-example #checkboxListExample></cookbook-checkbox-list-example>
+</cookbook-example-viewer>
 
-  <h2>States</h2>
-  <cookbook-example-viewer [html]="checkboxStatesExample.template">
-    <cookbook-checkbox-states-example #checkboxStatesExample></cookbook-checkbox-states-example>
-  </cookbook-example-viewer>
+<h2>States</h2>
+<cookbook-example-viewer [html]="checkboxStatesExample.template">
+  <cookbook-checkbox-states-example #checkboxStatesExample></cookbook-checkbox-states-example>
+</cookbook-example-viewer>
 
-  <h2>Sizes</h2>
-  <p>
-    The size applies to the clickable/tapable area (highlighted in the examples below). The checkbox
-    and checkmark always have the same size.
-  </p>
-  <cookbook-example-viewer [html]="checkboxSizesExample.template">
-    <cookbook-checkbox-sizes-example #checkboxSizesExample></cookbook-checkbox-sizes-example>
-  </cookbook-example-viewer>
+<h2>Sizes</h2>
+<p>
+  The size applies to the clickable/tapable area (highlighted in the examples below). The checkbox
+  and checkmark always have the same size.
+</p>
+<cookbook-example-viewer [html]="checkboxSizesExample.template">
+  <cookbook-checkbox-sizes-example #checkboxSizesExample></cookbook-checkbox-sizes-example>
+</cookbook-example-viewer>
 
-  <h2>Multiline Label</h2>
-  <p>
-    Line breaks can be made by using
-    <code>&#92;n</code>
-    or
-    <code>&amp;&#35;10;</code>
-    .
-  </p>
-  <cookbook-example-viewer [html]="checkboxMultilineExample.template">
-    <cookbook-checkbox-multiline-example
-      #checkboxMultilineExample
-    ></cookbook-checkbox-multiline-example>
-  </cookbook-example-viewer>
+<h2>Multiline Label</h2>
+<p>
+  Line breaks can be made by using
+  <code>&#92;n</code>
+  or
+  <code>&amp;&#35;10;</code>
+  .
+</p>
+<cookbook-example-viewer [html]="checkboxMultilineExample.template">
+  <cookbook-checkbox-multiline-example
+    #checkboxMultilineExample
+  ></cookbook-checkbox-multiline-example>
+</cookbook-example-viewer>
 
-  <h2>Checked Change Event</h2>
-  <cookbook-example-viewer
-    [html]="checkboxEventsExample.template"
-    [ts]="checkboxEventsExample.codeSnippet"
-  >
-    <cookbook-checkbox-events-example #checkboxEventsExample></cookbook-checkbox-events-example>
-  </cookbook-example-viewer>
+<h2>Checked Change Event</h2>
+<cookbook-example-viewer
+  [html]="checkboxEventsExample.template"
+  [ts]="checkboxEventsExample.codeSnippet"
+>
+  <cookbook-checkbox-events-example #checkboxEventsExample></cookbook-checkbox-events-example>
+</cookbook-example-viewer>
+<h2>Angular Forms</h2>
+<p>
+  The checkbox can be used directly in
+  <a href="https://angular.io/guide/forms" target="_blank">template driven</a>
+  and
+  <a href="https://angular.io/guide/reactive-forms" target="_blank">reactive forms</a>
+  . To use checkbox in a reactive form, bind your form control to
+  <code>&lt;kirby-checkbox&gt;</code>
+  with simple data binding:
+</p>
+<!-- prettier-ignore -->
+<cookbook-code-viewer language="html" [inlineLabel]="true">&lt;kirby-checkbox [formControl]="yourFormControl"&gt;
+// or simply:
+&lt;kirby-checkbox formControlName="yourFormControlName"&gt;
+</cookbook-code-viewer>
 
-  <h2>Properties</h2>
-  <cookbook-api-description-properties
-    [properties]="properties"
-  ></cookbook-api-description-properties>
+<cookbook-example-viewer
+  [html]="reactiveFormExample.template"
+  [ts]="reactiveFormExample.codeSnippet"
+>
+  <cookbook-checkbox-reactive-forms-example
+    #reactiveFormExample
+  ></cookbook-checkbox-reactive-forms-example>
+</cookbook-example-viewer>
 
-  <h2>Events</h2>
-  <cookbook-api-description-events [events]="events"></cookbook-api-description-events>
-</div>
+<h2>Properties</h2>
+<cookbook-api-description-properties
+  [properties]="properties"
+></cookbook-api-description-properties>
+
+<h2>Events</h2>
+<cookbook-api-description-events [events]="events"></cookbook-api-description-events>

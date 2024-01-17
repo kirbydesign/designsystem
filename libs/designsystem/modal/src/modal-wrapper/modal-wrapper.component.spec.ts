@@ -12,6 +12,7 @@ import { ButtonComponent } from '@kirbydesign/designsystem/button';
 import { PageModule } from '@kirbydesign/designsystem/page';
 import { CanDismissHelper, ModalWrapperComponent } from '@kirbydesign/designsystem/modal';
 import {
+  DummyContentEmbeddedComponent,
   DynamicFooterEmbeddedComponent,
   DynamicPageProgressEmbeddedComponent,
   InputEmbeddedComponent,
@@ -20,6 +21,8 @@ import {
   StaticPageProgressEmbeddedComponent,
   TitleEmbeddedComponent,
 } from './modal-wrapper.testbuilder';
+
+const { getColor } = DesignTokenHelper;
 
 describe('ModalWrapperComponent', () => {
   const createComponent = createComponentFactory({
@@ -645,6 +648,80 @@ describe('ModalWrapperComponent', () => {
           tick(ModalWrapperComponent.KEYBOARD_HIDE_DELAY_IN_MS);
           expect(spectator.component['ionModalElement'].dismiss).toHaveBeenCalledWith('test data');
         }));
+      });
+    });
+  });
+
+  describe('listenForScroll', () => {
+    afterEach(() => {
+      TestHelper.resetTestWindow();
+    });
+    it('should set scrollEventsEnabled to be false when opened on desktop', async () => {
+      await TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
+
+      modalWrapperTestBuilder = new ModalWrapperTestBuilder(createComponent);
+      spectator = modalWrapperTestBuilder
+        .flavor('modal')
+        .title('test')
+        .component(TitleEmbeddedComponent)
+        .build();
+
+      expect(spectator.component.scrollEventsEnabled).toBeFalse();
+    });
+
+    it('should set scrollEventsEnabled to be true when opened on a phone', async () => {
+      await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
+
+      modalWrapperTestBuilder = new ModalWrapperTestBuilder(createComponent);
+      spectator = modalWrapperTestBuilder
+        .flavor('modal')
+        .title('test')
+        .component(TitleEmbeddedComponent)
+        .build();
+
+      expect(spectator.component.scrollEventsEnabled).toBeTrue();
+    });
+
+    it('should set scrollEventsEnabled to be true when resizing from desktop to phone', async () => {
+      await TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
+      modalWrapperTestBuilder = new ModalWrapperTestBuilder(createComponent);
+      spectator = modalWrapperTestBuilder
+        .flavor('modal')
+        .title('test')
+        .component(TitleEmbeddedComponent)
+        .build();
+      expect(spectator.component.scrollEventsEnabled).toBeFalse();
+
+      await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
+      await TestHelper.whenTrue(() => spectator.component.scrollEventsEnabled);
+
+      expect(spectator.component.scrollEventsEnabled).toBeTrue();
+    });
+
+    it('should set border-bottom-color on ion-toolbar when scrolling on phone to the bottom or past offset', async () => {
+      await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
+      modalWrapperTestBuilder = new ModalWrapperTestBuilder(createComponent);
+      spectator = modalWrapperTestBuilder
+        .flavor('modal')
+        .component(DummyContentEmbeddedComponent)
+        .build();
+      await spectator.fixture.whenStable();
+      const MinimumScrollableContentHeight = '500px';
+      const ionContentElement = spectator.query('ion-content') as HTMLElement;
+      ionContentElement.style.minHeight = MinimumScrollableContentHeight;
+      spectator.detectChanges();
+
+      spectator.component.scrollToBottom();
+      await spectator.fixture.whenStable();
+      spectator.detectChanges();
+      await TestHelper.whenTrue(() => spectator.component.isContentScrolled);
+      const ionToolbarInScrolled = document.querySelector(
+        'ion-header.content-scrolled ion-toolbar'
+      ) as HTMLElement;
+      ionToolbarInScrolled.style.transition = 'none';
+
+      expect(ionToolbarInScrolled).toHaveComputedStyle({
+        'border-bottom-color': getColor('medium'),
       });
     });
   });

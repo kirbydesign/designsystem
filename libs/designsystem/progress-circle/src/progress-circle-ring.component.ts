@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
-import { ThemeColorDirective } from '@kirbydesign/designsystem/shared';
 
 @Component({
   standalone: true,

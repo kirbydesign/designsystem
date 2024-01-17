@@ -7,10 +7,10 @@
 <div class="color-sample-wrapper">
   <div class="h2">Example use (Click on a color below to change it):</div>
   <div class="color-sample-flex">
-    <div class="color-sample-example {{ selectedColor }}">
+    <div class="color-sample-example color-sample {{ selectedColor }}">
       <div class="color-sample-on-text">Contrast Text</div>
-      <div class="{{ selectedColor }}-tint">Tint</div>
-      <div class="{{ selectedColor }}-shade">Shade</div>
+      <div class="color-sample {{ selectedColor }}-tint">Tint</div>
+      <div class="color-sample {{ selectedColor }}-shade">Shade</div>
     </div>
     <pre class="language-css">
 @use '@kirbydesign/designsystem/scss/utils';
@@ -37,17 +37,19 @@
   *ngTemplateOutlet="colorPalette; context: { $implicit: notificationColors }"
 ></ng-container>
 
+<h2>Decoration colors</h2>
+<ng-container
+  *ngTemplateOutlet="decorationColorPalette; context: { $implicit: decorationColors }"
+></ng-container>
+
 <h2>System colors</h2>
 <ng-container *ngTemplateOutlet="colorPalette; context: { $implicit: systemColors }"></ng-container>
 
 <h2>Text colors</h2>
 <ul class="text-color-palette">
-  <li *ngFor="let color of textColors" class="text-color-box">
-    <div class="text-color-samples">
-      <div class="color-sample {{ color.name }}"></div>
-    </div>
+  <li *ngFor="let color of textColors" class="text-color-box {{ color.name }}">
     <div>
-      <h2 class="color-name">{{ color.name }}</h2>
+      <h3 class="color-name">{{ color.name }}</h3>
       <dl class="kirby-text-xsmall color-values">
         <dt>Value</dt>
         <dd>{{ color.value }}</dd>
@@ -59,10 +61,10 @@
 <ng-template #colorPalette let-colors>
   <ul class="color-palette">
     <li *ngFor="let color of colors" class="color-box" (click)="onColorClick(color)">
-      <h2 class="color-name">{{ color.name }}</h2>
+      <h3 class="color-name">{{ color.name }}</h3>
       <div class="color-samples">
         <div class="color-sample {{ color.name }}">
-          <h3>{{ color.name | slice: 0:2 | uppercase }}</h3>
+          <h3>{{ color.name | slice: 0:2 }}</h3>
         </div>
         <div class="color-sample {{ color.tint.name }}"></div>
         <div class="color-sample {{ color.shade.name }}"></div>
@@ -79,4 +81,21 @@
       </dl>
     </li>
   </ul>
+</ng-template>
+
+<ng-template #decorationColorPalette let-colors>
+  <div class="color-palette-ramps">
+    <div *ngFor="let color of colors" class="color-box">
+      <h3 class="color-name">{{ color.name }}</h3>
+      <dl>
+        <ng-container *ngFor="let ramp of color.ramp" class="color-box">
+          <dd>{{ ramp.step }}</dd>
+          <dt
+            class="color-ramp-sample {{ color.name }}-{{ ramp.step }}"
+            title="var(--kirby-decoration-color-{{ color.name }}-{{ ramp.step }})"
+          ></dt>
+        </ng-container>
+      </dl>
+    </div>
+  </div>
 </ng-template>

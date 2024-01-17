@@ -1,6 +1,7 @@
 @use 'sass:list';
 @use 'sass:map';
 @use 'sass:math';
+@use 'sass:meta';
 @use '@kirbydesign/core/src/scss/utils';
 
 // returns the total target height including padding and borders
@@ -38,26 +39,31 @@
   }
 }
 
-$_flag-notification-colors-map: map.remove(utils.$notification-colors, 'danger');
-$_color-names: map.keys($_flag-notification-colors-map);
-$_color-names: list.append($_color-names, 'semi-light');
+$_flag-notification-colors-map: (
+  'success': (
+    'green',
+    30,
+  ),
+  'warning': (
+    'yellow',
+    30,
+  ),
+  'danger': (
+    'red',
+    30,
+  ),
+  'semi-light': 'semi-light',
+);
 
-@each $name in $_color-names {
+@each $name, $variant_shade in $_flag-notification-colors-map {
   :host(.#{$name}) {
-    // Use utils.get-color() to assign a custom property instead of a color value.
-    // Custom properties can be overridden in consumer projects.
-    --kirby-flag-background-color: #{utils.get-color($name)};
-    --kirby-flag-color: #{utils.get-color($name + '-contrast')};
-    --kirby-flag-border-color: #{utils.get-color($name)};
-  }
-}
+    @if meta.type_of($variant_shade) == list {
+      --kirby-flag-background-color: #{utils.get-decoration-color($variant_shade...)};
+    } @else {
+      --kirby-flag-background-color: #{utils.get-color($variant_shade)};
+    }
 
-// <kirby-flag> uses a different "danger" notification color.
-// Overriding `--kirby-danger` in a consumer project will not have any effect on
-// the background color for danger flags.
-// See https://github.com/kirbydesign/designsystem/issues/2041
-:host(.danger) {
-  --kirby-flag-background-color: #{utils.$danger-background-weak};
-  --kirby-flag-color: #{utils.$danger-background-weak-contrast};
-  --kirby-flag-border-color: #{utils.$danger-background-weak};
+    --kirby-flag-color: #{utils.get-color('black')};
+    --kirby-flag-border-color: var(--kirby-flag-background-color);
+  }
 }

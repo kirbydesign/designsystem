@@ -21,10 +21,13 @@ export class DateInputDirective implements AfterViewInit {
   onInput() {
     if (!this.isDateInput) return;
 
-    this.updateMask(this.elementRef.nativeElement.value);
+    if (this.enableInputMask) {
+      this.updateMask(this.elementRef.nativeElement.value);
+    }
   }
 
   @Input() prefillYear = false;
+  @Input() useNativeDatePicker = false;
 
   private maskingElement: HTMLElement;
 
@@ -39,22 +42,39 @@ export class DateInputDirective implements AfterViewInit {
    */
   private isDateInput = false;
 
+  /**
+   * Inputmask should be enabled exclusively when _not_ using the platform
+   * native date picker.
+   *
+   * `enableInputMask` should be ignored if the type attribute of the `<input>`
+   * element is different from 'date' and/or the platform native date picker is
+   * explicitly enabled.
+   *
+   * @private
+   * @memberof DateInputDirective
+   */
+  private enableInputMask = false;
+
   constructor(
     private elementRef: ElementRef,
     private renderer: Renderer2,
     @Inject(LOCALE_ID) private locale: string
   ) {
     this.isDateInput = this.elementRef.nativeElement.type === 'date';
-    if (this.isDateInput) {
-      // Remove type to avoid user-agent specific behaviour for [type="date"]
-      this.elementRef.nativeElement.removeAttribute('type');
-    }
   }
 
   ngAfterViewInit(): void {
     if (!this.isDateInput) return;
 
-    this.initMask();
+    this.enableInputMask = !this.useNativeDatePicker;
+
+    // This case is identical to date input fields _before_ native date picker
+    // option was introduced
+    if (this.enableInputMask) {
+      // Remove type to avoid user-agent specific behaviour for [type="date"]
+      this.elementRef.nativeElement.removeAttribute('type');
+      this.initMask();
+    }
   }
 
   private initMask(): void {

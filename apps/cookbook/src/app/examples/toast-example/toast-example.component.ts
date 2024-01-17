@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ToastConfig } from '@kirbydesign/designsystem';
+import { MessageType, ToastConfig } from '@kirbydesign/designsystem';
 import { ToastController } from '@kirbydesign/designsystem';
 
 @Component({
@@ -9,10 +9,10 @@ import { ToastController } from '@kirbydesign/designsystem';
 })
 export class ToastExampleComponent {
   constructor(public toastController: ToastController) {}
-  showToast() {
+  showToast(messageType?: MessageType) {
     const config: ToastConfig = {
       message: 'Your toast message',
-      messageType: 'success',
+      messageType,
       durationInMs: 5000,
     };
     this.toastController.showToast(config, this.onToastClosed);

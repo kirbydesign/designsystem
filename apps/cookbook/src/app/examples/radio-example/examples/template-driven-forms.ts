@@ -57,7 +57,7 @@ favoriteRequired = true;`,
 @Component({
   selector: config.selector,
   template: config.template,
-  styleUrls: ['./ng-forms.shared.scss'],
+  styleUrls: ['../../ng-forms.shared.scss'],
 })
 export class RadioTemplateDrivenFormsExampleComponent {
   template: string = config.template.split('<cookbook-example-configuration-wrapper>')[0];

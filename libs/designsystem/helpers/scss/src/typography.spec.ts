@@ -112,6 +112,13 @@ describe('Typography', () => {
         fontWeight: '700',
         lineHeight: '24px',
       },
+      'heading 4': {
+        tag: 'h4',
+        cssClasses: ['h4', 'kirby-text-normal-bold'],
+        fontSize: '16px',
+        fontWeight: '700',
+        lineHeight: '24px',
+      },
     };
 
     for (const headingName in headings) {

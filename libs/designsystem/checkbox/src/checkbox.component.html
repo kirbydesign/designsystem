@@ -4,6 +4,7 @@
   [disabled]="disabled"
   (ionChange)="onChecked($event.detail.checked)"
   labelPlacement="end"
+  (ionBlur)="onBlur()"
 >
   <span *ngIf="text">{{ text }}</span>
 </ion-checkbox>

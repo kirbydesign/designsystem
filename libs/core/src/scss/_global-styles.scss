@@ -57,6 +57,11 @@ $modal-large-screen-min-height: $modal-header-height + $modal-expected-footer-he
   @each $color, $color-name in utils.$text-colors {
     --kirby-text-color-#{$color}: #{$color-name};
   }
+  @each $color, $color-ramp in utils.$decoration-colors {
+    @each $shade, $color-value in $color-ramp {
+      --kirby-decoration-color-#{$color}-#{$shade}: #{$color-value};
+    }
+  }
 
   --kirby-page-max-width: 1366px;
   --kirby-statusbar-padding: var(--ion-statusbar-padding);
@@ -95,7 +100,7 @@ ion-modal.kirby-overlay {
     --border-radius: 0;
     --background: var(--kirby-modal-background, #{utils.get-color('background-color')});
     --height: auto;
-    --box-shadow: #{utils.get-elevation(4)};
+    --box-shadow: #{utils.get-elevation(8)};
 
     box-sizing: border-box;
 
@@ -180,7 +185,7 @@ ion-modal.kirby-overlay {
   &.kirby-alert {
     --background: #{utils.get-color('background-color')};
     --border-radius: #{utils.$border-radius};
-    --box-shadow: #{utils.get-elevation(4)};
+    --box-shadow: #{utils.get-elevation(8)};
     --max-width: #{utils.$alert-max-width};
     --height: auto;
   }
@@ -208,16 +213,26 @@ ion-loading.kirby-loading-overlay {
   user-select: none;
   text-align: center;
 
-  // Set default colors
-  --background: #{utils.get-color('success')};
-  --color: #{utils.get-color('success-contrast')};
-  --button-color: #{utils.get-color('success-contrast')};
+  $_toast-notification-colors-map: (
+    'success': (
+      'green',
+      40,
+    ),
+    'warning': (
+      'yellow',
+      40,
+    ),
+  );
 
-  @each $color-name, $color-value in utils.$notification-colors {
-    &.#{$color-name} {
-      --background: #{utils.get-color($color-name)};
-      --color: #{utils.get-color($color-name + '-contrast')};
-      --button-color: #{utils.get-color($color-name + '-contrast')};
+  // Set default colors
+
+  --background: #{utils.get-decoration-color(map.get($_toast-notification-colors-map, 'success') ...)};
+  --color: #{utils.get-color('black')};
+  --button-color: var(--color);
+
+  @each $name, $variant_shade in $_toast-notification-colors-map {
+    &.#{$name} {
+      --background: #{utils.get-decoration-color($variant_shade...)};
     }
   }
 }

@@ -19,7 +19,7 @@ svg {
 :host {
   @each $color-name, $color-value in utils.$notification-colors {
     &.#{$color-name} {
-      --kirby-progress-circle-stroke-color: #{$color-value};
+      --kirby-progress-circle-stroke-color: #{utils.get-color($color-name)};
     }
   }
 }

@@ -5,7 +5,6 @@
   display: block;
   user-select: none;
 
-  --kirby-badge-elevation: #{utils.get-elevation(2)};
   --kirby-badge-position: absolute;
   --kirby-badge-top: -#{utils.size('xxs')};
   --kirby-badge-right: -#{utils.size('s')};
@@ -34,6 +33,7 @@
       box-shadow: var(--kirby-inputs-elevation);
       overflow: visible; // Ensures the badge is not cut off
       contain: none; // Ensures the badge is not cut off
+      width: fit-content; // The segmented control itself is block-level, but we don't want it to stretch
     }
   }
 
@@ -79,8 +79,8 @@
 
 ion-segment {
   border-radius: utils.$border-radius-round;
-  width: fit-content; // The segmented control itself is block-level, but we don't want it to stretch
-  grid-auto-columns: initial;
+  grid-auto-columns: max-content;
+  box-sizing: border-box;
 }
 
 ion-segment-button {

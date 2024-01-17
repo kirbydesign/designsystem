@@ -104,6 +104,10 @@ export const kirbyIconSettings: IconSettings = {
     { name: 'adjust', svg: 'assets/kirby/icons/svg/adjust.svg' },
     { name: 'bs-logo', svg: 'assets/kirby/icons/svg/bs-logo.svg' },
     { name: 'company', svg: 'assets/kirby/icons/svg/company.svg' },
+    { name: 'budget', svg: 'assets/kirby/icons/svg/budget.svg' },
+    { name: 'history', svg: 'assets/kirby/icons/svg/history.svg' },
+    { name: 'dot', svg: 'assets/kirby/icons/svg/dot.svg' },
+    { name: 'agreement', svg: 'assets/kirby/icons/svg/agreement.svg' },
   ],
 };
 
