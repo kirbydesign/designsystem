@@ -1,16 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg id="Lag_1" data-name="Lag 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 150">
-  <defs>
-    <style>
-      .cls-1, .cls-2 {
-        fill: #00e89a;
-      }
-
-      .cls-2 {
-        opacity: .5;
-      }
-    </style>
-  </defs>
-  <path id="Path_25" data-name="Path 25" class="cls-2" d="M128,75c0,4.42-3.58,8-8,8s-8-3.58-8-8,3.58-8,8-8h0c4.42,0,8,3.58,8,8"/>
-  <path id="Path_25-2" data-name="Path 25" class="cls-1" d="M125,75c0,2.76-2.24,5-5,5s-5-2.24-5-5,2.24-5,5-5h0c2.76,0,5,2.24,5,5"/>
-</svg>
+<?xml version="1.0" encoding="UTF-8"?><svg id="Lag_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 150"><defs><style>.cls-1,.cls-2{fill:#00e89a;}.cls-2{opacity:.5;}</style></defs><path id="Path_25" class="cls-2" d="m136,75c0,8.84-7.16,16-16,16s-16-7.16-16-16,7.16-16,16-16h0c8.84,0,16,7.16,16,16"/><path id="Path_25-2" class="cls-1" d="m130,75c0,5.52-4.48,10-10,10s-10-4.48-10-10,4.48-10,10-10h0c5.52,0,10,4.48,10,10"/></svg>
