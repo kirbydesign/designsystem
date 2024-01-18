@@ -60,6 +60,11 @@ export class DateInputDirective implements AfterViewInit {
     @Inject(LOCALE_ID) private locale: string
   ) {
     this.isDateInput = this.elementRef.nativeElement.type === 'date';
+    if (this.isDateInput) {
+      // Remove type to avoid user-agent specific behaviour for [type="date"]
+      // Has to be done in constructor to avoid browser behavior kicking in
+      this.elementRef.nativeElement.removeAttribute('type');
+    }
   }
 
   ngAfterViewInit(): void {
@@ -70,9 +75,11 @@ export class DateInputDirective implements AfterViewInit {
     // This case is identical to date input fields _before_ native date picker
     // option was introduced
     if (this.enableInputMask) {
-      // Remove type to avoid user-agent specific behaviour for [type="date"]
-      this.elementRef.nativeElement.removeAttribute('type');
       this.initMask();
+    }
+
+    if (this.useNativeDatePicker) {
+      this.elementRef.nativeElement.setAttribute('type', 'date');
     }
   }
 
