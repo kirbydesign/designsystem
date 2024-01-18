@@ -75,15 +75,16 @@ export class CheckboxReactiveFormsExampleComponent {
   template: string = config.template.split('<cookbook-example-configuration-wrapper>')[0]; // Remove config part of the template;
   codeSnippet: string = config.codeSnippet;
 
-  form: FormGroup = this.formBuilder.group({
-    Bacon: new FormControl(false),
-    Salami: new FormControl(false),
-    Tenderloin: new FormControl(false),
-  });
-
+  form: FormGroup;
   canSelectFavorite = true;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder) {
+    this.form = this.formBuilder.group({
+      Bacon: new FormControl(false),
+      Salami: new FormControl(false),
+      Tenderloin: new FormControl(false),
+    });
+  }
 
   toggleCanSelectFavorite() {
     this.canSelectFavorite = !this.canSelectFavorite;

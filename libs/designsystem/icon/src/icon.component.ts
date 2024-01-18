@@ -29,8 +29,8 @@ const CUSTOM_NAME_DEPRECATION_WARNING =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IconComponent implements OnChanges {
-  defaultIcon: Icon = this.iconRegistryService.getIcon('cog');
-  private _icon = (this.icon = this.defaultIcon);
+  defaultIcon: Icon;
+  private _icon;
   private _customName;
   @HostBinding('class')
   @Input()
@@ -69,6 +69,10 @@ export class IconComponent implements OnChanges {
     }
   }
 
+  constructor(private iconRegistryService: IconRegistryService) {
+    this.defaultIcon = this.iconRegistryService.getIcon('cog');
+  }
+
   private warnAboutMissingIcon(): void {
     if (this.customName) {
       console.warn(`Custom icon with name "${this.customName}" was not found. 
@@ -81,8 +85,6 @@ export class IconComponent implements OnChanges {
         <kirby-icon customName="${this.name}"></kirby-icon>`);
     }
   }
-
-  constructor(private iconRegistryService: IconRegistryService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.name && changes.name.currentValue) {

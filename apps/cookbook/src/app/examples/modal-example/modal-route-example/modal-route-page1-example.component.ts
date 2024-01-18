@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'cookbook-modal-route-page-1-example',
@@ -32,9 +33,11 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ModalRoutePage1ExampleComponent {
   showFooter: boolean = true;
-  queryParams$ = this.route.queryParams;
+  queryParams$: Observable<Params>;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute) {
+    this.queryParams$ = this.route.queryParams;
+  }
 
   toggleFooter() {
     this.showFooter = !this.showFooter;

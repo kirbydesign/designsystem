@@ -9,11 +9,14 @@ import { WindowRef } from '@kirbydesign/designsystem/types';
   styleUrls: ['./form-field-example.component.scss'],
 })
 export class FormFieldExampleComponent {
-  constructor(private windowRef: WindowRef) {}
   size: InputSize;
-  showDummyKeyboard = !!this.windowRef.nativeWindow.sessionStorage.getItem(
-    'kirby-cookbook-show-dummy-keyboard'
-  );
+  showDummyKeyboard: boolean;
+
+  constructor(private windowRef: WindowRef) {
+    this.showDummyKeyboard = !!this.windowRef.nativeWindow.sessionStorage.getItem(
+      'kirby-cookbook-show-dummy-keyboard'
+    );
+  }
 
   toggleDummyKeyboard(show: boolean) {
     const sessionKey = 'kirby-cookbook-show-dummy-keyboard';

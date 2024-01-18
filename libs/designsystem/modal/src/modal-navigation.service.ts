@@ -9,7 +9,13 @@ import { AlertConfig } from './public_api';
 
 @Injectable({ providedIn: 'root' })
 export class ModalNavigationService {
-  constructor(private router: Router, private route: ActivatedRoute, private location: Location) {}
+  private navigationEndListener$;
+
+  constructor(private router: Router, private route: ActivatedRoute, private location: Location) {
+    this.navigationEndListener$ = this.router.events.pipe(
+      filter((event): event is NavigationEnd => event instanceof NavigationEnd)
+    );
+  }
 
   isModalRoute(url: string): boolean {
     return url.includes('(modal:');
@@ -195,10 +201,6 @@ export class ModalNavigationService {
     return previousModalRouteParent !== currentModalRouteParent;
   }
 
-  private navigationEndListener$ = this.router.events.pipe(
-    filter((event): event is NavigationEnd => event instanceof NavigationEnd)
-  );
-
   private async waitForCurrentThenGetNavigationEndStream(): Promise<Observable<NavigationEnd>> {
     if (this.router.getCurrentNavigation()) {
       const currentNavigationEnd = await firstValueFrom(this.navigationEndListener$);
@@ -234,9 +236,11 @@ export class ModalNavigationService {
   ): Observable<boolean> {
     return navigationEnd$.pipe(
       pairwise(),
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       filter(([prevNavigation, _]) =>
         this.modalRouteSetContainsPath(modalRouteSet, prevNavigation, modalRoutesContainsUrlParams)
       ), // Only emit if previous route was modal
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       map(([_, currentNavigation]) => {
         const isNewModalRoute = this.isModalRoute(currentNavigation.urlAfterRedirects);
         // Deactivate modal route if new route is NOT modal OR is outside current parent route:

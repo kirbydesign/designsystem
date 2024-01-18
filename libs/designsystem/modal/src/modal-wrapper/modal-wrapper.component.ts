@@ -67,9 +67,8 @@ export class ModalWrapperComponent
   }
 
   static readonly KEYBOARD_HIDE_DELAY_IN_MS = 100;
-
-  scrollY: number = Math.abs(this.windowRef.nativeWindow.scrollY);
   private readonly VIEWPORT_RESIZE_DEBOUNCE_TIME = 100;
+  scrollY: number;
 
   set scrollDisabled(disabled: boolean) {
     this.ionContent.scrollY = !disabled;
@@ -157,6 +156,7 @@ export class ModalWrapperComponent
     private platform: PlatformService,
     private canDismissHelper: CanDismissHelper
   ) {
+    this.scrollY = Math.abs(this.windowRef.nativeWindow.scrollY);
     this.setViewportHeight();
     this.observeViewportResize();
     this.modalElementsMoverDelegate = new ModalElementsMoverDelegate(renderer, elementRef);

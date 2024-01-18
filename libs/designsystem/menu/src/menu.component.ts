@@ -40,7 +40,9 @@ export class MenuComponent implements AfterViewInit, OnDestroy {
     private elementRef: ElementRef<HTMLElement>,
     private zone: NgZone,
     private renderer: Renderer2
-  ) {}
+  ) {
+    this.DOMPortalOutlet = this.elementRef.nativeElement.ownerDocument.body;
+  }
 
   @Input() public isDisabled: boolean = false;
 
@@ -52,7 +54,7 @@ export class MenuComponent implements AfterViewInit, OnDestroy {
 
   @Input() public triggers: Array<TriggerEvent> = ['click'];
 
-  @Input() public DOMPortalOutlet: HTMLElement = this.elementRef.nativeElement.ownerDocument.body;
+  @Input() public DOMPortalOutlet: HTMLElement;
 
   @Input() public portalOutletConfig: PortalOutletConfig | undefined;
 

@@ -341,15 +341,9 @@ export class PageComponent
   private ngOnDestroy$: Subject<void> = new Subject<void>();
   private contentScrolled$: Observable<ScrollDetail>;
 
-  private navigationStart$: Observable<NavigationStart> = this.router.events.pipe(
-    filter((event): event is NavigationStart => event instanceof NavigationStart),
-    takeUntil(this.ngOnDestroy$)
-  );
+  private navigationStart$: Observable<NavigationStart>;
 
-  private navigationEnd$: Observable<NavigationEnd> = this.router.events.pipe(
-    filter((event): event is NavigationEnd => event instanceof NavigationEnd),
-    takeUntil(this.ngOnDestroy$)
-  );
+  private navigationEnd$: Observable<NavigationEnd>;
 
   toolbarActionGroupInjector: Injector;
 
@@ -371,7 +365,16 @@ export class PageComponent
     @Optional()
     private navCtrl: NavController,
     private ionicElementPartHelper: IonicElementPartHelper
-  ) {}
+  ) {
+    this.navigationStart$ = this.router.events.pipe(
+      filter((event): event is NavigationStart => event instanceof NavigationStart),
+      takeUntil(this.ngOnDestroy$)
+    );
+    this.navigationEnd$ = this.router.events.pipe(
+      filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+      takeUntil(this.ngOnDestroy$)
+    );
+  }
 
   private contentReadyPromise: Promise<void>;
   private whenContentReady() {

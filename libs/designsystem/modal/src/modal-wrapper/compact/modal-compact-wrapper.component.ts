@@ -19,7 +19,7 @@ import { CanDismissHelper } from '../../modal/services/can-dismiss.helper';
   host: { '[class.ion-page]': 'false' }, //Ensure ion-page class doesn't get applied by Ionic Modal Controller
 })
 export class ModalCompactWrapperComponent implements Modal, OnInit {
-  scrollY: number = Math.abs(this.windowRef.nativeWindow.scrollY);
+  scrollY: number;
   scrollDisabled = false;
   @Input() config: ModalConfig;
   componentPropsInjector: Injector;
@@ -35,7 +35,9 @@ export class ModalCompactWrapperComponent implements Modal, OnInit {
     private elementRef: ElementRef<HTMLElement>,
     private windowRef: WindowRef,
     private canDismissHelper: CanDismissHelper
-  ) {}
+  ) {
+    this.scrollY = Math.abs(this.windowRef.nativeWindow.scrollY);
+  }
 
   ngOnInit(): void {
     this.ionModalElement = this.elementRef.nativeElement.closest('ion-modal');

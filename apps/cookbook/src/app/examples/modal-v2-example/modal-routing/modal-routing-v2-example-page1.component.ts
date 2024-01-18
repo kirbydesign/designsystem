@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   template: `
@@ -30,6 +31,9 @@ import { ActivatedRoute } from '@angular/router';
   ],
 })
 export class ModalRoutingV2ExamplePage1Component {
-  constructor(private route: ActivatedRoute) {}
-  queryParams$ = this.route.queryParams;
+  queryParams$: Observable<Params>;
+
+  constructor(private route: ActivatedRoute) {
+    this.queryParams$ = this.route.queryParams;
+  }
 }

@@ -43,17 +43,21 @@ export class DecimalMaskDirective implements ControlValueAccessor, OnInit {
     this.min = this.getMin(maxlengthValue);
   }
 
-  groupSeparator = getLocaleNumberSymbol(this.locale, NumberSymbol.Group);
-  radixPoint = getLocaleNumberSymbol(this.locale, NumberSymbol.Decimal);
+  groupSeparator: string;
+  radixPoint: string;
   inputmask: InputMask;
 
   _allowMinus = false;
   _maxlength: number;
   _groupSeperatorDisabled: boolean;
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onChange = (_: string) => {};
 
-  constructor(private elementRef: ElementRef, @Inject(LOCALE_ID) private locale: string) {}
+  constructor(private elementRef: ElementRef, @Inject(LOCALE_ID) private locale: string) {
+    this.radixPoint = getLocaleNumberSymbol(this.locale, NumberSymbol.Decimal);
+    this.groupSeparator = getLocaleNumberSymbol(this.locale, NumberSymbol.Group);
+  }
 
   ngOnInit(): void {
     // Set type="text", because functionality like 'setSelectionRange' are not supported on type="number"
@@ -75,6 +79,7 @@ export class DecimalMaskDirective implements ControlValueAccessor, OnInit {
     this.onChange = onChange;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   registerOnTouched(_: any): void {}
 
   setDisabledState?(isDisabled: boolean): void {

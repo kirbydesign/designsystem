@@ -9,15 +9,16 @@ import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers';
   styleUrls: ['./examples.component.scss'],
 })
 export class ExamplesComponent {
-  showDummyKeyboard = !!this.windowRef.nativeWindow.sessionStorage.getItem(
-    'kirby-cookbook-show-dummy-keyboard'
-  );
+  showDummyKeyboard: boolean;
   keyboardIsShowing = false;
   keyboardHeight: number;
   keyCount = 40;
 
   constructor(private windowRef: WindowRef) {
     this.setKeyboardSize();
+    this.showDummyKeyboard = !!this.windowRef.nativeWindow.sessionStorage.getItem(
+      'kirby-cookbook-show-dummy-keyboard'
+    );
   }
 
   get keys() {
