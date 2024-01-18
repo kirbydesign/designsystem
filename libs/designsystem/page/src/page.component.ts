@@ -32,7 +32,7 @@ import {
 } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 import {
-  IonBackButtonDelegate,
+  IonBackButton,
   IonButtons,
   IonContent,
   IonFooter,
@@ -283,8 +283,8 @@ export class PageComponent
   private ionToolbarElement: ElementRef<HTMLIonToolbarElement>;
   @ViewChildren(IonButtons, { read: ElementRef })
   private ionToolbarButtonsElement: QueryList<ElementRef<HTMLIonButtonsElement>>;
-  @ViewChild(IonBackButtonDelegate, { static: false })
-  private backButtonDelegate: IonBackButtonDelegate;
+  @ViewChild(IonBackButton, { static: false })
+  private backButtonDelegate: IonBackButton;
   @ViewChild('pageTitle', { static: false, read: ElementRef })
   private pageTitle: ElementRef;
   @ViewChild('stickyContentContainer', { static: false, read: ElementRef })
