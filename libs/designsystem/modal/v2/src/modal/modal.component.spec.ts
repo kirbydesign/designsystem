@@ -7,7 +7,7 @@ import {
   IonModal,
   IonTitle,
   IonToolbar,
-} from '@ionic/angular';
+} from '@ionic/angular/standalone';
 import { MockComponents } from 'ng-mocks';
 import { IconComponent } from '@kirbydesign/designsystem/icon';
 import { ButtonComponent } from '@kirbydesign/designsystem/button';

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonFooter } from '@ionic/angular';
+import { IonFooter } from '@ionic/angular/standalone';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponents } from 'ng-mocks';
 

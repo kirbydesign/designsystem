@@ -4,6 +4,16 @@ import { SpinnerModule } from '@kirbydesign/designsystem/spinner';
 import { FitHeadingDirective } from '@kirbydesign/designsystem/shared';
 
 import { HeaderModule } from '@kirbydesign/designsystem/header';
+import {
+  IonBackButton,
+  IonButtons,
+  IonContent,
+  IonFooter,
+  IonHeader,
+  IonRefresher,
+  IonTitle,
+  IonToolbar,
+} from '@ionic/angular/standalone';
 import { PageFooterComponent } from './page-footer/page-footer.component';
 import {
   PageActionsComponent,
@@ -34,7 +44,20 @@ import {
     PageToolbarTitleDirective,
     PageStickyContentDirective,
   ],
-  imports: [CommonModule, FitHeadingDirective, SpinnerModule, HeaderModule],
+  imports: [
+    CommonModule,
+    FitHeadingDirective,
+    SpinnerModule,
+    HeaderModule,
+    IonHeader,
+    IonToolbar,
+    IonButtons,
+    IonBackButton,
+    IonContent,
+    IonTitle,
+    IonRefresher,
+    IonFooter,
+  ],
   exports: [
     PageComponent,
     PageActionsComponent,

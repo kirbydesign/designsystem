@@ -1,5 +1,5 @@
 import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { IonContent, IonModal } from '@ionic/angular';
+import { IonContent, IonModal } from '@ionic/angular/standalone';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { KirbyAnimation } from '@kirbydesign/designsystem/helpers';
 

@@ -77,6 +77,7 @@ import { ActionGroupComponent } from '@kirbydesign/designsystem/action-group';
 import { MenuComponent } from '@kirbydesign/designsystem/menu';
 import { TabNavigationModule } from '@kirbydesign/designsystem/tab-navigation';
 import { BadgeComponent } from '@kirbydesign/designsystem/badge';
+import { provideIonicAngular } from '@ionic/angular/standalone';
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
 import { ModalRouterLinkDirective } from './directives/modal-router-link/modal-router-link.directive';
@@ -152,6 +153,7 @@ const allExports = [...exportedModules, ...exportedDeclarations];
 const importedModules = [...exportedModules];
 
 const providers = [
+  provideIonicAngular(IONIC_CONFIG),
   ModalController,
   ActionSheetHelper,
   ModalHelper,
@@ -170,7 +172,7 @@ export interface KirbyConfig {
 }
 
 @NgModule({
-  imports: [CommonModule, RouterModule, IonicModule.forRoot(IONIC_CONFIG), ...importedModules],
+  imports: [CommonModule, RouterModule, ...importedModules],
   declarations: [declarations],
   providers: providers,
   exports: [allExports],

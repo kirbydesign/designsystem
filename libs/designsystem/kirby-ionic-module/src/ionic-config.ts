@@ -1,4 +1,4 @@
-import { AnimationController, isPlatform } from '@ionic/angular';
+import { AnimationController, isPlatform } from '@ionic/angular/standalone';
 import { IonicConfig } from '@ionic/core';
 
 const shouldHaveNoopAnimation = !isPlatform('hybrid');
