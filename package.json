@@ -103,7 +103,6 @@
     "@floating-ui/dom": "^1.1.0",
     "@fontsource/roboto": "4.2.1",
     "@ionic/angular": "7.3.3",
-    "@nrwl/angular": "17.2.8",
     "@nx/angular": "17.2.8",
     "@types/prismjs": "1.9.0",
     "chart.js": "^3.9.1",
@@ -127,7 +126,7 @@
     "@angular-eslint/eslint-plugin": "~17.0.0",
     "@angular-eslint/eslint-plugin-template": "~17.0.0",
     "@angular-eslint/template-parser": "~17.0.0",
-    "@angular/cli": "17.1.0",
+    "@angular/cli": "~17.0.0",
     "@angular/compiler-cli": "17.0.9",
     "@babel/core": "^7.14.6",
     "@capacitor/android": "^4.4.0",
@@ -137,7 +136,6 @@
     "@kirbydesign/core": "file:libs/core",
     "@ngneat/spectator": "^15.0.1",
     "@nx/eslint-plugin": "17.2.8",
-    "@nx/linter": "17.2.8",
     "@nx/workspace": "17.2.8",
     "@push-based/user-flow": "^0.8.0",
     "@schematics/angular": "17.0.10",
@@ -195,7 +193,8 @@
     "typescript": "5.2.2",
     "webpack": "^5.76.0",
     "webpack-bundle-analyzer": "^4.6.1",
-    "webpack-cli": "^4.9.0"
+    "webpack-cli": "^4.9.0",
+    "@nx/eslint": "17.2.8"
   },
   "husky": {
     "hooks": {

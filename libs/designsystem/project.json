@@ -24,10 +24,7 @@
       "outputs": ["{workspaceRoot}/coverage/libs/designsystem"]
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": ["libs/designsystem/**/*.ts", "libs/designsystem/**/*.html"]
-      }
+      "executor": "@nx/eslint:lint"
     }
   },
   "generators": {
