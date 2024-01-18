@@ -3,8 +3,7 @@
   "compilerOptions": {
     "outDir": "../../dist/out-tsc",
     "types": ["jasmine", "node"],
-    "target": "ES2022",
-    "useDefineForClassFields": false
+    "target": "ES2022"
   },
   "files": ["src/test.ts", "src/polyfills.ts"],
   "include": ["**/*.spec.ts", "**/*.d.ts"]

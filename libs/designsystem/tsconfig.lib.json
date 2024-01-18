@@ -5,8 +5,7 @@
     "target": "ES2022",
     "declaration": true,
     "types": [],
-    "lib": ["dom", "es2018"],
-    "useDefineForClassFields": false
+    "lib": ["dom", "ES2022"]
   },
   "angularCompilerOptions": {
     "annotateForClosureCompiler": true,
