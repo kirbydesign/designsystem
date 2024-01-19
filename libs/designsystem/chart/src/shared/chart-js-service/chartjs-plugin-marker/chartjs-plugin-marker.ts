@@ -112,12 +112,6 @@ export default {
       return;
     }
 
-    // fix for Safari
-    let buttons = e.native.buttons === undefined ? e.native.which : e.native.buttons;
-    if (e.native.type === 'mouseup') {
-      buttons = 0;
-    }
-
     chart.marker.enabled =
       e.type !== 'mouseout' &&
       e.x > xScale.getPixelForValue(xScale.min) &&

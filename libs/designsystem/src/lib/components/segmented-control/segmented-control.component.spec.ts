@@ -152,9 +152,7 @@ describe('SegmentedControlComponent', () => {
       });
 
       it('should set the correct value when changing the selected-index in segment-select call-back', fakeAsync(() => {
-        spectator
-          .output('segmentSelect')
-          .subscribe((value) => spectator.setInput('selectedIndex', 2));
+        spectator.output('segmentSelect').subscribe(() => spectator.setInput('selectedIndex', 2));
 
         spectator.dispatchMouseEvent('ion-segment-button:first-of-type', 'click');
         tick();
