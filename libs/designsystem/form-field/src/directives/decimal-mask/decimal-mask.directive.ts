@@ -51,6 +51,7 @@ export class DecimalMaskDirective implements ControlValueAccessor, OnInit {
   _maxlength: number;
   _groupSeperatorDisabled: boolean;
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onChange = (_: string) => {};
 
   constructor(private elementRef: ElementRef, @Inject(LOCALE_ID) private locale: string) {}
@@ -75,6 +76,7 @@ export class DecimalMaskDirective implements ControlValueAccessor, OnInit {
     this.onChange = onChange;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   registerOnTouched(_: any): void {}
 
   setDisabledState?(isDisabled: boolean): void {
