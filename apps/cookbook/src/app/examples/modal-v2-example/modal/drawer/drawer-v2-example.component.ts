@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalFlavor, PlatformService } from '@kirbydesign/designsystem';
+import { PlatformService } from '@kirbydesign/designsystem';
 
 export const drawerExampleTemplateHTML = `<kirby-modal-v2
   [flavor]="'drawer'"
@@ -38,12 +38,10 @@ export const drawerToModalExampleTemplateHTML = `<kirby-modal-v2
   styleUrls: ['./drawer-v2-example.component.scss'],
 })
 export class DrawerModalV2ExampleComponent {
-  flavor: ModalFlavor;
-  open = false;
+  constructor(private platformService: PlatformService) {}
 
-  constructor(private platformService: PlatformService) {
-    this.flavor = this.platformService.isPhabletOrBigger() ? 'modal' : 'drawer';
-  }
+  flavor = this.platformService.isPhabletOrBigger() ? 'modal' : 'drawer';
+  open = false;
 
   openDrawer() {
     this.open = true;

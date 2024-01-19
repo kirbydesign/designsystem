@@ -35,7 +35,7 @@ import { ButtonComponent } from '@kirbydesign/designsystem/button';
 export class AlertComponent implements AfterViewInit {
   readonly BLUR_WRAPPER_DELAY_IN_MS = 50;
   @ViewChild('alertWrapper', { static: true }) private alertWrapper: ElementRef;
-  private scrollY: number;
+  private scrollY: number = Math.abs(this.windowRef.nativeWindow.scrollY);
 
   title$: Observable<string>;
   @Input()
@@ -55,9 +55,7 @@ export class AlertComponent implements AfterViewInit {
   @Input() okBtnIsDestructive: boolean;
   @Input() cancelBtn: string;
 
-  constructor(private elementRef: ElementRef<HTMLElement>, private windowRef: WindowRef) {
-    this.scrollY = Math.abs(this.windowRef.nativeWindow.scrollY);
-  }
+  constructor(private elementRef: ElementRef<HTMLElement>, private windowRef: WindowRef) {}
 
   ngAfterViewInit(): void {
     setTimeout(() => {

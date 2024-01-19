@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { ModalV2Component } from '@kirbydesign/designsystem/modal/v2';
-import { KirbyAnimation, ModalFlavor } from '@kirbydesign/designsystem';
+import { KirbyAnimation } from '@kirbydesign/designsystem';
 import { PlatformService } from '@kirbydesign/designsystem';
 
 export const nestedModalsExampleTemplateHTML = `<kirby-modal-v2
@@ -57,9 +57,7 @@ export const nestedModalsExampleTemplateTS = `import { PlatformService } from '@
   styleUrls: ['./nested-modals-v2-example.component.scss'],
 })
 export class NestedModalsV2ExampleComponent {
-  constructor(private platformService: PlatformService) {
-    this.nestedDrawerFlavor = this.platformService.isPhabletOrBigger() ? 'modal' : 'drawer';
-  }
+  constructor(private platformService: PlatformService) {}
 
   @ViewChild(ModalV2Component) modal: ModalV2Component;
 
@@ -74,7 +72,7 @@ export class NestedModalsV2ExampleComponent {
   openNestedDrawer = false;
   nestedDrawerBreakpoints = [0, 0.5];
   nestedDrawerInitialBreakpoint = 0.5;
-  nestedDrawerFlavor: ModalFlavor;
+  nestedDrawerFlavor = this.platformService.isPhabletOrBigger() ? 'modal' : 'drawer';
 
   openModal() {
     this.open = true;

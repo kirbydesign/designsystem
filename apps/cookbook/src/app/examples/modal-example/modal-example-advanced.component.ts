@@ -201,7 +201,9 @@ export class ModalExampleAdvancedComponent {
   static readonly embeddedCodeSnippet = config.embeddedCodeSnippet;
   static readonly closeModalCodeSnippet = config.closeModalCodeSnippet;
 
-  showDummyKeyboard: boolean;
+  showDummyKeyboard = !!this.windowRef.nativeWindow.sessionStorage.getItem(
+    'kirby-cookbook-show-dummy-keyboard'
+  );
   showPageProgress = false;
   showFooter = false;
   snapFooterToKeyboard = false;
@@ -224,11 +226,7 @@ export class ModalExampleAdvancedComponent {
   snapNestedFooterToKeyboard = false;
   displayNestedFooterAsInline = false;
 
-  constructor(private modalController: ModalController, private windowRef: WindowRef) {
-    this.showDummyKeyboard = !!this.windowRef.nativeWindow.sessionStorage.getItem(
-      'kirby-cookbook-show-dummy-keyboard'
-    );
-  }
+  constructor(private modalController: ModalController, private windowRef: WindowRef) {}
 
   private async showOverlay(flavor: 'modal' | 'drawer') {
     let title = flavor === 'modal' ? 'Modal Title' : 'Drawer Title';

@@ -12,7 +12,8 @@
     "typeRoots": ["node_modules/@types"],
     "lib": ["ES2018", "dom"],
     "baseUrl": ".",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "useDefineForClassFields": false
   },
   "files": []
 }
