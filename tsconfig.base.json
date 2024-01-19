@@ -8,9 +8,9 @@
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "target": "ES2020",
+    "target": "ES2018",
     "typeRoots": ["node_modules/@types"],
-    "lib": ["ES2020", "dom"],
+    "lib": ["ES2018", "dom"],
     "baseUrl": ".",
     "resolveJsonModule": true
   },
