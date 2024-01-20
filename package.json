@@ -120,8 +120,8 @@
     "zone.js": "0.13.3"
   },
   "devDependencies": {
-    "@angular-builders/custom-webpack": "16.0.1",
-    "@angular-devkit/build-angular": "16.2.11",
+    "@angular-builders/custom-webpack": "17.0.0",
+    "@angular-devkit/build-angular": "17.1.0",
     "@angular-devkit/core": "16.2.3",
     "@angular-devkit/schematics": "16.2.3",
     "@angular-eslint/eslint-plugin": "16.2.0",
