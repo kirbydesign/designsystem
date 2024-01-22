@@ -30,6 +30,9 @@
     <ng-content select="kirby-radio-group"></ng-content>
     <div class="suffix vertical-align semi-dark-text">
       <ng-content select="[kirby-affix='suffix']"></ng-content>
+      <ng-container *ngIf="showDefaultIcon">
+        <kirby-icon name="calendar"></kirby-icon>
+      </ng-container>
     </div>
   </div>
 </ng-template>

@@ -22,6 +22,7 @@ import { RadioGroupComponent } from '@kirbydesign/designsystem/radio';
 import { ResizeObserverService } from '@kirbydesign/designsystem/shared';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 import { AffixDirective } from './directives/affix/affix.directive';
+import { DateInputDirective } from './directives/date/date-input.directive';
 import { InputCounterComponent } from './input-counter/input-counter.component';
 import { InputComponent } from './input/input.component';
 
@@ -40,6 +41,9 @@ export class FormFieldComponent
   private element: HTMLElement;
   private inputElement: HTMLInputElement | HTMLTextAreaElement;
   private isTouch: boolean;
+
+  showDefaultIcon = false;
+
   _labelId = UniqueIdGenerator.scopedTo('kirby-form-field-label').next();
 
   @Input() label: string;
@@ -53,6 +57,8 @@ export class FormFieldComponent
 
   @ContentChild(InputComponent, { read: ElementRef }) input: ElementRef<HTMLInputElement>;
   @ContentChild(TextareaComponent, { read: ElementRef }) textarea: ElementRef<HTMLTextAreaElement>;
+
+  @ContentChild(DateInputDirective) dateInput: DateInputDirective;
 
   constructor(
     elementRef: ElementRef<HTMLElement>,
@@ -160,6 +166,17 @@ export class FormFieldComponent
       this.isRegistered = true;
       this.dispatchLoadEvent();
     }
+
+    // TODO: Is ngAfterContentChecked the right lifecycle method to hook into?
+    // Decide if default calendar icon for date input should be shown
+    this.showDefaultIcon = this.shouldShowDefaultIcon();
+  }
+
+  private shouldShowDefaultIcon() {
+    return (
+      this.dateInput?.useNativeDatePicker &&
+      !this.affixElements.some((affix) => affix.type === 'suffix') // there are no suffix elements
+    );
   }
 
   ngOnDestroy(): void {
