@@ -3,7 +3,6 @@
   "compilerOptions": {
     "outDir": "../../dist/out-tsc",
     "types": ["jasmine", "node"],
-    "target": "ES2022",
     "paths": {
       "@kirbydesign/designsystem/*": ["libs/designsystem/src/lib/*"],
       "@kirbydesign/designsystem/helpers": ["helpers/index.ts"],
