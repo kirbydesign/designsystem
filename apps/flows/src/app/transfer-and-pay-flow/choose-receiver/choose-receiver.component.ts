@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { SegmentItem } from '@kirbydesign/designsystem';
-import { OwnAccountPageComponent } from '../own-account-page/own-account-page.component';
-import { OtherPageComponent } from '../other-page/other-page.component';
 import { OtherService } from '../other.service';
 @Component({
   selector: 'flows-choose-receiver',

@@ -61,8 +61,7 @@
       "@kirbydesign/designsystem/action-group": ["libs/designsystem/action-group/index.ts"],
       "@kirbydesign/designsystem/menu": ["libs/designsystem/menu/index.ts"],
       "@kirbydesign/designsystem/badge": ["libs/designsystem/badge/index.ts"]
-    },
-    "target": "es2020"
+    }
   },
   "include": [],
   "files": [],
