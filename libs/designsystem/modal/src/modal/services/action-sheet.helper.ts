@@ -35,7 +35,7 @@ export class ActionSheetHelper {
       ionModal.dismiss(item)
     );
     const onDidDismiss = ionModal.onDidDismiss();
-    onDidDismiss.then((_) => {
+    onDidDismiss.then(() => {
       cancelSubscription.unsubscribe();
       itemSelectSubscription.unsubscribe();
     });

@@ -8,7 +8,6 @@ import {
   OnChanges,
   OnInit,
   Output,
-  SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -63,7 +62,7 @@ export class RangeComponent implements OnChanges, OnInit, ControlValueAccessor {
     this.initializeMoveEventEmitter();
   }
 
-  ngOnChanges(_: SimpleChanges) {
+  ngOnChanges() {
     if (!this.ticks) return;
 
     /*
@@ -116,6 +115,7 @@ export class RangeComponent implements OnChanges, OnInit, ControlValueAccessor {
 
   public onTouched = () => {};
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public propagateChange = (_: any) => {};
 
   public writeValue(value: any): void {

@@ -36,9 +36,14 @@ describe('DateInputDirective', () => {
       expect(instance).toBeDefined();
     });
 
-    it('should have initial date-mask value', () => {
+    it('should have initial date-mask placeholder', () => {
       // @ts-ignore
       expect(spectator.element.placeholder).toEqual('mm/dd/yyyy');
+    });
+
+    it('should not have initial date-mask value', () => {
+      // @ts-ignore
+      expect(spectator.element.value).toEqual('');
     });
 
     it('should keep date-mask when typing', () => {
@@ -129,6 +134,22 @@ describe('DateInputDirective', () => {
 
         expect(datemaskPadding).toEqual(inputPadding);
       });
+    });
+  });
+
+  describe('when configured with value', () => {
+    beforeEach(() => {
+      spectator = createDirective(`<input kirby-input type="date" value="01-01-2024" />`);
+    });
+
+    it('should have date-mask placeholder', () => {
+      // @ts-ignore
+      expect(spectator.element.placeholder).toEqual('mm/dd/yyyy');
+    });
+
+    it('should have initial date-mask value', () => {
+      // @ts-ignore
+      expect(spectator.element.value).toEqual('01/01/2024');
     });
   });
 

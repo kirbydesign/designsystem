@@ -71,7 +71,6 @@ describe('ModalWrapperComponent', () => {
     */
 
     let ionContentElement: HTMLIonContentElement;
-    let ionTitleElement: HTMLIonTitleElement;
     const testTitle = 'This is a long test title';
 
     beforeEach(() => {
@@ -83,7 +82,6 @@ describe('ModalWrapperComponent', () => {
         .build();
 
       ionContentElement = spectator.query('ion-content');
-      ionTitleElement = spectator.query('ion-title');
     });
 
     afterEach(() => {
