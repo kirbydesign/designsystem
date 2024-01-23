@@ -284,7 +284,7 @@ export class PageComponent
   @ViewChildren(IonButtons, { read: ElementRef })
   private ionToolbarButtonsElement: QueryList<ElementRef<HTMLIonButtonsElement>>;
   @ViewChild(IonBackButton, { static: false })
-  private backButtonDelegate: IonBackButton;
+  private backButton: IonBackButton;
   @ViewChild('pageTitle', { static: false, read: ElementRef })
   private pageTitle: ElementRef;
   @ViewChild('stickyContentContainer', { static: false, read: ElementRef })
@@ -541,7 +541,7 @@ export class PageComponent
 
   private interceptBackButtonClicksSetup() {
     if (this.backButtonOverride) {
-      this.backButtonDelegate.onClick = (event: Event) => {
+      this.backButton.onClick = (event: Event) => {
         event.preventDefault();
         this.backButtonOverride.navigateBack(this.routerOutlet, this.navCtrl, this.defaultBackHref);
       };
@@ -551,9 +551,9 @@ export class PageComponent
     if (this.backButtonClick.observers.length === 0) {
       this.backButtonClick
         .pipe(takeUntil(this.ngOnDestroy$))
-        .subscribe(this.backButtonDelegate.onClick.bind(this.backButtonDelegate));
+        .subscribe(this.backButton.onClick.bind(this.backButton));
     }
-    this.backButtonDelegate.onClick = (event: Event) => {
+    this.backButton.onClick = (event: Event) => {
       this.backButtonClick.emit(event);
     };
   }
