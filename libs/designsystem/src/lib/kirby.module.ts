@@ -4,7 +4,6 @@ import { RouterModule } from '@angular/router';
 
 import { CardModule } from '@kirbydesign/designsystem/card';
 import { IconModule } from '@kirbydesign/designsystem/icon';
-import { IONIC_CONFIG } from '@kirbydesign/designsystem/kirby-ionic-module';
 import {
   ComponentLoaderDirective,
   ResizeObserverFactory,
@@ -78,6 +77,7 @@ import { MenuComponent } from '@kirbydesign/designsystem/menu';
 import { TabNavigationModule } from '@kirbydesign/designsystem/tab-navigation';
 import { BadgeComponent } from '@kirbydesign/designsystem/badge';
 import { provideIonicAngular } from '@ionic/angular/standalone';
+import { KirbyIonicModule } from '../public-api';
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
 import { ModalRouterLinkDirective } from './directives/modal-router-link/modal-router-link.directive';
@@ -153,7 +153,6 @@ const allExports = [...exportedModules, ...exportedDeclarations];
 const importedModules = [...exportedModules];
 
 const providers = [
-  provideIonicAngular(IONIC_CONFIG),
   ModalController,
   ActionSheetHelper,
   ModalHelper,
@@ -172,7 +171,7 @@ export interface KirbyConfig {
 }
 
 @NgModule({
-  imports: [CommonModule, RouterModule, ...importedModules],
+  imports: [CommonModule, RouterModule, KirbyIonicModule, ...importedModules],
   declarations: [declarations],
   providers: providers,
   exports: [allExports],
