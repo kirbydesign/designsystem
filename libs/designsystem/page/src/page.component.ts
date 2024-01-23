@@ -613,10 +613,10 @@ export class PageComponent
     /* eslint-disable */
     // prettier-ignore
     this.toolbarTitleTemplate = this.customToolbarTitleTemplate
-            ? this.customToolbarTitleTemplate
-            : typeof this.toolbarTitle === 'string'
-                ? this.simpleToolbarTitleTemplate
-                : defaultTitleTemplate;
+      ? this.customToolbarTitleTemplate
+      : typeof this.toolbarTitle === 'string'
+          ? this.simpleToolbarTitleTemplate
+          : defaultTitleTemplate;
 
     if (this.toolbarTitleClick.observed && this.hasInteractiveTitle === undefined) {
       this.hasInteractiveTitle = true;
